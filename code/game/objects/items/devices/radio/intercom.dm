@@ -144,7 +144,7 @@
 	broadcasting = 1
 
 /obj/item/device/radio/intercom/locked
-    var/locked_frequency
+	var/locked_frequency
 
 /obj/item/device/radio/intercom/locked/set_frequency(var/frequency)
 	if(frequency == locked_frequency)

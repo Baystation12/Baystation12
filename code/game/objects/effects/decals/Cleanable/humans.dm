@@ -1,4 +1,4 @@
-#define DRYING_TIME 5 * 60*10                        //for 1 unit of depth in puddle (amount var)
+#define DRYING_TIME 5 * 60*10 //for 1 unit of depth in puddle (amount var)
 
 var/global/list/image/splatter_cache=list()
 
@@ -137,8 +137,8 @@ var/global/list/image/splatter_cache=list()
 		user.verbs += /mob/living/carbon/human/proc/bloody_doodle
 
 /obj/effect/decal/cleanable/blood/splatter
-        random_icon_states = list("mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")
-        amount = 2
+	random_icon_states = list("mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")
+	amount = 2
 
 /obj/effect/decal/cleanable/blood/drip
 	name = "drips of blood"
@@ -218,18 +218,16 @@ var/global/list/image/splatter_cache=list()
 
 
 /obj/effect/decal/cleanable/blood/gibs/proc/streak(var/list/directions)
-        spawn (0)
-                var/direction = pick(directions)
-                for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
-                        sleep(3)
-                        if (i > 0)
-                                var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(loc)
-                                b.basecolor = src.basecolor
-                                b.update_icon()
-
-                        if (step_to(src, get_step(src, direction), 0))
-                                break
-
+	spawn (0)
+		var/direction = pick(directions)
+		for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
+			sleep(3)
+			if (i > 0)
+				var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(loc)
+				b.basecolor = src.basecolor
+				b.update_icon()
+			if (step_to(src, get_step(src, direction), 0))
+				break
 
 /obj/effect/decal/cleanable/mucus
 	name = "mucus"

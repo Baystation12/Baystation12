@@ -25,8 +25,8 @@
 	var/datum/radio_frequency/radio_connection
 
 /obj/machinery/atmospherics/binary/passive_gate/on
-    unlocked = 1
-    icon_state = "map_on"
+	unlocked = 1
+	icon_state = "map_on"
 
 /obj/machinery/atmospherics/binary/passive_gate/New()
 	..()
