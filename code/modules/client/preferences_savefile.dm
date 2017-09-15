@@ -86,7 +86,7 @@
 /datum/preferences/proc/update_setup(var/savefile/preferences, var/savefile/character)
 	if(!preferences || !character)
 		return 0
-	return update_setup(preferences, character)
+	return 1
 
 #undef SAVEFILE_VERSION_MAX
 #undef SAVEFILE_VERSION_MIN
