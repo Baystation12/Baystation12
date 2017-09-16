@@ -93,8 +93,3 @@ var/global/ntnet_card_uid = 1
 				return 1
 
 	return 0 // Computer is not on station and does not have upgraded network card. No signal.
-
-/obj/item/weapon/computer_hardware/network_card/Destroy()
-	if(holder2 && (holder2.network_card == src))
-		holder2.network_card = null
-	..()
