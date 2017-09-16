@@ -2095,9 +2095,9 @@
 	center_of_mass = "x=16;y=14"
 
 /obj/item/weapon/reagent_containers/food/snacks/mint/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/nutriment/mint, 1)
-    bitesize = 1
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/mint, 1)
+	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/mushroomsoup
 	name = "chantrelle soup"

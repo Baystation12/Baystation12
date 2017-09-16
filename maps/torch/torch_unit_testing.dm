@@ -63,10 +63,10 @@
 		/area/vacant/monitoring = NO_SCRUBBER|NO_VENT,
 		/area/vacant/office = 0,
 		/area/rnd/blanks = NO_SCRUBBER|NO_VENT,
-        /area/exoplanet          = NO_SCRUBBER|NO_VENT|NO_APC,
-        /area/exoplanet/desert   = NO_SCRUBBER|NO_VENT|NO_APC,
-        /area/exoplanet/grass    = NO_SCRUBBER|NO_VENT|NO_APC,
-        /area/exoplanet/snow     = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet          = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/desert   = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/grass    = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/snow     = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/exoplanet/garbage  = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 

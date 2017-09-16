@@ -115,8 +115,8 @@
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/signal/Initialize()
-    radio = new /obj/item/radio/integrated/signal(src)
-    . = ..()
+	radio = new /obj/item/radio/integrated/signal(src)
+	. = ..()
 
 /obj/item/weapon/cartridge/quartermaster
 	name = "\improper Space Parts & Space Vendors cartridge"

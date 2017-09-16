@@ -145,7 +145,7 @@ datum/unit_test/mob_damage
 datum/unit_test/mob_damage/start_test()
 	var/list/test = create_test_mob_with_mind(null, mob_type)
 	var/damage_amount = 5	// Do not raise, if damage >= 10 there is a % chance to reduce damage by half in /obj/item/organ/external/take_damage()
-                                // Which makes checks impossible.
+							// Which makes checks impossible.
 
 	if(isnull(test))
 		fail("Check Runtimed in Mob creation")
