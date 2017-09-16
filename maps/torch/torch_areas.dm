@@ -149,6 +149,7 @@
 
 /area/crew_quarters/safe_room/thirddeck
 	name = "\improper Third Deck Safe Room"
+	flags = AREA_RAD_SHIELDED
 
 
 //Second Deck (Z-3)
@@ -193,6 +194,7 @@
 
 /area/crew_quarters/safe_room/seconddeck
 	name = "\improper Second Deck Safe Room"
+	flags = AREA_RAD_SHIELDED
 
 
 //First Deck (Z-4)
@@ -246,6 +248,7 @@
 
 /area/crew_quarters/safe_room/firstdeck
 	name = "\improper First Deck Safe Room"
+	flags = AREA_RAD_SHIELDED
 
 /area/maintenance/substation/firstdeck // First Deck (Z-4)
 	name = "First Deck Substation"
@@ -288,6 +291,7 @@
 
 /area/crew_quarters/safe_room/bridge
 	name = "\improper Bridge Safe Room"
+	flags = AREA_RAD_SHIELDED
 
 /area/bridge/storage
 	name = "\improper Bridge Storage Room"
@@ -833,6 +837,7 @@
 	name = "\improper Bunk Room"
 	icon_state = "Sleep"
 	sound_env = SMALL_SOFTFLOOR
+	flags = AREA_RAD_SHIELDED
 
 /area/crew_quarters/sleep/cryo/aux
 	name = "\improper Auxiliary Cryogenic Storage"
