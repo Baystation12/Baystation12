@@ -70,7 +70,10 @@
 "bs" = (/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
 "bt" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
 "bu" = (/obj/structure/reagent_dispensers/fueltank,/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
+<<<<<<< HEAD
+=======
 "bv" = (/obj/structure/reagent_dispensers/watertank,/obj/item/weapon/reagent_containers/glass/bucket,/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/light{dir = 1},/obj/effect/floor_decal/corner/green/three_quarters{dir = 8},/turf/simulated/floor/tiled,/area/hydroponics/storage)
+>>>>>>> parent of 68a09b6... Adds light switches around the ship
 "bw" = (/obj/machinery/vending/hydronutrients,/obj/effect/floor_decal/corner/green{dir = 5},/turf/simulated/floor/tiled,/area/hydroponics/storage)
 "bx" = (/obj/machinery/seed_storage/garden,/obj/effect/floor_decal/corner/green{dir = 5},/turf/simulated/floor/tiled,/area/hydroponics/storage)
 "by" = (/obj/machinery/firealarm{dir = 2; pixel_y = 24},/obj/effect/floor_decal/corner/green{dir = 5},/obj/structure/closet/secure_closet/hydroponics_torch,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/hydroponics/storage)
@@ -459,7 +462,10 @@
 "iV" = (/obj/structure/closet/secure_closet/freezer/meat,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/freezer,/area/crew_quarters/galleybackroom)
 "iW" = (/obj/effect/floor_decal/corner/grey/diagonal{dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/table/marble,/obj/item/weapon/reagent_containers/glass/rag,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled/white,/area/crew_quarters/galley)
 "iX" = (/obj/effect/floor_decal/corner/grey/diagonal{dir = 4},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/crew_quarters/galley)
+<<<<<<< HEAD
+=======
 "iY" = (/obj/effect/floor_decal/corner/grey/diagonal{dir = 4},/obj/machinery/disposal,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/disposalpipe/trunk{dir = 1},/turf/simulated/floor/tiled/white,/area/crew_quarters/galley)
+>>>>>>> parent of 68a09b6... Adds light switches around the ship
 "iZ" = (/obj/structure/noticeboard,/turf/simulated/wall,/area/crew_quarters/galley)
 "ja" = (/obj/effect/floor_decal/corner/blue/diagonal{dir = 4},/obj/structure/disposalpipe/segment,/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/white,/area/crew_quarters/mess)
 "jb" = (/obj/effect/floor_decal/corner/blue/diagonal{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment,/obj/item/device/radio/beacon,/turf/simulated/floor/tiled/white,/area/crew_quarters/mess)
@@ -584,7 +590,10 @@
 "ls" = (/obj/machinery/iv_drip,/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
 "lt" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/ladder/updown,/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
 "lu" = (/turf/unsimulated/mask,/area/hallway/primary/thirddeck/center)
+<<<<<<< HEAD
+=======
 "lv" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22; pixel_y = 0},/obj/machinery/light{dir = 8},/obj/machinery/vending/coffee,/turf/simulated/floor/tiled/dark,/area/crew_quarters/bar)
+>>>>>>> parent of 68a09b6... Adds light switches around the ship
 "lw" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/effect/floor_decal/spline/fancy/wood{dir = 8},/turf/simulated/floor/lino,/area/crew_quarters/bar)
 "lx" = (/obj/structure/sink/kitchen{pixel_y = 28},/turf/simulated/floor/lino,/area/crew_quarters/bar)
 "ly" = (/obj/effect/floor_decal/corner/blue/diagonal{dir = 4},/obj/item/weapon/stool,/turf/simulated/floor/tiled/white,/area/crew_quarters/mess)
@@ -1515,6 +1524,10 @@
 "Ed" = (/obj/effect/floor_decal/industrial/warning/corner{icon_state = "warningcorner"; dir = 8},/turf/simulated/floor/plating,/area/maintenance/thirddeck/aftport)
 "Ee" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/maintenance/thirddeck/aftport)
 "Ef" = (/obj/structure/grille,/turf/simulated/floor/plating,/area/maintenance/thirddeck/foreport)
+<<<<<<< HEAD
+"Eg" = (/obj/structure/reagent_dispensers/watertank,/obj/item/weapon/reagent_containers/glass/bucket,/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/light{dir = 1},/obj/effect/floor_decal/corner/green/three_quarters{dir = 8},/obj/machinery/light_switch{step_x = -23},/turf/simulated/floor/tiled,/area/hydroponics/storage)
+=======
+>>>>>>> parent of 68a09b6... Adds light switches around the ship
 "En" = (/obj/machinery/power/shield_generator,/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/plating,/area/shield/thirddeck)
 "Eo" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/obj/machinery/firealarm{dir = 4; pixel_x = 24},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/plating,/area/shield/thirddeck)
 "Ep" = (/obj/machinery/atmospherics/binary/pump/on{dir = 2; target_pressure = 200},/obj/structure/bed/chair{dir = 1},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/crew_quarters/safe_room/thirddeck)
@@ -1843,6 +1856,10 @@
 "Ld" = (/obj/machinery/atmospherics/unary/outlet_injector{injecting = 1; use_power = 1},/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/reinforced,/area/thruster/d3port)
 "Le" = (/obj/machinery/atmospherics/unary/outlet_injector{injecting = 1; use_power = 1},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/reinforced,/area/thruster/d3port)
 "Lf" = (/obj/structure/window/reinforced{dir = 1},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/wood,/area/crew_quarters/gym)
+<<<<<<< HEAD
+"Lg" = (/obj/effect/floor_decal/corner/grey/diagonal{dir = 4},/obj/machinery/disposal,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/disposalpipe/trunk{dir = 1},/obj/machinery/light_switch{step_y = -25},/turf/simulated/floor/tiled/white,/area/crew_quarters/galley)
+=======
+>>>>>>> parent of 68a09b6... Adds light switches around the ship
 "Ll" = (/obj/machinery/atmospherics/valve/digital{frequency = 1447; id = "fuelmode"},/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/floor/reinforced,/area/thruster/d3port)
 "Lm" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel,/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/machinery/meter,/turf/simulated/floor/reinforced,/area/thruster/d3port)
 "Ln" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 5},/turf/simulated/floor/reinforced,/area/thruster/d3port)
@@ -1871,6 +1888,10 @@
 "Nd" = (/obj/structure/table/standard,/obj/item/device/radio/intercom{dir = 4; pixel_x = -22},/obj/item/weapon/storage/box/cups{pixel_x = 2; pixel_y = 2},/obj/item/weapon/storage/box/cups,/turf/simulated/floor/tiled,/area/crew_quarters/gym)
 "Ne" = (/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled,/area/crew_quarters/gym)
 "Nf" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/wood,/area/crew_quarters/gym)
+<<<<<<< HEAD
+"Ng" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22; pixel_y = 0},/obj/machinery/light{dir = 8},/obj/machinery/vending/coffee,/obj/machinery/light_switch{step_x = 0; step_y = 25},/turf/simulated/floor/tiled/dark,/area/crew_quarters/bar)
+=======
+>>>>>>> parent of 68a09b6... Adds light switches around the ship
 "Ob" = (/obj/effect/shuttle_landmark/torch/deck2/aquila,/turf/space,/area/space)
 "Oc" = (/obj/machinery/vending/fitness,/turf/simulated/floor/tiled,/area/crew_quarters/gym)
 "Od" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled/freezer,/area/crew_quarters/gym)
@@ -2059,7 +2080,11 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMaNaNaNaNaNaNaOaOaOaOaOaOaOaOaaaaaaaaaaaaaaaaaaaaaaaOaPaPaPaPaPaPaPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaIaQaQadadaRaSadadaQaQaQaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaVaVaVbdbdbdbdbdbdbdbdbdbdbdbdbdbdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMaMaNaNaNaNaNaNaOaOaOaOaOaOaOaOaOaaaaaaaaaaaaaaaaaaaOaOaPaPaPaPaPaPaPaWaIaIaIaIaIaIaIaIaIaIaIaWaQaaaIaQaQaQaQaXIEaZbaaQaQaQaQaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTcvcvbdbdLEbObObObObObObOctcseecuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMaMaMaNaNaNaNaNaNaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaPaPaPaPaPaPaWaWbebfbfbfbfbfbfbfbfbfbgaWaQaQaQaQaQaQbhaYaYaZaYZyaQaQaQaTaTaTaTaTaTaTaTaTaTaTaTeOePePePePePePePePfYPWgVgVgWhOhOhOKFhOhPKGlkcuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+<<<<<<< HEAD
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMaMbibjbkblbmbnboaNbpbqbrbsbsbtbuaOaOaOaOaOaOaOaOaOaOaOaOaOaPEgbwbxbybzbAbBbCbCbCbCbCbCbCbCbCbCbDbAaQaQaQaQaQbEaYbFaYbGbHbHbIbJbJbKbLbLbLbLbLbMbNbNqvpzunQXaTaTaTaTaTaTaTaTbdbdbdbdKHzxZcKJKKAjAjAlWobdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+=======
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMaMbibjbkblbmbnboaNbpbqbrbsbsbtbuaOaOaOaOaOaOaOaOaOaOaOaOaOaPbvbwbxbybzbAbBbCbCbCbCbCbCbCbCbCbCbDbAaQaQaQaQaQbEaYbFaYbGbHbHbIbJbJbKbLbLbLbLbLbMbNbNqvpzunQXaTaTaTaTaTaTaTaTbdbdbdbdKHzxZcKJKKAjAjAlWobdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+>>>>>>> parent of 68a09b6... Adds light switches around the ship
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaObaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMbQbRbSbTbkbUbVbWbXaNbsbsbsbsbYbsbsbZaOaOaOaOaOaOaOaOaOaOaObpcacbcccccccdbAcecfcgcgcgcgcgcgcgcgchcibAcjaQaQaQckaYclclclclclclcmclcncncncncncncncocpcqcrDpISEaaTaTaTaTaTaTaTcvaTbbbbaUbdIUPNKLKMKNKOJoJpcuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMaMXfcxcyczbkcAcBbWcCaNbsbscDcEcFbsbsbsbsbscGcHcIcJcKcKcKcKcKcKcLcMcNcNcNcOcPcQcRcScTcUcUcUcUcVcWcXcYcZdadbdadadadcbEaYdddeaXcldfdgcndhdidjdjdkcncodldmdldldlJqJrcqcqdnaTaTaTaTaTaUbbbbaUKPPFRkYqQAKPKTJpcuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMdobQbQbQdpbkdqdrdsdtaNbsdudvdvdvdvdvdvdvdwcGcEdxdydydydydybsdzcadAdBdCdDdEdFdGdHdIdIdJdIdIdKdLdIdMdNbAdOdPclclcldQcldRIEdddScldfdTcndUdVdWdXdYcndZeaebeceddlcqJscqcqefegaTaTaTaTaUaUaUaUYkKPKUKVLPLZOHPYbdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -2068,10 +2093,17 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMgagbgcgdgdgegfggghgigjepbsbsdvgkglgmgngodvbsbYILIMdygpgqgrgsgtfpfpfpfpgufpfpftgvgwgxgygygygzgAgBgCgDgEgEgEgEgEgEgEgEgEgEgEgEeDclclcngFgGgHgIgJgKgLgMgNgOgPgQgRgSgTgUJAJzJvcqgXaTcvaTaUaUaUaUaVaVKPOXKPRIbdbdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaaaaaaaMaMaMbQgYgZhahbhcenenenhdheepbshfdvhgglgmhhhidvcEbsINIOdydyhjhkhlhmhnhnhohphqfpfpfthrhshthuhuhvhwfBhxhyhzgEhAhAhAhAhAhAhAhAhAhAgEZzZAbacnhBhChDhEhFhGhHhIgNhJhKhLhMhNfWfWfWfWJCJBJraTaTaTaUaUaUaaaaaaaaaaaaMtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMhQhRhShThUhVhWhXhYhZiaepibbsdvhgglgmhhicdvidbsIPieifdyigihiidyijfpikiliminioipiqirisitiuisivfBfBfBfBgEhAhAhAhAhAhAhAhAhAhAgEITIRZBcncndVdVdViwixiyizgNiAiBiCiDiEgQgPiFfWiGiHJDaTaTaTaUaUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+<<<<<<< HEAD
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMiIbQbQbQcziJiKiLiMiNepbpbsdviOiPgmiQiRdvcEcIcKiSiTdyiUihiVdyiWfpiXilLgeveviZjajbjcjcjcjcjdjejfjgfBgEhAhAhAhAhAhAhAhAhAhAgEZCjhZDaQcnjjjkjljmjnjojpjqgNgNgNjrjsjthKjufWjvjwJEaTaTaTaUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMjxjyjzjAjBjCjDjEjFepjGbsdvjHjIjJjIjKdvcEdxcGjLjMdyiUihjNdyjOYfjQjRevevjSjTjUjVjWjXjWjWjYjZTbkbkckdhAhAhAhAhAhAhAhAhAhAgEkelClClCcnkgkhkikjgKkkklklkmknkokpkqiCkrksfWktIWJFaTaTaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMkukvkwkxkykzkAkBkCepcEbsdvkDkEkFkGkHdvcGkIcGkJbskKkKkKkKkKkKkKkLkMkLkNkOkPjUkQhvhukRhvkSkTkTkUkVkWhAhAhAhAhAhAhAhAhAhAgEdPlCZEZGcncnkXkYkZlalblcldlelflelglhlilililjljljJGaTaTaTaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllmlnloeplpbsdvdvlqlrlqdvdvlsdxcGkJltkKlululululukKNglwlxkOkOkPjUfvlylzlzlylAlBgEgEgEgEhAhAhAhAhAhAhAhAhAhAgEdPlClDlEZHlClFlGlHlIlJlKlLlMbclelOlPlQlRlSlTlUljJsaTaTaTaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+=======
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMiIbQbQbQcziJiKiLiMiNepbpbsdviOiPgmiQiRdvcEcIcKiSiTdyiUihiVdyiWfpiXiliYeveviZjajbjcjcjcjcjdjejfjgfBgEhAhAhAhAhAhAhAhAhAhAgEZCjhZDaQcnjjjkjljmjnjojpjqgNgNgNjrjsjthKjufWjvjwJEaTaTaTaUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMjxjyjzjAjBjCjDjEjFepjGbsdvjHjIjJjIjKdvcEdxcGjLjMdyiUihjNdyjOYfjQjRevevjSjTjUjVjWjXjWjWjYjZTbkbkckdhAhAhAhAhAhAhAhAhAhAgEkelClClCcnkgkhkikjgKkkklklkmknkokpkqiCkrksfWktIWJFaTaTaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMaMkukvkwkxkykzkAkBkCepcEbsdvkDkEkFkGkHdvcGkIcGkJbskKkKkKkKkKkKkKkLkMkLkNkOkPjUkQhvhukRhvkSkTkTkUkVkWhAhAhAhAhAhAhAhAhAhAgEdPlCZEZGcncnkXkYkZlalblcldlelflelglhlilililjljljJGaTaTaTaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllmlnloeplpbsdvdvlqlrlqdvdvlsdxcGkJltkKlululululukKlvlwlxkOkOkPjUfvlylzlzlylAlBgEgEgEgEhAhAhAhAhAhAhAhAhAhAgEdPlClDlEZHlClFlGlHlIlJlKlLlMbclelOlPlQlRlSlTlUljJsaTaTaTaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+>>>>>>> parent of 68a09b6... Adds light switches around the ship
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalllllVlllWlXlYlZmambmcllepmdepepcGffcGmemfmgmhcKcKcKmimjmkmjkKlululululukKmlmmmnmnmokPjUfvlymplzlyjcmqgEmrmsgEhAhAhAhAhAhAhAhAhAhAgEdPlCmtmumvmwlCmxmymzmABgmCmDmElemFmGlimHmImJmKljJsaTaTaTaTaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaaaaaaaaaaaaaaaaaallllllmLmMmNlYmOmPmQmRlYmSmTmUmVmjbsbsmWcGcGcGcGmXmXmXmYmZnakKlululululukKnbncndnenfkPngnhnikakaninjnkgEnlnmnnhAhAhAhAhAhAhAhAhAhAgEdPlCnonpnqnrlCnsntnunvnwnxnynznAnBnCnDnEnFnGnHljJsaTaTaTaTaTaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaallllllnJmMnKlYnLnMnNnOlYnPnQnRnSnTnUnUnVnWnXnYUJmXoaobocodoekKlululululukKofogohoinfkPjUfvjcjcjcjcjcojgEokolomhAhAhAhAhAhAhAhAhAhAgEdPlConooopoqlCorosotouovmDmDowlfoxoyliozmIoAoBljJIJHJHJHJJaTaTaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
