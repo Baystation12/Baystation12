@@ -2,7 +2,7 @@
 	name = "tie"
 	desc = "A neosilk clip-on tie."
 	icon = 'icons/obj/clothing/ties.dmi'
-	icon_state = "bluetie"
+	icon_state = "tie"
 	item_state = ""	//no inhands
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
@@ -93,13 +93,16 @@
 		return	//we aren't an object on the ground so don't call parent
 	..()
 
+/obj/item/clothing/accessory/long
+	icon_state = "longtie"
+
 /obj/item/clothing/accessory/blue
 	name = "blue tie"
-	icon_state = "bluetie"
+	color = "#123c5a"
 
 /obj/item/clothing/accessory/red
 	name = "red tie"
-	icon_state = "redtie"
+	color = "#800000"
 
 /obj/item/clothing/accessory/blue_clip
 	name = "blue tie with a clip"
@@ -107,19 +110,21 @@
 
 /obj/item/clothing/accessory/red_long
 	name = "red long tie"
-	icon_state = "redlongtie"
+	icon_state = "longtie"
+	color = "#a02929"
 
 /obj/item/clothing/accessory/black
 	name = "black tie"
-	icon_state = "blacktie"
+	color = "#FFFFFF"
 
 /obj/item/clothing/accessory/yellow
 	name = "yellow tie"
-	icon_state = "yellowtie"
+	icon_state = "longtie"
+	color = "#c4c83d"
 
 /obj/item/clothing/accessory/navy
 	name = "navy tie"
-	icon_state = "navytie"
+	color = "#182e44"
 
 /obj/item/clothing/accessory/horrible
 	name = "horrible tie"
@@ -128,7 +133,8 @@
 
 /obj/item/clothing/accessory/brown
 	name = "brown tie"
-	icon_state = "browntie"
+	icon_state = "longtie"
+	color = "#b18345"
 
 /obj/item/clothing/accessory/nt
 	name = "\improper NanoTrasen tie with a clip"

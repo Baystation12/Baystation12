@@ -177,6 +177,19 @@
 	ties["brown tie"] = /obj/item/clothing/accessory/brown
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
+/datum/gear/accessory/tie_color
+	display_name = "colored tie"
+	path = /obj/item/clothing/accessory
+	allowed_roles = NON_MILITARY_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/tie_color/New()
+	..()
+	var/ties = list()
+	ties["tie"] = /obj/item/clothing/accessory
+	ties["striped tie"] = /obj/item/clothing/accessory/long
+	gear_tweaks += new/datum/gear_tweak/path(ties)
+
 /datum/gear/accessory/stethoscope
 	display_name = "stethoscope (medical)"
 	path = /obj/item/clothing/accessory/stethoscope
