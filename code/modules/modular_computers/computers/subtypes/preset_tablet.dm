@@ -26,3 +26,9 @@
 	network_card = new/obj/item/weapon/computer_hardware/network_card(src)
 	battery_module = new/obj/item/weapon/computer_hardware/battery_module/micro(src)
 	battery_module.charge_to_full()
+
+/obj/item/modular_computer/tablet/preset/custom_loadout/install_default_programs()
+	..()
+	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)
+	if(!istype(H)) return
+	install_default_programs_by_job(H)

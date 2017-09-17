@@ -41,6 +41,15 @@
 /obj/item/modular_computer/proc/install_default_programs()
 	return 1
 
+/obj/item/modular_computer/proc/install_default_programs_by_job(var/mob/living/carbon/human/H)
+	var/datum/job/jb = job_master.occupations_by_title[H.job]
+	if(!jb) return
+	for(var/prog_type in jb.software_on_spawn)
+		var/datum/computer_file/program/prog_file = prog_type
+		if(initial(prog_file.usage_flags) & hardware_flag)
+			prog_file = new prog_file
+			hard_drive.store_file(prog_file)
+
 /obj/item/modular_computer/New()
 	GLOB.processing_objects.Add(src)
 	install_default_hardware()
