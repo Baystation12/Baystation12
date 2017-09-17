@@ -122,7 +122,7 @@ var/list/possible_cable_coil_colours
 		return "[round(powernet.avail/1000000, 0.01)] MW"
 	if(powernet.avail >= 1000000)
 		return "[round(powernet.avail/1000, 0.01)] kW"
-	return "[round(powernet.avail)]"
+	return "[round(powernet.avail)] W"
 
 //If underfloor, hide the cable
 /obj/structure/cable/hide(var/i)
@@ -200,7 +200,7 @@ var/list/possible_cable_coil_colours
 	else if(istype(W, /obj/item/device/multitool))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
-			to_chat(user, "<span class='warning'>[get_wattage()]W in power network.</span>")
+			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")
 
 		else
 			to_chat(user, "<span class='warning'>The cable is not powered.</span>")
