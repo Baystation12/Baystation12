@@ -36,3 +36,23 @@
 		user.adjustBruteLoss(-30)
 	else if(icon_state == "[name]1")
 		user.adjustBruteLoss(30)
+
+/////////////////////////Ring of Invisibility///////////////////////////
+/obj/item/clothing/ring/magic
+	name = "Ring of Invisibility"
+	desc = "A golden ring with symbols carved on it in some strange language."
+	icon_state = "magic"
+
+/obj/item/clothing/ring/magic/equipped(var/mob/living/carbon/human/H, var/slot)
+	..()
+	if(istype(H) && slot==slot_gloves && !H.cloaked)
+		H.cloaked = TRUE
+		H.update_icons()
+		H.visible_message("<span class='warning'>\The [H] seems to disappear before your eyes!</span>", "<span class='notice'>You feel completely invisible.</span>")
+
+/obj/item/clothing/ring/magic/dropped(var/mob/living/carbon/human/H)
+	..()
+	if(istype(H) && H.cloaked)
+		H.cloaked = FALSE
+		H.update_icons()
+		H.visible_message("<span class='warning'>\The [H] appears from thin air!</span>", "<span class='notice'>You have re-appeared.</span>")

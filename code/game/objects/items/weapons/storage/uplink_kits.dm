@@ -75,6 +75,7 @@
 		/obj/item/weapon/stamp/chameleon,
 		/obj/item/weapon/pen/chameleon,
 		/obj/item/device/destTagger,
+		/obj/item/clothing/ring/seal/signet/chameleon,
 		)
 
 /obj/item/weapon/storage/box/syndie_kit/spy

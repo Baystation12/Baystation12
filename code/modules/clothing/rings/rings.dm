@@ -19,30 +19,6 @@
 	icon_state = "mariner-grad"
 
 /////////////////////////////////////////
-//Magic Rings
-
-/obj/item/clothing/ring/magic
-	name = "magic ring"
-	desc = "A strange ring with symbols carved on it in some arcane language."
-	icon_state = "magic"
-
-/obj/item/clothing/ring/magic/equipped(var/mob/living/carbon/human/H)
-	..()
-	if(istype(H) && H.gloves==src)
-		H.cloaked = TRUE
-		H.update_icons()
-		H.visible_message("<span class='warning'>\[H.name] seems to disappear before your eyes!</span>", "<span class='notice'>You feel completely invisible.</span>")
-
-/obj/item/clothing/ring/magic/dropped(var/mob/living/carbon/human/H)
-	if(!..())
-		return 0
-
-	if(istype(H) && H.cloaked)
-		H.cloaked = FALSE
-		H.update_icons()
-		H.visible_message("<span class='warning'>\The [H] appears from thin air!</span>", "<span class='notice'>You have re-appeared.</span>")
-
-/////////////////////////////////////////
 //Reagent Rings
 
 /obj/item/clothing/ring/reagent
@@ -56,10 +32,9 @@
 /obj/item/clothing/ring/reagent/equipped(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H) && H.gloves==src)
-		to_chat(H, "<font color='blue'><b>You feel a prick as you slip on the ring.</b></font>")
-
 		if(reagents.total_volume)
 			if(H.reagents)
+				to_chat(H, "<span class='danger'>You feel a prick as you slip on \the [src].</span>")
 				var/contained_reagents = reagents.get_reagents()
 				var/trans = reagents.trans_to_mob(H, 15, CHEM_BLOOD)
 				admin_inject_log(usr, H, src, contained_reagents, trans)
@@ -102,7 +77,16 @@
 		to_chat(user, "<span class='notice'>The [src] has already been claimed!</span>")
 		return
 
-	nameset = 1
 	to_chat(user, "<span class='notice'>You claim the [src] as your own!</span>")
-	name = "[user]'s signet ring"
-	desc = "A signet ring belonging to [user], for when you're too sophisticated to sign letters."
+	change_name(user)
+	nameset = 1
+
+/obj/item/clothing/ring/seal/signet/proc/change_name(var/signet_name = "Unknown")
+	name = "[signet_name]'s signet ring"
+	desc = "A signet ring belonging to [signet_name], for when you're too sophisticated to sign letters."
+
+//Chameleon Signet Ring
+/obj/item/clothing/ring/seal/signet/chameleon/attack_self(mob/user)
+	var/signet_name = sanitize(input("Enter name. Leave blank to use your own.", "Name", signet_name)) || user
+	to_chat(user, "<span class='notice'>The face of \the [src] shifts.</span>")
+	change_name(signet_name)

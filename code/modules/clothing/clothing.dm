@@ -277,16 +277,16 @@ BLIND     // can't see anything
 		species_restricted -= SPECIES_TAJARA
 	return
 
-/obj/item/clothing/gloves/mob_can_equip(mob/user)
-	var/mob/living/carbon/human/H = user
+/obj/item/clothing/gloves/mob_can_equip(mob/user_mob, slot)
+	var/mob/living/carbon/human/H = user_mob
 
-	if(istype(H.gloves, /obj/item/clothing/ring))
+	if(istype(H.gloves, /obj/item/clothing/ring) && slot == slot_gloves)
 		ring = H.gloves
 		if(!ring.undergloves)
-			to_chat(user, "You are unable to wear \the [src] as \the [H.gloves] are in the way.")
+			to_chat(user_mob, "You are unable to wear \the [src] over \the [ring].")
 			ring = null
 			return 0
-		H.drop_from_inventory(ring)	//Remove the ring (or other under-glove item in the hand slot?) so you can put on the gloves.
+		H.drop_from_inventory(ring)	//Remove the ring so you can put on the gloves.
 		ring.forceMove(src)
 
 	if(!..())
@@ -296,7 +296,7 @@ BLIND     // can't see anything
 		return 0
 
 	if (ring)
-		to_chat(user, "You slip \the [src] on over \the [ring].")
+		to_chat(user_mob, "You slip \the [src] on over \the [ring].")
 	wearer = H //TODO clean this when magboots are cleaned
 	return 1
 
