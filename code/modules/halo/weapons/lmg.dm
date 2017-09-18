@@ -11,8 +11,9 @@
 	item_state = "halo_saw"
 	caliber = "a762"
 	slot_flags = 0	//too unwieldy to carry on your back
-	load_method = MAGAZINE|BELT_FEED
+	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762_box_ap
+	allowed_magazines = list(/obj/item/ammo_magazine/a762_box_ap) //Disallows loading normal ma5b mags into the LMG.
 	//fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'			//no halo firing sfx for this one yet
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
 	burst = 5

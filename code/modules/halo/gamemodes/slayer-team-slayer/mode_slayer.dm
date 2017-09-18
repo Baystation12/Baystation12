@@ -1,4 +1,6 @@
 
+#define RESPAWN_TIME 300
+
 /datum/game_mode/slayer
 	name = "Free For All Slayer"
 	round_description = "Fight to the death with everyone you come across."
@@ -8,8 +10,10 @@
 	probability = 0
 	var/list/mode_teams = list("Spartan Slayer")		//jobs are used to represent "teams"
 	var/list/team_scores_unsorted = list()
+	var/list/scores_with_names = list()
 	var/round_end_time = 0
 	var/round_length = 6000
+	var/nextrespawn
 	disabled_jobs = list(/datum/job/team_slayer_red, /datum/job/team_slayer_blue)
 
 /datum/game_mode/slayer/pre_setup()
@@ -22,6 +26,27 @@
 	if(world.time > round_end_time)
 		return 1
 	return 0
+
+/datum/game_mode/slayer/proc/auto_respawn()
+	for(var/mob/observer/ghost/G in GLOB.ghost_mob_list)
+		if(G.client)
+			if(G.can_reenter_corpse != CORPSE_CAN_REENTER_AND_RESPAWN)
+				to_chat(G,"<span class = 'danger'>You may now respawn.</span>")
+				G.can_reenter_corpse = CORPSE_CAN_REENTER_AND_RESPAWN
+				G.timeofdeath = 0
+				nextrespawn = world.time + RESPAWN_TIME
+
+/datum/game_mode/slayer/proc/auto_kill()
+	for(var/mob/living/carbon/human/i in GLOB.player_list)
+		if(i.stat == DEAD) continue
+		var/health = i.maxHealth - i.getBruteLoss() - i.getFireLoss() - i.getToxLoss() - i.getCloneLoss()
+		if(health <= (i.maxHealth/2))
+			i.adjustBrainLoss(i.health+1)
+
+/datum/game_mode/slayer/process() //Used to allow respawns after few minutes. Also auto-kills people after a threshold.
+	if(world.time >= nextrespawn)
+		auto_respawn()
+		auto_kill()
 
 /datum/game_mode/slayer/declare_completion()
 	var/out_message = "<h1>The round is over! The scores were:</h1>"
@@ -41,9 +66,18 @@
 //this is a bit hacky (it uses admin attack logging) but the alternative is writing a new system to do exactly the same thing
 /datum/game_mode/slayer/handle_mob_death(var/mob/victim, var/list/args = list())
 	var/datum/mob_lite/killer = victim.last_attacker_
-	if(killer && killer.assigned_role in mode_teams && killer.name != victim.name)
+	if(killer && killer.assigned_role in mode_teams)
 		var/team_name = get_team_name(killer)
 		if(!team_scores_unsorted[team_name])
 			team_scores_unsorted[team_name] = 0
-		team_scores_unsorted[team_name] += 1
-		to_world("<h1>[victim.real_name] has been killed by [killer.name]: [team_name] ([team_scores_unsorted[team_name]] kills)</h1>")
+		if(killer.name != victim.name)
+			team_scores_unsorted[team_name] += 1
+			to_world("<h1>[victim.real_name] has been killed by [killer.name]: [team_name] ([team_scores_unsorted[team_name]] kills)</h1>")
+	return 1
+	/*if(!scores_with_names[killer.name]) //Can be used later for by-name scoring, commented out seeing as it's probably not needed right now.
+		scores_with_names[killer.name] = 0
+	if(killer.name == victim.name)
+		scores_with_names[killer.name] -= 1
+		to_world("<h2>[killer.name] has committed suicide!</h2>")
+	else
+		scores_with_names[killer.name] += 1*/

@@ -453,7 +453,7 @@ var/global/list/additional_antag_types = list()
 	return
 
 /hook/death/proc/mode_on_mob_death(var/mob/living/carbon/human/H, var/list/args = list())
-	ticker.mode.handle_mob_death(H, args)
+	return ticker.mode.handle_mob_death(H, args)
 
 //////////////////////////
 //Reports player logouts//
