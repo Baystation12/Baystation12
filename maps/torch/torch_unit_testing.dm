@@ -7,7 +7,7 @@
 		/area/constructionsite/atmospherics = NO_SCRUBBER,
 		/area/constructionsite/teleporter = NO_SCRUBBER,
 		/area/derelict/ship = NO_SCRUBBER|NO_VENT,
-		/area/djstation = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/djstation = NO_SCRUBBER|NO_APC,
 		/area/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
 		/area/engineering/auxpower = NO_SCRUBBER|NO_VENT,
 		/area/engineering/drone_fabrication = NO_SCRUBBER|NO_VENT,
