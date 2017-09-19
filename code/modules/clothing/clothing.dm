@@ -549,6 +549,7 @@ BLIND     // can't see anything
 	holding.forceMove(get_turf(usr))
 
 	if(usr.put_in_hands(holding))
+		usr.visible_message("<span class='warning'>\The [usr] pulls \the [holding] out of \the [src]!</span>", range = 1)
 		holding = null
 	else
 		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
@@ -574,6 +575,7 @@ BLIND     // can't see anything
 		user.unEquip(I)
 		I.forceMove(src)
 		holding = I
+		user.visible_message("<span class='notice'>\The [user] shoves \the [I] into \the [src].</span>", range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/draw_knife
 		update_icon()
 	else
