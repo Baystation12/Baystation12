@@ -138,7 +138,7 @@
 			return 1
 	return 0
 
-/obj/machinery/smartfridge/drying_rack/process()
+/obj/machinery/smartfridge/drying_rack/Process()
 	..()
 	if(inoperable())
 		return
@@ -172,7 +172,7 @@
 				qdel(S)
 			return
 
-/obj/machinery/smartfridge/process()
+/obj/machinery/smartfridge/Process()
 	if(stat & (BROKEN|NOPOWER))
 		return
 	if(src.seconds_electrified > 0)

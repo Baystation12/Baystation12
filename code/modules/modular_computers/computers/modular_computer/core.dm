@@ -1,4 +1,4 @@
-/obj/item/modular_computer/process()
+/obj/item/modular_computer/Process()
 	if(!enabled) // The computer is turned off
 		last_power_usage = 0
 		return 0
@@ -42,7 +42,7 @@
 	return 1
 
 /obj/item/modular_computer/New()
-	GLOB.processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	install_default_hardware()
 	if(hard_drive)
 		install_default_programs()
@@ -52,7 +52,7 @@
 
 /obj/item/modular_computer/Destroy()
 	kill_program(1)
-	GLOB.processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
 		uninstall_component(null, CH)
 		qdel(CH)

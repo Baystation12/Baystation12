@@ -1,6 +1,4 @@
-var/global/list/datum/pipe_network/pipe_networks = list()
-
-datum/pipe_network
+/datum/pipe_network
 	var/list/datum/gas_mixture/gases = list() //All of the gas_mixtures continuously connected in this network
 	var/volume = 0	//caches the total volume for atmos machines to use in gas calculations
 
@@ -17,7 +15,7 @@ datum/pipe_network
 		..()
 
 	Destroy()
-		pipe_networks -= src
+		STOP_PROCESSING_PIPENET(src)
 		for(var/datum/pipeline/line_member in line_members)
 			line_member.network = null
 		for(var/obj/machinery/atmospherics/normal_member in normal_members)
@@ -47,7 +45,7 @@ datum/pipe_network
 		update_network_gases()
 
 		if((normal_members.len>0)||(line_members.len>0))
-			pipe_networks += src
+			START_PROCESSING_PIPENET(src)
 		else
 			qdel(src)
 

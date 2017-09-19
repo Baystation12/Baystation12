@@ -1,9 +1,9 @@
 SUBSYSTEM_DEF(garbage)
 	name = "Garbage"
 	priority = 15
-	wait = 5
+	wait = 20
 	flags = SS_POST_FIRE_TIMING|SS_BACKGROUND|SS_NO_INIT
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	runlevels = RUNLEVELS_DEFAULT|RUNLEVEL_LOBBY
 
 	var/collection_timeout = 3000 // deciseconds to wait to let running procs finish before we just say fuck it and force del() the object
 	var/delslasttick = 0          // number of del()'s we've done this tick
@@ -145,10 +145,10 @@ SUBSYSTEM_DEF(garbage)
 
 	queue[refid] = gctime
 
-//this is purely to seperate things profile wise.
+//this is purely to separate things profile wise.
 /datum/controller/subsystem/garbage/proc/HardDelete(datum/A)
 	var/time = world.timeofday
-	var/tick = world.tick_usage
+	var/tick = TICK_USAGE
 	var/ticktime = world.time
 
 	var/type = A.type
@@ -156,7 +156,7 @@ SUBSYSTEM_DEF(garbage)
 
 	del(A)
 
-	tick = (world.tick_usage-tick+((world.time-ticktime)/world.tick_lag*100))
+	tick = (TICK_USAGE-tick+((world.time-ticktime)/world.tick_lag*100))
 	if (tick > highest_del_tickusage)
 		highest_del_tickusage = tick
 	time = world.timeofday - time
@@ -237,19 +237,7 @@ SUBSYSTEM_DEF(garbage)
 	else if(D.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
 		CRASH("[D.type] destroy proc was called multiple times, likely due to a qdel loop in the Destroy logic")
 
-// Default implementation of clean-up code.
-// This should be overridden to remove all references pointing to the object being destroyed.
-// Return the appropriate QDEL_HINT; in most cases this is QDEL_HINT_QUEUE.
-/datum/proc/Destroy(force=FALSE)
-	tag = null
-	GLOB.nanomanager && GLOB.nanomanager.close_uis(src)
-	return QDEL_HINT_QUEUE
-
-/datum/var/gc_destroyed //Time when this object was destroyed.
-
 #ifdef TESTING
-/datum/var/running_find_references
-/datum/var/last_find_references = 0
 
 /datum/verb/find_refs()
 	set category = "Debug"
@@ -263,7 +251,7 @@ SUBSYSTEM_DEF(garbage)
 	running_find_references = type
 	if(usr && usr.client)
 		if(usr.client.running_find_references)
-			report_progress("CANCELLED search for references to a [usr.client.running_find_references].")
+			testing("CANCELLED search for references to a [usr.client.running_find_references].")
 			usr.client.running_find_references = null
 			running_find_references = null
 			//restart the garbage collector
@@ -282,12 +270,12 @@ SUBSYSTEM_DEF(garbage)
 	if(usr && usr.client)
 		usr.client.running_find_references = type
 
-	report_progress("Beginning search for references to a [type].")
+	testing("Beginning search for references to a [type].")
 	last_find_references = world.time
 	DoSearchVar(GLOB)
 	for(var/datum/thing in world)
 		DoSearchVar(thing, "WorldRef: [thing]")
-	report_progress("Completed search for references to a [type].")
+	testing("Completed search for references to a [type].")
 	if(usr && usr.client)
 		usr.client.running_find_references = null
 	running_find_references = null
@@ -298,13 +286,12 @@ SUBSYSTEM_DEF(garbage)
 
 /client/verb/purge_all_destroyed_objects()
 	set category = "Debug"
-	if(SSgarbage)
-		while(SSgarbage.queue.len)
-			var/datum/o = locate(SSgarbage.queue[1])
-			if(istype(o) && o.gc_destroyed)
-				del(o)
-				SSgarbage.totaldels++
-			SSgarbage.queue.Cut(1, 2)
+	while(SSgarbage.queue.len)
+		var/datum/o = locate(SSgarbage.queue[1])
+		if(istype(o) && o.gc_destroyed)
+			del(o)
+			SSgarbage.totaldels++
+		SSgarbage.queue.Cut(1, 2)
 
 /datum/verb/qdel_then_find_references()
 	set category = "Debug"
@@ -345,10 +332,10 @@ SUBSYSTEM_DEF(garbage)
 			for(var/varname in D.vars)
 				var/variable = D.vars[varname]
 				if(variable == src)
-					report_progress("Found [src.type] \ref[src] in [D.type]'s [varname] var. [Xname]")
+					testing("Found [src.type] \ref[src] in [D.type]'s [varname] var. [Xname]")
 				else if(islist(variable))
 					if(src in variable)
-						report_progress("Found [src.type] \ref[src] in [D.type]'s [varname] list var. Global: [Xname]")
+						testing("Found [src.type] \ref[src] in [D.type]'s [varname] list var. Global: [Xname]")
 #ifdef GC_FAILURE_HARD_LOOKUP
 					for(var/I in variable)
 						DoSearchVar(I, TRUE)
@@ -357,7 +344,7 @@ SUBSYSTEM_DEF(garbage)
 #endif
 	else if(islist(X))
 		if(src in X)
-			report_progress("Found [src.type] \ref[src] in list [Xname].")
+			testing("Found [src.type] \ref[src] in list [Xname].")
 #ifdef GC_FAILURE_HARD_LOOKUP
 		for(var/I in X)
 			DoSearchVar(I, Xname + ": list")

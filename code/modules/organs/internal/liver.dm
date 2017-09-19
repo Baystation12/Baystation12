@@ -13,7 +13,7 @@
 	. = ..()
 	icon_state = "liver-prosthetic"
 
-/obj/item/organ/internal/liver/process()
+/obj/item/organ/internal/liver/Process()
 
 	..()
 	if(!owner)

@@ -60,7 +60,7 @@
 
 	..(severity)
 
-/obj/machinery/portable_atmospherics/powered/pump/process()
+/obj/machinery/portable_atmospherics/powered/pump/Process()
 	..()
 	var/power_draw = -1
 

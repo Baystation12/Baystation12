@@ -297,7 +297,7 @@
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
 	icon_state = "mousetraps"
 	startswith = list(/obj/item/device/assembly/mousetrap = 6)
-	
+
 /obj/item/weapon/storage/box/mousetraps/empty
 	startswith = null
 
@@ -330,7 +330,7 @@
 			W.lit = 1
 			W.damtype = "burn"
 			W.icon_state = "match_lit"
-			GLOB.processing_objects.Add(W)
+			START_PROCESSING(SSobj, W)
 		W.update_icon()
 		return
 
@@ -355,7 +355,7 @@
 
 /obj/item/weapon/storage/box/lights/bulbs
 	startswith = list(/obj/item/weapon/light/bulb = 21)
-	
+
 /obj/item/weapon/storage/box/lights/bulbs/empty
 	startswith = null
 
@@ -364,7 +364,7 @@
 	icon_state = "lighttube"
 	startswith = list(/obj/item/weapon/light/tube = 17,
 					/obj/item/weapon/light/tube/large = 4)
-					
+
 /obj/item/weapon/storage/box/lights/tubes/empty
 	startswith = null
 
@@ -374,7 +374,7 @@
 	startswith = list(/obj/item/weapon/light/tube = 12,
 					/obj/item/weapon/light/tube/large = 4,
 					/obj/item/weapon/light/bulb = 5)
-					
+
 /obj/item/weapon/storage/box/lights/mixed/empty
 	startswith = null
 

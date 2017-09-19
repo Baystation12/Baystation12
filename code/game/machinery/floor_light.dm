@@ -78,7 +78,7 @@ var/list/floor_light_cache = list()
 		update_brightness()
 		return
 
-/obj/machinery/floor_light/process()
+/obj/machinery/floor_light/Process()
 	..()
 	var/need_update
 	if((!anchored || broken()) && on)

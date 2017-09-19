@@ -59,9 +59,8 @@ field_generator power level display
 	..()
 	fields = list()
 	connected_gens = list()
-	return
 
-/obj/machinery/field_generator/process()
+/obj/machinery/field_generator/Process()
 	if(Varedit_start == 1)
 		if(active == 0)
 			active = 1
@@ -76,7 +75,6 @@ field_generator power level display
 	if(src.active == 2)
 		calc_power()
 		update_icon()
-	return
 
 
 /obj/machinery/field_generator/attack_hand(mob/user as mob)
@@ -332,7 +330,7 @@ field_generator power level display
 	//I want to avoid using global variables.
 	spawn(1)
 		var/temp = 1 //stops spam
-		for(var/obj/singularity/O in GLOB.machines)
+		for(var/obj/singularity/O in SSmachines.machinery)
 			if(O.last_warning && temp)
 				if((world.time - O.last_warning) > 50) //to stop message-spam
 					temp = 0

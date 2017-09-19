@@ -98,7 +98,7 @@
 
 	return 0
 
-/obj/machinery/atmospherics/omni/mixer/process()
+/obj/machinery/atmospherics/omni/mixer/Process()
 	if(!..())
 		return 0
 

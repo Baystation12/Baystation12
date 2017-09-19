@@ -87,7 +87,7 @@
 /obj/machinery/atmospherics/trinary/filter/hide(var/i)
 	update_underlays()
 
-/obj/machinery/atmospherics/trinary/filter/process()
+/obj/machinery/atmospherics/trinary/filter/Process()
 	..()
 
 	last_power_draw = 0

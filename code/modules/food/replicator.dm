@@ -141,7 +141,7 @@
 	if(world.time > make_time)
 		start_making = 1
 
-/obj/machinery/food_replicator/process()
+/obj/machinery/food_replicator/Process()
 	if(queued_dishes && queued_dishes.len)
 		if(start_making) //want to do this first so that the first dish won't instantly come out
 			src.audible_message("<b>\The [src]</b> rumbles and vibrates.")

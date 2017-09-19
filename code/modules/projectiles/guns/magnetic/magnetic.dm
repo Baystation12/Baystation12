@@ -21,22 +21,20 @@
 	var/power_per_tick                                         // Capacitor charge per process(). Updated based on capacitor rating.
 
 /obj/item/weapon/gun/magnetic/Initialize()
+	START_PROCESSING(SSobj, src)
 	if(capacitor)
 		power_per_tick = (power_cost*0.15) * capacitor.rating
 	update_icon()
 	. = ..()
 
-/obj/item/weapon/gun/magnetic/New()
-	..()
-	GLOB.processing_objects |= src
-
 /obj/item/weapon/gun/magnetic/Destroy()
+	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(cell)
 	QDEL_NULL(loaded)
 	QDEL_NULL(capacitor)
 	. = ..()
 
-/obj/item/weapon/gun/magnetic/process()
+/obj/item/weapon/gun/magnetic/Process()
 	if(capacitor)
 		if(cell)
 			if(capacitor.charge < capacitor.max_charge && cell.checked_use(power_per_tick))

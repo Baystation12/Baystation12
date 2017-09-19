@@ -92,21 +92,16 @@ var/round_start_time = 0
 	next_duration_update = world.time + 1 MINUTES
 	return last_round_duration
 
-//Can be useful for things dependent on process timing
-/proc/process_schedule_interval(var/process_name)
-	var/datum/controller/process/process = processScheduler.getProcess(process_name)
-	return process.schedule_interval
-
 /hook/startup/proc/set_roundstart_hour()
 	roundstart_hour = pick(2,7,12,17)
 	return 1
 
-/var/midnight_rollovers = 0
-/var/rollovercheck_last_timeofday = 0
+GLOBAL_VAR_INIT(midnight_rollovers, 0)
+GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 /proc/update_midnight_rollover()
-	if (world.timeofday < rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
-		return midnight_rollovers++
-	return midnight_rollovers
+	if (world.timeofday < GLOB.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
+		return GLOB.midnight_rollovers++
+	return GLOB.midnight_rollovers
 
 //Increases delay as the server gets more overloaded,
 //as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful

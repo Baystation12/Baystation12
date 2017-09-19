@@ -154,7 +154,7 @@ var/datum/antagonist/cultist/cult
 				add_cult_magic(H.current)
 
 	if((CULT_GHOSTS_1 in to_update) || (CULT_GHOSTS_2 in to_update) || (CULT_GHOSTS_3 in to_update))
-		for(var/mob/observer/ghost/D in GLOB.mob_list)
+		for(var/mob/observer/ghost/D in SSmobs.mob_list)
 			add_ghost_magic(D)
 
 /datum/antagonist/cultist/proc/offer_uncult(var/mob/M)
