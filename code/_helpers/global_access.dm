@@ -167,8 +167,6 @@
 			return global.adminhelp_ignored_words;
 		if("adminlog")
 			return global.adminlog;
-		if("ai_icons")
-			return global.ai_icons;
 		if("ai_list")
 			return global.ai_list;
 		if("ai_status_emotions")
@@ -313,8 +311,6 @@
 			return global.chemical_reaction_logs;
 		if("chemical_reactions_list")
 			return global.chemical_reactions_list;
-		if("chemical_reagents_list")
-			return global.chemical_reagents_list;
 		if("chemistryProcess")
 			return global.chemistryProcess;
 		if("chicken_count")
@@ -383,8 +379,6 @@
 			return global.debug_verbs;
 		if("decls_repository")
 			return global.decls_repository;
-		if("default_ai_icon")
-			return global.default_ai_icon;
 		if("default_material_composition")
 			return global.default_material_composition;
 		if("default_mobloc")
@@ -525,8 +519,6 @@
 			return global.ghost_traps;
 		if("global_message_listener")
 			return global.global_message_listener;
-		if("global_underwear")
-			return global.global_underwear;
 		if("global_vars_")
 			return global.global_vars_;
 		if("godcult")
@@ -939,12 +931,6 @@
 			return global.secret_force_mode;
 		if("sector_shuttles")
 			return global.sector_shuttles;
-		if("security_announcement_down")
-			return global.security_announcement_down;
-		if("security_announcement_up")
-			return global.security_announcement_up;
-		if("security_level")
-			return global.security_level;
 		if("security_positions")
 			return global.security_positions;
 		if("seen_citizenships")
@@ -1023,8 +1009,6 @@
 			return global.station_account;
 		if("station_date")
 			return global.station_date;
-		if("status_icons_to_colour")
-			return global.status_icons_to_colour;
 		if("stool_cache")
 			return global.stool_cache;
 		if("stored_shock_by_ref")
@@ -1143,8 +1127,6 @@
 			return global.turbolift_controller;
 		if("turbolifts")
 			return global.turbolifts;
-		if("turfs")
-			return global.turfs;
 		if("turret_icons")
 			return global.turret_icons;
 		if("uniqueness_repository")
@@ -1376,8 +1358,6 @@
 			global.adminhelp_ignored_words=newval;
 		if("adminlog")
 			global.adminlog=newval;
-		if("ai_icons")
-			global.ai_icons=newval;
 		if("ai_list")
 			global.ai_list=newval;
 		if("ai_status_emotions")
@@ -1522,8 +1502,6 @@
 			global.chemical_reaction_logs=newval;
 		if("chemical_reactions_list")
 			global.chemical_reactions_list=newval;
-		if("chemical_reagents_list")
-			global.chemical_reagents_list=newval;
 		if("chemistryProcess")
 			global.chemistryProcess=newval;
 		if("chicken_count")
@@ -1592,8 +1570,6 @@
 			global.debug_verbs=newval;
 		if("decls_repository")
 			global.decls_repository=newval;
-		if("default_ai_icon")
-			global.default_ai_icon=newval;
 		if("default_material_composition")
 			global.default_material_composition=newval;
 		if("default_mobloc")
@@ -1734,8 +1710,6 @@
 			global.ghost_traps=newval;
 		if("global_message_listener")
 			global.global_message_listener=newval;
-		if("global_underwear")
-			global.global_underwear=newval;
 		if("global_vars_")
 			global.global_vars_=newval;
 		if("godcult")
@@ -2148,12 +2122,6 @@
 			global.secret_force_mode=newval;
 		if("sector_shuttles")
 			global.sector_shuttles=newval;
-		if("security_announcement_down")
-			global.security_announcement_down=newval;
-		if("security_announcement_up")
-			global.security_announcement_up=newval;
-		if("security_level")
-			global.security_level=newval;
 		if("security_positions")
 			global.security_positions=newval;
 		if("seen_citizenships")
@@ -2232,8 +2200,6 @@
 			global.station_account=newval;
 		if("station_date")
 			global.station_date=newval;
-		if("status_icons_to_colour")
-			global.status_icons_to_colour=newval;
 		if("stool_cache")
 			global.stool_cache=newval;
 		if("stored_shock_by_ref")
@@ -2352,8 +2318,6 @@
 			global.turbolift_controller=newval;
 		if("turbolifts")
 			global.turbolifts=newval;
-		if("turfs")
-			global.turfs=newval;
 		if("turret_icons")
 			global.turret_icons=newval;
 		if("uniqueness_repository")
@@ -2503,7 +2467,6 @@
 	"admin_verbs_spawn",
 	"adminhelp_ignored_words",
 	"adminlog",
-	"ai_icons",
 	"ai_list",
 	"ai_status_emotions",
 	"ai_verbs_default",
@@ -2577,7 +2540,6 @@
 	"checked_for_inactives",
 	"chemical_reaction_logs",
 	"chemical_reactions_list",
-	"chemical_reagents_list",
 	"chemistryProcess",
 	"chicken_count",
 	"church_name",
@@ -2612,7 +2574,6 @@
 	"deathsquad",
 	"debug_verbs",
 	"decls_repository",
-	"default_ai_icon",
 	"default_material_composition",
 	"default_mobloc",
 	"default_onmob_icons",
@@ -2683,7 +2644,6 @@
 	"ghost_sightless_images",
 	"ghost_traps",
 	"global_message_listener",
-	"global_underwear",
 	"global_vars_",
 	"godcult",
 	"gravity_is_on",
@@ -2891,9 +2851,6 @@
 	"secondary_mode",
 	"secret_force_mode",
 	"sector_shuttles",
-	"security_announcement_down",
-	"security_announcement_up",
-	"security_level",
 	"security_positions",
 	"seen_citizenships",
 	"seen_factions",
@@ -2933,7 +2890,6 @@
 	"sqlport",
 	"station_account",
 	"station_date",
-	"status_icons_to_colour",
 	"stool_cache",
 	"stored_shock_by_ref",
 	"string_part_flags",
@@ -2993,7 +2949,6 @@
 	"transfer_controller",
 	"turbolift_controller",
 	"turbolifts",
-	"turfs",
 	"turret_icons",
 	"uniqueness_repository",
 	"universe_has_ended",

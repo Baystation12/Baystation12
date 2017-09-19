@@ -1,12 +1,14 @@
-var/list/spawntypes = list()
+GLOBAL_VAR(spawntypes)
 
-/proc/populate_spawn_points()
-	spawntypes = list()
-	for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)
-		var/datum/spawnpoint/S = type
-		var/display_name = initial(S.display_name)
-		if((display_name in GLOB.using_map.allowed_spawns) || initial(S.always_visible))
-			spawntypes[display_name] = new S
+/proc/spawntypes()
+	if(!GLOB.spawntypes)
+		GLOB.spawntypes = list()
+		for(var/type in typesof(/datum/spawnpoint)-/datum/spawnpoint)
+			var/datum/spawnpoint/S = type
+			var/display_name = initial(S.display_name)
+			if((display_name in GLOB.using_map.allowed_spawns) || initial(S.always_visible))
+				GLOB.spawntypes[display_name] = new S
+	return GLOB.spawntypes
 
 /datum/spawnpoint
 	var/msg		  //Message to display on the arrivals computer.

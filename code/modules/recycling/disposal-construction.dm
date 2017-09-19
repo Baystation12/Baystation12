@@ -99,7 +99,7 @@
 	// hide called by levelupdate if turf intact status changes
 	// change visibility status and force update of icon
 	hide(var/intact)
-		invisibility = (intact && level==1) ? 101: 0	// hide if floor is intact
+		set_invisibility((intact && level==1) ? 101: 0)	// hide if floor is intact
 		update()
 
 
@@ -287,7 +287,7 @@
 							P.base_icon_state = base_state
 							P.set_dir(dir)
 							P.dpdir = dpdir
-							P.updateicon()
+							P.update_icon()
 
 							//Needs some special treatment ;)
 							if(ptype==9 || ptype==10)

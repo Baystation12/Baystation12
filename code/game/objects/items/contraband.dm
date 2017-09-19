@@ -31,14 +31,14 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random
 	flags = 0
-	var/list/random_reagent_list = list(list("water" = 15) = 1, list("cleaner" = 15) = 1)
+	var/list/random_reagent_list = list(list(/datum/reagent/water = 15) = 1, list(/datum/reagent/space_cleaner = 15) = 1)
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
-		list("mindbreaker" = 10, "space_drugs" = 20)	= 3,
-		list("carpotoxin" = 15)							= 2,
-		list("impedrezene" = 15)						= 2,
-		list("zombiepowder" = 10)						= 1)
+		list(/datum/reagent/mindbreaker = 10, /datum/reagent/space_drugs = 20)	= 3,
+		list(/datum/reagent/toxin/carpotoxin = 15)							= 2,
+		list(/datum/reagent/impedrezene = 15)						= 2,
+		list(/datum/reagent/toxin/zombiepowder = 10)						= 1)
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random/New()
 	..()

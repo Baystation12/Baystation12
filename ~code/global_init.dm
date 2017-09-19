@@ -10,14 +10,13 @@
 var/global/datum/global_init/init = new ()
 
 /*
-    Pre-map initialization stuff should go here.
+	Pre-map initialization stuff should go here.
 */
 /datum/global_init/New()
 	load_configuration()
 	callHook("global_init")
 
 	// kept out of a hook to preserve call order
-	initialize_chemical_reagents()
 	initialize_chemical_reactions()
 
 	qdel(src) //we're done

@@ -53,7 +53,7 @@
 "db" = (/obj/effect/shuttle_landmark/cluster/ninja,/turf/space,/area/space)
 "eb" = (/obj/effect/shuttle_landmark/cluster/ert,/turf/space,/area/space)
 "fb" = (/obj/effect/shuttle_landmark/cluster/aquila,/turf/space,/area/space)
-"gb" = (/obj/effect/shuttle_landmark/cluster/calypso,/turf/space,/area/space)
+"gb" = (/obj/effect/shuttle_landmark/cluster/exploration_shuttle,/turf/space,/area/space)
 "hb" = (/obj/effect/shuttle_landmark/cluster/guppy,/turf/space,/area/space)
 "ib" = (/obj/effect/shuttle_landmark/cluster/skipjack,/turf/simulated/floor/asteroid,/area/mine/explored)
 

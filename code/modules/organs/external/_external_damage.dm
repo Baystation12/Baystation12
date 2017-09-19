@@ -4,7 +4,7 @@
 
 /obj/item/organ/external/proc/is_damageable(var/additional_damage = 0)
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
-	return ((robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage)
+	return ((robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage * 4)
 
 /obj/item/organ/external/take_damage(brute, burn, damage_flags, used_weapon = null)
 	brute = round(brute * brute_mod, 0.1)
@@ -16,6 +16,63 @@
 	var/edge  = (damage_flags & DAM_EDGE)
 	var/laser = (damage_flags & DAM_LASER)
 	var/blunt = brute && !sharp && !edge
+
+	if(used_weapon)
+		add_autopsy_data("[used_weapon]", brute + burn)
+	var/can_cut = (prob(brute*2) || sharp) && (robotic < ORGAN_ROBOT)
+	var/spillover = 0
+	var/pure_brute = brute
+	if(!is_damageable(brute + burn))
+		spillover =  brute_dam + burn_dam + brute - max_damage
+		if(spillover > 0)
+			brute -= spillover
+		else
+			spillover = brute_dam + burn_dam + brute + burn - max_damage
+			if(spillover > 0)
+				burn -= spillover
+
+	owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
+	//If limb took enough damage, try to cut or tear it off
+	if(owner && loc == owner && !is_stump())
+		if(!cannot_amputate && config.limbs_can_break)
+			if((brute_dam + burn_dam + brute + burn + spillover) >= (max_damage * config.organ_health_multiplier))
+				var/force_droplimb = 0
+				if((brute_dam + burn_dam + brute + burn + spillover) >= (max_damage * config.organ_health_multiplier * 4))
+					force_droplimb = 1
+				//organs can come off in three cases
+				//1. If the damage source is edge_eligible and the brute damage dealt exceeds the edge threshold, then the organ is cut off.
+				//2. If the damage amount dealt exceeds the disintegrate threshold, the organ is completely obliterated.
+				//3. If the organ has already reached or would be put over it's max damage amount (currently redundant),
+				//   and the brute damage dealt exceeds the tearoff threshold, the organ is torn off.
+				//Check edge eligibility
+				var/edge_eligible = 0
+				if(edge)
+					if(istype(used_weapon,/obj/item))
+						var/obj/item/W = used_weapon
+						if(W.w_class >= w_class)
+							edge_eligible = 1
+					else
+						edge_eligible = 1
+				brute = pure_brute
+				if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE)
+					if(prob(brute) || force_droplimb)
+						droplimb(0, DROPLIMB_EDGE)
+						return
+				else if(burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY)
+					if(prob(burn/3) || force_droplimb)
+						droplimb(0, DROPLIMB_BURN)
+						return
+				else if(brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY)
+					if(prob(brute) || force_droplimb)
+						droplimb(0, DROPLIMB_BLUNT)
+						return
+				else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF)
+					if(prob(brute/3) || force_droplimb)
+						droplimb(0, DROPLIMB_EDGE)
+						return
+				else if(force_droplimb)
+					droplimb(0, DROPLIMB_BLUNT)
+					return
 
 	// High brute damage or sharp objects may damage internal organs
 	var/damage_amt = brute
@@ -46,73 +103,31 @@
 	if(brute_dam > min_broken_damage && prob(brute_dam + brute * (1+blunt)) ) //blunt damage is gud at fracturing
 		fracture()
 
-	if(used_weapon)
-		add_autopsy_data("[used_weapon]", brute + burn)
-	var/can_cut = (prob(brute*2) || sharp) && (robotic < ORGAN_ROBOT)
-	var/spillover = 0
-	var/pure_brute = brute
-	if(!is_damageable(brute + burn))
-		spillover =  brute_dam + burn_dam + brute - max_damage
-		if(spillover > 0)
-			brute -= spillover
-		else
-			spillover = brute_dam + burn_dam + brute + burn - max_damage
-			if(spillover > 0)
-				burn -= spillover
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
-	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can
-	// push them faster into paincrit though, as the additional damage is converted into shock.
-
 	var/datum/wound/created_wound
-	if(is_damageable(brute + burn) || !config.limbs_can_break)
-		if(brute)
-			if(can_cut)
-				//need to check sharp again here so that blunt damage that was strong enough to break skin doesn't give puncture wounds
-				if(sharp && !edge)
-					created_wound = createwound( PIERCE, brute )
-				else
-					created_wound = createwound( CUT, brute )
+	if(brute)
+		if(can_cut)
+			//need to check sharp again here so that blunt damage that was strong enough to break skin doesn't give puncture wounds
+			if(sharp && !edge)
+				created_wound = createwound( PIERCE, brute )
 			else
-				createwound( BRUISE, brute )
-		if(burn)
-			if(laser)
-				createwound( LASER, burn )
-			else
-				createwound( BURN, burn )
-	else
-		//If there are still hurties to dispense
-		if (spillover)
-			owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
+				created_wound = createwound( CUT, brute )
+		else
+			createwound( BRUISE, brute )
+	if(burn)
+		if(laser)
+			createwound( LASER, burn )
+		else
+			createwound( BURN, burn )
+
+	add_pain(0.6*burn + 0.4*brute)
+	//If there are still hurties to dispense
+	if (spillover)
+		owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
-	owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
-	//If limb took enough damage, try to cut or tear it off
-	if(owner && loc == owner && !is_stump())
-		if(!cannot_amputate && config.limbs_can_break && (brute_dam + burn_dam + brute + burn + spillover) >= (max_damage * config.organ_health_multiplier))
-			//organs can come off in three cases
-			//1. If the damage source is edge_eligible and the brute damage dealt exceeds the edge threshold, then the organ is cut off.
-			//2. If the damage amount dealt exceeds the disintegrate threshold, the organ is completely obliterated.
-			//3. If the organ has already reached or would be put over it's max damage amount (currently redundant),
-			//   and the brute damage dealt exceeds the tearoff threshold, the organ is torn off.
-			//Check edge eligibility
-			var/edge_eligible = 0
-			if(edge)
-				if(istype(used_weapon,/obj/item))
-					var/obj/item/W = used_weapon
-					if(W.w_class >= w_class)
-						edge_eligible = 1
-				else
-					edge_eligible = 1
-			brute = pure_brute
-			if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE && prob(brute))
-				droplimb(0, DROPLIMB_EDGE)
-			else if(burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(burn/3))
-				droplimb(0, DROPLIMB_BURN)
-			else if(brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(brute))
-				droplimb(0, DROPLIMB_BLUNT)
-			else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF && prob(brute/3))
-				droplimb(0, DROPLIMB_EDGE)
+	owner.updatehealth()
 
 	if(owner && update_damstate())
 		owner.UpdateDamageIcon()
@@ -129,9 +144,9 @@
 			break
 
 		// heal brute damage
-		if(W.damage_type == BURN)
+		if(W.damage_type == BURN && (burn_ratio < 1 || vital))
 			burn = W.heal_damage(burn)
-		else
+		else if(brute_ratio < 1 || vital)
 			brute = W.heal_damage(brute)
 
 	if(internal)
@@ -199,7 +214,10 @@
 		lasting_pain += 10
 	else if(is_dislocated())
 		lasting_pain += 5
-	return pain + lasting_pain + 1.2 * brute_dam + 1.5 * burn_dam
+	var/tox_dam = 0
+	for(var/obj/item/organ/internal/I in internal_organs)
+		tox_dam += I.getToxLoss()
+	return pain + lasting_pain + 0.7 * brute_dam + 0.8 * burn_dam + 0.3 * tox_dam + 0.5 * get_genetic_damage()
 
 /obj/item/organ/external/proc/remove_pain(var/amount)
 	if(!can_feel_pain() || robotic >= ORGAN_ROBOT)
@@ -226,9 +244,11 @@
 	return 1
 
 /obj/item/organ/external/proc/sever_artery()
-	if(robotic < ORGAN_ROBOT && !(status & ORGAN_ARTERY_CUT) && species && species.has_organ[BP_HEART])
-		status |= ORGAN_ARTERY_CUT
-		return TRUE
+	if(species && species.has_organ[BP_HEART])
+		var/obj/item/organ/internal/heart/O = species.has_organ[BP_HEART]
+		if(robotic < ORGAN_ROBOT && !(status & ORGAN_ARTERY_CUT) && !initial(O.open))
+			status |= ORGAN_ARTERY_CUT
+			return TRUE
 	return FALSE
 
 /obj/item/organ/external/proc/sever_tendon()

@@ -1,9 +1,3 @@
-//Blood levels. These are percentages based on the species blood_volume far.
-var/const/BLOOD_VOLUME_SAFE    = 85
-var/const/BLOOD_VOLUME_OKAY    = 75
-var/const/BLOOD_VOLUME_BAD     = 60
-var/const/BLOOD_VOLUME_SURVIVE = 40
-
 /obj/item/organ/internal/heart
 	name = "heart"
 	icon_state = "heart-on"
@@ -39,7 +33,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	if(owner.stat == DEAD || robotic >= ORGAN_ROBOT)
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
-	if(owner.shock_stage >= 120 || owner.getOxyLoss() >= 100 || owner.get_effective_blood_volume() < BLOOD_VOLUME_SURVIVE || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75))) // The heart has stopped due to going into traumatic or cardiovascular shock.
+	if(owner.shock_stage >= 120 || owner.getOxyLoss() >= 100 || owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75))) // The heart has stopped due to going into traumatic or cardiovascular shock.
 		if(pulse != PULSE_NONE)
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
 			pulse = PULSE_NONE
@@ -48,7 +42,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 		var/pulse_mod = owner.chem_effects[CE_PULSE]
 		if(owner.shock_stage > 30)
 			pulse_mod++
-		if(owner.get_effective_blood_volume() <= BLOOD_VOLUME_BAD)	//how much blood do we have
+		if(owner.get_blood_circulation() <= BLOOD_VOLUME_BAD)	//how much blood do we have
 			pulse  = PULSE_THREADY	//not enough :(
 
 		else if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
@@ -115,7 +109,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 						blood_max += bleed_amount
 						do_spray += "the [temp.artery_name] in \the [owner]'s [temp.name]"
 					else
-						owner.vessel.remove_reagent("blood", bleed_amount)
+						owner.vessel.remove_reagent(/datum/reagent/blood, bleed_amount)
 
 		switch(pulse)
 			if(PULSE_SLOW)

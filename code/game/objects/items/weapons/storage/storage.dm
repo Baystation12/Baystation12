@@ -322,8 +322,8 @@
 		remove_from_storage(I, T, 1)
 	update_ui_after_item_removal()
 
-/obj/item/weapon/storage/New()
-	..()
+/obj/item/weapon/storage/Initialize()
+	. = ..()
 	if(allow_quick_empty)
 		verbs += /obj/item/weapon/storage/verb/quick_empty
 	else
@@ -336,12 +336,6 @@
 
 	if(isnull(max_storage_space) && !isnull(storage_slots))
 		max_storage_space = storage_slots*base_storage_cost(max_w_class)
-
-	spawn(5)
-		var/total_storage_space = 0
-		for(var/obj/item/I in contents)
-			total_storage_space += I.get_storage_cost()
-		max_storage_space = max(total_storage_space,max_storage_space) //prevents spawned containers from being too small for their contents
 
 	storage_ui = new storage_ui(src)
 	prepare_ui()

@@ -90,6 +90,7 @@
 	shuttle_area = /area/shuttle/escape_pod10/station
 	number = 10
 /obj/effect/shuttle_landmark/escape_pod/start/pod10
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 10
 /obj/effect/shuttle_landmark/escape_pod/out/pod10
 	number = 10
@@ -101,6 +102,7 @@
 	shuttle_area = /area/shuttle/escape_pod11/station
 	number = 11
 /obj/effect/shuttle_landmark/escape_pod/start/pod11
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 11
 /obj/effect/shuttle_landmark/escape_pod/out/pod11
 	number = 11
@@ -113,6 +115,7 @@
 	shuttle_area = /area/shuttle/escape_pod12/station
 	number = 12
 /obj/effect/shuttle_landmark/escape_pod/start/pod12
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 12
 /obj/effect/shuttle_landmark/escape_pod/out/pod12
 	number = 12
@@ -123,6 +126,7 @@
 	shuttle_area = /area/shuttle/escape_pod13/station
 	number = 13
 /obj/effect/shuttle_landmark/escape_pod/start/pod13
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 13
 /obj/effect/shuttle_landmark/escape_pod/out/pod13
 	number = 13
@@ -133,6 +137,7 @@
 	shuttle_area = /area/shuttle/escape_pod14/station
 	number = 14
 /obj/effect/shuttle_landmark/escape_pod/start/pod14
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 14
 /obj/effect/shuttle_landmark/escape_pod/out/pod14
 	number = 14
@@ -143,6 +148,7 @@
 	shuttle_area = /area/shuttle/escape_pod15/station
 	number = 15
 /obj/effect/shuttle_landmark/escape_pod/start/pod15
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 15
 /obj/effect/shuttle_landmark/escape_pod/out/pod15
 	number = 15
@@ -153,6 +159,7 @@
 	shuttle_area = /area/shuttle/escape_pod16/station
 	number = 16
 /obj/effect/shuttle_landmark/escape_pod/start/pod16
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 16
 /obj/effect/shuttle_landmark/escape_pod/out/pod16
 	number = 16
@@ -163,6 +170,7 @@
 	shuttle_area = /area/shuttle/escape_pod17/station
 	number = 17
 /obj/effect/shuttle_landmark/escape_pod/start/pod17
+	base_turf = /turf/simulated/floor/reinforced/airless
 	number = 17
 /obj/effect/shuttle_landmark/escape_pod/out/pod17
 	number = 17
@@ -522,40 +530,40 @@
 	base_area = /area/quartermaster/hangar
 	base_turf = /turf/simulated/floor/plating
 
-/datum/shuttle/autodock/overmap/calypso
-	name = "Calypso"
+/datum/shuttle/autodock/overmap/exploration_shuttle
+	name = "Charon"
 	move_time = 90
-	shuttle_area = /area/calypso_hangar/start
+	shuttle_area = list(/area/exploration_shuttle/cockpit, /area/exploration_shuttle/atmos, /area/exploration_shuttle/power, /area/exploration_shuttle/crew, /area/exploration_shuttle/cargo, /area/exploration_shuttle/airlock)
 	current_location = "nav_hangar_calypso"
 	landmark_transition = "nav_transit_calypso"
 
-/obj/effect/shuttle_landmark/torch/hangar/calypso
-	name = "Calypso Hangar"
+/obj/effect/shuttle_landmark/torch/hangar/exploration_shuttle
+	name = "Charon Hangar"
 	landmark_tag = "nav_hangar_calypso"
 	base_area = /area/quartermaster/hangar
 	base_turf = /turf/simulated/floor/plating
 
-/obj/effect/shuttle_landmark/torch/deck1/calypso
+/obj/effect/shuttle_landmark/torch/deck1/exploration_shuttle
 	name = "Space near Deck Four"
 	landmark_tag = "nav_deck1_calypso"
 
-/obj/effect/shuttle_landmark/torch/deck2/calypso
+/obj/effect/shuttle_landmark/torch/deck2/exploration_shuttle
 	name = "Space near Deck Three"
 	landmark_tag = "nav_deck2_calypso"
 
-/obj/effect/shuttle_landmark/torch/deck3/calypso
+/obj/effect/shuttle_landmark/torch/deck3/exploration_shuttle
 	name = "Space near Deck Two"
 	landmark_tag = "nav_deck3_calypso"
 
-/obj/effect/shuttle_landmark/torch/deck4/calypso
+/obj/effect/shuttle_landmark/torch/deck4/exploration_shuttle
 	name = "Space near Deck One"
 	landmark_tag = "nav_deck4_calypso"
 
-/obj/effect/shuttle_landmark/torch/deck5/calypso
+/obj/effect/shuttle_landmark/torch/deck5/exploration_shuttle
 	name = "Space near Bridge"
 	landmark_tag = "nav_bridge_calypso"
 
-/obj/effect/shuttle_landmark/torch/transit/calypso
+/obj/effect/shuttle_landmark/torch/transit/exploration_shuttle
 	name = "In transit"
 	landmark_tag = "nav_transit_calypso"
 

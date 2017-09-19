@@ -87,7 +87,7 @@ proc/get_radio_key_from_channel(var/channel)
 	return default_language
 
 /mob/proc/is_muzzled()
-	return 0
+	return istype(wear_mask, /obj/item/clothing/mask/muzzle)
 
 //Takes a list of the form list(message, verb, whispering) and modifies it as needed
 //Returns 1 if a speech problem was applied, 0 otherwise

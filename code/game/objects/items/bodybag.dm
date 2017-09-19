@@ -123,8 +123,9 @@
 	a hostile enviroment."
 	icon = 'icons/obj/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
-	store_misc = 0
-	store_items = 0
+
+	storage_types = CLOSET_STORAGE_MOBS
+
 	var/used = 0
 	var/obj/item/weapon/tank/tank = null
 

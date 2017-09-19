@@ -154,3 +154,8 @@
 	desc = "A white beret adorned with the crest of NanoTrasen. For security guards that are more inclined towards style than safety."
 	icon_state = "beret_corporate_whitered"
 
+/obj/item/clothing/head/beret/plaincolor
+	name = "beret"
+	desc = "A simple, solid color beret. This one has no emblems or insignia on it."
+	icon_state = "beret_white"
+

@@ -42,9 +42,9 @@
 		A.laws.clear_supplied_laws()
 		to_chat(A, "<span class='danger'>Non-core laws reset.</span>")
 		return 1
-	if(href_list["PRG_uploadNTDefault"])
-		A.laws = new/datum/ai_laws/nanotrasen
-		to_chat(A, "<span class='danger'>All laws purged. NT Default lawset uploaded.</span>")
+	if(href_list["PRG_uploadDefault"])
+		A.laws = new GLOB.using_map.default_law_type
+		to_chat(A, "<span class='danger'>All laws purged. Default lawset uploaded.</span>")
 		return 1
 	if(href_list["PRG_addCustomSuppliedLaw"])
 		var/law_to_add = sanitize(input("Please enter a new law for the AI.", "Custom Law Entry"))
@@ -70,7 +70,7 @@
 		A.lying = 0
 		A.switch_from_dead_to_living_mob_list()
 		A.add_ai_verbs()
-		A.updateicon()
+		A.update_icon()
 		var/obj/item/weapon/aicard/AC = A.loc
 		if(AC)
 			ADD_ICON_QUEUE(AC)

@@ -67,7 +67,7 @@
 	if(do_after(M, climb_time, src))
 		climbLadder(M, target_ladder)
 		for (var/obj/item/grab/G in M)
-			G.adjust_position()
+			G.adjust_position(force = 1)
 
 
 /obj/structure/ladder/attack_ghost(var/mob/M)

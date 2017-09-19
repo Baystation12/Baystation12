@@ -146,7 +146,8 @@ var/list/support_positions = list(
 	if(M && istype(M) && M.client && M.client.prefs.char_department && M.job) //SO MANY CHECKS JEZUS ah well
 		var/datum/job/job = job_master.GetJob(M.job)
 		var/efficiencybonus = 4+(4*paychecks)
-		var/paycheck = round(job.base_pay * (calculate_department_rank(M) * 5) + (job.base_pay/100*efficiencybonus) * 4, 0.01)
+		var/rankbonus = job.base_pay/100*(100+(calculate_department_rank(M)*5))
+		var/paycheck = round(rankbonus + (job.base_pay/100*efficiencybonus) * 4, 0.01)
 		if(evacuation_controller.emergency_evacuation)
 			paycheck = paycheck/100*80
 		if(roundend)

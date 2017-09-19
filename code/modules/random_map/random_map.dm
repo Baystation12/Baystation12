@@ -31,7 +31,7 @@ var/global/list/map_count = list()
 	// Test to see if rand_seed() can be used reliably.
 	var/priority_process
 
-/datum/random_map/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce)
+/datum/random_map/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
 
 	// Store this for debugging.
 	if(!map_count[descriptor])

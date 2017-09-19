@@ -23,13 +23,17 @@
 	if(.)
 		user.set_boon(.)
 
+/datum/uplink_item/deity/feat
+	var/can_buy_multiples = 0
+
+
 /datum/uplink_item/deity/feat/can_view(obj/item/device/uplink/U)
 	if(!..())
 		return 0
-
-	var/mob/living/deity/D = U.uplink_owner.current
-	if(src.name in D.feats)
-		return 0
+	if(!can_buy_multiples)
+		var/mob/living/deity/D = U.uplink_owner.current
+		if(src.name in D.feats)
+			return 0
 	return 1
 
 /datum/uplink_item/deity/feat/buy(var/obj/item/device/uplink/U, var/mob/living/deity/user)

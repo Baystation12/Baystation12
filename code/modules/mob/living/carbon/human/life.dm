@@ -259,11 +259,11 @@
 		var/damage = 0
 		radiation -= 1 * RADIATION_SPEED_COEFFICIENT
 		if(prob(25))
-			damage = 1
+			damage = 2
 
 		if (radiation > 50)
-			damage = 1
-			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			damage = 2
+			radiation -= 2 * RADIATION_SPEED_COEFFICIENT
 			if(!isSynthetic())
 				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 					radiation -= 5 * RADIATION_SPEED_COEFFICIENT
@@ -280,7 +280,7 @@
 
 		if (radiation > 75)
 			damage = 3
-			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			radiation -= 3 * RADIATION_SPEED_COEFFICIENT
 			if(!isSynthetic())
 				if(prob(5))
 					take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
@@ -290,7 +290,7 @@
 					emote("gasp")
 		if(radiation > 150)
 			damage = 8
-			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
 		if(damage)
 			damage *= isSynthetic() ? 0.5 : species.radiation_mod
@@ -382,7 +382,7 @@
 	if(relative_density > 0.02) //don't bother if we are in vacuum or near-vacuum
 		var/loc_temp = environment.temperature
 
-		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1)
+		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1 && species.body_temperature)
 			pressure_alert = 0
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
@@ -637,9 +637,6 @@
 			if (prob(10) && nutrition > 70)
 				for(var/limb_type in species.has_limbs)
 					var/obj/item/organ/external/E = organs_by_name[limb_type]
-					for(var/datum/wound/W in E.wounds)
-						if (W.wound_damage() == 0 && prob(50))
-							E.wounds -= W
 					if(E && !E.is_usable())
 						E.removed()
 						qdel(E)
@@ -652,6 +649,10 @@
 						to_chat(src, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
 						nutrition -= 60
 						update_body()
+					else
+						for(var/datum/wound/W in E.wounds)
+							if (W.wound_damage() == 0 && prob(50))
+								E.wounds -= W
 
 	// TODO: stomach and bloodstream organ.
 	if(!isSynthetic())
@@ -708,7 +709,7 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(getHalLoss() >= (species.total_health - 100))
+		if(get_shock() >= (species.total_health - 100))
 			if(!stat)
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message].")
@@ -842,7 +843,7 @@
 						var/no_damage = 1
 						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
 						if(can_feel_pain())
-							trauma_val = max(shock_stage,getHalLoss())/(species.total_health-100)
+							trauma_val = max(shock_stage,get_shock())/(species.total_health-100)
 						// Collect and apply the images all at once to avoid appearance churn.
 						var/list/health_images = list()
 						for(var/obj/item/organ/external/E in organs)
@@ -890,7 +891,9 @@
 			if(hal_screwyhud == 4 || phoron_alert)	toxin.icon_state = "tox1"
 			else									toxin.icon_state = "tox0"
 		if(oxygen)
-			if(hal_screwyhud == 3 || oxygen_alert)	oxygen.icon_state = "oxy1"
+			if(hal_screwyhud == 3 || oxygen_alert)
+				if(oxygen_alert == 1)				oxygen.icon_state = "oxy1"
+				else								oxygen.icon_state = "oxy2"
 			else									oxygen.icon_state = "oxy0"
 		if(fire)
 			if(fire_alert)							fire.icon_state = "fire[fire_alert]" //fire_alert is either 0 if no alert, 1 for cold and 2 for heat.
@@ -949,9 +952,21 @@
 		return
 
 	// Puke if toxloss is too high
-	if(!stat)
-		if (getToxLoss() >= 45 && nutrition > 20)
-			spawn vomit()
+	var/vomit_score = 0
+	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
+		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
+		if(I)
+			vomit_score += I.damage
+		else if (should_have_organ(tag))
+			vomit_score += 45
+	if(chem_effects[CE_TOXIN] || radiation)
+		vomit_score += 0.5 * getToxLoss()
+	if(chem_effects[CE_ALCOHOL_TOXIC])
+		vomit_score += 10 * chem_effects[CE_ALCOHOL_TOXIC]
+	if(chem_effects[CE_ALCOHOL])
+		vomit_score += 10
+	if(stat != DEAD && vomit_score > 25 && prob(10))
+		spawn vomit(1, vomit_score, vomit_score/25)
 
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)
@@ -994,13 +1009,18 @@
 
 	if(is_asystole())
 		shock_stage = max(shock_stage, 61)
-	if(get_shock() >= max(50, shock_stage))
+	var/traumatic_shock = get_shock()
+	if(traumatic_shock >= max(50, shock_stage))
 		shock_stage += 1
 	else
 		shock_stage = min(shock_stage, 160)
-		shock_stage = max(shock_stage-1, 0)
+		var/recovery = 1
+		if(traumatic_shock < 0.5 * shock_stage) //lower shock faster if pain is gone completely
+			recovery++
+		if(traumatic_shock < 0.25 * shock_stage)
+			recovery++
+		shock_stage = max(shock_stage - recovery, 0)
 		return
-
 	if(stat) return 0
 
 	if(shock_stage == 10)
@@ -1021,7 +1041,7 @@
 		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
 		if (prob(2))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = 0)
-			Weaken(20)
+			Weaken(10)
 
 	if(shock_stage >= 80)
 		if (prob(5))
