@@ -79,7 +79,7 @@ proc/cardinalrange(var/center)
 	return 0
 
 
-/obj/machinery/am_shielding/Process()
+/obj/machinery/am_shielding/process()
 	if(!processing) . = PROCESS_KILL
 	//TODO: core functions and stability
 	//TODO: think about checking the airmix for phoron and increasing power output
@@ -151,7 +151,7 @@ proc/cardinalrange(var/center)
 
 /obj/machinery/am_shielding/proc/setup_core()
 	processing = 1
-	START_PROCESSING(SSmachines, src)
+	GLOB.machines.Add(src)
 	if(!control_unit)	return
 	control_unit.linked_cores.Add(src)
 	control_unit.reported_core_efficiency += efficiency

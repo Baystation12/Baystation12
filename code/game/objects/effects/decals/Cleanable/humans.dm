@@ -32,14 +32,14 @@ var/global/list/image/splatter_cache=list()
 	if(invisibility != 100)
 		set_invisibility(100)
 		amount = 0
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects -= src
 	..(ignore=1)
 
 /obj/effect/decal/cleanable/blood/hide()
 	return
 
 /obj/effect/decal/cleanable/blood/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects -= src
 	return ..()
 
 /obj/effect/decal/cleanable/blood/Initialize()
@@ -55,9 +55,9 @@ var/global/list/image/splatter_cache=list()
 						blood_DNA |= B.blood_DNA.Copy()
 					qdel(B)
 	drytime = world.time + DRYING_TIME * (amount+1)
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects += src
 
-/obj/effect/decal/cleanable/blood/Process()
+/obj/effect/decal/cleanable/blood/process()
 	if(world.time > drytime)
 		dry()
 
@@ -117,7 +117,7 @@ var/global/list/image/splatter_cache=list()
 	desc = drydesc
 	color = adjust_brightness(color, -50)
 	amount = 0
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects -= src
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
 	..()

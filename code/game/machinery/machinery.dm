@@ -120,13 +120,14 @@ Class Procs:
 	..(l)
 	if(d)
 		set_dir(d)
-
-/obj/machinery/Initialize()
-	. = ..()
-	START_PROCESSING(SSmachines, src)
+	if(!machinery_sort_required && ticker)
+		dd_insertObjectList(GLOB.machines, src)
+	else
+		GLOB.machines += src
+		machinery_sort_required = 1
 
 /obj/machinery/Destroy()
-	STOP_PROCESSING(SSmachines, src)
+	GLOB.machines -= src
 	if(component_parts)
 		for(var/atom/A in component_parts)
 			if(A.loc == src) // If the components are inside the machine, delete them.
@@ -138,9 +139,11 @@ Class Procs:
 			qdel(A)
 	return ..()
 
-/obj/machinery/Process()//If you dont use process or power why are you here
+/obj/machinery/process()//If you dont use process or power why are you here
 	if(!(use_power || idle_power_usage || active_power_usage))
 		return PROCESS_KILL
+
+	return
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)

@@ -104,7 +104,7 @@
 		return
 	return
 
-/obj/machinery/mineral/stacking_machine/Process()
+/obj/machinery/mineral/stacking_machine/process()
 	if (src.output && src.input)
 		var/turf/T = get_turf(input)
 		for(var/obj/item/O in T.contents)

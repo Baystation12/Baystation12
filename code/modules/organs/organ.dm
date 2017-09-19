@@ -85,12 +85,12 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/die()
 	damage = max_damage
 	status |= ORGAN_DEAD
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects -= src
 	death_time = world.time
 	if(owner && vital)
 		owner.death()
 
-/obj/item/organ/Process()
+/obj/item/organ/process()
 
 	if(loc != owner)
 		owner = null
@@ -326,7 +326,7 @@ var/list/organ_cache = list()
 	if(drop_organ)
 		dropInto(owner.loc)
 
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects |= src
 	rejecting = null
 	if(robotic < ORGAN_ROBOT)
 		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list //TODO fix this and all other occurences of locate(/datum/reagent/blood) horror

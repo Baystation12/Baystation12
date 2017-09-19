@@ -31,7 +31,7 @@
 
 	var/runlevels = RUNLEVELS_DEFAULT	//points of the game at which the SS can fire
 
-	var/static/list/failure_strikes //How many times we suspect a subsystem type has crashed the MC, 3 strikes and you're out!
+	var/static/failure_strikes = 0 //How many times we suspect this subsystem has crashed the MC, 3 strikes and you're out!
 
 //Do not override
 /datum/controller/subsystem/New()
@@ -192,7 +192,7 @@
 		if (SS_SLEEPING)
 			. = "S"
 		if (SS_IDLE)
-			. = "  "
+			. = " "
 
 //could be used to postpone a costly subsystem for (default one) var/cycles, cycles
 //for instance, during cpu intensive operations like explosions

@@ -17,6 +17,7 @@ var/global/list/ashtray_cache = list()
 		return
 	max_butts = round(material.hardness/10) //This is arbitrary but whatever.
 	update_icon()
+	return
 
 /obj/item/weapon/material/ashtray/update_icon()
 	color = null
@@ -55,6 +56,7 @@ var/global/list/ashtray_cache = list()
 			var/obj/item/clothing/mask/smokable/cigarette/cig = W
 			if (cig.lit == 1)
 				src.visible_message("[user] crushes [cig] in \the [src], putting it out.")
+				GLOB.processing_objects.Remove(cig)
 				var/obj/item/butt = new cig.type_butt(src)
 				cig.transfer_fingerprints_to(butt)
 				qdel(cig)

@@ -8,7 +8,7 @@ obj/machinery/door/airlock
 	var/datum/radio_frequency/radio_connection
 	var/cur_command = null	//the command the door is currently attempting to complete
 
-obj/machinery/door/airlock/Process()
+obj/machinery/door/airlock/process()
 	..()
 	if (arePowerSystemsOn())
 		execute_current_command()
@@ -192,7 +192,7 @@ obj/machinery/airlock_sensor/attack_hand(mob/user)
 	radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
 	flick("airlock_sensor_cycle", src)
 
-obj/machinery/airlock_sensor/Process()
+obj/machinery/airlock_sensor/process()
 	if(on)
 		var/datum/gas_mixture/air_sample = return_air()
 		var/pressure = round(air_sample.return_pressure(),0.1)

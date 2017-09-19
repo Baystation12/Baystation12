@@ -34,7 +34,7 @@
 			connect(port)
 			update_icon()
 
-/obj/machinery/portable_atmospherics/Process()
+/obj/machinery/portable_atmospherics/process()
 	if(!connected_port) //only react when pipe_network will ont it do it for you
 		//Allow for reactions
 		air_contents.react()

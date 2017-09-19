@@ -1056,7 +1056,7 @@
 	src.updateUsrDialog()
 	return
 
-/obj/machinery/suit_cycler/Process()
+/obj/machinery/suit_cycler/process()
 
 	if(electrified > 0)
 		electrified--

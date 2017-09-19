@@ -489,7 +489,7 @@ This function completely restores a damaged organ to perfect condition.
 		return 1
 	return 0
 
-/obj/item/organ/external/Process()
+/obj/item/organ/external/process()
 	if(owner)
 
 		if(pain)

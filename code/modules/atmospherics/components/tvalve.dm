@@ -179,7 +179,7 @@
 	else
 		src.go_to_side()
 
-/obj/machinery/atmospherics/tvalve/Process()
+/obj/machinery/atmospherics/tvalve/process()
 	..()
 	. = PROCESS_KILL
 	//machines.Remove(src)

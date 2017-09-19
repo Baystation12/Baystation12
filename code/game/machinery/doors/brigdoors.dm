@@ -35,11 +35,11 @@
 	..()
 
 	spawn(20)
-		for(var/obj/machinery/door/window/brigdoor/M in SSmachines.machinery)
+		for(var/obj/machinery/door/window/brigdoor/M in GLOB.machines)
 			if (M.id == src.id)
 				targets += M
 
-		for(var/obj/machinery/flasher/F in SSmachines.machinery)
+		for(var/obj/machinery/flasher/F in GLOB.machines)
 			if(F.id == src.id)
 				targets += F
 
@@ -57,7 +57,7 @@
 //Main door timer loop, if it's timing and time is >0 reduce time by 1.
 // if it's less than 0, open door, reset timer
 // update the door_timer window and the icon
-/obj/machinery/door_timer/Process()
+/obj/machinery/door_timer/process()
 
 	if(stat & (NOPOWER|BROKEN))	return
 	if(src.timing)

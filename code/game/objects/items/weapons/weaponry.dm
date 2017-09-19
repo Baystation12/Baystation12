@@ -100,9 +100,9 @@
 /obj/effect/energy_net/teleport
 	countdown = 60
 
-/obj/effect/energy_net/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
+/obj/effect/energy_net/New()
+	..()
+	GLOB.processing_objects.Add(src)
 
 /obj/effect/energy_net/Destroy()
 	if(istype(captured, /mob/living/carbon))
@@ -110,11 +110,11 @@
 			captured.handcuffed = null
 	if(captured)
 		unbuckle_mob()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Remove(src)
 	captured = null
 	return ..()
 
-/obj/effect/energy_net/Process()
+/obj/effect/energy_net/process()
 	countdown--
 	if(captured.buckled != src)
 		health = 0

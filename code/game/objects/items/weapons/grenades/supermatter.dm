@@ -8,12 +8,12 @@
 
 /obj/item/weapon/grenade/supermatter/Destroy()
 	if(implode_at)
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects -= src
 	. = ..()
 
 /obj/item/weapon/grenade/supermatter/detonate()
 	..()
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects += src
 	implode_at = world.time + 10 SECONDS
 	update_icon()
 	playsound(src, 'sound/weapons/wave.ogg', 100)
@@ -23,7 +23,7 @@
 	if(implode_at)
 		overlays += image(icon = 'icons/obj/machines/power/fusion.dmi', icon_state = "emfield_s1")
 
-/obj/item/weapon/grenade/supermatter/Process()
+/obj/item/weapon/grenade/supermatter/process()
 	if(!isturf(loc))
 		if(ismob(loc))
 			var/mob/M = loc

@@ -74,12 +74,14 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	decryptkey = GenerateKey()
 	send_pda_message("System Administrator", "system", "This is an automated message. The messaging system is functioning correctly.")
 	..()
+	return
 
 /obj/machinery/message_server/Destroy()
 	message_servers -= src
-	return ..()
+	..()
+	return
 
-/obj/machinery/message_server/Process()
+/obj/machinery/message_server/process()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
 		power_failure = 10
@@ -288,7 +290,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 	var/pda_msg_amt = 0
 	var/rc_msg_amt = 0
 
-	for(var/obj/machinery/message_server/MS in SSmachines.machinery)
+	for(var/obj/machinery/message_server/MS in GLOB.machines)
 		if(MS.pda_msgs.len > pda_msg_amt)
 			pda_msg_amt = MS.pda_msgs.len
 		if(MS.rc_msgs.len > rc_msg_amt)

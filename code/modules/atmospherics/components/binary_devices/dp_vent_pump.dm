@@ -99,7 +99,7 @@
 	update_icon()
 	update_underlays()
 
-/obj/machinery/atmospherics/binary/dp_vent_pump/Process()
+/obj/machinery/atmospherics/binary/dp_vent_pump/process()
 	..()
 
 	last_power_draw = 0

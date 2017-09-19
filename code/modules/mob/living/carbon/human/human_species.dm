@@ -1,11 +1,10 @@
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
-	virtual_mob = null
 
-/mob/living/carbon/human/dummy/mannequin/Initialize()
-	. = ..()
-	STOP_PROCESSING(SSmobs, src)
+/mob/living/carbon/human/dummy/mannequin/New()
+	..()
+	GLOB.mob_list -= src
 	GLOB.human_mob_list -= src
 	delete_inventory()
 

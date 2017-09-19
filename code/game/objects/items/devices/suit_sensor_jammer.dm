@@ -1,5 +1,5 @@
 #define JAMMER_MAX_RANGE world.view*2
-#define JAMMER_POWER_CONSUMPTION(tick_delay) ((max(0.75, range)**2 * jammer_method.energy_cost * tick_delay) / 20)
+#define JAMMER_POWER_CONSUMPTION ((max(0.75, range)**2 * jammer_method.energy_cost * process_schedule_interval("obj")) / 20)
 
 /obj/item/device/suit_sensor_jammer
 	name = "small device"
@@ -135,7 +135,7 @@ obj/item/device/suit_sensor_jammer/ui_data()
 		"methods" = methods,
 		"current_method" = "\ref[jammer_method]",
 		"current_cost" = jammer_method.energy_cost,
-		"total_cost" = "[ceil(JAMMER_POWER_CONSUMPTION(10))]"
+		"total_cost" = "[ceil(JAMMER_POWER_CONSUMPTION)]"
 	)
 
 	return data
@@ -162,11 +162,11 @@ obj/item/device/suit_sensor_jammer/ui_act(action, params)
 				set_method(method)
 				. = TRUE
 
-/obj/item/device/suit_sensor_jammer/Process(var/wait)
+/obj/item/device/suit_sensor_jammer/process()
 	if(bcell)
 		// With a range of 2 and jammer cost of 3 the default (high capacity) cell will last for almost 14 minutes, give or take
 		// 10000 / (2^2 * 3 / 10) ~= 8333 ticks ~= 13.8 minutes
-		var/deduction = JAMMER_POWER_CONSUMPTION(wait)
+		var/deduction = JAMMER_POWER_CONSUMPTION
 		if(!bcell.use(deduction))
 			disable()
 	else
@@ -177,7 +177,7 @@ obj/item/device/suit_sensor_jammer/ui_act(action, params)
 	if(active)
 		return FALSE
 	active = TRUE
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects += src
 	jammer_method.enable()
 	update_icon()
 	return TRUE
@@ -187,7 +187,7 @@ obj/item/device/suit_sensor_jammer/ui_act(action, params)
 		return FALSE
 	active = FALSE
 	jammer_method.disable()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects -= src
 	update_icon()
 	return TRUE
 

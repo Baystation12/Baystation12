@@ -153,15 +153,15 @@
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 	return
 
-/obj/item/device/assembly/signaler/Process()
+/obj/item/device/assembly/signaler/process()
 	if(!deadman)
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 	var/mob/M = src.loc
 	if(!M || !ismob(M))
 		if(prob(5))
 			signal()
 		deadman = 0
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 	else if(prob(5))
 		M.visible_message("[M]'s finger twitches a bit over [src]'s signal button!")
 	return
@@ -173,12 +173,12 @@
 
 	if(!deadman)
 		deadman = 1
-		START_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Add(src)
 		log_and_message_admins("is threatening to trigger a signaler deadman's switch")
 		usr.visible_message("<span class='danger'>[usr] moves their finger over [src]'s signal button...</span>")
 	else
 		deadman = 0
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 		log_and_message_admins("stops threatening to trigger a signaler deadman's switch")
 		usr.visible_message("<span class='notice'>[usr] moves their finger away from [src]'s signal button.</span>")
 

@@ -41,7 +41,7 @@
 	ignite()
 	return
 
-/obj/machinery/igniter/Process()	//ugh why is this even in process()?
+/obj/machinery/igniter/process()	//ugh why is this even in process()?
 	if (on && powered() )
 		var/turf/location = src.loc
 		if (isturf(location))
@@ -149,12 +149,12 @@
 	active = 1
 	icon_state = "launcheract"
 
-	for(var/obj/machinery/sparker/M in SSmachines.machinery)
+	for(var/obj/machinery/sparker/M in GLOB.machines)
 		if (M.id == id)
 			spawn( 0 )
 				M.ignite()
 
-	for(var/obj/machinery/igniter/M in SSmachines.machinery)
+	for(var/obj/machinery/igniter/M in GLOB.machines)
 		if(M.id == id)
 			M.ignite()
 

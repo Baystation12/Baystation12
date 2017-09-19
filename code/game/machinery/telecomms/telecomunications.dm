@@ -168,7 +168,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		on = 0
 	use_power = on
 
-/obj/machinery/telecomms/Process()
+/obj/machinery/telecomms/process()
 	update_power()
 
 	// Check heat and generate some

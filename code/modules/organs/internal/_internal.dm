@@ -47,7 +47,7 @@
 
 	..()
 
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects -= src
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src

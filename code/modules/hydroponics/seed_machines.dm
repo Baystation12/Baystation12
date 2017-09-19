@@ -41,7 +41,7 @@
 	var/failed_task = 0
 	var/disk_needs_genes = 0
 
-/obj/machinery/botany/Process()
+/obj/machinery/botany/process()
 
 	..()
 	if(!active) return

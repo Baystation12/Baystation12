@@ -115,7 +115,7 @@ var/list/solars_list = list()
 	sunfrac = cos(p_angle) ** 2
 	//isn't the power recieved from the incoming light proportionnal to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
-/obj/machinery/power/solar/Process()//TODO: remove/add this from machines to save on processing as needed ~Carn PRIORITY
+/obj/machinery/power/solar/process()//TODO: remove/add this from machines to save on processing as needed ~Carn PRIORITY
 	if(stat & BROKEN)
 		return
 	if(!GLOB.sun || !control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
@@ -168,7 +168,7 @@ var/list/solars_list = list()
 /obj/machinery/power/solar/fake/New(var/turf/loc, var/obj/item/solar_assembly/S)
 	..(loc, S, 0)
 
-/obj/machinery/power/solar/fake/Process()
+/obj/machinery/power/solar/fake/process()
 	. = PROCESS_KILL
 	return
 
@@ -433,7 +433,7 @@ var/list/solars_list = list()
 		src.attack_hand(user)
 	return
 
-/obj/machinery/power/solar_control/Process()
+/obj/machinery/power/solar_control/process()
 	lastgen = gen
 	gen = 0
 

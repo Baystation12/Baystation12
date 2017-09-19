@@ -38,7 +38,7 @@
 		else
 			icon_state = "[state]"
 
-	Process()
+	process()
 		if(!Beacon)
 			var/turf/T = loc
 			Beacon = new /obj/item/device/radio/beacon

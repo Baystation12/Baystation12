@@ -115,9 +115,9 @@
 	var/onfire = 0
 	body_parts_covered = HEAD
 
-/obj/item/clothing/head/cakehat/Process()
+/obj/item/clothing/head/cakehat/process()
 	if(!onfire)
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 		return
 
 	var/turf/location = src.loc
@@ -136,7 +136,7 @@
 		src.damtype = "fire"
 		src.icon_state = "cake1"
 		src.item_state = "cake1"
-		START_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Add(src)
 	else
 		src.force = null
 		src.damtype = "brute"

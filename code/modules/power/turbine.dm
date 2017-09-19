@@ -59,7 +59,7 @@
 #define COMPFRICTION 5e5
 #define COMPSTARTERLOAD 2800
 
-/obj/machinery/compressor/Process()
+/obj/machinery/compressor/process()
 	if(!starter)
 		return
 	overlays.Cut()
@@ -117,7 +117,7 @@
 #define TURBGENQ 20000
 #define TURBGENG 0.8
 
-/obj/machinery/power/turbine/Process()
+/obj/machinery/power/turbine/process()
 	if(!compressor.starter)
 		return
 	overlays.Cut()
@@ -216,15 +216,16 @@
 
 
 
-/obj/machinery/computer/turbine_computer/Initialize()
-	. = ..()
-	for(var/obj/machinery/compressor/C in SSmachines.machinery)
-		if(id == C.comp_id)
-			compressor = C
-	doors = new /list()
-	for(var/obj/machinery/door/blast/P in SSmachines.machinery)
-		if(P.id == id)
-			doors += P
+/obj/machinery/computer/turbine_computer/New()
+	..()
+	spawn(5)
+		for(var/obj/machinery/compressor/C in GLOB.machines)
+			if(id == C.comp_id)
+				compressor = C
+		doors = new /list()
+		for(var/obj/machinery/door/blast/P in GLOB.machines)
+			if(P.id == id)
+				doors += P
 
 /*
 /obj/machinery/computer/turbine_computer/attackby(I as obj, user as mob)
@@ -314,6 +315,6 @@
 	src.updateUsrDialog()
 	return
 
-/obj/machinery/computer/turbine_computer/Process()
+/obj/machinery/computer/turbine_computer/process()
 	src.updateDialog()
 	return

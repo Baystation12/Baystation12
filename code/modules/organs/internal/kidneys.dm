@@ -12,7 +12,8 @@
 	. = ..()
 	icon_state = "kidneys-prosthetic"
 
-/obj/item/organ/internal/kidneys/Process()
+/obj/item/organ/internal/kidneys/process()
+
 	..()
 
 	if(!owner)

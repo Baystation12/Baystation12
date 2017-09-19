@@ -14,13 +14,12 @@
 	var/current_time = world.timeofday
 
 	// Depower the supermatter, as it would quickly blow up once we remove all gases from the pipes.
-	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
+	for(var/obj/machinery/power/supermatter/S in GLOB.machines)
 		S.power = 0
 	to_chat(usr, "\[1/5\] - Supermatter depowered")
 
 	// Remove all gases from all pipenets
-	for(var/net in SSmachines.pipenets)
-		var/datum/pipe_network/PN = net
+	for(var/datum/pipe_network/PN in pipe_networks)
 		for(var/datum/gas_mixture/G in PN.gases)
 			G.gas = list()
 			G.update_values()

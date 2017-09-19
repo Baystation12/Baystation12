@@ -81,23 +81,24 @@
 
 /obj/item/integrated_circuit/time/ticker/Destroy()
 	if(is_running)
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects -= src
 	. = ..()
 
 /obj/item/integrated_circuit/time/ticker/on_data_written()
 	var/datum/integrated_io/do_tick = inputs[1]
 	if(do_tick.data && !is_running)
 		is_running = TRUE
-		START_PROCESSING(SSobj, src)
+		GLOB.processing_objects |= src
 	else if(is_running)
 		is_running = FALSE
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects -= src
 		ticks_completed = 0
 
-/obj/item/integrated_circuit/time/ticker/Process(var/wait)
-	ticks_completed += wait
+/obj/item/integrated_circuit/time/ticker/process()
+	var/process_ticks = process_schedule_interval("obj")
+	ticks_completed += process_ticks
 	if(ticks_completed >= ticks_to_pulse)
-		if(ticks_to_pulse >= wait)
+		if(ticks_to_pulse >= process_ticks)
 			ticks_completed -= ticks_to_pulse
 		else
 			ticks_completed = 0

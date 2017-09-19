@@ -35,15 +35,15 @@
 	else
 		power_supply = new /obj/item/weapon/cell/device/variable(src, max_shots*charge_cost)
 	if(self_recharge)
-		START_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Add(src)
 	update_icon()
 
 /obj/item/weapon/gun/energy/Destroy()
 	if(self_recharge)
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 	return ..()
 
-/obj/item/weapon/gun/energy/Process()
+/obj/item/weapon/gun/energy/process()
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
 		charge_tick++
 		if(charge_tick < recharge_time) return 0

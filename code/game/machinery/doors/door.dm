@@ -75,7 +75,7 @@
 	update_nearby_tiles()
 	. = ..()
 
-/obj/machinery/door/Process()
+/obj/machinery/door/process()
 	if(close_door_at && world.time >= close_door_at)
 		if(autoclose)
 			close_door_at = next_close_time()

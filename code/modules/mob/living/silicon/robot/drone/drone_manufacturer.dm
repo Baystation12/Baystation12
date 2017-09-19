@@ -38,7 +38,7 @@
 	if (stat & NOPOWER)
 		icon_state = "drone_fab_nopower"
 
-/obj/machinery/drone_fabricator/Process()
+/obj/machinery/drone_fabricator/process()
 
 	if(ticker.current_state < GAME_STATE_PLAYING)
 		return
@@ -118,7 +118,7 @@
 	if(!fabricator)
 
 		var/list/all_fabricators = list()
-		for(var/obj/machinery/drone_fabricator/DF in SSmachines.machinery)
+		for(var/obj/machinery/drone_fabricator/DF in GLOB.machines)
 			if((DF.stat & NOPOWER) || !DF.produce_drones || DF.drone_progress < 100)
 				continue
 			all_fabricators[DF.fabricator_tag] = DF

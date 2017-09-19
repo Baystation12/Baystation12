@@ -420,7 +420,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()
-	var/list/sortmob = sortAtom(SSmobs.mob_list)
+	var/list/sortmob = sortAtom(GLOB.mob_list)
 	for(var/mob/observer/eye/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/living/silicon/ai/M in sortmob)
@@ -833,7 +833,7 @@ proc/oview_or_orange(distance = world.view , center = usr , type)
 
 proc/get_mob_with_client_list()
 	var/list/mobs = list()
-	for(var/mob/M in SSmobs.mob_list)
+	for(var/mob/M in GLOB.mob_list)
 		if (M.client)
 			mobs += M
 	return mobs
@@ -1118,18 +1118,16 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	simulated = 0
 
 	see_in_dark = 1e6
-	
-	virtual_mob = null
 
 /atom/proc/get_light_and_color(var/atom/origin)
 	if(origin)
 		color = origin.color
 		set_light(origin.light_range, origin.light_power, origin.light_color)
 
-/mob/dview/Initialize()
-	. = ..()
+/mob/dview/New()
+	..()
 	// We don't want to be in any mob lists; we're a dummy not a mob.
-	STOP_PROCESSING(SSmobs, src)
+	GLOB.mob_list -= src
 
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)

@@ -155,7 +155,7 @@
 
 	updateDialog()
 
-/obj/machinery/space_heater/Process()
+/obj/machinery/space_heater/process()
 	if(on)
 		if(powered() || (cell && cell.charge))
 			var/datum/gas_mixture/env = loc.return_air()

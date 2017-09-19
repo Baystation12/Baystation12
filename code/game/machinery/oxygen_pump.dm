@@ -158,7 +158,7 @@
 		to_chat(user, "<span class='warning'>It is missing a tank!</span>")
 
 
-/obj/machinery/oxygen_pump/Process()
+/obj/machinery/oxygen_pump/process()
 	if(breather)
 		if(!can_apply_to_target(breather))
 			if(tank)

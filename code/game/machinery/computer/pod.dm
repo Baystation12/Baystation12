@@ -143,7 +143,7 @@
 	return
 
 
-/obj/machinery/computer/pod/Process()
+/obj/machinery/computer/pod/process()
 	if(!..())
 		return
 	if(timing)
@@ -170,7 +170,7 @@
 		if(href_list["alarm"])
 			alarm()
 		if(href_list["drive"])
-			for(var/obj/machinery/mass_driver/M in SSmachines.machinery)
+			for(var/obj/machinery/mass_driver/M in GLOB.machines)
 				if(M.id == id)
 					M.power = connected.power
 					M.drive()

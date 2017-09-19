@@ -41,7 +41,7 @@ var/hadevent    = 0
 //	sound_to(world, sound('sound/AI/aliens.ogg'))
 
 	var/list/vents = list()
-	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in SSmachines.machinery)
+	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in GLOB.machines)
 		if(!temp_vent.welded && temp_vent.network && temp_vent.loc.z in GLOB.using_map.station_levels)
 			if(temp_vent.network.normal_members.len > 50) // Stops Aliens getting stuck in small networks. See: Security, Virology
 				vents += temp_vent
@@ -167,7 +167,7 @@ var/hadevent    = 0
 				apc.overload_lighting()
 
 	else
-		for(var/obj/machinery/power/apc/apc in SSmachines.machinery)
+		for(var/obj/machinery/power/apc/apc in GLOB.machines)
 			apc.overload_lighting()
 
 	return
@@ -278,7 +278,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("THE [uppertext(station_name())] IS [who2pref] [who2]")
 
 	if(botEmagChance)
-		for(var/mob/living/bot/bot in SSmachines.machinery)
+		for(var/mob/living/bot/bot in GLOB.machines)
 			if(prob(botEmagChance))
 				bot.emag_act(1)
 

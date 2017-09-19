@@ -141,7 +141,7 @@
 /obj/machinery/power/smes/proc/remove_charge(var/amount)
 	charge -= amount*CELLRATE
 
-/obj/machinery/power/smes/Process()
+/obj/machinery/power/smes/process()
 	if(stat & BROKEN)	return
 	if(failure_timer)	// Disabled by gridcheck.
 		failure_timer--

@@ -33,7 +33,7 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-/obj/machinery/atm/Process()
+/obj/machinery/atm/process()
 	if(stat & NOPOWER)
 		return
 

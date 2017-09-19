@@ -1,4 +1,4 @@
-//Basically a one way passive valve. If the pressure inside is greater than the environment then gas will flow passively,
+//Basically a one way passive valve. If the pressure inside is greater than the environment then gas will flow passively, 
 //but it does not permit gas to flow back from the environment into the injector. Can be turned off to prevent any gas flow.
 //When it receives the "inject" signal, it will try to pump it's entire contents into the environment regardless of pressure, using power.
 
@@ -12,7 +12,7 @@
 	use_power = 0
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 15000	//15000 W ~ 20 HP
-
+	
 	var/injecting = 0
 
 	var/volume_rate = 50	//flow rate limit
@@ -25,7 +25,7 @@
 
 /obj/machinery/atmospherics/unary/outlet_injector/New()
 	..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more. 
 
 /obj/machinery/atmospherics/unary/outlet_injector/update_icon()
 	if(!powered())
@@ -41,7 +41,7 @@
 			return
 		add_underlay(T, node, dir)
 
-/obj/machinery/atmospherics/unary/outlet_injector/Process()
+/obj/machinery/atmospherics/unary/outlet_injector/process()
 	..()
 
 	last_power_draw = 0
@@ -49,21 +49,21 @@
 
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
-
+	
 	var/power_draw = -1
 	var/datum/gas_mixture/environment = loc.return_air()
-
+	
 	if(environment && air_contents.temperature > 0)
 		var/transfer_moles = (volume_rate/air_contents.volume)*air_contents.total_moles //apply flow rate limit
 		power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
-
+	
 	if (power_draw >= 0)
 		last_power_draw = power_draw
 		use_power(power_draw)
-
+		
 		if(network)
 			network.update = 1
-
+	
 	return 1
 
 /obj/machinery/atmospherics/unary/outlet_injector/proc/inject()
@@ -73,7 +73,7 @@
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (!environment)
 		return 0
-
+	
 	injecting = 1
 
 	if(air_contents.temperature > 0)

@@ -248,7 +248,7 @@
 
 	reagents.splash(O, 10)
 
-/obj/machinery/shower/Process()
+/obj/machinery/shower/process()
 	if(!on) return
 
 	for(var/thing in loc)

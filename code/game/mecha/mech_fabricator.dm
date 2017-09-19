@@ -45,7 +45,7 @@
 	update_categories()
 	. = ..()
 
-/obj/machinery/mecha_part_fabricator/Process()
+/obj/machinery/mecha_part_fabricator/process()
 	..()
 	if(stat)
 		return

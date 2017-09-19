@@ -68,6 +68,6 @@
 	return
 
 
-/obj/machinery/computer/operating/Process()
+/obj/machinery/computer/operating/process()
 	if(..())
 		src.updateDialog()

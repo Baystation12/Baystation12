@@ -57,7 +57,7 @@
 	var/fail_counter = 0
 
 //override for failcheck behaviour
-/obj/item/weapon/gun/energy/gun/nuclear/Process()
+/obj/item/weapon/gun/energy/gun/nuclear/process()
 	if(fail_counter > 0)
 		radiation_repository.radiate(src, fail_counter--)
 

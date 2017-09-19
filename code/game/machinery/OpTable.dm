@@ -77,7 +77,7 @@
 	icon_state = "table2-idle"
 	return 0
 
-/obj/machinery/optable/Process()
+/obj/machinery/optable/process()
 	check_victim()
 
 /obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)

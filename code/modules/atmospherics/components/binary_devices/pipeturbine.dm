@@ -40,17 +40,17 @@
 
 		if(node1)
 			node1.disconnect(src)
-			QDEL_NULL(network1)
+			qdel(network1)
 		if(node2)
 			node2.disconnect(src)
-			QDEL_NULL(network2)
+			qdel(network2)
 
 		node1 = null
 		node2 = null
 
-		. = ..()
+		..()
 
-	Process()
+	process()
 		..()
 		if(anchored && !(stat&BROKEN))
 			kin_energy *= 1 - kin_loss
@@ -247,6 +247,16 @@
 			if (turbine.stat & (BROKEN) || !turbine.anchored || turn(turbine.dir,180) != dir)
 				turbine = null
 
+	process()
+		updateConnection()
+		if(!turbine || !anchored || stat & (BROKEN))
+			return
+
+		var/power_generated = kin_to_el_ratio * turbine.kin_energy
+		turbine.kin_energy -= power_generated
+		add_avail(power_generated)
+
+
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/weapon/wrench))
 			anchored = !anchored
@@ -275,12 +285,3 @@
 			return
 
 		src.set_dir(turn(src.dir, 90))
-
-/obj/machinery/power/turbinemotor/Process()
-	updateConnection()
-	if(!turbine || !anchored || stat & (BROKEN))
-		return
-
-	var/power_generated = kin_to_el_ratio * turbine.kin_energy
-	turbine.kin_energy -= power_generated
-	add_avail(power_generated)

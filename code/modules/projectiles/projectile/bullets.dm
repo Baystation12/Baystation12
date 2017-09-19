@@ -250,7 +250,7 @@
 	embed = 0
 	sharp = 0
 
-/obj/item/projectile/bullet/pistol/cap/Process()
+/obj/item/projectile/bullet/pistol/cap/process()
 	loc = null
 	qdel(src)
 

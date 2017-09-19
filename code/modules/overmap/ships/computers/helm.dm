@@ -26,7 +26,7 @@
 			known_sectors[S.name] = R
 	..()
 
-/obj/machinery/computer/helm/Process()
+/obj/machinery/computer/helm/process()
 	..()
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)

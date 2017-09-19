@@ -84,7 +84,7 @@
 
 	return 1
 
-/obj/machinery/dnaforensics/Process()
+/obj/machinery/dnaforensics/process()
 	if(scanning)
 		if(!bloodsamp || bloodsamp.loc != src)
 			bloodsamp = null

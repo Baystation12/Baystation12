@@ -106,7 +106,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/disease2/isolator/Process()
+/obj/machinery/disease2/isolator/process()
 	if (isolating > 0)
 		isolating -= 1
 		if (isolating == 0)

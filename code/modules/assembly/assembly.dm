@@ -112,8 +112,9 @@
 	return
 
 
-/obj/item/device/assembly/Process()
-	return PROCESS_KILL
+/obj/item/device/assembly/process()
+	GLOB.processing_objects.Remove(src)
+	return
 
 
 /obj/item/device/assembly/examine(mob/user)

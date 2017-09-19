@@ -17,9 +17,14 @@
 	icon_state = "vclamp[open]"
 
 /obj/machinery/atmospherics/valve/shutoff/New()
+	GLOB.processing_objects |= src
 	open()
 	hide(1)
 	..()
+
+/obj/machinery/atmospherics/valve/shutoff/Destroy()
+	GLOB.processing_objects -= src
+	. = ..()
 
 /obj/machinery/atmospherics/valve/shutoff/attack_hand(mob/user as mob)
 	..()
@@ -35,7 +40,7 @@
 	else
 		reset_plane_and_layer()
 
-/obj/machinery/atmospherics/valve/shutoff/Process()
+/obj/machinery/atmospherics/valve/shutoff/process()
 	..()
 
 	if(!node1 || !node2)
