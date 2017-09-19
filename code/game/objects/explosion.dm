@@ -97,7 +97,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				else								continue
 				fireyexplosion(flame_range, T)
 				for(var/atom/movable/AM in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
-					if(AM && AM.simulated)	AM.ex_act(dist)
+					if(AM && AM.simulated && !T.protects_atom(AM))	AM.ex_act(dist)
 
 				T.ex_act(dist)
 				CHECK_TICK2(90)

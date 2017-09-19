@@ -1,4 +1,4 @@
-#define PROCESS_ACCURACY 10
+#define PROCESS_ACCURACY 3
 
 /****************************************************
 				INTERNAL ORGANS DEFINES
@@ -76,3 +76,8 @@
 	..()
 	min_bruised_damage += 5
 	min_broken_damage += 10
+
+/obj/item/organ/internal/proc/getToxLoss()
+	if(isrobotic())
+		return damage * 0.5
+	return damage

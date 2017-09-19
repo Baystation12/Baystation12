@@ -61,10 +61,13 @@ var/global/repository/radiation/radiation_repository = new()
 			origin = get_step_towards(origin, T) //Raytracing
 			if(!(origin in resistance_cache)) //Only get the resistance if we don't already know it.
 				origin.calc_rad_resistance()
-			working = max((working - (origin.cached_rad_resistance * config.radiation_resistance_multiplier)), 0)
-			if(working <= .)
+			if(origin.cached_rad_resistance)
+				working = max(round((working / (origin.cached_rad_resistance * config.radiation_resistance_multiplier)), 0.1), 0)
+			if((working <= .) || (working <= RADIATION_THRESHOLD_CUTOFF))
 				break // Already affected by a stronger source (or its zero...)
 		. = max((working * (1 / (dist ** 2))), .) //Butchered version of the inverse square law. Works for this purpose
+		if(. <= RADIATION_THRESHOLD_CUTOFF)
+			. = 0
 
 // Add a radiation source instance to the repository.  It will override any existing source on the same turf.
 /repository/radiation/proc/add_source(var/datum/radiation_source/S)

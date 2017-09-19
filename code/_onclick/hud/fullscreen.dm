@@ -6,25 +6,25 @@
 	condition ? overlay_fullscreen(screen_name, screen_type, arg) : clear_fullscreen(screen_name)
 
 /mob/proc/overlay_fullscreen(category, type, severity)
-    var/obj/screen/fullscreen/screen = screens[category]
+	var/obj/screen/fullscreen/screen = screens[category]
 
-    if(screen)
-        if(screen.type != type)
-            clear_fullscreen(category, FALSE)
-            screen = null
-        else if(!severity || severity == screen.severity)
-            return null
+	if(screen)
+		if(screen.type != type)
+			clear_fullscreen(category, FALSE)
+			screen = null
+		else if(!severity || severity == screen.severity)
+			return null
 
-    if(!screen)
-        screen = new type()
+	if(!screen)
+		screen = new type()
 
-    screen.icon_state = "[initial(screen.icon_state)][severity]"
-    screen.severity = severity
+	screen.icon_state = "[initial(screen.icon_state)][severity]"
+	screen.severity = severity
 
-    screens[category] = screen
-    if(client && stat != DEAD)
-        client.screen += screen
-    return screen
+	screens[category] = screen
+	if(client && stat != DEAD)
+		client.screen += screen
+	return screen
 
 /mob/proc/clear_fullscreen(category, animated = 10)
 	var/obj/screen/fullscreen/screen = screens[category]

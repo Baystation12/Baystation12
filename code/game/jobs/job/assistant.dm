@@ -1,8 +1,8 @@
 /datum/job/assistant
 	title = "Assistant"
+<<<<<<< HEAD
 //	department = "Civilian"
 //	department_flag = CIV
-	faction = "Station"
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "absolutely everyone"

@@ -24,7 +24,7 @@
 		if(has_power(0))
 			to_chat(src, "<span class='notice'>Main power restored. All systems returning to normal mode.</span>")
 			aiRestorePowerRoutine = AI_RESTOREPOWER_IDLE
-			updateicon()
+			update_icon()
 			return
 
 		if(aiRestorePowerRoutine == AI_RESTOREPOWER_FAILED)
@@ -105,7 +105,7 @@
 	A.failure_timer = 0
 	A.update()
 
-	updateicon()
+	update_icon()
 
 /mob/living/silicon/ai/proc/calculate_power_usage()
 	if(admin_powered)

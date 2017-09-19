@@ -75,10 +75,10 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/random
 	seed_type = null
 
-/obj/item/seeds/random/New()
+/obj/item/seeds/random/Initialize()
 	seed = plant_controller.create_random_seed()
 	seed_type = seed.name
-	update_seed()
+	. = ..()
 
 /obj/item/seeds/replicapod
 	seed_type = "diona"

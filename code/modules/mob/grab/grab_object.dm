@@ -78,6 +78,28 @@
 
 /obj/item/grab/proc/can_grab()
 
+// This is for all the sorts of things that need to be checked for pretty much every
+// grab made. Feel free to override it but it stops a lot of situations that could
+// cause runtimes so be careful with it.
+/obj/item/grab/proc/pre_check()
+
+	if(!assailant || !affecting)
+		return 0
+
+	if(assailant == affecting)
+		to_chat(assailant, "<span class='notice'>You can't grab yourself.</span>")
+		return 0
+
+	if(assailant.get_active_hand())
+		to_chat(assailant, "<span class='notice'>You can't grab someone if your hand is full.</span>")
+		return 0
+
+	if(assailant.grabbed_by.len)
+		to_chat(assailant, "<span class='notice'>You can't grab someone if you're being grabbed.</span>")
+		return 0
+
+	return 1
+
 /obj/item/grab/proc/init()
 	last_target = assailant.zone_sel.selecting
 	affecting.update_canmove()
@@ -143,8 +165,10 @@
 /obj/item/grab/proc/handle_resist()
 	current_grab.handle_resist(src)
 
-/obj/item/grab/proc/adjust_position()
-	if(!assailant.Adjacent(affecting))
+/obj/item/grab/proc/adjust_position(var/force = 0)
+	if(force)	affecting.forceMove(assailant.loc)
+
+	if(!assailant || !affecting || !assailant.Adjacent(affecting))
 		qdel(src)
 		return 0
 	else
@@ -152,7 +176,6 @@
 
 /obj/item/grab/proc/reset_position()
 	current_grab.reset_position(src)
-
 
 /*
 	This section is for the simple procs used to return things from current_grab.

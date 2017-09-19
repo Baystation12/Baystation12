@@ -21,13 +21,15 @@
 			qdel(F)
 	else if(holder)
 		var/turf/T = get_turf(holder)
+		if(!istype(T))
+			return
 		while(created_field.len < 16)
 			var/obj/effect/energy_field/E = new (locate(T.x,T.y,T.z))
 			created_field.Add(E)
 			E.strength = 1
 			E.set_density(1)
 			E.anchored = 1
-			E.invisibility = 0
+			E.set_invisibility(0)
 		spawn(10)
 			UpdateMove()
 	return 1
@@ -49,7 +51,7 @@
 			created_field.Add(E)
 			E.anchored = 1
 			E.set_density(1)
-			E.invisibility = 0
+			E.set_invisibility(0)
 
 		var/obj/effect/energy_field/E = created_field[1]
 		E.forceMove(locate(T.x + 2,T.y + 2,T.z))

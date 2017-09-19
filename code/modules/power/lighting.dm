@@ -209,13 +209,11 @@ var/global/list/light_type_cache = list()
 	update(0)
 
 /obj/machinery/light/Destroy()
-	if(s)
-		qdel(s)
-		s = null
+	QDEL_NULL(s)
 	if(MyArea)
 		on = 0
 //		A.update_lights()
-	..()
+	. = ..()
 
 /obj/machinery/light/update_icon()
 
@@ -476,14 +474,14 @@ var/global/list/light_type_cache = list()
 			prot = 1
 
 		if(prot > 0 || (COLD_RESISTANCE in user.mutations))
-			to_chat(user, "You remove the light [get_fitting_name()]")
+			to_chat(user, "You remove the [get_fitting_name()]")
 		else if(TK in user.mutations)
-			to_chat(user, "You telekinetically remove the light [get_fitting_name()].")
+			to_chat(user, "You telekinetically remove the [get_fitting_name()].")
 		else
-			to_chat(user, "You try to remove the light [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
+			to_chat(user, "You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
 			return				// if burned, don't remove the light
 	else
-		to_chat(user, "You remove the light [get_fitting_name()].")
+		to_chat(user, "You remove the [get_fitting_name()].")
 
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
@@ -494,7 +492,7 @@ var/global/list/light_type_cache = list()
 		to_chat(user, "There is no [get_fitting_name()] in this light.")
 		return
 
-	to_chat(user, "You telekinetically remove the light [get_fitting_name()].")
+	to_chat(user, "You telekinetically remove the [get_fitting_name()].")
 	remove_bulb()
 
 // ghost attack - make lights flicker like an AI, but even spookier!
@@ -564,7 +562,7 @@ var/global/list/light_type_cache = list()
 	spawn(0)
 		broken()	// break it first to give a warning
 		sleep(2)
-		explosion(T, 0, 0, 2, 2)
+		explosion(T, 0, 0, 3, 5)
 		sleep(1)
 		qdel(src)
 
@@ -689,7 +687,7 @@ obj/machinery/light/proc/burn_out()
 
 		to_chat(user, "You inject the solution into the [src].")
 
-		if(S.reagents.has_reagent("phoron", 5))
+		if(S.reagents.has_reagent(/datum/reagent/toxin/phoron, 5))
 
 			log_admin("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")
 			message_admins("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")

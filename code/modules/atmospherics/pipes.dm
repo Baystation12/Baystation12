@@ -188,7 +188,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/hide(var/i)
 	if(istype(loc, /turf/simulated))
-		invisibility = i ? 101 : 0
+		set_invisibility(i ? 101 : 0)
 	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/simple/process()
@@ -456,7 +456,7 @@
 
 /obj/machinery/atmospherics/pipe/manifold/hide(var/i)
 	if(istype(loc, /turf/simulated))
-		invisibility = i ? 101 : 0
+		set_invisibility(i ? 101 : 0)
 	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold/pipeline_expansion()
@@ -719,12 +719,16 @@
 /obj/machinery/atmospherics/pipe/manifold4w/Destroy()
 	if(node1)
 		node1.disconnect(src)
+		node1 = null
 	if(node2)
 		node2.disconnect(src)
+		node2 = null
 	if(node3)
 		node3.disconnect(src)
+		node3 = null
 	if(node4)
 		node4.disconnect(src)
+		node4 = null
 
 	. = ..()
 
@@ -824,7 +828,7 @@
 
 /obj/machinery/atmospherics/pipe/manifold4w/hide(var/i)
 	if(istype(loc, /turf/simulated))
-		invisibility = i ? 101 : 0
+		set_invisibility(i ? 101 : 0)
 	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold4w/atmos_init()
@@ -967,7 +971,7 @@
 
 /obj/machinery/atmospherics/pipe/cap/hide(var/i)
 	if(istype(loc, /turf/simulated))
-		invisibility = i ? 101 : 0
+		set_invisibility(i ? 101 : 0)
 	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/cap/pipeline_expansion()
@@ -1146,9 +1150,8 @@
 	if(istype(W, /obj/item/device/pipe_painter))
 		return
 
-	if(istype(W, /obj/item/device/analyzer) && in_range(user, src))
-		var/obj/item/device/analyzer/A = W
-		A.analyze_gases(src, user)
+	if(istype(W, /obj/item/device/analyzer))
+		return
 
 /obj/machinery/atmospherics/pipe/tank/air
 	name = "Pressure Tank (Air)"

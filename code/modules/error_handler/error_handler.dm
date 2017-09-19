@@ -16,7 +16,7 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 
 	GLOB.total_runtimes++
 
-	var/erroruid = "[E.file][E.line]"
+	var/erroruid = "[E.file],[E.line]"
 	var/last_seen = error_last_seen[erroruid]
 	var/cooldown = error_cooldown[erroruid] || 0
 

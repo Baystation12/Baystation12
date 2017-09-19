@@ -19,13 +19,11 @@
 		germ_level++
 
 /mob/living/carbon/Destroy()
-	qdel(ingested)
-	qdel(touching)
+	QDEL_NULL(ingested)
+	QDEL_NULL(touching)
 	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
-	for(var/guts in internal_organs)
-		qdel(guts)
-	for(var/food in stomach_contents)
-		qdel(food)
+	QDEL_NULL_LIST(internal_organs)
+	QDEL_NULL_LIST(stomach_contents)
 	return ..()
 
 /mob/living/carbon/rejuvenate()
@@ -99,12 +97,13 @@
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
-	shock_damage *= siemens_coeff
-	if (shock_damage<1)
+
+	shock_damage = apply_shock(shock_damage, def_zone, siemens_coeff)
+
+	if(!shock_damage)
 		return 0
 
 	stun_effect_act(agony_amount=shock_damage, def_zone=def_zone)
-	apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
 
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
@@ -135,6 +134,15 @@
 	s.start()
 
 	return shock_damage
+
+/mob/living/carbon/proc/apply_shock(var/shock_damage, var/def_zone, var/siemens_coeff = 1.0)
+	shock_damage *= siemens_coeff
+	if(shock_damage < 0.5)
+		return 0
+	if(shock_damage < 1)
+		shock_damage = 1
+	apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
+	return(shock_damage)
 
 /mob/proc/swap_hand()
 	return
@@ -278,6 +286,7 @@
 	if(!item) return
 
 	var/throw_range = item.throw_range
+	var/itemsize
 	if (istype(item, /obj/item/grab))
 		var/obj/item/grab/G = item
 		item = G.throw_held() //throw the person instead of the grab
@@ -286,7 +295,7 @@
 
 			//limit throw range by relative mob size
 			throw_range = round(M.throw_range * min(src.mob_size/M.mob_size, 1))
-
+			itemsize = round(M.mob_size/4)
 			var/turf/start_T = get_turf(loc) //Get the start and target tile for the descriptors
 			var/turf/end_T = get_turf(target)
 			if(start_T && end_T)
@@ -294,12 +303,16 @@
 				var/end_T_descriptor = "<font color='#6b4400'>[start_T] \[[end_T.x],[end_T.y],[end_T.z]\] ([end_T.loc])</font>"
 				admin_attack_log(usr, M, "Threw the victim from [start_T_descriptor] to [end_T_descriptor].", "Was from [start_T_descriptor] to [end_T_descriptor].", "threw, from [start_T_descriptor] to [end_T_descriptor], ")
 
+	else if (istype(item, /obj/item/))
+		var/obj/item/I = item
+		itemsize = I.w_class
+
 	src.drop_from_inventory(item)
 	if(!item || !isturf(item.loc))
 		return
 
 	//actually throw it!
-	src.visible_message("<span class='warning'>[src] has thrown [item].</span>")
+	src.visible_message("<span class='warning'>[src] has thrown [item].</span>", range = min(itemsize*2,world.view))
 
 	if(!src.lastarea)
 		src.lastarea = get_area(src.loc)
@@ -376,6 +389,12 @@
 /mob/living/carbon/proc/add_chemical_effect(var/effect, var/magnitude = 1)
 	if(effect in chem_effects)
 		chem_effects[effect] += magnitude
+	else
+		chem_effects[effect] = magnitude
+
+/mob/living/carbon/proc/add_up_to_chemical_effect(var/effect, var/magnitude = 1)
+	if(effect in chem_effects)
+		chem_effects[effect] = max(magnitude, chem_effects[effect])
 	else
 		chem_effects[effect] = magnitude
 

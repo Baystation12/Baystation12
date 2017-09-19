@@ -24,6 +24,7 @@
 	var/SA_sleep_min = 5
 	var/breathing = 0
 	var/last_failed_breath
+	var/breath_fail_ratio // How badly they failed a breath. Higher is worse.
 
 /obj/item/organ/internal/lungs/proc/remove_oxygen_deprivation(var/amount)
 	var/last_suffocation = oxygen_deprivation
@@ -32,20 +33,14 @@
 
 /obj/item/organ/internal/lungs/proc/add_oxygen_deprivation(var/amount)
 	var/last_suffocation = oxygen_deprivation
-	if(world.time < (last_failed_breath + 2 MINUTES)) //todo config
-		oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation + amount))
+	oxygen_deprivation = min(species.total_health,max(0,oxygen_deprivation + amount))
 	return (oxygen_deprivation - last_suffocation)
 
 // Returns a percentage value for use by GetOxyloss().
 /obj/item/organ/internal/lungs/proc/get_oxygen_deprivation()
-	var/result = oxygen_deprivation
 	if(status & ORGAN_DEAD)
 		return 100
-	else if(is_broken())
-		result = max(oxygen_deprivation, round(species.total_health * 0.5))
-	else if(is_damaged())
-		result = max(oxygen_deprivation, round(species.total_health * 0.25))
-	return round((result/species.total_health)*100)
+	return round((oxygen_deprivation/species.total_health)*100)
 
 /obj/item/organ/internal/lungs/robotize()
 	. = ..()
@@ -102,7 +97,7 @@
 			else
 				to_chat(owner, "<span class='danger'>You're having trouble getting enough [breath_type]!</span>")
 
-			owner.losebreath += 15
+			owner.losebreath += round(damage/2)
 
 /obj/item/organ/internal/lungs/proc/rupture()
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
@@ -114,7 +109,7 @@
 	if(!owner)
 		return 1
 	if(!breath)
-		owner.breath_fail_ratio = 1
+		breath_fail_ratio = 1
 		handle_failed_breath()
 		return 1
 
@@ -128,17 +123,13 @@
 			if(!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
 				rupture()
 	if(breath.total_moles == 0)
-		owner.breath_fail_ratio = 1
+		breath_fail_ratio = 1
 		handle_failed_breath()
 		return 1
 
 	var/safe_pressure_min = min_breath_pressure // Minimum safe partial pressure of breathable gas in kPa
 	// Lung damage increases the minimum safe pressure.
-	if(is_broken())
-		safe_pressure_min *= 1.5
-	else if(is_bruised())
-		safe_pressure_min *= 1.25
-
+	safe_pressure_min *= 1 + rand(1,4) * damage/max_damage
 
 	var/failed_inhale = 0
 	var/failed_exhale = 0
@@ -156,12 +147,12 @@
 		if(prob(20) && active_breathing)
 			owner.emote("gasp")
 
-		owner.breath_fail_ratio = 1 - inhale_pp/safe_pressure_min
+		breath_fail_ratio = round(1 - inhale_pp/safe_pressure_min, 0.001)
 		failed_inhale = 1
 	else
-		owner.breath_fail_ratio = 0
+		breath_fail_ratio = 0
 
-	owner.oxygen_alert = failed_inhale
+	owner.oxygen_alert = failed_inhale * 2
 
 	var/inhaled_gas_used = inhaling/6
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
@@ -204,7 +195,7 @@
 		var/ratio = (poison/safe_toxins_max) * 10
 		if(robotic >= ORGAN_ROBOT)
 			ratio /= 2 //Robolungs filter out some of the inhaled toxic air.
-		owner.reagents.add_reagent("toxin", Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
+		owner.reagents.add_reagent(/datum/reagent/toxin, Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
 		breath.adjust_gas(poison_type, -poison/6, update = 0) //update after
 		owner.phoron_alert = 1
 	else
@@ -239,8 +230,6 @@
 				breathing = 1
 
 	handle_temperature_effects(breath)
-	owner.adjustOxyLoss(max(HUMAN_MAX_OXYLOSS*(owner.breath_fail_ratio), 0))
-
 	breath.update_values()
 
 	if(failed_breath)
@@ -257,9 +246,10 @@
 		else
 			owner.emote(pick("shiver","twitch"))
 
-	owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS)
+	if(damage || world.time > last_failed_breath + 2 MINUTES)
+		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)
 
-	owner.oxygen_alert = max(owner.oxygen_alert, 1)
+	owner.oxygen_alert = max(owner.oxygen_alert, 2)
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
 	// Hot air hurts :(
@@ -276,7 +266,10 @@
 				else
 					damage = COLD_GAS_DAMAGE_LEVEL_1
 
-			owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+			if(prob(20))
+				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+			else
+				src.damage += damage
 			owner.fire_alert = 1
 		else if(breath.temperature >= species.heat_level_1)
 			if(prob(20))
@@ -290,7 +283,10 @@
 				else
 					damage = HEAT_GAS_DAMAGE_LEVEL_3
 
-			owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+			if(prob(20))
+				owner.apply_damage(damage, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+			else
+				src.damage += damage
 			owner.fire_alert = 2
 
 		//breathing in hot/cold air also heats/cools you a bit

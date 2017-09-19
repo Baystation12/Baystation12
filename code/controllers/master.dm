@@ -33,6 +33,8 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/init_time
 	var/tickdrift = 0
 
+	var/list/total_run_times
+
 	var/sleep_delta
 
 	var/make_runtime = 0
@@ -61,6 +63,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 /datum/controller/master/New()
 	// Highlander-style: there can only be one! Kill off the old and replace it with the new.
 	subsystems = list()
+	total_run_times = list()
 	if (Master != src)
 		if (istype(Master))
 			Recover()
@@ -140,6 +143,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 			Master.subsystems += new BadBoy.type	//NEW_SS_GLOBAL will remove the old one
 		subsystems = Master.subsystems
 		current_runlevel = Master.current_runlevel
+		total_run_times = Master.total_run_times
 		StartProcessing(10)
 	else
 		report_progress("The Master Controller is having some issues, we will need to re-initialize EVERYTHING")
@@ -476,6 +480,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 			tick_usage += queue_node.paused_tick_usage
 
 			queue_node.tick_usage = MC_AVERAGE_FAST(queue_node.tick_usage, tick_usage)
+			total_run_times[queue_node.name] += ((tick_usage / 100) * world.tick_lag) / 10
 
 			queue_node.cost = MC_AVERAGE_FAST(queue_node.cost, TICK_DELTA_TO_MS(tick_usage))
 			queue_node.paused_ticks = 0

@@ -85,8 +85,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 	for(var/area/A)
 		if(!istype(A,/area) || istype(A, /area/space) || istype(A,/area/beach))
 			continue
-
-		A.updateicon()
+		A.update_icon()
 		CHECK_TICK
 
 /datum/universal_state/supermatter_cascade/OverlayAndAmbientSet()
@@ -99,7 +98,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 				L.update_lumcount(0.0, 0.4, 1)
 			CHECK_TICK
 
-		for(var/turf/space/T in turfs)
+		for(var/turf/space/T)
 			OnTurfChange(T)
 			CHECK_TICK
 /*

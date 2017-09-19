@@ -52,14 +52,14 @@
 
 <h1>SECURITY SYSTEMS</h1>
 	{{if data.idsalarm}}
-        <div class="statusDisplay" style="overflow: auto;">
+    <div class="statusDisplay" style="overflow: auto;">
 		<div class="item">
 			<div class="itemContent" style="width: 100%;">
 				<h1>NETWORK INCURSION DETECTED</h1>
 				<i>An abnormal activity has been detected in the network. Please verify system logs for more information</i>
 			</div>
 		</div>
-        </div>		
+    </div>		
 	{{/if}}
 	<div class="item">
 		<div class="itemLabelWide">
@@ -68,7 +68,7 @@
 		<div class="itemContentNarrow">
                 	<b>{{:data.idsstatus ? 'ENABLED' : 'DISABLED'}}</b>
 		</div>
-        </div>
+    </div>
 	<div class="item">
 		<div class="itemLabelWide">
                 	Maximal Log Count: 
@@ -76,7 +76,15 @@
 		<div class="itemContentNarrow">
                 	<b>{{:data.ntnetmaxlogs}}</b>
 		</div>
-        </div>
+    </div>
+    <div class="item">
+		<div class="itemLabelWide">
+                	Blacklisted NIDs: 
+		</div>
+		<div class="itemContentNarrow">
+					{{:data.banned_nids}}
+		</div>
+    </div>
 	<div class="item">
 		<div class="itemLabelWide">
                 	Controls: 
@@ -87,11 +95,13 @@
 			<tr><td>{{:helper.link('TOGGLE IDS', null, {'toggleIDS' : 1})}}
 			<tr><td>{{:helper.link('SET LOG LIMIT', null, {'updatemaxlogs' : 1})}}
 			<tr><td>{{:helper.link('PURGE LOGS', null, {'purgelogs' : 1})}}
+			<tr><td>{{:helper.link('ADD BLACKLIST ENTRY', null, {'ban_nid' : 1})}}
+			<tr><td>{{:helper.link('REMOVE BLACKLIST ENTRY', null, {'unban_nid' : 1})}}
 			</table>
 		</div>
-        </div>
+    </div>
 	<b>System Logs</b>
-        <div class="statusDisplay" style="overflow: auto;">
+    <div class="statusDisplay" style="overflow: auto;">
 		<div class="item">
 			<div class="itemContent" style="width: 100%;">
 				{{for data.ntnetlogs}}
@@ -99,4 +109,4 @@
 				{{/for}}
 			</div>
 		</div>
-        </div>
+    </div>

@@ -1,8 +1,7 @@
 /mob/living/simple_animal/spiderbot
 
-	min_oxy = 0
-	max_tox = 0
-	max_co2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 	maxbodytemp = 500
 	mob_size = MOB_SMALL

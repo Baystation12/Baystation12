@@ -27,15 +27,14 @@
 	armor = list(melee = 30, bullet = 0, laser = 5,energy = 40, bomb = 35, bio = 100, rad = 100)
 	light_overlay = "hardhat_light"
 
-/obj/item/clothing/suit/space/void/excavation/prepared/Initialize()
-	. = ..()
-	helmet = new /obj/item/clothing/head/helmet/space/void/excavation
+/obj/item/clothing/suit/space/void/excavation/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/excavation
 
 /obj/item/weapon/storage/belt/archaeology
 	name = "excavation gear-belt"
 	desc = "Can hold various excavation gear."
 	icon_state = "gearbelt"
-	item_state = "utility"
+	item_state = ACCESSORY_SLOT_UTILITY
 	can_hold = list(
 		/obj/item/weapon/storage/box/samplebags,
 		/obj/item/device/core_sampler,

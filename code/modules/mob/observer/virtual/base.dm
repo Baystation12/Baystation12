@@ -26,7 +26,7 @@ var/list/all_virtual_listeners = list()
 	GLOB.mob_list -= src
 	all_virtual_listeners += src
 
-	updateicon()
+	update_icon()
 
 /mob/observer/virtual/Destroy()
 	GLOB.moved_event.unregister(host, src, /atom/movable/proc/move_to_turf_or_null)
@@ -34,7 +34,7 @@ var/list/all_virtual_listeners = list()
 	host = null
 	return ..()
 
-/mob/observer/virtual/updateicon()
+/mob/observer/virtual/update_icon()
 	if(!overlay_icons)
 		overlay_icons = list()
 		for(var/i_state in icon_states(icon))

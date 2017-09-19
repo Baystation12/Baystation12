@@ -122,15 +122,18 @@
 	if(tesla_link && tesla_link.enabled && apc_powered)
 		data["PC_apclinkicon"] = "charging.gif"
 
-	switch(get_ntnet_status())
-		if(0)
-			data["PC_ntneticon"] = "sig_none.gif"
-		if(1)
-			data["PC_ntneticon"] = "sig_low.gif"
-		if(2)
-			data["PC_ntneticon"] = "sig_high.gif"
-		if(3)
-			data["PC_ntneticon"] = "sig_lan.gif"
+	if(network_card && network_card.is_banned())
+		data["PC_ntneticon"] = "sig_warning.gif"
+	else
+		switch(get_ntnet_status())
+			if(0)
+				data["PC_ntneticon"] = "sig_none.gif"
+			if(1)
+				data["PC_ntneticon"] = "sig_low.gif"
+			if(2)
+				data["PC_ntneticon"] = "sig_high.gif"
+			if(3)
+				data["PC_ntneticon"] = "sig_lan.gif"
 
 	var/list/program_headers = list()
 	for(var/datum/computer_file/program/P in idle_threads)

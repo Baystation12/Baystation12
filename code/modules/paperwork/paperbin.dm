@@ -76,16 +76,31 @@
 	return
 
 
-/obj/item/weapon/paper_bin/attackby(obj/item/weapon/paper/i as obj, mob/user as mob)
-	if(!istype(i))
-		return
-
-	user.drop_item()
-	i.loc = src
-	to_chat(user, "<span class='notice'>You put [i] in [src].</span>")
-	papers.Add(i)
-	update_icon()
-	amount++
+/obj/item/weapon/paper_bin/attackby(obj/item/weapon/i as obj, mob/user as mob)
+	if(istype(i, /obj/item/weapon/paper))
+		user.drop_item()
+		i.forceMove(src)
+		to_chat(user, "<span class='notice'>You put [i] in [src].</span>")
+		papers.Add(i)
+		update_icon()
+		amount++
+	else if(istype(i, /obj/item/weapon/paper_bundle))
+		to_chat(user, "<span class='notice'>You loosen \the [i] and add its papers into \the [src].</span>")
+		var/was_there_a_photo = 0
+		for(var/obj/item/weapon/bundleitem in i) //loop through items in bundle
+			if(istype(bundleitem, /obj/item/weapon/paper)) //if item is paper, add into the bin
+				papers.Add(bundleitem)
+				update_icon()
+				amount++
+			else if(istype(bundleitem, /obj/item/weapon/photo)) //if item is photo, drop it on the ground
+				was_there_a_photo = 1
+				bundleitem.dropInto(user.loc)
+				bundleitem.reset_plane_and_layer()
+		user.drop_from_inventory(i)
+		qdel(i)
+		if(was_there_a_photo)
+			to_chat(user, "<span class='notice'>The photo cannot go into \the [src].</span>")
+	return
 
 
 /obj/item/weapon/paper_bin/examine(mob/user)

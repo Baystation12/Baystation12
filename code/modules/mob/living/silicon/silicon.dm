@@ -33,6 +33,7 @@
 	GLOB.silicon_mob_list |= src
 	..()
 	add_language(LANGUAGE_GALCOM)
+	default_language = all_languages[LANGUAGE_GALCOM]
 	init_id()
 	init_subsystems()
 
@@ -41,6 +42,12 @@
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.unregister_alarm(src)
 	return ..()
+
+/mob/living/silicon/fully_replace_character_name(new_name)
+	..()
+	if(istype(idcard))
+		idcard.registered_name = new_name
+		idcard.update_name()
 
 /mob/living/silicon/proc/init_id()
 	if(ispath(idcard))
