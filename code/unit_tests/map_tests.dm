@@ -330,12 +330,12 @@ datum/unit_test/ladder_check/start_test()
 /datum/unit_test/cryopod_comp_check/start_test()
 	var/pass = TRUE
 
-	for(var/obj/machinery/cryopod/C in SSmachines.machinery)
+	for(var/obj/machinery/cryopod/C in GLOB.machines)
 		if(!C.control_computer)
 			log_bad("[get_area(C)] lacks a cryopod control computer while holding a cryopod.")
 			pass = FALSE
 
-	for(var/obj/machinery/computer/cryopod/C in SSmachines.machinery)
+	for(var/obj/machinery/computer/cryopod/C in GLOB.machines)
 		if(!(locate(/obj/machinery/cryopod) in get_area(C)))
 			log_bad("[get_area(C)] lacks a cryopod while holding a control computer.")
 			pass = FALSE
@@ -469,7 +469,7 @@ datum/unit_test/ladder_check/start_test()
 
 /datum/unit_test/simple_pipes_shall_not_face_north_or_west/start_test()
 	var/failures = 0
-	for(var/obj/machinery/atmospherics/pipe/simple/pipe in SSmachines.machinery)
+	for(var/obj/machinery/atmospherics/pipe/simple/pipe in GLOB.machines)
 		if(!istype(pipe, /obj/machinery/atmospherics/pipe/simple/hidden) && !istype(pipe, /obj/machinery/atmospherics/pipe/simple/visible))
 			continue
 		if(pipe.dir == NORTH || pipe.dir == WEST)

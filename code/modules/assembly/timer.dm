@@ -27,10 +27,10 @@
 /obj/item/device/assembly/timer/toggle_secure()
 	secured = !secured
 	if(secured)
-		START_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Add(src)
 	else
 		timing = 0
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 	update_icon()
 	return secured
 
@@ -46,7 +46,7 @@
 	return
 
 
-/obj/item/device/assembly/timer/Process()
+/obj/item/device/assembly/timer/process()
 	if(timing && (time > 0))
 		time--
 	if(timing && time <= 0)

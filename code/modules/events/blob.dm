@@ -16,7 +16,7 @@
 	log_and_message_admins("Blob spawned in \the [get_area(T)]", location = T)
 	Blob = new /obj/effect/blob/core(T)
 	for(var/i = 1; i < rand(3, 4), i++)
-		Blob.Process()
+		Blob.process()
 
 /datum/event/blob/tick()
 	if(!Blob || !Blob.loc)
@@ -24,4 +24,4 @@
 		kill()
 		return
 	if(IsMultiple(activeFor, 3))
-		Blob.Process()
+		Blob.process()

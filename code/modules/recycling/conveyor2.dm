@@ -60,7 +60,7 @@
 
 	// machine process
 	// move items to the target location
-/obj/machinery/conveyor/Process()
+/obj/machinery/conveyor/process()
 	if(stat & (BROKEN | NOPOWER))
 		return
 	if(!operating)
@@ -194,7 +194,7 @@
 // timed process
 // if the switch changed, update the linked conveyors
 
-/obj/machinery/conveyor_switch/Process()
+/obj/machinery/conveyor_switch/process()
 	if(!operated)
 		return
 	operated = 0

@@ -43,10 +43,10 @@
 		qdel(src)
 		return
 
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Add(src)
 	..()
 
-/obj/structure/closet/statue/Process()
+/obj/structure/closet/statue/process()
 	timer--
 	for(var/mob/living/M in src) //Go-go gadget stasis field
 		M.setToxLoss(intialTox)
@@ -55,7 +55,7 @@
 		M.setOxyLoss(intialOxy)
 	if (timer <= 0)
 		dump_contents()
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 		qdel(src)
 
 /obj/structure/closet/statue/dump_contents()

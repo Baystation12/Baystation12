@@ -86,7 +86,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/computer/diseasesplicer/Process()
+/obj/machinery/computer/diseasesplicer/process()
 	if(stat & (NOPOWER|BROKEN))
 		return
 

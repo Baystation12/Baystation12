@@ -146,7 +146,7 @@
 				var/mob/living/carbon/human/I = impersonated[speaker_name]
 
 				if(!I)
-					for(var/mob/living/carbon/human/M in SSmobs.mob_list)
+					for(var/mob/living/carbon/human/M in GLOB.mob_list)
 						if(M.real_name == speaker_name)
 							I = M
 							impersonated[speaker_name] = I

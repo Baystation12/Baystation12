@@ -209,7 +209,7 @@
 		to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
 
 	// Effect 2: Z-level wide electrical pulse
-	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
+	for(var/obj/machinery/power/apc/A in GLOB.machines)
 		if(!(A.z in affected_z))
 			continue
 
@@ -223,7 +223,7 @@
 		else
 			A.energy_fail(round(DETONATION_SHUTDOWN_APC * random_change))
 
-	for(var/obj/machinery/power/smes/buildable/S in SSmachines.machinery)
+	for(var/obj/machinery/power/smes/buildable/S in GLOB.machines)
 		if(!(S.z in affected_z))
 			continue
 		// Causes SMESes to shut down for a bit
@@ -232,7 +232,7 @@
 
 	// Effect 3: Break solar arrays
 
-	for(var/obj/machinery/power/solar/S in SSmachines.machinery)
+	for(var/obj/machinery/power/solar/S in GLOB.machines)
 		if(!(S.z in affected_z))
 			continue
 		if(prob(DETONATION_SOLAR_BREAK_CHANCE))
@@ -289,7 +289,7 @@
 			public_alert = 0
 
 
-/obj/machinery/power/supermatter/Process()
+/obj/machinery/power/supermatter/process()
 
 	var/turf/L = loc
 

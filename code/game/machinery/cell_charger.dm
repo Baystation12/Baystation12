@@ -99,7 +99,7 @@
 	..(severity)
 
 
-/obj/machinery/cell_charger/Process()
+/obj/machinery/cell_charger/process()
 //	log_debug("ccpt [charging] [stat]")
 
 	if((stat & (BROKEN|NOPOWER)) || !anchored)

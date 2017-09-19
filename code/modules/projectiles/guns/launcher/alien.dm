@@ -6,16 +6,16 @@
 	var/ammo_type
 	var/ammo_name
 
-/obj/item/weapon/gun/launcher/alien/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
+/obj/item/weapon/gun/launcher/alien/New()
+	..()
+	GLOB.processing_objects.Add(src)
 	last_regen = world.time
 
 /obj/item/weapon/gun/launcher/alien/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Remove(src)
 	return ..()
 
-/obj/item/weapon/gun/launcher/alien/Process()
+/obj/item/weapon/gun/launcher/alien/process()
 	if(ammo < max_ammo && world.time > last_regen + ammo_gen_time)
 		ammo++
 		last_regen = world.time

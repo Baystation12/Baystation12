@@ -22,7 +22,7 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/weapon/holder/New()
 	..()
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Add(src)
 
 /obj/item/weapon/holder/proc/destroy_all()
 	for(var/atom/movable/AM in src)
@@ -33,10 +33,10 @@ var/list/holder_mob_icon_cache = list()
 	for(var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
 	last_holder = null
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Remove(src)
 	return ..()
 
-/obj/item/weapon/holder/Process()
+/obj/item/weapon/holder/process()
 	update_state()
 
 /obj/item/weapon/holder/dropped()

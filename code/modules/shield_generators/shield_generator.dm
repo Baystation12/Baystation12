@@ -124,7 +124,7 @@
 	upkeep_multiplier = new_upkeep
 
 
-/obj/machinery/power/shield_generator/Process()
+/obj/machinery/power/shield_generator/process()
 	upkeep_power_usage = 0
 	power_usage = 0
 

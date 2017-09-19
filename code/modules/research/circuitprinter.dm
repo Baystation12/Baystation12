@@ -31,7 +31,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
 	RefreshParts()
 
-/obj/machinery/r_n_d/circuit_imprinter/Process()
+/obj/machinery/r_n_d/circuit_imprinter/process()
 	..()
 	if(stat)
 		update_icon()

@@ -9,16 +9,16 @@
 	anchored = 1
 	var/boom_time = 1
 
-/obj/effect/force_portal/Initialize()
-	. = ..()
+/obj/effect/force_portal/New(var/loc)
+	..()
 	boom_time = world.time + 30 SECONDS
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects += src
 
 /obj/effect/force_portal/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects -= src
 	. = ..()
 
-/obj/effect/force_portal/Process()
+/obj/effect/force_portal/process()
 	if(boom_time && boom_time < world.time)
 		boom()
 		boom_time = 0

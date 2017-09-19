@@ -32,9 +32,9 @@
 	var/turf/archived_loc
 	var/energy_consumed_on_touch = 100
 
-/obj/item/weapon/anodevice/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
+/obj/item/weapon/anodevice/New()
+	..()
+	GLOB.processing_objects.Add(src)
 
 /obj/item/weapon/anodevice/attackby(var/obj/I as obj, var/mob/user as mob)
 	if(istype(I, /obj/item/weapon/anobattery))
@@ -78,7 +78,7 @@
 	user << browse(dat, "window=anodevice;size=400x500")
 	onclose(user, "anodevice")
 
-/obj/item/weapon/anodevice/Process()
+/obj/item/weapon/anodevice/process()
 	if(activated)
 		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
 			//make sure the effect is active
@@ -190,7 +190,7 @@
 	icon_state = "anodev[round(p,25)]"
 
 /obj/item/weapon/anodevice/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Remove(src)
 	..()
 
 /obj/item/weapon/anodevice/attack(mob/living/M as mob, mob/living/user as mob, def_zone)

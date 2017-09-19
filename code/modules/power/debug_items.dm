@@ -29,7 +29,7 @@
 	desc = "An experimental power generator"
 	var/power_generation_rate = 1000000
 
-/obj/machinery/power/debug_items/infinite_generator/Process()
+/obj/machinery/power/debug_items/infinite_generator/process()
 	add_avail(power_generation_rate)
 
 /obj/machinery/power/debug_items/infinite_generator/show_info(var/mob/user)
@@ -44,7 +44,7 @@
 	var/power_usage_rate = 0
 	var/last_used = 0
 
-/obj/machinery/power/debug_items/infinite_cable_powersink/Process()
+/obj/machinery/power/debug_items/infinite_cable_powersink/process()
 	last_used = draw_power(power_usage_rate)
 
 /obj/machinery/power/debug_items/infinite_cable_powersink/show_info(var/mob/user)

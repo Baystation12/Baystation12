@@ -62,14 +62,14 @@ var/list/global/tank_gauge_cache = list()
 	src.air_contents = new /datum/gas_mixture()
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Add(src)
 	update_gauge()
 	return
 
 /obj/item/weapon/tank/Destroy()
 	QDEL_NULL(air_contents)
 
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Remove(src)
 	QDEL_NULL(src.proxyassembly)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
@@ -346,7 +346,7 @@ var/list/global/tank_gauge_cache = list()
 
 	return remove_air(moles_needed)
 
-/obj/item/weapon/tank/Process()
+/obj/item/weapon/tank/process()
 	//Allow for reactions
 	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 	if(gauge_icon)

@@ -61,7 +61,7 @@
 		active_power_usage = base_charge_rate
 
 
-/obj/machinery/mech_recharger/Process()
+/obj/machinery/mech_recharger/process()
 	..()
 	if(!charging)
 		use_power = 1

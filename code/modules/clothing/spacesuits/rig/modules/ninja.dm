@@ -235,7 +235,7 @@
 		qdel(holder)
 	qdel(src)
 
-/obj/item/rig_module/self_destruct/Process()
+/obj/item/rig_module/self_destruct/process()
 	// Not being worn, leave it alone.
 	if(!holder || !holder.wearer || !holder.wearer.wear_suit == holder)
 		return 0

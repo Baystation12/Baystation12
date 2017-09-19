@@ -16,7 +16,7 @@
 	if (!target)
 		src.target = locate(/obj/machinery/atmospherics/pipe) in loc
 
-/obj/machinery/meter/Process()
+/obj/machinery/meter/process()
 	if(!target)
 		icon_state = "meterX"
 		return 0

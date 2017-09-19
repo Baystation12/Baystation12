@@ -29,11 +29,11 @@
 /obj/item/device/assembly/prox_sensor/toggle_secure()
 	secured = !secured
 	if(secured)
-		START_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Add(src)
 	else
 		scanning = 0
 		timing = 0
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 	update_icon()
 	return secured
 
@@ -61,7 +61,7 @@
 	return
 
 
-/obj/item/device/assembly/prox_sensor/Process()
+/obj/item/device/assembly/prox_sensor/process()
 	if(scanning)
 		var/turf/mainloc = get_turf(src)
 		for(var/mob/living/A in range(range,mainloc))

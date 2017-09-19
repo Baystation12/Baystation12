@@ -511,7 +511,7 @@
 
 	GLOB.nanomanager.update_uis(src)
 
-/obj/machinery/vending/Process()
+/obj/machinery/vending/process()
 	if(stat & (BROKEN|NOPOWER))
 		return
 

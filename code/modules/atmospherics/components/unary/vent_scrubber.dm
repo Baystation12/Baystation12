@@ -134,7 +134,7 @@
 			if(g != "oxygen" && g != "nitrogen")
 				scrubbing_gas += g
 
-/obj/machinery/atmospherics/unary/vent_scrubber/Process()
+/obj/machinery/atmospherics/unary/vent_scrubber/process()
 	..()
 
 	if (hibernate > world.time)

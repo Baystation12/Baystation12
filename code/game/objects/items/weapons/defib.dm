@@ -531,7 +531,7 @@
 /obj/item/weapon/shockpaddles/standalone/Destroy()
 	. = ..()
 	if(fail_counter)
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 
 /obj/item/weapon/shockpaddles/standalone/check_charge(var/charge_amt)
 	return 1
@@ -540,11 +540,11 @@
 	radiation_repository.radiate(src, charge_amt/12) //just a little bit of radiation. It's the price you pay for being powered by magic I guess
 	return 1
 
-/obj/item/weapon/shockpaddles/standalone/Process()
+/obj/item/weapon/shockpaddles/standalone/process()
 	if(fail_counter > 0)
 		radiation_repository.radiate(src, fail_counter--)
 	else
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 
 /obj/item/weapon/shockpaddles/standalone/emp_act(severity)
 	..()
@@ -559,7 +559,7 @@
 				to_chat(loc, "<span class='warning'>\The [src] feel pleasantly warm.</span>")
 
 	if(new_fail && !fail_counter)
-		START_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Add(src)
 	fail_counter = new_fail
 
 /obj/item/weapon/shockpaddles/standalone/traitor

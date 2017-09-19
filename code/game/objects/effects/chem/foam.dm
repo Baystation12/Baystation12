@@ -21,10 +21,10 @@
 	metal = ismetal
 	playsound(src, 'sound/effects/bubbles2.ogg', 80, 1, -3)
 	spawn(3 + metal * 3)
-		Process()
+		process()
 		checkReagents()
 	spawn(120)
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 		sleep(30)
 		if(metal)
 			var/obj/structure/foamedmetal/M = new(src.loc)
@@ -42,7 +42,7 @@
 		for(var/obj/O in T)
 			reagents.touch_obj(O)
 
-/obj/effect/effect/foam/Process()
+/obj/effect/effect/foam/process()
 	if(--amount < 0)
 		return
 

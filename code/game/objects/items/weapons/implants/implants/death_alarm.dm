@@ -19,7 +19,7 @@
 /obj/item/weapon/implant/death_alarm/islegal()
 	return TRUE
 
-/obj/item/weapon/implant/death_alarm/Process()
+/obj/item/weapon/implant/death_alarm/process()
 	if (!implanted) return
 	var/mob/M = imp_in
 
@@ -40,7 +40,7 @@
 	var/death_message = "[mobname] has died in [location]!"
 	if(!cause)
 		death_message = "[mobname] has died-zzzzt in-in-in..."
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Remove(src)
 
 	for(var/channel in list("Security", "Medical", "Command"))
 		GLOB.global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
@@ -57,19 +57,19 @@
 			meltdown()
 		else if (prob(60))	//but more likely it will just quietly die
 			malfunction = MALFUNCTION_PERMANENT
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects.Remove(src)
 
 	spawn(20)
 		malfunction = 0
 
 /obj/item/weapon/implant/death_alarm/implanted(mob/source as mob)
 	mobname = source.real_name
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Add(src)
 	return TRUE
 
 /obj/item/weapon/implant/death_alarm/removed()
 	..()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Remove(src)
 
 /obj/item/weapon/implantcase/death_alarm
 	name = "glass case - 'death alarm'"

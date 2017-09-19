@@ -135,7 +135,7 @@
 
 	spawn()
 		setup_trajectory(curloc, targloc, x_offset, y_offset, angle_offset) //plot the initial trajectory
-		Process()
+		process()
 
 	return 0
 
@@ -276,7 +276,7 @@
 /obj/item/projectile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 1
 
-/obj/item/projectile/Process()
+/obj/item/projectile/process()
 	var/first_step = 1
 
 	spawn while(src && src.loc)
@@ -411,9 +411,9 @@
 
 	//plot the initial trajectory
 	setup_trajectory(curloc, targloc)
-	return Process(targloc)
+	return process(targloc)
 
-/obj/item/projectile/test/Process(var/turf/targloc)
+/obj/item/projectile/test/process(var/turf/targloc)
 	while(src) //Loop on through!
 		if(result)
 			return (result - 1)

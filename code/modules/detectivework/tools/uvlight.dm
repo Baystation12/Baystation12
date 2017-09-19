@@ -21,12 +21,12 @@
 	on = !on
 	if(on)
 		set_light(range, 2, "#007fff")
-		START_PROCESSING(SSobj, src)
+		GLOB.processing_objects |= src
 		icon_state = "uv_on"
 	else
 		set_light(0)
 		clear_last_scan()
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects -= src
 		icon_state = "uv_off"
 
 /obj/item/device/uv_light/proc/clear_last_scan()
@@ -46,7 +46,7 @@
 			if(I.fluorescent == 2) I.fluorescent = 1
 		reset_objects.Cut()
 
-/obj/item/device/uv_light/Process()
+/obj/item/device/uv_light/process()
 	clear_last_scan()
 	if(on)
 		step_alpha = round(255/range)

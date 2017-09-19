@@ -31,7 +31,7 @@
 
 		..()
 
-	Process()
+	process()
 		..()
 		if(!partner)
 			return 0

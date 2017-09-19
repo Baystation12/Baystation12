@@ -108,7 +108,7 @@
 	wires = null
 	return ..()
 
-/obj/machinery/camera/Process()
+/obj/machinery/camera/process()
 	if((stat & EMPED) && world.time >= affected_by_emp_until)
 		stat &= ~EMPED
 		cancelCameraAlarm()
@@ -129,7 +129,7 @@
 			triggerCameraAlarm()
 			update_icon()
 			update_coverage()
-			START_PROCESSING(SSmachines, src)
+			GLOB.processing_objects |= src
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.get_structure_damage())

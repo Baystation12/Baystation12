@@ -140,7 +140,7 @@
 		return
 	return
 
-/obj/machinery/mineral/processing_unit/Process()
+/obj/machinery/mineral/processing_unit/process()
 
 	if (!src.output || !src.input) return
 

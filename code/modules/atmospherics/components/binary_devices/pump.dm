@@ -62,7 +62,7 @@ Thus, the two variables affect pump operation are set in New():
 /obj/machinery/atmospherics/binary/pump/hide(var/i)
 	update_underlays()
 
-/obj/machinery/atmospherics/binary/pump/Process()
+/obj/machinery/atmospherics/binary/pump/process()
 	last_power_draw = 0
 	last_flow_rate = 0
 

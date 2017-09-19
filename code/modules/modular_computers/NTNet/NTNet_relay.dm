@@ -35,7 +35,7 @@
 	else
 		icon_state = "bus_off"
 
-/obj/machinery/ntnet_relay/Process()
+/obj/machinery/ntnet_relay/process()
 	if(operable())
 		use_power = 2
 	else

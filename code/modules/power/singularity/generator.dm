@@ -9,7 +9,7 @@
 	use_power = 0
 	var/energy = 0
 
-/obj/machinery/the_singularitygen/Process()
+/obj/machinery/the_singularitygen/process()
 	var/turf/T = get_turf(src)
 	if(src.energy >= 200)
 		new /obj/singularity/(T, 50)

@@ -32,7 +32,7 @@
 			user.drop_from_inventory(G)
 	else ..()
 
-/obj/structure/deity/altar/Process()
+/obj/structure/deity/altar/process()
 	if(!target || world.time < next_cycle)
 		return
 	if(!linked_god || target.stat)
@@ -66,7 +66,7 @@
 	if(target || !linked_god)
 		return
 	cycles_before_converted = initial(cycles_before_converted)
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects |= src
 	target = L
 	update_icon()
 	GLOB.destroyed_event.register(L,src,/obj/structure/deity/altar/proc/remove_target)
@@ -74,7 +74,7 @@
 	GLOB.death_event.register(L, src, /obj/structure/deity/altar/proc/remove_target)
 
 /obj/structure/deity/altar/proc/remove_target()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects -= src
 	GLOB.destroyed_event.unregister(target, src)
 	GLOB.moved_event.unregister(target, src)
 	GLOB.death_event.unregister(target, src)

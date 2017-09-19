@@ -45,7 +45,7 @@
 // Proc: process()
 // Parameters: None
 // Description: This has to be here because we need sensors to remain in Machines list.
-/obj/machinery/power/sensor/Process()
+/obj/machinery/power/sensor/process()
 	return 1
 
 // Proc: reading_to_text()

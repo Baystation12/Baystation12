@@ -67,7 +67,7 @@
 	stored_energy = 0
 	return last_stored_energy_transferred
 
-/obj/machinery/atmospherics/binary/circulator/Process()
+/obj/machinery/atmospherics/binary/circulator/process()
 	..()
 
 	if(last_worldtime_transfer < world.time - 50)

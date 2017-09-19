@@ -40,7 +40,7 @@
 		generate_map()
 		generate_landing()
 		update_biome()
-		START_PROCESSING(SSobj, src)
+		GLOB.processing_objects += src
 
 //attempt at more consistent history generation for xenoarch finds.
 /obj/effect/overmap/sector/exoplanet/proc/get_engravings()
@@ -60,9 +60,9 @@
 //Not that it should ever get deleted but just in case
 /obj/effect/overmap/sector/exoplanet/Destroy()
 		. = ..()
-		STOP_PROCESSING(SSobj, src)
+		GLOB.processing_objects -= src
 
-/obj/effect/overmap/sector/exoplanet/Process()
+/obj/effect/overmap/sector/exoplanet/process()
 	var/list/dead = list()
 	for(var/mob/M in animals)
 		if(M.stat == DEAD)
@@ -89,7 +89,7 @@
 			daddy.copy_from(atmosphere)
 			daddy.group_multiplier = Z.air.group_multiplier
 			Z.air.equalize(daddy)
-
+				
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
 
@@ -151,7 +151,7 @@
 			newgases -= "phoron"
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= "aliether"
-
+		
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
 		var/gasnum = rand(1,4)
 		for(var/i = 1 to gasnum) //swapping gases wholesale. don't try at home
@@ -161,7 +161,7 @@
 				part = total_moles
 			atmosphere.gas[ng] += part
 			total_moles = max(total_moles - part, 0)
-
+		
 	atmosphere.temperature = T20C + rand(-10, 10)
 	var/factor = max(rand(60,140)/100, 0.6)
 	atmosphere.multiply(factor)

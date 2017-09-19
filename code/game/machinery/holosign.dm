@@ -61,7 +61,7 @@
 	active = !active
 	update_icon()
 
-	for(var/obj/machinery/holosign/M in SSmachines.machinery)
+	for(var/obj/machinery/holosign/M in GLOB.machines)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.toggle()

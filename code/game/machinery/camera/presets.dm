@@ -24,29 +24,29 @@
 
 // EMP
 
-/obj/machinery/camera/emp_proof/Initialize()
+/obj/machinery/camera/emp_proof/New()
 	..()
-	. = upgradeEmpProof()
+	upgradeEmpProof()
 
 // X-RAY
 
 /obj/machinery/camera/xray
 	icon_state = "xraycam" // Thanks to Krutchen for the icons.
 
-/obj/machinery/camera/xray/Initialize()
-	. = ..()
+/obj/machinery/camera/xray/New()
+	..()
 	upgradeXRay()
 
 // MOTION
 
-/obj/machinery/camera/motion/Initialize()
-	. = ..()
+/obj/machinery/camera/motion/New()
+	..()
 	upgradeMotion()
 
 // ALL UPGRADES
 
-/obj/machinery/camera/all/Initialize()
-	. = ..()
+/obj/machinery/camera/all/New()
+	..()
 	upgradeEmpProof()
 	upgradeXRay()
 	upgradeMotion()
@@ -85,7 +85,12 @@
 /obj/machinery/camera/proc/upgradeMotion()
 	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
 	setPowerUsage()
-	START_PROCESSING(SSmachines, src)
+	if(!(src in GLOB.machines))
+		if(!machinery_sort_required && ticker)
+			dd_insertObjectList(GLOB.machines, src)
+		else
+			GLOB.machines += src
+			machinery_sort_required = 1
 	update_coverage()
 
 /obj/machinery/camera/proc/setPowerUsage()

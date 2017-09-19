@@ -23,7 +23,7 @@
 		return
 	return
 
-/obj/machinery/mineral/unloading_machine/Process()
+/obj/machinery/mineral/unloading_machine/process()
 	if (src.output && src.input)
 		if (locate(/obj/structure/ore_box, input.loc))
 			var/obj/structure/ore_box/BOX = locate(/obj/structure/ore_box, input.loc)

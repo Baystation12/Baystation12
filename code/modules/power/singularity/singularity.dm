@@ -40,14 +40,14 @@
 			qdel(src)
 
 	..()
-	START_PROCESSING(SSobj, src)
-	for(var/obj/machinery/power/singularity_beacon/singubeacon in SSmachines.machinery)
+	GLOB.processing_objects += src
+	for(var/obj/machinery/power/singularity_beacon/singubeacon in GLOB.machines)
 		if(singubeacon.active)
 			target = singubeacon
 			break
 
 /obj/singularity/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects -= src
 	. = ..()
 
 /obj/singularity/attack_hand(mob/user as mob)
@@ -78,7 +78,7 @@
 /obj/singularity/Bumped(atom/A)
 	consume(A)
 
-/obj/singularity/Process()
+/obj/singularity/process()
 	eat()
 	dissipate()
 	check_energy()

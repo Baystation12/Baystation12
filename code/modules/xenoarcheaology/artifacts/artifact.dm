@@ -49,11 +49,13 @@
 			my_effect.trigger = pick(TRIGGER_WATER, TRIGGER_ACID, TRIGGER_VOLATILE, TRIGGER_TOXIN)
 
 /obj/machinery/artifact/Destroy()
-	QDEL_NULL(my_effect)
-	QDEL_NULL(secondary_effect)
+	qdel(my_effect)
+	qdel(secondary_effect)
+	my_effect = null
+	secondary_effect = null
 	. = ..()
 
-/obj/machinery/artifact/Process()
+/obj/machinery/artifact/process()
 	var/turf/L = loc
 	if(!istype(L)) 	// We're inside a container or on null turf, either way stop processing effects
 		return

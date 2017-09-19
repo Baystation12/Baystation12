@@ -187,15 +187,15 @@
 		if(-INFINITY to 33)
 			icon_state = "blob_factory"
 
-/obj/effect/blob/core/Initialize(loc)
-	. = ..()
-	START_PROCESSING(SSobj, src)
+/obj/effect/blob/core/New(loc)
+	GLOB.processing_objects.Add(src)
+	return ..(loc)
 
 /obj/effect/blob/core/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects.Remove(src)
 	return ..()
 
-/obj/effect/blob/core/Process()
+/obj/effect/blob/core/process()
 	set waitfor = 0
 	if(!blob_may_process)
 		return

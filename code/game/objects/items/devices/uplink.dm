@@ -46,15 +46,15 @@
 	src.uplink_owner = owner
 	world_uplinks += src
 	uses = telecrystals
-	START_PROCESSING(SSobj, src)
+	GLOB.processing_objects += src
 
 /obj/item/device/uplink/Destroy()
 	uplink_owner = null
 	world_uplinks -= src
-	STOP_PROCESSING(SSobj, src)
+	GLOB.processing_objects -= src
 	return ..()
 
-/obj/item/device/uplink/Process()
+/obj/item/device/uplink/process()
 	if(world.time > next_offer_time)
 		next_offer_time = world.time + offer_time
 		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
