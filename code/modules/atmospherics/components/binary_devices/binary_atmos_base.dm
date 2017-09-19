@@ -41,6 +41,21 @@ obj/machinery/atmospherics/binary
 
 		return null
 
+	Destroy()
+		loc = null
+
+		if(node1)
+			node1.disconnect(src)
+			qdel(network1)
+		if(node2)
+			node2.disconnect(src)
+			qdel(network2)
+
+		node1 = null
+		node2 = null
+
+		..()
+
 	atmos_init()
 		..()
 		if(node1 && node2) return
@@ -117,18 +132,3 @@ obj/machinery/atmospherics/binary
 		update_underlays()
 
 		return null
-		
-obj/machinery/atmospherics/binary/Destroy()
-	loc = null
-
-	if(node1)
-		node1.disconnect(src)
-		qdel(network1)
-	if(node2)
-		node2.disconnect(src)
-		qdel(network2)
-
-	node1 = null
-	node2 = null
-
-	. = ..()

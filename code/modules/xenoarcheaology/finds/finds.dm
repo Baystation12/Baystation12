@@ -25,8 +25,7 @@
 	..(loc)
 
 	if(inside_item_type)
-		var/T = get_archeological_find_by_findtype(inside_item_type)
-		new T(src)
+		new /obj/item/weapon/archaeological_find(src, new_item_type = inside_item_type)
 
 /obj/item/weapon/ore/strangerock/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/weapon/pickaxe/brush))

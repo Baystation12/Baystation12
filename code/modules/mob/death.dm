@@ -5,7 +5,7 @@
 	transforming = 1
 	canmove = 0
 	icon = null
-	set_invisibility(101)
+	invisibility = 101
 	update_canmove()
 	remove_from_dead_mob_list()
 
@@ -31,7 +31,7 @@
 	transforming = 1
 	canmove = 0
 	icon = null
-	set_invisibility(101)
+	invisibility = 101
 
 	animation = new(loc)
 	animation.icon_state = "blank"
@@ -85,7 +85,7 @@
 	if(mind) mind.store_memory("Time of death: [stationtime2text()]", 0)
 	switch_from_living_to_dead_mob_list()
 
-	update_icon()
+	updateicon()
 
 	if(ticker && ticker.mode)
 		ticker.mode.check_win()

@@ -2,7 +2,7 @@
 	name = "red armband"
 	desc = "A fancy red armband!"
 	icon_state = "red"
-	slot = ACCESSORY_SLOT_ARMBAND
+	slot = "armband"
 	species_restricted = null
 	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi')
 

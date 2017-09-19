@@ -203,8 +203,9 @@
 	state = 20//So it doesn't interact based on the above. Not really necessary.
 
 /obj/structure/AIcore/deactivated/Destroy()
-	empty_playable_ai_cores -= src
-	. = ..()
+	if(src in empty_playable_ai_cores)
+		empty_playable_ai_cores -= src
+	..()
 
 /obj/structure/AIcore/deactivated/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/weapon/aicard/card, var/mob/user)
 

@@ -181,16 +181,11 @@
 		ViewManifest()
 
 	if(href_list["SelectedJob"])
-		var/datum/job/job = job_master.GetJob(href_list["SelectedJob"])
-
-		if(!job)
-			to_chat(usr, "<span class='danger'>The job '[href_list["SelectedJob"]]' doesn't exist!</span>")
-			return
 
 		if(!config.enter_allowed)
 			to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 			return
-		if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
+		else if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
 			to_chat(usr, "<span class='danger'>The [station_name()] is currently exploding. Joining would go poorly.</span>")
 			return
 
@@ -198,7 +193,7 @@
 		if(!check_species_allowed(S))
 			return 0
 
-		AttemptLateSpawn(job, client.prefs.spawnpoint)
+		AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 		return
 
 /*	if(href_list["privacy_poll"])
@@ -322,7 +317,7 @@
 	if(client)
 		return client.prefs.char_rank
 
-/mob/new_player/proc/AttemptLateSpawn(var/datum/job/job, var/spawning_at)
+/mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
 	if(src != usr)
 		return 0
 	if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
@@ -331,9 +326,9 @@
 	if(!config.enter_allowed)
 		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 		return 0
-
+	var/datum/job/job = job_master.GetJob(rank)
 	if(!IsJobAvailable(job))
-		alert("[job.title] is not available. Please try another.")
+		alert("[rank] is not available. Please try another.")
 		return 0
 	if(!job.is_branch_allowed(client.prefs.char_department))
 		alert("Wrong branch of service for [rank]. Valid branches is: [job.department].")
@@ -342,13 +337,11 @@
 		alert("Wrong rank for [rank]. Valid ranks in [client.prefs.char_branch] are: [job.get_ranks(client.prefs.char_branch)].")
 		return 0
 
-	if(job.is_restricted(client.prefs, src))
-		return
 
-	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job.title)
+	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, rank)
 	var/turf/spawn_turf = pick(spawnpoint.turfs)
 	if(job.latejoin_at_spawnpoints)
-		var/obj/S = job_master.get_roundstart_spawnpoint(job.title)
+		var/obj/S = job_master.get_roundstart_spawnpoint(rank)
 		spawn_turf = get_turf(S)
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
 	if(airstatus)
@@ -363,16 +356,16 @@
 
 		// Just in case someone stole our position while we were waiting for input from alert() proc
 		if(!IsJobAvailable(job))
-			to_chat(src, alert("[job.title] is not available. Please try another."))
+			to_chat(src, alert("[rank] is not available. Please try another."))
 			return 0
 
-	job_master.AssignRole(src, job.title, 1)
+	job_master.AssignRole(src, rank, 1)
 
 	var/mob/living/character = create_character(spawn_turf)	//creates the human and transfers vars and mind
 	if(!character)
 		return 0
 
-	character = job_master.EquipRank(character, job.title, 1)					//equips the human
+	character = job_master.EquipRank(character, rank, 1)					//equips the human
 	UpdateFactionList(character)
 	equip_custom_items(character)
 
@@ -389,7 +382,7 @@
 		var/mob/living/silicon/ai/A = character
 		A.on_mob_init()
 
-		AnnounceCyborg(character, job.title, "has been downloaded to the empty core in \the [character.loc.loc]")
+		AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
 		ticker.mode.handle_latejoin(character)
 
 		qdel(C)
@@ -398,13 +391,13 @@
 
 	ticker.mode.handle_latejoin(character)
 	GLOB.universe.OnPlayerLatejoin(character)
-	if(job_master.ShouldCreateRecords(job.title))
+	if(job_master.ShouldCreateRecords(rank))
 		if(character.mind.assigned_role != "Cyborg")
 			GLOB.data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-			AnnounceArrival(character, job, spawnpoint.msg)
-		else
-			AnnounceCyborg(character, job, spawnpoint.msg)
+
+			if(job.announced)
+				AnnounceArrival(character, rank, spawnpoint.msg)
 		matchmaker.do_matchmaking()
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 	qdel(src)
@@ -443,8 +436,6 @@
 			for(var/mob/M in GLOB.player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
 				active++
 			if(IsJobRestricted(job, client.prefs.char_branch))
-				dat += "<a style='text-decoration: line-through' href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
-			else
 				dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
 			else
 				dat += "<a style='text-decoration: line-through' href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"

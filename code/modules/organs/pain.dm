@@ -23,10 +23,8 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 		last_pain_message = message
 		if(power >= 50)
 			to_chat(src, "<span class='danger'><font size=3>[message]</font></span>")
-		else if(power >= 10)
-			to_chat(src, "<span class='danger'>[message]</span>")
 		else
-			to_chat(src, "<span class='warning'>[message]</span>")
+			to_chat(src, "<span class='danger'>[message]</span>")
 	next_pain_time = world.time + (100-power)
 
 mob/living/carbon/human/proc/handle_pain()
@@ -66,28 +64,16 @@ mob/living/carbon/human/proc/handle_pain()
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/I in internal_organs)
-		if(prob(1) && !((I.status & ORGAN_DEAD) || I.robotic >= ORGAN_ROBOT) && I.damage > 5)
+		if((I.status & ORGAN_DEAD) || I.robotic >= ORGAN_ROBOT) continue
+		if(I.damage > 2) if(prob(2))
 			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
-			var/pain = 10
-			var/message = "You feel a dull pain in your [parent.name]"
-			if(I.is_bruised())
-				pain = 25
-				message = "You feel a pain in your [parent.name]"
-			if(I.is_broken())
-				pain = 50
-				message = "You feel a sharp pain in your [parent.name]"
-			src.custom_pain(message, pain, affecting = parent)
+			src.custom_pain("You feel a sharp pain in your [parent.name]", 50, affecting = parent)
 
-
-	if(prob(1))
+	if(prob(2))
 		switch(getToxLoss())
-			if(5 to 17)
+			if(10 to 25)
 				custom_pain("Your body stings slightly.", getToxLoss())
-			if(17 to 35)
-				custom_pain("Your body stings.", getToxLoss())
-			if(35 to 60)
-				custom_pain("Your body stings strongly.", getToxLoss())
-			if(60 to 100)
+			if(25 to 45)
 				custom_pain("Your whole body hurts badly.", getToxLoss())
-			if(100 to INFINITY)
+			if(61 to INFINITY)
 				custom_pain("Your body aches all over, it's driving you mad.", getToxLoss())

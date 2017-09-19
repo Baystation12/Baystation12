@@ -3,6 +3,7 @@
 	desc = "A structure made for the express purpose of religion."
 	health = 50
 	power_adjustment = 10
+	must_be_converted_turf = 0
 	important_structure = 1
 	build_cost = 500
 	var/mob/living/target

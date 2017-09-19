@@ -3,6 +3,7 @@
 	title = "Bartender"
 	department = "Service"
 	department_flag = SRV
+	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -15,6 +16,7 @@
 	title = "Chef"
 	department = "Service"
 	department_flag = SRV
+	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
@@ -28,6 +30,7 @@
 	title = "Gardener"
 	department = "Service"
 	department_flag = SRV
+	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -39,15 +42,16 @@
 
 //Cargo
 /datum/job/qm
-	title = "Head of Logistics"
+	title = "Quartermaster"
 	department = "Supply"
 	department_flag = SUP
+	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
 	economic_modifier = 5
-	base_pay = 20
+	base_pay = 14
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_player_age = 3
@@ -58,6 +62,7 @@
 	title = "Cargo Technician"
 	department = "Supply"
 	department_flag = SUP
+	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the quartermaster and the head of personnel"
@@ -70,6 +75,7 @@
 	title = "Shaft Miner"
 	department = "Supply"
 	department_flag = SUP
+	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the quartermaster and the head of personnel"
@@ -85,6 +91,7 @@
 	title = "Janitor"
 	department = "Service"
 	department_flag = SRV
+	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -99,6 +106,7 @@
 	title = "Librarian"
 	department = "Service"
 	department_flag = SRV
+	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -112,6 +120,7 @@
 	title = "Internal Affairs Agent"
 	department = "Security"
 	department_flag = SEC
+	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "company officials and Corporate Regulations"
@@ -122,6 +131,7 @@
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
+	announced = 1
 
 /datum/job/lawyer/equip(var/mob/living/carbon/human/H)
 	. = ..()

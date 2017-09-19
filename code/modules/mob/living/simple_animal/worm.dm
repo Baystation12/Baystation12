@@ -26,8 +26,9 @@
 
 	minbodytemp = 0
 	maxbodytemp = 350
-	min_gas = null
-	max_gas = null
+	min_oxy = 0
+	max_co2 = 0
+	max_tox = 0
 
 	a_intent = I_HURT //so they don't get pushed around
 
@@ -100,7 +101,7 @@
 	Destroy() //if a chunk a destroyed, make a new worm out of the split halves
 		if(previous)
 			previous.Detach()
-		. = ..()
+		..()
 
 	Move()
 		var/attachementNextPosition = loc
@@ -159,11 +160,16 @@
 
 	proc/Detach(die = 0)
 		var/mob/living/simple_animal/space_worm/newHead = new /mob/living/simple_animal/space_worm/head(loc,0)
+		var/mob/living/simple_animal/space_worm/newHeadPrevious = previous
 
-		newHead.Attach(src)
+		previous = null //so that no extra heads are spawned
+
+		newHead.Attach(newHeadPrevious)
 
 		if(die)
 			newHead.death()
+
+		qdel(src)
 
 	proc/ProcessStomach()
 		for(var/atom/movable/stomachContent in contents)

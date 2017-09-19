@@ -179,7 +179,7 @@ obj/structure/safe/ex_act(severity)
 	ADD_ICON_QUEUE(src)
 
 /obj/structure/safe/floor/hide(var/intact)
-	set_invisibility(intact ? 101 : 0)
+	invisibility = intact ? 101 : 0
 
 /obj/structure/safe/floor/hides_under_flooring()
 	return 1

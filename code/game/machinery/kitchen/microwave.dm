@@ -127,7 +127,7 @@
 		if (!O.reagents)
 			return 1
 		for (var/datum/reagent/R in O.reagents.reagent_list)
-			if (!(R.type in acceptable_reagents))
+			if (!(R.id in acceptable_reagents))
 				to_chat(user, "<span class='warning'>Your [O] contains components unsuitable for cookery.</span>")
 				return 1
 		return
@@ -209,9 +209,9 @@
 
 		for (var/datum/reagent/R in reagents.reagent_list)
 			var/display_name = R.name
-			if (R.type == /datum/reagent/capsaicin)
+			if (R.id == "capsaicin")
 				display_name = "Hotsauce"
-			if (R.type == /datum/reagent/frostoil)
+			if (R.id == "frostoil")
 				display_name = "Coldsauce"
 			dat += {"<B>[display_name]:</B> [R.volume] unit\s<BR>"}
 
@@ -364,13 +364,13 @@
 	for (var/obj/O in (InsertedContents()-ffuu))
 		amount++
 		if (O.reagents)
-			var/reagent_type = O.reagents.get_master_reagent_type()
-			if (reagent_type)
-				amount+=O.reagents.get_reagent_amount(reagent_type)
+			var/id = O.reagents.get_master_reagent_id()
+			if (id)
+				amount+=O.reagents.get_reagent_amount(id)
 		qdel(O)
 	src.reagents.clear_reagents()
-	ffuu.reagents.add_reagent(/datum/reagent/carbon, amount)
-	ffuu.reagents.add_reagent(/datum/reagent/toxin, amount/10)
+	ffuu.reagents.add_reagent("carbon", amount)
+	ffuu.reagents.add_reagent("toxin", amount/10)
 	return ffuu
 
 /obj/machinery/microwave/Topic(href, href_list)

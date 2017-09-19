@@ -134,13 +134,17 @@
 		O.set_dir(user.dir)
 		O.add_fingerprint(user)
 
-		if (recipe.goes_in_hands)
-			user.put_in_hands(O)
-
 		if (istype(O, /obj/item/stack))
 			var/obj/item/stack/S = O
 			S.amount = produced
-			S.add_to_stacks(user, recipe.goes_in_hands)
+			S.add_to_stacks(user)
+
+		if (recipe.goes_in_hands)
+			user.put_in_hands(O)
+			if (istype(O, /obj/item/stack))
+				var/obj/item/stack/S = O
+				S.amount = produced
+				S.add_to_stacks(user)
 
 /obj/item/stack/Topic(href, href_list)
 	..()
@@ -284,16 +288,8 @@
 		return
 	return max_amount
 
-/obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
-	var/list/stacks = list()
-	if(check_hands)
-		if(isstack(user.l_hand))
-			stacks += user.l_hand
-		if(isstack(user.r_hand))
-			stacks += user.r_hand
+/obj/item/stack/proc/add_to_stacks(mob/user as mob)
 	for (var/obj/item/stack/item in user.loc)
-		stacks += item
-	for (var/obj/item/stack/item in stacks)
 		if (item==src)
 			continue
 		var/transfer = src.transfer_to(item)

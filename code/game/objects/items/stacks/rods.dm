@@ -15,12 +15,6 @@
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 
-/obj/item/stack/rods/ten
-	amount = 10
-
-/obj/item/stack/rods/fifty
-	amount = 50
-
 /obj/item/stack/rods/cyborg
 	name = "metal rod synthesizer"
 	desc = "A device that makes metal rods."

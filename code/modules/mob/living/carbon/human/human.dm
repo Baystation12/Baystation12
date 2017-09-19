@@ -49,7 +49,6 @@
 
 /mob/living/carbon/human/Destroy()
 	GLOB.human_mob_list -= src
-	worn_underwear = null
 	for(var/organ in organs)
 		qdel(organ)
 	return ..()
@@ -220,11 +219,6 @@
 			dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
 	if(handcuffed)
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
-
-	for(var/entry in worn_underwear)
-		var/obj/item/underwear/UW = entry
-		dat += "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>"
-
 	dat += "<BR><A href='?src=\ref[src];item=splints'>Remove splints</A>"
 	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
@@ -304,10 +298,7 @@
 /mob/living/carbon/human/proc/get_face_name()
 	var/obj/item/organ/external/H = get_organ(BP_HEAD)
 	if(!H || H.disfigured || H.is_stump() || !real_name || (HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
-		if(istype(wear_mask))
-			return wear_mask.visible_name
-		else
-			return "Unknown"
+		return "Unknown"
 	return real_name
 
 //gets name from ID or PDA itself, ID inside PDA doesn't matter
@@ -344,62 +335,11 @@
 	if (!def_zone)
 		def_zone = pick(BP_L_HAND, BP_R_HAND)
 
-	return ..(shock_damage, source, base_siemens_coeff, def_zone)
+	var/obj/item/organ/external/affected_organ = get_organ(check_zone(def_zone))
+	var/siemens_coeff = base_siemens_coeff * get_siemens_coefficient_organ(affected_organ)
 
-/mob/living/carbon/human/apply_shock(var/shock_damage, var/def_zone, var/base_siemens_coeff = 1.0)
-	var/obj/item/organ/external/initial_organ = get_organ(check_zone(def_zone))
-	if(!initial_organ)
-		initial_organ = pick(organs)
+	return ..(shock_damage, source, siemens_coeff, def_zone)
 
-	var/obj/item/organ/external/floor_organ
-
-	if(!lying)
-		var/obj/item/organ/external/list/standing = list()
-		for(var/limb_tag in list(BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = organs_by_name[limb_tag]
-			if(E && E.is_usable())
-				standing[E.organ_tag] = E
-		if((def_zone == BP_L_FOOT || def_zone == BP_L_LEG) && standing[BP_L_FOOT])
-			floor_organ = standing[BP_L_FOOT]
-		if((def_zone == BP_R_FOOT || def_zone == BP_R_LEG) && standing[BP_R_FOOT])
-			floor_organ = standing[BP_R_FOOT]
-		else
-			floor_organ = standing[pick(standing)]
-
-	if(!floor_organ)
-		floor_organ = pick(organs)
-
-	var/obj/item/organ/external/list/to_shock = trace_shock(initial_organ, floor_organ)
-
-	if(to_shock && to_shock.len)
-		shock_damage /= to_shock.len
-		shock_damage = round(shock_damage, 0.1)
-	else
-		return 0
-
-	var/total_damage = 0
-
-	for(var/obj/item/organ/external/E in to_shock)
-		total_damage += ..(shock_damage, E.organ_tag, base_siemens_coeff * get_siemens_coefficient_organ(E))
-	return total_damage
-
-/mob/living/carbon/human/proc/trace_shock(var/obj/item/organ/external/init, var/obj/item/organ/external/floor)
-	var/obj/item/organ/external/list/traced_organs = list(floor)
-
-	if(!init)
-		return
-
-	if(!floor || init == floor)
-		return list(init)
-
-	for(var/obj/item/organ/external/E in list(floor, init))
-		while(E && E.parent_organ)
-			E = organs_by_name[E.parent_organ]
-			traced_organs += E
-			if(E == init)
-				return traced_organs
-
-	return traced_organs
 
 /mob/living/carbon/human/Topic(href, href_list)
 
@@ -413,8 +353,7 @@
 		src << browse(null, t1)
 
 	if(href_list["item"])
-		if(!handle_strip(href_list["item"],usr,locate(href_list["holder"])))
-			show_inv(usr)
+		handle_strip(href_list["item"],usr,locate(href_list["holder"]))
 
 	if (href_list["criminal"])
 		if(hasHUD(usr,"security"))
@@ -596,14 +535,12 @@
 					for (var/datum/data/record/R in GLOB.data_core.medical)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
-								to_chat(usr, "<b>Name:</b> [R.fields["name"]]")
-								to_chat(usr, "<b>Gender:</b> [R.fields["id_gender"]]")
-								to_chat(usr, "<b>Species:</b> [R.fields["species"]]")
+								to_chat(usr, "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]")
 								to_chat(usr, "<b>DNA:</b> [R.fields["b_dna"]]")
-								to_chat(usr, "<b>Blood Type:</b> [R.fields["b_type"]]")
-								to_chat(usr, "<b>Prosthetics:</b>")
-								for(var/p_name in R.fields["prosthetics"])
-									to_chat(usr, "\t [R.fields["prosthetics"][p_name]]")
+								to_chat(usr, "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]")
+								to_chat(usr, "<b>Details:</b> [R.fields["mi_dis_d"]]")
+								to_chat(usr, "<b>Major Disabilities:</b> [R.fields["ma_dis"]]")
+								to_chat(usr, "<b>Details:</b> [R.fields["ma_dis_d"]]")
 								to_chat(usr, "<b>Notes:</b> [R.fields["notes"]]")
 								to_chat(usr, "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>")
 								read = 1
@@ -776,23 +713,18 @@
 		return 0
 	return 1
 
-/mob/living/carbon/human/proc/vomit(var/toxvomit = 0, var/timevomit = 1, var/level = 3)
-	set waitfor = 0
-	if(!check_has_mouth() || isSynthetic() || !timevomit || !level)
+/mob/living/carbon/human/proc/vomit()
+	if(!check_has_mouth() || isSynthetic())
 		return
-	level = Clamp(level, 1, 3)
-	timevomit = Clamp(timevomit, 1, 10)
 	if(stat == DEAD)
 		return
 	if(!lastpuke)
 		lastpuke = 1
 		to_chat(src, "<span class='warning'>You feel nauseous...</span>")
-		if(level > 1)
-			sleep(150 / timevomit)	//15 seconds until second warning
+		spawn(150)	//15 seconds until second warning
 			to_chat(src, "<span class='warning'>You feel like you are about to throw up!</span>")
-			if(level > 2)
-				sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
-				Stun(3)
+			spawn(100)	//and you have 10 more for mad dash to the bucket
+				Stun(5)
 				if(nutrition < 40)
 					custom_emote(1,"dry heaves.")
 				else
@@ -808,11 +740,12 @@
 
 					var/turf/location = loc
 					if (istype(location, /turf/simulated))
-						location.add_vomit_floor(src, toxvomit)
-					ingested.remove_any(5)
-					nutrition -= 30
-		sleep(350)	//wait 35 seconds before next volley
-		lastpuke = 0
+						location.add_vomit_floor(src, 1)
+
+					nutrition -= 40
+					adjustToxLoss(-3)
+				spawn(350)	//wait 35 seconds before next volley
+					lastpuke = 0
 
 /mob/living/carbon/human/proc/morph()
 	set name = "Morph"
@@ -979,7 +912,7 @@
 /mob/living/carbon/human/revive()
 
 	if(should_have_organ(BP_HEART))
-		vessel.add_reagent(/datum/reagent/blood,species.blood_volume-vessel.total_volume)
+		vessel.add_reagent("blood",species.blood_volume-vessel.total_volume)
 		fixblood()
 
 	species.create_organs(src) // Reset our organs/limbs.
@@ -1223,9 +1156,9 @@
 		regenerate_icons()
 		if(vessel.total_volume < species.blood_volume)
 			vessel.maximum_volume = species.blood_volume
-			vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
+			vessel.add_reagent("blood", species.blood_volume - vessel.total_volume)
 		else if(vessel.total_volume > species.blood_volume)
-			vessel.remove_reagent(/datum/reagent/blood, vessel.total_volume - species.blood_volume)
+			vessel.remove_reagent("blood", vessel.total_volume - species.blood_volume)
 			vessel.maximum_volume = species.blood_volume
 		fixblood()
 
@@ -1484,8 +1417,6 @@
 //generates realistic-ish pulse output based on preset levels
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
 	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
-	if(!H)
-		return
 	if(H.open && !method)
 		return "muddled and unclear; you can't seem to find a vein"
 
@@ -1649,13 +1580,13 @@
 
 /mob/living/carbon/human/proc/make_adrenaline(amount)
 	if(stat == CONSCIOUS)
-		reagents.add_reagent(/datum/reagent/adrenaline, amount)
+		reagents.add_reagent("adrenaline", amount)
 
 //Get fluffy numbers
 /mob/living/carbon/human/proc/get_blood_pressure()
 	if(status_flags & FAKEDEATH)
 		return "[Floor(120+rand(-5,5))*0.25]/[Floor(80+rand(-5,5)*0.25)]"
-	var/blood_result = get_blood_circulation()
+	var/blood_result = get_effective_blood_volume()
 	return "[Floor((120+rand(-5,5))*(blood_result/100))]/[Floor(80+rand(-5,5)*(blood_result/100))]"
 
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.

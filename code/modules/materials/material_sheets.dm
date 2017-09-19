@@ -135,9 +135,6 @@
 	icon_state = "sheet-plastic"
 	default_type = "plastic"
 
-/obj/item/stack/material/plastic/ten
-	amount = 10
-
 /obj/item/stack/material/plastic/fifty
 	amount = 50
 
@@ -163,17 +160,11 @@
 	icon_state = "sheet-adamantine"
 	default_type = "platinum"
 
-/obj/item/stack/material/platinum/ten
-	amount = 10
-
 //Extremely valuable to Research.
 /obj/item/stack/material/mhydrogen
 	name = "metallic hydrogen"
 	icon_state = "sheet-mythril"
 	default_type = "mhydrogen"
-
-/obj/item/stack/material/mhydrogen/ten
-	amount = 10
 
 //Fuel for MRSPACMAN generator.
 /obj/item/stack/material/tritium
@@ -181,9 +172,6 @@
 	icon_state = "sheet-silver"
 	default_type = "tritium"
 	apply_colour = 1
-
-/obj/item/stack/material/tritium/ten
-	amount = 10
 
 /obj/item/stack/material/tritium/fifty
 	amount = 50
@@ -193,9 +181,6 @@
 	icon_state = "sheet-silver"
 	default_type = "osmium"
 	apply_colour = 1
-
-/obj/item/stack/material/osmium/ten
-	amount = 10
 
 /obj/item/stack/material/ocp
 	name = "osmium-carbide plasteel"
@@ -225,9 +210,6 @@
 	icon_state = "sheet-metal"
 	default_type = DEFAULT_WALL_MATERIAL
 
-/obj/item/stack/material/steel/ten
-	amount = 10
-
 /obj/item/stack/material/steel/fifty
 	amount = 50
 
@@ -248,9 +230,6 @@
 	icon_state = "sheet-wood"
 	default_type = "wood"
 
-/obj/item/stack/material/wood/ten
-	amount = 10
-
 /obj/item/stack/material/wood/fifty
 	amount = 50
 
@@ -263,9 +242,6 @@
 	name = "cardboard"
 	icon_state = "sheet-card"
 	default_type = "cardboard"
-
-/obj/item/stack/material/cardboard/ten
-	amount = 10
 
 /obj/item/stack/material/cardboard/fifty
 	amount = 50
@@ -281,9 +257,6 @@
 	icon_state = "sheet-glass"
 	default_type = "glass"
 
-/obj/item/stack/material/glass/ten
-	amount = 10
-
 /obj/item/stack/material/glass/fifty
 	amount = 50
 
@@ -291,12 +264,6 @@
 	name = "reinforced glass"
 	icon_state = "sheet-rglass"
 	default_type = "rglass"
-
-/obj/item/stack/material/glass/reinforced/ten
-	amount = 10
-
-/obj/item/stack/material/glass/reinforced/fifty
-	amount = 50
 
 /obj/item/stack/material/glass/phoronglass
 	name = "borosilicate glass"
@@ -311,6 +278,3 @@
 	singular_name = "reinforced borosilicate glass sheet"
 	icon_state = "sheet-phoronrglass"
 	default_type = "rphglass"
-
-/obj/item/stack/material/glass/phoronrglass/ten
-	amount = 10

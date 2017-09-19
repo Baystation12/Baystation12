@@ -75,14 +75,13 @@
 	name = "Emitter crate"
 	contains = list(/obj/machinery/power/emitter = 2)
 	cost = 10
-	containertype = /obj/structure/closet/crate/secure/large
+	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Emitter crate"
 	access = access_ce
 
 /decl/hierarchy/supply_pack/engineering/field_gen
 	name = "Field Generator crate"
 	contains = list(/obj/machinery/field_generator = 2)
-	containertype = /obj/structure/closet/crate/large
 	cost = 10
 	containername = "\improper Field Generator crate"
 	access = access_ce
@@ -91,15 +90,15 @@
 	name = "Singularity Generator crate"
 	contains = list(/obj/machinery/the_singularitygen)
 	cost = 10
-	containertype = /obj/structure/closet/crate/secure/large
+	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Singularity Generator crate"
 	access = access_ce
 
 /decl/hierarchy/supply_pack/engineering/collector
 	name = "Collector crate"
-	contains = list(/obj/machinery/power/rad_collector = 2)
-	cost = 6
-	containertype = /obj/structure/closet/crate/secure/large
+	contains = list(/obj/machinery/power/rad_collector = 3)
+	cost = 10
+	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Collector crate"
 	access = access_ce
 
@@ -113,7 +112,7 @@
 					/obj/structure/particle_accelerator/power_box,
 					/obj/structure/particle_accelerator/end_cap)
 	cost = 40
-	containertype = /obj/structure/largecrate
+	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Particle Accelerator crate"
 	access = access_ce
 
@@ -183,7 +182,7 @@
 	name = "Supermatter Core"
 	contains = list(/obj/machinery/power/supermatter)
 	cost = 150
-	containertype = /obj/structure/closet/crate/secure/large/phoron
+	containertype = /obj/structure/closet/crate/secure/phoron
 	containername = "\improper Supermatter crate (CAUTION)"
 	access = access_ce
 

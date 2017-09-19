@@ -20,8 +20,9 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 
-	min_gas = null
-	max_gas = null
+	min_oxy = 0
+	max_co2 = 0
+	max_tox = 0
 
 	speed = 2
 

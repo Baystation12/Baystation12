@@ -276,13 +276,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost_to_turf(T)
 	else
 		to_chat(src, "<span class='warning'>Invalid coordinates.</span>")
-/mob/observer/ghost/verb/follow(var/datum/follow_holder/fh in get_follow_targets())
+/mob/observer/ghost/verb/follow(input in get_follow_targets())
 	set category = "Ghost"
 	set name = "Follow"
 	set desc = "Follow and haunt a mob."
 
-	if(!fh.show_entry()) return
-	ManualFollow(fh.followed_instance)
+	var/target = get_follow_targets()[input]
+	if(!target) return
+	ManualFollow(target)
 
 /mob/observer/ghost/proc/ghost_to_turf(var/turf/target_turf)
 	if(check_is_holy_turf(target_turf))
@@ -445,7 +446,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	return 1
 
 /mob/proc/can_admin_interact()
-	return 0
+    return 0
 
 /mob/observer/ghost/can_admin_interact()
 	return check_rights(R_ADMIN, 0, src)
@@ -531,7 +532,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	alpha = pre_alpha
 	plane = pre_plane
 	layer = pre_layer
-	set_invisibility(pre_invis)
+	invisibility = pre_invis
 	transform = null	//make goast stand up
 
 /mob/observer/ghost/verb/respawn()

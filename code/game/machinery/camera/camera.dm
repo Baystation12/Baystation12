@@ -12,7 +12,6 @@
 	var/list/network = list(NETWORK_EXODUS)
 	var/c_tag = null
 	var/c_tag_order = 999
-	var/number = 0 //camera number in area
 	var/status = 1
 	anchored = 1.0
 	var/invuln = null
@@ -36,16 +35,6 @@
 	var/on_open_network = 0
 
 	var/affected_by_emp_until = 0
-
-/obj/machinery/camera/malf_upgrade(var/mob/living/silicon/ai/user)
-	..()
-	malf_upgraded = 1
-
-	upgradeEmpProof()
-	upgradeXRay()
-
-	to_chat(user, "\The [src] has been upgraded. It now has X-Ray capability and EMP resistance.")
-	return 1
 
 /obj/machinery/camera/apply_visual(mob/living/carbon/human/M)
 	if(!M.client)
@@ -84,20 +73,6 @@
 		ASSERT(src.network)
 		ASSERT(src.network.len > 0)
 	..()
-
-/obj/machinery/camera/Initialize()
-	. = ..()
-	if(!c_tag)
-		number = 1
-		var/area/A = get_area(src)
-		if(A)
-			for(var/obj/machinery/camera/C in A)
-				if(C == src) continue
-				if(C.number)
-					number = max(number, C.number+1)
-			c_tag = "[A.name][number == 1 ? "" : " #[number]"]"
-		invalidateCameraCache()
-
 
 /obj/machinery/camera/Destroy()
 	deactivate(null, 0) //kick anyone viewing out

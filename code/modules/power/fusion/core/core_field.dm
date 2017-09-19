@@ -1,7 +1,4 @@
-#define FUSION_ENERGY_PER_K        20
-#define FUSION_INSTABILITY_DIVISOR 50000
-#define FUSION_RUPTURE_THRESHOLD   10000
-#define FUSION_REACTANT_CAP        10000
+#define FUSION_ENERGY_PER_K 20
 
 /obj/effect/fusion_em_field
 	name = "electromagnetic field"
@@ -21,7 +18,7 @@
 	var/percent_unstable = 0
 
 	var/obj/machinery/power/fusion_core/owned_core
-	var/list/reactants = list()
+	var/list/dormant_reactant_quantities = list()
 	var/list/particle_catchers = list()
 
 	var/list/ignore_types = list(
@@ -124,7 +121,7 @@
 		uptake_gas = uptake_gas.remove_by_flag(XGM_GAS_FUSION_FUEL, rand(50,100))
 	if(uptake_gas && uptake_gas.total_moles)
 		for(var/gasname in uptake_gas.gas)
-			if(uptake_gas.gas[gasname]*10 > reactants[gasname])
+			if(uptake_gas.gas[gasname]*10 > dormant_reactant_quantities[gasname])
 				AddParticles(gasname, uptake_gas.gas[gasname]*10)
 				uptake_gas.adjust_gas(gasname, -(uptake_gas.gas[gasname]), update=FALSE)
 				added_particles = TRUE
@@ -144,13 +141,13 @@
 		plasma_temperature -= lost
 
 	//handle some reactants formatting
-	for(var/reactant in reactants)
-		var/amount = reactants[reactant]
+	for(var/reactant in dormant_reactant_quantities)
+		var/amount = dormant_reactant_quantities[reactant]
 		if(amount < 1)
-			reactants.Remove(reactant)
-		else if(amount >= FUSION_REACTANT_CAP)
+			dormant_reactant_quantities.Remove(reactant)
+		else if(amount >= 1000000)
 			var/radiate = rand(3 * amount / 4, amount / 4)
-			reactants[reactant] -= radiate
+			dormant_reactant_quantities[reactant] -= radiate
 			radiation += radiate
 
 	var/use_range
@@ -174,19 +171,19 @@
 	check_instability()
 	Radiate()
 	if(radiation)
-		radiation_repository.radiate(src, round(radiation*0.001))
+		radiation_repository.radiate(src, radiation)
 	return 1
 
 /obj/effect/fusion_em_field/proc/check_instability()
 	if(tick_instability > 0)
-		percent_unstable += (tick_instability*size)/FUSION_INSTABILITY_DIVISOR
+		percent_unstable += (tick_instability*size)/10000
 		tick_instability = 0
 	else
 		if(percent_unstable < 0)
 			percent_unstable = 0
 		else
-			if(percent_unstable > 1)
-				percent_unstable = 1
+			if(percent_unstable > 100)
+				percent_unstable = 100
 			if(percent_unstable > 0)
 				percent_unstable = max(0, percent_unstable-rand(0.01,0.03))
 
@@ -194,7 +191,7 @@
 		owned_core.Shutdown(force_rupture=1)
 	else
 		if(percent_unstable > 0.5 && prob(percent_unstable*100))
-			if(plasma_temperature < FUSION_RUPTURE_THRESHOLD)
+			if(plasma_temperature < 2000)
 				visible_message("<span class='danger'>\The [src] ripples uneasily, like a disturbed pond.</span>")
 			else
 				var/flare
@@ -224,12 +221,12 @@
 					plasma_temperature -= lost_plasma
 
 					if(fuel_loss)
-						for(var/particle in reactants)
-							var/lost_fuel = reactants[particle]*percent_unstable
+						for(var/particle in dormant_reactant_quantities)
+							var/lost_fuel = dormant_reactant_quantities[particle]*percent_unstable
 							radiation += lost_fuel
-							reactants[particle] -= lost_fuel
-							if(reactants[particle] <= 0)
-								reactants.Remove(particle)
+							dormant_reactant_quantities[particle] -= lost_fuel
+							if(dormant_reactant_quantities[particle] <= 0)
+								dormant_reactant_quantities.Remove(particle)
 					Radiate()
 	return
 
@@ -267,24 +264,20 @@
 		plasma_temperature += 1
 
 /obj/effect/fusion_em_field/proc/AddParticles(var/name, var/quantity = 1)
-	if(name in reactants)
-		reactants[name] += quantity
+	if(name in dormant_reactant_quantities)
+		dormant_reactant_quantities[name] += quantity
 	else if(name != "proton" && name != "electron" && name != "neutron")
-		reactants.Add(name)
-		reactants[name] = quantity
+		dormant_reactant_quantities.Add(name)
+		dormant_reactant_quantities[name] = quantity
 
 /obj/effect/fusion_em_field/proc/RadiateAll(var/ratio_lost = 1)
 
 	// Create our plasma field and dump it into our environment.
 	var/turf/T = get_turf(src)
 	if(istype(T))
-		var/datum/gas_mixture/plasma
-		for(var/reactant in reactants)
-			if(!gas_data.name[reactant])
-				continue
-			if(!plasma)
-				plasma = new
-			plasma.adjust_gas(reactant, max(1,round(reactants[reactant]*0.1)), 0) // *0.1 to compensate for *10 when uptaking gas.
+		var/datum/gas_mixture/plasma = new
+		plasma.adjust_gas("oxygen", (size*100), 0)
+		plasma.adjust_gas("phoron", (size*100), 0)
 		plasma.temperature = (plasma_temperature/2)
 		plasma.update_values()
 		T.assume_air(plasma)
@@ -292,13 +285,13 @@
 		plasma = null
 
 	// Radiate all our unspent fuel and energy.
-	for(var/particle in reactants)
-		radiation += reactants[particle]
-		reactants.Remove(particle)
+	for(var/particle in dormant_reactant_quantities)
+		radiation += dormant_reactant_quantities[particle]
+		dormant_reactant_quantities.Remove(particle)
 	radiation += plasma_temperature/2
 	plasma_temperature = 0
 
-	radiation_repository.radiate(src, round(radiation*0.001))
+	radiation_repository.radiate(src, radiation)
 	Radiate()
 
 /obj/effect/fusion_em_field/proc/Radiate()
@@ -317,8 +310,9 @@
 			if(skip_obstacle)
 				continue
 
+			log_debug("R-UST DEBUG: [AM] is [AM.type]")
 			AM.visible_message("<span class='danger'>The field buckles visibly around \the [AM]!</span>")
-			tick_instability += rand(30,50)
+			tick_instability += rand(15,30)
 			AM.emp_act(empsev)
 
 	if(owned_core && owned_core.loc)
@@ -369,7 +363,7 @@
 //the !!fun!! part
 /obj/effect/fusion_em_field/proc/React()
 	//loop through the reactants in random order
-	var/list/react_pool = reactants.Copy()
+	var/list/react_pool = dormant_reactant_quantities.Copy()
 
 	//cant have any reactions if there aren't any reactants present
 	if(react_pool.len)
@@ -377,7 +371,7 @@
 		//this is a hack, and quite nonrealistic :(
 		for(var/reactant in react_pool)
 			react_pool[reactant] = rand(Floor(react_pool[reactant]/2),react_pool[reactant])
-			reactants[reactant] -= react_pool[reactant]
+			dormant_reactant_quantities[reactant] -= react_pool[reactant]
 			if(!react_pool[reactant])
 				react_pool -= reactant
 
@@ -495,6 +489,3 @@
 	return 0
 
 #undef FUSION_HEAT_CAP
-#undef FUSION_INSTABILITY_DIVISOR
-#undef FUSION_RUPTURE_THRESHOLD
-#undef FUSION_REACTANT_CAP

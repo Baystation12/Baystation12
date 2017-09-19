@@ -7,6 +7,7 @@
 
 	reverse_facing = 0
 	can_absorb = 0
+	can_throw = 1
 
 	grab_slowdown = 0
 

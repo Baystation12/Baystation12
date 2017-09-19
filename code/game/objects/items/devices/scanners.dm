@@ -69,14 +69,12 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			if(H.has_brain_worms())
 				brain_result = "<span class='danger'>ERROR - aberrant/unknown brainwave patterns, advanced scanner recommended</span>"
 			else
-				switch(brain.get_current_damage_threshold())
-					if(0)
+				switch((brain.damage / brain.max_damage)*100)
+					if(0 to 20)
 						brain_result = "<span class='notice'>normal</span>"
-					if(1 to 2)
-						brain_result = "<span class='notice'>minor brain damage</span>"
-					if(3 to 5)
+					if(20 to 60)
 						brain_result = "<span class='warning'>weak</span>"
-					if(6 to INFINITY)
+					if(60 to INFINITY)
 						brain_result = "<span class='danger'>extremely weak</span>"
 					else
 						brain_result = "<span class='danger'>ERROR - Hardware fault</span>"
@@ -103,9 +101,10 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	. += "<span class='notice'>Pulse rate: [pulse_result]bpm.</span>"
 
 	// Blood pressure. Based on the idea of a normal blood pressure being 120 over 80.
-	if(H.get_blood_volume() <= 70)
+	var/blood_result = H.get_effective_blood_volume()
+	if(blood_result <= 70)
 		. += "<span class='danger'>Severe blood loss detected.</span>"
-	. += "<b>Blood pressure:</b> [H.get_blood_pressure()] ([H.get_blood_oxygenation()]% blood oxygenation)"
+	. += "<span class='notice'>Blood pressure:</span> [H.get_blood_pressure()] ([blood_result]% blood circulation)"
 
 	// Body temperature.
 	. += "<span class='notice'>Body temperature: [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)</span>"
@@ -187,9 +186,23 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			for(var/obj/item/organ/external/org in damaged)
 				var/limb_result = "[capitalize(org.name)][(org.robotic >= ORGAN_ROBOT) ? " (Cybernetic)" : ""]:"
 				if(org.brute_dam > 0)
-					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, org.vital)] physical trauma</b></font>\]"
+					var/degree = "minor"
+					if(org.brute_dam > 50)
+						degree = "severe"
+					else if(org.brute_dam > 25)
+						degree = "significant"
+					else if(org.brute_dam > 10)
+						degree = "moderate"
+					limb_result = "[limb_result] \[<font color = 'red'><b>[degree] physical trauma</b></font>\]"
 				if(org.burn_dam > 0)
-					limb_result = "[limb_result] \[<font color = '#FFA500'><b>[get_wound_severity(org.burn_ratio, org.vital)] burns</b></font>\]"
+					var/degree = "minor"
+					if(org.burn_dam > 50)
+						degree = "severe"
+					else if(org.burn_dam > 25)
+						degree = "significant"
+					else if(org.burn_dam > 10)
+						degree = "moderate"
+					limb_result = "[limb_result] \[<font color = '#FFA500'><b>[degree] burns</b></font>\]"
 				if(org.status & ORGAN_BLEEDING)
 					limb_result = "[limb_result] \[<span class='danger'>bleeding</span>\]"
 				. += limb_result
@@ -207,7 +220,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			var/datum/reagent/R = A
 			if(R.scannable)
 				print_reagent_default_message = FALSE
-				reagentdata[R.type] = "<span class='notice'>    [round(H.reagents.get_reagent_amount(R.type), 1)]u [R.name]</span>"
+				reagentdata["[R.id]"] = "<span class='notice'>    [round(H.reagents.get_reagent_amount(R.id), 1)]u [R.name]</span>"
 			else
 				unknown++
 		if(reagentdata.len)
@@ -242,29 +255,6 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 		. += "No results."
 	. = jointext(.,"<br>")
 
-// Calculates severity based on the ratios defined external limbs.
-proc/get_wound_severity(var/damage_ratio, var/vital = 0)
-	var/degree
-
-	switch(damage_ratio)
-		if(0 to 0.1)
-			degree = "minor"
-		if(0.1 to 0.25)
-			degree = "moderate"
-		if(0.25 to 0.5)
-			degree = "significant"
-		if(0.5 to 0.75)
-			degree = "severe"
-		if(0.75 to 1)
-			degree = "extreme"
-		else
-			if(vital)
-				degree = "critical"
-			else
-				degree = "irreparable"
-
-	return degree
-
 /obj/item/device/healthanalyzer/verb/toggle_mode()
 	set name = "Switch Verbosity"
 	set category = "Object"
@@ -290,36 +280,16 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
-	var/advanced_mode = 0
 
-/obj/item/device/analyzer/verb/verbosity(mob/user)
-	set name = "Toggle Advanced Gas Analysis"
-	set category = "Object"
-	set src in usr
-
-	if (!user.incapacitated())
-		advanced_mode = !advanced_mode
-		to_chat(user, "You toggle advanced gas analysis [advanced_mode ? "on" : "off"].")
-
-/obj/item/device/analyzer/attack_self(mob/user)
+/obj/item/device/analyzer/attack_self(mob/user as mob)
 
 	if (user.incapacitated())
 		return
 	if (!user.IsAdvancedToolUser())
 		return
 
-	analyze_gases(user.loc, user,advanced_mode)
-	return 1
-
-/obj/item/device/analyzer/afterattack(obj/O, mob/user, proximity)
-	if(!proximity)
-		return
-	if (user.incapacitated())
-		return
-	if (!user.IsAdvancedToolUser())
-		return
-	if(istype(O) && O.simulated)
-		analyze_gases(O, user, advanced_mode)
+	analyze_gases(user.loc, user)
+	return
 
 /obj/item/device/mass_spectrometer
 	name = "mass spectrometer"
@@ -359,7 +329,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	if(reagents.total_volume)
 		var/list/blood_traces = list()
 		for(var/datum/reagent/R in reagents.reagent_list)
-			if(R.type != /datum/reagent/blood)
+			if(R.id != "blood")
 				reagents.clear_reagents()
 				to_chat(user, "<span class='warning'>The sample was contaminated! Please insert another sample</span>")
 				return
@@ -430,6 +400,57 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	details = 1
 	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
 
+/obj/item/device/slime_scanner
+	name = "slime scanner"
+	icon_state = "adv_spectrometer"
+	item_state = "analyzer"
+	origin_tech = list(TECH_BIO = 1)
+	w_class = ITEM_SIZE_SMALL
+	flags = CONDUCT
+	throwforce = 0
+	throw_speed = 3
+	throw_range = 7
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
+
+/obj/item/device/slime_scanner/attack(mob/living/M as mob, mob/living/user as mob)
+	if(!isslime(M))
+		to_chat(user, "This device can only scan slimes.")
+		return
+	var/mob/living/carbon/slime/T = M
+	user.show_message("<span class='notice'>Slime scan result for \the [M]:</span>")
+	user.show_message("[T.colour] [T.is_adult ? "adult" : "baby"] slime")
+	user.show_message("Nutrition: [T.nutrition]/[T.get_max_nutrition()]")
+	if(T.nutrition < T.get_starve_nutrition())
+		user.show_message("<span class='alert'>Warning: the slime is starving!</span>")
+	else if (T.nutrition < T.get_hunger_nutrition())
+		user.show_message("<span class='warning'>Warning: the slime is hungry.</span>")
+	user.show_message("Electric charge strength: [T.powerlevel]")
+	user.show_message("Health: [round(T.health / T.maxHealth)]%")
+
+	var/list/mutations = T.GetMutations()
+
+	if(!mutations.len)
+		user.show_message("This slime will never mutate.")
+	else
+		var/list/mutationChances = list()
+		for(var/i in mutations)
+			if(i == T.colour)
+				continue
+			if(mutationChances[i])
+				mutationChances[i] += T.mutation_chance / mutations.len
+			else
+				mutationChances[i] = T.mutation_chance / mutations.len
+
+		var/list/mutationTexts = list("[T.colour] ([100 - T.mutation_chance]%)")
+		for(var/i in mutationChances)
+			mutationTexts += "[i] ([mutationChances[i]]%)"
+
+		user.show_message("Possible colours on splitting: [english_list(mutationTexts)]")
+
+	if (T.cores > 1)
+		user.show_message("Anomalious slime core amount detected.")
+	user.show_message("Growth progress: [T.amount_grown]/10.")
+
 /obj/item/device/price_scanner
 	name = "price scanner"
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
@@ -448,82 +469,3 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	var/value = get_value(target)
 	user.visible_message("\The [user] scans \the [target] with \the [src]")
 	user.show_message("Price estimation of \the [target]: [value ? value : "N/A"] Thalers")
-
-/obj/item/device/slime_scanner
-	name = "xenolife scanner"
-	desc = "Multipurpose organic life scanner. With spectral breath analyzer you can find out what snacks Ian had! Or what gasses alien life breathes."
-	icon_state = "xenobio"
-	item_state = "analyzer"
-	slot_flags = SLOT_BELT
-	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_BIO = 1)
-	flags = CONDUCT
-	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
-
-/obj/item/device/slime_scanner/proc/list_gases(var/gases)
-	. = list()
-	for(var/g in gases)
-		. += "[gas_data.name[g]] ([gases[g]]%)"
-	return english_list(.)
-
-/obj/item/device/slime_scanner/afterattack(mob/target, mob/user, proximity)
-	if(!proximity)
-		return
-
-	if(!istype(target))
-		return
-
-	user.visible_message("\The [user] scans \the [target] with \the [src]")
-	if(istype(target, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = target
-		user.show_message("<span class='notice'>Data for [H]:</span>")
-		user.show_message("Species:\t[H.species]")
-		user.show_message("Breathes:\t[gas_data.name[H.species.breath_type]]")
-		user.show_message("Exhales:\t[gas_data.name[H.species.exhale_type]]")
-		user.show_message("Known toxins:\t[gas_data.name[H.species.poison_type]]")
-		user.show_message("Temperature comfort zone:\t[H.species.cold_discomfort_level] K to [H.species.heat_discomfort_level] K")
-		user.show_message("Pressure comfort zone:\t[H.species.warning_low_pressure] kPa to [H.species.warning_high_pressure] kPa")
-	else if(istype(target, /mob/living/simple_animal))
-		var/mob/living/simple_animal/A = target
-		user.show_message("<span class='notice'>Data for [A]:</span>")
-		user.show_message("Species:\t[initial(A.name)]")
-		user.show_message("Breathes:\t[list_gases(A.min_gas)]")
-		user.show_message("Known toxins:\t[list_gases(A.max_gas)]")
-		user.show_message("Temperature comfort zone:\t[A.minbodytemp] K to [A.maxbodytemp] K")
-	else if(istype(target, /mob/living/carbon/slime/))
-		var/mob/living/carbon/slime/T = target
-		user.show_message("<span class='notice'>Slime scan result for \the [T]:</span>")
-		user.show_message("[T.colour] [T.is_adult ? "adult" : "baby"] slime")
-		user.show_message("Nutrition:\t[T.nutrition]/[T.get_max_nutrition()]")
-		if(T.nutrition < T.get_starve_nutrition())
-			user.show_message("<span class='alert'>Warning:\tthe slime is starving!</span>")
-		else if (T.nutrition < T.get_hunger_nutrition())
-			user.show_message("<span class='warning'>Warning:\tthe slime is hungry.</span>")
-		user.show_message("Electric charge strength:\t[T.powerlevel]")
-		user.show_message("Health:\t[round(T.health / T.maxHealth)]%")
-
-		var/list/mutations = T.GetMutations()
-
-		if(!mutations.len)
-			user.show_message("This slime will never mutate.")
-		else
-			var/list/mutationChances = list()
-			for(var/i in mutations)
-				if(i == T.colour)
-					continue
-				if(mutationChances[i])
-					mutationChances[i] += T.mutation_chance / mutations.len
-				else
-					mutationChances[i] = T.mutation_chance / mutations.len
-
-			var/list/mutationTexts = list("[T.colour] ([100 - T.mutation_chance]%)")
-			for(var/i in mutationChances)
-				mutationTexts += "[i] ([mutationChances[i]]%)"
-
-			user.show_message("Possible colours on splitting:\t[english_list(mutationTexts)]")
-
-		if (T.cores > 1)
-			user.show_message("Anomalous slime core amount detected.")
-		user.show_message("Growth progress:\t[T.amount_grown]/10.")
-	else
-		user.show_message("Incompatible life form, analysis failed.")

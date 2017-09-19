@@ -1,4 +1,10 @@
 // Alien clothing.
+/datum/gear/suit/zhan_furs
+	display_name = "Zhan-Khazan furs (Tajara)"
+	path = /obj/item/clothing/suit/tajaran/furs
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
+
 /datum/gear/head/zhan_scarf
 	display_name = "Zhan headscarf (Tajara)"
 	path = /obj/item/clothing/head/tajaran/scarf
@@ -170,5 +176,5 @@
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 	cost = 1
-	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/engineer, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/pathfinder, /datum/job/explorer)
+	allowed_roles = list("Maintenance Assistant", "Prospector", "Research Assistant")
 

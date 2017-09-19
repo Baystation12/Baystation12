@@ -32,7 +32,6 @@
 					/obj/item/weapon/grenade/chem_grenade/cleaner = 3,
 					/obj/structure/mopbucket)
 	cost = 10
-	containertype = /obj/structure/closet/crate/large
 	containername = "\improper Janitorial supplies"
 
 /decl/hierarchy/supply_pack/supply/boxes
@@ -56,7 +55,6 @@
 					 /obj/item/weapon/paper_bin)
 	name = "Office supplies"
 	cost = 15
-	containertype = /obj/structure/closet/crate/large
 	containername = "\improper Office supplies crate"
 
 /decl/hierarchy/supply_pack/supply/spare_pda

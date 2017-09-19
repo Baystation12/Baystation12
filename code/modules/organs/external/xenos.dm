@@ -3,24 +3,12 @@
 	name = "xeno organ"
 	icon = 'icons/effects/blood.dmi'
 	desc = "It smells like an accident in a chemical factory."
-	var/associated_power = /mob/living/carbon/human/proc/resin
-
-/obj/item/organ/internal/xenos/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)
-	. = ..()
-	if(ishuman(owner) && associated_power)
-		owner.verbs |= associated_power
-
-/obj/item/organ/internal/xenos/removed(var/mob/living/user)
-	. = ..()
-	if(ishuman(owner) && associated_power && !(associated_power in owner.species.inherent_verbs))
-		owner.verbs -= associated_power
 
 /obj/item/organ/internal/xenos/eggsac
 	name = "egg sac"
 	parent_organ = BP_GROIN
 	icon_state = "xgibmid1"
 	organ_tag = BP_EGG
-	associated_power = /mob/living/carbon/human/proc/lay_egg
 
 /obj/item/organ/internal/xenos/plasmavessel
 	name = "plasma vessel"
@@ -34,7 +22,6 @@
 	name = "bloated plasma vessel"
 	stored_plasma = 200
 	max_plasma = 500
-	associated_power = /mob/living/carbon/human/proc/neurotoxin
 
 /obj/item/organ/internal/xenos/plasmavessel/sentinel
 	stored_plasma = 100
@@ -50,9 +37,9 @@
 	parent_organ = BP_HEAD
 	icon_state = "xgibtorso"
 	organ_tag = BP_ACID
-	associated_power = /mob/living/carbon/human/proc/corrosive_acid
 
 /obj/item/organ/internal/xenos/hivenode
+
 	name = "hive node"
 	parent_organ = BP_CHEST
 	icon_state = "xgibmid2"
@@ -63,7 +50,6 @@
 	parent_organ = BP_HEAD
 	icon_state = "xgibmid2"
 	organ_tag = BP_RESIN
-	associated_power = /mob/living/carbon/human/proc/resin
 
 /obj/item/organ/internal/eyes/xenos/update_colour()
 	if(!owner)

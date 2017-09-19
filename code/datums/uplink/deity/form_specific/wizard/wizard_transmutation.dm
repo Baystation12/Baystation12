@@ -28,7 +28,7 @@
 	path = /spell/aoe_turf/smoke
 
 /datum/uplink_item/deity/feat/phenomena/transmutation/animation
-	name = "Phenomena: Animation"
+	name = "Animation Phenomena"
 	desc = "Gain the ability to transform objects into mimics."
 	item_cost = 75
 	path = /datum/phenomena/animate
@@ -49,7 +49,7 @@
 	required_feats = list(DEITY_LEVELED_TRANSMUTATION = 2)
 
 /datum/uplink_item/deity/feat/phenomena/transmutation/warp_body
-	name = "Phenomena: Warp Body"
+	name = "Warp Body"
 	desc = "Gain the ability to warp the very structure of a target's body, wracking pain and weakness."
 	item_cost = 75
 	required_feats = list(DEITY_LEVELED_TRANSMUTATION = 2)
@@ -91,7 +91,7 @@
 	path = /spell/targeted/heal_target/area
 
 /datum/uplink_item/deity/feat/phenomena/transmutation/rock_form
-	name = "Phenomena: Rock Form"
+	name = "Rock Form"
 	desc = "Gain the ability to transform your followers into beings of rock and stone."
 	item_cost = 75
 	required_feats = list(DEITY_LEVELED_TRANSMUTATION = 3)

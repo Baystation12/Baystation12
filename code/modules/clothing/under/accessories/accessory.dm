@@ -6,14 +6,14 @@
 	item_state = ""	//no inhands
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
-	var/slot = ACCESSORY_SLOT_DECOR
+	var/slot = "decor"
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
 	var/overlay_state = null
 	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi', slot_wear_suit_str = 'icons/mob/ties.dmi')
 	sprite_sheets = list(
-		SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi'
 		SPECIES_RESOMI = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 
@@ -26,8 +26,6 @@
 		var/tmp_icon_state = overlay_state? overlay_state : icon_state
 		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
-		else if("[tmp_icon_state]_tie" in icon_states(default_onmob_icons[slot_tie_str]))
-			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else
 			inv_overlay = image(icon = default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
 	inv_overlay.color = color
@@ -48,8 +46,8 @@
 			var/obj/item/clothing/under/C = loc
 			if(on_rolled["down"] && C.rolled_down > 0)
 				tmp_icon_state = on_rolled["down"]
-			else if(on_rolled["rolled"] && C.rolled_sleeves > 0)
-				tmp_icon_state = on_rolled["rolled"]
+			else if(on_rolled["sleeves"] && C.rolled_sleeves > 0)
+				tmp_icon_state = on_rolled["sleeves"]
 
 		var/use_sprite_sheet = accessory_icons[slot]
 		if(sprite_sheets[bodytype])
@@ -170,7 +168,7 @@
 								else
 									sound = "healthy heartbeat"
 
-							var/obj/item/organ/internal/lungs/L = M.internal_organs_by_name[M.species.breathing_organ]
+							var/obj/item/organ/internal/lungs/L = M.species.breathing_organ
 							if(!L || M.losebreath || !L.active_breathing)
 								sound += " and no respiration"
 							else if(M.is_lung_ruptured() || M.getOxyLoss() > 50)
@@ -192,10 +190,10 @@
 
 //Medals
 /obj/item/clothing/accessory/medal
-	name = ACCESSORY_SLOT_MEDAL
+	name = "medal"
 	desc = "A simple medal."
 	icon_state = "bronze"
-	slot = ACCESSORY_SLOT_MEDAL
+	slot = "medal"
 
 /obj/item/clothing/accessory/medal/iron
 	name = "iron medal"
@@ -301,7 +299,7 @@
 	name = "ribbon"
 	desc = "A simple military decoration."
 	icon_state = "ribbon_marksman"
-	slot = ACCESSORY_SLOT_MEDAL
+	slot = "medal"
 
 /obj/item/clothing/accessory/ribbon/marksman
 	name = "marksmanship ribbon"
@@ -328,7 +326,6 @@
 	name = "speciality blaze"
 	desc = "A color blaze denoting fleet personnel in some special role. This one is silver."
 	icon_state = "marinerank_command"
-	slot = ACCESSORY_SLOT_INSIGNIA
 
 /obj/item/clothing/accessory/specialty/janitor
 	name = "custodial blazes"
@@ -370,7 +367,6 @@
 	desc = "A golden pin denoting some special qualification."
 	icon_state = "fleetpin_officer"
 
-
 /obj/item/clothing/accessory/speciality/pilot
 	name = "pilot's qualification pin"
 	desc = "An iron pin denoting the qualification to fly in the SGDF."
@@ -381,8 +377,7 @@
 	name = "ranks"
 	desc = "Insignia denoting rank of some kind. These appear blank."
 	icon_state = "fleetrank"
-	on_rolled = list("down" = "none")
-	slot = ACCESSORY_SLOT_RANK
+	slot = "rank"
 
 /obj/item/clothing/accessory/rank/fleet
 	name = "naval ranks"
@@ -592,105 +587,6 @@
 /obj/item/clothing/accessory/rank/marine/flag/o10_alt
 	name = "ranks (O-10 commandant of the Marine Corps)"
 	desc = "Insignia denoting the rank of Commandant of the Marine Corps."
-
-
-//Department insignia
-/obj/item/clothing/accessory/department
-	name = "department insignia"
-	desc = "Insignia denoting assignment to a department. These appear blank."
-	icon_state = "dept_exped"
-	on_rolled = list("down" = "dept_exped_rolled")
-	slot = ACCESSORY_SLOT_DEPT
-
-/obj/item/clothing/accessory/department/command
-	name = "command insignia"
-	desc = "Insignia denoting assignment to the command department. These fit Expeditionary Corps uniforms."
-	color = "#E5EA4F"
-
-/obj/item/clothing/accessory/department/command/fleet
-	icon_state = "dept_fleet"
-	desc = "Insignia denoting assignment to the command department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
-
-/obj/item/clothing/accessory/department/command/marine
-	icon_state = "dept_marine"
-	desc = "Insignia denoting assignment to the command department. These fit Marine Corps uniforms."
-	on_rolled = list("down" = "none")
-
-/obj/item/clothing/accessory/department/engineering
-	name = "engineering insignia"
-	desc = "Insignia denoting assignment to the engineering department. These fit Expeditionary Corps uniforms."
-	color = "#FF7F00"
-
-/obj/item/clothing/accessory/department/engineering/fleet
-	icon_state = "dept_fleet"
-	desc = "Insignia denoting assignment to the engineering department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
-
-/obj/item/clothing/accessory/department/engineering/marine
-	icon_state = "dept_marine"
-	desc = "Insignia denoting assignment to the engineering department. These fit Marine Corps uniforms."
-	on_rolled = list("down" = "none")
-
-/obj/item/clothing/accessory/department/security
-	name = "security insignia"
-	desc = "Insignia denoting assignment to the security department. These fit Expeditionary Corps uniforms."
-	color = "#BF0000"
-
-/obj/item/clothing/accessory/department/security/fleet
-	icon_state = "dept_fleet"
-	desc = "Insignia denoting assignment to the security department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
-
-/obj/item/clothing/accessory/department/security/marine
-	icon_state = "dept_marine"
-	desc = "Insignia denoting assignment to the security department. These fit Marine Corps uniforms."
-	on_rolled = list("down" = "none")
-
-/obj/item/clothing/accessory/department/medical
-	name = "medical insignia"
-	desc = "Insignia denoting assignment to the medical department. These fit Expeditionary Corps uniforms."
-	color = "#4C9CE4"
-
-/obj/item/clothing/accessory/department/medical/fleet
-	icon_state = "dept_fleet"
-	desc = "Insignia denoting assignment to the medical department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
-
-/obj/item/clothing/accessory/department/medical/marine
-	icon_state = "dept_marine"
-	desc = "Insignia denoting assignment to the medical department. These fit Marine Corps uniforms."
-	on_rolled = list("down" = "none")
-
-/obj/item/clothing/accessory/department/supply
-	name = "supply insignia"
-	desc = "Insignia denoting assignment to the supply department. These fit Expeditionary Corps uniforms."
-	color = "#BB9042"
-
-/obj/item/clothing/accessory/department/supply/fleet
-	icon_state = "dept_fleet"
-	desc = "Insignia denoting assignment to the supply department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
-
-/obj/item/clothing/accessory/department/supply/marine
-	icon_state = "dept_marine"
-	desc = "Insignia denoting assignment to the supply department. These fit Marine Corps uniforms."
-	on_rolled = list("down" = "none")
-
-/obj/item/clothing/accessory/department/service
-	name = "service insignia"
-	desc = "Insignia denoting assignment to the service department. These fit Expeditionary Corps uniforms."
-	color = "#6EAA2C"
-
-/obj/item/clothing/accessory/department/service/fleet
-	icon_state = "dept_fleet"
-	desc = "Insignia denoting assignment to the service department. These fit Fleet uniforms."
-	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
-
-/obj/item/clothing/accessory/department/service/marine
-	icon_state = "dept_marine"
-	desc = "Insignia denoting assignment to the service department. These fit Marine Corps uniforms."
-	on_rolled = list("down" = "none")
 
 
 //Necklaces

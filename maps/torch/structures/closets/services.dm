@@ -8,8 +8,7 @@
 	icon_state = "black"
 	icon_closed = "black"
 
-/obj/structure/closet/chefcloset_torch/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/weapon/storage/box/mousetraps = 2,
 		/obj/item/clothing/under/rank/chef,
@@ -27,8 +26,7 @@
 	icon_broken = "hydrosecurebroken"
 	icon_off = "hydrosecureoff"
 
-/obj/structure/closet/secure_closet/hydroponics_torch/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/weapon/storage/plants,
 		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/weapon/material/minihoe,
@@ -46,8 +44,7 @@
 	icon_state = "mixed"
 	icon_closed = "mixed"
 
-/obj/structure/closet/jcloset_torch/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/weapon/cartridge/janitor,
 		/obj/item/clothing/gloves/thick,

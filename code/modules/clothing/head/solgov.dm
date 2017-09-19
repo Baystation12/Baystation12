@@ -46,8 +46,8 @@
 
 /obj/item/clothing/head/utility/marine
 	name = "marine utility cover"
-	desc = "A green utility cover bearing the crest of the SCG Marine Corps."
-	icon_state = "greenutility"
+	desc = "A grey utility cover bearing the crest of the SCG Marine Corps."
+	icon_state = "greyutility"
 	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/head/utility/marine/tan
@@ -55,10 +55,10 @@
 	desc = "A tan utility cover bearing the crest of the SCG Marine Corps."
 	icon_state = "tanutility"
 
-/obj/item/clothing/head/utility/marine/urban
-	name = "urban utility cover"
-	desc = "A grey utility cover bearing the crest of the SCG Marine Corps."
-	icon_state = "greyutility"
+/obj/item/clothing/head/utility/marine/green
+	name = "green utility cover"
+	desc = "A green utility cover bearing the crest of the SCG Marine Corps."
+	icon_state = "greenutility"
 
 //Service
 
@@ -223,11 +223,6 @@
 	desc = "An SCG Expeditionary Corps beret with a supply crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_supply"
 
-/obj/item/clothing/head/beret/sol/expedition/service
-	name = "expeditionary service beret"
-	desc = "An SCG Expeditionary Corps beret with a service crest. For personnel that are more inclined towards style than safety."
-	icon_state = "beret_black_service"
-
 /obj/item/clothing/head/beret/sol/expedition/command
 	name = "expeditionary officer's beret"
 	desc = "An SCG Expeditionary Corps beret with a golden crest. For personnel that are more inclined towards style than safety."
@@ -257,11 +252,6 @@
 	name = "fleet supply beret"
 	desc = "An SCG Fleet beret with a supply crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_supply"
-
-/obj/item/clothing/head/beret/sol/fleet/service
-	name = "fleet service beret"
-	desc = "An SCG Fleet beret with a service crest. For personnel that are more inclined towards style than safety."
-	icon_state = "beret_navy_service"
 
 /obj/item/clothing/head/beret/sol/fleet/command
 	name = "fleet officer's beret"

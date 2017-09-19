@@ -27,7 +27,7 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 	//This steap handles the gathering of turfs which will be ex_act() -ed in the next step. It also ensures each turf gets the maximum possible amount of power dealt to it.
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(epicenter, direction)
-		var/adj_power = power - epicenter.get_explosion_resistance()
+		var/adj_power = power - epicenter.explosion_resistance
 		if(shaped)
 			if (shaped == direction)
 				adj_power *= 3
@@ -45,7 +45,7 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 		if(!T) continue
 
 		//Wow severity looks confusing to calculate... Fret not, I didn't leave you with any additional instructions or help. (just kidding, see the line under the calculation)
-		var/severity = 4 - round(max(min( 3, ((explosion_turfs[T] - T.get_explosion_resistance()) / (max(3,(power/3)))) ) ,1), 1)								//sanity			effective power on tile				divided by either 3 or one third the total explosion power
+		var/severity = 4 - round(max(min( 3, ((explosion_turfs[T] - T.explosion_resistance) / (max(3,(power/3)))) ) ,1), 1)								//sanity			effective power on tile				divided by either 3 or one third the total explosion power
 								//															One third because there are three power levels and I
 								//															want each one to take up a third of the crater
 		var/x = T.x
@@ -54,11 +54,9 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 		T.ex_act(severity)
 		if(!T)
 			T = locate(x,y,z)
-
 		for(var/atom_movable in T.contents)
 			var/atom/movable/AM = atom_movable
-			if(AM && AM.simulated && !T.protects_atom(AM))
-				AM.ex_act(severity)
+			if(AM && AM.simulated)	AM.ex_act(severity)
 
 	explosion_turfs.Cut()
 	explosion_in_progress = 0
@@ -84,9 +82,10 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 	if(power > 20)
 		M.color = "#FFCC00"
 */
-	var/spread_power = power - src.get_explosion_resistance() //This is the amount of power that will be spread to the tile in the direction of the blast
+	var/spread_power = power - src.explosion_resistance //This is the amount of power that will be spread to the tile in the direction of the blast
 	for(var/obj/O in src)
-		spread_power -= O.get_explosion_resistance()
+		if(O.explosion_resistance)
+			spread_power -= O.explosion_resistance
 
 	var/turf/T = get_step(src, direction)
 	if(T)
@@ -101,10 +100,8 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 /turf/unsimulated/explosion_spread(power)
 	return //So it doesn't get to the parent proc, which simulates explosions
 
-/atom/var/explosion_resistance
-/atom/proc/get_explosion_resistance()
-	if(simulated && density)
-		return explosion_resistance
+/obj/var/explosion_resistance
+/turf/var/explosion_resistance
 
 /turf/space
 	explosion_resistance = 3

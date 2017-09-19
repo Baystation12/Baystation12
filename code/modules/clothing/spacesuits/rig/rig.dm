@@ -576,11 +576,9 @@
 
 	if(href_list["toggle_piece"])
 		toggle_piece(href_list["toggle_piece"], usr)
-		return 1
-	if(href_list["toggle_seals"])
+	else if(href_list["toggle_seals"])
 		toggle_seals(usr)
-		return 1
-	if(href_list["interact_module"])
+	else if(href_list["interact_module"])
 
 		var/module_index = text2num(href_list["interact_module"])
 
@@ -597,14 +595,15 @@
 					selected_module = module
 				if("select_charge_type")
 					module.charge_selected = href_list["charge_type"]
-		return 1
-	if(href_list["toggle_ai_control"])
+	else if(href_list["toggle_ai_control"])
 		ai_override_enabled = !ai_override_enabled
 		notify_ai("Synthetic suit control has been [ai_override_enabled ? "enabled" : "disabled"].")
-		return 1
-	if(href_list["toggle_suit_lock"])
+	else if(href_list["toggle_suit_lock"])
 		locked = !locked
-		return 1
+
+	usr.set_machine(src)
+	src.add_fingerprint(usr)
+	return 0
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
 	for(var/obj/item/rig_module/ai_container/module in installed_modules)
@@ -753,7 +752,7 @@
 			malfunction_delay = max(malfunction_delay, round(30/severity_class))
 
 	//drain some charge
-	if(cell) cell.emp_act(severity_class + 1)
+	if(cell) cell.emp_act(severity_class + 15)
 
 	//possibly damage some modules
 	take_hit((100/severity_class), "electrical pulse", 1)

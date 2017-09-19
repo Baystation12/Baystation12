@@ -103,40 +103,11 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 /proc/ion_storm_announcement()
 	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")
 
-/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/datum/job/job, var/join_message)
-	if(!istype(job) || !job.announced)
-		return
-	if (ticker.current_state != GAME_STATE_PLAYING)
-		return
-	var/rank = job.title
-	if(character.mind.role_alt_title)
-		rank = character.mind.role_alt_title
+/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
+	if (ticker.current_state == GAME_STATE_PLAYING)
+		if(character.mind.role_alt_title)
+			rank = character.mind.role_alt_title
+		AnnounceArrivalSimple(character.real_name, rank, join_message)
 
-	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job))
-
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency)
-	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
-
-/proc/get_announcement_frequency(var/datum/job/job)
-	// During red alert all jobs are announced on main frequency.
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
-		return "Common"
-
-	if(job.department_flag & (COM | CIV | MSC))
-		return "Common"
-	if(job.department_flag & (SUP | CRG))
-		return "Supply"
-	if(job.department_flag & SPT)
-		return "Command"
-	if(job.department_flag & SEC)
-		return "Security"
-	if(job.department_flag & ENG)
-		return "Engineering"
-	if(job.department_flag & MED)
-		return "Medical"
-	if(job.department_flag & SCI)
-		return "Science"
-	if(job.department_flag & SRV)
-		return "Service"
-	return "Common"
+/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]")
+	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer")

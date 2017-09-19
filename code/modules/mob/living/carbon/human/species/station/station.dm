@@ -114,8 +114,6 @@
 	base_color = "#066000"
 	blood_color = "#f24b2e"
 
-	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
-
 	heat_discomfort_level = 295
 	heat_discomfort_strings = list(
 		"You feel soothingly warm.",
@@ -154,14 +152,14 @@
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
 
-	min_age = 19
-	max_age = 140
+	min_age = 17
+	max_age = 80
 
-	blurb = "The Tajaran race is a species of long lived mammalian bipeds hailing from the planet of Ahdomai in the \
-	Shyihie system. They have been introduced to bluespace travel by the humans and Skrell, and their policies have been \
-	structured to prevent another reign of the Overseers. They hold a very spiritual outlook on life and \
-	have recently been fascinated by cybernetic enhancement. They prefer colder environments, \
-	and evolved a layer of thick fur to accommodate this. "
+	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
+	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
+	influenced heavily by their long history of Slavemaster rule. They have a structured, clan-influenced way \
+	of family and politics. They prefer colder environments, and speak a variety of languages, mostly Siik'Maas, \
+	using unique inflections their mouths form."
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -181,8 +179,6 @@
 	blood_color = "#862A51"
 
 	reagent_tag = IS_TAJARA
-
-	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
 	heat_discomfort_level = 292
 	heat_discomfort_strings = list(

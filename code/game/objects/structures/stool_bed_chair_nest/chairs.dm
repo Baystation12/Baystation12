@@ -75,9 +75,6 @@
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
-/obj/structure/bed/chair/AltClick()
-	rotate()
-
 /obj/structure/bed/chair/verb/rotate()
 	set name = "Rotate Chair"
 	set category = "Object"
