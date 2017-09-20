@@ -120,6 +120,8 @@
 	if(burn)
 		if(laser)
 			createwound(LASER, burn)
+			if(prob(40))
+				owner.IgniteMob()
 		else
 			createwound(BURN, burn)
 

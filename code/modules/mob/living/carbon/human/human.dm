@@ -1586,10 +1586,16 @@
 		return
 	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
 	if(istype(heart) && heart.robotic <= ORGAN_ROBOT && !(heart.status & ORGAN_DEAD))
-		if(!nervous_system_failure())
+		var/species_organ = species.breathing_organ
+		var/active_breaths = 0
+		if(species_organ)
+			var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+			if(L)
+				active_breaths = L.active_breathing
+		if(!nervous_system_failure() && active_breaths)
 			visible_message("\The [src] jerks and gasps for breath!")
 		else
-			visible_message("\The [src] twitches a bit as his heart restarts!")
+			visible_message("\The [src] twitches a bit as \his heart restarts!")
 		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
 		if(getOxyLoss() >= 75)
 			setOxyLoss(75)

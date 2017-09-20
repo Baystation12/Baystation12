@@ -224,7 +224,7 @@
 						to_chat(user, "<span class='deadsay'>[T.He] [T.has] a pulse!</span>")
 
 	if(fire_stacks)
-		msg += "[T.He] [T.is] covered in some liquid.\n"
+		msg += "[T.He] looks flammable.\n"
 	if(on_fire)
 		msg += "<span class='warning'>[T.He] [T.is] on fire!.</span>\n"
 
