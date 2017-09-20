@@ -467,7 +467,7 @@ var/global/datum/controller/occupations/job_master
 			for(var/thing in spawn_in_storage)
 				var/datum/gear/G = gear_datums[thing]
 				var/metadata = H.client.prefs.Gear()[G.display_name]
-				var/item = G.spawn_item(null, metadata)
+				var/item = G.spawn_item(H, metadata)
 
 				var/atom/placed_in = H.equip_to_storage(item)
 				if(placed_in)
