@@ -224,7 +224,7 @@
 	..()
 
 /datum/random_map/noise/exoplanet/proc/noise2value(var/value)
-    return min(9,max(0,round((value/cell_range)*10)))
+	return min(9,max(0,round((value/cell_range)*10)))
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
@@ -255,8 +255,8 @@
 				spawn_flora(T, 1)
 
 /datum/random_map/noise/exoplanet/proc/spawn_fauna(var/turf/T)
-    var/beastie = pick(fauna_types)
-    new beastie(T)
+	var/beastie = pick(fauna_types)
+	new beastie(T)
 
 /datum/random_map/noise/exoplanet/proc/generate_flora()
 	for(var/i = 1 to flora_diversity)

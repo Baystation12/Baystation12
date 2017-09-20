@@ -20,7 +20,7 @@
 	icon_state = "laser"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
-	damage = 0
+	damage = 2
 	damage_type = BURN
 	check_armour = "laser"
 	eyeblur = 2

@@ -105,20 +105,25 @@
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	var/datum/wound/created_wound
+	var/block_cut = !(brute > 15 || !(species.flags & NO_MINOR_CUT))
+
 	if(brute)
+		var/to_create = BRUISE
 		if(can_cut)
+			if(!block_cut)
+				to_create = CUT
 			//need to check sharp again here so that blunt damage that was strong enough to break skin doesn't give puncture wounds
 			if(sharp && !edge)
-				created_wound = createwound( PIERCE, brute )
-			else
-				created_wound = createwound( CUT, brute )
-		else
-			createwound( BRUISE, brute )
+				to_create = PIERCE
+		created_wound = createwound(to_create, brute)
+
 	if(burn)
 		if(laser)
-			createwound( LASER, burn )
+			createwound(LASER, burn)
+			if(prob(40))
+				owner.IgniteMob()
 		else
-			createwound( BURN, burn )
+			createwound(BURN, burn)
 
 	add_pain(0.6*burn + 0.4*brute)
 	//If there are still hurties to dispense

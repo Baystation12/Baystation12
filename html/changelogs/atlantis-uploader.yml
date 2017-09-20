@@ -1,0 +1,4 @@
+author: atlantiscze
+delete-after: True
+changes: 
+  - tweak: "AI integrity restorer program will now upload map's default law set instead of NT default."

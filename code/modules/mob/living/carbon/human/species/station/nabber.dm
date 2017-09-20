@@ -53,9 +53,9 @@
 
 	heat_level_1 = 410 //Default 360 - Higher is better
 	heat_level_2 = 440 //Default 400
-	heat_level_3 = 600 //Default 1000
+	heat_level_3 = 800 //Default 1000
 
-	flags = NO_SLIP | CAN_NAB | NO_BLOCK
+	flags = NO_SLIP | CAN_NAB | NO_BLOCK | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
@@ -133,6 +133,10 @@
 
 	return FALSE
 
+/datum/species/nabber/handle_environment_special(var/mob/living/carbon/human/H)
+	if(!H.on_fire && H.fire_stacks < 2)
+		H.fire_stacks += 0.2
+	return
 
 // Nabbers will only fall when there isn't enough air pressure for them to keep themselves aloft.
 /datum/species/nabber/can_fall(var/mob/living/carbon/human/H)
