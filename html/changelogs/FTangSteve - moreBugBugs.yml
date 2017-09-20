@@ -1,0 +1,10 @@
+author: FTangSteve
+
+delete-after: True
+
+changes: 
+  - rscadd: "GAS now are flammable."
+  - rscadd: "Lasers can catch flammable mobs on fire."
+  - rscadd: "GAS no longer are cut by small sources of cuts (they are bruised)."
+  - rscadd: "GAS no longer are cut by slithering over glass."
+  - rscadd: "Being on fire now burns immediately and isn't based on body temperature."
