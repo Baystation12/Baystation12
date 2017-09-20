@@ -523,7 +523,7 @@
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
 							 /datum/computer_file/program/camera_monitor)
-               
+
 /datum/job/roboticist
 	title = "Roboticist"
 	department = "Engineering"
