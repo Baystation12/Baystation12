@@ -5,7 +5,7 @@ Structure: ///////////////////          //////////////////////////
 		   // Mob or object // -------> // Reagents var (datum) // 	    Is a reference to the datum that holds the reagents.
 		   ///////////////////          //////////////////////////
 		   			|				    			 |
-    The object that holds everything.   			 V
+	The object that holds everything.   			 V
 		   							      reagent_list var (list)   	A List of datums, each datum is a reagent.
 
 		   							      |          |          |

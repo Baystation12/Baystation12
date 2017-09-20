@@ -11,7 +11,7 @@
 		icon = 'icons/mob/mob.dmi'
 		icon_state = "ghost-narsie"
 		overlays = 0
-		invisibility = 0
+		set_invisibility(0)
 		to_chat(src, "<span class='sinister'>Even as a non-corporal being, you can feel Nar-Sie's presence altering you. You are now visible to everyone.</span>")
 
 /mob/living/cultify()
@@ -25,7 +25,7 @@
 		G.icon = 'icons/mob/mob.dmi'
 		G.icon_state = "ghost-narsie"
 		G.overlays = 0
-		G.invisibility = 0
+		G.set_invisibility(0)
 		to_chat(G, "<span class='sinister'>You feel relieved as what's left of your soul finally escapes its prison of flesh.</span>")
 	else
 		dust()

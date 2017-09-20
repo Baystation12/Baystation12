@@ -321,6 +321,7 @@
 				break
 		if(!term)
 			to_chat(user, "<span class='warning'>There is no terminal on this tile.</span>")
+			building_terminal = 0
 			return 0
 		var/turf/tempTDir = get_turf(term)
 		if (istype(tempTDir))
@@ -374,7 +375,7 @@
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "smes.tmpl", "SMES Unit", 540, 380)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)

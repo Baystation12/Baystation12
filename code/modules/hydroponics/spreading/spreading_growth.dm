@@ -70,7 +70,7 @@
 		plant.age = seed.get_trait(TRAIT_MATURATION)-1
 		plant.update_icon()
 		if(growth_type==0) //Vines do not become invisible.
-			invisibility = INVISIBILITY_MAXIMUM
+			set_invisibility(INVISIBILITY_MAXIMUM)
 		else
 			plant.layer = layer + 0.1
 

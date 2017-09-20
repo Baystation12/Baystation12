@@ -1,16 +1,16 @@
 //See controllers/globals.dm
 #define GLOBAL_MANAGED(X, InitValue)\
 /datum/controller/global_vars/proc/InitGlobal##X(){\
-    ##X = ##InitValue;\
-    gvars_datum_init_order += #X;\
+	##X = ##InitValue;\
+	gvars_datum_init_order += #X;\
 }
 #define GLOBAL_UNMANAGED(X, InitValue) /datum/controller/global_vars/proc/InitGlobal##X()
 
 #ifndef TESTING
 #define GLOBAL_PROTECT(X)\
 /datum/controller/global_vars/InitGlobal##X(){\
-    ..();\
-    gvars_datum_protected_varlist += #X;\
+	..();\
+	gvars_datum_protected_varlist += #X;\
 }
 #else
 #define GLOBAL_PROTECT(X)

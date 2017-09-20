@@ -939,12 +939,6 @@
 			return global.secret_force_mode;
 		if("sector_shuttles")
 			return global.sector_shuttles;
-		if("security_announcement_down")
-			return global.security_announcement_down;
-		if("security_announcement_up")
-			return global.security_announcement_up;
-		if("security_level")
-			return global.security_level;
 		if("security_positions")
 			return global.security_positions;
 		if("seen_citizenships")
@@ -1023,8 +1017,6 @@
 			return global.station_account;
 		if("station_date")
 			return global.station_date;
-		if("status_icons_to_colour")
-			return global.status_icons_to_colour;
 		if("stool_cache")
 			return global.stool_cache;
 		if("stored_shock_by_ref")
@@ -1143,8 +1135,6 @@
 			return global.turbolift_controller;
 		if("turbolifts")
 			return global.turbolifts;
-		if("turfs")
-			return global.turfs;
 		if("turret_icons")
 			return global.turret_icons;
 		if("uniqueness_repository")
@@ -2150,12 +2140,6 @@
 			global.secret_force_mode=newval;
 		if("sector_shuttles")
 			global.sector_shuttles=newval;
-		if("security_announcement_down")
-			global.security_announcement_down=newval;
-		if("security_announcement_up")
-			global.security_announcement_up=newval;
-		if("security_level")
-			global.security_level=newval;
 		if("security_positions")
 			global.security_positions=newval;
 		if("seen_citizenships")
@@ -2234,8 +2218,6 @@
 			global.station_account=newval;
 		if("station_date")
 			global.station_date=newval;
-		if("status_icons_to_colour")
-			global.status_icons_to_colour=newval;
 		if("stool_cache")
 			global.stool_cache=newval;
 		if("stored_shock_by_ref")
@@ -2354,8 +2336,6 @@
 			global.turbolift_controller=newval;
 		if("turbolifts")
 			global.turbolifts=newval;
-		if("turfs")
-			global.turfs=newval;
 		if("turret_icons")
 			global.turret_icons=newval;
 		if("uniqueness_repository")
@@ -2891,9 +2871,6 @@
 	"secondary_mode",
 	"secret_force_mode",
 	"sector_shuttles",
-	"security_announcement_down",
-	"security_announcement_up",
-	"security_level",
 	"security_positions",
 	"seen_citizenships",
 	"seen_factions",
@@ -2933,7 +2910,6 @@
 	"sqlport",
 	"station_account",
 	"station_date",
-	"status_icons_to_colour",
 	"stool_cache",
 	"stored_shock_by_ref",
 	"string_part_flags",
@@ -2993,7 +2969,6 @@
 	"transfer_controller",
 	"turbolift_controller",
 	"turbolifts",
-	"turfs",
 	"turret_icons",
 	"uniqueness_repository",
 	"universe_has_ended",

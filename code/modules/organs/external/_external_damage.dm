@@ -125,7 +125,7 @@
 		else
 			createwound(BURN, burn)
 
-
+	add_pain(0.6*burn + 0.4*brute)
 	//If there are still hurties to dispense
 	if (spillover)
 		owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
@@ -219,7 +219,10 @@
 		lasting_pain += 10
 	else if(is_dislocated())
 		lasting_pain += 5
-	return pain + lasting_pain + 1.2 * brute_dam + 1.5 * burn_dam
+	var/tox_dam = 0
+	for(var/obj/item/organ/internal/I in internal_organs)
+		tox_dam += I.getToxLoss()
+	return pain + lasting_pain + 0.7 * brute_dam + 0.8 * burn_dam + 0.3 * tox_dam + 0.5 * get_genetic_damage()
 
 /obj/item/organ/external/proc/remove_pain(var/amount)
 	if(!can_feel_pain() || robotic >= ORGAN_ROBOT)
@@ -246,9 +249,11 @@
 	return 1
 
 /obj/item/organ/external/proc/sever_artery()
-	if(robotic < ORGAN_ROBOT && !(status & ORGAN_ARTERY_CUT) && species && species.has_organ[BP_HEART])
-		status |= ORGAN_ARTERY_CUT
-		return TRUE
+	if(species && species.has_organ[BP_HEART])
+		var/obj/item/organ/internal/heart/O = species.has_organ[BP_HEART]
+		if(robotic < ORGAN_ROBOT && !(status & ORGAN_ARTERY_CUT) && !initial(O.open))
+			status |= ORGAN_ARTERY_CUT
+			return TRUE
 	return FALSE
 
 /obj/item/organ/external/proc/sever_tendon()

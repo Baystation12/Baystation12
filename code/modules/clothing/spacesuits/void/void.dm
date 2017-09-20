@@ -60,6 +60,28 @@
 
 	action_button_name = "Toggle Helmet"
 
+#define VOIDSUIT_INIT_EQUIPMENT(equipment_var, expected_path) \
+if(ispath(##equipment_var, ##expected_path )){\
+	##equipment_var = new equipment_var (src);\
+}\
+else if(##equipment_var) {\
+	CRASH("[log_info_line(src)] has an invalid [#equipment_var] type: [log_info_line(##equipment_var)]");\
+}
+
+/obj/item/clothing/suit/space/void/Initialize()
+	. = ..()
+	VOIDSUIT_INIT_EQUIPMENT(boots,  /obj/item/clothing/shoes/magboots)
+	VOIDSUIT_INIT_EQUIPMENT(helmet, /obj/item/clothing/head/helmet)
+	VOIDSUIT_INIT_EQUIPMENT(tank,   /obj/item/weapon/tank)
+
+#undef VOIDSUIT_INIT_EQUIPMENT
+
+/obj/item/clothing/suit/space/void/Destroy()
+	. = ..()
+	QDEL_NULL(boots)
+	QDEL_NULL(helmet)
+	QDEL_NULL(tank)
+
 /obj/item/clothing/suit/space/void/examine(user)
 	. = ..(user)
 	var/list/part_list = new

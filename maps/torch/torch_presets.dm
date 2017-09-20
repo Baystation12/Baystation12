@@ -117,14 +117,17 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 
 /obj/machinery/telecomms/relay/preset/shuttle
 	id = "Charon Relay"
+	toggled = 0
 	autolinkers = list("s_relay")
 
 /obj/machinery/telecomms/relay/preset/exploration_shuttle
 	id = "Charon Relay"
+	toggled = 0
 	autolinkers = list("s_relay")
 
 /obj/machinery/telecomms/relay/preset/aquila
 	id = "Aquila Relay"
+	toggled = 0
 	autolinkers = list("s_relay")
 
 //

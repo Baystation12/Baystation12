@@ -3,12 +3,6 @@
 #define GAME_STATE_PLAYING		3
 #define GAME_STATE_FINISHED		4
 
-// Security levels.
-#define SEC_LEVEL_GREEN 0
-#define SEC_LEVEL_ORANGE  1
-#define SEC_LEVEL_RED   2
-#define SEC_LEVEL_DELTA 3
-
 #define BE_PLANT "BE_PLANT"
 #define BE_SYNTH "BE_SYNTH"
 #define BE_PAI   "BE_PAI"

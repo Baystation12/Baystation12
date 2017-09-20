@@ -2,12 +2,18 @@
 	name = "exoplanet"
 	var/list/seeds = list()
 	var/list/animals = list()
+	var/animalcount
 	var/datum/gas_mixture/atmosphere
+	var/list/breathgas = list()	//list of gases animals/plants require to survive
+	var/badgas					//id of gas that is toxic to life here
+
 	var/lightlevel
 	in_space = 0
 	var/maxx
 	var/maxy
 	var/landmark_type = /obj/effect/shuttle_landmark/automatic
+
+	var/list/actors = list() //things that appear in engravings on xenoarch finds.
 
 
 /obj/effect/overmap/sector/exoplanet/New()
@@ -36,15 +42,42 @@
 		update_biome()
 		GLOB.processing_objects += src
 
+//attempt at more consistent history generation for xenoarch finds.
+/obj/effect/overmap/sector/exoplanet/proc/get_engravings()
+	if(!actors)
+		actors += pick("alien humanoid","amorphic blob","short, hairy being","rodent-like creature","robot","primate","reptilian alien","unidentifiable object","statue","starship","unusual devices","structure")
+		actors += pick("alien humanoids","amorphic blobs","short, hairy beings","rodent-like creatures","robots","primates","reptilian aliens")
+	
+	var/engravings = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] a \
+	[pick(actors[1])] \
+	[pick("surrounded by","being held aloft by","being struck by","being examined by","communicating with")] \
+	[pick(actors[2])]"
+	if(prob(50))
+		engravings += ", [pick("they seem to be enjoying themselves","they seem extremely angry","they look pensive","they are making gestures of supplication","the scene is one of subtle horror","the scene conveys a sense of desperation","the scene is completely bizarre")]"
+	engravings += "."
+	return engravings
+
 //Not that it should ever get deleted but just in case
 /obj/effect/overmap/sector/exoplanet/Destroy()
 		. = ..()
 		GLOB.processing_objects -= src
 
 /obj/effect/overmap/sector/exoplanet/process()
-	if(!atmosphere)
-		return
+	var/list/dead = list()
+	for(var/mob/M in animals)
+		if(M.stat == DEAD)
+			dead += M
 	for(var/zlevel in map_z)
+		if(dead.len > 0.5*animalcount)
+			for(var/i = 1 to round(dead.len - 0.5*animalcount))
+				if(prob(10))
+					var/turf/simulated/T = locate(rand(1,world.maxx), rand(1,world.maxy), zlevel)
+					var/mob/S = pick(dead)
+					S = new S.type(T)
+					adapt_animal(S)
+
+		if(!atmosphere)
+			continue
 		var/zone/Z
 		for(var/i = 1 to world.maxx)
 			var/turf/simulated/T = locate(i, 1, zlevel)
@@ -67,14 +100,14 @@
 	for(var/mob/living/simple_animal/A in GLOB.living_mob_list_)
 		if(A.z in map_z)
 			animals += A
+	animalcount = animals.len
 
 /obj/effect/overmap/sector/exoplanet/proc/update_biome()
-	var/list/mingas = list()
 	for(var/gas in atmosphere.gas)
-		mingas[gas] = round(0.4*atmosphere.gas[gas])
+		breathgas[gas] = round(0.4*atmosphere.gas[gas])
 	var/list/badgases = gas_data.gases.Copy()
 	badgases -= atmosphere.gas
-	var/badgas = pick(badgases)
+	badgas = pick(badgases)
 	for(var/datum/seed/S in seeds)
 		S.set_trait(TRAIT_IDEAL_HEAT,          atmosphere.temperature + rand(-5,5),800,70)
 		S.set_trait(TRAIT_HEAT_TOLERANCE,      S.get_trait(TRAIT_HEAT_TOLERANCE) + rand(-5,5),800,70)
@@ -89,14 +122,17 @@
 				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 
 	for(var/mob/living/simple_animal/A in animals)
-		A.minbodytemp = atmosphere.temperature - 20
-		A.maxbodytemp = atmosphere.temperature + 30
-		A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
-		if(A.min_gas)
-			A.min_gas = mingas.Copy()
-		if(A.max_gas)
-			A.max_gas = list()
-			A.max_gas[badgas] = 5
+		adapt_animal(A)
+
+/obj/effect/overmap/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
+	A.minbodytemp = atmosphere.temperature - 20
+	A.maxbodytemp = atmosphere.temperature + 30
+	A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
+	if(A.min_gas)
+		A.min_gas = breathgas.Copy()
+	if(A.max_gas)
+		A.max_gas = list()
+		A.max_gas[badgas] = 5
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_landing()
 	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
@@ -188,7 +224,7 @@
 	..()
 
 /datum/random_map/noise/exoplanet/proc/noise2value(var/value)
-    return min(9,max(0,round((value/cell_range)*10)))
+	return min(9,max(0,round((value/cell_range)*10)))
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
@@ -219,8 +255,8 @@
 				spawn_flora(T, 1)
 
 /datum/random_map/noise/exoplanet/proc/spawn_fauna(var/turf/T)
-    var/beastie = pick(fauna_types)
-    new beastie(T)
+	var/beastie = pick(fauna_types)
+	new beastie(T)
 
 /datum/random_map/noise/exoplanet/proc/generate_flora()
 	for(var/i = 1 to flora_diversity)
@@ -259,6 +295,7 @@
 	name = "space land"
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
+	has_resources = 1
 	var/diggable = 1
 	var/mudpit = 0	//if pits should not take turf's color
 

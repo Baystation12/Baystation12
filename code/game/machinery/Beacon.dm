@@ -25,7 +25,7 @@
 
 	// update the invisibility and icon
 	hide(var/intact)
-		invisibility = intact ? 101 : 0
+		set_invisibility(intact ? 101 : 0)
 		update_icon()
 
 	// update the icon_state
@@ -42,7 +42,7 @@
 		if(!Beacon)
 			var/turf/T = loc
 			Beacon = new /obj/item/device/radio/beacon
-			Beacon.invisibility = INVISIBILITY_MAXIMUM
+			Beacon.set_invisibility(INVISIBILITY_MAXIMUM)
 			Beacon.loc = T
 		if(Beacon)
 			if(Beacon.loc != loc)

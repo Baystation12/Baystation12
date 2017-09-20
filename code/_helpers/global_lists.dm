@@ -10,8 +10,6 @@ var/global/list/side_effects = list()				//list of all medical sideeffects types
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 
-var/global/list/turfs = list()						//list of all turfs
-
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
 
@@ -96,7 +94,7 @@ var/global/list/string_slot_flags = list(
 //////////////////////////
 
 /hook/global_init/proc/populateGlobalLists()
-    possible_cable_coil_colours = sortAssoc(list(
+	possible_cable_coil_colours = sortAssoc(list(
 		"Yellow" = COLOR_YELLOW,
 		"Green" = COLOR_LIME,
 		"Pink" = COLOR_PINK,
@@ -106,7 +104,7 @@ var/global/list/string_slot_flags = list(
 		"Red" = COLOR_RED,
 		"White" = COLOR_WHITE
 	))
-    return 1
+	return 1
 
 /proc/get_mannequin(var/ckey)
 	if(!mannequins_)

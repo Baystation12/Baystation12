@@ -650,17 +650,18 @@
 	color = "#C8A5DC"
 	scannable = 1
 	overdose = 10
+	metabolism = 0.1
 
 /datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
 
-	if(dose > 1)	//not that effective after initial rush
-		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
-		M.add_chemical_effect(CE_PULSE, 1)
-	else
+	if(dose < 0.2)	//not that effective after initial rush
 		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
-		M.add_chemical_effect(CE_PULSE, 2)
+		M.add_chemical_effect(CE_PULSE, 1)
+	else if(dose < 1)
+		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
+	M.add_chemical_effect(CE_PULSE, 1)
 	if(dose > 5)
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())

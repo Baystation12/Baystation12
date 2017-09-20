@@ -777,6 +777,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			stump.name = "stump of \a [name]"
 			stump.artery_name = "mangled [artery_name]"
 			stump.arterial_bleed_severity = arterial_bleed_severity
+			stump.add_pain(max_damage)
 			if(robotic >= ORGAN_ROBOT)
 				stump.robotize()
 			stump.wounds |= W
@@ -1338,4 +1339,4 @@ Note that amputating the affected organ does in fact remove the infection from t
 		to_chat(target, "<span class='danger'>You feel extreme pain!</span>")
 
 		var/max_halloss = round(target.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
-		target.adjustHalLoss(Clamp(0, max_halloss - target.getHalLoss(), 30))
+		add_pain(Clamp(0, max_halloss - target.getHalLoss(), 30))
