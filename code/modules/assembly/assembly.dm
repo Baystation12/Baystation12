@@ -137,9 +137,9 @@
 	return //HTML MENU FOR WIRES GOES HERE
 
 /obj/item/device/assembly/nano_host()
-    if(istype(loc, /obj/item/device/assembly_holder))
-        return loc.nano_host()
-    return ..()
+	if(istype(loc, /obj/item/device/assembly_holder))
+		return loc.nano_host()
+	return ..()
 
 /*
 	var/small_icon_state = null//If this obj will go inside the assembly use this for icons

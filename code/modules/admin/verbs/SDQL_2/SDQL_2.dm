@@ -115,7 +115,9 @@
 						else
 							text += ": [t]<br>"
 						CHECK_TICK
-					usr << show_browser(usr, text, "window=SDQL-result")
+					if(!text)
+						text = "No results found."
+					show_browser(usr, text, "window=SDQL-result")
 
 				if("update")
 					if("set" in query_tree)
@@ -139,6 +141,8 @@
 										break
 
 							CHECK_TICK
+
+			to_chat(usr, "<span class='notice'>Query executed on [objs.len] object\s.</span>")
 	catch(var/exception/e)
 		to_chat(usr, "<span class='danger'>An exception has occured during the execution of your query and your query has been aborted.</span>")
 		to_chat(usr, "exception name: [e.name]")

@@ -87,10 +87,9 @@
 
 	startswith = list(
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/stack/medical/advanced/bruise_pack = 2,
+		/obj/item/stack/medical/advanced/bruise_pack = 3,
 		/obj/item/stack/medical/advanced/ointment = 2,
-		/obj/item/stack/medical/splint,
-		/obj/item/weapon/storage/pill_bottle/paracetamol
+		/obj/item/stack/medical/splint
 		)
 
 /obj/item/weapon/storage/firstaid/combat

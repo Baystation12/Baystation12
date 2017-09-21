@@ -111,6 +111,6 @@ var/datum/antagonist/godcultist/godcult
 		return
 
 	//Make em wait a few seconds.
-	src.visible_message("\The [src] bows their head, muttering something underneath their breathe", "<span class='notice'>You send the message \"[msg]\" to your master.</span>")
+	src.visible_message("\[src] bows their head down, muttering something.", "<span class='notice'>You send the message \"[msg]\" to your master.</span>")
 	to_chat(D, "<span class='notice'>\The [src] (<A href='?src=\ref[D];jump=\ref[src];'>J</A>) prays, \"[msg]\"</span>")
 	log_and_message_admins("dprayed, \"[msg]\" to \the [key_name(D)]")

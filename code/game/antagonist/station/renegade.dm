@@ -22,6 +22,7 @@ var/datum/antagonist/renegade/renegades
 	hard_cap_round = 12
 	initial_spawn_req = 3
 	initial_spawn_target = 6
+	antaghud_indicator = "hudrenegade"
 
 	var/list/spawn_guns = list(
 		/obj/item/weapon/gun/energy/laser,

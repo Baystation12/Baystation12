@@ -5,11 +5,13 @@
 	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
 	var/list/minimal_access = list()      // Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
+	var/list/software_on_spawn = list()   // Defines the software files that spawn on tablets and labtops
 	var/department_flag = 0
-	var/faction = "None"	              // Players will be allowed to spawn in as jobs that are set to "Station"
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
 	var/current_positions = 0             // How many players have this job
+	var/availablity_chance = 100          // Percentage chance job is available each round
+
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#ffffff"       // Selection screen color
 	var/list/alt_titles                   // List of alternate titles, if any and any potential alt. outfits as assoc values.
@@ -24,14 +26,23 @@
 	var/account_allowed = 1				  // Does this job type come with a station account?
 	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
 	var/base_pay = 12 					  // Always minimum wage at all times. Also base = 1 hr, paychecks calculate base * 4
-
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
-	var/list/allowed_branches			  // For Torch, also expandable for other purposes
-	var/list/allowed_ranks				  // Ditto
+	var/loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
+	var/list/allowed_branches             // For maps using branches and ranks, also expandable for other purposes
+	var/list/allowed_ranks                // Ditto
 
-	var/announced						  //If their arrival is announced on radio
-	var/latejoin_at_spawnpoints			  //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+	var/announced = TRUE                  //If their arrival is announced on radio
+	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+
+/datum/job/New()
+	..()
+	if(prob(100-availablity_chance))	//Close positions, blah blah.
+		total_positions = 0
+		spawn_positions = 0
+
+/datum/job/dd_SortValue()
+	return title
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
@@ -91,7 +102,7 @@
 	. = outfit.equip_base(H, title, alt_title)
 
 /datum/job/proc/get_access()
-	if(!config || config.jobs_have_minimal_access)
+	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
 		return src.minimal_access.Copy()
 	else
 		return src.access.Copy()
@@ -123,6 +134,25 @@
 
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
+
+/datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
+	if(!is_branch_allowed(prefs.char_branch))
+		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
+		return TRUE
+
+	if(!is_rank_allowed(prefs.char_branch, prefs.char_rank))
+		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.char_branch] are: [get_ranks(prefs.char_branch)].</span>")
+		return TRUE
+
+	var/datum/species/S = all_species[prefs.species]
+	if(!is_species_allowed(S))
+		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
+		return TRUE
+
+	return FALSE
+
+/datum/job/proc/is_species_allowed(var/datum/species/S)
+	return !GLOB.using_map.is_species_job_restricted(S, src)
 
 /**
  *  Check if members of the given branch are allowed in the job

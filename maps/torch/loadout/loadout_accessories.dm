@@ -87,7 +87,7 @@
 /datum/gear/accessory/armband_mp
 	display_name = "military police armband"
 	path = /obj/item/clothing/accessory/armband/mp
-	allowed_roles = list("Master at Arms", "Brig Officer", "Chief of Security", "Forensic Technician")
+	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/hos, /datum/job/detective)
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
@@ -102,12 +102,12 @@
 /datum/gear/accessory/armband_emt
 	display_name = "EMT armband"
 	path = /obj/item/clothing/accessory/armband/medgreen
-	allowed_roles = list("Corpsman", "Medical Contractor")
+	allowed_roles = list(/datum/job/doctor, /datum/job/doctor_contractor)
 
 /datum/gear/accessory/armband_corpsman
 	display_name = "medical corps armband"
 	path = /obj/item/clothing/accessory/armband/medblue
-	allowed_roles = list("Chief Medical Officer", "Physician", "Corpsman")
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor)
 
 /datum/gear/accessory/armband_engineering
 	display_name = "engineering armband"
@@ -117,12 +117,12 @@
 /datum/gear/accessory/armband_hydro
 	display_name = "hydroponics armband"
 	path = /obj/item/clothing/accessory/armband/hydro
-	allowed_roles = list("Research Director", "Scientist", "Research Assistant", "Passenger")
+	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/assistant)
 
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-	allowed_roles = list("Research Director", "NanoTrasen Liaison", "Senior Researcher", "NanoTrasen Pilot", "Scientist", "Prospector", "Security Guard", "Research Assistant", "Maintenance Assistant", "Roboticist", "Medical Assistant", "Virologist", "Chemist", "Counselor", "Supply Assistant", "Sanitation Technician", "Cook", "Bartender")
+	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
 
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
@@ -143,7 +143,7 @@
 	display_name = "holster selection"
 	path = /obj/item/clothing/accessory/holster
 	cost = 3
-	allowed_roles = MILITARY_ROLES
+	allowed_roles = ARMED_ROLES
 
 /datum/gear/accessory/holster/New()
 	..()
@@ -187,39 +187,39 @@
 	display_name = "webbing, engineering"
 	path = /obj/item/clothing/accessory/storage/brown_vest
 	cost = 3
-	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist", "Deck Officer", "Deck Technician",
-						"Supply Assistant", "Prospector", "Sanitation Technician", "Research Assistant", "Merchant", "SolGov Pilot", "NanoTrasen Pilot")
+	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
+						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/solgov_pilot, /datum/job/nt_pilot)
 
 /datum/gear/accessory/black_vest
 	display_name = "webbing, security"
 	path = /obj/item/clothing/accessory/storage/black_vest
 	cost = 3
-	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms", "Security Guard", "Merchant")
+	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
 
 /datum/gear/accessory/white_vest
 	display_name = "webbing, medical"
 	path = /obj/item/clothing/accessory/storage/white_vest
 	cost = 3
-	allowed_roles = list("Chief Medical Officer", "Physician", "Corpsman", "Medical Contractor", "Merchant")
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/merchant)
 
 /datum/gear/accessory/brown_drop_pouches
 	display_name = "drop pouches, engineering"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/brown
 	cost = 3
-	allowed_roles = list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist", "Deck Officer", "Deck Technician",
-						"Supply Assistant", "Prospector", "Sanitation Technician", "Research Assistant", "Merchant")
+	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
+						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant)
 
 /datum/gear/accessory/black_drop_pouches
 	display_name = "drop pouches, security"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/black
 	cost = 3
-	allowed_roles = list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms", "Security Guard", "Merchant")
+	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
 
 /datum/gear/accessory/white_drop_pouches
 	display_name = "drop pouches, medical"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/white
 	cost = 3
-	allowed_roles = list("Chief Medical Officer", "Physician", "Corpsman", "Medical Contractor", "Merchant")
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/merchant)
 
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"
@@ -296,7 +296,7 @@
 	description = "A medal or ribbon awarded to NanoTrasen personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal/bronze/nanotrasen
 	cost = 8
-	allowed_roles = list("Research Director", "NanoTrasen Liaison")
+	allowed_roles = NANOTRASEN_ROLES
 
 /datum/gear/accessory/ntaward/New()
 	..()
@@ -316,4 +316,9 @@
 	path = /obj/item/clothing/accessory/kneepads
 
 /datum/gear/accessory/flannel
+	display_name = "flannel (colorable)"
+	path = /obj/item/clothing/accessory/toggleable/flannel
+	slot = slot_tie
+	flags = GEAR_HAS_COLOR_SELECTION
+	sort_category = "Accessories"
 	allowed_roles = SEMIFORMAL_ROLES

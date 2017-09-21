@@ -202,17 +202,6 @@
 	return istype(get_equipped_item(slot_l_ear), /obj/item/device/radio/headset) || istype(get_equipped_item(slot_r_ear), /obj/item/device/radio/headset)
 
 /mob/living/carbon/human/proc/make_grab(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/victim, var/grab_tag)
-	if(!attacker || !victim)
-		return 0
-
-	if(attacker == victim)
-		to_chat(attacker, "<span class='notice'>You can't grab yourself.</span>")
-		return 0
-
-	if(attacker.grabbed_by.len)
-		to_chat(attacker, "<span class='notice'>You can't grab someone if you're being grabbed.</span>")
-		return 0
-
 	var/obj/item/grab/G
 
 	if(!grab_tag)
@@ -220,6 +209,10 @@
 	else
 		var/obj/item/grab/given_grab_type = all_grabobjects[grab_tag]
 		G = new given_grab_type(attacker, victim)
+
+	if(!G.pre_check())
+		qdel(G)
+		return 0
 
 	if(G.can_grab())
 		G.init()

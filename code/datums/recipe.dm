@@ -9,7 +9,7 @@
  * * items are objects. Fruits, tools, circuit boards.
  * * result is type to create as new object
  * * time is optional parameter, you shall use in in your machine,
-     default /datum/recipe/ procs does not rely on this parameter.
+ * * default /datum/recipe/ procs does not rely on this parameter.
  *
  *  Functions you need:
  *  /datum/recipe/proc/make(var/obj/container as obj)
@@ -31,7 +31,7 @@
  * */
 
 /datum/recipe
-	var/list/reagents // example: = list("berryjuice" = 5) // do not list same reagent twice
+	var/list/reagents // example: = list(/datum/reagent/drink/juice/berry = 5) // do not list same reagent twice
 	var/list/items    // example: = list(/obj/item/weapon/crowbar, /obj/item/weapon/welder) // place /foo/bar before /foo
 	var/list/fruit    // example: = list("fruit" = 3)
 	var/result        // example: = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
@@ -108,7 +108,7 @@
 	var/obj/result_obj = new result(container)
 	for (var/obj/O in (container.InsertedContents()-result_obj))
 		if (O.reagents)
-			O.reagents.del_reagent("nutriment")
+			O.reagents.del_reagent(/datum/reagent/nutriment)
 			O.reagents.update_total()
 			O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
 		if(istype(O,/obj/item/weapon/holder/))

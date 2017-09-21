@@ -22,14 +22,6 @@
 	var/corpse = /obj/effect/landmark/mobcorpse/syndicatesoldier
 	var/weapon1
 	var/weapon2
-	min_oxy = 5
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 1
-	min_co2 = 0
-	max_co2 = 5
-	min_n2 = 0
-	max_n2 = 0
 	unsuitable_atoms_damage = 15
 	environment_smash = 1
 	faction = "syndicate"
@@ -84,14 +76,8 @@
 
 
 /mob/living/simple_animal/hostile/syndicate/melee/space
-	min_oxy = 0
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 0
-	min_co2 = 0
-	max_co2 = 0
-	min_n2 = 0
-	max_n2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 	icon_state = "syndicatemeleespace"
 	icon_living = "syndicatemeleespace"
@@ -114,14 +100,8 @@
 	icon_state = "syndicaterangedpsace"
 	icon_living = "syndicaterangedpsace"
 	name = "Syndicate Commando"
-	min_oxy = 0
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 0
-	min_co2 = 0
-	max_co2 = 0
-	min_n2 = 0
-	max_n2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 	corpse = /obj/effect/landmark/mobcorpse/syndicatecommando
 	speed = 0
@@ -140,14 +120,8 @@
 	attacktext = "cut"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	faction = "syndicate"
-	min_oxy = 0
-	max_oxy = 0
-	min_tox = 0
-	max_tox = 0
-	min_co2 = 0
-	max_co2 = 0
-	min_n2 = 0
-	max_n2 = 0
+	min_gas = null
+	max_gas = null
 	minbodytemp = 0
 
 /mob/living/simple_animal/hostile/viscerator/death(gibbed, deathmessage, show_dead_message)

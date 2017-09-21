@@ -115,8 +115,8 @@
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/signal/Initialize()
-    radio = new /obj/item/radio/integrated/signal(src)
-    . = ..()
+	radio = new /obj/item/radio/integrated/signal(src)
+	. = ..()
 
 /obj/item/weapon/cartridge/quartermaster
 	name = "\improper Space Parts & Space Vendors cartridge"
@@ -215,7 +215,7 @@
 				log_admin("STATUS: [user] set status screen with [PDA]. Message: [data1] [data2]")
 				message_admins("STATUS: [user] set status screen with [PDA]. Message: [data1] [data2]")
 
-		if("alert")
+		if("image")
 			status_signal.data["picture_state"] = data1
 
 	frequency.post_signal(src, status_signal)
@@ -534,8 +534,8 @@
 			switch(href_list["statdisp"])
 				if("message")
 					post_status("message", message1, message2)
-				if("alert")
-					post_status("alert", href_list["alert"])
+				if("image")
+					post_status("image", href_list["image"])
 				if("setmsg1")
 					message1 = reject_bad_text(sanitize(input("Line 1", "Enter Message Text", message1) as text|null, 40), 40)
 					updateSelfDialog()

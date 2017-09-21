@@ -38,6 +38,12 @@
 	attack_verb = list("stabbed", "chopped", "cut")
 	applies_material_colour = 1
 
+/obj/item/weapon/material/hatchet/machete
+	name = "machete"
+	desc = "Sturdy long blade with a rugged handle. Leading the way to cursed treasures since before the space travel."
+	icon_state = "machete"
+	slot_flags = SLOT_BELT
+
 /obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"
 	desc = "It's used for removing weeds or scratching your back."

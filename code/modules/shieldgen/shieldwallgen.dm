@@ -247,11 +247,11 @@
 				break
 
 /obj/machinery/shieldwallgen/Destroy()
-	src.cleanup(1)
-	src.cleanup(2)
-	src.cleanup(4)
-	src.cleanup(8)
-	..()
+	src.cleanup(NORTH)
+	src.cleanup(SOUTH)
+	src.cleanup(EAST)
+	src.cleanup(WEST)
+	. = ..()
 
 
 //////////////Containment Field START

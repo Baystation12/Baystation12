@@ -48,27 +48,58 @@
 		{{:helper.link('Back', null, {'action' : 'sw_menu', 'target' : 2})}}
 		</div>
 	{{else data.state === 4}}
-		Set status displays:
-		<div class=item>{{:helper.link('Clear', null, {'action' : 'setstatus', 'target' : 'blank'})}} </div>
-		<div class=item>{{:helper.link('Local Time', null, {'action' : 'setstatus', 'target' : 'time'})}} </div>
-		<div class=item>{{:helper.link('Shuttle ETA', null, {'action' : 'setstatus', 'target' : 'shuttle'})}} </div>
-		<div class=item>{{:helper.link('Message', null, {'action' : 'setstatus', 'target' : 'message'})}}
-		<ul>
-		<li><div class=item>Line 1: {{:helper.link(data.message_line1 ? data.message_line1 : '(none)', null, {'action' : 'setstatus', 'target' : 'line1'})}}</div></li>
-		<li><div class=item>Line 2: {{:helper.link(data.message_line2 ? data.message_line2 : '(none)', null, {'action' : 'setstatus', 'target' : 'line2'})}}</div></li>
-		</ul></div>
-		<div class=item>Alert: {{:helper.link('Red Alert', null, {'action' : 'setstatus', 'target' : 'alert', 'alert' : 'redalert'})}}
-		{{:helper.link('Lockdown', null, {'action' : 'setstatus', 'target' : 'alert', 'alert' : 'lockdown'})}}
-		{{:helper.link('Biohazard', null, {'action' : 'setstatus', 'target' : 'alert', 'alert' : 'biohazard'})}} </div>
-		{{:helper.link('Back', null, {'action' : 'sw_menu', 'target' : 1})}}
+		<div class="item">
+            <div class="itemLabel">
+                <b>General</b>:
+            </div>
+            <div class="itemContent">
+                {{:helper.link('Clear',       'trash', {'action' : 'setstatus', 'target' : 'blank'})}}
+		        {{:helper.link('Local Time',  'gear', {'action' : 'setstatus', 'target' : 'time'})}}
+		        {{:helper.link('Shuttle ETA', 'gear', {'action' : 'setstatus', 'target' : 'shuttle'})}}
+		        {{:helper.link('Message',     'gear', {'action' : 'setstatus', 'target' : 'message'})}}
+             </div>
+         </div>
+         <div class="item">
+            <div class="itemLabel">
+                <b>Message line 1</b>
+            </div>
+            <div class="itemContent">
+                {{:helper.link(data.message_line1 ? data.message_line1 : '(none)', null, {'action' : 'setstatus', 'target' : 'line1'})}}
+            </div>
+        </div>
+        <div class="item">
+            <div class="itemLabel">
+                <b>Message line 2</b>
+            </div>
+            <div class="itemContent">
+                {{:helper.link(data.message_line2 ? data.message_line2 : '(none)', null, {'action' : 'setstatus', 'target' : 'line2'})}}
+            </div>
+        </div>
+        
+        <div class="item">
+            <div class="itemLabel">
+                <b>Alert:</b>
+            </div>
+            <div class="itemContent">
+                {{:helper.link('None',                   'alert',     {'action' : 'setstatus', 'target' : 'image', 'image' : 'default'})}}
+                {{:helper.link('Current Security Level', 'alert',     {'action' : 'setstatus', 'target' : 'alert'})}}
+                {{:helper.link('Lockdown',               'caution',   {'action' : 'setstatus', 'target' : 'image', 'image' : 'lockdown'})}}
+                {{:helper.link('Biohazard',              'radiation', {'action' : 'setstatus', 'target' : 'image', 'image' : 'biohazard'})}}
+            </div>
+            {{:helper.link('Back',                   null, {'action' : 'sw_menu', 'target' : 1})}}
+        </div>
 	{{else data.state === 5}}
-		Current Alert level is {{:data.current_security_level_title}}
-		{{if data.current_security_level === data.def_SEC_LEVEL_DELTA}}
+		Security Level: {{:data.current_security_level_title}}
+		{{if data.cannot_change_security_level}}
 			<div class=item><font color='red'><b>The self-destruct mechanism is active. Find a way to deactivate the mechanism to lower the alert level or evacuate.</b></font></div>
 		{{else}}
-			<div class=item>Set status: </div>
-			<div class=item>{{:helper.link('Blue', null, {'action' : 'setalert', 'target' : data.def_SEC_LEVEL_BLUE}, data.current_security_level === data.def_SEC_LEVEL_BLUE || data.isAI ? 'disabled' : null)}} </div>
-			<div class=item>{{:helper.link('Green', null, {'action' : 'setalert', 'target' : data.def_SEC_LEVEL_GREEN}, data.current_security_level === data.def_SEC_LEVEL_GREEN || data.isAI ? 'disabled' : null)}} </div>
+			<div class=item>Set Security Level: </div>
+			<div class=itemGroup>
+			{{for data.security_levels}}
+				<div class="item">
+					<div class=item>{{:helper.link(value.title, null, {'action' : 'setalert', 'target' : value.ref}, data.current_security_level_ref === value.ref || data.isAI ? 'disabled' : null)}} </div>
+				</div>
+			{{/for}}
 		{{/if}}
 		</br>
 		<div class=item>{{:helper.link('Back', null, {'action' : 'sw_menu', 'target' : 1})}} </div>

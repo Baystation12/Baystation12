@@ -35,7 +35,7 @@
 	siemens_coefficient = 0.2
 
 	flags = NO_SCAN
-	spawn_flags = SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 	blood_color = "#2299FC"
@@ -88,4 +88,5 @@
 		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/vox(H.back), slot_in_backpack)
 		H.internal = H.r_hand
-	H.internals.icon_state = "internal1"
+	if(H.internals)
+		H.internals.icon_state = "internal1"

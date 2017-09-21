@@ -8,8 +8,7 @@
 	var/list/resources
 
 	var/thermite = 0
-	oxygen = MOLES_O2STANDARD
-	nitrogen = MOLES_N2STANDARD
+	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
@@ -119,10 +118,10 @@
 					H.track_blood--
 
 			if (bloodDNA)
-				src.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,bloodDNA,H.dir,0,bloodcolor) // Coming
+				src.AddTracks(H.species.get_move_trail(H),bloodDNA,H.dir,0,bloodcolor) // Coming
 				var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
 				if(istype(from) && from)
-					from.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,bloodDNA,0,H.dir,bloodcolor) // Going
+					from.AddTracks(H.species.get_move_trail(H),bloodDNA,0,H.dir,bloodcolor) // Going
 
 				bloodDNA = null
 

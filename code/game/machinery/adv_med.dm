@@ -2,7 +2,7 @@
 
 
 /obj/machinery/bodyscanner
-	var/mob/living/carbon/occupant
+	var/mob/living/carbon/human/occupant
 	var/locked
 	name = "Body Scanner"
 	icon = 'icons/obj/Cryogenic2.dmi'
@@ -181,7 +181,7 @@
 	name = "Body Scanner Console"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scannerconsole"
-	density = 1
+	density = 0
 	anchored = 1
 
 
@@ -237,7 +237,7 @@
 		dat = text("[]<BR><BR><A href='?src=\ref[];clear=1'>Main Menu</A>", src.temphtml, src)
 	else
 		if (src.connected) //Is something connected?
-			dat = connected.get_occupant_data()
+			dat = connected.occupant.get_medical_data()
 			dat += "<br><HR><A href='?src=\ref[src];print=1'>Print</A><BR>"
 		else
 			dat = "<span class='warning'>Error: No Body Scanner connected.</span>"
@@ -262,10 +262,10 @@
 		if (!istype(occupant,/mob/living/carbon/human))
 			to_chat(usr, "\icon[src]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
 			return
-		new/obj/item/weapon/paper/(loc, "<tt>[connected.get_occupant_data()]</tt>", "Body scan report - [occupant]")
+		new/obj/item/weapon/paper/(loc, "<tt>[connected.occupant.get_medical_data()]</tt>", "Body scan report - [occupant]")
 
 
-/obj/machinery/bodyscanner/proc/get_severity(amount)
+/proc/get_severity(amount)
 	if(!amount)
 		return "none"
 	. = "minor"
@@ -276,10 +276,8 @@
 	else if(amount > 10)
 		. = "moderate"
 
-/obj/machinery/bodyscanner/proc/get_occupant_data()
-	if (!occupant || !istype(occupant, /mob/living/carbon/human))
-		return
-	var/mob/living/carbon/human/H = occupant
+/mob/living/carbon/human/proc/get_medical_data()
+	var/mob/living/carbon/human/H = src
 	var/dat = list()
 	dat +="<b>SCAN RESULTS FOR: [H]</b>"
 	dat +="Scan performed at [stationtime2text()]<br>"
@@ -306,11 +304,10 @@
 	. += "<b>Pulse rate:</b> [pulse_result]bpm."
 
 	// Blood pressure. Based on the idea of a normal blood pressure being 120 over 80.
-	var/blood_result = H.get_effective_blood_volume()
-	if(blood_result <= 70)
+	if(H.get_blood_volume() <= 70)
 		. += "<span class='danger'>Severe blood loss detected.</span>"
-	. += "<b>Blood pressure:</b> [H.get_blood_pressure()] ([blood_result]% blood circulation)"
-	. += "<b>Blood volume:</b> [H.vessel.get_reagent_amount("blood")]/[H.species.blood_volume]u"
+	. += "<b>Blood pressure:</b> [H.get_blood_pressure()] ([H.get_blood_oxygenation()]% blood oxygenation)"
+	. += "<b>Blood volume:</b> [H.vessel.get_reagent_amount(/datum/reagent/blood)]/[H.species.blood_volume]u"
 
 	// Body temperature.
 	. += "<b>Body temperature:</b> [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)"
@@ -337,7 +334,7 @@
 		for(var/A in H.reagents.reagent_list)
 			var/datum/reagent/R = A
 			if(R.scannable)
-				reagentdata["[R.id]"] = "[round(H.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
+				reagentdata[R.type] = "[round(H.reagents.get_reagent_amount(R.type), 1)]u [R.name]"
 		if(reagentdata.len)
 			dat += "Beneficial reagents detected in subject's blood:"
 			for(var/d in reagentdata)
@@ -352,9 +349,9 @@
 		else
 			table += "<td>"
 			if(E.brute_dam)
-				table += "[capitalize(get_severity(E.brute_dam))] physical trauma"
+				table += "[capitalize(get_wound_severity(E.brute_ratio, E.vital))] physical trauma"
 			if(E.burn_dam)
-				table += " [capitalize(get_severity(E.burn_dam))] burns"
+				table += " [capitalize(get_wound_severity(E.burn_ratio, E.vital))] burns"
 			if(E.brute_dam + E.burn_dam == 0)
 				table += "None"
 			table += "</td><td>[english_list(E.get_scan_results(), nothing_text = "", and_text = ", ")]</td></tr>"

@@ -43,7 +43,7 @@
 	plane = OBJ_PLANE
 	layer = OBJ_LAYER
 	pass_flags = PASSTABLE
-	mouse_opacity = 2
+	mouse_opacity = 1
 
 	var/health = 10
 	var/max_health = 100
@@ -62,42 +62,36 @@
 	var/last_tick = 0
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
-/obj/effect/plant/Destroy()
-	if(plant_controller)
-		plant_controller.remove_plant(src)
-	for(var/obj/effect/plant/neighbor in range(1,src))
-		plant_controller.add_plant(neighbor)
-	return ..()
-
 /obj/effect/plant/single
 	spread_chance = 0
 
 /obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent, var/start_matured = 0)
 	..()
-
+	
 	if(!newparent)
 		parent = src
 	else
 		parent = newparent
+	seed = newseed
+	if(start_matured)
+		mature_time = 0
+		health = max_health
 
-	if(!plant_controller)
-		sleep(250) // ugly hack, should mean roundstart plants are fine. TODO initialize perhaps?
+/obj/effect/plant/Initialize()
+	. = ..()
+	
 	if(!plant_controller)
 		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
-
-		qdel(src)
-		return
-
-	if(!istype(newseed))
-		newseed = plant_controller.seeds[DEFAULT_SEED]
-	seed = newseed
+		return INITIALIZE_HINT_QDEL
+	if(!istype(seed))
+		seed = plant_controller.seeds[DEFAULT_SEED]
 	if(!seed)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	name = seed.display_name
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(seed.get_trait(TRAIT_SPREAD)==2)
+		mouse_opacity = 2
 		max_growth = VINE_GROWTH_STAGES
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		icon = 'icons/obj/hydroponics_vines.dmi'
@@ -120,10 +114,13 @@
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
-	if(start_matured)
-		mature_time = 0
-		health = max_health
-		process()
+	
+/obj/effect/plant/Destroy()
+	if(plant_controller)
+		plant_controller.remove_plant(src)
+	for(var/obj/effect/plant/neighbor in range(1,src))
+		plant_controller.add_plant(neighbor)
+	return ..()
 
 // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
 /obj/effect/plant/proc/finish_spreading()
@@ -131,12 +128,11 @@
 	ADD_ICON_QUEUE(src)
 	plant_controller.add_plant(src)
 	// Some plants eat through plating.
-	if(islist(seed.chems) && !isnull(seed.chems["pacid"]))
+	if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/acid/polyacid]))
 		var/turf/T = get_turf(src)
 		T.ex_act(prob(80) ? 3 : 2)
 
 /obj/effect/plant/update_icon()
-	//TODO: should really be caching this.
 	refresh_icon()
 	if(growth_type == 0 && !floor)
 		src.transform = null
@@ -188,9 +184,11 @@
 
 	if(growth>2 && growth == max_growth)
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
-		set_opacity(1)
-		if(islist(seed.chems) && !isnull(seed.chems["woodpulp"]))
+		if(growth_type in list(2,3))
+			set_opacity(1)
+		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/woodpulp]))
 			set_density(1)
+			set_opacity(1)
 	else
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		set_density(0)
@@ -204,7 +202,7 @@
 
 	for(var/wallDir in GLOB.cardinal)
 		var/turf/newTurf = get_step(T,wallDir)
-		if(newTurf.density)
+		if(newTurf && newTurf.density)
 			direction |= wallDir
 
 	for(var/obj/effect/plant/shroom in T.contents)

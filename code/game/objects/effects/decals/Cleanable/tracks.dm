@@ -154,20 +154,49 @@ var/global/list/image/fluidtrack_cache=list()
 /obj/effect/decal/cleanable/blood/tracks/footprints
 	name = "wet footprints"
 	dryname = "dried footprints"
-	desc = "Whoops..."
-	drydesc = "Whoops..."
+	desc = "They look like still wet tracks left by footwear."
+	drydesc = "They look like dried tracks left by footwear."
 	coming_state = "human1"
 	going_state  = "human2"
+	amount = 0
+
+/obj/effect/decal/cleanable/blood/tracks/snake
+	name = "wet tracks"
+	dryname = "dried tracks"
+	desc = "They look like still wet tracks left by a giant snake."
+	drydesc = "They look like dried tracks left by a giant snake."
+	coming_state = "snake1"
+	going_state  = "snake2"
+	random_icon_states = null
+	amount = 0
+
+/obj/effect/decal/cleanable/blood/tracks/paw
+	name = "wet tracks"
+	dryname = "dried tracks"
+	desc = "They look like still wet tracks left by a mammal."
+	drydesc = "They look like dried tracks left by a mammal."
+	coming_state = "paw1"
+	going_state  = "paw2"
+	random_icon_states = null
+	amount = 0
+
+/obj/effect/decal/cleanable/blood/tracks/claw
+	name = "wet tracks"
+	dryname = "dried tracks"
+	desc = "They look like still wet tracks left by a reptile."
+	drydesc = "They look like dried tracks left by a reptile."
+	coming_state = "claw1"
+	going_state  = "claw2"
+	random_icon_states = null
 	amount = 0
 
 /obj/effect/decal/cleanable/blood/tracks/wheels
 	name = "wet tracks"
 	dryname = "dried tracks"
-	desc = "Whoops..."
-	drydesc = "Whoops..."
+	desc = "They look like still wet tracks left by wheels."
+	drydesc = "They look like dried tracks left by wheels."
 	coming_state = "wheels"
 	going_state  = ""
-	desc = "They look like tracks left by wheels."
 	gender = PLURAL
 	random_icon_states = null
 	amount = 0

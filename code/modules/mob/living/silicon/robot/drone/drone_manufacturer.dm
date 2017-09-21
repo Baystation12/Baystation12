@@ -71,19 +71,20 @@
 	if(!produce_drones || !config.allow_drone_spawn || count_drones() >= config.max_maint_drones)
 		return
 
-	if(!player || !isghost(player.mob))
+	if(player && !isghost(player.mob))
 		return
 
-	announce_ghost_joinleave(player, 0, "They have taken control over a maintenance drone.")
 	visible_message("\The [src] churns and grinds as it lurches into motion, disgorging a shiny new drone after a few moments.")
 	flick("h_lathe_leave",src)
-
-	time_last_drone = world.time
-	if(player.mob && player.mob.mind) player.mob.mind.reset()
-	var/mob/living/silicon/robot/drone/new_drone = new drone_type(get_turf(src))
-	new_drone.transfer_personality(player)
-
 	drone_progress = 0
+	time_last_drone = world.time
+
+	var/mob/living/silicon/robot/drone/new_drone = new drone_type(get_turf(src))
+	if(player)
+		announce_ghost_joinleave(player, 0, "They have taken control over a maintenance drone.")
+		if(player.mob && player.mob.mind) player.mob.mind.reset()
+		new_drone.transfer_personality(player)
+
 	return new_drone
 
 /mob/observer/ghost/verb/join_as_drone()

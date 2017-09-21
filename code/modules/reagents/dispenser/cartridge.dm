@@ -15,10 +15,10 @@
 	var/label = ""
 
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/New()
-	..()
+	. = ..()
 	if(spawn_reagent)
 		reagents.add_reagent(spawn_reagent, volume)
-		var/datum/reagent/R = chemical_reagents_list[spawn_reagent]
+		var/datum/reagent/R = GLOB.chemical_reagents_list[spawn_reagent]
 		setLabel(R.name)
 
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/examine(mob/user)

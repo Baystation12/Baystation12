@@ -11,8 +11,8 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/analyzer,/obj/item/device/radio,/obj/item/taperoll)
-	valid_accessory_slots = list("armband","medal")
-	restricted_accessory_slots = list("armband")
+	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
 /obj/item/clothing/suit/storage/service/expeditionary
 	name = "expeditionary jacket"
@@ -61,6 +61,18 @@
 	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and red trim."
 	icon_state = "blackservice_seccom"
 	item_state = "blackservice_seccom"
+
+/obj/item/clothing/suit/storage/service/expeditionary/service
+	name = "expeditionary service jacket"
+	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons and green trim."
+	icon_state = "blackservice_srv"
+	item_state = "blackservice_srv"
+
+/obj/item/clothing/suit/storage/service/expeditionary/service/command
+	name = "expeditionary service command jacket"
+	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and green trim."
+	icon_state = "blackservice_srvcom"
+	item_state = "blackservice_srvcom"
 
 /obj/item/clothing/suit/storage/service/expeditionary/command
 	name = "expeditionary command jacket"
@@ -117,6 +129,18 @@
 	icon_state = "greenservice_seccom"
 	item_state = "greenservice_seccom"
 
+/obj/item/clothing/suit/storage/service/marine/service
+	name = "marine service jacket"
+	desc = "An SCG Marine Corps service coat. This one has green markings."
+	icon_state = "greenservice_srv"
+	item_state = "greenservice_srv"
+
+/obj/item/clothing/suit/storage/service/marine/seervice/command
+	name = "marine service command jacket"
+	desc = "An SCG Marine Corps service coat. This one has green and gold markings."
+	icon_state = "greenservice_srvcom"
+	item_state = "greenservice_srvcom"
+
 /obj/item/clothing/suit/storage/service/marine/command
 	name = "marine command jacket"
 	desc = "An SCG Marine Corps service coat. This one has gold markings."
@@ -134,7 +158,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/device/radio,/obj/item/weapon/pen)
-	valid_accessory_slots = list("medal")
+	valid_accessory_slots = list(ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/dress/expedition
 	name = "expeditionary dress jacket"
@@ -156,7 +180,7 @@
 	icon_open = "whitedress_open"
 	icon_closed = "whitedress"
 	blood_overlay_type = "coat"
-	valid_accessory_slots = list("medal")
+	valid_accessory_slots = list(ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/storage/toggle/dress/fleet
 	name = "fleet dress jacket"
@@ -193,3 +217,4 @@
 	icon_open = "marshal_jacket_open"
 	icon_closed = "marshal_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)

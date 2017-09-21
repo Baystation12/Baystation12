@@ -453,8 +453,8 @@
 	layer = is_full_window() ? FULL_WINDOW_LAYER : SIDE_WINDOW_LAYER
 
 /obj/structure/window/reinforced/full
-    dir = 5
-    icon_state = "fwindow"
+	dir = 5
+	icon_state = "fwindow"
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"

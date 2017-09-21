@@ -138,6 +138,9 @@
 
 /mob/proc/movement_delay()
 	. = 0
+	if(istype(loc, /turf))
+		var/turf/T = loc
+		. += T.movement_delay
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
@@ -252,7 +255,7 @@
 	var/obj/P = new /obj/effect/decal/point(tile)
 	P.pixel_x = A.pixel_x
 	P.pixel_y = A.pixel_y
-	P.invisibility = invisibility
+	P.set_invisibility(invisibility)
 	spawn (20)
 		if(P)
 			qdel(P)	// qdel
@@ -959,7 +962,7 @@ mob/proc/yank_out_object()
 
 	return 0
 
-/mob/proc/updateicon()
+/mob/update_icon()
 	return
 
 /mob/verb/face_direction()

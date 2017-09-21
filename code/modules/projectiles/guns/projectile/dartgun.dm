@@ -73,8 +73,8 @@
 			var/obj/B = new container_type(src)
 			B.reagents.add_reagent(chem, 60)
 			beakers += B
-		ADD_ICON_QUEUE(src)
 	. = ..()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/gun/projectile/dartgun/update_icon()
 	if(!ammo_magazine)
@@ -201,7 +201,7 @@
 	desc = "A small gas-powered dartgun, fitted for nonhuman hands."
 
 /obj/item/weapon/gun/projectile/dartgun/vox/medical
-	starting_chems = list("kelotane","bicaridine","anti_toxin")
+	starting_chems = list(/datum/reagent/kelotane,/datum/reagent/bicaridine,/datum/reagent/dylovene)
 
 /obj/item/weapon/gun/projectile/dartgun/vox/raider
-	starting_chems = list("space_drugs","stoxin","impedrezene")
+	starting_chems = list(/datum/reagent/space_drugs,/datum/reagent/soporific,/datum/reagent/impedrezene)

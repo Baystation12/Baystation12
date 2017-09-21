@@ -17,9 +17,9 @@
 	w_class = ITEM_SIZE_TINY
 
 /obj/item/clothing/mask/muzzle/New()
-    ..()
-    say_messages = list("Mmfph!", "Mmmf mrrfff!", "Mmmf mnnf!")
-    say_verbs = list("mumbles", "says")
+	..()
+	say_messages = list("Mmfph!", "Mmmf mrrfff!", "Mmmf mnnf!")
+	say_verbs = list("mumbles", "says")
 
 // Clumsy folks can't take the mask off themselves.
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user as mob)
@@ -122,10 +122,10 @@
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/mask/horsehead/New()
-    ..()
-    // The horse mask doesn't cause voice changes by default, the wizard spell changes the flag as necessary
-    say_messages = list("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
-    say_verbs = list("whinnies", "neighs", "says")
+	..()
+	// The horse mask doesn't cause voice changes by default, the wizard spell changes the flag as necessary
+	say_messages = list("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+	say_verbs = list("whinnies", "neighs", "says")
 
 
 /obj/item/clothing/mask/ai
@@ -221,6 +221,7 @@
 /obj/item/clothing/mask/rubber/species
 	name = "human mask"
 	desc = "A rubber human mask."
+	icon_state = "manmet"
 	var/species = SPECIES_HUMAN
 
 /obj/item/clothing/mask/rubber/species/New()
@@ -245,5 +246,13 @@
 /obj/item/clothing/mask/rubber/species/skrell
 	name = "skrell mask"
 	desc = "A rubber skrell mask."
-	icon_state = "skrelmet"
+	icon_state = "skrellmet"
 	species = SPECIES_SKRELL
+
+/obj/item/clothing/mask/spirit
+	name = "spirit mask"
+	desc = "An eerie mask of ancient, pitted wood."
+	icon_state = "spirit_mask"
+	item_state = "spirit_mask"
+	flags_inv = HIDEFACE
+	body_parts_covered = FACE|EYES

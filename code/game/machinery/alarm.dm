@@ -892,15 +892,13 @@ FIRE ALARM
 		if(!src.detecting)
 			icon_state = "fire1"
 			set_light(l_range = 4, l_power = 2, l_color = COLOR_RED)
-		else
+		else if(z in GLOB.using_map.contact_levels)
 			icon_state = "fire0"
-			switch(seclevel)
-				if("green")	set_light(l_range = 2, l_power = 0.5, l_color = COLOR_LIME)
-				if("blue")	set_light(l_range = 2, l_power = 0.5, l_color = "#1024A9")
-				if("red")	set_light(l_range = 4, l_power = 2, l_color = COLOR_RED)
-				if("delta")	set_light(l_range = 4, l_power = 2, l_color = "#FF6633")
+			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+			var/decl/security_level/sl = security_state.current_security_level
 
-		src.overlays += image('icons/obj/monitors.dmi', "overlay_[seclevel]")
+			set_light(sl.light_range, sl.light_power, sl.light_color_alarm)
+			src.overlays += image(sl.icon, sl.overlay_alarm)
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, temperature, volume)
 	if(src.detecting)
@@ -1011,7 +1009,9 @@ FIRE ALARM
 	user.set_machine(src)
 	var/d1
 	var/d2
-	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon) || isAdminGhost(user))
+
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
 		if (MyArea.fire)
 			d1 = text("<A href='?src=\ref[];reset=1'>Reset - Lockdown</A>", src)
 		else
@@ -1022,7 +1022,7 @@ FIRE ALARM
 			d2 = text("<A href='?src=\ref[];time=1'>Initiate Time Lock</A>", src)
 		var/second = round(src.time) % 60
 		var/minute = (round(src.time) - second) / 60
-		var/dat = "<HTML><HEAD></HEAD><BODY><TT><B>Fire alarm</B> [d1]\n<HR>The current alert level is: <b>[get_security_level()]</b><br><br>\nTimer System: [d2]<BR>\nTime Left: [(minute ? "[minute]:" : null)][second] <A href='?src=\ref[src];tp=-30'>-</A> <A href='?src=\ref[src];tp=-1'>-</A> <A href='?src=\ref[src];tp=1'>+</A> <A href='?src=\ref[src];tp=30'>+</A>\n</TT></BODY></HTML>"
+		var/dat = "<HTML><HEAD></HEAD><BODY><TT><B>Fire alarm</B> [d1]\n<HR>The current security level is <b>[security_state.current_security_level.name]</b><br><br>\nTimer System: [d2]<BR>\nTime Left: [(minute ? "[minute]:" : null)][second] <A href='?src=\ref[src];tp=-30'>-</A> <A href='?src=\ref[src];tp=-1'>-</A> <A href='?src=\ref[src];tp=1'>+</A> <A href='?src=\ref[src];tp=30'>+</A>\n</TT></BODY></HTML>"
 		user << browse(dat, "window=firealarm")
 		onclose(user, "firealarm")
 	else
@@ -1036,7 +1036,7 @@ FIRE ALARM
 			d2 = text("<A href='?src=\ref[];time=1'>[]</A>", src, stars("Initiate Time Lock"))
 		var/second = round(src.time) % 60
 		var/minute = (round(src.time) - second) / 60
-		var/dat = "<HTML><HEAD></HEAD><BODY><TT><B>[stars("Fire alarm")]</B> [d1]\n<HR><b>The current alert level is: [stars(get_security_level())]</b><br><br>\nTimer System: [d2]<BR>\nTime Left: [(minute ? text("[]:", minute) : null)][second] <A href='?src=\ref[src];tp=-30'>-</A> <A href='?src=\ref[src];tp=-1'>-</A> <A href='?src=\ref[src];tp=1'>+</A> <A href='?src=\ref[src];tp=30'>+</A>\n</TT></BODY></HTML>"
+		var/dat = "<HTML><HEAD></HEAD><BODY><TT><B>[stars("Fire alarm")]</B> [d1]\n<HR>The current security level is <b>[security_state.current_security_level.name]</b><br><br>\nTimer System: [d2]<BR>\nTime Left: [(minute ? text("[]:", minute) : null)][second] <A href='?src=\ref[src];tp=-30'>-</A> <A href='?src=\ref[src];tp=-1'>-</A> <A href='?src=\ref[src];tp=1'>+</A> <A href='?src=\ref[src];tp=30'>+</A>\n</TT></BODY></HTML>"
 		user << browse(dat, "window=firealarm")
 		onclose(user, "firealarm")
 	return
@@ -1104,15 +1104,10 @@ FIRE ALARM
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 		frame.transfer_fingerprints_to(src)
 
-/obj/machinery/firealarm/proc/set_security_level(var/newlevel)
-	if(seclevel != newlevel)
-		seclevel = newlevel
-		ADD_ICON_QUEUE(src)
-
 /obj/machinery/firealarm/Initialize()
 	. = ..()
 	if(z in GLOB.using_map.contact_levels)
-		set_security_level(security_level? get_security_level() : "green")
+		ADD_ICON_QUEUE(src)
 
 /*
 FIRE ALARM CIRCUIT

@@ -3,7 +3,6 @@
 	title = "Bartender"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -16,7 +15,6 @@
 	title = "Chef"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
@@ -30,7 +28,6 @@
 	title = "Gardener"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -45,7 +42,6 @@
 	title = "Quartermaster"
 	department = "Supply"
 	department_flag = SUP
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -62,7 +58,6 @@
 	title = "Cargo Technician"
 	department = "Supply"
 	department_flag = SUP
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the quartermaster and the head of personnel"
@@ -75,7 +70,6 @@
 	title = "Shaft Miner"
 	department = "Supply"
 	department_flag = SUP
-	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the quartermaster and the head of personnel"
@@ -91,7 +85,6 @@
 	title = "Janitor"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -106,7 +99,6 @@
 	title = "Librarian"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -120,7 +112,6 @@
 	title = "Internal Affairs Agent"
 	department = "Security"
 	department_flag = SEC
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "company officials and Corporate Regulations"
@@ -131,7 +122,6 @@
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
-	announced = 1
 
 /datum/job/lawyer/equip(var/mob/living/carbon/human/H)
 	. = ..()

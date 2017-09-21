@@ -11,13 +11,13 @@
 	var/retribution = 1 //whether or not they will attack us if we attack them like some kinda dick.
 
 /mob/living/simple_animal/hostile/commanded/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
-	if((speaker in friends) || speaker == master)
+	if((weakref(speaker) in friends) || speaker == master)
 		command_buffer.Add(speaker)
 		command_buffer.Add(lowertext(html_decode(message)))
 	return 0
 
 /mob/living/simple_animal/hostile/commanded/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
-	if((speaker in friends) || speaker == master)
+	if((weakref(speaker) in friends) || speaker == master)
 		command_buffer.Add(speaker)
 		command_buffer.Add(lowertext(html_decode(message)))
 	return 0
@@ -66,7 +66,7 @@
 			stance = new_stance
 			return A
 		else
-			if(M == master || (M in friends))
+			if(M == master || (weakref(M) in friends))
 				continue
 			stance = new_stance
 			return A
@@ -108,7 +108,7 @@
 	var/list/possible_targets = hearers(src,10)
 	. = list()
 	for(var/mob/M in possible_targets)
-		if(filter_friendlies && ((M in friends) || M.faction == faction || M == master))
+		if(filter_friendlies && ((weakref(M) in friends) || M.faction == faction || M == master))
 			continue
 		var/found = 0
 		if(findtext(text, "[M]"))
@@ -178,8 +178,8 @@
 		stance = HOSTILE_STANCE_ATTACK
 		target_mob = user
 		allowed_targets += user //fuck this guy in particular.
-		if(user in friends) //We were buds :'(
-			friends -= user
+		if(weakref(user) in friends) //We were buds :'(
+			friends -= weakref(user)
 
 
 /mob/living/simple_animal/hostile/commanded/attack_hand(mob/living/carbon/human/M as mob)
@@ -188,5 +188,5 @@
 		target_mob = M
 		allowed_targets += M
 		stance = HOSTILE_STANCE_ATTACK
-		if(M in friends)
-			friends -= M
+		if(weakref(M) in friends)
+			friends -= weakref(M)

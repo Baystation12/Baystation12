@@ -68,8 +68,8 @@
 				<b>Fuel:</b><br>
 				<table><tr><th><b>Name</b></th><th><b>Amount</b></th></tr>
 			"}
-			for(var/reagent in cur_viewed_device.owned_field.dormant_reactant_quantities)
-				dat += "<tr><td>[reagent]</td><td>[cur_viewed_device.owned_field.dormant_reactant_quantities[reagent]]</td></tr>"
+			for(var/reagent in cur_viewed_device.owned_field.reactants)
+				dat += "<tr><td>[reagent]</td><td>[cur_viewed_device.owned_field.reactants[reagent]]</td></tr>"
 			dat += "</table><hr>"
 
 	else

@@ -24,11 +24,11 @@ proc/createRandomZlevel()
 	//	var/value = null
 
 		if (pos)
-            // No, don't do lowertext here, that breaks paths on linux
+			// No, don't do lowertext here, that breaks paths on linux
 			name = copytext(t, 1, pos)
 		//	value = copytext(t, pos + 1)
 		else
-            // No, don't do lowertext here, that breaks paths on linux
+			// No, don't do lowertext here, that breaks paths on linux
 			name = t
 
 		if (!name)

@@ -312,6 +312,9 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if (affected == null)
 		return 0
+	if (affected.open())
+		to_chat(user,"<span class='warning'>You can't get a clean cut with incisions getting in the way.</span>")
+		return SURGERY_FAILURE
 	return !affected.cannot_amputate
 
 /datum/surgery_step/generic/amputate/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
