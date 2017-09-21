@@ -104,8 +104,8 @@
 	var/aw_delam = FALSE
 	var/aw_EPR = FALSE
 
-/obj/machinery/power/supermatter/New()
-	..()
+/obj/machinery/power/supermatter/Initialize()
+	. = ..()
 	uid = gl_uid++
 
 /obj/machinery/power/supermatter/proc/handle_admin_warnings()
@@ -496,6 +496,7 @@
 /proc/supermatter_pull(var/atom/target, var/pull_range = 255, var/pull_power = STAGE_FIVE)
 	for(var/atom/A in range(pull_range, target))
 		A.singularity_pull(target, pull_power)
+		CHECK_TICK
 
 /obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow
 	return

@@ -209,9 +209,8 @@ var/global/list/light_type_cache = list()
 	update(0)
 
 /obj/machinery/light/Destroy()
-	var/area/A = get_area(src)
 	QDEL_NULL(s)
-	if(A)
+	if(MyArea)
 		on = 0
 //		A.update_lights()
 	. = ..()
@@ -234,7 +233,6 @@ var/global/list/light_type_cache = list()
 
 // update lighting
 /obj/machinery/light/proc/update(var/trigger = 1)
-	update_icon()
 	if(on)
 		use_power = 2
 
@@ -246,9 +244,11 @@ var/global/list/light_type_cache = list()
 
 		if(trigger && changed)
 			switch_check()
+			ADD_ICON_QUEUE(src)
 	else
 		use_power = 0
 		set_light(0)
+		ADD_ICON_QUEUE(src)
 
 	active_power_usage = ((light_range * light_power) * LIGHTING_POWER_FACTOR)
 
@@ -416,8 +416,8 @@ var/global/list/light_type_cache = list()
 // returns whether this light has power
 // true if area has power and lightswitch is on
 /obj/machinery/light/powered()
-	var/area/A = get_area(src)
-	return A && A.lightswitch && ..(power_channel)
+	if(MyArea)
+		return MyArea.lightswitch && ..(power_channel)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return
@@ -674,7 +674,8 @@ obj/machinery/light/proc/burn_out()
 		brightness_power = fixture.brightness_power
 		brightness_color = fixture.brightness_color
 		lighting_modes = fixture.lighting_modes.Copy()
-	update_icon()
+	spawn(5)
+		ADD_ICON_QUEUE(src)
 
 
 // attack bulb/tube with object

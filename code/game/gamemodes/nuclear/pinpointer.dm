@@ -44,7 +44,7 @@
 
 	examine(mob/user)
 		. = ..(user)
-		for(var/obj/machinery/nuclearbomb/bomb in world)
+		for(var/obj/machinery/nuclearbomb/bomb in GLOB.machines)
 			if(bomb.timing)
 				to_chat(user, "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]")
 

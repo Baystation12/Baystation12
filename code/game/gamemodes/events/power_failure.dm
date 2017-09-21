@@ -21,7 +21,7 @@
 	for(var/obj/machinery/power/smes/S in GLOB.machines)
 		S.failure_timer = 0
 		S.charge = S.capacity
-		S.update_icon()
+		ADD_ICON_QUEUE(S)
 		S.power_change()
 
 /proc/power_restore_quick(var/announce = 1)
@@ -34,5 +34,5 @@
 		S.output_level = S.output_level_max
 		S.output_attempt = 1
 		S.input_attempt = 1
-		S.update_icon()
+		ADD_ICON_QUEUE(S)
 		S.power_change()

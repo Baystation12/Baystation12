@@ -70,6 +70,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                 {{:helper.link('Messenger', data.new_Message ? 'mail-closed' : 'mail-open', {'choice' : "2"}, null, 'fixedLeftWide')}}
                 {{:helper.link('Crew Manifest', 'contact', {'choice' : "41"}, null, 'fixedLeftWide')}}
 				{{:helper.link('News', data.new_News ? 'mail-closed' : 'mail-open', {'choice' : "6"}, null, 'fixedLeftWide')}}
+				{{:helper.link('NT Profile', 'ntprofile', {'choice' : "31"}, null, 'fixedLeftWide')}}
             </div>
         </div>
         <br>
@@ -294,6 +295,43 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
         {{:helper.link('Reply', 'comment', {'choice' : "Message", 'target': data.active_conversation}, null, 'fixedLeft')}}
 
 
+	{{else data.mode == 31}} <!-- NT Profile -->
+		<h2>NanoTrasen Employee Profile</h2>
+        <div class="statusDisplayProfile">
+            <div class="item">
+                <div class="itemLabel">
+                    <b>Basic Employee Information:</b>
+                </div>
+                <div class = "itemContent">
+				    <span class="average">Name: {{:data.ntprofile.name}}</span><br>
+					<span class="average">Occupation: {{:data.ntprofile.job}}</span><br>
+					<span class="average">Department: {{:data.ntprofile.department}}</span><br>
+					<span class="average">Department Rank: {{:data.ntprofile.deptrank}}</span><br>
+                </div>
+                <div class="itemLabel">
+                    <b>Contract Information:</b>
+                </div>
+                <div class = "itemContent">
+					{{if data.ntprofile.permadeath == 1}}
+						<span class="average">Contract Type: External (Uninsured)</span><br>
+						<span class="average">Neural Laces: {{:data.ntprofile.neurallaces}}</span><br>
+						<span class="average">{{:helper.link('Buy Neural Lace $2,500', 'star', {'choice' : "Neurallace"}, null)}}</span><br>
+					{{/if}}
+					<span class="average">Contract Type: Life-Time (NT-Insured)</span><br>
+					<span class="average">Base hourly rate: {{:data.ntprofile.basepay}}</span><br>
+					<span class="average">Approximate gross income: {{:data.ntprofile.paycheck}}</span><br>
+					<span class="average">Recommendations: {{:data.ntprofile.recommendations}}</span><br>
+				</div>
+                <div class="itemLabel">
+                    <b>Financial Information:</b>
+                </div>
+                <div class = "itemContent">
+				    <span class="average">Banking Balance: {{:data.ntprofile.bank}}</span><br>
+					<span class="average">Pension Account: {{:data.ntprofile.pension}}</span>
+                </div>
+            </div>
+        </div>
+		
 	{{else data.mode== 41}} <!-- Manifest uses cached data so we only use nanowriter when shit changes.-->
 	    <div class="item">
             <center><table class="pmon"><tbody>

@@ -113,10 +113,22 @@ Class Procs:
 	var/panel_open = 0
 	var/global/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
+	var/area/MyArea
+
+#define SETAREA(byond)            \
+	if(byond.loc && isarea(byond.loc.loc) && byond.anchored)     \
+	{                             \
+		MyArea = byond.loc.loc    \
+	}                             \
+	else                          \
+	{                             \
+		MyArea = get_area(byond)  \
+	}
 	var/clicksound			// sound played on succesful interface use by a carbon lifeform
 	var/clickvol = 40		// sound played on succesful interface use
 
 /obj/machinery/New(l, d=0)
+	SETAREA(src) // Must be done ASAP.
 	..(l)
 	if(d)
 		set_dir(d)
@@ -128,6 +140,9 @@ Class Procs:
 
 /obj/machinery/Destroy()
 	GLOB.machines -= src
+	if(MyArea && MyArea.machinecache)
+		MyArea.machinecache -= src
+	MyArea = null
 	if(component_parts)
 		for(var/atom/A in component_parts)
 			if(A.loc == src) // If the components are inside the machine, delete them.
@@ -183,10 +198,23 @@ Class Procs:
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
 		return 0
-	if(src.use_power == 1)
-		use_power(idle_power_usage,power_channel, 1)
-	else if(src.use_power >= 2)
-		use_power(active_power_usage,power_channel, 1)
+	switch(use_power)
+		if(1)
+			switch(power_channel)
+				if(EQUIP)
+					MyArea.used_equip += idle_power_usage
+				if(LIGHT)
+					MyArea.used_light += idle_power_usage
+				if(ENVIRON)
+					MyArea.used_environ += idle_power_usage
+		if(2)
+			switch(power_channel)
+				if(EQUIP)
+					MyArea.used_equip += active_power_usage
+				if(LIGHT)
+					MyArea.used_light += active_power_usage
+				if(ENVIRON)
+					MyArea.used_environ += active_power_usage
 	return 1
 
 /proc/is_operable(var/obj/machinery/M, var/mob/user)
@@ -226,6 +254,8 @@ Class Procs:
 		return src.attack_hand(user)
 
 /obj/machinery/attack_hand(mob/user as mob)
+	if(isAdminGhost(usr))
+		return ..()
 	if(inoperable(MAINT))
 		return 1
 	if(user.lying || user.stat)
@@ -279,9 +309,8 @@ Class Procs:
 	s.set_up(5, 1, src)
 	s.start()
 	if(electrocute_mob(user, get_area(src), src, 0.7))
-		var/area/temp_area = get_area(src)
-		if(temp_area)
-			var/obj/machinery/power/apc/temp_apc = temp_area.get_apc()
+		if(MyArea)
+			var/obj/machinery/power/apc/temp_apc = MyArea.get_apc()
 
 			if(temp_apc && temp_apc.terminal && temp_apc.terminal.powernet)
 				temp_apc.terminal.powernet.trigger_warning()

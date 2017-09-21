@@ -8,11 +8,10 @@
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/weapon/implant/imp = null
 
-/obj/item/weapon/implanter/New()
+/obj/item/weapon/implanter/Initialize()
 	if(ispath(imp))
 		imp = new imp(src)
-	..()
-	update_icon()
+	. = ..()
 
 /obj/item/weapon/implanter/update_icon()
 	if (imp)

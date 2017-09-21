@@ -113,7 +113,7 @@
 /obj/machinery/particle_accelerator/control_box/proc/strength_change()
 	for(var/obj/structure/particle_accelerator/part in connected_parts)
 		part.strength = strength
-		part.update_icon()
+		ADD_ICON_QUEUE(part)
 
 /obj/machinery/particle_accelerator/control_box/proc/add_strength(var/s)
 	if(assembled)

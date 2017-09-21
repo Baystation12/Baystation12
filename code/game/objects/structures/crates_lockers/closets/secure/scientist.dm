@@ -29,6 +29,7 @@
 	icon_broken = "secureresbroken"
 	icon_off = "secureresoff"
 
+<<<<<<< HEAD
 /obj/structure/closet/secure_closet/xenobio/WillContain()
 	return list(
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger/tox, /obj/item/weapon/storage/backpack/satchel_tox)),

@@ -173,12 +173,18 @@
 	if(!id)
 		id = newid
 	update_icon()
+	button_machines.Add(src)
 
 	spawn(5)		// allow map load
 		conveyors = list()
 		for(var/obj/machinery/conveyor/C in world)
 			if(C.id == id)
 				conveyors += C
+
+
+/obj/machinery/conveyor_switch/Destroy()
+	button_machines.Remove(src)
+	. = ..()
 
 // update the icon depending on the position
 
@@ -224,7 +230,7 @@
 	update_icon()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in button_machines)
 		if(S.id == src.id)
 			S.position = position
 			S.update_icon()
@@ -253,7 +259,7 @@
 	update_icon()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in button_machines)
 		if(S.id == src.id)
 			S.position = position
 			S.update_icon()
@@ -303,8 +309,8 @@
 	w_class = ITEM_SIZE_HUGE
 	var/id = "" //inherited by the switch
 
-/obj/item/conveyor_switch_construct/New()
-	..()
+/obj/item/conveyor_switch_construct/Initialize()
+	. = ..()
 	id = rand() //this couldn't possibly go wrong
 
 /obj/item/conveyor_switch_construct/afterattack(atom/A, mob/user, proximity)

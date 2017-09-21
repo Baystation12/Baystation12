@@ -7,8 +7,9 @@
 	var/stored_charge = 0
 	var/effect_id = ""
 
-/obj/item/weapon/anobattery/New()
+/obj/item/weapon/anobattery/Initialize()
 	battery_effect = new()
+	. = ..()
 
 /obj/item/weapon/anobattery/proc/UpdateSprite()
 	var/p = (stored_charge/capacity)*100
@@ -32,8 +33,8 @@
 	var/turf/archived_loc
 	var/energy_consumed_on_touch = 100
 
-/obj/item/weapon/anodevice/New()
-	..()
+/obj/item/weapon/anodevice/Initialize()
+	. = ..()
 	GLOB.processing_objects.Add(src)
 
 /obj/item/weapon/anodevice/attackby(var/obj/I as obj, var/mob/user as mob)

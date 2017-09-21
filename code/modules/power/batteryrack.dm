@@ -183,7 +183,7 @@
 
 	// Don't update icon too much, prevents unnecessary processing.
 	if(icon_update >= 10)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	// Try to balance charge between stored cells. Capped at max_transfer_rate per tick.
 	// Take power from most charged cell, and give it to least charged cell.
 	if(equalise)
@@ -301,7 +301,7 @@
 
 		C.forceMove(get_turf(src))
 		internal_cells -= C
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		RefreshParts()
 		update_maxcharge()
 		return 1

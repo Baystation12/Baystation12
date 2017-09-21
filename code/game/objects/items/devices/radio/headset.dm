@@ -19,6 +19,8 @@
 
 /obj/item/device/radio/headset/Initialize()
 	. = ..()
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/ears.dmi')
+
 	internal_channels.Cut()
 	if(ks1type)
 		keyslot1 = new ks1type(src)

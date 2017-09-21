@@ -1,5 +1,17 @@
 //Refreshes the icon and sets the luminosity
 /obj/machinery/portable_atmospherics/hydroponics/update_icon()
+	if (!status_overlays)
+		status_overlays = new/list()
+
+		status_overlays.len = 6
+
+		status_overlays[1] = image(icon, "over_lowhealth3")    // 0=blue 1=red
+		status_overlays[2] = image(icon, "hydrocover")
+		status_overlays[3] = image(icon, "over_lowwater3")
+		status_overlays[4] = image(icon, "over_lownutri3")
+		status_overlays[5] = image(icon, "over_alert3")
+		status_overlays[6] = image(icon, "over_harvest3")
+
 	// Update name.
 	if(seed)
 		if(mechanical)
@@ -12,12 +24,12 @@
 	if(labelled)
 		name += " ([labelled])"
 
-	overlays.Cut()
+	overlays.Cut() // GC is easier on CPU right?
 	// Updates the plant overlay.
 	if(!isnull(seed))
 
 		if(mechanical && health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
-			overlays += "over_lowhealth3"
+			overlays += status_overlays[1]
 
 		if(dead)
 			var/ikey = "[seed.get_trait(TRAIT_PLANT_ICON)]-dead"
@@ -60,18 +72,18 @@
 
 	//Draw the cover.
 	if(closed_system)
-		overlays += "hydrocover"
+		overlays += status_overlays[2]
 
 	//Updated the various alert icons.
 	if(mechanical)
 		if(waterlevel <= 10)
-			overlays += "over_lowwater3"
+			overlays += status_overlays[3]
 		if(nutrilevel <= 2)
-			overlays += "over_lownutri3"
+			overlays += status_overlays[4]
 		if(weedlevel >= 5 || pestlevel >= 5 || toxins >= 40)
-			overlays += "over_alert3"
+			overlays += status_overlays[5]
 		if(harvest)
-			overlays += "over_harvest3"
+			overlays += status_overlays[6]
 
 	// Update bioluminescence.
 	if(seed)

@@ -26,6 +26,9 @@
 	if(!(remoter && remoter_state))	// The remoter is gone, let us leave
 		return STATUS_CLOSE
 
+	if(isAdminGhost(user))
+		return STATUS_INTERACTIVE
+
 	if(src_object != remote_target)
 		error("remote - Unexpected src_object: Expected '[remote_target]'/[remote_target.type], was '[src_object]'/[src_object.type]")
 

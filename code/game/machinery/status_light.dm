@@ -11,7 +11,7 @@
 
 /obj/machinery/status_light/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	radio_connection = register_radio(src, frequency, frequency, RADIO_ATMOSIA)
 
 
@@ -33,5 +33,5 @@
 	else
 		alert = 2
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return

@@ -69,12 +69,11 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			//Messages having theese tokens will be rejected by server. Case sensitive
 	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
 
-/obj/machinery/message_server/New()
+/obj/machinery/message_server/Initialize()
 	message_servers += src
 	decryptkey = GenerateKey()
 	send_pda_message("System Administrator", "system", "This is an automated message. The messaging system is functioning correctly.")
-	..()
-	return
+	. = ..()
 
 /obj/machinery/message_server/Destroy()
 	message_servers -= src
@@ -85,14 +84,14 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
 		power_failure = 10
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	else if(stat & (BROKEN|NOPOWER))
 		return
 	else if(power_failure > 0)
 		if(!(--power_failure))
 			active = 1
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/message_server/proc/send_pda_message(var/recipient = "",var/sender = "",var/message = "")
 	var/result
@@ -246,7 +245,8 @@ var/obj/machinery/blackbox_recorder/blackbox
 	var/list/datum/feedback_variable/feedback = new()
 
 	//Only one can exist in the world!
-/obj/machinery/blackbox_recorder/New()
+/obj/machinery/blackbox_recorder/Initialize()
+	. = ..()
 	if(blackbox)
 		if(istype(blackbox,/obj/machinery/blackbox_recorder))
 			qdel(src)
@@ -319,6 +319,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 //This proc is only to be called at round end.
 /obj/machinery/blackbox_recorder/proc/save_all_data_to_sql()
 	if(!feedback) return
+	return //No SQL, piss off.
 
 	round_end_data_gathering() //round_end time logging and some other data processing
 	establish_db_connection()

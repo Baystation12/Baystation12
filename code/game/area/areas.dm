@@ -6,6 +6,7 @@
 /area
 	var/global/global_uid = 0
 	var/uid
+	var/machinecache
 
 /area/New()
 	icon_state = ""
@@ -21,6 +22,7 @@
 	else
 		luminosity = 1
 
+	all_areas |= src
 	..()
 
 /area/Initialize()
@@ -30,9 +32,15 @@
 		power_equip = 0
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
+	initmachinelist()
 
 /area/proc/get_contents()
 	return contents
+
+/area/proc/initmachinelist()
+	machinecache = list()
+	for(var/obj/machinery/M in src)	// for each machine in the area
+		machinecache += M
 
 /area/proc/get_cameras()
 	var/list/cameras = list()
@@ -138,37 +146,14 @@
 		update_icon()
 	return
 
-/area/proc/partyalert()
-	if (!( party ))
-		party = 1
-		update_icon()
-		mouse_opacity = 0
-	return
-
-/area/proc/partyreset()
-	if (party)
-		party = 0
-		mouse_opacity = 0
-		update_icon()
-		for(var/obj/machinery/door/firedoor/D in src)
-			if(!D.blocked)
-				if(D.operating)
-					D.nextstate = FIREDOOR_OPEN
-				else if(D.density)
-					spawn(0)
-					D.open()
-	return
-
 /area/update_icon()
-	if ((fire || eject || party) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
-		if(fire && !eject && !party)
+	if ((fire || eject) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
+		if(fire && !eject)
 			icon_state = "blue"
 		/*else if(atmosalm && !fire && !eject && !party)
 			icon_state = "bluenew"*/
-		else if(!fire && eject && !party)
+		else if(!fire && eject)
 			icon_state = "red"
-		else if(party && !fire && !eject)
-			icon_state = "party"
 		else
 			icon_state = "blue-red"
 	else
@@ -199,10 +184,11 @@
 
 // called when power status changes
 /area/proc/power_change()
-	for(var/obj/machinery/M in src)	// for each machine in the area
-		M.power_change()			// reverify power status (to update icons etc.)
-	if (fire || eject || party)
-		update_icon()
+	for(var/M in machinecache)	// for each machine in the area
+		var/obj/machinery/MA = M
+		MA.power_change()			// reverify power status (to update icons etc.)
+	if (fire || eject)
+		updateicon()
 
 /area/proc/usage(var/chan)
 	var/used = 0
@@ -238,7 +224,7 @@
 		power_change()
 
 /area/proc/set_emergency_lighting(var/enable)
-	for(var/obj/machinery/light/M in src)
+	for(var/obj/machinery/light/M in machinecache)
 		M.set_emergency_lighting(enable)
 
 
@@ -275,7 +261,7 @@ var/list/mob/living/forced_ambiance_list = new
 	var/turf/T = get_turf(L)
 	var/hum = 0
 	if(!L.ear_deaf)
-		for(var/obj/machinery/atmospherics/unary/vent_pump/vent in src)
+		for(var/obj/machinery/atmospherics/unary/vent_pump/vent in machinecache)
 			if(vent.can_pump())
 				hum = 1
 				break
@@ -329,11 +315,11 @@ var/list/mob/living/forced_ambiance_list = new
 /area/proc/prison_break()
 	var/obj/machinery/power/apc/theAPC = get_apc()
 	if(theAPC && theAPC.operating)
-		for(var/obj/machinery/power/apc/temp_apc in src)
+		for(var/obj/machinery/power/apc/temp_apc in machinecache)
 			temp_apc.overload_lighting(70)
-		for(var/obj/machinery/door/airlock/temp_airlock in src)
+		for(var/obj/machinery/door/airlock/temp_airlock in machinecache)
 			temp_airlock.prison_open()
-		for(var/obj/machinery/door/window/temp_windoor in src)
+		for(var/obj/machinery/door/window/temp_windoor in machinecache)
 			temp_windoor.open()
 
 /area/proc/has_gravity()

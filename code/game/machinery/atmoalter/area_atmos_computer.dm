@@ -113,7 +113,7 @@
 				return
 
 			scrubber.on = text2num(href_list["toggle"])
-			scrubber.update_icon()
+			ADD_ICON_QUEUE(scrubber)
 
 	proc/validscrubber( var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber as obj )
 		if(!isobj(scrubber) || get_dist(scrubber.loc, src.loc) > src.range || scrubber.loc.z != src.loc.z)
@@ -167,7 +167,7 @@
 		var/turf/T = get_turf(src)
 		if(!T.loc) return
 		var/area/A = T.loc
-		for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in world )
+		for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in GLOB.machines)
 			var/turf/T2 = get_turf(scrubber)
 			if(T2 && T2.loc)
 				var/area/A2 = T2.loc

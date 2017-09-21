@@ -198,6 +198,7 @@
 	. = ..()
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
+	button_machines.Add(src)
 
 /obj/structure/crematorium/Destroy()
 	if(connected)
@@ -206,6 +207,7 @@
 	if(wifi_receiver)
 		qdel(wifi_receiver)
 		wifi_receiver = null
+	button_machines.Remove(src)
 	return ..()
 
 /obj/structure/crematorium/proc/update()
@@ -418,14 +420,11 @@
 	req_access = list(access_crematorium)
 	id = 1
 
-/obj/machinery/button/crematorium/update_icon()
-	return
-
 /obj/machinery/button/crematorium/attack_hand(mob/user as mob)
 	if(..())
 		return
 	if(src.allowed(user))
-		for (var/obj/structure/crematorium/C in world)
+		for (var/obj/structure/crematorium/C in button_machines)
 			if (C.id == id)
 				if (!C.cremating)
 					C.cremate(user)

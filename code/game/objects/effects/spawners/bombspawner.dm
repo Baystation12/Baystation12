@@ -158,7 +158,7 @@
 	..()
 
 /obj/effect/spawner/newbomb/Initialize()
-	..()
+	. = ..()
 	var/obj/item/device/transfer_valve/V = new(src.loc)
 	var/obj/item/weapon/tank/phoron/PT = new(V)
 	var/obj/item/weapon/tank/oxygen/OT = new(V)
@@ -191,7 +191,7 @@
 	S.holder = V
 	S.toggle_secure()
 
-	V.update_icon()
+	ADD_ICON_QUEUE(V)
 	return INITIALIZE_HINT_QDEL
 
 ///////////////////////

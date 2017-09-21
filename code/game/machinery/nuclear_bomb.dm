@@ -24,8 +24,8 @@ var/bomb_set
 	var/previous_level = ""
 	var/datum/wires/nuclearbomb/wires = null
 
-/obj/machinery/nuclearbomb/New()
-	..()
+/obj/machinery/nuclearbomb/Initialize()
+	. = ..()
 	r_code = "[rand(10000, 99999.0)]"//Creates a random code upon object spawn.
 	wires = new/datum/wires/nuclearbomb(src)
 
@@ -408,7 +408,7 @@ var/bomb_set
 	for(var/turf/simulated/floor/T in trange(1, src))
 		T.set_flooring(get_flooring_data(/decl/flooring/reinforced/circuit/red))
 		flash_tiles += T
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/nuclearbomb/station/Destroy()
 	flash_tiles.Cut()

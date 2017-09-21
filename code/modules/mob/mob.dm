@@ -253,6 +253,8 @@
 		return 0
 
 	var/obj/P = new /obj/effect/decal/point(tile)
+	P.pixel_x = A.pixel_x
+	P.pixel_y = A.pixel_y
 	P.set_invisibility(invisibility)
 	spawn (20)
 		if(P)
@@ -415,28 +417,26 @@
 	var/list/namecounts = list()
 	var/list/creatures = list()
 
-	for(var/obj/O in world)				//EWWWWWWWWWWWWWWWWWWWWWWWW ~needs to be optimised
-		if(!O.loc)
-			continue
-		if(istype(O, /obj/item/weapon/disk/nuclear))
-			var/name = "Nuclear Disk"
-			if (names.Find(name))
-				namecounts[name]++
-				name = "[name] ([namecounts[name]])"
-			else
-				names.Add(name)
-				namecounts[name] = 1
-			creatures[name] = O
-
-		if(istype(O, /obj/singularity))
-			var/name = "Singularity"
-			if (names.Find(name))
-				namecounts[name]++
-				name = "[name] ([namecounts[name]])"
-			else
-				names.Add(name)
-				namecounts[name] = 1
-			creatures[name] = O
+	for(var/obj/item/weapon/disk/nuclear/O in nuke_disks)
+		if(!O.loc)	continue
+		var/name = "Nuclear Disk"
+		if (names.Find(name))
+			namecounts[name]++
+			name = "[name] ([namecounts[name]])"
+		else
+			names.Add(name)
+			namecounts[name] = 1
+		creatures[name] = O
+	for(var/obj/singularity/O in GLOB.processing_objects)
+		if(!O.loc)	continue
+		var/name = "Singularity"
+		if (names.Find(name))
+			namecounts[name]++
+			name = "[name] ([namecounts[name]])"
+		else
+			names.Add(name)
+			namecounts[name] = 1
+		creatures[name] = O
 
 	for(var/mob/M in sortAtom(GLOB.mob_list))
 		var/name = M.name
@@ -618,7 +618,7 @@
 
 /mob/Stat()
 	..()
-	. = (is_client_active(10 MINUTES))
+	. = (is_client_active(5 MINUTES))
 	if(!.)
 		return
 
@@ -627,8 +627,10 @@
 			stat("Local Time", stationtime2text())
 			stat("Local Date", stationdate2text())
 			stat("Round Duration", roundduration2text())
+			stat("CPU Status", cpustate)
 		if(client.holder || isghost(client.mob))
 			stat("Location:", "([x], [y], [z]) [loc]")
+			stat("Enf. Score:", "[enfmods.modscore]")
 
 	if(client.holder)
 		if(statpanel("Processes") && processScheduler)

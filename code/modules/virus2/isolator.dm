@@ -117,7 +117,7 @@
 				ping("\The [src] pings, \"Viral strain isolated.\"")
 
 			GLOB.nanomanager.update_uis(src)
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/disease2/isolator/Topic(href, href_list)
 	if (..()) return 1

@@ -8,8 +8,8 @@
 	icon_state = "crystal"
 
 
-/obj/machinery/crystal/New()
-	..()
+/obj/machinery/crystal/Initialize()
+	. = ..()
 	icon_state = pick("crystal", "crystal2", "crystal3")
 
 

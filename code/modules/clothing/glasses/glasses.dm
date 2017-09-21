@@ -65,6 +65,12 @@
 	desc = "Optical Meson Scanner with prescription lenses."
 	prescription = 6
 
+/obj/item/clothing/glasses/meson/monocle
+	name = "mesonocle"
+	desc = "Used for seeing walls, floors, and stuff through anything; all while keeping a classy look."
+	icon_state = "mesonocle"
+	off_state = "mesonocle_off"
+
 /obj/item/clothing/glasses/science
 	name = "Science Goggles"
 	desc = "The goggles do nothing!"

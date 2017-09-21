@@ -223,7 +223,7 @@ var/global/list/damage_icon_parts = list()
 			continue
 
 		O.update_damstate()
-		O.update_icon()
+		ADD_ICON_QUEUE(O)
 		if(O.damage_state == "00") continue
 		var/icon/DI
 		var/use_colour = ((O.robotic >= ORGAN_ROBOT) ? SYNTH_BLOOD_COLOUR : O.species.get_blood_colour(src))

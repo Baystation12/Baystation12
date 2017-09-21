@@ -18,7 +18,7 @@
 /obj/machinery/light_switch/Initialize()
 	. = ..()
 	if(other_area)
-		src.connected_area = locate(other_area)
+		src.connected_area = locate(other_area) in all_areas
 	else
 		src.connected_area = get_area(src)
 
@@ -56,7 +56,7 @@
 /obj/machinery/light_switch/proc/sync_state()
 	if(on != connected_area.lightswitch)
 		on = connected_area.lightswitch
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return 1
 
 /obj/machinery/light_switch/attack_hand(mob/user)

@@ -17,7 +17,7 @@
 	if(alarm)
 		alarm--
 		if(!alarm)
-			update_icon()
+			ADD_ICON_QUEUE(src)
 		return
 
 	if(!enabled)

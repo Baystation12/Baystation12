@@ -10,6 +10,7 @@
 	layer = ABOVE_WINDOW_LAYER
 	var/number = 0
 	var/last_tick //used to delay the powercheck
+	var/area/MyArea
 
 /obj/item/device/radio/intercom/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
@@ -52,6 +53,7 @@
 /obj/item/device/radio/intercom/New()
 	..()
 	GLOB.processing_objects += src
+	MyArea = get_area(src)
 
 /obj/item/device/radio/intercom/department/medbay/Initialize()
 	. = ..()
@@ -129,11 +131,10 @@
 		if(!src.loc)
 			on = 0
 		else
-			var/area/A = get_area(src)
-			if(!A)
+			if(!MyArea)
 				on = 0
 			else
-				on = A.powered(EQUIP) // set "on" to the power status
+				on = MyArea.powered(EQUIP) // set "on" to the power status
 
 		if(!on)
 			icon_state = "intercom-p"

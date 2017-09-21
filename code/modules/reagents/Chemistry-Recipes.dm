@@ -610,7 +610,7 @@
 
 /datum/chemical_reaction/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/location = get_turf(holder.my_atom.loc)
-	for(var/turf/simulated/floor/target_tile in range(0,location))
+	for(var/turf/simulated/floor/target_tile in trange(0,location))
 		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(700, 400)
 	holder.del_reagent("napalm")
@@ -1067,7 +1067,7 @@
 		return
 
 	var/turf/location = get_turf(holder.my_atom.loc)
-	for(var/turf/simulated/floor/target_tile in range(0, location))
+	for(var/turf/simulated/floor/target_tile in trange(0, location))
 		target_tile.assume_gas(/datum/reagent/toxin/phoron, 25, 1400)
 		spawn (0)
 			target_tile.hotspot_expose(700, 400)
@@ -1257,7 +1257,7 @@
 
 /datum/chemical_reaction/slime/teleport/on_reaction(var/datum/reagents/holder)
 	var/list/turfs = list()
-	for(var/turf/T in orange(holder.my_atom,6))
+	for(var/turf/T in otrange(6,holder.my_atom))
 		turfs += T
 	for(var/atom/movable/a in viewers(holder.my_atom,2))
 		if(!a.simulated)

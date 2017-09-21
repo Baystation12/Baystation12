@@ -50,6 +50,17 @@
 	while (left-- > 0)
 		. = "0[.]"
 
+/proc/dd_list2text(list/the_list, separator)
+	var/total = the_list.len
+	if (total == 0)														// Nothing to work with.
+		return
+
+	var/newText = "[the_list[1]]"										// Treats any object/number as text also.
+	var/count
+	for (count = 2, count <= total, count++)
+		if (separator) newText += separator
+		newText += "[the_list[count]]"
+	return newText
 
 /proc/text2numlist(text, delimiter="\n")
 	var/list/num_list = list()

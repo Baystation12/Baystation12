@@ -27,9 +27,17 @@
 
 /obj/item/clothing/shoes/magboots/rig/light
 	name = "shoes"
+	
+	sprite_sheets = list(
+		SPECIES_RESOMI = 'icons/mob/species/resomi/shoes.dmi'
+	)
 
 /obj/item/clothing/head/helmet/space/rig/light
 	name = "hood"
+	
+	sprite_sheets = list(
+		SPECIES_RESOMI = 'icons/mob/species/resomi/helmet.dmi'
+	)
 
 /obj/item/weapon/rig/light/hacker
 	name = "cybersuit control module"
@@ -80,7 +88,7 @@
 	siemens_coefficient = 0.2 //heavy hardsuit level shock protection
 	emp_protection = 40 //change this to 30 if too high.
 	online_slowdown = 0
-	aimove_power_usage = 50
+	aimove_power_usage = 50	
 	chest_type = /obj/item/clothing/suit/space/rig/light/ninja
 	glove_type = /obj/item/clothing/gloves/rig/light/ninja
 	cell_type =  /obj/item/weapon/cell/hyper
@@ -101,9 +109,13 @@
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/self_destruct
 		)
+	
+	sprite_sheets = list(
+		SPECIES_RESOMI = 'icons/mob/species/resomi/back.dmi'
+	)
 
 	..()
-
+	
 /obj/item/weapon/rig/light/ninja/verb/rename_suit()
 	set name = "Name Ninja Suit"
 	set desc = "Rename your black voidsuit."
@@ -119,8 +131,8 @@
 		to_chat(M, "Suit naming succesful!")
 		verbs -= /obj/item/weapon/rig/light/ninja/verb/rename_suit
 		return 1
-
-
+	
+	
 /obj/item/weapon/rig/light/ninja/verb/rewrite_suit_desc()
 	set name = "Describe Ninja suit"
 	set desc = "Give your voidsuit a custom description."
@@ -138,9 +150,17 @@
 /obj/item/clothing/gloves/rig/light/ninja
 	name = "insulated gloves"
 	siemens_coefficient = 0
+	
+	sprite_sheets = list(
+		SPECIES_RESOMI = 'icons/mob/species/resomi/gloves.dmi'
+	)
 
 /obj/item/clothing/suit/space/rig/light/ninja
 	breach_threshold = 38 //comparable to regular hardsuits
+	
+	sprite_sheets = list(
+		SPECIES_RESOMI = 'icons/mob/species/resomi/suit.dmi'
+	)
 
 /obj/item/weapon/rig/light/stealth
 	name = "stealth suit control module"

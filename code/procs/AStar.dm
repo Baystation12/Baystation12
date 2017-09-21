@@ -114,5 +114,5 @@ proc/AStar(var/start, var/end, var/proc/adjacent, var/proc/dist, var/max_nodes, 
 
 			if(max_nodes && open.Length() > max_nodes)
 				open.Remove(open.Length())
-
+		CHECK_TICK
 	return path

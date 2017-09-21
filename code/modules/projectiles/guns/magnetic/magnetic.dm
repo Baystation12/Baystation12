@@ -23,12 +23,8 @@
 /obj/item/weapon/gun/magnetic/Initialize()
 	if(capacitor)
 		power_per_tick = (power_cost*0.15) * capacitor.rating
-	update_icon()
-	. = ..()
-
-/obj/item/weapon/gun/magnetic/New()
-	..()
 	GLOB.processing_objects |= src
+	. = ..()
 
 /obj/item/weapon/gun/magnetic/Destroy()
 	QDEL_NULL(cell)
@@ -43,7 +39,7 @@
 				capacitor.charge(power_per_tick)
 		else
 			capacitor.use(capacitor.charge * 0.05)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/gun/magnetic/update_icon()
 	var/list/overlays_to_add = list()

@@ -52,7 +52,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 			qdel(src)
 			return
 
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 
 	process()
@@ -149,4 +149,4 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 			qdel(src)
 			return
 
-		update_icon()
+		ADD_ICON_QUEUE(src)

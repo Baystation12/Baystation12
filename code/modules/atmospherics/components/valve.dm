@@ -84,7 +84,7 @@
 	node1 = null
 	node2 = null
 
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/valve/proc/open()
 	if(open) return 0
@@ -170,7 +170,7 @@
 
 	build_network()
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update_underlays()
 
 	if(openDuringInit)

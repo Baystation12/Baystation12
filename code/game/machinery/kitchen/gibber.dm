@@ -51,7 +51,7 @@
 
 /obj/machinery/gibber/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/gibber/update_icon()
 	overlays.Cut()

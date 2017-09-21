@@ -315,7 +315,7 @@
 		if(dir_alerts != old_alerts)
 			changed = 1
 		if(changed)
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/door/firedoor/proc/latetoggle()
 	if(operating || !nextstate)

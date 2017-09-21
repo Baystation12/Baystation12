@@ -11,6 +11,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_ID | SLOT_BELT
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/id.dmi')
 
 	//Main variables
 	var/owner = null
@@ -47,6 +48,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/new_message = 0			//To remove hackish overlay check
 	var/new_news = 0
 	var/list/tempmessage = list() // Used to store message in memory if sending failed
+	var/list/ntprofilecache = list()
 
 	var/active_feed				// The selected feed
 	var/list/warrant			// The warrant as we last knew it
@@ -462,7 +464,27 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(mode==41)
 		GLOB.data_core.get_manifest_list()
 
-
+	if(mode==31)
+		if(!user || !user.client)	return
+		var/recommends = ""
+		for(var/T in user.client.prefs.recommendations)
+			recommends = "[T]\n"
+		var/datum/job/job = job_master.GetJob(user:job)
+		data["ntprofile"] = list(\
+			"name" = "[owner]",\
+			"department" = "[user.client.prefs.char_department]",\
+			"deptrank" = "[calculate_department_rank(user)]",\
+			"job" = "[user:job]",\
+			"basepay" = "[job.base_pay]",\
+			"bank" = "[user.client.prefs.bank_balance]",\
+			"paycheck" = "[calculate_paycheck(user)]",\
+			"pension" = "[user.client.prefs.pension_balance]",\
+			"activehours" = "[user.client.prefs.department_playtime / 3600]",\
+			"recommendations" = "[recommends]",\
+			"neurallaces" = "[user.client.prefs.neurallaces]",\
+			"permadeath" = "[user.client.prefs.permadeath]"\
+			)
+		ntprofilecache = data["ntprofile"] //Cacheing for saving unneeded shit?
 	if(mode==3)
 		var/turf/T = get_turf(user.loc)
 		if(!isnull(T))
@@ -670,6 +692,27 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				scanmode = 0
 			else if((!isnull(cartridge)) && (cartridge.access_atmos))
 				scanmode = 5
+//NT PROFILE FUNCTIONALITY===================================
+		if("Neurallace")
+			var/mob/living/carbon/human/M = usr
+			if(M && M.client && owner == M.name)
+				switch(alert("Would you like to buy a neural lace for $3,000?", "Buy Neural Lace", "Yes", "Abort"))
+					if("Yes")
+						if(M.client.prefs.bank_balance < 3000) //Insufficient in bank.
+							if((M.client.prefs.bank_balance+M.client.prefs.pension_balance) < 3000)
+								to_chat(M, "You do not have sufficient funds for this!.")
+								return
+							else
+								var/topay = (3000-M.client.prefs.bank_balance)
+								M.client.prefs.bank_balance -= (3000-topay)
+								M.client.prefs.pension_balance -= topay
+						else
+							M.client.prefs.bank_balance -= 3000
+						M.client.prefs.neurallaces++ //Buy neural lace.
+						M.client.prefs.save_character(1)
+					if("Abort")
+						to_chat(M, "Purchase Aborted.")
+						return
 
 //MESSENGER/NOTE FUNCTIONS===================================
 
@@ -784,7 +827,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if("Toggle Door")
 			if(cartridge && cartridge.access_remote_door)
-				for(var/obj/machinery/door/blast/M in world)
+				for(var/obj/machinery/door/blast/M in button_machines)
 					if(M.id == cartridge.remote_door_id)
 						if(M.density)
 							M.open()
@@ -862,11 +905,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if (mode == 2||mode == 21)//To clear message overlays.
 		new_message = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	if (mode == 6||mode == 61)//To clear news overlays.
 		new_news = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	if ((honkamt > 0) && (prob(60)))//For clown virus.
 		honkamt--
@@ -1055,7 +1098,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if(!news_silent)
 		new_news = 1
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/item/device/pda/ai/new_news(var/message)
 	// Do nothing
@@ -1069,7 +1112,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
 	new_message = 1
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
 	if(!istype(sending_unit))

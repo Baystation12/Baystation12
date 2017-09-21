@@ -323,7 +323,7 @@
 	var/turf/location = loc
 	. = ..()
 	for(var/obj/structure/window/W in orange(location, 1))
-		W.update_icon()
+		ADD_ICON_QUEUE(W)
 
 
 /obj/structure/window/Move()
@@ -348,9 +348,9 @@
 
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!
 /obj/structure/window/proc/update_nearby_icons()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	for(var/obj/structure/window/W in orange(src, 1))
-		W.update_icon()
+		ADD_ICON_QUEUE(W)
 
 //Updates the availabiliy of the rotation verbs
 /obj/structure/window/proc/update_verbs()

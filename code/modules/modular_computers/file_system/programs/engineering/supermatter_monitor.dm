@@ -20,7 +20,7 @@
 		ui_header = "smmon_[last_status].gif"
 		program_icon_state = "smmon_[last_status]"
 		if(istype(computer))
-			computer.update_icon()
+			ADD_ICON_QUEUE(computer)
 
 /datum/nano_module/supermatter_monitor
 	name = "Supermatter monitor"

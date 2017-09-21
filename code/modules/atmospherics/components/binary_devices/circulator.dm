@@ -59,7 +59,7 @@
 		else
 			recent_moles_transferred = 0
 
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return removed
 
 /obj/machinery/atmospherics/binary/circulator/proc/return_stored_energy()
@@ -69,10 +69,10 @@
 
 /obj/machinery/atmospherics/binary/circulator/process()
 	..()
-
-	if(last_worldtime_transfer < world.time - 50)
-		recent_moles_transferred = 0
-		update_icon()
+	if(anchored) //Only when in use.
+		if(last_worldtime_transfer < world.time - 50)
+			recent_moles_transferred = 0
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/binary/circulator/update_icon()
 	if(stat & (BROKEN|NOPOWER) || !anchored)

@@ -10,9 +10,8 @@
 	icon_off = "miningsecoff"
 	req_access = list(access_mining)
 
-/obj/structure/closet/secure_closet/miner/New()
-	..()
-	sleep(2)
+/obj/structure/closet/secure_closet/miner/Initialize()
+	. = ..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/industrial(src)
 	else

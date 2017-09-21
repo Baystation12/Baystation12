@@ -23,9 +23,9 @@
 	var/ideal_character_age = 30
 	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
 
-	var/account_allowed = 1               // Does this job type come with a station account?
-	var/economic_modifier = 2             // With how much does this job modify the initial account amount?
-
+	var/account_allowed = 1				  // Does this job type come with a station account?
+	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
+	var/base_pay = 12 					  // Always minimum wage at all times. Also base = 1 hr, paychecks calculate base * 4
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
 	var/loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
@@ -162,18 +162,12 @@
  *  branch_name - String key for the branch to check
  */
 /datum/job/proc/is_branch_allowed(var/branch_name)
-	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
+	if(!GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
 		return 1
-	if(branch_name == "None")
+	if(branch_name == "None" || !branch_name)
 		return 0
 
-	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
-
-	if(!branch)
-		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
-		return 0
-
-	if(is_type_in_list(branch, allowed_branches))
+	if(branch_name == department)
 		return 1
 	else
 		return 0

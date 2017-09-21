@@ -23,10 +23,9 @@
 	var/expandType = /obj/effect/blob
 	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
 
-/obj/effect/blob/New(loc)
+/obj/effect/blob/Initialize(loc)
 	health = maxHealth
-	update_icon()
-	return ..(loc)
+	return . = ..(loc)
 
 /obj/effect/blob/CanPass(var/atom/movable/mover, vra/turf/target, var/height = 0, var/air_group = 0)
 	if(air_group || height == 0)
@@ -54,11 +53,11 @@
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		qdel(src)
 	else
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/effect/blob/proc/regen()
 	health = min(health + regen_rate, maxHealth)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/effect/blob/proc/expand(var/turf/T)
 	if(istype(T, /turf/unsimulated/) || istype(T, /turf/space) || (istype(T, /turf/simulated/mineral) && T.density))

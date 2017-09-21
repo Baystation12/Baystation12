@@ -36,12 +36,13 @@ var/list/mining_floors = list()
 
 	has_resources = 1
 
-/turf/simulated/mineral/New()
+/turf/simulated/mineral/Initialize()
 	mining_walls += src
 	spawn(0)
 		MineralSpread()
 	spawn(2)
 		update_icon(1)
+	. = ..()
 
 /turf/simulated/mineral/Destroy()
 	mining_walls -= src
@@ -145,7 +146,7 @@ var/list/mining_floors = list()
 	ore_overlay = image('icons/obj/mining.dmi', "rock_[mineral.icon_tag]")
 	ore_overlay.appearance_flags = RESET_COLOR
 	ore_overlay.turf_decal_layerise()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 //Not even going to touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -264,7 +265,7 @@ var/list/mining_floors = list()
 				updateIcon = 1
 
 			if(updateIcon)
-				update_icon()
+				ADD_ICON_QUEUE(src)
 
 			//drop some rocks
 			next_rock += P.excavation_amount

@@ -93,7 +93,7 @@
 /obj/proc/updateUsrDialog()
 	if(in_use)
 		var/is_in_use = 0
-		var/list/nearby = viewers(1, src)
+		var/list/nearby = range(1, src)
 		for(var/mob/M in nearby)
 			if ((M.client && M.machine == src))
 				is_in_use = 1
@@ -117,9 +117,8 @@
 /obj/proc/updateDialog()
 	// Check that people are actually using the machine. If not, don't update anymore.
 	if(in_use)
-		var/list/nearby = viewers(1, src)
 		var/is_in_use = 0
-		for(var/mob/M in nearby)
+		for(var/mob/M in range(1, src))
 			if ((M.client && M.machine == src))
 				is_in_use = 1
 				src.interact(M)

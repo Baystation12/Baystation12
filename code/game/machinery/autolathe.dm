@@ -26,9 +26,9 @@
 	var/datum/wires/autolathe/wires = null
 
 
-/obj/machinery/autolathe/New()
+/obj/machinery/autolathe/Initialize()
 
-	..()
+	. = ..()
 	wires = new(src)
 	//Create parts for lathe.
 	component_parts = list()

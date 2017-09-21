@@ -175,7 +175,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	checkheat()
 
 	// Update the icon
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 	if(traffic > 0)
 		traffic -= netspeed

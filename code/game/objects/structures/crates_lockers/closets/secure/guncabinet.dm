@@ -11,7 +11,7 @@
 
 /obj/structure/closet/secure_closet/guncabinet/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/structure/closet/secure_closet/guncabinet/toggle()
 	..()

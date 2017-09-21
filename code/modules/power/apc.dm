@@ -194,7 +194,6 @@
 		operating = 0
 		name = "\improper [area.name] APC"
 		stat |= MAINT
-		src.update_icon()
 
 	..()
 
@@ -202,6 +201,7 @@
 	. = ..()
 	if(operating)
 		src.update()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/power/apc/Destroy()
 	src.update()
@@ -252,7 +252,7 @@
 		src.area = get_area_name(areastring)
 		name = "\improper [area.name] APC"
 	area.apc = src
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 	make_terminal()
 
@@ -392,10 +392,11 @@
 	if(stat & MAINT)
 		update_state |= UPDATE_MAINT
 	if(opened)
-		if(opened==1)
-			update_state |= UPDATE_OPENED1
-		if(opened==2)
-			update_state |= UPDATE_OPENED2
+		switch(opened)
+			if(1)
+				update_state |= UPDATE_OPENED1
+			if(2)
+				update_state |= UPDATE_OPENED2
 	else if(emagged || (hacker && !hacker.hacked_apcs_hidden) || failure_timer)
 		update_state |= UPDATE_BLUESCREEN
 	else if(wiresexposed)
@@ -410,34 +411,36 @@
 		if(locked)
 			update_overlay |= APC_UPOVERLAY_LOCKED
 
-		if(!charging)
-			update_overlay |= APC_UPOVERLAY_CHARGEING0
-		else if(charging == 1)
-			update_overlay |= APC_UPOVERLAY_CHARGEING1
-		else if(charging == 2)
-			update_overlay |= APC_UPOVERLAY_CHARGEING2
+		switch(charging)
+			if(0)
+				update_overlay |= APC_UPOVERLAY_CHARGEING0
+			if(1)
+				update_overlay |= APC_UPOVERLAY_CHARGEING1
+			if(2)
+				update_overlay |= APC_UPOVERLAY_CHARGEING2
 
-		if (!equipment)
-			update_overlay |= APC_UPOVERLAY_EQUIPMENT0
-		else if(equipment == 1)
-			update_overlay |= APC_UPOVERLAY_EQUIPMENT1
-		else if(equipment == 2)
-			update_overlay |= APC_UPOVERLAY_EQUIPMENT2
+		switch(equipment)
+			if(0)
+				update_overlay |= APC_UPOVERLAY_EQUIPMENT0
+			if(1)
+				update_overlay |= APC_UPOVERLAY_EQUIPMENT1
+			if(2)
+				update_overlay |= APC_UPOVERLAY_EQUIPMENT2
+		switch(lighting)
+			if(0)
+				update_overlay |= APC_UPOVERLAY_LIGHTING0
+			if(1)
+				update_overlay |= APC_UPOVERLAY_LIGHTING1
+			if(2)
+				update_overlay |= APC_UPOVERLAY_LIGHTING2
 
-		if(!lighting)
-			update_overlay |= APC_UPOVERLAY_LIGHTING0
-		else if(lighting == 1)
-			update_overlay |= APC_UPOVERLAY_LIGHTING1
-		else if(lighting == 2)
-			update_overlay |= APC_UPOVERLAY_LIGHTING2
-
-		if(!environ)
-			update_overlay |= APC_UPOVERLAY_ENVIRON0
-		else if(environ==1)
-			update_overlay |= APC_UPOVERLAY_ENVIRON1
-		else if(environ==2)
-			update_overlay |= APC_UPOVERLAY_ENVIRON2
-
+		switch(environ)
+			if(0)
+				update_overlay |= APC_UPOVERLAY_ENVIRON0
+			if(1)
+				update_overlay |= APC_UPOVERLAY_ENVIRON1
+			if(2)
+				update_overlay |= APC_UPOVERLAY_ENVIRON2
 
 	var/results = 0
 	if(last_update_state == update_state && last_update_overlay == update_overlay)
@@ -454,15 +457,15 @@
 	if(!updating_icon)
 		updating_icon = 1
 		// Start the update
-		spawn(APC_UPDATE_ICON_COOLDOWN)
-			update_icon()
+		spawn(APC_UPDATE_ICON_COOLDOWN+rand(-15, 30))
+			ADD_ICON_QUEUE(src)
 			updating_icon = 0
 
 //attack with an item - open/close cover, insert cell, or (un)lock interface
 
 /obj/machinery/power/apc/attackby(obj/item/W, mob/user)
 
-	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
+	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1 || isAdminGhost(user))
 		return src.attack_hand(user)
 	src.add_fingerprint(user)
 	if (istype(W, /obj/item/weapon/crowbar) && opened)
@@ -684,7 +687,7 @@
 				"You hear bang")
 			update_icon()
 		else
-			if (istype(user, /mob/living/silicon))
+			if (istype(user, /mob/living/silicon) || isAdminGhost(usr))
 				return src.attack_hand(user)
 			if (!opened && wiresexposed && \
 				(istype(W, /obj/item/device/multitool) || \
@@ -951,11 +954,11 @@
 		update()
 
 	else if (href_list["overload"])
-		if(istype(usr, /mob/living/silicon))
+		if(istype(usr, /mob/living/silicon) || isAdminGhost(usr))
 			src.overload_lighting()
 
 	else if (href_list["toggleaccess"])
-		if(istype(usr, /mob/living/silicon))
+		if(istype(usr, /mob/living/silicon) || isAdminGhost(usr))
 			if(emagged || (stat & (BROKEN|MAINT)))
 				to_chat(usr, "The APC does not respond to the command.")
 			else
@@ -1189,7 +1192,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 		if(cell)
 			cell.emp_act(severity+1)
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	..()
 
 /obj/machinery/power/apc/ex_act(severity)
@@ -1244,7 +1247,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	equipment = POWERCHAN_ON_AUTO
 	environ = POWERCHAN_ON_AUTO
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update()
 
 // overload the lights in this APC area

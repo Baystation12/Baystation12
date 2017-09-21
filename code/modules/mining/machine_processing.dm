@@ -109,7 +109,7 @@
 	var/obj/machinery/mineral/input = null
 	var/obj/machinery/mineral/output = null
 	var/obj/machinery/mineral/console = null
-	var/sheets_per_tick = 10
+	var/sheets_per_tick = 20
 	var/list/ores_processing[0]
 	var/list/ores_stored[0]
 	var/static/list/alloy_data
@@ -156,7 +156,7 @@
 			world.log << "[src] encountered ore [O] with oretag [O.ore ? O.ore : "(no ore)"] which this machine did not have an entry for!"
 
 		qdel(O)
-
+		CHECK_TICK
 	if(!active)
 		return
 
@@ -238,5 +238,5 @@
 				new /obj/item/weapon/ore/slag(output.loc)
 		else
 			continue
-
+		CHECK_TICK
 	console.updateUsrDialog()

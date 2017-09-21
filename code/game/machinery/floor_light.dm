@@ -23,6 +23,10 @@ var/list/floor_light_cache = list()
 /obj/machinery/floor_light/prebuilt
 	anchored = 1
 
+/obj/machinery/floor_light/New()
+	sleep(40)
+	..()
+
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/weapon/screwdriver))
 		anchored = !anchored
@@ -101,7 +105,7 @@ var/list/floor_light_cache = list()
 			set_light(0)
 
 	active_power_usage = ((light_range + light_power) * 10)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/floor_light/update_icon()
 	overlays.Cut()
@@ -150,7 +154,6 @@ var/list/floor_light_cache = list()
 	return
 
 /obj/machinery/floor_light/Destroy()
-	var/area/A = get_area(src)
-	if(A)
+	if(MyArea)
 		on = 0
 	. = ..()

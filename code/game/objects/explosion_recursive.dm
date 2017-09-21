@@ -10,9 +10,10 @@ var/explosion_in_progress = 0
 proc/explosion_rec(turf/epicenter, power, shaped)
 	var/loopbreak = 0
 	while(explosion_in_progress)
-		if(loopbreak >= 15) return
-		sleep(10)
+		if(loopbreak > 10)
+			loopbreak = 0
 		loopbreak++
+		sleep()
 
 	if(power <= 0) return
 	epicenter = get_turf(epicenter)

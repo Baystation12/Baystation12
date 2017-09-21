@@ -20,18 +20,18 @@
 
 	pickup(mob/user)
 		..()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	dropped(mob/user)
 		..()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	attack_hand()
 		..()
 		update_icon()
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		if(!icon_state)
 			icon_state = "bottle-[rand(1,4)]"
 
