@@ -188,13 +188,8 @@
 
 /obj/machinery/atmospherics/pipe/simple/hide(var/i)
 	if(istype(loc, /turf/simulated))
-<<<<<<< HEAD
 		set_invisibility(i ? 101 : 0)
-	update_icon()
-=======
-		invisibility = i ? 101 : 0
 	ADD_ICON_QUEUE(src)
->>>>>>> Apollo-Dev
 
 /obj/machinery/atmospherics/pipe/simple/process()
 	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
@@ -461,13 +456,8 @@
 
 /obj/machinery/atmospherics/pipe/manifold/hide(var/i)
 	if(istype(loc, /turf/simulated))
-<<<<<<< HEAD
 		set_invisibility(i ? 101 : 0)
-	update_icon()
-=======
-		invisibility = i ? 101 : 0
 	ADD_ICON_QUEUE(src)
->>>>>>> Apollo-Dev
 
 /obj/machinery/atmospherics/pipe/manifold/pipeline_expansion()
 	return list(node1, node2, node3)

@@ -13,7 +13,7 @@
 	var/overlay_state = null
 	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/ties.dmi', slot_wear_suit_str = 'icons/mob/ties.dmi')
 	sprite_sheets = list(
-		SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi'
+		SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi',
 		SPECIES_RESOMI = 'icons/mob/species/resomi/ties.dmi') // for species where human variants do not fit
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 

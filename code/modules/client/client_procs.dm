@@ -221,7 +221,10 @@
 
 /client/proc/Login() //Makeshift login function for clients.
 	refreshclientdb()
+	if(!userdatabase)
+		global.userdatabase = new
 
+	userdatabase.AddToDB(src)
 
 /client/proc/log_client_to_db()
 
