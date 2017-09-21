@@ -71,7 +71,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
 	var/list/holodeck_supported_programs = list() // map of maps - first level maps from list-of-programs string id (e.g. "BarPrograms") to another map
-												  // this is in order to support multiple holodeck program listings for different holodecks
+                                                  // this is in order to support multiple holodeck program listings for different holodecks
 	                                              // second level maps from program friendly display names ("Picnic Area") to program string ids ("picnicarea")
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
@@ -85,18 +85,19 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 	var/overmap_event_areas = 0 //How many event "clouds" will be generated
 
-	var/lobby_icon									// The icon which contains the lobby image(s)
+	var/lobby_icon = 'maps/exodus/exodus_lobby.dmi' // The icon which contains the lobby image(s)
 	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
 	var/lobby_music/lobby_music                     // The track that will play in the lobby screen. Handed in the /setup_map() proc.
 
-	var/default_law_type = /datum/ai_laws/nanotrasen  // The default lawset use by synth units, if not overriden by their laws var.
-	var/security_state = /decl/security_state/default // The default security state system to use.
+	var/list/branch_types  // list of branch datum paths for military branches available on this map
+	var/list/spawn_branch_types  // subset of above for branches a player can spawn in with
+
+	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
-	var/num_exoplanets = 0
-
 /datum/map/New()
+	..()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
@@ -115,15 +116,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/perform_map_generation()
 	return
-
-/datum/map/proc/build_exoplanets()
-	if(!use_overmap)
-		return
-
-	for(var/i = 0, i < num_exoplanets, i++)
-		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/sector/exoplanet))
-		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type
-		new_planet.build_level()
 
 // Used to apply various post-compile procedural effects to the map.
 /datum/map/proc/refresh_mining_turfs()

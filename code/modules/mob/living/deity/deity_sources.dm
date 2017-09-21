@@ -27,8 +27,6 @@
 		L.faction = "neutral"
 
 /mob/living/deity/proc/adjust_power(var/amount, var/silent = 0, var/msg)
-	if(feats[DEITY_POWER_BONUS])
-		amount += amount * feats[DEITY_POWER_BONUS]
 	mob_uplink.uses += amount
 	if(!silent)
 		var/feel = ""

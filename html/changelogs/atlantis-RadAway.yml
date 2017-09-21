@@ -1,6 +1,0 @@
-author: atlantiscze
-
-delete-after: True
-
-changes: 
-  - tweak: "Walls and similar dense objects are now much better when protecting against radiation, especially at higher levels."

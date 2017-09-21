@@ -11,5 +11,3 @@
 
 	allowed_spawns = list("Arrivals Shuttle")
 	use_overmap = 1
-
-	num_exoplanets = 1

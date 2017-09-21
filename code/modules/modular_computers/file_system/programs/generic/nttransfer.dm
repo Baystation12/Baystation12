@@ -29,7 +29,6 @@ var/global/nttransfer_uid = 0
 	..()
 
 /datum/computer_file/program/nttransfer/process_tick()
-	..()
 	// Server mode
 	if(provided_file)
 		for(var/datum/computer_file/program/nttransfer/C in connected_clients)

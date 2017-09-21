@@ -8,16 +8,20 @@
 	icon_broken = "secureresbroken"
 	icon_off = "secureresoff"
 
-/obj/structure/closet/secure_closet/scientist/WillContain()
-	return list(
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger/tox, /obj/item/weapon/storage/backpack/satchel_tox)),
-		/obj/item/clothing/under/rank/scientist,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/shoes/white,
-		/obj/item/device/radio/headset/headset_sci,
-		/obj/item/clothing/mask/gas,
-		/obj/item/weapon/clipboard
-	)
+	Initialize()
+		. = ..()
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/toxins(src)
+		else
+			new /obj/item/weapon/storage/backpack/satchel_tox(src)
+		new /obj/item/clothing/under/rank/scientist(src)
+		//new /obj/item/clothing/suit/labcoat/science(src)
+		new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+		new /obj/item/clothing/shoes/white(src)
+		//new /obj/item/weapon/cartridge/signal/science(src)
+		new /obj/item/device/radio/headset/headset_sci(src)
+		new /obj/item/clothing/mask/gas(src)
+		new /obj/item/weapon/clipboard(src)
 
 /obj/structure/closet/secure_closet/xenobio
 	name = "xenobiologist's locker"
@@ -29,17 +33,23 @@
 	icon_broken = "secureresbroken"
 	icon_off = "secureresoff"
 
-/obj/structure/closet/secure_closet/xenobio/WillContain()
-	return list(
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger/tox, /obj/item/weapon/storage/backpack/satchel_tox)),
-		/obj/item/clothing/under/rank/scientist,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/shoes/white,
-		/obj/item/device/radio/headset/headset_sci,
-		/obj/item/clothing/mask/gas,
-		/obj/item/clothing/gloves/latex,
-		/obj/item/weapon/clipboard
-	)
+	Initialize()
+		. = ..()
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/toxins(src)
+		else
+			new /obj/item/weapon/storage/backpack/satchel_tox(src)
+		new /obj/item/clothing/under/rank/scientist(src)
+		//new /obj/item/clothing/suit/labcoat/science(src)
+		new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+		new /obj/item/clothing/shoes/white(src)
+		//new /obj/item/weapon/cartridge/signal/science(src)
+		new /obj/item/device/radio/headset/headset_sci(src)
+		new /obj/item/clothing/mask/gas(src)
+		new /obj/item/clothing/gloves/latex(src)
+		new /obj/item/weapon/clipboard(src)
+		return
+
 
 /obj/structure/closet/secure_closet/RD
 	name = "research director's locker"
@@ -51,36 +61,40 @@
 	icon_broken = "rdsecurebroken"
 	icon_off = "rdsecureoff"
 
-/obj/structure/closet/secure_closet/RD/WillContain()
-	return list(
-		/obj/item/clothing/suit/bio_suit/scientist = 2,
-		/obj/item/clothing/under/rank/research_director,
-		/obj/item/clothing/under/rank/research_director/rdalt,
-		/obj/item/clothing/under/rank/research_director/dress_rd,
-		/obj/item/clothing/under/rank/scientist/executive,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/weapon/cartridge/rd,
-		/obj/item/clothing/shoes/white,
-		/obj/item/clothing/shoes/leather,
-		/obj/item/clothing/gloves/latex,
-		/obj/item/device/radio/headset/heads/rd,
-		/obj/item/clothing/mask/gas,
-		/obj/item/device/flash,
-		/obj/item/weapon/clipboard,
-		/obj/item/clothing/suit/storage/toggle/labcoat/rd
-	)
+	Initialize()
+		. = ..()
+		new /obj/item/clothing/suit/bio_suit/scientist(src)
+		new /obj/item/clothing/head/bio_hood/scientist(src)
+		new /obj/item/clothing/under/rank/research_director(src)
+		new /obj/item/clothing/under/rank/research_director/rdalt(src)
+		new /obj/item/clothing/under/rank/research_director/dress_rd(src)
+		new /obj/item/clothing/under/rank/scientist/executive(src)
+		new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+		new /obj/item/weapon/cartridge/rd(src)
+		new /obj/item/clothing/shoes/white(src)
+		new /obj/item/clothing/shoes/leather(src)
+		new /obj/item/clothing/gloves/latex(src)
+		new /obj/item/device/radio/headset/heads/rd(src)
+		new /obj/item/clothing/mask/gas(src)
+		new /obj/item/device/flash(src)
+		new /obj/item/weapon/clipboard(src)
+		new /obj/item/clothing/suit/storage/toggle/labcoat/rd(src)
 
 /obj/structure/closet/secure_closet/animal
 	name = "animal control closet"
 	req_access = list(access_research)
 
-/obj/structure/closet/secure_closet/animal/WillContain()
-	return list(
-		/obj/item/device/assembly/signaler,
-		/obj/item/device/radio/electropack = 3,
-		/obj/item/weapon/gun/launcher/syringe/rapid,
-		/obj/item/weapon/storage/box/syringegun,
-		/obj/item/weapon/storage/box/syringes,
-		/obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate,
-		/obj/item/weapon/reagent_containers/glass/bottle/stoxin
-	)
+
+/obj/structure/closet/secure_closet/animal/Initialize()
+	. = ..()
+	new /obj/item/device/assembly/signaler(src)
+	new /obj/item/device/radio/electropack(src)
+	new /obj/item/device/radio/electropack(src)
+	new /obj/item/device/radio/electropack(src)
+	new /obj/item/weapon/gun/launcher/syringe/rapid(src)
+	new /obj/item/weapon/storage/box/syringegun(src)
+	new /obj/item/weapon/storage/box/syringes(src)
+	new /obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate(src)
+	new /obj/item/weapon/reagent_containers/glass/bottle/stoxin(src)
+	return
+

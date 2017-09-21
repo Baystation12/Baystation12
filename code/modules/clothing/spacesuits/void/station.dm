@@ -27,9 +27,10 @@
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
-/obj/item/clothing/suit/space/void/engineering/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/engineering
-	boots = /obj/item/clothing/shoes/magboots
+/obj/item/clothing/suit/space/void/engineering/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/engineering
+	boots = new /obj/item/clothing/shoes/magboots
 
 //Mining
 /obj/item/clothing/head/helmet/space/void/mining
@@ -55,8 +56,9 @@
 	armor = list(melee = 50, bullet = 5, laser = 20,energy = 5, bomb = 55, bio = 100, rad = 20)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/stack/flag,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 
-/obj/item/clothing/suit/space/void/mining/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/mining
+/obj/item/clothing/suit/space/void/mining/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/mining
 
 //Medical
 /obj/item/clothing/head/helmet/space/void/medical
@@ -81,9 +83,10 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical)
 	armor = list(melee = 30, bullet = 5, laser = 20,energy = 5, bomb = 25, bio = 100, rad = 50)
 
-/obj/item/clothing/suit/space/void/medical/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/medical
-	boots = /obj/item/clothing/shoes/magboots
+/obj/item/clothing/suit/space/void/medical/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/medical
+	boots = new /obj/item/clothing/shoes/magboots
 
 //Security
 /obj/item/clothing/head/helmet/space/void/security
@@ -111,9 +114,10 @@
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
 	siemens_coefficient = 0.7
 
-/obj/item/clothing/suit/space/void/security/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/security
-	boots = /obj/item/clothing/shoes/magboots
+/obj/item/clothing/suit/space/void/security/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/security
+	boots = new /obj/item/clothing/shoes/magboots
 
 //Atmospherics
 /obj/item/clothing/head/helmet/space/void/atmos
@@ -141,9 +145,10 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
 
-/obj/item/clothing/suit/space/void/atmos/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/atmos
-	boots = /obj/item/clothing/shoes/magboots
+/obj/item/clothing/suit/space/void/atmos/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/atmos
+	boots = new /obj/item/clothing/shoes/magboots
 
 //Surplus Voidsuits
 
@@ -166,9 +171,10 @@
 	..()
 	slowdown_per_slot[slot_wear_suit] = 2
 
-/obj/item/clothing/suit/space/void/engineering/alt/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/engineering/alt
-	boots = /obj/item/clothing/shoes/magboots
+/obj/item/clothing/suit/space/void/engineering/alt/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/engineering/alt
+	boots = new /obj/item/clothing/shoes/magboots
 
 //Mining
 /obj/item/clothing/head/helmet/space/void/mining/alt
@@ -184,8 +190,9 @@
 	desc = "A cheap prospecting voidsuit. What it lacks in comfort it makes up for in armor plating and street cred."
 	armor = list(melee = 50, bullet = 15, laser = 20,energy = 5, bomb = 55, bio = 100, rad = 0)
 
-/obj/item/clothing/suit/space/void/mining/alt/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/mining/alt
+/obj/item/clothing/suit/space/void/mining/alt/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/mining/alt
 
 //Medical
 /obj/item/clothing/head/helmet/space/void/medical/alt
@@ -207,9 +214,10 @@
 	..()
 	slowdown_per_slot[slot_wear_suit] = 0
 
-/obj/item/clothing/suit/space/void/medical/alt/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt
-	boots = /obj/item/clothing/shoes/magboots
+/obj/item/clothing/suit/space/void/medical/alt/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/medical/alt
+	boots = new /obj/item/clothing/shoes/magboots
 
 //Security
 /obj/item/clothing/head/helmet/space/void/security/alt
@@ -226,9 +234,10 @@
 	armor = list(melee = 70, bullet = 20, laser = 30, energy = 5, bomb = 35, bio = 100, rad = 10)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
 
-/obj/item/clothing/suit/space/void/security/alt/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/security/alt
-	boots = /obj/item/clothing/shoes/magboots
+/obj/item/clothing/suit/space/void/security/alt/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/security/alt
+	boots = new /obj/item/clothing/shoes/magboots
 
 //Atmospherics
 /obj/item/clothing/head/helmet/space/void/atmos/alt
@@ -247,9 +256,10 @@
 	armor = list(melee = 20, bullet = 5, laser = 20,energy = 15, bomb = 45, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/suit/space/void/atmos/alt/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/atmos/alt
-	boots = /obj/item/clothing/shoes/magboots
+/obj/item/clothing/suit/space/void/atmos/alt/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/atmos/alt
+	boots = new /obj/item/clothing/shoes/magboots
 
 //Misc
 /obj/item/clothing/head/helmet/space/void/engineering/salvage
@@ -274,29 +284,7 @@
 	armor = list(melee = 50, bullet = 10, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 80)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
 
-/obj/item/clothing/suit/space/void/engineering/salvage/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage
-	boots = /obj/item/clothing/shoes/magboots
-	
-//Pilot
-/obj/item/clothing/head/helmet/space/void/pilot
-	desc = "An atmos resistant helmet for space and planet exploration."
-	name = "pilot voidsuit helmet"
-	icon_state = "rig0_pilot"
-	item_state = "pilot_helm"
-	armor = list(melee = 40, bullet = 5, laser = 15,energy = 5, bomb = 5, bio = 100, rad = 50)
-	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	light_overlay = "helmet_light_dual"
-
-/obj/item/clothing/suit/space/void/pilot
-	desc = "An atmos resistant voidsuit for space and planet exploration."
-	icon_state = "rig-pilot"
-	item_state = "rig-pilot"
-	name = "pilot voidsuit"
-	armor = list(melee = 40, bullet = 5, laser = 15,energy = 5, bomb = 5, bio = 100, rad = 50)
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
-
-/obj/item/clothing/suit/space/void/pilot/prepared
-	helmet = /obj/item/clothing/head/helmet/space/void/pilot
-	boots = /obj/item/clothing/shoes/magboots
+/obj/item/clothing/suit/space/void/engineering/salvage/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/engineering/salvage
+	boots = new /obj/item/clothing/shoes/magboots

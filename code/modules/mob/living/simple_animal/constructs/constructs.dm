@@ -16,8 +16,14 @@
 	universal_speak = 0
 	universal_understand = 1
 	attack_sound = 'sound/weapons/spiderlunge.ogg'
-	min_gas = null
-	max_gas = null
+	min_oxy = 0
+	max_oxy = 0
+	min_tox = 0
+	max_tox = 0
+	min_co2 = 0
+	max_co2 = 0
+	min_n2 = 0
+	max_n2 = 0
 	minbodytemp = 0
 	show_stat_health = 1
 	faction = "cult"
@@ -42,7 +48,7 @@
 	add_language("Occult")
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
-	update_icon()
+	updateicon()
 
 /mob/living/simple_animal/construct/death(gibbed, deathmessage, show_dead_message)
 	new /obj/item/weapon/ectoplasm (src.loc)
@@ -50,7 +56,7 @@
 	ghostize()
 	qdel(src)
 
-/mob/living/simple_animal/construct/update_icon()
+/mob/living/simple_animal/construct/updateicon()
 	overlays.Cut()
 	..()
 	add_glow()

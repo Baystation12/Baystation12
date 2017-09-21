@@ -32,9 +32,7 @@
 	icon_state = "syndicate1"
 	icon_closed = "syndicate1"
 	icon_opened = "syndicate1open"
-
-/obj/structure/closet/gimmick/russian/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/head/ushanka = 5,
 		/obj/item/clothing/under/soviet = 5)
 
@@ -44,9 +42,7 @@
 	icon_state = "syndicate1"
 	icon_closed = "syndicate1"
 	icon_opened = "syndicate1open"
-
-/obj/structure/closet/gimmick/tacticool/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/glasses/eyepatch,
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/gloves/thick/swat = 2,
@@ -65,10 +61,8 @@
 	anchored = 1
 
 /obj/structure/closet/thunderdome/tdred
-	name = "red-team Thunderdome closet"
-
-/obj/structure/closet/thunderdome/tdred/WillContain()
-	return list(
+	name = "red-team Thunderdome closet"	
+	will_contain = list(
 		/obj/item/clothing/suit/armor/tdome/red = 3,
 		/obj/item/weapon/melee/energy/sword = 3,
 		/obj/item/weapon/gun/energy/laser = 3,
@@ -82,9 +76,7 @@
 	icon_state = "syndicate1"
 	icon_closed = "syndicate1"
 	icon_opened = "syndicate1open"
-
-/obj/structure/closet/thunderdome/tdgreen/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/suit/armor/tdome/green = 3,
 		/obj/item/weapon/melee/energy/sword = 3,
 		/obj/item/weapon/gun/energy/laser = 3,

@@ -3,9 +3,7 @@
 	icon_state = "syndicate"
 	icon_closed = "syndicate"
 	icon_opened = "syndicateopen"
-
-/obj/structure/closet/malf/suits/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/weapon/tank/jetpack/void,
 		/obj/item/clothing/mask/breath,
 		/obj/item/clothing/head/helmet/space/void,

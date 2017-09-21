@@ -31,7 +31,7 @@ In short:
 	KillMobs()
 
 /datum/universal_state/hell/proc/MiscSet()
-	for(var/turf/simulated/floor/T)
+	for(var/turf/simulated/floor/T in turfs)
 		if(!T.holy && prob(1))
 			new /obj/effect/gateway/active/cult(T)
 

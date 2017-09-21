@@ -8,8 +8,7 @@
 	icon_broken = "nanottwobroken"
 	icon_off = "nanottwooff"
 
-/obj/structure/closet/secure_closet/liaison/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/device/flash,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/device/camera,
@@ -37,8 +36,7 @@
 	icon_broken = "solsecurebroken"
 	icon_off = "solsecureoff"
 
-/obj/structure/closet/secure_closet/representative/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/device/flash,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/device/camera,
@@ -69,8 +67,7 @@
 	icon_broken = "solbroken"
 	icon_off = "soloff"
 
-/obj/structure/closet/secure_closet/crew/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/device/radio,
 		/obj/item/weapon/crowbar,
 		/obj/item/device/flashlight,
@@ -90,22 +87,21 @@
 /obj/structure/closet/secure_closet/guncabinet/sidearm
 	name = "sidearm cabinet"
 	req_access = list()
-	req_one_access = list(access_armory,access_emergency_armory,access_hos,access_hop,access_ce,access_cmo,access_rd,access_senadv)
+	req_one_access = list(access_armory,access_heads)
 
-/obj/structure/closet/secure_closet/guncabinet/sidearm/WillContain()
-	return list(/obj/item/weapon/gun/energy/gun = 3)
+	will_contain = list(
+		/obj/item/weapon/gun/energy/gun = 3
+	)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small
 	name = "personal sidearm cabinet"
-
-/obj/structure/closet/secure_closet/guncabinet/sidearm/small/WillContain()
-	return list(/obj/item/weapon/gun/energy/gun/small = 4)
+	will_contain = list(
+		/obj/item/weapon/gun/energy/gun/small = 4
+	)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined
 	name = "combined sidearm cabinet"
-
-/obj/structure/closet/secure_closet/guncabinet/sidearm/combined/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/weapon/gun/energy/gun/small = 2,
 		/obj/item/weapon/gun/energy/gun = 3
 	)

@@ -13,8 +13,7 @@
 	icon_broken = "capsecurebroken"
 	icon_off = "capsecureoff"
 
-/obj/structure/closet/secure_closet/CO/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/suit/storage/vest/solgov/command,
 		/obj/item/weapon/cartridge/captain,
 		/obj/item/clothing/head/helmet/solgov/command,
@@ -43,8 +42,7 @@
 	icon_broken = "twosolsecurebroken"
 	icon_off = "twosolsecureoff"
 
-/obj/structure/closet/secure_closet/XO/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/weapon/cartridge/hop,
 		/obj/item/clothing/suit/storage/vest/solgov/command,
@@ -76,8 +74,7 @@
 	icon_broken = "solbroken"
 	icon_off = "soloff"
 
-/obj/structure/closet/secure_closet/sea/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/weapon/cartridge/hop,
 		/obj/item/clothing/suit/storage/vest/solgov/command,
@@ -105,8 +102,7 @@
 	icon_broken = "solbroken"
 	icon_off = "soloff"
 
-/obj/structure/closet/secure_closet/bridgeofficer/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/device/radio,
 		/obj/item/weapon/pen,
 		/obj/item/device/tape/random,
@@ -134,8 +130,7 @@
 	icon_broken = "solbroken"
 	icon_off = "soloff"
 
-/obj/structure/closet/secure_closet/solgovpilot/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/device/radio,
 		/obj/item/weapon/pen,
 		/obj/item/device/tape/random,

@@ -117,6 +117,4 @@
 
 /obj/structure/closet/crate/mechabeacons
 	name = "exosuit tracking beacons crate"
-
-/obj/structure/closet/crate/mechabeacons/WillContain()
-	return list(/obj/item/mecha_parts/mecha_tracking = 7)
+	will_contain = list(/obj/item/mecha_parts/mecha_tracking = 7)

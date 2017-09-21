@@ -10,7 +10,7 @@
 	canmove = 0
 	stunned = 1
 	icon = null
-	set_invisibility(101)
+	invisibility = 101
 	for(var/t in organs)
 		qdel(t)
 	var/atom/movable/overlay/animation = new /atom/movable/overlay( loc )
@@ -24,7 +24,7 @@
 	transforming = 0
 	stunned = 0
 	update_canmove()
-	set_invisibility(initial(invisibility))
+	invisibility = initial(invisibility)
 
 	if(!species.primitive_form) //If the creature in question has no primitive set, this is going to be messy.
 		gib()
@@ -50,7 +50,6 @@
 		return
 	for(var/t in organs)
 		qdel(t)
-	QDEL_NULL_LIST(worn_underwear)
 	return ..(move)
 
 /mob/living/carbon/AIize()
@@ -61,7 +60,7 @@
 	transforming = 1
 	canmove = 0
 	icon = null
-	set_invisibility(101)
+	invisibility = 101
 	return ..()
 
 /mob/proc/AIize(move=1)
@@ -70,7 +69,7 @@
 
 
 	var/mob/living/silicon/ai/O = new (loc, GLOB.using_map.default_law_type,,1)//No MMI but safety is in effect.
-	O.set_invisibility(0)
+	O.invisibility = 0
 	O.aiRestorePowerRoutine = 0
 	if(mind)
 		mind.transfer_to(O)
@@ -111,21 +110,20 @@
 /mob/living/carbon/human/proc/Robotize()
 	if (transforming)
 		return
-	QDEL_NULL_LIST(worn_underwear)
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
 	transforming = 1
 	canmove = 0
 	icon = null
-	set_invisibility(101)
+	invisibility = 101
 	for(var/t in organs)
 		qdel(t)
 
 	var/mob/living/silicon/robot/O = new /mob/living/silicon/robot( loc )
 
 	O.gender = gender
-	O.set_invisibility(0)
+	O.invisibility = 0
 
 	if(mind)		//TODO
 		mind.transfer_to(O)
@@ -164,7 +162,7 @@
 	transforming = 1
 	canmove = 0
 	icon = null
-	set_invisibility(101)
+	invisibility = 101
 	for(var/t in organs)
 		qdel(t)
 
@@ -198,7 +196,7 @@
 	transforming = 1
 	canmove = 0
 	icon = null
-	set_invisibility(101)
+	invisibility = 101
 	for(var/t in organs)	//this really should not be necessary
 		qdel(t)
 
@@ -228,7 +226,7 @@
 	transforming = 1
 	canmove = 0
 	icon = null
-	set_invisibility(101)
+	invisibility = 101
 
 	for(var/t in organs)
 		qdel(t)
@@ -322,8 +320,6 @@
 		src.mind.special_role = "Zombie"
 	log_admin("[key_name(src)] has transformed into a zombie!")
 	Weaken(5)
-	if(should_have_organ(BP_HEART))
-		vessel.add_reagent(/datum/reagent/blood,species.blood_volume-vessel.total_volume)
 	for(var/o in organs)
 		var/obj/item/organ/organ = o
 		organ.vital = 0

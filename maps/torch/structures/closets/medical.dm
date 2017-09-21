@@ -12,8 +12,7 @@
 	icon_broken = "cmosecurebroken"
 	icon_off = "cmosecureoff"
 
-/obj/structure/closet/secure_closet/CMO_torch/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/white,
@@ -37,11 +36,18 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/white,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/storage/firstaid/adv,
+		/obj/item/weapon/storage/firstaid/regular,
 		/obj/item/weapon/storage/box/armband/med,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
-		RANDOM_SCRUBS
+		new /datum/atom_creator/weighted(list(
+				list(/obj/item/clothing/under/rank/medical/blue, /obj/item/clothing/head/surgery/blue),
+				list(/obj/item/clothing/under/rank/medical/green, /obj/item/clothing/head/surgery/green),
+				list(/obj/item/clothing/under/rank/medical/purple, /obj/item/clothing/head/surgery/purple),
+				list(/obj/item/clothing/under/rank/medical/black, /obj/item/clothing/head/surgery/black),
+				list(/obj/item/clothing/under/rank/medical/navyblue, /obj/item/clothing/head/surgery/navyblue)
+			)
+		)
 	)
 
 /obj/structure/closet/secure_closet/medical_torchsenior
@@ -54,8 +60,7 @@
 	icon_broken = "securesenmedbroken"
 	icon_off = "securesenmedoff"
 
-/obj/structure/closet/secure_closet/medical_torchsenior/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/surgicalapron,
@@ -71,7 +76,7 @@
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/storage/firstaid/adv,
+		/obj/item/weapon/storage/firstaid/regular,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
 		new /datum/atom_creator/weighted(list(
@@ -93,8 +98,7 @@
 	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
 
-/obj/structure/closet/secure_closet/medical_torch/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/accessory/storage/white_vest,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -109,7 +113,7 @@
 		/obj/item/weapon/storage/box/autoinjectors,
 		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/storage/firstaid/adv,
+		/obj/item/weapon/storage/firstaid/regular,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)
@@ -124,8 +128,7 @@
 	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
 
-/obj/structure/closet/secure_closet/medical_contractor/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/under/rank/orderly,
 		/obj/item/clothing/accessory/storage/webbing,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -136,7 +139,6 @@
 		/obj/item/weapon/storage/belt/medical/emt,
 		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/storage/firstaid/adv,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)
@@ -146,8 +148,7 @@
 	icon_state = "white"
 	icon_closed = "white"
 
-/obj/structure/closet/wardrobe/medic_torch/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/under/sterile = 2,
 		/obj/item/clothing/under/rank/medical/blue,
 		/obj/item/clothing/under/rank/medical/green,

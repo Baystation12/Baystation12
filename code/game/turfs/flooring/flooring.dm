@@ -168,6 +168,10 @@ var/list/flooring_types
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_WRENCH
 	can_paint = null
 
+/decl/flooring/reinforced/cult/New()
+	..()
+	new /obj/effect/overlay/cult/cultfloor(src)
+
 /decl/flooring/reinforced/cult/on_remove()
 	cult.remove_cultiness(CULTINESS_PER_TURF)
 

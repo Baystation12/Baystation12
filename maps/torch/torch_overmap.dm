@@ -3,11 +3,9 @@
 	fore_dir = WEST
 	vessel_mass = 800
 	default_delay = 12 SECONDS
-	start_x = 4
-	start_y = 5
 
 	restricted_waypoints = list(
-		"Charon" = list("nav_hangar_calypso"), 	//can't have random shuttles popping inside the ship
+		"Calypso" = list("nav_hangar_calypso"), 	//can't have random shuttles popping inside the ship
 		"Guppy" = list("nav_hangar_guppy")
 	)
 
@@ -54,8 +52,6 @@
 		"nav_cluster_6",
 		"nav_cluster_7"
 	)
-	start_x = 4
-	start_y = 5
 
 /obj/effect/shuttle_landmark/cluster/guppy
 	name = "Asteroid Navpoint #1"
@@ -65,7 +61,7 @@
 	name = "Asteroid Navpoint #2"
 	landmark_tag = "nav_cluster_2"
 
-/obj/effect/shuttle_landmark/cluster/exploration_shuttle
+/obj/effect/shuttle_landmark/cluster/calypso
 	name = "Asteroid Navpoint #3"
 	landmark_tag = "nav_cluster_3"
 
@@ -87,14 +83,14 @@
 	landmark_tag = "nav_cluster_7"
 	base_area = /area/mine/explored
 
-//	landing_areas = list(/area/aquila_hangar/mining, /area/exploration_shuttle_hangar/mining, /area/guppy_hangar/mining)
+//	landing_areas = list(/area/aquila_hangar/mining, /area/calypso_hangar/mining, /area/guppy_hangar/mining)
 
 /obj/effect/overmap/sector/derelict
 	name = "debris field"
 	desc = "A large field of miscellanious debris."
 	icon_state = "object"
 
-//	landing_areas = list(/area/aquila_hangar/salvage, /area/exploration_shuttle_hangar/salvage, /area/guppy_hangar/salvage)
+//	landing_areas = list(/area/aquila_hangar/salvage, /area/calypso_hangar/salvage, /area/guppy_hangar/salvage)
 	generic_waypoints = list(
 		"nav_derelict_1",
 		"nav_derelict_2",
@@ -113,7 +109,7 @@
 	name = "Debris Navpoint #2"
 	landmark_tag = "nav_derelict_2"
 
-/obj/effect/shuttle_landmark/derelict/exploration_shuttle
+/obj/effect/shuttle_landmark/derelict/calypso
 	name = "Debris Navpoint #3"
 	landmark_tag = "nav_derelict_3"
 
@@ -158,7 +154,7 @@
 	name = "Away Landing zone #2"
 	landmark_tag = "nav_away_2"
 
-/obj/effect/shuttle_landmark/away/exploration_shuttle
+/obj/effect/shuttle_landmark/away/calypso
 	name = "Away Landing zone #3"
 	landmark_tag = "nav_away_3"
 
@@ -183,10 +179,10 @@
 	shuttle_tag = "Aquila"
 	req_access = list(access_aquila_helm)
 
-/obj/machinery/computer/shuttle_control/explore/exploration_shuttle
-	name = "shuttle control console"
-	shuttle_tag = "Charon"
-	req_access = list(access_expedition_shuttle_helm)
+/obj/machinery/computer/shuttle_control/explore/calypso
+	name = "calypso control console"
+	shuttle_tag = "Calypso"
+	req_access = list(access_calypso_helm)
 
 /obj/machinery/computer/shuttle_control/explore/guppy
 	name = "guppy control console"

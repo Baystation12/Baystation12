@@ -3,7 +3,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 // Species definition follows.
 /datum/species/shapeshifter/promethean
 
-	name =             SPECIES_PROMETHEAN
+	name =             "Promethean"
 	name_plural =      "Prometheans"
 	blurb =            "What has Science done?"
 	show_ssd =         "totally quiescent"

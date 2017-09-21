@@ -239,16 +239,25 @@
 	//Create gas mixture to hold data for passing
 	var/datum/gas_mixture/GM = new
 
-	if(initial_gas)
-		GM.gas = initial_gas.Copy()
+	GM.adjust_multi("oxygen", oxygen, "carbon_dioxide", carbon_dioxide, "nitrogen", nitrogen, "phoron", phoron)
 	GM.temperature = temperature
-	GM.update_values()
 
 	return GM
 
 /turf/remove_air(amount as num)
-	var/datum/gas_mixture/GM = return_air()
-	return GM.remove(amount)
+	var/datum/gas_mixture/GM = new
+
+	var/sum = oxygen + carbon_dioxide + nitrogen + phoron
+	if(sum>0)
+		GM.gas["oxygen"] = (oxygen/sum)*amount
+		GM.gas["carbon_dioxide"] = (carbon_dioxide/sum)*amount
+		GM.gas["nitrogen"] = (nitrogen/sum)*amount
+		GM.gas["phoron"] = (phoron/sum)*amount
+
+	GM.temperature = temperature
+	GM.update_values()
+
+	return GM
 
 /turf/simulated/assume_air(datum/gas_mixture/giver)
 	var/datum/gas_mixture/my_air = return_air()
@@ -263,6 +272,10 @@
 		my_air.adjust_gas_temp(gasid, moles, temp)
 
 	return 1
+
+/turf/simulated/remove_air(amount as num)
+	var/datum/gas_mixture/my_air = return_air()
+	return my_air.remove(amount)
 
 /turf/simulated/return_air()
 	if(zone)
@@ -282,9 +295,9 @@
 /turf/proc/make_air()
 	air = new/datum/gas_mixture
 	air.temperature = temperature
-	if(initial_gas)
-		air.gas = initial_gas.Copy()
-	air.update_values()
+	air.adjust_multi("oxygen", oxygen, "carbon_dioxide", carbon_dioxide, "nitrogen", nitrogen, "phoron", phoron)
+	air.group_multiplier = 1
+	air.volume = CELL_VOLUME
 
 /turf/simulated/proc/c_copy_air()
 	if(!air) air = new/datum/gas_mixture

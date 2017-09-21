@@ -108,9 +108,9 @@
 
 /obj/item/robot_parts/robot_suit/Initialize()
 	. = ..()
-	ADD_ICON_QUEUE(src)
+	src.updateicon()
 
-/obj/item/robot_parts/robot_suit/update_icon()
+/obj/item/robot_parts/robot_suit/proc/updateicon()
 	src.overlays.Cut()
 	if(src.parts[BP_L_ARM])
 		src.overlays += "l_arm+o"
@@ -153,7 +153,7 @@
 			user.drop_item()
 			part.loc = src
 			src.parts[part.bp_tag] = part
-			src.update_icon()
+			src.updateicon()
 
 	if(istype(W, /obj/item/device/mmi))
 		var/obj/item/device/mmi/M = W
@@ -189,7 +189,7 @@
 			user.drop_item()
 
 			O.mmi = W
-			O.set_invisibility(0)
+			O.invisibility = 0
 			O.custom_name = created_name
 			O.updatename("Default")
 

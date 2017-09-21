@@ -2,7 +2,7 @@
 //This is for procs to replace all the goddamn 'in world's that are chilling around the code
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/chemical_reactions_list				//list of all /datum/chemical_reaction datums. Used during chemical reactions
-GLOBAL_LIST_INIT(chemical_reagents_list, do_initialize_chemical_reagents())
+var/global/list/chemical_reagents_list				//list of all /datum/reagent datums indexed by reagent id. Used by chemistry stuff
 var/global/list/landmarks_list = list()				//list of all landmarks created
 var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
@@ -44,9 +44,8 @@ var/global/list/facial_hair_styles_list = list()	//stores /datum/sprite_accessor
 var/global/list/facial_hair_styles_male_list = list()
 var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
-GLOBAL_LIST_INIT(body_marking_styles_list, list())		//stores /datum/sprite_accessory/marking indexed by name
 
-GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
+var/datum/category_collection/underwear/global_underwear = new()
 
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Brown Satchel", "Messenger Bag", "Black Satchel")
 var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
@@ -97,7 +96,7 @@ var/global/list/string_slot_flags = list(
 //////////////////////////
 
 /hook/global_init/proc/populateGlobalLists()
-	possible_cable_coil_colours = sortAssoc(list(
+    possible_cable_coil_colours = sortAssoc(list(
 		"Yellow" = COLOR_YELLOW,
 		"Green" = COLOR_LIME,
 		"Pink" = COLOR_PINK,
@@ -107,7 +106,7 @@ var/global/list/string_slot_flags = list(
 		"Red" = COLOR_RED,
 		"White" = COLOR_WHITE
 	))
-	return 1
+    return 1
 
 /proc/get_mannequin(var/ckey)
 	if(!mannequins_)
@@ -143,12 +142,6 @@ var/global/list/string_slot_flags = list(
 			else
 				facial_hair_styles_male_list += H.name
 				facial_hair_styles_female_list += H.name
-
-	//Body markings - Initialise all /datum/sprite_accessory/marking into an list indexed by marking name
-	paths = typesof(/datum/sprite_accessory/marking) - /datum/sprite_accessory/marking
-	for(var/path in paths)
-		var/datum/sprite_accessory/marking/M = new path()
-		GLOB.body_marking_styles_list[M.name] = M
 
 	//Surgery Steps - Initialize all /datum/surgery_step into a list
 	paths = typesof(/datum/surgery_step)-/datum/surgery_step

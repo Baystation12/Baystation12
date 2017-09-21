@@ -13,9 +13,7 @@
 	desc = "It's a storage unit for formal clothing."
 	icon_state = "black"
 	icon_closed = "black"
-
-/obj/structure/closet/gmcloset/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/head/that = 2,
 		/obj/item/device/radio/headset/headset_service = 2,
 		/obj/item/clothing/head/hairflower,
@@ -37,9 +35,7 @@
 	desc = "It's a storage unit for foodservice garments."
 	icon_state = "black"
 	icon_closed = "black"
-
-/obj/structure/closet/chefcloset/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/under/sundress,
 		/obj/item/clothing/under/waiter = 2,
 		/obj/item/device/radio/headset/headset_service = 2,
@@ -56,9 +52,7 @@
 	desc = "It's a storage unit for janitorial clothes and gear."
 	icon_state = "mixed"
 	icon_closed = "mixed"
-
-/obj/structure/closet/jcloset/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/under/rank/janitor,
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/weapon/cartridge/janitor,
@@ -80,9 +74,7 @@
 	desc = "It's a storage unit for courtroom apparel and items."
 	icon_state = "blue"
 	icon_closed = "blue"
-
-/obj/structure/closet/lawcloset/WillContain()
-	return list(
+	will_contain = list(
 		/obj/item/clothing/under/lawyer/female,
 		/obj/item/clothing/under/lawyer/black,
 		/obj/item/clothing/under/lawyer/red,

@@ -168,7 +168,6 @@
 			to_chat(user, last_scan)
 		else
 			to_chat(user, "\The [src] has not yet been used to analyze any assemblies.")
-
 /obj/item/device/integrated_electronics/analyzer/afterattack(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
 	if(!istype(assembly))
 		return ..()
@@ -189,7 +188,6 @@
 		last_scan += "*No Components Found*"
 	last_scan = jointext(last_scan,"\n")
 	to_chat(user, last_scan)
-
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"
 	desc = "This kit's essential for any circuitry projects."
@@ -200,8 +198,8 @@
 	storage_ui = /datum/storage_ui/tgui
 	allow_quick_empty = FALSE
 
-/obj/item/weapon/storage/bag/circuits/basic/Initialize()
-	. = ..()
+/obj/item/weapon/storage/bag/circuits/basic/New()
+	..()
 	var/list/types_to_spawn = typesof(/obj/item/integrated_circuit/arithmetic,
 		/obj/item/integrated_circuit/logic,
 		/obj/item/integrated_circuit/memory,
@@ -243,8 +241,8 @@
 	new /obj/item/weapon/screwdriver(src)
 	make_exact_fit()
 
-/obj/item/weapon/storage/bag/circuits/debug/Initialize()
-	. = ..()
+/obj/item/weapon/storage/bag/circuits/debug/New()
+	..()
 	name = "[name] - not intended for general use"
 	desc = "[desc] - not intended for general use"
 	for(var/subtype in subtypesof(/obj/item/integrated_circuit))

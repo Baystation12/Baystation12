@@ -53,16 +53,16 @@ var/global/datum/repository/crew/crew_repository = new()
 				if(H.w_uniform != C)
 					continue
 				var/pressure = H.get_blood_pressure()
-				var/blood_result = H.get_blood_oxygenation()
+				var/blood_result = H.get_effective_blood_volume()
 				if(blood_result > 110)
-					blood_result = "increased"
+					blood_result = "elevated"
 				else if(blood_result < 90)
 					blood_result = "low"
 				else if(blood_result < 60)
 					blood_result = "extremely low"
 				else
 					blood_result = "normal"
-				pressure += " ([blood_result] oxygenation)"
+				pressure += " ([blood_result])"
 
 				var/true_pulse = H.pulse()
 				var/pulse_span = "good"

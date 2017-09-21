@@ -79,9 +79,6 @@
 /proc/is_station_turf(var/turf/T)
 	return T && isStationLevel(T.z)
 
-/proc/has_air(var/turf/T)
-	return !!T.return_air()
-
 /proc/IsTurfAtmosUnsafe(var/turf/T)
 	if(istype(T, /turf/space)) // Space tiles
 		return "Spawn location is open to space."

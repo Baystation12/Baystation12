@@ -1,7 +1,7 @@
 /datum/job/ai
 	title = "AI"
 	department_flag = MSC
-
+	faction = "Station"
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
 	spawn_positions = 1
 	selection_color = "#3f823f"
@@ -11,7 +11,7 @@
 	account_allowed = 0
 	economic_modifier = 0
 	outfit_type = /decl/hierarchy/outfit/job/silicon/ai
-	loadout_allowed = FALSE
+	announced = 1
 
 /datum/job/ai/equip(var/mob/living/carbon/human/H)
 	if(!H)	return 0
@@ -23,7 +23,7 @@
 /datum/job/cyborg
 	title = "Cyborg"
 	department_flag = MSC
-
+	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "your laws and the AI"	//Nodrak
@@ -32,7 +32,6 @@
 	alt_titles = list("Android", "Robot")
 	account_allowed = 0
 	economic_modifier = 0
-	loadout_allowed = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/silicon/cyborg
 
 /datum/job/cyborg/equip(var/mob/living/carbon/human/H)

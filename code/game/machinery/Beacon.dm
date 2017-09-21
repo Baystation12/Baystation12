@@ -20,16 +20,17 @@
 		hide(!T.is_plating())
 
 	Destroy()
-		QDEL_NULL(Beacon)
-		. = ..()
+		if(Beacon)
+			qdel(Beacon)
+		..()
 
 	// update the invisibility and icon
 	hide(var/intact)
-		set_invisibility(intact ? 101 : 0)
-		update_icon()
+		invisibility = intact ? 101 : 0
+		updateicon()
 
 	// update the icon_state
-	update_icon()
+	proc/updateicon()
 		var/state="floor_beacon"
 
 		if(invisibility)
@@ -42,12 +43,12 @@
 		if(!Beacon)
 			var/turf/T = loc
 			Beacon = new /obj/item/device/radio/beacon
-			Beacon.set_invisibility(INVISIBILITY_MAXIMUM)
+			Beacon.invisibility = INVISIBILITY_MAXIMUM
 			Beacon.loc = T
 		if(Beacon)
 			if(Beacon.loc != loc)
 				Beacon.loc = loc
 
-		update_icon()
+		updateicon()
 
 

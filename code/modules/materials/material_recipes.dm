@@ -108,8 +108,6 @@
 	recipes += new/datum/stack_recipe("reagent dispenser cartridge (small)", /obj/item/weapon/reagent_containers/chem_disp_cartridge/small,  1, on_floor=0) // 100u
 	recipes += new/datum/stack_recipe("white floor tile", /obj/item/stack/tile/floor_white, 1, 4, 20)
 	recipes += new/datum/stack_recipe("freezer floor tile", /obj/item/stack/tile/floor_freezer, 1, 4, 20)
-	recipes += new/datum/stack_recipe("hazard cone", /obj/item/weapon/caution/cone, 1, on_floor = 1)
-
 
 /material/wood/generate_recipes()
 	..()
@@ -130,10 +128,10 @@
 	recipes += new/datum/stack_recipe("box", /obj/item/weapon/storage/box)
 	recipes += new/datum/stack_recipe("large box", /obj/item/weapon/storage/box/large, 2)
 	recipes += new/datum/stack_recipe("donut box", /obj/item/weapon/storage/box/donut/empty)
-	recipes += new/datum/stack_recipe("egg box", /obj/item/weapon/storage/fancy/egg_box/empty)
-	recipes += new/datum/stack_recipe("light tubes box", /obj/item/weapon/storage/box/lights/tubes/empty)
-	recipes += new/datum/stack_recipe("light bulbs box", /obj/item/weapon/storage/box/lights/bulbs/empty)
-	recipes += new/datum/stack_recipe("mouse traps box", /obj/item/weapon/storage/box/mousetraps/empty)
+	recipes += new/datum/stack_recipe("egg box", /obj/item/weapon/storage/fancy/egg_box)
+	recipes += new/datum/stack_recipe("light tubes box", /obj/item/weapon/storage/box/lights/tubes)
+	recipes += new/datum/stack_recipe("light bulbs box", /obj/item/weapon/storage/box/lights/bulbs)
+	recipes += new/datum/stack_recipe("mouse traps box", /obj/item/weapon/storage/box/mousetraps)
 	recipes += new/datum/stack_recipe("cardborg suit", /obj/item/clothing/suit/cardborg, 3)
 	recipes += new/datum/stack_recipe("cardborg helmet", /obj/item/clothing/head/cardborg)
 	recipes += new/datum/stack_recipe("pizza box", /obj/item/pizzabox)

@@ -60,9 +60,6 @@
 
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/egg = 12)
 
-/obj/item/weapon/storage/fancy/egg_box/empty
-	startswith = null
-
 
 /*
  * Candle Box
@@ -188,7 +185,7 @@
 
 /obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
 	..()
-	fill_cigarre_package(src,list(/datum/reagent/fuel = 4))
+	fill_cigarre_package(src,list("fuel" = 4))
 
 // New exciting ways to kill your lungs! - Earthcrusher //
 

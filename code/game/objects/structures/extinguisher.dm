@@ -71,9 +71,3 @@
 			icon_state = "extinguisher_full"
 	else
 		icon_state = "extinguisher_empty"
-
-/obj/structure/extinguisher_cabinet/AltClick(var/mob/user)
-	if(CanPhysicallyInteract(user))
-		opened = !opened
-		update_icon()
-

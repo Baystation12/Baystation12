@@ -5,9 +5,9 @@
 	icon_state = "coolanttank"
 	amount_per_transfer_from_this = 10
 
-/obj/structure/reagent_dispensers/coolanttank/New()
-	..()
-	reagents.add_reagent(/datum/reagent/coolant, 1000)
+/obj/structure/reagent_dispensers/coolanttank/Initialize()
+	. = ..()
+	reagents.add_reagent("coolant", 1000)
 
 /obj/structure/reagent_dispensers/coolanttank/bullet_act(var/obj/item/projectile/Proj)
 	if(Proj.get_structure_damage())

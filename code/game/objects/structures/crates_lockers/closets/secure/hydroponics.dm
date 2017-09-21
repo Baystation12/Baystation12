@@ -7,9 +7,7 @@
 	icon_opened = "hydrosecureopen"
 	icon_broken = "hydrosecurebroken"
 	icon_off = "hydrosecureoff"
-
-/obj/structure/closet/secure_closet/hydroponics/WillContain()
-	return list(
+	will_contain = list(
 		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/apron, /obj/item/clothing/suit/apron/overalls)),
 		/obj/item/weapon/storage/plants,
 		/obj/item/clothing/under/rank/hydroponics,

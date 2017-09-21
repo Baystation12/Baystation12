@@ -65,6 +65,3 @@
 
 /obj/item/weapon/fuel_assembly/supermatter/New(var/newloc)
 	..(newloc, "supermatter")
-
-/obj/item/fuel_assembly/hydrogen/New(var/newloc)
-	..(newloc, "hydrogen")

@@ -41,5 +41,3 @@
 #undef SERVICE_ROLES
 
 #undef RESEARCH_ROLES
-
-#undef ARMED_ROLES

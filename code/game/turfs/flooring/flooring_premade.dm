@@ -21,7 +21,8 @@
 	light_color = COLOR_BLUE
 
 /turf/simulated/floor/bluegrid/airless
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 
 /turf/simulated/floor/greengrid
 	name = "mainframe floor"
@@ -33,7 +34,8 @@
 	light_color = COLOR_GREEN
 
 /turf/simulated/floor/greengrid/airless
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 
 /turf/simulated/floor/wood
 	name = "wooden floor"
@@ -70,42 +72,50 @@
 	initial_flooring = /decl/flooring/reinforced
 
 /turf/simulated/floor/reinforced/airless
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 
 /turf/simulated/floor/reinforced/airmix
-	initial_gas = list("oxygen" = MOLES_O2ATMOS, "nitrogen" = MOLES_N2ATMOS)
+	oxygen = MOLES_O2ATMOS
+	nitrogen = MOLES_N2ATMOS
 
 /turf/simulated/floor/reinforced/nitrogen
-	initial_gas = list("nitrogen" = ATMOSTANK_NITROGEN)
-
-/turf/simulated/floor/reinforced/hydrogen
-	initial_gas = list("hydrogen" = ATMOSTANK_HYDROGEN)
+	oxygen = 0
+	nitrogen = ATMOSTANK_NITROGEN
 
 /turf/simulated/floor/reinforced/oxygen
-	initial_gas = list("oxygen" = ATMOSTANK_OXYGEN)
+	oxygen = ATMOSTANK_OXYGEN
+	nitrogen = 0
 
 /turf/simulated/floor/reinforced/phoron
-	initial_gas = list("phoron" = ATMOSTANK_PHORON)
-
-/turf/simulated/floor/reinforced/nitrogen/engine
-	name = "engine floor"
-	initial_gas = list("nitrogen" = MOLES_N2STANDARD)
-
-/turf/simulated/floor/reinforced/phoron/fuel
-	initial_gas = list("phoron" = ATMOSTANK_PHORON_FUEL)
+	oxygen = 0
+	nitrogen = 0
+	phoron = ATMOSTANK_PHORON
 
 /turf/simulated/floor/reinforced/carbon_dioxide
-	initial_gas = list("carbon_dioxide" = ATMOSTANK_CO2)
+	oxygen = 0
+	nitrogen = 0
+	carbon_dioxide = ATMOSTANK_CO2
 
 /turf/simulated/floor/reinforced/n20
-	initial_gas = list("sleeping_agent" = ATMOSTANK_NITROUSOXIDE)
+	oxygen = 0
+	nitrogen = 0
 
+/turf/simulated/floor/reinforced/n20/New()
+	..()
+	sleep(-1)
+	if(!air) make_air()
+	air.adjust_gas("sleeping_agent", ATMOSTANK_NITROUSOXIDE)
 
 /turf/simulated/floor/cult
 	name = "engraved floor"
 	icon = 'icons/turf/flooring/cult.dmi'
 	icon_state = "cult"
 	initial_flooring = /decl/flooring/reinforced/cult
+
+/turf/simulated/floor/cult/New()
+	..()
+	new /obj/effect/overlay/cult/cultfloor(src)
 
 /turf/simulated/floor/cult/cultify()
 	return
@@ -116,7 +126,8 @@
 	initial_flooring = /decl/flooring/tiling/dark
 
 /turf/simulated/floor/tiled/dark/airless
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 
 /turf/simulated/floor/tiled/white
 	name = "white floor"
@@ -137,35 +148,41 @@
 //ATMOS PREMADES
 /turf/simulated/floor/reinforced/airless
 	name = "vacuum floor"
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 	temperature = TCMB
 
 /turf/simulated/floor/airless
 	name = "airless plating"
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 	temperature = TCMB
 
 /turf/simulated/floor/tiled/airless
 	name = "airless floor"
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 	temperature = TCMB
 
 /turf/simulated/floor/bluegrid/airless
 	name = "airless floor"
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 	temperature = TCMB
 
 /turf/simulated/floor/greengrid/airless
 	name = "airless floor"
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 	temperature = TCMB
 
 /turf/simulated/floor/greengrid/nitrogen
-	initial_gas = list("nitrogen" = MOLES_N2STANDARD)
+	oxygen = 0
 
 /turf/simulated/floor/tiled/white/airless
 	name = "airless floor"
-	initial_gas = null
+	oxygen = 0
+	nitrogen = 0
 	temperature = TCMB
 
 // Placeholders
@@ -174,21 +191,17 @@
 	icon = 'icons/turf/flooring/lava.dmi'
 	icon_state = "lava"
 
-/turf/simulated/floor/ice
-	name = "ice"
-	icon = 'icons/turf/snow.dmi'
-	icon_state = "ice"
-
 /turf/simulated/floor/snow
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
 
 /turf/simulated/floor/snow/New()
-	icon_state = pick("snow[rand(1,12)]","snow0")
+	icon_state = "snow[rand(0,12)]"
 	..()
 
 /turf/simulated/floor/light
+/turf/simulated/floor/beach/coastline
 /turf/simulated/floor/airless/ceiling
 
 /turf/simulated/floor/beach
@@ -201,11 +214,6 @@
 
 /turf/simulated/floor/beach/sand/desert
 	icon_state = "desert"
-	has_resources = 1
-
-/turf/simulated/floor/beach/sand/desert/New()
-	icon_state = "desert[rand(0,5)]"
-	..()
 
 /turf/simulated/floor/beach/coastline
 	name = "coastline"

@@ -59,7 +59,7 @@
 	name = "Fleet medical"
 	departments = MED
 
-	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/medical, /obj/item/clothing/head/ushanka/fleet, /obj/item/clothing/head/utility/marine, /obj/item/clothing/under/utility/marine/medical, /obj/item/clothing/shoes/jungleboots)
+	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/medical, /obj/item/clothing/head/ushanka/fleet)
 	utility_under = /obj/item/clothing/under/utility/fleet/medical
 
 /decl/hierarchy/mil_uniform/fleet/med/officer
@@ -99,9 +99,6 @@
 	name = "Fleet service"
 	departments = SRV
 
-	utility_under = /obj/item/clothing/under/utility/fleet/service
-	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/service, /obj/item/clothing/head/ushanka/fleet)
-
 /decl/hierarchy/mil_uniform/fleet/srv/officer
 	name = "Fleet service CO"
 	min_rank = 11
@@ -116,13 +113,6 @@
 /decl/hierarchy/mil_uniform/fleet/spt
 	name = "Fleet command support"
 	departments = SPT
-
-	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/command, /obj/item/clothing/head/ushanka/fleet)
-	utility_under = /obj/item/clothing/under/utility/fleet/command
-
-	service_hat = /obj/item/clothing/head/dress/fleet/command
-
-	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer)
 
 /decl/hierarchy/mil_uniform/fleet/spt/officer
 	name = "Fleet command support CO"

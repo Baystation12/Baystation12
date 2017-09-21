@@ -126,8 +126,7 @@
 	if (authorized.len >= req_authorizations)
 		return 0 //don't need any more
 
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	if (!evacuation_controller.emergency_evacuation && security_state.current_security_level_is_lower_than(security_state.high_security_level))
+	if (!evacuation_controller.emergency_evacuation && security_level < SEC_LEVEL_RED)
 		src.visible_message("\The [src] buzzes. It does not appear to be accepting any commands.")
 		return 0
 

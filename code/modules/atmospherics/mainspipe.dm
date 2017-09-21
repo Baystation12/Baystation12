@@ -68,7 +68,7 @@ obj/machinery/atmospherics/mains_pipe
 
 	hide(var/i)
 		if(level == 1 && istype(loc, /turf/simulated))
-			set_invisibility(i ? 101 : 0)
+			invisibility = i ? 101 : 0
 		ADD_ICON_QUEUE(src)
 
 	proc/burst()

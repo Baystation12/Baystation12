@@ -113,7 +113,7 @@
 	module_sprites["Basic"] = "robot"
 	icontype = "Basic"
 	updatename(modtype)
-	update_icon()
+	updateicon()
 
 	radio = new /obj/item/device/radio/borg(src)
 	common_radio = radio
@@ -253,7 +253,7 @@
 		else
 			icontype = module_sprites[1]
 		icon_state = module_sprites[icontype]
-	update_icon()
+	updateicon()
 	return module_sprites
 
 /mob/living/silicon/robot/proc/pick_module()
@@ -261,8 +261,7 @@
 		return
 	var/list/modules = list()
 	modules.Add(GLOB.robot_module_types)
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	if((crisis && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)) || crisis_override) //Leaving this in until it's balanced appropriately.
+	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		to_chat(src, "<span class='warning'>Crisis mode active. Combat module available.</span>")
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot module", null, null) as null|anything in modules
@@ -340,7 +339,7 @@
 			custom_name = newname
 
 		updatename()
-		update_icon()
+		updateicon()
 
 // this verb lets cyborgs see the stations manifest
 /mob/living/silicon/robot/verb/cmd_station_manifest()
@@ -524,7 +523,7 @@
 				if(do_after(user, 50, src))
 					to_chat(user, "<span class='notice'>You close \the [src]'s maintenance hatch.</span>")
 					opened = 0
-					update_icon()
+					updateicon()
 
 			else if(wiresexposed && wires.IsAllCut())
 				//Cell is out, wires are exposed, remove MMI, produce damaged chassis, baleet original mob.
@@ -540,7 +539,7 @@
 					C.parts[BP_R_LEG] = new/obj/item/robot_parts/r_leg(C)
 					C.parts[BP_L_ARM] = new/obj/item/robot_parts/l_arm(C)
 					C.parts[BP_R_ARM] = new/obj/item/robot_parts/r_arm(C)
-					C.update_icon()
+					C.updateicon()
 					new/obj/item/robot_parts/chest(loc)
 					qdel(src)
 
@@ -577,7 +576,7 @@
 				if(do_after(user, 50, src))
 					to_chat(user, "<span class='notice'>You open \the [src]'s maintenance hatch.</span>")
 					opened = 1
-					update_icon()
+					updateicon()
 
 	else if (istype(W, /obj/item/weapon/stock_parts/matter_bin) && opened) // Installing/swapping a matter bin
 		if(storage)
@@ -619,14 +618,14 @@
 	else if(istype(W, /obj/item/weapon/screwdriver) && opened && !cell)	// haxing
 		wiresexposed = !wiresexposed
 		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"].")
-		update_icon()
+		updateicon()
 
 	else if(istype(W, /obj/item/weapon/screwdriver) && opened && cell)	// radio
 		if(radio)
 			radio.attackby(W,user)//Push it to the radio to let it handle everything
 		else
 			to_chat(user, "Unable to locate a radio.")
-		update_icon()
+		updateicon()
 
 	else if(istype(W, /obj/item/device/encryptionkey/) && opened)
 		if(radio)//sanityyyyyy
@@ -642,7 +641,7 @@
 			if(allowed(usr))
 				locked = !locked
 				to_chat(user, "You [ locked ? "lock" : "unlock"] [src]'s interface.")
-				update_icon()
+				updateicon()
 			else
 				to_chat(user, "<span class='warning'>Access denied.</span>")
 	else if(istype(W, /obj/item/borg/upgrade/))
@@ -686,7 +685,7 @@
 			cell = null
 			cell_component.wrapped = null
 			cell_component.installed = 0
-			update_icon()
+			updateicon()
 		else if(cell_component.installed == -1)
 			cell_component.installed = 0
 			var/obj/item/broken_device = cell_component.wrapped
@@ -726,7 +725,7 @@
 			return 1
 	return 0
 
-/mob/living/silicon/robot/update_icon()
+/mob/living/silicon/robot/updateicon()
 	overlays.Cut()
 	if(stat == CONSCIOUS)
 		var/eye_icon_state = "eyes-[module_sprites[icontype]]"
@@ -976,7 +975,7 @@
 	else
 		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chance\s." : "This is your last try."]", "Robot Icon", icontype, null) in module_sprites
 	icon_state = module_sprites[icontype]
-	update_icon()
+	updateicon()
 
 	if (module_sprites.len > 1 && triesleft >= 1 && client)
 		icon_selection_tries--
@@ -1108,7 +1107,7 @@
 						if(rebuild)
 							src.module.modules += new /obj/item/weapon/pickaxe/diamonddrill(src.module)
 							src.module.rebuild()
-					update_icon()
+					updateicon()
 			else
 				to_chat(user, "You fail to hack [src]'s interface.")
 				to_chat(src, "Hack attempt detected.")

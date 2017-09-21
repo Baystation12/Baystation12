@@ -9,28 +9,25 @@ var/global/datum/controller/occupations/job_master
 	var/list/occupations = list()
 		//Associative list of all jobs, by type
 	var/list/occupations_by_type
-	//Associative list of all jobs, by title
-	var/list/occupations_by_title
 		//Players who need jobs
 	var/list/unassigned = list()
 		//Debug info
 	var/list/job_debug = list()
 
 
-	proc/SetupOccupations(var/setup_titles = 0)
+	proc/SetupOccupations(var/faction = "Station", var/setup_titles = 0)
 		occupations = list()
 		occupations_by_type = list()
-		occupations_by_title = list()
 		var/list/all_jobs = list(/datum/job/assistant) | GLOB.using_map.allowed_jobs
 		if(!all_jobs.len)
 			log_error("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
-			var/datum/job/job = decls_repository.get_decl(J)
+			var/datum/job/job = new J()
 			if(!job)	continue
+			if(job.faction != faction)	continue
 			occupations += job
 			occupations_by_type[job.type] = job
-			occupations_by_title[job.title] = job
 			if(!setup_titles) continue
 			if(job.department_flag & COM)
 				command_positions |= job.title
@@ -92,7 +89,9 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
-			if(job.is_restricted(player.client.prefs))
+			if(!job.is_branch_allowed(player.get_branch_pref()))
+				return 0
+			if(!job.is_rank_allowed(player.get_branch_pref(), player.get_rank_pref()))
 				return 0
 
 			var/position_limit = job.total_positions
@@ -146,9 +145,6 @@ var/global/datum/controller/occupations/job_master
 				continue
 
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
-				continue
-
-			if(job.is_restricted(player.client.prefs))
 				continue
 
 			if(job.title in command_positions) //If you want a command position, select it!
@@ -357,14 +353,14 @@ var/global/datum/controller/occupations/job_master
 			//Equip custom gear loadout.
 			var/list/custom_equip_slots = list() //If more than one item takes the same slot, all after the first one spawn in storage.
 			var/list/custom_equip_leftovers = list()
-			if(H.client.prefs.Gear() && job.loadout_allowed)
+			if(H.client.prefs.Gear() && job.title != "Cyborg" && job.title != "AI")
 				for(var/thing in H.client.prefs.Gear())
 					var/datum/gear/G = gear_datums[thing]
 					if(G)
 						var/permitted
 						if(G.allowed_roles)
-							for(var/job_type in G.allowed_roles)
-								if(job.type == job_type)
+							for(var/job_name in G.allowed_roles)
+								if(job.title == job_name)
 									permitted = 1
 						else
 							permitted = 1
@@ -425,7 +421,7 @@ var/global/datum/controller/occupations/job_master
 
 		if(!joined_late || job.latejoin_at_spawnpoints)
 			var/obj/S = get_roundstart_spawnpoint(rank)
-
+			
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.forceMove(S.loc)
 			else
@@ -633,7 +629,7 @@ var/global/datum/controller/occupations/job_master
 				to_chat(H, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead. To resolve this error head to your character's setup and choose a different spawn point.</span>")
 			spawnpos = null
 		else
-			spawnpos = spawntypes()[spawnpoint]
+			spawnpos = spawntypes[spawnpoint]
 
 	if(spawnpos && !spawnpos.check_job_spawning(rank))
 		if(H)
@@ -643,7 +639,7 @@ var/global/datum/controller/occupations/job_master
 	if(!spawnpos)
 		// Step through all spawnpoints and pick first appropriate for job
 		for(var/spawntype in GLOB.using_map.allowed_spawns)
-			var/datum/spawnpoint/candidate = spawntypes()[spawntype]
+			var/datum/spawnpoint/candidate = spawntypes[spawntype]
 			if(candidate.check_job_spawning(rank))
 				spawnpos = candidate
 				break
@@ -651,7 +647,7 @@ var/global/datum/controller/occupations/job_master
 	if(!spawnpos)
 		// Pick at random from all the (wrong) spawnpoints, just so we have one
 		warning("Could not find an appropriate spawnpoint for job [rank].")
-		spawnpos = spawntypes()[pick(GLOB.using_map.allowed_spawns)]
+		spawnpos = spawntypes[pick(GLOB.using_map.allowed_spawns)]
 
 	return spawnpos
 

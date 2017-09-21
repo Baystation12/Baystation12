@@ -152,12 +152,11 @@ var/const/NO_EMAG_ACT = -50
 	popup.open()
 	return
 
-/obj/item/weapon/card/id/proc/update_name()
-	name = "[registered_name]'s ID Card"
-	if(military_rank && military_rank.name_short)
-		name = military_rank.name_short + " " + name
+/obj/item/weapon/card/id/proc/update_name(var/mob/M)
 	if(assignment)
-		name = name + " ([assignment])"
+		name = "[registered_name]'s ID Card ([assignment])"
+	else
+		name = "[registered_name]'s ID Card"
 
 /obj/item/weapon/card/id/proc/set_id_photo(var/mob/M)
 	front = getFlatIcon(M, SOUTH, always_use_defdir = 1)

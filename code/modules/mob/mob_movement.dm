@@ -58,16 +58,15 @@
 				to_chat(usr, "<span class='warning'>This mob type cannot throw items.</span>")
 			return
 		if(NORTHWEST)
-			mob.hotkey_drop()
-
-/mob/proc/hotkey_drop()
-	to_chat(usr, "<span class='warning'>This mob type cannot drop items.</span>")
-
-/mob/living/carbon/hotkey_drop()
-	if(!get_active_hand())
-		to_chat(usr, "<span class='warning'>You have nothing to drop in your hand.</span>")
-	else
-		drop_item()
+			if(iscarbon(usr))
+				var/mob/living/carbon/C = usr
+				if(!C.get_active_hand())
+					to_chat(usr, "<span class='warning'>You have nothing to drop in your hand.</span>")
+					return
+				drop_item()
+			else
+				to_chat(usr, "<span class='warning'>This mob type cannot drop items.</span>")
+			return
 
 //This gets called when you press the delete button.
 /client/verb/delete_key_pressed()
@@ -364,7 +363,7 @@
 								M.other_mobs = null
 								M.animate_movement = 2
 								return
-					G.adjust_position()
+
 		else
 			if(mob.confused)
 				switch(mob.m_intent)

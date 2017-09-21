@@ -56,53 +56,53 @@
 
 	on_reagent_change()
 		if(reagents.reagent_list.len > 0)
-			switch(reagents.get_master_reagent_type())
-				if(/datum/reagent/nutriment/ketchup)
+			switch(reagents.get_master_reagent_id())
+				if("ketchup")
 					name = "Ketchup"
 					desc = "You feel more American already."
 					icon_state = "ketchup"
 					center_of_mass = "x=16;y=6"
-				if(/datum/reagent/nutriment/barbecue)
+				if("barbecue")
 					name = "Barbecue Sauce"
 					desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
 					icon_state = "barbecue"
 					center_of_mass = "x=16;y=6"
-				if(/datum/reagent/capsaicin)
+				if("capsaicin")
 					name = "Hotsauce"
 					desc = "You can almost TASTE the stomach ulcers now!"
 					icon_state = "hotsauce"
 					center_of_mass = "x=16;y=6"
-				if(/datum/reagent/enzyme)
+				if("enzyme")
 					name = "Universal Enzyme"
 					desc = "Used in cooking various dishes."
 					icon_state = "enzyme"
 					center_of_mass = "x=16;y=6"
-				if(/datum/reagent/nutriment/soysauce)
+				if("soysauce")
 					name = "Soy Sauce"
 					desc = "A salty soy-based flavoring."
 					icon_state = "soysauce"
 					center_of_mass = "x=16;y=6"
-				if(/datum/reagent/frostoil)
+				if("frostoil")
 					name = "Coldsauce"
 					desc = "Leaves the tongue numb in its passage."
 					icon_state = "coldsauce"
 					center_of_mass = "x=16;y=6"
-				if(/datum/reagent/sodiumchloride)
+				if("sodiumchloride")
 					name = "Salt Shaker"
 					desc = "Salt. From space oceans, presumably."
 					icon_state = "saltshaker"
 					center_of_mass = "x=16;y=10"
-				if(/datum/reagent/blackpepper)
+				if("blackpepper")
 					name = "Pepper Mill"
 					desc = "Often used to flavor food or make people sneeze."
 					icon_state = "peppermillsmall"
 					center_of_mass = "x=16;y=10"
-				if(/datum/reagent/nutriment/cornoil)
+				if("cornoil")
 					name = "Corn Oil"
 					desc = "A delicious oil used in cooking. Made from corn."
 					icon_state = "oliveoil"
 					center_of_mass = "x=16;y=6"
-				if(/datum/reagent/sugar)
+				if("sugar")
 					name = "Sugar"
 					desc = "Tastey space sugar!"
 					center_of_mass = "x=16;y=6"
@@ -125,21 +125,22 @@
 	name = "Universal Enzyme"
 	desc = "Used in cooking various dishes."
 	icon_state = "enzyme"
-/obj/item/weapon/reagent_containers/food/condiment/enzyme/New()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/enzyme, 50)
+	New()
+		..()
+		reagents.add_reagent("enzyme", 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/barbecue
 	name = "Barbecue Sauce"
 	desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
 	icon_state = "barbecue"
-/obj/item/weapon/reagent_containers/food/condiment/barbecue/New()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/nutriment/barbecue, 50)
+	New()
+		..()
+		reagents.add_reagent("barbecue", 50)
 
-/obj/item/weapon/reagent_containers/food/condiment/sugar/New()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/sugar, 50)
+/obj/item/weapon/reagent_containers/food/condiment/sugar
+	New()
+		..()
+		reagents.add_reagent("sugar", 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/small
 	possible_transfer_amounts = "1;20"
@@ -156,7 +157,7 @@
 	center_of_mass = "x=16;y=9"
 	New()
 		..()
-		reagents.add_reagent(/datum/reagent/sodiumchloride, 20)
+		reagents.add_reagent("sodiumchloride", 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/peppermill
 	name = "pepper mill"
@@ -165,16 +166,16 @@
 	center_of_mass = "x=16;y=8"
 	New()
 		..()
-		reagents.add_reagent(/datum/reagent/blackpepper, 20)
+		reagents.add_reagent("blackpepper", 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar
 	name = "sugar"
 	desc = "Sweetness in a bottle"
 	icon_state = "sugarsmall"
 	center_of_mass = "x=17;y=9"
-/obj/item/weapon/reagent_containers/food/condiment/small/sugar/New()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/sugar, 20)
+	New()
+		..()
+		reagents.add_reagent("sugar", 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/flour
 	name = "flour sack"
@@ -186,4 +187,4 @@
 	randpixel = 10
 	New()
 		..()
-		reagents.add_reagent(/datum/reagent/nutriment/flour, 30)
+		reagents.add_reagent("flour", 30)

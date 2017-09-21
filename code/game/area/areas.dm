@@ -107,7 +107,7 @@
 /area/proc/fire_alert()
 	if(!fire)
 		fire = 1	//used for firedoor checks
-		update_icon()
+		updateicon()
 		mouse_opacity = 0
 		if(!all_doors)
 			return
@@ -122,7 +122,7 @@
 /area/proc/fire_reset()
 	if (fire)
 		fire = 0	//used for firedoor checks
-		update_icon()
+		updateicon()
 		mouse_opacity = 0
 		if(!all_doors)
 			return
@@ -137,16 +137,16 @@
 /area/proc/readyalert()
 	if(!eject)
 		eject = 1
-		update_icon()
+		updateicon()
 	return
 
 /area/proc/readyreset()
 	if(eject)
 		eject = 0
-		update_icon()
+		updateicon()
 	return
 
-/area/update_icon()
+/area/proc/updateicon()
 	if ((fire || eject) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
 		if(fire && !eject)
 			icon_state = "blue"
@@ -220,7 +220,7 @@
 /area/proc/set_lightswitch(var/new_switch)
 	if(lightswitch != new_switch)
 		lightswitch = new_switch
-		update_icon()
+		updateicon()
 		power_change()
 
 /area/proc/set_emergency_lighting(var/enable)

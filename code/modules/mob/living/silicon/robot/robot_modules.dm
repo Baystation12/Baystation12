@@ -24,15 +24,14 @@ var/global/list/robot_modules = list(
 	var/networks = list()
 	var/languages = list(
 		LANGUAGE_SOL_COMMON = 1,
-		LANGUAGE_LUNAR = 1,
+		LANGUAGE_TRADEBAND = 1,
 		LANGUAGE_UNATHI = 0,
 		LANGUAGE_SIIK_MAAS = 0,
 		LANGUAGE_SKRELLIAN = 0,
 		LANGUAGE_RESOMI = 0,
 		LANGUAGE_GUTTER = 0,
 		LANGUAGE_SIGN = 0,
-		LANGUAGE_INDEPENDENT = 0,
-		LANGUAGE_SPACER = 1)
+		LANGUAGE_INDEPDENDENT = 0)
 	var/sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0
@@ -178,7 +177,7 @@ var/global/list/robot_modules = list(
 					"Android" = "droid",
 					"Default" = "robot",
 					"Drone" = "drone-standard",
-					"Doot" = "eyebot-standard"
+					"Eyebot" = "eyebot-standard"
 				  )
 
 /obj/item/weapon/robot_module/standard/New()
@@ -206,7 +205,7 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
 					"Drone" = "drone-surgery",
-					"Doot" = "eyebot-medical"
+					"Eyebot" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/medical/surgeon/New()
@@ -225,7 +224,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/gripper/organ(src)
 	src.modules += new /obj/item/roller_holder(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
+	src.emag.reagents.add_reagent("pacid", 250)
 	src.emag.name = "Polyacid spray"
 
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(10000)
@@ -247,7 +246,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/medical/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
-		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
+		PS.reagents.add_reagent("pacid", 2 * amount)
 	..()
 
 /obj/item/weapon/robot_module/medical/crisis
@@ -259,7 +258,7 @@ var/global/list/robot_modules = list(
 					"Needles" = "medicalrobot",
 					"Drone - Medical" = "drone-medical",
 					"Drone - Chemistry" = "drone-chemistry",
-					"Doot" = "eyebot-medical"
+					"Eyebot" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/medical/crisis/New()
@@ -277,7 +276,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/extinguisher/mini(src)
 	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src) // Allows usage of inflatables. Since they are basically robotic alternative to EMTs, they should probably have them.
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
+	src.emag.reagents.add_reagent("pacid", 250)
 	src.emag.name = "Polyacid spray"
 
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(15000)
@@ -311,7 +310,7 @@ var/global/list/robot_modules = list(
 
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
-		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
+		PS.reagents.add_reagent("pacid", 2 * amount)
 
 	..()
 
@@ -320,7 +319,7 @@ var/global/list/robot_modules = list(
 	name = "engineering robot module"
 	channels = list("Engineering" = 1)
 	networks = list(NETWORK_ENGINEERING)
-	subsystems = list(/datum/nano_module/power_monitor, /datum/nano_module/supermatter_monitor)
+	subsystems = list(/datum/nano_module/power_monitor)
 	supported_upgrades = list(/obj/item/borg/upgrade/rcd)
 	sprites = list(
 					"Basic" = "Engineering",
@@ -328,7 +327,7 @@ var/global/list/robot_modules = list(
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
 					"Drone" = "drone-engineer",
-					"Doot" = "eyebot-engineering"
+					"Eyebot" = "eyebot-engineering"
 					)
 	no_slip = 1
 
@@ -351,7 +350,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/pipe_painter(src)
 	src.modules += new /obj/item/device/floor_painter(src)
 	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src)
-	src.emag = new /obj/item/weapon/melee/baton/robot/electrified_arm(src)
+	src.emag = new /obj/item/borg/stun(src)
 
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal(60000)
 	var/datum/matter_synth/glass = new /datum/matter_synth/glass(40000)
@@ -397,16 +396,11 @@ var/global/list/robot_modules = list(
 
 	..()
 
-/obj/item/weapon/robot_module/engineering/general/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
-	var/obj/item/device/lightreplacer/LR = locate() in src.modules
-	LR.Charge(R, amount)
-	..()
-
 /obj/item/weapon/robot_module/security
 	name = "security robot module"
 	channels = list("Security" = 1)
 	networks = list(NETWORK_SECURITY)
-	subsystems = list(/datum/nano_module/crew_monitor, /datum/nano_module/digitalwarrant)
+	subsystems = list(/datum/nano_module/crew_monitor)
 	can_be_pushed = 0
 	supported_upgrades = list(/obj/item/borg/upgrade/tasercooler)
 
@@ -418,8 +412,7 @@ var/global/list/robot_modules = list(
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
 					"Drone" = "drone-sec",
-					"Doot" = "eyebot-security",
-					"Tridroid" = "orb-security"
+					"Eyebot" = "eyebot-security"
 				)
 
 /obj/item/weapon/robot_module/security/general/New()
@@ -454,7 +447,7 @@ var/global/list/robot_modules = list(
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
 					"Drone" = "drone-janitor",
-					"Doot" = "eyebot-janitor"
+					"Eyebot" = "eyebot-janitor"
 					)
 
 /obj/item/weapon/robot_module/janitor/New()
@@ -464,7 +457,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/mop(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent(/datum/reagent/lube, 250)
+	src.emag.reagents.add_reagent("lube", 250)
 	src.emag.name = "Lube spray"
 	..()
 
@@ -474,7 +467,7 @@ var/global/list/robot_modules = list(
 	LR.Charge(R, amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/S = src.emag
-		S.reagents.add_reagent(/datum/reagent/lube, 20 * amount)
+		S.reagents.add_reagent("lube", 20 * amount)
 
 /obj/item/weapon/robot_module/clerical
 	name = "service robot module"
@@ -485,15 +478,10 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SIIK_MAAS	= 1,
 					LANGUAGE_SIIK_TAJR	= 0,
 					LANGUAGE_SKRELLIAN	= 1,
-<<<<<<< HEAD
 					LANGUAGE_RESOMI		= 1,
 					LANGUAGE_TRADEBAND	= 1,
-=======
-					LANGUAGE_LUNAR	= 1,
->>>>>>> f7966f594231c208dfde2ee1a0da347ef0071019
 					LANGUAGE_GUTTER		= 1,
-					LANGUAGE_INDEPENDENT= 1,
-					LANGUAGE_SPACER = 1
+					LANGUAGE_INDEPENDENT= 1
 					)
 
 /obj/item/weapon/robot_module/clerical/butler
@@ -504,7 +492,7 @@ var/global/list/robot_modules = list(
 					"Default" = "Service2",
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
-					"Doot" = "eyebot-standard"
+					"Eyebot" = "eyebot-standard"
 				  	)
 
 /obj/item/weapon/robot_module/clerical/butler/New()
@@ -536,7 +524,7 @@ var/global/list/robot_modules = list(
 	var/datum/reagents/R = new/datum/reagents(50)
 	src.emag.reagents = R
 	R.my_atom = src.emag
-	R.add_reagent(/datum/reagent/chloralhydrate/beer2, 50)
+	R.add_reagent("beer2", 50)
 	src.emag.name = "Mickey Finn's Special Brew"
 	..()
 
@@ -549,7 +537,7 @@ var/global/list/robot_modules = list(
 					"Rich" = "maximillion",
 					"Default" = "Service2",
 					"Drone" = "drone-service",
-					"Doot" = "eyebot-standard"
+					"Eyebot" = "eyebot-standard"
 					)
 
 /obj/item/weapon/robot_module/clerical/general/New()
@@ -564,14 +552,13 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
-	E.reagents.add_reagent(/datum/reagent/enzyme, 2 * amount)
+	E.reagents.add_reagent("enzyme", 2 * amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/B = src.emag
-		B.reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 2 * amount)
+		B.reagents.add_reagent("beer2", 2 * amount)
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"
-	subsystems = list(/datum/nano_module/supply)
 	channels = list("Supply" = 1, "Science" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(
@@ -579,7 +566,7 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-miner",
 					"Treadhead" = "Miner",
 					"Drone" = "drone-miner",
-					"Doot" = "eyebot-miner"
+					"Eyebot" = "eyebot-miner"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
@@ -604,7 +591,7 @@ var/global/list/robot_modules = list(
 	sprites = list(
 					"Droid" = "droid-science",
 					"Drone" = "drone-science",
-					"Doot" = "eyebot-science"
+					"Eyebot" = "eyebot-science"
 					)
 
 /obj/item/weapon/robot_module/research/New()

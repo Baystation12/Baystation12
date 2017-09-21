@@ -60,6 +60,9 @@ datum/controller/game_controller/proc/setup_objects()
 
 	// Do these first since character setup will rely on them
 
+	//Set up spawn points.
+	populate_spawn_points()
+
 	initialization_stage |= INITIALIZATION_HAS_BEGUN
 
 	if(config.generate_map)
