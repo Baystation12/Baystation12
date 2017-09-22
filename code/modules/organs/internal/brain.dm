@@ -21,7 +21,7 @@
 	var/healed_threshold = 1
 
 /obj/item/organ/internal/brain/robotize()
-	replace_self_with(/obj/item/organ/internal/mmi_holder/posibrain)
+	replace_self_with(/obj/item/organ/internal/posibrain)
 
 /obj/item/organ/internal/brain/mechassist()
 	replace_self_with(/obj/item/organ/internal/mmi_holder)

@@ -1012,7 +1012,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(!keep_organs)
 			for(var/obj/item/organ/thing in internal_organs)
 				if(istype(thing))
-					if(thing.vital)
+					if(thing.vital || thing.robotic >= ORGAN_ROBOT)
 						continue
 					internal_organs -= thing
 					owner.internal_organs_by_name[thing.organ_tag] = null

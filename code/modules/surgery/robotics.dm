@@ -434,7 +434,8 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/robotics/install_mmi
 	allowed_tools = list(
-	/obj/item/device/mmi = 100
+	/obj/item/device/mmi = 100,
+	/obj/item/organ/internal/posibrain = 100
 	)
 
 	min_duration = 60
@@ -442,7 +443,7 @@
 
 /datum/surgery_step/robotics/install_mmi/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
-	if(target_zone != BP_HEAD)
+	if(target_zone != BP_CHEST)
 		return
 
 	var/obj/item/device/mmi/M = tool
@@ -458,7 +459,7 @@
 		return SURGERY_FAILURE
 
 	if(!(affected.robotic >= ORGAN_ROBOT))
-		to_chat(user, "<span class='danger'>You cannot install a computer brain into a meat torso.</span>")
+		to_chat(user, "<span class='danger'>You cannot install a computer brain into a meat body.</span>")
 		return SURGERY_FAILURE
 
 	if(!target.should_have_organ(BP_BRAIN))

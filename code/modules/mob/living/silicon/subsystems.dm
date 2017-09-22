@@ -103,3 +103,7 @@
 
 /stat_silicon_subsystem/Click()
 	subsystem.ui_interact(usr, state = ui_state)
+
+/stat_silicon_subsystem/Click(var/mob/given)
+	if(given)
+		subsystem.ui_interact(given, state = ui_state)

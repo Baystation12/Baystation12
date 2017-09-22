@@ -168,10 +168,8 @@
 #define BP_LIVER    "liver"
 #define BP_KIDNEYS  "kidneys"
 #define BP_PLASMA   "plasma vessel"
-#define BP_STACK    "stack"
 #define BP_APPENDIX "appendix"
 #define BP_CELL     "cell"
-#define BP_OPTICS   "optics"
 #define BP_HIVE     "hive node"
 #define BP_NUTRIENT "nutrient vessel"
 #define BP_ACID     "acid gland"
@@ -182,8 +180,13 @@
 #define BP_GBLADDER "gas bladder"
 #define BP_POLYP    "polyp segment"
 #define BP_ANCHOR   "anchoring ligament"
-#define BP_VOICE    "vocal synthesiser"
 #define BP_PHORON   "phoron filter"
+
+// Robo Organs.
+#define BP_POSIBRAIN	"posibrain"
+#define BP_VOICE		"vocal synthesiser"
+#define BP_STACK		"stack"
+#define BP_OPTICS		"optics"
 
 // Limbs.
 #define BP_L_FOOT "l_foot"

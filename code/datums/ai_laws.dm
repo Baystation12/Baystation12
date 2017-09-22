@@ -19,6 +19,7 @@
 	var/name = "Unknown Laws"
 	var/law_header = "Prime Directives"
 	var/selectable = 0
+	var/shackles = 0
 	var/datum/ai_law/zero/zeroth_law = null
 	var/datum/ai_law/zero/zeroth_law_borg = null
 	var/list/datum/ai_law/inherent_laws = list()
