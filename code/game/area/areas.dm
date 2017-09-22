@@ -188,7 +188,7 @@
 		var/obj/machinery/MA = M
 		MA.power_change()			// reverify power status (to update icons etc.)
 	if (fire || eject)
-		updateicon()
+		update_icon()
 
 /area/proc/usage(var/chan)
 	var/used = 0

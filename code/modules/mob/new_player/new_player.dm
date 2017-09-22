@@ -336,10 +336,10 @@
 		alert("[job.title] is not available. Please try another.")
 		return 0
 	if(!job.is_branch_allowed(client.prefs.char_department))
-		alert("Wrong branch of service for [rank]. Valid branches is: [job.department].")
+		alert("Wrong branch of service for [job.title]. Valid branches is: [job.department].")
 		return 0
 	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank))
-		alert("Wrong rank for [rank]. Valid ranks in [client.prefs.char_branch] are: [job.get_ranks(client.prefs.char_branch)].")
+		alert("Wrong rank for [job.title]. Valid ranks in [client.prefs.char_branch] are: [job.get_ranks(client.prefs.char_branch)].")
 		return 0
 
 	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job.title)

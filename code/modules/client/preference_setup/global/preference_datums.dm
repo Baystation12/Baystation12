@@ -1,4 +1,3 @@
-
 var/list/_client_preferences
 var/list/_client_preferences_by_key
 var/list/_client_preferences_by_type
