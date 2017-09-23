@@ -265,6 +265,9 @@ var/list/organ_cache = list()
 					degree = " a bit"
 				owner.custom_pain("Something inside your [parent.name] hurts[degree].", amount, affecting = parent)
 
+/obj/item/organ/proc/heal_damage(amount)
+	damage = between(0, damage - amount, max_damage)
+
 /obj/item/organ/proc/bruise()
 	damage = max(damage, min_bruised_damage)
 
