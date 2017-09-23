@@ -1,8 +1,0 @@
-author: ZeroBits
-delete-after: True
-
-changes: 
-  - rscadd: "Activated the Solar Storm random event, which roasts anyone who's EVA at the time."
-  - tweak: "Added rad-shielding to the bunk room so you can stop dying while AFK, also added rad-shielding to the saferooms."
-  - tweak: "Tweaks lottery chances."
-  - tweak: "Allows admins to choose whether or not to make an announcement when they toggle gravity from the secrets panel."

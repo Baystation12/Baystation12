@@ -1,6 +1,0 @@
-author: Chinsky
-
-delete-after: True
-
-changes: 
-  - rscadd: "Can remove rolling end credits with Stop End Titles verb in OOC tab."
