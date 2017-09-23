@@ -258,7 +258,7 @@
 	overdose = 20
 	pain_power = 200
 
-/datum/reagent/painkiller/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/tramadol/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.druggy = max(M.druggy, 10)
 	M.hallucination = max(M.hallucination, 3)
