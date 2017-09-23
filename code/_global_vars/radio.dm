@@ -14,7 +14,8 @@ GLOBAL_LIST_INIT(default_internal_channels, list(
 	num2text(SEC_I_FREQ)=list(access_security),
 	num2text(SCI_FREQ) = list(access_tox,access_robotics,access_xenobiology),
 	num2text(SUP_FREQ) = list(access_cargo),
-	num2text(SRV_FREQ) = list(access_janitor, access_hydroponics)
+	num2text(SRV_FREQ) = list(access_janitor, access_hydroponics),
+	num2text(EXP_FREQ) = list(access_heads),
 ))
 
 GLOBAL_LIST_INIT(default_medbay_channels, list(

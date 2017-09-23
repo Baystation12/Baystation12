@@ -340,13 +340,13 @@
 
 /datum/job/solgov_pilot
 	title = "SolGov Pilot"
-	department = "Support"
-	department_flag = SPT
+	department = "Exploration"
+	department_flag = EXP
 
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
-	selection_color = "#515151"
+	selection_color = "#a3a332"
 	minimal_player_age = 5
 	economic_modifier = 7
 	ideal_character_age = 40
@@ -366,13 +366,13 @@
 
 /datum/job/pathfinder
 	title = "Pathfinder"
-	department = "Service"
-	department_flag = SRV
+	department = "Exploration"
+	department_flag = EXP
 
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
-	selection_color = "#515151"
+	selection_color = "#a3a332"
 	minimal_player_age = 7
 	economic_modifier = 7
 	ideal_character_age = 35
@@ -389,12 +389,12 @@
 
 /datum/job/explorer
 	title = "Explorer"
-	department = "Service"
-	department_flag = SRV
+	department = "Exploration"
+	department_flag = EXP
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
-	selection_color = "#515151"
+	selection_color = "#a3a332"
 	minimal_player_age = 4
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/explorer
