@@ -37,13 +37,8 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	to_chat(H, "<font color='blue'><b>You are now invisible to normal detection.</b></font>")
-	H.cloaked = TRUE
-	H.update_icons()
-
-	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
-
-	H.visible_message("[H.name] vanishes into thin air!",1)
+	if(H.add_cloaking_source(src))
+		anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
 /obj/item/rig_module/stealth_field/deactivate()
 
@@ -52,15 +47,11 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	to_chat(H, "<span class='danger'>You are now visible.</span>")
-	H.cloaked = FALSE
-	H.update_icons()
-
-	anim(get_turf(H), H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
-	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
-
-	for(var/mob/O in oviewers(H))
-		O.show_message("[H.name] appears from thin air!",1)
+	if(H.remove_cloaking_source(src))
+		anim(get_turf(H), H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
+		anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
+	
+	// We still play the sound, even if not visibly uncloaking. Ninjas are not that stealthy.
 	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
 
 
