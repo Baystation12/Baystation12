@@ -178,9 +178,9 @@
 	name = "Paracetamol"
 	description = "Most probably know this as Tylenol, but this chemical is a mild, simple painkiller."
 	taste_description = "sickness"
-	reagent_state = LIQUID
 	color = "#C8A5DC"
 	overdose = 60
+	reagent_state = LIQUID
 	scannable = 1
 	metabolism = 0.02
 	flags = IGNORE_MOB_SIZE
@@ -191,39 +191,74 @@
 /datum/reagent/paracetamol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.hallucination = max(M.hallucination, 2)
+	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /datum/reagent/tramadol
 	name = "Tramadol"
-	description = "A simple, yet effective painkiller."
+	description = "A simple, yet effective painkiller. Don't mix with alcohol."
 	taste_description = "sourness"
-	reagent_state = LIQUID
 	color = "#CB68FC"
+	reagent_state = LIQUID
 	overdose = 30
 	scannable = 1
 	metabolism = 0.02
 	flags = IGNORE_MOB_SIZE
+	var/pain_power = 80 //magnitide of painkilling effect
+	var/effective_dose = 0.2 //how many units it need to process to reach max power
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 80)
+	var/effectiveness = 1
+	if(dose < effective_dose) //some ease-in ease-out for the effect
+		effectiveness = dose/effective_dose
+	else if(volume < effective_dose)
+		effectiveness = volume/effective_dose
+	M.add_chemical_effect(CE_PAINKILLER, pain_power * effectiveness)
+	if(dose > 0.5 * overdose)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+		if(prob(1))
+			M.slurring = max(M.slurring, 10)
+	if(dose > 0.75 * overdose)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+		if(prob(5))
+			M.slurring = max(M.slurring, 20)
+	if(dose > overdose)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+		M.slurring = max(M.slurring, 30)
+		if(prob(1))
+			M.Weaken(2)
+			M.drowsyness = max(M.drowsyness, 5)
+	var/boozed = isboozed(M)
+	if(boozed)
+		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
+		M.add_chemical_effect(CE_BREATHLOSS, 0.1 * boozed) //drinking and opiating makes breathing kinda hard
 
 /datum/reagent/tramadol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.hallucination = max(M.hallucination, 2)
+	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
+	M.add_chemical_effect(CE_BREATHLOSS, 0.6) //Have trouble breathing, need more air
+	if(isboozed(M))
+		M.add_chemical_effect(CE_BREATHLOSS, 0.2) //Don't drink and OD on opiates folks
 
-/datum/reagent/oxycodone
+/datum/reagent/tramadol/proc/isboozed(var/mob/living/carbon/M)
+	. = 0
+	var/list/pool = M.reagents.reagent_list | M.ingested.reagent_list
+	for(var/datum/reagent/ethanol/booze in pool)
+		if(booze.dose < 2) //let them experience false security at first
+			continue
+		. = 1
+		if(booze.strength < 40) //liquor stuff hits harder
+			return 2
+
+/datum/reagent/tramadol/oxycodone
 	name = "Oxycodone"
-	description = "An effective and very addictive painkiller."
+	description = "An effective and very addictive painkiller. Don't mix with alcohol."
 	taste_description = "bitterness"
-	reagent_state = LIQUID
 	color = "#800080"
 	overdose = 20
-	metabolism = 0.02
-	flags = IGNORE_MOB_SIZE
+	pain_power = 200
 
-/datum/reagent/oxycodone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 200)
-
-/datum/reagent/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
+/datum/reagent/painkiller/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.druggy = max(M.druggy, 10)
 	M.hallucination = max(M.hallucination, 3)

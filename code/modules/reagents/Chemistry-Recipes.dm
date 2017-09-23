@@ -172,7 +172,7 @@
 
 /datum/chemical_reaction/oxycodone
 	name = "Oxycodone"
-	result = /datum/reagent/oxycodone
+	result = /datum/reagent/tramadol/oxycodone
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/tramadol = 1)
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
@@ -495,7 +495,7 @@
 /datum/chemical_reaction/noexcutite
 	name = "Noexcutite"
 	result = /datum/reagent/noexcutite
-	required_reagents = list(/datum/reagent/oxycodone = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/tramadol/oxycodone = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
 
 /* Solidification */
