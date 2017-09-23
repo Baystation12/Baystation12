@@ -65,7 +65,7 @@ mob/living/carbon/human/proc/handle_pain()
 		custom_pain(msg, 0, prob(10), affecting = damaged_organ)
 
 	// Damage to internal organs hurts a lot.
-	for(var/obj/item/organ/I in internal_organs)
+	for(var/obj/item/organ/internal/I in internal_organs)
 		if(prob(1) && !((I.status & ORGAN_DEAD) || I.robotic >= ORGAN_ROBOT) && I.damage > 5)
 			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
 			var/pain = 10
