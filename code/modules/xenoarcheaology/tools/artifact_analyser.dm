@@ -1,8 +1,8 @@
 /obj/machinery/artifact_analyser
 	name = "Anomaly Analyser"
 	desc = "Studies the emissions of anomalous materials to discover their uses."
-	icon = 'icons/obj/virology.dmi'
-	icon_state = "isolator"
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "xenoarch_console0"
 	anchored = 1
 	density = 1
 	var/scan_in_progress = 0
@@ -14,8 +14,8 @@
 	var/obj/scanned_object
 	var/report_num = 0
 
-/obj/machinery/artifact_analyser/Initialize()
-	. = ..()
+/obj/machinery/artifact_analyser/initialize()
+	..()
 	reconnect_scanner()
 
 /obj/machinery/artifact_analyser/proc/reconnect_scanner()
@@ -41,9 +41,15 @@
 	if(!owned_scanner)
 		dat += "<b><font color=red>Unable to locate analysis pad.</font></b><br>"
 	else if(scan_in_progress)
+		src.icon_state = "xenoarch_console1"
 		dat += "Please wait. Analysis in progress.<br>"
 		dat += "<a href='?src=\ref[src];halt_scan=1'>Halt scanning.</a><br>"
+		if (do_after(50))								//This works perfectly as far as I can tell, but I've got very little coding experience. If you see something wrong with it, please fix it and lemme know what I did wrong! -Blue Bit
+			src.icon_state = "xenoarch_console0"
+			update_icon()
+
 	else
+		icon_state = "xenoarch_console0"
 		dat += "Scanner is ready.<br>"
 		dat += "<a href='?src=\ref[src];begin_scan=1'>Begin scanning.</a><br>"
 
@@ -156,3 +162,4 @@
 			return out
 		else
 			return "[scanned_obj.name] - mundane application."
+
