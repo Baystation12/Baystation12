@@ -389,6 +389,7 @@
 	icon_state = "fleetrank"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_RANK
+	gender = PLURAL
 
 /obj/item/clothing/accessory/rank/fleet
 	name = "naval ranks"
