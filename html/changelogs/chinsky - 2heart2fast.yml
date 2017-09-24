@@ -9,3 +9,6 @@ changes:
   - rscadd: "Heart stopping is slightly less 100% surefire, so if you manage to get heart restarted it might beat for few ticks first."
   - rscadd: "You no longer need lungs/mouth to give CPR, but you will only do the heart bit. Checks still apply for mouth-to-mouth."
   - rscadd: "Shock stage stars rising earlier now (30 damage vs 50) and can go bit higher than usual."
+  - rscadd: "Painkillers speed changed. Now they ramp up slower if ingested, but stay longer. Opposite if injected."
+  - rscadd: "Tramadol and oxcodone injectors added to medical vendomats (and tramadol ones to hacked firstaid vendomats)."
+  - rscadd: "Adds some goodies to survival boxes - inapro injector, food and light."
