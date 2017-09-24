@@ -526,9 +526,9 @@
 	for (var/ch_name in channels)
 		channels[ch_name] = 0
 	..()
-    
+	
 /obj/item/device/radio/proc/recalculateChannels()
-    return
+	return
 
 ///////////////////////////////
 //////////Borg Radios//////////
@@ -551,11 +551,11 @@
 	keyslot = /obj/item/device/encryptionkey/syndicate
 
 /obj/item/device/radio/borg/New(var/mob/living/silicon/robot/loc)
-    if(!istype(loc))
-        CRASH("Invalid spawn location: [log_info_line(loc)]")
-    ..()
-    myborg = loc
-    
+	if(!istype(loc))
+		CRASH("Invalid spawn location: [log_info_line(loc)]")
+	..()
+	myborg = loc
+	
 /obj/item/device/radio/borg/Initialize()
 	. = ..()
 	recalculateChannels()
