@@ -172,7 +172,7 @@
 		for (var/mob/living/carbon/slime/S in view(1, src))
 			if (S != src)
 				frenemy = S
-		if (frenemy && prob(1))
+		if (frenemy && prob(1) && frenemy.Adjacent(src))
 			if (frenemy.colour == colour)
 				a_intent = I_HELP
 			else

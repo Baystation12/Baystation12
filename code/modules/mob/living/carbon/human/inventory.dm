@@ -149,6 +149,13 @@ This saves us from having to call add_fingerprint() any time something is put in
 				update_hair(0)	//rebuild hair
 				update_inv_ears(0)
 				update_inv_wear_mask(0)
+		if(src)
+			var/obj/item/clothing/mask/wear_mask = src.get_equipped_item(slot_wear_mask)
+			if(!(wear_mask && (wear_mask.item_flags & AIRTIGHT)))
+				if(internal)
+					if(internals)
+						internals.icon_state = "internal0"
+					internal = null
 		update_inv_head()
 	else if (W == l_ear)
 		l_ear = null
