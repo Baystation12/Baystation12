@@ -5,4 +5,3 @@
 	icon_state = "xenoarch_scanner"
 	anchored = 1
 	density = 0
-
