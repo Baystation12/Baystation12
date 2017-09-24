@@ -126,7 +126,7 @@ client
 			var/datum/gender/G = gender_datums[H.gender]
 			chunk += "[used_name]\t \t \t \t[uppertext(G.him)]SELF"
 		chunksize++
-		if(chunksize > 5)
+		if(chunksize > 2)
 			cast += "<center>[jointext(chunk,"<br>")]</center>"
 			chunk.Cut()
 			chunksize = 0
