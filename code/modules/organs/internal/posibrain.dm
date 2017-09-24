@@ -45,6 +45,11 @@
 		brainmob.dna = H.dna.Clone()
 		brainmob.add_language("Encoded Audio Language")
 
+/obj/item/organ/internal/posibrain/Destroy()
+	if(brainmob)
+		QDEL_NULL(brainmob)
+	..()
+
 /obj/item/organ/internal/posibrain/attack_self(mob/user as mob)
 	if(brainmob && !brainmob.key && searching == 0)
 		//Start the process of searching for a new user.

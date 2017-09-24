@@ -435,7 +435,6 @@
 /datum/surgery_step/robotics/install_mmi
 	allowed_tools = list(
 	/obj/item/device/mmi = 100,
-	/obj/item/organ/internal/posibrain = 100
 	)
 
 	min_duration = 60
@@ -443,7 +442,7 @@
 
 /datum/surgery_step/robotics/install_mmi/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
-	if(target_zone != BP_CHEST)
+	if(target_zone != BP_HEAD)
 		return
 
 	var/obj/item/device/mmi/M = tool

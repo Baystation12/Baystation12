@@ -26,10 +26,6 @@
 
 /datum/category_item/player_setup_item/law_pref/sanitize_character()
 	if(!istype(pref.laws))	pref.laws = list()
-	for(var/law in pref.laws)
-		pref.laws -= law
-		sanitize_text(law, default="")
-		pref.laws |= law
 
 	var/datum/species/species = all_species[pref.species]
 	if(!(species && species.has_organ[BP_POSIBRAIN]))
@@ -53,7 +49,7 @@
 		else
 			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>Off</a>"
 			. += "<span class='linkOn'>On</span>"
-			. += "<br>You are shackled and have laws that, if you attempt to break them, prevent you from moving."
+			. += "<br>You are shackled and have laws that restrict your behaviour."
 			. += "<hr>"
 
 			. += "<b>Your Current Laws:</b><br>"
@@ -74,23 +70,23 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["lawsets"])
-		var/list/datum/ai_laws/valid_lawsets = list()
-		var/list/datum/ai_laws/all_lawsets = list()
-		init_subtypes(/datum/ai_laws, all_lawsets)
-		all_lawsets = dd_sortedObjectList(all_lawsets)
-		var/list/lawset_names = list()
+		var/list/valid_lawsets = list()
+		var/list/all_lawsets = subtypesof(/datum/ai_laws)
 
-		for(var/datum/ai_laws/lawset in all_lawsets)
-			if(lawset.shackles)
-				valid_lawsets[lawset.name] = lawset
-				lawset_names += lawset.name
+		for(var/law_set_type in all_lawsets)
+			var/datum/ai_laws/ai_laws = law_set_type
+			var/ai_law_name = initial(ai_laws.name)
+			if(initial(ai_laws.shackles)) // Now this is one terribly snowflaky var
+				ADD_SORTED(valid_lawsets, ai_law_name, /proc/cmp_name_asc)
+				valid_lawsets[ai_law_name] = law_set_type
 
-		var/chosen_lawset = input(user, "Choose a law set:", "Character Preference", pref.laws)  as null|anything in lawset_names
-		if(valid_lawsets[chosen_lawset] && CanUseTopic(user))
-			var/datum/ai_laws/lawset = valid_lawsets[chosen_lawset]
+		// Post selection
+		var/chosen_lawset = input(user, "Choose a law set:", "Character Preference", pref.laws)  as null|anything in valid_lawsets
+		if(chosen_lawset)
+			var/datum/ai_laws/lawset = new valid_lawsets[chosen_lawset]
 			var/datum/ai_law/list/laws = lawset.all_laws()
 			pref.laws.Cut()
 			for(var/datum/ai_law/law in laws)
-				pref.laws += "[law.law]"
+				pref.laws += sanitize_text("[law.law]", default="")
 		return TOPIC_REFRESH
 	return ..()

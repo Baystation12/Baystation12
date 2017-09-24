@@ -54,11 +54,11 @@
 	qdel(SSS)
 	return TRUE
 
-/mob/living/silicon/proc/open_subsystem(var/subsystem_type)
+/mob/living/silicon/proc/open_subsystem(var/subsystem_type, var/mob/given = src)
 	var/stat_silicon_subsystem/SSS = silicon_subsystems[subsystem_type]
 	if(!istype(SSS))
 		return FALSE
-	SSS.Click()
+	SSS.Click(given)
 	return TRUE
 
 /mob/living/silicon/verb/activate_subsystem(var/datum/silicon_subsystem_name in silicon_subsystems_by_name)
@@ -101,9 +101,5 @@
 	subsystem = null
 	. = ..()
 
-/stat_silicon_subsystem/Click()
-	subsystem.ui_interact(usr, state = ui_state)
-
-/stat_silicon_subsystem/Click(var/mob/given)
-	if(given)
-		subsystem.ui_interact(given, state = ui_state)
+/stat_silicon_subsystem/Click(var/mob/given = usr)
+	subsystem.ui_interact(given, state = ui_state)

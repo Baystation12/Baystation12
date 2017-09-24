@@ -12,47 +12,18 @@
 		/datum/nano_module/law_manager
 	)
 
-	New()
-		var/datum/reagents/R = new/datum/reagents(1000)
-		reagents = R
-		R.my_atom = src
-		if(istype(loc, /obj/item/organ/internal/posibrain))
-			container = loc
-		..()
+/mob/living/silicon/sil_brainmob/New()
+	reagents = new/datum/reagents(1000, src)
+	if(istype(loc, /obj/item/organ/internal/posibrain))
+		container = loc
+	..()
 
-	Destroy()
-		if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
-			if(stat!=DEAD)	//If not dead.
-				death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
-			ghostize()		//Ghostize checks for key so nothing else is necessary.
-		..()
-
-	say_understands(var/other)//Goddamn is this hackish, but this say code is so odd
-		if (istype(other, /mob/living/silicon/ai))
-			if(!(container && istype(container, /obj/item/device/mmi)))
-				return 0
-			else
-				return 1
-		if (istype(other, /mob/living/silicon/decoy))
-			if(!(container && istype(container, /obj/item/device/mmi)))
-				return 0
-			else
-				return 1
-		if (istype(other, /mob/living/silicon/pai))
-			if(!(container && istype(container, /obj/item/device/mmi)))
-				return 0
-			else
-				return 1
-		if (istype(other, /mob/living/silicon/robot))
-			if(!(container && istype(container, /obj/item/device/mmi)))
-				return 0
-			else
-				return 1
-		if (istype(other, /mob/living/carbon/human))
-			return 1
-		if (istype(other, /mob/living/carbon/slime))
-			return 1
-		return ..()
+/mob/living/silicon/sil_brainmob/Destroy()
+	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
+		if(stat!=DEAD)	//If not dead.
+			death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
+		ghostize()		//Ghostize checks for key so nothing else is necessary.
+	..()
 
 /mob/living/silicon/sil_brainmob/update_canmove()
 	if(in_contents_of(/obj/mecha))
@@ -80,13 +51,9 @@
 		src.laws_sanity_check()
 		src.laws.show_laws(M)
 
-/mob/living/silicon/sil_brainmob/open_subsystem(var/subsystem_type, var/mob/given)
+/mob/living/silicon/sil_brainmob/open_subsystem(var/subsystem_type, var/mob/given = src)
 	update_owner_channels()
-	var/stat_silicon_subsystem/SSS = silicon_subsystems[subsystem_type]
-	if(!istype(SSS))
-		return FALSE
-	SSS.Click(given)
-	return TRUE
+	return ..(subsystem_type, given)
 
 /mob/living/silicon/sil_brainmob/proc/update_owner_channels()
 	var/mob/living/carbon/human/owner = container.owner
@@ -111,14 +78,10 @@
 	owner_channels = new_channels
 	return 1
 
-/mob/living/silicon/sil_brainmob/statelaw(var/law)
-	var/mob/living/L = src
+/mob/living/silicon/sil_brainmob/statelaw(var/law, var/mob/living/L = src)
 	if(container && container.owner)
 		L = container.owner
-	if(L.say(law))
-		sleep(10)
-		return 1
-	return 0
+	return ..(law, L)
 
 /mob/living/silicon/sil_brainmob/proc/update_law_channels()
 	update_owner_channels()
@@ -132,7 +95,7 @@
 
 /mob/living/silicon/sil_brainmob/statelaws(var/datum/ai_laws/laws)
 	update_law_channels()
-	if(!(law_channels[lawchannel] != null))
+	if(isnull(law_channels[lawchannel]))
 		to_chat(src, "<span class='danger'>[lawchannel]: Unable to state laws. Communication method unavailable.</span>")
 		return 0
 
