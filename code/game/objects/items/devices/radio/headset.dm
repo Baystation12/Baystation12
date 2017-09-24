@@ -152,6 +152,10 @@
 	var/myAi = null    // Atlantis: Reference back to the AI which has this radio.
 	var/disabledAi = 0 // Atlantis: Used to manually disable AI's integrated radio via inteliCard menu.
 
+/obj/item/device/radio/headset/heads/ai_integrated/Destroy()
+	myAi = null
+	. = ..()
+
 /obj/item/device/radio/headset/heads/ai_integrated/receive_range(freq, level)
 	if (disabledAi)
 		return -1 //Transciever Disabled.
@@ -295,7 +299,7 @@
 		return attack_self(M)
 	return
 
-/obj/item/device/radio/headset/proc/recalculateChannels(var/setDescription = 0)
+/obj/item/device/radio/headset/recalculateChannels(var/setDescription = 0)
 	src.channels = list()
 	src.translate_binary = 0
 	src.translate_hive = 0

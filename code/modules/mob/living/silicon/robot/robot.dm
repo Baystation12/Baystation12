@@ -46,7 +46,9 @@
 	var/module_state_2 = null
 	var/module_state_3 = null
 
-	var/obj/item/device/radio/borg/radio = null
+	silicon_camera = /obj/item/device/camera/siliconcam
+	silicon_radio = /obj/item/device/radio/borg
+
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/high
 	var/obj/machinery/camera/camera = null
@@ -68,7 +70,7 @@
 	var/locked = 1
 	var/has_power = 1
 	var/spawn_module = null
-	var/radio_key_type = null
+
 	var/spawn_sound = 'sound/voice/liveagain.ogg'
 	var/pitch_toggle = 1
 	var/list/req_access = list(access_robotics)
@@ -114,9 +116,6 @@
 	icontype = "Basic"
 	updatename(modtype)
 	update_icon()
-
-	radio = new /obj/item/device/radio/borg(src)
-	common_radio = radio
 
 	if(!scrambledcodes && !camera)
 		camera = new /obj/machinery/camera(src)
@@ -165,13 +164,8 @@
 		M.set_multiplier(mult)
 
 /mob/living/silicon/robot/proc/init()
-	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 	if(ispath(module))
 		new module(src)
-	if(radio_key_type)
-		qdel(radio.keyslot)
-		radio.keyslot = new radio_key_type(radio)
-		radio.recalculateChannels()
 	if(lawupdate)
 		var/new_ai = select_active_ai_with_fewest_borgs()
 		if(new_ai)
@@ -219,20 +213,22 @@
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 //Improved /N
 /mob/living/silicon/robot/Destroy()
-	if(mmi && mind)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
-		var/turf/T = get_turf(loc)//To hopefully prevent run time errors.
-		if(T)	mmi.loc = T
-		if(mmi.brainmob)
-			mind.transfer_to(mmi.brainmob)
+	if(mmi)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
+		if(mind)
+			mmi.dropInto(loc)
+			if(mmi.brainmob)
+				mind.transfer_to(mmi.brainmob)
+			else
+				to_chat(src, "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
+				ghostize()
+				//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
+			mmi = null
 		else
-			to_chat(src, "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
-			ghostize()
-			//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
-		mmi = null
+			QDEL_NULL(mmi)
 	if(connected_ai)
 		connected_ai.connected_robots -= src
-	qdel(wires)
-	wires = null
+	connected_ai = null
+	QDEL_NULL(wires)
 	return ..()
 
 /mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
@@ -622,15 +618,15 @@
 		update_icon()
 
 	else if(istype(W, /obj/item/weapon/screwdriver) && opened && cell)	// radio
-		if(radio)
-			radio.attackby(W,user)//Push it to the radio to let it handle everything
+		if(silicon_radio)
+			silicon_radio.attackby(W,user)//Push it to the radio to let it handle everything
 		else
 			to_chat(user, "Unable to locate a radio.")
 		update_icon()
 
 	else if(istype(W, /obj/item/device/encryptionkey/) && opened)
-		if(radio)//sanityyyyyy
-			radio.attackby(W,user)//GTFO, you have your own procs
+		if(silicon_radio)//sanityyyyyy
+			silicon_radio.attackby(W,user)//GTFO, you have your own procs
 		else
 			to_chat(user, "Unable to locate a radio.")
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda)||istype(W, /obj/item/weapon/card/robot))			// trying to unlock the interface with an ID card
@@ -871,7 +867,7 @@
 	return
 
 /mob/living/silicon/robot/proc/radio_menu()
-	radio.interact(src)//Just use the radio's Topic() instead of bullshit special-snowflake code
+	silicon_radio.interact(src)//Just use the radio's Topic() instead of bullshit special-snowflake code
 
 
 /mob/living/silicon/robot/Move(a, b, flag)
