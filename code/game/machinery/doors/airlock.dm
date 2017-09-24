@@ -886,14 +886,12 @@ About the new airlock wires panel:
 			"<span class='notice'>\The [user] begins [cut_verb] through [src]'s bolts.</span>",
 			"<span class='notice'>You begin [cut_verb] through the door bolts.</span>"
 			)
-		to_chat(usr, "You begin [cut_verb] through the door bolts.")
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src))
 			user.visible_message(
 				"<span class='notice'>\The [user] severs the door bolts, unlocking [src].</span>",
 				"<span class='notice'>You sever the door bolts, unlocking the door.</span>"
 				)
-			to_chat(user, "You sever the door bolts, unlocking the door.")
 			src.lock_cut_state = BOLTS_CUT
 			src.unlock(1) //force it
 		return 1
