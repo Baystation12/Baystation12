@@ -892,7 +892,6 @@ About the new airlock wires panel:
 				"<span class='notice'>\The [user] severs the door bolts, unlocking [src].</span>",
 				"<span class='notice'>You sever the door bolts, unlocking the door.</span>"
 				)
-			to_chat(user, "You sever the door bolts, unlocking the door.")
 			src.lock_cut_state = BOLTS_CUT
 			src.unlock(1) //force it
 		return 1
