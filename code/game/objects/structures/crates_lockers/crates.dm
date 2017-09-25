@@ -302,7 +302,7 @@ obj/structure/closet/crate
 	)
 
 /obj/structure/closet/crate/secure/biohazard
-	name = "biohazarad cart"
+	name = "biohazard cart"
 	desc = "A heavy cart with extensive sealing. You shouldn't eat things you find in it."
 	icon_state = "biohazard"
 	icon_opened = "biohazardopen"
