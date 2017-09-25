@@ -100,7 +100,7 @@ default behaviour is:
 			if(src.restrained())
 				now_pushing = 0
 				return
-			if(a_intent != I_HELP)
+			if(tmob.a_intent != I_HELP)
 				if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
 					if(prob(40) && !(FAT in src.mutations))
 						to_chat(src, "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>")
@@ -114,9 +114,9 @@ default behaviour is:
 					if(prob(99))
 						now_pushing = 0
 						return
-				if(!(tmob.status_flags & CANPUSH))
-					now_pushing = 0
-					return
+			if(!(tmob.status_flags & CANPUSH))
+				now_pushing = 0
+				return
 			tmob.LAssailant = src
 		if(isobj(AM))
 			var/obj/I = AM
