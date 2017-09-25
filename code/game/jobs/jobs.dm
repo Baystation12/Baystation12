@@ -75,33 +75,34 @@ var/list/support_positions = list(
 
 /proc/calculate_department_rank(var/mob/living/carbon/human/M)
 	if(istype(M, /mob/living/carbon/human))
-		if(M && M.client && M.client.prefs && M.job)
-			var/oldrank = M.client.prefs.department_rank
-			var/playtime = round(M.client.prefs.dept_experience/3600, 0.1) // In hours.
+		if(M && M.client && M.CharRecords && M.job)
+			var/oldrank = M.CharRecords.department_rank
+			var/playtime = round(M.CharRecords.department_experience/3600, 0.1) // In hours.
 			switch(playtime)
 				if(0 to 4)
-					M.client.prefs.department_rank = 1 //Intern--Lvl 1
+					M.CharRecords.department_rank = 1 //Intern--Lvl 1
 				if(5 to 9)
-					M.client.prefs.department_rank = 2 //Junior
+					M.CharRecords.department_rank = 2 //Junior
 				if(10 to 16)
-					M.client.prefs.department_rank = 3 //Regular
+					M.CharRecords.department_rank = 3 //Regular
 				if(17 to 25)
-					if(M.client.prefs.promoted == 1) //Promoted from Regular to Senior-capable.
-						M.client.prefs.department_rank = 4 //Senior
+					if(M.CharRecords.promoted == 1) //Promoted from Regular to Senior-capable.
+						M.CharRecords.department_rank = 4 //Senior
 				if(26 to 1000) // Yeah it stops here.
-					if(M.client.prefs.promoted == 1)
-						M.client.prefs.department_rank = 5 //Lead
-						if(M.client.prefs.recommendations.len)
-							for(var/N in M.client.prefs.recommendations)
+					if(M.CharRecords.promoted == 1)
+						M.CharRecords.department_rank = 5 //Lead
+						if(M.CharRecords.recommendations.len)
+							for(var/N in M.CharRecords.recommendations)
 								if(N && N:name != "NanoTrasen") //If it hasn't been done yet, do so now.
-									M.client.prefs.recommendations.Add(name = "NanoTrasen", recommendation = "Reaching seniority status within the company")
+									M.CharRecords.recommendations.Add(name = "NanoTrasen", recommendation = "Reaching seniority status within the company")
 						else
-							M.client.prefs.recommendations.Add(name = "NanoTrasen", recommendation = "Reaching seniority status within the company")
-			if(M.client.prefs.department_rank != oldrank) //Ranks changed)
-				if(M.client.prefs.department_rank > oldrank)
+
+							M.CharRecords.recommendations.Add(name = "NanoTrasen", recommendation = "Reaching seniority status within the company")
+			if(M.CharRecords.department_rank != oldrank) //Ranks changed)
+				if(M.CharRecords.department_rank > oldrank)
 					SendNTPDAMessage(M, "NT Administration", {"You have recieved a promotion for being with the company for a long time!
 					You are now a [get_department_rank_title(M)] [M.job]."})
-			return M.client.prefs.department_rank
+			return M.CharRecords.department_rank
 	return 1
 
 

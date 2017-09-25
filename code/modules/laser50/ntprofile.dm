@@ -9,7 +9,7 @@
 /*-------CHARACTER-RELATED-------*/
 	var/bank_balance
 	var/pension_balance
-	var/recommendations
+	var/recommendations = list()
 	var/neurallaces
 	var/promoted //May be obselete.
 	var/permadeath
@@ -49,3 +49,10 @@
 		S["neurallaces"]			<< neurallaces
 		S["recommendations"]		<< recommendations
 		S["promotion"]				<< promoted
+/*
+/datum/ntprofile/proc/add_recommendation(var/maker, var/reason)
+	if(!maker || !reason)	return
+	if(!recommendations)
+		recommendations = list()
+	recommendations.Add(name = "[maker]", reason = "[reason]")
+*/

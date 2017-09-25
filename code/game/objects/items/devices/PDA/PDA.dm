@@ -467,22 +467,22 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(mode==31)
 		if(!user || !user.client)	return
 		var/recommends = ""
-		for(var/T in user.client.prefs.recommendations)
+		for(var/T in user:CharRecords.recommendations)
 			recommends = "[T]\n"
 		var/datum/job/job = job_master.GetJob(user:job)
 		data["ntprofile"] = list(\
 			"name" = "[owner]",\
-			"department" = "[user.client.prefs.char_department]",\
+			"department" = "[user:CharRecords.char_department]",\
 			"deptrank" = "[calculate_department_rank(user)]",\
 			"job" = "[user:job]",\
 			"basepay" = "[job.base_pay]",\
-			"bank" = "[user.client.prefs.bank_balance]",\
+			"bank" = "[user:CharRecords.bank_balance]",\
 			"paycheck" = "[calculate_paycheck(user)]",\
-			"pension" = "[user.client.prefs.pension_balance]",\
-			"activehours" = "[user.client.prefs.department_playtime / 3600]",\
+			"pension" = "[user:CharRecords.pension_balance]",\
+			"activehours" = "[user:CharRecords.department_playtime / 3600]",\
 			"recommendations" = "[recommends]",\
-			"neurallaces" = "[user.client.prefs.neurallaces]",\
-			"permadeath" = "[user.client.prefs.permadeath]"\
+			"neurallaces" = "[user:CharRecords.neurallaces]",\
+			"permadeath" = "[user:CharRecords.permadeath]"\
 			)
 		ntprofilecache = data["ntprofile"] //Cacheing for saving unneeded shit?
 	if(mode==3)
@@ -698,18 +698,18 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if(M && M.client && owner == M.name)
 				switch(alert("Would you like to buy a neural lace for $3,000?", "Buy Neural Lace", "Yes", "Abort"))
 					if("Yes")
-						if(M.client.prefs.bank_balance < 3000) //Insufficient in bank.
-							if((M.client.prefs.bank_balance+M.client.prefs.pension_balance) < 3000)
+						if(M.CharRecords.bank_balance < 3000) //Insufficient in bank.
+							if((M.CharRecords.bank_balance+M.CharRecords.pension_balance) < 3000)
 								to_chat(M, "You do not have sufficient funds for this!.")
 								return
 							else
-								var/topay = (3000-M.client.prefs.bank_balance)
-								M.client.prefs.bank_balance -= (3000-topay)
-								M.client.prefs.pension_balance -= topay
+								var/topay = (3000-M.CharRecords.bank_balance)
+								M.CharRecords.bank_balance -= (3000-topay)
+								M.CharRecords.pension_balance -= topay
 						else
-							M.client.prefs.bank_balance -= 3000
-						M.client.prefs.neurallaces++ //Buy neural lace.
-						M.client.prefs.save_character(1)
+							M.CharRecords.bank_balance -= 3000
+						M.CharRecords.neurallaces++ //Buy neural lace.
+						M.CharRecords.save_persistent()
 					if("Abort")
 						to_chat(M, "Purchase Aborted.")
 						return

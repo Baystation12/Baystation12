@@ -67,12 +67,12 @@
 							<ul>
 							"}
 				for(var/mob/living/carbon/human/M in GLOB.mob_list)
-					if(M.client && M.client.prefs.char_department == department)
+					if(M.client && M.CharRecords.char_department == department)
 						dat += {"<li><b>Name:</b> [M.real_name]<br>
 						<b>Age:</b> [M.age]<br>
 						<b>Occupation:</b> [M.job]<br>
-						<b>Occupation Experience: [get_department_rank_title(M.client.prefs.char_department, M.client.prefs.department_rank)]<br>
-						<b>Clocked Hours:</b> [round(M.client.prefs.department_playtime/3600, 0.1)]<br>
+						<b>Occupation Experience: [get_department_rank_title(M.CharRecords.char_department, M.CharRecords.department_rank)]<br>
+						<b>Clocked Hours:</b> [round(M.CharRecords.department_playtime/3600, 0.1)]<br>
 						<a href='?src=\ref[src];choice=Profile;profiled=\ref[M]'>Profile</a></li>"}
 				dat += "</ul></body></html>"
 			if(2)
@@ -88,7 +88,7 @@
 						Name: [profiled.real_name]
 						Age: [profiled.age]
 						Occupation: [profiled.job]
-						Occupation Experience: [get_department_rank_title(profiled.client.prefs.char_department, calculate_department_rank(profiled))]<br>
+						Occupation Experience: [get_department_rank_title(profiled.CharRecords.char_department, calculate_department_rank(profiled))]<br>
 						"}
 				dat += "<A href='?src=\ref[src];choice=recommend'>Make Recommendation</A> <A href='?src=\ref[src];choice=promote'>Promote</A> <A href='?src=\ref[src];choice=demote'>Demote</A>"
 				dat += "</body></html>"
@@ -132,13 +132,13 @@
 /*--------------PROFILE BUTTONS--------------*/
 			if("recommend")
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
-				if(profiled.client.prefs.char_department != "Command") //Can't recommend your bosses?
+				if(profiled.CharRecords.char_department != "Command") //Can't recommend your bosses?
 					to_chat(usr, "Leave blank to cancel.")
 					var/recommendation = input("Reason for recommendation", "Recommendations - Department management") as text
 					if(!recommendation)	return
-//					profiled.client.prefs.recommendations.Add{"RECOMMENDATION: [usr.real_name] ([usr:job]) -- Official Recommendation\n
+//					profiled.CharRecords.recommendations.Add{"RECOMMENDATION: [usr.real_name] ([usr:job]) -- Official Recommendation\n
 //															   To [profiled.real_name] ([profiled.job]) for [recommendation]"}
-					profiled.client.prefs.recommendations.Add(name = "[usr.real_name] ([usr:job])", recommendation = "[recommendation]")
+					profiled.CharRecords.recommendations.Add(name = "[usr.real_name] ([usr:job])", recommendation = "[recommendation]")
 			if("promote")
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
 				switch(alert("Promote [profiled.real_name] to a Senior position or Head Role?","Promotion", "Senior Position", "Head Position", "No"))
@@ -147,15 +147,15 @@
 							to_chat(usr, "[profiled.real_name]'s rank is insufficient to allow for a promotion.")
 							return
 						else
-							if(!profiled.client.prefs.promoted)
-								profiled.client.prefs.promoted = 1
+							if(!profiled.CharRecords.promoted)
+								profiled.CharRecords.promoted = 1
 								calculate_department_rank(profiled) //Re-calculate to set proper rank.
 					if("Head Position")
 						if(department == "Command" && scan.assignment == "Captain") //Can promote to head I guess?
 							if(!profiled.client.command_whitelist) //Not yet whitelisted
-								if(profiled.client.prefs.promoted && profiled.client.prefs.recommendations.len == 3)
+								if(profiled.CharRecords.promoted && profiled.CharRecords.recommendations.len == 3)
 									profiled.client.command_whitelist = 1
-									profiled.client.prefs.promoted = 2
+									profiled.CharRecords.promoted = 2
 									return to_chat(usr, "[profiled.real_name] has been promoted.")
 								else
 									return to_chat(usr, "[profiled.real_name] insufficient info to process.")
@@ -170,15 +170,15 @@
 						if(calculate_department_rank(profiled) < 3)
 							return to_chat(usr, "[profiled.real_name]'s rank is insufficient to allow for a demotion.")
 						else
-							if(!profiled.client.prefs.promoted)
+							if(!profiled.CharRecords.promoted)
 								return to_chat(usr, "[profiled.real_name] has not been promoted.")
 							else
-								profiled.client.prefs.promoted = 0
+								profiled.CharRecords.promoted = 0
 								calculate_department_rank(profiled) //Re-calculate to set proper rank.
 					if("No")
 						return
 		if(profiled)
-			profiled.client.prefs.save_character(1)
+			profiled.CharRecords.save_character(1)
 	add_fingerprint(usr)
 	updateUsrDialog()
 	return

@@ -25,10 +25,10 @@ var/paychecks = 0
 			var/playtimeseconds = round(60-(timeafk/10), 1) // Divide by 10 to get seconds.
 			H.CharRecords.department_playtime += playtimeseconds
 			if(!H.CharRecords.promoted && calculate_department_rank(H) <= 3)
-				H.CharRecords.dept_experience += playtimeseconds
+				H.CharRecords.department_experience += playtimeseconds
 		else
 			H.CharRecords.department_playtime += 60
-			H.CharRecords.dept_experience += 60
+			H.CharRecords.department_experience += 60
 
 		if(H && ticks % 5) // Calculate once every 5 minutes
 			calculate_department_rank(H) //Checks time played and sets rank accordingly.

@@ -314,10 +314,6 @@
 	else
 		return 1
 
-/mob/new_player/proc/get_branch_pref()
-	if(client)
-		return client.prefs.char_department
-
 /mob/new_player/proc/get_rank_pref()
 	if(client)
 		return client.prefs.char_rank
@@ -335,7 +331,7 @@
 	if(!IsJobAvailable(job))
 		alert("[job.title] is not available. Please try another.")
 		return 0
-	if(!job.is_branch_allowed(client.prefs.char_department))
+	if(!job.is_branch_allowed(client.mob.CharRecords.char_department))
 		alert("Wrong branch of service for [job.title]. Valid branches is: [job.department].")
 		return 0
 	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank))
