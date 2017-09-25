@@ -137,37 +137,6 @@ var/list/support_positions = list(
 						return "Expert" //Different name because Lead is weird for civvies.
 					else return "Lead"
 
-/mob/verb/ForcePaycheck()
-	set name = "Force to get paid"
-
-	calculate_paycheck(src, add = 1)
-
-/proc/calculate_paycheck(var/mob/living/carbon/human/M, var/tax = 1, var/add = 0, var/roundend = 0) //Tax = if we should calculate taxes, add if we want to add the cash.
-	if(M && istype(M) && M.client && M.client.prefs.char_department && M.job) //SO MANY CHECKS JEZUS ah well
-		var/datum/job/job = job_master.GetJob(M.job)
-		var/efficiencybonus = 4+(4*paychecks)
-		var/paycheck = round(job.base_pay * (calculate_department_rank(M) * 5) + (job.base_pay/100*efficiencybonus) * 4, 0.01)
-		if(evacuation_controller.emergency_evacuation)
-			paycheck = paycheck/100*80
-		if(roundend)
-			var/mins = round((round_duration_in_ticks % 36000) / 600)
-			var/deduct = (paycheck/60)*(60 % mins)
-			paycheck -= deduct
-		// Paycheck  = base_pay (per job) * (department rank * increase percentage) * 4 (4 'working hours' per paycheck)
-		if(tax)
-			var/incometax = (paycheck / 100) * 14 //14%
-			var/pensiontax
-			if(M.client.prefs.permadeath == 1)
-				pensiontax = (paycheck / 100) * 12
-			else
-				pensiontax = (paycheck / 100) * 41
-			paycheck -= (incometax+pensiontax)
-			paycheck = round(paycheck, 0.01)
-			if(add)
-				M.client.prefs.pension_balance += pensiontax
-				M.client.prefs.bank_balance += paycheck
-		return paycheck
-
 /proc/SendNTPDAMessage(var/mob/living/carbon/M, var/sender, var/message)
 	var/obj/item/device/pda/PDARec = null
 	for (var/obj/item/device/pda/P in PDAs)

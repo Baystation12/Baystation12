@@ -492,6 +492,7 @@
 #include "code\game\jobs\access_datum.dm"
 #include "code\game\jobs\job_controller.dm"
 #include "code\game\jobs\jobs.dm"
+#include "code\game\jobs\payments.dm"
 #include "code\game\jobs\job\assistant.dm"
 #include "code\game\jobs\job\captain.dm"
 #include "code\game\jobs\job\civilian.dm"
