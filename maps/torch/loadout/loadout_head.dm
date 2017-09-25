@@ -48,7 +48,7 @@
 
 /datum/gear/head/bandana
 	display_name = "bandana selection"
-	path = /obj/item/clothing/head/bandana
+	path = /obj/item/clothing/head
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/head/bandana/New()
@@ -67,7 +67,7 @@
 
 /datum/gear/head/cap
 	display_name = "cap selection"
-	path = /obj/item/clothing/head/soft
+	path = /obj/item/clothing/head
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/head/cap/New()
@@ -110,7 +110,7 @@
 
 /datum/gear/head/formalhat
 	display_name = "formal hat selection"
-	path = /obj/item/clothing/head/hasturhood
+	path = /obj/item/clothing/head
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/head/formalhat/New()
@@ -128,7 +128,7 @@
 
 /datum/gear/head/informalhat
 	display_name = "informal hat selection"
-	path = /obj/item/clothing/head/cowboy_hat
+	path = /obj/item/clothing/head
 	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/head/informalhat/New()

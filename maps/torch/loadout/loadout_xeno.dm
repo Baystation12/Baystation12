@@ -29,7 +29,7 @@
 /datum/gear/ears/skrell/chains/New()
 	..()
 	var/list/chaintypes = list()
-	for(var/chain_style in typesof(/obj/item/clothing/ears/skrell/chain) - /obj/item/clothing/ears/skrell/colored/chain)
+	for(var/chain_style in subtypesof(/obj/item/clothing/ears/skrell/chain))
 		var/obj/item/clothing/ears/skrell/chain/chain = chain_style
 		chaintypes[initial(chain.name)] = chain
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(chaintypes))
@@ -51,7 +51,7 @@
 /datum/gear/ears/skrell/bands/New()
 	..()
 	var/list/bandtypes = list()
-	for(var/band_style in typesof(/obj/item/clothing/ears/skrell/band) - /obj/item/clothing/ears/skrell/colored/band)
+	for(var/band_style in subtypesof(/obj/item/clothing/ears/skrell/band))
 		var/obj/item/clothing/ears/skrell/band/band = band_style
 		bandtypes[initial(band.name)] = band
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(bandtypes))
