@@ -16,12 +16,13 @@ client
 
 	LAZYINITLIST(credits)
 
-	mob.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
-	mob.overlay_fullscreen("fadeout",/obj/screen/fullscreen/fadeout)
+	if(mob)
+		mob.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
+		mob.overlay_fullscreen("fadeout",/obj/screen/fullscreen/fadeout)
 	
-	if(mob.is_preference_enabled(/datum/client_preference/play_lobby_music))
-		sound_to(mob, sound(null, channel = 1))
-		sound_to(mob, sound('sound/music/THUNDERDOME.ogg', wait = 0, volume = 40, channel = 1))
+		if(mob.is_preference_enabled(/datum/client_preference/play_lobby_music))
+			sound_to(mob, sound(null, channel = 1))
+			sound_to(mob, sound('sound/music/THUNDERDOME.ogg', wait = 0, volume = 40, channel = 1))
 
 	var/list/_credits = credits
 	verbs += /client/proc/ClearCredits
