@@ -1,8 +1,8 @@
 /obj/machinery/artifact_analyser
 	name = "Anomaly Analyser"
 	desc = "Studies the emissions of anomalous materials to discover their uses."
-	icon = 'icons/obj/virology.dmi'
-	icon_state = "isolator"
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "xenoarch_console0"
 	anchored = 1
 	density = 1
 	var/scan_in_progress = 0
@@ -25,7 +25,7 @@
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 
 /obj/machinery/artifact_analyser/attack_hand(var/mob/user as mob)
-	src.add_fingerprint(user)
+	add_fingerprint(user)
 	interact(user)
 
 /obj/machinery/artifact_analyser/interact(mob/user)
@@ -41,9 +41,13 @@
 	if(!owned_scanner)
 		dat += "<b><font color=red>Unable to locate analysis pad.</font></b><br>"
 	else if(scan_in_progress)
+		icon_state = "xenoarch_console1"
 		dat += "Please wait. Analysis in progress.<br>"
 		dat += "<a href='?src=\ref[src];halt_scan=1'>Halt scanning.</a><br>"
+		sleep(50)
+		icon_state = "xenoarch_console0"
 	else
+		icon_state = "xenoarch_console0"
 		dat += "Scanner is ready.<br>"
 		dat += "<a href='?src=\ref[src];begin_scan=1'>Begin scanning.</a><br>"
 
