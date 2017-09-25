@@ -21,3 +21,4 @@ config/*
 !config/*/
 maps/nsv_apollo/
 .atom-build.json
+NewSOund/
