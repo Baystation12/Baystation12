@@ -201,6 +201,8 @@
 			return global.all_grabobjects;
 		if("all_grabstates")
 			return global.all_grabstates;
+		if("all_equip_slots")
+			return global.all_equip_slots;
 		if("all_languages")
 			return global.all_languages;
 		if("all_money_accounts")
@@ -1175,7 +1177,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1378,6 +1380,8 @@
 			global.all_grabobjects=newval;
 		if("all_grabstates")
 			global.all_grabstates=newval;
+		if("all_equip_slots")
+			global.all_equip_slots=newval;
 		if("all_languages")
 			global.all_languages=newval;
 		if("all_money_accounts")
@@ -2352,7 +2356,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2454,6 +2458,7 @@
 	"all_antag_types_",
 	"all_grabobjects",
 	"all_grabstates",
+	"all_equip_slots",
 	"all_languages",
 	"all_money_accounts",
 	"all_objectives",
