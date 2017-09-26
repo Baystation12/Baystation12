@@ -455,8 +455,10 @@
 	if(alien == IS_DIONA)
 		return
 	M.jitteriness = max(M.jitteriness - 5, 0)
-	if(prob(80))
-		M.adjustBrainLoss(0.15 * removed)
+	if(brain.past_damage_threshold(0))
+		M.adjustBrainLoss(0.3 * removed)
+	else
+		M.adjustBrainLoss(0.1 * removed)
 	if(prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
