@@ -259,11 +259,6 @@ var/list/organ_cache = list()
 	if(!istype(owner))
 		return
 
-	owner.internal_organs_by_name[organ_tag] = null
-	owner.internal_organs_by_name -= organ_tag
-	owner.internal_organs_by_name -= null
-	owner.internal_organs -= src
-
 	if(drop_organ)
 		dropInto(owner.loc)
 
