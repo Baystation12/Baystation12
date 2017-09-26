@@ -157,3 +157,24 @@
 
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.020	// kg/mol
+
+	processing = /proc/handle_watervapor
+
+/proc/handle_watervapor(var/zone/Z)
+	world << "VAPE CALC"
+	if(!Z) return
+	var/tdiff = T0C + 70 - Z.air.temperature
+	world << "diff = [tdiff]"
+	if(tdiff < 0) return
+	var/vape = Z.air.get_gas("watervapor")
+	world << "vape = [vape]"
+	if(!vape) return
+	world << "Tiles to wet: [vape/3]"
+	world << "Vape to remove: [-2*Z.air.group_multiplier]"
+	if(prob(tdiff+30))
+		world << "Doing"
+		Z.air.adjust_gas("watervapor", -2*Z.air.group_multiplier)
+		for(var/i = 1 to vape/3)
+			var/turf/simulated/T = pick(Z.contents)
+			world << "Wetting [T] [T.x] [T.y]"
+			T.wet_floor(5)

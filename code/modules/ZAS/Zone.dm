@@ -161,6 +161,10 @@ Class Procs:
 		if(E.sleeping)
 			E.recheck()
 
+	for(var/g in air.gas)
+		if(gas_data.processing[g])
+			call(gas_data.processing[g])(src)
+
 /zone/proc/dbg_data(mob/M)
 	to_chat(M, name)
 	for(var/g in air.gas)
