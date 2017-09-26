@@ -13,6 +13,7 @@
 	var/neurallaces
 	var/promoted //May be obselete.
 	var/permadeath
+/*--------OTHER-RELATED--------*/
 
 /datum/ntprofile/New(var/mob/living/carbon/human/H) //Init the profile.. Human set as owner.
 	if(H && H.client)
@@ -49,6 +50,25 @@
 		S["neurallaces"]			<< neurallaces
 		S["recommendations"]		<< recommendations
 		S["promotion"]				<< promoted
+
+
+
+/datum/ntprofile/recommendation
+	var/mob/living/carbon/human/recommaker = ""       //The maker of the Recommendation
+	var/mob/living/carbon/human/recomfor = ""         //The reason they have been recommended
+	var/recomscore = 0        // The score we assign to it, 3 score needed to be head eligible.
+	var/warrantspromotion = 0 //If this is enough to warrant a promotion, EG from regular to senior roles.
+	var/paybonuspercent = 0   //The percentage of extra hourly pay this will give the reciever
+	var/paybonuscredit = 0    //The amount of credits recieved on the next paycheck.
+	var/nanotrasen = 0        //Is this an official NanoTrasen Recommendation? (Adds a little checkmark?)
+	/*Recommendations are checked every paycheck, bonus credit that is outstanding (not 0) will be paid out*/
+
+/datum/ntprofile/recommendation/proc/add_recommendation(var/recommaker, var/recomfor, var/recomscore, var/warrantspromotion, var/paybonuspercent, var/paybonuscredit, var/nanotrasen)
+	if(recommaker && recomfor && recomcore) //The 3 main dawgs
+		recommendations.Add({"Recommendation to [recomfor] ([recomfor.job]), Recieved by [recommaker] ([ismob(recommaker) ? [recommaker.job] : ])
+		For [recomfor]. [nanotrasen ? "Official NanoTrasen Recommendation."]
+		"})
+
 /*
 /datum/ntprofile/proc/add_recommendation(var/maker, var/reason)
 	if(!maker || !reason)	return
