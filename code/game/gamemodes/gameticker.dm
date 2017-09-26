@@ -284,7 +284,7 @@ var/global/datum/controller/gameticker/ticker
 				else if(!player.mind.assigned_role)
 					continue
 				else
-					if(player.create_character())
+					if(player.create_character(bypass = 0))
 						qdel(player)
 
 

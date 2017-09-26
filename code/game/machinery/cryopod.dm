@@ -338,6 +338,10 @@
 		var/job = occupant.mind.assigned_role
 		job_master.FreeRole(job)
 
+		var/datum/species/assigned_species = occupant.mind.assigned_species
+		if(assigned_species)
+			assigned_species.current_slots--
+
 		if(occupant.mind.objectives.len)
 			occupant.mind.objectives = null
 			occupant.mind.special_role = null
