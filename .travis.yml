@@ -1,6 +1,6 @@
 language: generic
 sudo: false
-dist: trusty
+dist: precise
 
 env:
   global:
@@ -28,6 +28,8 @@ addons:
       - libgcc1:i386
       - libstdc++6:i386
       - oracle-java8-set-default
+      - python
+      - python-pip
 
 script:
   - test/run-test.sh
