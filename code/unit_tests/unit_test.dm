@@ -61,9 +61,6 @@ datum/unit_test
 	var/reported = 0	// If it's reported a success or failure.  Any tests that have not are assumed to be failures.
 	var/why_disabled = "No reason set."   // If we disable a unit test we will display why so it reminds us to check back on it later.
 
-	var/safe_landmark
-	var/space_landmark
-
 datum/unit_test/proc/log_debug(var/message)
 	log_unit_test("[ascii_yellow]---  DEBUG  --- \[[name]\]: [message][ascii_reset]")
 
@@ -91,22 +88,6 @@ datum/unit_test/proc/start_test()
 datum/unit_test/proc/check_result()
 	fail("No check results proc")
 	return 1
-
-datum/unit_test/proc/get_safe_turf()
-	if(!safe_landmark)
-		for(var/landmark in landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/safe_turf))
-				safe_landmark = landmark
-				break
-	return get_turf(safe_landmark)
-
-datum/unit_test/proc/get_space_turf()
-	if(!space_landmark)
-		for(var/landmark in landmarks_list)
-			if(istype(landmark, /obj/effect/landmark/test/space_turf))
-				space_landmark = landmark
-				break
-	return get_turf(space_landmark)
 
 proc/load_unit_test_changes()
 /*

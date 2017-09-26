@@ -5,3 +5,19 @@
 		var/mob/M = am
 		M.real_name = name
 	return am
+
+/proc/get_safe_turf()
+	var/obj/effect/landmark/test/safe_turf/safe_landmark
+	for(var/landmark in landmarks_list)
+		if(istype(landmark, /obj/effect/landmark/test/safe_turf))
+			safe_landmark = landmark
+			break
+	return get_turf(safe_landmark)
+
+/proc/get_space_turf()
+	var/obj/effect/landmark/test/space_turf/space_landmark
+	for(var/landmark in landmarks_list)
+		if(istype(landmark, /obj/effect/landmark/test/space_turf))
+			space_landmark = landmark
+			break
+	return get_turf(space_landmark)
