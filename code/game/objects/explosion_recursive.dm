@@ -79,9 +79,9 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 		M = new(src, power, direction)
 	M.maptext = "[power]"
 	if(power > 10)
-		M.color = "#CCCC00"
+		M.color = "#cccc00"
 	if(power > 20)
-		M.color = "#FFCC00"
+		M.color = "#ffcc00"
 */
 	var/spread_power = power - src.get_explosion_resistance() //This is the amount of power that will be spread to the tile in the direction of the blast
 	for(var/obj/O in src)

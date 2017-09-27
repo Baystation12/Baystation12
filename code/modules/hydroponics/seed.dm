@@ -60,7 +60,7 @@
 	set_trait(TRAIT_HIGHKPA_TOLERANCE,    200)          // High pressure capacity.
 	set_trait(TRAIT_IDEAL_HEAT,           293)          // Preferred temperature in Kelvin.
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25)         // Plant eats this much per tick.
-	set_trait(TRAIT_PLANT_COLOUR,         "#46B543")    // Colour of the plant icon.
+	set_trait(TRAIT_PLANT_COLOUR,         "#46b543")    // Colour of the plant icon.
 
 	spawn(5)
 		sleep(-1)

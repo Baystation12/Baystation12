@@ -66,7 +66,7 @@
 					// If the log is a speech file
 					if(C.input_type == "Speech File")
 
-						dat += "<li><font color = #008F00>[C.name]</font>  <font color = #FF0000><a href='?src=\ref[src];delete=[i]'>\[X\]</a></font><br>"
+						dat += "<li><font color = #008f00>[C.name]</font>  <font color = #ff0000><a href='?src=\ref[src];delete=[i]'>\[X\]</a></font><br>"
 
 						// -- Determine race of orator --
 
@@ -76,26 +76,26 @@
 						// -- If the orator is a human, or universal translate is active, OR mob has universal speech on --
 
 						if(universal_translate || C.parameters["uspeech"] || C.parameters["intelligible"])
-							dat += "<u><font color = #18743E>Data type</font></u>: [C.input_type]<br>"
-							dat += "<u><font color = #18743E>Source</font></u>: [C.parameters["name"]] (Job: [C.parameters["job"]])<br>"
-							dat += "<u><font color = #18743E>Class</font></u>: [race]<br>"
-							dat += "<u><font color = #18743E>Contents</font></u>: \"[C.parameters["message"]]\"<br>"
+							dat += "<u><font color = #18743e>Data type</font></u>: [C.input_type]<br>"
+							dat += "<u><font color = #18743e>Source</font></u>: [C.parameters["name"]] (Job: [C.parameters["job"]])<br>"
+							dat += "<u><font color = #18743e>Class</font></u>: [race]<br>"
+							dat += "<u><font color = #18743e>Contents</font></u>: \"[C.parameters["message"]]\"<br>"
 							if(language)
-								dat += "<u><font color = #18743E>Language</font></u>: [language]<br/>"
+								dat += "<u><font color = #18743e>Language</font></u>: [language]<br/>"
 
 						// -- Orator is not human and universal translate not active --
 
 						else
-							dat += "<u><font color = #18743E>Data type</font></u>: Audio File<br>"
-							dat += "<u><font color = #18743E>Source</font></u>: <i>Unidentifiable</i><br>"
-							dat += "<u><font color = #18743E>Class</font></u>: [race]<br>"
-							dat += "<u><font color = #18743E>Contents</font></u>: <i>Unintelligble</i><br>"
+							dat += "<u><font color = #18743e>Data type</font></u>: Audio File<br>"
+							dat += "<u><font color = #18743e>Source</font></u>: <i>Unidentifiable</i><br>"
+							dat += "<u><font color = #18743e>Class</font></u>: [race]<br>"
+							dat += "<u><font color = #18743e>Contents</font></u>: <i>Unintelligble</i><br>"
 
 						dat += "</li><br>"
 
 					else if(C.input_type == "Execution Error")
 
-						dat += "<li><font color = #990000>[C.name]</font>  <font color = #FF0000><a href='?src=\ref[src];delete=[i]'>\[X\]</a></font><br>"
+						dat += "<li><font color = #990000>[C.name]</font>  <font color = #ff0000><a href='?src=\ref[src];delete=[i]'>\[X\]</a></font><br>"
 						dat += "<u><font color = #787700>Output</font></u>: \"[C.parameters["message"]]\"<br>"
 						dat += "</li><br>"
 
@@ -138,7 +138,7 @@
 
 				if("scan")
 					if(servers.len > 0)
-						temp = "<font color = #D70B00>- FAILED: CANNOT PROBE WHEN BUFFER FULL -</font>"
+						temp = "<font color = #d70b00>- FAILED: CANNOT PROBE WHEN BUFFER FULL -</font>"
 
 					else
 						for(var/obj/machinery/telecomms/server/T in range(25, src))
@@ -146,7 +146,7 @@
 								servers.Add(T)
 
 						if(!servers.len)
-							temp = "<font color = #D70B00>- FAILED: UNABLE TO LOCATE SERVERS IN \[[network]\] -</font>"
+							temp = "<font color = #d70b00>- FAILED: UNABLE TO LOCATE SERVERS IN \[[network]\] -</font>"
 						else
 							temp = "<font color = #336699>- [servers.len] SERVERS PROBED & BUFFERED -</font>"
 
@@ -168,7 +168,7 @@
 				qdel(D)
 
 			else
-				temp = "<font color = #D70B00>- FAILED: NO SELECTED MACHINE -</font>"
+				temp = "<font color = #d70b00>- FAILED: NO SELECTED MACHINE -</font>"
 
 		if(href_list["network"])
 
@@ -176,7 +176,7 @@
 
 			if(newnet && ((usr in range(1, src) || issilicon(usr))))
 				if(length(newnet) > 15)
-					temp = "<font color = #D70B00>- FAILED: NETWORK TAG STRING TOO LENGHTLY -</font>"
+					temp = "<font color = #d70b00>- FAILED: NETWORK TAG STRING TOO LENGHTLY -</font>"
 
 				else
 

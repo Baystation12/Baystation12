@@ -808,7 +808,7 @@
 	departments = list("Mercenary")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 	can_repair = 1
-	
+
 /obj/machinery/suit_cycler/pilot
 	name = "Pilot suit cycler"
 	model_text = "Pilot"
@@ -1087,7 +1087,7 @@
 
 /obj/machinery/suit_cycler/proc/finished_job()
 	var/turf/T = get_turf(src)
-	T.visible_message("[icon2html(src, world)]<span class='notice'>The [src] pings loudly.</span>")
+	T.visible_message("\icon[src]<span class='notice'>The [src] pings loudly.</span>")
 	icon_state = initial(icon_state)
 	active = 0
 	src.updateUsrDialog()
@@ -1216,6 +1216,15 @@
 					slot_l_hand_str = "atmos_voidsuit",
 					slot_r_hand_str = "atmos_voidsuit",
 				)
+		if("Explorer")
+			if(helmet)
+				helmet.name = "exploration voidsuit helmet"
+				helmet.icon_state = "helm_explorer"
+				helmet.item_state = "helm_explorer"
+			if(suit)
+				suit.name = "exploration voidsuit"
+				suit.icon_state = "void_explorer"
+
 		if("^%###^%$" || "Mercenary")
 			if(helmet)
 				helmet.name = "blood-red voidsuit helmet"

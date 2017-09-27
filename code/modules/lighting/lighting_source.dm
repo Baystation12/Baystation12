@@ -163,11 +163,8 @@
 
 #define APPLY_CORNER(C)              \
 	. = LUM_FALLOFF(C, source_turf); \
-                                     \
-	. *= light_power/2;                \
-                                     \
+	. *= light_power/2;              \
 	effect_str[C] = .;               \
-                                     \
 	C.update_lumcount                \
 	(                                \
 		. * applied_lum_r,           \

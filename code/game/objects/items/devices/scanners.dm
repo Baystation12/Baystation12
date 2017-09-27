@@ -69,12 +69,14 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			if(H.has_brain_worms())
 				brain_result = "<span class='danger'>ERROR - aberrant/unknown brainwave patterns, advanced scanner recommended</span>"
 			else
-				switch((brain.damage / brain.max_damage)*100)
-					if(0 to 20)
+				switch(brain.get_current_damage_threshold())
+					if(0)
 						brain_result = "<span class='notice'>normal</span>"
-					if(20 to 60)
+					if(1 to 2)
+						brain_result = "<span class='notice'>minor brain damage</span>"
+					if(3 to 5)
 						brain_result = "<span class='warning'>weak</span>"
-					if(60 to INFINITY)
+					if(6 to INFINITY)
 						brain_result = "<span class='danger'>extremely weak</span>"
 					else
 						brain_result = "<span class='danger'>ERROR - Hardware fault</span>"
@@ -137,7 +139,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	if(H.getToxLoss() > 50)
 		. += "<font color='green'><b>Major systemic organ failure detected.</b></font>"
 	if(H.getFireLoss() > 50)
-		. += "<font color='#FFA500'><b>Severe burn damage detected.</b></font>"
+		. += "<font color='#ffa500'><b>Severe burn damage detected.</b></font>"
 	if(H.getBruteLoss() > 50)
 		. += "<font color='red'><b>Severe anatomical damage detected.</b></font>"
 
@@ -187,7 +189,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 				if(org.brute_dam > 0)
 					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, org.vital)] physical trauma</b></font>\]"
 				if(org.burn_dam > 0)
-					limb_result = "[limb_result] \[<font color = '#FFA500'><b>[get_wound_severity(org.burn_ratio, org.vital)] burns</b></font>\]"
+					limb_result = "[limb_result] \[<font color = '#ffa500'><b>[get_wound_severity(org.burn_ratio, org.vital)] burns</b></font>\]"
 				if(org.status & ORGAN_BLEEDING)
 					limb_result = "[limb_result] \[<span class='danger'>bleeding</span>\]"
 				. += limb_result

@@ -178,7 +178,7 @@
 		return
 
 	GLOB.processing_objects += src
-	set_light(2, null, "#E38F46")
+	set_light(2, null, "#e38f46")
 	on_fire = 1
 	update_name()
 	update_icon()

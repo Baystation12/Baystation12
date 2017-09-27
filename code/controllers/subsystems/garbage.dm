@@ -15,13 +15,13 @@ SUBSYSTEM_DEF(garbage)
 	var/highest_del_tickusage = 0
 
 	var/list/queue = list() // list of refID's of things that should be garbage collected
-                            // refID's are associated with the time at which they time out and need to be manually del()
-                            // we do this so we aren't constantly locating them and preventing them from being gc'd
+							// refID's are associated with the time at which they time out and need to be manually del()
+							// we do this so we aren't constantly locating them and preventing them from being gc'd
 
 	var/list/tobequeued = list() //We store the references of things to be added to the queue seperately so we can spread out GC overhead over a few ticks
 
 	var/list/didntgc = list() // list of all types that have failed to GC associated with the number of times that's happened.
-                              // the types are stored as strings
+							  // the types are stored as strings
 	var/list/sleptDestroy = list() //Same as above but these are paths that slept during their Destroy call
 
 	var/list/noqdelhint = list() // list of all types that do not return a QDEL_HINT
@@ -113,7 +113,7 @@ SUBSYSTEM_DEF(garbage)
 			// Something's still referring to the qdel'd object.  Kill it.
 			var/type = A.type
 			if(!didntgc[type])
-				log_debug("GC: -- \ref[A] | [type] was unable to be GC'd and was deleted --")
+				crash_with("WARNING: [type] was unable to be GC'd and was deleted.")
 			didntgc[type]++
 
 			HardDelete(A)

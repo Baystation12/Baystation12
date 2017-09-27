@@ -33,6 +33,7 @@
 #define CE_ALCOHOL       "alcohol"      // Liver filtering
 #define CE_ALCOHOL_TOXIC "alcotoxic"    // Liver damage
 #define CE_SPEEDBOOST    "gofast"       // Hyperzine
+#define CE_SLOWDOWN      "goslow"       // Slowdown
 #define CE_PULSE         "xcardic"      // increases or decreases heart rate
 #define CE_NOPULSE       "heartstop"    // stops heartbeat
 #define CE_ANTITOX       "antitox"      // Dylovene
@@ -40,6 +41,7 @@
 #define CE_BRAIN_REGEN   "brainfix"     // Alkysine.
 #define CE_ANTIVIRAL     "antiviral"    // Anti-virus effect.
 #define CE_TOXIN         "toxins"       // Generic toxins, stops autoheal.
+#define CE_BREATHLOSS    "breathloss"   // Breathing depression, makes you need more air
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1

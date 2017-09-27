@@ -248,7 +248,7 @@ its easier to just keep the beam vertical.
 		else
 			f_name += "oil-stained [name][infix]."
 
-	to_chat(user, "[icon2html(src, user)] That's [f_name] [suffix]")
+	to_chat(user, "\icon[src] That's [f_name] [suffix]")
 	to_chat(user, desc)
 
 	return distance == -1 || (get_dist(src, user) <= distance)
@@ -305,7 +305,7 @@ its easier to just keep the beam vertical.
 		blood_DNA = list()
 
 	was_bloodied = 1
-	blood_color = "#A10808"
+	blood_color = COLOR_BLOOD_HUMAN
 	if(istype(M))
 		if (!istype(M.dna, /datum/dna))
 			M.dna = new /datum/dna(null)

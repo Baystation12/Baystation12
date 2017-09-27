@@ -185,12 +185,12 @@
 	anchored = 1
 
 
-/obj/machinery/body_scanconsole/New()
-	..()
-	spawn( 5 )
-		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, WEST))
-		return
-	return
+/obj/machinery/body_scanconsole/Initialize()
+	for(var/D in GLOB.cardinal)
+		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
+		if(src.connected)
+			break
+	return ..()
 
 /*
 
@@ -253,14 +253,14 @@
 
 	if (href_list["print"])
 		if (!src.connected)
-			to_chat(usr, "[icon2html(src, usr)]<span class='warning'>Error: No body scanner connected.</span>")
+			to_chat(usr, "\icon[src]<span class='warning'>Error: No body scanner connected.</span>")
 			return
 		var/mob/living/carbon/human/occupant = src.connected.occupant
 		if (!src.connected.occupant)
-			to_chat(usr, "[icon2html(src, usr)]<span class='warning'>The body scanner is empty.</span>")
+			to_chat(usr, "\icon[src]<span class='warning'>The body scanner is empty.</span>")
 			return
 		if (!istype(occupant,/mob/living/carbon/human))
-			to_chat(usr, "[icon2html(src, usr)]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
+			to_chat(usr, "\icon[src]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
 			return
 		new/obj/item/weapon/paper/(loc, "<tt>[connected.occupant.get_medical_data()]</tt>", "Body scan report - [occupant]")
 
@@ -357,7 +357,7 @@
 			table += "</td><td>[english_list(E.get_scan_results(), nothing_text = "", and_text = ", ")]</td></tr>"
 
 	table += "<tr><td>---</td><td><b>INTERNAL ORGANS</b></td><td>---</td></tr>"
-	for(var/obj/item/organ/I in H.internal_organs)
+	for(var/obj/item/organ/internal/I in H.internal_organs)
 		table += "<tr><td>[I.name]</td>"
 		table += "<td>"
 		if(I.is_broken())

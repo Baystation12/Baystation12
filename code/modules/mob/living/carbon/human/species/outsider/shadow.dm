@@ -12,8 +12,8 @@
 	has_organ = list()
 	siemens_coefficient = 0
 
-	blood_color = "#CCCCCC"
-	flesh_color = "#AAAAAA"
+	blood_color = "#cccccc"
+	flesh_color = "#aaaaaa"
 
 	remains_type = /obj/effect/decal/cleanable/ash
 	death_message = "dissolves into ash..."

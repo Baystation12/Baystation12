@@ -236,7 +236,7 @@
 	if(equipment && equipment.len)
 		to_chat(user, "It's equipped with:")
 		for(var/obj/item/mecha_parts/mecha_equipment/ME in equipment)
-			to_chat(user, "[icon2html(ME, user)] [ME]")
+			to_chat(user, "\icon[ME] [ME]")
 	return
 
 
@@ -1207,7 +1207,7 @@
 						a {padding:2px 5px;;color:#0f0;}
 						.wr {margin-bottom: 5px;}
 						.header {cursor:pointer;}
-						.open, .closed {background: #32CD32; color:#000; padding:1px 2px;}
+						.open, .closed {background: #32cd32; color:#000; padding:1px 2px;}
 						.links a {margin-bottom: 2px;padding-top:3px;}
 						.visible {display: block;}
 						.hidden {display: none;}
@@ -1391,7 +1391,7 @@
 						<head>
 						<style>
 						body {color: #00ff00; background: #000000; font-family:"Courier New", Courier, monospace; font-size: 12px;}
-						a {padding:2px 5px; background:#32CD32;color:#000;display:block;margin:2px;text-align:center;text-decoration:none;}
+						a {padding:2px 5px; background:#32cd32;color:#000;display:block;margin:2px;text-align:center;text-decoration:none;}
 						</style>
 						</head>
 						<body>
@@ -1412,7 +1412,7 @@
 /obj/mecha/proc/occupant_message(message as text)
 	if(message)
 		if(src.occupant && src.occupant.client)
-			to_chat(src.occupant, "[icon2html(src, src.occupant)] [message]")
+			to_chat(src.occupant, "\icon[src] [message]")
 	return
 
 /obj/mecha/proc/log_message(message as text,red=null)

@@ -23,6 +23,9 @@
 /obj/item/organ/internal/stack/emp_act()
 	return
 
+/obj/item/organ/internal/stack/getToxLoss()
+	return 0
+
 /obj/item/organ/internal/stack/vox
 	name = "cortical stack"
 	invasive = 1

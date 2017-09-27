@@ -4,7 +4,7 @@
 		"species" = SPECIES_HUMAN,
 		"blood_DNA" = null,
 		"blood_type" = null,
-		"blood_colour" = "#A10808",
+		"blood_colour" = COLOR_BLOOD_HUMAN,
 		"trace_chem" = null,
 		"virus2" = list(),
 		"antibodies" = list(),
@@ -13,7 +13,7 @@
 	name = "Blood"
 	reagent_state = LIQUID
 	metabolism = REM * 5
-	color = "#C80000"
+	color = "#c80000"
 	taste_description = "iron"
 	taste_mult = 1.3
 	glass_name = "tomato juice"
@@ -108,7 +108,7 @@
 	name = "Antibodies"
 	taste_description = "slime"
 	reagent_state = LIQUID
-	color = "#0050F0"
+	color = "#0050f0"
 
 /datum/reagent/antibodies/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(src.data)
@@ -120,7 +120,7 @@
 	name = "Water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
-	color = "#0064C877"
+	color = "#0064c877"
 	metabolism = REM * 10
 	taste_description = "water"
 	glass_name = "water"

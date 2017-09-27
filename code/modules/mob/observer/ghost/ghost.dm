@@ -445,7 +445,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	return 1
 
 /mob/proc/can_admin_interact()
-    return 0
+	return 0
 
 /mob/observer/ghost/can_admin_interact()
 	return check_rights(R_ADMIN, 0, src)

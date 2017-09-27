@@ -136,7 +136,7 @@
 		var/turf/T = get_turf(container)
 		var/list/seen = viewers(4, T)
 		for(var/mob/M in seen)
-			M.show_message("<span class='notice'>[icon2html(container, M)] [mix_message]</span>", 1)
+			M.show_message("<span class='notice'>\icon[container] [mix_message]</span>", 1)
 		playsound(T, reaction_sound, 80, 1)
 
 //obtains any special data that will be provided to the reaction products
@@ -172,7 +172,7 @@
 
 /datum/chemical_reaction/oxycodone
 	name = "Oxycodone"
-	result = /datum/reagent/oxycodone
+	result = /datum/reagent/tramadol/oxycodone
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/tramadol = 1)
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
@@ -495,7 +495,7 @@
 /datum/chemical_reaction/noexcutite
 	name = "Noexcutite"
 	result = /datum/reagent/noexcutite
-	required_reagents = list(/datum/reagent/oxycodone = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/tramadol/oxycodone = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
 
 /* Solidification */
@@ -694,7 +694,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/red_paint/send_data()
-	return "#FE191A"
+	return "#fe191a"
 
 /datum/chemical_reaction/orange_paint
 	name = "Orange paint"
@@ -703,7 +703,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/orange_paint/send_data()
-	return "#FFBE4F"
+	return "#ffbe4f"
 
 /datum/chemical_reaction/yellow_paint
 	name = "Yellow paint"
@@ -712,7 +712,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/yellow_paint/send_data()
-	return "#FDFE7D"
+	return "#fdfe7d"
 
 /datum/chemical_reaction/green_paint
 	name = "Green paint"
@@ -721,7 +721,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/green_paint/send_data()
-	return "#18A31A"
+	return "#18a31a"
 
 /datum/chemical_reaction/blue_paint
 	name = "Blue paint"
@@ -730,7 +730,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/blue_paint/send_data()
-	return "#247CFF"
+	return "#247cff"
 
 /datum/chemical_reaction/purple_paint
 	name = "Purple paint"
@@ -739,7 +739,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/purple_paint/send_data()
-	return "#CC0099"
+	return "#cc0099"
 
 /datum/chemical_reaction/grey_paint //mime
 	name = "Grey paint"
@@ -757,7 +757,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/brown_paint/send_data()
-	return "#846F35"
+	return "#846f35"
 
 /datum/chemical_reaction/blood_paint
 	name = "Blood paint"
@@ -769,7 +769,7 @@
 	var/t = T.get_data("blood")
 	if(t && t["blood_colour"])
 		return t["blood_colour"]
-	return "#FE191A" // Probably red
+	return "#fe191a" // Probably red
 
 /datum/chemical_reaction/milk_paint
 	name = "Milk paint"
@@ -778,7 +778,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/milk_paint/send_data()
-	return "#F0F8FF"
+	return "#f0f8ff"
 
 /datum/chemical_reaction/orange_juice_paint
 	name = "Orange juice paint"
@@ -787,7 +787,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/orange_juice_paint/send_data()
-	return "#E78108"
+	return "#e78108"
 
 /datum/chemical_reaction/tomato_juice_paint
 	name = "Tomato juice paint"
@@ -805,7 +805,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/lime_juice_paint/send_data()
-	return "#365E30"
+	return "#365e30"
 
 /datum/chemical_reaction/carrot_juice_paint
 	name = "Carrot juice paint"
@@ -850,7 +850,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/watermelon_juice_paint/send_data()
-	return "#B83333"
+	return "#b83333"
 
 /datum/chemical_reaction/lemon_juice_paint
 	name = "Lemon juice paint"
@@ -859,7 +859,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/lemon_juice_paint/send_data()
-	return "#AFAF00"
+	return "#afaf00"
 
 /datum/chemical_reaction/banana_juice_paint
 	name = "Banana juice paint"
@@ -868,7 +868,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/banana_juice_paint/send_data()
-	return "#C3AF00"
+	return "#c3af00"
 
 /datum/chemical_reaction/potato_juice_paint
 	name = "Potato juice paint"
@@ -895,7 +895,7 @@
 	result_amount = 5
 
 /datum/chemical_reaction/aluminum_paint/send_data()
-	return "#F0F8FF"
+	return "#f0f8ff"
 
 /* Slime cores */
 
@@ -914,7 +914,7 @@
 	var/obj/item/slime_extract/T = holder.my_atom
 	T.Uses--
 	if(T.Uses <= 0)
-		T.visible_message("[icon2html(T, world)]<span class='notice'>\The [T]'s power is consumed in the reaction.</span>")
+		T.visible_message("\icon[T]<span class='notice'>\The [T]'s power is consumed in the reaction.</span>")
 		T.name = "used slime extract"
 		T.desc = "This extract has been used up."
 

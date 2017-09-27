@@ -12,19 +12,16 @@ var/list/organ_cache = list()
 	// Status tracking.
 	var/status = 0                    // Various status flags (such as robotic)
 	var/vital                         // Lose a vital limb, die immediately.
-	var/damage = 0                    // Current damage to the organ
 	var/robotic = 0
 
 	// Reference data.
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
-	var/list/autopsy_data = list()    // Trauma data for forensics.
-	var/list/trace_chemicals = list() // Traces of chemicals in the organ.
 	var/datum/dna/dna                 // Original DNA.
 	var/datum/species/species         // Original species.
 
 	// Damage vars.
-	var/min_bruised_damage = 10       // Damage before considered bruised
-	var/min_broken_damage = 30        // Damage before becoming broken
+	var/damage = 0                    // Current damage to the organ
+	var/min_broken_damage = 30     	  // Damage before becoming broken
 	var/max_damage                    // Damage cap
 	var/rejecting                     // Is this organ already being rejected?
 
@@ -32,9 +29,7 @@ var/list/organ_cache = list()
 
 /obj/item/organ/Destroy()
 
-	if(owner)           owner = null
-	if(autopsy_data)    autopsy_data.Cut()
-	if(trace_chemicals) trace_chemicals.Cut()
+	owner = null
 	dna = null
 	species = null
 
@@ -43,12 +38,14 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/update_health()
 	return
 
+/obj/item/organ/proc/is_broken()
+	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
+
 /obj/item/organ/New(var/mob/living/carbon/holder)
 	..(holder)
 
 	if(max_damage)
 		min_broken_damage = Floor(max_damage / 2)
-		min_bruised_damage = Floor(max_damage / 4)
 	else
 		max_damage = min_broken_damage * 2
 
@@ -111,9 +108,8 @@ var/list/organ_cache = list()
 		if(B && prob(40))
 			reagents.remove_reagent(/datum/reagent/blood,0.1)
 			blood_splatter(src,B,1)
-		if(config.organs_decay) damage += rand(1,3)
-		if(damage >= max_damage)
-			damage = max_damage
+		if(config.organs_decay)
+			take_damage(rand(1,3))
 		germ_level += rand(2,6)
 		if(germ_level >= INFECTION_LEVEL_TWO)
 			germ_level += rand(2,6)
@@ -209,15 +205,6 @@ var/list/organ_cache = list()
 		else if(status == "mechanical")
 			robotize()
 
-/obj/item/organ/proc/is_damaged()
-	return damage > 0
-
-/obj/item/organ/proc/is_bruised()
-	return damage >= min_bruised_damage
-
-/obj/item/organ/proc/is_broken()
-	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
-
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
 	var/antibiotics = 0
@@ -234,39 +221,13 @@ var/list/organ_cache = list()
 	else
 		germ_level -= 2 //at germ_level == 1000, this will cure the infection in 5 minutes
 
-//Adds autopsy data for used_weapon.
-/obj/item/organ/proc/add_autopsy_data(var/used_weapon, var/damage)
-	var/datum/autopsy_data/W = autopsy_data[used_weapon]
-	if(!W)
-		W = new()
-		W.weapon = used_weapon
-		autopsy_data[used_weapon] = W
-
-	W.hits += 1
-	W.damage += damage
-	W.time_inflicted = world.time
-
 //Note: external organs have their own version of this proc
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
-	amount = round(amount, 0.1)
-	if(src.robotic >= ORGAN_ROBOT)
-		src.damage = between(0, src.damage + (amount * 0.8), max_damage)
-	else
-		src.damage = between(0, src.damage + amount, max_damage)
+	damage = between(0, damage + round(amount, 0.1), max_damage)
 
-		//only show this if the organ is not robotic
-		if(owner && parent_organ && (amount > 5 || prob(10)))
-			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-			if(parent && !silent)
-				var/degree = ""
-				if(is_bruised())
-					degree = " a lot"
-				if(damage < 5)
-					degree = " a bit"
-				owner.custom_pain("Something inside your [parent.name] hurts[degree].", amount, affecting = parent)
+/obj/item/organ/proc/heal_damage(amount)
+	damage = between(0, damage - round(amount, 0.1), max_damage)
 
-/obj/item/organ/proc/bruise()
-	damage = max(damage, min_bruised_damage)
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
 	robotic = ORGAN_ROBOT
@@ -288,40 +249,15 @@ var/list/organ_cache = list()
 		if (3)
 			take_damage(1)
 
-//disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
-//TODO move this to organ/internal once the FPB port comes through
-/obj/item/organ/proc/cut_away(var/mob/living/user)
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(istype(parent)) //TODO ensure that we don't have to check this.
-		removed(user, 0)
-		parent.implants += src
-
-//TODO move cut_away() to the internal organ subtype and get rid of this
-/obj/item/organ/external/cut_away(var/mob/living/user)
-	removed(user)
-
 /**
  *  Remove an organ
  *
  *  drop_organ - if true, organ will be dropped at the loc of its former owner
- *  detach - if true, organ will be detached from parent. Keep false for organs
- *           removed together with parent, as with an amputation.
  */
-/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
+/obj/item/organ/proc/removed(var/mob/living/user, var/drop_organ=1)
 
 	if(!istype(owner))
 		return
-
-	owner.internal_organs_by_name[organ_tag] = null
-	owner.internal_organs_by_name -= organ_tag
-	owner.internal_organs_by_name -= null
-	owner.internal_organs -= src
-
-	if(detach)
-		var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-		if(affected)
-			affected.internal_organs -= src
-			status |= ORGAN_CUT_AWAY
 
 	if(drop_organ)
 		dropInto(owner.loc)
@@ -411,3 +347,6 @@ var/list/organ_cache = list()
 			. +=  "Septic"
 	if(rejecting)
 		. += "Genetic Rejection"
+
+/obj/item/organ/proc/isrobotic()
+	return robotic >= ORGAN_ROBOT

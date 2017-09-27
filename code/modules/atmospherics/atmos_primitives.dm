@@ -15,7 +15,7 @@
 
 /obj/machinery/atmospherics/var/debug = 0
 
-/client/proc/atmos_toggle_debug(var/obj/machinery/atmospherics/M in range(world.view))
+/client/proc/atmos_toggle_debug(var/obj/machinery/atmospherics/M in world)
 	set name = "Toggle Debug Messages"
 	set category = "Debug"
 	M.debug = !M.debug
@@ -462,46 +462,46 @@
 // - Has temperature between -10C and 50C
 // - Has no or only minimal phoron or N2O
 /proc/get_atmosphere_issues(datum/gas_mixture/atmosphere, var/returntext = 0)
-    var/list/status = list()
-    if(!atmosphere)
-        status.Add("No atmosphere present.")
+	var/list/status = list()
+	if(!atmosphere)
+		status.Add("No atmosphere present.")
 
-    // Temperature check
-    if((atmosphere.temperature > (T0C + 50)) || (atmosphere.temperature < (T0C - 10)))
-        status.Add("Temperature too [atmosphere.temperature > (T0C + 50) ? "high" : "low"].")
+	// Temperature check
+	if((atmosphere.temperature > (T0C + 50)) || (atmosphere.temperature < (T0C - 10)))
+		status.Add("Temperature too [atmosphere.temperature > (T0C + 50) ? "high" : "low"].")
 
-    // Pressure check
-    var/pressure = atmosphere.return_pressure()
-    if((pressure > 120) || (pressure < 80))
-        status.Add("Pressure too [pressure > 120 ? "high" : "low"].")
+	// Pressure check
+	var/pressure = atmosphere.return_pressure()
+	if((pressure > 120) || (pressure < 80))
+		status.Add("Pressure too [pressure > 120 ? "high" : "low"].")
 
-    // Gas concentration checks
-    var/oxygen = 0
-    var/phoron = 0
-    var/carbondioxide = 0
-    var/nitrousoxide = 0
-    if(atmosphere.total_moles) // Division by zero prevention
-        oxygen = (atmosphere.gas["oxygen"] / atmosphere.total_moles) * 100 // Percentage of the gas
-        phoron = (atmosphere.gas["phoron"] / atmosphere.total_moles) * 100
-        carbondioxide = (atmosphere.gas["carbon_dioxide"] / atmosphere.total_moles) * 100
-        nitrousoxide = (atmosphere.gas["sleeping_agent"] / atmosphere.total_moles) * 100
+	// Gas concentration checks
+	var/oxygen = 0
+	var/phoron = 0
+	var/carbondioxide = 0
+	var/nitrousoxide = 0
+	if(atmosphere.total_moles) // Division by zero prevention
+		oxygen = (atmosphere.gas["oxygen"] / atmosphere.total_moles) * 100 // Percentage of the gas
+		phoron = (atmosphere.gas["phoron"] / atmosphere.total_moles) * 100
+		carbondioxide = (atmosphere.gas["carbon_dioxide"] / atmosphere.total_moles) * 100
+		nitrousoxide = (atmosphere.gas["sleeping_agent"] / atmosphere.total_moles) * 100
 
-    if(!oxygen)
-        status.Add("No oxygen.")
-    else if((oxygen > 30) || (oxygen < 17))
-        status.Add("Oxygen too [oxygen > 30 ? "high" : "low"].")
-
-
-
-    if(phoron > 0.1)        // Toxic even in small amounts.
-        status.Add("Phoron contamination.")
-    if(nitrousoxide > 0.1)    // Probably slightly less dangerous but still.
-        status.Add("N2O contamination.")
-    if(carbondioxide > 5)    // Not as dangerous until very large amount is present.
-        status.Add("CO2 concentration high.")
+	if(!oxygen)
+		status.Add("No oxygen.")
+	else if((oxygen > 30) || (oxygen < 17))
+		status.Add("Oxygen too [oxygen > 30 ? "high" : "low"].")
 
 
-    if(returntext)
-        return jointext(status, " ")
-    else
-        return status.len
+
+	if(phoron > 0.1)		// Toxic even in small amounts.
+		status.Add("Phoron contamination.")
+	if(nitrousoxide > 0.1)	// Probably slightly less dangerous but still.
+		status.Add("N2O contamination.")
+	if(carbondioxide > 5)	// Not as dangerous until very large amount is present.
+		status.Add("CO2 concentration high.")
+
+
+	if(returntext)
+		return jointext(status, " ")
+	else
+		return status.len

@@ -156,7 +156,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		update_icon()
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
-		set_light(2, 0.25, "#E38F46")
+		set_light(2, 0.25, "#e38f46")
 		GLOB.processing_objects.Add(src)
 
 /obj/item/clothing/mask/smokable/proc/die(var/nomessage = 0)
@@ -585,9 +585,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 
 /obj/item/weapon/flame/lighter/random/New()
-    icon_state = "lighter-[pick("r","c","y","g")]"
-    item_state = icon_state
-    ..()
+	icon_state = "lighter-[pick("r","c","y","g")]"
+	item_state = icon_state
+	..()
 
 /obj/item/weapon/flame/lighter/attack_self(mob/living/user)
 	if(!lit)
@@ -599,14 +599,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		shutoff(user)
 
 /obj/item/weapon/flame/lighter/update_icon()
-    var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 
-    if(lit)
-        icon_state = "[bis.base_icon_state]on"
-        item_state = "[bis.base_icon_state]on"
-    else
-        icon_state = "[bis.base_icon_state]"
-        item_state = "[bis.base_icon_state]"
+	if(lit)
+		icon_state = "[bis.base_icon_state]on"
+		item_state = "[bis.base_icon_state]on"
+	else
+		icon_state = "[bis.base_icon_state]"
+		item_state = "[bis.base_icon_state]"
 
 /obj/item/weapon/flame/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))

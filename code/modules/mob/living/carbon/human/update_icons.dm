@@ -280,6 +280,8 @@ var/global/list/damage_icon_parts = list()
 		if(isnull(part) || part.is_stump())
 			icon_key += "0"
 			continue
+		for(var/M in part.markings)
+			icon_key += "[M][part.markings[M]["color"]]"
 		if(part)
 			icon_key += "[part.species.get_race_key(part.owner)]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"

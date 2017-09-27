@@ -1,6 +1,6 @@
 /obj/effect/overmap/sector/test1
 	name = "Test Sector #1"
-	color = "#00FF00"
+	color = "#00ff00"
 	start_x = 8
 	start_y = 8
 
@@ -12,7 +12,7 @@
 
 /obj/effect/overmap/sector/test2
 	name = "Test Sector #2"
-	color = "#FF0000"
+	color = "#ff0000"
 	start_x = 6
 	start_y = 8
 

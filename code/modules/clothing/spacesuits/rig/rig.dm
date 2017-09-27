@@ -92,7 +92,7 @@
 		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
 			if(!piece || piece.loc != wearer)
 				continue
-			to_chat(usr, "[icon2html(piece, usr)] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed.")
+			to_chat(usr, "\icon[piece] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed.")
 
 	if(src.loc == usr)
 		to_chat(usr, "The access panel is [locked? "locked" : "unlocked"].")
@@ -753,7 +753,7 @@
 			malfunction_delay = max(malfunction_delay, round(30/severity_class))
 
 	//drain some charge
-	if(cell) cell.emp_act(severity_class + 15)
+	if(cell) cell.emp_act(severity_class + 1)
 
 	//possibly damage some modules
 	take_hit((100/severity_class), "electrical pulse", 1)

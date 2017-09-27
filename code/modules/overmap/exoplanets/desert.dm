@@ -32,7 +32,7 @@
 	smoothing_iterations = 4
 	land_type = /turf/simulated/floor/exoplanet/desert
 	planetary_area = /area/exoplanet/desert
-	plantcolors = list("#EFDD6F","#7B4A12","#E49135","#BA6222","#5C755E","#120309")
+	plantcolors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#120309")
 
 	flora_prob = 10
 	large_flora_prob = 0

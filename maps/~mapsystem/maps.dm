@@ -71,7 +71,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
 	var/list/holodeck_supported_programs = list() // map of maps - first level maps from list-of-programs string id (e.g. "BarPrograms") to another map
-                                                  // this is in order to support multiple holodeck program listings for different holodecks
+												  // this is in order to support multiple holodeck program listings for different holodecks
 	                                              // second level maps from program friendly display names ("Picnic Area") to program string ids ("picnicarea")
 	                                              // as defined in holodeck_programs
 	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
@@ -89,7 +89,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
 	var/lobby_music/lobby_music                     // The track that will play in the lobby screen. Handed in the /setup_map() proc.
 
-	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
+	var/default_law_type = /datum/ai_laws/nanotrasen  // The default lawset use by synth units, if not overriden by their laws var.
+	var/security_state = /decl/security_state/default // The default security state system to use.
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
@@ -154,3 +155,22 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		world.maxz++
 		empty_levels = list(world.maxz)
 	return pick(empty_levels)
+
+// Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
+// This list needs to be purged but people insist on adding more cruft to the radio.
+/datum/map/proc/default_internal_channels()
+	return list(
+		num2text(PUB_FREQ)   = list(),
+		num2text(AI_FREQ)    = list(access_synth),
+		num2text(ENT_FREQ)   = list(),
+		num2text(ERT_FREQ)   = list(access_cent_specops),
+		num2text(COMM_FREQ)  = list(access_heads),
+		num2text(ENG_FREQ)   = list(access_engine_equip, access_atmospherics),
+		num2text(MED_FREQ)   = list(access_medical_equip),
+		num2text(MED_I_FREQ) = list(access_medical_equip),
+		num2text(SEC_FREQ)   = list(access_security),
+		num2text(SEC_I_FREQ) = list(access_security),
+		num2text(SCI_FREQ)   = list(access_tox,access_robotics,access_xenobiology),
+		num2text(SUP_FREQ)   = list(access_cargo),
+		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
+	)

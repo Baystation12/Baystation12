@@ -64,6 +64,14 @@
 			return /obj/item/slime_extract/gold
 		if("green")
 			return /obj/item/slime_extract/green
+		if("sepia")
+			return /obj/item/slime_extract/sepia
+		if("bluespace")
+			return /obj/item/slime_extract/bluespace
+		if("cerulean")
+			return /obj/item/slime_extract/cerulean
+		if("pyrite")
+			return /obj/item/slime_extract/pyrite
 		//Tier 5
 		if("light pink")
 			return /obj/item/slime_extract/lightpink

@@ -428,10 +428,10 @@
 #define CORNER_CLOCKWISE 4
 
 /*
-  turn() is weird:
-    turn(icon, angle) turns icon by angle degrees clockwise
-    turn(matrix, angle) turns matrix by angle degrees clockwise
-    turn(dir, angle) turns dir by angle degrees counter-clockwise
+	turn() is weird:
+		turn(icon, angle) turns icon by angle degrees clockwise
+		turn(matrix, angle) turns matrix by angle degrees clockwise
+		turn(dir, angle) turns dir by angle degrees counter-clockwise
 */
 
 /proc/dirs_to_corner_states(list/dirs)

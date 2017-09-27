@@ -364,16 +364,16 @@
 		if(update_state & (UPDATE_OPENED1|UPDATE_OPENED2|UPDATE_BROKE))
 			set_light(0)
 		else if(update_state & UPDATE_BLUESCREEN)
-			set_light(l_range = 2, l_power = 0.5, l_color = "#0000FF")
+			set_light(l_range = 2, l_power = 0.5, l_color = "#0000ff")
 		else if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
 			var/color
 			switch(charging)
 				if(0)
-					color = "#F86060"
+					color = "#f86060"
 				if(1)
-					color = "#A8B0F8"
+					color = "#a8b0f8"
 				if(2)
-					color = "#82FF4C"
+					color = "#82ff4c"
 			set_light(l_range = 2, l_power = 0.5, l_color = color)
 		else
 			set_light(0)
@@ -829,7 +829,7 @@
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "apc.tmpl", "[area.name] - APC", 520, data["siliconUser"] ? 465 : 440)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)

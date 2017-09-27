@@ -323,7 +323,8 @@ datum/controller/vote
 						if (config.allow_extra_antags && !antag_add_finished)
 							choices.Add("Add Antagonist")
 					else
-						if (get_security_level() == "red" || get_security_level() == "delta")
+						var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+						if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
 							to_chat(initiator_key, "The current alert status is too high to call for a crew transfer!")
 							return 0
 						if(ticker.current_state <= GAME_STATE_SETTING_UP)

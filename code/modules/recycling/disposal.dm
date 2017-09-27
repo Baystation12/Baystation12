@@ -664,7 +664,8 @@
 	var/dpdir = 0		// bitmask of pipe directions
 	dir = 0				// dir will contain dominant direction for junction pipes
 	var/health = 10 	// health points 0-10
-	plane = ABOVE_PLATING_PLANE
+	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
+	plane = ABOVE_TURF_PLANE
 	layer = DISPOSALS_PIPE_LAYER
 	var/base_icon_state	// initial icon state on map
 	var/sortType = ""
@@ -672,10 +673,11 @@
 	// new pipe, set the icon_state as on map
 	New()
 		..()
+		alpha = 255
+		plane = ABOVE_PLATING_PLANE
 		base_icon_state = icon_state
 		return
-
-
+		
 	// pipe is deleted
 	// ensure if holder is present, it is expelled
 	Destroy()
@@ -1258,7 +1260,7 @@
 			found = 1
 			break
 	if(!found)
-		to_chat(user, "[icon2html(src, user)]<span class=notice>\The [src] is not linked to any junctions!</span>")
+		to_chat(user, "\icon[src]<span class=notice>\The [src] is not linked to any junctions!</span>")
 		return
 	var/obj/machinery/disposal_switch/NC = new/obj/machinery/disposal_switch(A, id_tag)
 	transfer_fingerprints_to(NC)

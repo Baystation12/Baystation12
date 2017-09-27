@@ -85,12 +85,12 @@
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=iron'>Choose</A>")
-	dat += text("<br><font color='#8888FF'><b>Diamond inserted: </b>[amt_diamond]</font> ")
+	dat += text("<br><font color='#8888ff'><b>Diamond inserted: </b>[amt_diamond]</font> ")
 	if (chosen == "diamond")
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=diamond'>Choose</A>")
-	dat += text("<br><font color='#FF8800'><b>Phoron inserted: </b>[amt_phoron]</font> ")
+	dat += text("<br><font color='#ff8800'><b>Phoron inserted: </b>[amt_phoron]</font> ")
 	if (chosen == "phoron")
 		dat += text("chosen")
 	else
