@@ -27,9 +27,9 @@
 		if(pulse)
 			handle_heartbeat()
 			if(pulse == PULSE_2FAST && prob(1))
-				take_damage(1)
+				take_damage(0.5)
 			if(pulse == PULSE_THREADY && prob(5))
-				take_damage(1)
+				take_damage(0.5)
 		handle_blood()
 	..()
 
@@ -37,7 +37,7 @@
 	if(owner.stat == DEAD || robotic >= ORGAN_ROBOT)
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
-	var/should_stop = owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE //cardiovascular shock, not enough liquid to pump
+	var/should_stop = prob(80) && owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE //cardiovascular shock, not enough liquid to pump
 	should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75)) //brain failing to work heart properly
 	should_stop = should_stop || (prob(10) && owner.shock_stage >= 120) //traumatic shock
 	should_stop = should_stop || (prob(60) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
@@ -55,7 +55,9 @@
 	var/oxy = owner.get_blood_oxygenation()
 	if(oxy < BLOOD_VOLUME_OKAY) //brain wants us to get MOAR OXY
 		pulse_mod++
-	if(oxy <= BLOOD_VOLUME_BAD && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
+	if(oxy < BLOOD_VOLUME_BAD) //MOAR
+		pulse_mod++
+	if(oxy <= BLOOD_VOLUME_SURVIVE && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
 		pulse = PULSE_THREADY	
 		return
 
