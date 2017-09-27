@@ -113,6 +113,24 @@
 	dress_hat = /obj/item/clothing/head/dress/fleet/command
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword)
 
+/decl/hierarchy/mil_uniform/fleet/srv
+	name = "Fleet exploration"
+	departments = EXP
+
+	utility_under = /obj/item/clothing/under/utility/fleet/exploration
+	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/exploration, /obj/item/clothing/head/ushanka/fleet)
+
+/decl/hierarchy/mil_uniform/fleet/srv/officer
+	name = "Fleet exploration CO"
+	min_rank = 11
+
+	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet/command, /obj/item/clothing/head/ushanka/fleet)
+	service_hat = /obj/item/clothing/head/dress/fleet/command
+
+	dress_over = /obj/item/clothing/suit/storage/toggle/dress/fleet/command
+	dress_hat = /obj/item/clothing/head/dress/fleet/command
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword)
+
 /decl/hierarchy/mil_uniform/fleet/spt
 	name = "Fleet command support"
 	departments = SPT

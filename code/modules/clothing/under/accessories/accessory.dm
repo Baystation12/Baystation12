@@ -699,6 +699,21 @@
 	desc = "Insignia denoting assignment to the service department. These fit Marine Corps uniforms."
 	on_rolled = list("down" = "none")
 
+/obj/item/clothing/accessory/department/exploration
+	name = "exploration insignia"
+	desc = "Insignia denoting assignment to the exploration department. These fit Expeditionary Corps uniforms."
+	color = "#68099E"
+
+/obj/item/clothing/accessory/department/exploration/fleet
+	icon_state = "dept_fleet"
+	desc = "Insignia denoting assignment to the exploration department. These fit Fleet uniforms."
+	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
+
+/obj/item/clothing/accessory/department/exploration/marine
+	icon_state = "dept_marine"
+	desc = "Insignia denoting assignment to the exploration department. These fit Marine Corps uniforms."
+	on_rolled = list("down" = "none")
+
 
 //Necklaces
 /obj/item/clothing/accessory/necklace

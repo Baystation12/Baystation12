@@ -39,7 +39,7 @@
 /obj/item/device/radio/Initialize()
 	. = ..()
 	wires = new(src)
-	internal_channels = GLOB.default_internal_channels.Copy()
+	internal_channels = GLOB.using_map.default_internal_channels()
 	GLOB.listening_objects += src
 
 	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
