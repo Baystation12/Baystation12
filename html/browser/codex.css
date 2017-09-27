@@ -1,0 +1,29 @@
+body
+{
+	background-image: url("paper_bg.png");
+}
+
+.button-group .button 
+{
+	border: 1px solid RoyalBlue;
+	color: black;
+	padding: 5px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	width: 40%;
+	display: block;
+}
+
+.button-group .button:not(:last-child)
+{
+	border-bottom: none; /* Will hopefully prevent double borders */
+}
+
+.button-group .button:hover
+{
+	background-color: RoyalBlue;
+	color: white;
+}

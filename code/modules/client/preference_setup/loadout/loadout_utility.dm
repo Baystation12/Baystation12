@@ -28,6 +28,11 @@
 	display_name = "tape recorder"
 	path = /obj/item/device/taperecorder
 
+/datum/gear/utility/codex
+	display_name = "the explorer's guide, 12th edition"
+	path = /obj/item/weapon/book/codex
+	cost = 0
+
 /datum/gear/utility/folder/New()
 	..()
 	var/folders = list()
