@@ -40,7 +40,7 @@
 	var/should_stop = prob(80) && owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE //cardiovascular shock, not enough liquid to pump
 	should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75)) //brain failing to work heart properly
 	should_stop = should_stop || (prob(10) && owner.shock_stage >= 120) //traumatic shock
-	should_stop = should_stop || (prob(60) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
+	should_stop = should_stop || (prob(10) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
 	if(should_stop) // The heart has stopped due to going into traumatic or cardiovascular shock.
 		if(pulse != PULSE_NONE)
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
