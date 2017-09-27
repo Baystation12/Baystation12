@@ -974,7 +974,7 @@
 	if(is_asystole())
 		shock_stage = max(shock_stage, 61)
 	var/traumatic_shock = get_shock()
-	if(traumatic_shock >= max(50, shock_stage))
+	if(traumatic_shock >= max(30, 0.8*shock_stage))
 		shock_stage += 1
 	else
 		shock_stage = min(shock_stage, 160)
