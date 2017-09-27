@@ -1,4 +1,4 @@
-//SolGov Uniforms
+//SolGov Uniforms - DO NOT ADD NEW UNIFORMS TO UNIFORM.DMI - SOLGOV UNIFORMS GO IN SOLGOV.DMI
 
 //PT
 /obj/item/clothing/under/pt
@@ -9,6 +9,9 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	item_icons = list(
+		slot_w_uniform_str = 'icons/mob/solgov.dmi'
+		)
 
 /obj/item/clothing/under/pt/expeditionary
 	name = "expeditionary pt uniform"
@@ -39,6 +42,9 @@
 	worn_state = "blackutility"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	item_icons = list(
+		slot_w_uniform_str = 'icons/mob/solgov.dmi'
+		)
 
 /obj/item/clothing/under/utility/expeditionary
 	name = "expeditionary uniform"
@@ -191,6 +197,22 @@
 	worn_state = "whiteservice"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	item_icons = list(
+		slot_w_uniform_str = 'icons/mob/solgov.dmi'
+		)
+
+/obj/item/clothing/under/service/expeditionary_skirt
+	name = "expeditionary service skirt"
+	desc = "A black turtleneck and skirt, the optional ladies' service uniform of the Expeditionary Corps."
+	icon_state = "blackservicef"
+	worn_state = "blackservicef"
+	valid_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DECOR,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA) //dept colour tabs don't fit
+
+/obj/item/clothing/under/service/expeditionary_skirt/command
+	name = "expeditionary officer service skirt"
+	desc = "A black turtleneck and skirt, the optional ladies' service uniform of the Expeditionary Corps. This one has gold trim."
+	icon_state = "blackservicef_com"
+	worn_state = "blackservicef_com"
 
 /obj/item/clothing/under/service/fleet
 	name = "fleet service uniform"
@@ -230,6 +252,9 @@
 	worn_state = "greydress"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	item_icons = list(
+		slot_w_uniform_str = 'icons/mob/solgov.dmi'
+		)
 
 /obj/item/clothing/under/mildress/expeditionary
 	name = "expeditionary dress uniform"
