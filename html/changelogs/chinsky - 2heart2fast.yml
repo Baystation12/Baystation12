@@ -1,0 +1,11 @@
+ 
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Pulse now affects blood circulation. Lower pulse effectively lowers it and vice versa."
+  - rscadd: "Extremely high pulse risks damaging the heart. Shouldn't be a lot, but it's there."
+  - rscadd: "As you lose blood oxygenation, your pulse tries to rise to compensate. Thready (>250) pulse will cause a cardiac arrest."
+  - rscadd: "Inaprovaline tries to bring pulse to normal levels, either up or down. It also prevents thready pulse."
+  - rscadd: "Heart stopping is slightly less 100% surefire, so if you manage to get heart restarted it might beat for few ticks first."
+  - rscadd: "You no longer need lungs/mouth to give CPR, but you will only do the heart bit. Checks still apply for mouth-to-mouth."
+  - rscadd: "Shock stage stars rising earlier now (30 damage vs 50) and can go bit higher than usual."
