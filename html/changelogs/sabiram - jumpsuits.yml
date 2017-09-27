@@ -1,0 +1,6 @@
+author: sabiram
+delete-after: True
+changes:
+  - rscadd: "Added a jumpsuit with colour selection to the loadout, replacing the list of presets previously available."
+  - rscadd: "Added a new feminine jumpsuit with colour selection to the loadout."
+  - rscadd: "Added a service uniform skirt for Expeditionary Corps, available in the uniform vendor."

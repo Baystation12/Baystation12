@@ -180,6 +180,18 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/under/service/expeditionary_skirt
+	name = "expeditionary service skirt"
+	desc = "A black turtleneck and skirt, the optional ladies' service uniform of the Expeditionary Corps."
+	icon_state = "blackservicef"
+	worn_state = "blackservicef"
+
+/obj/item/clothing/under/service/expeditionary_skirt/command
+	name = "expeditionary officer service skirt"
+	desc = "A black turtleneck and skirt, the optional ladies' service uniform of the Expeditionary Corps. This one has gold trim."
+	icon_state = "blackservicef_com"
+	worn_state = "blackservicef_com"
+
 /obj/item/clothing/under/service/fleet
 	name = "fleet service uniform"
 	desc = "The service uniform of the SCG Fleet, made from immaculate white fabric."

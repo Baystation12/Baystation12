@@ -5,17 +5,28 @@
 	slot = slot_w_uniform
 	sort_category = "Uniforms and Casual Dress"
 
+/datum/gear/uniform/jumpsuit
+	display_name = "jumpsuit"
+	path = /obj/item/clothing/under/color
+	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/uniform/jumpsuit_f
+	display_name = "feminine jumpsuit"
+	path = /obj/item/clothing/under/fcolor
+	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_roles = NON_MILITARY_ROLES
+
 /datum/gear/uniform/shortjumpskirt
 	display_name = "short jumpskirt"
 	path = /obj/item/clothing/under/shortjumpskirt
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = RESTRICTED_ROLES
 
-/datum/gear/uniform/jumpsuit
-	display_name = "generic jumpsuits"
-	path = /obj/item/clothing/under/color/grey
-	allowed_roles = NON_MILITARY_ROLES
-	flags = GEAR_HAS_TYPE_SELECTION
+/datum/gear/uniform/blackjumpshorts
+	display_name = "black jumpsuit shorts"
+	path = /obj/item/clothing/under/shorts/blackjumpshorts
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/uniform/roboticist_skirt
 	display_name = "skirt, roboticist"
