@@ -448,16 +448,14 @@
 	description = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
 	taste_description = "numbness"
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
 	M.jitteriness = max(M.jitteriness - 5, 0)
-	if(brain.past_damage_threshold(0))
-		M.adjustBrainLoss(0.3 * removed)
-	else
+	if(prob(80))
 		M.adjustBrainLoss(0.1 * removed)
 	if(prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
