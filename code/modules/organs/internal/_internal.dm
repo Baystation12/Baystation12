@@ -33,6 +33,17 @@
 		if(istype(E)) E.internal_organs -= src
 	return ..()
 
+/obj/item/organ/internal/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
+	if(!istype(owner))
+		return
+
+	owner.internal_organs_by_name[organ_tag] = null
+	owner.internal_organs_by_name -= organ_tag
+	owner.internal_organs_by_name -= null
+	owner.internal_organs -= src
+
+	..()
+
 /obj/item/organ/internal/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
 
 	if(!istype(target))
