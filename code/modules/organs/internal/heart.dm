@@ -26,6 +26,10 @@
 		handle_pulse()
 		if(pulse)
 			handle_heartbeat()
+			if(pulse == PULSE_2FAST && prob(1))
+				take_damage(1)
+			if(pulse == PULSE_THREADY && prob(5))
+				take_damage(1)
 		handle_blood()
 	..()
 
@@ -33,23 +37,39 @@
 	if(owner.stat == DEAD || robotic >= ORGAN_ROBOT)
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
-	if(owner.shock_stage >= 120 || owner.getOxyLoss() >= 100 || owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75))) // The heart has stopped due to going into traumatic or cardiovascular shock.
+	var/should_stop = owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE //cardiovascular shock, not enough liquid to pump
+	should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75)) //brain failing to work heart properly
+	should_stop = should_stop || (prob(10) && owner.shock_stage >= 120) //traumatic shock
+	should_stop = should_stop || (prob(60) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
+	if(should_stop) // The heart has stopped due to going into traumatic or cardiovascular shock.
 		if(pulse != PULSE_NONE)
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
-			pulse = PULSE_NONE
-	else
-		pulse = PULSE_NORM
-		var/pulse_mod = owner.chem_effects[CE_PULSE]
-		if(owner.shock_stage > 30)
-			pulse_mod++
-		if(owner.get_blood_circulation() <= BLOOD_VOLUME_BAD)	//how much blood do we have
-			pulse  = PULSE_THREADY	//not enough :(
+		pulse = PULSE_NONE
+		return
 
-		else if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
-			pulse = PULSE_NONE		//pretend that we're dead. unlike actual death, can be inflienced by meds
-			pulse = Clamp(pulse + pulse_mod, PULSE_NONE, PULSE_2FAST)
+	pulse = PULSE_NORM
+	var/pulse_mod = owner.chem_effects[CE_PULSE]
+	if(owner.shock_stage > 30)
+		pulse_mod++
+
+	var/oxy = owner.get_blood_oxygenation()
+	if(oxy < BLOOD_VOLUME_OKAY) //brain wants us to get MOAR OXY
+		pulse_mod++
+	if(oxy <= BLOOD_VOLUME_BAD && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
+		pulse = PULSE_THREADY	
+		return
+
+	if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
+		pulse = PULSE_NONE		//pretend that we're dead. unlike actual death, can be inflienced by meds
+		pulse = Clamp(pulse + pulse_mod, PULSE_NONE, PULSE_2FAST)
+		return
+	
+	pulse = Clamp(pulse + pulse_mod, PULSE_SLOW, PULSE_2FAST)
+	if(pulse != PULSE_NORM && owner.chem_effects[CE_STABLE])
+		if(pulse > PULSE_NORM)
+			pulse--
 		else
-			pulse = Clamp(pulse + pulse_mod, PULSE_SLOW, PULSE_2FAST)
+			pulse++
 
 /obj/item/organ/internal/heart/proc/handle_heartbeat()
 	if(pulse >= PULSE_2FAST || owner.shock_stage >= 10 || is_below_sound_pressure(get_turf(owner)))
