@@ -1,6 +1,6 @@
 /obj/effect/overmap/ship/bearcat
 	name = "CSV Bearcat"
-	color = "#00FFFF"
+	color = "#00ffff"
 	start_x = 4
 	start_y = 4
 	base = 1

@@ -742,6 +742,10 @@
 	name = "\improper Expedition Storage"
 	icon_state = "mining"
 
+/area/quartermaster/exploration
+	name = "\improper Exploration Equipment"
+	icon_state = "mining"
+
 /area/quartermaster/hangar
 	name = "\improper Hangar Deck"
 	icon_state = "mining"
@@ -787,6 +791,7 @@
 /area/rnd/blanks
 	name = "\improper Aux Custodial Supplies"
 	icon_state = "decontamination"
+	flags = AREA_RAD_SHIELDED
 
 // Crew areas
 /area/crew_quarters/bar
@@ -842,6 +847,7 @@
 /area/crew_quarters/sleep/cryo/aux
 	name = "\improper Auxiliary Cryogenic Storage"
 	icon_state = "Sleep"
+	flags = AREA_RAD_SHIELDED
 
 /area/crew_quarters/diplomat
 	name = "\improper Diplomatic Quarters"
@@ -1406,6 +1412,7 @@
 /area/crew_quarters/sleep/cryo
 	name = "\improper Cryogenic Storage"
 	icon_state = "Sleep"
+	flags = AREA_RAD_SHIELDED
 
 /area/hydroponics
 	name = "\improper Hydroponics"

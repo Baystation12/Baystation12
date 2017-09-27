@@ -37,8 +37,8 @@
 	<head><style>
 		.manifest {border-collapse:collapse;}
 		.manifest td, th {border:1px solid [monochrome?"black":"[OOC?"black; background-color:#272727; color:white":"#DEF; background-color:white; color:black"]"]; padding:.25em}
-		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: [OOC?"#40628A":"#48C"]; color:white"]}
-		.manifest tr.head th { [monochrome?"border-top-width: 1px":"background-color: [OOC?"#013D3B;":"#488;"]"] }
+		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: [OOC?"#40628a":"#48C"]; color:white"]}
+		.manifest tr.head th { [monochrome?"border-top-width: 1px":"background-color: [OOC?"#013D3b;":"#488;"]"] }
 		.manifest td:first-child {text-align:right}
 		.manifest tr.alt td {[monochrome?"border-top-width: 2px":"background-color: [OOC?"#373737; color:white":"#DEF"]"]}
 	</style></head>
@@ -95,6 +95,9 @@
 			department = 1
 		if(real_rank in GLOB.civilian_positions)
 			civ[name] = rank
+			department = 1
+		if(real_rank in GLOB.exploration_positions)
+			exp[name] = rank
 			department = 1
 		if(real_rank in GLOB.service_positions)
 			srv[name] = rank
@@ -155,7 +158,7 @@
 	if(exp.len > 0)
 		dat += "<tr><th colspan=3>Exploration</th></tr>"
 		for(name in exp)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[exp[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(srv.len > 0)
 		dat += "<tr><th colspan=3>Service</th></tr>"

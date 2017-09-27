@@ -124,6 +124,14 @@
 	else
 		icon = initial(icon)
 
+/obj/item/clothing/get_examine_line()
+	. = ..()
+	var/list/ties = list()
+	for(var/accessory in accessories)
+		ties += "\icon[accessory] \a [accessory]"
+	if(ties.len)
+		.+= " with [english_list(ties)] attached"
+
 ///////////////////////////////////////////////////////////////////////
 // Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears

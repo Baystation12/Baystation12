@@ -2,7 +2,7 @@
 	name = "exoplanet"
 	var/list/seeds = list()
 	var/list/animals = list()
-	var/animalcount
+	var/max_animal_count
 	var/datum/gas_mixture/atmosphere
 	var/list/breathgas = list()	//list of gases animals/plants require to survive
 	var/badgas					//id of gas that is toxic to life here
@@ -14,6 +14,9 @@
 	var/landmark_type = /obj/effect/shuttle_landmark/automatic
 
 	var/list/actors = list() //things that appear in engravings on xenoarch finds.
+
+	var/repopulating = 0
+	var/repopulate_types = list() // animals which have died that may come back
 
 
 /obj/effect/overmap/sector/exoplanet/New()
@@ -47,7 +50,7 @@
 	if(!actors)
 		actors += pick("alien humanoid","amorphic blob","short, hairy being","rodent-like creature","robot","primate","reptilian alien","unidentifiable object","statue","starship","unusual devices","structure")
 		actors += pick("alien humanoids","amorphic blobs","short, hairy beings","rodent-like creatures","robots","primates","reptilian aliens")
-	
+
 	var/engravings = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] a \
 	[pick(actors[1])] \
 	[pick("surrounded by","being held aloft by","being struck by","being examined by","communicating with")] \
@@ -63,18 +66,22 @@
 		GLOB.processing_objects -= src
 
 /obj/effect/overmap/sector/exoplanet/process()
-	var/list/dead = list()
-	for(var/mob/M in animals)
-		if(M.stat == DEAD)
-			dead += M
+	if(animals.len < 0.5*max_animal_count && !repopulating)
+		repopulating = 1
+		max_animal_count = round(max_animal_count * 0.5)
 	for(var/zlevel in map_z)
-		if(dead.len > 0.5*animalcount)
-			for(var/i = 1 to round(dead.len - 0.5*animalcount))
+		if(repopulating)
+			for(var/i = 1 to round(max_animal_count - animals.len))
 				if(prob(10))
 					var/turf/simulated/T = locate(rand(1,world.maxx), rand(1,world.maxy), zlevel)
-					var/mob/S = pick(dead)
-					S = new S.type(T)
+					var/mob_type = pick(repopulate_types)
+					var/mob/S = new mob_type(T)
+					animals += S
+					GLOB.death_event.register(S, src, /obj/effect/overmap/sector/exoplanet/proc/remove_animal)
+					GLOB.destroyed_event.register(S, src, /obj/effect/overmap/sector/exoplanet/proc/remove_animal)
 					adapt_animal(S)
+			if(animals.len >= max_animal_count)
+				repopulating = 0
 
 		if(!atmosphere)
 			continue
@@ -89,7 +96,12 @@
 			daddy.copy_from(atmosphere)
 			daddy.group_multiplier = Z.air.group_multiplier
 			Z.air.equalize(daddy)
-				
+
+/obj/effect/overmap/sector/exoplanet/proc/remove_animal(var/mob/M)
+	animals -= M
+	GLOB.death_event.unregister(M, src)
+	GLOB.destroyed_event.unregister(M, src)
+	repopulate_types |= M.type
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
 
@@ -100,7 +112,9 @@
 	for(var/mob/living/simple_animal/A in GLOB.living_mob_list_)
 		if(A.z in map_z)
 			animals += A
-	animalcount = animals.len
+			GLOB.death_event.register(A, src, /obj/effect/overmap/sector/exoplanet/proc/remove_animal)
+			GLOB.destroyed_event.register(A, src, /obj/effect/overmap/sector/exoplanet/proc/remove_animal)
+	max_animal_count = animals.len
 
 /obj/effect/overmap/sector/exoplanet/proc/update_biome()
 	for(var/gas in atmosphere.gas)
@@ -151,7 +165,7 @@
 			newgases -= "phoron"
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= "aliether"
-		
+
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
 		var/gasnum = rand(1,4)
 		for(var/i = 1 to gasnum) //swapping gases wholesale. don't try at home
@@ -161,7 +175,7 @@
 				part = total_moles
 			atmosphere.gas[ng] += part
 			total_moles = max(total_moles - part, 0)
-		
+
 	atmosphere.temperature = T20C + rand(-10, 10)
 	var/factor = max(rand(60,140)/100, 0.6)
 	atmosphere.multiply(factor)

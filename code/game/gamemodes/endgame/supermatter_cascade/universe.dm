@@ -15,7 +15,7 @@ var/global/universe_has_ended = 0
 /datum/universal_state/supermatter_cascade/OnTurfChange(var/turf/T)
 	var/turf/space/S = T
 	if(istype(S))
-		S.color = "#0066FF"
+		S.color = "#0066ff"
 	else
 		S.color = initial(S.color)
 

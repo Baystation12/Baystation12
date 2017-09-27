@@ -36,3 +36,21 @@
 	id = "Utility Server"
 	freq_listening = list(EXP_FREQ)
 	autolinkers = list("Exploration")
+
+// Suit cyclers and storage
+/obj/machinery/suit_cycler/exploration
+	name = "Exploration suit cycler"
+	model_text = "Exploration"
+	req_access = list(access_explorer)
+	departments = list("Exploration")
+	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL)
+
+/obj/machinery/suit_storage_unit/explorer
+	name = "Exploration Voidsuit Storage Unit"
+	SUIT_TYPE = /obj/item/clothing/suit/space/void/exploration
+	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/exploration
+	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
+	TANK_TYPE = /obj/item/weapon/tank/oxygen
+	MASK_TYPE = /obj/item/clothing/mask/breath
+	req_access = list(access_explorer)
+	islocked = 1

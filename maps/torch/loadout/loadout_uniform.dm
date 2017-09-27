@@ -15,10 +15,7 @@
 	display_name = "generic jumpsuits"
 	path = /obj/item/clothing/under/color/grey
 	allowed_roles = NON_MILITARY_ROLES
-
-/datum/gear/uniform/jumpsuit/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/under/color)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/roboticist_skirt
 	display_name = "skirt, roboticist"
@@ -27,7 +24,7 @@
 
 /datum/gear/uniform/suit
 	display_name = "clothes selection"
-	path = /obj/item/clothing/under/sl_suit
+	path = /obj/item/clothing/under
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/suit/New()
@@ -63,7 +60,7 @@
 
 /datum/gear/uniform/scrubs
 	display_name = "medical scrubs"
-	path = /obj/item/clothing/under/rank/medical/black
+	path = /obj/item/clothing/under/rank/medical
 	allowed_roles = STERILE_ROLES
 
 /datum/gear/uniform/scrubs/New()
@@ -78,7 +75,7 @@
 
 /datum/gear/uniform/dress
 	display_name = "dress selection"
-	path = /obj/item/clothing/under/sundress_white
+	path = /obj/item/clothing/under
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/dress/New()
@@ -109,41 +106,25 @@
 	display_name = "skirt selection"
 	path = /obj/item/clothing/under/skirt
 	allowed_roles = FORMAL_ROLES
-
-/datum/gear/uniform/skirt/New()
-	..()
-	var/list/skirts = list()
-	for(var/skirt in (typesof(/obj/item/clothing/under/skirt)))
-		var/obj/item/clothing/under/skirt/skirt_type = skirt
-		skirts[initial(skirt_type.name)] = skirt_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(skirts))
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/casual_pants
 	display_name = "casual pants selection"
 	path = /obj/item/clothing/under/casual_pants
 	allowed_roles = SEMIFORMAL_ROLES
-
-/datum/gear/uniform/casual_pants/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/under/casual_pants)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/formal_pants
 	display_name = "formal pants selection"
 	path = /obj/item/clothing/under/formal_pants
 	allowed_roles = FORMAL_ROLES
-
-/datum/gear/uniform/formal_pants/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/under/formal_pants)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
 	path = /obj/item/clothing/under/shorts/jeans
 	allowed_roles = RESTRICTED_ROLES
-
-/datum/gear/uniform/shorts/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/under/shorts/jeans)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/turtleneck
 	display_name = "sweater"
@@ -158,7 +139,7 @@
 
 /datum/gear/uniform/corporate
 	display_name = "corporate uniform selection"
-	path = /obj/item/clothing/under/mbill
+	path = /obj/item/clothing/under
 	allowed_roles = list(/datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor,
 						/datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant)

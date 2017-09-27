@@ -11,6 +11,7 @@
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	idcard = /obj/item/weapon/card/id
+	silicon_radio = null // pAIs get their radio from the card they belong to.
 
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
@@ -85,24 +86,26 @@
 	src.loc = paicard
 	card = paicard
 	sradio = new(src)
-	if(card)
-		if(!card.radio)
-			card.radio = new /obj/item/device/radio(src.card)
-		radio = card.radio
-		common_radio = radio
 
 	//As a human made device, we'll understand sol common without the need of the translator
 	add_language(LANGUAGE_SOL_COMMON, 1)
-	
+
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
 	verbs -= /mob/living/verb/ghost
 
 	..()
 
-/mob/living/silicon/pai/Login()
-	..()
+	if(card)
+		if(!card.radio)
+			card.radio = new /obj/item/device/radio(card)
+		silicon_radio = card.radio
 
+/mob/living/silicon/pai/Destroy()
+	QDEL_NULL(sradio)
+	card = null
+	silicon_radio = null // Because this radio actually belongs to another instance we simply null
+	. = ..()
 
 // this function shows the information about being silenced as a pAI in the Status panel
 /mob/living/silicon/pai/proc/show_silenced()

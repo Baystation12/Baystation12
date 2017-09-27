@@ -58,8 +58,8 @@ var/global/list/robot_modules = list(
 	add_subsystems(R)
 	apply_status_flags(R)
 
-	if(R.radio)
-		R.radio.recalculateChannels()
+	if(R.silicon_radio)
+		R.silicon_radio.recalculateChannels()
 
 	R.set_module_sprites(sprites)
 	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
@@ -73,8 +73,8 @@ var/global/list/robot_modules = list(
 	remove_subsystems(R)
 	remove_status_flags(R)
 
-	if(R.radio)
-		R.radio.recalculateChannels()
+	if(R.silicon_radio)
+		R.silicon_radio.recalculateChannels()
 	R.choose_icon(0, R.set_module_sprites(list("Default" = "robot")))
 
 /obj/item/weapon/robot_module/Destroy()
@@ -552,7 +552,9 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/form_printer(src)
 	src.modules += new /obj/item/weapon/gripper/paperwork(src)
 	src.modules += new /obj/item/weapon/hand_labeler(src)
-	src.emag = new /obj/item/weapon/stamp/denied(src)
+	src.modules += new /obj/item/weapon/stamp(src)
+	src.modules += new /obj/item/weapon/stamp/denied(src)
+	src.emag = new /obj/item/weapon/stamp/chameleon(src)
 	..()
 
 /obj/item/weapon/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)

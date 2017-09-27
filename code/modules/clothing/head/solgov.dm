@@ -228,6 +228,11 @@
 	desc = "An SCG Expeditionary Corps beret with a service crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_service"
 
+/obj/item/clothing/head/beret/sol/expedition/exploration
+	name = "expeditionary exploration beret"
+	desc = "An SCG Expeditionary Corps beret with an exploration crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_exploration"
+
 /obj/item/clothing/head/beret/sol/expedition/command
 	name = "expeditionary officer's beret"
 	desc = "An SCG Expeditionary Corps beret with a golden crest. For personnel that are more inclined towards style than safety."
@@ -262,6 +267,11 @@
 	name = "fleet service beret"
 	desc = "An SCG Fleet beret with a service crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_service"
+
+/obj/item/clothing/head/beret/sol/fleet/exploration
+	name = "fleet exploration beret"
+	desc = "An SCG Fleet beret with an exploration crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_navy_exploration"
 
 /obj/item/clothing/head/beret/sol/fleet/command
 	name = "fleet officer's beret"

@@ -50,6 +50,8 @@ var/list/mob_hat_cache = list()
 
 	laws = /datum/ai_laws/drone
 
+	silicon_camera = /obj/item/device/camera/siliconcam/drone_camera
+
 	//Used for self-mailing.
 	var/mail_destination = ""
 	var/module_type = /obj/item/weapon/robot_module/drone
@@ -141,7 +143,6 @@ var/list/mob_hat_cache = list()
 	update_icon()
 
 /mob/living/silicon/robot/drone/init()
-	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
 	additional_law_channels["Drone"] = ":d"
 	if(!module) module = new module_type(src)
 

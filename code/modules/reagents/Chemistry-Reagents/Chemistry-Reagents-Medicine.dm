@@ -5,7 +5,7 @@
 	description = "Inaprovaline is a multipurpose neurostimulant and cardioregulator. Commonly used to slow bleeding and stabilize patients."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#00BFFF"
+	color = "#00bfff"
 	overdose = REAGENTS_OVERDOSE * 2
 	metabolism = REM * 0.5
 	scannable = 1
@@ -23,7 +23,7 @@
 	taste_description = "bitterness"
 	taste_mult = 3
 	reagent_state = LIQUID
-	color = "#BF0000"
+	color = "#bf0000"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -37,7 +37,7 @@
 	description = "Kelotane is a drug used to treat burns."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#FFA800"
+	color = "#ffa800"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -52,7 +52,7 @@
 	taste_description = "bitterness"
 	taste_mult = 1.5
 	reagent_state = LIQUID
-	color = "#FF8000"
+	color = "#ff8000"
 	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -66,7 +66,7 @@
 	description = "Dylovene is a broad-spectrum antitoxin used to neutralize poisons before they can do significant harm."
 	taste_description = "a roll of gauze"
 	reagent_state = LIQUID
-	color = "#00A000"
+	color = "#00a000"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	var/static/list/remove_toxins = list(
@@ -96,7 +96,7 @@
 	description = "Dexalin is used in the treatment of oxygen deprivation."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#0080FF"
+	color = "#0080ff"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -113,7 +113,7 @@
 	description = "Dexalin Plus is used in the treatment of oxygen deprivation. It is highly effective."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#0040FF"
+	color = "#0040ff"
 	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -130,7 +130,7 @@
 	description = "Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries."
 	taste_description = "grossness"
 	reagent_state = LIQUID
-	color = "#8040FF"
+	color = "#8040ff"
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
@@ -143,7 +143,7 @@
 	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
 	taste_description = "sludge"
 	reagent_state = LIQUID
-	color = "#8080FF"
+	color = "#8080ff"
 	metabolism = REM * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -160,7 +160,7 @@
 	description = "A liquid compound similar to that used in the cloning process. Can be used to 'finish' the cloning process when used in conjunction with a cryo tube."
 	taste_description = "slime"
 	reagent_state = LIQUID
-	color = "#80BFFF"
+	color = "#80bfff"
 	metabolism = REM * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -178,7 +178,8 @@
 	name = "Paracetamol"
 	description = "Most probably know this as Tylenol, but this chemical is a mild, simple painkiller."
 	taste_description = "sickness"
-	color = "#C8A5DC"
+	reagent_state = LIQUID
+	color = "#c8a5dc"
 	overdose = 60
 	reagent_state = LIQUID
 	scannable = 1
@@ -197,8 +198,8 @@
 	name = "Tramadol"
 	description = "A simple, yet effective painkiller. Don't mix with alcohol."
 	taste_description = "sourness"
-	color = "#CB68FC"
 	reagent_state = LIQUID
+	color = "#cb68fc"
 	overdose = 30
 	scannable = 1
 	metabolism = 0.02
@@ -270,7 +271,7 @@
 	description = "Synaptizine is used to treat various diseases."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#99CCFF"
+	color = "#99ccff"
 	metabolism = REM * 0.05
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
@@ -292,7 +293,7 @@
 	description = "Alkysine is a drug used to lessen the damage to neurological tissue after a injury. Can aid in healing brain tissue."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#FFFF66"
+	color = "#ffff66"
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
@@ -313,7 +314,7 @@
 	description = "Heals eye damage"
 	taste_description = "dull toxin"
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -334,7 +335,7 @@
 	description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#561EC3"
+	color = "#561ec3"
 	overdose = 10
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -377,7 +378,7 @@
 	description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
 	taste_description = "acid"
 	reagent_state = LIQUID
-	color = "#FF3300"
+	color = "#ff3300"
 	metabolism = REM * 0.15
 	overdose = REAGENTS_OVERDOSE * 0.5
 
@@ -443,7 +444,7 @@
 	description = "An all-purpose antiviral agent."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#C1C1C1"
+	color = "#c1c1c1"
 	metabolism = REM * 0.1
 	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
@@ -469,7 +470,7 @@
 	description = "Sterilizes wounds in preparation for surgery and thoroughly removes blood."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 	touch_met = 5
 
 /datum/reagent/sterilizine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
@@ -494,7 +495,7 @@
 	description = "Leporazine can be use to stabilize an individuals body temperature."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
@@ -513,7 +514,7 @@
 	description = "Improves the ability to concentrate."
 	taste_description = "sourness"
 	reagent_state = LIQUID
-	color = "#BF80BF"
+	color = "#bf80bf"
 	metabolism = 0.01
 	data = 0
 
@@ -533,7 +534,7 @@
 	description = "Stabilizes the mind a little."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#FF80FF"
+	color = "#ff80ff"
 	metabolism = 0.01
 	data = 0
 
@@ -552,7 +553,7 @@
 	name = "Paroxetine"
 	description = "Stabilizes the mind greatly, but has a chance of adverse effects."
 	reagent_state = LIQUID
-	color = "#FF80BF"
+	color = "#ff80bf"
 	metabolism = 0.01
 	data = 0
 
@@ -604,7 +605,7 @@
 	description = "Tastes naturally minty, and imparts a very mild numbing sensation."
 	taste_description = "mint"
 	reagent_state = LIQUID
-	color = "#80AF9C"
+	color = "#80af9c"
 	metabolism = REM * 0.002
 	overdose = REAGENTS_OVERDOSE * 0.25
 	scannable = 1
@@ -645,7 +646,7 @@
 	description = "A thick, syrupy liquid that has a lethargic effect. Used to cure cases of jitteriness."
 	taste_description = "numbing coldness"
 	reagent_state = LIQUID
-	color = "#BC018A"
+	color = "#bc018a"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -660,7 +661,7 @@
 	description = "All-in-one cold medicine. Fever, cough, sneeze, safe for babies."
 	taste_description = "cough syrup"
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 	overdose = 60
 	scannable = 1
 	metabolism = 0.02
@@ -682,7 +683,7 @@
 	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
 	taste_description = "rush"
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 	scannable = 1
 	overdose = 10
 	metabolism = 0.1
