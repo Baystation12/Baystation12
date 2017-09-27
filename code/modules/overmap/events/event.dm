@@ -31,6 +31,7 @@
 			var/obj/effect/overmap_event/event = new(event_turf)
 			event.name = overmap_event.name
 			event.icon_state = pick(overmap_event.event_icon_states)
+			event.opacity =  overmap_event.opacity
 
 		points_of_interest += overmap_event.name
 
@@ -110,6 +111,7 @@
 	name = "event"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "event"
+	opacity = 1
 
 /datum/overmap_event
 	var/name = "map event"
@@ -117,6 +119,7 @@
 	var/count = 6
 	var/event = null
 	var/list/event_icon_states = list("event")
+	var/opacity = 1
 	var/difficulty = EVENT_LEVEL_MODERATE
 	var/list/victims
 

@@ -397,6 +397,11 @@
 					/obj/item/device/flashlight/glowstick/blue = 1, /obj/item/device/flashlight/glowstick/orange = 1,
 					/obj/item/device/flashlight/glowstick/yellow = 1, /obj/item/device/flashlight/glowstick/random = 1)
 
+/obj/item/weapon/storage/box/greenglowsticks
+	name = "box of green glowsticks"
+	icon_state = "box"
+	startswith = list(/obj/item/device/flashlight/glowstick = 6)
+
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"
 	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."

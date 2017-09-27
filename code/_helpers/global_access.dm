@@ -357,8 +357,6 @@
 			return global.crew_repository;
 		if("cult")
 			return global.cult;
-		if("current_date_string")
-			return global.current_date_string;
 		if("currently_running_tests")
 			return global.currently_running_tests;
 		if("custom_event_msg")
@@ -411,8 +409,6 @@
 			return global.dummy_lighting_corner;
 		if("economic_species_modifier")
 			return global.economic_species_modifier;
-		if("economy_init")
-			return global.economy_init;
 		if("empty_playable_ai_cores")
 			return global.empty_playable_ai_cores;
 		if("endgame_exits")
@@ -1534,8 +1530,6 @@
 			global.crew_repository=newval;
 		if("cult")
 			global.cult=newval;
-		if("current_date_string")
-			global.current_date_string=newval;
 		if("currently_running_tests")
 			global.currently_running_tests=newval;
 		if("custom_event_msg")
@@ -1588,8 +1582,6 @@
 			global.dummy_lighting_corner=newval;
 		if("economic_species_modifier")
 			global.economic_species_modifier=newval;
-		if("economy_init")
-			global.economy_init=newval;
 		if("empty_playable_ai_cores")
 			global.empty_playable_ai_cores=newval;
 		if("endgame_exits")
@@ -2532,7 +2524,6 @@
 	"created",
 	"crew_repository",
 	"cult",
-	"current_date_string",
 	"currently_running_tests",
 	"custom_event_msg",
 	"custom_items",
@@ -2559,7 +2550,6 @@
 	"dreams",
 	"dummy_lighting_corner",
 	"economic_species_modifier",
-	"economy_init",
 	"empty_playable_ai_cores",
 	"endgame_exits",
 	"endgame_safespawns",
