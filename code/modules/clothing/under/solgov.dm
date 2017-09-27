@@ -1,4 +1,4 @@
-//SolGov Uniforms
+//SolGov Uniforms - DO NOT ADD NEW UNIFORMS TO UNIFORM.DMI - SOLGOV UNIFORMS GO IN SOLGOV.DMI
 
 //PT
 /obj/item/clothing/under/pt
@@ -9,6 +9,9 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	item_icons = list(
+		slot_w_uniform_str = 'icons/mob/solgov.dmi'
+		)
 
 /obj/item/clothing/under/pt/expeditionary
 	name = "expeditionary pt uniform"
@@ -39,6 +42,9 @@
 	worn_state = "blackutility"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	item_icons = list(
+		slot_w_uniform_str = 'icons/mob/solgov.dmi'
+		)
 
 /obj/item/clothing/under/utility/expeditionary
 	name = "expeditionary uniform"
@@ -65,6 +71,9 @@
 /obj/item/clothing/under/utility/expeditionary/service
 	starting_accessories = list(/obj/item/clothing/accessory/department/service)
 
+/obj/item/clothing/under/utility/expeditionary/exploration
+	starting_accessories = list(/obj/item/clothing/accessory/department/exploration)
+
 /obj/item/clothing/under/utility/expeditionary/officer
 	name = "expeditionary officer's uniform"
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has gold trim."
@@ -73,9 +82,6 @@
 
 /obj/item/clothing/under/utility/expeditionary/officer/command
 	starting_accessories = list(/obj/item/clothing/accessory/department/command)
-
-/obj/item/clothing/under/utility/expeditionary/officer/command/pilot
-	starting_accessories = list(/obj/item/clothing/accessory/department/command, /obj/item/clothing/accessory/speciality/pilot)
 
 /obj/item/clothing/under/utility/expeditionary/officer/engineering
 	starting_accessories = list(/obj/item/clothing/accessory/department/engineering)
@@ -92,6 +98,12 @@
 /obj/item/clothing/under/utility/expeditionary/officer/service
 	starting_accessories = list(/obj/item/clothing/accessory/department/service)
 
+/obj/item/clothing/under/utility/expeditionary/officer/exploration
+	starting_accessories = list(/obj/item/clothing/accessory/department/exploration)
+
+/obj/item/clothing/under/utility/expeditionary/officer/exploration/pilot
+	starting_accessories = list(/obj/item/clothing/accessory/department/exploration, /obj/item/clothing/accessory/speciality/pilot)
+
 
 /obj/item/clothing/under/utility/fleet
 	name = "fleet coveralls"
@@ -104,9 +116,6 @@
 
 /obj/item/clothing/under/utility/fleet/command
 	starting_accessories = list(/obj/item/clothing/accessory/department/command/fleet)
-
-/obj/item/clothing/under/utility/fleet/command/pilot
-	starting_accessories = list(/obj/item/clothing/accessory/department/command/fleet, /obj/item/clothing/accessory/speciality/pilot)
 
 /obj/item/clothing/under/utility/fleet/engineering
 	starting_accessories = list(/obj/item/clothing/accessory/department/engineering/fleet)
@@ -123,6 +132,12 @@
 /obj/item/clothing/under/utility/fleet/service
 	starting_accessories = list(/obj/item/clothing/accessory/department/service/fleet)
 
+/obj/item/clothing/under/utility/fleet/exploration
+	starting_accessories = list(/obj/item/clothing/accessory/department/exploration/fleet)
+
+/obj/item/clothing/under/utility/fleet/exploration/pilot
+	starting_accessories = list(/obj/item/clothing/accessory/department/exploration/fleet, /obj/item/clothing/accessory/speciality/pilot)
+
 
 /obj/item/clothing/under/utility/marine
 	name = "marine fatigues"
@@ -134,9 +149,6 @@
 
 /obj/item/clothing/under/utility/marine/command
 	starting_accessories = list(/obj/item/clothing/accessory/department/command/marine)
-
-/obj/item/clothing/under/utility/marine/command/pilot
-	starting_accessories = list(/obj/item/clothing/accessory/department/command/marine, /obj/item/clothing/accessory/speciality/pilot)
 
 /obj/item/clothing/under/utility/marine/engineering
 	starting_accessories = list(/obj/item/clothing/accessory/department/engineering/marine)
@@ -155,6 +167,12 @@
 
 /obj/item/clothing/under/utility/marine/service
 	starting_accessories = list(/obj/item/clothing/accessory/department/service/marine)
+
+/obj/item/clothing/under/utility/marine/exploration
+	starting_accessories = list(/obj/item/clothing/accessory/department/exploration/marine)
+
+/obj/item/clothing/under/utility/marine/exploration/pilot
+	starting_accessories = list(/obj/item/clothing/accessory/department/exploration/marine, /obj/item/clothing/accessory/speciality/pilot)
 
 /obj/item/clothing/under/utility/marine/urban
 	name = "urban fatigues"
@@ -179,12 +197,16 @@
 	worn_state = "whiteservice"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	item_icons = list(
+		slot_w_uniform_str = 'icons/mob/solgov.dmi'
+		)
 
 /obj/item/clothing/under/service/expeditionary_skirt
 	name = "expeditionary service skirt"
 	desc = "A black turtleneck and skirt, the optional ladies' service uniform of the Expeditionary Corps."
 	icon_state = "blackservicef"
 	worn_state = "blackservicef"
+	valid_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DECOR,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA) //dept colour tabs don't fit
 
 /obj/item/clothing/under/service/expeditionary_skirt/command
 	name = "expeditionary officer service skirt"
@@ -230,6 +252,9 @@
 	worn_state = "greydress"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	item_icons = list(
+		slot_w_uniform_str = 'icons/mob/solgov.dmi'
+		)
 
 /obj/item/clothing/under/mildress/expeditionary
 	name = "expeditionary dress uniform"

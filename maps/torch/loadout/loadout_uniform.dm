@@ -119,6 +119,12 @@
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
 
+/datum/gear/uniform/skirt/color
+	display_name = "short skirt"
+	path = /obj/item/clothing/under/skirt_c
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/uniform/casual_pants
 	display_name = "casual pants selection"
 	path = /obj/item/clothing/under/casual_pants

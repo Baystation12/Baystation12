@@ -93,7 +93,7 @@
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm)
+			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm, access_explorer, access_pathfinder)
 	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_heads,
@@ -102,7 +102,7 @@
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila)
+			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila, access_explorer, access_pathfinder)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
@@ -346,14 +346,14 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
-	selection_color = "#a3a332"
+	selection_color = "#68099e"
 	minimal_player_age = 5
 	economic_modifier = 7
 	ideal_character_age = 40
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/solgov_pilot
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/fleet,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/exploration/solgov_pilot/fleet,
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o2,
@@ -361,8 +361,8 @@
 	)
 
 
-	access = list(access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_solgov_crew,access_aquila, access_aquila_helm,
-						access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads)
+	access = list(access_maint_tunnels, access_external_airlocks, access_eva, access_emergency_storage, access_solgov_crew, access_aquila, access_aquila_helm,
+						access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads, access_explorer, access_cent_creed) //Yes, the last one is weird. It's used to make intercoms work.
 
 /datum/job/pathfinder
 	title = "Pathfinder"
@@ -372,11 +372,11 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
-	selection_color = "#a3a332"
+	selection_color = "#68099e"
 	minimal_player_age = 7
 	economic_modifier = 7
 	ideal_character_age = 35
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/pathfinder
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o2,
@@ -384,8 +384,7 @@
 	)
 
 
-	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar)
+	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
 
 /datum/job/explorer
 	title = "Explorer"
@@ -394,10 +393,10 @@
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
-	selection_color = "#a3a332"
+	selection_color = "#68099e"
 	minimal_player_age = 4
 	ideal_character_age = 20
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/explorer
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
 	allowed_ranks = list(
@@ -407,8 +406,7 @@
 		/datum/mil_rank/fleet/e5,
 	)
 
-	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
-						access_cargo_bot, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar)
+	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
 
 /datum/job/senior_engineer
 	title = "Senior Engineer"

@@ -742,6 +742,10 @@
 	name = "\improper Expedition Storage"
 	icon_state = "mining"
 
+/area/quartermaster/exploration
+	name = "\improper Exploration Equipment"
+	icon_state = "mining"
+
 /area/quartermaster/hangar
 	name = "\improper Hangar Deck"
 	icon_state = "mining"

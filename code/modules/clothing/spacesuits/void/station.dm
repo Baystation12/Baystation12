@@ -190,7 +190,7 @@
 //Medical
 /obj/item/clothing/head/helmet/space/void/medical/alt
 	name = "streamlined medical voidsuit helmet"
-	desc = "A trendy, lightly radiation-shielded voidsuit helmet trimmed in a fetching green."
+	desc = "A trendy, lightly radiation-shielded voidsuit helmet trimmed in a fetching blue."
 	icon_state = "rig0-medicalalt"
 	item_state = "medicalalt_helm"
 	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 60)
@@ -251,6 +251,26 @@
 	helmet = /obj/item/clothing/head/helmet/space/void/atmos/alt
 	boots = /obj/item/clothing/shoes/magboots
 
+//Exploration
+/obj/item/clothing/head/helmet/space/void/exploration
+	name = "exploration voidsuit helmet"
+	desc = "A radiation-resistant helmet made especially for exploring unknown planetary environments."
+	icon_state = "helm_explorer"
+	item_state = "helm_explorer"
+	armor = list(melee = 20, bullet = 10, laser = 15,energy = 45, bomb = 30, bio = 100, rad = 90)
+	light_overlay = "explorer_light"
+
+/obj/item/clothing/suit/space/void/exploration
+	name = "exploration voidsuit"
+	desc = "A lightweight, radiation-resistant voidsuit, featuring the Expeditionary Corps emblem on its chest plate. Designed for exploring unknown planetary environments."
+	icon_state = "void_explorer"
+	armor = list(melee = 20, bullet = 10, laser = 15,energy = 45, bomb = 30, bio = 100, rad = 90)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/device/healthanalyzer,/obj/item/device/gps,/obj/item/device/beacon_locator,/obj/item/device/radio/beacon,/obj/item/weapon/material/hatchet/machete,/obj/item/weapon/shovel)
+
+/obj/item/clothing/suit/space/void/exploration/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/exploration
+	boots = /obj/item/clothing/shoes/magboots
+
 //Misc
 /obj/item/clothing/head/helmet/space/void/engineering/salvage
 	name = "salvage voidsuit helmet"
@@ -277,7 +297,7 @@
 /obj/item/clothing/suit/space/void/engineering/salvage/prepared
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage
 	boots = /obj/item/clothing/shoes/magboots
-	
+
 //Pilot
 /obj/item/clothing/head/helmet/space/void/pilot
 	desc = "An atmos resistant helmet for space and planet exploration."

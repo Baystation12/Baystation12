@@ -96,6 +96,9 @@
 		if(real_rank in GLOB.civilian_positions)
 			civ[name] = rank
 			department = 1
+		if(real_rank in GLOB.exploration_positions)
+			exp[name] = rank
+			department = 1
 		if(real_rank in GLOB.service_positions)
 			srv[name] = rank
 			department = 1
@@ -155,7 +158,7 @@
 	if(exp.len > 0)
 		dat += "<tr><th colspan=3>Exploration</th></tr>"
 		for(name in exp)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[exp[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(srv.len > 0)
 		dat += "<tr><th colspan=3>Service</th></tr>"

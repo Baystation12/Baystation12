@@ -29,43 +29,43 @@
 
 /obj/item/clothing/under/color/white
 	name = "white jumpsuit"
-	color = "#FFFFFF"
+	color = "#ffffff"
 
 /obj/item/clothing/under/color/black
 	name = "black jumpsuit"
-	color = "#3D3D3D"
+	color = "#3d3d3d"
 
 /obj/item/clothing/under/color/grey
 	name = "grey jumpsuit"
-	color = "#C4C4C4"
+	color = "#c4c4c4"
 
 /obj/item/clothing/under/color/blue
 	name = "blue jumpsuit"
-	color = "#0066FF"
+	color = "#0066ff"
 
 /obj/item/clothing/under/color/pink
 	name = "pink jumpsuit"
-	color = "#DF20A6"
+	color = "#df20a6"
 
 /obj/item/clothing/under/color/red
 	name = "red jumpsuit"
-	color = "#EE1511"
+	color = "#ee1511"
 
 /obj/item/clothing/under/color/green
 	name = "green jumpsuit"
-	color = "#42A345"
+	color = "#42a345"
 
 /obj/item/clothing/under/color/yellow
 	name = "yellow jumpsuit"
-	color = "#FFEE00"
+	color = "#ffee00"
 
 /obj/item/clothing/under/color/lightpurple
 	name = "light purple jumpsuit"
-	color = "#C600FC"
+	color = "#c600fc"
 
 /obj/item/clothing/under/color/brown
 	name = "brown jumpsuit"
-	color = "#C08720"
+	color = "#c08720"
 
 // coloured jumpsuits, female pattern
 
