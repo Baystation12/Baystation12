@@ -216,7 +216,7 @@
 			set_light(1.5, 1,"#990000")
 		else
 			icon_state = "control_stun"
-			set_light(1.5, 1,"#FF9900")
+			set_light(1.5, 1,"#ff9900")
 	else
 		icon_state = "control_standby"
 		set_light(1.5, 1,"#003300")

@@ -151,7 +151,7 @@
 								var/datum/data/record/E = Perp[i+1]
 								crimstat = E.fields["criminal"]
 							var/background
-							background = "'background-color:#00FF7F;'"
+							background = "'background-color:#00ff7f;'"
 							dat += text("<tr style=[]><td><A href='?src=\ref[];choice=Browse Record;d_rec=\ref[]'>[]</a></td>", background, src, R, R.fields["name"])
 							dat += text("<td>[]</td>", R.fields["id"])
 							dat += text("<td>[]</td>", R.fields["rank"])

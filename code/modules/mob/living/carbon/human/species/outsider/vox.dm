@@ -38,8 +38,8 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
-	blood_color = "#2299FC"
-	flesh_color = "#808D11"
+	blood_color = "#2299fc"
+	flesh_color = "#808d11"
 
 	reagent_tag = IS_VOX
 

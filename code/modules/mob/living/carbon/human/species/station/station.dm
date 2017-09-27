@@ -108,7 +108,7 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
-	flesh_color = "#34AF10"
+	flesh_color = "#34af10"
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
@@ -176,9 +176,9 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
-	flesh_color = "#AFA59E"
+	flesh_color = "#afa59e"
 	base_color = "#333333"
-	blood_color = "#862A51"
+	blood_color = "#862a51"
 
 	reagent_tag = IS_TAJARA
 
@@ -222,8 +222,8 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
-	flesh_color = "#8CD7A3"
-	blood_color = "#1D2CBF"
+	flesh_color = "#8cd7a3"
+	blood_color = "#1d2cbf"
 	base_color = "#006666"
 
 	cold_level_1 = 280 //Default 260 - Lower is better
@@ -327,7 +327,7 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	blood_color = "#004400"
-	flesh_color = "#907E4A"
+	flesh_color = "#907e4a"
 
 	reagent_tag = IS_DIONA
 	genders = list(PLURAL)

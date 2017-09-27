@@ -241,7 +241,7 @@ var/list/possible_cable_coil_colours
 				qdel(src)
 
 obj/structure/cable/proc/cableColor(var/colorC)
-	var/color_n = "#DD0000"
+	var/color_n = "#dd0000"
 	if(colorC)
 		color_n = colorC
 	color = color_n

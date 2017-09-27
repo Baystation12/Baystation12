@@ -42,7 +42,7 @@
 
 /obj/structure/curtain/medical
 	name = "plastic curtain"
-	color = "#B8F5E3"
+	color = "#b8f5e3"
 	alpha = 200
 
 /obj/structure/curtain/open/bed
@@ -51,18 +51,18 @@
 
 /obj/structure/curtain/open/privacy
 	name = "privacy curtain"
-	color = "#B8F5E3"
+	color = "#b8f5e3"
 
 /obj/structure/curtain/open/shower
 	name = "shower curtain"
-	color = "#ACD1E9"
+	color = "#acd1e9"
 	alpha = 200
 
 /obj/structure/curtain/open/shower/engineering
-	color = "#FFA500"
+	color = "#ffa500"
 
 /obj/structure/curtain/open/shower/security
-	color = "#AA0000"
+	color = "#aa0000"
 
 #undef SHOWER_OPEN_LAYER
 #undef SHOWER_CLOSED_LAYER

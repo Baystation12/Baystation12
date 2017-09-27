@@ -246,7 +246,7 @@
 	icon_opened = "securemedopen"
 	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
-	req_access = list(64)
+	req_access = list(access_psychiatrist)
 
 /obj/structure/closet/secure_closet/psychiatry/WillContain()
 	return list(

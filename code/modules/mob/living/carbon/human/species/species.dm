@@ -21,8 +21,8 @@
 	var/prone_icon                            // If set, draws this from icobase when mob is prone.
 	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
 
-	var/blood_color = "#A10808"               // Red.
-	var/flesh_color = "#FFC896"               // Pink.
+	var/blood_color = COLOR_BLOOD_HUMAN               // Red.
+	var/flesh_color = "#ffc896"               // Pink.
 	var/blood_oxy = 1
 	var/base_color                            // Used by changelings. Should also be used for icon previes..
 	var/tail                                  // Name of tail state in species effects icon file.
