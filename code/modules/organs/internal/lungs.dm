@@ -105,7 +105,7 @@
 		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, affecting = parent)
 	bruise()
 
-/obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath)
+/obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath, var/forced)
 	if(!owner)
 		return 1
 	if(!breath)
@@ -131,7 +131,7 @@
 	// Lung damage increases the minimum safe pressure.
 	safe_pressure_min *= 1 + rand(1,4) * damage/max_damage
 
-	if(owner.chem_effects[CE_BREATHLOSS] && !owner.chem_effects[CE_STABLE]) //opiates are bad mmkay
+	if(!forced && owner.chem_effects[CE_BREATHLOSS] && !owner.chem_effects[CE_STABLE]) //opiates are bad mmkay
 		safe_pressure_min *= 1 + rand(1,4) * owner.chem_effects[CE_BREATHLOSS]
 
 	var/failed_inhale = 0

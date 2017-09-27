@@ -92,14 +92,20 @@
 					return
 
 				H.visible_message("<span class='notice'>\The [H] performs CPR on \the [src]!</span>")
-				if(prob(3))
+				if(prob(5))
 					var/obj/item/organ/external/chest = get_organ(BP_CHEST)
 					if(chest)
 						chest.fracture()
 				if(stat != DEAD)
-					adjustOxyLoss(-(min(getOxyLoss(), 5)))
-					updatehealth()
-					to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
+					var/species_organ = species.breathing_organ
+					if(!species_organ)
+						return
+					var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+					if(L)
+						var/datum/gas_mixture/breath = H.get_breath_from_environment()
+						var/fail = L.handle_breath(breath, 1)
+						if(!fail)
+							to_chat(src, "<span class='notice'>You feel a breath of fresh air enter your lungs. It feels good.</span>")
 					if(prob(15))
 						resuscitate()
 
