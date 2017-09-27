@@ -1,0 +1,4 @@
+author: sabiram
+delete-after: True
+changes:
+  - rscadd: "The clerical module robot now has access to the basic and denied rubber stamps. Additionally, their hacked item is now the chameleon stamp."
