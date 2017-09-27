@@ -7,7 +7,7 @@
 	icon_state = "bluespace"
 
 	//luminosity = 5
-	//l_color="#0066FF"
+	//l_color="#0066ff"
 	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	layer = SUPERMATTER_WALL_LAYER
 

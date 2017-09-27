@@ -33,7 +33,7 @@
 				I.icon_state = initial(A.icon_state)
 				I.color = initial(A.color)
 			if(!lootleft)
-				I.color = "#54362E"
+				I.color = "#54362e"
 		I.appearance_flags = PIXEL_SCALE
 		I.pixel_x = rand(-16,16)
 		I.pixel_y = rand(-16,16)

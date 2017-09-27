@@ -47,7 +47,7 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 		border: solid 1px #202020;
 		font-family: "Courier New";
 		padding-left: 10px;
-		color: #CCCCCC;
+		color: #cccccc;
 	}
 	.runtime_line
 	{

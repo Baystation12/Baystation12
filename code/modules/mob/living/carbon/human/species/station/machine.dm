@@ -41,7 +41,7 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_UNDERWEAR //IPCs can wear undies too :(
 
-	blood_color = "#1F181F"
+	blood_color = "#1f181f"
 	flesh_color = "#575757"
 	virus_immune = 1
 

@@ -1,5 +1,5 @@
 //Misc
-#define DEAD_PLANT_COLOUR "#C2A180"
+#define DEAD_PLANT_COLOUR "#c2a180"
 
 // Definitions for genes (trait groupings)
 #define GENE_BIOCHEMISTRY "biochemistry"

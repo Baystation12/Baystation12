@@ -589,7 +589,7 @@ obj/machinery/light/proc/burn_out()
 
 	var/brightness_range = 2 //how much light it gives off
 	var/brightness_power = 1
-	var/brightness_color = "#FFFFFF"
+	var/brightness_color = "#ffffff"
 	var/list/lighting_modes = list()
 
 /obj/item/weapon/light/tube
@@ -602,7 +602,7 @@ obj/machinery/light/proc/burn_out()
 
 	brightness_range = 6	// luminosity when on, also used in power calculation
 	brightness_power = 3
-	brightness_color = "#FFFFFF"
+	brightness_color = "#ffffff"
 	lighting_modes = list(
 		"emergency_lighting" = list(l_range = 4, l_power = 1, l_color = "#da0205"),
 		)

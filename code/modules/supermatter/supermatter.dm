@@ -64,9 +64,9 @@
 	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
 	var/explosion_point = 1000
 
-	light_color = "#8A8A00"
-	var/warning_color = "#B8B800"
-	var/emergency_color = "#D9D900"
+	light_color = "#8a8a00"
+	var/warning_color = "#b8b800"
+	var/emergency_color = "#d9d900"
 
 	var/grav_pulling = 0
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)

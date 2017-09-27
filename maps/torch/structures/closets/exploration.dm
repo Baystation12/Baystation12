@@ -5,7 +5,7 @@
 
 /obj/structure/closet/secure_closet/solgovpilot
 	name = "sol gov pilot's locker"
-	req_access = list(79)
+	req_access = list(access_aquila_helm)
 	icon_state = "pathsecure1"
 	icon_closed = "pathsecure"
 	icon_locked = "pathsecure1"
@@ -34,7 +34,7 @@
 
 /obj/structure/closet/secure_closet/pathfinder
 	name = "pathfinder's locker"
-	req_access = list(94)
+	req_access = list(access_pathfinder)
 	icon_state = "pathsecure1"
 	icon_closed = "pathsecure"
 	icon_locked = "pathsecure1"
@@ -71,7 +71,7 @@
 
 /obj/structure/closet/secure_closet/explorer
 	name = "explorer's locker"
-	req_access = list(93)
+	req_access = list(access_explorer)
 	icon_state = "exp1"
 	icon_closed = "exp"
 	icon_locked = "exp1"
