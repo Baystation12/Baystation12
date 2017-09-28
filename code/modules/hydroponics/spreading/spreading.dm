@@ -9,6 +9,10 @@
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
 			seed.set_trait(TRAIT_POTENCY,rand(potency_min, potency_max)) // 70-100 potency will help guarantee a wide spread and powerful effects.
 			seed.set_trait(TRAIT_MATURATION,rand(maturation_min, maturation_max))
+			seed.set_trait(TRAIT_HARVEST_REPEAT, 1)
+			seed.set_trait(TRAIT_STINGS, 1)
+			seed.set_trait(TRAIT_CARNIVOROUS,2)
+
 			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
@@ -95,7 +99,7 @@
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		icon = 'icons/obj/hydroponics_vines.dmi'
 		growth_type = 2 // Vines by default.
-		if(seed.get_trait(TRAIT_CARNIVOROUS) == 2)
+		if(seed.seed_noun == "cuttings")
 			growth_type = 1 // WOOOORMS.
 		else if(!(seed.seed_noun in list("seeds","pits")))
 			if(seed.seed_noun == "nodes")
@@ -114,7 +118,7 @@
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
 
-	process()
+	Process()
 
 /obj/effect/plant/Destroy()
 	if(plant_controller)

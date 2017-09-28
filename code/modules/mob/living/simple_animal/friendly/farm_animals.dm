@@ -47,11 +47,15 @@
 
 		if(locate(/obj/effect/plant) in loc)
 			var/obj/effect/plant/SV = locate() in loc
-			SV.die_off(1)
-
-		if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
-			var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
-			qdel(SP)
+			if(prob(60))
+				src.visible_message("<span class='notice'>[src] eats the plants.</span>")
+				SV.die_off(1)
+				if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
+					var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
+					qdel(SP)
+			else if(prob(20))
+				src.visible_message("<span class='notice'>[src] chews on the plants.</span>")
+			return
 
 		if(!pulledby)
 			var/obj/effect/plant/food
@@ -64,12 +68,6 @@
 	..()
 	if(stat == CONSCIOUS)
 		visible_message("<span class='warning'>[src] gets an evil-looking gleam in their eye.</span>")
-
-/mob/living/simple_animal/hostile/retaliate/goat/Move()
-	..()
-	if(!stat)
-		for(var/obj/effect/plant/SV in loc)
-			SV.die_off(1)
 
 /mob/living/simple_animal/hostile/retaliate/goat/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	var/obj/item/weapon/reagent_containers/glass/G = O

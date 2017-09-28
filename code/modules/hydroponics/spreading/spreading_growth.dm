@@ -60,8 +60,7 @@
 		if(neighbor.seed == src.seed)
 			neighbor.neighbors -= T
 
-/obj/effect/plant/Process()
-
+/obj/effect/plant/Process(var/grow = 1)
 	// Something is very wrong, kill ourselves.
 	if(!seed)
 		die_off()
@@ -72,25 +71,26 @@
 			die_off()
 			return
 
-	// Handle life.
-	var/turf/simulated/T = get_turf(src)
-	if(istype(T))
-		health -= seed.handle_environment(T,T.return_air(),null,1)
-	if(health < max_health)
-		health += rand(3,5)
-		refresh_icon()
-	if(health > max_health)
-		health = max_health
-	if(health == max_health && !plant)
-		plant = new(T,seed)
-		plant.dir = src.dir
-		plant.transform = src.transform
-		plant.age = seed.get_trait(TRAIT_MATURATION)-1
-		plant.update_icon()
-		if(growth_type==0) //Vines do not become invisible.
-			set_invisibility(INVISIBILITY_MAXIMUM)
-		else
-			plant.layer = layer + 0.1
+	if(grow)
+		// Handle life.
+		var/turf/simulated/T = get_turf(src)
+		if(istype(T))
+			health -= seed.handle_environment(T,T.return_air(),null,1)
+		if(health < max_health)
+			health += rand(3,5)
+			refresh_icon()
+		if(health > max_health)
+			health = max_health
+		if(health == max_health && !plant && istype(T) && !T.CanZPass(src, DOWN))
+			plant = new(T,seed)
+			plant.dir = src.dir
+			plant.transform = src.transform
+			plant.age = seed.get_trait(TRAIT_MATURATION)-1
+			plant.update_icon()
+			if(growth_type==0) //Vines do not become invisible.
+				set_invisibility(INVISIBILITY_MAXIMUM)
+			else
+				plant.layer = layer + 0.1
 
 	if(buckled_mob)
 		seed.do_sting(buckled_mob,src)
@@ -98,7 +98,7 @@
 			seed.do_thorns(buckled_mob,src)
 
 	if(world.time >= last_tick+NEIGHBOR_REFRESH_TIME)
-		last_tick = world.time
+		if(!grow)	last_tick = world.time
 		update_neighbors()
 
 	if(sampled)
