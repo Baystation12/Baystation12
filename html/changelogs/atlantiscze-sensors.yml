@@ -1,0 +1,7 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Ship sensors are now powered through a cable connection."
+  - rscadd: "Replaced sensor consoles with modular computer program."

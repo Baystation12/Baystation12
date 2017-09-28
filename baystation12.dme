@@ -1830,6 +1830,7 @@
 #include "code\modules\modular_computers\file_system\programs\antagonist\revelation.dm"
 #include "code\modules\modular_computers\file_system\programs\command\card.dm"
 #include "code\modules\modular_computers\file_system\programs\command\comm.dm"
+#include "code\modules\modular_computers\file_system\programs\command\ship_sensors.dm"
 #include "code\modules\modular_computers\file_system\programs\engineering\alarm_monitor.dm"
 #include "code\modules\modular_computers\file_system\programs\engineering\atmos_control.dm"
 #include "code\modules\modular_computers\file_system\programs\engineering\power_monitor.dm"

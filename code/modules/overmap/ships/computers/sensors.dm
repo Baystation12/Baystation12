@@ -1,128 +1,21 @@
-/obj/machinery/computer/sensors
-	name = "sensors console"
-	icon_state = "thick"
-	icon_keyboard = "teleport_key"
-	icon_screen = "teleport"
-	light_color = "#77fff8"
-	//circuit = /obj/item/weapon/circuitboard/sensors
-	var/obj/effect/overmap/ship/linked
-	var/obj/machinery/shipsensors/sensors
-	var/viewing = 0
-
-/obj/machinery/computer/sensors/Initialize()
-	. = ..()
-	linked = map_sectors["[z]"]
-	find_sensors()
-
-/obj/machinery/computer/sensors/Destroy()
-	sensors = null
-	. = ..()
-
-/obj/machinery/computer/sensors/proc/find_sensors()
-	for(var/obj/machinery/shipsensors/S in GLOB.machines)
-		if (S.z in GetConnectedZlevels(z))
-			sensors = S
-			break
-
-/obj/machinery/computer/sensors/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	if(!linked)
-		return
-
-	var/data[0]
-
-	data["viewing"] = viewing
-	if(sensors)
-		data["on"] = sensors.use_power
-		data["range"] = sensors.range
-		if(sensors.health == 0)
-			data["status"] = "DESTROYED"
-		else if(!sensors.powered())
-			data["status"] = "NO POWER"
-		else if(!sensors.in_vacuum())
-			data["status"] = "VACUUM SEAL BROKEN"
-		else 
-			data["status"] = "OK"
-	else
-		data["status"] = "MISSING"
-		data["range"] = "N/A"
-		data["on"] = 0
-
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if (!ui)
-		ui = new(user, src, ui_key, "shipsensors.tmpl", "[linked.name] Sensors Control", 380, 530)
-		ui.set_initial_data(data)
-		ui.open()
-		ui.set_auto_update(1)
-
-/obj/machinery/computer/sensors/check_eye(var/mob/user as mob)
-	if (!viewing)
-		return -1
-	if (!get_dist(user, src) > 1 || user.blinded || !linked )
-		viewing = 0
-		return -1
-	return 0
-
-/obj/machinery/computer/sensors/attack_hand(var/mob/user as mob)
-	if(..())
-		user.unset_machine()
-		viewing = 0
-		return
-
-	if(!isAI(user))
-		user.set_machine(src)
-		if(linked)
-			user.reset_view(linked)
-	ui_interact(user)
-
-/obj/machinery/computer/sensors/Topic(href, href_list, state)
-	if(..())
-		return 1
-
-	if (!linked)
-		return
-
-	if (href_list["viewing"])
-		viewing = !viewing
-		if(viewing && usr && !isAI(usr))
-			usr.reset_view(linked)
-		return 1
-
-	if (href_list["link"])
-		find_sensors()
-		return 1
-
-	if(sensors)
-		if (href_list["range"])
-			var/nrange = input("Set new sensors range", "Sensor range", sensors.range) as num|null
-			if(!CanInteract(usr,state)) 
-				return
-			if (nrange)
-				sensors.set_range(Clamp(nrange, 1, world.view))
-			return 1
-		if (href_list["toggle"])
-			sensors.toggle()
-			return 1
-
-/obj/machinery/computer/sensors/process()
-	..()
-	if(!linked)
-		return
-	if(sensors && sensors.use_power && sensors.powered())
-		linked.set_light(sensors.range+1, 5)
-	else
-		linked.set_light(0)
-	
-/obj/machinery/shipsensors
+/obj/machinery/power/shipsensors
 	name = "sensors suite"
 	desc = "Long range gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "sensors"
+	use_power = 0
 	var/max_health = 200
 	var/health = 200
 	var/range = 1
-	idle_power_usage = 5000
+	var/enabled = FALSE
+	var/base_power_usage = 15000
+	var/power_usage_multiplier = 1.65	// Results in approx. 500kW @ 7 tiles range
 
-/obj/machinery/shipsensors/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/power/shipsensors/New()
+	..()
+	uid = gl_uid++
+
+/obj/machinery/power/shipsensors/attackby(obj/item/weapon/W, mob/user)
 	var/damage = max_health - health
 	if(damage && istype(W, /obj/item/weapon/weldingtool))
 
@@ -143,7 +36,7 @@
 		return
 	..()
 
-/obj/machinery/shipsensors/proc/in_vacuum()
+/obj/machinery/power/shipsensors/proc/in_vacuum()
 	var/turf/T=get_turf(src)
 	if(istype(T))
 		var/datum/gas_mixture/environment = T.return_air()
@@ -151,13 +44,16 @@
 			return 0
 	return 1
 
-/obj/machinery/shipsensors/update_icon()
-	if(use_power)
+/obj/machinery/power/shipsensors/update_icon()
+	var/obj/effect/overmap/ship/linked = map_sectors["[z]"]
+	if(enabled && linked)
 		icon_state = "sensors"
+		linked.set_light(range + 1, range * 2)
 	else
 		icon_state = "sensors_off"
+		linked.set_light(0)
 
-/obj/machinery/shipsensors/examine(mob/user)
+/obj/machinery/power/shipsensors/examine(mob/user)
 	. = ..()
 	if(health == 0)
 		to_chat(user, "\The [src] is wrecked.")
@@ -168,39 +64,41 @@
 	else if(health < max_health * 0.75)
 		to_chat(user, "\The [src] shows signs of damage!")
 
-/obj/machinery/shipsensors/bullet_act(var/obj/item/projectile/Proj)
+/obj/machinery/power/shipsensors/bullet_act(var/obj/item/projectile/Proj)
 	take_damage(Proj.get_structure_damage())
 	..()
 
-/obj/machinery/shipsensors/proc/toggle()
-	if(!use_power && health == 0)
+/obj/machinery/power/shipsensors/proc/toggle()
+	if(!enabled && ((health <= 0) || !has_power()))
 		return
-	if(!use_power) //need some juice to kickstart
-		use_power(idle_power_usage*5)
-	use_power = !use_power
+	enabled = !enabled
 	update_icon()
 
-/obj/machinery/shipsensors/process()
+/obj/machinery/power/shipsensors/process()
 	..()
-	if(use_power) //can't run in non-vacuum
-		if(!in_vacuum())
-			toggle()
-
-/obj/machinery/shipsensors/power_change()
-	if(use_power && !powered())
+	if(!enabled)
+		return
+	if(!in_vacuum() || !has_power())
 		toggle()
+		return
+	powernet.draw_power(power_usage())
 
-/obj/machinery/shipsensors/proc/set_range(nrange)
-	range = nrange
-	idle_power_usage = 15000 * (range**2)
+/obj/machinery/power/shipsensors/proc/power_usage()
+	return base_power_usage * (power_usage_multiplier ** range)
 
-/obj/machinery/shipsensors/emp_act(severity)
-	if(!use_power)
+/obj/machinery/power/shipsensors/proc/has_power()
+	return powernet && (powernet.last_surplus() >= power_usage())
+
+/obj/machinery/power/shipsensors/power_change()
+	return
+
+/obj/machinery/power/shipsensors/emp_act(severity)
+	if(!enabled)
 		return
 	take_damage(20/severity)
 	toggle()
 
-/obj/machinery/shipsensors/proc/take_damage(value)
+/obj/machinery/power/shipsensors/proc/take_damage(value)
 	health = min(max(health - value, 0),max_health)
-	if(use_power && health == 0)
+	if(enabled && health == 0)
 		toggle()

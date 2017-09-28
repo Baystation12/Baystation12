@@ -129,3 +129,11 @@
 
 /proc/RoundUpToPowerOfTwo(var/val)
 	return 2 ** -round(-log(2,val))
+
+// Returns power reading converted to kW/MW as apropriate
+/proc/get_wattage(var/avail)
+	if(avail >= 1000000000)
+		return "[round(avail/1000000, 0.01)] MW"
+	if(avail >= 1000000)
+		return "[round(avail/1000, 0.01)] kW"
+	return "[round(avail)] W"

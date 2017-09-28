@@ -64,6 +64,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/comm())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
+	hard_drive.store_file(new/datum/computer_file/program/ship_sensors())
 
 // Security
 /obj/item/modular_computer/console/preset/security/install_default_programs()
