@@ -207,6 +207,13 @@
 		random_medical_record	= find_medical_record("id", random_general_record.fields["id"])
 
 	var/datum/data/record/general = GLOB.data_core.CreateGeneralRecord(user)
+	var/mob/living/carbon/human/H
+	if(istype(user,/mob/living/carbon/human))
+		H = user
+		general.fields["age"] = H.age
+	else
+		general.fields["age"] = initial(H.age)
+
 	if(I)
 		general.fields["age"] = I.age
 		general.fields["rank"] = I.assignment
@@ -214,12 +221,6 @@
 		general.fields["name"] = I.registered_name
 		general.fields["sex"] = I.sex
 	else
-		var/mob/living/carbon/human/H
-		if(istype(user,/mob/living/carbon/human))
-			H = user
-			general.fields["age"] = H.age
-		else
-			general.fields["age"] = initial(H.age)
 		var/assignment = GetAssignment(user)
 		general.fields["rank"] = assignment
 		general.fields["real_rank"] = assignment
@@ -227,7 +228,7 @@
 		general.fields["sex"] = capitalize(user.gender)
 
 	general.fields["species"] = user.get_species()
-	var/datum/data/record/medical = GLOB.data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
+	var/datum/data/record/medical = GLOB.data_core.CreateMedicalRecord(H, general.fields["id"])
 	GLOB.data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
 
 	if(random_general_record)
