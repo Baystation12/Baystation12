@@ -99,13 +99,3 @@
 				S.range = new_range
 				S.update_icon()
 		return 1
-
-/* TEMPORARY PLACEHOLDERS FOR TESTING PURPOSES BEFORE MAP CHANGES ARE PERFORMED */
-/obj/machinery/computer/sensors/New()
-	new/obj/item/modular_computer/console/preset/command(get_turf(src))
-	qdel(src)
-
-/obj/machinery/shipsensors/New()
-	new/obj/structure/cable(get_turf(src))
-	new/obj/machinery/power/shipsensors(get_turf(src))
-	new/obj/machinery/power/debug_items/infinite_generator(get_turf(src))
