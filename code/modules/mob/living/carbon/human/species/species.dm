@@ -433,7 +433,6 @@
 		return move_trail
 
 /datum/species/proc/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
-//	admin_attack_log(attacker, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
 	attacker.do_attack_animation(target)
 
 	if(target.w_uniform)
