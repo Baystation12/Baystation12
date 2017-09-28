@@ -35,7 +35,7 @@
 	taste_mult = 1.1
 	description = "A silvery white and ductile member of the boron group of chemical elements."
 	reagent_state = SOLID
-	color = "#A8A8A8"
+	color = "#a8a8a8"
 
 /datum/reagent/ammonia
 	name = "Ammonia"
@@ -58,7 +58,7 @@
 	taste_description = "sour chalk"
 	taste_mult = 1.5
 	reagent_state = SOLID
-	color = "#1C1300"
+	color = "#1c1300"
 	ingest_met = REM * 5
 
 /datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
@@ -84,7 +84,7 @@
 	name = "Copper"
 	description = "A highly ductile metal."
 	taste_description = "copper"
-	color = "#6E3B08"
+	color = "#6e3b08"
 
 /datum/reagent/ethanol
 	name = "Ethanol" //Parent class for all alcoholic reagents.
@@ -245,14 +245,14 @@
 	description = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
 	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
 	reagent_state = SOLID
-	color = "#A0A0A0"
+	color = "#a0a0a0"
 
 /datum/reagent/radium
 	name = "Radium"
 	description = "Radium is an alkaline earth metal. It is extremely radioactive."
 	taste_description = "the color blue, and regret"
 	reagent_state = SOLID
-	color = "#C7C7C7"
+	color = "#c7c7c7"
 
 /datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.apply_effect(10 * removed, IRRADIATE, blocked = 0) // Radium may increase your chances to cure a disease
@@ -283,7 +283,7 @@
 	description = "A very corrosive mineral acid with the molecular formula H2SO4."
 	taste_description = "acid"
 	reagent_state = LIQUID
-	color = "#DB5008"
+	color = "#db5008"
 	metabolism = REM * 2
 	touch_met = 50 // It's acid!
 	var/power = 5
@@ -375,7 +375,7 @@
 	name = "Silicon"
 	description = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
 	reagent_state = SOLID
-	color = "#A8A8A8"
+	color = "#a8a8a8"
 
 /datum/reagent/sodium
 	name = "Sodium"
@@ -390,7 +390,7 @@
 	taste_description = "sugar"
 	taste_mult = 1.8
 	reagent_state = SOLID
-	color = "#FFFFFF"
+	color = "#ffffff"
 
 	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
@@ -418,11 +418,11 @@
 	description = "A chemical element with a pungent smell."
 	taste_description = "old eggs"
 	reagent_state = SOLID
-	color = "#BF8C00"
+	color = "#bf8c00"
 
 /datum/reagent/tungsten
 	name = "Tungsten"
 	description = "A chemical element, and a strong oxidising agent."
 	taste_mult = 0 //no taste
 	reagent_state = SOLID
-	color = "#DCDCDC"
+	color = "#dcdcdc"

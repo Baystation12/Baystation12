@@ -407,7 +407,7 @@ This function restores all organs.
 	traumatic_shock -= chem_effects[CE_PAINKILLER] // TODO: check what is actually stored here.
 
 	if(stat == UNCONSCIOUS)
-		traumatic_shock *= 0.5
+		traumatic_shock *= 0.6
 
 	return max(0,traumatic_shock)
 

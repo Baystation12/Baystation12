@@ -137,4 +137,4 @@
 
 /obj/item/weapon/shreddedp/New()
 	..()
-	if(prob(65)) color = pick("#BABABA","#7F7F7F")
+	if(prob(65)) color = pick("#bababa","#7f7f7f")

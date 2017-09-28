@@ -24,7 +24,7 @@
 	water_type = /turf/simulated/floor/exoplanet/ice
 	planetary_area = /area/exoplanet/snow
 	fauna_types = list(/mob/living/simple_animal/hostile/retaliate/beast/samak, /mob/living/simple_animal/hostile/retaliate/beast/diyaab, /mob/living/simple_animal/hostile/retaliate/beast/shantak)
-	plantcolors = list("#D0FEF5","#93E1D8","#93E1D8", "#B2ABBF", "#3590F3", "#4B4E6D")
+	plantcolors = list("#d0fef5","#93e1d8","#93e1d8", "#b2abbf", "#3590f3", "#4b4e6d")
 
 /area/exoplanet/snow
 	ambience = list('sound/effects/wind/tundra0.ogg','sound/effects/wind/tundra1.ogg','sound/effects/wind/tundra2.ogg','sound/effects/wind/spooky0.ogg','sound/effects/wind/spooky1.ogg')

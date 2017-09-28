@@ -20,7 +20,7 @@
 
 /datum/gear/suit/medcoat
 	display_name = "medical suit selection"
-	path = /obj/item/clothing/suit/storage/toggle/fr_jacket
+	path = /obj/item/clothing/suit
 	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/suit/medcoat/New()
@@ -33,7 +33,7 @@
 
 /datum/gear/suit/trenchcoat
 	display_name = "trenchcoat selection"
-	path = /obj/item/clothing/suit/storage/det_trench
+	path = /obj/item/clothing/suit
 	cost = 3
 	allowed_roles = RESTRICTED_ROLES
 
@@ -64,15 +64,22 @@
 	allowed_roles = list(/datum/job/cargo_contractor, /datum/job/merchant)
 
 /datum/gear/suit/suit_jacket
+	display_name = "suit jackets"
+	path = /obj/item/clothing/suit/storage
 	allowed_roles = FORMAL_ROLES
+	
+/datum/gear/suit/suit_jacket/New()
+	..()
+	var/suitjackets = list()
+	suitjackets["black suit jacket"] = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
+	suitjackets["blue suit jacket"] = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
+	suitjackets["purple suit jacket"] = /obj/item/clothing/suit/storage/lawyer/purpjacket
+	gear_tweaks += new/datum/gear_tweak/path(suitjackets)
 
 /datum/gear/suit/hazard
 	display_name = "hazard vests"
 	path = /obj/item/clothing/suit/storage/hazardvest
-
-/datum/gear/suit/hazard/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/storage/hazardvest)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/suit/hoodie
 	display_name = "hoodie"
@@ -102,7 +109,7 @@
 
 /datum/gear/suit/leather
 	display_name = "jacket selection"
-	path = /obj/item/clothing/suit/storage/leather_jacket
+	path = /obj/item/clothing/suit
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/suit/leather/New()
@@ -120,14 +127,7 @@
 	display_name = "poncho selection"
 	path = /obj/item/clothing/suit/poncho/colored
 	cost = 1
-
-/datum/gear/suit/poncho/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/poncho/colored)
-
-/datum/gear/suit/suit_jacket
-	display_name = "suit jackets"
-	path = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/suit/roles/poncho/security
 	display_name = "poncho, security"
@@ -149,14 +149,6 @@
 	display_name = "poncho, supply"
 	path = /obj/item/clothing/suit/poncho/roles/cargo
 
-/datum/gear/suit/suit_jacket/New()
-	..()
-	var/suitjackets = list()
-	suitjackets["black suit jacket"] = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
-	suitjackets["blue suit jacket"] = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
-	suitjackets["purple suit jacket"] = /obj/item/clothing/suit/storage/lawyer/purpjacket
-	gear_tweaks += new/datum/gear_tweak/path(suitjackets)
-
 /datum/gear/suit/wintercoat
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
@@ -166,7 +158,4 @@
 	display_name = "track jacket selection"
 	path = /obj/item/clothing/suit/storage/toggle/track
 	allowed_roles = RESTRICTED_ROLES
-
-/datum/gear/suit/track/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/suit/storage/toggle/track)
+	flags = GEAR_HAS_TYPE_SELECTION

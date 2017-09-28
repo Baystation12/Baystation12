@@ -241,7 +241,7 @@ var/list/possible_cable_coil_colours
 				qdel(src)
 
 obj/structure/cable/proc/cableColor(var/colorC)
-	var/color_n = "#DD0000"
+	var/color_n = "#dd0000"
 	if(colorC)
 		color_n = colorC
 	color = color_n
@@ -488,6 +488,12 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = /obj/item/stack/cable_coil
+
+/obj/item/stack/cable_coil/single
+	amount = 1
+
+/obj/item/stack/cable_coil/single/New(var/loc, var/length = 1, var/param_color = null)
+	..(loc, length, param_color)
 
 /obj/item/stack/cable_coil/cyborg
 	name = "cable coil synthesizer"

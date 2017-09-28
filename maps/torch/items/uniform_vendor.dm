@@ -161,6 +161,7 @@
 
 	res["Service"] = list(
 		user_outfit.service_under,
+		user_outfit.service_skirt,
 		user_outfit.service_over,
 		user_outfit.service_shoes,
 		user_outfit.service_hat,

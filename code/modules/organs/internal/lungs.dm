@@ -105,7 +105,7 @@
 		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, affecting = parent)
 	bruise()
 
-/obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath)
+/obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath, var/forced)
 	if(!owner)
 		return 1
 	if(!breath)
@@ -130,6 +130,9 @@
 	var/safe_pressure_min = min_breath_pressure // Minimum safe partial pressure of breathable gas in kPa
 	// Lung damage increases the minimum safe pressure.
 	safe_pressure_min *= 1 + rand(1,4) * damage/max_damage
+
+	if(!forced && owner.chem_effects[CE_BREATHLOSS] && !owner.chem_effects[CE_STABLE]) //opiates are bad mmkay
+		safe_pressure_min *= 1 + rand(1,4) * owner.chem_effects[CE_BREATHLOSS]
 
 	var/failed_inhale = 0
 	var/failed_exhale = 0
@@ -246,7 +249,7 @@
 		else
 			owner.emote(pick("shiver","twitch"))
 
-	if(damage || world.time > last_failed_breath + 2 MINUTES)
+	if(damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_failed_breath + 2 MINUTES)
 		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)
 
 	owner.oxygen_alert = max(owner.oxygen_alert, 2)

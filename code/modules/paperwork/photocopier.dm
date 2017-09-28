@@ -85,7 +85,7 @@
 
 		if(toner >= 5)
 			var/mob/living/silicon/tempAI = usr
-			var/obj/item/device/camera/siliconcam/camera = tempAI.aiCamera
+			var/obj/item/device/camera/siliconcam/camera = tempAI.silicon_camera
 
 			if(!camera)
 				return

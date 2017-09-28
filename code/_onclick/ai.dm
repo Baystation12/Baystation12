@@ -55,9 +55,9 @@
 			MT.interact(aiMulti, src)
 			return
 
-	if(aiCamera.in_camera_mode)
-		aiCamera.camera_mode_off()
-		aiCamera.captureimage(A, usr)
+	if(silicon_camera.in_camera_mode)
+		silicon_camera.camera_mode_off()
+		silicon_camera.captureimage(A, usr)
 		return
 
 	/*

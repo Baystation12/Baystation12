@@ -281,3 +281,130 @@ Sells devices, odds and ends, and medical stuff
 				"bribe_refusal"  = "I've got too many customers waiting in other sectors, sorry.",
 				"bribe_accept"   = "Hm. Don't keep me waiting too long, though.",
 				)
+
+/datum/trader/xeno_shop
+	name = "Xenolife Collector"
+	origin = "CSV Not a Poacher"
+	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
+	possible_origins = list("XenoHugs","NT Specimen Acquisition","Lonely Pete's Exotic Companionship","Space Wei's Exotic Cuisine")
+	speech = list("hail_generic"    = "Welcome! We are always looking to acquire more exotic life forms.",
+				"hail_deny"         = "We no longer wish to speak to you. Please contact our legal representative if you wish to rectify this.",
+
+				"trade_complete"    = "Remember to give them attention and food. They are living beings, and you should treat them like so.",
+				"trade_blacklist"   = "Legally I can' do that. Morally... anyway I refuse to do that.",
+				"trade_found_unwanted" = "I only want animals. I don't need food, shiny things, I'm looking for specific ones at that. Ones I already have the cage and food for.",
+				"trade_not_enough"   = "I'd give you this for free, but I need the money to feed the specimens. So you must pay in full.",
+				"how_much"          = "This is a good choice, I believe it will cost you VALUE thalers.",
+				"what_want"         = "I have the facilities currently to support",
+
+				"compliment_deny"   = "According to customs on 34 planets I traded with, this constitutes sexual harrasment.",
+				"compliment_accept" = "Thank you. I needed that.",
+				"insult_good"       = "No need to be upset, I believe we can do business.",
+				"insult_bad"        = "I have traded dogs with more bark than that.",
+				)
+
+	possible_wanted_items = list(/mob/living/simple_animal/tindalos    = TRADER_THIS_TYPE,
+								/mob/living/simple_animal/tomato      = TRADER_THIS_TYPE,
+								/mob/living/simple_animal/yithian     = TRADER_THIS_TYPE,
+								/mob/living/simple_animal/hostile/retaliate/beast/diyaab = TRADER_THIS_TYPE,
+								/mob/living/simple_animal/hostile/retaliate/beast/shantak= TRADER_THIS_TYPE,
+								/mob/living/simple_animal/hostile/retaliate/beast/samak= TRADER_THIS_TYPE,
+								/mob/living/simple_animal/hostile/carp = TRADER_THIS_TYPE)
+
+	possible_trading_items = list(/mob/living/simple_animal/hostile/carp= TRADER_THIS_TYPE,
+								/obj/item/device/dociler              = TRADER_THIS_TYPE,
+								/obj/item/weapon/beartrap			  = TRADER_THIS_TYPE,
+								/obj/item/device/slime_scanner = TRADER_THIS_TYPE)
+
+/datum/trader/medical
+	name = "Medical Supplier"
+	origin = "Infirmary of CSV Inquity"
+	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY
+	want_multiplier = 1.2
+	margin = 2
+	possible_origins = list("Dr.Krieger's Practice","Legit Medical Supplies (No Refund)", "Mom's & Pop's Addictive Opoids")
+	speech = list("hail_generic"    = "Huh? How'd you get this number?! Oh well, if you wanna talk biz, I'm listening.",
+				"hail_deny"         = "This is an automated message. Feel free to fuck the right off after the buzzer. *buzz*",
+
+				"trade_complete"    = "Good to have business with ya. Remember, no refunds.",
+				"trade_blacklist"   = "Whoa whoa, I don't want this shit, put it away.",
+				"trade_found_unwanted" = "What the hell do you expect me to do with this junk?",
+				"trade_not_enough"   = "Sorry, pal, full payment upfront, I don't write the rules. Well, I do but that's beside the point.",
+				"how_much"          = "Hmm this is one damn fine item, but I'll part with it for VALUE thalers.",
+				"what_want"         = "I could always use some fucking",
+
+				"compliment_deny"   = "Haha, how nice of you, why don't you go fall in an elevator shaft.",
+				"compliment_accept" = "Damn right I'm awesome, tell me more.",
+				"insult_good"       = "Damn, pal, no need to get snippy.",
+				"insult_bad"        = "*muffled laughter* Sorry, was that you trying to talk shit? Adorable.",
+				)
+
+	possible_wanted_items = list(/obj/item/weapon/reagent_containers/food/drinks/bottle = TRADER_THIS_TYPE,
+								/obj/item/organ/internal/liver = TRADER_THIS_TYPE,
+								/obj/item/organ/internal/kidneys = TRADER_THIS_TYPE,
+								/obj/item/organ/internal/lungs = TRADER_THIS_TYPE,
+								/obj/item/organ/internal/heart = TRADER_THIS_TYPE,
+								/obj/item/weapon/storage/fancy/cigarettes = TRADER_ALL
+								)
+
+	possible_trading_items = list(/obj/item/weapon/storage/pill_bottle = TRADER_SUBTYPES_ONLY,
+								  /obj/item/weapon/storage/firstaid/fire  = TRADER_THIS_TYPE,
+								  /obj/item/weapon/storage/firstaid/toxin  = TRADER_THIS_TYPE,
+								  /obj/item/weapon/storage/firstaid/adv  = TRADER_THIS_TYPE,
+								  /obj/item/weapon/storage/box/bloodpacks  = TRADER_THIS_TYPE,
+								  /obj/item/weapon/reagent_containers/blood  = TRADER_SUBTYPES_ONLY,
+								  /obj/item/weapon/retractor = TRADER_THIS_TYPE,
+								  /obj/item/weapon/hemostat = TRADER_THIS_TYPE,
+								  /obj/item/weapon/cautery = TRADER_THIS_TYPE,
+								  /obj/item/weapon/surgicaldrill = TRADER_THIS_TYPE,
+								  /obj/item/weapon/scalpel = TRADER_THIS_TYPE,
+								  /obj/item/weapon/scalpel/manager = TRADER_THIS_TYPE,
+								  /obj/item/weapon/circular_saw = TRADER_THIS_TYPE,
+								  /obj/item/weapon/bonegel = TRADER_THIS_TYPE,
+								  /obj/item/weapon/bonesetter = TRADER_THIS_TYPE,
+								  /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
+								  /obj/item/weapon/reagent_containers/glass/bottle/stoxin = TRADER_THIS_TYPE,
+								  /obj/item/weapon/reagent_containers/glass/bottle/antitoxin = TRADER_THIS_TYPE,
+								  /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline = TRADER_THIS_TYPE,
+								  /obj/item/bodybag/cryobag = TRADER_THIS_TYPE,
+								  /obj/item/weapon/reagent_containers/chem_disp_cartridge/dexalin/small = TRADER_THIS_TYPE,
+								  /obj/item/sign/medipolma = TRADER_THIS_TYPE
+								)
+
+/datum/trader/mining
+	name = "Rock'n'Drill Mining Inc"
+	origin = "Automated Smelter AH-532"
+	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
+	want_multiplier = 1.5
+	margin = 2
+	possible_origins = list("Automated Smelter AH-532","CMV Locust")
+	speech = list("hail_generic"    = "Welcome to R n D Mining Inc. Please place your order.",
+				"hail_deny"         = "There is no response on the line.",
+
+				"trade_complete"    = "Transaction complete. Please use our services again",
+				"trade_blacklist"   = "Whoa whoa, I don't want this shit, put it away.",
+				"trade_found_unwanted" = "Sorry, we are currently not looking to purchase these items.",
+				"trade_not_enough"   = "Sorry, this is an insufficient sum for this purchase.",
+				"how_much"          = "For ONE entry of ITEM the price would be VALUE thalers.",
+				"what_want"         = "We are currently looking to procure",
+
+				"compliment_deny"   = "I am afraid this is beyond my competency.",
+				"compliment_accept" = "Thank you.",
+				"insult_good"       = "Alright, we will reconsider the terms.",
+				"insult_bad"        = "This is not acceptable, please cease.",
+				)
+
+	possible_wanted_items = list(/obj/item/weapon/ore/ = TRADER_SUBTYPES_ONLY,
+								/obj/item/weapon/disk/survey = TRADER_THIS_TYPE,
+								/obj/item/weapon/ore/slag = TRADER_BLACKLIST)
+
+	possible_trading_items = list(/obj/machinery/mining/drill = TRADER_THIS_TYPE,
+								  /obj/machinery/mining/brace = TRADER_THIS_TYPE,
+								  /obj/machinery/floodlight = TRADER_THIS_TYPE,
+								  /obj/machinery/floodlight = TRADER_THIS_TYPE,
+								  /obj/item/weapon/storage/box/greenglowsticks = TRADER_THIS_TYPE,
+								  /obj/item/clothing/suit/space/void/engineering/salvage/prepared  = TRADER_THIS_TYPE,
+								  /obj/item/stack/material/uranium/ten = TRADER_THIS_TYPE,
+								  /obj/item/stack/material/plasteel/fifty = TRADER_THIS_TYPE,
+								  /obj/item/stack/material/steel/fifty = TRADER_THIS_TYPE
+								)

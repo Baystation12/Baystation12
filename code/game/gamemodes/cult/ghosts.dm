@@ -50,7 +50,7 @@
 	if(!ghost_ability_check())
 		return
 
-	var/doodle_color = "#A10808"
+	var/doodle_color = COLOR_BLOOD_HUMAN
 
 	var/turf/simulated/T = get_turf(src)
 	if(!istype(T))

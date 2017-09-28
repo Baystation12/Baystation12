@@ -36,12 +36,13 @@
 	smoothing_iterations = 4
 	land_type = /turf/simulated/floor/exoplanet/desert
 	planetary_area = /area/exoplanet/garbage
-	plantcolors = list("#EFDD6F","#7B4A12","#E49135","#BA6222","#5C755E","#120309")
+	plantcolors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#120309")
 
 	flora_prob = 1
 	large_flora_prob = 0
 	flora_diversity = 2
 	fauna_types = list(/mob/living/simple_animal/hostile/hivebot, /mob/living/simple_animal/hostile/hivebot/range, /mob/living/simple_animal/hostile/viscerator)
+	fauna_prob = 1
 
 /datum/random_map/noise/exoplanet/garbage/get_additional_spawns(var/value, var/turf/T)
 	..()
@@ -52,7 +53,7 @@
 	else
 		if(prob(2))
 			new/obj/structure/rubble/war(T)
-		if(prob(0.5))
+		if(prob(0.02))
 			var/datum/artifact_find/A = new()
 			new A.artifact_find_type(T)
 			qdel(A)

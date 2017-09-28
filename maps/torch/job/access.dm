@@ -123,6 +123,18 @@
 	desc = "Senior Enlisted Advisor"
 	region = ACCESS_REGION_COMMAND
 
+/var/const/access_explorer = 93
+/datum/access/explorer
+	id = access_explorer
+	desc = "Explorer"
+	region = ACCESS_REGION_RESEARCH
+
+/var/const/access_pathfinder = 94
+/datum/access/pathfinder
+	id = access_pathfinder
+	desc = "Pathfinder"
+	region = ACCESS_REGION_RESEARCH
+
 /************
 * SEV Torch *
 ************/

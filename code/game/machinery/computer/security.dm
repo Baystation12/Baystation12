@@ -99,17 +99,17 @@
 							var/background
 							switch(crimstat)
 								if("*Arrest*")
-									background = "'background-color:#DC143C;'"
+									background = "'background-color:#dc143c;'"
 								if("Incarcerated")
-									background = "'background-color:#CD853F;'"
+									background = "'background-color:#cd853f;'"
 								if("Parolled")
-									background = "'background-color:#CD853F;'"
+									background = "'background-color:#cd853f;'"
 								if("Released")
-									background = "'background-color:#3BB9FF;'"
+									background = "'background-color:#3bb9ff;'"
 								if("None")
-									background = "'background-color:#00FF7F;'"
+									background = "'background-color:#00ff7f;'"
 								if("")
-									background = "'background-color:#FFFFFF;'"
+									background = "'background-color:#ffffff;'"
 									crimstat = "No Record."
 							dat += text("<tr style=[]><td><A href='?src=\ref[];choice=Browse Record;d_rec=\ref[]'>[]</a></td>", background, src, R, R.fields["name"])
 							dat += text("<td>[]</td>", R.fields["id"])
@@ -182,17 +182,17 @@
 							var/background
 							switch(crimstat)
 								if("*Arrest*")
-									background = "'background-color:#DC143C;'"
+									background = "'background-color:#dc143c;'"
 								if("Incarcerated")
-									background = "'background-color:#CD853F;'"
+									background = "'background-color:#cd853f;'"
 								if("Parolled")
-									background = "'background-color:#CD853F;'"
+									background = "'background-color:#cd853f;'"
 								if("Released")
-									background = "'background-color:#3BB9FF;'"
+									background = "'background-color:#3bb9ff;'"
 								if("None")
-									background = "'background-color:#00FF7F;'"
+									background = "'background-color:#00ff7f;'"
 								if("")
-									background = "'background-color:#FFFFFF;'"
+									background = "'background-color:#ffffff;'"
 									crimstat = "No Record."
 							dat += text("<tr style=[]><td><A href='?src=\ref[];choice=Browse Record;d_rec=\ref[]'>[]</a></td>", background, src, R, R.fields["name"])
 							dat += text("<td>[]</td>", R.fields["id"])

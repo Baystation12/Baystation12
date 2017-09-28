@@ -139,7 +139,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 				}
 				tr.d0 th {
 					background-color: none;
-					color: #4477E0;
+					color: #4477e0;
 					text-align:right;
 					vertical-align:top;
 					width:120px;
@@ -157,7 +157,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 					font-weight:bold;
 				}
 				a {
-					color:#4477E0;
+					color:#4477e0;
 				}
 				a.button {
 					color:white;
@@ -279,7 +279,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 						color: white;
 					}
 					tr.d2 td {
-						background-color: #00FF00;
+						background-color: #00ff00;
 						color: white;
 						text-align:center;
 					}

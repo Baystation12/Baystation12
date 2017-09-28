@@ -22,6 +22,7 @@
 	#include "items/clothing.dm"
 	#include "items/encryption_keys.dm"
 	#include "items/headsets.dm"
+	#include "items/items.dm"
 	#include "items/machinery.dm"
 	#include "items/manuals.dm"
 	#include "items/stamps.dm"
@@ -41,6 +42,7 @@
 	#include "structures/closets/security.dm"
 	#include "structures/closets/services.dm"
 	#include "structures/closets/supply.dm"
+	#include "structures/closets/exploration.dm"
 
 	#include "loadout/_defines.dm"
 	#include "loadout/loadout_accessories.dm"
@@ -64,6 +66,7 @@
 	#include "torch-9.dmm"
 	#include "torch-10.dmm"
 	#include "torch-11.dmm"
+	#include "../away/bearcat/bearcat.dm"
 
 	#include "../../code/modules/lobby_music/chasing_time.dm"
 	#include "../../code/modules/lobby_music/absconditus.dm"

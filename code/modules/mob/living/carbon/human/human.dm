@@ -295,7 +295,7 @@
 /mob/living/carbon/human/proc/get_visible_name()
 	var/face_name = get_face_name()
 	var/id_name = get_id_name("")
-	if(id_name && (id_name != face_name))
+	if((face_name == "Unknown") && id_name && (id_name != face_name))
 		return "[face_name] (as [id_name])"
 	return face_name
 
@@ -596,14 +596,14 @@
 					for (var/datum/data/record/R in GLOB.data_core.medical)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
-								to_chat(usr, "<b>Name:</b> [R.fields["name"]]")
+								to_chat(usr, "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]")
 								to_chat(usr, "<b>Gender:</b> [R.fields["id_gender"]]")
 								to_chat(usr, "<b>Species:</b> [R.fields["species"]]")
 								to_chat(usr, "<b>DNA:</b> [R.fields["b_dna"]]")
-								to_chat(usr, "<b>Blood Type:</b> [R.fields["b_type"]]")
-								to_chat(usr, "<b>Prosthetics:</b>")
-								for(var/p_name in R.fields["prosthetics"])
-									to_chat(usr, "\t [R.fields["prosthetics"][p_name]]")
+								to_chat(usr, "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]")
+								to_chat(usr, "<b>Details:</b> [R.fields["mi_dis_d"]]")
+								to_chat(usr, "<b>Major Disabilities:</b> [R.fields["ma_dis"]]")
+								to_chat(usr, "<b>Details:</b> [R.fields["ma_dis_d"]]")
 								to_chat(usr, "<b>Notes:</b> [R.fields["notes"]]")
 								to_chat(usr, "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>")
 								read = 1
@@ -1298,7 +1298,7 @@
 			message += "-"
 			to_chat(src, "<span class='warning'>You ran out of blood to write with!</span>")
 		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
-		W.basecolor = (hand_blood_color) ? hand_blood_color : "#A10808"
+		W.basecolor = (hand_blood_color) ? hand_blood_color : COLOR_BLOOD_HUMAN
 		W.update_icon()
 		W.message = message
 		W.add_fingerprint(src)
@@ -1637,10 +1637,16 @@
 		return
 	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
 	if(istype(heart) && heart.robotic <= ORGAN_ROBOT && !(heart.status & ORGAN_DEAD))
-		if(!nervous_system_failure())
+		var/species_organ = species.breathing_organ
+		var/active_breaths = 0
+		if(species_organ)
+			var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
+			if(L)
+				active_breaths = L.active_breathing
+		if(!nervous_system_failure() && active_breaths)
 			visible_message("\The [src] jerks and gasps for breath!")
 		else
-			visible_message("\The [src] twitches a bit as his heart restarts!")
+			visible_message("\The [src] twitches a bit as \his heart restarts!")
 		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
 		if(getOxyLoss() >= 75)
 			setOxyLoss(75)

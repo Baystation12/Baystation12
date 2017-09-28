@@ -11,7 +11,7 @@
 
 /datum/gear/eyes/fashionglasses
 	display_name = "glasses"
-	path = /obj/item/clothing/glasses/gglasses
+	path = /obj/item/clothing/glasses
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/eyes/fashionglasses/New()

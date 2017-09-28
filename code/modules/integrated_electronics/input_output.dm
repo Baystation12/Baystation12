@@ -517,7 +517,7 @@
 	activators = list("toggle light")
 	var/light_toggled = 0
 	var/light_brightness = 3
-	var/light_rgb = "#FFFFFF"
+	var/light_rgb = "#ffffff"
 
 /obj/item/integrated_circuit/output/light/do_work()
 	light_toggled = !light_toggled

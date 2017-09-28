@@ -139,7 +139,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	if(H.getToxLoss() > 50)
 		. += "<font color='green'><b>Major systemic organ failure detected.</b></font>"
 	if(H.getFireLoss() > 50)
-		. += "<font color='#FFA500'><b>Severe burn damage detected.</b></font>"
+		. += "<font color='#ffa500'><b>Severe burn damage detected.</b></font>"
 	if(H.getBruteLoss() > 50)
 		. += "<font color='red'><b>Severe anatomical damage detected.</b></font>"
 
@@ -189,7 +189,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 				if(org.brute_dam > 0)
 					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, org.vital)] physical trauma</b></font>\]"
 				if(org.burn_dam > 0)
-					limb_result = "[limb_result] \[<font color = '#FFA500'><b>[get_wound_severity(org.burn_ratio, org.vital)] burns</b></font>\]"
+					limb_result = "[limb_result] \[<font color = '#ffa500'><b>[get_wound_severity(org.burn_ratio, org.vital)] burns</b></font>\]"
 				if(org.status & ORGAN_BLEEDING)
 					limb_result = "[limb_result] \[<span class='danger'>bleeding</span>\]"
 				. += limb_result

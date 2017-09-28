@@ -29,10 +29,7 @@
 	display_name = "dashiki selection"
 	path = /obj/item/clothing/accessory/dashiki
 	allowed_roles = NON_MILITARY_ROLES
-
-/datum/gear/accessory/dashiki/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/dashiki)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/thawb
 	display_name = "thawb"
@@ -144,19 +141,13 @@
 	path = /obj/item/clothing/accessory/holster
 	cost = 3
 	allowed_roles = ARMED_ROLES
-
-/datum/gear/accessory/holster/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/holster)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/ubac
 	display_name = "ubac selection"
 	path = /obj/item/clothing/accessory/ubac
 	allowed_roles = MILITARY_ROLES
-
-/datum/gear/accessory/ubac/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/ubac)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/tie
 	display_name = "tie selection"
@@ -175,6 +166,19 @@
 	ties["navy tie"] = /obj/item/clothing/accessory/navy
 	ties["horrible tie"] = /obj/item/clothing/accessory/horrible
 	ties["brown tie"] = /obj/item/clothing/accessory/brown
+	gear_tweaks += new/datum/gear_tweak/path(ties)
+
+/datum/gear/accessory/tie_color
+	display_name = "colored tie"
+	path = /obj/item/clothing/accessory
+	allowed_roles = NON_MILITARY_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/tie_color/New()
+	..()
+	var/ties = list()
+	ties["tie"] = /obj/item/clothing/accessory
+	ties["striped tie"] = /obj/item/clothing/accessory/long
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
 /datum/gear/accessory/stethoscope
@@ -258,7 +262,7 @@
 /datum/gear/accessory/solawardmajor
 	display_name = "SolGov major award selection"
 	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory/medal/iron/star
+	path = /obj/item/clothing/accessory
 	cost = 8
 	allowed_roles = SOLGOV_ROLES
 
@@ -278,7 +282,7 @@
 /datum/gear/accessory/solawardminor
 	display_name = "SolGov minor award selection"
 	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
-	path = /obj/item/clothing/accessory/medal/iron/sol
+	path = /obj/item/clothing/accessory
 	cost = 5
 	allowed_roles = SOLGOV_ROLES
 
@@ -294,7 +298,7 @@
 /datum/gear/accessory/ntaward
 	display_name = "NanoTrasen award selection"
 	description = "A medal or ribbon awarded to NanoTrasen personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory/medal/bronze/nanotrasen
+	path = /obj/item/clothing/accessory/medal
 	cost = 8
 	allowed_roles = NANOTRASEN_ROLES
 

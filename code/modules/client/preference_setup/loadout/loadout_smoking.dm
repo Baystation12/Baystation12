@@ -10,6 +10,10 @@
 	display_name = "matchbook"
 	path = /obj/item/weapon/storage/box/matches
 
+/datum/gear/lighter
+	display_name = "cheap lighter"
+	path = /obj/item/weapon/flame/lighter
+
 /datum/gear/zippo
 	display_name = "zippo"
 	path = /obj/item/weapon/flame/lighter/zippo
@@ -22,6 +26,17 @@
 	display_name = "fancy cigar case"
 	path = /obj/item/weapon/storage/fancy/cigar
 	cost = 2
+
+/datum/gear/cigar
+	display_name = "fancy cigar"
+	path = /obj/item/clothing/mask/smokable/cigarette/cigar
+
+/datum/gear/cigar/New()
+	..()
+	var/cigar_type = list()
+	cigar_type["premium"] = /obj/item/clothing/mask/smokable/cigarette/cigar
+	cigar_type["Cohiba Robusto"] = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
+	gear_tweaks += new/datum/gear_tweak/path(cigar_type)
 
 /datum/gear/ecigs
 	display_name = "electronic cigarette, deluxe version"

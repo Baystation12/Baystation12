@@ -5,11 +5,8 @@
 
 /datum/gear/cosmetic/lipstick
 	display_name = "lipstick selection"
-	path = /obj/item/weapon/lipstick/black
-
-/datum/gear/cosmetic/lipstick/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/weapon/lipstick)
+	path = /obj/item/weapon/lipstick
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/cosmetic/mirror
 	display_name = "handheld mirror"

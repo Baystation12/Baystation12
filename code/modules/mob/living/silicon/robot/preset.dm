@@ -7,7 +7,7 @@
 	laws = /datum/ai_laws/syndicate_override
 	idcard = /obj/item/weapon/card/id/syndicate
 	module = /obj/item/weapon/robot_module/syndicate
-	radio_key_type = /obj/item/device/encryptionkey/syndicate
+	silicon_radio = /obj/item/device/radio/borg/syndicate
 	spawn_sound = 'sound/mecha/nominalsyndi.ogg'
 	cell = /obj/item/weapon/cell/super
 	pitch_toggle = 0
@@ -24,4 +24,4 @@
 /mob/living/silicon/robot/combat/nt
 	laws = /datum/ai_laws/nanotrasen_aggressive
 	idcard = /obj/item/weapon/card/id/centcom/ERT
-	radio_key_type = /obj/item/device/encryptionkey/ert
+	silicon_radio = /obj/item/device/radio/borg/ert

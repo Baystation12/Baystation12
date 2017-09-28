@@ -128,28 +128,28 @@ var/last_chew = 0
 	elastic = 1
 
 /obj/item/weapon/handcuffs/cable/red
-	color = "#DD0000"
+	color = "#dd0000"
 
 /obj/item/weapon/handcuffs/cable/yellow
-	color = "#DDDD00"
+	color = "#dddd00"
 
 /obj/item/weapon/handcuffs/cable/blue
-	color = "#0000DD"
+	color = "#0000dd"
 
 /obj/item/weapon/handcuffs/cable/green
-	color = "#00DD00"
+	color = "#00dd00"
 
 /obj/item/weapon/handcuffs/cable/pink
-	color = "#DD00DD"
+	color = "#dd00dd"
 
 /obj/item/weapon/handcuffs/cable/orange
-	color = "#DD8800"
+	color = "#dd8800"
 
 /obj/item/weapon/handcuffs/cable/cyan
-	color = "#00DDDD"
+	color = "#00dddd"
 
 /obj/item/weapon/handcuffs/cable/white
-	color = "#FFFFFF"
+	color = "#ffffff"
 
 /obj/item/weapon/handcuffs/cable/attackby(var/obj/item/I, mob/user as mob)
 	..()

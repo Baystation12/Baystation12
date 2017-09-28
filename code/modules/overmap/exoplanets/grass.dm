@@ -51,7 +51,7 @@
 	land_type = /turf/simulated/floor/exoplanet/grass
 	water_type = /turf/simulated/floor/exoplanet/water/shallow
 	planetary_area = /area/exoplanet/grass
-	plantcolors = list("#0E1E14","#1A3E38","#5A7467","#9EAB88","#6E7248", "RANDOM")
+	plantcolors = list("#0e1e14","#1a3e38","#5a7467","#9eab88","#6e7248", "RANDOM")
 
 	flora_prob = 30
 	large_flora_prob = 50

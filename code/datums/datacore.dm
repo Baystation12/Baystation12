@@ -30,14 +30,15 @@
 	var/list/misc = new()
 	var/list/srv = new()
 	var/list/sup = new()
+	var/list/exp = new()
 	var/list/isactive = new()
 	var/list/mil_ranks = list() // HTML to prepend to name
 	var/dat = {"
 	<head><style>
 		.manifest {border-collapse:collapse;}
 		.manifest td, th {border:1px solid [monochrome?"black":"[OOC?"black; background-color:#272727; color:white":"#DEF; background-color:white; color:black"]"]; padding:.25em}
-		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: [OOC?"#40628A":"#48C"]; color:white"]}
-		.manifest tr.head th { [monochrome?"border-top-width: 1px":"background-color: [OOC?"#013D3B;":"#488;"]"] }
+		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: [OOC?"#40628a":"#48C"]; color:white"]}
+		.manifest tr.head th { [monochrome?"border-top-width: 1px":"background-color: [OOC?"#013D3b;":"#488;"]"] }
 		.manifest td:first-child {text-align:right}
 		.manifest tr.alt td {[monochrome?"border-top-width: 2px":"background-color: [OOC?"#373737; color:white":"#DEF"]"]}
 	</style></head>
@@ -71,34 +72,37 @@
 
 			//cael - to prevent multiple appearances of a player/job combination, add a continue after each line
 		var/department = 0
-		if(real_rank in command_positions)
+		if(real_rank in GLOB.command_positions)
 			heads[name] = rank
 			department = 1
-		if(real_rank in support_positions)
+		if(real_rank in GLOB.support_positions)
 			spt[name] = rank
 			department = 1
-		if(real_rank in security_positions)
+		if(real_rank in GLOB.security_positions)
 			sec[name] = rank
 			department = 1
-		if(real_rank in engineering_positions)
+		if(real_rank in GLOB.engineering_positions)
 			eng[name] = rank
 			department = 1
-		if(real_rank in medical_positions)
+		if(real_rank in GLOB.medical_positions)
 			med[name] = rank
 			department = 1
-		if(real_rank in science_positions)
+		if(real_rank in GLOB.science_positions)
 			sci[name] = rank
 			department = 1
-		if(real_rank in cargo_positions)
+		if(real_rank in GLOB.cargo_positions)
 			car[name] = rank
 			department = 1
-		if(real_rank in civilian_positions)
+		if(real_rank in GLOB.civilian_positions)
 			civ[name] = rank
 			department = 1
-		if(real_rank in service_positions)
+		if(real_rank in GLOB.exploration_positions)
+			exp[name] = rank
+			department = 1
+		if(real_rank in GLOB.service_positions)
 			srv[name] = rank
 			department = 1
-		if(real_rank in supply_positions)
+		if(real_rank in GLOB.supply_positions)
 			sup[name] = rank
 			department = 1
 		if(!department && !(name in heads))
@@ -150,6 +154,11 @@
 		dat += "<tr><th colspan=3>Supply</th></tr>"
 		for(name in sup)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	if(exp.len > 0)
+		dat += "<tr><th colspan=3>Exploration</th></tr>"
+		for(name in exp)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[exp[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(srv.len > 0)
 		dat += "<tr><th colspan=3>Service</th></tr>"
@@ -223,7 +232,11 @@
 		var/datum/data/record/G = CreateGeneralRecord(H, id)
 
 		//Medical Record
-		CreateMedicalRecord(H, id)
+		var/datum/data/record/M = CreateMedicalRecord(H.real_name, id)
+		M.fields["b_type"]		= H.b_type
+		M.fields["b_dna"]		= H.dna.unique_enzymes
+		if(H.med_record && !jobban_isbanned(H, "Records"))
+			M.fields["notes"] = H.med_record
 
 		//Security Record
 		var/datum/data/record/S = CreateSecurityRecord(H.real_name, id)
@@ -313,25 +326,18 @@
 	var/datum/data/record/M = new()
 	M.name = "Medical Record #[id]"
 	M.fields["id"]			= id
-	M.fields["name"]		= H.real_name
-	M.fields["species"]		= H.species.name
-	M.fields["b_type"]		= H.b_type
-	M.fields["b_dna"]		= H.dna.unique_enzymes
-	M.fields["id_gender"]	= H.gender
-
-	var/obj/item/organ/list/robo_organs = list()
-	for(var/obj/item/organ/external/O in H.organs)
-		if(O.robotic >= ORGAN_ROBOT)
-			robo_organs[O.organ_tag] = O.name
-	for(var/obj/item/organ/internal/O in H.internal_organs)
-		if(O.robotic >= ORGAN_ROBOT)
-			robo_organs[O.organ_tag] = O.name
-
-	M.fields["prosthetics"]	= robo_organs
-	M.fields["notes"] = "No notes found."
-	if(H.med_record && !jobban_isbanned(H, "Records"))
-		M.fields["notes"] = H.med_record
-
+	M.fields["name"]		= name
+	M.fields["b_type"]		= "AB+"
+	M.fields["b_dna"]		= md5(name)
+	M.fields["id_gender"]	= "Unknown"
+	M.fields["mi_dis"]		= "None"
+	M.fields["mi_dis_d"]	= "No minor disabilities have been declared."
+	M.fields["ma_dis"]		= "None"
+	M.fields["ma_dis_d"]	= "No major disabilities have been diagnosed."
+	M.fields["alg"]			= "None"
+	M.fields["alg_d"]		= "No allergies have been detected in this patient."
+	M.fields["cdi"]			= "None"
+	M.fields["cdi_d"]		= "No diseases have been diagnosed at the moment."
 	GLOB.data_core.medical += M
 
 	return M

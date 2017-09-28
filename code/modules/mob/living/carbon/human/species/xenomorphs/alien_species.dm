@@ -42,7 +42,7 @@
 
 	reagent_tag = IS_XENOS
 
-	blood_color = "#05EE05"
+	blood_color = "#05ee05"
 	flesh_color = "#282846"
 	base_color =  "#00060c"
 
