@@ -66,7 +66,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 
-			if(H.species.siemens_coefficient<0.5 || (H.species.flags & NO_EMBED)) //Thick skin.
+			if(H.species.siemens_coefficient<0.5 || (H.species.flags & (NO_EMBED|NO_MINOR_CUT))) //Thick skin.
 				return
 
 			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )

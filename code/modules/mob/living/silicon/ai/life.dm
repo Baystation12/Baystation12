@@ -8,7 +8,7 @@
 
 	src.updatehealth()
 
-	if (!hardware_integrity() || !backup_capacitor())
+	if ((hardware_integrity() <= 0) || (backup_capacitor() <= 0))
 		death()
 		return
 
@@ -44,19 +44,6 @@
 			process_sec_hud(src,0,src.eyeobj)
 		if (MED_HUD)
 			process_med_hud(src,0,src.eyeobj)
-
-
-/mob/living/silicon/ai/updatehealth()
-	if(status_flags & GODMODE)
-		health = 100
-		set_stat(CONSCIOUS)
-		setOxyLoss(0)
-	else
-		health = 100 - getFireLoss() - getBruteLoss() // Oxyloss is not part of health as it represents AIs backup power. AI is immune against ToxLoss as it is machine.
-
-/mob/living/silicon/ai/rejuvenate()
-	..()
-	add_ai_verbs(src)
 
 /mob/living/silicon/ai/update_living_sight()
 	if(!has_power() || self_shutdown)

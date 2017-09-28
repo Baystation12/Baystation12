@@ -1,4 +1,4 @@
-/decl/turf_initializer/proc/Initialize(var/turf/T)
+/decl/turf_initializer/proc/InitializeTurf(var/turf/T)
 	return
 
 /area
@@ -9,4 +9,4 @@
 	for(var/turf/T in src)
 		if(turf_initializer)
 			var/decl/turf_initializer/ti = decls_repository.get_decl(turf_initializer)
-			ti.Initialize(T)
+			ti.InitializeTurf(T)

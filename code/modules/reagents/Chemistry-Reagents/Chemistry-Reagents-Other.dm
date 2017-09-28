@@ -10,27 +10,27 @@
 
 /datum/reagent/crayon_dust/red
 	name = "Red crayon dust"
-	color = "#FE191A"
+	color = "#fe191a"
 
 /datum/reagent/crayon_dust/orange
 	name = "Orange crayon dust"
-	color = "#FFBE4F"
+	color = "#ffbe4f"
 
 /datum/reagent/crayon_dust/yellow
 	name = "Yellow crayon dust"
-	color = "#FDFE7D"
+	color = "#fdfe7d"
 
 /datum/reagent/crayon_dust/green
 	name = "Green crayon dust"
-	color = "#18A31A"
+	color = "#18a31a"
 
 /datum/reagent/crayon_dust/blue
 	name = "Blue crayon dust"
-	color = "#247CFF"
+	color = "#247cff"
 
 /datum/reagent/crayon_dust/purple
 	name = "Purple crayon dust"
-	color = "#CC0099"
+	color = "#cc0099"
 
 /datum/reagent/crayon_dust/grey //Mime
 	name = "Grey crayon dust"
@@ -38,7 +38,7 @@
 
 /datum/reagent/crayon_dust/brown //Rainbow
 	name = "Brown crayon dust"
-	color = "#846F35"
+	color = "#846f35"
 
 /datum/reagent/paint
 	name = "Paint"
@@ -101,7 +101,7 @@
 	description = "It's magic. We don't have to explain it."
 	taste_description = "100% abuse"
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 	flags = AFFECTS_DEAD //This can even heal dead people.
 
 	glass_name = "liquid gold"
@@ -138,21 +138,21 @@
 	description = "Gold is a dense, soft, shiny metal and the most malleable and ductile metal known."
 	taste_description = "expensive metal"
 	reagent_state = SOLID
-	color = "#F7C430"
+	color = "#f7c430"
 
 /datum/reagent/silver
 	name = "Silver"
 	description = "A soft, white, lustrous transition metal, it has the highest electrical conductivity of any element and the highest thermal conductivity of any metal."
 	taste_description = "expensive yet reasonable metal"
 	reagent_state = SOLID
-	color = "#D0D0D0"
+	color = "#d0d0d0"
 
 /datum/reagent/uranium
 	name ="Uranium"
 	description = "A silvery-white metallic chemical element in the actinide series, weakly radioactive."
 	taste_description = "the inside of a reactor"
 	reagent_state = SOLID
-	color = "#B8B8C0"
+	color = "#b8b8c0"
 
 /datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_ingest(M, alien, removed)
@@ -171,7 +171,7 @@
 /datum/reagent/water/holywater
 	name = "Holy Water"
 	description = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
-	color = "#E0E8EF"
+	color = "#e0e8ef"
 
 	glass_name = "holy water"
 	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
@@ -203,14 +203,14 @@
 	description = "A isocyanate liquid that forms a foam when mixed with water."
 	taste_description = "metal"
 	reagent_state = LIQUID
-	color = "#9E6B38"
+	color = "#9e6b38"
 
 /datum/reagent/foaming_agent // Metal foaming agent. This is lithium hydride. Add other recipes (e.g. LiH + H2O -> LiOH + H2) eventually.
 	name = "Foaming agent"
 	description = "A agent that yields metallic foam when mixed with light metal and a strong acid."
 	taste_description = "metal"
 	reagent_state = SOLID
-	color = "#664B63"
+	color = "#664b63"
 
 /datum/reagent/thermite
 	name = "Thermite"
@@ -241,7 +241,7 @@
 	description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
 	taste_description = "sourness"
 	reagent_state = LIQUID
-	color = "#A5F0EE"
+	color = "#a5f0ee"
 	touch_met = 50
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
@@ -292,7 +292,7 @@
 	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
 	taste_description = "slime"
 	reagent_state = LIQUID
-	color = "#009CA8"
+	color = "#009ca8"
 
 /datum/reagent/lube/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -305,7 +305,7 @@
 	description = "A compound that can be used to reinforce glass."
 	taste_description = "plastic"
 	reagent_state = LIQUID
-	color = "#C7FFFF"
+	color = "#c7ffff"
 
 /datum/reagent/silicate/touch_obj(var/obj/O)
 	if(istype(O, /obj/structure/window))
@@ -338,27 +338,27 @@
 	taste_description = "sourness"
 	taste_mult = 1.1
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 
 /datum/reagent/ultraglue
 	name = "Ultra Glue"
 	description = "An extremely powerful bonding agent."
 	taste_description = "a special education class"
-	color = "#FFFFCC"
+	color = "#ffffcc"
 
 /datum/reagent/woodpulp
 	name = "Wood Pulp"
 	description = "A mass of wood fibers."
 	taste_description = "wood"
 	reagent_state = LIQUID
-	color = "#B97A57"
+	color = "#b97a57"
 
 /datum/reagent/luminol
 	name = "Luminol"
 	description = "A compound that interacts with blood on the molecular level."
 	taste_description = "metal"
 	reagent_state = LIQUID
-	color = "#F2F3F4"
+	color = "#f2f3f4"
 
 /datum/reagent/luminol/touch_obj(var/obj/O)
 	O.reveal_blood()

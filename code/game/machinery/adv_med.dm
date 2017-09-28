@@ -185,12 +185,12 @@
 	anchored = 1
 
 
-/obj/machinery/body_scanconsole/New()
-	..()
-	spawn( 5 )
-		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, WEST))
-		return
-	return
+/obj/machinery/body_scanconsole/Initialize()
+	for(var/D in GLOB.cardinal)
+		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
+		if(src.connected)
+			break
+	return ..()
 
 /*
 
@@ -357,7 +357,7 @@
 			table += "</td><td>[english_list(E.get_scan_results(), nothing_text = "", and_text = ", ")]</td></tr>"
 
 	table += "<tr><td>---</td><td><b>INTERNAL ORGANS</b></td><td>---</td></tr>"
-	for(var/obj/item/organ/I in H.internal_organs)
+	for(var/obj/item/organ/internal/I in H.internal_organs)
 		table += "<tr><td>[I.name]</td>"
 		table += "<td>"
 		if(I.is_broken())

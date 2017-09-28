@@ -4,7 +4,7 @@
 	icon = 'icons/obj/rune.dmi'
 	anchored = 1
 
-	New(location,main = "#FFFFFF",shade = "#000000",var/type = "rune")
+	New(location,main = "#ffffff",shade = "#000000",var/type = "rune")
 		..()
 		loc = location
 

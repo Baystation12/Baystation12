@@ -172,7 +172,7 @@
 	name = "cap"
 	desc = "A cap for children toys."
 	caliber = "caps"
-	color = "#FF0000"
+	color = "#ff0000"
 	projectile_type = /obj/item/projectile/bullet/pistol/cap
 
 // EMP ammo.

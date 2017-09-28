@@ -50,7 +50,7 @@
 		to_chat(src, "<span class='warning'>You cannot currently [use_emote.message_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!</span>")
 		return
 
-	if(m_type == AUDIBLE_MESSAGE && is_muzzled())
+	if(use_emote.message_type == AUDIBLE_MESSAGE && is_muzzled())
 		audible_message("<b>\The [src]</b> makes a muffled sound.")
 		return
 	else

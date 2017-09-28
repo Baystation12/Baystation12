@@ -94,7 +94,7 @@ var/global/list/string_slot_flags = list(
 //////////////////////////
 
 /hook/global_init/proc/populateGlobalLists()
-    possible_cable_coil_colours = sortAssoc(list(
+	possible_cable_coil_colours = sortAssoc(list(
 		"Yellow" = COLOR_YELLOW,
 		"Green" = COLOR_LIME,
 		"Pink" = COLOR_PINK,
@@ -104,7 +104,7 @@ var/global/list/string_slot_flags = list(
 		"Red" = COLOR_RED,
 		"White" = COLOR_WHITE
 	))
-    return 1
+	return 1
 
 /proc/get_mannequin(var/ckey)
 	if(!mannequins_)

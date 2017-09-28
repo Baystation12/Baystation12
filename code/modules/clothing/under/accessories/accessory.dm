@@ -2,7 +2,7 @@
 	name = "tie"
 	desc = "A neosilk clip-on tie."
 	icon = 'icons/obj/clothing/ties.dmi'
-	icon_state = "bluetie"
+	icon_state = "tie"
 	item_state = ""	//no inhands
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
@@ -93,13 +93,16 @@
 		return	//we aren't an object on the ground so don't call parent
 	..()
 
+/obj/item/clothing/accessory/long
+	icon_state = "longtie"
+
 /obj/item/clothing/accessory/blue
 	name = "blue tie"
-	icon_state = "bluetie"
+	color = "#123c5a"
 
 /obj/item/clothing/accessory/red
 	name = "red tie"
-	icon_state = "redtie"
+	color = "#800000"
 
 /obj/item/clothing/accessory/blue_clip
 	name = "blue tie with a clip"
@@ -107,19 +110,21 @@
 
 /obj/item/clothing/accessory/red_long
 	name = "red long tie"
-	icon_state = "redlongtie"
+	icon_state = "longtie"
+	color = "#a02929"
 
 /obj/item/clothing/accessory/black
 	name = "black tie"
-	icon_state = "blacktie"
+	color = "#ffffff"
 
 /obj/item/clothing/accessory/yellow
 	name = "yellow tie"
-	icon_state = "yellowtie"
+	icon_state = "longtie"
+	color = "#c4c83d"
 
 /obj/item/clothing/accessory/navy
 	name = "navy tie"
-	icon_state = "navytie"
+	color = "#182e44"
 
 /obj/item/clothing/accessory/horrible
 	name = "horrible tie"
@@ -128,7 +133,8 @@
 
 /obj/item/clothing/accessory/brown
 	name = "brown tie"
-	icon_state = "browntie"
+	icon_state = "longtie"
+	color = "#b18345"
 
 /obj/item/clothing/accessory/nt
 	name = "\improper NanoTrasen tie with a clip"
@@ -383,6 +389,7 @@
 	icon_state = "fleetrank"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_RANK
+	gender = PLURAL
 
 /obj/item/clothing/accessory/rank/fleet
 	name = "naval ranks"
@@ -605,7 +612,7 @@
 /obj/item/clothing/accessory/department/command
 	name = "command insignia"
 	desc = "Insignia denoting assignment to the command department. These fit Expeditionary Corps uniforms."
-	color = "#E5EA4F"
+	color = "#e5ea4f"
 
 /obj/item/clothing/accessory/department/command/fleet
 	icon_state = "dept_fleet"
@@ -620,7 +627,7 @@
 /obj/item/clothing/accessory/department/engineering
 	name = "engineering insignia"
 	desc = "Insignia denoting assignment to the engineering department. These fit Expeditionary Corps uniforms."
-	color = "#FF7F00"
+	color = "#ff7f00"
 
 /obj/item/clothing/accessory/department/engineering/fleet
 	icon_state = "dept_fleet"
@@ -635,7 +642,7 @@
 /obj/item/clothing/accessory/department/security
 	name = "security insignia"
 	desc = "Insignia denoting assignment to the security department. These fit Expeditionary Corps uniforms."
-	color = "#BF0000"
+	color = "#bf0000"
 
 /obj/item/clothing/accessory/department/security/fleet
 	icon_state = "dept_fleet"
@@ -650,7 +657,7 @@
 /obj/item/clothing/accessory/department/medical
 	name = "medical insignia"
 	desc = "Insignia denoting assignment to the medical department. These fit Expeditionary Corps uniforms."
-	color = "#4C9CE4"
+	color = "#4c9ce4"
 
 /obj/item/clothing/accessory/department/medical/fleet
 	icon_state = "dept_fleet"
@@ -665,7 +672,7 @@
 /obj/item/clothing/accessory/department/supply
 	name = "supply insignia"
 	desc = "Insignia denoting assignment to the supply department. These fit Expeditionary Corps uniforms."
-	color = "#BB9042"
+	color = "#bb9042"
 
 /obj/item/clothing/accessory/department/supply/fleet
 	icon_state = "dept_fleet"
@@ -680,7 +687,7 @@
 /obj/item/clothing/accessory/department/service
 	name = "service insignia"
 	desc = "Insignia denoting assignment to the service department. These fit Expeditionary Corps uniforms."
-	color = "#6EAA2C"
+	color = "#6eaa2c"
 
 /obj/item/clothing/accessory/department/service/fleet
 	icon_state = "dept_fleet"
@@ -690,6 +697,21 @@
 /obj/item/clothing/accessory/department/service/marine
 	icon_state = "dept_marine"
 	desc = "Insignia denoting assignment to the service department. These fit Marine Corps uniforms."
+	on_rolled = list("down" = "none")
+
+/obj/item/clothing/accessory/department/exploration
+	name = "exploration insignia"
+	desc = "Insignia denoting assignment to the exploration department. These fit Expeditionary Corps uniforms."
+	color = "#68099e"
+
+/obj/item/clothing/accessory/department/exploration/fleet
+	icon_state = "dept_fleet"
+	desc = "Insignia denoting assignment to the exploration department. These fit Fleet uniforms."
+	on_rolled = list("rolled" = "dept_fleet_sleeves", "down" = "none")
+
+/obj/item/clothing/accessory/department/exploration/marine
+	icon_state = "dept_marine"
+	desc = "Insignia denoting assignment to the exploration department. These fit Marine Corps uniforms."
 	on_rolled = list("down" = "none")
 
 

@@ -101,3 +101,10 @@
 	name = "khaki short shorts"
 	icon_state = "khaki_shorts_f"
 	worn_state = "khaki_shorts_f"
+
+/obj/item/clothing/under/shorts/blackjumpshorts
+	name = "black jumpsuit shorts"
+	desc = "The latest in space fashion, in a ladies' cut with shorts."
+	icon_state = "black"
+	item_state = "bl_suit"
+	worn_state = "blackf"

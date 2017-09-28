@@ -7,7 +7,7 @@
 	off_icon = "oven_off"
 	cook_type = "baked"
 	cook_time = 300
-	food_color = "#A34719"
+	food_color = "#a34719"
 	can_burn_food = 1
 
 	output_options = list(

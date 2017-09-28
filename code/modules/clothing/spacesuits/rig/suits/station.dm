@@ -229,16 +229,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/medical
 	camera = /obj/machinery/camera/network/medbay
-	species_restricted = list(SPECIES_HUMAN)
+	species_restricted = list(SPECIES_HUMAN, SPECIES_TAJARA)
 
 /obj/item/clothing/suit/space/rig/medical
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA)
 
 /obj/item/clothing/shoes/magboots/rig/medical
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA)
 
 /obj/item/clothing/gloves/rig/medical
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA)
 
 /obj/item/weapon/rig/medical/equipped
 

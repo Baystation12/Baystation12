@@ -48,7 +48,7 @@
 
 /datum/gear/head/bandana
 	display_name = "bandana selection"
-	path = /obj/item/clothing/head/bandana
+	path = /obj/item/clothing/head
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/head/bandana/New()
@@ -67,7 +67,7 @@
 
 /datum/gear/head/cap
 	display_name = "cap selection"
-	path = /obj/item/clothing/head/soft
+	path = /obj/item/clothing/head
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/head/cap/New()
@@ -110,7 +110,7 @@
 
 /datum/gear/head/formalhat
 	display_name = "formal hat selection"
-	path = /obj/item/clothing/head/hasturhood
+	path = /obj/item/clothing/head
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/head/formalhat/New()
@@ -128,7 +128,7 @@
 
 /datum/gear/head/informalhat
 	display_name = "informal hat selection"
-	path = /obj/item/clothing/head/cowboy_hat
+	path = /obj/item/clothing/head
 	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/head/informalhat/New()
@@ -176,6 +176,21 @@
 	display_name = "Sol Central Government Cap"
 	path = /obj/item/clothing/head/soft/sol
 	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/surgical
+	display_name = "surgical cap"
+	path = /obj/item/clothing/head/surgery
+	allowed_roles = STERILE_ROLES
+
+/datum/gear/head/surgical/New()
+	..()
+	var/capcolor = list()
+	capcolor["black cap"] = /obj/item/clothing/head/surgery/black
+	capcolor["blue cap"] = /obj/item/clothing/head/surgery/blue
+	capcolor["green cap"] = /obj/item/clothing/head/surgery/green
+	capcolor["navy blue cap"] = /obj/item/clothing/head/surgery/navyblue
+	capcolor["purple cap"] = /obj/item/clothing/head/surgery/purple
+	gear_tweaks += new/datum/gear_tweak/path(capcolor)
 
 /datum/gear/head/veteranhat
 	display_name = "veteran hat"

@@ -2,15 +2,12 @@
 	#include "overmap_unit_testing.dm"
 
 	#include "bearcat/bearcat.dm"
-	#include "bearcat/bearcat_areas.dm"
-	#include "bearcat/bearcat-1.dmm"
-	#include "bearcat/bearcat-2.dmm"
-
 	#include "sector/sector.dm"
 	#include "sector/sector-1.dmm"
 	#include "sector/sector-2.dmm"
 
-	#include "../../code/modules/lobby_music/absconditus.dm"
+	#include "../../code/modules/lobby_music/businessend.dm"
+	#include "../../code/modules/lobby_music/salutjohn.dm"
 
 	#define using_map_DATUM /datum/map/overmap_example
 

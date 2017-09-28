@@ -108,7 +108,7 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
-	flesh_color = "#34AF10"
+	flesh_color = "#34af10"
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
@@ -154,14 +154,14 @@
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
 
-	min_age = 17
-	max_age = 80
+	min_age = 19
+	max_age = 140
 
-	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
-	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
-	influenced heavily by their long history of Slavemaster rule. They have a structured, clan-influenced way \
-	of family and politics. They prefer colder environments, and speak a variety of languages, mostly Siik'Maas, \
-	using unique inflections their mouths form."
+	blurb = "The Tajaran race is a species of long lived mammalian bipeds hailing from the planet of Ahdomai in the \
+	Shyihie system. They have been introduced to bluespace travel by the humans and Skrell, and their policies have been \
+	structured to prevent another reign of the Overseers. They hold a very spiritual outlook on life and \
+	have recently been fascinated by cybernetic enhancement. They prefer colder environments, \
+	and evolved a layer of thick fur to accommodate this. "
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -176,9 +176,9 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
-	flesh_color = "#AFA59E"
+	flesh_color = "#afa59e"
 	base_color = "#333333"
-	blood_color = "#862A51"
+	blood_color = "#862a51"
 
 	reagent_tag = IS_TAJARA
 
@@ -222,8 +222,8 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
-	flesh_color = "#8CD7A3"
-	blood_color = "#1D2CBF"
+	flesh_color = "#8cd7a3"
+	blood_color = "#1d2cbf"
 	base_color = "#006666"
 
 	cold_level_1 = 280 //Default 260 - Lower is better
@@ -327,7 +327,7 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	blood_color = "#004400"
-	flesh_color = "#907E4A"
+	flesh_color = "#907e4a"
 
 	reagent_tag = IS_DIONA
 	genders = list(PLURAL)

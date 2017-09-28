@@ -311,7 +311,6 @@
 	var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
 	if(!L || nervous_system_failure())
 		failed_last_breath = 1
-		breath_fail_ratio = 1
 	else
 		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
 	return !failed_last_breath
@@ -674,7 +673,7 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(getHalLoss() >= (species.total_health - 100))
+		if(get_shock() >= (species.total_health - 100))
 			if(!stat)
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message].")
@@ -808,7 +807,7 @@
 						var/no_damage = 1
 						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
 						if(can_feel_pain())
-							trauma_val = max(shock_stage,getHalLoss())/(species.total_health-100)
+							trauma_val = max(shock_stage,get_shock())/(species.total_health-100)
 						// Collect and apply the images all at once to avoid appearance churn.
 						var/list/health_images = list()
 						for(var/obj/item/organ/external/E in organs)
@@ -974,13 +973,18 @@
 
 	if(is_asystole())
 		shock_stage = max(shock_stage, 61)
-	if(get_shock() >= max(50, shock_stage))
+	var/traumatic_shock = get_shock()
+	if(traumatic_shock >= max(30, 0.8*shock_stage))
 		shock_stage += 1
 	else
 		shock_stage = min(shock_stage, 160)
-		shock_stage = max(shock_stage-1, 0)
+		var/recovery = 1
+		if(traumatic_shock < 0.5 * shock_stage) //lower shock faster if pain is gone completely
+			recovery++
+		if(traumatic_shock < 0.25 * shock_stage)
+			recovery++
+		shock_stage = max(shock_stage - recovery, 0)
 		return
-
 	if(stat) return 0
 
 	if(shock_stage == 10)
@@ -1001,7 +1005,7 @@
 		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
 		if (prob(2))
 			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", shock_stage, nohalloss = 0)
-			Weaken(20)
+			Weaken(10)
 
 	if(shock_stage >= 80)
 		if (prob(5))
@@ -1086,15 +1090,13 @@
 
 	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
 		var/image/holder = hud_list[ID_HUD]
+		holder.icon_state = "hudunknown"
 		if(wear_id)
 			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
 			if(I)
-				holder.icon_state = "hud[ckey(I.GetJobName())]"
-			else
-				holder.icon_state = "hudunknown"
-		else
-			holder.icon_state = "hudunknown"
-
+				var/datum/job/J = job_master.GetJob(I.GetJobName())
+				if(J)
+					holder.icon_state = J.hud_icon
 
 		hud_list[ID_HUD] = holder
 
@@ -1175,6 +1177,26 @@
 
 	if (thermal_protection < 1 && bodytemperature < burn_temperature)
 		bodytemperature += round(BODYTEMP_HEATING_MAX*(1-thermal_protection), 1)
+
+	var/species_heat_mod = 1
+
+	var/protected_limbs = get_heat_protection_flags(burn_temperature)
+
+
+	if(species)
+		if(burn_temperature < species.heat_level_2)
+			species_heat_mod = 0.5
+		else if(burn_temperature < species.heat_level_3)
+			species_heat_mod = 0.75
+
+	burn_temperature -= species.heat_level_1
+
+	if(burn_temperature < 1)
+		return
+
+	for(var/obj/item/organ/external/E in organs)
+		if(!(E.body_part & protected_limbs) && prob(20))
+			E.take_damage(burn = round(species_heat_mod * log(10, (burn_temperature + 10)), 0.1), used_weapon = fire)
 
 /mob/living/carbon/human/rejuvenate()
 	restore_blood()

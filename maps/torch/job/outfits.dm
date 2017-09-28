@@ -598,27 +598,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	head = /obj/item/clothing/head/utility/marine
 	shoes = /obj/item/clothing/shoes/jungleboots
 
-/decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot //until they get a better uniform
-	name = OUTFIT_JOB_NAME("SolGov Pilot")
-	uniform = /obj/item/clothing/under/utility/expeditionary/officer/command/pilot
-	shoes = /obj/item/clothing/shoes/dutyboots
-	head = /obj/item/clothing/head/soft/sol/expedition
-	id_type = /obj/item/weapon/card/id/torch/crew/solgov_pilot
-	pda_type = /obj/item/device/pda
-	l_ear = /obj/item/device/radio/headset/pilot
-
-/decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/fleet
-	name = OUTFIT_JOB_NAME("Pilot - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet/command/pilot
-	head = /obj/item/clothing/head/utility/fleet
-	shoes = /obj/item/clothing/shoes/dutyboots
-
-/decl/hierarchy/outfit/job/torch/crew/service/solgov_pilot/marine
-	name = OUTFIT_JOB_NAME("Pilot - Marine")
-	uniform = /obj/item/clothing/under/utility/marine/command/pilot
-	head = /obj/item/clothing/head/utility/marine
-	shoes = /obj/item/clothing/shoes/jungleboots
-
 /decl/hierarchy/outfit/job/torch/crew/service/bartender
 	name = OUTFIT_JOB_NAME("Bartender - Torch")
 	uniform = /obj/item/clothing/under/rank/bartender
@@ -647,25 +626,40 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	head = /obj/item/clothing/head/utility/marine
 	shoes = /obj/item/clothing/shoes/jungleboots
 
-//Explorer Outfits
+//Exploration Outfits
 
-/decl/hierarchy/outfit/job/torch/crew/service/pathfinder
+/decl/hierarchy/outfit/job/torch/crew/exploration/solgov_pilot //until they get a better uniform
+	name = OUTFIT_JOB_NAME("SolGov Pilot")
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/exploration/pilot
+	shoes = /obj/item/clothing/shoes/dutyboots
+	head = /obj/item/clothing/head/soft/sol/expedition
+	id_type = /obj/item/weapon/card/id/torch/crew/solgov_pilot
+	pda_type = /obj/item/device/pda/pathfinder
+	l_ear = /obj/item/device/radio/headset/pilot
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/solgov_pilot/fleet
+	name = OUTFIT_JOB_NAME("Pilot - Fleet")
+	uniform = /obj/item/clothing/under/utility/fleet/exploration/pilot
+	head = /obj/item/clothing/head/utility/fleet
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
 	name = OUTFIT_JOB_NAME("Pathfinder")
-	uniform = /obj/item/clothing/under/utility/expeditionary/officer/service 
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/exploration
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/sol/expedition
 	id_type = /obj/item/weapon/card/id/torch/crew/pathfinder
-	pda_type = /obj/item/device/pda
-	l_ear = /obj/item/device/radio/headset/pilot
+	pda_type = /obj/item/device/pda/pathfinder
+	l_ear = /obj/item/device/radio/headset/pathfinder
 
-/decl/hierarchy/outfit/job/torch/crew/service/explorer
+/decl/hierarchy/outfit/job/torch/crew/exploration/explorer
 	name = OUTFIT_JOB_NAME("Explorer")
-	uniform = /obj/item/clothing/under/utility/expeditionary/service
+	uniform = /obj/item/clothing/under/utility/expeditionary/exploration
 	head = /obj/item/clothing/head/soft/sol/expedition
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/explorer
-	pda_type = /obj/item/device/pda
-	l_ear = /obj/item/device/radio/headset
+	pda_type = /obj/item/device/pda/explorer
+	l_ear = /obj/item/device/radio/headset/exploration
 
 //Passenger Outfits
 

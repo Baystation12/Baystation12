@@ -74,6 +74,18 @@
 	icon_state = "blackservice_srvcom"
 	item_state = "blackservice_srvcom"
 
+/obj/item/clothing/suit/storage/service/expeditionary/exploration
+	name = "expeditionary exploration jacket"
+	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons and purple trim."
+	icon_state = "blackservice_exp"
+	item_state = "blackservice_exp"
+
+/obj/item/clothing/suit/storage/service/expeditionary/exploration/command
+	name = "expeditionary exploration command jacket"
+	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and purple trim."
+	icon_state = "blackservice_expcom"
+	item_state = "blackservice_expcom"
+
 /obj/item/clothing/suit/storage/service/expeditionary/command
 	name = "expeditionary command jacket"
 	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and gold trim."
@@ -135,11 +147,23 @@
 	icon_state = "greenservice_srv"
 	item_state = "greenservice_srv"
 
-/obj/item/clothing/suit/storage/service/marine/seervice/command
+/obj/item/clothing/suit/storage/service/marine/service/command
 	name = "marine service command jacket"
 	desc = "An SCG Marine Corps service coat. This one has green and gold markings."
 	icon_state = "greenservice_srvcom"
 	item_state = "greenservice_srvcom"
+
+/obj/item/clothing/suit/storage/service/marine/exploration
+	name = "marine exploration jacket"
+	desc = "An SCG Marine Corps service coat. This one has purple markings."
+	icon_state = "greenservice_exp"
+	item_state = "greenservice_exp"
+
+/obj/item/clothing/suit/storage/service/marine/exploration/command
+	name = "marine exploration command jacket"
+	desc = "An SCG Marine Corps service coat. This one has purple and gold markings."
+	icon_state = "greenservice_expcom"
+	item_state = "greenservice_expcom"
 
 /obj/item/clothing/suit/storage/service/marine/command
 	name = "marine command jacket"

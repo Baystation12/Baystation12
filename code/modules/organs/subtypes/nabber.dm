@@ -86,8 +86,11 @@
 		amount *= 0.1
 
 	var/acetone_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/acetone)
-
-	if((acetone_volume_raw < acetone_level || !acetone_volume_raw) && owner.breath_fail_ratio < 0.25)
+	var/breath_fail_ratio = 1
+	var/obj/item/organ/internal/lungs/nabber/totally_not_lungs_I_swear = owner.internal_organs_by_name[BP_TRACH]
+	if(totally_not_lungs_I_swear)
+		breath_fail_ratio = totally_not_lungs_I_swear.breath_fail_ratio
+	if((acetone_volume_raw < acetone_level || !acetone_volume_raw) && breath_fail_ratio < 0.25)
 		owner.reagents.add_reagent(/datum/reagent/acetone, amount)
 	..()
 
@@ -110,10 +113,10 @@
 
 	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * owner.chem_effects[CE_OXYGENATED]))
 
-	if(H.breath_fail_ratio < 0.25 && owner.chem_effects[CE_OXYGENATED])
+	if(breath_fail_ratio < 0.25 && owner.chem_effects[CE_OXYGENATED])
 		H.oxygen_alert = 0
-	if(H.breath_fail_ratio >= 0.25)
-		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * H.breath_fail_ratio)
+	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_failed_breath + 2 MINUTES))
+		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * breath_fail_ratio)
 		if(owner.chem_effects[CE_OXYGENATED])
 			H.oxygen_alert = 1
 		else
@@ -217,5 +220,6 @@
 	name = "head"
 	eye_icon = "eyes_nabber"
 	eye_icon_location = 'icons/mob/nabber_face.dmi'
+	vital = 0
 	has_lips = 0
 	s_col_blend = ICON_MULTIPLY

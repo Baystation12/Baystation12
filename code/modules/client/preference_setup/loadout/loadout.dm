@@ -110,9 +110,9 @@ var/list/gear_datums = list()
 		if(G)
 			total_cost += G.cost
 
-	var/fcolor =  "#3366CC"
+	var/fcolor =  "#3366cc"
 	if(total_cost < MAX_GEAR_COST)
-		fcolor = "#E67300"
+		fcolor = "#e67300"
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
 	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\>"
@@ -140,7 +140,7 @@ var/list/gear_datums = list()
 			. += " <span class='linkOn'>[category] - [category_cost]</span> "
 		else
 			if(category_cost)
-				. += " <a href='?src=\ref[src];select_category=[category]'><font color = '#E67300'>[category] - [category_cost]</font></a> "
+				. += " <a href='?src=\ref[src];select_category=[category]'><font color = '#e67300'>[category] - [category_cost]</font></a> "
 			else
 				. += " <a href='?src=\ref[src];select_category=[category]'>[category] - 0</a> "
 
@@ -299,7 +299,9 @@ var/list/gear_datums = list()
 		var/obj/O = path
 		description = initial(O.desc)
 	if(flags & GEAR_HAS_COLOR_SELECTION)
-		gear_tweaks += list(gear_tweak_free_color_choice())
+		gear_tweaks += gear_tweak_free_color_choice()
+	if(flags & GEAR_HAS_TYPE_SELECTION)
+		gear_tweaks += new/datum/gear_tweak/path(path)
 
 /datum/gear_data
 	var/path

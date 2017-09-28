@@ -118,7 +118,9 @@
 	to_chat(user, "***** INSTALLATION SELF-DESTRUCT SEQUENCE INITIATED *****")
 	to_chat(user, "Self-destructing in 5 minutes. Use this command again to abort.")
 	user.bombing_station = 1
-	set_security_level("delta")
+
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	security_state.set_security_level(security_state.severe_security_level, TRUE)
 	radio.autosay("Self destruct sequence has been activated. Self-destructing in 5 minutes.", "Self-Destruct Control")
 
 	var/timer = 300

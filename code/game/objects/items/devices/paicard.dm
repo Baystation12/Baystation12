@@ -75,7 +75,7 @@
 					    color: white;
 					}
 					tr.d2 td {
-					    background-color: #00FF00;
+					    background-color: #00ff00;
 					    color: white;
 					    text-align:center;
 					}
@@ -90,7 +90,7 @@
 					}
 					td.button_red {
 					    border: 1px solid #161616;
-					    background-color: #B04040;
+					    background-color: #b04040;
 					    text-align: center;
 					}
 					td.download {
@@ -114,7 +114,7 @@
 					    vertical-align:top;
 					}
 					a {
-					    color:#4477E0;
+					    color:#4477e0;
 					}
 					a.button {
 					    color:white;
@@ -169,13 +169,13 @@
 				<table class="request">
 					<tr>
 						<td class="radio">Transmit:</td>
-						<td><a href='byond://?src=\ref[src];wires=4'>[radio.broadcasting ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
+						<td><a href='byond://?src=\ref[src];wires=4'>[radio.broadcasting ? "<font color=#55ff55>En" : "<font color=#ff5555>Dis" ]abled</font></a>
 
 						</td>
 					</tr>
 					<tr>
 						<td class="radio">Receive:</td>
-						<td><a href='byond://?src=\ref[src];wires=2'>[radio.listening ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
+						<td><a href='byond://?src=\ref[src];wires=2'>[radio.listening ? "<font color=#55ff55>En" : "<font color=#ff5555>Dis" ]abled</font></a>
 
 						</td>
 					</tr>

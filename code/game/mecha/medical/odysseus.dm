@@ -39,8 +39,8 @@
 		set category = "Exosuit Interface"
 		set src = usr.loc
 		var/perspective = input("Select a perspective type.",
-                      "Client perspective",
-                      occupant.client.perspective) in list(MOB_PERSPECTIVE,EYE_PERSPECTIVE)
+					  "Client perspective",
+					  occupant.client.perspective) in list(MOB_PERSPECTIVE,EYE_PERSPECTIVE)
 		log_debug("[perspective]")
 
 		occupant.client.perspective = perspective

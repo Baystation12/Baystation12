@@ -1,10 +1,10 @@
 GLOBAL_LIST_INIT(borer_reagent_types_by_name, setup_borer_reagents())
 
 /proc/setup_borer_reagents()
-    . = list()
-    for(var/reagent_type in list(/datum/reagent/alkysine, /datum/reagent/bicaridine, /datum/reagent/hyperzine, /datum/reagent/tramadol))
-        var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_type]
-        .[R.name] = reagent_type
+	. = list()
+	for(var/reagent_type in list(/datum/reagent/alkysine, /datum/reagent/bicaridine, /datum/reagent/hyperzine, /datum/reagent/tramadol))
+		var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_type]
+		.[R.name] = reagent_type
 
 /mob/living/simple_animal/borer/verb/release_host()
 	set category = "Abilities"

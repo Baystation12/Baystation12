@@ -25,9 +25,9 @@
 	var/datum/reagent/coffee = locate(/datum/reagent/drink/coffee) in owner.reagents.reagent_list
 	if(coffee)
 		if(is_bruised())
-			owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
+			owner.adjustToxLoss(0.1)
 		else if(is_broken())
-			owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
+			owner.adjustToxLoss(0.3)
 
 	//If your kidneys aren't working, your body's going to have a hard time cleaning your blood.
 	if(!owner.reagents.has_reagent(/datum/reagent/dylovene))

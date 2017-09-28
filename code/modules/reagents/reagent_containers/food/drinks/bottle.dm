@@ -429,8 +429,8 @@
 	icon_state = "beer"
 	center_of_mass = "x=16;y=12"
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/ethanol/beer, 30)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/ethanol/beer, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale
 	name = "\improper Magm-Ale"
@@ -439,5 +439,5 @@
 	item_state = "beer"
 	center_of_mass = "x=16;y=10"
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale/New()
-    . = ..()
-    reagents.add_reagent(/datum/reagent/ethanol/ale, 30)
+	. = ..()
+	reagents.add_reagent(/datum/reagent/ethanol/ale, 30)

@@ -164,7 +164,7 @@
 			if(S.dried_type == S.type)
 				S.dry = 1
 				S.name = "dried [S.name]"
-				S.color = "#AAAAAA"
+				S.color = "#aaaaaa"
 				stock_item(S)
 			else
 				var/D = S.dried_type
@@ -224,7 +224,7 @@
 				stock_item(G)
 
 		if(plants_loaded)
-			user.visible_message("<span class='notice'>\The [user] loads \the [src] with \the [P].</span>", "<span class='notice'>You load \the [src] with \the [P].</span>")
+			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [P].</span>", "<span class='notice'>You load \the [src] with the contents of \the [P].</span>")
 			if(P.contents.len > 0)
 				to_chat(user, "<span class='notice'>Some items were refused.</span>")
 

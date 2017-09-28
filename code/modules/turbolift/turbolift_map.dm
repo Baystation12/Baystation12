@@ -192,7 +192,7 @@
 		panel_ext.set_dir(udir)
 		cfloor.ext_panel = panel_ext
 
-        // Place lights
+		// Place lights
 		var/turf/placing1 = locate(light_x1, light_y1, cz)
 		var/turf/placing2 = locate(light_x2, light_y2, cz)
 		var/obj/machinery/light/light1 = new(placing1, light)

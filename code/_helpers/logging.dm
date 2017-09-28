@@ -173,7 +173,7 @@
 
 
 		if(include_link && is_special_character(M) && highlight_special_characters)
-			. += "/(<font color='#FFA500'>[name]</font>)" //Orange
+			. += "/(<font color='#ffa500'>[name]</font>)" //Orange
 		else
 			. += "/([name])"
 

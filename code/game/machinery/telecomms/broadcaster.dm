@@ -377,6 +377,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_cargo += blackbox_msg
 				if(SRV_FREQ)
 					blackbox.msg_service += blackbox_msg
+				if(EXP_FREQ)
+					blackbox.msg_exploration += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
 
@@ -554,6 +556,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_cargo += blackbox_msg
 				if(SRV_FREQ)
 					blackbox.msg_service += blackbox_msg
+				if(EXP_FREQ)
+					blackbox.msg_exploration += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
 

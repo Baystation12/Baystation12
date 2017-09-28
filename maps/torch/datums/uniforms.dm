@@ -14,6 +14,7 @@
 	var/utility_extra = null
 
 	var/service_under = null
+	var/service_skirt = null
 	var/service_over = null
 	var/service_shoes = null
 	var/service_hat = null
@@ -42,6 +43,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary
 	service_shoes = /obj/item/clothing/shoes/dress
 	service_hat = /obj/item/clothing/head/soft/sol/expedition
@@ -67,6 +69,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet, /obj/item/clothing/head/ushanka/fleet, /obj/item/clothing/head/soft/sol/fleet)
 
 	service_under = /obj/item/clothing/under/service/fleet
+	service_skirt = /obj/item/clothing/under/service/fleet/skirt
 	service_over = null
 	service_shoes = /obj/item/clothing/shoes/dress/white
 	service_hat = /obj/item/clothing/head/dress/fleet

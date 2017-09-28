@@ -4,6 +4,9 @@
 	icon_state = "whitepants"
 	gender = PLURAL
 	body_parts_covered = LOWER_TORSO|LEGS
+	item_icons = list(
+		slot_w_uniform_str = 'icons/mob/pants.dmi'
+		)
 
 /obj/item/clothing/under/formal_pants/red
 	name = "red pants"

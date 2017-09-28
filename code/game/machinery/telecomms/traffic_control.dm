@@ -147,7 +147,7 @@
 
 				if("scan")
 					if(servers.len > 0)
-						temp = "<font color = #D70B00>- FAILED: CANNOT PROBE WHEN BUFFER FULL -</font>"
+						temp = "<font color = #d70b00>- FAILED: CANNOT PROBE WHEN BUFFER FULL -</font>"
 
 					else
 						for(var/obj/machinery/telecomms/server/T in range(25, src))
@@ -155,7 +155,7 @@
 								servers.Add(T)
 
 						if(!servers.len)
-							temp = "<font color = #D70B00>- FAILED: UNABLE TO LOCATE SERVERS IN \[[network]\] -</font>"
+							temp = "<font color = #d70b00>- FAILED: UNABLE TO LOCATE SERVERS IN \[[network]\] -</font>"
 						else
 							temp = "<font color = #336699>- [servers.len] SERVERS PROBED & BUFFERED -</font>"
 
@@ -194,7 +194,7 @@
 
 			if(newnet && ((usr in range(1, src) || issilicon(usr))))
 				if(length(newnet) > 15)
-					temp = "<font color = #D70B00>- FAILED: NETWORK TAG STRING TOO LENGHTLY -</font>"
+					temp = "<font color = #d70b00>- FAILED: NETWORK TAG STRING TOO LENGHTLY -</font>"
 
 				else
 

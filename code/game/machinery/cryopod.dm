@@ -207,6 +207,59 @@
 	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
 	applies_stasis = 0
 
+/obj/machinery/cryopod/lifepod
+	name = "life pod"
+	desc = "A man-sized pod for entering suspended animation. Dubbed 'cryocoffin' by more cynical spacers, it is pretty barebone, counting on stasis system to keep the victim alive rather than packing extended supply of food or air. Can be ordered with symbols of common religious denominations to be used in space funerals too."
+	on_store_name = "Life Pod Oversight"
+	time_till_despawn = 20 MINUTES
+	icon_state = "redpod0"
+	base_icon_state = "redpod0"
+	occupied_icon_state = "redpod1"
+	var/launched = 0
+	var/datum/gas_mixture/airtank
+
+/obj/machinery/cryopod/lifepod/Initialize()
+	. = ..()
+	airtank = new()
+	var/turf/T = get_turf(src)
+	if(T)
+		airtank.copy_from(T.air)
+	
+/obj/machinery/cryopod/lifepod/return_air()
+	return airtank
+
+/obj/machinery/cryopod/lifepod/proc/launch()
+	launched = 1
+	for(var/d in GLOB.cardinal)
+		var/turf/T = get_step(src,d)
+		var/obj/machinery/door/blast/B = locate() in T
+		if(B && B.density)
+			B.force_open()
+			break
+
+	var/list/possible_locations = list()
+	if(GLOB.using_map.use_overmap)
+		var/obj/effect/overmap/O = map_sectors["[z]"]
+		for(var/obj/effect/overmap/OO in range(O,2))
+			if(OO.in_space || istype(OO,/obj/effect/overmap/sector/exoplanet))
+				possible_locations |= text2num(level)
+	
+	var/newz = GLOB.using_map.get_empty_zlevel()
+	if(possible_locations.len && prob(10))
+		newz = pick(possible_locations)
+	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)
+	if(!istype(nloc, /turf/space))
+		explosion(nloc, 1, 2, 3)
+	playsound(loc,'sound/effects/rocket.ogg',100)
+	forceMove(nloc)
+
+//Don't use these for in-round leaving
+/obj/machinery/cryopod/lifepod/process()
+	if(evacuation_controller && evacuation_controller.state >= EVAC_LAUNCHING)
+		if(occupant && !launched)
+			launch()
+		..()
+
 /obj/machinery/cryopod/New()
 	announce = new /obj/item/device/radio/intercom(src)
 	..()
@@ -371,8 +424,9 @@
 	//  and records should not be fetched by name as there is no guarantee names are unique
 	var/role_alt_title = occupant.mind ? occupant.mind.role_alt_title : "Unknown"
 
-	control_computer.frozen_crew += "[occupant.real_name], [role_alt_title] - [stationtime2text()]"
-	control_computer._admin_logs += "[key_name(occupant)] ([role_alt_title]) at [stationtime2text()]"
+	if(control_computer)
+		control_computer.frozen_crew += "[occupant.real_name], [role_alt_title] - [stationtime2text()]"
+		control_computer._admin_logs += "[key_name(occupant)] ([role_alt_title]) at [stationtime2text()]"
 	log_and_message_admins("[key_name(occupant)] ([role_alt_title]) entered cryostorage.")
 
 	announce.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
