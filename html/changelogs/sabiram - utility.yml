@@ -1,4 +1,0 @@
-author: sabiram
-delete-after: True
-changes:
-  - rscadd: "The service department has been split. The Sol Pilot, Pathfinder and Explorer are now in the Utility department, with their own department radio. The hotkey for the utility department is 'y'. Bartender, Cook, Janitor and Crewman remain in the service department."

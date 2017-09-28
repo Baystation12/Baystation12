@@ -1,9 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Ships now have sensors. Overmap is dark by default, with known sectors emitting some light. Dust/rocks/ion block visibility. You can control the sensor with console(s) on the bridge, its power setting sets how far it will shine. Higher settings use /huge/ mounts of power so don't leave it running on those. Sensors also cannot run in non-vacuum."
-  - rscadd: "Some improvements to helm console - now shows ETA to next grid, can set max speed for autopilot."
-  - rscadd: "Engines are now buildable - there's circuitboards for them in Tech storage."
-  - rscadd: "Merchant prices are now slightly less wack, they use actual procs for deciding them, instead of selling containeres full of stuff at price of container only."
-  - rscadd: "Mineral scanners now store survey data, currently useless aside from penile comparsions."
-  - rscadd: "New away mission - a drifting empty ship. Can be restored to fly around on its own like Torch."
