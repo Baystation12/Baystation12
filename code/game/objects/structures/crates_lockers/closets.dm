@@ -469,12 +469,12 @@
 	return
 
 // If we use the /obj/structure/closet/proc/togglelock variant BYOND asks the user to select an input for id_card, which is then mostly irrelevant.
-/obj/structure/closet/proc/togglelock_verb(var/mob/user)
+/obj/structure/closet/proc/togglelock_verb()
 	set src in oview(1) // One square distance
 	set category = "Object"
 	set name = "Toggle Lock"
 
-	return togglelock(user)
+	return togglelock(usr)
 
 /obj/structure/closet/proc/togglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
 	if(!(setup & CLOSET_HAS_LOCK))
