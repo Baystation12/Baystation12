@@ -90,25 +90,25 @@
 			sampled = 0
 
 	if(is_mature() && !buckled_mob)
-		for(var/turf/neighbor in neighbors)
+		for(var/turf/neighbor in (neighbors | loc))
 			for(var/mob/living/M in neighbor)
 				if(seed.get_trait(TRAIT_SPREAD) >= 2 && (M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)))))
 					entangle(M)
 
-	if(is_mature() && neighbors.len && prob(spread_chance))
+	if(is_mature() && neighbors.len)
 		//spread to 1-3 adjacent turfs depending on yield trait.
 		var/max_spread = between(1, round(seed.get_trait(TRAIT_YIELD)*3/14), 3)
-
 		for(var/i in 1 to max_spread)
 			if(prob(spread_chance))
 				sleep(rand(3,5))
 				if(!neighbors.len)
 					break
 				spread_to(pick(neighbors))
+				update_neighbors()
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
-	if(buckled_mob || neighbors.len)
+	if(buckled_mob || neighbors.len || !plant)
 		plant_controller.add_plant(src)
 
 //spreading vines aren't created on their final turf.

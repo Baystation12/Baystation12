@@ -66,8 +66,6 @@
 	spread_chance = 0
 
 /obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent, var/start_matured = 0)
-	..()
-	
 	if(!newparent)
 		parent = src
 	else
@@ -76,10 +74,11 @@
 	if(start_matured)
 		mature_time = 0
 		health = max_health
+	..()
 
 /obj/effect/plant/Initialize()
 	. = ..()
-	
+
 	if(!plant_controller)
 		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
 		return INITIALIZE_HINT_QDEL
@@ -114,7 +113,9 @@
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
-	
+
+	process()
+
 /obj/effect/plant/Destroy()
 	if(plant_controller)
 		plant_controller.remove_plant(src)
