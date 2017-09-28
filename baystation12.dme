@@ -1290,6 +1290,7 @@
 #include "code\modules\clothing\under\formal_pants.dm"
 #include "code\modules\clothing\under\mirania.dm"
 #include "code\modules\clothing\under\miscellaneous.dm"
+#include "code\modules\clothing\under\nanotrasen.dm"
 #include "code\modules\clothing\under\shorts.dm"
 #include "code\modules\clothing\under\skirts.dm"
 #include "code\modules\clothing\under\solgov.dm"
