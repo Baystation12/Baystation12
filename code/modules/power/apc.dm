@@ -96,7 +96,6 @@
 	var/locked = 1
 	var/coverlocked = 1
 	var/aidisabled = 0
-	var/tdir = null
 	var/obj/machinery/power/terminal/terminal = null
 	var/lastused_light = 0
 	var/lastused_equip = 0
@@ -179,10 +178,9 @@
 	// this allows the APC to be embedded in a wall, yet still inside an area
 	if (building)
 		set_dir(ndir)
-	src.tdir = dir		// to fix Vars bug
 
-	pixel_x = (src.tdir & 3)? 0 : (src.tdir == 4 ? 24 : -24)
-	pixel_y = (src.tdir & 3)? (src.tdir ==1 ? 24 : -24) : 0
+	pixel_x = (src.dir & 3)? 0 : (src.dir == 4 ? 24 : -24)
+	pixel_y = (src.dir & 3)? (src.dir ==1 ? 24 : -24) : 0
 
 	if (building==0)
 		init_round_start()
@@ -232,7 +230,7 @@
 	// create a terminal object at the same position as original turf loc
 	// wires will attach to this
 	terminal = new/obj/machinery/power/terminal(src.loc)
-	terminal.set_dir(tdir)
+	terminal.set_dir(dir)
 	terminal.master = src
 
 /obj/machinery/power/apc/proc/init_round_start()
