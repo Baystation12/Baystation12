@@ -373,6 +373,7 @@
 #include "code\game\shuttle_engines.dm"
 #include "code\game\sound.dm"
 #include "code\game\supplyshuttle.dm"
+#include "code\game\world.dm"
 #include "code\game\antagonist\_antagonist_setup.dm"
 #include "code\game\antagonist\antagonist.dm"
 #include "code\game\antagonist\antagonist_add.dm"
