@@ -8,9 +8,25 @@
 			cardinal_neighbors |= T
 	return cardinal_neighbors
 
+/obj/effect/plant/proc/get_zlevel_neighbors()
+	var/list/zlevel_neighbors = list()
+
+	var/turf/start = loc
+	var/turf/up = GetAbove(loc)
+	var/turf/down = GetBelow(loc)
+
+	if(start && start.CanZPass(src, DOWN))
+		zlevel_neighbors += down
+	if(up && up.CanZPass(src, UP))
+		zlevel_neighbors += up
+
+	return zlevel_neighbors
+
 /obj/effect/plant/proc/update_neighbors()
 	// Update our list of valid neighboring turfs.
+
 	neighbors = list()
+
 	for(var/turf/simulated/floor in get_cardinal_neighbors())
 		if(get_dist(parent, floor) > spread_distance)
 			continue
@@ -32,6 +48,8 @@
 			continue
 
 		neighbors |= floor
+
+	neighbors |= get_zlevel_neighbors()
 
 	if(neighbors.len)
 		plant_controller.add_plant(src) //if we have neighbours again, start processing
@@ -122,7 +140,7 @@
 
 		//move out to the destination
 		child.anchored = 0
-		step_to(child, target_turf)
+		child.Move(target_turf)
 		child.anchored = 1
 		child.update_icon()
 
@@ -150,12 +168,12 @@
 
 		child.finish_spreading()
 
-
 /obj/effect/plant/proc/die_off()
 	// Kill off our plant.
 	if(plant) plant.die()
 	// This turf is clear now, let our buddies know.
-	for(var/turf/simulated/check_turf in get_cardinal_neighbors())
+	update_neighbors()
+	for(var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors()))
 		if(!istype(check_turf))
 			continue
 		for(var/obj/effect/plant/neighbor in check_turf.contents)

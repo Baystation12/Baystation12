@@ -125,7 +125,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 			seed.chems -= null // Setting to null does not actually remove the entry, which is weird.
 		seed.set_trait(TRAIT_IDEAL_HEAT,293)
 		seed.set_trait(TRAIT_HEAT_TOLERANCE,20)
-		seed.set_trait(TRAIT_IDEAL_LIGHT,8)
+		seed.set_trait(TRAIT_IDEAL_LIGHT,4)
 		seed.set_trait(TRAIT_LIGHT_TOLERANCE,5)
 		seed.set_trait(TRAIT_LOWKPA_TOLERANCE,25)
 		seed.set_trait(TRAIT_HIGHKPA_TOLERANCE,200)
