@@ -196,10 +196,11 @@
 
 //Handles chem traces
 /mob/living/carbon/human/proc/handle_trace_chems()
-	//New are added for reagents to random organs.
-	for(var/datum/reagent/A in reagents.reagent_list)
-		var/obj/item/organ/external/E = pick(organs)
-		E.trace_chemicals[A.name] = 100
+	if(organs)
+		//New are added for reagents to random organs.
+		for(var/datum/reagent/A in reagents.reagent_list)
+			var/obj/item/organ/external/E = pick(organs)
+			E.trace_chemicals[A.name] = 100
 
 /mob/living/carbon/human/proc/sync_organ_dna()
 	var/list/all_bits = internal_organs|organs
