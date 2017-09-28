@@ -118,7 +118,7 @@ default behaviour is:
 				return
 
 			tmob.LAssailant = src
-		if(isobj(AM))
+		if(isobj(AM) && !AM.anchored)
 			var/obj/I = AM
 			if(!can_pull_size || can_pull_size < I.w_class)
 				to_chat(src, "<span class='warning'>It won't budge!</span>")

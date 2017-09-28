@@ -1,0 +1,8 @@
+
+author: FTangSteve
+
+delete-after: True
+
+changes: 
+  - tweak: "AI drones can no longer use non-drone langauge."
+  - tweak: "Drones can no longer push or pull items larger than medium."
