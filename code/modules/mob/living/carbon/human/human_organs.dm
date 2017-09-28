@@ -196,10 +196,13 @@
 
 //Handles chem traces
 /mob/living/carbon/human/proc/handle_trace_chems()
-	//New are added for reagents to random organs.
-	for(var/datum/reagent/A in reagents.reagent_list)
-		var/obj/item/organ/external/E = pick(organs)
-		E.trace_chemicals[A.name] = 100
+	for(var/T in chem_doses)
+		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
+			continue
+		var/datum/reagent/R = GLOB.chemical_reagents_list[T]
+		chem_doses[T] -= R.metabolism*2
+		if(chem_doses[T] <= 0)
+			chem_doses -= T
 
 /mob/living/carbon/human/proc/sync_organ_dna()
 	var/list/all_bits = internal_organs|organs

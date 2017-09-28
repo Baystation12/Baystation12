@@ -6,6 +6,7 @@
 		"blood_type" = null,
 		"blood_colour" = COLOR_BLOOD_HUMAN,
 		"trace_chem" = null,
+		"dose_chem" = null,
 		"virus2" = list(),
 		"antibodies" = list(),
 		"has_oxy" = 1
@@ -39,6 +40,7 @@
 	for(var/datum/reagent/R in C.reagents.reagent_list)
 		temp_chem[R.type] = R.volume
 	data["trace_chem"] = list2params(temp_chem)
+	data["dose_chem"] = list2params(C.chem_doses)
 	data["blood_colour"] = C.species.get_blood_colour(C)
 	color = data["blood_colour"]
 
@@ -71,9 +73,9 @@
 
 /datum/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 
-	if(dose > 5)
+	if(M.chem_doses[type] > 5)
 		M.adjustToxLoss(removed)
-	if(dose > 15)
+	if(M.chem_doses[type] > 15)
 		M.adjustToxLoss(removed)
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
@@ -189,7 +191,7 @@
 			S.Target = null
 		if(S.Victim)
 			S.Feedstop()
-	if(dose == removed)
+	if(M.chem_doses[type] == removed)
 		M.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 		M.confused = max(M.confused, 2)
 
