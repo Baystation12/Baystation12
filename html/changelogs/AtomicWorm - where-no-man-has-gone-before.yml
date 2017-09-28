@@ -1,9 +1,0 @@
-author: Broseph Stylin
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added an Exploration department-specific voidsuit. It has the same stats of an excavation voidsuit."
-  - rscadd: "Added Exploration department-specific colored uniforms and PDAs."
-  - rscadd: "Added lockers for the Pathfinder and Explorers."
-  - maptweak: "An Exploration Equipment area which can only be accessed by the Exploration department has been mapped on Deck 4 Aft."

@@ -1,4 +1,0 @@
-author: sabiram
-delete-after: True
-changes:
-  - bugfix: "Cerulean, pyrite, bluespace and sepia slimes now drop the correct slime core."
