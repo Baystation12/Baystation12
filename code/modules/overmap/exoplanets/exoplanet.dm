@@ -222,7 +222,7 @@
 
 	var/large_flora_prob = 60
 	var/flora_prob = 60
-	var/fauna_prob = 5
+	var/fauna_prob = 2
 	var/flora_diversity = 4
 
 	var/list/fauna_types = list()
