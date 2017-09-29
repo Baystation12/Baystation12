@@ -2,6 +2,7 @@
 /obj/item/organ/internal/liver
 	name = "liver"
 	icon_state = "liver"
+	w_class = ITEM_SIZE_SMALL
 	organ_tag = BP_LIVER
 	parent_organ = BP_GROIN
 	min_bruised_damage = 25
