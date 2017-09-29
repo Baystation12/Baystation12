@@ -1,0 +1,7 @@
+author: Atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "Completely overhauls crew records. Large text fields now support paper tag formatting. Records are now accessed through a computer program. Everyone can see generic fields (name, job, rank, ..), specialized fields become visible depending on your access."
+  - rscdel: "Removed old record computers of all kinds, removed PDA modules for crew record viewing."

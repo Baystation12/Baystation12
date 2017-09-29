@@ -95,7 +95,7 @@
 		if(EDIT_SHORTTEXT)
 			newValue = sanitize(input(usr, "Enter [field_name]:", "Record edit", html_decode(original_value)) as null|text)
 		if(EDIT_LONGTEXT)
-			newValue = sanitize(replacetext(input(usr, "Enter [field_name]. You may use HTML paper formatting tags:", "Record edit", html_decode(original_value)) as null|message, "\n", "\[br\]"))
+			newValue = sanitize(replacetext(input(usr, "Enter [field_name]. You may use HTML paper formatting tags:", "Record edit", replacetext(html_decode(original_value), "\[br\]", "\n")) as null|message, "\n", "\[br\]"))
 		if(EDIT_NUMERIC)
 			newValue = input(usr, "Enter [field_name]:", "Record edit", original_value) as null|num
 		if(EDIT_LIST)
@@ -136,6 +136,11 @@
 			return
 		active_record = new/datum/computer_file/crew_record()
 		GLOB.all_crew_records.Add(active_record)
+		return 1
+	if(href_list["print_active"])
+		if(!active_record)
+			return
+		print_text(record_to_html(active_record, access_med, access_empl, access_sec), usr)
 		return 1
 	if(href_list["dna_search"])
 		if(!access_sec)
@@ -345,3 +350,33 @@
 /obj/machinery/computer/med_data/laptop/New()
 	new/obj/item/modular_computer/console/preset/medical(get_turf(src))
 	qdel(src)
+
+/datum/design/circuit/secdata
+	name = "security records console"
+	id = "sec_data"
+	build_path = /obj/item/weapon/circuitboard/secure_data
+	sort_string = "DABAA"
+
+/datum/design/circuit/med_data
+	name = "medical records console"
+	id = "med_data"
+	build_path = /obj/item/weapon/circuitboard/med_data
+	sort_string = "FAAAA"
+
+/datum/design/circuit/emp_data
+	name = "employment records console"
+	id = "emp_data"
+	build_path = /obj/item/weapon/circuitboard/skills
+	sort_string = "LAAAC"
+
+/obj/item/weapon/circuitboard/med_data
+	name = T_BOARD("medical records console")
+	build_path = /obj/machinery/computer/med_data
+
+/obj/item/weapon/circuitboard/secure_data
+	name = T_BOARD("security records console")
+	build_path = /obj/machinery/computer/secure_data
+
+/obj/item/weapon/circuitboard/skills
+	name = T_BOARD("employment records console")
+	build_path = /obj/machinery/computer/skills

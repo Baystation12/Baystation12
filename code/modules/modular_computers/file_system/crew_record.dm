@@ -95,6 +95,36 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 				matches.Add(CR)
 	return matches
 
+// Simple record to HTML (for paper purposes) conversion.
+// Not visually that nice, but it gets the work done, feel free to tweak it visually
+/proc/record_to_html(var/datum/computer_file/crew_record/CR, var/access_med, var/access_empl, var/access_sec)
+	var/dat = "<H2>RECORD DATABASE DATA DUMP</H2><i>Generated on: [stationdate2text()] [stationtime2text()]</i><br>******************************<br>"
+	dat += "<table><tr><th>Field<th>Content"
+	dat += "<tr><td>Name<td>[CR.GetName()]"
+	dat += "<tr><td>Position<td>[CR.GetPosition()]"
+	dat += "<tr><td>Sex<td>[CR.GetSex()]"
+	dat += "<tr><td>Age<td>[CR.GetAge()]"
+	dat += "<tr><td>Status<td>[CR.GetStatus()]"
+	dat += "<tr><td>Species<td>[CR.GetSpecies()]"
+	dat += "<tr><td>Branch<td>[CR.GetBranch()]"
+	dat += "<tr><td>Rank<td>[CR.GetRank()]"
+	if(access_med)
+		dat += "<tr><td>Blood Type<td>[CR.GetBloodtype()]"
+		dat += "<tr><td>Details (Medical)<td>[pencode2html(CR.GetMedRecord())]"
+	if(access_empl)
+		dat += "<tr><td>Home System<td>[CR.GetHomeSystem()]"
+		dat += "<tr><td>Citizenship<td>[CR.GetCitizenship()]"
+		dat += "<tr><td>Faction<td>[CR.GetFaction()]"
+		dat += "<tr><td>Religion<td>[CR.GetReligion()]"
+		dat += "<tr><td>Details (Employment)<td>[pencode2html(CR.GetEmplRecord())]"
+	if(access_sec)
+		dat += "<tr><td>Criminal Status<td>[CR.GetCriminalStatus()]"
+		dat += "<tr><td>DNA Hash<td>[CR.GetDna()]"
+		dat += "<tr><td>Fingerprint Hash<td>[CR.GetFingerprint()]"
+		dat += "<tr><td>Details (Security)<td>[pencode2html(CR.GetSecRecord())]"
+	dat += "</table><br>******************************"
+	return dat
+
 // Generates a simple HTML crew manifest for use in various places
 /proc/html_crew_manifest(var/monochrome, var/OOC)
 	var/list/heads = new()

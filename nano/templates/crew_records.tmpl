@@ -2,7 +2,7 @@
 	<p>{{:helper.link('X', null, {'clear_message' : 1})}}{{:data.message}}</p>
 {{/if}}
 {{if data.name}}
-	{{:helper.link('BACK', '', {'clear_active' : 1})}}<br><br>
+	{{:helper.link('BACK', '', {'clear_active' : 1})}}{{:helper.link('PRINT', '', {'print_active' : 1})}}<br><br>
 	<div class='statusDisplay'>
 		<div style="text-align: center">
 			<h3>GENERIC INFORMATION</h3>
@@ -59,7 +59,7 @@
     			</div>
     			<div class='item'>
     				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_medrecord' : 1})}}Details:</div>
-    				<div class='itemBody'>{{:data.medrecord}}</div>
+    				<div class='itemBody'><br><br>{{:data.medrecord}}</div>
     			</div>
     		</div>
     	</div>
@@ -83,7 +83,7 @@
     			</div>
     			<div class='item'>
     				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_secrecord' : 1})}}Details:</div>
-    				<div class='itemBody'>{{:data.secrecord}}</div>
+    				<div class='itemBody'><br><br>{{:data.secrecord}}</div>
     			</div>
     		</div>
     	</div>
@@ -111,7 +111,7 @@
     			</div>
     			<div class='item'>
     				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_emplrecord' : 1})}}Details:</div>
-    				<div class='itemBody'>{{:data.emplrecord}}</div>
+    				<div class='itemBody'><br><br>{{:data.emplrecord}}</div>
     			</div>
     		</div>
     	</div>
@@ -123,7 +123,7 @@
 			</div>
 				<div class='item'>
     				<div class='itemLabel'>Details:</div>
-    				<div class='itemBody'>{{:data.antagrecord}}</div>
+    				<div class='itemBody'><br><br>{{:data.antagrecord}}</div>
     			</div>
     		</div>
     	</div>

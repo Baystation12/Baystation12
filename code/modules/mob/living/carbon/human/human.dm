@@ -404,8 +404,9 @@
 			for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
 				if (E.GetName() == perpname)
 					if(hasHUD(usr,"security"))
-						to_chat(usr, "<b>Name:</b> [E.GetName()]	<b>Criminal Status:</b> [E.GetCriminalStatus()]")
-						to_chat(usr, "<b>Details:</b> [html_encode(E.GetSecRecord())]")
+						to_chat(usr, "<b>Name:</b> [E.GetName()]")
+						to_chat(usr, "<b>Criminal Status:</b> [E.GetCriminalStatus()]")
+						to_chat(usr, "<b>Details:</b> [pencode2html(E.GetSecRecord())]")
 						read = 1
 
 			if(!read)
@@ -461,7 +462,7 @@
 						to_chat(usr, "<b>Gender:</b> [E.GetSex()]")
 						to_chat(usr, "<b>Species:</b> [E.GetSpecies()]")
 						to_chat(usr, "<b>Blood Type:</b> [E.GetBloodtype()]")
-						to_chat(usr, "<b>Details:</b> [html_encode(E.GetMedRecord())]")
+						to_chat(usr, "<b>Details:</b> [pencode2html(E.GetMedRecord())]")
 						read = 1
 
 			if(!read)
