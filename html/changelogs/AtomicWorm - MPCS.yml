@@ -1,0 +1,8 @@
+author: Broseph Stylin
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added some code by Techhead that allows for accessories to have and transfer armor values to the item they are attached to."
+  - rscadd: "Added a modular armor system based around a common plate carrier and accessories that attach to it."
+  - maptweak: "Replaced the armor vests and arm guards found inside the Emergency Armory with equivalents using the new modular armor system."
