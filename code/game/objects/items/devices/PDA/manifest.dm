@@ -51,7 +51,7 @@ name updates also zero the list; although they are not in data_core, synths are 
 		if(GLOB.using_map.flags & MAP_HAS_RANK && t.fields["mil_rank"] && t.fields["mil_rank"] != "None")
 			var/datum/mil_rank/mil_rank_datum = mil_branches.get_rank(t.fields["mil_branch"], t.fields["mil_rank"])
 			if(mil_rank_datum)
-				mil_rank = list("full" = mil_rank_datum.name, "short" = mil_rank_datum.name_short)
+				mil_rank = list("full" = mil_rank_datum.name, "short" = mil_rank_datum.name_short, "grade" = mil_rank_datum.grade() ? " ([mil_rank_datum.grade()])" : "")
 
 
 		if(real_rank in GLOB.command_positions)
