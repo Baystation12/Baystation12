@@ -96,31 +96,6 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                 </div>
                  <br>
             {{/if}}
-            {{if data.cartridge.access.access_medical == 1}}
-                <div class="item">
-                    <div class="itemLabelNarrow">
-                            <b>Medical</b>:
-                    </div>
-                    <div class="itemContent">
-                            {{:helper.link('Medical Records', 'gear', {'choice' : "44"}, null, 'fixedLeftWide')}}
-                            {{:helper.link(data.scanmode == 1 ? 'Disable Med Scanner' : 'Enable Med Scanner', 'gear', {'choice' : "Medical Scan"}, null , 'fixedLeftWide')}}
-                    </div>
-                </div>
-                <br>
-            {{/if}}
-            {{if data.cartridge.access.access_security == 1}}
-                <div class="item">
-                    <div class="itemLabelNarrow">
-                            <b>Security</b>:
-                    </div>
-                    <div class="itemContent">
-                        {{:helper.link('Security Records', 'gear', {'choice' : "45"}, null, 'fixedLeftWide')}}
-                        {{if data.cartridge.radio ==1}} {{:helper.link('Security Bot Access', 'gear', {'choice' : "46"}, null, 'fixedLeftWide')}} {{/if}}
-                        <br>
-                    </div>
-                </div>
-                <br>
-            {{/if}}
             {{if data.cartridge.access.access_quartermaster == 1}}
                 <div class="item">
                     <div class="itemLabelNarrow">

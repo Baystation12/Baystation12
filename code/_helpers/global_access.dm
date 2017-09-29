@@ -1179,8 +1179,6 @@
 			return global.vote;
 		if("vsc")
 			return global.vsc;
-		if("warrant_uid")
-			return global.warrant_uid;
 		if("wax_recipes")
 			return global.wax_recipes;
 		if("weighted_mundaneevent_locations")
@@ -1213,7 +1211,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2394,8 +2392,6 @@
 			global.vote=newval;
 		if("vsc")
 			global.vsc=newval;
-		if("warrant_uid")
-			global.warrant_uid=newval;
 		if("wax_recipes")
 			global.wax_recipes=newval;
 		if("weighted_mundaneevent_locations")
@@ -2428,7 +2424,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",

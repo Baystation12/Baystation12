@@ -1,3 +1,6 @@
+{{if data.message}}
+	<p>{{:helper.link('X', null, {'clear_message' : 1})}}{{:data.message}}</p>
+{{/if}}
 {{if data.name}}
 	{{:helper.link('BACK', '', {'clear_active' : 1})}}<br><br>
 	<div class='statusDisplay'>
@@ -8,6 +11,10 @@
 				<img src='side.png' width = 128px>
     		</div>
 		</div>
+		<div class='item'>
+    		<div class='itemLabel'>&nbsp</div>
+    		<div class='itemBody'>{{:helper.link('Edit Front', 'pencil', {'edit_photo_front' : 1})}}{{:helper.link('Edit Side', 'pencil', {'edit_photo_side' : 1})}}</div>
+    	</div>
     	<div class='item'>
     		<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_name' : 1})}}Name:</div>
     		<div class='itemBody'>{{:data.name}}</div>
@@ -122,8 +129,17 @@
     	</div>
 	{{/if}}
 {{else}}
+	{{:helper.link('New Record', 'new', {'new_record' : 1}, data.has_empl ? null : 'disabled')}}
+	{{:helper.link('DNA Search', 'search', {'dna_search' : 1}, data.has_sec ? null : 'disabled')}}
+	{{:helper.link('Fingerprint Search', 'search', {'fingerprint_search' : 1}, data.has_sec ? null : 'disabled')}}
+	<br><br>
 	<h2>Available records:</h2>
+	<table style="width:100%">
+	<tr><th style="width:60%">Name<th style="width:20%">Position<th style="width:20%">Rank
 	{{for data.all_records}}
-		{{:helper.link(value.name, '', {'set_active' : value.id})}}
+		<tr><td>{{:helper.link(value.name, '', {'set_active' : value.id})}}
+		<td>{{:value.rank}}
+		<td>{{:value.milrank}}
 	{{/for}}
+	</table>
 {{/if}}

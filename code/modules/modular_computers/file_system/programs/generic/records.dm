@@ -16,6 +16,7 @@
 /datum/nano_module/records
 	name = "Crew Records"
 	var/datum/computer_file/crew_record/active_record
+	var/message = null
 
 /datum/nano_module/records/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
@@ -28,6 +29,11 @@
 	if(istype(PC) && PC.computer_emagged)
 		access_antag = TRUE
 
+	data["message"] = message
+	data["has_med"] = access_med
+	data["has_sec"] = access_sec
+	data["has_empl"] = access_empl
+	data["has_antag"] = access_antag
 	if(active_record)
 		user << browse_rsc(active_record.photo_front, "front.png")
 		user << browse_rsc(active_record.photo_side, "side.png")
@@ -41,31 +47,28 @@
 		data["rank"] = active_record.GetRank()
 		// Actually transmit only the data the client can access, to prevent exploits.
 		if(access_med)
-			data["has_med"] = 1
 			data["bloodtype"] = active_record.GetBloodtype()
 			data["medrecord"] = pencode2html(active_record.GetMedRecord())
 		if(access_sec)
-			data["has_sec"] = 1
 			data["dna"] = active_record.GetDna()
 			data["criminalstatus"] = active_record.GetCriminalStatus()
 			data["fingerprint"] = active_record.GetFingerprint()
 			data["secrecord"] = pencode2html(active_record.GetSecRecord())
 		if(access_empl)
-			data["has_empl"] = 1
 			data["emplrecord"] = pencode2html(active_record.GetEmplRecord())
 			data["home_system"] = active_record.GetHomeSystem()
 			data["citizenship"] = active_record.GetCitizenship()
 			data["faction"] = active_record.GetFaction()
 			data["religion"] = active_record.GetReligion()
 		if(access_antag)
-			data["has_antag"] = 1
 			data["antagrecord"] = pencode2html(active_record.GetAntagRecord())
 	else
 		var/list/all_records = list()
+
 		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
 			all_records.Add(list(list(
 				"name" = R.GetName(),
-				"rank" = R.GetRank(),
+				"rank" = R.GetPosition(),
 				"milrank" = R.GetRank(),
 				"id" = R.uid
 			)))
@@ -112,6 +115,9 @@
 	if(href_list["clear_active"])
 		active_record = null
 		return 1
+	if(href_list["clear_message"])
+		message = null
+		return 1
 	if(href_list["set_active"])
 		var/ID = text2num(href_list["set_active"])
 		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
@@ -120,14 +126,60 @@
 				break
 		return 1
 
-	var/datum/computer_file/crew_record/R = active_record
-	if(!istype(R))
-		return 1
 	var/access_med = check_access(usr, access_medical)
 	var/access_sec = check_access(usr, access_security)
 	var/access_empl = check_access(usr, access_heads)		// Both for editing of Generic and Employment fields
 
+	if(href_list["new_record"])
+		if(!access_empl)
+			to_chat(usr, "Access Denied.")
+			return
+		active_record = new/datum/computer_file/crew_record()
+		GLOB.all_crew_records.Add(active_record)
+		return 1
+	if(href_list["dna_search"])
+		if(!access_sec)
+			to_chat(usr, "Access Denied.")
+			return
+		var/dna_hash = sanitize(input("Enter DNA hash for search.") as null|text)
+		if(!dna_hash)
+			return
+		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
+			if(R.GetDna() == dna_hash)
+				active_record = R
+				return 1
+		message = "Unable to find DNA hash '[dna_hash]'"
+		return 1
+	if(href_list["fingerprint_search"])
+		if(!access_sec)
+			to_chat(usr, "Access Denied.")
+			return
+		var/fingerprint_hash = sanitize(input("Enter fingerprint hash for search.") as null|text)
+		if(!fingerprint_hash)
+			return
+		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
+			if(R.GetFingerprint() == fingerprint_hash)
+				active_record = R
+				return 1
+		message = "Unable to find fingerprint hash '[fingerprint_hash]'"
+		return 1
+
+	var/datum/computer_file/crew_record/R = active_record
+	if(!istype(R))
+		return 1
+
 	// Generic records editing
+	if(href_list["edit_photo_front"])
+		var/photo = get_photo(usr)
+		if(photo && active_record && access_empl)
+			active_record.photo_front = photo
+		return 1
+	if(href_list["edit_photo_side"])
+		var/photo = get_photo(usr)
+		if(photo && active_record && access_empl)
+			active_record.photo_side = photo
+		return 1
+
 	if(href_list["edit_name"])
 		var/newValue = edit_field(R.GetName(), "name", access_empl, EDIT_SHORTTEXT)
 		if(newValue)
@@ -254,7 +306,42 @@
 			R.SetEmplRecord(newValue)
 		return 1
 
+/datum/nano_module/records/proc/get_photo(var/mob/user)
+	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
+		var/obj/item/weapon/photo/photo = user.get_active_hand()
+		return photo.img
+	if(istype(user, /mob/living/silicon))
+		var/mob/living/silicon/tempAI = usr
+		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
+		if (selection)
+			return selection.img
+
 #undef EDIT_SHORTTEXT
 #undef EDIT_LONGTEXT
 #undef EDIT_NUMERIC
 #undef EDIT_LIST
+
+// TODO: TEMPORARY PLACEHOLDER SPAWNERS. REMOVE ONCE MAP CHANGES ARE COMMITED.
+/obj/machinery/computer/secure_data/New()
+	new/obj/item/modular_computer/console/preset/security(get_turf(src))
+	qdel(src)
+
+/obj/machinery/computer/skills/New()
+	new/obj/item/modular_computer/console/preset/command(get_turf(src))
+	qdel(src)
+
+/obj/machinery/computer/med_data/New()
+	new/obj/item/modular_computer/console/preset/medical(get_turf(src))
+	qdel(src)
+
+/obj/structure/filingcabinet/security/New()
+	new/obj/item/modular_computer/console/preset/security(get_turf(src))
+	qdel(src)
+
+/obj/structure/filingcabinet/medical/New()
+	new/obj/item/modular_computer/console/preset/medical(get_turf(src))
+	qdel(src)
+
+/obj/machinery/computer/med_data/laptop/New()
+	new/obj/item/modular_computer/console/preset/medical(get_turf(src))
+	qdel(src)

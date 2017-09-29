@@ -9,7 +9,7 @@
 	throw_range = 10
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	var/datum/data/record/warrant/active
+	var/datum/computer_file/data/warrant/active
 
 //look at it
 /obj/item/device/holowarrant/examine(mob/user)
@@ -25,16 +25,15 @@
 /obj/item/device/holowarrant/attack_self(mob/living/user as mob)
 	active = null
 	var/list/warrants = list()
-	if(!isnull(GLOB.data_core.general))
-		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
-			if(!W.archived)
-				warrants += W.fields["namewarrant"]
+	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
+		if(!W.archived)
+			warrants += W.fields["namewarrant"]
 	if(warrants.len == 0)
 		to_chat(user,"<span class='notice'>There are no warrants available</span>")
 		return
 	var/temp
 	temp = input(user, "Which warrant would you like to load?") as null|anything in warrants
-	for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
+	for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 		if(W.fields["namewarrant"] == temp)
 			active = W
 	update_icon()

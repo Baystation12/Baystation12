@@ -186,29 +186,29 @@
 		nanoui_data["items"] = items
 	else if(nanoui_menu == 2)
 		var/permanentData[0]
-		for(var/datum/data/record/L in sortRecord(GLOB.data_core.locked))
-			permanentData[++permanentData.len] = list(Name = L.fields["name"],"id" = L.fields["id"])
+		for(var/datum/computer_file/crew_record/L in GLOB.all_crew_records)
+			permanentData[++permanentData.len] = list(Name = L.GetName(),"id" = L.uid)
 		nanoui_data["exploit_records"] = permanentData
 	else if(nanoui_menu == 21)
 		nanoui_data["exploit_exists"] = 0
 
-		for(var/datum/data/record/L in GLOB.data_core.locked)
-			if(L.fields["id"] == exploit_id)
+		for(var/datum/computer_file/crew_record/L in GLOB.all_crew_records)
+			if(L.uid == exploit_id)
 				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
 								 // and if it's sanitized for html.
-				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.fields["exploit_record"])                         		// Change stuff into html
+				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.GetAntagRecord())                         		// Change stuff into html
 				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // change line breaks into <br>
-				nanoui_data["exploit"]["name"] =  html_encode(L.fields["name"])
-				nanoui_data["exploit"]["sex"] =  html_encode(L.fields["sex"])
-				nanoui_data["exploit"]["age"] =  html_encode(L.fields["age"])
-				nanoui_data["exploit"]["species"] =  html_encode(L.fields["species"])
-				nanoui_data["exploit"]["rank"] =  html_encode(L.fields["rank"])
-				nanoui_data["exploit"]["home_system"] =  html_encode(L.fields["home_system"])
-				nanoui_data["exploit"]["citizenship"] =  html_encode(L.fields["citizenship"])
-				nanoui_data["exploit"]["faction"] =  html_encode(L.fields["faction"])
-				nanoui_data["exploit"]["religion"] =  html_encode(L.fields["religion"])
-				nanoui_data["exploit"]["fingerprint"] =  html_encode(L.fields["fingerprint"])
+				nanoui_data["exploit"]["name"] =  html_encode(L.GetName())
+				nanoui_data["exploit"]["sex"] =  html_encode(L.GetSex())
+				nanoui_data["exploit"]["age"] =  html_encode(L.GetAge())
+				nanoui_data["exploit"]["species"] =  html_encode(L.GetSpecies())
+				nanoui_data["exploit"]["rank"] =  html_encode(L.GetRank())
+				nanoui_data["exploit"]["home_system"] =  html_encode(L.GetHomeSystem())
+				nanoui_data["exploit"]["citizenship"] =  html_encode(L.GetCitizenship())
+				nanoui_data["exploit"]["faction"] =  html_encode(L.GetFaction())
+				nanoui_data["exploit"]["religion"] =  html_encode(L.GetReligion())
+				nanoui_data["exploit"]["fingerprint"] =  html_encode(L.GetFingerprint())
 
 				nanoui_data["exploit_exists"] = 1
 				break
