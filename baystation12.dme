@@ -1318,6 +1318,7 @@
 #include "code\modules\clothing\under\accessories\storage.dm"
 #include "code\modules\clothing\under\accessories\ties.dm"
 #include "code\modules\clothing\under\accessories\solgov\department.dm"
+#include "code\modules\clothing\under\accessories\solgov\ranks_ec.dm"
 #include "code\modules\clothing\under\accessories\solgov\ranks_fleet.dm"
 #include "code\modules\clothing\under\accessories\solgov\ranks_marine.dm"
 #include "code\modules\clothing\under\jobs\civilian.dm"

@@ -56,10 +56,6 @@
 	name = "ranks (E-9 master chief petty officer of the Fleet)"
 	desc = "Insignia denoting the rank of Master Chief Petty Officer of the Fleet."
 
-/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt5
-	name = "ranks (E-9 master chief petty officer of the Expeditionary Corps)"
-	desc = "Insignia denoting the rank of Master Chief Petty Officer of the Expeditionary Corps."
-
 /obj/item/clothing/accessory/rank/fleet/officer
 	name = "ranks (O-1 ensign)"
 	desc = "Insignia denoting the rank of Ensign."
