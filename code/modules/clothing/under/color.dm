@@ -16,6 +16,13 @@
 	has_sensor = 2
 	sensor_mode = 3
 
+/obj/item/clothing/under/color/blackjumpshorts
+	name = "black jumpsuit shorts"
+	desc = "The latest in space fashion, in a ladies' cut with shorts."
+	icon_state = "black"
+	item_state = "bl_suit"
+	worn_state = "blackshortsf"
+
 // coloured jumpsuits, male pattern
 
 /obj/item/clothing/under/color
