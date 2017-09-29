@@ -1,0 +1,44 @@
+<div class='item'>
+	<div class="itemLabel">
+		Sector map view:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.viewing ? 'Engaged' : 'Disengaged', 'shuffle', { 'toggle_view' : 1 }, null, data.viewing ? 'selected' : null)}}
+	</div>
+</div>
+{{for data.readings}}
+<div class='block'>
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='white'>Power:</span>
+		</div>
+		<div class="itemContent">
+			{{:helper.link(value.enabled ? 'Online' : 'Offline', null, { 'toggle_power' : value.uid })}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='white'>Range:</span>
+		</div>
+		<div class="itemContent">
+			{{:helper.link(value.range, null, { 'set_range' : value.uid })}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='white'>Power Usage:</span>
+		</div>
+		<div class="itemContent">
+			{{:value.powerusage}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='white'>Status:</span>
+		</div>
+		<div class="itemContent">
+			{{:value.status}}
+		</div>
+	</div>
+</div>
+{{/for}}

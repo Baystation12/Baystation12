@@ -118,11 +118,7 @@ var/list/possible_cable_coil_colours
 ///////////////////////////////////
 
 /obj/structure/cable/proc/get_wattage()
-	if(powernet.avail >= 1000000000)
-		return "[round(powernet.avail/1000000, 0.01)] MW"
-	if(powernet.avail >= 1000000)
-		return "[round(powernet.avail/1000, 0.01)] kW"
-	return "[round(powernet.avail)] W"
+	return get_wattage(powernet.avail)
 
 //If underfloor, hide the cable
 /obj/structure/cable/hide(var/i)
