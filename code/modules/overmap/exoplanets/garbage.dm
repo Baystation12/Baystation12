@@ -48,7 +48,6 @@
 	..()
 	var/v = noise2value(value)
 	if(v > 5)
-		T.icon_state = "desert[v-1]"
 		new/obj/structure/rubble/house(T)
 	else
 		if(prob(2))

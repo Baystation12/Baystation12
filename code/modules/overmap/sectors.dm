@@ -45,6 +45,10 @@ var/list/points_of_interest = list()
 	if(base)
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
+	//handle automatic waypoints that spawned before us
+	for(var/obj/effect/shuttle_landmark/automatic/L in world)
+		if(L.z in map_z)
+			L.add_to_sector(src, 1)
 
 	//find shuttle waypoints
 	var/list/found_waypoints = list()

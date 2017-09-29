@@ -744,11 +744,11 @@
 
 /area/quartermaster/exploration
 	name = "\improper Exploration Equipment"
-	icon_state = "mining"
+	icon_state = "exploration"
 
 /area/quartermaster/hangar
 	name = "\improper Hangar Deck"
-	icon_state = "mining"
+	icon_state = "hangar"
 	sound_env = LARGE_ENCLOSED
 
 // Research
