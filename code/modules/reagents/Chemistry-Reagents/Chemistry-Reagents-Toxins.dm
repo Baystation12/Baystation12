@@ -452,11 +452,14 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/obj/item/organ/internal/brain/brain = M.internal_organs_by_name[BP_BRAIN]
 	if(alien == IS_DIONA)
 		return
 	M.jitteriness = max(M.jitteriness - 5, 0)
-	if(prob(80))
-		M.adjustBrainLoss(0.1 * removed)
+	if(!brain.past_damage_threshold(0)
+		M.adjustBrainLoss(4 * removed)
+	else
+		M.adjustBrainLoss(removed)
 	if(prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
