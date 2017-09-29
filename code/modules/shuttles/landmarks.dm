@@ -78,13 +78,18 @@
 	base_area = get_area(src)
 	if(!GLOB.using_map.use_overmap)
 		return
-	var/obj/effect/overmap/O = map_sectors["[z]"]
+	add_to_sector(map_sectors["[z]"])
+
+/obj/effect/shuttle_landmark/automatic/proc/add_to_sector(var/obj/effect/overmap/O, var/tag_only)
 	if(!istype(O))
 		return
+	name = "[O.name] - [name]"
 	if(shuttle_restricted)
-		O.restricted_waypoints += src
+		if(!O.restricted_waypoints[shuttle_restricted])
+			O.restricted_waypoints[shuttle_restricted] = list()
+		O.restricted_waypoints[shuttle_restricted] += tag_only ? tag : src
 	else
-		O.generic_waypoints  += src
+		O.generic_waypoints += tag_only ? tag : src
 
 //Subtype that calls explosion on init to clear space for shuttles
 /obj/effect/shuttle_landmark/automatic/clearing
