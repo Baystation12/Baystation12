@@ -11,6 +11,7 @@ SUBSYSTEM_DEF(open_space)
 	init_order = INIT_OPEN_SPACE
 	var/list/turfs_to_process = list()		// List of turfs queued for update.
 	var/list/turfs_to_process_old = list()  //List of previous turfs that is set to update
+	var counter = 1 //Can't use .len because we need to iterate in order
 
 
 
@@ -36,6 +37,7 @@ turf/simulated/open/LateInitialize()
 
 	//If we're not resuming, this must mean it's a new iteration so we have to grab the turfs
 	if(!resumed)
+		counter = 1
 		src.turfs_to_process_old = turfs_to_process
 		//Clear list
 		turfs_to_process = list()
@@ -43,9 +45,9 @@ turf/simulated/open/LateInitialize()
 	//Apparently this is actually faster
 	var/list/turfs_to_process_old = src.turfs_to_process_old
 
-	while(turfs_to_process_old.len)
-		var/turf/T = turfs_to_process_old[turfs_to_process_old.len]
-		turfs_to_process_old.len--
+	while(counter <= turfs_to_process_old.len)
+		var/turf/T = turfs_to_process_old[counter]
+		counter += 1
 		update_turf(T)
 		if (MC_TICK_CHECK)
 			return
@@ -58,8 +60,13 @@ turf/simulated/open/LateInitialize()
 /datum/controller/subsystem/open_space/proc/add_turf(var/turf/T, var/recursive = 0)
 	ASSERT(isturf(T))
 	//Check for multiple additions
-	if(!(T in turfs_to_process))
-		turfs_to_process += T
+	if((T in turfs_to_process))
+		//If we want to add it again, the implication is
+		//That we need to know what happened below
+		//so It has to happen after previous addition
+		//take it out and readd
+		turfs_to_process -= T
+	turfs_to_process += T
 	if(recursive > 0)
 		var/turf/above = GetAbove(T)
 		if(above && isopenspace(above))

@@ -49,14 +49,14 @@
 			return global.SSgarbage;
 		if("SSlegacy")
 			return global.SSlegacy;
-		if("SSopen_space")
-			return global.SSopen_space;
 		if("SSmachines")
 			return global.SSmachines;
 		if("SSmobs")
 			return global.SSmobs;
 		if("SSobj")
 			return global.SSobj;
+		if("SSopen_space")
+			return global.SSopen_space;
 		if("SSprocessing")
 			return global.SSprocessing;
 		if("Tier1Runes")
@@ -1138,14 +1138,14 @@
 			global.SSgarbage=newval;
 		if("SSlegacy")
 			global.SSlegacy=newval;
-		if("SSopen_space")
-			global.SSopen_space=newval;
 		if("SSmachines")
 			global.SSmachines=newval;
 		if("SSmobs")
 			global.SSmobs=newval;
 		if("SSobj")
 			global.SSobj=newval;
+		if("SSopen_space")
+			global.SSopen_space=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
 		if("Tier1Runes")
@@ -2202,10 +2202,10 @@
 	"SSfastprocess",
 	"SSgarbage",
 	"SSlegacy",
-	"SSopen_space",
 	"SSmachines",
 	"SSmobs",
 	"SSobj",
+	"SSopen_space",
 	"SSprocessing",
 	"Tier1Runes",
 	"Tier2Runes",
