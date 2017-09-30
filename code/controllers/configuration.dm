@@ -204,6 +204,8 @@ var/list/gamemode_cache = list()
 
 	var/list/language_prefixes = list(",","#","-")//Default language prefixes
 
+	var/allow_chat_markup = 0 // Mark-up enabling
+
 	var/ghosts_can_possess_animals = 0
 	var/delist_when_no_admins = FALSE
 
@@ -706,6 +708,9 @@ var/list/gamemode_cache = list()
 					var/list/values = splittext(value, " ")
 					if(values.len > 0)
 						language_prefixes = values
+
+				if("allow_chat_markup")
+					config.allow_chat_markup = 1
 
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE
