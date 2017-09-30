@@ -190,8 +190,10 @@
 	name = "bioprinter"
 	desc = "It's a machine that prints replacement organs."
 	icon_state = "bioprinter"
-
-	var/amount_per_slab = 50
+	var/list/amount_list = list(
+		/obj/item/weapon/reagent_containers/food/snacks/meat = 50,
+		/obj/item/weapon/reagent_containers/food/snacks/rawcutlet = 15
+		)
 
 /obj/machinery/organ_printer/flesh/mapped/Initialize()
 	. = ..()
@@ -200,8 +202,8 @@
 /obj/machinery/organ_printer/flesh/dismantle()
 	var/turf/T = get_turf(src)
 	if(T)
-		while(stored_matter >= amount_per_slab)
-			stored_matter -= amount_per_slab
+		while(stored_matter >= amount_list[/obj/item/weapon/reagent_containers/food/snacks/meat])
+			stored_matter -= amount_list[/obj/item/weapon/reagent_containers/food/snacks/meat]
 			new /obj/item/weapon/reagent_containers/food/snacks/meat(T)
 	return ..()
 
@@ -218,17 +220,19 @@
 
 /obj/machinery/organ_printer/flesh/attackby(obj/item/weapon/W, mob/user)
 	// Load with matter for printing.
-	if(istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
-		if((max_stored_matter - stored_matter) < amount_per_slab)
-			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
+	for(var/path in amount_list)
+		if(istype(W, path))
+			if((max_stored_matter - stored_matter) < amount_list[path])
+				to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
+				return
+			stored_matter += amount_list[path]
+			user.drop_item()
+			to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>")
+			qdel(W)
 			return
-		stored_matter += amount_per_slab
-		user.drop_item()
-		to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>")
-		qdel(W)
-		return
+
 	// DNA sample from syringe.
-	else if(istype(W,/obj/item/weapon/reagent_containers/syringe))
+	if(istype(W,/obj/item/weapon/reagent_containers/syringe))
 		var/obj/item/weapon/reagent_containers/syringe/S = W
 		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
 		if(injected && injected.data)
