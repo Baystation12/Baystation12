@@ -107,3 +107,8 @@
 	name = "autoinjector (oxycodone)"
 	icon_state = "black"
 	starts_with = list(/datum/reagent/tramadol/oxycodone = 5)
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/mindbreaker
+	name = "autoinjector"
+	icon_state = "black"
+	starts_with = list(/datum/reagent/mindbreaker = 5)
