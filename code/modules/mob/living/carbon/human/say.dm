@@ -1,4 +1,4 @@
-/mob/living/carbon/human/say(var/message, var/datum/language/language = null)
+/mob/living/carbon/human/say(var/message, var/datum/language/language = null, whispering)
 	var/alt_name = ""
 	if(name != GetVoice())
 		if(get_id_name("Unknown") != GetVoice())
@@ -24,7 +24,7 @@
 		else if(L.breath_fail_ratio > 0.4 && length(message) > 10)
 			whisper_say(message, language, alt_name)
 	else
-		..(message, alt_name = alt_name, speaking = language)
+		..(message, alt_name = alt_name, speaking = language, whispering = whispering)
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
