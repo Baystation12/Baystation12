@@ -172,7 +172,7 @@
 
 // Geneloss/cloneloss.
 /obj/item/organ/external/proc/get_genetic_damage()
-	return ((species.flags & NO_SCAN) || robotic >= ORGAN_ROBOT) ? 0 : genetic_degradation
+	return ((species && (species.flags & NO_SCAN)) || robotic >= ORGAN_ROBOT) ? 0 : genetic_degradation
 
 /obj/item/organ/external/proc/remove_genetic_damage(var/amount)
 	if((species.flags & NO_SCAN) || robotic >= ORGAN_ROBOT)

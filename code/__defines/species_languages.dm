@@ -16,7 +16,8 @@
 #define SPECIES_IS_RESTRICTED       0x2    // Is not a core/normally playable species. (castes, mutantraces)
 #define SPECIES_CAN_JOIN            0x4    // Species is selectable in chargen.
 #define SPECIES_NO_FBP_CONSTRUCTION 0x8    // FBP of this species can't be made in-game.
-#define SPECIES_NO_FBP_CHARGEN      0x10    // FBP of this species can't be selected at chargen.
+#define SPECIES_NO_FBP_CHARGEN      0x10   // FBP of this species can't be selected at chargen.
+#define SPECIES_NO_LACE             0x20   // This species can't have a neural lace.
 
 // Species appearance flags
 #define HAS_SKIN_TONE     0x1    // Skin tone selectable in chargen. (0-255)

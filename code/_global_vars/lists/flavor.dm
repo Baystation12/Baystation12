@@ -5,11 +5,6 @@ GLOBAL_LIST_INIT(robot_module_types, list(
 	"Research"
 )) // This shouldn't be a static list. Am I the only one who cares about extendability around here?
 
-GLOBAL_LIST_INIT(station_departments, list(
-	"Command", "Medical", "Engineering",
-	"Science", "Security", "Cargo",
-	"Civilian")) // See above
-
 //Uplink spawn loc
 #define UPLINK_PDA   "PDA"
 #define UPLINK_RADIO "Headset"

@@ -232,7 +232,11 @@
 		var/datum/data/record/G = CreateGeneralRecord(H, id)
 
 		//Medical Record
-		CreateMedicalRecord(H, id)
+		var/datum/data/record/M = CreateMedicalRecord(H.real_name, id)
+		M.fields["b_type"]		= H.b_type
+		M.fields["b_dna"]		= H.dna.unique_enzymes
+		if(H.med_record && !jobban_isbanned(H, "Records"))
+			M.fields["notes"] = H.med_record
 
 		//Security Record
 		var/datum/data/record/S = CreateSecurityRecord(H.real_name, id)
@@ -322,25 +326,18 @@
 	var/datum/data/record/M = new()
 	M.name = "Medical Record #[id]"
 	M.fields["id"]			= id
-	M.fields["name"]		= H.real_name
-	M.fields["species"]		= H.species.name
-	M.fields["b_type"]		= H.b_type
-	M.fields["b_dna"]		= H.dna.unique_enzymes
-	M.fields["id_gender"]	= H.gender
-
-	var/obj/item/organ/list/robo_organs = list()
-	for(var/obj/item/organ/external/O in H.organs)
-		if(O.robotic >= ORGAN_ROBOT)
-			robo_organs[O.organ_tag] = O.name
-	for(var/obj/item/organ/internal/O in H.internal_organs)
-		if(O.robotic >= ORGAN_ROBOT)
-			robo_organs[O.organ_tag] = O.name
-
-	M.fields["prosthetics"]	= robo_organs
-	M.fields["notes"] = "No notes found."
-	if(H.med_record && !jobban_isbanned(H, "Records"))
-		M.fields["notes"] = H.med_record
-
+	M.fields["name"]		= name
+	M.fields["b_type"]		= "AB+"
+	M.fields["b_dna"]		= md5(name)
+	M.fields["id_gender"]	= "Unknown"
+	M.fields["mi_dis"]		= "None"
+	M.fields["mi_dis_d"]	= "No minor disabilities have been declared."
+	M.fields["ma_dis"]		= "None"
+	M.fields["ma_dis_d"]	= "No major disabilities have been diagnosed."
+	M.fields["alg"]			= "None"
+	M.fields["alg_d"]		= "No allergies have been detected in this patient."
+	M.fields["cdi"]			= "None"
+	M.fields["cdi_d"]		= "No diseases have been diagnosed at the moment."
 	GLOB.data_core.medical += M
 
 	return M

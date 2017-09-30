@@ -60,14 +60,16 @@
 /obj/item/weapon/reagent_containers/hypospray/autoinjector
 	name = "autoinjector"
 	desc = "A rapid and safe way to administer small amounts of drugs by untrained or trained personnel."
-	icon_state = "autoinjector"
+	icon_state = "blue"
 	item_state = "autoinjector"
 	amount_per_transfer_from_this = 5
 	volume = 5
+	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 5)
+	for(var/T in starts_with)
+		reagents.add_reagent(T, starts_with[T])
 	update_icon()
 	return
 
@@ -90,3 +92,18 @@
 		to_chat(user, "<span class='notice'>It is currently loaded.</span>")
 	else
 		to_chat(user, "<span class='notice'>It is spent.</span>")
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox
+	name = "autoinjector (antitox)"
+	icon_state = "green"
+	starts_with = list(/datum/reagent/dylovene = 5)
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/pain
+	name = "autoinjector (painkiller)"
+	icon_state = "purple"
+	starts_with = list(/datum/reagent/tramadol = 5)
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/combatpain
+	name = "autoinjector (oxycodone)"
+	icon_state = "black"
+	starts_with = list(/datum/reagent/tramadol/oxycodone = 5)

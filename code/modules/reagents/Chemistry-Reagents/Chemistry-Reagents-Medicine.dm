@@ -15,7 +15,6 @@
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
-	M.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
@@ -80,7 +79,6 @@
 	M.hallucination = max(0, M.hallucination - 9 * removed)
 	M.add_up_to_chemical_effect(CE_ANTITOX, 1)
 
-	// TODO: stomach pump
 	var/removing = (4 * removed)
 	for(var/datum/reagent/R in M.ingested.reagent_list)
 		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
@@ -202,10 +200,11 @@
 	color = "#cb68fc"
 	overdose = 30
 	scannable = 1
-	metabolism = 0.02
+	metabolism = 0.05
+	ingest_met = 0.02
 	flags = IGNORE_MOB_SIZE
 	var/pain_power = 80 //magnitide of painkilling effect
-	var/effective_dose = 0.2 //how many units it need to process to reach max power
+	var/effective_dose = 0.5 //how many units it need to process to reach max power
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/effectiveness = 1
@@ -258,6 +257,7 @@
 	color = "#800080"
 	overdose = 20
 	pain_power = 200
+	effective_dose = 2
 
 /datum/reagent/tramadol/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -697,7 +697,7 @@
 		M.add_chemical_effect(CE_PULSE, 1)
 	else if(dose < 1)
 		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
-	M.add_chemical_effect(CE_PULSE, 1)
+	M.add_chemical_effect(CE_PULSE, 2)
 	if(dose > 5)
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())

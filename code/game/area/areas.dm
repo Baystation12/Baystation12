@@ -274,7 +274,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 	var/turf/T = get_turf(L)
 	var/hum = 0
-	if(!L.ear_deaf)
+	if(!L.ear_deaf && !always_unpowered && power_environ)
 		for(var/obj/machinery/atmospherics/unary/vent_pump/vent in src)
 			if(vent.can_pump())
 				hum = 1
@@ -296,7 +296,7 @@ var/list/mob/living/forced_ambiance_list = new
 		else
 			sound_to(L, sound(null, channel = 1))
 	else if(src.ambience.len && prob(35))
-		if((world.time >= L.client.played + 600))
+		if((world.time >= L.client.played + 900))
 			var/sound = pick(ambience)
 			L.playsound_local(T, sound(sound, repeat = 0, wait = 0, volume = 25, channel = 1))
 			L.client.played = world.time

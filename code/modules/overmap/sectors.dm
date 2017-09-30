@@ -45,6 +45,10 @@ var/list/points_of_interest = list()
 	if(base)
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
+	//handle automatic waypoints that spawned before us
+	for(var/obj/effect/shuttle_landmark/automatic/L in world)
+		if(L.z in map_z)
+			L.add_to_sector(src, 1)
 
 	//find shuttle waypoints
 	var/list/found_waypoints = list()
@@ -66,6 +70,11 @@ var/list/points_of_interest = list()
 				log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
 		restricted_waypoints[shuttle_name] = found_waypoints
 
+	for(var/obj/machinery/computer/sensors/S in GLOB.machines)
+		if (S.z in map_z)
+			S.linked = src
+			testing("Sensor console at level [S.z] linked to overmap object '[name]'.")
+
 	. = ..()
 
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
@@ -81,8 +90,10 @@ var/list/points_of_interest = list()
 
 /obj/effect/overmap/sector/Initialize()
 	. = ..()
-	for(var/obj/machinery/computer/helm/H in GLOB.machines)
-		H.get_known_sectors()
+	if(known)
+		set_light(2, 5)
+		for(var/obj/machinery/computer/helm/H in GLOB.machines)
+			H.get_known_sectors()
 
 /proc/build_overmap()
 	if(!GLOB.using_map.use_overmap)
@@ -98,7 +109,6 @@ var/list/points_of_interest = list()
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
 			T = T.ChangeTurf(/turf/unsimulated/map/)
-		T.lighting_clear_overlay()
 		turfs += T
 
 	var/area/overmap/A = new

@@ -50,7 +50,7 @@
 	var/on = 1
 	var/datum/ship_engine/thermal/controller
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
-	var/moles_per_burn = 10
+	var/moles_per_burn = 5
 
 /obj/machinery/atmospherics/unary/engine/Initialize()
 	. = ..()
@@ -122,3 +122,14 @@
 	playsound(loc, 'sound/effects/spray.ogg', 50, 1, -1)
 	spawn(20)
 		qdel(src)
+
+/obj/item/weapon/circuitboard/unary_atmos/engine
+	name = T_BOARD("gas thruster")
+	icon_state = "mcontroller"
+	build_path = /obj/machinery/atmospherics/unary/engine/
+	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 2)
+	req_components = list(
+							/obj/item/stack/cable_coil = 2,
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/capacitor = 1,
+							/obj/item/pipe = 2)

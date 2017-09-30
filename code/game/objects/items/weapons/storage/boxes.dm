@@ -67,16 +67,34 @@
 	foldable = null //special form fitted boxes should not be foldable.
 
 /obj/item/weapon/storage/box/survival/
+	name = "crew survival kit"
+	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and white stripe indicate this one contains oxygen."
+	icon_state = "survival"
 	startswith = list(/obj/item/clothing/mask/breath = 1,
-					/obj/item/weapon/tank/emergency/oxygen = 1)
+					/obj/item/weapon/tank/emergency/oxygen = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
+					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/vox/
+	name = "vox survival kit"
+	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and black stripe indicate this one contains nitrogen."
+	icon_state = "survivalvox"
 	startswith = list(/obj/item/clothing/mask/breath = 1,
-					/obj/item/weapon/tank/emergency/nitrogen = 1)
+					/obj/item/weapon/tank/emergency/nitrogen = 1,
+					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/engineer/
+	name = "engineer survival kit"
+	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and orange stripe indicate this one as the engineering variant."
+	icon_state = "survivaleng"
 	startswith = list(/obj/item/clothing/mask/breath = 1,
-					/obj/item/weapon/tank/emergency/oxygen/engi = 1)
+					/obj/item/weapon/tank/emergency/oxygen/engi = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox = 1,
+					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of sterile gloves"
@@ -297,7 +315,7 @@
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
 	icon_state = "mousetraps"
 	startswith = list(/obj/item/device/assembly/mousetrap = 6)
-	
+
 /obj/item/weapon/storage/box/mousetraps/empty
 	startswith = null
 
@@ -355,7 +373,7 @@
 
 /obj/item/weapon/storage/box/lights/bulbs
 	startswith = list(/obj/item/weapon/light/bulb = 21)
-	
+
 /obj/item/weapon/storage/box/lights/bulbs/empty
 	startswith = null
 
@@ -364,7 +382,7 @@
 	icon_state = "lighttube"
 	startswith = list(/obj/item/weapon/light/tube = 17,
 					/obj/item/weapon/light/tube/large = 4)
-					
+
 /obj/item/weapon/storage/box/lights/tubes/empty
 	startswith = null
 
@@ -374,7 +392,7 @@
 	startswith = list(/obj/item/weapon/light/tube = 12,
 					/obj/item/weapon/light/tube/large = 4,
 					/obj/item/weapon/light/bulb = 5)
-					
+
 /obj/item/weapon/storage/box/lights/mixed/empty
 	startswith = null
 
@@ -384,6 +402,11 @@
 	startswith = list(/obj/item/device/flashlight/glowstick = 1, /obj/item/device/flashlight/glowstick/red = 1,
 					/obj/item/device/flashlight/glowstick/blue = 1, /obj/item/device/flashlight/glowstick/orange = 1,
 					/obj/item/device/flashlight/glowstick/yellow = 1, /obj/item/device/flashlight/glowstick/random = 1)
+
+/obj/item/weapon/storage/box/greenglowsticks
+	name = "box of green glowsticks"
+	icon_state = "box"
+	startswith = list(/obj/item/device/flashlight/glowstick = 6)
 
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"

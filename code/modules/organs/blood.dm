@@ -259,8 +259,16 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	if(!heart || (heart.pulse == PULSE_NONE && !(status_flags & FAKEDEATH) && heart.robotic < ORGAN_ROBOT))
 		blood_volume *= 0.25
 	else
-		blood_volume *= max(0.3, (1-(heart.damage / heart.max_damage)))
-	return blood_volume
+		var/pulse_mod = 1
+		switch(heart.pulse)
+			if(PULSE_SLOW)
+				pulse_mod *= 0.9
+			if(PULSE_FAST)
+				pulse_mod *= 1.1
+			if(PULSE_2FAST, PULSE_THREADY)
+				pulse_mod *= 1.25
+		blood_volume *= max(0.3, (1-(heart.damage / heart.max_damage))) * pulse_mod
+	return min(blood_volume, 100)
 
 //Whether the species needs blood to carry oxygen. Used in get_blood_oxygenation and may be expanded based on blood rather than species in the future.
 /mob/living/carbon/human/proc/blood_carries_oxygen()
@@ -287,4 +295,4 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 		oxygenated_mult = 0.8
 	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
 	blood_volume = blood_volume * blood_volume_mod
-	return blood_volume
+	return min(blood_volume, 100)

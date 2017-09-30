@@ -22,6 +22,7 @@
 			if(!E)
 				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
 			E.internal_organs |= src
+			E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
 
 /obj/item/organ/internal/Destroy()
 	if(owner)

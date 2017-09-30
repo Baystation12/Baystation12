@@ -4,6 +4,7 @@
 	gender = PLURAL
 	organ_tag = BP_LUNGS
 	parent_organ = BP_CHEST
+	w_class = ITEM_SIZE_NORMAL
 	min_bruised_damage = 25
 	min_broken_damage = 45
 	max_damage = 70
@@ -105,7 +106,7 @@
 		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, affecting = parent)
 	bruise()
 
-/obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath)
+/obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath, var/forced)
 	if(!owner)
 		return 1
 	if(!breath)
@@ -131,7 +132,7 @@
 	// Lung damage increases the minimum safe pressure.
 	safe_pressure_min *= 1 + rand(1,4) * damage/max_damage
 
-	if(owner.chem_effects[CE_BREATHLOSS] && !owner.chem_effects[CE_STABLE]) //opiates are bad mmkay
+	if(!forced && owner.chem_effects[CE_BREATHLOSS] && !owner.chem_effects[CE_STABLE]) //opiates are bad mmkay
 		safe_pressure_min *= 1 + rand(1,4) * owner.chem_effects[CE_BREATHLOSS]
 
 	var/failed_inhale = 0
@@ -145,12 +146,13 @@
 	var/toxins_pp = (poison/breath.total_moles)*breath_pressure
 	var/exhaled_pp = (exhaling/breath.total_moles)*breath_pressure
 
+	var/inhale_efficiency = max(round(inhale_pp/safe_pressure_min, 0.001), 3)
 	// Not enough to breathe
-	if(inhale_pp < safe_pressure_min)
+	if(inhale_efficiency < 1)
 		if(prob(20) && active_breathing)
 			owner.emote("gasp")
 
-		breath_fail_ratio = round(1 - inhale_pp/safe_pressure_min, 0.001)
+		breath_fail_ratio = 1 - inhale_efficiency
 		failed_inhale = 1
 	else
 		breath_fail_ratio = 0
@@ -224,7 +226,7 @@
 			last_failed_breath = world.time
 	else
 		last_failed_breath = null
-		owner.adjustOxyLoss(-5)
+		owner.adjustOxyLoss(-5 * inhale_efficiency)
 		if(robotic < ORGAN_ROBOT && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
 			if(breathing || owner.shock_stage >= 10)
 				sound_to(owner, sound(species.breathing_sound,0,0,0,5))

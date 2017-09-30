@@ -15,7 +15,7 @@
 	dissonance_spread = rand(1500, 2500) / 100
 
 /obj/item/weapon/ore/strangerock
-	name = "Strange rock"
+	name = "strange rock"
 	desc = "Seems to have some unusal strata evident throughout it."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "strange"

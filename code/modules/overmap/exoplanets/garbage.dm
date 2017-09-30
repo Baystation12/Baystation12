@@ -42,17 +42,17 @@
 	large_flora_prob = 0
 	flora_diversity = 2
 	fauna_types = list(/mob/living/simple_animal/hostile/hivebot, /mob/living/simple_animal/hostile/hivebot/range, /mob/living/simple_animal/hostile/viscerator)
+	fauna_prob = 1
 
 /datum/random_map/noise/exoplanet/garbage/get_additional_spawns(var/value, var/turf/T)
 	..()
 	var/v = noise2value(value)
 	if(v > 5)
-		T.icon_state = "desert[v-1]"
 		new/obj/structure/rubble/house(T)
 	else
 		if(prob(2))
 			new/obj/structure/rubble/war(T)
-		if(prob(0.5))
+		if(prob(0.02))
 			var/datum/artifact_find/A = new()
 			new A.artifact_find_type(T)
 			qdel(A)
