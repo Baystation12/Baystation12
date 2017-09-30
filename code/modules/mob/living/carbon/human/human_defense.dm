@@ -22,17 +22,32 @@ meteor_act
 			P.on_hit(src, 100, def_zone)
 			return 100
 
-	//Shrapnel
-	if(!(species.flags & NO_EMBED) && P.can_embed())
-		var/obj/item/organ/external/organ = get_organ(def_zone)
-		var/armor = getarmor_organ(organ, "bullet")
-		if(prob(20 + max(P.damage - armor, -10)))
-			var/obj/item/weapon/material/shard/shrapnel/SP = new()
-			if(P.name != "shrapnel")
-				SP.name = "[P.name] shrapnel"
-			SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."
-			SP.loc = organ
-			organ.embed(SP)
+	var/obj/item/organ/external/organ = get_organ(def_zone)
+	var/armor = getarmor_organ(organ, P.check_armour)
+	var/penetrating_damage = ((P.damage + P.armor_penetration) * P.penetration_modifier) - armor
+
+	//Organ damage
+	if(organ.internal_organs.len && prob(35 + max(penetrating_damage, -12.5)))
+		var/damage_amt = min((P.damage * P.penetration_modifier), penetrating_damage) //So we don't factor in armor_penetration as additional damage
+		if(damage_amt > 0)
+		// Damage an internal organ
+			var/list/victims = list()
+			var/list/possible_victims = shuffle(organ.internal_organs.Copy())
+			for(var/obj/item/organ/internal/I in possible_victims)
+				if(I.damage < I.max_damage && (prob((I.relative_size) * (1 / max(1, victims.len)))))
+					victims += I
+			if(victims.len)
+				for(var/obj/item/organ/victim in victims)
+					damage_amt /= 2
+					victim.take_damage(damage_amt)
+
+	//Embed or sever artery
+	if(prob(22.5 + max(penetrating_damage, -10)) && !(prob(50) && (organ.sever_artery())) && (P.can_embed() && !(species.flags & NO_EMBED)))
+		var/obj/item/weapon/material/shard/shrapnel/SP = new()
+		SP.name = (P.name != "shrapnel")? "[P.name] shrapnel" : "shrapnel"
+		SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."
+		SP.loc = organ
+		organ.embed(SP)
 
 	var/blocked = ..(P, def_zone)
 

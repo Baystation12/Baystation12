@@ -10,6 +10,15 @@
 	max_ammo = 6
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/c50
+	name = "speed loader (.50)"
+	icon_state = "38"
+	caliber = ".50"
+	ammo_type = /obj/item/ammo_casing/a50
+	matter = list(DEFAULT_WALL_MATERIAL = 1260)
+	max_ammo = 6
+	multiple_sprites = 1
+
 /obj/item/ammo_magazine/c38
 	name = "speed loader (.38)"
 	icon_state = "38"
@@ -156,23 +165,23 @@
 /obj/item/ammo_magazine/a10mm/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/a556
-	name = "magazine (5.56mm)"
+/obj/item/ammo_magazine/a762
+	name = "magazine (7.62mm)"
 	icon_state = "5.56"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	caliber = "a556"
+	caliber = "a762"
 	matter = list(DEFAULT_WALL_MATERIAL = 1800)
-	ammo_type = /obj/item/ammo_casing/a556
+	ammo_type = /obj/item/ammo_casing/a762
 	max_ammo = 15 //if we lived in a world where normal mags had 30 rounds, this would be a 20 round mag
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/a556/empty
+/obj/item/ammo_magazine/a762/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/a556/practice
-	name = "magazine (5.56mm practice)"
-	ammo_type = /obj/item/ammo_casing/a556/practice
+/obj/item/ammo_magazine/a762/practice
+	name = "magazine (7.62mm practice)"
+	ammo_type = /obj/item/ammo_casing/a762/practice
 
 /obj/item/ammo_magazine/a50
 	name = "magazine (.50)"
@@ -200,27 +209,27 @@
 /obj/item/ammo_magazine/a75/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/box/a762
-	name = "magazine box (7.62mm)"
+/obj/item/ammo_magazine/box/a556
+	name = "magazine box (5.56mm)"
 	icon_state = "a762"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	caliber = "a762"
+	caliber = "a556"
 	matter = list(DEFAULT_WALL_MATERIAL = 4500)
-	ammo_type = /obj/item/ammo_casing/a762
+	ammo_type = /obj/item/ammo_casing/a556
 	max_ammo = 50
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/box/a762/empty
+/obj/item/ammo_magazine/box/a556/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/c762
-	name = "magazine (7.62mm)"
+/obj/item/ammo_magazine/c556
+	name = "magazine (5.56mm)"
 	icon_state = "c762"
 	mag_type = MAGAZINE
-	caliber = "a762"
+	caliber = "a556"
 	matter = list(DEFAULT_WALL_MATERIAL = 1800)
-	ammo_type = /obj/item/ammo_casing/a762
+	ammo_type = /obj/item/ammo_casing/a556
 	max_ammo = 20
 	multiple_sprites = 1
 
