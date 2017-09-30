@@ -232,53 +232,10 @@
 			apply_damage(real_damage, (attack.deal_halloss ? PAIN : BRUTE), hit_zone, armour, damage_flags=attack.damage_flags())
 
 		if(I_DISARM)
-			admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
-			M.do_attack_animation(src)
+			if(H.species)
+				admin_attack_log(M, src, "Disarmed their victim.", "Was disarmed.", "disarmed")
+				H.species.disarm_attackhand(H, src)
 
-			if(w_uniform)
-				w_uniform.add_fingerprint(M)
-			var/obj/item/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
-
-			var/list/holding = list(get_active_hand() = 40, get_inactive_hand = 20)
-
-			//See if they have any guns that might go off
-			for(var/obj/item/weapon/gun/W in holding)
-				if(W && prob(holding[W]))
-					var/list/turfs = list()
-					for(var/turf/T in view())
-						turfs += T
-					if(turfs.len)
-						var/turf/target = pick(turfs)
-						visible_message("<span class='danger'>[src]'s [W] goes off during the struggle!</span>")
-						return W.afterattack(target,src)
-
-			var/randn = rand(1, 100)
-			if(!(species.flags & NO_SLIP) && randn <= 25)
-				var/armor_check = run_armor_check(affecting, "melee")
-				apply_effect(3, WEAKEN, armor_check)
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-				if(armor_check < 100)
-					visible_message("<span class='danger'>[M] has pushed [src]!</span>")
-				else
-					visible_message("<span class='warning'>[M] attempted to push [src]!</span>")
-				return
-
-			if(randn <= 60)
-				//See about breaking grips or pulls
-				if(break_all_grabs(M))
-					playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-					return
-
-				//Actually disarm them
-				for(var/obj/item/I in holding)
-					if(I)
-						drop_from_inventory(I)
-						visible_message("<span class='danger'>[M] has disarmed [src]!</span>")
-						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-						return
-
-			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-			visible_message("<span class='danger'>[M] attempted to disarm \the [src]!</span>")
 	return
 
 /mob/living/carbon/human/proc/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, inrange, params)
