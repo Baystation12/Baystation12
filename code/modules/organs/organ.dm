@@ -4,6 +4,7 @@ var/list/organ_cache = list()
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
 	germ_level = 0
+	w_class = ITEM_SIZE_TINY
 
 	// Strings.
 	var/organ_tag = "organ"           // Unique identifier.
@@ -50,8 +51,8 @@ var/list/organ_cache = list()
 		max_damage = min_broken_damage * 2
 
 	if(istype(holder))
-		src.owner = holder
-		src.w_class = max(src.w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
+		owner = holder
+		w_class = max(w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
 
 		if(holder.dna)
 			dna = holder.dna.Clone()
