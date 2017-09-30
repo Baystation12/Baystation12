@@ -995,7 +995,7 @@
 	else
 		return 0
 
-/obj/machinery/power/apc/process()
+/obj/machinery/power/apc/Process()
 
 	if(stat & (BROKEN|MAINT))
 		return

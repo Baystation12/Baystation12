@@ -55,7 +55,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 		update_icon()
 
 
-	process()
+	Process()
 		if(!parent)
 			..()
 		else

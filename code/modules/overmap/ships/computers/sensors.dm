@@ -19,7 +19,7 @@
 	. = ..()
 
 /obj/machinery/computer/sensors/proc/find_sensors()
-	for(var/obj/machinery/shipsensors/S in GLOB.machines)
+	for(var/obj/machinery/shipsensors/S in SSmachines.machinery)
 		if (S.z in GetConnectedZlevels(z))
 			sensors = S
 			break
@@ -40,7 +40,7 @@
 			data["status"] = "NO POWER"
 		else if(!sensors.in_vacuum())
 			data["status"] = "VACUUM SEAL BROKEN"
-		else 
+		else
 			data["status"] = "OK"
 	else
 		data["status"] = "MISSING"
@@ -94,7 +94,7 @@
 	if(sensors)
 		if (href_list["range"])
 			var/nrange = input("Set new sensors range", "Sensor range", sensors.range) as num|null
-			if(!CanInteract(usr,state)) 
+			if(!CanInteract(usr,state))
 				return
 			if (nrange)
 				sensors.set_range(Clamp(nrange, 1, world.view))
@@ -103,7 +103,7 @@
 			sensors.toggle()
 			return 1
 
-/obj/machinery/computer/sensors/process()
+/obj/machinery/computer/sensors/Process()
 	..()
 	if(!linked)
 		return
@@ -111,7 +111,7 @@
 		linked.set_light(sensors.range+1, 5)
 	else
 		linked.set_light(0)
-	
+
 /obj/machinery/shipsensors
 	name = "sensors suite"
 	desc = "Long range gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
@@ -180,7 +180,7 @@
 	use_power = !use_power
 	update_icon()
 
-/obj/machinery/shipsensors/process()
+/obj/machinery/shipsensors/Process()
 	..()
 	if(use_power) //can't run in non-vacuum
 		if(!in_vacuum())

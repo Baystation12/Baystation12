@@ -35,7 +35,7 @@
 	if(beaker)
 		beaker.forceMove(get_step(loc, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
 		beaker = null
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/atmos_init()
 	..()
@@ -46,7 +46,7 @@
 			node = target
 			break
 
-/obj/machinery/atmospherics/unary/cryo_cell/process()
+/obj/machinery/atmospherics/unary/cryo_cell/Process()
 	..()
 	if(!node)
 		return

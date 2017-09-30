@@ -18,13 +18,12 @@
 	..()
 
 /obj/item/weapon/shield_diffuser/Destroy()
-	qdel(cell)
-	cell = null
+	QDEL_NULL(cell)
 	if(enabled)
-		GLOB.processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/shield_diffuser/process()
+/obj/item/weapon/shield_diffuser/Process()
 	if(!enabled)
 		return
 
@@ -39,9 +38,9 @@
 	enabled = !enabled
 	update_icon()
 	if(enabled)
-		GLOB.processing_objects.Add(src)
+		START_PROCESSING(SSobj, src)
 	else
-		GLOB.processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 	to_chat(usr, "You turn \the [src] [enabled ? "on" : "off"].")
 
 /obj/item/weapon/shield_diffuser/examine()

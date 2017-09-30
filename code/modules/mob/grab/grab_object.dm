@@ -30,7 +30,7 @@
 	if(start_grab_name)
 		current_grab = all_grabstates[start_grab_name]
 
-/obj/item/grab/process()
+/obj/item/grab/Process()
 	current_grab.process(src)
 
 /obj/item/grab/attack_self(mob/user)

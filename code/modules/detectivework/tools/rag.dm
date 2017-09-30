@@ -34,7 +34,7 @@
 	update_name()
 
 /obj/item/weapon/reagent_containers/glass/rag/Destroy()
-	GLOB.processing_objects -= src //so we don't continue turning to ash while gc'd
+	STOP_PROCESSING(SSobj, src) //so we don't continue turning to ash while gc'd
 	. = ..()
 
 /obj/item/weapon/reagent_containers/glass/rag/attack_self(mob/user as mob)
@@ -177,14 +177,14 @@
 		qdel(src)
 		return
 
-	GLOB.processing_objects += src
+	START_PROCESSING(SSobj, src)
 	set_light(2, null, "#e38f46")
 	on_fire = 1
 	update_name()
 	update_icon()
 
 /obj/item/weapon/reagent_containers/glass/rag/proc/extinguish()
-	GLOB.processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	set_light(0)
 	on_fire = 0
 
@@ -197,7 +197,7 @@
 	update_name()
 	update_icon()
 
-/obj/item/weapon/reagent_containers/glass/rag/process()
+/obj/item/weapon/reagent_containers/glass/rag/Process()
 	if(!can_ignite())
 		visible_message("<span class='warning'>\The [src] burns out.</span>")
 		extinguish()
@@ -211,7 +211,7 @@
 		location.hotspot_expose(700, 5)
 
 	if(burn_time <= 0)
-		GLOB.processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 		new /obj/effect/decal/cleanable/ash(location)
 		qdel(src)
 		return

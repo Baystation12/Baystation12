@@ -34,7 +34,7 @@
 
 	//processing internal organs is pretty cheap, do that first.
 	for(var/obj/item/organ/I in internal_organs)
-		I.process()
+		I.Process()
 
 	handle_stance()
 	handle_grasp()
@@ -49,7 +49,7 @@
 			bad_external_organs -= E
 			continue
 		else
-			E.process()
+			E.Process()
 
 			if (!lying && !buckled && world.time - l_move_time < 15)
 			//Moving around with fractured ribs won't do you any good

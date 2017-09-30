@@ -431,7 +431,7 @@ var/global/datum/controller/gameticker/ticker
 	to_world("<br>")
 
 
-	for (var/mob/living/silicon/ai/aiPlayer in GLOB.mob_list)
+	for (var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
 		if (aiPlayer.stat != 2)
 			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the round were:</b>")
 
@@ -449,7 +449,7 @@ var/global/datum/controller/gameticker/ticker
 
 	var/dronecount = 0
 
-	for (var/mob/living/silicon/robot/robo in GLOB.mob_list)
+	for (var/mob/living/silicon/robot/robo in SSmobs.mob_list)
 
 		if(istype(robo,/mob/living/silicon/robot/drone))
 			dronecount++

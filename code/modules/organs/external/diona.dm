@@ -193,8 +193,8 @@
 	if(prob(50) && !skip_nymph && spawn_diona_nymph(get_turf(src)))
 		qdel(src)
 
-/obj/item/organ/internal/diona/process()
-	return
+/obj/item/organ/internal/diona/Process()
+	return PROCESS_KILL
 
 /obj/item/organ/internal/diona/strata
 	name = "neural strata"

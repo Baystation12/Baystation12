@@ -360,7 +360,7 @@
 
 // timed process
 // charge the gas reservoir and perform flush if ready
-/obj/machinery/disposal/process()
+/obj/machinery/disposal/Process()
 	if(!air_contents || (stat & BROKEN))			// nothing can happen if broken
 		update_use_power(0)
 		return

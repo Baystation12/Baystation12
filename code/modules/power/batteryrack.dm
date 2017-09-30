@@ -172,7 +172,7 @@
 	return 1
 
 
-/obj/machinery/power/smes/batteryrack/process()
+/obj/machinery/power/smes/batteryrack/Process()
 	charge = 0
 	for(var/obj/item/weapon/cell/C in internal_cells)
 		charge += C.charge

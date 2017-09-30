@@ -83,7 +83,7 @@
 					to_chat(user, "<span class='notice'>You secure the generator to the floor.</span>")
 				else
 					to_chat(user, "<span class='notice'>You unsecure the generator from the floor.</span>")
-				makepowernets()
+				SSmachines.makepowernets()
 			else if(istype(O, /obj/item/weapon/screwdriver))
 				open = !open
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)

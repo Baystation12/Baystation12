@@ -82,6 +82,9 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
 	unregister_radio(src, frequency)
+	if(initial_loc)
+		initial_loc.air_vent_info -= id_tag
+		initial_loc.air_vent_names -= id_tag
 	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
@@ -155,7 +158,7 @@
 		return 0
 	return 1
 
-/obj/machinery/atmospherics/unary/vent_pump/process()
+/obj/machinery/atmospherics/unary/vent_pump/Process()
 	..()
 
 	if (hibernate > world.time)
@@ -418,13 +421,6 @@
 			"You hear a ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
 		qdel(src)
-
-/obj/machinery/atmospherics/unary/vent_pump/Destroy()
-	if(initial_loc)
-		initial_loc.air_vent_info -= id_tag
-		initial_loc.air_vent_names -= id_tag
-	..()
-	return
 
 #undef DEFAULT_PRESSURE_DELTA
 

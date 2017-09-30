@@ -198,7 +198,7 @@
 	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.
 	..()
 
-/obj/item/device/flashlight/flare/process()
+/obj/item/device/flashlight/flare/Process()
 	var/turf/pos = get_turf(src)
 	if(pos)
 		pos.hotspot_expose(produce_heat, 5)
@@ -207,7 +207,7 @@
 		turn_off()
 		if(!fuel)
 			src.icon_state = "[initial(icon_state)]-empty"
-		GLOB.processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 
 /obj/item/device/flashlight/flare/proc/turn_off()
 	on = 0
@@ -229,7 +229,7 @@
 	on = TRUE
 	force = on_damage
 	damtype = "fire"
-	GLOB.processing_objects += src
+	START_PROCESSING(SSobj, src)
 	update_icon()
 	return 1
 
@@ -252,11 +252,15 @@
 	light_color = color
 	..()
 
-/obj/item/device/flashlight/glowstick/process()
+/obj/item/device/flashlight/glowstick/Destroy()
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
+
+/obj/item/device/flashlight/glowstick/Process()
 	fuel = max(fuel - 1, 0)
 	if(!fuel)
 		turn_off()
-		GLOB.processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 		update_icon()
 
 /obj/item/device/flashlight/glowstick/proc/turn_off()
@@ -296,7 +300,7 @@
 	. = ..()
 	if(.)
 		user.visible_message("<span class='notice'>[user] cracks and shakes the glowstick.</span>", "<span class='notice'>You crack and shake the glowstick, turning it on!</span>")
-		GLOB.processing_objects += src
+		START_PROCESSING(SSobj, src)
 
 /obj/item/device/flashlight/glowstick/red
 	name = "red glowstick"

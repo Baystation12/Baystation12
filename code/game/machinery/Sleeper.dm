@@ -22,7 +22,7 @@
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
-/obj/machinery/sleeper/process()
+/obj/machinery/sleeper/Process()
 	if(stat & (NOPOWER|BROKEN))
 		return
 
