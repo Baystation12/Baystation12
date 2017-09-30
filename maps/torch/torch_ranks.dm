@@ -263,6 +263,13 @@
 
 	assistant_job = "Passenger"
 
+/datum/mil_rank/grade()
+	. = ..()
+	if(!sort_order)
+		return ""
+	if(sort_order <= 10)
+		return "E[sort_order]"
+	return "O[sort_order % 10]"
 /*
  *  Fleet
  *  =====

@@ -58,7 +58,7 @@
 			var/datum/mil_rank/rank_obj = mil_branches.get_rank(t.fields["mil_branch"], t.fields["mil_rank"])
 
 			if(branch_obj && rank_obj)
-				mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
+				mil_ranks[name] = "<abbr title=\"[rank_obj.name][rank_obj.grade() ? "([rank_obj.grade()])":""], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
 
 		if(OOC)
 			var/active = 0
