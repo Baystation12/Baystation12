@@ -475,3 +475,12 @@
 	name = "box of spare medical armbands"
 	desc = "A box full of medical armbands. For use in emergencies when provisional medical personnel are needed."
 	startswith = list(/obj/item/clothing/accessory/armband/med = 5)
+
+/obj/item/weapon/storage/box/imprinting
+	name = "box of education implants"
+	desc = "A box full of neural implants for on-job training."
+	startswith = list(
+		/obj/item/weapon/implanter,
+		/obj/item/weapon/implantpad,
+		/obj/item/weapon/implantcase/imprinting = 3
+		)
