@@ -65,8 +65,8 @@ Class Procs:
 
 /datum/controller/subsystem/air
 	name = "Air"
-	priority = SS_PRIORITY_AIR
-	init_order = SS_INIT_AIR
+	priority = SS_PRIORITY_MOB
+	init_order = INIT_ORDER_AIR
 	flags = SS_POST_FIRE_TIMING
 
 	//Geometry lists
