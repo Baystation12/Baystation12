@@ -1,5 +1,3 @@
-/var/datum/controller/subsystem/processing/airflow/SSairflow
-
 #define CLEAR_OBJECT(TARGET)                \
 	processing -= TARGET;                   \
 	TARGET.airflow_dest = null;             \
@@ -10,14 +8,12 @@
 		TARGET.density = 0;                 \
 	}
 
-/datum/controller/subsystem/processing/airflow
+PROCESSING_SUBSYSTEM_DEF(airflow)
 	name = "Airflow"
 	wait = 1
 	flags = SS_NO_INIT
 	priority = SS_PRIORITY_AIRFLOW
 
-/datum/controller/subsystem/processing/airflow/New()
-	NEW_SS_GLOBAL(SSairflow)
 
 /datum/controller/subsystem/processing/airflow/fire(resumed = FALSE)
 	if (!resumed)

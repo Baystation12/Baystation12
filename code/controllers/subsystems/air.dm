@@ -1,5 +1,3 @@
-/var/datum/controller/subsystem/air/SSair
-
 /*
 
 Overview:
@@ -63,9 +61,9 @@ Class Procs:
 
 */
 
-/datum/controller/subsystem/air
+SUBSYSTEM_DEF(air)
 	name = "Air"
-	priority = SS_PRIORITY_MOB
+	priority = SS_PRIORITY_AIR
 	init_order = INIT_ORDER_AIR
 	flags = SS_POST_FIRE_TIMING
 
@@ -95,7 +93,7 @@ Class Procs:
 
 	// Make sure we don't rebuild mid-tick.
 	if (state != SS_IDLE)
-		admin_notice("<span class='danger'>ZAS Rebuild initiated. Waiting for current air tick to complete before continuing.</span>", R_DEBUG)
+		report_progress("ZAS Rebuild initiated. Waiting for current air tick to complete before continuing.")
 		while (state != SS_IDLE)
 			stoplag()
 
@@ -129,13 +127,10 @@ Class Procs:
 	)
 	..(out.Join())
 
-/datum/controller/subsystem/air/New()
-	NEW_SS_GLOBAL(SSair)
-
 /datum/controller/subsystem/air/Initialize(timeofday, simulate = TRUE)
 
 	var/starttime = REALTIMEOFDAY
-	admin_notice("<span class='danger'>Processing Geometry...</span>", R_DEBUG)
+	report_progress("Processing Geometry...")
 
 	var/simulated_turf_count = 0
 	for(var/turf/simulated/S)
@@ -144,23 +139,22 @@ Class Procs:
 
 		CHECK_TICK
 
-	admin_notice({"<span class='info'>
-Total Simulated Turfs: [simulated_turf_count]
+	report_progress({"Total Simulated Turfs: [simulated_turf_count]
 Total Zones: [zones.len]
 Total Edges: [edges.len]
 Total Active Edges: [active_edges.len ? "<span class='danger'>[active_edges.len]</span>" : "None"]
 Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_count]
-</span>"}, R_DEBUG)
+"})
 
-	admin_notice("<span class='danger'>Geometry processing completed in [(REALTIMEOFDAY - starttime)/10] seconds!</span>", R_DEBUG)
+	report_progress("Geometry processing completed in [(REALTIMEOFDAY - starttime)/10] seconds!")
 	
 	if (simulate)
-		admin_notice("<span class='danger'>Settling air...</span>", R_DEBUG)
+		report_progress("Settling air...")
 
 		starttime = REALTIMEOFDAY
 		fire(FALSE, TRUE)
 
-		admin_notice("<span class='danger'>Air settling completed in [(REALTIMEOFDAY - starttime)/10] seconds!</span>", R_DEBUG)
+		report_progress("Air settling completed in [(REALTIMEOFDAY - starttime)/10] seconds!")
 
 	..(timeofday)
 
