@@ -1,4 +1,4 @@
-proc/calculate_paycheck(var/mob/living/carbon/human/M, var/roundend = 0) //Tax = if we should calculate taxes, add if we want to add the cash.
+proc/calculate_paycheck(var/mob/living/carbon/human/M, var/roundend = 0, var/tax = 1) //Tax = if we should calculate taxes, add if we want to add the cash.
 	if(M && istype(M) && M.client && M.CharRecords.char_department && M.job) //SO MANY CHECKS JEZUS ah well
 		var/paycheck = round(get_base_pay(M) * 4, 0.01)
 		if(evacuation_controller.emergency_evacuation)
@@ -7,11 +7,15 @@ proc/calculate_paycheck(var/mob/living/carbon/human/M, var/roundend = 0) //Tax =
 			var/mins = round((round_duration_in_ticks % 36000) / 600)
 			var/deduct = (paycheck/60)*(60 % mins)
 			paycheck -= deduct
-		if(M.CharRecords.permadeath)
-			get_tax_deduction("pension", paycheck, 1)
-		else
-			get_tax_deduction("pension", paycheck, 0)
-		get_tax_deduction("income", paycheck)
+		if(tax)
+			if(M.CharRecords.permadeath)
+				get_tax_deduction("pension", paycheck, 1)
+			else
+				get_tax_deduction("pension", paycheck, 0)
+			get_tax_deduction("income", paycheck)
+		if(M.CharRecords.bonuscredit)
+			paycheck += M.CharRecords.bonuscredit
+			M.CharRecords.bonuscredit = 0
 		return paycheck
 
 proc/send_paycheck(var/mob/living/carbon/human/M, var/paycheck)
@@ -87,7 +91,7 @@ proc/get_species_modifier(var/mob/living/carbon/human/M)
 				if(M.CharRecords.char_department & MED)
 					bonuspercentage -= 5
 			if(SPECIES_DIONA)
-				bonuspercentage -= 15
+				bonuspercentage -= 95
 				if(M.CharRecords.char_department & SCI)
 					bonuspercentage += 5
 				if(M.CharRecords.char_department & SRV|CIV)
@@ -117,4 +121,12 @@ proc/get_species_modifier(var/mob/living/carbon/human/M)
 					bonuspercentage += 5
 				if(M.CharRecords.char_department & SEC)
 					bonuspercentage -= 5
+			if(SPECIES_WRYN)
+				bonuspercentage -= 40
+				if(M.CharRecords.char_department & SRV|CIV)
+					bonuspercentage += 10
+				if(M.CharRecords.char_department & SUP)
+					bonuspercentage += 5
+				if(M.CharRecords.char_department & SCI)
+					bonuspercentage -= 10
 		return bonuspercentage

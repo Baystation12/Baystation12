@@ -91,6 +91,9 @@ var/list/support_positions = list(
 				if(26 to 1000) // Yeah it stops here.
 					if(M.CharRecords.promoted == 1)
 						M.CharRecords.department_rank = 5 //Lead
+
+/*					if(M.CharRecords.promoted == 1)
+						M.CharRecords.department_rank = 5 //Lead
 						if(M.CharRecords.recommendations.len)
 							for(var/N in M.CharRecords.recommendations)
 								if(N && N:name != "NanoTrasen") //If it hasn't been done yet, do so now.
@@ -98,6 +101,7 @@ var/list/support_positions = list(
 						else
 
 							M.CharRecords.recommendations.Add(name = "NanoTrasen", recommendation = "Reaching seniority status within the company")
+*/
 			if(M.CharRecords.department_rank != oldrank) //Ranks changed)
 				if(M.CharRecords.department_rank > oldrank)
 					SendNTPDAMessage(M, "NT Administration", {"You have recieved a promotion for being with the company for a long time!

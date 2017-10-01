@@ -9,7 +9,9 @@
 /*-------CHARACTER-RELATED-------*/
 	var/bank_balance
 	var/pension_balance
-	var/recommendations = list()
+	var/bonuscredit = 0
+	var/employeescore = 5 //Calculated at run-time.
+	var/list/employee_records = list()
 	var/neurallaces
 	var/promoted //May be obselete.
 	var/permadeath
