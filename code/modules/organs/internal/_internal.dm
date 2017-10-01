@@ -44,16 +44,17 @@
 		parent.implants += src
 
 /obj/item/organ/internal/removed(var/mob/living/user, var/drop_organ=1, var/detach=1)
-	owner.internal_organs_by_name[organ_tag] = null
-	owner.internal_organs_by_name -= organ_tag
-	owner.internal_organs_by_name -= null
-	owner.internal_organs -= src
+	if(owner)
+		owner.internal_organs_by_name[organ_tag] = null
+		owner.internal_organs_by_name -= organ_tag
+		owner.internal_organs_by_name -= null
+		owner.internal_organs -= src
 
-	if(detach && owner)
-		var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
-		if(affected)
-			affected.internal_organs -= src
-			status |= ORGAN_CUT_AWAY
+		if(detach)
+			var/obj/item/organ/external/affected = owner.get_organ(parent_organ)
+			if(affected)
+				affected.internal_organs -= src
+				status |= ORGAN_CUT_AWAY
 	..()
 
 /obj/item/organ/internal/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
