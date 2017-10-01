@@ -301,16 +301,16 @@
 			pulse_result = H.get_pulse(1)
 	else
 		pulse_result = "ERROR - Nonstandard biology"
-	. += "<b>Pulse rate:</b> [pulse_result]bpm."
+	dat += "<b>Pulse rate:</b> [pulse_result]bpm."
 
 	// Blood pressure. Based on the idea of a normal blood pressure being 120 over 80.
 	if(H.get_blood_volume() <= 70)
-		. += "<span class='danger'>Severe blood loss detected.</span>"
-	. += "<b>Blood pressure:</b> [H.get_blood_pressure()] ([H.get_blood_oxygenation()]% blood oxygenation)"
-	. += "<b>Blood volume:</b> [H.vessel.get_reagent_amount(/datum/reagent/blood)]/[H.species.blood_volume]u"
+		dat += "<span class='danger'>Severe blood loss detected.</span>"
+	dat += "<b>Blood pressure:</b> [H.get_blood_pressure()] ([H.get_blood_oxygenation()]% blood oxygenation)"
+	dat += "<b>Blood volume:</b> [H.vessel.get_reagent_amount(/datum/reagent/blood)]/[H.species.blood_volume]u"
 
 	// Body temperature.
-	. += "<b>Body temperature:</b> [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)"
+	dat += "<b>Body temperature:</b> [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)"
 
 	dat += "<b>Physical Trauma:</b>\t[get_severity(H.getBruteLoss())]"
 	dat += "<b>Burn Severity:</b>\t[get_severity(H.getFireLoss())]"
