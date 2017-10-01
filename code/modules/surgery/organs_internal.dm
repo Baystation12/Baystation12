@@ -369,7 +369,7 @@
 		to_chat(user, "<span class='warning'>You can't find anywhere to attach [organ_to_replace] to!</span>")
 		return SURGERY_FAILURE
 
-	target.op_stage.current_organ = organ_to_replace.name
+	target.op_stage.current_organ = organ_to_replace
 	return ..()
 
 /datum/surgery_step/internal/attach_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -446,7 +446,7 @@
 		to_chat(user, "<span class='notice'>The [organ_to_fix.name] needs to be repaired before it is regenerated.</span>")
 		return 0
 
-	target.op_stage.current_organ = organ_to_fix.name
+	target.op_stage.current_organ = organ_to_fix
 
 	return 1
 
