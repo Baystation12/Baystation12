@@ -220,6 +220,10 @@
 	var/land_type = /turf/simulated/floor
 	var/water_type
 
+	//limit number of spawned things to these
+	var/fauna_limit = 50
+	var/flora_limit = 2000
+
 	var/large_flora_prob = 60
 	var/flora_prob = 60
 	var/fauna_prob = 2
