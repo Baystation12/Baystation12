@@ -167,7 +167,7 @@ datum/preferences
 		sanitize_preferences()
 		close_load_dialog(usr)
 	else if(href_list["resetslot"])
-		if("No" == alert("This will reset the current slot. Continue?", "Reset current slot?", "No", "Yes"))
+		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
 			return 0
 		load_character(SAVE_RESET)
 		sanitize_preferences()
