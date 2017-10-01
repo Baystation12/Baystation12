@@ -77,6 +77,7 @@ mob/living/carbon/human/verb/show_skills()
 	var/desc = "Placeholder skill" 	// Generic description of this skill.
 	var/field = "Unset" 			// Category under which this skill will be listed.
 	var/secondary = FALSE 			// Whether the skill is secondary. Secondary skills are cheaper and lack the Amateur level.
+	var/cost_multiplier = 1			// Relative cost of skill
 
    	// Specific descriptions for specific skill levels.
 	var/desc_unskilled = "Unskilled Descripton"
@@ -120,6 +121,7 @@ var/global/list/SKILLS = null
 	desc_unskilled = "You have basic safety training common to people who work in space: You know how to put on and seal your internals, and you can probably struggle into a space suit if you really need to, though you'll be clumsy at it. You're still prone to mistakes that may leave you trying to breathe vacuum."
 	desc_trained = "You can comfortably use a space suit and do so regularly in the course of your work. Checking your internals is second nature to you, and you don't panic in an emergency."
 	desc_professional = "You can use all kinds of space suits, including specialized versions. You can use a jet pack to navigate and are just as much at home in a vacuum as in atmosphere. You probably do your job almost entirely EVA."
+	cost_multiplier = 0.5
 
 /datum/skill/secondary/law
 	ID = "law"
@@ -136,6 +138,7 @@ var/global/list/SKILLS = null
 	desc_unskilled = "You've done some gardening. You can water, weed, fertilize, plant, and harvest, and you can recognize and deal with pests. You may be a hobby gardener."
 	desc_trained = "You're a botanist or farmer, growing crops on large scales or doing botanical research. You know the basics of manipulating plant genes."
 	desc_professional = "You're a specialized botanist. You can care for even the most exotic, fragile, or dangerous plants, and you can create custom hybrids and modified strains."
+	cost_multiplier = 0.5
 
 /datum/skill/secondary/cooking
 	ID = "cooking"
@@ -144,6 +147,7 @@ var/global/list/SKILLS = null
 	desc_unskilled = "You can make simple meals and do the cooking for your family. Things like spaghetti, grilled cheese, or simple mixed drinks are your usual fare."
 	desc_trained = "You can cook professionally, keeping an entire crew fed easily. Your food is tasty and you don't have a problem with tricky or complicated dishes. You can be depended on to make just about any commonly-served drink."
 	desc_professional = "Not only are you good at cooking and mixing drinks, but you can manage a kitchen staff and cater for special events. You can safely prepare exotic foods and drinks that would be poisonous if prepared incorrectly."
+	cost_multiplier = 0.5
 
 // Category: Security
 
@@ -155,6 +159,7 @@ var/global/list/SKILLS = null
 	desc_amateur = "You either have some experience with fistfights, or you have some training in a martial art. You can handle yourself if you really have to, and if you're a security officer, can handle a stun baton at least well enough to get the handcuffs onto a criminal."
 	desc_trained = "You're good at hand-to-hand combat. You've trained explicitly in a martial art or as a close combatant as part of a military or police unit. You can use weaponry competently and you can think strategically and quickly in a melee. You're in good shape and you spend time training."
 	desc_professional = "You specialize in hand-to-hand combat. You're well-trained in a practical martial art, and in good shape. You spend a lot of time practicing. You can take on just about anyone, use just about any weapon, and usually come out on top. You may be a professional athlete or special forces member."
+	cost_multiplier = 1.2
 
 /datum/skill/security/weapons
 	ID = "weapons"
@@ -173,6 +178,7 @@ var/global/list/SKILLS = null
 	desc_amateur = "You know how to avoid contaminating a crime scene. You know how to use the tools of the trade (scanner, computer database, and so forth), and you can conduct an interview with a witness or a suspect."
 	desc_trained = "You're a police officer, pathologist, or detective. You can secure a crime scene, gather evidence, interview witnesses, and put two and two together to get an arrest. If you're trained in anatomy, you can perform an autopsy."
 	desc_professional = "You specialize in criminal investigations. Your ability to gather and analyze evidence has been honed through intensive schooling, years of practice, or most likely both. You can organize a manhunt or draw a criminal into a trap, and though you're behind the scenes and may never even see the criminal, your skills make the difference between an unsolved crime and a convicted criminal."
+	cost_multiplier = 1.5
 
 // Category: Engineering
 
@@ -193,6 +199,7 @@ var/global/list/SKILLS = null
 	desc_amateur = "You can do basic wiring; you can lay cable for solars or the engine. You can repair broken wiring and build simple electrical equipment like light fixtures or APCs. You know the basics of circuits and understand how to protect yourself from electrical shock. You can probably hack a vending machine."
 	desc_trained = "You can repair and build electrical equipment and do so on a regular basis. You can troubleshoot an electrical system and monitor the installation power grid. You can probably hack an airlock."
 	desc_professional = "You are an electrical engineer or the equivalent. You can design, upgrade, and modify electrical equipment and you are good at maximizing the efficiency of your power network. You can hack anything on the installation you can deal with power outages and electrical problems easily and efficiently."
+	cost_multiplier = 1.1
 
 /datum/skill/engineering/atmos
 	ID = "atmos"
@@ -202,6 +209,7 @@ var/global/list/SKILLS = null
 	desc_amateur = "You know how to read an air monitor, how to use an air pump, how to analyze the atmosphere in a space, and how to help seal a breach. You can lay piping and work with gas tanks and canisters. If you work with the engine, you can set up the cooling system. You can use a fire extinguisher easily and place inflatable barriers so that they allow convenient access and airtight breach containment."
 	desc_trained = "You can run the Atmospherics system. You know how to monitor the air quality across the installation detect problems, and fix them. You're trained in dealing with fires, breaches, and gas leaks, and may have exosuit or fire gear training."
 	desc_professional = "You are an atmospherics specialist. You monitor, modify, and optimize the installation atmospherics system, and you can quickly and easily deal with emergencies. You can modify atmospherics systems to do pretty much whatever you want them to. You can easily handle a fire or breach, and are proficient at securing an area and rescuing civilians, but you're equally likely to have simply prevented it from happening in the first place."
+	cost_multiplier = 1.2
 
 /datum/skill/engineering/engines
 	ID = "engines"
@@ -229,6 +237,7 @@ var/global/list/SKILLS = null
 	desc_amateur = "You can pilot a small, short-range craft safely, but larger ships are out of your area of expertise. You are by no means an expert, and probably don't have much training. Skills of this level are typical for deck crew."
 	desc_trained = "You are a trained pilot, and can safely operate anything from a small craft to a corvette. You can spend extended periods of time piloting a spacecraft, and you're versed in the abilities of different ships, and what makes them function. You can do basic maintenance on smaller vessels, and perform most basic maneuvers. You can use armed spacecraft. You can make basic calculations relating to piloting. Skills of this level are typical for newer pilots. You have probably recieved formal piloting training."
 	desc_professional = "You are an experienced pilot, and can safely take the helm of many types of craft. You could probably live in a spacecraft, and you're very well versed in essentially everything related to space-faring vessels. Not only can you fly a ship, but you can perform difficult maneuvers, and make most calculations related to piloting a spacecraft. You can maintain a ship. Skills of this level are typical for very experienced pilots. You have recieved formal piloting training."
+	cost_multiplier = 1.2
 
 // Category: Research
 
@@ -240,7 +249,7 @@ var/global/list/SKILLS = null
 	desc_amateur = "You use and repair high-tech equipment in the course of your daily work. You can fix simple problems, and you know how to use a circuit printer or autolathe. You can build simple robots such as cleanbots and medibots. If you have the relevant medical or electronic knowledge, you can repair a prosthesis or artificial organ; if not, these devices are beyond you."
 	desc_trained = "You can build or repair an exosuit or cyborg chassis, use a protolathe and destructive analyzer, and build prosthetic limbs. You can safely transfer an MMI or posibrain into a cyborg chassis."
 	desc_professional = "You are an inventor, researcher, or anomalist. You can design, build, and modify equipment that most people don't even know exists. You are at home in the lab and the workshop and you've never met a gadget you couldn't take apart, put back together, and replicate."
-
+	
 /datum/skill/research/computer
 	ID = "computer"
 	name = "Information Technology"
@@ -278,6 +287,7 @@ var/global/list/SKILLS = null
 	desc_amateur = "You've taken an anatomy class and you've spent at least some time poking around inside actual people. You know where everything is, more or less. You could assist in surgery, if you have the required medical skills. If you have the forensics knowledge, you could perform an autopsy. If you really had to, you could probably perform basic surgery such as an appendectomy, but you're not yet a qualified surgeon and you really shouldn't--not unless it's an emergency. If you're a xenobiologist, you know how to take out slime cores."
 	desc_trained = "You're a surgical resident, or an experienced medical doctor. You can put together broken bones, fix a damaged lung, patch up a liver, or remove an appendix without problems. But tricky surgeries, with an unstable patient or delicate manipulation of vital organs like the heart and brain, are at the edge of your ability, and you prefer to leave them to specialized surgeons. You can recognize when someone's anatomy is noticeably unusual. You're trained in working with several species, but you're probably better at surgery on your own species."
 	desc_professional = "You are an experienced surgeon. You can handle anything that gets rolled, pushed, or dragged into the OR, and you can keep a patient alive and stable even if there's no one to assist you. You can handle severe trauma cases or multiple organ failure, repair brain damage, and perform heart surgery. By now, you've probably specialized in one field, where you may have made new contributions to surgical technique. You can detect even small variations in the anatomy of a patient--even a changeling probably wouldn't slip by your notice, provided you could get one on the operating table."
+	cost_multiplier = 0.8
 
 /datum/skill/medical/virology
 	ID = "virology"
@@ -296,3 +306,4 @@ var/global/list/SKILLS = null
 	desc_amateur = "You can make basic chemicals or medication--things like space cleaner or anti-toxin. You have some training in safety and you won't blow up the lab... probably."
 	desc_trained = "You work as a chemist, or else you are a doctor with training in chemistry. If you are a research chemist, you can create most useful chemicals; if you are a pharmacist, you can make most medications. At this stage, you're working mostly by-the-book. You can weaponize your chemicals by making grenades, smoke bombs, and similar devices."
 	desc_professional = "You specialized in chemistry or pharmaceuticals; you are either a medical researcher or professional chemist. You can create custom mixes and make even the trickiest of medications easily. You understand how your pharmaceuticals interact with the bodies of your patients. You are probably the originator of at least one new chemical innovation."
+	cost_multiplier = 1.2
