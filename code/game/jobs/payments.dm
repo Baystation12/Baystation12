@@ -46,6 +46,13 @@ proc/get_tax_deduction(var/taxtype, var/paycheck, var/permadeath)
 					pensiontax = (paycheck / 100) * 10
 				return pensiontax
 
+proc/calculate_bonus_credit(var/mob/living/carbon/human/M, var/bonuscredit, var/bonuspercentage)
+	if(M && M.job)
+		if(bonuscredit) //Applied in direct cashes.
+			M.CharRecords.bonuscredit += bonuscredit
+		else if(bonuspercentage) //Applies to base pay percentage.
+			M.CharRecords.bonuscredit += calculate_paycheck(M, 0, 0)/100*bonuspercentage
+
 proc/get_base_pay(var/mob/living/carbon/human/M)
 	if(M && M.job)
 		var/datum/job/job = job_master.GetJob(M.job)
@@ -53,7 +60,8 @@ proc/get_base_pay(var/mob/living/carbon/human/M)
 		var/efficiencybonus = 4+(4*paychecks) //Efficiencybonus = 4% + 4% per paycheck.
 		var/rankbonus = calculate_department_rank(M) * 5 // Rank bonus = rank number * 5%
 		var/speciesmodifier = get_species_modifier(M)
-		var/end_base_pay = (base_pay/100) * (100+efficiencybonus+rankbonus+speciesmodifier) // Turns 1% into more %
+		var/scoremodifier = (M.CharRecords.employeescore-5) * 2
+		var/end_base_pay = (base_pay/100) * (100+efficiencybonus+rankbonus+speciesmodifier+scoremodifier) // Turns 1% into more %
 		return end_base_pay
 
 
