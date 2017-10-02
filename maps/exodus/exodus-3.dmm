@@ -1558,7 +1558,7 @@
 "Ib" = (/obj/structure/bookcase{name = "Forbidden Knowledge"},/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
 "Ic" = (/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
 "Id" = (/obj/machinery/librarycomp,/obj/structure/table/woodentable,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
-"Ie" = (/obj/structure/table/woodentable,/obj/item/weapon/book/manual/security_space_law,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
+"Ie" = (/obj/structure/table/woodentable,/obj/item/weapon/book/manual/nt_regs,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
 "If" = (/obj/structure/table/woodentable,/obj/item/weapon/book/manual/nuclear,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/wizard_station)
 "Ig" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/backpack/satchel/withwallet,/turf/simulated/floor/carpet,/area/wizard_station)
 "Ih" = (/obj/structure/table/rack,/obj/item/clothing/suit/space/vox/pressure,/obj/item/clothing/head/helmet/space/vox/pressure,/obj/item/clothing/shoes/magboots/vox,/obj/item/clothing/gloves/vox,/obj/item/clothing/under/vox/vox_casual,/turf/unsimulated/floor{tag = "icon-asteroid"; icon_state = "asteroid"},/area/syndicate_mothership/raider_base)
