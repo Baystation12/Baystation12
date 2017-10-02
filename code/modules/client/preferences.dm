@@ -59,7 +59,7 @@ datum/preferences
 /datum/preferences/proc/CalculateSkillPoints()
 	used_skillpoints = 0
 	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
-		var/multiplier = 1
+		var/multiplier = S.cost_multiplier
 		switch(skills[S.ID])
 			if(SKILL_NONE)
 				used_skillpoints += 0 * multiplier
