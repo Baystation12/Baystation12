@@ -61,3 +61,7 @@
 
 /mob/living/carbon/human/stok/New(var/new_loc)
 	..(new_loc, "Stok")
+
+/mob/living/carbon/human/wryn/New(var/new_loc)
+	h_style = "wryn_antennae"
+	..(new_loc, "Wryn")

@@ -184,6 +184,7 @@
 #define BP_ANCHOR   "anchoring ligament"
 #define BP_VOICE    "vocal synthesiser"
 #define BP_PHORON   "phoron filter"
+#define BP_HIVENODE "hive node"
 
 // Limbs.
 #define BP_L_FOOT "l_foot"
@@ -248,6 +249,7 @@
 #define SPECIES_SKRELL "Skrell"
 #define SPECIES_NABBER "Giant Armoured Serpentid"
 #define SPECIES_PROMETHEAN "Promethean"
+#define SPECIES_WRYN "Wryn"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
