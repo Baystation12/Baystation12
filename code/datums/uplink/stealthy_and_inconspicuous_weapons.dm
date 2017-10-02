@@ -33,3 +33,8 @@
 	name = "Paralysis Pen"
 	item_cost = 24
 	path = /obj/item/weapon/pen/reagent/paralysis
+
+/datum/uplink_item/item/stealthy_weapons/sleepring
+	name = "Knockout Ring"
+	item_cost = 18
+	path = /obj/item/clothing/ring/reagent/sleepy

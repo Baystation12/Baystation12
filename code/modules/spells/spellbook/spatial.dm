@@ -26,6 +26,7 @@
 				/spell/aoe_turf/conjure/summon/bats = 			3,
 				/obj/item/weapon/contract/wizard/tk = 			5,
 				/obj/item/weapon/dice/d20/cursed = 				1,
+				/obj/item/clothing/ring/magic =                 1,
 				/obj/structure/closet/wizard/scrying = 			2,
 				/obj/item/weapon/teleportation_scroll = 		1,
 				/obj/item/weapon/magic_rock = 					1,
