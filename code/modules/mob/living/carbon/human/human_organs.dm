@@ -193,17 +193,6 @@
 		else
 			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
 
-
-//Handles chem traces
-/mob/living/carbon/human/proc/handle_trace_chems()
-	for(var/T in chem_doses)
-		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
-			continue
-		var/datum/reagent/R = GLOB.chemical_reagents_list[T]
-		chem_doses[T] -= R.metabolism*2
-		if(chem_doses[T] <= 0)
-			chem_doses -= T
-
 /mob/living/carbon/human/proc/sync_organ_dna()
 	var/list/all_bits = internal_organs|organs
 	for(var/obj/item/organ/O in all_bits)
