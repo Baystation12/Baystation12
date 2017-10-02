@@ -60,9 +60,8 @@
 	return src.damage / src.amount
 
 /datum/wound/proc/can_autoheal()
-	for(var/obj/item/thing in embedded_objects)
-		if(thing.w_class > ITEM_SIZE_SMALL)
-			return 0
+	if(embedded_objects.len)
+		return 0
 	return (wound_damage() <= autoheal_cutoff) ? 1 : is_treated()
 
 // checks whether the wound has been appropriately treated

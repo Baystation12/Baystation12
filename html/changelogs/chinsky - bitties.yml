@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Shrapnel is less deadly now. Tiny items don't jostle around anymore. They still prevent wounds they're embedded in from healing."
+  - rscdel: "Conductive things embedded in body will heat up in EMP, dealing damage depending on their size and EMP severity."
