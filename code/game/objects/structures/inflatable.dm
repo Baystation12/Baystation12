@@ -4,6 +4,8 @@
 	icon = 'icons/obj/inflatable.dmi'
 	var/deploy_path = null
 
+	atmos_canpass = CANPASS_DENSITY
+
 /obj/item/inflatable/attack_self(mob/user)
 	if(!deploy_path)
 		return

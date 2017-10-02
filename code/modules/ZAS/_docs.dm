@@ -15,7 +15,7 @@ Every air tick:
 
 Important Functions:
 
-air_master.mark_for_update(turf)
+SSair.mark_for_update(turf)
 	When stuff happens, call this. It works on everything. You basically don't need to worry about any other
 	functions besides CanPass().
 
