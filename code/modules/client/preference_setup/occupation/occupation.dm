@@ -78,7 +78,7 @@
 
 		player_branch = mil_branches.get_branch(pref.char_branch)
 
-		. += "Branch of Service: <a href='?src=\ref[src];char_branch=1'>[pref.char_branch]</a>	"
+	. += "Department of Service: <a href='?src=\ref[src];char_dept=1'>[pref.char_branch]</a>	"
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		player_rank = mil_branches.get_rank(pref.char_branch, pref.char_rank)
 
@@ -125,14 +125,16 @@
 		if(!job.is_species_allowed(S))
 			. += "<del>[rank]</del></td><td><b> \[SPECIES RESTRICTED]</b></td></tr>"
 			continue
-
-		if(job.allowed_branches)
-			if(!player_branch)
-				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[BRANCH RESTRICTED]</b></a></td></tr>"
-				continue
-			if(!is_type_in_list(player_branch, job.allowed_branches))
-				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [player_branch.name_short]]</b></a></td></tr>"
-				continue
+		if(!job.is_valid_department(job.get_department(user:CharRecords.char_department)))
+			. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [player_branch.name_short]]</b></a></td></tr>"
+			continue
+//		if(job.allowed_branches)
+//			if(!player_branch)
+//				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[BRANCH RESTRICTED]</b></a></td></tr>"
+//				continue
+//			if(!is_type_in_list(player_branch, job.allowed_branches))
+//				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [player_branch.name_short]]</b></a></td></tr>"
+//				continue
 
 		if(job.allowed_ranks)
 			if(!player_rank)
@@ -214,11 +216,31 @@
 
 	else if(href_list["set_job"])
 		if(SetJob(user, href_list["set_job"])) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
-
-	else if(href_list["char_branch"])
+/*
+	else if(href_list["char_dept"])
 		var/choice = input(user, "Choose your branch of service.", "Character Preference", pref.char_branch) as null|anything in mil_branches.spawn_branches(preference_species())
 		if(choice && CanUseTopic(user) && mil_branches.is_spawn_branch(choice, preference_species()))
 			pref.char_branch = choice
+			pref.char_rank = "None"
+			prune_job_prefs()
+			return TOPIC_REFRESH
+*/
+	else if(href_list["char_dept"])
+		var/new_department = input(user, "Select the department your character wishes to enlist in","Department enlistment") in list("Security","Medical","Engineering","Service","Science","Supply")
+		if(new_department && CanUseTopic(user))
+			switch(new_department)
+				if("Security")
+					user:CharRecords.char_department |= SEC
+				if("Medical")
+					user:CharRecords.char_department |= MED
+				if("Science")
+					user:CharRecords.char_department |= SCI
+				if("Engineering")
+					user:CharRecords.char_department |= ENG
+				if("Supply")
+					user:CharRecords.char_department |= SUP
+				if("Service")
+					user:CharRecords.char_department |= SRV
 			pref.char_rank = "None"
 			prune_job_prefs()
 			return TOPIC_REFRESH

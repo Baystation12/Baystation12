@@ -172,6 +172,12 @@
 	else
 		return 0
 
+/datum/job/proc/is_valid_department(var/dept_flag)
+	if(dept_flag == department_flag)
+		return 1
+	else
+		return 0
+
 /**
  *  Check if people with given rank are allowed in this job
  *
@@ -215,3 +221,21 @@
 			continue
 		res += initial(R.name)
 	return english_list(res)
+
+/datum/job/proc/get_department(var/department_flag)
+	if(!department_flag) return null
+	switch(department_flag)
+		if(COM)
+			return "Command"
+		if(SEC)
+			return "Security"
+		if(SCI)
+			return "Science"
+		if(ENG)
+			return "Engineering"
+		if(SRV)
+			return "Service"
+		if(CIV)
+			return "Civilian"
+		if(MED)
+			return "Medical"

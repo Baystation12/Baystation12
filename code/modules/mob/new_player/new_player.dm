@@ -335,7 +335,10 @@
 	if(!IsJobAvailable(job))
 		alert("[job.title] is not available. Please try another.")
 		return 0
-	if(!job.is_branch_allowed(client.mob:CharRecords.char_department))
+//	if(!job.is_branch_allowed(client.mob:CharRecords.char_department))
+//		alert("Wrong branch of service for [job.title]. Valid branches is: [job.department].")
+//		return 0
+	if(!job.is_valid_department(client.prefs.char_branch))
 		alert("Wrong branch of service for [job.title]. Valid branches is: [job.department].")
 		return 0
 	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank))

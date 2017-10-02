@@ -13,6 +13,7 @@
 	var/screen = 1 //Main screen always
 	var/mob/living/carbon/human/profiled
 	var/datum/browser/popup
+	var/mob/living/carbon/human/idowner
 
 /obj/machinery/computer/department_manager/verb/eject_id()
 	set category = "Object"
@@ -27,6 +28,9 @@
 		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
 		scan = null
+		idowner = null
+		profiled = null
+		screen = 1
 	else
 		to_chat(usr, "There is nothing to remove from the console.")
 	return
@@ -63,9 +67,15 @@
 							<title>[department] Management Console</title>
 						</head>
 						<body>
-							<h1>[department] Management Console<a href='?src=\ref[src];screen=3'>Economy</a></h1>
-							<ul>
+							<h2>[department] Management Console</h2><br>
+							<div font-size="medium">
+							<a href='?src=\ref[src];screen=2'>Employee Database</a><br>
+							<a href='?src=\ref[src];screen=3'>Department Economy</a>
+							<a href='?src=\ref[src];screen=4'></a>
+							</div>
 							"}
+			if(2)
+				dat = "<ul>"
 				for(var/mob/living/carbon/human/M in GLOB.mob_list)
 					if(M.client && M.CharRecords.char_department == department)
 						dat += {"<li><b>Name:</b> [M.real_name]<br>
@@ -73,9 +83,10 @@
 						<b>Occupation:</b> [M.job]<br>
 						<b>Occupation Experience: [get_department_rank_title(M.CharRecords.char_department, M.CharRecords.department_rank)]<br>
 						<b>Clocked Hours:</b> [round(M.CharRecords.department_playtime/3600, 0.1)]<br>
+						<b>Employee Grade:</b> [round(M.CharRecords.employeescore, 0.01)]
 						<a href='?src=\ref[src];choice=Profile;profiled=\ref[M]'>Profile</a></li>"}
 				dat += "</ul></body></html>"
-			if(2)
+			if(2.1) //Character Employee Profile
 				dat = {"
 						<html>
 						<head>
@@ -85,18 +96,33 @@
 							<h1>[department] Management Console</h1>
 							"}
 				dat += {"
-						Name: [profiled.real_name]
-						Age: [profiled.age]
-						Occupation: [profiled.job]
-						Occupation Experience: [get_department_rank_title(profiled.CharRecords.char_department, calculate_department_rank(profiled))]<br>
+						<b>Name:</b> [profiled.real_name]<br>
+						<b>Age:</b> [profiled.age]<br>
+						<b>Occupation:</b> [profiled.job]<br>
+						<b>Occupation Experience: [get_department_rank_title(profiled.CharRecords.char_department, profiled.CharRecords.department_rank)]<br>
+						<b>Clocked Hours:</b> [round(profiled.CharRecords.department_playtime/3600, 0.1)]<br>
+						<b>Employee Grade:</b> [round(profiled.CharRecords.employeescore, 0.01)]
 						"}
-				dat += "<A href='?src=\ref[src];choice=recommend'>Make Recommendation</A> <A href='?src=\ref[src];choice=promote'>Promote</A> <A href='?src=\ref[src];choice=demote'>Demote</A>"
+				dat += "<A href='?src=\ref[src];choice=recommend'>Player Records</A><br><A href='?src=\ref[src];choice=promote'>Promote</A><br><A href='?src=\ref[src];choice=demote'>Demote</A><br>"
+				dat += "<A href='?src=\ref[src];choice=return'>Return</A>"
 				dat += "</body></html>"
+			if(2.2) //Character Employee Records
+				dat = {"
+				<html>
+				<body>
+				<b>[profiled.real_name] Character records:</b>
+				"}
+				for(var/N in profiled.CharRecords.employee_records)
+					dat += "[N]<br>"
+				dat += {"
+				<A href='?src=\ref[src];choice=return'>Return</A>
+				</html>
+				</body>
+				"}
 			if(3)
 				return //Nothin yet son!
 	else
 		dat += text("<A href='?src=\ref[];choice=Log In'>Log In</A>", src)
-		dat += text("<A href='?src=\ref[];choice=Return'>Return</A>", src)
 
 	popup = new(user, "dept_console", "[department] Management Console", 420, 480)
 	popup.add_stylesheet("dept_console", 'html/browser/department_management_console.css')
@@ -119,6 +145,8 @@
 				if (istype(scan, /obj/item/weapon/card/id))
 					if(check_access(scan))
 						authenticated = scan.registered_name
+						if(ishuman(usr))
+							src.idowner = usr
 
 			if("Profile")
 				profiled = locate(href_list["profiled"])
@@ -130,15 +158,17 @@
 				profiled = null
 				popup.update()
 /*--------------PROFILE BUTTONS--------------*/
-			if("recommend")
+			if("employee_record")
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
 				if(profiled.CharRecords.char_department != "Command") //Can't recommend your bosses?
 					to_chat(usr, "Leave blank to cancel.")
-					var/recommendation = input("Reason for recommendation", "Recommendations - Department management") as text
+					var/recommendation = input("Insert Record:", "Record Management - Department Management") as text
+					var/score = input("Insert record score (1-10)", "Record Management - Department Management") as num
 					if(!recommendation)	return
-//					profiled.CharRecords.recommendations.Add{"RECOMMENDATION: [usr.real_name] ([usr:job]) -- Official Recommendation\n
-//															   To [profiled.real_name] ([profiled.job]) for [recommendation]"}
-					profiled.CharRecords.recommendations.Add(name = "[usr.real_name] ([usr:job])", recommendation = "[recommendation]")
+					if(!score)	score = 0
+					if(!score in 1 to 10)	score = 0
+					profiled.CharRecords.add_employeerecord(src.idowner.real_name, recommendation, score)
+/*
 			if("promote")
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
 				switch(alert("Promote [profiled.real_name] to a Senior position or Head Role?","Promotion", "Senior Position", "Head Position", "No"))
@@ -177,8 +207,21 @@
 								calculate_department_rank(profiled) //Re-calculate to set proper rank.
 					if("No")
 						return
+*/
+			if("return")
+				switch(screen)
+					if(2)
+						screen = 1
+					if(2.1)
+						screen = 2
+					if(2.2)
+						screen = 2.1
+					if(3)
+						screen = 1
+				updateUsrDialog()
+
 		if(profiled)
-			profiled.CharRecords.save_character(1)
+			profiled.CharRecords.save_persistent()
 	add_fingerprint(usr)
 	updateUsrDialog()
 	return
