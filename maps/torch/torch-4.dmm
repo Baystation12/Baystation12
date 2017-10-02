@@ -2106,7 +2106,7 @@
 "Pk" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/rnd/equipment)
 "Pl" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/effect/landmark{name = "xeno_spawn"; pixel_x = -1},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/rnd/equipment)
 "Pm" = (/obj/effect/floor_decal/corner/purple{dir = 6},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/cable/green{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled/white,/area/rnd/equipment)
-"Pn" = (/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 8},/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/xenoflora_storage)
+"Pn" = (/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 8},/obj/machinery/honey_extractor,/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/xenoflora_storage)
 "Po" = (/obj/machinery/atmospherics/pipe/manifold4w/hidden,/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/xenoflora_storage)
 "Pp" = (/obj/machinery/atmospherics/binary/pump{dir = 4},/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/xenoflora_storage)
 "Pq" = (/obj/machinery/atmospherics/pipe/simple/hidden/red,/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/tiled/white,/area/rnd/xenobiology/xenoflora_storage)
