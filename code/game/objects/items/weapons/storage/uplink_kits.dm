@@ -34,6 +34,14 @@
 		/obj/item/weapon/implantpad
 		)
 
+/obj/item/weapon/storage/box/syndie_kit/imp_imprinting
+	name = "box (I)"
+	startswith = list(
+		/obj/item/weapon/implanter/imprinting,
+		/obj/item/weapon/implantpad,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/mindbreaker
+		)
+
 // Space suit uplink kit
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/space
 	//name = "\improper EVA gear pack"
