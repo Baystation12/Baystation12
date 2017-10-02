@@ -30,7 +30,7 @@
 		if("number")
 			new_value = input(usr,"Enter variable value:" ,"Value", value_to_set) as num|null
 		if("mob-reference")
-			new_value = input(usr,"Enter variable value:" ,"Value", value_to_set) as null|mob in GLOB.mob_list
+			new_value = input(usr,"Enter variable value:" ,"Value", value_to_set) as null|mob in SSmobs.mob_list
 		if("obj-reference")
 			new_value = input(usr,"Enter variable value:" ,"Value", value_to_set) as null|obj in world
 		if("turf-reference")

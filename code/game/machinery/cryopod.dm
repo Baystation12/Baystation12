@@ -221,10 +221,9 @@
 /obj/machinery/cryopod/lifepod/Initialize()
 	. = ..()
 	airtank = new()
-	var/turf/T = get_turf(src)
-	if(T)
-		airtank.copy_from(T.air)
-	
+	airtank.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
+	airtank.adjust_gas("nitrogen", MOLES_N2STANDARD, 0)
+
 /obj/machinery/cryopod/lifepod/return_air()
 	return airtank
 
@@ -243,7 +242,7 @@
 		for(var/obj/effect/overmap/OO in range(O,2))
 			if(OO.in_space || istype(OO,/obj/effect/overmap/sector/exoplanet))
 				possible_locations |= text2num(level)
-	
+
 	var/newz = GLOB.using_map.get_empty_zlevel()
 	if(possible_locations.len && prob(10))
 		newz = pick(possible_locations)
@@ -254,7 +253,7 @@
 	forceMove(nloc)
 
 //Don't use these for in-round leaving
-/obj/machinery/cryopod/lifepod/process()
+/obj/machinery/cryopod/lifepod/Process()
 	if(evacuation_controller && evacuation_controller.state >= EVAC_LAUNCHING)
 		if(occupant && !launched)
 			launch()
@@ -305,7 +304,7 @@
 	return 1
 
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
-/obj/machinery/cryopod/process()
+/obj/machinery/cryopod/Process()
 	if(occupant)
 		//Allow a ten minute gap between entering the pod and actually despawning.
 		if(world.time - time_entered < time_till_despawn)

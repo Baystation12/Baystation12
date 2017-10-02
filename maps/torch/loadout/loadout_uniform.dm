@@ -25,7 +25,7 @@
 
 /datum/gear/uniform/blackjumpshorts
 	display_name = "black jumpsuit shorts"
-	path = /obj/item/clothing/under/shorts/blackjumpshorts
+	path = /obj/item/clothing/under/color/blackjumpshorts
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/uniform/roboticist_skirt

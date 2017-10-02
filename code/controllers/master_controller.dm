@@ -68,11 +68,11 @@ datum/controller/game_controller/proc/setup_objects()
 		CHECK_SLEEP_MASTER
 
 	report_progress("Initializing atmos machinery")
-	for(var/obj/machinery/atmospherics/A in GLOB.machines)
+	for(var/obj/machinery/atmospherics/A in SSmachines.machinery)
 		A.atmos_init()
 		CHECK_SLEEP_MASTER
 
-	for(var/obj/machinery/atmospherics/unary/U in GLOB.machines)
+	for(var/obj/machinery/atmospherics/unary/U in SSmachines.machinery)
 		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
 			var/obj/machinery/atmospherics/unary/vent_pump/T = U
 			T.broadcast_status()
@@ -82,7 +82,7 @@ datum/controller/game_controller/proc/setup_objects()
 		CHECK_SLEEP_MASTER
 
 	report_progress("Initializing pipe networks")
-	for(var/obj/machinery/atmospherics/machine in GLOB.machines)
+	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
 		machine.build_network()
 		CHECK_SLEEP_MASTER
 

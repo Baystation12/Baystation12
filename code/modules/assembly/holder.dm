@@ -242,7 +242,7 @@
 		tmr.time=5
 		tmr.secured = 1
 		tmr.holder = src
-		GLOB.processing_objects.Add(tmr)
+		STOP_PROCESSING(SSobj, tmr)
 		a_left = tmr
 		a_right = ign
 		secured = 1

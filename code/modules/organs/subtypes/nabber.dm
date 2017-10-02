@@ -44,10 +44,10 @@
 		to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
 		innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 		owner.eye_blind = min(2, owner.eye_blind)
-		process()
+		Process()
 		owner.update_icons()
 
-/obj/item/organ/internal/eyes/nabber/process()
+/obj/item/organ/internal/eyes/nabber/Process()
 	if(eyes_shielded)
 		owner.eye_blind = 20
 	..()
@@ -60,7 +60,7 @@
 	var/dexalin_level = 10
 	var/phoron_level = 0.5
 
-/obj/item/organ/internal/phoron/process()
+/obj/item/organ/internal/phoron/Process()
 	if(owner)
 		var amount = 0.1
 		if(is_broken())
@@ -79,7 +79,8 @@
 	name = "acetone reactor"
 	var/acetone_level = 20
 
-/obj/item/organ/internal/liver/nabber/process()
+
+/obj/item/organ/internal/liver/nabber/Process()
 	if(owner)
 		var amount = 0.8
 		if(is_broken())
@@ -135,7 +136,7 @@
 	parent_organ = BP_CHEST
 
 
-/obj/item/organ/internal/brain/nabber/process()
+/obj/item/organ/internal/brain/nabber/Process()
 	if(!owner || !owner.should_have_organ(BP_HEART))
 		return
 

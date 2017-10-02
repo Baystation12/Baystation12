@@ -29,7 +29,7 @@
 			known_sectors[S.name] = R
 	..()
 
-/obj/machinery/computer/helm/process()
+/obj/machinery/computer/helm/Process()
 	..()
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
@@ -218,11 +218,27 @@
 
 	var/data[0]
 
+
+	var/turf/T = get_turf(linked)
+	var/obj/effect/overmap/sector/current_sector = locate() in T
+
+	data["sector"] = current_sector ? current_sector.name : "Deep Space"
+	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
+	data["s_x"] = linked.x
+	data["s_y"] = linked.y
+	data["speed"] = linked.get_speed()
+	data["accel"] = linked.get_acceleration()
+	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 	data["viewing"] = viewing
+
+	if(linked.get_speed())
+		data["ETAnext"] = "[round(linked.ETA()/10)] seconds"
+	else	
+		data["ETAnext"] = "N/A"
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "nav.tmpl", "[linked.name] Helm Control", 380, 530)
+		ui = new(user, src, ui_key, "nav.tmpl", "[linked.name] Navigation Screen", 380, 530)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -241,13 +257,11 @@
 		viewing = 0
 		return
 
-	if(!isAI(user))
+	if(viewing && linked &&!isAI(user))
 		user.set_machine(src)
-		if(linked)
-			user.reset_view(linked)
+		user.reset_view(linked)
 
 	ui_interact(user)
-
 
 /obj/machinery/computer/navigation/Topic(href, href_list)
 	if(..())
@@ -256,12 +270,9 @@
 	if (!linked)
 		return
 
-	if (href_list["move"])
-		var/mob/user = usr
-		user.unset_machine()
-		viewing = 0
-		return 1
-
 	if (href_list["viewing"])
 		viewing = !viewing
+		if(viewing && !isAI(usr))
+			var/mob/user = usr
+			user.reset_view(linked)
 		return 1

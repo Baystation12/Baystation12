@@ -31,13 +31,15 @@
 		var/datum/reagent/R = GLOB.chemical_reagents_list[T]
 		reagent_names += R.name
 
-	GLOB.processing_objects.Add(src)
+/obj/item/weapon/reagent_containers/borghypo/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/reagent_containers/borghypo/Destroy()
-	GLOB.processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/reagent_containers/borghypo/process() //Every [recharge_time] seconds, recharge some reagents for the cyborg+
+/obj/item/weapon/reagent_containers/borghypo/Process() //Every [recharge_time] seconds, recharge some reagents for the cyborg+
 	if(++charge_tick < recharge_time)
 		return 0
 	charge_tick = 0

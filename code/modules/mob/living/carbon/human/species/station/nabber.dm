@@ -57,7 +57,7 @@
 
 	flags = NO_SLIP | CAN_NAB | NO_BLOCK | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
 
 	bump_flag = HEAVY
 	push_flags = ALLMOBS
@@ -201,3 +201,33 @@
 	affecting.apply_damage(15, BRUTE, BP_CHEST, armor, DAM_SHARP, "organic punctures")
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
+
+
+/datum/species/nabber/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+	if(attacker.pulling_punches || target.lying || attacker == target)
+		return ..(attacker, target)
+	if(world.time < attacker.last_attack + 20)
+		to_chat(attacker, "<span class='notice'>You can't attack again so soon.</span>")
+		return 0
+	attacker.last_attack = world.time
+	var/turf/T = get_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
+	playsound(target.loc, 'sound/weapons/pushhiss.ogg', 50, 1, -1)
+	if(!T.density)
+		step(target, get_dir(get_turf(attacker), get_turf(target)))
+		target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
+	else
+		target.turf_collision(T, target.throw_speed / 2)
+	if(prob(50))
+		target.set_dir(GLOB.reverse_dir[target.dir])
+
+/datum/species/nabber/get_additional_examine_text(var/mob/living/carbon/human/H)
+	var/datum/gender/T = gender_datums[H.get_gender()]
+	if(H.pulling_punches)
+		return "\n[T.His] manipulation arms are out and [T.he] looks ready to use complex items."
+	else
+		return "\n<span class='warning'>[T.His] deadly upper arms are raised and [T.he] looks ready to attack!</span>"
+
+/datum/species/nabber/handle_post_spawn(var/mob/living/carbon/human/H)
+	..()
+	H.pulling_punches = TRUE
+	H.nabbing = FALSE

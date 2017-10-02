@@ -9,3 +9,51 @@
 		</div>
 	</div>
 </div>
+<div style="float:left;width:50%">
+	<h3>Sector information</h3> 
+	<div class='block'>
+		{{:data.sector}}
+		<br>
+		<span class='average'>Coordinates:</span> {{:data.s_x}} : {{:data.s_y}}
+		<br>
+		<span class='average'>Additional information:</span> {{:data.sector_info}}
+	</div>
+</div>
+
+<div style="float:right;width:50%">
+	<h3>Flight data</h3> 
+	<div class='block'>
+		<div class='item'>
+			<div class="itemLabel">
+				<span class='average'>ETA to next grid:</span>
+			</div>
+			<div style="float:right">
+				{{:data.ETAnext}}
+			</div>
+		</div>
+		<div class='item'>
+			<div class="itemLabel">
+				<span class='average'>Speed:</span>
+			</div>
+			<div style="float:right">
+				{{:data.speed}}
+			</div>
+		</div>
+		<div class='item'>
+			<div class="itemLabel">
+				<span class='average'>Acceleration:</span>
+			</div>
+			<div style="float:right">
+				{{:data.accel}}
+			</div>
+		</div>
+		<div class='item'>
+			<div class="itemLabel">
+				<span class='average'>Heading:</span>
+			</div>
+			<div style="float:right">
+				{{:data.heading}}
+			</div>
+		</div> 
+	</div>
+</div>

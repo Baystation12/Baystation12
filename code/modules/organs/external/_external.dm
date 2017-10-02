@@ -71,8 +71,10 @@
 	var/artery_name = "artery"         // Flavour text for cartoid artery, aorta, etc.
 	var/arterial_bleed_severity = 1    // Multiplier for bleeding in a limb.
 	var/tendon_name = "tendon"         // Flavour text for Achilles tendon, etc.
+	var/cavity_name = "cavity"
 
 	// Surgery vars.
+	var/cavity_max_w_class = 0
 	var/hatch = 0
 	var/stage = 0
 	var/cavity = 0
@@ -89,8 +91,7 @@
 	if(owner)
 		replaced(owner)
 		sync_colour_to_human(owner)
-	spawn(1)
-		get_icon()
+	get_icon()
 
 /obj/item/organ/external/Destroy()
 
@@ -496,7 +497,7 @@ This function completely restores a damaged organ to perfect condition.
 		return 1
 	return 0
 
-/obj/item/organ/external/process()
+/obj/item/organ/external/Process()
 	if(owner)
 
 		if(pain)

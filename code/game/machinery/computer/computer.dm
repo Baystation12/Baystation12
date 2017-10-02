@@ -27,7 +27,7 @@
 	power_change()
 	update_icon()
 
-/obj/machinery/computer/process()
+/obj/machinery/computer/Process()
 	if(stat & (NOPOWER|BROKEN))
 		return 0
 	return 1

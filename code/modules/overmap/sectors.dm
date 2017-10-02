@@ -45,6 +45,10 @@ var/list/points_of_interest = list()
 	if(base)
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
+	//handle automatic waypoints that spawned before us
+	for(var/obj/effect/shuttle_landmark/automatic/L in world)
+		if(L.z in map_z)
+			L.add_to_sector(src, 1)
 
 	//find shuttle waypoints
 	var/list/found_waypoints = list()
@@ -66,7 +70,7 @@ var/list/points_of_interest = list()
 				log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
 		restricted_waypoints[shuttle_name] = found_waypoints
 
-	for(var/obj/machinery/computer/sensors/S in GLOB.machines)
+	for(var/obj/machinery/computer/sensors/S in SSmachines.machinery)
 		if (S.z in map_z)
 			S.linked = src
 			testing("Sensor console at level [S.z] linked to overmap object '[name]'.")
@@ -88,7 +92,7 @@ var/list/points_of_interest = list()
 	. = ..()
 	if(known)
 		set_light(2, 5)
-		for(var/obj/machinery/computer/helm/H in GLOB.machines)
+		for(var/obj/machinery/computer/helm/H in SSmachines.machinery)
 			H.get_known_sectors()
 
 /proc/build_overmap()

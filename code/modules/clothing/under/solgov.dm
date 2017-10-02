@@ -9,9 +9,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	item_icons = list(
-		slot_w_uniform_str = 'icons/mob/solgov.dmi'
-		)
+	item_icons = list(slot_w_uniform_str = 'icons/mob/solgov.dmi')
 
 /obj/item/clothing/under/pt/expeditionary
 	name = "expeditionary pt uniform"
@@ -42,9 +40,7 @@
 	worn_state = "blackutility"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
-	item_icons = list(
-		slot_w_uniform_str = 'icons/mob/solgov.dmi'
-		)
+	item_icons = list(slot_w_uniform_str = 'icons/mob/solgov.dmi')
 
 /obj/item/clothing/under/utility/expeditionary
 	name = "expeditionary uniform"
@@ -197,9 +193,7 @@
 	worn_state = "whiteservice"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
-	item_icons = list(
-		slot_w_uniform_str = 'icons/mob/solgov.dmi'
-		)
+	item_icons = list(slot_w_uniform_str = 'icons/mob/solgov.dmi')
 
 /obj/item/clothing/under/service/expeditionary_skirt
 	name = "expeditionary service skirt"
@@ -252,9 +246,7 @@
 	worn_state = "greydress"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
-	item_icons = list(
-		slot_w_uniform_str = 'icons/mob/solgov.dmi'
-		)
+	item_icons = list(slot_w_uniform_str = 'icons/mob/solgov.dmi')
 
 /obj/item/clothing/under/mildress/expeditionary
 	name = "expeditionary dress uniform"

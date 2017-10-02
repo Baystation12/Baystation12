@@ -431,3 +431,51 @@
 		return /obj/effect/decal/cleanable/blood/tracks/footprints
 	else
 		return move_trail
+
+/datum/species/proc/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+	attacker.do_attack_animation(target)
+
+	if(target.w_uniform)
+		target.w_uniform.add_fingerprint(attacker)
+	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(attacker.zone_sel.selecting))
+
+	var/list/holding = list(target.get_active_hand() = 40, target.get_inactive_hand() = 20)
+
+	//See if they have any guns that might go off
+	for(var/obj/item/weapon/gun/W in holding)
+		if(W && prob(holding[W]))
+			var/list/turfs = list()
+			for(var/turf/T in view())
+				turfs += T
+			if(turfs.len)
+				var/turf/shoot_to = pick(turfs)
+				target.visible_message("<span class='danger'>[target]'s [W] goes off during the struggle!</span>")
+				return W.afterattack(shoot_to,target)
+
+	var/randn = rand(1, 100)
+	if(!(flags & NO_SLIP) && randn <= 25)
+		var/armor_check = target.run_armor_check(affecting, "melee")
+		target.apply_effect(3, WEAKEN, armor_check)
+		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		if(armor_check < 100)
+			target.visible_message("<span class='danger'>[attacker] has pushed [target]!</span>")
+		else
+			target.visible_message("<span class='warning'>[attacker] attempted to push [target]!</span>")
+		return
+
+	if(randn <= 60)
+		//See about breaking grips or pulls
+		if(target.break_all_grabs(attacker))
+			playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			return
+
+		//Actually disarm them
+		for(var/obj/item/I in holding)
+			if(I)
+				target.drop_from_inventory(I)
+				target.visible_message("<span class='danger'>[attacker] has disarmed [target]!</span>")
+				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				return
+
+	playsound(target.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+	target.visible_message("<span class='danger'>[attacker] attempted to disarm \the [target]!</span>")

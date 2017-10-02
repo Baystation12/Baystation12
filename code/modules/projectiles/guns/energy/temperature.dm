@@ -15,14 +15,14 @@
 	cell_type = /obj/item/weapon/cell/high
 
 
-/obj/item/weapon/gun/energy/temperature/New()
-	..()
-	GLOB.processing_objects.Add(src)
+/obj/item/weapon/gun/energy/temperature/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
 
 /obj/item/weapon/gun/energy/temperature/Destroy()
-	GLOB.processing_objects.Remove(src)
-	..()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
 
 
 /obj/item/weapon/gun/energy/temperature/attack_self(mob/living/user as mob)
@@ -62,7 +62,7 @@
 	return
 
 
-/obj/item/weapon/gun/energy/temperature/process()
+/obj/item/weapon/gun/energy/temperature/Process()
 	switch(temperature)
 		if(0 to 100) charge_cost = 100
 		if(100 to 250) charge_cost = 50

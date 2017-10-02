@@ -1,9 +1,12 @@
+//Shorts - new shorts of this type go in pants.dmi
+
 /obj/item/clothing/under/shorts
 	name = "athletic shorts"
 	icon_state = "redshorts"
 	desc = "95% Polyester, 5% Spandex!"
 	gender = PLURAL
 	body_parts_covered = LOWER_TORSO
+	item_icons = list(slot_w_uniform_str = 'icons/mob/pants.dmi')
 
 /obj/item/clothing/under/shorts/red
 	name = "red athletic shorts"
@@ -101,10 +104,3 @@
 	name = "khaki short shorts"
 	icon_state = "khaki_shorts_f"
 	worn_state = "khaki_shorts_f"
-
-/obj/item/clothing/under/shorts/blackjumpshorts
-	name = "black jumpsuit shorts"
-	desc = "The latest in space fashion, in a ladies' cut with shorts."
-	icon_state = "black"
-	item_state = "bl_suit"
-	worn_state = "blackf"

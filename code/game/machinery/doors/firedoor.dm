@@ -273,7 +273,7 @@
 	return FA
 
 // CHECK PRESSURE
-/obj/machinery/door/firedoor/process()
+/obj/machinery/door/firedoor/Process()
 	..()
 
 	if(density && next_process_time <= world.time)

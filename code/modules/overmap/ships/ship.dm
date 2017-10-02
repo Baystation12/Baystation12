@@ -21,21 +21,21 @@
 	for(var/datum/ship_engine/E in ship_engines)
 		if (E.holder.z in map_z)
 			engines |= E
-	for(var/obj/machinery/computer/engines/E in GLOB.machines)
+	for(var/obj/machinery/computer/engines/E in SSmachines.machinery)
 		if (E.z in map_z)
 			E.linked = src
 			testing("Engines console at level [E.z] linked to overmap object '[name]'.")
-	for(var/obj/machinery/computer/helm/H in GLOB.machines)
+	for(var/obj/machinery/computer/helm/H in SSmachines.machinery)
 		if (H.z in map_z)
 			nav_control = H
 			H.linked = src
 			H.get_known_sectors()
 			testing("Helm console at level [H.z] linked to overmap object '[name]'.")
-	for(var/obj/machinery/computer/navigation/N in GLOB.machines)
+	for(var/obj/machinery/computer/navigation/N in SSmachines.machinery)
 		if (N.z in map_z)
 			N.linked = src
 			testing("Navigation console at level [N.z] linked to overmap object '[name]'.")
-	GLOB.processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
 	accelerate(direction)
@@ -106,7 +106,7 @@
 		if(direction & SOUTH)
 			adjust_speed(0, -get_burn_acceleration())
 
-/obj/effect/overmap/ship/process()
+/obj/effect/overmap/ship/Process()
 	if(!is_still())
 		var/list/deltas = list(0,0)
 		for(var/i=1, i<=2, i++)

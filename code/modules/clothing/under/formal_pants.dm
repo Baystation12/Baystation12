@@ -1,12 +1,12 @@
+//Formal pants - new pants of this type go in pants.dmi
+
 /obj/item/clothing/under/formal_pants
 	name = "white pants"
 	desc = "Plain white pants. Boring."
 	icon_state = "whitepants"
 	gender = PLURAL
 	body_parts_covered = LOWER_TORSO|LEGS
-	item_icons = list(
-		slot_w_uniform_str = 'icons/mob/pants.dmi'
-		)
+	item_icons = list(slot_w_uniform_str = 'icons/mob/pants.dmi')
 
 /obj/item/clothing/under/formal_pants/red
 	name = "red pants"

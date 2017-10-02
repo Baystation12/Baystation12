@@ -5,13 +5,15 @@
 /obj/effect/overmap/ship/bearcat
 	name = "FTV Bearcat"
 	color = "#00FFFF"
-	start_x = 4
-	start_y = 4
 	base = 1
 	vessel_mass = 60
 	default_delay = 3 MINUTES
 	speed_mod = 0.1 MINUTE
 	burn_delay = 10 SECONDS
+
+/obj/effect/overmap/ship/bearcat/New()
+	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
+	..()
 
 /datum/shuttle/autodock/ferry/lift
 	name = "Cargo Lift"
@@ -109,3 +111,5 @@
 			uniform.attach_accessory(null, eyegore)
 		else
 			qdel(eyegore)
+	var/obj/item/weapon/cell/super/C = new()
+	H.put_in_any_hand_if_possible(C)

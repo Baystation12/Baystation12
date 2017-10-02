@@ -20,7 +20,7 @@
 	overlays.Cut()
 	icon_state = "flood[open ? "o" : ""][open && cell ? "b" : ""]0[on]"
 
-/obj/machinery/floodlight/process()
+/obj/machinery/floodlight/Process()
 	if(!on)
 		return
 

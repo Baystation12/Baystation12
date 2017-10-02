@@ -8,6 +8,8 @@ var/const/NETWORK_FOURTH_DECK = "Fourth Deck"
 var/const/NETWORK_POD         = "General Utility Pod"
 var/const/NETWORK_SECOND_DECK = "Second Deck"
 var/const/NETWORK_SUPPLY      = "Supply"
+var/const/NETWORK_HANGAR      = "Hangar"
+var/const/NETWORK_EXPLO       = "Exploration"
 var/const/NETWORK_THIRD_DECK  = "Third Deck"
 
 /datum/map/torch/get_network_access(var/network)
@@ -22,6 +24,10 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 			return access_guppy
 		if(NETWORK_SUPPLY)
 			return access_mailsorting
+		if(NETWORK_HANGAR)
+			return access_hangar
+		if(NETWORK_EXPLO)
+			return access_explorer
 	return get_shared_network_access(network) || ..()
 
 /datum/map/torch
@@ -40,6 +46,8 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 		NETWORK_SECOND_DECK,
 		NETWORK_THIRD_DECK,
 		NETWORK_SUPPLY,
+		NETWORK_HANGAR,
+		NETWORK_EXPLO,
 		NETWORK_COMMAND,
 		NETWORK_ENGINEERING,
 		NETWORK_MEDICAL,
@@ -87,6 +95,12 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 
 /obj/machinery/camera/network/supply
 	network = list(NETWORK_SUPPLY)
+
+/obj/machinery/camera/network/hangar
+	network = list(NETWORK_HANGAR)
+
+/obj/machinery/camera/network/exploration
+	network = list(NETWORK_EXPLO)
 
 /obj/machinery/camera/network/third_deck
 	network = list(NETWORK_THIRD_DECK)

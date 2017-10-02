@@ -150,7 +150,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 						plant_queue -= plant
 						if(!istype(plant))
 							continue
-						plant.process()
+						plant.Process()
 						processed++
 						sleep(1) // Stagger processing out so previous tick can resolve (overlapping plant segments etc)
 				sleep(max(1,(plant_tick_time-processed)))
