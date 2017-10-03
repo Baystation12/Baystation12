@@ -59,6 +59,8 @@
 	for(var/area/A)
 		if(!A.contents.len)
 			continue
+		if(A.type in GLOB.using_map.area_purity_test_exempt_areas)
+			continue
 		if(A.name != initial(A.name))
 			log_bad("[log_info_line(A)] has an edited name.")
 			impure_areas++
