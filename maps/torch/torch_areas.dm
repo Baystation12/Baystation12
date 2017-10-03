@@ -847,7 +847,6 @@
 /area/crew_quarters/sleep/cryo/aux
 	name = "\improper Auxiliary Cryogenic Storage"
 	icon_state = "Sleep"
-	flags = AREA_RAD_SHIELDED
 
 /area/crew_quarters/diplomat
 	name = "\improper Diplomatic Quarters"
@@ -1412,7 +1411,6 @@
 /area/crew_quarters/sleep/cryo
 	name = "\improper Cryogenic Storage"
 	icon_state = "Sleep"
-	flags = AREA_RAD_SHIELDED
 
 /area/hydroponics
 	name = "\improper Hydroponics"

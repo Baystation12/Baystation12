@@ -324,11 +324,12 @@
 	if(job.latejoin_at_spawnpoints)
 		var/obj/S = job_master.get_roundstart_spawnpoint(job.title)
 		spawn_turf = get_turf(S)
+	var/radlevel = radiation_repository.get_rads_at_turf(spawn_turf)
 	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
-	if(airstatus)
-		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable atmospheric conditions. \
-		You may die shortly after spawning. It is possible to select different spawn point via character preferences. \
-		Spawn anyway? More information: [airstatus]", "Atmosphere warning", "Abort", "Spawn anyway")
+	if(airstatus || radlevel > 0 )
+		var/reply = alert(usr, "Warning. Your selected spawn location seems to have unfavorable conditions. \
+		You may die shortly after spawning. \
+		Spawn anyway? More information: [airstatus] Radiation: [radlevel] Bq", "Atmosphere warning", "Abort", "Spawn anyway")
 		if(reply == "Abort")
 			return 0
 		else
