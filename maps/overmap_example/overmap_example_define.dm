@@ -15,7 +15,7 @@
 
 	evac_controller_type = /datum/evacuation_controller/lifepods
 	lobby_icon = 'maps/overmap_example/overmap_example_lobby.dmi'
-	lobby_screens = list("spess","aesthetic")  
+	lobby_screens = list("spess","aesthetic")
 
 	allowed_spawns = list("Cryogenic Storage")
 	default_spawn = "Cryogenic Storage"
@@ -35,7 +35,7 @@
 	salary_modifier = 0.2
 
 /datum/map/overmap_example/map_info(victim)
-	to_chat(victim, "You're aboard <b>[station_name]</b> an independant vessel affiliated with Free Trade Union, on a SPACE FRONTIER. No major corporation or government has laid claims on planets in this sector, so their exploitation is entirely up to you - mine, poach and deforest all you want.")
+	to_chat(victim, "You're aboard the <b>[station_name],</b> an independent vessel affiliated with Free Trade Union, on a SPACE FRONTIER. No major corporation or government has laid claim on the planets in this sector, so their exploitation is entirely up to you - mine, poach and deforest all you want.")
 
 /datum/map/overmap_example/setup_map()
 	..()

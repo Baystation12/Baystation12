@@ -5,7 +5,6 @@
 /obj/effect/overmap/ship/bearcat
 	name = "FTV Bearcat"
 	color = "#00FFFF"
-	base = 1
 	vessel_mass = 60
 	default_delay = 3 MINUTES
 	speed_mod = 0.1 MINUTE
