@@ -815,21 +815,22 @@
 
 /obj/item/weapon/marshalling_wand/Initialize()
 	set_light(1.5, 1.5, "#ff0000")
+	return ..()
 
 /obj/item/weapon/marshalling_wand/attack_self(mob/living/user as mob)
 	if (user.a_intent == I_HELP)
-		usr.visible_message("<span class='notice'>[user.name] beckons with \the [src], signalling forward motion.</span>",
+		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",
 							"<span class='notice'>You beckon with \the [src], signalling forward motion.</span>")
-	else if (usr.a_intent == I_DISARM)
-		usr.visible_message("<span class='notice'>[user.name] holds \the [src] above their head, signalling a stop.</span>",
+	else if (user.a_intent == I_DISARM)
+		user.visible_message("<span class='notice'>[user] holds \the [src] above their head, signalling a stop.</span>",
 							"<span class='notice'>You hold \the [src] above your head, signalling a stop.</span>")
-	else if (usr.a_intent == I_GRAB)
+	else if (user.a_intent == I_GRAB)
 		var/WAND_TURN_DIRECTION
 		if (user.l_hand == src) WAND_TURN_DIRECTION = "left"
 		else if (user.r_hand == src) WAND_TURN_DIRECTION = "right"
 		else return //how can you not be holding it in either hand?? black magic
-		usr.visible_message("<span class='notice'>[user.name] waves \the [src] to the [WAND_TURN_DIRECTION], signalling a turn.</span>",
+		user.visible_message("<span class='notice'>[user] waves \the [src] to the [WAND_TURN_DIRECTION], signalling a turn.</span>",
 							"<span class='notice'>You wave \the [src] to the [WAND_TURN_DIRECTION], signalling a turn.</span>")
-	else if (usr.a_intent == I_HURT)
-		usr.visible_message("<span class='warning'>[user.name] frantically waves \the [src] above their head!</span>",
+	else if (user.a_intent == I_HURT)
+		user.visible_message("<span class='warning'>[user] frantically waves \the [src] above their head!</span>",
 							"<span class='warning'>You frantically wave \the [src] above your head!</span>")
