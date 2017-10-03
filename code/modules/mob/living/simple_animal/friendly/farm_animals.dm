@@ -48,13 +48,13 @@
 		if(locate(/obj/effect/plant) in loc)
 			var/obj/effect/plant/SV = locate() in loc
 			if(prob(60))
-				src.visible_message("<span class='notice'>[src] eats the plants.</span>")
+				src.visible_message("<span class='notice'>\The [src] eats the plants.</span>")
 				SV.die_off(1)
 				if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
 					var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
 					qdel(SP)
 			else if(prob(20))
-				src.visible_message("<span class='notice'>[src] chews on the plants.</span>")
+				src.visible_message("<span class='notice'>\The [src] chews on the plants.</span>")
 			return
 
 		if(!pulledby)

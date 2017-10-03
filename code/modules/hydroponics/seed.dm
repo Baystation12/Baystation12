@@ -7,7 +7,7 @@
 	var/uid                        // Unique identifier.
 	var/name                       // Index for global list.
 	var/seed_name                  // Plant name for seed packet.
-	var/seed_noun = "seeds"        // Descriptor for packet.
+	var/seed_noun = SEED_NOUN_SEEDS// Descriptor for packet.
 	var/display_name               // Prettier name.
 	var/roundstart                 // If set, seed will not display variety number.
 	var/mysterious                 // Only used for the random seed packets.
@@ -346,7 +346,7 @@
 		//These are various plant/mushroom genuses.
 		//I realize these might not be entirely accurate, but it could facilitate RP.
 		var/list/possible_prefixes
-		if(seed_noun == "cuttings" || seed_noun == "seeds" || (seed_noun == "nodes" && prob(50)))
+		if(seed_noun == SEED_NOUN_CUTTINGS || seed_noun == SEED_NOUN_SEEDS || (seed_noun == SEED_NOUN_NODES && prob(50)))
 			possible_prefixes = list("amelanchier", "saskatoon",
 										"magnolia", "angiosperma", "osmunda", "scabiosa", "spigelia", "psydrax", "chastetree",
 										"strychnos", "treebine", "caper", "justica", "ragwortus", "everlasting", "combretum",
@@ -384,7 +384,7 @@
 
 	roundstart = 0
 	mysterious = 1
-	seed_noun = pick("spores","nodes","cuttings","seeds")
+	seed_noun = pick(SEED_NOUN_SEEDS, SEED_NOUN_PITS, SEED_NOUN_NODES, SEED_NOUN_CUTTINGS)
 
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
 	set_trait(TRAIT_PRODUCT_ICON,pick(plant_controller.plant_product_sprites))
@@ -442,7 +442,7 @@
 		for(var/x=1;x<=additional_chems;x++)
 			var/new_chem = pick(GLOB.chemical_reagents_list)
 			if(new_chem in banned_chems)
-				additional_chems++
+				x--
 				continue
 			banned_chems += new_chem
 			chems[new_chem] = list(rand(1,10),rand(10,20))

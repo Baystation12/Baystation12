@@ -99,10 +99,10 @@
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		icon = 'icons/obj/hydroponics_vines.dmi'
 		growth_type = 2 // Vines by default.
-		if(seed.seed_noun == "cuttings")
+		if(seed.seed_noun == SEED_NOUN_CUTTINGS)
 			growth_type = 1 // WOOOORMS.
-		else if(!(seed.seed_noun in list("seeds","pits")))
-			if(seed.seed_noun == "nodes")
+		else if(!(seed.seed_noun in list(SEED_NOUN_SEEDS,SEED_NOUN_PITS)))
+			if(seed.seed_noun == SEED_NOUN_NODES)
 				growth_type = 3 // Biomass
 			else
 				growth_type = 4 // Mold

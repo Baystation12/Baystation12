@@ -27,7 +27,7 @@ var/global/list/plant_seed_sprites = list()
 
 	// Update icon.
 	overlays.Cut()
-	var/is_seeds = ((seed.seed_noun in list("seeds","pits","nodes")) ? 1 : 0)
+	var/is_seeds = ((seed.seed_noun in list(SEED_NOUN_SEEDS, SEED_NOUN_PITS, SEED_NOUN_NODES)) ? 1 : 0)
 	var/image/seed_mask
 	var/seed_base_key = "base-[is_seeds ? seed.get_trait(TRAIT_PLANT_COLOUR) : "spores"]"
 	if(plant_seed_sprites[seed_base_key])
