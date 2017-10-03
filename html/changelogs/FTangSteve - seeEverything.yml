@@ -1,6 +1,0 @@
-author: FTangSteve
-
-delete-after: True
-
-changes: 
-  - rscadd: "Adds a few cameras to hangar and to exploration with a network for each."
