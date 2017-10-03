@@ -1,6 +1,0 @@
-author: FTangSteve
-
-delete-after: True
-
-changes: 
-  - rscadd: "Adds in some of the GAS event things like the threat display and associated sounds."
