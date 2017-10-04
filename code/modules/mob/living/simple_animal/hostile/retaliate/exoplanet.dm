@@ -38,6 +38,21 @@
 					else
 						qdel(S)
 
+/mob/living/simple_animal/proc/name_species()
+	set name = "Name Alien Species"
+	set category = "Exploration"
+	set src in view()
+
+	if(!GLOB.using_map.use_overmap)
+		return
+	
+	for(var/obj/effect/overmap/sector/exoplanet/E)
+		if(src in E.animals)
+			var/newname = sanitize(input("What do you want to name this species?", "Species naming", E.get_random_species_name()) as text|null)
+			if(newname)
+				E.rename_species(type, newname)
+				to_chat(usr,"<span class='notice'>This species will be known from now on as '[newname]'.</span>")
+
 /mob/living/simple_animal/hostile/retaliate/beast/samak
 	name = "samak"
 	desc = "A fast, armoured predator accustomed to hiding and ambushing in cold terrain."

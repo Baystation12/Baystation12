@@ -14,6 +14,7 @@
 	var/landmark_type = /obj/effect/shuttle_landmark/automatic
 
 	var/list/actors = list() //things that appear in engravings on xenoarch finds.
+	var/list/species = list() //list of names to use for simple animals
 
 	var/repopulating = 0
 	var/repopulate_types = list() // animals which have died that may come back
@@ -137,6 +138,11 @@
 			S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 
 /obj/effect/overmap/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
+	if(species[A.type])
+		A.name = species[A.type]
+	else 
+		A.name = "alien creature"
+		A.verbs |= /mob/living/simple_animal/proc/name_species
 	A.minbodytemp = atmosphere.temperature - 20
 	A.maxbodytemp = atmosphere.temperature + 30
 	A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
@@ -145,6 +151,16 @@
 	if(A.max_gas)
 		A.max_gas = list()
 		A.max_gas[badgas] = 5
+
+/obj/effect/overmap/sector/exoplanet/proc/get_random_species_name()
+	return pick("nol","shan","can","fel","xor")+pick("a","e","o","t","ar")+pick("ian","oid","ac","ese","inian","rd")
+
+/obj/effect/overmap/sector/exoplanet/proc/rename_species(type, newname)
+	species[type] = newname
+	for(var/mob/living/simple_animal/A in animals)
+		if(istype(A,type))
+			A.name = newname
+			A.verbs -= /mob/living/simple_animal/proc/name_species
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_landing()
 	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
