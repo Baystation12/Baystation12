@@ -9,6 +9,10 @@
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
 			seed.set_trait(TRAIT_POTENCY,rand(potency_min, potency_max)) // 70-100 potency will help guarantee a wide spread and powerful effects.
 			seed.set_trait(TRAIT_MATURATION,rand(maturation_min, maturation_max))
+			seed.set_trait(TRAIT_HARVEST_REPEAT, 1)
+			seed.set_trait(TRAIT_STINGS, 1)
+			seed.set_trait(TRAIT_CARNIVOROUS,2)
+
 			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
@@ -66,8 +70,6 @@
 	spread_chance = 0
 
 /obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent, var/start_matured = 0)
-	..()
-	
 	if(!newparent)
 		parent = src
 	else
@@ -76,10 +78,11 @@
 	if(start_matured)
 		mature_time = 0
 		health = max_health
+	..()
 
 /obj/effect/plant/Initialize()
 	. = ..()
-	
+
 	if(!plant_controller)
 		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
 		return INITIALIZE_HINT_QDEL
@@ -96,10 +99,10 @@
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		icon = 'icons/obj/hydroponics_vines.dmi'
 		growth_type = 2 // Vines by default.
-		if(seed.get_trait(TRAIT_CARNIVOROUS) == 2)
+		if(seed.seed_noun == SEED_NOUN_CUTTINGS)
 			growth_type = 1 // WOOOORMS.
-		else if(!(seed.seed_noun in list("seeds","pits")))
-			if(seed.seed_noun == "nodes")
+		else if(!(seed.seed_noun in list(SEED_NOUN_SEEDS,SEED_NOUN_PITS)))
+			if(seed.seed_noun == SEED_NOUN_NODES)
 				growth_type = 3 // Biomass
 			else
 				growth_type = 4 // Mold
@@ -114,7 +117,9 @@
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
-	
+
+	Process()
+
 /obj/effect/plant/Destroy()
 	if(plant_controller)
 		plant_controller.remove_plant(src)
