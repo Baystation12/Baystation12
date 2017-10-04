@@ -1,0 +1,49 @@
+{{if data.error}}
+<h2>An error has occured:</h2>
+Additional information: {{:data.error}}<br>
+<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+{{:helper.link('Back to menu', null, { "PRG_backtomenu" : 1 })}}
+{{else}}
+{{if data.browsing}}
+	{{:helper.link('BACK TO EDITOR', null, { "PRG_closebrowser" : 1 })}}
+	<h2>Available documents (local):</h2>
+	<table>
+		<tr><th>Name
+		<th>Size (GQ)
+		{{for data.files}}
+			<tr><td>{{:value.name}}
+			<td>{{:value.size}}GQ
+			<td>{{:helper.link('OPEN', null, { "PRG_openfile" : value.name })}}
+		{{/for}}
+	</table>
+	{{if data.usbconnected}}
+		<h2>Available documents (portable device):</h2>
+		<table>
+			<tr><th>Name
+			<th>Size (GQ)
+			{{for data.usbfiles}}
+				<tr><td>{{:value.name}}
+				<td>{{:value.size}}GQ
+				<td>{{:helper.link('OPEN', null, { "PRG_openfile" : value.name })}}
+			{{/for}}
+		</table>
+	{{/if}}
+{{else}}
+	<h2>Document: {{:data.filename}}</h2>
+	<div class='item'>
+	{{:helper.link('NEW', null, { "PRG_newfile" : 1 })}}
+	{{:helper.link('LOAD', null, { "PRG_loadmenu" : 1 })}}
+	{{:helper.link('SAVE', null, { "PRG_savefile" : 1 })}}
+	{{:helper.link('SAVE AS', null, { "PRG_saveasfile" : 1 })}}
+	</div>
+	<div class='item'>
+	{{:helper.link('EDIT', null, { "PRG_editfile" : 1 })}}
+	{{:helper.link('PREVIEW', null, { "PRG_txtrpeview" : 1 }, data.filedata ? null : 'disabled')}}
+	{{:helper.link('FORMATTING HELP', null, { "PRG_taghelp" : 1 })}}
+	{{:helper.link('PRINT', null, { "PRG_printfile" : 1 })}}
+	</div><hr>
+	<div class='block'>
+		{{:data.filedata}}
+	</div>
+{{/if}}
+{{/if}}

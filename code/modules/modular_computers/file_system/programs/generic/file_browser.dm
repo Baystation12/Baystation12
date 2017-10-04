@@ -1,5 +1,3 @@
-#define MAX_TEXTFILE_LENGTH 128000		// 512GQ file
-
 /datum/computer_file/program/filemanager
 	filename = "filemanager"
 	filedesc = "NTOS File Manager"
@@ -205,4 +203,3 @@
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
-#undef MAX_TEXTFILE_LENGTH
