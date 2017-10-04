@@ -483,10 +483,11 @@
 /datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
+	M.add_chemical_effect(CE_MIND, -2)
 	if(alien == IS_SKRELL)
-		M.hallucination = max(M.hallucination, (100 * 0.8))
+		M.hallucination(25, 30)
 	else
-		M.hallucination = max(M.hallucination, 100)
+		M.hallucination(50, 50)
 
 /datum/reagent/psilocybin
 	name = "Psilocybin"
@@ -519,6 +520,7 @@
 		if(prob(10))
 			M.emote(pick("twitch", "giggle"))
 	else
+		M.add_chemical_effect(CE_MIND, -1)
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(10)
 		M.make_dizzy(10)

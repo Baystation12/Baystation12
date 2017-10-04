@@ -21,9 +21,9 @@
 		sound_to(user, get_sfx("swing_hit"))
 	if(prob(5))
 		to_chat(H, "<span class='warning'>You feel unhinged.</span>")
-	H.hallucination += 5
+	H.adjust_hallucination(5,5)
 	H.confused += 2
 	H.dizziness += 2
-	if(H.hallucination > 50)
+	if(H.hallucination_power > 50)
 		H.adjustBrainLoss(5)
 		to_chat(H, "<span class='danger'>You feel your mind tearing apart!</span>")
