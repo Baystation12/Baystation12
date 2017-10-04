@@ -173,7 +173,7 @@
 	M.adjustOxyLoss(3 * removed)
 	M.Weaken(10)
 	M.silent = max(M.silent, 10)
-	if(dose <= removed) //half-assed attempt to make timeofdeath update only at the onset
+	if(M.chem_doses[type] <= removed) //half-assed attempt to make timeofdeath update only at the onset
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
@@ -330,12 +330,12 @@
 	if(alien == IS_SKRELL)
 		threshold = 1.2
 
-	if(dose < 1 * threshold)
-		if(dose == metabolism * 2 || prob(5))
+	if(M.chem_doses[type] < 1 * threshold)
+		if(M.chem_doses[type] == metabolism * 2 || prob(5))
 			M.emote("yawn")
-	else if(dose < 1.5 * threshold)
+	else if(M.chem_doses[type] < 1.5 * threshold)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	else if(dose < 5 * threshold)
+	else if(M.chem_doses[type] < 5 * threshold)
 		if(prob(50))
 			M.Weaken(2)
 		M.drowsyness = max(M.drowsyness, 20)
@@ -361,16 +361,16 @@
 	if(alien == IS_SKRELL)
 		threshold = 1.2
 
-	if(dose == metabolism * threshold)
+	if(M.chem_doses[type] == metabolism * threshold)
 		M.confused += 2
 		M.drowsyness += 2
-	else if(dose < 2 * threshold)
+	else if(M.chem_doses[type] < 2 * threshold)
 		M.Weaken(30)
 		M.eye_blurry = max(M.eye_blurry, 10)
 	else
 		M.sleeping = max(M.sleeping, 30)
 
-	if(dose > 1 * threshold)
+	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
 
 /datum/reagent/chloralhydrate/beer2 //disguised as normal beer for use by emagged brobots
@@ -497,12 +497,12 @@
 
 	M.druggy = max(M.druggy, 30)
 
-	if(dose < 1 * threshold)
+	if(M.chem_doses[type] < 1 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_dizzy(5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
-	else if(dose < 2 * threshold)
+	else if(M.chem_doses[type] < 2 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
@@ -533,9 +533,9 @@
 	if(H.species.name == SPECIES_PROMETHEAN)
 		return
 	H.adjustToxLoss(40 * removed)
-	if(dose < 1 || prob(30))
+	if(H.chem_doses[type] < 1 || prob(30))
 		return
-	dose = 0
+	H.chem_doses[type] = 0
 	var/list/meatchunks = list()
 	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
 		var/obj/item/organ/external/E = H.get_organ(limb_tag)
@@ -647,7 +647,7 @@
 /datum/reagent/toxin/corrupting/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(prob(5))
-		if(dose < 15)
+		if(M.chem_doses[type] < 15)
 			to_chat(M, "<span class='warning'>You feel funny...</span>")
 		else
 			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")

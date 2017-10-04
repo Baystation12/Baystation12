@@ -20,8 +20,6 @@
 	var/metabolism = REM // This would be 0.2 normally
 	var/ingest_met = 0
 	var/touch_met = 0
-	var/dose = 0
-	var/max_dose = 0
 	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = "#000000"
@@ -67,12 +65,10 @@
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
-	max_dose = max(volume, max_dose)
 	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
 		effective *= (MOB_MEDIUM/M.mob_size)
-		max_dose *= (MOB_MEDIUM/M.mob_size)
 
-	dose = min(dose + effective, max_dose)
+	M.chem_doses[type] = M.chem_doses[type] + effective
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
 			if(CHEM_BLOOD)
