@@ -15,7 +15,7 @@
 
 /obj/structure/closet/secure_closet/CO/WillContain()
 	return list(
-		/obj/item/clothing/suit/storage/vest/solgov/command,
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/storage/vest/solgov/command, /obj/item/clothing/suit/armor/pcarrier/medium/command)),
 		/obj/item/weapon/cartridge/captain,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchcaptain,
@@ -47,7 +47,7 @@
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/weapon/cartridge/hop,
-		/obj/item/clothing/suit/storage/vest/solgov/command,
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/storage/vest/solgov/command, /obj/item/clothing/suit/armor/pcarrier/medium/command)),
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchxo,
 		/obj/item/weapon/gun/energy/gun,
@@ -81,7 +81,7 @@
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/weapon/cartridge/hop,
-		/obj/item/clothing/suit/storage/vest/solgov/command,
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/storage/vest/solgov/command, /obj/item/clothing/suit/armor/pcarrier/medium/command)),
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchxo,
 		/obj/item/weapon/gun/energy/gun,
@@ -111,7 +111,7 @@
 		/obj/item/device/radio,
 		/obj/item/weapon/pen,
 		/obj/item/device/tape/random,
-		/obj/item/clothing/suit/storage/vest/solgov/command,
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/storage/vest/solgov/command, /obj/item/clothing/suit/armor/pcarrier/medium/command)),
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/device/taperecorder,
 		/obj/item/device/flash,

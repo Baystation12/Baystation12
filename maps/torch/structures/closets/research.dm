@@ -40,7 +40,7 @@
 		/obj/item/taperoll/research,
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/device/holowarrant,
-		/obj/item/clothing/suit/armor/vest/nt,
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/armor/vest/nt, /obj/item/clothing/suit/armor/pcarrier/light)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/toxins, /obj/item/weapon/storage/backpack/satchel_tox)),
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/tox, 50)
 	)
@@ -153,8 +153,8 @@
 /obj/structure/closet/secure_closet/guard/WillContain()
 	return list(
 		/obj/item/clothing/under/rank/guard,
-		/obj/item/clothing/suit/armor/vest/nt,
-		/obj/item/clothing/suit/storage/vest/nt,
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/armor/vest/nt, /obj/item/clothing/suit/armor/pcarrier/light/nt)),
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/storage/vest/nt, /obj/item/clothing/suit/armor/pcarrier/medium/nt)),
 		/obj/item/clothing/head/helmet/nt/guard,
 		/obj/item/clothing/head/soft/sec/corp/guard,
 		/obj/item/clothing/head/beret/guard,

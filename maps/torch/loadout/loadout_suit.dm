@@ -67,7 +67,7 @@
 	display_name = "suit jackets"
 	path = /obj/item/clothing/suit/storage
 	allowed_roles = FORMAL_ROLES
-	
+
 /datum/gear/suit/suit_jacket/New()
 	..()
 	var/suitjackets = list()
@@ -159,3 +159,16 @@
 	path = /obj/item/clothing/suit/storage/toggle/track
 	allowed_roles = RESTRICTED_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
+
+/datum/gear/suit/pcarrier
+	display_name = "plate carrier selection"
+	path = /obj/item/clothing/suit/armor/pcarrier
+	cost = 1
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/suit/pcarrier/New()
+	..()
+	var/armors = list()
+	armors["green plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/green
+	armors["tan plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/tan
+	gear_tweaks += new/datum/gear_tweak/path(armors)
