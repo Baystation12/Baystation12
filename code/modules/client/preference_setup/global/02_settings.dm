@@ -30,6 +30,9 @@
 	for(var/cp in get_client_preferences())
 		var/datum/client_preference/client_pref = cp
 		client_preference_keys += client_pref.key
+		if(!client_pref.may_toggle(preference_mob()))
+			pref.preferences_enabled -= client_pref.key
+			pref.preferences_disabled -= client_pref.key
 		if((client_pref.key in pref.preferences_enabled) || (client_pref.key in pref.preferences_disabled))
 			continue
 
@@ -85,7 +88,7 @@
 		var/datum/client_preference/cp = get_client_preference(preference)
 		return cp && (cp.key in prefs.preferences_enabled)
 	else
-		log_error("Client is lacking preferences: [log_info_line(src)]")	
+		log_error("Client is lacking preferences: [log_info_line(src)]")
 
 /client/proc/is_preference_disabled(var/preference)
 	return !is_preference_enabled(preference)
