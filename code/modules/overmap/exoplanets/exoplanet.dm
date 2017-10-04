@@ -117,26 +117,24 @@
 	max_animal_count = animals.len
 
 /obj/effect/overmap/sector/exoplanet/proc/update_biome()
-	for(var/gas in atmosphere.gas)
-		breathgas[gas] = round(0.4*atmosphere.gas[gas])
-	var/list/badgases = gas_data.gases.Copy()
-	badgases -= atmosphere.gas
-	badgas = pick(badgases)
 	for(var/datum/seed/S in seeds)
-		S.set_trait(TRAIT_IDEAL_HEAT,          atmosphere.temperature + rand(-5,5),800,70)
-		S.set_trait(TRAIT_HEAT_TOLERANCE,      S.get_trait(TRAIT_HEAT_TOLERANCE) + rand(-5,5),800,70)
-		S.set_trait(TRAIT_LOWKPA_TOLERANCE,    atmosphere.return_pressure() + rand(-5,-50),80,0)
-		S.set_trait(TRAIT_HIGHKPA_TOLERANCE,   atmosphere.return_pressure() + rand(5,50),500,110)
-		if(S.exude_gasses)
-			S.exude_gasses -= badgas
-		if(S.consume_gasses)
-			S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
-		for(var/g in atmosphere.gas)
-			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
-				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
+		adapt_seed(S)
 
 	for(var/mob/living/simple_animal/A in animals)
 		adapt_animal(A)
+
+/obj/effect/overmap/sector/exoplanet/proc/adapt_seed(var/datum/seed/S)
+	S.set_trait(TRAIT_IDEAL_HEAT,          atmosphere.temperature + rand(-5,5),800,70)
+	S.set_trait(TRAIT_HEAT_TOLERANCE,      S.get_trait(TRAIT_HEAT_TOLERANCE) + rand(-5,5),800,70)
+	S.set_trait(TRAIT_LOWKPA_TOLERANCE,    atmosphere.return_pressure() + rand(-5,-50),80,0)
+	S.set_trait(TRAIT_HIGHKPA_TOLERANCE,   atmosphere.return_pressure() + rand(5,50),500,110)
+	if(S.exude_gasses)
+		S.exude_gasses -= badgas
+	if(S.consume_gasses)
+		S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
+	for(var/g in atmosphere.gas)
+		if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
+			S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
 
 /obj/effect/overmap/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
 	A.minbodytemp = atmosphere.temperature - 20
@@ -179,6 +177,13 @@
 	atmosphere.temperature = T20C + rand(-10, 10)
 	var/factor = max(rand(60,140)/100, 0.6)
 	atmosphere.multiply(factor)
+
+	//Set up gases for living things
+	for(var/gas in atmosphere.gas)
+		breathgas[gas] = round(0.4*atmosphere.gas[gas])
+	var/list/badgases = gas_data.gases.Copy()
+	badgases -= atmosphere.gas
+	badgas = pick(badgases)
 
 /obj/effect/overmap/sector/exoplanet/proc/process_map_edge(atom/movable/A)
 	var/new_x
