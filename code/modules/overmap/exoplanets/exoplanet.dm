@@ -319,21 +319,28 @@
 		else if(carnivore_prob < 20)
 			S.set_trait(TRAIT_CARNIVOROUS,1)
 		small_flora_types += S
-	for(var/i = 1 to flora_diversity)
-		var/datum/seed/S = new()
-		S.randomize()
-		S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
-		S.set_trait(TRAIT_PLANT_ICON,"tree5")
-		S.set_trait(TRAIT_SPREAD,0)
-		S.set_trait(TRAIT_HARVEST_REPEAT,1)
-		S.chems["woodpulp"] = 1
-		big_flora_types += S
+	if(large_flora_prob)
+		var/tree_diversity = max(1,flora_diversity/2)
+		for(var/i = 1 to tree_diversity)
+			var/datum/seed/S = new()
+			S.randomize()
+			S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
+			S.set_trait(TRAIT_PLANT_ICON,"tree")
+			S.set_trait(TRAIT_SPREAD,0)
+			S.set_trait(TRAIT_HARVEST_REPEAT,1)
+			S.set_trait(TRAIT_LARGE,1)
+			var/color = pick(plantcolors)
+			if(color == "RANDOM")
+				color = get_random_colour(0,75,190)
+			S.set_trait(TRAIT_LEAVES_COLOUR,color)
+			S.chems["woodpulp"] = 1
+			big_flora_types += S
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)
 	if(big)
-		new /obj/effect/vine(T, pick(big_flora_types), start_matured = 1)
+		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(T, pick(big_flora_types), 1)
 	else
-		new /obj/effect/vine(T, pick(small_flora_types), start_matured = 1)
+		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(T, pick(small_flora_types), 1)
 
 /turf/simulated/floor/exoplanet
 	name = "space land"

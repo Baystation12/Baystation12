@@ -57,6 +57,8 @@
 #define TRAIT_BIOLUM_COLOUR        37
 #define TRAIT_IMMUTABLE            38
 #define TRAIT_FLESH_COLOUR         39
+#define TRAIT_LARGE            	   40
+#define TRAIT_LEAVES_COLOUR        41
 
 // Seed noun datums
 #define SEED_NOUN_SPORES          "spores"
@@ -64,3 +66,8 @@
 #define SEED_NOUN_NODES           "notes"
 #define SEED_NOUN_CUTTINGS        "cuttings"
 #define SEED_NOUN_SEEDS           "seeds"
+
+#define GROWTH_WORMS      		  "worms"
+#define GROWTH_VINES      		  "vines"
+#define GROWTH_BIOMASS         	  "mass"
+#define GROWTH_MOLD          	  "mold"

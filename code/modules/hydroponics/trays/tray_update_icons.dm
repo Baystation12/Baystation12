@@ -41,16 +41,12 @@
 				if(maturation < 1)
 					maturation = 1
 				overlay_stage = maturation ? max(1,round(age/maturation)) : 1
-			var/ikey = "[seed.get_trait(TRAIT_PLANT_ICON)]-[overlay_stage]"
-			var/image/plant_overlay = plant_controller.plant_icon_cache["[ikey]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"]
-			if(!plant_overlay)
-				plant_overlay = image('icons/obj/hydroponics_growing.dmi', "[ikey]")
-				plant_overlay.color = seed.get_trait(TRAIT_PLANT_COLOUR)
-				plant_controller.plant_icon_cache["[ikey]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"] = plant_overlay
+			
+			var/image/plant_overlay = seed.get_icon(overlay_stage)
 			overlays |= plant_overlay
 
 			if(harvest && overlay_stage == seed.growth_stages)
-				ikey = "[seed.get_trait(TRAIT_PRODUCT_ICON)]"
+				var/ikey = "[seed.get_trait(TRAIT_PRODUCT_ICON)]"
 				var/image/harvest_overlay = plant_controller.plant_icon_cache["product-[ikey]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"]
 				if(!harvest_overlay)
 					harvest_overlay = image('icons/obj/hydroponics_products.dmi', "[ikey]")
@@ -73,14 +69,15 @@
 		if(harvest)
 			overlays += "over_harvest3"
 
+	if(seed && seed.get_trait(TRAIT_LARGE))
+		set_density(1)
+		set_opacity(1)
+	else
+		set_density(0)
+		set_opacity(0)
 	// Update bioluminescence.
-	if(seed)
-		if(seed.get_trait(TRAIT_BIOLUM))
-			var/clr
-			if(seed.get_trait(TRAIT_BIOLUM_COLOUR))
-				clr = seed.get_trait(TRAIT_BIOLUM_COLOUR)
-			set_light(round(seed.get_trait(TRAIT_POTENCY)/10), l_color = clr)
-			return
-
+	if(seed && seed.get_trait(TRAIT_BIOLUM))
+		set_light(round(seed.get_trait(TRAIT_POTENCY)/10), l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR))
+		return
 	set_light(0)
 	return
