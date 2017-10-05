@@ -16,16 +16,15 @@
 		atmosphere.temperature = T20C + rand(20, 100)
 		atmosphere.update_values()
 
-/obj/effect/overmap/sector/exoplanet/desert/update_biome()
+/obj/effect/overmap/sector/exoplanet/desert/adapt_seed(var/datum/seed/S)
 	..()
-	for(var/datum/seed/S in seeds)
-		if(prob(90))
-			S.set_trait(TRAIT_REQUIRES_WATER,0)
-		else
-			S.set_trait(TRAIT_REQUIRES_WATER,1)
-			S.set_trait(TRAIT_WATER_CONSUMPTION,1)
-		if(prob(15))
-			S.set_trait(TRAIT_STINGS,1)
+	if(prob(90))
+		S.set_trait(TRAIT_REQUIRES_WATER,0)
+	else
+		S.set_trait(TRAIT_REQUIRES_WATER,1)
+		S.set_trait(TRAIT_WATER_CONSUMPTION,1)
+	if(prob(15))
+		S.set_trait(TRAIT_STINGS,1)
 
 /datum/random_map/noise/exoplanet/desert
 	descriptor = "desert exoplanet"
