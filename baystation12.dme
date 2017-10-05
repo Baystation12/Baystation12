@@ -545,6 +545,7 @@
 #include "code\game\machinery\nuclear_bomb.dm"
 #include "code\game\machinery\OpTable.dm"
 #include "code\game\machinery\oxygen_pump.dm"
+#include "code\game\machinery\pager.dm"
 #include "code\game\machinery\portable_turret.dm"
 #include "code\game\machinery\recharger.dm"
 #include "code\game\machinery\rechargestation.dm"
