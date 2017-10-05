@@ -31,6 +31,7 @@
 		var/list/program = list()
 		program["name"] = P.filename
 		program["desc"] = P.filedesc
+		program["icon"] = P.program_menu_icon
 		program["autorun"] = (istype(autorun) && (autorun.stored_data == P.filename)) ? 1 : 0
 		if(P in idle_threads)
 			program["running"] = 1

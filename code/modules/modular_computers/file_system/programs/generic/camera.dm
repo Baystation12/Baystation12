@@ -27,6 +27,7 @@
 	filedesc = "Camera Monitoring"
 	nanomodule_path = /datum/nano_module/camera_monitor
 	program_icon_state = "cameras"
+	program_menu_icon = "search"
 	extended_desc = "This program allows remote access to the camera system. Some camera networks may have additional access requirements."
 	size = 12
 	available_on_ntnet = 1

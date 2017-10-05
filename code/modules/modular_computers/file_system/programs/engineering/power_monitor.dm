@@ -3,6 +3,7 @@
 	filedesc = "Power Monitoring"
 	nanomodule_path = /datum/nano_module/power_monitor/
 	program_icon_state = "power_monitor"
+	program_menu_icon = "battery-3"
 	extended_desc = "This program connects to sensors to provide information about electrical systems"
 	ui_header = "power_norm.gif"
 	required_access = access_engine

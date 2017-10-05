@@ -2,6 +2,7 @@
 	filename = "ntndownloader"
 	filedesc = "NTNet Software Download Tool"
 	program_icon_state = "generic"
+	program_menu_icon = "arrowthickstop-1-s"
 	extended_desc = "This program allows downloads of software from official NT repositories"
 	unsendable = 1
 	undeletable = 1
@@ -148,7 +149,8 @@
 			"filename" = P.filename,
 			"filedesc" = P.filedesc,
 			"fileinfo" = P.extended_desc,
-			"size" = P.size
+			"size" = P.size,
+			"icon" = P.program_menu_icon
 			)))
 		data["hackedavailable"] = 0
 		if(prog.computer_emagged) // If we are running on emagged computer we have access to some "bonus" software
@@ -159,7 +161,8 @@
 				"filename" = P.filename,
 				"filedesc" = P.filedesc,
 				"fileinfo" = P.extended_desc,
-				"size" = P.size
+				"size" = P.size,
+				"icon" = P.program_menu_icon
 				)))
 			data["hacked_programs"] = hacked_programs
 
