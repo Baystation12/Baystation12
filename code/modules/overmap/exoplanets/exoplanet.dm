@@ -14,6 +14,7 @@
 	var/landmark_type = /obj/effect/shuttle_landmark/automatic
 
 	var/list/actors = list() //things that appear in engravings on xenoarch finds.
+	var/list/species = list() //list of names to use for simple animals
 
 	var/repopulating = 0
 	var/repopulate_types = list() // animals which have died that may come back
@@ -117,28 +118,31 @@
 	max_animal_count = animals.len
 
 /obj/effect/overmap/sector/exoplanet/proc/update_biome()
-	for(var/gas in atmosphere.gas)
-		breathgas[gas] = round(0.4*atmosphere.gas[gas])
-	var/list/badgases = gas_data.gases.Copy()
-	badgases -= atmosphere.gas
-	badgas = pick(badgases)
 	for(var/datum/seed/S in seeds)
-		S.set_trait(TRAIT_IDEAL_HEAT,          atmosphere.temperature + rand(-5,5),800,70)
-		S.set_trait(TRAIT_HEAT_TOLERANCE,      S.get_trait(TRAIT_HEAT_TOLERANCE) + rand(-5,5),800,70)
-		S.set_trait(TRAIT_LOWKPA_TOLERANCE,    atmosphere.return_pressure() + rand(-5,-50),80,0)
-		S.set_trait(TRAIT_HIGHKPA_TOLERANCE,   atmosphere.return_pressure() + rand(5,50),500,110)
-		if(S.exude_gasses)
-			S.exude_gasses -= badgas
-		if(S.consume_gasses)
-			S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
-		for(var/g in atmosphere.gas)
-			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
-				S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
+		adapt_seed(S)
 
 	for(var/mob/living/simple_animal/A in animals)
 		adapt_animal(A)
 
+/obj/effect/overmap/sector/exoplanet/proc/adapt_seed(var/datum/seed/S)
+	S.set_trait(TRAIT_IDEAL_HEAT,          atmosphere.temperature + rand(-5,5),800,70)
+	S.set_trait(TRAIT_HEAT_TOLERANCE,      S.get_trait(TRAIT_HEAT_TOLERANCE) + rand(-5,5),800,70)
+	S.set_trait(TRAIT_LOWKPA_TOLERANCE,    atmosphere.return_pressure() + rand(-5,-50),80,0)
+	S.set_trait(TRAIT_HIGHKPA_TOLERANCE,   atmosphere.return_pressure() + rand(5,50),500,110)
+	if(S.exude_gasses)
+		S.exude_gasses -= badgas
+	if(S.consume_gasses)
+		S.consume_gasses = list(pick(atmosphere.gas)) // ensure that if the plant consumes a gas, the atmosphere will have it
+	for(var/g in atmosphere.gas)
+		if(gas_data.flags[g] & XGM_GAS_CONTAMINANT)
+			S.set_trait(TRAIT_TOXINS_TOLERANCE, rand(10,15))
+
 /obj/effect/overmap/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
+	if(species[A.type])
+		A.name = species[A.type]
+	else 
+		A.name = "alien creature"
+		A.verbs |= /mob/living/simple_animal/proc/name_species
 	A.minbodytemp = atmosphere.temperature - 20
 	A.maxbodytemp = atmosphere.temperature + 30
 	A.bodytemperature = (A.maxbodytemp+A.minbodytemp)/2
@@ -147,6 +151,16 @@
 	if(A.max_gas)
 		A.max_gas = list()
 		A.max_gas[badgas] = 5
+
+/obj/effect/overmap/sector/exoplanet/proc/get_random_species_name()
+	return pick("nol","shan","can","fel","xor")+pick("a","e","o","t","ar")+pick("ian","oid","ac","ese","inian","rd")
+
+/obj/effect/overmap/sector/exoplanet/proc/rename_species(type, newname)
+	species[type] = newname
+	for(var/mob/living/simple_animal/A in animals)
+		if(istype(A,type))
+			A.name = newname
+			A.verbs -= /mob/living/simple_animal/proc/name_species
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_landing()
 	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
@@ -179,6 +193,13 @@
 	atmosphere.temperature = T20C + rand(-10, 10)
 	var/factor = max(rand(60,140)/100, 0.6)
 	atmosphere.multiply(factor)
+
+	//Set up gases for living things
+	for(var/gas in atmosphere.gas)
+		breathgas[gas] = round(0.4*atmosphere.gas[gas])
+	var/list/badgases = gas_data.gases.Copy()
+	badgases -= atmosphere.gas
+	badgas = pick(badgases)
 
 /obj/effect/overmap/sector/exoplanet/proc/process_map_edge(atom/movable/A)
 	var/new_x
