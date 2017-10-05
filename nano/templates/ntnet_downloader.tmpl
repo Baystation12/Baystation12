@@ -57,64 +57,22 @@
 		{{:helper.displayBar(data.disk_used, 0, data.disk_size, 'good')}}
 		{{:data.disk_used}}GQ / {{:data.disk_size}}GQ
 	</div>
+	<table>
 	{{for data.downloadable_programs}}
-		<div class = "item">
-			<div class="itemLabel">
-				File name: 
-			</div>
-			<div class="itemContent">
-				{{:value.filename}} ({{:value.size}} GQ)
-			</div>
-			<div class="itemLabel">
-				Program name: 
-			</div>
-			<div class="itemContent">
-				{{:value.filedesc}}
-			</div>		
-			<div class="itemLabel">
-				Description: 
-			</div>
-			<div class="itemContent">
-				{{:value.fileinfo}}
-			</div>	
-			<div class="itemLabel">
-				File controls: 
-			</div>
-			<div class="itemContent">
-				{{:helper.link("DOWNLOAD", null, {'PRG_downloadfile' : value.filename})}}
-			</div>	
+		<tr><td><span class='white'>{{:value.filedesc}}</span>
+			<td>{{:value.fileinfo}}
+			<td>{{:helper.link('', 'arrowthickstop-1-s', {'PRG_downloadfile' : value.filename})}}	
 		</div>
 	{{/for}}
+	</table>
 	{{if data.hackedavailable}}
 		<h2>*UNKNOWN* software repository</h2>
 		<i>Please note that NanoTrasen does not recommend download of software from non-official servers.</i>
 		{{for data.hacked_programs}}
-			<div class = "item">
-				<div class="itemLabel">
-					File name: 
-				</div>
-				<div class="itemContent">
-					{{:value.filename}} ({{:value.size}} GQ)
-				</div>
-				<div class="itemLabel">
-					Program name: 
-				</div>
-				<div class="itemContent">
-					{{:value.filedesc}}
-				</div>		
-				<div class="itemLabel">
-					Description: 
-				</div>
-				<div class="itemContent">
-					{{:value.fileinfo}}
-				</div>
-				<div class="itemLabel">
-					File controls: 
-				</div>
-				<div class="itemContent">
-					{{:helper.link("DOWNLOAD", null, {'PRG_downloadfile' : value.filename})}}
-				</div>	
-			</div>
+		<tr><td><span class='white'>{{:value.filedesc}}</span>
+			<td>{{:value.fileinfo}}
+			<td>{{:helper.link('', 'arrowthickstop-1-s', {'PRG_downloadfile' : value.filename})}}	
+		</div>
 		{{/for}}
 	{{/if}}
 
