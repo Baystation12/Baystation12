@@ -97,26 +97,26 @@ default behaviour is:
 			if(!can_move_mob(tmob, 0, 0))
 				now_pushing = 0
 				return
-			if(a_intent == I_HELP || src.restrained())
+			if(src.restrained())
 				now_pushing = 0
 				return
-			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
-				if(prob(40) && !(FAT in src.mutations))
-					to_chat(src, "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>")
-					now_pushing = 0
-					return
-			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
-				if(prob(99))
-					now_pushing = 0
-					return
-			if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/riot))
-				if(prob(99))
-					now_pushing = 0
-					return
+			if(tmob.a_intent != I_HELP)
+				if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
+					if(prob(40) && !(FAT in src.mutations))
+						to_chat(src, "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>")
+						now_pushing = 0
+						return
+				if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
+					if(prob(99))
+						now_pushing = 0
+						return
+				if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/riot))
+					if(prob(99))
+						now_pushing = 0
+						return
 			if(!(tmob.status_flags & CANPUSH))
 				now_pushing = 0
 				return
-
 			tmob.LAssailant = src
 		if(isobj(AM))
 			var/obj/I = AM
@@ -144,6 +144,11 @@ default behaviour is:
 						now_pushing = 0
 						return
 				step(AM, t)
+				if (istype(AM, /mob/living))
+					var/mob/living/tmob = AM
+					if(istype(tmob.buckled, /obj/structure/bed))
+						if(!tmob.buckled.anchored)
+							step(tmob.buckled, t)
 				if(ishuman(AM) && AM:grabbed_by)
 					for(var/obj/item/grab/G in AM:grabbed_by)
 						step(G:assailant, get_dir(G:assailant, AM))
@@ -178,7 +183,7 @@ default behaviour is:
 		return 0
 
 	return can_move_mob(tmob, 1, 0)
-	
+
 /mob/living/verb/succumb()
 	set hidden = 1
 	if ((src.health < src.maxHealth/2)) // Health below half of maxhealth.
