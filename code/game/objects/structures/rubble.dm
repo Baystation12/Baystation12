@@ -11,6 +11,7 @@
 	var/list/loot = list(/obj/item/weapon/cell,/obj/item/stack/material/iron,/obj/item/stack/rods)
 	var/lootleft = 2
 	var/emptyprob = 30
+	var/health = 40
 
 /obj/structure/rubble/New()
 	..()
@@ -64,6 +65,12 @@
 			if(lootleft && prob(1))
 				var/obj/item/booty = pick(loot)
 				booty = new booty(loc)
+			qdel(src)
+	else 
+		..()
+		health -= I.force
+		if(health < 1)
+			visible_message("[user] clears away \the [src].")
 			qdel(src)
 
 /obj/structure/rubble/house
