@@ -55,7 +55,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/engines/Topic(href, href_list, state)
+/obj/machinery/computer/engines/Topic(href, href_list, ui_state)
 	if(..())
 		return 1
 
@@ -70,7 +70,7 @@
 
 	if(href_list["set_global_limit"])
 		var/newlim = input("Input new thrust limit (0..100%)", "Thrust limit", linked.thrust_limit*100) as num
-		if(!CanInteract(usr,state)) 
+		if(!CanInteract(usr,ui_state))
 			return
 		linked.thrust_limit = Clamp(newlim/100, 0, 1)
 		for(var/datum/ship_engine/E in linked.engines)
@@ -85,7 +85,7 @@
 		if(href_list["set_limit"])
 			var/datum/ship_engine/E = locate(href_list["engine"])
 			var/newlim = input("Input new thrust limit (0..100)", "Thrust limit", E.get_thrust_limit()) as num
-			if(!CanInteract(usr,state)) 
+			if(!CanInteract(usr,ui_state))
 				return
 			var/limit = Clamp(newlim/100, 0, 1)
 			if(istype(E))
@@ -102,5 +102,4 @@
 			if(istype(E))
 				E.toggle()
 
-	add_fingerprint(usr)
 	updateUsrDialog()
