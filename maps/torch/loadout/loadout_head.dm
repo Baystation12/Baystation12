@@ -177,6 +177,24 @@
 	path = /obj/item/clothing/head/soft/sol
 	allowed_roles = SOLGOV_ROLES
 
+/datum/gear/head/fleethat
+	display_name = "Fleet Cap"
+	path = /obj/item/clothing/head/utility/fleet
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/marinehat
+	display_name = "Marine Cap"
+	path = /obj/item/clothing/head/utility/marine
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/echat
+	display_name = "EC Cap"
+	path = /obj/item/clothing/head/soft/sol/expedition
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
 /datum/gear/head/surgical
 	display_name = "surgical cap"
 	path = /obj/item/clothing/head/surgery
