@@ -231,6 +231,15 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			print_reagent_default_message = FALSE
 			. += "<span class='warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
 
+	if(H.chem_doses.len)
+		var/list/chemtraces = list()
+		for(var/T in H.chem_doses)
+			var/datum/reagent/R = GLOB.chemical_reagents_list[T]
+			if(R.scannable)
+				chemtraces += "[R.name] ([H.chem_doses[T]])"
+		if(chemtraces.len)
+			. += "<span class='notice'>Metabolism products of [english_list(chemtraces)] found in subject's system.</span>"
+
 	if(H.virus2.len)
 		for (var/ID in H.virus2)
 			if (ID in virusDB)
@@ -341,15 +350,15 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 
 /obj/item/device/mass_spectrometer/New()
 	..()
-	var/datum/reagents/R = new/datum/reagents(5)
-	reagents = R
-	R.my_atom = src
+	create_reagents(5)
 
 /obj/item/device/mass_spectrometer/on_reagent_change()
+	update_icon()
+
+/obj/item/device/mass_spectrometer/update_icon()
+	icon_state = initial(icon_state)
 	if(reagents.total_volume)
-		icon_state = initial(icon_state) + "_s"
-	else
-		icon_state = initial(icon_state)
+		icon_state += "_s"
 
 /obj/item/device/mass_spectrometer/attack_self(mob/user as mob)
 	if (user.incapacitated())
@@ -358,6 +367,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 		return
 	if(reagents.total_volume)
 		var/list/blood_traces = list()
+		var/list/blood_doses = list()
 		for(var/datum/reagent/R in reagents.reagent_list)
 			if(R.type != /datum/reagent/blood)
 				reagents.clear_reagents()
@@ -365,13 +375,20 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 				return
 			else
 				blood_traces = params2list(R.data["trace_chem"])
+				blood_doses = params2list(R.data["dose_chem"])
 				break
 		var/dat = "Trace Chemicals Found: "
-		for(var/R in blood_traces)
+		for(var/T in blood_traces)
+			var/datum/reagent/R = GLOB.chemical_reagents_list[T]
 			if(details)
-				dat += "[R] ([blood_traces[R]] units) "
+				dat += "[R.name] ([blood_traces[T]] units) "
 			else
-				dat += "[R] "
+				dat += "[R.name] "
+		if(details)
+			dat += "\nMetabolism Products of Chemicals Found:"
+			for(var/T in blood_doses)
+				var/datum/reagent/R = GLOB.chemical_reagents_list[T]
+				dat += "[R.name] ([blood_doses[T]] units) "
 		to_chat(user, "[dat]")
 		reagents.clear_reagents()
 	return

@@ -337,7 +337,7 @@
 /datum/seed/mushroom
 	name = "mushrooms"
 	seed_name = "chanterelle"
-	seed_noun = "spores"
+	seed_noun = SEED_NOUN_SPORES
 	display_name = "chanterelle mushrooms"
 	mutants = list("reishi","amanita","plumphelmet")
 	chems = list(/datum/reagent/nutriment = list(1,25))
@@ -1000,7 +1000,7 @@
 /datum/seed/cherries
 	name = "cherry"
 	seed_name = "cherry"
-	seed_noun = "pits"
+	seed_noun = SEED_NOUN_PITS
 	display_name = "cherry tree"
 	chems = list(/datum/reagent/nutriment = list(1,15), /datum/reagent/sugar = list(1,15), /datum/reagent/nutriment/cherryjelly = list(10,15))
 	kitchen_tag = "cherries"
@@ -1040,7 +1040,7 @@
 /datum/seed/diona
 	name = "diona"
 	seed_name = "diona"
-	seed_noun = "nodes"
+	seed_noun = SEED_NOUN_NODES
 	display_name = "replicant pods"
 	can_self_harvest = 1
 	has_mob_product = /mob/living/carbon/alien/diona

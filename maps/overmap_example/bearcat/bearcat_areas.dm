@@ -60,8 +60,8 @@
 	name = "\improper Docking Bay"
 	icon_state = "entry_1"
 
-/area/ship/scrap/fire
-	name = "\improper Firefighting Equipment Comparment"
+/area/ship/scrap/garden
+	name = "\improper Garden"
 	icon_state = "green"
 
 /area/ship/scrap/unused
@@ -104,6 +104,7 @@
 /area/ship/scrap/maintenance/lower
 	name = "\improper Lower Deck Maintenance Compartments"
 	icon_state = "sub_maint_aft"
+	flags = AREA_RAD_SHIELDED
 
 /area/ship/scrap/maintenance/storage
 	name = "\improper Tools Storage"
@@ -123,7 +124,7 @@
 
 /area/ship/scrap/maintenance/atmos
 	name = "\improper Atmospherics Comparment"
-	icon_state = "atmos"	
+	icon_state = "atmos"
 	ambience = list('sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambiatm1.ogg')
 
 /area/ship/scrap/maintenance/power

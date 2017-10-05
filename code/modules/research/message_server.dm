@@ -158,6 +158,18 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 	return
 
+/obj/machinery/message_server/proc/send_to_department(var/department, var/message, var/tone)
+	var/reached = 0
+	for(var/obj/item/device/pda/P in PDAs)
+		if(P.toff)
+			continue
+		var/datum/job/J = job_master.GetJob(P.ownrank)
+		if(!J)
+			continue
+		if(J.department_flag & department)
+			P.new_info(P.message_silent, tone ? tone : P.ttone, "\icon[P] [message]")
+			reached++
+	return reached
 
 /datum/feedback_variable
 	var/variable

@@ -24,6 +24,8 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/yellow,
 		/obj/item/weapon/packageWrap,
+		/obj/item/weapon/marshalling_wand,
+		/obj/item/weapon/marshalling_wand,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75, /obj/item/weapon/storage/backpack/satchel_norm = 25)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
 	)

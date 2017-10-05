@@ -5,7 +5,6 @@
 /obj/effect/overmap/ship/bearcat
 	name = "FTV Bearcat"
 	color = "#00FFFF"
-	base = 1
 	vessel_mass = 60
 	default_delay = 3 MINUTES
 	speed_mod = 0.1 MINUTE
@@ -13,6 +12,9 @@
 
 /obj/effect/overmap/ship/bearcat/New()
 	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
+	for(var/area/ship/scrap/A)
+		A.name = "\improper [name] - [A.name]"
+		GLOB.using_map.area_purity_test_exempt_areas += A.type
 	..()
 
 /datum/shuttle/autodock/ferry/lift

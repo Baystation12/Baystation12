@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Can now rename alien creatures! All exoplanet animals start as 'alien creature', and you can use a Name Alien Species verb to rename them when you see 'em. Name can't be changed afterwards so don't go too silly. Random generated one is suggested when you use that verb too."

@@ -89,6 +89,11 @@
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
 
+/mob/living/carbon/human/set_stat(var/new_stat)
+	. = ..()
+	if(stat)
+		update_skin(1)
+
 /mob/living/carbon/human/proc/handle_some_updates()
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 		return 0
@@ -511,116 +516,30 @@
 
 /mob/living/carbon/human/handle_chemicals_in_body()
 
+	chem_effects.Cut()
+
+	if(status_flags & GODMODE)	
+		return 0
+
 	if(in_stasis)
 		return
 
+	if(isSynthetic())
+		return
+
 	if(reagents)
-		chem_effects.Cut()
+		if(touching) touching.metabolize()
+		if(ingested) ingested.metabolize()
+		if(bloodstr) bloodstr.metabolize()
 
-		if(!isSynthetic())
-
-			if(touching) touching.metabolize()
-			if(ingested) ingested.metabolize()
-			if(bloodstr) bloodstr.metabolize()
-
-			var/total_phoronloss = 0
-			for(var/obj/item/I in src)
-				if(I.contaminated)
-					total_phoronloss += vsc.plc.CONTAMINATION_LOSS
-			if(!(status_flags & GODMODE)) adjustToxLoss(total_phoronloss)
-
-	if(status_flags & GODMODE)	return 0	//godmode
-
-	var/obj/item/organ/internal/diona/node/light_organ = locate() in internal_organs
-
-	if(!isSynthetic())
-		// Handles adding nutrient for light organs.
-		if(light_organ && !light_organ.is_broken())
-			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
-			if(isturf(loc)) //else, there's considered to be no light
-				var/turf/T = loc
-				var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
-				if(L)
-					light_amount = max(0, min(14,(L.lum_r + L.lum_g + L.lum_b)) * 1.5) //hardcapped so it's not abused by having a ton of flashlights
-				else
-					light_amount =  5
-				light_amount = T.get_lumcount() * 10
-			nutrition += light_amount
-			shock_stage -= light_amount
-			nutrition = Clamp(nutrition, 0, 550)
-
-	if(species.light_dam)
-		var/light_amount = 0
-		if(isturf(loc))
-			var/turf/T = loc
-			light_amount = T.get_lumcount() * 10
-		if(light_amount > species.light_dam) //if there's enough light, start dying
-			take_overall_damage(1,1)
-		else //heal in the dark
-			heal_overall_damage(1,1)
-
-	// nutrition decrease
-	if (nutrition > 0 && stat != 2)
-		nutrition = max (0, nutrition - species.hunger_factor)
-
-	if(!isSynthetic() && (species.flags & IS_PLANT))
-
-		if(nutrition < 10)
-			take_overall_damage(2,0)
-			//traumatic_shock is updated every tick, incrementing that is pointless - shock_stage is the counter.
-			//Not that it matters much for diona, who have NO_PAIN.
-			shock_stage++
-		else if (innate_heal)
-			// Heals normal damage.
-			if(getBruteLoss())
-				adjustBruteLoss(-4)
-				nutrition -= 2
-			if(getFireLoss())
-				adjustFireLoss(-4)
-				nutrition -= 2
-			if(getToxLoss())
-				adjustToxLoss(-8)
-				nutrition -= 2
-			if(getOxyLoss())
-				adjustOxyLoss(-8)
-				nutrition -= 2
-
-			if (prob(10))
-				var/obj/item/organ/external/head/D = organs_by_name["head"]
-				if (D.disfigured && nutrition > 200 && !getBruteLoss() && !getFireLoss())
-					D.disfigured = 0
-					nutrition -= 20
-
-			for(var/obj/item/organ/I in internal_organs)
-				if(I.damage > 0)
-					I.damage = max(I.damage - 2, 0)
-					nutrition -= 2
-					if (prob(1))
-						to_chat(src, "<span class='warning'>You sense your [I.name] regenerating...</span>")
-
-			if (prob(10) && nutrition > 70)
-				for(var/limb_type in species.has_limbs)
-					var/obj/item/organ/external/E = organs_by_name[limb_type]
-					if(E && !E.is_usable())
-						E.removed()
-						qdel(E)
-						E = null
-					if(!E)
-						var/list/organ_data = species.has_limbs[limb_type]
-						var/limb_path = organ_data["path"]
-						var/obj/item/organ/O = new limb_path(src)
-						organ_data["descriptor"] = O.name
-						to_chat(src, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
-						nutrition -= 60
-						update_body()
-					else
-						for(var/datum/wound/W in E.wounds)
-							if (W.wound_damage() == 0 && prob(50))
-								E.wounds -= W
-
-	// TODO: stomach and bloodstream organ.
-	if(!isSynthetic())
-		handle_trace_chems()
+	// Trace chemicals
+	for(var/T in chem_doses)
+		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
+			continue
+		var/datum/reagent/R = GLOB.chemical_reagents_list[T]
+		chem_doses[T] -= R.metabolism*2
+		if(chem_doses[T] <= 0)
+			chem_doses -= T
 
 	updatehealth()
 
@@ -731,6 +650,17 @@
 		// If you're dirty, your gloves will become dirty, too.
 		if(gloves && germ_level > gloves.germ_level && prob(10))
 			gloves.germ_level += 1
+
+		if(vsc.plc.CONTAMINATION_LOSS) 
+			var/total_phoronloss = 0
+			for(var/obj/item/I in src)
+				if(I.contaminated)
+					total_phoronloss += vsc.plc.CONTAMINATION_LOSS
+			adjustToxLoss(total_phoronloss)
+
+		// nutrition decrease
+		if (nutrition > 0)
+			nutrition = max (0, nutrition - species.hunger_factor)
 
 	return 1
 
@@ -955,7 +885,7 @@
 					stomach_contents.Remove(M)
 					qdel(M)
 					continue
-				if(air_master.current_cycle%3==1)
+				if(life_tick % 3 == 1)
 					if(!(M.status_flags & GODMODE))
 						M.adjustBruteLoss(5)
 					nutrition += 10

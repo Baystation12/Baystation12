@@ -7,7 +7,7 @@
 	var/uid                        // Unique identifier.
 	var/name                       // Index for global list.
 	var/seed_name                  // Plant name for seed packet.
-	var/seed_noun = "seeds"        // Descriptor for packet.
+	var/seed_noun = SEED_NOUN_SEEDS// Descriptor for packet.
 	var/display_name               // Prettier name.
 	var/roundstart                 // If set, seed will not display variety number.
 	var/mysterious                 // Only used for the random seed packets.
@@ -115,10 +115,12 @@
 
 	if(!target_limb) target_limb = pick(BP_ALL_LIMBS)
 	var/blocked = target.run_armor_check(target_limb, "melee")
-	if(blocked >= 100)
+	var/obj/item/organ/external/affecting = target.get_organ(target_limb)
+
+	if(blocked >= 100 || (target.species && target.species.flags & (NO_EMBED|NO_MINOR_CUT)))
+		to_chat(target, "<span class='danger'>\The [fruit]'s thorns scratch against the armour on your [affecting.name]!</span>")
 		return
 
-	var/obj/item/organ/external/affecting = target.get_organ(target_limb)
 	var/damage = 0
 	var/has_edge = 0
 	if(get_trait(TRAIT_CARNIVOROUS) >= 2)
@@ -143,21 +145,24 @@
 /datum/seed/proc/do_sting(var/mob/living/carbon/human/target, var/obj/item/fruit)
 	if(!get_trait(TRAIT_STINGS))
 		return
+
 	if(chems && chems.len && target.reagents)
 
-		var/body_coverage = HEAD|FACE|EYES|UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+		var/obj/item/organ/external/affecting = pick(target.organs)
 
-		for(var/obj/item/clothing/clothes in target)
-			if(target.l_hand == clothes|| target.r_hand == clothes)
-				continue
-			body_coverage &= ~(clothes.body_parts_covered)
+		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
+			if(C && (C.body_parts_covered & affecting) && (C.item_flags & THICKMATERIAL))
+				affecting = null
 
-		if(!body_coverage)
-			return
-		to_chat(target, "<span class='danger'>You are stung by \the [fruit]!</span>")
-		for(var/rid in chems)
-			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/5))
-			target.reagents.add_reagent(rid,injecting)
+		if(!(target.species && target.species.flags & (NO_EMBED|NO_MINOR_CUT)))	affecting = null
+
+		if(affecting)
+			to_chat(target, "<span class='danger'>You are stung by \the [fruit] in your [affecting.name]!</span>")
+			for(var/rid in chems)
+				var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/5))
+				target.reagents.add_reagent(rid,injecting)
+		else
+			to_chat(target, "<span class='danger'>Sharp spines scrape against your armour!</span>")
 
 //Splatter a turf.
 /datum/seed/proc/splatter(var/turf/T,var/obj/item/thrown)
@@ -341,7 +346,7 @@
 		//These are various plant/mushroom genuses.
 		//I realize these might not be entirely accurate, but it could facilitate RP.
 		var/list/possible_prefixes
-		if(seed_noun == "cuttings" || seed_noun == "seeds" || (seed_noun == "nodes" && prob(50)))
+		if(seed_noun == SEED_NOUN_CUTTINGS || seed_noun == SEED_NOUN_SEEDS || (seed_noun == SEED_NOUN_NODES && prob(50)))
 			possible_prefixes = list("amelanchier", "saskatoon",
 										"magnolia", "angiosperma", "osmunda", "scabiosa", "spigelia", "psydrax", "chastetree",
 										"strychnos", "treebine", "caper", "justica", "ragwortus", "everlasting", "combretum",
@@ -379,7 +384,7 @@
 
 	roundstart = 0
 	mysterious = 1
-	seed_noun = pick("spores","nodes","cuttings","seeds")
+	seed_noun = pick(SEED_NOUN_SEEDS, SEED_NOUN_PITS, SEED_NOUN_NODES, SEED_NOUN_CUTTINGS)
 
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
 	set_trait(TRAIT_PRODUCT_ICON,pick(plant_controller.plant_product_sprites))
@@ -431,9 +436,13 @@
 			/datum/reagent/nanites
 			)
 
+		if(prob(30))	banned_chems |= typesof(/datum/reagent/ethanol)
+		if(prob(30))	banned_chems |= typesof(/datum/reagent/toxin)
+
 		for(var/x=1;x<=additional_chems;x++)
 			var/new_chem = pick(GLOB.chemical_reagents_list)
 			if(new_chem in banned_chems)
+				x--
 				continue
 			banned_chems += new_chem
 			chems[new_chem] = list(rand(1,10),rand(10,20))

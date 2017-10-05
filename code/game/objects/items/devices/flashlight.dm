@@ -291,10 +291,10 @@
 /obj/item/device/flashlight/glowstick/attack_self(mob/user)
 
 	if(!fuel)
-		to_chat(user,"<span class='notice'>The [src] is spent.</span>")
+		to_chat(user,"<span class='notice'>\The [src] is spent.</span>")
 		return
 	if(on)
-		to_chat(user,"<span class='notice'>The [src] is already lit.</span>")
+		to_chat(user,"<span class='notice'>\The [src] is already lit.</span>")
 		return
 
 	. = ..()

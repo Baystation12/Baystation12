@@ -208,20 +208,20 @@
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/effectiveness = 1
-	if(dose < effective_dose) //some ease-in ease-out for the effect
-		effectiveness = dose/effective_dose
+	if(M.chem_doses[type] < effective_dose) //some ease-in ease-out for the effect
+		effectiveness = M.chem_doses[type]/effective_dose
 	else if(volume < effective_dose)
 		effectiveness = volume/effective_dose
 	M.add_chemical_effect(CE_PAINKILLER, pain_power * effectiveness)
-	if(dose > 0.5 * overdose)
+	if(M.chem_doses[type] > 0.5 * overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		if(prob(1))
 			M.slurring = max(M.slurring, 10)
-	if(dose > 0.75 * overdose)
+	if(M.chem_doses[type] > 0.75 * overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		if(prob(5))
 			M.slurring = max(M.slurring, 20)
-	if(dose > overdose)
+	if(M.chem_doses[type] > overdose)
 		M.add_chemical_effect(CE_SLOWDOWN, 1)
 		M.slurring = max(M.slurring, 30)
 		if(prob(1))
@@ -244,7 +244,7 @@
 	. = 0
 	var/list/pool = M.reagents.reagent_list | M.ingested.reagent_list
 	for(var/datum/reagent/ethanol/booze in pool)
-		if(booze.dose < 2) //let them experience false security at first
+		if(M.chem_doses[booze.type] < 2) //let them experience false security at first
 			continue
 		. = 1
 		if(booze.strength < 40) //liquor stuff hits harder
@@ -407,7 +407,7 @@
 	if(M.ingested)
 		for(var/datum/reagent/R in M.ingested.reagent_list)
 			if(istype(R, /datum/reagent/ethanol))
-				R.dose = max(R.dose - removed * 5, 0)
+				M.chem_doses[R.type] = max(M.chem_doses[R.type] - removed * 5, 0)
 
 /datum/reagent/hyronalin
 	name = "Hyronalin"
@@ -455,7 +455,7 @@
 	if(volume > 10)
 		M.immunity = max(M.immunity - 0.3, 0)
 		M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_ENGINEERED)
-	if(dose > 15)
+	if(M.chem_doses[type] > 15)
 		M.immunity = max(M.immunity - 0.25, 0)
 
 /datum/reagent/spaceacillin/overdose(var/mob/living/carbon/M, var/alien)
@@ -521,7 +521,7 @@
 /datum/reagent/methylphenidate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
 		to_chat(M, "<span class='warning'>You lose focus...</span>")
 	else
@@ -541,7 +541,7 @@
 /datum/reagent/citalopram/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
 		to_chat(M, "<span class='warning'>Your mind feels a little less stable...</span>")
 	else
@@ -560,7 +560,7 @@
 /datum/reagent/paroxetine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(volume <= 0.1 && dose >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
 		to_chat(M, "<span class='warning'>Your mind feels much less stable...</span>")
 	else
@@ -588,7 +588,7 @@
 		return
 	if(prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume <= 0.02 && dose >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
+	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
 		data = world.time
 		to_chat(M, "<span class='warning'>You feel antsy, your concentration wavers...</span>")
 	else
@@ -633,11 +633,11 @@
 	M.adjustOxyLoss(-2 * removed)
 	M.heal_organ_damage(20 * removed, 20 * removed)
 	M.adjustToxLoss(-20 * removed)
-	if(dose > 3 && ishuman(M))
+	if(M.chem_doses[type] > 3 && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in H.organs)
 			E.disfigured = 1 //currently only matters for the head, but might as well disfigure them all.
-	if(dose > 10)
+	if(M.chem_doses[type] > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)
 
@@ -692,13 +692,13 @@
 	if(alien == IS_DIONA)
 		return
 
-	if(dose < 0.2)	//not that effective after initial rush
+	if(M.chem_doses[type] < 0.2)	//not that effective after initial rush
 		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
 		M.add_chemical_effect(CE_PULSE, 1)
-	else if(dose < 1)
+	else if(M.chem_doses[type] < 1)
 		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
 	M.add_chemical_effect(CE_PULSE, 2)
-	if(dose > 5)
+	if(M.chem_doses[type] > 5)
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)

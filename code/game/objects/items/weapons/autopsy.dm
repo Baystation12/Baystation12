@@ -11,7 +11,7 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	var/list/datum/autopsy_data_scanner/wdata = list()
-	var/list/datum/autopsy_data_scanner/chemtraces = list()
+	var/list/chemtraces = list()
 	var/target_name = null
 	var/timeofdeath = null
 
@@ -38,7 +38,7 @@
 		return W
 
 /obj/item/weapon/autopsy_scanner/proc/add_data(var/obj/item/organ/external/O)
-	if(!O.autopsy_data.len && !O.trace_chemicals.len) return
+	if(!O.autopsy_data.len) return
 
 	for(var/V in O.autopsy_data)
 		var/datum/autopsy_data/W = O.autopsy_data[V]
@@ -70,10 +70,6 @@
 
 		qdel(D.organs_scanned[O.name])
 		D.organs_scanned[O.name] = W.copy()
-
-	for(var/V in O.trace_chemicals)
-		if(O.trace_chemicals[V] > 0 && !chemtraces.Find(V))
-			chemtraces += V
 
 /obj/item/weapon/autopsy_scanner/verb/print_data()
 	set category = "Object"
@@ -186,5 +182,8 @@
 	M.visible_message("<span class='notice'>\The [user] scans the wounds on [M]'s [S.name] with [src]</span>")
 
 	src.add_data(S)
+	for(var/T in M.chem_doses)
+		var/datum/reagent/R = GLOB.chemical_reagents_list[T]
+		chemtraces += R.name
 
 	return 1

@@ -1,4 +1,0 @@
-author: PsiOmegaDelta
-delete-after: True
-changes: 
-  - tweak: "Converts the machine, mob, and obj processes to subsystems."

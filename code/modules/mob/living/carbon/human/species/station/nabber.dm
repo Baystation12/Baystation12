@@ -98,7 +98,8 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/nab,
 		/mob/living/carbon/human/proc/active_camo,
-		/mob/living/carbon/human/proc/switch_stance
+		/mob/living/carbon/human/proc/switch_stance,
+		/mob/living/carbon/human/proc/threat_display
 		)
 
 /datum/species/nabber/get_eyes(var/mob/living/carbon/human/H)
@@ -202,6 +203,44 @@
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
 
+/datum/species/nabber/update_skin(var/mob/living/carbon/human/H)
+
+	if(H.stat)
+		H.skin_state = SKIN_NORMAL
+
+	switch(H.skin_state)
+		if(SKIN_NORMAL)
+			return
+		if(SKIN_THREAT)
+
+			var/image_key = "[H.species.get_race_key(src)]"
+
+			for(var/organ_tag in H.species.has_limbs)
+				var/obj/item/organ/external/part = H.organs_by_name[organ_tag]
+				if(isnull(part) || part.is_stump())
+					image_key += "0"
+					continue
+				if(part)
+					image_key += "[part.species.get_race_key(part.owner)]"
+					image_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
+				if(part.robotic >= ORGAN_ROBOT)
+					image_key += "2[part.model ? "-[part.model]": ""]"
+				else if(part.status & ORGAN_DEAD)
+					image_key += "3"
+				else
+					image_key += "1"
+
+			var/image/threat_image = skin_overlays[image_key]
+			if(!threat_image)
+				var/icon/base_icon = icon(H.stand_icon)
+				var/icon/I = new('icons/mob/human_races/r_nabber_threat.dmi', "threat")
+				base_icon.Blend(COLOR_BLACK, ICON_MULTIPLY)
+				base_icon.Blend(I, ICON_ADD)
+				threat_image  = image(base_icon)
+				skin_overlays[image_key] = threat_image
+
+			return(threat_image)
+	return
 
 /datum/species/nabber/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
 	if(attacker.pulling_punches || target.lying || attacker == target)
@@ -231,3 +270,4 @@
 	..()
 	H.pulling_punches = TRUE
 	H.nabbing = FALSE
+

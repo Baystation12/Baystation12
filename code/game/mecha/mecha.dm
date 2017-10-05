@@ -19,6 +19,7 @@
 	plane = OBJ_PLANE
 	layer = ABOVE_WINDOW_LAYER //icon draw layer
 	infra_luminosity = 15 //byond implementation is bugged.
+	anchor_fall = TRUE
 	var/initial_icon = null //Mech type for resetting icon. Only used for reskinning kits (see custom items)
 	var/can_move = 1
 	var/mob/living/carbon/occupant = null

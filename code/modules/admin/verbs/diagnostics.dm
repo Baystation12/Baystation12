@@ -2,12 +2,12 @@
 	set category = "Debug"
 	set name = "Show Air Report"
 
-	if(!master_controller || !air_master)
-		alert(usr,"Master_controller or air_master not found.","Air Report")
+	if(!SSair)
+		alert(usr,"SSair not found.","Air Report")
 		return
 
-	var/active_groups = air_master.active_zones
-	var/inactive_groups = air_master.zones.len - active_groups
+	var/active_groups = SSair.active_zones
+	var/inactive_groups = SSair.zones.len - active_groups
 
 	var/hotspots = 0
 	for(var/obj/fire/hotspot in world)
@@ -15,7 +15,7 @@
 
 	var/active_on_main_station = 0
 	var/inactive_on_main_station = 0
-	for(var/zone/zone in air_master.zones)
+	for(var/zone/zone in SSair.zones)
 		var/turf/simulated/turf = locate() in zone.contents
 		if(turf && turf.z in GLOB.using_map.station_levels)
 			if(zone.needs_update)
@@ -25,8 +25,8 @@
 
 	var/output = {"<B>AIR SYSTEMS REPORT</B><HR>
 <B>General Processing Data</B><BR>
-	Cycle: [air_master.current_cycle]<br>
-	Groups: [air_master.zones.len]<BR>
+	Cycle: [SSair.times_fired]<br>
+	Groups: [SSair.zones.len]<BR>
 ---- <I>Active:</I> [active_groups]<BR>
 ---- <I>Inactive:</I> [inactive_groups]<BR><br>
 ---- <I>Active on station:</i> [active_on_main_station]<br>
@@ -36,7 +36,7 @@
 	Hotspot Processing: [hotspots]<BR>
 <br>
 <B>Geometry Processing Data</B><BR>
-	Tile Update: [air_master.tiles_to_update.len]<BR>
+	Tile Update: [SSair.tiles_to_update.len]<BR>
 "}
 
 	usr << browse(output,"window=airreport")
@@ -127,11 +127,11 @@
 		to_chat(src, "Only administrators may use this command.")
 		return
 
-	if(!air_master)
+	if(!SSair)
 		to_chat(usr, "Cannot find air_system")
 		return
 	var/datum/air_group/dead_groups = list()
-	for(var/datum/air_group/group in air_master.air_groups)
+	for(var/datum/air_group/group in SSair.air_groups)
 		if (!group.group_processing)
 			dead_groups += group
 	var/datum/air_group/dest_group = pick(dead_groups)
@@ -149,7 +149,7 @@
 		to_chat(src, "Only administrators may use this command.")
 		return
 
-	if(!air_master)
+	if(!SSair)
 		to_chat(usr, "Cannot find air_system")
 		return
 

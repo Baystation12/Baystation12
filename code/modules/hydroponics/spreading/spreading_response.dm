@@ -30,6 +30,7 @@
 	var/mob/living/carbon/human/H = victim
 	if(prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
 		entangle(victim)
+	Process(0)
 	if(istype(H) && H.shoes)
 		return
 	seed.do_thorns(victim,src)
@@ -81,12 +82,14 @@
 		return
 
 	//grabbing people
-	if(!victim.anchored && Adjacent(victim) && victim.loc != src.loc)
+	if(!victim.anchored && (Adjacent(victim) || victim.loc == src.loc))
 		var/can_grab = 1
 		if(istype(victim, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = victim
-			if((istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP)) || (H.species.flags & NO_SLIP))
-				can_grab = 0
+			if(((istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP)) || (H.species.flags & NO_SLIP)) && victim.loc != src.loc)
+				if(prob(90))
+					src.visible_message("<span class='danger'>Tendrils lash to drag \the [victim] but \the [src] can't pull them across the ground!</span>")
+					can_grab = 0
 		if(can_grab)
 			src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
 			victim.forceMove(src.loc)
@@ -96,6 +99,7 @@
 				buckle_mob(victim)
 				victim.set_dir(pick(GLOB.cardinal))
 				to_chat(victim, "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>")
+			Process(0)
 
 /obj/effect/plant/buckle_mob()
 	. = ..()
