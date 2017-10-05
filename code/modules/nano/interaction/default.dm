@@ -17,7 +17,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 	return STATUS_UPDATE									// Ghosts can view updates
 
 /mob/living/silicon/pai/default_can_use_topic(var/src_object)
-	if((src_object == src || src_object == radio) && !stat)
+	if((src_object == src || src_object == silicon_radio) && !stat)
 		return STATUS_INTERACTIVE
 	else
 		return ..()
