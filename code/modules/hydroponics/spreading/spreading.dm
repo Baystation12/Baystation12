@@ -75,10 +75,10 @@
 	else
 		parent = newparent
 	seed = newseed
+	..()
 	if(start_matured)
 		mature_time = 0
 		health = max_health
-	..()
 
 /obj/effect/plant/Initialize()
 	. = ..()
@@ -98,14 +98,7 @@
 		max_growth = VINE_GROWTH_STAGES
 		growth_threshold = max_health/VINE_GROWTH_STAGES
 		icon = 'icons/obj/hydroponics_vines.dmi'
-		growth_type = 2 // Vines by default.
-		if(seed.seed_noun == SEED_NOUN_CUTTINGS)
-			growth_type = 1 // WOOOORMS.
-		else if(!(seed.seed_noun in list(SEED_NOUN_SEEDS,SEED_NOUN_PITS)))
-			if(seed.seed_noun == SEED_NOUN_NODES)
-				growth_type = 3 // Biomass
-			else
-				growth_type = 4 // Mold
+		growth_type = seed.get_growth_type()
 	else
 		max_growth = seed.growth_stages
 		growth_threshold = max_health/seed.growth_stages
@@ -152,9 +145,6 @@
 			if(EAST)
 				M.Turn(270)
 		src.transform = M
-	var/icon_colour = seed.get_trait(TRAIT_PLANT_COLOUR)
-	if(icon_colour)
-		color = icon_colour
 	// Apply colour and light from seed datum.
 	if(seed.get_trait(TRAIT_BIOLUM))
 		var/clr
@@ -166,6 +156,7 @@
 		set_light(0)
 
 /obj/effect/plant/proc/refresh_icon()
+	overlays.Cut()
 	var/growth = min(max_growth,round(health/growth_threshold))
 	var/at_fringe = get_dist(src,parent)
 	if(spread_distance > 5)
@@ -173,19 +164,9 @@
 			max_growth--
 		if(at_fringe >= (spread_distance-2))
 			max_growth--
-	max_growth = max(1,max_growth)
-	if(growth_type > 0)
-		switch(growth_type)
-			if(1)
-				icon_state = "worms"
-			if(2)
-				icon_state = "vines-[growth]"
-			if(3)
-				icon_state = "mass-[growth]"
-			if(4)
-				icon_state = "mold-[growth]"
-	else
-		icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[growth]"
+	growth = max(1,max_growth)
+
+	appearance = seed.get_icon(growth)
 
 	if(growth>2 && growth == max_growth)
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
@@ -194,6 +175,9 @@
 		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/woodpulp]))
 			set_density(1)
 			set_opacity(1)
+	if(seed.get_trait(TRAIT_LARGE))
+		set_density(1)
+		set_opacity(1)
 	else
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		set_density(0)

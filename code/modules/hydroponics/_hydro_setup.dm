@@ -57,6 +57,8 @@
 #define TRAIT_BIOLUM_COLOUR        37
 #define TRAIT_IMMUTABLE            38
 #define TRAIT_FLESH_COLOUR         39
+#define TRAIT_LARGE            	   40
+#define TRAIT_LEAVES_COLOUR        41
 
 // Seed noun datums
 #define SEED_NOUN_SPORES          "spores"

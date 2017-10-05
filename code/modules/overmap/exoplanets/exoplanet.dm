@@ -314,9 +314,14 @@
 		var/datum/seed/S = new()
 		S.randomize()
 		S.set_trait(TRAIT_PRODUCT_ICON,"alien[rand(1,5)]")
-		S.set_trait(TRAIT_PLANT_ICON,"tree5")
+		S.set_trait(TRAIT_PLANT_ICON,"tree")
 		S.set_trait(TRAIT_SPREAD,0)
 		S.set_trait(TRAIT_HARVEST_REPEAT,1)
+		S.set_trait(TRAIT_LARGE,1)
+		var/color = pick(plantcolors)
+		if(color == "RANDOM")
+			color = get_random_colour(0,75,190)
+		S.set_trait(TRAIT_LEAVES_COLOUR,color)
 		S.chems["woodpulp"] = 1
 		big_flora_types += S
 
