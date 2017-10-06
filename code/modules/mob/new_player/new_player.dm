@@ -348,7 +348,6 @@
 		return 0
 
 	character = job_master.EquipRank(character, job.title, 1)					//equips the human
-	UpdateFactionList(character)
 	equip_custom_items(character)
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
@@ -491,7 +490,7 @@
 	new_character.sync_organ_dna()
 	if(client.prefs.disabilities)
 		// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
-		new_character.dna.SetSEState(GLASSESBLOCK,1,0)
+		new_character.dna.SetSEState(GLOB.GLASSESBLOCK,1,0)
 		new_character.disabilities |= NEARSIGHTED
 
 	// Give them their cortical stack if we're using them.
