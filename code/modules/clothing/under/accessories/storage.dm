@@ -140,6 +140,12 @@
 		/obj/item/weapon/screwdriver,
 		/obj/item/device/multitool,
 		/obj/item/weapon/magnetic_ammo,
-		/obj/item/ammo_magazine
+		/obj/item/ammo_magazine,
+		/obj/item/weapon/net_shell
 	)
 
+/obj/item/clothing/accessory/storage/bandolier/safari/New()
+	..()
+
+	for(var/i = 0, i < slots, i++)
+		new /obj/item/weapon/net_shell(hold)
