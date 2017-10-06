@@ -1,0 +1,9 @@
+author: Broseph Stylin
+
+delete-after: True
+
+changes: 
+  - tweak: "All armor-containing lockers now have a 50% chance to contain a modular armor equivalent to the older armor vests."
+  - tweak: "All armor crates from Supply have been altered to contain modular armor rather than the older vests."
+  - rscadd: "Plate carriers and storage pouches for them have been added to the loadout, priced at 1 and 2 points respectively. Only roles already issued armor can obtain them."
+  

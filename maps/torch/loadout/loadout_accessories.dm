@@ -240,6 +240,21 @@
 	path = /obj/item/clothing/accessory/storage/bandolier
 	cost = 3
 
+/datum/gear/accessory/armor_pouches
+	display_name = "armor storage selection"
+	path = /obj/item/clothing/accessory/storage/pouches
+	cost = 2
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/accessory/armor_pouches/New()
+	..()
+	var/pouches = list()
+	pouches["black pouches"] = /obj/item/clothing/accessory/storage/pouches
+	pouches["blue pouches"] = /obj/item/clothing/accessory/storage/pouches/blue
+	pouches["green pouches"] = /obj/item/clothing/accessory/storage/pouches/green
+	pouches["tan pouches"] = /obj/item/clothing/accessory/storage/pouches/tan
+	gear_tweaks += new/datum/gear_tweak/path(pouches)
+
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
 	path = /obj/item/clothing/accessory/toggleable/hawaii

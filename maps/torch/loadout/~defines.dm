@@ -43,3 +43,5 @@
 #undef RESEARCH_ROLES
 
 #undef ARMED_ROLES
+
+#undef ARMORED_ROLES

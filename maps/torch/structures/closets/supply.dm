@@ -57,7 +57,7 @@
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/device/holowarrant,
-		/obj/item/clothing/suit/armor/vest/solgov,
+		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/armor/vest/solgov, /obj/item/clothing/suit/armor/pcarrier/light/sol)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75, /obj/item/weapon/storage/backpack/satchel_norm = 25)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
 	)
