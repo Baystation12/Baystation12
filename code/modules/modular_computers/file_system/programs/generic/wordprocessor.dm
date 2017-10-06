@@ -19,7 +19,7 @@
 		return
 	var/datum/computer_file/data/F = HDD.find_file_by_name(filename)
 	if(!istype(F))
-		return 
+		return
 	return F
 
 /datum/computer_file/program/wordprocessor/proc/open_file(var/filename)
@@ -72,7 +72,7 @@
 		return 1
 
 	if(href_list["PRG_taghelp"])
-		to_chat(usr, "<span class='notice'>The hologram of a google-eyed paper clip helpfuly tells you:</span>")
+		to_chat(usr, "<span class='notice'>The hologram of a googly-eyed paper clip helpfully tells you:</span>")
 		var/help = {"
 		\[br\] : Creates a linebreak.
 		\[center\] - \[/center\] : Centers the text.
@@ -84,20 +84,20 @@
 		\[u\] - \[/u\] : Underlined.
 		\[small\] - \[/small\] : Decreases the size of the text.
 		\[large\] - \[/large\] : Increases the size of the text.
-		\[field\] : Inserts an invisible field which lets you start type from there. Useful for forms.
+		\[field\] : Inserts a blank text field, which can be filled later. Useful for forms.
 		\[date\] : Current station date.
 		\[time\] : Current station time.
-		\[list\] - \[/list\] : A list.
+		\[list\] - \[/list\] : Begins and ends a list.
 		\[*\] : A list item.
 		\[hr\] : Horizontal rule.
 		\[table\] - \[/table\] : Creates table using \[row\] and \[cell\] tags.
 		\[grid\] - \[/grid\] : Table without visible borders, for layouts.
-		\[row\] - new table row.
-		\[cell\] - new table cell.
-		\[logo\] - insert NT logo image.
-		\[bluelogo\] - insert blue NT logo image.
-		\[solcrest\] - insert SCG crest image"}
-	
+		\[row\] - New table row.
+		\[cell\] - New table cell.
+		\[logo\] - Inserts NT logo image.
+		\[bluelogo\] - Inserts blue NT logo image.
+		\[solcrest\] - Inserts SCG crest image"}
+
 		to_chat(usr, help)
 		return 1
 
@@ -108,7 +108,7 @@
 	if(href_list["PRG_backtomenu"])
 		error = null
 		return 1
-		
+
 	if(href_list["PRG_loadmenu"])
 		browsing = 1
 		return 1
