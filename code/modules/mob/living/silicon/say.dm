@@ -31,7 +31,7 @@
 	if(message_mode)
 		if(message_mode == "general")
 			message_mode = null
-		return radio.talk_into(src,message,message_mode,verb,speaking)
+		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
 
 /mob/living/silicon/say_quote(var/text)
 	var/ending = copytext(text, length(text))

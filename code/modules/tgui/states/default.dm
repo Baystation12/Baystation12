@@ -49,7 +49,7 @@
 
 /mob/living/silicon/pai/tg_default_can_use_topic(src_object)
 	// pAIs can only use themselves and the owner's radio.
-	if((src_object == src || src_object == radio) && !stat)
+	if((src_object == src || src_object == silicon_radio) && !stat)
 		return UI_INTERACTIVE
 	else
 		return ..()
