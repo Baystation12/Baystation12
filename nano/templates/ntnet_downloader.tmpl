@@ -59,7 +59,7 @@
 	</div>
 	<table>
 	{{for data.downloadable_programs}}
-		<tr><td><td>{{:helper.link('', value.icon, {'PRG_downloadfile' : value.filename})}}	
+		<tr><td>{{:helper.link('', value.icon, {'PRG_downloadfile' : value.filename})}}	
 			<td><span class='white'>{{:value.filedesc}}</span>
 			<td>{{:value.fileinfo}}
 			<td>{{:value.size}} GQ
@@ -70,7 +70,7 @@
 		<h2>*UNKNOWN* software repository</h2>
 		<i>Please note that NanoTrasen does not recommend download of software from non-official servers.</i>
 		{{for data.hacked_programs}}
-		<tr><td><td>{{:helper.link(value.filedesc, value.icon, {'PRG_downloadfile' : value.filename})}}	
+		<tr><td>{{:helper.link(value.filedesc, value.icon, {'PRG_downloadfile' : value.filename})}}	
 			<td>{{:value.fileinfo}}
 			<td>{{:value.size}} GQ
 		</div>
