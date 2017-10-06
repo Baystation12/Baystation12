@@ -428,7 +428,7 @@
 				dat += "<tr><td><a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title]</a></td><td>[job.current_positions]</td><td>(Active: [active])</td></tr>"
 
 	dat += "</table></center>"
-	src << browse(jointext(dat, null), "window=latechoices;size=300x640;can_close=1")
+	src << browse(jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
 
 /mob/new_player/proc/create_character(var/turf/spawn_turf)
 	spawning = 1
