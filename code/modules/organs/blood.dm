@@ -18,14 +18,22 @@
 		return
 
 	vessel.add_reagent(/datum/reagent/blood,species.blood_volume)
-	spawn(1)
-		fixblood()
+	fixblood()
 
 //Resets blood data
 /mob/living/carbon/human/proc/fixblood()
 	for(var/datum/reagent/blood/B in vessel.reagent_list)
 		if(B.type == /datum/reagent/blood)
-			B.data = list("donor" = src, "species" = species.name, "blood_DNA" = dna.unique_enzymes, "blood_colour" = species.get_blood_colour(src), "blood_type" = dna.b_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list())
+			B.data = list(
+				"donor" = weakref(src),
+				"species" = species.name,
+				"blood_DNA" = dna.unique_enzymes,
+				"blood_colour" = species.get_blood_colour(src),
+				"blood_type" = dna.b_type,
+				"trace_chem" = null,
+				"virus2" = list(),
+				"antibodies" = list()
+			)
 			B.color = B.data["blood_colour"]
 
 //Makes a blood drop, leaking amt units of blood from the mob
@@ -162,9 +170,9 @@
 /mob/living/carbon/proc/get_blood(datum/reagents/container)
 	var/datum/reagent/blood/res = locate() in container.reagent_list //Grab some blood
 	if(res) // Make sure there's some blood at all
-		if(res.data["donor"] != src) //If it's not theirs, then we look for theirs
+		if(weakref && res.data["donor"] != weakref) //If it's not theirs, then we look for theirs
 			for(var/datum/reagent/blood/D in container.reagent_list)
-				if(D.data["donor"] == src)
+				if(weakref && D.data["donor"] != weakref)
 					return D
 	return res
 
