@@ -1,0 +1,8 @@
+author: sabiram
+
+delete-after: True
+
+changes: 
+  - maptweak: "The executive officer's office has been redesigned."
+  - rscadd: "Heads of staff have been provided with laptops to replace the depreciated employment records consoles."
+  - rscadd: "The commanding officer and executive officer now have special pens."
