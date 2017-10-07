@@ -3,7 +3,7 @@
 	name = "department insignia"
 	desc = "Insignia denoting assignment to a department. These appear blank."
 	icon_state = "dept_exped"
-	on_rolled = list("down" = "dept_exped_rolled")
+	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_DEPT
 
 /obj/item/clothing/accessory/department/command
