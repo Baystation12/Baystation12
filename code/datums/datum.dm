@@ -7,6 +7,10 @@
 	var/tmp/last_find_references = 0
 #endif
 
+// The following vars cannot be edited by anyone
+/datum/VV_static()
+	return ..() + list("gc_destroyed", "is_processing")
+
 // Default implementation of clean-up code.
 // This should be overridden to remove all references pointing to the object being destroyed.
 // Return the appropriate QDEL_HINT; in most cases this is QDEL_HINT_QUEUE.
