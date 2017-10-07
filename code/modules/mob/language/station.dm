@@ -198,7 +198,7 @@
 	colour = "terran"
 	key = "r"
 	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
-	"danya","da","mied","zan","das","krem","myka","cyka","blyat","to","st","no","na","ni",
+	"danya","da","mied","zan","das","krem","myka","to","st","no","na","ni",
 	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")
 
 /datum/language/nabber
@@ -214,3 +214,12 @@
 		return capitalize(pick(GLOB.first_names_female))
 	else
 		return capitalize(pick(GLOB.first_names_male))
+
+/datum/language/spacer
+	name = LANGUAGE_SPACER
+	desc = "A pidgin language spoken by haulers, merchants, traders, travellers, and cocky fly-boys across the galaxy."
+	colour = "spacer"
+	key = "v"
+	syllables = list ("die", "en", "skei", "van", "son", "der", "aar", "ch", "op", "ruk", "aa", "be", "ne", "het",
+ 	"ek", "ras", "ver", "zan", "das", "waa", "geb", "vol", "lu", "min", "breh", "rus", "stv", "ee", "goe", "sk",
+ 	"la", "ver", "we", "ge", "luk", "an", "ar", "at", "es", "et", "bel", "du", "jaa", "ch", "kk", "gh", "ll", "uu", "wat")

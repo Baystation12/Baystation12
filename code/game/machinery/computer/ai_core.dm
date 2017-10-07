@@ -213,7 +213,7 @@
 
 	transfer.aiRestorePowerRoutine = 0
 	transfer.control_disabled = 0
-	transfer.aiRadio.disabledAi = 0
+	transfer.ai_radio.disabledAi = 0
 	transfer.loc = get_turf(src)
 	transfer.create_eyeobj()
 	transfer.cancel_camera()

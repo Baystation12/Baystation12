@@ -6,88 +6,88 @@ Overview:
 
 Class Variables:
    use_power (num)
-      current state of auto power use.
-      Possible Values:
-         0 -- no auto power use
-         1 -- machine is using power at its idle power level
-         2 -- machine is using power at its active power level
+	  current state of auto power use.
+	  Possible Values:
+		 0 -- no auto power use
+		 1 -- machine is using power at its idle power level
+		 2 -- machine is using power at its active power level
 
    active_power_usage (num)
-      Value for the amount of power to use when in active power mode
+	  Value for the amount of power to use when in active power mode
 
    idle_power_usage (num)
-      Value for the amount of power to use when in idle power mode
+	  Value for the amount of power to use when in idle power mode
 
    power_channel (num)
-      What channel to draw from when drawing power for power mode
-      Possible Values:
-         EQUIP:0 -- Equipment Channel
-         LIGHT:2 -- Lighting Channel
-         ENVIRON:3 -- Environment Channel
+	  What channel to draw from when drawing power for power mode
+	  Possible Values:
+		 EQUIP:0 -- Equipment Channel
+		 LIGHT:2 -- Lighting Channel
+		 ENVIRON:3 -- Environment Channel
 
    component_parts (list)
-      A list of component parts of machine used by frame based machines.
+	  A list of component parts of machine used by frame based machines.
 
    panel_open (num)
-      Whether the panel is open
+	  Whether the panel is open
 
    uid (num)
-      Unique id of machine across all machines.
+	  Unique id of machine across all machines.
 
    gl_uid (global num)
-      Next uid value in sequence
+	  Next uid value in sequence
 
    stat (bitflag)
-      Machine status bit flags.
-      Possible bit flags:
-         BROKEN:1 -- Machine is broken
-         NOPOWER:2 -- No power is being supplied to machine.
-         POWEROFF:4 -- tbd
-         MAINT:8 -- machine is currently under going maintenance.
-         EMPED:16 -- temporary broken by EMP pulse
+	  Machine status bit flags.
+	  Possible bit flags:
+		 BROKEN:1 -- Machine is broken
+		 NOPOWER:2 -- No power is being supplied to machine.
+		 POWEROFF:4 -- tbd
+		 MAINT:8 -- machine is currently under going maintenance.
+		 EMPED:16 -- temporary broken by EMP pulse
 
 Class Procs:
-   New()                     'game/machinery/machine.dm'
+   New()					 'game/machinery/machine.dm'
 
-   Destroy()                     'game/machinery/machine.dm'
+   Destroy()					 'game/machinery/machine.dm'
 
-   auto_use_power()            'game/machinery/machine.dm'
-      This proc determines how power mode power is deducted by the machine.
-      'auto_use_power()' is called by the 'master_controller' game_controller every
-      tick.
+   auto_use_power()			'game/machinery/machine.dm'
+	  This proc determines how power mode power is deducted by the machine.
+	  'auto_use_power()' is called by the 'master_controller' game_controller every
+	  tick.
 
-      Return Value:
-         return:1 -- if object is powered
-         return:0 -- if object is not powered.
+	  Return Value:
+		 return:1 -- if object is powered
+		 return:0 -- if object is not powered.
 
-      Default definition uses 'use_power', 'power_channel', 'active_power_usage',
-      'idle_power_usage', 'powered()', and 'use_power()' implement behavior.
+	  Default definition uses 'use_power', 'power_channel', 'active_power_usage',
+	  'idle_power_usage', 'powered()', and 'use_power()' implement behavior.
 
-   powered(chan = EQUIP)         'modules/power/power.dm'
-      Checks to see if area that contains the object has power available for power
-      channel given in 'chan'.
+   powered(chan = EQUIP)		 'modules/power/power.dm'
+	  Checks to see if area that contains the object has power available for power
+	  channel given in 'chan'.
 
    use_power(amount, chan=EQUIP, autocalled)   'modules/power/power.dm'
-      Deducts 'amount' from the power channel 'chan' of the area that contains the object.
-      If it's autocalled then everything is normal, if something else calls use_power we are going to
-      need to recalculate the power two ticks in a row.
+	  Deducts 'amount' from the power channel 'chan' of the area that contains the object.
+	  If it's autocalled then everything is normal, if something else calls use_power we are going to
+	  need to recalculate the power two ticks in a row.
 
-   power_change()               'modules/power/power.dm'
-      Called by the area that contains the object when ever that area under goes a
-      power state change (area runs out of power, or area channel is turned off).
+   power_change()			   'modules/power/power.dm'
+	  Called by the area that contains the object when ever that area under goes a
+	  power state change (area runs out of power, or area channel is turned off).
 
-   RefreshParts()               'game/machinery/machine.dm'
-      Called to refresh the variables in the machine that are contributed to by parts
-      contained in the component_parts list. (example: glass and material amounts for
-      the autolathe)
+   RefreshParts()			   'game/machinery/machine.dm'
+	  Called to refresh the variables in the machine that are contributed to by parts
+	  contained in the component_parts list. (example: glass and material amounts for
+	  the autolathe)
 
-      Default definition does nothing.
+	  Default definition does nothing.
 
-   assign_uid()               'game/machinery/machine.dm'
-      Called by machine to assign a value to the uid variable.
+   assign_uid()			   'game/machinery/machine.dm'
+	  Called by machine to assign a value to the uid variable.
 
-   process()                  'game/machinery/machine.dm'
-      Called by the 'master_controller' once per game tick for each machine that is listed in the 'machines' list.
+   process()				  'game/machinery/machine.dm'
+	  Called by the 'master_controller' once per game tick for each machine that is listed in the 'machines' list.
 
 
 	Compiled by Aygar
@@ -100,6 +100,7 @@ Class Procs:
 
 	var/stat = 0
 	var/emagged = 0
+	var/malf_upgraded = 0
 	var/use_power = 1
 		//0 = dont run the auto
 		//1 = run auto, use idle
@@ -119,30 +120,24 @@ Class Procs:
 	..(l)
 	if(d)
 		set_dir(d)
-	if(!machinery_sort_required && ticker)
-		dd_insertObjectList(GLOB.machines, src)
-	else
-		GLOB.machines += src
-		machinery_sort_required = 1
+
+/obj/machinery/Initialize()
+	. = ..()
+	START_PROCESSING(SSmachines, src)
 
 /obj/machinery/Destroy()
-	GLOB.machines -= src
+	STOP_PROCESSING(SSmachines, src)
 	if(component_parts)
 		for(var/atom/A in component_parts)
 			if(A.loc == src) // If the components are inside the machine, delete them.
 				qdel(A)
 			else // Otherwise we assume they were dropped to the ground during deconstruction, and were not removed from the component_parts list by deconstruction code.
 				component_parts -= A
-	if(contents) // The same for contents.
-		for(var/atom/A in contents)
-			qdel(A)
-	return ..()
+	. = ..()
 
-/obj/machinery/process()//If you dont use process or power why are you here
+/obj/machinery/Process()//If you dont use process or power why are you here
 	if(!(use_power || idle_power_usage || active_power_usage))
 		return PROCESS_KILL
-
-	return
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)
@@ -332,7 +327,7 @@ Class Procs:
 	else
 		to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
 		for(var/var/obj/item/C in component_parts)
-			to_chat(user, "<span class='notice'>    [C.name]</span>")
+			to_chat(user, "<span class='notice'>	[C.name]</span>")
 	return 1
 
 /obj/machinery/proc/dismantle()
@@ -355,6 +350,9 @@ Class Procs:
 
 /datum/proc/remove_visual(mob/M)
 	return
+
+/obj/machinery/proc/malf_upgrade(var/mob/living/silicon/ai/user)
+	return 0
 
 /obj/machinery/CouldUseTopic(var/mob/user)
 	..()

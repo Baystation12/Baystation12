@@ -136,7 +136,7 @@
 			to_chat(user, "<span class='notice'>You take all filled honeycombs out.</span>")
 		return
 
-/obj/machinery/beehive/process()
+/obj/machinery/beehive/Process()
 	if(closed && !smoked && bee_count)
 		pollinate_flowers()
 		update_icon()
@@ -156,9 +156,11 @@
 
 /obj/machinery/honey_extractor
 	name = "honey extractor"
-	desc = "A machine used to turn honeycombs on the frame into honey and wax."
+	desc = "A machine used to extract honey and wax from a beehive frame."
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "centrifuge"
+	anchored = 1
+	density = 1
 
 	var/processing = 0
 	var/honey = 0
@@ -188,7 +190,7 @@
 			return
 		var/obj/item/weapon/reagent_containers/glass/G = I
 		var/transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, honey)
-		G.reagents.add_reagent("honey", transferred)
+		G.reagents.add_reagent(/datum/reagent/nutriment/honey, transferred)
 		honey -= transferred
 		user.visible_message("<span class='notice'>\The [user] collects honey from \the [src] into \the [G].</span>", "<span class='notice'>You collect [transferred] units of honey from \the [src] into \the [G].</span>")
 		return 1

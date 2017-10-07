@@ -174,7 +174,7 @@
 		return 1
 
 	var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
-	to_chat(user, "<span class='notice'>You transfer [trans] units of the solution to [target].</span>")
+	to_chat(user, "<span class='notice'>You transfer [trans] unit\s of the solution to \the [target].</span>")
 	return 1
 
 /obj/item/weapon/reagent_containers/do_surgery(mob/living/carbon/M, mob/living/user)

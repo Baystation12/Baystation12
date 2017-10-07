@@ -45,10 +45,10 @@ obj/machinery/atmospherics/pipe/zpipe/New()
 
 /obj/machinery/atmospherics/pipe/zpipe/hide(var/i)
 	if(istype(loc, /turf/simulated))
-		invisibility = i ? 101 : 0
+		set_invisibility(i ? 101 : 0)
 	update_icon()
 
-obj/machinery/atmospherics/pipe/zpipe/process()
+obj/machinery/atmospherics/pipe/zpipe/Process()
 	if(!parent) //This should cut back on the overhead calling build_network thousands of times per cycle
 		..()
 	else

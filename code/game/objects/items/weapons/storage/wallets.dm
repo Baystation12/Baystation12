@@ -47,7 +47,7 @@
 	if(front_id)
 		front_id.dropInto(loc)
 		front_id = null
-	..()
+	. = ..()
 
 /obj/item/weapon/storage/wallet/remove_from_storage(obj/item/W as obj, atom/new_location)
 	. = ..(W, new_location)

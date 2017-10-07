@@ -127,7 +127,7 @@ var/list/possible_cable_coil_colours
 //If underfloor, hide the cable
 /obj/structure/cable/hide(var/i)
 	if(istype(loc, /turf))
-		invisibility = i ? 101 : 0
+		set_invisibility(i ? 101 : 0)
 	update_icon()
 
 /obj/structure/cable/hides_under_flooring()
@@ -200,7 +200,7 @@ var/list/possible_cable_coil_colours
 	else if(istype(W, /obj/item/device/multitool))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
-			to_chat(user, "<span class='warning'>[get_wattage()]W in power network.</span>")
+			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")
 
 		else
 			to_chat(user, "<span class='warning'>The cable is not powered.</span>")
@@ -239,10 +239,9 @@ var/list/possible_cable_coil_colours
 			if (prob(25))
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
-	return
 
 obj/structure/cable/proc/cableColor(var/colorC)
-	var/color_n = "#DD0000"
+	var/color_n = "#dd0000"
 	if(colorC)
 		color_n = colorC
 	color = color_n
@@ -458,7 +457,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			if(!P.connect_to_network()) //can't find a node cable on a the turf to connect to
 				P.disconnect_from_network() //remove from current network
 
-    powernet = null // And finally null the powernet var.
+	powernet = null // And finally null the powernet var.
 
 ///////////////////////////////////////////////
 // The cable coil object, used for laying cable
@@ -489,6 +488,12 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = /obj/item/stack/cable_coil
+
+/obj/item/stack/cable_coil/single
+	amount = 1
+
+/obj/item/stack/cable_coil/single/New(var/loc, var/length = 1, var/param_color = null)
+	..(loc, length, param_color)
 
 /obj/item/stack/cable_coil/cyborg
 	name = "cable coil synthesizer"

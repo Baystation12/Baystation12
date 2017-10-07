@@ -329,7 +329,7 @@
 	. = list()
 	. += "Current selection: [(current_console && current_console.id) || "None"]"
 	. += "Please select a teleporter to lock in on:"
-	for(var/obj/machinery/teleport/hub/R in GLOB.machines)
+	for(var/obj/machinery/teleport/hub/R in SSmachines.machinery)
 		var/obj/machinery/computer/teleporter/com = R.com
 		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable())
 			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
@@ -517,7 +517,7 @@
 	activators = list("toggle light")
 	var/light_toggled = 0
 	var/light_brightness = 3
-	var/light_rgb = "#FFFFFF"
+	var/light_rgb = "#ffffff"
 
 /obj/item/integrated_circuit/output/light/do_work()
 	light_toggled = !light_toggled

@@ -122,6 +122,7 @@ var/global/list/default_pai_software = list()
 		if(S && (ram >= S.ram_cost))
 			ram -= S.ram_cost
 			software[S.id] = S
+			S.on_purchase(src)
 		return 1
 
 	else if(href_list["image"])

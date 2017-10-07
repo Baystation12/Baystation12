@@ -28,7 +28,8 @@ meteor_act
 		var/armor = getarmor_organ(organ, "bullet")
 		if(prob(20 + max(P.damage - armor, -10)))
 			var/obj/item/weapon/material/shard/shrapnel/SP = new()
-			SP.name = (P.name != "shrapnel")? "[P.name] shrapnel" : "shrapnel"
+			if(P.name != "shrapnel")
+				SP.name = "[P.name] shrapnel"
 			SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."
 			SP.loc = organ
 			organ.embed(SP)
@@ -98,11 +99,13 @@ meteor_act
 		return 0
 	var/protection = 0
 	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
-	for(var/gear in protective_gear)
-		if(gear && istype(gear ,/obj/item/clothing))
-			var/obj/item/clothing/C = gear
-			if(istype(C) && C.body_parts_covered & def_zone.body_part)
-				protection = add_armor(protection, C.armor[type])
+	for(var/obj/item/clothing/gear in protective_gear)
+		if(gear.body_parts_covered & def_zone.body_part)
+			protection = add_armor(protection, gear.armor[type])
+		if(gear.accessories.len)
+			for(var/obj/item/clothing/accessory/bling in gear.accessories)
+				if(bling.body_parts_covered & def_zone.body_part)
+					protection = add_armor(protection, bling.armor[type])
 	return protection
 
 /mob/living/carbon/human/proc/check_head_coverage()

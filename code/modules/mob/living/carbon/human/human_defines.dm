@@ -34,8 +34,8 @@
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
 
-	var/list/all_underwear = list()
-	var/list/all_underwear_metadata = list()
+	var/list/worn_underwear = list()
+
 	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
 
 	// General information
@@ -114,3 +114,4 @@
 	var/shock_stage
 
 	var/obj/item/grab/current_grab_type 	// What type of grab they use when they grab someone.
+	var/skin_state = SKIN_NORMAL

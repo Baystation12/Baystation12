@@ -97,28 +97,28 @@ default behaviour is:
 			if(!can_move_mob(tmob, 0, 0))
 				now_pushing = 0
 				return
-			if(a_intent == I_HELP || src.restrained())
+			if(src.restrained())
 				now_pushing = 0
 				return
-			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
-				if(prob(40) && !(FAT in src.mutations))
-					to_chat(src, "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>")
-					now_pushing = 0
-					return
-			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
-				if(prob(99))
-					now_pushing = 0
-					return
-			if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/riot))
-				if(prob(99))
-					now_pushing = 0
-					return
+			if(tmob.a_intent != I_HELP)
+				if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
+					if(prob(40) && !(FAT in src.mutations))
+						to_chat(src, "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>")
+						now_pushing = 0
+						return
+				if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
+					if(prob(99))
+						now_pushing = 0
+						return
+				if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/riot))
+					if(prob(99))
+						now_pushing = 0
+						return
 			if(!(tmob.status_flags & CANPUSH))
 				now_pushing = 0
 				return
-
 			tmob.LAssailant = src
-		if(isobj(AM))
+		if(isobj(AM) && !AM.anchored)
 			var/obj/I = AM
 			if(!can_pull_size || can_pull_size < I.w_class)
 				to_chat(src, "<span class='warning'>It won't budge!</span>")
@@ -144,6 +144,11 @@ default behaviour is:
 						now_pushing = 0
 						return
 				step(AM, t)
+				if (istype(AM, /mob/living))
+					var/mob/living/tmob = AM
+					if(istype(tmob.buckled, /obj/structure/bed))
+						if(!tmob.buckled.anchored)
+							step(tmob.buckled, t)
 				if(ishuman(AM) && AM:grabbed_by)
 					for(var/obj/item/grab/G in AM:grabbed_by)
 						step(G:assailant, get_dir(G:assailant, AM))
@@ -181,9 +186,9 @@ default behaviour is:
 
 /mob/living/verb/succumb()
 	set hidden = 1
-	if ((src.health < 0 && src.health > (5-src.maxHealth))) // Health below Zero but above 5-away-from-death, as before, but variable
-		src.adjustOxyLoss(src.health + src.maxHealth * 2) // Deal 2x health in OxyLoss damage, as before but variable.
-		src.health = src.maxHealth - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss()
+	if ((src.health < src.maxHealth/2)) // Health below half of maxhealth.
+		src.adjustBrainLoss(src.health + src.maxHealth * 2) // Deal 2x health in BrainLoss damage, as before but variable.
+		updatehealth()
 		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
 
 /mob/living/proc/updatehealth()
@@ -547,9 +552,9 @@ default behaviour is:
 											location.add_blood(M)
 											if(ishuman(M))
 												var/mob/living/carbon/human/H = M
-												var/blood_volume = round(H.vessel.get_reagent_amount("blood"))
+												var/blood_volume = round(H.vessel.get_reagent_amount(/datum/reagent/blood))
 												if(blood_volume > 0)
-													H.vessel.remove_reagent("blood", 1)
+													H.vessel.remove_reagent(/datum/reagent/blood, 1)
 
 
 						step(pulling, get_dir(pulling.loc, T))

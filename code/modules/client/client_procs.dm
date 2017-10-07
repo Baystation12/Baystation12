@@ -153,6 +153,8 @@
 	. = ..()	//calls mob.Login()
 	prefs.sanitize_preferences()
 
+	GLOB.using_map.map_info(src)
+
 	if(custom_event_msg && custom_event_msg != "")
 		to_chat(src, "<h1 class='alert'>Custom Event</h1>")
 		to_chat(src, "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>")

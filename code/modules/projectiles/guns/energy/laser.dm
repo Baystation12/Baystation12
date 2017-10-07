@@ -21,6 +21,29 @@
 	name = "practice laser carbine"
 	desc = "A modified version of the HI G40E, this one fires less concentrated energy bolts designed for target practice."
 	projectile_type = /obj/item/projectile/beam/practice
+	charge_cost = 10 //How much energy is needed to fire.
+
+/obj/item/weapon/gun/energy/laser/practice/proc/hacked()
+	return projectile_type != /obj/item/projectile/beam/practice
+
+/obj/item/weapon/gun/energy/laser/practice/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
+	if(hacked())
+		return NO_EMAG_ACT
+	to_chat(user, "<span class='warning'>You disable the safeties on [src] and crank the output to the lethal levels.</span>")
+	desc += " Its safeties are disabled and output is set to dangerous levels."
+	projectile_type = /obj/item/projectile/beam/midlaser
+	charge_cost = 20
+	max_shots = rand(3,6) //will melt down after those
+	return 1
+
+/obj/item/weapon/gun/energy/laser/practice/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+	..()
+	if(hacked())
+		max_shots--
+		if(!max_shots) //uh hoh gig is up
+			to_chat(user, "<span class='danger'>\The [src] sizzles in your hands, acrid smoke rising from the firing end!</span>")
+			desc += " The optical pathway is melted and useless."
+			projectile_type = null
 
 obj/item/weapon/gun/energy/retro
 	name = "retro laser"

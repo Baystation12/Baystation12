@@ -147,7 +147,7 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 	return FALSE
 
 /mob/living/carbon/get_full_print()
-	if (mFingerprints in mutations)
+	if (!dna || (mFingerprints in mutations))
 		return FALSE
 	return md5(dna.uni_identity)
 

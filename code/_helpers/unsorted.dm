@@ -420,7 +420,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()
-	var/list/sortmob = sortAtom(GLOB.mob_list)
+	var/list/sortmob = sortAtom(SSmobs.mob_list)
 	for(var/mob/observer/eye/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/living/silicon/ai/M in sortmob)
@@ -517,13 +517,13 @@ proc/arctan(x)
 
 //returns random gauss number
 proc/GaussRand(var/sigma)
-  var/x,y,rsq
-  do
-    x=2*rand()-1
-    y=2*rand()-1
-    rsq=x*x+y*y
-  while(rsq>1 || !rsq)
-  return sigma*y*sqrt(-2*log(rsq)/rsq)
+	var/x,y,rsq
+	do
+		x=2*rand()-1
+		y=2*rand()-1
+		rsq=x*x+y*y
+	while(rsq>1 || !rsq)
+	return sigma*y*sqrt(-2*log(rsq)/rsq)
 
 //returns random gauss number, rounded to 'roundto'
 proc/GaussRandRound(var/sigma,var/roundto)
@@ -800,7 +800,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 
 	if(toupdate.len)
 		for(var/turf/simulated/T1 in toupdate)
-			air_master.mark_for_update(T1)
+			SSair.mark_for_update(T1)
 
 	return copiedobjs
 
@@ -833,7 +833,7 @@ proc/oview_or_orange(distance = world.view , center = usr , type)
 
 proc/get_mob_with_client_list()
 	var/list/mobs = list()
-	for(var/mob/M in GLOB.mob_list)
+	for(var/mob/M in SSmobs.mob_list)
 		if (M.client)
 			mobs += M
 	return mobs
@@ -1118,16 +1118,18 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	simulated = 0
 
 	see_in_dark = 1e6
+	
+	virtual_mob = null
 
 /atom/proc/get_light_and_color(var/atom/origin)
 	if(origin)
 		color = origin.color
 		set_light(origin.light_range, origin.light_power, origin.light_color)
 
-/mob/dview/New()
-	..()
+/mob/dview/Initialize()
+	. = ..()
 	// We don't want to be in any mob lists; we're a dummy not a mob.
-	GLOB.mob_list -= src
+	STOP_PROCESSING(SSmobs, src)
 
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)

@@ -28,7 +28,7 @@
 		data["name"] = carded_ai.name
 		data["hardware_integrity"] = carded_ai.hardware_integrity()
 		data["backup_capacitor"] = carded_ai.backup_capacitor()
-		data["radio"] = !carded_ai.aiRadio.disabledAi
+		data["radio"] = !carded_ai.ai_radio.disabledAi
 		data["wireless"] = !carded_ai.control_disabled
 		data["operational"] = carded_ai.stat != DEAD
 		data["flushing"] = flush
@@ -66,9 +66,9 @@
 				sleep(10)
 			flush = 0
 	if (href_list["radio"])
-		carded_ai.aiRadio.disabledAi = text2num(href_list["radio"])
-		to_chat(carded_ai, "<span class='warning'>Your Subspace Transceiver has been [carded_ai.aiRadio.disabledAi ? "disabled" : "enabled"]!</span>")
-		to_chat(user, "<span class='notice'>You [carded_ai.aiRadio.disabledAi ? "disable" : "enable"] the AI's Subspace Transceiver.</span>")
+		carded_ai.ai_radio.disabledAi = text2num(href_list["radio"])
+		to_chat(carded_ai, "<span class='warning'>Your Subspace Transceiver has been [carded_ai.ai_radio.disabledAi ? "disabled" : "enabled"]!</span>")
+		to_chat(user, "<span class='notice'>You [carded_ai.ai_radio.disabledAi ? "disable" : "enable"] the AI's Subspace Transceiver.</span>")
 	if (href_list["wireless"])
 		carded_ai.control_disabled = text2num(href_list["wireless"])
 		to_chat(carded_ai, "<span class='warning'>Your wireless interface has been [carded_ai.control_disabled ? "disabled" : "enabled"]!</span>")
@@ -97,7 +97,7 @@
 		to_chat(user, "<span class='danger'>Transfer failed:</span> Existing AI found on remote terminal. Remove existing AI to install a new one.")
 		return 0
 
-	if(ai.malfunctioning)
+	if(ai.malfunctioning && ai.uncardable)
 		to_chat(user, "<span class='danger'>ERROR:</span> Remote transfer interface disabled.")
 		return 0
 

@@ -53,7 +53,7 @@
 
 	RefreshParts()
 
-/obj/machinery/mining/drill/process()
+/obj/machinery/mining/drill/Process()
 
 	if(need_player_check)
 		return
@@ -80,6 +80,11 @@
 		var/turf/simulated/floor/asteroid/T = get_turf(src)
 		if(!T.dug)
 			T.gets_dug()
+	else if(istype(get_turf(src), /turf/simulated/floor/exoplanet))
+		var/turf/simulated/floor/exoplanet/T = get_turf(src)
+		if(T.diggable)
+			new /obj/structure/pit(T)
+			T.diggable = 0
 	else if(istype(get_turf(src), /turf/simulated/floor))
 		var/turf/simulated/floor/T = get_turf(src)
 		T.ex_act(2.0)
@@ -92,7 +97,8 @@
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
-			harvesting = pick(resource_field)
+			if(resource_field.len)
+				harvesting = pick(resource_field)
 
 		if(!harvesting) return
 

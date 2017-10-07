@@ -39,14 +39,14 @@ var/list/global/tank_gauge_cache = list()
 	description_info = "These tanks are utilised to store any of the various types of gaseous substances. \
 	They can be attached to various portable atmospheric devices to be filled or emptied. <br>\
 	<br>\
-	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ºC. \
+	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ï¿½C. \
 	The valve itself will close after expending most or all of the contents into the air.<br>\
 	<br>\
 	Filling a tank such that experiences ~4000kPa of pressure will cause the tank to rupture, spilling out its contents and destroying the tank. \
 	Tanks filled over ~5000kPa will rupture rather violently, exploding with significant force."
 
-	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ºC). \
-	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ºC. \
+	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ï¿½C). \
+	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ï¿½C. \
 	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
 
 /obj/item/weapon/tank/proc/init_proxy()
@@ -62,14 +62,14 @@ var/list/global/tank_gauge_cache = list()
 	src.air_contents = new /datum/gas_mixture()
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
-	GLOB.processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	update_gauge()
 	return
 
 /obj/item/weapon/tank/Destroy()
 	QDEL_NULL(air_contents)
 
-	GLOB.processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(src.proxyassembly)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
@@ -112,9 +112,8 @@ var/list/global/tank_gauge_cache = list()
 	if (istype(src.loc, /obj/item/assembly))
 		icon = src.loc
 
-	if ((istype(W, /obj/item/device/analyzer)) && get_dist(user, src) <= 1)
-		var/obj/item/device/analyzer/A = W
-		A.analyze_gases(src, user)
+	if (istype(W, /obj/item/device/analyzer))
+		return
 	else if (istype(W,/obj/item/latexballon))
 		var/obj/item/latexballon/LB = W
 		LB.blow(src)
@@ -264,7 +263,7 @@ var/list/global/tank_gauge_cache = list()
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "tanks.tmpl", "Tank", 500, 300)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
@@ -347,7 +346,7 @@ var/list/global/tank_gauge_cache = list()
 
 	return remove_air(moles_needed)
 
-/obj/item/weapon/tank/process()
+/obj/item/weapon/tank/Process()
 	//Allow for reactions
 	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 	if(gauge_icon)

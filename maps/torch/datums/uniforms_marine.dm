@@ -119,8 +119,32 @@
 	name = "Marine service"
 	departments = SRV
 
+	utility_under = /obj/item/clothing/under/utility/marine/service
+
+	service_over = /obj/item/clothing/suit/storage/service/marine/service
+
 /decl/hierarchy/mil_uniform/marine/srv/officer
 	name = "Marine service"
+	min_rank = 11
+
+	service_hat = /obj/item/clothing/head/service/marine/command
+
+	dress_under = /obj/item/clothing/under/mildress/marine/command
+	dress_skirt = /obj/item/clothing/under/mildress/marine/command/skirt
+	dress_over = /obj/item/clothing/suit/dress/marine/command
+	dress_hat = /obj/item/clothing/head/dress/marine/command
+	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/marineofficer)
+
+/decl/hierarchy/mil_uniform/marine/srv
+	name = "Marine exploration"
+	departments = EXP
+
+	utility_under = /obj/item/clothing/under/utility/marine/exploration
+
+	service_over = /obj/item/clothing/suit/storage/service/marine/exploration
+
+/decl/hierarchy/mil_uniform/marine/srv/officer
+	name = "Marine exploration"
 	min_rank = 11
 
 	service_hat = /obj/item/clothing/head/service/marine/command

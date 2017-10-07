@@ -13,31 +13,33 @@
 	var/charge_tick = 0
 	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
 
-	var/list/reagent_ids = list("tricordrazine", "inaprovaline", "spaceacillin")
+	var/list/reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/spaceacillin)
 	var/list/reagent_volumes = list()
 	var/list/reagent_names = list()
 
 /obj/item/weapon/reagent_containers/borghypo/surgeon
-	reagent_ids = list("bicaridine", "dexalin", "tramadol")
+	reagent_ids = list(/datum/reagent/bicaridine, /datum/reagent/dexalin, /datum/reagent/tramadol)
 
 /obj/item/weapon/reagent_containers/borghypo/crisis
-	reagent_ids = list("tricordrazine", "inaprovaline", "tramadol")
+	reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/tramadol)
 
-/obj/item/weapon/reagent_containers/borghypo/New()
-	..()
+/obj/item/weapon/reagent_containers/borghypo/Initialize()
+	. = ..()
 
 	for(var/T in reagent_ids)
 		reagent_volumes[T] = volume
-		var/datum/reagent/R = chemical_reagents_list[T]
+		var/datum/reagent/R = GLOB.chemical_reagents_list[T]
 		reagent_names += R.name
 
-	GLOB.processing_objects.Add(src)
+/obj/item/weapon/reagent_containers/borghypo/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/reagent_containers/borghypo/Destroy()
-	GLOB.processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/reagent_containers/borghypo/process() //Every [recharge_time] seconds, recharge some reagents for the cyborg+
+/obj/item/weapon/reagent_containers/borghypo/Process() //Every [recharge_time] seconds, recharge some reagents for the cyborg+
 	if(++charge_tick < recharge_time)
 		return 0
 	charge_tick = 0
@@ -89,26 +91,29 @@
 		if(mode == i)
 			t += "<b>[reagent_names[i]]</b>"
 		else
-			t += "<a href='?src=\ref[src];reagent=[reagent_ids[i]]'>[reagent_names[i]]</a>"
+			t += "<a href='?src=\ref[src];reagent_index=[i]'>[reagent_names[i]]</a>"
 	t = "Available reagents: [t]."
 	to_chat(user, t)
 
 	return
 
 /obj/item/weapon/reagent_containers/borghypo/Topic(var/href, var/list/href_list)
-	if(href_list["reagent"])
-		var/t = reagent_ids.Find(href_list["reagent"])
-		if(t)
+	if((. = ..()))
+		return
+	if(href_list["reagent_index"])
+		var/index = text2num(href_list["reagent_index"])
+		if(index > 0 && index <= reagent_ids.len)
 			playsound(loc, 'sound/effects/pop.ogg', 50, 0)
-			mode = t
-			var/datum/reagent/R = chemical_reagents_list[reagent_ids[mode]]
+			mode = index
+			var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_ids[mode]]
 			to_chat(usr, "<span class='notice'>Synthesizer is now producing '[R.name]'.</span>")
+		return 1
 
 /obj/item/weapon/reagent_containers/borghypo/examine(mob/user)
 	if(!..(user, 2))
 		return
 
-	var/datum/reagent/R = chemical_reagents_list[reagent_ids[mode]]
+	var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_ids[mode]]
 
 	to_chat(user, "<span class='notice'>It is currently producing [R.name] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.</span>")
 
@@ -121,7 +126,7 @@
 	recharge_time = 3
 	volume = 60
 	possible_transfer_amounts = "5;10;20;30"
-	reagent_ids = list("beer", "kahlua", "whiskey", "wine", "vodka", "gin", "rum", "tequilla", "vermouth", "cognac", "ale", "mead", "water", "sugar", "ice", "tea", "icetea", "cola", "spacemountainwind", "dr_gibb", "space_up", "tonic", "sodawater", "lemon_lime", "orangejuice", "limejuice", "watermelonjuice")
+	reagent_ids = list(/datum/reagent/ethanol/beer, /datum/reagent/ethanol/coffee/kahlua, /datum/reagent/ethanol/whiskey, /datum/reagent/ethanol/wine, /datum/reagent/ethanol/vodka, /datum/reagent/ethanol/gin, /datum/reagent/ethanol/rum, /datum/reagent/ethanol/tequilla, /datum/reagent/ethanol/vermouth, /datum/reagent/ethanol/cognac, /datum/reagent/ethanol/ale, /datum/reagent/ethanol/mead, /datum/reagent/water, /datum/reagent/sugar, /datum/reagent/drink/ice, /datum/reagent/drink/tea, /datum/reagent/drink/tea/icetea, /datum/reagent/drink/space_cola, /datum/reagent/drink/spacemountainwind, /datum/reagent/drink/dr_gibb, /datum/reagent/drink/space_up, /datum/reagent/drink/tonic, /datum/reagent/drink/sodawater, /datum/reagent/drink/lemon_lime, /datum/reagent/drink/juice/orange, /datum/reagent/drink/juice/lime, /datum/reagent/drink/juice/watermelon)
 
 /obj/item/weapon/reagent_containers/borghypo/service/attack(var/mob/M, var/mob/user)
 	return

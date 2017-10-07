@@ -53,16 +53,16 @@ var/global/datum/repository/crew/crew_repository = new()
 				if(H.w_uniform != C)
 					continue
 				var/pressure = H.get_blood_pressure()
-				var/blood_result = H.get_effective_blood_volume()
+				var/blood_result = H.get_blood_oxygenation()
 				if(blood_result > 110)
-					blood_result = "elevated"
+					blood_result = "increased"
 				else if(blood_result < 90)
 					blood_result = "low"
 				else if(blood_result < 60)
 					blood_result = "extremely low"
 				else
 					blood_result = "normal"
-				pressure += " ([blood_result])"
+				pressure += " ([blood_result] oxygenation)"
 
 				var/true_pulse = H.pulse()
 				var/pulse_span = "good"
@@ -92,7 +92,7 @@ var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew/proc/scan()
 	var/list/tracked = list()
-	for(var/mob/living/carbon/human/H in GLOB.mob_list)
+	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
 		if(istype(H.w_uniform, /obj/item/clothing/under))
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)

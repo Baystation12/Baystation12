@@ -50,7 +50,7 @@
 /mob
 	var/get_rig_stats = 0
 
-/obj/item/rig_module/ai_container/process()
+/obj/item/rig_module/ai_container/Process()
 	if(integrated_ai)
 		var/obj/item/weapon/rig/rig = get_rig()
 		if(rig && rig.ai_override_enabled)
@@ -423,7 +423,7 @@
 		return 1
 	return 0
 
-/obj/item/rig_module/power_sink/process()
+/obj/item/rig_module/power_sink/Process()
 
 	if(!interfaced_with)
 		return ..()

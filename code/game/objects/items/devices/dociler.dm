@@ -44,7 +44,7 @@
 		var/mob/living/simple_animal/hostile/H = L
 		H.LoseTarget()
 		H.attack_same = 0
-		H.friends += user
+		H.friends += weakref(user)
 	L.desc += "<br><span class='notice'>It looks especially docile.</span>"
 	var/name = input(user, "Would you like to rename \the [L]?", "Dociler", L.name) as text
 	if(length(name))

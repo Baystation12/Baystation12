@@ -1,4 +1,6 @@
-//print an error message to world.log
+//wrapper macros for easier grepping
+#define DIRECT_OUTPUT(A, B) A << B
+#define WRITE_FILE(file, text) DIRECT_OUTPUT(file, text)
 
 
 // On Linux/Unix systems the line endings are LF, on windows it's CRLF, admins that don't use notepad++
@@ -43,7 +45,7 @@
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
 	for(var/client/C in GLOB.admins)
-		if(C.is_preference_enabled(/datum/client_preference/debug/show_debug_logs))
+		if(C.is_preference_enabled(/datum/client_preference/staff/show_debug_logs))
 			to_chat(C, "[prefix]: [text]")
 
 /proc/log_game(text)
@@ -101,6 +103,9 @@
 /proc/log_unit_test(text)
 	to_world_log("## UNIT_TEST ##: [text]")
 	log_debug(text)
+
+/proc/log_qdel(text)
+	WRITE_FILE(GLOB.world_qdel_log, "\[[time_stamp()]]QDEL: [text]")
 
 //This replaces world.log so it displays both in DD and the file
 /proc/log_world(text)
@@ -173,7 +178,7 @@
 
 
 		if(include_link && is_special_character(M) && highlight_special_characters)
-			. += "/(<font color='#FFA500'>[name]</font>)" //Orange
+			. += "/(<font color='#ffa500'>[name]</font>)" //Orange
 		else
 			. += "/([name])"
 

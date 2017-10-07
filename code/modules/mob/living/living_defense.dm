@@ -215,6 +215,8 @@
 
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
+	visible_message("<span class='danger'>[src] slams into \the [T]!</span>")
+	playsound(loc, 'sound/effects/bangtaper.ogg', 50, 1, -1)
 	src.take_organ_damage(speed*5)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
@@ -275,8 +277,7 @@
 		ExtinguishMob() //Fire's been put out.
 		return 1
 
-	if(HUSK in mutations)
-		fire_stacks = max(0, fire_stacks - 0.1) //I guess the fire runs out of fuel eventually
+	fire_stacks = max(0, fire_stacks - 0.2) //I guess the fire runs out of fuel eventually
 
 	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
 	if(G.get_by_flag(XGM_GAS_OXIDIZER) < 1)

@@ -88,7 +88,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 /mob/observer/ghost/Topic(href, href_list)
 	if (href_list["track"])
 		if(istype(href_list["track"],/mob))
-			var/mob/target = locate(href_list["track"]) in GLOB.mob_list
+			var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
 			if(target)
 				ManualFollow(target)
 		else
@@ -276,14 +276,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost_to_turf(T)
 	else
 		to_chat(src, "<span class='warning'>Invalid coordinates.</span>")
-/mob/observer/ghost/verb/follow(input in get_follow_targets())
+/mob/observer/ghost/verb/follow(var/datum/follow_holder/fh in get_follow_targets())
 	set category = "Ghost"
 	set name = "Follow"
 	set desc = "Follow and haunt a mob."
 
-	var/target = get_follow_targets()[input]
-	if(!target) return
-	ManualFollow(target)
+	if(!fh.show_entry()) return
+	ManualFollow(fh.followed_instance)
 
 /mob/observer/ghost/proc/ghost_to_turf(var/turf/target_turf)
 	if(check_is_holy_turf(target_turf))
@@ -362,7 +361,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/mob/living/simple_animal/mouse/host
 	var/obj/machinery/atmospherics/unary/vent_pump/vent_found
 	var/list/found_vents = list()
-	for(var/obj/machinery/atmospherics/unary/vent_pump/v in GLOB.machines)
+	for(var/obj/machinery/atmospherics/unary/vent_pump/v in SSmachines.machinery)
 		if(!v.welded && v.z == T.z)
 			found_vents.Add(v)
 	if(found_vents.len)
@@ -446,7 +445,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	return 1
 
 /mob/proc/can_admin_interact()
-    return 0
+	return 0
 
 /mob/observer/ghost/can_admin_interact()
 	return check_rights(R_ADMIN, 0, src)
@@ -532,7 +531,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	alpha = pre_alpha
 	plane = pre_plane
 	layer = pre_layer
-	invisibility = pre_invis
+	set_invisibility(pre_invis)
 	transform = null	//make goast stand up
 
 /mob/observer/ghost/verb/respawn()

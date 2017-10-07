@@ -19,7 +19,7 @@
 
 	var/hibernate = 0 //Do we even process?
 	var/scrubbing = 1 //0 = siphoning, 1 = scrubbing
-	var/list/scrubbing_gas = list("carbon_dioxide", "phoron", "sleeping_agent")
+	var/list/scrubbing_gas
 
 	var/panic = 0 //is this scrubber panicked?
 
@@ -128,8 +128,13 @@
 	if (frequency)
 		set_frequency(frequency)
 		src.broadcast_status()
+	if(!scrubbing_gas)
+		scrubbing_gas = list()
+		for(var/g in gas_data.gases)
+			if(g != "oxygen" && g != "nitrogen")
+				scrubbing_gas += g
 
-/obj/machinery/atmospherics/unary/vent_scrubber/process()
+/obj/machinery/atmospherics/unary/vent_scrubber/Process()
 	..()
 
 	if (hibernate > world.time)

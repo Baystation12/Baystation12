@@ -55,8 +55,8 @@
 
 //hit other people with it
 /obj/item/device/holowarrant/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	user.visible_message("<span class='notice'>You show the warrant to [M].</span>", \
-			"<span class='notice'>[user] holds up a warrant projector and shows the contents to [M].</span>")
+	user.visible_message("<span class='notice'>[user] holds up a warrant projector and shows the contents to [M].</span>", \
+			"<span class='notice'>You show the warrant to [M].</span>")
 	M.examinate(src)
 
 /obj/item/device/holowarrant/update_icon()
@@ -71,7 +71,7 @@
 	if(active.fields["arrestsearch"] == "arrest")
 		var/output = {"
 		<HTML><HEAD><TITLE>[active.fields["namewarrant"]]</TITLE></HEAD>
-		<BODY bgcolor='#FFFFFF'><center><large><b>Sol Central Government Colonial Marshal Bureau</b></large></br>
+		<BODY bgcolor='#ffffff'><center><large><b>Sol Central Government Colonial Marshal Bureau</b></large></br>
 		in the jurisdiction of the</br>
 		[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
 		</br>
@@ -89,7 +89,7 @@
 	if(active.fields["arrestsearch"] ==  "search")
 		var/output= {"
 		<HTML><HEAD><TITLE>Search Warrant: [active.fields["namewarrant"]]</TITLE></HEAD>
-		<BODY bgcolor='#FFFFFF'><center>in the jurisdiction of the</br>
+		<BODY bgcolor='#ffffff'><center>in the jurisdiction of the</br>
 		[GLOB.using_map.boss_name] in [GLOB.using_map.system_name]</br>
 		</br>
 		<b>SEARCH WARRANT</b></center></br>

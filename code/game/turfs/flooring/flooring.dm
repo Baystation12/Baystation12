@@ -95,7 +95,6 @@ var/list/flooring_types
 	flags = TURF_REMOVE_SCREWDRIVER
 
 /decl/flooring/tiling/white
-	name = "floor"
 	desc = "How sterile."
 	icon_base = "white"
 	has_damage_range = null
@@ -103,7 +102,6 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/floor_white
 
 /decl/flooring/tiling/dark
-	name = "floor"
 	desc = "How ominous."
 	icon_base = "dark"
 	has_damage_range = null
@@ -111,7 +109,6 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/floor_dark
 
 /decl/flooring/tiling/freezer
-	name = "floor"
 	desc = "Don't slip."
 	icon_base = "freezer"
 	has_damage_range = null
@@ -167,10 +164,6 @@ var/list/flooring_types
 	has_damage_range = 6
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_WRENCH
 	can_paint = null
-
-/decl/flooring/reinforced/cult/New()
-	..()
-	new /obj/effect/overlay/cult/cultfloor(src)
 
 /decl/flooring/reinforced/cult/on_remove()
 	cult.remove_cultiness(CULTINESS_PER_TURF)

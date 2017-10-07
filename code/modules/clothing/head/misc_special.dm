@@ -115,9 +115,9 @@
 	var/onfire = 0
 	body_parts_covered = HEAD
 
-/obj/item/clothing/head/cakehat/process()
+/obj/item/clothing/head/cakehat/Process()
 	if(!onfire)
-		GLOB.processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		return
 
 	var/turf/location = src.loc
@@ -136,7 +136,7 @@
 		src.damtype = "fire"
 		src.icon_state = "cake1"
 		src.item_state = "cake1"
-		GLOB.processing_objects.Add(src)
+		START_PROCESSING(SSobj, src)
 	else
 		src.force = null
 		src.damtype = "brute"
@@ -154,6 +154,8 @@
 	icon_state = "ushankadown"
 	var/icon_state_up = "ushankaup"
 	flags_inv = HIDEEARS|BLOCKHEADHAIR
+	cold_protection = HEAD
+	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/head/ushanka/attack_self(mob/user as mob)
 	if(icon_state == initial(icon_state))

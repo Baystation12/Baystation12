@@ -24,53 +24,35 @@
 
 // EMP
 
-/obj/machinery/camera/emp_proof/New()
+/obj/machinery/camera/emp_proof/Initialize()
 	..()
-	upgradeEmpProof()
+	. = upgradeEmpProof()
 
 // X-RAY
 
 /obj/machinery/camera/xray
 	icon_state = "xraycam" // Thanks to Krutchen for the icons.
 
-/obj/machinery/camera/xray/New()
-	..()
+/obj/machinery/camera/xray/Initialize()
+	. = ..()
 	upgradeXRay()
 
 // MOTION
 
-/obj/machinery/camera/motion/New()
-	..()
+/obj/machinery/camera/motion/Initialize()
+	. = ..()
 	upgradeMotion()
 
 // ALL UPGRADES
 
-/obj/machinery/camera/all/New()
-	..()
+/obj/machinery/camera/all/Initialize()
+	. = ..()
 	upgradeEmpProof()
 	upgradeXRay()
 	upgradeMotion()
 
-// AUTONAME
+// AUTONAME left as a map stub
 /obj/machinery/camera/autoname
-	var/number = 0 //camera number in area
-
-//This camera type automatically sets it's name to whatever the area that it's in is called.
-/obj/machinery/camera/autoname/New()
-	..()
-	spawn(10)
-		number = 1
-		var/area/A = get_area(src)
-		if(A)
-			for(var/obj/machinery/camera/autoname/C in world)
-				if(C == src) continue
-				var/area/CA = get_area(C)
-				if(CA.type == A.type)
-					if(C.number)
-						number = max(number, C.number+1)
-			c_tag = "[A.name] #[number]"
-		invalidateCameraCache()
-
 
 // CHECKS
 
@@ -103,12 +85,7 @@
 /obj/machinery/camera/proc/upgradeMotion()
 	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
 	setPowerUsage()
-	if(!(src in GLOB.machines))
-		if(!machinery_sort_required && ticker)
-			dd_insertObjectList(GLOB.machines, src)
-		else
-			GLOB.machines += src
-			machinery_sort_required = 1
+	START_PROCESSING(SSmachines, src)
 	update_coverage()
 
 /obj/machinery/camera/proc/setPowerUsage()

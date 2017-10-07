@@ -139,14 +139,14 @@
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
 
 	charges = list(
-		list("tricordrazine", "tricordrazine", 0, 80),
-		list("tramadol",      "tramadol",      0, 80),
-		list("dexalin plus",  "dexalinp",      0, 80),
-		list("antibiotics",   "spaceacillin",  0, 80),
-		list("antitoxins",    "anti_toxin",    0, 80),
-		list("nutrients",     "glucose",     0, 80),
-		list("hyronalin",     "hyronalin",     0, 80),
-		list("radium",        "radium",        0, 80)
+		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     80),
+		list("dramadol",      "tramadol",      /datum/reagent/tramadol,          80),
+		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
+		list("antibiotics",   "antibiotics",   /datum/reagent/spaceacillin,      80),
+		list("antitoxins",    "antitoxins",    /datum/reagent/dylovene,          80),
+		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
+		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         80),
+		list("radium",        "radium",        /datum/reagent/radium,            80)
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
@@ -156,14 +156,14 @@
 
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
-		list("tricordrazine", "tricordrazine", 0, 20),
-		list("tramadol",      "tramadol",      0, 20),
-		list("dexalin plus",  "dexalinp",      0, 20),
-		list("antibiotics",   "spaceacillin",  0, 20),
-		list("antitoxins",    "anti_toxin",    0, 20),
-		list("nutrients",     "glucose",     0, 80),
-		list("hyronalin",     "hyronalin",     0, 20),
-		list("radium",        "radium",        0, 20)
+		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     20),
+		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20),
+		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          20),
+		list("antibiotics",   "antibiotics",   /datum/reagent/spaceacillin,      20),
+		list("antitoxins",    "antitoxins",    /datum/reagent/dylovene,          20),
+		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
+		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         20),
+		list("radium",        "radium",        /datum/reagent/radium,            20)
 		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
@@ -180,7 +180,7 @@
 	for(var/datum/reagent/R in input_item.reagents.reagent_list)
 		for(var/chargetype in charges)
 			var/datum/rig_charge/charge = charges[chargetype]
-			if(charge.display_name == R.id)
+			if(charge.product_type == R.type)
 
 				var/chems_to_transfer = R.volume
 
@@ -188,7 +188,7 @@
 					chems_to_transfer = max_reagent_volume - charge.charges
 
 				charge.charges += chems_to_transfer
-				input_item.reagents.remove_reagent(R.id, chems_to_transfer)
+				input_item.reagents.remove_reagent(R.type, chems_to_transfer)
 				total_transferred += chems_to_transfer
 
 				break
@@ -234,7 +234,7 @@
 	if(target_mob != H)
 		to_chat(H, "<span class='danger'>You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name].</span>")
 	to_chat(target_mob, "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>")
-	target_mob.reagents.add_reagent(charge.display_name, chems_to_use)
+	target_mob.reagents.add_reagent(charge.product_type, chems_to_use)
 
 	charge.charges -= chems_to_use
 	if(charge.charges < 0) charge.charges = 0
@@ -247,10 +247,10 @@
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
 
 	charges = list(
-		list("synaptizine",   "synaptizine",   0, 30),
-		list("hyperzine",     "hyperzine",     0, 30),
-		list("oxycodone",     "oxycodone",     0, 30),
-		list("nutrients",     "glucose",     0, 80),
+		list("synaptizine", "synaptizine", /datum/reagent/synaptizine,       30),
+		list("hyperzine",   "hyperzine",   /datum/reagent/hyperzine,         30),
+		list("oxycodone",   "oxycodone",   /datum/reagent/tramadol/oxycodone,         30),
+		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose, 80),
 		)
 
 	interface_name = "combat chem dispenser"

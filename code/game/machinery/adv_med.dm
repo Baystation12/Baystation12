@@ -181,16 +181,16 @@
 	name = "Body Scanner Console"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scannerconsole"
-	density = 1
+	density = 0
 	anchored = 1
 
 
-/obj/machinery/body_scanconsole/New()
-	..()
-	spawn( 5 )
-		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, WEST))
-		return
-	return
+/obj/machinery/body_scanconsole/Initialize()
+	for(var/D in GLOB.cardinal)
+		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
+		if(src.connected)
+			break
+	return ..()
 
 /*
 
@@ -301,17 +301,16 @@
 			pulse_result = H.get_pulse(1)
 	else
 		pulse_result = "ERROR - Nonstandard biology"
-	. += "<b>Pulse rate:</b> [pulse_result]bpm."
+	dat += "<b>Pulse rate:</b> [pulse_result]bpm."
 
 	// Blood pressure. Based on the idea of a normal blood pressure being 120 over 80.
-	var/blood_result = H.get_effective_blood_volume()
-	if(blood_result <= 70)
-		. += "<span class='danger'>Severe blood loss detected.</span>"
-	. += "<b>Blood pressure:</b> [H.get_blood_pressure()] ([blood_result]% blood circulation)"
-	. += "<b>Blood volume:</b> [H.vessel.get_reagent_amount("blood")]/[H.species.blood_volume]u"
+	if(H.get_blood_volume() <= 70)
+		dat += "<span class='danger'>Severe blood loss detected.</span>"
+	dat += "<b>Blood pressure:</b> [H.get_blood_pressure()] ([H.get_blood_oxygenation()]% blood oxygenation)"
+	dat += "<b>Blood volume:</b> [H.vessel.get_reagent_amount(/datum/reagent/blood)]/[H.species.blood_volume]u"
 
 	// Body temperature.
-	. += "<b>Body temperature:</b> [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)"
+	dat += "<b>Body temperature:</b> [H.bodytemperature-T0C]&deg;C ([H.bodytemperature*1.8-459.67]&deg;F)"
 
 	dat += "<b>Physical Trauma:</b>\t[get_severity(H.getBruteLoss())]"
 	dat += "<b>Burn Severity:</b>\t[get_severity(H.getFireLoss())]"
@@ -335,7 +334,7 @@
 		for(var/A in H.reagents.reagent_list)
 			var/datum/reagent/R = A
 			if(R.scannable)
-				reagentdata["[R.id]"] = "[round(H.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
+				reagentdata[R.type] = "[round(H.reagents.get_reagent_amount(R.type), 1)]u [R.name]"
 		if(reagentdata.len)
 			dat += "Beneficial reagents detected in subject's blood:"
 			for(var/d in reagentdata)
@@ -358,7 +357,7 @@
 			table += "</td><td>[english_list(E.get_scan_results(), nothing_text = "", and_text = ", ")]</td></tr>"
 
 	table += "<tr><td>---</td><td><b>INTERNAL ORGANS</b></td><td>---</td></tr>"
-	for(var/obj/item/organ/I in H.internal_organs)
+	for(var/obj/item/organ/internal/I in H.internal_organs)
 		table += "<tr><td>[I.name]</td>"
 		table += "<td>"
 		if(I.is_broken())

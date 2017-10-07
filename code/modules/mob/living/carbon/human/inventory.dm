@@ -1,3 +1,4 @@
+#define REMOVE_INTERNALS if(internal){ if(internals){ internals.icon_state = "internal0" }; internal = null }
 /*
 Add fingerprints to items when we put them in our hands.
 This saves us from having to call add_fingerprint() any time something is put in a human's hands programmatically.
@@ -149,6 +150,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 				update_hair(0)	//rebuild hair
 				update_inv_ears(0)
 				update_inv_wear_mask(0)
+		if(src)
+			var/obj/item/clothing/mask/wear_mask = src.get_equipped_item(slot_wear_mask)
+			if(!(wear_mask && (wear_mask.item_flags & AIRTIGHT)))
+				REMOVE_INTERNALS
 		update_inv_head()
 	else if (W == l_ear)
 		l_ear = null
@@ -173,10 +178,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if(I.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR))
 				update_hair(0)	//rebuild hair
 				update_inv_ears(0)
-		if(internal)
-			if(internals)
-				internals.icon_state = "internal0"
-			internal = null
+		REMOVE_INTERNALS
 		update_inv_wear_mask()
 	else if (W == wear_id)
 		wear_id = null
@@ -395,19 +397,21 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/get_equipped_items(var/include_carried = 0)
 	. = ..()
-	if(belt) . += belt
-	if(l_ear) . += l_ear
-	if(r_ear) . += r_ear
-	if(glasses) . += glasses
-	if(gloves) . += gloves
-	if(head) . += head
-	if(shoes) . += shoes
-	if(wear_id) . += wear_id
+	if(belt)      . += belt
+	if(l_ear)     . += l_ear
+	if(r_ear)     . += r_ear
+	if(glasses)   . += glasses
+	if(gloves)    . += gloves
+	if(head)      . += head
+	if(shoes)     . += shoes
+	if(wear_id)   . += wear_id
 	if(wear_suit) . += wear_suit
 	if(w_uniform) . += w_uniform
 
 	if(include_carried)
-		if(slot_l_store)    . += l_store
-		if(slot_r_store)    . += r_store
-		if(slot_handcuffed) . += handcuffed
-		if(slot_s_store)    . += s_store
+		if(l_store)    . += l_store
+		if(r_store)    . += r_store
+		if(handcuffed) . += handcuffed
+		if(s_store)    . += s_store
+		
+#undef REMOVE_INTERNALS

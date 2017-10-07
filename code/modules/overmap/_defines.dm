@@ -7,14 +7,11 @@ var/global/list/map_sectors = list()
 	name = "System Map"
 	icon_state = "start"
 	requires_power = 0
-	luminosity = 1
-	dynamic_lighting = 0
 	base_turf = /turf/unsimulated/map
 
 /turf/unsimulated/map
 	icon = 'icons/turf/space.dmi'
 	icon_state = "map"
-	dynamic_lighting = 0
 
 /turf/unsimulated/map/edge
 	opacity = 1
@@ -67,14 +64,14 @@ proc/toggle_move_stars(zlevel, direction)
 
 	if (moving_levels["[zlevel]"] != gen_dir)
 		moving_levels["[zlevel]"] = gen_dir
-		for(var/x = 1 to world.maxx)
-			for(var/y = 1 to world.maxy)
-				var/turf/space/T = locate(x,y,zlevel)
-				if (istype(T))
-					if(!gen_dir)
-						T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y)) % 25]"
-					else
-						T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
-						for(var/atom/movable/AM in T)
-							if (!AM.anchored)
-								AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
+		
+		var/list/spaceturfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
+		for(var/turf/space/T in spaceturfs)
+			if(!gen_dir)
+				T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y)) % 25]"
+			else
+				T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
+				for(var/atom/movable/AM in T)
+					if (!AM.anchored)
+						AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
+				sleep(-1)

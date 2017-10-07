@@ -125,7 +125,7 @@
 
 /datum/random_map/droppod/proc/get_spawned_drop(var/turf/T)
 	var/obj/structure/bed/chair/C = new(T)
-	C.set_light(3, l_color = "#CC0000")
+	C.set_light(3, l_color = "#cc0000")
 	var/mob/living/drop
 	// This proc expects a list of mobs to be passed to the spawner.
 	// Use the supply pod if you don't want to drop mobs.

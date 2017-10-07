@@ -1,6 +1,0 @@
-author: Atlantiscze
-
-delete-after: True
-
-changes: 
-  - tweak: "Canisters now once again use NanoUI, instead of tgui. Performance on some devices should be considerably better."

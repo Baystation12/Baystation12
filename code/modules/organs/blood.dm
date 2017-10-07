@@ -17,15 +17,23 @@
 	if(!should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
 
-	vessel.add_reagent("blood",species.blood_volume)
-	spawn(1)
-		fixblood()
+	vessel.add_reagent(/datum/reagent/blood,species.blood_volume)
+	fixblood()
 
 //Resets blood data
 /mob/living/carbon/human/proc/fixblood()
 	for(var/datum/reagent/blood/B in vessel.reagent_list)
-		if(B.id == "blood")
-			B.data = list("donor" = src, "species" = species.name, "blood_DNA" = dna.unique_enzymes, "blood_colour" = species.get_blood_colour(src), "blood_type" = dna.b_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list())
+		if(B.type == /datum/reagent/blood)
+			B.data = list(
+				"donor" = weakref(src),
+				"species" = species.name,
+				"blood_DNA" = dna.unique_enzymes,
+				"blood_colour" = species.get_blood_colour(src),
+				"blood_type" = dna.b_type,
+				"trace_chem" = null,
+				"virus2" = list(),
+				"antibodies" = list()
+			)
 			B.color = B.data["blood_colour"]
 
 //Makes a blood drop, leaking amt units of blood from the mob
@@ -88,7 +96,7 @@
 		return 0
 	if(!amt)
 		return 0
-	return vessel.remove_reagent("blood", amt * (src.mob_size/MOB_MEDIUM))
+	return vessel.remove_reagent(/datum/reagent/blood, amt * (src.mob_size/MOB_MEDIUM))
 
 /****************************************************
 				BLOOD TRANSFERS
@@ -100,7 +108,7 @@
 	if(!B)
 		B = new /datum/reagent/blood
 		B.sync_to(src)
-		container.reagents.add_reagent("blood", amount, B.data)
+		container.reagents.add_reagent(/datum/reagent/blood, amount, B.data)
 	else
 		B.sync_to(src)
 		B.volume += amount
@@ -113,7 +121,7 @@
 		reagents.trans_to_obj(container, amount)
 		return 1
 
-	if(vessel.get_reagent_amount("blood") < amount)
+	if(vessel.get_reagent_amount(/datum/reagent/blood) < amount)
 		return null
 
 	//make sure virus/etc data is up to date
@@ -142,7 +150,7 @@
 /mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
 
 	if(!should_have_organ(BP_HEART))
-		reagents.add_reagent("blood", amount, injected.data)
+		reagents.add_reagent(/datum/reagent/blood, amount, injected.data)
 		reagents.update_total()
 		return
 
@@ -151,10 +159,10 @@
 	if (!injected || !our)
 		return
 	if(blood_incompatible(injected.data["blood_type"],our.data["blood_type"],injected.data["species"],our.data["species"]) )
-		reagents.add_reagent("toxin",amount * 0.5)
+		reagents.add_reagent(/datum/reagent/toxin,amount * 0.5)
 		reagents.update_total()
 	else
-		vessel.add_reagent("blood", amount, injected.data)
+		vessel.add_reagent(/datum/reagent/blood, amount, injected.data)
 		vessel.update_total()
 	..()
 
@@ -162,9 +170,9 @@
 /mob/living/carbon/proc/get_blood(datum/reagents/container)
 	var/datum/reagent/blood/res = locate() in container.reagent_list //Grab some blood
 	if(res) // Make sure there's some blood at all
-		if(res.data["donor"] != src) //If it's not theirs, then we look for theirs
+		if(weakref && res.data["donor"] != weakref) //If it's not theirs, then we look for theirs
 			for(var/datum/reagent/blood/D in container.reagent_list)
-				if(D.data["donor"] == src)
+				if(weakref && D.data["donor"] != weakref)
 					return D
 	return res
 
@@ -245,14 +253,54 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 		B.virus2 = virus_copylist(source.data["virus2"])
 
 	B.fluorescent  = 0
-	B.invisibility = 0
+	B.set_invisibility(0)
 	return B
 
-/mob/living/carbon/human/proc/get_effective_blood_volume()
+//Percentage of maximum blood volume.
+/mob/living/carbon/human/proc/get_blood_volume()
+	return round((vessel.get_reagent_amount(/datum/reagent/blood)/species.blood_volume)*100)
+
+//Percentage of maximum blood volume, affected by the condition of circulation organs
+/mob/living/carbon/human/proc/get_blood_circulation()
 	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
-	var/blood_volume = round((vessel.get_reagent_amount("blood")/species.blood_volume)*100)
+	var/blood_volume = get_blood_volume()
 	if(!heart || (heart.pulse == PULSE_NONE && !(status_flags & FAKEDEATH) && heart.robotic < ORGAN_ROBOT))
 		blood_volume *= 0.25
 	else
-		blood_volume *= max(0.3, (1-(heart.damage / heart.max_damage)))
-	return blood_volume
+		var/pulse_mod = 1
+		switch(heart.pulse)
+			if(PULSE_SLOW)
+				pulse_mod *= 0.9
+			if(PULSE_FAST)
+				pulse_mod *= 1.1
+			if(PULSE_2FAST, PULSE_THREADY)
+				pulse_mod *= 1.25
+		blood_volume *= max(0.3, (1-(heart.damage / heart.max_damage))) * pulse_mod
+	return min(blood_volume, 100)
+
+//Whether the species needs blood to carry oxygen. Used in get_blood_oxygenation and may be expanded based on blood rather than species in the future.
+/mob/living/carbon/human/proc/blood_carries_oxygen()
+	return species.blood_oxy
+
+//Percentage of maximum blood volume, affected by the condition of circulation organs, affected by the oxygen loss. What ultimately matters for brain
+/mob/living/carbon/human/proc/get_blood_oxygenation()
+	var/blood_volume = get_blood_circulation()
+
+	if(is_asystole()) // Heart is missing or isn't beating and we're not breathing (hardcrit)
+		return min(blood_volume, BLOOD_VOLUME_SURVIVE)
+
+	if(!need_breathe())
+		return blood_volume
+
+	if(!blood_carries_oxygen())
+		blood_volume = 100
+
+	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(maxHealth/2))
+	var/oxygenated_mult = 0
+	if(chem_effects[CE_OXYGENATED] == 1) // Dexalin.
+		oxygenated_mult = 0.5
+	else if(chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
+		oxygenated_mult = 0.8
+	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
+	blood_volume = blood_volume * blood_volume_mod
+	return min(blood_volume, 100)

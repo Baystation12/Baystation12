@@ -41,6 +41,7 @@
 			return species.total_health
 	return 0
 
+//Straight pain values, not affected by painkillers etc
 /mob/living/carbon/human/getHalLoss()
 	var/amount = 0
 	for(var/obj/item/organ/external/E in organs)
@@ -171,9 +172,7 @@
 		return 0
 	var/amount = 0
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(I.organ_tag in list(BP_BRAIN, BP_STACK))
-			continue
-		amount += I.damage
+		amount += I.getToxLoss()
 	return amount
 
 /mob/living/carbon/human/setToxLoss(var/amount)
@@ -190,7 +189,7 @@
 	amount = abs(amount)
 
 	if(!heal && (CE_ANTITOX in chem_effects))
-		amount *= 0.75
+		amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
 
 	var/list/pick_organs = shuffle(internal_organs.Copy())
 
@@ -305,18 +304,17 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 /mob/living/carbon/human/take_overall_damage(var/brute, var/burn, var/sharp = 0, var/edge = 0, var/used_weapon = null)
 	if(status_flags & GODMODE)	return	//godmode
 	var/list/obj/item/organ/external/parts = get_damageable_organs()
-	var/damage_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
-	while(parts.len && (brute>0 || burn>0) )
-		var/obj/item/organ/external/picked = pick(parts)
+	if(!parts.len) return
 
-		var/brute_was = picked.brute_dam
-		var/burn_was = picked.burn_dam
+	var/dam_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
+	var/brute_avg = brute / parts.len
+	var/burn_avg = burn / parts.len
+	for(var/obj/item/organ/external/E in parts)
+		if(brute_avg)
+			apply_damage(damage = brute_avg, damagetype = BRUTE, blocked = getarmor_organ(E, "melee"), damage_flags = dam_flags, used_weapon = used_weapon, given_organ = E)
+		if(burn_avg)
+			apply_damage(damage = burn_avg, damagetype = BURN, damage_flags = dam_flags, used_weapon = used_weapon, given_organ = E)
 
-		picked.take_damage(brute, burn, damage_flags, used_weapon)
-		brute	-= (picked.brute_dam - brute_was)
-		burn	-= (picked.burn_dam - burn_was)
-
-		parts -= picked
 	updatehealth()
 	BITSET(hud_updateflag, HEALTH_HUD)
 
@@ -330,7 +328,7 @@ This function restores the subjects blood to max.
 	if(!should_have_organ(BP_HEART))
 		return
 	if(vessel.total_volume < species.blood_volume)
-		vessel.add_reagent("blood", species.blood_volume - vessel.total_volume)
+		vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
 
 /*
 This function restores all organs.
@@ -354,14 +352,15 @@ This function restores all organs.
 /mob/living/carbon/human/proc/get_organ(var/zone)
 	return organs_by_name[check_zone(zone)]
 
-/mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/damage_flags = 0, var/obj/used_weapon = null)
+/mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/damage_flags = 0, var/obj/used_weapon = null, var/obj/item/organ/external/given_organ = null)
 
-	var/obj/item/organ/external/organ = null
-	if(isorgan(def_zone))
-		organ = def_zone
-	else
-		if(!def_zone)	def_zone = ran_zone(def_zone)
-		organ = get_organ(check_zone(def_zone))
+	var/obj/item/organ/external/organ = given_organ
+	if(!organ)
+		if(isorgan(def_zone))
+			organ = def_zone
+		else
+			if(!def_zone)	def_zone = ran_zone(def_zone)
+			organ = get_organ(check_zone(def_zone))
 
 	//Handle other types of damage
 	if(!(damagetype in list(BRUTE, BURN, PAIN, CLONE)))
@@ -377,7 +376,7 @@ This function restores all organs.
 	if(blocked)
 		damage *= blocked_mult(blocked)
 
-	if(damage > 15)
+	if(damage > 15 && prob(damage*4))
 		make_adrenaline(round(damage/10))
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
@@ -405,14 +404,10 @@ This function restores all organs.
 		return 0
 
 	var/traumatic_shock = getHalLoss()                 // Pain.
-	traumatic_shock += (0.5 * src.getToxLoss())        // Organ failure.
-	traumatic_shock += (0.5 * src.getCloneLoss())      // Genetic decay.
-	traumatic_shock -= src.chem_effects[CE_PAINKILLER] // TODO: check what is actually stored here.
+	traumatic_shock -= chem_effects[CE_PAINKILLER] // TODO: check what is actually stored here.
 
-	if(slurring)                                       // Drunk.
-		traumatic_shock *= 0.75
 	if(stat == UNCONSCIOUS)
-		traumatic_shock *= 0.5
+		traumatic_shock *= 0.6
 
 	return max(0,traumatic_shock)
 

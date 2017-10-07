@@ -20,7 +20,7 @@
 	log_and_message_admins("jumped to [A]")
 	feedback_add_details("admin_verb","JA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/jumptoturf(var/turf/T in turfs)
+/client/proc/jumptoturf(var/turf/T)
 	set name = "Jump to Turf"
 	set category = "Admin"
 	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
@@ -32,7 +32,7 @@
 	mob.jumpTo(T)
 	feedback_add_details("admin_verb","JT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/jumptomob(var/mob/M in GLOB.mob_list)
+/client/proc/jumptomob(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Jump to Mob"
 
@@ -94,7 +94,7 @@
 	else
 		alert("Admin jumping disabled")
 
-/client/proc/Getmob(var/mob/M in GLOB.mob_list)
+/client/proc/Getmob(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Get Mob"
 	set desc = "Mob to teleport"

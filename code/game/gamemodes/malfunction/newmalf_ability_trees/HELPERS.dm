@@ -146,7 +146,7 @@
 
 // Proc: announce_hack_failure()
 // Parameters 2 - (user - hacking user, text - Used in alert text creation)
-// Description: Uses up certain amount of CPU power. Returns 1 on success, 0 on failure.
+// Description: Sends a hack failure message
 /proc/announce_hack_failure(var/mob/living/silicon/ai/user = null, var/text)
 	if(!user || !text)
 		return 0
@@ -159,9 +159,9 @@
 		if(3)
 			fulltext = "Another hack attempt has been detected, this time targeting [text]. We are certain the intruder entered the network via a terminal located somewhere on the [station_name()]."
 		if(4)
-			fulltext = "We have finished our traces and it seems the recent hack attempts are originating from your AI system. We recommend investigation."
+			fulltext = "We have finished our traces and it seems the recent hack attempts are originating from your AI system [user.name]. We recommend investigation."
 		else
-			fulltext = "Another hack attempt has been detected, targeting [text]. The source still seems to be your AI system."
+			fulltext = "Another hack attempt has been detected, targeting [text]. The source still seems to be your AI system [user.name]."
 
 	command_announcement.Announce(fulltext)
 
@@ -172,7 +172,7 @@
 	var/list/station_apcs = list()
 	var/list/offstation_apcs = list()
 
-	for(var/obj/machinery/power/apc/A in GLOB.machines)
+	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
 		if(A.hacker && A.hacker == user)
 			continue
 		if(A.z in GLOB.using_map.station_levels)
@@ -191,7 +191,7 @@
 		return
 
 	var/list/L = list()
-	for(var/mob/living/silicon/robot/RB in GLOB.mob_list)
+	for(var/mob/living/silicon/robot/RB in SSmobs.mob_list)
 		if(istype(RB, /mob/living/silicon/robot/drone))
 			continue
 		if(RB.connected_ai == A)
@@ -209,7 +209,7 @@
 		return
 
 	var/list/L = list()
-	for(var/mob/living/silicon/ai/AT in GLOB.mob_list)
+	for(var/mob/living/silicon/ai/AT in SSmobs.mob_list)
 		if(L == A)
 			continue
 		L.Add(AT)
@@ -222,3 +222,8 @@
 	else
 		message = text("used malf ability/function: [ability_name].")
 	admin_attack_log(A, null, message, null, message)
+
+proc/check_for_interception()
+	for(var/mob/living/silicon/ai/A in SSmobs.mob_list)
+		if(A.intercepts_communication)
+			return A

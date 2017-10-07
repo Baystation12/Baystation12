@@ -30,7 +30,7 @@
 /obj/machinery/power/port_gen/proc/handleInactive()
 	return
 
-/obj/machinery/power/port_gen/process()
+/obj/machinery/power/port_gen/Process()
 	if(active && HasFuel() && !IsBroken() && anchored && powernet)
 		add_avail(power_gen * power_output)
 		UseFuel()
@@ -183,7 +183,6 @@
 	//This should probably depend on the external temperature somehow, but whatever.
 	var/lower_limit = 56 + power_output * temperature_gain
 	var/upper_limit = 76 + power_output * temperature_gain
-
 	/*
 		Hot or cold environments can affect the equilibrium temperature
 		The lower the pressure the less effect it has. I guess it cools using a radiator or something when in vacuum.
@@ -192,6 +191,14 @@
 	*/
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
+		var/outer_temp = 0.1 * temperature + T0C
+		if(outer_temp > environment.temperature) //sharing the heat
+			var/heat_transfer = environment.get_thermal_energy_change(outer_temp)
+			if(heat_transfer > 1)
+				var/heating_power = 0.1 * power_gen * power_output
+				heat_transfer = min(heat_transfer, heating_power)
+				environment.add_thermal_energy(heat_transfer)
+
 		var/ratio = min(environment.return_pressure()/ONE_ATMOSPHERE, 1)
 		var/ambient = environment.temperature - T20C
 		lower_limit += ambient*ratio
@@ -375,11 +382,11 @@
 		if(href_list["action"] == "enable")
 			if(!active && HasFuel() && !IsBroken())
 				active = 1
-				icon_state = "portgen1"
+				update_icon()
 		if(href_list["action"] == "disable")
 			if (active)
 				active = 0
-				icon_state = "portgen0"
+				update_icon()
 		if(href_list["action"] == "eject")
 			if(!active)
 				DropFuel()
@@ -398,34 +405,90 @@
 	sheet_name = "Uranium Sheets"
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
 	board_path = /obj/item/weapon/circuitboard/pacman/super
+	var/rad_power = 2
 
 /obj/machinery/power/port_gen/pacman/super/UseFuel()
 	//produces a tiny amount of radiation when in use
-	if (prob(2*power_output))
-		radiation_repository.radiate(src, 4)
+	if (prob(rad_power*power_output))
+		radiation_repository.radiate(src, 2*rad_power)
 	..()
 
 /obj/machinery/power/port_gen/pacman/super/update_icon()
 	if(..())
 		set_light(0)
-		return
-	if(icon_state != "[initial(icon_state)]onrad")
-		if(power_output >= 3)
-			icon_state = "[initial(icon_state)]onrad"
-			set_light(2,1,"#3b97ca")
+		return 1
+	overlays.Cut()
+	if(power_output >= max_safe_output)
+		var/image/I = image(icon,"[initial(icon_state)]rad")
+		I.blend_mode = BLEND_ADD
+		I.alpha = round(255*power_output/max_power_output)
+		overlays += I 
+		set_light(rad_power + power_output - max_safe_output,1,"#3b97ca")
 	else
-		if(power_output < 3)
-			icon_state = "[initial(icon_state)]on"
-			set_light(0)
+		set_light(0)
 
 
 /obj/machinery/power/port_gen/pacman/super/explode()
 	//a nice burst of radiation
-	var/rads = 50 + (sheets + sheet_left)*1.5
+	var/rads = rad_power*25 + (sheets + sheet_left)*1.5
 	radiation_repository.radiate(src, (max(20, rads)))
 
-	explosion(src.loc, 3, 3, 5, 3)
+	explosion(src.loc, rad_power+1, rad_power+1, rad_power*2, 3)
 	qdel(src)
+
+/obj/machinery/power/port_gen/pacman/super/potato
+	name = "nuclear reactor"
+	desc = "PTTO-3, An industrial nuclear all-in-one power plant by Neo-Chernobyl Gmbh. Runs on uranium and vodka. Rated for 200 kW max safe output."
+	power_gen = 25000			//Watts output per power_output level
+	icon_state = "potato"
+	max_safe_output = 4
+	max_power_output = 8	//The maximum power setting without emagging.
+	temperature_gain = 80	//how much the temperature increases per power output level, in degrees per level
+	max_temperature = 450
+	time_per_sheet = 400
+	rad_power = 6
+	flags = OPENCONTAINER
+	board_path = /obj/item/weapon/circuitboard/pacman/super/potato
+	anchored = 1
+
+/obj/machinery/power/port_gen/pacman/super/potato/New()
+	create_reagents(120)
+	..()
+
+/obj/machinery/power/port_gen/pacman/super/potato/examine(mob/user)
+	..()
+	to_chat(user, "Auxilary tank shows [reagents.total_volume]u of liquid in it.")
+
+/obj/machinery/power/port_gen/pacman/super/potato/UseFuel()
+	if(reagents.has_reagent("vodka"))
+		rad_power = 2
+		temperature_gain = 60
+		reagents.remove_any(1)
+		if(prob(2))
+			audible_message("<span class='notice'>[src] churns happily</span>")
+	else
+		rad_power = initial(rad_power)
+		temperature_gain = initial(temperature_gain)
+	..()
+
+/obj/machinery/power/port_gen/pacman/super/potato/update_icon()
+	if(..())
+		return 1
+	if(power_output > max_safe_output)
+		icon_state = "potatodanger"
+
+/obj/machinery/power/port_gen/pacman/super/potato/attackby(var/obj/item/O, var/mob/user)
+	if(istype(O, /obj/item/weapon/reagent_containers/))
+		var/obj/item/weapon/reagent_containers/R = O
+		if(R.standard_pour_into(src,user))
+			if(reagents.has_reagent("vodka"))
+				audible_message("<span class='notice'>[src] blips happily</span>")
+				playsound(get_turf(src),'sound/machines/synth_yes.ogg', 50, 0)
+			else
+				audible_message("<span class='warning'>[src] blips in disappointment</span>")
+				playsound(get_turf(src), 'sound/machines/synth_no.ogg', 50, 0)
+		return
+	..()
 
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"

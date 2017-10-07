@@ -56,6 +56,8 @@ var/datum/mil_branches/mil_branches = new()
  *  Return all spawn branches for the given input
  */
 /datum/mil_branches/proc/spawn_branches(var/datum/species/S)
+	if(!S)
+		return spawn_branches_.Copy()
 	. = spawn_branches_by_species_[S]
 	if(!.)
 		. = list()
@@ -63,7 +65,6 @@ var/datum/mil_branches/mil_branches = new()
 		for(var/spawn_branch in spawn_branches_)
 			if(!GLOB.using_map.is_species_branch_restricted(S, spawn_branches_[spawn_branch]))
 				. += spawn_branch
-			.
 
 /**
  *  Return all spawn ranks for the given input
@@ -95,7 +96,7 @@ var/datum/mil_branches/mil_branches = new()
  */
 /datum/mil_branch
 	var/name = "Unknown"         // Longer name for branch, eg "Sol Central Marine Corps"
-	var/name_short = "N/A"       // Abbreviation of the name, eg "SCMC"
+	var/name_short       		// Abbreviation of the name, eg "SCMC"
 
 
 
@@ -129,6 +130,8 @@ var/datum/mil_branches/mil_branches = new()
 			spawn_ranks_[rank.name] = rank
 
 /datum/mil_branch/proc/spawn_ranks(var/datum/species/S)
+	if(!S)
+		return spawn_ranks_.Copy()
 	. = spawn_ranks_by_species_[S]
 	if(!.)
 		. = list()
@@ -172,7 +175,11 @@ var/datum/mil_branches/mil_branches = new()
  */
 /datum/mil_rank
 	var/name = "Unknown"
-	var/name_short = "N/A" // Abbreviation of the name. Should be null if the
+	var/name_short // Abbreviation of the name. Should be null if the
 	                       // rank doesn't usually serve as a prefix to the individual's name.
 	var/list/accessory		//type of accesory that will be equipped by job code with this rank
 	var/sort_order = 0 // A numerical equivalent of the rank used to indicate its order when compared to other datums: eg e-1 = 1, o-1 = 11
+
+//Returns short designation (yes shorter than name_short), like E1, O3 etc.
+/datum/mil_rank/proc/grade()
+	return sort_order

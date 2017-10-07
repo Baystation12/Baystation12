@@ -104,14 +104,14 @@
 		return
 	return
 
-/obj/machinery/mineral/stacking_machine/process()
+/obj/machinery/mineral/stacking_machine/Process()
 	if (src.output && src.input)
 		var/turf/T = get_turf(input)
 		for(var/obj/item/O in T.contents)
-			if(!O) return
-			if(istype(O,/obj/item/stack))
-				if(!isnull(stack_storage[O.name]))
-					stack_storage[O.name]++
+			if(istype(O,/obj/item/stack/material))
+				var/obj/item/stack/material/S = O
+				if(!isnull(stack_storage[initial(S.name)]))
+					stack_storage[initial(S.name)] += S.amount
 					O.loc = null
 				else
 					O.loc = output.loc

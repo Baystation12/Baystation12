@@ -17,6 +17,8 @@
 	var/sound_takeoff = 'sound/effects/shuttle_takeoff.ogg'
 	var/sound_landing = 'sound/effects/shuttle_landing.ogg'
 
+	var/knockdown = 1 //whether shuttle downs non-buckled people when it moves
+
 /datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(_name)
@@ -142,19 +144,19 @@
 				var/turf/TA = GetAbove(TO)
 				if(istype(TA, ceiling_type))
 					TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
-
-		for(var/mob/M in A)
-			if(M.client)
-				spawn(0)
-					if(M.buckled)
-						to_chat(M, "<span class='warning'>Sudden acceleration presses you into your chair!</span>")
-						shake_camera(M, 3, 1)
-					else
-						to_chat(M, "<span class='warning'>The floor lurches beneath you!</span>")
-						shake_camera(M, 10, 1)
-			if(istype(M, /mob/living/carbon))
-				if(!M.buckled)
-					M.Weaken(3)
+		if(knockdown)
+			for(var/mob/M in A)
+				if(M.client)
+					spawn(0)
+						if(M.buckled)
+							to_chat(M, "<span class='warning'>Sudden acceleration presses you into your chair!</span>")
+							shake_camera(M, 3, 1)
+						else
+							to_chat(M, "<span class='warning'>The floor lurches beneath you!</span>")
+							shake_camera(M, 10, 1)
+				if(istype(M, /mob/living/carbon))
+					if(!M.buckled)
+						M.Weaken(3)
 
 		for(var/obj/structure/cable/C in A)
 			powernets |= C.powernet

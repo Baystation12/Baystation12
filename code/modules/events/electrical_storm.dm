@@ -17,7 +17,7 @@
 /datum/event/electrical_storm/start()
 	..()
 	valid_apcs = list()
-	for(var/obj/machinery/power/apc/A in GLOB.machines)
+	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
 		if(A.z in GLOB.using_map.station_levels)
 			valid_apcs.Add(A)
 	endWhen = (severity * 60) + startWhen

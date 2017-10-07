@@ -115,7 +115,7 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-	GLOB.processing_objects |= src
+	START_PROCESSING(SSobj, src)
 
 	if(initial_modules && initial_modules.len)
 		for(var/path in initial_modules)
@@ -167,7 +167,7 @@
 		if(istype(M))
 			M.drop_from_inventory(piece)
 		qdel(piece)
-	GLOB.processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	qdel(wires)
 	wires = null
 	qdel(spark_system)
@@ -342,7 +342,7 @@
 			helmet.flags_inv |= HIDEMASK
 	update_icon(1)
 
-/obj/item/weapon/rig/process()
+/obj/item/weapon/rig/Process()
 
 	// If we've lost any parts, grab them back.
 	var/mob/living/M
@@ -390,7 +390,7 @@
 			malfunction()
 
 		for(var/obj/item/rig_module/module in installed_modules)
-			cell.use(module.process() * CELLRATE)
+			cell.use(module.Process() * CELLRATE)
 
 //offline should not change outside this proc
 /obj/item/weapon/rig/proc/update_offline()
@@ -576,9 +576,11 @@
 
 	if(href_list["toggle_piece"])
 		toggle_piece(href_list["toggle_piece"], usr)
-	else if(href_list["toggle_seals"])
+		return 1
+	if(href_list["toggle_seals"])
 		toggle_seals(usr)
-	else if(href_list["interact_module"])
+		return 1
+	if(href_list["interact_module"])
 
 		var/module_index = text2num(href_list["interact_module"])
 
@@ -595,15 +597,14 @@
 					selected_module = module
 				if("select_charge_type")
 					module.charge_selected = href_list["charge_type"]
-	else if(href_list["toggle_ai_control"])
+		return 1
+	if(href_list["toggle_ai_control"])
 		ai_override_enabled = !ai_override_enabled
 		notify_ai("Synthetic suit control has been [ai_override_enabled ? "enabled" : "disabled"].")
-	else if(href_list["toggle_suit_lock"])
+		return 1
+	if(href_list["toggle_suit_lock"])
 		locked = !locked
-
-	usr.set_machine(src)
-	src.add_fingerprint(usr)
-	return 0
+		return 1
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
 	for(var/obj/item/rig_module/ai_container/module in installed_modules)
@@ -676,7 +677,7 @@
 					if(use_obj && check_slot == use_obj)
 						to_chat(wearer, "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>")
 						use_obj.canremove = 1
-						holder.drop_from_inventory(use_obj)
+						holder.u_equip(use_obj)
 						use_obj.canremove = 0
 						use_obj.forceMove(src)
 
@@ -752,7 +753,7 @@
 			malfunction_delay = max(malfunction_delay, round(30/severity_class))
 
 	//drain some charge
-	if(cell) cell.emp_act(severity_class + 15)
+	if(cell) cell.emp_act(severity_class + 1)
 
 	//possibly damage some modules
 	take_hit((100/severity_class), "electrical pulse", 1)

@@ -1,4 +1,4 @@
-/obj/item/modular_computer/process()
+/obj/item/modular_computer/Process()
 	if(!enabled) // The computer is turned off
 		last_power_usage = 0
 		return 0
@@ -41,8 +41,17 @@
 /obj/item/modular_computer/proc/install_default_programs()
 	return 1
 
+/obj/item/modular_computer/proc/install_default_programs_by_job(var/mob/living/carbon/human/H)
+	var/datum/job/jb = job_master.occupations_by_title[H.job]
+	if(!jb) return
+	for(var/prog_type in jb.software_on_spawn)
+		var/datum/computer_file/program/prog_file = prog_type
+		if(initial(prog_file.usage_flags) & hardware_flag)
+			prog_file = new prog_file
+			hard_drive.store_file(prog_file)
+
 /obj/item/modular_computer/New()
-	GLOB.processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	install_default_hardware()
 	if(hard_drive)
 		install_default_programs()
@@ -52,7 +61,7 @@
 
 /obj/item/modular_computer/Destroy()
 	kill_program(1)
-	GLOB.processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
 		uninstall_component(null, CH)
 		qdel(CH)

@@ -1,5 +1,5 @@
 //allows right clicking mobs to send an admin PM to their client, forwards the selected mob's client to cmd_admin_pm
-/client/proc/cmd_admin_pm_context(mob/M as mob in GLOB.mob_list)
+/client/proc/cmd_admin_pm_context(mob/M as mob in SSmobs.mob_list)
 	set category = null
 	set name = "Admin PM Mob"
 	if(!holder)
@@ -136,7 +136,7 @@
 
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
-	if(C.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
+	if(C.is_preference_enabled(/datum/client_preference/staff/play_adminhelp_ping))
 		sound_to(C, 'sound/effects/adminhelp.ogg')
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")

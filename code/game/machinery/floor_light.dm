@@ -18,7 +18,7 @@ var/list/floor_light_cache = list()
 	var/damaged
 	var/default_light_range = 4
 	var/default_light_power = 2
-	var/default_light_colour = "#FFFFFF"
+	var/default_light_colour = "#ffffff"
 
 /obj/machinery/floor_light/prebuilt
 	anchored = 1
@@ -78,7 +78,7 @@ var/list/floor_light_cache = list()
 		update_brightness()
 		return
 
-/obj/machinery/floor_light/process()
+/obj/machinery/floor_light/Process()
 	..()
 	var/need_update
 	if((!anchored || broken()) && on)

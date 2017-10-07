@@ -1,10 +1,4 @@
 // Alien clothing.
-/datum/gear/suit/zhan_furs
-	display_name = "Zhan-Khazan furs (Tajara)"
-	path = /obj/item/clothing/suit/tajaran/furs
-	whitelisted = list(SPECIES_TAJARA)
-	sort_category = "Xenowear"
-
 /datum/gear/head/zhan_scarf
 	display_name = "Zhan headscarf (Tajara)"
 	path = /obj/item/clothing/head/tajaran/scarf
@@ -35,7 +29,7 @@
 /datum/gear/ears/skrell/chains/New()
 	..()
 	var/list/chaintypes = list()
-	for(var/chain_style in typesof(/obj/item/clothing/ears/skrell/chain) - /obj/item/clothing/ears/skrell/colored/chain)
+	for(var/chain_style in subtypesof(/obj/item/clothing/ears/skrell/chain))
 		var/obj/item/clothing/ears/skrell/chain/chain = chain_style
 		chaintypes[initial(chain.name)] = chain
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(chaintypes))
@@ -57,7 +51,7 @@
 /datum/gear/ears/skrell/bands/New()
 	..()
 	var/list/bandtypes = list()
-	for(var/band_style in typesof(/obj/item/clothing/ears/skrell/band) - /obj/item/clothing/ears/skrell/colored/band)
+	for(var/band_style in subtypesof(/obj/item/clothing/ears/skrell/band))
 		var/obj/item/clothing/ears/skrell/band/band = band_style
 		bandtypes[initial(band.name)] = band
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(bandtypes))
@@ -129,5 +123,5 @@
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 	cost = 1
-	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/mining, /datum/job/scientist_assistant)
+	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/engineer, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/pathfinder, /datum/job/explorer)
 

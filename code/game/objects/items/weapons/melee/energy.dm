@@ -186,15 +186,17 @@
 	var/datum/effect/effect/system/spark_spread/spark_system
 
 /obj/item/weapon/melee/energy/blade/New()
-
+	..()
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-	GLOB.processing_objects |= src
+/obj/item/weapon/melee/energy/blade/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/melee/energy/blade/Destroy()
-	GLOB.processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 /obj/item/weapon/melee/energy/blade/get_storage_cost()
@@ -208,7 +210,7 @@
 	..()
 	spawn(1) if(src) qdel(src)
 
-/obj/item/weapon/melee/energy/blade/process()
+/obj/item/weapon/melee/energy/blade/Process()
 	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
 		// Tidy up a bit.
 		if(istype(loc,/mob/living))

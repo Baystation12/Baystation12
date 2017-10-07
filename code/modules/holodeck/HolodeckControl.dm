@@ -158,7 +158,7 @@
 	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 		C.set_safety(!safety_disabled)
 		if (last_to_emag)
-			C.friends = list(last_to_emag)
+			C.friends = list(weakref(last_to_emag))
 
 //This could all be done better, but it works for now.
 /obj/machinery/computer/HolodeckControl/Destroy()
@@ -174,7 +174,7 @@
 	if (. && active && (stat & NOPOWER))
 		emergencyShutdown()
 
-/obj/machinery/computer/HolodeckControl/process()
+/obj/machinery/computer/HolodeckControl/Process()
 	for(var/item in holographic_objs) // do this first, to make sure people don't take items out when power is down.
 		if(!(get_turf(item) in linkedholodeck))
 			derez(item, 0)

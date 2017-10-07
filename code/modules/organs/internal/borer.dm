@@ -8,10 +8,11 @@
 	parent_organ = BP_HEAD
 	vital = 1
 
-/obj/item/organ/internal/borer/process()
+/obj/item/organ/internal/borer/Process()
 
 	// Borer husks regenerate health, feel no pain, and are resistant to stuns and brainloss.
-	for(var/chem in list("tricordrazine","tramadol","hyperzine","alkysine"))
+	for(var/chem_name in GLOB.borer_reagent_types_by_name)
+		var/chem = GLOB.borer_reagent_types_by_name[chem_name]
 		if(owner.reagents.get_reagent_amount(chem) < 3)
 			owner.reagents.add_reagent(chem, 5)
 

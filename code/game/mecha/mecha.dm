@@ -19,6 +19,7 @@
 	plane = OBJ_PLANE
 	layer = ABOVE_WINDOW_LAYER //icon draw layer
 	infra_luminosity = 15 //byond implementation is bugged.
+	anchor_fall = TRUE
 	var/initial_icon = null //Mech type for resetting icon. Only used for reskinning kits (see custom items)
 	var/can_move = 1
 	var/mob/living/carbon/occupant = null
@@ -1207,7 +1208,7 @@
 						a {padding:2px 5px;;color:#0f0;}
 						.wr {margin-bottom: 5px;}
 						.header {cursor:pointer;}
-						.open, .closed {background: #32CD32; color:#000; padding:1px 2px;}
+						.open, .closed {background: #32cd32; color:#000; padding:1px 2px;}
 						.links a {margin-bottom: 2px;padding-top:3px;}
 						.visible {display: block;}
 						.hidden {display: none;}
@@ -1391,7 +1392,7 @@
 						<head>
 						<style>
 						body {color: #00ff00; background: #000000; font-family:"Courier New", Courier, monospace; font-size: 12px;}
-						a {padding:2px 5px; background:#32CD32;color:#000;display:block;margin:2px;text-align:center;text-decoration:none;}
+						a {padding:2px 5px; background:#32cd32;color:#000;display:block;margin:2px;text-align:center;text-decoration:none;}
 						</style>
 						</head>
 						<body>

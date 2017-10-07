@@ -11,9 +11,10 @@
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
 	var/damtype = "brute"
 	var/armor_penetration = 0
+	var/anchor_fall = FALSE
 
 /obj/Destroy()
-	GLOB.processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = GLOB.default_state)
@@ -67,10 +68,6 @@
 	// Nada
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
-
-/obj/proc/process()
-	GLOB.processing_objects.Remove(src)
-	return 0
 
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)
@@ -152,7 +149,7 @@
 		src.attack_self(M)
 
 /obj/proc/hide(var/hide)
-	invisibility = hide ? INVISIBILITY_MAXIMUM : initial(invisibility)
+	set_invisibility(hide ? INVISIBILITY_MAXIMUM : initial(invisibility))
 
 /obj/proc/hides_under_flooring()
 	return level == 1

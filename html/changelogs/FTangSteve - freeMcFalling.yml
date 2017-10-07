@@ -1,0 +1,8 @@
+  
+author: FTangSteve
+
+delete-after: True
+
+changes: 
+  - bugfix: "Mechs can now fall and go down stairs."
+  - rscadd: "If a mech falls on you, it does a heck of a lot of damage."

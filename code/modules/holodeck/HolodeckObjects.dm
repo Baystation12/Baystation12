@@ -79,8 +79,8 @@
 
 /turf/simulated/floor/holofloor/beach/sand
 	name = "sand"
-	icon_state = "desert"
-	base_icon_state = "desert"
+	icon_state = "desert0"
+	base_icon_state = "desert0"
 
 /turf/simulated/floor/holofloor/beach/coastline
 	name = "coastline"

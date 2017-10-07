@@ -21,6 +21,9 @@
 	proc/is_active(mob/living/silicon/pai/user)
 		return 0
 
+	proc/on_purchase(mob/living/silicon/pai/user)
+		return
+
 /datum/pai_software/directives
 	name = "Directives"
 	ram_cost = 0
@@ -87,16 +90,16 @@
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui = null, force_open = 1)
 		var/data[0]
 
-		data["listening"] = user.radio.broadcasting
-		data["frequency"] = format_frequency(user.radio.frequency)
+		data["listening"] = user.silicon_radio.broadcasting
+		data["frequency"] = format_frequency(user.silicon_radio.frequency)
 
 		var/channels[0]
-		for(var/ch_name in user.radio.channels)
-			var/ch_stat = user.radio.channels[ch_name]
+		for(var/ch_name in user.silicon_radio.channels)
+			var/ch_stat = user.silicon_radio.channels[ch_name]
 			var/ch_dat[0]
 			ch_dat["name"] = ch_name
 			// FREQ_LISTENING is const in /obj/item/device/radio
-			ch_dat["listening"] = !!(ch_stat & user.radio.FREQ_LISTENING)
+			ch_dat["listening"] = !!(ch_stat & user.silicon_radio.FREQ_LISTENING)
 			channels[++channels.len] = ch_dat
 
 		data["channels"] = channels
@@ -111,7 +114,7 @@
 		var/mob/living/silicon/pai/P = usr
 		if(!istype(P)) return
 
-		P.radio.Topic(href, href_list)
+		P.silicon_radio.Topic(href, href_list)
 		return 1
 
 /datum/pai_software/crew_manifest
@@ -121,11 +124,9 @@
 	toggle = 0
 
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
-		GLOB.data_core.get_manifest_list()
-
 		var/data[0]
 		// This is dumb, but NanoUI breaks if it has no data to send
-		data["manifest"] = PDA_Manifest
+		data["manifest"] = nano_crew_manifest()
 
 		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
@@ -213,6 +214,11 @@
 				else
 					return alert("Failed to send message: the recipient could not be reached.")
 				return 1
+
+/datum/pai_software/messenger/on_purchase(mob/living/silicon/pai/user)
+	if(user && !user.pda)
+		user.pda = new(user)
+		user.pda.set_owner_rank_job(text("[]", user), "Personal Assistant")
 
 /datum/pai_software/door_jack
 	name = "Door Jack"
@@ -354,7 +360,7 @@
 	name = "Universal Translator"
 	ram_cost = 35
 	id = "translator"
-	var/list/languages = list(LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_EAL, LANGUAGE_INDEPENDENT)
+	var/list/languages = list(LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER, LANGUAGE_LUNAR)
 
 	toggle(mob/living/silicon/pai/user)
 		// 	Sol Common, Tradeband and Gutter are added with New() and are therefore the current default, always active languages

@@ -22,7 +22,7 @@
 			//Hurt target
 			if(istype(L, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = L
-				H.vessel.remove_reagent("blood", 10)
+				H.vessel.remove_reagent(/datum/reagent/blood, 10)
 			else
 				L.adjustBruteLoss(10)
 			to_chat(L, "<span class='danger'>You feel your lifeforce being ripping out of your body!</span>")
@@ -38,7 +38,7 @@
 				var/mob/living/carbon/human/H = user
 				var/amount = min(10, H.species.blood_volume - H.vessel.total_volume)
 				if(amount > 0)
-					H.vessel.add_reagent("blood", amount)
+					H.vessel.add_reagent(/datum/reagent/blood, amount)
 					continue
 			L.adjustBruteLoss(-5)
 			L.adjustFireLoss(-2.5)

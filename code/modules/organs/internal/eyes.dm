@@ -7,6 +7,7 @@
 	parent_organ = BP_HEAD
 	surface_accessible = TRUE
 	relative_size = 10
+	var/phoron_guard = 0
 	var/list/eye_colour = list(0,0,0)
 	var/innate_flash_protection = FLASH_PROTECTION_NONE
 	max_damage = 45
@@ -59,7 +60,7 @@
 	if(is_broken() && !oldbroken && owner && !owner.stat)
 		to_chat(owner, "<span class='danger'>You go blind!</span>")
 
-/obj/item/organ/internal/eyes/process() //Eye damage replaces the old eye_stat var.
+/obj/item/organ/internal/eyes/Process() //Eye damage replaces the old eye_stat var.
 	..()
 	if(!owner)
 		return

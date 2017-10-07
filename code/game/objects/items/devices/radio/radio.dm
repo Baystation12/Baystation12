@@ -39,7 +39,7 @@
 /obj/item/device/radio/Initialize()
 	. = ..()
 	wires = new(src)
-	internal_channels = GLOB.default_internal_channels.Copy()
+	internal_channels = GLOB.using_map.default_internal_channels()
 	GLOB.listening_objects += src
 
 	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
@@ -526,6 +526,9 @@
 	for (var/ch_name in channels)
 		channels[ch_name] = 0
 	..()
+	
+/obj/item/device/radio/proc/recalculateChannels()
+	return
 
 ///////////////////////////////
 //////////Borg Radios//////////
@@ -541,7 +544,24 @@
 	canhear_range = 0
 	subspace_transmission = 1
 
+/obj/item/device/radio/borg/ert
+	keyslot = /obj/item/device/encryptionkey/ert
+
+/obj/item/device/radio/borg/syndicate
+	keyslot = /obj/item/device/encryptionkey/syndicate
+
+/obj/item/device/radio/borg/New(var/mob/living/silicon/robot/loc)
+	if(!istype(loc))
+		CRASH("Invalid spawn location: [log_info_line(loc)]")
+	..()
+	myborg = loc
+	
+/obj/item/device/radio/borg/Initialize()
+	. = ..()
+	recalculateChannels()
+
 /obj/item/device/radio/borg/Destroy()
+	QDEL_NULL(keyslot)
 	myborg = null
 	return ..()
 
@@ -596,7 +616,7 @@
 
 	return
 
-/obj/item/device/radio/borg/proc/recalculateChannels()
+/obj/item/device/radio/borg/recalculateChannels()
 	src.channels = list()
 	src.syndie = 0
 
@@ -619,14 +639,10 @@
 
 	for (var/ch_name in src.channels)
 		if(!radio_controller)
-			sleep(30) // Waiting for the radio_controller to be created.
-		if(!radio_controller)
 			src.name = "broken radio"
 			return
 
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
-
-	return
 
 /obj/item/device/radio/borg/Topic(href, href_list)
 	if(..())
@@ -711,7 +727,7 @@
 	invisibility = 101
 	listening = 0
 	canhear_range = 0
-	channels=list("Engineering" = 1, "Security" = 1, "Medical" = 1, "Command" = 1, "Common" = 1, "Science" = 1, "Supply" = 1, "Service" = 1)
+	channels=list("Engineering" = 1, "Security" = 1, "Medical" = 1, "Command" = 1, "Common" = 1, "Science" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1)
 
 /obj/item/device/radio/announcer/Destroy()
 	crash_with("attempt to delete a [src.type] detected, and prevented.")

@@ -235,7 +235,7 @@
 		qdel(holder)
 	qdel(src)
 
-/obj/item/rig_module/self_destruct/process()
+/obj/item/rig_module/self_destruct/Process()
 	// Not being worn, leave it alone.
 	if(!holder || !holder.wearer || !holder.wearer.wear_suit == holder)
 		return 0
@@ -251,14 +251,14 @@
 		if(0)
 			return
 		if(1)
-			src.holder.set_light(1.5, 8.5, "#FF0A00")
+			src.holder.set_light(1.5, 8.5, "#ff0a00")
 			sleep(6)
 			src.holder.set_light(0, 0, "#000000")
 			spawn(6) .()
 		if(2)
-			src.holder.set_light(1.5, 8.5, "#FF0A00")
+			src.holder.set_light(1.5, 8.5, "#ff0a00")
 			sleep(2)
 			src.holder.set_light(0, 0, "#000000")
 			spawn(2) .()
 		if(3)
-			src.holder.set_light(1.5, 8.5, "#FF0A00")
+			src.holder.set_light(1.5, 8.5, "#ff0a00")

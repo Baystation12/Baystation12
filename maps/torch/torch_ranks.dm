@@ -29,12 +29,9 @@
 	species_to_rank_whitelist = list(
 		/datum/species/machine = list(
 			/datum/mil_branch/expeditionary_corps = list(
-				/datum/mil_rank/fleet/e1,
-				/datum/mil_rank/fleet/e2,
-				/datum/mil_rank/fleet/e3,
-				/datum/mil_rank/fleet/e4,
-				/datum/mil_rank/fleet/e5,
-				/datum/mil_rank/fleet/o1
+				/datum/mil_rank/ec/e2,
+				/datum/mil_rank/ec/e4,
+				/datum/mil_rank/ec/o1
 			),
 			/datum/mil_branch/fleet = list(
 				/datum/mil_rank/fleet/e1,
@@ -47,20 +44,16 @@
 		),
 		/datum/species/tajaran = list(
 			/datum/mil_branch/expeditionary_corps = list(
-				/datum/mil_rank/fleet/e1,
-				/datum/mil_rank/fleet/e2,
-				/datum/mil_rank/fleet/e3,
-				/datum/mil_rank/fleet/e4,
-				/datum/mil_rank/fleet/o1
+				/datum/mil_rank/ec/e2,
+				/datum/mil_rank/ec/e4,
+				/datum/mil_rank/ec/o1
 			)
 		),
 		/datum/species/skrell = list(
 			/datum/mil_branch/expeditionary_corps = list(
-				/datum/mil_rank/fleet/e1,
-				/datum/mil_rank/fleet/e2,
-				/datum/mil_rank/fleet/e3,
-				/datum/mil_rank/fleet/e4,
-				/datum/mil_rank/fleet/o1
+				/datum/mil_rank/ec/e2,
+				/datum/mil_rank/ec/e4,
+				/datum/mil_rank/ec/o1
 			)
 		)
 	)
@@ -77,53 +70,23 @@
 	email_domain = "torch.ec.scg"
 
 	rank_types = list(
-		/datum/mil_rank/fleet/e1,
-		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/fleet/e9,
-		/datum/mil_rank/fleet/e9_alt1,
-		/datum/mil_rank/fleet/e9_alt2,
-		/datum/mil_rank/fleet/e9_alt3,
-		/datum/mil_rank/fleet/e9_alt5,
-		/datum/mil_rank/fleet/w1,
-		/datum/mil_rank/fleet/w2,
-		/datum/mil_rank/fleet/w3,
-		/datum/mil_rank/fleet/w4,
-		/datum/mil_rank/fleet/w5,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/fleet/o4,
-		/datum/mil_rank/fleet/o5,
-		/datum/mil_rank/fleet/o6,
-		/datum/mil_rank/fleet/o7,
-		/datum/mil_rank/fleet/o8,
-		/datum/mil_rank/fleet/o9,
-		/datum/mil_rank/fleet/o10,
-		/datum/mil_rank/fleet/o10_alt
+		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e4,
+		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/ec/o3,
+		/datum/mil_rank/ec/o5,
+		/datum/mil_rank/ec/o6
 	)
 
 	spawn_rank_types = list(
-		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/fleet/e9,
-		/datum/mil_rank/fleet/e9_alt1,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/fleet/o4,
-		/datum/mil_rank/fleet/o5,
-		/datum/mil_rank/fleet/o6
+		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e4,
+		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/ec/o3,
+		/datum/mil_rank/ec/o5,
+		/datum/mil_rank/ec/o6
 	)
 
 	assistant_job = "Crewman"
@@ -263,6 +226,13 @@
 
 	assistant_job = "Passenger"
 
+/datum/mil_rank/grade()
+	. = ..()
+	if(!sort_order)
+		return ""
+	if(sort_order <= 10)
+		return "E[sort_order]"
+	return "O[sort_order - 10]"
 /*
  *  Fleet
  *  =====
@@ -344,12 +314,6 @@
 	name = "Master Chief Petty Officer of the Fleet"
 	name_short = "MCPOF"
 	accessory = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt4, /obj/item/clothing/accessory/specialty/enlisted)
-	sort_order = 9
-
-/datum/mil_rank/fleet/e9_alt5
-	name = "Master Chief Petty Officer of the Expeditionary Corps"
-	name_short = "MCPOEC"
-	accessory = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e9_alt5, /obj/item/clothing/accessory/specialty/enlisted)
 	sort_order = 9
 
 /datum/mil_rank/fleet/w1
@@ -443,6 +407,64 @@
 	accessory = list(/obj/item/clothing/accessory/rank/fleet/flag/o10_alt, /obj/item/clothing/accessory/specialty/officer)
 	sort_order = 20
 
+
+/*
+ *  EC
+ *  =====
+ */
+/datum/mil_rank/ec/e1
+	name = "Apprentice Explorer"
+	name_short = "AXPL"
+	accessory = list(/obj/item/clothing/accessory/rank/ec/enlisted)
+	sort_order = 1
+
+/datum/mil_rank/ec/e2
+	name = "Explorer"
+	name_short = "XPL"
+	accessory = list(/obj/item/clothing/accessory/rank/ec/enlisted/e2)
+	sort_order = 2
+
+/datum/mil_rank/ec/e4
+	name = "Senior Explorer"
+	name_short = "SXPL"
+	accessory = list(/obj/item/clothing/accessory/rank/ec/enlisted/e4)
+	sort_order = 5
+
+/datum/mil_rank/ec/e7
+	name = "Chief Explorer"
+	name_short = "CXPL"
+	accessory = list(/obj/item/clothing/accessory/rank/ec/enlisted/e7)
+	sort_order = 7
+
+/datum/mil_rank/ec/o1
+	name = "Ensign"
+	name_short = "ENS"
+	accessory = list(/obj/item/clothing/accessory/rank/ec/officer)
+	sort_order = 11
+
+/datum/mil_rank/ec/o3
+	name = "Lieutenant"
+	name_short = "LT"
+	accessory = list(/obj/item/clothing/accessory/rank/ec/officer/o3)
+	sort_order = 13
+
+/datum/mil_rank/ec/o5
+	name = "Commander"
+	name_short = "CDR"
+	accessory = list(/obj/item/clothing/accessory/rank/ec/officer/o5)
+	sort_order = 15
+
+/datum/mil_rank/ec/o6
+	name = "Captain"
+	name_short = "CAPT"
+	accessory = list(/obj/item/clothing/accessory/rank/ec/officer/o6)
+	sort_order = 16
+
+/datum/mil_rank/ec/o8
+	name = "Admiral"
+	name_short = "ADM"
+	accessory = list(/obj/item/clothing/accessory/rank/ec/officer/o8)
+	sort_order = 16
 
 /*
  *  Marines
@@ -623,16 +645,12 @@
 
 /datum/mil_rank/civ/nt
 	name = "NanoTrasen Employee"
-	name_short = null
 
 /datum/mil_rank/civ/contractor
 	name = "Contractor"
-	name_short = null
 
 /datum/mil_rank/civ/offduty
 	name = "Off-Duty Personnel"
-	name_short = "Off-Duty"
 
 /datum/mil_rank/civ/synthetic
 	name = "Synthetic"
-	name_short = null

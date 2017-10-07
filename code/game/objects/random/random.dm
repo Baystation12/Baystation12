@@ -807,7 +807,7 @@ obj/random/obstruction/spawn_choices()
 	return list(/obj/item/clothing/head/utility/fleet = 4,
 				/obj/item/clothing/head/utility/marine = 4,
 				/obj/item/clothing/head/utility/marine/tan = 3,
-				/obj/item/clothing/head/utility/marine/green = 3,
+				/obj/item/clothing/head/utility/marine/urban = 3,
 				/obj/item/clothing/head/soft/sol/expedition = 2,
 				/obj/item/clothing/head/soft/sol/fleet = 4,
 				/obj/item/clothing/head/helmet/solgov = 1,
@@ -815,7 +815,7 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/suit/storage/vest/solgov = 1,
 				/obj/item/clothing/suit/storage/service/expeditionary = 4,
 				/obj/item/clothing/under/utility/marine/tan = 2,
-				/obj/item/clothing/under/utility/marine/green = 2,
+				/obj/item/clothing/under/utility/marine/urban = 2,
 				/obj/item/clothing/under/utility/marine = 3,
 				/obj/item/clothing/under/utility = 5,
 				/obj/item/clothing/under/utility/fleet = 3,
@@ -1084,6 +1084,18 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/weapon/rig/light,
 				/obj/item/weapon/rig/unathi,
 				/obj/item/weapon/rig/unathi/fancy)
+
+/obj/random/hostile
+	name = "Random Hostile Mob"
+	desc = "This is a random hostile mob."
+	icon = 'icons/mob/amorph.dmi'
+	icon_state = "standing"
+	spawn_nothing_percentage = 80
+
+obj/random/hostile/spawn_choices()
+	return list(/mob/living/simple_animal/hostile/viscerator,
+				/mob/living/simple_animal/hostile/carp,
+				/mob/living/simple_animal/hostile/carp/pike)
 
 /*
 	Selects one spawn point out of a group of points with the same ID and asks it to generate its items

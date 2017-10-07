@@ -5,7 +5,6 @@ var/list/ai_list = list()
 var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_announcement,
 	/mob/living/silicon/ai/proc/ai_call_shuttle,
-	// /mob/living/silicon/ai/proc/ai_recall_shuttle,
 	/mob/living/silicon/ai/proc/ai_emergency_message,
 	/mob/living/silicon/ai/proc/ai_camera_track,
 	/mob/living/silicon/ai/proc/ai_camera_list,
@@ -50,6 +49,7 @@ var/list/ai_verbs_default = list(
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
+	maxHealth = 200
 	var/list/network = list("Exodus")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
@@ -59,7 +59,11 @@ var/list/ai_verbs_default = list(
 	var/holo_icon_malf = FALSE // for new hologram system
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
-	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
+
+	silicon_camera = /obj/item/device/camera/siliconcam/ai_camera
+	silicon_radio = /obj/item/device/radio/headset/heads/ai_integrated
+	var/obj/item/device/radio/headset/heads/ai_integrated/ai_radio
+
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
@@ -87,6 +91,9 @@ var/list/ai_verbs_default = list(
 	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
 	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
 	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
+	var/uncardable = 0							// Whether the AI can be carded when malfunctioning.
+	var/hacked_apcs_hidden = 0					// Whether the hacked APCs belonging to this AI are hidden, reduces CPU generation from APCs.
+	var/intercepts_communication = 0			// Whether the AI intercepts fax and emergency transmission communications.
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/carded
@@ -125,7 +132,6 @@ var/list/ai_verbs_default = list(
 	anchored = 1
 	canmove = 0
 	set_density(1)
-	loc = loc
 
 	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Default"))
 
@@ -133,12 +139,8 @@ var/list/ai_verbs_default = list(
 		laws = L
 
 	aiMulti = new(src)
-	aiRadio = new(src)
-	common_radio = aiRadio
-	aiRadio.myAi = src
-	additional_law_channels["Holopad"] = ":h"
 
-	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
+	additional_law_channels["Holopad"] = ":h"
 
 	if (istype(loc, /turf))
 		add_ai_verbs(src)
@@ -151,10 +153,11 @@ var/list/ai_verbs_default = list(
 	add_language(LANGUAGE_UNATHI, 1)
 	add_language(LANGUAGE_SIIK_MAAS, 1)
 	add_language(LANGUAGE_SKRELLIAN, 1)
-	add_language(LANGUAGE_TRADEBAND, 1)
+	add_language(LANGUAGE_LUNAR, 1)
 	add_language(LANGUAGE_GUTTER, 1)
 	add_language(LANGUAGE_SIGN, 0)
 	add_language(LANGUAGE_INDEPENDENT, 1)
+	add_language(LANGUAGE_SPACER, 1)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -179,6 +182,8 @@ var/list/ai_verbs_default = list(
 
 	ai_list += src
 	..()
+	ai_radio = silicon_radio
+	ai_radio.myAi = src
 
 /mob/living/silicon/ai/proc/on_mob_init()
 	to_chat(src, "<B>You are playing the [station_name()]'s AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>")
@@ -189,11 +194,11 @@ var/list/ai_verbs_default = list(
 	to_chat(src, "For department channels, use the following say commands:")
 
 	var/radio_text = ""
-	for(var/i = 1 to common_radio.channels.len)
-		var/channel = common_radio.channels[i]
+	for(var/i = 1 to silicon_radio.channels.len)
+		var/channel = silicon_radio.channels[i]
 		var/key = get_radio_key_from_channel(channel)
 		radio_text += "[key] - [channel]"
-		if(i != common_radio.channels.len)
+		if(i != silicon_radio.channels.len)
 			radio_text += ", "
 
 	to_chat(src, radio_text)
@@ -207,24 +212,28 @@ var/list/ai_verbs_default = list(
 	eyeobj.possess(src)
 
 /mob/living/silicon/ai/Destroy()
-	ai_list -= src
+	for(var/robot in connected_robots)
+		var/mob/living/silicon/robot/S = robot
+		S.connected_ai = null
+	connected_robots.Cut()
 
-	. = ..()
+	ai_list -= src
+	ai_radio = null
 
 	QDEL_NULL(announcement)
 	QDEL_NULL(eyeobj)
 	QDEL_NULL(psupply)
 	QDEL_NULL(aiPDA)
 	QDEL_NULL(aiMulti)
-	QDEL_NULL(aiRadio)
-	QDEL_NULL(aiCamera)
 	hack = null
+
+	. = ..()
 
 /mob/living/silicon/ai/proc/setup_icon()
 	if(LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]"))
 		return
 	var/list/custom_icons = list()
-	LAZYADDASSOC(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]", custom_icons)
+	LAZYSET(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]", custom_icons)
 
 	var/file = file2text("config/custom_sprites.txt")
 	var/lines = splittext(file, "\n")
@@ -420,7 +429,7 @@ var/list/ai_verbs_default = list(
 				to_chat(src, "<span class='notice'>Unable to locate the holopad.</span>")
 
 	if (href_list["track"])
-		var/mob/target = locate(href_list["track"]) in GLOB.mob_list
+		var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
 		var/mob/living/carbon/human/H = target
 
 		if(!istype(H) || (html_decode(href_list["trackname"]) == H.get_visible_name()) || (html_decode(href_list["trackname"]) == H.get_id_name()))
@@ -633,8 +642,8 @@ var/list/ai_verbs_default = list(
 		return
 
 	to_chat(src, "Accessing Subspace Transceiver control...")
-	if (src.aiRadio)
-		src.aiRadio.interact(src)
+	if (src.silicon_radio)
+		src.silicon_radio.interact(src)
 
 /mob/living/silicon/ai/proc/sensor_mode()
 	set name = "Set Sensor Augmentation"
@@ -666,7 +675,7 @@ var/list/ai_verbs_default = list(
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
 		if(feedback) to_chat(src, "<span class='warning'>Wireless control is disabled!</span>")
 		return 1
-	if((flags & AI_CHECK_RADIO) && src.aiRadio.disabledAi)
+	if((flags & AI_CHECK_RADIO) && src.ai_radio.disabledAi)
 		if(feedback) to_chat(src, "<span class='warning'>System Error - Transceiver Disabled!</span>")
 		return 1
 	return 0

@@ -59,7 +59,7 @@ datum/preferences
 /datum/preferences/proc/CalculateSkillPoints()
 	used_skillpoints = 0
 	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
-		var/multiplier = 1
+		var/multiplier = S.cost_multiplier
 		switch(skills[S.ID])
 			if(SKILL_NONE)
 				used_skillpoints += 0 * multiplier
@@ -167,7 +167,7 @@ datum/preferences
 		sanitize_preferences()
 		close_load_dialog(usr)
 	else if(href_list["resetslot"])
-		if("No" == alert("This will reset the current slot. Continue?", "Reset current slot?", "No", "Yes"))
+		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
 			return 0
 		load_character(SAVE_RESET)
 		sanitize_preferences()
@@ -269,20 +269,36 @@ datum/preferences
 				else if(status == "mechanical")
 					I.robotize()
 
-	character.all_underwear.Cut()
-	character.all_underwear_metadata.Cut()
+	QDEL_NULL_LIST(character.worn_underwear)
+	character.worn_underwear = list()
+
 	for(var/underwear_category_name in all_underwear)
-		var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
+		var/datum/category_group/underwear/underwear_category = GLOB.underwear.categories_by_name[underwear_category_name]
 		if(underwear_category)
 			var/underwear_item_name = all_underwear[underwear_category_name]
-			character.all_underwear[underwear_category_name] = underwear_category.items_by_name[underwear_item_name]
-			if(all_underwear_metadata[underwear_category_name])
-				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
+			var/datum/category_item/underwear/UWD = underwear_category.items_by_name[underwear_item_name]
+			var/metadata = all_underwear_metadata[underwear_category_name]
+			var/obj/item/underwear/UW = UWD.create_underwear(metadata)
+			if(UW)
+				UW.ForceEquipUnderwear(character, FALSE)
 		else
 			all_underwear -= underwear_category_name
 	if(backbag > 6 || backbag < 1)
 		backbag = 1 //Same as above
 	character.backbag = backbag
+
+	for(var/N in character.organs_by_name)
+		var/obj/item/organ/external/O = character.organs_by_name[N]
+		O.markings.Cut()
+
+	for(var/M in body_markings)
+		var/datum/sprite_accessory/marking/mark_datum = GLOB.body_marking_styles_list[M]
+		var/mark_color = "[body_markings[M]]"
+
+		for(var/BP in mark_datum.body_parts)
+			var/obj/item/organ/external/O = character.organs_by_name[BP]
+			if(O)
+				O.markings[M] = list("color" = mark_color, "datum" = mark_datum)
 
 	character.force_update_limbs()
 	character.update_mutations(0)
@@ -322,6 +338,9 @@ datum/preferences
 
 	if(!character.isSynthetic())
 		character.nutrition = rand(140,360)
+
+	return
+
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat  = list()

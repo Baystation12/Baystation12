@@ -16,7 +16,8 @@
 #define SPECIES_IS_RESTRICTED       0x2    // Is not a core/normally playable species. (castes, mutantraces)
 #define SPECIES_CAN_JOIN            0x4    // Species is selectable in chargen.
 #define SPECIES_NO_FBP_CONSTRUCTION 0x8    // FBP of this species can't be made in-game.
-#define SPECIES_NO_FBP_CHARGEN      0x10    // FBP of this species can't be selected at chargen.
+#define SPECIES_NO_FBP_CHARGEN      0x10   // FBP of this species can't be selected at chargen.
+#define SPECIES_NO_LACE             0x20   // This species can't have a neural lace.
 
 // Species appearance flags
 #define HAS_SKIN_TONE     0x1    // Skin tone selectable in chargen. (0-255)
@@ -37,12 +38,13 @@
 #define LANGUAGE_SKRELLIAN "Skrellian"
 #define LANGUAGE_ROOTLOCAL "Local Rootspeak"
 #define LANGUAGE_ROOTGLOBAL "Global Rootspeak"
-#define LANGUAGE_TRADEBAND "Tradeband"
+#define LANGUAGE_LUNAR "Selenian"
 #define LANGUAGE_GUTTER "Gutter"
 #define LANGUAGE_CULT "Cult"
 #define LANGUAGE_SIGN "Sign Language"
 #define LANGUAGE_INDEPENDENT "Independent"
 #define LANGUAGE_NABBER "Serpentid"
+#define LANGUAGE_SPACER "Spacer"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.
@@ -55,3 +57,7 @@
 #define NO_TALK_MSG  128 // Do not show the "\The [speaker] talks into \the [radio]" message
 #define NO_STUTTER   256 // No stuttering, slurring, or other speech problems
 #define ALT_TRANSMIT 512 // Language is not based on vision or sound (Todo: add this into the say code and use it for the rootspeak languages)
+
+// Skin Defines
+#define SKIN_NORMAL 0
+#define SKIN_THREAT 1

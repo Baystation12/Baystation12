@@ -146,7 +146,7 @@
 		M.canmove = 0
 		M.icon = null
 		M.overlays.len = 0
-		M.invisibility = 101
+		M.set_invisibility(101)
 
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/Robot = M

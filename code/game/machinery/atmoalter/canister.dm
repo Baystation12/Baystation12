@@ -49,6 +49,13 @@
 	name = "\improper Canister: \[O2 (Cryo)\]"
 	start_pressure = 20 * ONE_ATMOSPHERE
 
+/obj/machinery/portable_atmospherics/canister/hydrogen
+	name = "\improper Canister: \[Hydrogen\]"
+	icon_state = "red"
+	canister_color = "red"
+	can_label = 0
+
+
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "\improper Canister \[Phoron\]"
 	icon_state = "orange"
@@ -190,7 +197,7 @@ update_flag
 	else
 		return 1
 
-/obj/machinery/portable_atmospherics/canister/process()
+/obj/machinery/portable_atmospherics/canister/Process()
 	if (destroyed)
 		return
 
@@ -371,6 +378,12 @@ update_flag
 	..()
 
 	src.air_contents.adjust_gas("oxygen", MolesForPressure())
+	src.update_icon()
+	return 1
+
+/obj/machinery/portable_atmospherics/canister/hydrogen/New()
+	..()
+	src.air_contents.adjust_gas("hydrogen", MolesForPressure())
 	src.update_icon()
 	return 1
 

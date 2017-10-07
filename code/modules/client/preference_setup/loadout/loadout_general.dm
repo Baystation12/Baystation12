@@ -49,10 +49,7 @@
 /datum/gear/coffeecup
 	display_name = "coffee cup"
 	path = /obj/item/weapon/reagent_containers/food/drinks/coffeecup
-
-/datum/gear/coffeecup/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/weapon/reagent_containers/food/drinks/coffeecup)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/boot_knife
 	display_name = "boot knife"

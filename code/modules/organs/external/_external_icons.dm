@@ -49,6 +49,15 @@ var/list/limb_icon_cache = list()
 	update_icon(1)
 	..()
 
+	//Head markings, duplicated (sadly) below.
+	for(var/M in markings)
+		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+		var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
+		mark_s.Blend(markings[M]["color"], ICON_ADD)
+		overlays |= mark_s //So when it's not on your body, it has icons
+		mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
+		icon_cache_key += "[M][markings[M]["color"]]"
+
 /obj/item/organ/external/var/icon_cache_key
 /obj/item/organ/external/update_icon(var/regenerate = 0)
 	var/gender = "_m"
@@ -77,6 +86,15 @@ var/list/limb_icon_cache = list()
 
 	mob_icon = apply_colouration(new/icon(icon, icon_state))
 
+	//Body markings, does not include head, duplicated (sadly) above.
+	for(var/M in markings)
+		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+		var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
+		mark_s.Blend(markings[M]["color"], ICON_ADD)
+		overlays |= mark_s //So when it's not on your body, it has icons
+		mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
+		icon_cache_key += "[M][markings[M]["color"]]"
+
 	if(body_hair && islist(h_col) && h_col.len >= 3)
 		var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
 		if(!limb_icon_cache[cache_key])
@@ -99,8 +117,8 @@ var/list/limb_icon_cache = list()
 // amount to represent the obfuscation of being in agonizing pain.
 
 // Global scope, used in code below.
-var/list/flesh_hud_colours = list("#00FF00","#AAFF00","#FFFF00","#FFAA00","#FF0000","#AA0000","#660000")
-var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#666666","#444444","#222222","#000000")
+var/list/flesh_hud_colours = list("#00ff00","#aaff00","#ffff00","#ffaa00","#ff0000","#aa0000","#660000")
+var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#666666","#444444","#222222","#000000")
 
 /obj/item/organ/external/proc/get_damage_hud_image()
 
@@ -135,7 +153,7 @@ var/list/robot_hud_colours = list("#FFFFFF","#CCCCCC","#AAAAAA","#888888","#6666
 /obj/item/organ/external/proc/apply_colouration(var/icon/applying)
 
 	if(nonsolid)
-		applying.MapColors("#4D4D4D","#969696","#1C1C1C", "#000000")
+		applying.MapColors("#4d4d4d","#969696","#1c1c1c", "#000000")
 		if(species && species.get_bodytype(owner) != SPECIES_HUMAN)
 			applying.SetIntensity(1.5)
 		else

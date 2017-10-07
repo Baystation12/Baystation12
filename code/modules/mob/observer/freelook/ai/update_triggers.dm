@@ -9,8 +9,8 @@
 		set_light(0)
 	cameranet.update_visibility(src)
 
-/obj/machinery/camera/New()
-	..()
+/obj/machinery/camera/Initialize()
+	. = ..()
 	var/list/open_networks = difflist(network, restricted_camera_networks)
 	on_open_network = open_networks.len
 	if(on_open_network)

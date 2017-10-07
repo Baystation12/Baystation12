@@ -1,5 +1,5 @@
 /mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
-	GLOB.mob_list -= src
+	STOP_PROCESSING(SSmobs, src)
 	GLOB.dead_mob_list_ -= src
 	GLOB.living_mob_list_ -= src
 	unset_machine()
@@ -42,9 +42,9 @@
 	ability_master = null
 	zone_sel = null
 
-/mob/New()
-	GLOB.mob_list += src
-	..()
+/mob/Initialize()
+	. = ..()
+	START_PROCESSING(SSmobs, src)
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	if(!client)	return
@@ -131,13 +131,16 @@
 		O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 
 /mob/proc/findname(msg)
-	for(var/mob/M in GLOB.mob_list)
-		if (M.real_name == text("[]", msg))
+	for(var/mob/M in SSmobs.mob_list)
+		if (M.real_name == msg)
 			return M
 	return 0
 
 /mob/proc/movement_delay()
 	. = 0
+	if(istype(loc, /turf))
+		var/turf/T = loc
+		. += T.movement_delay
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
@@ -250,7 +253,7 @@
 		return 0
 
 	var/obj/P = new /obj/effect/decal/point(tile)
-	P.invisibility = invisibility
+	P.set_invisibility(invisibility)
 	spawn (20)
 		if(P)
 			qdel(P)	// qdel
@@ -435,7 +438,7 @@
 				namecounts[name] = 1
 			creatures[name] = O
 
-	for(var/mob/M in sortAtom(GLOB.mob_list))
+	for(var/mob/M in sortAtom(SSmobs.mob_list))
 		var/name = M.name
 		if (names.Find(name))
 			namecounts[name]++
@@ -483,6 +486,7 @@
 		onclose(usr, "[name]")
 	if(href_list["flavor_change"])
 		update_flavor_text()
+		
 //	..()
 	return
 

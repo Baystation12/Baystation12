@@ -31,7 +31,7 @@ var/global/list/map_count = list()
 	// Test to see if rand_seed() can be used reliably.
 	var/priority_process
 
-/datum/random_map/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce)
+/datum/random_map/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
 
 	// Store this for debugging.
 	if(!map_count[descriptor])
@@ -59,7 +59,7 @@ var/global/list/map_count = list()
 	// Testing needed to see how reliable this is (asynchronous calls, called during worldgen), DM ref is not optimistic
 	if(seed)
 		rand_seed(seed)
-		priority_process = 1
+		priority_process = !never_be_priority
 
 	for(var/i = 0;i<max_attempts;i++)
 		if(generate())

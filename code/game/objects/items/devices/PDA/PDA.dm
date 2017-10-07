@@ -223,7 +223,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	default_cartridge = /obj/item/weapon/cartridge/medical
 	icon_state = "pda-gene"
 
-
 // Special AI/pAI PDAs that cannot explode.
 /obj/item/device/pda/ai
 	icon_state = "NONE"
@@ -459,9 +458,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_name"] = sanitize(c["owner"])
 				data["convo_job"] = sanitize(c["job"])
 				break
-	if(mode==41)
-		GLOB.data_core.get_manifest_list()
-
 
 	if(mode==3)
 		var/turf/T = get_turf(user.loc)
@@ -531,7 +527,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		data["feed"] = feed
 
-	data["manifest"] = PDA_Manifest
+	data["manifest"] = nano_crew_manifest()
 
 	nanoUI = data
 	// update the ui if it exists, returns null if no ui is passed/found
@@ -1327,11 +1323,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		// Anything that is left in the page. just tack it on to the end as is
 		formatted_scan=formatted_scan+raw_scan
 
-    	// If there is something in there already, pad it out.
+		// If there is something in there already, pad it out.
 		if (length(note)>0)
 			note = note + "<br><br>"
 
-    	// Store the scanned document to the notes
+		// Store the scanned document to the notes
 		note = "Scanned Document. Edit to restore previous notes/delete scan.<br>----------<br>" + formatted_scan + "<br>"
 		// notehtml ISN'T set to allow user to get their old notes back. A better implementation would add a "scanned documents"
 		// feature to the PDA, which would better convey the availability of the feature, but this will work for now.

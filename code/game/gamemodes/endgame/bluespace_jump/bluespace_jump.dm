@@ -10,7 +10,7 @@
 
 /datum/universal_state/bluespace_jump/OnEnter()
 	var/space_zlevel = GLOB.using_map.get_empty_zlevel() //get a place for stragglers
-	for(var/mob/living/M in GLOB.mob_list)
+	for(var/mob/living/M in SSmobs.mob_list)
 		if(M.z in affected_levels)
 			var/area/A = get_area(M)
 			if(istype(A,/area/space)) //straggler
@@ -21,7 +21,7 @@
 				apply_bluespaced(M)
 	for(var/mob/goast in GLOB.ghost_mob_list)
 		goast.mouse_opacity = 0	//can't let you click that Dave
-		goast.invisibility = SEE_INVISIBLE_LIVING
+		goast.set_invisibility(SEE_INVISIBLE_LIVING)
 		goast.alpha = 255
 	old_accessible_z_levels = GLOB.using_map.accessible_z_levels.Copy()
 	for(var/z in affected_levels)
@@ -62,7 +62,7 @@
 	M.confused = 0
 	for(var/mob/goast in GLOB.ghost_mob_list)
 		goast.mouse_opacity = initial(goast.mouse_opacity)
-		goast.invisibility = initial(goast.invisibility)
+		goast.set_invisibility(initial(goast.invisibility))
 		goast.alpha = initial(goast.alpha)
 	for(var/G in bluegoasts)
 		qdel(G)
@@ -81,8 +81,8 @@
 	if(!ndaddy)
 		qdel(src)
 		return
-	set_dir(daddy.dir)
 	daddy = ndaddy
+	set_dir(daddy.dir)
 	appearance = daddy.appearance
 	GLOB.moved_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror)
 	GLOB.dir_set_event.register(daddy, src, /obj/effect/bluegoast/proc/mirror_dir)
@@ -134,7 +134,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "mfoam"
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
-	color = "#FF9900"
+	color = "#ff9900"
 	alpha = 100
 	blend_mode = BLEND_SUBTRACT
 	layer = FULLSCREEN_LAYER

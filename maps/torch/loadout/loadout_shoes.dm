@@ -18,7 +18,7 @@
 
 /datum/gear/shoes/boots
 	display_name = "boot selection"
-	path = /obj/item/clothing/shoes/jackboots
+	path = /obj/item/clothing/shoes
 	cost = 2
 
 /datum/gear/shoes/boots/New()
@@ -32,7 +32,7 @@
 
 /datum/gear/shoes/color
 	display_name = "shoe selection"
-	path = /obj/item/clothing/shoes/black
+	path = /obj/item/clothing/shoes
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/shoes/color/New()
@@ -67,7 +67,4 @@
 	display_name = "high tops selection"
 	path = /obj/item/clothing/shoes/hightops
 	allowed_roles = FORMAL_ROLES
-
-/datum/gear/shoes/high/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/shoes/hightops)
+	flags = GEAR_HAS_TYPE_SELECTION

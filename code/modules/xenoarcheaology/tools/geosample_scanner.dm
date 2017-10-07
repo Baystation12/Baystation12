@@ -47,18 +47,18 @@
 /obj/machinery/radiocarbon_spectrometer/New()
 	..()
 	create_reagents(500)
-	coolant_reagents_purity["water"] = 0.5
-	coolant_reagents_purity["icecoffee"] = 0.6
-	coolant_reagents_purity["icetea"] = 0.6
-	coolant_reagents_purity["milkshake"] = 0.6
-	coolant_reagents_purity["leporazine"] = 0.7
-	coolant_reagents_purity["kelotane"] = 0.7
-	coolant_reagents_purity["sterilizine"] = 0.7
-	coolant_reagents_purity["dermaline"] = 0.7
-	coolant_reagents_purity["hyperzine"] = 0.8
-	coolant_reagents_purity["cryoxadone"] = 0.9
-	coolant_reagents_purity["coolant"] = 1
-	coolant_reagents_purity["adminordrazine"] = 2
+	coolant_reagents_purity[/datum/reagent/water] = 0.5
+	coolant_reagents_purity[/datum/reagent/drink/coffee/icecoffee] = 0.6
+	coolant_reagents_purity[/datum/reagent/drink/tea/icetea] = 0.6
+	coolant_reagents_purity[/datum/reagent/drink/milkshake] = 0.6
+	coolant_reagents_purity[/datum/reagent/leporazine] = 0.7
+	coolant_reagents_purity[/datum/reagent/kelotane] = 0.7
+	coolant_reagents_purity[/datum/reagent/sterilizine] = 0.7
+	coolant_reagents_purity[/datum/reagent/dermaline] = 0.7
+	coolant_reagents_purity[/datum/reagent/hyperzine] = 0.8
+	coolant_reagents_purity[/datum/reagent/cryoxadone] = 0.9
+	coolant_reagents_purity[/datum/reagent/coolant] = 1
+	coolant_reagents_purity[/datum/reagent/adminordrazine] = 2
 
 /obj/machinery/radiocarbon_spectrometer/attack_hand(var/mob/user as mob)
 	ui_interact(user)
@@ -107,7 +107,7 @@
 	for (var/datum/reagent/current_reagent in src.reagents.reagent_list)
 		if (!current_reagent)
 			continue
-		var/cur_purity = coolant_reagents_purity[current_reagent.id]
+		var/cur_purity = coolant_reagents_purity[current_reagent.type]
 		if(!cur_purity)
 			cur_purity = 0.1
 		else if(cur_purity > 1)
@@ -153,7 +153,7 @@
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "geoscanner.tmpl", "High Res Radiocarbon Spectrometer", 900, 825)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
@@ -162,7 +162,7 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/radiocarbon_spectrometer/process()
+/obj/machinery/radiocarbon_spectrometer/Process()
 	if(scanning)
 		if(!scanned_item || scanned_item.loc != src)
 			scanned_item = null

@@ -44,13 +44,13 @@
 	icon_empty = "ccigoff"
 	icon_on = "ccigon"
 
-/obj/item/clothing/mask/smokable/ecig/process()
+/obj/item/clothing/mask/smokable/ecig/Process()
 	if(ishuman(loc))
 		var/mob/living/carbon/human/C = loc
 		if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
 			if (!active || !ec_cartridge || !ec_cartridge.reagents.total_volume)//no cartridge
 				active=0//autodisable the cigarette
-				GLOB.processing_objects.Remove(src)
+				STOP_PROCESSING(SSobj, src)
 				update_icon()
 				return
 			ec_cartridge.reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.4) // Most of it is not inhaled... balance reasons.
@@ -89,7 +89,7 @@
 /obj/item/clothing/mask/smokable/ecig/attack_self(mob/user as mob)
 	if (active)
 		active=0
-		GLOB.processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		to_chat(user, "<span class='notice'>You turn off [src]. </span> ")
 		update_icon()
 	else
@@ -97,7 +97,7 @@
 			to_chat(user, "<span class='notice'>Insert cartridge first.</span> ")
 			return
 		active=1
-		GLOB.processing_objects.Add(src)
+		START_PROCESSING(SSobj, src)
 		to_chat(user, "<span class='notice'>You turn on [src]. </span> ")
 		update_icon()
 
@@ -134,8 +134,8 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine/New()
 	..()
-	reagents.add_reagent("nicotine", 5)
-	reagents.add_reagent("water", 15)
+	reagents.add_reagent(/datum/reagent/nicotine, 5)
+	reagents.add_reagent(/datum/reagent/water, 15)
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine
 	name = "high nicotine tobacco flavour cartridge"
@@ -143,8 +143,8 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine/New()
 	..()
-	reagents.add_reagent("nicotine", 10)
-	reagents.add_reagent("water", 10)
+	reagents.add_reagent(/datum/reagent/nicotine, 10)
+	reagents.add_reagent(/datum/reagent/water, 10)
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/orange
 	name = "orange flavour cartridge"
@@ -152,9 +152,9 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/orange/New()
 	..()
-	reagents.add_reagent("nicotine", 5)
-	reagents.add_reagent("water", 10)
-	reagents.add_reagent("orangejuice", 5)
+	reagents.add_reagent(/datum/reagent/nicotine, 5)
+	reagents.add_reagent(/datum/reagent/water, 10)
+	reagents.add_reagent(/datum/reagent/drink/juice/orange, 5)
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/mint
 	name = "mint flavour cartridge"
@@ -162,9 +162,9 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/mint/New()
 	..()
-	reagents.add_reagent("nicotine", 5)
-	reagents.add_reagent("water", 10)
-	reagents.add_reagent("menthol", 5)
+	reagents.add_reagent(/datum/reagent/nicotine, 5)
+	reagents.add_reagent(/datum/reagent/water, 10)
+	reagents.add_reagent(/datum/reagent/menthol, 5)
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/watermelon
 	name = "watermelon flavour cartridge"
@@ -172,9 +172,9 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/watermelon/New()
 	..()
-	reagents.add_reagent("nicotine", 5)
-	reagents.add_reagent("water", 10)
-	reagents.add_reagent("watermelonjuice", 5)
+	reagents.add_reagent(/datum/reagent/nicotine, 5)
+	reagents.add_reagent(/datum/reagent/water, 10)
+	reagents.add_reagent(/datum/reagent/drink/juice/watermelon, 5)
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/grape
 	name = "grape flavour cartridge"
@@ -183,6 +183,6 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/grape/New()
 	..()
-	reagents.add_reagent("nicotine", 5)
-	reagents.add_reagent("water", 10)
-	reagents.add_reagent("grapejuice", 5)
+	reagents.add_reagent(/datum/reagent/nicotine, 5)
+	reagents.add_reagent(/datum/reagent/water, 10)
+	reagents.add_reagent(/datum/reagent/drink/juice/grape, 5)

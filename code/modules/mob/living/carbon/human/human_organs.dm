@@ -34,7 +34,7 @@
 
 	//processing internal organs is pretty cheap, do that first.
 	for(var/obj/item/organ/I in internal_organs)
-		I.process()
+		I.Process()
 
 	handle_stance()
 	handle_grasp()
@@ -49,7 +49,7 @@
 			bad_external_organs -= E
 			continue
 		else
-			E.process()
+			E.Process()
 
 			if (!lying && !buckled && world.time - l_move_time < 15)
 			//Moving around with fractured ribs won't do you any good
@@ -192,14 +192,6 @@
 			custom_pain("The sharp pain in your [affected.name] forces you to drop [thing]!", 30)
 		else
 			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
-
-
-//Handles chem traces
-/mob/living/carbon/human/proc/handle_trace_chems()
-	//New are added for reagents to random organs.
-	for(var/datum/reagent/A in reagents.reagent_list)
-		var/obj/item/organ/O = pick(organs)
-		O.trace_chemicals[A.name] = 100
 
 /mob/living/carbon/human/proc/sync_organ_dna()
 	var/list/all_bits = internal_organs|organs

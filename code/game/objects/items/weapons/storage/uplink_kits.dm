@@ -34,6 +34,14 @@
 		/obj/item/weapon/implantpad
 		)
 
+/obj/item/weapon/storage/box/syndie_kit/imp_imprinting
+	name = "box (I)"
+	startswith = list(
+		/obj/item/weapon/implanter/imprinting,
+		/obj/item/weapon/implantpad,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/mindbreaker
+		)
+
 // Space suit uplink kit
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/space
 	//name = "\improper EVA gear pack"
@@ -118,27 +126,27 @@
 	..()
 	var/obj/item/weapon/storage/fancy/cigarettes/pack
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("aluminum" = 1, "potassium" = 1, "sulfur" = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("aluminum" = 1, "potassium" = 1, "sulfur" = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))
 	pack.desc += " 'F' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("potassium" = 1, "sugar" = 1, "phosphorus" = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/potassium = 1, /datum/reagent/sugar = 1, /datum/reagent/phosphorus = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("potassium" = 1, "sugar" = 1, "phosphorus" = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/potassium = 1, /datum/reagent/sugar = 1, /datum/reagent/phosphorus = 1))
 	pack.desc += " 'S' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("anti_toxin" = 1, "silicon" = 1, "hydrazine" = 1))
+	fill_cigarre_package(pack, list(/datum/reagent/dylovene = 1, /datum/reagent/silicon = 1, /datum/reagent/hydrazine = 1))
 	pack.desc += " 'MB' has been scribbled on it."
 
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
-	fill_cigarre_package(pack, list("tricordrazine" = 4))
+	fill_cigarre_package(pack, list(/datum/reagent/tricordrazine = 4))
 	pack.desc += " 'T' has been scribbled on it."
 
 	new /obj/item/weapon/flame/lighter/zippo(src)

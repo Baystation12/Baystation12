@@ -10,7 +10,7 @@
 
 	language = LANGUAGE_NABBER
 	default_language = LANGUAGE_NABBER
-	assisted_langs = list(LANGUAGE_GALCOM, LANGUAGE_TRADEBAND, LANGUAGE_GUTTER, LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT)
+	assisted_langs = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
 	additional_langs = list(LANGUAGE_GALCOM)
 	name_language = LANGUAGE_NABBER
 	min_age = 8
@@ -26,6 +26,7 @@
 
 	blood_color = "#525252"
 	flesh_color = "#525252"
+	blood_oxy = 0
 
 	reagent_tag = IS_NABBER
 
@@ -41,7 +42,7 @@
 	slowdown = -0.5
 	rarity_value = 4
 	hud_type = /datum/hud_data/nabber
-	total_health = 150
+	total_health = 200
 	brute_mod = 0.85
 	burn_mod =  1.35
 	gluttonous = GLUT_SMALLER
@@ -52,11 +53,11 @@
 
 	heat_level_1 = 410 //Default 360 - Higher is better
 	heat_level_2 = 440 //Default 400
-	heat_level_3 = 600 //Default 1000
+	heat_level_3 = 800 //Default 1000
 
-	flags = NO_SLIP | CAN_NAB | NO_BLOCK
+	flags = NO_SLIP | CAN_NAB | NO_BLOCK | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
 
 	bump_flag = HEAVY
 	push_flags = ALLMOBS
@@ -97,7 +98,8 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/nab,
 		/mob/living/carbon/human/proc/active_camo,
-		/mob/living/carbon/human/proc/switch_stance
+		/mob/living/carbon/human/proc/switch_stance,
+		/mob/living/carbon/human/proc/threat_display
 		)
 
 /datum/species/nabber/get_eyes(var/mob/living/carbon/human/H)
@@ -132,6 +134,10 @@
 
 	return FALSE
 
+/datum/species/nabber/handle_environment_special(var/mob/living/carbon/human/H)
+	if(!H.on_fire && H.fire_stacks < 2)
+		H.fire_stacks += 0.2
+	return
 
 // Nabbers will only fall when there isn't enough air pressure for them to keep themselves aloft.
 /datum/species/nabber/can_fall(var/mob/living/carbon/human/H)
@@ -196,3 +202,72 @@
 	affecting.apply_damage(15, BRUTE, BP_CHEST, armor, DAM_SHARP, "organic punctures")
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
+
+/datum/species/nabber/update_skin(var/mob/living/carbon/human/H)
+
+	if(H.stat)
+		H.skin_state = SKIN_NORMAL
+
+	switch(H.skin_state)
+		if(SKIN_NORMAL)
+			return
+		if(SKIN_THREAT)
+
+			var/image_key = "[H.species.get_race_key(src)]"
+
+			for(var/organ_tag in H.species.has_limbs)
+				var/obj/item/organ/external/part = H.organs_by_name[organ_tag]
+				if(isnull(part) || part.is_stump())
+					image_key += "0"
+					continue
+				if(part)
+					image_key += "[part.species.get_race_key(part.owner)]"
+					image_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
+				if(part.robotic >= ORGAN_ROBOT)
+					image_key += "2[part.model ? "-[part.model]": ""]"
+				else if(part.status & ORGAN_DEAD)
+					image_key += "3"
+				else
+					image_key += "1"
+
+			var/image/threat_image = skin_overlays[image_key]
+			if(!threat_image)
+				var/icon/base_icon = icon(H.stand_icon)
+				var/icon/I = new('icons/mob/human_races/r_nabber_threat.dmi', "threat")
+				base_icon.Blend(COLOR_BLACK, ICON_MULTIPLY)
+				base_icon.Blend(I, ICON_ADD)
+				threat_image  = image(base_icon)
+				skin_overlays[image_key] = threat_image
+
+			return(threat_image)
+	return
+
+/datum/species/nabber/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+	if(attacker.pulling_punches || target.lying || attacker == target)
+		return ..(attacker, target)
+	if(world.time < attacker.last_attack + 20)
+		to_chat(attacker, "<span class='notice'>You can't attack again so soon.</span>")
+		return 0
+	attacker.last_attack = world.time
+	var/turf/T = get_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
+	playsound(target.loc, 'sound/weapons/pushhiss.ogg', 50, 1, -1)
+	if(!T.density)
+		step(target, get_dir(get_turf(attacker), get_turf(target)))
+		target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
+	else
+		target.turf_collision(T, target.throw_speed / 2)
+	if(prob(50))
+		target.set_dir(GLOB.reverse_dir[target.dir])
+
+/datum/species/nabber/get_additional_examine_text(var/mob/living/carbon/human/H)
+	var/datum/gender/T = gender_datums[H.get_gender()]
+	if(H.pulling_punches)
+		return "\n[T.His] manipulation arms are out and [T.he] looks ready to use complex items."
+	else
+		return "\n<span class='warning'>[T.His] deadly upper arms are raised and [T.he] looks ready to attack!</span>"
+
+/datum/species/nabber/handle_post_spawn(var/mob/living/carbon/human/H)
+	..()
+	H.pulling_punches = TRUE
+	H.nabbing = FALSE
+

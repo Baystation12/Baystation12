@@ -21,8 +21,9 @@
 	var/prone_icon                            // If set, draws this from icobase when mob is prone.
 	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
 
-	var/blood_color = "#A10808"               // Red.
-	var/flesh_color = "#FFC896"               // Pink.
+	var/blood_color = COLOR_BLOOD_HUMAN               // Red.
+	var/flesh_color = "#ffc896"               // Pink.
+	var/blood_oxy = 1
 	var/base_color                            // Used by changelings. Should also be used for icon previes..
 	var/tail                                  // Name of tail state in species effects icon file.
 	var/tail_animation                        // If set, the icon to obtain tail animation states from.
@@ -82,9 +83,9 @@
 	var/dusted_anim = "dust-h"
 	var/death_sound
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
-	var/knockout_message = "has been knocked unconscious!"
-	var/halloss_message = "slumps to the ground, too weak to continue fighting."
-	var/halloss_message_self = "You're in too much pain to keep going..."
+	var/knockout_message = "collapses, having been knocked unconscious."
+	var/halloss_message = "slumps over, too weak to continue fighting..."
+	var/halloss_message_self = "The pain is too severe for you to keep going..."
 
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
@@ -104,7 +105,6 @@
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE // High pressure warning.
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
-	var/light_dam                                     // If set, mob will be damaged in light over this value and heal in light below its negative.
 	var/body_temperature = 310.15	                  // Species will try to stabilize at this temperature.
 	                                                  // (also affects temperature processing)
 
@@ -158,6 +158,7 @@
 
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 
+	var/list/skin_overlays = list()
 
 	var/list/has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
@@ -430,3 +431,54 @@
 		return /obj/effect/decal/cleanable/blood/tracks/footprints
 	else
 		return move_trail
+
+/datum/species/proc/update_skin(var/mob/living/carbon/human/H)
+	return
+
+/datum/species/proc/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+	attacker.do_attack_animation(target)
+
+	if(target.w_uniform)
+		target.w_uniform.add_fingerprint(attacker)
+	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(attacker.zone_sel.selecting))
+
+	var/list/holding = list(target.get_active_hand() = 40, target.get_inactive_hand() = 20)
+
+	//See if they have any guns that might go off
+	for(var/obj/item/weapon/gun/W in holding)
+		if(W && prob(holding[W]))
+			var/list/turfs = list()
+			for(var/turf/T in view())
+				turfs += T
+			if(turfs.len)
+				var/turf/shoot_to = pick(turfs)
+				target.visible_message("<span class='danger'>[target]'s [W] goes off during the struggle!</span>")
+				return W.afterattack(shoot_to,target)
+
+	var/randn = rand(1, 100)
+	if(!(flags & NO_SLIP) && randn <= 25)
+		var/armor_check = target.run_armor_check(affecting, "melee")
+		target.apply_effect(3, WEAKEN, armor_check)
+		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		if(armor_check < 100)
+			target.visible_message("<span class='danger'>[attacker] has pushed [target]!</span>")
+		else
+			target.visible_message("<span class='warning'>[attacker] attempted to push [target]!</span>")
+		return
+
+	if(randn <= 60)
+		//See about breaking grips or pulls
+		if(target.break_all_grabs(attacker))
+			playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			return
+
+		//Actually disarm them
+		for(var/obj/item/I in holding)
+			if(I)
+				target.drop_from_inventory(I)
+				target.visible_message("<span class='danger'>[attacker] has disarmed [target]!</span>")
+				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				return
+
+	playsound(target.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+	target.visible_message("<span class='danger'>[attacker] attempted to disarm \the [target]!</span>")

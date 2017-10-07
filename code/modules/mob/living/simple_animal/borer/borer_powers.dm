@@ -1,3 +1,11 @@
+GLOBAL_LIST_INIT(borer_reagent_types_by_name, setup_borer_reagents())
+
+/proc/setup_borer_reagents()
+	. = list()
+	for(var/reagent_type in list(/datum/reagent/alkysine, /datum/reagent/bicaridine, /datum/reagent/hyperzine, /datum/reagent/tramadol))
+		var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_type]
+		.[R.name] = reagent_type
+
 /mob/living/simple_animal/borer/verb/release_host()
 	set category = "Abilities"
 	set name = "Release Host"
@@ -218,13 +226,13 @@
 	if(chemicals < 50)
 		to_chat(src, "You don't have enough chemicals!")
 
-	var/chem = input("Select a chemical to secrete.", "Chemicals") as null|anything in list("alkysine","bicaridine","hyperzine","tramadol")
+	var/chem = input("Select a chemical to secrete.", "Chemicals") as null|anything in GLOB.borer_reagent_types_by_name
 
 	if(!chem || chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
 		return
 
 	to_chat(src, "<span class='danger'>You squirt a measure of [chem] from your reservoirs into \the [host]'s bloodstream.</span>")
-	host.reagents.add_reagent(chem, 10)
+	host.reagents.add_reagent(GLOB.borer_reagent_types_by_name[chem], 10)
 	chemicals -= 50
 
 /mob/living/simple_animal/borer/verb/dominate_victim()

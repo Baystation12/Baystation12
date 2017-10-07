@@ -44,6 +44,10 @@ datum/category_group/underwear/dd_SortValue()
 	var/list/tweaks = list()         // Underwear customizations.
 	var/has_color = FALSE
 
+	var/underwear_name               // The name of the resulting underwear
+	var/underwear_gender = NEUTER    // Singular or plural form?
+	var/underwear_type               // The kind of underwear item this datum will create.
+
 /datum/category_item/underwear/New()
 	if(has_color)
 		tweaks += gear_tweak_free_color_choice()
@@ -56,11 +60,16 @@ datum/category_group/underwear/dd_SortValue()
 /datum/category_item/underwear/proc/is_default(var/gender)
 	return is_default
 
-/datum/category_item/underwear/proc/generate_image(var/list/metadata)
-	if(!icon_state)
+/datum/category_item/underwear/proc/create_underwear(var/list/metadata)
+	if(!underwear_type)
 		return
 
-	var/image/I = image(icon = 'icons/mob/human.dmi', icon_state = icon_state)
+	var/obj/item/underwear/UW = new underwear_type()
+	UW.name = underwear_name
+	UW.gender = underwear_gender
+	UW.icon = icon
+	UW.icon_state = icon_state
+
 	for(var/datum/gear_tweak/gt in tweaks)
-		gt.tweak_item(I, metadata && metadata["[gt]"] ? metadata["[gt]"] : gt.get_default())
-	return I
+		gt.tweak_item(UW, metadata && metadata["[gt]"] ? metadata["[gt]"] : gt.get_default())
+	return UW

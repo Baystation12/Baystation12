@@ -39,10 +39,28 @@
 	return ..()
 
 /obj/structure/ladder/attackby(obj/item/C as obj, mob/user as mob)
-	attack_hand(user)
-	return
+	climb(user)
 
 /obj/structure/ladder/attack_hand(var/mob/M)
+	climb(M)
+
+/obj/structure/ladder/attack_ai(var/mob/M)
+	var/mob/living/silicon/ai/ai = M
+	if(!istype(ai))
+		return
+	var/mob/observer/eye/AIeye = ai.eyeobj
+	if(istype(AIeye))
+		instant_climb(AIeye)
+
+/obj/structure/ladder/attack_robot(var/mob/M)
+	climb(M)
+
+/obj/structure/ladder/proc/instant_climb(var/mob/M)
+	var/target_ladder = getTargetLadder(M)
+	if(target_ladder)
+		M.forceMove(get_turf(target_ladder))
+
+/obj/structure/ladder/proc/climb(var/mob/M)
 	if(!M.may_climb_ladders(src))
 		return
 
@@ -69,11 +87,8 @@
 		for (var/obj/item/grab/G in M)
 			G.adjust_position(force = 1)
 
-
 /obj/structure/ladder/attack_ghost(var/mob/M)
-	var/target_ladder = getTargetLadder(M)
-	if(target_ladder)
-		M.forceMove(get_turf(target_ladder))
+	instant_climb(M)
 
 /obj/structure/ladder/proc/getTargetLadder(var/mob/M)
 	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf) || (target_down && !istype(target_down.loc,/turf))))
@@ -151,6 +166,8 @@
 	density = 0
 	opacity = 0
 	anchored = 1
+	plane = ABOVE_TURF_PLANE
+	layer = RUNE_LAYER
 
 	Initialize()
 		for(var/turf/turf in locs)

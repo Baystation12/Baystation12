@@ -44,3 +44,9 @@
 /obj/item/modular_computer/laptop/preset/records/install_default_programs()
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/records())
+
+/obj/item/modular_computer/laptop/preset/custom_loadout/install_default_programs()
+	..()
+	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)
+	if(!istype(H)) return
+	install_default_programs_by_job(H)

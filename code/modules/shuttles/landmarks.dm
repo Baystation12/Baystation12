@@ -19,11 +19,19 @@
 	var/area/base_area
 	//Will also leave this type of turf behind if set.
 	var/turf/base_turf
+	//If set, will set base area and turf type to same as where it was spawned at
+	var/autoset
 
 /obj/effect/shuttle_landmark/New()
 	..()
 	tag = landmark_tag //since tags cannot be set at compile time
-	base_area = locate(base_area || world.area)
+	if(autoset)
+		base_area = get_area(src)
+		var/turf/T = get_turf(src)
+		if(T)
+			base_turf = T.type
+	else
+		base_area = locate(base_area || world.area)
 	name = name + " ([x],[y])"
 
 /obj/effect/shuttle_landmark/Initialize()
@@ -50,35 +58,58 @@
 			return TRUE //collides with edge of map
 		if(target.loc != base_area)
 			return TRUE //collides with another area
+		if(target.density)
+			return TRUE //dense turf
 	return FALSE
 
 //Self-naming/numbering ones.
 /obj/effect/shuttle_landmark/automatic
 	name = "Navpoint"
 	landmark_tag = "navpoint"
+	autoset = 1
 	var/shuttle_restricted //name of the shuttle, null for generic waypoint
 
 /obj/effect/shuttle_landmark/automatic/New()
-	tag = landmark_tag+"-[x]-[y]"
 	..()
+	tag = landmark_tag+"-[x]-[y]"
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
 	. = ..()
+	base_area = get_area(src)
 	if(!GLOB.using_map.use_overmap)
 		return
-	var/obj/effect/overmap/O = map_sectors["[z]"]
+	add_to_sector(map_sectors["[z]"])
+
+/obj/effect/shuttle_landmark/automatic/proc/add_to_sector(var/obj/effect/overmap/O, var/tag_only)
 	if(!istype(O))
 		return
+	name = "[O.name] - [name]"
 	if(shuttle_restricted)
-		O.restricted_waypoints += src
+		if(!O.restricted_waypoints[shuttle_restricted])
+			O.restricted_waypoints[shuttle_restricted] = list()
+		O.restricted_waypoints[shuttle_restricted] += tag_only ? tag : src
 	else
-		O.generic_waypoints  += src
+		O.generic_waypoints += tag_only ? tag : src
+
+//Subtype that calls explosion on init to clear space for shuttles
+/obj/effect/shuttle_landmark/automatic/clearing
+	var/radius = 10
+
+/obj/effect/shuttle_landmark/automatic/clearing/Initialize()
+	. = ..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()
+	var/list/victims = circlerangeturfs(get_turf(src),radius)
+	for(var/turf/T in victims)
+		if(T.density)
+			T.ChangeTurf(get_base_turf_by_area(T))
 
 /obj/item/device/spaceflare
 	name = "bluespace flare"
 	desc = "Burst transmitter used to broadcast all needed information for shuttle navigation systems. Has a flare attached for marking the spot where you probably shouldn't be standing."
 	icon_state = "bluflare"
-	light_color = "#3728FF"
+	light_color = "#3728ff"
 	var/active
 
 /obj/item/device/spaceflare/attack_self(var/mob/user)

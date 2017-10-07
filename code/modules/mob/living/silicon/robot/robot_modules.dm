@@ -24,13 +24,14 @@ var/global/list/robot_modules = list(
 	var/networks = list()
 	var/languages = list(
 		LANGUAGE_SOL_COMMON = 1,
-		LANGUAGE_TRADEBAND = 1,
+		LANGUAGE_LUNAR = 1,
 		LANGUAGE_UNATHI = 0,
 		LANGUAGE_SIIK_MAAS = 0,
 		LANGUAGE_SKRELLIAN = 0,
 		LANGUAGE_GUTTER = 0,
 		LANGUAGE_SIGN = 0,
-		LANGUAGE_INDEPDENDENT = 0)
+		LANGUAGE_INDEPENDENT = 0,
+		LANGUAGE_SPACER = 1)
 	var/sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0
@@ -57,8 +58,8 @@ var/global/list/robot_modules = list(
 	add_subsystems(R)
 	apply_status_flags(R)
 
-	if(R.radio)
-		R.radio.recalculateChannels()
+	if(R.silicon_radio)
+		R.silicon_radio.recalculateChannels()
 
 	R.set_module_sprites(sprites)
 	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
@@ -72,8 +73,8 @@ var/global/list/robot_modules = list(
 	remove_subsystems(R)
 	remove_status_flags(R)
 
-	if(R.radio)
-		R.radio.recalculateChannels()
+	if(R.silicon_radio)
+		R.silicon_radio.recalculateChannels()
 	R.choose_icon(0, R.set_module_sprites(list("Default" = "robot")))
 
 /obj/item/weapon/robot_module/Destroy()
@@ -223,7 +224,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/gripper/organ(src)
 	src.modules += new /obj/item/roller_holder(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent("pacid", 250)
+	src.emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
 	src.emag.name = "Polyacid spray"
 
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(10000)
@@ -245,7 +246,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/medical/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
-		PS.reagents.add_reagent("pacid", 2 * amount)
+		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
 	..()
 
 /obj/item/weapon/robot_module/medical/crisis
@@ -275,7 +276,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/extinguisher/mini(src)
 	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src) // Allows usage of inflatables. Since they are basically robotic alternative to EMTs, they should probably have them.
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent("pacid", 250)
+	src.emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
 	src.emag.name = "Polyacid spray"
 
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(15000)
@@ -309,7 +310,7 @@ var/global/list/robot_modules = list(
 
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
-		PS.reagents.add_reagent("pacid", 2 * amount)
+		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
 
 	..()
 
@@ -349,7 +350,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/pipe_painter(src)
 	src.modules += new /obj/item/device/floor_painter(src)
 	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src)
-	src.emag = new /obj/item/borg/stun(src)
+	src.emag = new /obj/item/weapon/melee/baton/robot/electrified_arm(src)
 
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal(60000)
 	var/datum/matter_synth/glass = new /datum/matter_synth/glass(40000)
@@ -393,6 +394,11 @@ var/global/list/robot_modules = list(
 	PL.synths = list(plasteel)
 	src.modules += PL
 
+	..()
+
+/obj/item/weapon/robot_module/engineering/general/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+	var/obj/item/device/lightreplacer/LR = locate() in src.modules
+	LR.Charge(R, amount)
 	..()
 
 /obj/item/weapon/robot_module/security
@@ -457,7 +463,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/mop(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent("lube", 250)
+	src.emag.reagents.add_reagent(/datum/reagent/lube, 250)
 	src.emag.name = "Lube spray"
 	..()
 
@@ -467,7 +473,7 @@ var/global/list/robot_modules = list(
 	LR.Charge(R, amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/S = src.emag
-		S.reagents.add_reagent("lube", 20 * amount)
+		S.reagents.add_reagent(/datum/reagent/lube, 20 * amount)
 
 /obj/item/weapon/robot_module/clerical
 	name = "service robot module"
@@ -478,9 +484,10 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SIIK_MAAS	= 1,
 					LANGUAGE_SIIK_TAJR	= 0,
 					LANGUAGE_SKRELLIAN	= 1,
-					LANGUAGE_TRADEBAND	= 1,
+					LANGUAGE_LUNAR	= 1,
 					LANGUAGE_GUTTER		= 1,
-					LANGUAGE_INDEPENDENT= 1
+					LANGUAGE_INDEPENDENT= 1,
+					LANGUAGE_SPACER = 1
 					)
 
 /obj/item/weapon/robot_module/clerical/butler
@@ -523,7 +530,7 @@ var/global/list/robot_modules = list(
 	var/datum/reagents/R = new/datum/reagents(50)
 	src.emag.reagents = R
 	R.my_atom = src.emag
-	R.add_reagent("beer2", 50)
+	R.add_reagent(/datum/reagent/chloralhydrate/beer2, 50)
 	src.emag.name = "Mickey Finn's Special Brew"
 	..()
 
@@ -545,16 +552,18 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/form_printer(src)
 	src.modules += new /obj/item/weapon/gripper/paperwork(src)
 	src.modules += new /obj/item/weapon/hand_labeler(src)
-	src.emag = new /obj/item/weapon/stamp/denied(src)
+	src.modules += new /obj/item/weapon/stamp(src)
+	src.modules += new /obj/item/weapon/stamp/denied(src)
+	src.emag = new /obj/item/weapon/stamp/chameleon(src)
 	..()
 
 /obj/item/weapon/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
-	E.reagents.add_reagent("enzyme", 2 * amount)
+	E.reagents.add_reagent(/datum/reagent/enzyme, 2 * amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/B = src.emag
-		B.reagents.add_reagent("beer2", 2 * amount)
+		B.reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 2 * amount)
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"

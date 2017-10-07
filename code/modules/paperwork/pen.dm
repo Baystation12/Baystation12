@@ -101,7 +101,7 @@
 
 /obj/item/weapon/pen/reagent/sleepy/New()
 	..()
-	reagents.add_reagent("chloralhydrate", 22)	//Used to be 100 sleep toxin//30 Chloral seems to be fatal, reducing it to 22./N
+	reagents.add_reagent(/datum/reagent/chloralhydrate, 22)	//Used to be 100 sleep toxin//30 Chloral seems to be fatal, reducing it to 22./N
 
 
 /*
@@ -112,8 +112,8 @@
 
 /obj/item/weapon/pen/reagent/paralysis/New()
 	..()
-	reagents.add_reagent("zombiepowder", 10)
-	reagents.add_reagent("cryptobiolin", 15)
+	reagents.add_reagent(/datum/reagent/toxin/zombiepowder, 10)
+	reagents.add_reagent(/datum/reagent/cryptobiolin, 15)
 
 /*
  * Chameleon pen
@@ -182,7 +182,7 @@
 	icon_state = "crayonred"
 	w_class = ITEM_SIZE_TINY
 	attack_verb = list("attacked", "coloured")
-	colour = "#FF0000" //RGB
+	colour = "#ff0000" //RGB
 	var/shadeColour = "#220000" //RGB
 	var/uses = 30 //0 for unlimited uses
 	var/instant = 0

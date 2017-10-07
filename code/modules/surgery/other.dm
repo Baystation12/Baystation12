@@ -176,7 +176,7 @@
 	if(istype(booze) && booze.strength >= 40)
 		to_chat(user, "<span class='warning'>[booze] is too weak, you need something of higher proof for this...</span>")
 		return 0
-	if(!istype(booze) && !container.reagents.has_reagent("sterilizine"))
+	if(!istype(booze) && !container.reagents.has_reagent(/datum/reagent/sterilizine))
 		return 0
 	return 1
 
@@ -214,7 +214,7 @@
 
 	container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
 
-	user.visible_message("<span class='warning'>[user]'s hand slips, splilling \the [tool]'s contents over the [target]'s [affected.name]!</span>" , \
-	"<span class='warning'>Your hand slips, splilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")
+	user.visible_message("<span class='warning'>[user]'s hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>" , \
+	"<span class='warning'>Your hand slips, spilling \the [tool]'s contents over the [target]'s [affected.name]!</span>")
 	affected.disinfect()
 

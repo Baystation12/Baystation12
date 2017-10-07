@@ -252,7 +252,7 @@
 	name = "unusual potted plant"
 	desc = "This is an unusual plant. It's bulbous ends emit a soft blue light."
 	icon_state = "plant-09"
-	set_light(l_range = 1, l_power = 0.5, l_color = "#0000FF")
+	set_light(l_range = 1, l_power = 0.5, l_color = "#0000ff")
 
 /obj/structure/flora/pottedplant/orientaltree
 	name = "potted oriental tree"
@@ -308,7 +308,7 @@
 	name = "subterranean potted plant"
 	desc = "This is a subterranean plant. It's bulbous ends glow faintly."
 	icon_state = "plant-20"
-	set_light(l_range = 1, l_power = 0.5, l_color = "#FF6633")
+	set_light(l_range = 1, l_power = 0.5, l_color = "#ff6633")
 
 /obj/structure/flora/pottedplant/minitree
 	name = "potted tree"

@@ -103,7 +103,7 @@
 	if(!invalidFeedTarget(M)) // Checks for those we want to eat
 		if(istype(M, /mob/living/carbon/human)) // Ignore slime(wo)men - player-controlled slimes still can attack them
 			var/mob/living/carbon/human/H = M
-			if(H.species.name == "Promethean")
+			if(H.species.name == SPECIES_PROMETHEAN)
 				return 0
 		return 1
 
@@ -172,7 +172,7 @@
 		for (var/mob/living/carbon/slime/S in view(1, src))
 			if (S != src)
 				frenemy = S
-		if (frenemy && prob(1))
+		if (frenemy && prob(1) && frenemy.Adjacent(src))
 			if (frenemy.colour == colour)
 				a_intent = I_HELP
 			else

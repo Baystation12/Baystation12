@@ -39,6 +39,7 @@
 	var/s_col_blend = ICON_ADD         // How the skin colour is applied.
 	var/list/h_col                     // hair colour
 	var/body_hair                      // Icon blend for body hair if any.
+	var/list/markings = list()         // Markings (body_markings) to apply to the icon
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
@@ -51,6 +52,9 @@
 	var/list/implants = list()         // Currently implanted objects.
 	var/base_miss_chance = 20          // Chance of missing.
 	var/genetic_degradation = 0
+
+	//Forensics stuff
+	var/list/autopsy_data = list()    // Trauma data for forensics.
 
 	// Joint/state stuff.
 	var/can_grasp                      // It would be more appropriate if these two were named "affects_grasp" and "affects_stand" at this point
@@ -66,8 +70,10 @@
 	var/artery_name = "artery"         // Flavour text for cartoid artery, aorta, etc.
 	var/arterial_bleed_severity = 1    // Multiplier for bleeding in a limb.
 	var/tendon_name = "tendon"         // Flavour text for Achilles tendon, etc.
+	var/cavity_name = "cavity"
 
 	// Surgery vars.
+	var/cavity_max_w_class = 0
 	var/hatch = 0
 	var/stage = 0
 	var/cavity = 0
@@ -84,8 +90,7 @@
 	if(owner)
 		replaced(owner)
 		sync_colour_to_human(owner)
-	spawn(1)
-		get_icon()
+	get_icon()
 
 /obj/item/organ/external/Destroy()
 
@@ -116,6 +121,9 @@
 		owner.organs_by_name -= organ_tag
 		while(null in owner.organs)
 			owner.organs -= null
+
+	if(autopsy_data)    autopsy_data.Cut()
+
 	return ..()
 
 /obj/item/organ/external/emp_act(severity)
@@ -128,8 +136,15 @@
 		if (3)
 			burn_damage = 3
 	burn_damage *= robotic/burn_mod //ignore burn mod for EMP damage
+	
+	var/power = 4 - severity //stupid reverse severity
+	for(var/obj/item/I in implants)
+		if(I.flags & CONDUCT)
+			burn_damage += I.w_class * rand(power, 3*power)
+
 	if(burn_damage)
-		take_damage(0, burn_damage)
+		owner.custom_pain("Something inside your [src] burns a [severity < 2 ? "bit" : "lot"]!", power * 15) //robotic organs won't feel it anyway
+		take_damage(0, burn_damage, 0, used_weapon = "Hot metal")
 
 /obj/item/organ/external/attack_self(var/mob/user)
 	if(!contents.len)
@@ -466,8 +481,7 @@ This function completely restores a damaged organ to perfect condition.
 			   PROCESSING & UPDATING
 ****************************************************/
 
-//external organs handle brokenness a bit differently when it comes to damage. Instead brute_dam is checked inside process()
-//this also ensures that an external organ cannot be "broken" without broken_description being set.
+//external organs handle brokenness a bit differently when it comes to damage.
 /obj/item/organ/external/is_broken()
 	return ((status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !splinted))
 
@@ -488,7 +502,7 @@ This function completely restores a damaged organ to perfect condition.
 		return 1
 	return 0
 
-/obj/item/organ/external/process()
+/obj/item/organ/external/Process()
 	if(owner)
 
 		if(pain)
@@ -499,13 +513,6 @@ This function completely restores a damaged organ to perfect condition.
 		// Process wounds, doing healing etc. Only do this every few ticks to save processing power
 		if(owner.life_tick % wound_update_accuracy == 0)
 			update_wounds()
-
-		//Chem traces slowly vanish
-		if(owner.life_tick % 10 == 0)
-			for(var/chemID in trace_chemicals)
-				trace_chemicals[chemID] = trace_chemicals[chemID] - 1
-				if(trace_chemicals[chemID] <= 0)
-					trace_chemicals.Remove(chemID)
 
 		//Infections
 		update_germs()
@@ -549,7 +556,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		handle_germ_effects()
 
 /obj/item/organ/external/proc/handle_germ_sync()
-	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/spaceacillin)
 	for(var/datum/wound/W in wounds)
 		//Open wounds can become infected
 		if (owner.germ_level > W.germ_level && W.infection_check())
@@ -567,7 +574,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(germ_level < INFECTION_LEVEL_TWO)
 		return ..()
 
-	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/spaceacillin)
 
 	if(germ_level >= INFECTION_LEVEL_TWO)
 		//spread the infection to internal organs
@@ -776,6 +783,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			stump.name = "stump of \a [name]"
 			stump.artery_name = "mangled [artery_name]"
 			stump.arterial_bleed_severity = arterial_bleed_severity
+			stump.add_pain(max_damage)
 			if(robotic >= ORGAN_ROBOT)
 				stump.robotize()
 			stump.wounds |= W
@@ -1213,12 +1221,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
 
 	var/list/wound_descriptors = list()
-	if(open() >= (encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
-		var/list/bits = list()
-		for(var/obj/item/organ/organ in internal_organs)
-			if(organ.damage)
-				bits += "[organ.damage ? "damaged " : ""][organ.name]"
-		wound_descriptors["an open incision with [english_list(bits)] visible in it"] = 1
 	for(var/datum/wound/W in wounds)
 		var/this_wound_desc = W.desc
 		if(W.damage_type == BURN && W.salved)
@@ -1241,6 +1243,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 			wound_descriptors[this_wound_desc] += W.amount
 		else
 			wound_descriptors[this_wound_desc] = W.amount
+
+	if(open() >= (encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
+		var/list/bits = list()
+		if(status & ORGAN_BROKEN)
+			bits += "broken bones"
+		for(var/obj/item/organ/organ in internal_organs)
+			bits += "[organ.damage ? "damaged " : ""][organ.name]"
+		if(bits.len)
+			wound_descriptors["[english_list(bits)] visible in the wounds"] = 1
 
 	for(var/wound in wound_descriptors)
 		switch(wound_descriptors[wound])
@@ -1334,4 +1345,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 		to_chat(target, "<span class='danger'>You feel extreme pain!</span>")
 
 		var/max_halloss = round(target.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
-		target.adjustHalLoss(Clamp(0, max_halloss - target.getHalLoss(), 30))
+		add_pain(Clamp(0, max_halloss - target.getHalLoss(), 30))
+
+//Adds autopsy data for used_weapon.
+/obj/item/organ/external/proc/add_autopsy_data(var/used_weapon, var/damage)
+	var/datum/autopsy_data/W = autopsy_data[used_weapon]
+	if(!W)
+		W = new()
+		W.weapon = used_weapon
+		autopsy_data[used_weapon] = W
+
+	W.hits += 1
+	W.damage += damage
+	W.time_inflicted = world.time

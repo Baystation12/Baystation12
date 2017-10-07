@@ -79,7 +79,7 @@
 
 /obj/item/clothing/gloves/thick/botany
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
-	name = "botanist's leather gloves"
+	name = "thick leather gloves"
 	icon_state = "leather"
 	item_state = "ggloves"
 
@@ -97,14 +97,6 @@
 	desc = "Sterile nitrile gloves"
 	icon_state = "nitrile"
 	item_state = "ngloves"
-
-/obj/item/clothing/gloves/botanic_leather
-	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
-	name = "botanist's leather gloves"
-	icon_state = "leather"
-	item_state = "ggloves"
-	permeability_coefficient = 0.05
-	siemens_coefficient = 0.50 //thick work gloves
 
 /obj/item/clothing/gloves/duty
 	desc = "These brown duty gloves are made from a durable synthetic."

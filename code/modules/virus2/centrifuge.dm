@@ -77,7 +77,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/computer/centrifuge/process()
+/obj/machinery/computer/centrifuge/Process()
 	..()
 	if (stat & (NOPOWER|BROKEN)) return
 
@@ -126,7 +126,7 @@
 				return 1
 
 			var/has_toxins = locate(/datum/reagent/toxin) in sample.reagents.reagent_list
-			var/has_radium = sample.reagents.has_reagent("radium")
+			var/has_radium = sample.reagents.has_reagent(/datum/reagent/radium)
 			if (has_toxins || has_radium)
 				state("\The [src] beeps, \"Pathogen purging speed above nominal.\"", "blue")
 				if (has_toxins)
@@ -153,9 +153,9 @@
 	if (!B) return
 
 	var/list/data = list("antibodies" = B.data["antibodies"])
-	var/amt= sample.reagents.get_reagent_amount("blood")
-	sample.reagents.remove_reagent("blood", amt)
-	sample.reagents.add_reagent("antibodies", amt, data)
+	var/amt= sample.reagents.get_reagent_amount(/datum/reagent/blood)
+	sample.reagents.remove_reagent(/datum/reagent/blood, amt)
+	sample.reagents.add_reagent(/datum/reagent/antibodies, amt, data)
 
 	GLOB.nanomanager.update_uis(src)
 	update_icon()

@@ -2,7 +2,7 @@
 //Thanks to Kilakk for the admin-button portion of this code.
 
 var/global/send_emergency_team = 0 // Used for automagic response teams
-                                   // 'admin_emergency_team' for admin-spawned response teams
+								   // 'admin_emergency_team' for admin-spawned response teams
 var/ert_base_chance = 10 // Default base chance. Will be incremented by increment ERT chance.
 var/can_call_ert
 
@@ -25,8 +25,10 @@ var/can_call_ert
 		return
 	if(alert("Do you want to dispatch an Emergency Response Team?",,"Yes","No") != "Yes")
 		return
-	if(get_security_level() != "red") // Allow admins to reconsider if the alert level isn't Red
-		switch(alert("Red alert is not set. Do you still want to dispatch a response team?",,"Yes","No"))
+
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	if(security_state.current_security_level_is_lower_than(security_state.high_security_level)) // Allow admins to reconsider if the alert level is below High
+		switch(alert("Current security level lower than [security_state.high_security_level.name]. Do you still want to dispatch a response team?",,"Yes","No"))
 			if("No")
 				return
 	if(send_emergency_team)
@@ -64,7 +66,7 @@ client/verb/JoinResponseTeam()
 proc/percentage_dead()
 	var/total = 0
 	var/deadcount = 0
-	for(var/mob/living/carbon/human/H in GLOB.mob_list)
+	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
 		if(H.client) // Monkeys and mice don't have a client, amirite?
 			if(H.stat == 2) deadcount++
 			total++
@@ -76,7 +78,7 @@ proc/percentage_dead()
 proc/percentage_antagonists()
 	var/total = 0
 	var/antagonists = 0
-	for(var/mob/living/carbon/human/H in GLOB.mob_list)
+	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
 		if(is_special_character(H) >= 1)
 			antagonists++
 		total++
@@ -88,14 +90,9 @@ proc/percentage_antagonists()
 // the more likely an ERT is to be able to be called.
 proc/increment_ert_chance()
 	while(send_emergency_team == 0) // There is no ERT at the time.
-		if(get_security_level() == "green")
-			ert_base_chance += 1
-		if(get_security_level() == "blue")
-			ert_base_chance += 2
-		if(get_security_level() == "red")
-			ert_base_chance += 3
-		if(get_security_level() == "delta")
-			ert_base_chance += 10           // Need those big guns
+		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		var/index = security_state.all_security_levels.Find(security_state.current_security_level)
+		ert_base_chance += 2**index
 		sleep(600 * 3) // Minute * Number of Minutes
 
 

@@ -25,7 +25,7 @@
 
 		var/list/data = list("donor" = null, "blood_DNA" = null, "blood_type" = null, "trace_chem" = null, "virus2" = list(), "antibodies" = list())
 		data["virus2"] |= I:virus2
-		product.reagents.add_reagent("blood",30,data)
+		product.reagents.add_reagent(/datum/reagent/blood,30,data)
 
 		virusing = 1
 		spawn(1200) virusing = 0
@@ -65,7 +65,7 @@
 	onclose(user, "computer")
 	return
 
-/obj/machinery/computer/curer/process()
+/obj/machinery/computer/curer/Process()
 	..()
 
 	if(stat & (NOPOWER|BROKEN))
@@ -101,6 +101,6 @@
 
 	var/list/data = list()
 	data["antibodies"] = B.data["antibodies"]
-	product.reagents.add_reagent("antibodies",30,data)
+	product.reagents.add_reagent(/datum/reagent/antibodies,30,data)
 
 	state("\The [src.name] buzzes", "blue")

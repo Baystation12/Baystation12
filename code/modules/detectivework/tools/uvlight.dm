@@ -21,18 +21,18 @@
 	on = !on
 	if(on)
 		set_light(range, 2, "#007fff")
-		GLOB.processing_objects |= src
+		START_PROCESSING(SSobj, src)
 		icon_state = "uv_on"
 	else
 		set_light(0)
 		clear_last_scan()
-		GLOB.processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 		icon_state = "uv_off"
 
 /obj/item/device/uv_light/proc/clear_last_scan()
 	if(scanned.len)
 		for(var/atom/O in scanned)
-			O.invisibility = scanned[O]
+			O.set_invisibility(scanned[O])
 			if(O.fluorescent == 2) O.fluorescent = 1
 		scanned.Cut()
 	if(stored_alpha.len)
@@ -46,7 +46,7 @@
 			if(I.fluorescent == 2) I.fluorescent = 1
 		reset_objects.Cut()
 
-/obj/item/device/uv_light/process()
+/obj/item/device/uv_light/Process()
 	clear_last_scan()
 	if(on)
 		step_alpha = round(255/range)
@@ -60,7 +60,7 @@
 					A.fluorescent = 2 //To prevent light crosstalk.
 					if(A.invisibility)
 						scanned[A] = A.invisibility
-						A.invisibility = 0
+						A.set_invisibility(0)
 						stored_alpha[A] = A.alpha
 						A.alpha = use_alpha
 					if(istype(A, /obj/item))

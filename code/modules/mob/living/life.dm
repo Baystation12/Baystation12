@@ -31,11 +31,6 @@
 		handle_stomach()
 
 		. = 1
-	else if(timeofdeath && (world.time - timeofdeath < 150))
-		//This is to make dead people process reagents for a few ticks, so they can be treated and defibrilated
-		handle_chemicals_in_body()
-
-		. = 1
 
 	//Handle temperature/pressure differences between body and environment
 	if(environment)
@@ -47,7 +42,7 @@
 	update_pulling()
 
 	for(var/obj/item/grab/G in src)
-		G.process()
+		G.Process()
 
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()

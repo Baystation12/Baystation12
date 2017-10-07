@@ -66,18 +66,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			return_name = "Diamond"
 	return return_name
 
-/obj/machinery/computer/rdconsole/proc/CallReagentName(var/ID)
-	var/return_name = ID
-	var/datum/reagent/temp_reagent
-	for(var/R in (typesof(/datum/reagent) - /datum/reagent))
-		temp_reagent = null
-		temp_reagent = new R()
-		if(temp_reagent.id == ID)
-			return_name = temp_reagent.name
-			qdel(temp_reagent)
-			temp_reagent = null
-			break
-	return return_name
+/obj/machinery/computer/rdconsole/proc/CallReagentName(var/reagent_type)
+	var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_type]
+	return R ? R.name : "Unknown"
 
 /obj/machinery/computer/rdconsole/proc/SyncRDevices() //Makes sure it is properly sync'ed up with the devices attached to it (if any).
 	for(var/obj/machinery/r_n_d/D in range(3, src))
@@ -101,7 +92,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	files.AddDesign2Known(new /datum/design/prefab(files,create_prefab_from_assembly(assembly)))
 
 /obj/machinery/computer/rdconsole/proc/griefProtection() //Have it automatically push research to the centcomm server so wild griffins can't fuck up R&D's work
-	for(var/obj/machinery/r_n_d/server/centcom/C in GLOB.machines)
+	for(var/obj/machinery/r_n_d/server/centcom/C in SSmachines.machinery)
 		for(var/datum/tech/T in files.known_tech)
 			C.files.AddTech2Known(T)
 		for(var/datum/design/D in files.known_designs)
@@ -112,7 +103,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	..()
 	files = new /datum/research(src) //Setup the research data holder.
 	if(!id)
-		for(var/obj/machinery/r_n_d/server/centcom/S in GLOB.machines)
+		for(var/obj/machinery/r_n_d/server/centcom/S in SSmachines.machinery)
 			S.update_connections()
 			break
 
@@ -285,7 +276,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			griefProtection() //Putting this here because I dont trust the sync process
 			spawn(30)
 				if(src)
-					for(var/obj/machinery/r_n_d/server/S in GLOB.machines)
+					for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
 						var/server_processed = 0
 						if((id in S.id_with_upload) || istype(S, /obj/machinery/r_n_d/server/centcom))
 							for(var/datum/tech/T in files.known_tech)
@@ -335,7 +326,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		updateUsrDialog()
 
 	else if(href_list["disposeI"] && linked_imprinter)  //Causes the circuit imprinter to dispose of a single reagent (all of it)
-		linked_imprinter.reagents.del_reagent(href_list["dispose"])
+		var/datum/reagent/R = locate(href_list["disposeI"]) in linked_imprinter.reagents.reagent_list
+		if(R)
+			linked_imprinter.reagents.del_reagent(href_list["dispose"])
 
 	else if(href_list["disposeallI"] && linked_imprinter) //Causes the circuit imprinter to dispose of all it's reagents.
 		linked_imprinter.reagents.clear_reagents()
@@ -344,7 +337,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		linked_imprinter.removeFromQueue(text2num(href_list["removeI"]))
 
 	else if(href_list["disposeP"] && linked_lathe)  //Causes the protolathe to dispose of a single reagent (all of it)
-		linked_lathe.reagents.del_reagent(href_list["dispose"])
+		var/datum/reagent/R = locate(href_list["disposeP"]) in linked_lathe.reagents.reagent_list
+		if(R)
+			linked_lathe.reagents.del_reagent(R.type)
 
 	else if(href_list["disposeallP"] && linked_lathe) //Causes the protolathe to dispose of all it's reagents.
 		linked_lathe.reagents.clear_reagents()
@@ -683,7 +678,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Chemical Storage<BR><HR>"
 			for(var/datum/reagent/R in linked_lathe.reagents.reagent_list)
 				dat += "Name: [R.name] | Units: [R.volume] "
-				dat += "<A href='?src=\ref[src];disposeP=[R.id]'>(Purge)</A><BR>"
+				dat += "<A href='?src=\ref[src];disposeP=\ref[R]'>(Purge)</A><BR>"
 				dat += "<A href='?src=\ref[src];disposeallP=1'><U>Disposal All Chemicals in Storage</U></A><BR>"
 
 		if(3.4) // Protolathe queue
@@ -740,7 +735,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Chemical Storage<BR><HR>"
 			for(var/datum/reagent/R in linked_imprinter.reagents.reagent_list)
 				dat += "Name: [R.name] | Units: [R.volume] "
-				dat += "<A href='?src=\ref[src];disposeI=[R.id]'>(Purge)</A><BR>"
+				dat += "<A href='?src=\ref[src];disposeI=\ref[R]'>(Purge)</A><BR>"
 				dat += "<A href='?src=\ref[src];disposeallI=1'><U>Disposal All Chemicals in Storage</U></A><BR>"
 
 		if(4.3)

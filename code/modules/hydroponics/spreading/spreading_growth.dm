@@ -8,9 +8,25 @@
 			cardinal_neighbors |= T
 	return cardinal_neighbors
 
+/obj/effect/plant/proc/get_zlevel_neighbors()
+	var/list/zlevel_neighbors = list()
+
+	var/turf/start = loc
+	var/turf/up = GetAbove(loc)
+	var/turf/down = GetBelow(loc)
+
+	if(start && start.CanZPass(src, DOWN))
+		zlevel_neighbors += down
+	if(up && up.CanZPass(src, UP))
+		zlevel_neighbors += up
+
+	return zlevel_neighbors
+
 /obj/effect/plant/proc/update_neighbors()
 	// Update our list of valid neighboring turfs.
+
 	neighbors = list()
+
 	for(var/turf/simulated/floor in get_cardinal_neighbors())
 		if(get_dist(parent, floor) > spread_distance)
 			continue
@@ -24,7 +40,7 @@
 			continue
 
 		if(floor.density)
-			if(!isnull(seed.chems["pacid"]))
+			if(!isnull(seed.chems[/datum/reagent/acid/polyacid]))
 				spawn(rand(5,25)) floor.ex_act(3)
 			continue
 
@@ -32,6 +48,8 @@
 			continue
 
 		neighbors |= floor
+
+	neighbors |= get_zlevel_neighbors()
 
 	if(neighbors.len)
 		plant_controller.add_plant(src) //if we have neighbours again, start processing
@@ -42,37 +60,37 @@
 		if(neighbor.seed == src.seed)
 			neighbor.neighbors -= T
 
-/obj/effect/plant/process()
-
+/obj/effect/plant/Process(var/grow = 1)
 	// Something is very wrong, kill ourselves.
 	if(!seed)
 		die_off()
 		return 0
 
 	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
-		if(smoke.reagents.has_reagent("plantbgone"))
+		if(smoke.reagents.has_reagent(/datum/reagent/toxin/plantbgone))
 			die_off()
 			return
 
-	// Handle life.
-	var/turf/simulated/T = get_turf(src)
-	if(istype(T))
-		health -= seed.handle_environment(T,T.return_air(),null,1)
-	if(health < max_health)
-		health += rand(3,5)
-		refresh_icon()
-	if(health > max_health)
-		health = max_health
-	if(health == max_health && !plant)
-		plant = new(T,seed)
-		plant.dir = src.dir
-		plant.transform = src.transform
-		plant.age = seed.get_trait(TRAIT_MATURATION)-1
-		plant.update_icon()
-		if(growth_type==0) //Vines do not become invisible.
-			invisibility = INVISIBILITY_MAXIMUM
-		else
-			plant.layer = layer + 0.1
+	if(grow)
+		// Handle life.
+		var/turf/simulated/T = get_turf(src)
+		if(istype(T))
+			health -= seed.handle_environment(T,T.return_air(),null,1)
+		if(health < max_health)
+			health += rand(3,5)
+			refresh_icon()
+		if(health > max_health)
+			health = max_health
+		if(health == max_health && !plant && istype(T) && !T.CanZPass(src, DOWN))
+			plant = new(T,seed)
+			plant.dir = src.dir
+			plant.transform = src.transform
+			plant.age = seed.get_trait(TRAIT_MATURATION)-1
+			plant.update_icon()
+			if(growth_type==0) //Vines do not become invisible.
+				set_invisibility(INVISIBILITY_MAXIMUM)
+			else
+				plant.layer = layer + 0.1
 
 	if(buckled_mob)
 		seed.do_sting(buckled_mob,src)
@@ -80,7 +98,7 @@
 			seed.do_thorns(buckled_mob,src)
 
 	if(world.time >= last_tick+NEIGHBOR_REFRESH_TIME)
-		last_tick = world.time
+		if(!grow)	last_tick = world.time
 		update_neighbors()
 
 	if(sampled)
@@ -90,25 +108,25 @@
 			sampled = 0
 
 	if(is_mature() && !buckled_mob)
-		for(var/turf/neighbor in neighbors)
+		for(var/turf/neighbor in (neighbors | loc))
 			for(var/mob/living/M in neighbor)
 				if(seed.get_trait(TRAIT_SPREAD) >= 2 && (M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)))))
 					entangle(M)
 
-	if(is_mature() && neighbors.len && prob(spread_chance))
+	if(is_mature() && neighbors.len)
 		//spread to 1-3 adjacent turfs depending on yield trait.
 		var/max_spread = between(1, round(seed.get_trait(TRAIT_YIELD)*3/14), 3)
-
 		for(var/i in 1 to max_spread)
 			if(prob(spread_chance))
 				sleep(rand(3,5))
 				if(!neighbors.len)
 					break
 				spread_to(pick(neighbors))
+				update_neighbors()
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
-	if(buckled_mob || neighbors.len)
+	if(buckled_mob || neighbors.len || !plant)
 		plant_controller.add_plant(src)
 
 //spreading vines aren't created on their final turf.
@@ -122,7 +140,7 @@
 
 		//move out to the destination
 		child.anchored = 0
-		step_to(child, target_turf)
+		child.Move(target_turf)
 		child.anchored = 1
 		child.update_icon()
 
@@ -150,12 +168,12 @@
 
 		child.finish_spreading()
 
-
 /obj/effect/plant/proc/die_off()
 	// Kill off our plant.
 	if(plant) plant.die()
 	// This turf is clear now, let our buddies know.
-	for(var/turf/simulated/check_turf in get_cardinal_neighbors())
+	update_neighbors()
+	for(var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors()))
 		if(!istype(check_turf))
 			continue
 		for(var/obj/effect/plant/neighbor in check_turf.contents)

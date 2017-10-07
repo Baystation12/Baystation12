@@ -5,7 +5,7 @@
 	icon_state = "candle1"
 	item_state = "candle1"
 	w_class = ITEM_SIZE_TINY
-	light_color = "#E09D37"
+	light_color = "#e09d37"
 	var/wax = 2000
 
 /obj/item/weapon/flame/candle/New()
@@ -49,10 +49,10 @@
 		for(var/mob/O in viewers(usr, null))
 			O.show_message(flavor_text, 1)
 		set_light(CANDLE_LUM)
-		GLOB.processing_objects.Add(src)
+		START_PROCESSING(SSobj, src)
 
 
-/obj/item/weapon/flame/candle/process()
+/obj/item/weapon/flame/candle/Process()
 	if(!lit)
 		return
 	wax--

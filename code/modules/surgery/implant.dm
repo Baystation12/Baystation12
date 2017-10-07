@@ -17,26 +17,6 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	return affected && affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
 
-/datum/surgery_step/cavity/proc/get_max_wclass(var/obj/item/organ/external/affected)
-	switch (affected.organ_tag)
-		if (BP_HEAD)
-			return 1
-		if (BP_CHEST)
-			return 3
-		if (BP_GROIN)
-			return 2
-	return 0
-
-/datum/surgery_step/cavity/proc/get_cavity(var/obj/item/organ/external/affected)
-	switch (affected.organ_tag)
-		if (BP_HEAD)
-			return "cranial"
-		if (BP_CHEST)
-			return "thoracic"
-		if (BP_GROIN)
-			return "abdominal"
-	return ""
-
 /datum/surgery_step/cavity/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'>[user]'s hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</span>", \
@@ -63,16 +43,16 @@
 
 /datum/surgery_step/cavity/make_space/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts making some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].", \
-	"You start making some space inside [target]'s [get_cavity(affected)] cavity with \the [tool]." )
+	user.visible_message("[user] starts making some space inside [target]'s [affected.cavity_name] cavity with \the [tool].", \
+	"You start making some space inside [target]'s [affected.cavity_name] cavity with \the [tool]." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
 	affected.cavity = 1
 	..()
 
 /datum/surgery_step/cavity/make_space/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='notice'>[user] makes some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].</span>", \
-	"<span class='notice'>You make some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].</span>" )
+	user.visible_message("<span class='notice'>[user] makes some space inside [target]'s [affected.cavity_name] cavity with \the [tool].</span>", \
+	"<span class='notice'>You make some space inside [target]'s [affected.cavity_name] cavity with \the [tool].</span>" )
 
 //////////////////////////////////////////////////////////////////
 //	 implant cavity sealing surgery step
@@ -96,16 +76,16 @@
 
 /datum/surgery_step/cavity/close_space/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts mending [target]'s [get_cavity(affected)] cavity wall with \the [tool].", \
-	"You start mending [target]'s [get_cavity(affected)] cavity wall with \the [tool]." )
+	user.visible_message("[user] starts mending [target]'s [affected.cavity_name] cavity wall with \the [tool].", \
+	"You start mending [target]'s [affected.cavity_name] cavity wall with \the [tool]." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
 	affected.cavity = 0
 	..()
 
 /datum/surgery_step/cavity/close_space/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-	user.visible_message("<span class='notice'>[user] mends [target]'s [get_cavity(affected)] cavity walls with \the [tool].</span>", \
-	"<span class='notice'>You mend [target]'s [get_cavity(affected)] cavity walls with \the [tool].</span>" )
+	user.visible_message("<span class='notice'>[user] mends [target]'s [affected.cavity_name] cavity walls with \the [tool].</span>", \
+	"<span class='notice'>You mend [target]'s [affected.cavity_name] cavity walls with \the [tool].</span>" )
 
 //////////////////////////////////////////////////////////////////
 //	 implanting surgery step
@@ -123,11 +103,10 @@
 		if(istype(user,/mob/living/silicon/robot))
 			return FALSE
 		if(affected && affected.cavity)
-			var/max_w_class = get_max_wclass(affected)
-			var/max_volume = base_storage_capacity(max_w_class)
+			var/max_volume = base_storage_capacity(affected.cavity_max_w_class)
 
-			if(tool.w_class > max_w_class)
-				to_chat(user, "<span class='warning'>\The [tool] is too big for this cavity.</span>")
+			if(tool.w_class > affected.cavity_max_w_class)
+				to_chat(user, "<span class='warning'>\The [tool] is too big for [affected.cavity_name] cavity.</span>")
 				return FALSE
 
 			var/total_volume = tool.get_storage_cost()
@@ -136,15 +115,15 @@
 					continue
 				total_volume += I.get_storage_cost()
 			if(total_volume > max_volume)
-				to_chat(user, "<span class='warning'>There isn't enough space left in this cavity for [tool].</span>")
+				to_chat(user, "<span class='warning'>There isn't enough space left in [affected.cavity_name] cavity for [tool].</span>")
 				return FALSE
 			return TRUE
 
 
 /datum/surgery_step/cavity/place_item/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts putting \the [tool] inside [target]'s [get_cavity(affected)] cavity.", \
-	"You start putting \the [tool] inside [target]'s [get_cavity(affected)] cavity." )
+	user.visible_message("[user] starts putting \the [tool] inside [target]'s [affected.cavity_name] cavity.", \
+	"You start putting \the [tool] inside [target]'s [affected.cavity_name] cavity." )
 	target.custom_pain("The pain in your chest is living hell!",1,affecting = affected)
 	playsound(target.loc, 'sound/effects/squelch1.ogg', 25, 1)
 	..()
@@ -152,9 +131,9 @@
 /datum/surgery_step/cavity/place_item/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 
-	user.visible_message("<span class='notice'>[user] puts \the [tool] inside [target]'s [get_cavity(affected)] cavity.</span>", \
-	"<span class='notice'>You put \the [tool] inside [target]'s [get_cavity(affected)] cavity.</span>" )
-	if (tool.w_class > get_max_wclass(affected)/2 && prob(50) && !(affected.robotic >= ORGAN_ROBOT) && affected.sever_artery())
+	user.visible_message("<span class='notice'>[user] puts \the [tool] inside [target]'s [affected.cavity_name] cavity.</span>", \
+	"<span class='notice'>You put \the [tool] inside [target]'s [affected.cavity_name] cavity.</span>" )
+	if (tool.w_class > affected.cavity_max_w_class/2 && prob(50) && !(affected.robotic >= ORGAN_ROBOT) && affected.sever_artery())
 		to_chat(user, "<span class='warning'>You tear some blood vessels trying to fit such a big object in this cavity.</span>")
 		affected.owner.custom_pain("You feel something rip in your [affected.name]!", 1,affecting = affected)
 	user.drop_item()

@@ -263,7 +263,7 @@
 
 /mob/proc/TurfAdjacent(var/turf/T)
 	return T.AdjacentQuick(src)
-    
+
 /mob/observer/ghost/TurfAdjacent(var/turf/T)
 	if(!isturf(loc) || !client)
 		return FALSE

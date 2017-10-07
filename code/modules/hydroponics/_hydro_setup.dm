@@ -1,5 +1,5 @@
 //Misc
-#define DEAD_PLANT_COLOUR "#C2A180"
+#define DEAD_PLANT_COLOUR "#c2a180"
 
 // Definitions for genes (trait groupings)
 #define GENE_BIOCHEMISTRY "biochemistry"
@@ -26,7 +26,7 @@
 #define TRAIT_PRODUCES_POWER       6
 #define TRAIT_JUICY                7
 #define TRAIT_PRODUCT_ICON         8
-#define TRAIT_PLANT_ICON           0
+#define TRAIT_PLANT_ICON           9
 #define TRAIT_CONSUME_GASSES       10
 #define TRAIT_REQUIRES_NUTRIENTS   11
 #define TRAIT_NUTRIENT_CONSUMPTION 12
@@ -57,3 +57,10 @@
 #define TRAIT_BIOLUM_COLOUR        37
 #define TRAIT_IMMUTABLE            38
 #define TRAIT_FLESH_COLOUR         39
+
+// Seed noun datums
+#define SEED_NOUN_SPORES          "spores"
+#define SEED_NOUN_PITS            "pits"
+#define SEED_NOUN_NODES           "notes"
+#define SEED_NOUN_CUTTINGS        "cuttings"
+#define SEED_NOUN_SEEDS           "seeds"

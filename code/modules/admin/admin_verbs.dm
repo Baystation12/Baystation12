@@ -201,7 +201,9 @@ var/list/admin_verbs_debug = list(
 	/datum/admins/proc/capture_map,
 	/datum/admins/proc/view_runtimes,
 	/client/proc/cmd_analyse_health_context,
-	/client/proc/cmd_analyse_health_panel
+	/client/proc/cmd_analyse_health_panel,
+	/client/proc/visualpower,
+	/client/proc/visualpower_remove
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
@@ -434,11 +436,11 @@ var/list/admin_verbs_mentor = list(
 	set desc = "Toggles ghost-like invisibility (Don't abuse this)"
 	if(holder && mob)
 		if(mob.invisibility == INVISIBILITY_OBSERVER)
-			mob.invisibility = initial(mob.invisibility)
+			mob.set_invisibility(initial(mob.invisibility))
 			to_chat(mob, "<span class='danger'>Invisimin off. Invisibility reset.</span>")
 			mob.alpha = max(mob.alpha + 100, 255)
 		else
-			mob.invisibility = INVISIBILITY_OBSERVER
+			mob.set_invisibility(INVISIBILITY_OBSERVER)
 			to_chat(mob, "<span class='notice'>Invisimin on. You are now as invisible as a ghost.</span>")
 			mob.alpha = max(mob.alpha - 100, 0)
 
@@ -588,7 +590,7 @@ var/list/admin_verbs_mentor = list(
 	log_and_message_admins("created an admin explosion at [epicenter.loc].")
 	feedback_add_details("admin_verb","DB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/give_disease2(mob/T as mob in GLOB.mob_list) // -- Giacom
+/client/proc/give_disease2(mob/T as mob in SSmobs.mob_list) // -- Giacom
 	set category = "Fun"
 	set name = "Give Disease"
 	set desc = "Gives a Disease to a mob."
@@ -784,13 +786,15 @@ var/list/admin_verbs_mentor = list(
 	set category = "Admin"
 
 	if(!check_rights(R_ADMIN))	return
-	var sec_level = input(usr, "It's currently code [get_security_level()].", "Select Security Level")  as null|anything in (list("green","blue","red","delta")-get_security_level())
-	if(!sec_level)
+
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+
+	var/decl/security_level/new_security_level = input(usr, "It's currently [security_state.current_security_level.name].", "Select Security Level")  as null|anything in (security_state.all_security_levels - security_state.current_security_level)
+	if(!new_security_level)
 		return
 
-	if(alert("Switch from code [get_security_level()] to code [sec_level]?","Change security level?","Yes","No") == "Yes")
-		log_and_message_admins("changed the security level from code [get_security_level()] to code [sec_level].")
-		set_security_level(sec_level)
+	if(alert("Switch from [security_state.current_security_level.name] to [new_security_level.name]?","Change security level?","Yes","No") == "Yes")
+		security_state.set_security_level(new_security_level, TRUE)
 
 
 //---- bs12 verbs ----
@@ -923,7 +927,7 @@ var/list/admin_verbs_mentor = list(
 			to_chat(src, "<b>Enabled maint drones.</b>")
 			message_admins("Admin [key_name_admin(usr)] has enabled maint drones.", 1)
 
-/client/proc/man_up(mob/T as mob in GLOB.mob_list)
+/client/proc/man_up(mob/T as mob in SSmobs.mob_list)
 	set category = "Fun"
 	set name = "Man Up"
 	set desc = "Tells mob to man up and deal with it."
@@ -938,13 +942,13 @@ var/list/admin_verbs_mentor = list(
 	set name = "Man Up Global"
 	set desc = "Tells everyone to man up and deal with it."
 
-	for (var/mob/T as mob in GLOB.mob_list)
+	for (var/mob/T as mob in SSmobs.mob_list)
 		to_chat(T, "<br><center><span class='notice'><b><font size=4>Man up.<br> Deal with it.</font></b><br>Move on.</span></center><br>")
 		sound_to(T, 'sound/voice/ManUp1.ogg')
 
 	log_and_message_admins("told everyone to man up and deal with it.")
 
-/client/proc/give_spell(mob/T as mob in GLOB.mob_list) // -- Urist
+/client/proc/give_spell(mob/T as mob in SSmobs.mob_list) // -- Urist
 	set category = "Fun"
 	set name = "Give Spell"
 	set desc = "Gives a spell to a mob."

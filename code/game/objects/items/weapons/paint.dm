@@ -16,7 +16,7 @@ var/global/list/cached_icons = list()
 	volume = 60
 	unacidable = 0
 	flags = OPENCONTAINER
-	var/paint_hex = "#FE191A"
+	var/paint_hex = "#fe191a"
 
 /obj/item/weapon/reagent_containers/glass/paint/afterattack(turf/simulated/target, mob/user, proximity)
 	if(!proximity) return
@@ -29,32 +29,32 @@ var/global/list/cached_icons = list()
 /obj/item/weapon/reagent_containers/glass/paint/New()
 	..()
 	if(paint_hex && lentext(paint_hex) > 0)
-		reagents.add_reagent("paint", volume, paint_hex)
+		reagents.add_reagent(/datum/reagent/paint, volume, paint_hex)
 
 /obj/item/weapon/reagent_containers/glass/paint/red
 	name = "red paint bucket"
 	icon_state = "paint_red"
-	paint_hex = "#FE191A"
+	paint_hex = "#fe191a"
 
 /obj/item/weapon/reagent_containers/glass/paint/yellow
 	name = "yellow paint bucket"
 	icon_state = "paint_yellow"
-	paint_hex = "#FDFE7D"
+	paint_hex = "#fdfe7d"
 
 /obj/item/weapon/reagent_containers/glass/paint/green
 	name = "green paint bucket"
 	icon_state = "paint_green"
-	paint_hex = "#18A31A"
+	paint_hex = "#18a31a"
 
 /obj/item/weapon/reagent_containers/glass/paint/blue
 	name = "blue paint bucket"
 	icon_state = "paint_blue"
-	paint_hex = "#247CFF"
+	paint_hex = "#247cff"
 
 /obj/item/weapon/reagent_containers/glass/paint/purple
 	name = "purple paint bucket"
 	icon_state = "paint_violet"
-	paint_hex = "#CC0099"
+	paint_hex = "#cc0099"
 
 /obj/item/weapon/reagent_containers/glass/paint/black
 	name = "black paint bucket"
@@ -64,7 +64,7 @@ var/global/list/cached_icons = list()
 /obj/item/weapon/reagent_containers/glass/paint/white
 	name = "white paint bucket"
 	icon_state = "paint_white"
-	paint_hex = "#F0F8FF"
+	paint_hex = "#f0f8ff"
 
 /obj/item/weapon/reagent_containers/glass/paint/random
 	name = "odd paint bucket"

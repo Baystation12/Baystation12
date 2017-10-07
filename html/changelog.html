@@ -56,6 +56,369 @@
 		
 		-->
 		<div class="commit sansserif">
+			<h2 class="date">03 October 2017</h2>
+			<h3 class="author">Broseph Stylin updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added some code by Techhead that allows for accessories to have and transfer armor values to the item they are attached to.</li>
+				<li class="rscadd">Added a modular armor system based around a common plate carrier and accessories that attach to it.</li>
+				<li class="maptweak">Replaced the armor vests and arm guards found inside the Emergency Armory with equivalents using the new modular armor system.</li>
+			</ul>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Shrapnel is less deadly now. Tiny items don't jostle around anymore. They still prevent wounds they're embedded in from healing.</li>
+				<li class="rscdel">Conductive things embedded in body will heat up in EMP, dealing damage depending on their size and EMP severity.</li>
+				<li class="rscadd">Brainwashing implants! Well, kinda. XO now has a box of 'imprinting' implants, that can be set to a list of instructions, and will remind about those to whoever is implanted with it. Latest word in grimdark on-job training. They're not binding, just reminders.</li>
+				<li class="rscadd">Now the fun part is their abuse - when victim has mindbreaker in blood and implanted with those, implant wires deep enough to fool host that he actually believes these. Think borg laws. You can get the kit in uplink too, bundled with a dose of mindbreaker</li>
+				<li class="rscadd">Can now emag practice carbines to get lethal lasers out of them. They'll turn useless after 3-6 shots so bring a lot! Costs an emag charge.</li>
+				<li class="rscadd">Not having enough air in lungs will prevent you from talking efficiently. If you don't have air at all, you might use remaining air in lungs for one message. If you're just not getting enough, you'll be stuck whispering. Long messages might come out garbled.</li>
+			</ul>
+			<h3 class="author">FTangSteve updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added a push back disarm attack for GAS.</li>
+				<li class="rscadd">Added examine text and a message for GAS stance.</li>
+				<li class="rscadd">Adds in some of the GAS event things like the threat display and associated sounds.</li>
+				<li class="rscadd">Cutlets can now be added to the organ printer as well as full slabs of meat.</li>
+				<li class="rscadd">Adds a few cameras to hangar and to exploration with a network for each.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Converts the machine, mob, and obj processes to subsystems.</li>
+			</ul>
+			<h3 class="author">SierraKomodo updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Changed wording of maintenance drone laws from 'do not interfere' to 'do not interact' to better fit the spirit of the law and staff policy.</li>
+			</ul>
+
+			<h2 class="date">28 September 2017</h2>
+			<h3 class="author">Banditoz updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">Adds tintable windows to the Robotics Surgical Theater.</li>
+			</ul>
+			<h3 class="author">Broseph Stylin updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added an Exploration department-specific voidsuit. It has the same stats of an excavation voidsuit.</li>
+				<li class="rscadd">Added Exploration department-specific colored uniforms and PDAs.</li>
+				<li class="rscadd">Added lockers for the Pathfinder and Explorers.</li>
+				<li class="maptweak">An Exploration Equipment area which can only be accessed by the Exploration department has been mapped on Deck 4 Aft.</li>
+			</ul>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Pulse now affects blood circulation. Lower pulse effectively lowers it and vice versa.</li>
+				<li class="rscadd">Extremely high pulse risks damaging the heart. Shouldn't be a lot, but it's there.</li>
+				<li class="rscadd">As you lose blood oxygenation, your pulse tries to rise to compensate. Thready (>250) pulse will cause a cardiac arrest.</li>
+				<li class="rscadd">Inaprovaline tries to bring pulse to normal levels, either up or down. It also prevents thready pulse.</li>
+				<li class="rscadd">Heart stopping is slightly less 100% surefire, so if you manage to get heart restarted it might beat for few ticks first.</li>
+				<li class="rscadd">You no longer need lungs/mouth to give CPR, but you will only do the heart bit. Checks still apply for mouth-to-mouth.</li>
+				<li class="rscadd">Shock stage stars rising earlier now (30 damage vs 50) and can go bit higher than usual.</li>
+				<li class="rscadd">Painkillers speed changed. Now they ramp up slower if ingested, but stay longer. Opposite if injected.</li>
+				<li class="rscadd">Tramadol and oxcodone injectors added to medical vendomats (and tramadol ones to hacked firstaid vendomats).</li>
+				<li class="rscadd">Adds some goodies to survival boxes - inapro injector, food and light.</li>
+				<li class="rscadd">Changed how tramadol/oxycodone work a bit. They now have period for setting in and wearing off, gradually ramping power up/down. Those are short, ~20 seconds to reach max</li>
+				<li class="rscadd">Mixing those with alcohol is now as bad idea as it's supposed to be - increased liver damage and respiratory depression (harder time beathing) await you</li>
+				<li class="rscadd">Inaprovaline helps against breathing effects of both mixing and ODing.</li>
+				<li class="rscadd">There's now some effects based on how much you consume over time, rather than single dose. Effects stat at 15u with some slowdown and chance to start slurring, ramp up from there, with major slowdown and slurring after OD-worthy doses is metabolized.</li>
+				<li class="rscadd">Also ODing on those will give you even MORE painkilling effect! At a small cost of suffocating most likely, and don't even try doing that AND booze.</li>
+				<li class="rscadd">Ships now have sensors. Overmap is dark by default, with known sectors emitting some light. Dust/rocks/ion block visibility. You can control the sensor with console(s) on the bridge, its power setting sets how far it will shine. Higher settings use /huge/ mounts of power so don't leave it running on those. Sensors also cannot run in non-vacuum.</li>
+				<li class="rscadd">Some improvements to helm console - now shows ETA to next grid, can set max speed for autopilot.</li>
+				<li class="rscadd">Engines are now buildable - there's circuitboards for them in Tech storage.</li>
+				<li class="rscadd">Merchant prices are now slightly less wack, they use actual procs for deciding them, instead of selling containeres full of stuff at price of container only.</li>
+				<li class="rscadd">Mineral scanners now store survey data, currently useless aside from penile comparsions.</li>
+				<li class="rscadd">New away mission - a drifting empty ship. Can be restored to fly around on its own like Torch.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Cyborgs can now unwrap packages by clicking them..</li>
+			</ul>
+			<h3 class="author">dryerlint updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Autolathes can now print cable coils. They are under the Devices and Components category.</li>
+			</ul>
+			<h3 class="author">sabiram updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Cerulean, pyrite, bluespace and sepia slimes now drop the correct slime core.</li>
+				<li class="rscadd">Added a jumpsuit with colour selection to the loadout, replacing the list of presets previously available.</li>
+				<li class="rscadd">Added a new feminine jumpsuit with colour selection to the loadout.</li>
+				<li class="rscadd">Added a service uniform skirt for Expeditionary Corps, available in the uniform vendor.</li>
+				<li class="rscadd">The clerical module robot now has access to the basic and denied rubber stamps. Additionally, their hacked item is now the chameleon stamp.</li>
+				<li class="rscadd">The service department has been split. The Sol Pilot, Pathfinder and Explorer are now in the Utility department, with their own department radio. The hotkey for the utility department is 'y'. Bartender, Cook, Janitor and Crewman remain in the service department.</li>
+			</ul>
+
+			<h2 class="date">23 September 2017</h2>
+			<h3 class="author">Atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Pulling a knife out of your boot or putting it in produces a message once again, but only if you are adjacent to the person.</li>
+			</ul>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Can remove rolling end credits with Stop End Titles verb in OOC tab.</li>
+			</ul>
+			<h3 class="author">FTangSteve updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">GAS now are flammable.</li>
+				<li class="rscadd">Lasers can catch flammable mobs on fire.</li>
+				<li class="rscadd">GAS no longer are cut by small sources of cuts (they are bruised).</li>
+				<li class="rscadd">GAS no longer are cut by slithering over glass.</li>
+				<li class="rscadd">Being on fire now burns immediately and isn't based on body temperature.</li>
+				<li class="rscadd">Adds an autolathe to robotics.</li>
+				<li class="rscadd">Adds lightswitches to chemistry, the galley, and robotics.</li>
+				<li class="tweak">Adjusts some lights so lightswitches make those rooms dark.</li>
+			</ul>
+			<h3 class="author">ZeroBits updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Activated the Solar Storm random event, which roasts anyone who's EVA at the time.</li>
+				<li class="tweak">Added rad-shielding to the bunk room so you can stop dying while AFK, also added rad-shielding to the saferooms.</li>
+				<li class="tweak">Tweaks lottery chances.</li>
+				<li class="tweak">Allows admins to choose whether or not to make an announcement when they toggle gravity from the secrets panel.</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Walls and similar dense objects are now much better when protecting against radiation, especially at higher levels.</li>
+				<li class="tweak">AI integrity restorer program will now upload map's default law set instead of NT default.</li>
+				<li class="tweak">Cyborgs can now click ladders to climb. AIs can now click ladders to move their view to different Z.</li>
+			</ul>
+
+			<h2 class="date">13 September 2017</h2>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Changed way lung damage affects people. Instead of straight up oxyloss, it now makes you require higher oxygen pressure - so you can work around it with high pressure internals. Of course it's not 100% failsafe, as blood coughing and breathing stops still remain.</li>
+				<li class="rscadd">Inapro does more things now. It can heal brain damage up to 60, and also slows down brain damaging a general, more effective at higher oxygenation.</li>
+				<li class="rscadd">Health analyzers report brain damage a bit different now. They don't report damage that will self-heal without meds. New stage 'minor brain damage' covers range that can be healed with inapro. Rest are more or less same.</li>
+				<li class="rscadd">Painstuff tweaked around, should generally see slightly less instant KOs from lethal damages.</li>
+			</ul>
+			<h3 class="author">FTangSteve updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Makes it so breathing heat or cold will hurt your lungs more than making your head explode.</li>
+				<li class="rscadd">Electricity now shocks many parts of your body in a line to the ground rather than just your hand.</li>
+				<li class="tweak">Species with an open circulatory system now don't get cut veins or arteries.</li>
+			</ul>
+
+			<h2 class="date">08 September 2017</h2>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Calypso is dead, new shuttle is here in same role - Charon.</li>
+				<li class="rscadd">Can now hide custom loadout items that are not allowed for your job. The button's in top of loadout menu. Makes browsing less of pain for those with lots of restrictions.</li>
+				<li class="rscadd">Wildlife will now respawn if more than half is killed off. Beware.</li>
+				<li class="rscdel">Added new type of planets - settled ones. Full of xenoarch-filled garbage piles and hostile robots.</li>
+			</ul>
+			<h3 class="author">Cirra updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Protein is no longer present in food items which aren't supposed to contain it, such as skrellsnax.</li>
+			</ul>
+			<h3 class="author">CrimsonShrike updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Stacking machine will now stack materials again.</li>
+			</ul>
+			<h3 class="author">FTangSteve updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Updates engineering contractor to have access to atmos, EVA, etc.</li>
+			</ul>
+			<h3 class="author">Kelenius updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Defile counts towards rune unlock again, at a rate adjusted for Torch.</li>
+				<li class="tweak">Mass defile rune won't kill you with bloodloss when you draw it more than once (cost lowered from 80 to 20).</li>
+				<li class="bugfix">Soulstones should work properly now.</li>
+			</ul>
+			<h3 class="author">Minijar updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds pilot voidsuits to the Calypso along with a cycler.</li>
+			</ul>
+			<h3 class="author">TheGreyWolf updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscdel">Removes the Zhan-Khazan outfit from the loadout (Taj relevant only).</li>
+				<li class="rscadd">Added a NT pilot specific voidsuit, currently none are mapped in.</li>
+			</ul>
+			<h3 class="author">Zuhayr updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">R-UST backend/manual changes.</li>
+			</ul>
+
+			<h2 class="date">03 September 2017</h2>
+			<h3 class="author">Earthcrusher updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">The electrified arm (e-magged/traitored Engineering borg module) now behaves like a stun baton. It can be toggled on/off.</li>
+				<li class="tweak">Activating the electrified arm will now cause the borg to glow a faint blue, giving away that they are using it.</li>
+				<li class="imageadd">Added a unique sprite for the electrified arm.</li>
+			</ul>
+			<h3 class="author">Kelenius updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Pulling a knife out of your boot or putting it in no longer makes a message.</li>
+			</ul>
+			<h3 class="author">Minijar updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Adds atmospheric systemst the rust chamber</li>
+				<li class="bugfix">fixes the rust airlock</li>
+				<li class="bugfix">Removes accidental vacuum flooring</li>
+			</ul>
+			<h3 class="author">ParadoxSpace updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds Selenian, a lunar language for those who still hold onto that silver spoon.</li>
+				<li class="rscadd">Adds Spacer, a language of Dutch origin for non-landlubbers.</li>
+				<li class="rscdel">Took Tradeband out back.</li>
+			</ul>
+			<h3 class="author">dryerlint updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added ability to put paper bundles directly into paper bins and nano-printers.</li>
+				<li class="rscadd">Clicking on paper while holding a paper bundle now adds the paper onto the bundle.</li>
+				<li class="rscadd">Added new type of crate - the paper refill crate - filled with 30 blank papers. Intended to be used for refilling bins and printers.</li>
+				<li class="maptweak">Placed paper refill crate in Deck 1 Maintenance near the Conference Room.</li>
+			</ul>
+
+			<h2 class="date">30 August 2017</h2>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Health analyzers, advanced scanners and suit sensors will now report blood oxygenation instead of just how well it flows in general.</li>
+				<li class="rscadd">If you go near an edge of exoplanet, you get warped around, kinda like in space. Don't get lost, nerds.</li>
+				<li class="rscadd">Lush planets now have some drillable minerals too - some coal with a small chance of diamonds or uranium.</li>
+				<li class="rscadd">Movie titles music now uses lobby music preference toggle to see if it should play to you.</li>
+			</ul>
+			<h3 class="author">Crushtoe updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="maptweak">The derelict is no longer complete trash. There's actual rooms and plenty of loot to loot, too!</li>
+				<li class="rscadd">Added random spawns for hostile mobs on the Derelict. Now the good loot has a guardian pike/carp/viscerator.</li>
+			</ul>
+			<h3 class="author">FTangSteve updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Updates GAS to properly use the bloodmed system.</li>
+				<li class="bugfix">GAS eyes are no longer vulnerable to phoron in the air.</li>
+				<li class="bugfix">Fixed bug with humans not taking oxyloss after two minutes of not breathing.</li>
+				<li class="tweak">GAS now store more dexalin.</li>
+				<li class="tweak">Updates unit tests to include GAS.</li>
+				<li class="tweak">Updates unit tests to work with adjusted oxyloss system.</li>
+			</ul>
+			<h3 class="author">Minijar updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Changes blue alert to orange</li>
+				<li class="rscadd">Replaces the bluespace artillery cannon with a prototype RUST fusion reactor for engineering to experiment with.</li>
+				<li class="tweak">Edits the RUST manual to fit the new setup.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="experiment">Overhauls how reagents are identified, affecting both chemistry and food. Due to the large scale of these changes more or less subtle bugs may have crept their way in.</li>
+			</ul>
+			<h3 class="author">ThatOneGuy updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Can now play as the Explorer Department if you are a EC member. If a complete failure, up for removal.</li>
+				<li class="rscadd">Calypso remapped for more cargo space and crew area. Bathroom and Cryo deleted.</li>
+			</ul>
+			<h3 class="author">TheGreyWolf updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Fixed up pathfinder and explorer loadout.</li>
+			</ul>
+
+			<h2 class="date">27 August 2017</h2>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added a ton of usless gasses. Overall fireball planets should be slightly more rare now</li>
+				<li class="tweak">Lighters now have fuel storage inside, and will shut down if it's empty. Can refill at any welder fuel tank.</li>
+				<li class="rscadd">Can now dig graves planetside. Use shovel on ground to dig a pit. Can place grave markers with wooden planks.</li>
+				<li class="experiment">When you speak now, your first name is replaced by your rank in messages. Only affects those with military rank and wearing ID with it.</li>
+			</ul>
+			<h3 class="author">FTangSteve updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds insulated gloves for nabbers.</li>
+				<li class="rscadd">GAS can now be chemists and engineers..</li>
+			</ul>
+			<h3 class="author">Minijar updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Fixes holosigns to appear above doors</li>
+			</ul>
+			<h3 class="author">atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscdel">Removed Turrets Focus Enhancer malf AI hardware, it is obsolete now.</li>
+				<li class="rscdel">Hack Camera replaced with Reset Camera. No longer allows camera upgrades, this has been shifted to Machine Upgrade.</li>
+				<li class="rscadd">Added Quantum Knowledge Databank malf AI hardware. On use it advances all research by one level. Single-use.</li>
+				<li class="rscadd">Added T5 Machine Upgrade ability, behind Machine Overload. Right now only works on APC, SMES, Turret, Turret control, Camera. It is easily expandable to any machinery in the future.</li>
+				<li class="rscadd">Adds four new abilities in a new passive tree. T1 prevents intellicard transfers (toggleable), T2 removes BSOD/lockout from APCs, but reduces CPU generation (toggleable), T3 prevents hack failures, and allows you to complete system override silently and T4 prevents fax/emergency messages from going through.</li>
+			</ul>
+
+			<h2 class="date">23 August 2017</h2>
+			<h3 class="author">Broseph Stylin updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">The Body Scanner console and IV drips are no longer dense and can now be walked through.</li>
+			</ul>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Air analysers now have verb to be toggled into advanced mode. It displays gas properties like specific heat and molar mass.</li>
+				<li class="rscadd">Air analysers can also now be used on pipes and various atmos machinery to inspect the contents.</li>
+			</ul>
+			<h3 class="author">FTangSteve updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Makes it easier to recover people from severe radiation damage.</li>
+				<li class="tweak">Puts a limit on recovery time for surgery with peridaxon, two minutes after death the organ will no longer be savable.</li>
+			</ul>
+			<h3 class="author">PsiOmegaDelta updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Underwear is now handled as actual items.</li>
+				<li class="tweak">Your own underwear can be removed using the 'Remove-Underwear' verb.</li>
+				<li class="tweak">You can remove others underwear through the strip-menu.</li>
+				<li class="tweak">To put on underwear, on yourself or someone else, click the target mob with the underwear in your active hand.</li>
+				<li class="tweak">The wardrobe now offers a limited quota of underwear if replacements are needed.</li>
+				<li class="tweak">You can increase this quota by returning underwear items.</li>
+			</ul>
+			<h3 class="author">TheGreyWolf updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Tattoos are now available in character setup.</li>
+			</ul>
+			<h3 class="author">ZeroBits updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Manuals now point to the correct wiki pages.</li>
+				<li class="tweak">Cleaned up and organized manual files.</li>
+				<li class="rscdel">Deleted redundant manual that pointed to the same page as another.</li>
+			</ul>
+			<h3 class="author">Zuhayr updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Diona nymphs can now pick up and carry a small item. Use the drop_item command or the Home key to drop it. This can also be used to remove your hat.</li>
+				<li class="rscadd">Losing your head is no longer necessarily lethal, unless you're the kind of fat nasty trash who has a brain or other vital head organ.</li>
+			</ul>
+			<h3 class="author">chinsky and mkalash updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">A randomly generated exoplanet of one of the following for types is now available for away missions:</li>
+				<li class="rscadd">Grassy exoplanets, lush with (probably dangerous) flora and fauna, but not much else</li>
+				<li class="rscadd">Snowy exoplanets, like grassy but colder and with less life</li>
+				<li class="rscadd">Desert exoplanets, rich with minerals below the surface, which is covered with dangerous quicksand</li>
+				<li class="rscadd">Mountainous exoplanets, one of the three other options, but also covered with surface minerals</li>
+				<li class="tweak">Additionally, the airlocks of the three shuttles aboard the Torch now cycle to the external atmosphere.</li>
+			</ul>
+			<h3 class="author">nearlyNonexistent updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Fixes the inability to make enchiladas by making popcorn require salt. Enjoy your salted popcorn.</li>
+			</ul>
+			<h3 class="author">sabiram updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Maintenance drones now once again take damage and recieve alarm notifications.</li>
+			</ul>
+
+			<h2 class="date">19 August 2017</h2>
+			<h3 class="author">Atlantiscze updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Re-adds on-join announcements to all ranks.</li>
+				<li class="tweak">Most jobs are announced on relevant departmental frequency (if they have one). During red alert all jobs are announced on main frequency.</li>
+				<li class="tweak">Canisters now once again use NanoUI, instead of tgui. Performance on some devices should be considerably better.</li>
+				<li class="tweak">AI can once again track people by clicking their name from radio messages, even when their face is obstructed, assuming they are at least wearing a matching ID.</li>
+			</ul>
+			<h3 class="author">Chinsky updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Slimetoxin. Slimetoxin changed. Instead of pop and go slimeficiation it's now a life threatening process. Slime toxin metabolizes slowly, and deals fair bit of toxins damage. For every unit or so metabolized, it mutates one limb. Once every limb mutated, there's a 10% every tick to fully mutate into a slimegirl. If you're lucky, you might mutate right before death and that'd heal your all wounds! That' a great idea!</li>
+			</ul>
+			<h3 class="author">Devildabeast updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Adds a cyborg recharging station to the Auxiliary Head.</li>
+				<li class="rscdel">Removes toilet from said Head.</li>
+			</ul>
+			<h3 class="author">FTangSteve updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Adds more signals letting someone know they have toxin damage and giving them a chance to get help.</li>
+				<li class="tweak">Adjusts how often internal organ damage messages are displayed.</li>
+			</ul>
+			<h3 class="author">TheGreyWolf updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Added hoods to standard hoodies.</li>
+			</ul>
+			<h3 class="author">tlc2013 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Updates the Lobby and Nuclear Explosion cinematics to be more Torch-y. Special thanks to 50_n00b for the art.</li>
+			</ul>
+
 			<h2 class="date">12 August 2017</h2>
 			<h3 class="author">Atlantiscze updated:</h3>
 			<ul class="changes bgimages16">

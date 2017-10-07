@@ -6,7 +6,7 @@
 	icon_state = "voicebox"
 	parent_organ = BP_CHEST
 	organ_tag = BP_VOICE
-	will_assist_languages = list(LANGUAGE_GALCOM, LANGUAGE_TRADEBAND, LANGUAGE_GUTTER, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT)
+	will_assist_languages = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
 
 
 /obj/item/organ/internal/voicebox/nabber/New()
@@ -18,6 +18,7 @@
 /obj/item/organ/internal/eyes/nabber
 	name = "compound eyes"
 	innate_flash_protection = FLASH_PROTECTION_VULNERABLE
+	phoron_guard = 1
 	var/eyes_shielded
 
 /obj/item/organ/internal/eyes/nabber/additional_flash_effects(var/intensity)
@@ -43,10 +44,10 @@
 		to_chat(owner, "<span class='notice'>Your protective lenses retract out of the way.</span>")
 		innate_flash_protection = FLASH_PROTECTION_VULNERABLE
 		owner.eye_blind = min(2, owner.eye_blind)
-		process()
+		Process()
 		owner.update_icons()
 
-/obj/item/organ/internal/eyes/nabber/process()
+/obj/item/organ/internal/eyes/nabber/Process()
 	if(eyes_shielded)
 		owner.eye_blind = 20
 	..()
@@ -56,38 +57,44 @@
 	icon_state = "stomach"
 	organ_tag = BP_PHORON
 	parent_organ = BP_CHEST
-	var/dexalin_level = 5
-	var/phoron_level = 0.2
+	var/dexalin_level = 10
+	var/phoron_level = 0.5
 
-/obj/item/organ/internal/phoron/process()
-	var amount = 0.1
-	if(is_broken())
-		amount *= 0.5
-	else if(is_bruised())
-		amount *= 0.1
+/obj/item/organ/internal/phoron/Process()
+	if(owner)
+		var amount = 0.1
+		if(is_broken())
+			amount *= 0.5
+		else if(is_bruised())
+			amount *= 0.1
 
-	var/dexalin_volume_raw = owner.reagents.get_reagent_amount("dexalin")
-	var/phoron_volume_raw = owner.reagents.get_reagent_amount("phoron")
+		var/dexalin_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/dexalin)
+		var/phoron_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/toxin/phoron)
 
-	if((dexalin_volume_raw < dexalin_level || !dexalin_volume_raw) && (phoron_volume_raw < phoron_level || !phoron_volume_raw))
-		owner.reagents.add_reagent("phoron", amount)
+		if((dexalin_volume_raw < dexalin_level || !dexalin_volume_raw) && (phoron_volume_raw < phoron_level || !phoron_volume_raw))
+			owner.reagents.add_reagent(/datum/reagent/toxin/phoron, amount)
 	..()
 
 /obj/item/organ/internal/liver/nabber
 	name = "acetone reactor"
-	var/acetone_level = 10
+	var/acetone_level = 20
 
-/obj/item/organ/internal/liver/nabber/process()
-	var amount = 0.8
-	if(is_broken())
-		amount *= 0.5
-	else if(is_bruised())
-		amount *= 0.1
 
-	var/acetone_volume_raw = owner.reagents.get_reagent_amount("acetone")
+/obj/item/organ/internal/liver/nabber/Process()
+	if(owner)
+		var amount = 0.8
+		if(is_broken())
+			amount *= 0.5
+		else if(is_bruised())
+			amount *= 0.1
 
-	if((acetone_volume_raw < acetone_level || !acetone_volume_raw) && owner.breath_fail_ratio < 0.25)
-		owner.reagents.add_reagent("acetone", amount)
+		var/acetone_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/acetone)
+		var/breath_fail_ratio = 1
+		var/obj/item/organ/internal/lungs/nabber/totally_not_lungs_I_swear = owner.internal_organs_by_name[BP_TRACH]
+		if(totally_not_lungs_I_swear)
+			breath_fail_ratio = totally_not_lungs_I_swear.breath_fail_ratio
+		if((acetone_volume_raw < acetone_level || !acetone_volume_raw) && breath_fail_ratio < 0.25)
+			owner.reagents.add_reagent(/datum/reagent/acetone, amount)
 	..()
 
 // These are not actually lungs and shouldn't be thought of as such despite the claims of the parent.
@@ -107,12 +114,17 @@
 /obj/item/organ/internal/lungs/nabber/handle_failed_breath()
 	var/mob/living/carbon/human/H = owner
 
-	H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * H.breath_fail_ratio)
+	H.adjustOxyLoss(-(HUMAN_MAX_OXYLOSS * owner.chem_effects[CE_OXYGENATED]))
 
-	if(H.breath_fail_ratio > 0.175)
-		H.oxygen_alert = max(H.oxygen_alert, 1)
-	else
+	if(breath_fail_ratio < 0.25 && owner.chem_effects[CE_OXYGENATED])
 		H.oxygen_alert = 0
+	if(breath_fail_ratio >= 0.25 && (damage || world.time > last_failed_breath + 2 MINUTES))
+		H.adjustOxyLoss(HUMAN_MAX_OXYLOSS * breath_fail_ratio)
+		if(owner.chem_effects[CE_OXYGENATED])
+			H.oxygen_alert = 1
+		else
+			H.oxygen_alert = 2
+
 
 /obj/item/organ/internal/heart/nabber
 	open = 1
@@ -124,12 +136,12 @@
 	parent_organ = BP_CHEST
 
 
-/obj/item/organ/internal/brain/nabber/process()
+/obj/item/organ/internal/brain/nabber/Process()
 	if(!owner || !owner.should_have_organ(BP_HEART))
 		return
 
 	// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
-	var/blood_volume = owner.get_effective_blood_volume()
+	var/blood_volume = owner.get_blood_circulation()
 	if(!owner.internal_organs_by_name[BP_HEART])
 		if(blood_volume > BLOOD_VOLUME_SURVIVE)
 			blood_volume = BLOOD_VOLUME_SURVIVE
@@ -157,6 +169,7 @@
 			for(var/obj/item/organ/internal/I in owner.internal_organs)
 				if(prob(5))
 					I.take_damage(5)
+	..()
 
 /obj/item/organ/external/chest/nabber
 	name = "thorax"
@@ -210,5 +223,6 @@
 	name = "head"
 	eye_icon = "eyes_nabber"
 	eye_icon_location = 'icons/mob/nabber_face.dmi'
+	vital = 0
 	has_lips = 0
 	s_col_blend = ICON_MULTIPLY

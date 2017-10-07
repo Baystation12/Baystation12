@@ -31,11 +31,11 @@ In short:
 	KillMobs()
 
 /datum/universal_state/hell/proc/MiscSet()
-	for(var/turf/simulated/floor/T in turfs)
+	for(var/turf/simulated/floor/T)
 		if(!T.holy && prob(1))
 			new /obj/effect/gateway/active/cult(T)
 
 /datum/universal_state/hell/proc/KillMobs()
-	for(var/mob/living/simple_animal/M in GLOB.mob_list)
+	for(var/mob/living/simple_animal/M in SSmobs.mob_list)
 		if(M && !M.client)
 			M.set_stat(DEAD)

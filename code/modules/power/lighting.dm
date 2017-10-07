@@ -210,13 +210,11 @@ var/global/list/light_type_cache = list()
 
 /obj/machinery/light/Destroy()
 	var/area/A = get_area(src)
-	if(s)
-		qdel(s)
-		s = null
+	QDEL_NULL(s)
 	if(A)
 		on = 0
 //		A.update_lights()
-	..()
+	. = ..()
 
 /obj/machinery/light/update_icon()
 
@@ -476,14 +474,14 @@ var/global/list/light_type_cache = list()
 			prot = 1
 
 		if(prot > 0 || (COLD_RESISTANCE in user.mutations))
-			to_chat(user, "You remove the light [get_fitting_name()]")
+			to_chat(user, "You remove the [get_fitting_name()]")
 		else if(TK in user.mutations)
-			to_chat(user, "You telekinetically remove the light [get_fitting_name()].")
+			to_chat(user, "You telekinetically remove the [get_fitting_name()].")
 		else
-			to_chat(user, "You try to remove the light [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
+			to_chat(user, "You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand.")
 			return				// if burned, don't remove the light
 	else
-		to_chat(user, "You remove the light [get_fitting_name()].")
+		to_chat(user, "You remove the [get_fitting_name()].")
 
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
@@ -494,7 +492,7 @@ var/global/list/light_type_cache = list()
 		to_chat(user, "There is no [get_fitting_name()] in this light.")
 		return
 
-	to_chat(user, "You telekinetically remove the light [get_fitting_name()].")
+	to_chat(user, "You telekinetically remove the [get_fitting_name()].")
 	remove_bulb()
 
 // ghost attack - make lights flicker like an AI, but even spookier!
@@ -591,7 +589,7 @@ obj/machinery/light/proc/burn_out()
 
 	var/brightness_range = 2 //how much light it gives off
 	var/brightness_power = 1
-	var/brightness_color = "#FFFFFF"
+	var/brightness_color = "#ffffff"
 	var/list/lighting_modes = list()
 
 /obj/item/weapon/light/tube
@@ -604,7 +602,7 @@ obj/machinery/light/proc/burn_out()
 
 	brightness_range = 6	// luminosity when on, also used in power calculation
 	brightness_power = 3
-	brightness_color = "#FFFFFF"
+	brightness_color = "#ffffff"
 	lighting_modes = list(
 		"emergency_lighting" = list(l_range = 4, l_power = 1, l_color = "#da0205"),
 		)
@@ -688,7 +686,7 @@ obj/machinery/light/proc/burn_out()
 
 		to_chat(user, "You inject the solution into the [src].")
 
-		if(S.reagents.has_reagent("phoron", 5))
+		if(S.reagents.has_reagent(/datum/reagent/toxin/phoron, 5))
 
 			log_admin("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")
 			message_admins("LOG: [user.name] ([user.ckey]) injected a light with phoron, rigging it to explode.")

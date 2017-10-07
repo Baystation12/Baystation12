@@ -7,7 +7,7 @@ var/list/points_of_interest = list()
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
-	var/map_z = list()
+	var/list/map_z = list()
 
 	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
 	var/list/restricted_waypoints = list() //waypoints for specific shuttles
@@ -25,7 +25,6 @@ var/list/points_of_interest = list()
 
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
-	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
 	map_z = GetConnectedZlevels(z)
 	for(var/zlevel in map_z)
@@ -36,6 +35,7 @@ var/list/points_of_interest = list()
 
 	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
+	points_of_interest += name
 
 	GLOB.using_map.player_levels |= map_z
 
@@ -45,6 +45,10 @@ var/list/points_of_interest = list()
 	if(base)
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
+	//handle automatic waypoints that spawned before us
+	for(var/obj/effect/shuttle_landmark/automatic/L in world)
+		if(L.z in map_z)
+			L.add_to_sector(src, 1)
 
 	//find shuttle waypoints
 	var/list/found_waypoints = list()
@@ -66,14 +70,17 @@ var/list/points_of_interest = list()
 				log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
 		restricted_waypoints[shuttle_name] = found_waypoints
 
+	for(var/obj/machinery/computer/sensors/S in SSmachines.machinery)
+		if (S.z in map_z)
+			S.linked = src
+			testing("Sensor console at level [S.z] linked to overmap object '[name]'.")
+
 	. = ..()
 
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
 	. = generic_waypoints.Copy()
 	if(shuttle_name in restricted_waypoints)
 		. += restricted_waypoints[shuttle_name]
-
-	points_of_interest += name
 
 /obj/effect/overmap/sector
 	name = "generic sector"
@@ -83,8 +90,10 @@ var/list/points_of_interest = list()
 
 /obj/effect/overmap/sector/Initialize()
 	. = ..()
-	for(var/obj/machinery/computer/helm/H in GLOB.machines)
-		H.get_known_sectors()
+	if(known)
+		set_light(2, 5)
+		for(var/obj/machinery/computer/helm/H in SSmachines.machinery)
+			H.get_known_sectors()
 
 /proc/build_overmap()
 	if(!GLOB.using_map.use_overmap)
@@ -100,11 +109,12 @@ var/list/points_of_interest = list()
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
 			T = T.ChangeTurf(/turf/unsimulated/map/)
-		T.lighting_clear_overlay()
 		turfs += T
 
 	var/area/overmap/A = new
 	A.contents.Add(turfs)
+
+	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
 	testing("Overmap build complete.")
 	return 1

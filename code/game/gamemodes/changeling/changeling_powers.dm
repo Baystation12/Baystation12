@@ -361,7 +361,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.canmove = 0
 	C.icon = null
 	C.overlays.Cut()
-	C.invisibility = 101
+	C.set_invisibility(101)
 	var/atom/movable/overlay/animation = new /atom/movable/overlay( C.loc )
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
@@ -776,7 +776,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
 	T.make_jittery(400)
-	if(T.reagents)	T.reagents.add_reagent("lexorin", 40)
+	if(T.reagents)	T.reagents.add_reagent(/datum/reagent/lexorin, 40)
 	feedback_add_details("changeling_powers","DTHS")
 	return 1
 

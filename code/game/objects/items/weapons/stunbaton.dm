@@ -52,7 +52,7 @@
 		icon_state = "[initial(name)]"
 
 	if(icon_state == "[initial(name)]_active")
-		set_light(1.5, 2, "#FF6A00")
+		set_light(1.5, 2, "#ff6a00")
 	else
 		set_light(0)
 
@@ -213,6 +213,20 @@
 		set_status(0)
 	else if (!bcell || bcell != user.cell)
 		bcell = user.cell // if it is null, nullify it anyway
+
+// Traitor variant for Engineering synthetics.
+/obj/item/weapon/melee/baton/robot/electrified_arm
+	name = "electrified arm"
+	icon = 'icons/obj/device.dmi'
+	icon_state = "electrified_arm"
+
+/obj/item/weapon/melee/baton/robot/electrified_arm/update_icon()
+	if(status)
+		icon_state = "electrified_arm_active"
+		set_light(1.5, 2, "#006aff")
+	else
+		icon_state = "electrified_arm"
+		set_light(0)
 
 //Makeshift stun baton. Replacement for stun gloves.
 /obj/item/weapon/melee/baton/cattleprod

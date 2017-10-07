@@ -87,7 +87,7 @@
 /obj/machinery/atmospherics/trinary/filter/hide(var/i)
 	update_underlays()
 
-/obj/machinery/atmospherics/trinary/filter/process()
+/obj/machinery/atmospherics/trinary/filter/Process()
 	..()
 
 	last_power_draw = 0
@@ -246,7 +246,7 @@ obj/machinery/atmospherics/trinary/filter/m_filter/New()
 /obj/machinery/atmospherics/trinary/filter/m_filter/Initialize()
 	. = ..()
 	set_frequency(frequency)
-            
+
 /obj/machinery/atmospherics/trinary/filter/m_filter/atmos_init()
 	..()
 

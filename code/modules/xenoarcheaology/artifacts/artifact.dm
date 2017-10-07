@@ -49,13 +49,11 @@
 			my_effect.trigger = pick(TRIGGER_WATER, TRIGGER_ACID, TRIGGER_VOLATILE, TRIGGER_TOXIN)
 
 /obj/machinery/artifact/Destroy()
-	qdel(my_effect)
-	qdel(secondary_effect)
-	my_effect = null
-	secondary_effect = null
+	QDEL_NULL(my_effect)
+	QDEL_NULL(secondary_effect)
 	. = ..()
 
-/obj/machinery/artifact/process()
+/obj/machinery/artifact/Process()
 	var/turf/L = loc
 	if(!istype(L)) 	// We're inside a container or on null turf, either way stop processing effects
 		return
@@ -193,22 +191,22 @@
 /obj/machinery/artifact/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
 
 	if (istype(W, /obj/item/weapon/reagent_containers/))
-		if(W.reagents.has_reagent("hydrogen", 1) || W.reagents.has_reagent("water", 1))
+		if(W.reagents.has_reagent(/datum/reagent/hydrazine, 1) || W.reagents.has_reagent(/datum/reagent/water, 1))
 			if(my_effect.trigger == TRIGGER_WATER)
 				my_effect.ToggleActivate()
 			if(secondary_effect && secondary_effect.trigger == TRIGGER_WATER && prob(25))
 				secondary_effect.ToggleActivate(0)
-		else if(W.reagents.has_reagent("sacid", 1) || W.reagents.has_reagent("pacid", 1) || W.reagents.has_reagent("diethylamine", 1))
+		else if(W.reagents.has_reagent(/datum/reagent/acid, 1) || W.reagents.has_reagent(/datum/reagent/acid/polyacid, 1) || W.reagents.has_reagent(/datum/reagent/diethylamine, 1))
 			if(my_effect.trigger == TRIGGER_ACID)
 				my_effect.ToggleActivate()
 			if(secondary_effect && secondary_effect.trigger == TRIGGER_ACID && prob(25))
 				secondary_effect.ToggleActivate(0)
-		else if(W.reagents.has_reagent("phoron", 1) || W.reagents.has_reagent("thermite", 1))
+		else if(W.reagents.has_reagent(/datum/reagent/toxin/phoron, 1) || W.reagents.has_reagent(/datum/reagent/thermite, 1))
 			if(my_effect.trigger == TRIGGER_VOLATILE)
 				my_effect.ToggleActivate()
 			if(secondary_effect && secondary_effect.trigger == TRIGGER_VOLATILE && prob(25))
 				secondary_effect.ToggleActivate(0)
-		else if(W.reagents.has_reagent("toxin", 1) || W.reagents.has_reagent("cyanide", 1) || W.reagents.has_reagent("amatoxin", 1) || W.reagents.has_reagent("neurotoxin", 1))
+		else if(W.reagents.has_reagent(/datum/reagent/toxin, 1) || W.reagents.has_reagent(/datum/reagent/toxin/cyanide, 1) || W.reagents.has_reagent(/datum/reagent/toxin/amatoxin, 1) || W.reagents.has_reagent(/datum/reagent/ethanol/neurotoxin, 1))
 			if(my_effect.trigger == TRIGGER_TOXIN)
 				my_effect.ToggleActivate()
 			if(secondary_effect && secondary_effect.trigger == TRIGGER_TOXIN && prob(25))

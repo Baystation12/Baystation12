@@ -360,7 +360,7 @@
 
 // timed process
 // charge the gas reservoir and perform flush if ready
-/obj/machinery/disposal/process()
+/obj/machinery/disposal/Process()
 	if(!air_contents || (stat & BROKEN))			// nothing can happen if broken
 		update_use_power(0)
 		return
@@ -664,7 +664,8 @@
 	var/dpdir = 0		// bitmask of pipe directions
 	dir = 0				// dir will contain dominant direction for junction pipes
 	var/health = 10 	// health points 0-10
-	plane = ABOVE_PLATING_PLANE
+	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
+	plane = ABOVE_TURF_PLANE
 	layer = DISPOSALS_PIPE_LAYER
 	var/base_icon_state	// initial icon state on map
 	var/sortType = ""
@@ -672,10 +673,11 @@
 	// new pipe, set the icon_state as on map
 	New()
 		..()
+		alpha = 255
+		plane = ABOVE_PLATING_PLANE
 		base_icon_state = icon_state
 		return
-
-
+		
 	// pipe is deleted
 	// ensure if holder is present, it is expelled
 	Destroy()
@@ -692,13 +694,12 @@
 					AM.forceMove(T)
 					AM.pipe_eject(0)
 				qdel(H)
-				..()
-				return
+				return ..()
 
 			// otherwise, do normal expel from turf
 			if(H)
 				expel(H, T, 0)
-		..()
+		. = ..()
 
 	// returns the direction of the next pipe object, given the entrance dir
 	// by default, returns the bitmask of remaining directions
@@ -736,7 +737,7 @@
 	// hide called by levelupdate if turf intact status changes
 	// change visibility status and force update of icon
 	hide(var/intact)
-		invisibility = intact ? 101: 0	// hide if floor is intact
+		set_invisibility(intact ? 101: 0)	// hide if floor is intact
 		update_icon()
 
 	// update actual icon_state depending on visibility
@@ -820,7 +821,7 @@
 					var/obj/structure/disposalpipe/broken/P = new(src.loc)
 					P.set_dir(D)
 
-		src.invisibility = 101	// make invisible (since we won't delete the pipe immediately)
+		src.set_invisibility(101)	// make invisible (since we won't delete the pipe immediately)
 		var/obj/structure/disposalholder/H = locate() in src
 		if(H)
 			// holder was present
@@ -955,13 +956,12 @@
 				AM.forceMove(T)
 				AM.pipe_eject(0)
 			qdel(H)
-			..()
-			return
+			return ..()
 
 		// otherwise, do normal expel from turf
 		if(H)
 			expel(H, T, 0)
-	..()
+	. = ..()
 
 /obj/structure/disposalpipe/hides_under_flooring()
 	return 1

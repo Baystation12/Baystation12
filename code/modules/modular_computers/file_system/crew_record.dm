@@ -179,44 +179,44 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 			//cael - to prevent multiple appearances of a player/job combination, add a continue after each line
 		var/department = 0
-		if(rank in command_positions)
+		if(rank in GLOB.command_positions)
 			heads[name] = rank
 			department = 1
-		if(rank in support_positions)
+		if(rank in GLOB.support_positions)
 			spt[name] = rank
 			department = 1
-		if(rank in security_positions)
+		if(rank in GLOB.security_positions)
 			sec[name] = rank
 			department = 1
-		if(rank in engineering_positions)
+		if(rank in GLOB.engineering_positions)
 			eng[name] = rank
 			department = 1
-		if(rank in medical_positions)
+		if(rank in GLOB.medical_positions)
 			med[name] = rank
 			department = 1
-		if(rank in science_positions)
+		if(rank in GLOB.science_positions)
 			sci[name] = rank
 			department = 1
-		if(rank in cargo_positions)
+		if(rank in GLOB.cargo_positions)
 			car[name] = rank
 			department = 1
-		if(rank in civilian_positions)
+		if(rank in GLOB.civilian_positions)
 			civ[name] = rank
 			department = 1
-		if(rank in service_positions)
+		if(rank in GLOB.service_positions)
 			srv[name] = rank
 			department = 1
-		if(rank in supply_positions)
+		if(rank in GLOB.supply_positions)
 			sup[name] = rank
 			department = 1
 		if(!department && !(name in heads))
 			misc[name] = rank
 
 	// Synthetics don't have actual records, so we will pull them from here.
-	for(var/mob/living/silicon/ai/ai in GLOB.mob_list)
+	for(var/mob/living/silicon/ai/ai in SSmobs.mob_list)
 		bot[ai.name] = "Artificial Intelligence"
 
-	for(var/mob/living/silicon/robot/robot in GLOB.mob_list)
+	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
 		// No combat/syndicate cyborgs, no drones.
 		if(robot.module && robot.module.hide_on_manifest)
 			continue
@@ -296,13 +296,13 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 /proc/silicon_nano_crew_manifest(var/list/filter)
 	var/list/filtered_entries = list()
 
-	for(var/mob/living/silicon/ai/ai in GLOB.mob_list)
+	for(var/mob/living/silicon/ai/ai in SSmobs.mob_list)
 		filtered_entries.Add(list(list(
 			"name" = ai.name,
 			"rank" = "Artificial Intelligence",
 			"status" = ""
 		)))
-	for(var/mob/living/silicon/robot/robot in GLOB.mob_list)
+	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
 		if(robot.module && robot.module.hide_on_manifest)
 			continue
 		filtered_entries.Add(list(list(
@@ -325,31 +325,19 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	return filtered_entries
 
 /proc/nano_crew_manifest()
-	var/heads = filtered_nano_crew_manifest(command_positions)
-	var/spt = filtered_nano_crew_manifest(support_positions)
-	var/sec = filtered_nano_crew_manifest(security_positions)
-	var/eng = filtered_nano_crew_manifest(engineering_positions)
-	var/med = filtered_nano_crew_manifest(medical_positions)
-	var/sci = filtered_nano_crew_manifest(science_positions)
-	var/car = filtered_nano_crew_manifest(cargo_positions)
-	var/sup = filtered_nano_crew_manifest(supply_positions)
-	var/srv = filtered_nano_crew_manifest(service_positions)
-	var/civ = filtered_nano_crew_manifest(civilian_positions)
-	var/bot = silicon_nano_crew_manifest(cargo_positions)
-	var/misc = filtered_nano_crew_manifest(cargo_positions)
 	return list(\
-		"heads" = heads,\
-		"spt" = spt,\
-		"sec" = sec,\
-		"eng" = eng,\
-		"med" = med,\
-		"sci" = sci,\
-		"car" = car,\
-		"sup" = sup,\
-		"srv" = srv,\
-		"civ" = civ,\
-		"bot" = bot,\
-		"misc" = misc\
+		"heads" = filtered_nano_crew_manifest(GLOB.command_positions),\
+		"spt" = filtered_nano_crew_manifest(GLOB.support_positions),\
+		"sec" = filtered_nano_crew_manifest(GLOB.security_positions),\
+		"eng" = filtered_nano_crew_manifest(GLOB.engineering_positions),\
+		"med" = filtered_nano_crew_manifest(GLOB.medical_positions),\
+		"sci" = filtered_nano_crew_manifest(GLOB.science_positions),\
+		"car" = filtered_nano_crew_manifest(GLOB.cargo_positions),\
+		"sup" = filtered_nano_crew_manifest(GLOB.supply_positions),\
+		"srv" = filtered_nano_crew_manifest(GLOB.service_positions),\
+		"civ" = filtered_nano_crew_manifest(GLOB.civilian_positions),\
+		"bot" = silicon_nano_crew_manifest(GLOB.cargo_positions),\
+		"misc" = filtered_nano_crew_manifest(GLOB.cargo_positions)\
 		)
 
 /proc/get_crewmember_record(var/name)

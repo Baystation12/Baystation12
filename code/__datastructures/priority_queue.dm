@@ -15,34 +15,10 @@
 /PriorityQueue/proc/IsEmpty()
 	return !L.len
 
-//return the index the element should be in the priority queue using dichotomic search
-/PriorityQueue/proc/FindElementIndex(atom/A)
-	var/i = 1
-	var/j = L.len
-	var/mid
-
-	while(i < j)
-		mid = round((i+j)/2)
-
-		if(call(cmp)(L[mid],A) < 0)
-			i = mid + 1
-		else
-			j = mid
-
-	if(i == 1 || i ==  L.len) //edge cases
-		return (call(cmp)(L[i],A) > 0) ? i : i+1
-	else
-		return i
-
-
 //add an element in the list,
 //immediatly ordering it to its position using dichotomic search
 /PriorityQueue/proc/Enqueue(atom/A)
-	if(!L.len)
-		L.Add(A)
-		return
-
-	L.Insert(FindElementIndex(A),A)
+	ADD_SORTED(L, A, cmp)
 
 //removes and returns the first element in the queue
 /PriorityQueue/proc/Dequeue()

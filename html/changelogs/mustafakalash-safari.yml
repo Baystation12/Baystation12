@@ -1,0 +1,6 @@
+author: mkalash
+delete-after: True
+changes: 
+  - rscadd: "Added a net gun. It and a bandolier full of net shells is located in the Charon storage area."
+  - rscadd: "Added stasis cages for transport of alien fauna without having them suffocate, located in expedition storage."
+  - maptweak: "Refitted xenobiology to support changing the atmosphere of animal pens."

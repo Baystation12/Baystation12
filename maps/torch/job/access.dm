@@ -25,10 +25,10 @@
 	desc = "General Utility Pod Helm"
 	region = ACCESS_REGION_GENERAL
 
-/var/const/access_calypso_helm = 77
-/datum/access/calypso_helm
-	id = access_calypso_helm
-	desc = "Calypso Helm"
+/var/const/access_expedition_shuttle_helm = 77
+/datum/access/exploration_shuttle_helm
+	id = access_expedition_shuttle_helm
+	desc = "Charon Helm"
 	region = ACCESS_REGION_GENERAL
 
 /var/const/access_aquila = 78
@@ -72,14 +72,14 @@
 	id = access_liaison
 	desc = "NanoTrasen Liaison"
 	region = ACCESS_REGION_COMMAND
-	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO and RD cannot enter and access can't be added with computer.
+	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO and RD cannot enter
 
 /var/const/access_representative = 85
 /datum/access/representative
 	id = access_representative
 	desc = "SolGov Representative"
 	region = ACCESS_REGION_COMMAND
-	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO cannot enter and access can't be added with computer.
+	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO cannot enter
 
 /var/const/access_sec_guard = 86
 /datum/access/sec_guard
@@ -93,10 +93,10 @@
 	desc = "Gunnery"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_calypso = 88
-/datum/access/calypso
-	id = access_calypso
-	desc = "Calypso"
+/var/const/access_expedition_shuttle = 88
+/datum/access/exploration_shuttle
+	id = access_expedition_shuttle
+	desc = "Charon"
 	region = ACCESS_REGION_GENERAL
 
 /var/const/access_guppy = 89
@@ -122,6 +122,19 @@
 	id = access_senadv
 	desc = "Senior Enlisted Advisor"
 	region = ACCESS_REGION_COMMAND
+
+/var/const/access_explorer = 93
+/datum/access/explorer
+	id = access_explorer
+	desc = "Explorer"
+	region = ACCESS_REGION_RESEARCH
+
+/var/const/access_pathfinder = 94
+/datum/access/pathfinder
+	id = access_pathfinder
+	desc = "Pathfinder"
+	region = ACCESS_REGION_RESEARCH
+
 
 /************
 * SEV Torch *

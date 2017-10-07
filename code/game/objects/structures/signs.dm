@@ -84,7 +84,6 @@
 	icon_state = "securearea"
 
 /obj/structure/sign/warning/detailed
-	name = "\improper WARNING 2"
 	icon_state = "securearea2"
 
 /obj/structure/sign/warning/New()
@@ -400,3 +399,23 @@
 	name = "\improper Fourth Deck"
 	icon_state = "deck-4"
 
+/obj/item/sign/medipolma
+	name = "medical diploma"
+	desc = "A fancy print laminated paper that certifies that its bearer is indeed a Doctor of Medicine, graduated from a medical school in one of fringe systems. You don't recognize the name though, and half of latin words they used do not actually exist."
+	icon = 'icons/obj/decals.dmi'
+	icon_state = "goldenplaque"
+	sign_state = "goldenplaque"
+	var/claimant
+
+/obj/item/sign/medipolma/attack_self(mob/user)
+	if(!claimant)
+		to_chat(user, "<span class='notice'>You fill in your name in the blanks with a permanent marker.</span>")
+		claimant = user.real_name
+	..()
+
+/obj/item/sign/medipolma/examine(mob/user)
+	..()
+	if(claimant)
+		to_chat(user,"This one belongs to Dr.[claimant], MD.")
+	else
+		to_chat(user,"The name is left blank for some reason.")

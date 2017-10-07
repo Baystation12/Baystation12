@@ -7,6 +7,21 @@
 	var/descriptor                          // 'gaping hole' etc.
 	var/damtype = BURN                      // Punctured or melted
 	var/obj/item/clothing/suit/space/holder // Suit containing the list of breaches holding this instance.
+	var/global/list/breach_brute_descriptors = list(
+		"tiny puncture",
+		"ragged tear",
+		"large split",
+		"huge tear",
+		"gaping wound"
+		)
+
+	var/global/list/breach_burn_descriptors = list(
+		"small burn",
+		"melted patch",
+		"sizable burn",
+		"large scorched area",
+		"huge scorched area"
+		)
 
 /obj/item/clothing/suit/space
 
@@ -17,29 +32,6 @@
 	var/damage = 0                          // Current total damage
 	var/brute_damage = 0                    // Specifically brute damage.
 	var/burn_damage = 0                     // Specifically burn damage.
-	var/base_name                           // Used to keep the original name safe while we apply modifiers.
-
-/obj/item/clothing/suit/space/New()
-	..()
-	base_name = "[name]"
-
-//Some simple descriptors for breaches. Global because lazy, TODO: work out a better way to do this.
-
-var/global/list/breach_brute_descriptors = list(
-	"tiny puncture",
-	"ragged tear",
-	"large split",
-	"huge tear",
-	"gaping wound"
-	)
-
-var/global/list/breach_burn_descriptors = list(
-	"small burn",
-	"melted patch",
-	"sizable burn",
-	"large scorched area",
-	"huge scorched area"
-	)
 
 /datum/breach/proc/update_descriptor()
 
@@ -149,7 +141,7 @@ var/global/list/breach_burn_descriptors = list(
 	burn_damage = 0
 
 	if(!can_breach || !breaches || !breaches.len)
-		name = base_name
+		name = initial(name)
 		return 0
 
 	for(var/datum/breach/B in breaches)
@@ -165,13 +157,13 @@ var/global/list/breach_burn_descriptors = list(
 
 	if(damage >= 3)
 		if(brute_damage >= 3 && brute_damage > burn_damage)
-			name = "punctured [base_name]"
+			name = "punctured [initial(name)]"
 		else if(burn_damage >= 3 && burn_damage > brute_damage)
-			name = "scorched [base_name]"
+			name = "scorched [initial(name)]"
 		else
-			name = "damaged [base_name]"
+			name = "damaged [initial(name)]"
 	else
-		name = "[base_name]"
+		name = initial(name)
 
 	return damage
 

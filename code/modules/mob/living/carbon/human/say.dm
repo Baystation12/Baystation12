@@ -1,4 +1,4 @@
-/mob/living/carbon/human/say(var/message, var/datum/language/language = null)
+/mob/living/carbon/human/say(var/message, var/datum/language/language = null, whispering)
 	var/alt_name = ""
 	if(name != GetVoice())
 		if(get_id_name("Unknown") != GetVoice())
@@ -7,7 +7,24 @@
 			name = get_id_name("Unknown")
 
 	message = sanitize(message)
-	..(message, alt_name = alt_name, speaking = language)
+	var/obj/item/organ/internal/voicebox/vox = locate() in internal_organs
+	var/snowflake_speak = (language && (language.flags & NONVERBAL|SIGNLANG)) || (vox && vox.is_usable() && (language in vox.assists_languages))
+	if(!isSynthetic() && need_breathe() && failed_last_breath && !snowflake_speak)
+		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
+		if(L.breath_fail_ratio > 0.9)
+			if(world.time < L.last_failed_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
+				to_chat(src, "<span class='warning'>You use your remaining air to say something!</span>")
+				L.last_failed_breath = world.time - 2 MINUTES
+				..(message, alt_name = alt_name, speaking = language)
+				return
+			to_chat(src, "<span class='warning'>You don't have enough air in [L] to make a sound!</span>")
+			return
+		else if(L.breath_fail_ratio > 0.7)
+			whisper_say(length(message) > 5 ? stars(message) : message, language, alt_name)
+		else if(L.breath_fail_ratio > 0.4 && length(message) > 10)
+			whisper_say(message, language, alt_name)
+	else
+		..(message, alt_name = alt_name, speaking = language, whispering = whispering)
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)

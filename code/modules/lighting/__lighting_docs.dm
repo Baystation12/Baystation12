@@ -61,7 +61,7 @@ atom/movable/lighting_overlay: (lighting_overlay.dm)
   - var/xoffset, var/yoffset; (only present when using sub-tile overlays) fractional offset of this overlay in the tile
 
   - proc/update_lumcount(delta_r, delta_g, delta_b):
-      - Change the lumcount vars and queue the overlay for update
+		- Change the lumcount vars and queue the overlay for update
   - proc/update_overlay()
-	  - Called by the lighting process to update the color of the overlay
+		- Called by the lighting process to update the color of the overlay
 */

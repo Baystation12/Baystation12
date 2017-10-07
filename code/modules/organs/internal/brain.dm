@@ -26,6 +26,9 @@
 /obj/item/organ/internal/brain/mechassist()
 	replace_self_with(/obj/item/organ/internal/mmi_holder)
 
+/obj/item/organ/internal/brain/getToxLoss()
+	return 0
+
 /obj/item/organ/internal/brain/proc/replace_self_with(replace_path)
 	var/mob/living/carbon/human/tmp_owner = owner
 	qdel(src)
@@ -132,11 +135,12 @@
 /obj/item/organ/internal/brain/proc/past_damage_threshold(var/threshold)
 	return (get_current_damage_threshold() > threshold)
 
-/obj/item/organ/internal/brain/process()
+/obj/item/organ/internal/brain/Process()
 
 	if(owner)
 		if(damage > max_damage / 2 && healed_threshold)
-			alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
+			spawn()
+				alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 			healed_threshold = 0
 
 		if(damage < (max_damage / 4))
@@ -178,47 +182,43 @@
 		if(owner.should_have_organ(BP_HEART))
 
 			// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
-			var/blood_volume = owner.get_effective_blood_volume()
+			var/blood_volume = owner.get_blood_oxygenation()
 
 			if(owner.is_asystole()) // Heart is missing or isn't beating and we're not breathing (hardcrit)
-				blood_volume = min(blood_volume, BLOOD_VOLUME_SURVIVE)
 				owner.Paralyse(3)
-
-			else if(owner.need_breathe())
-				var/blood_volume_mod = max(0, 1 - owner.getOxyLoss()/(owner.maxHealth/2))
-				var/oxygenated_mult = 0
-				if(owner.chem_effects[CE_OXYGENATED] == 1) // Dexalin.
-					oxygenated_mult = 0.5
-				else if(owner.chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
-					oxygenated_mult = 0.8
-				blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
-				blood_volume = blood_volume * blood_volume_mod
+			var/can_heal = damage && (damage % damage_threshold_value || owner.chem_effects[CE_BRAIN_REGEN] || (!past_damage_threshold(3) && owner.chem_effects[CE_STABLE]))
+			var/damprob
 			//Effects of bloodloss
 			switch(blood_volume)
 
 				if(BLOOD_VOLUME_SAFE to INFINITY)
-					if((damage%damage_threshold_value)>=1 || (damage && owner.chem_effects[CE_BRAIN_REGEN]))
+					if(can_heal)
 						damage--
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 					if(prob(1))
 						to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")
-					if(!past_damage_threshold(2))
+					damprob = owner.chem_effects[CE_STABLE] ? 30 : 60
+					if(!past_damage_threshold(2) && prob(damprob))
 						take_damage(1)
 				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
 					owner.eye_blurry = max(owner.eye_blurry,6)
-					if(!past_damage_threshold(4))
+					damprob = owner.chem_effects[CE_STABLE] ? 40 : 80
+					if(!past_damage_threshold(4) && prob(damprob))
 						take_damage(1)
-					if(prob(15))
+					if(!owner.paralysis && prob(10))
 						owner.Paralyse(rand(1,3))
 						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
 				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 					owner.eye_blurry = max(owner.eye_blurry,6)
-					if(!past_damage_threshold(6))
+					damprob = owner.chem_effects[CE_STABLE] ? 60 : 100
+					if(!past_damage_threshold(6) && prob(damprob))
 						take_damage(1)
-					if(prob(15))
+					if(!owner.paralysis && prob(15))
 						owner.Paralyse(3,5)
 						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
 				if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
 					owner.eye_blurry = max(owner.eye_blurry,6)
-					take_damage(1)
+					damprob = owner.chem_effects[CE_STABLE] ? 80 : 100
+					if(prob(damprob))
+						take_damage(1)
 	..()
