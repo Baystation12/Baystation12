@@ -294,8 +294,8 @@
 		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/sea/marine
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e9
-		/datum/mil_rank/marine/e9
+		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/marine/e9,
 		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/marine/e9_alt1,
 		/datum/mil_rank/fleet/e8,
