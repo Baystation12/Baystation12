@@ -44,6 +44,7 @@
 /obj/item/modular_computer/laptop/preset/records/install_default_programs()
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/records())
+	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 
 /obj/item/modular_computer/laptop/preset/custom_loadout/install_default_programs()
 	..()
