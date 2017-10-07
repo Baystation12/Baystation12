@@ -8,7 +8,7 @@
 	mutation=mNobreath
 
 	New()
-		block=NOBREATHBLOCK
+		block=GLOB.NOBREATHBLOCK
 
 /datum/dna/gene/basic/remoteview
 	name="Remote Viewing"
@@ -16,7 +16,7 @@
 	mutation=mRemote
 
 	New()
-		block=REMOTEVIEWBLOCK
+		block=GLOB.REMOTEVIEWBLOCK
 
 	activate(var/mob/M, var/connected, var/flags)
 		..(M,connected,flags)
@@ -28,7 +28,7 @@
 	mutation=mRegen
 
 	New()
-		block=REGENERATEBLOCK
+		block=GLOB.REGENERATEBLOCK
 
 /datum/dna/gene/basic/increaserun
 	name="Super Speed"
@@ -36,7 +36,7 @@
 	mutation=mRun
 
 	New()
-		block=INCREASERUNBLOCK
+		block=GLOB.INCREASERUNBLOCK
 
 /datum/dna/gene/basic/remotetalk
 	name="Telepathy"
@@ -44,7 +44,7 @@
 	mutation=mRemotetalk
 
 	New()
-		block=REMOTETALKBLOCK
+		block=GLOB.REMOTETALKBLOCK
 
 	activate(var/mob/M, var/connected, var/flags)
 		..(M,connected,flags)
@@ -56,7 +56,7 @@
 	mutation=mMorph
 
 	New()
-		block=MORPHBLOCK
+		block=GLOB.MORPHBLOCK
 
 	activate(var/mob/M)
 		..(M)
@@ -69,7 +69,7 @@
 	mutation=mHeatres
 
 	New()
-		block=COLDBLOCK
+		block=GLOB.COLDBLOCK
 
 	can_activate(var/mob/M,var/flags)
 		if(flags & MUTCHK_FORCED)
@@ -91,7 +91,7 @@
 	mutation=COLD_RESISTANCE
 
 	New()
-		block=FIREBLOCK
+		block=GLOB.FIREBLOCK
 
 	can_activate(var/mob/M,var/flags)
 		if(flags & MUTCHK_FORCED)
@@ -113,7 +113,7 @@
 	mutation=mFingerprints
 
 	New()
-		block=NOPRINTSBLOCK
+		block=GLOB.NOPRINTSBLOCK
 
 /datum/dna/gene/basic/noshock
 	name="Shock Immunity"
@@ -121,7 +121,7 @@
 	mutation=mShock
 
 	New()
-		block=SHOCKIMMUNITYBLOCK
+		block=GLOB.SHOCKIMMUNITYBLOCK
 
 /datum/dna/gene/basic/midget
 	name="Midget"
@@ -129,7 +129,7 @@
 	mutation=mSmallsize
 
 	New()
-		block=SMALLSIZEBLOCK
+		block=GLOB.SMALLSIZEBLOCK
 
 	can_activate(var/mob/M,var/flags)
 		// Can't be big and small.
@@ -151,7 +151,7 @@
 	mutation=HULK
 
 	New()
-		block=HULKBLOCK
+		block=GLOB.HULKBLOCK
 
 	can_activate(var/mob/M,var/flags)
 		// Can't be big and small.
@@ -181,7 +181,7 @@
 	mutation=XRAY
 
 	New()
-		block=XRAYBLOCK
+		block=GLOB.XRAYBLOCK
 
 /datum/dna/gene/basic/tk
 	name="Telekenesis"
@@ -190,6 +190,6 @@
 	activation_prob=15
 
 	New()
-		block=TELEBLOCK
+		block=GLOB.TELEBLOCK
 	OnDrawUnderlays(var/mob/M,var/g,var/fat)
 		return "telekinesishead[fat]_s"

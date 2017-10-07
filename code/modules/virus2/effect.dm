@@ -195,7 +195,7 @@
 	name = "Telepathy Syndrome"
 	stage = 3
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		mob.dna.SetSEState(REMOTETALKBLOCK,1)
+		mob.dna.SetSEState(GLOB.REMOTETALKBLOCK,1)
 		domutcheck(mob, null, MUTCHK_FORCED)
 
 /datum/disease2/effect/mind

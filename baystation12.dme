@@ -1190,7 +1190,6 @@
 #include "code\modules\client\client_procs.dm"
 #include "code\modules\client\movement.dm"
 #include "code\modules\client\preferences.dm"
-#include "code\modules\client\preferences_factions.dm"
 #include "code\modules\client\preferences_savefile.dm"
 #include "code\modules\client\preferences_spawnpoints.dm"
 #include "code\modules\client\preferences_toggle.dm"
