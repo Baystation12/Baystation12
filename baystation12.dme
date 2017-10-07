@@ -2340,6 +2340,7 @@
 #include "code\modules\virus2\admin.dm"
 #include "code\modules\virus2\analyser.dm"
 #include "code\modules\virus2\antibodies.dm"
+#include "code\modules\virus2\antibodyanalyser.dm"
 #include "code\modules\virus2\centrifuge.dm"
 #include "code\modules\virus2\curer.dm"
 #include "code\modules\virus2\disease2.dm"
