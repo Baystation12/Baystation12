@@ -318,8 +318,8 @@
 			current_grab_type = all_grabobjects[GRAB_NAB]
 			to_chat(src, "<span class='notice'>You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey.</span>")
 			if(!hidden)
-				visible_message("<span class='warning'>[src] tenses as \he brings his smaller arms in close to \his body. \his two massive apiked arms reach \
-				out. \he looks dangerous and ready to attack.</span>")
+				visible_message("<span class='warning'>[src] tenses as \he brings \his smaller arms in close to \his body. \His two massive spiked arms reach \
+				out. \He looks ready to attack.</span>")
 	else
 		to_chat(src, "<span class='notice'>You stop adjusting your arms and don't switch between them.</span>")
 
@@ -349,11 +349,10 @@
 			switch(message)
 				if("Yes")
 					visible_message("<span class='warning'>[src]'s skin shifts to a deep red colour with dark chevrons running down in an almost hypnotic \
-						pattern. Standing tall, \he strikes, sharp spikes aimed at those threatening \him, claws whooshing through the air past them. This is  \
-						a very dangerous creature.</span>")
+						pattern. Standing tall, \he strikes, sharp spikes aimed at those threatening \him, claws whooshing through the air past them.</span>")
 				if("Cancel")
 					return
-			playsound(src, 'sound/effects/angrybug.ogg', 70, 0)
+			playsound(src, 'sound/effects/angrybug.ogg', 60, 0)
 			skin_state = SKIN_THREAT
 			spawn(100)
 				if(skin_state == SKIN_THREAT)
