@@ -347,15 +347,13 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	return null
 
 /proc/GetAssignment(var/mob/living/carbon/human/H)
-	if(H.mind.role_alt_title)
-		return H.mind.role_alt_title
-	else if(H.mind.assigned_role)
-		return H.mind.assigned_role
-	else if(H.job)
-		return H.job
-	else
+	if(!H)
 		return "Unassigned"
-
+	if(!H.mind)
+		return H.job
+	if(!H.mind.role_alt_title)
+		return H.mind.role_alt_title
+	return H.mind.assigned_role
 
 // Getters/Setters below.
 
