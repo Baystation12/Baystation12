@@ -35,8 +35,9 @@
 	data["has_empl"] = access_empl
 	data["has_antag"] = access_antag
 	if(active_record)
-		user << browse_rsc(active_record.photo_front, "front.png")
-		user << browse_rsc(active_record.photo_side, "side.png")
+		user << browse_rsc(active_record.photo_front, "front_[active_record.uid].png")
+		user << browse_rsc(active_record.photo_side, "side_[active_record.uid].png")
+		data["uid"] = active_record.uid
 		data["name"] = active_record.GetName()
 		data["position"] = active_record.GetPosition()
 		data["sex"] = active_record.GetSex()
@@ -82,9 +83,10 @@
 		ui.open()
 
 
-/datum/nano_module/records/proc/edit_field(var/original_value, var/field_name, var/has_access, var/mode, var/list/options = null)
-	if(!has_access)
+/datum/nano_module/records/proc/edit_field(var/original_value, var/field_name, var/access_requirement, var/mode, var/list/options = null)
+	if(!check_access(usr, access_requirement))
 		to_chat(usr, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
+		return
 
 	var/datum/computer_file/crew_record/R = active_record
 	if(!R)
@@ -103,6 +105,9 @@
 				CRASH("No list of options available for list selection edit type.")
 			newValue = input("Pick [field_name]:", "Record edit", original_value) as null|anything in options
 
+	if(!check_access(usr, access_requirement))
+		to_chat(usr, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
+		return null
 	if(!newValue)
 		return null
 	if(active_record != R)
@@ -142,6 +147,16 @@
 			return
 		print_text(record_to_html(active_record, access_med, access_empl, access_sec), usr)
 		return 1
+	if(href_list["name_search"])
+		var/name = sanitize(input("Enter full name for search.") as null|text)
+		if(!name)
+			return
+		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
+			if(lowertext(R.GetName()) == lowertext(name))
+				active_record = R
+				return 1
+		message = "Unable to find record for name '[name]'"
+		return 1
 	if(href_list["dna_search"])
 		if(!access_sec)
 			to_chat(usr, "Access Denied.")
@@ -150,7 +165,7 @@
 		if(!dna_hash)
 			return
 		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
-			if(R.GetDna() == dna_hash)
+			if(lowertext(R.GetDna()) == lowertext(dna_hash))
 				active_record = R
 				return 1
 		message = "Unable to find DNA hash '[dna_hash]'"
@@ -163,7 +178,7 @@
 		if(!fingerprint_hash)
 			return
 		for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
-			if(R.GetFingerprint() == fingerprint_hash)
+			if(lowertext(R.GetFingerprint()) == lowertext(fingerprint_hash))
 				active_record = R
 				return 1
 		message = "Unable to find fingerprint hash '[fingerprint_hash]'"
@@ -186,7 +201,7 @@
 		return 1
 
 	if(href_list["edit_name"])
-		var/newValue = edit_field(R.GetName(), "name", access_empl, EDIT_SHORTTEXT)
+		var/newValue = edit_field(R.GetName(), "name", access_heads, EDIT_SHORTTEXT)
 		if(newValue)
 			R.SetName(newValue)
 		return 1
@@ -195,22 +210,22 @@
 		genders |= "Unset"
 		for(var/G in gender_datums)
 			genders |= gender2text(G)
-		var/newValue = edit_field(R.GetSex(), "sex", access_empl, EDIT_LIST, genders)
+		var/newValue = edit_field(R.GetSex(), "sex", access_heads, EDIT_LIST, genders)
 		if(newValue)
 			R.SetSex(newValue)
 		return 1
 	if(href_list["edit_age"])
-		var/newValue = edit_field(R.GetAge(), "age", access_empl, EDIT_NUMERIC)
+		var/newValue = edit_field(R.GetAge(), "age", access_heads, EDIT_NUMERIC)
 		if(newValue)
 			R.SetAge(newValue)
 		return 1
 	if(href_list["edit_species"])
-		var/newValue = edit_field(R.GetSpecies(), "species", access_empl, EDIT_SHORTTEXT)
+		var/newValue = edit_field(R.GetSpecies(), "species", access_heads, EDIT_SHORTTEXT)
 		if(newValue)
 			R.SetSpecies(newValue)
 		return 1
 	if(href_list["edit_position"])
-		var/newValue = edit_field(R.GetPosition(), "position", access_empl, EDIT_SHORTTEXT)
+		var/newValue = edit_field(R.GetPosition(), "position", access_heads, EDIT_SHORTTEXT)
 		if(newValue)
 			R.SetPosition(newValue)
 		return 1
@@ -220,7 +235,7 @@
 		for(var/B in mil_branches.branches)
 			var/datum/mil_branch/BR = mil_branches.branches[B]
 			choices |= BR.name
-		var/newValue = edit_field(R.GetBranch(), "branch", access_empl, EDIT_LIST, choices)
+		var/newValue = edit_field(R.GetBranch(), "branch", access_heads, EDIT_LIST, choices)
 		if(newValue)
 			if(R.GetBranch() != newValue)
 				R.SetBranch(newValue)
@@ -239,7 +254,7 @@
 		for(var/rank in branch.ranks)
 			var/datum/mil_rank/RA = branch.ranks[rank]
 			choices |= RA.name
-		var/newValue = edit_field(R.GetRank(), "rank", access_empl, EDIT_LIST, choices)
+		var/newValue = edit_field(R.GetRank(), "rank", access_heads, EDIT_LIST, choices)
 		if(newValue)
 			R.SetRank(newValue)
 		return 1
@@ -247,66 +262,66 @@
 	// Medical record editing
 	// Technically speaking, status is part of common crew record (so it's publicly viewable) but we want doctors to be able to edit it so it's here.
 	if(href_list["edit_status"])
-		var/newValue = edit_field(R.GetStatus(), "status", access_med, EDIT_LIST, GLOB.physical_statuses)
+		var/newValue = edit_field(R.GetStatus(), "status", access_medical, EDIT_LIST, GLOB.physical_statuses)
 		if(newValue)
 			R.SetStatus(newValue)
 		return 1
 	if(href_list["edit_bloodtype"])
-		var/newValue = edit_field(R.GetBloodtype(), "blood type", access_med, EDIT_LIST, GLOB.blood_types)
+		var/newValue = edit_field(R.GetBloodtype(), "blood type", access_medical, EDIT_LIST, GLOB.blood_types)
 		if(newValue)
 			R.SetBloodtype(newValue)
 		return 1
 	if(href_list["edit_medrecord"])
-		var/newValue = edit_field(R.GetMedRecord(), "medical record", access_med, EDIT_LONGTEXT)
+		var/newValue = edit_field(R.GetMedRecord(), "medical record", access_medical, EDIT_LONGTEXT)
 		if(newValue)
 			R.SetMedRecord(newValue)
 		return 1
 
 	// Security record editing
 	if(href_list["edit_criminalstatus"])
-		var/newValue = edit_field(R.GetCriminalStatus(), "criminal status", access_sec, EDIT_LIST, GLOB.security_statuses)
+		var/newValue = edit_field(R.GetCriminalStatus(), "criminal status", access_security, EDIT_LIST, GLOB.security_statuses)
 		if(newValue)
 			R.SetSecRecord(newValue)
 		return 1
 	if(href_list["edit_dna"])
-		var/newValue = edit_field(R.GetDna(), "DNA", access_sec, EDIT_SHORTTEXT)
+		var/newValue = edit_field(R.GetDna(), "DNA", access_security, EDIT_SHORTTEXT)
 		if(newValue)
 			R.SetDna(newValue)
 		return 1
 	if(href_list["edit_fingerprint"])
-		var/newValue = edit_field(R.GetFingerprint(), "fingerprint", access_sec, EDIT_SHORTTEXT)
+		var/newValue = edit_field(R.GetFingerprint(), "fingerprint", access_security, EDIT_SHORTTEXT)
 		if(newValue)
 			R.SetFingerprint(newValue)
 		return 1
 	if(href_list["edit_secrecord"])
-		var/newValue = edit_field(R.GetSecRecord(), "security record", access_sec, EDIT_LONGTEXT)
+		var/newValue = edit_field(R.GetSecRecord(), "security record", access_security, EDIT_LONGTEXT)
 		if(newValue)
 			R.SetSecRecord(newValue)
 		return 1
 
 	// Employment record editing
 	if(href_list["edit_homesystem"])
-		var/newValue = edit_field(R.GetHomeSystem(), "home system", access_empl, EDIT_SHORTTEXT)
+		var/newValue = edit_field(R.GetHomeSystem(), "home system", access_heads, EDIT_SHORTTEXT)
 		if(newValue)
 			R.SetHomeSystem(newValue)
 		return 1
 	if(href_list["edit_citizenship"])
-		var/newValue = edit_field(R.GetCitizenship(), "citizenship", access_empl, EDIT_SHORTTEXT)
+		var/newValue = edit_field(R.GetCitizenship(), "citizenship", access_heads, EDIT_SHORTTEXT)
 		if(newValue)
 			R.SetCitizenship(newValue)
 		return 1
 	if(href_list["edit_faction"])
-		var/newValue = edit_field(R.GetFaction(), "faction", access_empl, EDIT_SHORTTEXT)
+		var/newValue = edit_field(R.GetFaction(), "faction", access_heads, EDIT_SHORTTEXT)
 		if(newValue)
 			R.SetFaction(newValue)
 		return 1
 	if(href_list["edit_religion"])
-		var/newValue = edit_field(R.GetReligion(), "religion", access_empl, EDIT_SHORTTEXT)
+		var/newValue = edit_field(R.GetReligion(), "religion", access_heads, EDIT_SHORTTEXT)
 		if(newValue)
 			R.SetReligion(newValue)
 		return 1
 	if(href_list["edit_emplrecord"])
-		var/newValue = edit_field(R.GetEmplRecord(), "employment record", access_empl, EDIT_LONGTEXT)
+		var/newValue = edit_field(R.GetEmplRecord(), "employment record", access_heads, EDIT_LONGTEXT)
 		if(newValue)
 			R.SetEmplRecord(newValue)
 		return 1

@@ -294,6 +294,8 @@
 		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/sea/marine
 	)
 	allowed_ranks = list(
+		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/marine/e9,
 		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/marine/e9_alt1,
 		/datum/mil_rank/fleet/e8,
@@ -304,7 +306,7 @@
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads, access_all_personal_lockers, access_janitor,
 			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_guppy_helm,
-			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar)
+			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory)
 
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor)
 

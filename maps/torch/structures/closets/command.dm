@@ -57,7 +57,7 @@
 		/obj/item/device/megaphone,
 		/obj/item/weapon/storage/box/headset,
 		/obj/item/weapon/storage/box/headset/torchxo,
-		/obj/item/weapon/storage/box/ids = 2,
+		/obj/item/weapon/storage/box/large/ids,
 		/obj/item/weapon/storage/box/PDAs,
 		/obj/item/weapon/clipboard,
 		/obj/item/device/holowarrant,
