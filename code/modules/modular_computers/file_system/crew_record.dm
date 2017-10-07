@@ -361,7 +361,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		return "Unassigned"
 	if(!H.mind)
 		return H.job
-	if(!H.mind.role_alt_title)
+	if(H.mind.role_alt_title)
 		return H.mind.role_alt_title
 	return H.mind.assigned_role
 
