@@ -204,16 +204,15 @@ var/world_topic_spam_protect_time = world.timeofday
 		return list2params(s)
 
 	else if(T == "manifest")
-		GLOB.data_core.get_manifest_list()
 		var/list/positions = list()
-
+		var/list/nano_crew_manifest = nano_crew_manifest()
 		// We rebuild the list in the format external tools expect
-		for(var/dept in PDA_Manifest)
-			var/list/dept_list = PDA_Manifest[dept]
+		for(var/dept in nano_crew_manifest)
+			var/list/dept_list = nano_crew_manifest[dept]
 			if(dept_list.len > 0)
 				positions[dept] = list()
-				for(var/list/person in dept_list)
-					positions[dept][person["name"]] = person["rank"]
+				for(var/datum/computer_file/crew_record/person in dept_list)
+					positions[dept][person.GetName()] = person.GetPosition()
 
 		for(var/k in positions)
 			positions[k] = list2params(positions[k]) // converts positions["heads"] = list("Bob"="Captain", "Bill"="CMO") into positions["heads"] = "Bob=Captain&Bill=CMO"

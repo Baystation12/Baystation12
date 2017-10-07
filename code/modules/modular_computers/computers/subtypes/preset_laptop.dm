@@ -31,6 +31,20 @@
 	battery_module = new/obj/item/weapon/computer_hardware/battery_module/advanced(src)
 	battery_module.charge_to_full()
 
+/obj/item/modular_computer/laptop/preset/records/install_default_hardware()
+	..()
+	processor_unit = new/obj/item/weapon/computer_hardware/processor_unit/small(src)
+	tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)
+	hard_drive = new/obj/item/weapon/computer_hardware/hard_drive/(src)
+	network_card = new/obj/item/weapon/computer_hardware/network_card/(src)
+	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
+	battery_module = new/obj/item/weapon/computer_hardware/battery_module/nano(src)
+	battery_module.charge_to_full()
+
+/obj/item/modular_computer/laptop/preset/records/install_default_programs()
+	..()
+	hard_drive.store_file(new/datum/computer_file/program/records())
+
 /obj/item/modular_computer/laptop/preset/custom_loadout/install_default_programs()
 	..()
 	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)

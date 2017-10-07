@@ -15,6 +15,8 @@
 			return global.CENT_FREQS;
 		if("CMinutes")
 			return global.CMinutes;
+		if("DEPT_FREQS")
+			return global.DEPT_FREQS;
 		if("Debug2")
 			return global.Debug2;
 		if("Failsafe")
@@ -31,12 +33,14 @@
 			return global.Master;
 		if("OOClog")
 			return global.OOClog;
-		if("PDA_Manifest")
-			return global.PDA_Manifest;
 		if("PDAs")
 			return global.PDAs;
 		if("SKILLS")
 			return global.SKILLS;
+		if("SSair")
+			return global.SSair;
+		if("SSairflow")
+			return global.SSairflow;
 		if("SSatoms")
 			return global.SSatoms;
 		if("SSfastprocess")
@@ -75,8 +79,6 @@
 			return global._preloader;
 		if("account_hack_attempted")
 			return global.account_hack_attempted;
-		if("acting_rank_prefixes")
-			return global.acting_rank_prefixes;
 		if("actor")
 			return global.actor;
 		if("additional_antag_types")
@@ -297,6 +299,8 @@
 			return global.created;
 		if("crew_repository")
 			return global.crew_repository;
+		if("csrfz_check")
+			return global.csrfz_check;
 		if("cult")
 			return global.cult;
 		if("currently_running_tests")
@@ -459,6 +463,8 @@
 			return global.gravity_is_on;
 		if("gyrotrons")
 			return global.gyrotrons;
+		if("gzn_check")
+			return global.gzn_check;
 		if("hadevent")
 			return global.hadevent;
 		if("hair_styles_female_list")
@@ -1047,8 +1053,6 @@
 			return global.vote;
 		if("vsc")
 			return global.vsc;
-		if("warrant_uid")
-			return global.warrant_uid;
 		if("wax_recipes")
 			return global.wax_recipes;
 		if("weighted_mundaneevent_locations")
@@ -1116,12 +1120,14 @@
 			global.Master=newval;
 		if("OOClog")
 			global.OOClog=newval;
-		if("PDA_Manifest")
-			global.PDA_Manifest=newval;
 		if("PDAs")
 			global.PDAs=newval;
 		if("SKILLS")
 			global.SKILLS=newval;
+		if("SSair")
+			global.SSair=newval;
+		if("SSairflow")
+			global.SSairflow=newval;
 		if("SSatoms")
 			global.SSatoms=newval;
 		if("SSfastprocess")
@@ -1160,8 +1166,6 @@
 			global._preloader=newval;
 		if("account_hack_attempted")
 			global.account_hack_attempted=newval;
-		if("acting_rank_prefixes")
-			global.acting_rank_prefixes=newval;
 		if("actor")
 			global.actor=newval;
 		if("additional_antag_types")
@@ -1382,6 +1386,8 @@
 			global.created=newval;
 		if("crew_repository")
 			global.crew_repository=newval;
+		if("csrfz_check")
+			global.csrfz_check=newval;
 		if("cult")
 			global.cult=newval;
 		if("currently_running_tests")
@@ -1544,6 +1550,8 @@
 			global.gravity_is_on=newval;
 		if("gyrotrons")
 			global.gyrotrons=newval;
+		if("gzn_check")
+			global.gzn_check=newval;
 		if("hadevent")
 			global.hadevent=newval;
 		if("hair_styles_female_list")
@@ -2132,8 +2140,6 @@
 			global.vote=newval;
 		if("vsc")
 			global.vsc=newval;
-		if("warrant_uid")
-			global.warrant_uid=newval;
 		if("wax_recipes")
 			global.wax_recipes=newval;
 		if("weighted_mundaneevent_locations")
@@ -2170,48 +2176,24 @@
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
-	"BLENDBLOCK",
-	"BLINDBLOCK",
-	"BLOCKADD",
 	"BSACooldown",
 	"BUMP_TELEPORTERS",
 	"Banlist",
 	"CENT_FREQS",
-	"CLUMSYBLOCK",
 	"CMinutes",
-	"COUGHBLOCK",
-	"DEAFBLOCK",
 	"DEPT_FREQS",
-	"DIFFMUT",
 	"Debug2",
-	"EPILEPSYBLOCK",
-	"FAKEBLOCK",
-	"FIREBLOCK",
 	"Failsafe",
-	"GLASSESBLOCK",
 	"GLOB",
-	"HALLUCINATIONBLOCK",
-	"HEADACHEBLOCK",
-	"HULKBLOCK",
 	"Holiday",
 	"IClog",
-	"INCREASERUNBLOCK",
 	"LIGHTING_CORNER_DIAGONAL",
-	"MONKEYBLOCK",
-	"MORPHBLOCK",
 	"Master",
-	"NERVOUSBLOCK",
-	"NOBREATHBLOCK",
-	"NOPRINTSBLOCK",
 	"OOClog",
-	"PDA_Manifest",
 	"PDAs",
-	"REGENERATEBLOCK",
-	"REMOTETALKBLOCK",
-	"REMOTEVIEWBLOCK",
-	"SHOCKIMMUNITYBLOCK",
 	"SKILLS",
-	"SMALLSIZEBLOCK",
+	"SSair",
+	"SSairflow",
 	"SSatoms",
 	"SSfastprocess",
 	"SSgarbage",
@@ -2220,21 +2202,17 @@
 	"SSmobs",
 	"SSobj",
 	"SSprocessing",
-	"TELEBLOCK",
-	"TWITCHBLOCK",
 	"Tier1Runes",
 	"Tier2Runes",
 	"Tier3Runes",
 	"Tier4Runes",
 	"WALLITEMS",
-	"XRAYBLOCK",
 	"_all_globals",
 	"_client_preferences",
 	"_client_preferences_by_key",
 	"_client_preferences_by_type",
 	"_preloader",
 	"account_hack_attempted",
-	"acting_rank_prefixes",
 	"actor",
 	"additional_antag_types",
 	"admin_datums",
@@ -2263,7 +2241,6 @@
 	"ai_verbs_default",
 	"air_alarm_topic",
 	"air_blocked",
-	"air_master",
 	"air_processing_killed",
 	"alarm_manager",
 	"alien_whitelist",
@@ -2308,8 +2285,6 @@
 	"blocked",
 	"bomb_set",
 	"borers",
-	"breach_brute_descriptors",
-	"breach_burn_descriptors",
 	"button_sound",
 	"cable_list",
 	"cached_icons",
@@ -2331,7 +2306,6 @@
 	"chemistryProcess",
 	"chicken_count",
 	"church_name",
-	"citizenship_choices",
 	"client_preference_stats_",
 	"client_repository",
 	"clown_sound",
@@ -2349,6 +2323,7 @@
 	"create_turf_html",
 	"created",
 	"crew_repository",
+	"csrfz_check",
 	"cult",
 	"currently_running_tests",
 	"custom_event_msg",
@@ -2393,7 +2368,6 @@
 	"facial_hair_styles_female_list",
 	"facial_hair_styles_list",
 	"facial_hair_styles_male_list",
-	"faction_choices",
 	"failed_db_connections",
 	"failed_old_db_connections",
 	"failed_unit_tests",
@@ -2431,6 +2405,7 @@
 	"godcult",
 	"gravity_is_on",
 	"gyrotrons",
+	"gzn_check",
 	"hadevent",
 	"hair_styles_female_list",
 	"hair_styles_list",
@@ -2598,7 +2573,6 @@
 	"random_useful_",
 	"recentmessages",
 	"registered_macros_by_ckey_",
-	"religion_choices",
 	"religion_name",
 	"renegades",
 	"req_console_assistance",
@@ -2622,11 +2596,6 @@
 	"scheduler",
 	"secondary_mode",
 	"secret_force_mode",
-	"sector_shuttles",
-	"seen_citizenships",
-	"seen_factions",
-	"seen_religions",
-	"seen_systems",
 	"send_emergency_team",
 	"sent_spiders_to_station",
 	"server_name",
@@ -2704,7 +2673,6 @@
 	"tg_self_state",
 	"tg_z_state",
 	"tgui_process",
-	"tick_multiplier",
 	"ticker",
 	"tickerProcess",
 	"ticket_panels",
@@ -2732,7 +2700,6 @@
 	"visual_nets",
 	"vote",
 	"vsc",
-	"warrant_uid",
 	"wax_recipes",
 	"weighted_mundaneevent_locations",
 	"weighted_randomevent_locations",

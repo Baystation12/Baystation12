@@ -1039,19 +1039,19 @@
 			if(I)
 				perpname = I.registered_name
 
-		for(var/datum/data/record/E in GLOB.data_core.general)
-			if(E.fields["name"] == perpname)
-				for (var/datum/data/record/R in GLOB.data_core.security)
-					if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "*Arrest*"))
+		for(var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
+			if(E.GetName() == perpname)
+				switch(E.GetCriminalStatus())
+					if("Arrest")
 						holder.icon_state = "hudwanted"
 						break
-					else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Incarcerated"))
+					if("Incarcerated")
 						holder.icon_state = "hudprisoner"
 						break
-					else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Parolled"))
+					if("Parolled")
 						holder.icon_state = "hudparolled"
 						break
-					else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Released"))
+					if("Released")
 						holder.icon_state = "hudreleased"
 						break
 		hud_list[WANTED_HUD] = holder

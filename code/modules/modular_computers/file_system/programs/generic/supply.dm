@@ -258,15 +258,3 @@
 	for(var/source in point_source_descriptions)
 		t += "[point_source_descriptions[source]]: [supply_controller.point_sources[source] || 0]<br>"
 	print_text(t, user)
-
-/datum/nano_module/supply/proc/print_text(var/text, var/mob/user)
-	var/obj/item/modular_computer/MC = nano_host()
-	if(istype(MC))
-		if(!MC.nano_printer)
-			to_chat(user, "Error: No printer detected. Unable to print document.")
-			return
-
-		if(!MC.nano_printer.print_text(text))
-			to_chat(user, "Error: Printer was unable to print the document. It may be out of paper.")
-	else
-		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running NTOSv2 compatible system?")

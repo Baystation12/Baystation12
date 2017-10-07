@@ -244,7 +244,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 		for (var/ID in H.virus2)
 			if (ID in virusDB)
 				print_reagent_default_message = FALSE
-				var/datum/data/record/V = virusDB[ID]
+				var/datum/computer_file/data/virus_record/V = virusDB[ID]
 				. += "<span class='warning'>Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]</span>"
 
 	if(print_reagent_default_message)

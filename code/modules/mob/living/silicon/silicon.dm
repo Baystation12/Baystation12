@@ -162,8 +162,7 @@
 /mob/living/silicon/proc/show_station_manifest()
 	var/dat
 	dat += "<h4>Crew Manifest</h4>"
-	if(GLOB.data_core)
-		dat += GLOB.data_core.get_manifest(1) // make it monochrome
+	dat += html_crew_manifest(1) // make it monochrome
 	dat += "<br>"
 	src << browse(dat, "window=airoster")
 	onclose(src, "airoster")
@@ -362,7 +361,6 @@
 	var/job = mind.assigned_role
 
 	job_master.FreeRole(job)
-	GLOB.data_core.ResetPDAManifest()
 
 	if(mind.objectives.len)
 		qdel(mind.objectives)

@@ -374,7 +374,7 @@
 	GLOB.universe.OnPlayerLatejoin(character)
 	if(job_master.ShouldCreateRecords(job.title))
 		if(character.mind.assigned_role != "Cyborg")
-			GLOB.data_core.manifest_inject(character)
+			CreateModularRecord(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			AnnounceArrival(character, job, spawnpoint.msg)
 		else
@@ -507,7 +507,7 @@
 
 /mob/new_player/proc/ViewManifest()
 	var/dat = "<div align='center'>"
-	dat += GLOB.data_core.get_manifest(OOC = 1)
+	dat += html_crew_manifest(OOC = 1)
 	//src << browse(dat, "window=manifest;size=370x420;can_close=1")
 	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
 	popup.set_content(dat)

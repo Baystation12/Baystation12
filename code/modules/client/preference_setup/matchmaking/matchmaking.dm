@@ -109,13 +109,6 @@ var/global/datum/matchmaker/matchmaker = new()
 /datum/relation/proc/finalize()
 	finalized = 1
 	if(other && other.finalized)
-		var/datum/data/record/R1 = find_general_record("name", holder.name)
-		var/datum/data/record/R2 = find_general_record("name", other.holder.name)
-		var/info = prob(60) ? get_desc_string() : "[holder] and [other.holder] know each other, but the exact nature of their relationship is unclear."
-		if(R1)
-			R1.fields["connections"] |= info
-		if(R2)
-			R2.fields["connections"] |= info
 		var/list/candidates = filter_list(GLOB.player_list, /mob/living/carbon/human)
 		candidates -= holder.current
 		candidates -= other.holder.current
