@@ -234,9 +234,9 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	if(H.chem_doses.len)
 		var/list/chemtraces = list()
 		for(var/T in H.chem_doses)
-			var/datum/reagent/R = GLOB.chemical_reagents_list[T]
-			if(R.scannable)
-				chemtraces += "[R.name] ([H.chem_doses[T]])"
+			var/datum/reagent/R = T
+			if(initial(R.scannable))
+				chemtraces += "[initial(R.name)] ([H.chem_doses[T]])"
 		if(chemtraces.len)
 			. += "<span class='notice'>Metabolism products of [english_list(chemtraces)] found in subject's system.</span>"
 
@@ -379,16 +379,16 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 				break
 		var/dat = "Trace Chemicals Found: "
 		for(var/T in blood_traces)
-			var/datum/reagent/R = GLOB.chemical_reagents_list[T]
+			var/datum/reagent/R = T
 			if(details)
-				dat += "[R.name] ([blood_traces[T]] units) "
+				dat += "[initial(R.name)] ([blood_traces[T]] units) "
 			else
-				dat += "[R.name] "
+				dat += "[initial(R.name)] "
 		if(details)
 			dat += "\nMetabolism Products of Chemicals Found:"
 			for(var/T in blood_doses)
-				var/datum/reagent/R = GLOB.chemical_reagents_list[T]
-				dat += "[R.name] ([blood_doses[T]] units) "
+				var/datum/reagent/R = T
+				dat += "[initial(R.name)] ([blood_doses[T]] units) "
 		to_chat(user, "[dat]")
 		reagents.clear_reagents()
 	return

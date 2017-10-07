@@ -518,7 +518,7 @@
 
 	chem_effects.Cut()
 
-	if(status_flags & GODMODE)	
+	if(status_flags & GODMODE)
 		return 0
 
 	if(in_stasis)
@@ -536,8 +536,8 @@
 	for(var/T in chem_doses)
 		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
 			continue
-		var/datum/reagent/R = GLOB.chemical_reagents_list[T]
-		chem_doses[T] -= R.metabolism*2
+		var/datum/reagent/R = T
+		chem_doses[T] -= initial(R.metabolism)*2
 		if(chem_doses[T] <= 0)
 			chem_doses -= T
 
@@ -651,7 +651,7 @@
 		if(gloves && germ_level > gloves.germ_level && prob(10))
 			gloves.germ_level += 1
 
-		if(vsc.plc.CONTAMINATION_LOSS) 
+		if(vsc.plc.CONTAMINATION_LOSS)
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
 				if(I.contaminated)

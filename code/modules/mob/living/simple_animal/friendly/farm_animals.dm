@@ -25,9 +25,12 @@
 	var/datum/reagents/udder = null
 
 /mob/living/simple_animal/hostile/retaliate/goat/New()
-	udder = new(50)
-	udder.my_atom = src
+	udder = new(50, src)
 	..()
+
+/mob/living/simple_animal/hostile/retaliate/goat/Destroy()
+	QDEL_NULL(udder)
+	. = ..()
 
 /mob/living/simple_animal/hostile/retaliate/goat/Life()
 	. = ..()

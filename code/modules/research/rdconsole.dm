@@ -67,8 +67,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	return return_name
 
 /obj/machinery/computer/rdconsole/proc/CallReagentName(var/reagent_type)
-	var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_type]
-	return R ? R.name : "Unknown"
+	var/datum/reagent/R = reagent_type
+	return ispath(reagent_type, /datum/reagent) ? initial(R.name) : "Unknown"
 
 /obj/machinery/computer/rdconsole/proc/SyncRDevices() //Makes sure it is properly sync'ed up with the devices attached to it (if any).
 	for(var/obj/machinery/r_n_d/D in range(3, src))
