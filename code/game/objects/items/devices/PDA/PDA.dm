@@ -429,6 +429,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/has_reception = reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER
 	data["reception"] = has_reception
 
+	if(mode==41)
+		data["crew_manifest"] = html_crew_manifest(1, 0)
+
 	if(mode==2)
 		var/convopdas[0]
 		var/pdas[0]

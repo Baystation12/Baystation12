@@ -139,6 +139,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/list/misc = new()
 	var/list/srv = new()
 	var/list/sup = new()
+	var/list/exp = new()
 	var/list/isactive = new()
 	var/list/mil_ranks = list() // HTML to prepend to name
 	var/dat = {"
@@ -209,6 +210,9 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		if(rank in GLOB.supply_positions)
 			sup[name] = rank
 			department = 1
+		if(rank in GLOB.exploration_positions)
+			exp[name] = rank
+			department = 1
 		if(!department && !(name in heads))
 			misc[name] = rank
 
@@ -274,6 +278,11 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		for(var/name in civ)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[civ[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
+	if(exp.len > 0)
+		dat += "<tr><th colspan=3>Exploration</th></tr>"
+		for(var/name in exp)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[exp[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
 	// in case somebody is insane and added them to the manifest, why not
 	if(bot.len > 0)
 		dat += "<tr><th colspan=3>Silicon</th></tr>"
@@ -336,6 +345,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		"sup" = filtered_nano_crew_manifest(GLOB.supply_positions),\
 		"srv" = filtered_nano_crew_manifest(GLOB.service_positions),\
 		"civ" = filtered_nano_crew_manifest(GLOB.civilian_positions),\
+		"exp" = filtered_nano_crew_manifest(GLOB.exploration_positions),\
 		"bot" = silicon_nano_crew_manifest(GLOB.cargo_positions),\
 		"misc" = filtered_nano_crew_manifest(GLOB.cargo_positions)\
 		)
