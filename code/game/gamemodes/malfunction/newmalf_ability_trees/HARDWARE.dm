@@ -128,11 +128,14 @@
 		sleep(10)
 		if(!user || !user.bombing_station || user.stat == DEAD)
 			radio.autosay("Self destruct sequence has been cancelled.", "Self-Destruct Control")
+			to_chat(user, "** Self destruct sequence has been cancelled **")
 			return
 		if(timer in list(2, 3, 4, 5, 10, 30, 60, 90, 120, 180, 240)) // Announcement times. "1" is not intentionally included!
 			radio.autosay("Self destruct in [timer] seconds.", "Self-Destruct Control")
+			to_chat(user, "** Self destructing in [timer] **")
 		if(timer == 1)
 			radio.autosay("Self destructing now. Have a nice day.", "Self-Destruct Control")
+			to_chat(user, "** Self destructing now **")
 		timer--
 
 	SetUniversalState(/datum/universal_state/nuclear_explosion/malf, arguments=list(user)) //TODO: find the station nuclear device and use that
