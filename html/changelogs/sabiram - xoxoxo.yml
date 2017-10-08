@@ -1,0 +1,10 @@
+author: sabiram
+
+delete-after: True
+
+changes: 
+  - maptweak: "The executive officer's office has been redesigned."
+  - rscadd: "Head of staff offices have been fitted with modular computer consoles."
+  - rscdel: "As the records have been integrated into modular computers, the laptop on the bridge previously adjacent to the security and medical records consoles has been removed."
+  - rscadd: "Heads of staff, the Senior Enlisted Advisor and the Bridge Officers have been leased modular tablets. The BO's are available in their lockers."
+  - rscadd: "The commanding officer and executive officer now have special pens."

@@ -754,7 +754,7 @@
 // Research
 /area/rnd/anom
 	name = "\improper Anomalous Materials"
-	icon_state = "toxmisc"
+	icon_state = "anolab"
 
 /area/rnd/canister
 	name = "\improper Canister Storage"
@@ -762,7 +762,7 @@
 
 /area/rnd/development
 	name = "\improper Development Lab"
-	icon_state = "toxlab"
+	icon_state = "devlab"
 
 /area/rnd/entry
 	name = "\improper Research and Development Access"
@@ -778,7 +778,7 @@
 
 /area/rnd/wing
 	name = "\improper Lab Wing"
-	icon_state = "toxlab"
+	icon_state = "labwing"
 
 /area/rnd/xenobiology/entry
 	name = "\improper Xenobiology Access"
@@ -1315,7 +1315,7 @@
 
 /area/rnd/misc_lab
 	name = "\improper Miscellaneous Research"
-	icon_state = "toxmisc"
+	icon_state = "misclab"
 
 /area/rnd/research
 	name = "\improper Research and Development"
