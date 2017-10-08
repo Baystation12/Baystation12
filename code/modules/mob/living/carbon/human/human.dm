@@ -975,6 +975,27 @@
 		to_chat(usr, message)
 	else
 		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
+
+/mob/living/carbon/human/verb/lookup()
+	set name = "Look up"
+	set desc = "If you want to know what's above."
+	set category = "IC"
+
+	if(!is_physically_disabled() && shadow)
+		if(client.eye == shadow)
+			reset_view(0)
+			return
+		var/turf/above = GetAbove(src)
+		if(istype(above, /turf/simulated/open))
+			to_chat(src, "<span class='notice'>You look up.</span>")
+			if(client)
+				reset_view(shadow)
+			return
+		to_chat(src, "<span class='notice'>You can see [above].</span>")
+	else
+		to_chat(src, "<span class='notice'>You can't do it right now.</span>")
+	return
+
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
 	if(!dna)
 		if(!new_species)
