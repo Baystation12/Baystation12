@@ -10,9 +10,7 @@
 	icon_state = "brain1"
 
 /mob/living/carbon/brain/New()
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
+	create_reagents(1000)
 	..()
 
 /mob/living/carbon/brain/Destroy()

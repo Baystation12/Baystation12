@@ -39,10 +39,8 @@
 	item_state = "balloon-empty"
 
 /obj/item/toy/water_balloon/New()
+	create_reagents(10)
 	..()
-	var/datum/reagents/R = new/datum/reagents(10)
-	reagents = R
-	R.my_atom = src
 
 /obj/item/toy/water_balloon/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return

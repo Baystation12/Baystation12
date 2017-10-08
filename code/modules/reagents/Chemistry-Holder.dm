@@ -6,14 +6,12 @@
 	var/maximum_volume = 100
 	var/atom/my_atom = null
 
-/datum/reagents/New(var/max = 100, atom/A = null)
+/datum/reagents/New(var/maximum_volume = 100, var/atom/my_atom)
+	if(!istype(my_atom))
+		CRASH("Invalid reagents holder: [log_info_line(my_atom)]")
 	..()
-	maximum_volume = max
-	my_atom = A
-
-	//I dislike having these here but map-objects are initialised before world/New() is called. >_>
-	if(!GLOB.chemical_reagents_list)
-		do_initialize_chemical_reagents()
+	src.my_atom = my_atom
+	src.maximum_volume = maximum_volume
 
 /datum/reagents/Destroy()
 	. = ..()
@@ -21,8 +19,7 @@
 		chemistryProcess.active_holders -= src
 
 	QDEL_NULL_LIST(reagent_list)
-	if(my_atom && my_atom.reagents == src)
-		my_atom.reagents = null
+	my_atom = null
 
 /* Internal procs */
 
@@ -128,11 +125,9 @@
 			if(my_atom)
 				my_atom.on_reagent_change()
 			return 1
-	var/datum/reagent/D = GLOB.chemical_reagents_list[reagent_type]
-	if(D)
-		var/datum/reagent/R = new D.type()
+	if(ispath(reagent_type, /datum/reagent))
+		var/datum/reagent/R = new reagent_type(src)
 		reagent_list += R
-		R.holder = src
 		R.volume = amount
 		R.initialize_data(data)
 		update_total()
@@ -386,9 +381,10 @@
 		return
 
 	if(!target.reagents)
-		var/datum/reagents/R = new /datum/reagents(amount * multiplier)
+		var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
 		. = trans_to_holder(R, amount, multiplier, copy)
 		R.touch_obj(target)
+		qdel(R)
 		return
 
 	return trans_to_holder(target.reagents, amount, multiplier, copy)
@@ -396,4 +392,9 @@
 /* Atom reagent creation - use it all the time */
 
 /atom/proc/create_reagents(var/max_vol)
-	reagents = new/datum/reagents(max_vol, src)
+	if(reagents)
+		log_debug("Attempted to create a new reagents holder when already referencing one: [log_info_line(src)]")
+		reagents.maximum_volume = max(reagents.maximum_volume, max_vol)
+	else
+		reagents = new/datum/reagents(max_vol, src)
+	return reagents

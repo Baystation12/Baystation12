@@ -190,11 +190,9 @@
 	var/max_water = 1000
 
 	New()
-		reagents = new/datum/reagents(max_water)
-		reagents.my_atom = src
+		create_reagents(max_water)
 		reagents.add_reagent(/datum/reagent/water, max_water)
 		..()
-		return
 
 	action(atom/target) //copypasted from extinguisher. TODO: Rewrite from scratch.
 		if(!action_checks(target) || get_dist(chassis, target)>3) return
