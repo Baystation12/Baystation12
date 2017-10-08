@@ -4,25 +4,6 @@
 /datum/uplink_item/item/badassery
 	category = /datum/uplink_category/badassery
 
-/datum/uplink_item/item/badassery/balloon
-	name = "For showing that You Are The BOSS (Useless Balloon)"
-	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
-	path = /obj/item/toy/balloon
-
-/datum/uplink_item/item/badassery/balloon/NT
-	name = "For showing that you love NT SOO much (Useless Balloon)"
-	path = /obj/item/toy/balloon/nanotrasen
-
-/datum/uplink_item/item/badassery/balloon/random
-	name = "For showing 'Whatevah~' (Useless Balloon)"
-	desc = "Randomly selects a ballon for you!"
-	path = /obj/item/toy/balloon
-
-/datum/uplink_item/item/badassery/balloon/random/get_goods(var/obj/item/device/uplink/U, var/loc)
-	var/balloon_type = pick(typesof(path))
-	var/obj/item/I = new balloon_type(loc)
-	return I
-
 /**************
 * Random Item *
 **************/
