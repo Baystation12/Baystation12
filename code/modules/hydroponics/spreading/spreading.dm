@@ -166,7 +166,7 @@
 		set_light(0)
 
 /obj/effect/plant/proc/refresh_icon()
-	var/growth = min(max_growth,round(health/growth_threshold))
+	var/growth = growth_threshold ? min(max_growth, round(health/growth_threshold)) : 1
 	var/at_fringe = get_dist(src,parent)
 	if(spread_distance > 5)
 		if(at_fringe >= (spread_distance-3))
