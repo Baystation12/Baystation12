@@ -1154,8 +1154,10 @@
 			reset_view(null)
 	else
 		var/isRemoteObserve = 0
-		if((mRemote in mutations) && remoteview_target)
-			if(remoteview_target.stat==CONSCIOUS)
+		if(shadow && client.eye == shadow && !is_physically_disabled())
+			isRemoteObserve = 1
+		else if((mRemote in mutations) && remoteview_target)
+			if(remoteview_target.stat == CONSCIOUS)
 				isRemoteObserve = 1
 		if(!isRemoteObserve && client && !client.adminobs)
 			remoteview_target = null

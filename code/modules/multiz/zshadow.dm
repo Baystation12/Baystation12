@@ -74,6 +74,9 @@
 	if(M.shadow)
 		qdel(M.shadow)
 		M.shadow = null
+		var/client/C = M.client
+		if(C && C.eye == shadow)
+			M.reset_view(0)
 
 //
 // Handle cases where the owner mob might have changed its icon or overlays.
