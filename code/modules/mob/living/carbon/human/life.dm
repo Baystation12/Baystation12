@@ -1020,21 +1020,17 @@
 			if(I)
 				perpname = I.registered_name
 
-		for(var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
-			if(E.GetName() == perpname)
-				switch(E.GetCriminalStatus())
-					if("Arrest")
-						holder.icon_state = "hudwanted"
-						break
-					if("Incarcerated")
-						holder.icon_state = "hudprisoner"
-						break
-					if("Parolled")
-						holder.icon_state = "hudparolled"
-						break
-					if("Released")
-						holder.icon_state = "hudreleased"
-						break
+		var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+		if(E)
+			switch(E.get_criminalStatus())
+				if("Arrest")
+					holder.icon_state = "hudwanted"
+				if("Incarcerated")
+					holder.icon_state = "hudprisoner"
+				if("Parolled")
+					holder.icon_state = "hudparolled"
+				if("Released")
+					holder.icon_state = "hudreleased"
 		hud_list[WANTED_HUD] = holder
 
 	if (  BITTEST(hud_updateflag, IMPLOYAL_HUD) \

@@ -430,22 +430,21 @@
 			else
 				perpname = name
 
-			if(perpname)
-				for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
-					if (E.GetName() == perpname)
-						var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", E.GetCriminalStatus()) in GLOB.security_statuses as null|text
-						if(hasHUD(usr, "security") && setcriminal)
-							E.SetCriminalStatus(setcriminal)
-							modified = 1
+			var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
+			if(R)
+				var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) in GLOB.security_statuses as null|text
+				if(hasHUD(usr, "security") && setcriminal)
+					R.set_criminalStatus(setcriminal)
+					modified = 1
 
-							spawn()
-								BITSET(hud_updateflag, WANTED_HUD)
-								if(istype(usr,/mob/living/carbon/human))
-									var/mob/living/carbon/human/U = usr
-									U.handle_regular_hud_updates()
-								if(istype(usr,/mob/living/silicon/robot))
-									var/mob/living/silicon/robot/U = usr
-									U.handle_regular_hud_updates()
+					spawn()
+						BITSET(hud_updateflag, WANTED_HUD)
+						if(istype(usr,/mob/living/carbon/human))
+							var/mob/living/carbon/human/U = usr
+							U.handle_regular_hud_updates()
+						if(istype(usr,/mob/living/silicon/robot))
+							var/mob/living/silicon/robot/U = usr
+							U.handle_regular_hud_updates()
 
 			if(!modified)
 				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
@@ -462,13 +461,13 @@
 					perpname = tempPda.owner
 			else
 				perpname = src.name
-			for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
-				if (E.GetName() == perpname)
-					if(hasHUD(usr,"security"))
-						to_chat(usr, "<b>Name:</b> [E.GetName()]")
-						to_chat(usr, "<b>Criminal Status:</b> [E.GetCriminalStatus()]")
-						to_chat(usr, "<b>Details:</b> [pencode2html(E.GetSecRecord())]")
-						read = 1
+			var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+			if(E)
+				if(hasHUD(usr,"security"))
+					to_chat(usr, "<b>Name:</b> [E.get_name()]")
+					to_chat(usr, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
+					to_chat(usr, "<b>Details:</b> [pencode2html(E.get_criminalStatus())]")
+					read = 1
 
 			if(!read)
 				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
@@ -486,20 +485,20 @@
 			else
 				perpname = src.name
 
-			for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
-				if (E.GetName() == perpname)
-					var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", E.GetStatus()) in GLOB.physical_statuses as null|text
-					if(hasHUD(usr,"medical") && setmedical)
-						E.SetStatus(setmedical)
-						modified = 1
+			var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+			if(E)
+				var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) in GLOB.physical_statuses as null|text
+				if(hasHUD(usr,"medical") && setmedical)
+					E.set_status(setmedical)
+					modified = 1
 
-						spawn()
-							if(istype(usr,/mob/living/carbon/human))
-								var/mob/living/carbon/human/U = usr
-								U.handle_regular_hud_updates()
-							if(istype(usr,/mob/living/silicon/robot))
-								var/mob/living/silicon/robot/U = usr
-								U.handle_regular_hud_updates()
+					spawn()
+						if(istype(usr,/mob/living/carbon/human))
+							var/mob/living/carbon/human/U = usr
+							U.handle_regular_hud_updates()
+						if(istype(usr,/mob/living/silicon/robot))
+							var/mob/living/silicon/robot/U = usr
+							U.handle_regular_hud_updates()
 
 			if(!modified)
 				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
@@ -516,15 +515,15 @@
 					perpname = tempPda.owner
 			else
 				perpname = src.name
-			for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
-				if (E.GetName() == perpname)
-					if(hasHUD(usr,"medical"))
-						to_chat(usr, "<b>Name:</b> [E.GetName()]")
-						to_chat(usr, "<b>Gender:</b> [E.GetSex()]")
-						to_chat(usr, "<b>Species:</b> [E.GetSpecies()]")
-						to_chat(usr, "<b>Blood Type:</b> [E.GetBloodtype()]")
-						to_chat(usr, "<b>Details:</b> [pencode2html(E.GetMedRecord())]")
-						read = 1
+			var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+			if(E)
+				if(hasHUD(usr,"medical"))
+					to_chat(usr, "<b>Name:</b> [E.get_name()]")
+					to_chat(usr, "<b>Gender:</b> [E.get_sex()]")
+					to_chat(usr, "<b>Species:</b> [E.get_species()]")
+					to_chat(usr, "<b>Blood Type:</b> [E.get_bloodtype()]")
+					to_chat(usr, "<b>Details:</b> [pencode2html(E.get_medRecord())]")
+					read = 1
 			if(!read)
 				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 

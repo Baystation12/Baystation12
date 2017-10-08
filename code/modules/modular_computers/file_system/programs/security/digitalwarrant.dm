@@ -135,7 +135,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		. = 1
 		var/namelist = list()
 		for(var/datum/computer_file/crew_record/CR in GLOB.all_crew_records)
-			namelist += CR.GetName()
+			namelist += CR.get_name()
 		var/new_name = sanitize(input(usr, "Please input name") as null|anything in namelist)
 		if(CanInteract(user, GLOB.default_state))
 			if (!new_name || !activewarrant)

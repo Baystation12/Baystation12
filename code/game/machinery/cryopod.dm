@@ -399,9 +399,9 @@
 			//current_mode.possible_traitors.Remove(occupant)
 
 	// Delete them from datacore.
-	for(var/datum/computer_file/crew_record/CR in GLOB.all_crew_records)
-		if(CR.GetName() == occupant.real_name)
-			qdel(CR)
+	var/datum/computer_file/crew_record/R = get_crewmember_record(occupant.real_name)
+	if(R)
+		qdel(R)
 
 	icon_state = base_icon_state
 

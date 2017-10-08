@@ -526,7 +526,7 @@ proc/is_blind(A)
 		if(check_records && !CR && !isMonkey())
 			threatcount += 4
 
-		if(check_arrest && CR && (CR.GetCriminalStatus() == GLOB.arrest_security_status))
+		if(check_arrest && CR && (CR.get_criminalStatus() == GLOB.arrest_security_status))
 			threatcount += 4
 
 	return threatcount
