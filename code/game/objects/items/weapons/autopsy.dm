@@ -183,7 +183,7 @@
 
 	src.add_data(S)
 	for(var/T in M.chem_doses)
-		var/datum/reagent/R = GLOB.chemical_reagents_list[T]
-		chemtraces += R.name
+		var/datum/reagent/R = T
+		chemtraces += initial(R.name)
 
 	return 1

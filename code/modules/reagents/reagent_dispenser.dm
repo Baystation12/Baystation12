@@ -16,9 +16,7 @@
 		return
 
 /obj/structure/reagent_dispensers/New()
-	var/datum/reagents/R = new/datum/reagents(initial_capacity)
-	reagents = R
-	R.my_atom = src
+	create_reagents(initial_capacity)
 
 	if (!possible_transfer_amounts)
 		src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT

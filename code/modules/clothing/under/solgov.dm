@@ -200,9 +200,8 @@
 	desc = "A black turtleneck and skirt, the optional ladies' service uniform of the Expeditionary Corps."
 	icon_state = "blackservicef"
 	worn_state = "blackservicef"
-	valid_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DECOR,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA) //dept colour tabs don't fit
 
-/obj/item/clothing/under/service/expeditionary_skirt/command
+/obj/item/clothing/under/service/expeditionary_skirt/officer
 	name = "expeditionary officer service skirt"
 	desc = "A black turtleneck and skirt, the optional ladies' service uniform of the Expeditionary Corps. This one has gold trim."
 	icon_state = "blackservicef_com"

@@ -33,6 +33,7 @@
 	var/mob/living/carbon/human/H = get_holder_of_type(src, /mob)
 	if(!istype(H)) return
 	install_default_programs_by_job(H)
+	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 
 //Map presets
 
@@ -54,3 +55,4 @@
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 	hard_drive.store_file(new/datum/computer_file/program/records())
+	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())

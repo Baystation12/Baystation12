@@ -1,9 +1,10 @@
+GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
+
 var/datum/controller/process/chemistry/chemistryProcess
 
 /datum/controller/process/chemistry
 	var/list/active_holders
 	var/list/chemical_reactions
-	var/list/chemical_reagents
 
 /datum/controller/process/chemistry/setup()
 	name = "chemistry"
@@ -11,7 +12,6 @@ var/datum/controller/process/chemistry/chemistryProcess
 	chemistryProcess = src
 	active_holders = list()
 	chemical_reactions = chemical_reactions_list
-	chemical_reagents = GLOB.chemical_reagents_list
 
 /datum/controller/process/chemistry/statProcess()
 	..()

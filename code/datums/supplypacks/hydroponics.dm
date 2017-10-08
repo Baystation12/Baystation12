@@ -30,7 +30,7 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "\improper Stok crate"
 
-/decl/hierarchy/supply_pack/hydroponics/lisa
+/decl/hierarchy/supply_pack/hydroponics/corgi
 	name = "Corgi crate"
 	contains = list()
 	cost = 50
