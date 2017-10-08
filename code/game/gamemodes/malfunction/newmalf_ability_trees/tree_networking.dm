@@ -139,7 +139,7 @@
 		log_ability_use(user, "elite encryption hack (FAIL - [alert_target])")
 		return
 	log_ability_use(user, "elite encryption hack (SUCCESS - [alert_target])")
-	security_state.set_security_level(alert_target, FALSE)
+	security_state.set_security_level(alert_target, TRUE)
 
 
 /datum/game_mode/malfunction/verb/system_override()
