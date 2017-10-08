@@ -992,9 +992,9 @@
 				if(client)
 					reset_view(shadow)
 				return
-		to_chat(src, "<span class='notice'>You can see [above].</span>")
+		to_chat(src, "<span class='notice'>You can see \the [above].</span>")
 	else
-		to_chat(src, "<span class='notice'>You can't do it right now.</span>")
+		to_chat(src, "<span class='notice'>You can't look up right now.</span>")
 	return
 
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
