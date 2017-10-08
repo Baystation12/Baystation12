@@ -467,12 +467,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(mode==31)
 		if(!user || !user.client)	return
 		var/recommends = ""
-		for(var/T in user:CharRecords.employee_records)
-			recommends = "[T]\n"
+		for(var/N in user:CharRecords.display_employeerecords())
+			recommends += "[N]<br>"
+
 		var/datum/job/job = job_master.GetJob(user:job)
 		data["ntprofile"] = list(\
 			"name" = "[owner]",\
-			"department" = "[user:CharRecords.char_department]",\
+			"department" = "[get_department(user:CharRecords.char_department)]",\
 			"deptrank" = "[calculate_department_rank(user)]",\
 			"job" = "[user:job]",\
 			"basepay" = "[job.base_pay]",\

@@ -17,7 +17,7 @@ var/paychecks = 0
 //	var/datum/category_item/player_setup_item/general/persistent/PERSISTENT = new()
 	for(var/client/C in GLOB.clients)
 		var/mob/living/carbon/human/H = C.mob
-		if(!H)	continue
+		if(!H || !ishuman(H) || !H.CharRecords)	continue
 		if(C.inactivity/10 > 120) // 2 minutes AFK or more we begin counting.
 			var/timeafk = round(C.inactivity/3, 1) // Take 1/3rd of the total AFK time.
 			if(timeafk > 1000)

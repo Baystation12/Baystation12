@@ -1,3 +1,4 @@
+/*
 var/const/ENG               =(1<<0)
 var/const/SEC               =(1<<1)
 var/const/MED               =(1<<2)
@@ -9,7 +10,7 @@ var/const/MSC               =(1<<7)
 var/const/SRV               =(1<<8)
 var/const/SUP               =(1<<9)
 var/const/SPT               =(1<<10)
-
+*/
 var/list/assistant_occupations = list(
 )
 
@@ -88,6 +89,9 @@ var/list/support_positions = list(
 				if(17 to 25)
 					if(M.CharRecords.promoted == 1) //Promoted from Regular to Senior-capable.
 						M.CharRecords.department_rank = 4 //Senior
+						if(!M.CharRecords.promoted) //Not reached Senior yet.
+							M.CharRecords.promoted = 1
+							M.CharRecords.add_employeerecord("NanoTrasen", "Reaching Seniority Status within the company", 7, 0, 0, 500, 1)
 				if(26 to 1000) // Yeah it stops here.
 					if(M.CharRecords.promoted == 1)
 						M.CharRecords.department_rank = 5 //Lead
@@ -104,15 +108,15 @@ var/list/support_positions = list(
 */
 			if(M.CharRecords.department_rank != oldrank) //Ranks changed)
 				if(M.CharRecords.department_rank > oldrank)
-					SendNTPDAMessage(M, "NT Administration", {"You have recieved a promotion for being with the company for a long time!
-					You are now a [get_department_rank_title(M)] [M.job]."})
+					SendNTPDAMessage(M, "NT Administration", {"You have recieved a promotion. You are now a [get_department_rank_title(M)] [M.job]."})
 			return M.CharRecords.department_rank
 	return 1
 
 
 /proc/get_department_rank_title(var/department, var/rank, var/ishead = 0)
 	if(department && rank)
-		if(ishead)
+		department = get_department(1, department)
+		if(department == "Command")
 			if(rank == 4)
 				return "Senior"
 			else

@@ -14,6 +14,11 @@
 	var/mob/living/carbon/human/profiled
 	var/datum/browser/popup
 	var/mob/living/carbon/human/idowner
+	var/list/pendingrequests = list()
+
+/obj/machinery/computer/department_manager/Initialize()
+	. = ..()
+	load_requests()
 
 /obj/machinery/computer/department_manager/verb/eject_id()
 	set category = "Object"
@@ -24,9 +29,10 @@
 
 	if(scan)
 		to_chat(usr, "You remove \the [scan] from \the [src].")
-		scan.dropInto(loc)
 		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
+		else
+			scan.dropInto(loc)
 		scan = null
 		idowner = null
 		profiled = null
@@ -64,24 +70,25 @@
 				dat = {"
 						<html>
 						<head>
-							<title>[department] Management Console</title>
+						<title>[department] Management Console</title>
 						</head>
 						<body>
-							<h2>[department] Management Console</h2><br>
-							<div font-size="medium">
-							<a href='?src=\ref[src];screen=2'>Employee Database</a><br>
-							<a href='?src=\ref[src];screen=3'>Department Economy</a>
-							<a href='?src=\ref[src];screen=4'></a>
-							</div>
-							"}
+						<h2>[department] Management Console</h2><br>
+						<div font-size="medium">
+						<a href='?src=\ref[src];screen=2'>Employee Database</a>
+						<a href='?src=\ref[src];screen=3'>Financial Manager</a>
+						"}
+				if(department == "NanoTrasen") //NT console
+					dat += "<a href='?src=\ref[src];screen=4'>Administrative Requests</a>"
+				dat += "</div>"
 			if(2)
 				dat = "<ul>"
 				for(var/mob/living/carbon/human/M in GLOB.mob_list)
-					if(M.client && M.CharRecords.char_department == department)
+					if(M.client && M.CharRecords.char_department == get_department(0, department) || department == "NanoTrasen")
 						dat += {"<li><b>Name:</b> [M.real_name]<br>
 						<b>Age:</b> [M.age]<br>
 						<b>Occupation:</b> [M.job]<br>
-						<b>Occupation Experience: [get_department_rank_title(M.CharRecords.char_department, M.CharRecords.department_rank)]<br>
+						<b>Occupation Experience: [get_department_rank_title(get_department(M.CharRecords.char_department), M.CharRecords.department_rank)]<br>
 						<b>Clocked Hours:</b> [round(M.CharRecords.department_playtime/3600, 0.1)]<br>
 						<b>Employee Grade:</b> [round(M.CharRecords.employeescore, 0.01)]
 						<a href='?src=\ref[src];choice=Profile;profiled=\ref[M]'>Profile</a></li>"}
@@ -99,11 +106,12 @@
 						<b>Name:</b> [profiled.real_name]<br>
 						<b>Age:</b> [profiled.age]<br>
 						<b>Occupation:</b> [profiled.job]<br>
-						<b>Occupation Experience: [get_department_rank_title(profiled.CharRecords.char_department, profiled.CharRecords.department_rank)]<br>
+						<b>Occupation Experience: [get_department_rank_title(get_department(1, profiled.CharRecords.char_department), profiled.CharRecords.department_rank)]<br>
 						<b>Clocked Hours:</b> [round(profiled.CharRecords.department_playtime/3600, 0.1)]<br>
 						<b>Employee Grade:</b> [round(profiled.CharRecords.employeescore, 0.01)]
 						"}
-				dat += "<A href='?src=\ref[src];choice=recommend'>Player Records</A><br><A href='?src=\ref[src];choice=promote'>Promote</A><br><A href='?src=\ref[src];choice=demote'>Demote</A><br>"
+				dat += "<A href='?src=\ref[src];choice=records'>Employee Records</A><br><A href='?src=\ref[src];choice=promote'>Promote</A><br><A href='?src=\ref[src];choice=demote'>Demote</A><br>"
+				dat += ""
 				dat += "<A href='?src=\ref[src];choice=return'>Return</A>"
 				dat += "</body></html>"
 			if(2.2) //Character Employee Records
@@ -140,7 +148,14 @@
 		switch(href_list["choice"])
 			if("Log Out")
 				authenticated = null
-
+				if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
+					usr.put_in_hands(scan)
+				else
+					scan.dropInto(loc)
+				scan = null
+				idowner = null
+				profiled = null
+				screen = 1
 			if("Log In")
 				if (istype(scan, /obj/item/weapon/card/id))
 					if(check_access(scan))
@@ -158,16 +173,67 @@
 				profiled = null
 				popup.update()
 /*--------------PROFILE BUTTONS--------------*/
-			if("employee_record")
+			if("records")
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
-				if(profiled.CharRecords.char_department != "Command") //Can't recommend your bosses?
+				if(profiled.CharRecords.char_department != "Command" || profiled.job == "Captain") //Can't recommend your bosses?
 					to_chat(usr, "Leave blank to cancel.")
-					var/recommendation = input("Insert Record:", "Record Management - Department Management") as text
-					var/score = input("Insert record score (1-10)", "Record Management - Department Management") as num
-					if(!recommendation)	return
-					if(!score)	score = 0
-					if(!score in 1 to 10)	score = 0
-					profiled.CharRecords.add_employeerecord(src.idowner.real_name, recommendation, score)
+					var/record = input("Insert Record:", "Record Management - Department Management") as text
+					var/score = input("Insert record score (1-10) for the employee rating.", "Record Management - Department Management") as num
+					if(!record)	return
+					if(!score || !score in 1 to 10)	score = 0
+					var/datum/ntrequest/NR = new()
+					NR.make_request("record", idowner.ckey, idowner.real_name, profiled.ckey, profiled.real_name, record)
+			if("promote")
+				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
+				switch(alert("Promote [profiled.real_name] to a Senior- or Head Position?", "Promotion Screen", "Senior Position", "Head Position"))
+					if("Head Position")
+						if(department == "Command" && idowner.job == "Captain" || department == "NanoTrasen") //Captain can promote to head.
+							var/record = input("Insert Reason/Record:", "Promotion Management - Department Management") as text
+							var/datum/ntrequest/NR = new()
+							NR.make_request("promote", idowner.ckey, idowner.real_name, profiled.ckey, profiled.real_name, record)
+							to_chat(usr, "Request has been sent to NanoTrasen for review.")
+					if("Senior Position")
+						if(calculate_department_rank(profiled) < 3)
+							to_chat(usr, "[profiled.real_name]'s rank is insufficient to allow for a promotion.")
+							return
+						else if(profiled.CharRecords.employeescore < 7)
+							to_chat(usr, "[profiled.real_name]'s employee score is insufficient to allow for a promotion. (Minimum of 7 required)")
+							return
+						else if(profiled.CharRecords.promoted == 1)
+							to_chat(usr, "[profiled.real_name] is already promoted!")
+							return
+						else
+							var/record = input("Insert Reason/Record:", "Promotion Management - Department Management") as text
+							var/score = input("Insert record score (1-10) for the employee rating.", "Record Management - Department Management") as num
+							profiled.CharRecords.add_employeerecord(idowner.real_name, record, score, 0, 0, 0)
+							profiled.CharRecords.promoted = 1
+							calculate_department_rank(profiled) //Re-calculate to set proper rank.
+							to_chat(usr, "Promotion complete.")
+			if("demote")
+				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
+				switch(alert("demote [profiled.real_name] from Senior- or Head Position?", "Promotion Screen", "Senior Position", "Head Position"))
+					if("Head Position")
+						if(department == "Command" && idowner.job == "Captain" || department == "NanoTrasen") //Captain can promote to head.
+							var/record = input("Insert Reason/Record:", "Promotion Management - Department Management") as text
+							var/score = input("Insert record score (1-10) for the employee rating.", "Record Management - Department Management") as num
+							if(!record)	return
+							if(!score || !score in 1 to 10)	score = 0
+							var/datum/ntrequest/NR = new()
+							NR.make_request("promote", idowner.ckey, idowner.real_name, profiled.ckey, profiled.real_name, record)
+							profiled.CharRecords.add_employeerecord(idowner.real_name, record, score, 0, 0, 0)
+							to_chat(usr, "Request has been sent to NanoTrasen for review.")
+					if("Senior Position")
+						if(profiled.CharRecords.promoted == 0)
+							to_chat(usr, "[profiled.real_name] is not a senior employee!")
+							return
+						else
+							var/record = input("Insert Reason/Record:", "Demotion Management - Department Management") as text
+							var/score = input("Insert record score (1-10) for the employee rating.", "Record Management - Department Management") as num
+							profiled.CharRecords.add_employeerecord(idowner.real_name, record, score, 0, 0, 0)
+							profiled.CharRecords.promoted = 0
+							calculate_department_rank(profiled) //Re-calculate to set proper rank.
+							to_chat(usr, "Demotion complete.")
+
 /*
 			if("promote")
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
@@ -225,3 +291,5 @@
 	add_fingerprint(usr)
 	updateUsrDialog()
 	return
+
+/obj/machinery/computer/department_manager/proc/make_request(var/fromckey, var/fromchar, var/tockey, var/tochar, var/request)

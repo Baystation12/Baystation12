@@ -173,7 +173,7 @@
 		return 0
 
 /datum/job/proc/is_valid_department(var/dept_flag)
-	if(dept_flag == department_flag)
+	if(dept_flag == department_flag || dept_flag == department)
 		return 1
 	else
 		return 0
@@ -222,20 +222,38 @@
 		res += initial(R.name)
 	return english_list(res)
 
-/datum/job/proc/get_department(var/department_flag)
+/proc/get_department(var/department_flag, var/bit = 1)
 	if(!department_flag) return null
-	switch(department_flag)
-		if(COM)
-			return "Command"
-		if(SEC)
-			return "Security"
-		if(SCI)
-			return "Science"
-		if(ENG)
-			return "Engineering"
-		if(SRV)
-			return "Service"
-		if(CIV)
-			return "Civilian"
-		if(MED)
-			return "Medical"
+	switch(bit)
+		if(1)
+			switch(department_flag)
+				if(COM)
+					return "Command"
+				if(SEC)
+					return "Security"
+				if(SCI)
+					return "Science"
+				if(ENG)
+					return "Engineering"
+				if(SRV)
+					return "Service"
+				if(CIV)
+					return "Civilian"
+				if(MED)
+					return "Medical"
+		if(0)
+			switch(department_flag)
+				if("Command")
+					return COM
+				if("Security")
+					return SEC
+				if("Science")
+					return SCI
+				if("Engineering")
+					return ENG
+				if("Service")
+					return SRV
+				if("Civilian")
+					return CIV
+				if("Medical")
+					return MED

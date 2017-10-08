@@ -338,7 +338,7 @@
 //	if(!job.is_branch_allowed(client.mob:CharRecords.char_department))
 //		alert("Wrong branch of service for [job.title]. Valid branches is: [job.department].")
 //		return 0
-	if(!job.is_valid_department(client.prefs.char_branch))
+	if(!job.is_valid_department(get_department(0, client.prefs.prefs_department)))
 		alert("Wrong branch of service for [job.title]. Valid branches is: [job.department].")
 		return 0
 	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank))
@@ -523,6 +523,10 @@
 	new_character.regenerate_icons()
 
 	new_character.key = key		//Manually transfer the key to log them in
+	new_character.CharRecords = new()
+	new_character.CharRecords.Load_Profile(new_character)
+	new_character.CharRecords.owner = new_character //Assign Owner..
+	new_character.CharRecords.clientowner = new_character.client
 	return new_character
 
 /mob/new_player/proc/ViewManifest()
