@@ -5,7 +5,7 @@
 	program_icon_state = "word"
 	size = 4
 	requires_ntnet = 0
-	available_on_ntnet = 0
+	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/program/computer_wordprocessor/
 	var/browsing
 	var/open_file
