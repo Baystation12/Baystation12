@@ -151,16 +151,6 @@ proc/get_radio_key_from_channel(var/channel)
 		if("*") return emote(copytext(message,2))
 		if("^") return custom_emote(1, copytext(message,2))
 
-	// This is broadcast to all mobs with the language,
-	// irrespective of distance or anything else.
-	if(speaking && (speaking.flags & HIVEMIND))
-		speaking.broadcast(src,trim(message))
-		return 1
-
-	if(is_muzzled())
-		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
-		return
-
 	//parse the radio code and consume it
 	var/message_mode = parse_message_mode(message, "headset")
 	if (message_mode)
@@ -178,6 +168,16 @@ proc/get_radio_key_from_channel(var/channel)
 			message = copytext(message,2+length(speaking.key))
 		else
 			speaking = get_default_language()
+
+	// This is broadcast to all mobs with the language,
+	// irrespective of distance or anything else.
+	if(speaking && (speaking.flags & HIVEMIND))
+		speaking.broadcast(src,trim(message))
+		return 1
+
+	if(is_muzzled())
+		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
+		return
 
 	if (speaking)
 		if(whispering)
