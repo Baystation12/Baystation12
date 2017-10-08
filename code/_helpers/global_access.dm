@@ -55,6 +55,8 @@
 			return global.SSmobs;
 		if("SSobj")
 			return global.SSobj;
+		if("SSopen_space")
+			return global.SSopen_space;
 		if("SSprocessing")
 			return global.SSprocessing;
 		if("Tier1Runes")
@@ -1142,6 +1144,8 @@
 			global.SSmobs=newval;
 		if("SSobj")
 			global.SSobj=newval;
+		if("SSopen_space")
+			global.SSopen_space=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
 		if("Tier1Runes")
@@ -2201,6 +2205,7 @@
 	"SSmachines",
 	"SSmobs",
 	"SSobj",
+	"SSopen_space",
 	"SSprocessing",
 	"Tier1Runes",
 	"Tier2Runes",

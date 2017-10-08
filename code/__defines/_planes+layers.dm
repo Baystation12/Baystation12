@@ -60,8 +60,15 @@ What is the naming convention for planes or layers?
 	FLOAT_PLANE = -32767
 */
 
-#define CLICKCATCHER_PLANE -99
-#define SPACE_PLANE -98
+#define CLICKCATCHER_PLANE -500
+#define SPACE_PLANE -499
+
+//Reserve planes for openspace
+#define OPENSPACE_PLANE_START -462
+#define OPENSPACE_PLANE_END -22
+#define OPENSPACE_PLANE -463
+#define OVER_OPENSPACE_PLANE -22
+
 
 #define BELOW_TURF_PLANE             -22 // objects that are below turfs. Useful for asteroid smoothing or other such magic.
 	// TURF_LAYER 2
@@ -190,6 +197,8 @@ What is the naming convention for planes or layers?
 	#define HUD_ABOVE_ITEM_LAYER 3
 
 
+//This is difference between highest and lowest visible
+#define PLANE_DIFFERENCE              22
 /image
 	plane = FLOAT_PLANE			// this is defunct, lummox fixed this on recent compilers, but it will bug out if I remove it for coders not on the most recent compile.
 
