@@ -281,7 +281,7 @@
 	if(href_list["edit_criminalstatus"])
 		var/newValue = edit_field(R.GetCriminalStatus(), "criminal status", access_security, EDIT_LIST, GLOB.security_statuses)
 		if(newValue)
-			R.SetSecRecord(newValue)
+			R.SetCriminalStatus(newValue)
 		return 1
 	if(href_list["edit_dna"])
 		var/newValue = edit_field(R.GetDna(), "DNA", access_security, EDIT_SHORTTEXT)
