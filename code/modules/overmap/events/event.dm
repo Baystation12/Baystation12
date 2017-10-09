@@ -20,7 +20,7 @@
 		var/overmap_event_type = pick(subtypesof(/datum/overmap_event))
 		var/datum/overmap_event/overmap_event = new overmap_event_type
 
-		var/list/event_turfs = acquire_event_turfs(overmap_event.count, overmap_event.radius, candidate_turfs)
+		var/list/event_turfs = acquire_event_turfs(overmap_event.count, overmap_event.radius, candidate_turfs, overmap_event.continuous)
 		candidate_turfs -= event_turfs
 
 		for(var/event_turf in event_turfs)
@@ -42,7 +42,7 @@
 		. = list()
 		event_turfs_by_z_level[z_level_text] = .
 
-/decl/overmap_event_handler/proc/acquire_event_turfs(var/number_of_turfs, var/distance_from_origin, var/list/candidate_turfs)
+/decl/overmap_event_handler/proc/acquire_event_turfs(var/number_of_turfs, var/distance_from_origin, var/list/candidate_turfs, var/continuous = TRUE)
 	number_of_turfs = min(number_of_turfs, candidate_turfs.len)
 	candidate_turfs = candidate_turfs.Copy() // Not this proc's responsibility to adjust the given lists
 
@@ -53,7 +53,7 @@
 
 	while(selection_turfs.len && selected_turfs.len < number_of_turfs)
 		var/selection_turf = pick(selection_turfs)
-		var/random_neighbour = get_random_neighbour(selection_turf, candidate_turfs)
+		var/random_neighbour = get_random_neighbour(selection_turf, candidate_turfs, continuous, distance_from_origin)
 
 		if(random_neighbour)
 			candidate_turfs -= random_neighbour
@@ -65,11 +65,16 @@
 
 	return selected_turfs
 
-/decl/overmap_event_handler/proc/get_random_neighbour(var/turf/origin_turf, var/list/candidate_turfs)
-	var/cardinal_turfs = shuffle(origin_turf.CardinalTurfs(FALSE))
-	for(var/cardinal_turf in cardinal_turfs)
-		if(cardinal_turf in candidate_turfs)
-			return cardinal_turf
+/decl/overmap_event_handler/proc/get_random_neighbour(var/turf/origin_turf, var/list/candidate_turfs, var/continuous = TRUE, var/range)
+	var/fitting_turfs
+	if(continuous)
+		fitting_turfs = origin_turf.CardinalTurfs(FALSE)
+	else
+		fitting_turfs = trange(range, origin_turf)
+	fitting_turfs = shuffle(fitting_turfs)
+	for(var/turf/T in fitting_turfs)
+		if(T in candidate_turfs)
+			return T
 
 /decl/overmap_event_handler/proc/on_turf_exited(var/turf/old_loc, var/obj/effect/overmap/ship/entering_ship, var/new_loc)
 	if(!istype(entering_ship))
@@ -122,6 +127,7 @@
 	var/opacity = 1
 	var/difficulty = EVENT_LEVEL_MODERATE
 	var/list/victims
+	var/continuous = TRUE //if it should form continous blob, or can have gaps
 
 /datum/overmap_event/proc/enter(var/obj/effect/overmap/ship/victim)
 	if(!GLOB.event_manager)
@@ -146,7 +152,9 @@
 /datum/overmap_event/meteor
 	name = "asteroid field"
 	event = /datum/event/meteor_wave/overmap
-	count = 7
+	count = 15
+	radius = 4
+	continuous = FALSE
 	event_icon_states = list("meteor1", "meteor2", "meteor3", "meteor4")
 	difficulty = EVENT_LEVEL_MAJOR
 
@@ -159,12 +167,14 @@
 /datum/overmap_event/electric
 	name = "electrical storm"
 	event = /datum/event/electrical_storm
-	count = 9
+	count = 11
+	radius = 3
 	event_icon_states = list("electrical1", "electrical2", "electrical3", "electrical4")
 	difficulty = EVENT_LEVEL_MAJOR
 
 /datum/overmap_event/dust
 	name = "dust cloud"
 	event = /datum/event/dust
-	count = 11
+	count = 16
+	radius = 4
 	event_icon_states = list("dust1", "dust2", "dust3", "dust4")

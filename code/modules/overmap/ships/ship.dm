@@ -145,3 +145,4 @@
 	for(var/i=1, i<=2, i++)
 		if(speed[i])
 			. = min(last_movement[i] + default_delay - speed_mod*abs(speed[i]) - world.time, .)
+	. = max(.,0)
