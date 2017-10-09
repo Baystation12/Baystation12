@@ -25,6 +25,7 @@
 		trodden_on(O)
 
 /obj/effect/vine/proc/trodden_on(var/mob/living/victim)
+	wake_neighbors()
 	if(!is_mature())
 		return
 	var/mob/living/carbon/human/H = victim
@@ -43,6 +44,7 @@
 			buckled_mob.anchored = initial(buckled_mob.anchored)
 			buckled_mob.update_canmove()
 		buckled_mob = null
+	START_PROCESSING(SSvines, src)
 	return
 
 /obj/effect/vine/proc/manual_unbuckle(mob/user as mob)
@@ -71,6 +73,7 @@
 				"<span class='warning'>You [text] at \the [src].</span>",\
 				"<span class='warning'>You hear shredding and ripping.</span>")
 			check_health()
+	START_PROCESSING(SSvines, src)
 	return
 
 /obj/effect/vine/proc/entangle(var/mob/living/victim)
@@ -103,4 +106,4 @@
 
 /obj/effect/vine/buckle_mob()
 	. = ..()
-	if(.) plant_controller.add_plant(src)
+	if(.) START_PROCESSING(SSvines, src)

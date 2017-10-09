@@ -118,20 +118,19 @@
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
 
-	Process()
+	START_PROCESSING(SSvines, src)
 
-/obj/effect/plant/Destroy()
-	if(plant_controller)
-		plant_controller.remove_plant(src)
-	for(var/obj/effect/plant/neighbor in range(1,src))
-		plant_controller.add_plant(neighbor)
+/obj/effect/vine/Destroy()
+	for(var/obj/effect/vine/neighbor in range(1,src))
+		START_PROCESSING(SSvines, neighbor)
+	STOP_PROCESSING(SSvines, src)
 	return ..()
 
 // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
 /obj/effect/vine/proc/finish_spreading()
 	set_dir(calc_dir())
 	update_icon()
-	plant_controller.add_plant(src)
+	START_PROCESSING(SSvines, src)
 	// Some plants eat through plating.
 	if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/acid/polyacid]))
 		var/turf/T = get_turf(src)
@@ -237,7 +236,7 @@
 /obj/effect/vine/attackby(var/obj/item/weapon/W, var/mob/user)
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	plant_controller.add_plant(src)
+	START_PROCESSING(SSvines, src)
 
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 		if(sampled)
