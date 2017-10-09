@@ -116,6 +116,7 @@
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
 		if(newloc)
 			Move(newloc)
+			handle_wraparound()
 		update_icon()
 
 /obj/effect/overmap/ship/update_icon()
@@ -146,3 +147,29 @@
 		if(speed[i])
 			. = min(last_movement[i] + default_delay - speed_mod*abs(speed[i]) - world.time, .)
 	. = max(.,0)
+
+/obj/effect/overmap/ship/proc/handle_wraparound()
+	var/nx = x
+	var/ny = y
+	var/low_edge = 1
+	var/high_edge = GLOB.using_map.overmap_size - 1
+
+	if(dir == WEST && x == low_edge)
+		nx = high_edge
+	else if(dir == EAST && x == high_edge)
+		nx = low_edge
+	else if(dir == SOUTH  && y == low_edge)
+		ny = high_edge
+	else if(dir == NORTH && y == high_edge)
+		ny = low_edge
+	else
+		return //we're not flying off anywhere
+
+	var/turf/T = locate(nx,ny,z)
+	if(T)
+		forceMove(T)
+
+/obj/effect/overmap/ship/Bump(var/atom/A)
+	if(istype(A,/turf/unsimulated/map/edge))
+		handle_wraparound()
+	..()
