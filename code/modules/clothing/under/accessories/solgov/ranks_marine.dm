@@ -1,7 +1,10 @@
 /obj/item/clothing/accessory/rank/marine
 	name = "marine ranks"
 	desc = "Insignia denoting marine rank of some kind. These appear blank."
+	icon = 'icons/obj/clothing/ranks.dmi'
+	accessory_icons = list(slot_w_uniform_str = 'icons/mob/ranks.dmi', slot_wear_suit_str = 'icons/mob/ranks.dmi')
 	icon_state = "marinerank_enlisted"
+	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/rank/marine/enlisted
 	name = "ranks (E-1 private)"
