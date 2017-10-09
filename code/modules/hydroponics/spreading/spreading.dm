@@ -16,7 +16,7 @@
 			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
-			new /obj/effect/plant(T,seed, start_matured = 1)
+			new /obj/effect/vine(T,seed, start_matured = 1)
 
 			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
 			return
@@ -33,12 +33,12 @@
 
 /obj/effect/dead_plant/attackby()
 	..()
-	for(var/obj/effect/plant/neighbor in range(1))
+	for(var/obj/effect/vine/neighbor in range(1))
 		neighbor.update_neighbors()
 	qdel(src)
 
-/obj/effect/plant
-	name = "plant"
+/obj/effect/vine
+	name = "vine"
 	anchored = 1
 	opacity = 0
 	density = 0
@@ -55,7 +55,7 @@
 	var/growth_type = 0
 	var/max_growth = 0
 	var/list/neighbors = list()
-	var/obj/effect/plant/parent
+	var/obj/effect/vine/parent
 	var/datum/seed/seed
 	var/sampled = 0
 	var/floor = 0
@@ -66,10 +66,10 @@
 	var/last_tick = 0
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
-/obj/effect/plant/single
+/obj/effect/vine/single
 	spread_chance = 0
 
-/obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent, var/start_matured = 0)
+/obj/effect/vine/New(var/newloc, var/datum/seed/newseed, var/obj/effect/vine/newparent, var/start_matured = 0)
 	if(!newparent)
 		parent = src
 	else
@@ -80,7 +80,7 @@
 		health = max_health
 	..()
 
-/obj/effect/plant/Initialize()
+/obj/effect/vine/Initialize()
 	. = ..()
 
 	if(!plant_controller)
@@ -128,7 +128,7 @@
 	return ..()
 
 // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
-/obj/effect/plant/proc/finish_spreading()
+/obj/effect/vine/proc/finish_spreading()
 	set_dir(calc_dir())
 	update_icon()
 	plant_controller.add_plant(src)
@@ -137,7 +137,7 @@
 		var/turf/T = get_turf(src)
 		T.ex_act(prob(80) ? 3 : 2)
 
-/obj/effect/plant/update_icon()
+/obj/effect/vine/update_icon()
 	refresh_icon()
 	if(growth_type == 0 && !floor)
 		src.transform = null
@@ -165,7 +165,7 @@
 	else
 		set_light(0)
 
-/obj/effect/plant/proc/refresh_icon()
+/obj/effect/vine/proc/refresh_icon()
 	var/growth = min(max_growth,round(health/growth_threshold))
 	var/at_fringe = get_dist(src,parent)
 	if(spread_distance > 5)
@@ -198,7 +198,7 @@
 		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
 		set_density(0)
 
-/obj/effect/plant/proc/calc_dir()
+/obj/effect/vine/proc/calc_dir()
 	set background = 1
 	var/turf/T = get_turf(src)
 	if(!istype(T)) return
@@ -210,7 +210,7 @@
 		if(newTurf && newTurf.density)
 			direction |= wallDir
 
-	for(var/obj/effect/plant/shroom in T.contents)
+	for(var/obj/effect/vine/shroom in T.contents)
 		if(shroom == src)
 			continue
 		if(shroom.floor) //special
@@ -234,7 +234,7 @@
 	floor = 1
 	return 1
 
-/obj/effect/plant/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/vine/attackby(var/obj/item/weapon/W, var/mob/user)
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	plant_controller.add_plant(src)
@@ -264,7 +264,7 @@
 	check_health()
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases
-/obj/effect/plant/proc/vine_overrun(datum/seed/attacker_seed, obj/effect/plant/attacker_parent)
+/obj/effect/vine/proc/vine_overrun(datum/seed/attacker_seed, obj/effect/plant/attacker_parent)
 	var/aggression = 0
 	aggression += (attacker_seed.get_trait(TRAIT_CARNIVOROUS) - seed.get_trait(TRAIT_CARNIVOROUS))
 	aggression += (attacker_seed.get_trait(TRAIT_SPREAD) - seed.get_trait(TRAIT_SPREAD))
@@ -289,7 +289,7 @@
 		health -= aggression*5
 		check_health()
 
-/obj/effect/plant/ex_act(severity)
+/obj/effect/vine/ex_act(severity)
 	switch(severity)
 		if(1.0)
 			die_off()
@@ -305,9 +305,9 @@
 		else
 	return
 
-/obj/effect/plant/proc/check_health()
+/obj/effect/vine/proc/check_health()
 	if(health <= 0)
 		die_off()
 
-/obj/effect/plant/proc/is_mature()
+/obj/effect/vine/proc/is_mature()
 	return (health >= (max_health/3) && world.time > mature_time)

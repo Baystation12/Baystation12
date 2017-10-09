@@ -14,6 +14,6 @@
 	. = ..()
 
 /obj/structure/alien/node/Process()
-	if(locate(/obj/effect/plant) in loc)
+	if(locate(/obj/effect/vine) in loc)
 		return
-	new/obj/effect/plant(get_turf(src), plant_controller.seeds["xenomorph"], start_matured = 1)
+	new/obj/effect/vine(get_turf(src), plant_controller.seeds["xenomorph"], start_matured = 1)

@@ -1,6 +1,6 @@
 #define NEIGHBOR_REFRESH_TIME 100
 
-/obj/effect/plant/proc/get_cardinal_neighbors()
+/obj/effect/vine/proc/get_cardinal_neighbors()
 	var/list/cardinal_neighbors = list()
 	for(var/check_dir in GLOB.cardinal)
 		var/turf/simulated/T = get_step(get_turf(src), check_dir)
@@ -8,7 +8,7 @@
 			cardinal_neighbors |= T
 	return cardinal_neighbors
 
-/obj/effect/plant/proc/get_zlevel_neighbors()
+/obj/effect/vine/proc/get_zlevel_neighbors()
 	var/list/zlevel_neighbors = list()
 
 	var/turf/start = loc
@@ -22,7 +22,7 @@
 
 	return zlevel_neighbors
 
-/obj/effect/plant/proc/update_neighbors()
+/obj/effect/vine/proc/update_neighbors()
 	// Update our list of valid neighboring turfs.
 
 	neighbors = list()
@@ -32,7 +32,7 @@
 			continue
 
 		var/blocked = 0
-		for(var/obj/effect/plant/other in floor.contents)
+		for(var/obj/effect/vine/other in floor.contents)
 			if(other.seed == src.seed)
 				blocked = 1
 				break
@@ -56,11 +56,11 @@
 
 	// Update all of our friends.
 	var/turf/T = get_turf(src)
-	for(var/obj/effect/plant/neighbor in range(1,src))
+	for(var/obj/effect/vine/neighbor in range(1,src))
 		if(neighbor.seed == src.seed)
 			neighbor.neighbors -= T
 
-/obj/effect/plant/Process(var/grow = 1)
+/obj/effect/vine/Process(var/grow = 1)
 	// Something is very wrong, kill ourselves.
 	if(!seed)
 		die_off()
@@ -131,8 +131,8 @@
 
 //spreading vines aren't created on their final turf.
 //Instead, they are created at their parent and then move to their destination.
-/obj/effect/plant/proc/spread_to(turf/target_turf)
-	var/obj/effect/plant/child = new(get_turf(src),seed,parent)
+/obj/effect/vine/proc/spread_to(turf/target_turf)
+	var/obj/effect/vine/child = new(get_turf(src),seed,parent)
 
 	spawn(1) // This should do a little bit of animation.
 		if(QDELETED(child))
@@ -146,8 +146,8 @@
 
 		//see if anything is there
 		for(var/thing in child.loc)
-			if(thing != child && istype(thing, /obj/effect/plant))
-				var/obj/effect/plant/other = thing
+			if(thing != child && istype(thing, /obj/effect/vine))
+				var/obj/effect/vine/other = thing
 				if(other.seed != child.seed)
 					other.vine_overrun(child.seed, src) //vine fight
 				qdel(child)
@@ -176,7 +176,7 @@
 	for(var/turf/simulated/check_turf in (get_cardinal_neighbors() | get_zlevel_neighbors()))
 		if(!istype(check_turf))
 			continue
-		for(var/obj/effect/plant/neighbor in check_turf.contents)
+		for(var/obj/effect/vine/neighbor in check_turf.contents)
 			neighbor.neighbors |= check_turf
 			plant_controller.add_plant(neighbor)
 	spawn(1) if(src) qdel(src)

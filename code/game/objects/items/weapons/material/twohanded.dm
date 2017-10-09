@@ -99,8 +99,8 @@
 			W.shatter()
 		else if(istype(A,/obj/structure/grille))
 			qdel(A)
-		else if(istype(A,/obj/effect/plant))
-			var/obj/effect/plant/P = A
+		else if(istype(A,/obj/effect/vine))
+			var/obj/effect/vine/P = A
 			P.die_off()
 
 //spears, bay edition

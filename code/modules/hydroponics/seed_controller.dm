@@ -146,7 +146,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 					for(var/x=0;x<target_to_process;x++)
 						if(!plant_queue.len)
 							break
-						var/obj/effect/plant/plant = pick(plant_queue)
+						var/obj/effect/vine/plant = pick(plant_queue)
 						plant_queue -= plant
 						if(!istype(plant))
 							continue
