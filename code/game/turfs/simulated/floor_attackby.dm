@@ -71,7 +71,24 @@
 				set_flooring(use_flooring)
 				playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 				return
-		// Repairs.
+		// Repairs and Deconstruction.
+		else if(istype(C, /obj/item/weapon/crowbar))
+			if(broken || burnt)
+				playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
+				visible_message("<span class='notice'>[user] has begun prying off the damaged plating.</span>")
+				var/turf/T = GetBelow(src)
+				if(T)
+					T.visible_message("<span class='warning'>The ceiling above looks as if it's being pried off.</span>")
+				if(do_after(user, 10 SECONDS))
+					visible_message("<span class='warning'>[user] has pried off the damaged plating.</span>")
+					new /obj/item/stack/tile/floor(src)
+					src.ReplaceWithLattice()
+					playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
+					if(T)
+						T.visible_message("<span class='danger'>The ceiling above has been pried off!</span>")
+			else
+				return
+			return
 		else if(istype(C, /obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/welder = C
 			if(welder.isOn() && (is_plating()))
@@ -85,6 +102,20 @@
 					else
 						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 					return
+				else
+					if(welder.remove_fuel(0,user))
+						playsound(src, 'sound/items/Welder.ogg', 80, 1)
+						visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
+						if(do_after(user, 5 SECONDS) && welder.isOn() && welder.remove_fuel(0,user))
+							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
+							playsound(src, 'sound/items/Welder.ogg', 80, 1)
+							burnt = 1
+							remove_decals()
+							update_icon()
+					else
+						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
+					return
+
 	return ..()
 
 
