@@ -1,0 +1,4 @@
+author: sabiram
+delete-after: True
+changes: 
+  - rscadd: "Keys can now be held in wallets."
