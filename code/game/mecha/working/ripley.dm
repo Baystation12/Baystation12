@@ -34,6 +34,7 @@
 	desc = "OH SHIT IT'S THE DEATHSQUAD WE'RE ALL GONNA DIE!"
 	name = "DEATH-RIPLEY"
 	icon_state = "deathripley"
+	initial_icon = "deathripley"
 	step_in = 2
 	opacity=0
 	lights_power = 60
