@@ -195,7 +195,7 @@
 		wound_flavor_text[E.name] = ""
 
 		if(E.applied_pressure == src)
-			applying_pressure = "<span class='info'>[T.He] is applying pressure to [T.his] [E.name].</span><br>"
+			applying_pressure = "<span class='info'>[T.He] are applying pressure to [T.his] [E.name].</span><br>"
 
 		var/obj/item/clothing/hidden
 		var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
