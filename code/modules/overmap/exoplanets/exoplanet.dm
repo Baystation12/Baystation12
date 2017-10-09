@@ -1,5 +1,6 @@
 /obj/effect/overmap/sector/exoplanet
 	name = "exoplanet"
+	icon_state = "globe"
 	var/list/seeds = list()
 	var/list/animals = list()
 	var/max_animal_count

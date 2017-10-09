@@ -1,6 +1,7 @@
 /obj/effect/overmap/sector/exoplanet/desert
 	name = "desert exoplanet"
 	desc = "An arid exoplanet with sparse biological resources but rich mineral deposits underground."
+	color = "#D6CCA4"
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()
 	if(prob(70))

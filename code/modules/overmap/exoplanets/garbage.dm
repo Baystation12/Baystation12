@@ -1,6 +1,7 @@
 /obj/effect/overmap/sector/exoplanet/garbage
 	name = "settled exoplanet"
 	desc = "An arid exoplanet with artificial structures detected on the surface."
+	color = "#A5A18B"
 
 /obj/effect/overmap/sector/exoplanet/garbage/generate_map()
 	if(prob(50))
