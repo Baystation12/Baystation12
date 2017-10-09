@@ -2,114 +2,79 @@
 /obj/item/clothing/ears/earring
 	name = "earring"
 	desc = "An earring of some kind."
+	icon = 'icons/obj/clothing/ears.dmi'
+	gender = PLURAL
+	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/ears/earring/stud
 	name = "pearl stud earrings"
-	desc = "A pair of small pearl stud earrings."
-	icon = 'icons/obj/clothing/ears.dmi'
+	desc = "A pair of small stud earrings."
 	icon_state = "ear_stud"
-	color = "#EAE0C8"
-	gender = PLURAL
-	species_restricted = list(SPECIES_HUMAN)
+	color = "#eae0c8"
 
-/obj/item/clothing/ears/earring/stud/material
-	var/material/material
+/obj/item/clothing/ears/earring/stud/glass
+	name = "glass stud earrings"
+	color = "#00e1ff"
 
-/obj/item/clothing/ears/earring/stud/material/New(var/newloc, var/new_material)
-	..(newloc)
-	if(!new_material)
-		new_material = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name(new_material)
-	if(!istype(material))
-		qdel(src)
-		return
-	name = "[material.display_name] stud earrings"
-	desc = "A pair of small stud earrings made from [material.display_name]."
-	color = material.icon_colour
+/obj/item/clothing/ears/earring/stud/wood
+	name = "wood stud earrings"
+	color = "#824b28"
 
-/obj/item/clothing/ears/earring/stud/material/get_material()
-	return material
+/obj/item/clothing/ears/earring/stud/iron
+	name = "iron stud earrings"
+	color = "#5c5454"
 
-/obj/item/clothing/ears/earring/stud/material/glass/New(var/newloc)
-	..(newloc, "glass")
+/obj/item/clothing/ears/earring/stud/steel
+	name = "steel stud earrings"
+	color = "#666666"
 
-/obj/item/clothing/ears/earring/stud/material/wood/New(var/newloc)
-	..(newloc, "wood")
+/obj/item/clothing/ears/earring/stud/silver
+	name = "silver stud earrings"
+	color = "#d1e6e3"
 
-/obj/item/clothing/ears/earring/stud/material/iron/New(var/newloc)
-	..(newloc, "iron")
+/obj/item/clothing/ears/earring/stud/gold
+	name = "gold stud earrings"
+	color = "#edd12f"
 
-/obj/item/clothing/ears/earring/stud/material/steel/New(var/newloc)
-	..(newloc, "steel")
+/obj/item/clothing/ears/earring/stud/platinum
+	name = "platinum stud earrings"
+	color = "#9999ff"
 
-/obj/item/clothing/ears/earring/stud/material/plasteel/New(var/newloc)
-	..(newloc, "plasteel")
+/obj/item/clothing/ears/earring/stud/diamond
+	name = "diamond stud earrings"
+	color = "#00ffe1"
 
-/obj/item/clothing/ears/earring/stud/material/titanium/New(var/newloc)
-	..(newloc, "titanium")
-
-/obj/item/clothing/ears/earring/stud/material/silver/New(var/newloc)
-	..(newloc, "silver")
-
-/obj/item/clothing/ears/earring/stud/material/gold/New(var/newloc)
-	..(newloc, "gold")
-
-/obj/item/clothing/ears/earring/stud/material/platinum/New(var/newloc)
-	..(newloc, "platinum")
-
-/obj/item/clothing/ears/earring/stud/material/diamond/New(var/newloc)
-	..(newloc, "diamond")
-
-/obj/item/clothing/ears/earring/dangle/material
-	name = "dangle earrings"
-	desc = "Some sort of earring."
-	icon = 'icons/obj/clothing/ears.dmi'
+/obj/item/clothing/ears/earring/dangle
 	icon_state = "ear_dangle"
-	gender = PLURAL
-	species_restricted = list(SPECIES_HUMAN)
-	var/material/material
 
-/obj/item/clothing/ears/earring/dangle/material/New(var/newloc, var/new_material)
-	..(newloc)
-	if(!new_material)
-		new_material = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name(new_material)
-	if(!istype(material))
-		qdel(src)
-		return
-	name = "[material.display_name] dangle earrings"
-	desc = "A pair of dangle earrings made from [material.display_name]."
-	color = material.icon_colour
+/obj/item/clothing/ears/earring/dangle/glass
+	name = "glass dangle earrings"
+	color = "#00e1ff"
 
-/obj/item/clothing/ears/earring/dangle/material/get_material()
-	return material
+/obj/item/clothing/ears/earring/dangle/wood
+	name = "wood dangle earrings"
+	color = "#824b28"
 
-/obj/item/clothing/ears/earring/dangle/material/glass/New(var/newloc)
-	..(newloc, "glass")
+/obj/item/clothing/ears/earring/dangle/iron
+	name = "iron dangle earrings"
+	color = "#5c5454"
 
-/obj/item/clothing/ears/earring/dangle/material/wood/New(var/newloc)
-	..(newloc, "wood")
+/obj/item/clothing/ears/earring/dangle/steel
+	name = "steel dangle earrings"
+	color = "#666666"
 
-/obj/item/clothing/ears/earring/dangle/material/iron/New(var/newloc)
-	..(newloc, "iron")
+/obj/item/clothing/ears/earring/dangle/silver
+	name = "silver dangle earrings"
+	color = "#d1e6e3"
 
-/obj/item/clothing/ears/earring/dangle/material/steel/New(var/newloc)
-	..(newloc, "steel")
+/obj/item/clothing/ears/earring/dangle/gold
+	name = "gold dangle earrings"
+	color = "#edd12f"
 
-/obj/item/clothing/ears/earring/dangle/material/plasteel/New(var/newloc)
-	..(newloc, "plasteel")
+/obj/item/clothing/ears/earring/dangle/platinum
+	name = "platinum dangle earrings"
+	color = "#9999ff"
 
-/obj/item/clothing/ears/earring/dangle/material/titanium/New(var/newloc)
-	..(newloc, "titanium")
-
-/obj/item/clothing/ears/earring/dangle/material/silver/New(var/newloc)
-	..(newloc, "silver")
-
-/obj/item/clothing/ears/earring/dangle/material/gold/New(var/newloc)
-	..(newloc, "gold")
-
-/obj/item/clothing/ears/earring/dangle/material/platinum/New(var/newloc)
-	..(newloc, "platinum")
-
-/obj/item/clothing/ears/earring/dangle/material/diamond/New(var/newloc)
-	..(newloc, "diamond")
+/obj/item/clothing/ears/earring/dangle/diamond
+	name = "diamond dangle earrings"
+	color = "#00ffe1"
