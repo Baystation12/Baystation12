@@ -121,8 +121,7 @@
 	START_PROCESSING(SSvines, src)
 
 /obj/effect/vine/Destroy()
-	for(var/obj/effect/vine/neighbor in range(1,src))
-		START_PROCESSING(SSvines, neighbor)
+	wake_neighbors()
 	STOP_PROCESSING(SSvines, src)
 	return ..()
 
