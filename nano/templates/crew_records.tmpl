@@ -129,16 +129,16 @@
     	</div>
 	{{/if}}
 {{else}}
-	{{:helper.link('New Record', 'new', {'new_record' : 1}, data.has_empl ? null : 'disabled')}}
+	{{:helper.link('New Record', 'document', {'new_record' : 1}, data.has_empl ? null : 'disabled')}}
 	{{:helper.link('Name Search', 'search', {'name_search' : 1})}}
 	{{:helper.link('DNA Search', 'search', {'dna_search' : 1}, data.has_sec ? null : 'disabled')}}
 	{{:helper.link('Fingerprint Search', 'search', {'fingerprint_search' : 1}, data.has_sec ? null : 'disabled')}}
 	<br><br>
 	<h2>Available records:</h2>
 	<table style="width:100%">
-	<tr><th style="width:60%">Name<th style="width:20%">Position<th style="width:20%">Rank
+	<tr><td style="width:40%">Name<th>Position<th>Rank
 	{{for data.all_records}}
-		<tr><td>{{:helper.link(value.name, '', {'set_active' : value.id})}}
+		<tr class="candystripe"><td>{{:helper.link(value.name, '', {'set_active' : value.id})}}
 		<td>{{:value.rank}}
 		<td>{{:value.milrank}}
 	{{/for}}
