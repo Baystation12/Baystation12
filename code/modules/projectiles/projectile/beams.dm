@@ -47,16 +47,16 @@
 	name = "x-ray beam"
 	icon_state = "xray"
 	fire_sound = 'sound/weapons/laser3.ogg'
-	damage = 30
-	armor_penetration = 30
+	damage = 15
+	armor_penetration = 80
 
 	muzzle_type = /obj/effect/projectile/xray/muzzle
 	tracer_type = /obj/effect/projectile/xray/tracer
 	impact_type = /obj/effect/projectile/xray/impact
 
 /obj/item/projectile/beam/xray/midlaser
-	damage = 30
-	armor_penetration = 50
+	damage = 25
+	armor_penetration = 100
 
 /obj/item/projectile/beam/pulse
 	name = "pulse"

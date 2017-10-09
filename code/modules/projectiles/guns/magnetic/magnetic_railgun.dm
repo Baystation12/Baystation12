@@ -86,7 +86,7 @@
 
 /obj/item/weapon/gun/magnetic/railgun/flechette
 	name = "flechette gun"
-	desc = "The MI-12 Skadi is a burst fire capable railgun that fires flechette rounds at high velocity. Deadly against armour, but much less effective against soft targets."
+	desc = "The MI-12 Comet is a burst fire capable railgun that fires flechette rounds at high velocity. Deadly against armour, but much less effective against soft targets."
 	icon_state = "flechette_gun"
 	item_state = "z8carbine"
 	initial_cell_type = /obj/item/weapon/cell/hyper
