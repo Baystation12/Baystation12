@@ -282,7 +282,6 @@ var/list/ai_verbs_default = list(
 	if(aiPDA)
 		aiPDA.set_owner_rank_job(pickedName, "AI")
 
-	GLOB.data_core.ResetPDAManifest()
 	setup_icon()
 
 /mob/living/silicon/ai/proc/pick_icon()
@@ -537,8 +536,8 @@ var/list/ai_verbs_default = list(
 
 		var/personnel_list[] = list()
 
-		for(var/datum/data/record/t in GLOB.data_core.locked)//Look in data core locked.
-			personnel_list["[t.fields["name"]]: [t.fields["rank"]]"] = t.fields["image"]//Pull names, rank, and image.
+		for(var/datum/computer_file/crew_record/t in GLOB.all_crew_records)//Look in data core locked.
+			personnel_list["[t.GetName()]: [t.GetRank()]"] = t.photo_front//Pull names, rank, and image.
 
 		if(personnel_list.len)
 			input = input("Select a crew member:") as null|anything in personnel_list

@@ -292,9 +292,15 @@ var/list/floor_decals = list()
 	icon_state = "carpet_edges"
 
 /obj/effect/floor_decal/carpet/blue
-	name = "carpet"
+	name = "turquoise carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "bcarpet_edges"
+
+/obj/effect/floor_decal/carpet/blue2
+	name = "blue carpet"
+	icon = 'icons/turf/flooring/carpet.dmi'
+	icon_state = "b2carpet_edges"
+
 
 /obj/effect/floor_decal/carpet/corners
 	name = "carpet"

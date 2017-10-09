@@ -103,6 +103,47 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/salary_modifier	= 1			//Multiplier to starting character money
 	var/station_departments = list()//Gets filled automatically depending on jobs allowed
 
+	//Factions prefs stuff
+	var/list/citizenship_choices = list(
+		"Earth",
+		"Mars",
+		"Moghes",
+		"Ahdomai",
+		"Qerrbalak"
+	)
+
+	var/list/home_system_choices = list(
+		"Sol",
+		"Nyx",
+		"Tau Ceti",
+		"Epsilon Ursae Minoris",
+		"S'randarr"
+		)
+
+	var/list/faction_choices = list(
+		"Sol Central Government",
+		"Vey Med",
+		"Einstein Engines",
+		"Free Trade Union",
+		"NanoTrasen",
+		"Ward-Takahashi GMB",
+		"Gilthari Exports",
+		"Grayson Manufactories Ltd.",
+		"Aether Atmospherics",
+		"Zeng-Hu Pharmaceuticals",
+		"Hephaestus Industries"
+		)
+
+	var/list/religion_choices = list(
+		"Unitarianism",
+		"Hinduism",
+		"Buddhist",
+		"Islamic",
+		"Christian",
+		"Agnostic",
+		"Deist"
+		)
+
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()

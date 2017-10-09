@@ -1,4 +1,3 @@
-GLOBAL_DATUM(data_core, /datum/datacore)
 GLOBAL_LIST_EMPTY(active_diseases)
 GLOBAL_LIST_EMPTY(med_hud_users)          // List of all entities using a medical HUD.
 GLOBAL_LIST_EMPTY(sec_hud_users)          // List of all entities using a security HUD.

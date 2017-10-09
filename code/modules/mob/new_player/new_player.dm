@@ -348,7 +348,6 @@
 		return 0
 
 	character = job_master.EquipRank(character, job.title, 1)					//equips the human
-	UpdateFactionList(character)
 	equip_custom_items(character)
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
@@ -375,7 +374,7 @@
 	GLOB.universe.OnPlayerLatejoin(character)
 	if(job_master.ShouldCreateRecords(job.title))
 		if(character.mind.assigned_role != "Cyborg")
-			GLOB.data_core.manifest_inject(character)
+			CreateModularRecord(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			AnnounceArrival(character, job, spawnpoint.msg)
 		else
@@ -491,7 +490,7 @@
 	new_character.sync_organ_dna()
 	if(client.prefs.disabilities)
 		// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
-		new_character.dna.SetSEState(GLASSESBLOCK,1,0)
+		new_character.dna.SetSEState(GLOB.GLASSESBLOCK,1,0)
 		new_character.disabilities |= NEARSIGHTED
 
 	// Give them their cortical stack if we're using them.
@@ -508,7 +507,7 @@
 
 /mob/new_player/proc/ViewManifest()
 	var/dat = "<div align='center'>"
-	dat += GLOB.data_core.get_manifest(OOC = 1)
+	dat += html_crew_manifest(OOC = 1)
 	//src << browse(dat, "window=manifest;size=370x420;can_close=1")
 	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
 	popup.set_content(dat)

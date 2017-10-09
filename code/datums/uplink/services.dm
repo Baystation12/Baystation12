@@ -195,57 +195,45 @@
 
 /obj/item/device/uplink_service/fake_crew_announcement/enable(var/mob/user = usr)
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
-	var/datum/data/record/random_general_record
-	var/datum/data/record/random_medical_record
+	var/datum/computer_file/crew_record/random_record
 
-	while(null in GLOB.data_core.general)
-		GLOB.data_core.general -= null
-		log_error("Found a null entry in data_core.general")
+	if(GLOB.all_crew_records.len)
+		random_record = pick(GLOB.all_crew_records)
 
-	if(GLOB.data_core.general.len)
-		random_general_record	= pick(GLOB.data_core.general)
-		random_medical_record	= find_medical_record("id", random_general_record.fields["id"])
-
-	var/datum/data/record/general = GLOB.data_core.CreateGeneralRecord(user)
+	var/datum/computer_file/crew_record/new_record = CreateModularRecord(user)
 	if(I)
-		general.fields["age"] = I.age
-		general.fields["rank"] = I.assignment
-		general.fields["real_rank"] = I.assignment
-		general.fields["name"] = I.registered_name
-		general.fields["sex"] = I.sex
+		new_record.SetAge(I.age)
+		new_record.SetRank(I.assignment)
+		new_record.SetName(I.registered_name)
+		new_record.SetSex(I.sex)
 	else
 		var/mob/living/carbon/human/H
 		if(istype(user,/mob/living/carbon/human))
 			H = user
-			general.fields["age"] = H.age
+			new_record.SetAge(H.age)
 		else
-			general.fields["age"] = initial(H.age)
+			new_record.SetAge(initial(H.age))
 		var/assignment = GetAssignment(user)
-		general.fields["rank"] = assignment
-		general.fields["real_rank"] = assignment
-		general.fields["name"] = user.real_name
-		general.fields["sex"] = capitalize(user.gender)
+		new_record.SetRank(assignment)
+		new_record.SetName(user.real_name)
+		new_record.SetSex(capitalize(user.gender))
+	new_record.SetSpecies(user.get_species())
 
-	general.fields["species"] = user.get_species()
-	var/datum/data/record/medical = GLOB.data_core.CreateMedicalRecord(general.fields["name"], general.fields["id"])
-	GLOB.data_core.CreateSecurityRecord(general.fields["name"], general.fields["id"])
-
-	if(random_general_record)
-		general.fields["citizenship"]	= random_general_record.fields["citizenship"]
-		general.fields["faction"] 		= random_general_record.fields["faction"]
-		general.fields["fingerprint"] 	= random_general_record.fields["fingerprint"]
-		general.fields["home_system"] 	= random_general_record.fields["home_system"]
-		general.fields["religion"] 		= random_general_record.fields["religion"]
-	if(random_medical_record)
-		medical.fields["b_type"]		= random_medical_record.fields["b_type"]
-		medical.fields["b_dna"]			= random_medical_record.fields["b_type"]
+	if(random_record)
+		new_record.SetCitizenship(random_record.GetCitizenship())
+		new_record.SetFaction(random_record.GetFaction())
+		new_record.SetFingerprint(random_record.GetFingerprint())
+		new_record.SetHomeSystem(random_record.GetHomeSystem())
+		new_record.SetReligion(random_record.GetReligion())
+		new_record.SetBloodtype(random_record.GetBloodtype())
+		new_record.SetDna(random_record.GetDna())
 
 	if(I)
-		general.fields["fingerprint"] 	= I.fingerprint_hash
-		medical.fields["b_type"]	= I.blood_type
-		medical.fields["b_dna"]		= I.dna_hash
+		new_record.SetFingerprint(I.fingerprint_hash)
+		new_record.SetBloodtype(I.blood_type)
+		new_record.SetDna(I.dna_hash)
 
-	var/datum/job/job = job_master.GetJob(general.fields["rank"])
+	var/datum/job/job = job_master.GetJob(new_record.GetRank())
 	if(istype(job) && job.announced)
-		AnnounceArrivalSimple(general.fields["name"], general.fields["rank"], get_announcement_frequency(job))
+		AnnounceArrivalSimple(new_record.GetName(), new_record.GetRank(), get_announcement_frequency(job))
 	. = ..()

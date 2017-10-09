@@ -184,9 +184,11 @@
 			// This is hackish but whatever.
 			var/turf/target = get_step(GetAbove(A), dir)
 			var/turf/source = A.loc
-			if(target.Enter(A, source))
-				A.loc = target
-				target.Entered(A, source)
+			var/turf/above = GetAbove(A)
+			if(above.CanZPass(source, UP) && target.Enter(A, source))
+				A.forceMove(target)
+			else
+				to_chat(A, "<span class='warning'>Something blocks the path.</span>")
 			return 0
 		return 1
 

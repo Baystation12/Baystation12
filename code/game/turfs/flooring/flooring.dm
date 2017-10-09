@@ -69,8 +69,14 @@ var/list/flooring_types
 	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 
 /decl/flooring/carpet/blue
-	name = "carpet"
+	name = "turquoise carpet"
 	icon_base = "bcarpet"
+	build_type = null
+	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+
+/decl/flooring/carpet/blue2
+	name = "blue carpet"
+	icon_base = "b2carpet"
 	build_type = null
 	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 

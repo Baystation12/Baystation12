@@ -55,6 +55,11 @@
 	force = 0
 	var/net_type = /obj/effect/energy_net
 
+/obj/item/weapon/energy_net/safari
+	name = "animal net"
+	desc = "An energized net meant to subdue animals."
+	net_type = /obj/effect/energy_net/safari
+
 /obj/item/weapon/energy_net/dropped()
 	..()
 	spawn(10)
@@ -93,9 +98,21 @@
 
 	var/health = 25
 	var/countdown = 15
+	var/temporary = 1
 	var/mob/living/carbon/captured = null
 	var/min_free_time = 50
 	var/max_free_time = 85
+
+/obj/effect/energy_net/safari
+	name = "animal net"
+	desc = "An energized net meant to subdue animals."
+
+	anchored = 0
+	health = 1
+	temporary = 0
+	min_free_time = 0
+	max_free_time = 0
+
 
 /obj/effect/energy_net/teleport
 	countdown = 60
@@ -115,7 +132,8 @@
 	return ..()
 
 /obj/effect/energy_net/Process()
-	countdown--
+	if(temporary)
+		countdown--
 	if(captured.buckled != src)
 		health = 0
 	if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
@@ -124,6 +142,13 @@
 		health = 0
 	healthcheck()
 
+/obj/effect/energy_net/Move()
+	..()
+
+	if(buckled_mob)
+		buckled_mob.forceMove(src.loc)
+	else
+		countdown = 0
 
 
 /obj/effect/energy_net/proc/capture_mob(mob/living/M)
@@ -137,6 +162,13 @@
 			C.handcuffed = src
 	return 1
 
+/obj/effect/energy_net/safari/capture_mob(mob/living/M)
+	if(istype(M, /mob/living/simple_animal))
+		. = ..()
+	else
+		visible_message("\The [src] fails to contain \the [M]!")
+		qdel(src)
+
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
 	if(buckled_mob)
 		plane = ABOVE_HUMAN_PLANE
@@ -145,7 +177,6 @@
 	else
 		to_chat(M,"<span class='warning'>You are free of the net!</span>")
 		reset_plane_and_layer()
-		qdel(src)
 
 /obj/effect/energy_net/proc/healthcheck()
 	if(health <=0)

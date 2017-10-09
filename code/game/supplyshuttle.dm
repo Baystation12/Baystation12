@@ -116,6 +116,7 @@ var/list/point_source_descriptions = list(
 	"crate" = "From exported crates",
 	"phoron" = "From exported phoron",
 	"platinum" = "From exported platinum",
+	"virology" = "From uploaded antibody data",
 	"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
 	)
 

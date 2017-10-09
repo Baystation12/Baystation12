@@ -1,13 +1,3 @@
-
-//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent type
-/proc/do_initialize_chemical_reagents()
-	. = list()
-	for(var/path in subtypesof(/datum/reagent))
-		var/datum/reagent/D = new path()
-		if(!D.name)
-			continue
-		.[D.type] = D
-
 /datum/reagent
 	var/name = "Reagent"
 	var/description = "A non-descript chemical."
@@ -31,9 +21,14 @@
 	var/glass_desc = "It's a glass of... what, exactly?"
 	var/list/glass_special = null // null equivalent to list()
 
+/datum/reagent/New(var/datum/reagents/holder)
+	if(!istype(holder))
+		CRASH("Invalid reagents holder: [log_info_line(holder)]")
+	src.holder = holder
+	..()
+
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
-	if(holder)
-		holder.remove_reagent(type, amount)
+	holder.remove_reagent(type, amount)
 
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /datum/reagent/proc/touch_mob(var/mob/M, var/amount)

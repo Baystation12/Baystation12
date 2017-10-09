@@ -1,24 +1,25 @@
 /datum/artifact_effect/radiate
 	name = "radiation"
-	var/radiation_amount
+	var/radiation_strength
+	var/radiation_range
 
 /datum/artifact_effect/radiate/New()
 	..()
-	radiation_amount = rand(1, 10)
+	radiation_strength = rand(10, 50)
 	effect_type = pick(EFFECT_PARTICLE, EFFECT_ORGANIC)
 
 /datum/artifact_effect/radiate/DoEffectTouch(var/mob/living/user)
 	if(user)
-		user.apply_effect(radiation_amount * 5,IRRADIATE, blocked = user.getarmor(null, "rad"))
+		user.apply_effect(radiation_strength * 2,IRRADIATE, blocked = user.getarmor(null, "rad"))
 		user.updatehealth()
 		return 1
 
 /datum/artifact_effect/radiate/DoEffectAura()
 	if(holder)
-		radiation_repository.flat_radiate(holder, radiation_amount, src.effectrange)
+		radiation_repository.radiate(holder, radiation_strength)
 		return 1
 
 /datum/artifact_effect/radiate/DoEffectPulse()
 	if(holder)
-		radiation_repository.radiate(holder, ((radiation_amount * 25) * (sqrt(src.effectrange)))) //Need to get feedback on this
+		radiation_repository.radiate(holder, radiation_strength * rand(5, 10)) //Need to get feedback on this
 		return 1

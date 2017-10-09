@@ -429,6 +429,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/has_reception = reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER
 	data["reception"] = has_reception
 
+	if(mode==41)
+		data["crew_manifest"] = html_crew_manifest(1, 0)
+
 	if(mode==2)
 		var/convopdas[0]
 		var/pdas[0]
@@ -458,9 +461,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_name"] = sanitize(c["owner"])
 				data["convo_job"] = sanitize(c["job"])
 				break
-	if(mode==41)
-		GLOB.data_core.get_manifest_list()
-
 
 	if(mode==3)
 		var/turf/T = get_turf(user.loc)
@@ -530,7 +530,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		data["feed"] = feed
 
-	data["manifest"] = PDA_Manifest
+	data["manifest"] = nano_crew_manifest()
 
 	nanoUI = data
 	// update the ui if it exists, returns null if no ui is passed/found

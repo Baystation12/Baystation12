@@ -140,8 +140,10 @@
 /obj/effect/overmap/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
 	if(species[A.type])
 		A.name = species[A.type]
-	else 
+		A.real_name = species[A.type]
+	else
 		A.name = "alien creature"
+		A.real_name = "alien creature"
 		A.verbs |= /mob/living/simple_animal/proc/name_species
 	A.minbodytemp = atmosphere.temperature - 20
 	A.maxbodytemp = atmosphere.temperature + 30
@@ -155,12 +157,18 @@
 /obj/effect/overmap/sector/exoplanet/proc/get_random_species_name()
 	return pick("nol","shan","can","fel","xor")+pick("a","e","o","t","ar")+pick("ian","oid","ac","ese","inian","rd")
 
-/obj/effect/overmap/sector/exoplanet/proc/rename_species(type, newname)
-	species[type] = newname
+/obj/effect/overmap/sector/exoplanet/proc/rename_species(var/species_type, var/newname, var/force = FALSE)
+	if(species[species_type] && !force)
+		return FALSE
+
+	species[species_type] = newname
+	log_and_message_admins("renamed [species_type] to [newname]")
 	for(var/mob/living/simple_animal/A in animals)
-		if(istype(A,type))
+		if(istype(A,species_type))
 			A.name = newname
+			A.real_name = newname
 			A.verbs -= /mob/living/simple_animal/proc/name_species
+	return TRUE
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_landing()
 	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])

@@ -1,3 +1,5 @@
+LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
+
 /obj/machinery/computer/helm
 	name = "helm control console"
 	icon_state = "thick"
@@ -22,7 +24,7 @@
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/sector/S in map)
 		if (S.known)
-			var/datum/data/record/R = new()
+			var/datum/computer_file/data/waypoint/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x
 			R.fields["y"] = S.y
@@ -104,7 +106,7 @@
 
 	var/list/locations[0]
 	for (var/key in known_sectors)
-		var/datum/data/record/R = known_sectors[key]
+		var/datum/computer_file/data/waypoint/R = known_sectors[key]
 		var/list/rdata[0]
 		rdata["name"] = R.fields["name"]
 		rdata["x"] = R.fields["x"]
@@ -129,7 +131,7 @@
 		return
 
 	if (href_list["add"])
-		var/datum/data/record/R = new()
+		var/datum/computer_file/data/waypoint/R = new()
 		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[known_sectors.len]") as text
 		if(!CanInteract(usr,state)) 
 			return
@@ -155,7 +157,7 @@
 		known_sectors[sec_name] = R
 
 	if (href_list["remove"])
-		var/datum/data/record/R = locate(href_list["remove"])
+		var/datum/computer_file/data/waypoint/R = locate(href_list["remove"])
 		if(R)
 			known_sectors.Remove(R.fields["name"])
 			qdel(R)

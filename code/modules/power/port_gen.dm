@@ -115,6 +115,7 @@
 	var/sheet_left = 0		//How much is left of the current sheet
 	var/temperature = 0		//The current temperature
 	var/overheating = 0		//if this gets high enough the generator explodes
+	var/max_overheat = 150
 
 /obj/machinery/power/port_gen/pacman/Initialize()
 	. = ..()
@@ -234,7 +235,7 @@
 
 /obj/machinery/power/port_gen/pacman/proc/overheat()
 	overheating++
-	if (overheating > 150)
+	if (overheating > max_overheat)
 		explode()
 
 /obj/machinery/power/port_gen/pacman/explode()
@@ -328,7 +329,10 @@
 	data["output_watts"] = power_output * power_gen
 	data["temperature_current"] = src.temperature
 	data["temperature_max"] = src.max_temperature
-	data["temperature_overheat"] = overheating
+	if(overheating)
+		data["temperature_overheat"] = ((overheating / max_overheat) * 100)		// Overheat percentage. Generator explodes at 100%
+	else
+		data["temperature_overheat"] = 0
 	// 1 sheet = 1000cm3?
 	data["fuel_stored"] = round((sheets * 1000) + (sheet_left * 1000))
 	data["fuel_capacity"] = round(max_sheets * 1000, 0.1)
@@ -422,7 +426,7 @@
 		var/image/I = image(icon,"[initial(icon_state)]rad")
 		I.blend_mode = BLEND_ADD
 		I.alpha = round(255*power_output/max_power_output)
-		overlays += I 
+		overlays += I
 		set_light(rad_power + power_output - max_safe_output,1,"#3b97ca")
 	else
 		set_light(0)

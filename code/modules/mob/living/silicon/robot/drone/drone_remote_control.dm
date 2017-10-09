@@ -21,8 +21,14 @@
 	controlling_ai = user
 	verbs += /mob/living/silicon/robot/drone/proc/release_ai_control_verb
 	local_transmit = FALSE
-	languages = controlling_ai.languages.Copy()
-	speech_synthesizer_langs = controlling_ai.speech_synthesizer_langs.Copy()
+	languages.Cut()
+	speech_synthesizer_langs.Cut()
+
+	for(var/datum/language/L in controlling_ai.languages)
+		add_language(L.name, 0)
+	add_language("Drone Talk", 1)
+	default_language = all_languages["Drone Talk"]
+
 	stat = CONSCIOUS
 	if(user.mind)
 		user.mind.transfer_to(src)
@@ -57,8 +63,12 @@
 	new_drone.controlling_ai = user
 	new_drone.verbs += /mob/living/silicon/robot/drone/proc/release_ai_control_verb
 	new_drone.local_transmit = FALSE
-	new_drone.languages = new_drone.controlling_ai.languages.Copy()
-	new_drone.speech_synthesizer_langs = new_drone.controlling_ai.speech_synthesizer_langs.Copy()
+	new_drone.languages.Cut()
+	new_drone.speech_synthesizer_langs.Cut()
+	for(var/datum/language/L in new_drone.controlling_ai.languages)
+		new_drone.add_language(L.name, 0)
+	new_drone.add_language("Drone Talk", 1)
+	new_drone.default_language = all_languages["Drone Talk"]
 
 	if(user.mind)
 		user.mind.transfer_to(new_drone)

@@ -163,49 +163,56 @@ var/list/_client_preferences_by_type
 	disabled_description = "Plain"
 
 /********************
-* Admin Preferences *
+* General Staff Preferences *
 ********************/
-/datum/client_preference/admin/may_toggle(var/mob/preference_mob)
-	return check_rights(R_ADMIN, 0, preference_mob)
 
-/datum/client_preference/admin/show_chat_prayers
+/datum/client_preference/staff
+	var/flags
+
+/datum/client_preference/staff/may_toggle(var/mob/preference_mob)
+	if(flags)
+		return check_rights(flags, 0, preference_mob)
+	else
+		return preference_mob && preference_mob.client && preference_mob.client.holder
+
+/datum/client_preference/staff/show_chat_prayers
 	description = "Chat Prayers"
 	key = "CHAT_PRAYER"
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
-/datum/client_preference/holder/may_toggle(var/mob/preference_mob)
-	return preference_mob && preference_mob.client && preference_mob.client.holder
-
-/datum/client_preference/holder/play_adminhelp_ping
+/datum/client_preference/staff/play_adminhelp_ping
 	description = "Adminhelps"
 	key = "SOUND_ADMINHELP"
 	enabled_description = "Hear"
 	disabled_description = "Silent"
 
-/datum/client_preference/admin/show_attack_logs
-	description = "Attack Log Messages"
-	key = "CHAT_ATTACKLOGS"
-	enabled_description = "Show"
-	disabled_description = "Hide"
-	enabled_by_default = FALSE
-
-/datum/client_preference/holder/show_rlooc
+/datum/client_preference/staff/show_rlooc
 	description ="Remote LOOC chat"
 	key = "CHAT_RLOOC"
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
 /********************
+* Admin Preferences *
+********************/
+
+/datum/client_preference/staff/show_attack_logs
+	description = "Attack Log Messages"
+	key = "CHAT_ATTACKLOGS"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+	flags = R_ADMIN
+	enabled_by_default = FALSE
+
+/********************
 * Debug Preferences *
 ********************/
 
-/datum/client_preference/debug/may_toggle(var/mob/preference_mob)
-	return check_rights(R_ADMIN|R_DEBUG, 0, preference_mob)
-
-/datum/client_preference/debug/show_debug_logs
+/datum/client_preference/staff/show_debug_logs
 	description = "Debug Log Messages"
 	key = "CHAT_DEBUGLOGS"
 	enabled_description = "Show"
 	disabled_description = "Hide"
 	enabled_by_default = FALSE
+	flags = R_ADMIN|R_DEBUG

@@ -7,7 +7,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/command
-	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/command
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/command
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
@@ -33,7 +33,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/engineering
-	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/command
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/engineering/command
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
@@ -63,7 +63,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/security
-	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/command
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/security/command
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
@@ -93,7 +93,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/medical
-	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/command
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/medical/command
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
@@ -123,7 +123,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/supply
-	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/command
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
 	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt
@@ -148,7 +148,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/service
-	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/command
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/service/command
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
@@ -174,7 +174,7 @@
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/exploration
-	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/command
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/exploration/command
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
@@ -199,7 +199,7 @@
 	utility_under= /obj/item/clothing/under/utility/expeditionary/officer/command
 
 	service_under= /obj/item/clothing/under/utility/expeditionary/officer/command
-	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/command
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
 
 	dress_under = /obj/item/clothing/under/mildress/expeditionary/command
 	dress_skirt = /obj/item/clothing/under/mildress/expeditionary/command/skirt

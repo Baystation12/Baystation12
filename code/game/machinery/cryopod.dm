@@ -399,18 +399,9 @@
 			//current_mode.possible_traitors.Remove(occupant)
 
 	// Delete them from datacore.
-
-	if(PDA_Manifest.len)
-		PDA_Manifest.Cut()
-	for(var/datum/data/record/R in GLOB.data_core.medical)
-		if ((R.fields["name"] == occupant.real_name))
-			qdel(R)
-	for(var/datum/data/record/T in GLOB.data_core.security)
-		if ((T.fields["name"] == occupant.real_name))
-			qdel(T)
-	for(var/datum/data/record/G in GLOB.data_core.general)
-		if ((G.fields["name"] == occupant.real_name))
-			qdel(G)
+	for(var/datum/computer_file/crew_record/CR in GLOB.all_crew_records)
+		if(CR.GetName() == occupant.real_name)
+			qdel(CR)
 
 	icon_state = base_icon_state
 

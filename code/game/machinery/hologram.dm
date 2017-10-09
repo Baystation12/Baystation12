@@ -229,9 +229,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	if(caller_id)
 		var/tempicon = 0
-		for(var/datum/data/record/t in GLOB.data_core.locked)
-			if(t.fields["name"]==caller_id.name)
-				tempicon = t.fields["image"]
+		for(var/datum/computer_file/crew_record/t in GLOB.all_crew_records)
+			if(t.GetName() == caller_id.name)
+				tempicon = t.photo_front
 		hologram.overlays += getHologramIcon(icon(tempicon)) // Add the callers image as an overlay to keep coloration!
 	else
 		hologram.overlays += A.holo_icon // Add the AI's configured holo Icon

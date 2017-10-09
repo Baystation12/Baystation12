@@ -86,7 +86,7 @@
 	if(!T)
 		return
 
-	var/datum/reagents/R = new/datum/reagents(100)
+	var/datum/reagents/R = new/datum/reagents(100, GLOB.temp_reagents_holder)
 	if(chems.len)
 		for(var/rid in chems)
 			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
@@ -96,6 +96,7 @@
 	S.attach(T)
 	S.set_up(R, round(get_trait(TRAIT_POTENCY)/4), 0, T)
 	S.start()
+	qdel(R)
 
 // Does brute damage to a target.
 /datum/seed/proc/do_thorns(var/mob/living/carbon/human/target, var/obj/item/fruit, var/target_limb)
@@ -440,7 +441,7 @@
 		if(prob(30))	banned_chems |= typesof(/datum/reagent/toxin)
 
 		for(var/x=1;x<=additional_chems;x++)
-			var/new_chem = pick(GLOB.chemical_reagents_list)
+			var/new_chem = pick(subtypesof(/datum/reagent))
 			if(new_chem in banned_chems)
 				x--
 				continue

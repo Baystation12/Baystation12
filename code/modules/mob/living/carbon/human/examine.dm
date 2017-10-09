@@ -195,7 +195,7 @@
 		wound_flavor_text[E.name] = ""
 
 		if(E.applied_pressure == src)
-			applying_pressure = "<span class='info'>[T.He] is applying pressure to [T.his] [E.name].</span><br>"
+			applying_pressure = "<span class='info'>[T.He] [T.is] applying pressure to [T.his] [E.name].</span><br>"
 
 		var/obj/item/clothing/hidden
 		var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
@@ -255,14 +255,12 @@
 			perpname = name
 
 		if(perpname)
-			for (var/datum/data/record/E in GLOB.data_core.general)
-				if(E.fields["name"] == perpname)
-					for (var/datum/data/record/R in GLOB.data_core.security)
-						if(R.fields["id"] == E.fields["id"])
-							criminal = R.fields["criminal"]
+			for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
+				if(E.GetName() == perpname)
+					criminal = E.GetCriminalStatus()
 
 			msg += "<span class = 'deptradio'>Criminal status:</span> <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
-			msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=`'>\[View\]</a>  <a href='?src=\ref[src];secrecordadd=`'>\[Add comment\]</a>\n"
+			msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=`'>\[View\]</a>\n"
 
 	if(hasHUD(user,"medical"))
 		var/perpname = "wot"
@@ -277,14 +275,12 @@
 		else
 			perpname = src.name
 
-		for (var/datum/data/record/E in GLOB.data_core.general)
-			if (E.fields["name"] == perpname)
-				for (var/datum/data/record/R in GLOB.data_core.general)
-					if (R.fields["id"] == E.fields["id"])
-						medical = R.fields["p_stat"]
+		for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
+			if (E.GetName() == perpname)
+				medical = E.GetStatus()
 
 		msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
-		msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a> <a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>\n"
+		msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
 
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"

@@ -1090,23 +1090,11 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/arcade/orion_trail
 	sort_string = "MABAA"
 
-/datum/design/circuit/secdata
-	name = "security records console"
-	id = "sec_data"
-	build_path = /obj/item/weapon/circuitboard/secure_data
-	sort_string = "DABAA"
-
 /datum/design/circuit/prisonmanage
 	name = "prisoner management console"
 	id = "prisonmanage"
 	build_path = /obj/item/weapon/circuitboard/prisoner
 	sort_string = "DACAA"
-
-/datum/design/circuit/med_data
-	name = "medical records console"
-	id = "med_data"
-	build_path = /obj/item/weapon/circuitboard/med_data
-	sort_string = "FAAAA"
 
 /datum/design/circuit/operating
 	name = "patient monitoring console"
@@ -1384,12 +1372,6 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_path = /obj/item/weapon/circuitboard/miningdrillbrace
 	sort_string = "KCAAB"
-
-/datum/design/circuit/emp_data
-	name = "employment records console"
-	id = "emp_data"
-	build_path = /obj/item/weapon/circuitboard/skills
-	sort_string = "LAAAC"
 
 /datum/design/circuit/mecha
 	req_tech = list(TECH_DATA = 3)
