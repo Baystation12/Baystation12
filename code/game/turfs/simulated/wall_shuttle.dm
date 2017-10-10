@@ -11,6 +11,10 @@
 	density = 1
 	blocks_air = 1
 
+/turf/simulated/shuttle/wall/alien
+	name = "alien wall"
+	icon_state = "bog0"
+
 /turf/simulated/shuttle/wall/corner
 	var/corner_overlay_state = "diagonalWall"
 	var/image/corner_overlay
@@ -72,4 +76,17 @@
 /turf/simulated/shuttle/wall/corner/dark/se
 	dir = SOUTH|EAST
 /turf/simulated/shuttle/wall/corner/dark/sw
+	dir = SOUTH|WEST
+
+
+/turf/simulated/shuttle/wall/corner/alien
+	icon_state = "corner_alien"
+	corner_overlay_state = "corner_alien"
+/turf/simulated/shuttle/wall/corner/alien/ne
+	dir = NORTH|EAST
+/turf/simulated/shuttle/wall/corner/alien/nw
+	dir = NORTH|WEST
+/turf/simulated/shuttle/wall/corner/alien/se
+	dir = SOUTH|EAST
+/turf/simulated/shuttle/wall/corner/alien/sw
 	dir = SOUTH|WEST

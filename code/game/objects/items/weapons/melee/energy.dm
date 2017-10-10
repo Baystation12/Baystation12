@@ -162,6 +162,17 @@
 	..()
 	icon_state = "cutlass1"
 
+
+/obj/item/weapon/melee/energy/sword/bogsword
+	name = "alien sword"
+	desc = "A strange, strange energy sword."
+	icon_state = "sword0"
+
+/obj/item/weapon/melee/energy/sword/bogswrd/activate(mob/living/user)
+	..()
+	icon_state = "bog_sword"
+
+
 /*
  *Energy Blade
  */

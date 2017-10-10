@@ -113,3 +113,17 @@
 	colour = "cult"
 	key = "y"
 	flags = RESTRICTED | HIVEMIND
+
+/datum/language/bogani
+	name = LANGUAGE_BOGANI
+	colour = "alien"
+	desc = "The language of the Bogani"
+	speech_verb = "gurgles"
+	ask_verb = "gurgles"
+	exclaim_verb = "wails"
+	key = "i"
+	flags = RESTRICTED
+	syllables = list("qy","bok","mok","yok","dy","gly","ryl","byl","dok","paj","kaj","wok","wyl","zak","qum","gyh","thj","qpo","basb","ies","niii",
+	"eri","erk","eok","eyl","yyl","hyk","qyb","eon","gni","shaf","bissna","goqqo","xokj","wej","nym","assah","qwssa","nieasl","qyno","shaffar",
+	"egyno","bogani","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")
+	machine_understands = 0
