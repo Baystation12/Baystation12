@@ -33,9 +33,9 @@
 	handle_power() // Handles all computer power interaction
 	check_update_ui_need()
 
-	if(enabled && world.time > ambience_last_played + 30 SECONDS && prob(10))
+	if(enabled && world.time > ambience_last_played + 30 SECONDS && prob(3))
 		ambience_last_played = world.time
-		playsound(src.loc,'sound/effects/computer_beeps.ogg',60,1,10)
+		playsound(src.loc,'sound/effects/computer_beeps.ogg',30,1,10)
 
 // Used to perform preset-specific hardware changes.
 /obj/item/modular_computer/proc/install_default_hardware()
