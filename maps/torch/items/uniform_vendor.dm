@@ -19,6 +19,7 @@
 	var/list/uniforms = list()
 	var/list/selected_outfit = list()
 	var/static/decl/hierarchy/mil_uniform/mil_uniforms
+	var/global/list/issued_items = list()
 
 /obj/machinery/uniform_vendor/attack_hand(mob/user)
 	if(..())
@@ -41,8 +42,10 @@
 					var/obj/item/clothing/C = piece
 					if(piece in selected_outfit)
 						dat += "<span class='linkOn'>[sanitize(initial(C.name))]</span><a href='byond://?src=\ref[src];rem=[piece]'>X</a>"
-					else
+					else if (can_issue(C))
 						dat += "<a href='byond://?src=\ref[src];add=[piece]'>[sanitize(initial(C.name))]</a>"
+					else
+						dat += "[sanitize(initial(C.name))] (ISSUED)"
 			dat += "<hr>"
 		dat += "<a href='byond://?src=\ref[src];vend=[1]'>Dispense</a>"
 	dat = jointext(dat,"<br>")
@@ -69,7 +72,11 @@
 				M.drop_from_inventory(I,src)
 		. = 1
 	if(href_list["get_all"])
-		selected_outfit |= uniforms[href_list["get_all"]]
+		var/list/addition = uniforms[href_list["get_all"]]
+		for(var/G in addition)
+			if(!can_issue(G))
+				addition -= G
+		selected_outfit |= addition
 		. = 1
 	if(href_list["add"])
 		selected_outfit |= text2path(href_list["add"])
@@ -185,11 +192,28 @@
 
 /obj/machinery/uniform_vendor/proc/spawn_uniform(var/list/selected_outfit)
 	listclearnulls(selected_outfit)
+	if(!issued_items[user_id()])
+		issued_items[user_id()] = list()
+	var/list/checkedout = issued_items[user_id()]
 	if(selected_outfit.len > 1)
 		var/obj/item/weapon/clothingbag/bag = new /obj/item/weapon/clothingbag
 		for(var/item in selected_outfit)
 			new item(bag)
+			checkedout += item
 		bag.forceMove(get_turf(src))
 	else if (selected_outfit.len)
 		var/obj/item/clothing/C = selected_outfit[1]
 		new C(get_turf(src))
+		checkedout += C
+
+/obj/machinery/uniform_vendor/proc/user_id()
+	if(!ID)
+		return "UNKNOWN"
+	else
+		return "[ID.registered_name], [ID.military_rank], [ID.military_branch]"
+
+/obj/machinery/uniform_vendor/proc/can_issue(var/gear)
+	var/list/issued = issued_items[user_id()]
+	if(!issued || !issued.len)
+		return TRUE
+	return !(gear in issued)
