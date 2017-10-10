@@ -229,6 +229,15 @@
 				I.take_damage(amount, silent=TRUE)
 				amount = 0
 
+/mob/living/carbon/human/proc/can_autoheal(var/dam_type)
+	if(!species || !dam_type) return FALSE
+
+	if(dam_type == BRUTE)
+		return(getBruteLoss() < species.total_health / 2)
+	else if(dam_type == BURN)
+		return(getFireLoss() < species.total_health / 2)
+	return FALSE
+
 ////////////////////////////////////////////
 
 //Returns a list of damaged organs
@@ -408,7 +417,6 @@ This function restores all organs.
 
 	if(stat == UNCONSCIOUS)
 		traumatic_shock *= 0.6
-
 	return max(0,traumatic_shock)
 
 /mob/living/carbon/human/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)

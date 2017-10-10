@@ -592,7 +592,7 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(get_shock() >= (species.total_health - 100))
+		if(get_shock() >= species.total_health)
 			if(!stat)
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message].")
