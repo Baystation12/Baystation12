@@ -4,13 +4,19 @@
 	icon_state = "holster"
 	slot = ACCESSORY_SLOT_UTILITY
 	var/obj/item/holstered = null
+	var/list/can_hold
 
 /obj/item/clothing/accessory/holster/proc/holster(var/obj/item/I, var/mob/living/user)
 	if(holstered && istype(user))
 		to_chat(user, "<span class='warning'>There is already \a [holstered] holstered here!</span>")
 		return
 
-	if (!(I.slot_flags & SLOT_HOLSTER))
+	if (can_hold)
+		if(!is_type_in_list(I,can_hold))
+			to_chat(user, "<span class='warning'>[I] won't fit in [src]!</span>")
+			return
+
+	else if (!(I.slot_flags & SLOT_HOLSTER))
 		to_chat(user, "<span class='warning'>[I] won't fit in [src]!</span>")
 		return
 
@@ -37,8 +43,8 @@
 	else
 		if(user.a_intent == I_HURT)
 			usr.visible_message(
-				"<span class='danger'>[user] draws \the [holstered], ready to shoot!</span>",
-				"<span class='warning'>You draw \the [holstered], ready to shoot!</span>"
+				"<span class='danger'>[user] draws \the [holstered], ready to go!</span>",
+				"<span class='warning'>You draw \the [holstered], ready to go!</span>"
 				)
 		else
 			user.visible_message(
@@ -105,7 +111,7 @@
 	if(!H.holstered)
 		var/obj/item/W = usr.get_active_hand()
 		if(!istype(W, /obj/item))
-			to_chat(usr, "<span class='warning'>You need your gun equiped to holster it.</span>")
+			to_chat(usr, "<span class='warning'>You're not holding anything to holster.</span>")
 			return
 		H.holster(W, usr)
 	else
@@ -131,3 +137,9 @@
 	name = "thigh holster"
 	desc = "A drop leg holster made of a durable synthetic fiber."
 	icon_state = "holster_thigh"
+
+/obj/item/clothing/accessory/holster/machete
+	name = "machete sheath"
+	desc = "A handsome synthetic leather sheath with matching belt."
+	icon_state = "holster_machete"
+	can_hold = list(/obj/item/weapon/material/hatchet/machete)
