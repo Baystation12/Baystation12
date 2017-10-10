@@ -29,7 +29,7 @@
 	path = /obj/item/device/taperecorder
 
 /datum/gear/utility/codex
-	display_name = "the explorer's guide, 12th edition"
+	display_name = "The Explorer's Guide (12th Edition)"
 	path = /obj/item/weapon/book/codex
 	cost = 0
 

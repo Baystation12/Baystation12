@@ -31,8 +31,6 @@
 	name = "Sol Gov Expeditionary Corps"
 	keywords += list("Expeditionary", "EC")
 	data = "The Expeditionary Corps is a non-military, uniformed organization of [quick_link("Sol Gov")], reporting to the Committee for Diplomatic Relations. It is governed by some military laws,\
-	 but has its own customs, regulations, and traditions that at times put it at odd with the Defense Forces. It's considered generally to be more lax than service in the [quick_link("Fleet")], \
-	 but don't let that make you think they don't know what they're doing. Things like saluting and strict enforcement of the SCMJ are going to be alien to many of the older EC \
-	 personnel, although they have used naval ranks since their inception. The focus of expeditionary personnel is on science and exploration instead of military objectives. \
-	 Corpsmen are often highly specialized for the roles they take on their missions, and they are known for their experimentality and ability to improvise. Some in the Defense \
-	 Forces look at the EC as a lesser organization."
+	 but has its own customs, regulations, and traditions that at times put it at odd with the Defense Forces.The focus of expeditionary personnel is on science and exploration instead of military objectives. \
+	 Corpsmen are often highly specialized for the roles they take on their missions, and they are known for their experimentality and ability to improvise. With the launch of the \
+	 Torch Project, the Expeditionary Corps is beginning the greatest mission for discovery since Humanity first left Sol."
