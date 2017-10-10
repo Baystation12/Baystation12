@@ -2,6 +2,7 @@
 	filename = "ntmonitor"
 	filedesc = "NTNet Diagnostics and Monitoring"
 	program_icon_state = "comm_monitor"
+	program_menu_icon = "wrench"
 	extended_desc = "This program monitors the local NTNet network, provides access to logging systems, and allows for configuration changes"
 	size = 12
 	requires_ntnet = 1

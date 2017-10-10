@@ -6,6 +6,7 @@
 	filename = "arcadec"					// File name, as shown in the file browser program.
 	filedesc = "Unknown Game"				// User-Friendly name. In this case, we will generate a random name in constructor.
 	program_icon_state = "game"				// Icon state of this program's screen.
+	program_menu_icon = "script"
 	extended_desc = "Fun for the whole family! Probably not an AAA title, but at least you can download it on the corporate network.."		// A nice description.
 	size = 5								// Size in GQ. Integers only. Smaller sizes should be used for utility/low use programs (like this one), while large sizes are for important programs.
 	requires_ntnet = 0						// This particular program does not require NTNet network conectivity...

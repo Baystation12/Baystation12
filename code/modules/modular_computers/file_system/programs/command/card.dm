@@ -3,6 +3,7 @@
 	filedesc = "ID card modification program"
 	nanomodule_path = /datum/nano_module/program/card_mod
 	program_icon_state = "id"
+	program_menu_icon = "key"
 	extended_desc = "Program for programming crew ID cards."
 	required_access = access_change_ids
 	requires_ntnet = 0

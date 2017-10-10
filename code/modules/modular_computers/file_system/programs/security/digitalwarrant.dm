@@ -8,6 +8,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	extended_desc = "Official NTsec program for creation and handling of warrants."
 	size = 8
 	program_icon_state = "warrant"
+	program_menu_icon = "star"
 	requires_ntnet = 1
 	available_on_ntnet = 1
 	required_access = access_security
