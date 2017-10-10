@@ -28,6 +28,7 @@
 	boots["workboots"] = /obj/item/clothing/shoes/workboots
 	boots["duty boots"] = /obj/item/clothing/shoes/dutyboots
 	boots["jungle boots"] = /obj/item/clothing/shoes/jungleboots
+	boots["desert boots"] = /obj/item/clothing/shoes/desertboots
 	gear_tweaks += new/datum/gear_tweak/path(boots)
 
 /datum/gear/shoes/color
