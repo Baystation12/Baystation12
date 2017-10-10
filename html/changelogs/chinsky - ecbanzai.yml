@@ -1,5 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "EC ranks have been changed, you'll probably need to update your char settings. Only 3 enlisted ranks now, slightly less officer ones."
-  - rscadd: "SUPER IMPORTANT: EC cannot longer be SEA. Also since they don't have O2 equivalent, Pathfinder can be either O1 or O3."

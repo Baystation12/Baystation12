@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Added doorbell pager button. Press one and it will ping all PDAs of relevant department people! There's one in Medical Cargo lobbies each."
