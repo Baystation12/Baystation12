@@ -134,6 +134,20 @@
 /obj/item/clothing/under/utility/fleet/exploration/pilot
 	starting_accessories = list(/obj/item/clothing/accessory/department/exploration/fleet, /obj/item/clothing/accessory/speciality/pilot)
 
+/obj/item/clothing/under/utility/fleet/combat
+	name = "fleet fatigues"
+	desc = "Alternative utility uniform of the SCG Fleet, for when coveralls are impractical."
+	icon_state = "navycombat"
+	worn_state = "navycombat"
+	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
+
+/obj/item/clothing/under/utility/fleet/combat/security
+	starting_accessories = list(/obj/item/clothing/accessory/department/security/fleet)
+
+/obj/item/clothing/under/utility/fleet/combat/medical
+	starting_accessories = list(/obj/item/clothing/accessory/department/medical/fleet, /obj/item/clothing/accessory/armband/medblue)
+
 
 /obj/item/clothing/under/utility/marine
 	name = "marine fatigues"

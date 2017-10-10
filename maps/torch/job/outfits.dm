@@ -136,7 +136,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
 	name = OUTFIT_JOB_NAME("Chief of Security - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet/security
+	uniform = /obj/item/clothing/under/utility/fleet/combat/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/marine
@@ -275,7 +275,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet
 	name = OUTFIT_JOB_NAME("Brig Officer - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet/security
+	uniform = /obj/item/clothing/under/utility/fleet/combat/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/marine
@@ -292,7 +292,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet
 	name = OUTFIT_JOB_NAME("Forensic Technician - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet/security
+	uniform = /obj/item/clothing/under/utility/fleet/combat/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marine
@@ -309,7 +309,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
 	name = OUTFIT_JOB_NAME("Master at Arms - Fleet")
-	uniform = /obj/item/clothing/under/utility/fleet/security
+	uniform = /obj/item/clothing/under/utility/fleet/combat/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/security/maa/marine
@@ -352,8 +352,8 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor/medic
 	name = OUTFIT_JOB_NAME("Corpsman - Medic")
-	uniform = /obj/item/clothing/under/utility/marine/medical/banded
-	shoes = /obj/item/clothing/shoes/jungleboots
+	uniform = /obj/item/clothing/under/utility/fleet/combat/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	name = OUTFIT_JOB_NAME("Medical Contractor")
