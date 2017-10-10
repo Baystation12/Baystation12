@@ -229,6 +229,12 @@
 	worn_state = "greenservice"
 	starting_accessories = list(/obj/item/clothing/accessory/brown)
 
+/obj/item/clothing/under/service/marine/skirt
+	name = "marine service skirt"
+	desc = "The service uniform skirt of the SCG Marine Corps. Slimming."
+	icon_state = "greenservicefem"
+	worn_state = "greenservicefem"
+
 /obj/item/clothing/under/service/marine/command
 	name = "marine officer's service uniform"
 	desc = "The service uniform of the SCG Marine Corps. Slimming and stylish."
@@ -236,6 +242,12 @@
 	item_state = "johnny"
 	worn_state = "greenservice_com"
 	starting_accessories = list(/obj/item/clothing/accessory/brown)
+
+/obj/item/clothing/under/service/marine/command/skirt
+	name = "marine officer's service skirt"
+	desc = "The service uniform skirt of the SCG Marine Corps. Slimming and stylish."
+	icon_state = "greenservicefem_com"
+	worn_state = "greenservicefem_com"
 
 //Dress
 /obj/item/clothing/under/mildress
