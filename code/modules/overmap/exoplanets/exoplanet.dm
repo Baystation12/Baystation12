@@ -19,6 +19,9 @@
 	var/repopulating = 0
 	var/repopulate_types = list() // animals which have died that may come back
 
+	var/max_features = 2
+	var/list/possible_features //pre-defined list of features to pick from, will use all types otherwise
+
 
 /obj/effect/overmap/sector/exoplanet/New()
 	if(!GLOB.using_map.use_overmap)
@@ -42,20 +45,20 @@
 	spawn()
 		generate_atmosphere()
 		generate_map()
+		generate_features()
 		generate_landing()
 		update_biome()
 		START_PROCESSING(SSobj, src)
 
 //attempt at more consistent history generation for xenoarch finds.
 /obj/effect/overmap/sector/exoplanet/proc/get_engravings()
-	if(!actors)
-		actors += pick("alien humanoid","amorphic blob","short, hairy being","rodent-like creature","robot","primate","reptilian alien","unidentifiable object","statue","starship","unusual devices","structure")
+	if(!actors.len)
+		actors += pick("alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")
 		actors += pick("alien humanoids","amorphic blobs","short, hairy beings","rodent-like creatures","robots","primates","reptilian aliens")
 
-	var/engravings = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] a \
-	[pick(actors[1])] \
+	var/engravings = "[actors[1]] \
 	[pick("surrounded by","being held aloft by","being struck by","being examined by","communicating with")] \
-	[pick(actors[2])]"
+	[actors[2]]"
 	if(prob(50))
 		engravings += ", [pick("they seem to be enjoying themselves","they seem extremely angry","they look pensive","they are making gestures of supplication","the scene is one of subtle horror","the scene conveys a sense of desperation","the scene is completely bizarre")]"
 	engravings += "."
@@ -105,6 +108,30 @@
 	repopulate_types |= M.type
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
+
+/obj/effect/overmap/sector/exoplanet/proc/generate_features()
+	if(!possible_features)
+		possible_features = subtypesof(/datum/random_map/feature)
+	for(var/F in possible_features)
+		var/datum/random_map/feature/FT = F
+		if(initial(FT.unique) && map_count[initial(FT.descriptor)])
+			possible_features -= F
+		if(initial(FT.limit_x) + 2 * TRANSITIONEDGE > world.maxx)
+			possible_features -= F
+		if(initial(FT.limit_y) + 2 * TRANSITIONEDGE > world.maxy)
+			possible_features -= F
+
+	max_features = rand(0,max_features)
+	for(var/zlevel in map_z)
+		for(var/i = 1 to max_features)
+			if(!possible_features.len)
+				return
+			var/datum/random_map/feature/F = pick(possible_features)
+			var/tx = rand(TRANSITIONEDGE, world.maxx - TRANSITIONEDGE - initial(F.limit_x))
+			var/ty = rand(TRANSITIONEDGE, world.maxy - TRANSITIONEDGE - initial(F.limit_y))
+			var/turf/T = locate(tx,ty,zlevel)
+			if(T)
+				F = new F(null,tx,ty,zlevel)
 
 /obj/effect/overmap/sector/exoplanet/proc/get_biostuff(var/datum/random_map/noise/exoplanet/random_map)
 	seeds += random_map.small_flora_types
