@@ -1,0 +1,4 @@
+author: sabiram
+delete-after: True
+changes: 
+  - rscadd: "Job bans can now be applied to jobs from the command support, exploration, service, and supply departments."
