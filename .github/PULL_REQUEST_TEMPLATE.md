@@ -11,11 +11,4 @@ Examples were changelog entries are optional/not typically required:
 * Minor bug fixes.
 
 You find a README and example file in .\html\changelogs\ for further instructions.
-
-You can use changelog autogeneration. To do so, use this structure in your PR opening post:
-
-:cl: Author Name On This Line
-rscadd: Added some stuff
-tweak: Tweaked stuff too
-/:cl:
 -->
