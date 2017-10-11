@@ -23,7 +23,7 @@
 	var/source_material = ""
 	var/material_descriptor = ""
 	if(prob(40))
-		material_descriptor = pick("rusted ","dusty ","archaic ","fragile ")
+		material_descriptor = pick("rusted","dusty","archaic","fragile")
 	source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
 
 	var/decorations = ""
@@ -72,7 +72,7 @@
 		desc += engravings
 
 	if(apply_prefix)
-		name = "[pick("strange","ancient","alien","")] [item_type]"
+		name = "[pick("strange ","ancient ","alien ")][item_type]"
 	else
 		name = item_type
 
@@ -105,7 +105,7 @@
 
 /obj/item/weapon/archaeological_find/bowl/spawn_item()
 	var/obj/item/weapon/reagent_containers/R
-	if(prob(33)) 
+	if(prob(33))
 		R = new /obj/item/weapon/reagent_containers/glass/replenishing(loc)
 	else
 		R = new /obj/item/weapon/reagent_containers/glass/beaker(loc)
@@ -116,6 +116,7 @@
 	return R
 
 /obj/item/weapon/archaeological_find/bowl/urn
+	find_type = ARCHAEO_URN
 	item_type = "urn"
 	icon_state = "urn"
 
@@ -126,6 +127,7 @@
 		additional_desc = "It [pick("whispers faintly","makes a quiet roaring sound","whistles softly","thrums quietly","throbs")] if you put it to your ear."
 	else
 		additional_desc = null
+	return I
 
 /obj/item/weapon/archaeological_find/cutlery
 	item_type = "cutlery"
@@ -168,7 +170,7 @@
 	item_type = "instrument"
 	icon_state = "instrument"
 	find_type = ARCHAEO_INSTRUMENT
-	
+
 /obj/item/weapon/archaeological_find/instrument/spawn_item()
 	var/obj/item/new_item = new(loc)
 	new_item.name = "instrument"
@@ -185,7 +187,7 @@
 /obj/item/weapon/archaeological_find/knife
 	item_type = "knife"
 	find_type = ARCHAEO_KNIFE
-	
+
 /obj/item/weapon/archaeological_find/knife/spawn_item()
 	item_type = "[pick("bladed knife","serrated blade","sharp cutting implement")]"
 	var/obj/item/new_item = new /obj/item/weapon/material/knife(loc)
@@ -262,7 +264,7 @@
 	else
 		new_item = new /obj/item/weapon/screwdriver(loc)
 	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
-	new_item.icon_state = "unkown[rand(1,4)]"
+	new_item.icon_state = "unknown[rand(1,4)]"
 	additional_desc = "[pick("It doesn't look safe.",\
 	"You wonder what it was used for",\
 	"There appear to be [pick("dark red","dark purple","dark green","dark blue")] stains on it")]."
@@ -326,7 +328,7 @@
 
 /obj/item/weapon/archaeological_find/blade/spawn_item()
 	return new /obj/item/weapon/melee/cultblade(loc)
-	
+
 /obj/item/weapon/archaeological_find/beacon
 	item_type = "device"
 	find_type = ARCHAEO_TELEBEACON
@@ -359,7 +361,7 @@
 
 /obj/item/weapon/archaeological_find/katana
 	item_type = "blade"
-	find_type = ARCHAEO_CLAYMORE
+	find_type = ARCHAEO_KATANA
 
 /obj/item/weapon/archaeological_find/katana/spawn_item()
 	return new /obj/item/weapon/material/sword/katana(loc)
@@ -374,42 +376,49 @@
 	possible_spawns -= /obj/item/weapon/stock_parts/subspace
 	var/new_type = pick(possible_spawns)
 	return new new_type(loc)
-	
+
 /obj/item/weapon/archaeological_find/laser
 	item_type = "gun"
 	icon_state = "egun1"
 	find_type = ARCHAEO_LASER
+	apply_prefix = 0
 
 /obj/item/weapon/archaeological_find/laser/spawn_item()
 	var/spawn_type = pick(\
-	/obj/item/weapon/gun/energy/laser/practice/xenoarch,\
-	/obj/item/weapon/gun/energy/laser/xenoarch,\
-	/obj/item/weapon/gun/energy/xray/xenoarch,\
-	/obj/item/weapon/gun/energy/captain/xenoarch)
+	/obj/item/weapon/gun/energy/laser/practice,\
+	/obj/item/weapon/gun/energy/laser,\
+	/obj/item/weapon/gun/energy/xray,\
+	/obj/item/weapon/gun/energy/captain)
 	var/obj/item/weapon/gun/energy/new_gun =  new spawn_type(loc)
+
+	new_gun.icon = 'icons/obj/xenoarchaeology.dmi'
 	new_gun.icon_state = "egun[rand(1,6)]"
-	new_gun.desc = "This is an antique energy weapon, you're not sure if it will fire or not."
+	new_gun.charge_meter = 0
+
 	//10% chance to have an unchargeable cell
 	//15% chance to gain a random amount of starting energy, otherwise start with an empty cell
-
 	if(prob(10))
 		new_gun.power_supply.maxcharge = 0
 	if(prob(15))
 		new_gun.power_supply.charge = rand(0, new_gun.power_supply.maxcharge)
 	else
 		new_gun.power_supply.charge = 0
+
+	additional_desc = "This is an antique energy weapon, you're not sure if it will fire or not."
+
 	return new_gun
-	
+
 /obj/item/weapon/archaeological_find/gun
 	item_type = "gun"
 	icon_state = "gun1"
 	find_type = ARCHAEO_GUN
 
 /obj/item/weapon/archaeological_find/gun/spawn_item()
-	var/obj/item/weapon/gun/projectile/revolver/new_gun =  new(loc)
+	var/obj/item/weapon/gun/projectile/revolver/new_gun = new(loc)
+
 	new_gun.icon = 'icons/obj/xenoarchaeology.dmi'
-	new_gun.icon_state = "gun[rand(1,6)]"
-	new_gun.desc = "This is an antique weapon, you're not sure if it will fire or not."
+	new_gun.icon_state = "gun[rand(1,4)]"
+
 	//33% chance to be able to reload the gun with human ammunition
 	if(prob(66))
 		new_gun.caliber = "999"
@@ -424,6 +433,9 @@
 			if(A.caliber != new_gun.caliber)
 				A.caliber = new_gun.caliber
 				A.desc = "A bullet casing of unknown caliber."
+
+	additional_desc = "This is an antique weapon, you're not sure if it will fire or not."
+
 	return new_gun
 
 /obj/item/weapon/archaeological_find/fossil
