@@ -341,9 +341,9 @@ var/list/mining_floors = list()
 		var/find = get_archeological_find_by_findtype(F.find_type)
 		new find(src)
 	else
-		var/rock = new /obj/item/weapon/ore/strangerock(src, inside_item_type = F.find_type)
+		var/obj/item/weapon/ore/strangerock/rock = new(src, inside_item_type = F.find_type)
 		geologic_data.UpdateNearbyArtifactInfo(src)
-		rock:geologic_data = geologic_data
+		rock.geologic_data = geologic_data
 
 	finds.Remove(F)
 
