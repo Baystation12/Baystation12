@@ -2389,7 +2389,6 @@
 #include "code\modules\xenoarcheaology\effects\sleepy.dm"
 #include "code\modules\xenoarcheaology\effects\stun.dm"
 #include "code\modules\xenoarcheaology\effects\teleport.dm"
-#include "code\modules\xenoarcheaology\finds\eguns.dm"
 #include "code\modules\xenoarcheaology\finds\find_spawning.dm"
 #include "code\modules\xenoarcheaology\finds\finds.dm"
 #include "code\modules\xenoarcheaology\finds\finds_defines.dm"
