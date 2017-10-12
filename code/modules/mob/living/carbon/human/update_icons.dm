@@ -154,8 +154,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	overlays.Cut()
 
 	if (icon_update)
-
-		if(cloaked)
+		if(is_cloaked())
 
 			icon = 'icons/mob/human.dmi'
 			icon_state = "blank"

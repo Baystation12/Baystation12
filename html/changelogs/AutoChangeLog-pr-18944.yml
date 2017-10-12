@@ -1,0 +1,10 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Electrical storms now can be blocked by shields. They have special mode for it. Keep in mind that they will be taking damage while event is running."
+  - rscadd: "Overmap events (meteor, dust, electrical storm) do not happen randomly now."
+  - rscadd: "Number of overmap events increased. Asteroid fields now spread over wider space but have gaps in them."
+  - rscadd: "Hitting edge of overmap will not warp you around to the opposing edge. Space is around after all."
+  - rscadd: "Away missions no longer glow on overmap, you have to find them now. Planets are still visible due to sheer size of signature."
+  - rscadd: "Changes to Torch's speed. Now default delay between moving is higher - 20 seconds vs 12, but speed affects it much more, e.g. at 5 speed you will move pretty much continuously."
+  - rscadd: "Shuttles have different ranges now. Charon (1) can go to away missions in adjacent grids, Aquila (2) one tile further. Travel time is multiplied by the distance."

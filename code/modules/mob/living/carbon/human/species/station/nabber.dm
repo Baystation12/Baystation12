@@ -177,11 +177,7 @@
 /datum/species/nabber/handle_movement_delay_special(var/mob/living/carbon/human/H)
 	var/tally = 0
 
-	if(H.cloaked)
-		H.visible_message("<span class='danger'>[H] suddenly appears!</span>")
-		H.cloaked = 0
-
-	H.update_icons()
+	H.remove_cloaking_source(src)
 
 	var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
 	if(istype(B,/obj/item/organ/internal/brain/nabber))

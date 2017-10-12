@@ -134,6 +134,20 @@
 /obj/item/clothing/under/utility/fleet/exploration/pilot
 	starting_accessories = list(/obj/item/clothing/accessory/department/exploration/fleet, /obj/item/clothing/accessory/speciality/pilot)
 
+/obj/item/clothing/under/utility/fleet/combat
+	name = "fleet fatigues"
+	desc = "Alternative utility uniform of the SCG Fleet, for when coveralls are impractical."
+	icon_state = "navycombat"
+	worn_state = "navycombat"
+	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
+
+/obj/item/clothing/under/utility/fleet/combat/security
+	starting_accessories = list(/obj/item/clothing/accessory/department/security/fleet)
+
+/obj/item/clothing/under/utility/fleet/combat/medical
+	starting_accessories = list(/obj/item/clothing/accessory/department/medical/fleet, /obj/item/clothing/accessory/armband/medblue)
+
 
 /obj/item/clothing/under/utility/marine
 	name = "marine fatigues"
@@ -229,6 +243,12 @@
 	worn_state = "greenservice"
 	starting_accessories = list(/obj/item/clothing/accessory/brown)
 
+/obj/item/clothing/under/service/marine/skirt
+	name = "marine service skirt"
+	desc = "The service uniform skirt of the SCG Marine Corps. Slimming."
+	icon_state = "greenservicefem"
+	worn_state = "greenservicefem"
+
 /obj/item/clothing/under/service/marine/command
 	name = "marine officer's service uniform"
 	desc = "The service uniform of the SCG Marine Corps. Slimming and stylish."
@@ -236,6 +256,12 @@
 	item_state = "johnny"
 	worn_state = "greenservice_com"
 	starting_accessories = list(/obj/item/clothing/accessory/brown)
+
+/obj/item/clothing/under/service/marine/command/skirt
+	name = "marine officer's service skirt"
+	desc = "The service uniform skirt of the SCG Marine Corps. Slimming and stylish."
+	icon_state = "greenservicefem_com"
+	worn_state = "greenservicefem_com"
 
 //Dress
 /obj/item/clothing/under/mildress

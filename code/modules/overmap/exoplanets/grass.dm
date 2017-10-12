@@ -1,6 +1,7 @@
 /obj/effect/overmap/sector/exoplanet/grass
 	name = "lush exoplanet"
 	desc = "Planet with abundant flora and fauna."
+	color = "#538224"
 
 /obj/effect/overmap/sector/exoplanet/grass/generate_map()
 	if(prob(40))

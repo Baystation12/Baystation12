@@ -178,7 +178,7 @@
 // Stunbaton module for Security synthetics
 /obj/item/weapon/melee/baton/robot
 	bcell = null
-	hitcost = 100
+	hitcost = 20
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
 /obj/item/weapon/melee/baton/robot/examine_cell(mob/user)
