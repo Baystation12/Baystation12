@@ -7,17 +7,17 @@
 	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/rank/fleet/enlisted
-	name = "ranks (E-1 crewman recruit)"
-	desc = "Insignia denoting the rank of Crewman Recruit."
+	name = "ranks (E-1 spacer recruit)"
+	desc = "Insignia denoting the rank of Spacer Recruit."
 	icon_state = "fleetrank_enlisted"
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e2
-	name = "ranks (E-2 crewman apprentice)"
-	desc = "Insignia denoting the rank of Crewman Apprentice."
+	name = "ranks (E-2 spacer apprentice)"
+	desc = "Insignia denoting the rank of Spacer Apprentice."
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e3
-	name = "ranks (E-3 crewman)"
-	desc = "Insignia denoting the rank of Crewman."
+	name = "ranks (E-3 spacer)"
+	desc = "Insignia denoting the rank of Spacer."
 
 /obj/item/clothing/accessory/rank/fleet/enlisted/e4
 	name = "ranks (E-4 petty officer third class)"
