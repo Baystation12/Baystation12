@@ -239,20 +239,20 @@
  */
 
 /datum/mil_rank/fleet/e1
-	name = "Spaceman Recruit"
+	name = "Spacer Recruit"
 	name_short = "SpR"
 	accessory = list(/obj/item/clothing/accessory/rank/fleet/enlisted, /obj/item/clothing/accessory/specialty/enlisted)
 	sort_order = 1
 
 /datum/mil_rank/fleet/e2
-	name = "Spaceman Apprentice"
+	name = "Spacer Apprentice"
 	name_short = "SpA"
 	accessory = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e2, /obj/item/clothing/accessory/specialty/enlisted)
 	sort_order = 2
 
 /datum/mil_rank/fleet/e3
-	name = "Spaceman"
-	name_short = "SpN"
+	name = "Spacer"
+	name_short = "Spr"
 	accessory = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e3, /obj/item/clothing/accessory/specialty/enlisted)
 	sort_order = 3
 
