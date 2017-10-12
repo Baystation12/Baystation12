@@ -3,10 +3,10 @@
 /datum/reagents
 	var/list/datum/reagent/reagent_list = list()
 	var/total_volume = 0
-	var/maximum_volume = 100
+	var/maximum_volume = 120
 	var/atom/my_atom = null
 
-/datum/reagents/New(var/maximum_volume = 100, var/atom/my_atom)
+/datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	if(!istype(my_atom))
 		CRASH("Invalid reagents holder: [log_info_line(my_atom)]")
 	..()
