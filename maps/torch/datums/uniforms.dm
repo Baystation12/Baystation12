@@ -95,6 +95,7 @@ decl/hierarchy/mil_uniform/marine
 	utility_extra = list(/obj/item/clothing/head/ushanka/marine)
 
 	service_under = /obj/item/clothing/under/service/marine
+	service_skirt = /obj/item/clothing/under/service/marine/skirt
 	service_over = /obj/item/clothing/suit/storage/service/marine
 	service_shoes = /obj/item/clothing/shoes/dress
 	service_hat = /obj/item/clothing/head/service/marine
