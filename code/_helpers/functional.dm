@@ -57,3 +57,8 @@
 
 		if(all_predicates_true(predicate_input, predicates))
 			. += entry
+
+/proc/map(var/list/list_to_map, var/map_proc)
+	. = list()
+	for(var/entry in list_to_map)
+		. += call(map_proc)(entry)
