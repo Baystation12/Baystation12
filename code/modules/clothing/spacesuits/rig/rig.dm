@@ -677,9 +677,8 @@
 					if(use_obj && check_slot == use_obj)
 						to_chat(wearer, "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>")
 						use_obj.canremove = 1
-						holder.u_equip(use_obj)
+						holder.drop_from_inventory(use_obj, src)
 						use_obj.canremove = 0
-						use_obj.forceMove(src)
 
 		else if (deploy_mode != ONLY_RETRACT)
 			if(check_slot && check_slot == use_obj)
