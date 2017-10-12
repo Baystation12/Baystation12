@@ -51,7 +51,7 @@ var/list/keyboard_sound = list('sound/machines/keypress1.ogg','sound/machines/ke
 var/list/switch_sound = list('sound/machines/switch1.ogg','sound/machines/switch2.ogg','sound/machines/switch3.ogg','sound/machines/switch4.ogg')
 var/list/button_sound = list('sound/machines/button1.ogg','sound/machines/button2.ogg','sound/machines/button3.ogg','sound/machines/button4.ogg')
 
-/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency)
+/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency, var/is_ambiance = 0)
 
 	soundin = get_sfx(soundin) // same sound for everyone
 
@@ -69,7 +69,7 @@ var/list/button_sound = list('sound/machines/button1.ogg','sound/machines/button
 			continue
 		if(get_dist(M, turf_source) <= (world.view + extrarange) * 2)
 			var/turf/T = get_turf(M)
-			if(T && T.z == turf_source.z)
+			if(T && T.z == turf_source.z && (!is_ambiance || M.is_preference_enabled(/datum/client_preference/play_ambiance)))
 				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global)
 
 var/const/FALLOFF_SOUNDS = 0.5
