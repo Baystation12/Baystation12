@@ -1,13 +1,14 @@
 // Eyes
 /datum/gear/eyes
-	display_name = "eyepatch"
-	path = /obj/item/clothing/glasses/eyepatch
+	display_name = "prescription glasses"
+	path = /obj/item/clothing/glasses/regular
 	slot = slot_glasses
 	sort_category = "Glasses and Eyewear"
 
-/datum/gear/eyes/glasses
-	display_name = "prescription glasses"
-	path = /obj/item/clothing/glasses/regular
+/datum/gear/eyes/eyepatch
+	display_name = "eyepatch"
+	path = /obj/item/clothing/glasses/eyepatch
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/eyes/fashionglasses
 	display_name = "glasses"
