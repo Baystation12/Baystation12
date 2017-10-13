@@ -49,6 +49,7 @@
 	fire_sound = 'sound/weapons/laser3.ogg'
 	damage = 30
 	armor_penetration = 30
+	penetration_modifier = 0.8
 
 	muzzle_type = /obj/effect/projectile/xray/muzzle
 	tracer_type = /obj/effect/projectile/xray/tracer
