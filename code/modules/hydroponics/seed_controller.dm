@@ -23,16 +23,12 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 
 /datum/controller/plants
 
-	var/plants_per_tick = PLANTS_PER_TICK
-	var/plant_tick_time = PLANT_TICK_TIME
 	var/list/product_descs = list()         // Stores generated fruit descs.
-	var/list/plant_queue = list()           // All queued plants.
 	var/list/seeds = list()                 // All seed data stored here.
 	var/list/gene_tag_masks = list()        // Gene obfuscation for delicious trial and error goodness.
 	var/list/plant_icon_cache = list()      // Stores images of growth, fruits and seeds.
 	var/list/plant_sprites = list()         // List of all harvested product sprites.
 	var/list/plant_product_sprites = list() // List of all growth sprites plus number of growth stages.
-	var/processing = 0                      // Off/on.
 	var/list/gene_masked_list = list()		// Stored gene masked list, rather than recreating it when needed.
 	var/list/plant_gene_datums = list()		// Stored datum versions of the gene masked list.
 
@@ -42,7 +38,6 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		qdel(plant_controller)
 	plant_controller = src
 	setup()
-	process()
 
 // Predefined/roundstart varieties use a string key to make it
 // easier to grab the new variety when mutating. Post-roundstart
@@ -130,33 +125,3 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		seed.set_trait(TRAIT_LOWKPA_TOLERANCE,25)
 		seed.set_trait(TRAIT_HIGHKPA_TOLERANCE,200)
 	return seed
-
-/datum/controller/plants/proc/process()
-	processing = 1
-	spawn(0)
-		set background = 1
-		var/processed = 0
-		while(1)
-			if(!processing)
-				sleep(plant_tick_time)
-			else
-				processed = 0
-				if(plant_queue.len)
-					var/target_to_process = min(plant_queue.len,plants_per_tick)
-					for(var/x=0;x<target_to_process;x++)
-						if(!plant_queue.len)
-							break
-						var/obj/effect/plant/plant = pick(plant_queue)
-						plant_queue -= plant
-						if(!istype(plant))
-							continue
-						plant.Process()
-						processed++
-						sleep(1) // Stagger processing out so previous tick can resolve (overlapping plant segments etc)
-				sleep(max(1,(plant_tick_time-processed)))
-
-/datum/controller/plants/proc/add_plant(var/obj/effect/plant/plant)
-	plant_queue |= plant
-
-/datum/controller/plants/proc/remove_plant(var/obj/effect/plant/plant)
-	plant_queue -= plant

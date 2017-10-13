@@ -1,4 +1,4 @@
-/obj/effect/plant/HasProximity(var/atom/movable/AM)
+/obj/effect/vine/HasProximity(var/atom/movable/AM)
 
 	if(!is_mature() || seed.get_trait(TRAIT_SPREAD) != 2)
 		return
@@ -13,18 +13,19 @@
 		spawn(1)
 			entangle(M)
 
-/obj/effect/plant/attack_hand(var/mob/user)
+/obj/effect/vine/attack_hand(var/mob/user)
 	manual_unbuckle(user)
 
-/obj/effect/plant/attack_generic(var/mob/user)
+/obj/effect/vine/attack_generic(var/mob/user)
 	if(istype(user))
 		manual_unbuckle(user)
 
-/obj/effect/plant/Crossed(atom/movable/O)
+/obj/effect/vine/Crossed(atom/movable/O)
 	if(isliving(O))
 		trodden_on(O)
 
-/obj/effect/plant/proc/trodden_on(var/mob/living/victim)
+/obj/effect/vine/proc/trodden_on(var/mob/living/victim)
+	wake_neighbors()
 	if(!is_mature())
 		return
 	var/mob/living/carbon/human/H = victim
@@ -36,16 +37,17 @@
 	seed.do_thorns(victim,src)
 	seed.do_sting(victim,src,pick(BP_R_FOOT,BP_L_FOOT,BP_R_LEG,BP_L_LEG))
 
-/obj/effect/plant/proc/unbuckle()
+/obj/effect/vine/proc/unbuckle()
 	if(buckled_mob)
 		if(buckled_mob.buckled == src)
 			buckled_mob.buckled = null
 			buckled_mob.anchored = initial(buckled_mob.anchored)
 			buckled_mob.update_canmove()
 		buckled_mob = null
+	START_PROCESSING(SSvines, src)
 	return
 
-/obj/effect/plant/proc/manual_unbuckle(mob/user as mob)
+/obj/effect/vine/proc/manual_unbuckle(mob/user as mob)
 	if(buckled_mob)
 		var/chance = 20
 		if(seed)
@@ -71,9 +73,10 @@
 				"<span class='warning'>You [text] at \the [src].</span>",\
 				"<span class='warning'>You hear shredding and ripping.</span>")
 			check_health()
+	START_PROCESSING(SSvines, src)
 	return
 
-/obj/effect/plant/proc/entangle(var/mob/living/victim)
+/obj/effect/vine/proc/entangle(var/mob/living/victim)
 
 	if(buckled_mob)
 		return
@@ -101,6 +104,6 @@
 				to_chat(victim, "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>")
 			Process(0)
 
-/obj/effect/plant/buckle_mob()
+/obj/effect/vine/buckle_mob()
 	. = ..()
-	if(.) plant_controller.add_plant(src)
+	if(.) START_PROCESSING(SSvines, src)

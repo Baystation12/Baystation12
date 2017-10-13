@@ -177,6 +177,7 @@
 #include "code\controllers\subsystems\processing\mobs.dm"
 #include "code\controllers\subsystems\processing\obj.dm"
 #include "code\controllers\subsystems\processing\processing.dm"
+#include "code\controllers\subsystems\processing\vines.dm"
 #include "code\datums\ai_law_sets.dm"
 #include "code\datums\ai_laws.dm"
 #include "code\datums\browser.dm"

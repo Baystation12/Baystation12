@@ -124,9 +124,9 @@
 	if(!closed_system && \
 	 seed.get_trait(TRAIT_SPREAD) == 2 && \
 	 2 * age >= seed.get_trait(TRAIT_MATURATION) && \
-	 !(locate(/obj/effect/plant) in get_turf(src)) && \
+	 !(locate(/obj/effect/vine) in get_turf(src)) && \
 	 prob(2 * seed.get_trait(TRAIT_POTENCY)))
-		new /obj/effect/plant(get_turf(src), seed)
+		new /obj/effect/vine(get_turf(src), seed)
 
 	if(prob(3))  // On each tick, there's a chance the pest population will increase
 		pestlevel += 0.1 * HYDRO_SPEED_MULTIPLIER

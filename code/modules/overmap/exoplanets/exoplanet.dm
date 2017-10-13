@@ -331,9 +331,9 @@
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)
 	if(big)
-		new /obj/effect/plant(T, pick(big_flora_types), start_matured = 1)
+		new /obj/effect/vine(T, pick(big_flora_types), start_matured = 1)
 	else
-		new /obj/effect/plant(T, pick(small_flora_types), start_matured = 1)
+		new /obj/effect/vine(T, pick(small_flora_types), start_matured = 1)
 
 /turf/simulated/floor/exoplanet
 	name = "space land"

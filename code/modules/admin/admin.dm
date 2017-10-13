@@ -1056,7 +1056,7 @@ var/global/floorIsLava = 0
 
 	if(!seedtype || !plant_controller.seeds[seedtype])
 		return
-	new /obj/effect/plant(get_turf(usr), plant_controller.seeds[seedtype])
+	new /obj/effect/vine(get_turf(usr), plant_controller.seeds[seedtype])
 	log_admin("[key_name(usr)] spawned [seedtype] vines at ([usr.x],[usr.y],[usr.z])")
 
 /datum/admins/proc/spawn_atom(var/object as text)

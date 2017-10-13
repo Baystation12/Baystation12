@@ -15,3 +15,4 @@
 #define SS_PRIORITY_PROCESSING    25	// Generic datum processor. Replaces objects processor.
 #define SS_PRIORITY_OBJECTS       15	// processing_objects processing.
 #define SS_PRIORITY_GARBAGE       15	// Garbage collection.
+#define SS_PRIORITY_VINES         15	// Spreading vine effects.
