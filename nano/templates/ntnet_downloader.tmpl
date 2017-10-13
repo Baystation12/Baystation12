@@ -1,4 +1,4 @@
-<i>Welcome to software download utility. Please select which software you wish to download.</i><hr>
+<i>Welcome to the software download utility. Please select which software you wish to download.</i><hr>
 {{if data.error}}
 	<h2>Download Error</h2>
 	<div class="itemLabel">
@@ -13,7 +13,10 @@
 	<div class="itemContent">
 		{{:helper.link("RESET", null, {'PRG_reseterror' : 1})}}
 	</div>	
-{{else data.downloadname}}
+	<hr>
+{{/if}}
+
+{{if data.downloadname}}
 	<h2>Download Running</h2>
 	<i>Please wait...</i>
 	<div class="item">
@@ -49,6 +52,60 @@
 		</div>
 	</div>
 {{else}}
+	<h2>No Downloads In Progress</h2>
+	<i>Standing by...</i>
+	<div class="item">
+		<div class="itemLabel">
+			File name: 
+		</div>
+		<div class="itemContent">
+			N/A
+		</div>
+		<div class="itemLabel">
+			File description: 
+		</div>
+		<div class="itemContent">
+			N/A
+		</div>
+		<div class="itemLabel">
+			File size: 
+		</div>
+		<div class="itemContent">
+			N/A
+		</div>
+		<div class="itemLabel">
+			Transfer Rate: 
+		</div>
+		<div class="itemContent">
+			0 GQ/s
+		</div>
+		<div class="itemLabel">
+			Download progress: 
+		</div>
+		<div class="itemContent">
+			{{:helper.displayBar(0, 0, 1, 'good')}}
+		</div>
+	</div>
+{{/if}}
+
+	<br><hr>
+	
+	<h2>Downloads Queue</h2>
+	<div class="item">
+	{{for data.downloads_queue}}
+		<div class="itemLabel">
+			{{:index + 1}}:
+		</div>
+		<div class="itemContent">
+			{{:value}}
+			{{:helper.link('', 'close', {'PRG_removequeued' : value})}}
+		</div>
+	{{empty}}
+		<i>The queue is currently empty.</i>
+	{{/for}}
+	</div>
+	<br><hr>
+	
 	<h2>Primary software repository</h2>
 	<div class="itemLabel">
 		Hard drive: 
@@ -77,5 +134,4 @@
 		{{/for}}
 	{{/if}}
 
-{{/if}}
 <br><br><hr><i>NTOS v2.0.4b Copyright NanoTrasen 2557 - 2559</i>
