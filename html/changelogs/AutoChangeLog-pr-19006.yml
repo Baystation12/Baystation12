@@ -1,0 +1,5 @@
+author: Broseph Stylin
+delete-after: True
+changes: 
+  - rscadd: "Added a Master at Arms brassard to the loadout."
+  - tweak: "Changed the Military Police armband to a brassard."
