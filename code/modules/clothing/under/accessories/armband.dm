@@ -47,6 +47,11 @@
 	icon_state = "whitered"
 
 /obj/item/clothing/accessory/armband/mp
-	name = "military police armband"
-	desc = "An armband, worn by the crew to display which department they're assigned to. This one is black with white letters MP."
+	name = "military police brassard"
+	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is black with white letters MP."
 	icon_state = "mpband"
+
+/obj/item/clothing/accessory/armband/ma
+	name = "master at arms brassard"
+	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is white with navy blue letters MA."
+	icon_state = "maband"

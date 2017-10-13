@@ -82,9 +82,14 @@
 	allowed_roles = SECURITY_ROLES
 
 /datum/gear/accessory/armband_mp
-	display_name = "military police armband"
+	display_name = "military police brassard"
 	path = /obj/item/clothing/accessory/armband/mp
-	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/hos, /datum/job/detective)
+	allowed_roles = SECURITY_ROLES
+
+/datum/gear/accessory/armband_ma
+	display_name = "master at arms brassard"
+	path = /obj/item/clothing/accessory/armband/ma
+	allowed_roles = SECURITY_ROLES
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
