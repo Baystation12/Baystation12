@@ -97,7 +97,7 @@
 	path = /obj/item/clothing/mask/monitor
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_IPC)
-	cost = 1
+	cost = 0
 
 /datum/gear/shoes/toeless
 	display_name = "toeless jackboots"
