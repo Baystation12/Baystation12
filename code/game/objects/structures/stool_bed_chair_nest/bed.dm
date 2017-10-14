@@ -172,6 +172,12 @@
 /obj/structure/bed/alien/New(var/newloc)
 	..(newloc,"resin")
 
+/obj/structure/bed/bogani
+	name = "alien bed"
+	desc = "a strange looking bed, not from something you've seen before."
+	icon_state = "bogbed"
+
+
 /*
  * Roller beds
  */

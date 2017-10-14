@@ -15,6 +15,7 @@
 	var/list/engines = list()
 	var/engines_state = 1 //global on/off toggle for all engines
 	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
+	var/triggers_events = 1
 
 /obj/effect/overmap/ship/Initialize()
 	. = ..()
