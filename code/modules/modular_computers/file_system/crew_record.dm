@@ -179,41 +179,46 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 			isactive[name] = CR.GetStatus()
 
 			//cael - to prevent multiple appearances of a player/job combination, add a continue after each line
+		var/datum/job/job = job_master.occupations_by_title[rank]
+		if(!job)
+			misc[name] = rank
+			continue
+
 		var/department = 0
-		if(rank in GLOB.command_positions)
+		if(job.department_flag & COM)
 			heads[name] = rank
 			department = 1
-		if(rank in GLOB.support_positions)
+		if(job.department_flag & SPT)
 			spt[name] = rank
 			department = 1
-		if(rank in GLOB.security_positions)
+		if(job.department_flag & SEC)
 			sec[name] = rank
 			department = 1
-		if(rank in GLOB.engineering_positions)
+		if(job.department_flag & ENG)
 			eng[name] = rank
 			department = 1
-		if(rank in GLOB.medical_positions)
+		if(job.department_flag & MED)
 			med[name] = rank
 			department = 1
-		if(rank in GLOB.science_positions)
+		if(job.department_flag & SCI)
 			sci[name] = rank
 			department = 1
-		if(rank in GLOB.cargo_positions)
-			car[name] = rank
-			department = 1
-		if(rank in GLOB.civilian_positions)
-			civ[name] = rank
-			department = 1
-		if(rank in GLOB.service_positions)
-			srv[name] = rank
-			department = 1
-		if(rank in GLOB.supply_positions)
-			sup[name] = rank
-			department = 1
-		if(rank in GLOB.exploration_positions)
+		if(job.department_flag & EXP)
 			exp[name] = rank
 			department = 1
-		if(!department && !(name in heads))
+		if(job.department_flag & CRG)
+			car[name] = rank
+			department = 1
+		if(job.department_flag & CIV)
+			civ[name] = rank
+			department = 1
+		if(job.department_flag & SRV)
+			srv[name] = rank
+			department = 1
+		if(job.department_flag & SUP)
+			sup[name] = rank
+			department = 1
+		if((job.department_flag & MSC) || (!department && !(name in heads)))
 			misc[name] = rank
 
 	// Synthetics don't have actual records, so we will pull them from here.
