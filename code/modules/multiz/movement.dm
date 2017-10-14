@@ -125,6 +125,9 @@
 
 //For children to override
 /atom/movable/proc/can_fall(var/anchor_bypass = FALSE)
+	if(!simulated)
+		return FALSE
+
 	if(anchored && !anchor_bypass)
 		return FALSE
 
@@ -170,17 +173,26 @@
 		return 1
 	else
 		handle_fall_effect(landing)
-#define CRUSH_DAMAGE 550
+
 /atom/movable/proc/handle_fall_effect(var/turf/landing)
 	if(istype(landing, /turf/simulated/open))
 		visible_message("\The [src] falls from the deck above through \the [landing]!", "You hear a whoosh of displaced air.")
 	else
 		visible_message("\The [src] falls from the deck above and slams into \the [landing]!", "You hear something slam into the deck.")
-		if(anchored)
+		if(fall_damage())
 			for(var/mob/living/M in landing.contents)
-				visible_message("\The [src] crushes \the [M.name]!")
-				M.take_overall_damage(CRUSH_DAMAGE)
-#undef CRUSH_DAMAGE
+				visible_message("\The [src] hits \the [M.name]!")
+				M.take_overall_damage(fall_damage())
+
+/atom/movable/proc/fall_damage()
+	return 0
+
+/obj/fall_damage()
+	if(w_class == ITEM_SIZE_TINY)
+		return 0
+	if(w_class == ITEM_SIZE_NO_CONTAINER)
+		return 100
+	return base_storage_cost(w_class)
 
 /mob/living/carbon/human/handle_fall_effect(var/turf/landing)
 	if(species && species.handle_fall_special(src, landing))
