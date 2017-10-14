@@ -29,6 +29,8 @@
 	S["player_alt_titles"] >> pref.player_alt_titles
 	S["char_branch"]       >> pref.char_branch
 	S["prefs_department"]  >> pref.prefs_department
+	if(!pref.prefs_department)
+		pref.prefs_department = initial(pref.prefs_department) // Oops
 	S["prefs_command"]     >> pref.prefs_command
 	S["char_rank"]         >> pref.char_rank
 
@@ -40,7 +42,8 @@
 	S["player_alt_titles"] << pref.player_alt_titles
 	S["char_branch"]       << pref.char_branch
 	S["char_rank"]         << pref.char_rank
-	S["prefs_department"]  << pref.prefs_department
+	if(pref.prefs_department)
+		S["prefs_department"]  << pref.prefs_department
 	S["prefs_command"]     << pref.prefs_command
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
@@ -131,9 +134,7 @@
 		if(!job.is_species_allowed(S))
 			. += "<del>[rank]</del></td><td><b> \[SPECIES RESTRICTED]</b></td></tr>"
 			continue
-		if(!job.is_valid_department(get_department(1, user.client.prefs.prefs_department)))
-			if(job.department == "Command" && user.client.prefs.prefs_command)
-				continue
+		if(!job.is_valid_department(get_department(user.client.prefs.prefs_department, 0)) || job.department == "Command" && !user.client.prefs.prefs_command)
 			. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [user.client.prefs.prefs_department]]</b></a></td></tr>"
 			continue
 //		if(job.allowed_branches)
