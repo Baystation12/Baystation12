@@ -36,7 +36,7 @@
 /datum/ntprofile/proc/load_persistent()
 	if(owner && clientowner) //Must be valid.
 		if(!clientowner.prefs.loaded_character)	return 0 //ERROR Fuck this shit
-	var/savefile/S = new /savefile("data/player_saves/[copytext(owner.client.ckey,1,2)]/[owner.client.ckey]/preferences.sav")
+	var/savefile/S = new /savefile("data/player_saves/[copytext(clientowner.ckey,1,2)]/[owner.client.ckey]/preferences.sav")
 	if(!S)					return 0
 	S.cd = GLOB.using_map.character_save_path(owner.client.prefs.default_slot)
 
@@ -56,7 +56,7 @@
 /datum/ntprofile/proc/save_persistent()
 	if(owner && clientowner) //Must be valid.
 		if(!clientowner.prefs.loaded_character)	return 0 //ERROR Fuck this shit
-	var/savefile/S = new /savefile("data/player_saves/[copytext(owner.client.ckey,1,2)]/[owner.client.ckey]/preferences.sav")
+	var/savefile/S = new /savefile("data/player_saves/[copytext(clientowner.ckey,1,2)]/[clientowner.ckey]/preferences.sav")
 	if(!S)					return 0
 	S.cd = GLOB.using_map.character_save_path(owner.client.prefs.default_slot)
 
