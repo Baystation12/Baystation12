@@ -16,77 +16,40 @@
 	<hr>
 {{/if}}
 
-{{if data.downloadname}}
-	<h2>Download Running</h2>
-	<i>Please wait...</i>
+	<h2>{{:data.downloadname ? 'Download Running' : 'No Downloads In Progress'}}</h2>
+	<i>{{:data.downloadname ? 'Please wait...' : 'Standing by...'}}</i>
 	<div class="item">
 		<div class="itemLabel">
 			File name: 
 		</div>
 		<div class="itemContent">
-			{{:data.downloadname}}
+			{{:data.downloadname ? data.downloadname : 'N/A'}}
 		</div>
 		<div class="itemLabel">
 			File description: 
 		</div>
 		<div class="itemContent">
-			{{:data.downloaddesc}}
+			{{:data.downloadname ? data.downloaddesc : 'N/A'}}
 		</div>
 		<div class="itemLabel">
 			File size: 
 		</div>
 		<div class="itemContent">
-			{{:data.downloadcompletion}}GQ / {{:data.downloadsize}}GQ
+			{{:data.downloadname ? (data.downloadcompletion + 'GQ / ' + data.downloadsize + 'GQ') : 'N/A'}}
 		</div>
 		<div class="itemLabel">
 			Transfer Rate: 
 		</div>
 		<div class="itemContent">
-			{{:data.downloadspeed}} GQ/s
+			{{:data.downloadname ? data.downloadspeed : '0'}} GQ/s
 		</div>
 		<div class="itemLabel">
 			Download progress: 
 		</div>
 		<div class="itemContent">
-			{{:helper.displayBar(data.downloadcompletion, 0, data.downloadsize, 'good')}}
+			{{:helper.displayBar(data.downloadcompletion, 0, data.downloadname ? data.downloadsize : 0, 'good')}}
 		</div>
 	</div>
-{{else}}
-	<h2>No Downloads In Progress</h2>
-	<i>Standing by...</i>
-	<div class="item">
-		<div class="itemLabel">
-			File name: 
-		</div>
-		<div class="itemContent">
-			N/A
-		</div>
-		<div class="itemLabel">
-			File description: 
-		</div>
-		<div class="itemContent">
-			N/A
-		</div>
-		<div class="itemLabel">
-			File size: 
-		</div>
-		<div class="itemContent">
-			N/A
-		</div>
-		<div class="itemLabel">
-			Transfer Rate: 
-		</div>
-		<div class="itemContent">
-			0 GQ/s
-		</div>
-		<div class="itemLabel">
-			Download progress: 
-		</div>
-		<div class="itemContent">
-			{{:helper.displayBar(0, 0, 1, 'good')}}
-		</div>
-	</div>
-{{/if}}
 
 	<br><hr>
 	
