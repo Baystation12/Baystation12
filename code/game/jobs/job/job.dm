@@ -222,7 +222,7 @@
 		res += initial(R.name)
 	return english_list(res)
 
-/proc/get_department(var/department_flag, var/bit = 1)
+/proc/get_department(var/department_flag, var/bit)
 	if(!department_flag) return null
 	switch(bit)
 		if(1)

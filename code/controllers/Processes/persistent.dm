@@ -49,7 +49,7 @@ var/paychecks = 0
 						--------------------\n
 						Employee Name: [M.name] <br>Employee Assignment: [M.job]\n
 						Total work time: [M.CharRecords.department_playtime]\n
-						Current Department Rank: [get_department_rank_title(M.CharRecords.char_department, calculate_department_rank(M))]\n
+						Current Department Rank: [get_department_rank_title(get_department(M.CharRecords.char_department, 1), calculate_department_rank(M))]\n
 						--------------------\n
 						Gross Paycheck: $[paycheck]\n
 						<b>Taxes:</b>\n

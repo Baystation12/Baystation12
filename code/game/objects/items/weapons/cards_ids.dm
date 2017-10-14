@@ -183,9 +183,9 @@ var/const/NO_EMAG_ACT = -50
 		id_card.military_branch = src.CharRecords.char_department
 	spawn(20)
 		if(id_card.access:Find(19))
-			id_card.name = "[id_card.registered_name]'s ID Card ([get_department_rank_title(src.CharRecords.char_department, src.CharRecords.department_rank, ishead = 1)] [id_card.assignment])"
+			id_card.name = "[id_card.registered_name]'s ID Card ([get_department_rank_title(get_department(src.CharRecords.char_department, 1), src.CharRecords.department_rank, ishead = 1)] [id_card.assignment])"
 		else
-			id_card.name = "[id_card.registered_name]'s ID Card ([get_department_rank_title(src.CharRecords.char_department, src.CharRecords.department_rank)] [id_card.assignment])"
+			id_card.name = "[id_card.registered_name]'s ID Card ([get_department_rank_title(get_department(src.CharRecords.char_department, 1), src.CharRecords.department_rank)] [id_card.assignment])"
 
 /obj/item/weapon/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")

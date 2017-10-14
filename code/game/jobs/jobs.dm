@@ -108,14 +108,13 @@ var/list/support_positions = list(
 */
 			if(M.CharRecords.department_rank != oldrank) //Ranks changed)
 				if(M.CharRecords.department_rank > oldrank)
-					SendNTPDAMessage(M, "NT Administration", {"You have recieved a promotion. You are now a [get_department_rank_title(M)] [M.job]."})
+					SendNTPDAMessage(M, "NT Administration", {"You have recieved a promotion. You are now a [get_department_rank_title(get_department(M.CharRecords.char_department, 1), M.CharRecords.department_rank)] [M.job]."})
 			return M.CharRecords.department_rank
 	return 1
 
 
 /proc/get_department_rank_title(var/department, var/rank, var/ishead = 0)
 	if(department && rank)
-		department = get_department(1, department)
 		if(department == "Command")
 			if(rank == 4)
 				return "Senior"

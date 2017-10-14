@@ -84,11 +84,11 @@
 			if(2)
 				dat = "<ul>"
 				for(var/mob/living/carbon/human/M in GLOB.mob_list)
-					if(M.client && M.CharRecords.char_department == get_department(0, department) || department == "NanoTrasen")
+					if(M.client && M.CharRecords.char_department == get_department(department, 0) || department == "NanoTrasen")
 						dat += {"<li><b>Name:</b> [M.real_name]<br>
 						<b>Age:</b> [M.age]<br>
 						<b>Occupation:</b> [M.job]<br>
-						<b>Occupation Experience: [get_department_rank_title(get_department(M.CharRecords.char_department), M.CharRecords.department_rank)]<br>
+						<b>Occupation Experience: [get_department_rank_title(get_department(M.CharRecords.char_department, 1), M.CharRecords.department_rank)]<br>
 						<b>Clocked Hours:</b> [round(M.CharRecords.department_playtime/3600, 0.1)]<br>
 						<b>Employee Grade:</b> [round(M.CharRecords.employeescore, 0.01)]
 						<a href='?src=\ref[src];choice=Profile;profiled=\ref[M]'>Profile</a></li>"}
@@ -106,7 +106,7 @@
 						<b>Name:</b> [profiled.real_name]<br>
 						<b>Age:</b> [profiled.age]<br>
 						<b>Occupation:</b> [profiled.job]<br>
-						<b>Occupation Experience: [get_department_rank_title(get_department(1, profiled.CharRecords.char_department), profiled.CharRecords.department_rank)]<br>
+						<b>Occupation Experience: [get_department_rank_title(get_department(profiled.CharRecords.char_department, 1), profiled.CharRecords.department_rank)]<br>
 						<b>Clocked Hours:</b> [round(profiled.CharRecords.department_playtime/3600, 0.1)]<br>
 						<b>Employee Grade:</b> [round(profiled.CharRecords.employeescore, 0.01)]
 						"}
