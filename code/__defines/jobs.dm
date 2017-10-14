@@ -9,3 +9,5 @@
 #define SRV 9
 #define SUP 10
 #define SPT 11
+
+#define REVIVEPRICE 2000 //2k for a permadeath char neural lace/revive.

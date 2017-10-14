@@ -21,10 +21,25 @@
 	var/permadeath = 0
 /*--------OTHER-RELATED--------*/
 
-
+/datum/ntprofile/proc/Reset_Profile()
+	char_department = initial(char_department)
+	department_playtime = initial(department_playtime)
+	department_experience = initial(department_experience)
+	department_rank = initial(department_rank)
+/*-------CHARACTER-RELATED-------*/
+	bank_balance = initial(bank_balance)
+	pension_balance = initial(pension_balance)
+	bonuscredit = initial(bonuscredit)
+	employeescore = initial(employeescore)
+	employee_records = list()
+	neurallaces = initial(neurallaces)
+	promoted = initial(promoted)
+	permadeath = initial(permadeath)
+	sleep(2)
+	save_persistent()
 
 /datum/ntprofile/proc/Load_Profile(var/mob/living/carbon/human/H) //Init the profile.. Human set as owner.
-	if(H && H.client)
+	if(H)
 		world.log << "H FOUND [H], [H.real_name], [H.client.ckey]"
 		owner = H //Assign Owner..
 		clientowner = H.client
@@ -60,7 +75,6 @@
 	if(!S)					return 0
 	S.cd = GLOB.using_map.character_save_path(owner.client.prefs.default_slot)
 
-	S["version"] << 15
 	S["char_department"]		<< char_department
 	S["department_playtime"]	<< department_playtime
 	S["dept_experience"]		<< department_experience
@@ -73,11 +87,6 @@
 	S["promotion"]				<< promoted
 	S["bonuscredit"]			<< bonuscredit
 	S["promoted"]				<< promoted
-
-mob/living/carbon/human/Login()
-	. = ..()
-	spawn(30)
-		CharRecords = new(usr)
 
 /datum/ntprofile/proc/load_score()
 	if(!owner || !employee_records)	return 5

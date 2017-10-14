@@ -523,10 +523,8 @@
 	new_character.regenerate_icons()
 
 	new_character.key = key		//Manually transfer the key to log them in
-	new_character.CharRecords = new(src)
+	new_character.CharRecords = new(new_character.CharRecords)
 	new_character.CharRecords.Load_Profile(new_character)
-//	new_character.CharRecords.owner = new_character //Assign Owner..
-//	new_character.CharRecords.clientowner = new_character.client
 	return new_character
 
 /mob/new_player/proc/ViewManifest()

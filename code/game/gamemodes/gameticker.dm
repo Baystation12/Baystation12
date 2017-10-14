@@ -432,6 +432,25 @@ var/global/datum/controller/gameticker/ticker
 					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
 	to_world("<br>")
 
+	for(var/mob/living/carbon/human/H in GLOB.player_list)
+		if(H.stat == DEAD && H.CharRecords.permadeath == 1)
+			if(H.CharRecords.neurallaces >= 1) //If neural lace is found, remove 1 and proceed.
+				to_chat(H, "<font color='green'><b>Your corpse has been taken back and has been cloned using a neural lace!</b></font>")
+				H.CharRecords.neurallaces--
+			else if(!H.CharRecords.neurallaces) //Has none
+				if(H.CharRecords.pension_balance >= REVIVEPRICE)
+					H.CharRecords.pension_balance -= REVIVEPRICE
+					to_chat(H, "<font color='green'><b>Your corpse has been taken back has been cloned using a new neural lace! (-[REVIVEPRICE] credits)</b></font>")
+					continue
+				else if(H.CharRecords.pension_balance+H.CharRecords.bank_balance >= REVIVEPRICE)
+					var/leftover = REVIVEPRICE-H.CharRecords.pension_balance
+					H.CharRecords.bank_balance -= leftover
+					to_chat(H, "<font color='green'><b>Your corpse has been taken back has been cloned using a new neural lace! (-[REVIVEPRICE] credits)</b></font>")
+					continue
+			else
+				H.client.prefs.load_character(-1)
+				sleep(2) //Make settings go.
+				H.client.prefs.save_character()
 
 	for (var/mob/living/silicon/ai/aiPlayer in GLOB.mob_list)
 		if (aiPlayer.stat != 2)
