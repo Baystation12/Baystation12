@@ -276,8 +276,7 @@
 					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
 	if(screen_shake)
-		spawn()
-			shake_camera(user, screen_shake+1, screen_shake)
+		shake_camera(user, screen_shake+1, screen_shake)
 	update_icon()
 
 

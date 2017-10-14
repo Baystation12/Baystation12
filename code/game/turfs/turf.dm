@@ -30,9 +30,8 @@
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
-		spawn( 0 )
-			src.Entered(AM)
-			return
+		src.Entered(AM)
+		return
 
 	if(dynamic_lighting)
 		luminosity = 0

@@ -416,9 +416,8 @@
 		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
-			spawn(0)
-				T.update_connections()
-				ADD_ICON_QUEUE(T)
+			T.update_connections()
+			ADD_ICON_QUEUE(T)
 
 	connections = dirs_to_corner_states(connection_dirs)
 

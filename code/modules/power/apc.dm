@@ -1256,12 +1256,11 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 		return
 	if( cell && cell.charge>=20)
 		cell.use(20);
-		spawn(0)
-			for(var/obj/machinery/light/L in area)
-				if(prob(chance))
-					L.on = 1
-					L.broken()
-				sleep(1)
+		for(var/obj/machinery/light/L in area)
+			if(prob(chance))
+				L.on = 1
+				L.broken()
+			sleep(1)
 
 /obj/machinery/power/apc/proc/setsubsystem(val)
 	if(cell && cell.charge > 0)
