@@ -337,7 +337,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(lit == 1)
 		var/image/ember = overlay_image(res.icon, "cigember", flags=RESET_COLOR)
 		ember.layer = ABOVE_LIGHTING_LAYER
-		ember.plane = LIGHTING_PLANE
+		ember.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		res.overlays += ember
 	return res
 
