@@ -97,6 +97,12 @@
 
 	return max_severity
 
+/datum/alarm/proc/zlevel()
+	if(origin)
+		return origin.z
+	var/turf/T = locate() in last_area
+	if (T)
+		return T.z
 /******************
 * Assisting procs *
 ******************/

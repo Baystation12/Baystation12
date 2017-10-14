@@ -14,6 +14,7 @@
 /datum/computer_file/program/alarm_monitor/process_tick()
 	..()
 	var/datum/nano_module/alarm_monitor/NMA = NM
+	NMA.zlevel = computer.z
 	if(istype(NMA) && NMA.has_major_alarms())
 		if(!has_alert)
 			program_icon_state = "alert-red"
@@ -32,6 +33,7 @@
 	name = "Alarm monitor"
 	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console. Currently really only for AI-use.
 	var/list/datum/alarm_handler/alarm_handlers // The particular list of alarm handlers this alarm monitor should present to the user.
+	var/zlevel	//zlevel we're monitoring from. Only show alerts from connected zlevels.
 	available_to_ai = FALSE
 
 /datum/nano_module/alarm_monitor/New()
@@ -65,21 +67,30 @@
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		all_alarms += AH.alarms
-
+	var/list/zlevels = GetConnectedZlevels(zlevel)
+	for(var/datum/alarm/A in all_alarms)
+		if(!(A.zlevel() in zlevels))
+			all_alarms -= A
 	return all_alarms
 
 /datum/nano_module/alarm_monitor/proc/major_alarms()
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		all_alarms += AH.major_alarms()
-
+	var/list/zlevels = GetConnectedZlevels(zlevel)
+	for(var/datum/alarm/A in all_alarms)
+		if(!(A.zlevel() in zlevels))
+			all_alarms -= A
 	return all_alarms
 
 // Modified version of above proc that uses slightly less resources, returns 1 if there is a major alarm, 0 otherwise.
 /datum/nano_module/alarm_monitor/proc/has_major_alarms()
+	var/list/zlevels = GetConnectedZlevels(zlevel)
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		if(AH.has_major_alarms())
-			return 1
+		var/list/alarms = AH.major_alarms()
+		for(var/datum/alarm/A in alarms)
+			if(A.zlevel() in zlevels)
+				return 1
 
 	return 0
 
@@ -87,7 +98,10 @@
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		all_alarms += AH.minor_alarms()
-
+	var/list/zlevels = GetConnectedZlevels(zlevel)
+	for(var/datum/alarm/A in all_alarms)
+		if(!(A.zlevel() in zlevels))
+			all_alarms -= A
 	return all_alarms
 
 /datum/nano_module/alarm_monitor/Topic(ref, href_list)
@@ -103,11 +117,14 @@
 
 /datum/nano_module/alarm_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
+	var/list/zlevels = GetConnectedZlevels(zlevel)
 
 	var/categories[0]
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		categories[++categories.len] = list("category" = AH.category, "alarms" = list())
 		for(var/datum/alarm/A in AH.major_alarms())
+			if(!(A.zlevel() in zlevels))
+				continue
 			var/cameras[0]
 			var/lost_sources[0]
 
