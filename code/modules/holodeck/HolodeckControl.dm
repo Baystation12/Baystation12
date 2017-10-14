@@ -1,6 +1,6 @@
 /obj/machinery/computer/HolodeckControl
 	name = "holodeck control console"
-	desc = "A computer used to control a nearby holodeck. It has a manual lock on its side."
+	desc = "A computer used to control a nearby holodeck."
 	icon_keyboard = "tech_key"
 	icon_screen = "holocontrol"
 	req_access = list(access_heads)
@@ -35,43 +35,12 @@
 	if (programs_list_id in GLOB.using_map.holodeck_restricted_programs)
 		restricted_programs |= GLOB.using_map.holodeck_restricted_programs[programs_list_id]
 
-/obj/machinery/computer/HolodeckControl/verb/togglelock_verb()
-	set category = "Object"
-	set name = "Toggle Lock"
-	set src in oview(1)
-	if(!CanPhysicallyInteract(usr))
-		return
-
-	return togglelock(usr)
-
-/obj/machinery/computer/HolodeckControl/proc/togglelock(var/mob/user)
-	add_fingerprint(user)
-	if(cantogglelock(user))
-		islocked = !islocked
-		visible_message("<span class='notice'>\The [src] has been [islocked ? null : "un"]locked by \the [user].</span>", range = 3)
-		return 0
-	else
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return 1
-
-/obj/machinery/computer/HolodeckControl/proc/cantogglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
-	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
-
-/obj/machinery/computer/HolodeckControl/CanUseTopic(var/mob/user)
-	if(islocked)
-		to_chat(user, "<span class='warning'>The console is locked!</span>")
-		return STATUS_CLOSE
-	return ..()
-
 /obj/machinery/computer/HolodeckControl/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/computer/HolodeckControl/attack_hand(var/mob/user as mob)
 	if(..())
 		return 1
-	else if(islocked)
-		to_chat(user, "<span class='warning'>The console is locked!</span>")
-		return 0
 
 	user.set_machine(src)
 	var/dat
@@ -126,6 +95,12 @@
 	else
 		dat += "Gravity is <A href='?src=\ref[src];gravity=1'><font color=blue>(OFF)</font></A><BR>"
 
+	if(!islocked)
+		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'><font color=green>(UNLOCKED)</font></A><BR>"
+	else
+		dat = "<B>Holodeck Control System</B><BR>"
+		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'><font color=red>(LOCKED)</font></A><BR>"
+
 	user << browse(dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
@@ -159,6 +134,9 @@
 
 		else if(href_list["gravity"])
 			toggleGravity(linkedholodeck)
+
+		else if(href_list["togglehololock"])
+			togglelock(usr)
 
 		src.add_fingerprint(usr)
 	src.updateUsrDialog()
@@ -372,3 +350,17 @@
 
 	active = 0
 	use_power = 1
+
+// Locking system
+
+/obj/machinery/computer/HolodeckControl/proc/togglelock(var/mob/user)
+	if(cantogglelock(user))
+		islocked = !islocked
+		visible_message("<span class='notice'>\The [src] emits a series of beeps to announce it has been [islocked ? null : "un"]locked.</span>", range = 3)
+		return 0
+	else
+		to_chat(user, "<span class='warning'>Access denied.</span>")
+		return 1
+
+/obj/machinery/computer/HolodeckControl/proc/cantogglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
+	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
