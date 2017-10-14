@@ -149,17 +149,17 @@
 			open_file = F.filename
 		else
 			error = "I/O error: Unable to create file '[href_list["PRG_saveasfile"]]'."
+		return 1
 
 	if(href_list["PRG_savefile"])
 		. = 1
-		var/datum/computer_file/data/F
-		if(open_file)
+		if(!open_file)
 			open_file = sanitize(input(usr, "Enter file name:", "Save As") as text|null)
 			if(!open_file)
 				return 0
-			open_file = F.filename
 		if(!save_file(open_file))
 			error = "I/O error: Unable to save file '[open_file]'."
+		return 1
 
 	if(href_list["PRG_editfile"])
 		var/oldtext = html_decode(loaded_data)
