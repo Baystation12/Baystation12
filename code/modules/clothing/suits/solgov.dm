@@ -242,3 +242,21 @@
 	icon_closed = "marshal_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/ec
+	name = "expeditionary winter coat"
+	icon_state = "coatec"
+	armor = list(melee = 25, bullet = 10, laser = 5, energy = 10, bomb = 20, bio = 0, rad = 10)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/marine
+	name = "marine winter coat"
+	icon_state = "coatmc"
+	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/fleet
+	name = "fleet winter coat"
+	icon_state = "coatfl"
+	armor = list(melee = 20, bullet = 10, laser = 10, energy = 20, bomb = 20, bio = 0, rad = 10)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
