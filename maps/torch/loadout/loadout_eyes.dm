@@ -1,13 +1,14 @@
 // Eyes
 /datum/gear/eyes
-	display_name = "eyepatch"
-	path = /obj/item/clothing/glasses/eyepatch
+	display_name = "prescription glasses"
+	path = /obj/item/clothing/glasses/regular
 	slot = slot_glasses
 	sort_category = "Glasses and Eyewear"
 
-/datum/gear/eyes/glasses
-	display_name = "prescription glasses"
-	path = /obj/item/clothing/glasses/regular
+/datum/gear/eyes/eyepatch
+	display_name = "eyepatch"
+	path = /obj/item/clothing/glasses/eyepatch
+	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/eyes/fashionglasses
 	display_name = "glasses"
@@ -87,3 +88,25 @@
 	display_name = "sunglasses, presciption"
 	path = /obj/item/clothing/glasses/sunglasses/prescription
 	cost = 3
+
+/datum/gear/eyes/hudpatch
+	display_name = "iPatch"
+	path = /obj/item/clothing/glasses/eyepatch/hud
+
+/datum/gear/eyes/secpatch
+	display_name = "HUDpatch, Security"
+	path = /obj/item/clothing/glasses/eyepatch/hud/security
+	allowed_roles = SECURITY_ROLES
+	cost = 2
+
+/datum/gear/eyes/medpatch
+	display_name = "HUDpatch, Medical"
+	path = /obj/item/clothing/glasses/eyepatch/hud/medical
+	allowed_roles = MEDICAL_ROLES
+	cost = 2
+
+/datum/gear/eyes/mespatch
+	display_name = "HUDpatch, Meson"
+	path = /obj/item/clothing/glasses/eyepatch/hud/meson
+	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/pathfinder, /datum/job/explorer)
+	cost = 2
