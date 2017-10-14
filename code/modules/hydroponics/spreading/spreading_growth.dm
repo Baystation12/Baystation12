@@ -128,7 +128,7 @@
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
-	if(!(buckled_mob || neighbors.len || (!plant && !T.CanZPass(src, DOWN)) || health < max_health) && !targets_in_range())
+	if(!(buckled_mob || neighbors.len || (!plant && T && !T.CanZPass(src, DOWN)) || health < max_health) && !targets_in_range())
 		STOP_PROCESSING(SSvines, src)
 
 //spreading vines aren't created on their final turf.
