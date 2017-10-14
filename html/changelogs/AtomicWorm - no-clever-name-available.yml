@@ -1,9 +1,0 @@
-author: Broseph Stylin
-
-delete-after: True
-
-changes: 
-  - rscadd: "Added Marine Corps service uniform skirts."
-  - rscadd: "Added desert boots. Available in the same places as and statistically equal to jungle boots."
-  - rscadd: "Added Fleet fatigues as an alternate utility uniform."
-  - tweak: "Fleet security and Field Medics now spawn with fatigues instead of coveralls."
