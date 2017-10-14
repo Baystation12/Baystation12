@@ -458,6 +458,7 @@ BLIND     // can't see anything
 	var/down_body_parts_covered = 0
 	var/down_icon_state = 0
 	var/down_item_flags = 0
+	var/down_flags_inv = 0
 	var/pull_mask = 0
 	var/hanging = 0
 	blood_overlay_type = "maskblood"
@@ -495,12 +496,14 @@ BLIND     // can't see anything
 				body_parts_covered = down_body_parts_covered
 				icon_state = down_icon_state
 				item_flags = down_item_flags
+				flags_inv = down_flags_inv
 				to_chat(usr, "You pull the [src] below your chin.")
 			else
 				gas_transfer_coefficient = initial(gas_transfer_coefficient)
 				body_parts_covered = initial(body_parts_covered)
 				icon_state = initial(icon_state)
 				item_flags = initial(item_flags)
+				flags_inv = initial(flags_inv)
 				to_chat(usr, "You pull the [src] up to cover your face.")
 			update_clothing_icon()
 			user.update_action_buttons()

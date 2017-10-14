@@ -6,7 +6,7 @@
 	flags_inv = HIDEFACE|BLOCKHAIR
 	body_parts_covered = FACE|HEAD
 	down_body_parts_covered = HEAD
-	down_item_flags = BLOCKHEADHAIR
+	down_flags_inv = BLOCKHEADHAIR
 	down_icon_state = "balaclava_r"
 	pull_mask = 1
 	w_class = ITEM_SIZE_SMALL
