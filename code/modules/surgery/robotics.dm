@@ -239,12 +239,12 @@
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(!affected) return
-	var/is_organ_damaged = 0
-	for(var/obj/item/organ/I in affected.internal_organs)
-		if(I.damage > 0 && (I.robotic >= ORGAN_ROBOT))
-			is_organ_damaged = 1
-			break
-	return affected.hatch == 3 && is_organ_damaged
+	for(var/obj/item/organ/internal/I in affected.internal_organs)
+		if(I.isrobotic() && I.damage > 0)
+			if(I.surface_accessible)
+				return TRUE
+			if(affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED) || affected.hatch == 3)
+				return TRUE
 
 /datum/surgery_step/robotics/fix_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
