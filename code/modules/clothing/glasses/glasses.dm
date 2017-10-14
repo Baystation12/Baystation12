@@ -114,15 +114,21 @@
 	body_parts_covered = 0
 	var/flipped = 0 // Indicates left or right eye; 0 = on the right
 
-/obj/item/clothing/glasses/eyepatch/attack_self(mob/user) //able to flip to each eye
+/obj/item/clothing/glasses/eyepatch/verb/flip_patch()
+	set name = "Flip Patch"
+	set category = "Object"
+	set src in usr
+
+	if (usr.stat || usr.restrained())
+		return
+
 	src.flipped = !src.flipped
 	if(src.flipped)
 		icon_state = "[icon_state]_r"
-		to_chat(user, "You change the Eyepatch to cover the left eye.")
 	else
 		src.icon_state = initial(icon_state)
-		to_chat(user, "You change the Eyepatch to cover the right eye..")
-	update_clothing_icon()	// mob-overlays updates
+	to_chat (usr, "You change \the [src] to cover the [src.flipped ? "left" : "right"] eye.")
+	update_clothing_icon()
 
 /obj/item/clothing/glasses/monocle
 	name = "monocle"
@@ -371,6 +377,48 @@
 	desc = "A set of implantable lenses designed to augment your vision."
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
+
+/obj/item/clothing/glasses/eyepatch/hud
+	name = "iPatch"
+	desc = "For the technologically inclined pirate. It connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
+	icon_state = "hudpatch"
+	item_state = "hudpatch"
+
+/obj/item/clothing/glasses/eyepatch/hud/security
+	name = "HUDpatch"
+	desc = "A Security-type heads-up display that connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
+	icon_state = "secpatch"
+	item_state = "secpatch"
+	off_state = "hudpatch"
+	action_button_name = "Toggle HUD"
+	toggleable = 1
+	hud = /obj/item/clothing/glasses/hud/security
+
+/obj/item/clothing/glasses/eyepatch/hud/medical
+	name = "MEDpatch"
+	desc = "A Medical-type heads-up display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
+	icon_state = "medpatch"
+	item_state = "medpatch"
+	off_state = "hudpatch"
+	action_button_name = "Toggle HUD"
+	toggleable = 1
+	hud = /obj/item/clothing/glasses/hud/health
+
+/obj/item/clothing/glasses/eyepatch/hud/meson
+	name = "MESpatch"
+	desc = "An optical meson scanner display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
+	icon_state = "mespatch"
+	item_state = "mespatch"
+	off_state = "hudpatch"
+	action_button_name = "Toggle Mesons"
+	toggleable = 1
+	vision_flags = SEE_TURFS
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+
+/obj/item/clothing/glasses/hudpatch/meson/New()
+
+	..()
+	overlay = GLOB.global_hud.meson
 
 
 /*---Tajaran-specific Eyewear---*/
