@@ -301,9 +301,17 @@
 		var/mob/living/carbon/human/H = M
 		switch(hudtype)
 			if("security")
-				return istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud)
+				if(istype(H.glasses,/obj/item/clothing/glasses))
+					var/obj/item/clothing/glasses/G = H.glasses
+					return istype(G.hud, /obj/item/clothing/glasses/hud/security) || istype(G, /obj/item/clothing/glasses/hud/security)
+				else 
+					return FALSE
 			if("medical")
-				return istype(H.glasses, /obj/item/clothing/glasses/hud/health)
+				if(istype(H.glasses,/obj/item/clothing/glasses))
+					var/obj/item/clothing/glasses/G = H.glasses
+					return istype(G.hud, /obj/item/clothing/glasses/hud/health) || istype(G, /obj/item/clothing/glasses/hud/health)
+				else 
+					return FALSE
 			else
 				return 0
 	else if(istype(M, /mob/living/silicon/robot))
