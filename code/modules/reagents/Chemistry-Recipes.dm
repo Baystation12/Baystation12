@@ -1066,11 +1066,9 @@
 	if(!(holder.my_atom && holder.my_atom.loc))
 		return
 
-	var/turf/location = get_turf(holder.my_atom.loc)
-	for(var/turf/simulated/floor/target_tile in range(0, location))
-		target_tile.assume_gas(/datum/reagent/toxin/phoron, 25, 1400)
-		spawn (0)
-			target_tile.hotspot_expose(700, 400)
+	var/turf/location = get_turf(holder.my_atom)
+	location.assume_gas("phoron", 250, 1400)
+	location.hotspot_expose(700, 400)
 
 //Yellow
 /datum/chemical_reaction/slime/overload
