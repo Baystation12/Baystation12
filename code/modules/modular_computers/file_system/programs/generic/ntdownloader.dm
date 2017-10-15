@@ -17,6 +17,7 @@
 	var/download_completion = 0 //GQ of downloaded data.
 	var/download_netspeed = 0
 	var/downloaderror = ""
+	var/list/downloads_queue[0]
 
 /datum/computer_file/program/ntnetdownload/kill_program()
 	..()
@@ -33,14 +34,7 @@
 
 	var/datum/computer_file/program/PRG = ntnet_global.find_ntnet_file_by_name(filename)
 
-	if(!PRG || !istype(PRG))
-		return 0
-
-	// Attempting to download antag only program, but without having emagged computer. No.
-	if(PRG.available_on_syndinet && !computer_emagged)
-		return 0
-
-	if(!computer || !computer.hard_drive || !computer.hard_drive.try_store_file(PRG))
+	if(!check_file_download(filename))
 		return 0
 
 	ui_header = "downloader_running.gif"
@@ -56,6 +50,22 @@
 		hacked_download = 0
 
 	downloaded_file = PRG.clone()
+
+/datum/computer_file/program/ntnetdownload/proc/check_file_download(var/filename)
+	//returns 1 if file can be downloaded, returns 0 if download prohibited
+	var/datum/computer_file/program/PRG = ntnet_global.find_ntnet_file_by_name(filename)
+
+	if(!PRG || !istype(PRG))
+		return 0
+
+	// Attempting to download antag only program, but without having emagged computer. No.
+	if(PRG.available_on_syndinet && !computer_emagged)
+		return 0
+
+	if(!computer || !computer.hard_drive || !computer.hard_drive.try_store_file(PRG))
+		return 0
+
+	return 1
 
 /datum/computer_file/program/ntnetdownload/proc/abort_file_download()
 	if(!downloaded_file)
@@ -81,6 +91,10 @@
 		return
 	if(download_completion >= downloaded_file.size)
 		complete_file_download()
+		if(downloads_queue.len > 0)
+			begin_file_download(downloads_queue[1])
+			downloads_queue.Remove(downloads_queue[1])
+
 	// Download speed according to connectivity state. NTNet server is assumed to be on unlimited speed so we're limited by our local connectivity
 	download_netspeed = 0
 	// Speed defines are found in misc.dm
@@ -99,6 +113,11 @@
 	if(href_list["PRG_downloadfile"])
 		if(!downloaded_file)
 			begin_file_download(href_list["PRG_downloadfile"])
+		else if(check_file_download(href_list["PRG_downloadfile"]) && !downloads_queue.Find(href_list["PRG_downloadfile"]) && downloaded_file.filename != href_list["PRG_downloadfile"])
+			downloads_queue += href_list["PRG_downloadfile"]
+		return 1
+	if(href_list["PRG_removequeued"])
+		downloads_queue.Remove(href_list["PRG_removequeued"])
 		return 1
 	if(href_list["PRG_reseterror"])
 		if(downloaderror)
@@ -131,42 +150,46 @@
 	// This IF cuts on data transferred to client, so i guess it's worth it.
 	if(prog.downloaderror) // Download errored. Wait until user resets the program.
 		data["error"] = prog.downloaderror
-	else if(prog.downloaded_file) // Download running. Wait please..
+	if(prog.downloaded_file) // Download running. Wait please..
 		data["downloadname"] = prog.downloaded_file.filename
 		data["downloaddesc"] = prog.downloaded_file.filedesc
 		data["downloadsize"] = prog.downloaded_file.size
 		data["downloadspeed"] = prog.download_netspeed
 		data["downloadcompletion"] = round(prog.download_completion, 0.1)
-	else // No download running, pick file.
-		data["disk_size"] = my_computer.hard_drive.max_capacity
-		data["disk_used"] = my_computer.hard_drive.used_capacity
-		var/list/all_entries[0]
-		for(var/datum/computer_file/program/P in ntnet_global.available_station_software)
-			// Only those programs our user can run will show in the list
-			if(!P.can_run(user) && P.requires_access_to_download)
-				continue
-			all_entries.Add(list(list(
+
+	data["disk_size"] = my_computer.hard_drive.max_capacity
+	data["disk_used"] = my_computer.hard_drive.used_capacity
+	var/list/all_entries[0]
+	for(var/datum/computer_file/program/P in ntnet_global.available_station_software)
+		// Only those programs our user can run will show in the list
+		if(!P.can_run(user) && P.requires_access_to_download)
+			continue
+		all_entries.Add(list(list(
+		"filename" = P.filename,
+		"filedesc" = P.filedesc,
+		"fileinfo" = P.extended_desc,
+		"size" = P.size,
+		"icon" = P.program_menu_icon
+		)))
+	data["hackedavailable"] = 0
+	if(prog.computer_emagged) // If we are running on emagged computer we have access to some "bonus" software
+		var/list/hacked_programs[0]
+		for(var/datum/computer_file/program/P in ntnet_global.available_antag_software)
+			data["hackedavailable"] = 1
+			hacked_programs.Add(list(list(
 			"filename" = P.filename,
 			"filedesc" = P.filedesc,
 			"fileinfo" = P.extended_desc,
 			"size" = P.size,
 			"icon" = P.program_menu_icon
 			)))
-		data["hackedavailable"] = 0
-		if(prog.computer_emagged) // If we are running on emagged computer we have access to some "bonus" software
-			var/list/hacked_programs[0]
-			for(var/datum/computer_file/program/P in ntnet_global.available_antag_software)
-				data["hackedavailable"] = 1
-				hacked_programs.Add(list(list(
-				"filename" = P.filename,
-				"filedesc" = P.filedesc,
-				"fileinfo" = P.extended_desc,
-				"size" = P.size,
-				"icon" = P.program_menu_icon
-				)))
-			data["hacked_programs"] = hacked_programs
+		data["hacked_programs"] = hacked_programs
 
-		data["downloadable_programs"] = all_entries
+	data["downloadable_programs"] = all_entries
+
+	if(prog.downloads_queue.len > 0)
+		data["downloads_queue"] = prog.downloads_queue
+
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_downloader.tmpl", "NTNet Download Program", 575, 700, state = state)
