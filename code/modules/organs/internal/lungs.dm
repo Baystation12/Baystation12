@@ -146,7 +146,7 @@
 	var/toxins_pp = (poison/breath.total_moles)*breath_pressure
 	var/exhaled_pp = (exhaling/breath.total_moles)*breath_pressure
 
-	var/inhale_efficiency = max(round(inhale_pp/safe_pressure_min, 0.001), 3)
+	var/inhale_efficiency = min(round(inhale_pp/safe_pressure_min, 0.001), 3)
 	// Not enough to breathe
 	if(inhale_efficiency < 1)
 		if(prob(20) && active_breathing)
