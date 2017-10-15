@@ -99,7 +99,6 @@ Class Procs:
 	#endif
 
 	admin_notice("<span class='danger'>Processing Geometry...</span>", R_DEBUG)
-	sleep(-1)
 
 	var/start_time = world.timeofday
 
