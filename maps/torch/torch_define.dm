@@ -44,8 +44,6 @@
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 	lobby_screens = list("title","title2")
 
-	num_exoplanets = 1
-
 /datum/map/torch/setup_map()
 	..()
 	system_name = generate_system_name()
