@@ -29,11 +29,12 @@
 
 	if(prob(30))
 		S.set_trait(TRAIT_PARASITE,1)
-	var/vine_prob = rand(100)
-	if(vine_prob < 15)
-		S.set_trait(TRAIT_SPREAD,2)
-	else if(vine_prob < 30)
-		S.set_trait(TRAIT_SPREAD,1)
+	if(!S.get_trait(TRAIT_LARGE))
+		var/vine_prob = rand(100)
+		if(vine_prob < 15)
+			S.set_trait(TRAIT_SPREAD,2)
+		else if(vine_prob < 30)
+			S.set_trait(TRAIT_SPREAD,1)
 
 /area/exoplanet/grass
 	base_turf = /turf/simulated/floor/exoplanet/grass
