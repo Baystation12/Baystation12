@@ -250,6 +250,9 @@
 	var/land_type = /turf/simulated/floor
 	var/water_type
 
+	//intended x*y size, used to adjust spawn probs
+	var/intended_x = 150
+	var/intended_y = 150
 	var/large_flora_prob = 60
 	var/flora_prob = 60
 	var/fauna_prob = 2
@@ -265,6 +268,12 @@
 	planetary_area = new planetary_area()
 	water_level = rand(water_level_min,water_level_max)
 	generate_flora()
+
+	//automagically adjust probs for bigger maps to help with lag
+	var/size_mod = intended_x / world.maxx * intended_y / world.maxy
+	flora_prob *= size_mod
+	large_flora_prob *= size_mod
+	fauna_prob *= size_mod
 	..()
 
 /datum/random_map/noise/exoplanet/proc/noise2value(var/value)
