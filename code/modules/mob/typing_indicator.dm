@@ -39,7 +39,7 @@ I IS TYPIN'!'
 	. = ..()
 
 /mob/proc/create_typing_indicator()
-	if(client && !stat && is_preference_enabled(/datum/client_preference/show_typing_indicator))
+	if(client && !stat && get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_SHOW)
 		new/atom/movable/overlay/typing_indicator(get_turf(src), src)
 
 /mob/proc/remove_typing_indicator() // A bit excessive, but goes with the creation of the indicator I suppose
