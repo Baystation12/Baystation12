@@ -65,6 +65,7 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/blue,
 		/obj/item/device/radio/headset/pathfinder,
+		/obj/item/weapon/storage/box/encryptionkey/exploration,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel_norm)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger)),
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/glowstick/random))
