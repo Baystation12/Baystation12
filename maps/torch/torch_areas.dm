@@ -550,8 +550,8 @@
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
-/area/command/captainmess
-	name = "Captain's Mess"
+/area/command/officermess
+	name = "Officer's Mess"
 	icon_state = "bar"
 	sound_env = MEDIUM_SOFTFLOOR
 
