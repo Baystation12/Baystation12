@@ -291,12 +291,14 @@
 	if(!amount)
 		return
 
-	var/datum/reagents/F = new /datum/reagents(amount)
+	var/datum/reagents/F = new /datum/reagents(amount, GLOB.temp_reagents_holder)
 	var/tmpdata = get_data(type)
 	F.add_reagent(type, amount, tmpdata)
 	remove_reagent(type, amount)
 
-	return F.trans_to(target, amount) // Let this proc check the atom's type
+	. = F.trans_to(target, amount) // Let this proc check the atom's type
+
+	qdel(F)
 
 // When applying reagents to an atom externally, touch() is called to trigger any on-touch effects of the reagent.
 // This does not handle transferring reagents to things.
@@ -363,17 +365,19 @@
 			var/datum/reagents/R = C.touching
 			return trans_to_holder(R, amount, multiplier, copy)
 	else
-		var/datum/reagents/R = new /datum/reagents(amount)
+		var/datum/reagents/R = new /datum/reagents(amount, GLOB.temp_reagents_holder)
 		. = trans_to_holder(R, amount, multiplier, copy)
 		R.touch_mob(target)
+		qdel(R)
 
 /datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Turfs don't have any reagents (at least, for now). Just touch it.
 	if(!target || !target.simulated)
 		return
 
-	var/datum/reagents/R = new /datum/reagents(amount * multiplier)
+	var/datum/reagents/R = new /datum/reagents(amount * multiplier, GLOB.temp_reagents_holder)
 	. = trans_to_holder(R, amount, multiplier, copy)
 	R.touch_turf(target)
+	qdel(R)
 	return
 
 /datum/reagents/proc/trans_to_obj(var/obj/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
