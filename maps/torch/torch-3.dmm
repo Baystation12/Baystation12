@@ -1023,7 +1023,7 @@
 "vW" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{icon_state = "map"; dir = 8},/obj/machinery/meter,/turf/simulated/floor/tiled,/area/engineering/atmos)
 "vX" = (/obj/machinery/atmospherics/binary/pump{dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
 "vZ" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/engineering/atmos)
-"wb" = (/obj/machinery/light/small,/obj/machinery/newscaster{pixel_y = -30},/turf/simulated/floor/tiled,/area/engineering/locker_room)
+"wb" = (/obj/machinery/light/small,/obj/machinery/alarm{dir = 1; pixel_y = -22},/turf/simulated/floor/tiled,/area/engineering/locker_room)
 "wc" = (/obj/machinery/atmospherics/pipe/simple/visible/green{icon_state = "intact"; dir = 4},/turf/simulated/floor/tiled,/area/engineering/atmos)
 "wd" = (/obj/machinery/atmospherics/unary/outlet_injector{dir = 8; frequency = 1441; icon_state = "map_injector"; id = "tox_in"; pixel_y = 1; use_power = 1},/turf/simulated/floor/reinforced/phoron,/area/engineering/atmos)
 "we" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/machinery/light{dir = 8},/turf/simulated/floor/plating,/area/engineering/engine_room)
