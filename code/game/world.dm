@@ -211,8 +211,8 @@ var/world_topic_spam_protect_time = world.timeofday
 			var/list/dept_list = nano_crew_manifest[dept]
 			if(dept_list.len > 0)
 				positions[dept] = list()
-				for(var/datum/computer_file/crew_record/person in dept_list)
-					positions[dept][person.GetName()] = person.GetPosition()
+				for(var/list/person in dept_list)
+					positions[dept][person["name"]] = person["rank"]
 
 		for(var/k in positions)
 			positions[k] = list2params(positions[k]) // converts positions["heads"] = list("Bob"="Captain", "Bill"="CMO") into positions["heads"] = "Bob=Captain&Bill=CMO"
