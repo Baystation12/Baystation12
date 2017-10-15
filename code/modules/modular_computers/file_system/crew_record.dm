@@ -133,7 +133,6 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/list/eng = new()
 	var/list/med = new()
 	var/list/sci = new()
-	var/list/car = new()
 	var/list/civ = new()
 	var/list/bot = new()
 	var/list/misc = new()
@@ -206,9 +205,6 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		if(job.department_flag & EXP)
 			exp[name] = rank
 			department = 1
-		if(job.department_flag & CRG)
-			car[name] = rank
-			department = 1
 		if(job.department_flag & CIV)
 			civ[name] = rank
 			department = 1
@@ -267,11 +263,6 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		dat += "<tr><th colspan=3>Supply</th></tr>"
 		for(var/name in sup)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(car.len > 0)
-		dat += "<tr><th colspan=3>Cargo</th></tr>"
-		for(var/name in car)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[car[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(exp.len > 0)
 		dat += "<tr><th colspan=3>Exploration</th></tr>"
@@ -346,12 +337,11 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		"eng" = filtered_nano_crew_manifest(GLOB.engineering_positions),\
 		"med" = filtered_nano_crew_manifest(GLOB.medical_positions),\
 		"sup" = filtered_nano_crew_manifest(GLOB.supply_positions),\
-		"car" = filtered_nano_crew_manifest(GLOB.cargo_positions),\
 		"exp" = filtered_nano_crew_manifest(GLOB.exploration_positions),\
 		"srv" = filtered_nano_crew_manifest(GLOB.service_positions),\
-		"bot" = silicon_nano_crew_manifest(GLOB.cargo_positions),\
+		"bot" = silicon_nano_crew_manifest(GLOB.nonhuman_positions),\
 		"civ" = filtered_nano_crew_manifest(GLOB.civilian_positions),\
-		"misc" = filtered_nano_crew_manifest(GLOB.cargo_positions)\
+		"misc" = filtered_nano_crew_manifest(GLOB.unsorted_positions)\
 		)
 
 /proc/get_crewmember_record(var/name)
