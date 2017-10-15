@@ -2,9 +2,8 @@
 PROCESSING_SUBSYSTEM_DEF(vines)
 	name = "Vines"
 	priority = SS_PRIORITY_VINES
-	flags = SS_KEEP_TIMING|SS_NO_INIT
 	runlevels = RUNLEVEL_GAME|RUNLEVEL_POSTGAME
-	wait = 20
+	wait = 80
 
 	process_proc = /obj/effect/vine/Process
 
