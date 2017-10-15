@@ -63,7 +63,7 @@ Each plays slightly different and has different challenges/benefits
 	starting_feats = list(DEITY_FORM_DARK_ART, DEITY_FORM_BLOOD_SAC, DEITY_FORM_DARK_MINION, DEITY_FORM_BLOOD_FORGE)
 
 /datum/god_form/narsie/take_charge(var/mob/living/user, var/charge)
-	charge *= 0.5
+	charge = min(100, charge * 0.25)
 	if(prob(charge))
 		to_chat(user, "<span class='warning'>You feel drained...</span>")
 	var/mob/living/carbon/human/H = user
