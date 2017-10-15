@@ -33,7 +33,7 @@
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/weapon/gun/energy/gun,
 		/obj/item/clothing/accessory/holster/thigh,
-		new /datum/atom_creator/weighted(list(/obj/item/clothing/suit/storage/vest/solgov/command, /obj/item/clothing/suit/armor/pcarrier/medium/command)),
+		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/weapon/clipboard,
 		/obj/item/device/flashlight,
