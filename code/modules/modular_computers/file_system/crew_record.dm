@@ -331,10 +331,10 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	for(var/datum/computer_file/crew_record/CR in department_crew_manifest(filter, blacklist))
 		filtered_entries.Add(list(list(
 			"name" = CR.GetName(),
-			"rank" = CR.GetRank(),
+			"rank" = CR.GetPosition(),
 			"status" = CR.GetStatus(),
 			"branch" = CR.GetBranch(),
-			"rank" = CR.GetRank()
+			"milrank" = CR.GetRank()
 		)))
 	return filtered_entries
 
