@@ -59,8 +59,9 @@
 	var/datum/seed/seed
 	var/sampled = 0
 	var/floor = 0
-	var/spread_chance = 40
-	var/spread_distance = 3
+	var/possible_children = 20
+	var/spread_chance = 30
+	var/spread_distance = 4
 	var/evolve_chance = 2
 	var/mature_time		//minimum maturation time
 	var/last_tick = 0
@@ -74,6 +75,7 @@
 		parent = src
 	else
 		parent = newparent
+		parent.possible_children = max(0, parent.possible_children - 1)
 	seed = newseed
 	if(start_matured)
 		mature_time = 0
@@ -107,6 +109,7 @@
 	mature_time = world.time + seed.get_trait(TRAIT_MATURATION) + 15 //prevent vines from maturing until at least a few seconds after they've been created.
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = (growth_type ? round(spread_chance*0.6) : round(spread_chance*0.3))
+	possible_children = seed.get_trait(TRAIT_POTENCY)
 	update_icon()
 
 	START_PROCESSING(SSvines, src)
@@ -127,7 +130,37 @@
 		T.ex_act(prob(80) ? 3 : 2)
 
 /obj/effect/vine/update_icon()
-	refresh_icon()
+	overlays.Cut()
+	var/growth = growth_threshold ? min(max_growth, round(health/growth_threshold)) : 1
+	var/at_fringe = get_dist(src,parent)
+	if(spread_distance > 5)
+		if(at_fringe >= spread_distance-3)
+			max_growth = max(2,max_growth-1)
+		if(at_fringe >= spread_distance-2)
+			max_growth = max(1,max_growth-1)
+
+	growth = max(1,max_growth)
+
+	var/ikey = "\ref[seed]-plant-[growth]"
+	if(!plant_controller.plant_icon_cache[ikey])
+		plant_controller.plant_icon_cache[ikey] = seed.get_icon(growth)
+	overlays += plant_controller.plant_icon_cache[ikey]
+
+	if(growth > 2 && growth == max_growth)
+		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
+		if(growth_type in list(GROWTH_VINES,GROWTH_BIOMASS))
+			set_opacity(1)
+		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/woodpulp]))
+			set_density(1)
+			set_opacity(1)
+
+	if((!density || !opacity) && seed.get_trait(TRAIT_LARGE))
+		set_density(1)
+		set_opacity(1)
+	else
+		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
+		set_density(0)
+
 	if(!growth_type && !floor)
 		src.transform = null
 		var/matrix/M = matrix()
@@ -147,33 +180,6 @@
 		set_light(1+round(seed.get_trait(TRAIT_POTENCY)/20), l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR))
 	else
 		set_light(0)
-
-/obj/effect/vine/proc/refresh_icon()
-	overlays.Cut()
-	var/growth = growth_threshold ? min(max_growth, round(health/growth_threshold)) : 1
-	var/at_fringe = get_dist(src,parent)
-	if(spread_distance > 5)
-		if(at_fringe >= (spread_distance-3))
-			max_growth--
-		if(at_fringe >= (spread_distance-2))
-			max_growth--
-	growth = max(1,max_growth)
-
-	overlays += seed.get_icon(growth)
-
-	if(growth>2 && growth == max_growth)
-		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
-		if(growth_type in list(GROWTH_VINES,GROWTH_BIOMASS))
-			set_opacity(1)
-		if(islist(seed.chems) && !isnull(seed.chems[/datum/reagent/woodpulp]))
-			set_density(1)
-			set_opacity(1)
-	if(seed.get_trait(TRAIT_LARGE))
-		set_density(1)
-		set_opacity(1)
-	else
-		layer = (seed && seed.force_layer) ? seed.force_layer : ABOVE_OBJ_LAYER
-		set_density(0)
 
 /obj/effect/vine/proc/calc_dir()
 	set background = 1

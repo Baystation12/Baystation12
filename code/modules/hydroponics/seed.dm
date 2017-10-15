@@ -65,6 +65,8 @@
 	spawn(5)
 		sleep(-1)
 		update_growth_stages()
+	
+	uid = plant_controller.seeds.len + 1
 
 /datum/seed/proc/get_trait(var/trait)
 	return traits["[trait]"]
@@ -792,11 +794,12 @@
 	return 0
 
 /datum/seed/proc/get_icon(growth_stage)
-	var/image/res = image('icons/obj/hydroponics_growing.dmi', "[get_trait(TRAIT_PLANT_ICON)]-[growth_stage]")
+	var/plant_icon = get_trait(TRAIT_PLANT_ICON)
+	var/image/res = image('icons/obj/hydroponics_growing.dmi', "[plant_icon]-[growth_stage]")
 	if(get_growth_type())
 		res.icon_state = "[get_growth_type()]-[growth_stage]"
 	else
-		res.icon_state = "[get_trait(TRAIT_PLANT_ICON)]-[growth_stage]"
+		res.icon_state = "[plant_icon]-[growth_stage]"
 
 	if(get_growth_type())
 		res.icon = 'icons/obj/hydroponics_vines.dmi'
@@ -808,9 +811,10 @@
 		res.pixel_x = -8
 		res.pixel_y = -16
 
-	if(get_trait(TRAIT_LEAVES_COLOUR))
-		var/image/I = image(res.icon, "[get_trait(TRAIT_PLANT_ICON)]-[growth_stage]-leaves")
-		I.color = get_trait(TRAIT_LEAVES_COLOUR)
+	var/leaves = get_trait(TRAIT_LEAVES_COLOUR)
+	if(leaves)
+		var/image/I = image(res.icon, "[plant_icon]-[growth_stage]-leaves")
+		I.color = leaves
 		I.appearance_flags = RESET_COLOR
 		res.overlays += I
 

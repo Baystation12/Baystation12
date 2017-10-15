@@ -78,11 +78,11 @@
 		if(istype(T))
 			health -= seed.handle_environment(T,T.return_air(),null,1)
 		if(health < max_health)
-			health += rand(3,5)
-			refresh_icon()
+			health += 1
+			update_icon()
 		if(health > max_health)
 			health = max_health
-		if(health == max_health && !plant && istype(T) && !T.CanZPass(src, DOWN))
+		if(parent == src && health == max_health && !plant && istype(T) && !T.CanZPass(src, DOWN))
 			plant = new(T,seed)
 			plant.dir = src.dir
 			plant.transform = src.transform
@@ -110,21 +110,15 @@
 		if(prob(chance))
 			sampled = 0
 
-	if(is_mature() && !buckled_mob)
-		var/mob/living/list/targets = targets_in_range()
-		if(targets && targets.len && prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
-			entangle(pick(targets))
+	if(is_mature())
+		if(!buckled_mob)
+			var/mob/living/list/targets = targets_in_range()
+			if(targets && targets.len && prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
+				entangle(pick(targets))
 
-	if(is_mature() && neighbors.len)
-		//spread to 1-3 adjacent turfs depending on yield trait.
-		var/max_spread = between(1, round(seed.get_trait(TRAIT_YIELD)*3/14), 3)
-		for(var/i in 1 to max_spread)
-			if(prob(spread_chance))
-				sleep(rand(3,5))
-				if(!neighbors.len)
-					break
-				spread_to(pick(neighbors))
-				update_neighbors()
+		if(parent && parent.possible_children && neighbors.len && prob(spread_chance))
+			spread_to(pick(neighbors))
+			update_neighbors()
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()

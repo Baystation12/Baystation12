@@ -200,11 +200,12 @@
 	else
 		return !density
 
-/obj/machinery/portable_atmospherics/hydroponics/proc/check_health()
+/obj/machinery/portable_atmospherics/hydroponics/proc/check_health(var/icon_update = 1)
 	if(seed && !dead && health <= 0)
 		die()
 	check_level_sanity()
-	update_icon()
+	if(icon_update)
+		update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/die()
 	dead = 1
