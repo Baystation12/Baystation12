@@ -72,7 +72,10 @@
 		repopulating = 1
 		max_animal_count = round(max_animal_count * 0.5)
 	for(var/zlevel in map_z)
-		if(repopulating)
+		if(is_on_fire(zlevel)) //not the time
+			continue
+
+		if(repopulating) //biosphere recovery
 			for(var/i = 1 to round(max_animal_count - animals.len))
 				if(prob(10))
 					var/turf/simulated/T = locate(rand(1,world.maxx), rand(1,world.maxy), zlevel)
@@ -85,19 +88,20 @@
 			if(animals.len >= max_animal_count)
 				repopulating = 0
 
-		if(!atmosphere)
-			continue
-		var/zone/Z
-		for(var/i = 1 to world.maxx)
-			var/turf/simulated/T = locate(i, 1, zlevel)
-			if(istype(T) && T.zone && T.zone.contents.len > (world.maxx*world.maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
-				Z = T.zone
-				break
-		if(Z && !Z.fire_tiles.len && !atmosphere.compare(Z.air)) //let fire die out first if there is one
+		if(atmosphere && !atmosphere.compare(Z.air)) //atmosphere recovery
 			var/datum/gas_mixture/daddy = new() //make a fake 'planet' zone gas
 			daddy.copy_from(atmosphere)
 			daddy.group_multiplier = Z.air.group_multiplier
 			Z.air.equalize(daddy)
+
+/obj/effect/overmap/sector/exoplanet/proc/is_on_fire(var/zlevel)
+	var/zone/Z
+	for(var/i = 1 to world.maxx)
+		var/turf/simulated/T = locate(i, 1, zlevel)
+		if(istype(T) && T.zone && T.zone.contents.len > (world.maxx*world.maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
+			Z = T.zone
+			break
+	return Z && Z.fire_tiles.len
 
 /obj/effect/overmap/sector/exoplanet/proc/remove_animal(var/mob/M)
 	animals -= M
