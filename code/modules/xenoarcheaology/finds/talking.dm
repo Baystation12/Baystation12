@@ -114,7 +114,7 @@
 			continue //skip monkeys and leavers
 		if (istype(M, /mob/new_player))
 			continue
-		if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
+		if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
 			listening|=M
 
 	for(var/mob/M in listening)

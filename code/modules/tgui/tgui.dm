@@ -220,8 +220,8 @@
 			"screen"	= src_object.ui_screen,
 			"style"     = style,
 			"interface" = interface,
-			"fancy"     = user.is_preference_enabled(/datum/client_preference/tgui_style),
-			"locked"    = user.is_preference_enabled(/datum/client_preference/tgui_monitor),
+			"fancy"     = user.get_preference_value(/datum/client_preference/tgui_style) == GLOB.PREF_FANCY,
+			"locked"    = user.get_preference_value(/datum/client_preference/tgui_monitor) == GLOB.PREF_PRIMARY,
 			"window"    = window_id,
 			"ref"       = "\ref[src]",
 			"user"      = list(

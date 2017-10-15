@@ -41,6 +41,6 @@
 
 	progress = Clamp(progress, 0, goal)
 	bar.icon_state = "prog_bar_[round(((progress / goal) * 100), 5)]"
-	if (!shown && user.is_preference_enabled(/datum/client_preference/show_progress_bar))
+	if (!shown && user.get_preference_value(/datum/client_preference/show_progress_bar) == GLOB.PREF_SHOW)
 		user.client.images += bar
 		shown = 1
