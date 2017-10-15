@@ -1957,6 +1957,7 @@
 #include "code\modules\overmap\exoplanets\grass.dm"
 #include "code\modules\overmap\exoplanets\mountain.dm"
 #include "code\modules\overmap\exoplanets\snow.dm"
+#include "code\modules\overmap\exoplanets\features\feature.dm"
 #include "code\modules\overmap\ships\ship.dm"
 #include "code\modules\overmap\ships\computers\engine_control.dm"
 #include "code\modules\overmap\ships\computers\helm.dm"

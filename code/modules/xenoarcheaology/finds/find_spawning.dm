@@ -56,11 +56,11 @@
 	var/engravings = ""
 	if(apply_image_decorations)
 		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
+		engravings = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] "
 		if(istype(E))
-			engravings = E.get_engravings()
+			engravings += E.get_engravings()
 		else
-			engravings = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] \
-			[pick("an alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")] \
+			engravings += "[pick("an alien humanoid","an amorphic blob","a short, hairy being","a rodent-like creature","a robot","a primate","a reptilian alien","an unidentifiable object","a statue","a starship","unusual devices","a structure")] \
 			[pick("surrounded by","being held aloft by","being struck by","being examined by","communicating with")] \
 			[pick("alien humanoids","amorphic blobs","short, hairy beings","rodent-like creatures","robots","primates","reptilian aliens")]"
 			if(prob(50))
