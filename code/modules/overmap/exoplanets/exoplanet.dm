@@ -189,10 +189,24 @@
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= "aliether"
 
+		var/sanity = prob(99.9)
+
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
 		var/gasnum = rand(1,4)
 		for(var/i = 1 to gasnum) //swapping gases wholesale. don't try at home
 			var/ng = pick_n_take(newgases)	//pick a gas
+			if(sanity) //make sure atmosphere is not flammable... always
+				var/badflag = 0
+				if(gas_data.flags[ng] & XGM_GAS_OXIDIZER)
+					badflag = XGM_GAS_FUEL
+				if(gas_data.flags[ng] & XGM_GAS_FUEL)
+					badflag = XGM_GAS_OXIDIZER
+				if(badflag)
+					for(var/g in newgases)
+						if(gas_data.flags[g] & XGM_GAS_FUEL)
+							newgases -= g
+					sanity = 0
+				
 			var/part = total_moles * rand(3,80)/100 //allocate percentage to it
 			if(i == gasnum) //if it's last gas, let it have all remaining moles
 				part = total_moles
