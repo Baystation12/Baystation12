@@ -45,7 +45,7 @@
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
 	for(var/client/C in GLOB.admins)
-		if(C.is_preference_enabled(/datum/client_preference/staff/show_debug_logs))
+		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
 			to_chat(C, "[prefix]: [text]")
 
 /proc/log_game(text)

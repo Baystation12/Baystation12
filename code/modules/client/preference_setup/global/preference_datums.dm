@@ -1,3 +1,27 @@
+GLOBAL_VAR_CONST(PREF_YES, "Yes")
+GLOBAL_VAR_CONST(PREF_NO, "No")
+GLOBAL_VAR_CONST(PREF_ALL_SPEECH, "All Speech")
+GLOBAL_VAR_CONST(PREF_NEARBY, "Nearby")
+GLOBAL_VAR_CONST(PREF_ALL_EMOTES, "All Emotes")
+GLOBAL_VAR_CONST(PREF_ALL_CHATTER, "All Chatter")
+GLOBAL_VAR_CONST(PREF_SHORT, "Short")
+GLOBAL_VAR_CONST(PREF_LONG, "Long")
+GLOBAL_VAR_CONST(PREF_SHOW, "Show")
+GLOBAL_VAR_CONST(PREF_HIDE, "Hide")
+GLOBAL_VAR_CONST(PREF_FANCY, "Fancy")
+GLOBAL_VAR_CONST(PREF_PLAIN, "Plain")
+GLOBAL_VAR_CONST(PREF_PRIMARY, "Primary")
+GLOBAL_VAR_CONST(PREF_ALL, "All")
+GLOBAL_VAR_CONST(PREF_OFF, "Off")
+GLOBAL_VAR_CONST(PREF_BASIC, "Basic")
+GLOBAL_VAR_CONST(PREF_FULL, "Full")
+GLOBAL_VAR_CONST(PREF_MIDDLE_CLICK, "middle click")
+GLOBAL_VAR_CONST(PREF_ALT_CLICK, "alt click")
+GLOBAL_VAR_CONST(PREF_CTRL_CLICK, "ctrl click")
+GLOBAL_VAR_CONST(PREF_CTRL_SHIFT_CLICK, "ctrl shift click")
+GLOBAL_VAR_CONST(PREF_HEAR, "Hear")
+GLOBAL_VAR_CONST(PREF_SILENT, "Silent")
+
 var/list/_client_preferences
 var/list/_client_preferences_by_key
 var/list/_client_preferences_by_type
@@ -37,14 +61,19 @@ var/list/_client_preferences_by_type
 /datum/client_preference
 	var/description
 	var/key
-	var/enabled_by_default = TRUE
-	var/enabled_description = "Yes"
-	var/disabled_description = "No"
+	var/list/options = list(GLOB.PREF_YES, GLOB.PREF_NO)
+	var/default_value
 
-/datum/client_preference/proc/may_toggle(var/mob/preference_mob)
+/datum/client_preference/New()
+	. = ..()
+
+	if(!default_value)
+		default_value = options[1]
+
+/datum/client_preference/proc/may_set(var/mob/preference_mob)
 	return TRUE
 
-/datum/client_preference/proc/toggled(var/mob/preference_mob, var/enabled)
+/datum/client_preference/proc/changed(var/mob/preference_mob, var/new_value)
 	return
 
 /*********************
@@ -59,8 +88,8 @@ var/list/_client_preferences_by_type
 	description ="Play lobby music"
 	key = "SOUND_LOBBY"
 
-/datum/client_preference/play_lobby_music/toggled(var/mob/preference_mob, var/enabled)
-	if(enabled)
+/datum/client_preference/play_lobby_music/changed(var/mob/preference_mob, var/new_value)
+	if(new_value == GLOB.PREF_YES)
 		GLOB.using_map.lobby_music.play_to(preference_mob)
 	else
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))
@@ -69,98 +98,94 @@ var/list/_client_preferences_by_type
 	description ="Play ambience"
 	key = "SOUND_AMBIENCE"
 
-/datum/client_preference/play_ambiance/toggled(var/mob/preference_mob, var/enabled)
-	if(!enabled)
+/datum/client_preference/play_ambiance/changed(var/mob/preference_mob, var/new_value)
+	if(new_value == GLOB.PREF_NO)
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = 1))
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = 2))
 
 /datum/client_preference/ghost_ears
 	description ="Ghost ears"
 	key = "CHAT_GHOSTEARS"
-	enabled_description = "All Speech"
-	disabled_description = "Nearby"
+	options = list(GLOB.PREF_ALL_SPEECH, GLOB.PREF_NEARBY)
 
 /datum/client_preference/ghost_sight
 	description ="Ghost sight"
 	key = "CHAT_GHOSTSIGHT"
-	enabled_description = "All Emotes"
-	disabled_description = "Nearby"
+	options = list(GLOB.PREF_ALL_EMOTES, GLOB.PREF_NEARBY)
 
 /datum/client_preference/ghost_radio
 	description ="Ghost radio"
 	key = "CHAT_GHOSTRADIO"
-	enabled_description = "All Chatter"
-	disabled_description = "Nearby"
+	options = list(GLOB.PREF_ALL_CHATTER, GLOB.PREF_NEARBY)
 
 /datum/client_preference/ghost_follow_link_length
 	description ="Ghost Follow Links"
 	key = "CHAT_GHOSTFOLLOWLINKLENGTH"
-	enabled_description = "Short"
-	disabled_description = "Long"
+	options = list(GLOB.PREF_SHORT, GLOB.PREF_LONG)
 
 /datum/client_preference/chat_tags
 	description ="Chat tags"
 	key = "CHAT_SHOWICONS"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_typing_indicator
 	description ="Typing indicator"
 	key = "SHOW_TYPING"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
-/datum/client_preference/show_typing_indicator/toggled(var/mob/preference_mob, var/enabled)
-	if(!enabled)
+/datum/client_preference/show_typing_indicator/changed(var/mob/preference_mob, var/new_value)
+	if(new_value == GLOB.PREF_HIDE)
 		QDEL_NULL(preference_mob.typing_indicator)
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"
 	key = "CHAT_OOC"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_aooc
 	description ="AOOC chat"
 	key = "CHAT_AOOC"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_looc
 	description ="LOOC chat"
 	key = "CHAT_LOOC"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_dsay
 	description ="Dead chat"
 	key = "CHAT_DEAD"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_progress_bar
 	description ="Progress Bar"
 	key = "SHOW_PROGRESS"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/tgui_style
 	description ="tgui Style"
 	key = "TGUI_FANCY"
-	enabled_description = "Fancy"
-	disabled_description = "Plain"
+	options = list(GLOB.PREF_FANCY, GLOB.PREF_PLAIN)
 
 /datum/client_preference/tgui_monitor
 	description ="tgui Monitor"
 	key = "TGUI_MONITOR"
-	enabled_description = "Primary"
-	disabled_description = "All"
+	options = list(GLOB.PREF_PRIMARY, GLOB.PREF_ALL)
 
 /datum/client_preference/browser_style
 	description = "Fake NanoUI Browser Style"
 	key = "BROWSER_STYLED"
-	enabled_description = "Fancy"
-	disabled_description = "Plain"
+	options = list(GLOB.PREF_FANCY, GLOB.PREF_PLAIN)
+
+/datum/client_preference/autohiss
+	description = "Autohiss"
+	key = "AUTOHISS"
+	options = list(GLOB.PREF_OFF, GLOB.PREF_BASIC, GLOB.PREF_FULL)
+
+/datum/client_preference/hardsuit_activation
+	description = "Hardsuit Module Activation Key"
+	key = "HARDSUIT_ACTIVATION"
+	options = list(GLOB.PREF_MIDDLE_CLICK, GLOB.PREF_CTRL_CLICK, GLOB.PREF_ALT_CLICK, GLOB.PREF_CTRL_SHIFT_CLICK)
 
 /********************
 * General Staff Preferences *
@@ -169,7 +194,7 @@ var/list/_client_preferences_by_type
 /datum/client_preference/staff
 	var/flags
 
-/datum/client_preference/staff/may_toggle(var/mob/preference_mob)
+/datum/client_preference/staff/may_set(var/mob/preference_mob)
 	if(flags)
 		return check_rights(flags, 0, preference_mob)
 	else
@@ -178,20 +203,17 @@ var/list/_client_preferences_by_type
 /datum/client_preference/staff/show_chat_prayers
 	description = "Chat Prayers"
 	key = "CHAT_PRAYER"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/staff/play_adminhelp_ping
 	description = "Adminhelps"
 	key = "SOUND_ADMINHELP"
-	enabled_description = "Hear"
-	disabled_description = "Silent"
+	options = list(GLOB.PREF_HEAR, GLOB.PREF_SILENT)
 
 /datum/client_preference/staff/show_rlooc
 	description ="Remote LOOC chat"
 	key = "CHAT_RLOOC"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /********************
 * Admin Preferences *
@@ -200,10 +222,9 @@ var/list/_client_preferences_by_type
 /datum/client_preference/staff/show_attack_logs
 	description = "Attack Log Messages"
 	key = "CHAT_ATTACKLOGS"
-	enabled_description = "Show"
-	disabled_description = "Hide"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 	flags = R_ADMIN
-	enabled_by_default = FALSE
+	default_value = GLOB.PREF_HIDE
 
 /********************
 * Debug Preferences *
@@ -212,7 +233,6 @@ var/list/_client_preferences_by_type
 /datum/client_preference/staff/show_debug_logs
 	description = "Debug Log Messages"
 	key = "CHAT_DEBUGLOGS"
-	enabled_description = "Show"
-	disabled_description = "Hide"
-	enabled_by_default = FALSE
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	default_value = GLOB.PREF_HIDE
 	flags = R_ADMIN|R_DEBUG

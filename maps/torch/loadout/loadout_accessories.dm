@@ -246,7 +246,7 @@
 	cost = 3
 
 /datum/gear/accessory/armor_pouches
-	display_name = "armor storage selection"
+	display_name = "armor pouches"
 	path = /obj/item/clothing/accessory/storage/pouches
 	cost = 2
 	allowed_roles = ARMORED_ROLES
@@ -256,9 +256,48 @@
 	var/pouches = list()
 	pouches["black pouches"] = /obj/item/clothing/accessory/storage/pouches
 	pouches["blue pouches"] = /obj/item/clothing/accessory/storage/pouches/blue
+	pouches["navy blue pouches"] = /obj/item/clothing/accessory/storage/pouches/navy
 	pouches["green pouches"] = /obj/item/clothing/accessory/storage/pouches/green
 	pouches["tan pouches"] = /obj/item/clothing/accessory/storage/pouches/tan
 	gear_tweaks += new/datum/gear_tweak/path(pouches)
+
+/datum/gear/accessory/large_pouches
+	display_name = "armor large pouches"
+	path = /obj/item/clothing/accessory/storage/pouches/large
+	cost = 5
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/accessory/large_pouches/New()
+	..()
+	var/lpouches = list()
+	lpouches["black pouches"] = /obj/item/clothing/accessory/storage/pouches/large
+	lpouches["blue pouches"] = /obj/item/clothing/accessory/storage/pouches/large/blue
+	lpouches["navy blue pouches"] = /obj/item/clothing/accessory/storage/pouches/large/navy
+	lpouches["green pouches"] = /obj/item/clothing/accessory/storage/pouches/large/green
+	lpouches["tan pouches"] = /obj/item/clothing/accessory/storage/pouches/large/tan
+	gear_tweaks += new/datum/gear_tweak/path(lpouches)
+
+/datum/gear/accessory/armor_deco
+	display_name = "armor customization"
+	path = /obj/item/clothing/accessory/armor/tag
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/accessory/armor_deco/New()
+	..()
+	var/tags = list()
+	tags["SCG flag"] = /obj/item/clothing/accessory/armor/tag
+	tags["EC crest"] = /obj/item/clothing/accessory/armor/tag/ec
+	tags["PCRC tag"] = /obj/item/clothing/accessory/armor/tag/pcrc
+	tags["SAARE tag"] = /obj/item/clothing/accessory/armor/tag/saare
+	tags["blood patch, O+"] = /obj/item/clothing/accessory/armor/tag/opos
+	tags["blood patch, O-"] = /obj/item/clothing/accessory/armor/tag/oneg
+	tags["blood patch, A+"] = /obj/item/clothing/accessory/armor/tag/apos
+	tags["blood patch, A-"] = /obj/item/clothing/accessory/armor/tag/aneg
+	tags["blood patch, B+"] = /obj/item/clothing/accessory/armor/tag/bpos
+	tags["blood patch, B-"] = /obj/item/clothing/accessory/armor/tag/bneg
+	tags["blood patch, AB+"] = /obj/item/clothing/accessory/armor/tag/abpos
+	tags["blood patch, AB-"] = /obj/item/clothing/accessory/armor/tag/abneg
+	gear_tweaks += new/datum/gear_tweak/path(tags)
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"

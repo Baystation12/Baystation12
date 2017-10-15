@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Planets now have some alien landmarks to find and rub your face on."

@@ -69,7 +69,7 @@ var/list/button_sound = list('sound/machines/button1.ogg','sound/machines/button
 			continue
 		if(get_dist(M, turf_source) <= (world.view + extrarange) * 2)
 			var/turf/T = get_turf(M)
-			if(T && T.z == turf_source.z && (!is_ambiance || M.is_preference_enabled(/datum/client_preference/play_ambiance)))
+			if(T && T.z == turf_source.z && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))
 				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global)
 
 var/const/FALLOFF_SOUNDS = 0.5
@@ -158,7 +158,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 	src << S
 
 /client/proc/playtitlemusic()
-	if(is_preference_enabled(/datum/client_preference/play_lobby_music))
+	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
 		GLOB.using_map.lobby_music.play_to(src)
 
 /proc/get_rand_frequency()

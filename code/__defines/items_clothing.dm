@@ -31,6 +31,7 @@
 #define ACCESSORY_SLOT_INSIGNIA "Insignia"
 #define ACCESSORY_SLOT_ARMOR_C  "Chest armor"
 #define ACCESSORY_SLOT_ARMOR_A  "Arm armor"
+#define ACCESSORY_SLOT_ARMOR_L  "Leg armor"
 #define ACCESSORY_SLOT_ARMOR_S  "Armor storage"
 #define ACCESSORY_SLOT_ARMOR_M  "Misc armor"
 

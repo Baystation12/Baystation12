@@ -4,6 +4,7 @@
 /obj/machinery/oxygen_pump
 	name = "emergency oxygen pump"
 	icon = 'icons/obj/walllocker.dmi'
+	desc = "A wall mounted oxygen pump with a retractable face mask that you can pull over your face in case of emergencies."
 	icon_state = "emerg"
 
 	anchored = TRUE
