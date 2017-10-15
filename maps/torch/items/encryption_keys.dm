@@ -39,6 +39,11 @@
 	icon_state = "srv_cypherkey"
 	channels = list("Exploration" = 1)
 
+/obj/item/weapon/storage/box/encryptionkey/exploration
+	name = "box of spare exploration radio keys"
+	desc = "A box full of exploration department radio keys."
+	startswith = list(/obj/item/weapon/screwdriver, /obj/item/device/encryptionkey/exploration = 5)
+
 /obj/item/device/encryptionkey/pathfinder
 	name = "pathfinder's encryption key"
 	icon_state = "com_cypherkey"
