@@ -1448,6 +1448,7 @@
 #include "code\modules\halo\weapons\covenant\melee.dm"
 #include "code\modules\halo\weapons\covenant\pistols.dm"
 #include "code\modules\halo\weapons\covenant\rifles.dm"
+#include "code\modules\halo\weapons\~undef\~undef.dm"
 #include "code\modules\holodeck\HolodeckControl.dm"
 #include "code\modules\holodeck\HolodeckObjects.dm"
 #include "code\modules\holodeck\HolodeckPrograms.dm"

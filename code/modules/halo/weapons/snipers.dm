@@ -23,7 +23,7 @@
 	set name = "Use Scope (2x)"
 	set popup_menu = 1
 
-	toggle_scope(2.0)
+	toggle_scope(usr, 2.0)
 
 /obj/item/weapon/gun/projectile/srs99_sniper/update_icon()
 	if(ammo_magazine)
@@ -56,7 +56,7 @@
 	set name = "Use Scope (1.25x)"
 	set popup_menu = 1
 
-	toggle_scope(1.25)
+	toggle_scope(usr, 1.25)
 
 /obj/item/weapon/gun/projectile/m392_dmr/update_icon()
 	if(ammo_magazine)

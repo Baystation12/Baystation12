@@ -37,6 +37,6 @@
 	slot_flags = SLOT_BELT||SLOT_HOLSTER
 	fire_sound = 'code/modules/halo/sounds/needlerfire.ogg'
 	magazine_type = /obj/item/ammo_magazine/needles
-	handle_casings = CASELESS
+	handle_casings = CLEAR_CASINGS
 	caliber = "needler"
 	load_method = MAGAZINE
