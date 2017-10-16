@@ -64,5 +64,5 @@
 /obj/machinery/pager/medical
 	department = MED
 
-/obj/machinery/pager/cargo
-	department = CRG
+/obj/machinery/pager/cargo //supply
+	department = SUP

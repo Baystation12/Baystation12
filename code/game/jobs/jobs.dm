@@ -4,12 +4,11 @@ var/const/MED               =(1<<2)
 var/const/SCI               =(1<<3)
 var/const/CIV               =(1<<4)
 var/const/COM               =(1<<5)
-var/const/CRG               =(1<<6)
-var/const/MSC               =(1<<7)
-var/const/SRV               =(1<<8)
-var/const/SUP               =(1<<9)
-var/const/SPT               =(1<<10)
-var/const/EXP               =(1<<11)
+var/const/MSC               =(1<<6)
+var/const/SRV               =(1<<7)
+var/const/SUP               =(1<<8)
+var/const/SPT               =(1<<9)
+var/const/EXP               =(1<<10)
 
 GLOBAL_LIST_EMPTY(assistant_occupations)
 
@@ -20,8 +19,6 @@ GLOBAL_LIST_EMPTY(engineering_positions)
 GLOBAL_LIST_EMPTY(medical_positions)
 
 GLOBAL_LIST_EMPTY(science_positions)
-
-GLOBAL_LIST_EMPTY(cargo_positions)
 
 GLOBAL_LIST_EMPTY(civilian_positions)
 
@@ -36,6 +33,8 @@ GLOBAL_LIST_EMPTY(supply_positions)
 GLOBAL_LIST_EMPTY(support_positions)
 
 GLOBAL_LIST_EMPTY(exploration_positions)
+
+GLOBAL_LIST_EMPTY(unsorted_positions) // for nano manifest
 
 
 /proc/guest_jobbans(var/job)
