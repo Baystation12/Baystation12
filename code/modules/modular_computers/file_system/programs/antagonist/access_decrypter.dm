@@ -2,6 +2,7 @@
 	filename = "nt_accrypt"
 	filedesc = "NTNet Access Decrypter"
 	program_icon_state = "hostile"
+	program_menu_icon = "unlocked"
 	extended_desc = "This highly advanced script can very slowly decrypt operational codes used in almost any network. These codes can be downloaded to an ID card to expand the available access. The system administrator will probably notice this."
 	size = 34
 	requires_ntnet = 1

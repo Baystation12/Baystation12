@@ -122,7 +122,7 @@
 			descriptors -= chosen
 			desc += "[(descriptor_count>1 && descriptor_count!=descriptor_num) ? "," : "" ] [chosen]"
 			descriptor_num--
-		if(seed.seed_noun == "spores")
+		if(seed.seed_noun == SEED_NOUN_SPORES)
 			desc += " mushroom"
 		else
 			desc += " fruit"

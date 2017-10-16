@@ -12,7 +12,7 @@
 	var/isolating = 0
 	var/state = HOME
 	var/datum/disease2/disease/virus2 = null
-	var/datum/data/record/entry = null
+	var/datum/computer_file/data/virus_record/entry = null
 	var/obj/item/weapon/reagent_containers/syringe/sample = null
 
 /obj/machinery/disease2/isolator/update_icon()
@@ -68,13 +68,14 @@
 					var/list/virus = B.data["virus2"]
 					for (var/ID in virus)
 						var/datum/disease2/disease/V = virus[ID]
-						var/datum/data/record/R = null
+						var/datum/computer_file/data/virus_record/R = null
 						if (ID in virusDB)
 							R = virusDB[ID]
 
-						var/mob/living/carbon/human/D = B.data["donor"]
+						var/weakref/W = B.data["donor"]
+						var/mob/living/carbon/human/D = W.resolve()
 						pathogen_pool.Add(list(list(\
-							"name" = "[D.get_species()] [B.name]", \
+							"name" = "[D ? D.get_species() : "Unidentified"] [B.name]", \
 							"dna" = B.data["blood_DNA"], \
 							"unique_id" = V.uniqueID, \
 							"reference" = "\ref[V]", \
@@ -87,7 +88,7 @@
 		if (LIST)
 			var/list/db[0]
 			for (var/ID in virusDB)
-				var/datum/data/record/r = virusDB[ID]
+				var/datum/computer_file/data/virus_record/r = virusDB[ID]
 				db.Add(list(list("name" = r.fields["name"], "record" = "\ref[r]")))
 
 			if (db.len > 0)
@@ -106,7 +107,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/disease2/isolator/process()
+/obj/machinery/disease2/isolator/Process()
 	if (isolating > 0)
 		isolating -= 1
 		if (isolating == 0)
@@ -141,7 +142,7 @@
 		return 1
 
 	if (href_list[ENTRY])
-		if (istype(locate(href_list["view"]), /datum/data/record))
+		if (istype(locate(href_list["view"]), /datum/computer_file/data/virus_record))
 			entry = locate(href_list["view"])
 
 		state = ENTRY
@@ -186,8 +187,9 @@
 			P.info += "<hr>"
 
 			for(var/datum/reagent/blood/B in sample.reagents.reagent_list)
-				var/mob/living/carbon/human/D = B.data["donor"]
-				P.info += "<large><u>[D.get_species()] [B.name]:</u></large><br>[B.data["blood_DNA"]]<br>"
+				var/weakref/W = B.data["donor"]
+				var/mob/living/carbon/human/D = W.resolve()
+				P.info += "<large><u>[D ? D.get_species() : "Unidentified"] [B.name]:</u></large><br>[B.data["blood_DNA"]]<br>"
 
 				var/list/virus = B.data["virus2"]
 				P.info += "<u>Pathogens:</u> <br>"
@@ -212,7 +214,7 @@
 			var/i = 0
 			for (var/ID in virusDB)
 				i++
-				var/datum/data/record/r = virusDB[ID]
+				var/datum/computer_file/data/virus_record/r = virusDB[ID]
 				P.info += "[i]. " + r.fields["name"]
 				P.info += "<br>"
 

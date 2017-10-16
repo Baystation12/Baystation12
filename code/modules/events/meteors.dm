@@ -27,7 +27,7 @@
 /datum/event/meteor_wave/tick()
 	// Begin sending the alarm signals to shield diffusers so the field is already regenerated (if it exists) by the time actual meteors start flying around.
 	if(alarmWhen < activeFor)
-		for(var/obj/machinery/shield_diffuser/SD in GLOB.machines)
+		for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
 			if(isStationLevel(SD.z))
 				SD.meteor_alarm(10)
 

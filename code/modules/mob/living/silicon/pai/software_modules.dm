@@ -90,16 +90,16 @@
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui = null, force_open = 1)
 		var/data[0]
 
-		data["listening"] = user.radio.broadcasting
-		data["frequency"] = format_frequency(user.radio.frequency)
+		data["listening"] = user.silicon_radio.broadcasting
+		data["frequency"] = format_frequency(user.silicon_radio.frequency)
 
 		var/channels[0]
-		for(var/ch_name in user.radio.channels)
-			var/ch_stat = user.radio.channels[ch_name]
+		for(var/ch_name in user.silicon_radio.channels)
+			var/ch_stat = user.silicon_radio.channels[ch_name]
 			var/ch_dat[0]
 			ch_dat["name"] = ch_name
 			// FREQ_LISTENING is const in /obj/item/device/radio
-			ch_dat["listening"] = !!(ch_stat & user.radio.FREQ_LISTENING)
+			ch_dat["listening"] = !!(ch_stat & user.silicon_radio.FREQ_LISTENING)
 			channels[++channels.len] = ch_dat
 
 		data["channels"] = channels
@@ -114,7 +114,7 @@
 		var/mob/living/silicon/pai/P = usr
 		if(!istype(P)) return
 
-		P.radio.Topic(href, href_list)
+		P.silicon_radio.Topic(href, href_list)
 		return 1
 
 /datum/pai_software/crew_manifest
@@ -124,11 +124,9 @@
 	toggle = 0
 
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
-		GLOB.data_core.get_manifest_list()
-
 		var/data[0]
 		// This is dumb, but NanoUI breaks if it has no data to send
-		data["manifest"] = PDA_Manifest
+		data["manifest"] = nano_crew_manifest()
 
 		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
@@ -221,118 +219,6 @@
 	if(user && !user.pda)
 		user.pda = new(user)
 		user.pda.set_owner_rank_job(text("[]", user), "Personal Assistant")
-
-/datum/pai_software/med_records
-	name = "Medical Records"
-	ram_cost = 15
-	id = "med_records"
-	toggle = 0
-
-	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
-		var/data[0]
-
-		var/records[0]
-		for(var/datum/data/record/general in sortRecord(GLOB.data_core.general))
-			var/record[0]
-			record["name"] = general.fields["name"]
-			record["ref"] = "\ref[general]"
-			records[++records.len] = record
-
-		data["records"] = records
-
-		var/datum/data/record/G = user.medicalActive1
-		var/datum/data/record/M = user.medicalActive2
-		data["general"] = G ? G.fields : null
-		data["medical"] = M ? M.fields : null
-		data["could_not_find"] = user.medical_cannotfind
-
-		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
-		if(!ui)
-			// Don't copy-paste this unless you're making a pAI software module!
-			ui = new(user, user, id, "pai_medrecords.tmpl", "Medical Records", 450, 600)
-			ui.set_initial_data(data)
-			ui.open()
-			ui.set_auto_update(1)
-
-	Topic(href, href_list)
-		var/mob/living/silicon/pai/P = usr
-		if(!istype(P)) return
-
-		if(href_list["select"])
-			var/datum/data/record/record = locate(href_list["select"])
-			if(record)
-				var/datum/data/record/R = record
-				var/datum/data/record/M = null
-				if (!( GLOB.data_core.general.Find(R) ))
-					P.medical_cannotfind = 1
-				else
-					P.medical_cannotfind = 0
-					for(var/datum/data/record/E in GLOB.data_core.medical)
-						if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
-							M = E
-					P.medicalActive1 = R
-					P.medicalActive2 = M
-			else
-				P.medical_cannotfind = 1
-			return 1
-
-/datum/pai_software/sec_records
-	name = "Security Records"
-	ram_cost = 15
-	id = "sec_records"
-	toggle = 0
-
-	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
-		var/data[0]
-
-		var/records[0]
-		for(var/datum/data/record/general in sortRecord(GLOB.data_core.general))
-			var/record[0]
-			record["name"] = general.fields["name"]
-			record["ref"] = "\ref[general]"
-			records[++records.len] = record
-
-		data["records"] = records
-
-		var/datum/data/record/G = user.securityActive1
-		var/datum/data/record/S = user.securityActive2
-		data["general"] = G ? G.fields : null
-		data["security"] = S ? S.fields : null
-		data["could_not_find"] = user.security_cannotfind
-
-		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
-		if(!ui)
-			// Don't copy-paste this unless you're making a pAI software module!
-			ui = new(user, user, id, "pai_secrecords.tmpl", "Security Records", 450, 600)
-			ui.set_initial_data(data)
-			ui.open()
-			ui.set_auto_update(1)
-
-	Topic(href, href_list)
-		var/mob/living/silicon/pai/P = usr
-		if(!istype(P)) return
-
-		if(href_list["select"])
-			var/datum/data/record/record = locate(href_list["select"])
-			if(record)
-				var/datum/data/record/R = record
-				var/datum/data/record/S = null
-				if (!( GLOB.data_core.general.Find(R) ))
-					P.securityActive1 = null
-					P.securityActive2 = null
-					P.security_cannotfind = 1
-				else
-					P.security_cannotfind = 0
-					for(var/datum/data/record/E in GLOB.data_core.security)
-						if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
-							S = E
-					P.securityActive1 = R
-					P.securityActive2 = S
-			else
-				P.securityActive1 = null
-				P.securityActive2 = null
-				P.security_cannotfind = 1
-			return 1
 
 /datum/pai_software/door_jack
 	name = "Door Jack"

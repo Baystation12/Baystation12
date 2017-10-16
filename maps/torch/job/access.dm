@@ -72,14 +72,14 @@
 	id = access_liaison
 	desc = "NanoTrasen Liaison"
 	region = ACCESS_REGION_COMMAND
-	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO and RD cannot enter and access can't be added with computer.
+	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO and RD cannot enter
 
 /var/const/access_representative = 85
 /datum/access/representative
 	id = access_representative
 	desc = "SolGov Representative"
 	region = ACCESS_REGION_COMMAND
-	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO cannot enter and access can't be added with computer.
+	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO cannot enter
 
 /var/const/access_sec_guard = 86
 /datum/access/sec_guard
@@ -122,6 +122,19 @@
 	id = access_senadv
 	desc = "Senior Enlisted Advisor"
 	region = ACCESS_REGION_COMMAND
+
+/var/const/access_explorer = 93
+/datum/access/explorer
+	id = access_explorer
+	desc = "Explorer"
+	region = ACCESS_REGION_RESEARCH
+
+/var/const/access_pathfinder = 94
+/datum/access/pathfinder
+	id = access_pathfinder
+	desc = "Pathfinder"
+	region = ACCESS_REGION_RESEARCH
+
 
 /************
 * SEV Torch *

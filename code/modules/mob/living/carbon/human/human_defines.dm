@@ -103,7 +103,6 @@
 	var/datum/mil_rank/char_rank = null
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
-	var/cloaked // If set, mob will only render its inhands, no other icons will be shown.
 
 	var/obj/machinery/machine_visual //machine that is currently applying visual effects to this mob. Only used for camera monitors currently.
 
@@ -111,4 +110,5 @@
 	var/shock_stage
 
 	var/obj/item/grab/current_grab_type 	// What type of grab they use when they grab someone.
+	var/skin_state = SKIN_NORMAL
 	var/datum/ntprofile/CharRecords

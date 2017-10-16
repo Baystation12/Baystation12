@@ -1,10 +1,11 @@
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
+	virtual_mob = null
 
-/mob/living/carbon/human/dummy/mannequin/New()
-	..()
-	GLOB.mob_list -= src
+/mob/living/carbon/human/dummy/mannequin/Initialize()
+	. = ..()
+	STOP_PROCESSING(SSmobs, src)
 	GLOB.human_mob_list -= src
 	delete_inventory()
 
@@ -45,6 +46,12 @@
 
 /mob/living/carbon/human/machine/New(var/new_loc)
 	..(new_loc, SPECIES_IPC)
+
+/mob/living/carbon/human/bogani/New(var/new_loc)
+	..(new_loc, SPECIES_BOGANI)
+
+/mob/living/carbon/human/egyno/New(var/new_loc)
+	..(new_loc, SPECIES_EGYNO)
 
 /mob/living/carbon/human/nabber/New(var/new_loc)
 	pulling_punches = 1

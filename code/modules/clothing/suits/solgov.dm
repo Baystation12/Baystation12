@@ -74,6 +74,18 @@
 	icon_state = "blackservice_srvcom"
 	item_state = "blackservice_srvcom"
 
+/obj/item/clothing/suit/storage/service/expeditionary/exploration
+	name = "expeditionary exploration jacket"
+	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons and purple trim."
+	icon_state = "blackservice_exp"
+	item_state = "blackservice_exp"
+
+/obj/item/clothing/suit/storage/service/expeditionary/exploration/command
+	name = "expeditionary exploration command jacket"
+	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and purple trim."
+	icon_state = "blackservice_expcom"
+	item_state = "blackservice_expcom"
+
 /obj/item/clothing/suit/storage/service/expeditionary/command
 	name = "expeditionary command jacket"
 	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and gold trim."
@@ -135,11 +147,23 @@
 	icon_state = "greenservice_srv"
 	item_state = "greenservice_srv"
 
-/obj/item/clothing/suit/storage/service/marine/seervice/command
+/obj/item/clothing/suit/storage/service/marine/service/command
 	name = "marine service command jacket"
 	desc = "An SCG Marine Corps service coat. This one has green and gold markings."
 	icon_state = "greenservice_srvcom"
 	item_state = "greenservice_srvcom"
+
+/obj/item/clothing/suit/storage/service/marine/exploration
+	name = "marine exploration jacket"
+	desc = "An SCG Marine Corps service coat. This one has purple markings."
+	icon_state = "greenservice_exp"
+	item_state = "greenservice_exp"
+
+/obj/item/clothing/suit/storage/service/marine/exploration/command
+	name = "marine exploration command jacket"
+	desc = "An SCG Marine Corps service coat. This one has purple and gold markings."
+	icon_state = "greenservice_expcom"
+	item_state = "greenservice_expcom"
 
 /obj/item/clothing/suit/storage/service/marine/command
 	name = "marine command jacket"
@@ -217,4 +241,22 @@
 	icon_open = "marshal_jacket_open"
 	icon_closed = "marshal_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/ec
+	name = "expeditionary winter coat"
+	icon_state = "coatec"
+	armor = list(melee = 25, bullet = 10, laser = 5, energy = 10, bomb = 20, bio = 0, rad = 10)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/marine
+	name = "marine winter coat"
+	icon_state = "coatmc"
+	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/fleet
+	name = "fleet winter coat"
+	icon_state = "coatfl"
+	armor = list(melee = 20, bullet = 10, laser = 10, energy = 20, bomb = 20, bio = 0, rad = 10)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)

@@ -6,7 +6,7 @@
 	taste_description = "bitterness"
 	taste_mult = 1.2
 	reagent_state = LIQUID
-	color = "#CF3600"
+	color = "#cf3600"
 	metabolism = REM * 0.25 // 0.05 by default. They last a while and slowly kill you.
 
 	var/target_organ
@@ -36,7 +36,7 @@
 	description = "Liquid plastic, do not eat."
 	taste_description = "plastic"
 	reagent_state = LIQUID
-	color = "#CF3600"
+	color = "#cf3600"
 	strength = 5
 
 /datum/reagent/toxin/amatoxin
@@ -61,10 +61,19 @@
 	description = "Phoron in its liquid form."
 	taste_mult = 1.5
 	reagent_state = LIQUID
-	color = "#FF3300"
+	color = "#ff3300"
 	strength = 30
 	touch_met = 5
 	var/fire_mult = 5
+
+/datum/reagent/toxin/chlorine
+	name = "Chlorine"
+	description = "A highly poisonous liquid. Smells strongly of bleach."
+	reagent_state = LIQUID
+	taste_description = "bleach"
+	color = "#707C13"
+	strength = 15
+	metabolism = REM
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
@@ -105,7 +114,7 @@
 	description = "A highly toxic chemical."
 	taste_mult = 0.6
 	reagent_state = LIQUID
-	color = "#CF3600"
+	color = "#cf3600"
 	strength = 20
 	metabolism = REM * 2
 	target_organ = BP_HEART
@@ -119,7 +128,7 @@
 	description = "A delicious salt that stops the heart when injected into cardiac muscle."
 	taste_description = "salt"
 	reagent_state = SOLID
-	color = "#FFFFFF"
+	color = "#ffffff"
 	strength = 0
 	overdose = REAGENTS_OVERDOSE
 
@@ -140,7 +149,7 @@
 	description = "A specific chemical based on Potassium Chloride to stop the heart for surgery. Not safe to eat!"
 	taste_description = "salt"
 	reagent_state = SOLID
-	color = "#FFFFFF"
+	color = "#ffffff"
 	strength = 10
 	overdose = 20
 
@@ -173,7 +182,7 @@
 	M.adjustOxyLoss(3 * removed)
 	M.Weaken(10)
 	M.silent = max(M.silent, 10)
-	if(dose <= removed) //half-assed attempt to make timeofdeath update only at the onset
+	if(M.chem_doses[type] <= removed) //half-assed attempt to make timeofdeath update only at the onset
 		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
@@ -206,7 +215,7 @@
 	description = "A harmful toxic mixture to kill plantlife. Do not ingest!"
 	taste_mult = 1
 	reagent_state = LIQUID
-	color = "#49002E"
+	color = "#49002e"
 	strength = 4
 
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
@@ -218,7 +227,7 @@
 			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
 
 /datum/reagent/toxin/plantbgone/touch_obj(var/obj/O, var/volume)
-	if(istype(O, /obj/effect/plant))
+	if(istype(O, /obj/effect/vine))
 		qdel(O)
 
 /datum/reagent/toxin/plantbgone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -236,7 +245,7 @@
 	description = "Polytrinic acid is a an extremely corrosive chemical substance."
 	taste_description = "acid"
 	reagent_state = LIQUID
-	color = "#8E18A9"
+	color = "#8e18a9"
 	power = 10
 	meltdose = 4
 
@@ -245,7 +254,7 @@
 	description = "Lexorin temporarily stops respiration. Causes tissue damage."
 	taste_description = "acid"
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/lexorin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -266,7 +275,7 @@
 	taste_description = "slime"
 	taste_mult = 0.9
 	reagent_state = LIQUID
-	color = "#13BC5E"
+	color = "#13bc5e"
 
 /datum/reagent/mutagen/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(33))
@@ -302,7 +311,7 @@
 	taste_description = "slime"
 	taste_mult = 1.3
 	reagent_state = LIQUID
-	color = "#801E28"
+	color = "#801e28"
 
 /datum/reagent/slimejelly/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -318,7 +327,7 @@
 	description = "An effective hypnotic used to treat insomnia."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	color = "#009CA8"
+	color = "#009ca8"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 
@@ -330,12 +339,12 @@
 	if(alien == IS_SKRELL)
 		threshold = 1.2
 
-	if(dose < 1 * threshold)
-		if(dose == metabolism * 2 || prob(5))
+	if(M.chem_doses[type] < 1 * threshold)
+		if(M.chem_doses[type] == metabolism * 2 || prob(5))
 			M.emote("yawn")
-	else if(dose < 1.5 * threshold)
+	else if(M.chem_doses[type] < 1.5 * threshold)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	else if(dose < 5 * threshold)
+	else if(M.chem_doses[type] < 5 * threshold)
 		if(prob(50))
 			M.Weaken(2)
 		M.drowsyness = max(M.drowsyness, 20)
@@ -361,16 +370,16 @@
 	if(alien == IS_SKRELL)
 		threshold = 1.2
 
-	if(dose == metabolism * threshold)
+	if(M.chem_doses[type] == metabolism * threshold)
 		M.confused += 2
 		M.drowsyness += 2
-	else if(dose < 2 * threshold)
+	else if(M.chem_doses[type] < 2 * threshold)
 		M.Weaken(30)
 		M.eye_blurry = max(M.eye_blurry, 10)
 	else
 		M.sleeping = max(M.sleeping, 30)
 
-	if(dose > 1 * threshold)
+	if(M.chem_doses[type] > 1 * threshold)
 		M.adjustToxLoss(removed)
 
 /datum/reagent/chloralhydrate/beer2 //disguised as normal beer for use by emagged brobots
@@ -378,7 +387,7 @@
 	description = "An alcoholic beverage made from malted grains, hops, yeast, and water. The fermentation appears to be incomplete." //If the players manage to analyze this, they deserve to know something is wrong.
 	taste_description = "shitty piss water"
 	reagent_state = LIQUID
-	color = "#FFD300"
+	color = "#ffd300"
 
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
@@ -390,7 +399,7 @@
 	taste_description = "bitterness"
 	taste_mult = 0.4
 	reagent_state = LIQUID
-	color = "#60A584"
+	color = "#60a584"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 
@@ -448,7 +457,7 @@
 	description = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
 	taste_description = "numbness"
 	reagent_state = LIQUID
-	color = "#C8A5DC"
+	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -467,7 +476,7 @@
 	description = "A powerful hallucinogen, it can cause fatal effects in users."
 	taste_description = "sourness"
 	reagent_state = LIQUID
-	color = "#B31008"
+	color = "#b31008"
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
 
@@ -483,7 +492,7 @@
 	name = "Psilocybin"
 	description = "A strong psycotropic derived from certain species of mushroom."
 	taste_description = "mushroom"
-	color = "#E700E7"
+	color = "#e700e7"
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5
 
@@ -497,12 +506,12 @@
 
 	M.druggy = max(M.druggy, 30)
 
-	if(dose < 1 * threshold)
+	if(M.chem_doses[type] < 1 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_dizzy(5)
 		if(prob(5))
 			M.emote(pick("twitch", "giggle"))
-	else if(dose < 2 * threshold)
+	else if(M.chem_doses[type] < 2 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
@@ -524,7 +533,7 @@
 	description = "A corruptive toxin produced by slimes."
 	taste_description = "sludge"
 	reagent_state = LIQUID
-	color = "#13BC5E"
+	color = "#13bc5e"
 	metabolism = REM * 0.2
 
 /datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
@@ -533,9 +542,9 @@
 	if(H.species.name == SPECIES_PROMETHEAN)
 		return
 	H.adjustToxLoss(40 * removed)
-	if(dose < 1 || prob(30))
+	if(H.chem_doses[type] < 1 || prob(30))
 		return
-	dose = 0
+	H.chem_doses[type] = 0
 	var/list/meatchunks = list()
 	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
 		var/obj/item/organ/external/E = H.get_organ(limb_tag)
@@ -545,7 +554,7 @@
 		if(prob(10))
 			to_chat(H, "<span class='danger'>Your flesh rapidly mutates!</span>")
 			H.set_species(SPECIES_PROMETHEAN)
-			H.shapeshifter_set_colour("#05FF9B")
+			H.shapeshifter_set_colour("#05ff9b")
 			H.verbs -= /mob/living/carbon/human/proc/shapeshifter_select_colour
 		return
 	var/obj/item/organ/external/O = pick(meatchunks)
@@ -556,7 +565,7 @@
 	for(var/obj/item/organ/external/E in meatchunks)
 		E.species = all_species[SPECIES_PROMETHEAN]
 		E.s_tone = null
-		E.s_col = ReadRGB("#05FF9B")
+		E.s_col = ReadRGB("#05ff9b")
 		E.s_col_blend = ICON_ADD
 		E.status &= ~ORGAN_BROKEN
 		E.status |= ORGAN_MUTATED
@@ -576,7 +585,7 @@
 	description = "An advanced corruptive toxin produced by slimes."
 	taste_description = "sludge"
 	reagent_state = LIQUID
-	color = "#13BC5E"
+	color = "#13bc5e"
 
 /datum/reagent/aslimetoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // TODO: check if there's similar code anywhere else
 	if(M.transforming)
@@ -606,21 +615,21 @@
 	description = "Microscopic construction robots."
 	taste_description = "slimey metal"
 	reagent_state = LIQUID
-	color = "#535E66"
+	color = "#535e66"
 
 /datum/reagent/xenomicrobes
 	name = "Xenomicrobes"
 	description = "Microbes with an entirely alien cellular structure."
 	taste_description = "sludge"
 	reagent_state = LIQUID
-	color = "#535E66"
+	color = "#535e66"
 
 /datum/reagent/toxin/hair_remover
 	name = "Hair Remover"
 	description = "An extremely effective chemical depilator. Do not ingest."
 	taste_description = "acid"
 	reagent_state = LIQUID
-	color = "#D9FFB3"
+	color = "#d9ffb3"
 	strength = 1
 	overdose = REAGENTS_OVERDOSE
 
@@ -635,7 +644,7 @@
 	name = "Corruption"
 	description = "a loyalty changing liquid."
 	taste_description = "blood"
-	color = "#FFFFFF"
+	color = "#ffffff"
 	taste_mult = 5
 	strength = 10
 	metabolism = REM * 2
@@ -647,7 +656,7 @@
 /datum/reagent/toxin/corrupting/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(prob(5))
-		if(dose < 15)
+		if(M.chem_doses[type] < 15)
 			to_chat(M, "<span class='warning'>You feel funny...</span>")
 		else
 			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")

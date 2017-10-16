@@ -83,7 +83,7 @@
 				dat += "</div>"
 			if(2)
 				dat = "<ul>"
-				for(var/mob/living/carbon/human/M in GLOB.mob_list)
+				for(var/mob/living/carbon/human/M in SSmobs.mob_list)
 					if(M.client && M.CharRecords.char_department == get_department(department, 0) || department == "NanoTrasen")
 						dat += {"<li><b>Name:</b> [M.real_name]<br>
 						<b>Age:</b> [M.age]<br>

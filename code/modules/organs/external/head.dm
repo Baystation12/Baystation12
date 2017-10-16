@@ -14,6 +14,7 @@
 	gendered_icon = 1
 	encased = "skull"
 	artery_name = "cartoid artery"
+	cavity_name = "cranial"
 
 	var/can_intake_reagents = 1
 	var/eye_icon = "eyes_s"

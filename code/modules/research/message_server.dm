@@ -1,8 +1,6 @@
 #define MESSAGE_SERVER_SPAM_REJECT 1
 #define MESSAGE_SERVER_DEFAULT_SPAM_LIMIT 10
 
-var/global/list/obj/machinery/message_server/message_servers = list()
-
 /datum/data_pda_msg
 	var/recipient = "Unspecified" //name of the person
 	var/sender = "Unspecified" //name of the sender
@@ -70,17 +68,16 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
 
 /obj/machinery/message_server/Initialize()
-	message_servers += src
+	GLOB.message_servers += src
 	decryptkey = GenerateKey()
 	send_pda_message("System Administrator", "system", "This is an automated message. The messaging system is functioning correctly.")
 	. = ..()
 
 /obj/machinery/message_server/Destroy()
-	message_servers -= src
-	..()
-	return
+	GLOB.message_servers -= src
+	return ..()
 
-/obj/machinery/message_server/process()
+/obj/machinery/message_server/Process()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
 		power_failure = 10
@@ -159,6 +156,18 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 	return
 
+/obj/machinery/message_server/proc/send_to_department(var/department, var/message, var/tone)
+	var/reached = 0
+	for(var/obj/item/device/pda/P in PDAs)
+		if(P.toff)
+			continue
+		var/datum/job/J = job_master.GetJob(P.ownrank)
+		if(!J)
+			continue
+		if(J.department_flag & department)
+			P.new_info(P.message_silent, tone ? tone : P.ttone, "\icon[P] [message]")
+			reached++
+	return reached
 
 /datum/feedback_variable
 	var/variable
@@ -241,6 +250,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 	var/list/msg_raider = list()
 	var/list/msg_cargo = list()
 	var/list/msg_service = list()
+	var/list/msg_exploration = list()
 
 	var/list/datum/feedback_variable/feedback = new()
 
@@ -290,7 +300,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 	var/pda_msg_amt = 0
 	var/rc_msg_amt = 0
 
-	for(var/obj/machinery/message_server/MS in GLOB.machines)
+	for(var/obj/machinery/message_server/MS in SSmachines.machinery)
 		if(MS.pda_msgs.len > pda_msg_amt)
 			pda_msg_amt = MS.pda_msgs.len
 		if(MS.rc_msgs.len > rc_msg_amt)

@@ -90,8 +90,13 @@
 			return
 
 // Preset types - left here for the code that uses them
+/obj/item/weapon/material/shrapnel
+	name = "shrapnel"
+	default_material = DEFAULT_WALL_MATERIAL
+	w_class = ITEM_SIZE_TINY	//it's real small
+
 /obj/item/weapon/material/shard/shrapnel/New(loc)
-	..(loc, "steel")
+	..(loc, DEFAULT_WALL_MATERIAL)
 
 /obj/item/weapon/material/shard/phoron/New(loc)
 	..(loc, "phglass")

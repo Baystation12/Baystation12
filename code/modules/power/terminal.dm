@@ -35,5 +35,5 @@
 
 // Needed so terminals are not removed from machines list.
 // Powernet rebuilds need this to work properly.
-/obj/machinery/power/terminal/process()
+/obj/machinery/power/terminal/Process()
 	return 1

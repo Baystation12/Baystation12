@@ -7,6 +7,7 @@
 	filename = "comm"
 	filedesc = "Command and Communications Program"
 	program_icon_state = "comm"
+	program_menu_icon = "flag"
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
 	required_access = access_heads
@@ -317,7 +318,7 @@ var/last_message_id = 0
 
 
 /proc/is_relay_online()
-	for(var/obj/machinery/bluespacerelay/M in GLOB.machines)
+	for(var/obj/machinery/bluespacerelay/M in SSmachines.machinery)
 		if(M.stat == 0)
 			return 1
 	return 0

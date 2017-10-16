@@ -3,7 +3,7 @@
 	desc = "A slab of meat."
 	icon_state = "meat"
 	health = 180
-	filling_color = "#FF1C1C"
+	filling_color = "#ff1c1c"
 	center_of_mass = "x=16;y=14"
 	New()
 		..()

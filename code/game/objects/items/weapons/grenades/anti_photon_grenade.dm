@@ -9,7 +9,7 @@
 
 /obj/item/weapon/grenade/anti_photon/detonate()
 	playsound(src.loc, 'sound/effects/phasein.ogg', 50, 1, 5)
-	set_light(10, -10, "#FFFFFF")
+	set_light(10, -10, "#ffffff")
 
 	var/extra_delay = rand(0,90)
 

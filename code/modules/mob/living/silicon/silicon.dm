@@ -5,7 +5,7 @@
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
 	var/list/stating_laws = list()// Channels laws are currently being stated on
-	var/obj/item/device/radio/common_radio
+	var/obj/item/device/radio/silicon_radio
 
 	var/list/hud_list[10]
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
@@ -15,7 +15,7 @@
 	var/speak_exclamation = "declares"
 	var/speak_query = "queries"
 	var/pose //Yes, now AIs can pose too.
-	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
+	var/obj/item/device/camera/siliconcam/silicon_camera = null //photography
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
 	var/sensor_mode = 0 //Determines the current HUD.
@@ -30,8 +30,14 @@
 	#define MED_HUD 2 //Medical HUD mode
 
 /mob/living/silicon/New()
-	GLOB.silicon_mob_list |= src
+	GLOB.silicon_mob_list += src
 	..()
+
+	if(silicon_radio)
+		silicon_radio = new silicon_radio(src)
+	if(silicon_camera)
+		silicon_camera = new silicon_camera(src)
+
 	add_language(LANGUAGE_GALCOM)
 	default_language = all_languages[LANGUAGE_GALCOM]
 	init_id()
@@ -39,6 +45,8 @@
 
 /mob/living/silicon/Destroy()
 	GLOB.silicon_mob_list -= src
+	QDEL_NULL(silicon_radio)
+	QDEL_NULL(silicon_camera)
 	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
 		AH.unregister_alarm(src)
 	return ..()
@@ -154,8 +162,7 @@
 /mob/living/silicon/proc/show_station_manifest()
 	var/dat
 	dat += "<h4>Crew Manifest</h4>"
-	if(GLOB.data_core)
-		dat += GLOB.data_core.get_manifest(1) // make it monochrome
+	dat += html_crew_manifest(1) // make it monochrome
 	dat += "<br>"
 	src << browse(dat, "window=airoster")
 	onclose(src, "airoster")
@@ -354,7 +361,6 @@
 	var/job = mind.assigned_role
 
 	job_master.FreeRole(job)
-	GLOB.data_core.ResetPDAManifest()
 
 	if(mind.objectives.len)
 		qdel(mind.objectives)

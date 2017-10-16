@@ -53,9 +53,14 @@
 	initial_flooring = /decl/flooring/diona
 
 /turf/simulated/floor/carpet/blue
-	name = "blue carpet"
+	name = "turquoise carpet"
 	icon_state = "bcarpet"
 	initial_flooring = /decl/flooring/carpet/blue
+
+/turf/simulated/floor/carpet/blue2
+	name = "blue carpet"
+	icon_state = "b2carpet"
+	initial_flooring = /decl/flooring/carpet/blue2
 
 /turf/simulated/floor/tiled
 	name = "steel floor"

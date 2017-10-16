@@ -28,9 +28,9 @@
 	QDEL_NULL(ptank)
 	. = ..()
 
-/obj/item/weapon/flamethrower/process()
+/obj/item/weapon/flamethrower/Process()
 	if(!lit)
-		GLOB.processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		return null
 	var/turf/location = loc
 	if(istype(location, /mob/))
@@ -56,7 +56,6 @@
 	return
 
 /obj/item/weapon/flamethrower/afterattack(atom/target, mob/user, proximity)
-	if(!proximity) return
 	// Make sure our user is still holding us
 	if(user && user.get_active_hand() == src)
 		var/turf/target_turf = get_turf(target)
@@ -143,7 +142,7 @@
 		if(!status)	return
 		lit = !lit
 		if(lit)
-			GLOB.processing_objects.Add(src)
+			START_PROCESSING(SSobj, src)
 	if(href_list["amount"])
 		throw_amount = throw_amount + text2num(href_list["amount"])
 		throw_amount = max(50, min(5000, throw_amount))

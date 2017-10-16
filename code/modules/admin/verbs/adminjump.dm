@@ -32,7 +32,7 @@
 	mob.jumpTo(T)
 	feedback_add_details("admin_verb","JT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/jumptomob(var/mob/M in GLOB.mob_list)
+/client/proc/jumptomob(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Jump to Mob"
 
@@ -94,7 +94,7 @@
 	else
 		alert("Admin jumping disabled")
 
-/client/proc/Getmob(var/mob/M in GLOB.mob_list)
+/client/proc/Getmob(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Get Mob"
 	set desc = "Mob to teleport"

@@ -13,10 +13,15 @@
 	var/scanning = 0
 	var/radiation_count = 0
 
-/obj/item/device/geiger/New()
-	GLOB.processing_objects |= src
+/obj/item/device/geiger/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
-/obj/item/device/geiger/process()
+/obj/item/device/geiger/Destroy()
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
+
+/obj/item/device/geiger/Process()
 	if(!scanning)
 		return
 	radiation_count = radiation_repository.get_rads_at_turf(get_turf(src))

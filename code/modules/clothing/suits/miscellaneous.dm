@@ -430,31 +430,31 @@
 
 /obj/item/clothing/suit/poncho/roles/security
 	name = "security poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is black and red, standard NanoTrasen Security colors."
+	desc = "A simple, comfortable cloak without sleeves. This one is black and red, which are standard NanoTrasen Security colors."
 	icon_state = "secponcho"
 	item_state = "secponcho"
 
 /obj/item/clothing/suit/poncho/roles/medical
 	name = "medical poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is white with green and blue tint, standard Medical colors."
+	desc = "A simple, comfortable cloak without sleeves. This one is white with a blue tint, which are standard Medical colors."
 	icon_state = "medponcho"
 	item_state = "medponcho"
 
 /obj/item/clothing/suit/poncho/roles/engineering
 	name = "engineering poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, standard Engineering colors."
+	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, which are standard Engineering colors."
 	icon_state = "engiponcho"
 	item_state = "engiponcho"
 
 /obj/item/clothing/suit/poncho/roles/science
 	name = "science poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is white with purple trim, standard NanoTrasen Science colors."
+	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, which are standard NanoTrasen Science colors."
 	icon_state = "sciponcho"
 	item_state = "sciponcho"
 
 /obj/item/clothing/suit/poncho/roles/cargo
 	name = "cargo poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, the colors of Cargo."
+	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, which are standard Cargo colors."
 	icon_state = "cargoponcho"
 	item_state = "cargoponcho"
 
@@ -463,56 +463,55 @@
  */
 /obj/item/clothing/suit/storage/toggle/track
 	name = "track jacket"
-	desc = "a track jacket, for the athletic."
+	desc = "A track jacket, for the athletic."
 	icon_state = "trackjacket"
 	icon_open = "trackjacket_open"
 	icon_closed = "trackjacket"
 
 /obj/item/clothing/suit/storage/toggle/track/blue
 	name = "blue track jacket"
+	desc = "A blue track jacket, for the athletic."
 	icon_state = "trackjacketblue"
 	icon_open = "trackjacketblue_open"
 	icon_closed = "trackjacketblue"
 
 /obj/item/clothing/suit/storage/toggle/track/green
 	name = "green track jacket"
+	desc = "A green track jacket, for the athletic."
 	icon_state = "trackjacketgreen"
 	icon_open = "trackjacketgreen_open"
 	icon_closed = "trackjacketgreen"
 
 /obj/item/clothing/suit/storage/toggle/track/red
 	name = "red track jacket"
+	desc = "A red track jacket, for the athletic."
 	icon_state = "trackjacketred"
 	icon_open = "trackjacketred_open"
 	icon_closed = "trackjacketred"
 
 /obj/item/clothing/suit/storage/toggle/track/white
 	name = "white track jacket"
+	desc = "A white track jacket, for the athletic."
 	icon_state = "trackjacketwhite"
 	icon_open = "trackjacketwhite_open"
 	icon_closed = "trackjacketwhite"
 
 /obj/item/clothing/suit/rubber
 	name = "human suit"
-	desc = "Rubber suit, perfect for infiltrating Earthling nudist beaches."
+	desc = "A Human suit made out of rubber."
 	icon_state = "mansuit"
-	permeability_coefficient = 0
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 90, rad = 0)
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
-	siemens_coefficient = 0.8
 
 /obj/item/clothing/suit/rubber/tajaran
 	name = "tajara suit"
-	desc = "Rubber suit covered in artificial fur. No tajaran interns harmed excessively in making."
+	desc = "A Tajara suit made out of rubber."
 	icon_state = "catsuit"
 
 /obj/item/clothing/suit/rubber/skrell
 	name = "skrell suit"
-	desc = "Rubber suit of slimy texture. Not guaranteed to fool real Skrell."
+	desc = "A Skrell suit made out of rubber."
 	icon_state = "skrellsuit"
 
 /obj/item/clothing/suit/rubber/unathi
 	name = "unathi suit"
-	desc = "Rubber suit with muscle painted on. Would probably fool average Unathi."
+	desc = "A Unathi suit made out of rubber."
 	icon_state = "lizsuit"

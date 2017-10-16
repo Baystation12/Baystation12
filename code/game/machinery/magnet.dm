@@ -129,7 +129,7 @@
 
 
 
-	process()
+	Process()
 		if(stat & NOPOWER)
 			on = 0
 
@@ -225,7 +225,7 @@
 		..()
 
 		if(autolink)
-			for(var/obj/machinery/magnetic_module/M in GLOB.machines)
+			for(var/obj/machinery/magnetic_module/M in SSmachines.machinery)
 				if(M.freq == frequency && M.code == code)
 					magnets.Add(M)
 
@@ -239,9 +239,9 @@
 			filter_path() // renders rpath
 
 
-	process()
+	Process()
 		if(magnets.len == 0 && autolink)
-			for(var/obj/machinery/magnetic_module/M in GLOB.machines)
+			for(var/obj/machinery/magnetic_module/M in SSmachines.machinery)
 				if(M.freq == frequency && M.code == code)
 					magnets.Add(M)
 

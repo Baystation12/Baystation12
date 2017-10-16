@@ -43,7 +43,7 @@
 /decl/dsay_communication/proc/can_receive(var/client/C, var/mob/M)
 	if(istype(C) && C.mob == M)
 		return TRUE
-	if(M.is_preference_disabled(/datum/client_preference/show_dsay))
+	if(M.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
 		return FALSE
 	if(istype(C) && M.is_key_ignored(C.key))
 		return FALSE

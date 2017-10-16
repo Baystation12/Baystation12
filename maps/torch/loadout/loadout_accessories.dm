@@ -29,10 +29,7 @@
 	display_name = "dashiki selection"
 	path = /obj/item/clothing/accessory/dashiki
 	allowed_roles = NON_MILITARY_ROLES
-
-/datum/gear/accessory/dashiki/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/dashiki)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/thawb
 	display_name = "thawb"
@@ -85,9 +82,14 @@
 	allowed_roles = SECURITY_ROLES
 
 /datum/gear/accessory/armband_mp
-	display_name = "military police armband"
+	display_name = "military police brassard"
 	path = /obj/item/clothing/accessory/armband/mp
-	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/hos, /datum/job/detective)
+	allowed_roles = SECURITY_ROLES
+
+/datum/gear/accessory/armband_ma
+	display_name = "master at arms brassard"
+	path = /obj/item/clothing/accessory/armband/ma
+	allowed_roles = SECURITY_ROLES
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
@@ -122,7 +124,7 @@
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
+	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
 
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
@@ -144,19 +146,13 @@
 	path = /obj/item/clothing/accessory/holster
 	cost = 3
 	allowed_roles = ARMED_ROLES
-
-/datum/gear/accessory/holster/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/holster)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/ubac
 	display_name = "ubac selection"
 	path = /obj/item/clothing/accessory/ubac
 	allowed_roles = MILITARY_ROLES
-
-/datum/gear/accessory/ubac/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/ubac)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/tie
 	display_name = "tie selection"
@@ -175,6 +171,19 @@
 	ties["navy tie"] = /obj/item/clothing/accessory/navy
 	ties["horrible tie"] = /obj/item/clothing/accessory/horrible
 	ties["brown tie"] = /obj/item/clothing/accessory/brown
+	gear_tweaks += new/datum/gear_tweak/path(ties)
+
+/datum/gear/accessory/tie_color
+	display_name = "colored tie"
+	path = /obj/item/clothing/accessory
+	allowed_roles = NON_MILITARY_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/tie_color/New()
+	..()
+	var/ties = list()
+	ties["tie"] = /obj/item/clothing/accessory
+	ties["striped tie"] = /obj/item/clothing/accessory/long
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
 /datum/gear/accessory/stethoscope
@@ -236,6 +245,60 @@
 	path = /obj/item/clothing/accessory/storage/bandolier
 	cost = 3
 
+/datum/gear/accessory/armor_pouches
+	display_name = "armor pouches"
+	path = /obj/item/clothing/accessory/storage/pouches
+	cost = 2
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/accessory/armor_pouches/New()
+	..()
+	var/pouches = list()
+	pouches["black pouches"] = /obj/item/clothing/accessory/storage/pouches
+	pouches["blue pouches"] = /obj/item/clothing/accessory/storage/pouches/blue
+	pouches["navy blue pouches"] = /obj/item/clothing/accessory/storage/pouches/navy
+	pouches["green pouches"] = /obj/item/clothing/accessory/storage/pouches/green
+	pouches["tan pouches"] = /obj/item/clothing/accessory/storage/pouches/tan
+	gear_tweaks += new/datum/gear_tweak/path(pouches)
+
+/datum/gear/accessory/large_pouches
+	display_name = "armor large pouches"
+	path = /obj/item/clothing/accessory/storage/pouches/large
+	cost = 5
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/accessory/large_pouches/New()
+	..()
+	var/lpouches = list()
+	lpouches["black pouches"] = /obj/item/clothing/accessory/storage/pouches/large
+	lpouches["blue pouches"] = /obj/item/clothing/accessory/storage/pouches/large/blue
+	lpouches["navy blue pouches"] = /obj/item/clothing/accessory/storage/pouches/large/navy
+	lpouches["green pouches"] = /obj/item/clothing/accessory/storage/pouches/large/green
+	lpouches["tan pouches"] = /obj/item/clothing/accessory/storage/pouches/large/tan
+	gear_tweaks += new/datum/gear_tweak/path(lpouches)
+
+/datum/gear/accessory/armor_deco
+	display_name = "armor customization"
+	path = /obj/item/clothing/accessory/armor/tag
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/accessory/armor_deco/New()
+	..()
+	var/tags = list()
+	tags["SCG flag"] = /obj/item/clothing/accessory/armor/tag
+	tags["EC crest"] = /obj/item/clothing/accessory/armor/tag/ec
+	tags["PCRC tag"] = /obj/item/clothing/accessory/armor/tag/pcrc
+	tags["SAARE tag"] = /obj/item/clothing/accessory/armor/tag/saare
+	tags["blood patch, O+"] = /obj/item/clothing/accessory/armor/tag/opos
+	tags["blood patch, O-"] = /obj/item/clothing/accessory/armor/tag/oneg
+	tags["blood patch, A+"] = /obj/item/clothing/accessory/armor/tag/apos
+	tags["blood patch, A-"] = /obj/item/clothing/accessory/armor/tag/aneg
+	tags["blood patch, B+"] = /obj/item/clothing/accessory/armor/tag/bpos
+	tags["blood patch, B-"] = /obj/item/clothing/accessory/armor/tag/bneg
+	tags["blood patch, AB+"] = /obj/item/clothing/accessory/armor/tag/abpos
+	tags["blood patch, AB-"] = /obj/item/clothing/accessory/armor/tag/abneg
+	gear_tweaks += new/datum/gear_tweak/path(tags)
+
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
 	path = /obj/item/clothing/accessory/toggleable/hawaii
@@ -258,7 +321,7 @@
 /datum/gear/accessory/solawardmajor
 	display_name = "SolGov major award selection"
 	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory/medal/iron/star
+	path = /obj/item/clothing/accessory
 	cost = 8
 	allowed_roles = SOLGOV_ROLES
 
@@ -278,7 +341,7 @@
 /datum/gear/accessory/solawardminor
 	display_name = "SolGov minor award selection"
 	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
-	path = /obj/item/clothing/accessory/medal/iron/sol
+	path = /obj/item/clothing/accessory
 	cost = 5
 	allowed_roles = SOLGOV_ROLES
 
@@ -294,7 +357,7 @@
 /datum/gear/accessory/ntaward
 	display_name = "NanoTrasen award selection"
 	description = "A medal or ribbon awarded to NanoTrasen personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory/medal/bronze/nanotrasen
+	path = /obj/item/clothing/accessory/medal
 	cost = 8
 	allowed_roles = NANOTRASEN_ROLES
 
@@ -316,4 +379,9 @@
 	path = /obj/item/clothing/accessory/kneepads
 
 /datum/gear/accessory/flannel
+	display_name = "flannel (colorable)"
+	path = /obj/item/clothing/accessory/toggleable/flannel
+	slot = slot_tie
+	flags = GEAR_HAS_COLOR_SELECTION
+	sort_category = "Accessories"
 	allowed_roles = SEMIFORMAL_ROLES

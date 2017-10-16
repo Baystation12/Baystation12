@@ -17,9 +17,7 @@
 
 /obj/machinery/biogenerator/New()
 	..()
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
+	create_reagents(1000)
 	beaker = new /obj/item/weapon/reagent_containers/glass/bottle(src)
 
 	component_parts = list()

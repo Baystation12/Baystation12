@@ -1,9 +1,12 @@
+//Shorts - new shorts of this type go in pants.dmi
+
 /obj/item/clothing/under/shorts
 	name = "athletic shorts"
 	icon_state = "redshorts"
 	desc = "95% Polyester, 5% Spandex!"
 	gender = PLURAL
 	body_parts_covered = LOWER_TORSO
+	item_icons = list(slot_w_uniform_str = 'icons/mob/pants.dmi')
 
 /obj/item/clothing/under/shorts/red
 	name = "red athletic shorts"

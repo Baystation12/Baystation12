@@ -10,48 +10,38 @@ var/const/MSC               =(1<<7)
 var/const/SRV               =(1<<8)
 var/const/SUP               =(1<<9)
 var/const/SPT               =(1<<10)
+var/const/EXP               =(1<<11)
+
 */
-var/list/assistant_occupations = list(
-)
+GLOBAL_LIST_EMPTY(assistant_occupations)
 
-var/list/command_positions = list(
-)
+GLOBAL_LIST_EMPTY(command_positions)
 
-var/list/engineering_positions = list(
-)
+GLOBAL_LIST_EMPTY(engineering_positions)
 
-var/list/medical_positions = list(
-)
+GLOBAL_LIST_EMPTY(medical_positions)
 
-var/list/science_positions = list(
-)
+GLOBAL_LIST_EMPTY(science_positions)
 
-var/list/cargo_positions = list(
-)
+GLOBAL_LIST_EMPTY(cargo_positions)
 
-var/list/civilian_positions = list(
-)
+GLOBAL_LIST_EMPTY(civilian_positions)
 
+GLOBAL_LIST_EMPTY(security_positions)
 
-var/list/security_positions = list(
-)
+GLOBAL_LIST_INIT(nonhuman_positions, list("pAI"))
 
-var/list/nonhuman_positions = list(
-	"pAI"
-)
+GLOBAL_LIST_EMPTY(service_positions)
 
-var/list/service_positions = list(
-)
+GLOBAL_LIST_EMPTY(supply_positions)
 
-var/list/supply_positions = list(
-)
+GLOBAL_LIST_EMPTY(support_positions)
 
-var/list/support_positions = list(
-)
+GLOBAL_LIST_EMPTY(exploration_positions)
 
 
 /proc/guest_jobbans(var/job)
-	return (job in command_positions)
+	return (job in GLOB.command_positions)
 
 /proc/get_job_datums()
 	var/list/occupations = list()
@@ -115,11 +105,11 @@ var/list/support_positions = list(
 
 /proc/get_department_rank_title(var/department, var/rank, var/ishead = 0)
 	if(department && rank)
-		if(department == "Command")
+		if(department == "Command" || ishead)
 			if(rank == 4)
 				return "Senior"
 			else
-				return null
+				return
 		switch(rank)
 			if(0 to 1) //Intern
 				switch(department)
@@ -154,8 +144,8 @@ var/list/support_positions = list(
 			//Sender isn't faking as someone who exists
 			if(!isnull(PDARec))
 				var/obj/machinery/message_server/linkedServer
-				if(message_servers && message_servers.len > 0)
-					linkedServer = message_servers[1]
+				if(GLOB.message_servers && GLOB.message_servers.len > 0)
+					linkedServer = GLOB.message_servers[1]
 				linkedServer.send_pda_message("[P.owner]", "[sender]","[message]")
 				P.new_message("[sender]", "[sender]", "NanoTrasen", message)
 				P.tnote.Add(list(list("sent" = 0, "owner" = "NanoTrasen", "job" = "[sender]", "message" = "[message]", "target" = "\ref[src]")))

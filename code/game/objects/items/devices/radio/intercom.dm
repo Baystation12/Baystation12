@@ -50,9 +50,9 @@
 	frequency = ENT_FREQ
 	canhear_range = 4
 
-/obj/item/device/radio/intercom/New()
-	..()
-	GLOB.processing_objects += src
+/obj/item/device/radio/intercom/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 	MyArea = get_area(src)
 
 /obj/item/device/radio/intercom/department/medbay/Initialize()
@@ -96,7 +96,7 @@
 	internal_channels[num2text(RAID_FREQ)] = list(access_syndicate)
 
 /obj/item/device/radio/intercom/Destroy()
-	GLOB.processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/device/radio/intercom/attack_ai(mob/user as mob)
@@ -124,7 +124,7 @@
 
 	return canhear_range
 
-/obj/item/device/radio/intercom/process()
+/obj/item/device/radio/intercom/Process()
 	if(((world.timeofday - last_tick) > 30) || ((world.timeofday - last_tick) < 0))
 		last_tick = world.timeofday
 

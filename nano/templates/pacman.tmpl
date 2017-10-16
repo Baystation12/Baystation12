@@ -100,11 +100,11 @@
 		Generator Status:
 	</div>
 	<div class="itemContent">
-		{{if data.temperature_overheat > 50}}
+		{{if data.temperature_overheat > 90}}
 			<span class="bad">DANGER: CRITICAL OVERHEAT! Deactivate generator immediately!</span>
-		{{else data.temperature_overheat > 20}}
+		{{else data.temperature_overheat > 50}}
 			<span class="average">WARNING: Overheating!</span>
-		{{else data.temperature_overheat > 1}}
+		{{else data.temperature_overheat > 10}}
 			<span class="average">Temperature High</span>
 		{{else}}
 			<span class="good">Optimal</span>

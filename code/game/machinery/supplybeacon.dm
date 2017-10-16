@@ -77,7 +77,7 @@
 	if(surplus() < 500)
 		if(user) to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
 		return
-	set_light(3, 3, "#00CCAA")
+	set_light(3, 3, "#00ccaa")
 	icon_state = "beacon_active"
 	use_power = 1
 	if(user) to_chat(user, "<span class='notice'>You activate the beacon. The supply drop will be dispatched soon.</span>")
@@ -98,7 +98,7 @@
 		deactivate()
 	..()
 
-/obj/machinery/power/supply_beacon/process()
+/obj/machinery/power/supply_beacon/Process()
 	if(expended)
 		return PROCESS_KILL
 	if(!use_power)

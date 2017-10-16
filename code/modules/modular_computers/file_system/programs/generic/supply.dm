@@ -2,7 +2,8 @@
 	filename = "supply"
 	filedesc = "Supply Management"
 	nanomodule_path = /datum/nano_module/supply
-	program_icon_state = "generic"
+	program_icon_state = "supply"
+	program_menu_icon = "cart"
 	extended_desc = "A management tool that allows for ordering of various supplies through the facility's cargo system. Some features may require additional access."
 	size = 21
 	available_on_ntnet = 1
@@ -45,6 +46,7 @@
 			data["credits_phoron"] = supply_controller.point_sources["phoron"] ? supply_controller.point_sources["phoron"] : 0
 			data["credits_platinum"] = supply_controller.point_sources["platinum"] ? supply_controller.point_sources["platinum"] : 0
 			data["credits_paperwork"] = supply_controller.point_sources["manifest"] ? supply_controller.point_sources["manifest"] : 0
+			data["credits_virology"] = supply_controller.point_sources["virology"] ? supply_controller.point_sources["virology"] : 0
 			data["can_print"] = can_print()
 
 		if(3)// Shuttle monitoring and control
@@ -257,15 +259,3 @@
 	for(var/source in point_source_descriptions)
 		t += "[point_source_descriptions[source]]: [supply_controller.point_sources[source] || 0]<br>"
 	print_text(t, user)
-
-/datum/nano_module/supply/proc/print_text(var/text, var/mob/user)
-	var/obj/item/modular_computer/MC = nano_host()
-	if(istype(MC))
-		if(!MC.nano_printer)
-			to_chat(user, "Error: No printer detected. Unable to print document.")
-			return
-
-		if(!MC.nano_printer.print_text(text))
-			to_chat(user, "Error: Printer was unable to print the document. It may be out of paper.")
-	else
-		to_chat(user, "Error: Unable to detect compatible printer interface. Are you running NTOSv2 compatible system?")

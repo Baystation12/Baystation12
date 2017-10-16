@@ -10,7 +10,7 @@
 
 /datum/universal_state/bluespace_jump/OnEnter()
 	var/space_zlevel = GLOB.using_map.get_empty_zlevel() //get a place for stragglers
-	for(var/mob/living/M in GLOB.mob_list)
+	for(var/mob/living/M in SSmobs.mob_list)
 		if(M.z in affected_levels)
 			var/area/A = get_area(M)
 			if(istype(A,/area/space)) //straggler
@@ -134,7 +134,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "mfoam"
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
-	color = "#FF9900"
+	color = "#ff9900"
 	alpha = 100
 	blend_mode = BLEND_SUBTRACT
 	layer = FULLSCREEN_LAYER

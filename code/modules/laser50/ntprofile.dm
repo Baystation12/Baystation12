@@ -3,8 +3,7 @@
 ^ Both mut be set properly, or things break.
 =====================================*/
 /datum/ntprofile
-	var/mob/living/carbon/human/owner
-	var/client/clientowner
+	var/mob/owner
 /*-------DEPARTMENT-RELATED-------*/
 	var/char_department = SRV
 	var/department_playtime = 0
@@ -38,55 +37,57 @@
 	sleep(2)
 	save_persistent()
 
-/datum/ntprofile/proc/Load_Profile(var/mob/living/carbon/human/H) //Init the profile.. Human set as owner.
-	if(H)
-		world.log << "H FOUND [H], [H.real_name], [H.client.ckey]"
-		owner = H //Assign Owner..
-		clientowner = H.client
-		load_persistent() //Load persistent info.
-		load_score()
-		assign_flag()
-		add_employeerecord("NanoTrasen", "Beginning of Employment in [H.client.prefs.prefs_department] Dept.", 5, 0, 0, 250, 1)
+/datum/ntprofile/New(var/mob/M)
+	if(M)
+		owner = M
+		Load_Profile(M)
+
+/datum/ntprofile/proc/Load_Profile() //Init the profile.. Human set as owner.
+	load_persistent() //Load persistent info.
+	load_score()
+	assign_flag()
+	calculate_department_rank(owner)
+	add_employeerecord("NanoTrasen", "Beginning of Employment in [owner.client.prefs.prefs_department] Dept.", 5, 0, 0, 250, 1)
 
 /datum/ntprofile/proc/load_persistent()
-	if(owner && clientowner) //Must be valid.
-		if(!clientowner.prefs.loaded_character)	return 0 //ERROR Fuck this shit
-	var/savefile/S = new /savefile("data/player_saves/[copytext(clientowner.ckey,1,2)]/[owner.client.ckey]/preferences.sav")
-	if(!S)					return 0
-	S.cd = GLOB.using_map.character_save_path(owner.client.prefs.default_slot)
+	if(owner) //Must be valid.
+		if(!owner.client.prefs.loaded_character)	return 0 //ERROR Fuck this shit
+		var/savefile/S = new /savefile("data/player_saves/[copytext(owner.client.ckey,1,2)]/[owner.client.ckey]/preferences.sav")
+		if(!S)					return 0
+		S.cd = GLOB.using_map.character_save_path(owner.client.prefs.default_slot)
 
-	S["char_department"]		>> char_department
-	S["department_playtime"]	>> department_playtime
-	S["dept_experience"]		>> department_experience
-	S["bank_balance"]			>> bank_balance
-	S["department_rank"]		>> department_rank
-	S["pension_balance"]		>> pension_balance
-	S["permadeath"]				>> permadeath
-	S["neurallaces"]			>> neurallaces
-	S["employee_records"]		>> employee_records
-	S["promotion"]				>> promoted
-	S["bonuscredit"]			>> bonuscredit
-	S["promoted"]				>> promoted
+		S["char_department"]		>> char_department
+		S["department_playtime"]	>> department_playtime
+		S["dept_experience"]		>> department_experience
+		S["bank_balance"]			>> bank_balance
+		S["department_rank"]		>> department_rank
+		S["pension_balance"]		>> pension_balance
+		S["permadeath"]				>> permadeath
+		S["neurallaces"]			>> neurallaces
+		S["employee_records"]		>> employee_records
+		S["promotion"]				>> promoted
+		S["bonuscredit"]			>> bonuscredit
+		S["promoted"]				>> promoted
 
 /datum/ntprofile/proc/save_persistent()
-	if(owner && clientowner) //Must be valid.
-		if(!clientowner.prefs.loaded_character)	return 0 //ERROR Fuck this shit
-	var/savefile/S = new /savefile("data/player_saves/[copytext(clientowner.ckey,1,2)]/[clientowner.ckey]/preferences.sav")
-	if(!S)					return 0
-	S.cd = GLOB.using_map.character_save_path(owner.client.prefs.default_slot)
+	if(owner) //Must be valid.
+		if(!owner.client.prefs.loaded_character)	return 0 //ERROR Fuck this shit
+		var/savefile/S = new /savefile("data/player_saves/[copytext(owner.client.ckey,1,2)]/[owner.client.ckey]/preferences.sav")
+		if(!S)					return 0
+		S.cd = GLOB.using_map.character_save_path(owner.client.prefs.default_slot)
 
-	S["char_department"]		<< char_department
-	S["department_playtime"]	<< department_playtime
-	S["dept_experience"]		<< department_experience
-	S["bank_balance"]			<< bank_balance
-	S["department_rank"]		<< department_rank
-	S["pension_balance"]		<< pension_balance
-	S["permadeath"]				<< permadeath
-	S["neurallaces"]			<< neurallaces
-	S["employee_records"]		<< employee_records
-	S["promotion"]				<< promoted
-	S["bonuscredit"]			<< bonuscredit
-	S["promoted"]				<< promoted
+		S["char_department"]		<< char_department
+		S["department_playtime"]	<< department_playtime
+		S["dept_experience"]		<< department_experience
+		S["bank_balance"]			<< bank_balance
+		S["department_rank"]		<< department_rank
+		S["pension_balance"]		<< pension_balance
+		S["permadeath"]				<< permadeath
+		S["neurallaces"]			<< neurallaces
+		S["employee_records"]		<< employee_records
+		S["promotion"]				<< promoted
+		S["bonuscredit"]			<< bonuscredit
+		S["promoted"]				<< promoted
 
 /datum/ntprofile/proc/load_score()
 	if(!owner || !employee_records)	return 5
@@ -99,8 +100,8 @@
 	return employeescore
 
 /datum/ntprofile/proc/assign_flag() //Updates the character department and sets the proper flags.
-	if(clientowner && clientowner.prefs.prefs_department)
-		switch(clientowner.prefs.prefs_department)
+	if(owner.client.prefs.prefs_department)
+		switch(owner.client.prefs.prefs_department)
 			if("Security")
 				char_department |= SEC
 			if("Medical")
@@ -139,7 +140,7 @@
 /datum/ntprofile/proc/display_employeerecords() //Displays all records.
 	. = list()
 	for(var/datum/ntprofile/employeerecord/R in employee_records)
-		. += "<b>[R.nanotrasen ? "OFFICIAL " : ""]RECORD| </b>[R.maker.real_name]: [R.note] ([R.recomscore])"
+		. += "<b>[R.nanotrasen ? "OFFICIAL " : ""]RECORD| </b>[R.maker]: [R.note] ([R.recomscore])"
 	return .
 /*		if(nanotrasen)
 			employee_records.Add("NOTE: NanoTrasen (OFFICIAL) -- [note] (S: [recomscore]")

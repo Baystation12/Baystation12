@@ -55,7 +55,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 		ADD_ICON_QUEUE(src)
 
 
-	process()
+	Process()
 		if(!parent)
 			..()
 		else

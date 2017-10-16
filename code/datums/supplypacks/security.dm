@@ -13,7 +13,7 @@
 
 /decl/hierarchy/supply_pack/security/lightarmor
 	name = "Armor - Light"
-	contains = list(/obj/item/clothing/suit/armor/vest = 4,
+	contains = list(/obj/item/clothing/suit/armor/pcarrier/light = 4,
 					/obj/item/clothing/head/helmet =4)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure
@@ -22,7 +22,7 @@
 
 /decl/hierarchy/supply_pack/security/armor
 	name = "Armor - Unmarked"
-	contains = list(/obj/item/clothing/suit/storage/vest = 2,
+	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium = 2,
 					/obj/item/clothing/head/helmet =2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
@@ -32,7 +32,7 @@
 /decl/hierarchy/supply_pack/security/tacticalarmor
 	name = "Armor - Tactical"
 	contains = list(/obj/item/clothing/under/tactical,
-					/obj/item/clothing/suit/storage/vest/tactical,
+					/obj/item/clothing/suit/armor/pcarrier/tan/tactical,
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,
 					/obj/item/clothing/glasses/tacgoggles,
@@ -45,12 +45,46 @@
 	access = access_armory
 
 /decl/hierarchy/supply_pack/security/armguards
-	name = "Armor - Arm guards"
-	contains = list(/obj/item/clothing/gloves/guards = 4)
+	name = "Armor - Black arm guards"
+	contains = list(/obj/item/clothing/accessory/armguards = 4)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Arm guards crate"
 	access = access_armory
+
+/decl/hierarchy/supply_pack/security/legguards
+	name = "Armor - Black leg guards"
+	contains = list(/obj/item/clothing/accessory/legguards = 4)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Leg guards crate"
+	access = access_armory
+
+/decl/hierarchy/supply_pack/security/armguards_random
+	name = "Armor - Assorted arm guards"
+	num_contained = 4
+	contains = list(/obj/item/clothing/accessory/armguards/blue,
+					/obj/item/clothing/accessory/armguards/navy,
+					/obj/item/clothing/accessory/armguards/green,
+					/obj/item/clothing/accessory/armguards/tan)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Arm guards crate"
+	access = access_armory
+	supply_method = /decl/supply_method/randomized
+
+/decl/hierarchy/supply_pack/security/legguards_random
+	name = "Armor - Assorted leg guards"
+	num_contained = 4
+	contains = list(/obj/item/clothing/accessory/legguards/blue,
+					/obj/item/clothing/accessory/legguards/navy,
+					/obj/item/clothing/accessory/legguards/green,
+					/obj/item/clothing/accessory/legguards/tan)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Leg guards crate"
+	access = access_armory
+	supply_method = /decl/supply_method/randomized
 
 /decl/hierarchy/supply_pack/security/riotarmor
 	name = "Armor - Riot gear"
@@ -208,19 +242,19 @@
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/bullpupammo
-	name = "Ammunition - 5.56"
-	contains = list(/obj/item/ammo_magazine/a556 = 4)
+	name = "Ammunition - 7.62"
+	contains = list(/obj/item/ammo_magazine/a762 = 4)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "\improper 5.56 ammunition crate"
+	containername = "\improper 7.62 ammunition crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/bullpupammopractice
-	name = "Ammunition - 5.56 practice"
-	contains = list(/obj/item/ammo_magazine/a556/practice = 8)
+	name = "Ammunition - 7.62 practice"
+	contains = list(/obj/item/ammo_magazine/a762/practice = 8)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "\improper 5.56 practice ammunition crate"
+	containername = "\improper 7.62 practice ammunition crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/forensics //Not access-restricted so PIs can use it.

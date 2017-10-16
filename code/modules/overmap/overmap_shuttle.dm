@@ -1,5 +1,3 @@
-var/list/sector_shuttles = list()
-
 #define waypoint_sector(waypoint) map_sectors["[waypoint.z]"]
 
 /datum/shuttle/autodock/overmap
@@ -8,14 +6,6 @@ var/list/sector_shuttles = list()
 	var/range = 0	//how many overmap tiles can shuttle go, for picking destinations and returning.
 
 	category = /datum/shuttle/autodock/overmap
-
-/datum/shuttle/autodock/overmap/New(_name)
-	..(_name)
-	sector_shuttles += src
-
-/datum/shuttle/autodock/overmap/Destroy()
-	sector_shuttles -= src
-	return ..()
 
 /datum/shuttle/autodock/overmap/proc/can_go()
 	if(!next_location)
@@ -33,6 +23,7 @@ var/list/sector_shuttles = list()
 /datum/shuttle/autodock/overmap/proc/set_destination(var/obj/effect/shuttle_landmark/A)
 	if(A != current_location)
 		next_location = A
+		move_time = initial(move_time) * (1 + get_dist(waypoint_sector(current_location),waypoint_sector(next_location)))
 
 /datum/shuttle/autodock/overmap/proc/get_possible_destinations()
 	var/list/res = list()

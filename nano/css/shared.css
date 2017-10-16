@@ -650,6 +650,12 @@ th.srv {
     color: #ffffff;
 }
 
+th.exp {
+    background: #68099e;
+    font-weight: bold;
+    color: #ffffff;
+}
+
 th.misc {
     background: #666666;
     font-weight: bold;
@@ -686,4 +692,12 @@ th.bot {
 }
 .wideTable tr:nth-child(odd) {
     background-color: #272727;
+}
+
+/* Candystriped rows for tables */
+.candystripe {
+	background-color: rgba(148, 148, 148, 0.25);
+}
+.candystripe:nth-child(odd) {
+	background-color: rgba(0, 0, 0, 0.16);
 }

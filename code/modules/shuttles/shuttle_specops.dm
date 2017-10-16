@@ -202,7 +202,7 @@
 /obj/machinery/light/small/readylight
 	brightness_range = 5
 	brightness_power = 1
-	brightness_color = "#DA0205"
+	brightness_color = "#da0205"
 	var/state = 0
 
 /obj/machinery/light/small/readylight/proc/set_state(var/new_state)

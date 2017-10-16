@@ -63,3 +63,5 @@
 		/area/exoplanet/snow,
 		/area/exoplanet/garbage
 	)
+
+	var/list/area_purity_test_exempt_areas = list()

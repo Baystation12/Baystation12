@@ -139,7 +139,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	if(H.getToxLoss() > 50)
 		. += "<font color='green'><b>Major systemic organ failure detected.</b></font>"
 	if(H.getFireLoss() > 50)
-		. += "<font color='#FFA500'><b>Severe burn damage detected.</b></font>"
+		. += "<font color='#ffa500'><b>Severe burn damage detected.</b></font>"
 	if(H.getBruteLoss() > 50)
 		. += "<font color='red'><b>Severe anatomical damage detected.</b></font>"
 
@@ -189,7 +189,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 				if(org.brute_dam > 0)
 					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, org.vital)] physical trauma</b></font>\]"
 				if(org.burn_dam > 0)
-					limb_result = "[limb_result] \[<font color = '#FFA500'><b>[get_wound_severity(org.burn_ratio, org.vital)] burns</b></font>\]"
+					limb_result = "[limb_result] \[<font color = '#ffa500'><b>[get_wound_severity(org.burn_ratio, org.vital)] burns</b></font>\]"
 				if(org.status & ORGAN_BLEEDING)
 					limb_result = "[limb_result] \[<span class='danger'>bleeding</span>\]"
 				. += limb_result
@@ -231,11 +231,20 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			print_reagent_default_message = FALSE
 			. += "<span class='warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
 
+	if(H.chem_doses.len)
+		var/list/chemtraces = list()
+		for(var/T in H.chem_doses)
+			var/datum/reagent/R = T
+			if(initial(R.scannable))
+				chemtraces += "[initial(R.name)] ([H.chem_doses[T]])"
+		if(chemtraces.len)
+			. += "<span class='notice'>Metabolism products of [english_list(chemtraces)] found in subject's system.</span>"
+
 	if(H.virus2.len)
 		for (var/ID in H.virus2)
 			if (ID in virusDB)
 				print_reagent_default_message = FALSE
-				var/datum/data/record/V = virusDB[ID]
+				var/datum/computer_file/data/virus_record/V = virusDB[ID]
 				. += "<span class='warning'>Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]</span>"
 
 	if(print_reagent_default_message)
@@ -341,15 +350,15 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 
 /obj/item/device/mass_spectrometer/New()
 	..()
-	var/datum/reagents/R = new/datum/reagents(5)
-	reagents = R
-	R.my_atom = src
+	create_reagents(5)
 
 /obj/item/device/mass_spectrometer/on_reagent_change()
+	update_icon()
+
+/obj/item/device/mass_spectrometer/update_icon()
+	icon_state = initial(icon_state)
 	if(reagents.total_volume)
-		icon_state = initial(icon_state) + "_s"
-	else
-		icon_state = initial(icon_state)
+		icon_state += "_s"
 
 /obj/item/device/mass_spectrometer/attack_self(mob/user as mob)
 	if (user.incapacitated())
@@ -358,6 +367,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 		return
 	if(reagents.total_volume)
 		var/list/blood_traces = list()
+		var/list/blood_doses = list()
 		for(var/datum/reagent/R in reagents.reagent_list)
 			if(R.type != /datum/reagent/blood)
 				reagents.clear_reagents()
@@ -365,13 +375,20 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 				return
 			else
 				blood_traces = params2list(R.data["trace_chem"])
+				blood_doses = params2list(R.data["dose_chem"])
 				break
 		var/dat = "Trace Chemicals Found: "
-		for(var/R in blood_traces)
+		for(var/T in blood_traces)
+			var/datum/reagent/R = T
 			if(details)
-				dat += "[R] ([blood_traces[R]] units) "
+				dat += "[initial(R.name)] ([blood_traces[T]] units) "
 			else
-				dat += "[R] "
+				dat += "[initial(R.name)] "
+		if(details)
+			dat += "\nMetabolism Products of Chemicals Found:"
+			for(var/T in blood_doses)
+				var/datum/reagent/R = T
+				dat += "[initial(R.name)] ([blood_doses[T]] units) "
 		to_chat(user, "[dat]")
 		reagents.clear_reagents()
 	return

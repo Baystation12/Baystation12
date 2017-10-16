@@ -2,6 +2,8 @@
 	startWhen				= 45
 	announceWhen			= 1
 	var/const/rad_interval 	= 5  	//Same interval period as radiation storms.
+	var/const/temp_incr     = 100
+	var/const/fire_loss     = 40
 	var/base_solar_gen_rate
 
 
@@ -9,7 +11,7 @@
 	endWhen = startWhen + rand(30,90) + rand(30,90) //2-6 minute duration
 
 /datum/event/solar_storm/announce()
-	command_announcement.Announce("A solar storm has been detected approaching the [station_name()]. Please halt all EVA activites immediately and return inside.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound)
+	command_announcement.Announce("A solar storm has been detected approaching the [station_name()]. Please halt all EVA activites immediately and return inside.", "[station_name()] Sensor Array")
 	adjust_solar_output(1.5)
 
 /datum/event/solar_storm/proc/adjust_solar_output(var/mult = 1)
@@ -36,12 +38,15 @@
 		if(!istype(T.loc,/area/space) && !istype(T,/turf/space))	//Make sure you're in a space area or on a space turf
 			continue
 
-		//Todo: Apply some burn damage from the heat of the sun. Until then, enjoy some moderate radiation.
-		L.rad_act(rand(15, 30))
+		//Apply some heat or burn damage from the sun.
+		if(istype(L, /mob/living/carbon/human))
+			L.bodytemperature += temp_incr
+		else
+			L.adjustFireLoss(fire_loss)
 
 
 /datum/event/solar_storm/end()
-	command_announcement.Announce("The solar storm has passed the [station_name()]. It is now safe to resume EVA activities. Please report to medbay if you experience any unusual symptoms. ", "[station_name()] Sensor Array")
+	command_announcement.Announce("The solar storm has passed the [station_name()]. It is now safe to resume EVA activities. ", "[station_name()] Sensor Array")
 	adjust_solar_output()
 
 

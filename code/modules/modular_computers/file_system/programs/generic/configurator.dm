@@ -7,6 +7,7 @@
 	filedesc = "Computer Configuration Tool"
 	extended_desc = "This program allows configuration of computer's hardware"
 	program_icon_state = "generic"
+	program_menu_icon = "gear"
 	unsendable = 1
 	undeletable = 1
 	size = 4

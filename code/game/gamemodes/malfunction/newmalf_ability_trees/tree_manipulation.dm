@@ -54,7 +54,7 @@
 	if(!ability_prechecks(user, price) || !ability_pay(user,price))
 		return
 	to_chat(user, "Sending feedback pulse...")
-	for(var/obj/machinery/power/apc/AP in GLOB.machines)
+	for(var/obj/machinery/power/apc/AP in SSmachines.machinery)
 		if(prob(5))
 			AP.overload_lighting()
 		if(prob(2.5) && (get_area(AP) != get_area(user))) // Very very small chance to actually destroy the APC, but not if the APC is powering the AI.
@@ -108,7 +108,7 @@
 		user.hacking = 0
 
 
-/datum/game_mode/malfunction/verb/machine_overload(obj/machinery/M in GLOB.machines)
+/datum/game_mode/malfunction/verb/machine_overload(obj/machinery/M in SSmachines.machinery)
 	set name = "Machine Overload"
 	set desc = "400 CPU - Causes cyclic short-circuit in machine, resulting in weak explosion after some time."
 	set category = "Software"
@@ -181,7 +181,7 @@
 		if(M)
 			qdel(M)
 
-/datum/game_mode/malfunction/verb/machine_upgrade(obj/machinery/M in GLOB.machines)
+/datum/game_mode/malfunction/verb/machine_upgrade(obj/machinery/M in SSmachines.machinery)
 	set name = "Machine Upgrade"
 	set desc = "800 CPU - Pushes existing hardware to it's technological limits by rapidly upgrading it's software."
 	set category = "Software"

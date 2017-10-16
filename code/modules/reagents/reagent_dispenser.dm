@@ -16,9 +16,7 @@
 		return
 
 /obj/structure/reagent_dispensers/New()
-	var/datum/reagents/R = new/datum/reagents(initial_capacity)
-	reagents = R
-	R.my_atom = src
+	create_reagents(initial_capacity)
 
 	if (!possible_transfer_amounts)
 		src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT
@@ -146,7 +144,7 @@
 
 	else if(isflamesource(W))
 		log_and_message_admins("triggered a fueltank explosion with \a [W].")
-		user.visible_message("<span class='danger'>\The [user] puts \the [W] to \the [src]!</span>", "<span class='danger'>You put your [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
+		user.visible_message("<span class='danger'>\The [user] puts \the [W] to \the [src]!</span>", "<span class='danger'>You put \the [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
 		src.explode()
 		return
 

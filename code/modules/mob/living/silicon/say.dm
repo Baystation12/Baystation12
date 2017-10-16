@@ -12,26 +12,26 @@
 			return 0
 		if(message_mode == "general")
 			message_mode = null
-		return radio.talk_into(src,message,message_mode,verb,speaking)
+		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
 
 /mob/living/silicon/ai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	..()
 	if(message_mode == "department")
 		return holopad_talk(message, verb, speaking)
 	else if(message_mode)
-		if (aiRadio.disabledAi || !has_power() || stat)
+		if (ai_radio.disabledAi || !has_power() || stat)
 			to_chat(src, "<span class='danger'>System Error - Transceiver Disabled.</span>")
 			return 0
 		if(message_mode == "general")
 			message_mode = null
-		return aiRadio.talk_into(src,message,message_mode,verb,speaking)
+		return ai_radio.talk_into(src,message,message_mode,verb,speaking)
 
 /mob/living/silicon/pai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	..()
 	if(message_mode)
 		if(message_mode == "general")
 			message_mode = null
-		return radio.talk_into(src,message,message_mode,verb,speaking)
+		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
 
 /mob/living/silicon/say_quote(var/text)
 	var/ending = copytext(text, length(text))
@@ -101,7 +101,7 @@
 
 
 			for(var/mob/M in GLOB.player_list)
-				if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
+				if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
 					M.hear_say(message,verb,speaking,null,null, src)
 					continue
 				if(M.loc && (M.locs[1] in hearturfs))

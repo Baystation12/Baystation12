@@ -225,7 +225,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	default_cartridge = /obj/item/weapon/cartridge/medical
 	icon_state = "pda-gene"
 
-
 // Special AI/pAI PDAs that cannot explode.
 /obj/item/device/pda/ai
 	icon_state = "NONE"
@@ -432,6 +431,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/has_reception = reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER
 	data["reception"] = has_reception
 
+	if(mode==41)
+		data["crew_manifest"] = html_crew_manifest(1, 0)
+
 	if(mode==2)
 		var/convopdas[0]
 		var/pdas[0]
@@ -461,8 +463,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_name"] = sanitize(c["owner"])
 				data["convo_job"] = sanitize(c["job"])
 				break
+
 	if(mode==41)
-		GLOB.data_core.get_manifest_list()
+		data["crew_manifest"] = html_crew_manifest(1, 0)
 
 	if(mode==31)
 		if(!user || !user.client)	return
@@ -473,8 +476,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		var/datum/job/job = job_master.GetJob(user:job)
 		data["ntprofile"] = list(\
 			"name" = "[owner]",\
-			"department" = "[get_department(user:CharRecords.char_department)]",\
-			"deptrank" = "[calculate_department_rank(user)]",\
+			"department" = "[get_department(user:CharRecords.char_department, 1)]",\
+			"deptrank" = "[calculate_department_rank(user)] ([get_department_rank_title(get_department(user:CharRecords.char_department, 1), user:CharRecords.department_rank)])",\
 			"job" = "[user:job]",\
 			"basepay" = "[job.base_pay]",\
 			"bank" = "[user:CharRecords.bank_balance]",\
@@ -486,6 +489,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			"permadeath" = "[user:CharRecords.permadeath]"\
 			)
 		ntprofilecache = data["ntprofile"] //Cacheing for saving unneeded shit?
+
 	if(mode==3)
 		var/turf/T = get_turf(user.loc)
 		if(!isnull(T))
@@ -554,7 +558,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		data["feed"] = feed
 
-	data["manifest"] = PDA_Manifest
+	data["manifest"] = nano_crew_manifest()
 
 	nanoUI = data
 	// update the ui if it exists, returns null if no ui is passed/found
@@ -1053,7 +1057,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
 		for(var/mob/M in GLOB.player_list)
-			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears)) // src.client is so that ghosts don't have to listen to mice
+			if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))
 					continue
 				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[t]</span></span>")

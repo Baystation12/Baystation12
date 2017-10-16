@@ -135,6 +135,10 @@
 	stat_modules +=	new/stat_rig_module/select(src)
 	stat_modules +=	new/stat_rig_module/charge(src)
 
+/obj/item/rig_module/Destroy()
+	deactivate()
+	. = ..()
+
 // Called when the module is installed into a suit.
 /obj/item/rig_module/proc/installed(var/obj/item/weapon/rig/new_holder)
 	holder = new_holder
@@ -216,7 +220,7 @@
 	return
 
 // Called by the hardsuit each rig process tick.
-/obj/item/rig_module/process()
+/obj/item/rig_module/Process()
 	if(active)
 		return active_power_cost
 	else

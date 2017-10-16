@@ -23,10 +23,13 @@ var/list/all_virtual_listeners = list()
 	src.host = host
 	GLOB.moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)
 
-	GLOB.mob_list -= src
 	all_virtual_listeners += src
 
 	update_icon()
+   
+/mob/observer/virtual/Initialize()
+	. = ..()
+	STOP_PROCESSING(SSmobs, src)
 
 /mob/observer/virtual/Destroy()
 	GLOB.moved_event.unregister(host, src, /atom/movable/proc/move_to_turf_or_null)
@@ -54,11 +57,8 @@ var/list/all_virtual_listeners = list()
 
 /atom/movable/Initialize()
 	. = ..()
-	if(ispath(virtual_mob))
-		if(shall_have_virtual_mob())
-			virtual_mob = new virtual_mob(get_turf(src), src)
-		else
-			virtual_mob = null
+	if(shall_have_virtual_mob())
+		virtual_mob = new virtual_mob(get_turf(src), src)
 
 /atom/movable/Destroy()
 	if(virtual_mob && !ispath(virtual_mob))
@@ -67,7 +67,4 @@ var/list/all_virtual_listeners = list()
 	return ..()
 
 /atom/movable/proc/shall_have_virtual_mob()
-	return TRUE
-
-/mob/shall_have_virtual_mob()
-	return (src in GLOB.mob_list)
+	return ispath(initial(virtual_mob))

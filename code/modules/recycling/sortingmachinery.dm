@@ -14,12 +14,16 @@
 	var/label_x
 	var/tag_x
 
-/obj/structure/bigDelivery/attack_hand(mob/user as mob)
-	unwrap()
+/obj/structure/bigDelivery/attack_robot(mob/user as mob)
+	unwrap(user)
 
-/obj/structure/bigDelivery/proc/unwrap()
-	// Destroy will drop our wrapped object on the turf, so let it.
-	qdel(src)
+/obj/structure/bigDelivery/attack_hand(mob/user as mob)
+	unwrap(user)
+
+/obj/structure/bigDelivery/proc/unwrap(var/mob/user)
+	if(Adjacent(user))
+		// Destroy will drop our wrapped object on the turf, so let it.
+		qdel(src)
 
 /obj/structure/bigDelivery/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/device/destTagger))
@@ -106,6 +110,18 @@
 			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
 	return
 
+/obj/structure/bigDelivery/Destroy()
+	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
+		wrapped.forceMove(get_turf(src))
+		if(istype(wrapped, /obj/structure/closet))
+			var/obj/structure/closet/O = wrapped
+			O.welded = 0
+		wrapped = null
+	var/turf/T = get_turf(src)
+	for(var/atom/movable/AM in contents)
+		AM.forceMove(T)
+	return ..()
+
 /obj/item/smallDelivery
 	desc = "A small wrapped package."
 	name = "small parcel"
@@ -117,17 +133,22 @@
 	var/nameset = 0
 	var/tag_x
 
-/obj/item/smallDelivery/attack_self(mob/user as mob)
-	if (src.wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.forceMove(user.loc)
-		user.drop_item()
-		if(ishuman(user))
-			user.put_in_hands(wrapped)
-		else
-			wrapped.forceMove(get_turf(src))
-
+/obj/item/smallDelivery/proc/unwrap(var/mob/user)
+	if (!wrapped || !Adjacent(user))
+		return
+	wrapped.forceMove(user.loc)
+	user.drop_item()
+	if(ishuman(user))
+		user.put_in_hands(wrapped)
+	else
+		wrapped.forceMove(get_turf(src))
 	qdel(src)
-	return
+
+/obj/item/smallDelivery/attack_robot(mob/user as mob)
+	unwrap(user)
+
+/obj/item/smallDelivery/attack_self(mob/user as mob)
+	unwrap(user)
 
 /obj/item/smallDelivery/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/device/destTagger))
@@ -311,18 +332,6 @@
 	if(..(user, 0))
 		to_chat(user, "<span class='notice'>There are [amount] units of package wrap left!</span>")
 	return
-
-/obj/structure/bigDelivery/Destroy()
-	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.forceMove(get_turf(src))
-		if(istype(wrapped, /obj/structure/closet))
-			var/obj/structure/closet/O = wrapped
-			O.welded = 0
-		wrapped = null
-	var/turf/T = get_turf(src)
-	for(var/atom/movable/AM in contents)
-		AM.forceMove(T)
-	return ..()
 
 /obj/item/device/destTagger
 	name = "destination tagger"

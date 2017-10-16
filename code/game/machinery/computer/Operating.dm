@@ -68,7 +68,7 @@
 	return
 
 
-/obj/machinery/computer/operating/process()
+/obj/machinery/computer/operating/Process()
 	if(..())
 		if(table.victim)
 			src.updateDialog()

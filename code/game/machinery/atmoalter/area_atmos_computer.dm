@@ -33,35 +33,35 @@
 				<style type="text/css">
 					a.green:link
 					{
-						color:#00CC00;
+						color:#00cc00;
 					}
 					a.green:visited
 					{
-						color:#00CC00;
+						color:#00cc00;
 					}
 					a.green:hover
 					{
-						color:#00CC00;
+						color:#00cc00;
 					}
 					a.green:active
 					{
-						color:#00CC00;
+						color:#00cc00;
 					}
 					a.red:link
 					{
-						color:#FF0000;
+						color:#ff0000;
 					}
 					a.red:visited
 					{
-						color:#FF0000;
+						color:#ff0000;
 					}
 					a.red:hover
 					{
-						color:#FF0000;
+						color:#ff0000;
 					}
 					a.red:active
 					{
-						color:#FF0000;
+						color:#ff0000;
 					}
 				</style>
 			</head>
@@ -167,7 +167,7 @@
 		var/turf/T = get_turf(src)
 		if(!T.loc) return
 		var/area/A = T.loc
-		for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in GLOB.machines)
+		for(var/obj/machinery/portable_atmospherics/powered/scrubber/huge/scrubber in SSmachines.machinery)
 			var/turf/T2 = get_turf(scrubber)
 			if(T2 && T2.loc)
 				var/area/A2 = T2.loc

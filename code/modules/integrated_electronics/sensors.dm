@@ -163,14 +163,14 @@
 		return
 	on = !on
 	if(on)
-		GLOB.processing_objects.Add(src)
+		START_PROCESSING(SSobj, src)
 		var/turf/T = get_turf(src)
 		if(T)
 			last_location = list(T.x, T.y, T.z)
 	else
-		GLOB.processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 
-/obj/item/integrated_circuit/accelerometer/process()
+/obj/item/integrated_circuit/accelerometer/Process()
 	var/turf/T = get_turf(src)
 	if(!T)
 		return

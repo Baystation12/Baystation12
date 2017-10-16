@@ -7,6 +7,7 @@
 	weaken = 1
 	penetrating = 5
 	armor_penetration = 70
+	penetration_modifier = 1.1
 	fire_sound = 'sound/weapons/railgun.ogg'
 
 /obj/item/projectile/bullet/magnetic/slug

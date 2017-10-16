@@ -302,7 +302,7 @@ obj/structure/closet/crate
 	)
 
 /obj/structure/closet/crate/secure/biohazard
-	name = "biohazarad cart"
+	name = "biohazard cart"
 	desc = "A heavy cart with extensive sealing. You shouldn't eat things you find in it."
 	icon_state = "biohazard"
 	icon_opened = "biohazardopen"
@@ -324,3 +324,13 @@ obj/structure/closet/crate
 
 /obj/structure/closet/crate/paper_refill/WillContain()
 	return list(/obj/item/weapon/paper = 30)
+
+/obj/structure/closet/crate/uranium
+	name = "fissibles crate"
+	desc = "A crate with a radiation sign on it."
+	icon_state = "radiation"
+	icon_opened = "radiationopen"
+	icon_closed = "radiation"
+
+/obj/structure/closet/crate/uranium/WillContain()
+	return list(/obj/item/stack/material/uranium/ten = 5)

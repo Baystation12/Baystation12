@@ -190,8 +190,8 @@ var/syndicate_code_response//Code response for traitors.
 	var/locations[] = length(stationlocs) ? stationlocs : drinks//if null, defaults to drinks instead.
 
 	var/names[] = list()
-	for(var/datum/data/record/t in GLOB.data_core.general)//Picks from crew manifest.
-		names += t.fields["name"]
+	for(var/datum/computer_file/crew_record/t in GLOB.all_crew_records)//Picks from crew manifest.
+		names += t.GetName()
 
 	var/maxwords = words//Extra var to check for duplicates.
 

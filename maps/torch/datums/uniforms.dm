@@ -14,6 +14,7 @@
 	var/utility_extra = null
 
 	var/service_under = null
+	var/service_skirt = null
 	var/service_over = null
 	var/service_shoes = null
 	var/service_hat = null
@@ -39,9 +40,10 @@
 	utility_under = /obj/item/clothing/under/utility/expeditionary
 	utility_shoes = /obj/item/clothing/shoes/dutyboots
 	utility_hat = /obj/item/clothing/head/soft/sol/expedition
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition, /obj/item/clothing/head/ushanka/expedition)
+	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary
+	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary
 	service_shoes = /obj/item/clothing/shoes/dress
 	service_hat = /obj/item/clothing/head/soft/sol/expedition
@@ -64,9 +66,10 @@
 	utility_under = /obj/item/clothing/under/utility/fleet
 	utility_shoes = /obj/item/clothing/shoes/dutyboots
 	utility_hat = /obj/item/clothing/head/utility/fleet
-	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet, /obj/item/clothing/head/ushanka/fleet, /obj/item/clothing/head/soft/sol/fleet)
+	utility_extra = list(/obj/item/clothing/head/beret/sol/fleet, /obj/item/clothing/head/ushanka/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/fleet, /obj/item/clothing/head/soft/sol/fleet)
 
 	service_under = /obj/item/clothing/under/service/fleet
+	service_skirt = /obj/item/clothing/under/service/fleet/skirt
 	service_over = null
 	service_shoes = /obj/item/clothing/shoes/dress/white
 	service_hat = /obj/item/clothing/head/dress/fleet
@@ -89,9 +92,10 @@ decl/hierarchy/mil_uniform/marine
 	utility_under = /obj/item/clothing/under/utility/marine
 	utility_shoes = /obj/item/clothing/shoes/jungleboots
 	utility_hat = /obj/item/clothing/head/utility/marine
-	utility_extra = list(/obj/item/clothing/head/ushanka/marine)
+	utility_extra = list(/obj/item/clothing/head/ushanka/marine/green, /obj/item/clothing/suit/storage/hooded/wintercoat/marine)
 
 	service_under = /obj/item/clothing/under/service/marine
+	service_skirt = /obj/item/clothing/under/service/marine/skirt
 	service_over = /obj/item/clothing/suit/storage/service/marine
 	service_shoes = /obj/item/clothing/shoes/dress
 	service_hat = /obj/item/clothing/head/service/marine

@@ -21,6 +21,7 @@
 	parent_organ = null
 	encased = "ribcage"
 	artery_name = "aorta"
+	cavity_name = "thoracic"
 
 /obj/item/organ/external/chest/robotize()
 	if(..())
@@ -50,6 +51,7 @@
 	dislocated = -1
 	gendered_icon = 1
 	artery_name = "iliac artery"
+	cavity_name = "abdominal"
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM

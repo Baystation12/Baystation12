@@ -49,6 +49,7 @@
 	fire_sound = 'sound/weapons/laser3.ogg'
 	damage = 30
 	armor_penetration = 30
+	penetration_modifier = 0.8
 
 	muzzle_type = /obj/effect/projectile/xray/muzzle
 	tracer_type = /obj/effect/projectile/xray/tracer
@@ -83,6 +84,16 @@
 	if(isturf(target))
 		target.ex_act(2)
 	..()
+
+/obj/item/projectile/beam/pulse/bogani
+	name = "pulsar"
+	icon_state = "bogb"
+	fire_sound='sound/weapons/blaster.ogg'
+	damage = 30
+
+	muzzle_type = /obj/effect/projectile/laser_bogani/muzzle
+	tracer_type = /obj/effect/projectile/laser_bogani/tracer
+	impact_type = /obj/effect/projectile/laser_bogani/impact
 
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"

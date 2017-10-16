@@ -21,21 +21,16 @@
 	var/coinsToProduce = 10
 
 
-/obj/machinery/mineral/mint/New()
-	..()
-	spawn( 5 )
-		for (var/dir in GLOB.cardinal)
-			src.input = locate(/obj/machinery/mineral/input, get_step(src, dir))
-			if(src.input) break
-		for (var/dir in GLOB.cardinal)
-			src.output = locate(/obj/machinery/mineral/output, get_step(src, dir))
-			if(src.output) break
-		GLOB.processing_objects.Add(src)
-		return
-	return
+/obj/machinery/mineral/mint/Initialize()
+	. = ..()
+	for (var/dir in GLOB.cardinal)
+		src.input = locate(/obj/machinery/mineral/input, get_step(src, dir))
+		if(src.input) break
+	for (var/dir in GLOB.cardinal)
+		src.output = locate(/obj/machinery/mineral/output, get_step(src, dir))
+		if(src.output) break
 
-
-/obj/machinery/mineral/mint/process()
+/obj/machinery/mineral/mint/Process()
 	if ( src.input)
 		var/obj/item/stack/O
 		O = locate(/obj/item/stack, input.loc)
@@ -85,12 +80,12 @@
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=iron'>Choose</A>")
-	dat += text("<br><font color='#8888FF'><b>Diamond inserted: </b>[amt_diamond]</font> ")
+	dat += text("<br><font color='#8888ff'><b>Diamond inserted: </b>[amt_diamond]</font> ")
 	if (chosen == "diamond")
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=diamond'>Choose</A>")
-	dat += text("<br><font color='#FF8800'><b>Phoron inserted: </b>[amt_phoron]</font> ")
+	dat += text("<br><font color='#ff8800'><b>Phoron inserted: </b>[amt_phoron]</font> ")
 	if (chosen == "phoron")
 		dat += text("chosen")
 	else

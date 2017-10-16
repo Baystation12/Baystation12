@@ -8,10 +8,10 @@
 	var/amount = 1
 
 	New(turf/newLoc,amt=1,nologs=0)
-		..()
 		if(!nologs)
 			log_and_message_admins(" - Liquid fuel has been spilled")
 		src.amount = amt
+		..()
 
 	proc/Spread(exclude=list())
 		//Allows liquid fuels to sometimes flow into other tiles.

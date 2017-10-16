@@ -51,7 +51,7 @@
 		icon_state = "[initial(name)]"
 
 	if(icon_state == "[initial(name)]_active")
-		set_light(1.5, 2, "#FF6A00")
+		set_light(1.5, 2, "#ff6a00")
 	else
 		set_light(0)
 
@@ -177,7 +177,7 @@
 // Stunbaton module for Security synthetics
 /obj/item/weapon/melee/baton/robot
 	bcell = null
-	hitcost = 100
+	hitcost = 20
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
 /obj/item/weapon/melee/baton/robot/examine_cell(mob/user)
@@ -222,7 +222,7 @@
 /obj/item/weapon/melee/baton/robot/electrified_arm/update_icon()
 	if(status)
 		icon_state = "electrified_arm_active"
-		set_light(1.5, 2, "#006AFF")
+		set_light(1.5, 2, "#006aff")
 	else
 		icon_state = "electrified_arm"
 		set_light(0)

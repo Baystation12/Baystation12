@@ -111,7 +111,7 @@
 		return
 
 	var/obj/O = new /obj(T)
-	O.set_light(range, -10, "#FFFFFF")
+	O.set_light(range, -10, "#ffffff")
 
 	spawn(duration)
 		qdel(O)

@@ -726,6 +726,7 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/shoes/laceup = 4,
 				/obj/item/clothing/shoes/black = 4,
 				/obj/item/clothing/shoes/jungleboots = 3,
+				/obj/item/clothing/shoes/desertboots = 3,
 				/obj/item/clothing/shoes/dutyboots = 3,
 				/obj/item/clothing/shoes/tactical = 1,
 				/obj/item/clothing/shoes/dress = 3,

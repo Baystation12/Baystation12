@@ -43,7 +43,7 @@
 	return ..()
 
 
-obj/machinery/resleever/process()
+obj/machinery/resleever/Process()
 
 	if(occupant)
 		occupant.Paralyse(4) // We need to always keep the occupant sleeping if they're in here.

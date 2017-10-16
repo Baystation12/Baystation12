@@ -11,6 +11,7 @@
 	var/list/loot = list(/obj/item/weapon/cell,/obj/item/stack/material/iron,/obj/item/stack/rods)
 	var/lootleft = 2
 	var/emptyprob = 30
+	var/health = 40
 
 /obj/structure/rubble/New()
 	..()
@@ -25,7 +26,7 @@
 	overlays.Cut()
 	var/list/parts = list()
 	for(var/i = 1 to 7)
-		var/image/I = image(icon,"rubble[rand(1,9)]")
+		var/image/I = image(icon,"rubble[rand(1,15)]")
 		if(prob(10))
 			var/atom/A = pick(loot)
 			if(initial(A.icon) && initial(A.icon_state))
@@ -33,7 +34,7 @@
 				I.icon_state = initial(A.icon_state)
 				I.color = initial(A.color)
 			if(!lootleft)
-				I.color = "#54362E"
+				I.color = "#54362e"
 		I.appearance_flags = PIXEL_SCALE
 		I.pixel_x = rand(-16,16)
 		I.pixel_y = rand(-16,16)
@@ -64,6 +65,12 @@
 			if(lootleft && prob(1))
 				var/obj/item/booty = pick(loot)
 				booty = new booty(loc)
+			qdel(src)
+	else 
+		..()
+		health -= I.force
+		if(health < 1)
+			visible_message("[user] clears away \the [src].")
 			qdel(src)
 
 /obj/structure/rubble/house

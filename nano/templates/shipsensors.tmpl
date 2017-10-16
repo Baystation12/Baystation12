@@ -1,0 +1,33 @@
+<h3>Sensors control console</h3>
+<div class='block'>
+	{{:helper.link(data.on ? 'Switch off' : 'Switch on', 'gear', { 'toggle' : 1 }, data.status != 'MISSING' ? null : 'disabled', data.on ? 'selected' : null)}}
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='white'>Status:</span>
+		</div>
+		<div class="itemContent">
+			{{:data.status}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='white'>Range:</span>
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.range, null, { 'range' : 1 }, null, null)}}
+		</div>
+	</div>
+</div>
+<div class='item'>
+	<div class="itemContent">
+		<div class='item'>
+			<span class='white'>Sector map view</span>
+			{{:helper.link(data.viewing ? 'Engaged' : 'Disengaged', 'shuffle', { 'viewing' : 1 }, null, data.viewing ? 'selected' : null)}}
+		</div>
+	</div>
+</div>
+{{if data.status == 'MISSING'}}
+	<div class='item'>
+		{{:helper.link('Link up with the sensor suite', 'gear', { 'link' : 1 }, data.status == 'MISSING' ? null : 'disabled', null)}}
+	</div>
+{{/if}}

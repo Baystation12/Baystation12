@@ -4,8 +4,9 @@
 		"species" = SPECIES_HUMAN,
 		"blood_DNA" = null,
 		"blood_type" = null,
-		"blood_colour" = "#A10808",
+		"blood_colour" = COLOR_BLOOD_HUMAN,
 		"trace_chem" = null,
+		"dose_chem" = null,
 		"virus2" = list(),
 		"antibodies" = list(),
 		"has_oxy" = 1
@@ -13,7 +14,7 @@
 	name = "Blood"
 	reagent_state = LIQUID
 	metabolism = REM * 5
-	color = "#C80000"
+	color = "#c80000"
 	taste_description = "iron"
 	taste_mult = 1.3
 	glass_name = "tomato juice"
@@ -26,7 +27,7 @@
 	return
 
 /datum/reagent/blood/proc/sync_to(var/mob/living/carbon/C)
-	data["donor"] = C
+	data["donor"] = weakref(C)
 	if (!data["virus2"])
 		data["virus2"] = list()
 	data["virus2"] |= virus_copylist(C.virus2)
@@ -39,6 +40,7 @@
 	for(var/datum/reagent/R in C.reagents.reagent_list)
 		temp_chem[R.type] = R.volume
 	data["trace_chem"] = list2params(temp_chem)
+	data["dose_chem"] = list2params(C.chem_doses)
 	data["blood_colour"] = C.species.get_blood_colour(C)
 	color = data["blood_colour"]
 
@@ -62,18 +64,22 @@
 /datum/reagent/blood/touch_turf(var/turf/simulated/T)
 	if(!istype(T) || volume < 3)
 		return
-	if(!data["donor"] || istype(data["donor"], /mob/living/carbon/human))
+	var/weakref/W = data["donor"]
+	if (!W)
 		blood_splatter(T, src, 1)
-	else if(istype(data["donor"], /mob/living/carbon/alien))
+	W = W.resolve()
+	if(istype(W, /mob/living/carbon/human))
+		blood_splatter(T, src, 1)
+	else if(istype(W, /mob/living/carbon/alien))
 		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, src, 1)
 		if(B)
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
 /datum/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 
-	if(dose > 5)
+	if(M.chem_doses[type] > 5)
 		M.adjustToxLoss(removed)
-	if(dose > 15)
+	if(M.chem_doses[type] > 15)
 		M.adjustToxLoss(removed)
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
@@ -108,7 +114,7 @@
 	name = "Antibodies"
 	taste_description = "slime"
 	reagent_state = LIQUID
-	color = "#0050F0"
+	color = "#0050f0"
 
 /datum/reagent/antibodies/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(src.data)
@@ -120,7 +126,7 @@
 	name = "Water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
-	color = "#0064C877"
+	color = "#0064c877"
 	metabolism = REM * 10
 	taste_description = "water"
 	glass_name = "water"
@@ -189,7 +195,7 @@
 			S.Target = null
 		if(S.Victim)
 			S.Feedstop()
-	if(dose == removed)
+	if(M.chem_doses[type] == removed)
 		M.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 		M.confused = max(M.confused, 2)
 

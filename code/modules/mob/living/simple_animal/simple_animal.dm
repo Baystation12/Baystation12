@@ -60,6 +60,9 @@
 	var/supernatural = 0
 	var/purge = 0
 
+	// contained in a cage
+	var/in_stasis = 0
+
 /mob/living/simple_animal/Life()
 	..()
 
@@ -113,6 +116,9 @@
 					audible_emote("[pick(emote_hear)].")
 				if("emote_see")
 					visible_emote("[pick(emote_see)].")
+
+	if(in_stasis)
+		return 1 // return early to skip atmos checks
 
 	//Atmos
 	var/atmos_suitable = 1

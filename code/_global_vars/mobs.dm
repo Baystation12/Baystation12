@@ -5,7 +5,6 @@ GLOBAL_LIST_EMPTY(ckey_directory) //all ckeys with associated client
 
 
 GLOBAL_LIST_EMPTY(player_list)      //List of all mobs **with clients attached**. Excludes /mob/new_player
-GLOBAL_LIST_EMPTY(mob_list)         //List of all mobs, including clientless
 GLOBAL_LIST_EMPTY(human_mob_list)   //List of all human mobs and sub-types, including clientless
 GLOBAL_LIST_EMPTY(silicon_mob_list) //List of all silicon mobs, including clientless
 GLOBAL_LIST_EMPTY(living_mob_list_) //List of all alive mobs, including clientless. Excludes /mob/new_player

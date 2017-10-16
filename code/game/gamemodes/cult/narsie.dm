@@ -58,7 +58,7 @@ var/global/list/narsie_list = list()
 				evacuation_controller.call_evacuation(null, TRUE, 1)
 				evacuation_controller.evac_no_return = 0 // Cannot recall
 
-/obj/singularity/narsie/process()
+/obj/singularity/narsie/Process()
 	eat()
 
 	if (!target || prob(5))
@@ -331,7 +331,7 @@ var/global/list/narsie_list = list()
 	chained = 1
 	move_self = 0
 	icon_state ="narsie-chains"
-	for(var/mob/M in GLOB.mob_list)//removing the client image of nar-sie while it is chained
+	for(var/mob/M in SSmobs.mob_list)//removing the client image of nar-sie while it is chained
 		if(M.client)
 			M.see_narsie(src)
 

@@ -57,7 +57,7 @@
 
 	flags = NO_SLIP | CAN_NAB | NO_BLOCK | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
 
 	bump_flag = HEAVY
 	push_flags = ALLMOBS
@@ -98,7 +98,8 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/nab,
 		/mob/living/carbon/human/proc/active_camo,
-		/mob/living/carbon/human/proc/switch_stance
+		/mob/living/carbon/human/proc/switch_stance,
+		/mob/living/carbon/human/proc/threat_display
 		)
 
 /datum/species/nabber/get_eyes(var/mob/living/carbon/human/H)
@@ -176,11 +177,7 @@
 /datum/species/nabber/handle_movement_delay_special(var/mob/living/carbon/human/H)
 	var/tally = 0
 
-	if(H.cloaked)
-		H.visible_message("<span class='danger'>[H] suddenly appears!</span>")
-		H.cloaked = 0
-
-	H.update_icons()
+	H.remove_cloaking_source(src)
 
 	var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
 	if(istype(B,/obj/item/organ/internal/brain/nabber))
@@ -201,3 +198,72 @@
 	affecting.apply_damage(15, BRUTE, BP_CHEST, armor, DAM_SHARP, "organic punctures")
 	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
 	affecting.Stun(10)
+
+/datum/species/nabber/update_skin(var/mob/living/carbon/human/H)
+
+	if(H.stat)
+		H.skin_state = SKIN_NORMAL
+
+	switch(H.skin_state)
+		if(SKIN_NORMAL)
+			return
+		if(SKIN_THREAT)
+
+			var/image_key = "[H.species.get_race_key(src)]"
+
+			for(var/organ_tag in H.species.has_limbs)
+				var/obj/item/organ/external/part = H.organs_by_name[organ_tag]
+				if(isnull(part) || part.is_stump())
+					image_key += "0"
+					continue
+				if(part)
+					image_key += "[part.species.get_race_key(part.owner)]"
+					image_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
+				if(part.robotic >= ORGAN_ROBOT)
+					image_key += "2[part.model ? "-[part.model]": ""]"
+				else if(part.status & ORGAN_DEAD)
+					image_key += "3"
+				else
+					image_key += "1"
+
+			var/image/threat_image = skin_overlays[image_key]
+			if(!threat_image)
+				var/icon/base_icon = icon(H.stand_icon)
+				var/icon/I = new('icons/mob/human_races/r_nabber_threat.dmi', "threat")
+				base_icon.Blend(COLOR_BLACK, ICON_MULTIPLY)
+				base_icon.Blend(I, ICON_ADD)
+				threat_image  = image(base_icon)
+				skin_overlays[image_key] = threat_image
+
+			return(threat_image)
+	return
+
+/datum/species/nabber/disarm_attackhand(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/target)
+	if(attacker.pulling_punches || target.lying || attacker == target)
+		return ..(attacker, target)
+	if(world.time < attacker.last_attack + 20)
+		to_chat(attacker, "<span class='notice'>You can't attack again so soon.</span>")
+		return 0
+	attacker.last_attack = world.time
+	var/turf/T = get_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
+	playsound(target.loc, 'sound/weapons/pushhiss.ogg', 50, 1, -1)
+	if(!T.density)
+		step(target, get_dir(get_turf(attacker), get_turf(target)))
+		target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
+	else
+		target.turf_collision(T, target.throw_speed / 2)
+	if(prob(50))
+		target.set_dir(GLOB.reverse_dir[target.dir])
+
+/datum/species/nabber/get_additional_examine_text(var/mob/living/carbon/human/H)
+	var/datum/gender/T = gender_datums[H.get_gender()]
+	if(H.pulling_punches)
+		return "\n[T.His] manipulation arms are out and [T.he] looks ready to use complex items."
+	else
+		return "\n<span class='warning'>[T.His] deadly upper arms are raised and [T.he] looks ready to attack!</span>"
+
+/datum/species/nabber/handle_post_spawn(var/mob/living/carbon/human/H)
+	..()
+	H.pulling_punches = TRUE
+	H.nabbing = FALSE
+

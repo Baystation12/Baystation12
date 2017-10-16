@@ -22,7 +22,7 @@
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	ADD_ICON_QUEUE(src)
 
-/obj/machinery/sleeper/process()
+/obj/machinery/sleeper/Process()
 	if(stat & (NOPOWER|BROKEN))
 		return
 

@@ -9,7 +9,7 @@
 	var/obj/machinery/computer/department_manager/DeptMan
 
 /datum/ntrequest/New()
-	for(var/obj/machinery/computer/department_manager/DM in GLOB.machines)
+	for(var/obj/machinery/computer/department_manager/DM in SSmachines.machinery)
 		if(DM && DM.department == "NanoTrasen")
 			DeptMan = DM //Assign department manager before-hand.
 	requestid = rand(0, 1000) //Basically 1000 requests per time.

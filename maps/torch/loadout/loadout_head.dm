@@ -48,7 +48,7 @@
 
 /datum/gear/head/bandana
 	display_name = "bandana selection"
-	path = /obj/item/clothing/head/bandana
+	path = /obj/item/clothing/head
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/head/bandana/New()
@@ -66,6 +66,8 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/head/cap
+	display_name = "cap selection"
+	path = /obj/item/clothing/head
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/head/hairflower
@@ -78,10 +80,20 @@
 	allowed_roles = TECHNICAL_ROLES
 
 /datum/gear/head/formalhat
+<<<<<<< HEAD
+	display_name = "formal hat selection"
+	path = /obj/item/clothing/head
+=======
+>>>>>>> Apollo-Dev
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/head/informalhat
+<<<<<<< HEAD
+	display_name = "informal hat selection"
+	path = /obj/item/clothing/head
+=======
 	path = /obj/item/clothing/head/cowboy_hat
+>>>>>>> Apollo-Dev
 	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/head/welding
@@ -90,6 +102,24 @@
 /datum/gear/head/solhat
 	display_name = "Sol Central Government Cap"
 	path = /obj/item/clothing/head/soft/sol
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/fleethat
+	display_name = "Fleet Cap"
+	path = /obj/item/clothing/head/utility/fleet
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/marinehat
+	display_name = "Marine Cap"
+	path = /obj/item/clothing/head/utility/marine
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/echat
+	display_name = "EC Cap"
+	path = /obj/item/clothing/head/soft/sol/expedition
+	cost = 0
 	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/head/surgical

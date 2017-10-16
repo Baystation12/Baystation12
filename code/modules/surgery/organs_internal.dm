@@ -140,7 +140,7 @@
 
 	if(!affected)
 		return 0
-	
+
 	if(affected.robotic >= ORGAN_ROBOT)
 		return 0
 
@@ -274,8 +274,6 @@
 	var/obj/item/organ/internal/O = tool
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(!affected) return
-	var/organ_compatible
-	var/organ_missing
 
 	if(!istype(O))
 		return 0
@@ -285,37 +283,25 @@
 		return SURGERY_FAILURE
 
 	if(!target.species)
-		CRASH("Target ([target]) of surgery [src.type] has no species!")
+		CRASH("Target ([target]) of surgery [type] has no species!")
 		return SURGERY_FAILURE
 
 	var/o_is = (O.gender == PLURAL) ? "are" : "is"
 	var/o_a =  (O.gender == PLURAL) ? "" : "a "
-	var/o_do = (O.gender == PLURAL) ? "don't" : "doesn't"
 
 	if(O.damage > (O.max_damage * 0.75))
-		to_chat(user, "<span class='warning'>\The [O.organ_tag] [o_is] in no state to be transplanted.</span>")
+		to_chat(user, "<span class='warning'>\The [O.name] [o_is] in no state to be transplanted.</span>")
+		return SURGERY_FAILURE
+	if(O.w_class > affected.cavity_max_w_class)
+		to_chat(user, "<span class='warning'>\The [O.name] [o_is] too big for [affected.cavity_name] cavity!</span>")
 		return SURGERY_FAILURE
 
-	if(!target.internal_organs_by_name[O.organ_tag])
-		organ_missing = 1
-	else
-		to_chat(user, "<span class='warning'>\The [target] already has [o_a][O.organ_tag].</span>")
+	var/obj/item/organ/internal/I = target.internal_organs_by_name[O.organ_tag]
+	if(I && (I.parent_organ == affected.organ_tag || istype(O, /obj/item/organ/internal/stack)))
+		to_chat(user, "<span class='warning'>\The [target] already has [o_a][O.name].</span>")
 		return SURGERY_FAILURE
 
-	if(O && affected.organ_tag == O.parent_organ)
-		organ_compatible = 1
-
-	else if(istype(O, /obj/item/organ/internal/stack))
-		if(!target.internal_organs_by_name[O.organ_tag])
-			organ_missing = 1
-		else
-			to_chat(user, "<span class='warning'>\The [target] already has [o_a][O.organ_tag].</span>")
-			return SURGERY_FAILURE
-	else
-		to_chat(user, "<span class='warning'>\The [O.organ_tag] [o_do] normally go in \the [affected.name].</span>")
-		return SURGERY_FAILURE
-
-	return ..() && organ_missing && organ_compatible
+	return ..()
 
 /datum/surgery_step/internal/replace_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -373,12 +359,15 @@
 
 	var/list/attachable_organs = list()
 	for(var/obj/item/organ/I in affected.implants)
-		if(I && (I.status & ORGAN_CUT_AWAY) && I.parent_organ == target_zone)
+		if(I && (I.status & ORGAN_CUT_AWAY))
 			attachable_organs |= I
 
-	var/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in attachable_organs
+	var/obj/item/organ/organ_to_replace = input(user, "Which organ do you want to reattach?") as null|anything in attachable_organs
 	if(!organ_to_replace)
 		return 0
+	if(organ_to_replace.parent_organ != affected.organ_tag)
+		to_chat(user, "<span class='warning'>You can't find anywhere to attach [organ_to_replace] to!</span>")
+		return SURGERY_FAILURE
 
 	target.op_stage.current_organ = organ_to_replace
 	return ..()
@@ -473,20 +462,21 @@
 	var/obj/item/weapon/reagent_containers/container = tool
 
 	var/amount = container.amount_per_transfer_from_this
-	var/datum/reagents/temp = new(amount)
-	container.reagents.trans_to_holder(temp, amount)
+	var/datum/reagents/temp_reagents = new(amount, GLOB.temp_reagents_holder)
+	container.reagents.trans_to_holder(temp_reagents, amount)
 
-	var/rejuvenate = temp.has_reagent(/datum/reagent/peridaxon)
+	var/rejuvenate = temp_reagents.has_reagent(/datum/reagent/peridaxon)
 
-	var/trans = temp.trans_to_mob(target, temp.total_volume, CHEM_BLOOD) //technically it's contact, but the reagents are being applied to internal tissue
+	var/trans = temp_reagents.trans_to_mob(target, temp_reagents.total_volume, CHEM_BLOOD) //technically it's contact, but the reagents are being applied to internal tissue
 	if (trans > 0)
 
 		if(rejuvenate)
 			affected.status &= ~ORGAN_DEAD
 			affected.owner.update_body(1)
 
-		user.visible_message("<span class='notice'>[user] applies [trans] units of the solution to affected tissue in [target]'s [affected.name]</span>.", \
-			"<span class='notice'>You apply [trans] units of the solution to affected tissue in [target]'s [affected.name] with \the [tool].</span>")
+		user.visible_message("<span class='notice'>[user] applies [trans] unit\s of the solution to affected tissue in [target]'s [affected.name]</span>.", \
+			"<span class='notice'>You apply [trans] unit\s of the solution to affected tissue in [target]'s [affected.name] with \the [tool].</span>")
+	qdel(temp_reagents)
 
 /datum/surgery_step/internal/treat_necrosis/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)

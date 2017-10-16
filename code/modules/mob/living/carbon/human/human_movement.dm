@@ -14,6 +14,9 @@
 	if(CE_SPEEDBOOST in chem_effects)
 		return -1
 
+	if(CE_SLOWDOWN in chem_effects)
+		tally += chem_effects[CE_SLOWDOWN]
+
 	var/health_deficiency = (maxHealth - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 

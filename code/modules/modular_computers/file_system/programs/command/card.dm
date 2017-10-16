@@ -3,6 +3,7 @@
 	filedesc = "ID card modification program"
 	nanomodule_path = /datum/nano_module/program/card_mod
 	program_icon_state = "id"
+	program_menu_icon = "key"
 	extended_desc = "Program for programming crew ID cards."
 	required_access = access_change_ids
 	requires_ntnet = 0
@@ -19,7 +20,7 @@
 
 	data["src"] = "\ref[src]"
 	data["station_name"] = station_name()
-	data["manifest"] = GLOB.data_core ? GLOB.data_core.get_manifest(0) : null
+	data["manifest"] = html_crew_manifest()
 	data["assignments"] = show_assignments
 	if(program && program.computer)
 		data["have_id_slot"] = !!program.computer.card_slot
@@ -42,15 +43,16 @@
 		data["id_owner"] = id_card && id_card.registered_name ? id_card.registered_name : "-----"
 		data["id_name"] = id_card ? id_card.name : "-----"
 
-	data["command_jobs"] = format_jobs(command_positions)
-	data["support_jobs"] = format_jobs(support_positions)
-	data["engineering_jobs"] = format_jobs(engineering_positions)
-	data["medical_jobs"] = format_jobs(medical_positions)
-	data["science_jobs"] = format_jobs(science_positions)
-	data["security_jobs"] = format_jobs(security_positions)
-	data["service_jobs"] = format_jobs(service_positions)
-	data["supply_jobs"] = format_jobs(supply_positions)
-	data["civilian_jobs"] = format_jobs(civilian_positions)
+	data["command_jobs"] = format_jobs(GLOB.command_positions)
+	data["support_jobs"] = format_jobs(GLOB.support_positions)
+	data["engineering_jobs"] = format_jobs(GLOB.engineering_positions)
+	data["medical_jobs"] = format_jobs(GLOB.medical_positions)
+	data["science_jobs"] = format_jobs(GLOB.science_positions)
+	data["security_jobs"] = format_jobs(GLOB.security_positions)
+	data["exploration_jobs"] = format_jobs(GLOB.exploration_positions)
+	data["service_jobs"] = format_jobs(GLOB.service_positions)
+	data["supply_jobs"] = format_jobs(GLOB.supply_positions)
+	data["civilian_jobs"] = format_jobs(GLOB.civilian_positions)
 	data["centcom_jobs"] = format_jobs(get_all_centcom_jobs())
 
 	data["all_centcom_access"] = is_centcom ? get_accesses(1) : null
@@ -153,7 +155,7 @@
 				else
 					var/contents = {"<h4>Crew Manifest</h4>
 									<br>
-									[GLOB.data_core ? GLOB.data_core.get_manifest(0) : ""]
+									[html_crew_manifest()]
 									"}
 					if(!computer.nano_printer.print_text(contents,text("crew manifest ([])", stationtime2text())))
 						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
@@ -162,8 +164,6 @@
 						computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
 		if("eject")
 			if(computer && computer.card_slot)
-				if(id_card)
-					GLOB.data_core.manifest_modify(id_card.registered_name, id_card.assignment)
 				computer.proc_eject_id(user)
 		if("terminate")
 			if(computer && can_run(user, 1))

@@ -11,7 +11,7 @@
 "ak" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/derelict/ship)
 "al" = (/obj/structure/shuttle/engine/propulsion{icon_state = "propulsion"; dir = 4},/turf/space,/area/derelict/ship)
 "am" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/regular{pixel_x = 6; pixel_y = -5},/turf/simulated/floor/tiled,/area/derelict/ship)
-"an" = (/obj/machinery/computer/med_data,/turf/simulated/floor/shuttle/white,/area/derelict/ship)
+"an" = (/obj/item/modular_computer/console/preset/medical,/turf/simulated/floor/shuttle/white,/area/derelict/ship)
 "ao" = (/obj/machinery/door/airlock/glass,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/derelict/ship)
 "ap" = (/obj/item/weapon/scalpel,/turf/simulated/floor/tiled,/area/derelict/ship)
 "aq" = (/obj/machinery/portable_atmospherics/canister/air,/turf/simulated/floor/tiled,/area/derelict/ship)

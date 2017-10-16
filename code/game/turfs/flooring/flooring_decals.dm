@@ -198,7 +198,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/grey
 	name = "grey corner"
-	color = "#8D8C8C"
+	color = "#8d8c8c"
 
 /obj/effect/floor_decal/corner/grey/diagonal
 	icon_state = "corner_white_diagonal"
@@ -216,7 +216,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/spline/fancy/wood
 	name = "spline - wood"
-	color = "#CB9E04"
+	color = "#cb9e04"
 
 /obj/effect/floor_decal/spline/fancy/wood/corner
 	icon_state = "spline_fancy_corner"
@@ -254,7 +254,7 @@ var/list/floor_decals = list()
 	alpha = 229
 
 /obj/effect/floor_decal/industrial/hatch/yellow
-	color = "#CFCF55"
+	color = "#cfcf55"
 
 /obj/effect/floor_decal/industrial/outline
 	name = "white outline"
@@ -267,11 +267,11 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/industrial/outline/blue
 	name = "blue outline"
-	color = "#00B8B2"
+	color = "#00b8b2"
 
 /obj/effect/floor_decal/industrial/outline/yellow
 	name = "yellow outline"
-	color = "#CFCF55"
+	color = "#cfcf55"
 
 /obj/effect/floor_decal/industrial/outline/grey
 	name = "grey outline"
@@ -292,9 +292,15 @@ var/list/floor_decals = list()
 	icon_state = "carpet_edges"
 
 /obj/effect/floor_decal/carpet/blue
-	name = "carpet"
+	name = "turquoise carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_state = "bcarpet_edges"
+
+/obj/effect/floor_decal/carpet/blue2
+	name = "blue carpet"
+	icon = 'icons/turf/flooring/carpet.dmi'
+	icon_state = "b2carpet_edges"
+
 
 /obj/effect/floor_decal/carpet/corners
 	name = "carpet"

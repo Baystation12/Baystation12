@@ -69,8 +69,14 @@ var/list/flooring_types
 	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 
 /decl/flooring/carpet/blue
-	name = "carpet"
+	name = "turquoise carpet"
 	icon_base = "bcarpet"
+	build_type = null
+	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+
+/decl/flooring/carpet/blue2
+	name = "blue carpet"
+	icon_base = "b2carpet"
 	build_type = null
 	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 
@@ -95,7 +101,6 @@ var/list/flooring_types
 	flags = TURF_REMOVE_SCREWDRIVER
 
 /decl/flooring/tiling/white
-	name = "floor"
 	desc = "How sterile."
 	icon_base = "white"
 	has_damage_range = null
@@ -103,7 +108,6 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/floor_white
 
 /decl/flooring/tiling/dark
-	name = "floor"
 	desc = "How ominous."
 	icon_base = "dark"
 	has_damage_range = null
@@ -111,7 +115,6 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/floor_dark
 
 /decl/flooring/tiling/freezer
-	name = "floor"
 	desc = "Don't slip."
 	icon_base = "freezer"
 	has_damage_range = null

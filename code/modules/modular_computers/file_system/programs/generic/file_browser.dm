@@ -1,10 +1,9 @@
-#define MAX_TEXTFILE_LENGTH 128000		// 512GQ file
-
 /datum/computer_file/program/filemanager
 	filename = "filemanager"
 	filedesc = "NTOS File Manager"
 	extended_desc = "This program allows management of files."
 	program_icon_state = "generic"
+	program_menu_icon = "folder-collapsed"
 	size = 8
 	requires_ntnet = 0
 	available_on_ntnet = 0
@@ -205,4 +204,3 @@
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
-#undef MAX_TEXTFILE_LENGTH

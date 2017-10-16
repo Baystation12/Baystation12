@@ -1,13 +1,3 @@
-
-//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent type
-/proc/do_initialize_chemical_reagents()
-	. = list()
-	for(var/path in subtypesof(/datum/reagent))
-		var/datum/reagent/D = new path()
-		if(!D.name)
-			continue
-		.[D.type] = D
-
 /datum/reagent
 	var/name = "Reagent"
 	var/description = "A non-descript chemical."
@@ -20,8 +10,6 @@
 	var/metabolism = REM // This would be 0.2 normally
 	var/ingest_met = 0
 	var/touch_met = 0
-	var/dose = 0
-	var/max_dose = 0
 	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = "#000000"
@@ -32,6 +20,12 @@
 	var/glass_name = "something"
 	var/glass_desc = "It's a glass of... what, exactly?"
 	var/list/glass_special = null // null equivalent to list()
+
+/datum/reagent/New(var/datum/reagents/holder)
+	if(!istype(holder))
+		CRASH("Invalid reagents holder: [log_info_line(holder)]")
+	src.holder = holder
+	..()
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	holder.remove_reagent(type, amount)
@@ -67,12 +61,10 @@
 
 	//adjust effective amounts - removed, dose, and max_dose - for mob size
 	var/effective = removed
-	max_dose = max(volume, max_dose)
 	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
 		effective *= (MOB_MEDIUM/M.mob_size)
-		max_dose *= (MOB_MEDIUM/M.mob_size)
 
-	dose = min(dose + effective, max_dose)
+	M.chem_doses[type] = M.chem_doses[type] + effective
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
 			if(CHEM_BLOOD)
@@ -96,6 +88,7 @@
 	return
 
 /datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
+	M.add_chemical_effect(CE_TOXIN, 1)
 	M.adjustToxLoss(REM)
 	return
 

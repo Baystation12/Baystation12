@@ -1,15 +1,3 @@
-client/proc/ZoneTick()
-	set category = "Debug"
-	set name = "Process Atmos"
-
-	var/result = air_master.Tick()
-	if(result)
-		to_chat(src, "Sucessfully Processed.")
-
-	else
-		to_chat(src, "Failed to process! ([air_master.tick_progress])")
-
-
 client/proc/Zone_Info(turf/T as null|turf)
 	set category = "Debug"
 	if(T)

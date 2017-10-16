@@ -3,6 +3,7 @@
 	filedesc = "RCON Remote Control"
 	nanomodule_path = /datum/nano_module/rcon
 	program_icon_state = "generic"
+	program_menu_icon = "power"
 	extended_desc = "This program allows remote control of power distribution systems. This program can not be run on tablet computers."
 	required_access = access_engine
 	requires_ntnet = 1
@@ -120,11 +121,11 @@
 // Description: Refreshes local list of known devices.
 /datum/nano_module/rcon/proc/FindDevices()
 	known_SMESs = new /list()
-	for(var/obj/machinery/power/smes/buildable/SMES in GLOB.machines)
+	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
 		if(SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)
 			known_SMESs.Add(SMES)
 
 	known_breakers = new /list()
-	for(var/obj/machinery/power/breakerbox/breaker in GLOB.machines)
+	for(var/obj/machinery/power/breakerbox/breaker in SSmachines.machinery)
 		if(breaker.RCon_tag != "NO_TAG")
 			known_breakers.Add(breaker)

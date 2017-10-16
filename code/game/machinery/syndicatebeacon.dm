@@ -91,23 +91,28 @@
 	var/active = 0
 	var/icontype = "beacon"
 
+/obj/machinery/power/singularity_beacon/Destroy()
+	if(active)
+		STOP_PROCESSING(SSmachines, src)
+	. = ..()
 
 /obj/machinery/power/singularity_beacon/proc/Activate(mob/user = null)
 	if(surplus() < 1500)
 		if(user) to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
 		return
-	for(var/obj/singularity/singulo in GLOB.processing_objects)
+	for(var/obj/singularity/singulo in world)
 		if(singulo.z == z)
 			singulo.target = src
 	icon_state = "[icontype]1"
 	active = 1
-	GLOB.machines |= src
+
+	START_PROCESSING(SSmachines, src)
 	if(user)
 		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
 
 
 /obj/machinery/power/singularity_beacon/proc/Deactivate(mob/user = null)
-	for(var/obj/singularity/singulo in GLOB.processing_objects)
+	for(var/obj/singularity/singulo in world)
 		if(singulo.target == src)
 			singulo.target = null
 	icon_state = "[icontype]0"
@@ -156,13 +161,12 @@
 	..()
 
 //stealth direct power usage
-/obj/machinery/power/singularity_beacon/process()
+/obj/machinery/power/singularity_beacon/Process()
 	if(!active)
 		return PROCESS_KILL
 	else
 		if(draw_power(1500) < 1500)
 			Deactivate()
-
 
 /obj/machinery/power/singularity_beacon/syndicate
 	icontype = "beaconsynd"
