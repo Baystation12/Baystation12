@@ -175,6 +175,20 @@
 		. * applied_lum_b            \
 	);
 
+#define APPLY_CORNER_AMBIENT(C)      \
+	. = 1;                           \
+                                     \
+	. *= light_power/2;              \
+                                     \
+	effect_str[C] = .;               \
+                                     \
+	C.update_lumcount                \
+	(                                \
+		. * applied_lum_r,           \
+		. * applied_lum_g,           \
+		. * applied_lum_b            \
+	);
+
 // I don't need to explain what this does, do I?
 #define REMOVE_CORNER(C)             \
 	. = -effect_str[C];              \
@@ -232,6 +246,51 @@
 
 	update_gen++
 
+/datum/light_source/ambient/apply_lum()
+	var/static/update_gen = 1
+	applied = 1
+
+	// Keep track of the last applied lum values so that the lighting can be reversed
+	applied_lum_r = lum_r
+	applied_lum_g = lum_g
+	applied_lum_b = lum_b
+
+	for(var/turf/T in block(locate(1, 1, source_turf.z), locate(world.maxx, world.maxy, source_turf.z)))
+
+		if(!T.lighting_corners_initialised)
+			T.generate_missing_corners()
+
+		for(var/datum/lighting_corner/C in T.get_corners())
+			if(C.update_gen == update_gen)
+				continue
+
+			C.update_gen = update_gen
+			C.affecting += src
+
+			if(!C.active)
+				effect_str[C] = 0
+				continue
+
+			APPLY_CORNER_AMBIENT(C)
+
+
+
+		if(!T.affecting_lights)
+			T.affecting_lights = list()
+
+		T.affecting_lights += src
+		affecting_turfs    += T
+
+		var/turf/simulated/open/O = T
+		if(istype(O) && O.below)
+			// Consider the turf below us as well. (Z-lights)
+			//Do subprocessing for open turfs
+			for(T = O.below; !isnull(T); T = process_the_turf(T,update_gen));
+
+
+
+	update_gen++
+
 /datum/light_source/proc/process_the_turf(var/turf/T, update_gen)
 
 	if(!T.lighting_corners_initialised)
@@ -249,6 +308,37 @@
 			continue
 
 		APPLY_CORNER(C)
+
+
+
+	if(!T.affecting_lights)
+		T.affecting_lights = list()
+
+	T.affecting_lights += src
+	affecting_turfs    += T
+
+	var/turf/simulated/open/O = T
+	if(istype(O) && O.below)
+		return O.below
+	return null
+
+/datum/light_source/ambient/process_the_turf(var/turf/T, update_gen)
+
+	if(!T.lighting_corners_initialised)
+		T.generate_missing_corners()
+
+	for(var/datum/lighting_corner/C in T.get_corners())
+		if(C.update_gen == update_gen)
+			continue
+
+		C.update_gen = update_gen
+		C.affecting += src
+
+		if(!C.active)
+			effect_str[C] = 0
+			continue
+
+		APPLY_CORNER_AMBIENT(C)
 
 
 
