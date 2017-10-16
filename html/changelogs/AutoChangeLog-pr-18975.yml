@@ -1,0 +1,8 @@
+author: Broseph Stylin
+delete-after: True
+changes: 
+  - rscadd: "Added some stuff"
+  - tweak: "Tweaked stuff too"
+  - rscadd: "Added some stuff"
+  - tweak: "Tweaked stuff too"
+  - tweak: "Holsters and webbing/bandoliers/drop pouches can now be worn together."
