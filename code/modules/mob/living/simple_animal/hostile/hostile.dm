@@ -7,6 +7,7 @@
 	var/rapid = 0
 	var/projectiletype
 	var/projectilesound
+	var/list/attack_sfx = list()
 	var/casingtype
 	var/move_to_delay = 4 //delay for the automated movement.
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
@@ -26,7 +27,7 @@
 	if(!faction) //No faction, no reason to attack anybody.
 		return null
 	var/atom/T = null
-	stop_automated_movement = 0
+	//stop_automated_movement = 0
 	for(var/atom/A in ListTargets(10))
 
 		if(A == src)
@@ -214,17 +215,26 @@
 	var/def_zone = get_exposed_defense_zone(target)
 	A.launch(target, def_zone)
 
+GLOBAL_LIST_INIT(hostile_attackables, list(\
+	/obj/structure/window,\
+	/obj/structure/closet,\
+	/obj/structure/table,\
+	/obj/structure/grille,\
+	/obj/structure/barricade,\
+	/obj/structure/tanktrap\
+))
+
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
 	if(prob(break_stuff_probability))
-		for(var/dir in GLOB.cardinal) // North, South, East, West
-			var/obj/effect/shield/S = locate(/obj/effect/shield, get_step(src, dir))
+		for(var/checkdir in GLOB.cardinal) // North, South, East, West
+			var/obj/effect/shield/S = locate(/obj/effect/shield, get_step(src, checkdir))
 			if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
 				S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 				return
-			for(var/obj/structure/window/obstacle in get_step(src, dir))
-				if(obstacle.dir == GLOB.reverse_dir[dir]) // So that windows get smashed in the right order
+			for(var/obj/structure/window/obstacle in get_step(src, checkdir))
+				if(obstacle.dir == GLOB.reverse_dir[checkdir]) // So that windows get smashed in the right order
 					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 					return
-			var/obj/structure/obstacle = locate(/obj/structure, get_step(src, dir))
-			if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
+			var/obj/structure/obstacle = locate(/obj/structure, get_step(src, checkdir))
+			if(obstacle && obstacle.type in GLOB.hostile_attackables)
 				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
