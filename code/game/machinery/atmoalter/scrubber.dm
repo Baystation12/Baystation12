@@ -19,8 +19,8 @@
 
 	var/list/scrubbing_gas
 
-/obj/machinery/portable_atmospherics/powered/scrubber/New()
-	..()
+/obj/machinery/portable_atmospherics/powered/scrubber/Initialize()
+	. = ..()
 	cell = new/obj/item/weapon/cell/apc(src)
 
 /obj/machinery/portable_atmospherics/powered/scrubber/Initialize()
@@ -88,7 +88,7 @@
 		//ran out of charge
 		if (!cell.charge)
 			power_change()
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 	//src.update_icon()
 	src.updateDialog()
@@ -186,7 +186,7 @@
 	var/old_stat = stat
 	..()
 	if (old_stat != stat)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/Process()
 	if(!on || (stat & (NOPOWER|BROKEN)))

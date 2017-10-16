@@ -46,7 +46,7 @@
 			return
 		tray.labelled = label
 		spawn(1)
-			tray.update_icon()
+			ADD_ICON_QUEUE(tray)
 
 	user.visible_message("<span class='notice'>[user] labels [A] as [label].</span>", \
 						 "<span class='notice'>You label [A] as [label].</span>")

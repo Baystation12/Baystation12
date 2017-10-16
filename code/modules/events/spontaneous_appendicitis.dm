@@ -5,5 +5,5 @@
 			if(!istype(A) || (A && A.inflamed))
 				continue
 			A.inflamed = 1
-			A.update_icon()
+			ADD_ICON_QUEUE(A)
 			break

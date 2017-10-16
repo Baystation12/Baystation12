@@ -74,28 +74,23 @@
 
 	if(!src.loc)
 		return 0
-
+	if(chan == -1)
+		chan = power_channel
 	//Don't do this. It allows machines that set use_power to 0 when off (many machines) to
 	//be turned on again and used after a power failure because they never gain the NOPOWER flag.
 	//if(!use_power)
 	//	return 1
-
-	if(!check_area)
-		check_area = src.loc.loc		// make sure it's in an area
-	if(!check_area || !isarea(check_area))
-		return 0					// if not, then not powered
-	if(chan == -1)
-		chan = power_channel
-	return check_area.powered(chan)			// return power status of the area
+	if(check_area)
+		return check_area.powered(chan)			// return power status of the area
+	else
+		if(MyArea)
+			return MyArea.powered(chan)			// return power status of the area
 
 // increment the power usage stats for an area
 /obj/machinery/proc/use_power(var/amount, var/chan = -1) // defaults to power_channel
-	var/area/A = get_area(src)		// make sure it's in an area
-	if(!A || !isarea(A))
-		return
 	if(chan == -1)
 		chan = power_channel
-	A.use_power(amount, chan)
+	MyArea.use_power(amount, chan)
 
 // called whenever the power settings of the containing area change
 // by default, check equipment channel & set flag can override if needed
@@ -109,7 +104,8 @@
 
 	. = (stat != oldstat)
 	if(.)
-		update_icon()
+		ADD_ICON_QUEUE(src) //New way to process shii
+//		update_icon()
 
 // connect the machine to a powernet if a node cable is present on the turf
 /obj/machinery/power/proc/connect_to_network()
@@ -236,6 +232,8 @@
 
 //remove the old powernet and replace it with a new one throughout the network.
 /proc/propagate_network(var/obj/O, var/datum/powernet/PN)
+//	while(defer_powernet_rebuild)
+//		sleep(20)
 	//world.log << "propagating new network"
 	var/list/worklist = list()
 	var/list/found_machines = list()
@@ -260,6 +258,7 @@
 
 		else
 			continue
+		CHECK_TICK
 
 	//now that the powernet is set, connect found machines to it
 	for(var/obj/machinery/power/PM in found_machines)

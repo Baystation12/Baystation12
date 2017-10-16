@@ -18,6 +18,18 @@
 	cost = 1
 	allowed_roles = NON_MILITARY_ROLES
 
+/datum/gear/suit/leather
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/suit/hoodie
+	allowed_roles = RESTRICTED_ROLES
+
+/datum/gear/suit/hoodie_sel
+	allowed_roles = RESTRICTED_ROLES
+
+/datum/gear/suit/labcoat
+	allowed_roles = NON_MILITARY_ROLES
+
 /datum/gear/suit/medcoat
 	display_name = "medical suit selection"
 	path = /obj/item/clothing/suit
@@ -150,13 +162,9 @@
 	path = /obj/item/clothing/suit/poncho/roles/cargo
 
 /datum/gear/suit/wintercoat
-	display_name = "winter coat"
-	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/track
-	display_name = "track jacket selection"
-	path = /obj/item/clothing/suit/storage/toggle/track
 	allowed_roles = RESTRICTED_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
 

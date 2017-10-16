@@ -4,7 +4,7 @@ var/global/datum/controller/gameticker/ticker
 	var/const/restart_timeout = 600
 	var/current_state = GAME_STATE_PREGAME
 
-	var/hide_mode = 0
+	var/hide_mode = 1
 	var/datum/game_mode/mode = null
 	var/post_game = 0
 	var/event_time = null
@@ -79,8 +79,8 @@ var/global/datum/controller/gameticker/ticker
 	//Create and announce mode
 	if(master_mode=="secret")
 		src.hide_mode = 1
-	else
-		src.hide_mode = 0
+//	else
+//		src.hide_mode = 0
 
 	var/list/runnable_modes = config.get_runnable_modes()
 	if((master_mode=="random") || (master_mode=="secret"))
@@ -300,7 +300,10 @@ var/global/datum/controller/gameticker/ticker
 	proc/equip_characters()
 		var/captainless=1
 		for(var/mob/living/carbon/human/player in GLOB.player_list)
-			if(player && player.mind && player.mind.assigned_role)
+			player.client.prefs.load_character()
+			calculate_department_rank(player)
+			player.CharRecords = new(player)
+			if(player.mind && player.mind.assigned_role)
 				if(player.mind.assigned_role == "Captain")
 					captainless=0
 				if(!player_is_antag(player.mind, only_offstation_roles = 1))
@@ -421,6 +424,7 @@ var/global/datum/controller/gameticker/ticker
 					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
 				else
 					to_chat(Player, "<font color='blue'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></font>")
+				calculate_paycheck(Player, add = 1, roundend = 1)
 			else
 				if(isghost(Player))
 					var/mob/observer/ghost/O = Player
@@ -430,6 +434,25 @@ var/global/datum/controller/gameticker/ticker
 					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
 	to_world("<br>")
 
+	for(var/mob/living/carbon/human/H in GLOB.player_list)
+		if(H.stat == DEAD && H.CharRecords.permadeath == 1)
+			if(H.CharRecords.neurallaces >= 1) //If neural lace is found, remove 1 and proceed.
+				to_chat(H, "<font color='green'><b>Your corpse has been taken back and has been cloned using a neural lace!</b></font>")
+				H.CharRecords.neurallaces--
+			else if(!H.CharRecords.neurallaces) //Has none
+				if(H.CharRecords.pension_balance >= REVIVEPRICE)
+					H.CharRecords.pension_balance -= REVIVEPRICE
+					to_chat(H, "<font color='green'><b>Your corpse has been taken back has been cloned using a new neural lace! (-[REVIVEPRICE] credits)</b></font>")
+					continue
+				else if(H.CharRecords.pension_balance+H.CharRecords.bank_balance >= REVIVEPRICE)
+					var/leftover = REVIVEPRICE-H.CharRecords.pension_balance
+					H.CharRecords.bank_balance -= leftover
+					to_chat(H, "<font color='green'><b>Your corpse has been taken back has been cloned using a new neural lace! (-[REVIVEPRICE] credits)</b></font>")
+					continue
+			else
+				H.client.prefs.load_character(-1)
+				sleep(2) //Make settings go.
+				H.client.prefs.save_character()
 
 	for (var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
 		if (aiPlayer.stat != 2)

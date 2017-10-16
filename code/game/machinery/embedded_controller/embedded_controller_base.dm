@@ -28,7 +28,7 @@ obj/machinery/embedded_controller/radio/Destroy()
 	if(program)
 		program.process()
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/embedded_controller/attack_ai(mob/user as mob)
 	src.ui_interact(user)

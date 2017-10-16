@@ -24,6 +24,8 @@
 
 	if(!istype(user))
 		return 0
+	if(isAdminGhost(user))
+		return 1
 
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	if(!I)

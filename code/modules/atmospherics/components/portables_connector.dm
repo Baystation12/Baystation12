@@ -86,7 +86,7 @@
 				node = target
 				break
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update_underlays()
 
 /obj/machinery/atmospherics/portables_connector/build_network()

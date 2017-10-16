@@ -27,7 +27,7 @@
 				target_down = L
 				L.target_up = src
 				return
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/structure/ladder/Destroy()
 	if(target_down)

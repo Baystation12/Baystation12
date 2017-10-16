@@ -11,4 +11,4 @@
 		S.blood_color = "rainbow"
 	for(var/obj/effect/decal/cleanable/blood/B in world)
 		B.basecolor = "rainbow"
-		B.update_icon()
+		ADD_ICON_QUEUE(B)

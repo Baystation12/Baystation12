@@ -421,3 +421,57 @@
 					for(var/datum/wound/W in E.wounds)
 						if (W.wound_damage() == 0 && prob(50))
 							E.wounds -= W
+/datum/species/wryn
+	name = "Wryn"
+	name_plural = "Wryn"
+	icobase = 'icons/mob/human_races/r_wryn.dmi'
+	deform = 'icons/mob/human_races/r_wryn.dmi'
+	language = "Wryn Hivemind"
+	tail = "wryntail"
+	tail_animation = 'icons/mob/species/wryn/tail.dmi'
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
+
+	darksight = 3
+	slowdown = 1
+
+	warning_low_pressure = -300
+	hazard_low_pressure = 1
+
+	blurb = "The wryn (r-in, singular r-in) are a humanoid race that possess many bee-like features. Originating from Alveare they \
+	have adapted extremely well to cold environments though have lost most of their muscles over generations.\
+	In order to communicate and work with multi-species crew Wryn were forced to take on names. Wryn have tended towards using only \
+	first names, these names are generally simplistic and easy to pronounce. Wryn have rarely had to communicate using their mouths, \
+	so in order to integrate with the multi-species crew they have been taught broken sol?."
+
+	cold_level_1 = 200 //Default 260 - Lower is better
+	cold_level_2 = 150 //Default 200
+	cold_level_3 = 115 //Default 120
+
+	heat_level_1 = 300 //Default 360 - Higher is better
+	heat_level_2 = 310 //Default 400
+	heat_level_3 = 317 //Default 1000
+
+	body_temperature = 286
+
+	has_organ = list(    // which required-organ checks are conducted.
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_APPENDIX = /obj/item/organ/internal/appendix,
+		BP_HIVENODE = /obj/item/organ/wryn/hivenode,
+		BP_EYES =     /obj/item/organ/internal/eyes
+		)
+
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | NO_SCAN | HIVEMIND
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	reagent_tag = IS_WRYN
+
+	base_color = "#704300"
+	flesh_color = "#704300"
+	blood_color = "#FFFF99"
+
+/datum/species/wryn/handle_death(var/mob/living/carbon/human/H)
+	for(var/mob/living/carbon/C in GLOB.player_list)
+		if(locate(/obj/item/organ/wryn/hivenode) in C.internal_organs)
+			C << "<span class='alert'><B>Your antennae tingle as you are overcome with pain...</B></span>"
+			C << "<span class='alert'>It feels like part of you has died.</span>"

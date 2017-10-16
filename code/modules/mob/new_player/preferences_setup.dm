@@ -204,8 +204,6 @@ datum/preferences
 				if(job.title == job_high)
 					previewJob = job
 					break
-	else
-		return
 
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
 		var/list/equipped_slots = list() //If more than one item takes the same slot only spawn the first

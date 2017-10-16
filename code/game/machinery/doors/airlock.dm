@@ -366,10 +366,10 @@
 		PhoronBurn(exposed_temperature)
 
 /obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
-	for(var/turf/simulated/floor/target_tile in range(2,loc))
+	for(var/turf/simulated/floor/target_tile in trange(2,loc))
 		target_tile.assume_gas("phoron", 35, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(temperature, 400)
-	for(var/turf/simulated/wall/W in range(3,src))
+	for(var/turf/simulated/wall/W in trange(3,src))
 		W.burn((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
 	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
 		D.ignite(temperature/4)
@@ -487,7 +487,7 @@ About the new airlock wires panel:
 	if(electrified_until && isAllPowerLoss())
 		electrify(0)
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/door/airlock/proc/loseBackupPower()
 	backup_power_lost_until = backupPowerCablesCut() ? -1 : world.time + SecondsToTicks(60)
@@ -496,7 +496,7 @@ About the new airlock wires panel:
 	if(electrified_until && isAllPowerLoss())
 		electrify(0)
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/door/airlock/proc/regainMainPower()
 	if(!mainPowerCablesCut())
@@ -505,14 +505,14 @@ About the new airlock wires panel:
 		if(!backup_power_lost_until)
 			backup_power_lost_until = -1
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/door/airlock/proc/regainBackupPower()
 	if(!backupPowerCablesCut())
 		// Restore backup power only if main power is offline, otherwise permanently disable
 		backup_power_lost_until = main_power_lost_until == 0 ? -1 : 0
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/door/airlock/proc/electrify(var/duration, var/feedback = 0)
 	var/message = ""
@@ -1217,7 +1217,7 @@ About the new airlock wires panel:
 		brace = A
 		brace.airlock = src
 		brace.forceMove(src)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	. = ..()
 
 /obj/machinery/door/airlock/Destroy()

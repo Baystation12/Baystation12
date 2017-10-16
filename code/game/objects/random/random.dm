@@ -9,7 +9,7 @@
 
 // creates a new object and deletes itself
 /obj/random/Initialize()
-	..()
+	. = ..()
 	call(src, spawn_method)()
 	return INITIALIZE_HINT_QDEL
 

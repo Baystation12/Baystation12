@@ -105,26 +105,6 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 /obj/machinery/camera/network/third_deck
 	network = list(NETWORK_THIRD_DECK)
 
-/obj/machinery/camera/network/command
-	network = list(NETWORK_COMMAND)
-
-/obj/machinery/camera/network/crescent
-	network = list(NETWORK_CRESCENT)
-
-/obj/machinery/camera/network/engine
-	network = list(NETWORK_ENGINE)
-
-/obj/machinery/camera/network/engineering_outpost
-	network = list(NETWORK_ENGINEERING_OUTPOST)
-
-// Motion
-/obj/machinery/camera/motion/engineering_outpost
-	network = list(NETWORK_ENGINEERING_OUTPOST)
-
-// All Upgrades
-/obj/machinery/camera/all/command
-	network = list(NETWORK_COMMAND)
-
 //
 // T-Coms
 //

@@ -44,7 +44,7 @@ var/list/ai_status_emotions = list(
 		if(istype(M, /obj/machinery/ai_status_display))
 			var/obj/machinery/ai_status_display/AISD = M
 			AISD.emotion = emote
-			AISD.update_icon()
+			ADD_ICON_QUEUE(AISD)
 		//if Friend Computer, change ALL displays
 		else if(istype(M, /obj/machinery/status_display))
 

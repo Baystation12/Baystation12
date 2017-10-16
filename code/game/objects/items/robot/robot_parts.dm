@@ -106,9 +106,9 @@
 	var/parts = list()
 	var/created_name = ""
 
-/obj/item/robot_parts/robot_suit/New()
-	..()
-	src.update_icon()
+/obj/item/robot_parts/robot_suit/Initialize()
+	. = ..()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/robot_parts/robot_suit/update_icon()
 	src.overlays.Cut()

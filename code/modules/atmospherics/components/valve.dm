@@ -168,7 +168,7 @@
 
 	build_network()
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update_underlays()
 
 	if(openDuringInit)

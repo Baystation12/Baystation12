@@ -47,7 +47,7 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/New()
+/obj/machinery/door/Initialize()
 	. = ..()
 	if(density)
 		layer = closed_layer
@@ -67,7 +67,7 @@
 			bound_height = width * world.icon_size
 
 	health = maxhealth
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 	update_nearby_tiles(need_rebuild=1)
 	return
@@ -303,7 +303,7 @@
 		visible_message("\The [src] looks seriously damaged!" )
 	else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
 		visible_message("\The [src] shows signs of damage!" )
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return
 
 

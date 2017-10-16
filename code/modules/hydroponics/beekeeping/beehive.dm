@@ -139,11 +139,11 @@
 /obj/machinery/beehive/Process()
 	if(closed && !smoked && bee_count)
 		pollinate_flowers()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	smoked = max(0, smoked - 1)
 	if(!smoked && bee_count)
 		bee_count = min(bee_count * 1.005, 100)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/beehive/proc/pollinate_flowers()
 	var/coef = bee_count / 100
@@ -216,8 +216,8 @@
 	desc = "A frame for the beehive that the bees have filled with honeycombs."
 	honey = 20
 
-/obj/item/honey_frame/filled/New()
-	..()
+/obj/item/honey_frame/filled/Initialize()
+	. = ..()
 	overlays += "honeycomb"
 
 /obj/item/beehive_assembly
@@ -242,8 +242,8 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "wax"
 
-/obj/item/stack/wax/New()
-	..()
+/obj/item/stack/wax/Initialize()
+	. = ..()
 	recipes = wax_recipes
 
 var/global/list/datum/stack_recipe/wax_recipes = list( \
@@ -257,8 +257,8 @@ var/global/list/datum/stack_recipe/wax_recipes = list( \
 	icon_state = "beepack"
 	var/full = 1
 
-/obj/item/bee_pack/New()
-	..()
+/obj/item/bee_pack/Initialize()
+	. = ..()
 	overlays += "beepack-full"
 
 /obj/item/bee_pack/proc/empty()

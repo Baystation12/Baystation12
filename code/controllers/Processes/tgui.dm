@@ -21,7 +21,6 @@ var/global/datum/controller/process/tgui/tgui_process
 			SCHECK
 			continue
 		processing_uis.Remove(ui)
-		SCHECK
 
 /datum/controller/process/tgui/statProcess()
 	..()

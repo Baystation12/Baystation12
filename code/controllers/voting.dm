@@ -300,6 +300,9 @@ datum/controller/vote
 				var/next_allowed_time = (started_time + config.vote_delay)
 				if(next_allowed_time > world.time)
 					return 0
+			if(ticker.current_state == GAME_STATE_PREGAME && initiator_key != "the server")
+				usr << "You can not start this vote, the server will do it for you."
+				return 0
 
 			reset()
 			switch(vote_type)
@@ -435,7 +438,8 @@ datum/controller/vote
 					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Third</a></b>"
 				else
 					. += "<a href='?src=\ref[src];low_vote=[i]'>Third</a>"
-				. += "</td><td align = 'center'>[votepercent]%</td>"
+				if(admin)
+					. += "</td><td align = 'center'>[votepercent]%</td>"
 				if (additional_text.len >= i)
 					. += additional_text[i]
 				. += "</tr>"

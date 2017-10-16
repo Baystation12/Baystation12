@@ -73,16 +73,16 @@
 	color = "#ffffff"
 	alpha = 255
 	update_connections(1)
-	update_icon()
 	update_desc()
 	update_material()
+	ADD_ICON_QUEUE(src)
 
 /obj/structure/table/Destroy()
 	material = null
 	reinforced = null
 	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
 	for(var/obj/structure/table/T in oview(src, 1))
-		T.update_icon()
+		ADD_ICON_QUEUE(T)
 	. = ..()
 
 /obj/structure/table/examine(mob/user)
@@ -129,7 +129,7 @@
 			update_connections(1)
 			update_icon()
 			for(var/obj/structure/table/T in oview(src, 1))
-				T.update_icon()
+				ADD_ICON_QUEUE(T)
 			update_desc()
 			update_material()
 		return 1
@@ -416,9 +416,8 @@
 		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
-			spawn(0)
-				T.update_connections()
-				T.update_icon()
+			T.update_connections()
+			ADD_ICON_QUEUE(T)
 
 	connections = dirs_to_corner_states(connection_dirs)
 

@@ -1,8 +1,6 @@
 #define MESSAGE_SERVER_SPAM_REJECT 1
 #define MESSAGE_SERVER_DEFAULT_SPAM_LIMIT 10
 
-var/global/list/obj/machinery/message_server/message_servers = list()
-
 /datum/data_pda_msg
 	var/recipient = "Unspecified" //name of the person
 	var/sender = "Unspecified" //name of the sender
@@ -69,28 +67,28 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			//Messages having theese tokens will be rejected by server. Case sensitive
 	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
 
-/obj/machinery/message_server/New()
-	message_servers += src
+/obj/machinery/message_server/Initialize()
+	GLOB.message_servers += src
 	decryptkey = GenerateKey()
 	send_pda_message("System Administrator", "system", "This is an automated message. The messaging system is functioning correctly.")
-	..()
+	. = ..()
 
 /obj/machinery/message_server/Destroy()
-	message_servers -= src
+	GLOB.message_servers -= src
 	return ..()
 
 /obj/machinery/message_server/Process()
 	if(active && (stat & (BROKEN|NOPOWER)))
 		active = 0
 		power_failure = 10
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	else if(stat & (BROKEN|NOPOWER))
 		return
 	else if(power_failure > 0)
 		if(!(--power_failure))
 			active = 1
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/message_server/proc/send_pda_message(var/recipient = "",var/sender = "",var/message = "")
 	var/result
@@ -257,7 +255,8 @@ var/obj/machinery/blackbox_recorder/blackbox
 	var/list/datum/feedback_variable/feedback = new()
 
 	//Only one can exist in the world!
-/obj/machinery/blackbox_recorder/New()
+/obj/machinery/blackbox_recorder/Initialize()
+	. = ..()
 	if(blackbox)
 		if(istype(blackbox,/obj/machinery/blackbox_recorder))
 			qdel(src)
@@ -330,6 +329,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 //This proc is only to be called at round end.
 /obj/machinery/blackbox_recorder/proc/save_all_data_to_sql()
 	if(!feedback) return
+	return //No SQL, piss off.
 
 	round_end_data_gathering() //round_end time logging and some other data processing
 	establish_db_connection()

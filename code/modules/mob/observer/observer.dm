@@ -56,6 +56,9 @@ mob/observer/check_airflow_movable()
 /mob/observer/is_deaf() 	//Nor deaf.
 	return
 
+/mob/observer/GetAccess()		//And has all access if admin.
+	return isAdminGhost(src) ? get_all_accesses() : list()
+
 /mob/observer/set_stat()
 	stat = DEAD // They are also always dead
 

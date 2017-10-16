@@ -15,9 +15,9 @@
 	var/mat_efficiency = 1
 	var/speed = 1
 
-/obj/machinery/r_n_d/protolathe/New()
+/obj/machinery/r_n_d/protolathe/Initialize()
 	materials = default_material_composition.Copy()
-	..()
+	. = ..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/protolathe(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -31,11 +31,11 @@
 /obj/machinery/r_n_d/protolathe/Process()
 	..()
 	if(stat)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	if(queue.len == 0)
 		busy = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	var/datum/design/D = queue[1]
 	if(canBuild(D))
@@ -47,12 +47,12 @@
 			removeFromQueue(1)
 			if(linked_console)
 				linked_console.updateUsrDialog()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	else
 		if(busy)
 			visible_message("<span class='notice'>\icon [src] flashes: insufficient materials: [getLackingMaterials(D)].</span>")
 			busy = 0
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/r_n_d/protolathe/RefreshParts()
 	var/T = 0

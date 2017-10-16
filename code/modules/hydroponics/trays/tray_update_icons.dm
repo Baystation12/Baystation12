@@ -1,5 +1,17 @@
 //Refreshes the icon and sets the luminosity
 /obj/machinery/portable_atmospherics/hydroponics/update_icon()
+	if (!status_overlays)
+		status_overlays = new/list()
+
+		status_overlays.len = 6
+
+		status_overlays[1] = image(icon, "over_lowhealth3")    // 0=blue 1=red
+		status_overlays[2] = image(icon, "hydrocover")
+		status_overlays[3] = image(icon, "over_lowwater3")
+		status_overlays[4] = image(icon, "over_lownutri3")
+		status_overlays[5] = image(icon, "over_alert3")
+		status_overlays[6] = image(icon, "over_harvest3")
+
 	// Update name.
 	if(seed)
 		if(mechanical)
@@ -49,17 +61,17 @@
 	if(mechanical)
 		//Draw the cover.
 		if(closed_system)
-			new_overlays += "hydrocover"
+			new_overlays += status_overlays[2]
 		if(seed && health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
-			new_overlays += "over_lowhealth3"
+			new_overlays += status_overlays[1]
 		if(waterlevel <= 10)
-			new_overlays += "over_lowwater3"
+			new_overlays += status_overlays[3]
 		if(nutrilevel <= 2)
-			new_overlays += "over_lownutri3"
+			new_overlays += status_overlays[4]
 		if(weedlevel >= 5 || pestlevel >= 5 || toxins >= 40)
-			new_overlays += "over_alert3"
+			new_overlays += status_overlays[5]
 		if(harvest)
-			new_overlays += "over_harvest3"
+			new_overlays += status_overlays[6]
 
 	if((!density || !opacity) && seed && seed.get_trait(TRAIT_LARGE))
 		set_density(1)

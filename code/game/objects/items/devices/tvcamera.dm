@@ -27,7 +27,7 @@
 	radio = new(src)
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/device/tvcamera/examine()
 	. = ..()

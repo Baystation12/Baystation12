@@ -15,7 +15,8 @@
 	var/signs = 0	//maximum capacity hardcoded below
 
 
-/obj/structure/janitorialcart/New()
+/obj/structure/janitorialcart/Initialize()
+	. = ..()
 	create_reagents(180)
 
 

@@ -94,7 +94,7 @@
 	if (last_flow_rate)
 		flowing = 1
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 //Radio remote control
@@ -162,7 +162,7 @@
 
 	spawn(2)
 		broadcast_status()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return
 
 /obj/machinery/atmospherics/binary/passive_gate/attack_hand(user as mob)

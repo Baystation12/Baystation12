@@ -11,6 +11,8 @@
 	var/list/player_alt_titles // the default name of a job like "Medical Doctor"
 	var/char_branch	= "None"   // military branch
 	var/char_rank = "None"     // military rank
+	var/prefs_department = "Service" //Department of choice, also saved in NT Profile
+	var/prefs_command = 0 //Eligible for command roles? Also saved in NT profile.
 
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 2
@@ -26,6 +28,10 @@
 	S["job_low"]           >> pref.job_low
 	S["player_alt_titles"] >> pref.player_alt_titles
 	S["char_branch"]       >> pref.char_branch
+	S["prefs_department"]  >> pref.prefs_department
+	if(!pref.prefs_department)
+		pref.prefs_department = initial(pref.prefs_department) // Oops
+	S["prefs_command"]     >> pref.prefs_command
 	S["char_rank"]         >> pref.char_rank
 
 /datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
@@ -36,6 +42,9 @@
 	S["player_alt_titles"] << pref.player_alt_titles
 	S["char_branch"]       << pref.char_branch
 	S["char_rank"]         << pref.char_rank
+	if(pref.prefs_department)
+		S["prefs_department"]  << pref.prefs_department
+	S["prefs_command"]     << pref.prefs_command
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
 	if(!istype(pref.job_medium)) pref.job_medium = list()
@@ -68,17 +77,17 @@
 		return
 
 	var/datum/species/S = preference_species()
-	var/datum/mil_branch/player_branch = null
+//	var/datum/mil_branch/player_branch = null
 	var/datum/mil_rank/player_rank = null
 
 	. = list()
 	. += "<tt><center>"
 	. += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br>"
-	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
+//	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 
-		player_branch = mil_branches.get_branch(pref.char_branch)
+//		player_branch = mil_branches.get_branch(pref.char_branch)
 
-		. += "Branch of Service: <a href='?src=\ref[src];char_branch=1'>[pref.char_branch]</a>	"
+	. += "Department of Service: <a href='?src=\ref[src];char_dept=1'>[user.client.prefs.prefs_department]</a>	"
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
 		player_rank = mil_branches.get_rank(pref.char_branch, pref.char_rank)
 
@@ -125,14 +134,16 @@
 		if(!job.is_species_allowed(S))
 			. += "<del>[rank]</del></td><td><b> \[SPECIES RESTRICTED]</b></td></tr>"
 			continue
-
-		if(job.allowed_branches)
-			if(!player_branch)
-				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[BRANCH RESTRICTED]</b></a></td></tr>"
-				continue
-			if(!is_type_in_list(player_branch, job.allowed_branches))
-				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [player_branch.name_short]]</b></a></td></tr>"
-				continue
+		if(!job.is_valid_department(get_department(user.client.prefs.prefs_department, 0)) || job.department == "Command" && !user.client.prefs.prefs_command)
+			. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [user.client.prefs.prefs_department]]</b></a></td></tr>"
+			continue
+//		if(job.allowed_branches)
+//			if(!player_branch)
+//				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[BRANCH RESTRICTED]</b></a></td></tr>"
+//				continue
+//			if(!is_type_in_list(player_branch, job.allowed_branches))
+//				. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [player_branch.name_short]]</b></a></td></tr>"
+//				continue
 
 		if(job.allowed_ranks)
 			if(!player_rank)
@@ -214,14 +225,21 @@
 
 	else if(href_list["set_job"])
 		if(SetJob(user, href_list["set_job"])) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
-
-	else if(href_list["char_branch"])
+/*
+	else if(href_list["char_dept"])
 		var/choice = input(user, "Choose your branch of service.", "Character Preference", pref.char_branch) as null|anything in mil_branches.spawn_branches(preference_species())
 		if(choice && CanUseTopic(user) && mil_branches.is_spawn_branch(choice, preference_species()))
 			pref.char_branch = choice
 			pref.char_rank = "None"
 			prune_job_prefs()
 			return TOPIC_REFRESH
+*/
+	else if(href_list["char_dept"])
+		var/new_department = input(user, "Select the department your character wishes to enlist in","Department enlistment") in list("Security","Medical","Engineering","Service","Science","Supply")
+		pref.char_rank = "None"
+		pref.prefs_department = new_department
+		prune_job_prefs()
+		return TOPIC_REFRESH
 
 	else if(href_list["char_rank"])
 		var/choice = null

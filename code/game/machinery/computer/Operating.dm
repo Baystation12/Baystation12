@@ -70,4 +70,5 @@
 
 /obj/machinery/computer/operating/Process()
 	if(..())
-		src.updateDialog()
+		if(table.victim)
+			src.updateDialog()

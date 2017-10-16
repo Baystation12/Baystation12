@@ -107,7 +107,7 @@
 		return
 	if(src.state != 2 || (!powernet && active_power_usage))
 		src.active = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	if(((src.last_shot + src.fire_delay) <= world.time) && (src.active == 1))
 
@@ -115,12 +115,12 @@
 		if(actual_load >= active_power_usage) //does the laser have enough power to shoot?
 			if(!powered)
 				powered = 1
-				update_icon()
+				ADD_ICON_QUEUE(src)
 				investigate_log("regained power and turned <font color='green'>on</font>","singulo")
 		else
 			if(powered)
 				powered = 0
-				update_icon()
+				ADD_ICON_QUEUE(src)
 				investigate_log("lost power and turned <font color='red'>off</font>","singulo")
 			return
 

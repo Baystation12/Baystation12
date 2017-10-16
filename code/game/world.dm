@@ -1,6 +1,7 @@
-/var/server_name = "Baystation 12"
+/var/server_name = "Apollo Gaming"
 
 /var/game_id = null
+/var/finished_init = 0
 /hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
@@ -92,6 +93,7 @@
 		log = runtime_log
 
 	callHook("startup")
+	finished_init = 1
 	//Emergency Fix
 	load_mods()
 	//end-emergency fix
@@ -108,17 +110,18 @@
 
 	// This is kinda important. Set up details of what the hell things are made of.
 	populate_material_list()
-
+/*
 	if(config.generate_map)
 		if(GLOB.using_map.perform_map_generation())
 			GLOB.using_map.refresh_mining_turfs()
 	GLOB.using_map.build_exoplanets()
-
+*/
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
 
 	processScheduler = new
 	master_controller = new /datum/controller/game_controller()
+	enfmods = new
 
 	processScheduler.deferSetupFor(/datum/controller/process/ticker)
 	processScheduler.setup()
@@ -129,9 +132,14 @@
 		initialize_unit_tests()
 #endif
 
+	spawn(1)
+		CPUUpdater()
+		enfmods.CheckScore()
+
 	spawn(3000)		//so we aren't adding to the round-start lag
-		if(config.ToRban)
-			ToRban_autoupdate()
+		Announce()
+//		if(config.ToRban)
+//			ToRban_autoupdate()
 
 #undef RECOMMENDED_VERSION
 
@@ -416,7 +424,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			return "Bad Key"
 
 		return show_player_info_irc(ckey(input["notes"]))
-
+/*
 	else if(copytext(T,1,4) == "age")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
@@ -437,7 +445,8 @@ var/world_topic_spam_protect_time = world.timeofday
 				return "Ckey not found"
 		else
 			return "Database connection failed or not set up"
-
+*/
+/*
 	else if(copytext(T,1,14) == "placepermaban")
 		var/input[] = params2list(T)
 		if(!config.ban_comms_password)
@@ -469,7 +478,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
 		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
 		qdel(C)
-
+*/
 	else if(copytext(T,1,19) == "prometheus_metrics")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
@@ -537,17 +546,37 @@ var/world_topic_spam_protect_time = world.timeofday
 /world/proc/load_motd()
 	join_motd = file2text("config/motd.txt")
 
+var/global/cpustate = "Unknown"
+
+/world/proc/CPUUpdater()
+	while(1)
+		switch(world.cpu)
+			if(0 to 20)
+				cpustate = "Optimal performance"
+			if(21 to 40)
+				cpustate = "Good Performance"
+			if(41 to 60)
+				cpustate = "Ok Performance"
+			if(61 to 79)
+				cpustate = "Bad Performance"
+			if(80 to 99)
+				cpustate = "Terrible Performance"
+			if(100 to 1000)
+				cpustate = "Server Overloaded"
+		sleep(50)
 
 /proc/load_configuration()
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
-	config.loadsql("config/dbconfig.txt")
+//	config.loadsql("config/dbconfig.txt")
 	config.load_event("config/custom_event.txt")
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
 	world.load_mentors() // no need to write another hook.
+	spawn(20)
+		world.load_enfmods()
 	return 1
 
 /world/proc/load_mods()
@@ -591,17 +620,30 @@ var/world_topic_spam_protect_time = world.timeofday
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
 				D.associate(GLOB.ckey_directory[ckey])
 
+/world/proc/load_enfmods()
+	if(config.admin_legacy_system)
+		var/text = file2text("config/enfmods.txt")
+		if (!text)
+			error("Failed to load config/enfmods.txt")
+		else
+			var/list/lines = splittext(text, "\n")
+			for(var/line in lines)
+				if (!line)
+					continue
+				if (copytext(line, 1, 2) == ";")
+					continue
+				var/ckey = copytext(line, 1, length(line)+1)
+				enfmods.enforcingmods.Add(ckey)
+
 /world/proc/update_status()
 	var/s = ""
 
 	if (config && config.server_name)
-		s += "<b>[config.server_name]</b> &#8212; "
+		s += "<big><b><a href=\"http://www.apollo-gaming.net\">[config.server_name]</a></b></big> &#8212; "
 
-	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += "<a href=\"http://\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"http://www.apollo-gaming.net\">Forums!</a>|<a href=\"https://discord.gg/4AkV32x\">Discord!</a>" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
-	s += "Default"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"
 
@@ -636,7 +678,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 
 	if (config && config.hostedby)
-		features += "hosted by <b>[config.hostedby]</b>"
+		features += "<b>[config.hostedby]</b>"
 
 	if (features)
 		s += ": [jointext(features, ", ")]"
@@ -661,16 +703,16 @@ var/world_topic_spam_protect_time = world.timeofday
 #undef WORLD_LOG_START
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
-var/failed_db_connections = 0
-var/failed_old_db_connections = 0
-
+var/failed_db_connections = 6
+var/failed_old_db_connections = 6
+/*
 /hook/startup/proc/connectDB()
 	if(!setup_database_connection())
 		world.log << "Your server failed to establish a connection with the feedback database."
 	else
 		world.log << "Feedback database connection established."
 	return 1
-
+*/
 proc/setup_database_connection()
 
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to conenct anymore.
@@ -705,14 +747,14 @@ proc/establish_db_connection()
 	else
 		return 1
 
-
+/*
 /hook/startup/proc/connectOldDB()
 	if(!setup_old_database_connection())
 		world.log << "Your server failed to establish a connection with the SQL database."
 	else
 		world.log << "SQL database connection established."
 	return 1
-
+*/
 //These two procs are for the old database, while it's being phased out. See the tgstation.sql file in the SQL folder for more information.
 proc/setup_old_database_connection()
 

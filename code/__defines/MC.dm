@@ -1,5 +1,6 @@
 #define MC_TICK_CHECK ( ( TICK_USAGE > Master.current_ticklimit || src.state != SS_RUNNING ) ? pause() : 0 )
 
+#define MC_TICK_CHECK2(CPU) ( ( TICK_USAGE > CPU || src.state != SS_RUNNING ) ? pause() : 0 )
 #define MC_SPLIT_TICK_INIT(phase_count) var/original_tick_limit = Master.current_ticklimit; var/split_tick_phases = ##phase_count
 #define MC_SPLIT_TICK \
 	if(split_tick_phases > 1){\

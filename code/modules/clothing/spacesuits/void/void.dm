@@ -17,6 +17,7 @@
 		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
 		SPECIES_BOGANI = 'icons/mob/species/bogani/helmet.dmi',
 		SPECIES_EGYNO  = 'icons/mob/species/bogani/helmet.dmi',
+		SPECIES_RESOMI = 'icons/mob/species/resomi/helmet.dmi',
 		)
 	sprite_sheets_obj = list(
 		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/hats.dmi',
@@ -24,6 +25,7 @@
 		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/hats.dmi',
 		SPECIES_BOGANI = 'icons/obj/clothing/species/bogani/hats.dmi',
 		SPECIES_EGYNO  = 'icons/obj/clothing/species/bogani/hats.dmi',
+		SPECIES_RESOMI = 'icons/obj/clothing/species/resomi/hats.dmi',
 		)
 
 	light_overlay = "helmet_light"
@@ -47,6 +49,7 @@
 		SPECIES_SKRELL = 'icons/mob/species/skrell/suit.dmi',
 		SPECIES_BOGANI = 'icons/mob/species/bogani/suits.dmi',
 		SPECIES_EGYNO  = 'icons/mob/species/bogani/suits.dmi',
+		SPECIES_RESOMI = 'icons/mob/species/resomi/suit.dmi',
 		)
 
 	sprite_sheets_obj = list(
@@ -55,6 +58,7 @@
 		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/suits.dmi',
 		SPECIES_BOGANI = 'icons/obj/clothing/species/bogani/suits.dmi',
 		SPECIES_EGYNO  = 'icons/obj/clothing/species/bogani/suits.dmi',
+		SPECIES_RESOMI = 'icons/obj/clothing/species/resomi/suits.dmi',
 		)
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.

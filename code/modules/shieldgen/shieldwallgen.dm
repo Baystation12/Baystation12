@@ -148,7 +148,7 @@
 			src.visible_message("<span class='warning'>The [src.name] shuts down due to lack of power!</span>", \
 				"You hear heavy droning fade out")
 			src.active = 0
-			update_icon()
+			ADD_ICON_QUEUE(src)
 			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
 
 /obj/machinery/shieldwallgen/proc/setup_field(var/NSEW = 0)

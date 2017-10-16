@@ -85,7 +85,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 	var/overmap_event_areas = 0 //How many event "clouds" will be generated
 
-	var/lobby_icon									// The icon which contains the lobby image(s)
+	var/lobby_icon = 'maps/exodus/exodus_lobby.dmi' // The icon which contains the lobby image(s)
 	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
 	var/lobby_music/lobby_music                     // The track that will play in the lobby screen. Handed in the /setup_map() proc.
 	var/welcome_sound = 'sound/AI/welcome.ogg'		// Sound played on roundstart
@@ -175,16 +175,14 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 // Used to apply various post-compile procedural effects to the map.
 /datum/map/proc/refresh_mining_turfs()
-
-	set background = 1
-	set waitfor = 0
-
 	for(var/thing in mining_walls)
 		var/turf/simulated/mineral/M = thing
-		M.update_icon()
+		ADD_ICON_QUEUE(M)
+		CHECK_TICK
 	for(var/thing in mining_floors)
 		var/turf/simulated/floor/asteroid/M = thing
 		M.updateMineralOverlays()
+		CHECK_TICK
 
 /datum/map/proc/get_network_access(var/network)
 	return 0

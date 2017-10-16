@@ -35,8 +35,6 @@
 			return global.OOClog;
 		if("PDAs")
 			return global.PDAs;
-		if("SKILLS")
-			return global.SKILLS;
 		if("SSair")
 			return global.SSair;
 		if("SSairflow")
@@ -83,8 +81,6 @@
 			return global._preloader;
 		if("account_hack_attempted")
 			return global.account_hack_attempted;
-		if("actor")
-			return global.actor;
 		if("additional_antag_types")
 			return global.additional_antag_types;
 		if("admin_datums")
@@ -143,8 +139,6 @@
 			return global.air_processing_killed;
 		if("alarm_manager")
 			return global.alarm_manager;
-		if("alien_whitelist")
-			return global.alien_whitelist;
 		if("allCasters")
 			return global.allCasters;
 		if("allConsoles")
@@ -479,8 +473,6 @@
 			return global.hair_styles_male_list;
 		if("hazard_overlays")
 			return global.hazard_overlays;
-		if("hidden_skill_types")
-			return global.hidden_skill_types;
 		if("hiss_sound")
 			return global.hiss_sound;
 		if("hivemind_bank")
@@ -617,8 +609,6 @@
 			return global.merged;
 		if("message_delay")
 			return global.message_delay;
-		if("message_servers")
-			return global.message_servers;
 		if("meteors_armageddon")
 			return global.meteors_armageddon;
 		if("meteors_cataclysm")
@@ -1063,8 +1053,6 @@
 			return global.weighted_mundaneevent_locations;
 		if("weighted_randomevent_locations")
 			return global.weighted_randomevent_locations;
-		if("whitelist")
-			return global.whitelist;
 		if("whitelisted_species")
 			return global.whitelisted_species;
 		if("wireColours")
@@ -1089,7 +1077,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1126,8 +1114,6 @@
 			global.OOClog=newval;
 		if("PDAs")
 			global.PDAs=newval;
-		if("SKILLS")
-			global.SKILLS=newval;
 		if("SSair")
 			global.SSair=newval;
 		if("SSairflow")
@@ -1174,8 +1160,6 @@
 			global._preloader=newval;
 		if("account_hack_attempted")
 			global.account_hack_attempted=newval;
-		if("actor")
-			global.actor=newval;
 		if("additional_antag_types")
 			global.additional_antag_types=newval;
 		if("admin_datums")
@@ -1234,8 +1218,6 @@
 			global.air_processing_killed=newval;
 		if("alarm_manager")
 			global.alarm_manager=newval;
-		if("alien_whitelist")
-			global.alien_whitelist=newval;
 		if("allCasters")
 			global.allCasters=newval;
 		if("allConsoles")
@@ -1570,8 +1552,6 @@
 			global.hair_styles_male_list=newval;
 		if("hazard_overlays")
 			global.hazard_overlays=newval;
-		if("hidden_skill_types")
-			global.hidden_skill_types=newval;
 		if("hiss_sound")
 			global.hiss_sound=newval;
 		if("hivemind_bank")
@@ -1708,8 +1688,6 @@
 			global.merged=newval;
 		if("message_delay")
 			global.message_delay=newval;
-		if("message_servers")
-			global.message_servers=newval;
 		if("meteors_armageddon")
 			global.meteors_armageddon=newval;
 		if("meteors_cataclysm")
@@ -2154,8 +2132,6 @@
 			global.weighted_mundaneevent_locations=newval;
 		if("weighted_randomevent_locations")
 			global.weighted_randomevent_locations=newval;
-		if("whitelist")
-			global.whitelist=newval;
 		if("whitelisted_species")
 			global.whitelisted_species=newval;
 		if("wireColours")
@@ -2180,7 +2156,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",

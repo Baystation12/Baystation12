@@ -32,7 +32,7 @@ var/list/nuke_disks = list()
 		..()
 		return
 	var/disk_rescued = 1
-	for(var/obj/item/weapon/disk/nuclear/D in world)
+	for(var/obj/item/weapon/disk/nuclear/D in nuke_disks)
 		var/disk_area = get_area(D)
 		if(!is_type_in_list(disk_area, GLOB.using_map.post_round_safe_areas))
 			disk_rescued = 0

@@ -32,7 +32,7 @@ var/hadevent    = 0
 			if(!istype(A) || (A && A.inflamed))
 				continue
 			A.inflamed = 1
-			A.update_icon()
+			ADD_ICON_QUEUE(A)
 			break
 
 
@@ -100,14 +100,14 @@ var/hadevent    = 0
 
 
 	var/list/area/areas = list()
-	for(var/area/A in world)
+	for(var/area/A in all_areas)
 		if(istype(A, /area/security/prison) || istype(A, /area/security/brig))
 			areas += A
 
 	if(areas && areas.len > 0)
 
 		for(var/area/A in areas)
-			for(var/obj/machinery/light/L in A)
+			for(var/obj/machinery/light/L in A.machinecache)
 				L.flicker(10)
 
 		sleep(100)

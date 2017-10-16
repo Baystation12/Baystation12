@@ -4,6 +4,7 @@
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
 
 #define get_turf(A) get_step(A,0)
+#define get_area2(A) return A.loc.loc
 
 #define isAI(A) istype(A, /mob/living/silicon/ai)
 

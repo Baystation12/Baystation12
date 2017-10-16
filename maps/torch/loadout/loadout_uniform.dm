@@ -138,8 +138,6 @@
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/shorts
-	display_name = "shorts selection"
-	path = /obj/item/clothing/under/shorts/jeans
 	allowed_roles = RESTRICTED_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
 

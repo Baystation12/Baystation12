@@ -249,7 +249,7 @@
 
 	spawn(2)
 		broadcast_status()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 #undef DEFAULT_PRESSURE_DELTA
 

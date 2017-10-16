@@ -122,6 +122,7 @@
 		/datum/reagent/radium =  8,
 		/datum/reagent/mutagen = 15
 		)
+	var/global/list/status_overlays
 
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
 	if(mechanical && !usr.incapacitated() && Adjacent(usr))
@@ -161,15 +162,15 @@
 			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
 		return
 
-/obj/machinery/portable_atmospherics/hydroponics/New()
-	..()
+/obj/machinery/portable_atmospherics/hydroponics/Initialize()
+	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
 	temp_chem_holder.flags |= OPENCONTAINER
 	create_reagents(200)
 	if(mechanical)
 		connect()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/portable_atmospherics/hydroponics/bullet_act(var/obj/item/projectile/Proj)
 
@@ -205,7 +206,7 @@
 		die()
 	check_level_sanity()
 	if(icon_update)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/die()
 	dead = 1
@@ -331,7 +332,7 @@
 	weedlevel = 0
 	pestlevel = 0
 	sampled = 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	visible_message("<span class='notice'>[src] has been overtaken by [seed.display_name].</span>")
 
 	return
@@ -368,7 +369,7 @@
 		if(labelled)
 			to_chat(usr, "You remove the label.")
 			labelled = null
-			update_icon()
+			ADD_ICON_QUEUE(src)
 		else
 			to_chat(usr, "There is no label to remove.")
 	return
@@ -419,7 +420,7 @@
 	harvest = 0
 	weedlevel = 0
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	visible_message("<span class='danger'>The </span><span class='notice'>[previous_plant]</span><span class='danger'> has suddenly mutated into </span><span class='notice'>[seed.display_name]!</span>")
 
 	return
