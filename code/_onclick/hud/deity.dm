@@ -28,6 +28,7 @@
 	for(var/i in 1 to D.control_types.len)
 		var/obj/screen/S = new()
 		S.name = null //Don't want them to be able to actually right click it.
+		S.mouse_opacity = 0
 		S.icon_state = "blank"
 		desc_screens[D.control_types[i]] = S
 		S.maptext_width = 128
