@@ -15,34 +15,38 @@
 	item_state = "ecigoff"
 	var/icon_off
 	var/icon_empty
+	var/ecig_colors = list(null, COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_PURPLE_GRAY)
 
 /obj/item/clothing/mask/smokable/ecig/New()
 	..()
 	ec_cartridge = new cartridge_type(src)
 
-/obj/item/clothing/mask/smokable/ecig/util
-	name = "\improper ONI-55 electronic cigarette"
-	desc = "Small metal cigarette-shaped device to satiate nicotine hunger. This one is ONI-55 model. "
-	icon_state = "ecigoff1"
-	icon_off = "ecigoff1"
-	icon_empty = "ecigoff2"
-	icon_on = "ecigon"
-
-/obj/item/clothing/mask/smokable/ecig/deluxe
-	name = "\improper eGavana MK3 electronic cigarette"
-	desc = "Cigar-like device for those who like luxurous option. This one is eGavana MK3 model. "
-	icon_state = "pcigoff1"
-	icon_off = "pcigoff1"
-	icon_empty = "pcigoff2"
-	icon_on = "pcigon"
-
 /obj/item/clothing/mask/smokable/ecig/simple
-	name = "\improper Lucky 1337 electronic cigarette"
-	desc = "Device for safe consuming of nicotine, made to look like regular cigarette. This one is Lucky 1337 model. "
+	name = "simple electronic cigarette"
+	desc = "A cheap Lucky 1337 electronic cigarette, styled like a traditional cigarette."
 	icon_state = "ccigoff"
 	icon_off = "ccigoff"
 	icon_empty = "ccigoff"
 	icon_on = "ccigon"
+
+/obj/item/clothing/mask/smokable/ecig/util
+	name = "electronic cigarette"
+	desc = "A popular utilitarian model electronic cigarette, the ONI-55. Comes in a variety of colors."
+	icon_state = "ecigoff1"
+	icon_off = "ecigoff1"
+	icon_empty = "ecigoff1"
+	icon_on = "ecigon"
+/obj/item/clothing/mask/smokable/ecig/util/New()
+	..()
+	color = pick(ecig_colors)
+
+/obj/item/clothing/mask/smokable/ecig/deluxe
+	name = "deluxe electronic cigarette"
+	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
+	icon_state = "pcigoff1"
+	icon_off = "pcigoff1"
+	icon_empty = "pcigoff2"
+	icon_on = "pcigon"
 
 /obj/item/clothing/mask/smokable/ecig/Process()
 	if(ishuman(loc))
@@ -78,7 +82,7 @@
 /obj/item/clothing/mask/smokable/ecig/attackby(var/obj/item/I, var/mob/user as mob)
 	if(istype(I, /obj/item/weapon/reagent_containers/ecig_cartridge))
 		if (ec_cartridge)//can't add second one
-			to_chat(user, "<span class='notice'>There's already cartridge inside.</span> ")
+			to_chat(user, "<span class='notice'>A cartridge has already been installed.</span> ")
 		else//fits in new one
 			user.remove_from_mob(I)
 			I.forceMove(src)//I.loc=src
@@ -90,15 +94,15 @@
 	if (active)
 		active=0
 		STOP_PROCESSING(SSobj, src)
-		to_chat(user, "<span class='notice'>You turn off [src]. </span> ")
+		to_chat(user, "<span class='notice'>You turn off \the [src]. </span> ")
 		update_icon()
 	else
 		if (!ec_cartridge)
-			to_chat(user, "<span class='notice'>Insert cartridge first.</span> ")
+			to_chat(user, "<span class='notice'>You can't use it with no cartridge installed!.</span> ")
 			return
 		active=1
 		START_PROCESSING(SSobj, src)
-		to_chat(user, "<span class='notice'>You turn on [src]. </span> ")
+		to_chat(user, "<span class='notice'>You turn on \the [src]. </span> ")
 		update_icon()
 
 /obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user as mob)//eject cartridge
@@ -106,7 +110,7 @@
 		if (ec_cartridge)
 			active=0
 			user.put_in_hands(ec_cartridge)
-			to_chat(user, "<span class='notice'>You eject [ec_cartridge] from [src].</span> ")
+			to_chat(user, "<span class='notice'>You eject [ec_cartridge] from \the [src].</span> ")
 			ec_cartridge = null
 			update_icon()
 	else
@@ -114,10 +118,11 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge
 	name = "tobacco flavour cartridge"
-	desc = "A small cartridge. Contains the liquid used in electronic cigarettes. Tobacco flavour. "
+	desc = "A small metal cartridge, used with electronic cigarettes, which contains an atomizing coil and a solution to be atomized."
 	w_class = ITEM_SIZE_TINY
 	icon = 'icons/obj/ecig.dmi'
 	icon_state = "ecartridge"
+	matter = list("metal" = 50, "glass" = 10)
 	volume = 20
 	flags = OPENCONTAINER
 
@@ -126,12 +131,24 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/examine(mob/user as mob)//to see how much left
 	..()
-	to_chat(user, "Has [reagents.total_volume] units of liquid remaining.")
+	to_chat(user, "The cartridge has [reagents.total_volume] units of liquid remaining.")
+
+//flavours
+/obj/item/weapon/reagent_containers/ecig_cartridge/blank
+	name = "ecigarette cartridge"
+	desc = "A small metal cartridge which contains an atomizing coil."
+
+/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico
+	name = "flavorless nicotine cartridge"
+	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says you can add whatever flavoring agents you want."
+/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nicotine, 5)
+	reagents.add_reagent(/datum/reagent/water, 10)
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine
 	name = "tobacco flavour cartridge"
-	desc =  "A small cartridge. Contains the liquid used in electronic cigarettes. Tobacco flavour. "
-
+	desc =  "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its tobacco flavored."
 /obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nicotine, 5)
@@ -139,8 +156,7 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine
 	name = "high nicotine tobacco flavour cartridge"
-	desc = "A small cartridge. Contains the liquid used in electronic cigarettes. Tobacco flavour with high content of nicotine. "
-
+	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its tobacco flavored, with extra nicotine."
 /obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nicotine, 10)
@@ -148,8 +164,7 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/orange
 	name = "orange flavour cartridge"
-	desc = "A small cartridge. Contains the liquid used in electronic cigarettes. Orange flavuor. "
-
+	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its orange flavored."
 /obj/item/weapon/reagent_containers/ecig_cartridge/orange/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nicotine, 5)
@@ -158,8 +173,7 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/mint
 	name = "mint flavour cartridge"
-	desc = "A small cartridge. Contains the liquid used in electronic cigarettes. Mint flavuor. "
-
+	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its mint flavored."
 /obj/item/weapon/reagent_containers/ecig_cartridge/mint/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nicotine, 5)
@@ -168,8 +182,7 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/watermelon
 	name = "watermelon flavour cartridge"
-	desc = "A small cartridge. Contains the liquid used in electronic cigarettes. Watermelon flavuor. "
-
+	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its watermelon flavored."
 /obj/item/weapon/reagent_containers/ecig_cartridge/watermelon/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nicotine, 5)
@@ -178,11 +191,27 @@
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/grape
 	name = "grape flavour cartridge"
-	desc = "A small cartridge. Contains the liquid used in electronic cigarettes. Grape flavuor. "
-
-
+	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its grape flavored."
 /obj/item/weapon/reagent_containers/ecig_cartridge/grape/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nicotine, 5)
 	reagents.add_reagent(/datum/reagent/water, 10)
 	reagents.add_reagent(/datum/reagent/drink/juice/grape, 5)
+
+/obj/item/weapon/reagent_containers/ecig_cartridge/lemonlime
+	name = "lemon-lime flavour cartridge"
+	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its lemon-lime flavored."
+/obj/item/weapon/reagent_containers/ecig_cartridge/lemonlime/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nicotine, 5)
+	reagents.add_reagent(/datum/reagent/water, 10)
+	reagents.add_reagent(/datum/reagent/drink/lemon_lime, 5)
+
+/obj/item/weapon/reagent_containers/ecig_cartridge/coffee
+	name = "coffee flavour cartridge"
+	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says its coffee flavored."
+/obj/item/weapon/reagent_containers/ecig_cartridge/coffee/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nicotine, 5)
+	reagents.add_reagent(/datum/reagent/water, 10)
+	reagents.add_reagent(/datum/reagent/drink/coffee, 5)
