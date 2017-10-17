@@ -29,7 +29,7 @@
 /mob/living/deity/proc/adjust_power(var/amount, var/silent = 0, var/msg)
 	if(feats[DEITY_POWER_BONUS])
 		amount += amount * feats[DEITY_POWER_BONUS]
-	mob_uplink.uses += amount
+	mob_uplink.uses = max(0, mob_uplink.uses + amount)
 	if(!silent)
 		var/feel = ""
 		if(abs(amount) > 100)
