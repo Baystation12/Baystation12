@@ -175,13 +175,12 @@
 	embed = 0
 	sharp = 0
 
-//Should do about 80 damage at 1 tile distance (adjacent), and 50 damage at 3 tiles distance.
 //Overall less damage than slugs in exchange for more damage at very close range and more embedding
 /obj/item/projectile/bullet/pellet/shotgun
 	name = "shrapnel"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 15
-	pellets = 6
+	pellets = 9 //12 gauge
 	range_step = 1
 	spread_step = 10
 
