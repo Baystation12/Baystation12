@@ -62,6 +62,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Laser carbines crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_ELEVATED
 
 /decl/hierarchy/supply_pack/security/advancedlaser
 	name = "Weapons - Advanced Laser Weapons"
@@ -72,6 +73,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Advanced Laser Weapons crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/sniperlaser
 	name = "Weapons - Energy marksman"
@@ -80,6 +82,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Energy marksman crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/pdw
 	name = "Weapons - Ballistic PDWs"
@@ -88,6 +91,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Ballistic PDW crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/bullpup
 	name = "Weapons - Ballistic rifles"
@@ -96,6 +100,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Bullpup automatic rifle crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/holster
 	name = "Misc - Holster crate"
