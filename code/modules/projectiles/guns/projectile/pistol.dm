@@ -183,6 +183,10 @@
 	caliber = initial(ammo.caliber)
 	..()
 
+/obj/item/weapon/gun/projectile/pirate/unload_ammo()
+	..()
+	playsound(src.loc,'sound/weapons/magload.ogg', 50, 1)
+
 // Zip gun construction.
 /obj/item/weapon/zipgunframe
 	name = "zip gun frame"

@@ -68,7 +68,7 @@
 /obj/item/projectile/bullet/pellet
 	name = "shrapnel" //'shrapnel' sounds more dangerous (i.e. cooler) than 'pellet'
 	damage = 22.5
-	//icon_state = "bullet" //TODO: would be nice to have it's own icon state
+	icon_state = "pellets"
 	var/pellets = 4			//number of pellets
 	var/range_step = 2		//projectile will lose a fragment each time it travels this distance. Can be a non-integer.
 	var/base_spread = 90	//lower means the pellets spread more across body parts. If zero then this is considered a shrapnel explosion instead of a shrapnel cone
@@ -175,15 +175,14 @@
 	embed = 0
 	sharp = 0
 
-//Should do about 80 damage at 1 tile distance (adjacent), and 50 damage at 3 tiles distance.
 //Overall less damage than slugs in exchange for more damage at very close range and more embedding
 /obj/item/projectile/bullet/pellet/shotgun
 	name = "shrapnel"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	damage = 15
+	damage = 17
 	pellets = 6
-	range_step = 1
-	spread_step = 10
+	range_step = 2
+	spread_step = 5
 
 /* "Rifle" rounds */
 

@@ -1,3 +1,8 @@
+/obj/item/weapon/gun/projectile/shotgun
+	name = "ERROR"
+	desc = "This gun should not exist. Please contact an admin."
+	load_sound = 'sound/weapons/shotguninsert.ogg'
+
 /obj/item/weapon/gun/projectile/shotgun/pump
 	name = "shotgun"
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
@@ -84,6 +89,7 @@
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
 	..(user, allow_dump=1)
+	playsound(src.loc,'sound/weapons/magload.ogg', 50, 1)
 
 //this is largely hacky and bad :(	-Pete
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/attackby(var/obj/item/A as obj, mob/user as mob)
