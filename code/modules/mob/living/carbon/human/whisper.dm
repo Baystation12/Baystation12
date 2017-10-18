@@ -7,7 +7,6 @@
 			to_chat(src, "<span class='warning'>You cannot whisper (muted).</span>")
 			return
 
-
 	if (src.stat == 2)
 		return src.say_dead(message)
 
@@ -21,12 +20,7 @@
 		else
 			name = get_id_name("Unknown")
 
-	//parse the language code and consume it
-	var/datum/language/speaking = parse_language(message)
-	if (speaking)
-		message = copytext(message,2+length(speaking.key))
-
-	whisper_say(message, speaking, alt_name)
+	whisper_say(message, alt_name = alt_name)
 
 
 //This is used by both the whisper verb and human/say() to handle whispering
