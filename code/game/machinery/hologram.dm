@@ -53,6 +53,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	var/obj/machinery/hologram/holopad/targetpad
 	var/last_message
 
+	var/map_range = -1 //how far on overmap can it connect, -1 for local zlevels only
+
 /obj/machinery/hologram/holopad/New()
 	..()
 	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[loc.loc]'"
@@ -89,8 +91,13 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 			if(last_request + 200 < world.time) //don't spam other people with requests either, you jerk!
 				last_request = world.time
 				var/list/holopadlist = list()
+				var/zlevels = GetConnectedZlevels(z)
+				if(GLOB.using_map.use_overmap && map_range >= 0)
+					var/obj/effect/overmap/O = map_sectors["[z]"]
+					for(var/obj/effect/overmap/OO in range(O,map_range))
+						zlevels |= OO.map_z
 				for(var/obj/machinery/hologram/holopad/H in SSmachines.machinery)
-					if((H.z in GLOB.using_map.station_levels) && H.operable())
+					if((H.z in zlevels) && H.operable())
 						holopadlist["[H.loc.loc.name]"] = H	//Define a list and fill it with the area of every holopad in the world
 				holopadlist = sortAssoc(holopadlist)
 				var/temppad = input(user, "Which holopad would you like to contact?", "holopad list") as null|anything in holopadlist
@@ -386,6 +393,11 @@ Holographic project of everything else.
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "hologram0"
 
+/obj/machinery/hologram/holopad/longrange
+	name = "long range holopad"
+	desc = "It's a floor-mounted device for projecting holographic images. This one utilizes bluespace transmitter to communicate with far away locations."
+	map_range = 2
+	power_per_hologram = 1000 //per usage per hologram
 
 #undef RANGE_BASED
 #undef AREA_BASED
