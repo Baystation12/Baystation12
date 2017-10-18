@@ -171,35 +171,27 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["roundduration"] = roundduration2text()
 		s["map"] = GLOB.using_map.full_name
 
-		if(input["status"] == "2")
-			var/list/players = list()
-			var/list/admins = list()
+		var/active = 0
+		var/list/players = list()
+		var/list/admins = list()
+		var/legacy = input["status"] != "2"
+		for(var/client/C in GLOB.clients)
+			if(C.holder)
+				if(C.is_stealthed())
+					continue	//so stealthmins aren't revealed by the hub
+				admins[C.key] = C.holder.rank
+			if(legacy)
+				s["player[players.len]"] = C.key
+			players += C.key
+			if(istype(C.mob, /mob/living))
+				active++
 
-			for(var/client/C in GLOB.clients)
-				if(C.holder)
-					if(C.is_stealthed())
-						continue
-					admins[C.key] = C.holder.rank
-				players += C.key
-
-			s["players"] = players.len
+		s["players"] = players.len
+		s["admins"] = admins.len
+		if(!legacy)
 			s["playerlist"] = list2params(players)
-			s["admins"] = admins.len
 			s["adminlist"] = list2params(admins)
-		else
-			var/n = 0
-			var/admins = 0
-
-			for(var/client/C in GLOB.clients)
-				if(C.holder)
-					if(C.is_stealthed())
-						continue	//so stealthmins aren't revealed by the hub
-					admins++
-				s["player[n]"] = C.key
-				n++
-
-			s["players"] = n
-			s["admins"] = admins
+			s["active_players"] = active
 
 		return list2params(s)
 
