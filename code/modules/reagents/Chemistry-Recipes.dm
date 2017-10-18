@@ -1,4 +1,3 @@
-
 //Chemical Reactions - Initialises all /datum/chemical_reaction into a list
 // It is filtered into multiple lists within a list.
 // For example:
@@ -1569,6 +1568,32 @@
 	result = /datum/reagent/ethanol/screwdrivercocktail
 	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/juice/orange = 1)
 	result_amount = 3
+
+/datum/chemical_reaction/battuta
+	name = "Ibn Battuta"
+	result = /datum/reagent/ethanol/battuta
+	required_reagents = list(/datum/reagent/ethanol/herbal = 2, /datum/reagent/drink/juice/orange = 1)
+	catalysts = list(/datum/reagent/nutriment/mint)
+	result_amount = 3
+
+/datum/chemical_reaction/magellan
+	name = "Magellan"
+	result = /datum/reagent/ethanol/magellan
+	required_reagents = list(/datum/reagent/ethanol/wine = 1, /datum/reagent/ethanol/specialwhiskey = 1)
+	catalysts = list(/datum/reagent/sugar)
+	result_amount = 2
+
+/datum/chemical_reaction/zhenghe
+	name = "Zheng He"
+	result = /datum/reagent/ethanol/zhenghe
+	required_reagents = list(/datum/reagent/drink/tea = 2, /datum/reagent/ethanol/vermouth = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/armstrong
+	name = "Armstrong"
+	result = /datum/reagent/ethanol/armstrong
+	required_reagents = list(/datum/reagent/ethanol/beer = 2, /datum/reagent/ethanol/vodka = 1, /datum/reagent/drink/juice/lime = 1)
+	result_amount = 4
 
 /datum/chemical_reaction/bloody_mary
 	name = "Bloody Mary"

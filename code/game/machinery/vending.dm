@@ -644,6 +644,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/herbal = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/tea = 15,
 					/obj/item/weapon/glass_extra/stick = 15,
 					/obj/item/weapon/glass_extra/straw = 15)
