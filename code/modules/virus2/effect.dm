@@ -376,7 +376,8 @@
 	stage = 1
 	delay = 25 SECONDS
 	activate(var/mob/living/carbon/human/mob,var/multiplier)
-		to_chat(mob, "<span class='warning'>Your [pick(mob.organs_by_name)] itches like hell.</span>")
+		var/obj/O = pick(mob.organs)
+		to_chat(mob, "<span class='warning'>Your [O.name] itches like hell.</span>")
 
 /datum/disease2/effect/stomach
 	name = "Upset stomach"
