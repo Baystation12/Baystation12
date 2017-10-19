@@ -94,7 +94,7 @@
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm, access_explorer, access_pathfinder)
+			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm, access_explorer, access_pathfinder, access_gunlockers)
 	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_heads,
@@ -103,7 +103,7 @@
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila, access_explorer, access_pathfinder)
+			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila, access_explorer, access_pathfinder, access_gunlockers)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
@@ -124,7 +124,7 @@
 	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_heads, access_rd,
 						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard,
-						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
+						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_gunlockers)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -153,7 +153,7 @@
 			            access_teleporter, access_eva, access_heads,
 			            access_chapel_office, access_crematorium, access_chemistry, access_virology,
 			            access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
-			            access_medical_equip, access_solgov_crew, access_senmed)
+			            access_medical_equip, access_solgov_crew, access_senmed, access_gunlockers)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -187,12 +187,12 @@
 			            access_ai_upload, access_teleporter, access_eva, access_heads,
 			            access_tech_storage, access_robotics, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
+			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics, access_gunlockers)
 	minimal_access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_ai_upload, access_teleporter, access_eva, access_heads,
 			            access_tech_storage, access_atmospherics, access_janitor, access_construction,
 			            access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
-			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics)
+			            access_solgov_crew, access_robotics_engineering, access_seneng, access_hangar, access_robotics, access_gunlockers)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/ntnetmonitor,
@@ -230,7 +230,7 @@
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_gun)
+			            access_solgov_crew, access_gun, access_gunlockers)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -306,7 +306,7 @@
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads, access_all_personal_lockers, access_janitor,
 			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_guppy_helm,
-			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory)
+			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory, access_gunlockers)
 
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor)
 
@@ -337,7 +337,7 @@
 
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
 			            access_heads, access_janitor, access_kitchen, access_cargo, access_RC_announce, access_keycard_auth,
-			            access_solgov_crew)
+			            access_solgov_crew, access_gunlockers)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/suit_sensors,
@@ -371,7 +371,7 @@
 
 
 	access = list(access_maint_tunnels, access_external_airlocks, access_eva, access_emergency_storage, access_solgov_crew, access_aquila, access_aquila_helm,
-						access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads, access_explorer, access_cent_creed) //Yes, the last one is weird. It's used to make intercoms work.
+						access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads, access_explorer, access_gunlockers, access_cent_creed) //Yes, the last one is weird. It's used to make intercoms work.
 
 /datum/job/pathfinder
 	title = "Pathfinder"
@@ -393,7 +393,7 @@
 	)
 
 
-	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
+	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed, access_gunlockers)
 
 /datum/job/explorer
 	title = "Explorer"
@@ -808,7 +808,7 @@
 	)
 
 	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar)
+						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_gunlockers)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/supply)

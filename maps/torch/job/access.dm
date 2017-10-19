@@ -135,6 +135,12 @@
 	desc = "Pathfinder"
 	region = ACCESS_REGION_RESEARCH
 
+/var/const/access_gunlockers = 95
+/datum/access/gunlockers
+	id = access_gunlockers
+	desc = "Gun Lockers"
+	region = ACCESS_REGION_COMMAND
+
 
 /************
 * SEV Torch *
