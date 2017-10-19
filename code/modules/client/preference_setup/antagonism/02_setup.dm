@@ -32,7 +32,7 @@
 		return TOPIC_REFRESH
 
 	if(href_list["exploitable_record"])
-		var/exploitmsg = sanitize(input(user,"Set exploitable information about you here.","Exploitable Information", html_decode(pref.exploit_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		var/exploitmsg = sanitize(input(user,"Set exploitable information about you here.","Exploitable Information", html_decode(pref.exploit_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 512)
 		if(!isnull(exploitmsg) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.exploit_record = exploitmsg
 			return TOPIC_REFRESH
