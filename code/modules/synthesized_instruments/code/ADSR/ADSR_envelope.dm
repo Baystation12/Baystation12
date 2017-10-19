@@ -47,10 +47,10 @@
 		CRASH("Release_cycle does not end with 0.0 volume mod")
 	for (var/mult in src.attack_decay_cycle)
 		if (0 >= mult)
-			CRASH("One of volume multiplies in attack_decay_cycle is zero")
-	for (var/mult in src. sustain_cycle)
+			CRASH("One of volume multipliers in attack_decay_cycle is zero")
+	for (var/mult in src.sustain_cycle)
 		if (0 >= mult)
-			CRASH("One of volume multiplies in sustain_cycle is zero")
+			CRASH("One of volume multipliers in sustain_cycle is zero")
 	for (var/mul_indx = 1 to src.release_cycle.len-1)
 		var/mult = src.release_cycle[mul_indx]
 		if (0 >= mult)

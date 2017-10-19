@@ -20,17 +20,17 @@
 	update_sound &= istype(src.object)
 	update_sound &= istype(src.subject)
 	update_sound &= istype(src.source)
-	if (update_sound) src.update_sound()
-	else src.destroy_sound()
+	if (update_sound) src._update_sound()
+	else src._destroy_sound()
 
 
-/namespace/synthesized_instruments/event/proc/update_sound()
+/namespace/synthesized_instruments/event/proc/_update_sound()
 	src.object.volume = src.new_volume
 	src.object.status |= SOUND_UPDATE
 	sound_to(src.subject, src.object)
 
 
-/namespace/synthesized_instruments/event/proc/destroy_sound()
+/namespace/synthesized_instruments/event/proc/_destroy_sound()
 	if (istype(src.object) && istype(src.subject))
 		var/sound/null_sound = sound(channel=src.object.channel, wait=0)
 		if (GLOB.synthesized_instruments.flags.env_settings_available)
@@ -43,7 +43,7 @@
 
 
 /namespace/synthesized_instruments/manager/event_manager
-	var/list/datum/musical_event/events = list()
+	var/list/namespace/synthesized_instruments/event/events = list()
 	var/suspended = 0
 	var/active = 0
 	var/kill_loop = 0
@@ -64,12 +64,12 @@
 	src.active = 1
 
 	spawn
-		var/list/datum/musical_event/left_events = list()
+		var/list/namespace/synthesized_instruments/event/left_events = list()
 		while (1)
 			left_events.Cut()
 			if (src.kill_loop) break
 			if (!src.suspended)
-				for (var/datum/musical_event/event in src.events)
+				for (var/namespace/synthesized_instruments/event/event in src.events)
 					event.time -= world.tick_lag
 					if (0 >= event.time)
 						event.tick()
@@ -82,12 +82,12 @@
 /namespace/synthesized_instruments/manager/event_manager/proc/deactivate()
 	if (src.kill_loop) return
 	if (src.active) src.kill_loop = 1
-	for (var/datum/musical_event/event in src.events)
-		event.destroy_sound()
+	for (var/namespace/synthesized_instruments/event/event in src.events)
+		event._destroy_sound()
 	src.events.Cut()
 	src.active = 0
 	src.suspended = 0
 
 
 /namespace/synthesized_instruments/event_manager/proc/is_overloaded()
-	return src.events.len > GLOB.synthesised_instruments.constants.max_events_per_instrument
+	return src.events.len > GLOB.synthesized_instruments.constants.max_events_per_instrument

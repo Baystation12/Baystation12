@@ -1,12 +1,12 @@
 #define OUTBOUNDS_CHECK(var, min, max) !(var in min to max)
 #define CP(L, S) copytext(L, S, S+1)
 #define IS_DIGIT(L) (L >= "0" && L <= "9" ? 1 : 0)
-// God object much, huh?
 /namespace/synthesized_instruments/player
 	var/range = 15
 	var/volume_falloff_exponent = 0.9
 	var/falloff = 2
 	var/three_dimensional_sound = 1
+	var/forced_sound_in = 0
 	var/apply_echo = 0
 	var/env_preset = -1
 	var/env[23]
@@ -30,16 +30,13 @@
 	var/datum/nano_module/song_editor/song_editor
 	var/datum/nano_module/usage_info/usage_info
 
-	var/sustain_mode
-	var/sustain_timer = 1
-	var/soft_coeff = 2.0
 	var/transposition = 0
 
-	var/namespace/synthesized_instruments/bound/octave_range = new {min = 0; max = 9; is_integer = 1}
-	var/namespace/synthesized_instruments/bound/volume_range = new {min = 0; max = 100; is_integer = 0} // 100 is actually painfully loud
+	var/namespace/synthesized_instruments/bound/octave_range = new /namespace/synthesized_instruments/bound {min = 0; max = 9; is_integer = 1}
+	var/namespace/synthesized_instruments/bound/volume_range = new /namespace/synthesized_instruments/bound {min = 0; max = 100; is_integer = 0} // 100 is actually painfully loud
 
 
-/namespace/synthesized_instruments/player/New(obj/actual_instrument, datum/instrument/default_instrument)
+/namespace/synthesized_instruments/player/New(obj/actual_instrument, namespace/synthesized_instruments/instrument/default_instrument)
 	src.actual_instrument = actual_instrument
 	src.echo = GLOB.synthesized_instruments.echo.echo_default.Copy()
 	src.env = GLOB.synthesized_instruments.environment.env_default.Copy()
@@ -58,10 +55,10 @@
 
 	var/delta1 = 0
 	switch(accidental_char)
-		if ("b") delta = -1
-		if ("#") delta = 1
-		if ("s") delta = 1
-		if ("n") delta = 0
+		if ("b") delta1 = -1
+		if ("#") delta1 = 1
+		if ("s") delta1 = 1
+		if ("n") delta1 = 0
 
 	var/delta2 = 12 * octave
 
@@ -93,33 +90,15 @@
 		// src.apply_modifications_for(hearer, sound_copy, note_index, line_index, note_name) -- Music Code is unused for now
 		src.apply_modifications_for(hearer, sound_copy)
 
-		sound_to(receiver, sound_copy)
+		sound_to(hearer, sound_copy)
 		#if DM_VERSION < 511
 		// Shit broke when I updated BYOND to 511
 		// It took me forever to track down the issue
 		sound_copy.frequency = 1
 		#endif
-		var/delta_volume = player.volume / src.sustain_timer
-		var/current_volume = max(round(sound_copy.volume), 0)
-		var/tick = duration
-		while (current_volume > 0)
-			var/new_volume = current_volume
-			tick += world.tick_lag
-			if (0 >= delta_volume)
-				CRASH("Delta Volume somehow was non-positive: [delta_volume]")
-			if (1 >= src.soft_coeff)
-				CRASH("Soft Coeff somehow was <=1: [src.soft_coeff]")
-			if (src.linear_decay)
-				new_volume = new_volume - delta_volume
-			else
-				new_volume = new_volume / src.soft_coeff
-
-			var/sanitized_volume = max(round(new_volume), 0)
-			if (sanitized_volume == current_volume)
-				current_volume = new_volume
-				continue
-			current_volume = sanitized_volume
-			src.event_manager.push_event(src, who, sound_copy, tick, current_volume)
+		/*
+			@@@ IMPLEMENT ADSR ENVELOPE @@@
+		*/
 
 
 /namespace/synthesized_instruments/player/Destroy()
@@ -130,15 +109,16 @@
 	src.instrument = null
 	sleep(1)
 	for (var/channel in src.song.free_channels)
-		GLOB.musical_config.free_channels += channel // Deoccupy channels
-	song = null
-	qdel(song)
+		GLOB.synthesized_instruments.shared._free_channels += channel // Deoccupy channels
 	return ..()
 
 
 /namespace/synthesized_instruments/player/proc/apply_modifications_for(mob/who, sound/what, note_num, which_line, which_note) // You don't need to override this
+	/*
+
+	@@@ IMPLEMENT IN EFFECT MANAGER @@@
 	var/mod = (get_dist_euclidian(who, get_turf(src.actual_instrument))-1) / src.range
-	what.volume = volume / (100**mod**src.volume_falloff_exponent)
+	what.volume = src.player_manager.base_volume / (100**mod**src.volume_falloff_exponent)
 	if (get_turf(who) in stored_locations)
 		what.volume /= 10 // Twice as low
 
@@ -153,10 +133,11 @@
 		what.z = dz
 
 		what.y = 1
-	if (GLOB.musical_config.env_settings_available)
-		what.environment = GLOB.musical_config.is_custom_env(src.virtual_environment_selected) ? src.env : src.virtual_environment_selected
+	if (GLOB.synthesized_instruments.env_settings_available)
+		what.environment = GLOB.synthesized_instruments.is_custom_env(src.virtual_environment_selected) ? src.env : src.virtual_environment_selected
 	if (src.apply_echo)
 		what.echo = src.echo
+	*/
 	return
 
 
@@ -184,7 +165,7 @@
 				var/delta = components.len==2 && text2num(components[2]) ? text2num(components[2]) : 1
 				var/note_str = splittext(components[1], "-")
 
-				var/duration = sanitize_tempo(src.tempo / delta)
+				var/duration = GLOB.synthesized_instruments.functions.sanitize_tempo(src.tempo / delta)
 				src.event_manager.suspended = 1
 				for (var/note in note_str)
 					if (!note)	continue // wtf, empty note
@@ -246,7 +227,7 @@
 	src.actual_instrument.add_fingerprint(usr)
 
 	switch (target)
-		if ("tempo") src.tempo = sanitize_tempo(src.tempo + value*world.tick_lag)
+		if ("tempo") src.tempo = GLOB.synthesized_instruments.functions.sanitize_tempo(src.tempo + value*world.tick_lag)
 
 		if ("play")
 			src.playing = value
@@ -255,12 +236,12 @@
 
 		if ("newsong")
 			src.player.song.lines.Cut()
-			src.player.song.tempo = sanitize_tempo(5) // default 120 BPM
+			src.player.song.tempo = GLOB.synthesized_instruments.functions.sanitize_tempo(5) // default 120 BPM
 
 		if ("import")
 			var/t = ""
 			do
-				t = html_encode(input(usr, "Please paste the entire song, formatted:", text("[]", name), t)  as message)
+				t = html_encode(input(usr, "Please paste the entire song, formatted:", text("[]"), t)  as message)
 				if(!in_range(src, usr))
 					return
 
@@ -279,12 +260,12 @@
 						src.player.song.tempo = src.player.song.sanitize_tempo(5)
 				else
 					src.player.song.tempo = src.player.song.sanitize_tempo(5) // default 120 BPM
-				if(src.player.song.lines.len > maximum_lines)
+				if(src.player.song.lines.len > GLOB.synthesized_instruments.constants.max_lines_in_song)
 					to_chat(usr, "Too many lines!")
-					src.player.song.lines.Cut(maximum_lines+1)
+					src.player.song.lines.Cut(GLOB.synthesized_instruments.constants.max_lines_in_song+1)
 				var/linenum = 1
 				for(var/l in src.player.song.lines)
-					if(length(l) > maximum_line_length)
+					if(length(l) > GLOB.synthesized_instruments.constants.max_length_of_line_in_song)
 						to_chat(usr, "Line [linenum] too long!")
 						src.player.song.lines.Remove(l)
 					else
@@ -307,7 +288,9 @@
 
 
 /namespace/synthesized_instruments/player/proc/shouldStopPlaying(mob/user)
-	return actual_instrument:shouldStopPlaying(user)
+	// return actual_instrument:shouldStopPlaying(user)
+	return 0
+
 #undef OUTBOUNDS_CHECK
 #undef CP
 #undef IS_DIGIT

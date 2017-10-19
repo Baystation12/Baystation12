@@ -5,11 +5,6 @@
 
 /namespace/synthesized_instruments/player/synthesizer/apply_modifications_for(mob/who, sound/what, which, where, which_one)
 	..(who, what, which)
-	for (var/datum/music_code/cond in code)
-		if (cond.test(which, where, which_one))
-			var/datum/sample_pair/pair = cond.instrument.sample_map[GLOB.musical_config.n2t(which)]
-			what.file = pair.sample
-
 
 
 /namespace/synthesized_instruments/player/synthesizer/torture
@@ -33,7 +28,8 @@
 	..()
 	for (var/type in typesof(/namespace/synthesized_instruments/instrument))
 		var/namespace/synthesized_instruments/instrument/new_instrument = new type
-		if (!new_instrument.id) continue
+		if (!new_instrument.id) // Skip categories, obviously
+			continue
 		new_instrument.create_full_sample_deviation_map()
 		src.instruments[new_instrument.name] = new_instrument
 	src.player = new /namespace/synthesized_instruments/player/synthesizer(src, instruments[pick(instruments)])
@@ -67,40 +63,40 @@
 	var/list/data
 	data = list(
 		"playback" = list(
-			"playing" = src.player.song.playing,
-			"autorepeat" = src.player.song.autorepeat,
+			"playing" = src.player.playing,
+			"autorepeat" = src.player.autorepeat,
 			"three_dimensional_sound" = src.player.three_dimensional_sound
 		),
 		"basic_options" = list(
-			"cur_instrument" = src.player.song.instrument_data.name,
+			"cur_instrument" = src.player.instrument_data.name,
 			"volume" = src.player.volume,
-			"BPM" = round(600 / src.player.song.tempo),
-			"transposition" = src.player.song.transposition,
+			"BPM" = round(600 / src.player.tempo),
+			"transposition" = src.player.transposition,
 			"octave_range" = list(
-				"min" = src.player.song.octave_range_min,
-				"max" = src.player.song.octave_range_max
+				"min" = src.player.octave_range_min,
+				"max" = src.player.octave_range_max
 			)
 		),
 		"advanced_options" = list(
-			"all_environments" = GLOB.musical_config.all_environments,
-			"selected_environment" = GLOB.musical_config.id_to_environment(src.player.virtual_environment_selected),
+			"all_environments" = GLOB.synthesized_instruments.all_environments,
+			"selected_environment" = GLOB.synthesized_instruments.id_to_environment(src.player.virtual_environment_selected),
 			"apply_echo" = src.player.apply_echo
 		),
 		"sustain" = list(
-			"linear_decay_active" = src.player.song.linear_decay,
-			"sustain_timer" = src.player.song.sustain_timer,
-			"soft_coeff" = src.player.song.soft_coeff
+			"linear_decay_active" = src.player.linear_decay,
+			"sustain_timer" = src.player.sustain_timer,
+			"soft_coeff" = src.player.soft_coeff
 		),
 		"show" = list(
-			"playback" = src.player.song.lines.len > 0,
-			"custom_env_options" = GLOB.musical_config.is_custom_env(src.player.virtual_environment_selected) && src.player.three_dimensional_sound,
-			"env_settings" = GLOB.musical_config.env_settings_available
+			"playback" = src.player.lines.len > 0,
+			"custom_env_options" = GLOB.synthesized_instruments.is_custom_env(src.player.virtual_environment_selected) && src.player.three_dimensional_sound,
+			"env_settings" = GLOB.synthesized_instruments.env_settings_available
 		),
 		"status" = list(
-			"channels" = src.player.song.free_channels.len,
+			"channels" = src.player.free_channels.len,
 			"events" = src.player.event_manager.events.len,
-			"max_channels" = GLOB.musical_config.channels_per_instrument,
-			"max_events" = GLOB.musical_config.max_events,
+			"max_channels" = GLOB.synthesized_instruments.channels_per_instrument,
+			"max_events" = GLOB.synthesized_instruments.max_events,
 		)
 	)
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -125,19 +121,19 @@
 		if ("volume")
 			src.player.volume = max(min(player.volume+text2num(value), 100), 0)
 		if ("transposition")
-			src.player.song.transposition = max(min(player.song.transposition+value, GLOB.musical_config.highest_transposition), GLOB.musical_config.lowest_transposition)
+			src.player.transposition = max(min(player.transposition+value, GLOB.synthesized_instruments.highest_transposition), GLOB.synthesized_instruments.lowest_transposition)
 		if ("min_octave")
-			src.player.song.octave_range_min = max(min(player.song.octave_range_min+value, GLOB.musical_config.highest_octave), GLOB.musical_config.lowest_octave)
-			src.player.song.octave_range_max = max(player.song.octave_range_max, player.song.octave_range_min)
+			src.player.octave_range_min = max(min(player.octave_range_min+value, GLOB.synthesized_instruments.highest_octave), GLOB.synthesized_instruments.lowest_octave)
+			src.player.octave_range_max = max(player.octave_range_max, player.octave_range_min)
 		if ("max_octave")
-			src.player.song.octave_range_max = max(min(player.song.octave_range_max+value, GLOB.musical_config.highest_octave), GLOB.musical_config.lowest_octave)
-			src.player.song.octave_range_min = min(player.song.octave_range_max, player.song.octave_range_min)
+			src.player.octave_range_max = max(min(player.octave_range_max+value, GLOB.synthesized_instruments.highest_octave), GLOB.synthesized_instruments.lowest_octave)
+			src.player.octave_range_min = min(player.octave_range_max, player.octave_range_min)
 		if ("sustain_timer")
-			src.player.song.sustain_timer = max(min(player.song.sustain_timer+value, GLOB.musical_config.longest_sustain_timer), 1)
+			src.player.sustain_timer = max(min(player.sustain_timer+value, GLOB.synthesized_instruments.longest_sustain_timer), 1)
 		if ("soft_coeff")
-			var/new_coeff = input(usr, "from [GLOB.musical_config.gentlest_drop] to [GLOB.musical_config.steepest_drop]") as num
-			new_coeff = round(min(max(new_coeff, GLOB.musical_config.gentlest_drop), GLOB.musical_config.steepest_drop), 0.001)
-			src.player.song.soft_coeff = new_coeff
+			var/new_coeff = input(usr, "from [GLOB.synthesized_instruments.gentlest_drop] to [GLOB.synthesized_instruments.steepest_drop]") as num
+			new_coeff = round(min(max(new_coeff, GLOB.synthesized_instruments.gentlest_drop), GLOB.synthesized_instruments.steepest_drop), 0.001)
+			src.player.soft_coeff = new_coeff
 		if ("instrument")
 			var/list/categories = list()
 			for (var/key in instruments)
@@ -153,13 +149,13 @@
 
 			var/new_instrument = input(usr, "Choose an instrument") in instruments_available as text|null
 			if (new_instrument)
-				src.player.song.instrument_data = instruments[new_instrument]
+				src.player.instrument_data = instruments[new_instrument]
 		if ("3d_sound") src.player.three_dimensional_sound = value
-		if ("autorepeat") src.player.song.autorepeat = value
-		if ("decay") src.player.song.linear_decay = value
+		if ("autorepeat") src.player.autorepeat = value
+		if ("decay") src.player.linear_decay = value
 		if ("echo") src.player.apply_echo = value
 		if ("show_env_editor")
-			if (GLOB.musical_config.env_settings_available)
+			if (GLOB.synthesized_instruments.env_settings_available)
 				if (!src.env_editor)
 					src.env_editor = new (src.player)
 				src.env_editor.ui_interact(usr)
@@ -179,7 +175,7 @@
 
 
 /obj/structure/synthesized_instrument/synthesizer/shouldStopPlaying(mob/user)
-	return !((src && in_range(src, user) && src.anchored) || src.player.song.autorepeat)
+	return !((src && in_range(src, user) && src.anchored) || src.player.autorepeat)
 
 
 

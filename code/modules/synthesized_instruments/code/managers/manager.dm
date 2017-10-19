@@ -3,4 +3,3 @@
 
 /namespace/synthesized_instruments/manager/New(namespace/synthesized_instruments/player/source)
 	src.source = source
-

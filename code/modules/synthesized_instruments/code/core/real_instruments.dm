@@ -9,12 +9,6 @@
 	return player.Topic(href, href_list)
 
 
-/obj/structure/synthesized_instrument/New()
-	..()
-	src.maximum_lines = GLOB.musical_config.max_lines
-	src.maximum_line_length = GLOB.musical_config.max_line_length
-
-
 /obj/structure/synthesized_instrument/Destroy()
 	qdel(src.player)
 	return ..()
@@ -42,12 +36,6 @@
 		return 1
 
 	return player.Topic(href, href_list)
-
-
-/obj/item/device/synthesized_instrument/New()
-	..()
-	src.maximum_lines = GLOB.musical_config.max_lines
-	src.maximum_line_length = GLOB.musical_config.max_line_length
 
 
 /obj/item/device/synthesized_instrument/Destroy()
