@@ -122,19 +122,19 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["set_medical_records"])
-		var/new_medical = sanitize(input(user,"Enter medical information here.","Character Preference", html_decode(pref.med_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		var/new_medical = sanitize(input(user,"Enter medical information here.","Character Preference", html_decode(pref.med_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 512)
 		if(!isnull(new_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.med_record = new_medical
 		return TOPIC_REFRESH
 
 	else if(href_list["set_general_records"])
-		var/new_general = sanitize(input(user,"Enter employment information here.","Character Preference", html_decode(pref.gen_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		var/new_general = sanitize(input(user,"Enter employment information here.","Character Preference", html_decode(pref.gen_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 512)
 		if(!isnull(new_general) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.gen_record = new_general
 		return TOPIC_REFRESH
 
 	else if(href_list["set_security_records"])
-		var/sec_medical = sanitize(input(user,"Enter security information here.","Character Preference", html_decode(pref.sec_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
+		var/sec_medical = sanitize(input(user,"Enter security information here.","Character Preference", html_decode(pref.sec_record)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 512)
 		if(!isnull(sec_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.sec_record = sec_medical
 		return TOPIC_REFRESH
