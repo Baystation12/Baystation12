@@ -44,10 +44,10 @@
 
 /datum/ntprofile/proc/Load_Profile() //Init the profile.. Human set as owner.
 	load_persistent() //Load persistent info.
-	load_score()
 	assign_flag()
 	calculate_department_rank(owner)
 	add_employeerecord("NanoTrasen", "Beginning of Employment in [owner.client.prefs.prefs_department] Dept.", 5, 0, 0, 250, 1)
+	load_score()
 
 /datum/ntprofile/proc/load_persistent()
 	if(owner) //Must be valid.
@@ -118,7 +118,7 @@
 /datum/ntprofile/employeerecord
 	var/mob/living/carbon/human/maker = ""       //The maker of the Recommendation
 	var/note = "" //The note to add.
-	var/recomscore = 0        // The score (1-10) we apply to the overall NT score
+	var/recomscore = 0        // The score (1-10) we apply to the overall NT score 0 = no change.
 	var/warrantspromotion = 0 //If this is enough to warrant a promotion, EG from regular to senior roles.
 	var/paybonuspercent = 0   //The percentage of extra hourly pay this will give the reciever
 	var/paybonuscredit = 0    //The amount of credits recieved on the next paycheck.
@@ -128,8 +128,16 @@
 /datum/ntprofile/proc/add_employeerecord(var/recommaker, var/note, var/recomscore, var/warrantspromotion, var/paybonuspercent, var/paybonuscredit, var/nanotrasen)
 	if(recommaker && note) //The 2 main dawgs
 //		var/mob/living/carbon/human/Maker = recommaker
-		var/datum/ntprofile/employeerecord/record = new(recommaker, note, recomscore, warrantspromotion, paybonuspercent, paybonuscredit, nanotrasen)
+		var/datum/ntprofile/employeerecord/record = new() //Initialize the record.
 		if(record)
+			record.maker = recommaker
+			record.note = note
+			record.recomscore = recomscore
+			record.warrantspromotion = warrantspromotion
+			record.paybonuspercent = paybonuspercent
+			record.paybonuscredit = paybonuscredit
+			record.nanotrasen = nanotrasen
+
 			for(var/datum/ntprofile/employeerecord/R in employee_records)
 				if(R.note == record.note) // Assuming it is a double.
 					return
