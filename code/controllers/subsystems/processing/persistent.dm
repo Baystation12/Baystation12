@@ -1,4 +1,4 @@
-var/paychecks = 0
+var/global/paychecks = 0
 SUBSYSTEM_DEF(persistent)
 	name = "Persistent"
 	priority = SS_PRIORITY_PROCESSING
@@ -44,7 +44,7 @@ SUBSYSTEM_DEF(persistent)
 		command_announcement.Announce("Paychecks have been processed for crew of [station_name()].", "[GLOB.using_map.boss_name]")
 		for(var/mob/living/carbon/human/M in GLOB.player_list)
 			if(M.stat != 2) // Not fucking dead either, and must be working for NT.
-				var/paycheck = calculate_paycheck(M, paychecks = paychecks)
+				var/paycheck = calculate_paycheck(M)
 				if(paycheck)
 					var/sender = "NanoTrasen Financial Department"
 					var/message = {"
