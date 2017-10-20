@@ -23,10 +23,12 @@
 	on = 0
 
 /obj/item/clothing/head/helmet/spartan/blue
-	icon_state = "helmet_blue"
+	icon_state = "helmet_grey"
+	color = list(0,0,127)
 
 /obj/item/clothing/head/helmet/spartan/red
-	icon_state = "helmet_red"
+	icon_state = "helmet_grey"
+	color = list(127,0,51)
 
 /obj/item/clothing/suit/armor/special/spartan
 	name = "MJOLNIR Powered Assault Armor Mark V"
@@ -51,7 +53,8 @@
 		special.try_item_action()
 
 /obj/item/clothing/suit/armor/special/spartan/red
-	icon_state = "suit_red"
+	icon_state = "suit_grey"
+	color = list(255,0,51)
 	armor = list(melee = 60, bullet = 75, laser = 40, energy = 40, bomb = 60, bio = 25, rad = 25) //lowered armour values for slayer.
 	specials = list(/datum/armourspecials/shields/spartan,/datum/armourspecials/dispenseitems/spartanmeds,/datum/armourspecials/shieldmonitor)
 	totalshields = 150
@@ -59,7 +62,8 @@
 	action_button_name = "Dispense Medicine"
 
 /obj/item/clothing/suit/armor/special/spartan/blue
-	icon_state = "suit_blue"
+	icon_state = "suit_grey"
+	color = list(0,0,255)
 	armor = list(melee = 60, bullet = 75, laser = 40, energy = 40, bomb = 60, bio = 25, rad = 25) //lowered armour values for slayer.
 	specials = list(/datum/armourspecials/shields/spartan,/datum/armourspecials/dispenseitems/spartanmeds,/datum/armourspecials/shieldmonitor)
 	totalshields = 150

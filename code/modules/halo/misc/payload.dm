@@ -16,7 +16,6 @@
 	var/disarming
 	var/explodedesc = "A spraypainted image of a skull adorns this slowly ticking bomb."
 	var/activeoverlay = "MFDD Armed Screen"
-	var/testingvar
 
 /obj/payload/attack_hand(var/mob/living/user)
 	if(!exploding)
@@ -28,7 +27,7 @@
 			explode_at = world.time + secondstoexplode*10
 			exploding = 1
 			GLOB.processing_objects += src
-			anchored = 1
+			set_anchor(1)
 			checkoverlay(1)
 	else
 		if(!disarming)
@@ -75,6 +74,9 @@
 		qdel(src)
 		return
 
+/obj/payload/proc/set_anchor(var/onoff)
+	anchored = onoff
+
 /obj/payload/proc/checkdisarm()
 	if(!checknextto() || !checkalive() || !disarming)
 		disarming = 0
@@ -83,7 +85,7 @@
 		u.visible_message("<span class = 'danger'>[u] disarms the [src]</span>","<span class = 'notice'>You disarm the [src]</span>")
 		exploding = 0
 		disarming = 0
-		anchored = 0
+		set_anchor(0)
 		desc = initial(desc)
 		checkoverlay(0)
 		GLOB.processing_objects -= src

@@ -7,6 +7,7 @@ GLOBAL_LIST_EMPTY(latejoin)
 GLOBAL_LIST_EMPTY(latejoin_gateway)
 GLOBAL_LIST_EMPTY(latejoin_cryo)
 GLOBAL_LIST_EMPTY(latejoin_cyborg)
+GLOBAL_LIST_EMPTY(latejoin_ghosts)
 
 GLOBAL_LIST_EMPTY(prisonwarp) // Prisoners go to these
 GLOBAL_LIST_EMPTY(tdome1)

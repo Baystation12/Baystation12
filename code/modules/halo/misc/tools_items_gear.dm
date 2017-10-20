@@ -33,15 +33,18 @@
 /obj/item/weapon/storage/firstaid/unsc
 	name = "UNSC medkit"
 	desc = "A general medical kit for UNSC personnel and installations."
-	icon_state = "unsc_medkit"
-	item_state = "firstaid-unsc"
+	icon = 'code/modules/halo/misc/halohumanmisc.dmi'
+	icon_state = "medkit"
+	item_state = "medkit"
 
 	startswith = list(
 		/obj/item/stack/medical/bruise_pack,
 		/obj/item/stack/medical/ointment,
-		/obj/item/weapon/storage/pill_bottle/kelotane,
 		/obj/item/weapon/storage/pill_bottle/inaprovaline,
-		/obj/item/weapon/storage/pill_bottle/bicaridine,
+		/obj/item/weapon/reagent_containers/syringe/biofoam,
+		/obj/item/weapon/reagent_containers/syringe/biofoam,
+		/obj/item/weapon/reagent_containers/syringe/biofoam,
+		/obj/item/weapon/reagent_containers/syringe/biofoam,
 		/obj/item/weapon/storage/pill_bottle/dexalin,
 		/obj/item/device/healthanalyzer
 		)

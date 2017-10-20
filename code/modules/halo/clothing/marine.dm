@@ -1,16 +1,22 @@
+#define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
+#define ITEM_INHAND 'code/modules/halo/clothing/marine_inhands.dmi'
 
 /obj/item/clothing/under/unsc/marine_fatigues
 	desc = "standard issue for UNSC marines"
 	name = "UNSC Marine fatigues"
-	icon_state = "jumpsuit_marine_s"
-	item_state = "g_suit"
-	worn_state = "jumpsuit_marine"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "uniform"
+	icon_state = "uniform"
+	worn_state = "UNSC Marine Fatigues"
 
 /obj/item/clothing/head/helmet/marine
 	name = "CH252 Helmet"
 	desc = "the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	icon_state = "marine"
-	item_state = "marine"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "CH252 Helmet"
+	icon_state = "helmet_novisor"
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
 	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 25, bio = 0, rad = 0)
@@ -24,22 +30,27 @@
 
 /obj/item/clothing/head/helmet/marine/visor
 	desc = "the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR."
-	icon_state = "marine_visor"
-	item_state = "marine_visor"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "CH252 Visor Helmet"
+	icon_state = "helmet"
 
 /obj/item/clothing/suit/armor/marine
 	name = "M52B Body Armor"
 	desc = "an armored protective vest worn by the members of the UNSC Marine Corps."
-	icon_state = "marine"
-	item_state = "marine"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	icon_state = "M52B Body Armor"
 	blood_overlay_type = "armor"
 	armor = list(melee = 50, bullet = 95, laser = 4, energy = 4, bomb = 60, bio = 0, rad = 0)
 
 /obj/item/clothing/shoes/marine
 	name = "VZG7 Armored Boots"
 	desc = "standard issue combat boots for the UNSC Marines, worn as a part of the Marine BDU."
-	icon_state = "marine"
-	item_state = "marine"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "VZG7 Armored Legs"
+	icon_state = "boots"
 	force = 5
 	armor = list(melee = 40, bullet = 60, laser = 5, energy = 4, bomb = 40, bio = 0, rad = 0)
 	item_flags = NOSLIP
@@ -49,3 +60,29 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/weapon/storage/belt/marine_ammo
+	name = "Ammunition Storage Belt"
+	desc = "A belt with many various pouches to hold ammunition"
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	icon_state = "UNSC Marine Ammo Belt item"
+	item_state = "UNSC Marine Ammo Belt"
+	storage_slots = 6
+
+	can_hold = list(/obj/item/ammo_magazine)
+
+/obj/item/weapon/storage/belt/marine_medic
+	name = "Medical Supplies Storage Belt"
+	desc = "A belt with multiple hooks to hold medical kits, alongside a few small ammunition pouches"
+	icon_state = "medicalbelt"
+	/*icon = ITEM_INHAND //Using normal medical belt sprites for now.
+	icon_override = MARINE_OVERRIDE
+	icon_state = "UNSC Marine Medical Belt item"
+	item_state = "UNSC Marine Medical Belt"*/
+	storage_slots = 5
+
+	can_hold = list(/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphe,/obj/item/weapon/storage/firstaid/unsc)
+
+#undef MARINE_OVERRIDE
+#undef ITEM_INHAND

@@ -93,12 +93,12 @@
 
 /datum/reagent/biofoam/affect_blood(var/mob/living/carbon/M,var/alien,var/removed) //Biofoam stops internal and external bleeding, heals organs and fixes bones.
 	if(istype(M,/mob/living/carbon/human))
-		M.custom_pain("You feel a searing pain in your veins",25)
+		M.custom_pain("You feel a searing pain in your veins",3)
 		fix_wounds(M)
 		mend_external(M)
 		mend_internal(M)
 		spawn(5)
-			M.add_chemical_effect(CE_PAINKILLER, 40)
+			M.add_chemical_effect(CE_PAINKILLER, 5)
 
 /datum/reagent/biofoam/overdose(var/mob/living/carbon/M)
 	if(istype(M,/mob/living/carbon/human))
