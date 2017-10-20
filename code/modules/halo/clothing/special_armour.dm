@@ -1,6 +1,6 @@
 
 /obj/item/clothing/suit/armor/special
-	var/specials = list()
+	var/specials = list() //Don't edit these during runtime unless you really need too. If edited during runtime, manually run the item's New() proc.
 	var/totalshields
 
 /obj/item/clothing/suit/armor/special/New()

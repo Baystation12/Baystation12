@@ -16,6 +16,7 @@
 	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m762_ap
+	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap) //Disallows loading LMG boxmags into the MA5B
 	burst = 3
 	burst_delay = 2
 

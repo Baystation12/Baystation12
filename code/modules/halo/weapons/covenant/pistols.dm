@@ -12,20 +12,18 @@
 	var/overcharge = 0
 	projectile_type = /obj/item/projectile/covenant/plasmapistol
 
-/obj/item/weapon/gun/energy/plasmapistol/attack_self()
+/obj/item/weapon/gun/energy/plasmapistol/attack_self(var/mob/user)
 	if(overcharge) //tell user overcharge deactivated, reset stats.
-		visible_message("<span class='notice'>[usr]'s [src]'s lights darken</span>","<span class='notice'>You deactivate your [src]'s overcharge</span>")
-		max_shots = 20
+		visible_message("<span class='notice'>[user.name]'s [src]'s lights darken</span>","<span class='notice'>You deactivate your [src]'s overcharge</span>")
 		projectile_type = /obj/item/projectile/covenant/plasmapistol
 		overcharge = 0
-		charge_cost = 200
+		charge_cost = 20
 		return
 	else
-		visible_message("<span class='notice'>[usr]'s [src]'s lights brighten</span>","<span class='notice'>You activate your [src]'s overcharge</span>")
+		visible_message("<span class='notice'>[user.name]'s [src]'s lights brighten</span>","<span class='notice'>You activate your [src]'s overcharge</span>")
 		projectile_type = /obj/item/projectile/covenant/plasmapistol/overcharge
-		charge_cost = 2000 // half of inbuiilt cell charge
+		charge_cost = 100 // half of inbuiilt cell charge
 		overcharge = 1
-		max_shots = 2
 		return
 
 
@@ -37,6 +35,6 @@
 	slot_flags = SLOT_BELT||SLOT_HOLSTER
 	fire_sound = 'code/modules/halo/sounds/needlerfire.ogg'
 	magazine_type = /obj/item/ammo_magazine/needles
-	handle_casings = CASELESS
+	handle_casings = CLEAR_CASINGS
 	caliber = "needler"
 	load_method = MAGAZINE

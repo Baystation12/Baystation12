@@ -1,8 +1,6 @@
+#define SINGLE_CASING 	1
+#define SPEEDLOADER 	2
 #define MAGAZINE 		4
-#define BELT_FEED		8
-
-#define EJECT_CASINGS	1
-#define CASELESS		3
 
 
 
@@ -165,7 +163,7 @@
 	name = "box magazine (7.62mm) M118 FMJ-AP"
 	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 50 shots. Designed for heavier use."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
-	mag_type = BELT_FEED
+	mag_type = MAGAZINE
 	icon_state = "M739mag"
 	ammo_type = /obj/item/ammo_casing/a762_ap
 	matter = list(DEFAULT_WALL_MATERIAL = 5000) //7.62mm casing = 50 metal each
