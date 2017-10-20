@@ -97,7 +97,7 @@
 		if(EDIT_SHORTTEXT)
 			newValue = sanitize(input(usr, "Enter [field_name]:", "Record edit", html_decode(original_value)) as null|text)
 		if(EDIT_LONGTEXT)
-			newValue = sanitize(replacetext(input(usr, "Enter [field_name]. You may use HTML paper formatting tags:", "Record edit", replacetext(html_decode(original_value), "\[br\]", "\n")) as null|message, "\n", "\[br\]"))
+			newValue = sanitize(replacetext(input(usr, "Enter [field_name]. You may use HTML paper formatting tags:", "Record edit", replacetext(html_decode(original_value), "\[br\]", "\n")) as null|message, "\n", "\[br\]"), MAX_PAPER_MESSAGE_LEN)
 		if(EDIT_NUMERIC)
 			newValue = input(usr, "Enter [field_name]:", "Record edit", original_value) as null|num
 		if(EDIT_LIST)
