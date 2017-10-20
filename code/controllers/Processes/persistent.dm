@@ -10,8 +10,8 @@ var/paychecks = 0
 
 	spawn(300)
 		if(!linkedServer)
-			if(message_servers && message_servers.len > 0)
-				linkedServer = message_servers[1]
+			if(GLOB.message_servers && GLOB.message_servers.len > 0)
+				linkedServer = GLOB.message_servers[1]
 
 /datum/controller/process/persistent/doWork()
 //	var/datum/category_item/player_setup_item/general/persistent/PERSISTENT = new()
