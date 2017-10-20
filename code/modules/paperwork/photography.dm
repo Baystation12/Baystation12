@@ -136,7 +136,7 @@ var/global/photo_count = 0
 /obj/item/device/camera
 	name = "camera"
 	icon = 'icons/obj/items.dmi'
-	desc = "A polaroid camera. 10 photos left."
+	desc = "A polaroid camera."
 	icon_state = "camera"
 	item_state = "electropack"
 	w_class = ITEM_SIZE_SMALL
@@ -149,6 +149,16 @@ var/global/photo_count = 0
 	var/icon_on = "camera"
 	var/icon_off = "camera_off"
 	var/size = 3
+/obj/item/device/camera/update_icon()
+	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+	if(on)
+		icon_state = "[bis.base_icon_state]"
+	else
+		icon_state = "[bis.base_icon_state]_off"
+/obj/item/device/camera/Initialize()
+	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+	update_icon()
+	. = ..()
 
 /obj/item/device/camera/verb/change_size()
 	set name = "Set Photo Focus"
@@ -163,10 +173,7 @@ var/global/photo_count = 0
 
 /obj/item/device/camera/attack_self(mob/user as mob)
 	on = !on
-	if(on)
-		src.icon_state = icon_on
-	else
-		src.icon_state = icon_off
+	update_icon()
 	to_chat(user, "You switch the camera [on ? "on" : "off"].")
 	return
 
@@ -209,13 +216,19 @@ var/global/photo_count = 0
 	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, 1, -3)
 
 	pictures_left--
-	desc = "A polaroid camera. It has [pictures_left] photos left."
 	to_chat(user, "<span class='notice'>[pictures_left] photos left.</span>")
-	icon_state = icon_off
+
 	on = 0
+	update_icon()
 	spawn(64)
-		icon_state = icon_on
 		on = 1
+		update_icon()
+
+/obj/item/device/camera/examine(mob/user)
+	if(!..(user))
+		return
+
+	to_chat(user, "It has [pictures_left] photo\s left.")
 
 //Proc for capturing check
 /mob/living/proc/can_capture_turf(turf/T)
