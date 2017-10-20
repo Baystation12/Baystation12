@@ -1,0 +1,8 @@
+author: TheWelp
+
+delete-after: True
+
+changes: 
+  - rscadd: "Added a deity hud element that shows your current phenomenas."
+  - tweak: "Reduced D-Nar's blood costs to half."
+  - tweak: "Made it so that a deity's power can never go below 0."

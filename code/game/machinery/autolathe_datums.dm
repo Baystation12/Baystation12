@@ -520,3 +520,8 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "device cell"
 	path = /obj/item/weapon/cell/device/standard
 	category = "Devices and Components"
+
+/datum/autolathe/recipe/ecigcartridge
+	name = "ecigarette cartridge"
+	path = /obj/item/weapon/reagent_containers/ecig_cartridge/blank
+	category = "Devices and Components"

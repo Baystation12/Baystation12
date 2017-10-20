@@ -52,8 +52,6 @@ var/global/datum/controller/occupations/job_master
 				GLOB.supply_positions |= job.title
 			if(job.department_flag & SRV)
 				GLOB.service_positions |= job.title
-			if(job.department_flag & CRG)
-				GLOB.cargo_positions |= job.title
 			if(job.department_flag & CIV)
 				GLOB.civilian_positions |= job.title
 			if(job.department_flag & MSC)

@@ -23,6 +23,7 @@
 #define SLOT_HOLSTER	0x8000 //16th bit - higher than this will overflow
 
 #define ACCESSORY_SLOT_UTILITY  "Utility"
+#define ACCESSORY_SLOT_HOLSTER  "Holster"
 #define ACCESSORY_SLOT_ARMBAND  "Armband"
 #define ACCESSORY_SLOT_RANK     "Rank"
 #define ACCESSORY_SLOT_DEPT		"Department"

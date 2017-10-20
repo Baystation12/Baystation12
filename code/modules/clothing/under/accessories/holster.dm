@@ -2,7 +2,7 @@
 	name = "shoulder holster"
 	desc = "A handgun holster."
 	icon_state = "holster"
-	slot = ACCESSORY_SLOT_UTILITY
+	slot = ACCESSORY_SLOT_HOLSTER
 	var/obj/item/holstered = null
 	var/list/can_hold
 
@@ -55,14 +55,6 @@
 		holstered.add_fingerprint(user)
 		w_class = initial(w_class)
 		clear_holster()
-
-/obj/item/clothing/accessory/holster/attack_hand(mob/user as mob)
-	if (has_suit)	//if we are part of a suit
-		if (holstered)
-			unholster(user)
-		return
-
-	..(user)
 
 /obj/item/clothing/accessory/holster/attackby(obj/item/W as obj, mob/user as mob)
 	holster(W, user)

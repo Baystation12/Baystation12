@@ -1,6 +1,7 @@
 /mob/living/deity
 	var/list/phenomenas = list()
 	var/list/intent_phenomenas = list()
+	var/static/list/control_types = list("control", "controlshift", "shift")
 
 
 /mob/living/deity/New()
@@ -45,7 +46,7 @@
 /mob/living/deity/proc/populate_intent(var/intent)
 	if(!intent_phenomenas[intent])
 		intent_phenomenas[intent] = list()
-	intent_phenomenas[intent] |= list("shift", "control", "controlshift")
+	intent_phenomenas[intent] |= control_types
 
 /mob/living/deity/proc/set_phenomena(var/datum/phenomena/phenomena, var/intent, var/modifiers)
 	if(!intent_phenomenas[intent])

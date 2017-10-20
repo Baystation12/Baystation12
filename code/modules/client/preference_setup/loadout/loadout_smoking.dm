@@ -38,6 +38,11 @@
 	cigar_type["Cohiba Robusto"] = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	gear_tweaks += new/datum/gear_tweak/path(cigar_type)
 
-/datum/gear/ecigs
-	display_name = "electronic cigarette, deluxe version"
+/datum/gear/ecig
+	display_name = "electronic cigarette"
+	path = /obj/item/clothing/mask/smokable/ecig/util
+
+/datum/gear/ecig/deluxe
+	display_name = "electronic cigarette, deluxe"
 	path = /obj/item/clothing/mask/smokable/ecig/deluxe
+	cost = 2

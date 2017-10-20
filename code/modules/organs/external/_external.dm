@@ -647,7 +647,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 		heal_amt = heal_amt / (wounds.len + 1)
 		// making it look prettier on scanners
 		heal_amt = round(heal_amt,0.1)
-		if(owner.can_autoheal(W.damage_type))
+		var/dam_type = BRUTE
+		if(W.damage_type == BURN)
+			dam_type = BURN
+		if(owner.can_autoheal(dam_type))
 			W.heal_damage(heal_amt)
 
 		// Salving also helps against infection

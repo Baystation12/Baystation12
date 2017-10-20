@@ -41,6 +41,7 @@
 	base_icon = "shot"
 	filling_states = "33;66;100"
 	volume = 5
+	matter = list("glass" = 15)
 	possible_transfer_amounts = "1;2;5"
 	rim_pos = "y=17;x_left=13;x_right=21"
 
