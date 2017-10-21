@@ -313,15 +313,15 @@
 	switch(icon_level)
 		if (0)
 			icon_state = "alarm0"
-			new_color = "#03a728"
+			new_color = COLOR_LIME
 		if (1)
 			icon_state = "alarm2" //yes, alarm2 is yellow alarm
 			new_color = COLOR_SUN
 		if (2)
 			icon_state = "alarm1"
-			new_color = "#da0205"
+			new_color = COLOR_RED_LIGHT
 
-	set_light(l_range = 2, l_power = 0.5, l_color = new_color)
+	set_light(l_range = 2, l_power = 0.6, l_color = new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
