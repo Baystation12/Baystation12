@@ -610,7 +610,7 @@ About the new airlock wires panel:
 	else
 		icon_state = "door_open"
 		if(src.arePowerSystemsOn())
-			set_light(2, 0.75, COLOR_LIME)
+			set_light(2, 0.65, COLOR_LIME)
 		if((stat & BROKEN) && !(stat & NOPOWER))
 			overlays += image(icon, "sparks_open")
 
