@@ -38,7 +38,7 @@
 	pt_shoes = /obj/item/clothing/shoes/black
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary
-	utility_shoes = list(/obj/item/clothing/shoes/dutyboots, /obj/item/clothing/shoes/jackboots/unathi)
+	utility_shoes = /obj/item/clothing/shoes/dutyboots
 	utility_hat = /obj/item/clothing/head/soft/sol/expedition
 	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
@@ -112,8 +112,6 @@ decl/hierarchy/mil_uniform/civilian
 	name = "Master civilian outfit"		//Basically just here for the rent-a-tux, ahem, I mean... dress uniform.
 	hierarchy_type = /decl/hierarchy/mil_uniform/civilian
 	branch = /datum/mil_branch/civilian
-	
-	utility_shoes = /obj/item/clothing/shoes/jackboots/unathi
 
 	dress_under = /obj/item/clothing/under/rank/internalaffairs/plain
 	dress_over = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
