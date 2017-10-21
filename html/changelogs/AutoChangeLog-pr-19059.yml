@@ -1,5 +1,0 @@
-author: ZeroBits
-delete-after: True
-changes: 
-  - rscadd: "Added three new strength brackets for the R-UST: 9x9, 11x11, and 13x13. For the engineers who have 51 extra fuel injectors and way too much free time."
-  - tweak: "Changed the sprite of the R-UST to look cooler."
