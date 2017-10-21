@@ -116,7 +116,7 @@
 	M.radiation = 0
 	M.heal_organ_damage(5,5)
 	M.adjustToxLoss(-5)
-	M.hallucination = 0
+	M.hallucination_power = 0
 	M.setBrainLoss(0)
 	M.disabilities = 0
 	M.sdisabilities = 0

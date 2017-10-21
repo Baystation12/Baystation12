@@ -681,8 +681,6 @@
 			return global.ninjas;
 		if("ninjastart")
 			return global.ninjastart;
-		if("non_fakeattack_weapons")
-			return global.non_fakeattack_weapons;
 		if("not_incapacitated_turf_state")
 			return global.not_incapacitated_turf_state;
 		if("ntnet_card_uid")
@@ -1772,8 +1770,6 @@
 			global.ninjas=newval;
 		if("ninjastart")
 			global.ninjastart=newval;
-		if("non_fakeattack_weapons")
-			global.non_fakeattack_weapons=newval;
 		if("not_incapacitated_turf_state")
 			global.not_incapacitated_turf_state=newval;
 		if("ntnet_card_uid")

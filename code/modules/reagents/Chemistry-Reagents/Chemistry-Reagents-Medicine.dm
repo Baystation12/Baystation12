@@ -76,7 +76,7 @@
 	if(alien == IS_DIONA)
 		return
 	M.drowsyness = max(0, M.drowsyness - 6 * removed)
-	M.hallucination = max(0, M.hallucination - 9 * removed)
+	M.adjust_hallucination(-9 * removed)
 	M.add_up_to_chemical_effect(CE_ANTITOX, 1)
 
 	var/removing = (4 * removed)
@@ -189,7 +189,7 @@
 
 /datum/reagent/paracetamol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
-	M.hallucination = max(M.hallucination, 2)
+	M.druggy = max(M.druggy, 2)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /datum/reagent/tramadol
@@ -234,7 +234,8 @@
 
 /datum/reagent/tramadol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
-	M.hallucination = max(M.hallucination, 2)
+	M.hallucination(120, 30)
+	M.druggy = max(M.druggy, 10)
 	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
 	M.add_chemical_effect(CE_BREATHLOSS, 0.6) //Have trouble breathing, need more air
 	if(isboozed(M))
@@ -259,11 +260,6 @@
 	pain_power = 200
 	effective_dose = 2
 
-/datum/reagent/tramadol/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
-	..()
-	M.druggy = max(M.druggy, 10)
-	M.hallucination = max(M.hallucination, 3)
-
 /* Other medicine */
 
 /datum/reagent/synaptizine
@@ -284,7 +280,8 @@
 	M.AdjustStunned(-1)
 	M.AdjustWeakened(-1)
 	holder.remove_reagent(/datum/reagent/mindbreaker, 5)
-	M.hallucination = max(0, M.hallucination - 10)
+	M.adjust_hallucination(-10)
+	M.add_chemical_effect(CE_MIND, 2)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)
 
@@ -545,6 +542,7 @@
 		data = world.time
 		to_chat(M, "<span class='warning'>Your mind feels a little less stable...</span>")
 	else
+		M.add_chemical_effect(CE_MIND, 1)
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			to_chat(M, "<span class='notice'>Your mind feels stable... a little stable.</span>")
@@ -564,13 +562,14 @@
 		data = world.time
 		to_chat(M, "<span class='warning'>Your mind feels much less stable...</span>")
 	else
+		M.add_chemical_effect(CE_MIND, 2)
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			if(prob(90))
 				to_chat(M, "<span class='notice'>Your mind feels much more stable.</span>")
 			else
 				to_chat(M, "<span class='warning'>Your mind breaks apart...</span>")
-				M.hallucination += 200
+				M.hallucination(200, 100)
 
 /datum/reagent/nicotine
 	name = "Nicotine"
@@ -676,7 +675,8 @@
 
 /datum/reagent/antidexafen/overdose(var/mob/living/carbon/M, var/alien)
 	..()
-	M.hallucination = max(M.hallucination, 2)
+	M.hallucination(60, 20)
+	M.druggy = max(M.druggy, 2)
 
 /datum/reagent/adrenaline
 	name = "Adrenaline"
