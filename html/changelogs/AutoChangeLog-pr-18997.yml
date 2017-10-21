@@ -1,6 +1,0 @@
-author: Broseph Stylin
-delete-after: True
-changes: 
-  - rscadd: "Added customization options for modular armor to the loadout."
-  - rscadd: "Added leg guards as an armor module."
-  - tweak: "replaced all static armor spawns with their modular equivalents."
