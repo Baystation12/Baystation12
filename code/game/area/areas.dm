@@ -283,7 +283,7 @@ var/list/mob/living/forced_ambiance_list = new
 	if(hum)
 		if(!L.client.ambience_playing)
 			L.client.ambience_playing = 1
-			L.playsound_local(T,sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 25, channel = 2))
+			L.playsound_local(T,sound('sound/ambience/vents.ogg', repeat = 1, wait = 0, volume = 20, channel = 2))
 	else
 		if(L.client.ambience_playing)
 			L.client.ambience_playing = 0
@@ -296,9 +296,9 @@ var/list/mob/living/forced_ambiance_list = new
 		else
 			sound_to(L, sound(null, channel = 1))
 	else if(src.ambience.len && prob(35))
-		if((world.time >= L.client.played + 900))
+		if((world.time >= L.client.played + 3 MINUTES))
 			var/sound = pick(ambience)
-			L.playsound_local(T, sound(sound, repeat = 0, wait = 0, volume = 25, channel = 1))
+			L.playsound_local(T, sound(sound, repeat = 0, wait = 0, volume = 15, channel = 1))
 			L.client.played = world.time
 
 /area/proc/gravitychange(var/gravitystate = 0)
