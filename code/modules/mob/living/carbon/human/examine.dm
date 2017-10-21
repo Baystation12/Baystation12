@@ -23,7 +23,7 @@
 
 	if(wear_mask)
 		skipface |= wear_mask.flags_inv & HIDEFACE
-	
+
 	//no accuately spotting headsets from across the room.
 	if(get_dist(user, src) > 3)
 		skipears = 1
@@ -138,6 +138,15 @@
 			msg += "<span class='warning'>[T.He] [T.is] extremely jittery.</span>\n"
 		else if(jitteriness >= 100)
 			msg += "<span class='warning'>[T.He] [T.is] twitching ever so slightly.</span>\n"
+
+	//Disfigured face
+	if(!skipface) //Disfigurement only matters for the head currently.
+		var/obj/item/organ/external/head/E = get_organ(BP_HEAD)
+		if(E && E.disfigured) //Check to see if we even have a head and if the head's disfigured.
+			if(E.species) //Check to make sure we have a species
+				msg += E.species.disfigure_msg(src)
+			else //Just in case they lack a species for whatever reason.
+				msg += "<span class='warning'>[T.his] face is horribly mangled!</span>\n"
 
 	//splints
 	for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
