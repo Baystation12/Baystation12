@@ -93,7 +93,7 @@
 			var/obj/item/weapon/weldingtool/welder = C
 			if(welder.isOn() && (is_plating()))
 				if(broken || burnt)
-					if(welder.remove_fuel(0,user))
+					if(welder.isOn())
 						to_chat(user, "<span class='notice'>You fix some dents on the broken plating.</span>")
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						icon_state = "plating"
@@ -103,10 +103,10 @@
 						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 					return
 				else
-					if(welder.remove_fuel(0,user))
+					if(welder.isOn())
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
-						if(do_after(user, 5 SECONDS) && welder.isOn() && welder.remove_fuel(0,user))
+						if(do_after(user, 5 SECONDS) && welder.isOn())
 							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
 							playsound(src, 'sound/items/Welder.ogg', 80, 1)
 							burnt = 1
