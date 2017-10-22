@@ -560,7 +560,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/solgov_pilot //until they get a better uniform
 	name = OUTFIT_JOB_NAME("SolGov Pilot")
-	uniform = /obj/item/clothing/under/utility/expeditionary/officer/exploration/pilot
+	uniform = /obj/item/clothing/under/utility/expeditionary/officer/exploration
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/solgov_pilot
 	pda_type = /obj/item/device/pda/pathfinder

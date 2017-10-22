@@ -97,9 +97,6 @@
 /obj/item/clothing/under/utility/expeditionary/officer/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/department/exploration)
 
-/obj/item/clothing/under/utility/expeditionary/officer/exploration/pilot
-	starting_accessories = list(/obj/item/clothing/accessory/department/exploration, /obj/item/clothing/accessory/speciality/pilot)
-
 
 /obj/item/clothing/under/utility/fleet
 	name = "fleet coveralls"
@@ -180,9 +177,6 @@
 
 /obj/item/clothing/under/utility/marine/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/department/exploration/marine)
-
-/obj/item/clothing/under/utility/marine/exploration/pilot
-	starting_accessories = list(/obj/item/clothing/accessory/department/exploration/marine, /obj/item/clothing/accessory/speciality/pilot)
 
 /obj/item/clothing/under/utility/marine/urban
 	name = "urban fatigues"
