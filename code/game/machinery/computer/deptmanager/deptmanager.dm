@@ -64,7 +64,7 @@
 		to_chat(user, "<span class='warning'>Unable to establish a connection:</span> You're too far away from the [station_name()]!")
 		return
 	var/dat
-	if (authenticated)
+	if(authenticated)
 		switch(screen)
 			if(1)
 				dat = {"
@@ -162,7 +162,7 @@
 						authenticated = scan.registered_name
 						if(ishuman(usr))
 							src.idowner = usr
-
+							screen = 1
 			if("Profile")
 				profiled = locate(href_list["profiled"])
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
