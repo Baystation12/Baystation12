@@ -62,10 +62,9 @@
 	#include "torch-5.dmm"
 	#include "torch-6.dmm"
 	#include "torch-7.dmm"
-	#include "torch-8.dmm"
-	#include "torch-9.dmm"
-	#include "torch-10.dmm"
-	#include "torch-11.dmm"
+	#include "../away/empty.dmm"
+	#include "../away/mining/mining.dm"
+	#include "../away/derelict/derelict.dm"
 	#include "../away/bearcat/bearcat.dm"
 
 	#include "../../code/modules/lobby_music/chasing_time.dm"
