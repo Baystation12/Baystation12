@@ -99,6 +99,9 @@ GLOBAL_LIST_EMPTY(exploration_positions)
 			if(M.CharRecords.department_rank != oldrank) //Ranks changed)
 				if(M.CharRecords.department_rank > oldrank)
 					SendNTPDAMessage(M, "NT Administration", {"You have recieved a promotion. You are now a [get_department_rank_title(get_department(M.CharRecords.char_department, 1), M.CharRecords.department_rank)] [M.job]."})
+					for(var/obj/item/weapon/card/id/id_card in M.contents)
+						if(id_card.registered_name == M.real_name) //Extra verification
+							M:set_id_info(id_card)
 			return M.CharRecords.department_rank
 	return 1
 
