@@ -1,0 +1,4 @@
+author: Cirra
+delete-after: True
+changes: 
+  - bugfix: "Stasis Clamps actually work now."
