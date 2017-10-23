@@ -124,7 +124,10 @@
 		/area/exoplanet/desert,
 		/area/exoplanet/grass,
 		/area/exoplanet/snow,
-		/area/exoplanet/garbage
+		/area/exoplanet/garbage,
+		/area/template_noop,
+		/area/map_template,
+		/area/map_template/little_house
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber

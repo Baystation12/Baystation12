@@ -54,3 +54,6 @@
 		. = B.failures - A.failures
 	if (!.)
 		. = B.qdels - A.qdels
+
+/proc/cmp_ruincost_priority(datum/map_template/ruin/A, datum/map_template/ruin/B)
+	return initial(A.cost) - initial(B.cost)

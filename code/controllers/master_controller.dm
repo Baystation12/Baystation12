@@ -46,17 +46,8 @@ datum/controller/game_controller/proc/setup()
 	report_progress("Initializations complete")
 	initialization_stage |= INITIALIZATION_COMPLETE
 
-#ifdef UNIT_TEST
-#define CHECK_SLEEP_MASTER // For unit tests we don't care about a smooth lobby screen experience. We care about speed.
-#else
-#define CHECK_SLEEP_MASTER if(!(initialization_stage & INITIALIZATION_NOW) && ++initialized_objects > 500) { initialized_objects=0;sleep(world.tick_lag); }
-#endif
-
 datum/controller/game_controller/proc/setup_objects()
 	set background=1
-#ifndef UNIT_TEST
-	var/initialized_objects = 0
-#endif
 
 	// Do these first since character setup will rely on them
 
@@ -65,31 +56,9 @@ datum/controller/game_controller/proc/setup_objects()
 	if(GLOB.using_map.use_overmap)
 		report_progress("Initializing overmap events")
 		overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
-		CHECK_SLEEP_MASTER
-
-	report_progress("Initializing atmos machinery")
-	for(var/obj/machinery/atmospherics/A in SSmachines.machinery)
-		A.atmos_init()
-		CHECK_SLEEP_MASTER
-
-	for(var/obj/machinery/atmospherics/unary/U in SSmachines.machinery)
-		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
-			var/obj/machinery/atmospherics/unary/vent_pump/T = U
-			T.broadcast_status()
-		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
-			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
-			T.broadcast_status()
-		CHECK_SLEEP_MASTER
-
-	report_progress("Initializing pipe networks")
-	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
-		machine.build_network()
-		CHECK_SLEEP_MASTER
 
 	report_progress("Initializing lathe recipes")
 	populate_lathe_recipes()
-
-#undef CHECK_SLEEP_MASTER
 
 /proc/report_progress(var/progress_message)
 	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)

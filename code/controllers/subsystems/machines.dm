@@ -49,6 +49,7 @@ SUBSYSTEM_DEF(machines)
 
 /datum/controller/subsystem/machines/Initialize(timeofday)
 	makepowernets()
+	setup_atmos_machinery(machinery)
 	fire()
 	..()
 
@@ -80,12 +81,36 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	for(var/datum/powernet/PN in powernets)
 		qdel(PN)
 	powernets.Cut()
+	setup_powernets_for_cables(cable_list)
 
-	for(var/obj/structure/cable/PC in cable_list)
+/datum/controller/subsystem/machines/proc/setup_powernets_for_cables(list/cables)
+	for(var/obj/structure/cable/PC in cables)
 		if(!PC.powernet)
 			var/datum/powernet/NewPN = new()
 			NewPN.add_cable(PC)
 			propagate_network(PC,PC.powernet)
+
+datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
+	set background=1
+
+	report_progress("Initializing atmos machinery")
+	for(var/obj/machinery/atmospherics/A in machines)
+		A.atmos_init()
+		CHECK_TICK
+
+	for(var/obj/machinery/atmospherics/unary/U in machines)
+		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
+			var/obj/machinery/atmospherics/unary/vent_pump/T = U
+			T.broadcast_status()
+		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
+			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
+			T.broadcast_status()
+		CHECK_TICK
+
+	report_progress("Initializing pipe networks")
+	for(var/obj/machinery/atmospherics/machine in machines)
+		machine.build_network()
+		CHECK_TICK
 
 /datum/controller/subsystem/machines/stat_entry()
 	var/msg = list()

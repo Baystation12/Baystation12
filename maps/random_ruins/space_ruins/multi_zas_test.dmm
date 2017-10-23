@@ -1,0 +1,30 @@
+"a" = (/turf/simulated/wall/diamond,/area/template_noop)
+"b" = (/turf/simulated/floor,/area/template_noop)
+"c" = (/mob/living/simple_animal/corgi,/turf/simulated/floor,/area/template_noop)
+"d" = (/turf/simulated/open,/area/template_noop)
+"e" = (/turf/unsimulated/floor/shuttle_ceiling,/area/template_noop)
+"f" = (/obj/effect/landmark/map_data{height = 3},/turf/unsimulated/floor/shuttle_ceiling,/area/template_noop)
+
+(1,1,1) = {"
+aaaaa
+abbba
+abcba
+abbba
+aaaaa
+"}
+
+(1,1,2) = {"
+aaaaa
+addda
+addda
+addda
+aaaaa
+"}
+
+(1,1,3) = {"
+eeeee
+eeeee
+eeeee
+eeeee
+feeee
+"}
