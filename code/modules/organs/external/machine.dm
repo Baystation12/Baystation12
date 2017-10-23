@@ -101,6 +101,7 @@
 // Used for an MMI or posibrain being installed into a human.
 /obj/item/organ/internal/mmi_holder
 	name = "brain interface"
+	icon_state = "brain-prosthetic"
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
 	vital = 1
@@ -162,18 +163,3 @@
 			if(response == "Yes")
 				persistantMind.transfer_to(stored_mmi.brainmob)
 	qdel(src)
-
-
-/obj/item/organ/internal/mmi_holder/posibrain
-	name = "positronic brain interface"
-	parent_organ = BP_CHEST
-
-/obj/item/organ/internal/mmi_holder/posibrain/New()
-	stored_mmi = new /obj/item/device/mmi/digital/posibrain(src)
-	..()
-
-/obj/item/organ/internal/mmi_holder/posibrain/update_from_mmi()
-	..()
-	stored_mmi.icon_state = "posibrain-occupied"
-	icon_state = stored_mmi.icon_state
-

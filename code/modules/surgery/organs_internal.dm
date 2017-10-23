@@ -18,7 +18,7 @@
 	if(!affected)
 		return 0
 	if(affected.robotic >= ORGAN_ROBOT)
-		return affected.hatch == 3
+		return affected.hatch_state == HATCH_OPENED
 	else
 		return affected.open() == (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
 
@@ -288,6 +288,10 @@
 
 	var/o_is = (O.gender == PLURAL) ? "are" : "is"
 	var/o_a =  (O.gender == PLURAL) ? "" : "a "
+
+	if(O.organ_tag == BP_POSIBRAIN && !target.species.has_organ[BP_POSIBRAIN])
+		to_chat(user, "<span class='warning'>There's no place in [target] to fit \the [O.organ_tag].</span>")
+		return SURGERY_FAILURE
 
 	if(O.damage > (O.max_damage * 0.75))
 		to_chat(user, "<span class='warning'>\The [O.name] [o_is] in no state to be transplanted.</span>")
