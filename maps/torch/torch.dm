@@ -17,6 +17,7 @@
 	#include "datums/uniforms_fleet.dm"
 	#include "datums/uniforms_marine.dm"
 	#include "datums/supplypacks/security.dm"
+	#include "datums/supplypacks/science.dm"
 
 	#include "items/cards_ids.dm"
 	#include "items/clothing.dm"

@@ -259,3 +259,13 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate
 	containername = "\improper Sterile equipment crate"
+
+/decl/hierarchy/supply_pack/medical/voidsuit
+	name = "Medical voidsuit"
+	contains = list(/obj/item/clothing/suit/space/void/medical/alt,
+					/obj/item/clothing/head/helmet/space/void/medical/alt,
+					/obj/item/clothing/shoes/magboots)
+	cost = 120
+	containername = "\improper Medical voidsuit crate"
+	containertype = /obj/structure/closet/crate/secure/large
+	access = access_medical_equip

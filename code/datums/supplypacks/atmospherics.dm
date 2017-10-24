@@ -81,3 +81,13 @@
 	containername = "\improper CO2 canister crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_atmospherics
+
+/decl/hierarchy/supply_pack/atmospherics/voidsuit
+	name = "Atmospherics voidsuit"
+	contains = list(/obj/item/clothing/suit/space/void/atmos/alt,
+					/obj/item/clothing/head/helmet/space/void/atmos/alt,
+					/obj/item/clothing/shoes/magboots)
+	cost = 120
+	containername = "\improper Atmospherics voidsuit crate"
+	containertype = /obj/structure/closet/crate/secure/large
+	access = access_atmospherics

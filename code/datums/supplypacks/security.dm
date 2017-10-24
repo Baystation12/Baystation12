@@ -116,6 +116,16 @@
 	containername = "\improper Ablative suit crate"
 	access = access_armory
 
+/decl/hierarchy/supply_pack/security/voidsuit
+	name = "Armor - Security voidsuit"
+	contains = list(/obj/item/clothing/suit/space/void/security/alt,
+					/obj/item/clothing/head/helmet/space/void/security/alt,
+					/obj/item/clothing/shoes/magboots)
+	cost = 120
+	containername = "\improper Security voidsuit crate"
+	containertype = /obj/structure/closet/crate/secure/large
+	access = access_brig
+
 /decl/hierarchy/supply_pack/security/weapons
 	name = "Weapons - Security basic"
 	contains = list(/obj/item/device/flash = 4,
@@ -315,6 +325,7 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Security biohazard gear crate"
 	access = access_security
+
 /*
 /decl/hierarchy/supply_pack/security/flareguns
 	name = "Flare guns crate"
