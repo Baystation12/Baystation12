@@ -83,7 +83,8 @@
 		// Post selection
 		var/chosen_lawset = input(user, "Choose a law set:", "Character Preference", pref.laws)  as null|anything in valid_lawsets
 		if(chosen_lawset)
-			var/datum/ai_laws/lawset = new valid_lawsets[chosen_lawset]
+			var/path = valid_lawsets[chosen_lawset]
+			var/datum/ai_laws/lawset = new path()
 			var/datum/ai_law/list/laws = lawset.all_laws()
 			pref.laws.Cut()
 			for(var/datum/ai_law/law in laws)
