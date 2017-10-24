@@ -4,7 +4,7 @@
 	departments = COM
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/command
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/command
 	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
@@ -20,7 +20,7 @@
 	departments = ENG
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/engineering
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/engineering, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/engineering, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/engineering
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/engineering
@@ -30,7 +30,7 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/engineering
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/engineering
 	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
@@ -50,7 +50,7 @@
 	departments = SEC
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/security
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/security, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/security, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/security
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/security
@@ -60,7 +60,7 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/security
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/security
 	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
@@ -80,7 +80,7 @@
 	departments = MED
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/medical
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/medical, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/medical, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/medical
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/medical
@@ -90,7 +90,7 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/medical
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/medical
 	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
@@ -109,7 +109,7 @@
 	name = "EC supply"
 	departments = SUP
 
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/supply, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/supply, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 	utility_under = /obj/item/clothing/under/utility/expeditionary/supply
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/supply
@@ -120,7 +120,7 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/supply
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/supply
 	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
@@ -134,7 +134,7 @@
 	name = "EC service"
 	departments = SRV
 
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/service, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/service, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 	utility_under = /obj/item/clothing/under/utility/expeditionary/service
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/service
@@ -145,7 +145,7 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/service
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/service
 	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
@@ -160,7 +160,7 @@
 	name = "EC exploration"
 	departments = EXP
 
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/exploration, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/exploration, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 	utility_under = /obj/item/clothing/under/utility/expeditionary/exploration
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/exploration
@@ -171,7 +171,7 @@
 	min_rank = 11
 
 	utility_under = /obj/item/clothing/under/utility/expeditionary/officer/exploration
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under = /obj/item/clothing/under/utility/expeditionary/officer/exploration
 	service_skirt = /obj/item/clothing/under/service/expeditionary_skirt/officer
@@ -187,7 +187,7 @@
 	departments = SPT
 
 	utility_under= /obj/item/clothing/under/utility/expeditionary/command
-	utility_extra = list(/obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
+	utility_extra = list(/obj/item/clothing/shoes/jackboots/unathi, /obj/item/clothing/head/beret/sol/expedition/command, /obj/item/clothing/head/ushanka/expedition, /obj/item/clothing/suit/storage/hooded/wintercoat/ec)
 
 	service_under= /obj/item/clothing/under/utility/expeditionary/command
 	service_over = /obj/item/clothing/suit/storage/service/expeditionary/command
