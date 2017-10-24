@@ -1,7 +1,7 @@
 /datum/map/torch
 	species_to_job_whitelist = list(
 		/datum/species/nabber = list(/datum/job/ai, /datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant,
-			/datum/job/roboticist, /datum/job/cargo_contractor, /datum/job/chef, /datum/job/engineer_contractor, /datum/job/doctor_contractor),
+			/datum/job/roboticist, /datum/job/cargo_contractor, /datum/job/chef, /datum/job/engineer_contractor, /datum/job/doctor_contractor, /datum/job/bartender),
 		/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
 	)
 
@@ -798,13 +798,17 @@
 		/datum/mil_rank/ec/o1,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/marine/o1,
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/marine/o2,
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/marine/e5,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/marine/e6,
 		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/marine/e7
+		/datum/mil_rank/marine/e7,
+		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/marine/e8
 	)
 
 	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,

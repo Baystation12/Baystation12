@@ -396,3 +396,6 @@ STARLIGHT 0
 
 ## Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes
 # AUTOSTEALTH 30
+
+## How many loadout points are available. Use 0 to disable loadout, and any negative number to indicate infinite points.
+MAX_GEAR_COST 10

@@ -374,14 +374,19 @@ var/list/global/slot_flags_enumeration = list(
 			if(!allow)
 				return 0
 		if(slot_tie)
-			if(!H.w_uniform && (slot_w_uniform in mob_equip))
+			if((!H.w_uniform && (slot_w_uniform in mob_equip)) && (!H.wear_suit && (slot_wear_suit in mob_equip)))
 				if(!disable_warning)
-					to_chat(H, "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>")
+					to_chat(H, "<span class='warning'>You need something you can attach \the [src] to.</span>")
 				return 0
 			var/obj/item/clothing/under/uniform = H.w_uniform
-			if(uniform.accessories.len && !uniform.can_attach_accessory(src))
+			var/obj/item/clothing/suit/suit = H.wear_suit
+			if(uniform && !uniform.can_attach_accessory(src))
 				if (!disable_warning)
-					to_chat(H, "<span class='warning'>You already have an accessory of this type attached to your [uniform].</span>")
+					to_chat(H, "<span class='warning'>You can not equip \the [src] to \the [uniform].</span>")
+				return 0
+			if(suit && !suit.can_attach_accessory(src))
+				if (!disable_warning)
+					to_chat(H, "<span class='warning'>You can not equip \the [src] to \the [suit].</span>")
 				return 0
 	return 1
 

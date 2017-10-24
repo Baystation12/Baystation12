@@ -977,30 +977,36 @@
 	name = "Tattoo (Heart, Torso)"
 	icon_state = "tat_heart"
 	body_parts = list(BP_CHEST)
+	species_allowed = list(SPECIES_HUMAN)
 
 /datum/sprite_accessory/marking/tat_hive
 	name = "Tattoo (Hive, Back)"
 	icon_state = "tat_hive"
 	body_parts = list(BP_CHEST)
+	species_allowed = list(SPECIES_HUMAN)
 
 /datum/sprite_accessory/marking/tat_nightling
 	name = "Tattoo (Nightling, Back)"
 	icon_state = "tat_nightling"
 	body_parts = list(BP_CHEST)
+	species_allowed = list(SPECIES_HUMAN)
 
 /datum/sprite_accessory/marking/tat_campbell
 	name = "Tattoo (Campbell, R.Arm)"
 	icon_state = "tat_campbell"
 	body_parts = list(BP_R_ARM)
+	species_allowed = list(SPECIES_HUMAN)
 
 /datum/sprite_accessory/marking/tat_campbell/left
 		name = "Tattoo (Campbell, L.Arm)"
 		body_parts = list(BP_L_ARM)
+		species_allowed = list(SPECIES_HUMAN)
 
 /datum/sprite_accessory/marking/tat_tiger
 	name = "Tattoo (Tiger Stripes, Body)"
 	icon_state = "tat_tiger"
 	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_CHEST,BP_GROIN)
+	species_allowed = list(SPECIES_HUMAN)
 
 /datum/sprite_accessory/marking/taj_paw_socks
 	name = "Socks Coloration (Taj)"
@@ -1064,6 +1070,7 @@
 	name = "Tiger Stripes (Head, Minor)"
 	icon_state = "tigerhead"
 	body_parts = list(BP_HEAD)
+	species_allowed = list("Tajara")
 
 /datum/sprite_accessory/marking/tigerface
 	name = "Tiger Stripes (Head, Major)"

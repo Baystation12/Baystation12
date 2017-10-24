@@ -94,7 +94,7 @@ var/list/gear_datums = list()
 					gears -= gear_name
 				else
 					var/datum/gear/G = gear_datums[gear_name]
-					if(total_cost + G.cost > MAX_GEAR_COST)
+					if(total_cost + G.cost > config.max_gear_cost)
 						gears -= gear_name
 					else
 						total_cost += G.cost
@@ -111,12 +111,15 @@ var/list/gear_datums = list()
 			total_cost += G.cost
 
 	var/fcolor =  "#3366cc"
-	if(total_cost < MAX_GEAR_COST)
+	if(total_cost < config.max_gear_cost)
 		fcolor = "#e67300"
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
-	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\>"
-	. += "</a><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b>"
+	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a>"
+
+	if(config.max_gear_cost < INFINITY)
+		. += "<b><font color = '[fcolor]'>[total_cost]/[config.max_gear_cost]</font> loadout points spent.</b>"
+
 	. += "<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>"
 	. += "<a href='?src=\ref[src];toggle_hiding=1'>[hide_unavailable_gear ? "Show all" : "Hide unavailable"]</a></center></td></tr>"
 
@@ -222,7 +225,7 @@ var/list/gear_datums = list()
 			for(var/gear_name in pref.gear_list[pref.gear_slot])
 				var/datum/gear/G = gear_datums[gear_name]
 				if(istype(G)) total_cost += G.cost
-			if((total_cost+TG.cost) <= MAX_GEAR_COST)
+			if((total_cost+TG.cost) <= config.max_gear_cost)
 				pref.gear_list[pref.gear_slot] += TG.display_name
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["gear"] && href_list["tweak"])
@@ -319,3 +322,31 @@ var/list/gear_datums = list()
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_item(item, metadata["[gt]"])
 	return item
+
+/datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H)
+	// This is a miserable way to fix the loadout overwrite bug, but the alternative requires
+	// adding an arg to a bunch of different procs. Will look into it after this merge. ~ Z
+	var/metadata = H.client.prefs.Gear()[display_name]
+	var/obj/item/item = spawn_item(H, metadata)
+
+	if(H.equip_to_slot_or_del(item, slot))
+		to_chat(H, "<span class='notice'>Equipping you with \the [item]!</span>")
+		return TRUE
+
+	return FALSE
+
+/datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H)
+	var/metadata = H.client.prefs.Gear()[display_name]
+	var/obj/item/item = spawn_item(H, metadata)
+
+	var/atom/placed_in = H.equip_to_storage(item)
+	if(placed_in)
+		to_chat(H, "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>")
+	else if(H.equip_to_appropriate_slot(item))
+		to_chat(H, "<span class='notice'>Placing \the [item] in your inventory!</span>")
+	else if(H.put_in_hands(item))
+		to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
+	else
+		to_chat(H, "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>")
+		to_chat(H, "<span class='notice'>Dropping \the [item] on the ground!</span>")
+		item.forceMove(get_turf(H))
