@@ -46,7 +46,6 @@ var/list/gamemode_cache = list()
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
 	var/fps = 20
 	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
-	var/socket_talk	= 0					// use socket_talk to communicate with other processes
 	var/list/resource_urls = null
 	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
 	var/antag_hud_restricted = 0                    // Ghosts that turn on Antagovision cannot rejoin the round.
@@ -557,9 +556,6 @@ var/list/gamemode_cache = list()
 					config.antag_hud_allowed = 1
 				if("antag_hud_restricted")
 					config.antag_hud_restricted = 1
-
-				if("socket_talk")
-					socket_talk = text2num(value)
 
 				if("humans_need_surnames")
 					humans_need_surnames = 1
