@@ -186,7 +186,7 @@
 
 /datum/gear/uniform/utility
 	display_name = "Contractor Utility Uniform"
-	path = /obj/item/clothing/under/utility
+	path = /obj/item/clothing/under/solgov/utility
 	allowed_roles = CONTRACTOR_ROLES
 
 /datum/gear/uniform/frontier

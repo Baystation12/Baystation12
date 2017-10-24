@@ -17,16 +17,6 @@
 	siemens_coefficient = 0.7
 	w_class = ITEM_SIZE_NORMAL
 
-/obj/item/clothing/head/helmet/solgov
-	name = "\improper Sol Central Government helmet"
-	desc = "A helmet painted in Peacekeeper blue. Stands out like a sore thumb."
-	icon_state = "helmet_sol"
-
-/obj/item/clothing/head/helmet/solgov/command
-	name = "command helmet"
-	desc = "A helmet with 'SOL CENTRAL GOVERNMENT' printed on the back in gold lettering."
-	icon_state = "helmet_command"
-
 /obj/item/clothing/head/helmet/solgov/security
 	name = "security helmet"
 	desc = "A helmet with 'MASTER AT ARMS' printed on the back in silver lettering."
