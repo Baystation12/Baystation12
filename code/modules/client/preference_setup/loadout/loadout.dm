@@ -322,3 +322,31 @@ var/list/gear_datums = list()
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_item(item, metadata["[gt]"])
 	return item
+
+/datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H)
+	// This is a miserable way to fix the loadout overwrite bug, but the alternative requires
+	// adding an arg to a bunch of different procs. Will look into it after this merge. ~ Z
+	var/metadata = H.client.prefs.Gear()[display_name]
+	var/obj/item/item = spawn_item(H, metadata)
+
+	if(H.equip_to_slot_or_del(item, slot))
+		to_chat(H, "<span class='notice'>Equipping you with \the [item]!</span>")
+		return TRUE
+
+	return FALSE
+
+/datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H)
+	var/metadata = H.client.prefs.Gear()[display_name]
+	var/obj/item/item = spawn_item(H, metadata)
+
+	var/atom/placed_in = H.equip_to_storage(item)
+	if(placed_in)
+		to_chat(H, "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>")
+	else if(H.equip_to_appropriate_slot(item))
+		to_chat(H, "<span class='notice'>Placing \the [item] in your inventory!</span>")
+	else if(H.put_in_hands(item))
+		to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
+	else
+		to_chat(H, "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>")
+		to_chat(H, "<span class='notice'>Dropping \the [item] on the ground!</span>")
+		item.forceMove(get_turf(H))
