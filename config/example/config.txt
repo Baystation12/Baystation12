@@ -263,9 +263,6 @@ USEALIENWHITELIST
 ## Uncomment to enable sending data to the IRC bot.
 #USE_IRC_BOT
 
-## Uncomment if the IRC bot requires using world.Export() instead of nudge.py/libnudge
-#IRC_BOT_EXPORT
-
 ## Host where the IRC bot is hosted.  Port 45678 needs to be open.
 #IRC_BOT_HOST localhost
 
@@ -274,14 +271,6 @@ USEALIENWHITELIST
 
 ## IRC channel to send adminhelps to.  Leave blank to disable adminhelps-to-irc.
 #ADMIN_IRC #admin
-
-## Path to the python2 executable on the system.  Leave blank for default.
-## Default is "python" on Windows, "/usr/bin/env python2" on UNIX.
-#PYTHON_PATH
-
-## Uncomment to use the C library nudge instead of the python script.
-## This helps security and stability on Linux, but you need to compile the library first.
-#USE_LIB_NUDGE
 
 ## Uncommen to allow ghosts to write in blood during Cult rounds.
 ALLOW_CULT_GHOSTWRITER

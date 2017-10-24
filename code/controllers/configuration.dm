@@ -4,8 +4,6 @@ var/list/gamemode_cache = list()
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
 
-	var/nudge_script_path = "nudge.py"  // where the nudge.py script is located
-
 	var/log_ooc = 0						// log OOC channel
 	var/log_access = 0					// log login/logout
 	var/log_say = 0						// log client say
@@ -164,12 +162,9 @@ var/list/gamemode_cache = list()
 
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
-	var/irc_bot_export = 0 // whether the IRC bot in use is a Bot32 (or similar) instance; Bot32 uses world.Export() instead of nudge.py/libnudge
 	var/main_irc = ""
 	var/admin_irc = ""
 	var/announce_shuttle_dock_to_irc = FALSE
-	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
-	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
@@ -408,9 +403,6 @@ var/list/gamemode_cache = list()
 				if ("serversuffix")
 					config.server_suffix = 1
 
-				if ("nudge_script_path")
-					config.nudge_script_path = value
-
 				if ("hostedby")
 					config.hostedby = value
 
@@ -550,9 +542,6 @@ var/list/gamemode_cache = list()
 				if("use_irc_bot")
 					use_irc_bot = 1
 
-				if("irc_bot_export")
-					irc_bot_export = 1
-
 				if("ticklag")
 					var/ticklag = text2num(value)
 					if(ticklag > 0)
@@ -621,13 +610,6 @@ var/list/gamemode_cache = list()
 
 				if("announce_shuttle_dock_to_irc")
 					config.announce_shuttle_dock_to_irc = TRUE
-
-				if("python_path")
-					if(value)
-						config.python_path = value
-
-				if("use_lib_nudge")
-					config.use_lib_nudge = 1
 
 				if("allow_cult_ghostwriter")
 					config.cult_ghostwriter = 1
@@ -854,14 +836,6 @@ var/list/gamemode_cache = list()
 		if(M && !M.startRequirements() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
 			runnable_modes |= M
 	return runnable_modes
-
-/datum/configuration/proc/post_load()
-	//apply a default value to config.python_path, if needed
-	if (!config.python_path)
-		if(world.system_type == UNIX)
-			config.python_path = "/usr/bin/env python2"
-		else //probably windows, if not this should work anyway
-			config.python_path = "python"
 
 /datum/configuration/proc/load_event(filename)
 	var/event_info = file2text(filename)

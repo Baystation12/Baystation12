@@ -1408,7 +1408,6 @@
 #include "code\modules\examine\descriptions\turfs.dm"
 #include "code\modules\examine\descriptions\weapons.dm"
 #include "code\modules\ext_scripts\irc.dm"
-#include "code\modules\ext_scripts\python.dm"
 #include "code\modules\flufftext\Dreaming.dm"
 #include "code\modules\flufftext\TextFilters.dm"
 #include "code\modules\food\recipes_microwave.dm"
