@@ -1,0 +1,434 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/obj/structure/lattice,/obj/structure/grille,/turf/space,/area/space)
+"ac" = (/obj/structure/lattice,/turf/space,/area/space)
+"ad" = (/obj/machinery/power/tracker,/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/turf/simulated/floor/airless,/area/space)
+"ae" = (/obj/effect/shuttle_landmark/nav_lost_supply_base/nav3,/turf/space,/area/space)
+"af" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/airless,/area/space)
+"ag" = (/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/obj/machinery/power/solar{id = "auxsolarstarboard"; name = "Starboard Auxiliary Solar Array"},/obj/effect/floor_decal/solarpanel,/turf/simulated/floor/airless,/area/space)
+"ah" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/item/stack/material/steel,/turf/simulated/floor/airless,/area/space)
+"ai" = (/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/airless,/area/space)
+"aj" = (/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/airless,/area/space)
+"ak" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/airless,/area/space)
+"al" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/airless,/area/space)
+"am" = (/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable/yellow{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/airless,/area/space)
+"an" = (/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable/yellow{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/airless,/area/space)
+"ao" = (/obj/structure/cable/yellow,/obj/machinery/power/solar{id = "auxsolarstarboard"; name = "Starboard Auxiliary Solar Array"},/obj/effect/floor_decal/solarpanel,/turf/simulated/floor/airless,/area/space)
+"ap" = (/turf/simulated/floor/airless,/area/space)
+"aq" = (/obj/item/stack/rods,/turf/space,/area/space)
+"ar" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/item/stack/rods{amount = 50},/obj/item/stack/material/steel,/turf/simulated/floor/airless,/area/space)
+"as" = (/obj/machinery/power/solar{id = "auxsolarstarboard"; name = "Starboard Auxiliary Solar Array"},/obj/effect/floor_decal/solarpanel,/turf/simulated/floor/airless,/area/space)
+"at" = (/obj/effect/shuttle_landmark/nav_lost_supply_base/nav1,/turf/space,/area/space)
+"au" = (/obj/machinery/power/solar{id = "auxsolarstarboard"; name = "Starboard Auxiliary Solar Array"},/obj/structure/cable/yellow,/obj/effect/floor_decal/solarpanel,/turf/simulated/floor/airless,/area/space)
+"av" = (/obj/structure/girder/displaced,/turf/space,/area/space)
+"aw" = (/obj/structure/lattice,/obj/structure/grille,/obj/structure/grille,/turf/simulated/floor/airless,/area/space)
+"ax" = (/turf/simulated/wall/r_wall,/area/lost_supply_base_solar)
+"ay" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "solar_outer"; locked = 1; name = "Solar External Access"; req_access = list(11,13)},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/shield_diffuser,/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"az" = (/obj/machinery/embedded_controller/radio/airlock/airlock_controller{frequency = 1379; id_tag = "solar_starboard_airlock"; pixel_x = 24; req_access = list(13); tag_airpump = "solar_starboard_pump"; tag_chamber_sensor = "solar_starboard_sensor"; tag_exterior_door = "solar_starboard_outer"; tag_interior_door = "solar_starboard_inner"},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 2; frequency = 1379; id_tag = "solar_starboard_pump"},/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "solar_starboard_sensor"; pixel_x = 24; pixel_y = 12},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/floor_decal/industrial/warning/full,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"aA" = (/turf/simulated/wall/r_wall,/area/lost_supply_base)
+"aB" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "solar_inner"; locked = 1; name = "Solar Access"; req_access = list(11,13)},/obj/machinery/atmospherics/pipe/simple/hidden,/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"aC" = (/turf/simulated/wall/r_wall,/area/lost_supply_base_office)
+"aD" = (/turf/space,/area/lost_supply_base)
+"aE" = (/obj/structure/lattice,/turf/space,/area/lost_supply_base)
+"aF" = (/obj/machinery/portable_atmospherics/canister/air,/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/airless,/area/lost_supply_base)
+"aG" = (/turf/simulated/floor/airless,/area/lost_supply_base)
+"aH" = (/obj/machinery/light_construct{dir = 1},/turf/simulated/floor/airless,/area/lost_supply_base)
+"aI" = (/obj/machinery/power/apc{name = "Work area APC"; pixel_y = 25},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/turf/simulated/floor/airless,/area/lost_supply_base)
+"aJ" = (/obj/structure/table/rack,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/toolbox,/turf/simulated/floor/airless,/area/lost_supply_base)
+"aK" = (/turf/simulated/wall,/area/lost_supply_base_solar)
+"aL" = (/obj/machinery/power/solar_control{id = "suuplybasesolar"; name = "Solar Control"; track = 0},/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/obj/effect/floor_decal/industrial/warning/corner{dir = 4},/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"aM" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 8; icon_state = "map"; tag = "icon-manifold-f (WEST)"},/obj/machinery/access_button{command = "cycle_interior"; frequency = 1379; master_tag = "solar_starboard_airlock"; name = "interior access button"; pixel_x = 24; pixel_y = 24; req_access = list(11,13)},/obj/structure/cable/yellow{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"aN" = (/obj/machinery/portable_atmospherics/canister/air/airlock,/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/effect/floor_decal/industrial/warning/corner{dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"aO" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"aP" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"aQ" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/wall/r_wall,/area/lost_supply_base_office)
+"aR" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/item/weapon/paper,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"aS" = (/obj/machinery/power/apc{name = "Office APC"; pixel_y = 25},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"aT" = (/obj/structure/bed/chair/comfy/captain,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"aU" = (/obj/item/modular_computer/console,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"aV" = (/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"aW" = (/obj/item/weapon/paper,/obj/structure/safe,/obj/random/drinkbottle,/obj/random/handgun,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"aX" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 4; external_pressure_bound = 0; external_pressure_bound_default = 0; frequency = 1441; icon_state = "map_vent_in"; id_tag = "n2_out"; initialize_directions = 1; internal_pressure_bound = 4000; internal_pressure_bound_default = 4000; pressure_checks = 2; pressure_checks_default = 2; pump_direction = 0; use_power = 1},/turf/simulated/floor/airless,/area/lost_supply_base)
+"aY" = (/obj/machinery/atmospherics/binary/pump/on{dir = 8; target_pressure = 200},/turf/simulated/floor/airless,/area/lost_supply_base)
+"aZ" = (/obj/machinery/atmospherics/pipe/simple/hidden/cyan{dir = 4; icon_state = "intact"; tag = "icon-intact-f (EAST)"},/turf/simulated/wall/r_wall,/area/lost_supply_base)
+"ba" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/cyan{dir = 9; icon_state = "intact"; tag = "icon-intact-f (NORTHWEST)"},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bb" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (NORTHEAST)"; icon_state = "warning"; dir = 5},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bc" = (/obj/effect/landmark/corpse,/obj/random/projectile,/turf/simulated/floor/airless,/area/lost_supply_base)
+"bd" = (/obj/random/trash,/turf/simulated/floor/airless,/area/lost_supply_base)
+"be" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bf" = (/obj/structure/closet/crate/solar,/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"bg" = (/obj/machinery/atmospherics/binary/pump/on{dir = 1; target_pressure = 200},/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"bh" = (/obj/machinery/power/terminal,/obj/structure/cable/yellow{d2 = 8; icon_state = "0-8"},/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"bi" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"bj" = (/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"bk" = (/obj/structure/table/steel_reinforced,/obj/random/handgun,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"bl" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"bm" = (/obj/item/stack/tile/floor_dark{pixel_x = 5; pixel_y = -3},/obj/item/stack/material/steel,/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned0"; icon_state = "steel_burned0"},/area/lost_supply_base_office)
+"bn" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned0"; icon_state = "steel_burned0"},/area/lost_supply_base_office)
+"bo" = (/obj/item/stack/tile/floor_dark{pixel_x = 5; pixel_y = -3},/turf/space,/area/space)
+"bp" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"bq" = (/obj/machinery/door/airlock/external{frequency = 1380; glass = 1380; icon_state = "door_locked"; id_tag = "centcom_shuttle_bay_door"; locked = 1; name = "Transport Airlock"},/turf/simulated/floor/airless,/area/lost_supply_base)
+"br" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/access_button{command = "cycle_interior"; frequency = 1379; master_tag = "solar_starboard_airlock"; name = "interior access button"; pixel_x = -24; pixel_y = 24; req_access = list(11,13)},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bs" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken4"; icon_state = "steel_broken4"},/area/lost_supply_base)
+"bt" = (/obj/effect/decal/cleanable/blood,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"bu" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"bv" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bw" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bx" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/table/rack,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/tech_supply,/turf/simulated/floor/airless,/area/lost_supply_base)
+"by" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/wall,/area/lost_supply_base_solar)
+"bz" = (/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/machinery/power/apc{dir = 8; name = "Solars APC"; pixel_x = -24},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"bA" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal,/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"bB" = (/obj/machinery/power/smes/buildable{charge = 0; input_level = 5000; input_level_max = 20000; RCon_tag = "Supply base MAIN"},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/lost_supply_base_solar)
+"bC" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"bD" = (/obj/item/weapon/pen/red,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"bE" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken4"; icon_state = "steel_broken4"},/area/lost_supply_base_office)
+"bF" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken1"; icon_state = "steel_broken1"},/area/lost_supply_base_office)
+"bG" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/turf/simulated/wall/r_wall,/area/lost_supply_base_office)
+"bH" = (/obj/machinery/embedded_controller/radio/airlock/airlock_controller{frequency = 1379; id_tag = "solar_starboard_airlock"; pixel_x = 24; req_access = list(13); tag_airpump = "solar_starboard_pump"; tag_chamber_sensor = "solar_starboard_sensor"; tag_exterior_door = "solar_starboard_outer"; tag_interior_door = "solar_starboard_inner"},/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "solar_starboard_sensor"; pixel_x = 24; pixel_y = 12},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bI" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/airless,/area/lost_supply_base)
+"bJ" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (SOUTHEAST)"; icon_state = "warning"; dir = 6},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bK" = (/obj/structure/table/rack,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/tech_supply,/obj/item/device/radio,/turf/simulated/floor/airless,/area/lost_supply_base)
+"bL" = (/obj/machinery/atmospherics/pipe/simple/hidden,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/airless,/area/lost_supply_base_solar)
+"bM" = (/obj/random/ammo,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"bN" = (/obj/structure/girder/displaced,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"bO" = (/turf/space,/area/lost_supply_base_office)
+"bP" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/turf/simulated/wall/r_wall,/area/lost_supply_base)
+"bQ" = (/obj/random/trash,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"bR" = (/obj/item/stack/tile/floor_dark{pixel_x = 5; pixel_y = -3},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bS" = (/obj/machinery/atmospherics/pipe/simple/hidden,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/airless,/area/lost_supply_base)
+"bT" = (/turf/simulated/wall,/area/lost_supply_base)
+"bU" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken1"; icon_state = "steel_broken1"},/area/lost_supply_base)
+"bV" = (/obj/machinery/door/airlock{name = "Control room"},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"bW" = (/obj/machinery/atmospherics/unary/vent_scrubber,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"bX" = (/obj/machinery/light,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"bY" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_office)
+"bZ" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken0"; icon_state = "steel_broken0"},/area/lost_supply_base_office)
+"ca" = (/obj/item/stack/material/steel,/turf/space,/area/space)
+"cb" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cc" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cd" = (/obj/item/stack/rods,/obj/item/stack/material/steel,/turf/simulated/floor/airless,/area/lost_supply_base)
+"ce" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken4"; icon_state = "steel_broken4"},/area/lost_supply_base)
+"cf" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"cg" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/wall/r_wall,/area/lost_supply_base_common)
+"ch" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/wall/r_wall,/area/lost_supply_base_common)
+"ci" = (/turf/simulated/wall/r_wall,/area/lost_supply_base_common)
+"cj" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (NORTH)"; icon_state = "warning"; dir = 1},/turf/simulated/floor/airless,/area/lost_supply_base)
+"ck" = (/obj/random/trash,/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken1"; icon_state = "steel_broken1"},/area/lost_supply_base)
+"cl" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (NORTHEAST)"; icon_state = "warning"; dir = 5},/obj/random/trash,/turf/simulated/floor/airless,/area/lost_supply_base)
+"cm" = (/obj/effect/decal/cleanable/blood/gibs/body,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"cn" = (/obj/structure/door_assembly,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"co" = (/obj/machinery/atmospherics/omni/mixer{tag_east = 1; tag_east_con = 0.5; tag_south = 1; tag_south_con = 0.5; tag_west = 2; use_power = 0},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cp" = (/obj/structure/cable,/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cq" = (/obj/item/stack/tile/floor_dark{pixel_x = 5; pixel_y = -3},/obj/item/stack/tile/floor_dark{pixel_x = 5; pixel_y = -3},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cr" = (/obj/effect/landmark/corpse,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"cs" = (/obj/item/stack/tile/floor_dark{pixel_x = 5; pixel_y = -3},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"ct" = (/turf/simulated/wall,/area/lost_supply_base_common)
+"cu" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"cv" = (/obj/machinery/power/apc{name = "Common area APC"; pixel_y = 25},/obj/structure/table/standard,/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"cw" = (/obj/machinery/gibber,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"cx" = (/obj/structure/closet/secure_closet/freezer/meat,/obj/machinery/cooker/oven,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"cy" = (/obj/structure/closet/secure_closet/freezer/meat,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned1"; icon_state = "steel_burned1"},/area/lost_supply_base_common)
+"cz" = (/obj/structure/closet/secure_closet/freezer/meat,/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"cA" = (/obj/structure/closet/crate/freezer,/turf/simulated/floor/airless,/area/lost_supply_base)
+"cB" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cC" = (/obj/item/stack/material/cardboard,/turf/simulated/floor/airless,/area/lost_supply_base)
+"cD" = (/obj/item/device/price_scanner,/turf/simulated/floor/airless,/area/lost_supply_base)
+"cE" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/airless,/area/lost_supply_base)
+"cF" = (/obj/machinery/portable_atmospherics/canister/carbon_dioxide,/turf/simulated/floor/airless,/area/lost_supply_base)
+"cG" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken0"; icon_state = "steel_broken0"},/area/lost_supply_base)
+"cH" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned1"; icon_state = "steel_burned1"},/area/lost_supply_base)
+"cI" = (/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"cJ" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned1"; icon_state = "steel_burned1"},/area/lost_supply_base_common)
+"cK" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/turf/space,/area/lost_supply_base_common)
+"cL" = (/obj/machinery/light_construct{dir = 8},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cM" = (/obj/structure/closet/crate/freezer/rations,/turf/simulated/floor/airless,/area/lost_supply_base)
+"cN" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cO" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/wall,/area/lost_supply_base)
+"cP" = (/obj/machinery/light_construct{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cQ" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cR" = (/obj/structure/girder/displaced,/turf/space,/area/lost_supply_base)
+"cS" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned0"; icon_state = "steel_burned0"},/area/lost_supply_base)
+"cT" = (/obj/random/junk,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"cU" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/turf/simulated/wall/r_wall,/area/lost_supply_base_common)
+"cV" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cW" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/airless,/area/lost_supply_base)
+"cX" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/wall,/area/lost_supply_base)
+"cY" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"cZ" = (/obj/machinery/door/window/southleft,/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned1"; icon_state = "steel_burned1"},/area/lost_supply_base_common)
+"da" = (/obj/structure/table/standard,/obj/item/trash/tray{pixel_x = 10},/obj/item/trash/tray,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"db" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dc" = (/obj/structure/table/standard,/obj/item/weapon/material/kitchen/utensil/fork,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dd" = (/obj/structure/table/standard,/obj/machinery/microwave,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"de" = (/obj/structure/closet/crate/secure/phoron{name = "mineral crate"; req_access = list(19)},/turf/simulated/floor/airless,/area/lost_supply_base)
+"df" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/structure/closet/crate/secure/phoron{name = "mineral crate"; req_access = list(19)},/turf/simulated/floor/airless,/area/lost_supply_base)
+"dg" = (/obj/random/junk,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dh" = (/obj/random/ammo,/turf/simulated/floor/airless,/area/lost_supply_base)
+"di" = (/obj/effect/decal/mecha_wreckage/ripley,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dj" = (/obj/machinery/light_construct,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dk" = (/obj/item/stack/material/steel,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dl" = (/obj/structure/closet/firecloset/full,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dm" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"dn" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned1"; icon_state = "steel_burned1"},/area/lost_supply_base)
+"do" = (/obj/machinery/door/airlock{name = "Cantina"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dp" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dq" = (/obj/structure/closet/crate/secure/gear,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dr" = (/obj/effect/floor_decal/industrial/warning,/obj/structure/closet/crate/hydroponics,/turf/simulated/floor/airless,/area/lost_supply_base)
+"ds" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (SOUTHEAST)"; icon_state = "warning"; dir = 6},/obj/item/weapon/storage/backpack/dufflebag,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dt" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/blood/writing,/turf/simulated/floor/airless,/area/lost_supply_base)
+"du" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/wall,/area/lost_supply_base)
+"dv" = (/obj/item/weapon/material/kitchen/utensil/spoon,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dw" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dx" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/trash/plate,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dy" = (/obj/structure/table/standard{name = "plastic table frame"},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dz" = (/obj/item/weapon/material/kitchen/utensil/fork,/obj/structure/bed/chair{tag = "icon-chair_preview (WEST)"; icon_state = "chair_preview"; dir = 8},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dA" = (/obj/random/trash,/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"dB" = (/turf/simulated/shuttle/wall{dir = 2; icon_state = "swall"},/area/space)
+"dC" = (/obj/machinery/door/airlock/external{frequency = 1380; icon_state = "door_locked"; id_tag = "centcom_shuttle_hatch"; locked = 1; name = "Shuttle Hatch"; req_access = list(13)},/turf/simulated/floor/shuttle/blue,/area/space)
+"dD" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "swall"},/area/space)
+"dE" = (/turf/simulated/shuttle/wall{icon_state = "swall_t"; dir = 1},/area/space)
+"dF" = (/turf/simulated/shuttle/wall{icon_state = "swall_straight"; dir = 4},/area/space)
+"dG" = (/turf/simulated/shuttle/wall{icon_state = "swall_s"; dir = 2},/area/space)
+"dH" = (/obj/random/junk,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dI" = (/obj/machinery/atmospherics/pipe/tank/oxygen,/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dJ" = (/obj/machinery/atmospherics/pipe/tank/oxygen,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dK" = (/obj/machinery/atmospherics/pipe/tank/air,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dL" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"dM" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned0"; icon_state = "steel_burned0"},/area/lost_supply_base)
+"dN" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned0"; icon_state = "steel_burned0"},/area/lost_supply_base_common)
+"dO" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/space,/area/lost_supply_base_common)
+"dP" = (/turf/simulated/shuttle/wall{icon_state = "swall_straight"; dir = 1},/area/space)
+"dQ" = (/turf/simulated/floor/shuttle/blue,/area/space)
+"dR" = (/obj/structure/bed/chair,/obj/random/handgun,/turf/simulated/floor/shuttle/blue,/area/space)
+"dS" = (/obj/structure/bed/chair,/turf/simulated/floor/shuttle/blue,/area/space)
+"dT" = (/obj/structure/bed/chair,/obj/random/smokes,/turf/simulated/floor/shuttle/blue,/area/space)
+"dU" = (/turf/simulated/shuttle/wall{dir = 1; icon_state = "swall_f"},/area/space)
+"dV" = (/obj/structure/window/reinforced{dir = 1; health = 1e+006},/turf/simulated/floor/airless,/area/lost_supply_base)
+"dW" = (/obj/item/stack/tile/floor_dark,/obj/structure/window/reinforced{dir = 1; health = 1e+006},/turf/simulated/floor/airless,/area/lost_supply_base)
+"dX" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/turf/simulated/floor/airless,/area/lost_supply_base)
+"dY" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/airless,/area/lost_supply_base)
+"dZ" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/airless,/area/lost_supply_base)
+"ea" = (/obj/random/tank,/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/airless,/area/lost_supply_base)
+"eb" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/airless,/area/lost_supply_base)
+"ec" = (/obj/random/trash,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"ed" = (/obj/structure/bed/chair{tag = "icon-chair_preview (WEST)"; icon_state = "chair_preview"; dir = 8},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"ee" = (/obj/structure/shuttle/engine/propulsion{tag = "icon-propulsion_r (WEST)"; icon_state = "propulsion_r"; dir = 8},/turf/space,/area/space)
+"ef" = (/obj/structure/shuttle/engine/heater{icon_state = "heater"; dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/shuttle/blue,/area/space)
+"eg" = (/turf/simulated/shuttle/wall{icon_state = "swall"; dir = 1},/area/space)
+"eh" = (/obj/item/modular_computer/console,/turf/simulated/floor/shuttle/blue,/area/space)
+"ei" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/space)
+"ej" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/airless,/area/lost_supply_base)
+"ek" = (/obj/effect/landmark/corpse/engineer,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/airless,/area/lost_supply_base)
+"el" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/airless,/area/lost_supply_base)
+"em" = (/obj/random/tool,/turf/simulated/floor/airless,/area/lost_supply_base)
+"en" = (/obj/random/tank,/turf/simulated/floor/airless,/area/lost_supply_base)
+"eo" = (/obj/structure/closet/medical_wall{pixel_x = -30},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"ep" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/weapon/flame/lighter,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"eq" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"er" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned0"; icon_state = "steel_burned0"},/area/lost_supply_base_common)
+"es" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/turf/space,/area/lost_supply_base_common)
+"et" = (/obj/machinery/portable_atmospherics/canister,/turf/simulated/floor/shuttle/blue,/area/space)
+"eu" = (/obj/machinery/door/unpowered/shuttle,/turf/simulated/floor/shuttle/blue,/area/space)
+"ev" = (/obj/structure/bed/chair{dir = 4},/obj/item/key,/turf/simulated/floor/shuttle/blue,/area/space)
+"ew" = (/obj/item/stack/material/cardboard,/obj/item/weapon/grenade/fake,/turf/simulated/floor/airless,/area/lost_supply_base)
+"ex" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/airless,/area/lost_supply_base)
+"ey" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken4"; icon_state = "steel_broken4"},/area/lost_supply_base_common)
+"ez" = (/turf/simulated/shuttle/wall{dir = 2; icon_state = "swall"; tag = "icon-swall2"},/area/space)
+"eA" = (/obj/machinery/atmospherics/pipe/tank/phoron{dir = 2; volume = 3200},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/airless,/area/lost_supply_base)
+"eB" = (/obj/machinery/atmospherics/pipe/tank/phoron{dir = 2; volume = 3200},/turf/simulated/floor/airless,/area/lost_supply_base)
+"eC" = (/obj/item/weapon/bedsheet,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"eD" = (/obj/machinery/atmospherics/unary/vent_scrubber,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"eE" = (/obj/machinery/light,/obj/structure/reagent_dispensers/water_cooler,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"eF" = (/obj/machinery/computer/arcade,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"eG" = (/obj/machinery/light,/obj/machinery/computer/arcade,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"eH" = (/obj/machinery/media/jukebox,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"eI" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/shuttle/blue,/area/space)
+"eJ" = (/obj/structure/table/rack,/obj/item/weapon/tank/air,/obj/random/tech_supply,/obj/item/clothing/mask/breath,/turf/simulated/floor/shuttle/blue,/area/space)
+"eK" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/shuttle/blue,/area/space)
+"eL" = (/obj/structure/bed/chair{dir = 1},/obj/random/voidhelmet,/turf/simulated/floor/shuttle/blue,/area/space)
+"eM" = (/turf/simulated/shuttle/wall{icon_state = "swall_f"; dir = 4},/area/space)
+"eN" = (/turf/simulated/shuttle/wall{icon_state = "swall_s"; dir = 8},/area/space)
+"eO" = (/obj/machinery/portable_atmospherics/canister/phoron,/turf/simulated/floor/airless,/area/lost_supply_base)
+"eP" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/machinery/portable_atmospherics/canister/phoron,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/airless,/area/lost_supply_base)
+"eQ" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/phoron,/turf/simulated/floor/airless,/area/lost_supply_base)
+"eR" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"eS" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/wall,/area/lost_supply_base_common)
+"eT" = (/obj/machinery/door/airlock{name = "Cantina"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_common)
+"eU" = (/turf/simulated/shuttle/wall{dir = 5; icon_state = "swall"},/area/space)
+"eV" = (/turf/simulated/shuttle/wall{icon_state = "swall_t"; dir = 2},/area/space)
+"eW" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/simulated/floor/airless,/area/lost_supply_base)
+"eX" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/simulated/floor/airless,/area/lost_supply_base)
+"eY" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"eZ" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken0"; icon_state = "steel_broken0"},/area/lost_supply_base)
+"fa" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/random/obstruction,/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"fb" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/random/obstruction,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"fc" = (/obj/machinery/door/airlock{name = "Bunk room"},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fd" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fe" = (/obj/machinery/power/apc{name = "Supply APC"; pixel_y = 25},/obj/structure/closet/emcloset,/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"ff" = (/obj/structure/bed,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fg" = (/obj/structure/closet,/obj/random/clothing,/obj/item/trash/liquidfood,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fh" = (/obj/structure/bed,/obj/random/plushie,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fi" = (/obj/structure/closet,/obj/random/clothing,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fj" = (/turf/simulated/wall/r_wall,/area/lost_supply_base_supply)
+"fk" = (/obj/machinery/portable_atmospherics/canister,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fl" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (SOUTHWEST)"; icon_state = "warning"; dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fm" = (/obj/random/junk,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"fn" = (/turf/simulated/wall,/area/lost_supply_base_supply)
+"fo" = (/obj/item/weapon/bedsheet,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fp" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned0"; icon_state = "steel_burned0"},/area/lost_supply_base_supply)
+"fq" = (/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fr" = (/obj/structure/table/standard,/obj/random/smokes,/obj/item/device/radio,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fs" = (/obj/effect/shuttle_landmark/nav_lost_supply_base/nav2,/turf/space,/area/space)
+"ft" = (/obj/structure/window/reinforced,/obj/machinery/portable_atmospherics/canister/carbon_dioxide,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fu" = (/obj/structure/window/reinforced,/obj/machinery/portable_atmospherics/canister,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fv" = (/obj/machinery/atmospherics/unary/vent_scrubber{tag = "icon-map_scrubber_off (NORTH)"; icon_state = "map_scrubber_off"; dir = 1},/turf/simulated/floor/airless,/area/lost_supply_base)
+"fw" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"fx" = (/obj/random/junk,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fy" = (/obj/structure/table/standard,/obj/item/weapon/storage/briefcase,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fz" = (/obj/structure/sign/warning{pixel_x = -30},/obj/machinery/portable_atmospherics/canister/air,/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fA" = (/obj/random/energy,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fB" = (/obj/machinery/atmospherics/unary/vent_scrubber,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fC" = (/obj/machinery/light,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fD" = (/obj/machinery/light,/obj/structure/bed,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"fE" = (/obj/structure/largecrate,/obj/machinery/atmospherics/binary/pump/on{dir = 8; target_pressure = 200},/turf/simulated/floor/airless,/area/lost_supply_base)
+"fF" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fG" = (/obj/item/weapon/material/twohanded/fireaxe,/obj/effect/decal/cleanable/blood,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fH" = (/obj/effect/landmark/corpse/engineer,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/decal/cleanable/blood,/obj/item/stack/tile/floor_dark{pixel_x = 5; pixel_y = -3},/turf/simulated/floor/airless,/area/lost_supply_base)
+"fI" = (/obj/effect/decal/cleanable/blood/writing{dir = 4},/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fJ" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned1"; icon_state = "steel_burned1"},/area/lost_supply_base)
+"fK" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/item/stack/material/steel,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"fL" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/wall,/area/lost_supply_base_supply)
+"fM" = (/obj/machinery/door/airlock{name = "Head"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/space,/area/lost_supply_base_supply)
+"fN" = (/obj/machinery/door/airlock/external{frequency = 1380; glass = 1380; icon_state = "door_locked"; id_tag = "centcom_shuttle_bay_door"; locked = 1; name = "Transport Airlock"},/turf/simulated/shuttle/wall{icon_state = "swall_straight"; dir = 1},/area/lost_supply_base)
+"fO" = (/obj/structure/door_assembly,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fP" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/airless,/area/lost_supply_base)
+"fQ" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/item/stack/tile/floor_dark{pixel_x = 5; pixel_y = -3},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"fR" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/wall,/area/lost_supply_base_supply)
+"fS" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken0"; icon_state = "steel_broken0"},/area/lost_supply_base_supply)
+"fT" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_burned1"; icon_state = "steel_burned1"},/area/lost_supply_base_supply)
+"fU" = (/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken0"; icon_state = "steel_broken0"},/area/lost_supply_base_supply)
+"fV" = (/obj/effect/landmark/corpse,/obj/item/weapon/gun/projectile/shotgun/pump,/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken4"; icon_state = "steel_broken4"},/area/lost_supply_base_supply)
+"fW" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/turf/simulated/floor/airless,/area/lost_supply_base)
+"fX" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4; icon_state = "intact"},/turf/simulated/floor/airless,/area/lost_supply_base)
+"fY" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4; icon_state = "intact"},/turf/simulated/wall/r_wall,/area/lost_supply_base)
+"fZ" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4; icon_state = "intact"},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{frequency = 1379; id_tag = "solar_starboard_airlock"; pixel_x = 24; req_access = list(13); tag_airpump = "solar_starboard_pump"; tag_chamber_sensor = "solar_starboard_sensor"; tag_exterior_door = "solar_starboard_outer"; tag_interior_door = "solar_starboard_inner"},/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "solar_starboard_sensor"; pixel_x = 24; pixel_y = 12},/turf/simulated/floor/airless,/area/lost_supply_base)
+"ga" = (/obj/effect/floor_decal/industrial/warning,/obj/machinery/atmospherics/binary/pump/on{dir = 8; target_pressure = 200},/turf/simulated/floor/airless,/area/lost_supply_base)
+"gb" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (SOUTHEAST)"; icon_state = "warning"; dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4; icon_state = "intact"},/turf/simulated/floor/airless,/area/lost_supply_base)
+"gc" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/airless,/area/lost_supply_base)
+"gd" = (/obj/structure/closet/emcloset,/turf/simulated/floor/airless,/area/lost_supply_base)
+"ge" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"gf" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/item/stack/tile/floor_dark{pixel_x = 5; pixel_y = -3},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"gg" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"gh" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"gi" = (/obj/machinery/door/airlock{name = "Head"},/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"gj" = (/obj/structure/lattice,/obj/structure/grille,/turf/space,/area/lost_supply_base)
+"gk" = (/obj/machinery/light,/turf/simulated/floor/airless,/area/lost_supply_base)
+"gl" = (/obj/structure/closet/crate/trashcart,/obj/item/weapon/mop,/obj/item/weapon/storage/box/lights/bulbs,/obj/machinery/atmospherics/unary/vent_pump{dir = 1; external_pressure_bound = 0; external_pressure_bound_default = 0; icon_state = "map_vent_in"; initialize_directions = 1; internal_pressure_bound = 4000; internal_pressure_bound_default = 4000; use_power = 1; pressure_checks = 2; pressure_checks_default = 2; pump_direction = 0},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"gm" = (/obj/item/stack/material/steel,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
+"gn" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/structure/mirror{pixel_x = -32},/obj/machinery/light/small,/turf/simulated/floor/tiled/airless{tag = "icon-steel_broken0"; icon_state = "steel_broken0"},/area/lost_supply_base_supply)
+"go" = (/obj/structure/toilet{dir = 1},/obj/machinery/light/small,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"gp" = (/obj/machinery/shower{tag = "icon-shower (WEST)"; icon_state = "shower"; dir = 8},/obj/random/soap,/obj/machinery/light/small,/turf/simulated/floor/tiled/airless,/area/lost_supply_base_supply)
+"gq" = (/obj/effect/shuttle_landmark/nav_lost_supply_base/navantag,/turf/space,/area/space)
+"gr" = (/turf/unsimulated/mask,/area/mine/unexplored)
+"gs" = (/turf/simulated/floor/asteroid,/area/mine/explored)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababacadaaaaaaababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaeaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacacaaacacaaaaacacaaacacafacacaaaaacaaaaacacaaacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacagagagagagagagagagagacahacagaaaaaaagagagagagagacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaiajajajajajajajajajakalakamamamaaamamamamamanaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaoaoaoaoaoaoaoaoaoaoacafacaoaoaoaaaaaoaoaoaoaoaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacacacacacacacacacacacacafacacacacacaaacacacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaagagagagagagagagagagapafapagagagagagaaagagagagaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqaaaaaaabaaaiajajajajajajajajajakalakamamamamamaraaamamanaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaqaoaoaoaoaoaoaoaoaoaoaaaaapaoaoaoaoaoasaaaaaoaoaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacaaacaaaaaaacacacacacacacacacaaacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqaaagagagagagagagagagacafacagagagagagagagagaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaiajajajajajajajajajakalakamamamamamamamamamaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaoaoaoaoaoaoaoaoaoaoacafacauaoaoaoaoaoaoaoaoaoaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqaaaaabaaaaaaaaaaaaaaaaaaaaacafacaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavaaaaawaaaaaaaaaaaaaaaaaaaaaxayaxaaaaaaaaaaaaaaaaaaaaabaaaqaaaqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqaaaaaqaaabaaaaaaaaaaaaaaaaaaaaaxazaxaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaAaAaAaAaAaAaAaAaAaxaxaBaxaxaAaAaCaCaCaCaCaCaCaCaaaaaaaaaaaqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqaaaaaDaEaEaAaAaFaGaGaGaHaGaIaGaJaKaLaMaNaKaOaPaQaRaSaTaUaVaWaCaaaaaaaaaqaqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDaDaXaYaZbabbaGbcbdaGbeaGaJaKbfbgbhaKbibjaCaVbkblblbmbnaCaaaqboaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaEaDbpbpbqbrbsbpbtbpbubvbwbxbybzbAbBaKbCbjaCbDaVaVbnbEbFbGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaGaGbHaAbIbJaGaGaGbpaGaGbKaKaKbLaKaKbibjaCaVbMbNbEbObObOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaAbPaAaAaGaGaGaGaGbQaGbRaGaEaGbSaGbTbibUbVbWbXbYbnbEbZaCaaaaaqcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaGaGaGaGbdbpaXcbccbTaGbScdbTcecfcgchciciciciciciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAcjckclaGaGbpcmbpcnaGcocpcqaEcrcsctcucvcwcxcyczciaaaqaaaaavaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAcAcAcBcCcDbpbRaGcEaEcFaGcGbTcHbjctcIcIcIcJcIcIcKaaaaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAcLcMcBaGaGbpaGbUcNcOcPcQcRbTcScsctcIcIcIcTcIcIcUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAcMcMcBbpbpbpaGaGcdcVaEaDcWcXcYbjctcZdadbdcdbddciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaGdedfdgaGbpaGdhdidjaGdkdlbTdmdndodpcIcIcIcIcIciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAdqdrdsaGaGbpdhdhdtdubTaGbTbTcSbjctdvdwdxdydzdAcKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadBdCdDdEdFdFdFdFdGaaaaaaaaaAbUaGaGaGaGdHaGaGdtdIdJaGdKbTdLdMctcIcJdydNcIcIdOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadPdQdQdPdRdSdTdQdUdGaaaaaaaAdVdVdWdXaGbpaGaGdtdYdZeaebbTcHbjcteccJcJdyeddNdOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeeefdQdQegdQdQdQdQeheiaaaaaaaAejejejdXaGbpaGdhekelemaGenbTdLbjcteodwepeqederesaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeeefetdQeudQdQdQdQeveiaaaaaaaAejejaGdXewbpaGaGexelemaGaGbTcHbjctcIcIeycIcIecciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeeefdQdQezdQdQdQdQeheiaaaaaaaAaGejaGdXaGbpaGaGaGeAeBeBeBbTeCbjcteDeEeFeceGeHciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadPeIeJdPeKeLeKdQeMeNaaaaaaaAaGaGeOdXaGbpaGaGaGePebebeQbTeRcfeSeTctctctctctciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeUdFdFeVdFdFdFdFeNaaaaaaaaaAeWaGeXeYbpbueZbpbpeleOaGaGbTfafbfcfdfefffgfhfifjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaGfkaGdXaGbpaGaGaGflbIbIbIbTfmbjfnfofpfqfqfpfrfjaaaaaaaaaaaaaaaaaaaaaaaaaaaafsaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAftfufudXaGbpaGdgaGfvaGaGdkbTfwbjfnfqfqfpfxfqfyfjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDaDaAaAbPaAaAfzaGaGaGfAbpaGaGdkaGbRdkaGbTdLbsfnfBfCfffifDfifjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDaDaAdgaXfEaZbabbaGaGfFfGfHfIfIbpbpbpbpaGfJfKfLfMfnfnfnfnfnfjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDaDfNbpbpbpfObrfPbpbpbpbpaGaGbRaGaGaGaGbTaDfQfRfSfBfTfUfVfqfjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafWfXfYfXfXfZfYgagbgcaGaGaGgddkaGdkaGaGaGbTgegffLggghfngifngifjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagjgjaAaAbPaAaAaGaGeOgkaGaGaGaGaGaGgkaGaGbTglgmfngnfqfngofngpfjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAfjfjfjfjfjfjfjfjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagraaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgsgsgraaaaaaaaaaaaaaaaaaaaaagrgrgraaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgsgraaaaaaaaaaaaaagrgrgrgrgrgraaaaaagraaaaaa
+aaaaaaaaaaaaaaaaaaaaaagrgraaaagrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgsgsgsgsgrgrgsgrgrgrgraagrgrgrgrgrgrgrgrgraaaagraaaaaa
+aaaaaaaaaaaaaaaaaaaaaagrgraaaagrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgsgsgrgrgrgsgrgrgrgrgrgrgrgrgrgrgrgrgraaaagraaaaaa
+aaaaaaaaaaaaaaaagsgrgrgrgrgraagrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaa
+aaaaaaaaaaaaaaaagsgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgsgsgrgrgraagraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaa
+aaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaagrgrgraaaagrgrgrgrgrgrgrgsgsgrgrgraagraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagraaaaaagsgsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgsgrgrgrgrgraaaaaaaagrgrgsgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgsgsaaaaaagrgrgrgrgrgrgrgrgrgrgrgrgraagraaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgsaaaaaagrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagraaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaagraaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgsgraagrgrgrgsgsgsgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaagraaaaaaaaaagsgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaagraaaaaaaa
+aaaaaaaaaaaaaaaaaaaagsgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaagraaaaaaaagsgrgrgrgrgrgrgrgrgrgrgraaaagsgsgsgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsaaaaaagsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsgrgrgsaaaaaa
+aaaaaaaaaaaaaaaaaaaagsgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaagrgsgsaaaagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaagraaaaaaaaaaaaaaaaaaaaaagsgsgsgrgrgrgrgrgrgrgrgsgsgsaaaaaaaaaaaagrgrgrgrgraaaaaa
+aaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaagsgrgraaaagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsgrgrgraaaaaaaaaaaaaaaaaaaaaagrgrgsgrgraaaagrgrgrgrgrgsgraaaaaaaaaaaagrgrgsgsgsaaaaaa
+aaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaagsgsgsgsgsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaagrgsgsaaaagrgrgrgrgsgrgraaaaaaaaaaaagrgrgsgsgraaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgsaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaagrgsgsaaaaaaaagrgrgrgrgraaaaaaaaaaaaaagrgsgraaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaagsaaaaaaaaaaaaaaaagsgrgrgrgsgsgsaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaagsaaaaaaaaaaaaaaaagsgrgrgrgsgsgsaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsgsgsgrgrgrgrgrgraaaaaaaaaaaaaaaagrgraaaaaaaaaaaaaagrgrgrgrgrgsgraaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaagsgsgsgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgraaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgraaaaaaaaaaaaaagsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgraaaaaaaaaaaaaagsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsaaaagsgsgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgraaaaaaaaaaaaaagrgrgsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaagrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgraaaaaaaaaaaaaaaaaaaagsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgraaaaaaaaaaaaaaaaaaaaaaaaaagsgsgsgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgraaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsgsgsgsgsgsgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgraagrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgrgsgsgsgsgsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgsgsgrgrgraagsgsgrgrgrgrgrgrgrgrgrgraagrgrgrgrgsgsgrgrgrgrgsgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgsgsgrgrgraagsgsgrgrgrgrgrgrgrgrgraaaagrgrgsgsgsgsgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgrgrgrgrgraagrgrgrgrgrgrgrgrgrgrgraaaaaagrgrgsgrgrgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgrgrgsgrgrgrgrgrgrgraaaaaaaaaaaaaagsgrgrgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagrgrgrgrgrgrgrgraaaaaaaaaagsgsgsgsgsgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgrgrgraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
