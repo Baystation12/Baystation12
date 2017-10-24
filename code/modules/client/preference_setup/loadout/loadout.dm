@@ -94,7 +94,7 @@ var/list/gear_datums = list()
 					gears -= gear_name
 				else
 					var/datum/gear/G = gear_datums[gear_name]
-					if(total_cost + G.cost > MAX_GEAR_COST)
+					if(total_cost + G.cost > config.max_gear_cost)
 						gears -= gear_name
 					else
 						total_cost += G.cost
@@ -111,12 +111,15 @@ var/list/gear_datums = list()
 			total_cost += G.cost
 
 	var/fcolor =  "#3366cc"
-	if(total_cost < MAX_GEAR_COST)
+	if(total_cost < config.max_gear_cost)
 		fcolor = "#e67300"
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
-	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\>"
-	. += "</a><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b>"
+	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a>"
+
+	if(config.max_gear_cost < INFINITY)
+		. += "<b><font color = '[fcolor]'>[total_cost]/[config.max_gear_cost]</font> loadout points spent.</b>"
+
 	. += "<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>"
 	. += "<a href='?src=\ref[src];toggle_hiding=1'>[hide_unavailable_gear ? "Show all" : "Hide unavailable"]</a></center></td></tr>"
 
@@ -222,7 +225,7 @@ var/list/gear_datums = list()
 			for(var/gear_name in pref.gear_list[pref.gear_slot])
 				var/datum/gear/G = gear_datums[gear_name]
 				if(istype(G)) total_cost += G.cost
-			if((total_cost+TG.cost) <= MAX_GEAR_COST)
+			if((total_cost+TG.cost) <= config.max_gear_cost)
 				pref.gear_list[pref.gear_slot] += TG.display_name
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 	if(href_list["gear"] && href_list["tweak"])
