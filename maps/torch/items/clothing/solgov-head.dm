@@ -323,6 +323,11 @@
 	icon = 'maps/torch/icons/obj/solgov-head.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
 
+/obj/item/clothing/head/helmet/solgov/security
+	name = "security helmet"
+	desc = "A helmet with 'MASTER AT ARMS' printed on the back in silver lettering."
+	icon_state = "helmet_security"
+
 /obj/item/clothing/head/helmet/solgov/command
 	name = "command helmet"
 	desc = "A helmet with 'SOL CENTRAL GOVERNMENT' printed on the back in gold lettering."
