@@ -673,3 +673,22 @@
 	item_state = "wetsuit"
 	worn_state = "wetsuit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/hazard
+	name = "hazard jumpsuit"
+	desc = "A high visibility jumpsuit made from heat and radiation resistant materials."
+	icon_state = "hazard"
+	item_state = "engi_suit"
+	worn_state = "hazard"
+	siemens_coefficient = 0.8
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 20, bio = 0, rad = 20)
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/under/sterile
+	name = "sterile jumpsuit"
+	desc = "A sterile white jumpsuit with medical markings. Protects against all manner of biohazards."
+	icon_state = "sterile"
+	item_state = "w_suit"
+	worn_state = "sterile"
+	permeability_coefficient = 0.50
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 30, rad = 0)

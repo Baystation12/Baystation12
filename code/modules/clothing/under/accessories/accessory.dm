@@ -93,15 +93,6 @@
 		return	//we aren't an object on the ground so don't call parent
 	..()
 
-//Ranks
-/obj/item/clothing/accessory/rank
-	name = "ranks"
-	desc = "Insignia denoting rank of some kind. These appear blank."
-	icon_state = "fleetrank"
-	on_rolled = list("down" = "none")
-	slot = ACCESSORY_SLOT_RANK
-	gender = PLURAL
-
 //Necklaces
 /obj/item/clothing/accessory/necklace
 	name = "necklace"

@@ -20,7 +20,6 @@
 	#include "datums/supplypacks/science.dm"
 
 	#include "items/cards_ids.dm"
-	#include "items/clothing.dm"
 	#include "items/encryption_keys.dm"
 	#include "items/headsets.dm"
 	#include "items/items.dm"
@@ -28,6 +27,14 @@
 	#include "items/manuals.dm"
 	#include "items/stamps.dm"
 	#include "items/uniform_vendor.dm"
+
+	#include "items/clothing/clothing.dm"
+	#include "items/clothing/solgov-accessory.dm"
+	#include "items/clothing/solgov-armor.dm"
+	#include "items/clothing/solgov-feet.dm"
+	#include "items/clothing/solgov-head.dm"
+	#include "items/clothing/solgov-suit.dm"
+	#include "items/clothing/solgov-under.dm"
 
 	#include "job/access.dm"
 	#include "job/jobs.dm"

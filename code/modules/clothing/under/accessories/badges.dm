@@ -99,34 +99,6 @@
 		..()
 		return
 
-
-/obj/item/weapon/storage/box/holobadge_solgov
-	name = "holobadge box"
-	desc = "A box claiming to contain holobadges, this one has 'Master at Arms' written on it in fine print."
-	startswith = list(/obj/item/clothing/accessory/badge/security = 6)
-
-
-/obj/item/clothing/accessory/badge/security
-	name = "security forces badge"
-	desc = "A silver law enforcement badge. Stamped with the words 'Master at Arms'."
-	icon_state = "silverbadge"
-	slot_flags = SLOT_TIE
-	badge_string = "Sol Central Government"
-
-/obj/item/clothing/accessory/badge/marshal
-	name = "marshal's badge"
-	desc = "A leather-backed gold badge displaying the crest of the Colonial Marshals."
-	icon_state = "marshalbadge"
-	badge_string = "Colonial Marshal Bureau"
-
-/obj/item/clothing/accessory/badge/tags //child of a badge for now because I'd rather not copy-paste their code
-	name = "dog tags"
-	desc = "Plain identification tags made from a durable metal. Stamped with a variety of informational details."
-	gender = PLURAL
-	icon_state = "tags"
-	badge_string = "Sol Central Government"
-	slot_flags = SLOT_MASK | SLOT_TIE
-
 /obj/item/clothing/accessory/badge/defenseintel
 	name = "investigator's badge"
 	desc = "A leather-backed silver badge bearing the crest of the Defense Intelligence Agency."
@@ -141,13 +113,6 @@
 	slot_flags = SLOT_TIE
 	badge_string = "Office of Interstellar Intelligence"
 
-/obj/item/clothing/accessory/badge/representative
-	name = "representative's badge"
-	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a representative of the Sol Central Government."
-	icon_state = "solbadge"
-	slot_flags = SLOT_TIE
-	badge_string = "Sol Central Government"
-
 /obj/item/clothing/accessory/badge/nanotrasen
 	name = "\improper NanoTrasen badge"
 	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a NanoTrasen corporate executive."
@@ -155,3 +120,8 @@
 	slot_flags = SLOT_TIE
 	badge_string = "NanoTrasen"
 
+/obj/item/clothing/accessory/badge/marshal
+	name = "marshal's badge"
+	desc = "A leather-backed gold badge displaying the crest of the Colonial Marshals."
+	icon_state = "marshalbadge"
+	badge_string = "Colonial Marshal Bureau"
