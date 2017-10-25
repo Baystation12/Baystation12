@@ -1,146 +1,52 @@
 {{if data.message}}
-	<p>{{:helper.link('X', null, {'clear_message' : 1})}}{{:data.message}}</p>
+<p>{{:helper.link('X', null, {'clear_message' : 1})}}{{:data.message}}</p>
 {{/if}}
-{{if data.name}}
-	{{:helper.link('BACK', '', {'clear_active' : 1})}}{{:helper.link('PRINT', '', {'print_active' : 1})}}<br><br>
-	<div class='statusDisplay'>
-		<div style="text-align: center">
-			<h3>GENERIC INFORMATION</h3>
-    		<div style="display: inline-block;">
-    			<img src='front_{{:data.uid}}.png' width = 128px>
-				<img src='side_{{:data.uid}}.png' width = 128px>
-    		</div>
+{{if data.uid}}
+{{:helper.link('BACK', '', {'clear_active' : 1})}}{{:helper.link('PRINT', '', {'print_active' : 1})}}<br><br>
+<div class='statusDisplay'>
+	<div style="text-align: center">
+		<h3>GENERIC INFORMATION</h3>
+		<div style="display: inline-block;">
+			<img src='front_{{:data.uid}}.png' width = 128px>
+			<img src='side_{{:data.uid}}.png' width = 128px>
 		</div>
-		<div class='item'>
-    		<div class='itemLabel'>&nbsp</div>
-    		<div class='itemBody'>{{:helper.link('Edit Front', 'pencil', {'edit_photo_front' : 1}, data.has_empl ? null : 'disabled')}}{{:helper.link('Edit Side', 'pencil', {'edit_photo_side' : 1}, data.has_empl ? null : 'disabled')}}</div>
-    	</div>
-    	<div class='item'>
-    		<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_name' : 1}, data.has_empl ? null : 'disabled')}}Name:</div>
-    		<div class='itemBody'>{{:data.name}}</div>
-    	</div>
-    	<div class='item'>
-    		<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_sex' : 1}, data.has_empl ? null : 'disabled')}}Sex:</div>
-    		<div class='itemBody'>{{:data.sex}}</div>
-    	</div>
-    	<div class='item'>
-    		<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_age' : 1}, data.has_empl ? null : 'disabled')}}Age:</div>
-    		<div class='itemBody'>{{:data.age}}</div>
-    	</div>
-    	<div class='item'>
-    		<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_species' : 1}, data.has_empl ? null : 'disabled')}}Species:</div>
-    		<div class='itemBody'>{{:data.species}}</div>
-    	</div>
-    	<div class='item'>
-    		<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_status' : 1}, data.has_med ? null : 'disabled')}}Status:</div>
-    		<div class='itemBody'>{{:data.status}}</div>
-    	</div>
-    	<div class='item'>
-    		<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_position' : 1}, data.has_empl ? null : 'disabled')}}Position:</div>
-    		<div class='itemBody'>{{:data.position}}</div>
-    	</div>
-    	<div class='item'>
-    		<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_branch' : 1}, data.has_empl ? null : 'disabled')}}Branch:</div>
-    		<div class='itemBody'>{{:data.branch}}</div>
-    	</div>
-    	<div class='item'>
-    		<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_rank' : 1}, data.has_empl ? null : 'disabled')}}Rank:</div>
-    		<div class='itemBody'>{{:data.rank}}</div>
-    	</div>
 	</div>
-	{{if data.has_med}}
-		<div class='statusDisplay'>
-			<div style="text-align: center">
-				<h3>MEDICAL RECORD</h3>
-			</div>
-    			<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_bloodtype' : 1}, data.has_med ? null : 'disabled')}}Blood type:</div>
-    				<div class='itemBody'>{{:data.bloodtype}}</div>
-    			</div>
-    			<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_medrecord' : 1}, data.has_med ? null : 'disabled')}}Details:</div>
-    				<div class='itemBody'><br><br>{{:data.medrecord}}</div>
-    			</div>
-    		</div>
-    	</div>
+	{{if data.pic_edit}}
+		<div class='item'>
+			<div class='itemLabel'>&nbsp</div>
+			<div class='itemBody'>{{:helper.link('Edit Front', 'pencil', {'edit_photo_front' : 1}, null)}}{{:helper.link('Edit Side', 'pencil', {'edit_photo_side' : 1}, null)}}</div>
+		</div>
 	{{/if}}
-	{{if data.has_sec}}
-		<div class='statusDisplay'>
-			<div style="text-align: center">
-				<h3>SECURITY RECORD</h3>
-			</div>
-				<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_criminalstatus' : 1}, data.has_sec ? null : 'disabled')}}Status:</div>
-    				<div class='itemBody'>{{:data.criminalstatus}}</div>
-    			</div>
-    			<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_dna' : 1}, data.has_sec ? null : 'disabled')}}DNA:</div>
-    				<div class='itemBody'>{{:data.dna}}</div>
-    			</div>
-    			<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_fingerprint' : 1}, data.has_sec ? null : 'disabled')}}Fingerprint:</div>
-    				<div class='itemBody'>{{:data.fingerprint}}</div>
-    			</div>
-    			<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_secrecord' : 1}, data.has_sec ? null : 'disabled')}}Details:</div>
-    				<div class='itemBody'><br><br>{{:data.secrecord}}</div>
-    			</div>
-    		</div>
-    	</div>
-	{{/if}}
-	{{if data.has_empl}}
-		<div class='statusDisplay'>
-			<div style="text-align: center">
-				<h3>EMPLOYMENT RECORD</h3>
-			</div>
-				<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_home_system' : 1}, data.has_empl ? null : 'disabled')}}Home System:</div>
-    				<div class='itemBody'>{{:data.home_system}}</div>
-    			</div>
-    			<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_citizenship' : 1}, data.has_empl ? null : 'disabled')}}Citizenship:</div>
-    				<div class='itemBody'>{{:data.citizenship}}</div>
-    			</div>
-    			<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_faction' : 1}, data.has_empl ? null : 'disabled')}}Faction:</div>
-    				<div class='itemBody'>{{:data.faction}}</div>
-    			</div>
-    			<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_religion' : 1}, data.has_empl ? null : 'disabled')}}Religion:</div>
-    				<div class='itemBody'>{{:data.religion}}</div>
-    			</div>
-    			<div class='item'>
-    				<div class='itemLabel'>{{:helper.link('EDIT', 'pencil', {'edit_emplrecord' : 1}, data.has_empl ? null : 'disabled')}}Details:</div>
-    				<div class='itemBody'><br><br>{{:data.emplrecord}}</div>
-    			</div>
-    		</div>
-    	</div>
-	{{/if}}
-	{{if data.has_antag}}
-		<div class='statusDisplay'>
-			<div style="text-align: center">
-				<h3>ERROR - Cannot verify data source! Contact system administrator for assistance.</h3>
-			</div>
-				<div class='item'>
-    				<div class='itemLabel'>Details:</div>
-    				<div class='itemBody'><br><br>{{:data.antagrecord}}</div>
-    			</div>
-    		</div>
-    	</div>
-	{{/if}}
-{{else}}
-	{{:helper.link('New Record', 'document', {'new_record' : 1}, data.has_empl ? null : 'disabled')}}
-	{{:helper.link('Name Search', 'search', {'name_search' : 1})}}
-	{{:helper.link('DNA Search', 'search', {'dna_search' : 1}, data.has_sec ? null : 'disabled')}}
-	{{:helper.link('Fingerprint Search', 'search', {'fingerprint_search' : 1}, data.has_sec ? null : 'disabled')}}
-	<br><br>
-	<h2>Available records:</h2>
-	<table style="width:100%">
-	<tr><td style="width:40%">Name<th>Position<th>Rank
-	{{for data.all_records}}
-		<tr class="candystripe"><td>{{:helper.link(value.name, '', {'set_active' : value.id})}}
-		<td>{{:value.rank}}
-		<td>{{:value.milrank}}
+	{{for data.fields}}
+		<div class='item'>
+			{{if value.editable}}
+				<div class='itemLabel'>{{:helper.link(value.name, 'pencil', {'edit_field' : value.key}, null)}}</div>
+			{{else}}
+				<div class='itemLabel'>{{:value.name}}:</div>
+			{{/if}}
+			<div class='itemBody'>{{:value.val}}</div>
+		</div>
 	{{/for}}
-	</table>
+</div>
+{{else}}
+{{if data.creation}}
+	{{:helper.link('New Record', 'document', {'new_record' : 1}, null)}}
+{{/if}}
+{{:helper.link('Name Search', 'search', {'search' : 'name'}, null)}}
+{{if data.dnasearch}}
+	{{:helper.link('DNA Search', 'search', {'search' : 'dna'}, null)}}
+{{/if}}
+{{if data.fingersearch}}
+	{{:helper.link('Fingerprint Search', 'search', {'search' : 'fingerprint'}, null)}}
+{{/if}}
+<br><br>
+<h2>Available records:</h2>
+<table style="width:100%">
+<tr><td style="width:40%">Name<th>Position<th>Rank
+{{for data.all_records}}
+	<tr class="candystripe"><td>{{:helper.link(value.name, '', {'set_active' : value.id})}}
+	<td>{{:value.rank}}
+	<td>{{:value.milrank}}
+{{/for}}
+</table>
 {{/if}}

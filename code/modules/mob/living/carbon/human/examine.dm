@@ -264,9 +264,9 @@
 			perpname = name
 
 		if(perpname)
-			for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
-				if(E.GetName() == perpname)
-					criminal = E.GetCriminalStatus()
+			var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
+			if(R)
+				criminal = R.get_criminalStatus()
 
 			msg += "<span class = 'deptradio'>Criminal status:</span> <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
 			msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=`'>\[View\]</a>\n"
@@ -284,9 +284,9 @@
 		else
 			perpname = src.name
 
-		for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
-			if (E.GetName() == perpname)
-				medical = E.GetStatus()
+		var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
+		if(R)
+			medical = R.get_status()
 
 		msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
 		msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"

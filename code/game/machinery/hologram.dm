@@ -239,9 +239,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	if(caller_id)
 		var/tempicon = 0
-		for(var/datum/computer_file/crew_record/t in GLOB.all_crew_records)
-			if(t.GetName() == caller_id.name)
-				tempicon = t.photo_front
+		var/datum/computer_file/crew_record/R = get_crewmember_record(caller_id.name)
+		if(R)
+			tempicon = R.photo_front
 		hologram.overlays += getHologramIcon(icon(tempicon), hologram_color = holopadType) // Add the callers image as an overlay to keep coloration!
 	else
 		if(holopadType == HOLOPAD_LONG_RANGE)

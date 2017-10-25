@@ -162,7 +162,7 @@
 	else if(href_list["menu"])
 		nanoui_menu = text2num(href_list["menu"])
 		if(href_list["id"])
-			exploit_id = href_list["id"]
+			exploit_id = text2num(href_list["id"])
 		if(href_list["category"])
 			category = locate(href_list["category"]) in uplink.categories
 
@@ -187,7 +187,7 @@
 	else if(nanoui_menu == 2)
 		var/permanentData[0]
 		for(var/datum/computer_file/crew_record/L in GLOB.all_crew_records)
-			permanentData[++permanentData.len] = list(Name = L.GetName(),"id" = L.uid)
+			permanentData[++permanentData.len] = list(Name = L.get_name(),"id" = L.uid, "exploit" = length(L.get_antagRecord()))
 		nanoui_data["exploit_records"] = permanentData
 	else if(nanoui_menu == 21)
 		nanoui_data["exploit_exists"] = 0
@@ -197,18 +197,29 @@
 				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
 								 // and if it's sanitized for html.
-				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.GetAntagRecord())                         		// Change stuff into html
+				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.get_antagRecord())                         		// Change stuff into html
 				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // change line breaks into <br>
-				nanoui_data["exploit"]["name"] =  html_encode(L.GetName())
-				nanoui_data["exploit"]["sex"] =  html_encode(L.GetSex())
-				nanoui_data["exploit"]["age"] =  html_encode(L.GetAge())
-				nanoui_data["exploit"]["species"] =  html_encode(L.GetSpecies())
-				nanoui_data["exploit"]["rank"] =  html_encode(L.GetRank())
-				nanoui_data["exploit"]["home_system"] =  html_encode(L.GetHomeSystem())
-				nanoui_data["exploit"]["citizenship"] =  html_encode(L.GetCitizenship())
-				nanoui_data["exploit"]["faction"] =  html_encode(L.GetFaction())
-				nanoui_data["exploit"]["religion"] =  html_encode(L.GetReligion())
-				nanoui_data["exploit"]["fingerprint"] =  html_encode(L.GetFingerprint())
+				var/list/fields = list(
+					REC_FIELD(name),
+					REC_FIELD(sex),
+					REC_FIELD(age),
+					REC_FIELD(species),
+					REC_FIELD(rank),
+					REC_FIELD(homeSystem),
+					REC_FIELD(citizenship),
+					REC_FIELD(faction),
+					REC_FIELD(religion),
+					REC_FIELD(fingerprint))
+				var/list/rec_fields = list()
+				for(var/field in fields)
+					var/record_field/F = locate(field) in L.fields
+					if(!F)
+						continue
+					rec_fields.Add(list(list(
+						"name" = html_encode(F.name), 
+						"val" = html_encode(F.get_value())
+					)))
+				nanoui_data["exploit"]["fields"] =  rec_fields
 
 				nanoui_data["exploit_exists"] = 1
 				break

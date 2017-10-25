@@ -209,3 +209,10 @@
 #define RADIATION_THRESHOLD_CUTOFF 0.1	// Radiation will not affect a tile when below this value.
 
 #define LEGACY_RECORD_STRUCTURE(X, Y) GLOBAL_LIST_EMPTY(##X);/datum/computer_file/data/##Y/var/list/fields[0];/datum/computer_file/data/##Y/New(){..();GLOB.##X.Add(src);}/datum/computer_file/data/##Y/Destroy(){..();GLOB.##X.Remove(src);}
+
+#define EDIT_SHORTTEXT 1	// Short (single line) text input field
+#define EDIT_LONGTEXT 2		// Long (multi line, papercode tag formattable) text input field
+#define EDIT_NUMERIC 3		// Single-line number input field
+#define EDIT_LIST 4			// Option select dialog
+
+#define REC_FIELD(KEY) 		/record_field/##KEY

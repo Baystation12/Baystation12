@@ -1,7 +1,3 @@
-// A simple macro for generating getter/setter methods. These should be preferred, as any change to the record structure
-// will result in compilation error, therefore making it easier to reveal potential issues that may arise.
-#define GETTER_SETTER(X, Y) /datum/computer_file/crew_record/proc/Get##X(){return fields[Y];} /datum/computer_file/crew_record/proc/Set##X(var/newValue){fields[Y] = newValue;}
-
 GLOBAL_LIST_EMPTY(all_crew_records)
 GLOBAL_LIST_INIT(blood_types, list("A-", "A+", "B-", "B+", "AB-", "AB+", "O-", "O+"))
 GLOBAL_LIST_INIT(physical_statuses, list("Active", "Disabled", "SSD", "Deceased"))
@@ -23,6 +19,8 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 /datum/computer_file/crew_record/New()
 	..()
+	for(var/T in subtypesof(/record_field/))
+		new T(src)
 	load_from_mob(null)
 
 /datum/computer_file/crew_record/Destroy()
@@ -40,53 +38,63 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		qdel(dummy)
 
 	// Generic record
-	SetName(H ? H.real_name : "Unset")
-	SetPosition(H ? GetAssignment(H) : "Unset")
-	SetSex(H ? gender2text(H.gender) : "Unset")
-	SetAge(H ? H.age : 30)
-	SetStatus(GLOB.default_physical_status)
-	SetSpecies(H ? H.get_species() : SPECIES_HUMAN)
-	SetBranch(H ? (H.char_branch && H.char_branch.name) : "None")
-	SetRank(H ? (H.char_rank && H.char_rank.name) : "None")
+	set_name(H ? H.real_name : "Unset")
+	set_job(H ? GetAssignment(H) : "Unset")
+	set_sex(H ? gender2text(H.gender) : "Unset")
+	set_age(H ? H.age : 30)
+	set_status(GLOB.default_physical_status)
+	set_species(H ? H.get_species() : SPECIES_HUMAN)
+	set_branch(H ? (H.char_branch && H.char_branch.name) : "None")
+	set_rank(H ? (H.char_rank && H.char_rank.name) : "None")
 
 	// Medical record
-	SetBloodtype(H ? H.b_type : "Unset")
-	SetMedRecord((H && H.med_record && !jobban_isbanned(H, "Records") ? H.med_record : "No record supplied"))
+	set_bloodtype(H ? H.b_type : "Unset")
+	set_medRecord((H && H.med_record && !jobban_isbanned(H, "Records") ? H.med_record : "No record supplied"))
 
 	// Security record
-	SetCriminalStatus(GLOB.default_security_status)
-	SetDna(H ? H.dna.unique_enzymes : "")
-	SetFingerprint(H ? md5(H.dna.uni_identity) : "")
-	SetSecRecord((H && H.sec_record && !jobban_isbanned(H, "Records") ? H.sec_record : "No record supplied"))
+	set_criminalStatus(GLOB.default_security_status)
+	set_dna(H ? H.dna.unique_enzymes : "")
+	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
+	set_secRecord((H && H.sec_record && !jobban_isbanned(H, "Records") ? H.sec_record : "No record supplied"))
 
 	// Employment record
-	SetEmplRecord((H && H.gen_record && !jobban_isbanned(H, "Records") ? H.gen_record : "No record supplied"))
-	SetHomeSystem(H ? H.home_system : "Unset")
-	SetCitizenship(H ? H.citizenship : "Unset")
-	SetFaction(H ? H.personal_faction : "Unset")
-	SetReligion(H ? H.religion : "Unset")
+	set_emplRecord((H && H.gen_record && !jobban_isbanned(H, "Records") ? H.gen_record : "No record supplied"))
+	set_homeSystem(H ? H.home_system : "Unset")
+	set_citizenship(H ? H.citizenship : "Unset")
+	set_faction(H ? H.personal_faction : "Unset")
+	set_religion(H ? H.religion : "Unset")
 
 	// Antag record
-	SetAntagRecord((H && H.exploit_record && !jobban_isbanned(H, "Records") ? H.exploit_record : "No record supplied"))
+	set_antagRecord((H && H.exploit_record && !jobban_isbanned(H, "Records") ? H.exploit_record : ""))
 
 // Returns independent copy of this file.
 /datum/computer_file/crew_record/clone(var/rename = 0)
 	var/datum/computer_file/crew_record/temp = ..()
 	return temp
 
+/datum/computer_file/crew_record/proc/get_field(var/field_type)
+	var/record_field/F = locate(field_type) in fields
+	if(F)
+		return F.get_value()
+
+/datum/computer_file/crew_record/proc/set_field(var/field_type, var/value)
+	var/record_field/F = locate(field_type) in fields
+	if(F)
+		return F.set_value(value)
+
 // Global methods
 // Used by character creation to create a record for new arrivals.
 /proc/CreateModularRecord(var/mob/living/carbon/human/H)
 	var/datum/computer_file/crew_record/CR = new/datum/computer_file/crew_record()
-	CR.load_from_mob(H)
 	GLOB.all_crew_records.Add(CR)
+	CR.load_from_mob(H)
 	return CR
 
 // Gets crew records filtered by set of positions
 /proc/department_crew_manifest(var/list/filter_positions, var/blacklist = FALSE)
 	var/list/matches = list()
 	for(var/datum/computer_file/crew_record/CR in GLOB.all_crew_records)
-		var/rank = CR.GetPosition()
+		var/rank = CR.get_job()
 		if(blacklist)
 			if(!(rank in filter_positions))
 				matches.Add(CR)
@@ -97,256 +105,17 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 // Simple record to HTML (for paper purposes) conversion.
 // Not visually that nice, but it gets the work done, feel free to tweak it visually
-/proc/record_to_html(var/datum/computer_file/crew_record/CR, var/access_med, var/access_empl, var/access_sec)
+/proc/record_to_html(var/datum/computer_file/crew_record/CR, var/access)
 	var/dat = "<H2>RECORD DATABASE DATA DUMP</H2><i>Generated on: [stationdate2text()] [stationtime2text()]</i><br>******************************<br>"
 	dat += "<table><tr><th>Field<th>Content"
-	dat += "<tr><td>Name<td>[CR.GetName()]"
-	dat += "<tr><td>Position<td>[CR.GetPosition()]"
-	dat += "<tr><td>Sex<td>[CR.GetSex()]"
-	dat += "<tr><td>Age<td>[CR.GetAge()]"
-	dat += "<tr><td>Status<td>[CR.GetStatus()]"
-	dat += "<tr><td>Species<td>[CR.GetSpecies()]"
-	dat += "<tr><td>Branch<td>[CR.GetBranch()]"
-	dat += "<tr><td>Rank<td>[CR.GetRank()]"
-	if(access_med)
-		dat += "<tr><td>Blood Type<td>[CR.GetBloodtype()]"
-		dat += "<tr><td>Details (Medical)<td>[pencode2html(CR.GetMedRecord())]"
-	if(access_empl)
-		dat += "<tr><td>Home System<td>[CR.GetHomeSystem()]"
-		dat += "<tr><td>Citizenship<td>[CR.GetCitizenship()]"
-		dat += "<tr><td>Faction<td>[CR.GetFaction()]"
-		dat += "<tr><td>Religion<td>[CR.GetReligion()]"
-		dat += "<tr><td>Details (Employment)<td>[pencode2html(CR.GetEmplRecord())]"
-	if(access_sec)
-		dat += "<tr><td>Criminal Status<td>[CR.GetCriminalStatus()]"
-		dat += "<tr><td>DNA Hash<td>[CR.GetDna()]"
-		dat += "<tr><td>Fingerprint Hash<td>[CR.GetFingerprint()]"
-		dat += "<tr><td>Details (Security)<td>[pencode2html(CR.GetSecRecord())]"
-	dat += "</table><br>******************************"
+	for(var/record_field/F in CR.fields)
+		if(F.can_see(access))
+			dat += "<tr><td>[F.name]<td>[F.get_value()]"
 	return dat
-
-// Generates a simple HTML crew manifest for use in various places
-/proc/html_crew_manifest(var/monochrome, var/OOC)
-	var/list/heads = new()
-	var/list/spt = new()
-	var/list/sec = new()
-	var/list/eng = new()
-	var/list/med = new()
-	var/list/sci = new()
-	var/list/civ = new()
-	var/list/bot = new()
-	var/list/misc = new()
-	var/list/srv = new()
-	var/list/sup = new()
-	var/list/exp = new()
-	var/list/isactive = new()
-	var/list/mil_ranks = list() // HTML to prepend to name
-	var/dat = {"
-	<head><style>
-		.manifest {border-collapse:collapse;}
-		.manifest td, th {border:1px solid [monochrome?"black":"[OOC?"black; background-color:#272727; color:white":"#DEF; background-color:white; color:black"]"]; padding:.25em}
-		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: [OOC?"#40628A":"#48C"]; color:white"]}
-		.manifest tr.head th { [monochrome?"border-top-width: 1px":"background-color: [OOC?"#013D3B;":"#488;"]"] }
-		.manifest td:first-child {text-align:right}
-		.manifest tr.alt td {[monochrome?"border-top-width: 2px":"background-color: [OOC?"#373737; color:white":"#DEF"]"]}
-	</style></head>
-	<table class="manifest" width='350px'>
-	<tr class='head'><th>Name</th><th>Position</th><th>Activity</th></tr>
-	"}
-	var/even = 0
-	// sort mobs
-	for(var/datum/computer_file/crew_record/CR in GLOB.all_crew_records)
-		var/name = CR.GetName()
-		var/rank = CR.GetPosition()
-		mil_ranks[name] = ""
-
-		if(GLOB.using_map.flags & MAP_HAS_RANK)
-			var/datum/mil_branch/branch_obj = mil_branches.get_branch(CR.GetBranch())
-			var/datum/mil_rank/rank_obj = mil_branches.get_rank(CR.GetBranch(), CR.GetRank())
-
-			if(branch_obj && rank_obj)
-				mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
-
-		if(OOC)
-			var/active = 0
-			for(var/mob/M in GLOB.player_list)
-				if(M.real_name == name && M.client && M.client.inactivity <= 10 * 60 * 10)
-					active = 1
-					break
-			isactive[name] = active ? "Active" : "Inactive"
-		else
-			isactive[name] = CR.GetStatus()
-
-			//cael - to prevent multiple appearances of a player/job combination, add a continue after each line
-		var/datum/job/job = job_master.occupations_by_title[rank]
-		if(!job)
-			misc[name] = rank
-			continue
-
-		var/department = 0
-		if(job.department_flag & COM)
-			heads[name] = rank
-			department = 1
-		if(job.department_flag & SPT)
-			spt[name] = rank
-			department = 1
-		if(job.department_flag & SEC)
-			sec[name] = rank
-			department = 1
-		if(job.department_flag & ENG)
-			eng[name] = rank
-			department = 1
-		if(job.department_flag & MED)
-			med[name] = rank
-			department = 1
-		if(job.department_flag & SCI)
-			sci[name] = rank
-			department = 1
-		if(job.department_flag & EXP)
-			exp[name] = rank
-			department = 1
-		if(job.department_flag & CIV)
-			civ[name] = rank
-			department = 1
-		if(job.department_flag & SRV)
-			srv[name] = rank
-			department = 1
-		if(job.department_flag & SUP)
-			sup[name] = rank
-			department = 1
-		if((job.department_flag & MSC) || (!department && !(name in heads)))
-			misc[name] = rank
-
-	// Synthetics don't have actual records, so we will pull them from here.
-	for(var/mob/living/silicon/ai/ai in SSmobs.mob_list)
-		bot[ai.name] = "Artificial Intelligence"
-
-	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
-		// No combat/syndicate cyborgs, no drones.
-		if(robot.module && robot.module.hide_on_manifest)
-			continue
-
-		bot[robot.name] = "[robot.modtype] [robot.braintype]"
-
-
-	if(heads.len > 0)
-		dat += "<tr><th colspan=3>Heads of Staff</th></tr>"
-		for(var/name in heads)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[heads[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(spt.len > 0)
-		dat += "<tr><th colspan=3>Command Support</th></tr>"
-		for(var/name in spt)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[spt[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(sci.len > 0)
-		dat += "<tr><th colspan=3>Research</th></tr>"
-		for(var/name in sci)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sci[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(sec.len > 0)
-		dat += "<tr><th colspan=3>Security</th></tr>"
-		for(var/name in sec)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sec[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(med.len > 0)
-		dat += "<tr><th colspan=3>Medical</th></tr>"
-		for(var/name in med)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[med[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(eng.len > 0)
-		dat += "<tr><th colspan=3>Engineering</th></tr>"
-		for(var/name in eng)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[eng[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(sup.len > 0)
-		dat += "<tr><th colspan=3>Supply</th></tr>"
-		for(var/name in sup)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(exp.len > 0)
-		dat += "<tr><th colspan=3>Exploration</th></tr>"
-		for(var/name in exp)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[exp[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(srv.len > 0)
-		dat += "<tr><th colspan=3>Service</th></tr>"
-		for(var/name in srv)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[srv[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(bot.len > 0)
-		dat += "<tr><th colspan=3>Silicon</th></tr>"
-		for(var/name in bot)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[bot[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	if(civ.len > 0)
-		dat += "<tr><th colspan=3>Civilian</th></tr>"
-		for(var/name in civ)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[civ[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-	// misc guys
-	if(misc.len > 0)
-		dat += "<tr><th colspan=3>Miscellaneous</th></tr>"
-		for(var/name in misc)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[mil_ranks[name]][name]</td><td>[misc[name]]</td><td>[isactive[name]]</td></tr>"
-			even = !even
-
-
-	dat += "</table>"
-	dat = replacetext(dat, "\n", "") // so it can be placed on paper correctly
-	dat = replacetext(dat, "\t", "")
-	return dat
-
-/proc/silicon_nano_crew_manifest(var/list/filter)
-	var/list/filtered_entries = list()
-
-	for(var/mob/living/silicon/ai/ai in SSmobs.mob_list)
-		filtered_entries.Add(list(list(
-			"name" = ai.name,
-			"rank" = "Artificial Intelligence",
-			"status" = ""
-		)))
-	for(var/mob/living/silicon/robot/robot in SSmobs.mob_list)
-		if(robot.module && robot.module.hide_on_manifest)
-			continue
-		filtered_entries.Add(list(list(
-			"name" = robot.name,
-			"rank" = "[robot.modtype] [robot.braintype]",
-			"status" = ""
-		)))
-	return filtered_entries
-
-/proc/filtered_nano_crew_manifest(var/list/filter, var/blacklist = FALSE)
-	var/list/filtered_entries = list()
-	for(var/datum/computer_file/crew_record/CR in department_crew_manifest(filter, blacklist))
-		filtered_entries.Add(list(list(
-			"name" = CR.GetName(),
-			"rank" = CR.GetPosition(),
-			"status" = CR.GetStatus(),
-			"branch" = CR.GetBranch(),
-			"milrank" = CR.GetRank()
-		)))
-	return filtered_entries
-
-/proc/nano_crew_manifest()
-	return list(\
-		"heads" = filtered_nano_crew_manifest(GLOB.command_positions),\
-		"spt" = filtered_nano_crew_manifest(GLOB.support_positions),\
-		"sci" = filtered_nano_crew_manifest(GLOB.science_positions),\
-		"sec" = filtered_nano_crew_manifest(GLOB.security_positions),\
-		"eng" = filtered_nano_crew_manifest(GLOB.engineering_positions),\
-		"med" = filtered_nano_crew_manifest(GLOB.medical_positions),\
-		"sup" = filtered_nano_crew_manifest(GLOB.supply_positions),\
-		"exp" = filtered_nano_crew_manifest(GLOB.exploration_positions),\
-		"srv" = filtered_nano_crew_manifest(GLOB.service_positions),\
-		"bot" = silicon_nano_crew_manifest(GLOB.nonhuman_positions),\
-		"civ" = filtered_nano_crew_manifest(GLOB.civilian_positions),\
-		"misc" = filtered_nano_crew_manifest(GLOB.unsorted_positions)\
-		)
 
 /proc/get_crewmember_record(var/name)
 	for(var/datum/computer_file/crew_record/CR in GLOB.all_crew_records)
-		if(CR.GetName() == name)
+		if(CR.get_name() == name)
 			return CR
 	return null
 
@@ -359,36 +128,129 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		return H.mind.role_alt_title
 	return H.mind.assigned_role
 
-// Getters/Setters below.
+/record_field
+	var/name = "Unknown"
+	var/value = "Unset"
+	var/valtype = EDIT_SHORTTEXT
+	var/acccess
+	var/acccess_edit
+	var/record_id
+
+/record_field/New(var/datum/computer_file/crew_record/record)
+	acccess_edit = acccess ? acccess : access_heads
+	if(record)
+		record_id = record.uid
+		record.fields += src
+	..()
+
+/record_field/proc/get_value()
+	return value
+
+/record_field/proc/set_value(var/newval)
+	if(isnull(newval))
+		return
+	switch(valtype)
+		if(EDIT_LIST)
+			var/options = get_options()
+			if(!(newval in options))
+				return
+		if(EDIT_SHORTTEXT)
+			newval = sanitize(newval)
+		if(EDIT_LONGTEXT)
+			newval = sanitize(newval, MAX_PAPER_MESSAGE_LEN)
+	value = newval
+	return 1
+
+/record_field/proc/get_options()
+	return list()
+
+/record_field/proc/can_edit(var/used_access)
+	if(!acccess_edit)
+		return TRUE
+	if(!used_access)
+		return FALSE
+	return islist(used_access) ? (acccess_edit in used_access) : acccess_edit == used_access
+
+/record_field/proc/can_see(var/used_access)
+	if(!acccess)
+		return TRUE
+	if(!used_access)
+		return FALSE
+	return islist(used_access) ? (acccess_edit in used_access) : acccess_edit == used_access
+
+#define GETTER_SETTER(KEY) /datum/computer_file/crew_record/proc/get_##KEY(){var/record_field/F = locate(/record_field/##KEY) in fields; if(F) return F.get_value()} \
+/datum/computer_file/crew_record/proc/set_##KEY(value){var/record_field/F = locate(/record_field/##KEY) in fields; if(F) return F.set_value(value)}
+
+// Fear not the preprocessor, for it is a friend. To add a field, use one of these, depending on value type and if you need special access to see it.
+// It will also create getter/setter procs for record datum, named like /get_[key here]() /set_[key_here](value) e.g. get_name() set_name(value)
+// Use getter setters to avoid errors caused by typoing the string key.
+#define FIELD_SHORT(NAME, KEY) /record_field/##KEY/name = ##NAME; GETTER_SETTER(##KEY)
+#define FIELD_SHORT_SECURE(NAME, KEY, ACCESS) FIELD_SHORT(##NAME, ##KEY); /record_field/##KEY/acccess = ##ACCESS
+
+#define FIELD_LONG(NAME, KEY) FIELD_SHORT(##NAME, ##KEY); /record_field/##KEY/valtype = EDIT_LONGTEXT
+#define FIELD_LONG_SECURE(NAME, KEY, ACCESS) FIELD_LONG(##NAME, ##KEY); /record_field/##KEY/acccess = ##ACCESS
+
+#define FIELD_NUM(NAME, KEY) FIELD_SHORT(##NAME, ##KEY); /record_field/##KEY/valtype = EDIT_NUMERIC; /record_field/##KEY/value = 0
+#define FIELD_NUM_SECURE(NAME, KEY, ACCESS) FIELD_NUM(##NAME, ##KEY); /record_field/##KEY/acccess = ##ACCESS
+
+#define FIELD_LIST(NAME, KEY, OPTIONS) FIELD_SHORT(##NAME, ##KEY); /record_field/##KEY/valtype = EDIT_LIST; /record_field/##KEY/get_options(){. = ##OPTIONS;}
+#define FIELD_LIST_SECURE(NAME, KEY, OPTIONS, ACCESS) FIELD_LIST(##NAME, ##KEY, ##OPTIONS); /record_field/##KEY/acccess = ##ACCESS
 
 // GENERIC RECORDS
-GETTER_SETTER(Name, "name")				// Results in GetName() and SetName(var/newname) methods.
-GETTER_SETTER(Position, "position")
-GETTER_SETTER(Sex, "sex")
-GETTER_SETTER(Age, "age")
-GETTER_SETTER(Status, "status")
-GETTER_SETTER(Species, "species")
-GETTER_SETTER(Branch, "branch")
-GETTER_SETTER(Rank, "rank")
+FIELD_SHORT("Name",name)
+FIELD_SHORT("Job",job)
+FIELD_LIST("Sex", sex, record_genders())
+FIELD_NUM("Age", age)
+
+FIELD_LIST("Status", status, GLOB.physical_statuses)
+/record_field/status/acccess_edit = access_medical
+
+FIELD_SHORT("Species",species)
+FIELD_LIST("Branch", branch, record_branches())
+FIELD_LIST("Rank", rank, record_ranks())
 
 // MEDICAL RECORDS
-GETTER_SETTER(Bloodtype, "bloodtype")
-GETTER_SETTER(MedRecord, "medRecord")
+FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types)
+FIELD_LONG_SECURE("Medical Record", medRecord, access_medical)
 
 // SECURITY RECORDS
-GETTER_SETTER(CriminalStatus, "criminalStatus")
-GETTER_SETTER(SecRecord, "secRecord")
-GETTER_SETTER(Dna, "dna")
-GETTER_SETTER(Fingerprint, "fingerprint")
+FIELD_LIST_SECURE("Criminal Status", criminalStatus, GLOB.security_statuses, access_security)
+FIELD_LONG_SECURE("Security Record", secRecord, access_security)
+FIELD_SHORT_SECURE("DNA", dna, access_security)
+FIELD_SHORT_SECURE("Fingerprint", fingerprint, access_security)
 
 // EMPLOYMENT RECORDS
-GETTER_SETTER(EmplRecord, "emplRecord")
-GETTER_SETTER(HomeSystem, "homeSystem")
-GETTER_SETTER(Citizenship, "citizenship")
-GETTER_SETTER(Faction, "faction")
-GETTER_SETTER(Religion, "religion")
+FIELD_LONG_SECURE("Employment Record", emplRecord, access_heads)
+FIELD_SHORT_SECURE("Home System", homeSystem, access_heads)
+FIELD_SHORT_SECURE("Citizenship", citizenship, access_heads)
+FIELD_SHORT_SECURE("Faction", faction, access_heads)
+FIELD_SHORT_SECURE("Religion", religion, access_heads)
 
 // ANTAG RECORDS
-GETTER_SETTER(AntagRecord, "antagRecord")
+FIELD_LONG_SECURE("Exploitable Information", antagRecord, access_syndicate)
 
-#undef GETTER_SETTER
+//Options builderes
+/record_field/rank/proc/record_ranks()
+	for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
+		if(R.uid == record_id)
+			var/datum/mil_branch/branch = mil_branches.get_branch(R.get_branch()) 
+			if(!branch)
+				return null
+			. = list()
+			. |= "Unset"
+			for(var/rank in branch.ranks)
+				var/datum/mil_rank/RA = branch.ranks[rank]
+				. |= RA.name
+
+/record_field/sex/proc/record_genders()
+	. = list()
+	. |= "Unset"
+	for(var/G in gender_datums)
+		. |= gender2text(G)
+
+/record_field/branch/proc/record_branches()
+	. = list()
+	. |= "Unset"
+	for(var/B in mil_branches.branches)
+		var/datum/mil_branch/BR = mil_branches.branches[B]
+		. |= BR.name

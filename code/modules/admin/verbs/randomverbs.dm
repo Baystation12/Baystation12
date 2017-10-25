@@ -367,10 +367,10 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		record_found = get_crewmember_record(G_found.real_name)
 
 	if(record_found)//If they have a record we can determine a few things.
-		new_character.real_name = record_found.GetName()
-		new_character.gender = record_found.GetSex()
-		new_character.age = record_found.GetAge()
-		new_character.b_type = record_found.GetBloodtype()
+		new_character.real_name = record_found.get_name()
+		new_character.gender = record_found.get_sex()
+		new_character.age = record_found.get_age()
+		new_character.b_type = record_found.get_bloodtype()
 	else
 		new_character.gender = pick(MALE,FEMALE)
 		var/datum/preferences/A = new()
@@ -395,7 +395,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	//DNA
 	new_character.dna.ready_dna(new_character)
 	if(record_found)//Pull up their name from database records if they did have a mind.
-		new_character.dna.unique_enzymes = record_found.GetDna()//Enzymes are based on real name but we'll use the record for conformity.
+		new_character.dna.unique_enzymes = record_found.get_dna()//Enzymes are based on real name but we'll use the record for conformity.
 	new_character.key = G_found.key
 
 	/*

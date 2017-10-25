@@ -90,10 +90,9 @@
 	if(!. || !in_depth)
 		return
 
-	for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
-		if(R.GetName() == old_name)
-			R.SetName(new_name)
-			break
+	var/datum/computer_file/crew_record/R = get_crewmember_record(old_name)
+	if(R)
+		R.set_name(new_name)
 
 	//update our pda and id if we have them on our person
 	var/list/searching = GetAllContents(searchDepth = 3)
