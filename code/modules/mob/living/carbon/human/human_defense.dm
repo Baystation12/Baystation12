@@ -42,7 +42,7 @@ meteor_act
 					victim.take_damage(damage_amt)
 
 	//Embed or sever artery
-	if(prob(22.5 + max(penetrating_damage, -10)) && !(prob(50) && (organ.sever_artery())) && (P.can_embed() && !(species.flags & NO_EMBED)))
+	if(P.can_embed() && !(species.flags & NO_EMBED) && prob(22.5 + max(penetrating_damage, -10)) && !(prob(50) && (organ.sever_artery())))
 		var/obj/item/weapon/material/shard/shrapnel/SP = new()
 		SP.name = (P.name != "shrapnel")? "[P.name] shrapnel" : "shrapnel"
 		SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."
