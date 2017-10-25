@@ -356,7 +356,25 @@ var/global/datum/controller/occupations/job_master
 
 		if(job)
 
-			// Equip custom gear loadout
+			//Equip job items.
+			job.setup_account(H)
+			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
+			job.apply_fingerprints(H)
+
+			if(H.char_rank && H.char_rank.accessory)
+				for(var/accessory_path in H.char_rank.accessory)
+					var/list/accessory_data = H.char_rank.accessory[accessory_path]
+					if(islist(accessory_data))
+						var/amt = accessory_data[1]
+						var/list/accessory_args = accessory_data.Copy()
+						accessory_args[1] = src
+						for(var/i in 1 to amt)
+							H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
+					else
+						for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
+							H.equip_to_slot_or_del(new accessory_path(src), slot_tie)
+
+			// Equip custom gear loadout, replacing any job items
 			var/list/loadout_taken_slots = list()
 			if(H.client.prefs.Gear() && job.loadout_allowed)
 				for(var/thing in H.client.prefs.Gear())
@@ -377,28 +395,10 @@ var/global/datum/controller/occupations/job_master
 							to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
 							continue
 
-						if(!G.slot || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H))
+						if(!G.slot || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))
 							spawn_in_storage.Add(G)
 						else
 							loadout_taken_slots.Add(G.slot)
-
-			//Equip job items.
-			job.setup_account(H)
-			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
-			job.apply_fingerprints(H)
-
-			if(H.char_rank && H.char_rank.accessory)
-				for(var/accessory_path in H.char_rank.accessory)
-					var/list/accessory_data = H.char_rank.accessory[accessory_path]
-					if(islist(accessory_data))
-						var/amt = accessory_data[1]
-						var/list/accessory_args = accessory_data.Copy()
-						accessory_args[1] = src
-						for(var/i in 1 to amt)
-							H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
-					else
-						for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
-							H.equip_to_slot_or_del(new accessory_path(src), slot_tie)
 
 		else
 			to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
@@ -447,7 +447,7 @@ var/global/datum/controller/occupations/job_master
 
 		// put any loadout items that couldn't spawn into storage or on the ground
 		for(var/datum/gear/G in spawn_in_storage)
-			G.spawn_in_storage_or_drop(H)
+			G.spawn_in_storage_or_drop(H, H.client.prefs.Gear()[G.display_name])
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ(BP_L_FOOT)
