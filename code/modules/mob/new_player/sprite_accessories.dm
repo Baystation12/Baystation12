@@ -47,6 +47,7 @@
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
 	var/veryshort						//doesn't need to be hidden by BLOCKHEADHAIR hats/helmets
+	var/flags
 
 	bald
 		name = "Bald"
@@ -366,10 +367,16 @@
 		icon_state = "hair_hbraid"
 		gender = FEMALE
 
-	braid
-		name = "Floorlength Braid"
+	braidvlong
+		name = "Very Long Braid"
 		icon_state = "hair_braid"
 		gender = FEMALE
+
+	braidfloor
+		name = "Floorlength Braid"
+		icon_state = "hair_floor_braid"
+		gender = FEMALE
+		flags = HAIR_FLOORTOUCH
 
 	odango
 		name = "Odango"
