@@ -303,11 +303,6 @@
 	desc = "A synthetic armor vest. This one is marked with the crest of NanoTrasen."
 	icon_state = "ntvest"
 
-/obj/item/clothing/suit/armor/vest/solgov
-	name = "\improper Sol Central Government armored vest"
-	desc = "A synthetic armor vest. This one is marked with the crest of the Sol Central Government."
-	icon_state = "solvest"
-
 /obj/item/clothing/suit/armor/vest/detective
 	name = "brown armored vest"
 	desc = "An synthetic armor vest colored in a vintage brown."
