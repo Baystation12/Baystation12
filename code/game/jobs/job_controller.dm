@@ -361,19 +361,6 @@ var/global/datum/controller/occupations/job_master
 			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
 			job.apply_fingerprints(H)
 
-			if(H.char_rank && H.char_rank.accessory)
-				for(var/accessory_path in H.char_rank.accessory)
-					var/list/accessory_data = H.char_rank.accessory[accessory_path]
-					if(islist(accessory_data))
-						var/amt = accessory_data[1]
-						var/list/accessory_args = accessory_data.Copy()
-						accessory_args[1] = src
-						for(var/i in 1 to amt)
-							H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
-					else
-						for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
-							H.equip_to_slot_or_del(new accessory_path(src), slot_tie)
-
 			// Equip custom gear loadout, replacing any job items
 			var/list/loadout_taken_slots = list()
 			if(H.client.prefs.Gear() && job.loadout_allowed)
@@ -395,10 +382,24 @@ var/global/datum/controller/occupations/job_master
 							to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
 							continue
 
-						if(!G.slot || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))
+						if(!G.slot || G.slot == slot_tie || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))
 							spawn_in_storage.Add(G)
 						else
 							loadout_taken_slots.Add(G.slot)
+
+			// do accessories last so they don't attach to a suit that will be replaced
+			if(H.char_rank && H.char_rank.accessory)
+				for(var/accessory_path in H.char_rank.accessory)
+					var/list/accessory_data = H.char_rank.accessory[accessory_path]
+					if(islist(accessory_data))
+						var/amt = accessory_data[1]
+						var/list/accessory_args = accessory_data.Copy()
+						accessory_args[1] = src
+						for(var/i in 1 to amt)
+							H.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
+					else
+						for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
+							H.equip_to_slot_or_del(new accessory_path(src), slot_tie)
 
 		else
 			to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
