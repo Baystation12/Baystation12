@@ -209,7 +209,8 @@
 		"nav_away_6",
 		"nav_derelict_5",
 		"nav_cluster_6",
-		"nav_ninja_start"
+		"nav_ninja_start",
+		"nav_lost_supply_base_antag"
 		)
 	shuttle_area = /area/ninja_dojo/start
 	current_location = "nav_ninja_start"
@@ -325,7 +326,8 @@
 		"nav_derelict_6",
 		"nav_cluster_5",
 		"nav_merc_dock",
-		"nav_merc_start"
+		"nav_merc_start",
+		"nav_lost_supply_base_antag"
 		)
 	shuttle_area = /area/syndicate_station/start
 	dock_target = "merc_shuttle"
@@ -385,7 +387,8 @@
 		"nav_derelict_7",
 		"nav_cluster_7",
 		"nav_skipjack_dock",
-		"nav_skipjack_start"
+		"nav_skipjack_start",
+		"nav_lost_supply_base_antag"
 		)
 	shuttle_area =  /area/skipjack_station/start
 	dock_target = "skipjack_shuttle"
@@ -445,7 +448,8 @@
 		"nav_derelict_4",
 		"nav_cluster_4",
 		"nav_ert_dock",
-		"nav_ert_start"
+		"nav_ert_start",
+		"nav_lost_supply_base_antag"
 		)
 	shuttle_area = /area/rescue_base/start
 	dock_target = "rescue_shuttle"
