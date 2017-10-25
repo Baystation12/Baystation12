@@ -1,0 +1,5 @@
+author: CrimsonShrike
+delete-after: True
+changes: 
+  - rscadd: "Added morgue access to Forensic Technicians."
+
