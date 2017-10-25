@@ -614,7 +614,7 @@
 
 	access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
-			            access_sec_doors, access_solgov_crew)
+			            access_sec_doors, access_solgov_crew, access_morgue)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
