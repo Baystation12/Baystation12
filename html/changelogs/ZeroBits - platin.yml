@@ -1,0 +1,4 @@
+author: ZeroBits
+delete-after: True
+changes: 
+  - tweak: "You can now disassemble bare plating by first damaging it with a welder (or bomb) then prying it up with a crowbar."

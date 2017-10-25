@@ -29,6 +29,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/has_cortical_stack = FALSE
 	var/equip_preview_mob = EQUIP_PREVIEW_ALL
 
+	var/icon/bgstate = "000"
+	var/list/bgstate_options = list("000", "fff", "steel", "white")
+
 /datum/category_item/player_setup_item/general/body
 	name = "Body"
 	sort_order = 3
@@ -57,6 +60,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["has_cortical_stack"] >> pref.has_cortical_stack
 	S["body_markings"]		>> pref.body_markings
 	pref.preview_icon = null
+	from_file(S["bgstate"], pref.bgstate)
 
 /datum/category_item/player_setup_item/general/body/save_character(var/savefile/S)
 	S["species"]			<< pref.species
@@ -81,6 +85,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["rlimb_data"]			<< pref.rlimb_data
 	S["has_cortical_stack"] << pref.has_cortical_stack
 	S["body_markings"]		<< pref.body_markings
+	to_file(S["bgstate"], pref.bgstate)
 
 /datum/category_item/player_setup_item/general/body/sanitize_character(var/savefile/S)
 	if(!pref.species || !(pref.species in playable_species))
@@ -114,6 +119,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.body_markings = list()
 	else
 		pref.body_markings &= GLOB.body_marking_styles_list
+	if(!pref.bgstate || !(pref.bgstate in pref.bgstate_options))
+		pref.bgstate = "000"
 
 /datum/category_item/player_setup_item/general/body/content(var/mob/user)
 	. = list()
@@ -230,6 +237,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	. += "</td><td><b>Preview</b><br>"
 	. += "<div class='statusDisplay'><center><img src=previewicon.png width=[pref.preview_icon.Width()] height=[pref.preview_icon.Height()]></center></div>"
+	. += "<br><a href='?src=\ref[src];cycle_bg=1'>Cycle background</a>"
 	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_LOADOUT]'>[pref.equip_preview_mob & EQUIP_PREVIEW_LOADOUT ? "Hide loadout" : "Show loadout"]</a>"
 	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[pref.equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
 	. += "</td></tr></table>"
@@ -622,6 +630,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	else if(href_list["toggle_preview_value"])
 		pref.equip_preview_mob ^= text2num(href_list["toggle_preview_value"])
+		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if(href_list["cycle_bg"])
+		pref.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	return ..()

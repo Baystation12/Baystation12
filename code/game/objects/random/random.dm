@@ -798,33 +798,6 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/head/ushanka = 3,
 				/obj/item/clothing/head/welding = 2)
 
-/obj/random/solgov
-	name = "random solgov equipment"
-	desc = "This is a random piece of solgov equipment or clothing."
-	icon = 'icons/obj/clothing/hats.dmi'
-	icon_state = "helmet_sol"
-
-/obj/random/solgov/spawn_choices()
-	return list(/obj/item/clothing/head/utility/fleet = 4,
-				/obj/item/clothing/head/utility/marine = 4,
-				/obj/item/clothing/head/utility/marine/tan = 3,
-				/obj/item/clothing/head/utility/marine/urban = 3,
-				/obj/item/clothing/head/soft/sol/expedition = 2,
-				/obj/item/clothing/head/soft/sol/fleet = 4,
-				/obj/item/clothing/head/helmet/solgov = 1,
-				/obj/item/clothing/suit/armor/vest/solgov = 2,
-				/obj/item/clothing/suit/storage/vest/solgov = 1,
-				/obj/item/clothing/suit/storage/service/expeditionary = 4,
-				/obj/item/clothing/under/utility/marine/tan = 2,
-				/obj/item/clothing/under/utility/marine/urban = 2,
-				/obj/item/clothing/under/utility/marine = 3,
-				/obj/item/clothing/under/utility = 5,
-				/obj/item/clothing/under/utility/fleet = 3,
-				/obj/item/clothing/under/pt/expeditionary = 4,
-				/obj/item/clothing/under/pt/marine = 2,
-				/obj/item/clothing/under/pt/fleet = 4,
-				/obj/item/clothing/accessory/armband/bluegold = 3)
-
 /obj/random/suit
 	name = "random suit"
 	desc = "This is a random piece of outerwear."
@@ -859,7 +832,6 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/under/syndicate/combat = 1,
 				/obj/item/clothing/under/hazard = 4,
 				/obj/item/clothing/under/sterile = 4,
-				/obj/item/clothing/under/pt = 1,
 				/obj/item/clothing/under/casual_pants/camo = 2,
 				/obj/item/clothing/under/frontier = 2,
 				/obj/item/clothing/under/harness = 2,
@@ -901,27 +873,6 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/weapon/spacecash/bundle/c50 = 2,
 				/obj/item/weapon/spacecash/bundle/c100 = 2,
 				/obj/item/weapon/spacecash/bundle/c1000 = 1)
-
-/obj/random/maintenance/solgov //can be used for loot on non-torch maps, so not a torch item
-	name = "random maintenance item"
-	desc = "This is a random maintenance item."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "gift1"
-
-/obj/random/maintenance/solgov/spawn_choices()
-	return list(/obj/random/junk = 4,
-				/obj/random/trash = 4,
-				/obj/random/maintenance/solgov/clean = 5)
-
-/obj/random/maintenance/solgov/clean
-	name = "random maintenance item"
-	desc = "This is a random maintenance item."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "gift2"
-
-/obj/random/maintenance/solgov/clean/spawn_choices()
-	return list(/obj/random/solgov = 3,
-				/obj/random/maintenance/clean = 800)
 
 /obj/random/maintenance //Clutter and loot for maintenance and away missions
 	name = "random maintenance item"

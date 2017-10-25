@@ -343,6 +343,7 @@
 	item_state = "electronic"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
+	matter = list("metal" = 110, "glass" = 0)
 
 /obj/item/device/destTagger/proc/openwindow(mob/user as mob)
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"

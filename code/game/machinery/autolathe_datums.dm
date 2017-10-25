@@ -384,6 +384,36 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/clothing/glasses/welding
 	category = "General"
 
+/datum/autolathe/recipe/blackpen
+	name = "black ink pen"
+	path = /obj/item/weapon/pen
+	category = "General"
+
+/datum/autolathe/recipe/bluepen
+	name = "blue ink pen"
+	path = /obj/item/weapon/pen/blue
+	category = "General"
+	
+/datum/autolathe/recipe/redpen
+	name = "red ink pen"
+	path = /obj/item/weapon/pen/red
+	category = "General"
+
+/datum/autolathe/recipe/clipboard
+	name = "clipboard"
+	path = /obj/item/weapon/clipboard
+	category = "General"
+	
+/datum/autolathe/recipe/destTagger
+	name = "destination tagger"
+	path = /obj/item/device/destTagger
+	category = "General"
+	
+/datum/autolathe/recipe/labeler
+	name = "dhand labeler"
+	path = /obj/item/weapon/hand_labeler
+	category = "General"
+
 /datum/autolathe/recipe/flamethrower
 	name = "flamethrower"
 	path = /obj/item/weapon/flamethrower/full

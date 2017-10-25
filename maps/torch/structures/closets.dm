@@ -38,7 +38,7 @@
 
 /obj/structure/closet/wardrobe/ptgear/WillContain()
 	return list(
-		/obj/item/clothing/under/pt/expeditionary = 4,
+		/obj/item/clothing/under/solgov/pt/expeditionary = 4,
 		/obj/item/clothing/shoes/white = 2,
 		/obj/item/clothing/shoes/black = 2)
 

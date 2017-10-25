@@ -31,7 +31,7 @@
 		if(!S)
 			to_chat(user, "<span class='warning'>\The [M] is missing that body part.</span>")
 
-		if(S && S.robotic >= ORGAN_ROBOT && S.hatch >= 2)
+		if(S && S.robotic >= ORGAN_ROBOT && S.hatch_state == HATCH_OPENED)
 			if(!S.get_damage())
 				to_chat(user, "<span class='notice'>Nothing to fix here.</span>")
 			else if(can_use(1))

@@ -46,7 +46,7 @@
 	virus_immune = 1
 
 	has_organ = list(
-		BP_BRAIN = /obj/item/organ/internal/mmi_holder/posibrain,
+		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
 		BP_OPTICS = /obj/item/organ/internal/eyes/optics
 		)
 
