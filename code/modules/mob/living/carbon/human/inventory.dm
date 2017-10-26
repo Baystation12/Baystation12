@@ -229,6 +229,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 	if(!has_organ_for_slot(slot)) return
 	if(!species || !species.hud || !(slot in species.hud.equip_slots)) return
 	W.forceMove(src)
+
+	var/obj/item/old_item = get_equipped_item(slot)
+
 	switch(slot)
 		if(slot_back)
 			src.back = W
@@ -351,6 +354,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 	if(W.action_button_name)
 		update_action_buttons()
 
+	// if we replaced an item, delete the old item. do this at the end to make the replacement seamless
+	if(old_item)
+		qdel(old_item)
+
 	return 1
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
@@ -413,5 +420,5 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(r_store)    . += r_store
 		if(handcuffed) . += handcuffed
 		if(s_store)    . += s_store
-		
+
 #undef REMOVE_INTERNALS
