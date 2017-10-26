@@ -76,3 +76,14 @@
 	slot_flags = SLOT_BACK
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 2)
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
+
+/obj/item/weapon/material/stick
+	name = "stick"
+	desc = "You feel the urge of poking something with this."
+	icon_state = "stick"
+	item_state = "stickmat"
+	force_divisor = 0.05
+	thrown_force_divisor = 0.05
+	w_class = ITEM_SIZE_NORMAL
+	default_material = "wood"
+	attack_verb = list("poked", "jabbed")
