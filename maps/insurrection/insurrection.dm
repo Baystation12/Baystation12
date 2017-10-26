@@ -115,6 +115,11 @@
 	else
 		return 0
 
+/datum/game_mode/insurrection/proc/get_config()
+	for(var/datum/configuration/c in world)
+		return c
+	return 0
+
 /datum/game_mode/insurrection/pre_setup()
 	..()
 	for(var/obj/effect/landmark/innie_bomb/b in world)
