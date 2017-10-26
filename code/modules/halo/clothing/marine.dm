@@ -1,5 +1,5 @@
 #define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
-#define ITEM_INHAND 'code/modules/halo/clothing/marine_inhands.dmi'
+#define ITEM_INHAND 'code/modules/halo/clothing/marine_items.dmi'
 
 /obj/item/clothing/under/unsc/marine_fatigues
 	desc = "standard issue for UNSC marines"
