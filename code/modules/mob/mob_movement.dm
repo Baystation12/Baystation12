@@ -237,8 +237,6 @@
 						b.zoom()
 				*/
 
-
-
 	//if(istype(mob.loc, /turf/space) || (mob.flags & NOGRAV))
 	//	if(!mob.Allow_Spacemove(0))	return 0
 
@@ -318,6 +316,9 @@
 							if(prob(25))	direct = turn(direct, pick(90, -90))
 				move_delay += 2
 				return mob.buckled.relaymove(mob,direct)
+
+		if(mob.check_slipmove())
+			return
 
 		//We are now going to move
 		moving = 1
@@ -477,6 +478,9 @@
 	if(Check_Shoegrip())
 		return 0
 	return prob_slip
+
+/mob/proc/check_slipmove()
+	return
 
 #define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_step(mob, final_dir), final_dir);
 

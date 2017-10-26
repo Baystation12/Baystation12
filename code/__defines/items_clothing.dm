@@ -212,6 +212,9 @@
 #define SUIT_HAS_SENSORS 1
 #define SUIT_LOCKED_SENSORS 2
 
+// Hair flags
+#define HAIR_FLOORTOUCH      0x1 // If the hair is long enough to touch the floor
+
 // Storage
 
 /*
