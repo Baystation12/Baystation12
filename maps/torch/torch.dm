@@ -11,6 +11,7 @@
 	#include "torch_unit_testing.dm"
 	#include "torch_gamemodes.dm"
 	#include "torch_antagonism.dm"
+	#include "torch_npcs.dm"
 
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
