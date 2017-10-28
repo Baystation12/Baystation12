@@ -1,0 +1,42 @@
+################################
+# Example Changelog File
+#
+# Note: This file, and files beginning with ".", and files that don't end in ".yml" will not be read. If you change this file, you will look really dumb.
+#
+# Your changelog will be merged with a master changelog. (New stuff added only, and only on the date entry for the day it was merged.)
+# When it is, any changes listed below will disappear.
+#
+# Valid Prefixes: 
+#   bugfix
+#   wip (For works in progress)
+#   tweak
+#   soundadd
+#   sounddel
+#   rscadd (general adding of nice things)
+#   rscdel (general deleting of nice things)
+#   imageadd
+#   imagedel
+#   maptweak
+#   spellcheck (typo fixes)
+#   experiment
+#################################
+
+# Your name.  
+author: sabiram
+
+# Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
+delete-after: True
+
+# Any changes you've made.  See valid prefix list above.
+# INDENT WITH TWO SPACES.  NOT TABS.  SPACES.
+# SCREW THIS UP AND IT WON'T WORK.
+# Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
+# Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
+changes: 
+  - bugfix: "Chemical grenades (cleaner, metal foam, etc) now work properly again."
+  - tweak: "Security module robots' stun batons now consume much less of their cell per hit."
+  - rscadd: "Anyone with bridge access can now lock the holodeck into its current state in the console interface."
+  - rscadd: "The Pathfinder now has a box of Exploration department encryption keys to distribute if they choose."
+  - tweak: "As part of the SolGov staff well-being initiative, cigarette supply to their installations have been restricted. Vendor prices have increased to match the limited supply."
+  - rscadd: "Added more e-cigarette flavour cartridge types to vendors, including ones to fill with your own flavours, and added empty e-cigarette cartridges to autolathes."
+  - maptweak: "Wall lockers with cardboard, wrapping paper and destination taggers have been added to the kitchen, hydroponics and the research and development lab."

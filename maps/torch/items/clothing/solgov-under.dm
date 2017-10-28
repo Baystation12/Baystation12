@@ -4,12 +4,6 @@
 	icon = 'maps/torch/icons/obj/solgov-under.dmi'
 	item_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/solgov-under.dmi')
 
-//misc garbage
-/obj/item/clothing/under/rank/internalaffairs/plain/solgov
-	desc = "A plain shirt and pair of pressed black pants."
-	name = "formal outfit"
-	starting_accessories = list(/obj/item/clothing/accessory/blue_clip,/obj/item/clothing/accessory/badge/solgov/representative)
-
 //PT
 /obj/item/clothing/under/solgov/pt
 	name = "pt uniform"
@@ -319,3 +313,16 @@
 	desc = "A feminine version of the SCG Marine Corps dress uniform, even classier in gold."
 	icon_state = "blackdressfem"
 	worn_state = "blackdressfem_com"
+
+//misc garbage
+/obj/item/clothing/under/rank/internalaffairs/plain/solgov
+	desc = "A plain shirt and pair of pressed black pants."
+	name = "formal outfit"
+	starting_accessories = list(/obj/item/clothing/accessory/blue_clip,/obj/item/clothing/accessory/badge/solgov/representative)
+
+/obj/item/clothing/under/solgov/utility/expeditionary/monkey
+	name = "adjusted expeditionary uniform"
+	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim. It was also mangled to fit a monkey. This better be worth the NJP you'll get for making it."
+	species_restricted = list("Monkey")
+	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/rank/fleet/officer/wo1_monkey)
