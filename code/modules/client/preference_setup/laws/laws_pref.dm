@@ -77,7 +77,7 @@
 			var/datum/ai_laws/ai_laws = law_set_type
 			var/ai_law_name = initial(ai_laws.name)
 			if(initial(ai_laws.shackles)) // Now this is one terribly snowflaky var
-				ADD_SORTED(valid_lawsets, ai_law_name, /proc/cmp_name_asc)
+				ADD_SORTED(valid_lawsets, ai_law_name, /proc/cmp_text_asc)
 				valid_lawsets[ai_law_name] = law_set_type
 
 		// Post selection
