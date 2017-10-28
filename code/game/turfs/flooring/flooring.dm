@@ -22,6 +22,7 @@ var/list/flooring_types
 	var/desc
 	var/icon
 	var/icon_base
+	var/color
 
 	var/has_base_range
 	var/has_damage_range
@@ -80,17 +81,6 @@ var/list/flooring_types
 	build_type = null
 	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 
-/decl/flooring/tiling
-	name = "floor"
-	desc = "Scuffed from the passage of countless greyshirts."
-	icon = 'icons/turf/flooring/tiles.dmi'
-	icon_base = "steel"
-	has_damage_range = 4
-	damage_temperature = T0C+1400
-	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
-	build_type = /obj/item/stack/tile/floor
-	can_paint = 1
-
 /decl/flooring/linoleum
 	name = "linoleum"
 	desc = "It's like the 2390's all over again."
@@ -100,19 +90,41 @@ var/list/flooring_types
 	build_type = /obj/item/stack/tile/linoleum
 	flags = TURF_REMOVE_SCREWDRIVER
 
+/decl/flooring/tiling
+	name = "floor"
+	desc = "Scuffed from the passage of countless greyshirts."
+	icon = 'icons/turf/flooring/tiles.dmi'
+	icon_base = "tiled"
+	color = COLOR_GUNMETAL
+	has_damage_range = 4
+	damage_temperature = T0C+1400
+	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
+	build_type = /obj/item/stack/tile/floor
+	can_paint = 1
+
+/decl/flooring/tiling/mono
+	icon_base = "monotile"
+
 /decl/flooring/tiling/white
 	desc = "How sterile."
-	icon_base = "white"
+	color = COLOR_WHITE
 	build_type = /obj/item/stack/tile/floor_white
+
+/decl/flooring/tiling/white/mono
+	icon_base = "monotile"
 
 /decl/flooring/tiling/dark
 	desc = "How ominous."
-	icon_base = "dark"
+	color = COLOR_DARK_GRAY
 	build_type = /obj/item/stack/tile/floor_dark
+
+/decl/flooring/tiling/dark/mono
+	icon_base = "monotile"
 
 /decl/flooring/tiling/freezer
 	desc = "Don't slip."
 	icon_base = "freezer"
+	color = null
 	has_damage_range = null
 	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_freezer
