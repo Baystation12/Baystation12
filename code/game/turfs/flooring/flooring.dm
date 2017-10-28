@@ -103,15 +103,11 @@ var/list/flooring_types
 /decl/flooring/tiling/white
 	desc = "How sterile."
 	icon_base = "white"
-	has_damage_range = null
-	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_white
 
 /decl/flooring/tiling/dark
 	desc = "How ominous."
 	icon_base = "dark"
-	has_damage_range = null
-	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor_dark
 
 /decl/flooring/tiling/freezer

@@ -10,6 +10,7 @@ var/list/flooring_cache = list()
 		name = flooring.name
 		desc = flooring.desc
 		icon = flooring.icon
+		color = flooring.color
 
 		if(flooring_override)
 			icon_state = flooring_override
@@ -29,36 +30,13 @@ var/list/flooring_cache = list()
 					has_border |= step_dir
 					overlays |= get_flooring_overlay("[flooring.icon_base]-edge-[step_dir]", "[flooring.icon_base]_edges", step_dir)
 
-			// There has to be a concise numerical way to do this but I am too noob.
-			if((has_border & NORTH) && (has_border & EAST))
-				overlays |= get_flooring_overlay("[flooring.icon_base]-edge-[NORTHEAST]", "[flooring.icon_base]_edges", NORTHEAST)
-			if((has_border & NORTH) && (has_border & WEST))
-				overlays |= get_flooring_overlay("[flooring.icon_base]-edge-[NORTHWEST]", "[flooring.icon_base]_edges", NORTHWEST)
-			if((has_border & SOUTH) && (has_border & EAST))
-				overlays |= get_flooring_overlay("[flooring.icon_base]-edge-[SOUTHEAST]", "[flooring.icon_base]_edges", SOUTHEAST)
-			if((has_border & SOUTH) && (has_border & WEST))
-				overlays |= get_flooring_overlay("[flooring.icon_base]-edge-[SOUTHWEST]", "[flooring.icon_base]_edges", SOUTHWEST)
-
-			if(flooring.flags & TURF_HAS_CORNERS)
-				// As above re: concise numerical way to do this.
-				if(!(has_border & NORTH))
-					if(!(has_border & EAST))
-						var/turf/simulated/floor/T = get_step(src, NORTHEAST)
-						if(!(istype(T) && T.flooring && T.flooring.name == flooring.name))
-							overlays |= get_flooring_overlay("[flooring.icon_base]-corner-[NORTHEAST]", "[flooring.icon_base]_corners", NORTHEAST)
-					if(!(has_border & WEST))
-						var/turf/simulated/floor/T = get_step(src, NORTHWEST)
-						if(!(istype(T) && T.flooring && T.flooring.name == flooring.name))
-							overlays |= get_flooring_overlay("[flooring.icon_base]-corner-[NORTHWEST]", "[flooring.icon_base]_corners", NORTHWEST)
-				if(!(has_border & SOUTH))
-					if(!(has_border & EAST))
-						var/turf/simulated/floor/T = get_step(src, SOUTHEAST)
-						if(!(istype(T) && T.flooring && T.flooring.name == flooring.name))
-							overlays |= get_flooring_overlay("[flooring.icon_base]-corner-[SOUTHEAST]", "[flooring.icon_base]_corners", SOUTHEAST)
-					if(!(has_border & WEST))
-						var/turf/simulated/floor/T = get_step(src, SOUTHWEST)
-						if(!(istype(T) && T.flooring && T.flooring.name == flooring.name))
-							overlays |= get_flooring_overlay("[flooring.icon_base]-corner-[SOUTHWEST]", "[flooring.icon_base]_corners", SOUTHWEST)
+			for(var/diagonal in list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST))
+				if((has_border & diagonal) == diagonal)
+					overlays |= get_flooring_overlay("[flooring.icon_base]-edge-[diagonal]", "[flooring.icon_base]_edges", diagonal)
+				if((has_border & diagonal) == 0 && (flooring.flags & TURF_HAS_CORNERS))
+					var/turf/simulated/floor/T = get_step(src, diagonal)
+					if(!(istype(T) && T.flooring && T.flooring.name == flooring.name))
+						overlays |= get_flooring_overlay("[flooring.icon_base]-corner-[diagonal]", "[flooring.icon_base]_corners", diagonal)
 
 		if(flooring.can_paint && decals && decals.len)
 			overlays |= decals
@@ -74,19 +52,26 @@ var/list/flooring_cache = list()
 		icon_state = "dmg[rand(1,4)]"
 	else if(flooring)
 		if(!isnull(broken) && (flooring.flags & TURF_CAN_BREAK))
-			overlays |= get_flooring_overlay("[flooring.icon_base]-broken-[broken]","[flooring.icon_base]_broken[broken]")
+			overlays |= get_damage_overlay("broken[broken]", BLEND_MULTIPLY)
 		if(!isnull(burnt) && (flooring.flags & TURF_CAN_BURN))
-			overlays |= get_flooring_overlay("[flooring.icon_base]-burned-[burnt]","[flooring.icon_base]_burned[burnt]")
+			overlays |= get_damage_overlay("burned[burnt]")
 
 	if(update_neighbors)
-		for(var/turf/simulated/floor/F in range(src, 1))
-			if(F == src)
-				continue
+		for(var/turf/simulated/floor/F in orange(src, 1))
 			F.update_icon()
 
 /turf/simulated/floor/proc/get_flooring_overlay(var/cache_key, var/icon_base, var/icon_dir = 0)
 	if(!flooring_cache[cache_key])
 		var/image/I = image(icon = flooring.icon, icon_state = icon_base, dir = icon_dir)
+		I.turf_decal_layerise()
+		flooring_cache[cache_key] = I
+	return flooring_cache[cache_key]
+
+/turf/simulated/floor/proc/get_damage_overlay(var/cache_key, var/blend)
+	if(!flooring_cache[cache_key])
+		var/image/I = image(icon = 'icons/turf/flooring/damage.dmi', icon_state = cache_key)
+		if(blend)
+			I.blend_mode = blend
 		I.turf_decal_layerise()
 		flooring_cache[cache_key] = I
 	return flooring_cache[cache_key]
