@@ -1,7 +1,7 @@
 
 /datum/reagent/triadrenaline
 	name = "Tri-Adrenaline"
-	description = "An extremely powerful synthetic stimulant. Capable of restarting the hearts of the dead."
+	description = "An extremely powerful synthetic stimulant. Capable of restarting a human heart."
 	reagent_state = LIQUID
 	color = "#00BFFF" //Same as inaprovaline because why not!
 	metabolism = 0.2
@@ -13,26 +13,16 @@
 	M.adjustOxyLoss(-300 * removed)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/Ghost = 0
-		if (M.stat == DEAD)
-			M.visible_message("[H] begins to violently twitch", "You feel your muscles suddenly become tense")
-			//These few bits are a shameless rip from the defib code
-			for(var/mob/observer/ghost/G in world)
-				if(G.mind == M.mind)
-					to_chat(G,"Return to your body to be revived!")
-					sleep(100)
-					if(G.mind == M)
-						H.visible_message("[H] falls limp", "Your muscles relax")
-						Ghost = 1
-					break
-			if(!Ghost)
-				H.visible_message("[H] suddenly gasps for air", "You suddenly feel air enter your lungs")
-				H.timeofdeath = 0
-				H.stat = CONSCIOUS
-				H.regenerate_icons()
-				H.failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
-			//End shameless rip
+
+		//Ports and simplifies defib code
+		if(H.stat != DEAD)
+			if(H.ssd_check())
+				to_chat(find_dead_player(H.ckey, 1), "Return to your body to be revived!")
+				sleep(100)
+
+			H.resuscitate()
 			holder.remove_reagent("triadrenaline", dose)
+			log_and_message_admins("Tri-adrenaline used to revive [key_name(H)]")
 
 /datum/reagent/triadrenaline/overdose(var/mob/living/carbon/human/H)
 	var/obj/item/organ/internal/heart/O = H.internal_organs_by_name["heart"]
@@ -42,7 +32,7 @@
 		to_chat(H,"You feel a sudden stabbing pain in your chest")
 	else if(prob(25))
 		to_chat(H,"You feel your heart thundering in your chest")
-		O.pulse = PULSE_2FAST
+		O.pulse = PULSE_2FAST //This can actually cause heart damage now
 
 /datum/reagent/biofoam
 	name = "Bio-Foam"
