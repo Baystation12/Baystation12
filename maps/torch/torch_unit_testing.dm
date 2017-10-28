@@ -78,7 +78,9 @@
 		/area/ship/scrap/escape_port = NO_SCRUBBER|NO_VENT,
 		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
 		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT
+		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT,
+		/area/marooned/marooned_snow = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/marooned/marooned_hut = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -91,7 +93,9 @@
 		/area/exoplanet/desert,
 		/area/exoplanet/grass,
 		/area/exoplanet/snow,
-		/area/exoplanet/garbage
+		/area/exoplanet/garbage,
+		/area/marooned/marooned_snow
+
 	)
 
 	area_coherency_test_subarea_count = list(
