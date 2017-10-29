@@ -104,10 +104,18 @@
 
 /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
 	name = "\improper Tough operator"
-	desc = "Revolver with ammunition."
+	desc = ".357 revolver, with ammunition."
 	startswith = list(
 		/obj/item/weapon/gun/projectile/revolver,
 		/obj/item/ammo_magazine/a357
+	)
+
+/obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver2
+	name = "\improper Dandy tough operator"
+	desc = ".44 magnum revolver, with ammunition."
+	startswith = list(
+		/obj/item/weapon/gun/projectile/revolver/webley,
+		/obj/item/ammo_magazine/c44
 	)
 
 /obj/item/weapon/storage/box/syndie_kit/toxin

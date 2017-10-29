@@ -35,10 +35,16 @@
 	path = /obj/item/weapon/gun/energy/gun
 
 /datum/uplink_item/item/visible_weapons/revolver
-	name = "Revolver"
+	name = "Revolver, .357"
 	item_cost = 56
 	antag_costs = list(MODE_MERCENARY = 7)
 	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver
+
+/datum/uplink_item/item/visible_weapons/revolver2
+	name = "Revolver, .44"
+	item_cost = 48
+	antag_costs = list(MODE_MERCENARY = 5)
+	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/revolver2
 
 /datum/uplink_item/item/visible_weapons/grenade_launcher
 	name = "Grenade Launcher"

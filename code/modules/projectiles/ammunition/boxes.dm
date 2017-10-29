@@ -3,6 +3,7 @@
 	//desc = "A box of .357 ammo"
 	//icon_state = "357"
 	name = "speed loader (.357)"
+	desc = "A speed loader for revolvers."
 	icon_state = "38"
 	caliber = "357"
 	ammo_type = /obj/item/ammo_casing/a357
@@ -12,6 +13,7 @@
 
 /obj/item/ammo_magazine/c50
 	name = "speed loader (.50)"
+	desc = "A speed loader for revolvers."
 	icon_state = "38"
 	caliber = ".50"
 	ammo_type = /obj/item/ammo_casing/a50
@@ -21,6 +23,7 @@
 
 /obj/item/ammo_magazine/c38
 	name = "speed loader (.38)"
+	desc = "A speed loader for revolvers."
 	icon_state = "38"
 	caliber = "38"
 	matter = list(DEFAULT_WALL_MATERIAL = 360)
@@ -29,8 +32,24 @@
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/c38/rubber
-	name = "speed loader (.38 rubber)"
+	name = "speed loader (.38, rubber)"
+	icon_state = "R38"
 	ammo_type = /obj/item/ammo_casing/c38/rubber
+
+/obj/item/ammo_magazine/c44
+	name = "speed loader (.44 magnum)"
+	desc = "A speed loader for revolvers."
+	icon_state = "38"
+	ammo_type = /obj/item/ammo_casing/c44
+	matter = list(DEFAULT_WALL_MATERIAL = 450)
+	caliber = ".44"
+	max_ammo = 6
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/c44/rubber
+	name = "speed loader (.44 magnum, rubber)"
+	icon_state = "R38"
+	ammo_type = /obj/item/ammo_casing/c44/rubber
 
 /obj/item/ammo_magazine/c45m
 	name = "magazine (.45)"
@@ -46,15 +65,15 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/c45m/rubber
-	name = "magazine (.45 rubber)"
+	name = "magazine (.45, rubber)"
 	ammo_type = /obj/item/ammo_casing/c45/rubber
 
 /obj/item/ammo_magazine/c45m/practice
-	name = "magazine (.45 practice)"
+	name = "magazine (.45, practice)"
 	ammo_type = /obj/item/ammo_casing/c45/practice
 
 /obj/item/ammo_magazine/c45m/flash
-	name = "magazine (.45 flash)"
+	name = "magazine (.45, flash)"
 	ammo_type = /obj/item/ammo_casing/c45/flash
 
 /obj/item/ammo_magazine/c45uzi
@@ -85,7 +104,7 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/mc9mm/flash
-	name = "magazine (9mm flash)"
+	name = "magazine (9mm, flash)"
 	ammo_type = /obj/item/ammo_casing/c9mm/flash
 
 /obj/item/ammo_magazine/box/c9mm
@@ -101,7 +120,7 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/box/emp
-	name = "ammunition box (.38 haywire)"
+	name = "ammunition box (.38, haywire)"
 	icon_state = "empbox"
 	origin_tech = list(TECH_COMBAT = 2)
 	max_ammo = 10
@@ -109,12 +128,12 @@
 	caliber = ".38"
 
 /obj/item/ammo_magazine/box/emp/c45
-	name = "ammunition box (.45 haywire)"
+	name = "ammunition box (.45, haywire)"
 	ammo_type = /obj/item/ammo_casing/c45/emp
 	caliber = ".45"
 
 /obj/item/ammo_magazine/box/emp/a10mm
-	name = "ammunition box (10mm haywire)"
+	name = "ammunition box (10mm, haywire)"
 	ammo_type = /obj/item/ammo_casing/a10mm/emp
 	caliber = "10mm"
 
@@ -132,11 +151,11 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/mc9mmt/rubber
-	name = "top mounted magazine (9mm rubber)"
+	name = "top mounted magazine (9mm, rubber)"
 	ammo_type = /obj/item/ammo_casing/c9mm/rubber
 
 /obj/item/ammo_magazine/mc9mmt/practice
-	name = "top mounted magazine (9mm practice)"
+	name = "top mounted magazine (9mm, practice)"
 	ammo_type = /obj/item/ammo_casing/c9mm/practice
 
 /obj/item/ammo_magazine/box/c45
@@ -180,7 +199,7 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/a762/practice
-	name = "magazine (7.62mm practice)"
+	name = "magazine (7.62mm, practice)"
 	ammo_type = /obj/item/ammo_casing/a762/practice
 
 /obj/item/ammo_magazine/a50
@@ -235,6 +254,7 @@
 
 /obj/item/ammo_magazine/caps
 	name = "speed loader (caps)"
+	desc = "A cheap plastic speed loader for some kind of revolver."
 	icon_state = "T38"
 	caliber = "caps"
 	color = "#ff0000"
