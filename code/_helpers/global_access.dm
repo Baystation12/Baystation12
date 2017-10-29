@@ -227,8 +227,6 @@
 			return global.bomb_set;
 		if("borers")
 			return global.borers;
-		if("button_sound")
-			return global.button_sound;
 		if("cable_list")
 			return global.cable_list;
 		if("cached_icons")
@@ -273,8 +271,6 @@
 			return global.client_preference_stats_;
 		if("client_repository")
 			return global.client_repository;
-		if("clown_sound")
-			return global.clown_sound;
 		if("combatlog")
 			return global.combatlog;
 		if("comm_message_listeners")
@@ -383,8 +379,6 @@
 			return global.exclude_jobs;
 		if("explosion_in_progress")
 			return global.explosion_in_progress;
-		if("explosion_sound")
-			return global.explosion_sound;
 		if("explosion_turfs")
 			return global.explosion_turfs;
 		if("facial_hair_styles_female_list")
@@ -425,8 +419,6 @@
 			return global.follow_repository;
 		if("forced_ambiance_list")
 			return global.forced_ambiance_list;
-		if("fracture_sound")
-			return global.fracture_sound;
 		if("fruit_icon_cache")
 			return global.fruit_icon_cache;
 		if("fuel_injectors")
@@ -481,8 +473,6 @@
 			return global.hazard_overlays;
 		if("hidden_skill_types")
 			return global.hidden_skill_types;
-		if("hiss_sound")
-			return global.hiss_sound;
 		if("hivemind_bank")
 			return global.hivemind_bank;
 		if("holder_mob_icon_cache")
@@ -523,8 +513,6 @@
 			return global.joblist;
 		if("join_motd")
 			return global.join_motd;
-		if("keyboard_sound")
-			return global.keyboard_sound;
 		if("landmarks_list")
 			return global.landmarks_list;
 		if("language_keys")
@@ -543,8 +531,6 @@
 			return global.light_overlay_cache;
 		if("light_type_cache")
 			return global.light_type_cache;
-		if("lighter_sound")
-			return global.lighter_sound;
 		if("lighting_overlays_initialised")
 			return global.lighting_overlays_initialised;
 		if("lighting_update_corners")
@@ -711,8 +697,6 @@
 			return global.outfits_decls_root_;
 		if("overmap_event_handler")
 			return global.overmap_event_handler;
-		if("page_sound")
-			return global.page_sound;
 		if("paiController")
 			return global.paiController;
 		if("pai_emotions")
@@ -779,8 +763,6 @@
 			return global.prometheans;
 		if("protected_objects")
 			return global.protected_objects;
-		if("punch_sound")
-			return global.punch_sound;
 		if("rad_collectors")
 			return global.rad_collectors;
 		if("radiation_repository")
@@ -837,8 +819,6 @@
 			return global.rune_list;
 		if("runtime_diary")
 			return global.runtime_diary;
-		if("rustle_sound")
-			return global.rustle_sound;
 		if("same_wires")
 			return global.same_wires;
 		if("scheduler")
@@ -855,8 +835,6 @@
 			return global.server_name;
 		if("severity_to_string")
 			return global.severity_to_string;
-		if("shatter_sound")
-			return global.shatter_sound;
 		if("ship_engines")
 			return global.ship_engines;
 		if("shuttle_controller")
@@ -883,8 +861,6 @@
 			return global.sounds_cache;
 		if("spacevines_spawned")
 			return global.spacevines_spawned;
-		if("spark_sound")
-			return global.spark_sound;
 		if("sparring_attack_cache")
 			return global.sparring_attack_cache;
 		if("spells")
@@ -945,10 +921,6 @@
 			return global.swapmaps_loaded;
 		if("swapmaps_mode")
 			return global.swapmaps_mode;
-		if("swing_hit_sound")
-			return global.swing_hit_sound;
-		if("switch_sound")
-			return global.switch_sound;
 		if("syndicate_access")
 			return global.syndicate_access;
 		if("syndicate_code_phrase")
@@ -1316,8 +1288,6 @@
 			global.bomb_set=newval;
 		if("borers")
 			global.borers=newval;
-		if("button_sound")
-			global.button_sound=newval;
 		if("cable_list")
 			global.cable_list=newval;
 		if("cached_icons")
@@ -1362,8 +1332,6 @@
 			global.client_preference_stats_=newval;
 		if("client_repository")
 			global.client_repository=newval;
-		if("clown_sound")
-			global.clown_sound=newval;
 		if("combatlog")
 			global.combatlog=newval;
 		if("comm_message_listeners")
@@ -1472,8 +1440,6 @@
 			global.exclude_jobs=newval;
 		if("explosion_in_progress")
 			global.explosion_in_progress=newval;
-		if("explosion_sound")
-			global.explosion_sound=newval;
 		if("explosion_turfs")
 			global.explosion_turfs=newval;
 		if("facial_hair_styles_female_list")
@@ -1514,8 +1480,6 @@
 			global.follow_repository=newval;
 		if("forced_ambiance_list")
 			global.forced_ambiance_list=newval;
-		if("fracture_sound")
-			global.fracture_sound=newval;
 		if("fruit_icon_cache")
 			global.fruit_icon_cache=newval;
 		if("fuel_injectors")
@@ -1570,8 +1534,6 @@
 			global.hazard_overlays=newval;
 		if("hidden_skill_types")
 			global.hidden_skill_types=newval;
-		if("hiss_sound")
-			global.hiss_sound=newval;
 		if("hivemind_bank")
 			global.hivemind_bank=newval;
 		if("holder_mob_icon_cache")
@@ -1612,8 +1574,6 @@
 			global.joblist=newval;
 		if("join_motd")
 			global.join_motd=newval;
-		if("keyboard_sound")
-			global.keyboard_sound=newval;
 		if("landmarks_list")
 			global.landmarks_list=newval;
 		if("language_keys")
@@ -1632,8 +1592,6 @@
 			global.light_overlay_cache=newval;
 		if("light_type_cache")
 			global.light_type_cache=newval;
-		if("lighter_sound")
-			global.lighter_sound=newval;
 		if("lighting_overlays_initialised")
 			global.lighting_overlays_initialised=newval;
 		if("lighting_update_corners")
@@ -1800,8 +1758,6 @@
 			global.outfits_decls_root_=newval;
 		if("overmap_event_handler")
 			global.overmap_event_handler=newval;
-		if("page_sound")
-			global.page_sound=newval;
 		if("paiController")
 			global.paiController=newval;
 		if("pai_emotions")
@@ -1868,8 +1824,6 @@
 			global.prometheans=newval;
 		if("protected_objects")
 			global.protected_objects=newval;
-		if("punch_sound")
-			global.punch_sound=newval;
 		if("rad_collectors")
 			global.rad_collectors=newval;
 		if("radiation_repository")
@@ -1926,8 +1880,6 @@
 			global.rune_list=newval;
 		if("runtime_diary")
 			global.runtime_diary=newval;
-		if("rustle_sound")
-			global.rustle_sound=newval;
 		if("same_wires")
 			global.same_wires=newval;
 		if("scheduler")
@@ -1944,8 +1896,6 @@
 			global.server_name=newval;
 		if("severity_to_string")
 			global.severity_to_string=newval;
-		if("shatter_sound")
-			global.shatter_sound=newval;
 		if("ship_engines")
 			global.ship_engines=newval;
 		if("shuttle_controller")
@@ -1972,8 +1922,6 @@
 			global.sounds_cache=newval;
 		if("spacevines_spawned")
 			global.spacevines_spawned=newval;
-		if("spark_sound")
-			global.spark_sound=newval;
 		if("sparring_attack_cache")
 			global.sparring_attack_cache=newval;
 		if("spells")
@@ -2034,10 +1982,6 @@
 			global.swapmaps_loaded=newval;
 		if("swapmaps_mode")
 			global.swapmaps_mode=newval;
-		if("swing_hit_sound")
-			global.swing_hit_sound=newval;
-		if("switch_sound")
-			global.switch_sound=newval;
 		if("syndicate_access")
 			global.syndicate_access=newval;
 		if("syndicate_code_phrase")
