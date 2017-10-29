@@ -31,6 +31,8 @@
 	name = "Magnitka fleet officer uniform"
 	desc = "Dark uniform coat worn by Magnitka fleet officers."
 	icon_state = "magnitka_officer"
+	item_state = "magnitka_officer_on"
+	worn_state = "magnitka_officer"
 	icon = 'marooned_sprites.dmi'
 
 /obj/item/clothing/accessory/medal/silver/marooned_medal
