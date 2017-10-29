@@ -150,7 +150,7 @@
 //Decorative attachments
 /obj/item/clothing/accessory/armor/tag
 	name = "master armor tag"
-	desc = "You shouldn't be seeing this."
+	desc = "A collection of various tags for placing on the front of a plate carrier."
 	icon_override = 'icons/mob/modular_armor.dmi'
 	icon = 'icons/obj/clothing/modular_armor.dmi'
 	accessory_icons = list(slot_tie_str = 'icons/mob/modular_armor.dmi', slot_wear_suit_str = 'icons/mob/modular_armor.dmi')
