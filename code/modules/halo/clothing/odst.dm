@@ -9,6 +9,11 @@
 	item_state = "Jumpsuit"
 	icon_state = "Jumpsuit"
 	worn_state = "ODST Jumpsuit"
+	armor = list(melee = 10, bullet = 10, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	item_icons = list(
+		slot_l_hand_str = null,
+		slot_r_hand_str = null,
+		)
 
 /obj/item/clothing/head/helmet/odst
 	name = "ODST Helmet"
@@ -23,6 +28,10 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	armor = list(melee = 60, bullet = 20, laser = 55,energy = 15, bomb = 25, bio = 0, rad = 5)
+	item_icons = list(
+		slot_l_hand_str = null,
+		slot_r_hand_str = null,
+		)
 
 /obj/item/clothing/suit/armor/odst
 	name = "ODST Armour"
@@ -37,6 +46,10 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	item_icons = list(
+		slot_l_hand_str = null,
+		slot_r_hand_str = null,
+		)
 
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND

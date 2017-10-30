@@ -104,9 +104,11 @@
 			to_chat(M,"<span class='notice'>ASSAULT POD DEPARTING!</span>")
 		launching = LAUNCH_UNDERWAY
 		spawn(20)
-			explosion(land_point.loc,0,0,5,10) //A very weak explosion to announce the arrival.
-			spawn(2)
-				launch()//Then actually arrive.
+			for(var/mob/living/l in GLOB.player_list)
+				if(l.z != land_point.z)
+					continue
+				l.playsound_local(land_point, get_sfx("explosion"), 100, 1,, falloff = 1)
+			launch()
 
 /obj/effect/landmark/innie_bomb
 	name = "innie bomb spawn"
