@@ -1,6 +1,6 @@
 /obj/item/weapon/material/stick
 	name = "stick"
-	desc = "You feel the urge of poking something with this."
+	desc = "You feel the urge to poke someone with this."
 	icon_state = "stick"
 	item_state = "stickmat"
 	force_divisor = 0.1
@@ -16,8 +16,8 @@
 
 
 /obj/item/weapon/material/stick/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.sharp && W.edge)
-		user.visible_message("<span class='warning'>\[user] sharpens [src] with [W].</span>", "<span class='warning'>You sharpen [src] using [W].</span>")
+	if(W.sharp && W.edge && !sharp)
+		user.visible_message("<span class='warning'>[user] sharpens [src] with [W].</span>", "<span class='warning'>You sharpen [src] using [W].</span>")
 		sharp = 1 //Sharpen stick
 		name = "sharpened " + name
 		update_force()
@@ -27,7 +27,7 @@
 /obj/item/weapon/material/stick/attack(mob/M, mob/user)
 	if(user != M && user.a_intent == I_HELP)
 		//Playful poking is its own thing
-		user.visible_message("[user] pokes [M] with [src].", "You poke [M] with [src].")
+		user.visible_message("<span class='notice'>[user] pokes [M] with [src].</span>", "<span class='notice'>You poke [M] with [src].</span>")
 		//Consider adding a check to see if target is dead
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(M)
