@@ -993,6 +993,7 @@
 #include "code\game\turfs\simulated\floor_damage.dm"
 #include "code\game\turfs\simulated\floor_icon.dm"
 #include "code\game\turfs\simulated\floor_static.dm"
+#include "code\game\turfs\simulated\footsteps.dm"
 #include "code\game\turfs\simulated\wall_attacks.dm"
 #include "code\game\turfs\simulated\wall_icon.dm"
 #include "code\game\turfs\simulated\wall_shuttle.dm"
