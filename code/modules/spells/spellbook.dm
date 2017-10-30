@@ -244,7 +244,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 /obj/item/weapon/spellbook/Process()
 	if(investing_time && investing_time <= world.time)
-		src.visible_message("<b>\The [src]</b> chims.")
+		src.visible_message("<b>\The [src]</b> emits a soft chime.")
 		uses += 2
 		if(uses > spellbook.max_uses)
 			spellbook.max_uses = uses
