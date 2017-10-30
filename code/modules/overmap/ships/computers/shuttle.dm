@@ -31,6 +31,13 @@
 
 	var/datum/computer/file/embedded_program/docking/docking_controller = shuttle.active_docking_controller
 
+	var/fuel_pressure = 0
+	if(shuttle.fuel_port)
+		if(shuttle.fuel_port.contents.len)
+			var/obj/item/weapon/tank/fuel_tank = shuttle.fuel_port.contents[1]
+			if(istype(fuel_tank))
+				fuel_pressure = fuel_tank.air_contents.return_pressure()
+
 	data = list(
 		"destination_name" = shuttle.get_destination_name(),
 		"can_pick" = shuttle.moving_status == SHUTTLE_IDLE,
@@ -42,6 +49,8 @@
 		"can_launch" = shuttle.can_launch(),
 		"can_cancel" = shuttle.can_cancel(),
 		"can_force" = shuttle.can_force(),
+		"fuel_port_present" = shuttle.fuel_port? 1 : 0,
+		"fuel_pressure" = fuel_pressure
 	)
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)

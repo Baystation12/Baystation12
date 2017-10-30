@@ -71,6 +71,8 @@
 		if (moving_status == SHUTTLE_IDLE)
 			return FALSE	//someone cancelled the launch
 
+		if(!fuel_check()) return
+
 		moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
 		attempt_move(destination)
 		moving_status = SHUTTLE_IDLE
@@ -84,8 +86,10 @@
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
 	spawn(warmup_time*10)
-		if (moving_status == SHUTTLE_IDLE)
+		if(moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
+
+		if(!fuel_check()) return
 
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
@@ -100,6 +104,17 @@
 				attempt_move(start_location) //try to go back to where we started. If that fails, I guess we're stuck in the interim location
 
 		moving_status = SHUTTLE_IDLE
+
+/datum/shuttle/proc/fuel_check()
+	if(istype(src,/datum/shuttle/autodock/overmap))
+		var/datum/shuttle/autodock/overmap/this_shuttle = src
+		if(!this_shuttle.try_consume_fuel()) //insufficient fuel
+			for(var/area/A in shuttle_area)
+				for(var/mob/living/M in A)
+					M.show_message("<spawn class='warning'>You hear the shuttle engines sputter... perhaps it's out of fuel?", AUDIBLE_MESSAGE,
+					"<spawn class='warning'>The shuttle shakes but fails to take off.", VISIBLE_MESSAGE)
+					return 0 //failure!
+	return 1 //sucess, continue with launch
 
 
 /datum/shuttle/proc/attempt_move(var/obj/effect/shuttle_landmark/destination)
