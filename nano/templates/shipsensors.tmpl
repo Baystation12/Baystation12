@@ -18,6 +18,48 @@
 		</div>
 	</div>
 </div>
+<div class='block'>
+	<div class='item'>
+		<div class="itemLabel">
+			Integrity:
+		</div>
+		<div class="itemContent">
+			{{if data.health < (data.max_health * 0.25)}}
+				{{:helper.displayBar(data.health, 0, data.max_health, 'bad')}}
+				<br><span class="bad">{{:data.health}}/{{:data.max_health}}</span>
+			{{else data.health < data.max_health *.75}}
+				{{:helper.displayBar(data.health, 0, data.max_health, 'average')}}
+				<br><span class="average">{{:data.health}}/{{:data.max_health}}</span>
+			{{else}}
+				{{:helper.displayBar(data.health, 0, data.max_health, 'good')}}
+				<br><span class="good">{{:data.health}}/{{:data.max_health}}</span>
+			{{/if}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			Temperature:
+		</div>
+		<div class="itemContent">
+			{{if data.heat < (data.critical_heat * 0.5)}}
+				{{:helper.displayBar(data.heat, 0, data.critical_heat, 'good')}}
+			{{else data.heat < (data.critical_heat * 0.75)}}
+				{{:helper.displayBar(data.heat, 0, data.critical_heat, 'average')}}
+			{{else}}
+				{{:helper.displayBar(data.heat, 0, data.critical_heat, 'bad')}}
+			{{/if}}
+		</div>
+		<div class="itemContent">
+			{{if data.heat < (data.critical_heat * 0.5)}}
+				<span class="good">Temperature low.</span>
+			{{else data.heat < (data.critical_heat * 0.75)}}
+				<span class="average">Sensor temperature high!</span>
+			{{else}}
+				<span class="bad">TEMPERATURE CRITICAL: Disable or reduce power immediately!</span>
+			{{/if}}
+		</div>
+	</div>
+</div>
 <div class='item'>
 	<div class="itemContent">
 		<div class='item'>
