@@ -14,6 +14,7 @@
 	var/rare_count = 0
 	var/surface_count = 0
 	var/deep_count = 0
+	var/gas_count = 0
 
 	// Increment map sanity counters.
 	for(var/value in map)
@@ -44,42 +45,95 @@
 	for(var/i=0,i<chunk_size,i++)
 		for(var/j=0,j<chunk_size,j++)
 			var/turf/simulated/T = locate(tx+j, ty+i, origin_z)
-			if(!istype(T) || !T.has_resources)
+			if(!istype(T) || (!T.has_resources && !T.has_gases))
 				continue
 			if(!priority_process) sleep(-1)
-			T.resources = list()
-			T.resources["silicates"] = rand(3,5)
-			T.resources["carbonaceous rock"] = rand(3,5)
+			if(T.has_resources)
+				T.resources = list()
+				T.resources["silicates"] = rand(3,5)
+				T.resources["carbonaceous rock"] = rand(3,5)
 
-			var/current_cell = map[get_map_cell(x,y)]
-			if(current_cell < rare_val)      // Surface metals.
-				T.resources["iron"] =     rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
-				T.resources["gold"] =     rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources["silver"] =   rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources["uranium"] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources["diamond"] =  0
-				T.resources["phoron"] =   0
-				T.resources["osmium"] =   0
-				T.resources["hydrogen"] = 0
-			else if(current_cell < deep_val) // Rare metals.
-				T.resources["gold"] =     rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources["silver"] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources["uranium"] =  rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources["phoron"] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources["osmium"] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources["hydrogen"] = 0
-				T.resources["diamond"] =  0
-				T.resources["iron"] =     0
-			else                             // Deep metals.
-				T.resources["uranium"] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources["diamond"] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
-				T.resources["phoron"] =   rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
-				T.resources["osmium"] =   rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
-				T.resources["hydrogen"] = rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
-				T.resources["iron"] =     0
-				T.resources["gold"] =     0
-				T.resources["silver"] =   0
-	return
+				var/current_cell = map[get_map_cell(x,y)]
+				if(current_cell < rare_val)      // Surface metals.
+					T.resources["iron"] =     rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
+					T.resources["gold"] =     rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
+					T.resources["silver"] =   rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
+					T.resources["uranium"] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
+					T.resources["diamond"] =  0
+					T.resources["phoron"] =   0
+					T.resources["osmium"] =   0
+					T.resources["hydrogen"] = 0
+				else if(current_cell < deep_val) // Rare metals.
+					T.resources["gold"] =     rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+					T.resources["silver"] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+					T.resources["uranium"] =  rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+					T.resources["phoron"] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+					T.resources["osmium"] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+					T.resources["hydrogen"] = 0
+					T.resources["diamond"] =  0
+					T.resources["iron"] =     0
+				else                             // Deep metals.
+					T.resources["uranium"] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
+					T.resources["diamond"] =  rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
+					T.resources["phoron"] =   rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
+					T.resources["osmium"] =   rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
+					T.resources["hydrogen"] = rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
+					T.resources["iron"] =     0
+					T.resources["gold"] =     0
+					T.resources["silver"] =   0
+			if(T.has_gases)
+
+				// All gases are, by default, 0
+				T.gases = list(
+					"Pr" = 0,
+					"N2O" = 0,
+					"CH4" = 0,
+					"Ar" = 0,
+					"Ne" = 0,
+					"Xe" = 0,
+					"Cl" = 0,
+					"O2" = 0,
+					"Kr" = 0,
+					"NO2" = 0,
+					"CO2" = 0,
+					"N2" = 0,
+					"H2" = 0,
+					"He" = 0
+					)
+
+				// Gas rarity.
+				var/raregas = list(
+					"Pr",
+					"N2O",
+					"CH4",
+					"Ar",
+					"Ne",
+					"Xe",
+					"Cl"
+					)
+				var/uncommongas = list(
+					"O2",
+					"Kr",
+					"NO2",
+					"CO2"
+					)
+				var/commongas = list(
+					"N2",
+					"H2",
+					"He"
+					)
+
+				var/current_cell = map[get_map_cell(x,y)]
+				if(current_cell < rare_val) // Mostly empty under the surface, lots of room for serpentids
+					T.gases[raregas[rand(1,raregas.len)]] = rand(0,GAS_MID)*45
+					T.gases[uncommongas[rand(1,uncommongas.len)]] = rand(GAS_LOW,GAS_HIGH)*45
+					T.gases[commongas[rand(1,commongas.len)]] = rand(GAS_MID,GAS_HIGH)*45
+				else if(current_cell < deep_val) // Some deeper minerals, leaving less room for gas
+					T.gases[raregas[rand(1,raregas.len)]] = rand(0,GAS_LOW)*45
+					T.gases[uncommongas[rand(1,uncommongas.len)]] = rand(0,GAS_MID)*45
+					T.gases[commongas[rand(1,commongas.len)]] = rand(GAS_LOW,GAS_HIGH)*45
+				// Otherwise rich in deep ores, with no gases
+		return
 
 /datum/random_map/noise/ore/get_map_char(var/value)
 	if(value < rare_val)

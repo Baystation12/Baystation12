@@ -7,6 +7,9 @@
 	var/has_resources
 	var/list/resources
 
+	var/has_gases
+	var/list/gases
+
 	var/thermite = 0
 	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed

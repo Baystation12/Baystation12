@@ -1373,6 +1373,13 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/miningdrillbrace
 	sort_string = "KCAAB"
 
+/datum/design/circuit/fracking
+	name = "hydraulic extractor"
+	id = "hydraulic extractor"
+	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/circuitboard/fracking
+	sort_string = "KCAAC"
+
 /datum/design/circuit/mecha
 	req_tech = list(TECH_DATA = 3)
 
