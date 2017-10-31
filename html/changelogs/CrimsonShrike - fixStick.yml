@@ -1,0 +1,6 @@
+author: CrimsonShrike
+delete-after: True
+changes: 
+  - bugfix: "Fixed stick messages not showing."
+  - rscadd: "Sticks can now be sharpened using edged sharp tools."
+
