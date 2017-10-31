@@ -169,14 +169,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		return
 
 	for(var/i = 0, i < num_exoplanets, i++)
-		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/sector/exoplanet)) 
-		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type 
+		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/sector/exoplanet))
+		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type
 		new_planet.build_level()
 
 // Used to apply various post-compile procedural effects to the map.
 /datum/map/proc/refresh_mining_turfs()
-	for(var/thing in mining_walls)
-		var/turf/simulated/mineral/M = thing
+	for(var/turf/simulated/mineral/M in mining_walls)
 		ADD_ICON_QUEUE(M)
 		CHECK_TICK
 	for(var/thing in mining_floors)

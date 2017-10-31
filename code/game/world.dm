@@ -118,14 +118,14 @@
 */
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
+	spawn(50) //Attempted to move to spawn() so that the game loads clients quicker.
+		processScheduler = new
+		master_controller = new /datum/controller/game_controller()
+		enfmods = new
 
-	processScheduler = new
-	master_controller = new /datum/controller/game_controller()
-	enfmods = new
-
-	processScheduler.deferSetupFor(/datum/controller/process/ticker)
-	processScheduler.setup()
-	Master.Initialize(10, FALSE)
+		processScheduler.deferSetupFor(/datum/controller/process/ticker)
+		processScheduler.setup()
+		Master.Initialize(10, FALSE)
 
 #ifdef UNIT_TEST
 	spawn(1)
@@ -550,6 +550,7 @@ var/global/cpustate = "Unknown"
 
 /world/proc/CPUUpdater()
 	while(1)
+		CHECK_TICK
 		switch(world.cpu)
 			if(0 to 20)
 				cpustate = "Optimal performance"

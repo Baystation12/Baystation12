@@ -93,10 +93,7 @@
 	lum_g += delta_g
 	lum_b += delta_b
 
-	if ((delta_r+delta_g+delta_b) == 0)
-		return
-
-	if (!needs_update)
+	if (!needs_update || !(delta_r + delta_g + delta_b))
 		needs_update = TRUE
 		lighting_update_corners += src
 

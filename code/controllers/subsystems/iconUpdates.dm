@@ -46,7 +46,7 @@ var/datum/controller/subsystem/icon_updater/iconupdater
 			A.update_icon()
 			iconslasttick++
 		icon_updates.Cut(1, 2)
-		sleep()
+		CHECK_TICK2(90)
 	report_progress("Icon refresh completed. [iconslasttick] icons refreshed.")
 
 #define ADD_ICON_QUEUE(THING)           \

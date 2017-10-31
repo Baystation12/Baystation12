@@ -109,6 +109,7 @@ var/global/datum/controller/gameticker/ticker
 
 	job_master.ResetOccupations()
 	src.mode.create_antagonists()
+	CHECK_TICK
 	src.mode.pre_setup()
 	job_master.DivideOccupations() // Apparently important for new antagonist system to register specific job antags properly.
 
@@ -138,11 +139,13 @@ var/global/datum/controller/gameticker/ticker
 		src.mode.announce()
 
 	GLOB.using_map.setup_economy()
+	CHECK_TICK
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
 	create_characters() //Create player characters and transfer them
 	collect_minds()
 	equip_characters()
+	CHECK_TICK
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(!H.mind || player_is_antag(H.mind, only_offstation_roles = 1) || !job_master.ShouldCreateRecords(H.mind.assigned_role))
 			continue
@@ -151,11 +154,12 @@ var/global/datum/controller/gameticker/ticker
 	callHook("roundstart")
 
 	shuttle_controller.initialize_shuttles()
-
+	CHECK_TICK
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup()
 		to_world("<FONT color='blue'><B>Enjoy the game!</B></FONT>")
 		sound_to(world, sound(GLOB.using_map.welcome_sound))
+		CHECK_TICK
 
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
@@ -167,12 +171,11 @@ var/global/datum/controller/gameticker/ticker
 	if(admins_number == 0)
 		send2adminirc("Round has started with no admins online.")
 
-
+	CHECK_TICK
 	processScheduler.start()
 
 	if(config.sql_enabled)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
-
 	return 1
 
 /datum/controller/gameticker
