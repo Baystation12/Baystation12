@@ -12,6 +12,7 @@
 	#include "torch_gamemodes.dm"
 	#include "torch_antagonism.dm"
 	#include "torch_npcs.dm"
+	#include "torch_security_state.dm"
 
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
