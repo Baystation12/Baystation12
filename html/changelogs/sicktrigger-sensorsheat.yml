@@ -1,0 +1,6 @@
+author: sicktrigger
+
+delete-after: True
+
+changes: 
+  - rscadd: "Ship sensors will now heat up and eventually take damage at higher settings (they can be repaired with a welder). Their power usage has also been significantly reduced."
