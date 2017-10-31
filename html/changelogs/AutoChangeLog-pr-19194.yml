@@ -1,0 +1,9 @@
+author: sabiram
+delete-after: True
+changes: 
+  - rscadd: "Added two new alert levels to the Torch map."
+  - rscadd: "Code Violet for major medical emergencies."
+  - rscadd: "Code Orange for major engineering emergencies."
+  - rscadd: "Code Red now has a unique sound on activation."
+  - tweak: "Code Blue alert should now only be used for major security emergencies and not as a general readiness state."
+  - tweak: "Code Red alert should now be used as a general high alert when the situation is more severe than or would warrant two of the standard department alert statuses."
