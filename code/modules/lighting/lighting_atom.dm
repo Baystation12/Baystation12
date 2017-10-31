@@ -25,6 +25,12 @@
 
 #undef NONSENSICAL_VALUE
 
+/atom/movable/New()
+	. = ..()
+	var/turf/simulated/T = loc
+	if(istype(T))
+		T.opaque_counter += opacity
+
 /atom/proc/update_light()
 	set waitfor = FALSE
 
