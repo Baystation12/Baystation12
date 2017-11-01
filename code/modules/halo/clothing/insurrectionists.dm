@@ -58,3 +58,5 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+#undef INNIE_OVERRIDE
