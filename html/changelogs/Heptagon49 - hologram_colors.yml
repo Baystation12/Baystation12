@@ -1,8 +1,0 @@
-author: Heptagon49
-
-delete-after: True
-
-changes: 
-  - rscadd: "A hologram's color will now vary depending on what kind of holopad is projecting it."
-  - imageadd: "Added a unique sprite for long-range holopads."
-  - spellcheck: "You now step onto a holopad instead of stepping unto one."
