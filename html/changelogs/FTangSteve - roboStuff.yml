@@ -1,7 +1,0 @@
-author: FTangSteve
-
-delete-after: True
-
-changes: 
-  - tweak: "Robotic organ surgery now needs the hatch screwed back down after it's closed with a crowbar."
-  - rscadd: "Adds the ability for IPCs to choose whether they are shackled and a lawset in character setup if they would like."
