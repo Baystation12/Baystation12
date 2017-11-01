@@ -8,7 +8,6 @@
 	name = "\improper Sol Central Government cap"
 	desc = "It's a ballcap in SCG colors."
 	icon_state = "solsoft"
-	flags_inv = BLOCKHEADHAIR
 	icon = 'maps/torch/icons/obj/solgov-head.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
 
