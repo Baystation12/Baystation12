@@ -178,6 +178,11 @@
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
+	var/mob/living/special_mobs/rexus/R in view()
+	if(R)
+		R.gunshots++
+		R.people["[user.real_name]"]
+		user.
 
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
