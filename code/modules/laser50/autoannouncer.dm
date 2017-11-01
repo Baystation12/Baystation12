@@ -22,4 +22,5 @@ var/list/announcemessages = list(
 			continue //The empty messages are there to keep time time inbetween larger.
 		for(var/client/C in GLOB.clients)
 			C << "<font color='green' size='2'><b>" + create_text_tag("news", "NEWS:", C) + " Auto-Announcer: </b><span class='message'>[message]</span></font>"
-		sleep(1800+rand(900, 1800))
+			CHECK_TICK
+		sleep(1800+rand(900, 3000))
