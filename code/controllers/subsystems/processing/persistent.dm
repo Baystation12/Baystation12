@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(persistent)
 						Gross Paycheck: $[paycheck]\n
 						<b>Taxes:</b>\n
 						Income Tax: $-[get_tax_deduction("income", paycheck)] (20%)\n
-						Pension Tax: $-[get_tax_deduction("pension:", paycheck, M.CharRecords.permadeath ? 1 : 0)] ([M.CharRecords.permadeath ? 16 : 10]%)\n
+						Pension Tax: $-[get_tax_deduction("pension", paycheck, M.CharRecords.permadeath ? 1 : 0)] ([M.CharRecords.permadeath ? 16 : 10]%)\n
 						Net Income: $[send_paycheck(M, paycheck)]\n
 						"}
 					SendPDAMessage(M, sender, message)

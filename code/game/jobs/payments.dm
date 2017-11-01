@@ -16,6 +16,7 @@ proc/calculate_paycheck(var/mob/living/carbon/human/M, var/roundend = 0, var/tax
 		if(M.CharRecords.bonuscredit)
 			paycheck += M.CharRecords.bonuscredit
 			M.CharRecords.bonuscredit = 0
+		paycheck = round(paycheck, 0.01)
 		return paycheck
 
 proc/send_paycheck(var/mob/living/carbon/human/M, var/paycheck)

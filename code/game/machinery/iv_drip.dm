@@ -75,8 +75,6 @@
 
 
 /obj/machinery/iv_drip/Process()
-	set background = 1
-
 	if(src.attached)
 
 		if(!(get_dist(src, src.attached) <= 1 && isturf(src.attached.loc)))
@@ -122,7 +120,7 @@
 				visible_message("\The [src] beeps loudly.")
 
 			if(T.take_blood(beaker,amount))
-				update_icon()
+				ADD_ICON_QUEUE(src)
 
 /obj/machinery/iv_drip/attack_hand(mob/user as mob)
 	if(src.beaker)

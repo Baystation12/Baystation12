@@ -68,6 +68,7 @@
 		S["promotion"]				>> promoted
 		S["bonuscredit"]			>> bonuscredit
 		S["promoted"]				>> promoted
+		return 1
 
 /datum/ntprofile/proc/save_persistent()
 	if(owner) //Must be valid.
@@ -88,6 +89,7 @@
 		S["promotion"]				<< promoted
 		S["bonuscredit"]			<< bonuscredit
 		S["promoted"]				<< promoted
+		return 1
 
 /datum/ntprofile/proc/load_score()
 	if(!owner || !employee_records)	return 5
@@ -101,6 +103,8 @@
 
 /datum/ntprofile/proc/assign_flag() //Updates the character department and sets the proper flags.
 	if(owner.client.prefs.prefs_department)
+		if(!isnum(char_department)) //Text, apparently bugged out or broken from previous testing..
+			char_department = get_department(char_department, 0)
 		switch(owner.client.prefs.prefs_department)
 			if("Security")
 				char_department |= SEC
@@ -130,7 +134,7 @@
 //		var/mob/living/carbon/human/Maker = recommaker
 		var/datum/ntprofile/employeerecord/record = new() //Initialize the record.
 		if(record)
-			record.maker = recommaker
+			record.maker.real_name = recommaker
 			record.note = note
 			record.recomscore = recomscore
 			record.warrantspromotion = warrantspromotion

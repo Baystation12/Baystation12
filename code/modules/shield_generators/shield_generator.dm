@@ -418,7 +418,6 @@
 
 
 /obj/machinery/power/shield_generator/proc/fieldtype_hull()
-	set background = 1
 	. = list()
 	var/list/base_turfs = get_base_turfs()
 
