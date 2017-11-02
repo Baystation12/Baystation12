@@ -10,6 +10,10 @@
 	ammo_type = /obj/item/ammo_casing/a357
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 
+/obj/item/weapon/gun/projectile/revolver/AltClick()
+	if(CanPhysicallyInteract(usr))
+		spin_cylinder()
+
 /obj/item/weapon/gun/projectile/revolver/verb/spin_cylinder()
 	set name = "Spin cylinder"
 	set desc = "Fun when you're bored out of your skull."
@@ -108,3 +112,13 @@
 	icon_state = "revolver"
 	desc += " Someone snipped off the barrel's toy mark. How dastardly."
 	return 1
+
+/obj/item/weapon/gun/projectile/revolver/webley
+	name = "webley revolver"
+	desc = "A top break revolver based on the Webley Mk. VI model. Uses .44 magnum rounds."
+	icon_state = "webley"
+	item_state = "webley"
+	max_shells = 6
+	caliber = ".44"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	ammo_type = /obj/item/ammo_casing/c44

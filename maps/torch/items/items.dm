@@ -67,3 +67,7 @@
 /obj/random/maintenance/solgov/clean/spawn_choices()
 	return list(/obj/random/solgov = 3,
 				/obj/random/maintenance/clean = 800)
+
+/obj/item/weapon/gun/projectile/revolver/webley/torch
+	name = "officer's revolver"
+	desc = "A top break revolver based on the Webley Mk. VI model. It bears the Torch mission patch in a medallion set into the grip. Uses .44 magnum rounds."
