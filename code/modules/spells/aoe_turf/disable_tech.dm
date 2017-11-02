@@ -3,7 +3,6 @@
 	desc = "This spell disables all weapons, cameras and most other technology in range."
 	feedback = "DT"
 	charge_max = 400
-	spell_flags = NEEDSCLOTHES
 	invocation = "NEC CANTIO"
 	invocation_type = SpI_SHOUT
 	selection_type = "range"

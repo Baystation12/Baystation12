@@ -4,7 +4,7 @@
 	feedback = "EJ"
 	school = "transmutation"
 	charge_max = 300
-	spell_flags = Z2NOCAST | NEEDSCLOTHES | INCLUDEUSER
+	spell_flags = Z2NOCAST | INCLUDEUSER
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = -1

@@ -4,7 +4,7 @@
 	feedback = "ET"
 	school = "transmutation"
 	charge_max = 600
-	spell_flags = NEEDSCLOTHES | SELECTABLE | IGNOREPREV
+	spell_flags = SELECTABLE | IGNOREPREV
 	invocation = "Bu-Ekel'Inas!"
 	invocation_type = SpI_SHOUT
 	range = 3

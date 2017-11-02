@@ -5,7 +5,6 @@
 	feedback = "FP"
 	summon_type = list(/obj/effect/force_portal)
 	charge_max = 200
-	spell_flags = NEEDSCLOTHES
 	range = 0
 	cast_sound = null
 

@@ -5,7 +5,7 @@
 	school = "conjuration"
 	charge_type = Sp_RECHARGE
 	charge_max = 600
-	spell_flags = NEEDSCLOTHES | INCLUDEUSER
+	spell_flags = INCLUDEUSER
 	invocation = "Yee'Ro Su!"
 	invocation_type = SpI_SHOUT
 	range = -1

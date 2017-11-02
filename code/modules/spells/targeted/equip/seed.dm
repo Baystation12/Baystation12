@@ -4,7 +4,7 @@
 	feedback = "SE"
 	delete_old = 0
 
-	spell_flags = INCLUDEUSER | NEEDSCLOTHES
+	spell_flags = INCLUDEUSER
 	invocation_type = SpI_WHISPER
 	invocation = "Ria'li  akta."
 
