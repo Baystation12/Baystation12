@@ -8,6 +8,11 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 
+/obj/item/weapon/gun/projectile/colt/officer
+	name = "military .45 pistol"
+	desc = "The WT45 - a mass produced kinetic sidearm well-known in films and entertainment programming for being the daily carry choice issued to officers of the Sol Central Government Defense Forces. Uses .45 rounds."
+	icon_state = "usp"
+
 /obj/item/weapon/gun/projectile/sec
 	name = ".45 pistol"
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
