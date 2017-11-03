@@ -1,4 +1,4 @@
-/datum/species/spartan
+/datum/species/brutes
 	name = "Brute"
 	name_plural = "Brutes"
 	blurb = ""//Not in chargen
@@ -9,6 +9,7 @@
 	icon_template = 'code/modules/halo/icons/species/r_Augmented_Human_template.dmi'
 	default_language = "Sangheili"
 	language = "Sangheili"
+	flags = NO_MINOR_CUT
 	total_health = 200 //Higher base health than spartans and sangheili
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_IS_WHITELISTED

@@ -116,15 +116,20 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	if(is_broken())
 		return
 	var/obj/item/organ/internal/heart = owner.internal_organs_by_name["heart"]
-	var/mob/living/carbon/human/m = owner
 	if(heart && heart.is_broken())
 		var/useheart = world.time + 50
 		if(world.time >= useheart) //They still feel the effect.
 			damage = heart.damage;heart.damage = 0
 		return
-	m.vessel.add_reagent("blood",30) // 30 blood should be enough to resist a shallow cut at max damage for that type.
+	if(prob(5)) //The original implementation of adding blood now causes runtimes.
+		for(var/obj/item/organ/external/e in owner.bad_external_organs)
+			for(var/datum/wound/w in e.wounds)
+				w.damage -= rand(0.10)
+				if(!w.bandaged)
+					w.bandage()//Only helps agains brute wounds, burn isn't autobandaged by the secondary heart.
 
 /obj/effect/armoursets/SangheiliMinorSet/New()
+	new /obj/item/clothing/under/covenant/sangheili (src.loc)
 	new /obj/item/clothing/suit/armor/special/combatharness/minor (src.loc)
 	new /obj/item/clothing/shoes/sangheili/minor (src.loc)
 	new /obj/item/clothing/head/sangheili/minor (src.loc)
