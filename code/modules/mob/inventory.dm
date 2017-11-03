@@ -46,6 +46,12 @@
 /mob/proc/equip_to_slot_or_del(obj/item/W as obj, slot)
 	return equip_to_slot_if_possible(W, slot, 1, 1, 0)
 
+/mob/proc/equip_to_slot_or_store_or_drop(obj/item/W as obj, slot)
+	var/store = equip_to_slot_if_possible(W, slot, 0, 1, 0)
+	if(!store)
+		return equip_to_storage_or_drop(W)
+	return store
+
 //The list of slots by priority. equip_to_appropriate_slot() uses this list. Doesn't matter if a mob type doesn't have a slot.
 var/list/slot_equipment_priority = list( \
 		slot_back,\
@@ -94,6 +100,12 @@ var/list/slot_equipment_priority = list( \
 		if(S.can_be_inserted(newitem, null, 1))
 			newitem.forceMove(S)
 			return S
+
+/mob/proc/equip_to_storage_or_drop(obj/item/newitem)
+	var/stored = equip_to_storage(newitem)
+	if(!stored && newitem)
+		newitem.forceMove(loc)
+	return stored
 
 //These procs handle putting s tuff in your hand. It's probably best to use these rather than setting l_hand = ...etc
 //as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
