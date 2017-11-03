@@ -29,8 +29,9 @@
 				fields.Add(list(list(
 					"key" = F.type, 
 					"name" = F.name, 
-					"val" = F.value, 
-					"editable" = F.can_edit(user_access)
+					"val" = F.get_display_value(), 
+					"editable" = F.can_edit(user_access),
+					"large" = (F.valtype == EDIT_LONGTEXT)
 				)))
 		data["fields"] = fields
 	else

@@ -31,7 +31,11 @@
 		"static" =   "ipc_static",
 		"yellow" =   "ipc_yellow",
 		"smiley" =   "ipc_smiley",
-		"list" =     "ipc_database"
+		"list" =     "ipc_database",
+		"yes" =      "ipc_yes",
+		"no" =       "ipc_no",
+		"frown" =    "ipc_frowny",
+		"stars" =    "ipc_stars"
 		)
 
 /obj/item/clothing/mask/monitor/set_dir()

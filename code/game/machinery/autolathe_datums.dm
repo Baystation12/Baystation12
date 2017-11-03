@@ -308,6 +308,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/ammo_magazine/c45m/rubber
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/speedloader_44_rubber
+	name = "speed loader (.44 magnum, rubber)"
+	path = /obj/item/ammo_magazine/c44/rubber
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/magazine_flash
 	name = "ammunition (.45, flash)"
 	path = /obj/item/ammo_magazine/c45m/flash
@@ -393,7 +398,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "blue ink pen"
 	path = /obj/item/weapon/pen/blue
 	category = "General"
-	
+
 /datum/autolathe/recipe/redpen
 	name = "red ink pen"
 	path = /obj/item/weapon/pen/red
@@ -403,12 +408,12 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "clipboard"
 	path = /obj/item/weapon/clipboard
 	category = "General"
-	
+
 /datum/autolathe/recipe/destTagger
 	name = "destination tagger"
 	path = /obj/item/device/destTagger
 	category = "General"
-	
+
 /datum/autolathe/recipe/labeler
 	name = "dhand labeler"
 	path = /obj/item/weapon/hand_labeler
@@ -429,6 +434,12 @@ var/const/EXTRA_COST_FACTOR = 1.25
 /datum/autolathe/recipe/magazine_revolver_2
 	name = "ammunition (.45)"
 	path = /obj/item/ammo_magazine/c45m
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/speedloader_44
+	name = "speed loader (.44 magnum)"
+	path = /obj/item/ammo_magazine/c44
 	hidden = 1
 	category = "Arms and Ammunition"
 

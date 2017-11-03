@@ -24,7 +24,13 @@
 			{{else}}
 				<div class='itemLabel'>{{:value.name}}:</div>
 			{{/if}}
-			<div class='itemBody'>{{:value.val}}</div>
+			{{if value.large}}
+				<div style="display: inline-block;">
+				{{:value.val}}
+				</div>
+			{{else}}
+				<div class='itemBody'>{{:value.val}}</div>
+			{{/if}}
 		</div>
 	{{/for}}
 </div>

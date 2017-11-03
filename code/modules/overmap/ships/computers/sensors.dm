@@ -34,6 +34,10 @@
 	if(sensors)
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
+		data["health"] = sensors.health
+		data["max_health"] = sensors.max_health
+		data["heat"] = sensors.heat
+		data["critical_heat"] = sensors.critical_heat
 		if(sensors.health == 0)
 			data["status"] = "DESTROYED"
 		else if(!sensors.powered())
@@ -49,7 +53,7 @@
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "shipsensors.tmpl", "[linked.name] Sensors Control", 380, 530)
+		ui = new(user, src, ui_key, "shipsensors.tmpl", "[linked.name] Sensors Control", 420, 530)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -119,6 +123,9 @@
 	icon_state = "sensors"
 	var/max_health = 200
 	var/health = 200
+	var/critical_heat = 50 // sparks and takes damage when active & above this heat
+	var/heat_reduction = 1.5 // mitigates this much heat per tick
+	var/heat = 0
 	var/range = 1
 	idle_power_usage = 5000
 
@@ -159,12 +166,12 @@
 
 /obj/machinery/shipsensors/examine(mob/user)
 	. = ..()
-	if(health == 0)
+	if(health <= 0)
 		to_chat(user, "\The [src] is wrecked.")
-	if(health < max_health * 0.25)
-		to_chat(user, "\The [src] looks like it's about to break!")
+	else if(health < max_health * 0.25)
+		to_chat(user, "<span class='danger'>\The [src] looks like it's about to break!</span>")
 	else if(health < max_health * 0.5)
-		to_chat(user, "\The [src] looks seriously damaged!")
+		to_chat(user, "<span class='danger'>\The [src] looks seriously damaged!</span>")
 	else if(health < max_health * 0.75)
 		to_chat(user, "\The [src] shows signs of damage!")
 
@@ -185,6 +192,18 @@
 	if(use_power) //can't run in non-vacuum
 		if(!in_vacuum())
 			toggle()
+		if(heat > critical_heat)
+			src.visible_message("<span class='danger'>\The [src] violently spews out sparks!</span>")
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			s.set_up(3, 1, src)
+			s.start()
+
+			take_damage(rand(10,50))
+			toggle()
+		heat += idle_power_usage/15000
+
+	if (heat > 0)
+		heat = max(0, heat - heat_reduction)
 
 /obj/machinery/shipsensors/power_change()
 	if(use_power && !powered())
@@ -192,7 +211,7 @@
 
 /obj/machinery/shipsensors/proc/set_range(nrange)
 	range = nrange
-	idle_power_usage = 15000 * (range**2)
+	idle_power_usage = 1500 * (range**2) // Exponential increase, also affects speed of overheating
 
 /obj/machinery/shipsensors/emp_act(severity)
 	if(!use_power)
