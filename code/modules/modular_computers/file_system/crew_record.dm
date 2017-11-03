@@ -106,11 +106,15 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 // Simple record to HTML (for paper purposes) conversion.
 // Not visually that nice, but it gets the work done, feel free to tweak it visually
 /proc/record_to_html(var/datum/computer_file/crew_record/CR, var/access)
-	var/dat = "<H2>RECORD DATABASE DATA DUMP</H2><i>Generated on: [stationdate2text()] [stationtime2text()]</i><br>******************************<br>"
-	dat += "<table><tr><th>Field<th>Content"
+	var/dat = "<tt><H2>RECORD DATABASE DATA DUMP</H2><i>Generated on: [stationdate2text()] [stationtime2text()]</i><br>******************************<br>"
+	dat += "<table>"
 	for(var/record_field/F in CR.fields)
 		if(F.can_see(access))
-			dat += "<tr><td>[F.name]<td>[F.get_value()]"
+			dat += "<tr><td><b>[F.name]</b>"
+			if(F.valtype == EDIT_LONGTEXT)
+				dat += "<tr>"
+			dat += "<td>[F.get_display_value()]"
+	dat += "</tt>"
 	return dat
 
 /proc/get_crewmember_record(var/name)
@@ -146,6 +150,11 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 /record_field/proc/get_value()
 	return value
 
+/record_field/proc/get_display_value()
+	if(valtype == EDIT_LONGTEXT)
+		return pencode2html(value)
+	return value
+
 /record_field/proc/set_value(var/newval)
 	if(isnull(newval))
 		return
@@ -157,7 +166,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		if(EDIT_SHORTTEXT)
 			newval = sanitize(newval)
 		if(EDIT_LONGTEXT)
-			newval = sanitize(newval, MAX_PAPER_MESSAGE_LEN)
+			newval = sanitize(replacetext(newval, "\n", "\[br\]"), MAX_PAPER_MESSAGE_LEN)
 	value = newval
 	return 1
 
