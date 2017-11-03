@@ -5,10 +5,11 @@
 /obj/effect/overlay/shields
 	icon = 'code/modules/halo/icons/elitearmour.dmi'
 	icon_state = "shield"
+	layer = ABOVE_HUMAN_LAYER
 
 /obj/effect/overlay/shields/spartan
-	icon = 'code/modules/halo/icons/Spartan MrkV Armour Shield.dmi'
-	icon_state = "Shield_hit"
+	icon = 'code/modules/halo/clothing/mob_spartansuit.dmi'
+	icon_state = "Spartan Shields"
 
 /datum/armourspecials/shields
 	var/shieldstrength
@@ -27,6 +28,10 @@
 	return 0
 
 /datum/armourspecials/proc/try_item_action()
+
+/datum/armourspecials/proc/on_equip(var/obj/source_armour)
+
+/datum/armourspecials/proc/on_drop(var/obj/source_armour)
 
 /datum/armourspecials/proc/process()
 
@@ -130,6 +135,29 @@
 	var/client
 	var/datum/armourspecials/shields/shield_datum*/
 	var/list/valid_helmets = list(/obj/item/clothing/head/helmet/spartan) //This should work for the slayer helms too. IIRC, Istype also counts subtypes.
+
+/datum/armourspecials/internal_jumpsuit
+	//Created for spartan armour to allow them to carry things in slots which require a jumpsuit.
+	var/internal_jumpsuit_type
+
+/datum/armourspecials/internal_jumpsuit/on_equip(var/obj/source_armour)
+	if(!user)
+		return
+	if(user.wear_suit != source_armour)
+		return
+	if(!user.w_uniform)
+		user.equip_to_slot(new internal_jumpsuit_type,slot_w_uniform)
+
+/datum/armourspecials/internal_jumpsuit/on_drop(var/obj/source_armour)
+	if(!user)
+		return
+	if(user.wear_suit == source_armour)
+		return
+	if(istype(user.w_uniform,internal_jumpsuit_type))
+		qdel(user.w_uniform)
+
+/datum/armourspecials/internal_jumpsuit/spartan
+	internal_jumpsuit_type = /obj/item/clothing/under/spartan_internal
 
 /datum/armourspecials/cloaking // Placeholders for later stuff.
 
