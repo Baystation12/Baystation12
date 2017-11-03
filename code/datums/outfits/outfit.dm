@@ -125,7 +125,7 @@ var/list/outfits_decls_by_type_
 	for(var/path in backpack_contents)
 		var/number = backpack_contents[path]
 		for(var/i=0,i<number,i++)
-			H.equip_to_slot_or_del(new path(H), slot_in_backpack)
+			H.equip_to_slot_or_store_or_drop(new path(H), slot_in_backpack)
 
 	post_equip(H)
 	H.regenerate_icons()
@@ -187,7 +187,7 @@ var/list/outfits_decls_by_type_
 	if(assignment)
 		W.assignment = assignment
 	H.set_id_info(W)
-	if(H.equip_to_slot_or_del(W, id_slot))
+	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
 		return W
 
 /decl/hierarchy/outfit/proc/equip_pda(mob/living/carbon/human/H, rank, assignment)
@@ -195,7 +195,7 @@ var/list/outfits_decls_by_type_
 		return
 	var/obj/item/device/pda/heads/pda = new pda_type(H)
 	pda.set_owner_rank_job(H.real_name, rank, assignment)
-	if(H.equip_to_slot_or_del(pda, pda_slot))
+	if(H.equip_to_slot_or_store_or_drop(pda, pda_slot))
 		return pda
 
 /decl/hierarchy/outfit/dd_SortValue()
