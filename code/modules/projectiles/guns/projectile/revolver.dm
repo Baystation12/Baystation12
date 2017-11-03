@@ -114,8 +114,8 @@
 	return 1
 
 /obj/item/weapon/gun/projectile/revolver/webley
-	name = "webley revolver"
-	desc = "A top break revolver based on the Webley Mk. VI model. Uses .44 magnum rounds."
+	name = "service revolver"
+	desc = "A rugged top break revolver based on the Webley Mk. VI model, with modern improvements. Uses .44 magnum rounds."
 	icon_state = "webley"
 	item_state = "webley"
 	max_shells = 6
