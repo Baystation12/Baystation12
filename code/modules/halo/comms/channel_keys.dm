@@ -85,7 +85,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	channels = list("INNIECOM" = 1)
 
 /obj/item/device/encryptionkey/inniecom/New()
-	channels = list("[halo_frequencies.innie_channel]" = 1)
+	channels = list(halo_frequencies.innie_channel = 1,EBAND_NAME = 1)
 	..()
 
 /obj/item/device/encryptionkey/shipcom

@@ -9,9 +9,10 @@
 /decl/hierarchy/outfit/job/Insurrectionist
 	name = "Insurrectionist"
 
-	mask = /obj/item/clothing/mask/balaclava
-	suit = /obj/item/clothing/suit/armor/vest/old
-	uniform = /obj/item/clothing/under/tactical
+	head = /obj/item/clothing/head/helmet/innie
+	mask = /obj/item/clothing/mask/innie/shemagh
+	suit = /obj/item/clothing/suit/armor/innie
+	uniform = /obj/item/clothing/under/innie/jumpsuit
 	shoes = /obj/item/clothing/shoes/jackboots
 
 	flags = 0

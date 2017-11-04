@@ -1,0 +1,45 @@
+<h3>Mark II Hanley-Messer Deuterium Fusion Drive</h3>
+<div class='block'>
+	<div class='item'>
+		<div class="itemLabel">
+			Power production:
+		</div>
+		<div class="itemContent">
+			{{:data.powerprod}} W
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			Core temperature:
+		</div>
+		<div class="itemContent">
+			{{:data.coretemp}} K ({{:data.coreoverload}}% overload progress)
+		</div>
+	</div>
+	<div class='item'>
+		Warning! Do not let core exceed 1000 degrees or a potentially catastrophic overload will occur.
+	</div>
+	{{if(data.held_fuel)}}
+		<div class='item'>
+			<div class="itemLabel">
+				Fuel remaining: 
+			</div>
+			{{:data.fuelunits}} units ({{:data.fuelremain}}%) {{:helper.link('Eject Fuel Packet', 'eject', { 'eject_fuel' : 1}, '', 'selected')}}
+		</div>
+	{{else}}
+		<div class='item'>
+			<div class="itemLabel">
+				No fuel packet inserted.
+			</div>
+		</div>
+	{{/if}}
+
+	<div class='item'>
+		<div class="itemLabel">
+			Fuel consumption rate:
+		</div>
+		{{:data.fuel_rate}} units/sec {{:helper.link('Modify Rate', 'carat-2-n-s ', { 'modify_fuel_use' : 1}, '', 'selected')}}
+	<div class='item'>
+		Warning! Consumption rates around {{:data.fuel_rate_max}} units/sec or higher will require significant additional cooling.
+	</div>
+</div>

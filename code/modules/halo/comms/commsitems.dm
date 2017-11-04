@@ -41,6 +41,8 @@
 		return
 	if(signal.source == src)
 		return
+	if(signal.data["reject"] == 1)
+		return
 	if(!(signal.frequency in recieving_frequencies))
 		return
 
@@ -52,6 +54,7 @@
 	var/datum/signal/original = signal.data["original"]
 	if(original)
 		original.data["done"] = 1
+		original.data["reject"] = 1
 
 	var/datum/radio_frequency/connection = signal.data["connection"]
 
@@ -62,16 +65,20 @@
 					  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
 					  signal.data["verb"], signal.data["language"])
 
+	signal.data["reject"] = 1 //To stop backpack multisend
+
 /obj/item/device/mobilecomms/commsbackpack/unsc
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. The insignia of the UNSC is stitched into the back."
 	recieving_frequencies = list(TEAMCOM_NAME,CIV_NAME,EBAND_NAME,FLEETCOM_NAME,SQUADCOM_NAME,SHIPCOM_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/innie
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. This one appears to have been tampered with."
-	recieving_frequencies = list(EBAND_NAME)
+	recieving_frequencies = list(CIV_NAME,EBAND_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/innie/New()
-	recieving_frequencies.Add(halo_frequencies.innie_freq)
+	..()
+	spawn(6) //The convert_freq_to_numerical proc runtimes if this isn't here, it attempts to read the innie frequency
+		recieving_frequencies.Add(halo_frequencies.innie_freq)
 
 
 #undef SHIPCOM_NAME

@@ -1400,6 +1400,7 @@
 #include "code\modules\halo\chemicals\containers.dm"
 #include "code\modules\halo\chemicals\medicine.dm"
 #include "code\modules\halo\chemicals\recipes.dm"
+#include "code\modules\halo\clothing\insurrectionists.dm"
 #include "code\modules\halo\clothing\jumpsuits.dm"
 #include "code\modules\halo\clothing\marine.dm"
 #include "code\modules\halo\clothing\misc.dm"
