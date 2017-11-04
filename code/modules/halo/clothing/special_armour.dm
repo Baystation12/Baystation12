@@ -18,6 +18,7 @@
 /obj/item/clothing/suit/armor/special/equipped(mob/user)
 	for(var/datum/armourspecials/i in specials)
 		i.user = user
+		i.on_equip(src)
 
 /obj/item/clothing/suit/armor/special/emp_act(severity)
 	for(var/datum/armourspecials/i in specials)
@@ -25,6 +26,7 @@
 
 /obj/item/clothing/suit/armor/special/dropped()
 	for(var/datum/armourspecials/i in specials)
+		i.on_drop(src)
 		i.user = null
 
 /obj/item/clothing/suit/armor/special/Destroy()
