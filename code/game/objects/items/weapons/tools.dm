@@ -22,6 +22,7 @@
 	description_antag = "Not only is this handy tool good for making off with machines, but it even makes a weapon in a pinch!"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrench"
+	item_state = "wrench"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 5.0
@@ -32,6 +33,8 @@
 	center_of_mass = "x=17;y=16"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
+/obj/item/weapon/wrench/New()
+	icon_state = "wrench[pick("","_red","_black")]"
 
 /*
  * Screwdriver

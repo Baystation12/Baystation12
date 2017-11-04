@@ -415,7 +415,7 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	category = "General"
 
 /datum/autolathe/recipe/labeler
-	name = "dhand labeler"
+	name = "hand labeler"
 	path = /obj/item/weapon/hand_labeler
 	category = "General"
 
