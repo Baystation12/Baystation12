@@ -1961,7 +1961,7 @@
 #include "code\modules\overmap\ships\computers\sensors.dm"
 #include "code\modules\overmap\ships\computers\shuttle.dm"
 #include "code\modules\overmap\ships\engines\engine.dm"
-#include "code\modules\overmap\ships\engines\thermal.dm"
+#include "code\modules\overmap\ships\engines\gas_thruster.dm"
 #include "code\modules\paperwork\adminpaper.dm"
 #include "code\modules\paperwork\carbonpaper.dm"
 #include "code\modules\paperwork\clipboard.dm"
