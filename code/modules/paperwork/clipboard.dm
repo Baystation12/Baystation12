@@ -10,7 +10,7 @@
 	var/obj/item/weapon/pen/haspen		//The stored pen.
 	var/obj/item/weapon/toppaper	//The topmost piece of paper.
 	slot_flags = SLOT_BELT
-	matter = list("metal" = 70)
+	matter = list(DEFAULT_WALL_MATERIAL = 70)
 
 /obj/item/weapon/clipboard/New()
 	update_icon()
