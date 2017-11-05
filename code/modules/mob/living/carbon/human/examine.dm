@@ -146,7 +146,7 @@
 			if(E.species) //Check to make sure we have a species
 				msg += E.species.disfigure_msg(src)
 			else //Just in case they lack a species for whatever reason.
-				msg += "<span class='warning'>[T.his] face is horribly mangled!</span>\n"
+				msg += "<span class='warning'>[T.His] face is horribly mangled!</span>\n"
 
 	//splints
 	for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
@@ -313,13 +313,13 @@
 				if(istype(H.glasses,/obj/item/clothing/glasses))
 					var/obj/item/clothing/glasses/G = H.glasses
 					return istype(G.hud, /obj/item/clothing/glasses/hud/security) || istype(G, /obj/item/clothing/glasses/hud/security)
-				else 
+				else
 					return FALSE
 			if("medical")
 				if(istype(H.glasses,/obj/item/clothing/glasses))
 					var/obj/item/clothing/glasses/G = H.glasses
 					return istype(G.hud, /obj/item/clothing/glasses/hud/health) || istype(G, /obj/item/clothing/glasses/hud/health)
-				else 
+				else
 					return FALSE
 			else
 				return 0
