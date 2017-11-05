@@ -215,6 +215,9 @@
 		return total_moles * R_IDEAL_GAS_EQUATION * temperature / volume
 	return 0
 
+//Returns the temperature of the gas mix.
+/datum/gas_mixture/proc/return_temperature()
+	return temperature
 
 //Removes moles from the gas mixture and returns a gas_mixture containing the removed air.
 /datum/gas_mixture/proc/remove(amount)
