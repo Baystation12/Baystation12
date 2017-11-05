@@ -286,6 +286,19 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/industrial/warning/cee
 	icon_state = "warningcee"
 
+/obj/effect/floor_decal/industrial/warning/orange
+	name = "orange hazard stripes"
+	icon_state = "Owarning"
+
+/obj/effect/floor_decal/industrial/warning/orange/corner
+	icon_state = "Owarningcorner"
+
+/obj/effect/floor_decal/industrial/warning/orange/full
+	icon_state = "Owarningfull"
+
+/obj/effect/floor_decal/industrial/warning/orange/cee
+	icon_state = "Owarningcee"
+
 /obj/effect/floor_decal/industrial/warning/dust
 	name = "hazard stripes"
 	icon_state = "warning_dust"
