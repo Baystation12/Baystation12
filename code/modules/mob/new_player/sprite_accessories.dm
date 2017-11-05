@@ -46,19 +46,19 @@
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
-	var/veryshort						//doesn't need to be hidden by BLOCKHEADHAIR hats/helmets
-
+	var/flags
+	
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
 		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
-		veryshort = 1
+		flags = VERY_SHORT
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
-		veryshort = 1
+		flags = VERY_SHORT
 
 	twintail
 		name = "Twintail"
@@ -71,7 +71,7 @@
 	cut
 		name = "Cut Hair"
 		icon_state = "hair_c"
-		veryshort = 1
+		flags = VERY_SHORT
 
 	flair
 		name = "Flaired Hair"
@@ -154,7 +154,7 @@
 	sleeze
 		name = "Sleeze"
 		icon_state = "hair_sleeze"
-		veryshort = 1
+		flags = VERY_SHORT
 
 	quiff
 		name = "Quiff"
@@ -211,13 +211,13 @@
 		icon_state = "hair_buzzcut"
 		gender = MALE
 		species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
-		veryshort = 1
+		flags = VERY_SHORT
 
 	crew
 		name = "Crewcut"
 		icon_state = "hair_crewcut"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	combover
 		name = "Combover"
@@ -262,18 +262,18 @@
 	rows
 		name = "Rows"
 		icon_state = "hair_rows1"
-		veryshort = 1
+		flags = VERY_SHORT
 
 	rows2
 		name = "Rows 2"
 		icon_state = "hair_rows2"
-		veryshort = 1
+		flags = VERY_SHORT
 
 	sargeant
 		name = "Flat Top"
 		icon_state = "hair_sargeant"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	emo
 		name = "Emo"
@@ -370,6 +370,7 @@
 		name = "Floorlength Braid"
 		icon_state = "hair_braid"
 		gender = FEMALE
+		flags = HAIR_TRIPPABLE
 
 	odango
 		name = "Odango"
@@ -389,13 +390,13 @@
 	skinhead
 		name = "Skinhead"
 		icon_state = "hair_skinhead"
-		veryshort = 1
+		flags = VERY_SHORT
 
 	balding
 		name = "Balding Hair"
 		icon_state = "hair_e"
 		gender = MALE // turnoff!
-		veryshort = 1
+		flags = VERY_SHORT
 
 	familyman
 		name = "The Family Man"
@@ -489,7 +490,7 @@
 		name = "Low Fade"
 		icon_state = "hair_lowfade"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	medfade
 		name = "Medium Fade"
@@ -499,67 +500,67 @@
 		name = "High Fade"
 		icon_state = "hair_highfade"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	baldfade
 		name = "Balding Fade"
 		icon_state = "hair_baldfade"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	nofade
 		name = "Regulation Cut"
 		icon_state = "hair_nofade"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	trimflat
 		name = "Trimmed Flat Top"
 		icon_state = "hair_trimflat"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	shaved
 		name = "Shaved"
 		icon_state = "hair_shaved"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	trimmed
 		name = "Trimmed"
 		icon_state = "hair_trimmed"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	tightbun
 		name = "Tight Bun"
 		icon_state = "hair_tightbun"
 		gender = FEMALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	coffeehouse
 		name = "Coffee House Cut"
 		icon_state = "hair_coffeehouse"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	undercut
 		name = "Undercut"
 		icon_state = "hair_undercut"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	partfade
 		name = "Parted Fade"
 		icon_state = "hair_shavedpart"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	hightight
 		name = "High and Tight"
 		icon_state = "hair_hightight"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	rowbun
 		name = "Row Bun"
@@ -580,7 +581,7 @@
 		name = "Regulation Mohawk"
 		icon_state = "hair_shavedmohawk"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	topknot
 		name = "Topknot"
@@ -601,19 +602,19 @@
 		name = "Thinning"
 		icon_state = "hair_thinning"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	thinningfront
 		name = "Thinning Front"
 		icon_state = "hair_thinningfront"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	thinningback
 		name = "Thinning Back"
 		icon_state = "hair_thinningrear"
 		gender = MALE
-		veryshort = 1
+		flags = VERY_SHORT
 
 	manbun
 		name = "Manbun"

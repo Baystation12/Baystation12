@@ -319,6 +319,9 @@
 				move_delay += 2
 				return mob.buckled.relaymove(mob,direct)
 
+		if(mob.check_slipmove())
+			return
+
 		//We are now going to move
 		moving = 1
 		//Something with pulling things
@@ -479,6 +482,9 @@
 	return prob_slip
 
 #define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_step(mob, final_dir), final_dir);
+
+/mob/proc/check_slipmove()
+	return
 
 /client/verb/moveup()
 	set name = ".moveup"

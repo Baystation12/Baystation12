@@ -212,6 +212,10 @@
 #define SUIT_HAS_SENSORS 1
 #define SUIT_LOCKED_SENSORS 2
 
+// Hair Flags
+#define VERY_SHORT 0x1
+#define HAIR_TRIPPABLE 0x2
+
 // Storage
 
 /*
