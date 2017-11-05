@@ -1,45 +1,45 @@
-//Thermal nozzle engine
-/datum/ship_engine/thermal
-	name = "thermal engine"
+//Gas nozzle engine
+/datum/ship_engine/gas_thruster
+	name = "gas thruster"
 	var/obj/machinery/atmospherics/unary/engine/nozzle
 
-/datum/ship_engine/thermal/New(var/obj/machinery/_holder)
+/datum/ship_engine/gas_thruster/New(var/obj/machinery/_holder)
 	..()
 	nozzle = _holder
 
-/datum/ship_engine/thermal/Destroy()
+/datum/ship_engine/gas_thruster/Destroy()
 	nozzle = null
 	. = ..()
 
-/datum/ship_engine/thermal/get_status()
+/datum/ship_engine/gas_thruster/get_status()
 	return nozzle.get_status()
 
-/datum/ship_engine/thermal/get_thrust()
+/datum/ship_engine/gas_thruster/get_thrust()
 	return nozzle.get_thrust()
 
-/datum/ship_engine/thermal/burn()
+/datum/ship_engine/gas_thruster/burn()
 	return nozzle.burn()
 
-/datum/ship_engine/thermal/set_thrust_limit(var/new_limit)
+/datum/ship_engine/gas_thruster/set_thrust_limit(var/new_limit)
 	nozzle.thrust_limit = new_limit
 
-/datum/ship_engine/thermal/get_thrust_limit()
+/datum/ship_engine/gas_thruster/get_thrust_limit()
 	return nozzle.thrust_limit
 
-/datum/ship_engine/thermal/is_on()
+/datum/ship_engine/gas_thruster/is_on()
 	return nozzle.is_on()
 
-/datum/ship_engine/thermal/toggle()
+/datum/ship_engine/gas_thruster/toggle()
 	nozzle.on = !nozzle.on
 
-/datum/ship_engine/thermal/can_burn()
+/datum/ship_engine/gas_thruster/can_burn()
 	return nozzle.is_on() && nozzle.check_fuel()
 
 //Actual thermal nozzle engine object
 
 /obj/machinery/atmospherics/unary/engine
-	name = "engine nozzle"
-	desc = "Simple thermal nozzle, uses heated gast to propell the ship."
+	name = "rocket nozzle"
+	desc = "Simple rocket nozzle, expelling gas at hypersonic velocities to propell the ship."
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle"
 	use_power = 0
@@ -48,7 +48,7 @@
 	opacity = 1
 	density = 1
 	var/on = 1
-	var/datum/ship_engine/thermal/controller
+	var/datum/ship_engine/gas_thruster/controller
 	var/thrust_limit = 1	//Value between 1 and 0 to limit the resulting thrust
 	var/moles_per_burn = 5
 
@@ -96,10 +96,11 @@
 	var/exhaust_dir = reverse_direction(dir)
 	var/datum/gas_mixture/removed = air_contents.remove(moles_per_burn * thrust_limit)
 	. = calculate_thrust(removed)
+	playsound(loc, 'sound/machines/thruster.ogg', 100 * thrust_limit, 0, world.view * 4, 0.1)
 	var/turf/T = get_step(src,exhaust_dir)
 	if(T)
 		T.assume_air(removed)
-		new/obj/effect/engine_exhaust(T,exhaust_dir,air_contents.temperature)
+		new/obj/effect/engine_exhaust(T, exhaust_dir, air_contents.check_combustability() && air_contents.temperature >= PHORON_MINIMUM_BURN_TEMPERATURE)
 
 /obj/machinery/atmospherics/unary/engine/proc/calculate_thrust(datum/gas_mixture/propellant, used_part = 1)
 	return round(sqrt(propellant.get_mass() * used_part * air_contents.return_pressure()/100),0.1)
@@ -112,14 +113,13 @@
 	light_color = "#ed9200"
 	anchored = 1
 
-/obj/effect/engine_exhaust/New(var/turf/nloc, var/ndir, var/temp)
+/obj/effect/engine_exhaust/New(var/turf/nloc, var/ndir, var/flame)
 	..(nloc)
-	if(temp > PHORON_MINIMUM_BURN_TEMPERATURE)
+	if(flame)
 		icon_state = "exhaust"
+		nloc.hotspot_expose(1000,125)
 		set_light(5, 2)
 	set_dir(ndir)
-	nloc.hotspot_expose(temp,125)
-	playsound(loc, 'sound/effects/spray.ogg', 50, 1, -1)
 	spawn(20)
 		qdel(src)
 
