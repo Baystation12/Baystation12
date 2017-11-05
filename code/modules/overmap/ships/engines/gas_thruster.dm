@@ -96,6 +96,7 @@
 	var/exhaust_dir = reverse_direction(dir)
 	var/datum/gas_mixture/removed = air_contents.remove(moles_per_burn * thrust_limit)
 	. = calculate_thrust(removed)
+	playsound(loc, 'sound/machines/thruster.ogg', 100 * thrust_limit, 0, world.view * 4, 0.1)
 	var/turf/T = get_step(src,exhaust_dir)
 	if(T)
 		T.assume_air(removed)
@@ -119,7 +120,6 @@
 		nloc.hotspot_expose(1000,125)
 		set_light(5, 2)
 	set_dir(ndir)
-	playsound(loc, 'sound/effects/spray.ogg', 50, 1, -1)
 	spawn(20)
 		qdel(src)
 
