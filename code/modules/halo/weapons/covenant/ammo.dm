@@ -3,6 +3,11 @@
 	name = "Plasma Bolt"
 	desc = "A searing hot bolt of plasma."
 
+/obj/item/projectile/covenant/attack_mob()
+	damage_type = BURN
+	damtype = BURN
+	return ..()
+
 /obj/item/projectile/covenant/plasmapistol
 	damage = 25
 	accuracy = -1

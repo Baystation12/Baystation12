@@ -54,3 +54,8 @@
 		deactivate()
 		visible_message("The [src] deactivates.")
 		return
+
+/obj/item/weapon/melee/energysword/attack(var/mob/m)
+	if(ismob(m))
+		damtype = BURN
+	return ..()
