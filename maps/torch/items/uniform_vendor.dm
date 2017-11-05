@@ -1,5 +1,5 @@
 /obj/machinery/uniform_vendor
-	name = "uniform Vendor"
+	name = "uniform vendor"
 	desc= "A uniform vendor for utility, service, and dress uniforms."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "robotics"
@@ -94,7 +94,10 @@
 /obj/machinery/uniform_vendor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if(istype(W, /obj/item/weapon/clothingbag))
-		to_chat(user, "<span class='notice'>You put [W] into \the [src] recycling slot.</span>")
+		if(W.contents.len)
+			to_chat(user, "<span class='notice'>You must empty \the [W] before you can put it in \the [src].</span>")
+			return
+		to_chat(user, "<span class='notice'>You put \the [W] into \the [src]'s recycling slot.</span>")
 		qdel(W)
 		return
 
