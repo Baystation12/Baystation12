@@ -17,7 +17,7 @@
 
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot,
-						/datum/job/pathfinder, /datum/job/explorer,
+						///datum/job/pathfinder, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
@@ -45,6 +45,8 @@
 					species_to_job_blacklist[S.type] = species_blacklist
 				species_blacklist |= job.type
 
+
+// Heads of Staff
 /datum/job/captain
 	title = "Commanding Officer"
 	supervisors = "the Sol Central Government and the Sol Code of Military Justice"
@@ -62,6 +64,7 @@
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
 							 /datum/computer_file/program/camera_monitor)
+
 
 /datum/job/hop
 	title = "Executive Officer"
@@ -110,7 +113,6 @@
 							 /datum/computer_file/program/camera_monitor)
 
 
-
 /datum/job/rd
 	title = "Research Director"
 	supervisors = "NanoTrasen and the Commanding Officer"
@@ -130,6 +132,7 @@
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/aidiag,
 							 /datum/computer_file/program/camera_monitor)
+
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
@@ -159,6 +162,7 @@
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
+
 
 /datum/job/chief_engineer
 	title = "Chief Engineer"
@@ -203,6 +207,7 @@
 							 /datum/computer_file/program/rcon_console,
 							 /datum/computer_file/program/camera_monitor)
 
+
 /datum/job/hos
 	title = "Chief of Security"
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -237,11 +242,12 @@
 							 /datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
+
+//Command Support
 /datum/job/liaison
 	title = "NanoTrasen Liaison"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "NanoTrasen and Corporate Regulations"
@@ -257,11 +263,11 @@
 						access_xenoarch, access_nanotrasen, access_sec_guard,
 						access_hangar, access_petrov, access_petrov_helm)
 
+
 /datum/job/representative
 	title = "SolGov Representative"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Sol Central Government and the SCG Charter"
@@ -280,7 +286,6 @@
 	title = "Senior Enlisted Advisor"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -310,11 +315,11 @@
 
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor)
 
+
 /datum/job/bridgeofficer
 	title = "Bridge Officer"
 	department = "Support"
 	department_flag = SPT
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Commanding Officer and heads of staff"
@@ -346,11 +351,12 @@
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/camera_monitor)
 
+
+//Exploration
 /datum/job/solgov_pilot
 	title = "SolGov Pilot"
 	department = "Exploration"
 	department_flag = EXP
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -370,14 +376,16 @@
 	)
 
 
-	access = list(access_maint_tunnels, access_external_airlocks, access_eva, access_emergency_storage, access_solgov_crew, access_aquila, access_aquila_helm,
-						access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads, access_explorer, access_cent_creed) //Yes, the last one is weird. It's used to make intercoms work.
+	access = list(access_maint_tunnels, access_external_airlocks, access_eva, access_emergency_storage,
+					access_solgov_crew, access_aquila, access_aquila_helm,
+					access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_guppy_helm, access_hangar,
+					access_solgov_crew, access_heads, access_explorer, access_cent_creed) //Yes, the last one is weird. It's used to make intercoms work.
+
 
 /datum/job/pathfinder
 	title = "Pathfinder"
 	department = "Exploration"
 	department_flag = EXP
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Commanding Officer and the Executive Officer"
@@ -393,7 +401,10 @@
 	)
 
 
-	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
+	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads,
+					access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew,
+					access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
+
 
 /datum/job/explorer
 	title = "Explorer"
@@ -413,13 +424,15 @@
 		/datum/mil_rank/ec/e4
 	)
 
-	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
+	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm,
+					access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
 
+
+//Engineering
 /datum/job/senior_engineer
 	title = "Senior Engineer"
 	department = "Engineering"
 	department_flag = ENG
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
@@ -455,6 +468,7 @@
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
 							 /datum/computer_file/program/camera_monitor)
+
 
 /datum/job/engineer
 	title = "Engineer"
@@ -503,11 +517,11 @@
 							 /datum/computer_file/program/rcon_console,
 							 /datum/computer_file/program/camera_monitor)
 
+
 /datum/job/engineer_contractor
 	title = "Maintenance Assistant"
 	department = "Engineering"
 	department_flag = ENG
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Engineer and Engineering Personnel"
@@ -532,11 +546,11 @@
 							 /datum/computer_file/program/rcon_console,
 							 /datum/computer_file/program/camera_monitor)
 
+
 /datum/job/roboticist
 	title = "Roboticist"
 	department = "Engineering"
 	department_flag = ENG
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
@@ -553,6 +567,7 @@
 	minimal_access = list()
 
 
+//Security
 /datum/job/warden
 	title = "Brig Officer"
 	total_positions = 1
@@ -587,6 +602,7 @@
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
+
 /datum/job/detective
 	title = "Forensic Technician"
 	total_positions = 1
@@ -619,6 +635,7 @@
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
+
 
 /datum/job/officer
 	title = "Master at Arms"
@@ -656,11 +673,12 @@
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
+
+//Medical
 /datum/job/senior_doctor
 	title = "Physician"
 	department = "Medical"
 	department_flag = MED
-
 	minimal_player_age = 14
 	ideal_character_age = 45
 	total_positions = 2
@@ -688,6 +706,7 @@
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
+
 
 /datum/job/doctor
 	title = "Corpsman"
@@ -721,11 +740,11 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 
+
 /datum/job/doctor_contractor
 	title = "Medical Contractor"
 	department = "Medical"
 	department_flag = MED
-
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Chief Medical Officer and Medical Personnel"
@@ -748,6 +767,7 @@
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
+
 
 /datum/job/psychiatrist
 	title = "Counselor"
@@ -778,6 +798,8 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 
+
+//Supply
 /datum/job/qm
 	title = "Deck Officer"
 	department = "Supply"
@@ -817,6 +839,7 @@
 
 	software_on_spawn = list(/datum/computer_file/program/supply)
 
+
 /datum/job/cargo_tech
 	title = "Deck Technician"
 	department = "Supply"
@@ -849,11 +872,11 @@
 
 	software_on_spawn = list(/datum/computer_file/program/supply)
 
+
 /datum/job/cargo_contractor
 	title = "Supply Assistant"
 	department = "Supply"
 	department_flag = SUP
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Deck Officer and Supply Personnel"
@@ -867,11 +890,12 @@
 
 	software_on_spawn = list(/datum/computer_file/program/supply)
 
+
+//Service
 /datum/job/janitor
 	title = "Sanitation Technician"
 	department = "Service"
 	department_flag = SRV
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Executive Officer"
@@ -900,6 +924,7 @@
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
 	minimal_access = list()
+
 
 /datum/job/chef
 	title = "Cook"
@@ -934,6 +959,7 @@
 	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew)
 	minimal_access = list()
 
+
 /datum/job/bartender
 	department = "Service"
 	department_flag = SRV
@@ -952,7 +978,6 @@
 	title = "Crewman"
 	department = "Service"
 	department_flag = SRV
-
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the Executive Officer and SolGov Personnel"
@@ -979,14 +1004,14 @@
 		/datum/mil_rank/marine/e4
 	)
 
-
 	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
 
+
+//Research/NT
 /datum/job/senior_scientist
 	title = "Senior Researcher"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Research Director"
@@ -1004,12 +1029,12 @@
 						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen,
 						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
 
+
 /datum/job/nt_pilot
 	title = "NanoTrasen Pilot"
 	supervisors = "the Research Director"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1024,6 +1049,7 @@
 	access = list(access_research, access_mining_office,
 						access_mining_station, access_nanotrasen, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
 						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
+
 /datum/job/scientist
 	title = "Scientist"
 	total_positions = 6
@@ -1078,7 +1104,6 @@
 	title = "Security Guard"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1098,7 +1123,6 @@
 	title = "Research Assistant"
 	department = "Science"
 	department_flag = SCI
-
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Research Director and NanoTrasen Personnel"
@@ -1120,6 +1144,7 @@
 	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy)
 
 
+//Civilian
 /datum/job/assistant
 	title = "Passenger"
 	total_positions = 12
@@ -1152,7 +1177,6 @@
 	title = "Merchant"
 	department = "Civilian"
 	department_flag = CIV
-
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 30
@@ -1172,7 +1196,6 @@
 	title = "Stowaway"
 	department = "Civilian"
 	department_flag = CIV
-
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 20
