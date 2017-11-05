@@ -95,9 +95,9 @@
 
 	if(istype(W, /obj/item/weapon/clothingbag))
 		if(W.contents.len)
-			to_chat(user, "<span class='notice'>You must empty the [W] before you can put it in \the [src].</span>")
+			to_chat(user, "<span class='notice'>You must empty \the [W] before you can put it in \the [src].</span>")
 			return
-		to_chat(user, "<span class='notice'>You put [W] into \the [src] recycling slot.</span>")
+		to_chat(user, "<span class='notice'>You put \the [W] into \the [src]'s recycling slot.</span>")
 		qdel(W)
 		return
 
