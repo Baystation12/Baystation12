@@ -57,13 +57,13 @@
 		/obj/random/cash,
 		/obj/random/cash,
 		/obj/random/smokes,
-		new /datum/atom_creator/weighted( /obj/item/weapon/reagent_containers/syringe, 50),
-		new /datum/atom_creator/weighted( /obj/item/weapon/reagent_containers/syringe/steroid, 10),
-		new /datum/atom_creator/weighted( /obj/item/weapon/reagent_containers/syringe/steroid, 10),
-		new /datum/atom_creator/weighted( list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola, /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle, /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb)),
-		new /datum/atom_creator/weighted( /obj/item/clothing/glasses/eyepatch, 30),
-		new /datum/atom_creator/weighted( /obj/item/clothing/gloves/duty, 80),
-		new /datum/atom_creator/weighted( /obj/item/clothing/mask/balaclava/tactical, 30))
+		new /datum/atom_creator/simple(/obj/item/weapon/reagent_containers/syringe, 50),
+		new /datum/atom_creator/simple(/obj/item/weapon/reagent_containers/syringe/steroid, 10),
+		new /datum/atom_creator/simple(/obj/item/weapon/reagent_containers/syringe/steroid, 10),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola, /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle, /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb)),
+		new /datum/atom_creator/simple(/obj/item/clothing/glasses/eyepatch, 30),
+		new /datum/atom_creator/simple(/obj/item/clothing/gloves/duty, 80),
+		new /datum/atom_creator/simple(/obj/item/clothing/mask/balaclava/tactical, 30))
 
 /obj/random/ore
 	name = "random ore"

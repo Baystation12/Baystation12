@@ -205,7 +205,7 @@
 	return ckey ? "[..()] ([ckey])" : ..()
 
 /proc/log_info_line(var/datum/d)
-	if(!d)
+	if(isnull(d))
 		return "*null*"
 	if(islist(d))
 		var/list/L = list()
