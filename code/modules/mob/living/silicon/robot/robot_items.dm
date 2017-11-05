@@ -404,3 +404,8 @@
 
 	to_chat(user, "You fail to pick up \the [A] with \the [src]")
 	return
+
+/obj/item/weapon/reagent_containers/spray/cleaner/drone
+	name = "space cleaner"
+	desc = "BLAM!-brand non-foaming space cleaner!"
+	volume = 150
