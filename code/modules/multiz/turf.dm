@@ -7,10 +7,24 @@
 		if(direction == DOWN) //on a turf above, trying to enter
 			return !density
 
-/turf/simulated/open/CanZPass(atom, direction)
+/turf/simulated/open/CanZPass(atom/A, direction)
+	if(z == A.z) //moving FROM this turf
+		if(locate(/obj/structure/catwalk, src)) //We only care about catwalks preventing really
+			if(direction == DOWN)
+				return 0
+			else return 1
+	if(direction == UP && locate(/obj/structure/catwalk, src)) //on a turf below, trying to enter
+		return 0
 	return 1
 
-/turf/space/CanZPass(atom, direction)
+/turf/space/CanZPass(atom/A, direction)
+	if(z == A.z) //moving FROM this turf
+		if(locate(/obj/structure/catwalk, src)) //We only care about catwalks preventing really
+			if(direction == DOWN)
+				return 0
+			else return 1
+	if(direction == UP && locate(/obj/structure/catwalk, src)) //on a turf below, trying to enter
+		return 0
 	return 1
 
 /turf/simulated/open

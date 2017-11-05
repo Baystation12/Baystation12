@@ -62,7 +62,18 @@
 			to_chat(user, "<span class='notice'>Slicing lattice joints ...</span>")
 		new /obj/item/stack/rods(loc)
 		qdel(src)
-
+	if (istype(C, /obj/item/stack/rods))
+		var/obj/item/stack/rods/R = C
+		if(R.amount <= 2)
+			return
+		else
+			R.use(2)
+			to_chat(user, "<span class='notice'>You start connecting [R.name] to [src.name] ...</span>")
+			if(do_after(user,50))
+				src.alpha = 0
+				new /obj/structure/catwalk(src.loc)
+				qdel(src)
+			return
 	return
 
 /obj/structure/lattice/proc/updateOverlays()
@@ -73,11 +84,13 @@
 
 		var/dir_sum = 0
 
+		var/turf/T
 		for (var/direction in GLOB.cardinal)
-			if(locate(/obj/structure/lattice, get_step(src, direction)))
+			T = get_step(src, direction)
+			if(locate(/obj/structure/lattice, T) || locate(/obj/structure/catwalk, T))
 				dir_sum += direction
 			else
-				if(!(istype(get_step(src, direction), /turf/space)))
+				if(!(istype(get_step(src, direction), /turf/space)) && !(istype(get_step(src, direction), /turf/simulated/open)))
 					dir_sum += direction
 
 		icon_state = "lattice[dir_sum]"
