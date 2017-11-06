@@ -137,7 +137,7 @@
 		/obj/item/clothing/shoes/brown,
 		/obj/item/device/radio/headset/heads/cmo,
 		/obj/item/device/flash,
-		/obj/item/weapon/reagent_containers/hypospray,
+		/obj/item/weapon/reagent_containers/hypospray/vial,
 		RANDOM_SCRUBS
 	)
 
