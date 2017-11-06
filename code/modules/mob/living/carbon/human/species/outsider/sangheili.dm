@@ -9,7 +9,8 @@
 	icon_template = 'code/modules/halo/icons/species/r_elite_template.dmi'
 	default_language = "Sangheili"
 	language = "Sangheili"
-	total_health = 150 // Stronger than humans at base health.
+	flags = NO_MINOR_CUT
+	total_health = 250 // Stronger than humans at base health.
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_IS_WHITELISTED
 	brute_mod = 0.9

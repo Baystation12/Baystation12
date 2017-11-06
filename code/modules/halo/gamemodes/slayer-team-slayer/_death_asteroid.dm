@@ -5,7 +5,7 @@
 	#include "death_asteroid_areas.dm"
 	#include "death_asteroid_spawns.dm"
 
-	#include "death_asteroid.dmm"
+	#include "../../../../../maps/slayer/death_asteroid.dmm"
 
 	#include "mode_teamslayer.dm"
 	#include "mode_slayer.dm"

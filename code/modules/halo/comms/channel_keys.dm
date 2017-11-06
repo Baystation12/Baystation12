@@ -1,6 +1,14 @@
 
 var/global/datum/halo_frequencies/halo_frequencies = new()
 
+//These defines are undef'd in commsitems.dm
+#define SHIPCOM_NAME "SHIPCOM"
+#define TEAMCOM_NAME "TEAMCOM"
+#define SQUADCOM_NAME "SQUADCOM"
+#define FLEETCOM_NAME "FLEETCOM"
+#define EBAND_NAME "EBAND"
+#define CIV_NAME "Common"
+
 /datum/halo_frequencies
 	var/innie_channel = "INNIECOM"
 	var/innie_freq = -1
@@ -11,10 +19,20 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	var/const/eband_freq = 1160
 	var/const/civ_freq = 1459
 	var/list/used_freqs = list()
+	var/list/frequencies = list("INNIECOM",SHIPCOM_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME)
 
 /datum/halo_frequencies/New()
 	setup_com_channels()
 
+/datum/halo_frequencies/proc/setup_com_channel_list()
+	frequencies.Insert(frequencies.Find("INNIECOM"),innie_channel) //Find the inniecom placeholder, and place the new name at it's index.
+	frequencies[SHIPCOM_NAME] = shipcom_freq
+	frequencies[TEAMCOM_NAME] = teamcom_freq
+	frequencies[SQUADCOM_NAME] = squadcom_freq
+	frequencies[FLEETCOM_NAME] = fleetcom_freq
+	frequencies[EBAND_NAME] = eband_freq
+	frequencies[CIV_NAME] = civ_freq
+	radiochannels = frequencies
 /datum/halo_frequencies/proc/setup_com_channels()
 	innie_channel = pick(\
 	"ZULUCOM","OMEGACOM","RANGERCOM","BAGDERCOM",\
@@ -59,60 +77,31 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 		fleetcom_freq = rand(1001, 9998)
 	used_freqs += "[fleetcom_freq]"
 
+	setup_com_channel_list()
+
 	return 1
 
 /obj/item/device/encryptionkey/inniecom
-	channel_name = "INNIECOM"
-	encryption_key = "INNIECOM"
-	message_css = "syndradio"
+	channels = list("INNIECOM" = 1)
 
-/obj/item/device/encryptionkey/inniecom/initialize()
-	channel_name = halo_frequencies.innie_channel
-	frequency_num = halo_frequencies.innie_freq
+/obj/item/device/encryptionkey/inniecom/New()
+	channels = list(halo_frequencies.innie_channel = 1,EBAND_NAME = 1)
 	..()
 
 /obj/item/device/encryptionkey/shipcom
-	channel_name = "SHIPCOM"
-	encryption_key = "SHIPCOM"
-	message_css = "comradio"
-
-/obj/item/device/encryptionkey/shipcom/initialize()
-	frequency_num = halo_frequencies.shipcom_freq
-	..()
+	channels = list(SHIPCOM_NAME = 1,EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/fleetcom
-	channel_name = "FLEETCOM"
-	encryption_key = "FLEETCOM"
-	message_css = "centradio"
-
-/obj/item/device/encryptionkey/fleetcom/initialize()
-	frequency_num = halo_frequencies.fleetcom_freq
-	..()
+	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,FLEETCOM_NAME = 1,EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/squadcom
-	channel_name = "SQDCOM"
-	encryption_key = "SQDCOM"
-	message_css = "supradio"
-
-/obj/item/device/encryptionkey/squadcom/initialize()
-	frequency_num = halo_frequencies.squadcom_freq
-	..()
+	channels = list(SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/teamcom
-	channel_name = "TEAMCOM"
-	encryption_key = "TEAMCOM"
-	message_css = "medradio"
-
-/obj/item/device/encryptionkey/teamcom/initialize()
-	frequency_num = halo_frequencies.teamcom_freq
-	..()
+	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/eband
-	channel_name = "E-BAND"
-	message_css = "airadio"
-	frequency_num = halo_frequencies.eband_freq
+		channels = list(EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/public
-	channel_name = "Public COM"
-	message_css = "radio"
-	frequency_num = halo_frequencies.civ_freq
+	channels = list(CIV_NAME = 1)

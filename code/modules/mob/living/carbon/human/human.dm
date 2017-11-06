@@ -92,6 +92,14 @@
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
 
+		if(wear_suit && istype(wear_suit,/obj/item/clothing/suit/armor/special/))
+			var/obj/item/clothing/suit/armor/special/suit = wear_suit
+			for(var/datum/armourspecials/shields/shield_datum in suit.specials)
+				for(var/datum/armourspecials/shieldmonitor/mon in suit.specials)
+					for(var/helm in mon.valid_helmets)
+						if(istype(head,helm)) //No correct helm? No shield indicator.
+							stat("Shield Level:","[(shield_datum.shieldstrength/shield_datum.totalshields)*100]%")
+
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)
 		flash_eyes()

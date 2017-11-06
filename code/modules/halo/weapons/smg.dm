@@ -1,5 +1,5 @@
 
-
+#define CLEAR_CASINGS 1
 
 //M7 submachine gun
 

@@ -264,6 +264,7 @@
 	icon_state = "missile"
 	var/primed = null
 	throwforce = 15
+	var/fire_sound  //The lack of this var causes runtimes with the rocket launcher
 
 	throw_impact(atom/hit_atom)
 		if(primed)

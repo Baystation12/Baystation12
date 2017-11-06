@@ -45,6 +45,7 @@
 	caliber = "a762"
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/m762_ap
+	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap) //Disallows loading LMG boxmags into the DMR.
 	fire_sound = 'code/modules/halo/sounds/DMR_ShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
 

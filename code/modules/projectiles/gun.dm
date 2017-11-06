@@ -350,7 +350,7 @@
 	return launched
 
 /obj/item/weapon/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
-	var/shot_sound = (istype(P) && P.fire_sound)? P.fire_sound : fire_sound
+	var/shot_sound = (istype(P) && fire_sound)? fire_sound : P.fire_sound //Tweaked to favour gun firesound over projectile firesound.;
 	if(silenced)
 		playsound(user, shot_sound, 10, 1)
 	else

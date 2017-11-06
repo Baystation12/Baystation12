@@ -1,10 +1,6 @@
+#define SINGLE_CASING 	1
+#define SPEEDLOADER 	2
 #define MAGAZINE 		4
-#define BELT_FEED		8
-
-#define HOLD_CASINGS	0 //do not do anything after firing. Manual action, like pump shotguns, or guns that want to define custom behaviour
-#define CLEAR_CASINGS	1 //clear chambered so that the next round will be automatically loaded and fired, but don't drop anything on the floor
-#define EJECT_CASINGS	2 //drop spent casings on the ground after firing
-#define CYCLE_CASINGS	3 //cycle casings, like a revolver. Also works for multibarrelled guns
 
 
 
@@ -167,7 +163,7 @@
 	name = "box magazine (7.62mm) M118 FMJ-AP"
 	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 50 shots. Designed for heavier use."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
-	mag_type = BELT_FEED
+	mag_type = MAGAZINE
 	icon_state = "M739mag"
 	ammo_type = /obj/item/ammo_casing/a762_ap
 	matter = list(DEFAULT_WALL_MATERIAL = 5000) //7.62mm casing = 50 metal each

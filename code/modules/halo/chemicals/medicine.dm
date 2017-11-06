@@ -91,12 +91,27 @@
 				W.salved = 1
 				o.update_damages()
 
+/datum/reagent/biofoam/proc/remove_embedded(var/mob/living/carbon/human/M)
+	for(var/obj/item/organ/external/o in M.bad_external_organs)
+		for(var/datum/wound/w in o.wounds)
+			for(var/obj/embedded in w.embedded_objects)
+				if(!prob(25))
+					continue
+				w.embedded_objects -= embedded //Removing the embedded item from the wound
+				embedded.loc = M.loc //And placing it on the ground below
+				to_chat(M,"<span class = 'notice'>The [embedded.name] is pushed out of the [w.desc] in your [o.name].</span>")
+
+
+
 /datum/reagent/biofoam/affect_blood(var/mob/living/carbon/M,var/alien,var/removed) //Biofoam stops internal and external bleeding, heals organs and fixes bones.
 	if(istype(M,/mob/living/carbon/human))
-		M.custom_pain("You feel a searing pain in your veins",50)
+		M.custom_pain("You feel a searing pain in your veins",3)
+		remove_embedded(M)
 		fix_wounds(M)
 		mend_external(M)
 		mend_internal(M)
+		spawn(5)
+			M.add_chemical_effect(CE_PAINKILLER, 5)
 
 /datum/reagent/biofoam/overdose(var/mob/living/carbon/M)
 	if(istype(M,/mob/living/carbon/human))

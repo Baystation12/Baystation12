@@ -368,6 +368,9 @@
 		for(var/obj/machinery/telecomms/allinone/R in telecomms_list)
 			R.receive_signal(signal)
 
+		for(var/obj/item/device/mobilecomms/R in telecomms_list)
+			R.receive_signal(signal)
+
 		// Receiving code can be located in Telecommunications.dm
 		return signal.data["done"] && position.z in signal.data["level"]
 

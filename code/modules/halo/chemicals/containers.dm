@@ -6,16 +6,26 @@
 /obj/item/weapon/reagent_containers/syringe/ld50_syringe/spartan
 	name = "Field Medical Syringe"
 	desc = "A potent cocktail of chemicals which allows for increased survivability in the field."
-	amount_per_transfer_from_this = 20
-	volume = 20
+	amount_per_transfer_from_this = 15
+	volume = 15
 	time = 30
 
 	New()
-		..()
-		reagents.add_reagent(/datum/reagent/triadrenaline,5)
+		..() //There was Tri-Adrenaline here. It led to lots of scorespam.
 		reagents.add_reagent(/datum/reagent/biofoam,5)
 		reagents.add_reagent(/datum/reagent/tricordrazine,5)
 		reagents.add_reagent(/datum/reagent/tramadol,5)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+/obj/item/weapon/reagent_containers/syringe/biofoam
+	name = "Biofoam Syringe"
+	desc = "A syringe filled with biofoam, used to quickly fix internal and external injuries."
+	amount_per_transfer_from_this = 10
+
+	New()
+		..()
+		reagents.add_reagent(/datum/reagent/biofoam,10)
 		mode = SYRINGE_INJECT
 		update_icon()
 
