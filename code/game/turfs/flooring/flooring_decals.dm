@@ -8,6 +8,7 @@ var/list/floor_decals = list()
 	icon = 'icons/turf/flooring/decals.dmi'
 	plane = ABOVE_TURF_PLANE
 	layer = DECAL_LAYER
+	appearance_flags = RESET_COLOR
 	var/supplied_dir
 
 /obj/effect/floor_decal/New(var/newloc, var/newdir, var/newcolour)
@@ -23,10 +24,9 @@ var/list/floor_decals = list()
 		var/cache_key = "[alpha]-[color]-[dir]-[icon_state]-[plane]-[layer]"
 		if(!floor_decals[cache_key])
 			var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
-			if(plane == ABOVE_PLATING_PLANE)
-				I.plating_decal_layerise()
-			else
-				I.turf_decal_layerise()
+			I.plane = plane
+			I.layer = layer
+			I.appearance_flags = appearance_flags
 			I.color = src.color
 			I.alpha = src.alpha
 			floor_decals[cache_key] = I
@@ -487,3 +487,25 @@ var/list/floor_decals = list()
 	icon = 'icons/turf/overlays.dmi'
 	icon_state = "snowfloor"
 
+/obj/effect/floor_decal/floordetail
+	plane = TURF_PLANE
+	layer = TURF_DETAIL_LAYER
+	color = COLOR_GUNMETAL
+	icon_state = "manydot"
+	appearance_flags = 0
+
+/obj/effect/floor_decal/floordetail/New(var/newloc, var/newdir, var/newcolour)
+	color = null //color is here just for map preview, if left it applies both our and tile colors.
+	..()
+
+/obj/effect/floor_decal/floordetail/tiled
+	icon_state = "manydot_tiled"
+
+/obj/effect/floor_decal/floordetail/pryhole
+	icon_state = "pryhole"
+
+/obj/effect/floor_decal/floordetail/edgedrain
+	icon_state = "edge"
+
+/obj/effect/floor_decal/floordetail/traction
+	icon_state = "traction"
