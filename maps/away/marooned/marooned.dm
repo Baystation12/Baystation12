@@ -2,6 +2,11 @@
 #include "marooned.dmm"
 #include "../mining/mining_areas.dm"
 
+/turf/simulated/floor/marooned/snow
+	name = "snow"
+	icon = 'icons/turf/snow.dmi'
+	icon_state = "snow"
+	temperature = T20C - 40
 
 /obj/effect/overmap/sector/marooned
 	name = "Glacier planet with power signature in polar region"
@@ -12,7 +17,7 @@
 	generic_waypoints = list(
 		"nav_marooned_1",
 		"nav_marooned_2",
-		"nav_lmarooned_antag"
+		"nav_marooned_antag"
 	)
 
 /obj/effect/shuttle_landmark/nav_marooned/nav1
