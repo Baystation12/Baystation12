@@ -49,7 +49,7 @@
 	contains = list(/obj/item/weapon/storage/belt/medical,
 					/obj/item/device/radio/headset/heads/cmo,
 					/obj/item/clothing/under/rank/chief_medical_officer,
-					/obj/item/weapon/reagent_containers/hypospray,
+					/obj/item/weapon/reagent_containers/hypospray/vial,
 					/obj/item/clothing/accessory/stethoscope,
 					/obj/item/clothing/glasses/hud/health,
 					/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
