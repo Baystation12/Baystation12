@@ -23,6 +23,10 @@
 	var/damtype = BRUTE
 	var/defense = "melee" //what armor protects against its attacks
 
+	var/turf/assault_target
+	var/target_margin = 0
+	var/feral = 0
+
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
 		return null

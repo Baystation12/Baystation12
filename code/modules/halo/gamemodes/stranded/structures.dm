@@ -52,7 +52,7 @@
 					src.visible_message("<span class='info'>[AM] slips past [src].</span>")
 					AM.loc = T
 		else
-			AM << "<span class='warning'>Something is blocking you from maneuvring past [src].</span>"
+			AM << "<span class='warning'>Something is blocking you from maneuvering past [src].</span>"
 	..()
 
 /obj/structure/tanktrap/attack_generic(var/mob/user, var/damage, var/attacktext)

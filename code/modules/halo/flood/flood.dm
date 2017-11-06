@@ -2,13 +2,6 @@ GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 
-/mob/living/simple_animal/hostile
-	var/turf/assault_target
-	var/target_margin = 0
-	var/feral = 0
-	stop_automated_movement = 1
-	wander = 0
-
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
 		'sound/effects/attackblob.ogg',\
@@ -22,6 +15,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	mob_swap_flags = 0
 	mob_push_flags = 0
 	break_stuff_probability = 50
+	stop_automated_movement = 1
+	wander = 0
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()

@@ -1403,6 +1403,7 @@
 #include "code\modules\halo\floorsigns\floorsigns.dm"
 #include "code\modules\halo\gamemodes\slayer-team-slayer\__death_asteroid_map.dm"
 #include "code\modules\halo\gamemodes\slayer-team-slayer\_death_asteroid.dm"
+#include "code\modules\halo\gamemodes\stranded\structures.dm"
 #include "code\modules\halo\insurrection\access_ids.dm"
 #include "code\modules\halo\insurrection\antagonist.dm"
 #include "code\modules\halo\insurrection\objectives.dm"
