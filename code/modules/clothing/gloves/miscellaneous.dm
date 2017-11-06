@@ -56,6 +56,11 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
+/obj/item/clothing/gloves/thick/modified/Initialize()
+	cut_fingertops()
+
+	. = ..()
+
 /obj/item/clothing/gloves/thick/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
 	name = "\improper SWAT Gloves"
@@ -83,6 +88,11 @@
 	icon_state = "leather"
 	item_state = "ggloves"
 
+/obj/item/clothing/gloves/thick/botany/modified/Initialize()
+	cut_fingertops()
+
+	. = ..()
+
 /obj/item/clothing/gloves/latex
 	name = "latex gloves"
 	desc = "Sterile latex gloves."
@@ -92,11 +102,21 @@
 	permeability_coefficient = 0.01
 	germ_level = 0
 
+/obj/item/clothing/gloves/latex/modified/Initialize()
+	cut_fingertops()
+
+	. = ..()
+
 /obj/item/clothing/gloves/latex/nitrile
 	name = "nitrile gloves"
 	desc = "Sterile nitrile gloves"
 	icon_state = "nitrile"
 	item_state = "ngloves"
+
+/obj/item/clothing/gloves/latex/nitrile/modified/Initialize()
+	cut_fingertops()
+
+	. = ..()
 
 /obj/item/clothing/gloves/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
@@ -105,6 +125,11 @@
 	item_state = "wgloves"
 	siemens_coefficient = 0.50
 	armor = list(melee = 10, bullet = 10, laser = 10, energy = 5, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/gloves/duty/modified/Initialize()
+	cut_fingertops()
+
+	. = ..()
 
 /obj/item/clothing/gloves/tactical
 	desc = "These brown tactical gloves are made from a durable synthetic, and have hardened knuckles."

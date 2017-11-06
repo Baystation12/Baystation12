@@ -4,12 +4,6 @@
 	slot = slot_gloves
 	sort_category = "Gloves and Handwear"
 	category = /datum/gear/gloves
-// Gloves
-/datum/gear/gloves
-	cost = 2
-	slot = slot_gloves
-	sort_category = "Gloves and Handwear"
-	category = /datum/gear/gloves
 
 /datum/gear/gloves/colored
 	display_name = "gloves, colored"
