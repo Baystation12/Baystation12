@@ -867,6 +867,11 @@ FIRE ALARM
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
 	var/seclevel
 
+/obj/machinery/firealarm/examine(mob/user)
+	. = ..(user)
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	to_chat(user, "The current alert level is [security_state.current_security_level.name].")
+
 /obj/machinery/firealarm/update_icon()
 	overlays.Cut()
 
