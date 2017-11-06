@@ -80,7 +80,11 @@
 		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT,
 		/area/marooned/marooned_snow = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/marooned/marooned_hut = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/marooned/marooned_hut = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/lost_supply_base_solar = NO_SCRUBBER,
+		/area/smugglers/base = NO_SCRUBBER,
+		/area/smugglers/dorms = NO_SCRUBBER|NO_VENT,
+		/area/smugglers/office = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(
