@@ -141,7 +141,8 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/record_id
 
 /record_field/New(var/datum/computer_file/crew_record/record)
-	acccess_edit = acccess ? acccess : access_heads
+	if(!acccess_edit)
+		acccess_edit = acccess ? acccess : access_heads
 	if(record)
 		record_id = record.uid
 		record.fields += src
@@ -242,7 +243,7 @@ FIELD_LONG_SECURE("Exploitable Information", antagRecord, access_syndicate)
 /record_field/rank/proc/record_ranks()
 	for(var/datum/computer_file/crew_record/R in GLOB.all_crew_records)
 		if(R.uid == record_id)
-			var/datum/mil_branch/branch = mil_branches.get_branch(R.get_branch()) 
+			var/datum/mil_branch/branch = mil_branches.get_branch(R.get_branch())
 			if(!branch)
 				return null
 			. = list()
