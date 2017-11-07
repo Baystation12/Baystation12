@@ -28,6 +28,30 @@
 	desc = "A scarf of coarse fabric. Seems to have ear-holes."
 	icon_state = "zhan_scarf"
 	body_parts_covered = HEAD|FACE
+	
+/obj/item/clothing/shoes/sandal/tajaran/caligae
+	name = "caligae"
+	desc = "The standard Tajaran footwear loosly resembles the Roman Caligae. Made of leather and rubber, their unique design allows for improved traction and protection. They don't look like they would fit on anyone but a Tajara."
+	description_fluff = "These traditional Tajaran footwear, also called Haskri, have remained reletivly unchanged in principal, with improved materials and construction being the only notable improvment. Originally used for harsher environment, they became widespread for their comfort and hygiene. Some of them come with covering for additional protection for more sterile environments. Made for the Tajarans digitigrade anatomy, they won't fit on any other species."
+	icon_state = "caligae"
+	item_state = "caligae"
+	body_parts_covered = FEET|LEGS
+	species_restricted = list(SPECIES_TAJARA)
+	
+/obj/item/clothing/shoes/sandal/tajaran/caligae/white
+	desc = "The standard Tajaran footwear loosly resembles the Roman Caligae. Made of leather and rubber, their unique design allows for improved traction and protection. They don't look like they would fit on anyone but a Tajara. /This one has a white covering."
+	icon_state = "whitecaligae"
+	item_state = "whitecaligae"
+	
+/obj/item/clothing/shoes/sandal/tajaran/caligae/grey
+	desc = "The standard Tajaran footwear loosly resembles the Roman Caligae. Made of leather and rubber, their unique design allows for improved traction and protection. They don't look like they would fit on anyone but a Tajara. /This one has a grey covering."
+	icon_state = "greycaligae"
+	item_state = "greycaligae"
+
+/obj/item/clothing/shoes/sandal/tajaran/caligae/black
+	desc = "The standard Tajaran footwear loosly resembles the Roman Caligae. Made of leather and rubber, their unique design allows for improved traction and protection. They don't look like they would fit on anyone but a Tajara. /This one has a black covering."
+	icon_state = "blackcaligae"
+	item_state = "blackcaligae"
 
 //Voxclothing
 
