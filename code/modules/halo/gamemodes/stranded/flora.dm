@@ -6,7 +6,7 @@
 /obj/structure/tree/attackby(obj/item/I as obj, mob/user as mob)
 	. = 1
 	if(woodleft <= 0)
-		user << "<span class='warning'>There is no wood left on [src]!</span>"
+		user.show_message("<span class='warning'>There is no wood left on [src]!</span>")
 		qdel(src)
 		return 1
 
@@ -27,13 +27,13 @@
 		spawn(0)
 			if(do_after(user, 20 + 20 / chopping))
 				woodleft -= 1
-				user << "<span class='info'>You chop some wood from [src]. There is [src.woodleft] planks left.</span>"
+				user.show_message("<span class='info'>You chop some wood from [src]. There is [src.woodleft] planks left.</span>")
 				var/obj/item/stack/material/wood/W = new(src.loc)
 				W.amount = 10
 				if(woodleft <= 0)
 					qdel(src)
 	else
-		user << "<span class='warning'>You need something sharp to chop down [src]</span>"
+		user.show_message("<span class='warning'>You need something sharp to chop down [src]</span>")
 
 /obj/structure/tree/palm
 	name = "palm tree"
@@ -82,8 +82,8 @@
 				playsound(src.loc, pick(rustle_sound), 50, 5, 0)
 		spawn(0)
 			if(do_after(user, 10 + 20 / chopping))
-				user << "<span class='info'>You clear away the [src] and get some cloth scraps.</span>"
+				user.show_message("<span class='info'>You clear away the [src] and get some cloth scraps.</span>")
 				new /obj/item/stack/material/cloth(src.loc)
 				qdel(src)
 	else
-		user << "<span class='warning'>You need something sharp to clear away [src]</span>"
+		user.show_message("<span class='warning'>You need something sharp to clear away [src]</span>")

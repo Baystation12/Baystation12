@@ -51,19 +51,19 @@
 
 	if(valid_tool)
 		if (dug)
-			user << "\red This area has already been dug"
+			user.show_message("\red This area has already been dug")
 			return
 
 		var/turf/T = user.loc
 		if (!(istype(T)))
 			return
 
-		user << "\red You start digging."
+		user.show_message("\red You start digging.")
 		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
 
 		if(!do_after(user,40)) return
 
-		user << "\blue You dug a hole."
+		user.show_message("\blue You dug a hole.")
 		dug = 1
 		new/obj/item/weapon/ore/glass(src)
 		icon_state = "desert_dug"
