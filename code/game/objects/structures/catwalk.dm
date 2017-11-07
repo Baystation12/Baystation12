@@ -10,21 +10,22 @@
 	layer = LATTICE_LAYER
 
 /obj/structure/catwalk/Initialize()
-	..()
+	. = ..()
 	for(var/obj/structure/catwalk/C in get_turf(src))
 		if(C != src)
 			qdel(C)
 	update_icon()
 	redraw_nearby_catwalks()
 
+
 /obj/structure/catwalk/Destroy()
 	redraw_nearby_catwalks()
-	..()
+	return ..()
 
 /obj/structure/catwalk/proc/redraw_nearby_catwalks()
 	for(var/direction in GLOB.alldirs)
-		if(locate(/obj/structure/catwalk, get_step(src, direction)))
-			var/obj/structure/catwalk/L = locate(/obj/structure/catwalk, get_step(src, direction))
+		var/obj/structure/catwalk/L = locate() in get_step(src, direction)
+		if(L)
 			L.update_icon() //so siding get updated properly
 
 
@@ -49,11 +50,12 @@
 
 /obj/structure/catwalk/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(1)
+			new /obj/item/stack/rods(src.loc)
 			qdel(src)
-		if(2.0)
+		if(2)
+			new /obj/item/stack/rods(src.loc)
 			qdel(src)
-	return
 
 /obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
 	if (istype(C, /obj/item/weapon/weldingtool))
@@ -65,4 +67,3 @@
 			new /obj/item/stack/rods(src.loc)
 			new /obj/structure/lattice/(src.loc)
 			qdel(src)
-	return
