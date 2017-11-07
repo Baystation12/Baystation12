@@ -35,7 +35,8 @@
 		"yes" =      "ipc_yes",
 		"no" =       "ipc_no",
 		"frown" =    "ipc_frowny",
-		"stars" =    "ipc_stars"
+		"stars" =    "ipc_stars",
+		"crt" =      "ipc_crt"
 		)
 
 /obj/item/clothing/mask/monitor/set_dir()
