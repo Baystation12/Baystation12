@@ -2,6 +2,7 @@
 #define LAUNCH_ABORTED -1
 #define LAUNCH_UNDERWAY -2
 
+
 /obj/machinery/podcontrol
 	name = "Assault Pod Controller"
 	desc = "Controls the launching of the assault pod. One way only."
@@ -16,8 +17,12 @@
 /obj/machinery/podcontrol/New()
 	..()
 	overlays += icon(icon,"nav")
-	land_point = pick(get_valid_landings())
+	calc_land_point()
 	contained_area = loc.loc
+
+/obj/machinery/podcontrol/proc/calc_land_point()
+	if(isnull(land_point))
+		land_point = pick(get_valid_landings())
 
 /obj/machinery/podcontrol/proc/calc_translation(var/obj/target)
 	var/x_trans = target.x - x
@@ -90,8 +95,8 @@
 		spawn(1) //A small delay to allow the items that were present before to be moved or deleted.
 			check_if_turf_then_translate(i,newloc)
 
-	land_point = null
 	qdel(land_point)
+	land_point = null
 
 /obj/machinery/podcontrol/process()
 	if(launching == LAUNCH_ABORTED)
@@ -108,6 +113,7 @@
 				if(l.z != land_point.z)
 					continue
 				l.playsound_local(land_point, get_sfx("explosion"), 100, 1,, falloff = 1)
+			calc_land_point()
 			launch()
 
 /obj/effect/landmark/innie_bomb
