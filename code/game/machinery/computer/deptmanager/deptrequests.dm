@@ -3,8 +3,8 @@ var/global/list/pendingdeptrequests = list()
 
 /datum/ntrequest
 	var/requestid
-	var/requesttype //Demotion, Promotion, Raise pay, Cut pay, bonus and Record.
-	var/requesttext
+	var/requesttype = "" //Demotion, Promotion, Raise pay, Cut pay, bonus and Record.
+	var/requesttext = ""
 	var/fromchar
 	var/tochar
 	var/ckey

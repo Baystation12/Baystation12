@@ -15,12 +15,14 @@
 	var/employeecount = 0
 	var/changedrecord = 0
 	var/next_run = 0
+	var/list/requestsbackup = list()
 
 /obj/machinery/computer/department_manager/Initialize()
 	. = ..()
 	load_requests()
 
 /obj/machinery/computer/department_manager/Process()
+	requestsbackup = pendingdeptrequests
 	if(world.time < next_run + 30 SECONDS)
 		return
 	next_run = world.time
@@ -161,7 +163,7 @@
 					"}
 					dat += "<ul>"
 					for(var/datum/ntrequest/N in pendingdeptrequests)
-						dat += "<li>REQUEST-#[N.requestid]<b>|</b>[N.requesttype], FROM [N.fromchar]. TO [N.tochar]. FOR [N.requesttext] <a href='?src=\ref[src];choice=handlereq;requestid=[N.requestid]'>Handle</a></li><br>"
+						dat += "<li>REQUEST-#[N.requestid]<b>|</b>[N.requesttype], FROM [N.fromchar]. TO [N.tochar]. FOR [N.requesttext]. <a href='?src=\ref[src];choice=acceptreq;requestid=[N.requestid]'>Accept</a><a href='?src=\ref[src];choice=acceptreq;requestid=[N.requestid]'>Deny</a></li><br>"
 					dat += {"
 					</ul>
 					</html>
@@ -232,7 +234,7 @@
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
 				if(profiled.CharRecords.char_department != "Command" || profiled.job == "Captain" || profiled.CharRecords.promoted == 2) //Can't see your bosses, Captain or Heads.
 					to_chat(usr, "Leave blank to cancel.")
-					var/record = input("Insert Record:", "Record Management - Department Management") as text
+					var/record = input("Insert Record:", "Record Management - Department Management")
 					var/score = input("Insert record score (1-10) for the employee rating.", "Record Management - Department Management") as num
 					if(!record)	return
 					if(!score || !score in 1 to 10)	score = 0
@@ -244,7 +246,7 @@
 				switch(alert("Promote [profiled.real_name] to a Senior- or Head Position?", "Promotion Screen", "Senior Position", "Head Position"))
 					if("Head Position")
 						if(department == "Command" && idowner.job == "Captain" || department == "NanoTrasen") //Captain can promote to head.
-							var/record = input("Insert Reason/Record:", "Promotion Management - Department Management") as text
+							var/record = input("Insert Reason/Record:", "Promotion Management - Department Management")
 							var/datum/ntrequest/NR = new()
 							NR.make_request(src, "promote",idowner, profiled, record)
 							to_chat(usr, "Request has been sent to NanoTrasen for review.")
@@ -259,7 +261,7 @@
 							to_chat(usr, "[profiled.real_name] is already promoted!")
 							return
 						else
-							var/record = input("Insert Reason/Record:", "Promotion Management - Department Management") as text
+							var/record = input("Insert Reason/Record:", "Promotion Management - Department Management")
 							var/score = input("Insert record score (1-10) for the employee rating.", "Record Management - Department Management") as num
 							profiled.CharRecords.add_employeerecord(idowner.real_name, record, score, 0, 0, 0)
 							profiled.CharRecords.promoted = 1
@@ -271,7 +273,7 @@
 				switch(alert("demote [profiled.real_name] from Senior- or Head Position?", "Promotion Screen", "Senior Position", "Head Position"))
 					if("Head Position")
 						if(department == "Command" && idowner.job == "Captain" || department == "NanoTrasen") //Captain can promote to head.
-							var/record = input("Insert Reason/Record:", "Promotion Management - Department Management") as text
+							var/record = input("Insert Reason/Record:", "Promotion Management - Department Management")
 							if(!record)	return
 							var/datum/ntrequest/NR = new()
 							NR.make_request(src, "demote", idowner, profiled, record)
@@ -282,7 +284,7 @@
 							to_chat(usr, "[profiled.real_name] is not a senior employee!")
 							return
 						else
-							var/record = input("Insert Reason/Record:", "Demotion Management - Department Management") as text
+							var/record = input("Insert Reason/Record:", "Demotion Management - Department Management")
 							profiled.CharRecords.add_employeerecord(idowner.real_name, record, 0, 0, 0, 0)
 							profiled.CharRecords.promoted = 0
 							calculate_department_rank(profiled) //Re-calculate to set proper rank.
@@ -318,7 +320,7 @@
 													pendingdeptrequests.Remove(N) //Remove from system after all is applied.
 													qdel(N)
 													return
-												H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (DENIED)", N.score, 0, 0, 0, 0)
+												H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (ACCEPTED)", N.score, 0, 0, 0, 0)
 												switch(H.CharRecords.promoted)
 													if(1) //Promoted to Senior
 														H.CharRecords.promoted = 0 //Back down yee!
