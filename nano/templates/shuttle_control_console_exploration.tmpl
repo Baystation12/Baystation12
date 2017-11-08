@@ -61,28 +61,15 @@
 		{{:helper.link('Choose Destination', 'arrowreturn-1-s', {'pick' : '1'}, data.can_pick ? null : 'disabled' , null)}}
 	</div>
 </div>
-{{if data.fuel_port_present}}
 <div class="item" style="padding-top: 10px">
 	<div class="itemLabel">
 		Fuel Tank Pressure:
 	</div>
 	<div class="itemContent">
-		{{:helper.displayBar(data.fuel_pressure, 0, 1013, (data.fuel_pressure > 200) ? 'good' : ((data.fuel_pressure > 100) ? 'average' : 'bad'))}}
-		<div class="statusValue">
-			{{:data.fuel_pressure}} kPa
-		</div>
+		{{:data.fuel_port_present ? helper.displayBar(data.fuel_pressure, 0, data.fuel_max_pressure, data.fuel_pressure_status) : ''}}
+		{{:data.fuel_port_present ? data.fuel_pressure : '<i>This shuttle\'s ionic propulsion does not require fuel.</i>'}}{{:data.fuel_port_present ? ' kPa' : ''}}
 	</div>
 </div>
-{{else}}
-<div class="item" style="padding-top: 10px">
-	<div class="itemLabel">
-		Fuel Tank Pressure:
-	</div>
-	<div class="itemContent">
-		<i>This shuttle's ionic propulsion does not require fuel.</i>
-	</div>
-</div>
-{{/if}}
 <h3>Shuttle Control</h3>
 <div class="item" style="padding-top: 10px">
 	<div class="item">

@@ -71,7 +71,9 @@
 		if (moving_status == SHUTTLE_IDLE)
 			return FALSE	//someone cancelled the launch
 
-		if(!fuel_check()) return
+		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+			return
+			moving_status = SHUTTLE_IDLE
 
 		moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
 		attempt_move(destination)
@@ -111,7 +113,7 @@
 		if(!this_shuttle.try_consume_fuel()) //insufficient fuel
 			for(var/area/A in shuttle_area)
 				for(var/mob/living/M in A)
-					M.show_message("<spawn class='warning'>You hear the shuttle engines sputter... perhaps it's out of fuel?", AUDIBLE_MESSAGE,
+					M.show_message("<spawn class='warning'>You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?", AUDIBLE_MESSAGE,
 					"<spawn class='warning'>The shuttle shakes but fails to take off.", VISIBLE_MESSAGE)
 					return 0 //failure!
 	return 1 //sucess, continue with launch

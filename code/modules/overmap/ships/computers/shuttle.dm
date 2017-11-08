@@ -32,11 +32,17 @@
 	var/datum/computer/file/embedded_program/docking/docking_controller = shuttle.active_docking_controller
 
 	var/fuel_pressure = 0
-	if(shuttle.fuel_port)
-		if(shuttle.fuel_port.contents.len)
-			var/obj/item/weapon/tank/fuel_tank = shuttle.fuel_port.contents[1]
-			if(istype(fuel_tank))
-				fuel_pressure = fuel_tank.air_contents.return_pressure()
+	var/fuel_max_pressure = 0
+	if(shuttle.fuel_ports)
+		if(shuttle.fuel_ports.len)
+			for(var/obj/structure/fuel_port/FP in shuttle.fuel_ports) //loop through fuel ports
+				if(FP.contents.len)
+					var/obj/item/weapon/tank/fuel_tank = FP.contents[1]
+					if(istype(fuel_tank))
+						fuel_pressure += fuel_tank.air_contents.return_pressure()
+						fuel_max_pressure += 1013
+
+	if(fuel_max_pressure == 0) fuel_max_pressure = 1
 
 	data = list(
 		"destination_name" = shuttle.get_destination_name(),
@@ -49,14 +55,16 @@
 		"can_launch" = shuttle.can_launch(),
 		"can_cancel" = shuttle.can_cancel(),
 		"can_force" = shuttle.can_force(),
-		"fuel_port_present" = shuttle.fuel_port? 1 : 0,
-		"fuel_pressure" = fuel_pressure
+		"fuel_port_present" = shuttle.fuel_consumption? 1 : 0,
+		"fuel_pressure" = fuel_pressure,
+		"fuel_max_pressure" = fuel_max_pressure,
+		"fuel_pressure_status" = (fuel_pressure/fuel_max_pressure > 0.2)? "good" : "bad"
 	)
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "shuttle_control_console_exploration.tmpl", "[shuttle_tag] Shuttle Control", 470, 310)
+		ui = new(user, src, ui_key, "shuttle_control_console_exploration.tmpl", "[shuttle_tag] Shuttle Control", 510, 310)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
