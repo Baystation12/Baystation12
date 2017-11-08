@@ -5,7 +5,7 @@
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
-	outfit_type = /decl/hierarchy/outfit/job/slayer/red
+	outfit_type = /decl/hierarchy/outfit/job/slayer
 	total_positions = -1
 	spawn_positions = -1
 	track_players = 1
@@ -17,7 +17,7 @@
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
-	outfit_type = /decl/hierarchy/outfit/job/slayer/blue
+	outfit_type = /decl/hierarchy/outfit/job/slayer
 	total_positions = -1
 	spawn_positions = -1
 	track_players = 1
