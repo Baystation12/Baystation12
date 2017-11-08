@@ -91,7 +91,9 @@
 		if(moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
 
-		if(!fuel_check()) return
+		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+			return
+			moving_status = SHUTTLE_IDLE
 
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
@@ -108,16 +110,7 @@
 		moving_status = SHUTTLE_IDLE
 
 /datum/shuttle/proc/fuel_check()
-	if(istype(src,/datum/shuttle/autodock/overmap))
-		var/datum/shuttle/autodock/overmap/this_shuttle = src
-		if(!this_shuttle.try_consume_fuel()) //insufficient fuel
-			for(var/area/A in shuttle_area)
-				for(var/mob/living/M in A)
-					M.show_message("<spawn class='warning'>You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?", AUDIBLE_MESSAGE,
-					"<spawn class='warning'>The shuttle shakes but fails to take off.", VISIBLE_MESSAGE)
-					return 0 //failure!
-	return 1 //sucess, continue with launch
-
+	return 1 //fuel check should always pass in non-overmap shuttles (they have magic engines)
 
 /datum/shuttle/proc/attempt_move(var/obj/effect/shuttle_landmark/destination)
 	if(current_location == destination)
