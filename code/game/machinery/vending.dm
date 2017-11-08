@@ -16,7 +16,7 @@
 
 	var/icon_vend //Icon_state when vending
 	var/icon_deny //Icon_state when denying access
-	var/diona_spawn_chance = 1 //For admin shenanigans
+	var/diona_spawn_chance = 0.1
 
 	// Power
 	use_power = 1
