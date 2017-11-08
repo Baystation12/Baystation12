@@ -35,10 +35,11 @@
 // controls power to devices in that area
 // may be opened to change power cell
 // three different channels (lighting/equipment/environ) - may each be set to on, off, or auto
-#define POWERCHAN_OFF      0
-#define POWERCHAN_OFF_AUTO 1
-#define POWERCHAN_ON       2
-#define POWERCHAN_ON_AUTO  3
+#define POWERCHAN_OFF		0
+#define POWERCHAN_OFF_TEMP	0.5 // I know, I am a bad person
+#define POWERCHAN_OFF_AUTO	1
+#define POWERCHAN_ON		2
+#define POWERCHAN_ON_AUTO	3
 
 //thresholds for channels going off automatically. ENVIRON channel stays on as long as possible, and doesn't have a threshold
 #define AUTO_THRESHOLD_LIGHTING  50
@@ -1155,12 +1156,15 @@
 obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	switch(cur_state)
 		if(POWERCHAN_OFF); //autoset will never turn on a channel set to off
+		if(POWERCHAN_OFF_TEMP)
+			if(on == 1 || on == 2)
+				return POWERCHAN_ON
 		if(POWERCHAN_OFF_AUTO)
 			if(on == 1)
 				return POWERCHAN_ON_AUTO
 		if(POWERCHAN_ON)
 			if(on == 0)
-				return POWERCHAN_OFF
+				return POWERCHAN_OFF_TEMP
 		if(POWERCHAN_ON_AUTO)
 			if(on == 0 || on == 2)
 				return POWERCHAN_OFF_AUTO
