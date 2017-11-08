@@ -139,7 +139,7 @@ Class Procs:
 
 /obj/machinery/Destroy()
 	STOP_PROCESSING(SSmachines, src)
-	if(MyArea && MyArea.machinecache)
+	if(MyArea.machinecache)
 		MyArea.machinecache -= src
 	MyArea = null
 
@@ -154,6 +154,7 @@ Class Procs:
 /obj/machinery/Process()//If you dont use process or power why are you here
 	if(!(use_power || idle_power_usage || active_power_usage))
 		return PROCESS_KILL
+	return M_NO_PROCESS
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)

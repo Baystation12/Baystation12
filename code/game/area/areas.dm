@@ -184,9 +184,8 @@
 
 // called when power status changes
 /area/proc/power_change()
-	for(var/M in machinecache)	// for each machine in the area
-		var/obj/machinery/MA = M
-		MA.power_change()			// reverify power status (to update icons etc.)
+	for(var/obj/machinery/M in machinecache)	// for each machine in the area
+		M.power_change()			// reverify power status (to update icons etc.)
 	if (fire || eject)
 		update_icon()
 

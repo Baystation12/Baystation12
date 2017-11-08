@@ -10,7 +10,7 @@
 #define LIGHT_BURNED 3
 
 #define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
-#define LIGHTING_POWER_FACTOR 5		//5W per luminosity * range
+#define LIGHTING_POWER_FACTOR 10		//15W per luminosity * range
 
 var/global/list/light_type_cache = list()
 /proc/get_light_type_instance(var/light_type)
@@ -63,23 +63,24 @@ var/global/list/light_type_cache = list()
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (istype(W, /obj/item/weapon/wrench))
-		if (src.stage == 1)
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			to_chat(usr, "You begin deconstructing \a [src].")
-			if (!do_after(usr, 30,src))
+		switch(stage)
+			if(1)
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+				to_chat(usr, "You begin deconstructing \a [src].")
+				if (!do_after(usr, 30,src))
+					return
+				new /obj/item/stack/material/steel( get_turf(src.loc), sheets_refunded )
+				user.visible_message("[user.name] deconstructs [src].", \
+					"You deconstruct [src].", "You hear a noise.")
+				playsound(src.loc, 'sound/items/Deconstruct.ogg', 75, 1)
+				qdel(src)
+			if(2)
+				to_chat(usr, "You have to remove the wires first.")
 				return
-			new /obj/item/stack/material/steel( get_turf(src.loc), sheets_refunded )
-			user.visible_message("[user.name] deconstructs [src].", \
-				"You deconstruct [src].", "You hear a noise.")
-			playsound(src.loc, 'sound/items/Deconstruct.ogg', 75, 1)
-			qdel(src)
-		if (src.stage == 2)
-			to_chat(usr, "You have to remove the wires first.")
-			return
 
-		if (src.stage == 3)
-			to_chat(usr, "You have to unscrew the case first.")
-			return
+			if(3)
+				to_chat(usr, "You have to unscrew the case first.")
+				return
 
 	if(istype(W, /obj/item/weapon/wirecutters))
 		if (src.stage != 2) return

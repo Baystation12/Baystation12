@@ -110,7 +110,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	while(current_run.len)
 		var/datum/pipe_network/PN = current_run[current_run.len]
 		current_run.len--
-		if(istype(PN) && !QDELETED(PN))
+		if(!QDELETED(PN))
 			PN.Process(wait)
 		else
 			pipenets.Remove(PN)
@@ -126,9 +126,18 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	while(current_run.len)
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
-		if(istype(M) && !QDELETED(M) && !(M.Process(wait) == PROCESS_KILL))
+		if(!QDELETED(M) && !(M.Process(wait) == PROCESS_KILL))
 			if(M.use_power)
-				M.auto_use_power()
+				switch (M.power_channel)
+					if (EQUIP)
+						M.MyArea.used_equip += M.use_power == 2 ? M.active_power_usage : M.idle_power_usage
+					if (LIGHT)
+						M.MyArea.used_equip += M.use_power == 2 ? M.active_power_usage : M.idle_power_usage
+					if (ENVIRON)
+						M.MyArea.used_environ += M.use_power == 2 ? M.active_power_usage : M.idle_power_usage
+					else // ?!
+						log_debug("SSmachinery: Type '[M.type]' has insane channel [M.power_channel] (expected value in range 1-3).")
+						M.use_power = FALSE
 		else
 			machinery.Remove(M)
 			M.is_processing = null
@@ -143,7 +152,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	while(current_run.len)
 		var/datum/powernet/PN = current_run[current_run.len]
 		current_run.len--
-		if(istype(PN) && !QDELETED(PN))
+		if(!QDELETED(PN))
 			PN.reset(wait)
 		else
 			powernets.Remove(PN)
