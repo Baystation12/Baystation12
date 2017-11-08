@@ -1,0 +1,6 @@
+author: Heptagon49
+delete-after: True
+changes:
+  - tweak: "Lowered the chances of a Doona popping out of a vending machine from 1% to 0.1%."
+  - bugfix: "Made the outer windoor of the sci checkpoint all-access."
+  - tweak: "Added an outer windoor to the RnD desk."
