@@ -43,7 +43,7 @@ var/datum/antagonist/actor/actor
 	set name = "Join as Actor"
 	set desc = "Join as an Actor to entertain the crew through television!"
 
-	if(!MayRespawn(1))
+	if(!MayRespawn(1) || !actor.can_become_antag(usr.mind, 1))
 		return
 
 	var/choice = alert("Are you sure you'd like to join as an actor?", "Confirmation","Yes", "No")
