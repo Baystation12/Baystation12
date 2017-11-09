@@ -58,6 +58,15 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenglow"
 
+/obj/effect/decal/cleanable/cryojuice
+	name = "cryo fluid"
+	desc = "It's still cold to the touch and smells like piss."
+	gender = PLURAL
+	density = 0
+	anchored = 1
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "cryojuice"
+
 /obj/effect/decal/cleanable/cobweb
 	name = "cobweb"
 	desc = "Somebody should remove that."
