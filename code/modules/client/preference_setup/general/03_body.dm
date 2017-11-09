@@ -147,6 +147,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	if(has_flag(mob_species, HAS_SKIN_TONE))
 		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/220</a><br>"
+	if(has_flag(mob_species, HAS_SKIN_TONE_GRAV))
+		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/85</a><br>"
+	if(has_flag(mob_species, HAS_SKIN_TONE_SPCR))
+		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/165</a><br>"
 	. += "Needs Glasses: <a href='?src=\ref[src];disabilities=[NEARSIGHTED]'><b>[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]</b></a><br>"
 	. += "Limbs: <a href='?src=\ref[src];limbs=1'>Adjust</a> <a href='?src=\ref[src];reset_limbs=1'>Reset</a><br>"
 	. += "Internal Organs: <a href='?src=\ref[src];organs=1'>Adjust</a><br>"
@@ -404,12 +408,16 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_tone"])
-		if(!has_flag(mob_species, HAS_SKIN_TONE))
+		if(!has_flag(mob_species, HAS_SKIN_TONE | HAS_SKIN_TONE_GRAV | HAS_SKIN_TONE_SPCR))
 			return TOPIC_NOACTION
-		var/new_s_tone = input(user, "Choose your character's skin-tone:\n(Light 1 - 220 Dark)", "Character Preference", (-pref.s_tone) + 35)  as num|null
+		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker: \n Human: 1-220 \n Grav-Adapted: 1-100 \n Spacer: 1-165", "Character Preference", (-pref.s_tone) + 35)  as num|null
 		if(new_s_tone && has_flag(mob_species, HAS_SKIN_TONE) && CanUseTopic(user))
 			pref.s_tone = 35 - max(min( round(new_s_tone), 220),1)
-			return TOPIC_REFRESH_UPDATE_PREVIEW
+		else if(new_s_tone && has_flag(mob_species, HAS_SKIN_TONE_GRAV) && CanUseTopic(user))
+			pref.s_tone = 35 - max(min( round(new_s_tone), 100),1)
+		else if(new_s_tone && has_flag(mob_species, HAS_SKIN_TONE_SPCR) && CanUseTopic(user))
+			pref.s_tone = 35 - max(min( round(new_s_tone), 165),1)
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_color"])
 		if(!has_flag(mob_species, HAS_SKIN_COLOR))
