@@ -1,0 +1,5 @@
+#Listing maps here will blacklist them from generating as away sites.
+#Maps must be the full path to them
+#SPECIFYING AN INVALID MAP WILL RESULT IN RUNTIMES ON GAME START
+
+#maps/random_ruins/away_sites/example.dmm

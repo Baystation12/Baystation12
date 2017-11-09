@@ -172,6 +172,8 @@
 	return drained_energy
 
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
+	..()
+
 	wires = new(src)
 
 	// offset 24 pixels in direction of dir
@@ -192,8 +194,6 @@
 		name = "\improper [area.name] APC"
 		stat |= MAINT
 		src.update_icon()
-
-	..()
 
 /obj/machinery/power/apc/Initialize()
 	. = ..()
