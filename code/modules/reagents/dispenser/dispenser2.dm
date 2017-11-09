@@ -9,7 +9,6 @@
 
 	var/list/cartridges = list() // Associative, label -> cartridge
 	var/obj/item/weapon/reagent_containers/container = null
-	var/image/container_image
 
 	var/ui_title = "Chemical Dispenser"
 
