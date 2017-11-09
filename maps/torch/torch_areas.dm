@@ -789,6 +789,11 @@
 	icon_state = "checkpoint1"
 
 /area/rnd/blanks
+	name = "\improper Blank Template Storage"
+	icon_state = "blanks"
+	flags = AREA_RAD_SHIELDED
+
+/area/rnd/cleanup
 	name = "\improper Aux Custodial Supplies"
 	icon_state = "decontamination"
 	flags = AREA_RAD_SHIELDED

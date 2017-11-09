@@ -312,9 +312,6 @@ obj/structure/closet/crate
 	req_access = list(access_xenobiology)
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS
 
-/obj/structure/closet/crate/secure/biohazard/blanks/WillContain()
-	return list(/mob/living/carbon/human/blank, /obj/item/usedcryobag)
-
 /obj/structure/closet/crate/paper_refill
 	name = "paper refill crate"
 	desc = "A rectangular plastic crate, filled up with blank papers for refilling bins and printers. A bureaucrat's favorite."
