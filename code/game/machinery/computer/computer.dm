@@ -113,3 +113,6 @@
 			qdel(src)
 	else
 		..()
+
+/obj/machinery/computer/attack_ghost(var/mob/ghost)
+	attack_hand(ghost)
