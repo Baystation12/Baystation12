@@ -132,4 +132,60 @@
 	sort_category = "Xenowear"
 	cost = 1
 	allowed_roles = SECURITY_ROLES
-	
+
+// Pre-modified gloves
+
+/datum/gear/gloves/colored/modified
+	display_name = "modified gloves, colored"
+	path = /obj/item/clothing/gloves/color/modified
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
+/datum/gear/gloves/latex/modified
+	display_name = "modified gloves, latex"
+	path = /obj/item/clothing/gloves/latex/modified
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
+/datum/gear/gloves/nitrile/modified
+	display_name = "modified gloves, nitrile"
+	path = /obj/item/clothing/gloves/latex/nitrile/modified
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
+/datum/gear/gloves/rainbow/modified
+	display_name = "modified gloves, rainbow"
+	path = /obj/item/clothing/gloves/rainbow/modified
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
+/datum/gear/gloves/evening/modified
+	display_name = "modified gloves, evening"
+	path = /obj/item/clothing/gloves/color/evening/modified
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
+/datum/gear/gloves/botany/modified
+	display_name = "modified gloves, botany"
+	path = /obj/item/clothing/gloves/thick/botany/modified
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
+/datum/gear/gloves/dress/modified
+	display_name = "modified gloves, dress"
+	path = /obj/item/clothing/gloves/color/white/modified
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
+/datum/gear/gloves/duty/modified
+	display_name = "modified gloves, duty"
+	path = /obj/item/clothing/gloves/duty/modified
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
+/datum/gear/gloves/work/modified
+	display_name = "modified gloves, work"
+	path = /obj/item/clothing/gloves/thick/modified
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
