@@ -104,10 +104,7 @@
 // Used for important things such as the ship's autoregulation system
 /obj/machinery/meter/danger
 	desc = "A gas flow meter. This one looks important, and is bolted in place."
-
-/obj/machinery/meter/danger/Initialize()
-	. = ..()
-	src.overlays += "danger_overlay"
+	overlays = list("danger_overlay")
 
 /obj/machinery/meter/danger/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	return
