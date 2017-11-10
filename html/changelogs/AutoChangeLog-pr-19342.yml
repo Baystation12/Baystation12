@@ -1,0 +1,6 @@
+author: sabiram
+delete-after: True
+changes: 
+  - rscadd: "Holsters have been added to the gun cabinets."
+  - rscdel: "Holsters have been removed from the bridge officer and Sol pilot's lockers."
+  - tweak: "Gun cabinets now have a chance to spawn a small e-gun instead of the full sized variant."
