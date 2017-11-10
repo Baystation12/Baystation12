@@ -14,7 +14,7 @@
 	var/round_end_time = 0
 	var/round_length = 6000
 	var/nextrespawn
-	var/species_included = list(/datum/species/spartan)
+	var/species_included = list("Spartan") //This has to be an exact name taken from the datum
 	disabled_jobs = list(/datum/job/team_slayer_red, /datum/job/team_slayer_blue)
 
 /datum/game_mode/slayer/pre_setup()
@@ -44,23 +44,20 @@
 		if(health <= (i.maxHealth/2))
 			i.adjustBrainLoss(i.health+1)
 
-/datum/game_mode/slayer/proc/get_job_datum(var/mob/living/carbon/human/H)
-		var/list/jobs = get_job_datums()
-		var/job
-		for(var/datum/job/j in jobs)
-			if(job.name == H.assigned_role)
-				job = j
-				break
-		return job
+/datum/game_mode/slayer/proc/get_outfit_datum(var/wanted_outfit_name)
+	for(var/decl/hierarchy/outfit/outfit_decl in outfits_decls_)
+		if(outfit_decl.name == wanted_outfit_name)
+			return outfit_decl
 
 /datum/game_mode/slayer/proc/make_correct_species()
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
-		if(H.species in species_included)
+		if(H.species.name in species_included)
 			continue
-		var/newspecies = pick(species_included)
-		var/datum/job/j = get_job_datum(H)
-		H.set_species(species_included.name)
-		j.equip(H)
+		var/new_species_name = "[pick(species_included)]" //Choose which species datum we're going to use.
+		var/wanted_outfit_name = "[H.mind.assigned_role] [new_species_name]" //Create a string for the wanted outfit name
+		var/decl/hierarchy/outfit/outfit = get_outfit_datum(wanted_outfit_name) //Get the outfit
+		H.set_species(new_species_name)
+		outfit.equip(H)
 
 /datum/game_mode/slayer/process() //Used to allow respawns after few minutes. Also auto-kills people after a threshold.
 	if(world.time >= nextrespawn)
