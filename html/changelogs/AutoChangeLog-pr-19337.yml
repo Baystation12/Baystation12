@@ -1,0 +1,4 @@
+author: sabiram
+delete-after: True
+changes: 
+  - tweak: "Voice changers available in the upload now have chameleon mask functionality."
