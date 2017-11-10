@@ -1,4 +1,0 @@
-author: Hubblenaut
-delete-after: True
-changes: 
-  - bugfix: "Fixes brig cell timers not connecting to windoors/mounted flashes."

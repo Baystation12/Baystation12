@@ -1,5 +1,0 @@
-author: Heptagon49
-delete-after: True
-changes:
-  - rscadd: "Chem dispenser now has a visual indicator when it has a beaker loaded."
-  - bugfix: "Pill bottles loaded into the chemmaster now get filled."
