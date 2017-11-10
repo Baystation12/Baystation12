@@ -105,17 +105,6 @@
 
 
 /*
- * Parapens
- */
-/obj/item/weapon/pen/reagent/paralysis
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
-
-/obj/item/weapon/pen/reagent/paralysis/New()
-	..()
-	reagents.add_reagent(/datum/reagent/toxin/zombiepowder, 10)
-	reagents.add_reagent(/datum/reagent/cryptobiolin, 15)
-
-/*
  * Chameleon pen
  */
 /obj/item/weapon/pen/chameleon

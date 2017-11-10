@@ -47,7 +47,7 @@
 #define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
 
 //Flags for items (equipment)
-#define THICKMATERIAL          0x1  // Prevents syringes, parapens and hyposprays if equiped to slot_suit or slot_head.
+#define THICKMATERIAL          0x1  // Prevents syringes, reagent pens, and hyposprays if equiped to slot_suit or slot_head.
 #define STOPPRESSUREDAMAGE     0x2  // Counts towards pressure protection. Note that like temperature protection, body_parts_covered is considered here as well.
 #define AIRTIGHT               0x4  // Functions with internals.
 #define NOSLIP                 0x8  // Prevents from slipping on wet floors, in space, etc.
