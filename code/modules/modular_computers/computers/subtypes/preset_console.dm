@@ -98,7 +98,11 @@
 	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
 
 // Crew-facing supply ordering computer
-/obj/item/modular_computer/console/preset/civilian/supply/install_default_programs()
+/obj/item/modular_computer/console/preset/supply/install_default_hardware()
+	..()
+	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
+
+/obj/item/modular_computer/console/preset/supply/install_default_programs()
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/supply())
 	set_autorun("supply")
