@@ -1,0 +1,4 @@
+author: mkalash
+delete-after: True
+changes: 
+  - rscdel: "Removed parapen, parasting, and the stun talisman."
