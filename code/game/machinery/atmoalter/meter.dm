@@ -101,6 +101,18 @@
 		new /obj/item/pipe_meter(src.loc)
 		qdel(src)
 
+// Used for important things such as the ship's autoregulation system
+/obj/machinery/meter/danger
+	desc = "A gas flow meter. This one looks important, and is bolted in place."
+
+/obj/machinery/meter/danger/Initialize()
+	. = ..()
+	src.overlays += "danger_overlay"
+
+/obj/machinery/meter/danger/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	return
+
+
 // TURF METER - REPORTS A TILE'S AIR CONTENTS
 
 /obj/machinery/meter/turf/New()
