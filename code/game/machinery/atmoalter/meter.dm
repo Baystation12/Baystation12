@@ -103,11 +103,13 @@
 
 // Used for important things such as the ship's autoregulation system
 /obj/machinery/meter/danger
-	desc = "A gas flow meter. This one looks important, and is bolted in place."
+	desc = "A gas flow meter. This one looks important, and is permanently fastened in place."
 	overlays = list("danger_overlay")
 
 /obj/machinery/meter/danger/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	return
+	if (istype(W, /obj/item/weapon/wrench))
+		to_chat(user, "<span class='notice'>It won't budge.</span>")
+	return ..()
 
 
 // TURF METER - REPORTS A TILE'S AIR CONTENTS

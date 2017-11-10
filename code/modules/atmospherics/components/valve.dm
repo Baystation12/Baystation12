@@ -232,7 +232,7 @@
 	var/datum/radio_frequency/radio_connection
 	var/mode = 0 //0 = None, 1 = Pressure high, 2 = Pressure low
 	var/check_pressure = 0
-	var/open_or_close = 0 // 0 = Open, 1 = Close
+	var/will_close = 0 // 0 = Open, 1 = Close
 
 /obj/machinery/atmospherics/valve/digital/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -275,16 +275,17 @@
 			result = signal.data["pressure"] > check_pressure
 		else if(mode == 2)
 			result = signal.data["pressure"] <= check_pressure
-		if(result)
-			if(!open && !open_or_close)
-				open()
-			else if(open && open_or_close)
-				close()
-		else if(!isnull(result))
-			if(!open && open_or_close)
-				open()
-			else if(open && !open_or_close)
-				close()
+		switch(result)
+			if(TRUE)
+				if(!open && !will_close)
+					open()
+				else if(open && will_close)
+					close()
+			if(FALSE)
+				if(!open && will_close)
+					open()
+				else if(open && !will_close)
+					close()
 
 	switch(signal.data["command"])
 		if("valve_open")
