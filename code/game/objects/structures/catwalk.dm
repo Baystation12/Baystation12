@@ -5,7 +5,6 @@
 	icon_state = "catwalk"
 	density = 0
 	anchored = 1.0
-	w_class = ITEM_SIZE_NORMAL
 	plane = ABOVE_PLATING_PLANE
 	layer = LATTICE_LAYER
 
