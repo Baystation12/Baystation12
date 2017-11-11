@@ -7,13 +7,13 @@
 <div class="item" style="padding-top: 10px">
 	<div class="item">
 		<div class="itemLabel">
-			Drive:
+			Engines:
 		</div>
 		<div class="itemContent">
 			{{if data.shuttle_state == "idle"}}
 				<span class="idle">IDLE</span>
 			{{else data.shuttle_state == "warmup"}}
-				<span style="font-weight: bold;color: #336699">SPINNING UP</span>
+				<span style="font-weight: bold;color: #336699">STARTING IGNITION</span>
 			{{else data.shuttle_state == "in_transit"}}
 				<span style="font-weight: bold;color: #336699">ENGAGED</span>
 			{{else}}
@@ -54,11 +54,20 @@
 {{/if}}
 <div class="item" style="padding-top: 10px">
 	<div class="itemLabel">
-	    Current Destination:
+		Current Destination:
 	</div>
 	<span class="average">{{:data.destination_name}}</span>
 	<div class="item">
 		{{:helper.link('Choose Destination', 'arrowreturn-1-s', {'pick' : '1'}, data.can_pick ? null : 'disabled' , null)}}
+	</div>
+</div>
+<div class="item" style="padding-top: 10px">
+	<div class="itemLabel">
+		Fuel Tank Pressure:
+	</div>
+	<div class="itemContent">
+		{{:data.fuel_port_present ? helper.displayBar(data.fuel_pressure, 0, data.fuel_max_pressure, data.fuel_pressure_status) : ''}}
+		{{:data.fuel_port_present ? data.fuel_pressure : '<i>This shuttle\'s ionic propulsion does not require fuel.</i>'}}{{:data.fuel_port_present ? ' kPa' : ''}}
 	</div>
 </div>
 <h3>Shuttle Control</h3>
