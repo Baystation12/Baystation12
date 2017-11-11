@@ -1,0 +1,4 @@
+author: CountAlex
+delete-after: True
+changes: 
+  - rscadd: "Added Oxygen regenerator device for Atmospherics. Device takes from an input pipe CO2 and slowly feeds O2 to an output pipe and drops chunks of coal on the top tray of the machine."

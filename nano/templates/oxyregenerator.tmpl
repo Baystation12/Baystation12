@@ -1,0 +1,48 @@
+<div class="item">
+	<div class="itemLabel">
+		Status:
+	</div>
+	<div class="itemContent">		
+		{{:helper.link('On', 'power', {'toggleStatus' : 1}, data.on ? 'selected' : null)}}{{:helper.link('Off', 'close', {'toggleStatus' : 1}, data.on ? null : 'selected')}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Power Level:
+	</div>
+	<div class="itemContent">		
+		{{:helper.link('1', null, {'setPower' :  1}, (data.powerSetting ==  1)? 'selected' : null)}}
+		{{:helper.link('2', null, {'setPower' :  2}, (data.powerSetting ==  2)? 'selected' : null)}}
+		{{:helper.link('3', null, {'setPower' :  3}, (data.powerSetting ==  3)? 'selected' : null)}}
+		{{:helper.link('4', null, {'setPower' :  4}, (data.powerSetting ==  4)? 'selected' : null)}}
+		{{:helper.link('5', null, {'setPower' :  5}, (data.powerSetting ==  5)? 'selected' : null)}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Gas Pressure:
+	</div>
+	<div class="itemContent">		
+		{{:data.gasPressure}} kPa
+	</div>
+</div>
+
+<h3>Gas Temperature</h3>
+	<div class="itemLabel">
+		Current:
+	</div>
+	<div class="itemContent">		
+		{{:data.gasTemperature}} K
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Processing rate:
+	</div>
+	<div class="itemContent">		
+		{{:data.gasProcessed}} moles
+	</div>
+</div>
