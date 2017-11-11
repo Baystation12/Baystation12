@@ -171,8 +171,7 @@
 
 	return drained_energy
 
-/obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
-	..()
+/obj/machinery/power/apc/Initialize(mapload, var/ndir, var/building=0)
 
 	wires = new(src)
 
@@ -195,8 +194,8 @@
 		stat |= MAINT
 		src.update_icon()
 
-/obj/machinery/power/apc/Initialize()
-	. = ..()
+	. = ..(mapload)
+
 	if(operating)
 		src.update()
 
@@ -250,8 +249,6 @@
 		name = "\improper [area.name] APC"
 	area.apc = src
 	update_icon()
-
-	make_terminal()
 
 /obj/machinery/power/apc/examine(mob/user)
 	if(..(user, 1))
