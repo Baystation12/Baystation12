@@ -90,6 +90,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/crowbar
 	category = "Tools"
 
+/datum/autolathe/recipe/prybar
+	name = "pry bar"
+	path = /obj/item/weapon/crowbar/prybar
+	category = "Tools"
+
 /datum/autolathe/recipe/int_wirer
 	name = "integrated circuit wirer"
 	path = /obj/item/device/integrated_electronics/wirer
