@@ -20,7 +20,7 @@
 	departments = ENG
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/engineering
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command, /obj/item/clothing/head/ushanka/solgov, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov, /obj/item/clothing/shoes/jackboots/unathi)
+	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/engineering, /obj/item/clothing/head/ushanka/solgov, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov, /obj/item/clothing/shoes/jackboots/unathi)
 
 	service_under = /obj/item/clothing/under/solgov/utility/expeditionary/engineering
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering
