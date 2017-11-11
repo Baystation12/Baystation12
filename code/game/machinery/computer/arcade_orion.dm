@@ -176,6 +176,9 @@
 	user << browse(dat, "window=arcade")
 
 /obj/machinery/computer/arcade/orion_trail/Topic(href,href_list)
+	if((. = ..()))
+		return
+
 	if(href_list["continue"])
 		if(view == ORION_VIEW_MAIN)
 			var/next_event = null
