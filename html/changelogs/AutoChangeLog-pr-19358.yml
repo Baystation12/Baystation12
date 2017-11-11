@@ -1,0 +1,4 @@
+author: comma
+delete-after: True
+changes: 
+  - tweak: "Propellant in fuel bay changed, instead of plasma it's CO2 now. Thrust should be more or less same, but less eternal fires and more space for engies to increase said thrust."
