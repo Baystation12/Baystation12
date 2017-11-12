@@ -21,7 +21,7 @@
 			fuel_ports += fuel_port_in_area
 
 /datum/shuttle/autodock/overmap/fuel_check()
-	if(src.try_consume_fuel()) //insufficient fuel
+	if(!src.try_consume_fuel()) //insufficient fuel
 		for(var/area/A in shuttle_area)
 			for(var/mob/living/M in A)
 				M.show_message("<spawn class='warning'>You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?", AUDIBLE_MESSAGE,
