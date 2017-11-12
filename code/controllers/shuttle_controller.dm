@@ -5,6 +5,24 @@ var/global/datum/shuttle_controller/shuttle_controller
 /datum/shuttle_controller
 	var/list/shuttles	//maps shuttle tags to shuttle datums, so that they can be looked up.
 	var/list/process_shuttles	//simple list of shuttles, for processing
+	var/list/registered_shuttle_landmarks
+	var/last_landmark_registration_time
+
+/datum/shuttle_controller/New()
+	shuttles = list()
+	process_shuttles = list()
+	registered_shuttle_landmarks = list()
+	last_landmark_registration_time = world.time
+
+/datum/shuttle_controller/proc/register_landmark(var/shuttle_landmark_tag, var/obj/effect/shuttle_landmark/shuttle_landmark)
+	if (registered_shuttle_landmarks[shuttle_landmark_tag])
+		CRASH("Attempted to register shuttle landmark with tag [shuttle_landmark_tag], but it is already registered!")
+	if (istype(shuttle_landmark))
+		registered_shuttle_landmarks[shuttle_landmark_tag] = shuttle_landmark
+		last_landmark_registration_time = world.time
+
+/datum/shuttle_controller/proc/get_landmark(var/shuttle_landmark_tag)
+	return registered_shuttle_landmarks[shuttle_landmark_tag]
 
 /datum/shuttle_controller/proc/process()
 	//process ferry shuttles
@@ -19,7 +37,3 @@ var/global/datum/shuttle_controller/shuttle_controller
 		if(initial(shuttle.category) == shuttle_type)
 			continue
 		shuttle = new shuttle()
-
-/datum/shuttle_controller/New()
-	shuttles = list()
-	process_shuttles = list()

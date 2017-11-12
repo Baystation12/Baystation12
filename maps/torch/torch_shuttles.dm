@@ -200,7 +200,7 @@
 /datum/shuttle/autodock/multi/antag/ninja
 	name = "Ninja"
 	warmup_time = 0
-	destinations = list(
+	destination_tags = list(
 		"nav_ninja_deck1",
 		"nav_ninja_deck2",
 		"nav_ninja_deck3",
@@ -318,7 +318,7 @@
 /datum/shuttle/autodock/multi/antag/mercenary
 	name = "Mercenary"
 	warmup_time = 0
-	destinations = list(
+	destination_tags = list(
 		"nav_merc_deck1",
 		"nav_merc_deck2",
 		"nav_merc_deck3",
@@ -381,7 +381,7 @@
 /datum/shuttle/autodock/multi/antag/skipjack
 	name = "Skipjack"
 	warmup_time = 0
-	destinations = list(
+	destination_tags = list(
 		"nav_skipjack_deck1",
 		"nav_skipjack_deck2",
 		"nav_skipjack_deck3",
@@ -444,7 +444,7 @@
 /datum/shuttle/autodock/multi/antag/rescue
 	name = "Rescue"
 	warmup_time = 0
-	destinations = list(
+	destination_tags = list(
 		"nav_ert_deck1",
 		"nav_ert_deck2",
 		"nav_ert_deck3",

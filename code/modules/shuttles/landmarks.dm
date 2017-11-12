@@ -41,6 +41,7 @@
 		docking_controller = locate(docking_tag)
 		if(!istype(docking_controller))
 			log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
+	shuttle_controller.register_landmark(tag, src)
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
