@@ -337,7 +337,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(t)
 		print_atmos_analysis(src, atmosanalyzer_scan(t))
 
-/mob/observer/ghost/verb/become_mouse()
+/*/mob/observer/ghost/verb/become_mouse()
 	set name = "Become mouse"
 	set category = "Ghost"
 
@@ -375,7 +375,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		announce_ghost_joinleave(src, 0, "They are now a mouse.")
 		host.ckey = src.ckey
 		host.status_flags |= NO_ANTAG
-		to_chat(host, "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>")
+		to_chat(host, "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>")*/
 /mob/observer/ghost/verb/view_manfiest()
 	set name = "Show Crew Manifest"
 	set category = "Ghost"
