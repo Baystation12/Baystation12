@@ -1,0 +1,4 @@
+author: "chinsky"
+delete-after: True
+changes: 
+  - tweak: "Humanoids able to vent-crawl can now bring select articles of clothing and carry items which are not too big."

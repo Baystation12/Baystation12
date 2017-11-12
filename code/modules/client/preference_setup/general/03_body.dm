@@ -96,7 +96,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.r_facial		= sanitize_integer(pref.r_facial, 0, 255, initial(pref.r_facial))
 	pref.g_facial		= sanitize_integer(pref.g_facial, 0, 255, initial(pref.g_facial))
 	pref.b_facial		= sanitize_integer(pref.b_facial, 0, 255, initial(pref.b_facial))
-	pref.s_tone			= sanitize_integer(pref.s_tone, -185, 34, initial(pref.s_tone))
 	pref.r_skin			= sanitize_integer(pref.r_skin, 0, 255, initial(pref.r_skin))
 	pref.g_skin			= sanitize_integer(pref.g_skin, 0, 255, initial(pref.g_skin))
 	pref.b_skin			= sanitize_integer(pref.b_skin, 0, 255, initial(pref.b_skin))
@@ -111,6 +110,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/datum/species/mob_species = all_species[pref.species]
 	if(mob_species && mob_species.spawn_flags & SPECIES_NO_LACE)
 		pref.has_cortical_stack = FALSE
+
+	var/low_skin_tone = mob_species ? (35 - max_skin_tone(mob_species)) : -185
+	sanitize_integer(pref.s_tone, low_skin_tone, 34, initial(pref.s_tone))
 
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
 	if(!istype(pref.organ_data)) pref.organ_data = list()
@@ -145,12 +147,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. += "Species: <a href='?src=\ref[src];show_species=1'>[pref.species]</a><br>"
 	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
 
-	if(has_flag(mob_species, HAS_SKIN_TONE))
-		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/220</a><br>"
-	if(has_flag(mob_species, HAS_SKIN_TONE_GRAV))
-		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/85</a><br>"
-	if(has_flag(mob_species, HAS_SKIN_TONE_SPCR))
-		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/165</a><br>"
+	if(has_flag(mob_species, HAS_A_SKIN_TONE))
+		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/[max_skin_tone(mob_species)]</a><br>"
+
 	. += "Needs Glasses: <a href='?src=\ref[src];disabilities=[NEARSIGHTED]'><b>[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]</b></a><br>"
 	. += "Limbs: <a href='?src=\ref[src];limbs=1'>Adjust</a> <a href='?src=\ref[src];reset_limbs=1'>Reset</a><br>"
 	. += "Internal Organs: <a href='?src=\ref[src];organs=1'>Adjust</a><br>"
@@ -408,15 +407,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_tone"])
-		if(!has_flag(mob_species, HAS_SKIN_TONE | HAS_SKIN_TONE_GRAV | HAS_SKIN_TONE_SPCR))
+		if(!has_flag(mob_species, HAS_A_SKIN_TONE))
 			return TOPIC_NOACTION
-		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker: \n Human: 1-220 \n Grav-Adapted: 1-100 \n Spacer: 1-165", "Character Preference", (-pref.s_tone) + 35)  as num|null
-		if(new_s_tone && has_flag(mob_species, HAS_SKIN_TONE) && CanUseTopic(user))
-			pref.s_tone = 35 - max(min( round(new_s_tone), 220),1)
-		else if(new_s_tone && has_flag(mob_species, HAS_SKIN_TONE_GRAV) && CanUseTopic(user))
-			pref.s_tone = 35 - max(min( round(new_s_tone), 100),1)
-		else if(new_s_tone && has_flag(mob_species, HAS_SKIN_TONE_SPCR) && CanUseTopic(user))
-			pref.s_tone = 35 - max(min( round(new_s_tone), 165),1)
+		var/max_tone = max_skin_tone(mob_species)
+		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [max_tone]", "Character Preference", (-pref.s_tone) + 35) as num|null
+		if(new_s_tone && has_flag(mob_species, HAS_A_SKIN_TONE) && CanUseTopic(user))
+			pref.s_tone = 35 - max(min( round(new_s_tone), max_tone),1)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_color"])
@@ -650,6 +646,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.organ_data.Cut()
 	pref.rlimb_data.Cut()
 
+/datum/category_item/player_setup_item/general/body/proc/max_skin_tone(var/datum/species/S)
+	if(has_flag(S, HAS_SKIN_TONE_GRAV))
+		return 100
+	if(has_flag(S, HAS_SKIN_TONE_SPCR))
+		return 165
+	return 220
+
 /datum/category_item/player_setup_item/general/body/proc/SetSpecies(mob/user)
 	if(!pref.species_preview || !(pref.species_preview in all_species))
 		pref.species_preview = SPECIES_HUMAN
@@ -681,7 +684,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		dat += "</br><b>Has excellent traction.</b>"
 	if(current_species.flags & NO_POISON)
 		dat += "</br><b>Immune to most poisons.</b>"
-	if(current_species.appearance_flags & HAS_SKIN_TONE)
+	if(current_species.appearance_flags & HAS_A_SKIN_TONE)
 		dat += "</br><b>Has a variety of skin tones.</b>"
 	if(current_species.appearance_flags & HAS_SKIN_COLOR)
 		dat += "</br><b>Has a variety of skin colours.</b>"

@@ -19,7 +19,6 @@
 		/obj/item/weapon/pen,
 		/obj/item/device/tape/random,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
-		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/device/taperecorder,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
