@@ -522,6 +522,9 @@
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
 
+/obj/machinery/power/supermatter/ex_act(severity) 
+	power = (power + 100) * severity
+	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power]")
 
 #undef NITROGEN_RETARDATION_FACTOR
 #undef THERMAL_RELEASE_MODIFIER
