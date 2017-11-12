@@ -72,8 +72,10 @@
 			return FALSE	//someone cancelled the launch
 
 		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+			var/datum/shuttle/autodock/S = src
+			if(istype(S))
+				S.cancel_launch(null)
 			return
-			moving_status = SHUTTLE_IDLE
 
 		moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
 		attempt_move(destination)
@@ -92,8 +94,10 @@
 			return	//someone cancelled the launch
 
 		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+			var/datum/shuttle/autodock/S = src
+			if(istype(S))
+				S.cancel_launch(null)
 			return
-			moving_status = SHUTTLE_IDLE
 
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
