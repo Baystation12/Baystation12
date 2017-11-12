@@ -47,7 +47,6 @@
 		/area/storage/tools = 0,
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/tcommsat/relay = NO_SCRUBBER|NO_VENT,
 		/area/teleporter/seconddeck = NO_SCRUBBER|NO_VENT,,
 		/area/thruster = NO_SCRUBBER,
 		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC,

@@ -431,7 +431,7 @@
 	if(!connection)	return 0	//~Carn
 	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
-					  filter_type, signal.data["compression"], list(position.z), connection.frequency,verb,speaking)
+					  filter_type, signal.data["compression"], GetConnectedZlevels(position.z), connection.frequency,verb,speaking)
 
 
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)
@@ -526,7 +526,7 @@
 	for (var/ch_name in channels)
 		channels[ch_name] = 0
 	..()
-	
+
 /obj/item/device/radio/proc/recalculateChannels()
 	return
 
@@ -555,7 +555,7 @@
 		CRASH("Invalid spawn location: [log_info_line(loc)]")
 	..()
 	myborg = loc
-	
+
 /obj/item/device/radio/borg/Initialize()
 	. = ..()
 	recalculateChannels()

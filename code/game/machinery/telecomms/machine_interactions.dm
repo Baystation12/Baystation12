@@ -185,11 +185,11 @@
 	var/turf/position = get_turf(src)
 
 	// Toggle on/off getting signals from the station or the current Z level
-	if(src.listening_level == STATION_Z) // equals the station
-		src.listening_level = position.z
+	if(src.listening_levels == GLOB.using_map.contact_levels) // equals the station
+		src.listening_levels = GetConnectedZlevels(position.z)
 		return 1
-	else if(position.z == TELECOMM_Z)
-		src.listening_level = STATION_Z
+	else
+		src.listening_levels = GLOB.using_map.contact_levels
 		return 1
 	return 0
 
@@ -239,7 +239,7 @@
 /obj/machinery/telecomms/relay/Options_Menu()
 	var/dat = ""
 	if(src.z == TELECOMM_Z)
-		dat += "<br>Signal Locked to the [station_name()]: <A href='?src=\ref[src];change_listening=1'>[listening_level == STATION_Z ? "TRUE" : "FALSE"]</a>"
+		dat += "<br>Signal Locked to the [station_name()]: <A href='?src=\ref[src];change_listening=1'>[listening_levels == GLOB.using_map.contact_levels ? "TRUE" : "FALSE"]</a>"
 	dat += "<br>Broadcasting: <A href='?src=\ref[src];broadcast=1'>[broadcasting ? "YES" : "NO"]</a>"
 	dat += "<br>Receiving:    <A href='?src=\ref[src];receive=1'>[receiving ? "YES" : "NO"]</a>"
 	return dat
@@ -400,6 +400,3 @@
 	if(issilicon(user) || in_range(user, src))
 		return 1
 	return 0
-
-#undef TELECOMM_Z
-#undef STATION_Z
