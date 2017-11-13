@@ -49,7 +49,7 @@
 	icon_state = "screwdriver"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_EARS
-	force = 5.0
+	force = 4.0
 	w_class = ITEM_SIZE_TINY
 	throwforce = 5.0
 	throw_speed = 3
@@ -109,7 +109,7 @@
 	icon_state = "cutters"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	force = 6.0
+	force = 3.0
 	throw_speed = 2
 	throw_range = 9
 	w_class = ITEM_SIZE_SMALL
@@ -424,34 +424,6 @@
 	if(reagents > max_fuel)
 		reagents = max_fuel
 
-/*
- * Crowbar
- */
-
-/obj/item/weapon/crowbar
-	name = "pocket crowbar"
-	desc = "A crowbar made of steel."
-	description_info = "Crowbars have countless uses: click on floor tiles to pry them loose. Use alongside a screwdriver to install or remove windows. Force open emergency shutters, or depowered airlocks. Open the panel of an unlocked APC. Pry a computer's circuit board free. And much more!"
-	description_fluff = "As is the case with most standard-issue tools, crowbars are a simple and timeless design, the only difference being that advanced materials like plasteel have made them uncommonly tough."
-	description_antag = "Need to bypass a bolted door? You can use a crowbar to pry the electronics out of an airlock, provided that it has no power and has been welded shut."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "crowbar"
-	flags = CONDUCT
-	slot_flags = SLOT_BELT
-	force = 5.0
-	throwforce = 7.0
-	item_state = "crowbar"
-	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_ENGINEERING = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 50)
-	center_of_mass = "x=16;y=20"
-	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
-
-/obj/item/weapon/crowbar/red
-	icon = 'icons/obj/items.dmi'
-	icon_state = "red_crowbar"
-	item_state = "crowbar_red"
-
 /obj/item/weapon/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
 
 	if(ishuman(M))
@@ -470,6 +442,50 @@
 
 	else
 		return ..()
+
+/*
+ * Crowbar
+ */
+
+/obj/item/weapon/crowbar
+	name = "pocket crowbar"
+	desc = "A crowbar made of steel."
+	description_info = "Crowbars have countless uses: click on floor tiles to pry them loose. Use alongside a screwdriver to install or remove windows. Force open emergency shutters, or depowered airlocks. Open the panel of an unlocked APC. Pry a computer's circuit board free. And much more!"
+	description_fluff = "As is the case with most standard-issue tools, crowbars are a simple and timeless design, the only difference being that advanced materials like plasteel have made them uncommonly tough."
+	description_antag = "Need to bypass a bolted door? You can use a crowbar to pry the electronics out of an airlock, provided that it has no power and has been welded shut."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "crowbar"
+	flags = CONDUCT
+	slot_flags = SLOT_BELT
+	force = 7.0
+	throwforce = 7.0
+	throw_range = 3
+	item_state = "crowbar"
+	w_class = ITEM_SIZE_SMALL
+	origin_tech = list(TECH_ENGINEERING = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 140)
+	center_of_mass = "x=16;y=20"
+	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
+
+/obj/item/weapon/crowbar/red
+	icon_state = "red_crowbar"
+	item_state = "crowbar_red"
+
+/obj/item/weapon/crowbar/prybar
+	name = "pry bar"
+	desc = "A steel bar with a wedge at one end and a hard rubber pommel handle at the other."
+	icon_state = "prybar"
+	item_state = "crowbar"
+	force = 4.0
+	throwforce = 6.0
+	throw_range = 5
+	w_class = ITEM_SIZE_SMALL
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
+
+/*
+ * Combitool
+ */
+
 
 /*/obj/item/weapon/combitool
 	name = "combi-tool"
