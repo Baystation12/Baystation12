@@ -7,10 +7,22 @@
 		if(direction == DOWN) //on a turf above, trying to enter
 			return !density
 
-/turf/simulated/open/CanZPass(atom, direction)
+/turf/simulated/open/CanZPass(atom/A, direction)
+	if(locate(/obj/structure/catwalk, src))
+		if(z == A.z)
+			if(direction == DOWN)
+				return 0
+		else if(direction == UP)
+			return 0
 	return 1
 
-/turf/space/CanZPass(atom, direction)
+/turf/space/CanZPass(atom/A, direction)
+	if(locate(/obj/structure/catwalk, src))
+		if(z == A.z)
+			if(direction == DOWN)
+				return 0
+		else if(direction == UP)
+			return 0
 	return 1
 
 /turf/simulated/open
@@ -138,7 +150,7 @@
 			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			new /obj/structure/lattice(locate(src.x, src.y, src.z))
-			//Update properly
+			//Update turfs
 			SSopen_space.add_turf(src, 1)
 		return
 

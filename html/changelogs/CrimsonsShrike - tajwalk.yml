@@ -1,0 +1,6 @@
+author: CrimsonShrike
+delete-after: True
+changes: 
+  - rscadd: "Added catwalks. Can be built by using rods on existing lattice."
+  - bugfix: "Fixed lattice icons on openspace turfs."
+
