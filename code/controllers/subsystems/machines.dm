@@ -3,7 +3,17 @@
 #define SSMACHINES_POWERNETS     3
 #define SSMACHINES_POWER_OBJECTS 4
 
-#define START_PROCESSING_IN_LIST(Datum, List) if (!Datum.is_processing) {Datum.is_processing = "SSmachines.[#List]"; SSmachines.List += Datum}
+#define START_PROCESSING_IN_LIST(Datum, List) \
+if (Datum.is_processing) {\
+	if(Datum.is_processing != #Processor)\
+	{\
+		crash_with("Failed to start processing. [log_info_line(Datum)] is already being processed by [Datum.is_processing] but queue attempt occured on [#Processor]."); \
+	}\
+} else {\
+	Datum.is_processing = "SSmachines.[#List]";\
+	SSmachines.List += Datum;\
+}
+
 #define STOP_PROCESSING_IN_LIST(Datum, List) \
 if(Datum.is_processing) {\
 	if(SSmachines.List.Remove(Datum)) {\
