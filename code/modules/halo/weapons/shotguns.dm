@@ -1,6 +1,4 @@
 
-
-
 //M90 shotgun
 //nothing special here, basically just a resprite
 /obj/item/weapon/gun/projectile/shotgun/pump/m90_ts
@@ -11,4 +9,5 @@
 	item_state = "halo_shotgun"
 	fire_sound = 'code/modules/halo/sounds/Shotgun_Shot_Sound_Effect.ogg'
 	reload_sound = 'code/modules/halo/sounds/Shotgun_Pump_Slide.ogg'
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	max_shells = 6
