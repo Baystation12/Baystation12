@@ -445,6 +445,7 @@
 	icon_state = "tajblind"
 	item_state = "tajblind"
 	prescription = 5
+	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/hud/health/tajblind
 	name = "lightweight veil"
@@ -459,6 +460,7 @@
 	icon_state = "tajblind_sec"
 	item_state = "tajblind_sec"
 	prescription = 5
+	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/meson/prescription/tajblind
 	name = "industrial veil"
@@ -466,3 +468,4 @@
 	icon_state = "tajblind_meson"
 	item_state = "tajblind_meson"
 	off_state = "tajblind_meson"
+	body_parts_covered = EYES
