@@ -451,7 +451,7 @@
 	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
 	icon_state = "tajblind_med"
 	item_state = "tajblind_med"
-	body_parts_covered = 1
+	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/sunglasses/sechud/tajblind
 	name = "sleek veil"
