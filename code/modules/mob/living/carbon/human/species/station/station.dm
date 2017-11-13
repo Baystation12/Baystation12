@@ -69,7 +69,7 @@
 	if(H.stat == CONSCIOUS)
 		return "staring blankly, not reacting to your presence"
 	return ..()
-
+/* //Commented instead of removed because these species could be a useful reference in the future.
 /datum/species/unathi
 	name = SPECIES_UNATHI
 	name_plural = SPECIES_UNATHI
@@ -374,3 +374,4 @@
 
 /datum/species/diona/get_blood_name()
 	return "sap"
+*/
