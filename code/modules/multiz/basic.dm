@@ -8,6 +8,8 @@ var/z_levels = 0 // Each bit represents a connection between adjacent levels.  S
 /obj/effect/landmark/map_data/New()
 	..()
 	ASSERT(height <= z)
+	if(z > GLOB.HIGHEST_CONNECTABLE_ZLEVEL_INDEX)
+		CRASH("[log_info_line(src)] - Attempted to connect Z-levels outside the valid range.")
 	// Due to the offsets of how connections are stored v.s. how z-levels are indexed, some magic number silliness happened.
 	for(var/i = (z - height) to (z - 2))
 		z_levels |= (1 << i)
