@@ -80,7 +80,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	name = "Sangheili EVA Harness"
 	desc = "A sealed. airtight Sangheili Combat Harness."
 	icon_state = "ranger_chest"
-	specials = list(/datum/armourspecials/shields)
+	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
 	totalshields = 150
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
@@ -104,7 +104,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 /obj/item/clothing/suit/armor/special/combatharness/minor
 	icon_state = "minor_chest"
 	totalshields = 100
-	specials = list(/datum/armourspecials/shields)
+	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
 
 /obj/item/organ/heart_secondary
 	name = "Secondary Heart"
