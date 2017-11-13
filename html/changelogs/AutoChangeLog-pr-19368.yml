@@ -1,0 +1,5 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added the pry bar, a smaller crowbar, to the autolathe."
+  - tweak: "The damage values of tools have been adjusted."
