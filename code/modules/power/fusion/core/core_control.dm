@@ -131,8 +131,7 @@
 	user.set_machine(src)
 
 /obj/machinery/computer/fusion_core_control/Topic(href, href_list)
-	. = ..()
-	if(.)
+	if((. = ..()))
 		return
 
 	if(href_list["access_device"])

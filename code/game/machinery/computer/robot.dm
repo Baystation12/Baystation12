@@ -32,7 +32,7 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/robotics/Topic(href, href_list)
-	if(..())
+	if((. = ..()))
 		return
 	var/mob/user = usr
 	if(!src.allowed(user))
