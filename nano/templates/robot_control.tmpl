@@ -1,20 +1,3 @@
-{{if !data.is_ai}}
-	<div class='notice'>
-		<div class="itemContentSmall" style="width: 180px">
-			Emergency Self-Destruct:
-		</div>
-		<div class="itemContentFull">
-			{{if data.safety}}
-				{{:helper.link('ARM', 'unlocked', {'arm' : 1})}}
-				{{:helper.link('DETONATE', 'radiation', {'nuke' : 1}, 'disabled')}}
-			{{else}}
-				{{:helper.link('DISARM', 'locked', {'arm' : 1})}}
-				{{:helper.link('DETONATE', 'radiation', {'nuke' : 1}, null, 'redButton')}}
-			{{/if}}
-		</div>
-		<div class="clearBoth"></div>
-	</div>
-{{/if}}
 {{for data.robots}}
 	<hr>
 	<div class='item'>
@@ -38,6 +21,12 @@
 		<span class="itemContent">
 			{{:value.module}}
 		</span>		
+		<span class="itemLabel">
+			Position: 
+		</span>
+		<span class="itemContent">
+			{{:value.location}}
+		</span>	
 
 		{{if value.hackable}}
 			<span class="itemLabel">
@@ -75,7 +64,6 @@
 			{{else}}
 				{{:helper.link('Unlock', 'unlocked', {'lockdown' : value.name})}}
 			{{/if}}
-				{{:helper.link('Self-Destruct', 'radiation', {'detonate' : value.name}, null, 'redButton')}}
 			{{if value.hackable}}
 				{{:helper.link('Hack', 'calculator', {'hack' : value.name}, null, 'redButton')}}
 			{{/if}}
