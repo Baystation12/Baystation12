@@ -22,12 +22,15 @@
 	var/list/category_names
 	var/list/category_contents
 	var/emagged = FALSE	// TODO: Implement synchronisation with modular computer framework.
+	var/current_security_level
 
 /datum/nano_module/supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/is_admin = check_access(user, access_cargo)
-	if(!category_names || !category_contents)
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	if(!category_names || !category_contents || current_security_level != security_state.current_security_level)
 		generate_categories()
+		current_security_level = security_state.current_security_level
 
 	data["is_admin"] = is_admin
 	data["screen"] = screen
@@ -208,7 +211,7 @@
 			category_names.Add(sp.name)
 			var/list/category[0]
 			for(var/decl/hierarchy/supply_pack/spc in sp.children)
-				if((spc.hidden || spc.contraband) && !emagged)
+				if((spc.hidden || spc.contraband || !spc.sec_available()) && !emagged)
 					continue
 				category.Add(list(list(
 					"name" = spc.name,
