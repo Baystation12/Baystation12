@@ -5,7 +5,7 @@
 	school = "conjuration"
 	invocation = "Sia helda!"
 	invocation_type = SpI_SHOUT
-	spell_flags = INCLUDEUSER | NEEDSCLOTHES
+	spell_flags = INCLUDEUSER
 	range = -1
 	max_targets = 1
 

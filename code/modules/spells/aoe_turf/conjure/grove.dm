@@ -2,7 +2,7 @@
 	name = "Grove"
 	desc = "Creates a sanctuary of nature around the wizard as well as creating a healing plant."
 
-	spell_flags = IGNOREDENSE | IGNORESPACE | NEEDSCLOTHES | Z2NOCAST | IGNOREPREV
+	spell_flags = IGNOREDENSE | IGNORESPACE | Z2NOCAST | IGNOREPREV
 	charge_max = 1200
 	school = "transmutation"
 

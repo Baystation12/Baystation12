@@ -22,7 +22,6 @@
 	feedback = "SB"
 
 	charge_max = 1200 //2 minutes
-	spell_flags = NEEDSCLOTHES
 	invocation = "Bla'yo daya!"
 	invocation_type = SpI_SHOUT
 	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 3, Sp_POWER = 3)
@@ -48,7 +47,6 @@
 	desc = "This spell summons a permanent bear companion that will follow your orders."
 	feedback = "BR"
 	charge_max = 3000 //5 minutes because this is a REALLY powerful spell. May tone it down/up.
-	spell_flags = NEEDSCLOTHES
 	invocation = "REA'YO GOR DAYA!"
 	invocation_type = SpI_SHOUT
 	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 0, Sp_POWER = 4)

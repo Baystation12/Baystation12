@@ -15,7 +15,9 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 								/obj/item/weapon/teleportation_scroll = 	"TS",
 								/obj/item/weapon/gun/energy/staff = 		"ST",
 								/obj/item/weapon/gun/energy/staff/animate =	"SA",
-								/obj/item/weapon/dice/d20/cursed = 			"DW")
+								/obj/item/weapon/dice/d20/cursed = 			"DW",
+								/obj/item/weapon/pen =                      "PN",
+								/obj/item/weapon/paper =                    "PP")
 
 /obj/item/weapon/spellbook
 	name = "master spell book"
@@ -136,7 +138,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			if(length(info))
 				dat += " ([info])"
 			dat += " ([spellbook.spells[spellbook.spells[i]]] spell slot[spellbook.spells[spellbook.spells[i]] > 1 ? "s" : "" ])"
-			if(spellbook.book_flags & CAN_MAKE_CONTRACTS)
+			if((spellbook.book_flags & CAN_MAKE_CONTRACTS) || )
 				dat += " <A href='byond://?src=\ref[src];path=[spellbook.spells[i]];contract=1;'>Make Contract</a>"
 			dat += "<br><i>[desc]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
@@ -298,12 +300,10 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	var/max_uses = 1
 	var/title = "Book of Tomes"
 	var/title_desc = "This tome marks down all the available tomes for use. Choose wisely, there are no refunds."
-	var/list/spells = list(/datum/spellbook/standard = 1,
-				/datum/spellbook/cleric = 1,
-				/datum/spellbook/battlemage = 1,
-				/datum/spellbook/spatial = 1,
-				/datum/spellbook/druid = 1,
-				/datum/spellbook/student = 1
+	var/list/spells = list(/datum/spellbook/wizard = 1,
+				/datum/spellbook/trickster = 1,
+				/datum/spellbook/artificer = 1,
+				/datum/spellbook/cleric = 1
 				) //spell's path = cost of spell
 
 	var/list/sacrifice_reagents
