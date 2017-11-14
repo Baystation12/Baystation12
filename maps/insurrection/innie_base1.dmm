@@ -447,7 +447,7 @@
 "iE" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled/white,/area/asteroid_base/mess_hall)
 "iF" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled/white,/area/asteroid_base/mess_hall)
 "iG" = (/obj/structure/table/steel,/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/item/weapon/gun/projectile/m739_lmg,/turf/simulated/floor/tiled/dark,/area/asteroid_base/armoury_1)
-"iH" = (/obj/structure/table/steel,/obj/item/weapon/gun/projectile/br55,/obj/item/weapon/gun/projectile/br55,/turf/simulated/floor/tiled/dark,/area/asteroid_base/armoury_1)
+"iH" = (/obj/structure/table/steel,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/turf/simulated/floor/tiled/dark,/area/asteroid_base/armoury_1)
 "iI" = (/obj/structure/table/steel,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/turf/simulated/floor/tiled/dark,/area/asteroid_base/armoury_2)
 "iJ" = (/obj/machinery/light{dir = 8},/obj/structure/table/steel,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled/dark,/area/asteroid_base/armoury_2)
 "iK" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/tiled/dark,/area/asteroid_base/engine)
