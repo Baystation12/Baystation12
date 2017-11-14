@@ -72,7 +72,7 @@
 /obj/structure/closet/secure_closet/crew/WillContain()
 	return list(
 		/obj/item/device/radio,
-		/obj/item/weapon/crowbar,
+		/obj/item/weapon/crowbar/small/prybar,
 		/obj/item/device/flashlight,
 		/obj/item/weapon/storage/box
 	)

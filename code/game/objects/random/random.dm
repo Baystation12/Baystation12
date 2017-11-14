@@ -52,7 +52,8 @@
 				/obj/item/weapon/wirecutters,
 				/obj/item/weapon/weldingtool,
 				/obj/item/weapon/weldingtool/largetank,
-				/obj/item/weapon/crowbar,
+				/obj/item/weapon/crowbar/small/,
+				/obj/item/weapon/crowbar/small/prybar,
 				/obj/item/weapon/wrench,
 				/obj/item/device/flashlight)
 
