@@ -85,14 +85,14 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/glass_jar
 	category = "General"
 
-/datum/autolathe/recipe/crowbar
+/datum/autolathe/recipe/crowbar_classic
 	name = "crowbar"
 	path = /obj/item/weapon/crowbar
 	category = "Tools"
 
-/datum/autolathe/recipe/prybar
-	name = "pry bar"
-	path = /obj/item/weapon/crowbar/prybar
+/datum/autolathe/recipe/diet_crowbar
+	name = "prybar"
+	path = /obj/item/weapon/crowbar/small/prybar
 	category = "Tools"
 
 /datum/autolathe/recipe/int_wirer

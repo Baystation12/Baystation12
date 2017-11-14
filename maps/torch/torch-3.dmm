@@ -146,7 +146,7 @@
 "cX" = (/obj/machinery/power/smes/buildable{charge = 0; RCon_tag = "Solar - Starboard"},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/item/device/radio/intercom{dir = 8; pixel_x = 22},/turf/simulated/floor/plating,/area/maintenance/auxsolarstarboard)
 "cY" = (/obj/structure/closet/crate/medical,/obj/item/bodybag,/obj/item/bodybag,/turf/simulated/floor/plating,/area/maintenance/seconddeck/aftstarboard)
 "cZ" = (/obj/structure/table/rack,/obj/item/clothing/suit/straight_jacket,/obj/item/clothing/mask/muzzle,/turf/simulated/floor/plating,/area/storage/medical)
-"da" = (/obj/structure/table/rack,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/device/radio,/obj/item/device/radio,/obj/item/device/radio,/obj/item/weapon/storage/box/bodybags,/turf/simulated/floor/plating,/area/storage/medical)
+"da" = (/obj/structure/table/rack,/obj/item/weapon/crowbar/small/prybar,/obj/item/weapon/crowbar/small/prybar,/obj/item/weapon/crowbar/small/prybar,/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/device/radio,/obj/item/device/radio,/obj/item/device/radio,/obj/item/weapon/storage/box/bodybags,/turf/simulated/floor/plating,/area/storage/medical)
 "db" = (/obj/structure/closet/secure_closet/medical_torch,/turf/simulated/floor/plating,/area/storage/medical)
 "dc" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/plating,/area/storage/medical)
 "dd" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating,/area/maintenance/seconddeck/aftstarboard)

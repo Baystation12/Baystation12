@@ -691,7 +691,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = null
 	l_ear = null
 	l_pocket = /obj/item/weapon/wrench
-	r_pocket = /obj/item/weapon/crowbar
+	r_pocket = /obj/item/weapon/crowbar/small/prybar
 
 /decl/hierarchy/outfit/job/torch/stowaway/post_equip(var/mob/living/carbon/human/H)
 	..()

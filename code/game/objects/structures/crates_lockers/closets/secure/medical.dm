@@ -106,7 +106,7 @@
 	    /obj/item/device/healthanalyzer,
 	    /obj/item/device/radio/off,
 	    /obj/random/medical,
-	    /obj/item/weapon/crowbar,
+	    /obj/item/weapon/crowbar/small/prybar,
 	    /obj/item/weapon/extinguisher/mini,
 	    /obj/item/weapon/storage/box/freezer,
 	    /obj/item/clothing/accessory/storage/white_vest,
