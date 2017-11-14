@@ -92,6 +92,19 @@
 		target.emagged = 1
 		to_chat(target, "<span class='notice'>Failsafe protocols overriden. New tools available.</span>")
 
+	else if (href_list["message"])
+		var/mob/living/silicon/robot/target = get_cyborg_by_name(href_list["message"])
+		if(!target || !istype(target))
+			return
+
+		var/message = sanitize(input("Enter message to transmit to the synthetic.") as null|text)
+		if(!message || !istype(target))
+			return
+
+		log_and_message_admins("[key_name_admin(usr)] sent message '[message]' to [target.name] using robotics control console!")
+		to_chat(target, "<span class='notice'>New remote message received using R-SSH protocol:</span>")
+		to_chat(target, message)
+
 // Proc: get_cyborgs()
 // Parameters: 1 (operator - mob which is operating the console.)
 // Description: Returns NanoUI-friendly list of accessible cyborgs.
@@ -110,10 +123,12 @@
 		robot["name"] = R.name
 		var/turf/T = get_turf(R)
 		var/area/A = get_area(T)
-		if(istype(A))
+
+		if(istype(T) && istype(A) && (T.z in GLOB.using_map.contact_levels))
 			robot["location"] = "[A.name] ([T.x], [T.y])"
 		else
 			robot["location"] = "Unknown"
+
 		if(R.stat)
 			robot["status"] = "Not Responding"
 		else if (!R.canmove)

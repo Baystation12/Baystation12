@@ -59,6 +59,7 @@
 			<b> N/A %</b>
 		{{/if}}
 		<h3>Actions</h3>
+			{{:helper.link('Message', 'mail-closed', {'message' : value.name})}}
 			{{if value.status == "Operational"}}
 				{{:helper.link('Lockdown', 'locked', {'lockdown' : value.name})}}
 			{{else}}
