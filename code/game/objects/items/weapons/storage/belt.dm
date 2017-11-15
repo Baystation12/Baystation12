@@ -125,6 +125,7 @@
 	icon_state = "securitybelt"
 	item_state = "security"
 	can_hold = list(
+		/obj/item/weapon/crowbar,
 		/obj/item/weapon/grenade,
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/handcuffs,
