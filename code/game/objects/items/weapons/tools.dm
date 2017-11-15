@@ -159,7 +159,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_LARGE
 
 	//Cost to make in the autolathe
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
@@ -170,7 +170,7 @@
 	//Welding tool specific stuff
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
-	var/max_fuel = 20 	//The max amount of fuel the welder can hold
+	var/max_fuel = 30 	//The max amount of fuel the welder can hold
 
 /obj/item/weapon/weldingtool/New()
 //	var/random_fuel = min(rand(10,20),max_fuel)
@@ -387,21 +387,23 @@
 /obj/item/weapon/weldingtool/mini
 	name = "miniature welding tool"
 	desc = "A welder with a very small fuel tank, meant for quick emergency use."
-	max_fuel = 5
+	max_fuel = 10
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 15, "glass" = 5)
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
 	desc = "A heavy-duty portable welder, with an extra large fuel tank to ensure it won't suddenly go cold on you."
-	max_fuel = 40
+	max_fuel = 80
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
+	w_class = ITEM_SIZE_HUGE
 
 /obj/item/weapon/weldingtool/hugetank
-	name = "upgraded welding tool"
-	desc = "A portable welding tool of astonishing weight. It appears to have had a very large after-market fuel tank installed."
-	max_fuel = 80
+	name = "compact welding tool"
+	desc = "A modified miniature welding tool that appears to have had a unique after-market fuel tank installed."
+	max_fuel = 20
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
@@ -409,8 +411,8 @@
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
-	max_fuel = 40
-	w_class = ITEM_SIZE_NORMAL
+	max_fuel = 20
+	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	var/last_gen = 0
