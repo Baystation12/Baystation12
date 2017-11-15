@@ -36,7 +36,7 @@
 		to_chat(user, "The lid is open.")
 
 /obj/machinery/beehive/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/crowbar))
+	if(iscrowbar(I))
 		closed = !closed
 		user.visible_message("<span class='notice'>\The [user] [closed ? "closes" : "opens"] \the [src].</span>", "<span class='notice'>You [closed ? "close" : "open"] \the [src].</span>")
 		update_icon()

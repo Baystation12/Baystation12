@@ -104,7 +104,7 @@
 			reinf_material = null
 			reset_girder()
 
-	else if(istype(W, /obj/item/weapon/crowbar) && state == 0 && anchored)
+	else if(iscrowbar(W) && state == 0 && anchored)
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now dislodging the girder...</span>")
 		if(do_after(user, 40,src))

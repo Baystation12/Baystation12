@@ -54,7 +54,7 @@
 				to_chat(user, "<span class='notice'>You screw the circuit board into place.</span>")
 				src.state = 2
 				src.icon_state = "2"
-			if(istype(P, /obj/item/weapon/crowbar) && circuit)
+			if(iscrowbar(P) && circuit)
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
 				src.state = 1
@@ -101,7 +101,7 @@
 						src.state = 4
 						src.icon_state = "4"
 		if(4)
-			if(istype(P, /obj/item/weapon/crowbar))
+			if(iscrowbar(P))
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You remove the glass panel.</span>")
 				src.state = 3

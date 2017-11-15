@@ -81,7 +81,7 @@
 						A.amount = 5
 
 			if(3)
-				if(istype(P, /obj/item/weapon/crowbar))
+				if(iscrowbar(P))
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 					state = 2
 					circuit.loc = src.loc

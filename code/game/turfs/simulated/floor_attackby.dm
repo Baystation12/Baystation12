@@ -7,7 +7,7 @@
 		return ..(C, user)
 
 	if(flooring)
-		if(istype(C, /obj/item/weapon/crowbar))
+		if(iscrowbar(C))
 			if(broken || burnt)
 				to_chat(user, "<span class='notice'>You remove the broken [flooring.descriptor].</span>")
 				make_plating()
@@ -72,7 +72,7 @@
 				playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 				return
 		// Repairs and Deconstruction.
-		else if(istype(C, /obj/item/weapon/crowbar))
+		else if(iscrowbar(C))
 			if(broken || burnt)
 				playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
 				visible_message("<span class='notice'>[user] has begun prying off the damaged plating.</span>")

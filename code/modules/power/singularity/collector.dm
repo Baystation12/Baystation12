@@ -71,7 +71,7 @@ var/global/list/rad_collectors = list()
 		W.loc = src
 		update_icons()
 		return 1
-	else if(istype(W, /obj/item/weapon/crowbar))
+	else if(iscrowbar(W))
 		if(P && !src.locked)
 			eject()
 			return 1

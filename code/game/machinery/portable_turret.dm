@@ -288,7 +288,7 @@ var/list/turret_icons
 
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
 	if(stat & BROKEN)
-		if(istype(I, /obj/item/weapon/crowbar))
+		if(iscrowbar(I))
 			//If the turret is destroyed, you can remove it with a crowbar to
 			//try and salvage its components
 			to_chat(user, "<span class='notice'>You begin prying the metal coverings off.</span>")
@@ -695,7 +695,7 @@ var/list/turret_icons
 				build_step = 1
 				return
 
-			else if(istype(I, /obj/item/weapon/crowbar) && !anchored)
+			else if(iscrowbar(I) && !anchored)
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				to_chat(user, "<span class='notice'>You dismantle the turret construction.</span>")
 				new /obj/item/stack/material/steel( loc, 5)
@@ -830,7 +830,7 @@ var/list/turret_icons
 
 					qdel(src) // qdel
 
-			else if(istype(I, /obj/item/weapon/crowbar))
+			else if(iscrowbar(I))
 				playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 				to_chat(user, "<span class='notice'>You pry off the turret's exterior armor.</span>")
 				new /obj/item/stack/material/steel(loc, 2)

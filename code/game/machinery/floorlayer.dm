@@ -49,7 +49,7 @@
 		TakeTile(T)
 		return
 
-	if(istype(W, /obj/item/weapon/crowbar))
+	if(iscrowbar(W))
 		if(!length(contents))
 			to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
 		else

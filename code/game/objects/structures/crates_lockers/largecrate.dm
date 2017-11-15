@@ -18,7 +18,7 @@
 	return
 
 /obj/structure/largecrate/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/crowbar))
+	if(iscrowbar(W))
 		new /obj/item/stack/material/wood(src)
 		var/turf/T = get_turf(src)
 		for(var/atom/movable/AM in contents)
@@ -39,7 +39,7 @@
 	icon_state = "mulecrate"
 
 /obj/structure/largecrate/hoverpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/crowbar))
+	if(iscrowbar(W))
 		var/obj/item/mecha_parts/mecha_equipment/ME
 		var/obj/mecha/working/hoverpod/H = new (loc)
 

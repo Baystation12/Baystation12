@@ -30,7 +30,7 @@
 		to_chat(user, "You [locked ? "lock" : "unlock"] \the [src] access panel.")
 		return
 
-	else if(istype(W,/obj/item/weapon/crowbar))
+	else if(iscrowbar(W))
 
 		if(!open && locked)
 			to_chat(user, "The access panel is locked shut.")

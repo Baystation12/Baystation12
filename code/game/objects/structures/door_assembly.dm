@@ -230,7 +230,7 @@
 			src.name = "Near finished Airlock Assembly"
 			src.electronics = W
 
-	else if(istype(W, /obj/item/weapon/crowbar) && state == 2 )
+	else if(iscrowbar(W) && state == 2 )
 		//This should never happen, but just in case I guess
 		if (!electronics)
 			to_chat(user, "<span class='notice'>There was nothing to remove.</span>")

@@ -296,7 +296,7 @@
 					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
 					return
 			if(3)
-				if (istype(W, /obj/item/weapon/crowbar))
+				if(iscrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
@@ -337,7 +337,7 @@
 					to_chat(user, "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>")
 					return
 			if(0)
-				if(istype(W, /obj/item/weapon/crowbar))
+				if(iscrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
