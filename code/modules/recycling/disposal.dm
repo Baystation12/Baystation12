@@ -677,7 +677,7 @@
 		plane = ABOVE_PLATING_PLANE
 		base_icon_state = icon_state
 		return
-		
+
 	// pipe is deleted
 	// ensure if holder is present, it is expelled
 	Destroy()
@@ -1215,7 +1215,7 @@
 	return ..()
 
 /obj/machinery/disposal_switch/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/weapon/crowbar))
+	if(iscrowbar(I))
 		var/obj/item/disposal_switch_construct/C = new/obj/item/disposal_switch_construct(src.loc, id_tag)
 		transfer_fingerprints_to(C)
 		user.visible_message("<span class='notice'>\The [user] deattaches \the [src]</span>")

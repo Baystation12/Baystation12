@@ -75,7 +75,7 @@
 			open = 1
 			to_chat(user, "<span class='notice'>You unscrew the battery panel.</span>")
 
-	if (istype(W, /obj/item/weapon/crowbar))
+	if(iscrowbar(W))
 		if(open)
 			if(cell)
 				user.put_in_hands(cell)

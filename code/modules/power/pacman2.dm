@@ -91,7 +91,7 @@
 					to_chat(user, "<span class='notice'>You open the access panel.</span>")
 				else
 					to_chat(user, "<span class='notice'>You close the access panel.</span>")
-			else if(istype(O, /obj/item/weapon/crowbar) && !open)
+			else if(iscrowbar(O) && !open)
 				var/obj/machinery/constructable_frame/machine_frame/new_frame = new /obj/machinery/constructable_frame/machine_frame(src.loc)
 				for(var/obj/item/I in component_parts)
 					I.loc = src.loc

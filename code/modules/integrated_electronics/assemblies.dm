@@ -203,7 +203,7 @@
 			interact(user)
 		else
 			user.put_in_any_hand_if_possible(I)
-	else if(istype(I, /obj/item/weapon/crowbar))
+	else if(iscrowbar(I))
 		if(applied_shell)
 			to_chat(user, "<span class='warning'>You cannot open the assembly while it has a shell attached.</span>")
 			return 0

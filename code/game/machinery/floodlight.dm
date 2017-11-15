@@ -108,7 +108,7 @@
 				unlocked = 1
 				to_chat(user, "You unscrew the battery panel.")
 
-	if (istype(W, /obj/item/weapon/crowbar))
+	if(iscrowbar(W))
 		if(unlocked)
 			if(open)
 				open = 0

@@ -121,7 +121,7 @@
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance hatch")
 		return
-	if(istype(W, /obj/item/weapon/crowbar))
+	if(iscrowbar(W))
 		if(!panel_open)
 			to_chat(user, "Open the maintenance panel first.")
 			return

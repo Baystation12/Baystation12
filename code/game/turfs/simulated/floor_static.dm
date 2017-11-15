@@ -28,8 +28,8 @@
 	icon_state = "jaggy"
 
 /turf/simulated/floor/fixed/alium/attackby(var/obj/item/C, var/mob/user)
-	if(istype(C, /obj/item/weapon/crowbar))
-		to_chat(user, "<span class='notice'>There isn't any openings big enough to pry it away...</span>")
+	if(iscrowbar(C))
+		to_chat(user, "<span class='notice'>There aren't any openings big enough to pry it away...</span>")
 		return
 	return ..()
 
