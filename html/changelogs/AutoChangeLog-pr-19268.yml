@@ -1,0 +1,5 @@
+author: "Serveris"
+delete-after: True
+changes: 
+  - rscadd: "Added the WT45 pistol."
+  - tweak: "Line Officers now spawn with said in their lockers, rather than energy guns."
