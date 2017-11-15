@@ -5,7 +5,7 @@
  * Step 4: Wrench the assembly in place
  * Step 5: Add cables to the assembly
  * Step 6: Set access for the door.
- * Step 7: Screwdriver the door to complete
+ * Step 7: Crowbar the door to complete
  */
 
 
@@ -181,7 +181,7 @@ obj/structure/windoor_assembly/Destroy()
 					W.loc = src.loc
 
 			//Screwdriver to remove airlock electronics. Step 6 undone.
-			else if(istype(W, /obj/item/weapon/screwdriver) && src.electronics)
+			else if(isscrewdriver(W) && src.electronics)
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to uninstall electronics from the airlock assembly.")
 
@@ -197,7 +197,7 @@ obj/structure/windoor_assembly/Destroy()
 					ae.loc = src.loc
 
 			//Crowbar to complete the assembly, Step 7 complete.
-			else if(istype(W, /obj/item/weapon/crowbar))
+			else if(iscrowbar(W))
 				if(!src.electronics)
 					to_chat(usr, "<span class='warning'>The assembly is missing electronics.</span>")
 					return

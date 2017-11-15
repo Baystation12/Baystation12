@@ -168,7 +168,7 @@
 				qdel(W)
 
 		if(8)
-			if(istype(W, /obj/item/weapon/screwdriver))
+			if(isscrewdriver(W))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				var/turf/T = get_turf(user)
 				to_chat(user, "<span class='notice'>Now attaching the gun to the frame...</span>")

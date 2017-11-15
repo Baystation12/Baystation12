@@ -174,7 +174,7 @@
 
 
 /obj/machinery/power/shield_generator/attackby(obj/item/O as obj, mob/user as mob)
-	if(panel_open && (istype(O, /obj/item/device/multitool) || iswirecutter(O)))
+	if(panel_open && ismultitool(O) || iswirecutter(O))
 		attack_hand(user)
 		return
 

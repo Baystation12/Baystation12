@@ -459,7 +459,7 @@
 	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
 		return src.attack_hand(user)
 	src.add_fingerprint(user)
-	if (istype(W, /obj/item/weapon/crowbar) && opened)
+	if(iscrowbar(W) && opened)
 		if (has_electronics==1)
 			if (terminal)
 				to_chat(user, "<span class='warning'>Disconnect wires first.</span>")
@@ -484,7 +484,7 @@
 		else if (opened!=2) //cover isn't removed
 			opened = 0
 			update_icon()
-	else if (istype(W, /obj/item/weapon/crowbar) && !((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)) )
+	else if(iscrowbar(W) && !((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)) )
 		if(coverlocked && !(stat & MAINT))
 			to_chat(user, "<span class='warning'>The cover is locked and cannot be opened.</span>")
 			return
@@ -510,7 +510,7 @@
 			"<span class='notice'>You insert the power cell.</span>")
 		chargecount = 0
 		update_icon()
-	else if	(istype(W, /obj/item/weapon/screwdriver))	// haxing
+	else if(isscrewdriver(W))	// haxing
 		if(opened)
 			if (cell)
 				to_chat(user, "<span class='warning'>Close the APC first.</span>")//Less hints more mystery!
@@ -675,18 +675,16 @@
 			opened = 2
 			user.visible_message("<span class='danger'>The APC cover was knocked down with the [W.name] by [user.name]!</span>", \
 				"<span class='danger'>You knock down the APC cover with your [W.name]!</span>", \
-				"You hear bang")
+				"You hear a bang")
 			update_icon()
 		else
 			if (istype(user, /mob/living/silicon))
 				return src.attack_hand(user)
-			if (!opened && wiresexposed && \
-				(istype(W, /obj/item/device/multitool) || \
-				istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/device/assembly/signaler)))
+			if (!opened && wiresexposed && ismultitool(W) || iswirecutter(W) || istype(W, /obj/item/device/assembly/signaler))
 				return src.attack_hand(user)
 			user.visible_message("<span class='danger'>The [src.name] has been hit with the [W.name] by [user.name]!</span>", \
 				"<span class='danger'>You hit the [src.name] with your [W.name]!</span>", \
-				"You hear bang")
+				"You hear a bang")
 
 // attack with hand - remove cell (if cover open) or interact with the APC
 

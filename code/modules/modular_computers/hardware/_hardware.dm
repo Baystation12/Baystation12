@@ -15,7 +15,7 @@
 
 /obj/item/weapon/computer_hardware/attackby(var/obj/item/W as obj, var/mob/living/user as mob)
 	// Multitool. Runs diagnostics
-	if(istype(W, /obj/item/device/multitool))
+	if(ismultitool(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")
 		diagnostics(user)
 		to_chat(user, "******************************")

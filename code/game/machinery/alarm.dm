@@ -761,7 +761,7 @@
 
 	switch(buildstage)
 		if(2)
-			if(istype(W, /obj/item/weapon/screwdriver))  // Opening that Air Alarm up.
+			if(isscrewdriver(W))  // Opening that Air Alarm up.
 //				to_chat(user, "You pop the Air Alarm's maintence panel open.")
 				wiresexposed = !wiresexposed
 				to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"]")
@@ -800,7 +800,7 @@
 					to_chat(user, "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>")
 					return
 
-			else if(istype(W, /obj/item/weapon/crowbar))
+			else if(iscrowbar(W))
 				to_chat(user, "You start prying out the circuit.")
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				if(do_after(user,20))
@@ -818,7 +818,7 @@
 				update_icon()
 				return
 
-			else if(istype(W, /obj/item/weapon/wrench))
+			else if(iswrench(W))
 				to_chat(user, "You remove the fire alarm assembly from the wall!")
 				new /obj/item/frame/air_alarm(get_turf(user))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -924,7 +924,7 @@ FIRE ALARM
 /obj/machinery/firealarm/attackby(obj/item/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 
-	if (istype(W, /obj/item/weapon/screwdriver) && buildstage == 2)
+	if(isscrewdriver(W) && buildstage == 2)
 		wiresexposed = !wiresexposed
 		update_icon()
 		return
@@ -932,7 +932,7 @@ FIRE ALARM
 	if(wiresexposed)
 		switch(buildstage)
 			if(2)
-				if (istype(W, /obj/item/device/multitool))
+				if(ismultitool(W))
 					src.detecting = !( src.detecting )
 					if (src.detecting)
 						user.visible_message("<span class='notice'>\The [user] has reconnected [src]'s detecting unit!</span>", "<span class='notice'>You have reconnected [src]'s detecting unit.</span>")
@@ -954,7 +954,7 @@ FIRE ALARM
 					else
 						to_chat(user, "<span class='warning'>You need 5 pieces of cable to wire \the [src].</span>")
 						return
-				else if(istype(W, /obj/item/weapon/crowbar))
+				else if(iscrowbar(W))
 					to_chat(user, "You pry out the circuit!")
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 					spawn(20)
@@ -969,7 +969,7 @@ FIRE ALARM
 					buildstage = 1
 					update_icon()
 
-				else if(istype(W, /obj/item/weapon/wrench))
+				else if(iswrench(W))
 					to_chat(user, "You remove the fire alarm assembly from the wall!")
 					new /obj/item/frame/fire_alarm(get_turf(user))
 					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)

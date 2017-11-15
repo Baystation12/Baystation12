@@ -7,7 +7,7 @@
 	thrown_force_divisor = 0.1
 
 /obj/item/weapon/material/butterflyconstruction/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/screwdriver))
+	if(isscrewdriver(W))
 		to_chat(user, "You finish the concealed blade weapon.")
 		new /obj/item/weapon/material/butterfly(user.loc, material.name)
 		qdel(src)

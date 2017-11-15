@@ -949,7 +949,7 @@ About the new airlock wires panel:
 			return
 		else
 			return
-	else if(istype(C, /obj/item/weapon/screwdriver))
+	else if(isscrewdriver(C))
 		if (src.p_open)
 			if (stat & BROKEN)
 				to_chat(usr, "<span class='warning'>The panel is broken and cannot be closed.</span>")
@@ -960,14 +960,14 @@ About the new airlock wires panel:
 		src.update_icon()
 	else if(iswirecutter(C))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/multitool))
+	else if(ismultitool(C))
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/device/assembly/signaler))
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
-	else if(!repairing && istype(C, /obj/item/weapon/crowbar))
+	else if(!repairing && iscrowbar(C))
 		if(src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && !src.locked)) && !brace)
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")

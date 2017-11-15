@@ -131,7 +131,7 @@
 	return 1
 
 /obj/machinery/oxygen_pump/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(W))
 		stat ^= MAINT
 		user.visible_message("<span class='notice'>\The [user] [stat & MAINT ? "opens" : "closes"] \the [src].</span>", "<span class='notice'>You [stat & MAINT ? "open" : "close"] \the [src].</span>")
 		if(stat & MAINT)

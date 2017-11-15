@@ -41,7 +41,7 @@
 	tg_ui_interact(user)
 
 /obj/item/device/suit_sensor_jammer/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/crowbar))
+	if(iscrowbar(I))
 		if(bcell)
 			to_chat(user, "<span class='notice'>You remove \the [bcell].</span>")
 			disable()

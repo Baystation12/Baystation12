@@ -77,12 +77,12 @@
 /obj/vehicle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/hand_labeler))
 		return
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(W))
 		if(!locked)
 			open = !open
 			update_icon()
 			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
-	else if(istype(W, /obj/item/weapon/crowbar) && cell && open)
+	else if(iscrowbar(W) && cell && open)
 		remove_cell(user)
 
 	else if(istype(W, /obj/item/weapon/cell) && !cell && open)

@@ -225,7 +225,7 @@
 	//doesn't use power cells
 	if(istype(I, /obj/item/weapon/cell))
 		return
-	if (istype(I, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(I))
 		return
 
 	//doesn't hold tanks

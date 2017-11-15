@@ -38,7 +38,7 @@
 			return
 		else
 			name = ("bookcase ([newname])")
-	else if(istype(O,/obj/item/weapon/screwdriver))
+	else if(isscrewdriver(O))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 		to_chat(user, "<span class='notice'>You begin dismantling \the [src].</span>")
 		if(do_after(user,25,src))

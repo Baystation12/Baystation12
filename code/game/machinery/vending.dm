@@ -189,11 +189,11 @@
 
 		GLOB.nanomanager.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
-	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
+	else if(ismultitool(W) || iswirecutter(W))
 		if(src.panel_open)
 			attack_hand(user)
 		return
-	else if((flags & OBJ_ANCHORABLE) && istype(W, /obj/item/weapon/wrench))
+	else if((flags & OBJ_ANCHORABLE) && iswrench(W))
 		wrench_floor_bolts(user)
 		power_change()
 		return

@@ -71,7 +71,7 @@
 	if(istype(W, /obj/item/weapon/reagent_containers/chem_disp_cartridge))
 		add_cartridge(W, user)
 
-	else if(istype(W, /obj/item/weapon/screwdriver))
+	else if(isscrewdriver(W))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
 		if(!label) return
 		var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = remove_cartridge(label)

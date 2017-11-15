@@ -30,7 +30,7 @@
 		to_chat(user, "You [locked ? "lock" : "unlock"] \the [src] access panel.")
 		return
 
-	else if(istype(W,/obj/item/weapon/crowbar))
+	else if(iscrowbar(W))
 
 		if(!open && locked)
 			to_chat(user, "The access panel is locked shut.")
@@ -43,7 +43,7 @@
 	if(open)
 
 		// Hacking.
-		if(iswirecutter(W) || istype(W,/obj/item/device/multitool))
+		if(iswirecutter(W) || ismultitool(W))
 			if(open)
 				wires.Interact(user)
 			else
@@ -111,7 +111,7 @@
 			air_supply = null
 			return
 
-		else if(istype(W,/obj/item/weapon/screwdriver))
+		else if(isscrewdriver(W))
 
 			var/list/current_mounts = list()
 			if(cell) current_mounts   += "cell"

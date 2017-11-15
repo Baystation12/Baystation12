@@ -271,7 +271,7 @@
 		return 1
 
 /obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(W))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(is_open)
 			to_chat(user, "<span class='notice'>You close the panel.</span>")

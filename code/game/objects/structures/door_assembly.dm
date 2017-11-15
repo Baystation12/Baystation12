@@ -230,7 +230,7 @@
 			src.name = "Near finished Airlock Assembly"
 			src.electronics = W
 
-	else if(istype(W, /obj/item/weapon/crowbar) && state == 2 )
+	else if(iscrowbar(W) && state == 2 )
 		//This should never happen, but just in case I guess
 		if (!electronics)
 			to_chat(user, "<span class='notice'>There was nothing to remove.</span>")
@@ -273,7 +273,7 @@
 								to_chat(user, "<span class='notice'>You installed [material_display_name(material_name)] plating into the airlock assembly.</span>")
 								glass = material_name
 
-	else if(istype(W, /obj/item/weapon/screwdriver) && state == 2 )
+	else if(isscrewdriver(W) && state == 2 )
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now finishing the airlock.</span>")
 

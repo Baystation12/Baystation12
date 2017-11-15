@@ -197,7 +197,7 @@ var/list/possible_cable_coil_colours
 			return
 		coil.cable_join(src, user)
 
-	else if(istype(W, /obj/item/device/multitool))
+	else if(ismultitool(W))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
 			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")

@@ -733,7 +733,7 @@
 				to_chat(user, "<span class='warning'>Invalid ID: Access denied.</span>")
 		else
 			to_chat(user, "<span class='warning'>Maintenance protocols disabled by operator.</span>")
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(iswrench(W))
 		if(state==1)
 			state = 2
 			to_chat(user, "You undo the securing bolts.")
@@ -741,7 +741,7 @@
 			state = 1
 			to_chat(user, "You tighten the securing bolts.")
 		return
-	else if(istype(W, /obj/item/weapon/crowbar))
+	else if(iscrowbar(W))
 		if(state==2)
 			state = 3
 			to_chat(user, "You open the hatch to the power unit")
@@ -758,7 +758,7 @@
 			else
 				to_chat(user, "There's not enough wire to finish the task.")
 		return
-	else if(istype(W, /obj/item/weapon/screwdriver))
+	else if(isscrewdriver(W))
 		if(hasInternalDamage(MECHA_INT_TEMP_CONTROL))
 			clearInternalDamage(MECHA_INT_TEMP_CONTROL)
 			to_chat(user, "You repair the damaged temperature controller.")
@@ -773,7 +773,7 @@
 			to_chat(user, "You screw the cell in place.")
 		return
 
-	else if(istype(W, /obj/item/device/multitool))
+	else if(ismultitool(W))
 		if(state>=3 && src.occupant)
 			to_chat(user, "You attempt to eject the pilot using the maintenance controls.")
 			if(src.occupant.stat)

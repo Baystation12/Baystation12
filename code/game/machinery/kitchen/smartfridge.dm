@@ -191,7 +191,7 @@
 ********************/
 
 /obj/machinery/smartfridge/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(O))
 		panel_open = !panel_open
 		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
 		overlays.Cut()
@@ -200,7 +200,7 @@
 		GLOB.nanomanager.update_uis(src)
 		return
 
-	if(istype(O, /obj/item/device/multitool) || iswirecutter(O))
+	if(ismultitool(O) || iswirecutter(O))
 		if(panel_open)
 			attack_hand(user)
 		return

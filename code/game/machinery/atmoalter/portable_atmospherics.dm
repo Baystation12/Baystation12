@@ -167,7 +167,7 @@
 		power_change()
 		return
 
-	if(istype(I, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(I))
 		if(!cell)
 			to_chat(user, "<span class='warning'>There is no power cell installed.</span>")
 			return

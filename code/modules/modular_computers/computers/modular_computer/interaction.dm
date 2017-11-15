@@ -205,7 +205,7 @@
 			to_chat(user, "You repair \the [src].")
 		return
 
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(W))
 		var/list/all_components = get_all_components()
 		if(!all_components.len)
 			to_chat(user, "This device doesn't have any components installed.")

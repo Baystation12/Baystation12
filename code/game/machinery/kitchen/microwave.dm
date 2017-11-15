@@ -53,7 +53,7 @@
 
 /obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(src.broken > 0)
-		if(src.broken == 2 && istype(O, /obj/item/weapon/screwdriver)) // If it's broken and they're using a screwdriver
+		if(src.broken == 2 && isscrewdriver(O)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
 				"<span class='notice'>You start to fix part of the microwave.</span>" \
@@ -133,7 +133,7 @@
 		var/obj/item/grab/G = O
 		to_chat(user, "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>")
 		return 1
-	else if(istype(O,/obj/item/weapon/crowbar))
+	else if(iscrowbar(O))
 		user.visible_message( \
 			"<span class='notice'>\The [user] begins [src.anchored ? "securing" : "unsecuring"] the microwave.</span>", \
 			"<span class='notice'>You attempt to [src.anchored ? "secure" : "unsecure"] the microwave.</span>"

@@ -105,7 +105,7 @@
 			update_material()
 		return 1
 
-	if(carpeted && istype(W, /obj/item/weapon/crowbar))
+	if(carpeted && iscrowbar(W))
 		user.visible_message("<span class='notice'>\The [user] removes the carpet from \the [src].</span>",
 		                              "<span class='notice'>You remove the carpet from \the [src].</span>")
 		new /obj/item/stack/tile/carpet(loc)

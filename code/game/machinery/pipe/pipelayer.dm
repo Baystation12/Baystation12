@@ -45,7 +45,7 @@
 		user.visible_message("<span class='notice'>[user] has set \the [src] to manufacture [P_type_t].</span>", "<span class='notice'>You set \the [src] to manufacture [P_type_t].</span>")
 		return
 
-	if(istype(W, /obj/item/weapon/crowbar))
+	if(iscrowbar(W))
 		a_dis=!a_dis
 		user.visible_message("<span class='notice'>[user] has [!a_dis?"de":""]activated auto-dismantling.</span>", "<span class='notice'>You [!a_dis?"de":""]activate auto-dismantling.</span>")
 		return
@@ -62,7 +62,7 @@
 
 		return
 
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(W))
 		if(metal)
 			var/m = round(input(usr,"Please specify the amount of metal to remove","Remove metal",min(round(metal),50)) as num, 1)
 			m = min(m, 50)

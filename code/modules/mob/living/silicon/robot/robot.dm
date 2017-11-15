@@ -509,7 +509,7 @@
 			for(var/mob/O in viewers(user, null))
 				O.show_message(text("<span class='warning'>[user] has fixed some of the burnt wires on [src]!</span>"), 1)
 
-	else if (istype(W, /obj/item/weapon/crowbar))	// crowbar means open or close the cover
+	else if(iscrowbar(W))	// crowbar means open or close the cover - we all know what a crowbar is by now
 		if(opened)
 			if(cell)
 				user.visible_message("<span class='notice'>\The [user] begins clasping shut \the [src]'s maintenance hatch.</span>", "<span class='notice'>You begin closing up \the [src].</span>")
@@ -603,12 +603,12 @@
 			C.brute_damage = 0
 			C.electronics_damage = 0
 
-	else if(iswirecutter(W) || istype(W, /obj/item/device/multitool))
+	else if(iswirecutter(W) || ismultitool(W))
 		if (wiresexposed)
 			wires.Interact(user)
 		else
 			to_chat(user, "You can't reach the wiring.")
-	else if(istype(W, /obj/item/weapon/screwdriver) && opened && !cell)	// haxing
+	else if(isscrewdriver(W) && opened && !cell)	// haxing
 		wiresexposed = !wiresexposed
 		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"].")
 		update_icon()

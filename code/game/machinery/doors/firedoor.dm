@@ -194,14 +194,14 @@
 			update_icon()
 			return
 
-	if(density && istype(C, /obj/item/weapon/screwdriver))
+	if(density && isscrewdriver(C))
 		hatch_open = !hatch_open
 		user.visible_message("<span class='danger'>[user] has [hatch_open ? "opened" : "closed"] \the [src] maintenance hatch.</span>",
 									"You have [hatch_open ? "opened" : "closed"] the [src] maintenance hatch.")
 		update_icon()
 		return
 
-	if(blocked && istype(C, /obj/item/weapon/crowbar) && !repairing)
+	if(blocked && iscrowbar(C) && !repairing)
 		if(!hatch_open)
 			to_chat(user, "<span class='danger'>You must open the maintenance hatch first!</span>")
 		else
@@ -219,11 +219,11 @@
 		to_chat(user, "<span class='danger'>\The [src] is welded shut!</span>")
 		return
 
-	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/material/twohanded/fireaxe))
+	if(iscrowbar(C) || istype(C,/obj/item/weapon/material/twohanded/fireaxe))
 		if(operating)
 			return
 
-		if(blocked && istype(C, /obj/item/weapon/crowbar))
+		if(blocked && iscrowbar(C))
 			user.visible_message("<span class='danger'>\The [user] pries at \the [src] with \a [C], but \the [src] is welded in place!</span>",\
 			"You try to pry \the [src] [density ? "open" : "closed"], but it is welded in place!",\
 			"You hear someone struggle and metal straining.")
@@ -238,7 +238,7 @@
 				"You start forcing \the [src] [density ? "open" : "closed"] with \the [C]!",\
 				"You hear metal strain.")
 		if(do_after(user,30,src))
-			if(istype(C, /obj/item/weapon/crowbar))
+			if(iscrowbar(C))
 				if(stat & (BROKEN|NOPOWER) || !density)
 					user.visible_message("<span class='danger'>\The [user] forces \the [src] [density ? "open" : "closed"] with \a [C]!</span>",\
 					"You force \the [src] [density ? "open" : "closed"] with \the [C]!",\

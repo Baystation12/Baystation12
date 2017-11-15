@@ -61,7 +61,7 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar/attackby(obj/item/weapon/W, mob/user)
 
-	if(istype(W, /obj/item/weapon/crowbar))
+	if(iscrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar panel.</span>")
 		if(do_after(user, 50,src))
@@ -264,7 +264,7 @@ var/list/solars_list = list()
 			user.visible_message("<span class='notice'>[user] inserts the electronics into the solar assembly.</span>")
 			return 1
 	else
-		if(istype(W, /obj/item/weapon/crowbar))
+		if(iscrowbar(W))
 			new /obj/item/weapon/tracker_electronics(src.loc)
 			tracker = 0
 			user.visible_message("<span class='notice'>[user] takes out the electronics from the solar assembly.</span>")
@@ -403,7 +403,7 @@ var/list/solars_list = list()
 	return
 
 /obj/machinery/power/solar_control/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(I))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20,src))
 			if (src.stat & BROKEN)

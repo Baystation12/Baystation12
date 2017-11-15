@@ -163,7 +163,7 @@
 		else
 			to_chat(user, "<span class='notice'>[src] already has a cell installed.</span>")
 
-	else if(istype(W, /obj/item/weapon/screwdriver))
+	else if(isscrewdriver(W))
 		if(cell)
 			var/obj/item/C = cell
 			C.loc = get_turf(user)
@@ -265,7 +265,7 @@
 			else
 				to_chat(user, "<span class='notice'>You need at least three plastic sheets to complete this task.</span>")
 			return
-	else if(istype(W,/obj/item/weapon/screwdriver))
+	else if(isscrewdriver(W))
 		if(buildstate == 5)
 			to_chat(user, "<span class='notice'>You secure the crossbow's various parts.</span>")
 			new /obj/item/weapon/gun/launcher/crossbow(get_turf(src))

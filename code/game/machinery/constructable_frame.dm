@@ -81,7 +81,7 @@
 						A.amount = 5
 
 			if(3)
-				if(istype(P, /obj/item/weapon/crowbar))
+				if(iscrowbar(P))
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 					state = 2
 					circuit.loc = src.loc
@@ -97,7 +97,7 @@
 					components = null
 					icon_state = "box_1"
 				else
-					if(istype(P, /obj/item/weapon/screwdriver))
+					if(isscrewdriver(P))
 						var/component_check = 1
 						for(var/R in req_components)
 							if(req_components[R] > 0)

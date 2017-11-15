@@ -45,7 +45,7 @@ var/bomb_set
 		GLOB.nanomanager.update_uis(src)
 
 /obj/machinery/nuclearbomb/attackby(obj/item/weapon/O as obj, mob/user as mob, params)
-	if (istype(O, /obj/item/weapon/screwdriver))
+	if(isscrewdriver(O))
 		src.add_fingerprint(user)
 		if (src.auth)
 			if (panel_open == 0)
@@ -69,7 +69,7 @@ var/bomb_set
 			flick("lock", src)
 		return
 
-	if (panel_open && (istype(O, /obj/item/device/multitool) || iswirecutter(O)))
+	if (panel_open && ismultitool(O) || iswirecutter(O))
 		return attack_hand(user)
 
 	if (src.extended)
