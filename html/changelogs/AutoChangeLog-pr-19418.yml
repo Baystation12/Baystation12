@@ -1,0 +1,4 @@
+author: "mkalash"
+delete-after: True
+changes: 
+  - tweak: "You can now place crowbars in security belts."
