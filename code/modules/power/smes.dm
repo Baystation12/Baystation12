@@ -312,7 +312,7 @@
 			to_chat(user, "You repair all structural damage to \the [src]")
 			damage = 0
 		return 0
-	else if(istype(W, /obj/item/weapon/wirecutters) && !building_terminal)
+	else if(iswirecutter(W) && !building_terminal)
 		building_terminal = 1
 		var/obj/machinery/power/terminal/term
 		for(var/obj/machinery/power/terminal/T in get_turf(user))

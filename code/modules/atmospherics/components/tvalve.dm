@@ -340,7 +340,7 @@
 				go_to_side()
 
 /obj/machinery/atmospherics/tvalve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))
+	if(!iswrench(W))
 		return ..()
 	if (istype(src, /obj/machinery/atmospherics/tvalve/digital))
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it's too complicated.</span>")

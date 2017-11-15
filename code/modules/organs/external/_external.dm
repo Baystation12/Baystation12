@@ -136,7 +136,7 @@
 		if (3)
 			burn_damage = 3
 	burn_damage *= robotic/burn_mod //ignore burn mod for EMP damage
-	
+
 	var/power = 4 - severity //stupid reverse severity
 	for(var/obj/item/I in implants)
 		if(I.flags & CONDUCT)
@@ -194,7 +194,7 @@
 				stage++
 				return
 		if(2)
-			if(W.sharp || istype(W,/obj/item/weapon/hemostat) || istype(W,/obj/item/weapon/wirecutters))
+			if(W.sharp || istype(W,/obj/item/weapon/hemostat) || iswirecutter(W))
 				var/list/organs = get_contents_recursive()
 				if(organs.len)
 					var/obj/item/removing = pick(organs)

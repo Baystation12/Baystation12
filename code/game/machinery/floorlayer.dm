@@ -36,7 +36,7 @@
 
 /obj/machinery/floorlayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
 
-	if (istype(W, /obj/item/weapon/wrench))
+	if(iswrench(W))
 		var/m = input("Choose work mode", "Mode") as null|anything in mode
 		mode[m] = !mode[m]
 		var/O = mode[m]

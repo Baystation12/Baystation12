@@ -200,7 +200,7 @@
 		GLOB.nanomanager.update_uis(src)
 		return
 
-	if(istype(O, /obj/item/device/multitool)||istype(O, /obj/item/weapon/wirecutters))
+	if(istype(O, /obj/item/device/multitool) || iswirecutter(O))
 		if(panel_open)
 			attack_hand(user)
 		return

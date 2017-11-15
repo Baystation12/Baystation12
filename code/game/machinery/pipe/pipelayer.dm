@@ -39,7 +39,7 @@
 
 /obj/machinery/pipelayer/attackby(var/obj/item/W as obj, var/mob/user as mob)
 
-	if (istype(W, /obj/item/weapon/wrench))
+	if(iswrench(W))
 		P_type_t = input("Choose pipe type", "Pipe type") as null|anything in Pipes
 		P_type = Pipes[P_type_t]
 		user.visible_message("<span class='notice'>[user] has set \the [src] to manufacture [P_type_t].</span>", "<span class='notice'>You set \the [src] to manufacture [P_type_t].</span>")

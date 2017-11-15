@@ -45,16 +45,16 @@
 				to_chat(user, "You fasten the bolts.")
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				construct_op --
-			if(istype(P, /obj/item/weapon/wrench))
+			if(iswrench(P))
 				to_chat(user, "You dislodge the external plating.")
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				construct_op ++
 		if(2)
-			if(istype(P, /obj/item/weapon/wrench))
+			if(iswrench(P))
 				to_chat(user, "You secure the external plating.")
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				construct_op --
-			if(istype(P, /obj/item/weapon/wirecutters))
+			if(iswirecutter(P))
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				to_chat(user, "You remove the cables.")
 				construct_op ++

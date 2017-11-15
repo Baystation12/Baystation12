@@ -43,7 +43,7 @@
 	if(open)
 
 		// Hacking.
-		if(istype(W,/obj/item/weapon/wirecutters) || istype(W,/obj/item/device/multitool))
+		if(iswirecutter(W) || istype(W,/obj/item/device/multitool))
 			if(open)
 				wires.Interact(user)
 			else
@@ -100,7 +100,7 @@
 			src.cell = W
 			return
 
-		else if(istype(W,/obj/item/weapon/wrench))
+		else if(iswrench(W))
 
 			if(!air_supply)
 				to_chat(user, "There is not tank to remove.")

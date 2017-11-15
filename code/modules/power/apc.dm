@@ -581,7 +581,7 @@
 					"You add cables to the APC frame.")
 				make_terminal()
 				terminal.connect_to_network()
-	else if (istype(W, /obj/item/weapon/wirecutters) && terminal && opened && has_electronics!=2)
+	else if(iswirecutter(W) && terminal && opened && has_electronics!=2)
 		var/turf/T = loc
 		if(istype(T) && !T.is_plating())
 			to_chat(user, "<span class='warning'>You must remove the floor plating in front of the APC first.</span>")

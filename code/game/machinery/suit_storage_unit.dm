@@ -826,7 +826,7 @@
 			return
 
 	//Hacking init.
-	if(istype(I, /obj/item/device/multitool) || istype(I, /obj/item/weapon/wirecutters))
+	if(istype(I, /obj/item/device/multitool) || iswirecutter(I))
 		if(panel_open)
 			attack_hand(user)
 		return

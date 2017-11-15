@@ -76,7 +76,7 @@
 			O.loc = src
 			to_chat(user, "<span class='notice'>You add the phoron tank to the generator.</span>")
 		else if(!active)
-			if(istype(O, /obj/item/weapon/wrench))
+			if(iswrench(O))
 				anchored = !anchored
 				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 				if(anchored)

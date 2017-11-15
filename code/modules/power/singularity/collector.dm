@@ -75,7 +75,7 @@ var/global/list/rad_collectors = list()
 		if(P && !src.locked)
 			eject()
 			return 1
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(iswrench(W))
 		if(P)
 			to_chat(user, "<span class='notice'>Remove the phoron tank first.</span>")
 			return 1

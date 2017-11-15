@@ -24,7 +24,7 @@
 			authorized = 1
 	switch(state)
 		if(0)
-			if(istype(P, /obj/item/weapon/wrench))
+			if(iswrench(P))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 				if(do_after(user, 20, src))
 					to_chat(user, "<span class='notice'>You wrench the frame into place.</span>")
@@ -43,7 +43,7 @@
 					qdel(src)
 					return
 		if(1)
-			if(istype(P, /obj/item/weapon/wrench))
+			if(iswrench(P))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 				if(do_after(user, 20, src))
 					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
@@ -88,7 +88,7 @@
 						to_chat(user, "<span class='notice'>You add cables to the frame.</span>")
 				return
 		if(3)
-			if(istype(P, /obj/item/weapon/wirecutters))
+			if(iswirecutter(P))
 				if (brain)
 					to_chat(user, "Get that brain out of there first")
 				else

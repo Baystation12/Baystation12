@@ -100,7 +100,7 @@ field_generator power level display
 	if(active)
 		to_chat(user, "The [src] needs to be off.")
 		return
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(iswrench(W))
 		switch(state)
 			if(0)
 				state = 1

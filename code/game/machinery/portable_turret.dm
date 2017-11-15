@@ -307,7 +307,7 @@ var/list/turret_icons
 					to_chat(user, "<span class='notice'>You remove the turret but did not manage to salvage anything.</span>")
 				qdel(src) // qdel
 
-	else if((istype(I, /obj/item/weapon/wrench)))
+	else if(iswrench(I))
 		if(enabled || raised)
 			to_chat(user, "<span class='warning'>You cannot unsecure an active turret!</span>")
 			return
@@ -688,7 +688,7 @@ var/list/turret_icons
 	//this is a bit unwieldy but self-explanatory
 	switch(build_step)
 		if(0)	//first step
-			if(istype(I, /obj/item/weapon/wrench) && !anchored)
+			if(iswrench(I) && !anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You secure the external bolts.</span>")
 				anchored = 1

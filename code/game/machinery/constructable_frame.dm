@@ -43,7 +43,7 @@
 							state = 2
 							icon_state = "box_1"
 				else
-					if(istype(P, /obj/item/weapon/wrench))
+					if(iswrench(P))
 						playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 						to_chat(user, "<span class='notice'>You dismantle the frame</span>")
 						new /obj/item/stack/material/steel(src.loc, 5)
@@ -72,7 +72,7 @@
 					else
 						to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
 				else
-					if(istype(P, /obj/item/weapon/wirecutters))
+					if(iswirecutter(P))
 						playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 						to_chat(user, "<span class='notice'>You remove the cables.</span>")
 						state = 1

@@ -55,7 +55,7 @@
 		reinforce_girder()
 
 /obj/structure/girder/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench) && state == 0)
+	if(iswrench(W) && state == 0)
 		if(anchored && !reinf_material)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
@@ -94,7 +94,7 @@
 			reinforcing = !reinforcing
 			to_chat(user, "<span class='notice'>\The [src] can now be [reinforcing? "reinforced" : "constructed"]!</span>")
 
-	else if(istype(W, /obj/item/weapon/wirecutters) && state == 1)
+	else if(iswirecutter(W) && state == 1)
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now removing support struts...</span>")
 		if(do_after(user, 40,src))
@@ -232,7 +232,7 @@
 	qdel(src)
 
 /obj/structure/girder/cult/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
+	if(iswrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
 		if(do_after(user,40,src))

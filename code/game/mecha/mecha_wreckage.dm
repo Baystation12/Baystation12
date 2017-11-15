@@ -48,7 +48,7 @@
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 			return
-	if(istype(W, /obj/item/weapon/wirecutters))
+	if(iswirecutter(W))
 		if(salvage_num <= 0)
 			to_chat(user, "You don't see anything that can be cut with [W].")
 			return

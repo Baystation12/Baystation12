@@ -148,7 +148,7 @@
 
 /obj/machinery/power/emitter/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/weapon/wrench))
+	if(iswrench(W))
 		if(active)
 			to_chat(user, "Turn off [src] first.")
 			return

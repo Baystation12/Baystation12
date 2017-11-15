@@ -116,7 +116,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 			var/obj/item/I = L.get_active_hand()
 			holder.add_hiddenprint(L)
 			if(href_list["cut"]) // Toggles the cut/mend status
-				if(istype(I, /obj/item/weapon/wirecutters))
+				if(iswirecutter(I))
 					var/colour = href_list["cut"]
 					CutWireColour(colour)
 				else

@@ -226,7 +226,7 @@ var/list/solars_list = list()
 /obj/item/solar_assembly/attackby(var/obj/item/weapon/W, var/mob/user)
 
 	if(!anchored && isturf(loc))
-		if(istype(W, /obj/item/weapon/wrench))
+		if(iswrench(W))
 			anchored = 1
 			pixel_x = 0
 			pixel_y = 0
@@ -235,7 +235,7 @@ var/list/solars_list = list()
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 	else
-		if(istype(W, /obj/item/weapon/wrench))
+		if(iswrench(W))
 			anchored = 0
 			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from it's place.</span>")
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)

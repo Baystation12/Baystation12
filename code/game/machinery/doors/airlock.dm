@@ -958,7 +958,7 @@ About the new airlock wires panel:
 		else
 			src.p_open = 1
 		src.update_icon()
-	else if(istype(C, /obj/item/weapon/wirecutters))
+	else if(iswirecutter(C))
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/device/multitool))
 		return src.attack_hand(user)

@@ -184,7 +184,7 @@
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
 			return
 
-	else if(istype(W, /obj/item/weapon/wrench) && state == 0)
+	else if(iswrench(W) && state == 0)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		if(anchored)
 			user.visible_message("[user] begins unsecuring the airlock assembly from the floor.", "You starts unsecuring the airlock assembly from the floor.")
@@ -207,7 +207,7 @@
 				src.state = 1
 				to_chat(user, "<span class='notice'>You wire the airlock.</span>")
 
-	else if(istype(W, /obj/item/weapon/wirecutters) && state == 1 )
+	else if(iswirecutter(W) && state == 1 )
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		user.visible_message("[user] cuts the wires from the airlock assembly.", "You start to cut the wires from airlock assembly.")
 

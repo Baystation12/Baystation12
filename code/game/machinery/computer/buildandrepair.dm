@@ -14,7 +14,7 @@
 /obj/structure/computerframe/attackby(obj/item/P as obj, mob/user as mob)
 	switch(state)
 		if(0)
-			if(istype(P, /obj/item/weapon/wrench))
+			if(iswrench(P))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				if(do_after(user, 20, src))
 					to_chat(user, "<span class='notice'>You wrench the frame into place.</span>")
@@ -32,7 +32,7 @@
 					new /obj/item/stack/material/steel( src.loc, 5 )
 					qdel(src)
 		if(1)
-			if(istype(P, /obj/item/weapon/wrench))
+			if(iswrench(P))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				if(do_after(user, 20, src))
 					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
@@ -80,7 +80,7 @@
 						state = 3
 						icon_state = "3"
 		if(3)
-			if(istype(P, /obj/item/weapon/wirecutters))
+			if(iswirecutter(P))
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You remove the cables.</span>")
 				src.state = 2

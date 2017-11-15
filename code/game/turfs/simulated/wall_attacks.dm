@@ -248,7 +248,7 @@
 	else
 		switch(construction_stage)
 			if(6)
-				if (istype(W, /obj/item/weapon/wirecutters))
+				if(iswirecutter(W))
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
 					new /obj/item/stack/rods( src )
@@ -306,7 +306,7 @@
 					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
 					return
 			if(2)
-				if (istype(W, /obj/item/weapon/wrench))
+				if(iswrench(W))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
 					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 2)

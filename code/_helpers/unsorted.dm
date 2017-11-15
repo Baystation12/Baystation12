@@ -896,7 +896,7 @@ var/global/list/common_tools = list(
 	return 0
 
 /proc/iswirecutter(O)
-	if(istype(O, /obj/item/weapon/wirecutters))
+	if(istype(O, /obj/item/weapon/wirecutters)) //check
 		return 1
 	return 0
 
@@ -911,7 +911,7 @@ var/global/list/common_tools = list(
 	return 0
 
 /proc/iscrowbar(O)
-	if(istype(O, /obj/item/weapon/crowbar))
+	if(istype(O, /obj/item/weapon/crowbar)) //check
 		return 1
 	return 0
 
@@ -1118,7 +1118,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	simulated = 0
 
 	see_in_dark = 1e6
-	
+
 	virtual_mob = null
 
 /atom/proc/get_light_and_color(var/atom/origin)

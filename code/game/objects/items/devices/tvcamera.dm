@@ -145,7 +145,7 @@
 				desc = "This TV camera assembly has wires sticking out"
 				return
 		if(3)
-			if(istype(W, /obj/item/weapon/wirecutters))
+			if(iswirecutter(W))
 				to_chat(user, "<span class='notice'> You trim the wires.</span>")
 				buildstep++
 				desc = "This TV camera assembly needs casing."

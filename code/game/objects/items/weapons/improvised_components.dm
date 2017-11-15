@@ -60,7 +60,7 @@
 		var/obj/item/weapon/material/tmp_shard = I
 		finished = new /obj/item/weapon/material/twohanded/spear(get_turf(user), tmp_shard.material.name)
 		to_chat(user, "<span class='notice'>You fasten \the [I] to the top of the rod with the cable.</span>")
-	else if(istype(I, /obj/item/weapon/wirecutters))
+	else if(iswirecutter(I))
 		finished = new /obj/item/weapon/melee/baton/cattleprod(get_turf(user))
 		to_chat(user, "<span class='notice'>You fasten the wirecutters to the top of the rod with the cable, prongs outward.</span>")
 	if(finished)

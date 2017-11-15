@@ -180,7 +180,7 @@
 			try_install_component(user, C)
 		else
 			to_chat(user, "This component is too large for \the [src].")
-	if(istype(W, /obj/item/weapon/wrench))
+	if(iswrench(W))
 		var/list/components = get_all_components()
 		if(components.len)
 			to_chat(user, "Remove all components from \the [src] before disassembling it.")

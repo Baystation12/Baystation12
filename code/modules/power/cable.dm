@@ -157,7 +157,7 @@ var/list/possible_cable_coil_colours
 	if(!T.is_plating())
 		return
 
-	if(istype(W, /obj/item/weapon/wirecutters))
+	if(iswirecutter(W))
 		if(d1 == UP || d2 == UP)
 			to_chat(user, "<span class='warning'>You must cut this cable from above.</span>")
 			return

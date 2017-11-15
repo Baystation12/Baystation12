@@ -81,7 +81,7 @@ var/global/list/light_type_cache = list()
 			to_chat(usr, "You have to unscrew the case first.")
 			return
 
-	if(istype(W, /obj/item/weapon/wirecutters))
+	if(iswirecutter(W))
 		if (src.stage != 2) return
 		src.stage = 1
 		src.update_icon()
