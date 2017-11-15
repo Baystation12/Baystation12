@@ -19,6 +19,7 @@ num=`grep -E 'world<<|world[[:space:]]<<' **/*.dm | wc -l`; echo "$num world<< u
 num=`grep -E 'world.log<<|world.log[[:space:]]<<' **/*.dm | wc -l`; echo "$num world.log<< uses (expecting exactly ${WORLD_LOG_COUNT})"; [ $num -eq ${WORLD_LOG_COUNT} ] || FAILED=1
 num=`grep -P '(?<!<)<<(?!<)' **/*.dm | wc -l`; echo "$num << uses (expecting exactly ${ANGLE_BRACKET_COUNT})"; [ $num -eq ${ANGLE_BRACKET_COUNT} ] || FAILED=1
 num=`grep -P '^( {4,})' **/*.dm | wc -l`; echo "$num incorrect indentations (expecting exactly 0)"; [ $num -eq 0 ] || FAILED=1
+num=`grep -E 'text2path' **/*.dm | wc -l`; echo "$num text2path uses (expecting exactly 39)"; [ $num -eq 39 ] || FAILED=1
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`; echo "$num non-yml files (expecting exactly 2)"; [ $num -eq 2 ] || FAILED=1
 
 [[ $FAILED -eq 1 ]] && exit 1 || exit 0
