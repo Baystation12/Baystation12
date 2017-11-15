@@ -33,7 +33,6 @@
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/weapon/gun/projectile/colt/officer,
 		/obj/item/ammo_magazine/c45m,
-		/obj/item/ammo_magazine/c45m,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
