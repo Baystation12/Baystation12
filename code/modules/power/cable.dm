@@ -470,16 +470,16 @@ obj/structure/cable/proc/cableColor(var/colorC)
 #define MAXCOIL 30
 
 /obj/item/stack/cable_coil
-	name = "cable coil"
+	name = "multipurpose cable coil"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
 	randpixel = 2
 	amount = MAXCOIL
 	max_amount = MAXCOIL
 	color = COLOR_RED
-	desc = "A coil of power cable."
-	throwforce = 10
-	w_class = ITEM_SIZE_SMALL
+	desc = "A coil of wiring, for delicate electronics use aswell as the more basic cable laying."
+	throwforce = 0
+	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
 	throw_range = 5
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 20)
