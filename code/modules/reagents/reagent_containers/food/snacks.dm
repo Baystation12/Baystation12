@@ -1210,7 +1210,7 @@
 	trash = /obj/item/trash/raisins
 	filling_color = "#343834"
 	center_of_mass = "x=15;y=4"
-	nutriment_desc = list("dried raisins" = 6)
+	nutriment_desc = list("raisins" = 6)
 	nutriment_amt = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/spacetwinkie
