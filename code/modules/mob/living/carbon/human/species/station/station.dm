@@ -70,23 +70,18 @@
 		return "staring blankly, not reacting to your presence"
 	return ..()
 
-/datum/species/unathi
+/datum/species/human/unathi
 	name = SPECIES_UNATHI
 	name_plural = SPECIES_UNATHI
 	icobase = 'icons/mob/human_races/r_lizard.dmi'
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
 	tail = "sogtail"
 	tail_animation = 'icons/mob/species/unathi/tail.dmi'
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/tail, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	primitive_form = "Stok"
-	darksight = 3
 	gluttonous = GLUT_TINY
-	slowdown = 0.5
-	brute_mod = 0.8
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_UNATHI)
 	name_language = LANGUAGE_UNATHI
-	health_hud_intensity = 2
 
 	min_age = 18
 	max_age = 260
@@ -97,15 +92,7 @@
 	else, frequently even their own lives. They prefer warmer temperatures than most species and \
 	their native tongue is a heavy hissing laungage called Sinta'Unathi."
 
-	cold_level_1 = 280 //Default 260 - Lower is better
-	cold_level_2 = 220 //Default 200
-	cold_level_3 = 130 //Default 120
-
-	heat_level_1 = 420 //Default 360 - Higher is better
-	heat_level_2 = 480 //Default 400
-	heat_level_3 = 1100 //Default 1000
-
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34af10"
@@ -116,14 +103,12 @@
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/claw
 
-	heat_discomfort_level = 295
 	heat_discomfort_strings = list(
 		"You feel soothingly warm.",
 		"You feel the heat sink into your bones.",
 		"You feel warm enough to take a nap."
 		)
 
-	cold_discomfort_level = 292
 	cold_discomfort_strings = list(
 		"You feel chilly.",
 		"You feel sluggish and cold.",
@@ -131,11 +116,11 @@
 		)
 	breathing_sound = 'sound/voice/lizard.ogg'
 
-/datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/human/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
-/datum/species/tajaran
+/datum/species/human/tajaran
 	name = SPECIES_TAJARA
 	name_plural = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
@@ -143,16 +128,10 @@
 	tail = "tajtail"
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
 	default_h_style = "Tajaran Ears"
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	darksight = 8
-	slowdown = -0.5
-	brute_mod = 1.15
-	burn_mod =  1.15
 	gluttonous = GLUT_TINY
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR)
 	name_language = LANGUAGE_SIIK_MAAS
-	health_hud_intensity = 1.75
 
 	min_age = 19
 	max_age = 140
@@ -163,17 +142,9 @@
 	have recently been fascinated by cybernetic enhancement. They prefer colder environments, \
 	and evolved a layer of thick fur to accommodate this. "
 
-	cold_level_1 = 200 //Default 260
-	cold_level_2 = 140 //Default 200
-	cold_level_3 = 80  //Default 120
-
-	heat_level_1 = 330 //Default 360
-	heat_level_2 = 380 //Default 400
-	heat_level_3 = 800 //Default 1000
-
 	primitive_form = "Farwa"
 
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#afa59e"
@@ -184,20 +155,18 @@
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
-	heat_discomfort_level = 292
 	heat_discomfort_strings = list(
 		"Your fur prickles in the heat.",
 		"You feel uncomfortably warm.",
 		"Your overheated skin itches."
 		)
-	cold_discomfort_level = 275
 
-/datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/human/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 	H.equip_to_slot_or_del(new /obj/item/clothing/glasses/tajblind(H),slot_glasses)
 
-/datum/species/skrell
+/datum/species/human/skrell
 	name = SPECIES_SKRELL
 	name_plural = SPECIES_SKRELL
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
@@ -212,27 +181,16 @@
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SKRELLIAN)
 	name_language = null
-	health_hud_intensity = 1.75
 
 	min_age = 19
 	max_age = 90
 
-	darksight = 4
-
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8cd7a3"
 	blood_color = "#1d2cbf"
 	base_color = "#006666"
-
-	cold_level_1 = 280 //Default 260 - Lower is better
-	cold_level_2 = 220 //Default 200
-	cold_level_3 = 130 //Default 120
-
-	heat_level_1 = 420 //Default 360 - Higher is better
-	heat_level_2 = 480 //Default 400
-	heat_level_3 = 1100 //Default 1000
 
 	reagent_tag = IS_SKRELL
 
@@ -250,25 +208,20 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
-/datum/species/diona
+/datum/species/human/diona
 	name = SPECIES_DIONA
 	name_plural = "Dionaea"
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = LANGUAGE_ROOTLOCAL
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
-	//primitive_form = "Nymph"
-	slowdown = 7
-	rarity_value = 3
 	hud_type = /datum/hud_data/diona
-	siemens_coefficient = 0.3
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_ROOTGLOBAL)
 	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
 	health_hud_intensity = 2
-	hunger_factor = 3
 
 	min_age = 1
 	max_age = 300
@@ -309,22 +262,9 @@
 		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
-	warning_low_pressure = 50
-	hazard_low_pressure = -1
-
-	cold_level_1 = 50
-	cold_level_2 = -1
-	cold_level_3 = -1
-
-	heat_level_1 = 2000
-	heat_level_2 = 3000
-	heat_level_3 = 4000
-
-	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
-
-	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP
+	flags = IS_PLANT 
 	appearance_flags = 0
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
+	spawn_flags = SPECIES_CAN_JOIN 
 
 	blood_color = "#004400"
 	flesh_color = "#907e4a"
@@ -333,7 +273,7 @@
 	genders = list(PLURAL)
 
 #define DIONA_LIMB_DEATH_COUNT 9
-/datum/species/diona/handle_death_check(var/mob/living/carbon/human/H)
+/datum/species/human/diona/handle_death_check(var/mob/living/carbon/human/H)
 	var/lost_limb_count = has_limbs.len - H.organs.len
 	if(lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
 		return TRUE
@@ -344,80 +284,15 @@
 	return (lost_limb_count >= DIONA_LIMB_DEATH_COUNT)
 #undef DIONA_LIMB_DEATH_COUNT
 
-/datum/species/diona/can_understand(var/mob/other)
-	var/mob/living/carbon/alien/diona/D = other
-	if(istype(D))
-		return 1
-	return 0
-
-/datum/species/diona/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/human/diona/equip_survival_gear(var/mob/living/carbon/human/H)
 	if(H.backbag == 1)
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H), slot_r_hand)
 	else
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H.back), slot_in_backpack)
 
-/datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
+/datum/species/human/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER
 	return ..()
 
-/datum/species/diona/handle_death(var/mob/living/carbon/human/H)
-
-	if(H.isSynthetic())
-		var/mob/living/carbon/alien/diona/S = new(get_turf(H))
-
-		if(H.mind)
-			H.mind.transfer_to(S)
-		H.visible_message("<span class='danger'>\The [H] collapses into parts, revealing a solitary diona nymph at the core.</span>")
-		return
-	else
-		H.diona_split_nymph()
-
-/datum/species/diona/get_blood_name()
+/datum/species/human/diona/get_blood_name()
 	return "sap"
-
-/datum/species/diona/handle_environment_special(var/mob/living/carbon/human/H)
-	if(H.in_stasis || H.stat == DEAD)
-		return
-	if(H.nutrition < 10)
-		H.take_overall_damage(2,0)
-	else if (H.innate_heal)
-		// Heals normal damage.
-		if(H.getBruteLoss())
-			H.adjustBruteLoss(-4)
-			H.nutrition -= 2
-		if(H.getFireLoss())
-			H.adjustFireLoss(-4)
-			H.nutrition -= 2
-
-		if(prob(10) && H.nutrition > 200 && !H.getBruteLoss() && !H.getFireLoss())
-			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
-			if (D.disfigured)
-				D.disfigured = 0
-				H.nutrition -= 20
-
-		for(var/obj/item/organ/I in H.internal_organs)
-			if(I.damage > 0)
-				I.damage = max(I.damage - 2, 0)
-				H.nutrition -= 2
-				if (prob(1))
-					to_chat(H, "<span class='warning'>You sense your [I.name] regenerating...</span>")
-
-		if (prob(10) && H.nutrition > 70)
-			for(var/limb_type in has_limbs)
-				var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-				if(E && !E.is_usable())
-					E.removed()
-					qdel(E)
-					E = null
-				if(!E)
-					var/list/organ_data = has_limbs[limb_type]
-					var/limb_path = organ_data["path"]
-					var/obj/item/organ/O = new limb_path(src)
-					organ_data["descriptor"] = O.name
-					to_chat(H, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
-					H.nutrition -= 60
-					H.update_body()
-				else
-					for(var/datum/wound/W in E.wounds)
-						if (W.wound_damage() == 0 && prob(50))
-							E.wounds -= W
