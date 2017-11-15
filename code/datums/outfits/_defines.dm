@@ -1,3 +1,0 @@
-#define OUTFIT_HAS_JETPACK       1
-#define OUTFIT_HAS_BACKPACK      2
-#define OUTFIT_EXTENDED_SURVIVAL 4
