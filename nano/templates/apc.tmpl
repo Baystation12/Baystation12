@@ -117,13 +117,13 @@
 			</div>
 			<div class="itemContent" style="width: 105px">
 				&nbsp;&nbsp;
-				{{if value.status <= 1}}
+				{{if value.status < data.pChan_On}}
 					<span class='bad'>Off</span>
-				{{else value.status >= 2}}
+				{{else}}
 					<span class='good'>On</span>
 				{{/if}}
 				{{if data.locked}}
-					{{if value.status == 1 || value.status == 3}}
+					{{if value.status == data.pChan_Off_A || value.status == data.pChan_On_A}}
 						&nbsp;&nbsp;Auto
 					{{else}}
 						&nbsp;&nbsp;Manual
@@ -132,9 +132,9 @@
 			</div>
 			{{if !data.locked || data.siliconUser}}
 				<div class="itemContentFull">
-					{{:helper.link('Auto', 'refresh', value.topicParams.auto, (value.status == 1 || value.status == 3) ? 'selected' : null)}}
-					{{:helper.link('On', 'power', value.topicParams.on, (value.status == 2) ? 'selected' : null)}}
-					{{:helper.link('Off', 'close', value.topicParams.off, (value.status == 0) ? 'selected' : null)}}
+					{{:helper.link('Auto', 'refresh', value.topicParams.auto, (value.status == data.pChan_Off_A || value.status == data.pChan_On_A) ? 'selected' : null)}}
+					{{:helper.link('On', 'power', value.topicParams.on, (value.status == data.pChan_Off_T || value.status == data.pChan_On) ? 'selected' : null)}}
+					{{:helper.link('Off', 'close', value.topicParams.off, (value.status == data.pChan_Off) ? 'selected' : null)}}
 				</div>
 			{{/if}}
 		</div>
