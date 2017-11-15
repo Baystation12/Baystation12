@@ -23,14 +23,17 @@
 /obj/effect/shuttle_landmark/nav_marooned/nav1
 	name = "Planetside Navpoint #1"
 	landmark_tag = "nav_marooned_1"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/nav_marooned/nav2
 	name = "Planetside Navpoint #2"
 	landmark_tag = "nav_marooned_2"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/nav_marooned/nav3
 	name = "Planetside Navpoint #3"
 	landmark_tag = "nav_marooned_antag"
+	autoset = 1
 
 /obj/item/clothing/under/magintka_uniform
 	name = "Magnitka fleet officer uniform"
