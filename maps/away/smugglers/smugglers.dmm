@@ -131,6 +131,7 @@
 "eb" = (/obj/item/weapon/beartrap{anchored = 1; deployed = 1; icon_state = "beartrap1"},/obj/machinery/airlock_sensor{frequency = 1501; master_tag = "asteroid_base_east_airlock"; pixel_y = -25},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1501; id_tag = "asteroid_base_east_pump"},/obj/effect/floor_decal/industrial/warning/full,/turf/simulated/floor/airless/ceiling,/area/smugglers/base)
 "fb" = (/obj/structure/cable,/obj/structure/cable{d1 = 32; d2 = 4; icon_state = "32-4"},/obj/structure/cable{icon_state = "0-2"; dir = 4; pixel_y = 0; d1 = 16; d2 = 0},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/airless/ceiling,/area/smugglers/base)
 "gb" = (/obj/structure/bed/chair/comfy/red{dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/smugglers/office)
+"hb" = (/obj/effect/landmark/random_gen/asteroid{generation_height = 50; generation_width = 50},/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -182,5 +183,5 @@ aaaaaaaaaaacacacacacacaaaaaaaaaaaaacabababababacacacacacacacaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaacacacacabaaaaaaaaaaaaaaaaaaaaaaaaacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+hbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
