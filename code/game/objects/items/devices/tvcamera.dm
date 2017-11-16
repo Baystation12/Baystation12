@@ -34,10 +34,6 @@
 	to_chat(usr, "Video feed is [camera.status ? "on" : "off"]")
 	to_chat(usr, "Audio feed is [radio.broadcasting ? "on" : "off"]")
 
-/obj/item/device/tvcamera/hear_talk(mob/living/M, msg, var/verb="says", datum/language/speaking=null)
-	radio.hear_talk(M,msg,verb,speaking)
-	..()
-
 /obj/item/device/tvcamera/attack_self(mob/user)
 	add_fingerprint(user)
 	user.set_machine(src)
