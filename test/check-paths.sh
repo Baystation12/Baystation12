@@ -1,24 +1,37 @@
 #!/usr/bin/env bash
 set -e
 
-WORLD_LOG_COUNT=46
-ANGLE_BRACKET_COUNT=717
-
 FAILED=0
-
 shopt -s globstar
-num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting 0)"; [ $num -eq 0 ] || FAILED=1
-num=`grep -E '\WDel\(' **/*.dm | wc -l`; echo "$num Del()s (expecting exactly 6)"; [ $num -eq 6 ] || FAILED=1
-num=`grep -E '"/atom' **/*.dm | wc -l`; echo "$num /atom text paths (expecting exactly 2)"; [ $num -eq 2 ] || FAILED=1
-num=`grep -E '"/area' **/*.dm | wc -l`; echo "$num /area text paths (expecting exactly 2)"; [ $num -eq 2 ] || FAILED=1
-num=`grep -E '"/datum' **/*.dm | wc -l`; echo "$num /datum text paths (expecting exactly 2)"; [ $num -eq 2 ] || FAILED=1
-num=`grep -E '"/mob' **/*.dm | wc -l`; echo "$num /mob text paths (expecting exactly 2)"; [ $num -eq 2 ] || FAILED=1
-num=`grep -E '"/obj' **/*.dm | wc -l`; echo "$num /obj text paths (expecting exactly 12)"; [ $num -eq 12 ] || FAILED=1
-num=`grep -E '"/turf' **/*.dm | wc -l`; echo "$num /turf text paths (expecting exactly 8)"; [ $num -eq 8 ] || FAILED=1
-num=`grep -E 'world<<|world[[:space:]]<<' **/*.dm | wc -l`; echo "$num world<< uses (expecting exactly 1)"; [ $num -eq 1 ] || FAILED=1
-num=`grep -E 'world.log<<|world.log[[:space:]]<<' **/*.dm | wc -l`; echo "$num world.log<< uses (expecting exactly ${WORLD_LOG_COUNT})"; [ $num -eq ${WORLD_LOG_COUNT} ] || FAILED=1
-num=`grep -P '(?<!<)<<(?!<)' **/*.dm | wc -l`; echo "$num << uses (expecting exactly ${ANGLE_BRACKET_COUNT})"; [ $num -eq ${ANGLE_BRACKET_COUNT} ] || FAILED=1
-num=`grep -P '^( {4,})' **/*.dm | wc -l`; echo "$num incorrect indentations (expecting exactly 0)"; [ $num -eq 0 ] || FAILED=1
-num=`find ./html/changelogs -not -name "*.yml" | wc -l`; echo "$num non-yml files (expecting exactly 2)"; [ $num -eq 2 ] || FAILED=1
 
-[[ $FAILED -eq 1 ]] && exit 1 || exit 0
+exactly() { # exactly N name search [mode]
+	count="$1"
+	name="$2"
+	search="$3"
+	mode="${4:--E}"
+
+	num="$(grep "$mode" "$search" **/*.dm | wc -l)"
+
+	echo "$num $name (expecting exactly $count)"
+	[ $num -eq $count ] || FAILED=1
+}
+
+exactly 0 "escapes" '\\\\(red|blue|green|black|b|i[^mc])'
+exactly 6 "Del()s" '\WDel\('
+exactly 2 "/atom text paths" '"/atom'
+exactly 2 "/area text paths" '"/area'
+exactly 2 "/datum text paths" '"/datum'
+exactly 2 "/mob text paths" '"/mob'
+exactly 12 "/obj text paths" '"/obj'
+exactly 8 "/turf text paths" '"/turf'
+exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
+exactly 46 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
+exactly 717 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 0 "incorrect indentations" '^( {4,})' -P
+exactly 39 "text2path uses" 'text2path'
+
+num=`find ./html/changelogs -not -name "*.yml" | wc -l`
+echo "$num non-yml files (expecting exactly 2)"
+[ $num -eq 2 ] || FAILED=1
+
+exit $FAILED
