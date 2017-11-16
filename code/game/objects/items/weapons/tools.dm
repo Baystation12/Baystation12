@@ -170,13 +170,13 @@
 	//Welding tool specific stuff
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
-	var/max_fuel = 30 	//The max amount of fuel the welder can hold
 
-/obj/item/weapon/weldingtool/New()
-//	var/random_fuel = min(rand(10,20),max_fuel)
-	create_reagents(max_fuel)
-	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
-	..()
+	var/obj/item/weapon/fuel_cartridge/tank // where the fuel is stored
+	var/tank_type = /obj/item/weapon/fuel_cartridge // what kind of tank the welder has by default
+
+/obj/item/weapon/weldingtool/Initialize()
+	tank = new tank_type
+	. = ..()
 
 /obj/item/weapon/weldingtool/Destroy()
 	if(welding)
@@ -184,15 +184,17 @@
 	return ..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
-	if(..(user, 0))
-		to_chat(user, text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel ))
+	if(..(user, 0) && tank)
+		to_chat(user, "\The [tank] is attached.")
+		to_chat(user, text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),tank.max_fuel))
 
 
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
+	if(welding)
+		to_chat(user, "<span class='danger'>Stop welding first!</span>")
+		return
+
 	if(istype(W,/obj/item/weapon/screwdriver))
-		if(welding)
-			to_chat(user, "<span class='danger'>Stop welding first!</span>")
-			return
 		status = !status
 		if(status)
 			to_chat(user, "<span class='notice'>You secure the welder.</span>")
@@ -222,8 +224,37 @@
 		src.add_fingerprint(user)
 		return
 
+	if(istype(W, /obj/item/weapon/fuel_cartridge))
+		if(tank)
+			to_chat(user, "Remove the current tank first.")
+			return
+
+		if(W.w_class >= w_class)
+			to_chat(user, "\The [W] is too large to fit in \the [src].")
+			return
+
+		user.drop_from_inventory(W, src)
+		tank = W
+		user.visible_message("[user] slots \a [W] into \the [src].", "You slot \a [W] into \the [src].")
+		return
+
 	..()
-	return
+
+
+/obj/item/weapon/weldingtool/attack_hand(mob/user as mob)
+	if(!welding)
+		if(tank && user.get_inactive_hand() == src)
+			if(tank.can_remove)
+				user.visible_message("[user] removes \the [tank] from \the [src].", "You remove \the [tank] from \the [src].")
+				user.put_in_hands(tank)
+				tank = null
+				return
+			else
+				to_chat(user, "\The [tank] can't be removed.")
+	else
+		to_chat(user, "<span class='danger'>Stop welding first!</span>")
+
+	..()
 
 
 /obj/item/weapon/weldingtool/Process()
@@ -234,8 +265,11 @@
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
-		O.reagents.trans_to_obj(src, max_fuel)
-		to_chat(user, "<span class='notice'>Welder refueled</span>")
+		if(!tank)
+			to_chat(user, "\The [src] has no tank attached!")
+			return
+		O.reagents.trans_to_obj(tank, tank.max_fuel)
+		to_chat(user, "<span class='notice'>You refuel \the [tank].</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 	if (src.welding)
@@ -255,7 +289,7 @@
 
 //Returns the amount of fuel in the welder
 /obj/item/weapon/weldingtool/proc/get_fuel()
-	return reagents.get_reagent_amount(/datum/reagent/fuel)
+	return tank ? tank.reagents.get_reagent_amount(/datum/reagent/fuel) : 0
 
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
@@ -273,6 +307,9 @@
 		return 0
 
 /obj/item/weapon/weldingtool/proc/burn_fuel(var/amount)
+	if(!tank)
+		return
+
 	var/mob/living/in_mob = null
 
 	//consider ourselves in a mob if we are in the mob's contents and not in their hands
@@ -283,11 +320,11 @@
 
 	if(in_mob)
 		amount = max(amount, 2)
-		reagents.trans_type_to(in_mob, /datum/reagent/fuel, amount)
+		tank.reagents.trans_type_to(in_mob, /datum/reagent/fuel, amount)
 		in_mob.IgniteMob()
 
 	else
-		reagents.remove_reagent(/datum/reagent/fuel, amount)
+		tank.reagents.remove_reagent(/datum/reagent/fuel, amount)
 		var/turf/location = get_turf(src.loc)
 		if(location)
 			location.hotspot_expose(700, 5)
@@ -383,48 +420,95 @@
 				spawn(100)
 					H.disabilities &= ~NEARSIGHTED
 
+/obj/item/weapon/fuel_cartridge
+	name = "welding fuel cartridge"
+	desc = "An interchangable fuel tank meant for a welding tool."
+	icon = 'icons/obj/ammo.dmi'
+	icon_state = "fuel"
+	w_class = ITEM_SIZE_NORMAL
+	var/max_fuel = 30
+	var/can_remove = 0
+
+/obj/item/weapon/fuel_cartridge/Initialize()
+	create_reagents(max_fuel)
+	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
+	. = ..()
+
+/obj/item/weapon/fuel_cartridge/afterattack(obj/O as obj, mob/user as mob, proximity)
+	if(!proximity) return
+	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1)
+		O.reagents.trans_to_obj(src, max_fuel)
+		to_chat(user, "<span class='notice'>You refuel \the [src].</span>")
+		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		return
 
 /obj/item/weapon/weldingtool/mini
 	name = "miniature welding tool"
-	desc = "A welder with a very small fuel tank, meant for quick emergency use."
-	max_fuel = 10
+	desc = "A smaller welder, meant for quick or emergency use."
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 15, "glass" = 5)
 	w_class = ITEM_SIZE_NORMAL
+	tank_type = /obj/item/weapon/fuel_cartridge/mini
+
+/obj/item/weapon/fuel_cartridge/mini
+	name = "small welding fuel cartridge"
+	w_class = ITEM_SIZE_SMALL
+	max_fuel = 10
+	can_remove = 1
 
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
-	desc = "A heavy-duty portable welder, with an extra large fuel tank to ensure it won't suddenly go cold on you."
-	max_fuel = 80
+	desc = "A heavy-duty portable welder, made to ensure it won't suddenly go cold on you."
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
 	w_class = ITEM_SIZE_HUGE
+	tank_type = /obj/item/weapon/fuel_cartridge/large
+
+/obj/item/weapon/fuel_cartridge/large
+	name = "large welding fuel cartridge"
+	w_class = ITEM_SIZE_LARGE
+	max_fuel = 80
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "compact welding tool"
-	desc = "A modified miniature welding tool that appears to have had a unique after-market fuel tank installed."
-	max_fuel = 20
+	desc = "A modified miniature welding tool that appears to make the most out of its size."
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
+	tank_type = /obj/item/weapon/fuel_cartridge/compact
+
+/obj/item/weapon/fuel_cartridge/compact
+	name = "compact welding fuel cartridge"
+	w_class = ITEM_SIZE_SMALL
+	max_fuel = 20
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
-	max_fuel = 20
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
+	tank_type = /obj/item/weapon/fuel_cartridge/experimental
+
+/obj/item/weapon/fuel_cartridge/experimental
+	name = "experimental welding fuel cartridge"
+	w_class = ITEM_SIZE_NORMAL
+	max_fuel = 20
 	var/last_gen = 0
 
-/obj/item/weapon/weldingtool/experimental/New()
-	description_info += "<br><br>This welder will passively regenerate fuel."
+/obj/item/weapon/fuel_cartridge/experimental/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
-/obj/item/weapon/weldingtool/experimental/proc/fuel_gen()//Proc to make the experimental welder generate fuel, optimized as fuck -Sieve
-	var/gen_amount = ((world.time-last_gen)/25)
-	reagents += (gen_amount)
-	if(reagents > max_fuel)
-		reagents = max_fuel
+/obj/item/weapon/fuel_cartridge/experimental/Destroy()
+	STOP_PROCESSING(SSobj, src)
+
+/obj/item/weapon/fuel_cartridge/experimental/Process()
+	var/cur_fuel = reagents.get_reagent_amount(/datum/reagent/fuel)
+	if(cur_fuel < max_fuel)
+		var/gen_amount = ((world.time-last_gen)/25)
+		reagents.add_reagent(/datum/reagent/fuel, max(gen_amount, max_fuel - cur_fuel))
+		last_gen = world.time
 
 /obj/item/weapon/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
 
