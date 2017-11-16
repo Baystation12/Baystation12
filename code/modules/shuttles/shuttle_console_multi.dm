@@ -16,7 +16,7 @@
 		return
 
 	if(href_list["pick"])
-		var/dest_key = input("Choose shuttle destination", "Shuttle Destination") as null|anything in shuttle.destinations
+		var/dest_key = input("Choose shuttle destination", "Shuttle Destination") as null|anything in shuttle.get_destinations()
 		if(CanInteract(usr, GLOB.default_state))
 			shuttle.set_destination(dest_key, usr)
 
