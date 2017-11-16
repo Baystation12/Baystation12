@@ -73,7 +73,8 @@
 
 	var/spawn_sound = 'sound/voice/liveagain.ogg'
 	var/pitch_toggle = 1
-	var/list/req_access = list(access_robotics)
+	var/list/req_access = list()
+	var/list/req_one_access = list(access_robotics, access_ce, access_hop)
 	var/ident = 0
 	var/viewalerts = 0
 	var/modtype = "Default"
