@@ -52,8 +52,8 @@
 				return
 			if (istype(C, /obj/item/stack/rods))
 				var/obj/item/stack/rods/R = C
-				if (R.use(1))
-					to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
+				if (R.use(2))
+					to_chat(user, "<span class='notice'>You lay down the catwalk.</span>")
 					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 					new /obj/structure/catwalk(locate(src.x, src.y, src.z))
 				return
