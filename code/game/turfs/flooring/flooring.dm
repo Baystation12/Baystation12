@@ -142,12 +142,12 @@ var/list/flooring_types
 
 /decl/flooring/reinforced
 	name = "reinforced floor"
-	desc = "Heavily reinforced with steel rods."
+	desc = "Heavily reinforced with steel plating."
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "reinforced"
 	flags = TURF_REMOVE_WRENCH | TURF_ACID_IMMUNE
-	build_type = /obj/item/stack/rods
-	build_cost = 2
+	build_type = /obj/item/stack/material/steel
+	build_cost = 1
 	build_time = 30
 	apply_thermal_conductivity = 0.025
 	apply_heat_capacity = 325000
