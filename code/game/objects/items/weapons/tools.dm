@@ -168,25 +168,24 @@
 	origin_tech = list(TECH_ENGINEERING = 1)
 
 	//Welding tool specific stuff
-	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
-	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
-	var/max_fuel = 20 	//The max amount of fuel the welder can hold
+	var/welding = 0 					//Whether or not the welding tool is off(0), on(1) or currently welding(2)
+	var/status = 1 						//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
+	var/max_fuel = 20 					//The max amount of fuel the welder can hold
+	var/passive_usage = 0.05			// Amount of fuel used when the welding tool is lit.
+	var/const/usage_rounding = 0.01		// Fuel usage will be rounded automatically by this number
 
 /obj/item/weapon/weldingtool/New()
-//	var/random_fuel = min(rand(10,20),max_fuel)
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	..()
 
 /obj/item/weapon/weldingtool/Destroy()
-	if(welding)
-		STOP_PROCESSING(SSobj, src)
-	return ..()
+	set_processing(FALSE, TRUE)
 
 /obj/item/weapon/weldingtool/examine(mob/user)
-	if(..(user, 0))
-		to_chat(user, text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel ))
-
+	. = ..(user, 2)
+	if(.)
+		to_chat(user, "The fuel gauge reads [round(src.reagents.total_volume, 0.01)]/[max_fuel] ([round((src.reagents.total_volume / max_fuel) * 100, 0.1)]%)")
 
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
@@ -228,7 +227,8 @@
 
 /obj/item/weapon/weldingtool/Process()
 	if(welding)
-		if(!remove_fuel(0.05))
+		if(!remove_fuel(passive_usage))
+			burn_fuel(get_fuel())	// Ensures the welder isn't left with tiny amounts like 0.01u when it shuts off due to running out of fuel
 			setWelding(0)
 
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
@@ -251,15 +251,49 @@
 
 /obj/item/weapon/weldingtool/attack_self(mob/user as mob)
 	setWelding(!welding, usr)
-	return
+
+/obj/item/weapon/weldingtool/proc/set_processing(var/processing, var/init_or_destroy = FALSE)
+	if(processing)
+		START_PROCESSING(SSobj, src)
+	else
+		STOP_PROCESSING(SSobj, src)
 
 //Returns the amount of fuel in the welder
 /obj/item/weapon/weldingtool/proc/get_fuel()
 	return reagents.get_reagent_amount(/datum/reagent/fuel)
 
+/obj/item/weapon/weldingtool/proc/refill_from_fuelpack()
+	if(get_fuel() == max_fuel)
+		return
+	var/mob/M = loc
+	if(!istype(M))
+		return
+	var/datum/reagents/R = M.get_fuel_source()
+	if(!istype(R))
+		return
+	R.trans_to_obj(src, max_fuel)
+
+/mob/proc/get_fuel_source()
+	return
+
+/mob/living/silicon/robot/get_fuel_source()
+	var/obj/item/weapon/weldpack/WP
+	if(istype(module_state_1, /obj/item/weapon/weldpack/))
+		WP = module_state_1
+	else if(istype(module_state_2, /obj/item/weapon/weldpack/))
+		WP = module_state_2
+	else if(istype(module_state_3, /obj/item/weapon/weldpack/))
+		WP = module_state_3
+	return WP.reagents
+
+/mob/living/carbon/human/get_fuel_source()
+	var/obj/item/weapon/weldpack/WP = back
+	if(istype(WP))
+		return WP.reagents
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
 /obj/item/weapon/weldingtool/proc/remove_fuel(var/amount = 1, var/mob/M = null)
+	amount = round(amount, usage_rounding)
 	if(!welding)
 		return 0
 	if(get_fuel() >= amount)
@@ -291,6 +325,7 @@
 		var/turf/location = get_turf(src.loc)
 		if(location)
 			location.hotspot_expose(700, 5)
+	refill_from_fuelpack()
 
 //Returns whether or not the welding tool is currently on.
 /obj/item/weapon/weldingtool/proc/isOn()
@@ -314,10 +349,11 @@
 /obj/item/weapon/weldingtool/proc/setWelding(var/set_welding, var/mob/M)
 	if(!status)	return
 
+	refill_from_fuelpack()
 	var/turf/T = get_turf(src)
 	//If we're turning it on
 	if(set_welding && !welding)
-		if (get_fuel() > 0)
+		if (get_fuel() > passive_usage)
 			if(M)
 				to_chat(M, "<span class='notice'>You switch the [src] on.</span>")
 			else if(T)
@@ -326,14 +362,14 @@
 			src.damtype = "fire"
 			welding = 1
 			update_icon()
-			START_PROCESSING(SSobj, src)
+			set_processing(TRUE)
 		else
 			if(M)
 				to_chat(M, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 			return
 	//Otherwise
 	else if(!set_welding && welding)
-		STOP_PROCESSING(SSobj, src)
+		set_processing(FALSE)
 		if(M)
 			to_chat(M, "<span class='notice'>You switch \the [src] off.</span>")
 		else if(T)
@@ -383,6 +419,24 @@
 				spawn(100)
 					H.disabilities &= ~NEARSIGHTED
 
+/obj/item/weapon/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
+
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
+
+		if(!S || !(S.robotic >= ORGAN_ROBOT) || user.a_intent != I_HELP)
+			return ..()
+
+		if(!welding)
+			to_chat(user, "<span class='warning'>You'll need to turn [src] on to patch the damage on [M]'s [S.name]!</span>")
+			return 1
+
+		if(S.robo_repair(15, BRUTE, "some dents", src, user))
+			remove_fuel(1, user)
+
+	else
+		return ..()
 
 /obj/item/weapon/weldingtool/mini
 	name = "miniature welding tool"
@@ -418,30 +472,18 @@
 /obj/item/weapon/weldingtool/experimental/New()
 	description_info += "<br><br>This welder will passively regenerate fuel."
 
-/obj/item/weapon/weldingtool/experimental/proc/fuel_gen()//Proc to make the experimental welder generate fuel, optimized as fuck -Sieve
-	var/gen_amount = ((world.time-last_gen)/25)
-	reagents += (gen_amount)
-	if(reagents > max_fuel)
-		reagents = max_fuel
+// Refills fuel at the rate of 0.025 per tick, this is half of the passive fuel usage rate when lit.
+/obj/item/weapon/weldingtool/experimental/Process()
+	reagents.add_reagent(/datum/reagent/fuel, between(0, (get_fuel() - max_fuel), 0.025))
+	..()
 
-/obj/item/weapon/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
+/obj/item/weapon/weldingtool/experimental/Initialize()
+	. = ..()
+	set_processing(TRUE, TRUE)
 
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/S = H.organs_by_name[target_zone]
-
-		if(!S || !(S.robotic >= ORGAN_ROBOT) || user.a_intent != I_HELP)
-			return ..()
-
-		if(!welding)
-			to_chat(user, "<span class='warning'>You'll need to turn [src] on to patch the damage on [M]'s [S.name]!</span>")
-			return 1
-
-		if(S.robo_repair(15, BRUTE, "some dents", src, user))
-			remove_fuel(1, user)
-
-	else
-		return ..()
+/obj/item/weapon/weldingtool/experimental/set_processing(var/processing, var/init_or_destroy = FALSE)
+	if(init_or_destroy)
+		..(processing)
 
 /*
  * Crowbar
