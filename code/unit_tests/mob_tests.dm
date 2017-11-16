@@ -262,7 +262,7 @@ datum/unit_test/mob_damage/halloss
 // =================================================================
 // Unathi
 // =================================================================
-
+/*
 datum/unit_test/mob_damage/unathi
 	name = "MOB: Unathi damage check template"
 	mob_type = /mob/living/carbon/human/unathi
@@ -498,7 +498,7 @@ datum/unit_test/mob_damage/machine/halloss
 	damagetype = PAIN
 	expected_vulnerability = IMMUNE
 
-
+*/
 // ==============================================================================
 
 
