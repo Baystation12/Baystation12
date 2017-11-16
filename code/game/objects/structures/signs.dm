@@ -21,7 +21,7 @@
 	return
 
 /obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
-	if(isscrewdriver(tool) && !istype(src, /obj/structure/sign/double))
+	if(isScrewdriver(tool) && !istype(src, /obj/structure/sign/double))
 		to_chat(user, "You unfasten the sign with your [tool.name].")
 		var/obj/item/sign/S = new(src.loc)
 		S.name = name

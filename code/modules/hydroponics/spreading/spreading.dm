@@ -222,7 +222,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	START_PROCESSING(SSvines, src)
 
-	if(iswirecutter(W) || istype(W, /obj/item/weapon/scalpel))
+	if(isWirecutter(W) || istype(W, /obj/item/weapon/scalpel))
 		if(sampled)
 			to_chat(user, "<span class='warning'>You cannot take another sample from \the [src].</span>")
 			return

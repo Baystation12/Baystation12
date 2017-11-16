@@ -94,7 +94,7 @@
 //		src.sd_SetLuminosity(0)
 
 /obj/machinery/sparker/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(isscrewdriver(W))
+	if(isScrewdriver(W))
 		add_fingerprint(user)
 		disable = !disable
 		if(disable)

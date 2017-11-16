@@ -182,7 +182,7 @@
 
 /obj/attackby(obj/item/O as obj, mob/user as mob)
 	if(flags & OBJ_ANCHORABLE)
-		if(iswrench(O))
+		if(isWrench(O))
 			wrench_floor_bolts(user)
 			update_icon()
 			return

@@ -231,7 +231,7 @@
 
 		return
 
-	if(repairing && istype(I, /obj/item/weapon/weldingtool))
+	if(repairing && isWelder(I))
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 			return
@@ -248,7 +248,7 @@
 				repairing = null
 		return
 
-	if(repairing && iscrowbar(I))
+	if(repairing && isCrowbar(I))
 		to_chat(user, "<span class='notice'>You remove \the [repairing].</span>")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.loc = user.loc

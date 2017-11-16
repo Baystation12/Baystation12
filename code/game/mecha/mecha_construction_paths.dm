@@ -3,22 +3,22 @@
 ////////////////////////////////
 
 /datum/construction/mecha/custom_action(step, atom/used_atom, mob/user)
-	if(istype(used_atom, /obj/item/weapon/weldingtool))
+	if(isWelder(used_atom))
 		var/obj/item/weapon/weldingtool/W = used_atom
 		if (W.remove_fuel(0, user))
 			playsound(holder, 'sound/items/Welder2.ogg', 50, 1)
 		else
 			return 0
-	else if(iswrench(used_atom))
+	else if(isWrench(used_atom))
 		playsound(holder, 'sound/items/Ratchet.ogg', 50, 1)
 
-	else if(isscrewdriver(used_atom))
+	else if(isScrewdriver(used_atom))
 		playsound(holder, 'sound/items/Screwdriver.ogg', 50, 1)
 
-	else if(iswirecutter(used_atom))
+	else if(isWirecutter(used_atom))
 		playsound(holder, 'sound/items/Wirecutter.ogg', 50, 1)
 
-	else if(istype(used_atom, /obj/item/stack/cable_coil))
+	else if(isCoil(used_atom))
 		var/obj/item/stack/cable_coil/C = used_atom
 		if(C.use(4))
 			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
@@ -35,19 +35,19 @@
 	return 1
 
 /datum/construction/reversible/mecha/custom_action(index as num, diff as num, atom/used_atom, mob/user as mob)
-	if(istype(used_atom, /obj/item/weapon/weldingtool))
+	if(isWelder(used_atom))
 		var/obj/item/weapon/weldingtool/W = used_atom
 		if (W.remove_fuel(0, user))
 			playsound(holder, 'sound/items/Welder2.ogg', 50, 1)
 		else
 			return 0
-	else if(iswrench(used_atom))
+	else if(isWrench(used_atom))
 		playsound(holder, 'sound/items/Ratchet.ogg', 50, 1)
 
-	else if(isscrewdriver(used_atom))
+	else if(isScrewdriver(used_atom))
 		playsound(holder, 'sound/items/Screwdriver.ogg', 50, 1)
 
-	else if(iswirecutter(used_atom))
+	else if(isWirecutter(used_atom))
 		playsound(holder, 'sound/items/Wirecutter.ogg', 50, 1)
 
 	else if(istype(used_atom, /obj/item/stack/cable_coil))

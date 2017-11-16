@@ -62,7 +62,7 @@ var/global/list/light_type_cache = list()
 		if(3) to_chat(user, "The casing is closed.")
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if(iswrench(W))
+	if(isWrench(W))
 		if (src.stage == 1)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(usr, "You begin deconstructing \a [src].")
@@ -81,7 +81,7 @@ var/global/list/light_type_cache = list()
 			to_chat(usr, "You have to unscrew the case first.")
 			return
 
-	if(iswirecutter(W))
+	if(isWirecutter(W))
 		if (src.stage != 2) return
 		src.stage = 1
 		src.update_icon()
@@ -101,7 +101,7 @@ var/global/list/light_type_cache = list()
 				"You add wires to [src].")
 		return
 
-	if(isscrewdriver(W))
+	if(isScrewdriver(W))
 		if (src.stage == 2)
 			src.stage = 3
 			src.update_icon()

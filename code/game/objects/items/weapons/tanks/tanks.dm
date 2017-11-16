@@ -119,14 +119,14 @@ var/list/global/tank_gauge_cache = list()
 		LB.blow(src)
 		src.add_fingerprint(user)
 
-	if(istype(W, /obj/item/stack/cable_coil))
+	if(isCoil(W))
 		var/obj/item/stack/cable_coil/C = W
 		if(C.use(1))
 			wired = 1
 			to_chat(user, "<span class='notice'>You attach the wires to the tank.</span>")
 			src.add_bomb_overlay()
 
-	if(iswirecutter(W))
+	if(isWirecutter(W))
 		if(wired && src.proxyassembly.assembly)
 
 			to_chat(user, "<span class='notice'>You carefully begin clipping the wires that attach to the tank.</span>")
@@ -181,7 +181,7 @@ var/list/global/tank_gauge_cache = list()
 			to_chat(user, "<span class='notice'>You need to wire the device up first.</span>")
 
 
-	if(istype(W, /obj/item/weapon/weldingtool/))
+	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(WT.remove_fuel(1,user))
 			if(!valve_welded)

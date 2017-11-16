@@ -211,7 +211,7 @@
 		update_connected_network()
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I as obj, var/mob/user as mob)
-	if(iswrench(I))
+	if(isWrench(I))
 		if(on)
 			to_chat(user, "<span class='warning'>Turn \the [src] off first!</span>")
 			return
@@ -225,7 +225,7 @@
 	//doesn't use power cells
 	if(istype(I, /obj/item/weapon/cell))
 		return
-	if(isscrewdriver(I))
+	if(isScrewdriver(I))
 		return
 
 	//doesn't hold tanks
@@ -239,7 +239,7 @@
 	name = "Stationary Air Scrubber"
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I as obj, var/mob/user as mob)
-	if(iswrench(I))
+	if(isWrench(I))
 		to_chat(user, "<span class='warning'>The bolts are too tight for you to unscrew!</span>")
 		return
 

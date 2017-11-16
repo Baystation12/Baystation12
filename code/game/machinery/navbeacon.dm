@@ -43,7 +43,7 @@ var/global/list/navbeacons = list()
 	if(!T.is_plating())
 		return		// prevent intraction when T-scanner revealed
 
-	if(isscrewdriver(I))
+	if(isScrewdriver(I))
 		open = !open
 
 		user.visible_message("\The [user] [open ? "opens" : "closes"] cover of \the [src].", "You [open ? "open" : "close"] cover of \the [src].")

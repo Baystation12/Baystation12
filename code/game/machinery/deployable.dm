@@ -184,7 +184,7 @@ for reference:
 					visible_message("<span class='warning'>BZZzZZzZZzZT</span>")
 					return
 			return
-		else if(iswrench(W))
+		else if(isWrench(W))
 			if (src.health < src.maxhealth)
 				src.health = src.maxhealth
 				src.emagged = 0

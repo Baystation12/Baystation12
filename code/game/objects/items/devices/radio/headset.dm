@@ -241,10 +241,10 @@
 /obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
-	if (!( isscrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))
+	if (!( isScrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))
 		return
 
-	if(isscrewdriver(W))
+	if(isScrewdriver(W))
 		if(keyslot1 || keyslot2)
 
 

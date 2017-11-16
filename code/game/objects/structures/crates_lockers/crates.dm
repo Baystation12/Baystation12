@@ -55,7 +55,7 @@ obj/structure/closet/crate
 			user.drop_item()
 			W.forceMove(src)
 			return
-	else if(iswirecutter(W))
+	else if(isWirecutter(W))
 		if(rigged)
 			to_chat(user, "<span class='notice'>You cut away the wiring.</span>")
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)

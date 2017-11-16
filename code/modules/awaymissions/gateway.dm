@@ -132,7 +132,7 @@ obj/machinery/gateway/centerstation/Process()
 
 
 /obj/machinery/gateway/centerstation/attackby(obj/item/device/W as obj, mob/user as mob)
-	if(ismultitool(W))
+	if(isMultitool(W))
 		to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 		return
 
@@ -226,7 +226,7 @@ obj/machinery/gateway/centerstation/Process()
 
 
 /obj/machinery/gateway/centeraway/attackby(obj/item/device/W as obj, mob/user as mob)
-	if(ismultitool(W))
+	if(isMultitool(W))
 		if(calibrated)
 			to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 			return

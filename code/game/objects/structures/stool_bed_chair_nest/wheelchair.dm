@@ -23,7 +23,7 @@
 		buckled_mob.set_dir(dir)
 
 /obj/structure/bed/chair/wheelchair/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(iswrench(W) || istype(W,/obj/item/stack) || iswirecutter(W))
+	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
 		return
 	..()
 

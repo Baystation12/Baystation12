@@ -99,7 +99,7 @@
 			unlock_brace(user)
 		return
 
-	if(istype(W, /obj/item/weapon/weldingtool))
+	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/C = W
 		if(cur_health == max_health)
 			to_chat(user, "\The [src] does not require repairs.")

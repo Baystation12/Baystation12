@@ -10,7 +10,7 @@
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 
 /obj/item/frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(iswrench(W))
+	if(isWrench(W))
 		new refund_type( get_turf(src.loc), refund_amt)
 		qdel(src)
 		return

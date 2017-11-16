@@ -195,7 +195,7 @@
 			repair_breaches(BURN, use_amt * repair_power, user)
 		return
 
-	else if(istype(W, /obj/item/weapon/weldingtool))
+	else if(isWelder(W))
 
 		if(istype(src.loc,/mob/living))
 			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")

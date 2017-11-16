@@ -272,7 +272,7 @@
 		updateUsrDialog()
 		return
 	else if(!active)
-		if(iswrench(O))
+		if(isWrench(O))
 
 			if(!anchored)
 				connect_to_network()
@@ -284,14 +284,14 @@
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			anchored = !anchored
 
-		else if(isscrewdriver(O))
+		else if(isScrewdriver(O))
 			open = !open
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			if(open)
 				to_chat(user, "<span class='notice'>You open the access panel.</span>")
 			else
 				to_chat(user, "<span class='notice'>You close the access panel.</span>")
-		else if(iscrowbar(O) && open)
+		else if(isCrowbar(O) && open)
 			var/obj/machinery/constructable_frame/machine_frame/new_frame = new /obj/machinery/constructable_frame/machine_frame(src.loc)
 			for(var/obj/item/I in component_parts)
 				I.loc = src.loc

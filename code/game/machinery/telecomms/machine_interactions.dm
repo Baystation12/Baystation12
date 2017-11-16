@@ -18,7 +18,7 @@
 /obj/machinery/telecomms/attackby(obj/item/P as obj, mob/user as mob)
 
 	// Using a multitool lets you access the receiver's interface
-	if(ismultitool(P))
+	if(isMultitool(P))
 		attack_hand(user)
 
 
@@ -36,25 +36,25 @@
 
 	switch(construct_op)
 		if(0)
-			if(isscrewdriver(P))
+			if(isScrewdriver(P))
 				to_chat(user, "You unfasten the bolts.")
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				construct_op ++
 		if(1)
-			if(isscrewdriver(P))
+			if(isScrewdriver(P))
 				to_chat(user, "You fasten the bolts.")
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				construct_op --
-			if(iswrench(P))
+			if(isWrench(P))
 				to_chat(user, "You dislodge the external plating.")
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				construct_op ++
 		if(2)
-			if(iswrench(P))
+			if(isWrench(P))
 				to_chat(user, "You secure the external plating.")
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				construct_op --
-			if(iswirecutter(P))
+			if(isWirecutter(P))
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				to_chat(user, "You remove the cables.")
 				construct_op ++
@@ -62,7 +62,7 @@
 				A.amount = 5
 				stat |= BROKEN // the machine's been borked!
 		if(3)
-			if(istype(P, /obj/item/stack/cable_coil))
+			if(isCoil(P))
 				var/obj/item/stack/cable_coil/A = P
 				if (A.use(5))
 					to_chat(user, "<span class='notice'>You insert the cables.</span>")
@@ -70,7 +70,7 @@
 					stat &= ~BROKEN // the machine's not borked anymore!
 				else
 					to_chat(user, "<span class='warning'>You need five coils of wire for this.</span>")
-			if(iscrowbar(P))
+			if(isCrowbar(P))
 				to_chat(user, "You begin prying out the circuit board other components...")
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				if(do_after(user,60, src))

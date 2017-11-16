@@ -78,7 +78,7 @@
 			update_icon()
 		else
 			to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
-	else if(isscrewdriver(W))
+	else if(isScrewdriver(W))
 		if(bcell)
 			bcell.update_icon()
 			bcell.dropInto(loc)

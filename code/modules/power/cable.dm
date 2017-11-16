@@ -157,7 +157,7 @@ var/list/possible_cable_coil_colours
 	if(!T.is_plating())
 		return
 
-	if(iswirecutter(W))
+	if(isWirecutter(W))
 		if(d1 == UP || d2 == UP)
 			to_chat(user, "<span class='warning'>You must cut this cable from above.</span>")
 			return
@@ -190,14 +190,14 @@ var/list/possible_cable_coil_colours
 		return
 
 
-	else if(istype(W, /obj/item/stack/cable_coil))
+	else if(isCoil(W))
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.get_amount() < 1)
 			to_chat(user, "Not enough cable")
 			return
 		coil.cable_join(src, user)
 
-	else if(ismultitool(W))
+	else if(isMultitool(W))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
 			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")
