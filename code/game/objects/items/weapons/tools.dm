@@ -471,17 +471,6 @@
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
 
-/obj/item/weapon/crowbar/prybar
-	name = "pry bar"
-	desc = "A steel bar with a wedge at one end and a hard rubber pommel handle at the other."
-	icon_state = "prybar"
-	item_state = "crowbar"
-	force = 4.0
-	throwforce = 6.0
-	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
-	matter = list(DEFAULT_WALL_MATERIAL = 80)
-
 /*
  * Combitool
  */
