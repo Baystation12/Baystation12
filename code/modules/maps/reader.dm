@@ -170,8 +170,9 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 									if(!grid_models[model_key])
 										throw EXCEPTION("Undefined model key in DMM.")
 									var/datum/grid_load_metadata/M = parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion, clear_contents)
-									atoms_to_initialise += M.atoms_to_initialise
-									atoms_to_delete += M.atoms_to_delete
+									if (M)
+										atoms_to_initialise += M.atoms_to_initialise
+										atoms_to_delete += M.atoms_to_delete
 								#ifdef TESTING
 								else
 									++turfsSkipped
