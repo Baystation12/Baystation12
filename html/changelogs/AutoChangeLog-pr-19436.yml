@@ -1,0 +1,4 @@
+author: "sick-trigger"
+delete-after: True
+changes: 
+  - rscadd: "Ghosts will now be informed of the contests of examined closets/lockers."
