@@ -322,6 +322,9 @@
 		if(mob.check_slipmove())
 			return
 
+		if(mob.check_coldhead()) //wind chill
+			return
+
 		//We are now going to move
 		moving = 1
 		//Something with pulling things
@@ -484,6 +487,9 @@
 #define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_step(mob, final_dir), final_dir);
 
 /mob/proc/check_slipmove()
+	return
+
+/mob/proc/check_coldhead()
 	return
 
 /client/verb/moveup()
