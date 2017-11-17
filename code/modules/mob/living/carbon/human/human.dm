@@ -1257,6 +1257,16 @@
 			return TRUE
 	return FALSE
 
+/mob/living/carbon/human/check_coldhead()
+	if(h_style)
+		var/datum/sprite_accessory/hair/S = hair_styles_list[h_style]
+		if(S && S.flags & VERY_SHORT && (bodytemperature < 312) && prob(0.4))
+			visible_message("<span class='notice'>[src] pauses to rub their neck.</span>", "<span class='warning'>Your neck is awfully cold. You pause to rub it and warm up.</span>")
+			Weaken(rand(3,5))
+			bodytemperature ++
+			return TRUE
+	return FALSE
+
 /mob/living/carbon/human/proc/undislocate()
 	set category = "Object"
 	set name = "Undislocate Joint"
