@@ -55,7 +55,7 @@
 				if (R.use(2))
 					to_chat(user, "<span class='notice'>You lay down the catwalk.</span>")
 					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-					new /obj/structure/catwalk(locate(src.x, src.y, src.z))
+					new /obj/structure/catwalk(src)
 				return
 			var/obj/item/stack/S = C
 			var/decl/flooring/use_flooring
