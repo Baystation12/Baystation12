@@ -17,16 +17,17 @@
  *		Plushies
  *		Toy cult sword
  *		Marshalling wand
+ *		SEV Torch table-top model
+ *		Fidget spinner
  */
 
-
+/* Parent */
 /obj/item/toy
 	icon = 'icons/obj/toy.dmi'
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
 	force = 0
-
 
 /*
  * Balloons
@@ -346,7 +347,7 @@
 
 /obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
 	if(cooldown < world.time - 35)
-		to_chat(user, "<span class='notice'>You blow on [src], creating an ear-splitting noise!</span>")
+		to_chat(user, "<span class='notice'>You blow on \the [src], creating an ear-splitting noise!</span>")
 		playsound(user, 'sound/misc/boatswain.ogg', 20, 1)
 		cooldown = world.time
 
@@ -355,76 +356,83 @@
  */
 /obj/item/toy/prize
 	icon = 'icons/obj/toy.dmi'
-	icon_state = "ripleytoy"
 	var/cooldown = 0
 
 //all credit to skasi for toy mech fun ideas
 /obj/item/toy/prize/attack_self(mob/user as mob)
 	if(cooldown < world.time - 8)
-		to_chat(user, "<span class='notice'>You play with [src].</span>")
+		to_chat(user, "<span class='notice'>You play with \the [src].</span>")
 		playsound(user, 'sound/mecha/mechstep.ogg', 20, 1)
+		cooldown = world.time
+		
+/obj/item/toy/prize/honk/attack_self(mob/user as mob)
+	if(cooldown < world.time - 8)
+		to_chat(user, "<span class='notice'>You play with \the [src].</span>")
+		playsound(user, 'sound/mecha/mechstep.ogg', 20, 1)
+		playsound(user, 'sound/items/bikehorn.ogg', 20, 1)
 		cooldown = world.time
 
 /obj/item/toy/prize/attack_hand(mob/user as mob)
 	if(loc == user)
 		if(cooldown < world.time - 8)
-			to_chat(user, "<span class='notice'>You play with [src].</span>")
+			to_chat(user, "<span class='notice'>You play with \the [src].</span>")
 			playsound(user, 'sound/mecha/mechturn.ogg', 20, 1)
 			cooldown = world.time
 			return
 	..()
 
 /obj/item/toy/prize/ripley
-	name = "toy ripley"
+	name = "toy Ripley mech"
 	desc = "Mini-Mecha action figure! Collect them all! 1/11."
+	icon_state = "ripleytoy"
 
 /obj/item/toy/prize/fireripley
-	name = "toy firefighting ripley"
+	name = "toy Firefighting Ripley mech"
 	desc = "Mini-Mecha action figure! Collect them all! 2/11."
 	icon_state = "fireripleytoy"
 
 /obj/item/toy/prize/deathripley
-	name = "toy deathsquad ripley"
+	name = "toy Deathsquad Ripley mech"
 	desc = "Mini-Mecha action figure! Collect them all! 3/11."
 	icon_state = "deathripleytoy"
 
 /obj/item/toy/prize/gygax
-	name = "toy gygax"
+	name = "toy Gygax mech"
 	desc = "Mini-Mecha action figure! Collect them all! 4/11."
 	icon_state = "gygaxtoy"
 
 /obj/item/toy/prize/durand
-	name = "toy durand"
+	name = "toy Durand mech"
 	desc = "Mini-Mecha action figure! Collect them all! 5/11."
 	icon_state = "durandprize"
 
 /obj/item/toy/prize/honk
-	name = "toy H.O.N.K."
+	name = "toy H.O.N.K. mech"
 	desc = "Mini-Mecha action figure! Collect them all! 6/11."
 	icon_state = "honkprize"
 
 /obj/item/toy/prize/marauder
-	name = "toy marauder"
+	name = "toy Marauder mech"
 	desc = "Mini-Mecha action figure! Collect them all! 7/11."
 	icon_state = "marauderprize"
 
 /obj/item/toy/prize/seraph
-	name = "toy seraph"
+	name = "toy Seraph mech"
 	desc = "Mini-Mecha action figure! Collect them all! 8/11."
 	icon_state = "seraphprize"
 
 /obj/item/toy/prize/mauler
-	name = "toy mauler"
+	name = "toy Mauler mech"
 	desc = "Mini-Mecha action figure! Collect them all! 9/11."
 	icon_state = "maulerprize"
 
 /obj/item/toy/prize/odysseus
-	name = "toy odysseus"
+	name = "toy Odysseus mech"
 	desc = "Mini-Mecha action figure! Collect them all! 10/11."
 	icon_state = "odysseusprize"
 
 /obj/item/toy/prize/phazon
-	name = "toy phazon"
+	name = "toy Phazon mech"
 	desc = "Mini-Mecha action figure! Collect them all! 11/11."
 	icon_state = "phazonprize"
 
@@ -633,42 +641,42 @@
 	desc = "A toy for therapeutic and recreational purposes. This one is red."
 	icon_state = "therapyred"
 	item_state = "egg4" // It's the red egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/toy/therapy_purple
 	name = "purple therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is purple."
 	icon_state = "therapypurple"
 	item_state = "egg1" // It's the magenta egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/toy/therapy_blue
 	name = "blue therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is blue."
 	icon_state = "therapyblue"
 	item_state = "egg2" // It's the blue egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/toy/therapy_yellow
 	name = "yellow therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is yellow."
 	icon_state = "therapyyellow"
 	item_state = "egg5" // It's the yellow egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/toy/therapy_orange
 	name = "orange therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is orange."
 	icon_state = "therapyorange"
 	item_state = "egg4" // It's the red one again, lacking an orange item_state and making a new one is pointless
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/toy/therapy_green
 	name = "green therapy doll"
 	desc = "A toy for therapeutic and recreational purposes. This one is green."
 	icon_state = "therapygreen"
 	item_state = "egg3" // It's the green egg in items_left/righthand
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 
 /*
  * Plushies
@@ -838,3 +846,16 @@
 	desc = "This is an SEV Torch replica in scale 1:250 on wooden stand. Small lights blink on the hull and at the engine exhaust."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "torch_model_figure"
+	
+/obj/item/toy/fidgetspinner
+	name = "fidget spinner"
+	desc = "A fidget spinner."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "fidgetspinner"
+	throwforce = 1
+	w_class = ITEM_SIZE_SMALL
+	matter = list(DEFAULT_WALL_MATERIAL = 200)
+	
+/obj/item/toy/fidgetspinner/attack_self(mob/user as mob)
+	flick("fidgetspin", src)
+	user.visible_message("<span class='notice'><b>\The [user]</b> spins \the [src]!</span>","<span class='notice'>You spin \the [src]!</span>")
