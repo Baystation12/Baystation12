@@ -171,16 +171,19 @@
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
 
-	var/obj/item/weapon/fuel_cartridge/tank // where the fuel is stored
-	var/tank_type = /obj/item/weapon/fuel_cartridge // what kind of tank the welder has by default
+	var/obj/item/weapon/fuel_cartridge/tank = /obj/item/weapon/fuel_cartridge // where the fuel is stored
 
 /obj/item/weapon/weldingtool/Initialize()
-	tank = new tank_type
+	if(ispath(tank))
+		tank = new tank
 	. = ..()
 
 /obj/item/weapon/weldingtool/Destroy()
 	if(welding)
 		STOP_PROCESSING(SSobj, src)
+
+	qdel(tank)
+	tank = null
 	return ..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
@@ -448,7 +451,7 @@
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 15, "glass" = 5)
 	w_class = ITEM_SIZE_NORMAL
-	tank_type = /obj/item/weapon/fuel_cartridge/mini
+	tank = /obj/item/weapon/fuel_cartridge/mini
 
 /obj/item/weapon/fuel_cartridge/mini
 	name = "small welding fuel cartridge"
@@ -462,7 +465,7 @@
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
 	w_class = ITEM_SIZE_HUGE
-	tank_type = /obj/item/weapon/fuel_cartridge/large
+	tank = /obj/item/weapon/fuel_cartridge/large
 
 /obj/item/weapon/fuel_cartridge/large
 	name = "large welding fuel cartridge"
@@ -475,7 +478,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
-	tank_type = /obj/item/weapon/fuel_cartridge/compact
+	tank = /obj/item/weapon/fuel_cartridge/compact
 
 /obj/item/weapon/fuel_cartridge/compact
 	name = "compact welding fuel cartridge"
@@ -488,7 +491,7 @@
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
-	tank_type = /obj/item/weapon/fuel_cartridge/experimental
+	tank = /obj/item/weapon/fuel_cartridge/experimental
 
 /obj/item/weapon/fuel_cartridge/experimental
 	name = "experimental welding fuel cartridge"
