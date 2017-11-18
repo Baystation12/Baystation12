@@ -1,16 +1,17 @@
+
 #if !defined(using_map_DATUM)
 
-	#include "../../lobby_music/halo_lobby_music.dm"
-
+	#include "../../code/modules/halo/lobby_music/halo_lobby_music.dm"
 	#include "death_asteroid_areas.dm"
 	#include "death_asteroid_spawns.dm"
 
-	#include "../../../../../maps/slayer/death_asteroid.dmm"
 
 	#include "mode_teamslayer.dm"
 	#include "mode_slayer.dm"
 	#include "slayer_jobs.dm"
 	#include "slayer_outfits.dm"
+
+	#include "death_asteroid.dmm"
 
 	#define using_map_DATUM /datum/map/teamslayer_asteroid
 

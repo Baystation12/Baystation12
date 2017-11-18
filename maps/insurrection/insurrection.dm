@@ -43,7 +43,7 @@
 
 /datum/game_mode/insurrection/proc/update_pod_status()
 	for(var/obj/machinery/podcontrol/p in remaining_pods)
-		if(!p.land_point)
+		if(isnull(p.land_point) && (p.launching == -2)) //-2 is LAUNCH_UNDERWAY
 			remaining_pods -= p
 
 /datum/game_mode/insurrection/proc/inform_start_round()
@@ -146,14 +146,15 @@
 		update_bomb_timer()
 		return
 	if(bombs[1] < world.time)
+		update_pod_status()
 		update_bomb_status()
 		update_bomb_timer()
 	if(autolaunchtime < world.time)
+		update_pod_status()
 		for(var/obj/machinery/podcontrol/control in remaining_pods)
-			control.start_launch()
+			control.launch()
 			message_faction("UNSC","<span class = 'danger'>Assault pods autolaunched.</span>")
 			modify_pod_launch(LAUNCH_UNDERWAY)
-			update_pod_status()
 			remaining_pods -= control
 
 /datum/game_mode/insurrection/handle_mob_death()
