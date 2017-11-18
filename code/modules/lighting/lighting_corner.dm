@@ -20,6 +20,11 @@
 	var/lum_g = 0
 	var/lum_b = 0
 
+	var/add_r = 0
+	var/add_g = 0
+	var/add_b = 0
+	var/needs_add = FALSE
+
 	var/needs_update = FALSE
 
 	var/cache_r  = LIGHTING_SOFT_THRESHOLD
@@ -104,6 +109,7 @@
 	var/lum_b = src.lum_b
 	var/mx = max(lum_r, lum_g, lum_b) // Scale it so 1 is the strongest lum, if it is above 1.
 	. = 1 // factor
+	needs_add = FALSE
 	if (mx > 1)
 		. = 1 / mx
 
@@ -120,6 +126,15 @@
 	cache_b  = round(lum_b * ., LIGHTING_ROUND_VALUE)
 	#endif
 	cache_mx = round(mx, LIGHTING_ROUND_VALUE)
+
+	if (needs_add)
+		add_r = min(max((lum_b - 2) * 0.5, 0), 0.3) //Adder threshhold declared in subsystems/lighting.dm
+		add_g = min(max((lum_b - 2) * 0.5, 0), 0.3)
+		add_b = min(max((lum_b - 2) * 0.5, 0), 0.3)
+	else
+		add_r = initial(add_r)
+		add_g = initial(add_g)
+		add_b = initial(add_b)
 
 	for (var/TT in masters)
 		var/turf/T = TT
