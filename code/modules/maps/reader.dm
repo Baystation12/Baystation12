@@ -33,24 +33,28 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
  * 2) Read the map line by line, parsing the result (using parse_grid)
  *
  */
-/dmm_suite/load_map(dmm_file as file, x_offset as num, y_offset as num, z_offset as num, cropMap as num, measureOnly as num, no_changeturf as num, clear_contents as num, lower_crop_x as num,  lower_crop_y as num, upper_crop_x as num, upper_crop_y as num)
+/dmm_suite/load_map(var/list/dmm_files, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y)
 	//How I wish for RAII
 	Master.StartLoadingMap()
 	space_key = null
 	#ifdef TESTING
 	turfsSkipped = 0
 	#endif
-	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y)
+	. = load_map_impl(dmm_files, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y)
 	#ifdef TESTING
 	if(turfsSkipped)
 		testing("Skipped loading [turfsSkipped] default turfs")
 	#endif
 	Master.StopLoadingMap()
 
-/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY)
-	var/tfile = dmm_file//the map file we're creating
-	if(isfile(tfile))
-		tfile = file2text(tfile)
+/dmm_suite/proc/load_map_impl(var/list/dmm_files, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/x_lower = -INFINITY, var/x_upper = INFINITY, var/y_lower = -INFINITY, var/y_upper = INFINITY)
+
+	var/list/tfiles = list()
+
+	for (var/dmm_file in dmm_files)
+		var/tfile = file(dmm_file)
+		if(isfile(tfile))
+			tfiles += file2text(tfile)
 
 	if(!x_offset)
 		x_offset = 1
@@ -60,6 +64,27 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		z_offset = world.maxz + 1
 
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
+	var/list/all_atoms_to_initialise = list()
+
+	for (var/tfile in tfiles)
+		var/datum/map_load_metadata/M = load_map_zlevel(tfile, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower, x_upper, y_lower, y_upper)
+		if (M)
+			bounds[MAP_MINX] = min(bounds[MAP_MINX], M.bounds[MAP_MINX])
+			bounds[MAP_MAXX] = max(bounds[MAP_MAXX], M.bounds[MAP_MAXX])
+			bounds[MAP_MINY] = min(bounds[MAP_MINY], M.bounds[MAP_MINY])
+			bounds[MAP_MAXY] = max(bounds[MAP_MAXY], M.bounds[MAP_MAXY])
+			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], M.bounds[MAP_MINZ])
+			bounds[MAP_MAXZ] = max(bounds[MAP_MAXZ], M.bounds[MAP_MAXZ])
+			all_atoms_to_initialise += M.atoms_to_initialise
+		z_offset = bounds[MAP_MAXZ] + 1
+
+	var/datum/map_load_metadata/M = new
+	M.bounds = bounds
+	M.atoms_to_initialise = all_atoms_to_initialise
+	return M
+
+/dmm_suite/proc/load_map_zlevel(var/tfile, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower, x_upper, y_lower, y_upper)
+
 	var/list/grid_models = list()
 	var/key_len = 0
 
@@ -67,6 +92,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 	var/list/atoms_to_initialise = list()
 	var/list/atoms_to_delete = list()
+	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 
 	while(dmmRegex.Find(tfile, stored_index))
 		stored_index = dmmRegex.next
@@ -192,11 +218,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		return null
 	else
 		if(!measureOnly)
-			if(!no_changeturf)
-				for(var/t in block(locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]), locate(bounds[MAP_MAXX], bounds[MAP_MAXY], bounds[MAP_MAXZ])))
-					var/turf/T = t
-					//we do this after we load everything in. if we don't; we'll have weird atmos bugs regarding atmos adjacent turfs
-					T.post_change()
 			if(clear_contents)
 				for(var/atom/to_delete in atoms_to_delete)
 					qdel(to_delete)
@@ -273,7 +294,13 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			old_position = dpos + 1
 
 			if(!atom_def) // Skip the item if the path does not exist.  Fix your crap, mappers!
-				continue
+	#ifdef UNIT_TEST
+				log_error("Couldn't find atom path specified in map: [full_def]")
+	#endif
+				if (dpos == 0)
+					break
+				else
+					continue
 
 			members += atom_def
 
@@ -370,6 +397,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			T = instance_atom(members[index],members_attributes[index],crds,no_changeturf)//instance new turf
 			T.underlays += underlay
 			index++
+			atoms_to_initialise += T
 
 	if (clear_contents && is_not_noop)
 		for (var/type_to_delete in types_to_delete())

@@ -19,9 +19,9 @@
 	level = 1
 
 
-/obj/machinery/atmospherics/portables_connector/New()
+/obj/machinery/atmospherics/portables_connector/Initialize()
 	initialize_directions = dir
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/portables_connector/update_icon()
 	icon_state = "connector"
