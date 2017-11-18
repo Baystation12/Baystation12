@@ -1,0 +1,6 @@
+author: "atlantiscze"
+delete-after: True
+changes: 
+  - rscdel: "Cyborgs can no longer be self-destructed through the remote console."
+  - rscadd: "Cyborg's precise position is now displayed on the console instead."
+  - rscadd: "The console now offers you an option to send direct message to a cyborg. This message is independent on telecommunications and range."
