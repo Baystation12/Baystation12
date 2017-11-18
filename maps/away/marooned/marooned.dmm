@@ -4,7 +4,6 @@
 "ad" = (/obj/structure/flora/tree/pine,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "ae" = (/obj/structure/flora/ausbushes/pointybush,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "af" = (/obj/structure/grille,/obj/item/weapon/material/shard/shrapnel{pixel_x = 5; pixel_y = 7},/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
-"ag" = (/obj/item/weapon/material/shard{tag = "icon-splinterslarge"; icon_state = "splinterslarge"},/obj/item/weapon/material/shard{tag = "icon-shardlarge"; icon_state = "shardlarge"},/obj/item/stack/rods,/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
 "ah" = (/obj/structure/grille,/obj/item/weapon/material/shard/shrapnel,/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
 "ai" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
 "aj" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/marooned/marooned_snow)
@@ -19,8 +18,6 @@
 "as" = (/obj/effect/decal/cleanable/liquid_fuel,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "at" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "au" = (/turf/simulated/wall/wood,/area/marooned/marooned_hut)
-"av" = (/obj/structure/window/basic{tag = "icon-window (NORTH)"; icon_state = "window"; dir = 1},/obj/structure/flora/pottedplant/small,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
-"aw" = (/obj/structure/window/basic{tag = "icon-window (NORTH)"; icon_state = "window"; dir = 1},/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "ax" = (/obj/item/weapon/material/shard/shrapnel{pixel_x = -4},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "ay" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
 "az" = (/obj/item/weapon/material/shard/shrapnel,/obj/effect/decal/cleanable/liquid_fuel,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
@@ -35,17 +32,14 @@
 "aI" = (/obj/structure/table/woodentable,/obj/item/clothing/accessory/medal/silver/marooned_medal{desc = "A heart-shaped bronze medal. Has Magnitka flag at top part and engraved name - H. Warda."; name = "\improper Magnitka medal"},/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "aJ" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "aK" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
-"aL" = (/obj/item/weapon/material/shard{tag = "icon-splinterslarge"; icon_state = "splinterslarge"},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "aM" = (/obj/structure/window/basic{dir = 8},/obj/structure/table/woodentable,/obj/item/clothing/glasses/regular,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "aN" = (/obj/random/trash,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "aO" = (/obj/machinery/space_heater,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
-"aP" = (/obj/structure/window/basic{tag = "icon-window (EAST)"; icon_state = "window"; dir = 4},/obj/machinery/power/port_gen/pacman/mrs,/obj/item/stack/cable_coil,/obj/item/weapon/wirecutters,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "aQ" = (/obj/item/stack/material/wood{pixel_x = 10; pixel_y = 10},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "aR" = (/obj/item/stack/material/wood,/obj/item/stack/material/wood,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "aS" = (/obj/structure/window/basic{dir = 8},/obj/structure/table/woodentable,/obj/item/weapon/material/kitchen/utensil/fork,/obj/item/trash/plate,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "aT" = (/obj/structure/bed/chair/wood,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "aU" = (/obj/item/trash/chips,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
-"aV" = (/obj/structure/window/basic{tag = "icon-window (EAST)"; icon_state = "window"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "aW" = (/obj/item/trash/liquidfood{pixel_x = 4; pixel_y = 7},/obj/item/trash/liquidfood,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "aX" = (/obj/item/weapon/material/wirerod{desc = "Metal rod with wiró attached to it."; name = "Jurry-rigged antenna"},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "aY" = (/obj/item/weapon/material/shard/shrapnel,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
@@ -55,7 +49,6 @@
 "bc" = (/obj/item/device/radio,/obj/item/stack/cable_coil{pixel_x = -10; pixel_y = -5},/obj/item/weapon/computer_hardware/battery_module{pixel_x = -7; pixel_y = 7},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "bd" = (/obj/item/weapon/material/shard/shrapnel{pixel_x = -5; pixel_y = -12},/obj/effect/decal/cleanable/generic,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "be" = (/turf/simulated/floor/beach/water,/area/marooned/marooned_snow)
-"bf" = (/turf/simulated/floor/wood{tag = "icon-wood_broken4"; icon_state = "wood_broken4"},/area/marooned/marooned_snow)
 "bg" = (/obj/structure/table/woodentable,/obj/item/ammo_casing/shotgun/blank{pixel_x = 5; pixel_y = 3},/obj/item/ammo_casing/shotgun/blank{pixel_x = -4; pixel_y = 5},/obj/item/ammo_casing/shotgun/blank,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "bh" = (/obj/structure/table/woodentable,/obj/item/clothing/gloves/duty,/obj/item/weapon/screwdriver,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
 "bi" = (/obj/structure/closet/crate/freezer,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
@@ -70,12 +63,20 @@
 "br" = (/obj/effect/overmap/sector/marooned,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "bs" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/ash,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "bt" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/ore/slag,/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
-"bu" = (/obj/item/weapon/material/shard{icon_state = "piecesmall"; pixel_x = 10; pixel_y = -8; tag = "icon-piecesmall"},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
+"bu" = (/obj/item/weapon/material/shard{icon_state = "piecesmall"; pixel_x = 10; pixel_y = -8},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "bv" = (/obj/item/stack/material/steel,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
 "bw" = (/obj/effect/shuttle_landmark/nav_marooned/nav3,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
-"bx" = (/obj/item/weapon/material/shard{tag = "icon-shrapnelmedium"; icon_state = "shrapnelmedium"},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "by" = (/obj/effect/shuttle_landmark/nav_marooned/nav1,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
 "bz" = (/obj/effect/shuttle_landmark/nav_marooned/nav2,/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
+"cb" = (/obj/item/weapon/material/shard{icon_state = "splinterslarge"},/obj/item/weapon/material/shard{icon_state = "shardlarge"},/obj/item/stack/rods,/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/floor/beach/sand,/area/marooned/marooned_snow)
+"db" = (/obj/structure/window/basic{icon_state = "window"; dir = 1},/obj/structure/flora/pottedplant/small,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
+"eb" = (/obj/structure/window/basic{icon_state = "window"; dir = 1},/turf/simulated/floor/wood,/area/marooned/marooned_hut)
+"fb" = (/obj/item/weapon/material/shard{icon_state = "splinterslarge"},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
+"gb" = (/obj/structure/window/basic{icon_state = "window"; dir = 4},/obj/machinery/power/port_gen/pacman/mrs,/obj/item/stack/cable_coil,/obj/item/weapon/wirecutters,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
+"hb" = (/obj/structure/window/basic{icon_state = "window"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/marooned/marooned_hut)
+"ib" = (/turf/simulated/floor/wood{icon_state = "wood_broken4"},/area/marooned/marooned_snow)
+"jb" = (/obj/item/weapon/material/shard{icon_state = "shrapnelmedium"},/turf/simulated/floor/marooned/snow,/area/marooned/marooned_snow)
+"kb" = (/obj/effect/landmark/random_gen/asteroid{generation_height = 100; generation_width = 100},/turf/unsimulated/mineral,/area/marooned/marooned_snow)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -96,18 +97,18 @@ aaababababababababababacacacacacacacacacacacacacacacacacadacacacacacacacacacacac
 aaababababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababababababababababababababababababababababababababababababababababababaa
 aaababababababacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacababababababababababababababababababababababababababababababababababababababababababababababaa
 aaababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababababababababababababababababababababababababababababababababaa
-aaababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababababababababababababafagahaiabababababababababababababababababaa
+aaababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababababababababababababafcbahaiabababababababababababababababababaa
 aaabababababababacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababababababababababababajakajaiabababababababababababababababababaa
 aaabababababababacacacacacacaladacacacacacacacacacacacacacacacacacacacacacacadacacacacacacacacacacacacacacacacacacacacababababababababababababababababababaiajamajanabababababababababababababababababaa
 aaababababababacacacacacacacaoacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacabababababababababababababababababababapaqaraqasacababababababababababababababababaa
-aaababababababacacacacacacacatatacacacacacacacacacadacauauauavawauauauacacacacacacacacacacacacacacacacacacacacacacababababababababababababababababababababaxayacayazaAacabababababababababababababababaa
+aaababababababacacacacacacacatatacacacacacacacacacadacauauaudbebauauauacacacacacacacacacacacacacacacacacacacacacacababababababababababababababababababababaxayacayazaAacabababababababababababababababaa
 aaababababababacacacacacacacacacacacacacaBacacacacacacauaCaCaDaDaDaEauacacacacacacacacacacacacacacacacacacacacacabababababababababababababababababababababaFayacayasaGasabababababababababababababababaa
-aaababababababacacacacadacacacacacacacaHacacacaeacacacauaDaDaDaDaDaIauacacacacacaeacacacacacacacacacacacacacacacabababababababababababababababababababababapayaJaKasasaLabababababababababababababababaa
-aaababababababacacacacacacacacacaBacaHacacacatacacacacaMaDaNaDaDaDaOaPacacacacacacacacacacacacacacacacacacacacacacababababababababababababababababababababacayacayaFapacabababababababababababababababaa
-aaababababababacacacacacacacacacacaQataRataHacacacacacaSaTaDaDaDaUaDaVaWaXacacacacacacacacacacacacacacacacacacacababababababababababababababababababababaFacaYaJayacacacabababababababababababababababaa
-aaababababababacacacacacacacacacacacatacatacacacaZbaacbbaDaDaDaDaDaDaVacbcacacacacacacacacacacacacacacacacacacabababababababababababababababababababababacaFayaJaybdapacacababababababababababababababaa
-aaababababababacacacacacacacacacacatacbebfbeacacacatataubgaDaDaDaDaDauacatacacacacacacacacacacacacacacacacacacababacabababababababababababababababababababacayacayacapacacacabababababababababababababaa
-aaababababababacacacacacacacacacacacacbebfbebeacacacataubhbiaDaDbjbkauacatacadacacacacacacacacacacacacacacacacababacababababababababababababababababababblbmayacayaZacacacacabababababababababababababaa
+aaababababababacacacacadacacacacacacacaHacacacaeacacacauaDaDaDaDaDaIauacacacacacaeacacacacacacacacacacacacacacacabababababababababababababababababababababapayaJaKasasfbabababababababababababababababaa
+aaababababababacacacacacacacacacaBacaHacacacatacacacacaMaDaNaDaDaDaOgbacacacacacacacacacacacacacacacacacacacacacacababababababababababababababababababababacayacayaFapacabababababababababababababababaa
+aaababababababacacacacacacacacacacaQataRataHacacacacacaSaTaDaDaDaUaDhbaWaXacacacacacacacacacacacacacacacacacacacababababababababababababababababababababaFacaYaJayacacacabababababababababababababababaa
+aaababababababacacacacacacacacacacacatacatacacacaZbaacbbaDaDaDaDaDaDhbacbcacacacacacacacacacacacacacacacacacacabababababababababababababababababababababacaFayaJaybdapacacababababababababababababababaa
+aaababababababacacacacacacacacacacatacbeibbeacacacatataubgaDaDaDaDaDauacatacacacacacacacacacacacacacacacacacacababacabababababababababababababababababababacayacayacapacacacabababababababababababababaa
+aaababababababacacacacacacacacacacacacbeibbebeacacacataubhbiaDaDbjbkauacatacadacacacacacacacacacacacacacacacacababacababababababababababababababababababblbmayacayaZacacacacabababababababababababababaa
 aaababababababacacacacacacacacadacacbebebebebebeacacatauauaubnbnauauauatacacacacacacacacacacacacacacacacabatacacacacababababababababababababababababababacboaYacayacacacacacabababababababababababababaa
 aaababababababacacacacacacacacacacacbebebebeadacacacacatatatatatatatatatacacacacacacacacacacacacacabababababacacatacacabababababababababababababababababababayapayacacacacacabababababababababababababaa
 aaababababababacacacacacacacacacacacacbebebeacacacacacacacacacbpacacacacacacacacacacacacacacacacacabababababababababatacabacacacababababababababababababababayacayacacacacababababababababababababababaa
@@ -128,7 +129,7 @@ aaabababababababababababababababababababacacababacacacabababacacacacacacabababab
 aaabababababababababababababababababababacacacacacacacabababacacacacacababababababababababababababababababababababababababababababababacacababababababababacacacacacacacacacacacacacacacacacacababacabaa
 aaabababababababababababababababababababacacacacacacababbubvaZacacacacababacacababababababababababababababababababababababababababababacacababababababababacacacacacacacacbwacacacacacacacacacacacacabaa
 aaababababababababababababababababacacacacacaeacacacababacayayacacacacacacacacacacababababababababababababababababababababababababababacacababababababacabacacacacacacacacacacacacacacacacacacacacacabaa
-aaababababababababababababababababababacacacacacacacbxbvacacayacacacacacacacacacacacacabababababababababababababababababababababababacacacababababababacacacacacacacacacacacacacacacacacacacacacacababaa
+aaababababababababababababababababababacacacacacacacjbbvacacayacacacacacacacacacacacacabababababababababababababababababababababababacacacababababababacacacacacacacacacacacacacacacacacacacacacacababaa
 aaabababababababababababababababababababacacacacacacaZayacacacayacacbeacacacacacacacacababababababababababababababababababababababacacacabababababababababacacacacacacacacacacacacacacacacacacababababaa
 aaabababababababababababababababababababababacacacacacayacacacacacacbebebeacaeacacababababababababababababababababababababababababacacababababababababababacacacacacacacacacacacacacacacacacacababababaa
 aaababababababababababababababababababababababacacacacacayacacaBacacbebebebebeacacacacababababababababababababababababababababababacacacababababababacacabacacacacacacacacacacacacacacacacacacababababaa
@@ -177,5 +178,5 @@ aaababababababababababababababababababababababababababababababababababababababab
 aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
 aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
 aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+kbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
