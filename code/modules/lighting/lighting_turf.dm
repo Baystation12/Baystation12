@@ -5,14 +5,15 @@
 	var/tmp/lighting_corners_initialised = FALSE
 
 	var/tmp/list/datum/light_source/affecting_lights       // List of light sources affecting this turf.
-	var/tmp/atom/movable/lighting_overlay/lighting_overlay // Our lighting overlay.
+	var/tmp/atom/movable/lighting/multiplier/lighting_overlay // Our lighting overlay.
+	var/tmp/atom/movable/lighting/adder/lighting_adder
 	var/tmp/list/datum/lighting_corner/corners
 	var/opaque_counter
 
 /turf/New()
 	opaque_counter = opacity
 	..()
-	
+
 /turf/set_opacity()
 	. = ..()
 	handle_opacity_change(src)
@@ -25,6 +26,7 @@
 /turf/proc/lighting_clear_overlay()
 	if(lighting_overlay)
 		qdel(lighting_overlay)
+		qdel(lighting_adder)
 
 	for(var/datum/lighting_corner/C in corners)
 		C.update_active()
@@ -39,7 +41,7 @@
 		if(!lighting_corners_initialised)
 			generate_missing_corners()
 
-		new /atom/movable/lighting_overlay(src)
+		new /atom/movable/lighting/multiplier(src)
 
 		for(var/datum/lighting_corner/C in corners)
 			if(!C.active) // We would activate the corner, calculate the lighting for it.
@@ -54,7 +56,7 @@
 	if(!lighting_overlay)
 		var/area/A = loc
 		if(A.dynamic_lighting)
-			var/atom/movable/lighting_overlay/O = new /atom/movable/lighting_overlay(src)
+			var/atom/movable/lighting/multiplier/O = new /atom/movable/lighting/multiplier(src)
 			lighting_overlay = O
 
 	var/totallums = 0
@@ -73,7 +75,7 @@
 	if(Obj && Obj.opacity)
 		if(!opaque_counter++)
 			reconsider_lights()
-		
+
 
 /turf/Exited(var/atom/movable/Obj, var/atom/newloc)
 	. = ..()
@@ -109,5 +111,4 @@
 			opaque_counter--
 			if(old_counter && !opaque_counter)
 				reconsider_lights()
-	
-	
+

@@ -65,3 +65,8 @@ atom/movable/lighting_overlay: (lighting_overlay.dm)
   - proc/update_overlay()
 		- Called by the lighting process to update the color of the overlay
 */
+
+/*
+Important note for future contributers: Bloom and "adder" are used interchangably. adder is used codewise,
+but "bloom" is used for user-oriented interactions. Please keep it that way.
+*/

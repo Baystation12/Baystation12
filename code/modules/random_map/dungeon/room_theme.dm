@@ -49,7 +49,7 @@
 			if(!check)
 				continue
 			for(var/atom/movable/M in check.contents)
-				if(!istype(M, /atom/movable/lighting_overlay) && M.density)
+				if(!istype(M, /atom/movable/lighting) && M.density)
 					return 0
 	if(!T)
 		return 0

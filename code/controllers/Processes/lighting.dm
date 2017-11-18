@@ -24,7 +24,7 @@
 	name = "lighting"
 
 	schedule_interval = 0 // run as fast as you possibly can
-	sleep_interval = 10 
+	sleep_interval = 10
 	create_all_lighting_overlays()
 	lighting_overlays_initialised = TRUE
 
@@ -67,7 +67,7 @@
 	lighting_update_overlays = list()
 
 	for(var/A in lighting_update_overlays_old)
-		var/atom/movable/lighting_overlay/O = A
+		var/atom/movable/lighting/multiplier/O = A
 		O.update_overlay()
 		O.needs_update = 0
 		SCHECK
@@ -92,6 +92,6 @@
 
 /datum/controller/process/lighting/statProcess()
 	..()
-	stat(null, "[total_lighting_sources] sources, [total_lighting_corners] corners, [total_lighting_overlays] overlays")
+	stat(null, "[total_lighting_sources] sources, [total_lighting_corners] corners, [total_lightings] overlays")
 	for(var/stat_type in stats_lists)
 		stat(null, "[stat_type] updates: [jointext(stats_lists[stat_type], " | ")]")

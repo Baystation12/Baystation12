@@ -983,10 +983,10 @@
 			return global.tickets;
 		if("total_lighting_corners")
 			return global.total_lighting_corners;
-		if("total_lighting_overlays")
-			return global.total_lighting_overlays;
 		if("total_lighting_sources")
 			return global.total_lighting_sources;
+		if("total_lightings")
+			return global.total_lightings;
 		if("total_unit_tests")
 			return global.total_unit_tests;
 		if("traitors")
@@ -2044,10 +2044,10 @@
 			global.tickets=newval;
 		if("total_lighting_corners")
 			global.total_lighting_corners=newval;
-		if("total_lighting_overlays")
-			global.total_lighting_overlays=newval;
 		if("total_lighting_sources")
 			global.total_lighting_sources=newval;
+		if("total_lightings")
+			global.total_lightings=newval;
 		if("total_unit_tests")
 			global.total_unit_tests=newval;
 		if("traitors")
@@ -2613,8 +2613,8 @@
 	"ticket_panels",
 	"tickets",
 	"total_lighting_corners",
-	"total_lighting_overlays",
 	"total_lighting_sources",
+	"total_lightings",
 	"total_unit_tests",
 	"traitors",
 	"transfer_controller",
