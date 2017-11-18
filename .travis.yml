@@ -15,6 +15,7 @@ env:
     - TEST=MAP MAP_PATH=example
     - TEST=MAP MAP_PATH=torch
     - TEST=MAP MAP_PATH=overmap_example
+    - TEST=MAP MAP_PATH=away_sites_testing
 
 cache:
   directories:

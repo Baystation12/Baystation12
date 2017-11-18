@@ -107,7 +107,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 				continue
 
 			var/zexpansion = zcrd > world.maxz
-			if(zexpansion)
+			if(zexpansion && !measureOnly) // don't actually expand the world if we're only measuring bounds
 				if(cropMap)
 					continue
 				else
@@ -521,7 +521,18 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		var/value = attributes[attribute]
 		if(islist(value))
 			value = deepCopyList(value)
-		what.vars[attribute] = value
+		try
+			what.vars[attribute] = value
+		catch (var/ex)
+			var/found = FALSE
+			for (var/V in what.vars)
+				if (deep_string_equals(V, attribute))
+					what.vars[V] = value
+					log_debug("Successfully performed manual var detection for var [V] \ref[V] on provided attribute [attribute] \ref[attribute] for atom [what]")
+					found = TRUE
+					break
+			if (!found)
+				throw ex
 	GLOB.use_preloader = FALSE
 
 /area/template_noop

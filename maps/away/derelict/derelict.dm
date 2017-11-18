@@ -1,5 +1,4 @@
 #include "derelict_areas.dm"
-#include "derelict-station.dmm"
 
 /obj/effect/overmap/sector/derelict
 	name = "debris field"
@@ -16,6 +15,14 @@
 		"nav_derelict_6",
 		"nav_derelict_7"
 	)
+
+/datum/map_template/ruin/away_site/derelict
+	name = "Derelict Station"
+	id = "awaysite_derelict"
+	description = "An abandoned construction project."
+	suffixes = list("derelict/derelict-station.dmm")
+	cost = 1
+	accessibility_weight = 10
 
 /obj/effect/shuttle_landmark/derelict/nav1
 	name = "Debris Navpoint #1"
