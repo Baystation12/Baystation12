@@ -7,6 +7,7 @@
 	parent_organ = BP_HEAD
 	organ_tag = BP_VOICE
 	will_assist_languages = list(LANGUAGE_GALCOM)
+	max_damage = 40
 
 
 /obj/item/organ/internal/voicebox/New()
