@@ -28,3 +28,8 @@
 	name = "Detomatix PDA Cartridge"
 	item_cost = 16
 	path = /obj/item/weapon/cartridge/syndicate
+	
+/datum/uplink_item/item/stealthy_weapons/fidgetshuriken
+	name = "Shuriken Fidget Spinner"
+	item_cost = 4
+	path = /obj/item/weapon/material/star/fidgetspinner

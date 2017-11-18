@@ -20,5 +20,13 @@
 		var/urgh = material.radioactivity
 		M.adjustToxLoss(rand(urgh/2,urgh))
 
+/* Stars */
 /obj/item/weapon/material/star/ninja
 	default_material = "uranium"
+
+/obj/item/weapon/material/star/fidgetspinner
+	name = "fidget spinner"
+	desc = "A fidget spinner. On closer inspection, it looks like someone has attached some razorblades to this one."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "fidgetspinner"
+	w_class = ITEM_SIZE_SMALL
