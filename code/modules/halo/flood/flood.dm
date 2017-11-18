@@ -17,6 +17,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	break_stuff_probability = 50
 	stop_automated_movement = 1
 	wander = 0
+	melee_damage_lower = 5
+	melee_damage_upper = 10
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()

@@ -27,7 +27,7 @@
 
 /obj/item/device/flashlight/flaming_torch/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	..()
-	user << "It has [fuel_ticks_left] out of [max_fuel_ticks] units of fuel left ([100 * fuel_ticks_left/max_fuel_ticks]%)."
+	to_chat(user, "It has [fuel_ticks_left] out of [max_fuel_ticks] units of fuel left ([100 * fuel_ticks_left/max_fuel_ticks]%).")
 
 /obj/item/device/flashlight/flaming_torch/attack_self(mob/user)
 	if(..())

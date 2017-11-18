@@ -33,7 +33,7 @@
 				if(woodleft <= 0)
 					qdel(src)
 	else
-		user << "<span class='warning'>You need something sharp to chop down [src]</span>"
+		to_chat(user, "<span class='warning'>You need something sharp to chop down [src]</span>")
 
 /obj/structure/tree/palm
 	name = "palm tree"
