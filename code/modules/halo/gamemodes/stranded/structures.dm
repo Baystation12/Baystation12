@@ -46,13 +46,16 @@
 				return
 		var/turf/T = get_step(AM, AM.dir)
 		if(T.CanPass(AM, T))
-			AM << "<span class='notice'>You start maneuvring past [src]...</span>"
+			if(ismob(AM))
+				var/mob/moving = AM
+				moving.show_message("<span class='notice'>You start maneuvring past [src]...</span>")
 			spawn(0)
 				if(do_after(AM, 30))
 					src.visible_message("<span class='info'>[AM] slips past [src].</span>")
 					AM.loc = T
-		else
-			AM << "<span class='warning'>Something is blocking you from maneuvering past [src].</span>"
+		else if(ismob(AM))
+			var/mob/moving = AM
+			moving.show_message("<span class='warning'>Something is blocking you from maneuvering past [src].</span>")
 	..()
 
 /obj/structure/tanktrap/attack_generic(var/mob/user, var/damage, var/attacktext)
@@ -109,13 +112,16 @@
 
 		var/turf/T = get_step(AM, AM.dir)
 		if(T.CanPass(AM, T))
-			AM << "<span class='notice'>You start climbing over [src]...</span>"
+			if(ismob(AM))
+				var/mob/moving = AM
+				moving.show_message("<span class='notice'>You start climbing over [src]...</span>")
 			spawn(0)
 				if(do_after(AM, 30))
 					src.visible_message("<span class='info'>[AM] climbs over [src].</span>")
 					AM.loc = T
-		else
-			AM << "<span class='warning'>You cannot climb over [src] as it is being blocked.</span>"
+		else if(ismob(AM))
+			var/mob/moving = AM
+			moving.show_message("<span class='warning'>You cannot climb over [src] as it is being blocked.</span>")
 	..()
 
 /obj/structure/sandbag/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
@@ -216,7 +222,9 @@
 		L.adjustBruteLoss(damage)
 		if(prob(25))
 			L.Weaken(2)
-		AM << "<span class='warning'>You are caught in [src]!</span>"
+		if(ismob(AM))
+			var/mob/moving = AM
+			moving.show_message("<span class='warning'>You are caught in [src]!</span>")
 		health -= 1
 		if(health <= 0)
 			new /obj/item/metalscraps(src.loc)

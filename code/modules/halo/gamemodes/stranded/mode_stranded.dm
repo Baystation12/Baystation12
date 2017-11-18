@@ -98,13 +98,11 @@
 	process_evac()
 
 /datum/game_mode/stranded/proc/process_daynight()
-	//world << "/datum/game_mode/stranded/proc/process_daynight()"
 
 	var/phase_duration = is_daytime ? duration_day : duration_night
 	var/daynight_progress = 1 - (time_lightchange - world.time) / phase_duration
 	daynight_progress = max(daynight_progress, 0)
 	daynight_progress = min(daynight_progress, 1)
-	//world << "	daynight_progress: [daynight_progress]"
 
 	var/duskdawn_threshold = is_daytime ? threshold_dusk : threshold_dawn
 	if(daynight_progress > duskdawn_threshold)
@@ -135,7 +133,6 @@
 				if(is_daytime)
 					duskdawn_progress = 1 - duskdawn_progress
 				set_ambient_light(duskdawn_progress * daytime_brightness)*/
-				//world << "	updated current_light_level:[current_light_level]"
 				set_ambient_light(current_light_level)
 
 /datum/game_mode/stranded/proc/process_spawning()
@@ -150,7 +147,6 @@
 
 		if(world.time > time_next_spawn_tick)
 			time_next_spawn_tick = world.time + spawn_interval
-			//world << "spawn cycle [world.time]"
 			spawn(0)
 				spawn_attackers_tick(spawns_per_tick_current)
 	else
@@ -179,7 +175,6 @@
 
 /datum/game_mode/stranded/proc/spawn_attackers_tick(var/amount = 1)
 	set background = 1
-	//world << "/datum/game_mode/stranded/proc/spawn_attackers_tick([amount]) [world.time]"
 	amount += bonus_spawns
 	bonus_spawns = 0
 	while(amount >= 1)
@@ -199,20 +194,16 @@
 	bonus_spawns = max(amount, 0)
 
 /datum/game_mode/stranded/proc/spawn_attackers(var/spawntype, var/amount)
-	//world << "/datum/game_mode/stranded/proc/spawn_attackers([spawntype],[amount])"
 	if(GLOB.live_flood_simplemobs.len >= GLOB.max_flood_simplemobs)
-		//world << "MAX FLOOD ON MAP"
 		return
 	if(flood_spawn_turfs.len)
 		for(var/i = 0, i < amount, i++)
-			//world << "	check3"
 			var/turf/spawn_turf = pick(flood_spawn_turfs)
 			var/mob/living/simple_animal/hostile/flood/F = new spawntype(spawn_turf)
 			if(flood_assault_turfs.len)
 				var/turf/assault_turf = pick(flood_assault_turfs)
 				assault_turf = pick(range(7, assault_turf))
 				F.set_assault_target(assault_turf)
-				//world << "	check4"
 			else
 				log_admin("Error: gamemode unable to find any /obj/effect/landmark/flood_assault_target/")
 	else

@@ -43,5 +43,5 @@
 		var/mob/M = src.loc
 		if(M && istype(M))
 			M.remove_from_mob(src)
-			M << "<span class='warning'>[src] burns itself out.</span>"
+			M.show_message("<span class='warning'>[src] burns itself out.</span>")
 		qdel(src)
