@@ -252,6 +252,7 @@
 #define SPECIES_PROMETHEAN "Promethean"
 #define SPECIES_BOGANI "Bogani"
 #define SPECIES_EGYNO "Egyno"
+#define SPECIES_UPLIFT_CHIMP "Uplift"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
