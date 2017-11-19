@@ -136,3 +136,14 @@
 	icon_state = "rapidsyringegun"
 	item_state = "rapidsyringegun"
 	max_darts = 5
+
+/obj/item/weapon/gun/launcher/syringe/disguised
+	name = "deluxe electronic cigarette"
+	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar. The button is a little stiff."
+	icon = 'icons/obj/ecig.dmi'
+	icon_state = "pcigoff1"
+	item_state = "pcigoff1"
+	w_class = ITEM_SIZE_SMALL
+	force = 3
+	throw_distance = 7
+	release_force = 7
