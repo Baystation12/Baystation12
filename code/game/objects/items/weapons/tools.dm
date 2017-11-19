@@ -20,7 +20,7 @@
 	description_info = "This versatile tool is used for dismantling machine frames, anchoring or unanchoring heavy objects like vending machines and emitters, and much more. In general, if you want something to move or stop moving entirely, you ought to use a wrench on it."
 	description_fluff = "The classic open-end wrench (or spanner, if you prefer) hasn't changed significantly in shape in over 500 years, though these days they employ a bit of automated trickery to match various bolt sizes and configurations."
 	description_antag = "Not only is this handy tool good for making off with machines, but it even makes a weapon in a pinch!"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "wrench"
 	item_state = "wrench"
 	flags = CONDUCT
@@ -33,8 +33,9 @@
 	center_of_mass = "x=17;y=16"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
-/obj/item/weapon/wrench/New()
+/obj/item/weapon/wrench/Initialize()
 	icon_state = "wrench[pick("","_red","_black")]"
+	. = ..()
 
 /*
  * Screwdriver
@@ -45,7 +46,7 @@
 	description_info = "This tool is used to expose or safely hide away cabling. It can open and shut the maintenance panels on vending machines, airlocks, and much more. You can also use it, in combination with a crowbar, to install or remove windows."
 	description_fluff = "Screws have not changed significantly in centuries, and neither have the drivers used to install and remove them."
 	description_antag = "In the world of breaking and entering, tools like multitools and wirecutters are the bread; the screwdriver is the butter. In a pinch, try targetting someone's eyes and stabbing them with it - it'll really hurt!"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "screwdriver"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_EARS
@@ -59,7 +60,7 @@
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 
-/obj/item/weapon/screwdriver/New()
+/obj/item/weapon/screwdriver/Initialize()
 	switch(pick("red","blue","purple","brown","green","cyan","yellow"))
 		if ("red")
 			icon_state = "screwdriver2"
@@ -85,7 +86,7 @@
 
 	if (prob(75))
 		src.pixel_y = rand(0, 16)
-	..()
+	. = ..()
 
 /obj/item/weapon/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M) || user.a_intent == "help")
@@ -105,7 +106,7 @@
 	description_info = "This tool will cut wiring anywhere you see it - make sure to wear insulated gloves! When used on more complicated machines or airlocks, it can not only cut cables, but repair them, as well."
 	description_fluff = "With modern alloys, today's wirecutters can snap through cables of astonishing thickness."
 	description_antag = "These cutters can be used to cripple the power anywhere on the ship. All it takes is some creativity, and being in the right place at the right time."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "cutters"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
@@ -120,11 +121,11 @@
 	sharp = 1
 	edge = 1
 
-/obj/item/weapon/wirecutters/New()
+/obj/item/weapon/wirecutters/Initialize()
 	if(prob(50))
 		icon_state = "cutters-y"
 		item_state = "cutters_yellow"
-	..()
+	. = ..()
 
 /obj/item/weapon/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
 	if(user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/weapon/handcuffs/cable)))
@@ -144,7 +145,7 @@
  */
 /obj/item/weapon/weldingtool
 	name = "welding tool"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "welder"
 	desc = "A heavy but portable welding gun with its own internal fuel tank. It features a simple toggle switch, and a port for attaching an external tank."
 	description_info = "Use in your hand to toggle the welder on and off. Click on an object to try to weld it. You can seal airlocks, attach heavy-duty machines like emitters and disposal chutes, and repair damaged walls - these are only a few of its uses. Each use of the welder will consume a unit of fuel. Be sure to wear eye protection such as goggles, a mask, or certain voidsuit helmets, otherwise you risk damaging your eyes! You can refill the welder with a welder tank by clicking on it, but be sure to turn it off first!"
@@ -172,11 +173,11 @@
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
 	var/max_fuel = 20 	//The max amount of fuel the welder can hold
 
-/obj/item/weapon/weldingtool/New()
+/obj/item/weapon/weldingtool/Initialize()
 //	var/random_fuel = min(rand(10,20),max_fuel)
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
-	..()
+	. = ..()
 
 /obj/item/weapon/weldingtool/Destroy()
 	if(welding)
@@ -415,8 +416,9 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	var/last_gen = 0
 
-/obj/item/weapon/weldingtool/experimental/New()
+/obj/item/weapon/weldingtool/experimental/Initialize()
 	description_info += "<br><br>This welder will passively regenerate fuel."
+	. = ..()
 
 /obj/item/weapon/weldingtool/experimental/proc/fuel_gen()//Proc to make the experimental welder generate fuel, optimized as fuck -Sieve
 	var/gen_amount = ((world.time-last_gen)/25)
@@ -453,7 +455,7 @@
 	description_info = "Crowbars have countless uses: click on floor tiles to pry them loose. Use alongside a screwdriver to install or remove windows. Force open emergency shutters, or depowered airlocks. Open the panel of an unlocked APC. Pry a computer's circuit board free. And much more!"
 	description_fluff = "As is the case with most standard-issue tools, crowbars are a simple and timeless design, the only difference being that advanced materials like plasteel have made them uncommonly tough."
 	description_antag = "Need to bypass a bolted door? You can use a crowbar to pry the electronics out of an airlock, provided that it has no power and has been welded shut."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "crowbar"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
@@ -473,7 +475,7 @@
 
 /obj/item/weapon/crowbar/prybar
 	name = "pry bar"
-	desc = "A steel bar with a wedge at one end and a hard rubber pommel handle at the other."
+	desc = "A steel bar with a wedge. It comes in a variety of configurations - collect them all."
 	icon_state = "prybar"
 	item_state = "crowbar"
 	force = 4.0
@@ -481,6 +483,10 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
+
+/obj/item/weapon/crowbar/prybar/Initialize()
+	icon_state = "prybar[pick("","_red","_green","_aubergine","_blue")]"
+	. = ..()
 
 /*
  * Combitool
