@@ -1362,6 +1362,12 @@
 	required_reagents = list(/datum/reagent/nutriment/ketchup = 2, "pepper" = 1, "salt" = 1)
 	result_amount = 4
 
+/datum/chemical_reaction/garlicsauce
+	name = "Garlic Sauce"
+	result = /datum/reagent/nutriment/garlicsauce
+	required_reagents = list(/datum/reagent/drink/juice/garlic = 1, /datum/reagent/nutriment/cornoil = 1)
+	result_amount = 2
+
 /datum/chemical_reaction/cheesewheel
 	name = "Cheesewheel"
 	result = null

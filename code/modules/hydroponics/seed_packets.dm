@@ -263,3 +263,12 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/kudzuseed
 	seed_type = "kudzu"
+
+/obj/item/seeds/peppercornseed
+	seed_type = "peppercorn"
+
+/obj/item/seeds/garlicseed
+	seed_type = "garlic"
+
+/obj/item/seeds/onionseed
+	seed_type = "onion"
