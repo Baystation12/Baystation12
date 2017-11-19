@@ -45,9 +45,9 @@
 				"id" = R.uid
 			)))
 		data["all_records"] = all_records
-		data["creation"] = check_access(user, access_heads) 
-		data["dnasearch"] = check_access(user, access_medical) 
-		data["fingersearch"] = check_access(user, access_security) 
+		data["creation"] = check_access(user, access_heads)
+		data["dnasearch"] = check_access(user, access_medical) || check_access(user, access_security)
+		data["fingersearch"] = check_access(user, access_security)
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

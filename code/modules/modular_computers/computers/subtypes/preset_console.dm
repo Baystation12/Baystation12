@@ -4,6 +4,7 @@
 	tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)
 	hard_drive = new/obj/item/weapon/computer_hardware/hard_drive/super(src)
 	network_card = new/obj/item/weapon/computer_hardware/network_card/wired(src)
+	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
 
 // Engineering
 /obj/item/modular_computer/console/preset/engineering/install_default_programs()
@@ -59,7 +60,6 @@
 // Command
 /obj/item/modular_computer/console/preset/command/install_default_hardware()
 	..()
-	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
 	card_slot = new/obj/item/weapon/computer_hardware/card_slot(src)
 
 /obj/item/modular_computer/console/preset/command/install_default_programs()
@@ -95,12 +95,10 @@
 // Offices
 /obj/item/modular_computer/console/preset/civilian/professional/install_default_hardware()
 	..()
-	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
 
 // Crew-facing supply ordering computer
 /obj/item/modular_computer/console/preset/supply/install_default_hardware()
 	..()
-	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
 
 /obj/item/modular_computer/console/preset/supply/install_default_programs()
 	..()
@@ -111,7 +109,6 @@
 /obj/item/modular_computer/console/preset/ert/install_default_hardware()
 	..()
 	ai_slot = new/obj/item/weapon/computer_hardware/ai_slot(src)
-	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
 	card_slot = new/obj/item/weapon/computer_hardware/card_slot(src)
 
 /obj/item/modular_computer/console/preset/ert/install_default_programs()
