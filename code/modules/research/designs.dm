@@ -1763,6 +1763,9 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/airlock_brace
 	sort_string = "VBAAP"
 
+
+// tools
+
 /datum/design/item/brace_jack
 	name = "maintenance jack design"
 	desc = "A special maintenance tool that can be used to remove airlock braces."
@@ -1772,6 +1775,14 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/crowbar/brace_jack
 	sort_string = "VBAAS"
 
+/datum/design/item/experimental_welder
+	name = "experimental welding tool"
+	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
+	id = "experimental_welder"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_PHORON = 4)
+	materials = list(DEFAULT_WALL_MATERIAL = 120, "glass" = 50)
+	build_path = /obj/item/weapon/weldingtool/experimental
+	sort_string = "VBAAT"
 
 //RIG Modules
 //Sidenote; Try to keep a requirement of 5 engineering for each, but keep the rest as similiar to it's original as possible.
