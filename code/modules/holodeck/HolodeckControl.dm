@@ -46,6 +46,14 @@
 	var/dat
 
 	dat += "<B>Holodeck Control System</B><BR>"
+	if(!islocked)
+		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'><font color=green>(UNLOCKED)</font></A><BR>"
+	else
+		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'><font color=red>(LOCKED)</font></A><BR>"
+		show_browser(user, dat, "window=computer;size=400x500")
+		onclose(user, "computer")
+		return
+
 	dat += "<HR>Current Loaded Programs:<BR>"
 
 	if(!linkedholodeck)
@@ -94,13 +102,6 @@
 		dat += "Gravity is <A href='?src=\ref[src];gravity=1'><font color=green>(ON)</font></A><BR>"
 	else
 		dat += "Gravity is <A href='?src=\ref[src];gravity=1'><font color=blue>(OFF)</font></A><BR>"
-
-	if(!islocked)
-		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'><font color=green>(UNLOCKED)</font></A><BR>"
-	else
-		dat = "<B>Holodeck Control System</B><BR>"
-		dat += "Holodeck is <A href='?src=\ref[src];togglehololock=1'><font color=red>(LOCKED)</font></A><BR>"
-
 	user << browse(dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
@@ -362,5 +363,5 @@
 		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return 1
 
-/obj/machinery/computer/HolodeckControl/proc/cantogglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
-	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
+/obj/machinery/computer/HolodeckControl/proc/cantogglelock(var/mob/user)
+	return allowed(user)
