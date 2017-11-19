@@ -1287,7 +1287,8 @@
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("fried onions" = 5)
 	nutriment_amt = 5
-	New()
+
+/obj/item/weapon/reagent_containers/food/snacks/onionrings/New()
 		..()
 		bitesize = 2
 
@@ -1380,7 +1381,8 @@
 
 	nutriment_desc = list("onion" = 2, "mushroom" = 2)
 	nutriment_amt = 4
-	New()
+
+/obj/item/weapon/reagent_containers/food/snacks/loadedsteak/New()
 		..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 		reagents.add_reagent(/datum/reagent/nutriment/garlicsauce, 2)
