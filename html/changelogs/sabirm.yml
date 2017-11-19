@@ -1,6 +1,0 @@
-author: sabirm
-delete-after: True
-changes: 
-  - rscadd: "Added a supply crate containing ammunition for the executive heads' revolvers."
-  - tweak: "The rubber ammo crate now contains two rubber .45, two flash .45, and two rubber .44 magnum magazines on the Torch map."
-  - tweak: "As part of the Great Gun Experiment, all ammunition is now hidden in the autolathe."
