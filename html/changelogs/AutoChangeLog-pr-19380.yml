@@ -1,6 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - rscadd: "The telecomms broadcaster, relays, station bounced radios and intercomms now broadcast to all connected z levels."
-  - rscadd: "Adds a relay circuit board to the telecomms storage."
-  - rscdel: "Removes relay rooms and replaces them with maintenance."
