@@ -47,6 +47,16 @@
 			if(broken || burnt)
 				to_chat(user, "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>")
 				return
+			//first check, catwalk? Else let flooring do its thing
+			if(locate(/obj/structure/catwalk, src))
+				return
+			if (istype(C, /obj/item/stack/rods))
+				var/obj/item/stack/rods/R = C
+				if (R.use(2))
+					to_chat(user, "<span class='notice'>You lay down the catwalk.</span>")
+					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+					new /obj/structure/catwalk(src)
+				return
 			var/obj/item/stack/S = C
 			var/decl/flooring/use_flooring
 			for(var/flooring_type in flooring_types)
@@ -115,6 +125,7 @@
 					else
 						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 					return
+
 
 	return ..()
 

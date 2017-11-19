@@ -1,0 +1,6 @@
+author: CrimsonShrike
+delete-after: True
+changes: 
+  - rscadd: "Now catwalks can be built above plating."
+  - tweak: "Reinforced floor now requires 1 steel sheet instead of 2 rods."
+

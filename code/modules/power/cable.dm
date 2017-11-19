@@ -41,12 +41,6 @@ var/list/possible_cable_coil_colours
 	color = COLOR_RED
 	var/obj/machinery/power/breakerbox/breaker_box
 
-/obj/structure/cable/hide(var/do_hide)
-	if(do_hide && level == 1)
-		plane = ABOVE_PLATING_PLANE
-		layer = WIRE_LAYER
-	else
-		reset_plane_and_layer()
 
 /obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
 

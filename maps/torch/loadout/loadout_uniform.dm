@@ -159,7 +159,7 @@
 	path = /obj/item/clothing/under
 	allowed_roles = list(/datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor,
-						/datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant)
+						/datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant, /datum/job/assistant)
 
 /datum/gear/uniform/corporate/New()
 	..()
@@ -172,6 +172,7 @@
 	corps["ward-takahashi uniform"] = /obj/item/clothing/under/wardt
 	corps["grayson uniform"] = /obj/item/clothing/under/grayson
 	corps["focal point uniform"] = /obj/item/clothing/under/focal
+	corps["nanotrasen"] = /obj/item/clothing/under/rank/ntwork
 	gear_tweaks += new/datum/gear_tweak/path(corps)
 
 /datum/gear/uniform/sterile
