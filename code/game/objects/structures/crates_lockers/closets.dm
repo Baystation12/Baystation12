@@ -265,7 +265,7 @@
 			return 0
 		if(istype(W,/obj/item/tk_grab))
 			return 0
-		if(istype(W, /obj/item/weapon/weldingtool))
+		if(isWelder(W))
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.isOn())
 				slice_into_parts(WT, user)
@@ -297,7 +297,7 @@
 			open()
 	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
-	else if(istype(W, /obj/item/weapon/weldingtool) && (setup & CLOSET_CAN_BE_WELDED))
+	else if(isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(0,user))
 			if(!WT.isOn())

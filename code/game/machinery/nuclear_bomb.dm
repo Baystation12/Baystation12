@@ -45,7 +45,7 @@ var/bomb_set
 		GLOB.nanomanager.update_uis(src)
 
 /obj/machinery/nuclearbomb/attackby(obj/item/weapon/O as obj, mob/user as mob, params)
-	if (istype(O, /obj/item/weapon/screwdriver))
+	if(isScrewdriver(O))
 		src.add_fingerprint(user)
 		if (src.auth)
 			if (panel_open == 0)
@@ -69,7 +69,7 @@ var/bomb_set
 			flick("lock", src)
 		return
 
-	if (panel_open && (istype(O, /obj/item/device/multitool) || istype(O, /obj/item/weapon/wirecutters)))
+	if (panel_open && isMultitool(O) || isWirecutter(O))
 		return attack_hand(user)
 
 	if (src.extended)
@@ -83,7 +83,7 @@ var/bomb_set
 	if (src.anchored)
 		switch(removal_stage)
 			if(0)
-				if(istype(O,/obj/item/weapon/weldingtool))
+				if(isWelder(O))
 					var/obj/item/weapon/weldingtool/WT = O
 					if(!WT.isOn()) return
 					if (WT.get_fuel() < 5) // uses up 5 fuel.
@@ -99,7 +99,7 @@ var/bomb_set
 				return
 
 			if(1)
-				if(iscrowbar(O))
+				if(isCrowbar(O))
 					user.visible_message("[user] starts forcing open the bolt covers on [src].", "You start forcing open the anchoring bolt covers with [O]...")
 
 					if(do_after(user, 15, src))
@@ -109,7 +109,7 @@ var/bomb_set
 				return
 
 			if(2)
-				if(istype(O,/obj/item/weapon/weldingtool))
+				if(isWelder(O))
 
 					var/obj/item/weapon/weldingtool/WT = O
 					if(!WT.isOn()) return
@@ -126,7 +126,7 @@ var/bomb_set
 				return
 
 			if(3)
-				if(istype(O,/obj/item/weapon/wrench))
+				if(isWrench(O))
 
 					user.visible_message("[user] begins unwrenching the anchoring bolts on [src].", "You begin unwrenching the anchoring bolts...")
 
@@ -137,7 +137,7 @@ var/bomb_set
 				return
 
 			if(4)
-				if(iscrowbar(O))
+				if(isCrowbar(O))
 
 					user.visible_message("[user] begins lifting [src] off of the anchors.", "You begin lifting the device off the anchors...")
 

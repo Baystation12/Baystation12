@@ -203,7 +203,7 @@
 			interact(user)
 		else
 			user.put_in_any_hand_if_possible(I)
-	else if(iscrowbar(I))
+	else if(isCrowbar(I))
 		if(applied_shell)
 			to_chat(user, "<span class='warning'>You cannot open the assembly while it has a shell attached.</span>")
 			return 0
@@ -220,13 +220,13 @@
 		var/obj/item/electronic_assembly_shell/S = I
 		if(apply_shell(S, user))
 			playsound(src, 'sound/weapons/flipblade.ogg', 50, 0, -2)
-	else if(istype(I, /obj/item/weapon/screwdriver)	&& applied_shell)
+	else if(isScrewdriver(I)	&& applied_shell)
 		applied_shell.dropInto(loc)
 		user.put_in_any_hand_if_possible(applied_shell)
 		applied_shell = null
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, 0, -2)
 		update_icon()
-	else if(istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger) || istype(I, /obj/item/weapon/screwdriver))
+	else if(istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger) || isScrewdriver(I))
 		if(opened)
 			interact(user)
 		else

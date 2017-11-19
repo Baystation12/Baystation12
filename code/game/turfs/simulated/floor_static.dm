@@ -8,7 +8,7 @@
 	initial_flooring = null
 
 /turf/simulated/floor/fixed/attackby(var/obj/item/C, var/mob/user)
-	if(istype(C, /obj/item/stack) && !istype(C, /obj/item/stack/cable_coil))
+	if(istype(C, /obj/item/stack) && !isCoil(C))
 		return
 	return ..()
 
@@ -28,7 +28,7 @@
 	icon_state = "jaggy"
 
 /turf/simulated/floor/fixed/alium/attackby(var/obj/item/C, var/mob/user)
-	if(iscrowbar(C))
+	if(isCrowbar(C))
 		to_chat(user, "<span class='notice'>There aren't any openings big enough to pry it away...</span>")
 		return
 	return ..()

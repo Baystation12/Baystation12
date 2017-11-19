@@ -10,7 +10,7 @@
 	var/obj/machinery/power/fusion_core/cur_viewed_device
 
 /obj/machinery/computer/fusion_core_control/attackby(var/obj/item/thing, var/mob/user)
-	if(ismultitool(thing))
+	if(isMultitool(thing))
 		var/new_ident = input("Enter a new ident tag.", "Core Control", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident

@@ -230,7 +230,7 @@
 		buildstate++
 		update_icon()
 		return
-	else if(isscrewdriver(thing) && buildstate == 3)
+	else if(isScrewdriver(thing) && buildstate == 3)
 		user.visible_message("<span class='notice'>\The [user] secures the trigger assembly with \the [thing].</span>")
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		var/obj/item/weapon/gun/projectile/pirate/zipgun

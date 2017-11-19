@@ -112,7 +112,7 @@
 /datum/surgery_step/hardsuit/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!istype(target))
 		return 0
-	if(istype(tool,/obj/item/weapon/weldingtool))
+	if(isWelder(tool))
 		var/obj/item/weapon/weldingtool/welder = tool
 		if(!welder.isOn() || !welder.remove_fuel(1,user))
 			return 0
