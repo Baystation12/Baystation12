@@ -159,7 +159,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_NORMAL
 
 	//Cost to make in the autolathe
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
@@ -428,9 +428,9 @@
 	desc = "An interchangable fuel tank meant for a welding tool."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "fuel"
-	w_class = ITEM_SIZE_NORMAL
-	var/max_fuel = 30
-	var/can_remove = 0
+	w_class = ITEM_SIZE_SMALL
+	var/max_fuel = 20
+	var/can_remove = 1
 
 /obj/item/weapon/fuel_cartridge/Initialize()
 	create_reagents(max_fuel)
@@ -456,34 +456,34 @@
 /obj/item/weapon/fuel_cartridge/mini
 	name = "small welding fuel cartridge"
 	w_class = ITEM_SIZE_SMALL
-	max_fuel = 10
-	can_remove = 1
+	max_fuel = 5
+	can_remove = 0
 
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
 	desc = "A heavy-duty portable welder, made to ensure it won't suddenly go cold on you."
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
-	w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_LARGE
 	tank = /obj/item/weapon/fuel_cartridge/large
 
 /obj/item/weapon/fuel_cartridge/large
 	name = "large welding fuel cartridge"
-	w_class = ITEM_SIZE_LARGE
-	max_fuel = 80
+	w_class = ITEM_SIZE_NORMAL
+	max_fuel = 40
 
 /obj/item/weapon/weldingtool/hugetank
-	name = "compact welding tool"
+	name = "upgraded welding tool"
 	desc = "A modified miniature welding tool that appears to make the most out of its size."
-	w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
-	tank = /obj/item/weapon/fuel_cartridge/compact
+	tank = /obj/item/weapon/fuel_cartridge/huge
 
-/obj/item/weapon/fuel_cartridge/compact
-	name = "compact welding fuel cartridge"
-	w_class = ITEM_SIZE_SMALL
-	max_fuel = 20
+/obj/item/weapon/fuel_cartridge/huge
+	name = "huge welding fuel cartridge"
+	w_class = ITEM_SIZE_LARGE
+	max_fuel = 80
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
@@ -496,7 +496,8 @@
 /obj/item/weapon/fuel_cartridge/experimental
 	name = "experimental welding fuel cartridge"
 	w_class = ITEM_SIZE_NORMAL
-	max_fuel = 20
+	max_fuel = 40
+	can_remove = 0
 	var/last_gen = 0
 
 /obj/item/weapon/fuel_cartridge/experimental/Initialize()
