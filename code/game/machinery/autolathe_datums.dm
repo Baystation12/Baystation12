@@ -301,31 +301,37 @@ var/const/EXTRA_COST_FACTOR = 1.25
 /datum/autolathe/recipe/shotgun_beanbag
 	name = "ammunition (shotgun, beanbag)"
 	path = /obj/item/ammo_casing/shotgun/beanbag
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/shotgun_flash
 	name = "ammunition (shotgun, flash)"
 	path = /obj/item/ammo_casing/shotgun/flash
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_rubber
 	name = "ammunition (.45, rubber)"
 	path = /obj/item/ammo_magazine/c45m/rubber
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/speedloader_44_rubber
 	name = "speed loader (.44 magnum, rubber)"
 	path = /obj/item/ammo_magazine/c44/rubber
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_flash
 	name = "ammunition (.45, flash)"
 	path = /obj/item/ammo_magazine/c45m/flash
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_smg_rubber
 	name = "ammunition (9mm rubber top mounted)"
 	path = /obj/item/ammo_magazine/mc9mmt/rubber
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/consolescreen
