@@ -1,5 +1,30 @@
-#define CRITICAL_APC_EMP_PROTECTION 10 // EMP effect duration is divided by this number if the APC has "critical" flag
-//update_state
+
+
+// The Area Power Controller (APC)
+// Controls and provides power to most electronics in an area
+// Only one required per area
+// Requires a wire connection to a power network through a terminal
+// Generates a terminal based on the direction of the APC on spawn
+
+// There are three different power channels, lighting, equipment, and enviroment
+// Each may have one of the following states
+
+#define POWERCHAN_OFF		0	// Power channel is off
+#define POWERCHAN_OFF_TEMP	1	// Power channel is off until there is power
+#define POWERCHAN_OFF_AUTO	2	// Power channel is off until power passes a threshold
+#define POWERCHAN_ON		3	// Power channel is on until there is no power
+#define POWERCHAN_ON_AUTO	4	// Power channel is on until power drops below a threshold
+
+// Power channels set to Auto change when power levels rise or drop below a threshold
+
+#define AUTO_THRESHOLD_LIGHTING  50
+#define AUTO_THRESHOLD_EQUIPMENT 25
+// The ENVIRON channel stays on as long as possible, and doesn't have a threshold
+
+#define CRITICAL_APC_EMP_PROTECTION 10	// EMP effect duration is divided by this number if the APC has "critical" flag
+#define APC_UPDATE_ICON_COOLDOWN 100	// Time between automatically updating the icon (10 seconds)
+
+// Used to check whether or not to update the icon_state
 #define UPDATE_CELL_IN 1
 #define UPDATE_OPENED1 2
 #define UPDATE_OPENED2 4
@@ -9,50 +34,20 @@
 #define UPDATE_WIREEXP 64
 #define UPDATE_ALLGOOD 128
 
-//update_overlay
+// Used to check whether or not to update the overlay
 #define APC_UPOVERLAY_CHARGEING0 1
 #define APC_UPOVERLAY_CHARGEING1 2
 #define APC_UPOVERLAY_CHARGEING2 4
-#define APC_UPOVERLAY_EQUIPMENT0 8
-#define APC_UPOVERLAY_EQUIPMENT1 16
-#define APC_UPOVERLAY_EQUIPMENT2 32
-#define APC_UPOVERLAY_LIGHTING0 64
-#define APC_UPOVERLAY_LIGHTING1 128
-#define APC_UPOVERLAY_LIGHTING2 256
-#define APC_UPOVERLAY_ENVIRON0 512
-#define APC_UPOVERLAY_ENVIRON1 1024
-#define APC_UPOVERLAY_ENVIRON2 2048
-#define APC_UPOVERLAY_LOCKED 4096
-#define APC_UPOVERLAY_OPERATING 8192
+#define APC_UPOVERLAY_LOCKED 8
+#define APC_UPOVERLAY_OPERATING 16
 
-
-#define APC_UPDATE_ICON_COOLDOWN 100 // 10 seconds
-
-
-// the Area Power Controller (APC), formerly Power Distribution Unit (PDU)
-// one per area, needs wire conection to power network through a terminal
-
-// controls power to devices in that area
-// may be opened to change power cell
-// three different channels (lighting/equipment/environ) - may each be set to on, off, or auto
-#define POWERCHAN_OFF      0
-#define POWERCHAN_OFF_AUTO 1
-#define POWERCHAN_ON       2
-#define POWERCHAN_ON_AUTO  3
-
-//thresholds for channels going off automatically. ENVIRON channel stays on as long as possible, and doesn't have a threshold
-#define AUTO_THRESHOLD_LIGHTING  50
-#define AUTO_THRESHOLD_EQUIPMENT 25
-
-//NOTE: STUFF STOLEN FROM AIRLOCK.DM thx
-
+// Various APC types
 /obj/machinery/power/apc/critical
 	is_critical = 1
 
 /obj/machinery/power/apc/high
 	cell_type = /obj/item/weapon/cell/high
 
-// Construction site APC, starts turned off
 /obj/machinery/power/apc/high/inactive
 	cell_type = /obj/item/weapon/cell/high
 	lighting = 0
@@ -70,6 +65,7 @@
 /obj/machinery/power/apc/hyper
 	cell_type = /obj/item/weapon/cell/hyper
 
+// Main APC code
 /obj/machinery/power/apc
 	name = "area power controller"
 	desc = "A control terminal for the area electrical systems."
@@ -114,6 +110,7 @@
 	var/datum/wires/apc/wires = null
 	var/update_state = -1
 	var/update_overlay = -1
+	var/list/update_overlay_chan		// Used to determine if there is a change in channels
 	var/is_critical = 0
 	var/global/status_overlays = 0
 	var/updating_icon = 0
@@ -126,12 +123,6 @@
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
 
-/obj/machinery/power/apc/malf_upgrade(var/mob/living/silicon/ai/user)
-	..()
-	malf_upgraded = 1
-	emp_hardened = 1
-	to_chat(user, "\The [src] has been upgraded. It is now protected against EM pulses.")
-	return 1
 
 /obj/machinery/power/apc/updateDialog()
 	if (stat & (BROKEN|MAINT))
@@ -287,9 +278,9 @@
 
 		status_overlays_lock.len = 2
 		status_overlays_charging.len = 3
-		status_overlays_equipment.len = 4
-		status_overlays_lighting.len = 4
-		status_overlays_environ.len = 4
+		status_overlays_equipment.len = 5
+		status_overlays_lighting.len = 5
+		status_overlays_environ.len = 5
 
 		status_overlays_lock[1] = image(icon, "apcox-0")    // 0=blue 1=red
 		status_overlays_lock[2] = image(icon, "apcox-1")
@@ -298,20 +289,23 @@
 		status_overlays_charging[2] = image(icon, "apco3-1")
 		status_overlays_charging[3] = image(icon, "apco3-2")
 
-		status_overlays_equipment[1] = image(icon, "apco0-0")
-		status_overlays_equipment[2] = image(icon, "apco0-1")
-		status_overlays_equipment[3] = image(icon, "apco0-2")
-		status_overlays_equipment[4] = image(icon, "apco0-3")
+		status_overlays_equipment[POWERCHAN_OFF + 1] = image(icon, "apco0-0")
+		status_overlays_equipment[POWERCHAN_OFF_TEMP + 1] = image(icon, "apco0-1")
+		status_overlays_equipment[POWERCHAN_OFF_AUTO + 1] = image(icon, "apco0-1")
+		status_overlays_equipment[POWERCHAN_ON + 1] = image(icon, "apco0-2")
+		status_overlays_equipment[POWERCHAN_ON_AUTO + 1] = image(icon, "apco0-3")
 
-		status_overlays_lighting[1] = image(icon, "apco1-0")
-		status_overlays_lighting[2] = image(icon, "apco1-1")
-		status_overlays_lighting[3] = image(icon, "apco1-2")
-		status_overlays_lighting[4] = image(icon, "apco1-3")
+		status_overlays_lighting[POWERCHAN_OFF + 1] = image(icon, "apco1-0")
+		status_overlays_lighting[POWERCHAN_OFF_TEMP + 1] = image(icon, "apco1-1")
+		status_overlays_lighting[POWERCHAN_OFF_AUTO + 1] = image(icon, "apco1-1")
+		status_overlays_lighting[POWERCHAN_ON + 1] = image(icon, "apco1-2")
+		status_overlays_lighting[POWERCHAN_ON_AUTO + 1] = image(icon, "apco1-3")
 
-		status_overlays_environ[1] = image(icon, "apco2-0")
-		status_overlays_environ[2] = image(icon, "apco2-1")
-		status_overlays_environ[3] = image(icon, "apco2-2")
-		status_overlays_environ[4] = image(icon, "apco2-3")
+		status_overlays_environ[POWERCHAN_OFF + 1] = image(icon, "apco2-0")
+		status_overlays_environ[POWERCHAN_OFF_TEMP + 1] = image(icon, "apco2-1")
+		status_overlays_environ[POWERCHAN_OFF_AUTO + 1] = image(icon, "apco2-1")
+		status_overlays_environ[POWERCHAN_ON + 1] = image(icon, "apco2-2")
+		status_overlays_environ[POWERCHAN_ON_AUTO + 1] = image(icon, "apco2-3")
 
 	var/update = check_updates() 		//returns 0 if no need to update icons.
 						// 1 if we need to update the icon_state
@@ -373,12 +367,13 @@
 			set_light(0)
 
 /obj/machinery/power/apc/proc/check_updates()
-
+	if(!update_overlay_chan)
+		update_overlay_chan = new/list()
 	var/last_update_state = update_state
 	var/last_update_overlay = update_overlay
+	var/list/last_update_overlay_chan = update_overlay_chan.Copy()
 	update_state = 0
 	update_overlay = 0
-
 	if(cell)
 		update_state |= UPDATE_CELL_IN
 	if(stat & BROKEN)
@@ -411,34 +406,18 @@
 		else if(charging == 2)
 			update_overlay |= APC_UPOVERLAY_CHARGEING2
 
-		if (!equipment)
-			update_overlay |= APC_UPOVERLAY_EQUIPMENT0
-		else if(equipment == 1)
-			update_overlay |= APC_UPOVERLAY_EQUIPMENT1
-		else if(equipment == 2)
-			update_overlay |= APC_UPOVERLAY_EQUIPMENT2
 
-		if(!lighting)
-			update_overlay |= APC_UPOVERLAY_LIGHTING0
-		else if(lighting == 1)
-			update_overlay |= APC_UPOVERLAY_LIGHTING1
-		else if(lighting == 2)
-			update_overlay |= APC_UPOVERLAY_LIGHTING2
-
-		if(!environ)
-			update_overlay |= APC_UPOVERLAY_ENVIRON0
-		else if(environ==1)
-			update_overlay |= APC_UPOVERLAY_ENVIRON1
-		else if(environ==2)
-			update_overlay |= APC_UPOVERLAY_ENVIRON2
+		update_overlay_chan["Equipment"] = equipment
+		update_overlay_chan["Lighting"] = lighting
+		update_overlay_chan["Enviroment"] = environ
 
 
 	var/results = 0
-	if(last_update_state == update_state && last_update_overlay == update_overlay)
+	if(last_update_state == update_state && last_update_overlay == update_overlay && last_update_overlay_chan == update_overlay_chan)
 		return 0
 	if(last_update_state != update_state)
 		results += 1
-	if(last_update_overlay != update_overlay)
+	if(last_update_overlay != update_overlay || last_update_overlay_chan != update_overlay_chan)
 		results += 2
 	return results
 
@@ -771,6 +750,11 @@
 		return
 
 	var/list/data = list(
+		"pChan_Off" = POWERCHAN_OFF,
+		"pChan_Off_T" = POWERCHAN_OFF_TEMP,
+		"pChan_Off_A" = POWERCHAN_OFF_AUTO,
+		"pChan_On" = POWERCHAN_ON,
+		"pChan_On_A" = POWERCHAN_ON_AUTO,
 		"locked" = (locked && !emagged) ? 1 : 0,
 		"isOperating" = operating,
 		"externalPower" = main_status,
@@ -782,16 +766,15 @@
 		"coverLocked" = coverlocked,
 		"failTime" = failure_timer * 2,
 		"siliconUser" = istype(user, /mob/living/silicon),
-
 		"powerChannels" = list(
 			list(
 				"title" = "Equipment",
 				"powerLoad" = lastused_equip,
 				"status" = equipment,
 				"topicParams" = list(
-					"auto" = list("eqp" = 3),
-					"on"   = list("eqp" = 2),
-					"off"  = list("eqp" = 1)
+					"auto" = list("eqp" = 2),
+					"on"   = list("eqp" = 1),
+					"off"  = list("eqp" = 0)
 				)
 			),
 			list(
@@ -799,9 +782,9 @@
 				"powerLoad" = round(lastused_light),
 				"status" = lighting,
 				"topicParams" = list(
-					"auto" = list("lgt" = 3),
-					"on"   = list("lgt" = 2),
-					"off"  = list("lgt" = 1)
+					"auto" = list("lgt" = 2),
+					"on"   = list("lgt" = 1),
+					"off"  = list("lgt" = 0)
 				)
 			),
 			list(
@@ -809,9 +792,9 @@
 				"powerLoad" = round(lastused_environ),
 				"status" = environ,
 				"topicParams" = list(
-					"auto" = list("env" = 3),
-					"on"   = list("env" = 2),
-					"off"  = list("env" = 1)
+					"auto" = list("env" = 2),
+					"on"   = list("env" = 1),
+					"off"  = list("env" = 0)
 				)
 			)
 		)
@@ -1150,12 +1133,15 @@
 obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	switch(cur_state)
 		if(POWERCHAN_OFF); //autoset will never turn on a channel set to off
+		if(POWERCHAN_OFF_TEMP)
+			if(on == 1 || on == 2)
+				return POWERCHAN_ON
 		if(POWERCHAN_OFF_AUTO)
 			if(on == 1)
 				return POWERCHAN_ON_AUTO
 		if(POWERCHAN_ON)
 			if(on == 0)
-				return POWERCHAN_OFF
+				return POWERCHAN_OFF_TEMP
 		if(POWERCHAN_ON_AUTO)
 			if(on == 0 || on == 2)
 				return POWERCHAN_OFF_AUTO
@@ -1254,11 +1240,17 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 
 /obj/machinery/power/apc/proc/setsubsystem(val)
 	if(cell && cell.charge > 0)
-		return (val==1) ? 0 : val
-	else if(val == 3)
-		return 1
+		switch(val)
+			if(2) return POWERCHAN_ON_AUTO
+			if(1) return POWERCHAN_ON
+			else return POWERCHAN_OFF
 	else
-		return 0
+		switch(val)
+			if(2) return POWERCHAN_OFF_AUTO
+			if(1) return POWERCHAN_OFF_TEMP
+			else return POWERCHAN_OFF
+
+
 
 // Malfunction: Transfers APC under AI's control
 /obj/machinery/power/apc/proc/ai_hack(var/mob/living/silicon/ai/A = null)
@@ -1279,4 +1271,14 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 	w_class = ITEM_SIZE_SMALL
 	flags = CONDUCT
+
+/obj/machinery/power/apc/malf_upgrade(var/mob/living/silicon/ai/user)
+	..()
+	malf_upgraded = 1
+	emp_hardened = 1
+	to_chat(user, "\The [src] has been upgraded. It is now protected against EM pulses.")
+	return 1
+
+
+
 #undef APC_UPDATE_ICON_COOLDOWN
