@@ -151,6 +151,8 @@
 /obj/item/weapon/storage/backpack/dufflebag/New()
 	..()
 	slowdown_per_slot[slot_back] = 3
+	slowdown_per_slot[slot_r_hand] = 1
+	slowdown_per_slot[slot_l_hand] = 1
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"
