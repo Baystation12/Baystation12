@@ -192,7 +192,7 @@
 			switch(blood_volume)
 
 				if(BLOOD_VOLUME_SAFE to INFINITY)
-					if(can_heal)
+					if(can_heal && damage < max_damage)
 						damage--
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 					if(prob(1))
