@@ -59,7 +59,7 @@
 "bg" = (/obj/machinery/light/spot{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/space,/area/UNSC_Staging)
 "bh" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/space,/area/UNSC_Staging)
 "bi" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled/dark,/area/UNSC_Staging)
-"bj" = (/obj/structure/closet,/obj/item/clothing/under/unsc/odst_jumpsuit,/obj/item/clothing/suit/armor/odst,/obj/item/clothing/head/helmet/odst,/obj/item/clothing/shoes/marine,/obj/item/device/encryptionkey/teamcom,/turf/simulated/floor/carpet,/area/UNSC_Staging)
+"bj" = (/obj/structure/closet,/obj/item/clothing/under/unsc/odst_jumpsuit,/obj/item/clothing/shoes/marine,/obj/item/device/encryptionkey/teamcom,/obj/effect/random_ODST_set,/turf/simulated/floor/carpet,/area/UNSC_Staging)
 "bk" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/full,/turf/simulated/floor/tiled/dark,/area/UNSC_Staging/pods/pod2)
 "bl" = (/turf/simulated/shuttle/wall,/area/UNSC_Staging/pods/pod2)
 "bm" = (/obj/machinery/door/airlock/halo_lifepod,/turf/simulated/floor/tiled/dark,/area/UNSC_Staging/pods/pod2)
