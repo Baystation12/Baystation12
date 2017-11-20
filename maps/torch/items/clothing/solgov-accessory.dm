@@ -232,6 +232,11 @@ armour attachments
 	desc = "An armor tag with the words SOL CENTRAL GOVERNMENT printed in gold lettering on it."
 	icon_state = "comtag"
 
+/obj/item/clothing/accessory/armor/tag/solgov/com/sec
+	name = "\improper POLICE tag"
+	desc = "An armor tag with the words POLICE printed in gold lettering on it."
+	icon_state = "comsectag"
+
 /**************
 department tags
 **************/
