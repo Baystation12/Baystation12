@@ -246,6 +246,8 @@
 #include "code\datums\outfits\_defines.dm"
 #include "code\datums\outfits\outfit.dm"
 #include "code\datums\outfits\spec_op.dm"
+#include "code\datums\outfits\tournament.dm"
+#include "code\datums\outfits\wizardry.dm"
 #include "code\datums\outfits\jobs\_defines.dm"
 #include "code\datums\outfits\jobs\cargo.dm"
 #include "code\datums\outfits\jobs\civilian.dm"
