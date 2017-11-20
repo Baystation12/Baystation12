@@ -13,7 +13,7 @@
 
 	if(!spawned)
 		spawned = 1
-		new /obj/structure/evac_pelican(src.loc)
+		. = new /obj/structure/evac_pelican(src.loc)
 		qdel(src)
 
 /obj/structure/evac_pelican/
@@ -74,21 +74,24 @@
 		icon_state = "base"
 
 	if((icon_state != old_icon_state))
-		var/image/I = image(icon = 'pilot_head.dmi', icon_state = "head")
-		to_world("\
-			<span class='radio'>\
-				<span class='name'>D77-TC Pilot</span> \
-				\icon[I] \
-				<b>\[UNSC Emergency Freq\]</b> \
-				<span class='message'>\"[pilot_message]\"</span>\
-			<span>")
-		qdel(I)
+		world_say_pilot_message(pilot_message)
 	/*
 	attack_sfx = list(\
 		'sound/effects/attackblob.ogg',\
 		'sound/effects/blobattack.ogg'\
 		)
 		*/
+
+/obj/structure/evac_pelican/proc/world_say_pilot_message(var/pilot_message)
+	//var/image/I = image(icon = 'pilot_head.dmi', icon_state = "head")
+	to_world("\
+		<span class='radio'>\
+			<span class='name'>D77-TC Pilot</span> \
+			\icon[src] \
+			<b>\[UNSC Emergency Freq\]</b> \
+			<span class='message'>\"[pilot_message]\"</span>\
+		</span>")
+	//qdel(I)
 
 /obj/structure/evac_pelican/attack_hand(var/mob/M)
 	attempt_enter(M)

@@ -61,8 +61,11 @@
 	var/survive_duration = 18000
 	var/pelican_load_time = 600
 	var/time_pelican_arrive = 9999
+	var/evac_stage = 0
 	var/time_pelican_leave
 	var/all_survivors_dead = 0
+
+	var/obj/structure/evac_pelican/evac_pelican
 
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time

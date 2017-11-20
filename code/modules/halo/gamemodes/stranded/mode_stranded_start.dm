@@ -26,4 +26,4 @@
 	..()
 	time_pelican_arrive = world.time + survive_duration
 	time_pelican_leave = time_pelican_arrive + pelican_load_time
-	//time_wave_cycle = world.time + duration_rest_base / 2
+	time_wave_cycle = world.time + duration_rest_base / 2
