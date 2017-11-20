@@ -81,6 +81,7 @@
 	primitive_form = "Stok"
 	darksight = 3
 	gluttonous = GLUT_TINY
+	strength = STR_HIGH
 	slowdown = 0.5
 	brute_mod = 0.8
 	num_alternate_languages = 2
@@ -264,6 +265,7 @@
 	siemens_coefficient = 0.3
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 2
+	strength = STR_VHIGH
 	secondary_langs = list(LANGUAGE_ROOTGLOBAL)
 	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
