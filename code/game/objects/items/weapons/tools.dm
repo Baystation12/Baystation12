@@ -147,8 +147,8 @@
 	name = "welding tool"
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "welder"
-	desc = "A heavy but portable welding gun with its own interchangable fuel tank. It features a simple toggle switch, and a port for attaching an external tank."
-	description_info = "Use in your hand to toggle the welder on and off. Hold in one hand and click with an empty hand to remove its internal tank. Click on an object to try to weld it. You can seal airlocks, attach heavy-duty machines like emitters and disposal chutes, and repair damaged walls - these are only a few of its uses. Each use of the welder will consume a unit of fuel. Be sure to wear eye protection such as goggles, a mask, or certain voidsuit helmets, otherwise you risk damaging your eyes! You can refill the welder with a welder tank by clicking on it, but be sure to turn it off first!"
+	desc = "A heavy but portable welding gun with its own interchangeable fuel tank. It features a simple toggle switch and a port for attaching an external tank."
+	description_info = "Use in your hand to toggle the welder on and off. Hold in one hand and click with an empty hand to remove its internal tank. Click on an object to try to weld it. You can seal airlocks, attach heavy-duty machines like emitters and disposal chutes, and repair damaged walls - these are only a few of its uses. Each use of the welder will consume a unit of fuel. Be sure to wear protective equipment such as goggles, a mask, or certain voidsuit helmets to prevent eye damage. You can refill the welder with a welder tank by clicking on it, but be sure to turn it off first!"
 	description_fluff = "One of many tools of ancient design, still used in today's busy world of engineering with only minor tweaks here and there. Compact machinery and innovations in fuel storage have allowed for conveniences like this one-piece, handheld welder to exist."
 	description_antag = "You can use a welder to rapidly seal off doors, ventilation ducts, and scrubbers. It also makes for a devastating weapon. Modify it with a screwdriver and stick some metal rods on it, and you've got the beginnings of a flamethrower."
 	flags = CONDUCT
@@ -428,7 +428,7 @@
 
 /obj/item/weapon/fuel_cartridge
 	name = "welding fuel cartridge"
-	desc = "An interchangable fuel tank meant for a welding tool."
+	desc = "An interchangeable fuel tank meant for a welding tool."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "fuel"
 	w_class = ITEM_SIZE_SMALL
