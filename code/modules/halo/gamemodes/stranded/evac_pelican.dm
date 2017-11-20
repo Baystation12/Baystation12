@@ -38,6 +38,9 @@
 	health -= amount
 	if(health < 0)
 		//destroy
+		explosion(src.loc,20,30,40,50)
+		qdel(src)
+
 	else if(health / healthmax < 0.2)
 		icon_state = "dam5"
 		pilot_message = "Any more hits and we won't be getting out of here!"
@@ -69,3 +72,29 @@
 		'sound/effects/blobattack.ogg'\
 		)
 		*/
+
+/obj/structure/evac_pelican/attack_hand(var/mob/M)
+	attempt_enter(M)
+
+/obj/structure/evac_pelican/proc/attempt_enter(var/mob/L)
+	if(isliving(usr))
+		var/mob/living/M = usr
+		if(M.stat == CONSCIOUS)
+			var/success = 0
+			for(var/turf/T in range(1,M))
+				if(T in src.locs)
+					success = 1
+					M.loc = src
+					to_chat(M, "<span class='info'>You enter [src].</span>")
+					break
+			if(!success)
+				to_chat(M, "<span class='warning'>You are too far to do that.</span>")
+		else
+			to_chat(M, "<span class='warning'>You are unable to do that.</span>")
+
+/obj/structure/evac_pelican/verb/enter_pelican()
+	set name = "Enter the Evac Pelican"
+	set src in view()
+	set category = "IC"
+
+	attempt_enter(usr)
