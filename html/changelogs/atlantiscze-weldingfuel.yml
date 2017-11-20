@@ -1,0 +1,5 @@
+author: atlantiscze
+delete-after: True
+
+changes: 
+  - rscadd: "Wearing a welding kit (portable fuel tank) now automatically refills your welding tool."
