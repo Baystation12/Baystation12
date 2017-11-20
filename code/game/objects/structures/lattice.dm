@@ -64,15 +64,14 @@
 		qdel(src)
 	if (istype(C, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = C
-		if(R.amount <= 2)
+		if(R.use(2))
+			src.alpha = 0
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+			new /obj/structure/catwalk(src.loc)
+			qdel(src)
 			return
 		else
-			R.use(2)
-			to_chat(user, "<span class='notice'>You start connecting [R.name] to [src.name] ...</span>")
-			if(do_after(user,50))
-				src.alpha = 0
-				new /obj/structure/catwalk(src.loc)
-				qdel(src)
+			to_chat(user, "<span class='notice'>You require at least two rods to complete the catwalk.</span>")
 			return
 	return
 
