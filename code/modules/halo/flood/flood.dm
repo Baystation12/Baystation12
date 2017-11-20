@@ -170,7 +170,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	health = 0
 
 /mob/living/simple_animal/hostile/flood/carrier/death(gibbed, deathmessage = "bursts!")
-	src.visible_message("<span class='danger'>You burst, propelling flood infestors in all directions!",\
+	src.visible_message("<span class='danger'>You burst, propelling flood infestors in all directions!</span>",\
 		"<span class='danger'>[src] bursts, propelling flood infestors in all directions!</span>")
 	playsound(src.loc, 'sound/weapons/heavysmash.ogg', 50, 0, 0)
 	icon_state = "burst"
