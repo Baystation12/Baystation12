@@ -15,7 +15,7 @@
 	name = "desert sand"
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
-	dynamic_lighting = 1
+	dynamic_lighting = 0
 	var/dug = 0
 
 /turf/unsimulated/floor/desert/New()
@@ -76,4 +76,16 @@
 	name = "soil"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock-dark"
-	dynamic_lighting = 1
+	dynamic_lighting = 0
+
+/turf/unsimulated/floor/wood
+	name = "wooden floor"
+	icon = 'icons/turf/flooring/wood.dmi'
+	icon_state = "wood"
+	dynamic_lighting = 0
+
+/turf/unsimulated/floor/dustymetal
+	name = "sandy floor"
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "asteroidfloor"
+	dynamic_lighting = 0
