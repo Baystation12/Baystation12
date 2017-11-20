@@ -150,6 +150,7 @@
 	brute_mod = 1.15
 	burn_mod =  1.15
 	gluttonous = GLUT_TINY
+	strength = STR_LOW
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR)
 	name_language = LANGUAGE_SIIK_MAAS
