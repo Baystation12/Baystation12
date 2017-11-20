@@ -42,7 +42,6 @@
 	var/current_light_level = 1
 	var/time_lightchange = 0
 	//
-	var/time_pelican_arrive = 9999
 
 	var/worldtime_offset = 0
 
@@ -59,12 +58,22 @@
 	var/dawn_brightness = 0.5
 	var/dusk_brightness = 0.5
 
-/datum/game_mode/stranded/pre_setup()
-	for(var/obj/effect/landmark/flood_spawn/F in world)
-		flood_spawn_turfs.Add(get_turf(F))
+	var/survive_duration = 18000
+	var/pelican_load_time = 600
+	var/time_pelican_arrive = 9999
+	var/time_pelican_leave
+	var/all_survivors_dead = 0
 
-	for(var/obj/effect/landmark/flood_assault_target/F in world)
-		flood_assault_turfs.Add(get_turf(F))
+/datum/game_mode/stranded/pre_setup()
+	..()
+
+	spawn(-1)
+		for(var/obj/effect/landmark/flood_spawn/F in world)
+			flood_spawn_turfs.Add(get_turf(F))
+
+	spawn(-1)
+		for(var/obj/effect/landmark/flood_assault_target/F in world)
+			flood_assault_turfs.Add(get_turf(F))
 
 	planet_area = locate() in world
 	GLOB.max_flood_simplemobs = 300
@@ -72,7 +81,7 @@
 	//lighting and day/night cycle
 	time_lightchange = world.time + duration_day
 	is_daytime = 1
-	set_ambient_light(daytime_brightness)
+	//set_ambient_light(daytime_brightness)
 
 /datum/game_mode/stranded/proc/set_ambient_light(var/brightness)
 	light_power = brightness
@@ -86,15 +95,21 @@
 		ambient_light = null
 
 /datum/game_mode/stranded/post_setup()
-	time_pelican_arrive = world.time + 24000 + 24000 * rand()
+	..()
+	time_pelican_arrive = world.time + survive_duration
+	time_pelican_leave = time_pelican_arrive + pelican_load_time
 	//time_wave_cycle = world.time + duration_rest_base / 2
+
+/datum/game_mode/stranded/announce()
+	..()
+	to_world("<span class='notice'>There is [get_evac_time()] until the evacuation pelican arrives.</span>")
 
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time
 
 	if(do_daynight_cycle)
 		process_daynight()
-	//process_spawning()
+	process_spawning()
 	process_evac()
 
 /datum/game_mode/stranded/proc/process_daynight()
@@ -143,12 +158,13 @@
 			is_spawning = 0
 			time_wave_cycle = world.time + duration_rest_current
 			duration_rest_current *= rest_dur_multi
-			to_world("<span class='danger'>Flood spawns have stopped! Rest and recuperate before the next wave...</span>")
+			to_world("<span class='danger'>Flood spawns have stopped! Rest and recuperate before the next wave...</span> \
+				<span class='notice'>there is [get_evac_time()] left until evacuation.</span>")
 
 		if(world.time > time_next_spawn_tick)
 			time_next_spawn_tick = world.time + spawn_interval
-			/*spawn(0)
-				spawn_attackers_tick(spawns_per_tick_current)*/
+			spawn(0)
+				spawn_attackers_tick(spawns_per_tick_current)
 	else
 		//rest period is currently ongoing
 		if(world.time > time_wave_cycle)
@@ -156,7 +172,8 @@
 			is_spawning = 1
 			time_wave_cycle = world.time + duration_wave_current
 			duration_wave_current *= wave_dur_multi
-			to_world("<span class='danger'>Flood spawns have started! Get back to your base and dig in...</span>")
+			to_world("<span class='danger'>Flood spawns have started! Get back to your base and dig in...</span> \
+				<span class='notice'>there is [get_evac_time()] left until evacuation.</span>")
 			//
 			wave_num++
 			spawns_per_tick_current = wave_num * spawn_wave_multi
@@ -173,7 +190,7 @@
 		time_wave_cycle = world.time + 3000
 		time_pelican_arrive += 9999999		//round is about to end anyway so meh
 		is_spawning = 1
-		to_world("<span class='danger'>The pelican is due to arrive! Unfortunately the coders haven't added it in yet. Good luck hahahahahahahahaha!</span>")
+		to_world("<span class='warning'>The pelican has arrived! Protect it for [pelican_load_time / 10] seconds until it is ready to liftoff!</span>")
 
 /datum/game_mode/stranded/proc/spawn_attackers_tick(var/amount = 1)
 	set background = 1
@@ -233,10 +250,60 @@
 
 /obj/effect/evac_pelican/verb/spawn_pelican()
 	set name = "Spawn the Evac Pelican"
-	set src in view()
+	set src in view(1)
 	set category = "IC"
 
 	if(!spawned)
 		spawned = 1
 		new /obj/structure/evac_pelican(src.loc)
 		qdel(src)
+
+/datum/game_mode/stranded/proc/get_evac_time()
+	var/seconds_left = (time_pelican_arrive - world.time) / 10
+	if(seconds_left <= 60)
+		return "[seconds_left] seconds"
+	else
+		return "[round(seconds_left / 60)] minutes"
+
+/datum/game_mode/stranded/handle_mob_death(var/mob/M, var/list/args = list())
+	all_survivors_dead = 1
+
+	//look for any remaining living players
+	for(var/mob/living/L in GLOB.mob_list)
+		if(M.stat == CONSCIOUS && M.client)
+			all_survivors_dead = 0
+			break
+	return 1
+
+/datum/game_mode/stranded/check_finished()
+	if(world.time > time_pelican_leave)
+		return 1
+	if(all_survivors_dead)
+		return 1
+	if(world.time > time_pelican_arrive)
+		var/obj/structure/evac_pelican/evac_pelican = locate() in world
+		if(!evac_pelican || evac_pelican.health <= 0)
+			return 1
+	return 0
+
+/datum/game_mode/stranded/declare_completion()
+
+	var/obj/structure/evac_pelican/evac_pelican = locate() in world
+	if(evac_pelican.health <= 0)
+		evac_pelican = null
+	var/announcement_text = ""
+	if(evac_pelican)
+		announcement_text = "<span class='good'>The pelican takes off! The survivors were:</span><br>"
+		var/no_survivors = 1
+		for(var/mob/living/M in GLOB.player_list)
+			if(M.stat != DEAD && M.loc == evac_pelican)
+				announcement_text += "<span class='emote'><span class='prefix'>[M]</span>, [M.job]</span> (played by <span class='info'>[M.ckey]</span>)<br>"
+				no_survivors = 0
+		if(no_survivors)
+			announcement_text = "<span class='bad'>Defeat: No living survivors managed to evacuate on the pelican.</span>"
+	else if(world.time > time_pelican_leave)
+		announcement_text = "<span class='bad'>Defeat: The pelican has been destroyed! Any survivors are doomed to die alone in the wastes...</span><br>"
+	else if(all_survivors_dead)
+		announcement_text = "<span class='bad'>Defeat: The survivors have been overrun. The pelican did not arrive in time.</span>"
+
+	to_world(announcement_text)
