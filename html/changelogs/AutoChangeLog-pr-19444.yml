@@ -1,0 +1,7 @@
+author: "mkalash"
+delete-after: True
+changes: 
+  - tweak: "Welding tool sizes have been rebalanced. Namely, the industrial welding tool is now too large for a tool belt."
+  - rscadd: "To balance this out, engineers can now easily carry spare welding fuel cartridges found in the welding locker and hot swap them out, actually increasing the welding capacity of the typical engineer."
+  - bugfix: "Experimental fuel tanks now automatically refill, as intended."
+  - rscadd: "The experimental welding tool can now be produced in rnd."
