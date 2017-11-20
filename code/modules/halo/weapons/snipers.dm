@@ -8,7 +8,7 @@
 	desc = "Special Applications Rifle, system 99 Anti-Matériel. Deadly at extreme range.  Takes 14.5mm calibre magazines."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
 	icon_state = "SRS99"
-	item_state = "heavysniper"
+	item_state = "srs99"
 	load_method = MAGAZINE
 	caliber = "14.5mm"
 	slot_flags = SLOT_BACK
@@ -40,7 +40,7 @@
 	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance.  Takes 7.62mm calibre magazines."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
 	icon_state = "M395"
-	item_state = "halo_dmr"
+	item_state = "m392"
 	load_method = MAGAZINE
 	caliber = "a762"
 	slot_flags = SLOT_BACK
@@ -51,6 +51,11 @@
 
 	accuracy = 1
 	scoped_accuracy = 2
+
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		)
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
 	set category = "Object"
