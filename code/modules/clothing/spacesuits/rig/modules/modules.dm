@@ -84,7 +84,7 @@
 		paste.use(1)
 		return
 
-	else if(istype(W,/obj/item/stack/cable_coil))
+	else if(isCoil(W))
 
 		switch(damage)
 			if(0)

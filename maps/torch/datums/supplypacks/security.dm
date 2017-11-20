@@ -62,6 +62,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Laser carbines crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_ELEVATED
 
 /decl/hierarchy/supply_pack/security/advancedlaser
 	name = "Weapons - Advanced Laser Weapons"
@@ -72,6 +73,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Advanced Laser Weapons crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/sniperlaser
 	name = "Weapons - Energy marksman"
@@ -80,6 +82,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Energy marksman crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/pdw
 	name = "Weapons - Ballistic PDWs"
@@ -88,6 +91,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Ballistic PDW crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/bullpup
 	name = "Weapons - Ballistic rifles"
@@ -96,6 +100,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Bullpup automatic rifle crate"
 	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
 
 /decl/hierarchy/supply_pack/security/holster
 	name = "Misc - Holster crate"
@@ -144,3 +149,23 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Practice laser carbine crate"
 	access = access_solgov_crew
+
+/decl/hierarchy/supply_pack/security/pistolammorubber //overriding standard pack
+	name = "Ammo - Assorted Non-Lethal, Pistol"
+	contains = list(/obj/item/ammo_magazine/c45m/rubber = 2, /obj/item/ammo_magazine/c45m/flash = 2, /obj/item/ammo_magazine/c44/rubber = 2)
+	cost = 25
+	containername = "\improper Non-lethal ammunition crate"
+	access = access_heads //only heads get these
+
+/decl/hierarchy/supply_pack/security/pistolammo //overriding standard pack
+	cost = 30
+	access = access_heads
+
+/decl/hierarchy/supply_pack/security/magnum_ammo
+	name = "Ammo - .44 Magnum"
+	contains = list(/obj/item/ammo_magazine/c44 = 4)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper .44 magnum ammunition crate"
+	access = access_heads
+	security_level = SUPPLY_SECURITY_ELEVATED

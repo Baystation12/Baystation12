@@ -18,7 +18,7 @@
 /obj/machinery/telecomms/attackby(obj/item/P as obj, mob/user as mob)
 
 	// Using a multitool lets you access the receiver's interface
-	if(istype(P, /obj/item/device/multitool))
+	if(isMultitool(P))
 		attack_hand(user)
 
 
@@ -36,25 +36,25 @@
 
 	switch(construct_op)
 		if(0)
-			if(istype(P, /obj/item/weapon/screwdriver))
+			if(isScrewdriver(P))
 				to_chat(user, "You unfasten the bolts.")
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				construct_op ++
 		if(1)
-			if(istype(P, /obj/item/weapon/screwdriver))
+			if(isScrewdriver(P))
 				to_chat(user, "You fasten the bolts.")
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				construct_op --
-			if(istype(P, /obj/item/weapon/wrench))
+			if(isWrench(P))
 				to_chat(user, "You dislodge the external plating.")
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				construct_op ++
 		if(2)
-			if(istype(P, /obj/item/weapon/wrench))
+			if(isWrench(P))
 				to_chat(user, "You secure the external plating.")
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				construct_op --
-			if(istype(P, /obj/item/weapon/wirecutters))
+			if(isWirecutter(P))
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				to_chat(user, "You remove the cables.")
 				construct_op ++
@@ -62,7 +62,7 @@
 				A.amount = 5
 				stat |= BROKEN // the machine's been borked!
 		if(3)
-			if(istype(P, /obj/item/stack/cable_coil))
+			if(isCoil(P))
 				var/obj/item/stack/cable_coil/A = P
 				if (A.use(5))
 					to_chat(user, "<span class='notice'>You insert the cables.</span>")
@@ -70,7 +70,7 @@
 					stat &= ~BROKEN // the machine's not borked anymore!
 				else
 					to_chat(user, "<span class='warning'>You need five coils of wire for this.</span>")
-			if(istype(P, /obj/item/weapon/crowbar))
+			if(isCrowbar(P))
 				to_chat(user, "You begin prying out the circuit board other components...")
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				if(do_after(user,60, src))
@@ -185,11 +185,11 @@
 	var/turf/position = get_turf(src)
 
 	// Toggle on/off getting signals from the station or the current Z level
-	if(src.listening_level == STATION_Z) // equals the station
-		src.listening_level = position.z
+	if(src.listening_levels == GLOB.using_map.contact_levels) // equals the station
+		src.listening_levels = GetConnectedZlevels(position.z)
 		return 1
-	else if(position.z == TELECOMM_Z)
-		src.listening_level = STATION_Z
+	else
+		src.listening_levels = GLOB.using_map.contact_levels
 		return 1
 	return 0
 
@@ -239,7 +239,7 @@
 /obj/machinery/telecomms/relay/Options_Menu()
 	var/dat = ""
 	if(src.z == TELECOMM_Z)
-		dat += "<br>Signal Locked to the [station_name()]: <A href='?src=\ref[src];change_listening=1'>[listening_level == STATION_Z ? "TRUE" : "FALSE"]</a>"
+		dat += "<br>Signal Locked to the [station_name()]: <A href='?src=\ref[src];change_listening=1'>[listening_levels == GLOB.using_map.contact_levels ? "TRUE" : "FALSE"]</a>"
 	dat += "<br>Broadcasting: <A href='?src=\ref[src];broadcast=1'>[broadcasting ? "YES" : "NO"]</a>"
 	dat += "<br>Receiving:    <A href='?src=\ref[src];receive=1'>[receiving ? "YES" : "NO"]</a>"
 	return dat
@@ -400,6 +400,3 @@
 	if(issilicon(user) || in_range(user, src))
 		return 1
 	return 0
-
-#undef TELECOMM_Z
-#undef STATION_Z

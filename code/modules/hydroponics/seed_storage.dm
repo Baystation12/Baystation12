@@ -305,7 +305,7 @@
 		else
 			to_chat(user, "<span class='notice'>There are no seeds in \the [O.name].</span>")
 		return
-	else if(istype(O, /obj/item/weapon/wrench))
+	else if(isWrench(O))
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")

@@ -241,7 +241,7 @@
 			W.loc = src
 			src.cell = W
 			to_chat(user, "<span class='notice'>You insert the cell!</span>")
-	if(istype(W, /obj/item/stack/cable_coil))
+	if(isCoil(W))
 		if(src.wires)
 			to_chat(user, "<span class='warning'>You have already inserted wire!</span>")
 			return

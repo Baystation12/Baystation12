@@ -91,13 +91,9 @@
 
 /obj/machinery/computer/gravity_control_computer/Topic(href, href_list)
 	set background = 1
-	..()
-
-	if ( (get_dist(src, usr) > 1 ))
-		if (!istype(usr, /mob/living/silicon))
-			usr.unset_machine()
-			usr << browse(null, "window=air_alarm")
-			return
+	if((. = ..()))
+		usr << browse(null, "window=air_alarm")
+		return
 
 	if(href_list["gentoggle"])
 		if(gravity_generator.on)
@@ -115,5 +111,4 @@
 				gravity_generator.on = 1
 				A.gravitychange(1)
 
-		src.updateUsrDialog()
-		return
+	src.updateUsrDialog()

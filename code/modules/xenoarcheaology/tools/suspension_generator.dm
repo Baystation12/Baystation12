@@ -129,7 +129,7 @@
 /obj/machinery/suspension_gen/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(!locked && !suspension_field && default_deconstruction_screwdriver(user, W))
 		return
-	else if (istype(W, /obj/item/weapon/wrench))
+	else if(isWrench(W))
 		if(!suspension_field)
 			if(anchored)
 				anchored = 0

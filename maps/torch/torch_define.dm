@@ -76,20 +76,6 @@
 	minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
 
 
-
-/datum/map/torch/perform_map_generation()
-	new /datum/random_map/automata/cave_system(null,1,1,9,world.maxx,world.maxy) // Create the mining Z-level.
-	new /datum/random_map/noise/ore(null,1,1,7,64, 64)             // Create the mining ore distribution map.
-	new /datum/random_map/automata/cave_system(null,1,1,10,world.maxx,world.maxy) // Create the mining Z-level.
-	new /datum/random_map/noise/ore(null,1,1,9,64, 64)             // Create the mining ore distribution map.
-	new /datum/random_map/automata/cave_system(null,1,1,12,world.maxx,world.maxy) // lost_supply_base
-	new /datum/random_map/noise/ore(null,1,1,12,64, 64)             // Create the mining ore distribution map.
-	new /datum/random_map/automata/cave_system(null,1,1,13,world.maxx,world.maxy) // marooned
-	new /datum/random_map/noise/ore(null,1,1,13,64, 64)             // Create the mining ore distribution map.
-	new /datum/random_map/automata/cave_system(null,1,1,14,world.maxx,world.maxy) // smugglers.
-	new /datum/random_map/noise/ore(null,1,1,14,64, 64)             // Create the mining ore distribution map.
-	return 1
-
 //Overriding event containers to remove random versions of overmap events - electrical storm, dust and meteor
 /datum/event_container/mundane
 	available_events = list(

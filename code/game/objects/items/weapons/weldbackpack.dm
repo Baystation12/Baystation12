@@ -15,7 +15,7 @@
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 
 /obj/item/weapon/weldpack/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/weldingtool))
+	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/T = W
 		if(T.welding & prob(50))
 			message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
@@ -28,11 +28,20 @@
 		else
 			if(T.welding)
 				to_chat(user, "<span class='danger'>That was close!</span>")
-			src.reagents.trans_to_obj(W, T.max_fuel)
-			to_chat(user, "<span class='notice'>Welder refilled!</span>")
+			if(!T.tank)
+				to_chat(user, "\The [T] has no tank attached!")
+			src.reagents.trans_to_obj(T.tank, T.tank.max_fuel)
+			to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
-	to_chat(user, "<span class='warning'>The tank will accept only a welding tool.</span>")
+	else if(istype(W, /obj/item/weapon/fuel_cartridge))
+		var/obj/item/weapon/fuel_cartridge/tank = W
+		src.reagents.trans_to_obj(tank, tank.max_fuel)
+		to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
+		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		return
+
+	to_chat(user, "<span class='warning'>The tank will accept only a welding tool or cartridge.</span>")
 	return
 
 /obj/item/weapon/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)

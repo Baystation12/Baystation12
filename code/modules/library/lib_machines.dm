@@ -50,7 +50,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				dat += "<font color=red><b>ERROR</b>: Malformed search request. Please contact your system administrator for assistance.</font><BR>"
 			else
 				dat += {"<table>
-				<tr><td>AUTHOR</td><td>TITLE</td><td>CATEGORY</td><td>SS<sup>13</sup>BN</td></tr>"}
+				<tr><td>AUTHOR</td><td>TITLE</td><td>CATEGORY</td><td>USBN</td></tr>"}
 
 				var/DBQuery/query = dbcon_old.NewQuery(SQLquery)
 				query.Execute()
@@ -80,7 +80,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			title = null
 		title = sanitizeSQL(title)
 	if(href_list["setcategory"])
-		var/newcategory = input("Choose a category to search for:") in list("Any", "Fiction", "Non-Fiction", "Adult", "Reference", "Religion")
+		var/newcategory = input("Choose a category to search for:") in list("Any", "Fiction", "Non-Fiction", "Reference", "Religion")
 		if(newcategory)
 			category = sanitize(newcategory)
 		else
@@ -114,6 +114,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
  */
 // TODO: Make this an actual /obj/machinery/computer that can be crafted from circuit boards and such
 // It is August 22nd, 2012... This TODO has already been here for months.. I wonder how long it'll last before someone does something about it.
+// It is November 13th, 2016... The answer you're looking for is "at least 4 years" my nameless friend.
 /obj/machinery/librarycomp
 	name = "Check-In/Out Computer"
 	icon = 'icons/obj/library.dmi'
@@ -196,7 +197,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			else
 				dat += {"<A href='?src=\ref[src];orderbyid=1'>(Order book by SS<sup>13</sup>BN)</A><BR><BR>
 				<table>
-				<tr><td><A href='?src=\ref[src];sort=author'>AUTHOR</A></td><td><A href='?src=\ref[src];sort=title'>TITLE</A></td><td><A href='?src=\ref[src];sort=category'>CATEGORY</A></td><td></td></tr>"}
+				<tr><td><A href='?src=\ref[src];sort=author'>AUTHOR</A></td><td><A href='?src=\ref[src];sort=title'>TITLE</A></td><td><A href='?src=\ref[src];sort=category'>CATEGORY</A></td><td><A href='?src=\ref[src];sort=id'>USBN</A></td><td></td></tr>"}
 				var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library ORDER BY [sortby]")
 				query.Execute()
 
@@ -205,7 +206,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 					var/author = query.item[2]
 					var/title = query.item[3]
 					var/category = query.item[4]
-					dat += "<tr><td>[author]</td><td>[title]</td><td>[category]</td><td><A href='?src=\ref[src];targetid=[id]'>\[Order\]</A></td></tr>"
+					dat += "<tr><td>[author]</td><td>[title]</td><td>[category]</td><td>[id]</td><td><A href='?src=\ref[src];targetid=[id]'>\[Order\]</A></td></tr>"
 				dat += "</table>"
 			dat += "<BR><A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"
 		if(5)
@@ -233,7 +234,6 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			<A href='?src=\ref[src];arccheckout=1'>Yes.</A><BR>
 			<A href='?src=\ref[src];switchscreen=0'>No.</A><BR>"}
 
-	//dat += "<A HREF='?src=\ref[user];mach_close=library'>Close</A><br><br>"
 	user << browse(dat, "window=library")
 	onclose(user, "library")
 
@@ -324,7 +324,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 		if(newauthor)
 			scanner.cache.author = newauthor
 	if(href_list["setcategory"])
-		var/newcategory = input("Choose a category: ") in list("Fiction", "Non-Fiction", "Adult", "Reference", "Religion")
+		var/newcategory = input("Choose a category: ") in list("Fiction", "Non-Fiction", "Reference", "Religion")
 		if(newcategory)
 			upload_category = newcategory
 	if(href_list["upload"])
@@ -339,12 +339,6 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 						if(!dbcon_old.IsConnected())
 							alert("Connection to Archive has been severed. Aborting.")
 						else
-							/*
-							var/sqltitle = dbcon.Quote(scanner.cache.name)
-							var/sqlauthor = dbcon.Quote(scanner.cache.author)
-							var/sqlcontent = dbcon.Quote(scanner.cache.dat)
-							var/sqlcategory = dbcon.Quote(upload_category)
-							*/
 							var/sqltitle = sanitizeSQL(scanner.cache.name)
 							var/sqlauthor = sanitizeSQL(scanner.cache.author)
 							var/sqlcontent = sanitizeSQL(scanner.cache.dat)
@@ -373,16 +367,18 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			query.Execute()
 
 			while(query.NextRow())
+				var/id = query.item[1]
 				var/author = query.item[2]
 				var/title = query.item[3]
 				var/content = query.item[4]
 				var/obj/item/weapon/book/B = new(src.loc)
-				B.name = "Book: [title]"
+				B.name = title
 				B.title = title
 				B.author = author
 				B.dat = content
 				B.icon_state = "book[rand(1,7)]"
-				src.visible_message("[src]'s printer hums as it produces a completely bound book. How did it do that?")
+				B.desc = "[author], \"[title]\", USBN [id]"
+				src.visible_message("[src]'s printer hums as it produces a completely bound book.")
 				break
 	if(href_list["orderbyid"])
 		var/orderid = input("Enter your order:") as num|null
@@ -390,7 +386,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			if(isnum(orderid))
 				var/nhref = "src=\ref[src];targetid=[orderid]"
 				spawn() src.Topic(nhref, params2list(nhref), src)
-	if(href_list["sort"] in list("author", "title", "category"))
+	if(href_list["sort"] in list("author", "title", "category", "id"))
 		sortby = href_list["sort"]
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()

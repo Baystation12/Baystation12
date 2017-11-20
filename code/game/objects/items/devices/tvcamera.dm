@@ -34,10 +34,6 @@
 	to_chat(usr, "Video feed is [camera.status ? "on" : "off"]")
 	to_chat(usr, "Audio feed is [radio.broadcasting ? "on" : "off"]")
 
-/obj/item/device/tvcamera/hear_talk(mob/living/M, msg, var/verb="says", datum/language/speaking=null)
-	radio.hear_talk(M,msg,verb,speaking)
-	..()
-
 /obj/item/device/tvcamera/attack_self(mob/user)
 	add_fingerprint(user)
 	user.set_machine(src)
@@ -133,7 +129,7 @@
 				desc = "This TV camera assembly has a camera and audio module."
 				return
 		if(2)
-			if(istype(W, /obj/item/stack/cable_coil))
+			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if(!C.use(3))
 					to_chat(user, "<span class='notice'>You need three cable coils to wire the devices.</span>")
@@ -145,7 +141,7 @@
 				desc = "This TV camera assembly has wires sticking out"
 				return
 		if(3)
-			if(istype(W, /obj/item/weapon/wirecutters))
+			if(isWirecutter(W))
 				to_chat(user, "<span class='notice'> You trim the wires.</span>")
 				buildstep++
 				desc = "This TV camera assembly needs casing."

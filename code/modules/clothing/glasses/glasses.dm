@@ -445,12 +445,14 @@
 	icon_state = "tajblind"
 	item_state = "tajblind"
 	prescription = 5
+	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/hud/health/tajblind
 	name = "lightweight veil"
 	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has an installed medical HUD."
 	icon_state = "tajblind_med"
 	item_state = "tajblind_med"
+	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/sunglasses/sechud/tajblind
 	name = "sleek veil"
@@ -458,6 +460,7 @@
 	icon_state = "tajblind_sec"
 	item_state = "tajblind_sec"
 	prescription = 5
+	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/meson/prescription/tajblind
 	name = "industrial veil"
@@ -465,3 +468,4 @@
 	icon_state = "tajblind_meson"
 	item_state = "tajblind_meson"
 	off_state = "tajblind_meson"
+	body_parts_covered = EYES
