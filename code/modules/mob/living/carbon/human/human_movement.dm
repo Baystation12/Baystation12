@@ -41,10 +41,10 @@
 				item_slowdown += I.slowdown_general
 				item_slowdown += I.slowdown_per_slot[slot]
 
-				if(!isnull(species.strength) && item_slowdown >= 0)
+				if(item_slowdown >= 0)
 					var/size_mod = 0
 					if(!(mob_size == MOB_MEDIUM))
-						size_mod = log(mob_size / MOB_MEDIUM, 2)
+						size_mod = log(2, mob_size / MOB_MEDIUM)
 					if(species.strength + size_mod + 1 > 0)
 						item_slowdown = item_slowdown / (species.strength + size_mod + 1)
 					else
