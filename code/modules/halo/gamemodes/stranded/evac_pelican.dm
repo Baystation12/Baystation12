@@ -1,4 +1,21 @@
 
+/obj/effect/evac_pelican/
+	name = "Evac Pelican Spawn"
+	desc = "You shouldn't see this."
+	invisibility = 101
+	anchored = 1
+	density = 0
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "x3"
+	var/spawned = 0
+
+/obj/effect/evac_pelican/proc/spawn_pelican()
+
+	if(!spawned)
+		spawned = 1
+		new /obj/structure/evac_pelican(src.loc)
+		qdel(src)
+
 /obj/structure/evac_pelican/
 	name = "D77-TC Pelican"
 	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. Tt can also be used as a support gunship."
