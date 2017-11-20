@@ -1408,6 +1408,7 @@
 #include "code\modules\halo\doors\halo_doors.dm"
 #include "code\modules\halo\flood\flood.dm"
 #include "code\modules\halo\floorsigns\floorsigns.dm"
+#include "code\modules\halo\gamemodes\stranded\__desert_outpost_map.dm"
 #include "code\modules\halo\gamemodes\stranded\_desert_outpost.dm"
 #include "code\modules\halo\gamemodes\stranded\evac_pelican.dm"
 #include "code\modules\halo\gamemodes\stranded\structures.dm"

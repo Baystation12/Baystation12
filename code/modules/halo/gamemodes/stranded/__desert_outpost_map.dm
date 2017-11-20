@@ -8,5 +8,4 @@
 	station_short = "Unknown desert world"
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
-	lobby_icon = 'code/modules/halo/splashworks/title6.dmi'
-	//lobby_screens = list("")
+	lobby_icon = 'code/modules/halo/splashworks/title6.png'
