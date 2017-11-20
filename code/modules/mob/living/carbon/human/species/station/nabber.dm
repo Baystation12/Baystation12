@@ -47,6 +47,7 @@
 	burn_mod =  1.35
 	gluttonous = GLUT_SMALLER
 	mob_size = MOB_LARGE
+	strength = STR_HIGH
 	breath_pressure = 25
 	blood_volume = 840
 	spawns_with_stack = 0

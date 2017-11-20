@@ -38,6 +38,7 @@
 	var/pixel_offset_y = 0                    // Used for offsetting large icons.
 
 	var/mob_size	= MOB_MEDIUM
+	var/strength    = STR_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/virus_immune
 	var/short_sighted                         // Permanent weldervision.
