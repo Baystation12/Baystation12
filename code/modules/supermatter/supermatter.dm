@@ -242,7 +242,7 @@
 
 	// Effect 4: Medium scale explosion
 	spawn(0)
-		explosion(TS, explosion_power/2, explosion_power, explosion_power * 2, explosion_power * 4, 1)
+		explosion(TS, explosion_power, explosion_power * 2, explosion_power * 8, explosion_power * 12, 1)
 		qdel(src)
 
 //Changes color and luminosity of the light to these values if they were not already set
