@@ -5,7 +5,7 @@
 	required_players = 0
 	required_enemies = 0
 	end_on_antag_death = 0
-	round_description = "Build a base as you struggle to survive. The Flood is coming..."
+	round_description = "Build a base in order to survive. The Flood is coming..."
 	extended_round_description = "Your ship has crash landed on a distant alien world. Now waves of Flood are attacking and there is only limited time to setup defences. Can you survive until the rescue team arrives?"
 	//hub_descriptions = list("desperately struggling to survive against waves of parasitic aliens on a distant world...")
 
@@ -94,7 +94,7 @@
 
 	if(do_daynight_cycle)
 		process_daynight()
-	process_spawning()
+	//process_spawning()
 	process_evac()
 
 /datum/game_mode/stranded/proc/process_daynight()
@@ -147,8 +147,8 @@
 
 		if(world.time > time_next_spawn_tick)
 			time_next_spawn_tick = world.time + spawn_interval
-			spawn(0)
-				spawn_attackers_tick(spawns_per_tick_current)
+			/*spawn(0)
+				spawn_attackers_tick(spawns_per_tick_current)*/
 	else
 		//rest period is currently ongoing
 		if(world.time > time_wave_cycle)
@@ -165,6 +165,8 @@
 /datum/game_mode/stranded/proc/process_evac()
 	if(world.time > time_pelican_arrive)
 		//force an immediate wave to spawn
+		for(var/obj/effect/evac_pelican/E in world)
+			E.spawn_pelican()
 		wave_num++
 		spawns_per_tick_current = wave_num * spawn_wave_multi
 		spawn_feral_chance = wave_num * 0.2
@@ -218,3 +220,23 @@
 	return timeshift ? time2text(time+(36000*roundstart_hour), "hh:mm") : time2text(time, "hh:mm")
 	*/
 	return
+
+/obj/effect/evac_pelican/
+	name = "Evac Pelican Spawn"
+	desc = "You shouldn't see this."
+	//invisibility = 101
+	anchored = 1
+	density = 0
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "x3"
+	var/spawned = 0
+
+/obj/effect/evac_pelican/verb/spawn_pelican()
+	set name = "Spawn the Evac Pelican"
+	set src in view()
+	set category = "IC"
+
+	if(!spawned)
+		spawned = 1
+		new /obj/structure/evac_pelican(src.loc)
+		qdel(src)
