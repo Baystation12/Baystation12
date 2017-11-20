@@ -15,9 +15,9 @@
 	votable = 1
 	var/obj/payload/bombs = list("timer" = 0)
 	var/list/remaining_pods = list()
-	var/prepare_time =  3 MINUTES //The amount of time the insurrectionists have to prepare for the ODST assault, in ticks
+	var/prepare_time =  5 MINUTES //The amount of time the insurrectionists have to prepare for the ODST assault, in ticks
 	var/last_assault = 0 //This is also set to -1 when a bomb is active.
-	var/autolaunchtime = 10 MINUTES //At runtime, this stores the time in ticks after roundstart will launch at.
+	var/autolaunchtime = 12 MINUTES //At runtime, this stores the time in ticks after roundstart will launch at.
 	var/warned = 0 //To stop bomb detonation warning spam
 
 /datum/game_mode/insurrection/proc/message_faction(var/faction,var/message)

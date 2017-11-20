@@ -99,6 +99,7 @@
 
 /obj/item/ammo_magazine/m762_ap/MA5B
 	icon_state = "MA5B_mag"
+	max_ammo = 60
 
 /obj/item/ammo_magazine/m762_ap/MA37
 	icon_state = "MA37_mag"
