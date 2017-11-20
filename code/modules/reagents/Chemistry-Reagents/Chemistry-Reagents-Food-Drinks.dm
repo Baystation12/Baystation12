@@ -157,6 +157,14 @@
 	nutriment_factor = 5
 	color = "#4f330f"
 
+/datum/reagent/nutriment/garlicsauce
+	name = "Garlic Sauce"
+	description = "Garlic sauce, perfect for spicing up a plate of garlic."
+	taste_description = "garlic"
+	reagent_state = LIQUID
+	nutriment_factor = 4
+	color = "#d8c045"
+
 /datum/reagent/nutriment/rice
 	name = "Rice"
 	description = "Enjoy the great taste of nothing."
@@ -545,6 +553,26 @@
 
 	glass_name = "potato juice"
 	glass_desc = "Juice from a potato. Bleh."
+
+/datum/reagent/drink/juice/garlic
+	name = "Garlic Juice"
+	description = "Who would even drink this?"
+	taste_description = "bad breath"
+	nutrition = 1
+	color = "#eeddcc"
+
+	glass_name = "garlic juice"
+	glass_desc = "Who would even drink juice from garlic?"
+
+/datum/reagent/drink/juice/onion
+	name = "Onion Juice"
+	description = "Juice from an onion, for when you need to cry."
+	taste_description = "stinging tears"
+	nutrition = 1
+	color = "#ffeedd"
+
+	glass_name = "onion juice"
+	glass_desc = "Juice from an onion, for when you need to cry."
 
 /datum/reagent/drink/juice/tomato
 	name = "Tomato Juice"

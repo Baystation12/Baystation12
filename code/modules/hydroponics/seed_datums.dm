@@ -648,9 +648,27 @@
 	set_trait(TRAIT_PRODUCTION,6)
 	set_trait(TRAIT_YIELD,6)
 	set_trait(TRAIT_POTENCY,10)
-	set_trait(TRAIT_PRODUCT_ICON,"potato")
+	set_trait(TRAIT_PRODUCT_ICON,"nuts")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#c4ae7a")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+
+/datum/seed/peppercorn
+	name = "peppercorn"
+	seed_name = "peppercorn"
+	display_name = "black pepper"
+	chems = list(blackpepper = list(10,10))
+
+/datum/seed/peppercorn/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,4)
+	set_trait(TRAIT_PRODUCTION,4)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,5)
+	set_trait(TRAIT_PRODUCT_ICON,"nuts")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#4d4d4d")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 
 /datum/seed/cabbage
@@ -737,6 +755,42 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#d4cab4")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+
+/datum/seed/garlic
+	name = "garlic"
+	seed_name = "garlic"
+	display_name = "garlic"
+	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/juice/garlic = list(10,10))
+	kitchen_tag = "garlic"
+
+/datum/seed/garlic/New()
+	..()
+	set_trait(TRAIT_MATURATION,10)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_POTENCY,12)
+	set_trait(TRAIT_PRODUCT_ICON,"bulb")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#fff8dd")
+	set_trait(TRAIT_PLANT_ICON,"stalk")
+	set_trait(TRAIT_WATER_CONSUMPTION, 7)
+
+/datum/seed/onion
+	name = "onion"
+	seed_name = "onion"
+	display_name = "onions"
+	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/juice/onion = list(10,10))
+	kitchen_tag = "onion"
+
+/datum/seed/onion/New()
+	..()
+	set_trait(TRAIT_MATURATION,10)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"bulb")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#ffeedd")
+	set_trait(TRAIT_PLANT_ICON,"stalk")
+	set_trait(TRAIT_WATER_CONSUMPTION, 5)
 
 /datum/seed/soybean
 	name = "soybean"
