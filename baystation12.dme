@@ -1411,6 +1411,7 @@
 #include "code\modules\halo\gamemodes\stranded\__desert_outpost_map.dm"
 #include "code\modules\halo\gamemodes\stranded\_desert_outpost.dm"
 #include "code\modules\halo\gamemodes\stranded\evac_pelican.dm"
+#include "code\modules\halo\gamemodes\stranded\materials.dm"
 #include "code\modules\halo\gamemodes\stranded\structures.dm"
 #include "code\modules\halo\insurrection\access_ids.dm"
 #include "code\modules\halo\insurrection\antagonist.dm"
