@@ -33,11 +33,12 @@
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
 	else
-		for(var/slot = slot_first to slot_last)
-			var/obj/item/I = get_equipped_item(slot)
-			if(I)
-				tally += I.slowdown_general
-				tally += I.slowdown_per_slot[slot]
+		if(!(species.flags & NO_BURDEN))
+			for(var/slot = slot_first to slot_last)
+				var/obj/item/I = get_equipped_item(slot)
+				if(I)
+					tally += I.slowdown_general
+					tally += I.slowdown_per_slot[slot]
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(organ_name)
