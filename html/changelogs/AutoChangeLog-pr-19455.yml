@@ -1,0 +1,4 @@
+author: "Cirra"
+delete-after: True
+changes: 
+  - tweak: "Radiation is now relevant again, due to material radiation resistance being lowered."
