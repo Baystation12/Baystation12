@@ -730,6 +730,10 @@
 	name = "\improper Exploration Equipment"
 	icon_state = "exploration"
 
+/area/quartermaster/shuttlefuel
+	name = "\improper Shuttle Fuel Bay"
+	icon_state = "toxstorage"
+
 /area/quartermaster/hangar
 	name = "\improper Hangar Deck"
 	icon_state = "hangar"
