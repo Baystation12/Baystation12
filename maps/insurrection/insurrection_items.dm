@@ -40,8 +40,6 @@
 
 /obj/machinery/podcontrol/attack_hand(var/mob/user)
 	//TODO: Move controls to UI based.
-	if(!land_point)
-		return
 	if(launching == LAUNCH_UNDERWAY)
 		return
 	if(launching == LAUNCH_ABORTED)
@@ -79,6 +77,11 @@
 
 
 /obj/machinery/podcontrol/proc/launch()
+	get_and_set_land_point()
+	if(isnull(land_point))
+		visible_message("<span class = 'notice'>POD LAUNCH FAILURE</span>","<span class = 'notice'>You hear an angry beep</span>")
+		return
+	playsound(land_point, get_sfx("explosion"), 100, 1,, falloff = 1)
 	var/translation = calc_translation(land_point)
 	for(var/mob/m in view(7,land_point))
 		to_chat(m,"<span class='danger'>A concussive blast throws everything aside!</span>") //Tell everyone things were thrown away.
@@ -109,11 +112,6 @@
 			to_chat(M,"<span class='notice'>ASSAULT POD DEPARTING!</span>")
 		launching = LAUNCH_UNDERWAY
 		spawn(20)
-			for(var/mob/living/l in GLOB.player_list)
-				if(l.z != land_point.z)
-					continue
-				l.playsound_local(land_point, get_sfx("explosion"), 100, 1,, falloff = 1)
-			get_and_set_land_point()
 			launch()
 
 /obj/effect/landmark/innie_bomb
