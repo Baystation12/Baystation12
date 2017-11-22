@@ -1,6 +1,9 @@
 /*
  * Acid
  */
+ #define ACID_STRONG     2
+ #define ACID_MODERATE   1.5
+ #define ACID_WEAK       1
 /obj/effect/acid
 	name = "acid"
 	desc = "Burbling corrosive stuff. Probably a bad idea to roll around in it."
@@ -13,40 +16,30 @@
 
 	var/atom/target
 	var/ticks = 0
-	var/target_strength = 0
+	var/acid_strength = ACID_WEAK
+	var/melt_time = 10 SECONDS
 
 /obj/effect/acid/New(loc, supplied_target)
 	..(loc)
 	target = supplied_target
+	melt_time = melt_time / acid_strength
 
-	if(isturf(target)) // Turf take twice as long to take down.
-		target_strength = 8
-	else
-		target_strength = 4
-	tick()
+	melt_stuff()
 
-/obj/effect/acid/proc/tick()
-	if(!target)
-		qdel(src)
-
-	ticks++
-	if(ticks >= target_strength)
-		target.visible_message("<span class='alium'>\The [target] collapses under its own weight into a puddle of goop and undigested debris!</span>")
-		if(istype(target, /turf/simulated/wall)) // I hate turf code.
-			var/turf/simulated/wall/W = target
-			W.dismantle_wall(1)
+/obj/effect/acid/proc/melt_stuff()
+	spawn(1)
+		var/melted = target.acid_melt(melt_time)
+		sleep(melt_time)
+		if(melted)
+			qdel(src)
 		else
-			qdel(target)
-		qdel(src)
-		return
+			melt_stuff()
 
-	switch(target_strength - ticks)
-		if(6)
-			visible_message("<span class='alium'>\The [src.target] is holding up against the acid!</span>")
-		if(4)
-			visible_message("<span class='alium'>\The [src.target]\s structure is being melted by the acid!</span>")
-		if(2)
-			visible_message("<span class='alium'>\The [src.target] is struggling to withstand the acid!</span>")
-		if(0 to 1)
-			visible_message("<span class='alium'>\The [src.target] begins to crumble under the acid!</span>")
-	spawn(rand(150, 200)) tick()
+/atom/proc/acid_melt(var/melt_time)
+	visible_message("<span class='alium'>Acid hits \the [src] with a sizzle!</span>")
+	for(var/i = 0, i < 4, i++)
+		sleep(melt_time)
+		visible_message("<span class='alium'>The acid melts \the [src]!</span>")
+	visible_message("<span class='alium'>The acid melts \the [src] away into nothing!</span>")
+	qdel(src)
+	return TRUE
