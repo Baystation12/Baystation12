@@ -9,9 +9,12 @@
 	throw_range = 20
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
+	var/truncated_name = "nade" // Used for clusterbombs.
 	var/active = 0
 	var/det_time = 50
 	var/arm_sound = 'sound/weapons/armbomb.ogg'
+	var/banglet = 0 //Used by clusternades.
+
 
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/user)
 	if((CLUMSY in user.mutations) && prob(50))
@@ -24,23 +27,13 @@
 		return 0
 	return 1
 
-
-/*/obj/item/weapon/grenade/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
-	if (istype(target, /obj/item/weapon/storage)) return ..() // Trying to put it in a full container
-	if (istype(target, /obj/item/weapon/gun/grenadelauncher)) return ..()
-	if((user.get_active_hand() == src) && (!active) && (clown_check(user)) && target.loc != src.loc)
-		to_chat(user, "<span class='warning'>You prime the [name]! [det_time/10] seconds!</span>")
-		active = 1
-		icon_state = initial(icon_state) + "_active"
-		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-		spawn(det_time)
-			detonate()
-			return
-		user.set_dir(get_dir(user, target))
-		user.drop_item()
-		var/t = (isturf(target) ? target : target.loc)
-		walk_towards(src, t, 3)
-	return*/
+/obj/item/weapon/grenade/New()
+	if(banglet) //Used in cluster.dm
+		var/stepdist = rand(1,3)
+		var/temploc = src.loc
+		walk_away(src,temploc,stepdist) //Spread.
+		det_time  = rand(15,30)
+		activate()
 
 
 /obj/item/weapon/grenade/examine(mob/user)

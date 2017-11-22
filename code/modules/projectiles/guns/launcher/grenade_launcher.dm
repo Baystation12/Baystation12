@@ -19,7 +19,8 @@
 		/obj/item/weapon/grenade/frag/shell)
 
 	var/blacklisted_grenades = list(
-		/obj/item/weapon/grenade/flashbang/clusterbang,
+		/obj/item/weapon/grenade/cluster/frag,
+		/obj/item/weapon/grenade/cluster/supermatter,
 		/obj/item/weapon/grenade/frag)
 
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
