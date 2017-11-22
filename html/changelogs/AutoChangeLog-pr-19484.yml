@@ -1,7 +1,0 @@
-author: "atlantiscze"
-delete-after: True
-changes: 
-  - tweak: "Communication outages are overall less common."
-  - tweak: "Communication outage has only 75% chance to affect each particular machine, therefore with some luck, enough machines may remain functional to get at least some working frequencies. The hub, broadcaster and receiver have 10% chance to be affected, as they are critical for the whole telecommunications system."
-  - tweak: "Increased chance of ion anomaly being announced. There is still a small probability of the anomaly occuring silently."
-  - rscadd: "It is now possible to reset EMP/ion/random event affected telecommunications machinery with a multitool through the UI. The UI also shows a timer until automated reset."

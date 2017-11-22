@@ -1,5 +1,0 @@
-author: "dryerlint"
-delete-after: True
-changes: 
-  - rscadd: "Added fuel ports to Charon and GUP. They will consume fuel and eventually run out"
-  - rscadd: "Added small refueling room to Hangar, for anyone with Supply Warehouse access"
