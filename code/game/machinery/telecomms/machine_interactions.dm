@@ -123,6 +123,8 @@
 	dat = "<font face = \"Courier\"><HEAD><TITLE>[src.name]</TITLE></HEAD><center><H3>[src.name] Access</H3></center>"
 	dat += "<br>[temp]<br>"
 	dat += "<br>Power Status: <a href='?src=\ref[src];input=toggle'>[src.toggled ? "On" : "Off"]</a>"
+	if(overloaded_for)
+		dat += "<br><br>WARNING: Ion interference detected. System will automatically recover in [overloaded_for*2] seconds. <a href='?src=\ref[src];input=resetoverload'>Reset manually</a><br>"
 	if(on && toggled)
 		if(id != "" && id)
 			dat += "<br>Identification String: <a href='?src=\ref[src];input=id'>[id]</a>"
@@ -297,6 +299,10 @@
 
 	if(href_list["input"])
 		switch(href_list["input"])
+
+			if("resetoverload")
+				overloaded_for = 0
+				temp = "<font color = #666633>-% Manual override accepted. \The [src] has been reset.</font>"
 
 			if("toggle")
 
