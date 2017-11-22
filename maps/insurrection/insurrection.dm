@@ -151,8 +151,7 @@
 	if(autolaunchtime < world.time)
 		for(var/obj/machinery/podcontrol/control in remaining_pods)
 			message_faction("UNSC","<span class = 'danger'>Assault pods autolaunched.</span>")
-			modify_pod_launch(1)
-			control.process()
+			modify_pod_launch(0)
 			remaining_pods -= control
 			update_pod_status()
 
