@@ -1,0 +1,5 @@
+author: "Casper3667"
+delete-after: True
+changes: 
+  - tweak: "Fixes up balaclava and half-gas mask sprites for taj."
+  - rscadd: "Adds new shoes for taj called caligae."
