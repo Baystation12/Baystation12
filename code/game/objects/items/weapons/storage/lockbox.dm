@@ -92,7 +92,4 @@
 
 /obj/item/weapon/storage/lockbox/clusterbang/New()
 	..()
-	new /obj/item/weapon/grenade/cluster/flashbang(src)
-	new /obj/item/weapon/grenade/cluster/flashbang(src)
-	new /obj/item/weapon/grenade/cluster/flashbang(src)
-	new /obj/item/weapon/grenade/cluster/flashbang(src)
+	MultiNew(/obj/item/weapon/grenade/cluster/flashbang,4,src)

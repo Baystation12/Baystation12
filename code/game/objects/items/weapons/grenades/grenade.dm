@@ -27,15 +27,6 @@
 		return 0
 	return 1
 
-/obj/item/weapon/grenade/New()
-	if(banglet) //Used in cluster.dm
-		var/stepdist = rand(1,3)
-		var/temploc = src.loc
-		walk_away(src,temploc,stepdist) //Spread.
-		det_time  = rand(15,30)
-		activate()
-
-
 /obj/item/weapon/grenade/examine(mob/user)
 	if(..(user, 0))
 		if(det_time > 1)
@@ -59,12 +50,14 @@
 	return
 
 
-/obj/item/weapon/grenade/proc/activate(mob/user as mob)
+/obj/item/weapon/grenade/proc/activate()
 	if(active)
 		return
 
-	if(user)
-		msg_admin_attack("[user.name] ([user.ckey]) primed \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+	if(iscarbon(src.loc))
+		var/mob/living/carbon/user = src.loc
+		if(user)
+			msg_admin_attack("[user.name] ([user.ckey]) primed \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 	icon_state = initial(icon_state) + "_active"
 	active = 1
