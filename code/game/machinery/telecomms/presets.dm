@@ -7,8 +7,11 @@
 
 /obj/machinery/telecomms/relay/preset/station
 	id = "Primary Relay"
-	listening_level = 2
 	autolinkers = list("s_relay")
+
+/obj/machinery/telecomms/relay/preset/station/Initialize()
+	listening_levels = GLOB.using_map.contact_levels
+	return ..()
 
 /obj/machinery/telecomms/relay/preset/telecomms
 	id = "Telecomms Relay"

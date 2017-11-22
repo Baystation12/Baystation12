@@ -205,8 +205,9 @@ var/list/gamemode_cache = list()
 	var/wait_for_sigusr1_reboot = 0 // Don't allow reboot unless it was caused by SIGUSR1
 
 	var/radiation_decay_rate = 1 //How much radiation is reduced by each tick
-	var/radiation_resistance_multiplier = 6.5
-	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
+	var/radiation_resistance_multiplier = 1.25
+	var/radiation_material_resistance_divisor = 2 //A turf's possible radiation resistance is divided by this number, to get the real value.
+	var/radiation_lower_limit = 0.15 //If the radiation level for a turf would be below this, ignore it.
 
 	var/autostealth = 0 // Staff get automatic stealth after this many minutes
 
@@ -715,6 +716,14 @@ var/list/gamemode_cache = list()
 					max_gear_cost = text2num(value)
 					if(max_gear_cost < 0)
 						max_gear_cost = INFINITY
+				if("radiation_decay_rate")
+					radiation_decay_rate = text2num(value)
+				if("radiation_resistance_multiplier")
+					radiation_resistance_multiplier = text2num(value)
+				if("radiation_material_resistance_divisor")
+					radiation_material_resistance_divisor = text2num(value)
+				if("radiation_lower_limit")
+					radiation_lower_limit = text2num(value)
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

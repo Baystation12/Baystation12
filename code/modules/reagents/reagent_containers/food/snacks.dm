@@ -1210,7 +1210,7 @@
 	trash = /obj/item/trash/raisins
 	filling_color = "#343834"
 	center_of_mass = "x=15;y=4"
-	nutriment_desc = list("dried raisins" = 6)
+	nutriment_desc = list("raisins" = 6)
 	nutriment_amt = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/spacetwinkie
@@ -1275,6 +1275,20 @@
 	nutriment_desc = list("fresh fries" = 4)
 	nutriment_amt = 4
 	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/onionrings
+	name = "Onion Rings"
+	desc = "Like circular fries but better."
+	icon_state = "onionrings"
+	trash = /obj/item/trash/plate
+	filling_color = "#eddd00"
+	center_of_mass = "x=16;y=11"
+	nutriment_desc = list("fried onions" = 5)
+	nutriment_amt = 5
+
+/obj/item/weapon/reagent_containers/food/snacks/onionrings/New()
 		..()
 		bitesize = 2
 
@@ -1355,6 +1369,23 @@
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
 		reagents.add_reagent(/datum/reagent/sodiumchloride, 1)
 		reagents.add_reagent(/datum/reagent/blackpepper, 1)
+		bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/loadedsteak
+	name = "Loaded steak"
+	desc = "A steak slathered in sauce with sauteed onions and mushrooms."
+	icon_state = "meatstake"
+	trash = /obj/item/trash/plate
+	filling_color = "#7a3d11"
+	center_of_mass = "x=16;y=13"
+
+	nutriment_desc = list("onion" = 2, "mushroom" = 2)
+	nutriment_amt = 4
+
+/obj/item/weapon/reagent_containers/food/snacks/loadedsteak/New()
+		..()
+		reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
+		reagents.add_reagent(/datum/reagent/nutriment/garlicsauce, 2)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/spacylibertyduff

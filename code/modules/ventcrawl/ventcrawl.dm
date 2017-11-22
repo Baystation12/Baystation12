@@ -53,6 +53,10 @@ var/list/ventcrawl_machinery = list(
 /mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(carried_item in organs)
 		return 1
+	if(carried_item in list(w_uniform, gloves, glasses, wear_mask, l_ear, r_ear, belt, l_store, r_store))
+		return 1
+	if(carried_item in list(l_hand,r_hand))
+		return carried_item.w_class <= ITEM_SIZE_NORMAL
 	return ..()
 
 /mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)

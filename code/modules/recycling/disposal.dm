@@ -57,7 +57,7 @@
 
 	src.add_fingerprint(user)
 	if(mode<=0) // It's off
-		if(istype(I, /obj/item/weapon/screwdriver))
+		if(isScrewdriver(I))
 			if(contents.len > 0)
 				to_chat(user, "Eject the items first!")
 				return
@@ -71,7 +71,7 @@
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You attach the screws around the power connection.")
 				return
-		else if(istype(I,/obj/item/weapon/weldingtool) && mode==-1)
+		else if(isWelder(I) && mode==-1)
 			if(contents.len > 0)
 				to_chat(user, "Eject the items first!")
 				return
@@ -677,7 +677,7 @@
 		plane = ABOVE_PLATING_PLANE
 		base_icon_state = icon_state
 		return
-		
+
 	// pipe is deleted
 	// ensure if holder is present, it is expelled
 	Destroy()
@@ -1215,7 +1215,7 @@
 	return ..()
 
 /obj/machinery/disposal_switch/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/weapon/crowbar))
+	if(isCrowbar(I))
 		var/obj/item/disposal_switch_construct/C = new/obj/item/disposal_switch_construct(src.loc, id_tag)
 		transfer_fingerprints_to(C)
 		user.visible_message("<span class='notice'>\The [user] deattaches \the [src]</span>")
@@ -1638,7 +1638,7 @@
 		if(!I || !user)
 			return
 		src.add_fingerprint(user)
-		if(istype(I, /obj/item/weapon/screwdriver))
+		if(isScrewdriver(I))
 			if(mode==0)
 				mode=1
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)

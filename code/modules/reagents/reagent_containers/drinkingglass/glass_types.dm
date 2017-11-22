@@ -18,7 +18,7 @@
 	rim_pos = "y=21;x_left=10;x_right=23"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/shake
-	name = "milkshake glass"
+	name = "tall cocktail glass"
 	base_name = "glass"
 	base_icon = "shake"
 	filling_states = "25;50;75;100"

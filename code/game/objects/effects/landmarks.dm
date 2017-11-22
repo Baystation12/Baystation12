@@ -242,3 +242,46 @@
 	new /obj/item/clothing/mask/spirit(src.loc)
 	new /obj/item/clothing/under/savage_hunter/female(src.loc)
 	delete_me = 1
+
+/obj/effect/landmark/ruin
+	var/datum/map_template/ruin/ruin_template
+
+/obj/effect/landmark/ruin/New(loc, my_ruin_template)
+	name = "ruin_[sequential_id(/obj/effect/landmark/ruin)]"
+	..(loc)
+	ruin_template = my_ruin_template
+	GLOB.ruin_landmarks |= src
+
+/obj/effect/landmark/ruin/Destroy()
+	GLOB.ruin_landmarks -= src
+	ruin_template = null
+	. = ..()
+
+/obj/effect/landmark/random_gen
+	var/generation_width
+	var/generation_height
+	var/seed
+	delete_me = TRUE
+
+/obj/effect/landmark/random_gen/asteroid/Initialize()
+	. = ..()
+
+	if (!config.generate_map)
+		return
+
+	var/min_x = 1
+	var/min_y = 1
+	var/max_x = world.maxx
+	var/max_y = world.maxy
+
+	if (generation_width)
+		min_x = max(src.x, min_x)
+		max_x = min(src.x + generation_width, max_x)
+	if (generation_height)
+		min_y = max(src.y, min_y)
+		max_y = min(src.y + generation_height, max_y)
+
+	new /datum/random_map/automata/cave_system(seed, min_x, min_y, src.z, max_x, max_y)
+	new /datum/random_map/noise/ore(seed, min_x, min_y, src.z, max_x, max_y)
+
+	GLOB.using_map.refresh_mining_turfs(src.z)

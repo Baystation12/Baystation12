@@ -20,7 +20,7 @@
 	description_info = "This versatile tool is used for dismantling machine frames, anchoring or unanchoring heavy objects like vending machines and emitters, and much more. In general, if you want something to move or stop moving entirely, you ought to use a wrench on it."
 	description_fluff = "The classic open-end wrench (or spanner, if you prefer) hasn't changed significantly in shape in over 500 years, though these days they employ a bit of automated trickery to match various bolt sizes and configurations."
 	description_antag = "Not only is this handy tool good for making off with machines, but it even makes a weapon in a pinch!"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "wrench"
 	item_state = "wrench"
 	flags = CONDUCT
@@ -33,8 +33,9 @@
 	center_of_mass = "x=17;y=16"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
-/obj/item/weapon/wrench/New()
+/obj/item/weapon/wrench/Initialize()
 	icon_state = "wrench[pick("","_red","_black")]"
+	. = ..()
 
 /*
  * Screwdriver
@@ -45,11 +46,11 @@
 	description_info = "This tool is used to expose or safely hide away cabling. It can open and shut the maintenance panels on vending machines, airlocks, and much more. You can also use it, in combination with a crowbar, to install or remove windows."
 	description_fluff = "Screws have not changed significantly in centuries, and neither have the drivers used to install and remove them."
 	description_antag = "In the world of breaking and entering, tools like multitools and wirecutters are the bread; the screwdriver is the butter. In a pinch, try targetting someone's eyes and stabbing them with it - it'll really hurt!"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "screwdriver"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_EARS
-	force = 5.0
+	force = 4.0
 	w_class = ITEM_SIZE_TINY
 	throwforce = 5.0
 	throw_speed = 3
@@ -59,7 +60,7 @@
 	attack_verb = list("stabbed")
 	lock_picking_level = 5
 
-/obj/item/weapon/screwdriver/New()
+/obj/item/weapon/screwdriver/Initialize()
 	switch(pick("red","blue","purple","brown","green","cyan","yellow"))
 		if ("red")
 			icon_state = "screwdriver2"
@@ -85,7 +86,7 @@
 
 	if (prob(75))
 		src.pixel_y = rand(0, 16)
-	..()
+	. = ..()
 
 /obj/item/weapon/screwdriver/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M) || user.a_intent == "help")
@@ -105,11 +106,11 @@
 	description_info = "This tool will cut wiring anywhere you see it - make sure to wear insulated gloves! When used on more complicated machines or airlocks, it can not only cut cables, but repair them, as well."
 	description_fluff = "With modern alloys, today's wirecutters can snap through cables of astonishing thickness."
 	description_antag = "These cutters can be used to cripple the power anywhere on the ship. All it takes is some creativity, and being in the right place at the right time."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "cutters"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	force = 6.0
+	force = 3.0
 	throw_speed = 2
 	throw_range = 9
 	w_class = ITEM_SIZE_SMALL
@@ -120,11 +121,11 @@
 	sharp = 1
 	edge = 1
 
-/obj/item/weapon/wirecutters/New()
+/obj/item/weapon/wirecutters/Initialize()
 	if(prob(50))
 		icon_state = "cutters-y"
 		item_state = "cutters_yellow"
-	..()
+	. = ..()
 
 /obj/item/weapon/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
 	if(user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/weapon/handcuffs/cable)))
@@ -144,10 +145,10 @@
  */
 /obj/item/weapon/weldingtool
 	name = "welding tool"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "welder"
-	desc = "A heavy but portable welding gun with its own internal fuel tank. It features a simple toggle switch, and a port for attaching an external tank."
-	description_info = "Use in your hand to toggle the welder on and off. Click on an object to try to weld it. You can seal airlocks, attach heavy-duty machines like emitters and disposal chutes, and repair damaged walls - these are only a few of its uses. Each use of the welder will consume a unit of fuel. Be sure to wear eye protection such as goggles, a mask, or certain voidsuit helmets, otherwise you risk damaging your eyes! You can refill the welder with a welder tank by clicking on it, but be sure to turn it off first!"
+	desc = "A heavy but portable welding gun with its own interchangeable fuel tank. It features a simple toggle switch and a port for attaching an external tank."
+	description_info = "Use in your hand to toggle the welder on and off. Hold in one hand and click with an empty hand to remove its internal tank. Click on an object to try to weld it. You can seal airlocks, attach heavy-duty machines like emitters and disposal chutes, and repair damaged walls - these are only a few of its uses. Each use of the welder will consume a unit of fuel. Be sure to wear protective equipment such as goggles, a mask, or certain voidsuit helmets to prevent eye damage. You can refill the welder with a welder tank by clicking on it, but be sure to turn it off first!"
 	description_fluff = "One of many tools of ancient design, still used in today's busy world of engineering with only minor tweaks here and there. Compact machinery and innovations in fuel storage have allowed for conveniences like this one-piece, handheld welder to exist."
 	description_antag = "You can use a welder to rapidly seal off doors, ventilation ducts, and scrubbers. It also makes for a devastating weapon. Modify it with a screwdriver and stick some metal rods on it, and you've got the beginnings of a flamethrower."
 	flags = CONDUCT
@@ -159,7 +160,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
 
 	//Cost to make in the autolathe
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
@@ -170,29 +171,36 @@
 	//Welding tool specific stuff
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
-	var/max_fuel = 20 	//The max amount of fuel the welder can hold
 
-/obj/item/weapon/weldingtool/New()
-//	var/random_fuel = min(rand(10,20),max_fuel)
-	create_reagents(max_fuel)
-	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
-	..()
+	var/obj/item/weapon/fuel_cartridge/tank = /obj/item/weapon/fuel_cartridge // where the fuel is stored
+
+/obj/item/weapon/weldingtool/Initialize()
+	if(ispath(tank))
+		tank = new tank
+	. = ..()
 
 /obj/item/weapon/weldingtool/Destroy()
 	if(welding)
 		STOP_PROCESSING(SSobj, src)
+
+	QDEL_NULL(tank)
+
 	return ..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
 	if(..(user, 0))
-		to_chat(user, text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel ))
+		if(tank)
+			to_chat(user, "\icon[tank] \The [tank] contains [get_fuel()]/[tank.max_fuel] units of fuel!")
+		else
+			to_chat(user, "There is no tank attached.")
 
 
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
+	if(welding)
+		to_chat(user, "<span class='danger'>Stop welding first!</span>")
+		return
+
 	if(istype(W,/obj/item/weapon/screwdriver))
-		if(welding)
-			to_chat(user, "<span class='danger'>Stop welding first!</span>")
-			return
 		status = !status
 		if(status)
 			to_chat(user, "<span class='notice'>You secure the welder.</span>")
@@ -222,8 +230,37 @@
 		src.add_fingerprint(user)
 		return
 
+	if(istype(W, /obj/item/weapon/fuel_cartridge))
+		if(tank)
+			to_chat(user, "Remove the current tank first.")
+			return
+
+		if(W.w_class >= w_class)
+			to_chat(user, "\The [W] is too large to fit in \the [src].")
+			return
+
+		user.drop_from_inventory(W, src)
+		tank = W
+		user.visible_message("[user] slots \a [W] into \the [src].", "You slot \a [W] into \the [src].")
+		return
+
 	..()
-	return
+
+
+/obj/item/weapon/weldingtool/attack_hand(mob/user as mob)
+	if(tank && user.get_inactive_hand() == src)
+		if(!welding)
+			if(tank.can_remove)
+				user.visible_message("[user] removes \the [tank] from \the [src].", "You remove \the [tank] from \the [src].")
+				user.put_in_hands(tank)
+				tank = null
+			else
+				to_chat(user, "\The [tank] can't be removed.")
+		else
+			to_chat(user, "<span class='danger'>Stop welding first!</span>")
+
+	else
+		..()
 
 
 /obj/item/weapon/weldingtool/Process()
@@ -234,8 +271,11 @@
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
-		O.reagents.trans_to_obj(src, max_fuel)
-		to_chat(user, "<span class='notice'>Welder refueled</span>")
+		if(!tank)
+			to_chat(user, "\The [src] has no tank attached!")
+			return
+		O.reagents.trans_to_obj(tank, tank.max_fuel)
+		to_chat(user, "<span class='notice'>You refuel \the [tank].</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 	if (src.welding)
@@ -255,7 +295,7 @@
 
 //Returns the amount of fuel in the welder
 /obj/item/weapon/weldingtool/proc/get_fuel()
-	return reagents.get_reagent_amount(/datum/reagent/fuel)
+	return tank ? tank.reagents.get_reagent_amount(/datum/reagent/fuel) : 0
 
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
@@ -273,6 +313,9 @@
 		return 0
 
 /obj/item/weapon/weldingtool/proc/burn_fuel(var/amount)
+	if(!tank)
+		return
+
 	var/mob/living/in_mob = null
 
 	//consider ourselves in a mob if we are in the mob's contents and not in their hands
@@ -283,11 +326,11 @@
 
 	if(in_mob)
 		amount = max(amount, 2)
-		reagents.trans_type_to(in_mob, /datum/reagent/fuel, amount)
+		tank.reagents.trans_type_to(in_mob, /datum/reagent/fuel, amount)
 		in_mob.IgniteMob()
 
 	else
-		reagents.remove_reagent(/datum/reagent/fuel, amount)
+		tank.reagents.remove_reagent(/datum/reagent/fuel, amount)
 		var/turf/location = get_turf(src.loc)
 		if(location)
 			location.hotspot_expose(700, 5)
@@ -383,74 +426,96 @@
 				spawn(100)
 					H.disabilities &= ~NEARSIGHTED
 
+/obj/item/weapon/fuel_cartridge
+	name = "welding fuel cartridge"
+	desc = "An interchangeable fuel tank meant for a welding tool."
+	icon = 'icons/obj/ammo.dmi'
+	icon_state = "fuel"
+	w_class = ITEM_SIZE_SMALL
+	var/max_fuel = 20
+	var/can_remove = 1
+
+/obj/item/weapon/fuel_cartridge/Initialize()
+	create_reagents(max_fuel)
+	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
+	. = ..()
+
+/obj/item/weapon/fuel_cartridge/afterattack(obj/O as obj, mob/user as mob, proximity)
+	if(!proximity) return
+	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1)
+		O.reagents.trans_to_obj(src, max_fuel)
+		to_chat(user, "<span class='notice'>You refuel \the [src].</span>")
+		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		return
 
 /obj/item/weapon/weldingtool/mini
 	name = "miniature welding tool"
-	desc = "A welder with a very small fuel tank, meant for quick emergency use."
-	max_fuel = 5
+	desc = "A smaller welder, meant for quick or emergency use."
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 15, "glass" = 5)
+	w_class = ITEM_SIZE_SMALL
+	tank = /obj/item/weapon/fuel_cartridge/mini
+
+/obj/item/weapon/fuel_cartridge/mini
+	name = "small welding fuel cartridge"
+	w_class = ITEM_SIZE_TINY
+	max_fuel = 5
+	can_remove = 0
 
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
-	desc = "A heavy-duty portable welder, with an extra large fuel tank to ensure it won't suddenly go cold on you."
-	max_fuel = 40
+	desc = "A heavy-duty portable welder, made to ensure it won't suddenly go cold on you."
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
+	w_class = ITEM_SIZE_LARGE
+	tank = /obj/item/weapon/fuel_cartridge/large
+
+/obj/item/weapon/fuel_cartridge/large
+	name = "large welding fuel cartridge"
+	w_class = ITEM_SIZE_NORMAL
+	max_fuel = 40
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
-	desc = "A portable welding tool of astonishing weight. It appears to have had a very large after-market fuel tank installed."
-	max_fuel = 80
-	w_class = ITEM_SIZE_NORMAL
+	desc = "A sizable welding tool with room to accomodate the largest of fuel tanks."
+	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
+	tank = /obj/item/weapon/fuel_cartridge/huge
+
+/obj/item/weapon/fuel_cartridge/huge
+	name = "huge welding fuel cartridge"
+	w_class = ITEM_SIZE_LARGE
+	max_fuel = 80
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
-	max_fuel = 40
-	w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
+	tank = /obj/item/weapon/fuel_cartridge/experimental
+
+/obj/item/weapon/fuel_cartridge/experimental
+	name = "experimental welding fuel cartridge"
+	w_class = ITEM_SIZE_NORMAL
+	max_fuel = 40
+	can_remove = 0
 	var/last_gen = 0
 
-/obj/item/weapon/weldingtool/experimental/New()
-	description_info += "<br><br>This welder will passively regenerate fuel."
+/obj/item/weapon/fuel_cartridge/experimental/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
-/obj/item/weapon/weldingtool/experimental/proc/fuel_gen()//Proc to make the experimental welder generate fuel, optimized as fuck -Sieve
-	var/gen_amount = ((world.time-last_gen)/25)
-	reagents += (gen_amount)
-	if(reagents > max_fuel)
-		reagents = max_fuel
+/obj/item/weapon/fuel_cartridge/experimental/Destroy()
+	STOP_PROCESSING(SSobj, src)
 
-/*
- * Crowbar
- */
-
-/obj/item/weapon/crowbar
-	name = "crowbar"
-	desc = "A heavy crowbar of solid steel, good and solid in your hand."
-	description_info = "Crowbars have countless uses: click on floor tiles to pry them loose. Use alongside a screwdriver to install or remove windows. Force open emergency shutters, or depowered airlocks. Open the panel of an unlocked APC. Pry a computer's circuit board free. And much more!"
-	description_fluff = "As is the case with most standard-issue tools, crowbars are a simple and timeless design, the only difference being that advanced materials like plasteel have made them uncommonly tough."
-	description_antag = "Need to bypass a bolted door? You can use a crowbar to pry the electronics out of an airlock, provided that it has no power and has been welded shut."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "crowbar"
-	flags = CONDUCT
-	slot_flags = SLOT_BELT
-	force = 5.0
-	throwforce = 7.0
-	item_state = "crowbar"
-	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_ENGINEERING = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 50)
-	center_of_mass = "x=16;y=20"
-	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
-
-/obj/item/weapon/crowbar/red
-	icon = 'icons/obj/items.dmi'
-	icon_state = "red_crowbar"
-	item_state = "crowbar_red"
+/obj/item/weapon/fuel_cartridge/experimental/Process()
+	var/cur_fuel = reagents.get_reagent_amount(/datum/reagent/fuel)
+	if(cur_fuel < max_fuel)
+		var/gen_amount = ((world.time-last_gen)/25)
+		reagents.add_reagent(/datum/reagent/fuel, gen_amount)
+		last_gen = world.time
 
 /obj/item/weapon/weldingtool/attack(mob/living/M, mob/living/user, target_zone)
 
@@ -470,6 +535,54 @@
 
 	else
 		return ..()
+
+/*
+ * Crowbar
+ */
+
+/obj/item/weapon/crowbar
+	name = "crowbar"
+	desc = "A heavy crowbar of solid steel, good and solid in your hand."
+	description_info = "Crowbars have countless uses: click on floor tiles to pry them loose. Use alongside a screwdriver to install or remove windows. Force open emergency shutters, or depowered airlocks. Open the panel of an unlocked APC. Pry a computer's circuit board free. And much more!"
+	description_fluff = "As is the case with most standard-issue tools, crowbars are a simple and timeless design, the only difference being that advanced materials like plasteel have made them uncommonly tough."
+	description_antag = "Need to bypass a bolted door? You can use a crowbar to pry the electronics out of an airlock, provided that it has no power and has been welded shut."
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "crowbar"
+	flags = CONDUCT
+	slot_flags = SLOT_BELT
+	force = 7.0
+	throwforce = 7.0
+	throw_range = 3
+	item_state = "crowbar"
+	w_class = ITEM_SIZE_NORMAL
+	origin_tech = list(TECH_ENGINEERING = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 140)
+	center_of_mass = "x=16;y=20"
+	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
+
+/obj/item/weapon/crowbar/red
+	icon_state = "red_crowbar"
+	item_state = "crowbar_red"
+
+/obj/item/weapon/crowbar/prybar
+	name = "pry bar"
+	desc = "A steel bar with a wedge. It comes in a variety of configurations - collect them all."
+	icon_state = "prybar"
+	item_state = "crowbar"
+	force = 4.0
+	throwforce = 6.0
+	throw_range = 5
+	w_class = ITEM_SIZE_SMALL
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
+
+/obj/item/weapon/crowbar/prybar/Initialize()
+	icon_state = "prybar[pick("","_red","_green","_aubergine","_blue")]"
+	. = ..()
+
+/*
+ * Combitool
+ */
+
 
 /*/obj/item/weapon/combitool
 	name = "combi-tool"

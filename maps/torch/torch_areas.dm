@@ -95,10 +95,6 @@
 /area/maintenance/substation/fourthdeck
 	name = "Fourth Deck Substation"
 
-/area/tcommsat/relay/fourthdeck
-	name = "\improper Fourth Deck Relay"
-	icon_state = "tcomsatcham"
-
 //Third Deck (Z-2)
 /area/hallway/primary/thirddeck/fore
 	name = "\improper Third Deck Fore Hallway"
@@ -185,10 +181,6 @@
 	name = "\improper Second Deck Central Stairwell"
 	icon_state = "hallC2"
 
-/area/tcommsat/relay/seconddeck
-	name = "\improper Second Deck Relay"
-	icon_state = "tcomsatcham"
-
 /area/maintenance/substation/seconddeck
 	name = "Second Deck Substation"
 
@@ -242,10 +234,6 @@
 	name = "\improper First Deck Aft Hallway"
 	icon_state = "hallA"
 
-/area/tcommsat/relay/firstdeck
-	name = "\improper First Deck Relay"
-	icon_state = "tcomsatcham"
-
 /area/crew_quarters/safe_room/firstdeck
 	name = "\improper First Deck Safe Room"
 	flags = AREA_RAD_SHIELDED
@@ -281,10 +269,6 @@
 /area/hallway/primary/bridge/aft
 	name = "\improper Bridge Aft Hallway"
 	icon_state = "hallA"
-
-/area/tcommsat/relay/bridge
-	name = "\improper Bridge Relay"
-	icon_state = "tcomsatcham"
 
 /area/maintenance/substation/bridge // First Deck (Z-4)
 	name = "Bridge Substation"
@@ -745,6 +729,10 @@
 /area/quartermaster/exploration
 	name = "\improper Exploration Equipment"
 	icon_state = "exploration"
+
+/area/quartermaster/shuttlefuel
+	name = "\improper Shuttle Fuel Bay"
+	icon_state = "toxstorage"
 
 /area/quartermaster/hangar
 	name = "\improper Hangar Deck"

@@ -103,17 +103,21 @@
 					icon_state = "ed209_legs"
 
 		if(2)
-			if(istype(W, /obj/item/clothing/suit/storage/vest))
+			if(istype(W, /obj/item/clothing/suit/storage/vest) || istype(W, /obj/item/clothing/suit/armor/pcarrier) || istype(W, /obj/item/clothing/accessory/armorplate))
+				if(istype(W, /obj/item/clothing/suit/armor/pcarrier))
+					if(!locate(/obj/item/clothing/accessory/armorplate) in W.contents)
+						to_chat(user, "There's no armor plates on this [W].")
+						return
 				user.drop_item()
 				qdel(W)
 				build_step++
-				to_chat(user, "<span class='notice'>You add the armor to [src].</span>")
+				to_chat(user, "<span class='notice'>You add [W] to [src].</span>")
 				name = "vest/legs/frame assembly"
 				item_state = "ed209_shell"
 				icon_state = "ed209_shell"
 
 		if(3)
-			if(istype(W, /obj/item/weapon/weldingtool))
+			if(isWelder(W))
 				var/obj/item/weapon/weldingtool/WT = W
 				if(WT.remove_fuel(0, user))
 					build_step++
@@ -140,7 +144,7 @@
 				icon_state = "ed209_prox"
 
 		if(6)
-			if(istype(W, /obj/item/stack/cable_coil))
+			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if (C.get_amount() < 1)
 					to_chat(user, "<span class='warning'>You need one coil of wire to wire [src].</span>")
@@ -164,7 +168,7 @@
 				qdel(W)
 
 		if(8)
-			if(istype(W, /obj/item/weapon/screwdriver))
+			if(isScrewdriver(W))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				var/turf/T = get_turf(user)
 				to_chat(user, "<span class='notice'>Now attaching the gun to the frame...</span>")

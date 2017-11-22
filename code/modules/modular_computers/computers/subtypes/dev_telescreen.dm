@@ -1,6 +1,6 @@
 /obj/item/modular_computer/telescreen
 	name = "telescreen"
-	desc = "A stationary wall-mounted touchscreen"
+	desc = "A wall-mounted touchscreen computer."
 	icon = 'icons/obj/modular_telescreen.dmi'
 	icon_state = "telescreen"
 	icon_state_unpowered = "telescreen"
@@ -24,7 +24,7 @@
 	name = "telescreen"
 
 /obj/item/modular_computer/telescreen/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/weapon/crowbar))
+	if(isCrowbar(W))
 		if(anchored)
 			shutdown_computer()
 			anchored = FALSE

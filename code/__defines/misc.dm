@@ -1,8 +1,10 @@
 #define DEBUG
 // Turf-only flags.
 #define NOJAUNT 1 // This is used in literally one place, turf.dm, to block ethereal jaunt.
+#define NORUINS 2
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
+#define RUIN_MAP_EDGE_PAD 15
 
 // Invisibility constants.
 #define INVISIBILITY_LIGHTING    20
@@ -216,3 +218,6 @@
 #define EDIT_LIST 4			// Option select dialog
 
 #define REC_FIELD(KEY) 		/record_field/##KEY
+
+#define SUPPLY_SECURITY_ELEVATED 1
+#define SUPPLY_SECURITY_HIGH 2

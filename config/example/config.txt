@@ -385,3 +385,15 @@ STARLIGHT 0
 
 ## How many loadout points are available. Use 0 to disable loadout, and any negative number to indicate infinite points.
 MAX_GEAR_COST 10
+
+## How much radiation levels self-reduce by each tick.
+RADIATION_DECAY_RATE 1
+
+## The amount of radiation resistance on a turf is multiplied by this value
+RADIATION_RESISTANCE_MULTIPLIER 1.25
+
+## General material radiation resistance is divided by this value
+RADIATION_MATERIAL_RESISTANCE_DIVISOR 2
+
+## Below this point, radiation is ignored
+RADIATION_LOWER_LIMIT 0.15

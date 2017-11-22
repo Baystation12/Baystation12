@@ -208,6 +208,11 @@
 			return current.get_data()
 	return 0
 
+/datum/reagents/proc/get_overdose(var/datum/reagent/current)
+	if(current)
+		return initial(current.overdose)
+	return 0
+
 /datum/reagents/proc/get_reagents()
 	. = list()
 	for(var/datum/reagent/current in reagent_list)

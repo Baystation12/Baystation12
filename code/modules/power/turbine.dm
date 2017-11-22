@@ -286,33 +286,29 @@
 
 
 /obj/machinery/computer/turbine_computer/Topic(href, href_list)
-	if(..())
+	if((. = ..()))
+		show_browser(usr, null, "window=computer")
 		return
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
-		usr.machine = src
 
-		if( href_list["view"] )
-			usr.client.eye = src.compressor
-		else if( href_list["str"] )
-			src.compressor.starter = !src.compressor.starter
-		else if (href_list["doors"])
-			for(var/obj/machinery/door/blast/D in src.doors)
-				if (door_status == 0)
-					spawn( 0 )
-						D.open()
-						door_status = 1
-				else
-					spawn( 0 )
-						D.close()
-						door_status = 0
-		else if( href_list["close"] )
-			usr << browse(null, "window=computer")
-			usr.machine = null
-			return
+	if( href_list["view"] )
+		usr.client.eye = src.compressor
+	else if( href_list["str"] )
+		src.compressor.starter = !src.compressor.starter
+	else if (href_list["doors"])
+		for(var/obj/machinery/door/blast/D in src.doors)
+			if (door_status == 0)
+				spawn( 0 )
+					D.open()
+					door_status = 1
+			else
+				spawn( 0 )
+					D.close()
+					door_status = 0
+	else if( href_list["close"] )
+		usr << browse(null, "window=computer")
+		return
 
-		src.add_fingerprint(usr)
 	src.updateUsrDialog()
-	return
 
 /obj/machinery/computer/turbine_computer/Process()
 	src.updateDialog()

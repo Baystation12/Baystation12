@@ -177,7 +177,7 @@ obj/machinery/resleever/Process()
 		else
 			to_chat(user, "<span class='warning'>\The [src] already has a neural lace inside it!</span>")
 			return
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(isWrench(W))
 		if(isnull(occupant))
 			if(anchored)
 				anchored = 0

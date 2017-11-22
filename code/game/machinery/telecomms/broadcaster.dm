@@ -23,6 +23,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	produces_heat = 0
 	delay = 7
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/broadcaster
+	outage_probability = 10
 
 /obj/machinery/telecomms/broadcaster/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	// Don't broadcast rejected signals
@@ -48,7 +49,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if(signal.data["slow"] > 0)
 			sleep(signal.data["slow"]) // simulate the network lag if necessary
 
-		signal.data["level"] |= listening_level
+		signal.data["level"] |= listening_levels
 
 	   /** #### - Normal Broadcast - #### **/
 
@@ -71,7 +72,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			/* ###### Broadcast a message using signal.data ###### */
 			Broadcast_SimpleMessage(signal.data["name"], signal.frequency,
 								  signal.data["message"],null, null,
-								  signal.data["compression"], listening_level)
+								  signal.data["compression"], listening_levels)
 
 
 	   /** #### - Artificial Broadcast - #### **/

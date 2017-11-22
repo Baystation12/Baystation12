@@ -3,11 +3,11 @@
 	if(!C || !user)
 		return 0
 
-	if(istype(C, /obj/item/stack/cable_coil) || (flooring && istype(C, /obj/item/stack/rods)))
+	if(isCoil(C) || (flooring && istype(C, /obj/item/stack/rods)))
 		return ..(C, user)
 
 	if(flooring)
-		if(istype(C, /obj/item/weapon/crowbar))
+		if(isCrowbar(C))
 			if(broken || burnt)
 				to_chat(user, "<span class='notice'>You remove the broken [flooring.descriptor].</span>")
 				make_plating()
@@ -21,14 +21,14 @@
 				return
 			playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
 			return
-		else if(istype(C, /obj/item/weapon/screwdriver) && (flooring.flags & TURF_REMOVE_SCREWDRIVER))
+		else if(isScrewdriver(C) && (flooring.flags & TURF_REMOVE_SCREWDRIVER))
 			if(broken || burnt)
 				return
 			to_chat(user, "<span class='notice'>You unscrew and remove the [flooring.descriptor].</span>")
 			make_plating(1)
 			playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
 			return
-		else if(istype(C, /obj/item/weapon/wrench) && (flooring.flags & TURF_REMOVE_WRENCH))
+		else if(isWrench(C) && (flooring.flags & TURF_REMOVE_WRENCH))
 			to_chat(user, "<span class='notice'>You unwrench and remove the [flooring.descriptor].</span>")
 			make_plating(1)
 			playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
@@ -38,7 +38,7 @@
 			make_plating(1)
 			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 			return
-		else if(istype(C, /obj/item/stack/cable_coil))
+		else if(isCoil(C))
 			to_chat(user, "<span class='warning'>You must remove the [flooring.descriptor] first.</span>")
 			return
 	else
@@ -46,6 +46,15 @@
 		if(istype(C, /obj/item/stack))
 			if(broken || burnt)
 				to_chat(user, "<span class='warning'>This section is too damaged to support anything. Use a welder to fix the damage.</span>")
+				return
+			//first check, catwalk? Else let flooring do its thing
+			if(locate(/obj/structure/catwalk, src))
+				return
+			if (istype(C, /obj/item/stack/rods))
+				var/obj/item/stack/rods/R = C
+				if (R.use(2))
+					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+					new /obj/structure/catwalk(src)
 				return
 			var/obj/item/stack/S = C
 			var/decl/flooring/use_flooring
@@ -72,7 +81,7 @@
 				playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 				return
 		// Repairs and Deconstruction.
-		else if(istype(C, /obj/item/weapon/crowbar))
+		else if(isCrowbar(C))
 			if(broken || burnt)
 				playsound(src, 'sound/items/Crowbar.ogg', 80, 1)
 				visible_message("<span class='notice'>[user] has begun prying off the damaged plating.</span>")
@@ -89,7 +98,7 @@
 			else
 				return
 			return
-		else if(istype(C, /obj/item/weapon/weldingtool))
+		else if(isWelder(C))
 			var/obj/item/weapon/weldingtool/welder = C
 			if(welder.isOn() && (is_plating()))
 				if(broken || burnt)
@@ -115,6 +124,7 @@
 					else
 						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 					return
+
 
 	return ..()
 

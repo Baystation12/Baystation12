@@ -227,8 +227,7 @@
 					else
 						memory["purge"] = 1 // should always purge first if using external air, chamber pressure should never be higher than target pressure here
 
-				//Make sure the airlock isn't aiming for pure vacuum - an impossibility
-				memory["target_pressure"] = max(target_pressure, SENSOR_TOLERANCE)
+				memory["target_pressure"] = target_pressure
 
 		if(STATE_PRESSURIZE)
 			if(memory["chamber_sensor_pressure"] >= memory["target_pressure"] - SENSOR_TOLERANCE)
@@ -255,7 +254,8 @@
 					if(memory["purge"])
 						memory["purge"] = 0
 						memory["target_pressure"] = (target_state == TARGET_INOPEN ? memory["internal_sensor_pressure"] : memory["external_sensor_pressure"])
-						state = STATE_PREPARE
+						if (memory["target_pressure"] > SENSOR_TOLERANCE)
+							state = STATE_PREPARE
 					else
 						cycleDoors(target_state)
 						state = STATE_IDLE

@@ -71,7 +71,7 @@
 	if(istype(W, /obj/item/weapon/reagent_containers/chem_disp_cartridge))
 		add_cartridge(W, user)
 
-	else if(istype(W, /obj/item/weapon/screwdriver))
+	else if(isScrewdriver(W))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
 		if(!label) return
 		var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = remove_cartridge(label)
@@ -97,6 +97,7 @@
 		container =  RC
 		user.drop_from_inventory(RC)
 		RC.loc = src
+		update_icon()
 		to_chat(user, "<span class='notice'>You set \the [RC] on \the [src].</span>")
 		GLOB.nanomanager.update_uis(src) // update all UIs attached to src
 
@@ -155,6 +156,7 @@
 			var/obj/item/weapon/reagent_containers/B = container
 			B.loc = loc
 			container = null
+			update_icon()
 
 	add_fingerprint(usr)
 	return 1 // update UIs attached to this object
@@ -164,3 +166,11 @@
 
 /obj/machinery/chemical_dispenser/attack_hand(mob/user as mob)
 	ui_interact(user)
+
+/obj/machinery/chemical_dispenser/update_icon()
+	overlays.Cut()
+	if(container)
+		var/mutable_appearance/beaker_overlay
+		beaker_overlay = image('icons/obj/chemical.dmi', src, "lil_beaker")
+		beaker_overlay.pixel_x = rand(-10, 5)
+		overlays += beaker_overlay
