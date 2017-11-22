@@ -752,6 +752,10 @@
 	name = "Chinless Beard"
 	icon_state = "facial_chinlessbeard"
 
+/datum/sprite_accessory/facial_hair/braided
+	name = "Braided Beard"
+	icon_state = "facial_biker"
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
