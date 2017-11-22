@@ -91,3 +91,11 @@
 	containername = "\improper Atmospherics voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_atmospherics
+
+/decl/hierarchy/supply_pack/atmospherics/canister_hydrogen
+	name = "Hydrogen canister"
+	contains = list(/obj/machinery/portable_atmospherics/canister/hydrogen)
+	cost = 10
+	containername = "\improper Hydrogen canister crate"
+	containertype = /obj/structure/closet/crate/secure/large
+	access = access_atmospherics
