@@ -26,6 +26,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 /datum/halo_frequencies/proc/setup_com_channel_list()
 	frequencies.Insert(frequencies.Find("INNIECOM"),innie_channel) //Find the inniecom placeholder, and place the new name at it's index.
+	frequencies[innie_channel] = innie_freq
 	frequencies[SHIPCOM_NAME] = shipcom_freq
 	frequencies[TEAMCOM_NAME] = teamcom_freq
 	frequencies[SQUADCOM_NAME] = squadcom_freq
@@ -33,6 +34,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	frequencies[EBAND_NAME] = eband_freq
 	frequencies[CIV_NAME] = civ_freq
 	radiochannels = frequencies
+
 /datum/halo_frequencies/proc/setup_com_channels()
 	innie_channel = pick(\
 	"ZULUCOM","OMEGACOM","RANGERCOM","BAGDERCOM",\

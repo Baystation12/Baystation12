@@ -2,7 +2,7 @@
 /datum/job/Insurrectionist
 	title = "Insurrectionist"
 	total_positions = 46
-	selection_color = "#ffffff"
+	selection_color = "#000000"
 
 	supervisors = " the Insurrectionist Leader"
 
@@ -20,7 +20,7 @@
 /datum/job/UNSC_assault
 	title = "ODST Assault Squad Member"
 	total_positions = 40
-	selection_color = "#ffffff"
+	selection_color = "#000000"
 
 	supervisors = "the ODST Assault Team Lead and the ODST Assault Squad Lead"
 
@@ -38,7 +38,7 @@
 	title = "ODST Assault Squad Lead"
 	head_position = 1
 	total_positions = 5
-	selection_color = "#ffffff"
+	selection_color = "#000000"
 
 	supervisors = "the ODST Assault Team Lead"
 
@@ -56,7 +56,7 @@
 	title = "ODST Assault Team Lead"
 	head_position = 1
 	total_positions = 1
-	selection_color = "#ffffff"
+	selection_color = "#000000"
 
 	create_record = 0
 	account_allowed = 0

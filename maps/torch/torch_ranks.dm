@@ -14,20 +14,20 @@
 	)
 
 	species_to_branch_whitelist = list(
-		/datum/species/diona   = list(/datum/mil_branch/civilian),
+		/*/datum/species/diona   = list(/datum/mil_branch/civilian),
 		/datum/species/nabber  = list(/datum/mil_branch/civilian),
 		/datum/species/tajaran = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
 		/datum/species/skrell  = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
 		/datum/species/unathi  = list(/datum/mil_branch/civilian),
-		/datum/species/vox     = list()
+		/datum/species/vox     = list()*/
 	)
 
 	species_to_branch_blacklist = list(
-		/datum/species/machine = list(/datum/mil_branch/marine_corps)
+		///datum/species/machine = list(/datum/mil_branch/marine_corps)
 	)
 
 	species_to_rank_whitelist = list(
-		/datum/species/machine = list(
+		/*/datum/species/machine = list(
 			/datum/mil_branch/expeditionary_corps = list(
 				/datum/mil_rank/fleet/e1,
 				/datum/mil_rank/fleet/e2,
@@ -62,7 +62,7 @@
 				/datum/mil_rank/fleet/e4,
 				/datum/mil_rank/fleet/o1
 			)
-		)
+		)*/
 	)
 
 

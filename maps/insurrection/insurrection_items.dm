@@ -17,12 +17,12 @@
 /obj/machinery/podcontrol/New()
 	..()
 	overlays += icon(icon,"nav")
-	calc_land_point()
 	contained_area = loc.loc
 
-/obj/machinery/podcontrol/proc/calc_land_point()
-	if(isnull(land_point))
-		land_point = pick(get_valid_landings())
+/obj/machinery/podcontrol/proc/get_and_set_land_point()
+	var/obj/point = pick(get_valid_landings())
+	point.name += "_[contained_area.name]"
+	land_point = point
 
 /obj/machinery/podcontrol/proc/calc_translation(var/obj/target)
 	var/x_trans = target.x - x
@@ -113,7 +113,7 @@
 				if(l.z != land_point.z)
 					continue
 				l.playsound_local(land_point, get_sfx("explosion"), 100, 1,, falloff = 1)
-			calc_land_point()
+			get_and_set_land_point()
 			launch()
 
 /obj/effect/landmark/innie_bomb
@@ -121,6 +121,7 @@
 
 /obj/payload/innie
 	anchored = 1
+	seconds_to_disarm = 30
 
 /obj/payload/innie/set_anchor()
 	return
