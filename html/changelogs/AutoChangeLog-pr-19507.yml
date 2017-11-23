@@ -1,0 +1,7 @@
+author: "mkalash"
+delete-after: True
+changes: 
+  - tweak: "The welding pack is now too large for backpacks."
+  - rscadd: "You can now attach welding tools to welding packs via drag drop."
+  - rscadd: "Welders now show an overlay of what fuel tank is attached, if any."
+  - tweak: "Fuel cartridges are now welding fuel tanks."
