@@ -151,7 +151,7 @@
 	var/list/APC_data = list()
 	if(L.len > 0)
 		// These lists are used as replacement for number based APC settings
-		var/list/S = list("M-OFF","A-OFF","M-ON", "A-ON")
+		var/list/S = list("M-OFF", "DC-OFF","A-OFF","M-ON", "A-ON")
 		var/list/chg = list("N","C","F")
 
 		for(var/obj/machinery/power/apc/A in L)
