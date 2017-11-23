@@ -622,12 +622,10 @@
 /datum/sprite_accessory/hair/leftsidecut
 	name = "Left Sidecut"
 	icon_state = "hair_leftside"
-	gender = FEMALE
 
 /datum/sprite_accessory/hair/rightsidecut
 	name = "Right Sidecut"
 	icon_state = "hair_rightside"
-	gender = FEMALE
 
 /*
 ///////////////////////////////////
