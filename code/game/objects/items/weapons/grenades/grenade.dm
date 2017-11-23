@@ -1,3 +1,5 @@
+//Todo on clusternades: add a pin overlay to grenades, and handling for it.
+
 /obj/item/weapon/grenade
 	name = "grenade"
 	desc = "A hand held grenade, with an adjustable timer."
@@ -9,12 +11,54 @@
 	throw_range = 20
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
+
 	var/truncated_name = "nade" // Used for clusterbombs.
 	var/active = 0
 	var/det_time = 50
 	var/arm_sound = 'sound/weapons/armbomb.ogg'
-	var/banglet = 0 //Used by clusternades.
+	var/unique_lever = 0 //Applies a specific lever sprite if true, saved as ([icon_state] + "_lever") in grenade.dmi.
+	var/is_digital = 1 //Is this an electronic grenade? Used for EMP_act. Required for spawner, gravity, radiation, shock, laser
 
+/*
+---Grenade traits.---
+Controls the various behaviors of a grenade. Down the line it should allow for custom grenade synthesis without using chem grenades.
+*/
+	var/trait_flags
+/*
+Offensive grenades: Concussion; HE; Fragmentation; Incendiary; Shock; Tesla; Gravitating; Radioactive; Laser
+
+Concussion: Extremely high damage close to the grenade; rapid damage falloff (Applies clumsy.) - Exclusive to gravitating
+
+*/
+
+
+
+
+/*
+Tactical grenades: Flash; Sonic; Daze; EMP; Anti-Photon
+*/
+
+/*
+Utility grenades: Cleaner; Metal foam; Pest killer (For space vines); Smoke; Tear gas; Tranq smoke; Berserk smoke; Medicine smoke;
+	Mutually exclusive to all traits.
+*/
+
+
+/*
+Spawner grenades: Carp; Holocarp; Viscerator; Spiderling
+	Mutually exclusive to all traits.
+*/
+
+
+
+
+
+
+
+/obj/item/weapon/grenade/New()
+	..()
+	var/icon/L = image(icon, unique_lever ? "[src]_lever" : "lever")
+	overlays += L
 
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/user)
 	if((CLUMSY in user.mutations) && prob(50))
@@ -73,6 +117,8 @@
 	var/turf/T = get_turf(src)
 	if(T)
 		T.hotspot_expose(700,125)
+
+/obj/item/weapon/grenade/throw_at()
 
 
 /obj/item/weapon/grenade/attackby(obj/item/weapon/W as obj, mob/user as mob)

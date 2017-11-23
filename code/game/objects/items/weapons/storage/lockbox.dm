@@ -92,4 +92,4 @@
 
 /obj/item/weapon/storage/lockbox/clusterbang/New()
 	..()
-	MultiNew(/obj/item/weapon/grenade/cluster/flashbang,4,src)
+	create_many(/obj/item/weapon/grenade/cluster/flashbang,4,src)

@@ -17,6 +17,7 @@
 
 	New()
 		create_reagents(1000)
+		overlays.Cut()
 
 	attack_self(mob/user as mob)
 		if(!stage || stage==1)
@@ -81,6 +82,7 @@
 					to_chat(user, "<span class='notice'>You lock the empty assembly.</span>")
 					name = "fake grenade"
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
+				var/image/P = icon(icon,"lever")
 				icon_state = initial(icon_state) +"_locked"
 				stage = 2
 			else if(stage == 2)
@@ -127,6 +129,7 @@
 				detonator.a_right.activate()
 				active = 1
 		if(active)
+			overlays.Cut()
 			icon_state = initial(icon_state) + "_active"
 
 			if(user)
