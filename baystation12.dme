@@ -1866,6 +1866,7 @@
 #include "code\modules\modular_computers\file_system\programs\generic\email_client.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\file_browser.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\game.dm"
+#include "code\modules\modular_computers\file_system\programs\generic\library.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\news_browser.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\ntdownloader.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\ntnrc_client.dm"
