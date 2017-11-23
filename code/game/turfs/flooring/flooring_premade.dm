@@ -5,12 +5,6 @@
 	icon_state = "plating"
 	plane = PLATING_PLANE
 
-/turf/simulated/floor/carpet
-	name = "carpet"
-	icon = 'icons/turf/flooring/carpet.dmi'
-	icon_state = "carpet"
-	initial_flooring = /decl/flooring/carpet
-
 /turf/simulated/floor/bluegrid
 	name = "mainframe floor"
 	icon = 'icons/turf/flooring/circuit.dmi'
@@ -52,21 +46,47 @@
 	icon = 'icons/turf/floors.dmi'
 	initial_flooring = /decl/flooring/diona
 
-/turf/simulated/floor/carpet/blue
-	name = "turquoise carpet"
-	icon_state = "bcarpet"
-	initial_flooring = /decl/flooring/carpet/blue
-
-/turf/simulated/floor/carpet/blue2
-	name = "blue carpet"
-	icon_state = "b2carpet"
-	initial_flooring = /decl/flooring/carpet/blue2
-
 /turf/simulated/floor/tiled
 	name = "steel floor"
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
 	initial_flooring = /decl/flooring/tiling
+
+/turf/simulated/floor/carpet
+	name = "brown carpet"
+	icon = 'icons/turf/flooring/carpet.dmi'
+	icon_state = "brown"
+	initial_flooring = /decl/flooring/carpet
+
+/turf/simulated/floor/carpet/blue
+	name = "blue carpet"
+	icon_state = "blue1"
+	initial_flooring = /decl/flooring/carpet/blue
+
+/turf/simulated/floor/carpet/blue2
+	name = "pale blue carpet"
+	icon_state = "blue2"
+	initial_flooring = /decl/flooring/carpet/blue2
+
+/turf/simulated/floor/carpet/purple
+	name = "purple carpet"
+	icon_state = "purple"
+	initial_flooring = /decl/flooring/carpet/purple
+
+/turf/simulated/floor/carpet/orange
+	name = "orange carpet"
+	icon_state = "orange"
+	initial_flooring = /decl/flooring/carpet/orange
+
+/turf/simulated/floor/carpet/green
+	name = "green carpet"
+	icon_state = "green"
+	initial_flooring = /decl/flooring/carpet/green
+
+/turf/simulated/floor/carpet/red
+	name = "red carpet"
+	icon_state = "red"
+	initial_flooring = /decl/flooring/carpet/red
 
 /turf/simulated/floor/reinforced
 	name = "reinforced floor"

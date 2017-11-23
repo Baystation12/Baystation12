@@ -61,25 +61,43 @@ var/list/flooring_types
 	build_type = null
 
 /decl/flooring/carpet
-	name = "carpet"
-	desc = "Imported and comfy."
+	name = "brown carpet"
+	desc = "Comfy and fancy carpeting."
 	icon = 'icons/turf/flooring/carpet.dmi'
-	icon_base = "carpet"
+	icon_base = "brown"
 	build_type = /obj/item/stack/tile/carpet
 	damage_temperature = T0C+200
 	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 
 /decl/flooring/carpet/blue
-	name = "turquoise carpet"
-	icon_base = "bcarpet"
-	build_type = null
-	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+	name = "blue carpet"
+	icon_base = "blue1"
+	build_type = /obj/item/stack/tile/carpetblue
 
 /decl/flooring/carpet/blue2
-	name = "blue carpet"
-	icon_base = "b2carpet"
-	build_type = null
-	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+	name = "pale blue carpet"
+	icon_base = "blue2"
+	build_type = /obj/item/stack/tile/carpetblue2
+
+/decl/flooring/carpet/purple
+	name = "purple carpet"
+	icon_base = "purple"
+	build_type = /obj/item/stack/tile/carpetpurple
+
+/decl/flooring/carpet/orange
+	name = "orange carpet"
+	icon_base = "orange"
+	build_type = /obj/item/stack/tile/carpetorange
+
+/decl/flooring/carpet/green
+	name = "green carpet"
+	icon_base = "green"
+	build_type = /obj/item/stack/tile/carpetgreen
+
+/decl/flooring/carpet/red
+	name = "red carpet"
+	icon_base = "red"
+	build_type = /obj/item/stack/tile/carpetred
 
 /decl/flooring/linoleum
 	name = "linoleum"
