@@ -173,11 +173,15 @@
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
 
-	var/obj/item/weapon/fuel_cartridge/tank = /obj/item/weapon/fuel_cartridge // where the fuel is stored
+	var/obj/item/weapon/welder_tank/tank = /obj/item/weapon/welder_tank // where the fuel is stored
 
 /obj/item/weapon/weldingtool/Initialize()
 	if(ispath(tank))
 		tank = new tank
+
+	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+	update_icon()
+
 	. = ..()
 
 /obj/item/weapon/weldingtool/Destroy()
@@ -195,6 +199,22 @@
 		else
 			to_chat(user, "There is no tank attached.")
 
+/obj/item/weapon/weldingtool/MouseDrop(atom/over)
+	if(!CanMouseDrop(over, usr))
+		return
+
+	if(istype(over, /obj/item/weapon/weldpack))
+		var/obj/item/weapon/weldpack/wp = over
+		if(wp.welder)
+			to_chat(usr, "\The [wp] already has \a [wp.welder] attached.")
+		else
+			usr.drop_from_inventory(src, wp)
+			wp.welder = src
+			usr.visible_message("[usr] attaches \the [src] to \the [wp].", "You attach \the [src] to \the [wp].")
+			wp.update_icon()
+		return
+
+	..()
 
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
 	if(welding)
@@ -231,7 +251,7 @@
 		src.add_fingerprint(user)
 		return
 
-	if(istype(W, /obj/item/weapon/fuel_cartridge))
+	if(istype(W, /obj/item/weapon/welder_tank))
 		if(tank)
 			to_chat(user, "Remove the current tank first.")
 			return
@@ -243,6 +263,7 @@
 		user.drop_from_inventory(W, src)
 		tank = W
 		user.visible_message("[user] slots \a [W] into \the [src].", "You slot \a [W] into \the [src].")
+		update_icon()
 		return
 
 	..()
@@ -255,6 +276,7 @@
 				user.visible_message("[user] removes \the [tank] from \the [src].", "You remove \the [tank] from \the [src].")
 				user.put_in_hands(tank)
 				tank = null
+				update_icon()
 			else
 				to_chat(user, "\The [tank] can't be removed.")
 		else
@@ -347,16 +369,21 @@
 
 /obj/item/weapon/weldingtool/update_icon()
 	..()
+
 	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
 	icon_state = welding ? "[bis.base_icon_state]1" : "[bis.base_icon_state]"
+	item_state = welding ? "welder1" : "welder"
+
+	underlays.Cut()
+	if(tank)
+		var/image/tank_image = image(tank.icon, icon_state = tank.icon_state)
+		tank_image.pixel_z = 0
+		underlays += tank_image
+
 	var/mob/M = loc
 	if(istype(M))
 		M.update_inv_l_hand()
 		M.update_inv_r_hand()
-/obj/item/weapon/weldingtool/Initialize()
-	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
-	update_icon()
-	. = ..()
 
 //Sets the welding state of the welding tool. If you see W.welding = 1 anywhere, please change it to W.setWelding(1)
 //so that the welding tool updates accordingly
@@ -432,8 +459,8 @@
 				spawn(100)
 					H.disabilities &= ~NEARSIGHTED
 
-/obj/item/weapon/fuel_cartridge
-	name = "welding fuel cartridge"
+/obj/item/weapon/welder_tank
+	name = "welding fuel tank"
 	desc = "An interchangeable fuel tank meant for a welding tool."
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "fuel_m"
@@ -441,12 +468,12 @@
 	var/max_fuel = 20
 	var/can_remove = 1
 
-/obj/item/weapon/fuel_cartridge/Initialize()
+/obj/item/weapon/welder_tank/Initialize()
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	. = ..()
 
-/obj/item/weapon/fuel_cartridge/afterattack(obj/O as obj, mob/user as mob, proximity)
+/obj/item/weapon/welder_tank/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1)
 		O.reagents.trans_to_obj(src, max_fuel)
@@ -462,10 +489,10 @@
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 15, "glass" = 5)
 	w_class = ITEM_SIZE_SMALL
-	tank = /obj/item/weapon/fuel_cartridge/mini
+	tank = /obj/item/weapon/welder_tank/mini
 
-/obj/item/weapon/fuel_cartridge/mini
-	name = "small welding fuel cartridge"
+/obj/item/weapon/welder_tank/mini
+	name = "small welding fuel tank"
 	icon_state = "fuel_s"
 	w_class = ITEM_SIZE_TINY
 	max_fuel = 5
@@ -479,10 +506,10 @@
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
 	w_class = ITEM_SIZE_LARGE
-	tank = /obj/item/weapon/fuel_cartridge/large
+	tank = /obj/item/weapon/welder_tank/large
 
-/obj/item/weapon/fuel_cartridge/large
-	name = "large welding fuel cartridge"
+/obj/item/weapon/welder_tank/large
+	name = "large welding fuel tank"
 	icon_state = "fuel_l"
 	w_class = ITEM_SIZE_NORMAL
 	max_fuel = 40
@@ -495,40 +522,40 @@
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
-	tank = /obj/item/weapon/fuel_cartridge/huge
+	tank = /obj/item/weapon/welder_tank/huge
 
-/obj/item/weapon/fuel_cartridge/huge
-	name = "huge welding fuel cartridge"
+/obj/item/weapon/welder_tank/huge
+	name = "huge welding fuel tank"
 	icon_state = "fuel_h"
 	w_class = ITEM_SIZE_LARGE
 	max_fuel = 80
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
-	icon_state = "welder_x"
+	icon_state = "welder_l"
 	item_state = "welder"
 	desc = "This welding tool feels heavier in your possession than is normal. There appears to be no external fuel port."
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
-	tank = /obj/item/weapon/fuel_cartridge/experimental
+	tank = /obj/item/weapon/welder_tank/experimental
 
-/obj/item/weapon/fuel_cartridge/experimental
-	name = "experimental welding fuel cartridge"
+/obj/item/weapon/welder_tank/experimental
+	name = "experimental welding fuel tank"
 	icon_state = "fuel_x"
 	w_class = ITEM_SIZE_NORMAL
 	max_fuel = 40
 	can_remove = 0
 	var/last_gen = 0
 
-/obj/item/weapon/fuel_cartridge/experimental/Initialize()
+/obj/item/weapon/welder_tank/experimental/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/item/weapon/fuel_cartridge/experimental/Destroy()
+/obj/item/weapon/welder_tank/experimental/Destroy()
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/weapon/fuel_cartridge/experimental/Process()
+/obj/item/weapon/welder_tank/experimental/Process()
 	var/cur_fuel = reagents.get_reagent_amount(/datum/reagent/fuel)
 	if(cur_fuel < max_fuel)
 		var/gen_amount = ((world.time-last_gen)/25)

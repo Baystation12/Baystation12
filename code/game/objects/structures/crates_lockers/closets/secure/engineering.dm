@@ -65,7 +65,7 @@
 		/obj/item/weapon/weldingtool/largetank = 3,
 		/obj/item/weapon/weldpack = 3,
 		/obj/item/clothing/glasses/welding = 3,
-		/obj/item/weapon/fuel_cartridge = 6
+		/obj/item/weapon/welder_tank = 6
 	)
 
 /obj/structure/closet/secure_closet/engineering_personal
