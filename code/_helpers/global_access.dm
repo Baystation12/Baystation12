@@ -543,6 +543,8 @@
 			return global.hair_styles_list;
 		if("hair_styles_male_list")
 			return global.hair_styles_male_list;
+		if("halo_frequencies")
+			return global.halo_frequencies;
 		if("hazard_overlays")
 			return global.hazard_overlays;
 		if("hidden_skill_types")
@@ -1758,6 +1760,8 @@
 			global.hair_styles_list=newval;
 		if("hair_styles_male_list")
 			global.hair_styles_male_list=newval;
+		if("halo_frequencies")
+			global.halo_frequencies=newval;
 		if("hazard_overlays")
 			global.hazard_overlays=newval;
 		if("hidden_skill_types")
@@ -2701,6 +2705,7 @@
 	"hair_styles_female_list",
 	"hair_styles_list",
 	"hair_styles_male_list",
+	"halo_frequencies",
 	"hazard_overlays",
 	"hidden_skill_types",
 	"hiss_sound",

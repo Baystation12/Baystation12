@@ -3,11 +3,15 @@
 	name = "Lifepod Airlock"
 	icon = 'code/modules/halo/doors/airlocklifepod.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
+	opacity = 0
+	glass = 1
 
 /obj/machinery/door/airlock/halo_maint
 	name = "Maintenance Airlock"
 	icon = 'code/modules/halo/doors/airlockmaint.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
+	opacity = 0
+	glass = 1
 
 /obj/machinery/door/airlock/halo
 	name = "Airlock"

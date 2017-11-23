@@ -450,7 +450,7 @@ var/global/list/additional_antag_types = list()
 	return
 
 /datum/game_mode/proc/handle_mob_death(var/mob/M, var/list/args = list())
-	return
+	return 1
 
 /hook/death/proc/mode_on_mob_death(var/mob/living/carbon/human/H, var/list/args = list())
 	return ticker.mode.handle_mob_death(H, args)

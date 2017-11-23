@@ -1,7 +1,7 @@
 
 /datum/reagent/triadrenaline
 	name = "Tri-Adrenaline"
-	description = "An extremely powerful synthetic stimulant. Capable of restarting the hearts of the dead."
+	description = "An extremely powerful synthetic stimulant. Capable of restarting a human heart."
 	reagent_state = LIQUID
 	color = "#00BFFF" //Same as inaprovaline because why not!
 	metabolism = 0.2
@@ -13,26 +13,16 @@
 	M.adjustOxyLoss(-300 * removed)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/Ghost = 0
-		if (M.stat == DEAD)
-			M.visible_message("[H] begins to violently twitch", "You feel your muscles suddenly become tense")
-			//These few bits are a shameless rip from the defib code
-			for(var/mob/observer/ghost/G in world)
-				if(G.mind == M.mind)
-					to_chat(G,"Return to your body to be revived!")
-					sleep(100)
-					if(G.mind == M)
-						H.visible_message("[H] falls limp", "Your muscles relax")
-						Ghost = 1
-					break
-			if(!Ghost)
-				H.visible_message("[H] suddenly gasps for air", "You suddenly feel air enter your lungs")
-				H.timeofdeath = 0
-				H.stat = CONSCIOUS
-				H.regenerate_icons()
-				H.failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
-			//End shameless rip
+
+		//Ports and simplifies defib code
+		if(H.stat != DEAD)
+			if(H.ssd_check())
+				to_chat(find_dead_player(H.ckey, 1), "Return to your body to be revived!")
+				sleep(100)
+
+			H.resuscitate()
 			holder.remove_reagent("triadrenaline", dose)
+			log_and_message_admins("Tri-adrenaline used to revive [key_name(H)]")
 
 /datum/reagent/triadrenaline/overdose(var/mob/living/carbon/human/H)
 	var/obj/item/organ/internal/heart/O = H.internal_organs_by_name["heart"]
@@ -42,7 +32,7 @@
 		to_chat(H,"You feel a sudden stabbing pain in your chest")
 	else if(prob(25))
 		to_chat(H,"You feel your heart thundering in your chest")
-		O.pulse = PULSE_2FAST
+		O.pulse = PULSE_2FAST //This can actually cause heart damage now
 
 /datum/reagent/biofoam
 	name = "Bio-Foam"
@@ -91,14 +81,27 @@
 				W.salved = 1
 				o.update_damages()
 
+/datum/reagent/biofoam/proc/remove_embedded(var/mob/living/carbon/human/M)
+	for(var/obj/item/organ/external/o in M.bad_external_organs)
+		for(var/datum/wound/w in o.wounds)
+			for(var/obj/embedded in w.embedded_objects)
+				if(!prob(25))
+					continue
+				w.embedded_objects -= embedded //Removing the embedded item from the wound
+				embedded.loc = M.loc //And placing it on the ground below
+				to_chat(M,"<span class = 'notice'>The [embedded.name] is pushed out of the [w.desc] in your [o.name].</span>")
+
+
+
 /datum/reagent/biofoam/affect_blood(var/mob/living/carbon/M,var/alien,var/removed) //Biofoam stops internal and external bleeding, heals organs and fixes bones.
 	if(istype(M,/mob/living/carbon/human))
-		M.custom_pain("You feel a searing pain in your veins",25)
+		M.custom_pain("You feel a searing pain in your veins",3)
+		remove_embedded(M)
 		fix_wounds(M)
 		mend_external(M)
 		mend_internal(M)
 		spawn(5)
-			M.add_chemical_effect(CE_PAINKILLER, 40)
+			M.add_chemical_effect(CE_PAINKILLER, 5)
 
 /datum/reagent/biofoam/overdose(var/mob/living/carbon/M)
 	if(istype(M,/mob/living/carbon/human))
