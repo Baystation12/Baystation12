@@ -1,0 +1,4 @@
+author: CrimsonShrike
+delete-after: True
+changes: 
+  - rscadd: "Added Hydrogen canisters to supply request list."
