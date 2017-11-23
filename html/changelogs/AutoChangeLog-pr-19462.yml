@@ -1,0 +1,5 @@
+author: "FTangSteve"
+delete-after: True
+changes: 
+  - tweak: "Add SCG Police tag to CoS carrier"
+  - tweak: "upgrade CoS armour plate"
