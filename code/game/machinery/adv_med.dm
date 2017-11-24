@@ -4,6 +4,8 @@
 /obj/machinery/bodyscanner
 	var/mob/living/carbon/human/occupant
 	var/locked
+	var/scanned = FALSE
+
 	name = "Body Scanner"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
@@ -29,6 +31,7 @@
 		return
 	src.go_out()
 	add_fingerprint(usr)
+	scanned = FALSE
 	return
 
 /obj/machinery/bodyscanner/verb/move_inside()
@@ -178,12 +181,12 @@
 	var/obj/machinery/bodyscanner/connected
 	var/delete
 	var/temphtml
+	var/scanning = FALSE
 	name = "Body Scanner Console"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scannerconsole"
 	density = 0
 	anchored = 1
-
 
 /obj/machinery/body_scanconsole/Initialize()
 	for(var/D in GLOB.cardinal)
@@ -229,6 +232,21 @@
 	if(!ishuman(connected.occupant))
 		to_chat(user, "<span class='warning'>This device can only scan compatible lifeforms.</span>")
 		return
+
+	if(scanning)
+		to_chat(user, "<span class='notice'>There is already someone performing a scan.</span>")
+		return
+
+	if(!connected.scanned)
+		scanning = TRUE
+		visible_message("<span class='notice'>\The [user] begins pressing buttons on the console as \he scans \the [connected.occupant].</span>")
+		playsound(src, 'sound/machines/buttonbeep.ogg', 30, 0)
+		if(!do_after(user, 5 SECONDS, src))
+			scanning = FALSE
+			return
+		connected.scanned = TRUE
+		playsound(src, 'sound/machines/chime.ogg', 30, 0)
+	scanning = FALSE
 
 	var/dat
 	if (src.delete && src.temphtml) //Window in buffer but its just simple message, so nothing
