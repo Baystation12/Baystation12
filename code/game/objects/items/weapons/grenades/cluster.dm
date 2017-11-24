@@ -64,7 +64,6 @@
 	I.transform = M
 	underlays += I
 
-	reset_matrix(M)
 
 /obj/item/weapon/grenade/cluster/detonate()
 	playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
