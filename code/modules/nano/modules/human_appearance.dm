@@ -34,15 +34,9 @@
 				return 1
 	if(href_list["skin_tone"])
 		if(can_change_skin_tone())
-			var/new_s_tone = input(usr, "Choose your character's skin-tone:", "Skin Tone", -owner.s_tone + 35) as num|null
+			var/new_s_tone = input(usr, "Choose your character's skin-tone:\n1 (lighter) - [owner.species.max_skin_tone()] (darker)", "Skin Tone", -owner.s_tone + 35) as num|null
 			if(isnum(new_s_tone) && can_still_topic(state) && owner.species.appearance_flags & HAS_SKIN_TONE_NORMAL)
-				new_s_tone = 35 - max(min( round(new_s_tone), 220),1)
-				return owner.change_skin_tone(new_s_tone)
-			else if(isnum(new_s_tone) && can_still_topic(state) && owner.species.appearance_flags & HAS_SKIN_TONE_GRAV)
-				new_s_tone = 35 - max(min( round(new_s_tone), 100),1)
-				return owner.change_skin_tone(new_s_tone)
-			else if(isnum(new_s_tone) && can_still_topic(state) && owner.species.appearance_flags & HAS_SKIN_TONE_SPCR)
-				new_s_tone = 35 - max(min( round(new_s_tone), 165),1)
+				new_s_tone = 35 - max(min(round(new_s_tone), owner.species.max_skin_tone()), 1)
 				return owner.change_skin_tone(new_s_tone)
 	if(href_list["skin_color"])
 		if(can_change_skin_color())

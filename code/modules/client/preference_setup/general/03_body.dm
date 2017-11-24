@@ -111,7 +111,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if(mob_species && mob_species.spawn_flags & SPECIES_NO_LACE)
 		pref.has_cortical_stack = FALSE
 
-	var/low_skin_tone = mob_species ? (35 - max_skin_tone(mob_species)) : -185
+	var/low_skin_tone = mob_species ? (35 - mob_species.max_skin_tone()) : -185
 	sanitize_integer(pref.s_tone, low_skin_tone, 34, initial(pref.s_tone))
 
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
@@ -148,7 +148,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
 
 	if(has_flag(mob_species, HAS_A_SKIN_TONE))
-		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/[max_skin_tone(mob_species)]</a><br>"
+		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/[mob_species.max_skin_tone()]</a><br>"
 
 	. += "Needs Glasses: <a href='?src=\ref[src];disabilities=[NEARSIGHTED]'><b>[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]</b></a><br>"
 	. += "Limbs: <a href='?src=\ref[src];limbs=1'>Adjust</a> <a href='?src=\ref[src];reset_limbs=1'>Reset</a><br>"
@@ -409,10 +409,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["skin_tone"])
 		if(!has_flag(mob_species, HAS_A_SKIN_TONE))
 			return TOPIC_NOACTION
-		var/max_tone = max_skin_tone(mob_species)
-		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [max_tone]", "Character Preference", (-pref.s_tone) + 35) as num|null
+		var/new_s_tone = input(user, "Choose your character's skin-tone. Lower numbers are lighter, higher are darker. Range: 1 to [mob_species.max_skin_tone()]", "Character Preference", (-pref.s_tone) + 35) as num|null
 		if(new_s_tone && has_flag(mob_species, HAS_A_SKIN_TONE) && CanUseTopic(user))
-			pref.s_tone = 35 - max(min( round(new_s_tone), max_tone),1)
+			pref.s_tone = 35 - max(min(round(new_s_tone), mob_species.max_skin_tone()), 1)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["skin_color"])
@@ -645,13 +644,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 /datum/category_item/player_setup_item/general/body/proc/reset_limbs()
 	pref.organ_data.Cut()
 	pref.rlimb_data.Cut()
-
-/datum/category_item/player_setup_item/general/body/proc/max_skin_tone(var/datum/species/S)
-	if(has_flag(S, HAS_SKIN_TONE_GRAV))
-		return 100
-	if(has_flag(S, HAS_SKIN_TONE_SPCR))
-		return 165
-	return 220
 
 /datum/category_item/player_setup_item/general/body/proc/SetSpecies(mob/user)
 	if(!pref.species_preview || !(pref.species_preview in all_species))
