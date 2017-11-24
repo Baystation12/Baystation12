@@ -202,9 +202,7 @@
 //When turf changes, a bunch of things can take place
 /turf/simulated/open/proc/turf_change(var/turf/affected)
 	if(GLOB.open_space_initialised)
-		if(isopenspace(affected))//If affected is openspace we have to add it too
-			SSopen_space.add_turf(affected, 1)
-		else
+		if(!isopenspace(affected))//If affected is openspace it will add itself
 			SSopen_space.add_turf(src, 1)
 
 
