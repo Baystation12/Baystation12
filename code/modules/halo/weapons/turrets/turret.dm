@@ -43,12 +43,9 @@
 		var/obj/item/weapon/gun/projectile/gun = new detached_turret_path
 		stand = new stand(loc)
 		stand.dir = dir
-		if(!user.l_hand)
-			user.equip_to_slot_or_del(gun,slot_l_hand)
-		else if(!user.r_hand)
-			user.equip_to_slot_or_del(gun,slot_r_hand)
-		else
-			gun.loc = user.loc
+		if(!user.put_in_active_hand(gun))
+			if(!user.put_in_inactive_hand(gun))
+				gun.loc = user.loc
 		qdel(src)
 		return
 
@@ -83,8 +80,9 @@
 			dir = WEST
 
 /obj/structure/turret/proc/give_manning_gun()
-	if(!mob_manning.equip_to_slot_or_del(new turret_gun,slot_l_hand))
-		if(!mob_manning.equip_to_slot_or_del(new turret_gun,slot_r_hand))
+	var/obj/gun = new turret_gun
+	if(!mob_manning.put_in_active_hand(gun))
+		if(!mob_manning.put_in_inactive_hand(gun))
 			unman_turret()
 			return 0
 	return 1
@@ -175,7 +173,7 @@
 	item_state = "chaingun_obj"
 
 	slowdown_general = 7
-	w_class = 4
+	w_class = 5
 	item_icons = list( //Null here due to this version being used only when manning the turret, Every turret requires a /detached define with the item_icons set.
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
@@ -219,6 +217,8 @@
 	else
 		icon_state = "[initial(icon_state)]_unloaded"
 
+
+
 //Detached Turret Gun Define// Every detachable turret gun needs this.
 /obj/item/weapon/gun/projectile/turret/detached
 	removed_from_turret = 1
@@ -226,6 +226,5 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		)
-
 
 #undef EJECT_CASINGS
