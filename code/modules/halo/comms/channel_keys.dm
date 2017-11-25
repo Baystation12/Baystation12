@@ -96,6 +96,9 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 /obj/item/device/encryptionkey/fleetcom
 	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,FLEETCOM_NAME = 1,EBAND_NAME = 1)
 
+/obj/item/device/encryptionkey/officercom
+	channels = list(SHIPCOM_NAME = 1,FLEETCOM_NAME = 1, EBAND_NAME = 1)
+
 /obj/item/device/encryptionkey/squadcom
 	channels = list(SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1)
 
