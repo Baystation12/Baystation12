@@ -10,6 +10,8 @@
 	lobby_icon = 'code/modules/halo/splashworks/title6.png'
 	id_hud_icons = 'maps/insurrection/insurrection_hud_icons.dmi'
 
+	allowed_jobs = ALL_SHIP_JOBS
+
 	station_name  = "UNSC Frigate"
 	station_short = "Frigate"
 	dock_name     = "Hangar Bay"
@@ -18,3 +20,5 @@
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
 	system_name = "Uncharted System"
+
+	use_overmap = 1
