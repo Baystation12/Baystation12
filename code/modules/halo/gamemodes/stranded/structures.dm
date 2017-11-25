@@ -15,6 +15,7 @@
 	health -= Proj.damage/10
 	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
 	if (src.health <= 0)
+		dismantle()
 		qdel(src)
 
 
@@ -65,9 +66,7 @@
 	src.health -= damage
 	playsound(src.loc, 'sound/weapons/bite.ogg', 50, 0, 0)
 	if (src.health <= 0)
-		new /obj/item/metalscraps(src.loc)
-		if(prob(50))
-			new /obj/item/metalscraps(src.loc)
+		new /obj/item/stack/material/steel(src.loc)
 		if(prob(50))
 			new /obj/item/stack/rods(src.loc)
 		if(prob(50))
@@ -124,6 +123,27 @@
 			moving.show_message("<span class='warning'>You cannot climb over [src] as it is being blocked.</span>")
 	..()
 
+/obj/structure/sandbag/verb/climb()
+	set name = "Climb over sandbag"
+	set category = "Object"
+	set src = view(1)
+
+	var/mob/living/M = usr
+	if(M && istype(M))
+		var/climb_dir = get_dir(M, src)
+		if(M.loc == src.loc)
+			climb_dir = src.dir
+		var/turf/T = get_step(src, climb_dir)
+		if(T.CanPass(M, T))
+			M.dir = climb_dir
+			to_chat(M, "<span class='notice'>You start climbing over [src]...</span>")
+			spawn(0)
+				if(do_after(M, 30))
+					src.visible_message("<span class='info'>[M] climbs over [src].</span>")
+					M.loc = T
+		else
+			M.show_message("<span class='warning'>You cannot climb over [src] as it is being blocked.</span>")
+
 /obj/structure/sandbag/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
 	if(mover.throwing)
 		return 1
@@ -144,11 +164,15 @@
 	src.health -= damage
 	playsound(src.loc, 'sound/weapons/bite.ogg', 50, 0, 0)
 	if (src.health <= 0)
+		new/obj/item/weapon/ore/glass(src)
+		new/obj/structure/sandbag_dead(src.loc, dir = src.dir)
 		qdel(src)
 
 /obj/structure/sandbag/bullet_act(var/obj/item/projectile/Proj)
 	health -= 1		//bullets do very little damage
 	if (src.health <= 0)
+		new/obj/item/weapon/ore/glass(src)
+		new/obj/structure/sandbag_dead(src.loc, dir = src.dir)
 		qdel(src)
 
 /obj/structure/sandbag/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -174,17 +198,49 @@
 	else
 		return ..()
 
+/obj/structure/sandbag_dead
+	name = "sandbag"
+	icon = 'desert_outpost.dmi'
+	icon_state = "sandbag_dead"
+	anchored = 1
+	flags = ON_BORDER
+	throwpass = 1
+	var/health = 50
+
+/obj/structure/sandbag_dead/attackby(obj/item/I as obj, mob/user as mob)
+	. = 1
+
+	if(!I || !user)
+		return 0
+
+	if(is_sharp(I))
+		user.visible_message("<span class='notice'>[user] starts deconstructing [src]...</span>",\
+			"<span class='notice'>You start deconstructing [src]...</span>")
+		spawn(0)
+			if(do_after(user, 30) && src && src.loc)
+				new /obj/item/stack/material/cloth(src.loc)
+				qdel(src)
+		return 1
+	else
+		return ..()
+
 /obj/item/empty_sandbags
 	name = "empty sandbags"
 	desc = "Fill them with sand to form a defensive barrier"
 	icon = 'desert_outpost.dmi'
 	icon_state = "empty sandbags"
 
-/obj/item/empty_sandbags/verb/rotate()
-	set name = "Rotate sandbags clockwise"
+/obj/item/empty_sandbags/examine(mob/user)
+	to_chat(user,"It is oriented [src.dir].")
+
+/obj/item/empty_sandbags/verb/arrange_dir()
+	set name = "Choose sandbag direction"
 	set category = "Object"
-	set src in oview(1)
-	src.dir = turn(src.dir, 90)
+	set src = view(1)
+
+	var/list/dir_options = list("North" = NORTH,"South" = SOUTH, "East" = EAST, "West" = WEST)
+	var/newdirname = input("Pick new direction for this barbed wire","New wire direction","North") in dir_options
+	src.dir = dir_options[newdirname]
 
 /obj/item/empty_sandbags/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/ore/glass))
@@ -204,7 +260,6 @@
 	..()
 	recipes += new/datum/stack_recipe("empty sandbags", /obj/item/empty_sandbags, 1, time = 30)
 
-
 /obj/structure/bardbedwire
 	name = "barbed wire coil"
 	icon = 'desert_outpost.dmi'
@@ -212,8 +267,19 @@
 	density = 0
 	anchored = 1
 	throwpass = 1
+	var/first_dir = 0
 	var/damage = 5
 	var/health = 10
+
+/obj/structure/bardbedwire/verb/arrange_dir()
+	set name = "Choose barbed wire direction"
+	set category = "Object"
+	set src = view(1)
+
+	var/list/dir_options = list("North" = NORTH,"South" = SOUTH, "East" = EAST, "West" = WEST,\
+		"Northeast" = NORTHEAST, "Northwest" = NORTHWEST, "Southeast" = SOUTHEAST,"Southwest" = SOUTHWEST)
+	var/newdirname = input("Pick new direction for this barbed wire","New wire direction","North") in dir_options
+	src.dir = dir_options[newdirname]
 
 /obj/structure/bardbedwire/Crossed(atom/movable/AM)
 	. = 1
@@ -230,9 +296,50 @@
 			new /obj/item/metalscraps(src.loc)
 			qdel(src)
 
+/obj/structure/bardbedwire/attackby(obj/item/I as obj, mob/user as mob)
+	. = 1
+
+	if(!I || !user)
+		return 0
+
+	if(istype(I, /obj/item/weapon/wirecutters))
+		user.visible_message("<span class='notice'>[user] starts clearing [src]...</span>",\
+			"<span class='notice'>You start deconstructing [src]...</span>")
+		spawn(0)
+			if(do_after(user, 10) && src && src.loc)
+				new /obj/item/stack/material/steel(src.loc)
+				qdel(src)
+		return 1
+	else
+		return ..()
+
+/obj/item/stack/barbedwire
+	name = "barbed wire coil"
+	desc = "A coil of wire covered in wickedly sharp barbs."
+	icon = 'desert_outpost.dmi'
+	icon_state = "barbedwire_obj"
+	flags = CONDUCT
+	w_class = ITEM_SIZE_LARGE
+	force = 9.0
+	throwforce = 15.0
+	throw_speed = 5
+	throw_range = 20
+	matter = list(DEFAULT_WALL_MATERIAL = 1875)
+	max_amount = 10
+	center_of_mass = null
+	attack_verb = list("hit", "bludgeoned", "whacked")
+	lock_picking_level = 3
+
+/obj/item/stack/barbedwire/attack_self(var/mob/user)
+	if(do_after(user, 10) && use(1))
+		new /obj/structure/bardbedwire(user.loc)
+		user.visible_message("<span class='info'>[user] spools out from a coil of barbed wire.</span>",\
+			"<span class = 'info'>You spool out from the coil of barbed wire.</span>")
+
+
 /material/steel/generate_recipes()
 	..()
-	recipes += new/datum/stack_recipe("barbed wire", /obj/structure/bardbedwire, 1, one_per_turf = 1, on_floor = 1, time = 30)
+	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, time = 30)
 	recipes += new/datum/stack_recipe("tank trap", /obj/structure/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
 
 
@@ -240,11 +347,7 @@
 	name = "metal scraps"
 	desc = "some ruined scraps of metal"
 	icon = 'desert_outpost.dmi'
-	icon_state = "metalscraps"
-
-/obj/item/metalscraps/New()
-	..()
-	icon_state = "metalscraps[rand(1,4)]"
+	icon_state = "barbedwire_dead"
 
 
 /obj/structure/barrel
