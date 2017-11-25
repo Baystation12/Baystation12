@@ -1,0 +1,4 @@
+author: "chinsky"
+delete-after: True
+changes: 
+  - tweak: "Melee attacks will now always hit targets with the Help intent selected."
