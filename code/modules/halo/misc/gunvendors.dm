@@ -1,11 +1,16 @@
 
+/obj/machinery/vending/armory/attackby(var/atom/A,var/mob/user)
+	if(A in products)
+		products[A] = products[A] + 1
+	return ..()
+
 /obj/machinery/vending/armory/hybrid // Both ammo, and guns!
 	name = "UNSC Weapon and Ammunition Rack"
 	desc = "Storage for basic weapons and ammunition"
 	icon = 'code/modules/halo/gunvend.dmi'
 	icon_state ="ironhammer" // SPRITES
 	icon_deny = "ironhammer-deny"
-	req_access = list(access_unsc_marine)
+	req_access = list(/*access_unsc_marine*/)
 	products = list(/obj/item/ammo_magazine/m127_saphe =20,/obj/item/ammo_magazine/m127_saphp =20,/obj/item/ammo_magazine/m762_ap =20
 					,/obj/item/ammo_magazine/m95_sap = 20,/obj/item/ammo_magazine/m5 = 20,/obj/item/weapon/melee/combat_knife =15
 					,/obj/item/weapon/gun/projectile/m6d_magnum = 5,/obj/item/weapon/gun/projectile/ma5b_ar = 10,/obj/item/weapon/gun/projectile/br85 = 10
@@ -17,6 +22,6 @@
 	icon = 'code/modules/halo/gunvend.dmi'
 	icon_state = "ironhammer" //SPRITES
 	icon_deny = "ironhammer-deny"
-	req_access = list(access_unsc_armoury)
+	req_access = list(/*access_unsc_armoury*/)
 	products = list(/obj/item/ammo_magazine/m145_ap = 10,/obj/item/ammo_magazine/a762_box_ap = 10,/obj/item/weapon/gun/projectile/m739_lmg = 5
 	,/obj/item/weapon/gun/projectile/srs99_sniper = 5)
