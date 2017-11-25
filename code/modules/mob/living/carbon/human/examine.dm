@@ -23,7 +23,7 @@
 
 	if(wear_mask)
 		skipface |= wear_mask.flags_inv & HIDEFACE
-	
+
 	//no accuately spotting headsets from across the room.
 	if(get_dist(user, src) > 3)
 		skipears = 1
@@ -46,7 +46,7 @@
 	var/is_synth = isSynthetic()
 	if(!(skipjumpsuit && skipface))
 		var/species_name = "\improper "
-		if(is_synth && species.type != /datum/species/machine)
+		if(is_synth /*&& species.type != /datum/species/machine*/)
 			species_name += "Cyborg "
 		species_name += "[species.name]"
 		msg += ", <b><font color='[species.get_flesh_colour(src)]'> \a [species_name]!</font></b>"

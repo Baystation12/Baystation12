@@ -51,5 +51,74 @@
 		slot_r_hand_str = null,
 		)
 
+//Defines for armour subtypes//
+
+/obj/effect/odst_armour_set
+	var/obj/helmet = /obj/item/clothing/head/helmet/odst
+	var/obj/armour = /obj/item/clothing/suit/armor/odst
+
+/obj/effect/odst_armour_set/New()
+	.=..()
+	new helmet(src.loc)
+	new armour(src.loc)
+
+/obj/effect/odst_armour_set/Initialize()
+	.=..()
+	return INITIALIZE_HINT_QDEL
+
+/obj/effect/odst_armour_set/cqb
+	helmet = /obj/item/clothing/head/helmet/odst/cqb
+	armour = /obj/item/clothing/suit/armor/odst/cqb
+
+/obj/item/clothing/suit/armor/odst/cqb
+	name = "ODST CQB Armour"
+
+	icon_state = "Odst Armour CQB"
+
+/obj/item/clothing/head/helmet/odst/cqb
+	name = "ODST CQB Helmet"
+
+	item_state = "Odst Helmet CQB"
+	icon_state = "Helmet CQB"
+
+/obj/effect/odst_armour_set/sharpshooter
+	helmet = /obj/item/clothing/head/helmet/odst/sharpshooter
+	armour = /obj/item/clothing/suit/armor/odst/sharpshooter
+
+/obj/item/clothing/suit/armor/odst/sharpshooter
+	name = "ODST Sharpshooter Armour"
+
+	icon_state = "Odst Armour Sharpshooter"
+
+/obj/item/clothing/head/helmet/odst/sharpshooter
+	name = "ODST Sharpshooter Helmet"
+
+	item_state = "Odst Helmet Sharpshooter"
+	icon_state = "Helmet Sharpshooter"
+
+/obj/effect/odst_armour_set/medic
+	helmet = /obj/item/clothing/head/helmet/odst/medic
+	armour = /obj/item/clothing/suit/armor/odst/medic
+
+/obj/item/clothing/suit/armor/odst/medic
+	name = "ODST Medic Armour"
+
+	icon_state = "Odst Armour Medic"
+
+/obj/item/clothing/head/helmet/odst/medic
+	name = "ODST Medic Helmet"
+
+	item_state = "Odst Helmet Medic"
+	icon_state = "Helmet Medic"
+
+/obj/effect/random_ODST_set/New()
+	.=..()
+	var/obj/armour_set = pick(list(/obj/effect/odst_armour_set/medic,/obj/effect/odst_armour_set/sharpshooter,/obj/effect/odst_armour_set/cqb,/obj/effect/odst_armour_set))
+	new armour_set(src.loc)
+
+/obj/effect/random_ODST_set/Initialize()
+	.=..()
+	return INITIALIZE_HINT_QDEL
+
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND

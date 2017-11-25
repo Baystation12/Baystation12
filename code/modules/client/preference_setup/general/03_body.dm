@@ -455,13 +455,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	else if(href_list["limbs"])
 
-		var/list/limb_selection_list = list("Left Leg","Right Leg","Left Arm","Right Arm","Left Foot","Right Foot","Left Hand","Right Hand","Full Body")
+		var/list/limb_selection_list = list("Left Leg","Right Leg","Left Arm","Right Arm","Left Foot","Right Foot","Left Hand","Right Hand")//1,"Full Body")
 
 		// Full prosthetic bodies without a brain are borderline unkillable so make sure they have a brain to remove/destroy.
-		var/datum/species/current_species = all_species[pref.species]
-		if(current_species.spawn_flags & SPECIES_NO_FBP_CHARGEN)
-			limb_selection_list -= "Full Body"
-		else if(pref.organ_data[BP_CHEST] == "cyborg")
+		//var/datum/species/current_species = all_species[pref.species]
+		//if(current_species.spawn_flags & SPECIES_NO_FBP_CHARGEN)
+		//	limb_selection_list -= "Full Body"
+		if(pref.organ_data[BP_CHEST] == "cyborg")
 			limb_selection_list |= "Head"
 
 		var/organ_tag = input(user, "Which limb do you want to change?") as null|anything in limb_selection_list

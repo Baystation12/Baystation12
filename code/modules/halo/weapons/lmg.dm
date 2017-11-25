@@ -8,7 +8,7 @@
 	desc = "Standard-issue squad automatic weapon, designed for use in heavy engagements. Takes 7.62mm calibre ordinary and box type magazines."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
 	icon_state = "M739"
-	item_state = "halo_saw"
+	item_state = "SAW"
 	caliber = "a762"
 	slot_flags = 0	//too unwieldy to carry on your back
 	load_method = MAGAZINE
@@ -18,6 +18,11 @@
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
 	burst = 5
 	burst_delay = 3
+
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		)
 
 	firemodes = list(
 		list(mode_name="short bursts",	burst=5, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2),          dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),

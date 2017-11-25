@@ -32,9 +32,15 @@
 	desc = "A Type 33 Guided Munitions Launcher"
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Needler"
+	item_state = "needler"
 	slot_flags = SLOT_BELT||SLOT_HOLSTER
 	fire_sound = 'code/modules/halo/sounds/needlerfire.ogg'
 	magazine_type = /obj/item/ammo_magazine/needles
 	handle_casings = CLEAR_CASINGS
 	caliber = "needler"
 	load_method = MAGAZINE
+
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		)

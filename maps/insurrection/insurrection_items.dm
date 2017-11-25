@@ -17,12 +17,12 @@
 /obj/machinery/podcontrol/New()
 	..()
 	overlays += icon(icon,"nav")
-	calc_land_point()
 	contained_area = loc.loc
 
-/obj/machinery/podcontrol/proc/calc_land_point()
-	if(isnull(land_point))
-		land_point = pick(get_valid_landings())
+/obj/machinery/podcontrol/proc/get_and_set_land_point()
+	var/obj/point = pick(get_valid_landings())
+	point.name += "_[contained_area.name]"
+	land_point = point
 
 /obj/machinery/podcontrol/proc/calc_translation(var/obj/target)
 	var/x_trans = target.x - x
@@ -40,8 +40,6 @@
 
 /obj/machinery/podcontrol/attack_hand(var/mob/user)
 	//TODO: Move controls to UI based.
-	if(!land_point)
-		return
 	if(launching == LAUNCH_UNDERWAY)
 		return
 	if(launching == LAUNCH_ABORTED)
@@ -79,6 +77,11 @@
 
 
 /obj/machinery/podcontrol/proc/launch()
+	get_and_set_land_point()
+	if(isnull(land_point))
+		visible_message("<span class = 'notice'>POD LAUNCH FAILURE</span>","<span class = 'notice'>You hear an angry beep</span>")
+		return
+	playsound(land_point, get_sfx("explosion"), 100, 1,, falloff = 1)
 	var/translation = calc_translation(land_point)
 	for(var/mob/m in view(7,land_point))
 		to_chat(m,"<span class='danger'>A concussive blast throws everything aside!</span>") //Tell everyone things were thrown away.
@@ -109,11 +112,6 @@
 			to_chat(M,"<span class='notice'>ASSAULT POD DEPARTING!</span>")
 		launching = LAUNCH_UNDERWAY
 		spawn(20)
-			for(var/mob/living/l in GLOB.player_list)
-				if(l.z != land_point.z)
-					continue
-				l.playsound_local(land_point, get_sfx("explosion"), 100, 1,, falloff = 1)
-			calc_land_point()
 			launch()
 
 /obj/effect/landmark/innie_bomb
@@ -121,6 +119,7 @@
 
 /obj/payload/innie
 	anchored = 1
+	seconds_to_disarm = 30
 
 /obj/payload/innie/set_anchor()
 	return

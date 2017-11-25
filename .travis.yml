@@ -13,7 +13,6 @@ env:
     - TEST=CODE
     - TEST=WEB
     - TEST=MAP MAP_PATH=example
-    - TEST=MAP MAP_PATH=torch
     - TEST=MAP MAP_PATH=overmap_example
     - TEST=MAP MAP_PATH=insurrection
     - TEST=MAP MAP_PATH=slayer
