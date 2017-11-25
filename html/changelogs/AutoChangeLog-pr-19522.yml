@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - bugfix: "\"Fixes openspaces above shuttles retaining image of the floor.\""
