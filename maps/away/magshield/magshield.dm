@@ -40,6 +40,8 @@
 	desc = "A large three-handed with rotating top. It is used to create high-power magnetic fields in hard vacuum."
 	icon = 'magshield_sprites.dmi'
 	icon_state = "maggen"
+	var/heavy_range = 10
+	var/lighter_range = 20
 	var/chance = 0
 
 /obj/structure/magshield/maggen/Initialize()
@@ -54,7 +56,10 @@
 	var/eye_safety = 0
 	chance = rand(1,300)//I wanted to use Poisson distribution with Lambda for 5 minutes but made it simpler
 	if (chance == 1)
-		empulse(src, 10, 20, 1)
+		empulse(src, heavy_range, lighter_range, 0)
+		var/turf/T = get_turf(src)
+		var/area/A = get_area(src)
+		log_game("EMP with size ([heavy_range], [lighter_range]) in area [A] ([T.x], [T.y], [T.z])")
 		visible_message("<span class='notice'>\the [src] suddenly activates.</span>", "<span class='notice'>Few lightnings jump between [src]'s rotating hands. You feel everything metal being pulled towards \the [src].</span>")
 		for(var/mob/living/carbon/M in hear(10, get_turf(src)))
 			eye_safety = M.eyecheck()
