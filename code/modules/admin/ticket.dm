@@ -119,7 +119,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 					status = "Assigned to [english_list(ticket.assigned_admin_ckeys(), "no one")]"
 				if(TICKET_CLOSED)
 					status = "Closed by [ticket.closed_by.ckey]"
-			ticket_dat += "<li>"
+			ticket_dat += "<li style='padding-bottom:10px'>"
 			if(open_ticket && open_ticket == ticket)
 				ticket_dat += "<i>"
 			ticket_dat += "Ticket #[id] - [ticket.owner.ckey] - [status]<br /><a href='byond://?src=\ref[src];action=view;ticket=\ref[ticket]'>VIEW</a>"
