@@ -40,12 +40,6 @@ Controls the various behaviors of a grenade. Down the line it should allow for c
 	var/trait_payload_1
 	var/trait_payload_2
 	var/trait_payload_3
-/*
-Offensive grenades: Concussion; HE; Fragmentation; Incendiary; Shock; Tesla; Gravitating; Radioactive; Laser; Scatter (Caltrops,; STING
-
-Concussion: Extremely high damage close to the grenade; rapid damage falloff (Inverse square?) (Applies clumsy.) - Exclusive to gravitating
-
-*/
 
 /*
 Tactical grenades: Flash; Sonic; Daze; EMP; Anti-Photon
@@ -182,6 +176,9 @@ Spawner grenades: Carp; Holocarp; Viscerator; Spiderling
 		add_fingerprint(user)
 	..()
 	return
+
+//Handle grenadeparts.
+/obj/item/weapon/grenade/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 /obj/item/weapon/grenade/attack_hand()
 	walk(src, null, null)

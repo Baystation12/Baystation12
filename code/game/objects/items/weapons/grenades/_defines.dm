@@ -16,6 +16,9 @@
 //Spawns mobs.
 #define SPAWNER 0x8
 
+//Spawner part uses 5 complexity.
+//Old spawnernades generally spawn 5 mobs. Thus: Spawnernades will be power = 5 with one spawner part.
+
 //Offensive grenades: HE; Fragmentation;  Concussion; Incendiary; Taze; Tesla; Gravitating; Laser; Scatter (Caltrops et al), STING
 #define EXPLOSIVE 0x10
 #define FRAGMENTING 0x20
