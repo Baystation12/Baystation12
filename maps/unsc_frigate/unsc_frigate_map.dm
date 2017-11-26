@@ -1,3 +1,6 @@
+#if !defined(ALL_SHIP_JOBS)
+	#define ALL_SHIP_JOBS list() //A define so things don't throw errors due to missing define
+#endif
 
 /datum/map/unsc_frigate
 	name = "Frigate"
@@ -11,6 +14,7 @@
 	id_hud_icons = 'maps/insurrection/insurrection_hud_icons.dmi'
 
 	allowed_jobs = ALL_SHIP_JOBS
+	allowed_spawns = list("Arrivals Shuttle","Cryogenic Storage")
 
 	station_name  = "UNSC Frigate"
 	station_short = "Frigate"

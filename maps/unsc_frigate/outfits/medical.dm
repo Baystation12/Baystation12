@@ -1,6 +1,6 @@
 
 /decl/hierarchy/outfit/job/UNSC_ship/medical_chief
-	name = "Marine Commanding Officer"
+	name = "Crew Chief (Medical)"
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/medical
