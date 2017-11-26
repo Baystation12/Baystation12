@@ -38,7 +38,7 @@ var/datum/antagonist/actor/actor
 
 	return 1
 
-/client/verb/join_as_actor()
+/*/client/verb/join_as_actor()
 	set category = "IC"
 	set name = "Join as Actor"
 	set desc = "Join as an Actor to entertain the crew through television!"
@@ -57,4 +57,4 @@ var/datum/antagonist/actor/actor
 		actor.create_default(usr)
 		return
 
-	to_chat(usr, "You must be observing or be a new player to spawn as an actor.")
+	to_chat(usr, "You must be observing or be a new player to spawn as an actor.")*/

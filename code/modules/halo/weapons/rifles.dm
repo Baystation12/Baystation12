@@ -7,18 +7,23 @@
 	name = "\improper MA5B Assault Rifle"
 	desc = "Standard-issue service rifle of the UNSC Marines. Takes 7.62mm calibre magazines."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
-	icon_state = "MA5D"		//we'll just pretend ok?
-	item_state = "halo_ar"
+	icon_state = "MA5B"
+	item_state = "ma5b"
 	caliber = "a762"
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
 	//fire_sound_burst = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
 	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/m762_ap
+	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap) //Disallows loading LMG boxmags into the MA5B
 	burst = 3
 	burst_delay = 2
+
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		)
 
 	firemodes = list(
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 0.6)),
@@ -27,20 +32,30 @@
 
 /obj/item/weapon/gun/projectile/ma5b_ar/update_icon()
 	if(ammo_magazine)
-		icon_state = "MA5D"
+		icon_state = "MA5B"
 	else
-		icon_state = "MA5D_unloaded"
+		icon_state = "MA5B_unloaded"
 
+/obj/item/weapon/gun/projectile/ma5b_ar/MA37
+	name = "\improper MA37 ICWS"
+	desc = "Also formally known as the MA5."
+	icon_state = "MA37"
+	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
 
+/obj/item/weapon/gun/projectile/ma5b_ar/MA37/update_icon()
+	if(ammo_magazine)
+		icon_state = "MA37"
+	else
+		icon_state = "MA37_unloaded"
 
-//BR55 battle
+//BR85 battle
 
-/obj/item/weapon/gun/projectile/br55
-	name = "\improper BR55 Battle Rifle"
-	desc = "When nothing else gets the job done, the BR55 Battle Rifle will do. Takes 9.5mm calibre magazines."
+/obj/item/weapon/gun/projectile/br85
+	name = "\improper BR85 Battle Rifle"
+	desc = "When nothing else gets the job done, the BR85 Battle Rifle will do. Takes 9.5mm calibre magazines."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
-	icon_state = "BattleRifle"
-	item_state = "halo_br"
+	icon_state = "Br85"
+	item_state = "br85"
 	caliber = "9.5mm"
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/BattleRifleShotSoundEffect.ogg'
@@ -51,8 +66,13 @@
 	burst_delay = 1
 	accuracy = 1
 
-/obj/item/weapon/gun/projectile/br55/update_icon()
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		)
+
+/obj/item/weapon/gun/projectile/br85/update_icon()
 	if(ammo_magazine)
-		icon_state = "BattleRifle"
+		icon_state = "Br85"
 	else
-		icon_state = "BattleRifle_unloaded"
+		icon_state = "Br85_unloaded"

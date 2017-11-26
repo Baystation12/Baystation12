@@ -15,9 +15,9 @@
 	votable = 1
 	var/obj/payload/bombs = list("timer" = 0)
 	var/list/remaining_pods = list()
-	var/prepare_time =  3 MINUTES //The amount of time the insurrectionists have to prepare for the ODST assault, in ticks
+	var/prepare_time =  5 MINUTES //The amount of time the insurrectionists have to prepare for the ODST assault, in ticks
 	var/last_assault = 0 //This is also set to -1 when a bomb is active.
-	var/autolaunchtime = 10 MINUTES //At runtime, this stores the time in ticks after roundstart will launch at.
+	var/autolaunchtime = 12 MINUTES //At runtime, this stores the time in ticks after roundstart will launch at.
 	var/warned = 0 //To stop bomb detonation warning spam
 
 /datum/game_mode/insurrection/proc/message_faction(var/faction,var/message)
@@ -43,7 +43,7 @@
 
 /datum/game_mode/insurrection/proc/update_pod_status()
 	for(var/obj/machinery/podcontrol/p in remaining_pods)
-		if(isnull(p.land_point) && (p.launching == -2)) //-2 is LAUNCH_UNDERWAY
+		if(!p.land_point)
 			remaining_pods -= p
 
 /datum/game_mode/insurrection/proc/inform_start_round()
@@ -104,7 +104,7 @@
 	for(var/obj/payload/b in bombs)
 		if(b.exploding == 1)
 			last_assault = BOMB_ACTIVE
-		if((((b.explode_at - world.time)/10) <b.secondstodisarm) && (!warned))
+		if((((b.explode_at - world.time)/10) <b.seconds_to_disarm) && (!warned))
 			message_faction("UNSC","<span class = 'danger'>Insurrectionist self destruct nearing time of detonation. Exfiltration craft arriving at evacuation wing.</span>")
 			message_faction("Insurrection","<span class='danger'>Integrated self destruct device reports nearing time of detonation. Relocate all personnel to the evacuation wing.</span>")
 			warned = TRUE
@@ -146,16 +146,14 @@
 		update_bomb_timer()
 		return
 	if(bombs[1] < world.time)
-		update_pod_status()
 		update_bomb_status()
 		update_bomb_timer()
 	if(autolaunchtime < world.time)
-		update_pod_status()
 		for(var/obj/machinery/podcontrol/control in remaining_pods)
-			control.launch()
 			message_faction("UNSC","<span class = 'danger'>Assault pods autolaunched.</span>")
-			modify_pod_launch(LAUNCH_UNDERWAY)
+			modify_pod_launch(0)
 			remaining_pods -= control
+			update_pod_status()
 
 /datum/game_mode/insurrection/handle_mob_death()
 	update_pod_status()
@@ -175,7 +173,7 @@
 		if(living_players_unsc.len == 0)
 			announce_win("Insurrection")
 			return 1
-		if(living_players_innie == 0)
+		if(living_players_innie.len == 0)
 			announce_win("UNSC")
 			return 1
 	else

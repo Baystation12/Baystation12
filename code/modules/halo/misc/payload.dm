@@ -9,9 +9,10 @@
 	var/explodetype = /datum/nuclearexplosion
 	var/exploding
 	var/explode_at
-	var/secondstoexplode = 240
+	var/seconds_to_explode = 240
+	var/arm_time = 3 //Time in seconds to arm the bomb.
 	var/disarm_at
-	var/secondstodisarm = 60
+	var/seconds_to_disarm = 60
 	var/mob/living/u = null
 	var/disarming
 	var/explodedesc = "A spraypainted image of a skull adorns this slowly ticking bomb."
@@ -22,18 +23,19 @@
 		if(!checkturf())
 			src.visible_message("<span class='danger'>The [src] beeps a warning:'OPTIMAL LOCATION NOT REACHED'</span>")
 		else
-			u = user
-			u.visible_message("<span class = 'userdanger'>[user.name] primes the [src] for detonation</span>","<span class ='notice'>You prime the [src] for detonation</span>")
-			explode_at = world.time + secondstoexplode*10
-			exploding = 1
-			GLOB.processing_objects += src
-			set_anchor(1)
-			checkoverlay(1)
+			if(do_after(user,arm_time SECONDS,src,1,1,,1))
+				u = user
+				u.visible_message("<span class = 'userdanger'>[user.name] primes the [src] for detonation</span>","<span class ='notice'>You prime the [src] for detonation</span>")
+				explode_at = world.time + seconds_to_explode*10
+				exploding = 1
+				GLOB.processing_objects += src
+				set_anchor(1)
+				checkoverlay(1)
 	else
 		if(!disarming)
 			u = user
-			u.visible_message("<span class = 'danger'>[user.name] starts disarming the [src]</span>","<span class ='notice'>You start disarming the [src]. You estimate it'll take [secondstodisarm] seconds</span>")
-			disarm_at = world.time + secondstodisarm*10
+			u.visible_message("<span class = 'danger'>[user.name] starts disarming the [src]</span>","<span class ='notice'>You start disarming the [src]. You estimate it'll take [seconds_to_disarm] seconds</span>")
+			disarm_at = world.time + seconds_to_disarm*10
 			disarming = 1
 		else
 			to_chat(user,"<span class ='notice'>Someone else is already disarming the [src]</span>")
@@ -109,8 +111,8 @@
 	icon_state ="Antimatter"
 	activeoverlay = null
 	explodedesc = "Spikes conceal a countdown timer."
-	secondstoexplode = 300
-	secondstodisarm = 60
+	seconds_to_explode = 300
+	seconds_to_disarm = 60
 
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator
 	name = "Optimal Ordinance Yield Locator"

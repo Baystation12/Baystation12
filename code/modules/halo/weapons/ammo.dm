@@ -97,6 +97,13 @@
 	max_ammo = 30		//lets try 30 instead of 60 for now
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/m762_ap/MA5B
+	icon_state = "MA5B_mag"
+	max_ammo = 60
+
+/obj/item/ammo_magazine/m762_ap/MA37
+	icon_state = "MA37_mag"
+
 /obj/item/ammo_casing/a762_ap
 	desc = "A 7.62mm bullet casing."
 	caliber = "a762"
@@ -126,7 +133,7 @@
 	name = "magazine (9.5mm) M634 X-HP-SAP"
 	desc = "9.5x40mm M634 Experimental High-Powered Semi-Armor-Piercing magazine containing 36 shots. Standard issue."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
-	icon_state = "BattleRiflemag"
+	icon_state = "Br85_mag"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/a95_sap
 	matter = list(DEFAULT_WALL_MATERIAL = 3000) //7.62mm casing = 50 metal each
