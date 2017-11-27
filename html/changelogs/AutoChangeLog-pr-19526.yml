@@ -1,0 +1,5 @@
+author: "FTangSteve"
+delete-after: True
+changes: 
+  - rscadd: "makes item slowdown impacted by species strength"
+  - tweak: "changeling transform now takes time with a progress bar based on mob_size difference"
