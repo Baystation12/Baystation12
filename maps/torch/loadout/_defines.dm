@@ -78,13 +78,13 @@
 #define CIVILIAN_BRANCH list(/datum/mil_branch/civilian)
 
 // For enlisted military ranks
-#define ENLISTED_RANKS list("enlisted")
+#define ENLISTED_RANKS list(RANK_TYPE_ENLISTED)
 
 // For officers military ranks
-#define OFFICER_RANKS list("officer")
+#define OFFICER_RANKS list(RANK_TYPE_OFFICER)
 
 // For nanotrasen civilian ranks
-#define NANOTRASEN_RANKS list("nanotrasen")
+#define NANOTRASEN_RANKS list(RANK_TYPE_NANOTRASEN)
 
 // For not-nanotrasen civilian ranks
-#define NOT_NANOTRASEN_RANKS list("civilian")
+#define NOT_NANOTRASEN_RANKS list(RANK_TYPE_CIVILIAN)
