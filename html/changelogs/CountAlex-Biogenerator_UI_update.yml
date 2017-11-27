@@ -1,0 +1,5 @@
+author: CountAlex
+delete-after: True
+
+changes: 
+  - tweak: "Changed Biogenerator UI to nano-ui instead of basic HTML."

@@ -26,9 +26,9 @@ exactly 12 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
 exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 46 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
-exactly 717 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 712 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
-exactly 39 "text2path uses" 'text2path'
+exactly 40 "text2path uses" 'text2path'
 
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`
 echo "$num non-yml files (expecting exactly 2)"
