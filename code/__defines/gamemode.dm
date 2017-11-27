@@ -44,6 +44,8 @@
 #define MODE_TRAITOR "traitor"
 #define MODE_DEITY "deity"
 #define MODE_GODCULTIST "god cultist"
+#define MODE_VAMPIRE "vampire"
+#define MODE_THRALL "thrall"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 130
 
@@ -89,3 +91,14 @@
 #define INITIALIZATION_HAS_BEGUN 2
 #define INITIALIZATION_COMPLETE 4
 #define INITIALIZATION_NOW_AND_COMPLETE (INITIALIZATION_NOW|INITIALIZATION_COMPLETE)
+
+/////////////////
+//// Vampire ////
+/////////////////
+
+#define VAMP_DRAINING   0x1
+#define VAMP_HEALING    0x2
+#define VAMP_PRESENCE   0x4
+#define VAMP_FRENZIED   0x8
+#define VAMP_ISTHRALL   0x10
+#define VAMP_FULLPOWER 0x20

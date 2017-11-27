@@ -233,3 +233,16 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 	object = "soul stone"
 	ghost_trap_message = "They are occupying a soul stone now."
 	ghost_trap_role = "Shade"
+
+
+/datum/ghosttrap/vampire
+	object = "Vampire"
+	pref_check = MODE_VAMPIRE
+	ghost_trap_message = "They are occupying a vampire."
+	ghost_trap_role = "vampire"
+	ban_checks = list(MODE_VAMPIRE)
+	can_set_own_name = FALSE
+	list_as_special_role = FALSE
+
+/datum/ghosttrap/vampire/welcome_candidate(var/mob/target)
+	return 0

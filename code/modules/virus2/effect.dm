@@ -131,6 +131,10 @@
 		mob.update_body(1)
 		mob.adjustToxLoss(15*multiplier)
 
+	vampire //Itjustworks.png
+		stage = 3
+
+
 	deactivate(var/mob/living/carbon/human/mob,var/multiplier)
 		for (var/obj/item/organ/external/E in mob.organs)
 			E.status &= ~ORGAN_DEAD

@@ -179,7 +179,11 @@
 /datum/reagent/water/holywater/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(ishuman(M)) // Any location
-		if(iscultist(M))
+		if (M.mind && M.mind.vampire) //Placed here, as it's a tiny amount more likely to happen.
+			var/datum/vampire/vampire = M.mind.vampire
+			vampire.frenzy += removed * 5
+
+		else if(iscultist(M))
 			if(prob(10))
 				cult.offer_uncult(M)
 			if(prob(2))

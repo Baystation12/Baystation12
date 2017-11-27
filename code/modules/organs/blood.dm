@@ -153,7 +153,7 @@
 		reagents.update_total()
 		return
 
-	if(blood_incompatible(injected.data["blood_type"], injected.data["species"]))
+	if(blood_incompatible(injected.data["blood_type"], injected.data["species"] && !(mind && mind.vampire)))
 		reagents.add_reagent(/datum/reagent/toxin, amount * 0.5)
 		reagents.update_total()
 	else
