@@ -8,8 +8,9 @@
 /proc/isipc(A)
 	if(istype(A, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = A
-		return istype(H.species, /datum/species/machine)
+		return istype(H.species, /mob/living/carbon/alien/diona)
 	return 0
+
 
 
 /proc/issmall(A)

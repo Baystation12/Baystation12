@@ -50,9 +50,8 @@
 			user.visible_message("<span class='warning'>[user] raises \the [src] up to their mouth and bites into it.</span>", "<span class='notice'>You raise \the [src] up to your mouth and bite into it, starting to drain its contents.<br>You need to stand still.</span>")
 			being_feed = TRUE
 			vampire_marks = TRUE
-			if (!LAZYLEN(src.other_DNA))
-				LAZYADD(src.other_DNA, M.dna.unique_enzymes)
-				src.other_DNA_type = "saliva"
+			if (!LAZYLEN(src.other_dna))
+				LAZYADD(src.other_dna, M.dna.unique_enzymes)
 
 			while (do_after(user, 25, 5, 1))
 				var/blood_taken = 0
@@ -69,7 +68,7 @@
 			user.visible_message("<span class='warning'>[user] licks \his fangs dry, lowering \the [src].</span>", "<span class='notice'>You lick your fangs clean of the tasteless blood.</span>")
 			being_feed = FALSE
 	else
-	..()
+		..()
 
 /obj/item/weapon/reagent_containers/blood/APlus
 	blood_type = "A+"

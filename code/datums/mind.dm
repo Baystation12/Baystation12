@@ -98,7 +98,7 @@
 		new_character.make_changeling()
 
 	if(vampire)
-	new_character.make_vampire()
+		new_character.make_vampire()
 
 	if(active)
 		new_character.key = key		//now transfer the key to link the client to our new body
