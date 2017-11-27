@@ -169,6 +169,8 @@ var/list/gear_datums = list()
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td><font size=2>[G.description]</font>"
 		var/allowed = 1
+
+		// Role whitelist
 		if(G.allowed_roles)
 			var/good_job = 0
 			var/bad_job = 0
@@ -186,6 +188,50 @@ var/list/gear_datums = list()
 					bad_job = 1
 			allowed = good_job || !bad_job
 			entry += "</i>"
+
+		// Branch whitelist
+		if (G.allowed_branch)
+			var/datum/mil_branch/branch = pref.char_branch
+			entry += "<br><i>"
+			if (branch in G.allowed_branch)
+				entry += "<font color=55cc55>[branch.name]</font>"
+			else
+				entry += "<font color=cc5555>[branch.name]</font>"
+				allowed = 0
+			entry += "</i>"
+
+		// Rank whitelist
+		if (G.allowed_ranks)
+			entry += "<br><i>"
+			var/datum/mil_rank/rank = pref.char_rank
+			// Values are as defined in map\torch\loadout\_defines.dm
+			switch (G.allowed_ranks)
+				if ("enlisted")
+					if (rank.sort_order < 10)
+						entry += "<font color=55cc55>[rank.name]</font>"
+					else
+						entry += "<font color=cc5555>[rank.name]</font>"
+						allowed = 0
+				if ("officer")
+					if (rank.sort_order >= 10)
+						entry += "<font color=55cc55>[rank.name]</font>"
+					else
+						entry += "<font color=cc5555>[rank.name]</font>"
+						allowed = 0
+				if ("nanotrasen")
+					if (rank == /datum/mil_rank/civ/nt)
+						entry += "<font color=55cc55>[rank.name]</font>"
+					else
+						entry += "<font color=cc5555>[rank.name]</font>"
+						allowed = 0
+				if ("not_nanotrasen")
+					if (rank in list(/datum/mil_rank/civ/civ, /datum/mil_rank/civ/contractor, /datum/mil_rank/civ/offduty))
+						entry += "<font color=55cc55>[rank.name]</font>"
+					else
+						entry += "<font color=cc5555>[rank.name]</font>"
+						allowed = 0
+			entry += "</i>"
+
 		entry += "</tr>"
 		if(ticked)
 			entry += "<tr><td colspan=3>"
