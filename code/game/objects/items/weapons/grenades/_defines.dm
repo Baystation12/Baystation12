@@ -4,32 +4,24 @@
 
 //Grenade supertypes, Don't fucking hybridize these I swear to god it'll break everythin
 
-//Killy grenades. Includes less than lethal grenades.
-#define OFFENSIVE 0x1
 
-//Hindering grenades;
-#define TACTICAL 0x2
-
-//Deferr to chemnade mechanics if present.
-#define UTILITY 0x4
-
-//Spawns mobs.
-#define SPAWNER 0x8
+//Spawns mobs. Skips all other behaviors if present.
+#define SPAWNER 0x1
 
 //Spawner part uses 5 complexity.
 //Old spawnernades generally spawn 5 mobs. Thus: Spawnernades will be power = 5 with one spawner part.
 
 //Offensive grenades: HE; Fragmentation;  Concussion; Incendiary; Taze; Tesla; Gravitating; Laser; Scatter (Caltrops et al), STING
-#define EXPLOSIVE 0x10
-#define FRAGMENTING 0x20
-#define CONCUSSIVE 0x40
-#define INCENDIARY 0x80
-#define TAZE 0x100
-#define TESLA 0x200
-#define GRAV 0x400
-#define LASER 0x800
-#define SCATTER 0x1000
-#define STING 0x2000
+#define EXPLOSIVE 0x2
+#define FRAGMENTING 0x4
+#define CONCUSSIVE 0x8
+#define INCENDIARY 0x10
+#define TAZE 0x20
+#define TESLA 0x40
+#define GRAV 0x80
+#define LASER 0x100
+#define SCATTER 0x200
+#define STING 0x400
 
 //Start second flag list.
 
@@ -37,16 +29,17 @@
 Tactical grenades: Flashbang; Daze; EMP; Darkness
 */
 
-#define FLASHING 0x4000
-#define DEAFENING 0x8000
-#define DAZING 0x8000
+#define FLASHING 0x800
+#define DEAFENING 0x1000
+#define DAZING 0x2000
+#define EM-PULSING 0x4000
+#define DARKNESS 0x8000
 
-//Start second flag list.
+
+//Start second flag list. Fucking byond.
 
 
-#define EM-PULSING 0x1
-#define DARKNESS 0x2
-#define SMOKE 0x4
+#define SMOKE 0x1
 
 
 

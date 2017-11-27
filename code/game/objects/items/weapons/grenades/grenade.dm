@@ -32,18 +32,15 @@ Controls the various behaviors of a grenade. Down the line it should allow for c
 	var/trait_flags //A list of flags concerning grenade behaviors.
 	var/trait_flags_2 //Second list of bitflags because we ran out in the first list. DO NOT MIX UP THE FIRST AND SECOND LISTS. YOUR GRENADE WILL NOT BEHAVE CORRECTLY.
 	var/trait_power //Dictates things like range, strength of force, amount of projectiles,
+	var/trait_complexity //How complex is this grenade? Calculated on new() and every time a new part gets added.
+	var/max_complexity = 10 //May be higher on larger grenade hulls.
 
-	var/detonative_power //Used exclusively by grenades that explode proper.
-	var/falloff_type =
+	var/parts_to_deny = list() //Inheirits a list from the parts of incompatible parts.
 //Path to projectiles, items, or mobs that you will spawn, chosen randomly. Any movable atom, really. Not other grenades; that's what cluster bombs are for.
 
 	var/trait_payload_1
 	var/trait_payload_2
 	var/trait_payload_3
-
-/*
-Tactical grenades: Flash; Sonic; Daze; EMP; Anti-Photon
-*/
 
 /*
 Utility grenades: Cleaner; Metal foam; Pest killer (For space vines); Tear gas; Tranq smoke; Berserk smoke; Medicine smoke;
