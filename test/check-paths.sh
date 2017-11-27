@@ -12,8 +12,12 @@ exactly() { # exactly N name search [mode]
 
 	num="$(grep "$mode" "$search" **/*.dm | wc -l)"
 
-	echo "$num $name (expecting exactly $count)"
-	[ $num -eq $count ] || FAILED=1
+	if [ $num -eq $count ]; then
+		echo "$num $name"
+	else
+		echo "$(tput setaf 9)$num $name (expecting exactly $count)$(tput sgr0)"
+		FAILED=1
+	fi
 }
 
 exactly 0 "escapes" '\\\\(red|blue|green|black|b|i[^mc])'
