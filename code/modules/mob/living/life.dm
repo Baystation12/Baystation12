@@ -56,6 +56,9 @@
 
 	handle_regular_hud_updates()
 
+	if(mind && mind.vampire)
+		handle_vampire()
+
 /mob/living/proc/handle_breathing()
 	return
 
@@ -218,6 +221,10 @@
 /mob/living/proc/handle_hud_icons()
 	handle_hud_icons_health()
 	handle_hud_glasses()
+
+	if (mind.vampire)
+		if (mind.vampire.status & VAMP_FRENZIED)
+			damageoverlay.add_overlay("frenzyoverlay")
 
 /mob/living/proc/handle_hud_icons_health()
 	return
