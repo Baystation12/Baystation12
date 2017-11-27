@@ -7,16 +7,11 @@
 /obj/item/clothing/accessory/badge
 	name = "detective's badge"
 	desc = "A simple badge, made from gold."
-	icon_state = "goldbadge"
+	icon_state = "detectivebadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	var/stored_name
 	var/badge_string = "Private Investigator"
-
-/obj/item/clothing/accessory/badge/old
-	name = "faded badge"
-	desc = "A faded badge, backed with leather. Looks crummy."
-	icon_state = "badge_round"
 
 /obj/item/clothing/accessory/badge/proc/set_name(var/new_name)
 	stored_name = new_name
@@ -99,6 +94,11 @@
 		..()
 		return
 
+/obj/item/clothing/accessory/badge/old
+	name = "faded badge"
+	desc = "A faded badge, backed with leather. Looks crummy."
+	icon_state = "badge_round"
+
 /obj/item/clothing/accessory/badge/defenseintel
 	name = "investigator's badge"
 	desc = "A leather-backed silver badge bearing the crest of the Defense Intelligence Agency."
@@ -125,3 +125,9 @@
 	desc = "A leather-backed gold badge displaying the crest of the Colonial Marshals."
 	icon_state = "marshalbadge"
 	badge_string = "Colonial Marshal Bureau"
+	
+/obj/item/clothing/accessory/badge/press
+    name = "press badge"
+    desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."
+    icon_state = "pressbadge"
+    badge_string = "Journalist"
