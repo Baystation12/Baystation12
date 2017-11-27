@@ -517,6 +517,7 @@
 	name = "Master Sergeant"
 	name_short = "MSgt"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e8)
+	sort_order = 8
 
 /datum/mil_rank/marine/e8_alt
 	name = "First Sergeant"
