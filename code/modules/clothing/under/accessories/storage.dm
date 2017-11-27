@@ -141,7 +141,8 @@
 		/obj/item/device/multitool,
 		/obj/item/weapon/magnetic_ammo,
 		/obj/item/ammo_magazine,
-		/obj/item/weapon/net_shell
+		/obj/item/weapon/net_shell,
+		/obj/item/weapon/reagent_containers/glass/beaker/vial
 	)
 
 /obj/item/clothing/accessory/storage/bandolier/safari/New()
