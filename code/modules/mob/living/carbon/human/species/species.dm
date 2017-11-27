@@ -486,3 +486,10 @@
 /datum/species/proc/disfigure_msg(var/mob/living/carbon/human/H) //Used for determining the message a disfigured face has on examine. To add a unique message, just add this onto a specific species and change the "return" message.
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] face is horribly mangled!</span>\n"
+
+/datum/species/proc/max_skin_tone()
+	if(appearance_flags & HAS_SKIN_TONE_GRAV)
+		return 100
+	if(appearance_flags & HAS_SKIN_TONE_SPCR)
+		return 165
+	return 220
