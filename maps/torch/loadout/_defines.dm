@@ -68,3 +68,23 @@
 
 //For jobs that spawn with armor in their lockers
 #define ARMORED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/guard, /datum/job/merchant)
+
+
+/* Branch/Rank defines */
+// For military branches
+#define MILITARY_BRANCH list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet, /datum/mil_branch/marine_corps)
+
+// For non-military branches (Included in the off chance we get additional branches in this category)
+#define CIVILIAN_BRANCH list(/datum/mil_branch/civilian)
+
+// For enlisted military ranks
+#define ENLISTED_RANKS "enlisted"
+
+// For officers military ranks
+#define OFFICER_RANKS "officer"
+
+// For nanotrasen civilian ranks
+#define NANOTRASEN_RANKS "nanotrasen"
+
+// For not-nanotrasen civilian ranks
+#define NOT_NANOTRASEN_RANKS "not_nanotrasen"
