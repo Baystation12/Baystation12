@@ -4,6 +4,7 @@
 	extended_round_description = "Changelings and a wizard spawn during this round."
 	config_tag = "lizard"
 	required_players = 15
+	votable = 0
 	required_enemies = 4
 	end_on_antag_death = 0
 	antag_tags = list(MODE_WIZARD, MODE_CHANGELING)
