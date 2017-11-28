@@ -69,12 +69,3 @@
 	#undef LTR
 	#undef NUM
 	#undef NAME
-/*
-// These guys are going to need full resprites of all the suits/etc so I'm going to
-// define them and commit the sprites, but leave the clothing for another day.
-/datum/species/human/chimpanzee
-	name = "uplifted Chimpanzee"
-	name_plural = "uplifted Chimpanzees"
-	blurb = "Ook ook."
-	icobase = 'icons/mob/human_races/subspecies/r_upliftedchimp.dmi'
-*/

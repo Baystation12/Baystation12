@@ -19,6 +19,7 @@
 		/datum/species/tajaran = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
 		/datum/species/skrell  = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
 		/datum/species/unathi  = list(/datum/mil_branch/civilian),
+		/datum/species/human/uplift  = list(/datum/mil_branch/civilian),
 		/datum/species/vox     = list()
 	)
 
