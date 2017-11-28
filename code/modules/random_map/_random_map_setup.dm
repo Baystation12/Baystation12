@@ -12,6 +12,10 @@
 #define RESOURCE_LOW_MAX 1
 #define RESOURCE_LOW_MIN 0
 
+#define GAS_HIGH 5
+#define GAS_MID 3
+#define GAS_LOW 1
+
 #define FLOOR_CHAR 0
 #define WALL_CHAR 1
 #define DOOR_CHAR 2

@@ -427,6 +427,7 @@ var/list/mining_floors = list()
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 	var/overlay_detail
 	has_resources = 1
+	has_gases = 1
 
 /turf/simulated/floor/asteroid/New()
 	if (!mining_floors["[src.z]"])
