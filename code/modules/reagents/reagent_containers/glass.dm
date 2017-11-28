@@ -40,58 +40,68 @@
 		/obj/machinery/biogenerator,
 		/obj/machinery/constructable_frame,
 		/obj/machinery/radiocarbon_spectrometer
-		)
+	)
 
-	New()
-		..()
-		base_name = name
+/obj/item/weapon/reagent_containers/glass/New()
+	..()
+	base_name = name
 
-	examine(var/mob/user)
-		if(!..(user, 2))
-			return
-		if(reagents && reagents.reagent_list.len)
-			to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
-		else
-			to_chat(user, "<span class='notice'>It is empty.</span>")
-		if(!is_open_container())
-			to_chat(user, "<span class='notice'>Airtight lid seals it completely.</span>")
+/obj/item/weapon/reagent_containers/glass/examine(var/mob/user)
+	if(!..(user, 2))
+		return
+	if(reagents && reagents.reagent_list.len)
+		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
+	else
+		to_chat(user, "<span class='notice'>It is empty.</span>")
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>The airtight lid seals it completely.</span>")
 
-	attack_self()
-		..()
-		if(is_open_container())
-			to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")
-			flags ^= OPENCONTAINER
-		else
-			to_chat(usr, "<span class = 'notice'>You take the lid off \the [src].</span>")
-			flags |= OPENCONTAINER
-		update_icon()
+/obj/item/weapon/reagent_containers/glass/attack_self()
+	..()
+	if(is_open_container())
+		to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")
+		flags ^= OPENCONTAINER
+	else
+		to_chat(usr, "<span class = 'notice'>You take the lid off \the [src].</span>")
+		flags |= OPENCONTAINER
+	update_icon()
 
-	do_surgery(mob/living/carbon/M, mob/living/user)
-		if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
-			return ..()
-		afterattack(M, user, 1)
+/obj/item/weapon/reagent_containers/glass/attack(mob/M as mob, mob/user as mob, def_zone)
+	if(force && !(flags & NOBLUDGEON) && user.a_intent == I_HURT)
+		return	..()
+	if(standard_feed_mob(user, M))
+		return
+	return 0
+
+/obj/item/weapon/reagent_containers/glass/standard_feed_mob(var/mob/user, var/mob/target)
+	if(!is_open_container())
+		to_chat(user, "<span class='notice'>You need to open \the [src] first.</span>")
 		return 1
+	if(user.a_intent == I_HURT)
+		return 1
+	return ..()
 
-	afterattack(var/obj/target, var/mob/user, var/proximity)
+/obj/item/weapon/reagent_containers/glass/self_feed_message(var/mob/user)
+	to_chat(user, "<span class='notice'>You swallow a gulp from \the [src].</span>")
 
-		if(!is_open_container() || !proximity)
-			return
-
-		for(var/type in can_be_placed_into)
-			if(istype(target, type))
-				return
-
-		if(standard_splash_mob(user, target))
-			return
-		if(standard_dispenser_refill(user, target))
-			return
-		if(standard_pour_into(user, target))
-			return
-
-		if(reagents.total_volume)
-			to_chat(user, "<span class='notice'>You splash the solution onto [target].</span>")
+/obj/item/weapon/reagent_containers/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
+	if(!is_open_container() || !proximity) //Is the container open & are they next to whatever they're clicking?
+		return 1 //If not, do nothing.
+	for(var/type in can_be_placed_into) //Is it something it can be placed into?
+		if(istype(target, type))
+			return 1
+	if(standard_dispenser_refill(user, target)) //Are they clicking a water tank/some dispenser?
+		return 1
+	if(standard_pour_into(user, target)) //Pouring into another beaker?
+		return
+	if(user.a_intent == I_HURT)
+		if(standard_splash_mob(user,target))
+			return 1
+		if(reagents && reagents.total_volume)
+			to_chat(user, "<span class='notice'>You splash the contents of \the [src] onto [target].</span>") //They are on harm intent, aka wanting to spill it.
 			reagents.splash(target, reagents.total_volume)
-			return
+			return 1
+	..()
 
 /obj/item/weapon/reagent_containers/glass/beaker
 	name = "beaker"
@@ -173,7 +183,7 @@
 	matter = list("glass" = 5000)
 	volume = 300
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = "5;10;15;25;30;60;120;300"
+	possible_transfer_amounts = "5;10;15;25;30;60;120;150;200;250;300"
 	flags = OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial
@@ -185,7 +195,7 @@
 	volume = 30
 	w_class = ITEM_SIZE_TINY //half the volume of a bottle, half the size
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = "5;10;15;25"
+	possible_transfer_amounts = "5;10;15;30"
 	flags = OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone
@@ -207,11 +217,11 @@
 	icon_state = "bucket"
 	item_state = "bucket"
 	center_of_mass = "x=16;y=9"
-	matter = list(DEFAULT_WALL_MATERIAL = 200)
+	matter = list(DEFAULT_WALL_MATERIAL = 280)
 	w_class = ITEM_SIZE_NORMAL
 	amount_per_transfer_from_this = 20
-	possible_transfer_amounts = "10;20;30;60;120"
-	volume = 120
+	possible_transfer_amounts = "10;20;30;60;120;150;180"
+	volume = 180
 	flags = OPENCONTAINER
 	unacidable = 0
 
