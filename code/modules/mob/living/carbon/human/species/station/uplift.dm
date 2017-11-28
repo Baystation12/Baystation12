@@ -1,15 +1,26 @@
-/datum/species/human/uplift
+/datum/species/uplift
 	name = SPECIES_UPLIFT_CHIMP
 	name_plural = "Uplifts"
 	blurb = "A number of corporations have taken up the practice of genetically uplifting \
 	primates to serve as cheap labor. Without the same civil status as their creators, Uplifts are \
-	often given undesirable positions with little or no pay. But they are physically and mentally very \
+	often given undesirable positions with little or no pay. But they are mentally very \
 	similar to humans."
-	icobase = 'icons/mob/human_races/subspecies/r_uplift.dmi'
+	icobase = 'icons/mob/human_races/monkeys/r_monkey.dmi'
+	deform = 'icons/mob/human_races/monkeys/r_monkey.dmi'
+	damage_overlays = 'icons/mob/human_races/masks/dam_monkey.dmi'
+	damage_mask = 'icons/mob/human_races/masks/dam_mask_monkey.dmi'
+	blood_mask = 'icons/mob/human_races/masks/blood_monkey.dmi'
 	greater_form = SPECIES_HUMAN
 	primitive_form = SPECIES_MONKEY
+	mob_size = MOB_SMALL
 
+	gibbed_anim = "gibbed-m"
+	dusted_anim = "dust-m"
 	death_message = "lets out a faint chimper as they stop moving..."
+	tail = "chimptail"
+
+	unarmed_types = list(/datum/unarmed_attack/bite, /datum/unarmed_attack/claws)
+	inherent_verbs = list(/mob/living/proc/ventcrawl)
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
 
 	language = LANGUAGE_MONKEY
@@ -32,6 +43,14 @@
 	total_health = 150
 	gluttonous = GLUT_TINY
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_NO_LACE
+
+	bump_flag = MONKEY
+	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN
+
+	pass_flags = PASSTABLE
+	holder_type = /obj/item/weapon/holder
+
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_EYE_COLOR | HAS_UNDERWEAR
 
 	flesh_color = "#ECCD90"
