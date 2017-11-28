@@ -1,0 +1,5 @@
+author: "Techhead0"
+delete-after: True
+changes: 
+  - tweak: "Removes age gate from Janitor"
+  - tweak: "Changes crewman alt-tiles to \"Trainee\" instead of \"Junior\""
