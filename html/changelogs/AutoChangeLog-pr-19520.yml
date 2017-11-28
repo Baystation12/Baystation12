@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "You can now drink from buckets and beakers by clicking with the HELP intent. Clicking with HARM intent splashes/spills."
