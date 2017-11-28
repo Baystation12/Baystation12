@@ -196,19 +196,14 @@
 	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/head/surgical
-	display_name = "surgical cap"
+	display_name = "standard surgical caps"
 	path = /obj/item/clothing/head/surgery
 	allowed_roles = STERILE_ROLES
+	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/head/surgical/New()
-	..()
-	var/capcolor = list()
-	capcolor["black cap"] = /obj/item/clothing/head/surgery/black
-	capcolor["blue cap"] = /obj/item/clothing/head/surgery/blue
-	capcolor["green cap"] = /obj/item/clothing/head/surgery/green
-	capcolor["navy blue cap"] = /obj/item/clothing/head/surgery/navyblue
-	capcolor["purple cap"] = /obj/item/clothing/head/surgery/purple
-	gear_tweaks += new/datum/gear_tweak/path(capcolor)
+/datum/gear/head/surgical/custom
+	display_name = "surgical cap, colour selection"
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/veteranhat
 	display_name = "veteran hat"
