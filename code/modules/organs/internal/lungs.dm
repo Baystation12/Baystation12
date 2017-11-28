@@ -13,7 +13,8 @@
 	var/active_breathing = 1
 
 	var/breath_type
-	var/poison_type
+	var/list/poison_type = list()
+	var/list/poison_reagents = list("chlorine"="Chloride") //For gases with a different poison type
 	var/exhale_type
 
 	var/min_breath_pressure
@@ -61,7 +62,7 @@
 /obj/item/organ/internal/lungs/proc/sync_breath_types()
 	min_breath_pressure = species.breath_pressure
 	breath_type = species.breath_type ? species.breath_type : "oxygen"
-	poison_type = species.poison_type ? species.poison_type : "phoron"
+	poison_type = species.poison_type ? species.poison_type : list("phoron", "chlorine")
 	exhale_type = species.exhale_type ? species.exhale_type : "carbon_dioxide"
 
 /obj/item/organ/internal/lungs/Process()
@@ -139,7 +140,12 @@
 	var/failed_exhale = 0
 
 	var/inhaling = breath.gas[breath_type]
-	var/poison = breath.gas[poison_type]
+	var/poison
+	var/list/poison_list = list()
+	for(var/gas in poison_type)
+		poison += breath.gas[gas]
+		if(breath.gas[gas])
+			poison_list[gas] = breath.gas[gas]
 	var/exhaling = exhale_type ? breath.gas[exhale_type] : 0
 
 	var/inhale_pp = (inhaling/breath.total_moles)*breath_pressure
@@ -200,11 +206,14 @@
 
 	// Too much poison in the air.
 	if(toxins_pp > safe_toxins_max)
-		var/ratio = (poison/safe_toxins_max) * 10
-		if(robotic >= ORGAN_ROBOT)
-			ratio /= 2 //Robolungs filter out some of the inhaled toxic air.
-		owner.reagents.add_reagent(/datum/reagent/toxin, Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
-		breath.adjust_gas(poison_type, -poison/6, update = 0) //update after
+		var/adding_poison
+		for(var/possible_poison in poison_list)
+			adding_poison = possible_poison in poison_reagents ? poison_reagents[possible_poison] : "Toxin"
+			var/ratio = (poison_list[possible_poison]/safe_toxins_max) * 10
+			if(robotic >= ORGAN_ROBOT)
+				ratio /= 2 //Robolungs filter out some of the inhaled toxic air.
+			owner.reagents.add_reagent(adding_poison, Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
+			breath.adjust_gas(possible_poison, -possible_poison/6, update = 0) //update after
 		owner.phoron_alert = 1
 	else
 		owner.phoron_alert = 0
