@@ -23,6 +23,7 @@ var/bomb_set
 	var/lastentered
 	var/previous_level = ""
 	var/datum/wires/nuclearbomb/wires = null
+	var/decl/security_level/original_level
 
 /obj/machinery/nuclearbomb/New()
 	..()
@@ -37,9 +38,9 @@ var/bomb_set
 	return ..()
 
 /obj/machinery/nuclearbomb/Process(var/wait)
-	if (timing)
+	if(timing)
 		timeleft = max(timeleft - (wait / 10), 0)
-		if (timeleft <= 0)
+		if(timeleft <= 0)
 			spawn
 				explode()
 		GLOB.nanomanager.update_uis(src)
@@ -47,8 +48,8 @@ var/bomb_set
 /obj/machinery/nuclearbomb/attackby(obj/item/weapon/O as obj, mob/user as mob, params)
 	if(isScrewdriver(O))
 		src.add_fingerprint(user)
-		if (src.auth)
-			if (panel_open == 0)
+		if(src.auth)
+			if(panel_open == 0)
 				panel_open = 1
 				overlays |= "panel_open"
 				to_chat(user, "You unscrew the control panel of [src].")
@@ -59,9 +60,9 @@ var/bomb_set
 				to_chat(user, "You screw the control panel of [src] back on.")
 				playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 		else
-			if (panel_open == 0)
+			if(panel_open == 0)
 				to_chat(user, "\The [src] emits a buzzing noise, the panel staying locked in.")
-			if (panel_open == 1)
+			if(panel_open == 1)
 				panel_open = 0
 				overlays -= "panel_open"
 				to_chat(user, "You screw the control panel of \the [src] back on.")
@@ -69,24 +70,24 @@ var/bomb_set
 			flick("lock", src)
 		return
 
-	if (panel_open && isMultitool(O) || isWirecutter(O))
+	if(panel_open && isMultitool(O) || isWirecutter(O))
 		return attack_hand(user)
 
-	if (src.extended)
-		if (istype(O, /obj/item/weapon/disk/nuclear))
+	if(src.extended)
+		if(istype(O, /obj/item/weapon/disk/nuclear))
 			usr.drop_item()
 			O.forceMove(src)
 			src.auth = O
 			src.add_fingerprint(user)
 			return attack_hand(user)
 
-	if (src.anchored)
+	if(src.anchored)
 		switch(removal_stage)
 			if(0)
 				if(isWelder(O))
 					var/obj/item/weapon/weldingtool/WT = O
 					if(!WT.isOn()) return
-					if (WT.get_fuel() < 5) // uses up 5 fuel.
+					if(WT.get_fuel() < 5) // uses up 5 fuel.
 						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
 						return
 
@@ -110,7 +111,6 @@ var/bomb_set
 
 			if(2)
 				if(isWelder(O))
-
 					var/obj/item/weapon/weldingtool/WT = O
 					if(!WT.isOn()) return
 					if (WT.get_fuel() < 5) // uses up 5 fuel.
@@ -127,9 +127,7 @@ var/bomb_set
 
 			if(3)
 				if(isWrench(O))
-
 					user.visible_message("[user] begins unwrenching the anchoring bolts on [src].", "You begin unwrenching the anchoring bolts...")
-
 					if(do_after(user, 50, src))
 						if(!src || !user) return
 						user.visible_message("[user] unwrenches the anchoring bolts on [src].", "You unwrench the anchoring bolts.")
@@ -138,9 +136,7 @@ var/bomb_set
 
 			if(4)
 				if(isCrowbar(O))
-
 					user.visible_message("[user] begins lifting [src] off of the anchors.", "You begin lifting the device off the anchors...")
-
 					if(do_after(user, 80, src))
 						if(!src || !user) return
 						user.visible_message("\The [user] crowbars \the [src] off of the anchors. It can now be moved.", "You jam the crowbar under the nuclear device and lift it off its anchors. You can now move it!")
@@ -153,12 +149,12 @@ var/bomb_set
 	attack_hand(user)
 
 /obj/machinery/nuclearbomb/attack_hand(mob/user as mob)
-	if (extended)
-		if (panel_open)
+	if(extended)
+		if(panel_open)
 			wires.Interact(user)
 		else
 			ui_interact(user)
-	else if (deployable)
+	else if(deployable)
 		if(removal_stage < 5)
 			src.anchored = 1
 			visible_message("<span class='warning'>With a steely snap, bolts slide out of [src] and anchor it to the flooring!</span>")
@@ -174,13 +170,14 @@ var/bomb_set
 	var/data[0]
 	data["hacking"] = 0
 	data["auth"] = is_auth(user)
-	if (is_auth(user))
-		if (yes_code)
+	data["moveable_anchor"] = !istype(src, /obj/machinery/nuclearbomb/station)
+	if(is_auth(user))
+		if(yes_code)
 			data["authstatus"] = timing ? "Functional/Set" : "Functional"
 		else
 			data["authstatus"] = "Auth. S2"
 	else
-		if (timing)
+		if(timing)
 			data["authstatus"] = "Set"
 		else
 			data["authstatus"] = "Auth. S1"
@@ -191,13 +188,13 @@ var/bomb_set
 	data["anchored"] = anchored
 	data["yescode"] = yes_code
 	data["message"] = "AUTH"
-	if (is_auth(user))
+	if(is_auth(user))
 		data["message"] = code
-		if (yes_code)
+		if(yes_code)
 			data["message"] = "*****"
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if (!ui)
+	if(!ui)
 		ui = new(user, src, ui_key, "nuclear_bomb.tmpl", "Nuke Control Panel", 300, 510)
 		ui.set_initial_data(data)
 		ui.open()
@@ -211,7 +208,7 @@ var/bomb_set
 	if(usr.incapacitated())
 		return
 
-	if (src.deployable)
+	if(src.deployable)
 		to_chat(usr, "<span class='warning'>You close several panels to make [src] undeployable.</span>")
 		src.deployable = 0
 	else
@@ -230,68 +227,78 @@ var/bomb_set
 	if(..())
 		return 1
 
-	if (href_list["auth"])
-		if (auth)
+	if(href_list["auth"])
+		if(auth)
 			auth.forceMove(loc)
 			yes_code = 0
 			auth = null
 		else
 			var/obj/item/I = usr.get_active_hand()
-			if (istype(I, /obj/item/weapon/disk/nuclear))
+			if(istype(I, /obj/item/weapon/disk/nuclear))
 				usr.drop_item()
 				I.forceMove(src)
 				auth = I
-	if (is_auth(usr))
-		if (href_list["type"])
-			if (href_list["type"] == "E")
-				if (code == r_code)
+	if(is_auth(usr))
+		if(href_list["type"])
+			if(href_list["type"] == "E")
+				if(code == r_code)
 					yes_code = 1
 					code = null
 					log_and_message_admins("has armed \the [src]")
 				else
 					code = "ERROR"
 			else
-				if (href_list["type"] == "R")
+				if(href_list["type"] == "R")
 					yes_code = 0
 					code = null
 				else
 					lastentered = text("[]", href_list["type"])
-					if (text2num(lastentered) == null)
+					if(text2num(lastentered) == null)
 						log_and_message_admins("tried to exploit a nuclear bomb by entering non-numerical codes")
 					else
 						code += lastentered
-						if (length(code) > 5)
+						if(length(code) > 5)
 							code = "ERROR"
-		if (yes_code)
-			if (href_list["time"])
-				if (timing)
+		if(yes_code)
+			if(href_list["time"])
+				if(timing)
 					to_chat(usr, "<span class='warning'>Cannot alter the timing during countdown.</span>")
 					return
 
 				var/time = text2num(href_list["time"])
 				timeleft += time
 				timeleft = Clamp(timeleft, 120, 600)
-			if (href_list["timer"])
-				if (timing == -1)
+			if(href_list["timer"])
+				if(timing == -1)
 					return 1
-				if (!anchored)
+				if(!anchored)
 					to_chat(usr, "<span class='warning'>\The [src] needs to be anchored.</span>")
 					return 1
-				if (safety)
+				if(safety)
 					to_chat(usr, "<span class='warning'>The safety is still on.</span>")
 					return 1
-				if (wires.IsIndexCut(NUCLEARBOMB_WIRE_TIMING))
+				if(wires.IsIndexCut(NUCLEARBOMB_WIRE_TIMING))
 					to_chat(usr, "<span class='warning'>Nothing happens, something might be wrong with the wiring.</span>")
 					return 1
-
-				if (!timing && !safety)
+				if(!timing && !safety)
+					if(istype(src, /obj/machinery/nuclearbomb/station))
+						var/obj/machinery/nuclearbomb/station/B = src
+						for(var/inserter in B.inserters)
+							var/obj/machinery/self_destruct/sd = inserter
+							if(!istype(sd) || !sd.armed)
+								to_chat(usr, "<span class='warning'>An inserter has not been armed or is damaged.</span>")
+								return
 					timing = 1
 					log_and_message_admins("activated the detonation countdown of \the [src]")
 					bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
+					var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+					original_level = security_state.current_security_level
+					security_state.set_security_level(security_state.severe_security_level, TRUE)
 					update_icon()
 				else
 					secure_device()
-			if (href_list["safety"])
+
+			if(href_list["safety"])
 				if (wires.IsIndexCut(NUCLEARBOMB_WIRE_SAFETY))
 					to_chat(usr, "<span class='warning'>Nothing happens, something might be wrong with the wiring.</span>")
 					return 1
@@ -299,7 +306,7 @@ var/bomb_set
 				if(safety)
 					secure_device()
 				update_icon()
-			if (href_list["anchor"])
+			if(href_list["anchor"])
 				if(removal_stage == 5)
 					anchored = 0
 					visible_message("<span class='warning'>\The [src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut.</span>")
@@ -319,7 +326,8 @@ var/bomb_set
 /obj/machinery/nuclearbomb/proc/secure_device()
 	if(timing <= 0)
 		return
-
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	security_state.set_security_level(original_level, TRUE)
 	bomb_set--
 	safety = TRUE
 	timing = 0
@@ -401,14 +409,38 @@ var/bomb_set
 
 	var/list/flash_tiles = list()
 	var/last_turf_state
+	var/list/inserters = list()
 
 /obj/machinery/nuclearbomb/station/Initialize()
 	. = ..()
 	verbs -= /obj/machinery/nuclearbomb/verb/toggle_deployable
-	for(var/turf/simulated/floor/T in trange(1, src))
-		T.set_flooring(get_flooring_data(/decl/flooring/reinforced/circuit/red))
-		flash_tiles += T
+	for(var/turf/simulated/floor/T in get_area(src))
+		if(istype(T.flooring, /decl/flooring/reinforced/circuit/red))
+			flash_tiles += T
 	update_icon()
+	for(var/obj/machinery/self_destruct/ch in get_area(src))
+		inserters += ch
+
+/obj/machinery/nuclearbomb/station/attackby(obj/item/weapon/O as obj, mob/user as mob)
+	if(isWrench(O))
+		return
+
+/obj/machinery/nuclearbomb/station/Topic(href, href_list)
+	if((. = ..()))
+		return
+
+	if(href_list["anchor"])
+		return
+
+	if(href_list["time"])
+		if(timing)
+			to_chat(usr, "<span class='warning'>Cannot alter the timing during countdown.</span>")
+			return
+
+		var/time = text2num(href_list["time"])
+		timeleft += time
+		timeleft = Clamp(timeleft, 300, 900)
+		return 1
 
 /obj/machinery/nuclearbomb/station/Destroy()
 	flash_tiles.Cut()

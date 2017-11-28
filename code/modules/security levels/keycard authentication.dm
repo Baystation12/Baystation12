@@ -7,7 +7,7 @@
 	var/event = ""
 	var/screen = 1
 	var/confirmed = 0 //This variable is set by the device that confirms the request.
-	var/confirm_delay = 20 //(2 seconds)
+	var/confirm_delay = 3 SECONDS
 	var/busy = 0 //Busy when waiting for authentication or an event request has been sent from this device.
 	var/obj/machinery/keycard_auth/event_source
 	var/mob/event_triggered_by
@@ -33,9 +33,11 @@
 		if(access_keycard_auth in ID.access)
 			if(active == 1)
 				//This is not the device that made the initial request. It is the device confirming the request.
-				if(event_source)
+				if(event_source && event_source.event_triggered_by != usr)
 					event_source.confirmed = 1
 					event_source.event_confirmed_by = usr
+				else
+					to_chat(user, "<span class='warning'>Unable to confirm, DNA matches that of origin.</span>")
 			else if(screen == 2)
 				event_triggered_by = usr
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
@@ -72,6 +74,7 @@
 
 		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Emergency Maintenance Access'>Grant Emergency Maintenance Access</A></li>"
 		dat += "<li><A href='?src=\ref[src];triggerevent=Revoke Emergency Maintenance Access'>Revoke Emergency Maintenance Access</A></li>"
+		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Nuclear Authorization Code'>Grant Nuclear Authorization Code</A></li>"
 		dat += "</ul>"
 		user << browse(dat, "window=keycard_auth;size=500x250")
 	if(screen == 2)
@@ -159,6 +162,13 @@
 
 			trigger_armed_response_team(1)
 			feedback_inc("alert_keycard_auth_ert",1)
+		if("Grant Nuclear Authorization Code")
+			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in world
+			if(nuke)
+				to_chat(usr, "The nuclear authorization code is [nuke.r_code]")
+			else
+				to_chat(usr, "No self destruct terminal found.")
+			feedback_inc("alert_keycard_auth_nukecode",1)
 
 /obj/machinery/keycard_auth/proc/is_ert_blocked()
 	if(config.ert_admin_call_only) return 1
