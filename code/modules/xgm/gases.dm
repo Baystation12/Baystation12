@@ -151,6 +151,9 @@
 	molar_mass = 0.017	// kg/mol
 	flags = XGM_GAS_CONTAMINANT
 
+	tile_overlay = "chlorine"
+	overlay_limit = 0.7
+
 /decl/xgm_gas/vapor
 	id = "watervapor"
 	name = "Water Vapor"
