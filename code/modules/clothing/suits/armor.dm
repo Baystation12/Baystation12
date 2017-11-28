@@ -386,6 +386,9 @@
 
 /obj/item/clothing/suit/armor/pcarrier/light/nt
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/nt)
+	
+/obj/item/clothing/suit/armor/pcarrier/light/press
+	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/press)
 
 /obj/item/clothing/suit/armor/pcarrier/medium
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate/medium, /obj/item/clothing/accessory/storage/pouches)
@@ -412,6 +415,11 @@
 	name = "tan plate carrier"
 	desc = "A lightweight tan plate carrier vest. It can be equipped with armor plates, but provides no protection of its own."
 	icon_state = "pcarrier_tan"
+	
+/obj/item/clothing/suit/armor/pcarrier/press
+	name = "press plate carrier"
+	desc = "A lightweight plate carrier for press personnel in conflict conditions. It can be equipped with armor plates, but provides no protection of its own."
+	icon_state = "pcarrier_press"
 
 /obj/item/clothing/suit/armor/pcarrier/tan/tactical
 	name = "tactical plate carrier"
