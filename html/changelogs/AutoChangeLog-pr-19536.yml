@@ -1,4 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - tweak: "Meteor mode now progresses a bit faster on difficulty scale, and can produce bigger waves in the end."

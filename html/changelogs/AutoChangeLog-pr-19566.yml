@@ -1,9 +1,0 @@
-author: "Orelbon"
-delete-after: True
-changes: 
-  - rscadd: "Self Destruct Sequence Has been revamped."
-  - rscadd: "Keycard device can now be used to get the nuke code."
-  - tweak: "Keycard device now waits 3 seconds for someone else to swipe."
-  - rscadd: "The vault has been replaced by the self destruct room on deck 1."
-  - tweak: "The engineering supply room was moved into the side of the hallway on deck 1."
-  - tweak: "The vacant office was moved to behind the self destruct room."

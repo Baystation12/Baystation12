@@ -1,5 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "Added new scrub and surgical cap colours to random spawns and loadout: white, lilac, teal, and heliodor."
-  - rscadd: "Added colour selection to scrubs and surgical caps in the loadout."
