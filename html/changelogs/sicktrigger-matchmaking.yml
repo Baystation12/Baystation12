@@ -1,0 +1,6 @@
+author: sick trigger
+
+delete-after: True
+
+changes: 
+  - rscadd: "Finalizing a matchmaking connection now informs the other player."
