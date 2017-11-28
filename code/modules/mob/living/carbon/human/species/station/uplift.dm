@@ -51,7 +51,7 @@
 	pass_flags = PASSTABLE
 	holder_type = /obj/item/weapon/holder
 
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_EYE_COLOR | HAS_UNDERWEAR
+	appearance_flags = HAS_HAIR_COLOR | HAS_EYE_COLOR | HAS_UNDERWEAR
 
 	flesh_color = "#ECCD90"
 	base_color = "#2E2E2E"
