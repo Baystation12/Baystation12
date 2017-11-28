@@ -118,7 +118,7 @@
 	name = "Paramedic equipment"
 	contains = list(/obj/item/weapon/storage/belt/medical/emt,
 					/obj/item/device/radio/headset/headset_med,
-					/obj/item/clothing/under/rank/medical/black,
+					/obj/item/clothing/under/rank/medical/scrubs/black,
 					/obj/item/clothing/accessory/armband/medgreen,
 					/obj/item/clothing/glasses/hud/health,
 					/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -159,15 +159,15 @@
 
 /decl/hierarchy/supply_pack/medical/medicalscrubs
 	name = "Medical scrubs"
-	contains = list(/obj/item/clothing/shoes/white = 3,
-					/obj/item/clothing/under/rank/medical/blue = 3,
-					/obj/item/clothing/under/rank/medical/green = 3,
-					/obj/item/clothing/under/rank/medical/purple = 3,
-					/obj/item/clothing/under/rank/medical/black = 3,
-					/obj/item/clothing/head/surgery = 3,
-					/obj/item/clothing/head/surgery/purple = 3,
-					/obj/item/clothing/head/surgery/blue = 3,
-					/obj/item/clothing/head/surgery/green = 3,
+	contains = list(/obj/item/clothing/shoes/white = 4,
+					/obj/item/clothing/under/rank/medical/scrubs/blue,
+					/obj/item/clothing/under/rank/medical/scrubs/green,
+					/obj/item/clothing/under/rank/medical/scrubs/purple,
+					/obj/item/clothing/under/rank/medical/scrubs/black,
+					/obj/item/clothing/head/surgery/black,
+					/obj/item/clothing/head/surgery/purple,
+					/obj/item/clothing/head/surgery/blue,
+					/obj/item/clothing/head/surgery/green,
 					/obj/item/weapon/storage/box/masks,
 					/obj/item/weapon/storage/box/gloves)
 	cost = 15
@@ -257,7 +257,7 @@
 
 /decl/hierarchy/supply_pack/medical/sterile
 	name = "Sterile equipment crate"
-	contains = list(/obj/item/clothing/under/rank/medical/green = 2,
+	contains = list(/obj/item/clothing/under/rank/medical/scrubs/green = 2,
 					/obj/item/clothing/head/surgery/green = 2,
 					/obj/item/weapon/storage/box/masks,
 					/obj/item/weapon/storage/box/gloves,
