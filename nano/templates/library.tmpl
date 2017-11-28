@@ -1,0 +1,73 @@
+{{if data.error}}
+	<h2>Error</h2>
+	{{:data.error}}<br><br>
+	{{:helper.link("Reset", null, {'reseterror' : 1})}}
+{{else data.current_book}}
+	<h2>{{:data.current_book.title}}</h2>
+	<div class="item">
+		<div class="itemLabel">
+			Author: 
+		</div>
+		<div class="itemContent">
+			 {{:data.current_book.author}}
+		</div>
+		<div class="itemLabel">
+			USBN: 
+		</div>
+		<div class="itemContent">
+			{{:data.current_book.id}}
+		</div>
+		<div class="itemLabel">
+			Commands: 
+		</div>
+		<div class="itemContent">
+			{{:helper.link("Close", null, {'closebook' : 1})}}
+			{{:helper.link("Print", null, {'printbook' : 1})}}
+		</div>
+	</div>
+	{{:data.current_book.content}}
+{{else}}
+	<h2>External Archives</h2>
+	<div class="item">
+		<div class="itemLabel">
+			Scanner:
+		</div>
+		<div class="itemContent">
+			{{:data.scanner ? 'Connected' : 'Not Connected'}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Commands:
+		</div>
+		<div class="itemContent">
+			{{:helper.link("View By USBN", null, {'viewid' : 1})}}
+			{{:helper.link("Upload From Scanner", null, {'uploadbook' : 1})}}
+			{{:helper.link("Connect to Scanner", null, {'connectscanner' : 1})}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Sort by:
+		</div>
+		<div class="itemContent">
+			{{:helper.link("Title", null, {'sortby' : 'title'})}}
+			{{:helper.link("Author", null, {'sortby' : 'author'})}}
+			{{:helper.link("Category", null, {'sortby' : 'category'})}}
+			{{:helper.link("USBN", null, {'sortby' : 'id'})}}
+		</div>
+	</div>
+
+	<table style="width:100%">
+		<tr><th style="width:20%">Commands<th style="width:40%">Title<th style="width:15%">Author<th style="width:15%">Category<th style="width:10%">USBN
+		{{for data.book_list}}
+		<tr><td>{{:helper.link("View", null, {'viewbook' : value.id})}}
+			<td>{{:value.title}}
+			<td>{{:value.author}}
+			<td>{{:value.category}}
+			<td>{{:value.id}}
+		</div>
+		{{/for}}
+	</table>
+{{/if}}
+<br><br><hr><i>NTOS v2.0.4b Copyright NanoTrasen 2557 - 2561</i>

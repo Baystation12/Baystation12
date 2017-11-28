@@ -875,7 +875,6 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Executive Officer"
-	minimal_player_age = 3
 	ideal_character_age = 20
 	alt_titles = list(
 		"Janitor")
@@ -959,8 +958,8 @@
 	selection_color = "#515151"
 	ideal_character_age = 20
 	alt_titles = list(
-		"Junior Engineer",
-		"Junior Corpsman",
+		"Engineer Trainee",
+		"Corpsman Trainee",
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
