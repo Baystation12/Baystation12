@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: True
+changes:
+  - bugfix: "Fixes cyborgs being unable to repair doors."
