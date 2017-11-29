@@ -5,7 +5,7 @@
 	#include "cadulus_elevator.dm"
 	#include "cadulus_holodecks.dm"
 	#include "cadulus_overmap.dm"
-//	#include "cadulus_presets.dm"
+	#include "cadulus_presets.dm"
 	#include "cadulus_ranks.dm"
 	#include "cadulus_shuttles.dm"
 	#include "cadulus_unit_testing.dm"
