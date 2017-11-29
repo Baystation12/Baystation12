@@ -70,19 +70,14 @@
 	gear_tweaks += new/datum/gear_tweak/path(suits)
 
 /datum/gear/uniform/scrubs
-	display_name = "medical scrubs"
-	path = /obj/item/clothing/under/rank/medical
+	display_name = "standard medical scrubs"
+	path = /obj/item/clothing/under/rank/medical/scrubs
 	allowed_roles = STERILE_ROLES
+	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/uniform/scrubs/New()
-	..()
-	var/scrubcolor = list()
-	scrubcolor["black scrubs"] = /obj/item/clothing/under/rank/medical/black
-	scrubcolor["blue scrubs"] = /obj/item/clothing/under/rank/medical/blue
-	scrubcolor["green scrubs"] = /obj/item/clothing/under/rank/medical/green
-	scrubcolor["navy blue scrubs"] = /obj/item/clothing/under/rank/medical/navyblue
-	scrubcolor["purple scrubs"] = /obj/item/clothing/under/rank/medical/purple
-	gear_tweaks += new/datum/gear_tweak/path(scrubcolor)
+/datum/gear/uniform/scrubs/custom
+	display_name = "scrubs, colour selection"
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/dress
 	display_name = "dress selection"
@@ -139,7 +134,13 @@
 
 /datum/gear/uniform/formal_pants/custom
 	display_name = "suit pants, colour selection"
-	path = /obj/item/clothing/under/formal_pants/
+	path = /obj/item/clothing/under/formal_pants
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/uniform/formal_pants/custom
+	display_name = "baggy suit pants, colour selection"
+	path = /obj/item/clothing/under/formal_pants/baggy
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 

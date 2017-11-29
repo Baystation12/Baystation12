@@ -2590,7 +2590,7 @@
 "aYw" = (/obj/random/maintenance,/turf/simulated/floor/shuttle/white,/area/skipjack_station/start)
 "aYx" = (/obj/structure/table/standard,/obj/item/weapon/bonesetter,/obj/item/weapon/bonegel,/obj/item/weapon/FixOVein,/obj/item/weapon/reagent_containers/syringe/antiviral,/obj/item/weapon/reagent_containers/syringe/antiviral,/turf/simulated/floor/shuttle/white,/area/skipjack_station/start)
 "aYy" = (/obj/structure/toilet{dir = 4},/obj/machinery/light/small{dir = 8},/turf/simulated/floor/shuttle/black,/area/skipjack_station/start)
-"aYz" = (/obj/structure/closet/crate,/obj/item/clothing/suit/space/pirate,/obj/item/clothing/under/rank/medical/black,/turf/simulated/floor/shuttle/red,/area/skipjack_station/start)
+"aYz" = (/obj/structure/closet/crate,/obj/item/clothing/suit/space/pirate,/obj/item/clothing/under/rank/medical/scrubs/black,/turf/simulated/floor/shuttle/red,/area/skipjack_station/start)
 "aYA" = (/obj/structure/bed,/obj/item/weapon/bedsheet/green,/obj/machinery/light/small{dir = 4},/turf/simulated/floor/shuttle/red,/area/skipjack_station/start)
 "aYB" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/fire{pixel_x = 1},/obj/item/weapon/storage/firstaid/o2{pixel_x = 3; pixel_y = 3},/turf/simulated/floor/shuttle/white,/area/skipjack_station/start)
 "aYC" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/adv{pixel_x = 1},/obj/item/weapon/storage/firstaid/toxin{pixel_x = 3; pixel_y = 3},/obj/machinery/light/small{dir = 4},/obj/item/weapon/melee/baton/cattleprod,/turf/simulated/floor/shuttle/white,/area/skipjack_station/start)
