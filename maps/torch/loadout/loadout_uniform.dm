@@ -138,7 +138,7 @@
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/uniform/formal_pants/custom
+/datum/gear/uniform/formal_pants/baggycustom
 	display_name = "baggy suit pants, colour selection"
 	path = /obj/item/clothing/under/formal_pants/baggy
 	allowed_roles = FORMAL_ROLES
