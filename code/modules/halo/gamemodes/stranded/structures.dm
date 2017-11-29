@@ -66,12 +66,49 @@
 	src.health -= damage
 	playsound(src.loc, 'sound/weapons/bite.ogg', 50, 0, 0)
 	if (src.health <= 0)
-		new /obj/item/stack/material/steel(src.loc)
+		new /obj/structure/tanktrap_dead(src.loc)
+		if(prob(50))
+			new /obj/item/stack/rods(src.loc)
 		if(prob(50))
 			new /obj/item/stack/rods(src.loc)
 		if(prob(50))
 			new /obj/item/stack/material/steel(src.loc)
+		if(prob(50))
+			new /obj/item/stack/material/steel(src.loc)
 		qdel(src)
+
+/obj/structure/tanktrap_dead/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(do_after(user, 20) && WT.remove_fuel(3, user))
+			user.visible_message("<span class='info'>You salvage the tank trap.</span>")
+			new /obj/item/stack/material/steel(src.loc)
+			new /obj/item/stack/material/steel(src.loc)
+			new /obj/item/stack/material/steel(src.loc)
+			qdel(src)
+		else
+			to_chat(user, "<span class='warning'>There is not enough fuel to salvage the tank trap!</span>")
+	else
+		..()
+
+/obj/structure/tanktrap_dead
+	name = "tanktrap"
+	icon = 'desert_outpost.dmi'
+	icon_state = "tanktrap_dead"
+	density = 0
+	anchored = 1
+
+/obj/structure/tanktrap_dead/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.remove_fuel(1, user))
+			user.visible_message("<span class='info'>You salvage the ruined tank trap.</span>")
+			new /obj/item/stack/material/steel(src.loc)
+			qdel(src)
+		else
+			to_chat(user, "<span class='warning'>There is not enough fuel to salvage the tank trap!</span>")
+	else
+		..()
 
 /obj/structure/sandbag
 	name = "sandbag"
