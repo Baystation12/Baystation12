@@ -201,26 +201,8 @@ is facing either north or east.
 When the mob faces north the back item icon is shifted 12 pixes down and 7 pixels to the right.
 When the mob faces east the back item icon is shifted 2 pixels down and 12 pixels to the left.
 
-slot_back_str
-slot_l_hand_str
-slot_r_hand_str
-slot_w_uniform_str
-slot_head_str
-slot_wear_suit_str
-slot_l_ear_str
-slot_r_ear_str
-slot_belt_str
-slot_shoes_str
-slot_head_str
-slot_wear_mask_str
-slot_handcuffed_str
-slot_legcuffed_str
-slot_wear_mask_str
-slot_wear_id_str
-slot_gloves_str
-slot_glasses_str
-slot_s_store_str
-slot_tie_str
+The slots that you can use are found in items_clothing.dm and are the inventory slot string ones, so make sure
+	you use the _str version of the slot.
 */
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
