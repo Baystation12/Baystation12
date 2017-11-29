@@ -662,12 +662,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	return (slot != slot_wear_suit_str && slot != slot_head_str)
 
-/obj/item/proc/get_mob_overlay(mob/user_mob, slot)
-	var/bodytype = "Default"
-	if(ishuman(user_mob))
-		var/mob/living/carbon/human/user_human = user_mob
-		bodytype = user_human.species.get_bodytype(user_human)
-
+/obj/item/proc/get_icon_state(mob/user_mob, slot)
 	var/mob_state
 	if(item_state_slots && item_state_slots[slot])
 		mob_state = item_state_slots[slot]
@@ -675,8 +670,37 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_state = item_state
 	else
 		mob_state = icon_state
+	return mob_state
+
+/obj/item/proc/spec_shift_dir(var/dir_given)
+	switch(dir_given)
+		if("NORTH")
+			return NORTH
+		if("SOUTH")
+			return SOUTH
+		if("EAST")
+			return EAST
+		if("WEST")
+			return WEST
+
+/obj/item/proc/dir_shift(var/icon/given_icon, var/dir_given, var/x = 0, var/y = 0)
+	var/icon/I = new(given_icon, dir = dir_given)
+	I.Shift(EAST, x)
+	I.Shift(NORTH, y)
+	given_icon.Insert(I, dir = dir_given)
+	return given_icon
+
+/obj/item/proc/get_mob_overlay(mob/user_mob, slot)
+	var/bodytype = "Default"
+	var/mob/living/carbon/human/user_human
+	if(ishuman(user_mob))
+		user_human = user_mob
+		bodytype = user_human.species.get_bodytype(user_human)
+
+	var/mob_state = get_icon_state(user_mob, slot)
 
 	var/mob_icon
+	var/spritesheet = FALSE
 	if(icon_override)
 		mob_icon = icon_override
 		if(slot == 	slot_l_hand_str || slot == slot_l_ear_str)
@@ -688,13 +712,39 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_l"
 		if(slot == slot_r_ear)
 			mob_state = "[mob_state]_r"
-
+		spritesheet = TRUE
 		mob_icon = sprite_sheets[bodytype]
 	else if(item_icons && item_icons[slot])
 		mob_icon = item_icons[slot]
 	else
 		mob_icon = default_onmob_icons[slot]
-	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)
+
+	var/image/ret_overlay
+	if(user_human && user_human.species && user_human.species.equip_adjust.len && !spritesheet)
+		var/list/equip_adjusts = user_human.species.equip_adjust
+		if(equip_adjusts[slot])
+			var/image_key = "[user_human.species] [mob_icon] [mob_state] [color]"
+			ret_overlay = user_human.species.equip_overlays[image_key]
+			if(!ret_overlay)
+				var/icon/final_I = new(mob_icon, icon_state = mob_state)
+				var/list/shifts = equip_adjusts[slot]
+				if(shifts && shifts.len)
+					var/shift_facing
+					for(shift_facing in shifts)
+						var/list/facing_list = shifts[shift_facing]
+						final_I = dir_shift(final_I, spec_shift_dir(shift_facing), facing_list["x"], facing_list["y"])
+				ret_overlay = overlay_image(final_I, color, flags = RESET_COLOR)
+
+				user_human.species.equip_overlays[image_key] = ret_overlay
+		else
+			ret_overlay = overlay_image(mob_icon,mob_state,color,RESET_COLOR)
+
+	return ret_overlay
+
+/mob/verb/test_overshenans()
+   var/icon/I = new(usr.icon,icon_state = "",dir = EAST)
+   I.Turn(90)   //rotate clockwise 90 degrees
+   usr.icon = I
 
 /obj/item/proc/get_examine_line()
 	if(blood_DNA)
