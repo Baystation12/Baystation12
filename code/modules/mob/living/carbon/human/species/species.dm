@@ -184,6 +184,9 @@
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
 
+	var/list/item_icon_offsets = list(0,0) //A list (x,y) of offsets to apply to inhand images.
+	//NOTE FOR ABOVE: Posive X moves right, positive Y moves up.
+
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return
 
