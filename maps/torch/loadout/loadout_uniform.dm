@@ -137,11 +137,23 @@
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
 
+/datum/gear/uniform/formal_pants/custom
+	display_name = "suit pants, colour selection"
+	path = /obj/item/clothing/under/formal_pants/
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
 	path = /obj/item/clothing/under/shorts/jeans
 	allowed_roles = RESTRICTED_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
+
+/datum/gear/uniform/shorts/custom
+	display_name = "athletic shorts, colour selection"
+	path = /obj/item/clothing/under/shorts/
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/turtleneck
 	display_name = "sweater"
