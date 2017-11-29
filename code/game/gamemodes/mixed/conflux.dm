@@ -3,6 +3,7 @@
 	round_description = "A space wizard and a cult have invaded!"
 	extended_round_description = "Cultists and wizards spawn during this round."
 	config_tag = "conflux"
+	votable = 0
 	required_players = 15
 	required_enemies = 5
 	end_on_antag_death = 0
