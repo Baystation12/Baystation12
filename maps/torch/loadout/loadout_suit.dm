@@ -64,17 +64,23 @@
 	allowed_roles = list(/datum/job/cargo_contractor, /datum/job/merchant)
 
 /datum/gear/suit/suit_jacket
-	display_name = "suit jackets"
-	path = /obj/item/clothing/suit/storage
+	display_name = "standard suit jackets"
+	path = /obj/item/clothing/suit/storage/toggle/suit
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/suit/suit_jacket/New()
 	..()
 	var/suitjackets = list()
-	suitjackets["black suit jacket"] = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
-	suitjackets["blue suit jacket"] = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
-	suitjackets["purple suit jacket"] = /obj/item/clothing/suit/storage/lawyer/purpjacket
+	suitjackets["black suit jacket"] = /obj/item/clothing/suit/storage/toggle/suit/black
+	suitjackets["blue suit jacket"] = /obj/item/clothing/suit/storage/toggle/suit/blue
+	suitjackets["purple suit jacket"] = /obj/item/clothing/suit/storage/toggle/suit/purple
 	gear_tweaks += new/datum/gear_tweak/path(suitjackets)
+
+/datum/gear/suit/custom_suit_jacket
+	display_name = "suit jacket, colour selection"
+	path = /obj/item/clothing/suit/storage/toggle/suit
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/suit/hazard
 	display_name = "hazard vests"

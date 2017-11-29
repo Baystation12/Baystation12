@@ -114,7 +114,7 @@ decl/hierarchy/mil_uniform/civilian
 	branch = /datum/mil_branch/civilian
 
 	dress_under = /obj/item/clothing/under/rank/internalaffairs/plain
-	dress_over = /obj/item/clothing/suit/storage/toggle/internalaffairs/plain
+	dress_over = /obj/item/clothing/suit/storage/toggle/suit/black
 	dress_shoes = /obj/item/clothing/shoes/dress
 	dress_extra = list(/obj/item/clothing/accessory/wcoat)
 

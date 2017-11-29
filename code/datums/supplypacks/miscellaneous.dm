@@ -116,8 +116,8 @@
 /decl/hierarchy/supply_pack/miscellaneous/formal_wear
 	contains = list(/obj/item/clothing/head/bowler,
 					/obj/item/clothing/head/that,
-					/obj/item/clothing/suit/storage/toggle/lawyer/bluejacket,
-					/obj/item/clothing/suit/storage/lawyer/purpjacket,
+					/obj/item/clothing/suit/storage/toggle/suit/blue,
+					/obj/item/clothing/suit/storage/toggle/suit/purple,
 					/obj/item/clothing/under/suit_jacket,
 					/obj/item/clothing/under/suit_jacket/female,
 					/obj/item/clothing/under/suit_jacket/really_black,
