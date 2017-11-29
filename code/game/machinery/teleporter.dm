@@ -38,10 +38,6 @@
 	if(locked)
 		var/turf/T = get_turf(locked)
 		to_chat(user, "<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>")
-		if(hub.accurate)
-			to_chat(user, "<span class='notice'>Test fire completed.</span>")
-		else
-			to_chat(user, "<span class='warning'>Destination untested. Test firing recommended.</span>")
 
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
@@ -140,7 +136,6 @@
 		return
 
 	src.locked = L[desc]
-	hub.accurate = 0
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='notice'>Locked In</span>", 2)
 	src.add_fingerprint(usr)
@@ -179,7 +174,6 @@
 	desc = "It's the hub of a teleporting machine."
 	icon_state = "tele0"
 	dir = 4
-	var/accurate = 0
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 2000
@@ -205,24 +199,10 @@
 		for(var/mob/O in hearers(src, null))
 			O.show_message("<span class='warning'>Failure: Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.</span>")
 		return
-	if (istype(M, /atom/movable))
-		if(prob(5) && !accurate) //oh dear a problem
-			var/turf/T = get_turf(M)
-			var/destination_z = T ? GetConnectedZlevels(T.z) : GetConnectedZlevels(z)
-			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), destination_z), 2)
-		else
-			do_teleport(M, com.locked) //dead-on precision
-
-		if(com.one_time_use) //Make one-time-use cards only usable one time!
-			com.one_time_use = 0
-			com.locked = null
-	else
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(5, 1, src)
-		s.start()
-		accurate = 1
-		for(var/mob/B in hearers(src, null))
-			B.show_message("<span class='notice'>Test fire completed.</span>")
+	do_teleport(M, com.locked)
+	if(com.one_time_use) //Make one-time-use cards only usable one time!
+		com.one_time_use = 0
+		com.locked = null
 	return
 /*
 /proc/do_teleport(atom/movable/M as mob|obj, atom/destination, precision)
@@ -361,39 +341,12 @@
 
 	if (com)
 		com.icon_state = "tele0"
-		com.accurate = 0
 		com.update_use_power(1)
 		update_use_power(1)
 		for(var/mob/O in hearers(src, null))
 			O.show_message("<span class='notice'>Teleporter disengaged!</span>", 2)
 	src.add_fingerprint(usr)
 	src.engaged = 0
-	return
-
-/obj/machinery/teleport/station/AltClick()
-	if(!usr.incapacitated() && Adjacent(usr))
-		testfire()
-
-
-/obj/machinery/teleport/station/verb/testfire()
-	set name = "Test Fire Teleporter"
-	set category = "Object"
-	set src in oview(1)
-
-	if(stat & (BROKEN|NOPOWER) || !istype(usr,/mob/living))
-		return
-
-	if (com && !active)
-		active = 1
-		for(var/mob/O in hearers(src, null))
-			O.show_message("<span class='notice'>Test firing!</span>", 2)
-		com.teleport()
-		use_power(5000)
-
-		spawn(30)
-			active=0
-
-	src.add_fingerprint(usr)
 	return
 
 /obj/machinery/teleport/station/update_icon()

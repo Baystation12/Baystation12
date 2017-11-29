@@ -116,6 +116,13 @@
 #define MOB_TINY 		5
 #define MOB_MINISCULE	1
 
+// Defines how strong the species is compared to humans. Think like strength in D&D
+#define STR_VHIGH       2
+#define STR_HIGH        1
+#define STR_MEDIUM      0
+#define STR_LOW        -1
+#define STR_VLOW       -2
+
 // Gluttony levels.
 #define GLUT_TINY 1       // Eat anything tiny and smaller
 #define GLUT_SMALLER 2    // Eat anything smaller than we are

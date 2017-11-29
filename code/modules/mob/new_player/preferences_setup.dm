@@ -8,7 +8,7 @@ datum/preferences
 		h_style = random_hair_style(gender, species)
 		f_style = random_facial_hair_style(gender, species)
 		if(current_species)
-			if(current_species.appearance_flags & HAS_SKIN_TONE)
+			if(current_species.appearance_flags & HAS_A_SKIN_TONE)
 				s_tone = random_skin_tone()
 			if(current_species.appearance_flags & HAS_SKIN_COLOR)
 				r_skin = rand (0,255)

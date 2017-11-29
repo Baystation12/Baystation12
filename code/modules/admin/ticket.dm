@@ -119,7 +119,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 					status = "Assigned to [english_list(ticket.assigned_admin_ckeys(), "no one")]"
 				if(TICKET_CLOSED)
 					status = "Closed by [ticket.closed_by.ckey]"
-			ticket_dat += "<li>"
+			ticket_dat += "<li style='padding-bottom:10px'>"
 			if(open_ticket && open_ticket == ticket)
 				ticket_dat += "<i>"
 			ticket_dat += "Ticket #[id] - [ticket.owner.ckey] - [status]<br /><a href='byond://?src=\ref[src];action=view;ticket=\ref[ticket]'>VIEW</a>"
@@ -129,6 +129,10 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=take;ticket=\ref[ticket]'>[(open == 1) ? "TAKE" : "JOIN"]</a>"
 				if(ticket.status != TICKET_CLOSED && (C.holder || ticket.status == TICKET_OPEN))
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=close;ticket=\ref[ticket]'>CLOSE</a>"
+			if(C.holder)
+				var/client/owner_client = client_by_ckey(ticket.owner.ckey)
+				var/ref_mob = "\ref[owner_client.mob]"
+				ticket_dat += " - <A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A> - <A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A> - <A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A> - <A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A> - [admin_jump_link(owner_client.mob, src)]"
 			if(open_ticket && open_ticket == ticket)
 				ticket_dat += "</i>"
 			ticket_dat += "</li>"
@@ -142,7 +146,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 			var/list/msg_dat = list()
 			for(var/datum/ticket_msg/msg in open_ticket.msgs)
 				var/msg_to = msg.msg_to ? msg.msg_to : "Adminhelp"
-				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [msg.msg]</li>"
+				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [C.holder ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
 
 			if(msg_dat.len)
 				dat += "<ul>[jointext(msg_dat, null)]</ul></div>"
@@ -212,7 +216,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 
 	var/datum/ticket_panel/ticket_panel = new()
 	ticket_panels[src] = ticket_panel
-	ticket_panel.ticket_panel_window = new(src.mob, "ticketpanel", "Ticket Manager", 800, 600, ticket_panel)
+	ticket_panel.ticket_panel_window = new(src.mob, "ticketpanel", "Ticket Manager", 1024, 768, ticket_panel)
 
 	ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat())
 	ticket_panel.ticket_panel_window.open()

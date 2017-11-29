@@ -2,33 +2,14 @@
 //This is a list of words which are ignored by the parser when comparing message contents for names. MUST BE IN LOWER CASE!
 var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","alien","as")
 
-/client/verb/adminhelp(msg as text)
-	set category = "Admin"
-	set name = "Adminhelp"
-
-	//handle muting and automuting
-	if(prefs.muted & MUTE_ADMINHELP)
-		to_chat(src, "<font color='red'>Error: Admin-PM: You cannot send adminhelps (Muted).</font>")
-		return
-
-	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
-
-
-	//clean the input msg
-	if(!msg)
-		return
-	msg = sanitize(msg)
-	if(!msg)
-		return
-	var/original_msg = msg
+/proc/generate_ahelp_key_words(var/mob/mob, var/msg)
+	var/list/surnames = list()
+	var/list/forenames = list()
+	var/list/ckeys = list()
 
 	//explode the input msg into a list
 	var/list/msglist = splittext(msg, " ")
 
-	//generate keywords lookup
-	var/list/surnames = list()
-	var/list/forenames = list()
-	var/list/ckeys = list()
 	for(var/mob/M in SSmobs.mob_list)
 		var/list/indexing = list(M.real_name, M.name)
 		if(M.mind)	indexing += M.mind.name
@@ -58,8 +39,10 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		var/word = ckey(original_word)
 		if(word)
 			if(!(word in adminhelp_ignored_words))
-				if(word == "ai")
+				if(word == "ai" && !ai_found)
 					ai_found = 1
+					msg += "<b>[original_word] <A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A></b> "
+					continue
 				else
 					var/mob/found = ckeys[word]
 					if(!found)
@@ -69,21 +52,42 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 					if(found)
 						if(!(found in mobs_found))
 							mobs_found += found
+							msg += "<b>[original_word] <A HREF='?_src_=holder;adminmoreinfo=\ref[found]'>(?)</A>"
 							if(!ai_found && isAI(found))
 								ai_found = 1
-							msg += "<b><font color='black'>[original_word] (<A HREF='?_src_=holder;adminmoreinfo=\ref[found]'>?</A>)</font></b> "
+								msg += " <A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A>"
+							msg += "</b> "
 							continue
 			msg += "[original_word] "
+
+	return msg
+
+/client/verb/adminhelp(msg as text)
+	set category = "Admin"
+	set name = "Adminhelp"
+
+	//handle muting and automuting
+	if(prefs.muted & MUTE_ADMINHELP)
+		to_chat(src, "<font color='red'>Error: Admin-PM: You cannot send adminhelps (Muted).</font>")
+		return
+
+	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
+
+
+	//clean the input msg
+	if(!msg)
+		return
+	msg = sanitize(msg)
+	if(!msg)
+		return
+	var/original_msg = msg
+
 
 	if(!mob) //this doesn't happen
 		return
 
-	var/ai_cl
-	if(ai_found)
-		ai_cl = " (<A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>CL</A>)"
-
-			//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
-			//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
+	//generate keywords lookup
+	msg = generate_ahelp_key_words(mob, msg)
 
 	// handle ticket
 	var/datum/client_lite/client_lite = client_repository.get_lite_client(src)
@@ -106,8 +110,12 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	ticket.msgs += new /datum/ticket_msg(src.ckey, null, original_msg)
 	update_ticket_panels()
 
-	var/mentor_msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
-	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+
+	//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
+	//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
+
+	var/mentor_msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 

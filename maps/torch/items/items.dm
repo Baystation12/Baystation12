@@ -1,28 +1,6 @@
-/obj/item/device/pda/explorer
-	icon_state = "pda-explorer"
-
-/obj/item/device/pda/pathfinder
-	icon_state = "pda-pathfinder"
-
-/obj/item/weapon/pen/multi/cmd/xo
-	name = "executive officer's pen"
-	icon = 'maps/torch/icons/obj/uniques.dmi'
-	icon_state = "pen_xo"
-	desc = "A slightly bulky pen with a silvery case. Twisting the top allows you to switch the nib for different colors."
-
-/obj/item/weapon/pen/multi/cmd/co
-	name = "commanding officer's pen"
-	icon = 'maps/torch/icons/obj/uniques.dmi'
-	icon_state = "pen_co"
-	desc = "A slightly bulky pen with a golden case. Twisting the top allows you to switch the nib for different colors."
-
-/obj/item/weapon/pen/multi/cmd/attack_self(mob/user)
-	if(++selectedColor > 3)
-		selectedColor = 1
-
-	colour = colors[selectedColor]
-
-	to_chat(user, "<span class='notice'>Changed color to '[colour].'</span>")
+/*******************
+Random item spawning
+*******************/
 
 /obj/random/solgov
 	name = "random solgov equipment"
@@ -69,6 +47,42 @@
 /obj/random/maintenance/solgov/clean/spawn_choices()
 	return list(/obj/random/solgov = 3,
 				/obj/random/maintenance/clean = 800)
+
+/*******************
+Torch specific items
+*******************/
+
+/obj/item/device/pda/explorer
+	icon_state = "pda-explorer"
+
+/obj/item/device/pda/pathfinder
+	icon_state = "pda-pathfinder"
+
+/***********
+Unique items
+***********/
+
+/obj/item/weapon/pen/multi/cmd/xo
+	name = "executive officer's pen"
+	icon = 'maps/torch/icons/obj/uniques.dmi'
+	icon_state = "pen_xo"
+	desc = "A slightly bulky pen with a silvery case. Twisting the top allows you to switch the nib for different colors."
+
+/obj/item/weapon/pen/multi/cmd/co
+	name = "commanding officer's pen"
+	icon = 'maps/torch/icons/obj/uniques.dmi'
+	icon_state = "pen_co"
+	desc = "A slightly bulky pen with a golden case. Twisting the top allows you to switch the nib for different colors."
+
+/obj/item/weapon/pen/multi/cmd/attack_self(mob/user)
+	if(++selectedColor > 3)
+		selectedColor = 1
+	colour = colors[selectedColor]
+	to_chat(user, "<span class='notice'>Changed color to '[colour].'</span>")
+
+/******
+Weapons
+******/
 
 /obj/item/weapon/gun/projectile/revolver/webley/captain
 	name = "captain's revolver"

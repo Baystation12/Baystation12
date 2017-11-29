@@ -145,3 +145,12 @@
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/merchant())
 	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+
+// Library
+/obj/item/modular_computer/console/preset/library/install_default_programs()
+	..()
+	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
+	hard_drive.store_file(new/datum/computer_file/program/newsbrowser())
+	hard_drive.store_file(new/datum/computer_file/program/email_client())
+	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	hard_drive.store_file(new/datum/computer_file/program/library())

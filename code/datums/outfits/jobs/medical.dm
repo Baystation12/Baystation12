@@ -33,7 +33,7 @@
 
 /decl/hierarchy/outfit/job/medical/doctor/surgeon
 	name = OUTFIT_JOB_NAME("Surgeon")
-	uniform = /obj/item/clothing/under/rank/medical/blue
+	uniform = /obj/item/clothing/under/rank/medical/scrubs/blue
 	head = /obj/item/clothing/head/surgery/blue
 
 /decl/hierarchy/outfit/job/medical/doctor/virologist
@@ -57,7 +57,7 @@
 			uniform = /obj/item/clothing/under/rank/nurse
 		head = /obj/item/clothing/head/nursehat
 	else
-		uniform = /obj/item/clothing/under/rank/medical/purple
+		uniform = /obj/item/clothing/under/rank/medical/scrubs/purple
 		head = null
 
 /decl/hierarchy/outfit/job/medical/chemist
@@ -92,7 +92,7 @@
 
 /decl/hierarchy/outfit/job/medical/paramedic
 	name = OUTFIT_JOB_NAME("Paramedic")
-	uniform = /obj/item/clothing/under/rank/medical/black
+	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
 	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
 	shoes = /obj/item/clothing/shoes/jackboots
 	l_hand = /obj/item/weapon/storage/firstaid/adv
