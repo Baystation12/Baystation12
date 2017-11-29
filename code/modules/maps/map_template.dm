@@ -18,13 +18,18 @@
 	if(rename)
 		name = rename
 
-/datum/map_template/proc/preload_size(var/list/paths)
-	var/datum/map_load_metadata/M = maploader.load_map(paths, 1, 1, 1, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE)
-	if(M)
-		width = M.bounds[MAP_MAXX] - M.bounds[MAP_MINX] + 1
-		height = M.bounds[MAP_MAXY] - M.bounds[MAP_MINX] + 1
-		tallness = M.bounds[MAP_MAXZ] - M.bounds[MAP_MINZ] + 1
-	return M
+/datum/map_template/proc/preload_size()
+	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
+	for (var/mappath in mappaths)
+		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), 1, 1, 1, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE)
+		if(M)
+			bounds = extend_bounds_if_needed(bounds, M.bounds)
+		else
+			return FALSE
+	width = bounds[MAP_MAXX] - bounds[MAP_MINX] + 1
+	height = bounds[MAP_MAXY] - bounds[MAP_MINX] + 1
+	tallness = bounds[MAP_MAXZ] - bounds[MAP_MINZ] + 1
+	return TRUE
 
 /datum/map_template/proc/init_atoms(var/list/atoms)
 
@@ -73,11 +78,18 @@
 	if (x < 1) x = 1
 	if (y < 1) y = 1
 
-	var/datum/map_load_metadata/M = maploader.load_map(mappaths, x, y, no_changeturf=TRUE)
-	if (!M)
-		return
+	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
+	var/list/atoms_to_initialise = list()
 
-	for (var/z_index = M.bounds[MAP_MINZ]; z_index <= M.bounds[MAP_MAXZ]; z_index++)
+	for (var/mappath in mappaths)
+		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), x, y, no_changeturf=TRUE)
+		if (M)
+			bounds = extend_bounds_if_needed(bounds, M.bounds)
+			atoms_to_initialise += M.atoms_to_initialise
+		else
+			return FALSE
+
+	for (var/z_index = bounds[MAP_MINZ]; z_index <= bounds[MAP_MAXZ]; z_index++)
 		if (accessibility_weight)
 			GLOB.using_map.accessible_z_levels[num2text(z_index)] = accessibility_weight
 		if (base_turf_for_zs)
@@ -85,7 +97,7 @@
 		GLOB.using_map.player_levels |= z_index
 
 	//initialize things that are normally initialized after map load
-	init_atoms(M.atoms_to_initialise)
+	init_atoms(atoms_to_initialise)
 	init_shuttles()
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
 	loaded++
@@ -102,17 +114,31 @@
 	if(T.y+height > world.maxy)
 		return
 
-	var/datum/map_load_metadata/M = maploader.load_map(mappaths, T.x, T.y, T.z, cropMap=TRUE, clear_contents=clear_contents)
-	if(!M)
-		return
+	var/list/atoms_to_initialise = list()
+
+	for (var/mappath in mappaths)
+		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), T.x, T.y, T.z, cropMap=TRUE, clear_contents=clear_contents)
+		if (M)
+			atoms_to_initialise += M.atoms_to_initialise
+		else
+			return FALSE
 
 	//initialize things that are normally initialized after map load
-	init_atoms(M.atoms_to_initialise)
+	init_atoms(atoms_to_initialise)
 	init_shuttles()
 	log_game("[name] loaded at at [T.x],[T.y],[T.z]")
 	loaded++
 
 	return TRUE
+
+/datum/map_template/proc/extend_bounds_if_needed(var/list/existing_bounds, var/list/new_bounds)
+	var/list/bounds_to_combine = existing_bounds.Copy()
+	for (var/min_bound in list(MAP_MINX, MAP_MINY, MAP_MINZ))
+		bounds_to_combine[min_bound] = min(existing_bounds[min_bound], new_bounds[min_bound])
+	for (var/max_bound in list(MAP_MAXX, MAP_MAXY, MAP_MAXZ))
+		bounds_to_combine[max_bound] = max(existing_bounds[max_bound], new_bounds[max_bound])
+	return bounds_to_combine
+
 
 /datum/map_template/proc/get_affected_turfs(turf/T, centered = FALSE)
 	var/turf/placement = T

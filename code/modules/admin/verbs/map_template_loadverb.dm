@@ -69,7 +69,7 @@
 		return
 
 	var/datum/map_template/M = new(map, "[map]")
-	if(M.preload_size(map))
+	if(M.preload_size())
 		to_chat(usr, "Map template '[map]' ready to place ([M.width]x[M.height])")
 		SSmapping.map_templates[M.name] = M
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] has uploaded a map template ([map])</span>")
