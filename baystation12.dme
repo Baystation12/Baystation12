@@ -1791,6 +1791,7 @@
 #include "code\modules\mob\living\simple_animal\hostile\russian.dm"
 #include "code\modules\mob\living\simple_animal\hostile\syndicate.dm"
 #include "code\modules\mob\living\simple_animal\hostile\tree.dm"
+#include "code\modules\mob\living\simple_animal\hostile\vagrant.dm"
 #include "code\modules\mob\living\simple_animal\hostile\voxslug.dm"
 #include "code\modules\mob\living\simple_animal\hostile\commanded\_command_defines.dm"
 #include "code\modules\mob\living\simple_animal\hostile\commanded\bear_companion.dm"
