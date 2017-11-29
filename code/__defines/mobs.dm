@@ -44,6 +44,7 @@
 
 #define LEFT  1
 #define RIGHT 2
+#define UNDER 3
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.

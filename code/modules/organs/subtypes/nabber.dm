@@ -177,6 +177,7 @@
 
 /obj/item/organ/external/groin/nabber
 	name = "abdomen"
+	icon_position = UNDER
 	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/arm/nabber
@@ -193,7 +194,7 @@
 
 /obj/item/organ/external/leg/nabber
 	name = "left tail side"
-	icon_position = 0
+	icon_position = LEFT
 	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/leg/right/nabber
@@ -202,11 +203,12 @@
 
 /obj/item/organ/external/foot/nabber
 	name = "left tail tip"
-	icon_position = 0
+	icon_position = LEFT
 	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/foot/right/nabber
 	name = "right tail tip"
+	icon_position = RIGHT
 	s_col_blend = ICON_MULTIPLY
 
 /obj/item/organ/external/hand/nabber
