@@ -1,6 +1,9 @@
 /datum
 	var/tmp/gc_destroyed //Time when this object was destroyed.
+	var/list/active_timers  //for SStimer
+	var/var_edited = FALSE //Warrenty void if seal is broken
 	var/tmp/is_processing = FALSE
+	var/use_tag = FALSE
 
 #ifdef TESTING
 	var/tmp/running_find_references
@@ -16,6 +19,13 @@
 // Return the appropriate QDEL_HINT; in most cases this is QDEL_HINT_QUEUE.
 /datum/proc/Destroy(force=FALSE)
 	tag = null
+	var/list/timers = active_timers
+	active_timers = null
+	for(var/thing in timers)
+		var/datum/timedevent/timer = thing
+		if (timer.spent)
+			continue
+		qdel(timer)
 	GLOB.nanomanager && GLOB.nanomanager.close_uis(src)
 	return QDEL_HINT_QUEUE
 
