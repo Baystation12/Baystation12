@@ -627,6 +627,18 @@
 	name = "Right Sidecut"
 	icon_state = "hair_rightside"
 
+/datum/sprite_accessory/hair/slick
+	name = "Slick"
+	icon_state = "hair_slick"
+
+/datum/sprite_accessory/hair/messyhair
+	name = "Messy"
+	icon_state = "hair_messyhair"
+
+/datum/sprite_accessory/hair/averagejoe
+	name = "Average Joe"
+	icon_state = "hair_averagejoe"
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
