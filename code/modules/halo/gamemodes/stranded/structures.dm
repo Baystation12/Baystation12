@@ -276,7 +276,7 @@
 	set src = view(1)
 
 	var/list/dir_options = list("North" = NORTH,"South" = SOUTH, "East" = EAST, "West" = WEST)
-	var/newdirname = input("Pick new direction for this barbed wire","New wire direction","North") in dir_options
+	var/newdirname = input("Pick new direction for [src]","New direction","North") in dir_options
 	src.dir = dir_options[newdirname]
 
 /obj/item/empty_sandbags/attackby(obj/item/I as obj, mob/user as mob)
@@ -315,7 +315,7 @@
 
 	var/list/dir_options = list("North" = NORTH,"South" = SOUTH, "East" = EAST, "West" = WEST,\
 		"Northeast" = NORTHEAST, "Northwest" = NORTHWEST, "Southeast" = SOUTHEAST,"Southwest" = SOUTHWEST)
-	var/newdirname = input("Pick new direction for this barbed wire","New wire direction","North") in dir_options
+	var/newdirname = input("Pick new direction for [src]","New direction","North") in dir_options
 	src.dir = dir_options[newdirname]
 
 /obj/structure/bardbedwire/Crossed(atom/movable/AM)

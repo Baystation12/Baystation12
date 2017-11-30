@@ -99,7 +99,7 @@
 /obj/structure/evac_pelican/proc/attempt_enter(var/mob/L)
 	if(isliving(usr))
 		var/mob/living/M = usr
-		if(M.stat == CONSCIOUS)
+		if(!M.incapacitated())
 			var/success = 0
 			for(var/turf/T in range(1,M))
 				if(T in src.locs)
