@@ -42,6 +42,9 @@ var/z_levels = 0 // Each bit represents a connection between adjacent levels.  S
 		return null
 	return HasBelow(turf.z) ? get_step(turf, DOWN) : null
 
+#define GET_BELOW_OR_NULL(atom, z) \
+	(!(z > world.maxz || z > 17 || z < 2) && z_levels & (1 << (z - 2))) ? get_step(atom, DOWN) : null
+
 /proc/GetConnectedZlevels(z)
 	. = list(z)
 	for(var/level = z, HasBelow(level), level--)
