@@ -51,10 +51,11 @@ var/list/outfits_decls_by_type_
 	var/id_pda_assignment
 
 	var/backpack = /obj/item/weapon/storage/backpack
-	var/satchel_one  = /obj/item/weapon/storage/backpack/satchel_norm
-	var/satchel_two  = /obj/item/weapon/storage/backpack/satchel
 	var/messenger_bag = /obj/item/weapon/storage/backpack/messenger
-	var/satchel_black = /obj/item/weapon/storage/backpack/satchel_black
+	var/satchel_job  = /obj/item/weapon/storage/backpack/satchel/grey
+	var/satchel_brown  = /obj/item/weapon/storage/backpack/satchel/brown
+	var/satchel_black = /obj/item/weapon/storage/backpack/satchel/black
+	var/pocketbook = /obj/item/weapon/storage/backpack/satchel/pocketbook
 
 	var/flags // Specific flags
 
@@ -70,10 +71,11 @@ var/list/outfits_decls_by_type_
 	if(flags & OUTFIT_HAS_BACKPACK)
 		switch(H.backbag)
 			if(2) back = backpack
-			if(3) back = satchel_one
-			if(4) back = satchel_two
-			if(5) back = messenger_bag
+			if(3) back = messenger_bag
+			if(4) back = satchel_job
+			if(5) back = satchel_brown
 			if(6) back = satchel_black
+			if(7) back = pocketbook
 			else back = null
 
 /decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)

@@ -51,7 +51,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/solgov/expedition/co
 	backpack = /obj/item/weapon/storage/backpack/captain
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_cap
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_cap
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
 	id_type = /obj/item/weapon/card/id/torch/gold
 	pda_type = /obj/item/device/pda/captain
@@ -92,7 +92,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = /obj/item/device/pda/heads/cmo
 	pda_slot = slot_l_store
 	backpack = /obj/item/weapon/storage/backpack/medic
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_med
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_med
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/med
 
 /decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet
@@ -108,7 +108,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/silver/engineering
 	pda_type = /obj/item/device/pda/heads/ce
 	backpack = /obj/item/weapon/storage/backpack/industrial
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_eng
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_eng
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
@@ -131,7 +131,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/silver/security
 	pda_type = /obj/item/device/pda/heads/hos
 	backpack = /obj/item/weapon/storage/backpack/security
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_sec
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
@@ -203,7 +203,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/engineering
 	l_ear = /obj/item/device/radio/headset/headset_eng
 	backpack = /obj/item/weapon/storage/backpack/industrial
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_eng
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_eng
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
@@ -262,7 +262,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/security
 	l_ear = /obj/item/device/radio/headset/headset_sec
 	backpack = /obj/item/weapon/storage/backpack/security
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_sec
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
 	pda_slot = slot_l_store
 
@@ -325,7 +325,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = /obj/item/device/pda/medical
 	pda_slot = slot_l_store
 	backpack = /obj/item/weapon/storage/backpack/medic
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_med
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_med
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/med
 
 /decl/hierarchy/outfit/job/torch/crew/medical/senior
@@ -381,7 +381,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Virologist - Torch")
 	uniform = /obj/item/clothing/under/rank/virologist
 	backpack = /obj/item/weapon/storage/backpack/virology
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_vir
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_vir
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/viro
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic
@@ -398,7 +398,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/chemist
 	shoes = /obj/item/clothing/shoes/white
 	backpack = /obj/item/weapon/storage/backpack/chemistry
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_chem
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_chem
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/chem
 	pda_type = /obj/item/device/pda/chemist
 
@@ -432,7 +432,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = /obj/item/device/radio/headset/headset_cargo
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/supply
 	backpack = /obj/item/weapon/storage/backpack/industrial
-	satchel_one  = /obj/item/weapon/storage/backpack/satchel_eng
+	satchel_job  = /obj/item/weapon/storage/backpack/satchel_eng
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
 
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
@@ -600,7 +600,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/heads/rd
 	backpack = /obj/item/weapon/storage/backpack/toxins
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_tox
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_tox
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/viro
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/senior_scientist
 
@@ -617,7 +617,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/science
 	backpack = /obj/item/weapon/storage/backpack/toxins
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_tox
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_tox
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/viro
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/scientist
 
@@ -630,7 +630,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/ntwork
 	shoes = /obj/item/clothing/shoes/workboots
 	backpack = /obj/item/weapon/storage/backpack/industrial
-	satchel_one  = /obj/item/weapon/storage/backpack/satchel_eng
+	satchel_job  = /obj/item/weapon/storage/backpack/satchel_eng
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/mining
 	pda_type = /obj/item/device/pda/shaftminer
@@ -641,7 +641,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/guard
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack = /obj/item/weapon/storage/backpack/security
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_sec
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/guard
 	pda_type = /obj/item/device/pda/security
