@@ -33,7 +33,7 @@
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
 	else
-		var/total_item_slowdown = 0
+		var/total_item_slowdown = -1
 		for(var/slot = slot_first to slot_last)
 			var/obj/item/I = get_equipped_item(slot)
 			if(I)
