@@ -12,7 +12,7 @@
 		{{for type.products :product:product_index}}
 			<div class='item'>
 				<div class='itemContent'>
-					{{:helper.link('Generate (' + product.cost + ' points)', 'cart', {"action": "create", "type" : type.type_name, "path": product.path}, data.points>=product.cost? null: "disabled")}}
+					{{:helper.link('Generate (' + product.cost + ' points)', 'cart', {"action": "create", "type" : type.type_name, "product_index": product.product_index}, data.points>=product.cost? null: "disabled")}}
 					<span> {{:product.name}}</span>
 				</div>
 			</div>

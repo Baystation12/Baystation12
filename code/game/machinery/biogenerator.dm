@@ -147,7 +147,7 @@
 				name = initial(A.name)
 				cost = current_content[path]
 				listed_products.Add(list(list(
-					"path" = path,
+					"product_index" = c_product,
 					"name" = name,
 					"cost" = cost)))
 			listed_types.Add(list(list(
@@ -177,13 +177,13 @@
 			if (state == BG_PROCESSING)
 				return 1
 			var/type = href_list["type"]
-			var/path = text2path(href_list["path"])
+			var/product_index = text2num(href_list["product_index"])
 			if (isnull(products[type]))
 				return 1
 			var/list/sub_products = products[type]
-			if (isnull(sub_products[path]))
+			if (product_index < 1 || product_index > sub_products.len)
 				return 1
-			create_product(type, path)
+			create_product(type, sub_products[product_index])
 			return 1
 		if("return")
 			state = BG_READY
