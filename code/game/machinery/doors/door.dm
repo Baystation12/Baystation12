@@ -28,7 +28,6 @@
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
 	var/obj/item/stack/material/repairing
 	var/block_air_zones = 1 //If set, air zones cannot merge across the door even when it is opened.
-	var/close_door_at = 0 //When to automatically close the door, if possible
 
 	//Multi-tile doors
 	dir = EAST
@@ -76,14 +75,6 @@
 	set_density(0)
 	update_nearby_tiles()
 	. = ..()
-
-/obj/machinery/door/Process()
-	if(close_door_at && world.time >= close_door_at)
-		if(autoclose)
-			close_door_at = next_close_time()
-			close()
-		else
-			close_door_at = 0
 
 /obj/machinery/door/proc/can_open()
 	if(!density || operating || !ticker)
@@ -393,19 +384,14 @@
 	operating = 0
 
 	if(autoclose)
-		close_door_at = next_close_time()
-
+		addtimer(CALLBACK(src, .proc/close), normalspeed ? 150 : 5)
 	return 1
-
-/obj/machinery/door/proc/next_close_time()
-	return world.time + (normalspeed ? 150 : 5)
 
 /obj/machinery/door/proc/close(var/forced = 0)
 	if(!can_close(forced))
 		return
 	operating = 1
 
-	close_door_at = 0
 	do_animate("closing")
 	sleep(3)
 	src.set_density(1)
