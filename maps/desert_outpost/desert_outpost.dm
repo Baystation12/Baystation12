@@ -4,6 +4,7 @@
 	#include "jobs.dm"
 	#include "outfits.dm"
 	#include "turfs_areas.dm"
+	#include "unit_test.dm"
 
 	#include "desert_outpost.dmm"
 

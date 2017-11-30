@@ -4,7 +4,7 @@
 
 /datum/job/stranded_unsc_marine
 	title = "UNSC marine survivor"
-	outfit_type = /decl/hierarchy/outfit/stranded_unsc/marine
+	outfit_type = /decl/hierarchy/outfit/job/stranded_unsc/marine
 	latejoin_at_spawnpoints = 1
 	create_record = 0
 	account_allowed = 0
@@ -16,7 +16,7 @@
 
 /datum/job/stranded_unsc_tech
 	title = "UNSC technician survivor"
-	outfit_type = /decl/hierarchy/outfit/stranded_unsc/tech
+	outfit_type = /decl/hierarchy/outfit/job/stranded_unsc/tech
 	latejoin_at_spawnpoints = 1
 	create_record = 0
 	account_allowed = 0
@@ -28,7 +28,7 @@
 
 /datum/job/stranded_unsc_medic
 	title = "UNSC corpsman survivor"
-	outfit_type = /decl/hierarchy/outfit/stranded_unsc/medic
+	outfit_type = /decl/hierarchy/outfit/job/stranded_unsc/medic
 	latejoin_at_spawnpoints = 1
 	create_record = 0
 	account_allowed = 0
@@ -40,7 +40,7 @@
 
 /datum/job/stranded_unsc_crew
 	title = "UNSC crewman survivor"
-	outfit_type = /decl/hierarchy/outfit/stranded_unsc/crew
+	outfit_type = /decl/hierarchy/outfit/job/stranded_unsc/crew
 	latejoin_at_spawnpoints = 1
 	create_record = 0
 	account_allowed = 0
@@ -52,7 +52,7 @@
 
 /datum/job/stranded_unsc_civ
 	title = "UEG colonist survivor"
-	outfit_type = /decl/hierarchy/outfit/stranded_unsc/civ
+	outfit_type = /decl/hierarchy/outfit/job/stranded_unsc/civ
 	latejoin_at_spawnpoints = 1
 	create_record = 0
 	account_allowed = 0
