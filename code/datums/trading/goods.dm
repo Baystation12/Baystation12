@@ -165,7 +165,7 @@
 								/obj/item/clothing/gloves/thick/swat            = TRADER_BLACKLIST,
 								/obj/item/clothing/gloves/chameleon       = TRADER_BLACKLIST,
 								/obj/item/clothing/head                   = TRADER_SUBTYPES_ONLY,
-								/obj/item/clothing/head/HoS               = TRADER_BLACKLIST_ALL,
+								/obj/item/clothing/head/coshat               = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/head/beret/centcom     = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/head/bio_hood          = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/head/bomb_hood         = TRADER_BLACKLIST_ALL,

@@ -96,7 +96,7 @@
 "bV" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister,/turf/simulated/floor/airless/ceiling,/area/smugglers/base)
 "bW" = (/obj/machinery/portable_atmospherics/canister/air,/turf/simulated/floor/airless/ceiling,/area/smugglers/base)
 "bX" = (/obj/machinery/constructable_frame/machine_frame,/obj/random/trash,/turf/simulated/floor/tiled,/area/smugglers/office)
-"bY" = (/obj/structure/table/rack,/obj/item/clothing/head/cowboy_hat,/obj/item/clothing/suit/armor/hos/jensen,/turf/simulated/floor/tiled,/area/smugglers/office)
+"bY" = (/obj/structure/table/rack,/obj/item/clothing/head/cowboy_hat,/obj/item/clothing/suit/armor/cos/jensen,/turf/simulated/floor/tiled,/area/smugglers/office)
 "bZ" = (/obj/structure/filingcabinet/chestdrawer,/turf/simulated/floor/tiled,/area/smugglers/office)
 "ca" = (/turf/simulated/wall/r_wall,/area/smugglers/dorms)
 "cb" = (/obj/machinery/door/airlock/maintenance{name = "Restroom"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/airless/ceiling,/area/smugglers/dorms)
