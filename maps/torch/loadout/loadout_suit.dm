@@ -77,7 +77,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(suitjackets)
 
 /datum/gear/suit/custom_suit_jacket
-	display_name = "suit jacket, colour selection"
+	display_name = "suit jacket, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/suit
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
@@ -88,13 +88,13 @@
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/suit/hoodie
-	display_name = "hoodie"
+	display_name = "hoodie, colour select"
 	path = /obj/item/clothing/suit/storage/hooded/hoodie
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/hoodie_sel
-	display_name = "hoodies"
+	display_name = "standard hoodies"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
 	allowed_roles = RESTRICTED_ROLES
 
@@ -108,7 +108,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(hoodies)
 
 /datum/gear/suit/labcoat
-	display_name = "labcoat, colored"
+	display_name = "labcoat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = NON_MILITARY_ROLES

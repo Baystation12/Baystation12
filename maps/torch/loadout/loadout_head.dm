@@ -6,7 +6,7 @@
 
 /datum/gear/head/beret
 	allowed_roles = NON_MILITARY_ROLES
-	display_name = "beret, colored"
+	display_name = "beret, colour select"
 	path = /obj/item/clothing/head/beret/plaincolor
 	flags = GEAR_HAS_COLOR_SELECTION
 	description = "A simple, solid color beret. This one has no emblems or insignia on it."
@@ -60,7 +60,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(bandanas)
 
 /datum/gear/head/bow
-	display_name = "hair bow"
+	display_name = "hair bow, colour select"
 	path = /obj/item/clothing/head/hairflower/bow
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = NON_MILITARY_ROLES
@@ -148,22 +148,22 @@
 	gear_tweaks += new/datum/gear_tweak/path(pins)
 
 /datum/gear/head/hijab
-	display_name = "hijab"
+	display_name = "hijab, colour select"
 	path = /obj/item/clothing/head/hijab
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/kippa
-	display_name = "kippa"
+	display_name = "kippa, colour select"
 	path = /obj/item/clothing/head/kippa
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/turban
-	display_name = "turban"
+	display_name = "turban, colour select"
 	path = /obj/item/clothing/head/turban
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/taqiyah
-	display_name = "taqiyah"
+	display_name = "taqiyah, colour select"
 	path = /obj/item/clothing/head/taqiyah
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -202,7 +202,7 @@
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/head/surgical/custom
-	display_name = "surgical cap, colour selection"
+	display_name = "surgical cap, colour select"
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/veteranhat

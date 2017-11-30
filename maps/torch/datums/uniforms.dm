@@ -116,5 +116,6 @@ decl/hierarchy/mil_uniform/civilian
 	dress_under = /obj/item/clothing/under/rank/internalaffairs/plain
 	dress_over = /obj/item/clothing/suit/storage/toggle/suit/black
 	dress_shoes = /obj/item/clothing/shoes/dress
-	dress_extra = list(/obj/item/clothing/accessory/wcoat)
-
+	dress_extra = list(/obj/item/clothing/accessory/wcoat,\
+	/obj/item/clothing/under/skirt_c/dress/black, /obj/item/clothing/under/skirt_c/dress/long/black,\
+	/obj/item/clothing/under/skirt_c/dress/eggshell, /obj/item/clothing/under/skirt_c/dress/long/eggshell)
