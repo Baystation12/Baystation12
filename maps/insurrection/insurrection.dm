@@ -136,7 +136,7 @@
 	spawn(prepare_time) //After the time elapses, allow the pods to launch
 		modify_pod_launch(LAUNCH_ABORTED)
 		message_faction("UNSC","<span class='danger'>Strike Craft in effective range. Assault Pods unlocked.</span>")
-	spawn(200) //Delay this for a little to allow for people to spawn in.
+	spawn(10 SECONDS) //Delay this for a little to allow for people to spawn in.
 		inform_start_round()
 
 /datum/game_mode/insurrection/process()
@@ -169,7 +169,7 @@
 		return 1
 	if(last_assault == 1)
 		var/list/living_players_unsc = check_players_live("UNSC")
-		var/list/living_players_innie = check_players_live("Insurrection")
+		var/list/living_players_innie = check_players_live("Insurrection") + check_players_live("Insurrectionist Leader")
 		if(living_players_unsc.len == 0)
 			announce_win("Insurrection")
 			return 1
