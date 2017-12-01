@@ -283,9 +283,8 @@ datum/preferences
 				UW.ForceEquipUnderwear(character, FALSE)
 		else
 			all_underwear -= underwear_category_name
-	if(backbag > 7 || backbag < 1)
-		backbag = 1 //Same as above
-	character.backbag = backbag
+
+	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
 	for(var/N in character.organs_by_name)
 		var/obj/item/organ/external/O = character.organs_by_name[N]

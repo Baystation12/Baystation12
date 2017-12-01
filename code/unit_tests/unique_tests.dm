@@ -115,6 +115,25 @@
 		pass("All languages datums have unique keys.")
 	return 1
 
+/datum/unit_test/outfit_backpacks_shall_have_unique_names
+	name = "UNIQUENESS: Outfit Backpacks Shall Have Unique Names"
+
+/datum/unit_test/outfit_backpacks_shall_have_unique_names/start_test()
+	var/list/backpacks_by_name = list()
+
+	var/bos = decls_repository.get_decls_of_subtype(/decl/backpack_outfit)
+	for(var/bo in bos)
+		var/decl/backpack_outfit/backpack_outfit = bos[bo]
+		group_by(backpacks_by_name, backpack_outfit.name, backpack_outfit)
+
+	var/number_of_issues = number_of_issues(backpacks_by_name, "Outfit Backpack Names")
+	if(number_of_issues)
+		fail("[number_of_issues] outfit backpacks\s found.")
+	else
+		pass("All outfit backpacks have unique names.")
+	return 1
+
+
 /datum/unit_test/proc/number_of_issues(var/list/entries, var/type, var/feedback = /decl/noi_feedback)
 	var/issues = 0
 	for(var/key in entries)

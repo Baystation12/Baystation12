@@ -213,8 +213,6 @@
 			return global.autolathe_categories;
 		if("autolathe_recipes")
 			return global.autolathe_recipes;
-		if("backbaglist")
-			return global.backbaglist;
 		if("base_miss_chance")
 			return global.base_miss_chance;
 		if("basic_robolimb")
@@ -1274,8 +1272,6 @@
 			global.autolathe_categories=newval;
 		if("autolathe_recipes")
 			global.autolathe_recipes=newval;
-		if("backbaglist")
-			global.backbaglist=newval;
 		if("base_miss_chance")
 			global.base_miss_chance=newval;
 		if("basic_robolimb")
@@ -2228,7 +2224,6 @@
 	"attack_log_repository",
 	"autolathe_categories",
 	"autolathe_recipes",
-	"backbaglist",
 	"base_miss_chance",
 	"basic_robolimb",
 	"blackbox",

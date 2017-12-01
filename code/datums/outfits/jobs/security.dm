@@ -4,10 +4,11 @@
 	l_ear = /obj/item/device/radio/headset/headset_sec
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/jackboots
-	backpack = /obj/item/weapon/storage/backpack/security
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_sec
 	backpack_contents = list(/obj/item/weapon/handcuffs = 1)
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
+
+/decl/hierarchy/outfit/job/security/New()
+	..()
+	BACKPACK_OVERRIDE_SECURITY
 
 /decl/hierarchy/outfit/job/security/hos
 	name = OUTFIT_JOB_NAME("Head of security")
@@ -34,9 +35,11 @@
 	r_hand = /obj/item/weapon/storage/briefcase/crimekit
 	id_type = /obj/item/weapon/card/id/security/detective
 	pda_type = /obj/item/device/pda/detective
-	backpack = /obj/item/weapon/storage/backpack
-	satchel_job = /obj/item/weapon/storage/backpack/satchel/grey
 	backpack_contents = list(/obj/item/weapon/storage/box/evidence = 1)
+
+/decl/hierarchy/outfit/job/security/detective/New()
+	..()
+	backpack_overrides.Cut()
 
 /decl/hierarchy/outfit/job/security/detective/forensic
 	name = OUTFIT_JOB_NAME("Forensic technician")

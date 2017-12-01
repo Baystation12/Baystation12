@@ -197,14 +197,16 @@
  * Satchel Types
  */
 
-/obj/item/weapon/storage/backpack/satchel/grey
+/obj/item/weapon/storage/backpack/satchel
 	name = "satchel"
 	desc = "A trendy looking satchel."
 	icon_state = "satchel-norm"
 
-/obj/item/weapon/storage/backpack/satchel/grey/withwallet/New()
-	..()
-	new /obj/item/weapon/storage/wallet/random( src )
+/obj/item/weapon/storage/backpack/satchel/grey
+	name = "grey satchel"
+
+/obj/item/weapon/storage/backpack/satchel/grey/withwallet
+	startswith = list(/obj/item/weapon/storage/wallet/random)
 
 /obj/item/weapon/storage/backpack/satchel/brown
 	name = "brown leather satchel"

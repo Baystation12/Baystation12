@@ -637,6 +637,15 @@ proc/dd_sortedTextList(list/incoming)
 		group_list[key] = values
 
 	values += value
+	
+/proc/duplicates(var/list/L)
+	. = list()
+	var/list/checked = list()
+	for(var/value in L)
+		if(value in checked)
+			. |= value
+		else
+			checked += value
 
 /proc/assoc_by_proc(var/list/plain_list, var/get_initial_value)
 	. = list()

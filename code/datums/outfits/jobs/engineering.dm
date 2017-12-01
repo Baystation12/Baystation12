@@ -3,11 +3,12 @@
 	belt = /obj/item/weapon/storage/belt/utility/full
 	l_ear = /obj/item/device/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/workboots
-	backpack = /obj/item/weapon/storage/backpack/industrial
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_eng
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+
+/decl/hierarchy/outfit/job/engineering/New()
+	..()
+	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/engineering/chief_engineer
 	name = OUTFIT_JOB_NAME("Chief engineer")
