@@ -20,7 +20,7 @@
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/accessory/zhongshan
-	display_name = "zhongshan jacket"
+	display_name = "zhongshan jacket, colour select"
 	path = /obj/item/clothing/accessory/toggleable/zhongshan
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
@@ -37,31 +37,31 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/sherwani
-	display_name = "sherwani"
+	display_name = "sherwani, colour select"
 	path = /obj/item/clothing/accessory/sherwani
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/qipao
-	display_name = "qipao blouse"
+	display_name = "qipao blouse, colour select"
 	path = /obj/item/clothing/accessory/qipao
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/sweater
-	display_name = "turtleneck sweater"
+	display_name = "turtleneck sweater, colour select"
 	path = /obj/item/clothing/accessory/sweater
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/tangzhuang
-	display_name = "tangzhuang jacket"
+	display_name = "tangzhuang jacket, colour select"
 	path = /obj/item/clothing/accessory/tangzhuang
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/necklace
-	display_name = "necklace"
+	display_name = "necklace, colour select"
 	path = /obj/item/clothing/accessory/necklace
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -71,7 +71,7 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/bowtie/color
-	display_name = "bowtie, colored"
+	display_name = "bowtie, colour select"
 	path = /obj/item/clothing/accessory/bowtie/color
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -132,7 +132,7 @@
 	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/accessory/wallet
-	display_name = "wallet"
+	display_name = "wallet, colour select"
 	path = /obj/item/weapon/storage/wallet
 	flags = GEAR_HAS_COLOR_SELECTION
 

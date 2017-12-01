@@ -35,7 +35,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(chaintypes))
 
 /datum/gear/ears/skrell/colored/chain
-	display_name = "colored headtail chain (Skrell)"
+	display_name = "colored headtail chain, colour select (Skrell)"
 	path = /obj/item/clothing/ears/skrell/colored/chain
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_SKRELL)
@@ -57,7 +57,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(bandtypes))
 
 /datum/gear/ears/skrell/colored/band
-	display_name = "colored headtail bands (Skrell)"
+	display_name = "headtail bands, colour select (Skrell)"
 	path = /obj/item/clothing/ears/skrell/colored/band
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_SKRELL)
@@ -65,7 +65,7 @@
 
 //Skrell Cloth
 /datum/gear/ears/skrell/cloth/male
-	display_name = "male colored headtail cloth (Skrell)"
+	display_name = "men's headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_male
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_SKRELL)
@@ -76,7 +76,7 @@
 	gear_tweaks = list(new/datum/gear_tweak/color(valid_colors))
 
 /datum/gear/ears/skrell/cloth/female
-	display_name = "female colored headtail cloth (Skrell)"
+	display_name = "women's headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_female
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_SKRELL)
@@ -132,12 +132,12 @@
 	sort_category = "Xenowear"
 	cost = 1
 	allowed_roles = SECURITY_ROLES
-	
+
 /datum/gear/shoes/caligae
 	display_name = "caligae (Tajara)"
 	path = /obj/item/clothing/shoes/sandal/tajaran/caligae
 	sort_category = "Xenowear"
-	
+
 /datum/gear/shoes/caligae/New()
 	..()
 	var/caligae = list()
