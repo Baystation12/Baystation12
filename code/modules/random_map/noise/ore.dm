@@ -49,13 +49,16 @@
 			var/turf/simulated/T = locate(tx+j, ty+i, origin_z)
 			if(!istype(T) || !T.has_resources)
 				continue
-			if(!priority_process) sleep(-1)
+			if(!priority_process) 
+				CHECK_TICK
 			T.resources = list()
 			T.resources["silicates"] = rand(3,5)
 			T.resources["carbonaceous rock"] = rand(3,5)
 
-			var/current_cell = map[get_map_cell(x,y)]
-			if(current_cell < rare_val)      // Surface metals.
+			var/tmp_cell
+			TRANSLATE_AND_VERIFY_COORD(x, y)
+
+			if(tmp_cell < rare_val)      // Surface metals.
 				T.resources["iron"] =     rand(RESOURCE_HIGH_MIN, RESOURCE_HIGH_MAX)
 				T.resources["gold"] =     rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
 				T.resources["silver"] =   rand(RESOURCE_LOW_MIN,  RESOURCE_LOW_MAX)
@@ -64,7 +67,7 @@
 				T.resources["phoron"] =   0
 				T.resources["osmium"] =   0
 				T.resources["hydrogen"] = 0
-			else if(current_cell < deep_val) // Rare metals.
+			else if(tmp_cell < deep_val) // Rare metals.
 				T.resources["gold"] =     rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 				T.resources["silver"] =   rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
 				T.resources["uranium"] =  rand(RESOURCE_MID_MIN,  RESOURCE_MID_MAX)
@@ -82,7 +85,6 @@
 				T.resources["iron"] =     0
 				T.resources["gold"] =     0
 				T.resources["silver"] =   0
-	return
 
 /datum/random_map/noise/ore/get_map_char(var/value)
 	if(value < rare_val)
