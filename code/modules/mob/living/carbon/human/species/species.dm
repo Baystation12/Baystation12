@@ -184,6 +184,26 @@
 
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
+	var/list/equip_adjust = list()
+	var/list/equip_overlays = list()
+/*
+These are all the things that can be adjusted for equipping stuff and
+each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
+the direction to shift the thing and what direction.
+
+example:
+	equip_adjust = list(
+		slot_back_str = list(NORTH = list(SOUTH = 12, EAST = 7), EAST = list(SOUTH = 2, WEST = 12))
+			)
+
+This would shift back items (backpacks, axes, etc.) when the mob
+is facing either north or east.
+When the mob faces north the back item icon is shifted 12 pixes down and 7 pixels to the right.
+When the mob faces east the back item icon is shifted 2 pixels down and 12 pixels to the left.
+
+The slots that you can use are found in items_clothing.dm and are the inventory slot string ones, so make sure
+	you use the _str version of the slot.
+*/
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return

@@ -205,13 +205,12 @@ BLIND     // can't see anything
 		SPECIES_VOX = 'icons/mob/species/vox/eyes.dmi',
 		)
 
-/obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
+/obj/item/clothing/glasses/get_icon_state(mob/user_mob, slot)
 	if(item_state_slots && item_state_slots[slot])
-		ret.icon_state = item_state_slots[slot]
+		return item_state_slots[slot]
 	else
-		ret.icon_state = icon_state
-	return ret
+		return icon_state
+	return ..()
 
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))
@@ -479,14 +478,6 @@ BLIND     // can't see anything
 		var/mob/M = src.loc
 		M.update_inv_wear_mask()
 
-/obj/item/clothing/mask/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
-	if(item_state_slots && item_state_slots[slot])
-		ret.icon_state = item_state_slots[slot]
-	else
-		ret.icon_state = icon_state
-	return ret
-
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
 
@@ -690,15 +681,13 @@ BLIND     // can't see anything
 	if(rolled_sleeves == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
 
-/obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
+/obj/item/clothing/under/get_icon_state(mob/user_mob, slot)
+	var/ret
 	if(item_state_slots && item_state_slots[slot])
-		ret.icon_state = item_state_slots[slot]
+		ret = item_state_slots[slot]
 	else
-		ret.icon_state = icon_state
-	ret.icon_state = "[ret.icon_state]_s"
-	return ret
-
+		ret = icon_state
+	return "[ret]_s"
 
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(accessories && accessories.len)

@@ -42,8 +42,9 @@
 #define HOSTILE_STANCE_TIRED     5
 #define HOSTILE_STANCE_INSIDE    6
 
-#define LEFT  1
-#define RIGHT 2
+#define LEFT  0x1
+#define RIGHT 0x2
+#define UNDER 0x4
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.
