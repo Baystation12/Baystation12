@@ -64,9 +64,6 @@
 /area/far_isle/bar/lower
 	name = "Bar Lower Level"
 
-/area/far_isle/bar/upper
-	name = "Bar Upper Level"
-
 //Living Pods//
 /area/far_isle/living_pods
 	name = "Living Pods"
@@ -93,6 +90,14 @@
 	name = "Residential Streets"
 	requires_power = 0
 
+//Shop//
+/area/far_isle/shop
+	name = "Shop"
+
+//Hydroponics//
+/area/far_isle/hydroponics
+	name = "Hydroponics"
+
 //Civillian Hauler Areas//
 /area/far_isle/civhaul
 	name = "Civillian Hauler"
@@ -115,6 +120,9 @@
 
 /area/far_isle/civhaul/medical
 	name = "Civillian Hauler - Medbay"
+
+/area/far_isle/civhaul/engineering
+	name = "Civillian Hauler - Engineering"
 
 /area/far_isle/civhaul/cargo
 	name = "Civillian Hauler - Cargo Hold"
