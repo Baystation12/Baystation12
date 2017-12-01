@@ -550,10 +550,6 @@ BLIND     // can't see anything
 		)
 	blood_overlay_type = "shoeblood"
 
-/obj/item/clothing/shoes/New()
-	..()
-	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN
-
 /obj/item/clothing/shoes/proc/draw_knife()
 	set name = "Draw Boot Knife"
 	set desc = "Pull out your boot knife."

@@ -1,7 +1,5 @@
 #define HUMAN_STRIP_DELAY        40   // Takes 40ds = 4s to strip someone.
 
-#define SHOES_SLOWDOWN          -1.0  // How much shoes slow you down by default. Negative values speed you up.
-
 #define CANDLE_LUM 3 // For how bright candles are.
 
 // Item inventory slot bitmasks.
