@@ -5,7 +5,7 @@
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack = /obj/item/weapon/storage/backpack/security
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_sec
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_sec
 	backpack_contents = list(/obj/item/weapon/handcuffs = 1)
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
 
@@ -35,7 +35,7 @@
 	id_type = /obj/item/weapon/card/id/security/detective
 	pda_type = /obj/item/device/pda/detective
 	backpack = /obj/item/weapon/storage/backpack
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_norm
+	satchel_job = /obj/item/weapon/storage/backpack/satchel/grey
 	backpack_contents = list(/obj/item/weapon/storage/box/evidence = 1)
 
 /decl/hierarchy/outfit/job/security/detective/forensic

@@ -5,7 +5,7 @@
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/science
 	backpack = /obj/item/weapon/storage/backpack/toxins
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_tox
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_tox
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/tox
 
 /decl/hierarchy/outfit/job/science/rd
@@ -38,4 +38,4 @@
 	pda_slot = slot_r_store
 	pda_type = /obj/item/device/pda/roboticist
 	backpack = /obj/item/weapon/storage/backpack
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_norm
+	satchel_job = /obj/item/weapon/storage/backpack/satchel/grey

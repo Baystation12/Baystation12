@@ -5,7 +5,7 @@
 	pda_type = /obj/item/device/pda/medical
 	pda_slot = slot_l_store
 	backpack = /obj/item/weapon/storage/backpack/medic
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_med
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_med
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/med
 
 /decl/hierarchy/outfit/job/medical/cmo
@@ -42,7 +42,7 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/virologist
 	mask = /obj/item/clothing/mask/surgical
 	backpack = /obj/item/weapon/storage/backpack/virology
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_vir
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_vir
 
 /decl/hierarchy/outfit/job/medical/doctor/nurse
 	name = OUTFIT_JOB_NAME("Nurse")
@@ -65,7 +65,7 @@
 	uniform = /obj/item/clothing/under/rank/chemist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/chemist
 	backpack = /obj/item/weapon/storage/backpack/chemistry
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_chem
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_chem
 	id_type = /obj/item/weapon/card/id/medical/chemist
 	pda_type = /obj/item/device/pda/chemist
 
@@ -75,7 +75,7 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/genetics
 	backpack = /obj/item/weapon/storage/backpack/genetics
 	r_pocket = /obj/item/device/flashlight/pen
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_gen
+	satchel_job = /obj/item/weapon/storage/backpack/satchel_gen
 	id_type = /obj/item/weapon/card/id/medical/geneticist
 	pda_type = /obj/item/device/pda/geneticist
 
