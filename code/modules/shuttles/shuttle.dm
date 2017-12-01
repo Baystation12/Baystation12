@@ -19,6 +19,8 @@
 
 	var/knockdown = 1 //whether shuttle downs non-buckled people when it moves
 
+	var/defer_initialisation = FALSE //this shuttle will/won't be initialised by something after roundstart
+
 /datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(_name)

@@ -26,11 +26,18 @@
 /obj/effect/wingrille_spawn/attack_generic()
 	activate()
 
-/obj/effect/wingrille_spawn/Initialize()
+/obj/effect/wingrille_spawn/Initialize(mapload)
 	. = ..()
 	if(!win_path)
 		return
-	if(ticker && ticker.current_state < GAME_STATE_PLAYING)
+
+	// sometimes it's useful to plonk these down and activate them all manually,
+	// once all your ducks are in a row. So if we're already playing, only
+	// auto-activate if this has been put down by a maploader, not a creative admin
+	// see https://github.com/Baystation12/Baystation12/pull/9907#issuecomment-114896669
+	var/auto_activate = mapload || (ticker && ticker.current_state < GAME_STATE_PLAYING)
+
+	if(auto_activate)
 		activate()
 		return INITIALIZE_HINT_QDEL
 

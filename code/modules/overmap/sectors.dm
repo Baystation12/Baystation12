@@ -20,6 +20,8 @@ var/list/points_of_interest = list()
 	var/in_space = 1	//can be accessed via lucky EVA
 
 /obj/effect/overmap/Initialize()
+	. = ..()
+
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 
@@ -74,8 +76,6 @@ var/list/points_of_interest = list()
 		if (S.z in map_z)
 			S.linked = src
 			testing("Sensor console at level [S.z] linked to overmap object '[name]'.")
-
-	. = ..()
 
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
 	. = generic_waypoints.Copy()

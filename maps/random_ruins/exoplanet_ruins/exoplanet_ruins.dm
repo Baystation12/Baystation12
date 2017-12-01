@@ -7,7 +7,7 @@
 	name = "Little House"
 	id = "exoplanet_little_house"
 	description = "oh wow look it's a cute little house"
-	suffix = "little_house.dmm"
+	suffixes = list("little_house.dmm")
 	cost = 1
 
 /area/map_template/little_house

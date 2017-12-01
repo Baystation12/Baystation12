@@ -34,6 +34,10 @@ var/global/datum/shuttle_controller/shuttle_controller
 /datum/shuttle_controller/proc/initialize_shuttles()
 	for(var/shuttle_type in subtypesof(/datum/shuttle))
 		var/datum/shuttle/shuttle = shuttle_type
-		if(initial(shuttle.category) == shuttle_type)
-			continue
+		if (!initial(shuttle.defer_initialisation))
+			initialise_shuttle(shuttle_type)
+
+/datum/shuttle_controller/proc/initialise_shuttle(var/shuttle_type)
+	var/datum/shuttle/shuttle = shuttle_type
+	if(initial(shuttle.category) != shuttle_type)
 		shuttle = new shuttle()
