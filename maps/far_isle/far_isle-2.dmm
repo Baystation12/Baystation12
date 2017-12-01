@@ -706,7 +706,7 @@
 "nD" = (/turf/simulated/wall,/area/far_isle/civhaul/medical)
 "nE" = (/obj/machinery/door/airlock/glass_medical{name = "Medbay"; req_one_access = list()},/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor,/area/far_isle/civhaul/medical)
 "nF" = (/turf/simulated/wall/r_wall,/area/far_isle/civhaul/medical)
-"nG" = (/obj/machinery/power/smes,/obj/effect/floor_decal/industrial/warning/full,/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/obj/structure/cable,/turf/simulated/floor/plating,/area/far_isle/civhaul/engineering)
+"nG" = (/obj/effect/floor_decal/industrial/warning/full,/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/obj/structure/cable,/obj/machinery/power/smes/buildable/outpost_substation,/turf/simulated/floor/plating,/area/far_isle/civhaul/engineering)
 "nH" = (/obj/structure/closet/crate,/obj/item/stack/material/phoron,/obj/item/stack/material/phoron,/turf/simulated/floor/plating,/area/far_isle/civhaul/engineering)
 "nI" = (/obj/structure/closet/crate,/obj/item/stack/material/phoron,/turf/simulated/floor/plating,/area/far_isle/civhaul/engineering)
 "nJ" = (/obj/structure/closet/crate,/obj/item/stack/material/steel,/obj/item/stack/material/glass,/obj/item/stack/material/glass,/turf/simulated/floor/plating,/area/far_isle/civhaul/engineering)
