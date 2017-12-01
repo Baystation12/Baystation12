@@ -14,6 +14,7 @@
 	suit = /obj/item/clothing/suit/armor/innie
 	uniform = /obj/item/clothing/under/innie/jumpsuit
 	shoes = /obj/item/clothing/shoes/jackboots
+	r_pocket = /obj/item/device/encryptionkey/inniecom
 
 	flags = 0
 
@@ -25,6 +26,7 @@
 	suit = /obj/item/clothing/suit/armor/innie
 	uniform = /obj/item/clothing/under/innie/jumpsuit
 	shoes = /obj/item/clothing/shoes/jackboots
+	r_pocket = /obj/item/device/encryptionkey/inniecom
 
 	l_hand = /obj/item/turret_deploy_kit/chaingun
 
