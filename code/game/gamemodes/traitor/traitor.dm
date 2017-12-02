@@ -11,6 +11,7 @@
 		friends and family as they try to use your emotions and trust to their advantage, leaving you with nothing \
 		but the painful reminder that space is cruel and unforgiving."
 	config_tag = "traitor"
+	votable = 0
 	required_players = 0
 	required_enemies = 1
 	antag_tags = list(MODE_TRAITOR)

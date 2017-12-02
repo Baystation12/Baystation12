@@ -16,6 +16,22 @@
 
 	latejoin_at_spawnpoints = TRUE
 
+/datum/job/Insurrectionist_leader
+	title = "Insurrectionist Leader"
+	total_positions = 1
+	selection_color = "#000000"
+
+	supervisors = " the Insurrection"
+
+	create_record = 0
+	account_allowed = 0
+	generate_email = 0
+
+	loadout_allowed = TRUE
+	announced = FALSE
+	outfit_type = /decl/hierarchy/outfit/job/Insurrectionist_leader
+
+	latejoin_at_spawnpoints = TRUE
 
 /datum/job/UNSC_assault
 	title = "ODST Assault Squad Member"
