@@ -69,6 +69,7 @@
 
 /datum/game_mode/stranded/pre_setup()
 	GLOB.hostile_attackables += /obj/structure/evac_pelican
+	GLOB.hostile_attackables +=	/obj/structure/tanktrap
 
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time
