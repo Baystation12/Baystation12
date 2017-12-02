@@ -67,6 +67,9 @@
 
 	var/obj/structure/evac_pelican/evac_pelican
 
+/datum/game_mode/stranded/pre_setup()
+	GLOB.hostile_attackables += /obj/structure/evac_pelican
+
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time
 
