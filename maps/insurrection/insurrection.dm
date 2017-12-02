@@ -1,10 +1,14 @@
+
 #if !defined(using_map_DATUM)
 
+	#include "insurrection_gm.dm"
+	#include "insurrection_items.dm"
 	#include "insurrection_outfits.dm"
 	#include "insurrection_jobs.dm"
 	#include "insurrection_spawns.dm"
-	#include "insurrection_items.dm"
+
 	#include "innie_base_areas.dm"
+	#include "unsc_staging_areas.dm"
 	#include "innie_base2.dmm"
 	#include "innie_base1.dmm"
 	#include "ODST_staging.dmm"

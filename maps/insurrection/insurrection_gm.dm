@@ -1,6 +1,6 @@
 
 #define UNSC_ROLES list("ODST Assault Squad Member","ODST Assault Squad Lead","ODST Assault Team Lead")
-#define INNIE_ROLES list("Insurrectionist")
+#define INNIE_ROLES list("Insurrectionist","Insurrectionist Leader")
 
 #define LAUNCH_ABORTED -1
 #define LAUNCH_UNDERWAY -2
@@ -13,12 +13,19 @@
 	round_description = "The UNSC has located an Insurrection base..."
 	config_tag = "Insurrection"
 	votable = 1
-	var/obj/payload/bombs = list("timer" = 0)
+	var/list/bombs = list("timer" = 0)
 	var/list/remaining_pods = list()
 	var/prepare_time =  5 MINUTES //The amount of time the insurrectionists have to prepare for the ODST assault, in ticks
 	var/last_assault = 0 //This is also set to -1 when a bomb is active.
 	var/autolaunchtime = 12 MINUTES //At runtime, this stores the time in ticks after roundstart will launch at.
 	var/warned = 0 //To stop bomb detonation warning spam
+
+/datum/game_mode/insurrection/proc/lockdown_bombs()
+	for(var/obj/payload/bomb in bombs)
+		if(istype(bomb,/obj/payload/innie))
+			var/obj/payload/innie/b = bomb
+			b.lockdown_bomb()
+			b.visible_message("<span class = 'danger'>The [b.name]'s automatic anchoring bolts engage!</span>")
 
 /datum/game_mode/insurrection/proc/message_faction(var/faction,var/message)
 	var/list/allowed_roles
@@ -49,6 +56,7 @@
 /datum/game_mode/insurrection/proc/inform_start_round()
 	message_faction("UNSC","<span class='danger'>Insurrection Base Located, time to Assault Pod effective range: [prepare_time/10] seconds</span>")
 	message_faction("Insurrection","<span class = 'danger'>UNSC Strike Craft detected on approach vector!</span>")
+	message_faction("Insurrection","<span class = 'danger'>Security of nuclear payload is not ensured, relocate payload if possible. Timed locking mechanisms are active.</span>")
 
 
 /datum/game_mode/insurrection/proc/inform_last_assault()
@@ -134,9 +142,10 @@
 	update_bomb_status()
 	modify_pod_launch(LAUNCH_UNDERWAY) //Stop the pods from launching.
 	spawn(prepare_time) //After the time elapses, allow the pods to launch
+		lockdown_bombs()
 		modify_pod_launch(LAUNCH_ABORTED)
 		message_faction("UNSC","<span class='danger'>Strike Craft in effective range. Assault Pods unlocked.</span>")
-	spawn(200) //Delay this for a little to allow for people to spawn in.
+	spawn(10 SECONDS) //Delay this for a little to allow for people to spawn in.
 		inform_start_round()
 
 /datum/game_mode/insurrection/process()

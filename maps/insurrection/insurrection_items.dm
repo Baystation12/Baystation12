@@ -118,8 +118,21 @@
 	name = "innie bomb spawn"
 
 /obj/payload/innie
-	anchored = 1
+	anchored = 0
 	seconds_to_disarm = 30
+
+/obj/payload/innie/proc/lockdown_bomb()
+	anchored = 1
+	new /obj/effect/bomblocation (loc)
+
+/obj/payload/innie/verb/anchor_bomb()
+	set name = "Anchor Bomb (unreversible)"
+	set src in oview(1)
+
+	if(!anchored && do_after(usr,8 SECONDS,src,1,1,,1))
+		visible_message("<span class = 'danger'>[usr] engages the anchoring bolts on the [name]</span>")
+		lockdown_bomb()
+
 
 /obj/payload/innie/set_anchor()
 	return

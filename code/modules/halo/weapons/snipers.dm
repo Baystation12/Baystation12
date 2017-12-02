@@ -8,7 +8,7 @@
 	desc = "Special Applications Rifle, system 99 Anti-Matériel. Deadly at extreme range.  Takes 14.5mm calibre magazines."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
 	icon_state = "SRS99"
-	item_state = "srs99"
+	item_state = "SRS99"
 	load_method = MAGAZINE
 	caliber = "14.5mm"
 	slot_flags = SLOT_BACK
@@ -17,6 +17,11 @@
 	reload_sound = 'code/modules/halo/sounds/SniperRifleReloadSoundEffect.ogg'
 	scoped_accuracy = 3
 	screen_shake = 0
+
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		)
 
 /obj/item/weapon/gun/projectile/srs99_sniper/verb/scope()
 	set category = "Object"
