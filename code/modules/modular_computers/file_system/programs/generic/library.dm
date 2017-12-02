@@ -129,8 +129,10 @@ The answer was five and a half years -ZeroBits
 			return 1
 
 		//PRINT TO BINDER
+		if(!nano_host())
+			return 1
 		for(var/d in GLOB.cardinal)
-			var/obj/machinery/bookbinder/bndr = locate(/obj/machinery/bookbinder, get_step(src, d))
+			var/obj/machinery/bookbinder/bndr = locate(/obj/machinery/bookbinder, get_step(nano_host(), d))
 			if(bndr && bndr.anchored)
 				var/obj/item/weapon/book/B = new(bndr.loc)
 				B.name = current_book["title"]
