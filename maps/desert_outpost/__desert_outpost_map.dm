@@ -10,6 +10,4 @@
 	company_short = "UNSC"
 	lobby_icon = 'code/modules/halo/splashworks/title6.png'
 
-	allowed_spawns = list()
-	default_spawn = "Default"
 	id_hud_icons = 'stranded_hud_icons.dmi'

@@ -21,7 +21,7 @@
 
 /obj/structure/tanktrap
 	name = "tanktrap"
-	icon = 'desert_outpost.dmi'
+	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
 	icon_state = "tanktrap"
 	density = 1
 	anchored = 1
@@ -93,7 +93,7 @@
 
 /obj/structure/tanktrap_dead
 	name = "tanktrap"
-	icon = 'desert_outpost.dmi'
+	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
 	icon_state = "tanktrap_dead"
 	density = 0
 	anchored = 1
@@ -112,7 +112,7 @@
 
 /obj/structure/sandbag
 	name = "sandbag"
-	icon = 'desert_outpost.dmi'
+	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
 	icon_state = "sandbag"
 	density = 1
 	anchored = 1
@@ -149,15 +149,13 @@
 		var/turf/T = get_step(AM, AM.dir)
 		if(T.CanPass(AM, T))
 			if(ismob(AM))
-				var/mob/moving = AM
-				moving.show_message("<span class='notice'>You start climbing over [src]...</span>")
+				to_chat(AM,"<span class='notice'>You start climbing over [src]...</span>")
 			spawn(0)
 				if(do_after(AM, 30))
 					src.visible_message("<span class='info'>[AM] climbs over [src].</span>")
 					AM.loc = T
 		else if(ismob(AM))
-			var/mob/moving = AM
-			moving.show_message("<span class='warning'>You cannot climb over [src] as it is being blocked.</span>")
+			to_chat(AM,"<span class='warning'>You cannot climb over [src] as it is being blocked.</span>")
 	..()
 
 /obj/structure/sandbag/verb/climb()
@@ -179,7 +177,7 @@
 					src.visible_message("<span class='info'>[M] climbs over [src].</span>")
 					M.loc = T
 		else
-			M.show_message("<span class='warning'>You cannot climb over [src] as it is being blocked.</span>")
+			to_chat(M,"<span class='warning'>You cannot climb over [src] as it is being blocked.</span>")
 
 /obj/structure/sandbag/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
 	if(mover.throwing)
@@ -237,7 +235,7 @@
 
 /obj/structure/sandbag_dead
 	name = "sandbag"
-	icon = 'desert_outpost.dmi'
+	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
 	icon_state = "sandbag_dead"
 	anchored = 1
 	flags = ON_BORDER
@@ -264,7 +262,7 @@
 /obj/item/empty_sandbags
 	name = "empty sandbags"
 	desc = "Fill them with sand to form a defensive barrier"
-	icon = 'desert_outpost.dmi'
+	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
 	icon_state = "empty sandbags"
 
 /obj/item/empty_sandbags/examine(mob/user)
@@ -299,7 +297,7 @@
 
 /obj/structure/bardbedwire
 	name = "barbed wire coil"
-	icon = 'desert_outpost.dmi'
+	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
 	icon_state = "barbedwire"
 	density = 0
 	anchored = 1
@@ -326,8 +324,7 @@
 		if(prob(25))
 			L.Weaken(2)
 		if(ismob(AM))
-			var/mob/moving = AM
-			moving.show_message("<span class='warning'>You are caught in [src]!</span>")
+			to_chat(AM,"<span class='warning'>You are caught in [src]!</span>")
 		health -= 1
 		if(health <= 0)
 			new /obj/item/metalscraps(src.loc)
@@ -353,7 +350,7 @@
 /obj/item/stack/barbedwire
 	name = "barbed wire coil"
 	desc = "A coil of wire covered in wickedly sharp barbs."
-	icon = 'desert_outpost.dmi'
+	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
 	icon_state = "barbedwire_obj"
 	flags = CONDUCT
 	w_class = ITEM_SIZE_LARGE
@@ -383,11 +380,11 @@
 /obj/item/metalscraps
 	name = "metal scraps"
 	desc = "some ruined scraps of metal"
-	icon = 'desert_outpost.dmi'
+	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
 	icon_state = "barbedwire_dead"
 
 
 /obj/structure/barrel
 	name = "metal barrel"
-	icon = 'code/modules/halo/gamemodes/stranded/desert_outpost.dmi'
+	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
 	icon_state = "barrel"
