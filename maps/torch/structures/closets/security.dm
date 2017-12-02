@@ -52,9 +52,6 @@
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/command/security,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/clothing/head/coshat,
-		/obj/item/clothing/suit/armor/cos,
-		/obj/item/clothing/under/rank/cos/jensen,
 		/obj/item/clothing/suit/armor/cos/jensen,
 		/obj/item/clothing/head/dermalpatch,
 		/obj/item/weapon/cartridge/hos,
