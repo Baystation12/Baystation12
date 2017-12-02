@@ -19,6 +19,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap) //Disallows loading LMG boxmags into the MA5B
 	burst = 3
 	burst_delay = 2
+	one_hand_penalty = -1
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
@@ -62,6 +63,7 @@
 	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m95_sap
+	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 1
 	accuracy = 1

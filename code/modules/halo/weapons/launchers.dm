@@ -11,6 +11,7 @@
 	item_state = "m41"
 	fire_sound = 'code/modules/halo/sounds/RocketLauncherShotSoundEffect.ogg'
 	//reload_sound = 'code/modules/halo/sounds/RocketLauncherReloadSoundEffect.ogg'
+	one_hand_penalty = -1
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',

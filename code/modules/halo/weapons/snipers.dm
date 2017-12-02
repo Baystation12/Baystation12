@@ -15,6 +15,7 @@
 	magazine_type = /obj/item/ammo_magazine/m145_ap
 	fire_sound = 'code/modules/halo/sounds/SniperShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/SniperRifleReloadSoundEffect.ogg'
+	one_hand_penalty = -1
 	scoped_accuracy = 3
 	screen_shake = 0
 
@@ -53,6 +54,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap) //Disallows loading LMG boxmags into the DMR.
 	fire_sound = 'code/modules/halo/sounds/DMR_ShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
+	one_hand_penalty = -1
 
 	accuracy = 1
 	scoped_accuracy = 2
