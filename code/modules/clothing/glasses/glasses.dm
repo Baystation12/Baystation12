@@ -24,6 +24,19 @@
 	hud = null
 	. = ..()
 
+/obj/item/clothing/glasses/proc/blurvision()
+	if(istype(src.loc, /mob/living/carbon/human))
+		var/mob/living/carbon/human/M = src.loc
+		to_chat(M, "<span class='danger'>Your [src] overload, blinding you!</span>")
+		if(M.glasses == src)
+			M.eye_blind = 2
+			M.eye_blurry = 4
+			// Don't cure being nearsighted
+			if(!(M.disabilities & NEARSIGHTED))
+				M.disabilities |= NEARSIGHTED
+				spawn(100)
+					M.disabilities &= ~NEARSIGHTED
+
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())
 		if(active)
@@ -93,7 +106,7 @@
 	..()
 	overlay = GLOB.global_hud.nvg
 
-/obj/item/clothing/glasses/tacgoggles //made their own thing, with more extreme flash protection and medium NV, but no more sechud
+/obj/item/clothing/glasses/tacgoggles
 	name = "tactical goggles"
 	desc = "Self-polarizing goggles with light amplification for dark environments. Made from durable synthetic."
 	icon_state = "swatgoggles"
@@ -102,9 +115,14 @@
 	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	flash_protection = FLASH_PROTECTION_MAJOR
 	armor = list(melee = 20, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
+	flash_protection = FLASH_PROTECTION_REDUCED // if it amplifies light it should make flashes more dangerous, not useless.
+
+/obj/item/clothing/glasses/tacgoggles/emp_act(severity)
+	src.see_invisible = 5
+	src.darkness_view = 0
+	blurvision()
 
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
@@ -188,6 +206,10 @@
 	item_state = "sunglasses"
 	darkness_view = -1
 	flash_protection = FLASH_PROTECTION_MODERATE
+
+/obj/item/clothing/glasses/sunglasses/New()
+	..()
+	overlay = GLOB.global_hud.sunglasses
 
 /obj/item/clothing/glasses/welding
 	name = "welding goggles"
@@ -328,19 +350,9 @@
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	flash_protection = FLASH_PROTECTION_REDUCED
 
-	emp_act(severity)
-		if(istype(src.loc, /mob/living/carbon/human))
-			var/mob/living/carbon/human/M = src.loc
-			to_chat(M, "<span class='danger'>The Optical Thermal Scanner overloads and blinds you!</span>")
-			if(M.glasses == src)
-				M.eye_blind = 3
-				M.eye_blurry = 5
-				// Don't cure being nearsighted
-				if(!(M.disabilities & NEARSIGHTED))
-					M.disabilities |= NEARSIGHTED
-					spawn(100)
-						M.disabilities &= ~NEARSIGHTED
-		..()
+/obj/item/clothing/glasses/thermal/emp_act(severity)
+	blurvision()
+	..()
 
 /obj/item/clothing/glasses/thermal/New()
 	..()
