@@ -7,6 +7,7 @@
 /obj/structure/sign/ecplaque
 	name = "\improper Expeditionary Directives"
 	desc = "A plaque with Expeditionary Corps logo etched in it."
+	icon = 'maps/torch/icons/obj/solgov-decals.dmi'
 	icon_state = "ecplaque"
 	var/directives = {"<hr><center>
 		1. <b>Exploring the unknown is your Primary Mission</b><br>
