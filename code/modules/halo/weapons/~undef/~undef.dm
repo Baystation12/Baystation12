@@ -1,0 +1,4 @@
+#undef HOLD_CASINGS
+#undef CLEAR_CASINGS
+#undef EJECT_CASINGS
+#undef CYCLE_CASINGS

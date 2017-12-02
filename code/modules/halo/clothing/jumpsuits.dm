@@ -1,7 +1,7 @@
 /obj/item/clothing/under/unsc
-	icon = 'icons/mob/uniform.dmi'
 	desc = "standard issue command crew uniform"
 	name = "command officer uniform"
+	icon = 'code/modules/halo/clothing/jumpsuits.dmi'
 	icon_state = "unscgrey_s"
 	item_state = "gy_suit"
 	worn_state = "unscgrey"
