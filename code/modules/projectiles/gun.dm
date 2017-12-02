@@ -188,7 +188,7 @@
 
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
-	user.setMoveCooldown(shoot_time) //no moving while shooting either
+	//user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
 
 	//actually attempt to shoot
@@ -217,7 +217,7 @@
 
 	//update timing
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	user.setMoveCooldown(move_delay)
+	//user.setMoveCooldown(move_delay)//
 	next_fire_time = world.time + fire_delay
 
 //obtains the next projectile to fire
