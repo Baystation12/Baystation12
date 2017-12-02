@@ -8,7 +8,7 @@
 	flags = CONDUCT
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
-	var/health = 10
+	var/health = 12
 	var/destroyed = 0
 
 

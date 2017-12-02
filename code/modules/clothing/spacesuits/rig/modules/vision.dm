@@ -3,6 +3,7 @@
  * /obj/item/rig_module/vision
  * /obj/item/rig_module/vision/multi
  * /obj/item/rig_module/vision/meson
+ * /obj/item/rig_module/vision/material
  * /obj/item/rig_module/vision/thermal
  * /obj/item/rig_module/vision/nvg
  * /obj/item/rig_module/vision/medhud
@@ -27,6 +28,11 @@
 	mode = "meson scanner"
 /datum/rig_vision/meson/New()
 	glasses = new /obj/item/clothing/glasses/meson
+
+/datum/rig_vision/material
+	mode = "material scanner"
+/datum/rig_vision/material/New()
+	glasses = new /obj/item/clothing/glasses/material
 
 /datum/rig_vision/sechud
 	mode = "security HUD"
@@ -61,7 +67,8 @@
 	var/list/vision_modes = list(
 		/datum/rig_vision/nvg,
 		/datum/rig_vision/thermal,
-		/datum/rig_vision/meson
+		/datum/rig_vision/meson,
+		/datum/rig_vision/material
 		)
 
 	var/vision_index
@@ -77,6 +84,7 @@
 	interface_desc = "An integrated multi-mode vision system."
 
 	vision_modes = list(/datum/rig_vision/meson,
+						/datum/rig_vision/material,
 						/datum/rig_vision/nvg,
 						/datum/rig_vision/thermal,
 						/datum/rig_vision/sechud,
@@ -94,6 +102,19 @@
 	interface_desc = "An integrated meson scanner."
 
 	vision_modes = list(/datum/rig_vision/meson)
+
+/obj/item/rig_module/vision/material
+
+	name = "hardsuit material scanner"
+	desc = "A layered, translucent visor system for a hardsuit."
+	icon_state = "material"
+	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 5)
+	usable = 0
+
+	interface_name = "material scanner"
+	interface_desc = "An integrated material scanner."
+
+	vision_modes = list(/datum/rig_vision/material)
 
 /obj/item/rig_module/vision/thermal
 

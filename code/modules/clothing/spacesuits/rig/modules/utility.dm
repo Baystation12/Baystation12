@@ -38,7 +38,7 @@
 	suit_overlay_inactive = "plasmacutter"
 	use_power_cost = 50
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6)
-	device_type = /obj/item/weapon/pickaxe/plasmacutter
+	device_type = /obj/item/weapon/gun/energy/plasmacutter
 
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
@@ -96,7 +96,7 @@
 	interface_desc = "A device for building or removing walls. Cell-powered."
 	usable = 1
 	engage_string = "Configure RCD"
-	use_power_cost = 100 KILOWATTS // Matter fabrication is a very energy-demanding process.
+	use_power_cost = 500
 	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
 	device_type = /obj/item/weapon/rcd/mounted
 
@@ -267,6 +267,17 @@
 
 	interface_name = "mounted chem injector"
 	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."
+
+/obj/item/rig_module/chem_dispenser/injector/medical
+	//High amounts of medicine, because you cannot refill it FOR SOME REASON.
+	charges = list(
+		list("dylovene", "dylovene", /datum/reagent/dylovene,       30),
+		list("dexalin-plus", "dexalin-plus", /datum/reagent/dexalinp,       50),
+		list("bicaridinegn", "bicaridine", /datum/reagent/bicaridine,       50),
+		list("inaprovaline",   "inaprovaline",   /datum/reagent/inaprovaline,         40),
+		list("tramadol",   "tramadol",   /datum/reagent/tramadol,         40),
+		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose, 80),
+		)
 
 /obj/item/rig_module/voice
 

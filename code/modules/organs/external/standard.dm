@@ -22,6 +22,7 @@
 	encased = "ribcage"
 	artery_name = "aorta"
 	cavity_name = "thoracic"
+	can_be_maimed = FALSE
 
 /obj/item/organ/external/chest/robotize()
 	if(..())
@@ -52,6 +53,7 @@
 	gendered_icon = 1
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
+	maim_bonus = 0.25
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
@@ -134,6 +136,7 @@
 	has_tendon = TRUE
 	tendon_name = "Achilles tendon"
 	arterial_bleed_severity = 0.5
+	maim_bonus = 1
 
 /obj/item/organ/external/foot/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || agony_amount < 5)
@@ -171,6 +174,7 @@
 	has_tendon = TRUE
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
+	maim_bonus = 1
 
 /obj/item/organ/external/hand/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || (agony_amount < 5))

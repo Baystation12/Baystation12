@@ -105,7 +105,7 @@
 	return list(/obj/item/weapon/storage/toolbox/mechanical = 30,
 				/obj/item/weapon/storage/toolbox/electrical = 20,
 				/obj/item/weapon/storage/toolbox/emergency = 20,
-				/obj/item/weapon/storage/toolbox/syndicate = 1)
+				/obj/item/weapon/storage/toolbox/syndicate = 2)
 
 /obj/random/tech_supply
 	name = "random tech supply"
@@ -203,9 +203,6 @@
 				/obj/item/weapon/reagent_containers/glass/beaker/sulphuric = 1,
 				/obj/item/weapon/contraband/poster = 5,
 				/obj/item/weapon/material/butterfly = 2,
-				/obj/item/weapon/material/butterflyblade = 3,
-				/obj/item/weapon/material/butterflyhandle = 3,
-				/obj/item/weapon/material/wirerod = 3,
 				/obj/item/weapon/melee/baton/cattleprod = 1,
 				/obj/item/weapon/material/butterfly/switchblade = 1,
 				/obj/item/weapon/material/hatchet/tacknife = 1,
@@ -253,7 +250,7 @@
 				/obj/item/weapon/gun/energy/gun/nuclear = 1,
 				/obj/item/weapon/gun/energy/ionrifle = 2,
 				/obj/item/weapon/gun/energy/toxgun = 3,
-				/obj/item/weapon/gun/energy/taser = 4,
+				/obj/item/weapon/gun/energy/taser = 3,
 				/obj/item/weapon/gun/energy/crossbow/largecrossbow = 2,
 				/obj/item/weapon/gun/energy/stunrevolver = 4)
 
@@ -548,7 +545,7 @@ obj/random/closet/spawn_choices()
 				/obj/item/weapon/soap/nanotrasen = 3,
 				/obj/item/weapon/soap/deluxe = 3,
 				/obj/item/weapon/soap/syndie = 1,
-				/obj/item/weapon/soap/gold = 1,
+				/obj/item/weapon/soap/gold = 0.5,
 				/obj/item/weapon/reagent_containers/glass/rag = 2,
 				/obj/item/weapon/reagent_containers/spray/cleaner = 2,
 				/obj/item/weapon/grenade/chem_grenade/cleaner = 1)
@@ -755,7 +752,7 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/gloves/duty = 5,
 				/obj/item/clothing/gloves/guards = 3,
 				/obj/item/clothing/gloves/tactical = 3,
-				/obj/item/clothing/gloves/insulated/cheap = 5)
+				/obj/item/clothing/gloves/insulated/cheap = 4)
 
 /obj/random/glasses
 	name = "random eyewear"
@@ -882,7 +879,7 @@ obj/random/obstruction/spawn_choices()
 
 /obj/random/maintenance/spawn_choices()
 	return list(/obj/random/junk = 4,
-				/obj/random/trash = 4,
+				/obj/random/trash = 3,
 				/obj/random/maintenance/clean = 5)
 
 /obj/random/maintenance/clean
@@ -895,14 +892,14 @@ something, make sure it's not in one of the other lists.*/
 	icon_state = "gift2"
 
 /obj/random/maintenance/clean/spawn_choices()
-	return list(/obj/random/tech_supply = 100,
+	return list(/obj/random/tech_supply = 60,
 				/obj/random/medical = 40,
-				/obj/random/medical/lite = 80,
+				/obj/random/medical/lite = 55,
 				/obj/random/firstaid = 20,
 				/obj/random/powercell = 50,
-				/obj/random/technology_scanner = 80,
-				/obj/random/bomb_supply = 80,
-				/obj/random/contraband = 1,
+				/obj/random/technology_scanner = 60,
+				/obj/random/bomb_supply = 50,
+				/obj/random/contraband = 3,
 				/obj/random/action_figure = 2,
 				/obj/random/plushie = 2,
 				/obj/random/material = 40,
@@ -911,7 +908,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/random/tank = 20,
 				/obj/random/soap = 5,
 				/obj/random/drinkbottle = 5,
-				/obj/random/loot = 1,
+				/obj/random/loot = 2,
 				/obj/random/advdevice = 50,
 				/obj/random/smokes = 30,
 				/obj/random/masks = 10,

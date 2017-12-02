@@ -17,7 +17,7 @@
 	return
 
 /datum/effect/system/expl_particles
-	var/number = 10
+	var/number = 20
 	var/turf/location
 	var/total_particles = 0
 

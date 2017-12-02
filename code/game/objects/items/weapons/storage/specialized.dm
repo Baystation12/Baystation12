@@ -15,7 +15,7 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
 	slot_flags = SLOT_BELT
-	max_storage_space = 200
+	max_storage_space = 400
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
 	can_hold = list(/obj/item/weapon/ore)
@@ -58,7 +58,7 @@
 
 	storage_ui = /datum/storage_ui/default/sheetsnatcher
 
-	var/capacity = 300; //the number of sheets it can carry.
+	var/capacity = 400; //the number of sheets it can carry.
 	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 7
 
@@ -156,4 +156,4 @@
 /obj/item/weapon/storage/sheetsnatcher/borg
 	name = "sheet snatcher 9000"
 	desc = ""
-	capacity = 500//Borgs get more because >specialization
+	capacity = 600//Borgs get more because >specialization

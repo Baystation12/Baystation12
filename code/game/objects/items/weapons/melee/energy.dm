@@ -95,7 +95,7 @@
 	name = "energy sword"
 	desc = "May the force be within you."
 	icon_state = "sword0"
-	active_force = 30
+	active_force = 45
 	active_throwforce = 20
 	force = 3
 	throwforce = 5
@@ -143,7 +143,7 @@
 	icon_state = initial(icon_state)
 
 /obj/item/weapon/melee/energy/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
-	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
+	if(active && default_parry_check(user, attacker, damage_source) && prob(60))
 		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()

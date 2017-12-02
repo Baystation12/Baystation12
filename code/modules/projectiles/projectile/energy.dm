@@ -60,9 +60,14 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	nodamage = 1
 	taser_effect = 1
-	agony = 60
+	agony = 65
 	damage_type = PAIN
+	hitscan = 0
 	//Damage will be handled on the MOB side, to prevent window shattering.
+
+/obj/item/projectile/energy/electrode/taser
+	agony  = 50
+
 
 /obj/item/projectile/energy/electrode/stunshot
 	nodamage = 0
@@ -82,20 +87,27 @@
 /obj/item/projectile/energy/dart
 	name = "dart"
 	icon_state = "toxin"
-	damage = 5
+	damage = 10
 	damage_type = TOX
 	weaken = 5
-
+	armor_penetration = 5
+	hitscan = 0
 
 /obj/item/projectile/energy/bolt
 	name = "bolt"
 	icon_state = "cbbolt"
+	fire_sound = 'sound/weapons/radxbow.ogg'
 	damage = 10
 	damage_type = TOX
 	nodamage = 0
 	agony = 40
 	stutter = 10
+	armor_penetration = 10
+	hitscan = 0
 
+/obj/item/projectile/energy/bolt/on_hit(var/atom/target, var/blocked = 0)
+		empulse(get_turf(target), 0, 1,0) //Turns off radios for optimal steathing.
+		return 1
 
 /obj/item/projectile/energy/bolt/large
 	name = "largebolt"
@@ -112,17 +124,17 @@
 
 /obj/item/projectile/energy/phoron
 	name = "phoron bolt"
-	icon_state = "energy"
-	fire_sound = 'sound/effects/stealthoff.ogg'
-	damage = 20
+	icon_state = "radbolt"
+	fire_sound = 'sound/weapons/laser_c.ogg'
+	damage = 10
 	damage_type = TOX
 	irradiate = 20
 
 /obj/item/projectile/energy/plasmastun
 	name = "plasma pulse"
 	icon_state = "plasma_stun"
-	fire_sound = 'sound/weapons/blaster.ogg'
-	armor_penetration = 10
+	fire_sound = 'sound/weapons/laser_e.ogg'
+	armor_penetration = 5
 	kill_count = 4
 	damage = 5
 	agony = 70

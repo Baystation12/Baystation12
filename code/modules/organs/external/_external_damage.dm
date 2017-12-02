@@ -21,7 +21,6 @@
 		add_autopsy_data("[used_weapon]", brute + burn)
 	var/can_cut = (prob(brute*2) || sharp) && (robotic < ORGAN_ROBOT)
 	var/spillover = 0
-	var/pure_brute = brute
 	if(!is_damageable(brute + burn))
 		spillover =  brute_dam + burn_dam + brute - max_damage
 		if(spillover > 0)
@@ -36,43 +35,39 @@
 	if(owner && loc == owner && !is_stump())
 		if(!cannot_amputate && config.limbs_can_break)
 			if((brute_dam + burn_dam + brute + burn + spillover) >= (max_damage * config.organ_health_multiplier))
-				var/force_droplimb = 0
-				if((brute_dam + burn_dam + brute + burn + spillover) >= (max_damage * config.organ_health_multiplier * 4))
-					force_droplimb = 1
 				//organs can come off in three cases
 				//1. If the damage source is edge_eligible and the brute damage dealt exceeds the edge threshold, then the organ is cut off.
 				//2. If the damage amount dealt exceeds the disintegrate threshold, the organ is completely obliterated.
 				//3. If the organ has already reached or would be put over it's max damage amount (currently redundant),
 				//   and the brute damage dealt exceeds the tearoff threshold, the organ is torn off.
+
 				//Check edge eligibility
 				var/edge_eligible = 0
+				var/gibs_traditionally = TRUE
 				if(edge)
 					if(istype(used_weapon,/obj/item))
 						var/obj/item/W = used_weapon
-						if(W.w_class >= w_class)
-							edge_eligible = 1
+
+						if(isprojectile(W)) //Maiming projectiles use a different method to calcualate gibbing.
+							var/obj/item/projectile/P = used_weapon
+							if(P.maiming)
+								gibs_traditionally = FALSE
+
+						else
+							if(W.w_class >= w_class)
+								edge_eligible = 1
 					else
 						edge_eligible = 1
-				brute = pure_brute
-				if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE)
-					if(prob(brute) || force_droplimb)
+
+				if(gibs_traditionally)
+					if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE && prob(brute))
 						droplimb(0, DROPLIMB_EDGE)
-						return
-				else if(burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY)
-					if(prob(burn/3) || force_droplimb)
+					else if(burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(burn/3))
 						droplimb(0, DROPLIMB_BURN)
-						return
-				else if(brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY)
-					if(prob(brute) || force_droplimb)
+					else if(brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(brute))
 						droplimb(0, DROPLIMB_BLUNT)
-						return
-				else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF)
-					if(prob(brute/3) || force_droplimb)
+					else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF && prob(brute/3))
 						droplimb(0, DROPLIMB_EDGE)
-						return
-				else if(force_droplimb)
-					droplimb(0, DROPLIMB_BLUNT)
-					return
 
 	// High brute damage or sharp objects may damage internal organs
 	var/damage_amt = brute

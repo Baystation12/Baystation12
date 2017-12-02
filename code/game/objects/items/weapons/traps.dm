@@ -84,7 +84,7 @@
 	if(blocked >= 100)
 		return
 
-	if(!L.apply_damage(30, BRUTE, target_zone, blocked, used_weapon=src))
+	if(!L.apply_damage(50, BRUTE, target_zone, blocked, used_weapon=src))
 		return 0
 
 	//trap the victim in place

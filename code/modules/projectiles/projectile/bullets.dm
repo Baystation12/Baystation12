@@ -152,6 +152,9 @@
 /obj/item/projectile/bullet/pistol/strong/revolver //revolvers
 	damage = 50 //Revolvers get snowflake bullets, to keep them relevant
 	armor_penetration = 20
+	maiming = 1
+	maim_rate = 25
+	maim_type = DROPLIMB_BLUNT
 
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
@@ -169,6 +172,8 @@
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 55
 	armor_penetration = 20
+	maiming = 1 //To prevent rando headgibbing, it uses the special headgib damage model. Don't get me wrong, it'll still kill the man, but more predictably.
+	maim_rate = 25
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
@@ -187,6 +192,8 @@
 	pellets = 6
 	range_step = 1
 	spread_step = 10
+	maim_rate = 1 //6% base chance of gib if all pellets hit. Likely to blow limbs at point blank. (As it should be.)
+	maim_type = DROPLIMB_BLUNT
 
 /* "Rifle" rounds */
 
@@ -212,6 +219,9 @@
 	armor_penetration = 80
 	hitscan = 1 //so the PTR isn't useless as a sniper weapon
 	penetration_modifier = 1.25
+	maiming = 1
+	maim_rate = 60
+	maim_type = DROPLIMB_BLUNT
 
 /obj/item/projectile/bullet/rifle/a145/apds
 	damage = 75

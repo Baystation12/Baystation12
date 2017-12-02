@@ -246,8 +246,8 @@
 	taste_description = "acid"
 	reagent_state = LIQUID
 	color = "#8e18a9"
-	power = 10
-	meltdose = 4
+	power = 7
+	meltdose = 30 //Three full sprays.
 
 /datum/reagent/lexorin
 	name = "Lexorin"
@@ -318,7 +318,7 @@
 		return
 	if(prob(10))
 		to_chat(M, "<span class='danger'>Your insides are burning!</span>")
-		M.adjustToxLoss(rand(100, 300) * removed)
+		M.adjustToxLoss(rand(50, 150) * removed)
 	else if(prob(40))
 		M.heal_organ_damage(25 * removed, 0)
 
