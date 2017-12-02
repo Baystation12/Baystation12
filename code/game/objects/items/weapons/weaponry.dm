@@ -4,10 +4,10 @@
 	icon_state = "nullrod"
 	item_state = "nullrod"
 	slot_flags = SLOT_BELT
-	force = 15
+	force = 0
 	throw_speed = 1
 	throw_range = 4
-	throwforce = 10
+	throwforce = 1
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
