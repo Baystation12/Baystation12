@@ -121,56 +121,56 @@
 /*
  * Head of Security
  */
-/obj/item/clothing/under/rank/head_of_security
-	desc = "It's a jumpsuit worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
+/obj/item/clothing/under/rank/cos
+	desc = "It's a jumpsuit worn by those few with the dedication to achieve the position of \"Chief of Security\". It has additional armor to protect the wearer."
 	name = "head of security's jumpsuit"
 	icon_state = "hos"
 	item_state = "r_suit"
 	worn_state = "hosred"
-	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.8
 
-/obj/item/clothing/under/rank/head_of_security/corp
+/obj/item/clothing/under/rank/cos/corp
 	icon_state = "hos_corporate"
-	//item_state = "hos_corporate"
 	worn_state = "hos_corporate"
 
-/obj/item/clothing/head/HoS
-	name = "Head of Security Hat"
-	desc = "The hat of the Head of Security. For showing the officers who's in charge."
+/obj/item/clothing/head/coshat
+	name = "chief of security's hat"
+	desc = "The hat of the chief of security. For showing who's in charge."
 	icon_state = "hoscap"
-	body_parts_covered = 0
 	siemens_coefficient = 0.8
 
-/obj/item/clothing/head/HoS/dermal
-	name = "Dermal Armour Patch"
-	desc = "You're not quite sure how you manage to take it on and off, but it implants nicely in your head."
+/obj/item/clothing/head/dermalpatch
+	name = "dermal armour patch"
+	desc = "A sleek armour plating that fits on your forehead. It seems to camoflauge to your skin colour."
 	icon_state = "dermal"
 	armor = list(melee = 50, bullet = 50, laser = 50,energy = 25, bomb = 30, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
 
-/obj/item/clothing/suit/armor/hos
+/obj/item/clothing/suit/armor/cos
 	name = "armored coat"
-	desc = "A greatcoat enhanced with a special alloy for some protection and style."
+	desc = "A trenchcoat with some inserted fittings of armor and padding, for comfort and protection."
 	icon_state = "hos"
 	item_state = "hos"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-	armor = list(melee = 65, bullet = 30, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.6
 
-//Jensen cosplay gear
-/obj/item/clothing/under/rank/head_of_security/jensen
-	desc = "You never asked for anything that stylish."
-	name = "head of security's jumpsuit"
+/*
+ * Adam Jensen Gear
+ */
+/obj/item/clothing/under/rank/cos/jensen
+	name = "chief of security's jumpsuit"
+	desc = "You never asked for anything this stylish."
 	icon_state = "jensen"
 	item_state = "jensen"
 	worn_state = "jensen"
 	siemens_coefficient = 0.6
 
-/obj/item/clothing/suit/armor/hos/jensen
+/obj/item/clothing/suit/armor/cos/jensen
 	name = "armored trenchcoat"
-	desc = "A trenchcoat augmented with a special alloy for some protection and style."
+	desc = "A trenchcoat augmented with special metal alloy fittings, for protection and comfort."
 	icon_state = "hostrench"
 	item_state = "hostrench"
 	flags_inv = 0

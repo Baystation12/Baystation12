@@ -52,9 +52,10 @@
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/command/security,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/clothing/head/HoS/dermal,
+		/obj/item/clothing/suit/armor/cos/jensen,
+		/obj/item/clothing/head/dermalpatch,
 		/obj/item/weapon/cartridge/hos,
-		/obj/item/device/radio/headset/heads/cos,
+		/obj/item/device/radio/headset/heads/hos,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,
 		/obj/item/weapon/handcuffs,
