@@ -214,3 +214,7 @@
 	welding_masks += /obj/item/clothing/head/welding/knight
 	welding_masks += /obj/item/clothing/head/welding/carp
 	gear_tweaks += new/datum/gear_tweak/path(assoc_by_proc(welding_masks, /proc/get_initial_name))
+
+/datum/gear/head/tankccap
+	display_name = "padded cap"
+	path = /obj/item/clothing/head/tank 
