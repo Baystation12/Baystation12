@@ -103,6 +103,7 @@
 		/obj/item/weapon/pickaxe/plasmacutter = 100
 		)
 
+	priority = 3
 	can_infect = 0
 	blood_level = 0
 
