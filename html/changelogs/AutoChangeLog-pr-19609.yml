@@ -1,0 +1,4 @@
+author: "Zero-Bits"
+delete-after: True
+changes: 
+  - bugfix: "\"Fixed library program UI and bookbinder linking.\""
