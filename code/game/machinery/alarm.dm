@@ -86,6 +86,9 @@
 
 	var/report_danger_level = 1
 
+/obj/machinery/alarm/cold
+	target_temperature = T0C+4
+
 /obj/machinery/alarm/nobreach
 	breach_detection = 0
 
