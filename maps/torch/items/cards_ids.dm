@@ -193,3 +193,29 @@
 	dna_hash = md5(fingerprint_hash)
 	blood_type = RANDOM_BLOOD_TYPE
 	update_name()
+
+
+/*
+*	Snowflake shit to give different access to alt-titles.
+*	Unique ID card should be added to their outfit.
+*/
+
+/obj/item/weapon/card/id/torch/contractor/medical/chemist/New()
+	..()
+	access &= list(access_medical, access_medical_equip, access_solgov_crew)
+	access |= list(access_chemistry)
+
+/obj/item/weapon/card/id/torch/contractor/medical/virologist/New()
+	..()
+	access &= list(access_medical, access_medical_equip, access_solgov_crew, access_morgue)
+	access |= list(access_virology, access_crematorium)
+
+/obj/item/weapon/card/id/torch/contractor/medical/mortus/New()
+	..()
+	access &= list(access_medical, access_medical_equip, access_solgov_crew, access_morgue)
+	access |= list(access_crematorium)
+
+/obj/item/weapon/card/id/torch/contractor/medical/paramedic/New()
+	..()
+	access &= list(access_medical, access_medical_equip, access_solgov_crew)
+	access |= list(access_eva, access_emergency_storage, access_external_airlocks)
