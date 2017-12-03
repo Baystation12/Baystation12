@@ -37,17 +37,16 @@
 
 /obj/item/clothing/under/magintka_uniform
 	name = "Magnitka fleet officer uniform"
-	desc = "Dark uniform coat worn by Magnitka fleet officers."
+	desc = "A dark uniform coat worn by Magnitka fleet officers."
 	icon_state = "magnitka_officer"
-	item_state = "magnitka_officer_on"
-	worn_state = "magnitka_officer"
-	icon = 'marooned_sprites.dmi'
+	icon = 'maps/away/marooned/marooned_sprites.dmi'
+	item_icons = list(slot_w_uniform_str = 'maps/away/marooned/marooned_sprites.dmi')
 
 /obj/item/clothing/accessory/medal/silver/marooned_medal
-	name = "\improper marooned officer's  medal"
+	name = "marooned officer's medal"
 	desc = "An silver round medal of marooned officer. It has inscription \"For Distinguished Service\" in lower part. On medal's plank it's engraved \"H. Warda\""
 	icon_state = "marooned_medal"
-	icon = 'marooned_sprites.dmi'
+	icon = 'maps/away/marooned/marooned_sprites.dmi'
 
 /obj/effect/landmark/corpse/marooned_officer
 	name = "Marooned Magnitka's fleet officer"
