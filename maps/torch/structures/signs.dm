@@ -28,8 +28,6 @@
 	to_chat(usr, "The founding principles of EC are written there: <A href='?src=\ref[src];show_info=1'>Expeditionary Directives</A>")
 
 /obj/structure/sign/ecplaque/Topic(href, href_list)
-	if(..())
-		return 1
 	if(href_list["show_info"])
 		to_chat(usr, directives)
 
