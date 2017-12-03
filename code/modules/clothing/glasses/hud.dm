@@ -4,6 +4,8 @@
 	flags = 0 //doesn't protect eyes because it's a monocle, duh
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 2)
 	var/list/icon/current = list() //the current hud icons
+	electric = 1
+	gender = NEUTER
 
 /obj/item/clothing/glasses/proc/process_hud(var/mob/M)
 	if(hud)
@@ -13,7 +15,7 @@
 	return
 
 /obj/item/clothing/glasses/hud/health
-	name = "Health Scanner HUD"
+	name = "health scanner HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."
 	icon_state = "healthhud"
 	body_parts_covered = 0
@@ -23,29 +25,30 @@
 	process_med_hud(M, 1)
 
 /obj/item/clothing/glasses/hud/health/prescription
-	name = "Prescription Health Scanner HUD"
+	name = "prescription health scanner HUD"
 	desc = "A medical HUD integrated with a set of prescription glasses"
 	prescription = 7
 	icon_state = "healthhudpresc"
 	item_state = "glasses"
 
 /obj/item/clothing/glasses/hud/security
-	name = "Security HUD"
+	name = "security HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their ID status and security records."
 	icon_state = "securityhud"
 	body_parts_covered = 0
 	var/global/list/jobs[0]
 
 /obj/item/clothing/glasses/hud/security/prescription
-	name = "Prescription Security HUD"
+	name = "prescription security HUD"
 	desc = "A security HUD integrated with a set of prescription glasses"
 	prescription = 7
 	icon_state = "sechudpresc"
 	item_state = "glasses"
 
 /obj/item/clothing/glasses/hud/security/jensenshades
-	name = "Augmented shades"
+	name = "augmented shades"
 	desc = "Polarized bioneural eyewear, designed to augment your vision."
+	gender = PLURAL
 	icon_state = "jensenshades"
 	item_state = "jensenshades"
 	vision_flags = SEE_MOBS
