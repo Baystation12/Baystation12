@@ -84,6 +84,7 @@ obj/item/weapon/gun/energy/retro
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
+	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/energy/lasercannon/mounted
 	name = "mounted laser cannon"
@@ -105,6 +106,7 @@ obj/item/weapon/gun/energy/retro
 	w_class = ITEM_SIZE_LARGE
 	charge_cost = 15
 	max_shots = 10
+	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/energy/xray/pistol
 	name = "x-ray laser gun"
@@ -132,6 +134,7 @@ obj/item/weapon/gun/energy/retro
 	w_class = ITEM_SIZE_HUGE
 	accuracy = -2 //shooting at the hip
 	scoped_accuracy = 0
+	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/energy/sniperrifle/update_icon()
 	..()
