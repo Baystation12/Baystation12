@@ -1,5 +1,8 @@
 /datum/map/overmap_example
 	allowed_jobs = list(/datum/job/captain, /datum/job/chief_engineer, /datum/job/doctor, /datum/job/hop, /datum/job/cyborg, /datum/job/assistant, /datum/job/engineer)
+	species_to_job_whitelist = list(
+		/datum/species/vox = list(/datum/job/assistant)
+	)
 
 /datum/job/captain
 	supervisors = "the Merchant Code and your conscience"
@@ -38,7 +41,7 @@
 			GLOB.using_map.company_name = company
 		if(company_s)
 			GLOB.using_map.company_short = company_s
-		command_announcement.Announce("Congratulations to all employes of [capitalize(GLOB.using_map.company_name)] on the new name. The rebranding have changed the [GLOB.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Company name change approved")
+		command_announcement.Announce("Congratulations to all employees of [capitalize(GLOB.using_map.company_name)] on the new name. Their rebranding has changed the [GLOB.using_map.company_short] market value by [0.01*rand(-10,10)]%.", "Company name change approved")
 	verbs -= /client/proc/rename_company
 
 /datum/job/captain/get_access()
@@ -107,7 +110,7 @@
 	pda_type = /obj/item/device/pda/captain
 	r_pocket = /obj/item/device/radio
 	id_type = /obj/item/weapon/card/id/gold
-	
+
 
 /decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
