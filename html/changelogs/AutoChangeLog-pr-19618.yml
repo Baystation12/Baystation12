@@ -1,7 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "Sunglasses now apply a screen overlay when worn."
-  - tweak: "A makeshift duct tape blindfold can now protect your eyes from welders, if you don't mind welding blind."
-  - balance: "All HUDs and other glasses types with electrical components are now vulnerable to EMP, and will disorient you and turn the HUD off when hit. Neither of the effects are permanent, and you can turn your kit back on right away."
-  - balance: "Any glasses type with night vision no longer has flash/welder protection, or is otherwise vulnerable to flashes or welders."

@@ -1,5 +1,0 @@
-author: "sabiram & chinsky"
-delete-after: True
-changes: 
-  - rscadd: "The tobacco plant can now be grown, with a couple mutates."
-  - bugfix: "Electronic cigarettes should no longer be more harmful than regular cigarettes."
