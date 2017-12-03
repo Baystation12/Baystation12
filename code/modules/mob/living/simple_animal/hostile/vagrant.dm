@@ -33,8 +33,8 @@
 	var/blood_per_tick = 4
 	var/health_per_tick = 0.75
 
-/mob/living/simple_animal/hostile/vagrant/New()
-	..()
+/mob/living/simple_animal/hostile/vagrant/Initialize()
+	. = ..()
 	if(prob(40))
 		carried = new/datum/disease2/disease()
 		carried.makerandom(rand(2, 4))
@@ -100,7 +100,7 @@
 			src.loc = gripping.loc
 			return
 
-/mob/living/simple_animal/hostile/vagrant/swarm/New()
-	..()
-	if(prob(75)) new/mob/living/simple_animal/hostile/vagrant(src.loc)
-	if(prob(50)) new/mob/living/simple_animal/hostile/vagrant(src.loc)
+/mob/living/simple_animal/hostile/vagrant/swarm/Initialize()
+	. = ..()
+	if(prob(75)) new/mob/living/simple_animal/hostile/vagrant(loc)
+	if(prob(50)) new/mob/living/simple_animal/hostile/vagrant(loc)
