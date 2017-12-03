@@ -21,7 +21,7 @@
 	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. Tt can also be used as a support gunship."
 	anchored = 1
 	density = 1
-	icon = 'evac_pelican.dmi'
+	icon = 'maps/desert_outpost/gamemode/evac_pelican.dmi'
 	icon_state = "base"
 	var/health = 600
 	var/healthmax = 600
