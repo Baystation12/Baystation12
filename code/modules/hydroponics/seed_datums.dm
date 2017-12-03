@@ -1152,6 +1152,54 @@
 	set_trait(TRAIT_IDEAL_HEAT, 283)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
+/datum/seed/tobacco
+	name = "tobacco"
+	seed_name = "tobacco"
+	display_name = "tobacco leaves"
+	mutants = list("finetobacco", "puretobacco")
+	chems = list(/datum/reagent/tobacco = list(1,10))
+
+/datum/seed/tobacco/New()
+	..()
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_PRODUCT_ICON,"tobacco")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#749733")
+	set_trait(TRAIT_PLANT_COLOUR,"#749733")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
+	set_trait(TRAIT_IDEAL_HEAT, 299)
+	set_trait(TRAIT_IDEAL_LIGHT, 7)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
+
+/datum/seed/tobacco/finetobacco
+	name = "finetobacco"
+	seed_name = "fine tobacco"
+	display_name = "fine tobacco leaves"
+	chems = list(/datum/reagent/tobacco/fine = list(1,10))
+
+/datum/seed/tobacco/finetobacco/New()
+	..()
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#33571b")
+	set_trait(TRAIT_PLANT_COLOUR,"#33571b")
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.20)
+
+/datum/seed/tobacco/puretobacco //provides the pure nicotine reagent
+	name = "puretobacco"
+	seed_name = "succulent tobacco"
+	display_name = "succulent tobacco leaves"
+	chems = list(/datum/reagent/nicotine = list(1,10))
+
+/datum/seed/tobacco/puretobacco/New()
+	..()
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_JUICY,1)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#b7c61a")
+	set_trait(TRAIT_PLANT_COLOUR,"#b7c61a")
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.30)
+
 // Alien weeds.
 /datum/seed/xenomorph
 	name = "xenomorph"
