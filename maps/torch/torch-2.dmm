@@ -361,7 +361,7 @@
 "hg" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan{icon_state = "map"; dir = 8},/turf/simulated/floor/plating,/area/engineering/atmos/aux)
 "hh" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/red,/turf/simulated/floor/plating,/area/engineering/atmos/aux)
 "hi" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{icon_state = "map"; dir = 4},/turf/simulated/floor/plating,/area/engineering/atmos/aux)
-"hj" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22; pixel_y = 0},/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/closet/crate/freezer,/turf/simulated/floor/tiled/freezer,/area/crew_quarters/galleybackroom)
+"hj" = (/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/closet/crate/freezer,/obj/machinery/alarm/cold{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/galleybackroom)
 "hk" = (/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/galleybackroom)
 "hl" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/galleybackroom)
 "hm" = (/obj/machinery/door/airlock/freezer{name = "Galley Cold Room"; req_access = list(28)},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/galleybackroom)
