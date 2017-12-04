@@ -6,7 +6,6 @@
 "af" = (/turf/simulated/wall/r_wall,/area/smugglers/base)
 "ag" = (/obj/machinery/door/airlock/external{frequency = 1503; icon_state = "door_closed"; locked = 0},/turf/simulated/floor/airless/ceiling,/area/smugglers/base)
 "ah" = (/turf/simulated/floor/asteroid,/area/space)
-"ai" = (/turf/space,/area/mine/explored)
 "aj" = (/obj/effect/landmark/corpse,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/asteroid,/area/mine/explored)
 "ak" = (/obj/item/ammo_casing/a50{pixel_x = 5; pixel_y = 5},/obj/item/ammo_casing/a50,/obj/item/weapon/shovel{pixel_x = 10; pixel_y = -5},/obj/effect/decal/cleanable/blood,/turf/simulated/floor/asteroid,/area/mine/explored)
 "al" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/asteroid,/area/mine/explored)
@@ -132,6 +131,8 @@
 "fb" = (/obj/structure/cable,/obj/structure/cable{d1 = 32; d2 = 4; icon_state = "32-4"},/obj/structure/cable{icon_state = "0-2"; dir = 4; pixel_y = 0; d1 = 16; d2 = 0},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/airless/ceiling,/area/smugglers/base)
 "gb" = (/obj/structure/bed/chair/comfy/red{dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/smugglers/office)
 "hb" = (/obj/effect/landmark/random_gen/asteroid{generation_height = 50; generation_width = 50},/turf/space,/area/space)
+"ib" = (/mob/living/simple_animal/hostile/retaliate/malf_drone,/turf/simulated/floor/tiled,/area/smugglers/office)
+"jb" = (/obj/structure/bed,/obj/effect/decal/cleanable/dirt,/mob/living/simple_animal/hostile/retaliate/malf_drone,/turf/simulated/floor/tiled,/area/smugglers/dorms)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -139,7 +140,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaababacaaaaaaaaaaacaaababacaaaaaaacacaaacaaaaaaaaaaaaaaaaaaaa
 aaaaaaabacacaaaaaaaaaaaaaaaaaaaaaaaaabababababacacaaaaaaacacacabacaaadaaacacaaacacaaaaaaaaaaaaaaaaaa
 aaaaaaababacaaaaaaaeaaaaaaaaaaaaaaaaaaabacacababababaaaaaaacacacabaaaaaaaaacacacacaaaaaaaaaaaaaaaaaa
-aaaaaaacababaaaaafagafaaaaahaiaaaaaaaaabacacababaaabaaaaaaacacajakalalaaaaacacacacacacacaaaaaaaaaaaa
+aaaaaaacababaaaaafagafaaaaahaaaaaaaaaaabacacababaaabaaaaaaacacajakalalaaaaacacacacacacacaaaaaaaaaaaa
 aaaaaaaaacabababamdbafaaahaoapaqaaaaaaacacacabababacacacacacacabacacabababababacacababacababaaaaaaaa
 aaaaaaaaacababacafarafafafafafasatauafafafafafafafavacacacacabacacacabababababacababacacacabaaaaaaaa
 aaaaaaaaababababafawaxayazaAaBaCaDaEaFaGaHaIaJebaLaMababacacabacababaNabababababababacacacabaaaaaaaa
@@ -149,14 +150,14 @@ aaaaaaaaacacacacafaZbebibjbkbebebebfaVblbmbnafacacacacacacacbobpabacacabacacacab
 aaaaaaabacacacacafbqbrbsbtbubebabebvbwbwbwbwbxacacacacacacacacacacacacababababababababaaaaaaaaaaaaaa
 aaaaaaababacacacafaZbybzbAbubebebebBbCbDbEbFbxacacacacacacacacacacacacacacacaNababacabaaaaaaaaaaaaaa
 aaaaaaacabacacacafaZbabGbHbIbebebebJbwbKbLgbbxabacacacacacacacacacacacacacacacabacababaaaaaaaaaaaaaa
-aaaaaaacababacacafbqbebebebebNbObebPbwbKbQbQbxacacacacacacacacacacababacacacacabacabacaaaaaaaaaaaaaa
+aaaaaaacababacacafbqbebebebebNbObebPbwbKibbQbxacacacacacacacacacacababacacacacabacabacaaaaaaaaaaaaaa
 aaaaaaaaaaacacabafaZbabRbSbTbUbVbebWbwbXbYbZbxacabababababacacacacabacacacacacacabababaaaaabaaaaaaaa
 aaaaaaaaaaacacabcacbcccccccccccccccccabxbxbxbxacabababababacacacacababacacacacabacacabaaaaabaaaaaaaa
 aaaaaaaaaaaaacaccacdcecfcgchcicccjckcaacacacacacacacabacacacacacacabababacacacaNabababacacacaaaaaaaa
 aaaaaaaaabacacaccaclcmcmcmcmcncocpcqcaababababababacaoacacacacacacacabababacacabacacacacacaaaaaaaaaa
 aaaaaaaaababacaccacmcrcsctcucvcccacacaacacacabababacababacacacacabacacacacacacabacacacacacaaaaaaaaaa
 aaaaaaaaaaabacaccacwcccccccccccccaabacacacacabababababaNabacacababacacacacacababacacababababacaaaaaa
-aaaaaaaaaaabacaccacmcxcycxcycxcycaabacacacacacacababacacababababacacacababababacacacabababacacaaaaaa
+aaaaaaaaaaabacaccacmcxcyjbcycxcycaabacacacacacacababacacababababacacacababababacacacabababacacaaaaaa
 aaaaaaacaaababaccaczcAcmcmcmcAcmcaacacacabababababacacacababacababacacaNacacacacacacabababacacaaaaaa
 aaaaaaababababaccacacacacacacacacaacabababababacacacacacabacacacababababacacacaaaaaaaaaaaaaaacaaaaaa
 aaaaaaaaaaaaabacacababacacacacacabababaNacacacabacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaa
