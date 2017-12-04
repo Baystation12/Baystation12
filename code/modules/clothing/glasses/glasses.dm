@@ -486,6 +486,10 @@
 	prescription = 5
 	body_parts_covered = EYES
 
+/obj/item/clothing/glasses/sunglasses/sechud/tajblind/Initialize()
+        . = ..()
+        overlay = null
+
 /obj/item/clothing/glasses/meson/prescription/tajblind
 	name = "industrial veil"
 	desc = "An Ahdominian made veil that allows the user to see while obscuring their eyes. This one has installed mesons."
