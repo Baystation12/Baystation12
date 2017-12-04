@@ -13,7 +13,6 @@
 	var/activation_sound = 'sound/items/goggles_charge.ogg'
 	var/obj/screen/overlay = null
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
-	var/electric = 0 //if the glasses should be disrupted by EMP
 
 /obj/item/clothing/glasses/New()
 	..()
@@ -24,23 +23,6 @@
 	qdel(hud)
 	hud = null
 	. = ..()
-
-/obj/item/clothing/glasses/emp_act(severity)
-	if(electric)
-		if(istype(src.loc, /mob/living/carbon/human))
-			var/mob/living/carbon/human/M = src.loc
-			to_chat(M, "<span class='danger'>Your [name] malfunction[gender != PLURAL ? "s":""], blinding you!</span>")
-			if(M.glasses == src)
-				M.eye_blind = 2
-				M.eye_blurry = 4
-				// Don't cure being nearsighted
-				if(!(M.disabilities & NEARSIGHTED))
-					M.disabilities |= NEARSIGHTED
-					spawn(100)
-						M.disabilities &= ~NEARSIGHTED
-		if(toggleable)
-			if(active)
-				active = 0
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())
@@ -64,9 +46,8 @@
 		user.update_action_buttons()
 
 /obj/item/clothing/glasses/meson
-	name = "optical meson scanner"
+	name = "Optical Meson Scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
-	gender = NEUTER
 	icon_state = "meson"
 	item_state = "glasses"
 	action_button_name = "Toggle Goggles"
@@ -74,7 +55,6 @@
 	toggleable = 1
 	vision_flags = SEE_TURFS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	electric = 1
 
 /obj/item/clothing/glasses/meson/New()
 	..()
@@ -86,20 +66,19 @@
 	prescription = 6
 
 /obj/item/clothing/glasses/science
-	name = "science goggles"
+	name = "Science Goggles"
 	desc = "The goggles do nothing!"
 	icon_state = "purple"
 	item_state = "glasses"
 	action_button_name = "Toggle Goggles"
 	toggleable = 1
-	electric = 1
 
 /obj/item/clothing/glasses/science/New()
 	..()
 	overlay = GLOB.global_hud.science
 
 /obj/item/clothing/glasses/night
-	name = "night vision goggles"
+	name = "Night Vision Goggles"
 	desc = "You can totally see in the dark now!"
 	icon_state = "night"
 	item_state = "glasses"
@@ -109,13 +88,12 @@
 	toggleable = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	off_state = "denight"
-	electric = 1
 
 /obj/item/clothing/glasses/night/New()
 	..()
 	overlay = GLOB.global_hud.nvg
 
-/obj/item/clothing/glasses/tacgoggles
+/obj/item/clothing/glasses/tacgoggles //made their own thing, with more extreme flash protection and medium NV, but no more sechud
 	name = "tactical goggles"
 	desc = "Self-polarizing goggles with light amplification for dark environments. Made from durable synthetic."
 	icon_state = "swatgoggles"
@@ -124,9 +102,9 @@
 	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	flash_protection = FLASH_PROTECTION_MAJOR
 	armor = list(melee = 20, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
-	electric = 1
 
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
@@ -160,19 +138,17 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/material
-	name = "optical material scanner"
+	name = "Optical Material Scanner"
 	desc = "Very confusing glasses."
-	gender = NEUTER
 	icon_state = "material"
 	item_state = "glasses"
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3)
 	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	vision_flags = SEE_OBJS
-	electric = 1
 
 /obj/item/clothing/glasses/regular
-	name = "prescription glasses"
+	name = "Prescription Glasses"
 	desc = "Made by Nerd. Co."
 	icon_state = "glasses"
 	item_state = "glasses"
@@ -180,43 +156,38 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/regular/scanners
-	name = "scanning goggles"
+	name = "Scanning Goggles"
 	desc = "A very oddly shaped pair of goggles with bits of wire poking out the sides. A soft humming sound emanates from it."
 	icon_state = "uzenwa_sissra_1"
 	light_protection = 7
-	electric = 1
 
 /obj/item/clothing/glasses/regular/hipster
-	name = "prescription glasses"
+	name = "Prescription Glasses"
 	desc = "Made by Uncool. Co."
 	icon_state = "hipster_glasses"
 	item_state = "hipster_glasses"
 
 /obj/item/clothing/glasses/threedglasses
-	name = "3D glasses"
 	desc = "A long time ago, people used these glasses to makes images from screens threedimensional."
+	name = "3D glasses"
 	icon_state = "3d"
 	item_state = "3d"
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/gglasses
-	name = "green glasses"
+	name = "Green Glasses"
 	desc = "Forest green glasses, like the kind you'd wear when hatching a nasty scheme."
 	icon_state = "gglasses"
 	item_state = "gglasses"
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/sunglasses
-	name = "sunglasses"
 	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes."
+	name = "sunglasses"
 	icon_state = "sun"
 	item_state = "sunglasses"
 	darkness_view = -1
 	flash_protection = FLASH_PROTECTION_MODERATE
-
-/obj/item/clothing/glasses/sunglasses/New()
-	..()
-	overlay = GLOB.global_hud.sunglasses
 
 /obj/item/clothing/glasses/welding
 	name = "welding goggles"
@@ -272,7 +243,6 @@
 	icon_state = "blindfold"
 	item_state = "blindfold"
 	tint = TINT_BLIND
-	flash_protection = FLASH_PROTECTION_MAJOR
 
 /obj/item/clothing/glasses/sunglasses/blindfold/tape
 	name = "length of tape"
@@ -292,11 +262,10 @@
 	item_state = "bigsunglasses"
 
 /obj/item/clothing/glasses/sunglasses/sechud
-	name = "HUD sunglasses"
+	name = "HUDSunglasses"
 	desc = "Sunglasses with a HUD."
 	icon_state = "sunhud"
 	hud = /obj/item/clothing/glasses/hud/security
-	electric = 1
 
 /obj/item/clothing/glasses/sunglasses/sechud/goggles //now just a more "military" set of HUDglasses for the Torch
 	name = "HUD goggles"
@@ -348,9 +317,8 @@
 		icon_state = off_state
 
 /obj/item/clothing/glasses/thermal
-	name = "optical thermal scanner"
+	name = "Optical Thermal Scanner"
 	desc = "Thermals in the shape of glasses."
-	gender = NEUTER
 	icon_state = "thermal"
 	item_state = "glasses"
 	action_button_name = "Toggle Goggles"
@@ -358,14 +326,28 @@
 	toggleable = 1
 	vision_flags = SEE_MOBS
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	electric = 1
+	flash_protection = FLASH_PROTECTION_REDUCED
+
+	emp_act(severity)
+		if(istype(src.loc, /mob/living/carbon/human))
+			var/mob/living/carbon/human/M = src.loc
+			to_chat(M, "<span class='danger'>The Optical Thermal Scanner overloads and blinds you!</span>")
+			if(M.glasses == src)
+				M.eye_blind = 3
+				M.eye_blurry = 5
+				// Don't cure being nearsighted
+				if(!(M.disabilities & NEARSIGHTED))
+					M.disabilities |= NEARSIGHTED
+					spawn(100)
+						M.disabilities &= ~NEARSIGHTED
+		..()
 
 /obj/item/clothing/glasses/thermal/New()
 	..()
 	overlay = GLOB.global_hud.thermal
 
 /obj/item/clothing/glasses/thermal/syndi	//These are now a traitor item, concealed as mesons.	-Pete
-	name = "optical meson scanner"
+	name = "Optical Meson Scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
 	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
@@ -376,7 +358,7 @@
 	action_button_name = null
 
 /obj/item/clothing/glasses/thermal/plain/monocle
-	name = "thermoncle"
+	name = "Thermoncle"
 	desc = "A monocle thermal."
 	icon_state = "thermoncle"
 	flags = null //doesn't protect eyes because it's a monocle, duh
@@ -384,15 +366,14 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/thermal/plain/eyepatch
-	name = "optical thermal eyepatch"
+	name = "Optical Thermal Eyepatch"
 	desc = "An eyepatch with built-in thermal optics."
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/thermal/plain/jensen
-	name = "optical thermal implants"
-	gender = PLURAL
+	name = "Optical Thermal Implants"
 	desc = "A set of implantable lenses designed to augment your vision."
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
@@ -400,14 +381,12 @@
 /obj/item/clothing/glasses/eyepatch/hud
 	name = "iPatch"
 	desc = "For the technologically inclined pirate. It connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
-	gender = NEUTER
 	icon_state = "hudpatch"
 	item_state = "hudpatch"
 	off_state = "hudpatch"
 	action_button_name = "Toggle iPatch"
 	toggleable = 1
 	var/eye_color = COLOR_WHITE
-	electric = 1
 
 /obj/item/clothing/glasses/eyepatch/hud/Initialize()
 	.  = ..()
