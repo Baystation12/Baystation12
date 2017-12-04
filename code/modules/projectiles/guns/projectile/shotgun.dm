@@ -16,6 +16,22 @@
 	one_hand_penalty = 2
 	var/recentpump = 0 // to prevent spammage
 
+/obj/item/weapon/gun/projectile/shotgun/pump/proc/load_from_box(var/obj/item/ammo_box/box,var/mob/user)
+	if(box.contents.len == 0 || isnull(box.contents.len))
+		to_chat(user,"<span class ='notice'>The [box.name] is empty!</span>")
+		return
+	if(!(loaded.len <= max_shells))
+		to_chat(user,"<span class = 'notice'>The [name] is full!</span>")
+		return
+	to_chat(user,"<span class ='notice'>You start loading the [name] from the [box.name]</span>")
+	for(var/ammo in box.contents)
+		if(do_after(user,box.load_time SECONDS,box, same_direction = 1))
+			load_ammo(ammo,user)
+			continue
+		break
+
+	box.update_icon()
+
 /obj/item/weapon/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
 		return chambered.BB
@@ -25,6 +41,11 @@
 	if(world.time >= recentpump + 10)
 		pump(user)
 		recentpump = world.time
+
+/obj/item/weapon/gun/projectile/shotgun/pump/attackby(var/obj/item/W,var/mob/user)
+	if(istype(W,/obj/item/ammo_box))
+		load_from_box(W,user)
+	return ..()
 
 /obj/item/weapon/gun/projectile/shotgun/pump/proc/pump(mob/M as mob)
 	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
