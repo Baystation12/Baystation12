@@ -2,7 +2,8 @@
 /obj/item/ammo_box
 	name = "Ammo Box"
 	desc = "An ammunition box used for quick loading."
-	icon_state = "gift"
+	icon = 'icons/obj/ammo.dmi'
+	icon_state = "666"
 	var/capacity = 20
 	var/list/ammo_spawnwith = list()
 	var/load_time = 1 //The time it takes to load one round from the box to the weapon, in seconds
