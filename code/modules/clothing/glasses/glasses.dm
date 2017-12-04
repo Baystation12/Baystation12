@@ -305,7 +305,7 @@
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle
 	name = "HUD aviators"
-	desc = "Modified aviator glasses that can be switch between HUD and flash protection modes."
+	desc = "Modified aviator glasses that can be switched between HUD and flash protection modes."
 	icon_state = "sec_hud"
 	off_state = "sec_flash"
 	action_button_name = "Toggle Mode"
@@ -318,6 +318,7 @@
 /obj/item/clothing/glasses/sunglasses/sechud/toggle/New()
 	..()
 	hud_holder = hud
+	overlay = null
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle/Destroy()
 	qdel(hud_holder)
@@ -331,9 +332,11 @@
 		if(on)
 			flash_protection = FLASH_PROTECTION_NONE
 			src.hud = hud_holder
-			to_chat(user, "You switch the [src] to HUD mode.")
+			overlay = null
+			to_chat(user, "You switch \the [src] to HUD mode.")
 		else
 			flash_protection = initial(flash_protection)
+			overlay = GLOB.global_hud.sunglasses
 			src.hud = null
 			to_chat(user, "You switch \the [src] to flash protection mode.")
 		update_icon()
