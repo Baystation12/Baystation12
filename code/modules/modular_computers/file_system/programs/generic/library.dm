@@ -49,6 +49,7 @@ The answer was five and a half years -ZeroBits
 				"category" = query.item[4]
 			)))
 		data["book_list"] = all_entries
+		data["scanner"] = istype(scanner)
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -64,9 +65,8 @@ The answer was five and a half years -ZeroBits
 		view_book(href_list["viewbook"])
 		return 1
 	if(href_list["viewid"])
-		var/bookid = input("Enter USBN:") as num|null
-		if(bookid && isnum(bookid))
-			return view_book(bookid)
+		view_book(sanitizeSQL(input("Enter USBN:") as num|null))
+		return 1
 	if(href_list["closebook"])
 		current_book = null
 		return 1
@@ -78,7 +78,6 @@ The answer was five and a half years -ZeroBits
 			if(scn && scn.anchored)
 				scanner = scn
 				return 1
-		return 0
 	if(href_list["uploadbook"])
 		if(!scanner || !scanner.anchored)
 			scanner = null
@@ -94,10 +93,19 @@ The answer was five and a half years -ZeroBits
 			error_message = "Interface Error: Cached book is copy-protected."
 			return 1
 
+		B.name = input(usr, "Enter Book Title", "Title", B.name) as text|null
+		B.author = input(usr, "Enter Author Name", "Author", B.author) as text|null
+
 		if(!B.author)
 			B.author = "Anonymous"
-		var/choice = input(usr, "Upload [B.name] by [B.author] to the External Archive?") in list("Yes", "No")
+		else if(lowertext(B.author) == "edgar allen poe" || lowertext(B.author) == "edgar allan poe")
+			error_message = "User Error: Upload something original."
+			return 1
 
+		if(!B.title)
+			B.title = "Untitled"
+
+		var/choice = input(usr, "Upload [B.name] by [B.author] to the External Archive?") in list("Yes", "No")
 		if(choice == "Yes")
 			establish_old_db_connection()
 			if(!dbcon_old.IsConnected())
@@ -141,11 +149,11 @@ The answer was five and a half years -ZeroBits
 				B.dat = current_book["content"]
 				B.icon_state = "book[rand(1,7)]"
 				B.desc = current_book["author"]+", "+current_book["title"]+", "+"USBN "+current_book["id"]
-				bndr.visible_message("[bndr] whirs as it prints and binds a new book.")
+				bndr.visible_message("\The [bndr] whirs as it prints and binds a new book.")
 				return 1
 
 		//Regular printing
-		print_text("<i>Author: [current_book["author"]]<br>USBN: [current_book["id"]]</i><br><h3>[current_book["title"]]</h3<br>[current_book["content"]]", usr)
+		print_text("<i>Author: [current_book["author"]]<br>USBN: [current_book["id"]]</i><br><h3>[current_book["title"]]</h3><br>[current_book["content"]]", usr)
 		return 1
 	if(href_list["sortby"])
 		sort_by = href_list["sortby"]
@@ -153,12 +161,13 @@ The answer was five and a half years -ZeroBits
 	if(href_list["reseterror"])
 		if(error_message)
 			current_book = null
+			scanner = null
 			sort_by = "id"
 			error_message = ""
 		return 1
 
 /datum/nano_module/library/proc/view_book(var/id)
-	if(current_book)
+	if(current_book || !id)
 		return 0
 
 	var/sqlid = sanitizeSQL(id)
