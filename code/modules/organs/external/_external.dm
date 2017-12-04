@@ -24,6 +24,8 @@
 	var/last_dam = -1                  // used in healing/processing calculations.
 	var/pain = 0                       // How much the limb hurts.
 	var/pain_disability_threshold      // Point at which a limb becomes unusable due to pain.
+	var/maim_bonus = 0.75              //For special projectile gibbing calculation, dubbed "maiming"
+	var/can_be_maimed = FALSE
 
 	// Appearance vars.
 	var/nonsolid                       // Snowflake warning, reee. Used for slime limbs.

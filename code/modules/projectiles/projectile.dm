@@ -48,6 +48,12 @@
 	var/hitscan = 0		// whether the projectile should be hitscan
 	var/step_delay = 1	// the delay between iterations if not a hitscan projectile
 
+	//For Maim / Maiming.
+	var/maiming = 0 //Enables special limb dismemberment calculation; used primarily for ranged weapons that can maim, but do not do brute damage.
+	var/maim_rate = 0 //Factor that the recipiant will be maimed by the projectile (NOT OUT OF 100%.)
+	var/clean_cut = 0 //Is the delimbning painful and unclean? Probably. Can be a function or proc, if you're doing something odd.
+	var/maim_type = DROPLIMB_EDGE
+
 	// effect types to be used
 	var/muzzle_type
 	var/tracer_type
@@ -68,15 +74,31 @@
 
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
 /obj/item/projectile/proc/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
-	if(blocked >= 100)		return 0//Full block
-	if(!isliving(target))	return 0
-	if(isanimal(target))	return 0
+	if(blocked >= 100)
+		return 0//Full block
+	if(!isliving(target))
+		return 0
+	if(isanimal(target))
+		return 0
 
 	var/mob/living/L = target
 
-	L.apply_effects(stun, weaken, paralyze, 0, stutter, eyeblur, drowsy, agony, blocked)
-	//radiation protection is handled separately from other armour types.
-	L.apply_effect(irradiate, IRRADIATE, L.getarmor(null, "rad"))
+	if (ishuman(target))
+		var/mob/living/carbon/human/H = target
+		var/obj/item/organ/external/organ = H.get_organ(def_zone)
+		var/armor = H.getarmor_organ(organ, check_armour)
+		if(agony)
+			agony = max(0, agony - armor)
+
+	/*
+	Maim / Maiming check. Disembody a limb depending on several factors.
+	can_be_maimed and maim_bonus are defined on 'obj/item/organ/external'.
+	*/
+		if(organ.can_be_maimed && maiming)
+			if(prob(maim_rate * (organ.get_damage() * organ.maim_bonus)))
+				organ.droplimb(clean_cut,maim_type)
+	L.apply_effect(irradiate, IRRADIATE, L.getarmor(null, "rad")) //radiation protection is handled separately from other armour types.
+
 
 	return 1
 

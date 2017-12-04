@@ -437,7 +437,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	C.emote("gasp")
 
-	spawn(rand(800,2000))
+	spawn(rand(800,1200))
 		if(changeling_power(20,1,100,DEAD))
 			// charge the changeling chemical cost for stasis
 			changeling.chem_charges -= 20
@@ -499,6 +499,9 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.SetStunned(0)
 	C.SetWeakened(0)
 	C.lying = 0
+	if(C.reagents)
+		C.reagents.add_reagent(/datum/reagent/hyperzine, 10)
+		C.reagents.add_reagent(/datum/reagent/oxycodone, 3)
 	C.update_canmove()
 
 	src.verbs -= /mob/proc/changeling_unstun
@@ -768,15 +771,21 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 
 /mob/proc/changeling_DEATHsting()
 	set category = "Changeling"
-	set name = "Death Sting (40)"
+	set name = "Death Sting (60)"
 	set desc = "Causes spasms onto death."
 	var/loud = 1
 
-	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting,loud)
-	if(!T)	return 0
+	var/mob/living/carbon/human/T = changeling_sting(60,/mob/proc/changeling_DEATHsting,loud) //IT COSTS ALL THEIR CHEMICALS.
+	if(!T)
+		return 0
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
 	T.make_jittery(400)
-	if(T.reagents)	T.reagents.add_reagent(/datum/reagent/lexorin, 40)
+	if(T.reagents)
+		T.reagents.add_reagent(/datum/reagent/lexorin, 20)
+		T.reagents.add_reagent(/datum/reagent/cryptobiolin, 20)
+		T.reagents.add_reagent(/datum/reagent/slimejelly, 3)
+		T.reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 3
+		T.reagents.add_reagent(/datum/reagent/mutagen, 8) //May hulk the victim.
 	feedback_add_details("changeling_powers","DTHS")
 	return 1
 

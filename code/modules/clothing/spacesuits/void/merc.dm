@@ -4,8 +4,8 @@
 	desc = "An advanced helmet designed for work in special operations. Property of Gorlex Marauders."
 	icon_state = "rig0-syndie"
 	item_state = "syndie_helm"
-	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 35, bio = 100, rad = 60)
-	siemens_coefficient = 0.3
+	armor = list(melee = 80, bullet = 55, laser = 55,energy = 15, bomb = 35, bio = 100, rad = 60)
+	siemens_coefficient = 0.5
 	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
 	camera = /obj/machinery/camera/network/mercenary
 	light_overlay = "helmet_light_green" //todo: species-specific light overlays
@@ -19,8 +19,19 @@
 		slot_r_hand_str = "syndie_voidsuit",
 	)
 	w_class = ITEM_SIZE_LARGE //normally voidsuits are bulky but the merc voidsuit is 'advanced' or something
-	armor = list(melee = 60, bullet = 50, laser = 50, energy = 15, bomb = 35, bio = 100, rad = 60)
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
+	armor = list(melee = 60, bullet = 50, laser = 50, energy = 30, bomb = 40, bio = 100, rad = 60)
+	allowed = list(/obj/item/device/flashlight,
+						/obj/item/weapon/tank,
+						/obj/item/device/suit_cooling_unit,
+						/obj/item/weapon/gun,
+						/obj/item/ammo_magazine,
+						/obj/item/ammo_casing,
+						/obj/item/weapon/melee,
+						/obj/item/weapon/flamethrower,
+						/obj/item/weapon/melee/energy/sword,
+						/obj/item/weapon/handcuffs,
+						/obj/item/device/transfer_valve,
+						/obj/item/weapon/plastique)
 	siemens_coefficient = 0.3
 	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC)
 

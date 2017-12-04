@@ -14,9 +14,9 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 
-	var/spray_particles = 3
-	var/spray_amount = 120	//units of liquid per spray - 120 -> same as splashing them with a bucket per spray
-	var/max_water = 2000
+	var/spray_particles = 4
+	var/spray_amount = 240	//units of liquid per spray - 240 -> same as splashing them with two buckets a spray.
+	var/max_water = 5000
 	var/last_use = 1.0
 	var/safety = 1
 	var/sprite_name = "fire_extinguisher"
@@ -61,10 +61,10 @@
 
 		src.last_use = world.time
 		reagents.splash(M, min(reagents.total_volume, spray_amount))
-		
+
 		user.visible_message("<span class='notice'>\The [user] sprays \the [M] with \the [src].</span>")
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
-		
+
 		return 1 // No afterattack
 	return ..()
 

@@ -26,17 +26,17 @@
 	eyeblur = 2
 
 /obj/item/projectile/beam/smalllaser
-	damage = 25
+	damage = 23
 
 /obj/item/projectile/beam/midlaser
 	damage = 40
-	armor_penetration = 10
+	armor_penetration = 5
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
 	icon_state = "heavylaser"
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
-	damage = 60
+	damage = 50
 	armor_penetration = 30
 
 	muzzle_type = /obj/effect/projectile/laser_heavy/muzzle
@@ -47,7 +47,7 @@
 	name = "x-ray beam"
 	icon_state = "xray"
 	fire_sound = 'sound/weapons/laser3.ogg'
-	damage = 30
+	damage = 25
 	armor_penetration = 30
 	penetration_modifier = 0.8
 
@@ -61,19 +61,20 @@
 
 /obj/item/projectile/beam/pulse
 	name = "pulse"
-	icon_state = "u_laser"
+	icon_state = "pulse"
 	fire_sound='sound/weapons/pulse.ogg'
-	damage = 15 //lower damage, but fires in bursts
+	damage = 4 //lower damage, but fires in bursts
+	hitscan = 0
 
 	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
 	tracer_type = /obj/effect/projectile/laser_pulse/tracer
 	impact_type = /obj/effect/projectile/laser_pulse/impact
 
 /obj/item/projectile/beam/pulse/mid
-	damage = 20
+	damage = 6
 
 /obj/item/projectile/beam/pulse/heavy
-	damage = 25
+	damage = 8
 
 /obj/item/projectile/beam/pulse/destroy
 	name = "destroyer pulse"
@@ -90,6 +91,7 @@
 	icon_state = "bogb"
 	fire_sound='sound/weapons/blaster.ogg'
 	damage = 30
+	hitscan = 1
 
 	muzzle_type = /obj/effect/projectile/laser_bogani/muzzle
 	tracer_type = /obj/effect/projectile/laser_bogani/tracer
@@ -100,6 +102,7 @@
 	icon_state = "emitter"
 	fire_sound = 'sound/weapons/emitter.ogg'
 	damage = 0 // The actual damage is computed in /code/modules/power/singularity/emitter.dm
+	armor_penetration = 30
 
 	muzzle_type = /obj/effect/projectile/emitter/muzzle
 	tracer_type = /obj/effect/projectile/emitter/tracer
@@ -198,7 +201,7 @@
 	damage_type = ELECTROCUTE
 	damage = 10
 	agony  = 5
-	fire_sound='sound/weapons/pulse.ogg'
+	fire_sound='sound/weapons/taser_shock.ogg'
 
 /obj/item/projectile/beam/stun/shock/heavy
 	name = "heavy shock beam"

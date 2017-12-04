@@ -129,15 +129,15 @@ var/list/datum/power/changeling/powerinstances = list()
 	genomecost = 4
 	isVerb = 0
 	verbpath = /mob/proc/changeling_fastchemical
-/*
+
 /datum/power/changeling/AdvChemicalSynth
 	name = "Advanced Chemical-Synthesis"
 	desc = "We evolve new pathways for producing our necessary chemicals, permitting us to naturally create them faster."
-	helptext = "Doubles the rate at which we naturally recharge chemicals."
+	helptext = "Doubles the rate at which we naturally recharge chemicals. Stacks with rapid chemical synthesis."
 	genomecost = 8
 	isVerb = 0
 	verbpath = /mob/proc/changeling_fastchemical
-*/
+
 /datum/power/changeling/EngorgedGlands
 	name = "Engorged Chemical Glands"
 	desc = "Our chemical glands swell, permitting us to store more chemicals inside of them."
@@ -158,7 +158,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Rapid Regeneration"
 	desc = "We evolve the ability to rapidly regenerate, negating the need for stasis."
 	helptext = "Heals a moderate amount of damage every tick."
-	genomecost = 7
+	genomecost = 6
 	verbpath = /mob/proc/changeling_rapidregen
 
 

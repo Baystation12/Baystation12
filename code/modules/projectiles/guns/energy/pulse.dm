@@ -6,14 +6,14 @@
 	slot_flags = SLOT_BACK
 	force = 12
 	projectile_type = /obj/item/projectile/beam/pulse/heavy
-	max_shots = 36
+	max_shots = 108
 	w_class = ITEM_SIZE_HUGE
-	one_hand_penalty=6
+	one_hand_penalty=8
 	multi_aim = 1
-	burst_delay = 3
-	burst = 3
+	burst_delay = 1.5
+	burst = 9
 	move_delay = 4
-	accuracy = -1
+	accuracy = -4
 
 /obj/item/weapon/gun/energy/pulse_rifle/carbine
 	name = "pulse carbine"
@@ -22,11 +22,12 @@
 	slot_flags = SLOT_BACK|SLOT_BELT
 	force = 8
 	projectile_type = /obj/item/projectile/beam/pulse/mid
-	max_shots = 24
+	max_shots = 72
 	w_class = ITEM_SIZE_LARGE
 	one_hand_penalty=3
-	burst_delay = 2
+	burst_delay = 1.25
 	move_delay = 2
+	accuracy = -2
 
 /obj/item/weapon/gun/energy/pulse_rifle/pistol
 	name = "pulse pistol"
@@ -40,6 +41,7 @@
 	one_hand_penalty=1 //a bit heavy
 	burst_delay = 1
 	move_delay = 1
+	accuracy = -1
 
 /obj/item/weapon/gun/energy/pulse_rifle/mounted
 	self_recharge = 1
@@ -62,6 +64,7 @@
 	icon_state = "bog_rifle"
 	item_state = "bog_rifle"
 	wielded_item_state = "bog_rifle-wielded"
+	burst = 3
 	projectile_type = /obj/item/projectile/beam/pulse/bogani
 	max_shots = 100 //Don't want it to run out
 	icon_rounder = 20

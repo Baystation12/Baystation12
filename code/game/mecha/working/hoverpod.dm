@@ -4,14 +4,14 @@
 	icon_state = "engineering_pod"
 	initial_icon = "engineering_pod"
 	internal_damage_threshold = 80
-	step_in = 4
+	step_in = 1
 	step_energy_drain = 400
 	max_temperature = 20000
 	health = 150
 	infra_luminosity = 6
 	wreckage = /obj/effect/decal/mecha_wreckage/hoverpod
-	cargo_capacity = 5
-	max_equip = 3
+	cargo_capacity = 7
+	max_equip = 4
 	var/datum/effect/effect/system/trail/ion_trail
 	var/stabilization_enabled = 1
 

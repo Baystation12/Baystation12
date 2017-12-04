@@ -107,7 +107,7 @@
 
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
-		L.adjust_fire_stacks(amount / 15)
+		L.adjust_fire_stacks(amount / 7)
 
 /datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed * 2 * toxicity)
@@ -231,7 +231,7 @@
 			step(M, pick(GLOB.cardinal))
 		if(prob(5))
 			M.emote(pick("twitch", "drool", "moan"))
-		M.adjustBrainLoss(0.1)
+		M.adjustBrainLoss(1.2)
 
 /datum/reagent/phosphorus
 	name = "Phosphorus"
@@ -287,10 +287,10 @@
 	metabolism = REM * 2
 	touch_met = 50 // It's acid!
 	var/power = 5
-	var/meltdose = 10 // How much is needed to melt
+	var/meltdose = 120 // How much is needed to melt. Two beakers.
 
 /datum/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.take_organ_damage(0, removed * power * 2)
+	M.take_organ_damage(0, removed * power)
 
 /datum/reagent/acid/affect_touch(var/mob/living/carbon/M, var/alien, var/removed) // This is the most interesting
 	if(ishuman(M))

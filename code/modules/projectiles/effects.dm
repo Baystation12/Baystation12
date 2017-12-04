@@ -86,13 +86,25 @@
 // Pulse laser beam
 //----------------------------
 /obj/effect/projectile/laser_pulse/tracer
-	icon_state = "u_laser"
+	icon_state = "pulse"
 
 /obj/effect/projectile/laser_pulse/muzzle
-	icon_state = "muzzle_u_laser"
+	icon_state = "muzzle_pulse"
 
 /obj/effect/projectile/laser_pulse/impact
-	icon_state = "impact_u_laser"
+	icon_state = "impact_pulse"
+
+//----------------------------
+// Treye beam
+//----------------------------
+/obj/effect/projectile/trilaser/tracer
+	icon_state = "plasmacutter"
+
+/obj/effect/projectile/trilaser/muzzle
+	icon_state = "muzzle_plasmacutter"
+
+/obj/effect/projectile/trilaser/impact
+	icon_state = "impact_plasmacutter"
 
 //----------------------------
 // Bogani Pulsar beam

@@ -76,14 +76,31 @@
 	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for assassins."
 	suit_type = "ominous"
 	icon_state = "ninja_rig"
-	armor = list(melee = 50, bullet = 15, laser = 30, energy = 10, bomb = 25, bio = 100, rad = 30)
+	armor = list(melee = 50, bullet = 15, laser = 35, energy = 10, bomb = 25, bio = 100, rad = 30)
 	siemens_coefficient = 0.2 //heavy hardsuit level shock protection
 	emp_protection = 40 //change this to 30 if too high.
-	online_slowdown = 0
+	online_slowdown = -0.40 //Ninja very fast. But +50% seemed like too much. Tajara would be totally untouchable.
 	aimove_power_usage = 50
 	chest_type = /obj/item/clothing/suit/space/rig/light/ninja
 	glove_type = /obj/item/clothing/gloves/rig/light/ninja
 	cell_type =  /obj/item/weapon/cell/hyper
+	allowed = 	list(/obj/item/weapon/gun,
+				/obj/item/weapon/melee,
+				/obj/item/ammo_magazine,
+				/obj/item/ammo_casing,
+				/obj/item/weapon/melee/baton,
+				/obj/item/weapon/handcuffs,
+				/obj/item/weapon/tank,
+				/obj/item/device/suit_cooling_unit,
+				/obj/item/weapon/material/sword,
+				/obj/item/weapon/cell,
+				/obj/item/weapon/flamethrower,
+				/obj/item/weapon/shield,
+				/obj/item/weapon/locator,
+				/obj/item/weapon/beartrap,
+				/obj/item/weapon/rcd,
+				/obj/item/weapon/plastique)
+
 
 	req_access = list(access_syndicate)
 

@@ -78,7 +78,7 @@
 	base_icon = "fireaxe"
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
-	
+
 	// 15/32 with hardness 60 (steel) and 20/42 with hardness 80 (plasteel)
 	force_divisor = 0.525
 	unwielded_force_divisor = 0.25
@@ -109,15 +109,15 @@
 	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	force = 10
+	force = 15
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 
 	// 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	force_divisor = 0.33
-	unwielded_force_divisor = 0.20
+	unwielded_force_divisor = 0.66
 	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
-	throw_speed = 3
+	throw_speed = 6
 	edge = 0
 	sharp = 1
 	hitsound = 'sound/weapons/bladeslice.ogg'
