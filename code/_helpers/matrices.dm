@@ -110,6 +110,14 @@
 
 	return list(R + x,R,R, G,G + x,G, B,B,B + x)
 
+proc/reset_matrix(matrix/m)
+	m.a = 1
+	m.b = 0
+	m.c = 0
+	m.d = 0
+	m.e = 1
+	m.f = 0
+
 #undef LUMR
 #undef LUMG
 #undef LUMB

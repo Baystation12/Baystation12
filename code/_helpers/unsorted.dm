@@ -1097,3 +1097,9 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 /proc/pass()
 	return
+
+/proc/create_many(type, count, ...)
+	var/list/theargs = args.len > 2 ? args.Copy(3) : list()
+	. = list()
+	for (var/i in 1 to count)
+		. += new type(arglist(theargs))

@@ -17,10 +17,13 @@
 	name = "fragmentation grenade"
 	desc = "A military fragmentation grenade, designed to explode in a deadly shower of fragments, while avoiding massive structural damage."
 	icon_state = "frggrenade"
+	truncated_name = "frag"
 
 	var/list/fragment_types = list(/obj/item/projectile/bullet/pellet/fragment = 1)
 	var/num_fragments = 72  //total number of fragments produced by the grenade
 	var/explosion_size = 2   //size of the center explosion
+	truncated_name = "frag"
+	is_digital = 0
 
 	//The radius of the circle used to launch projectiles. Lower values mean less projectiles are used but if set too low gaps may appear in the spread pattern
 	var/spread_range = 7 //leave as is, for some reason setting this higher makes the spread pattern have gaps close to the epicenter

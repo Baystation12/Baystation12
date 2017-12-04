@@ -1,5 +1,6 @@
 /obj/item/weapon/grenade/fake
 	icon_state = "frggrenade"
+	truncated_name = "fuck"
 
 /obj/item/weapon/grenade/fake/detonate()
 	active = 0
