@@ -175,6 +175,7 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	storage_types = CLOSET_STORAGE_ITEMS
 	req_access = list(access_medical_equip)
 
 /obj/structure/closet/secure_closet/counselor

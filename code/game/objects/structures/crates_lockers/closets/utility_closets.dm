@@ -208,6 +208,7 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	storage_types = CLOSET_STORAGE_ITEMS
 
 /obj/structure/closet/hydrant/New()
 	..()
@@ -232,6 +233,7 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	storage_types = CLOSET_STORAGE_ITEMS
 
 /obj/structure/closet/medical_wall/update_icon()
 	if(!opened)
@@ -255,6 +257,7 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	storage_types = CLOSET_STORAGE_ITEMS
 
 /obj/structure/closet/shipping_wall/update_icon()
 	if(!opened)
