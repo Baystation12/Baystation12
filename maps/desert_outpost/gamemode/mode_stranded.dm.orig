@@ -69,7 +69,10 @@
 
 /datum/game_mode/stranded/pre_setup()
 	GLOB.hostile_attackables += /obj/structure/evac_pelican
+<<<<<<< HEAD:maps/desert_outpost/gamemode/mode_stranded.dm
+=======
 	GLOB.hostile_attackables +=	/obj/structure/tanktrap
+>>>>>>> 106a590d64e393ea02ab5c0e51e417929f5b703e:maps/desert_outpost/gamemode/mode_stranded.dm
 
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time

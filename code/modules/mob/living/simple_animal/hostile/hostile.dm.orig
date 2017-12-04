@@ -224,7 +224,12 @@ GLOBAL_LIST_INIT(hostile_attackables, list(\
 	/obj/structure/closet,\
 	/obj/structure/table,\
 	/obj/structure/grille,\
+<<<<<<< HEAD
+	/obj/structure/barricade,\
+	/obj/structure/tanktrap
+=======
 	/obj/structure/barricade
+>>>>>>> 106a590d64e393ea02ab5c0e51e417929f5b703e
 ))
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
