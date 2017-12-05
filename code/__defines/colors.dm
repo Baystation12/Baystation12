@@ -41,6 +41,7 @@
 #define COLOR_OFF_WHITE        "#eeeeee"
 #define COLOR_WHITE            "#ffffff"
 #define COLOR_NT_RED           "#9d2300"
+#define COLOR_NT_RED_PALE      "#992E0F"
 #define COLOR_GUNMETAL         "#80868e"
 
 #define	PIPE_COLOR_GREY        "#ffffff"	//yes white is grey
