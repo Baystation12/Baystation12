@@ -74,21 +74,24 @@
 	icon_state = "rad_sensor"
 	anchored = 1
 
-/obj/machinery/light/magshield/nav_light
+/obj/structure/magshield/nav_light
 	name = "navigation light"
 	desc = "Large and bright light regularly emitting green flashes."
 	icon = 'magshield_sprites.dmi'
 	icon_state = "nav_light_green"
-	brightness_color = "#00ee00"
-	brightness_range = 10
-	use_power = 0
-	idle_power_usage = 0
-	active_power_usage = 0
-	brightness_power = 10
+	anchored = 1
+	density = 1
+	light_range = 10
+	light_power = 10
+	light_color = "#00ee00"
 
-/obj/machinery/light/magshield/nav_light/red
+/obj/structure/magshield/nav_light/New()//try make flashing through the process
+	..()
+	set_light(light_range, light_power, light_color)
+
+/obj/structure/magshield/nav_light/red
 	desc = "Large and bright light regularly emitting red flashes."
-	brightness_color = "#ee0000"
+	light_color = "#ee0000"
 	icon_state = "nav_light_red"
 
 
