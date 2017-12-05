@@ -146,6 +146,12 @@
 		owner.switch_from_dead_to_living_mob_list()
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
+/obj/item/organ/internal/mmi_holder/cut_away(var/mob/living/user)
+	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+	if(istype(parent))
+		removed(user, 0)
+		parent.implants += transfer_and_delete()
+
 /obj/item/organ/internal/mmi_holder/removed()
 	if(owner && owner.mind)
 		persistantMind = owner.mind
@@ -155,6 +161,7 @@
 
 /obj/item/organ/internal/mmi_holder/proc/transfer_and_delete()
 	if(stored_mmi)
+		. = stored_mmi
 		stored_mmi.forceMove(src.loc)
 		if(persistantMind)
 			persistantMind.transfer_to(stored_mmi.brainmob)
