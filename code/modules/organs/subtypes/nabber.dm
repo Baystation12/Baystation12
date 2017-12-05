@@ -23,7 +23,7 @@
 
 /obj/item/organ/internal/eyes/nabber/additional_flash_effects(var/intensity)
 	if(is_usable())
-		take_damage(max(0, 8 * (intensity)))
+		take_damage(max(0, 6 * (intensity)))
 		return 1
 	else
 		return -1

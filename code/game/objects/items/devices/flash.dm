@@ -87,7 +87,7 @@
 				flashfail = 1
 
 	else if(issilicon(M))
-		M.Weaken(rand(4,7))
+		M.Weaken(rand(4,6))
 	else
 		flashfail = 1
 

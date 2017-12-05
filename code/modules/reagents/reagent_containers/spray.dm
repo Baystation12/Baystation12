@@ -15,6 +15,7 @@
 	possible_transfer_amounts = "5;10" //Set to null instead of list, if there is only one.
 	var/spray_size = 3
 	var/list/spray_sizes = list(1,3)
+	var/projspeed = 10 // lower is faster
 	volume = 250
 
 /obj/item/weapon/reagent_containers/spray/New()
@@ -65,7 +66,7 @@
 				return
 			reagents.trans_to_obj(D, amount_per_transfer_from_this)
 			D.set_color()
-			D.set_up(my_target, spray_size, 10)
+			D.set_up(my_target, spray_size, projspeed)
 	return
 
 /obj/item/weapon/reagent_containers/spray/attack_self(var/mob/user)
@@ -119,17 +120,18 @@
 
 /obj/item/weapon/reagent_containers/spray/pepper
 	name = "pepperspray"
-	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."
+	desc = "Manufactured by Uhang Inc., it fires a mist of condensed capsaicin to blind and down an opponent quickly."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "pepperspray"
 	item_state = "pepperspray"
 	possible_transfer_amounts = null
-	volume = 40
+	volume = 50
 	var/safety = 1
+	projspeed = 3
 
 /obj/item/weapon/reagent_containers/spray/pepper/New()
 	..()
-	reagents.add_reagent(/datum/reagent/capsaicin/condensed, 40)
+	reagents.add_reagent(/datum/reagent/capsaicin/condensed, 50)
 
 /obj/item/weapon/reagent_containers/spray/pepper/examine(mob/user)
 	if(..(user, 1))
