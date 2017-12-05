@@ -229,6 +229,11 @@
 	emote_message_3p_target = "USER shakes hands with TARGET."
 	message_type = VISIBLE_MESSAGE
 
+/decl/emote/visible/tsalute
+	key = "tsalute"
+	check_restraints = TRUE
+	emote_message_3p = "USER ducks USER_THEIR head and dabs."
+
 /decl/emote/visible/handshake/get_emote_message_3p(var/atom/user, var/atom/target, var/extra_params)
 	if(target && !user.Adjacent(target))
 		return "USER holds out USER_HIS hand out to TARGET."

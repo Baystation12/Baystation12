@@ -41,15 +41,17 @@ Each plays slightly different and has different challenges/benefits
 	return ..()
 
 /datum/god_form/narsie
-	name = "Nar-Sie"
-	info = {"The Geometer of Blood, you crave blood and destruction.<br>
+	name = "Papa Stalin"
+	info = {"The Herald of Communism and destroyer of Germany, you crave blood and destruction.<br>
 	<b>Benefits:</b><br>
 		<font color='blue'>+Can gain power from blood sacrifices.<br>
-		+Ability to forge weapons and armor.</font>
+		+Ability to forge weapons and armor.<br>
+		+Communism.</font>
 	<b>Drawbacks:</b><br>
-		<font color='red'>-Servant abilities require copious amounts of their blood.</font>
+		<font color='red'>-Servant abilities require copious amounts of their blood.<br>
+		-Unworthy servants may be sent to Gulag.</font>
 	"}
-	desc = "A being made of a million nightmares, a billion deaths."
+	desc = "A being made of a million nightmares, a billion deaths." // Don't even have to change this line
 	god_icon_state = "nar-sie"
 	pylon_icon_state = "shade"
 	faction = "cult"
