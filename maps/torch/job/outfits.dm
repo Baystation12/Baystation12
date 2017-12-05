@@ -50,11 +50,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = /obj/item/device/radio/headset/heads/torchcaptain
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/solgov/expedition/co
-	backpack = /obj/item/weapon/storage/backpack/captain
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_cap
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
 	id_type = /obj/item/weapon/card/id/torch/gold
 	pda_type = /obj/item/device/pda/captain
+
+/decl/hierarchy/outfit/job/torch/crew/command/CO/New()
+	..()
+	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/weapon/storage/backpack/captain
+	backpack_overrides[/decl/backpack_outfit/satchel] = /obj/item/weapon/storage/backpack/satchel_cap
+	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/weapon/storage/backpack/messenger/com
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO
 	name = OUTFIT_JOB_NAME("Executive Officer")
@@ -91,9 +94,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/silver/medical
 	pda_type = /obj/item/device/pda/heads/cmo
 	pda_slot = slot_l_store
-	backpack = /obj/item/weapon/storage/backpack/medic
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_med
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/med
+
+/decl/hierarchy/outfit/job/torch/crew/command/cmo/New()
+	..()
+	BACKPACK_OVERRIDE_MEDICAL
 
 /decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet
 	name = OUTFIT_JOB_NAME("Chief Medical Officer - Fleet")
@@ -107,11 +111,12 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = /obj/item/device/radio/headset/heads/ce
 	id_type = /obj/item/weapon/card/id/torch/silver/engineering
 	pda_type = /obj/item/device/pda/heads/ce
-	backpack = /obj/item/weapon/storage/backpack/industrial
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_eng
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+
+/decl/hierarchy/outfit/job/torch/crew/command/cos/New()
+	..()
+	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet
 	name = OUTFIT_JOB_NAME("Chief Engineer - Fleet")
@@ -130,9 +135,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/silver/security
 	pda_type = /obj/item/device/pda/heads/hos
-	backpack = /obj/item/weapon/storage/backpack/security
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_sec
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
+
+/decl/hierarchy/outfit/job/torch/crew/command/cos/New()
+	..()
+	BACKPACK_OVERRIDE_SECURITY
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
 	name = OUTFIT_JOB_NAME("Chief of Security - Fleet")
@@ -202,11 +208,12 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/engineering
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/engineering
 	l_ear = /obj/item/device/radio/headset/headset_eng
-	backpack = /obj/item/weapon/storage/backpack/industrial
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_eng
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/New()
+	..()
+	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer
 	name = OUTFIT_JOB_NAME("Senior Engineer")
@@ -261,10 +268,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/security
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/security
 	l_ear = /obj/item/device/radio/headset/headset_sec
-	backpack = /obj/item/weapon/storage/backpack/security
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_sec
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
 	pda_slot = slot_l_store
+
+/decl/hierarchy/outfit/job/torch/crew/security/New()
+	..()
+	BACKPACK_OVERRIDE_SECURITY
 
 /decl/hierarchy/outfit/job/torch/crew/security/brig_officer
 	name = OUTFIT_JOB_NAME("Brig Officer")
@@ -324,9 +332,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = /obj/item/device/radio/headset/headset_med
 	pda_type = /obj/item/device/pda/medical
 	pda_slot = slot_l_store
-	backpack = /obj/item/weapon/storage/backpack/medic
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_med
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/med
+
+/decl/hierarchy/outfit/job/torch/crew/medical/New()
+	..()
+	BACKPACK_OVERRIDE_MEDICAL
 
 /decl/hierarchy/outfit/job/torch/crew/medical/senior
 	name = OUTFIT_JOB_NAME("Physician")
@@ -380,9 +389,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist
 	name = OUTFIT_JOB_NAME("Virologist - Torch")
 	uniform = /obj/item/clothing/under/rank/virologist
-	backpack = /obj/item/weapon/storage/backpack/virology
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_vir
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/viro
+
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist/New()
+	..()
+	BACKPACK_OVERRIDE_VIROLOGY
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic
 	name = OUTFIT_JOB_NAME("Paramedic - Torch")
@@ -397,10 +407,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Chemist - Torch")
 	uniform = /obj/item/clothing/under/rank/chemist
 	shoes = /obj/item/clothing/shoes/white
-	backpack = /obj/item/weapon/storage/backpack/chemistry
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_chem
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/chem
 	pda_type = /obj/item/device/pda/chemist
+
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist/New()
+	..()
+	BACKPACK_OVERRIDE_CHEMISTRY
 
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	name = OUTFIT_JOB_NAME("Counselor")
@@ -431,9 +442,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/supply
 	l_ear = /obj/item/device/radio/headset/headset_cargo
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/supply
-	backpack = /obj/item/weapon/storage/backpack/industrial
-	satchel_job  = /obj/item/weapon/storage/backpack/satchel_eng
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
+
+/decl/hierarchy/outfit/job/torch/crew/supply/New()
+	..()
+	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
 	name = OUTFIT_JOB_NAME("Deck Officer")
@@ -599,10 +611,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/heads/rd
-	backpack = /obj/item/weapon/storage/backpack/toxins
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_tox
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/viro
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/senior_scientist
+
+/decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist/New()
+	..()
+	BACKPACK_OVERRIDE_RESEARCH
 
 /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot //pending better uniform
 	name = OUTFIT_JOB_NAME("NanoTrasen Pilot")
@@ -616,10 +629,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/scientist
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/science
-	backpack = /obj/item/weapon/storage/backpack/toxins
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_tox
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/viro
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/scientist
+
+/decl/hierarchy/outfit/job/torch/passenger/research/scientist/New()
+	..()
+	BACKPACK_OVERRIDE_RESEARCH
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych
 	name = OUTFIT_JOB_NAME("Psychologist - Torch")
@@ -629,22 +643,24 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Prospector")
 	uniform = /obj/item/clothing/under/rank/ntwork
 	shoes = /obj/item/clothing/shoes/workboots
-	backpack = /obj/item/weapon/storage/backpack/industrial
-	satchel_job  = /obj/item/weapon/storage/backpack/satchel_eng
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/mining
 	pda_type = /obj/item/device/pda/shaftminer
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+
+/decl/hierarchy/outfit/job/torch/passenger/research/prospector/New()
+	..()
+	BACKPACK_OVERRIDE_ENGINEERING
 
 /decl/hierarchy/outfit/job/torch/passenger/research/guard
 	name = OUTFIT_JOB_NAME("Security Guard")
 	uniform = /obj/item/clothing/under/rank/guard
 	shoes = /obj/item/clothing/shoes/jackboots
-	backpack = /obj/item/weapon/storage/backpack/security
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_sec
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/guard
 	pda_type = /obj/item/device/pda/security
+
+/decl/hierarchy/outfit/job/torch/passenger/research/guard/New()
+	..()
+	BACKPACK_OVERRIDE_SECURITY
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist
 	name = OUTFIT_JOB_NAME("Research Assistant - Torch")

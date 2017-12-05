@@ -222,12 +222,15 @@
 /proc/isLeap(y)
 	return ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
 
-/proc/atomtype2nameassoclist(var/atom_type)
+/proc/atomtypes2nameassoclist(var/list/atom_types)
 	. = list()
-	for(var/sub_atom_type in typesof(atom_type))
-		var/atom/A = sub_atom_type
-		.[initial(A.name)] = sub_atom_type
+	for(var/atom_type in atom_types)
+		var/atom/A = atom_type
+		.[initial(A.name)] = atom_type
 	. = sortAssoc(.)
+
+/proc/atomtype2nameassoclist(var/atom_type)
+	return atomtypes2nameassoclist(typesof(atom_type))
 
 //Splits the text of a file at seperator and returns them in a list.
 /world/proc/file2list(filename, seperator="\n")

@@ -8,6 +8,7 @@
 	back = /obj/item/weapon/storage/backpack
 	backpack_contents = list(/obj/item/weapon/storage/box = 1)
 	hierarchy_type = /decl/hierarchy/outfit/wizard
+	flags = OUTFIT_HAS_BACKPACK
 
 /decl/hierarchy/outfit/wizard/blue
 	name = "Wizard - Blue"

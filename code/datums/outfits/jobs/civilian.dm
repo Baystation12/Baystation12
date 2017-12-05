@@ -25,11 +25,14 @@
 	suit = /obj/item/clothing/suit/apron
 	gloves = /obj/item/clothing/gloves/thick/botany
 	r_pocket = /obj/item/device/analyzer/plant_analyzer
-	backpack = /obj/item/weapon/storage/backpack/hydroponics
-	satchel_job = /obj/item/weapon/storage/backpack/satchel_hyd
 	id_type = /obj/item/weapon/card/id/civilian/botanist
 	pda_type = /obj/item/device/pda/botanist
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/hyd
+
+/decl/hierarchy/outfit/job/service/gardener/New()
+	..()
+	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/weapon/storage/backpack/hydroponics
+	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/weapon/storage/backpack/satchel_hyd
+	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/weapon/storage/backpack/messenger/hyd
 
 /decl/hierarchy/outfit/job/service/janitor
 	name = OUTFIT_JOB_NAME("Janitor")
