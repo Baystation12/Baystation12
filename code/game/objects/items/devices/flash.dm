@@ -69,18 +69,25 @@
 			var/mob/living/carbon/C = M
 			var/safety = C.eyecheck()
 			if(safety < FLASH_PROTECTION_MODERATE)
-				var/flash_strength = 10
+				var/flash_strength = (rand(2,7))
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
-					flash_strength *= H.species.flash_mod
+					flash_strength = round(H.species.flash_mod * flash_strength)
 				if(flash_strength > 0)
-					M.Weaken(flash_strength)
 					M.flash_eyes(FLASH_PROTECTION_MODERATE - safety)
+					M.Stun(flash_strength / 2)
+					M.eye_blurry += flash_strength
+					M.confused += flash_strength
+					if(flash_strength > 3)
+						M.drop_l_hand()
+						M.drop_r_hand()
+					if(flash_strength > 5)
+						M.Weaken(2)
 			else
 				flashfail = 1
 
 	else if(issilicon(M))
-		M.Weaken(rand(5,10))
+		M.Weaken(rand(4,7))
 	else
 		flashfail = 1
 
@@ -99,15 +106,11 @@
 	if(!flashfail)
 		flick("flash2", src)
 		if(!issilicon(M))
-
 			user.visible_message("<span class='disarm'>[user] blinds [M] with the flash!</span>")
 		else
-
 			user.visible_message("<span class='notice'>[user] overloads [M]'s sensors with the flash!</span>")
 	else
-
 		user.visible_message("<span class='notice'>[user] fails to blind [M] with the flash!</span>")
-
 	return
 
 
@@ -155,6 +158,7 @@
 		if(safety < FLASH_PROTECTION_MODERATE)
 			if(!M.blinded)
 				M.flash_eyes()
+				M.eye_blurry += 2
 
 	return
 
