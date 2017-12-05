@@ -230,7 +230,7 @@
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_gun)
+			            access_solgov_crew, access_gun, access_emergency_armory)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
