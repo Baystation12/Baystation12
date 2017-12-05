@@ -399,6 +399,59 @@ var/bomb_set
 			log_and_message_admins("[src], the last authentication disk, has been destroyed. Failed to respawn disc!")
 	return ..()
 
+//====the nuclear football (holds the disk and instructions)====
+/obj/item/weapon/storage/secure/briefcase/nukedisk
+	startswith = list(
+		/obj/item/weapon/disk/nuclear,
+		/obj/item/weapon/pinpointer,
+		/obj/item/smallDelivery/nuke_instructions,
+		/obj/item/modular_computer/laptop/preset/custom_loadout/cheap/
+	)
+	desc = "A large briefcase with a digital locking system. On closer inspection, you see an \
+	Expeditionary Corps emblem is etched into the front of it."
+
+/obj/item/smallDelivery/nuke_instructions
+	name = "classified instructions"
+	desc = "A small envelope. The label reads 'open only in event of high emergency'."
+
+/obj/item/smallDelivery/nuke_instructions/Initialize()
+	..()
+	var/obj/item/weapon/paper/R = new(src.loc)
+	R.name = "vessel self-destruct instructions"
+	R.info = "<center><img src=sollogo.png><br><br>\
+	<b>Warning: Classified<br>SEV Torch Self Destruct System - Instructions</b></center><br><br>\
+	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's \
+	on-board nuclear self destruct system. Please read carefully.<br><br>\
+	1) (Optional) Announce the imminent activation to any surviving crew members, and begin evacuation procedures.<br>\
+	2) Notify two heads of staff, both with ID cards with access to the ship's Keycard Authentication Devices.<br>\
+	3) Proceed to the self-destruct chamber, located on Deck One by the stairwell.<br>\
+	4) Unbolt the door and enter the chamber.<br>\
+	5) Both heads of staff should stand in front of their own Keycard Authentication Devices. On the KAD interface, select \
+	Grant Nuclear Authentication Code. Both heads of staff should then swipe their ID cards simultaneously.<br>\
+	6) The KAD will now display the Authentication Code. Memorize this code.<br>\
+	7) Enter the code into the self-destruct terminal.<br>\
+	8) Insert the nuclear authentication disk into the self-destruct terminal.<br>\
+	9) Authentication procedures are now complete. Open the two cabinets containing the nuclear cylinders. They are \
+	located on the back wall of the chamber.<br>\
+	10) Place the cylinders upon the six nuclear cylinder inserters.<br>\
+	11) Activate the inserters. The cylinders will be pulled down into the self-destruct system.<br>\
+	12) Return to the terminal. Enter the desired countdown time.<br>\
+	13) When ready, disable the safety switch.<br>\
+	14) Start the countdown.<br><br>\
+	This concludes the instructions."
+
+	//stamp the paper
+	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+	stampoverlay.icon_state = "paper_stamp-hos"
+	if(!R.stamped)
+		R.stamped = new
+	R.stamped += /obj/item/weapon/stamp
+	R.overlays += stampoverlay
+	R.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
+	src.wrapped = R
+	R.loc = src
+
+//====vessel self-destruct system====
 /obj/machinery/nuclearbomb/station
 	name = "self-destruct terminal"
 	desc = "For when it all gets too much to bear. Do not taunt."
