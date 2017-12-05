@@ -107,6 +107,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/citizenship_choices = list(
 		"Earth",
 		"Mars",
+		"Terra",
+		"Gaia",
 		"Moghes",
 		"Ahdomai",
 		"Qerrbalak"
@@ -117,11 +119,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		"Nyx",
 		"Tau Ceti",
 		"Epsilon Ursae Minoris",
-		"S'randarr"
+		"S'randarr",
+		"Gilgamesh"
 		)
 
 	var/list/faction_choices = list(
 		"Sol Central Government",
+		"Terran Colonial Confederation",
 		"Vey Med",
 		"Einstein Engines",
 		"Free Trade Union",

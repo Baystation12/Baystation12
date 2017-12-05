@@ -96,7 +96,8 @@
 		\[cell\] - New table cell.
 		\[logo\] - Inserts NT logo image.
 		\[bluelogo\] - Inserts blue NT logo image.
-		\[solcrest\] - Inserts SCG crest image"}
+		\[solcrest\] - Inserts SCG crest image.
+		\[terraseal\] - Inserts TCC seal"}
 
 		to_chat(usr, help)
 		return 1
