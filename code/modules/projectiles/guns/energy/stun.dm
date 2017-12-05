@@ -1,3 +1,5 @@
+GLOBAL_LIST_INIT(secure_tasers, list())
+
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
 	desc = "The NT Mk30 NL is a small, low capacity gun used for non-lethal takedowns. Produced by NT, it's actually a licensed version of a W-T design. It can switch between high and low intensity stun shots."
@@ -10,6 +12,40 @@
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		)
+
+/obj/item/weapon/gun/energy/taser/secure
+	desc = "The NT Mk30-S NL is a variant of the popular NanoTrasen-make taser which requires authorization to fire."
+	var/authorized = 0
+
+/obj/item/weapon/gun/energy/taser/secure/Initialize()
+	GLOB.secure_tasers += src
+
+	. = ..()
+
+/obj/item/weapon/gun/energy/taser/secure/Destroy()
+	GLOB.secure_tasers -= src
+
+	. = ..()
+
+/obj/item/weapon/gun/energy/taser/secure/proc/authorize(var/authorized, var/mob/by)
+	if(src.authorized == authorized)
+		return 0
+
+	src.authorized = authorized
+
+	var/mob/M = get_holder_of_type(src, /mob)
+	if(M)
+		to_chat(M, "<span class='notice'>Your [src] has been [authorized ? "granted" : "denied"] fire authorization by [by].</span>")
+
+	return 1
+
+/obj/item/weapon/gun/energy/taser/secure/special_check()
+	if(!authorized)
+		visible_message("<span class='warning'>\The [src] buzzes, refusing to fire.</span>")
+		playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+		return 0
+
+	. = ..()
 
 /obj/item/weapon/gun/energy/taser/carbine
 	name = "taser carbine"

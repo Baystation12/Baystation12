@@ -1,0 +1,12 @@
+{{:helper.link("Authorize all", null, {"mass_authorize" : 1})}}<br />
+{{:helper.link("Unauthorize all", null, {"mass_authorize" : 0})}}
+<ul>
+    {{for data.tasers}}
+        <li>
+            Taser held by {{:value.owner}} at ({{:value.loc.x}}, {{:value.loc.y}}, {{:value.loc.z}}), authorized: {{:value.authorized}}.<br />
+            {{:helper.link("Authorize", null, {"authorize" : 1, "taser" : value.ref})}} {{:helper.link("Unauthorize", null, {"authorize" : 0, "taser" : value.ref})}}
+        </li>
+    {{else}}
+        <li>No tasers found.</li>
+    {{/for}}
+</ul>
