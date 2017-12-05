@@ -39,6 +39,7 @@
 	var/temperature_alert = 0
 	var/in_stasis = 0
 	var/heartbeat = 0
+	var/last_washed = 0
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -88,6 +89,12 @@
 
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
+
+	if(job)
+		var/datum/job/J = job_master.GetJob(job)
+		if(J && (J.type in GLOB.using_map.medical_roles) && last_washed + 5 MINUTES < world.time && !virus2 && prob(1))
+			infect_mob_random_greater(src)
+
 
 /mob/living/carbon/human/set_stat(var/new_stat)
 	. = ..()
