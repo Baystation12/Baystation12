@@ -525,8 +525,6 @@
 			return global.license_to_url;
 		if("light_overlay_cache")
 			return global.light_overlay_cache;
-		if("light_type_cache")
-			return global.light_type_cache;
 		if("lighting_overlays_initialised")
 			return global.lighting_overlays_initialised;
 		if("lighting_update_corners")
@@ -1582,8 +1580,6 @@
 			global.license_to_url=newval;
 		if("light_overlay_cache")
 			global.light_overlay_cache=newval;
-		if("light_type_cache")
-			global.light_type_cache=newval;
 		if("lighting_overlays_initialised")
 			global.lighting_overlays_initialised=newval;
 		if("lighting_update_corners")
@@ -2376,7 +2372,6 @@
 	"last_tick_duration",
 	"license_to_url",
 	"light_overlay_cache",
-	"light_type_cache",
 	"lighting_overlays_initialised",
 	"lighting_update_corners",
 	"lighting_update_corners_old",
