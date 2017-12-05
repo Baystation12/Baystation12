@@ -10,6 +10,16 @@
 	max_damage = 70
 	relative_size = 60
 
+/obj/item/organ/internal/liver/New()
+	..()
+	if(!owner)
+		return
+
+	if(owner.personal_faction == "Terran Colonial Confederation")
+		min_bruised_damage = 200
+		min_broken_damage = 360
+		max_damage = 560
+
 /obj/item/organ/internal/liver/robotize()
 	. = ..()
 	icon_state = "liver-prosthetic"
