@@ -176,7 +176,7 @@
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/webbing,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/gun/energy/stunrevolver,
+		/obj/item/weapon/gun/energy/secure/stunrevolver,
 		/obj/item/clothing/shoes/jackboots,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
