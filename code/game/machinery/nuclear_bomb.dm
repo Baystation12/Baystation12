@@ -415,10 +415,9 @@ var/bomb_set
 	desc = "A small envelope. The label reads 'open only in event of high emergency'."
 
 /obj/item/smallDelivery/nuke_instructions/Initialize()
-	..()
-	var/obj/item/weapon/paper/R = new(src.loc)
-	R.name = "vessel self-destruct instructions"
-	R.info = "<center><img src=sollogo.png><br><br>\
+	. = ..()
+	var/obj/item/weapon/paper/R = new(src)
+	R.set_content("<center><img src=sollogo.png><br><br>\
 	<b>Warning: Classified<br>SEV Torch Self Destruct System - Instructions</b></center><br><br>\
 	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's \
 	on-board nuclear self destruct system. Please read carefully.<br><br>\
@@ -429,8 +428,8 @@ var/bomb_set
 	5) Both heads of staff should stand in front of their own Keycard Authentication Devices. On the KAD interface, select \
 	Grant Nuclear Authentication Code. Both heads of staff should then swipe their ID cards simultaneously.<br>\
 	6) The KAD will now display the Authentication Code. Memorize this code.<br>\
-	7) Enter the code into the self-destruct terminal.<br>\
-	8) Insert the nuclear authentication disk into the self-destruct terminal.<br>\
+	7) Insert the nuclear authentication disk into the self-destruct terminal.<br>\
+	8) Enter the code into the self-destruct terminal.<br>\
 	9) Authentication procedures are now complete. Open the two cabinets containing the nuclear cylinders. They are \
 	located on the back wall of the chamber.<br>\
 	10) Place the cylinders upon the six nuclear cylinder inserters.<br>\
@@ -438,18 +437,15 @@ var/bomb_set
 	12) Return to the terminal. Enter the desired countdown time.<br>\
 	13) When ready, disable the safety switch.<br>\
 	14) Start the countdown.<br><br>\
-	This concludes the instructions."
+	This concludes the instructions.", "vessel self-destruct instructions")
 
 	//stamp the paper
 	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
 	stampoverlay.icon_state = "paper_stamp-hos"
-	if(!R.stamped)
-		R.stamped = new
 	R.stamped += /obj/item/weapon/stamp
 	R.overlays += stampoverlay
 	R.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
 	src.wrapped = R
-	R.loc = src
 
 //====vessel self-destruct system====
 /obj/machinery/nuclearbomb/station
