@@ -30,6 +30,8 @@
 						/datum/job/merchant, /datum/job/stowaway
 						)
 
+	medical_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor)
+
 
 /datum/map/torch/setup_map()
 	..()

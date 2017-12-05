@@ -270,6 +270,7 @@
 				H.bloody_hands = null
 				H.update_inv_gloves(0)
 			H.germ_level = 0
+			H.last_washed = world.time
 	update_icons()	//apply the now updated overlays to the mob
 
 //Throwing stuff
