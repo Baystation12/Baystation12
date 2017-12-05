@@ -193,7 +193,7 @@
 
 /datum/language/confederate
 	name = LANGUAGE_INDEPENDENT
-	desc = "The official language of the Terran Confederacy, evolved from the languages of Eastern Europe and Northern Asia."
+	desc = "The official language of the Terran Colonial Confederation, evolved from a pidgin of Eastern European languages and English."
 	speech_verb = "speaks"
 	colour = "terran"
 	key = "r"
