@@ -42,7 +42,7 @@
 		icon_state = "light[on]"
 		overlay.icon_state = "light[on]-overlay"
 		overlays += overlay
-		set_light(2, 0.1, on ? "#82ff4c" : "#f86060")
+		set_light(2, 0.3, on ? "#82ff4c" : "#f86060")
 
 /obj/machinery/light_switch/examine(mob/user)
 	if(..(user, 1))
