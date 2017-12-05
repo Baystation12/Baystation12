@@ -7,6 +7,7 @@
 /obj/structure/sign/ecplaque
 	name = "\improper Expeditionary Directives"
 	desc = "A plaque with Expeditionary Corps logo etched in it."
+	icon = 'maps/torch/icons/obj/solgov-decals.dmi'
 	icon_state = "ecplaque"
 	var/directives = {"<hr><center>
 		1. <b>Exploring the unknown is your Primary Mission</b><br>
@@ -26,11 +27,15 @@
 	..()
 	to_chat(usr, "The founding principles of EC are written there: <A href='?src=\ref[src];show_info=1'>Expeditionary Directives</A>")
 
+/obj/structure/sign/ecplaque/CanUseTopic()
+	return STATUS_INTERACTIVE
+
 /obj/structure/sign/ecplaque/Topic(href, href_list)
 	if(..())
 		return 1
 	if(href_list["show_info"])
 		to_chat(usr, directives)
+		return 1
 
 /obj/effect/floor_decal/scglogo
 	alpha = 230
