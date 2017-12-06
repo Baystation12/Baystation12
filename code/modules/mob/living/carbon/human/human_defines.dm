@@ -114,3 +114,6 @@
 	var/shock_stage
 
 	var/obj/item/grab/current_grab_type 	// What type of grab they use when they grab someone.
+
+	var/list/supression_icons = list()
+	var/time_last_supressed = 0
