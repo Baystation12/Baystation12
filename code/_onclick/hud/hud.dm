@@ -1,36 +1,20 @@
 /*
-	The global hud:
-	Uses the same visual objects for all players.
-*/
-
-GLOBAL_DATUM_INIT(global_hud, /datum/global_hud, new())
-
-/datum/global_hud
-	var/obj/screen/nvg
-	var/obj/screen/thermal
-	var/obj/screen/meson
-	var/obj/screen/science
-
-/datum/global_hud/proc/setup_overlay(var/icon_state)
-	var/obj/screen/screen = new /obj/screen()
-	screen.screen_loc = "1,1"
-	screen.icon = 'icons/obj/hud_full.dmi'
-	screen.icon_state = icon_state
-	screen.mouse_opacity = 0
-
-	return screen
-
-/datum/global_hud/New()
-	nvg = setup_overlay("nvg_hud")
-	thermal = setup_overlay("thermal_hud")
-	meson = setup_overlay("meson_hud")
-	science = setup_overlay("science_hud")
-
-/*
 	The hud datum
 	Used to show and hide huds for all the different mob types,
 	including inventories and item quick actions.
 */
+
+/mob
+	var/hud_type = null
+	var/datum/hud/hud_used = null
+
+/mob/proc/InitializeHud()
+	if(hud_used)
+		qdel(hud_used)
+	if(hud_type)
+		hud_used = new hud_type(src)
+	else
+		hud_used = new /datum/hud
 
 /datum/hud
 	var/mob/mymob
@@ -53,7 +37,7 @@ GLOBAL_DATUM_INIT(global_hud, /datum/global_hud, new())
 	var/obj/screen/movable/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = 0
 
-datum/hud/New(mob/owner)
+/datum/hud/New(mob/owner)
 	mymob = owner
 	instantiate()
 	..()
@@ -68,7 +52,6 @@ datum/hud/New(mob/owner)
 	adding = null
 	other = null
 	hotkeybuttons = null
-//	item_action_list = null // ?
 	mymob = null
 
 /datum/hud/proc/hidden_inventory_update()
@@ -164,9 +147,9 @@ datum/hud/New(mob/owner)
 	var/ui_color = mymob.client.prefs.UI_style_color
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
 
-	mymob.instantiate_hud(src, ui_style, ui_color, ui_alpha)
+	FinalizeInstantiation(ui_style, ui_color, ui_alpha)
 
-/mob/proc/instantiate_hud(var/datum/hud/HUD, var/ui_style, var/ui_color, var/ui_alpha)
+/datum/hud/proc/FinalizeInstantiation(var/ui_style, var/ui_color, var/ui_alpha)
 	return
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
