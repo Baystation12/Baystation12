@@ -1,0 +1,5 @@
+author: "dryerlint"
+delete-after: True
+changes: 
+  - rscadd: "Added nuclear football (secure briefcase with disk, pinpointer, instructions, and laptop)"
+  - maptweak: "Removed nuke disk and pinpointer from CO's office, replaced with nuclear briefcase. Added pinpointer to Bridge Storage."
