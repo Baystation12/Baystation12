@@ -214,10 +214,6 @@
 	darkness_view = -1
 	flash_protection = FLASH_PROTECTION_MODERATE
 
-/obj/item/clothing/glasses/sunglasses/New()
-	..()
-	overlay = GLOB.global_hud.sunglasses
-
 /obj/item/clothing/glasses/welding
 	name = "welding goggles"
 	desc = "Protects the eyes from welders, approved by the mad scientist association."
@@ -318,7 +314,6 @@
 /obj/item/clothing/glasses/sunglasses/sechud/toggle/New()
 	..()
 	hud_holder = hud
-	overlay = null
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle/Destroy()
 	qdel(hud_holder)
@@ -332,11 +327,9 @@
 		if(on)
 			flash_protection = FLASH_PROTECTION_NONE
 			src.hud = hud_holder
-			overlay = null
 			to_chat(user, "You switch \the [src] to HUD mode.")
 		else
 			flash_protection = initial(flash_protection)
-			overlay = GLOB.global_hud.sunglasses
 			src.hud = null
 			to_chat(user, "You switch \the [src] to flash protection mode.")
 		update_icon()
