@@ -15,6 +15,7 @@
 	possible_transfer_amounts = "5;10" //Set to null instead of list, if there is only one.
 	var/spray_size = 3
 	var/list/spray_sizes = list(1,3)
+	var/step_delay = 10 // lower is faster
 	volume = 250
 
 /obj/item/weapon/reagent_containers/spray/New()
@@ -65,7 +66,7 @@
 				return
 			reagents.trans_to_obj(D, amount_per_transfer_from_this)
 			D.set_color()
-			D.set_up(my_target, spray_size, 10)
+			D.set_up(my_target, spray_size, step_delay)
 	return
 
 /obj/item/weapon/reagent_containers/spray/attack_self(var/mob/user)
@@ -96,6 +97,7 @@
 /obj/item/weapon/reagent_containers/spray/cleaner
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
+	step_delay = 6
 
 /obj/item/weapon/reagent_containers/spray/cleaner/New()
 	..()
@@ -119,17 +121,18 @@
 
 /obj/item/weapon/reagent_containers/spray/pepper
 	name = "pepperspray"
-	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."
+	desc = "Manufactured by Uhang Inc., it fires a mist of condensed capsaicin to blind and down an opponent quickly."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "pepperspray"
 	item_state = "pepperspray"
 	possible_transfer_amounts = null
-	volume = 40
+	volume = 60
 	var/safety = 1
+	step_delay = 1
 
 /obj/item/weapon/reagent_containers/spray/pepper/New()
 	..()
-	reagents.add_reagent(/datum/reagent/capsaicin/condensed, 40)
+	reagents.add_reagent(/datum/reagent/capsaicin/condensed, 60)
 
 /obj/item/weapon/reagent_containers/spray/pepper/examine(mob/user)
 	if(..(user, 1))
@@ -170,6 +173,7 @@
 	possible_transfer_amounts = null
 	volume = 600
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	step_delay = 8
 
 /obj/item/weapon/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
 	var/direction = get_dir(src, A)
