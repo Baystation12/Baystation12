@@ -97,6 +97,7 @@
 /obj/item/weapon/reagent_containers/spray/cleaner
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
+	projspeed = 6
 
 /obj/item/weapon/reagent_containers/spray/cleaner/New()
 	..()
@@ -125,13 +126,13 @@
 	icon_state = "pepperspray"
 	item_state = "pepperspray"
 	possible_transfer_amounts = null
-	volume = 50
+	volume = 60
 	var/safety = 1
-	projspeed = 3
+	projspeed = 1
 
 /obj/item/weapon/reagent_containers/spray/pepper/New()
 	..()
-	reagents.add_reagent(/datum/reagent/capsaicin/condensed, 50)
+	reagents.add_reagent(/datum/reagent/capsaicin/condensed, 60)
 
 /obj/item/weapon/reagent_containers/spray/pepper/examine(mob/user)
 	if(..(user, 1))
@@ -172,6 +173,7 @@
 	possible_transfer_amounts = null
 	volume = 600
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	projspeed = 8
 
 /obj/item/weapon/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
 	var/direction = get_dir(src, A)
