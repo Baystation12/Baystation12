@@ -132,7 +132,10 @@
 		/area/exoplanet/garbage,
 		/area/template_noop,
 		/area/map_template,
-		/area/map_template/little_house
+		/area/map_template/little_house,
+		/area/rnd/wing,
+		/area/rnd/anom,
+		/area/rnd/equipment
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
