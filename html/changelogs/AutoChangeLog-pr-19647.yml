@@ -1,0 +1,6 @@
+author: "atlantiscze"
+delete-after: True
+changes: 
+  - tweak: "AI can now hack multiple APCs at once, assuming it has enough CPU power to begin the hack. AI can use abilities while hacking an APC (the hacking task has been completely isolated)"
+  - tweak: "AI can now use its abilities during system override. On torch the override takes quite a long time due to larger amount of APCs, and during this period the AI is otherwise very vulnerable."
+  - tweak: "Failed advanced encryption hack now offers you to retry the hack without having to copy-paste/write the message again. This should make the ability a bit more comfortable to use."
