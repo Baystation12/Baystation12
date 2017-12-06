@@ -1441,6 +1441,7 @@
 #include "code\modules\halo\turfs\covenant\materials.dm"
 #include "code\modules\halo\turfs\covenant\walls.dm"
 #include "code\modules\halo\weapons\ammo.dm"
+#include "code\modules\halo\weapons\ammo_boxes.dm"
 #include "code\modules\halo\weapons\dual_wielding.dm"
 #include "code\modules\halo\weapons\grenades.dm"
 #include "code\modules\halo\weapons\launchers.dm"
