@@ -16,7 +16,11 @@
 	else if(is_sharp(I))
 		chopping = 1
 	if(chopping)
-		to_chat(user,"<span class='info'>You start chopping down [src]...[chopping < 2 ? " [I] isn't very effective though" : ""]</span>")
+		var/tmp/str_out = "<span class='info'>You start chopping down [src]... "
+		if(chopping < 2)
+			str_out += "The [I.name] isn't very effective."
+		str_out += "</span>"
+		to_chat(user,str_out)
 		user.visible_message("<span class='info'>[user] starts chopping down [src]</span>")
 
 		playsound(src.loc, 'sound/effects/woodhit.ogg', 50, 5, 0)
@@ -72,8 +76,12 @@
 	else if(is_sharp(I))
 		chopping = 1
 	if(chopping)
-		to_chat(user,"<span class='info'>You start clearing [src]...[chopping < 2 ? " [I] isn't very effective though" : ""]</span>")
-			user.visible_message("<span class='info'>[user] starts clearing [src]</span>")
+		var/tmp/str_out = "<span class='info'>You start clearing [src]... "
+		if(chopping < 2)
+			str_out += "The [I.name] isn't very effective."
+		str_out += "</span>"
+		to_chat(user,str_out)
+		user.visible_message("<span class='info'>[user] starts clearing [src]</span>")
 
 		playsound(src.loc, pick(rustle_sound), 50, 5, 0)
 		spawn(10)
