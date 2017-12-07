@@ -212,7 +212,7 @@
 	name = "brown leather satchel"
 	desc = "A very fancy satchel made of some kind of leather."
 	icon_state = "satchel"
-	color = "#2c1d0d"
+	color = "#3d2711"
 
 /obj/item/weapon/storage/backpack/satchel/leather/khaki
 	name = "khaki leather satchel"
@@ -220,11 +220,11 @@
 
 /obj/item/weapon/storage/backpack/satchel/leather/black
 	name = "black leather satchel"
-	color = "#191919"
+	color = "#212121"
 
 /obj/item/weapon/storage/backpack/satchel/leather/navy
 	name = "navy leather satchel"
-	color = "#141c38"
+	color = "#1c2133"
 
 /obj/item/weapon/storage/backpack/satchel/leather/olive
 	name = "olive leather satchel"
@@ -232,7 +232,7 @@
 
 /obj/item/weapon/storage/backpack/satchel/leather/reddish
 	name = "auburn leather satchel"
-	color = "#421010"
+	color = "#512828"
 
 /obj/item/weapon/storage/backpack/satchel/pocketbook //black, master type
 	name = "black pocketbook"
@@ -242,15 +242,15 @@
 	slot_flags = SLOT_BACK
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
-	color = "#191919"
+	color = "#212121"
 
 /obj/item/weapon/storage/backpack/satchel/pocketbook/brown
 	name = "brown pocketbook"
-	color = "#2c1d0d"
+	color = "#3d2711"
 
 /obj/item/weapon/storage/backpack/satchel/pocketbook/reddish
 	name = "auburn pocketbook"
-	color = "#421010"
+	color = "#512828"
 
 /obj/item/weapon/storage/backpack/satchel_eng
 	name = "industrial satchel"
