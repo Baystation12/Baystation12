@@ -23,14 +23,13 @@
 	var/max_features = 2
 	var/list/possible_features //pre-defined list of features to pick from, will use all types otherwise
 
-
 /obj/effect/overmap/sector/exoplanet/New()
 	if(!GLOB.using_map.use_overmap)
 		qdel(src)
 		return
 
-	maxx = world.maxx
-	maxy = world.maxy
+	maxx = min(64, world.maxx)
+	maxy = min(64, world.maxy)
 
 	name = "[generate_planet_name()], \a [name]"
 
@@ -78,7 +77,7 @@
 		if(repopulating)
 			for(var/i = 1 to round(max_animal_count - animals.len))
 				if(prob(10))
-					var/turf/simulated/T = locate(rand(1,world.maxx), rand(1,world.maxy), zlevel)
+					var/turf/simulated/T = locate(rand(1,maxx), rand(1,maxy), zlevel)
 					var/mob_type = pick(repopulate_types)
 					var/mob/S = new mob_type(T)
 					animals += S
@@ -91,9 +90,9 @@
 		if(!atmosphere)
 			continue
 		var/zone/Z
-		for(var/i = 1 to world.maxx)
+		for(var/i = 1 to maxx)
 			var/turf/simulated/T = locate(i, 1, zlevel)
-			if(istype(T) && T.zone && T.zone.contents.len > (world.maxx*world.maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
+			if(istype(T) && T.zone && T.zone.contents.len > (maxx*maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
 				Z = T.zone
 				break
 		if(Z && !Z.fire_tiles.len && !atmosphere.compare(Z.air)) //let fire die out first if there is one
@@ -117,9 +116,9 @@
 		var/datum/random_map/feature/FT = F
 		if(initial(FT.unique) && map_count[initial(FT.descriptor)])
 			possible_features -= F
-		if(initial(FT.limit_x) + 2 * TRANSITIONEDGE > world.maxx)
+		if(initial(FT.limit_x) + 2 * TRANSITIONEDGE > maxx)
 			possible_features -= F
-		if(initial(FT.limit_y) + 2 * TRANSITIONEDGE > world.maxy)
+		if(initial(FT.limit_y) + 2 * TRANSITIONEDGE > maxy)
 			possible_features -= F
 
 	max_features = rand(0,max_features)
@@ -128,8 +127,8 @@
 			if(!possible_features.len)
 				return
 			var/datum/random_map/feature/F = pick(possible_features)
-			var/tx = rand(TRANSITIONEDGE, world.maxx - TRANSITIONEDGE - initial(F.limit_x))
-			var/ty = rand(TRANSITIONEDGE, world.maxy - TRANSITIONEDGE - initial(F.limit_y))
+			var/tx = rand(TRANSITIONEDGE, maxx - TRANSITIONEDGE - initial(F.limit_x))
+			var/ty = rand(TRANSITIONEDGE, maxy - TRANSITIONEDGE - initial(F.limit_y))
 			var/turf/T = locate(tx,ty,zlevel)
 			if(T)
 				F = new F(null,tx,ty,zlevel)
@@ -241,20 +240,20 @@
 	var/new_x
 	var/new_y
 	if(A.x <= TRANSITIONEDGE)
-		new_x = world.maxx - TRANSITIONEDGE - 2
-		new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+		new_x = maxx - TRANSITIONEDGE - 2
+		new_y = rand(TRANSITIONEDGE + 2, maxy - TRANSITIONEDGE - 2)
 
-	else if (A.x >= (world.maxx - TRANSITIONEDGE + 1))
+	else if (A.x >= (maxx - TRANSITIONEDGE + 1))
 		new_x = TRANSITIONEDGE + 1
-		new_y = rand(TRANSITIONEDGE + 2, world.maxy - TRANSITIONEDGE - 2)
+		new_y = rand(TRANSITIONEDGE + 2, maxy - TRANSITIONEDGE - 2)
 
 	else if (A.y <= TRANSITIONEDGE)
-		new_y = world.maxy - TRANSITIONEDGE -2
-		new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+		new_y = maxy - TRANSITIONEDGE -2
+		new_x = rand(TRANSITIONEDGE + 2, maxx - TRANSITIONEDGE - 2)
 
-	else if (A.y >= (world.maxy - TRANSITIONEDGE + 1))
+	else if (A.y >= (maxy - TRANSITIONEDGE + 1))
 		new_y = TRANSITIONEDGE + 1
-		new_x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
+		new_x = rand(TRANSITIONEDGE + 2, maxx - TRANSITIONEDGE - 2)
 
 	var/turf/T = locate(new_x, new_y, A.z)
 	if(T)
@@ -290,17 +289,18 @@
 	var/list/big_flora_types = list()
 	var/list/plantcolors = list("RANDOM")
 
-/datum/random_map/noise/exoplanet/New()
+/datum/random_map/noise/exoplanet/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
 	target_turf_type = world.turf
 	planetary_area = new planetary_area()
 	water_level = rand(water_level_min,water_level_max)
 	generate_flora()
 
 	//automagically adjust probs for bigger maps to help with lag
-	var/size_mod = intended_x / world.maxx * intended_y / world.maxy
+	var/size_mod = intended_x / tlx * intended_y / tly
 	flora_prob *= size_mod
 	large_flora_prob *= size_mod
 	fauna_prob *= size_mod
+
 	..()
 
 /datum/random_map/noise/exoplanet/proc/noise2value(var/value)
@@ -388,11 +388,12 @@
 
 /turf/simulated/floor/exoplanet/Entered(atom/movable/A)
 	..()
-	if(A.simulated && GLOB.using_map.use_overmap)
-		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
-			var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
-			if(istype(E))
-				E.process_map_edge(A)
+
+	var/obj/effect/overmap/sector/exoplanet/sector = map_sectors["[z]"]
+	if(istype(sector))
+		if(A.simulated && GLOB.using_map.use_overmap)
+			if (A.x <= TRANSITIONEDGE || A.x >= (sector.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (sector.maxy - TRANSITIONEDGE + 1))
+				sector.process_map_edge(A)
 
 /turf/simulated/floor/exoplanet/New()
 	if(GLOB.using_map.use_overmap)

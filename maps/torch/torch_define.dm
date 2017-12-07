@@ -39,6 +39,7 @@
 
 	default_law_type = /datum/ai_laws/solgov
 	use_overmap = 1
+	num_exoplanets = 1
 
 	away_site_budget = 4
 
