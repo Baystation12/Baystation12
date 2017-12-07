@@ -756,17 +756,9 @@
 	name = "\improper Research and Development Access"
 	icon_state = "decontamination"
 
-/area/rnd/equipment
-	name = "\improper Equipment Storage"
-	icon_state = "toxstorage"
-
 /area/rnd/locker
 	name = "\improper Research Locker Room"
 	icon_state = "locker"
-
-/area/rnd/wing
-	name = "\improper Lab Wing"
-	icon_state = "labwing"
 
 /area/rnd/xenobiology/entry
 	name = "\improper Xenobiology Access"
