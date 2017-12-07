@@ -23,7 +23,7 @@
 
 /decl/backpack_outfit/satchel/New()
 	..()
-	tweaks += new /datum/backpack_tweak/selection/specified_types(/obj/item/weapon/storage/backpack/satchel/grey, /obj/item/weapon/storage/backpack/satchel/brown, /obj/item/weapon/storage/backpack/satchel/black)
+	tweaks += new /datum/backpack_tweak/selection/specified_types(/obj/item/weapon/storage/backpack/satchel/grey, /obj/item/weapon/storage/backpack/satchel/leather, /obj/item/weapon/storage/backpack/satchel/leather/khaki, /obj/item/weapon/storage/backpack/satchel/leather/black, /obj/item/weapon/storage/backpack/satchel/leather/navy, /obj/item/weapon/storage/backpack/satchel/leather/olive, /obj/item/weapon/storage/backpack/satchel/leather/reddish)
 
 /decl/backpack_outfit/messenger_bag
 	name = "Messenger bag"
@@ -32,6 +32,10 @@
 /decl/backpack_outfit/pocketbook
 	name = "Pocketbook"
 	path = /obj/item/weapon/storage/backpack/satchel/pocketbook
+
+/decl/backpack_outfit/pocketbook/New()
+	..()
+	tweaks += new /datum/backpack_tweak/selection/specified_types(/obj/item/weapon/storage/backpack/satchel/pocketbook, /obj/item/weapon/storage/backpack/satchel/pocketbook/brown, /obj/item/weapon/storage/backpack/satchel/pocketbook/reddish)
 
 /* Code */
 /decl/backpack_outfit

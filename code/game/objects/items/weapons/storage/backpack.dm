@@ -208,24 +208,49 @@
 /obj/item/weapon/storage/backpack/satchel/grey/withwallet
 	startswith = list(/obj/item/weapon/storage/wallet/random)
 
-/obj/item/weapon/storage/backpack/satchel/brown
+/obj/item/weapon/storage/backpack/satchel/leather //brown, master type
 	name = "brown leather satchel"
-	desc = "A very fancy satchel made with fine brown leather."
+	desc = "A very fancy satchel made of some kind of leather."
 	icon_state = "satchel"
+	color = "#2c1d0d"
 
-/obj/item/weapon/storage/backpack/satchel/black
+/obj/item/weapon/storage/backpack/satchel/leather/khaki
+	name = "khaki leather satchel"
+	color = "#baa481"
+
+/obj/item/weapon/storage/backpack/satchel/leather/black
 	name = "black leather satchel"
-	desc = "A very fancy satchel made with fine black leather."
-	icon_state = "satchel_black"
+	color = "#191919"
 
-/obj/item/weapon/storage/backpack/satchel/pocketbook
+/obj/item/weapon/storage/backpack/satchel/leather/navy
+	name = "navy leather satchel"
+	color = "#141c38"
+
+/obj/item/weapon/storage/backpack/satchel/leather/olive
+	name = "olive leather satchel"
+	color = "#544f3d"
+
+/obj/item/weapon/storage/backpack/satchel/leather/reddish
+	name = "auburn leather satchel"
+	color = "#421010"
+
+/obj/item/weapon/storage/backpack/satchel/pocketbook //black, master type
 	name = "black pocketbook"
-	desc = "A neat little black folding clasp pocketbook with a shoulder sling."
+	desc = "A neat little folding clasp pocketbook with a shoulder sling."
 	icon_state = "pocketbook"
 	w_class = ITEM_SIZE_HUGE // to avoid recursive backpacks
 	slot_flags = SLOT_BACK
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
+	color = "#191919"
+
+/obj/item/weapon/storage/backpack/satchel/pocketbook/brown
+	name = "brown pocketbook"
+	color = "#2c1d0d"
+
+/obj/item/weapon/storage/backpack/satchel/pocketbook/reddish
+	name = "auburn pocketbook"
+	color = "#421010"
 
 /obj/item/weapon/storage/backpack/satchel_eng
 	name = "industrial satchel"
