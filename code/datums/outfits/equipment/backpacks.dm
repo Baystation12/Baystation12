@@ -23,7 +23,7 @@
 
 /decl/backpack_outfit/satchel/New()
 	..()
-	tweaks += new /datum/backpack_tweak/selection/specified_types(/obj/item/weapon/storage/backpack/satchel/grey, /obj/item/weapon/storage/backpack/satchel/leather, /obj/item/weapon/storage/backpack/satchel/leather/khaki, /obj/item/weapon/storage/backpack/satchel/leather/black, /obj/item/weapon/storage/backpack/satchel/leather/navy, /obj/item/weapon/storage/backpack/satchel/leather/olive, /obj/item/weapon/storage/backpack/satchel/leather/reddish)
+	tweaks += new/datum/backpack_tweak/selection/specified_types_as_list(typesof(/obj/item/weapon/storage/backpack/satchel/leather) + /obj/item/weapon/storage/backpack/satchel/grey)
 
 /decl/backpack_outfit/messenger_bag
 	name = "Messenger bag"
@@ -32,10 +32,7 @@
 /decl/backpack_outfit/pocketbook
 	name = "Pocketbook"
 	path = /obj/item/weapon/storage/backpack/satchel/pocketbook
-
-/decl/backpack_outfit/pocketbook/New()
-	..()
-	tweaks += new /datum/backpack_tweak/selection/specified_types(/obj/item/weapon/storage/backpack/satchel/pocketbook, /obj/item/weapon/storage/backpack/satchel/pocketbook/brown, /obj/item/weapon/storage/backpack/satchel/pocketbook/reddish)
+	flags = BACKPACK_HAS_TYPE_SELECTION
 
 /* Code */
 /decl/backpack_outfit
@@ -48,7 +45,7 @@
 /decl/backpack_outfit/New()
 	tweaks = tweaks || list()
 
-	if(flags&(BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION)==(BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))
+	if((flags&(BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))==(BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))
 		CRASH("May not have both type and subtype selection tweaks")
 
 	if(flags & BACKPACK_HAS_TYPE_SELECTION)
@@ -104,6 +101,8 @@
 		CRASH("No selections offered")
 	if(RETURN_GIVEN_BACKPACK in selections)
 		CRASH("May not use the keyword '[RETURN_GIVEN_BACKPACK]'")
+	if(RETURN_RANDOM_BACKPACK in selections)
+		CRASH("May not use the keyword '[RETURN_RANDOM_BACKPACK]'")
 	var/list/duplicate_keys = duplicates(selections)
 	if(duplicate_keys.len)
 		CRASH("Duplicate names found: [english_list(duplicate_keys)]")
@@ -149,7 +148,10 @@
 /datum/backpack_tweak/selection/subtypes/New(var/selection_type)
 	..(atomtypes2nameassoclist(subtypesof(selection_type)))
 
-/datum/backpack_tweak/selection/specified_types/New()
+/datum/backpack_tweak/selection/specified_types_as_list/New(var/selection_list)
+	..(atomtypes2nameassoclist(selection_list))
+
+/datum/backpack_tweak/selection/specified_types_as_args/New()
 	..(atomtypes2nameassoclist(args))
 
 /******************
@@ -172,3 +174,6 @@
 		var/decl/backpack_outfit/bo = backpacks[backpack]
 		if(bo.is_default)
 			return bo
+
+#undef BACKPACK_HAS_TYPE_SELECTION
+#undef BACKPACK_HAS_SUBTYPE_SELECTION
