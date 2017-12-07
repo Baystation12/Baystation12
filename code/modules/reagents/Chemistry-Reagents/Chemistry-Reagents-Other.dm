@@ -298,7 +298,7 @@
 	if(!istype(T))
 		return
 	if(volume >= 1)
-		T.wet_floor(80)
+		T.wet_floor(320)
 
 /datum/reagent/silicate
 	name = "Silicate"
