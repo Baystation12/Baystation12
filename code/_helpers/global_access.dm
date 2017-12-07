@@ -259,8 +259,6 @@
 			return global.chemical_reaction_logs;
 		if("chemical_reactions_list")
 			return global.chemical_reactions_list;
-		if("chemistryProcess")
-			return global.chemistryProcess;
 		if("chicken_count")
 			return global.chicken_count;
 		if("church_name")
@@ -1318,8 +1316,6 @@
 			global.chemical_reaction_logs=newval;
 		if("chemical_reactions_list")
 			global.chemical_reactions_list=newval;
-		if("chemistryProcess")
-			global.chemistryProcess=newval;
 		if("chicken_count")
 			global.chicken_count=newval;
 		if("church_name")
@@ -2247,7 +2243,6 @@
 	"checked_for_inactives",
 	"chemical_reaction_logs",
 	"chemical_reactions_list",
-	"chemistryProcess",
 	"chicken_count",
 	"church_name",
 	"client_preference_stats_",
