@@ -49,7 +49,7 @@
 			if(isMultitool(W) && (src.open == 1)&& (!src.l_hacking))
 				user.show_message("<span class='notice'>Now attempting to reset internal memory, please hold.</span>", 1)
 				src.l_hacking = 1
-				if (do_after(usr, 100, src))
+				if (do_after(usr, pick(10 SECONDS, 20 SECONDS), src))
 					if (prob(40))
 						src.l_setshort = 1
 						src.l_set = 0
