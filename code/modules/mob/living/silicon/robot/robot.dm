@@ -46,7 +46,7 @@
 	var/module_state_2 = null
 	var/module_state_3 = null
 
-	silicon_camera = /obj/item/device/camera/siliconcam
+	silicon_camera = /obj/item/device/camera/siliconcam/robot_camera
 	silicon_radio = /obj/item/device/radio/borg
 
 	var/mob/living/silicon/ai/connected_ai = null
