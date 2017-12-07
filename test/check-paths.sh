@@ -12,8 +12,12 @@ exactly() { # exactly N name search [mode]
 
 	num="$(grep "$mode" "$search" **/*.dm | wc -l)"
 
-	echo "$num $name (expecting exactly $count)"
-	[ $num -eq $count ] || FAILED=1
+	if [ $num -eq $count ]; then
+		echo "$num $name"
+	else
+		echo "$(tput setaf 9)$num $name (expecting exactly $count)$(tput sgr0)"
+		FAILED=1
+	fi
 }
 
 exactly 0 "escapes" '\\\\(red|blue|green|black|b|i[^mc])'
@@ -26,7 +30,7 @@ exactly 12 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
 exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 46 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
-exactly 717 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 709 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 39 "text2path uses" 'text2path'
 

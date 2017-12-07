@@ -8,7 +8,7 @@ datum/preferences
 		h_style = random_hair_style(gender, species)
 		f_style = random_facial_hair_style(gender, species)
 		if(current_species)
-			if(current_species.appearance_flags & HAS_SKIN_TONE)
+			if(current_species.appearance_flags & HAS_A_SKIN_TONE)
 				s_tone = random_skin_tone()
 			if(current_species.appearance_flags & HAS_SKIN_COLOR)
 				r_skin = rand (0,255)
@@ -27,7 +27,7 @@ datum/preferences
 				var/datum/category_item/underwear/WRI = pick(WRC.items)
 				all_underwear[WRC.name] = WRI.name
 
-		backbag = rand(1,5)
+		backpack = decls_repository.get_decl(pick(subtypesof(/decl/backpack_outfit)))
 		age = rand(current_species.min_age, current_species.max_age)
 		b_type = RANDOM_BLOOD_TYPE
 		if(H)

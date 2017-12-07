@@ -11,7 +11,7 @@
 	allowed_roles = MILITARY_ROLES
 
 /datum/gear/shoes/athletic
-	display_name = "athletic shoes"
+	display_name = "athletic shoes, colour select"
 	path = /obj/item/clothing/shoes/athletic
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = SEMIFORMAL_ROLES
@@ -59,7 +59,7 @@
 	allowed_roles = MILITARY_ROLES
 
 /datum/gear/shoes/flats
-	display_name = "flats"
+	display_name = "flats, colour select"
 	path = /obj/item/clothing/shoes/flats
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = SEMIANDFORMAL_ROLES

@@ -11,7 +11,6 @@
  *		Snap pops
  *		Water flower
  *      Therapy dolls
- *      Toddler doll
  *      Inflatable duck
  *		Action figures
  *		Plushies
@@ -775,18 +774,6 @@
 	item_state = "cultblade"
 	w_class = ITEM_SIZE_HUGE
 	attack_verb = list("attacked", "slashed", "stabbed", "poked")
-
-/* NYET.
-/obj/item/weapon/toddler
-	icon_state = "toddler"
-	name = "toddler"
-	desc = "This baby looks almost real. Wait, did it just burp?"
-	force = 5
-	w_class = ITEM_SIZE_HUGE
-	slot_flags = SLOT_BACK
-*/
-
-//This should really be somewhere else but I don't know where. w/e
 
 /obj/item/weapon/inflatable_duck
 	name = "inflatable duck"

@@ -18,13 +18,14 @@
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
 
-/obj/item/weapon/handcuffs/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
+
+
+/obj/item/weapon/handcuffs/get_icon_state(mob/user_mob, slot)
 	if(slot == slot_handcuffed_str)
-		ret.icon_state = "handcuff1"
+		return "handcuff1"
 	if(slot == slot_legcuffed_str)
-		ret.icon_state = "legcuff1"
-	return ret
+		return "legcuff1"
+	return ..()
 
 /obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 

@@ -573,12 +573,12 @@
 
 /datum/reagent/nicotine
 	name = "Nicotine"
-	description = "Stimulates and relaxes the mind and body."
-	taste_description = "smoke"
+	description = "A sickly yellow liquid sourced from tobacco leaves. Stimulates and relaxes the mind and body."
+	taste_description = "peppery bitterness"
 	reagent_state = LIQUID
-	color = "#181818"
+	color = "#efebaa"
 	metabolism = REM * 0.002
-	overdose = 5
+	overdose = 6
 	scannable = 1
 	data = 0
 
@@ -598,6 +598,35 @@
 /datum/reagent/nicotine/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
+
+/datum/reagent/tobacco
+	name = "Tobacco"
+	description = "Cut and processed tobacco leaves."
+	taste_description = "tobacco"
+	reagent_state = SOLID
+	color = "#684b3c"
+	scannable = 1
+	var/nicotine = REM * 0.2
+
+/datum/reagent/tobacco/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.reagents.add_reagent(/datum/reagent/nicotine, nicotine)
+
+/datum/reagent/tobacco/fine
+	name = "Fine Tobacco"
+	taste_description = "fine tobacco"
+
+/datum/reagent/tobacco/bad
+	name = "Terrible Tobacco"
+	taste_description = "acrid smoke"
+
+/datum/reagent/tobacco/liquid
+	name = "Nicotine Solution"
+	description = "A diluted nicotine solution."
+	reagent_state = LIQUID
+	taste_mult = 0
+	color = "#fcfcfc"
+	nicotine = REM * 0.1
 
 /datum/reagent/menthol
 	name = "Menthol"

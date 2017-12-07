@@ -151,6 +151,8 @@
 /obj/item/weapon/storage/backpack/dufflebag/New()
 	..()
 	slowdown_per_slot[slot_back] = 3
+	slowdown_per_slot[slot_r_hand] = 1
+	slowdown_per_slot[slot_l_hand] = 1
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie
 	name = "black dufflebag"
@@ -196,19 +198,34 @@
  */
 
 /obj/item/weapon/storage/backpack/satchel
-	name = "brown leather satchel"
-	desc = "It's a very fancy satchel made with fine brown leather."
-	icon_state = "satchel"
-
-/obj/item/weapon/storage/backpack/satchel/withwallet
-	New()
-		..()
-		new /obj/item/weapon/storage/wallet/random( src )
-
-/obj/item/weapon/storage/backpack/satchel_norm
 	name = "satchel"
 	desc = "A trendy looking satchel."
 	icon_state = "satchel-norm"
+
+/obj/item/weapon/storage/backpack/satchel/grey
+	name = "grey satchel"
+
+/obj/item/weapon/storage/backpack/satchel/grey/withwallet
+	startswith = list(/obj/item/weapon/storage/wallet/random)
+
+/obj/item/weapon/storage/backpack/satchel/brown
+	name = "brown leather satchel"
+	desc = "A very fancy satchel made with fine brown leather."
+	icon_state = "satchel"
+
+/obj/item/weapon/storage/backpack/satchel/black
+	name = "black leather satchel"
+	desc = "A very fancy satchel made with fine black leather."
+	icon_state = "satchel_black"
+
+/obj/item/weapon/storage/backpack/satchel/pocketbook
+	name = "black pocketbook"
+	desc = "A neat little black folding clasp pocketbook with a shoulder sling."
+	icon_state = "pocketbook"
+	w_class = ITEM_SIZE_HUGE // to avoid recursive backpacks
+	slot_flags = SLOT_BACK
+	max_w_class = ITEM_SIZE_NORMAL
+	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 
 /obj/item/weapon/storage/backpack/satchel_eng
 	name = "industrial satchel"
@@ -270,11 +287,6 @@
 		slot_l_hand_str = "satchel-cap",
 		slot_r_hand_str = "satchel-cap",
 		)
-
-/obj/item/weapon/storage/backpack/satchel_black
-	name = "black leather satchel"
-	desc = "It's a very fancy satchel made with fine black leather."
-	icon_state = "satchel_black"
 
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert

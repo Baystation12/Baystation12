@@ -1,9 +1,9 @@
 var/obj/screen/robot_inventory
 
-/mob/living/silicon/robot/instantiate_hud(var/datum/hud/HUD)
-	HUD.robot_hud()
+/mob/living/silicon/robot
+	hud_type = /datum/hud/robot
 
-/datum/hud/proc/robot_hud()
+/datum/hud/robot/FinalizeInstantiation()
 
 	src.adding = list()
 	src.other = list()

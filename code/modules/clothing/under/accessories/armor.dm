@@ -172,6 +172,12 @@
 	desc = "An armor tag with the acronym SAARE printed in olive-green lettering on it."
 	icon_state = "saaretag"
 
+/obj/item/clothing/accessory/armor/tag/press
+	name = "\improper PRESS tag"
+	desc = "A tag with the word PRESS printed in white lettering on it."
+	icon_state = "presstag"
+	slot_flags = SLOT_BELT
+
 /obj/item/clothing/accessory/armor/tag/opos
 	name = "\improper O+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as O POSITIVE."

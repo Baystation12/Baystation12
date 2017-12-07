@@ -36,7 +36,7 @@
 
 	var/list/worn_underwear = list()
 
-	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
+	var/datum/backpack_setup/backpack_setup
 
 	// General information
 	var/home_system = ""

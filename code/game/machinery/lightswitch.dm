@@ -5,12 +5,12 @@
 	name = "light switch"
 	desc = "It turns lights on and off. What are you, simple?"
 	icon = 'icons/obj/power.dmi'
-	icon_state = "light1"
+	icon_state = "light0"
 	anchored = 1.0
 	use_power = 1
 	idle_power_usage = 20
 	power_channel = LIGHT
-	var/on = 1
+	var/on = 0
 	var/area/connected_area = null
 	var/other_area = null
 	var/image/overlay
@@ -22,10 +22,11 @@
 	else
 		src.connected_area = get_area(src)
 
-	if(!name)
+	if(name == initial(name))
 		name = "light switch ([connected_area.name])"
 
-	sync_state()
+	connected_area.set_lightswitch(on)
+	update_icon()
 
 /obj/machinery/light_switch/update_icon()
 	if(!overlay)
@@ -41,7 +42,7 @@
 		icon_state = "light[on]"
 		overlay.icon_state = "light[on]-overlay"
 		overlays += overlay
-		set_light(2, 0.1, on ? "#82ff4c" : "#f86060")
+		set_light(2, 0.3, on ? "#82ff4c" : "#f86060")
 
 /obj/machinery/light_switch/examine(mob/user)
 	if(..(user, 1))
@@ -54,7 +55,7 @@
 		update_icon()
 
 /obj/machinery/light_switch/proc/sync_state()
-	if(on != connected_area.lightswitch)
+	if(connected_area && on != connected_area.lightswitch)
 		on = connected_area.lightswitch
 		update_icon()
 		return 1

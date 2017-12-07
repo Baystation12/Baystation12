@@ -47,7 +47,7 @@
 /turf/simulated/open/proc/update()
 	plane = OPENSPACE_PLANE + (src.z * PLANE_DIFFERENCE)
 	below = GetBelow(src)
-	GLOB.turf_changed_event.register(below, src,/turf/simulated/open/update_icon)
+	GLOB.turf_changed_event.register(below, src,/turf/simulated/open/proc/turf_change)
 	GLOB.exited_event.register(below, src, /turf/simulated/open/proc/handle_move)
 	GLOB.entered_event.register(below, src, /turf/simulated/open/proc/handle_move)
 	levelupdate()
@@ -91,6 +91,7 @@
 */
 /turf/simulated/open/update_icon()
 	overlays.Cut()
+	underlays.Cut()
 	var/turf/below = GetBelow(src)
 	if(below)
 		var/below_is_open = isopenspace(below)
@@ -191,12 +192,19 @@
 
 /turf/simulated/open/proc/clean_up()
 	//Unregister
-	GLOB.turf_changed_event.unregister(below, src,/turf/simulated/open/update_icon)
+	GLOB.turf_changed_event.unregister(below, src,/turf/simulated/open/proc/turf_change)
 	GLOB.exited_event.unregister(below, src, /turf/simulated/open/proc/handle_move)
 	GLOB.entered_event.unregister(below, src, /turf/simulated/open/proc/handle_move)
 	//Take care of shadow
 	for(var/mob/zshadow/M in src)
 		qdel(M)
+
+//When turf changes, a bunch of things can take place
+/turf/simulated/open/proc/turf_change(var/turf/affected)
+	if(GLOB.open_space_initialised)
+		if(!isopenspace(affected))//If affected is openspace it will add itself
+			SSopen_space.add_turf(src, 1)
+
 
 //The two situations which require unregistering
 
@@ -204,7 +212,6 @@
 	//We do not want to change any of the behaviour, just make sure this goes away
 	src.clean_up()
 	. = ..()
-
 
 /turf/simulated/open/Destroy()
 	src.clean_up()

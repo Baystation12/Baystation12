@@ -6,19 +6,19 @@
 	sort_category = "Uniforms and Casual Dress"
 
 /datum/gear/uniform/jumpsuit
-	display_name = "jumpsuit"
+	display_name = "jumpsuit, colour select"
 	path = /obj/item/clothing/under/color
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/uniform/jumpsuit_f
-	display_name = "feminine jumpsuit"
+	display_name = "feminine jumpsuit, colour select"
 	path = /obj/item/clothing/under/fcolor
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/uniform/shortjumpskirt
-	display_name = "short jumpskirt"
+	display_name = "short jumpskirt, colour select"
 	path = /obj/item/clothing/under/shortjumpskirt
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = RESTRICTED_ROLES
@@ -70,19 +70,14 @@
 	gear_tweaks += new/datum/gear_tweak/path(suits)
 
 /datum/gear/uniform/scrubs
-	display_name = "medical scrubs"
-	path = /obj/item/clothing/under/rank/medical
+	display_name = "standard medical scrubs"
+	path = /obj/item/clothing/under/rank/medical/scrubs
 	allowed_roles = STERILE_ROLES
+	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/uniform/scrubs/New()
-	..()
-	var/scrubcolor = list()
-	scrubcolor["black scrubs"] = /obj/item/clothing/under/rank/medical/black
-	scrubcolor["blue scrubs"] = /obj/item/clothing/under/rank/medical/blue
-	scrubcolor["green scrubs"] = /obj/item/clothing/under/rank/medical/green
-	scrubcolor["navy blue scrubs"] = /obj/item/clothing/under/rank/medical/navyblue
-	scrubcolor["purple scrubs"] = /obj/item/clothing/under/rank/medical/purple
-	gear_tweaks += new/datum/gear_tweak/path(scrubcolor)
+/datum/gear/uniform/scrubs/custom
+	display_name = "scrubs, colour select"
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/dress
 	display_name = "dress selection"
@@ -102,13 +97,13 @@
 	gear_tweaks += new/datum/gear_tweak/path(dresses)
 
 /datum/gear/uniform/cheongsam
-	display_name = "cheongsam"
+	display_name = "cheongsam, colour select"
 	path = /obj/item/clothing/under/cheongsam
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/uniform/abaya
-	display_name = "abaya"
+	display_name = "abaya, colour select"
 	path = /obj/item/clothing/under/abaya
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = FORMAL_ROLES
@@ -119,9 +114,15 @@
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/uniform/skirt/color
-	display_name = "short skirt"
+/datum/gear/uniform/skirt_c
+	display_name = "short skirt, colour select"
 	path = /obj/item/clothing/under/skirt_c
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/uniform/skirt_c/dress
+	display_name = "simple dress, colour select"
+	path = /obj/item/clothing/under/skirt_c/dress
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -137,14 +138,32 @@
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
 
+/datum/gear/uniform/formal_pants/custom
+	display_name = "suit pants, colour select"
+	path = /obj/item/clothing/under/formal_pants
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/uniform/formal_pants/baggycustom
+	display_name = "baggy suit pants, colour select"
+	path = /obj/item/clothing/under/formal_pants/baggy
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
 	path = /obj/item/clothing/under/shorts/jeans
 	allowed_roles = RESTRICTED_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
 
+/datum/gear/uniform/shorts/custom
+	display_name = "athletic shorts, colour select"
+	path = /obj/item/clothing/under/shorts/
+	allowed_roles = FORMAL_ROLES
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/uniform/turtleneck
-	display_name = "sweater"
+	display_name = "sweater, colour select"
 	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = FORMAL_ROLES

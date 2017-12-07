@@ -1,27 +1,7 @@
+/mob/living/carbon/slime
+	hud_type = /datum/hud/slime
 
-/datum/hud/proc/unplayer_hud()
-	return
-
-/mob/observer/ghost/instantiate_hud(var/datum/hud/HUD)
-	HUD.ghost_hud()
-
-/datum/hud/proc/ghost_hud()
-	return
-
-/mob/living/carbon/brain/instantiate_hud(var/datum/hud/HUD)
-	return
-
-/mob/living/silicon/ai/instantiate_hud(var/datum/hud/HUD)
-	HUD.ai_hud()
-
-/datum/hud/proc/ai_hud()
-	return
-
-/mob/living/carbon/slime/instantiate_hud(var/datum/hud/HUD)
-	HUD.slime_hud()
-
-/datum/hud/proc/slime_hud(ui_style = 'icons/mob/screen1_Midnight.dmi')
-
+/datum/hud/slime/FinalizeInstantiation(ui_style = 'icons/mob/screen1_Midnight.dmi')
 	src.adding = list()
 
 	var/obj/screen/using
@@ -33,10 +13,10 @@
 	mymob.client.screen = list()
 	mymob.client.screen += src.adding
 
-/mob/living/simple_animal/construct/instantiate_hud(var/datum/hud/HUD)
-	HUD.construct_hud()
+/mob/living/simple_animal/construct
+	hud_type = /datum/hud/construct
 
-/datum/hud/proc/construct_hud()
+/datum/hud/construct/FinalizeInstantiation()
 	var/constructtype
 
 	if(istype(mymob,/mob/living/simple_animal/construct/armoured) || istype(mymob,/mob/living/simple_animal/construct/behemoth))

@@ -1,0 +1,4 @@
+author: "dryerlint"
+delete-after: True
+changes: 
+  - rscadd: "Added the SolGov flag, a variant of the existing flags, but with SolGov logo on it. It is found in Exploration Storage."

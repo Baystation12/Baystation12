@@ -1645,6 +1645,14 @@
 	wrapped = 0
 	flags |= OPENCONTAINER
 
+/obj/item/weapon/reagent_containers/food/snacks/monkeycube/On_Consume(var/mob/M)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		H.visible_message("<span class='warning'>A screeching creature bursts out of [M]'s chest!</span>")
+		var/obj/item/organ/external/organ = H.get_organ(BP_CHEST)
+		organ.take_damage(50, 0, 0, "Animal escaping the ribcage")
+	Expand()
+
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/on_reagent_change()
 	if(reagents.has_reagent(/datum/reagent/water))
 		Expand()

@@ -15,6 +15,7 @@
 	handle_casings = HOLD_CASINGS
 	one_hand_penalty = 2
 	var/recentpump = 0 // to prevent spammage
+	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
@@ -67,6 +68,8 @@
 	caliber = "shotgun"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+	one_hand_penalty = 2
+	wielded_item_state = "gun_wielded"
 
 	burst_delay = 0
 	firemodes = list(

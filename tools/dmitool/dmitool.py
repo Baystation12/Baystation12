@@ -58,10 +58,10 @@ def info(filepath):
             continue
 
         stateinfo = {}
-        item = item.split(",", 3)
-        _safe_parse(stateinfo, "name", lambda: item[0].split()[1].strip(" \""))
-        _safe_parse(stateinfo, "dirs", lambda: int(item[1].split()[0].strip()))
-        _safe_parse(stateinfo, "frames", lambda: int(item[2].split()[0].strip()))
+        item = [x.strip() for x in item.split(",")]
+        _safe_parse(stateinfo, "name", lambda: ''.join(item[0:(len(item)-2)]).split()[1].strip(" \""))
+        _safe_parse(stateinfo, "dirs", lambda: int(item[len(item)-2].split()[0].strip()))
+        _safe_parse(stateinfo, "frames", lambda: (item[len(item)-1] if item[len(item)-1] == 'loop(infinite)' else int(item[len(item)-1].split()[0].strip())))
         if len(item) > 3:
             stateinfo["misc"] = item[3]
 

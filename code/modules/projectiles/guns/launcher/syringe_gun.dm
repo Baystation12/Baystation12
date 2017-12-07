@@ -139,7 +139,7 @@
 
 /obj/item/weapon/gun/launcher/syringe/disguised
 	name = "deluxe electronic cigarette"
-	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar. The button is a little stiff."
+	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
 	icon = 'icons/obj/ecig.dmi'
 	icon_state = "pcigoff1"
 	item_state = "pcigoff1"
@@ -147,3 +147,7 @@
 	force = 3
 	throw_distance = 7
 	release_force = 7
+
+/obj/item/weapon/gun/launcher/syringe/disguised/examine(mob/user)
+	if(( . = ..(user, 0)))
+		to_chat(user, "The button is a little stiff.")

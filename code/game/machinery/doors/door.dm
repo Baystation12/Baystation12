@@ -221,10 +221,11 @@
 			if (!transfer)
 				to_chat(user, "<span class='warning'>You must weld or remove \the [repairing] from \the [src] before you can add anything else.</span>")
 		else
-			repairing = stack.split(amount_needed)
+			repairing = stack.split(amount_needed, force=TRUE)
 			if (repairing)
 				repairing.loc = src
 				transfer = repairing.amount
+				repairing.uses_charge = FALSE //for clean robot door repair - stacks hint immortal if true
 
 		if (transfer)
 			to_chat(user, "<span class='notice'>You fit [transfer] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")

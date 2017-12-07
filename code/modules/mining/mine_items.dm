@@ -213,6 +213,14 @@
 	fringe = "greenflag_fringe"
 	light_color = COLOR_LIME
 
+/obj/item/stack/flag/solgov
+	name = "sol gov flags"
+	singular_name = "sol gov flag"
+	icon_state = "solgovflag"
+	fringe = "solgovflag_fringe"
+	desc = "A portable flag with the Sol Government symbol on it. I claim this land for Sol!"
+	light_color = COLOR_BLUE
+
 /obj/item/stack/flag/attackby(var/obj/item/W, var/mob/user)
 	if(upright)
 		attack_hand(user)

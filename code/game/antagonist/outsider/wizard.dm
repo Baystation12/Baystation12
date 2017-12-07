@@ -76,19 +76,10 @@ var/datum/antagonist/wizard/wizards
 	if(!..())
 		return 0
 
-	wizard_mob.equip_to_slot_or_del(new /obj/item/device/radio/headset(wizard_mob), slot_l_ear)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple(wizard_mob), slot_w_uniform)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(wizard_mob), slot_shoes)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe(wizard_mob), slot_wear_suit)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/head/wizard(wizard_mob), slot_head)
-	if(wizard_mob.backbag == 2) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(wizard_mob), slot_back)
-	if(wizard_mob.backbag == 3) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(wizard_mob), slot_back)
-	if(wizard_mob.backbag == 4) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(wizard_mob), slot_back)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box(wizard_mob), slot_in_backpack)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/teleportation_scroll(wizard_mob), slot_r_store)
-	var/obj/item/I = new /obj/item/weapon/spellbook(get_turf(wizard_mob))
-	wizard_mob.put_in_hands(I) //makes sure to at least have it on the ground for the wizard, considering how important it is.
-	wizard_mob.update_icons()
+	var/outfit_type = pick(subtypesof(/decl/hierarchy/outfit/wizard))
+	var/decl/hierarchy/outfit/wizard_outfit = outfit_by_type(outfit_type)
+	wizard_outfit.equip(wizard_mob)
+
 	return 1
 
 /datum/antagonist/wizard/check_victory()

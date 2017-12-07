@@ -164,7 +164,7 @@ function find_code_deps {
     need_cmd grep
     need_cmd awk
     need_cmd md5sum
-    need_cmd python
+    need_cmd python2
     need_cmd pip
 }
 
@@ -206,10 +206,10 @@ function run_code_tests {
     run_test "code quality checks" "test/check-paths.sh"
     run_test "indentation check" "awk -f tools/indentation.awk **/*.dm"
     run_test "check changelog example unchanged" "md5sum -c - <<< '79e058ac02ed52aad99a489ab4c8f75b *html/changelogs/example.yml'"
-    run_test "check tags" "python tools/TagMatcher/tag-matcher.py ."
-    run_test "check punctuation" "python tools/PunctuationChecker/punctuation-checker.py ."
-    run_test "check icon state limit" "python tools/dmitool/check_icon_state_limit.py ."
-    run_test_ci "check changelog builds" "python tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
+    run_test "check tags" "python2 tools/TagMatcher/tag-matcher.py ."
+    run_test "check punctuation" "python2 tools/PunctuationChecker/punctuation-checker.py ."
+    run_test "check icon state limit" "python2 tools/dmitool/check_icon_state_limit.py ."
+    run_test_ci "check changelog builds" "python2 tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
 function run_web_tests {
@@ -240,7 +240,7 @@ function run_byond_tests {
         source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
     fi
     run_test_ci "check globals build" "python tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm"
-    run_test "check globals unchanged" "md5sum -c - <<< '420417e347d13864634f5ed09d99e6ab *code/_helpers/global_access.dm'"
+    run_test "check globals unchanged" "md5sum -c - <<< '4110a81a274d32a7c60de2796f5ce0fe *code/_helpers/global_access.dm'"
     run_test "build map unit tests" "scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme"
     run_test "check no warnings in build" "grep ', 0 warnings' build_log.txt"
     run_test "run unit tests" "DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt"

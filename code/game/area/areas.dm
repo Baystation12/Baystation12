@@ -234,6 +234,8 @@
 /area/proc/set_lightswitch(var/new_switch)
 	if(lightswitch != new_switch)
 		lightswitch = new_switch
+		for(var/obj/machinery/light_switch/L in src)
+			L.sync_state()
 		update_icon()
 		power_change()
 

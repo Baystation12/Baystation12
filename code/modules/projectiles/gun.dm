@@ -89,12 +89,6 @@
 
 /obj/item/weapon/gun/update_twohanding()
 	if(one_hand_penalty)
-		var/mob/living/M = loc
-		if(istype(M))
-			if(M.can_wield_item(src) && src.is_held_twohanded(M))
-				name = "[initial(name)] (wielded)"
-			else
-				name = initial(name)
 		update_icon() // In case item_state is set somewhere else.
 	..()
 

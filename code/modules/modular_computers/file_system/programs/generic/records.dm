@@ -128,7 +128,7 @@
 		print_text(record_to_html(active_record, get_record_access(usr)), usr)
 		return 1
 	if(href_list["search"])
-		var/field = text2path(href_list["search"])
+		var/field = text2path("/record_field/"+href_list["search"])
 		var/search = sanitize(input("Enter the value for search for.") as null|text)
 		if(!search)
 			return

@@ -40,6 +40,8 @@
 	desc = "A large three-handed with rotating top. It is used to create high-power magnetic fields in hard vacuum."
 	icon = 'magshield_sprites.dmi'
 	icon_state = "maggen"
+	var/heavy_range = 10
+	var/lighter_range = 20
 	var/chance = 0
 
 /obj/structure/magshield/maggen/Initialize()
@@ -54,7 +56,10 @@
 	var/eye_safety = 0
 	chance = rand(1,300)//I wanted to use Poisson distribution with Lambda for 5 minutes but made it simpler
 	if (chance == 1)
-		empulse(src, 10, 20, 1)
+		empulse(src, heavy_range, lighter_range, 0)
+		var/turf/T = get_turf(src)
+		var/area/A = get_area(src)
+		log_game("EMP with size ([heavy_range], [lighter_range]) in area [A] ([T.x], [T.y], [T.z])")
 		visible_message("<span class='notice'>\the [src] suddenly activates.</span>", "<span class='notice'>Few lightnings jump between [src]'s rotating hands. You feel everything metal being pulled towards \the [src].</span>")
 		for(var/mob/living/carbon/M in hear(10, get_turf(src)))
 			eye_safety = M.eyecheck()
@@ -69,21 +74,24 @@
 	icon_state = "rad_sensor"
 	anchored = 1
 
-/obj/machinery/light/magshield/nav_light
+/obj/structure/magshield/nav_light
 	name = "navigation light"
 	desc = "Large and bright light regularly emitting green flashes."
 	icon = 'magshield_sprites.dmi'
 	icon_state = "nav_light_green"
-	brightness_color = "#00ee00"
-	brightness_range = 10
-	use_power = 0
-	idle_power_usage = 0
-	active_power_usage = 0
-	brightness_power = 10
+	anchored = 1
+	density = 1
+	light_range = 10
+	light_power = 10
+	light_color = "#00ee00"
 
-/obj/machinery/light/magshield/nav_light/red
+/obj/structure/magshield/nav_light/New()//try make flashing through the process
+	..()
+	set_light(light_range, light_power, light_color)
+
+/obj/structure/magshield/nav_light/red
 	desc = "Large and bright light regularly emitting red flashes."
-	brightness_color = "#ee0000"
+	light_color = "#ee0000"
 	icon_state = "nav_light_red"
 
 
