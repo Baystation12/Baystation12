@@ -67,6 +67,7 @@
 /datum/game_mode/insurrection/proc/last_assault()
 	last_assault = TRUE
 	deny_respawn = 1 //No more respawn
+	modify_pod_launch(1)
 	warned = 1
 
 /datum/game_mode/insurrection/proc/check_pods_left()
