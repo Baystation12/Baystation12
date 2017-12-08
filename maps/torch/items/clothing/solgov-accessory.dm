@@ -592,8 +592,8 @@ ranks - marines
 	icon_state = "marinerank_officer"
 
 /obj/item/clothing/accessory/solgov/rank/marine/officer/o2
-	name = "ranks (O-2 lieutenant)"
-	desc = "Insignia denoting the rank of Lieutenant."
+	name = "ranks (O-2 first lieutenant)"
+	desc = "Insignia denoting the rank of First Lieutenant."
 
 /obj/item/clothing/accessory/solgov/rank/marine/officer/o3
 	name = "ranks (O-3 captain)"

@@ -569,19 +569,19 @@
 
 /datum/mil_rank/marine/o1
 	name = "Second Lieutenant"
-	name_short = "2ndLt"
+	name_short = "2Lt"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/officer)
 	sort_order = 11
 
 /datum/mil_rank/marine/o2
-	name = "Lieutenant"
-	name_short = "Lt"
+	name = "First Lieutenant"
+	name_short = "1Lt"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/officer/o2)
 	sort_order = 12
 
 /datum/mil_rank/marine/o3
 	name = "Captain"
-	name_short = "Capt"
+	name_short = "Cpt"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/officer/o3)
 	sort_order = 13
 
