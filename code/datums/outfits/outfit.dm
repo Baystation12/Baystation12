@@ -173,8 +173,10 @@ var/list/outfits_decls_by_type_
 		H.equip_to_slot_or_del(new suit_store(H),slot_s_store)
 
 	if(l_hand)
+		H.drop_l_hand()
 		H.put_in_l_hand(new l_hand(H))
 	if(r_hand)
+		H.drop_r_hand()
 		H.put_in_r_hand(new r_hand(H))
 	if(H.species)
 		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL)
