@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added a few different colours to the satchel and pocketbook selection in character setup."
