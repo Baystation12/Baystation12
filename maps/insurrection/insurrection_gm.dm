@@ -2,9 +2,6 @@
 #define UNSC_ROLES list("ODST Assault Squad Member","ODST Assault Squad Lead","ODST Assault Team Lead")
 #define INNIE_ROLES list("Insurrectionist","Insurrectionist Leader")
 
-#define LAUNCH_ABORTED -1
-#define LAUNCH_UNDERWAY -2
-
 #define BOMB_ACTIVE -1
 #define ROUND_ENDED -2
 
@@ -27,12 +24,16 @@
 			b.lockdown_bomb()
 			b.visible_message("<span class = 'danger'>The [b.name]'s automatic anchoring bolts engage!</span>")
 
-/datum/game_mode/insurrection/proc/message_faction(var/faction,var/message)
-	var/list/allowed_roles
+/datum/game_mode/insurrection/proc/get_roles_from_faction(var/faction)
+	var/list/allowed_roles = list()
 	if(faction == "UNSC")
 		allowed_roles = UNSC_ROLES
 	else if (faction == "Insurrection")
 		allowed_roles = INNIE_ROLES
+	return allowed_roles
+
+/datum/game_mode/insurrection/proc/message_faction(var/faction,var/message)
+	var/list/allowed_roles = get_roles_from_faction(faction)
 	for(var/mob/living/l in GLOB.player_list)
 		var/datum/mind/m = l.mind
 		if(m.assigned_role in allowed_roles)
@@ -41,17 +42,17 @@
 		to_chat(i,"[faction]:[message]")
 
 /datum/game_mode/insurrection/proc/obtain_all_pods()
-	for(var/obj/machinery/podcontrol/p in world)
+	for(var/obj/structure/drop_pods/p in world)
 		remaining_pods += p
 
-/datum/game_mode/insurrection/proc/modify_pod_launch(var/launch_state)
-	for(var/obj/machinery/podcontrol/p in remaining_pods)
-		p.launching = launch_state
-
 /datum/game_mode/insurrection/proc/update_pod_status()
-	for(var/obj/machinery/podcontrol/p in remaining_pods)
-		if(!p.land_point)
+	for(var/obj/structure/drop_pods/p in remaining_pods)
+		if(p.launched)
 			remaining_pods -= p
+
+/datum/game_mode/insurrection/proc/modify_pod_launch(var/modify_to)
+	for(var/obj/structure/drop_pods/p in remaining_pods)
+		p.launched = modify_to
 
 /datum/game_mode/insurrection/proc/inform_start_round()
 	message_faction("UNSC","<span class='danger'>Insurrection Base Located, time to Assault Pod effective range: [prepare_time/10] seconds</span>")
@@ -80,14 +81,13 @@
 	return remaining_pods.len
 
 /datum/game_mode/insurrection/proc/check_players_live(var/faction)
-	var/living_players = list()
-	for(var/i in GLOB.player_list)
-		var/mob/l = i
-		var/datum/mind/m = l.mind
-		if(m.assigned_role == faction)
-			if(l.stat != DEAD)
-				living_players += l
-	return living_players
+	var/list/live_players = list()
+	var/list/allowed_roles = get_roles_from_faction(faction)
+	for(var/mob/living/player in GLOB.player_list)
+		if(player.mind.assigned_role in allowed_roles)
+			if(player.stat == CONSCIOUS)
+				live_players += player
+	return live_players
 
 /datum/game_mode/insurrection/proc/announce_win(var/faction)
 	if(faction == "Insurrection")
@@ -140,10 +140,10 @@
 	..()
 	obtain_all_pods()
 	update_bomb_status()
-	modify_pod_launch(LAUNCH_UNDERWAY) //Stop the pods from launching.
+	modify_pod_launch(1) //Stop the pods from launching.
 	spawn(prepare_time) //After the time elapses, allow the pods to launch
 		lockdown_bombs()
-		modify_pod_launch(LAUNCH_ABORTED)
+		modify_pod_launch(0)
 		message_faction("UNSC","<span class='danger'>Strike Craft in effective range. Assault Pods unlocked.</span>")
 	spawn(10 SECONDS) //Delay this for a little to allow for people to spawn in.
 		inform_start_round()
@@ -158,17 +158,19 @@
 		update_bomb_status()
 		update_bomb_timer()
 	if(autolaunchtime < world.time)
-		for(var/obj/machinery/podcontrol/control in remaining_pods)
-			message_faction("UNSC","<span class = 'danger'>Assault pods autolaunched.</span>")
-			modify_pod_launch(0)
-			remaining_pods -= control
+		if(!warned)
+			message_faction("UNSC","<span class = 'danger'>Assault pods auto-locked..</span>")
+		for(var/obj/structure/drop_pods/p in remaining_pods)
+			p.launched = 1
+			remaining_pods -= p
 			update_pod_status()
+		warned = 1
+	if((check_pods_left() == 0) && (world.time > autolaunchtime))
+		inform_last_assault()
+		last_assault()
 
 /datum/game_mode/insurrection/handle_mob_death()
 	update_pod_status()
-	if(check_pods_left() == 0)
-		inform_last_assault()
-		last_assault()
 	update_bomb_status() //Placement of this is important, if passes successfully after last_assault, it will override the usual last assault measures.
 	return 1
 
