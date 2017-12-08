@@ -77,6 +77,8 @@
 	var/list/live_players = list()
 	var/list/allowed_roles = get_roles_from_faction(faction)
 	for(var/mob/living/player in GLOB.player_list)
+		if(player.z in GLOB.using_map.admin_levels)
+			continue
 		if(player.mind.assigned_role in allowed_roles)
 			if(player.stat == CONSCIOUS)
 				live_players += player
