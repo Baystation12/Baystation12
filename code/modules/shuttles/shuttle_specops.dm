@@ -198,17 +198,3 @@
 						M.close()
 		special_ops.readyreset()//Reset firealarm after the team launched.
 	//End Marauder launchpad.
-
-/obj/machinery/light/small/readylight
-	brightness_range = 5
-	brightness_power = 1
-	brightness_color = "#da0205"
-	var/state = 0
-
-/obj/machinery/light/small/readylight/proc/set_state(var/new_state)
-	state = new_state
-	if(state)
-		brightness_color = "00FF00"
-	else
-		brightness_color = initial(brightness_color)
-	update()
