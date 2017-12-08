@@ -1,6 +1,6 @@
 "aa" = (/turf/unsimulated/mineral,/area/far_isle/caves/upper)
-"ab" = (/turf/simulated/floor/exoplanet/desert,/area/far_isle/caves/upper)
-"ac" = (/obj/structure/ladder,/turf/simulated/floor/exoplanet/desert,/area/far_isle/caves/upper)
+"ab" = (/turf/unsimulated/beach/sand,/area/far_isle/caves/upper)
+"ac" = (/obj/structure/ladder,/turf/unsimulated/beach/sand,/area/far_isle/caves/upper)
 "ad" = (/turf/unsimulated/mineral,/area/far_isle/outside)
 "ae" = (/turf/simulated/open,/area/far_isle/outside)
 "af" = (/turf/simulated/floor/holofloor/tiled,/area/far_isle/outside)

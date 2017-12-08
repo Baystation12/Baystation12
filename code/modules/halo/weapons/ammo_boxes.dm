@@ -6,7 +6,7 @@
 	icon_state = "666"
 	var/capacity = 20
 	var/list/ammo_spawnwith = list()
-	var/load_time = 1 //The time it takes to load one round from the box to the weapon, in seconds
+	var/load_time = 0.5 //The time it takes to load one round from the box to the weapon, in seconds
 
 /obj/item/ammo_box/New()
 	.=..()

@@ -1,6 +1,6 @@
 "aa" = (/turf/unsimulated/mineral,/area/far_isle/caves/below)
-"ab" = (/obj/structure/ladder/up,/turf/simulated/floor/exoplanet/desert,/area/far_isle/caves/below)
-"ac" = (/turf/simulated/floor/exoplanet/desert,/area/far_isle/caves/below)
+"ab" = (/obj/structure/ladder/up,/turf/unsimulated/beach/sand,/area/far_isle/caves/below)
+"ac" = (/turf/unsimulated/beach/sand,/area/far_isle/caves/below)
 "ad" = (/turf/simulated/wall/titanium,/area/far_isle/tunnel)
 "ae" = (/turf/simulated/floor/tiled/dark,/area/far_isle/tunnel)
 "af" = (/obj/structure/stairs_decorative{dir = 8},/turf/simulated/floor/tiled/dark,/area/far_isle/tunnel)

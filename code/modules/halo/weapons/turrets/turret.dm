@@ -171,6 +171,7 @@
 	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
 	icon_state = "chaingun_obj"
 	item_state = "chaingun_obj"
+	one_hand_penalty = -1
 
 	slowdown_general = 7
 	w_class = 5
