@@ -133,9 +133,7 @@
 		/area/template_noop,
 		/area/map_template,
 		/area/map_template/little_house,
-		/area/rnd/wing,
-		/area/rnd/anom,
-		/area/rnd/equipment
+		/area/rnd/anom
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
