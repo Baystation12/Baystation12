@@ -169,6 +169,7 @@
 	event = /datum/event/electrical_storm
 	count = 11
 	radius = 3
+	opacity = 0
 	event_icon_states = list("electrical1", "electrical2", "electrical3", "electrical4")
 	difficulty = EVENT_LEVEL_MAJOR
 
@@ -178,3 +179,21 @@
 	count = 16
 	radius = 4
 	event_icon_states = list("dust1", "dust2", "dust3", "dust4")
+
+/datum/overmap_event/carp
+	name = "carp shoal"
+	event = /datum/event/carp_migration
+	count = 6
+	radius = 4
+	opacity = 0
+	difficulty = EVENT_LEVEL_MAJOR
+	continuous = FALSE
+	event_icon_states = list("carp1", "carp2", "carp3", "carp4")
+
+/datum/overmap_event/ion
+	name = "ion cloud"
+	event = /datum/event/ionstorm
+	count = 8
+	radius = 3
+	opacity = 0
+	event_icon_states = list("ion1", "ion2", "ion3")
