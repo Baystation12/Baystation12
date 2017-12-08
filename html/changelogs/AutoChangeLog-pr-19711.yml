@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "A more gentle carp event has been added to the overmap to supplement the more dangerous version. The event icons with three carp are the more dangerous schools."
