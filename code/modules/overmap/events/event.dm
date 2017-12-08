@@ -196,4 +196,4 @@
 	count = 8
 	radius = 3
 	opacity = 0
-	event_icon_states = list("ion1", "ion2", "ion3")
+	event_icon_states = list("ion1", "ion2", "ion3", "ion4")
