@@ -76,6 +76,7 @@
 		a.locked = TRUE
 	last_assault = TRUE
 	deny_respawn = 1 //No more respawn
+	warned = 1
 
 /datum/game_mode/insurrection/proc/check_pods_left()
 	return remaining_pods.len
@@ -165,7 +166,7 @@
 			remaining_pods -= p
 			update_pod_status()
 		warned = 1
-	if((check_pods_left() == 0) && (world.time > autolaunchtime))
+	if((check_pods_left() == 0) && (world.time > autolaunchtime) && (!warned))
 		inform_last_assault()
 		last_assault()
 
