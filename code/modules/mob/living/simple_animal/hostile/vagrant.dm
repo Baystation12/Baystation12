@@ -7,8 +7,8 @@
 	icon_living = "vagrant"
 	icon_dead = "vagrant"
 	icon_gib = "vagrant"
-	maxHealth = 60
-	health = 35
+	maxHealth = 65
+	health = 40
 	speed = 5
 	speak_chance = 0
 	turns_per_move = 3
@@ -30,8 +30,8 @@
 	var/datum/disease2/disease/carried
 	var/cloaked = 0
 	var/mob/living/carbon/human/gripping = null
-	var/blood_per_tick = 4
-	var/health_per_tick = 0.75
+	var/blood_per_tick = 4.25
+	var/health_per_tick = 0.8
 
 /mob/living/simple_animal/hostile/vagrant/Initialize()
 	. = ..()
@@ -41,6 +41,14 @@
 
 /mob/living/simple_animal/hostile/vagrant/Allow_Spacemove(var/check_drift = 0)
 	return 1
+
+/mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
+	var/oldhealth = health
+	. = ..()
+	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
+		target_mob = Proj.firer
+		turns_per_move = 2
+		MoveToTarget()
 
 /mob/living/simple_animal/hostile/vagrant/Life()
 	. = ..()
@@ -57,6 +65,9 @@
 					to_chat(gripping, "<span class='danger'>You feel your fluids being drained!</span>")
 			else
 				gripping = null
+
+		if(turns_per_move != initial(turns_per_move))
+			turns_per_move = initial(turns_per_move)
 
 	if(stance == HOSTILE_STANCE_IDLE && !cloaked)
 		cloaked = 1
@@ -89,7 +100,9 @@
 		if(gripping == H)
 			H.Weaken(3)
 			return
-		if(!gripping && (cloaked || prob(health)))
+		//This line ensures there's always a reasonable chance of grabbing, while still
+		//Factoring in health
+		if(!gripping && (cloaked || prob(health + ((maxHealth - health) * 2))))
 			gripping = H
 			cloaked = 0
 			update_icon()

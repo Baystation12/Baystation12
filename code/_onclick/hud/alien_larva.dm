@@ -1,7 +1,7 @@
-/mob/living/carbon/alien/instantiate_hud(var/datum/hud/HUD)
-	HUD.larva_hud()
+/mob/living/carbon/alien
+	hud_type = /datum/hud/larva
 
-/datum/hud/proc/larva_hud()
+/datum/hud/larva/FinalizeInstantiation()
 
 	src.adding = list()
 	src.other = list()
