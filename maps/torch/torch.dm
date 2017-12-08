@@ -9,7 +9,6 @@
 	#include "torch_ranks.dm"
 	#include "torch_shuttles.dm"
 	#include "torch_unit_testing.dm"
-	#include "torch_gamemodes.dm"
 	#include "torch_antagonism.dm"
 	#include "torch_npcs.dm"
 	#include "torch_security_state.dm"
