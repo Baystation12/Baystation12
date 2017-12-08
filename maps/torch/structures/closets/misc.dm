@@ -48,7 +48,7 @@
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
 		/obj/item/weapon/storage/secure/briefcase,
-		/obj/item/device/radio/headset/headset_com,
+		/obj/item/device/radio/headset/heads/cos/solrep,
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/clothing/under/rank/internalaffairs/plain/solgov,
 		/obj/item/clothing/suit/storage/toggle/suit/black,

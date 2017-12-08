@@ -33,6 +33,10 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/heads/hos
 
+/obj/item/device/radio/headset/heads/cos/solrep
+	name = "sol representative's headset"
+	desc = "The headset of your boss' boss' lackey."
+
 /obj/item/device/radio/headset/headset_deckofficer
 	name = "deck officer's radio headset"
 	desc = "The headset of the chief box pusher."
@@ -54,7 +58,7 @@
 
 /obj/item/device/radio/headset/exploration
 	name = "exploration headset"
-	desc = "A headset for real tools, with access to the exploration channel."
+	desc = "A headset with access to the exploration channel."
 	icon_state = "srv_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/exploration
