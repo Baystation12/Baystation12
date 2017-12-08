@@ -1,0 +1,5 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Space carp can now be encountered on the overmap."
+  - rscadd: "Ion clouds have condensed in the vicinity of the ship and can be collided with on the overmap."
