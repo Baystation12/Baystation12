@@ -65,15 +65,6 @@
 	message_faction("Insurrection","<span class = 'danger'>UNSC Strike Craft retreating! Eliminate the remaining UNSC forces.</span>")
 
 /datum/game_mode/insurrection/proc/last_assault()
-	var/area/staging_area
-	for(var/area/UNSC_Staging/s in world)
-		staging_area = s
-		break
-	if(!staging_area)
-		return
-	for(var/obj/machinery/door/airlock/a in staging_area.contents)
-		a.close()
-		a.locked = TRUE
 	last_assault = TRUE
 	deny_respawn = 1 //No more respawn
 	warned = 1
