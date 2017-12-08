@@ -158,11 +158,12 @@
 	min_age = 19
 	max_age = 140
 
-	blurb = "The Tajaran race is a species of long lived mammalian bipeds hailing from the planet of Ahdomai in the \
-	Shyihie system. They have been introduced to bluespace travel by the humans and Skrell, and their policies have been \
-	structured to prevent another reign of the Overseers. They hold a very spiritual outlook on life and \
-	have recently been fascinated by cybernetic enhancement. They prefer colder environments, \
-	and evolved a layer of thick fur to accommodate this. "
+	blurb = "The Tajaran are a species of furred mammalian bipeds hailing from the chilly planet of Ahdomai \
+	in the Zamsiin-lr system. They are a naturally superstitious species, with the new generations growing up with tales \
+	of the heroic struggles of their forebears against the Overseers. This spirit has led them forward to the \
+	reconstruction and advancement of their society to what they are today. Their pride for the struggles they \
+	went through is heavily tied to their spiritual beliefs. Recent discoveries have jumpstarted the progression \
+	of highly advanced cybernetic technology, causing a culture shock within Tajaran society."
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
