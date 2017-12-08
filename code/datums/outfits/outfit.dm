@@ -51,7 +51,7 @@ var/list/outfits_decls_by_type_
 	var/id_pda_assignment
 
 	var/list/backpack_overrides
-	var/flags // Specific flags
+	var/flags = OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/New()
 	..()
@@ -63,7 +63,8 @@ var/list/outfits_decls_by_type_
 	dd_insertObjectList(outfits_decls_, src)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
-	return
+	if(flags & OUTFIT_RESET_EQUIPMENT)
+		H.delete_inventory(TRUE)
 
 /decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_JETPACK)
