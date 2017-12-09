@@ -30,6 +30,7 @@ var/list/tape_roll_applications = list()
 	name = "tape"
 	icon = 'icons/policetape.dmi'
 	icon_state = "tape"
+	layer = ABOVE_DOOR_LAYER
 	randpixel = 0
 	anchored = 1
 	var/lifted = 0
