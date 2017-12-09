@@ -142,7 +142,6 @@
 	..()
 	var/caligae = list()
 	caligae["no sock"] = /obj/item/clothing/shoes/sandal/tajaran/caligae
-	caligae["black sock"] = /obj/item/clothing/shoes/sandal/tajaran/caligae/black
 	caligae["grey sock"] = /obj/item/clothing/shoes/sandal/tajaran/caligae/grey
 	caligae["white sock"] = /obj/item/clothing/shoes/sandal/tajaran/caligae/white
 	gear_tweaks += new/datum/gear_tweak/path(caligae)

@@ -159,7 +159,7 @@
 	max_age = 140
 
 	blurb = "The Tajaran are a species of furred mammalian bipeds hailing from the chilly planet of Ahdomai \
-	in the Zamsiin-lr system. They are a naturally superstitious species, with the new generations growing up with tales \
+	in the Zamsiin-lr system. They are a naturally superstitious species. With the new generations growing up with tales \
 	of the heroic struggles of their forebears against the Overseers. This spirit has led them forward to the \
 	reconstruction and advancement of their society to what they are today. Their pride for the struggles they \
 	went through is heavily tied to their spiritual beliefs. Recent discoveries have jumpstarted the progression \
