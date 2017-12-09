@@ -1,7 +1,7 @@
 /obj/item/projectile/beam
 	name = "laser"
 	icon_state = "laser"
-	fire_sound='sound/weapons/Laser.ogg'
+	fire_sound = 'sound/weapons/laser_g.ogg'
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 40
 	damage_type = BURN
@@ -15,6 +15,12 @@
 	tracer_type = /obj/effect/projectile/laser/tracer
 	impact_type = /obj/effect/projectile/laser/impact
 
+/obj/item/projectile/beam/on_hit(var/atom/target)
+	..()
+	if(isturf(target))
+		playsound(target.loc, 'sound/weapons/effects/searwall.ogg', 50, 2)
+
+
 /obj/item/projectile/beam/practice
 	name = "laser"
 	icon_state = "laser"
@@ -26,17 +32,19 @@
 	eyeblur = 2
 
 /obj/item/projectile/beam/smalllaser
-	damage = 25
+	damage = 23
+	fire_sound = 'sound/weapons/Laser.ogg'
 
 /obj/item/projectile/beam/midlaser
 	damage = 50
 	armor_penetration = 10
+	fire_sound = 'sound/weapons/Laser.ogg'
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
 	icon_state = "heavylaser"
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
-	damage = 60
+	damage = 50
 	armor_penetration = 30
 
 	muzzle_type = /obj/effect/projectile/laser_heavy/muzzle
@@ -59,37 +67,12 @@
 	damage = 30
 	armor_penetration = 50
 
-/obj/item/projectile/beam/pulse
-	name = "pulse"
-	icon_state = "u_laser"
-	fire_sound='sound/weapons/pulse.ogg'
-	damage = 15 //lower damage, but fires in bursts
-
-	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
-	tracer_type = /obj/effect/projectile/laser_pulse/tracer
-	impact_type = /obj/effect/projectile/laser_pulse/impact
-
-/obj/item/projectile/beam/pulse/mid
-	damage = 20
-
-/obj/item/projectile/beam/pulse/heavy
-	damage = 25
-
-/obj/item/projectile/beam/pulse/destroy
-	name = "destroyer pulse"
-	damage = 100 //badmins be badmins I don't give a fuck
-	armor_penetration = 100
-
-/obj/item/projectile/beam/pulse/destroy/on_hit(var/atom/target, var/blocked = 0)
-	if(isturf(target))
-		target.ex_act(2)
-	..()
-
-/obj/item/projectile/beam/pulse/bogani
+/obj/item/projectile/beam/bogani
 	name = "pulsar"
 	icon_state = "bogb"
 	fire_sound='sound/weapons/blaster.ogg'
 	damage = 30
+	hitscan = 1
 
 	muzzle_type = /obj/effect/projectile/laser_bogani/muzzle
 	tracer_type = /obj/effect/projectile/laser_bogani/tracer
@@ -100,6 +83,7 @@
 	icon_state = "emitter"
 	fire_sound = 'sound/weapons/emitter.ogg'
 	damage = 0 // The actual damage is computed in /code/modules/power/singularity/emitter.dm
+	armor_penetration = 30
 
 	muzzle_type = /obj/effect/projectile/emitter/muzzle
 	tracer_type = /obj/effect/projectile/emitter/tracer
@@ -188,6 +172,8 @@
 	tracer_type = /obj/effect/projectile/stun/tracer
 	impact_type = /obj/effect/projectile/stun/impact
 
+
+
 /obj/item/projectile/beam/stun/heavy
 	name = "heavy stun beam"
 	agony = 60
@@ -197,7 +183,7 @@
 	damage_type = ELECTROCUTE
 	damage = 10
 	agony  = 5
-	fire_sound='sound/weapons/pulse.ogg'
+	fire_sound='sound/weapons/taser_shock.ogg'
 
 /obj/item/projectile/beam/stun/shock/heavy
 	name = "heavy shock beam"
