@@ -25,6 +25,9 @@
 	hud = null
 	. = ..()
 
+/obj/item/clothing/glasses/needs_vision_update()
+	return ..() || overlay || vision_flags || see_invisible || darkness_view
+
 /obj/item/clothing/glasses/emp_act(severity)
 	if(electric)
 		if(istype(src.loc, /mob/living/carbon/human))
@@ -221,6 +224,7 @@
 	item_state = "welding-g"
 	action_button_name = "Flip Welding Goggles"
 	matter = list(DEFAULT_WALL_MATERIAL = 1500, "glass" = 1000)
+	use_alt_layer = TRUE
 	var/up = 0
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY

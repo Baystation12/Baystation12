@@ -52,6 +52,8 @@
 
 	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
 
+	var/use_alt_layer = FALSE // Use the slot's alternative layer when rendering on a mob
+
 	//** These specify item/icon overrides for _slots_
 
 	var/list/item_state_slots = list(slot_wear_id_str = "id") //overrides the default item_state for particular slots.
