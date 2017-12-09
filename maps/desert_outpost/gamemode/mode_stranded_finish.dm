@@ -3,8 +3,8 @@
 	all_survivors_dead = 1
 
 	//look for any remaining living players
-	for(var/mob/living/L in GLOB.mob_list)
-		if(M.stat == CONSCIOUS && M.client)
+	for(var/mob/living/L in GLOB.player_list)
+		if(L.stat == CONSCIOUS && L.client)
 			all_survivors_dead = 0
 			break
 	return 1
