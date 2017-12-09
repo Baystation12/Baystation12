@@ -6,6 +6,13 @@
 
 	default_spawn = "Crash Site"
 
+/datum/map/crashsite_zeta
+	allowed_jobs = list(/datum/job/stranded_unsc_marine, /datum/job/stranded_unsc_tech, /datum/job/stranded_unsc_medic, /datum/job/stranded_unsc_crew, /datum/job/stranded_unsc_civ)
+
+	allowed_spawns = list("Crash Site")
+
+	default_spawn = "Crash Site"
+
 /datum/job/stranded_unsc_marine
 	title = "UNSC marine survivor"
 	outfit_type = /decl/hierarchy/outfit/job/stranded_unsc/marine
