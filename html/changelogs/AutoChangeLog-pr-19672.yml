@@ -1,0 +1,7 @@
+author: "Orelbon"
+delete-after: True
+changes: 
+  - maptweak: "Xenobotany Has been remapped for space and usability."
+  - maptweak: "Xenoarchiology lab has been moved to the Petrov."
+  - maptweak: "Misc Lab is now a circuit lab and a small chemical testing chamber."
+  - maptweak: "A chemistry station & toxins have been added to the Petrov."
