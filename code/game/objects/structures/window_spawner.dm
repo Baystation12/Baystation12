@@ -92,6 +92,7 @@
 
 /obj/effect/wingrille_spawn/reinforced/full
 	name = "reinforced window grille spawner - full tile"
+	icon_state = "rf-wingrille"
 	fulltile = TRUE
 	win_path = /obj/structure/window/reinforced/full
 
