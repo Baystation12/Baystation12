@@ -1,4 +1,0 @@
-author: "dryerlint"
-delete-after: True
-changes: 
-  - tweak: "Flags can now be placed on any terrain/turf, except for space"
