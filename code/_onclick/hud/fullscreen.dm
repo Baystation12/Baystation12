@@ -139,3 +139,6 @@
 /obj/screen/fullscreen/fishbed
 	icon_state = "fishbed"
 	allstate = 1
+
+/obj/screen/fullscreen/frenzy
+	icon_state = "frenzy"

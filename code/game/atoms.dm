@@ -2,6 +2,7 @@
 	var/level = 2
 	var/flags = 0
 	var/list/blood_DNA
+	var/list/other_DNA
 	var/was_bloodied
 	var/blood_color
 	var/last_bumped = 0

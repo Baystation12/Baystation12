@@ -708,6 +708,10 @@
 		else
 			clear_fullscreen("brute")
 
+		if (mind.vampire) //Feral vampire overlay.
+			if (mind.vampire.status & VAMP_FRENZIED)
+				overlay_fullscreen("frenzy")
+
 		if(healths)
 			if (chem_effects[CE_PAINKILLER] > 100)
 				healths.overlays.Cut()

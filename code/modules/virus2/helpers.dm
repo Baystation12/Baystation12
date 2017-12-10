@@ -87,6 +87,10 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 	if(!disease.affected_species.len)
 		return
 
+	// Vampires and thralls are immune to diseases.
+	if (M.mind && M.mind.vampire)
+		return
+
 	if (!(M.species.get_bodytype(M) in disease.affected_species))
 		if (forced)
 			disease.affected_species[1] = M.species.get_bodytype(M)
