@@ -18,6 +18,18 @@
 	var/dpdir = 0	// directions as disposalpipe
 	var/base_state = "pipe-s"
 
+/obj/structure/disposalconstruct/Initialize()
+	update_verbs()
+	. = ..()
+
+/obj/structure/disposalconstruct/proc/update_verbs()
+	if(anchored)
+		verbs -= /obj/structure/disposalconstruct/proc/rotate
+		verbs -= /obj/structure/disposalconstruct/proc/flip
+	else
+		verbs += /obj/structure/disposalconstruct/proc/rotate
+		verbs += /obj/structure/disposalconstruct/proc/flip
+
 // update iconstate and dpdir due to dir and type
 /obj/structure/disposalconstruct/proc/update()
 	var/flip = turn(dir, 180)
@@ -104,12 +116,12 @@
 
 
 // flip and rotate verbs
-/obj/structure/disposalconstruct/verb/rotate()
+/obj/structure/disposalconstruct/proc/rotate()
 	set category = "Object"
 	set name = "Rotate Pipe"
 	set src in view(1)
 
-	if(usr.stat)
+	if(usr.incapacitated())
 		return
 
 	if(anchored)
@@ -119,11 +131,11 @@
 	set_dir(turn(dir, -90))
 	update()
 
-/obj/structure/disposalconstruct/verb/flip()
+/obj/structure/disposalconstruct/proc/flip()
 	set category = "Object"
 	set name = "Flip Pipe"
 	set src in view(1)
-	if(usr.stat)
+	if(usr.incapacitated())
 		return
 
 	if(anchored)
@@ -267,6 +279,7 @@
 			to_chat(user, "You attach the [nicetype] to the underfloor.")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		update()
+		update_verbs()
 
 	else if(istype(I, /obj/item/weapon/weldingtool))
 		if(anchored)
