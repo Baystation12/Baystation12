@@ -83,7 +83,7 @@
 			var/mob/living/carbon/human/H = O
 			if(!H.eyecheck() <= 0)
 				continue
-			flash_time *= H.species.flash_mod
+			flash_time = round(H.species.flash_mod * flash_time)
 			var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[BP_EYES]
 			if(!E)
 				return
@@ -94,7 +94,10 @@
 			if(!O.blinded && isliving(O))
 				var/mob/living/L = O
 				L.flash_eyes()
-		O.Weaken(flash_time)
+		O.flash_eyes()
+		O.confused += (flash_time + 2)
+		O.Stun(flash_time / 2)
+		O.Weaken(3)
 
 /obj/machinery/flasher/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
