@@ -214,3 +214,4 @@
 	path = /obj/item/clothing/mask/gas/vox
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_VOX)
+	allowed_roles = /datum/job/merchant //Since that is the only role vox can be beside stowaway.
