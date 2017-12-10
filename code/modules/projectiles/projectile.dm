@@ -45,7 +45,7 @@
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
 
 	var/hitscan = 0		// whether the projectile should be hitscan
-	var/step_delay = 1	// the delay between iterations if not a hitscan projectile
+	var/step_delay = 0.5	// the delay between iterations if not a hitscan projectile
 
 	// effect types to be used
 	var/muzzle_type
