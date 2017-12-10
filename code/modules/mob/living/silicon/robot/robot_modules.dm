@@ -223,6 +223,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/surgicaldrill(src)
 	src.modules += new /obj/item/weapon/gripper/organ(src)
 	src.modules += new /obj/item/roller_holder(src)
+	src.modules += new /obj/item/weapon/shockpaddles/robot(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
 	src.emag.name = "Polyacid spray"
@@ -274,6 +275,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/gripper/chemistry(src)
 	src.modules += new /obj/item/weapon/extinguisher/mini(src)
+	src.modules += new /obj/item/taperoll/medical(src)
 	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src) // Allows usage of inflatables. Since they are basically robotic alternative to EMTs, they should probably have them.
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
@@ -345,6 +347,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/analyzer(src)
 	src.modules += new /obj/item/device/geiger(src)
 	src.modules += new /obj/item/taperoll/engineering(src)
+	src.modules += new /obj/item/taperoll/atmos(src)
 	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
@@ -428,6 +431,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
 	src.modules += new /obj/item/weapon/gun/energy/taser/mounted/cyborg(src)
 	src.modules += new /obj/item/taperoll/police(src)
+	src.modules += new /obj/item/device/megaphone(src)
 	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src)
 	..()
 
