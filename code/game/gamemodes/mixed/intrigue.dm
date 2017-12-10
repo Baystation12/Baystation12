@@ -2,6 +2,7 @@
 	name = "Ninja & Traitor"
 	extended_round_description = "Traitors and a ninja spawn during this round."
 	config_tag = "intrigue"
+	votable = 0
 	required_players = 15
 	required_enemies = 4
 	end_on_antag_death = 0

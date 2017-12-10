@@ -3,6 +3,7 @@
 	round_description = "Some crewmembers are attempting to start a revolution while a cult plots in the shadows!"
 	extended_round_description = "Cultists and revolutionaries spawn in this round."
 	config_tag = "uprising"
+	votable = 0
 	required_players = 20
 	required_enemies = 6
 	end_on_antag_death = 0

@@ -62,7 +62,7 @@
 	var/scoped_accuracy = null
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
 	var/list/dispersion = list(0)
-	var/one_hand_penalty
+	var/one_hand_penalty // -1 is used for "unable to fire unless twohandable".
 	var/wielded_item_state
 
 	var/next_fire_time = 0
@@ -179,12 +179,17 @@
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
 
+	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
+
+	if(one_hand_penalty == -1)
+		if(!held_twohanded)
+			to_chat(user,"<span class = 'notice'>You can't fire this weapon with just one hand!</span>")
+			return
+
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
-	user.setMoveCooldown(shoot_time) //no moving while shooting either
+	//user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time
-
-	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
@@ -212,7 +217,7 @@
 
 	//update timing
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	user.setMoveCooldown(move_delay)
+	//user.setMoveCooldown(move_delay)//
 	next_fire_time = world.time + fire_delay
 
 //obtains the next projectile to fire

@@ -207,6 +207,10 @@
 
 	return 1
 
+/obj/item/projectile/proc/do_supression_aoe(var/location)
+	for(var/mob/living/carbon/human/h in orange(1,location))
+		h.supression_act(src)
+
 /obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
 	if(A == src)
 		return 0 //no
@@ -303,6 +307,9 @@
 
 		before_move()
 		Move(location.return_turf())
+		if(first_step != 1)
+			spawn()
+				do_supression_aoe(loc)
 
 		if(!bumped && !isturf(original))
 			if(loc == get_turf(original))

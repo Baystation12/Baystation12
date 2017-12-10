@@ -118,12 +118,14 @@
 	name = "Optimal Ordinance Yield Locator"
 	desc = "A locator device that points towards an optimal location that maximises the yield of a bomb."
 	mode = 2
-	var/bomblocation = list()
+	var/list/bomblocations = list()
 
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator/New()
 	for(var/obj/effect/bomblocation/b in world)
-		bomblocation += b.loc
-	target = pick(bomblocation)
+		bomblocations += b.loc
+	if(bomblocations.len == 0)
+		return log_admin("ERROR: Bombplantlocator cannot find any bomblocations")
+	target = pick(bomblocations)
 
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator/toggle_mode()
 	visible_message("<span class = 'notice'>The locator announces 'TARGET LOCKED: MODE CHANGE UNAVAILABLE'</span>")

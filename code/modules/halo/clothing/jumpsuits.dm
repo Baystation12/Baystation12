@@ -3,7 +3,6 @@
 
 
 /obj/item/clothing/under/unsc
-	icon = 'icons/mob/uniform.dmi'
 	desc = "standard issue command crew uniform"
 	name = "command officer uniform"
 	icon = SHIP_ITEM_OVERRIDE
