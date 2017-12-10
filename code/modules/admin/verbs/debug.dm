@@ -398,8 +398,12 @@
 	if(!outfit)
 		return
 
+	var/reset_equipment = (outfit.flags&OUTFIT_RESET_EQUIPMENT)
+	if(!reset_equipment)
+		reset_equipment = alert("Do you wish to delete all current equipment first?", "Delete Equipment?","Yes", "No") == "Yes"
+
 	feedback_add_details("admin_verb","SEQ")
-	dressup_human(H, outfit)
+	dressup_human(H, outfit, reset_equipment)
 
 /proc/dressup_human(var/mob/living/carbon/human/H, var/decl/hierarchy/outfit/outfit, var/undress = TRUE)
 	if(!H || !outfit)
