@@ -155,31 +155,37 @@
 			src.parts[part.bp_tag] = part
 			src.update_icon()
 
-	if(istype(W, /obj/item/device/mmi))
-		var/obj/item/device/mmi/M = W
+	if(istype(W, /obj/item/device/mmi) || istype(W, /obj/item/organ/internal/posibrain))
+		var/mob/living/carbon/brain/B
+		if(istype(W, /obj/item/device/mmi))
+			var/obj/item/device/mmi/M = W
+			B = M.brainmob
+		else
+			var/obj/item/organ/internal/posibrain/P = W
+			B = P.brainmob
 		if(check_completion())
 			if(!istype(loc,/turf))
 				to_chat(user, "<span class='warning'>You can't put \the [W] in, the frame has to be standing on the ground to be perfectly precise.</span>")
 				return
-			if(!M.brainmob)
+			if(!B)
 				to_chat(user, "<span class='warning'>Sticking an empty [W] into the frame would sort of defeat the purpose.</span>")
 				return
-			if(!M.brainmob.key)
+			if(!B.key)
 				var/ghost_can_reenter = 0
-				if(M.brainmob.mind)
+				if(B.mind)
 					for(var/mob/observer/ghost/G in GLOB.player_list)
-						if(G.can_reenter_corpse && G.mind == M.brainmob.mind)
+						if(G.can_reenter_corpse && G.mind == B.mind)
 							ghost_can_reenter = 1
 							break
 				if(!ghost_can_reenter)
 					to_chat(user, "<span class='notice'>\The [W] is completely unresponsive; there's no point.</span>")
 					return
 
-			if(M.brainmob.stat == DEAD)
+			if(B.stat == DEAD)
 				to_chat(user, "<span class='warning'>Sticking a dead [W] into the frame would sort of defeat the purpose.</span>")
 				return
 
-			if(jobban_isbanned(M.brainmob, "Cyborg"))
+			if(jobban_isbanned(B, "Cyborg"))
 				to_chat(user, "<span class='warning'>This [W] does not seem to fit.</span>")
 				return
 
@@ -193,7 +199,7 @@
 			O.custom_name = created_name
 			O.updatename("Default")
 
-			M.brainmob.mind.transfer_to(O)
+			B.mind.transfer_to(O)
 
 			if(O.mind && O.mind.special_role)
 				O.mind.store_memory("In case you look at this after being borged, the objectives are only here until I find a way to make them not show up for you, as I can't simply delete them without screwing up round-end reporting. --NeoFite")
