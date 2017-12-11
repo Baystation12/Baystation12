@@ -32,7 +32,7 @@
 			var/turf/Tr = null
 			for(var/obj/item/weapon/implant/chem/C in world)
 				Tr = get_turf(C)
-				if((Tr) && (Tr.z != src.z))	continue//Out of range
+				if((Tr) && !AreConnectedZLevels(Tr.z, src.z))	continue // Out of range
 				if(!C.implanted) continue
 				dat += "[C.imp_in.name] | Remaining Units: [C.reagents.total_volume] | Inject: "
 				dat += "<A href='?src=\ref[src];inject1=\ref[C]'>(<font color=red>(1)</font>)</A>"
@@ -42,11 +42,11 @@
 			dat += "<HR>Tracking Implants<BR>"
 			for(var/obj/item/weapon/implant/tracking/T in world)
 				Tr = get_turf(T)
-				if((Tr) && (Tr.z != src.z))	continue//Out of range
+				if((Tr) && !AreConnectedZLevels(Tr.z, src.z))	continue // Out of range
 				if(!T.implanted) continue
-				var/loc_display = "Unknown"
+				var/loc_display = "Space"
 				var/mob/living/carbon/M = T.imp_in
-				if((M.z in GLOB.using_map.station_levels) && !istype(M.loc, /turf/space))
+				if(!istype(M.loc, /turf/space))
 					var/turf/mob_loc = get_turf(M)
 					loc_display = mob_loc.loc
 				if(T.malfunction)
