@@ -39,7 +39,6 @@
 		if(istype(fixture, /obj/machinery/light))
 			fixture_type = fixture.type
 		fixture.transfer_fingerprints_to(src)
-		stage = 2
 
 	update_icon()
 
