@@ -253,6 +253,7 @@
 			if(health <= 7)
 				set_anchored(FALSE)
 				step(src, get_dir(user, src))
+				update_verbs()
 		else
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
