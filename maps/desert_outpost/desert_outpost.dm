@@ -2,12 +2,13 @@
 
 	#include "gamemode/stranded_includes.dm"
 
-	#include "flora.dm"
 	#include "jobs.dm"
 	#include "outfits.dm"
 	#include "turfs_areas.dm"
 	#include "desert_outpost_spawns.dm"
 	#include "unit_test.dm"
+
+	#include "../~turfs/desert.dm"
 
 	#include "desert_outpost.dmm"
 
