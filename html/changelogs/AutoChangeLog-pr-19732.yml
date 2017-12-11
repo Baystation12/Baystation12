@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - rscadd: "Carafes and implanters are now available in the autolathe."
