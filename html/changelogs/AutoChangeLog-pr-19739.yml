@@ -1,0 +1,6 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "Mounted flash effect changed from 20 seconds of knock down to 6 seconds of knock down followed by a further 10 seconds of stun - a total of 16 seconds of useful disable - followed by a further 8 seconds of confusion."
+  - tweak: "Flash and flare cartridges now inflict more agony damage."
+  - rscadd: "Flash and flare cartridges now blur the vision and disorient those within their flash ranges - tiles adjacent to the explosion for flashes, and two tiles adjacent for flares."
