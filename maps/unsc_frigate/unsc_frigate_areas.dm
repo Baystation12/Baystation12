@@ -53,6 +53,9 @@
 	name = "Reactor Four"
 	icon_state = "engine"
 
+/area/unscfrigate/engine_power_storage
+	name = "Engine Power Storage"
+
 //Misc
 
 /area/unscfrigate/tcomms

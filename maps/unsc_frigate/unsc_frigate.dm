@@ -1,5 +1,7 @@
 #if !defined(using_map_DATUM)
 
+	#include "unsc_frigate_areas.dm"
+
 	#include "unsc_frigate-4.dmm"
 	#include "unsc_frigate-3.dmm"
 	#include "unsc_frigate-2.dmm"
