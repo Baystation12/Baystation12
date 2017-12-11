@@ -65,6 +65,9 @@ var/const/EXTRA_COST_FACTOR = 1.25
 /datum/autolathe/recipe/drinkingglass/wine
 	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/wine
 
+/datum/autolathe/recipe/drinkingglass/wine
+	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/carafe
+
 /datum/autolathe/recipe/flashlight
 	name = "flashlight"
 	path = /obj/item/device/flashlight
@@ -286,6 +289,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 /datum/autolathe/recipe/syringe
 	name = "syringe"
 	path = /obj/item/weapon/reagent_containers/syringe
+	category = "Medical"
+
+/datum/autolathe/recipe/implanter
+	name = "implanter"
+	path = /obj/item/weapon/implanter
 	category = "Medical"
 
 /datum/autolathe/recipe/syringegun_ammo
