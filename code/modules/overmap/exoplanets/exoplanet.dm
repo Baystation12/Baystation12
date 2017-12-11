@@ -91,7 +91,7 @@
 			continue
 		var/zone/Z
 		for(var/i = 1 to maxx)
-			var/turf/simulated/T = locate(i, 1, zlevel)
+			var/turf/simulated/T = locate(i, 2, zlevel)
 			if(istype(T) && T.zone && T.zone.contents.len > (maxx*maxy*0.25)) //if it's a zone quarter of zlevel, good enough odds it's planetary main one
 				Z = T.zone
 				break
@@ -216,9 +216,27 @@
 			newgases -= "aliether"
 
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
+		var/list/oxidizers = list()
+		var/list/fuels = list()
+		var/flammable = prob(10) // chance for a planet to be allowed to be flammable, not necessarily that they will be
 		var/gasnum = rand(1,4)
 		for(var/i = 1 to gasnum) //swapping gases wholesale. don't try at home
-			var/ng = pick_n_take(newgases)	//pick a gas
+			var/ng
+			do
+				var/ng_test = pick_n_take(newgases)	//pick a gas
+				if(gas_data.flags[ng_test] & XGM_GAS_OXIDIZER)
+					if(!fuels.len || flammable)
+						ng = ng_test
+						oxidizers |= ng
+				else if(gas_data.flags[ng_test] & XGM_GAS_FUEL)
+					if(!oxidizers.len || flammable)
+						ng = ng_test
+						fuels |= ng
+				else
+					ng = ng_test
+			while(!ng && newgases.len)
+			if(!ng)
+				break // there are no eligible gases left
 			var/part = total_moles * rand(3,80)/100 //allocate percentage to it
 			if(i == gasnum) //if it's last gas, let it have all remaining moles
 				part = total_moles
@@ -302,6 +320,21 @@
 	fauna_prob *= size_mod
 
 	..()
+
+	for(var/x = 1 to tlx)
+		var/turf/T = locate(x, 1, tz)
+		T.set_density(1)
+		T.set_opacity(1)
+		T = locate(x, tly, tz)
+		T.set_density(1)
+		T.set_opacity(1)
+	for(var/y = 1 to tly)
+		var/turf/T = locate(1, y, tz)
+		T.set_density(1)
+		T.set_opacity(1)
+		T = locate(tlx, y, tz)
+		T.set_density(1)
+		T.set_opacity(1)
 
 /datum/random_map/noise/exoplanet/proc/noise2value(var/value)
 	return min(9,max(0,round((value/cell_range)*10)))
