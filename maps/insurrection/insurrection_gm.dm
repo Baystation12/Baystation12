@@ -107,6 +107,8 @@
 	for(var/obj/payload/b in bombs)
 		if(b.exploding == 1)
 			last_assault = BOMB_ACTIVE
+		if(!b.explode_at)
+			return 0
 		if((((b.explode_at - world.time)/10) <b.seconds_to_disarm) && (!warned))
 			message_faction("UNSC","<span class = 'danger'>Insurrectionist self destruct nearing time of detonation. Exfiltration craft arriving at evacuation wing.</span>")
 			message_faction("Insurrection","<span class='danger'>Integrated self destruct device reports nearing time of detonation. Relocate all personnel to the evacuation wing.</span>")
