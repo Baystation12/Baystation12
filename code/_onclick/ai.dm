@@ -27,6 +27,9 @@
 		return
 
 	var/list/modifiers = params2list(params)
+	if(modifiers["ctrl"] && modifiers["alt"])
+		CtrlAltClickOn(A)
+		return
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
 		return
@@ -89,6 +92,11 @@
 	for AI shift, ctrl, and alt clicking.
 */
 
+/mob/living/silicon/ai/CtrlAltClickOn(var/atom/A)
+	if(!control_disabled && A.AICtrlAltClick(src))
+		return
+	..()
+
 /mob/living/silicon/ai/ShiftClickOn(var/atom/A)
 	if(!control_disabled && A.AIShiftClick(src))
 		return
@@ -113,6 +121,17 @@
 	The following criminally helpful code is just the previous code cleaned up;
 	I have no idea why it was in atoms.dm instead of respective files.
 */
+
+/atom/proc/AICtrlAltClick()
+
+/obj/machinery/door/airlock/AICtrlAltClick() // Electrifies doors.
+	if(!electrified_until)
+		// permanent shock
+		Topic(src, list("command"="electrify_permanently", "activate" = "1"))
+	else
+		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
+		Topic(src, list("command"="electrify_permanently", "activate" = "0"))
+	return 1
 
 /atom/proc/AICtrlShiftClick()
 	return
@@ -147,15 +166,6 @@
 
 /atom/proc/AIAltClick(var/atom/A)
 	return AltClick(A)
-
-/obj/machinery/door/airlock/AIAltClick() // Electrifies doors.
-	if(!electrified_until)
-		// permanent shock
-		Topic(src, list("command"="electrify_permanently", "activate" = "1"))
-	else
-		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
-		Topic(src, list("command"="electrify_permanently", "activate" = "0"))
-	return 1
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	Topic(src, list("command"="lethal", "value"="[!lethal]"))
