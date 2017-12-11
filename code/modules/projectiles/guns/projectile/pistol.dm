@@ -64,6 +64,8 @@
 	item_state = "revolver"
 	force = 14.0
 	caliber = ".50"
+	fire_delay = 12
+	screen_shake = 2
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a50
 	allowed_magazines = /obj/item/ammo_magazine/a50
