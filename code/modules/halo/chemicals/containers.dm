@@ -43,7 +43,20 @@
 		mode = SYRINGE_INJECT
 		update_icon()
 
+//Iron pills + bottle define//
+/obj/item/weapon/reagent_containers/pill/iron
+	name = "Iron pill"
+	desc = "Used to increase the speed of blood replenishment."
+	icon_state = "pill18"
+	New()
+		..()
+		reagents.add_reagent(/datum/reagent/iron, 20)
 
+/obj/item/weapon/storage/pill_bottle/iron
+	name = "bottle of Iron pills"
+	desc = "Contains pills used to assist in blood replenishment."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/iron = 7)
 
 #undef SYRINGE_DRAW
 #undef SYRINGE_INJECT

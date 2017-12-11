@@ -11,6 +11,7 @@
 	total_health = 250 //Same base health as sangheili
 	spawn_flags = SPECIES_IS_WHITELISTED
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
+	item_icon_offsets = list(-1,3)
 
 	has_limbs =  list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest/augmented),
