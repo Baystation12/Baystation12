@@ -758,7 +758,8 @@ BLIND     // can't see anything
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
-		M.update_inv_w_uniform()
+		M.update_inv_w_uniform(0)
+		M.update_inv_wear_id()
 
 
 /obj/item/clothing/under/examine(mob/user)
