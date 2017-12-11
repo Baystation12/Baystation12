@@ -31,6 +31,8 @@
 	var/duration_rest_base = 6000
 	var/duration_rest_current = 6000
 	var/time_wave_cycle = 0
+	var/interval_resupply = 2000
+	var/time_next_resupply = 0
 	//
 	var/duration_day = 3000
 	var/duration_night = 3000
@@ -67,9 +69,22 @@
 
 	var/obj/structure/evac_pelican/evac_pelican
 
+	var/list/available_resupply_points = list()
+
 /datum/game_mode/stranded/pre_setup()
 	GLOB.hostile_attackables += /obj/structure/evac_pelican
-	GLOB.hostile_attackables +=	/obj/structure/tanktrap
+	GLOB.hostile_attackables += /obj/structure/tanktrap
+
+	//create resupply points
+	var/center_margin = 50
+	var/turf/center_turf = locate(world.maxx / 2, world.maxy / 2, 1)
+	for(var/curx = 1, curx < world.maxx, curx += 20)
+		for(var/cury = 1, cury < world.maxy, cury += 20)
+			var/turf/T = locate(curx, cury, 1)
+			if(get_dist(center_turf, T) < center_margin)
+				continue
+			var/obj/effect/landmark/scavenge_spawn/S = new(T)
+			available_resupply_points.Add(S)
 
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time
@@ -77,6 +92,7 @@
 	if(do_daynight_cycle)
 		process_daynight()
 	process_spawning()
+	process_resupply()
 	process_evac()
 
 #include "mode_stranded_attackers_process.dm"

@@ -20,7 +20,7 @@
 	var/list/random_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum = /obj/item/ammo_magazine/m127_saphe,\
 		/obj/item/weapon/gun/projectile/ma5b_ar = /obj/item/ammo_magazine/m762_ap,\
 		/obj/item/weapon/gun/projectile/m7_smg = /obj/item/ammo_magazine/m5,\
-		/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = /obj/item/weapon/storage/box/shotgunshells)
+		/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = /obj/item/ammo_box/shotgun)
 	var/picked_weapon = pick(random_weapons)
 	H.equip_to_slot_or_del(new picked_weapon(H),slot_r_hand)
 	var/picked_ammo = random_weapons[picked_weapon]
