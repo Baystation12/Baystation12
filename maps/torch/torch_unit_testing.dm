@@ -98,22 +98,27 @@
 		/area/turbolift/seconddeck,
 		/area/turbolift/thirddeck,
 		/area/turbolift/fourthdeck,
+		/area/exoplanet,
+		/area/exoplanet/desert,
+		/area/exoplanet/grass,
+		/area/exoplanet/snow,
+		/area/exoplanet/garbage,
 		/area/template_noop,
+		/area/map_template,
+		/area/map_template/little_house,
 	)
 
+	// not an away site? you probably want to be using area_usage_test_exempted_areas
 	area_usage_test_exempted_root_areas = list(
 		/area/casino,
 		/area/constructionsite,
 		/area/derelict,
-		/area/exoplanet,
 		/area/lost_supply_base,
 		/area/magshield,
-		/area/map_template,
 		/area/marooned,
 		/area/mine,
 		/area/ship,
 		/area/smugglers,
-		/area/syndicate_mothership,
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
