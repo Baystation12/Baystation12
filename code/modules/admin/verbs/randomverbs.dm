@@ -115,7 +115,8 @@
 	log_and_message_admins(" - GlobalNarrate: [msg]")
 	feedback_add_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_direct_narrate(var/mob/M)	// Targetted narrate -- TLE
+// Targetted narrate: will narrate to one specific mob
+/client/proc/cmd_admin_direct_narrate(var/mob/M)
 	set category = "Special Verbs"
 	set name = "Direct Narrate"
 
@@ -138,6 +139,66 @@
 	log_and_message_admins(" - DirectNarrate to ([M.name]/[M.key]): [msg]")
 	feedback_add_details("admin_verb","DIRN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+// Local narrate, narrates to everyone who can see where you are regardless of whether they are blind or deaf.
+/client/proc/cmd_admin_local_narrate(var/atom/A)
+	set category = "Special Verbs"
+	set name = "Local Narrate"
+
+	var/list/listening_hosts = hosts_in_view_range(usr)
+
+	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
+
+	if( !msg )
+		return
+
+	for(var/listener in listening_hosts)
+		to_chat(listener, msg)
+	log_and_message_admins(" - LocalNarrate: [msg]")
+
+// Visible narrate, it's as if it's a visible message
+/client/proc/cmd_admin_visible_narrate(var/atom/A)
+	set category = "Special Verbs"
+	set name = "Visible Narrate"
+	if(!holder)
+		to_chat(src, "Only administrators may use this command.")
+		return
+
+	var/mob/M = mob
+
+	if(!M)
+		to_chat(src, "You must be in control of a mob to use this.")
+		return
+
+	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
+
+	if( !msg )
+		return
+
+	M.visible_message(msg, narrate = TRUE)
+	log_and_message_admins(" - VisibleNarrate on [A]: [msg]")
+
+// Visible narrate, it's as if it's a audible message
+/client/proc/cmd_admin_audible_narrate(var/atom/A)
+	set category = "Special Verbs"
+	set name = "Audible Narrate"
+	if(!holder)
+		to_chat(src, "Only administrators may use this command.")
+		return
+
+	var/mob/M = mob
+
+	if(!M)
+		to_chat(src, "You must be in control of a mob to use this.")
+		return
+
+	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
+
+	if( !msg )
+		return
+
+	M.audible_message(msg, narrate = TRUE)
+	log_and_message_admins(" - AudibleNarrate on [A]: [msg]")
+
 /client/proc/cmd_admin_godmode(mob/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
 	set name = "Godmode"
@@ -149,7 +210,6 @@
 	log_admin("[key_name(usr)] has toggled [key_name(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]")
 	message_admins("[key_name_admin(usr)] has toggled [key_name_admin(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]", 1)
 	feedback_add_details("admin_verb","GOD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 
 proc/cmd_admin_mute(mob/M as mob, mute_type)
 	if(!usr || !usr.client)
