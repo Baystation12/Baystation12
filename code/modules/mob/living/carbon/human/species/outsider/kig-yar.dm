@@ -13,6 +13,7 @@
 	spawn_flags = SPECIES_IS_WHITELISTED
 	darksight = 6
 	brute_mod = 1.1
+	item_icon_offsets = list(-1,1)
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),

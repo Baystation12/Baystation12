@@ -11,6 +11,7 @@
 	reload_sound = 'code/modules/halo/sounds/Shotgun_Pump_Slide.ogg'
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	max_shells = 6
+	one_hand_penalty = -1
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',

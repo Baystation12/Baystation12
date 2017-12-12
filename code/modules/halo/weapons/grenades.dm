@@ -8,14 +8,4 @@
 /obj/item/weapon/storage/box/m9_frag
 	name = "box of M9 frag grenades (WARNING)"
 	desc = "<B>WARNING: These devices are extremely dangerous and can cause serious bodily laceration or death.</B>"
-	icon_state = "flashbang"
-
-	New()
-		..()
-		new /obj/item/weapon/grenade/frag/m9_hedp(src)
-		new /obj/item/weapon/grenade/frag/m9_hedp(src)
-		new /obj/item/weapon/grenade/frag/m9_hedp(src)
-		new /obj/item/weapon/grenade/frag/m9_hedp(src)
-		new /obj/item/weapon/grenade/frag/m9_hedp(src)
-		new /obj/item/weapon/grenade/frag/m9_hedp(src)
-		new /obj/item/weapon/grenade/frag/m9_hedp(src)
+	startswith = list(/obj/item/weapon/grenade/frag/m9_hedp = 7)

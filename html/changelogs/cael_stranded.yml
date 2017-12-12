@@ -1,0 +1,11 @@
+
+author: Cael_Aislinn
+
+delete-after: True
+changes: 
+  - wip: "Adds Stranded gamemode. Your UNSC ship has crashed landed on an abandoned alien world and now must fend off waves of Flood until your evacuation Pelican arrives!"
+  - wip: "Scavenge resources from your environment and build a base to hold them off."
+  - maptweak: "Stranded desert outpost map"
+  - rscadd: "Adds new buildable structures: tank trap, barbed wire, sandbags"
+  - tweak: "Adds an atom despawner (testing)"
+  - wip: "Adds an experiement ambient lighting system (testing)"

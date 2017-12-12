@@ -70,7 +70,7 @@
 	item_state = "UNSC Marine Ammo Belt"
 	storage_slots = 6
 
-	can_hold = list(/obj/item/ammo_magazine)
+	can_hold = list(/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/weapon/grenade/frag/m9_hedp)
 
 /obj/item/weapon/storage/belt/marine_medic
 	name = "Medical Supplies Storage Belt"
