@@ -101,9 +101,9 @@
 /client/proc/cmd_admin_world_narrate() // Allows administrators to fluff events a little easier -- TLE
 	set category = "Special Verbs"
 	set name = "Global Narrate"
+	set desc = "Narrate to everyone."
 
-	if (!holder)
-		to_chat(src, "Only administrators may use this command.")
+	if(!check_rights(R_ADMIN))
 		return
 
 	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to everyone:")) as text)
@@ -119,9 +119,9 @@
 /client/proc/cmd_admin_direct_narrate(var/mob/M)
 	set category = "Special Verbs"
 	set name = "Direct Narrate"
+	set desc = "Narrate to a specific mob."
 
-	if(!holder)
-		to_chat(src, "Only administrators may use this command.")
+	if(!check_rights(R_ADMIN))
 		return
 
 	if(!M)
@@ -140,16 +140,20 @@
 	feedback_add_details("admin_verb","DIRN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 // Local narrate, narrates to everyone who can see where you are regardless of whether they are blind or deaf.
-/client/proc/cmd_admin_local_narrate(var/atom/A)
+/client/proc/cmd_admin_local_narrate()
 	set category = "Special Verbs"
 	set name = "Local Narrate"
+	set desc = "Narrate to everyone who can see the turf your mob is on."
 
-	var/list/listening_hosts = hosts_in_view_range(usr)
+	if(!check_rights(R_ADMIN))
+		return
 
 	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
 
 	if( !msg )
 		return
+
+	var/list/listening_hosts = hosts_in_view_range(usr)
 
 	for(var/listener in listening_hosts)
 		to_chat(listener, msg)
@@ -159,8 +163,9 @@
 /client/proc/cmd_admin_visible_narrate(var/atom/A)
 	set category = "Special Verbs"
 	set name = "Visible Narrate"
-	if(!holder)
-		to_chat(src, "Only administrators may use this command.")
+	set desc = "Narrate to those who can see the given atom."
+
+	if(!check_rights(R_ADMIN))
 		return
 
 	var/mob/M = mob
@@ -181,6 +186,8 @@
 /client/proc/cmd_admin_audible_narrate(var/atom/A)
 	set category = "Special Verbs"
 	set name = "Audible Narrate"
+	set desc = "Narrate to those who can hear the given atom."
+
 	if(!holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
