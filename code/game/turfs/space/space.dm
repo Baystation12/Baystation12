@@ -9,11 +9,6 @@
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/keep_sprite = 0
-	color = list(
-	1,0,0,0,
-	0,1,0,0,
-	0,0,1,0,
-	0,0,0,1)
 //	heat_capacity = 700000 No.
 
 /turf/space/Initialize()
