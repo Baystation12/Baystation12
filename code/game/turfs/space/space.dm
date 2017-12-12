@@ -1,6 +1,7 @@
 /turf/space
 	plane = SPACE_PLANE
 	icon = 'icons/turf/space.dmi'
+
 	name = "\proper space"
 	icon_state = "0"
 	dynamic_lighting = 0
@@ -10,14 +11,11 @@
 	var/keep_sprite = 0
 //	heat_capacity = 700000 No.
 
-/turf/space/New()
+/turf/space/Initialize()
+	. = ..()
 	if((icon_state == "0") && (!keep_sprite))
 		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	update_starlight()
-	..()
-
-/turf/space/Initialize()
-	. = ..()
 	if(!HasBelow(z))
 		return
 	var/turf/below = GetBelow(src)
