@@ -1,6 +1,7 @@
 /turf/space
 	plane = SPACE_PLANE
 	icon = 'icons/turf/space.dmi'
+
 	name = "\proper space"
 	icon_state = "0"
 	dynamic_lighting = 0
@@ -8,16 +9,18 @@
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/keep_sprite = 0
+	color = list(
+	1,0,0,0,
+	0,1,0,0,
+	0,0,1,0,
+	0,0,0,1)
 //	heat_capacity = 700000 No.
-
-/turf/space/New()
-	if((icon_state == "0") && (!keep_sprite))
-		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
-	update_starlight()
-	..()
 
 /turf/space/Initialize()
 	. = ..()
+	if((icon_state == "0") && (!keep_sprite))
+		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
+	update_starlight()
 	if(!HasBelow(z))
 		return
 	var/turf/below = GetBelow(src)
