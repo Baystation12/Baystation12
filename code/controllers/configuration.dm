@@ -158,6 +158,7 @@ var/list/gamemode_cache = list()
 	var/login_export_addr = null
 
 	var/enter_allowed = 1
+	var/player_limit = 0
 
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
@@ -724,6 +725,8 @@ var/list/gamemode_cache = list()
 					radiation_material_resistance_divisor = text2num(value)
 				if("radiation_lower_limit")
 					radiation_lower_limit = text2num(value)
+				if("player_limit")
+					player_limit = text2num(value)
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
