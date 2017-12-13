@@ -1,6 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "Control+Alt clicking a PDA will now toggle the flashlight."
-  - rscadd: "Control+Alt clicking closets and lockers is now a shortcut to the toggle open verb."
-  - tweak: "AI door electrification shortcut moved from Alt-click to Control-Alt-click to remove conflict with Alt-click inspecting the turf."
