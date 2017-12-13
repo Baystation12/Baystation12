@@ -8,6 +8,7 @@ var/list/mining_floors = list()
 	icon_state = "rock-dark"
 	blocks_air = 1
 	density = 1
+	opacity = 1
 
 /turf/simulated/mineral //wall piece
 	name = "Rock"
