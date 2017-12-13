@@ -308,8 +308,28 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	filling = list(/datum/reagent/tobacco/fine = 2)
 
 /obj/item/clothing/mask/smokable/cigarette/trident/mint
-	icon_state = "cigarelloM"
+	icon_state = "cigarelloMi"
 	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/menthol = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/berry
+	icon_state = "cigarelloBe"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/drink/juice/berry = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/cherry
+	icon_state = "cigarelloCh"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/nutriment/cherryjelly = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/grape
+	icon_state = "cigarelloGr"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/drink/juice/grape = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/watermelon
+	icon_state = "cigarelloWm"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/drink/juice/watermelon = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/orange
+	icon_state = "cigarelloOr"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/drink/juice/orange = 2)
 
 /obj/item/weapon/cigbutt/woodbutt
 	name = "wooden tip"
