@@ -79,11 +79,7 @@ obj/item/clothing/mask/smokable/ecig/deluxe/examine(mob/user)
 /obj/item/clothing/mask/smokable/ecig/Process()
 	if(idle >= idle_treshold) //idle too long -> automatic shut down
 		idle = 0
-		if(ishuman(loc))
-			var/mob/living/carbon/human/D = loc
-			to_chat(D,"<span class='notice'>\The [src] powered down automatically.</span>")
-		else
-			src.visible_message("<span class='notice'>\The [src] powered down automatically.</span>", null, 2)
+		src.visible_message("<span class='notice'>\The [src] powered down automatically.</span>", null, 2)
 		active=0//autodisable the cigarette
 		STOP_PROCESSING(SSobj, src)
 		update_icon()
