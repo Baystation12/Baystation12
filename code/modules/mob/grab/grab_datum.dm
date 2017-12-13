@@ -260,7 +260,7 @@
 
 	var/break_strength = breakability + size_difference(affecting, assailant)
 
-	if(affecting.lying)
+	if(affecting.lying || affecting.stunned)
 		break_strength--
 
 	if(break_strength < 1)
