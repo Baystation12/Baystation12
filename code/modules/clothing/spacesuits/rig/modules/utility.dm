@@ -36,7 +36,7 @@
 	suit_overlay_inactive = "plasmacutter"
 	use_power_cost = 50
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6)
-	device_type = /obj/item/weapon/pickaxe/plasmacutter
+	device_type = /obj/item/weapon/gun/energy/plasmacutter
 
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
