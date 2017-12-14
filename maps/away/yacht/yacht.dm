@@ -2,12 +2,15 @@
 #include "yacht.dmm"
 
 
-/obj/effect/overmap/sector/yacht
+/obj/effect/overmap/ship/yacht
 	name = "Small ship"
 	desc = "Sensor array is detecting a small vessel with unknown lifeforms on board"
-	icon_state = "object"
-	known = 0
-
+	name = "Yacht"
+	color = "#FFC966"
+	vessel_mass = 30
+	default_delay = 35 SECONDS
+	speed_mod = 5 SECONDS
+	triggers_events = 0
 	generic_waypoints = list(
 		"nav_yacht_1",
 		"nav_yacht_2",
