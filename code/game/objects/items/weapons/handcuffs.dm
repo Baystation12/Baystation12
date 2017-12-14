@@ -1,3 +1,6 @@
+//Yay fast flagchecks.
+#define NOTCUFFS 0x1
+
 /obj/item/weapon/handcuffs
 	name = "handcuffs"
 	desc = "Use this to keep prisoners in line."
@@ -12,6 +15,7 @@
 	throw_range = 5
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
+	var/behavior_flag
 	var/elastic
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
@@ -36,6 +40,15 @@
 		to_chat(user, "<span class='warning'>Uh ... how do those things work?!</span>")
 		place_handcuffs(user, user)
 		return
+
+	if(!(behavior_flag & NOTCUFFS))
+		if(user.a_intent == I_HURT)
+			force = 20
+			user.visible_message("<span class='warning'><b>\The [user]</b> whips [C] with their [src]!</span>","<span class='warning'>You whip [C] with your [src]!</span>")
+			spawn(0)
+				force = initial(force)
+			. = ..() //This is dumb.
+			return
 
 	if(!C.handcuffed)
 		if (C == user)
@@ -127,6 +140,7 @@ var/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
+	behavior_flag = NOTCUFFS
 
 /obj/item/weapon/handcuffs/cable/red
 	color = "#dd0000"
@@ -174,3 +188,5 @@ var/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
+
+#undef NOTCUFFS
