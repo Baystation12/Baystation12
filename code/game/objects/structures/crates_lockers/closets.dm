@@ -521,6 +521,9 @@
 	else
 		return ..()
 
+/obj/structure/closet/CtrlAltClick(var/mob/user)
+	verb_toggleopen()
+
 /obj/structure/closet/emp_act(severity)
 	for(var/obj/O in src)
 		O.emp_act(severity)
