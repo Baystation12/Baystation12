@@ -359,6 +359,8 @@
 			W.damtype = "burn"
 			W.icon_state = "match_lit"
 			START_PROCESSING(SSobj, W)
+			playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
+			user.visible_message("<span class='notice'>[user] strikes the match on the matchbox.</span>")
 		W.update_icon()
 		return
 
