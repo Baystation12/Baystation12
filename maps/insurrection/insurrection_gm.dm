@@ -15,6 +15,7 @@
 	var/prepare_time =  5 MINUTES //The amount of time the insurrectionists have to prepare for the ODST assault, in ticks
 	var/last_assault = 0 //This is also set to -1 when a bomb is active.
 	var/autolaunchtime = 12 MINUTES //At runtime, this stores the time in ticks after roundstart will launch at.
+	var/pods_launched = 0
 	var/warned = 0 //To stop bomb detonation warning spam
 
 /datum/game_mode/insurrection/proc/lockdown_bombs()
@@ -107,6 +108,8 @@
 	for(var/obj/payload/b in bombs)
 		if(b.exploding == 1)
 			last_assault = BOMB_ACTIVE
+		if(!b.explode_at)
+			return 0
 		if((((b.explode_at - world.time)/10) <b.seconds_to_disarm) && (!warned))
 			message_faction("UNSC","<span class = 'danger'>Insurrectionist self destruct nearing time of detonation. Exfiltration craft arriving at evacuation wing.</span>")
 			message_faction("Insurrection","<span class='danger'>Integrated self destruct device reports nearing time of detonation. Relocate all personnel to the evacuation wing.</span>")
@@ -152,14 +155,13 @@
 	if(bombs[1] < world.time)
 		update_bomb_status()
 		update_bomb_timer()
-	if(autolaunchtime < world.time)
-		if(!warned)
-			message_faction("UNSC","<span class = 'danger'>Assault pods auto-locked..</span>")
+	if(autolaunchtime < world.time && !pods_launched)
+		message_faction("UNSC","<span class = 'danger'>Assault pods auto-locked..</span>")
+		pods_launched = 1
 		for(var/obj/structure/drop_pods/p in remaining_pods)
 			p.launched = 1
 			remaining_pods -= p
 			update_pod_status()
-		warned = 1
 	if((check_pods_left() == 0) && (world.time > autolaunchtime) && (!warned))
 		inform_last_assault()
 		last_assault()

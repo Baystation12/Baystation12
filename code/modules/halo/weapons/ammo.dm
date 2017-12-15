@@ -161,9 +161,9 @@
 	damage = 80
 	stun = 1
 	weaken = 1
+	step_delay = 0.3
 	penetrating = 5
 	armor_penetration = 80
-	hitscan = 1
 	accuracy = 6
 
 /obj/item/weapon/storage/box/m145_ap
