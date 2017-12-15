@@ -96,6 +96,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
 	var/num_exoplanets = 0
+	var/away_site_budget = 0
 
 	//Economy stuff
 	var/starting_money = 75000		//Money in station account
@@ -168,6 +169,27 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/perform_map_generation()
 	return
 
+/datum/map/proc/build_away_sites()
+#ifdef UNIT_TEST
+	report_progress("Unit testing, so not loading away sites")
+	return // don't build away sites during unit testing
+#else
+	report_progress("Loading away sites...")
+	var/list/sites_by_spawn_weight = list()
+	for (var/site_name in SSmapping.away_sites_templates)
+		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
+		sites_by_spawn_weight[site] = site.spawn_weight
+	while (away_site_budget > 0 && sites_by_spawn_weight.len)
+		var/datum/map_template/ruin/away_site/selected_site = pickweight(sites_by_spawn_weight)
+		if (!selected_site)
+			break
+		sites_by_spawn_weight -= selected_site
+		if (selected_site.load_new_z())
+			report_progress("Loaded away site [selected_site]!")
+			away_site_budget -= selected_site.cost
+	report_progress("Finished loading away sites, remaining budget [away_site_budget], remaining sites [sites_by_spawn_weight.len]")
+#endif
+
 /datum/map/proc/build_exoplanets()
 	if(!use_overmap)
 		return
@@ -188,7 +210,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		M.update_icon()
 	for(var/thing in mining_floors["[zlevel]"])
 		var/turf/simulated/floor/asteroid/M = thing
-		M.updateMineralOverlays()
+		if (istype(M))
+			M.updateMineralOverlays()
 
 /datum/map/proc/get_network_access(var/network)
 	return 0

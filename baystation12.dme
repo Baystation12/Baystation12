@@ -2479,6 +2479,7 @@
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
 #include "maps\away\away_sites.dm"
+#include "maps\away_sites_testing\away_sites_testing_define.dm"
 #include "maps\example\example_define.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\random_ruins\exoplanet_ruins\exoplanet_ruins.dm"
