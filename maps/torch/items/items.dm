@@ -85,7 +85,10 @@ Weapons
 ******/
 
 /obj/item/weapon/gun/projectile/revolver/webley/captain
-	name = "captain's revolver"
+	name = "captain's autorevolver"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
-	icon_state = "webley2"
-	desc = "A shiny Webley style top-break revolver with black accents and a captain's rank pin set into the grip.  Uses .44 magnum rounds."
+	icon_state = "mosley"
+	desc = "A shiny Mosley Autococker automatic revolver, with black accents. Marketed as the 'Revolver for the Modern Era'. Uses .44 magnum rounds."
+	fire_delay = 5.7 //Autorevolver. Also synced with the animation
+	fire_anim = "mosley_fire"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
