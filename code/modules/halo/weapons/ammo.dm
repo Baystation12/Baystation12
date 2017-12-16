@@ -29,19 +29,7 @@
 
 /obj/item/weapon/storage/box/m127_saphe
 	name = "box of 12.7mm M225 magazines"
-	icon_state = "bullet"
-
-/obj/item/weapon/storage/box/m127_saphe/New()
-	..()
-	new /obj/item/ammo_magazine/m127_saphe(src)
-	new /obj/item/ammo_magazine/m127_saphe(src)
-	new /obj/item/ammo_magazine/m127_saphe(src)
-	new /obj/item/ammo_magazine/m127_saphe(src)
-	new /obj/item/ammo_magazine/m127_saphe(src)
-	new /obj/item/ammo_magazine/m127_saphe(src)
-	new /obj/item/ammo_magazine/m127_saphe(src)
-
-
+	startswith = list(/obj/item/ammo_magazine/m127_saphe = 7)
 
 //used by: Magnum M6D, Magnum M6S
 
@@ -69,19 +57,7 @@
 
 /obj/item/weapon/storage/box/m127_saphp
 	name = "box of 12.7mm M228 magazines"
-	icon_state = "bullet"
-
-/obj/item/weapon/storage/box/m127_saphp/New()
-	..()
-	new /obj/item/ammo_magazine/m127_saphp(src)
-	new /obj/item/ammo_magazine/m127_saphp(src)
-	new /obj/item/ammo_magazine/m127_saphp(src)
-	new /obj/item/ammo_magazine/m127_saphp(src)
-	new /obj/item/ammo_magazine/m127_saphp(src)
-	new /obj/item/ammo_magazine/m127_saphp(src)
-	new /obj/item/ammo_magazine/m127_saphp(src)
-
-
+	startswith = list(/obj/item/ammo_magazine/m127_saphp = 7)
 
 //used by: MA5B assault rifle, M739 Light Machine Gun, M392 designated marksman rifle
 
@@ -114,18 +90,7 @@
 
 /obj/item/weapon/storage/box/m762_ap
 	name = "box of 7.62mm M118 magazines"
-	icon_state = "magazine"
-
-/obj/item/weapon/storage/box/m762_ap/New()
-	..()
-	new /obj/item/ammo_magazine/m762_ap(src)
-	new /obj/item/ammo_magazine/m762_ap(src)
-	new /obj/item/ammo_magazine/m762_ap(src)
-	new /obj/item/ammo_magazine/m762_ap(src)
-	new /obj/item/ammo_magazine/m762_ap(src)
-	new /obj/item/ammo_magazine/m762_ap(src)
-
-
+	startswith = list(/obj/item/ammo_magazine/m762_ap = 7)
 
 //used by: BR55 battle rifle
 
@@ -152,17 +117,7 @@
 
 /obj/item/weapon/storage/box/m95_sap
 	name = "box of 9.5mm M634 magazines"
-	icon_state = "magazine"
-
-/obj/item/weapon/storage/box/m95_sap/New()
-	..()
-	new /obj/item/ammo_magazine/m95_sap(src)
-	new /obj/item/ammo_magazine/m95_sap(src)
-	new /obj/item/ammo_magazine/m95_sap(src)
-	new /obj/item/ammo_magazine/m95_sap(src)
-	new /obj/item/ammo_magazine/m95_sap(src)
-
-
+	startswith = list(/obj/item/ammo_magazine/m95_sap = 7)
 
 //used by: M739 Light Machine Gun
 
@@ -206,23 +161,14 @@
 	damage = 80
 	stun = 1
 	weaken = 1
+	step_delay = 0.3
 	penetrating = 5
 	armor_penetration = 80
-	hitscan = 1
 	accuracy = 6
 
 /obj/item/weapon/storage/box/m145_ap
 	name = "box of 14.5mm M112 magazines"
-	icon_state = "bullet"
-
-/obj/item/weapon/storage/box/m145_ap/New()
-	..()
-	new /obj/item/ammo_magazine/m145_ap(src)
-	new /obj/item/ammo_magazine/m145_ap(src)
-	new /obj/item/ammo_magazine/m145_ap(src)
-	new /obj/item/ammo_magazine/m145_ap(src)
-
-
+	startswith = list(/obj/item/ammo_magazine/m145_ap = 4)
 
 //used by: M7 submachine gun
 //todo: these are not supposed to eject spent shell casings on firing, so figure out a way to disable that
@@ -249,14 +195,4 @@
 
 /obj/item/weapon/storage/box/m5
 	name = "box of 5mm M443 magazines"
-	icon_state = "magazine"
-
-/obj/item/weapon/storage/box/m5/New()
-	..()
-	new /obj/item/ammo_magazine/m5(src)
-	new /obj/item/ammo_magazine/m5(src)
-	new /obj/item/ammo_magazine/m5(src)
-	new /obj/item/ammo_magazine/m5(src)
-	new /obj/item/ammo_magazine/m5(src)
-	new /obj/item/ammo_magazine/m5(src)
-	new /obj/item/ammo_magazine/m5(src)
+	startswith = list(/obj/item/ammo_magazine/m5 = 7)

@@ -4,6 +4,8 @@ Contains most of the procs that are called when a mob is attacked by something
 bullet_act
 ex_act
 meteor_act
+supression_act
+attack_generic override.
 
 */
 
@@ -472,3 +474,31 @@ meteor_act
 		perm += perm_by_part[part]
 
 	return perm
+
+/mob/living/carbon/human/proc/supression_act(var/obj/item/projectile/P)
+	if(!client)
+		return
+	var/seconds_since_supression = (world.time - time_last_supressed)/10
+	if(seconds_since_supression <= 1)
+		shake_camera(src,2,1)
+		overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
+		//severe supression effects
+	else if(seconds_since_supression <=5)
+		overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 5)
+		//medium supression effects
+	else if(seconds_since_supression <=10)
+		overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 4)
+		//low supression effects
+	else if(seconds_since_supression > 10)
+		if(prob(40))
+			visible_message("<span class = 'danger'>The [P.name] whizzes past [src]!</span>")
+	time_last_supressed = world.time
+
+/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message)
+	if(!damage || !istype(user))
+		return
+
+	if(check_shields(damage, user, user, attack_text = attack_message))
+		return
+
+	return ..()

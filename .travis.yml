@@ -16,6 +16,8 @@ env:
     - TEST=MAP MAP_PATH=overmap_example
     - TEST=MAP MAP_PATH=insurrection
     - TEST=MAP MAP_PATH=slayer
+    - TEST=MAP MAP_PATH=desert_outpost
+    - TEST=MAP MAP_PATH=far_isle
 
 cache:
   directories:
