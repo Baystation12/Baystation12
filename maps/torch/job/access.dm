@@ -81,49 +81,49 @@
 	region = ACCESS_REGION_COMMAND
 	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO cannot enter
 
-/var/const/access_gun = 86
+/var/const/access_gun = 87
 /datum/access/gun
 	id = access_gun
 	desc = "Gunnery"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_expedition_shuttle = 87
+/var/const/access_expedition_shuttle = 88
 /datum/access/exploration_shuttle
 	id = access_expedition_shuttle
 	desc = "Charon"
 	region = ACCESS_REGION_GENERAL
 
-/var/const/access_guppy = 88
+/var/const/access_guppy = 89
 /datum/access/guppy
 	id = access_guppy
 	desc = "General Utility Pod"
 	region = ACCESS_REGION_GENERAL
 
-/var/const/access_seneng = 89
+/var/const/access_seneng = 90
 /datum/access/seneng
 	id = access_seneng
 	desc = "Senior Engineer"
 	region = ACCESS_REGION_ENGINEERING
 
-/var/const/access_senmed = 90
+/var/const/access_senmed = 91
 /datum/access/senmed
 	id = access_senmed
 	desc = "Physician"
 	region = ACCESS_REGION_MEDBAY
 
-/var/const/access_senadv = 91
+/var/const/access_senadv = 92
 /datum/access/senadv
 	id = access_senadv
 	desc = "Senior Enlisted Advisor"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_explorer = 92
+/var/const/access_explorer = 93
 /datum/access/explorer
 	id = access_explorer
 	desc = "Explorer"
 	region = ACCESS_REGION_RESEARCH
 
-/var/const/access_pathfinder = 93
+/var/const/access_pathfinder = 94
 /datum/access/pathfinder
 	id = access_pathfinder
 	desc = "Pathfinder"
