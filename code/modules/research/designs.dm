@@ -618,13 +618,6 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/floragun
 	sort_string = "TACAA"
 
-/datum/design/item/weapon/advancedflash
-	id = "advancedflash"
-	req_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
-	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 2000, "silver" = 500)
-	build_path = /obj/item/device/flash/advanced
-	sort_string = "TADAA"
-
 /datum/design/item/weapon/stunrevolver
 	id = "stunrevolver"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
