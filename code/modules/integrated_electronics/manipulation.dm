@@ -306,7 +306,7 @@
 	else
 		var/turf/destination = get_random_turf_in_range(src, 10)
 		if(destination)
-			new /obj/effect/portal(rift_location, destination)
+			new /obj/effect/portal(rift_location, destination, 30 SECONDS, 33)
 		else
 			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
 
