@@ -1,0 +1,8 @@
+author: "BlueNexus"
+delete-after: True
+changes: 
+  - tweak: "The WT45 now fires slightly slower, and is more accurate."
+  - tweak: "The Mk58 now fires slightly faster, and is less accurate."
+  - tweak: "Revolvers fire slightly slower, in general."
+  - tweak: "Adjusted fluff for several firearms"
+  - rscadd: "The CO's revolver has been replaced with an autorevolver."
