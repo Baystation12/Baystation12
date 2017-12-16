@@ -402,8 +402,8 @@
 			if(I.damage > 0)
 				I.damage = max(I.damage - 2, 0)
 				H.nutrition -= 2
-				if (prob(1))
-					to_chat(H, "<span class='warning'>You sense your [I.name] regenerating...</span>")
+				if (prob(5))
+					to_chat(H, "<span class='warning'>You sense your nymphs shifting internally to regenerate your [I.name]...</span>")
 
 		if (prob(10) && H.nutrition > 70)
 			for(var/limb_type in has_limbs)
@@ -415,7 +415,7 @@
 				if(!E)
 					var/list/organ_data = has_limbs[limb_type]
 					var/limb_path = organ_data["path"]
-					var/obj/item/organ/O = new limb_path(src)
+					var/obj/item/organ/O = new limb_path(H)
 					organ_data["descriptor"] = O.name
 					to_chat(H, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
 					H.nutrition -= 60
