@@ -28,7 +28,7 @@
 	ec_cartridge = new cartridge_type(src)
 
 /obj/item/clothing/mask/smokable/ecig/simple
-	name = "\improper Lucky 1337 e-cig"
+	name = "cheap electronic cigarette"
 	desc = "A cheap Lucky 1337 electronic cigarette, styled like a traditional cigarette."
 	icon_state = "ccigoff"
 	icon_off = "ccigoff"
@@ -43,7 +43,7 @@
 		to_chat(user,"<span class='notice'>There is no cartridge connected.</span>")
 
 /obj/item/clothing/mask/smokable/ecig/util
-	name = "\improper ONI-55 e-cig"
+	name = "electronic cigarette"
 	desc = "A popular utilitarian model electronic cigarette, the ONI-55. Comes in a variety of colors."
 	icon_state = "ecigoff1"
 	icon_off = "ecigoff1"
@@ -64,7 +64,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	to_chat(user,"<span class='notice'>Gauge shows about [round(cigcell.percent(), 25)]% energy remaining</span>")
 
 /obj/item/clothing/mask/smokable/ecig/deluxe
-	name = "\improper eGavana MK3 e-cig"
+	name = "deluxe electronic cigarette"
 	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
 	icon_state = "pcigoff1"
 	icon_off = "pcigoff1"
