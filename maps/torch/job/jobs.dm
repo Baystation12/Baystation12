@@ -11,7 +11,7 @@
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
 		/datum/species/tajaran = list(HUMAN_ONLY_JOBS),
 		/datum/species/machine = list(HUMAN_ONLY_JOBS),
-		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer, /datum/job/detective),	//Other jobs unavailable via branch restrictions,
+		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/officer_contractor, /datum/job/officer, /datum/job/detective, /datum/job/officer_contractor),	//Other jobs unavailable via branch restrictions,
 	)
 #undef HUMAN_ONLY_JOBS
 
@@ -19,12 +19,12 @@
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot,
 						/datum/job/pathfinder, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
-						/datum/job/officer, /datum/job/warden, /datum/job/detective,
+						/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/officer_contractor,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
-						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
+						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
 						/datum/job/merchant, /datum/job/stowaway
@@ -622,8 +622,8 @@
 
 /datum/job/officer
 	title = "Master at Arms"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief of Security"
 	alt_titles = list(
 		"Military Police")
@@ -655,6 +655,33 @@
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/officer_contractor
+	title = "Security Contractor"
+	department = "Security"
+	department_flag = SEC
+
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Chief of Security and Security Personnel"
+	alt_titles = list(
+		"Private Military Contractor",
+		"Security Officer",
+		"Security Guard")
+	minimal_player_age = 8
+	selection_color = "#601c1c"
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/contractor
+	allowed_branches = list(
+		/datum/mil_branch/civilian
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor)
+
+	access = list(access_security, access_brig, access_maint_tunnels, access_external_airlocks, access_emergency_storage, access_eva, access_sec_doors, access_solgov_crew)
+
+	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
+							 /datum/computer_file/program/camera_monitor)
+
 
 /datum/job/senior_doctor
 	title = "Physician"
@@ -1071,26 +1098,6 @@
 	access = list(access_research, access_mining, access_mining_office, access_mining_station, access_nanotrasen,
 						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_guppy_helm)
 	minimal_access = list()
-
-
-/datum/job/guard
-	title = "Security Guard"
-	department = "Science"
-	department_flag = SCI
-
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the Research Director and NanoTrasen Personnel"
-	selection_color = "#633d63"
-	economic_modifier = 6
-	minimal_player_age = 3
-	ideal_character_age = 25
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/guard
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
-
-	access = list(access_tox, access_tox_storage,access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_expedition_shuttle, access_guppy)
 
 
 /datum/job/scientist_assistant

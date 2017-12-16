@@ -325,6 +325,13 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/marine/security
 	shoes = /obj/item/clothing/shoes/jungleboots
 
+/decl/hierarchy/outfit/job/torch/crew/security/contractor
+	name = OUTFIT_JOB_NAME("Security Contractor")
+	uniform = /obj/item/clothing/under/rank/security
+	shoes = /obj/item/clothing/shoes/jackboots
+	id_type = /obj/item/weapon/card/id/torch/contractor/security
+	pda_type = /obj/item/device/pda/security
+
 //Medical Outfits
 
 /decl/hierarchy/outfit/job/torch/crew/medical
@@ -650,13 +657,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector/New()
 	..()
 	BACKPACK_OVERRIDE_ENGINEERING
-
-/decl/hierarchy/outfit/job/torch/passenger/research/guard
-	name = OUTFIT_JOB_NAME("Security Guard")
-	uniform = /obj/item/clothing/under/rank/guard
-	shoes = /obj/item/clothing/shoes/jackboots
-	id_type = /obj/item/weapon/card/id/torch/passenger/research/guard
-	pda_type = /obj/item/device/pda/security
 
 /decl/hierarchy/outfit/job/torch/passenger/research/guard/New()
 	..()
