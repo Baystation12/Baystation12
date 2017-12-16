@@ -8,12 +8,13 @@
 
 	station_levels = list(1,2,3,4,5)
 	contact_levels = list(1,2,3,4,5)
-	player_levels = list(1,2,3,4,5,8)
+	player_levels = list(1,2,3,4,5,8,9,10,11)
 	admin_levels = list(6,7)
 	empty_levels = list(8)
-	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"8"=30)
+	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"8"=30,"9"=10,"11"=10)
 	overmap_size = 60
 	overmap_event_areas = 60
+	base_turf_by_z = list("10" = /turf/simulated/floor/asteroid)
 	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "torch.marine.mil", "freemail.nt")
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
@@ -39,8 +40,6 @@
 
 	default_law_type = /datum/ai_laws/solgov
 	use_overmap = 1
-
-	away_site_budget = 4
 
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 	lobby_screens = list("title","title2")
