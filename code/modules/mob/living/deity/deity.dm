@@ -4,7 +4,6 @@
 	icon = 'icons/mob/deity_big.dmi'
 	icon_state = "egg"
 	var/power_min = 10 //Below this amount you regenerate uplink TCs
-	var/power_tick = 10
 	pixel_x = -128
 	pixel_y = -128
 	health = 100
@@ -29,24 +28,18 @@
 
 /mob/living/deity/Life()
 	. = ..()
-	if(. && mob_uplink.uses < power_min && --power_tick == 0)
-		mob_uplink.uses += 1
+	if(. && mob_uplink.uses < power_min)
+		mob_uplink.uses += 1 + (!feats[DEITY_POWER_BONUS] ? 0 : feats[DEITY_POWER_BONUS])
 		GLOB.nanomanager.update_uis(mob_uplink)
-		power_tick = initial(power_tick)
 
 /mob/living/deity/death()
 	. = ..()
 	if(.)
 		for(var/m in minions)
 			var/datum/mind/M = m
-			if(M.learned_spells)
-				for(var/s in M.learned_spells)
-					var/spell/S = s
-					if(S.connected_god == src)
-						M.current.remove_spell(S)
-						qdel(S)
-			to_chat(M, "<font size='3'><span class='danger'>Your connection has been severed! \The [src] is no more!</span></font>")
-			sound_to(M, 'sound/hallucinations/far_noise.ogg')
+			remove_follower_spells(M)
+			to_chat(M.current, "<font size='3'><span class='danger'>Your connection has been severed! \The [src] is no more!</span></font>")
+			sound_to(M.current, 'sound/hallucinations/far_noise.ogg')
 			M.current.Weaken(10)
 		for(var/s in structures)
 			var/obj/structure/deity/S = s

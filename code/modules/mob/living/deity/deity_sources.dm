@@ -2,41 +2,41 @@
 	if(is_follower(L, silent=1))
 		return
 
-	adjust_source(30, L)
+	adjust_source(3, L)
 	minions += L.mind
+	var/spell/construction/C = new()
+	L.add_spell(C)
+	C.set_connected_god(src)
 	if(form)
 		L.faction = form.faction
+
+/mob/living/deity/proc/remove_follower_spells(var/datum/mind/M)
+	if(M.learned_spells)
+		for(var/s in M.learned_spells)
+			var/spell/S = s
+			if(S.connected_god == src)
+				M.current.remove_spell(S)
+				qdel(S)
 
 /mob/living/deity/proc/remove_follower(var/mob/living/L)
 	if(!is_follower(L, silent=1))
 		return
 
-	adjust_source(-30, L)
-
-/mob/living/deity/proc/change_follower(var/mob/living/L, var/adding = 1)
-	if(is_follower(L, silent=1) && adding)
-		return
-
-	adjust_source(30 * (adding ? 1 : -1), L, 0)
-	if(adding)
-		minions += L.mind
-		if(form)
-			L.faction = form.faction
-	else
-		minions -= L.mind
-		L.faction = "neutral"
+	adjust_source(-3, L)
+	minions -= L.mind
+	L.faction = "neutral"
+	if(L.mind)
+		remove_follower_spells(L.mind)
 
 /mob/living/deity/proc/adjust_power(var/amount, var/silent = 0, var/msg)
-	if(feats[DEITY_POWER_BONUS])
-		amount += amount * feats[DEITY_POWER_BONUS]
-	mob_uplink.uses = max(0, mob_uplink.uses + amount)
+	power_min = max(0, power_min + amount)
 	if(!silent)
 		var/feel = ""
-		if(abs(amount) > 100)
+		if(abs(amount) > 20)
 			feel = " immensely"
-		else if(abs(amount) > 50)
+		else if(abs(amount) > 10)
 			feel = " greatly"
-		if(abs(amount) >= 10)
+		if(abs(amount) >= 5)
 			var/class = amount > 0 ? "notice" : "warning"
 			to_chat(src, "<span class='[class]'>You feel your power [amount > 0 ? "increase" : "decrease"][feel][msg ? " [msg]" : ""]</span>")
 
@@ -77,7 +77,7 @@
 	var/turf/T = get_turf(L)
 	for(var/s in structures)
 		var/obj/structure/deity/D = s
-		if(!D.important_structure)
+		if(D.deity_flags & DEITY_STRUCTURE_NEAR_IMPORTANT)//If it needs to be near an important structure, it isn't important.
 			continue
 
 		if(get_dist(T, s) <= 3)
