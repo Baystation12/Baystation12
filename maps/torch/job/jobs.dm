@@ -665,7 +665,6 @@
 	spawn_positions = 2
 	supervisors = "the Chief of Security and Security Personnel"
 	alt_titles = list(
-		"Private Military Contractor",
 		"Security Officer",
 		"Security Guard")
 	minimal_player_age = 8

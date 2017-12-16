@@ -35,6 +35,6 @@ delete-after: True
 changes: 
   - rscadd: "Adds Security Contractors."
   - tweak: "Lowers the number of slots for Master at Arms to 2 to prevent bloat."
-  - rscdel: "Removes Security Guards and the NT hardsuit module (Security Guard is still a selectable alt-title!)
+  - rscdel: "Removes Security Guards and the NT hardsuit module (Security Guard is still a selectable alt-title!)"
   - tweak: "The Research Checkpoint is now a Security Office."
   - rscdel: "Removes the Research Checkpoint from the Petrov."
