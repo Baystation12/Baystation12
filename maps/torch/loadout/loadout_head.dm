@@ -80,20 +80,13 @@
 	allowed_roles = TECHNICAL_ROLES
 
 /datum/gear/head/formalhat
-<<<<<<< HEAD
 	display_name = "formal hat selection"
 	path = /obj/item/clothing/head
-=======
->>>>>>> Apollo-Dev
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/head/informalhat
-<<<<<<< HEAD
 	display_name = "informal hat selection"
 	path = /obj/item/clothing/head
-=======
-	path = /obj/item/clothing/head/cowboy_hat
->>>>>>> Apollo-Dev
 	allowed_roles = SEMIFORMAL_ROLES
 
 /datum/gear/head/welding
