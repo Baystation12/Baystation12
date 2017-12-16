@@ -1253,7 +1253,7 @@
 
 /datum/reagent/ethanol/vodka
 	name = "Vodka"
-	description = "Number one drink AND fueling choice for Russians galaxywide."
+	description = "Number one drink AND fueling choice for Terrans around the galaxy."
 	taste_description = "grain alcohol"
 	color = "#0064c8" // rgb: 0, 100, 200
 	strength = 15
@@ -1264,6 +1264,13 @@
 /datum/reagent/ethanol/vodka/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.apply_effect(max(M.radiation - 1 * removed, 0), IRRADIATE, blocked = 0)
+
+/datum/reagent/ethanol/vodka/premium
+	name = "Premium Vodka"
+	description = "Premium distilled vodka imported directly from the Terran Colonial Confederation."
+	taste_description = "clear kvass"
+	color = "#aaddff" // rgb: 170, 221, 255 - very light blue.
+	strength = 10
 
 /datum/reagent/ethanol/whiskey
 	name = "Whiskey"
@@ -1284,6 +1291,13 @@
 
 	glass_name = "wine"
 	glass_desc = "A very classy looking drink."
+
+/datum/reagent/ethanol/wine/premium
+	name = "White Wine"
+	description = "An exceptionally expensive alchoholic beverage made from distilled white grapes."
+	taste_description = "white velvet"
+	color = "#ffddaa" // rgb: 255, 221, 170 - a light cream
+	strength = 20
 
 /datum/reagent/ethanol/herbal
 	name = "Herbal Liquor"
