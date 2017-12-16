@@ -27,6 +27,7 @@
 		G.overlays = 0
 		G.set_invisibility(0)
 		to_chat(G, "<span class='sinister'>You feel relieved as what's left of your soul finally escapes its prison of flesh.</span>")
+		cult.harvested += G.mind
 	else
 		dust()
 
