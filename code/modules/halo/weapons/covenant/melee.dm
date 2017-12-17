@@ -23,7 +23,7 @@
 /obj/item/weapon/melee/energysword/proc/activate()
 		playsound(src.loc,'code/modules/halo/sounds/Energysworddeploy.ogg',75)
 		icon_state = "T1EW-deployed"
-		force = 25
+		force = 40
 		throwforce = 12
 		w_class = 4
 		deployed = 1
