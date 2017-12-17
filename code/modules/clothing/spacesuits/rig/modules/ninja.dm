@@ -27,9 +27,6 @@
 	interface_name = "integrated stealth system"
 	interface_desc = "An integrated active camouflage system."
 
-	suit_overlay_active =   "stealth_active"
-	suit_overlay_inactive = "stealth_inactive"
-
 /obj/item/rig_module/stealth_field/activate()
 
 	if(!..())

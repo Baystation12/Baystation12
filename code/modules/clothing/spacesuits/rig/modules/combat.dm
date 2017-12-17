@@ -25,8 +25,6 @@
 	icon_state = "grenadelauncher"
 	use_power_cost = 2 KILOWATTS	// 2kJ per shot, a mass driver that propels the grenade?
 
-	suit_overlay = "grenade"
-
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
 
@@ -110,8 +108,6 @@
 	module_cooldown = 0
 	icon_state = "lcannon"
 
-	suit_overlay = "mounted-lascannon"
-
 	engage_string = "Configure"
 
 	interface_name = "mounted laser cannon"
@@ -154,9 +150,6 @@
 	icon_state = "taser"
 
 	usable = 0
-
-	suit_overlay_active = "mounted-taser"
-	suit_overlay_inactive = "mounted-taser"
 
 	interface_name = "mounted taser"
 	interface_desc = "A shoulder-mounted cell-powered taser."

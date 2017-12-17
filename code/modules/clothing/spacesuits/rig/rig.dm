@@ -522,11 +522,6 @@
 			species_icon =  sprite_sheets[wearer.species.get_bodytype(wearer)]
 		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
 
-	if(installed_modules.len)
-		for(var/obj/item/rig_module/module in installed_modules)
-			if(module.suit_overlay)
-				chest.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
-
 	if(wearer)
 		wearer.update_inv_shoes()
 		wearer.update_inv_gloves()
@@ -542,9 +537,6 @@
 	if(slot != slot_back_str || offline)
 		return ret
 
-	for(var/obj/item/rig_module/module in installed_modules)
-		if(module.suit_overlay)
-			ret.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]")
 	return ret
 
 /obj/item/weapon/rig/proc/check_suit_access(var/mob/living/carbon/human/user)
