@@ -81,12 +81,6 @@
 	region = ACCESS_REGION_COMMAND
 	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO cannot enter
 
-/var/const/access_sec_guard = 86
-/datum/access/sec_guard
-	id = access_sec_guard
-	desc = "Security Guard"
-	region = ACCESS_REGION_RESEARCH
-
 /var/const/access_gun = 87
 /datum/access/gun
 	id = access_gun

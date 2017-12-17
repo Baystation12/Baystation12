@@ -72,6 +72,8 @@
 /obj/item/weapon/card/id/torch/crew/security/forensic
 	job_access_type = /datum/job/detective
 
+/obj/item/weapon/card/id/torch/contractor/security
+	job_access_type = /datum/job/officer_contractor
 
 /obj/item/weapon/card/id/torch/silver/engineering
 	job_access_type = /datum/job/chief_engineer
@@ -159,9 +161,6 @@
 
 /obj/item/weapon/card/id/torch/passenger/research/mining
 	job_access_type = /datum/job/mining
-
-/obj/item/weapon/card/id/torch/passenger/research/guard
-	job_access_type = /datum/job/guard
 
 /obj/item/weapon/card/id/torch/passenger/research/liaison
 	job_access_type = /datum/job/liaison
