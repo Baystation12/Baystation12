@@ -34,8 +34,6 @@
 	icon_state = "plasmacutter"
 	interface_name = "plasma cutter"
 	interface_desc = "A self-sustaining plasma arc capable of cutting through walls."
-	suit_overlay_active = "plasmacutter"
-	suit_overlay_inactive = "plasmacutter"
 	use_power_cost = 50
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6)
 	device_type = /obj/item/weapon/pickaxe/plasmacutter
@@ -56,8 +54,6 @@
 	icon_state = "drill"
 	interface_name = "mounted drill"
 	interface_desc = "A diamond-tipped industrial drill."
-	suit_overlay_active = "mounted-drill"
-	suit_overlay_inactive = "mounted-drill"
 	use_power_cost = 75
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
@@ -333,9 +329,6 @@
 	disruptive = 0
 	active_power_cost = 50
 
-	suit_overlay_active = "maneuvering_active"
-	suit_overlay_inactive = null //"maneuvering_inactive"
-
 	engage_string = "Toggle Stabilizers"
 	activate_string = "Activate Thrusters"
 	deactivate_string = "Deactivate Thrusters"
@@ -357,13 +350,6 @@
 		return 0
 
 	active = 1
-
-	spawn(1)
-		if(suit_overlay_active)
-			suit_overlay = suit_overlay_active
-		else
-			suit_overlay = null
-		holder.update_icon()
 
 	if(!jets.on)
 		jets.toggle()

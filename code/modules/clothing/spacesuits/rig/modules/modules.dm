@@ -40,12 +40,6 @@
 	var/list/charges                    // Associative list of charge types and remaining numbers.
 	var/charge_selected                 // Currently selected option used for charge dispensing.
 
-	// Icons.
-	var/suit_overlay
-	var/suit_overlay_active             // If set, drawn over icon and mob when effect is active.
-	var/suit_overlay_inactive           // As above, inactive.
-	var/suit_overlay_used               // As above, when engaged.
-
 	//Display fluff
 	var/interface_name = "hardsuit upgrade"
 	var/interface_desc = "A generic hardsuit upgrade."
@@ -111,8 +105,6 @@
 
 /obj/item/rig_module/New()
 	..()
-	if(suit_overlay_inactive)
-		suit_overlay = suit_overlay_inactive
 
 	if(charges && charges.len)
 		var/list/processed_charges = list()
@@ -186,13 +178,6 @@
 
 	active = 1
 
-	spawn(1)
-		if(suit_overlay_active)
-			suit_overlay = suit_overlay_active
-		else
-			suit_overlay = null
-		holder.update_icon()
-
 	return 1
 
 // Proc for toggling off active abilities.
@@ -202,14 +187,6 @@
 		return 0
 
 	active = 0
-
-	spawn(1)
-		if(suit_overlay_inactive)
-			suit_overlay = suit_overlay_inactive
-		else
-			suit_overlay = null
-		if(holder)
-			holder.update_icon()
 
 	return 1
 
