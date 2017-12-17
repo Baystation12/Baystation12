@@ -4,7 +4,7 @@
 	full_name = "Far Isle Colony"
 	path = "far_isle"
 	station_levels = list(1,2,3)
-	admin_levels = list()
+	admin_levels = list(4)
 	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.png'
