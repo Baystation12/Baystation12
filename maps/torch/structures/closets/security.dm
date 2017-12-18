@@ -129,9 +129,6 @@
 
 /obj/structure/closet/secure_closet/forensics/WillContain()
 	return list(
-		/obj/item/clothing/under/det,
-		/obj/item/clothing/head/det,
-		/obj/item/clothing/suit/storage/det_trench,
 		/obj/item/clothing/gloves/forensic,
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/vest/detective,
@@ -156,6 +153,7 @@
 		/obj/item/device/uv_light,
 		/obj/item/weapon/reagent_containers/spray/luminol,
 		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/glasses/sunglasses/sechud/toggle,
 		/obj/item/device/holowarrant,
 		/obj/item/device/flashlight/maglight,
