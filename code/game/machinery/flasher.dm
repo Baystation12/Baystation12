@@ -74,7 +74,7 @@
 	src.last_flash = world.time
 	use_power(1500)
 
-	for (var/mob/O in viewers(src, null))
+	for (var/mob/living/O in viewers(src, null))
 		if (get_dist(src, O) > src.range)
 			continue
 
@@ -90,14 +90,12 @@
 			if(E.is_bruised() && prob(E.damage + 50))
 				H.flash_eyes()
 				E.damage += rand(1, 5)
-		else
-			if(!O.blinded && isliving(O))
-				var/mob/living/L = O
-				L.flash_eyes()
-		O.flash_eyes()
-		O.confused += (flash_time + 2)
-		O.Stun(flash_time / 2)
-		O.Weaken(3)
+		if(!O.blinded)
+			O.flash_eyes()
+			O.eye_blurry += flash_time
+			O.confused += (flash_time + 2)
+			O.Stun(flash_time / 2)
+			O.Weaken(3)
 
 /obj/machinery/flasher/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
