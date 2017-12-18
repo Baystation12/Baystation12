@@ -29,7 +29,6 @@
 	icon_state = "security"
 	item_state = "r_suit"
 	worn_state = "secred"
-	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/dispatch
 	name = "dispatcher's uniform"
