@@ -35,7 +35,7 @@
 	display_name = "trenchcoat selection"
 	path = /obj/item/clothing/suit
 	cost = 3
-	allowed_roles = list(/datum/job/assistant, /datum/job/bartender, /datum/job/officer_contractor, /datum/job/merchant,/datum/job/stowaway)
+	allowed_roles = list(/datum/job/assistant, /datum/job/bartender, /datum/job/officer_contractor, /datum/job/merchant, /datum/job/stowaway)
 
 /datum/gear/suit/trenchcoat/New()
 	..()
