@@ -1,7 +1,0 @@
-author: "Casper3667"
-delete-after: True
-changes: 
-  - rscadd: "Surgeon borgs now have defibrillator."
-  - rscadd: "Crisis borgs now have medical tape."
-  - rscadd: "Engie borgs got atmos atmos tape."
-  - rscadd: "Security borgs now have a megaphone module."
