@@ -1424,6 +1424,7 @@
 #include "code\modules\halo\misc\atmos_machinery.dm"
 #include "code\modules\halo\misc\closets.dm"
 #include "code\modules\halo\misc\cryopod.dm"
+#include "code\modules\halo\misc\explosives.dm"
 #include "code\modules\halo\misc\gunvendors.dm"
 #include "code\modules\halo\misc\payload.dm"
 #include "code\modules\halo\misc\supersmes.dm"
