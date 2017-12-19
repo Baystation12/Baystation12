@@ -2,7 +2,9 @@
 /obj/effect/landmark/scavenge_spawn
 	name = "resupply spawn marker"
 	icon_state = "x3"
-	invisibility = 0
+
+/obj/effect/landmark/scavenge_spawn_skip
+	icon_state = "x"
 
 /datum/game_mode/stranded/proc/process_resupply()
 	if(world.time > time_next_resupply)
@@ -17,33 +19,22 @@
 		//work out what message
 		var/pilot_message
 		var/impact_text
-		if(prob(50))
-			pilot_message = "A clump of debris from your ship has crashed down to the [dir_text]. See if you can salvage it for resources."
-			impact_text = "a massive impact"
-			spawn(0)
-				spawn_ship_debris(drop_turf)
-		else
-			pilot_message = "Supply run completed, I've dropped off my cargo to the [dir_text]. Good luck!"
-			impact_text = "multiple thudding impacts"
-			spawn(0)
-				spawn_resupply(drop_turf)
+		var/resupply_type = pick(1,2)
+		switch(resupply_type)
+			if(1)
+				pilot_message = "A clump of debris from your ship has crashed down to the [dir_text]. See if you can salvage it for resources."
+				impact_text = "a massive impact"
+				spawn(0)
+					spawn_ship_debris(drop_turf)
+			if(2)
+				pilot_message = "Supply run completed, I've dropped off my cargo to the [dir_text]. Good luck!"
+				impact_text = "multiple thudding impacts"
+				spawn(0)
+					spawn_resupply(drop_turf)
 
-		// ripped from proc/explosion() see code/game/objects/exposion.dm
-		var/close_range = 14
-		var/turf/epicenter = get_turf(S)
-		var/frequency = get_rand_frequency()
-		for(var/mob/M in GLOB.player_list)
-			if(M.z == epicenter.z)
-				var/turf/M_turf = get_turf(M)
-				var/dist = get_dist(M_turf, epicenter)
-				// If inside the blast radius + world.view - 2
-				if(dist <= close_range)
-					M.playsound_local(epicenter, get_sfx("explosion"), 100, 1, frequency, falloff = 5) // get_sfx() is so that everyone gets the same sound
-					to_chat(M, "<span class='warning'>You hear [impact_text] to the [dir2text(get_dir(M, S))].</span>")
-				else
-					var/far_volume = Clamp(world.maxx, 30, 50) // Volume is based on explosion size and dist
-					far_volume += (dist <= world.maxx * 0.5 ? 50 : 0) // add 50 volume if the mob is pretty close to the explosion
-					M.playsound_local(epicenter, 'sound/effects/explosionfar.ogg', far_volume, 1, frequency, falloff = 5)
+		playsound(drop_turf, "explosion", 100, 1)
+		for(var/mob/M in range(21, drop_turf))
+			to_chat(M, "<span class='warning'>You hear [impact_text] to the [dir2text(get_dir(M, S))].</span>")
 
 		//tell the players
 		to_world("\

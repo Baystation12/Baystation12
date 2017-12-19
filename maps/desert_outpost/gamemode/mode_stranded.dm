@@ -75,13 +75,14 @@
 	GLOB.hostile_attackables += /obj/structure/evac_pelican
 	GLOB.hostile_attackables += /obj/structure/tanktrap
 
-	//create resupply points
-	var/center_margin = 50
-	var/turf/center_turf = locate(world.maxx / 2, world.maxy / 2, 1)
-	for(var/curx = 1, curx < world.maxx, curx += 20)
-		for(var/cury = 1, cury < world.maxy, cury += 20)
+	//loop over the map creating resupply spawn points
+	var/resup_dist = 20
+	for(var/curx = 1, curx < world.maxx, curx += resup_dist + pick(-7,0,7))
+		for(var/cury = 1, cury < world.maxy, cury += resup_dist)
 			var/turf/T = locate(curx, cury, 1)
-			if(get_dist(center_turf, T) < center_margin)
+			//if there is a scavenge_spawn_skip landmark, skip this spot (place one eg near the player base)
+			var/obj/effect/landmark/scavenge_spawn_skip/N = locate() in range(resup_dist, T)
+			if(N)
 				continue
 			var/obj/effect/landmark/scavenge_spawn/S = new(T)
 			available_resupply_points.Add(S)
