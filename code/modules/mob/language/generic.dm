@@ -27,6 +27,7 @@
 	key = "0"
 	flags = RESTRICTED
 	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
+	partial_understanding = list(LANGUAGE_SKRELLIAN = 30, LANGUAGE_SOL_COMMON = 30)
 	shorthand = "GC"
 
 // Otherwise we end up with Blahblehmeh Nehnahwahblah, Captain.
@@ -58,6 +59,7 @@
 					 "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla",
 					 "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt",
 					 "in", "culpa", "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum")
+	partial_understanding = list(LANGUAGE_SOL_COMMON = 10)
 	shorthand = "SL"
 
 // Criminal language.
@@ -68,6 +70,7 @@
 	colour = "rough"
 	key = "3"
 	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
+	partial_understanding = list(LANGUAGE_GALCOM = 10, LANGUAGE_INDEPENDENT = 20, LANGUAGE_SOL_COMMON = 20)
 	shorthand = "GT"
 
 /datum/language/sign
