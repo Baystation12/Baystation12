@@ -30,9 +30,10 @@
 
 /mob/living/carbon/human/RangedAttack(var/atom/A)
 	//Climbing up open spaces
-	if((istype(A, /turf/simulated/floor) || istype(A, /obj/structure/catwalk)) && isturf(loc) && shadow && !is_physically_disabled()) //Climbing through openspace
+	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && shadow && !is_physically_disabled()) //Climbing through openspace
 		var/turf/T = get_turf(A)
-		if(T.Adjacent(shadow) && !locate(/obj/structure) in shadow.loc)
+		var/turf/above = shadow.loc
+		if(T.Adjacent(shadow) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
 			var/list/objects_to_stand_on = list(
 				/obj/item/weapon/stool,
 				/obj/structure/bed,
@@ -46,8 +47,8 @@
 					helper = locate(type) in src.loc
 					if(helper)
 						if(istype(helper, /obj/structure/bed/chair/office) && prob(60)) //If you are intent on removing yourself from the round
-							visible_message("<span class='warning'>[src] slips and falls!", "<span class='warning'>\The [helper] moves beneath you and you fall on the ground!")
-							shadow.visible_message("<span class='warning'>[src] slips and falls!")
+							visible_message("<span class='warning'>[src] slips and falls!</span>", "<span class='warning'>\The [helper] moves beneath you and you fall on the ground!</span>")
+							shadow.visible_message("<span class='warning'>[src] slips and falls!</span>")
 
 							//Taken from climbing shaken proc
 							Weaken(3)
@@ -60,14 +61,14 @@
 								target = get_organ(pick(BP_ALL_LIMBS))
 
 								if(target)
-									visible_message("<span class='warning'>[src] lands heavily on their [target.name]!", "<span class='warning'>You land heavily on your [target.name]!")
-									shadow.visible_message("<span class='warning'>[shadow] lands heavily on their [target.name]!")
+									visible_message("<span class='warning'>[src] lands heavily on their [target.name]!</span>", "<span class='warning'>You land heavily on your [target.name]!</span>")
+									shadow.visible_message("<span class='warning'>[shadow] lands heavily on their [target.name]</span>!")
 									target.take_damage(damage, 0)
 								if(target.parent)
 									target.parent.add_autopsy_data("Fall", damage)
 								else
-									visible_message("<span class='warning'>[src] lands heavily!", "<span class='warning'>You land heavily!")
-									shadow.visible_message("<span class='warning'>[shadow] lands heavily.")
+									visible_message("<span class='warning'>[src] lands heavily!</span>", "<span class='warning'>You land heavily!</span>")
+									shadow.visible_message("<span class='warning'>[shadow] lands heavily.</span>")
 									adjustBruteLoss(damage)
 
 								UpdateDamageIcon()
@@ -90,8 +91,8 @@
 				shadow.visible_message("<span class='notice'>[shadow] climbs onto \the [A]!</span>")
 				src.Move(T)
 			else
-				visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!", "<span class='warning'>You give up on trying to climb onto \the [A]!")
-				shadow.visible_message("<span class='warning'>[shadow] gives up on trying to climb onto \the [A]!")
+				visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
+				shadow.visible_message("<span class='warning'>[shadow] gives up on trying to climb onto \the [A]!</span>")
 			return
 
 	if(!gloves && !mutations.len) return
