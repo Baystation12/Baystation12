@@ -110,7 +110,7 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["religion"])
-		var/choice = input(user, "Please choose a religion.", "Character Preference", pref.religion) as null|anything in GLOB.using_map.religion_choices + list("None","Other")
+		var/choice = input(user, "Please choose a religion.", "Character Preference", pref.religion) as null|anything in GLOB.using_map.religion_choices + list("Other")
 		if(!choice || !CanUseTopic(user))
 			return TOPIC_NOACTION
 		if(choice == "Other")
