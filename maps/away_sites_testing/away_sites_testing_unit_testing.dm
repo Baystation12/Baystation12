@@ -31,7 +31,8 @@
 		/area/smugglers/office = NO_SCRUBBER|NO_VENT,
 		/area/casino/casino_solar_control = NO_SCRUBBER,
 		/area/casino/casino_maintenance = NO_SCRUBBER,
-		/area/casino/casino_hangar = NO_SCRUBBER
+		/area/casino/casino_hangar = NO_SCRUBBER,
+		/area/slavers_base/hangar = NO_SCRUBBER,
 	)
 
 	area_coherency_test_exempt_areas = list(
