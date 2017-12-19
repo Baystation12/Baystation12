@@ -45,6 +45,11 @@
 		if(!A.CanPass(src, start, 1.5, 0))
 			to_chat(src, "<span class='warning'>\The [A] blocks you.</span>")
 			return 0
+
+	if(can_fall(FALSE, destination))
+		to_chat(src, "<span class='warning'>You see nothing to hold on to.</span>")
+		return 0
+
 	Move(destination)
 	return 1
 
@@ -140,21 +145,23 @@
 		handle_fall(below)
 
 //For children to override
-/atom/movable/proc/can_fall(var/anchor_bypass = FALSE)
+/atom/movable/proc/can_fall(var/anchor_bypass = FALSE, var/turf/location_override = src.loc)
 	if(!simulated)
 		return FALSE
 
 	if(anchored && !anchor_bypass)
 		return FALSE
 
-	if(locate(/obj/structure/lattice, loc) || locate(/obj/structure/catwalk, loc))
-		return FALSE
-
-	// See if something prevents us from falling.
-	var/turf/below = GetBelow(src)
-	for(var/atom/A in below)
-		if(!A.CanPass(src, src.loc))
+	//Override will make checks from different location used for prediction
+	if(location_override)
+		if(locate(/obj/structure/lattice, location_override) || locate(/obj/structure/catwalk, location_override))
 			return FALSE
+
+		var/turf/below = GetBelow(location_override)
+		for(var/atom/A in below)
+			if(!A.CanPass(src, location_override))
+				return FALSE
+
 
 	return TRUE
 
