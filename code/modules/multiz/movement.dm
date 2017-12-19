@@ -52,7 +52,23 @@
 	return FALSE
 
 /mob/living/carbon/human/can_overcome_gravity()
-	return species && species.can_overcome_gravity(src)
+	//First do species check
+	if(species && species.can_overcome_gravity(src))
+		return 1
+	else
+		for(var/atom/a in src.loc)
+			if(a.flags & OBJ_CLIMBABLE)
+				return 1
+
+		//Last check, list of items that could plausibly be used to climb but aren't climbable themselves
+		var/list/objects_to_stand_on = list(
+				/obj/item/weapon/stool,
+				/obj/structure/bed,
+			)
+		for(var/type in objects_to_stand_on)
+			if(locate(type) in src.loc)
+				return 1
+	return 0
 
 /mob/observer/zMove(direction)
 	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
