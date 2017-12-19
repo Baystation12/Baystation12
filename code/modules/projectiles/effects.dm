@@ -128,12 +128,24 @@
 // Stun beam
 //----------------------------
 /obj/effect/projectile/stun/tracer
-	icon_state = "stun"
+	icon_state = "beam_omni"
 
 /obj/effect/projectile/stun/muzzle
-	icon_state = "muzzle_stun"
+	icon_state = "muzzle_omni"
 
 /obj/effect/projectile/stun/impact
+	icon_state = "impact_omni"
+
+//----------------------------
+// Shock beam
+//----------------------------
+/obj/effect/projectile/shock/tracer
+	icon_state = "stun"
+
+/obj/effect/projectile/shock/muzzle
+	icon_state = "muzzle_stun"
+
+/obj/effect/projectile/shock/impact
 	icon_state = "impact_stun"
 
 //----------------------------

@@ -1,18 +1,19 @@
 /obj/item/weapon/gun/energy/taser
-	name = "taser gun"
+	name = "stun gun"
 	desc = "The NT Mk30 NL is a small, low capacity gun used for non-lethal takedowns. Produced by NT, it's actually a licensed version of a W-T design. It can switch between high and low intensity stun shots."
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	max_shots = 5
 	projectile_type = /obj/item/projectile/beam/stun
+	modifystate = "taserstun"
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="taserstun"),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="tasershock"),
 		)
 
 /obj/item/weapon/gun/energy/taser/carbine
-	name = "taser carbine"
+	name = "stun carbine"
 	desc = "The NT Mk44 NL is a high capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
 	icon_state = "tasercarbine"
 	w_class = ITEM_SIZE_LARGE
