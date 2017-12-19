@@ -17,7 +17,7 @@
 		var/obj/item/weapon/pickaxe/P = I
 
 		user.visible_message("<span class='info'>[user] starts clearing [src]</span>")
-		to_chat(user,"<span class='info'>You start clearing [src]... ")
+		to_chat(user,"<span class='info'>You start clearing [src]...</span>")
 
 		playsound(src.loc, P.drill_sound, 20, 1)
 

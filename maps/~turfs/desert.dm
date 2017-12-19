@@ -14,14 +14,14 @@
 		icon_state = "desert[rand(0,4)]"
 
 	if(prob(2))
-		new /obj/structure/tree/palm(src)
-		return .
-
-	if(prob(2))
 		new /obj/effect/flora/desert(src)
 		return .
 
-	if(prob(2))
+	if(prob(1))
+		new /obj/structure/tree/palm(src)
+		return .
+
+	if(prob(1))
 		if(prob(50))
 			new /obj/effect/rocks(src)
 		else
