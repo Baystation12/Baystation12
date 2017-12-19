@@ -29,6 +29,71 @@
 	return
 
 /mob/living/carbon/human/RangedAttack(var/atom/A)
+	//Climbing up open spaces
+	if((istype(A, /turf/simulated/floor) || istype(A, /obj/structure/catwalk)) && isturf(loc) && shadow && !is_physically_disabled()) //Climbing through openspace
+		var/turf/T = get_turf(A)
+		if(T.Adjacent(shadow) && !locate(/obj/structure) in shadow.loc)
+			var/list/objects_to_stand_on = list(
+				/obj/item/weapon/stool,
+				/obj/structure/bed,
+			)
+			var/atom/helper = null
+			var/area/location = get_area(loc)
+			if(!location.has_gravity || can_overcome_gravity())
+				helper = src
+			else
+				for(var/type in objects_to_stand_on)
+					helper = locate(type) in src.loc
+					if(helper)
+						if(istype(helper, /obj/structure/bed/chair/office) && prob(60)) //If you are intent on removing yourself from the round
+							visible_message("<span class='warning'>[src] slips and falls!", "<span class='warning'>\The [helper] moves beneath you and you fall on the ground!")
+							shadow.visible_message("<span class='warning'>[src] slips and falls!")
+
+							//Taken from climbing shaken proc
+							Weaken(3)
+
+							//With any luck you won't kill yourself
+							if(prob(40))
+								var/damage = rand(10,30)
+								var/obj/item/organ/external/target
+
+								target = get_organ(pick(BP_ALL_LIMBS))
+
+								if(target)
+									visible_message("<span class='warning'>[src] lands heavily on their [target.name]!", "<span class='warning'>You land heavily on your [target.name]!")
+									shadow.visible_message("<span class='warning'>[shadow] lands heavily on their [target.name]!")
+									target.take_damage(damage, 0)
+								if(target.parent)
+									target.parent.add_autopsy_data("Fall", damage)
+								else
+									visible_message("<span class='warning'>[src] lands heavily!", "<span class='warning'>You land heavily!")
+									shadow.visible_message("<span class='warning'>[shadow] lands heavily.")
+									adjustBruteLoss(damage)
+
+								UpdateDamageIcon()
+								updatehealth()
+
+						break
+				//Right, second time around we check climbable if we didn't find from list of items
+				if(!helper)
+					for(var/atom/a in src.loc)
+						if(a.flags & OBJ_CLIMBABLE)
+							helper = a
+							break
+				if(!helper)
+					return
+
+			visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
+			shadow.visible_message("<span class='notice'>[shadow] starts climbing onto \the [A]!</span>")
+			if(do_after(src, 50, helper))
+				visible_message("<span class='notice'>[src] climbs onto \the [A]!</span>", "<span class='notice'>You climb onto \the [A]!</span>")
+				shadow.visible_message("<span class='notice'>[shadow] climbs onto \the [A]!</span>")
+				src.Move(T)
+			else
+				visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!", "<span class='warning'>You give up on trying to climb onto \the [A]!")
+				shadow.visible_message("<span class='warning'>[shadow] gives up on trying to climb onto \the [A]!")
+			return
+
 	if(!gloves && !mutations.len) return
 	var/obj/item/clothing/gloves/G = gloves
 	if((LASER in mutations) && a_intent == I_HURT)
