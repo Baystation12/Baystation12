@@ -144,7 +144,11 @@
 
 /obj/structure/sign/warning/lethal_turrets/New()
 	..()
-	desc += " Enter at own risk!."
+	desc += " Enter at own risk!"
+
+/obj/structure/sign/warning/lethal_turrets/ondef/New()
+	..()
+	desc += " Weapons systems activated by default!"
 
 /obj/structure/sign/warning/mail_delivery
 	name = "\improper MAIL DELIVERY"
