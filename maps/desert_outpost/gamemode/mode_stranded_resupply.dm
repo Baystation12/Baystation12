@@ -9,6 +9,9 @@
 /datum/game_mode/stranded/proc/process_resupply()
 	if(world.time > time_next_resupply)
 		time_next_resupply = world.time + interval_resupply
+		if(!available_resupply_points.len)
+			log_admin("Warning: Unable to locate marker to spawn resupply")
+			return
 
 		var/turf/center_turf = locate(world.maxx/2, world.maxy/2, 1)
 		var/obj/effect/landmark/scavenge_spawn/S = pick(available_resupply_points)
@@ -27,7 +30,7 @@
 				spawn(0)
 					spawn_ship_debris(drop_turf)
 			if(2)
-				pilot_message = "Supply run completed, I've dropped off my cargo to the [dir_text]. Good luck!"
+				pilot_message = "Supply run completed, I've dropped off my cargo to the [dir_text]. [pick("Good luck!","Hang in there!","Evacuation is coming!")]"
 				impact_text = "multiple thudding impacts"
 				spawn(0)
 					spawn_resupply(drop_turf)
@@ -169,6 +172,16 @@ var/debris_objs = list(\
 	new /obj/item/weapon/gun/projectile/srs99_sniper(C)
 	new /obj/item/ammo_magazine/m145_ap(C)
 	new /obj/item/ammo_magazine/m145_ap(C)
+
+/datum/game_mode/stranded/proc/spawn_landmine_crate(var/turf/spawn_turf)
+	var/obj/structure/closet/crate/C = new(spawn_turf)
+	C.name = "landmine crate"
+	C.icon_state = "secgearcrate"
+	C.icon_opened = "secgearcrateopen"
+	C.icon_closed = "secgearcrate"
+
+	for(var/i=0,i<6,i++)
+		new /obj/item/device/landmine(C)
 
 /datum/game_mode/stranded/proc/spawn_armour_crate(var/turf/spawn_turf)
 	var/obj/structure/closet/crate/C = new(spawn_turf)

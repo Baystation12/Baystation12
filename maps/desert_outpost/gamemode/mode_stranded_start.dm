@@ -20,7 +20,8 @@
 
 /datum/game_mode/stranded/announce()
 	..()
-	to_world("<span class='notice'>There is [get_evac_time()] until the evacuation pelican arrives.</span>")
+	to_world("<span class='notice'>You must survive for [round(survive_duration/600)] minutes until the evacuation pelican arrives. \
+		Chop down trees, dig up rocks and sand, gather cloth from plants or scavenge resources from around the map.</span>")
 
 /datum/game_mode/stranded/post_setup()
 	..()

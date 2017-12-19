@@ -26,8 +26,8 @@
 	var/spawn_interval = 30
 
 	//deciseconds
-	var/duration_wave_base = 3000
-	var/duration_wave_current = 3000
+	var/duration_wave_base = 6000
+	var/duration_wave_current = 6000
 	var/duration_rest_base = 6000
 	var/duration_rest_current = 6000
 	var/time_wave_cycle = 0
@@ -62,7 +62,7 @@
 
 	var/survive_duration = 18000
 	var/pelican_load_time = 600
-	var/time_pelican_arrive = 9999
+	var/time_pelican_arrive = 18000
 	var/evac_stage = 0
 	var/time_pelican_leave
 	var/all_survivors_dead = 0
