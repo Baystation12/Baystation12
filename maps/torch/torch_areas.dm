@@ -173,6 +173,10 @@
 	name = "Second Deck Central Maintenance"
 	icon_state = "maintcentral"
 
+/area/maintenance/seconddeck/hallway
+	name = "Second Deck Central Hallway"
+	icon_state = "hallC2"
+
 /area/teleporter/seconddeck
 	name = "\improper Second Deck Teleporter"
 	icon_state = "teleporter"
