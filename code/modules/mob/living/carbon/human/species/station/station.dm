@@ -18,6 +18,8 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
+	sexybits_location = BP_GROIN
+
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
@@ -193,6 +195,8 @@
 		"Your overheated skin itches."
 		)
 	cold_discomfort_level = 275
+
+	sexybits_location = BP_GROIN
 
 /datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
