@@ -243,7 +243,15 @@
 	return pain-last_pain
 
 /obj/item/organ/external/proc/stun_act(var/stun_amount, var/agony_amount)
-	return
+	if(agony_amount > 5 && owner && vital && get_pain() > 0.5 * max_damage)
+		owner.visible_message("<span class='warning'>[owner] reels in pain!</span>")
+		if(get_pain() + agony_amount > max_damage)
+			owner.Weaken(6)
+		else
+			owner.Stun(6)
+			owner.drop_l_hand()
+			owner.drop_r_hand()
+		return 1
 
 /obj/item/organ/external/proc/get_agony_multiplier()
 	return 1
