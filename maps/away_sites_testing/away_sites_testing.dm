@@ -12,6 +12,8 @@
 	#include "../away/smugglers/smugglers.dm"
 	#include "../away/casino/casino.dm"
 	#include "../away/magshield/magshield.dm"
+	#include "../away/blueriver/blueriver.dm"
+
 
 	#include "../../code/modules/lobby_music/absconditus.dm"
 

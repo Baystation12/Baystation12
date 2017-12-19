@@ -53,6 +53,9 @@
 /turf/simulated/floor/asteroid/get_footstep_sound()
 	return safepick(footstep_sounds[FOOTSTEP_ASTEROID])
 
+/turf/simulated/floor/exoplanet/snow/get_footstep_sound()
+	return safepick(footstep_sounds[FOOTSTEP_CARPET])
+
 /turf/simulated/floor/Entered(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H))
