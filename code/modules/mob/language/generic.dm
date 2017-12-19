@@ -27,6 +27,7 @@
 	key = "0"
 	flags = RESTRICTED
 	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
+	partial_understanding = list(LANGUAGE_SKRELLIAN = 30, LANGUAGE_SOL_COMMON = 30)
 
 //TODO flag certain languages to use the mob-type specific say_quote and then get rid of these.
 /datum/language/common/get_spoken_verb(var/msg_end)
@@ -53,6 +54,7 @@
 					 "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla",
 					 "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt",
 					 "in", "culpa", "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum")
+	partial_understanding = list(LANGUAGE_SOL_COMMON = 10)
 
 // Criminal language.
 /datum/language/gutter
@@ -62,6 +64,7 @@
 	colour = "rough"
 	key = "3"
 	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
+	partial_understanding = list(LANGUAGE_GALCOM = 10, LANGUAGE_INDEPENDENT = 20, LANGUAGE_SOL_COMMON = 20)
 
 /datum/language/sign
 	name = LANGUAGE_SIGN
