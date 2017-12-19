@@ -5,8 +5,8 @@
 	author = "The Sol Central Government"
 	title = "Sol Central Government Law"
 
-/obj/item/weapon/book/manual/solgov_law/New()
-	..()
+/obj/item/weapon/book/manual/solgov_law/Initialize()
+	. = ..()
 	dat = {"
 
 		<html><head>
@@ -28,8 +28,8 @@
 	author = "The Sol Central Government"
 	title = "The Sol Code of Military Justice"
 
-/obj/item/weapon/book/manual/military_law/New()
-	..()
+/obj/item/weapon/book/manual/military_law/Initialize()
+	. = ..()
 	dat = {"
 
 		<html><head>
@@ -50,8 +50,8 @@
 	author = "The Sol Central Government"
 	title = "Standard Operating Procedure"
 
-/obj/item/weapon/book/manual/sol_sop/New()
-	..()
+/obj/item/weapon/book/manual/sol_sop/Initialize()
+	. = ..()
 	dat = {"
 
 		<html><head>
@@ -70,8 +70,8 @@
 /obj/item/weapon/folder/envelope/blanks
 	desc = "A thick envelope. Nanotrasen logo is stamped in the corner, along with 'CONFIDENTIAL'."
 
-/obj/item/weapon/folder/envelope/blanks/New()
-	..()
+/obj/item/weapon/folder/envelope/blanks/Initialize()
+	. = ..()
 	new/obj/item/weapon/paper/blanks(src)
 
 /obj/item/weapon/paper/blanks
@@ -97,8 +97,8 @@
 /obj/item/weapon/folder/envelope/captain
 	desc = "A thick envelope. SCG crest is stamped in the corner, along with 'TOP SECRET - TORCH UMBRA'."
 
-/obj/item/weapon/folder/envelope/captain/New()
-	..()
+/obj/item/weapon/folder/envelope/captain/Initialize()
+	. = ..()
 	var/memo = {"
 	<tt><center><b><font color='red'>SECRET - CODE WORDS: TORCH</font></b>
 	<h3>SOL CENTRAL GOVERNMENT EXPEDITIONARY COMMAND</h3>
@@ -136,8 +136,8 @@
 /obj/item/weapon/folder/envelope/rep
 	desc = "A thick envelope. SCG crest is stamped in the corner, along with 'TOP SECRET - UMBRA'."
 	
-/obj/item/weapon/folder/envelope/rep/New()
-	..()
+/obj/item/weapon/folder/envelope/rep/Initialize()
+	. = ..()
 	new/obj/item/weapon/paper/umbra(src)
 
 /obj/item/weapon/paper/umbra
