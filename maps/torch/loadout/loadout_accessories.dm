@@ -385,3 +385,7 @@
 	flags = GEAR_HAS_COLOR_SELECTION
 	sort_category = "Accessories"
 	allowed_roles = SEMIFORMAL_ROLES
+
+/datum/gear/accessory/torch_patch
+	display_name = "Torch mission patch"
+	path = /obj/item/clothing/accessory/solgov/torch_patch

@@ -67,6 +67,12 @@ medals
 	desc = "A white heart emblazoned with a red cross awarded to members of the SCG for service as a medical professional in a combat zone."
 	icon_state = "white_heart"
 
+/obj/item/clothing/accessory/solgov/torch_patch
+	name = "\improper Torch mission patch"
+	desc = "A fire resistant shoulder patch, worn by the personnel involved in the Torch Project."
+	icon_state = "torchpatch"
+	slot = ACCESSORY_SLOT_INSIGNIA
+
 /******
 ribbons
 ******/
