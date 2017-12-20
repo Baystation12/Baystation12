@@ -175,7 +175,7 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 	_input_on = TRUE
 	_output_on = TRUE
 	_fully_charged = TRUE
-
+/*
 var/const/NETWORK_COMMAND = "Command"
 var/const/NETWORK_ENGINE  = "Engine"
 var/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
@@ -186,7 +186,7 @@ var/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 			return access_heads
 		if(NETWORK_ENGINE, NETWORK_ENGINEERING_OUTPOST)
 			return access_engine
-
+*/
 /datum/map/torch/default_internal_channels()
 	return list(
 		num2text(PUB_FREQ)   = list(),
