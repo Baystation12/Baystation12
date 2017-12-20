@@ -14,7 +14,7 @@ var/datum/controller/process/alarm/alarm_manager
 
 /datum/controller/process/alarm/setup()
 	name = "alarm"
-	schedule_interval = 20 // every 2 seconds
+	schedule_interval = 25 // every 2 seconds
 	all_handlers = list(atmosphere_alarm, camera_alarm, fire_alarm, motion_alarm, power_alarm)
 	alarm_manager = src
 

@@ -206,7 +206,7 @@ SUBSYSTEM_DEF(garbage)
 
 //this is mainly to separate things profile wise.
 /datum/controller/subsystem/garbage/proc/HardDelete(datum/D)
-	set background = 1
+	set background = BACKGROUND_ENABLED
 	set waitfor = 0
 
 	var/time = world.timeofday

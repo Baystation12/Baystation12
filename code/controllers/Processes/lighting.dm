@@ -23,7 +23,7 @@
 /datum/controller/process/lighting/setup()
 	name = "lighting"
 
-	schedule_interval = world.tick_lag // run as fast as you possibly can
+	schedule_interval = world.tick_lag*2 // run as fast as you possibly can
 	sleep_interval = 10
 	create_all_lighting_overlays()
 	lighting_overlays_initialised = TRUE
