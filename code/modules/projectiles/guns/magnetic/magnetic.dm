@@ -15,6 +15,7 @@
 
 	var/obj/item/loaded                                        // Currently loaded object, for retrieval/unloading.
 	var/load_type = /obj/item/stack/rods                       // Type of stack to load with.
+	var/load_sheet_max = 1									   // Maximum number of "sheets" you can load from a stack.
 	var/projectile_type = /obj/item/projectile/bullet/magnetic // Actual fire type, since this isn't throw_at rod launcher.
 
 	var/power_cost = 950                                       // Cost per fire, should consume almost an entire basic cell.
@@ -127,18 +128,34 @@
 
 	if(istype(thing, load_type))
 
-		if(loaded)
-			to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
-			return
-
 		// This is not strictly necessary for the magnetic gun but something using
 		// specific ammo types may exist down the track.
 		var/obj/item/stack/ammo = thing
 		if(!istype(ammo))
+			if(loaded)
+				to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
+				return
 			loaded = thing
 			user.drop_from_inventory(thing)
 			thing.forceMove(src)
+		else if(load_sheet_max > 1)
+			var ammo_count = 0
+			var/obj/item/stack/loaded_ammo = loaded
+			if(!istype(loaded_ammo))
+				ammo_count = min(load_sheet_max,ammo.amount)
+				loaded = new load_type(src, ammo_count)
+			else
+				ammo_count = min(load_sheet_max-loaded_ammo.amount,ammo.amount)
+				loaded_ammo.amount += ammo_count
+			if(ammo_count <= 0)
+				// This will also display when someone tries to insert a stack of 0, but that shouldn't ever happen anyway.
+				to_chat(user, "<span class='warning'>\The [src] is already fully loaded.</span>")
+				return
+			ammo.use(ammo_count)
 		else
+			if(loaded)
+				to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
+				return
 			loaded = new load_type(src, 1)
 			ammo.use(1)
 
