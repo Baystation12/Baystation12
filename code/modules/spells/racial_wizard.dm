@@ -158,12 +158,12 @@
 	hud_state = "wiz_unathi"
 
 /spell/moghes_blessing/choose_targets(mob/user = usr)
-	var/list/hands = list()
+	. = list()
 	for(var/obj/item/I in list(user.l_hand, user.r_hand))
 		//make sure it's not already blessed
 		if(istype(I) && !has_extension(I, /datum/extension/moghes_blessing))
-			hands += I
-	return hands
+			. += I
+	return .
 
 /spell/moghes_blessing/cast(var/list/targets, mob/user)
 	for(var/obj/item/I in targets)

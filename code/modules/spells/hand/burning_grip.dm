@@ -19,13 +19,13 @@
 	return 1
 
 /spell/hand/burning_grip/cast_hand(var/mob/living/carbon/human/H, var/mob/user)
-	var/list/targets = list()
+	. = list()
 	if(H.l_hand)
-		targets += BP_L_HAND
+		. += BP_L_HAND
 	if(H.r_hand)
-		targets += BP_R_HAND
+		. += BP_R_HAND
 
-	for(var/organ in targets)
+	for(var/organ in .)
 		var/obj/item/organ/external/E = H.get_organ(organ)
 		E.take_damage(burn=10, used_weapon = "hot iron")
 		if(E.can_feel_pain())

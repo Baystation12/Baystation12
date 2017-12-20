@@ -244,13 +244,13 @@
 	..()
 
 /mob/living/bot/mulebot/proc/GetBeaconList()
-	var/list/beaconlist = list()
+	. = list()
 	for(var/obj/machinery/navbeacon/N in navbeacons)
 		if(!N.codes["delivery"])
 			continue
-		beaconlist.Add(N.location)
-		beaconlist[N.location] = N
-	return beaconlist
+		. += N.location
+		.[N.location] = N
+	return .
 
 /mob/living/bot/mulebot/proc/load(var/atom/movable/C)
 	if(busy || load || get_dist(C, src) > 1 || !isturf(C.loc))

@@ -42,12 +42,12 @@
 
 /datum/ai_laws/proc/laws_to_state()
 	sort_laws()
-	var/list/statements = new()
+	. = list()
 	for(var/datum/ai_law/law in sorted_laws)
 		if(get_state_law(law))
-			statements += law
+			. += law
 
-	return statements
+	return .
 
 /datum/ai_laws/proc/sort_laws()
 	if(sorted_laws.len)

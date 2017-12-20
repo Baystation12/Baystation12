@@ -44,25 +44,25 @@ GLOBAL_LIST_EMPTY(exploration_positions)
 	return (job in GLOB.command_positions)
 
 /proc/get_job_datums()
-	var/list/occupations = list()
+	. = list()
 	var/list/all_jobs = typesof(/datum/job)
 
 	for(var/A in all_jobs)
 		var/datum/job/job = new A()
 		if(!job)	continue
-		occupations += job
+		. += job
 
-	return occupations
+	return .
 
 /proc/get_alternate_titles(var/job)
 	var/list/jobs = get_job_datums()
-	var/list/titles = list()
+	. = list()
 
 	for(var/datum/job/J in jobs)
 		if(J.title == job)
-			titles = J.alt_titles
+			. = J.alt_titles
 
-	return titles
+	return .
 
 /proc/calculate_department_rank(var/mob/living/carbon/human/M)
 	if(istype(M, /mob/living/carbon/human))

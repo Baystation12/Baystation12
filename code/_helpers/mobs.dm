@@ -19,13 +19,13 @@
 #define blocked_mult(blocked) max(1 - (blocked/100), 0)
 
 /proc/mobs_in_view(var/range, var/source)
-	var/list/mobs = list()
+	. = list()
 	for(var/atom/movable/AM in view(range, source))
 		var/M = AM.get_mob()
 		if(M)
-			mobs += M
+			. += M
 
-	return mobs
+	return .
 
 proc/random_hair_style(gender, species = SPECIES_HUMAN)
 	var/h_style = "Bald"
@@ -233,11 +233,11 @@ proc/age2agedescription(age)
 		qdel(progbar)
 
 /proc/able_mobs_in_oview(var/origin)
-	var/list/mobs = list()
+	. = list()
 	for(var/mob/living/M in oview(origin)) // Only living mobs are considered able.
 		if(!M.is_physically_disabled())
-			mobs += M
-	return mobs
+			. += M
+	return .
 
 // Returns true if M was not already in the dead mob list
 /mob/proc/switch_from_living_to_dead_mob_list()

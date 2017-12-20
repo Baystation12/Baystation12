@@ -220,15 +220,15 @@
  *  Get a list of contents of this organ and all the child organs
  */
 /obj/item/organ/external/proc/get_contents_recursive()
-	var/list/all_items = list()
+	. = list()
 
-	all_items.Add(implants)
-	all_items.Add(internal_organs)
+	. += implants
+	. += internal_organs
 
 	for(var/obj/item/organ/external/child in children)
-		all_items.Add(child.get_contents_recursive())
+		. += child.get_contents_recursive()
 
-	return all_items
+	return .
 
 /obj/item/organ/external/proc/is_dislocated()
 	if(dislocated > 0)

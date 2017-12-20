@@ -25,12 +25,12 @@ var/datum/controller/process/alarm/alarm_manager
 		SCHECK
 
 /datum/controller/process/alarm/proc/active_alarms()
-	var/list/all_alarms = new
+	. = list()
 	for(var/datum/alarm_handler/AH in all_handlers)
 		var/list/alarms = AH.alarms
-		all_alarms += alarms
+		. += alarms
 
-	return all_alarms
+	return .
 
 /datum/controller/process/alarm/proc/number_of_active_alarms()
 	var/list/alarms = active_alarms()

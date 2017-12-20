@@ -95,14 +95,14 @@ obj/machinery/atmospherics/binary
 		return 1
 
 	return_network_air(datum/pipe_network/reference)
-		var/list/results = list()
+		. = list()
 
 		if(network1 == reference)
-			results += air1
+			. += air1
 		if(network2 == reference)
-			results += air2
+			. += air2
 
-		return results
+		return .
 
 	disconnect(obj/machinery/atmospherics/reference)
 		if(reference==node1)

@@ -86,11 +86,11 @@
 	return STATUS_UPDATE
 
 /datum/topic_state/air_alarm/href_list(var/mob/user)
-	var/list/extra_href = list()
-	extra_href["remote_connection"] = 1
-	extra_href["remote_access"] = has_access(user)
+	. = list()
+	.["remote_connection"] = 1
+	.["remote_access"] = has_access(user)
 
-	return extra_href
+	return .
 
 /datum/topic_state/air_alarm/proc/has_access(var/mob/user)
 	return user && (isAI(user) || atmos_control.access.allowed(user) || atmos_control.emagged || air_alarm.rcon_setting == RCON_YES || (air_alarm.alarm_area.atmosalm && air_alarm.rcon_setting == RCON_AUTO))

@@ -104,12 +104,12 @@
 	return 0
 
 /mob/living/silicon/proc/law_channels()
-	var/list/channels = new()
-	channels += MAIN_CHANNEL
-	channels += silicon_radio.channels
-	channels += additional_law_channels
-	channels += "Binary"
-	return channels
+	. = list()
+	. += MAIN_CHANNEL
+	. += silicon_radio.channels
+	. += additional_law_channels
+	. += "Binary"
+	return .
 
 /mob/living/silicon/proc/lawsync()
 	laws_sanity_check()

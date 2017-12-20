@@ -164,7 +164,7 @@
 // Parameters: 1 (operator - mob which is operating the console.)
 // Description: Returns NanoUI-friendly list of accessible cyborgs.
 /obj/machinery/computer/robotics/proc/get_cyborgs(var/mob/operator)
-	var/list/robots = list()
+	. = list()
 
 	for(var/mob/living/silicon/robot/R in GLOB.silicon_mob_list)
 		// Ignore drones
@@ -198,8 +198,8 @@
 		if(operator && istype(operator, /mob/living/silicon/ai) && (R.connected_ai == operator) && (operator.mind.special_role && operator.mind.original == operator))
 			robot["hacked"] = R.emagged ? 1 : 0
 			robot["hackable"] = R.emagged? 0 : 1
-		robots.Add(list(robot))
-	return robots
+		. += list(robot)
+	return .
 
 // Proc: get_cyborg_by_name()
 // Parameters: 1 (name - Cyborg we are trying to find)

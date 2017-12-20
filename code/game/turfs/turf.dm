@@ -203,12 +203,12 @@ var/const/enterloopsanity = 100
 		return get_dist(src,t)
 
 /turf/proc/AdjacentTurfsSpace()
-	var/L[] = new()
-	for(var/turf/t in oview(src,1))
+	. = list()
+	for(var/turf/t in otrange(src,1))
 		if(!t.density)
 			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
-				L.Add(t)
-	return L
+				. += t
+	return .
 
 /turf/proc/process()
 	return PROCESS_KILL

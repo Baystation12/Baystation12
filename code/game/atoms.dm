@@ -148,10 +148,10 @@
  */
 
 /atom/proc/search_contents_for(path,list/filter_path=null)
-	var/list/found = list()
+	. = list()
 	for(var/atom/A in src)
 		if(istype(A, path))
-			found += A
+			. += A
 		if(filter_path)
 			var/pass = 0
 			for(var/type in filter_path)
@@ -159,8 +159,8 @@
 			if(!pass)
 				continue
 		if(A.contents.len)
-			found += A.search_contents_for(path,filter_path)
-	return found
+			. += A.search_contents_for(path,filter_path)
+	return .
 
 
 

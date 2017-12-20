@@ -179,7 +179,7 @@ nanoui is used to open and update nano browser uis
 /datum/nanoui/proc/get_config_data()
 	var/name = "[src_object]"
 	name = sanitize(name)
-	var/list/config_data = list(
+	. = list(
 			"title" = title,
 			"srcObject" = list("name" = name),
 			"stateKey" = state_key,
@@ -192,7 +192,7 @@ nanoui is used to open and update nano browser uis
 			"mapZLevels" = GLOB.using_map.map_levels,
 			"user" = list("name" = user.name)
 		)
-	return config_data
+	return .
 
  /**
   * Get data to sent to the ui.
@@ -204,12 +204,12 @@ nanoui is used to open and update nano browser uis
 /datum/nanoui/proc/get_send_data(var/list/data)
 	var/list/config_data = get_config_data()
 
-	var/list/send_data = list("config" = config_data)
+	. = list("config" = config_data)
 
 	if (!isnull(data))
-		send_data["data"] = data
+		.["data"] = data
 
-	return send_data
+	return .
 
  /**
   * Set the browser window options for this ui

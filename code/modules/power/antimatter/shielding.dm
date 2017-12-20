@@ -1,11 +1,11 @@
 //like orange but only checks north/south/east/west for one step
 proc/cardinalrange(var/center)
-	var/list/things = list()
+	. = list()
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(center, direction)
 		if(!T) continue
-		things += T.contents
-	return things
+		. += T.contents
+	return .
 
 /obj/machinery/am_shielding
 	name = "antimatter reactor section"

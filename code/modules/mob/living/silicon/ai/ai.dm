@@ -479,16 +479,16 @@ var/list/ai_verbs_default = list(
 	if(check_unable())
 		return
 
-	var/list/cameralist = new()
+	. = list()
 	for (var/obj/machinery/camera/C in cameranet.cameras)
 		if(!C.can_use())
 			continue
 		var/list/tempnetwork = difflist(C.network,restricted_camera_networks,1)
 		for(var/i in tempnetwork)
-			cameralist[i] = i
+			.[i] = i
 
-	cameralist = sortAssoc(cameralist)
-	return cameralist
+	. = sortAssoc(.)
+	return .
 
 /mob/living/silicon/ai/proc/ai_network_change(var/network in get_camera_network_list())
 	set category = "Silicon Commands"

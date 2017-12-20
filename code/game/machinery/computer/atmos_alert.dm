@@ -75,8 +75,8 @@ var/global/list/minor_air_alarms = list()
 var/datum/topic_state/air_alarm_topic/air_alarm_topic = new()
 
 /datum/topic_state/air_alarm_topic/href_list(var/mob/user)
-	var/list/extra_href = list()
-	extra_href["remote_connection"] = 1
-	extra_href["remote_access"] = 1
+	. = list()
+	.["remote_connection"] = 1
+	.["remote_access"] = 1
 
-	return extra_href
+	return .

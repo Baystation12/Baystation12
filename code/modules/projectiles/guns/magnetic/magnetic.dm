@@ -44,22 +44,22 @@
 	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/gun/magnetic/update_icon()
-	var/list/overlays_to_add = list()
+	. = list()
 	if(removable_components)
 		if(cell)
-			overlays_to_add += image(icon, "[icon_state]_cell")
+			. += image(icon, "[icon_state]_cell")
 		if(capacitor)
-			overlays_to_add += image(icon, "[icon_state]_capacitor")
+			. += image(icon, "[icon_state]_capacitor")
 	if(!cell || !capacitor)
-		overlays_to_add += image(icon, "[icon_state]_red")
+		. += image(icon, "[icon_state]_red")
 	else if(capacitor.charge < power_cost)
-		overlays_to_add += image(icon, "[icon_state]_amber")
+		. += image(icon, "[icon_state]_amber")
 	else
-		overlays_to_add += image(icon, "[icon_state]_green")
+		. += image(icon, "[icon_state]_green")
 	if(loaded)
-		overlays_to_add += image(icon, "[icon_state]_loaded")
+		. += image(icon, "[icon_state]_loaded")
 
-	overlays = overlays_to_add
+	overlays = .
 	..()
 
 /obj/item/weapon/gun/magnetic/proc/show_ammo(var/mob/user)

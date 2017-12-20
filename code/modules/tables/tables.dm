@@ -270,20 +270,20 @@
 // is to avoid filling the list with nulls, as place_shard won't place shards of certain materials (holo-wood, holo-steel)
 
 /obj/structure/table/proc/break_to_parts(full_return = 0)
-	var/list/shards = list()
+	. = list()
 	var/obj/item/weapon/material/shard/S = null
 	if(reinforced)
 		if(reinforced.stack_type && (full_return || prob(20)))
 			reinforced.place_sheet(loc)
 		else
 			S = reinforced.place_shard(loc)
-			if(S) shards += S
+			if(S) . += S
 	if(material)
 		if(material.stack_type && (full_return || prob(20)))
 			material.place_sheet(loc)
 		else
 			S = material.place_shard(loc)
-			if(S) shards += S
+			if(S) . += S
 	if(carpeted && (full_return || prob(50))) // Higher chance to get the carpet back intact, since there's no non-intact option
 		new /obj/item/stack/tile/carpet(src.loc)
 	if(full_return || prob(20))
@@ -291,9 +291,9 @@
 	else
 		var/material/M = get_material_by_name(DEFAULT_WALL_MATERIAL)
 		S = M.place_shard(loc)
-		if(S) shards += S
+		if(S) . += S
 	qdel(src)
-	return shards
+	return .
 
 /obj/structure/table/update_icon()
 	if(flipped != 1)

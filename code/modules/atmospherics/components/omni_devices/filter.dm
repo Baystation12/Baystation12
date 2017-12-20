@@ -108,10 +108,10 @@
 		ui.open()
 
 /obj/machinery/atmospherics/omni/filter/proc/build_uidata()
-	var/list/data = new()
+	. = list()
 
-	data["power"] = use_power
-	data["config"] = configuring
+	.["power"] = use_power
+	.["config"] = configuring
 
 	var/portData[0]
 	for(var/datum/omni_port/P in ports)
@@ -139,12 +139,12 @@
 										"f_type" = f_type)
 
 	if(portData.len)
-		data["ports"] = portData
+		.["ports"] = portData
 	if(output)
-		data["set_flow_rate"] = round(set_flow_rate*10)		//because nanoui can't handle rounded decimals.
-		data["last_flow_rate"] = round(last_flow_rate*10)
+		.["set_flow_rate"] = round(set_flow_rate*10)		//because nanoui can't handle rounded decimals.
+		.["last_flow_rate"] = round(last_flow_rate*10)
 
-	return data
+	return .
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(var/mode = ATM_NONE)
 	switch(mode)

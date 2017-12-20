@@ -115,7 +115,7 @@ obj/machinery/resleever/Process()
 		ui.open()
 
 /obj/machinery/resleever/ui_data()
-	var/list/data = list(
+	. = list(
 		"name" = occupant_name,
 		"lace" = lace_name,
 		"isOccupiedEjectable" = isOccupiedEjectable(),
@@ -126,7 +126,7 @@ obj/machinery/resleever/Process()
 		"ready" = readyToBegin()
 	)
 
-	return data
+	return .
 
 /obj/machinery/resleever/ui_act(action, params)
 	if(..())

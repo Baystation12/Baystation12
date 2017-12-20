@@ -309,42 +309,42 @@ default behaviour is:
 
 //Recursive function to find everything a mob is holding.
 /mob/living/get_contents(var/obj/item/weapon/storage/Storage = null)
-	var/list/L = list()
+	. = list()
 
 	if(Storage) //If it called itself
-		L += Storage.return_inv()
+		. += Storage.return_inv()
 
 		//Leave this commented out, it will cause storage items to exponentially add duplicate to the list
 		//for(var/obj/item/weapon/storage/S in Storage.return_inv()) //Check for storage items
 		//	L += get_contents(S)
 
 		for(var/obj/item/weapon/gift/G in Storage.return_inv()) //Check for gift-wrapped items
-			L += G.gift
+			. += G.gift
 			if(istype(G.gift, /obj/item/weapon/storage))
-				L += get_contents(G.gift)
+				. += get_contents(G.gift)
 
 		for(var/obj/item/smallDelivery/D in Storage.return_inv()) //Check for package wrapped items
-			L += D.wrapped
+			. += D.wrapped
 			if(istype(D.wrapped, /obj/item/weapon/storage)) //this should never happen
-				L += get_contents(D.wrapped)
-		return L
+				. += get_contents(D.wrapped)
+		return .
 
 	else
 
-		L += src.contents
+		. += src.contents
 		for(var/obj/item/weapon/storage/S in src.contents)	//Check for storage items
-			L += get_contents(S)
+			. += get_contents(S)
 
 		for(var/obj/item/weapon/gift/G in src.contents) //Check for gift-wrapped items
-			L += G.gift
+			. += G.gift
 			if(istype(G.gift, /obj/item/weapon/storage))
-				L += get_contents(G.gift)
+				. += get_contents(G.gift)
 
 		for(var/obj/item/smallDelivery/D in src.contents) //Check for package wrapped items
-			L += D.wrapped
+			. += D.wrapped
 			if(istype(D.wrapped, /obj/item/weapon/storage)) //this should never happen
-				L += get_contents(D.wrapped)
-		return L
+				. += get_contents(D.wrapped)
+		return .
 
 /mob/living/proc/check_contents_for(A)
 	var/list/L = src.get_contents()

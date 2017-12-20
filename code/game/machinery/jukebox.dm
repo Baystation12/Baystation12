@@ -98,14 +98,14 @@ datum/track/New(var/title_name, var/audio)
 	for(var/datum/track/T in tracks)
 		juke_tracks.Add(T.title)
 
-	var/list/data = list(
+	. = list(
 		"current_track" = current_track != null ? current_track.title : "No track selected",
 		"playing" = playing,
 		"tracks" = juke_tracks,
 		"volume" = volume
 	)
 
-	return data
+	return .
 
 /obj/machinery/media/jukebox/ui_act(action, params)
 	if(..())

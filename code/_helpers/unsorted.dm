@@ -380,20 +380,20 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		else
 			logged_list |= M
 		old_list.Remove(named)
-	var/list/new_list = list()
-	new_list += AI_list
-	new_list += keyclient_list
-	new_list += key_list
-	new_list += logged_list
-	new_list += Dead_list
-	return new_list
+	. = list()
+	. += AI_list
+	. += keyclient_list
+	. += key_list
+	. += logged_list
+	. += Dead_list
+	return .
 
 //Returns a list of all mobs with their name
 /proc/getmobs()
 
 	var/list/mobs = sortmobs()
 	var/list/names = list()
-	var/list/creatures = list()
+	. = list()
 	var/list/namecounts = list()
 	for(var/mob/M in mobs)
 		var/name = M.name
@@ -410,46 +410,46 @@ Turf and target are seperate in case you want to teleport some distance from a t
 				name += " \[observer\]"
 			else
 				name += " \[dead\]"
-		creatures[name] = M
+		.[name] = M
 
-	return creatures
+	return .
 
 /proc/get_follow_targets()
 	return follow_repository.get_follow_targets()
 
 //Orders mobs by type then by name
 /proc/sortmobs()
-	var/list/moblist = list()
+	. = list()
 	var/list/sortmob = sortAtom(SSmobs.mob_list)
 	for(var/mob/observer/eye/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/silicon/ai/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/silicon/pai/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/silicon/robot/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/deity/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/carbon/human/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/carbon/brain/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/carbon/alien/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/observer/ghost/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/new_player/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/carbon/slime/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/simple_animal/M in sortmob)
-		moblist.Add(M)
+		. += M
 //	for(var/mob/living/silicon/hivebot/M in world)
 //		mob_list.Add(M)
 //	for(var/mob/living/silicon/hive_mainframe/M in world)
 //		mob_list.Add(M)
-	return moblist
+	return .
 
 //Forces a variable to be posative
 /proc/modulus(var/M)
@@ -534,15 +534,15 @@ proc/GaussRandRound(var/sigma,var/roundto)
 */
 /atom/proc/GetAllContents()
 	var/list/processing_list = list(src)
-	var/list/assembled = list()
+	. = list()
 	while(processing_list.len)
 		var/atom/A = processing_list[1]
 		processing_list.Cut(1, 2)
 		//Byond does not allow things to be in multiple contents, or double parent-child hierarchies, so only += is needed
 		//This is also why we don't need to check against assembled as we go along
 		processing_list += A.contents
-		assembled += A
-	return assembled
+		. += A
+	return .
 
 //Step-towards method of determining whether one atom can see another. Similar to viewers()
 /proc/can_see(var/atom/source, var/atom/target, var/length=5) // I couldn't be arsed to do actual raycasting :I This is horribly inaccurate.
@@ -614,10 +614,10 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		var/area/areatemp = areatype
 		areatype = areatemp.type
 
-	var/list/areas = new/list()
+	. = list()
 	for(var/area/N in all_areas)
-		if(istype(N, areatype)) areas += N
-	return areas
+		if(istype(N, areatype)) . += N
+	return .
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all atoms	(objs, turfs, mobs) in areas of that type of that type in the world.
@@ -628,12 +628,12 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		var/area/areatemp = areatype
 		areatype = areatemp.type
 
-	var/list/atoms = new/list()
+	. = list()
 	for(var/area/N in all_areas)
 		if(istype(N, areatype))
 			for(var/atom/A in N)
-				atoms += A
-	return atoms
+				. += A
+	return .
 
 /area/proc/move_contents_to(var/area/A)
 	//Takes: Area.
@@ -1122,7 +1122,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	simulated = 0
 
 	see_in_dark = 1e6
-	
+
 	virtual_mob = null
 
 /atom/proc/get_light_and_color(var/atom/origin)

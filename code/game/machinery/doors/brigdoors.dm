@@ -161,12 +161,12 @@
 	tg_ui_interact(user)
 
 /obj/machinery/door_timer/ui_data(mob/user)
-	var/list/data = list()
+	. = list()
 
-	data["timing"] = timing
-	data["releasetime"] = releasetime
-	data["timetoset"] = timetoset
-	data["timeleft"] = timeleft()
+	.["timing"] = timing
+	.["releasetime"] = releasetime
+	.["timetoset"] = timetoset
+	.["timeleft"] = timeleft()
 
 	var/list/flashes = list()
 
@@ -178,8 +178,8 @@
 			flashdata["status"] = 1
 		flashes[++flashes.len] = flashdata
 
-	data["flashes"] = flashes
-	return data
+	.["flashes"] = flashes
+	return .
 
 
 /obj/machinery/door_timer/ui_act(action, params)

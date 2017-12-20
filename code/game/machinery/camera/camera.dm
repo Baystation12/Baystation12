@@ -323,16 +323,16 @@
 	return 1
 
 /obj/machinery/camera/proc/can_see()
-	var/list/see = null
+	. = list()
 	var/turf/pos = get_turf(src)
 	if(!pos)
 		return list()
 
 	if(isXRay())
-		see = range(view_range, pos)
+		. = range(view_range, pos)
 	else
-		see = hear(view_range, pos)
-	return see
+		. = hear(view_range, pos)
+	return .
 
 /atom/proc/auto_turn()
 	//Automatically turns based on nearby walls.

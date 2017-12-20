@@ -276,13 +276,13 @@
 	return 1
 
 /obj/machinery/atmospherics/omni/return_network_air(datum/pipe_network/reference)
-	var/list/results = list()
+	. = list()
 
 	for(var/datum/omni_port/P in ports)
 		if(P.network == reference)
-			results += P.air
+			. += P.air
 
-	return results
+	return .
 
 /obj/machinery/atmospherics/omni/disconnect(obj/machinery/atmospherics/reference)
 	for(var/datum/omni_port/P in ports)

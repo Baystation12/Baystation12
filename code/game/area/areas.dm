@@ -43,10 +43,10 @@
 		machinecache += M
 
 /area/proc/get_cameras()
-	var/list/cameras = list()
+	. = list()
 	for (var/obj/machinery/camera/C in src)
-		cameras += C
-	return cameras
+		. += C
+	return .
 
 /area/proc/is_shuttle_locked()
 	return 0
@@ -167,7 +167,6 @@
 */
 
 /area/proc/powered(var/chan)		// return true if the area has power to given channel
-
 	if(!requires_power)
 		return 1
 	if(always_unpowered)
@@ -179,7 +178,6 @@
 			return power_light
 		if(ENVIRON)
 			return power_environ
-
 	return 0
 
 // called when power status changes
@@ -190,17 +188,17 @@
 		update_icon()
 
 /area/proc/usage(var/chan)
-	var/used = 0
+	. = 0
 	switch(chan)
 		if(LIGHT)
-			used += used_light
+			. += used_light
 		if(EQUIP)
-			used += used_equip
+			. += used_equip
 		if(ENVIRON)
-			used += used_environ
+			. += used_environ
 		if(TOTAL)
-			used += used_light + used_equip + used_environ
-	return used
+			. += used_light + used_equip + used_environ
+	return .
 
 /area/proc/clear_usage()
 	used_equip = 0

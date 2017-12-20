@@ -152,13 +152,13 @@ datum/uplink_item/dd_SortValue()
 * Support procs *
 ****************/
 /proc/get_random_uplink_items(var/obj/item/device/uplink/U, var/remaining_TC, var/loc)
-	var/list/bought_items = list()
+	. = list()
 	while(remaining_TC)
 		var/datum/uplink_random_selection/uplink_selection = get_uplink_random_selection_by_type(/datum/uplink_random_selection/default)
-		var/datum/uplink_item/I = uplink_selection.get_random_item(remaining_TC, U, bought_items)
+		var/datum/uplink_item/I = uplink_selection.get_random_item(remaining_TC, U, .)
 		if(!I)
 			break
-		bought_items += I
+		. += I
 		remaining_TC -= I.cost(remaining_TC, U)
 
-	return bought_items
+	return .
