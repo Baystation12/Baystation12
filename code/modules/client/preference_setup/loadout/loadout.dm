@@ -94,7 +94,7 @@ var/list/gear_datums = list()
 					gears -= gear_name
 				else
 					var/datum/gear/G = gear_datums[gear_name]
-					if(total_cost + G.cost > MAX_GEAR_COST)
+					if(total_cost + G.cost > GetMaxGearCost(pref.client))
 						gears -= gear_name
 					else
 						total_cost += G.cost
@@ -211,6 +211,10 @@ var/list/gear_datums = list()
 /datum/category_item/player_setup_item/loadout/proc/set_tweak_metadata(var/datum/gear/G, var/datum/gear_tweak/tweak, var/new_metadata)
 	var/list/metadata = get_gear_metadata(G)
 	metadata["[tweak]"] = new_metadata
+
+/datum/category_item/player_setup_item/loadout/proc/GetMaxGearCost(var/client/C)
+	if(C && C.donator)
+		return MAX_GEAR_COST+(C.donator*4)
 
 /datum/category_item/player_setup_item/loadout/OnTopic(href, href_list, user)
 	if(href_list["toggle_gear"])
