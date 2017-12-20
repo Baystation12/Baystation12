@@ -92,6 +92,8 @@
 		runtime_log << "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]"
 		log = runtime_log
 
+	enfmods = new //Moved here to prevent runtimes.
+
 	callHook("startup")
 	finished_init = 1
 	//Emergency Fix
@@ -118,11 +120,10 @@
 */
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
-	spawn(50) //Attempted to move to spawn() so that the game loads clients quicker.
-		processScheduler = new
-		master_controller = new /datum/controller/game_controller()
-		enfmods = new
+	processScheduler = new
+	master_controller = new /datum/controller/game_controller()
 
+	spawn(40) //Attempted to move to spawn() so that the game loads clients quicker.
 		processScheduler.deferSetupFor(/datum/controller/process/ticker)
 		processScheduler.setup()
 		Master.Initialize(10, FALSE)
@@ -576,8 +577,7 @@ var/global/cpustate = "Unknown"
 /hook/startup/proc/loadMods()
 	world.load_mods()
 	world.load_mentors() // no need to write another hook.
-	spawn(20)
-		world.load_enfmods()
+	world.load_enfmods()
 	return 1
 
 /world/proc/load_mods()

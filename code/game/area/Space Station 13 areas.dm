@@ -239,4 +239,4 @@ area/space/atmosalert()
 				spawn(sound_delay)
 					sound_to(H, S)
 
-	spawn(60) .()
+	spawn(85) .()
