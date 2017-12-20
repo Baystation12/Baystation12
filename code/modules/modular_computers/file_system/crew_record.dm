@@ -160,14 +160,14 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		var/name = CR.GetName()
 		var/rank = CR.GetPosition()
 		mil_ranks[name] = ""
-
+/*
 		if(GLOB.using_map.flags & MAP_HAS_RANK)
 			var/datum/mil_branch/branch_obj = mil_branches.get_branch(CR.GetBranch())
 			var/datum/mil_rank/rank_obj = mil_branches.get_rank(CR.GetBranch(), CR.GetRank())
 
 			if(branch_obj && rank_obj)
 				mil_ranks[name] = "<abbr title=\"[rank_obj.name], [branch_obj.name]\">[rank_obj.name_short]</abbr> "
-
+*/
 		if(OOC)
 			var/active = 0
 			for(var/mob/M in GLOB.player_list)
