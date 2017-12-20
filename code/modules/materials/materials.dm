@@ -177,7 +177,7 @@ var/list/name_to_material
 // Return the matter comprising this material.
 /material/proc/get_matter()
 	var/list/temp_matter = list()
-	if(islist(composite_material))
+	if(length(composite_material))
 		for(var/material_string in composite_material)
 			temp_matter[material_string] = composite_material[material_string]
 	else if(SHEET_MATERIAL_AMOUNT)
