@@ -124,6 +124,7 @@
 		/area/mine,
 		/area/ship,
 		/area/smugglers,
+		/area/slavers_base,
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
