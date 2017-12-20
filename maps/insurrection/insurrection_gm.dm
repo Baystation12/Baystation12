@@ -192,5 +192,11 @@
 	else
 		return 0
 
+#undef BOMB_ACTIVE
+#undef ROUND_ENDED
+
+#undef WARN_BOMB
+#undef WARN_GENERAL
+
 #undef LAUNCH_ABORTED
 #undef LAUNCH_UNDERWAY
