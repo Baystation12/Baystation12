@@ -12,7 +12,7 @@ var/datum/controller/subsystem/icon_updater/iconupdater
 
 /datum/controller/subsystem/icon_updater/New()
 	NEW_SS_GLOBAL(iconupdater)
-	spawn(600) //After 60 seconds, so when everything has pretty much initialized..
+	spawn(500) //After 50 seconds, so when everything has pretty much initialized..
 		report_progress("Completing icon refresh.")
 		Instant_Queue() //We do the entire queue now so we won't have to catch up.
 
@@ -40,14 +40,15 @@ var/datum/controller/subsystem/icon_updater/iconupdater
 			return
 
 /datum/controller/subsystem/icon_updater/proc/Instant_Queue()
+	var/iconscomplete
 	while(icon_updates.len)
 		var/tmp/atom/A = icon_updates[1]
 		if(!QDELETED(A))
 			A.update_icon()
-			iconslasttick++
+			iconscomplete++
 		icon_updates.Cut(1, 2)
 		CHECK_TICK2(90)
-	report_progress("Icon refresh completed. [iconslasttick] icons refreshed.")
+	report_progress("Icon refresh completed. [iconscomplete] icons refreshed.")
 
 #define ADD_ICON_QUEUE(THING)           \
 	if(!QDELETED(THING))                \
