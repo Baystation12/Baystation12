@@ -10,7 +10,7 @@ obj/machinery/door/airlock
 
 obj/machinery/door/airlock/Process()
 	..()
-	if (arePowerSystemsOn())
+	if (arePowerSystemsOn() && cur_command)
 		execute_current_command()
 
 obj/machinery/door/airlock/receive_signal(datum/signal/signal)
@@ -31,9 +31,9 @@ obj/machinery/door/airlock/proc/command(var/new_command)
 obj/machinery/door/airlock/proc/execute_current_command()
 	if(operating)
 		return //emagged or busy doing something else
-
-	if (!cur_command)
-		return
+//	~L: Checked in Process()
+//	if (!cur_command)
+//		return
 
 	do_command(cur_command)
 	if (command_completed(cur_command))

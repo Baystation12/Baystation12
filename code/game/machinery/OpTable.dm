@@ -10,7 +10,7 @@
 	active_power_usage = 5
 	var/mob/living/carbon/human/victim = null
 	var/strapped = 0.0
-
+	var/next_process_time = 0
 	var/obj/machinery/computer/operating/computer = null
 
 /obj/machinery/optable/Initialize()
@@ -78,7 +78,9 @@
 	return 0
 
 /obj/machinery/optable/Process()
-	check_victim()
+	if(next_process_time <= world.time)
+		next_process_time = world.time + 40		// 4 second delays between process updates
+		check_victim()
 
 /obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)
 	if (C == user)

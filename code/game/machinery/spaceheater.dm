@@ -13,6 +13,7 @@
 	var/heating_power = 40 KILOWATTS
 	flags = OBJ_CLIMBABLE
 	clicksound = "switch"
+	special_power_checks = TRUE
 
 
 /obj/machinery/space_heater/Initialize()

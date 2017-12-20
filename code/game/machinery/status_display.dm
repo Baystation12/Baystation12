@@ -35,6 +35,7 @@
 
 	var/friendc = 0      // track if Friend Computer mode
 	var/ignore_friendc = 0
+	var/next_process_time = 0
 
 	maptext_height = 26
 	maptext_width = 32
@@ -64,7 +65,9 @@
 	if(stat & NOPOWER)
 		remove_display()
 		return
-	update()
+	if(next_process_time <= world.time)
+		next_process_time = world.time + 40		// 4 second delays between process updates
+		update()
 
 /obj/machinery/status_display/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

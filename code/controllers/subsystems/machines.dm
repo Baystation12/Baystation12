@@ -63,6 +63,54 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	resumed = 0;\
 	current_step = next_step;\
 }
+//Adding Power usage to a define removes useless proc overhead from the large number of calls.
+#define ADD_POWER_USE(Machine) \
+if (Machine.special_power_checks) { \
+	Machine.auto_use_power(); \
+} \
+else { \
+	if(Machine.use_power) { \
+		if(!Machine.MyArea) { \
+			Machine.MyArea = Machine.loc.loc; \
+		} \
+	} \
+		switch(Machine.use_power) { \
+			if(1) { \
+				switch(Machine.power_channel) { \
+					if (EQUIP) { \
+						Machine.MyArea.used_equip += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					if (LIGHT) { \
+						Machine.MyArea.used_light += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					if (ENVIRON) { \
+						Machine.MyArea.used_environ += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					else { \
+						log_debug("SSmachinery: Type '[Machine.type]' has insane channel [Machine.power_channel] (expected value in range 1-3)."); \
+						Machine.use_power = FALSE; \
+					} \
+				} \
+			} \
+			if(2) { \
+				switch(Machine.power_channel) { \
+					if (EQUIP) { \
+						Machine.MyArea.used_equip += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					if (LIGHT) { \
+						Machine.MyArea.used_light += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					if (ENVIRON) { \
+						Machine.MyArea.used_environ += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					else { \
+						log_debug("SSmachinery: Type '[Machine.type]' has insane channel [Machine.power_channel] (expected value in range 1-3)."); \
+						Machine.use_power = FALSE; \
+					} \
+				} \
+			} \
+		} \
+} \
 
 /datum/controller/subsystem/machines/fire(resumed = 0)
 	var/timer = TICK_USAGE_REAL
@@ -127,17 +175,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
 		if(!QDELETED(M) && !(M.Process(wait) == PROCESS_KILL))
-			if(M.use_power)
-				switch (M.power_channel)
-					if (EQUIP)
-						M.MyArea.used_equip += M.use_power == 2 ? M.active_power_usage : M.idle_power_usage
-					if (LIGHT)
-						M.MyArea.used_equip += M.use_power == 2 ? M.active_power_usage : M.idle_power_usage
-					if (ENVIRON)
-						M.MyArea.used_environ += M.use_power == 2 ? M.active_power_usage : M.idle_power_usage
-					else // ?!
-						log_debug("SSmachinery: Type '[M.type]' has insane channel [M.power_channel] (expected value in range 1-3).")
-						M.use_power = FALSE
+			ADD_POWER_USE(M)
 		else
 			machinery.Remove(M)
 			M.is_processing = null

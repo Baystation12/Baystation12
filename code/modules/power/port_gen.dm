@@ -14,6 +14,7 @@
 	var/recent_fault = 0
 	var/power_output = 1
 	flags = OBJ_CLIMBABLE
+	special_power_checks = TRUE
 
 /obj/machinery/power/port_gen/proc/IsBroken()
 	return (stat & (BROKEN|EMPED))

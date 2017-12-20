@@ -77,6 +77,7 @@
 	update_nearby_tiles()
 	. = ..()
 
+/* ~L Process Optimize
 /obj/machinery/door/Process()
 	if(close_door_at && world.time >= close_door_at)
 		if(autoclose)
@@ -84,7 +85,7 @@
 			close()
 		else
 			close_door_at = 0
-
+*/
 /obj/machinery/door/proc/can_open()
 	if(!density || operating || !ticker)
 		return 0
@@ -393,8 +394,20 @@
 
 	if(autoclose)
 		close_door_at = next_close_time()
-
+		close_door_in()
 	return 1
+
+/obj/machinery/door/proc/close_door_in(var/time = 5 SECONDS)
+	while(close_door_at)
+		if(close_door_at && world.time >= close_door_at)
+			if(autoclose)
+				close_door_at = next_close_time()
+				close()
+				break
+			else
+				close_door_at = 0
+				break
+		sleep(10)
 
 /obj/machinery/door/proc/next_close_time()
 	return world.time + (normalspeed ? 150 : 5)

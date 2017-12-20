@@ -46,17 +46,18 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	attack_verb = list("burnt", "singed")
 
 /obj/item/weapon/flame/match/Process()
-	if(isliving(loc))
-		var/mob/living/M = loc
-		M.IgniteMob()
-	var/turf/location = get_turf(src)
-	smoketime--
-	if(smoketime < 1)
-		burn_out()
-		return
-	if(location)
-		location.hotspot_expose(700, 5)
-		return
+	if(lit)
+		if(isliving(loc))
+			var/mob/living/M = loc
+			M.IgniteMob()
+		smoketime--
+		if(smoketime < 1)
+			burn_out()
+			return
+		var/turf/location = get_turf(src)
+		if(location)
+			location.hotspot_expose(700, 5)
+			return
 
 /obj/item/weapon/flame/match/dropped(mob/user as mob)
 	//If dropped, put ourselves out
@@ -123,12 +124,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			reagents.remove_any(REM)
 
 /obj/item/clothing/mask/smokable/Process()
-	var/turf/location = get_turf(src)
-	smoke(1)
-	if(smoketime < 1)
-		die()
-		return
-	if(location)
+	if(lit)
+		var/turf/location = get_turf(src)
+		smoke(1)
+		if(smoketime < 1)
+			die()
+			return
 		location.hotspot_expose(700, 5)
 
 /obj/item/clothing/mask/smokable/update_icon()

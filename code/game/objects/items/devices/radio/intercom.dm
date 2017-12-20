@@ -125,16 +125,13 @@
 	return canhear_range
 
 /obj/item/device/radio/intercom/Process()
-	if(((world.timeofday - last_tick) > 30) || ((world.timeofday - last_tick) < 0))
+	if(((world.timeofday - last_tick) > 40) || ((world.timeofday - last_tick) < 0))
 		last_tick = world.timeofday
 
-		if(!src.loc)
+		if(!src.loc || !MyArea)
 			on = 0
 		else
-			if(!MyArea)
-				on = 0
-			else
-				on = MyArea.powered(EQUIP) // set "on" to the power status
+			on = MyArea.powered(EQUIP) // set "on" to the power status
 
 		if(!on)
 			icon_state = "intercom-p"

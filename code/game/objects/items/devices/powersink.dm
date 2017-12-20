@@ -115,15 +115,16 @@
 
 
 /obj/item/device/powersink/Process()
-	drained_this_tick = 0
-	power_drained -= min(dissipation_rate, power_drained)
-	if(power_drained > max_power * 0.95)
-		playsound(src, 'sound/effects/screech.ogg', 100, 1, 1)
-	if(power_drained >= max_power)
-		explosion(src.loc, 3,6,9,12)
-		qdel(src)
-		return
-	if(attached && attached.powernet)
-		PN = attached.powernet
-	else
-		PN = null
+	if(mode == 2)
+		drained_this_tick = 0
+		power_drained -= min(dissipation_rate, power_drained)
+		if(power_drained > max_power * 0.95)
+			playsound(src, 'sound/effects/screech.ogg', 100, 1, 1)
+		if(power_drained >= max_power)
+			explosion(src.loc, 3,6,9,12)
+			qdel(src)
+			return
+		if(attached && attached.powernet)
+			PN = attached.powernet
+		else
+			PN = null

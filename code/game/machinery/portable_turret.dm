@@ -59,6 +59,7 @@
 
 	var/wrenching = 0
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
+	var/next_process_time = 0
 
 /obj/machinery/porta_turret/crescent
 	enabled = 0
@@ -451,17 +452,18 @@ var/list/turret_icons
 		//if the turret is off, make it pop down
 		popDown()
 		return
+	if(next_process_time <= world.time)
+		next_process_time = world.time + 30		// 3 second delays between process updates
+		var/list/targets = list()			//list of primary targets
+		var/list/secondarytargets = list()	//targets that are least important
 
-	var/list/targets = list()			//list of primary targets
-	var/list/secondarytargets = list()	//targets that are least important
+		for(var/mob/living/M in mobs_in_view(world.view, src))
+			assess_and_assign(M, targets, secondarytargets)
 
-	for(var/mob/M in mobs_in_view(world.view, src))
-		assess_and_assign(M, targets, secondarytargets)
-
-	if(!tryToShootAt(targets))
-		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
-			spawn()
-				popDown() // no valid targets, close the cover
+		if(!tryToShootAt(targets))
+			if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
+				spawn()
+					popDown() // no valid targets, close the cover
 
 	if(auto_repair && (health < maxhealth))
 		use_power(20000)

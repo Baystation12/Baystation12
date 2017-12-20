@@ -504,7 +504,8 @@ About the new airlock wires panel:
 		// If backup power is currently active then disable, otherwise let it count down and disable itself later
 		if(!backup_power_lost_until)
 			backup_power_lost_until = -1
-
+		close_door_at = next_close_time()
+		close_door_in()
 	ADD_ICON_QUEUE(src)
 
 /obj/machinery/door/airlock/proc/regainBackupPower()
