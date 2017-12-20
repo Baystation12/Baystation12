@@ -47,7 +47,7 @@ var/list/gamemode_cache = list()
 	var/allow_Metadata = 0				// Metadata is supported.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
 	var/Ticklag = 0.33
-	var/fps = 40
+	var/fps = 50
 	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
 	var/socket_talk	= 0					// use socket_talk to communicate with other processes
 	var/list/resource_urls = null
@@ -854,12 +854,12 @@ var/list/gamemode_cache = list()
 	return gamemode_cache["extended"]
 
 /datum/configuration/proc/get_runnable_modes()
-	var/list/runnable_modes = list()
+	. = list()
 	for(var/game_mode in gamemode_cache)
 		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if(M && !M.startRequirements() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
-			runnable_modes |= M
-	return runnable_modes
+			. |= M
+	return .
 
 /datum/configuration/proc/post_load()
 	//apply a default value to config.python_path, if needed
