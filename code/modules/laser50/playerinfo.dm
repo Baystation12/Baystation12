@@ -1,5 +1,7 @@
 /client
 	var/donator //Donator status
+	var/donatorsince
+	var/list/donatoritems = list()
 	var/alien_whitelist //Alien whitelists
 	var/command_whitelist //Head whitelists
 	var/datejoined //The date the player first joined the server
