@@ -9,31 +9,28 @@
  *			worldtime2text
  */
 
-// Returns an integer given a hexadecimal number string as input.
+//Returns an integer given a hex input, supports negative values "-ff"
+//skips preceding invalid characters
+//breaks when hittin invalid characters thereafter
 /proc/hex2num(hex)
-	if (!istext(hex))
-		return
-
-	var/num   = 0
-	var/power = 1
-	var/i     = length(hex)
-
-	while (i)
-		var/char = text2ascii(hex, i)
-		switch(char)
-			if(48)                                  // 0 -- do nothing
-			if(49 to 57) num += (char - 48) * power // 1-9
-			if(97,  65)  num += power * 10          // A
-			if(98,  66)  num += power * 11          // B
-			if(99,  67)  num += power * 12          // C
-			if(100, 68)  num += power * 13          // D
-			if(101, 69)  num += power * 14          // E
-			if(102, 70)  num += power * 15          // F
+	. = 0
+	var/place = 1
+	for(var/i in length(hex) to 1 step -1)
+		var/num = text2ascii(hex, i)
+		switch(num)
+			if(48 to 57)
+				num -= 48	//0-9
+			if(97 to 102)
+				num -= 87	//a-f
+			if(65 to 70)
+				num -= 55	//A-F
+			if(45)
+				return . * -1 // -
 			else
-				return
-		power *= 16
-		i--
-	return num
+				CRASH("Malformed hex number")
+
+		. += num * place
+		place *= 16
 
 // Returns the hex value of a number given a value assumed to be a base-ten value
 /proc/num2hex(num, padlength)
