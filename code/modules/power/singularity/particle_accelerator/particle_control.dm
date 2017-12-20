@@ -42,7 +42,7 @@
 
 /obj/machinery/particle_accelerator/control_box/update_state()
 	if(construction_state < 3)
-		update_use_power(0)
+		update_use_power(src, 0)
 		assembled = 0
 		active = 0
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
@@ -52,7 +52,7 @@
 		connected_parts = list()
 		return
 	if(!part_scan())
-		update_use_power(1)
+		update_use_power(src, 1)
 		active = 0
 		connected_parts = list()
 
@@ -141,9 +141,9 @@
 	. = ..()
 	if(stat & NOPOWER)
 		active = 0
-		update_use_power(0)
+		update_use_power(src, 0)
 	else if(!stat && construction_state == 3)
-		update_use_power(1)
+		update_use_power(src, 1)
 	return
 
 
@@ -216,13 +216,13 @@
 	message_admins("PA Control Computer turned [active ?"ON":"OFF"] by [key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
 	log_game("PA Control Computer turned [active ?"ON":"OFF"] by [usr.ckey]([usr]) in ([x],[y],[z])")
 	if(src.active)
-		update_use_power(2)
+		update_use_power(src, 2)
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
 			part.strength = src.strength
 			part.powered = 1
 			part.update_icon()
 	else
-		update_use_power(1)
+		update_use_power(src, 1)
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
 			part.strength = null
 			part.powered = 0

@@ -190,7 +190,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/proc/StopPlaying()
 	playing = 0
-	update_use_power(1)
+	update_use_power(src, 1)
 	update_icon()
 	QDEL_NULL(sound_token)
 
@@ -204,7 +204,7 @@ datum/track/New(var/title_name, var/audio)
 	sound_token = sound_player.PlayLoopingSound(src, sound_id, current_track.sound, volume = volume, range = 7, falloff = 3, prefer_mute = TRUE)
 
 	playing = 1
-	update_use_power(2)
+	update_use_power(src, 2)
 	update_icon()
 
 /obj/machinery/media/jukebox/proc/AdjustVolume(var/new_volume)

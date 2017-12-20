@@ -35,7 +35,6 @@
 		add_avail(power_gen * power_output)
 		UseFuel()
 		src.updateDialog()
-		ADD_ICON_QUEUE(src)
 	else
 		active = 0
 		handleInactive()

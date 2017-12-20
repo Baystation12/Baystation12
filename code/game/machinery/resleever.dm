@@ -48,10 +48,10 @@ obj/machinery/resleever/Process()
 	if(occupant)
 		occupant.Paralyse(4) // We need to always keep the occupant sleeping if they're in here.
 	if(stat & (NOPOWER|BROKEN) || !anchored)
-		update_use_power(0)
+		update_use_power(src, 0)
 		return
 	if(resleeving)
-		update_use_power(2)
+		update_use_power(src, 2)
 		if(remaining < timetosleeve)
 			remaining += 1
 
@@ -60,12 +60,12 @@ obj/machinery/resleever/Process()
 		else
 			remaining = 0
 			resleeving = 0
-			update_use_power(1)
+			update_use_power(src, 1)
 			eject_occupant()
 			playsound(loc, 'sound/machines/ping.ogg', 100, 1)
 			visible_message("\The [src] pings as it completes its procedure!", 3)
 			return
-	update_use_power(0)
+	update_use_power(src, 0)
 	return
 
 /obj/machinery/resleever/proc/isOccupiedEjectable()

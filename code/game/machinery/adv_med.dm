@@ -49,7 +49,7 @@
 	usr.client.eye = src
 	usr.forceMove(src)
 	src.occupant = usr
-	update_use_power(2)
+	update_use_power(src, 2)
 	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
 		//O = null
@@ -69,7 +69,7 @@
 		src.occupant.client.perspective = MOB_PERSPECTIVE
 	src.occupant.dropInto(loc)
 	src.occupant = null
-	update_use_power(1)
+	update_use_power(src, 1)
 	src.icon_state = "body_scanner_0"
 	return
 
@@ -85,7 +85,7 @@
 	var/mob/M = G.affecting
 	M.forceMove(src)
 	src.occupant = M
-	update_use_power(2)
+	update_use_power(src, 2)
 	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
 		O.forceMove(loc)
@@ -113,7 +113,7 @@
 	var/mob/M = target
 	M.forceMove(src)
 	src.occupant = M
-	update_use_power(2)
+	update_use_power(src, 2)
 	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
 		O.forceMove(loc)

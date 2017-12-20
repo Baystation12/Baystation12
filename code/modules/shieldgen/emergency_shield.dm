@@ -149,7 +149,7 @@
 	idle_power_usage = 0
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
 		idle_power_usage += shield_tile.shield_idle_power
-	update_use_power(1)
+	update_use_power(src, 1)
 
 /obj/machinery/shieldgen/proc/shields_down()
 	if(!active) return 0 //If it's already off, how did this get called?
@@ -159,7 +159,7 @@
 
 	collapse_shields()
 
-	update_use_power(0)
+	update_use_power(src, 0)
 
 /obj/machinery/shieldgen/proc/create_shields()
 	for(var/turf/target_tile in trange(2, src))

@@ -112,4 +112,9 @@ var/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,"Secret
 
 // If this is returned from a machine's process() proc, the machine will stop processing but
 // will continue to have power calculations done.
-#define M_NO_PROCESS 27
+
+#define update_use_power(Machine, new_power)            \
+	if(Machine)               \
+	{                          \
+		Machine.use_power = new_power             \
+	}

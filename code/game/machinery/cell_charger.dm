@@ -100,13 +100,13 @@
 //	log_debug("ccpt [charging] [stat]")
 
 	if((stat & (BROKEN|NOPOWER)) || !anchored)
-		update_use_power(0)
+		update_use_power(src, 0)
 		return
 
 	if (charging && !charging.fully_charged())
 		charging.give(active_power_usage*CELLRATE)
-		update_use_power(2)
+		update_use_power(src, 2)
 
 		ADD_ICON_QUEUE(src)
 	else
-		update_use_power(1)
+		update_use_power(src, 1)
