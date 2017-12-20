@@ -39,7 +39,7 @@
 /client/proc/add_whitelist()
 	set category = "Admin"
 	set name = "Write to whitelist"
-	set desc = "Adds a user to any whitelist available in the directory mid-round."
+	set desc = "Adds or removes a user to any whitelist available in the directory mid-round."
 
 	if(!check_rights(R_ADMIN|R_MOD))
 		return
@@ -61,8 +61,14 @@
 	switch(type)
 		if("Command Whitelist")
 			if(C.command_whitelist)
-				usr << "<span class='warning'>Could not add [C] to the command whitelist. Already on whitelist.</span>"
-				return 0
+				switch(input("Remove whitelist?", "remove Whitelist", "Yes", "No"))
+					if("Yes")
+						message_admins("[key_name_admin(usr)] has un-whitelisted [C].")
+						to_chat(C, "un-Whitelisted for command roles.")
+						C.command_whitelist = 0
+					else
+						usr << "<span class='warning'>Could not add [C] to the command whitelist. Already on whitelist.</span>"
+						return 0
 			else
 				message_admins("[key_name_admin(usr)] has whitelisted [C].")
 				to_chat(C, "Whitelisted for command roles.")
@@ -86,6 +92,7 @@
 				usr << "<span class='warning'>Could not add [C] to donators. Already a donator.</span>"
 				return 0
 			C.donator = 1
+			C.donatorsince = world.realtime
 			message_admins("[key_name_admin(usr)] has added [C] as a donator.")
 			to_chat(C, "Donator status added.")
 	if(C.saveclientdb())
