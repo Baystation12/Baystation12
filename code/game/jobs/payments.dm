@@ -106,7 +106,7 @@ proc/get_species_modifier(var/mob/living/carbon/human/M)
 				if(M.CharRecords.char_department & SRV|CIV)
 					bonuspercentage -= 10
 			if(SPECIES_VOX)
-				bonuspercentage -= 10
+				bonuspercentage -= 20
 				if(M.CharRecords.char_department & ENG)
 					bonuspercentage += 10
 				if(M.CharRecords.char_department & SEC)
