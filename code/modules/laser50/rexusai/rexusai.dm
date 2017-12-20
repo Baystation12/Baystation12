@@ -38,43 +38,43 @@
 		"Get",
 		"Fetch"
 		)
-	var/list/all_commands = list()
-
-/mob/living/special_mobs/rexus/Initialize()
-	..()
-	all_commands.Add(attack_commands, defend_commands, stop_commands, fetch_commands)
-
+	var/list/all_commands = list(
+		fetch_commands,
+		)
 /mob/living/special_mobs/rexus/Process()
-	return
 
-/mob/living/special_mobs/rexus/hear_say(mob/living/M as mob, text)
+
+/mob/living/special_mobs/rexus/hear_talk(mob/living/M as mob, text)
 	var/true_text = lowertext(html_decode(text))
 	var/found
-
 	for(var/called in callingnames)
 		if(findtext(true_text, called))
 			found = called
 	if(found) //We've been summoned!
 		var/commanded
-		for(var/command in all_commands)
+		for(var/command in RecursiveListLoop(all_commands))
 			if(findtext(true_text, command))
 				commanded = command
-		if(commanded in attack_commands)
-			return
-		if(commanded in defend_commands)
-			return
-		if(commanded in stop_commands)
-			return
-		if(commanded in fetch_commands)
-			return
+		switch(commanded)
+			if(commanded in attack_commands)
+			if(commanded in defend_commands)
+			if(commanded in stop_commands)
 
+			var/true_text = lowertext(html_decode(text))
+			for(var/menu_item in menu)
+				if(findtext(true_text, menu_item))
+					queue_dish(menu_item)
+			if(findtext(true_text, "status"))
+				state_status()
+			else if(findtext(true_text, "menu"))
+				state_menu()
 
 //Extra: Blood, bleeding, fighting
 /mob/living/special_mobs/rexus/proc/AssessSituation()
 	/*--------Threat assesment--------*/
-	for(var/mob/living/carbon/human/M in view())
-		var/score = 0
+	for(var/mob/living/carbon/human/M in view(6))
 		if(M.stat != DEAD)
+			var/score = 0
 			if(!M in familiarpeople)
 				score += rand(5, 10) //Unfamiliar people are scary for the doggo, some more than others
 				if(!M.client) //Clientless are't as dangerous, to make sure logged off people don't get bitten to death
@@ -90,4 +90,4 @@
 					score += rand(5, 12)
 		else if(M.stat == UNCONSCIOUS || M.resting) //Downed people aren't that scary..
 			score -= min(5, rand(25, 35))
-		people["[M.real_name]"] = score
+				people["[M.real_name]"] = score

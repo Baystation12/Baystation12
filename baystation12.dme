@@ -1488,8 +1488,6 @@
 #include "code\modules\laser50\playerdatabase.dm"
 #include "code\modules\laser50\playerinfo.dm"
 #include "code\modules\laser50\whitelist.dm"
-#include "code\modules\laser50\rexusai\rexus_helpers.dm"
-#include "code\modules\laser50\rexusai\rexusai.dm"
 #include "code\modules\library\lib_items.dm"
 #include "code\modules\library\lib_machines.dm"
 #include "code\modules\library\lib_readme.dm"
