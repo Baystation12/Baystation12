@@ -282,16 +282,23 @@ update_flag
 /obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
 	var/data[0]
-	data["name"] = name
-	data["canLabel"] = can_label ? 1 : 0
-	data["portConnected"] = connected_port ? 1 : 0
-	data["tankPressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
-	data["releasePressure"] = round(release_pressure ? release_pressure : 0)
-	data["minReleasePressure"] = round(ONE_ATMOSPHERE/10)
-	data["maxReleasePressure"] = round(10*ONE_ATMOSPHERE)
-	data["valveOpen"] = valve_open ? 1 : 0
+	if(istype(user, /mob/living/silicon))
+		data["name"] = name
+		data["portConnected"] = connected_port ? 1 : 0
+		data["tankPressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
+		data["releasePressure"] = round(release_pressure ? release_pressure : 0)
+		data["hasHoldingTank"] = holding ? 1 : 0
+	else
+		data["name"] = name
+		data["canLabel"] = can_label ? 1 : 0
+		data["portConnected"] = connected_port ? 1 : 0
+		data["tankPressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
+		data["releasePressure"] = round(release_pressure ? release_pressure : 0)
+		data["minReleasePressure"] = round(ONE_ATMOSPHERE/10)
+		data["maxReleasePressure"] = round(10*ONE_ATMOSPHERE)
+		data["valveOpen"] = valve_open ? 1 : 0
+		data["hasHoldingTank"] = holding ? 1 : 0
 
-	data["hasHoldingTank"] = holding ? 1 : 0
 	if (holding)
 		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.return_pressure()))
 
