@@ -8,8 +8,10 @@ SUBSYSTEM_DEF(persistent)
 
 	var/paycheckticks = 0
 	var/obj/machinery/message_server/linkedServer = null
+	var/obj/item/device/pda/NTpda
 
 /datum/controller/subsystem/persistent/Initialize(timeofday)
+	InitializePDA()
 	spawn(200)
 		if(!linkedServer)
 			if(GLOB.message_servers.len)
@@ -62,6 +64,13 @@ SUBSYSTEM_DEF(persistent)
 						"}
 					SendPDAMessage(M, sender, message)
 
+/datum/controller/subsystem/persistent/proc/InitializePDA()
+	NTpda = new(src)
+	NTpda.owner = "NanoTrasen"
+	NTpda.message_silent = 1
+	NTpda.news_silent = 1
+	NTpda.hidden = 1
+	NTpda.ownjob = "NanoTrasen"
 
 /datum/controller/subsystem/persistent/proc/SendPDAMessage(var/mob/living/carbon/M, var/sender, var/message)
 	var/obj/item/device/pda/PDARec = null
@@ -71,8 +80,14 @@ SUBSYSTEM_DEF(persistent)
 			PDARec = P
 			//Sender isn't faking as someone who exists
 			if(!isnull(PDARec))
-				linkedServer.send_pda_message("[P.owner]", "NT Financial Dept","[message]")
-				P.new_message("NT Financial Dept", "NT Financial Dept", "NanoTrasen", message)
-				P.tnote.Add(list(list("sent" = 0, "owner" = "NanoTrasen", "job" = "NT Financial Dept", "message" = "[message]", "target" = "\ref[src]")))
+				linkedServer.send_pda_message("[P.owner]", "NanoTrasen Administrative Dept.","[message]")
+				P.new_message("NanoTrasen Administrative Dept.", "NanoTrasen Administrative Dept.", "NanoTrasen", message)
+				P.new_message_from_pda(NTpda, message)
+				P.tnote.Add(list(list("sent" = 0, "owner" = "NanoTrasen", "job" = "NanoTrasen Administrative Dept.", "message" = "[message]", "target" = "\ref[src]")))
+				NTpda.tnote.Add(list(list("sent" = 1, "owner" = "NanoTrasen", "job" = "NanoTrasen Administrative Dept.", "message" = "[message]", "target" = "\ref[src]")))
+			if(!NTpda.conversations.Find("\ref[P]"))
+				NTpda.conversations.Add("\ref[P]")
+			if(!P.conversations.Find("\ref[NTpda]"))
+				P.conversations.Add("\ref[NTpda]")
 				if (!P.message_silent)
 					playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
