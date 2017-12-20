@@ -23,6 +23,12 @@
 
 	var/current_heat_capacity = 50
 
+/obj/machinery/atmospherics/unary/cryo_cell/New()
+	..()
+	icon = 'icons/obj/cryogenics_split.dmi'
+	update_icon()
+	initialize_directions = dir
+
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
 	var/turf/T = loc
 	T.contents += contents

@@ -117,7 +117,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 	set waitfor = 0
 	if(flame_range && prob(40) && !isspace(T) && !T.density)
 		var/obj/fire/F = new(T)
-		sleep(5)
+		sleep(rand(5, 10))
 		qdel(F)
 
 proc/secondaryexplosion(turf/epicenter, range)

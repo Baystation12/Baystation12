@@ -114,6 +114,7 @@ Class Procs:
 	var/global/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/area/MyArea
+	var/special_power_checks = FALSE
 
 #define SETAREA(byond)            \
 	if(byond.loc && isarea(byond.loc.loc) && byond.anchored)     \
@@ -139,7 +140,7 @@ Class Procs:
 
 /obj/machinery/Destroy()
 	STOP_PROCESSING(SSmachines, src)
-	if(MyArea.machinecache)
+	if(MyArea && MyArea.machinecache)
 		MyArea.machinecache -= src
 	MyArea = null
 
@@ -154,7 +155,6 @@ Class Procs:
 /obj/machinery/Process()//If you dont use process or power why are you here
 	if(!(use_power || idle_power_usage || active_power_usage))
 		return PROCESS_KILL
-	return M_NO_PROCESS
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)
@@ -187,10 +187,11 @@ Class Procs:
 		else
 	return
 
+/* SEE __DEFINES/MACHINERY.DM
 //sets the use_power var and then forces an area power update
 /obj/machinery/proc/update_use_power(var/new_use_power)
 	use_power = new_use_power
-
+*/
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
 		return 0

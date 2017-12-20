@@ -45,7 +45,11 @@
 		screen_loc = "[screen_loc_X[1]]:[pix_X],[screen_loc_Y[1]]:[pix_Y]"
 
 /obj/screen/movable/proc/encode_screen_X(X)
-	var/view = usr.client ? usr.client.view : world.view
+	var/view
+	if(!usr || !usr.client)
+		view = world.view
+	else
+		view = usr.client.view
 	if(X > view+1)
 		. = "EAST-[view*2 + 1-X]"
 	else if(X < view+1)
@@ -54,7 +58,11 @@
 		. = "CENTER"
 
 /obj/screen/movable/proc/decode_screen_X(X)
-	var/view = usr.client ? usr.client.view : world.view
+	var/view
+	if(!usr || !usr.client)
+		view = world.view
+	else
+		view = usr.client.view
 	//Find EAST/WEST implementations
 	if(findtext(X,"EAST-"))
 		var/num = text2num(copytext(X,6)) //Trim EAST-
@@ -70,7 +78,11 @@
 		. = view+1
 
 /obj/screen/movable/proc/encode_screen_Y(Y)
-	var/view = usr.client ? usr.client.view : world.view
+	var/view
+	if(!usr || !usr.client)
+		view = world.view
+	else
+		view = usr.client.view
 	if(Y > view+1)
 		. = "NORTH-[view*2 + 1-Y]"
 	else if(Y < usr.client.view+1)
@@ -79,7 +91,11 @@
 		. = "CENTER"
 
 /obj/screen/movable/proc/decode_screen_Y(Y)
-	var/view = usr.client ? usr.client.view : world.view
+	var/view
+	if(!usr || !usr.client)
+		view = world.view
+	else
+		view = usr.client.view
 	if(findtext(Y,"NORTH-"))
 		var/num = text2num(copytext(Y,7)) //Trim NORTH-
 		if(!num)

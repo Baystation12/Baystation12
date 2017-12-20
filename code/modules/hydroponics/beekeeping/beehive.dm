@@ -139,7 +139,6 @@
 /obj/machinery/beehive/Process()
 	if(closed && !smoked && bee_count)
 		pollinate_flowers()
-		ADD_ICON_QUEUE(src)
 	smoked = max(0, smoked - 1)
 	if(!smoked && bee_count)
 		bee_count = min(bee_count * 1.005, 100)
@@ -153,6 +152,7 @@
 			H.health += 0.05 * coef
 			++trays
 	honeycombs = min(honeycombs + 0.1 * coef * min(trays, 5), frames * 100)
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/honey_extractor
 	name = "honey extractor"

@@ -39,6 +39,8 @@
 	power_channel = ENVIRON
 	use_power = 1
 	idle_power_usage = 5
+	glass = 1
+	visible = 1
 
 	var/list/tile_info[4]
 	var/list/dir_alerts[4] // 4 dirs, bitflags

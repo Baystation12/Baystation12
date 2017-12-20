@@ -32,7 +32,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	..()
 
 /obj/machinery/computer/helm/Process()
-	..()
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
 		if(linked.loc == T)

@@ -134,7 +134,7 @@
 		if(!job.is_species_allowed(S))
 			. += "<del>[rank]</del></td><td><b> \[SPECIES RESTRICTED]</b></td></tr>"
 			continue
-		if(!job.is_valid_department(get_department(user.client.prefs.prefs_department, 0)) || job.department == "Command" && !user.client.prefs.prefs_command)
+		if(!job.is_valid_department(get_department(user.client.prefs.prefs_department, 0)))
 			. += "<del>[rank]</del></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [user.client.prefs.prefs_department]]</b></a></td></tr>"
 			continue
 //		if(job.allowed_branches)

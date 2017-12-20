@@ -245,11 +245,11 @@ var/global/list/light_type_cache = list()
 
 		if(trigger && changed)
 			switch_check()
-			ADD_ICON_QUEUE(src)
+			update_icon()
 	else
 		use_power = 0
 		set_light(0)
-		ADD_ICON_QUEUE(src)
+		update_icon()
 
 	active_power_usage = ((light_range * light_power) * LIGHTING_POWER_FACTOR)
 

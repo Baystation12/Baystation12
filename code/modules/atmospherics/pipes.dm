@@ -112,7 +112,7 @@
 		return
 
 	pipe_color = new_color
-	ADD_ICON_QUEUE(src)
+	update_icon()
 
 /*
 /obj/machinery/atmospherics/pipe/add_underlay(var/obj/machinery/atmospherics/node, var/direction)
@@ -551,7 +551,7 @@
 
 /obj/machinery/atmospherics/pipe/manifold/update_underlays()
 	..()
-	ADD_ICON_QUEUE(src)
+	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold/atmos_init()
 	..()
@@ -824,7 +824,7 @@
 
 /obj/machinery/atmospherics/pipe/manifold4w/update_underlays()
 	..()
-	ADD_ICON_QUEUE(src)
+	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold4w/hide(var/i)
 	if(istype(loc, /turf/simulated))
@@ -1353,7 +1353,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/visible/universal/update_underlays()
 	..()
-	ADD_ICON_QUEUE(src)
+	update_icon()
 
 
 
@@ -1390,7 +1390,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/hidden/universal/update_underlays()
 	..()
-	ADD_ICON_QUEUE(src)
+	update_icon()
 
 /obj/machinery/atmospherics/proc/universal_underlays(var/obj/machinery/atmospherics/node, var/direction)
 	var/turf/T = loc

@@ -83,8 +83,7 @@
 	if(check_area)
 		return check_area.powered(chan)			// return power status of the area
 	else
-		if(MyArea)
-			return MyArea.powered(chan)			// return power status of the area
+		return MyArea.powered(chan)			// return power status of the area
 
 // increment the power usage stats for an area
 /obj/machinery/proc/use_power(var/amount, var/chan = -1) // defaults to power_channel
@@ -258,7 +257,6 @@
 
 		else
 			continue
-		CHECK_TICK
 
 	//now that the powernet is set, connect found machines to it
 	for(var/obj/machinery/power/PM in found_machines)

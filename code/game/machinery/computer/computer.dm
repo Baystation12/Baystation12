@@ -24,11 +24,6 @@
 	power_change()
 	ADD_ICON_QUEUE(src)
 
-/obj/machinery/computer/Process()
-	if(stat & (NOPOWER|BROKEN))
-		return 0
-	return 1
-
 /obj/machinery/computer/emp_act(severity)
 	if(prob(20/severity)) set_broken()
 	..()

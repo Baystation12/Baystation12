@@ -15,6 +15,7 @@
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
 	var/overlay_state
+	var/global/list/overlay_cache = list()
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 
@@ -27,6 +28,9 @@
 /obj/item/weapon/cell/Initialize()
 	. = ..()
 	ADD_ICON_QUEUE(src)
+	if(!overlay_cache.len)
+		overlay_cache["cell-o2"] = image('icons/obj/power.dmi', "cell-o2")
+		overlay_cache["cell-o1"] = image('icons/obj/power.dmi', "cell-o1")
 
 /obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/power = 0)
 
@@ -50,9 +54,9 @@
 
 	if(new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
-		overlays.Cut()
+		overlays.len = 0
 		if(overlay_state)
-			overlays += image('icons/obj/power.dmi', overlay_state)
+			overlays += overlay_cache["[overlay_state]"]
 
 /obj/item/weapon/cell/proc/percent()		// return % charge of cell
 	return maxcharge && (100.0*charge/maxcharge)

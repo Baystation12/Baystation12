@@ -189,7 +189,9 @@
 	if(contents)
 		for(var/atom/movable/something in contents)
 			something.dropInto(loc)
-	. = ..()
+	if(reagents)
+		QDEL_NULL(reagents)
+	return ..()
 
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END

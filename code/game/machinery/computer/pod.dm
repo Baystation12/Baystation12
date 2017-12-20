@@ -142,7 +142,7 @@
 
 
 /obj/machinery/computer/pod/Process()
-	if(!..())
+	if(inoperable())
 		return
 	if(timing)
 		if(time > 0)

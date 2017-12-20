@@ -268,7 +268,7 @@
 			scan_ticks++
 			if(prob(scan_ticks * 10))
 				spawn(0)
-					set background = 1
+					set background = BACKGROUND_ENABLED
 					if(src in SSobj.processing)
 						//scan radios in the world to try and find one
 						var/cur_dist = 999
@@ -278,6 +278,7 @@
 								if(check_dist < cur_dist)
 									cur_dist = check_dist
 									target_radio = R
+							CHECK_TICK
 
 						scan_ticks = 0
 						var/turf/T = get_turf(src)

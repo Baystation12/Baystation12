@@ -117,6 +117,7 @@
 					O.loc = output.loc
 			else
 				O.loc = output.loc
+			CHECK_TICK
 
 	//Output amounts that are past stack_amt.
 	for(var/sheet in stack_storage)
