@@ -2,7 +2,7 @@
 	name = "remote object control"
 	desc = "It controls objects, remotely."
 	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "doorctrl0"
+	icon_state = "doorctrl"
 	power_channel = ENVIRON
 	var/desiredstate = 0
 	var/exposedwires = 0
@@ -43,11 +43,11 @@
 
 	if(!allowed(user) && (wires & 1))
 		to_chat(user, "<span class='warning'>Access Denied</span>")
-		flick("doorctrl-denied",src)
+		flick("[initial(icon_state)]-denied",src)
 		return
 
 	use_power(5)
-	icon_state = "doorctrl1"
+	icon_state = "[initial(icon_state)]1"
 	desiredstate = !desiredstate
 	trigger(user)
 	spawn(15)
@@ -58,9 +58,9 @@
 
 /obj/machinery/button/remote/update_icon()
 	if(stat & NOPOWER)
-		icon_state = "doorctrl-p"
+		icon_state = "[initial(icon_state)]-p"
 	else
-		icon_state = "doorctrl0"
+		icon_state = "[initial(icon_state)]"
 
 /*
 	Airlock remote control
@@ -129,6 +129,7 @@
 /obj/machinery/button/remote/blast_door
 	name = "remote blast door-control"
 	desc = "It controls blast doors, remotely."
+	icon_state = "blastctrl"
 
 /obj/machinery/button/remote/blast_door/trigger()
 	for(var/obj/machinery/door/blast/M in world)
