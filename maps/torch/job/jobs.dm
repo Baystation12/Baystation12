@@ -7,11 +7,11 @@
 
 #define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder, /datum/job/warden
 	species_to_job_blacklist = list(
-		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/officer, /datum/job/detective), //Other jobs unavailable via branch restrictions,
+		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/officer, /datum/job/forensic_tech), //Other jobs unavailable via branch restrictions,
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
 		/datum/species/tajaran = list(HUMAN_ONLY_JOBS),
 		/datum/species/machine = list(HUMAN_ONLY_JOBS),
-		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer, /datum/job/detective, /datum/job/officer_contractor),	//Other jobs unavailable via branch restrictions,
+		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer, /datum/job/forensic_tech),	//Other jobs unavailable via branch restrictions,
 	)
 #undef HUMAN_ONLY_JOBS
 
@@ -19,7 +19,7 @@
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot,
 						/datum/job/pathfinder, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
-						/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/officer_contractor,
+						/datum/job/officer, /datum/job/warden, /datum/job/forensic_tech, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
@@ -587,23 +587,24 @@
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
 
-/datum/job/detective
+/datum/job/forensic_tech
 	title = "Forensic Technician"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	department = "Security"
+	department_flag = SEC
+	spawn_positions = 1
 	supervisors = "the Chief of Security"
+	selection_color = "#601c1c"
 	economic_modifier = 5
 	minimal_player_age = 7
 	ideal_character_age = 35
-	alt_titles = list("Criminal Investigator",
-						"Detective"
+	alt_titles = list("Criminal Investigator"
 	)
-	outfit_type = /decl/hierarchy/outfit/job/security/detective/forensic
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet,
 		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marine,
-		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e3,
@@ -613,7 +614,6 @@
 		/datum/mil_rank/marine/e4,
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/marine/e5,
-		/datum/mil_rank/civ/contractor
 	)
 
 	access = list(access_security, access_brig, access_forensics_lockers,
@@ -623,6 +623,28 @@
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/detective
+	title = "Detective"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Chief of Security"
+	economic_modifier = 5
+	minimal_player_age = 5
+	outfit_type = /decl/hierarchy/outfit/job/security/detective/forensic
+	allowed_branches = list(
+		/datum/mil_branch/civilian
+	)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor
+	)
+
+	access = list(access_security, access_brig, access_forensics_lockers,
+			            access_maint_tunnels, access_emergency_storage,
+			            access_sec_doors, access_solgov_crew, access_morgue)
+
+	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
+							 /datum/computer_file/program/camera_monitor)
+
 
 /datum/job/officer
 	title = "Master at Arms"
@@ -656,34 +678,6 @@
 						access_external_airlocks, access_emergency_storage,
 			            access_eva, access_sec_doors, access_solgov_crew)
 	minimal_access = list()
-
-	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
-							 /datum/computer_file/program/camera_monitor)
-
-/datum/job/officer_contractor
-	title = "Security Contractor"
-	department = "Security"
-	department_flag = SEC
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the Chief of Security and Security Personnel"
-	selection_color = "#601c1c"
-	alt_titles = list(
-		"Security Officer")
-	economic_modifier = 2
-	minimal_player_age = 8
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/contractor
-	allowed_branches = list(
-		/datum/mil_branch/civilian
-	)
-	allowed_ranks = list(
-	/datum/mil_rank/civ/contractor
-	)
-
-
-	access = list(access_security, access_brig, access_maint_tunnels,
-						access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew)
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)

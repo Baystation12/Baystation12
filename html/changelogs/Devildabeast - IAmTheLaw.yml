@@ -33,8 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Added 2 Security Contractor slots to the Security department."
-  - rscadd: "Added 2 Security Contractor lockers to the Brig."
-  - tweak: "Forensic Technician slots have been raised to 2."
-  - tweak: "Forensic Technicians can now be Contractors."
-  - rscadd: "Detective has been added as an alternate title for FT."
+  - rscadd: "Added a Detective slot to Security."
+  - rscadd: "Added an extra locker to the Forensic Technician's Office."

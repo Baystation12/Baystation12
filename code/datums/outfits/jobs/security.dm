@@ -44,7 +44,13 @@
 /decl/hierarchy/outfit/job/security/detective/forensic
 	name = OUTFIT_JOB_NAME("Forensic technician")
 	head = null
+	glasses = null
 	suit = /obj/item/clothing/suit/storage/forensics/blue
+	gloves = null
+	id_type = /obj/item/weapon/card/id/torch/crew/contractor/forensic
+	l_pocket = null
+	r_hand = null
+	backpack_contents = null
 
 /decl/hierarchy/outfit/job/security/officer
 	name = OUTFIT_JOB_NAME("Security Officer")

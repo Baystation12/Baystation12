@@ -293,16 +293,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 	name = OUTFIT_JOB_NAME("Forensic Technician - Torch")
-	uniform = /obj/item/clothing/under/det
-	suit = /obj/item/clothing/suit/storage/forensics/blue
-	shoes = /obj/item/clothing/shoes/laceup
-	id_type = /obj/item/weapon/card/id/torch/crew/security/forensic
-	pda_type = /obj/item/device/pda/detective
-
-/decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/ec
-	name = OUTFIT_JOB_NAME("Forensic Technician - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/security/forensic
+	pda_type = /obj/item/device/pda/detective
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet
 	name = OUTFIT_JOB_NAME("Forensic Technician - Fleet")
@@ -313,6 +307,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Forensic Technician - Marine")
 	uniform = /obj/item/clothing/under/solgov/utility/marine/security
 	shoes = /obj/item/clothing/shoes/jungleboots
+
+/decl/hierarchy/outfit/job/torch/crew/security/detective
+	name = OUTFIT_JOB_NAME("Detective")
+	uniform = /obj/item/clothing/under/det
+	suit = /obj/item/clothing/suit/storage/forensics/blue
+	shoes = /obj/item/clothing/shoes/laceup
+	id_type = /obj/item/weapon/card/id/torch/crew/contractor/forensic
+	pda_type = /obj/item/device/pda/detective
 
 /decl/hierarchy/outfit/job/torch/crew/security/maa
 	name = OUTFIT_JOB_NAME("Master at Arms")
@@ -330,12 +332,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Master at Arms - Marine")
 	uniform = /obj/item/clothing/under/solgov/utility/marine/security
 	shoes = /obj/item/clothing/shoes/jungleboots
-
-/decl/hierarchy/outfit/job/torch/crew/security/contractor
-	name = OUTFIT_JOB_NAME("Security Contractor")
-	uniform = /obj/item/clothing/under/rank/security
-	id_type = /obj/item/weapon/card/id/torch/contractor/security
-	pda_type = /obj/item/device/pda/security
 
 //Medical Outfits
 

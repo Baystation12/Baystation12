@@ -35,7 +35,7 @@
 	display_name = "trenchcoat selection"
 	path = /obj/item/clothing/suit
 	cost = 3
-	allowed_roles = list(/datum/job/assistant, /datum/job/bartender, /datum/job/officer_contractor, /datum/job/merchant, /datum/job/stowaway)
+	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/trenchcoat/New()
 	..()
@@ -49,7 +49,7 @@
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/roles/poncho/security
-	allowed_roles = list(/datum/job/guard, /datum/job/officer_contractor, /datum/job/merchant)
+	allowed_roles = list(/datum/job/guard, /datum/job/detective, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/medical
 	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/psychiatrist, /datum/job/merchant)
