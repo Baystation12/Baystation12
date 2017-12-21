@@ -23,13 +23,13 @@
 	var/max_features = 2
 	var/list/possible_features //pre-defined list of features to pick from, will use all types otherwise
 
-/obj/effect/overmap/sector/exoplanet/New()
+/obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
 		qdel(src)
 		return
 
-	maxx = min(64, world.maxx)
-	maxy = min(64, world.maxy)
+	maxx = max_x ? max_x : world.maxx
+	maxy = max_y ? max_y : world.maxy
 
 	name = "[generate_planet_name()], \a [name]"
 
@@ -215,37 +215,31 @@
 		if(prob(50)) //alium gas should be slightly less common than mundane shit
 			newgases -= "aliether"
 
+		var/sanity = prob(99.9)
+
 		var/total_moles = MOLES_CELLSTANDARD * rand(80,120)/100
-		var/list/oxidizers = list()
-		var/list/fuels = list()
-		var/flammable = prob(10) // chance for a planet to be allowed to be flammable, not necessarily that they will be
 		var/gasnum = rand(1,4)
-		for(var/i = 1 to gasnum) //swapping gases wholesale. don't try at home
-			var/ng
-			do
-				var/ng_test = pick_n_take(newgases)	//pick a gas
-				if(gas_data.flags[ng_test] & XGM_GAS_OXIDIZER)
-					if(!fuels.len || flammable)
-						ng = ng_test
-						oxidizers |= ng
-				else if(gas_data.flags[ng_test] & XGM_GAS_FUEL)
-					if(!oxidizers.len || flammable)
-						ng = ng_test
-						fuels |= ng
-				else
-					ng = ng_test
-			while(!ng && newgases.len)
-			if(!ng)
-				break // there are no eligible gases left
+		var/i = 1
+		while(i <= gasnum && total_moles && newgases.len)
+			var/ng = pick_n_take(newgases)	//pick a gas
+			if(sanity) //make sure atmosphere is not flammable... always
+				var/badflag = 0
+				if(gas_data.flags[ng] & XGM_GAS_OXIDIZER)
+					badflag = XGM_GAS_FUEL
+				if(gas_data.flags[ng] & XGM_GAS_FUEL)
+					badflag = XGM_GAS_OXIDIZER
+				if(badflag)
+					for(var/g in newgases)
+						if(gas_data.flags[g] & badflag)
+							newgases -= g
+					sanity = 0
+
 			var/part = total_moles * rand(3,80)/100 //allocate percentage to it
-			if(i == gasnum) //if it's last gas, let it have all remaining moles
+			if(i == gasnum || !newgases.len) //if it's last gas, let it have all remaining moles
 				part = total_moles
 			atmosphere.gas[ng] += part
 			total_moles = max(total_moles - part, 0)
-
-	atmosphere.temperature = T20C + rand(-10, 10)
-	var/factor = max(rand(60,140)/100, 0.6)
-	atmosphere.multiply(factor)
+			i++
 
 	//Set up gases for living things
 	for(var/gas in atmosphere.gas)
@@ -321,23 +315,18 @@
 
 	..()
 
-	for(var/x = 1 to tlx)
-		var/turf/T = locate(x, 1, tz)
-		T.set_density(1)
-		T.set_opacity(1)
-		T = locate(x, tly, tz)
-		T.set_density(1)
-		T.set_opacity(1)
-	for(var/y = 1 to tly)
-		var/turf/T = locate(1, y, tz)
-		T.set_density(1)
-		T.set_opacity(1)
-		T = locate(tlx, y, tz)
-		T.set_density(1)
-		T.set_opacity(1)
-
 /datum/random_map/noise/exoplanet/proc/noise2value(var/value)
 	return min(9,max(0,round((value/cell_range)*10)))
+
+/datum/random_map/noise/exoplanet/apply_to_turf(var/x,var/y)
+	var/turf/T = ..()
+	if(limit_x < world.maxx && (T.y == limit_y || T.x == limit_x))
+		T.set_density(1)
+		T.set_opacity(1)
+		if(istype(T, /turf/simulated))
+			var/turf/simulated/S = T
+			S.blocks_air = 1
+			
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
@@ -422,9 +411,9 @@
 /turf/simulated/floor/exoplanet/Entered(atom/movable/A)
 	..()
 
-	var/obj/effect/overmap/sector/exoplanet/sector = map_sectors["[z]"]
-	if(istype(sector))
-		if(A.simulated && GLOB.using_map.use_overmap)
+	if(A.simulated && GLOB.using_map.use_overmap)
+		var/obj/effect/overmap/sector/exoplanet/sector = map_sectors["[z]"]
+		if(istype(sector))
 			if (A.x <= TRANSITIONEDGE || A.x >= (sector.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (sector.maxy - TRANSITIONEDGE + 1))
 				sector.process_map_edge(A)
 
