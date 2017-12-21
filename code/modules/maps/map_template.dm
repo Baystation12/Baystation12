@@ -70,10 +70,6 @@
 
 /datum/map_template/proc/load_new_z()
 
-	if (tallness > 1) // aka this template has multiple zlevels and needs to be linked by the zlevel system...
-		if (tallness + world.maxz > GLOB.HIGHEST_CONNECTABLE_ZLEVEL_INDEX) // aka it's too tall to fit in the system...
-			return  // fug!
-
 	var/x = round((world.maxx - width)/2)
 	var/y = round((world.maxy - height)/2)
 
