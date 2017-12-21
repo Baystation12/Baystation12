@@ -4,7 +4,7 @@
 #include "blueriver_areas.dm"
 /obj/effect/overmap/sector/arcticplanet
 	name = "Arctic Planet"
-	desc = "Sensor array an arctic planet with a small vessle on the surface. Scans further indicate strange energy levels below the planet's surface."
+	desc = "Sensor array detects an arctic planet with a small vessle on the surface. Scans further indicate strange energy levels below the planet's surface."
 	name = "Arctic Planet"
 	generic_waypoints = list(
 		"nav_blueriv_1",
@@ -42,6 +42,7 @@
 	var/transformation_delay_max = 8
 
 /mob/living/simple_animal/hostile/hive_alien/defender/proc/mode_movement() //Slightly broken, but it's alien and unpredictable so w/e
+	set waitfor = 0
 	icon_state = "hive_executioner_move"
 	flick("hive_executioner_movemode", src)
 
@@ -121,7 +122,12 @@
 	icon = 'riverturfs.dmi'
 	icon_state = "floor"
 	temperature = 233
-/turf/simulated/floor/away/blueriver/alienfloor/New()
+
+
+/turf/simulated/floor/away/blueriver/alienfloor/Initialize()
+	.=..()
+
+///turf/simulated/floor/away/blueriver/alienfloor/Initial()
 	set_light(l_range = 5, l_power = 2, l_color = "#0066FF")
 
 
@@ -134,8 +140,11 @@
 	density = 1
 	temperature = 233
 
-/turf/unsimulated/wall/away/blueriver/livingwall/New()
-	..()
+/turf/unsimulated/wall/away/blueriver/livingwall/Initialize()
+	.=..()
+
+///turf/unsimulated/wall/away/blueriver/livingwall/Initial()
+//	..()
 
 	if(prob(80))
 		icon_state = "evilwall_[rand(1,8)]"
@@ -150,7 +159,10 @@
 	opacity = 0
 	dynamic_lighting = 0
 
-/turf/unsimulated/wall/supermatterriver/New()
+/turf/unsimulated/wall/supermatterriver/Initialize()
+	.=..()
+
+///turf/unsimulated/wall/supermatterriver/Initial()
 	icon_state = "bluespacecrystal[rand(1,3)]"
 	set_light(l_range = 5, l_power = 2, l_color = "#0066FF")
 
@@ -192,8 +204,7 @@
 
 	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
 	user.drop_from_inventory(W)
-	qdel(W)
-
+	Consume(W)
 
 
 /turf/unsimulated/wall/supermatterriver/Bumped(var/atom/movable/AM)
@@ -204,17 +215,21 @@
 		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
 		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\
 		"<span class=\"warning\">You hear an unearthly noise as a wave of heat washes over you.</span>")
-		qdel(AM)
+		Consume(AM)
 
 	else
 		AM.visible_message("<span class=\"warning\">\The [AM] smacks into \the [src] and rapidly flashes to ash.</span>",\
 		"<span class=\"warning\">You hear a loud crack as you are washed with a wave of heat.</span>")
-		qdel(AM)
+		Consume(AM)
 
 
 	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
 
 /turf/unsimulated/wall/supermatterriver/Entered(var/atom/movable/AM)
 	Bumped(AM)
+
+
+/turf/unsimulated/wall/supermatterriver/proc/Consume(atom/AM)
+	return AM.supermatter_act(src)
 
 #undef MayConsume
