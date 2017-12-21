@@ -20,9 +20,10 @@
 	name = "small energy gun"
 	desc = "A smaller model of the versatile LAEP90 Perun, packing considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
 	icon_state = "smallgunstun"
-	max_shots = 5
+	max_shots = 6
 	w_class = ITEM_SIZE_SMALL
 	force = 2 //it's the size of a car key, what did you expect?
+	fire_delay = 16 //it's smaller and can't dissipate heat as fast.
 	modifystate = "smallgunstun"
 
 	firemodes = list(
