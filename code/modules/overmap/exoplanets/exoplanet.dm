@@ -37,7 +37,8 @@
 									/datum/map_template/ruin/exoplanet/hydrobase,
 									/datum/map_template/ruin/exoplanet/crashed_pod,
 									/datum/map_template/ruin/exoplanet/hut,
-									/datum/map_template/ruin/exoplanet/playablecolony)
+									/datum/map_template/ruin/exoplanet/playablecolony,
+									/datum/map_template/ruin/exoplanet/ec_old_crash)
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)

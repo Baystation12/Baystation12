@@ -28,5 +28,7 @@
 		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/hydrobase/station = NO_SCRUBBER,
 		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/map_template/datacapsule = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/map_template/datacapsule = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/map_template/ecship/engine = NO_SCRUBBER|NO_APC,
+		/area/map_template/ecship/cockpit = NO_SCRUBBER|NO_APC
 	)

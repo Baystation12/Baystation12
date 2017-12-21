@@ -87,7 +87,9 @@
 		/area/shuttle/petrov/maint = NO_SCRUBBER,
 		/area/vacant/bar = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT,
-		/area/map_template/datacapsule = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/map_template/datacapsule = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/map_template/ecship/engine = NO_SCRUBBER|NO_APC,
+		/area/map_template/ecship/cockpit = NO_SCRUBBER|NO_APC
 	)
 
 	area_coherency_test_exempt_areas = list(
