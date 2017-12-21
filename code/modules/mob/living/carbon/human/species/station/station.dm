@@ -84,10 +84,12 @@
 	strength = STR_HIGH
 	slowdown = 0.5
 	brute_mod = 0.8
+	blood_volume = 800
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_UNATHI)
 	name_language = LANGUAGE_UNATHI
 	health_hud_intensity = 2
+	hunger_factor = 0.2
 
 	min_age = 18
 	max_age = 260
@@ -132,9 +134,79 @@
 		)
 	breathing_sound = 'sound/voice/lizard.ogg'
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/diona_heal_toggle
+		)
+
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
+
+/datum/species/unathi/handle_environment_special(var/mob/living/carbon/human/H)
+	if(H.in_stasis || H.stat == DEAD)
+		return
+	if(H.nutrition < 50)
+		H.adjustToxLoss(2,0)
+	else if (H.innate_heal)
+		//Heals normal damage.
+		if (H.getBruteLoss())
+			H.adjustBruteLoss(-4)
+			H.nutrition -= 4
+		if(H.getFireLoss())
+			H.adjustFireLoss(-3)
+			H.nutrition -= 4
+		if(H.getOxyLoss())
+			H.adjustOxyLoss(-4)
+			H.nutrition -= 4
+		if(H.getToxLoss())
+			H.adjustToxLoss(-2)
+			H.nutrition -= 4
+
+		if(prob(10) && H.nutrition > 150 && !H.getBruteLoss() && !H.getFireLoss())
+			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
+			if (D.disfigured)
+				D.disfigured = 0
+				H.nutrition -= 20
+
+	if(H.nutrition <= 100)
+		return
+
+	for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
+
+		var/obj/item/organ/internal/regen_organ = H.internal_organs_by_name[bpart]
+
+		if(regen_organ.robotic >= ORGAN_ROBOT)
+			continue
+		if(istype(regen_organ))
+			if(regen_organ.damage > 0)
+				regen_organ.damage = max(regen_organ.damage - 5, 0)
+				H.nutrition -= 5
+				if(prob(5))
+					to_chat(H, "<span class='warning'>You feel a soothing sensation as your [regen_organ] mends...</span>")
+
+	if(prob(5) && H.nutrition > 150)
+		for(var/limb_type in has_limbs)
+			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
+			if(E && !E.is_usable())
+				E.removed()
+				qdel(E)
+				E= null
+			if(!E)
+				var/list/organ_data = has_limbs[limb_type]
+				var/limb_path = organ_data["path"]
+				var/obj/item/organ/O = new limb_path(H)
+				organ_data["descriptor"] = O.name
+				to_chat(H, "<span class='danger'>With a shower of fresh blood, a new [O.name] forms.</span>")
+				H.visible_message("<span class='danger'>With a shower of fresh blood, a length of biomass shoots from [H], forming a new [O.name]</span>")
+				H.nutrition -= 50
+				var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
+				blood_splatter(H,B,1)
+				H.update_body()
+				return
+			else
+				for(var/datum/wound/W in E.wounds)
+					if(W.wound_damage() == 0 && prob(50))
+						E.wounds -= W
 
 /datum/species/tajaran
 	name = SPECIES_TAJARA
