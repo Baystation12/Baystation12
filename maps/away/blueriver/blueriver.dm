@@ -182,7 +182,7 @@
 /turf/unsimulated/wall/supermatterriver/attack_ai(mob/user as mob)
 	user.examinate(src)
 
-#define MayConsume(A) (istype(A) && A.simulated && !isobserver(A))
+#define MayConsume(A) (istype(A) && A.simulated)
 
 /turf/unsimulated/wall/supermatterriver/attack_hand(mob/user as mob)
 	if(!MayConsume(user))
