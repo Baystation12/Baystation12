@@ -64,43 +64,8 @@ obj/effect/icarus/irradiate/Destroy()
 	landmark_tag = "nav_icarus_antag"
 	flags = SLANDMARK_FLAG_AUTOSET
 
-obj/structure/icarus/broken_cryo
-	name = "destroyed cryo sleeper"
-	desc = "A mangled cryo sleeper with evidence that someone was inside when it was crushed. It looks like you could pry it open with a crowbar."
-	icon = 'maps/away/icarus/icarus_sprites.dmi'
-	icon_state = "broken_cryo"
-	anchored = 1
-	density = 1
-	var/closed = 1
-	var/busy = 0
-
-obj/structure/icarus/broken_cryo/attack_hand(mob/user)
-	..()
-	if (closed)
-		to_chat(user, "<span class='notice'>You tug at the glass but can't open it with your hands alone.</span>")
-	else
-		to_chat(user, "<span class='notice'>The glass is already open.</span>")
-
-
-/obj/structure/icarus/broken_cryo/attackby(obj/item/W as obj, mob/user as mob)
-	if (busy)
-		to_chat(user, "<span class='notice'>Someone else is attempting to open this.</span>")
-		return
-	if (closed)
-		if (isCrowbar(W))
-			busy = 1
-			visible_message("[user] starts to pry the glass cover off of \the [src].")
-			if (!do_after(user, 50, src))
-				visible_message("[user] stops trying to pry the glass off of \the [src].")
-				busy = 0
-				return
-			closed = 0
-			busy = 0
-			icon_state = "broken_cryo_open"
-			var/obj/dead = new /obj/item/icarus/dead_personnel(loc)
-			dead.dir = src.dir//skeleton is oriented as cryo
-	else
-		to_chat(user, "<span class='notice'>The glass cover is already open.</span>")
+/obj/structure/broken_cryo/icarus
+	remains_type = /obj/item/icarus/dead_personnel
 
 /obj/item/icarus/dead_personnel
 	name = "partial skeleton remains"
