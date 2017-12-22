@@ -89,7 +89,7 @@
 	secondary_langs = list(LANGUAGE_UNATHI)
 	name_language = LANGUAGE_UNATHI
 	health_hud_intensity = 2
-	hunger_factor = 0.2
+	hunger_factor = DEFAULT_HUNGER_FACTOR * 3
 
 	min_age = 18
 	max_age = 260
@@ -147,26 +147,26 @@
 		return
 	if(H.nutrition < 50)
 		H.adjustToxLoss(2,0)
-	else if (H.innate_heal)
-		//Heals normal damage.
-		if (H.getBruteLoss())
-			H.adjustBruteLoss(-4)
-			H.nutrition -= 4
-		if(H.getFireLoss())
-			H.adjustFireLoss(-3)
-			H.nutrition -= 4
-		if(H.getOxyLoss())
-			H.adjustOxyLoss(-4)
-			H.nutrition -= 4
-		if(H.getToxLoss())
-			H.adjustToxLoss(-2)
-			H.nutrition -= 4
+		return
+	if(!H.innate_heal)
+		return
 
-		if(prob(10) && H.nutrition > 150 && !H.getBruteLoss() && !H.getFireLoss())
-			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
-			if (D.disfigured)
-				D.disfigured = 0
-				H.nutrition -= 20
+	//Heals normal damage.
+	if(H.getBruteLoss())
+		H.adjustBruteLoss(-4)
+		H.nutrition -= 4
+	if(H.getFireLoss())
+		H.adjustFireLoss(-3)
+		H.nutrition -= 4
+	if(H.getToxLoss())
+		H.adjustToxLoss(-2)
+		H.nutrition -= 4
+
+	if(prob(10) && H.nutrition > 150 && !H.getBruteLoss() && !H.getFireLoss())
+		var/obj/item/organ/external/head/D = H.organs_by_name["head"]
+		if (D.disfigured)
+			D.disfigured = 0
+			H.nutrition -= 20
 
 	if(H.nutrition <= 100)
 		return
@@ -178,7 +178,7 @@
 		if(regen_organ.robotic >= ORGAN_ROBOT)
 			continue
 		if(istype(regen_organ))
-			if(regen_organ.damage > 0)
+			if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
 				regen_organ.damage = max(regen_organ.damage - 5, 0)
 				H.nutrition -= 5
 				if(prob(5))
