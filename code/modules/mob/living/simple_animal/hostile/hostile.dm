@@ -100,7 +100,12 @@
 		return
 	if(isliving(target_mob))
 		var/mob/living/L = target_mob
-		L.apply_damage(rand(melee_damage_lower,melee_damage_upper),damtype,null,L.run_armor_check(null,defense))
+		var/damage_to_apply = rand(melee_damage_lower,melee_damage_upper)
+		if(istype(L,/mob/living/carbon/human))
+			var/mob/living/carbon/human/h = L
+			if(h.check_shields(damage_to_apply, src, src, attacktext))
+				return
+		L.apply_damage(damage_to_apply,damtype,null,L.run_armor_check(null,defense))
 		L.visible_message("<span class='danger'>[src] has attacked [L]!</span>")
 		src.do_attack_animation(L)
 		spawn(1) L.updatehealth()
