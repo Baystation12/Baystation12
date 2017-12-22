@@ -7,7 +7,7 @@
 	req_one_access = list(access_heads)
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
-	var/department = "Command"
+	var/department = "NanoTrasen"
 	var/screen = 1 //Main screen always
 	var/mob/living/carbon/human/profiled
 	var/datum/browser/popup
@@ -23,17 +23,17 @@
 
 /obj/machinery/computer/department_manager/Process()
 	requestsbackup = pendingdeptrequests
-	if(world.time < next_run + 30 SECONDS)
+	if(world.time < next_run + 10 SECONDS)
 		return
 	next_run = world.time
 
 	employeecount = 0
 	for(var/mob/living/carbon/human/M in GLOB.player_list)
-		if(M.CharRecords.char_department == get_department(department, 0) || department == "NanoTrasen")
+		if(M.CharRecords.char_department == get_department(department, 0) || M.job && department == "NanoTrasen")
 			employeecount++
 //	if(!DeptRequests && department == "NanoTrasen")
 //		DeptRequests = new("data/ntrequests.sav")
-	load_requests()
+//	load_requests()
 
 
 /obj/machinery/computer/department_manager/verb/eject_id()
@@ -76,6 +76,7 @@
 	ui_interact(user)
 
 /obj/machinery/computer/department_manager/ui_interact(user)
+	..()
 	if (!isPlayerLevel(z))
 		to_chat(user, "<span class='warning'>Unable to establish a connection:</span> You're too far away from the [station_name()]!")
 		return
@@ -116,22 +117,23 @@
 						<a href='?src=\ref[src];choice=Profile;profiled=\ref[M]'>Profile</a></li>"}
 				dat += "</ul></body></html>"
 			if(2.1) //Character Employee Profile
+				var/icon/Front = getFlatIcon(profiled, SOUTH, always_use_defdir = 1)
+				if(Front)	profiled << browse_rsc(Front, "front.png")
 				dat = {"
 						<html>
 						<head>
 							<title>[department] Management Console</title>
 						</head>
 						<body>
-							<h1>[department] Management Console</h1>
-							"}
+						"}
 				dat += {"
-						<b>Name:</b> [profiled.real_name]<br>
+						<b>Name:</b> [profiled.real_name]<body><div class='right' style='float: right;'>Photo:<br><img src=front.png height=64 width=64 border=5></div></body><br>
 						<b>Age:</b> [profiled.age]<br>
 						<b>Occupation:</b> [profiled.job]<br>
 						<b>Occupation Rank: [get_department_rank_title(get_department(profiled.CharRecords.char_department, 1), profiled.CharRecords.department_rank)]<br>
 						<b>Clocked Hours:</b> [round(profiled.CharRecords.department_playtime/3600, 0.1)]<br>
 						<b>Employee Grade:</b> [round(profiled.CharRecords.employeescore, 0.01)]<hr>
-						<A href='?src=\ref[src];choice=records'>Employee Records</A><br><A href='?src=\ref[src];choice=promote'>Promote</A><br><A href='?src=\ref[src];choice=demote'>Demote</A><br>"}
+						<A href='?src=\ref[src];choice=records'>Employee Records</A>||<A href='?src=\ref[src];choice=promdemote'>Promote/Demote</A>||<A href='?src=\ref[src];choice=promote'>Promote</A><A href='?src=\ref[src];choice=demote'>Demote</A><br>"}
 				dat += "</body></html>"
 			if(2.2) //Character Employee Records
 				dat = {"
@@ -143,13 +145,69 @@
 				dat += "<ul>"
 				for(var/REC in records)
 					dat += "<li>[REC]</li><br>"
-				dat += "<A href='?src=\ref[src];choice=addrecord'>Add Record</A><br>"
+				dat += "<A href='?src=\ref[src];choice=addrecord'>Add Record</A>"
+				dat += {"
+				</ul>
+				</html>
+				</body>
+				"}
+			if(2.3) //Adding records
+				dat = {"
+				<html>
+				<body>
+				<b>[profiled.real_name] record editor:</b><br>
+				"}
+				dat += {"
+				<b>Name: </b> [profiled.real_name]<br>
+				<b>Occupation: </b> [profiled.job]<br>
+				<div class='left'><b>Number of Records:</b> [profiled.CharRecords.employee_records.len]</div><div class='right'><h3>Employee Grade: [round(profiled.CharRecords.employeescore, 0.01)]</h3></div><br>
+				<hr>
+				<b>Adding Character Record</b><br>
+				<form action="byond://?" method="get">
+				Record to add: <input type=text name=emprecord>
+				Employee Score rating (0-10)(0=none): <input type="number" name=empscore min="0" max="10">
+				<input type=submit value="Add Record" choice=addrecord>
+				"}
+//				dat += "<A href='?src=\ref[src];choice=addrecord'>Add Record</A>"
+				dat += {"
+				</ul>
+				</html>
+				</body>
+				"}
+			if(2.4) //Promoting/Demoting to head.
+				dat = {"
+				<html>
+				<body>
+				<b>[profiled.real_name] promotion editor:</b><br>
+				"}
+				dat += {"
+				<b>Name: </b> [profiled.real_name]<br>
+				<b>Occupation: </b> [profiled.job]<br>
+				<div class='left'><b>Number of Records:</b> [profiled.CharRecords.employee_records.len]</div><div class='right'><h3>Employee Grade: [round(profiled.CharRecords.employeescore, 0.01)]</h3></div><br>
+				<hr>
+				<b>Select promotion or demotion</b><br>
+				<form action="byond://?" method="get">
+				<select>
+					<option value="promote">Promote</option>
+					<option value="demote">Demote</option>
+				</select>
+				<b>Promote/Demote to rank:</b>
+				<select>
+					<option value="head">Head Rank</option>
+					<option value="senior">Senior Rank</option>
+				</select>
+				Record to add: <input type=text name=emprecord>
+				Employee Score rating (0-10)(0=none): <input type="number" name=empscore min="0" max="10">
+				<input type=submit value="Add Record" choice=addrecord>
+				"}
+//				dat += "<A href='?src=\ref[src];choice=addrecord'>Add Record</A>"
 				dat += {"
 				</ul>
 				</html>
 				</body>
 				"}
 			if(3)
+				dat += "ERROR: Server undergoing routine maintenance, check back later. ((WIP))"
 				dat += "<A href='?src=\ref[src];choice=return'>Return</A>"
 				return //Nothin yet son!
 			if(4)
@@ -162,8 +220,20 @@
 					<hr>
 					"}
 					dat += "<ul>"
+					var/list/online = list()
+					var/list/offline = list()
 					for(var/datum/ntrequest/N in pendingdeptrequests)
-						dat += "<li>REQUEST-#[N.requestid]<b>|</b>[N.requesttype], FROM [N.fromchar]. TO [N.tochar]. FOR [N.requesttext]. <a href='?src=\ref[src];choice=acceptreq;requestid=[N.requestid]'>Accept</a><a href='?src=\ref[src];choice=acceptreq;requestid=[N.requestid]'>Deny</a></li><br>"
+						for(var/mob/living/carbon/human/H in GLOB.player_list)
+							if(N.real_name == H.real_name && N.ckey == H.ckey) //You're matched, say hello!
+								online += "<li><font color='green'>REQUEST-#[N.requestid]<b></font>|</b>[N.requesttype], FROM [N.fromchar]. TO [N.tochar]. FOR [N.requesttext]. <a href='?src=\ref[src];choice=reqaccept;requested=\ref[N]'>Accept</a><a href='?src=\ref[src];choice=reqdeny;requested=\ref[N]'>Deny</a></li><br>"
+							else //Offline/Not found
+								offline += "<li><font color='red'>REQUEST-#[N.requestid]<b></font>|</b>[N.requesttype], FROM [N.fromchar]. TO [N.tochar]. FOR [N.requesttext]. <a href='?src=\ref[src];choice=reqaccept;requested=\ref[N]'>Accept</a><a href='?src=\ref[src];choice=reqdeny;requested=\ref[N]'>Deny</a></li><br>"
+					if(online.len)
+						dat += "<br><b>Availible Requests</b><hr>"
+						dat += dd_list2text(online)
+					if(offline.len)
+						dat += "<br><b>Unavailible Requests</b><hr>"
+						dat += dd_list2text(offline)
 					dat += {"
 					</ul>
 					</html>
@@ -171,8 +241,9 @@
 					"}
 		dat += "<A href='?src=\ref[src];choice=return'>Return</A>"
 	else
-		dat += text("<A href='?src=\ref[];choice=Log In'>Log In</A>", src)
-	popup = new(user, "dept_console", "[department] Management Console", 420, 480)
+		dat += "<b>Department:</b> [department]<br><b>Employee Count:</b> [employeecount]<hr>"
+		dat += text("<center><A href='?src=\ref[];choice=Log In'>Log In</A></center>", src)
+	popup = new(user, "dept_console", "[department] Management Console", 480, 520)
 	popup.add_stylesheet("dept_console", 'html/browser/department_management_console.css')
 	popup.set_content(jointext(dat, null))
 	popup.open()
@@ -181,8 +252,8 @@
 
 
 /obj/machinery/computer/department_manager/Topic(href, href_list)
-	if(..())
-		return 1
+//	if(..())
+//		return 1
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 		switch(href_list["choice"])
@@ -209,13 +280,17 @@
 				screen = 3
 			if("ntpanel")
 				screen = 4
+			if("addrecord")
+				screen = 2.3
+			if("promdemote")
+				screen = 2.4
 			if("return")
 				switch(screen)
 					if(2)
 						screen = 1
 					if(2.1)
 						screen = 2
-					if(2.2)
+					if(2.1 to 2.4)
 						screen = 2.1
 					if(3)
 						screen = 1
@@ -232,15 +307,27 @@
 				screen = 2.2
 			if("addrecord")
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
+				if(profiled.CharRecords.char_department != "Command" || profiled.job == "Captain" || profiled.CharRecords.promoted == 2) //Can't sue your bosses, Captain or Heads.
+					to_chat(usr, "Leave blank to cancel.")
+					var/record = href_list["emprecord"]
+					var/score = href_list["empscore"]
+					if(!record)	return world.log << "WARN: Attempted adding record with no record?"
+					if(!score || score > 10 || score < 0)	score = 0
+					var/datum/ntrequest/NR = new()
+					NR.make_request(src, "record", idowner, profiled, record, score)
+				changedrecord = 1
+
+/*			if("addrecord")
+				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
 				if(profiled.CharRecords.char_department != "Command" || profiled.job == "Captain" || profiled.CharRecords.promoted == 2) //Can't see your bosses, Captain or Heads.
 					to_chat(usr, "Leave blank to cancel.")
 					var/record = input("Insert Record:", "Record Management - Department Management")
 					var/score = input("Insert record score (1-10) for the employee rating.", "Record Management - Department Management") as num
 					if(!record)	return
-					if(!score || !score in 1 to 10)	score = 0
+					if(!score || score > 10 || score < 0)	score = 0
 					var/datum/ntrequest/NR = new()
 					NR.make_request(src, "record", idowner, profiled, record, score)
-				changedrecord = 1
+				changedrecord = 1*/
 			if("promote")
 				if(!profiled)	return to_chat(usr, "Unknown system error occurred, could not retrieve profile.")
 				switch(alert("Promote [profiled.real_name] to a Senior- or Head Position?", "Promotion Screen", "Senior Position", "Head Position"))
@@ -291,75 +378,78 @@
 							to_chat(usr, "Demotion complete.")
 				changedrecord = 1
 			if("reqaccept")
-				var/id = locate(href_list["requestid"])
+				var/datum/ntrequest/N = locate(href_list["requested"])
+				if(!N || !istype(N))	world.log << "WARN: No NT Request found in accepting."
 				switch(alert("Are you sure you wish to accept?", "Pending requests", "Cancel", "Accept Request"))
 					if("Cancel")
 						return
 					if("Accept Request")
-						for(var/datum/ntrequest/N in pendingdeptrequests)
-							if(N.requestid == id)
-								for(var/mob/living/carbon/human/H in GLOB.player_list)
-									if(H && N.real_name == H.real_name && N.ckey == H.ckey) //You're matched, say hello!
-										switch(N.requesttype)
-											if("record")
-												H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (ACCEPTED)", N.score, 0, 0, 0, 0)
-												pendingdeptrequests.Remove(N) //Remove from system after all is applied.
-												qdel(N)
-											if("promote")
-												if(!H.CharRecords.promoted) //No can do..?
-													pendingdeptrequests.Remove(N) //Remove from system after all is applied.
-													qdel(N)
-													return
-												else if(H.CharRecords.promoted == 1)
-													H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (ACCEPTED)", N.score, 0, 10, 0, 0)
-													H.CharRecords.promoted = 2
-													pendingdeptrequests.Remove(N) //Remove from system after all is applied.
-													qdel(N)
-											if("demote")
-												if(!H.CharRecords.promoted) //No can do..?
-													pendingdeptrequests.Remove(N) //Remove from system after all is applied.
-													qdel(N)
-													return
-												H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (ACCEPTED)", N.score, 0, 0, 0, 0)
-												switch(H.CharRecords.promoted)
-													if(1) //Promoted to Senior
-														H.CharRecords.promoted = 0 //Back down yee!
-													if(2) //Promoted to Head.
-														H.CharRecords.promoted = 1 //Back down yee!
-												pendingdeptrequests.Remove(N) //Remove from system after all is applied.
-												qdel(N)
+						for(var/mob/living/carbon/human/H in GLOB.player_list)
+							if(N.real_name == H.real_name && N.ckey == H.ckey) //You're matched, say hello!
+								world.log << "WARN: Found match [N.real_name], [N.ckey]"
+								switch(N.requesttype)
+									if("record")
+										H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (ACCEPTED)", N.score, 0, 0, 0, 0)
+										pendingdeptrequests.Remove(N) //Remove from system after all is applied.
+										del(N)
+									if("promote")
+										if(!H.CharRecords.promoted) //No can do..?
+											pendingdeptrequests.Remove(N) //Remove from system after all is applied.
+											del(N)
+											return
+										else if(H.CharRecords.promoted == 1)
+											H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (ACCEPTED)", N.score, 0, 10, 0, 0)
+											H.CharRecords.promoted = 2
+											pendingdeptrequests.Remove(N) //Remove from system after all is applied.
+											del(N)
+									if("demote")
+										if(!H.CharRecords.promoted) //No can do..?
+											pendingdeptrequests.Remove(N) //Remove from system after all is applied.
+											del(N)
+											return											H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (ACCEPTED)", N.score, 0, 0, 0, 0)
+										switch(H.CharRecords.promoted)
+											if(1) //Promoted to Senior
+												H.CharRecords.promoted = 0 //Back down yee!
+											if(2) //Promoted to Head.
+												H.CharRecords.promoted = 1 //Back down yee!
+										pendingdeptrequests.Remove(N) //Remove from system after all is applied.
+										del(N)
+								save_requests()
+								updateUsrDialog()
+								return
 			if("reqdeny")
-				var/id = locate(href_list["requestid"])
+				var/datum/ntrequest/N = locate(href_list["requested"])
 				switch(alert("Are you sure you wish to deny?", "Pending requests", "Cancel", "Deny Request"))
 					if("Cancel")
 						return
 					if("Deny Request")
-						for(var/datum/ntrequest/N in pendingdeptrequests)
-							if(N.requestid == id)
-								for(var/mob/living/carbon/human/H in GLOB.player_list)
-									if(H && N.real_name == H.real_name && N.ckey == H.ckey) //You're matched, say hello!
-										switch(N.requesttype)
-											if("record")
-												H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (DENIED)", N.score, 0, 0, 0, 0)
-												pendingdeptrequests.Remove(N) //Remove from system after all is applied.
-												qdel(N)
-											if("promote")
-												H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (DENIED)", N.score, 0, 0, 0, 0)
-												pendingdeptrequests.Remove(N) //Remove from system after all is applied.
-												qdel(N)
-											if("demote")
-												if(!H.CharRecords.promoted) //No can do..?
-													pendingdeptrequests.Remove(N) //Remove from system after all is applied.
-													qdel(N)
-													return
-												H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (DENIED)", N.score, 0, -10, 0, 0)
-												switch(H.CharRecords.promoted)
-													if(1) //Promoted to Senior
-														H.CharRecords.promoted = 0 //Back down yee!
-													if(2) //Promoted to Head.
-														H.CharRecords.promoted = 1 //Back down yee!
-												pendingdeptrequests.Remove(N) //Remove from system after all is applied.
-												qdel(N)
+						for(var/mob/living/carbon/human/H in GLOB.player_list)
+							if(N.real_name == H.real_name && N.ckey == H.ckey) //You're matched, say hello!
+								world.log << "WARN: Found match [N.real_name], [N.ckey]"
+								switch(N.requesttype)
+									if("record")
+										H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (DENIED)", N.score, 0, 0, 0, 0)
+										pendingdeptrequests.Remove(N) //Remove from system after all is applied.
+										del(N)
+									if("promote")
+										H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (DENIED)", N.score, 0, 0, 0, 0)
+										pendingdeptrequests.Remove(N) //Remove from system after all is applied.
+										del(N)
+									if("demote")
+										if(!H.CharRecords.promoted) //No can do..?
+											pendingdeptrequests.Remove(N) //Remove from system after all is applied.
+											del(N)
+											return
+										H.CharRecords.add_employeerecord(N.fromchar,"[N.requesttext] (DENIED)", N.score, 0, -10, 0, 0)
+										switch(H.CharRecords.promoted)
+											if(1) //Promoted to Senior
+												H.CharRecords.promoted = 0 //Back down yee!
+											if(2) //Promoted to Head.
+												H.CharRecords.promoted = 1 //Back down yee!
+										pendingdeptrequests.Remove(N) //Remove from system after all is applied.
+										del(N)
+								save_requests()
+								updateUsrDialog()
 
 		Save_Changes()
 	add_fingerprint(usr)

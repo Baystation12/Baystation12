@@ -18,6 +18,7 @@
 	var/neurallaces = 0
 	var/promoted = 0 //May be obselete.
 	var/permadeath = 0
+	var/newchar = 1
 /*--------OTHER-RELATED--------*/
 
 /datum/ntprofile/proc/Reset_Profile()
@@ -46,8 +47,13 @@
 	load_persistent() //Load persistent info.
 	assign_flag()
 	calculate_department_rank(owner)
-	add_employeerecord("NanoTrasen", "Beginning of Employment in [owner.client.prefs.prefs_department] Dept.", 5, 0, 0, 250, 1)
 	load_score()
+	spawn(50)
+		if(newchar)
+			add_employeerecord("NanoTrasen", "Beginning of Employment in [owner.client.prefs.prefs_department] Dept.", 5, 0, 0, 250, 1)
+			employeescore = 5 //Default.
+			to_chat(owner, "{*} First time character detected, enjoy your department! (Initializations complete.)")
+			newchar = 0
 
 /datum/ntprofile/proc/load_persistent()
 	if(owner) //Must be valid.
@@ -68,6 +74,7 @@
 		S["promotion"]				>> promoted
 		S["bonuscredit"]			>> bonuscredit
 		S["promoted"]				>> promoted
+		S["newchar"]				>> newchar
 		return 1
 
 /datum/ntprofile/proc/save_persistent()
@@ -89,6 +96,7 @@
 		S["promotion"]				<< promoted
 		S["bonuscredit"]			<< bonuscredit
 		S["promoted"]				<< promoted
+		S["newchar"]				<< newchar
 		return 1
 
 /datum/ntprofile/proc/load_score()
@@ -120,7 +128,7 @@
 				char_department |= SRV
 
 /datum/ntprofile/employeerecord
-	var/mob/living/carbon/human/maker = ""       //The maker of the Recommendation
+	var/maker = "" //The maker of this record.
 	var/note = "" //The note to add.
 	var/recomscore = 0        // The score (1-10) we apply to the overall NT score 0 = no change.
 	var/warrantspromotion = 0 //If this is enough to warrant a promotion, EG from regular to senior roles.
@@ -134,7 +142,7 @@
 //		var/mob/living/carbon/human/Maker = recommaker
 		var/datum/ntprofile/employeerecord/record = new() //Initialize the record.
 		if(record)
-			record.maker.real_name = recommaker
+			record.maker = recommaker
 			record.note = note
 			record.recomscore = recomscore
 			record.warrantspromotion = warrantspromotion
