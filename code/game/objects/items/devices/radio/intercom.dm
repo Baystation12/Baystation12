@@ -9,7 +9,7 @@
 	flags = CONDUCT | NOBLOODY
 	layer = ABOVE_WINDOW_LAYER
 	var/number = 0
-	var/last_tick //used to delay the powercheck
+	var/next_tick = 0 //used to delay the powercheck
 	var/area/MyArea
 
 /obj/item/device/radio/intercom/get_storage_cost()
@@ -125,8 +125,8 @@
 	return canhear_range
 
 /obj/item/device/radio/intercom/Process()
-	if(((world.timeofday - last_tick) > 40) || ((world.timeofday - last_tick) < 0))
-		last_tick = world.timeofday
+	if(next_tick < world.time)
+		next_tick = world.time + 45
 
 		if(!src.loc || !MyArea)
 			on = 0
