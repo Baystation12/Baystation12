@@ -110,6 +110,6 @@
 
 /turf/unsimulated/wall/supermatter/proc/Consume(var/atom/movable/AM)
 	if(MayConsume(AM))
-		return AM.supermatter_act(src)
+		qdel(AM)
 
 #undef MayConsume

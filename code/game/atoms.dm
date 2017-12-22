@@ -541,7 +541,3 @@ its easier to just keep the beam vertical.
 		do_climb(target)
 	else
 		return ..()
-
-/atom/proc/supermatter_act(atom/source, severity)
-	qdel(src)
-	return 1

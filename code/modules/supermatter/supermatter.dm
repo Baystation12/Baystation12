@@ -479,7 +479,7 @@
 		user.dust()
 		power += 200
 	else
-		return user.supermatter_act(src)
+		qdel(user)
 
 	power += 200
 
