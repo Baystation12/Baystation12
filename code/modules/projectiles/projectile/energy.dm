@@ -63,15 +63,16 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	nodamage = 1
 	taser_effect = 1
-	agony = 60
+	agony = 50
 	damage_type = PAIN
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
 /obj/item/projectile/energy/electrode/stunshot
 	nodamage = 0
-	damage = 10
-	agony = 80
+	damage = 15
+	agony = 70
 	damage_type = BURN
+	armor_penetration = 10
 
 /obj/item/projectile/energy/declone
 	name = "decloner beam"
