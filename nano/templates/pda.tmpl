@@ -301,8 +301,8 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     <b>Financial Information:</b>
                 </div>
                 <div class = "itemContent">
-				    <span class="average">Banking Balance: {{:data.ntprofile.bank}}</span><br>
-					<span class="average">Pension Account: {{:data.ntprofile.pension}}</span>
+				    <span class="average">Banking Balance: ${{:helper.formatNumber(data.ntprofile.bank)}}</span><br>
+					<span class="average">Pension Account: ${{:helper.formatNumber(data.ntprofile.pension)}}</span>
                 </div>
             </div>
         </div>

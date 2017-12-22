@@ -49,3 +49,8 @@ a:active {
 	background-color: #8A803F;
 }
 
+input { 
+    background: grey;
+	border: none;
+	border-radius: 4px;
+}
