@@ -115,7 +115,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 /proc/fireyexplosion(var/flame_range, var/turf/T)
 	set waitfor = 0
-	if(flame_range && prob(40) && !isspace(T) && !T.density)
+	if(flame_range && prob(44) && !isspace(T) && !T.density)
 		var/obj/fire/F = new(T)
 		sleep(rand(5, 10))
 		qdel(F)
