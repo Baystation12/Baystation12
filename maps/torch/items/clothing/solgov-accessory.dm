@@ -219,7 +219,7 @@ armour attachments
 	desc = "An emblem depicting the Sol Central Government's flag."
 	icon_override = 'maps/torch/icons/obj/solgov-accessory.dmi'
 	icon = 'maps/torch/icons/obj/solgov-accessory.dmi'
-	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/solgov-accessory.dmi')
+	accessory_icons = list(slot_tie_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_w_uniform_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/solgov-accessory.dmi')
 	icon_state = "solflag"
 	slot = ACCESSORY_SLOT_ARMOR_M
 
@@ -242,6 +242,10 @@ armour attachments
 	name = "\improper POLICE tag"
 	desc = "An armor tag with the words POLICE printed in gold lettering on it."
 	icon_state = "comsectag"
+
+/obj/item/clothing/accessory/armor/helmcover/blue/sol
+	name = "peacekeeper helmet cover"
+	desc = "A fabric cover for armored helmets. This one is in SCG peacekeeper colors."
 
 /**************
 department tags
