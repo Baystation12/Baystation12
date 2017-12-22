@@ -38,6 +38,8 @@ var/global/list/additional_antag_types = list()
 	var/waittime_l = 60 SECONDS				 // Lower bound on time before start of shift report
 	var/waittime_h = 180 SECONDS		     // Upper bounds on time before start of shift report
 
+	var/list/allowed_ghost_roles = list(/datum/ghost_role/mouse)
+
 /datum/game_mode/New()
 	..()
 	// Enforce some formatting.

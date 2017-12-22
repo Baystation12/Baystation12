@@ -9,6 +9,8 @@
 	extended_round_description = "Your ship has crash landed on a distant alien world. Now waves of Flood are attacking and there is only limited time to setup defences. Can you survive until the rescue team arrives?"
 	//hub_descriptions = list("desperately struggling to survive against waves of parasitic aliens on a distant world...")
 
+	allowed_ghost_roles = list(/datum/ghost_role/flood_combat_form)
+
 	var/wave_num = 0
 	var/area/planet/daynight/planet_area
 	var/list/flood_spawn_turfs = list()
