@@ -216,7 +216,7 @@ proc/age2agedescription(age)
 		if (progress)
 			progbar.update(world.time - starttime)
 
-		if(!user || user.incapacitated(incapacitation_flags) || user.loc != original_loc || (same_direction && user.dir != original_dir))
+		if(!user || (incapacitation_flags && user.incapacitated(incapacitation_flags)) || user.loc != original_loc || (same_direction && user.dir != original_dir))
 			. = 0
 			break
 
