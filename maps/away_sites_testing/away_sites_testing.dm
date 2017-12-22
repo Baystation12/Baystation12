@@ -12,13 +12,9 @@
 	#include "../away/smugglers/smugglers.dm"
 	#include "../away/casino/casino.dm"
 	#include "../away/magshield/magshield.dm"
-<<<<<<< HEAD
 	#include "../away/blueriver/blueriver.dm"
-
-=======
 	#include "../away/slavers/slavers_base.dm"
->>>>>>> 250613a339... Added new overmap location - slavers base inside asteroid.
-
+	#include "../away/slavers/slavers_base.dm"
 	#include "../../code/modules/lobby_music/absconditus.dm"
 
 	#define using_map_DATUM /datum/map/away_sites_testing
