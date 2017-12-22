@@ -483,7 +483,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			"bank" = "[user:CharRecords.bank_balance]",\
 			"paycheck" = "[calculate_paycheck(user)]",\
 			"pension" = "[user:CharRecords.pension_balance]",\
-			"activehours" = "[user:CharRecords.department_playtime / 3600]",\
+			"activehours" = "[round(user:CharRecords.department_playtime/3600, 0.1)]",\
 			"recommendations" = "[recommends]",\
 			"neurallaces" = "[user:CharRecords.neurallaces]",\
 			"permadeath" = "[user:CharRecords.permadeath]"\
@@ -633,6 +633,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if(mode==2)
 					active_conversation = null
 				if(mode==4)//Fix for cartridges. Redirects to hub.
+					mode = 0
+				if(mode==31)
 					mode = 0
 				else if(mode >= 40 && mode <= 49)//Fix for cartridges. Redirects to refresh the menu.
 					cartridge.mode = mode
