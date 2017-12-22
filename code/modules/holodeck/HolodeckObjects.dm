@@ -14,9 +14,9 @@
 	return
 
 /turf/simulated/floor/holofloor/carpet
-	name = "carpet"
+	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
-	icon_state = "carpet"
+	icon_state = "brown"
 	initial_flooring = /decl/flooring/carpet
 
 /turf/simulated/floor/holofloor/tiled

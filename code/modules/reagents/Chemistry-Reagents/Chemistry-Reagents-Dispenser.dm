@@ -153,7 +153,7 @@
 		M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 	if(halluci)
-		M.hallucination = max(M.hallucination, halluci)
+		M.adjust_hallucination(halluci, halluci)
 
 /datum/reagent/ethanol/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/paper))

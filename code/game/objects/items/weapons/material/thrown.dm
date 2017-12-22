@@ -17,7 +17,8 @@
 	..()
 	if(material.radioactivity>0 && istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
-		M.adjustToxLoss(rand(20,40))
+		var/urgh = material.radioactivity
+		M.adjustToxLoss(rand(urgh/2,urgh))
 
 /obj/item/weapon/material/star/ninja
 	default_material = "uranium"

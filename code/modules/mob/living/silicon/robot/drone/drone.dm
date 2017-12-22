@@ -37,6 +37,7 @@ var/list/mob_hat_cache = list()
 	integrated_light_power = 3
 	local_transmit = 1
 	possession_candidate = 1
+	speed = -1
 
 	can_pull_size = ITEM_SIZE_NORMAL
 	can_pull_mobs = MOB_PULL_SMALLER
@@ -206,7 +207,7 @@ var/list/mob_hat_cache = list()
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
 		return
 
-	else if (istype(W, /obj/item/weapon/crowbar))
+	else if(isCrowbar(W))
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return
 

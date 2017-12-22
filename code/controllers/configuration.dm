@@ -4,8 +4,6 @@ var/list/gamemode_cache = list()
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
 
-	var/nudge_script_path = "nudge.py"  // where the nudge.py script is located
-
 	var/log_ooc = 0						// log OOC channel
 	var/log_access = 0					// log login/logout
 	var/log_say = 0						// log client say
@@ -49,7 +47,6 @@ var/list/gamemode_cache = list()
 	var/Ticklag = 0.33
 	var/fps = 50
 	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
-	var/socket_talk	= 0					// use socket_talk to communicate with other processes
 	var/list/resource_urls = null
 	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
 	var/antag_hud_restricted = 0                    // Ghosts that turn on Antagovision cannot rejoin the round.
@@ -70,7 +67,6 @@ var/list/gamemode_cache = list()
 	var/mod_tempban_max = 1440
 	var/mod_job_tempban_max = 1440
 	var/load_jobs_from_txt = 0
-	var/ToRban = 0
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 	var/use_cortical_stacks = 0
 
@@ -163,15 +159,13 @@ var/list/gamemode_cache = list()
 	var/login_export_addr = null
 
 	var/enter_allowed = 1
+	var/player_limit = 0
 
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
-	var/irc_bot_export = 0 // whether the IRC bot in use is a Bot32 (or similar) instance; Bot32 uses world.Export() instead of nudge.py/libnudge
 	var/main_irc = ""
 	var/admin_irc = ""
 	var/announce_shuttle_dock_to_irc = FALSE
-	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
-	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
@@ -214,8 +208,9 @@ var/list/gamemode_cache = list()
 	var/wait_for_sigusr1_reboot = 0 // Don't allow reboot unless it was caused by SIGUSR1
 
 	var/radiation_decay_rate = 1 //How much radiation is reduced by each tick
-	var/radiation_resistance_multiplier = 6.5
-	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
+	var/radiation_resistance_multiplier = 1.25
+	var/radiation_material_resistance_divisor = 2 //A turf's possible radiation resistance is divided by this number, to get the real value.
+	var/radiation_lower_limit = 0.15 //If the radiation level for a turf would be below this, ignore it.
 
 	var/autostealth = 0 // Staff get automatic stealth after this many minutes
 
@@ -223,6 +218,8 @@ var/list/gamemode_cache = list()
 	var/error_limit = 50 // How many occurrences before the next will silence them
 	var/error_silence_time = 6000 // How long a unique error will be silenced for
 	var/error_msg_delay = 50 // How long to wait between messaging admins about occurrences of a unique error
+
+	var/max_gear_cost = 10 // Used in chargen for accessory loadout limit. 0 disables loadout, negative allows infinite points.
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -411,9 +408,6 @@ var/list/gamemode_cache = list()
 				if ("serversuffix")
 					config.server_suffix = 1
 
-				if ("nudge_script_path")
-					config.nudge_script_path = value
-
 				if ("hostedby")
 					config.hostedby = value
 
@@ -553,9 +547,6 @@ var/list/gamemode_cache = list()
 				if("use_irc_bot")
 					use_irc_bot = 1
 
-				if("irc_bot_export")
-					irc_bot_export = 1
-
 				if("ticklag")
 					var/ticklag = text2num(value)
 					if(ticklag > 0)
@@ -572,14 +563,8 @@ var/list/gamemode_cache = list()
 				if("antag_hud_restricted")
 					config.antag_hud_restricted = 1
 
-				if("socket_talk")
-					socket_talk = text2num(value)
-
 				if("humans_need_surnames")
 					humans_need_surnames = 1
-
-				if("tor_ban")
-					ToRban = 1
 
 				if("usealienwhitelist")
 					usealienwhitelist = 1
@@ -627,13 +612,6 @@ var/list/gamemode_cache = list()
 
 				if("announce_shuttle_dock_to_irc")
 					config.announce_shuttle_dock_to_irc = TRUE
-
-				if("python_path")
-					if(value)
-						config.python_path = value
-
-				if("use_lib_nudge")
-					config.use_lib_nudge = 1
 
 				if("allow_cult_ghostwriter")
 					config.cult_ghostwriter = 1
@@ -736,6 +714,21 @@ var/list/gamemode_cache = list()
 					error_silence_time = text2num(value)
 				if("error_msg_delay")
 					error_msg_delay = text2num(value)
+
+				if("max_gear_cost")
+					max_gear_cost = text2num(value)
+					if(max_gear_cost < 0)
+						max_gear_cost = INFINITY
+				if("radiation_decay_rate")
+					radiation_decay_rate = text2num(value)
+				if("radiation_resistance_multiplier")
+					radiation_resistance_multiplier = text2num(value)
+				if("radiation_material_resistance_divisor")
+					radiation_material_resistance_divisor = text2num(value)
+				if("radiation_lower_limit")
+					radiation_lower_limit = text2num(value)
+				if("player_limit")
+					player_limit = text2num(value)
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
@@ -860,14 +853,6 @@ var/list/gamemode_cache = list()
 		if(M && !M.startRequirements() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
 			. |= M
 	return .
-
-/datum/configuration/proc/post_load()
-	//apply a default value to config.python_path, if needed
-	if (!config.python_path)
-		if(world.system_type == UNIX)
-			config.python_path = "/usr/bin/env python2"
-		else //probably windows, if not this should work anyway
-			config.python_path = "python"
 
 /datum/configuration/proc/load_event(filename)
 	var/event_info = file2text(filename)

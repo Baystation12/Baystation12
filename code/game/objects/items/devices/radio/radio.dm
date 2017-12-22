@@ -431,7 +431,7 @@
 	if(!connection)	return 0	//~Carn
 	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
-					  filter_type, signal.data["compression"], list(position.z), connection.frequency,verb,speaking)
+					  filter_type, signal.data["compression"], GetConnectedZlevels(position.z), connection.frequency,verb,speaking)
 
 
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)
@@ -506,7 +506,7 @@
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	user.set_machine(src)
-	if (!( istype(W, /obj/item/weapon/screwdriver) ))
+	if (!( isScrewdriver(W) ))
 		return
 	b_stat = !( b_stat )
 	if(!istype(src, /obj/item/device/radio/beacon))
@@ -526,7 +526,7 @@
 	for (var/ch_name in channels)
 		channels[ch_name] = 0
 	..()
-	
+
 /obj/item/device/radio/proc/recalculateChannels()
 	return
 
@@ -555,7 +555,7 @@
 		CRASH("Invalid spawn location: [log_info_line(loc)]")
 	..()
 	myborg = loc
-	
+
 /obj/item/device/radio/borg/Initialize()
 	. = ..()
 	recalculateChannels()
@@ -578,10 +578,10 @@
 /obj/item/device/radio/borg/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
-	if (!( istype(W, /obj/item/weapon/screwdriver) || (istype(W, /obj/item/device/encryptionkey/ ))))
+	if (!( isScrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))
 		return
 
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(isScrewdriver(W))
 		if(keyslot)
 
 

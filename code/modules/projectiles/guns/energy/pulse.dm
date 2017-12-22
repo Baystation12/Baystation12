@@ -8,12 +8,13 @@
 	projectile_type = /obj/item/projectile/beam/pulse/heavy
 	max_shots = 36
 	w_class = ITEM_SIZE_HUGE
-	one_hand_penalty=6
+	one_hand_penalty= 6
 	multi_aim = 1
 	burst_delay = 3
 	burst = 3
 	move_delay = 4
 	accuracy = -1
+	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/energy/pulse_rifle/carbine
 	name = "pulse carbine"
@@ -24,7 +25,7 @@
 	projectile_type = /obj/item/projectile/beam/pulse/mid
 	max_shots = 24
 	w_class = ITEM_SIZE_LARGE
-	one_hand_penalty=3
+	one_hand_penalty= 3
 	burst_delay = 2
 	move_delay = 2
 
@@ -40,6 +41,7 @@
 	one_hand_penalty=1 //a bit heavy
 	burst_delay = 1
 	move_delay = 1
+	wielded_item_state = null
 
 /obj/item/weapon/gun/energy/pulse_rifle/mounted
 	self_recharge = 1
@@ -51,7 +53,7 @@
 	cell_type = /obj/item/weapon/cell/super
 	fire_delay = 25
 	projectile_type=/obj/item/projectile/beam/pulse/destroy
-	charge_cost=40
+	charge_cost= 40
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
 	to_chat(user, "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>")

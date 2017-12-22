@@ -145,7 +145,6 @@ var/list/Tier1Runes = list(
 	/mob/proc/wall_rune,
 	/mob/proc/ajorney_rune,
 	/mob/proc/defile_rune,
-	/mob/proc/stun_imbue,
 	/mob/proc/emp_imbue,
 	/mob/proc/cult_communicate
 	)
@@ -273,12 +272,6 @@ var/list/Tier4Runes = list(
 	set name = "Rune: Tear Reality"
 
 	make_rune(/obj/effect/rune/tearreality, cost = 50, tome_required = 1)
-
-/mob/proc/stun_imbue()
-	set category = "Cult Magic"
-	set name = "Imbue: Stun"
-
-	make_rune(/obj/effect/rune/imbue/stun)
 
 /mob/proc/emp_imbue()
 	set category = "Cult Magic"

@@ -23,7 +23,7 @@
 
 	if(wear_mask)
 		skipface |= wear_mask.flags_inv & HIDEFACE
-	
+
 	//no accuately spotting headsets from across the room.
 	if(get_dist(user, src) > 3)
 		skipears = 1
@@ -138,6 +138,15 @@
 			msg += "<span class='warning'>[T.He] [T.is] extremely jittery.</span>\n"
 		else if(jitteriness >= 100)
 			msg += "<span class='warning'>[T.He] [T.is] twitching ever so slightly.</span>\n"
+
+	//Disfigured face
+	if(!skipface) //Disfigurement only matters for the head currently.
+		var/obj/item/organ/external/head/E = get_organ(BP_HEAD)
+		if(E && E.disfigured) //Check to see if we even have a head and if the head's disfigured.
+			if(E.species) //Check to make sure we have a species
+				msg += E.species.disfigure_msg(src)
+			else //Just in case they lack a species for whatever reason.
+				msg += "<span class='warning'>[T.His] face is horribly mangled!</span>\n"
 
 	//splints
 	for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
@@ -255,9 +264,9 @@
 			perpname = name
 
 		if(perpname)
-			for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
-				if(E.GetName() == perpname)
-					criminal = E.GetCriminalStatus()
+			var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
+			if(R)
+				criminal = R.get_criminalStatus()
 
 			msg += "<span class = 'deptradio'>Criminal status:</span> <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
 			msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=`'>\[View\]</a>\n"
@@ -275,9 +284,9 @@
 		else
 			perpname = src.name
 
-		for (var/datum/computer_file/crew_record/E in GLOB.all_crew_records)
-			if (E.GetName() == perpname)
-				medical = E.GetStatus()
+		var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
+		if(R)
+			medical = R.get_status()
 
 		msg += "<span class = 'deptradio'>Physical status:</span> <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>\n"
 		msg += "<span class = 'deptradio'>Medical records:</span> <a href='?src=\ref[src];medrecord=`'>\[View\]</a>\n"
@@ -301,9 +310,17 @@
 		var/mob/living/carbon/human/H = M
 		switch(hudtype)
 			if("security")
-				return istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud)
+				if(istype(H.glasses,/obj/item/clothing/glasses))
+					var/obj/item/clothing/glasses/G = H.glasses
+					return istype(G.hud, /obj/item/clothing/glasses/hud/security) || istype(G, /obj/item/clothing/glasses/hud/security)
+				else
+					return FALSE
 			if("medical")
-				return istype(H.glasses, /obj/item/clothing/glasses/hud/health)
+				if(istype(H.glasses,/obj/item/clothing/glasses))
+					var/obj/item/clothing/glasses/G = H.glasses
+					return istype(G.hud, /obj/item/clothing/glasses/hud/health) || istype(G, /obj/item/clothing/glasses/hud/health)
+				else
+					return FALSE
 			else
 				return 0
 	else if(istype(M, /mob/living/silicon/robot))

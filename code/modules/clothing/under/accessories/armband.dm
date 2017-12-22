@@ -36,22 +36,12 @@
 	desc = "An armband, worn by the crew to display which department they're assigned to. This one is white and blue."
 	icon_state = "medblueband"
 
-/obj/item/clothing/accessory/armband/bluegold
-	name = "peacekeeper armband"
-	desc = "An armband, worn by the crew to display which department they're assigned to. This one is blue and gold."
-	icon_state = "solblue"
-
 /obj/item/clothing/accessory/armband/whitered
 	name = "\improper NanoTrasen armband"
 	desc = "An armband, worn by the crew to display which department they're assigned to. This one is white and red."
 	icon_state = "whitered"
 
-/obj/item/clothing/accessory/armband/mp
-	name = "military police brassard"
-	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is black with white letters MP."
-	icon_state = "mpband"
-
-/obj/item/clothing/accessory/armband/ma
-	name = "master at arms brassard"
-	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is white with navy blue letters MA."
-	icon_state = "maband"
+/obj/item/clothing/accessory/armband/bluegold
+	name = "peacekeeper armband"
+	desc = "An armband, worn by the crew to display which department they're assigned to. This one is blue and gold."
+	icon_state = "solblue"

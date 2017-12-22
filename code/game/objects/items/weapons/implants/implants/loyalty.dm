@@ -1,6 +1,7 @@
 /obj/item/weapon/implant/loyalty
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 3)
 	known = 1
 
 /obj/item/weapon/implant/loyalty/get_data()

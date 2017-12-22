@@ -451,6 +451,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	name = "price scanner"
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
 	icon_state = "price_scanner"
+	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 0
@@ -473,7 +474,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	item_state = "analyzer"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_BIO = 1)
+	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	flags = CONDUCT
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 

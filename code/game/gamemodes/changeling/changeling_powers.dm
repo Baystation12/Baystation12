@@ -272,6 +272,18 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.chem_charges -= 5
 	changeling.geneticdamage = 30
 
+	var/S_name = chosen_dna.speciesName
+	var/datum/species/S_dat = all_species[S_name]
+	var/changeTime = 2 SECONDS
+	if(mob_size != S_dat.mob_size)
+		src.visible_message("<span class='warning'>[src]'s body begins to twist, their mass changing rapidly!</span>")
+		changeTime = 8 SECONDS
+	else
+		src.visible_message("<span class='warning'>[src]'s body begins to twist, changing rapidly!</span>")
+
+	if(!do_after(src, changeTime))
+		to_chat(src, "<span class='notice'>You fail to change shape.</span>")
+		return
 	handle_changeling_transform(chosen_dna)
 
 	src.verbs -= /mob/proc/changeling_transform
@@ -711,7 +723,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	var/mob/living/carbon/human/T = changeling_sting(15,/mob/proc/changeling_lsdsting)
 	if(!T)	return 0
 	spawn(rand(300,600))
-		if(T)	T.hallucination += 400
+		if(T)	T.hallucination(400, 80)
 	feedback_add_details("changeling_powers","HS")
 	return 1
 
@@ -752,18 +764,6 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	T.sdisabilities |= DEAF
 	spawn(300)	T.sdisabilities &= ~DEAF
 	feedback_add_details("changeling_powers","DS")
-	return 1
-
-/mob/proc/changeling_paralysis_sting()
-	set category = "Changeling"
-	set name = "Paralysis sting (30)"
-	set desc="Sting target"
-
-	var/mob/living/carbon/human/T = changeling_sting(30,/mob/proc/changeling_paralysis_sting)
-	if(!T)	return 0
-	to_chat(T, "<span class='danger'>Your muscles begin to painfully tighten.</span>")
-	T.Weaken(20)
-	feedback_add_details("changeling_powers","PS")
 	return 1
 
 /mob/proc/changeling_DEATHsting()

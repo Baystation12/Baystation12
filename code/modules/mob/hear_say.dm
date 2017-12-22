@@ -118,10 +118,7 @@
 			else // Used for compression
 				message = RadioChat(null, message, 80, 1+(hard_to_hear/10))
 
-	var/speaker_name = speaker.name
-
-	if(vname)
-		speaker_name = vname
+	var/speaker_name = vname ? vname : speaker.name
 
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
@@ -140,7 +137,7 @@
 		if (ishuman(speaker))
 			var/mob/living/carbon/human/H = speaker
 
-			if(H.wear_mask && istype(H.wear_mask,/obj/item/clothing/mask/gas/voice))
+			if(H.wear_mask && istype(H.wear_mask,/obj/item/clothing/mask/chameleon/voice))
 				changed_voice = 1
 				var/list/impersonated = new()
 				var/mob/living/carbon/human/I = impersonated[speaker_name]

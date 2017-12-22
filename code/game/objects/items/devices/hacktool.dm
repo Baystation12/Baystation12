@@ -24,7 +24,7 @@
 	return ..()
 
 /obj/item/device/multitool/hacktool/attackby(var/obj/W, var/mob/user)
-	if(isscrewdriver(W))
+	if(isScrewdriver(W))
 		in_hack_mode = !in_hack_mode
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 	else
@@ -53,8 +53,8 @@
 
 	to_chat(user, "<span class='notice'>You begin hacking \the [target]...</span>")
 	is_hacking = 1
-	// On average hackin takes ~30 seconds. Fairly small random span to avoid people simply aborting and trying again
-	var/hack_result = do_after(user, (20 SECONDS + rand(0, 10 SECONDS) + rand(0, 10 SECONDS)), progress = 0)
+	// Hackin takes roughly 15-25 seconds. Fairly small random span to avoid people simply aborting and trying again.
+	var/hack_result = do_after(user, (15 SECONDS + rand(0, 5 SECONDS) + rand(0, 5 SECONDS)), progress = 0)
 	is_hacking = 0
 
 	if(hack_result && in_hack_mode)

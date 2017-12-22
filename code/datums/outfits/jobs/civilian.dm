@@ -25,11 +25,14 @@
 	suit = /obj/item/clothing/suit/apron
 	gloves = /obj/item/clothing/gloves/thick/botany
 	r_pocket = /obj/item/device/analyzer/plant_analyzer
-	backpack = /obj/item/weapon/storage/backpack/hydroponics
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_hyd
 	id_type = /obj/item/weapon/card/id/civilian/botanist
 	pda_type = /obj/item/device/pda/botanist
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/hyd
+
+/decl/hierarchy/outfit/job/service/gardener/New()
+	..()
+	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/weapon/storage/backpack/hydroponics
+	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/weapon/storage/backpack/satchel_hyd
+	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/weapon/storage/backpack/messenger/hyd
 
 /decl/hierarchy/outfit/job/service/janitor
 	name = OUTFIT_JOB_NAME("Janitor")
@@ -40,7 +43,6 @@
 /decl/hierarchy/outfit/job/librarian
 	name = OUTFIT_JOB_NAME("Librarian")
 	uniform = /obj/item/clothing/under/suit_jacket/red
-	l_hand = /obj/item/weapon/barcodescanner
 	id_type = /obj/item/weapon/card/id/civilian/librarian
 	pda_type = /obj/item/device/pda/librarian
 
@@ -48,7 +50,7 @@
 	name = OUTFIT_JOB_NAME("Internal affairs agent")
 	l_ear = /obj/item/device/radio/headset/ia
 	uniform = /obj/item/clothing/under/rank/internalaffairs
-	suit = /obj/item/clothing/suit/storage/toggle/internalaffairs
+	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	l_hand = /obj/item/weapon/storage/briefcase

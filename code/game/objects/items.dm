@@ -42,7 +42,7 @@
 	var/permeability_coefficient = 1 // for chemicals/diseases
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
 	var/slowdown_general = 0 // How much clothing is slowing you down. Negative values speeds you up. This is a genera##l slowdown, no matter equipment slot.
-	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. Negative values speeds you up. This is an associative list: item slot - slowdown
+	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. This is an associative list: item slot - slowdown
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
 	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/allowed = null //suit storage stuff.
@@ -51,6 +51,8 @@
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
 	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
+
+	var/use_alt_layer = FALSE // Use the slot's alternative layer when rendering on a mob
 
 	//** These specify item/icon overrides for _slots_
 
@@ -298,7 +300,8 @@ var/list/global/slot_flags_enumeration = list(
 //If you are making custom procs but would like to retain partial or complete functionality of this one, include a 'return ..()' to where you want this to happen.
 //Set disable_warning to 1 if you wish it to not give you outputs.
 //Should probably move the bulk of this into mob code some time, as most of it is related to the definition of slots and not item-specific
-/obj/item/proc/mob_can_equip(M as mob, slot, disable_warning = 0)
+//set force to ignore blocking overwear and occupied slots
+/obj/item/proc/mob_can_equip(M as mob, slot, disable_warning = 0, force = 0)
 	if(!slot) return 0
 	if(!M) return 0
 
@@ -318,14 +321,15 @@ var/list/global/slot_flags_enumeration = list(
 		if(!(req_flags & slot_flags))
 			return 0
 
-	//Next check that the slot is free
-	if(H.get_equipped_item(slot))
-		return 0
+	if(!force)
+		//Next check that the slot is free
+		if(H.get_equipped_item(slot))
+			return 0
 
-	//Next check if the slot is accessible.
-	var/mob/_user = disable_warning? null : H
-	if(!H.slot_is_accessible(slot, src, _user))
-		return 0
+		//Next check if the slot is accessible.
+		var/mob/_user = disable_warning? null : H
+		if(!H.slot_is_accessible(slot, src, _user))
+			return 0
 
 	//Lastly, check special rules for the desired slot.
 	switch(slot)
@@ -374,14 +378,15 @@ var/list/global/slot_flags_enumeration = list(
 			if(!allow)
 				return 0
 		if(slot_tie)
-			if(!H.w_uniform && (slot_w_uniform in mob_equip))
+			if((!H.w_uniform && (slot_w_uniform in mob_equip)) && (!H.wear_suit && (slot_wear_suit in mob_equip)))
 				if(!disable_warning)
-					to_chat(H, "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>")
+					to_chat(H, "<span class='warning'>You need something you can attach \the [src] to.</span>")
 				return 0
 			var/obj/item/clothing/under/uniform = H.w_uniform
-			if(uniform.accessories.len && !uniform.can_attach_accessory(src))
+			var/obj/item/clothing/suit/suit = H.wear_suit
+			if((uniform && !uniform.can_attach_accessory(src)) && (suit && !suit.can_attach_accessory(src)))
 				if (!disable_warning)
-					to_chat(H, "<span class='warning'>You already have an accessory of this type attached to your [uniform].</span>")
+					to_chat(H, "<span class='warning'>You can not equip \the [src].</span>")
 				return 0
 	return 1
 
@@ -659,12 +664,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	return (slot != slot_wear_suit_str && slot != slot_head_str)
 
-/obj/item/proc/get_mob_overlay(mob/user_mob, slot)
-	var/bodytype = "Default"
-	if(ishuman(user_mob))
-		var/mob/living/carbon/human/user_human = user_mob
-		bodytype = user_human.species.get_bodytype(user_human)
-
+/obj/item/proc/get_icon_state(mob/user_mob, slot)
 	var/mob_state
 	if(item_state_slots && item_state_slots[slot])
 		mob_state = item_state_slots[slot]
@@ -672,8 +672,26 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_state = item_state
 	else
 		mob_state = icon_state
+	return mob_state
+
+/obj/item/proc/dir_shift(var/icon/given_icon, var/dir_given, var/x = 0, var/y = 0)
+	var/icon/I = new(given_icon, dir = dir_given)
+	I.Shift(EAST, x)
+	I.Shift(NORTH, y)
+	given_icon.Insert(I, dir = dir_given)
+	return given_icon
+
+/obj/item/proc/get_mob_overlay(mob/user_mob, slot)
+	var/bodytype = "Default"
+	var/mob/living/carbon/human/user_human
+	if(ishuman(user_mob))
+		user_human = user_mob
+		bodytype = user_human.species.get_bodytype(user_human)
+
+	var/mob_state = get_icon_state(user_mob, slot)
 
 	var/mob_icon
+	var/spritesheet = FALSE
 	if(icon_override)
 		mob_icon = icon_override
 		if(slot == 	slot_l_hand_str || slot == slot_l_ear_str)
@@ -685,13 +703,32 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_l"
 		if(slot == slot_r_ear)
 			mob_state = "[mob_state]_r"
-
+		spritesheet = TRUE
 		mob_icon = sprite_sheets[bodytype]
 	else if(item_icons && item_icons[slot])
 		mob_icon = item_icons[slot]
 	else
 		mob_icon = default_onmob_icons[slot]
-	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)
+
+	var/image/ret_overlay = overlay_image(mob_icon,mob_state,color,RESET_COLOR)
+	if(user_human && user_human.species && user_human.species.equip_adjust.len && !spritesheet)
+		var/list/equip_adjusts = user_human.species.equip_adjust
+		if(equip_adjusts[slot])
+			var/image_key = "[user_human.species] [mob_icon] [mob_state] [color]"
+			ret_overlay = user_human.species.equip_overlays[image_key]
+			if(!ret_overlay)
+				var/icon/final_I = new(mob_icon, icon_state = mob_state)
+				var/list/shifts = equip_adjusts[slot]
+				if(shifts && shifts.len)
+					var/shift_facing
+					for(shift_facing in shifts)
+						var/list/facing_list = shifts[shift_facing]
+						final_I = dir_shift(final_I, text2dir(shift_facing), facing_list["x"], facing_list["y"])
+				ret_overlay = overlay_image(final_I, color, flags = RESET_COLOR)
+
+				user_human.species.equip_overlays[image_key] = ret_overlay
+
+	return ret_overlay
 
 /obj/item/proc/get_examine_line()
 	if(blood_DNA)

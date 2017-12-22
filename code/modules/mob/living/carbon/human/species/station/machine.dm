@@ -14,7 +14,8 @@
 	language = LANGUAGE_EAL
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
-	num_alternate_languages = 1 // potentially could be 2?
+	num_alternate_languages = 2
+	strength = STR_HIGH
 	name_language = LANGUAGE_EAL
 
 	min_age = 1
@@ -46,7 +47,7 @@
 	virus_immune = 1
 
 	has_organ = list(
-		BP_BRAIN = /obj/item/organ/internal/mmi_holder/posibrain,
+		BP_POSIBRAIN = /obj/item/organ/internal/posibrain,
 		BP_OPTICS = /obj/item/organ/internal/eyes/optics
 		)
 
@@ -95,3 +96,7 @@
 
 /datum/species/machine/get_blood_name()
 	return "oil"
+
+/datum/species/machine/disfigure_msg(var/mob/living/carbon/human/H)
+	var/datum/gender/T = gender_datums[H.get_gender()]
+	return "<span class='danger'>[T.His] monitor is completely busted!</span>\n"

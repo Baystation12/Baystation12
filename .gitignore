@@ -19,6 +19,9 @@ __pycache__
 # ignore config, but not subdirs
 config/*
 !config/*/
+sql/test_db
+
 maps/nsv_apollo/
 .atom-build.json
 NewSOund/
+Space Miners/

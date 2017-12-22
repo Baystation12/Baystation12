@@ -1,7 +1,5 @@
 #define HUMAN_STRIP_DELAY        40   // Takes 40ds = 4s to strip someone.
 
-#define SHOES_SLOWDOWN          -1.0  // How much shoes slow you down by default. Negative values speed you up.
-
 #define CANDLE_LUM 3 // For how bright candles are.
 
 // Item inventory slot bitmasks.
@@ -23,6 +21,7 @@
 #define SLOT_HOLSTER	0x8000 //16th bit - higher than this will overflow
 
 #define ACCESSORY_SLOT_UTILITY  "Utility"
+#define ACCESSORY_SLOT_HOLSTER  "Holster"
 #define ACCESSORY_SLOT_ARMBAND  "Armband"
 #define ACCESSORY_SLOT_RANK     "Rank"
 #define ACCESSORY_SLOT_DEPT		"Department"
@@ -34,6 +33,7 @@
 #define ACCESSORY_SLOT_ARMOR_L  "Leg armor"
 #define ACCESSORY_SLOT_ARMOR_S  "Armor storage"
 #define ACCESSORY_SLOT_ARMOR_M  "Misc armor"
+#define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 
 // Flags bitmasks.
 #define NOBLUDGEON         0x1   // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
@@ -46,12 +46,13 @@
 #define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
 
 //Flags for items (equipment)
-#define THICKMATERIAL          0x1  // Prevents syringes, parapens and hyposprays if equiped to slot_suit or slot_head.
+#define THICKMATERIAL          0x1  // Prevents syringes, reagent pens, and hyposprays if equiped to slot_suit or slot_head.
 #define STOPPRESSUREDAMAGE     0x2  // Counts towards pressure protection. Note that like temperature protection, body_parts_covered is considered here as well.
 #define AIRTIGHT               0x4  // Functions with internals.
 #define NOSLIP                 0x8  // Prevents from slipping on wet floors, in space, etc.
 #define BLOCK_GAS_SMOKE_EFFECT 0x10 // Blocks the effect that chemical clouds would have on a mob -- glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
 #define FLEXIBLEMATERIAL       0x20 // At the moment, masks with this flag will not prevent eating even if they are covering your face.
+#define PREMODIFIED            0x40 // Gloves that are clipped by default
 
 // Flags for pass_flags.
 #define PASSTABLE  0x1
@@ -210,6 +211,10 @@
 #define SUIT_NO_SENSORS 0
 #define SUIT_HAS_SENSORS 1
 #define SUIT_LOCKED_SENSORS 2
+
+// Hair Flags
+#define VERY_SHORT 0x1
+#define HAIR_TRIPPABLE 0x2
 
 // Storage
 

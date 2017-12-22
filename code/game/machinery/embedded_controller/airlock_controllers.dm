@@ -25,6 +25,12 @@
 	dummy_terminals.Cut()
 	return ..()
 
+/obj/machinery/embedded_controller/radio/airlock/CanUseTopic(var/mob/user)
+	if(!allowed(user))
+		return min(STATUS_UPDATE, ..())
+	else
+		return ..()
+
 //Advanced airlock controller for when you want a more versatile airlock controller - useful for turning simple access control rooms into airlocks
 /obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller
 	name = "Advanced Airlock Controller"

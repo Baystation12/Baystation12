@@ -43,6 +43,11 @@
 #define DROPLIMB_BLUNT 1
 #define DROPLIMB_BURN 2
 
+// Robotics hatch_state defines.
+#define HATCH_CLOSED 0
+#define HATCH_UNSCREWED 1
+#define HATCH_OPENED 2
+
 // These control the amount of blood lost from burns. The loss is calculated so
 // that dealing just enough burn damage to kill the player will cause the given
 // proportion of their max blood volume to be lost

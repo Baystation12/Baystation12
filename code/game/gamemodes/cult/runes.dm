@@ -840,10 +840,6 @@
 	qdel(target)
 	qdel(src)
 
-/obj/effect/rune/imbue/stun
-	cultname = "stun imbue"
-	papertype = /obj/item/weapon/paper/talisman/stun
-
 /obj/effect/rune/imbue/emp
 	cultname = "destroy technology imbue"
 	papertype = /obj/item/weapon/paper/talisman/emp

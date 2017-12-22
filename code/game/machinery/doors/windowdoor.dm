@@ -128,7 +128,7 @@
 	set_density(0)
 	update_icon()
 	update_nearby_tiles()
-	
+
 	if(operating == 1) //emag again
 		src.operating = 0
 	return 1
@@ -200,7 +200,7 @@
 		return 1
 
 	//If it's emagged, crowbar can pry electronics out.
-	if (src.operating == -1 && istype(I, /obj/item/weapon/crowbar))
+	if (src.operating == -1 && isCrowbar(I))
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the windoor.", "You start to remove electronics from the windoor.")
 		if (do_after(user,40,src))

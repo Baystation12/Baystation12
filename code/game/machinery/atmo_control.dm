@@ -471,7 +471,7 @@ Rate: [volume_rate] L/sec<BR>"}
 		..(signal)
 
 /obj/machinery/computer/general_air_control/fuel_injection/Topic(href, href_list)
-	if(..())
+	if((. = ..()))
 		return
 
 	if(href_list["refresh_status"])

@@ -1,6 +1,7 @@
 /turf/space
 	plane = SPACE_PLANE
 	icon = 'icons/turf/space.dmi'
+
 	name = "\proper space"
 	icon_state = "0"
 	dynamic_lighting = 0
@@ -33,6 +34,9 @@
 	if(!below.density && istype(below.loc, /area/space))
 		return
 
+	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
+
+/turf/space/LateInitialize()
 	// We alter area type before the turf to ensure the turf-change-event-propagation is handled as expected.
 	if(GLOB.using_map.base_floor_area)
 		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
@@ -60,7 +64,7 @@
 	if (istype(C, /obj/item/stack/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			return
+			return L.attackby(C, user)
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")

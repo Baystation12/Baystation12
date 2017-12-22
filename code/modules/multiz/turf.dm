@@ -7,10 +7,22 @@
 		if(direction == DOWN) //on a turf above, trying to enter
 			return !density
 
-/turf/simulated/open/CanZPass(atom, direction)
+/turf/simulated/open/CanZPass(atom/A, direction)
+	if(locate(/obj/structure/catwalk, src))
+		if(z == A.z)
+			if(direction == DOWN)
+				return 0
+		else if(direction == UP)
+			return 0
 	return 1
 
-/turf/space/CanZPass(atom, direction)
+/turf/space/CanZPass(atom/A, direction)
+	if(locate(/obj/structure/catwalk, src))
+		if(z == A.z)
+			if(direction == DOWN)
+				return 0
+		else if(direction == UP)
+			return 0
 	return 1
 
 /turf/simulated/open
@@ -35,7 +47,7 @@
 /turf/simulated/open/proc/update()
 	plane = OPENSPACE_PLANE + (src.z * PLANE_DIFFERENCE)
 	below = GetBelow(src)
-	GLOB.turf_changed_event.register(below, src,/turf/simulated/open/update_icon)
+	GLOB.turf_changed_event.register(below, src,/turf/simulated/open/proc/turf_change)
 	GLOB.exited_event.register(below, src, /turf/simulated/open/proc/handle_move)
 	GLOB.entered_event.register(below, src, /turf/simulated/open/proc/handle_move)
 	levelupdate()
@@ -79,6 +91,7 @@
 */
 /turf/simulated/open/update_icon()
 	overlays.Cut()
+	underlays.Cut()
 	var/turf/below = GetBelow(src)
 	if(below)
 		var/below_is_open = isopenspace(below)
@@ -132,13 +145,13 @@
 	if (istype(C, /obj/item/stack/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			return
+			return L.attackby(C, user)
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			new /obj/structure/lattice(locate(src.x, src.y, src.z))
-			//Update properly
+			//Update turfs
 			SSopen_space.add_turf(src, 1)
 		return
 
@@ -157,7 +170,7 @@
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
 
 	//To lay cable.
-	if(istype(C, /obj/item/stack/cable_coil))
+	if(isCoil(C))
 		var/obj/item/stack/cable_coil/coil = C
 		coil.turf_place(src, user)
 		return
@@ -179,12 +192,19 @@
 
 /turf/simulated/open/proc/clean_up()
 	//Unregister
-	GLOB.turf_changed_event.unregister(below, src,/turf/simulated/open/update_icon)
+	GLOB.turf_changed_event.unregister(below, src,/turf/simulated/open/proc/turf_change)
 	GLOB.exited_event.unregister(below, src, /turf/simulated/open/proc/handle_move)
 	GLOB.entered_event.unregister(below, src, /turf/simulated/open/proc/handle_move)
 	//Take care of shadow
 	for(var/mob/zshadow/M in src)
 		qdel(M)
+
+//When turf changes, a bunch of things can take place
+/turf/simulated/open/proc/turf_change(var/turf/affected)
+	if(GLOB.open_space_initialised)
+		if(!isopenspace(affected))//If affected is openspace it will add itself
+			SSopen_space.add_turf(src, 1)
+
 
 //The two situations which require unregistering
 
@@ -192,7 +212,6 @@
 	//We do not want to change any of the behaviour, just make sure this goes away
 	src.clean_up()
 	. = ..()
-
 
 /turf/simulated/open/Destroy()
 	src.clean_up()

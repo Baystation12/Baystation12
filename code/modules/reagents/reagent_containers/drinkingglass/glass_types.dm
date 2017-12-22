@@ -18,7 +18,7 @@
 	rim_pos = "y=21;x_left=10;x_right=23"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/shake
-	name = "milkshake glass"
+	name = "tall cocktail glass"
 	base_name = "glass"
 	base_icon = "shake"
 	filling_states = "25;50;75;100"
@@ -41,6 +41,7 @@
 	base_icon = "shot"
 	filling_states = "33;66;100"
 	volume = 5
+	matter = list("glass" = 15)
 	possible_transfer_amounts = "1;2;5"
 	rim_pos = "y=17;x_left=13;x_right=21"
 
@@ -77,6 +78,7 @@
 	base_icon = "carafe"
 	filling_states = "10;20;30;40;50;60;70;80;90;100"
 	volume = 120
+	matter = list("glass" = 250)
 	possible_transfer_amounts = "5;10;15;30;60;120"
 	rim_pos = "y=26;x_left=12;x_right=21"
 	center_of_mass = "x=16;y=7"

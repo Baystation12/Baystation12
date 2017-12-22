@@ -133,6 +133,7 @@
 	name = "maglight"
 	desc = "A very, very heavy duty flashlight."
 	icon_state = "maglight"
+	item_state = "maglight"
 	force = 10
 	attack_verb = list ("smacked", "thwacked", "thunked")
 	matter = list(DEFAULT_WALL_MATERIAL = 200,"glass" = 50)

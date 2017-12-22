@@ -36,7 +36,8 @@
 		/obj/item/device/radio/headset,
 		/obj/item/device/paicard,
 		/obj/item/weapon/stamp,
-		/obj/item/weapon/key)
+		/obj/item/weapon/key,
+		/obj/item/clothing/accessory/badge)
 	slot_flags = SLOT_ID
 
 	var/obj/item/weapon/card/id/front_id = null

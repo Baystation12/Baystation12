@@ -45,7 +45,7 @@
 
 
 /obj/machinery/computer/drone_control/Topic(href, href_list)
-	if(..())
+	if((. = ..()))
 		return
 
 	if(!allowed(usr))

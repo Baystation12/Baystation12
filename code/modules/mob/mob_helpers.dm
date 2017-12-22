@@ -160,6 +160,9 @@ var/list/global/organ_rel_size = list(
 	zone = check_zone(zone)
 
 	if(!ranged_attack)
+		// target isn't trying to fight
+		if(target.a_intent == I_HELP)
+			return zone
 		// you cannot miss if your target is prone or restrained
 		if(target.buckled || target.lying)
 			return zone
@@ -526,7 +529,7 @@ proc/is_blind(A)
 		if(check_records && !CR && !isMonkey())
 			threatcount += 4
 
-		if(check_arrest && CR && (CR.GetCriminalStatus() == GLOB.arrest_security_status))
+		if(check_arrest && CR && (CR.get_criminalStatus() == GLOB.arrest_security_status))
 			threatcount += 4
 
 	return threatcount

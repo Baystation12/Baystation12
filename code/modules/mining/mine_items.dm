@@ -40,7 +40,7 @@
 /obj/item/weapon/pickaxe
 	name = "mining drill"
 	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 15.0
@@ -143,7 +143,7 @@
 /obj/item/weapon/shovel
 	name = "shovel"
 	desc = "A large tool for digging and moving dirt."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "shovel"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
@@ -212,6 +212,14 @@
 	fringe = "greenflag_fringe"
 	light_color = COLOR_LIME
 
+/obj/item/stack/flag/solgov
+	name = "sol gov flags"
+	singular_name = "sol gov flag"
+	icon_state = "solgovflag"
+	fringe = "solgovflag_fringe"
+	desc = "A portable flag with the Sol Government symbol on it. I claim this land for Sol!"
+	light_color = COLOR_BLUE
+
 /obj/item/stack/flag/attackby(var/obj/item/W, var/mob/user)
 	if(upright)
 		attack_hand(user)
@@ -228,19 +236,22 @@
 /obj/item/stack/flag/attack_self(var/mob/user)
 	var/turf/T = get_turf(src)
 
-	if(!istype(T, /turf/simulated/floor/asteroid) && !istype(T, /turf/simulated/floor/exoplanet))
-		to_chat(user, "The flag won't stand up in this terrain.")
+	if(istype(T, /turf/space) || istype(T, /turf/simulated/open))
+		to_chat(user, "<span class='warning'>There's no solid surface to plant the flag on.</span>")
 		return
 
 	for(var/obj/item/stack/flag/F in T)
 		if(F.upright)
-			to_chat(user, "\The [F] is already planted here.")
+			to_chat(user, "<span class='warning'>\The [F] is already planted here.</span>")
 			return
 
 	if(use(1)) // Don't skip use() checks even if you only need one! Stacks with the amount of 0 are possible, e.g. on synthetics!
 		var/obj/item/stack/flag/newflag = new src.type(T, 1)
 		newflag.set_up()
-		user.visible_message("\The [user] plants \the [newflag.singular_name] firmly in the ground.")
+		if(istype(T, /turf/simulated/floor/asteroid) || istype(T, /turf/simulated/floor/exoplanet))
+			user.visible_message("\The [user] plants \the [newflag.singular_name] firmly in the ground.")
+		else
+			user.visible_message("\The [user] attaches \the [newflag.singular_name] firmly to the ground.")
 
 /obj/item/stack/flag/proc/set_up()
 	pixel_x = 0

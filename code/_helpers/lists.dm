@@ -637,6 +637,15 @@ proc/dd_sortedTextList(list/incoming)
 		group_list[key] = values
 
 	values += value
+	
+/proc/duplicates(var/list/L)
+	. = list()
+	var/list/checked = list()
+	for(var/value in L)
+		if(value in checked)
+			. |= value
+		else
+			checked += value
 
 /proc/assoc_by_proc(var/list/plain_list, var/get_initial_value)
 	. = list()
@@ -701,3 +710,13 @@ proc/dd_sortedTextList(list/incoming)
 			L.Swap(start++,end--)
 
 	return L
+
+//Copies a list, and all lists inside it recusively
+//Does not copy any other reference type
+/proc/deepCopyList(list/l)
+	if(!islist(l))
+		return l
+	. = l.Copy()
+	for(var/i = 1 to l.len)
+		if(islist(.[i]))
+			.[i] = .(.[i])

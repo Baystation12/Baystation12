@@ -1,0 +1,4 @@
+author: "Kelenius"
+delete-after: True
+changes: 
+  - rscadd: "Hydroponics now has bees and space for bees. And some chemical machinery."

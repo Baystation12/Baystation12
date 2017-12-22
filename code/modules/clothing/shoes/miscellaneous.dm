@@ -76,12 +76,12 @@
 
 /obj/item/clothing/shoes/dress
 	name = "dress shoes"
-	desc = "Sharp looking low quarters, perfect for a formal uniform."
+	desc = "The height of fashion, and they're pre-polished!"
 	icon_state = "laceups"
 
 /obj/item/clothing/shoes/dress/white
 	name = "white dress shoes"
-	desc = "Brilliantly white low quarters, not a spot on them."
+	desc = "Brilliantly white shoes, not a spot on them."
 	icon_state = "whitedress"
 
 /obj/item/clothing/shoes/sandal
@@ -110,7 +110,7 @@
 
 /obj/item/clothing/shoes/clown_shoes/New()
 	..()
-	slowdown_per_slot[slot_shoes]  = SHOES_SLOWDOWN+1
+	slowdown_per_slot[slot_shoes]  = 1
 
 /obj/item/clothing/shoes/clown_shoes/handle_movement(var/turf/walking, var/running)
 	if(running)
@@ -172,7 +172,7 @@
 
 /obj/item/clothing/shoes/swimmingfins/New()
 	..()
-	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN+1
+	slowdown_per_slot[slot_shoes] = 1
 
 /obj/item/clothing/shoes/athletic
 	name = "athletic shoes"

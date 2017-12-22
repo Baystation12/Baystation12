@@ -8,17 +8,14 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
+
 	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/belt.dmi')
 	var/show_above_suit = 0
-
 /obj/item/weapon/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"
 	set category = "Object"
 
-	if(show_above_suit == -1)
-		to_chat(usr, "<span class='notice'>\The [src] cannot be worn above your suit!</span>")
-		return
-	show_above_suit = !show_above_suit
+	use_alt_layer = !use_alt_layer
 	update_icon()
 
 /obj/item/weapon/storage/update_icon()
@@ -126,6 +123,7 @@
 	icon_state = "securitybelt"
 	item_state = "security"
 	can_hold = list(
+		/obj/item/weapon/crowbar,
 		/obj/item/weapon/grenade,
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/handcuffs,

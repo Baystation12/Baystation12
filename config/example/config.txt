@@ -228,9 +228,6 @@ TICKLAG 0.7
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0
 
-## Uncomment this to ban use of ToR
-#TOR_BAN
-
 ## Comment this out to disable automuting
 #AUTOMUTE_ON
 
@@ -266,9 +263,6 @@ USEALIENWHITELIST
 ## Uncomment to enable sending data to the IRC bot.
 #USE_IRC_BOT
 
-## Uncomment if the IRC bot requires using world.Export() instead of nudge.py/libnudge
-#IRC_BOT_EXPORT
-
 ## Host where the IRC bot is hosted.  Port 45678 needs to be open.
 #IRC_BOT_HOST localhost
 
@@ -277,14 +271,6 @@ USEALIENWHITELIST
 
 ## IRC channel to send adminhelps to.  Leave blank to disable adminhelps-to-irc.
 #ADMIN_IRC #admin
-
-## Path to the python2 executable on the system.  Leave blank for default.
-## Default is "python" on Windows, "/usr/bin/env python2" on UNIX.
-#PYTHON_PATH
-
-## Uncomment to use the C library nudge instead of the python script.
-## This helps security and stability on Linux, but you need to compile the library first.
-#USE_LIB_NUDGE
 
 ## Uncommen to allow ghosts to write in blood during Cult rounds.
 ALLOW_CULT_GHOSTWRITER
@@ -396,3 +382,18 @@ STARLIGHT 0
 
 ## Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes
 # AUTOSTEALTH 30
+
+## How many loadout points are available. Use 0 to disable loadout, and any negative number to indicate infinite points.
+MAX_GEAR_COST 10
+
+## How much radiation levels self-reduce by each tick.
+RADIATION_DECAY_RATE 1
+
+## The amount of radiation resistance on a turf is multiplied by this value
+RADIATION_RESISTANCE_MULTIPLIER 1.25
+
+## General material radiation resistance is divided by this value
+RADIATION_MATERIAL_RESISTANCE_DIVISOR 2
+
+## Below this point, radiation is ignored
+RADIATION_LOWER_LIMIT 0.15

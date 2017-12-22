@@ -6,6 +6,8 @@
 		slot_l_hand_str = "helmet",
 		slot_r_hand_str = "helmet",
 		)
+	valid_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_HELM_C)
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
 	armor = list(melee = 50, bullet = 50, laser = 50,energy = 25, bomb = 30, bio = 0, rad = 0)
@@ -16,21 +18,6 @@
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = ITEM_SIZE_NORMAL
-
-/obj/item/clothing/head/helmet/solgov
-	name = "\improper Sol Central Government helmet"
-	desc = "A helmet painted in Peacekeeper blue. Stands out like a sore thumb."
-	icon_state = "helmet_sol"
-
-/obj/item/clothing/head/helmet/solgov/command
-	name = "command helmet"
-	desc = "A helmet with 'SOL CENTRAL GOVERNMENT' printed on the back in gold lettering."
-	icon_state = "helmet_command"
-
-/obj/item/clothing/head/helmet/solgov/security
-	name = "security helmet"
-	desc = "A helmet with 'MASTER AT ARMS' printed on the back in silver lettering."
-	icon_state = "helmet_security"
 
 /obj/item/clothing/head/helmet/nt
 	name = "\improper corporate security helmet"
@@ -43,9 +30,7 @@
 	icon_state = "helmet_pcrc"
 
 /obj/item/clothing/head/helmet/nt/guard
-	name = "\improper NanoTrasen helmet"
-	desc = "A helmet painted in NanoTrasen colors. Probably belongs to corporate security."
-	icon_state = "helmet_ntguard"
+	starting_accessories = list(/obj/item/clothing/accessory/armor/helmcover/nt)
 
 /obj/item/clothing/head/helmet/tactical
 	name = "tactical helmet"
@@ -65,6 +50,7 @@
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
 	icon_state = "helmet_riot"
+	valid_accessory_slots = null
 	body_parts_covered = HEAD|FACE|EYES //face shield
 	armor = list(melee = 82, bullet = 15, laser = 5, energy = 5, bomb = 5, bio = 2, rad = 0)
 	siemens_coefficient = 0.7
@@ -83,6 +69,7 @@
 	name = "ablative helmet"
 	desc = "A helmet made from advanced materials which protects against concentrated energy weapons."
 	icon_state = "helmet_reflect"
+	valid_accessory_slots = null
 	armor = list(melee = 15, bullet = 5, laser = 82, energy = 50, bomb = 5, bio = 2, rad = 0)
 	siemens_coefficient = 0
 
@@ -90,6 +77,7 @@
 	name = "ballistic helmet"
 	desc = "A helmet with reinforced plating to protect against ballistic projectiles."
 	icon_state = "helmet_bulletproof"
+	valid_accessory_slots = null
 	armor = list(melee = 5, bullet = 82, laser = 30, energy = 5, bomb = 30, bio = 2, rad = 0)
 	siemens_coefficient = 0.7
 
@@ -106,6 +94,7 @@
 	name = "\improper Thunderdome helmet"
 	desc = "<i>'Let the battle commence!'</i>"
 	icon_state = "thunderdome"
+	valid_accessory_slots = null
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 10, bomb = 25, bio = 10, rad = 0)
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -115,6 +104,7 @@
 	name = "gladiator helmet"
 	desc = "Ave, Imperator, morituri te salutant."
 	icon_state = "gladiator"
+	valid_accessory_slots = null
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	body_parts_covered = HEAD|FACE
 	siemens_coefficient = 1
@@ -124,6 +114,7 @@
 	name = "tactical helmet"
 	desc = "An armored helmet capable of being fitted with a multitude of attachments."
 	icon_state = "swathelm"
+	valid_accessory_slots = null
 	sprite_sheets = list(
 		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi'
@@ -138,6 +129,7 @@
 	name = "Augment Array"
 	desc = "A helmet with optical and cranial augments coupled to it."
 	icon_state = "v62"
+	valid_accessory_slots = null
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	body_parts_covered = HEAD|EYES|BLOCKHEADHAIR
@@ -151,6 +143,7 @@
 	name = "asset protection command helmet"
 	desc = "An in-atmosphere helmet worn by many corporate and private asset protection forces. Has blue highlights."
 	icon_state = "erthelmet_cmd"
+	valid_accessory_slots = null
 	item_state_slots = list(
 		slot_l_hand_str = "syndicate-helm-green",
 		slot_r_hand_str = "syndicate-helm-green",

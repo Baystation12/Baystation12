@@ -2,7 +2,7 @@
 	name = "fountain of power"
 	desc = "Refreshing, cool water surrounded by archaic carvings."
 	icon_state = "fountain"
-	power_adjustment = 5
+	power_adjustment = 2
 	build_cost = 700
 
 /obj/structure/deity/wizard_recharger/attack_hand(var/mob/living/hitter)

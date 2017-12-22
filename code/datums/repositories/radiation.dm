@@ -119,13 +119,13 @@ var/global/repository/radiation/radiation_repository = new()
 		else if(O.density) //So open doors don't get counted
 			var/material/M = O.get_material()
 			if(!M)	continue
-			cached_rad_resistance += M.weight
+			cached_rad_resistance += M.weight / config.radiation_material_resistance_divisor
 	// Looks like storing the contents length is meant to be a basic check if the cache is stale due to items enter/exiting.  Better than nothing so I'm leaving it as is. ~Leshana
 	radiation_repository.resistance_cache[src] = (length(contents) + 1)
 
 /turf/simulated/wall/calc_rad_resistance()
 	radiation_repository.resistance_cache[src] = (length(contents) + 1)
-	cached_rad_resistance = (density ? material.weight : 0)
+	cached_rad_resistance = (density ? material.weight / config.radiation_material_resistance_divisor : 0)
 
 /obj
 	var/rad_resistance = 0  // Allow overriding rad resistance

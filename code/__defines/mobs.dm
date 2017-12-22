@@ -42,8 +42,9 @@
 #define HOSTILE_STANCE_TIRED     5
 #define HOSTILE_STANCE_INSIDE    6
 
-#define LEFT  1
-#define RIGHT 2
+#define LEFT  0x1
+#define RIGHT 0x2
+#define UNDER 0x4
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.
@@ -116,6 +117,13 @@
 #define MOB_TINY 		5
 #define MOB_MINISCULE	1
 
+// Defines how strong the species is compared to humans. Think like strength in D&D
+#define STR_VHIGH       2
+#define STR_HIGH        1
+#define STR_MEDIUM      0
+#define STR_LOW        -1
+#define STR_VLOW       -2
+
 // Gluttony levels.
 #define GLUT_TINY 1       // Eat anything tiny and smaller
 #define GLUT_SMALLER 2    // Eat anything smaller than we are
@@ -168,10 +176,8 @@
 #define BP_LIVER    "liver"
 #define BP_KIDNEYS  "kidneys"
 #define BP_PLASMA   "plasma vessel"
-#define BP_STACK    "stack"
 #define BP_APPENDIX "appendix"
 #define BP_CELL     "cell"
-#define BP_OPTICS   "optics"
 #define BP_HIVE     "hive node"
 #define BP_NUTRIENT "nutrient vessel"
 #define BP_ACID     "acid gland"
@@ -182,9 +188,14 @@
 #define BP_GBLADDER "gas bladder"
 #define BP_POLYP    "polyp segment"
 #define BP_ANCHOR   "anchoring ligament"
-#define BP_VOICE    "vocal synthesiser"
 #define BP_PHORON   "phoron filter"
 #define BP_HIVENODE "hive node"
+
+// Robo Organs.
+#define BP_POSIBRAIN	"posibrain"
+#define BP_VOICE		"vocal synthesiser"
+#define BP_STACK		"stack"
+#define BP_OPTICS		"optics"
 
 // Limbs.
 #define BP_L_FOOT "l_foot"

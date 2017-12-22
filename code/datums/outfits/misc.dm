@@ -6,7 +6,7 @@
 	uniform = /obj/item/clothing/under/color/grey
 	back = /obj/item/weapon/tank/jetpack/oxygen
 	mask = /obj/item/clothing/mask/breath
-	flags = OUTFIT_HAS_JETPACK
+	flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/soviet_soldier
 	name = "Soviet soldier"

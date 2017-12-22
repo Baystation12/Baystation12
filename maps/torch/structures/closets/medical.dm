@@ -20,22 +20,21 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 		/obj/item/weapon/cartridge/cmo,
-		/obj/item/clothing/gloves/latex,
 		/obj/item/device/radio/headset/heads/cmo,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/reagent_containers/hypospray,
-		/obj/item/clothing/mask/surgical,
+		/obj/item/weapon/reagent_containers/hypospray/vial,
+		/obj/item/weapon/storage/fancy/vials,
 		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/accessory/stethoscope,
 		/obj/item/device/flashlight/pen,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/gun/energy/gun,
+		/obj/item/weapon/gun/projectile/colt/officer,
+		/obj/item/ammo_magazine/c45m,
+		/obj/item/ammo_magazine/c45m,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/weapon/clipboard,
-		/obj/item/weapon/folder/white,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/storage/firstaid/adv,
 		/obj/item/weapon/storage/box/armband/med,
@@ -74,13 +73,7 @@
 		/obj/item/weapon/storage/firstaid/adv,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med)),
-		new /datum/atom_creator/weighted(list(
-					list(/obj/item/clothing/under/rank/medical/blue, /obj/item/clothing/head/surgery/blue),
-					list(/obj/item/clothing/under/rank/medical/green, /obj/item/clothing/head/surgery/green),
-					list(/obj/item/clothing/under/rank/medical/purple, /obj/item/clothing/head/surgery/purple),
-					list(/obj/item/clothing/under/rank/medical/black, /obj/item/clothing/head/surgery/black),
-					list(/obj/item/clothing/under/rank/medical/navyblue, /obj/item/clothing/head/surgery/navyblue)
-				)) = 2
+		RANDOM_SCRUBS = 2
 	)
 
 /obj/structure/closet/secure_closet/medical_torch
@@ -149,16 +142,7 @@
 /obj/structure/closet/wardrobe/medic_torch/WillContain()
 	return list(
 		/obj/item/clothing/under/sterile = 2,
-		/obj/item/clothing/under/rank/medical/blue,
-		/obj/item/clothing/under/rank/medical/green,
-		/obj/item/clothing/under/rank/medical/purple,
-		/obj/item/clothing/under/rank/medical/black,
-		/obj/item/clothing/under/rank/medical/navyblue,
-		/obj/item/clothing/head/surgery/navyblue,
-		/obj/item/clothing/head/surgery/purple,
-		/obj/item/clothing/head/surgery/blue,
-		/obj/item/clothing/head/surgery/green,
-		/obj/item/clothing/head/surgery/black,
+		RANDOM_SCRUBS = 4,
 		/obj/item/clothing/suit/surgicalapron = 2,
 		/obj/item/clothing/shoes/white = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat = 2,

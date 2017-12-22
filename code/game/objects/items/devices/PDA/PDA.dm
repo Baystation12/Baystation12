@@ -26,7 +26,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	//Secondary variables
 	var/scanmode = 0 //1 is medical scanner, 2 is forensics, 3 is reagent scanner.
 	var/fon = 0 //Is the flashlight function on?
-	var/f_lum = 2 //Luminosity for the flashlight function
+	var/f_lum = 3 //Luminosity for the flashlight function
 	var/message_silent = 0 //To beep or not to beep, that is the question
 	var/news_silent = 1 //To beep or not to beep, that is the question.  The answer is No.
 	var/toff = 0 //If 1, messenger disabled
@@ -338,6 +338,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return 1
 	else
 		return 0
+
+/obj/item/device/pda/proc/toggle_light()
+	if(can_use())
+		if(fon)
+			fon = 0
+			set_light(0)
+		else
+			fon = 1
+			set_light(f_lum)
 
 /obj/item/device/pda/GetAccess()
 	if(id)
@@ -669,12 +678,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 //MAIN FUNCTIONS===================================
 
 		if("Light")
-			if(fon)
-				fon = 0
-				set_light(0)
-			else
-				fon = 1
-				set_light(f_lum)
+			toggle_light()
 		if("Medical Scan")
 			if(scanmode == 1)
 				scanmode = 0
@@ -1008,6 +1012,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/AltClick()
 	if(Adjacent(usr))
 		verb_remove_id()
+
+/obj/item/device/pda/CtrlAltClick()
+	toggle_light()
 
 /obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P, var/tap = 1)
 	if(!istype(P))

@@ -20,7 +20,7 @@
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/accessory/zhongshan
-	display_name = "zhongshan jacket"
+	display_name = "zhongshan jacket, colour select"
 	path = /obj/item/clothing/accessory/toggleable/zhongshan
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
@@ -37,31 +37,31 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/sherwani
-	display_name = "sherwani"
+	display_name = "sherwani, colour select"
 	path = /obj/item/clothing/accessory/sherwani
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/qipao
-	display_name = "qipao blouse"
+	display_name = "qipao blouse, colour select"
 	path = /obj/item/clothing/accessory/qipao
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/sweater
-	display_name = "turtleneck sweater"
+	display_name = "turtleneck sweater, colour select"
 	path = /obj/item/clothing/accessory/sweater
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/tangzhuang
-	display_name = "tangzhuang jacket"
+	display_name = "tangzhuang jacket, colour select"
 	path = /obj/item/clothing/accessory/tangzhuang
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/necklace
-	display_name = "necklace"
+	display_name = "necklace, colour select"
 	path = /obj/item/clothing/accessory/necklace
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -71,7 +71,7 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/bowtie/color
-	display_name = "bowtie, colored"
+	display_name = "bowtie, colour select"
 	path = /obj/item/clothing/accessory/bowtie/color
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -83,12 +83,12 @@
 
 /datum/gear/accessory/armband_mp
 	display_name = "military police brassard"
-	path = /obj/item/clothing/accessory/armband/mp
+	path = /obj/item/clothing/accessory/armband/solgov/mp
 	allowed_roles = SECURITY_ROLES
 
 /datum/gear/accessory/armband_ma
 	display_name = "master at arms brassard"
-	path = /obj/item/clothing/accessory/armband/ma
+	path = /obj/item/clothing/accessory/armband/solgov/ma
 	allowed_roles = SECURITY_ROLES
 
 /datum/gear/accessory/armband_cargo
@@ -132,7 +132,7 @@
 	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/accessory/wallet
-	display_name = "wallet"
+	display_name = "wallet, colour select"
 	path = /obj/item/weapon/storage/wallet
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -285,8 +285,8 @@
 /datum/gear/accessory/armor_deco/New()
 	..()
 	var/tags = list()
-	tags["SCG flag"] = /obj/item/clothing/accessory/armor/tag
-	tags["EC crest"] = /obj/item/clothing/accessory/armor/tag/ec
+	tags["SCG flag"] = /obj/item/clothing/accessory/armor/tag/solgov
+	tags["EC crest"] = /obj/item/clothing/accessory/armor/tag/solgov/ec
 	tags["PCRC tag"] = /obj/item/clothing/accessory/armor/tag/pcrc
 	tags["SAARE tag"] = /obj/item/clothing/accessory/armor/tag/saare
 	tags["blood patch, O+"] = /obj/item/clothing/accessory/armor/tag/opos
@@ -298,6 +298,21 @@
 	tags["blood patch, AB+"] = /obj/item/clothing/accessory/armor/tag/abpos
 	tags["blood patch, AB-"] = /obj/item/clothing/accessory/armor/tag/abneg
 	gear_tweaks += new/datum/gear_tweak/path(tags)
+
+/datum/gear/accessory/helm_covers
+	display_name = "helmet covers"
+	path = /obj/item/clothing/accessory/armor/helmcover
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/accessory/helm_covers/New()
+	..()
+	var/covers = list()
+	covers["green helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/green
+	covers["navy blue helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/navy
+	covers["tan helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/tan
+	covers["PCRC helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/pcrc
+	covers["SAARE helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/saare
+	gear_tweaks += new/datum/gear_tweak/path(covers)
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
@@ -328,14 +343,14 @@
 /datum/gear/accessory/solawardmajor/New()
 	..()
 	var/solmajors = list()
-	solmajors["iron star"] = /obj/item/clothing/accessory/medal/iron/star
-	solmajors["bronze heart"] = /obj/item/clothing/accessory/medal/bronze/heart
-	solmajors["silver sword"] = /obj/item/clothing/accessory/medal/silver/sword
-	solmajors["medical heart"] = /obj/item/clothing/accessory/medal/heart
-	solmajors["valor medal"] = /obj/item/clothing/accessory/medal/silver/sol
-	solmajors["sapienterian medal"] = /obj/item/clothing/accessory/medal/gold/sol
-	solmajors["peacekeeper ribbon"] = /obj/item/clothing/accessory/ribbon/peace
-	solmajors["marksman ribbon"] = /obj/item/clothing/accessory/ribbon/marksman
+	solmajors["iron star"] = /obj/item/clothing/accessory/medal/solgov/iron/star
+	solmajors["bronze heart"] = /obj/item/clothing/accessory/medal/solgov/bronze/heart
+	solmajors["silver sword"] = /obj/item/clothing/accessory/medal/solgov/silver/sword
+	solmajors["medical heart"] = /obj/item/clothing/accessory/medal/solgov/heart
+	solmajors["valor medal"] = /obj/item/clothing/accessory/medal/solgov/silver/sol
+	solmajors["sapienterian medal"] = /obj/item/clothing/accessory/medal/solgov/gold/sol
+	solmajors["peacekeeper ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/peace
+	solmajors["marksman ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/marksman
 	gear_tweaks += new/datum/gear_tweak/path(solmajors)
 
 /datum/gear/accessory/solawardminor
@@ -348,10 +363,10 @@
 /datum/gear/accessory/solawardminor/New()
 	..()
 	var/solminors = list()
-	solminors["expeditionary medal"] = /obj/item/clothing/accessory/medal/iron/sol
-	solminors["operations medal"] = /obj/item/clothing/accessory/medal/bronze/sol
-	solminors["frontier ribbon"] = /obj/item/clothing/accessory/ribbon/frontier
-	solminors["instructor ribbon"] = /obj/item/clothing/accessory/ribbon/instructor
+	solminors["expeditionary medal"] = /obj/item/clothing/accessory/medal/solgov/iron/sol
+	solminors["operations medal"] = /obj/item/clothing/accessory/medal/solgov/bronze/sol
+	solminors["frontier ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/frontier
+	solminors["instructor ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/instructor
 	gear_tweaks += new/datum/gear_tweak/path(solminors)
 
 /datum/gear/accessory/ntaward
@@ -371,7 +386,7 @@
 
 /datum/gear/accessory/tags
 	display_name = "dog tags"
-	path = /obj/item/clothing/accessory/badge/tags
+	path = /obj/item/clothing/accessory/badge/solgov/tags
 	allowed_roles = MILITARY_ROLES
 
 /datum/gear/accessory/kneepads
@@ -385,3 +400,7 @@
 	flags = GEAR_HAS_COLOR_SELECTION
 	sort_category = "Accessories"
 	allowed_roles = SEMIFORMAL_ROLES
+
+/datum/gear/accessory/torch_patch
+	display_name = "Torch mission patch"
+	path = /obj/item/clothing/accessory/solgov/torch_patch

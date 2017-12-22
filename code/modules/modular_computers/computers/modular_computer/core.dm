@@ -152,7 +152,7 @@
 		P.kill_program(1)
 		idle_threads.Remove(P)
 	if(loud)
-		visible_message("\The [src] shuts down.")
+		visible_message("\The [src] shuts down.", range = 1)
 	enabled = 0
 	update_icon()
 

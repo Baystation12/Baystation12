@@ -124,7 +124,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
-	if(s_tone == tone || !(species.appearance_flags & HAS_SKIN_TONE))
+	if(s_tone == tone || !(species.appearance_flags & HAS_A_SKIN_TONE))
 		return
 
 	s_tone = tone

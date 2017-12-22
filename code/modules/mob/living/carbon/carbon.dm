@@ -24,6 +24,7 @@
 	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
 	QDEL_NULL_LIST(internal_organs)
 	QDEL_NULL_LIST(stomach_contents)
+	QDEL_NULL_LIST(hallucinations)
 	return ..()
 
 /mob/living/carbon/rejuvenate()

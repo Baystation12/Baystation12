@@ -206,13 +206,12 @@ BLIND     // can't see anything
 		SPECIES_VOX = 'icons/mob/species/vox/eyes.dmi',
 		SPECIES_RESOMI = 'icons/mob/species/resomi/eyes.dmi')
 
-/obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
+/obj/item/clothing/glasses/get_icon_state(mob/user_mob, slot)
 	if(item_state_slots && item_state_slots[slot])
-		ret.icon_state = item_state_slots[slot]
+		return item_state_slots[slot]
 	else
-		ret.icon_state = icon_state
-	return ret
+		return icon_state
+	return ..()
 
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))
@@ -242,6 +241,12 @@ BLIND     // can't see anything
 		SPECIES_RESOMI = 'icons/mob/species/resomi/gloves.dmi')
 	blood_overlay_type = "bloodyhands"
 
+/obj/item/clothing/gloves/Initialize()
+	if(item_flags & PREMODIFIED)
+		cut_fingertops()
+
+	. = ..()
+
 /obj/item/clothing/gloves/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
@@ -262,12 +267,12 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 		if (clipped)
-			to_chat(user, "<span class='notice'>The [src] have already been clipped!</span>")
+			to_chat(user, "<span class='notice'>\The [src] have already been modified!</span>")
 			update_icon()
 			return
 
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-		user.visible_message("<span class='warning'>\The [user] cuts the fingertips off of \the [src].</span>","<span class='warning'>You cut the fingertips off of \the [src].</span>")
+		user.visible_message("<span class='warning'>\The [user] modifies \the [src] with \the [W].</span>","<span class='warning'>You modify \the [src] with \the [W].</span>")
 
 		cut_fingertops() // apply change, so relevant xenos can wear these
 		return
@@ -280,7 +285,7 @@ BLIND     // can't see anything
 
 	clipped = 1
 	name = "modified [name]"
-	desc = "[desc]<br>They have had the fingertips cut off of them."
+	desc = "[desc]<br>They have been modified to accommodate a different shape."
 	if("exclude" in species_restricted)
 		species_restricted -= SPECIES_UNATHI
 		species_restricted -= SPECIES_TAJARA
@@ -469,6 +474,7 @@ BLIND     // can't see anything
 /obj/item/clothing/mask/New()
 	if(pull_mask)
 		action_button_name = "Adjust Mask"
+		verbs += /obj/item/clothing/mask/proc/adjust_mask
 	..()
 
 /obj/item/clothing/mask/update_clothing_icon()
@@ -476,21 +482,17 @@ BLIND     // can't see anything
 		var/mob/M = src.loc
 		M.update_inv_wear_mask()
 
-/obj/item/clothing/mask/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
-	if(item_state_slots && item_state_slots[slot])
-		ret.icon_state = item_state_slots[slot]
-	else
-		ret.icon_state = icon_state
-	return ret
-
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
 
 /obj/item/clothing/mask/proc/adjust_mask(var/mob/user)
+	set category = "Object"
+	set name = "Adjust mask"
+	set src in usr
+
 	if(!user.incapacitated())
 		if(!pull_mask)
-			to_chat(usr, "<span class ='notice'>You cannot pull down your [src].</span>")
+			to_chat(usr, "<span class ='notice'>You cannot pull down your [src.name].</span>")
 			return
 		else
 			src.hanging = !src.hanging
@@ -498,31 +500,24 @@ BLIND     // can't see anything
 				gas_transfer_coefficient = down_gas_transfer_coefficient
 				body_parts_covered = down_body_parts_covered
 				icon_state = down_icon_state
+				item_state = down_icon_state
 				item_flags = down_item_flags
 				flags_inv = down_flags_inv
-				to_chat(usr, "You pull the [src] below your chin.")
+				to_chat(usr, "You pull [src] below your chin.")
 			else
 				gas_transfer_coefficient = initial(gas_transfer_coefficient)
 				body_parts_covered = initial(body_parts_covered)
 				icon_state = initial(icon_state)
+				item_state = initial(icon_state)
 				item_flags = initial(item_flags)
 				flags_inv = initial(flags_inv)
-				to_chat(usr, "You pull the [src] up to cover your face.")
+				to_chat(usr, "You pull [src] up to cover your face.")
 			update_clothing_icon()
 			user.update_action_buttons()
 
 /obj/item/clothing/mask/attack_self(mob/user)
 	if(pull_mask)
 		adjust_mask(user)
-
-/obj/item/clothing/mask/verb/toggle()
-	set category = "Object"
-	set name = "Adjust mask"
-	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-
-	adjust_mask(usr)
 
 ///////////////////////////////////////////////////////////////////////
 //Shoes
@@ -546,10 +541,6 @@ BLIND     // can't see anything
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi',
 		SPECIES_RESOMI = 'icons/mob/species/resomi/shoes.dmi')
 	blood_overlay_type = "shoeblood"
-
-/obj/item/clothing/shoes/New()
-	..()
-	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN
 
 /obj/item/clothing/shoes/proc/draw_knife()
 	set name = "Draw Boot Knife"
@@ -679,8 +670,8 @@ BLIND     // can't see anything
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
-	valid_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT,ACCESSORY_SLOT_DECOR,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA)
-	restricted_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT)
+	valid_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_HOLSTER,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT,ACCESSORY_SLOT_DECOR,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_HOLSTER,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT)
 
 /obj/item/clothing/under/New()
 	..()
@@ -691,15 +682,13 @@ BLIND     // can't see anything
 	if(rolled_sleeves == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
 
-/obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
+/obj/item/clothing/under/get_icon_state(mob/user_mob, slot)
+	var/ret
 	if(item_state_slots && item_state_slots[slot])
-		ret.icon_state = item_state_slots[slot]
+		ret = item_state_slots[slot]
 	else
-		ret.icon_state = icon_state
-	ret.icon_state = "[ret.icon_state]_s"
-	return ret
-
+		ret = icon_state
+	return "[ret]_s"
 
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(accessories && accessories.len)
@@ -772,7 +761,8 @@ BLIND     // can't see anything
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
-		M.update_inv_w_uniform()
+		M.update_inv_w_uniform(0)
+		M.update_inv_wear_id()
 
 
 /obj/item/clothing/under/examine(mob/user)

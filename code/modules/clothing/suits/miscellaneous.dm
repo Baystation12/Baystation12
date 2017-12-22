@@ -496,6 +496,13 @@
 	icon_open = "trackjacketwhite_open"
 	icon_closed = "trackjacketwhite"
 
+/obj/item/clothing/suit/storage/toggle/track/tcc
+	name = "TCC track jacket"
+	desc = "A Terran track jacket, for the truly cheeki breeki."
+	icon_state = "trackjackettcc"
+	icon_open = "trackjackettcc_open"
+	icon_closed = "trackjackettcc"
+
 /obj/item/clothing/suit/rubber
 	name = "human suit"
 	desc = "A Human suit made out of rubber."

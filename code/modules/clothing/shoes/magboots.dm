@@ -16,7 +16,7 @@
 	randpixel = 0
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
-	slowdown_per_slot[slot_shoes] = shoes? max(SHOES_SLOWDOWN, shoes.slowdown_per_slot[slot_shoes]): SHOES_SLOWDOWN	//So you can't put on magboots to make you walk faster.
+	slowdown_per_slot[slot_shoes] = shoes? max(0, shoes.slowdown_per_slot[slot_shoes]): 0	//So you can't put on magboots to make you walk faster.
 	if (magpulse)
 		slowdown_per_slot[slot_shoes] += 3
 

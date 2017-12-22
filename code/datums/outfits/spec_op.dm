@@ -22,7 +22,7 @@
 	back = /obj/item/weapon/tank/jetpack/oxygen
 	mask = /obj/item/clothing/mask/gas/swat
 
-	flags = OUTFIT_HAS_JETPACK
+	flags = OUTFIT_HAS_JETPACK|OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/ert
 	name = "Spec ops - Emergency response team"
@@ -66,4 +66,4 @@
 	id_type = /obj/item/weapon/card/id/syndicate
 	id_pda_assignment = "Mercenary"
 
-	flags = OUTFIT_HAS_BACKPACK
+	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT

@@ -74,7 +74,7 @@
 
 	// Surgery vars.
 	var/cavity_max_w_class = 0
-	var/hatch = 0
+	var/hatch_state = 0
 	var/stage = 0
 	var/cavity = 0
 	var/atom/movable/applied_pressure
@@ -136,7 +136,7 @@
 		if (3)
 			burn_damage = 3
 	burn_damage *= robotic/burn_mod //ignore burn mod for EMP damage
-	
+
 	var/power = 4 - severity //stupid reverse severity
 	for(var/obj/item/I in implants)
 		if(I.flags & CONDUCT)
@@ -194,7 +194,7 @@
 				stage++
 				return
 		if(2)
-			if(W.sharp || istype(W,/obj/item/weapon/hemostat) || istype(W,/obj/item/weapon/wirecutters))
+			if(W.sharp || istype(W,/obj/item/weapon/hemostat) || isWirecutter(W))
 				var/list/organs = get_contents_recursive()
 				if(organs.len)
 					var/obj/item/removing = pick(organs)
@@ -204,6 +204,9 @@
 					current_child.internal_organs.Remove(removing)
 
 					status |= ORGAN_CUT_AWAY
+					if(istype(removing, /obj/item/organ/internal/mmi_holder))
+						var/obj/item/organ/internal/mmi_holder/O = removing
+						removing = O.transfer_and_delete()
 
 					removing.forceMove(get_turf(user))
 
@@ -321,7 +324,7 @@
 		else return 0
 
 	if(!damage_amount)
-		if(src.hatch != 2)
+		if(src.hatch_state != HATCH_OPENED)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 		return 0
 
@@ -1015,7 +1018,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(!keep_organs)
 			for(var/obj/item/organ/thing in internal_organs)
 				if(istype(thing))
-					if(thing.vital)
+					if(thing.vital || thing.robotic >= ORGAN_ROBOT)
 						continue
 					internal_organs -= thing
 					owner.internal_organs_by_name[thing.organ_tag] = null
@@ -1215,8 +1218,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 					descriptors += "some burns"
 				if(21 to INFINITY)
 					descriptors += pick("a lot of burns","severe melting")
-		if(hatch)
-			descriptors += "an open panel"
+		switch(hatch_state)
+			if(HATCH_UNSCREWED)
+				descriptors += "a closed but unsecured panel"
+			if(HATCH_OPENED)
+				descriptors += "an open panel"
 
 		return english_list(descriptors)
 

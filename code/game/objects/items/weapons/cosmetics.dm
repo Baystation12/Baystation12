@@ -69,13 +69,13 @@
 
 
 /obj/item/weapon/haircomb //sparklysheep's comb
-	name = "purple comb"
-	desc = "A pristine purple comb made from flexible plastic."
+	name = "plastic comb"
+	desc = "A pristine comb made from flexible plastic."
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	icon = 'icons/obj/items.dmi'
-	icon_state = "purplecomb"
-	item_state = "purplecomb"
+	icon_state = "comb"
+	item_state = "comb"
 
 /obj/item/weapon/haircomb/attack_self(mob/user)
 	user.visible_message("<span class='notice'>[user] uses [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"].</span>")

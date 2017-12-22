@@ -56,6 +56,7 @@
 	var/move_delay = 1
 	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/fire_sound_text = "gunshot"
+	var/fire_anim = null
 	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
 	var/silenced = 0
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
@@ -89,12 +90,6 @@
 
 /obj/item/weapon/gun/update_twohanding()
 	if(one_hand_penalty)
-		var/mob/living/M = loc
-		if(istype(M))
-			if(M.can_wield_item(src) && src.is_held_twohanded(M))
-				name = "[initial(name)] (wielded)"
-			else
-				name = initial(name)
 		update_icon() // In case item_state is set somewhere else.
 	..()
 
@@ -153,7 +148,7 @@
 		return
 
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
-		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
+		to_chat(user, "<span class='warning'>You refrain from firing \the [src] as your intent is set to help.</span>")
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
 
@@ -242,6 +237,9 @@
 
 //called after successfully firing
 /obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+	if(fire_anim)
+		flick(fire_anim, src)
+
 	if(!silenced)
 		if(reflex)
 			user.visible_message(

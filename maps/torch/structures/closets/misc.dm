@@ -21,7 +21,7 @@
 		/obj/item/weapon/storage/secure/briefcase,
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/clothing/under/rank/internalaffairs/plain/nt,
-		/obj/item/clothing/suit/storage/toggle/internalaffairs/plain,
+		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/glasses/sunglasses/big,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50)
@@ -51,7 +51,7 @@
 		/obj/item/device/radio/headset/headset_com,
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/clothing/under/rank/internalaffairs/plain/solgov,
-		/obj/item/clothing/suit/storage/toggle/internalaffairs/plain,
+		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/glasses/sunglasses/big,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50)
@@ -93,7 +93,10 @@
 	req_one_access = list(access_armory,access_emergency_armory,access_hos,access_hop,access_ce,access_cmo,access_rd,access_senadv)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/WillContain()
-	return list(/obj/item/weapon/gun/energy/gun = 3)
+	return list(
+			/obj/item/clothing/accessory/holster/thigh = 2,
+			/obj/item/weapon/gun/energy/gun = 3,
+	)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small
 	name = "personal sidearm cabinet"
@@ -107,5 +110,7 @@
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined/WillContain()
 	return list(
 		/obj/item/weapon/gun/energy/gun/small = 2,
-		/obj/item/weapon/gun/energy/gun = 3
+		/obj/item/clothing/accessory/holster/thigh = 2,
+		/obj/item/weapon/gun/energy/gun = 2,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/gun/energy/gun, /obj/item/weapon/gun/energy/gun/small))
 	)

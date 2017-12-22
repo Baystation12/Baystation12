@@ -3,6 +3,7 @@
 	name = "explosive implant"
 	desc = "A military grade micro bio-explosive. Highly dangerous."
 	icon_state = "implant_evil"
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 3)
 	var/elevel
 	var/phrase
 	var/code = 13

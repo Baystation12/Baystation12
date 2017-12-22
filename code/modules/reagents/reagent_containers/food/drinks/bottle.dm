@@ -201,7 +201,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"
-	desc = "Aah, vodka. Prime choice of drink AND fuel by Russians worldwide."
+	desc = "Aah, vodka. Prime choice of drink AND fuel by Terrans around the galaxy."
 	icon_state = "vodkabottle"
 	center_of_mass = "x=17;y=3"
 	New()
@@ -325,6 +325,15 @@
 		..()
 		reagents.add_reagent(/datum/reagent/ethanol/bluecuracao, 100)
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/herbal
+	name = "Liqueur d'Herbe"
+	desc = "A bottle of the seventh-finest herbal liquor sold under a generic name in the galaxy. The back label has a load of guff about the monks who traditionally made this particular variety."
+	icon_state = "herbal"
+	center_of_mass = "x=16;y=6"
+	New()
+		..()
+		reagents.add_reagent(/datum/reagent/ethanol/herbal, 100)
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine
 	name = "Briar Rose Grenadine Syrup"
 	desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
@@ -369,6 +378,34 @@
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/ethanol/pwine, 100)
+
+//////////////////////////PREMIUM ALCOHOL ///////////////////////
+/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka
+	name = "Four Stripes Quadruple Distilled"
+	desc = "Premium distilled vodka imported directly from the Terran Colonial Confederation."
+	icon_state = "premiumvodka"
+	center_of_mass = "x=17;y=3"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka/New()
+	..()
+	reagents.add_reagent(/datum/reagent/ethanol/vodka/premium, 100)
+	var/namepick = pick("Four Stripes","Gilgamesh","Novaya Zemlya","Terran","STS-35")
+	var/typepick = pick("Absolut","Gold","Quadruple Distilled","Platinum","Standard")
+	name = "[namepick] [typepick]"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine
+	name = "Uve De Blanc"
+	desc = "You feel pretentious just looking at it."
+	icon_state = "premiumwine"
+	center_of_mass = "x=16;y=4"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine/New()
+	..()
+	reagents.add_reagent(/datum/reagent/ethanol/wine/premium, 100)
+	var/namepick = pick("Calumont","Sciacchemont","Recioto","Torcalota")
+	var/agedyear = rand(2350,2550)
+	name = "Chateau [namepick] De Blanc"
+	desc += " This bottle is marked as [agedyear] Vintage."
 
 //////////////////////////JUICES AND STUFF ///////////////////////
 

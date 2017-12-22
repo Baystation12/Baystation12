@@ -76,7 +76,7 @@
 	if(alien == IS_DIONA)
 		return
 	M.drowsyness = max(0, M.drowsyness - 6 * removed)
-	M.hallucination = max(0, M.hallucination - 9 * removed)
+	M.adjust_hallucination(-9 * removed)
 	M.add_up_to_chemical_effect(CE_ANTITOX, 1)
 
 	var/removing = (4 * removed)
@@ -189,7 +189,7 @@
 
 /datum/reagent/paracetamol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
-	M.hallucination = max(M.hallucination, 2)
+	M.druggy = max(M.druggy, 2)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /datum/reagent/tramadol
@@ -234,7 +234,8 @@
 
 /datum/reagent/tramadol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
-	M.hallucination = max(M.hallucination, 2)
+	M.hallucination(120, 30)
+	M.druggy = max(M.druggy, 10)
 	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
 	M.add_chemical_effect(CE_BREATHLOSS, 0.6) //Have trouble breathing, need more air
 	if(isboozed(M))
@@ -259,11 +260,6 @@
 	pain_power = 200
 	effective_dose = 2
 
-/datum/reagent/tramadol/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
-	..()
-	M.druggy = max(M.druggy, 10)
-	M.hallucination = max(M.hallucination, 3)
-
 /* Other medicine */
 
 /datum/reagent/synaptizine
@@ -284,7 +280,8 @@
 	M.AdjustStunned(-1)
 	M.AdjustWeakened(-1)
 	holder.remove_reagent(/datum/reagent/mindbreaker, 5)
-	M.hallucination = max(0, M.hallucination - 10)
+	M.adjust_hallucination(-10)
+	M.add_chemical_effect(CE_MIND, 2)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)
 
@@ -545,6 +542,7 @@
 		data = world.time
 		to_chat(M, "<span class='warning'>Your mind feels a little less stable...</span>")
 	else
+		M.add_chemical_effect(CE_MIND, 1)
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			to_chat(M, "<span class='notice'>Your mind feels stable... a little stable.</span>")
@@ -564,22 +562,23 @@
 		data = world.time
 		to_chat(M, "<span class='warning'>Your mind feels much less stable...</span>")
 	else
+		M.add_chemical_effect(CE_MIND, 2)
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			if(prob(90))
 				to_chat(M, "<span class='notice'>Your mind feels much more stable.</span>")
 			else
 				to_chat(M, "<span class='warning'>Your mind breaks apart...</span>")
-				M.hallucination += 200
+				M.hallucination(200, 100)
 
 /datum/reagent/nicotine
 	name = "Nicotine"
-	description = "Stimulates and relaxes the mind and body."
-	taste_description = "smoke"
+	description = "A sickly yellow liquid sourced from tobacco leaves. Stimulates and relaxes the mind and body."
+	taste_description = "peppery bitterness"
 	reagent_state = LIQUID
-	color = "#181818"
+	color = "#efebaa"
 	metabolism = REM * 0.002
-	overdose = 10
+	overdose = 6
 	scannable = 1
 	data = 0
 
@@ -599,6 +598,35 @@
 /datum/reagent/nicotine/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
+
+/datum/reagent/tobacco
+	name = "Tobacco"
+	description = "Cut and processed tobacco leaves."
+	taste_description = "tobacco"
+	reagent_state = SOLID
+	color = "#684b3c"
+	scannable = 1
+	var/nicotine = REM * 0.2
+
+/datum/reagent/tobacco/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.reagents.add_reagent(/datum/reagent/nicotine, nicotine)
+
+/datum/reagent/tobacco/fine
+	name = "Fine Tobacco"
+	taste_description = "fine tobacco"
+
+/datum/reagent/tobacco/bad
+	name = "Terrible Tobacco"
+	taste_description = "acrid smoke"
+
+/datum/reagent/tobacco/liquid
+	name = "Nicotine Solution"
+	description = "A diluted nicotine solution."
+	reagent_state = LIQUID
+	taste_mult = 0
+	color = "#fcfcfc"
+	nicotine = REM * 0.1
 
 /datum/reagent/menthol
 	name = "Menthol"
@@ -676,7 +704,8 @@
 
 /datum/reagent/antidexafen/overdose(var/mob/living/carbon/M, var/alien)
 	..()
-	M.hallucination = max(M.hallucination, 2)
+	M.hallucination(60, 20)
+	M.druggy = max(M.druggy, 2)
 
 /datum/reagent/adrenaline
 	name = "Adrenaline"
@@ -685,7 +714,7 @@
 	reagent_state = LIQUID
 	color = "#c8a5dc"
 	scannable = 1
-	overdose = 10
+	overdose = 20
 	metabolism = 0.1
 
 /datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
@@ -698,7 +727,7 @@
 	else if(M.chem_doses[type] < 1)
 		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
 	M.add_chemical_effect(CE_PULSE, 2)
-	if(M.chem_doses[type] > 5)
+	if(M.chem_doses[type] > 10)
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)

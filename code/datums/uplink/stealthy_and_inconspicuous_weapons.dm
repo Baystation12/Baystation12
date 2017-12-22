@@ -29,7 +29,7 @@
 	item_cost = 16
 	path = /obj/item/weapon/cartridge/syndicate
 
-/datum/uplink_item/item/stealthy_weapons/parapen
-	name = "Paralysis Pen"
-	item_cost = 24
-	path = /obj/item/weapon/pen/reagent/paralysis
+/datum/uplink_item/item/stealthy_weapons/syringegun
+	name = "Disguised Syringe Gun"
+	item_cost = 10
+	path = /obj/item/weapon/storage/box/syndie_kit/syringegun

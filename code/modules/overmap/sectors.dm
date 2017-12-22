@@ -20,6 +20,8 @@ var/list/points_of_interest = list()
 	var/in_space = 1	//can be accessed via lucky EVA
 
 /obj/effect/overmap/Initialize()
+	. = ..()
+
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 
@@ -75,8 +77,6 @@ var/list/points_of_interest = list()
 			S.linked = src
 			testing("Sensor console at level [S.z] linked to overmap object '[name]'.")
 
-	. = ..()
-
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
 	. = generic_waypoints.Copy()
 	if(shuttle_name in restricted_waypoints)
@@ -91,7 +91,8 @@ var/list/points_of_interest = list()
 /obj/effect/overmap/sector/Initialize()
 	. = ..()
 	if(known)
-		set_light(2, 5)
+		layer = ABOVE_LIGHTING_LAYER
+		plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		for(var/obj/machinery/computer/helm/H in SSmachines.machinery)
 			H.get_known_sectors()
 

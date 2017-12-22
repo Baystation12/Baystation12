@@ -7,15 +7,23 @@
 	slot_flags = SLOT_BACK
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "welderpack"
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_HUGE
 	var/max_fuel = 350
+	var/obj/item/weapon/weldingtool/welder
 
-/obj/item/weapon/weldpack/New()
+/obj/item/weapon/weldpack/Initialize()
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 
+	. = ..()
+
+/obj/item/weapon/weldpack/Destroy()
+	QDEL_NULL(welder)
+
+	. = ..()
+
 /obj/item/weapon/weldpack/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/weldingtool))
+	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/T = W
 		if(T.welding & prob(50))
 			message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
@@ -28,11 +36,20 @@
 		else
 			if(T.welding)
 				to_chat(user, "<span class='danger'>That was close!</span>")
-			src.reagents.trans_to_obj(W, T.max_fuel)
-			to_chat(user, "<span class='notice'>Welder refilled!</span>")
+			if(!T.tank)
+				to_chat(user, "\The [T] has no tank attached!")
+			src.reagents.trans_to_obj(T.tank, T.tank.max_fuel)
+			to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
-	to_chat(user, "<span class='warning'>The tank will accept only a welding tool.</span>")
+	else if(istype(W, /obj/item/weapon/welder_tank))
+		var/obj/item/weapon/welder_tank/tank = W
+		src.reagents.trans_to_obj(tank, tank.max_fuel)
+		to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
+		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		return
+
+	to_chat(user, "<span class='warning'>The tank will accept only a welding tool or cartridge.</span>")
 	return
 
 /obj/item/weapon/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
@@ -47,7 +64,27 @@
 		to_chat(user, "<span class='warning'>The pack is already full!</span>")
 		return
 
+/obj/item/weapon/weldpack/attack_hand(mob/user as mob)
+	if(welder && user.get_inactive_hand() == src)
+		user.put_in_hands(welder)
+		user.visible_message("[user] removes \the [welder] from \the [src].", "You remove \the [welder] from \the [src].")
+		welder = null
+		update_icon()
+	else
+		..()
+
+/obj/item/weapon/weldpack/update_icon()
+	..()
+
+	overlays.Cut()
+	if(welder)
+		var/image/welder_image = image(welder.icon, icon_state = welder.icon_state)
+		welder_image.pixel_x = 16
+		overlays += welder_image
+
 /obj/item/weapon/weldpack/examine(mob/user)
 	. = ..(user)
 	to_chat(user, text("\icon[] [] units of fuel left!", src, src.reagents.total_volume))
-	return
+
+	if(welder)
+		to_chat(user, "\The [welder] is attached.")

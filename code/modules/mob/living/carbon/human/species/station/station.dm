@@ -16,7 +16,7 @@
 	gluttonous = GLUT_TINY
 
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
@@ -81,12 +81,15 @@
 	primitive_form = "Stok"
 	darksight = 3
 	gluttonous = GLUT_TINY
+	strength = STR_HIGH
 	slowdown = 0.5
 	brute_mod = 0.8
+	blood_volume = 800
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_UNATHI)
 	name_language = LANGUAGE_UNATHI
 	health_hud_intensity = 2
+	hunger_factor = 0.2
 
 	min_age = 18
 	max_age = 260
@@ -131,9 +134,79 @@
 		)
 	breathing_sound = 'sound/voice/lizard.ogg'
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/diona_heal_toggle
+		)
+
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
+
+/datum/species/unathi/handle_environment_special(var/mob/living/carbon/human/H)
+	if(H.in_stasis || H.stat == DEAD)
+		return
+	if(H.nutrition < 50)
+		H.adjustToxLoss(2,0)
+	else if (H.innate_heal)
+		//Heals normal damage.
+		if (H.getBruteLoss())
+			H.adjustBruteLoss(-4)
+			H.nutrition -= 4
+		if(H.getFireLoss())
+			H.adjustFireLoss(-3)
+			H.nutrition -= 4
+		if(H.getOxyLoss())
+			H.adjustOxyLoss(-4)
+			H.nutrition -= 4
+		if(H.getToxLoss())
+			H.adjustToxLoss(-2)
+			H.nutrition -= 4
+
+		if(prob(10) && H.nutrition > 150 && !H.getBruteLoss() && !H.getFireLoss())
+			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
+			if (D.disfigured)
+				D.disfigured = 0
+				H.nutrition -= 20
+
+	if(H.nutrition <= 100)
+		return
+
+	for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
+
+		var/obj/item/organ/internal/regen_organ = H.internal_organs_by_name[bpart]
+
+		if(regen_organ.robotic >= ORGAN_ROBOT)
+			continue
+		if(istype(regen_organ))
+			if(regen_organ.damage > 0)
+				regen_organ.damage = max(regen_organ.damage - 5, 0)
+				H.nutrition -= 5
+				if(prob(5))
+					to_chat(H, "<span class='warning'>You feel a soothing sensation as your [regen_organ] mends...</span>")
+
+	if(prob(5) && H.nutrition > 150)
+		for(var/limb_type in has_limbs)
+			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
+			if(E && !E.is_usable())
+				E.removed()
+				qdel(E)
+				E= null
+			if(!E)
+				var/list/organ_data = has_limbs[limb_type]
+				var/limb_path = organ_data["path"]
+				var/obj/item/organ/O = new limb_path(H)
+				organ_data["descriptor"] = O.name
+				to_chat(H, "<span class='danger'>With a shower of fresh blood, a new [O.name] forms.</span>")
+				H.visible_message("<span class='danger'>With a shower of fresh blood, a length of biomass shoots from [H], forming a new [O.name]</span>")
+				H.nutrition -= 50
+				var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
+				blood_splatter(H,B,1)
+				H.update_body()
+				return
+			else
+				for(var/datum/wound/W in E.wounds)
+					if(W.wound_damage() == 0 && prob(50))
+						E.wounds -= W
 
 /datum/species/tajaran
 	name = SPECIES_TAJARA
@@ -150,18 +223,20 @@
 	burn_mod =  1.15
 	gluttonous = GLUT_TINY
 	num_alternate_languages = 2
-	secondary_langs = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR)
+	secondary_langs = list(LANGUAGE_SIIK_TAJR)
+	additional_langs = list(LANGUAGE_SIIK_MAAS)
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
 
 	min_age = 19
 	max_age = 140
 
-	blurb = "The Tajaran race is a species of long lived mammalian bipeds hailing from the planet of Ahdomai in the \
-	Shyihie system. They have been introduced to bluespace travel by the humans and Skrell, and their policies have been \
-	structured to prevent another reign of the Overseers. They hold a very spiritual outlook on life and \
-	have recently been fascinated by cybernetic enhancement. They prefer colder environments, \
-	and evolved a layer of thick fur to accommodate this. "
+	blurb = "The Tajaran are a species of furred mammalian bipeds hailing from the chilly planet of Ahdomai \
+	in the Zamsiin-lr system. They are a naturally superstitious species, with the new generations growing up with tales \
+	of the heroic struggles of their forebears against the Overseers. This spirit has led them forward to the \
+	reconstruction and advancement of their society to what they are today. Their pride for the struggles they \
+	went through is heavily tied to their spiritual beliefs. Recent discoveries have jumpstarted the progression \
+	of highly advanced cybernetic technology, causing a culture shock within Tajaran society."
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -264,6 +339,7 @@
 	siemens_coefficient = 0.3
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 2
+	strength = STR_VHIGH
 	secondary_langs = list(LANGUAGE_ROOTGLOBAL)
 	name_language = LANGUAGE_ROOTLOCAL
 	spawns_with_stack = 0
@@ -351,10 +427,10 @@
 	return 0
 
 /datum/species/diona/equip_survival_gear(var/mob/living/carbon/human/H)
-	if(H.backbag == 1)
-		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H), slot_r_hand)
-	else
+	if(istype(H.get_equipped_item(slot_back), /obj/item/weapon/storage/backpack))
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H.back), slot_in_backpack)
+	else
+		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H), slot_r_hand)
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER
@@ -399,8 +475,8 @@
 			if(I.damage > 0)
 				I.damage = max(I.damage - 2, 0)
 				H.nutrition -= 2
-				if (prob(1))
-					to_chat(H, "<span class='warning'>You sense your [I.name] regenerating...</span>")
+				if (prob(5))
+					to_chat(H, "<span class='warning'>You sense your nymphs shifting internally to regenerate your [I.name]...</span>")
 
 		if (prob(10) && H.nutrition > 70)
 			for(var/limb_type in has_limbs)
@@ -412,7 +488,7 @@
 				if(!E)
 					var/list/organ_data = has_limbs[limb_type]
 					var/limb_path = organ_data["path"]
-					var/obj/item/organ/O = new limb_path(src)
+					var/obj/item/organ/O = new limb_path(H)
 					organ_data["descriptor"] = O.name
 					to_chat(H, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
 					H.nutrition -= 60
@@ -421,6 +497,7 @@
 					for(var/datum/wound/W in E.wounds)
 						if (W.wound_damage() == 0 && prob(50))
 							E.wounds -= W
+
 /datum/species/wryn
 	name = "Wryn"
 	name_plural = "Wryn"

@@ -1,0 +1,6 @@
+author: "Orelbon"
+delete-after: True
+changes: 
+  - tweak: "Ion weapons shouldn't be horrible anymore, they now activate their emp no matter what they hit."
+  - tweak: "The rifle now has a max range of 2, and the pistol a max range of 1."
+  - tweak: "Ion pistol max shots lowered to 6."

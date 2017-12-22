@@ -19,13 +19,14 @@
 	var/cuff_type = "handcuffs"
 	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/handcuffs.dmi')
 
-/obj/item/weapon/handcuffs/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
+
+
+/obj/item/weapon/handcuffs/get_icon_state(mob/user_mob, slot)
 	if(slot == slot_handcuffed_str)
-		ret.icon_state = "handcuff1"
+		return "handcuff1"
 	if(slot == slot_legcuffed_str)
-		ret.icon_state = "legcuff1"
-	return ret
+		return "legcuff1"
+	return ..()
 
 /obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 

@@ -42,7 +42,7 @@
 				log_error("<span class='danger'>Seed type [seed.get_trait(TRAIT_PLANT_ICON)] cannot find a growth stage value.</span>")
 				return
 			var/overlay_stage = get_overlay_stage()
-			
+
 			var/ikey = "\ref[seed]-plant-[overlay_stage]"
 			if(!plant_controller.plant_icon_cache[ikey])
 				plant_controller.plant_icon_cache[ikey] = seed.get_icon(overlay_stage)
@@ -74,10 +74,12 @@
 			new_overlays += status_overlays[6]
 
 	if((!density || !opacity) && seed && seed.get_trait(TRAIT_LARGE))
-		set_density(1)
+		if(!mechanical)
+			set_density(1)
 		set_opacity(1)
 	else
-		set_density(0)
+		if(!mechanical)
+			set_density(0)
 		set_opacity(0)
 
 	overlays |= new_overlays

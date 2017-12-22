@@ -128,14 +128,11 @@ Class Procs:
 	var/clicksound			// sound played on succesful interface use by a carbon lifeform
 	var/clickvol = 40		// sound played on succesful interface use
 
-/obj/machinery/New(l, d=0)
+/obj/machinery/Initialize(mapload, d=0)
+	. = ..()
 	SETAREA(src) // Must be done ASAP.
-	..(l)
 	if(d)
 		set_dir(d)
-
-/obj/machinery/Initialize()
-	. = ..()
 	START_PROCESSING(SSmachines, src)
 
 /obj/machinery/Destroy()

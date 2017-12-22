@@ -88,7 +88,6 @@
 "bK" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/usedup,/area/ship/scrap/maintenance/lower)
 "bL" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -24},/obj/structure/closet,/obj/random/clothing,/obj/random/clothing,/obj/random/clothing,/turf/simulated/floor/tiled/dark/airless,/area/ship/scrap/crew/dorms1)
 "bM" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1; layer = 2.4; level = 2},/obj/structure/holostool,/turf/simulated/floor/tiled/dark/airless,/area/ship/scrap/crew/dorms1)
-"bN" = (/obj/effect/floor_decal/corner/beige{icon_state = "corner_white"; dir = 10},/obj/structure/curtain/open/bed,/obj/structure/bed/padded,/obj/item/weapon/bedsheet/brown,/turf/simulated/floor/tiled/dark/airless,/area/ship/scrap/crew/dorms1)
 "bO" = (/obj/effect/floor_decal/corner/beige{icon_state = "corner_white"; dir = 9},/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/obj/effect/floor_decal/industrial/warning/corner,/obj/machinery/mining/brace,/turf/simulated/floor/tiled/usedup,/area/ship/scrap/cargo/lower)
 "bP" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/effect/floor_decal/industrial/warning,/obj/structure/closet/crate,/obj/item/weapon/fossil/skull,/obj/item/weapon/fossil/bone,/obj/item/weapon/fossil/bone,/obj/item/weapon/fossil/shell,/obj/item/xenos_claw,/obj/item/weapon/ore/strangerock,/turf/simulated/floor/tiled/usedup,/area/ship/scrap/cargo/lower)
 "bQ" = (/obj/effect/floor_decal/industrial/warning,/obj/effect/decal/cleanable/dirt,/obj/machinery/computer/shuttle_control/lift,/turf/simulated/floor/tiled/usedup,/area/ship/scrap/cargo/lower)
@@ -257,6 +256,7 @@
 "eY" = (/obj/structure/grille,/obj/machinery/door/blast/regular{density = 0; dir = 4; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor,/turf/simulated/floor/usedup,/area/ship/scrap/maintenance/storage)
 "fb" = (/obj/structure/curtain/open/bed,/obj/structure/bed/padded,/obj/effect/floor_decal/corner/beige{icon_state = "corner_white"; dir = 10},/obj/item/weapon/bedsheet/red,/turf/simulated/floor/tiled/dark/airless,/area/ship/scrap/crew/dorms2)
 "gb" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate,/obj/random/loot,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/advdevice,/turf/simulated/floor/tiled/usedup,/area/ship/scrap/cargo/lower)
+"vU" = (/obj/effect/floor_decal/corner/beige{icon_state = "corner_white"; dir = 10},/obj/structure/curtain/open/bed,/obj/structure/bed/padded,/obj/item/weapon/bedsheet/brown,/mob/living/simple_animal/hostile/vagrant,/turf/simulated/floor/tiled/dark/airless,/area/ship/scrap/crew/dorms1)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -324,7 +324,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKaKaLaKaLaMaoaNaOaPaQaQaRaoaSaTaTaTaUaUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKaVaWaXaKaYaoaZgbaQbbbcbdaobeaTbfbgbhaUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabibjbkblbmbnbobpbqbrbsbtbubobvbwbxbybzbAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaLbBbCbDaKbEaobFbGaQbHbIbJaobKaTbLbMbNaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaLbBbCbDaKbEaobFbGaQbHbIbJaobKaTbLbMvUaTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaLaKaKaKaKbEaobObPbQbRbSbTaobUaTaTaTaTaUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabVbWbXbYbZcaaocbcccdcdcecfaocgchcicjckclaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacmcncocpcqcrbocsctcucvcwcfbocxcyczcAcBcCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -380,3 +380,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

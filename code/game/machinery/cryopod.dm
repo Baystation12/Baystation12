@@ -66,8 +66,7 @@
 	onclose(user, "cryopod_console")
 
 /obj/machinery/computer/cryopod/Topic(href, href_list)
-
-	if(..())
+	if((. = ..()))
 		return
 
 	var/mob/user = usr
@@ -222,7 +221,7 @@
 	. = ..()
 	airtank = new()
 	airtank.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
-	airtank.adjust_gas("nitrogen", MOLES_N2STANDARD, 0)
+	airtank.adjust_gas("nitrogen", MOLES_N2STANDARD)
 
 /obj/machinery/cryopod/lifepod/return_air()
 	return airtank
@@ -399,9 +398,9 @@
 			//current_mode.possible_traitors.Remove(occupant)
 
 	// Delete them from datacore.
-	for(var/datum/computer_file/crew_record/CR in GLOB.all_crew_records)
-		if(CR.GetName() == occupant.real_name)
-			qdel(CR)
+	var/datum/computer_file/crew_record/R = get_crewmember_record(occupant.real_name)
+	if(R)
+		qdel(R)
 
 	icon_state = base_icon_state
 

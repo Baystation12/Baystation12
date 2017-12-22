@@ -50,16 +50,12 @@ var/list/outfits_decls_by_type_
 
 	var/id_pda_assignment
 
-	var/backpack = /obj/item/weapon/storage/backpack
-	var/satchel_one  = /obj/item/weapon/storage/backpack/satchel_norm
-	var/satchel_two  = /obj/item/weapon/storage/backpack/satchel
-	var/messenger_bag = /obj/item/weapon/storage/backpack/messenger
-	var/satchel_black = /obj/item/weapon/storage/backpack/satchel_black
-
-	var/flags // Specific flags
+	var/list/backpack_overrides
+	var/flags = OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/New()
 	..()
+	backpack_overrides = backpack_overrides || list()
 
 	if(is_hidden_category())
 		return
@@ -67,14 +63,8 @@ var/list/outfits_decls_by_type_
 	dd_insertObjectList(outfits_decls_, src)
 
 /decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
-	if(flags & OUTFIT_HAS_BACKPACK)
-		switch(H.backbag)
-			if(2) back = backpack
-			if(3) back = satchel_one
-			if(4) back = satchel_two
-			if(5) back = messenger_bag
-			if(6) back = satchel_black
-			else back = null
+	if(flags & OUTFIT_RESET_EQUIPMENT)
+		H.delete_inventory(TRUE)
 
 /decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_JETPACK)
@@ -125,7 +115,7 @@ var/list/outfits_decls_by_type_
 	for(var/path in backpack_contents)
 		var/number = backpack_contents[path]
 		for(var/i=0,i<number,i++)
-			H.equip_to_slot_or_del(new path(H), slot_in_backpack)
+			H.equip_to_slot_or_store_or_drop(new path(H), slot_in_backpack)
 
 	post_equip(H)
 	H.regenerate_icons()
@@ -141,8 +131,23 @@ var/list/outfits_decls_by_type_
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform)
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit)
-	if(back)
-		H.equip_to_slot_or_del(new back(H),slot_back)
+
+	if((flags & OUTFIT_HAS_BACKPACK))
+		var/decl/backpack_outfit/bo
+		var/metadata
+
+		if(H.backpack_setup)
+			bo = H.backpack_setup.backpack
+			metadata = H.backpack_setup.metadata
+		else
+			bo = get_default_outfit_backpack()
+
+		var/override_type = backpack_overrides[bo.type]
+		var/backpack = bo.spawn_backpack(H, metadata, override_type)
+
+		if(backpack)
+			H.equip_to_slot_or_del(backpack,slot_back)
+
 	if(belt)
 		H.equip_to_slot_or_del(new belt(H),slot_belt)
 	if(gloves)
@@ -187,7 +192,7 @@ var/list/outfits_decls_by_type_
 	if(assignment)
 		W.assignment = assignment
 	H.set_id_info(W)
-	if(H.equip_to_slot_or_del(W, id_slot))
+	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
 		return W
 
 /decl/hierarchy/outfit/proc/equip_pda(mob/living/carbon/human/H, rank, assignment)
@@ -195,7 +200,7 @@ var/list/outfits_decls_by_type_
 		return
 	var/obj/item/device/pda/heads/pda = new pda_type(H)
 	pda.set_owner_rank_job(H.real_name, rank, assignment)
-	if(H.equip_to_slot_or_del(pda, pda_slot))
+	if(H.equip_to_slot_or_store_or_drop(pda, pda_slot))
 		return pda
 
 /decl/hierarchy/outfit/dd_SortValue()

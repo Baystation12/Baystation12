@@ -19,6 +19,8 @@
 
 	var/knockdown = 1 //whether shuttle downs non-buckled people when it moves
 
+	var/defer_initialisation = FALSE //this shuttle will/won't be initialised by something after roundstart
+
 /datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(_name)
@@ -71,6 +73,12 @@
 		if (moving_status == SHUTTLE_IDLE)
 			return FALSE	//someone cancelled the launch
 
+		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+			var/datum/shuttle/autodock/S = src
+			if(istype(S))
+				S.cancel_launch(null)
+			return
+
 		moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
 		attempt_move(destination)
 		moving_status = SHUTTLE_IDLE
@@ -84,8 +92,14 @@
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
 	spawn(warmup_time*10)
-		if (moving_status == SHUTTLE_IDLE)
+		if(moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
+
+		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
+			var/datum/shuttle/autodock/S = src
+			if(istype(S))
+				S.cancel_launch(null)
+			return
 
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
@@ -101,6 +115,8 @@
 
 		moving_status = SHUTTLE_IDLE
 
+/datum/shuttle/proc/fuel_check()
+	return 1 //fuel check should always pass in non-overmap shuttles (they have magic engines)
 
 /datum/shuttle/proc/attempt_move(var/obj/effect/shuttle_landmark/destination)
 	if(current_location == destination)

@@ -17,7 +17,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/lit = 0
 
 /proc/isflamesource(A)
-	if(istype(A, /obj/item/weapon/weldingtool))
+	if(isWelder(A))
 		var/obj/item/weapon/weldingtool/WT = A
 		return (WT.isOn())
 	else if(istype(A, /obj/item/weapon/flame))
@@ -162,7 +162,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			qdel(src)
 			return
 		flags &= ~NOREACT // allowing reagents to react after being lit
-		reagents.handle_reactions()
+		reagents.process_reactions()
 		update_icon()
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
@@ -185,7 +185,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			text = zippomes
 		else if(istype(W, /obj/item/weapon/flame/lighter))
 			text = lightermes
-		else if(istype(W, /obj/item/weapon/weldingtool))
+		else if(isWelder(W))
 			text = weldermes
 		else if(istype(W, /obj/item/device/assembly/igniter))
 			text = ignitermes
@@ -204,7 +204,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/cigarette
 	name = "cigarette"
-	desc = "A roll of tobacco and nicotine."
+	desc = "A small paper cylinder filled with processed tobacco and various fillers."
 	icon_state = "cigoff"
 	throw_speed = 0.5
 	item_state = "cigoff"
@@ -220,16 +220,24 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
 	brand = "\improper Trans-Stellar Duty-free"
+	var/list/filling = list(/datum/reagent/tobacco = 1)
 
 /obj/item/clothing/mask/smokable/cigarette/New()
 	..()
-	reagents.add_reagent(/datum/reagent/nicotine, 1)
+	for(var/R in filling)
+		reagents.add_reagent(R, filling[R])
 
 /obj/item/clothing/mask/smokable/cigarette/update_icon()
 	..()
 	overlays.Cut()
 	if(lit)
 		overlays += overlay_image(icon, "cigon", flags=RESET_COLOR)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/update_icon()
+	..()
+	overlays.Cut()
+	if(lit)
+		overlays += overlay_image(icon, "cigarello-on", flags=RESET_COLOR)
 
 /obj/item/clothing/mask/smokable/cigarette/die(var/nomessage = 0)
 	..()
@@ -253,14 +261,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	brand = "\improper Temperamento Menthol"
 	color = "#ddffe8"
 	type_butt = /obj/item/weapon/cigbutt/menthol
+	filling = list(/datum/reagent/tobacco = 1, /datum/reagent/menthol = 1)
 
 /obj/item/weapon/cigbutt/menthol
 	icon_state = "cigbuttmentol"
-
-/obj/item/clothing/mask/smokable/cigarette/menthol/New()
-	..()
-	reagents.add_reagent(/datum/reagent/nicotine, 1)
-	reagents.add_reagent(/datum/reagent/menthol, 1)
 
 /obj/item/clothing/mask/smokable/cigarette/luckystars
 	brand = "\improper Lucky Star"
@@ -271,6 +275,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "cigjer"
 	color = "#dcdcdc"
 	type_butt = /obj/item/weapon/cigbutt/jerichos
+	filling = list(/datum/reagent/tobacco/bad = 1.5)
 
 /obj/item/weapon/cigbutt/jerichos
 	icon_state = "cigbuttjer"
@@ -285,6 +290,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	brand = "\improper Professional"
 	icon_state = "cigpro"
 	type_butt = /obj/item/weapon/cigbutt/professionals
+	filling = list(/datum/reagent/tobacco/bad = 1)
 
 /obj/item/weapon/cigbutt/professionals
 	icon_state = "cigbuttpro"
@@ -294,6 +300,47 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/cigarette/dromedaryco
 	brand = "\improper Dromedary Co. cigarette"
+
+/obj/item/clothing/mask/smokable/cigarette/trident
+	name = "wood tip cigar"
+	brand = "\improper Trident cigar"
+	desc = "A narrow cigar with a wooden tip."
+	icon_state = "cigarello"
+	item_state = "cigaroff"
+	smoketime = 600
+	chem_volume = 10
+	type_butt = /obj/item/weapon/cigbutt/woodbutt
+	filling = list(/datum/reagent/tobacco/fine = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/mint
+	icon_state = "cigarelloMi"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/menthol = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/berry
+	icon_state = "cigarelloBe"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/drink/juice/berry = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/cherry
+	icon_state = "cigarelloCh"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/nutriment/cherryjelly = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/grape
+	icon_state = "cigarelloGr"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/drink/juice/grape = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/watermelon
+	icon_state = "cigarelloWm"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/drink/juice/watermelon = 2)
+
+/obj/item/clothing/mask/smokable/cigarette/trident/orange
+	icon_state = "cigarelloOr"
+	filling = list(/datum/reagent/tobacco/fine = 2, /datum/reagent/drink/juice/orange = 2)
+
+/obj/item/weapon/cigbutt/woodbutt
+	name = "wooden tip"
+	desc = "A wooden mouthpiece from a cigar. Smells rather bad."
+	icon_state = "woodbutt"
+	matter = list("Wood" = 1)
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -321,6 +368,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!proximity)
 		return
 	if(istype(glass)) //you can dip cigarettes into beakers
+		if(!glass.is_open_container())
+			to_chat(user, "<span class='notice'>You need to take the lid off first.</span>")
+			return
 		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
 		if(transfered)	//if reagents were transfered, show the message
 			to_chat(user, "<span class='notice'>You dip \the [src] into \the [glass].</span>")
@@ -336,9 +386,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		die(1)
 	return ..()
 
+/obj/item/clothing/mask/smokable/cigarette/get_icon_state(mob/user_mob, slot)
+	return item_state
+
 /obj/item/clothing/mask/smokable/cigarette/get_mob_overlay(mob/user_mob, slot)
 	var/image/res = ..()
-	res.icon_state = item_state
 	if(lit == 1)
 		var/image/ember = overlay_image(res.icon, "cigember", flags=RESET_COLOR)
 		ember.layer = ABOVE_LIGHTING_LAYER
@@ -364,10 +416,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
 	weldermes = "<span class='notice'>USER insults NAME by lighting it with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
-
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/nicotine, 5)
+	filling = list(/datum/reagent/tobacco/fine = 5)
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	name = "\improper Cohiba Robusto cigar"
@@ -382,10 +431,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "cigar2on"
 	smoketime = 3000
 	chem_volume = 20
-
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/nicotine, 10)
+	filling = list(/datum/reagent/tobacco/fine = 10)
 
 /obj/item/weapon/cigbutt
 	name = "cigarette butt"

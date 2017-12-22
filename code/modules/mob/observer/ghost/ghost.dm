@@ -337,6 +337,15 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(t)
 		print_atmos_analysis(src, atmosanalyzer_scan(t))
 
+/mob/observer/ghost/verb/check_radiation()
+	set name = "Check Radiation"
+	set category = "Ghost"
+
+	var/turf/t = get_turf(src)
+	if(t)
+		var/rads = radiation_repository.get_rads_at_turf(t)
+		to_chat(src, "<span class='notice'>Radiation level: [rads ? rads : "0"] Bq.</span>")
+
 /mob/observer/ghost/verb/become_mouse()
 	set name = "Become mouse"
 	set category = "Ghost"

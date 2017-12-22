@@ -67,7 +67,7 @@
 		cell.emp_act(severity)
 
 /obj/item/organ/internal/cell/attackby(obj/item/weapon/W, mob/user)
-	if (istype(W, /obj/item/weapon/screwdriver))
+	if(isScrewdriver(W))
 		if(open)
 			open = 0
 			to_chat(user, "<span class='notice'>You screw the battery panel in place.</span>")
@@ -75,7 +75,7 @@
 			open = 1
 			to_chat(user, "<span class='notice'>You unscrew the battery panel.</span>")
 
-	if (istype(W, /obj/item/weapon/crowbar))
+	if(isCrowbar(W))
 		if(open)
 			if(cell)
 				user.put_in_hands(cell)
@@ -101,6 +101,7 @@
 // Used for an MMI or posibrain being installed into a human.
 /obj/item/organ/internal/mmi_holder
 	name = "brain interface"
+	icon_state = "brain-prosthetic"
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
 	vital = 1
@@ -145,6 +146,12 @@
 		owner.switch_from_dead_to_living_mob_list()
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
+/obj/item/organ/internal/mmi_holder/cut_away(var/mob/living/user)
+	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+	if(istype(parent))
+		removed(user, 0)
+		parent.implants += transfer_and_delete()
+
 /obj/item/organ/internal/mmi_holder/removed()
 	if(owner && owner.mind)
 		persistantMind = owner.mind
@@ -154,6 +161,7 @@
 
 /obj/item/organ/internal/mmi_holder/proc/transfer_and_delete()
 	if(stored_mmi)
+		. = stored_mmi
 		stored_mmi.forceMove(src.loc)
 		if(persistantMind)
 			persistantMind.transfer_to(stored_mmi.brainmob)
@@ -162,18 +170,3 @@
 			if(response == "Yes")
 				persistantMind.transfer_to(stored_mmi.brainmob)
 	qdel(src)
-
-
-/obj/item/organ/internal/mmi_holder/posibrain
-	name = "positronic brain interface"
-	parent_organ = BP_CHEST
-
-/obj/item/organ/internal/mmi_holder/posibrain/New()
-	stored_mmi = new /obj/item/device/mmi/digital/posibrain(src)
-	..()
-
-/obj/item/organ/internal/mmi_holder/posibrain/update_from_mmi()
-	..()
-	stored_mmi.icon_state = "posibrain-occupied"
-	icon_state = stored_mmi.icon_state
-

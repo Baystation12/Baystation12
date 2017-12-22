@@ -176,6 +176,9 @@
 	user << browse(dat, "window=arcade")
 
 /obj/machinery/computer/arcade/orion_trail/Topic(href,href_list)
+	if((. = ..()))
+		return
+
 	if(href_list["continue"])
 		if(view == ORION_VIEW_MAIN)
 			var/next_event = null
@@ -400,7 +403,7 @@
 				var/mob/living/carbon/M = usr
 				if(prob(50))
 					to_chat(usr, "<span class='warning'>You hear battle shouts. The tramping of boots on cold metal. Screams of agony. The rush of venting air. Are you going insane?</span>")
-					M.hallucination += 50
+					M.hallucination(50, 50)
 				else
 					to_chat(usr, "<span class='danger'>Something strikes you from behind! It hurts like hell and feel like a blunt weapon, but nothing is there...</span>")
 					M.take_organ_damage(10)

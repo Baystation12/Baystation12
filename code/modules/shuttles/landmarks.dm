@@ -41,6 +41,7 @@
 		docking_controller = locate(docking_tag)
 		if(!istype(docking_controller))
 			log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
+	shuttle_controller.register_landmark(tag, src)
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
 	if(shuttle.current_location == src)
@@ -69,11 +70,8 @@
 	autoset = 1
 	var/shuttle_restricted //name of the shuttle, null for generic waypoint
 
-/obj/effect/shuttle_landmark/automatic/New()
-	..()
-	tag = landmark_tag+"-[x]-[y]"
-
 /obj/effect/shuttle_landmark/automatic/Initialize()
+	tag = landmark_tag+"-[x]-[y]"
 	. = ..()
 	base_area = get_area(src)
 	if(!GLOB.using_map.use_overmap)

@@ -359,6 +359,8 @@
 			W.damtype = "burn"
 			W.icon_state = "match_lit"
 			START_PROCESSING(SSobj, W)
+			playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
+			user.visible_message("<span class='notice'>[user] strikes the match on the matchbox.</span>")
 		W.update_icon()
 		return
 
@@ -470,11 +472,6 @@
 	startswith = list(/obj/item/device/radio/headset = 7)
 
 //Spare Armbands
-
-/obj/item/weapon/storage/box/armband
-	name = "box of spare military police armbands"
-	desc = "A box full of security armbands. For use in emergencies when provisional security personnel are needed."
-	startswith = list(/obj/item/clothing/accessory/armband/mp = 5)
 
 /obj/item/weapon/storage/box/armband/engine
 	name = "box of spare engineering armbands"

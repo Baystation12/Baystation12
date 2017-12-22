@@ -28,7 +28,7 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	one_hand_penalty = 0
 	charge_cost = 20
-	max_shots = 8
+	max_shots = 6
 	projectile_type = /obj/item/projectile/ion/small
 
 /obj/item/weapon/gun/energy/decloner
@@ -117,6 +117,7 @@
 	name = "mind flayer"
 	desc = "A custom-built weapon of some kind."
 	icon_state = "xray"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MAGNET = 4)
 	projectile_type = /obj/item/projectile/beam/mindflayer
 
 /obj/item/weapon/gun/energy/toxgun
