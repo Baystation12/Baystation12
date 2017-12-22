@@ -19,6 +19,7 @@
 	var/list/syllables                // Used when scrambling text for a non-speaker.
 	var/list/space_chance = 55        // Likelihood of getting a space in the random scramble string
 	var/machine_understands = 1       // Whether machines can parse and understand this language
+	var/list/partial_understanding				  // List of languages that can /somehwat/ understand it, format is: name = chance of understanding a word
 
 /datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!syllables || !syllables.len)
@@ -41,8 +42,41 @@
 /datum/language
 	var/list/scramble_cache = list()
 
-/datum/language/proc/scramble(var/input)
+/datum/language/proc/scramble(var/input, var/list/known_languages)
 
+	var/understand_chance = 0
+	for(var/datum/language/L in known_languages)
+		if(partial_understanding && partial_understanding[L.name]) 
+			understand_chance += partial_understanding[L.name]
+		if(L.partial_understanding && L.partial_understanding[name]) 
+			understand_chance += L.partial_understanding[name] * 0.5 
+
+	var/scrambled_text = ""
+	var/list/words = splittext(input, " ")
+	for(var/w in words)
+		if(prob(understand_chance))
+			scrambled_text += " [w] "
+		else
+			var/nword = scramble_word(w)
+			var/ending = copytext(scrambled_text, length(scrambled_text)-1)
+			if(findtext(ending,"."))
+				nword = capitalize(nword)
+			scrambled_text += nword
+	scrambled_text = replacetext(scrambled_text,"  "," ")
+
+	scrambled_text = capitalize(scrambled_text)
+	scrambled_text = trim(scrambled_text)
+	var/ending = copytext(scrambled_text, length(scrambled_text))
+	if(ending == ".")
+		scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
+
+	var/input_ending = copytext(input, length(input))
+	if(input_ending in list("!","?","."))
+		scrambled_text += input_ending
+
+	return scrambled_text
+
+/datum/language/proc/scramble_word(var/input)
 	if(!syllables || !syllables.len)
 		return stars(input)
 
@@ -55,7 +89,7 @@
 
 	var/input_size = length(input)
 	var/scrambled_text = ""
-	var/capitalize = 1
+	var/capitalize = 0
 
 	while(length(scrambled_text) < input_size)
 		var/next = pick(syllables)
@@ -70,19 +104,11 @@
 		else if(chance > 5 && chance <= space_chance)
 			scrambled_text += " "
 
-	scrambled_text = trim(scrambled_text)
-	var/ending = copytext(scrambled_text, length(scrambled_text))
-	if(ending == ".")
-		scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
-	var/input_ending = copytext(input, input_size)
-	if(input_ending in list("!","?","."))
-		scrambled_text += input_ending
-
 	// Add it to cache, cutting old entries if the list is too long
 	scramble_cache[input] = scrambled_text
 	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
 		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
-
+	
 	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
