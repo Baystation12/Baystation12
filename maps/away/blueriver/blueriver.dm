@@ -116,7 +116,7 @@
 
 
 /turf/simulated/floor/away/blueriver/alienfloor
-	name = "Glowing Floor"
+	name = "glowing floor"
 	desc = "The floor glows without any apparent reason"
 	icon = 'riverturfs.dmi'
 	icon_state = "floor"
@@ -144,7 +144,7 @@
 		icon_state = "evilwall_[rand(1,8)]"
 
 /turf/unsimulated/wall/supermatter/no_spread
-	name = "Unknown"
+	name = "weird liquid"
 	desc = "The viscous liquid glows and moves as if it were alive."
 	icon='blueriver.dmi'
 	icon_state = "bluespacecrystal1"
