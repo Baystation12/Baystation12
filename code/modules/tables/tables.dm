@@ -73,16 +73,16 @@
 	color = "#ffffff"
 	alpha = 255
 	update_connections(1)
-	update_icon()
 	update_desc()
 	update_material()
+	ADD_ICON_QUEUE(src)
 
 /obj/structure/table/Destroy()
 	material = null
 	reinforced = null
 	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
 	for(var/obj/structure/table/T in oview(src, 1))
-		T.update_icon()
+		ADD_ICON_QUEUE(T)
 	. = ..()
 
 /obj/structure/table/examine(mob/user)
@@ -129,7 +129,7 @@
 			update_connections(1)
 			update_icon()
 			for(var/obj/structure/table/T in oview(src, 1))
-				T.update_icon()
+				ADD_ICON_QUEUE(T)
 			update_desc()
 			update_material()
 		return 1
@@ -270,20 +270,20 @@
 // is to avoid filling the list with nulls, as place_shard won't place shards of certain materials (holo-wood, holo-steel)
 
 /obj/structure/table/proc/break_to_parts(full_return = 0)
-	var/list/shards = list()
+	. = list()
 	var/obj/item/weapon/material/shard/S = null
 	if(reinforced)
 		if(reinforced.stack_type && (full_return || prob(20)))
 			reinforced.place_sheet(loc)
 		else
 			S = reinforced.place_shard(loc)
-			if(S) shards += S
+			if(S) . += S
 	if(material)
 		if(material.stack_type && (full_return || prob(20)))
 			material.place_sheet(loc)
 		else
 			S = material.place_shard(loc)
-			if(S) shards += S
+			if(S) . += S
 	if(carpeted && (full_return || prob(50))) // Higher chance to get the carpet back intact, since there's no non-intact option
 		new /obj/item/stack/tile/carpet(src.loc)
 	if(full_return || prob(20))
@@ -291,9 +291,9 @@
 	else
 		var/material/M = get_material_by_name(DEFAULT_WALL_MATERIAL)
 		S = M.place_shard(loc)
-		if(S) shards += S
+		if(S) . += S
 	qdel(src)
-	return shards
+	return .
 
 /obj/structure/table/update_icon()
 	if(flipped != 1)
@@ -416,9 +416,8 @@
 		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
-			spawn(0)
-				T.update_connections()
-				T.update_icon()
+			T.update_connections()
+			ADD_ICON_QUEUE(T)
 
 	connections = dirs_to_corner_states(connection_dirs)
 

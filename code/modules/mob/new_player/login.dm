@@ -4,9 +4,14 @@
 	name = "Baystation12"
 	desc = "This shouldn't be read."
 	screen_loc = "WEST,SOUTH"
+/*
+/obj/effect/lobby_image/Initialize()
+	icon = using_map.lobby_icon
+=======
 
 /obj/effect/lobby_image/Initialize()
 	icon = GLOB.using_map.lobby_icon
+>>>>>>> 5c72d4a156fc67e05df1445de89a232fb6b28a28
 	var/known_icon_states = icon_states(icon)
 	for(var/lobby_screen in GLOB.using_map.lobby_screens)
 		if(!(lobby_screen in known_icon_states))
@@ -17,9 +22,12 @@
 		icon_state = pick(GLOB.using_map.lobby_screens)
 	else
 		icon_state = known_icon_states[1]
+<<<<<<< HEAD
+
 
 	. = ..()
 
+*/
 /mob/new_player/Login()
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
 	if(join_motd)
@@ -40,6 +48,6 @@
 	new_player_panel()
 	spawn(40)
 		if(client)
-			handle_privacy_poll()
+//			handle_privacy_poll()
 			client.playtitlemusic()
 			maybe_send_staffwarns("connected as new player")

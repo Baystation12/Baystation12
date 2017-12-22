@@ -5,15 +5,15 @@
 	..()
 
 /datum/alarm_handler/atmosphere/major_alarms()
-	var/list/major_alarms = new()
+	. = list()
 	for(var/datum/alarm/A in alarms)
 		if(A.max_severity() > 1)
-			major_alarms.Add(A)
-	return major_alarms
+			. += A
+	return .
 
 /datum/alarm_handler/atmosphere/minor_alarms()
-	var/list/minor_alarms = new()
+	. = list()
 	for(var/datum/alarm/A in alarms)
 		if(A.max_severity() == 1)
-			minor_alarms.Add(A)
-	return minor_alarms
+			. += A
+	return .

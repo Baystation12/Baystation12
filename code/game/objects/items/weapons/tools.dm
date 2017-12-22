@@ -128,15 +128,34 @@
 	. = ..()
 
 /obj/item/weapon/wirecutters/attack(mob/living/carbon/C as mob, mob/user as mob)
-	if(user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/weapon/handcuffs/cable)))
-		usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
-		"You cut \the [C]'s restraints with \the [src]!",\
-		"You hear cable being cut.")
-		C.handcuffed = null
-		if(C.buckled && C.buckled.buckle_require_restraints)
-			C.buckled.unbuckle_mob()
-		C.update_inv_handcuffed()
-		return
+	if(C.handcuffed)
+		var/obj/item/organ/wryn/hivenode/HN = locate() in C.internal_organs
+		if(C.species.name == "Wryn" && HN && user.a_intent == I_HURT)
+			var/turf/p_loc = user.loc
+			var/turf/p_loc_m = C.loc
+
+			user.visible_message("<span class='notice'>[user] begins to cut off [C]'s antennae.</span>")
+			C << "<span class='alert'><B>[user] begins to cut off your antennae!<B></span>"
+			do_after(C, 150)
+			if(p_loc == user.loc && p_loc_m == C.loc)
+				qdel(HN)
+				C.remove_language("Wryn Hivemind")
+				new /obj/item/organ/wryn/hivenode(user.loc)
+				user << "<span class='notice'>You hear a loud crunch as you mercilessly off cut [C]'s antennae.</span>"
+				C << "<span class='alert'><B>You hear a loud crunch as the wirecutters rip through your antennae.</B></span>"
+				C << "<span class='alert'><B>Its so quiet...</B></span>"
+				C:h_style = "Bald"
+				C:update_hair()
+		else
+			if(user.a_intent == I_HELP && (C.handcuffed) && (istype(C.handcuffed, /obj/item/weapon/handcuffs/cable)))
+				usr.visible_message("\The [usr] cuts \the [C]'s restraints with \the [src]!",\
+				"You cut \the [C]'s restraints with \the [src]!",\
+				"You hear cable being cut.")
+				C.handcuffed = null
+				if(C.buckled && C.buckled.buckle_require_restraints)
+					C.buckled.unbuckle_mob()
+				C.update_inv_handcuffed()
+				return
 	else
 		..()
 

@@ -1,5 +1,5 @@
 // Originally a debug verb, made it a proper adminverb for ~fun~
-/client/proc/makePAI(turf/t in range(world.view), name as text, pai_key as null|text)
+/client/proc/makePAI(turf/t in trange(world.view), name as text, pai_key as null|text)
 	set name = "Make pAI"
 	set category = "Admin"
 

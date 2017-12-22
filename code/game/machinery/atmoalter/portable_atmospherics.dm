@@ -28,18 +28,17 @@
 
 /obj/machinery/portable_atmospherics/Initialize()
 	. = ..()
-	spawn()
-		var/obj/machinery/atmospherics/portables_connector/port = locate() in loc
-		if(port)
-			connect(port)
-			update_icon()
+	var/obj/machinery/atmospherics/portables_connector/port = locate() in loc
+	if(port)
+		connect(port)
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/portable_atmospherics/Process()
 	if(!connected_port) //only react when pipe_network will ont it do it for you
 		//Allow for reactions
 		air_contents.react()
 	else
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/portable_atmospherics/proc/StandardAirMix()
 	return list(
@@ -143,6 +142,7 @@
 	var/power_losses
 	var/last_power_draw = 0
 	var/obj/item/weapon/cell/cell
+	special_power_checks = TRUE
 
 /obj/machinery/portable_atmospherics/powered/powered()
 	if(use_power) //using area power

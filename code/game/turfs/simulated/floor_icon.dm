@@ -57,8 +57,8 @@ var/list/flooring_cache = list()
 			overlays |= get_damage_overlay("burned[burnt]")
 
 	if(update_neighbors)
-		for(var/turf/simulated/floor/F in orange(src, 1))
-			F.update_icon()
+		for(var/turf/simulated/floor/F in otrange(1, src))
+			ADD_ICON_QUEUE(F)
 
 /turf/simulated/floor/proc/get_flooring_overlay(var/cache_key, var/icon_base, var/icon_dir = 0)
 	if(!flooring_cache[cache_key])

@@ -44,7 +44,8 @@ var/list/gamemode_cache = list()
 	var/continous_rounds = 0			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/allow_Metadata = 0				// Metadata is supported.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
-	var/fps = 20
+	var/Ticklag = 0.33
+	var/fps = 50
 	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
 	var/list/resource_urls = null
 	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
@@ -184,6 +185,7 @@ var/list/gamemode_cache = list()
 	var/abandon_allowed = 1
 	var/ooc_allowed = 1
 	var/looc_allowed = 1
+	var/donsay_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
 	var/aooc_allowed = 1
@@ -845,12 +847,12 @@ var/list/gamemode_cache = list()
 	return gamemode_cache["extended"]
 
 /datum/configuration/proc/get_runnable_modes()
-	var/list/runnable_modes = list()
+	. = list()
 	for(var/game_mode in gamemode_cache)
 		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if(M && !M.startRequirements() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
-			runnable_modes |= M
-	return runnable_modes
+			. |= M
+	return .
 
 /datum/configuration/proc/load_event(filename)
 	var/event_info = file2text(filename)

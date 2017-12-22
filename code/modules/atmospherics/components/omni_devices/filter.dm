@@ -5,7 +5,7 @@
 	name = "omni gas filter"
 	icon_state = "map_filter"
 
-	var/list/filters = new()
+	var/list/filtersex = new()
 	var/datum/omni_port/input
 	var/datum/omni_port/output
 	var/max_output_pressure = MAX_OMNI_PRESSURE
@@ -28,7 +28,7 @@
 /obj/machinery/atmospherics/omni/filter/Destroy()
 	input = null
 	output = null
-	filters.Cut()
+	filtersex.Cut()
 	. = ..()
 
 /obj/machinery/atmospherics/omni/filter/sort_ports()
@@ -38,8 +38,8 @@
 				output = null
 			if(input == P)
 				input = null
-			if(filters.Find(P))
-				filters -= P
+			if(filtersex.Find(P))
+				filtersex -= P
 
 			P.air.volume = 200
 			switch(P.mode)
@@ -48,12 +48,12 @@
 				if(ATM_OUTPUT)
 					output = P
 				if(ATM_O2 to ATM_N2O)
-					filters += P
+					filtersex += P
 
 /obj/machinery/atmospherics/omni/filter/error_check()
-	if(!input || !output || !filters)
+	if(!input || !output || !filtersex)
 		return 1
-	if(filters.len < 1) //requires at least 1 filter ~otherwise why are you using a filter?
+	if(filtersex.len < 1) //requires at least 1 filter ~otherwise why are you using a filter?
 		return 1
 
 	return 0
@@ -67,7 +67,7 @@
 
 	var/delta = between(0, (output_air ? (max_output_pressure - output_air.return_pressure()) : 0), max_output_pressure)
 	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0)
-	for(var/datum/omni_port/filter_output in filters)
+	for(var/datum/omni_port/filter_output in filtersex)
 		delta = between(0, (filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), max_output_pressure)
 		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.volume) ? filter_output.network.volume : 0)))
 
@@ -86,7 +86,7 @@
 			input.network.update = 1
 		if(output.network)
 			output.network.update = 1
-		for(var/datum/omni_port/P in filters)
+		for(var/datum/omni_port/P in filtersex)
 			if(P.network)
 				P.network.update = 1
 
@@ -108,10 +108,10 @@
 		ui.open()
 
 /obj/machinery/atmospherics/omni/filter/proc/build_uidata()
-	var/list/data = new()
+	. = list()
 
-	data["power"] = use_power
-	data["config"] = configuring
+	.["power"] = use_power
+	.["config"] = configuring
 
 	var/portData[0]
 	for(var/datum/omni_port/P in ports)
@@ -139,12 +139,12 @@
 										"f_type" = f_type)
 
 	if(portData.len)
-		data["ports"] = portData
+		.["ports"] = portData
 	if(output)
-		data["set_flow_rate"] = round(set_flow_rate*10)		//because nanoui can't handle rounded decimals.
-		data["last_flow_rate"] = round(last_flow_rate*10)
+		.["set_flow_rate"] = round(set_flow_rate*10)		//because nanoui can't handle rounded decimals.
+		.["last_flow_rate"] = round(last_flow_rate*10)
 
-	return data
+	return .
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(var/mode = ATM_NONE)
 	switch(mode)

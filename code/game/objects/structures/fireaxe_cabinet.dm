@@ -35,10 +35,9 @@
 	else if(!open)
 		overlays += image(icon, "fireaxe_window")
 
-/obj/structure/fireaxecabinet/New()
-	..()
+/obj/structure/fireaxecabinet/Initialize()
+	. = ..()
 	fireaxe = new(src)
-	update_icon()
 
 /obj/structure/fireaxecabinet/attack_ai(var/mob/user)
 	toggle_lock(user)

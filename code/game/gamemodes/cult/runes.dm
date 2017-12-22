@@ -351,8 +351,8 @@
 	cultname = "defile"
 
 /obj/effect/rune/defile/cast(var/mob/living/user)
-	speak_incantation(user, "Ia! Ia! Zasan therium viortia!")
-	for(var/turf/T in range(1, src))
+	user.say("Ia! Ia! Zasan therium viortia!")
+	for(var/turf/T in trange(1, src))
 		if(T.holy)
 			T.holy = 0
 		else
@@ -500,16 +500,16 @@
 /obj/effect/rune/drain/proc/heal_user(var/mob/living/carbon/human/user)
 	if(!istype(user))
 		return list("you feel no different")
-	var/list/statuses = list()
+	. = list()
 	var/charges = 20
 	var/use
 	use = min(charges, user.species.blood_volume - user.vessel.total_volume)
 	if(use > 0)
 		user.vessel.add_reagent(/datum/reagent/blood, use)
 		charges -= use
-		statuses += "you regain lost blood"
+		. += "you regain lost blood"
 		if(!charges)
-			return statuses
+			return .
 	if(user.getBruteLoss() || user.getFireLoss())
 		var/healbrute = user.getBruteLoss()
 		var/healburn = user.getFireLoss()
@@ -524,32 +524,32 @@
 			healbrute = min(healbrute, charges)
 			charges -= healbrute
 		user.heal_organ_damage(healbrute, healburn)
-		statuses += "your wounds mend"
+		. += "your wounds mend"
 		if(!charges)
-			return statuses
+			return .
 	if(user.getToxLoss())
 		use = min(user.getToxLoss(), charges)
 		user.adjustToxLoss(-use)
 		charges -= use
-		statuses += "your body stings less"
+		. += "your body stings less"
 		if(!charges)
-			return statuses
+			return .
 	if(charges >= 15)
 		for(var/obj/item/organ/external/e in user.organs)
 			if(e && e.status & ORGAN_BROKEN)
 				e.status &= ~ORGAN_BROKEN
-				statuses += "bones in your [e.name] snap into place"
+				. += "bones in your [e.name] snap into place"
 				charges -= 15
 				if(charges < 15)
 					break
 	if(!charges)
-		return statuses
+		return .
 	var/list/obj/item/organ/damaged = list()
 	for(var/obj/item/organ/I in user.internal_organs)
 		if(I.damage)
 			damaged += I
 	if(damaged.len)
-		statuses += "you feel pain inside for a moment that passes quickly"
+		. += "you feel pain inside for a moment that passes quickly"
 		while(charges && damaged.len)
 			var/obj/item/organ/fix = pick(damaged)
 			fix.damage = max(0, fix.damage - min(charges, 1))
@@ -561,7 +561,7 @@
 		user.ingested.add_reagent(/datum/reagent/hell_water, charges)
 		statuses += "you feel empowered"
 	*/
-	return statuses
+	return .
 
 /datum/reagent/hell_water
 	name = "Hell water"
@@ -603,7 +603,7 @@
 	else
 		for(var/mob/living/M in cultists)
 			M.say("Ia! Ia! Zasan therium viortia! Razan gilamrua kioha!")
-		for(var/turf/T in range(5, src))
+		for(var/turf/T in trange(5, src))
 			if(T.holy)
 				T.holy = 0
 			else
@@ -779,7 +779,7 @@
 			if(prob(5))
 				M.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
 
-		for(var/turf/T in range(min(the_end_comes, 15)))
+		for(var/turf/T in trange(min(the_end_comes, 15)))
 			if(prob(the_end_comes / 3))
 				T.cultify()
 		sleep(10)

@@ -46,9 +46,9 @@
 		if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 			command_announcement.Announce("Bluespace artillery fire detected. Brace for impact.")
 			message_admins("[key_name_admin(usr)] has launched an artillery strike.", 1)
-			var/list/L = list()
+			. = list()
 			for(var/turf/T in get_area_turfs(thearea))
-				L+=T
-			var/loc = pick(L)
+				. += T
+			var/loc = pick(.)
 			explosion(loc,2,5,11)
 			reload = 0

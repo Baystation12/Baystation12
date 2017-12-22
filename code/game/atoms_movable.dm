@@ -2,7 +2,7 @@
 	plane = OBJ_PLANE
 
 	appearance_flags = TILE_BOUND
-	glide_size = 8
+	glide_size = 6
 
 	var/last_move = null
 	var/anchored = 0
@@ -72,6 +72,7 @@
 					AM.Crossed(src)
 			if(is_new_area && is_destination_turf)
 				destination.loc.Entered(src, origin)
+	update_client_hook(loc)
 	return 1
 
 //called when src is thrown into hit_atom
@@ -264,3 +265,17 @@
 		var/turf/T = locate(new_x, new_y, new_z)
 		if(T)
 			forceMove(T)
+
+/atom/movable/proc/update_client_hook(atom/destination)
+	if(locate(/mob) in src)
+		for(var/client/C in parallax_on_clients)
+			if((get_turf(C.eye) == destination) && (C.mob.hud_used))
+				C.mob.hud_used.update_parallax_values()
+
+/mob/update_client_hook(atom/destination)
+	if(locate(/mob) in src)
+		for(var/client/C in parallax_on_clients)
+			if((get_turf(C.eye) == destination) && (C.mob.hud_used))
+				C.mob.hud_used.update_parallax_values()
+	else if(client && hud_used)
+		hud_used.update_parallax_values()

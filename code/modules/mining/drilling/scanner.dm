@@ -27,7 +27,7 @@
 		"exotic matter" = 0
 		)
 	var/new_data = 0
-	for(var/turf/simulated/T in range(2, get_turf(user)))
+	for(var/turf/simulated/T in trange(2, get_turf(user)))
 
 		if(!T.has_resources)
 			continue
@@ -37,15 +37,15 @@
 			var/data_value = 1
 
 			switch(metal)
-				if("silicates", "carbonaceous rock", "iron")	
+				if("silicates", "carbonaceous rock", "iron")
 					ore_type = "surface minerals"
-				if("gold", "silver", "diamond")					
+				if("gold", "silver", "diamond")
 					ore_type = "precious metals"
 					data_value = 2
-				if("uranium")									
+				if("uranium")
 					ore_type = "nuclear fuel"
 					data_value = 3
-				if("phoron", "osmium", "hydrogen")				
+				if("phoron", "osmium", "hydrogen")
 					ore_type = "exotic matter"
 					data_value = 4
 
@@ -78,7 +78,7 @@
 	set category = "Object"
 	set name = "Get Survey Data"
 	set src in usr
-	
+
 	var/mob/M = usr
 	if(!istype(M))
 		return

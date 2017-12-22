@@ -40,9 +40,8 @@
 	var/need_update_field = 0
 	var/need_player_check = 0
 
-/obj/machinery/mining/drill/New()
-
-	..()
+/obj/machinery/mining/drill/Initialize()
+	. = ..()
 
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/miningdrill(src)
@@ -70,7 +69,7 @@
 		get_resource_field()
 
 	if(world.time % 10 == 0)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	if(!active)
 		return
@@ -111,7 +110,7 @@
 				system_error("insufficient storage space")
 				active = 0
 				need_player_check = 1
-				update_icon()
+				ADD_ICON_QUEUE(src)
 				return
 
 			if(contents.len + total_harvest >= capacity)
@@ -143,7 +142,7 @@
 	else
 		active = 0
 		need_player_check = 1
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/mining/drill/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
@@ -253,7 +252,7 @@
 		src.visible_message("<span class='notice'>\The [src] flashes a '[error]' warning.</span>")
 	need_player_check = 1
 	active = 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/mining/drill/proc/get_resource_field()
 
@@ -300,8 +299,8 @@
 	icon_state = "mining_brace"
 	var/obj/machinery/mining/drill/connected
 
-/obj/machinery/mining/brace/New()
-	..()
+/obj/machinery/mining/brace/Initialize()
+	. = ..()
 
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/miningdrillbrace(src)

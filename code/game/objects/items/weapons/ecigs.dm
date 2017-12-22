@@ -108,7 +108,7 @@ obj/item/clothing/mask/smokable/ecig/deluxe/examine(mob/user)
 			if(!cigcell.checked_use(power_usage * CELLRATE)) //if this passes, there's not enough power in the battery
 				active = 0
 				STOP_PROCESSING(SSobj, src)
-				update_icon()
+				ADD_ICON_QUEUE(src)
 				to_chat(C,"<span class='notice'>Battery in \the [src] ran out and it powered down.</span>")
 				return
 			ec_cartridge.reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.4) // Most of it is not inhaled... balance reasons.

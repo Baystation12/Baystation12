@@ -19,10 +19,10 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	idle_power_usage = 30
 	active_power_usage = 2500
 
-/obj/machinery/r_n_d/circuit_imprinter/New()
+/obj/machinery/r_n_d/circuit_imprinter/Initialize()
 	materials = default_material_composition.Copy()
 
-	..()
+	. = ..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/circuit_imprinter(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -34,11 +34,11 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 /obj/machinery/r_n_d/circuit_imprinter/Process()
 	..()
 	if(stat)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	if(queue.len == 0)
 		busy = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return
 	var/datum/design/D = queue[1]
 	if(canBuild(D))
@@ -50,12 +50,12 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 			removeFromQueue(1)
 			if(linked_console)
 				linked_console.updateUsrDialog()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	else
 		if(busy)
 			visible_message("<span class='notice'>\icon [src] flashes: insufficient materials: [getLackingMaterials(D)].</span>")
 			busy = 0
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/r_n_d/circuit_imprinter/RefreshParts()
 	var/T = 0

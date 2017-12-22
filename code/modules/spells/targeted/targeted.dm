@@ -30,18 +30,18 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 
 
 /spell/targeted/choose_targets(mob/user = usr)
-	var/list/targets = list()
+	. = list()
 
 	if(max_targets == 0) //unlimited
 		if(range == -2)
-			targets = GLOB.living_mob_list_
+			. = GLOB.living_mob_list_
 		else
 			for(var/mob/living/target in view_or_range(range, holder, selection_type))
-				targets += target
+				. += target
 
 	else if(max_targets == 1) //single target can be picked
 		if((range == 0 || range == -1) && spell_flags & INCLUDEUSER)
-			targets += user
+			. += user
 		else
 			var/list/possible_targets = list()
 			var/list/starting_targets
@@ -63,9 +63,9 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 				if(spell_flags & SELECTABLE) //if we are allowed to choose. see setup.dm for details
 					var/mob/temp_target = input(user, "Choose the target for the spell.", "Targeting") as null|mob in possible_targets
 					if(temp_target)
-						targets += temp_target
+						. += temp_target
 				else
-					targets += pick(possible_targets)
+					. += pick(possible_targets)
 			//Adds a safety check post-input to make sure those targets are actually in range.
 
 
@@ -95,7 +95,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 				if(range != -2)
 					if(!(M in view_or_range(range, holder, selection_type)))
 						continue
-				targets += M
+				. += M
 				possible_targets -= M
 		else
 			for(var/i=1,i<=max_targets,i++)
@@ -104,19 +104,19 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 				if(target_ignore_prev)
 					var/target = pick(possible_targets)
 					possible_targets -= target
-					targets += target
+					. += target
 				else
-					targets += pick(possible_targets)
+					. += pick(possible_targets)
 
-	if(!(spell_flags & INCLUDEUSER) && (user in targets))
-		targets -= user
+	if(!(spell_flags & INCLUDEUSER) && (user in .))
+		. -= user
 
 	if(compatible_mobs && compatible_mobs.len)
-		for(var/mob/living/target in targets) //filters out all the non-compatible mobs
+		for(var/mob/living/target in .) //filters out all the non-compatible mobs
 			if(!is_type_in_list(target, compatible_mobs))
-				targets -= target
+				. -= target
 
-	return targets
+	return .
 
 /spell/targeted/cast(var/list/targets, mob/user)
 	for(var/mob/living/target in targets)

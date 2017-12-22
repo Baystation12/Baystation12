@@ -14,7 +14,8 @@
 	var/base_icon = null // Base icon name for fill states
 
 /obj/item/weapon/reagent_containers/food/drinks/on_reagent_change()
-	update_icon()
+	if(filling_states)
+		update_icon()
 	return
 
 /obj/item/weapon/reagent_containers/food/drinks/attack_self(mob/user as mob)

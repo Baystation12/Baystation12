@@ -95,7 +95,7 @@
 		R.set_name(new_name)
 
 	//update our pda and id if we have them on our person
-	var/list/searching = GetAllContents(searchDepth = 3)
+	var/list/searching = GetAllContents()
 	var/search_id = 1
 	var/search_pda = 1
 

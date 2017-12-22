@@ -52,7 +52,7 @@
 					node = target
 					break
 
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		update_underlays()
 
 	build_network()
@@ -77,12 +77,12 @@
 		return 1
 
 	return_network_air(datum/pipe_network/reference)
-		var/list/results = list()
+		. = list()
 
 		if(network == reference)
-			results += air_contents
+			. += air_contents
 
-		return results
+		return .
 
 	disconnect(obj/machinery/atmospherics/reference)
 		if(reference==node)

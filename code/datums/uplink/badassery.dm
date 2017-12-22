@@ -47,14 +47,14 @@
 	return max(1, telecrystals)
 
 /datum/uplink_item/item/badassery/random_many/get_goods(var/obj/item/device/uplink/U, var/loc)
-	var/list/bought_items = list()
+	. = list()
 	for(var/datum/uplink_item/UI in get_random_uplink_items(U, U.uses, loc))
 		UI.purchase_log(U)
 		var/obj/item/I = UI.get_goods(U, loc)
 		if(istype(I))
-			bought_items += I
+			. += I
 
-	return bought_items
+	return .
 
 /datum/uplink_item/item/badassery/random_many/purchase_log(obj/item/device/uplink/U)
 	feedback_add_details("traitor_uplink_items_bought", "[src]")

@@ -55,8 +55,8 @@ field_generator power level display
 	return
 
 
-/obj/machinery/field_generator/New()
-	..()
+/obj/machinery/field_generator/Initialize()
+	. = ..()
 	fields = list()
 	connected_gens = list()
 
@@ -69,13 +69,12 @@ field_generator power level display
 			anchored = 1
 			warming_up = 3
 			start_fields()
-			update_icon()
+			ADD_ICON_QUEUE(src)
 		Varedit_start = 0
 
 	if(src.active == 2)
 		calc_power()
-		update_icon()
-
+		ADD_ICON_QUEUE(src)
 
 /obj/machinery/field_generator/attack_hand(mob/user as mob)
 	if(state == 2)

@@ -40,9 +40,8 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
 
-/obj/machinery/media/jukebox/New()
-	..()
-	update_icon()
+/obj/machinery/media/jukebox/Initialize()
+	. = ..()
 	sound_id = "[type]_[sequential_id(type)]"
 
 /obj/machinery/media/jukebox/Destroy()
@@ -99,14 +98,14 @@ datum/track/New(var/title_name, var/audio)
 	for(var/datum/track/T in tracks)
 		juke_tracks.Add(T.title)
 
-	var/list/data = list(
+	. = list(
 		"current_track" = current_track != null ? current_track.title : "No track selected",
 		"playing" = playing,
 		"tracks" = juke_tracks,
 		"volume" = volume
 	)
 
-	return data
+	return .
 
 /obj/machinery/media/jukebox/ui_act(action, params)
 	if(..())
@@ -191,7 +190,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/proc/StopPlaying()
 	playing = 0
-	update_use_power(1)
+	update_use_power(src, 1)
 	update_icon()
 	QDEL_NULL(sound_token)
 
@@ -205,7 +204,7 @@ datum/track/New(var/title_name, var/audio)
 	sound_token = sound_player.PlayLoopingSound(src, sound_id, current_track.sound, volume = volume, range = 7, falloff = 3, prefer_mute = TRUE)
 
 	playing = 1
-	update_use_power(2)
+	update_use_power(src, 2)
 	update_icon()
 
 /obj/machinery/media/jukebox/proc/AdjustVolume(var/new_volume)

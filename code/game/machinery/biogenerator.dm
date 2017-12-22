@@ -55,7 +55,7 @@
 	RefreshParts()
 
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/biogenerator/update_icon()
 	if(state == BG_NO_BEAKER)

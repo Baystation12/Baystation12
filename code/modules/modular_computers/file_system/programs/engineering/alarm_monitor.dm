@@ -62,18 +62,18 @@
 		AH.unregister_alarm(object)
 
 /datum/nano_module/alarm_monitor/proc/all_alarms()
-	var/list/all_alarms = new()
+	. = list()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		all_alarms += AH.alarms
+		. += AH.alarms
 
-	return all_alarms
+	return .
 
 /datum/nano_module/alarm_monitor/proc/major_alarms()
-	var/list/all_alarms = new()
+	. = list()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		all_alarms += AH.major_alarms()
+		. += AH.major_alarms()
 
-	return all_alarms
+	return .
 
 // Modified version of above proc that uses slightly less resources, returns 1 if there is a major alarm, 0 otherwise.
 /datum/nano_module/alarm_monitor/proc/has_major_alarms()
@@ -84,11 +84,11 @@
 	return 0
 
 /datum/nano_module/alarm_monitor/proc/minor_alarms()
-	var/list/all_alarms = new()
+	. = list()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		all_alarms += AH.minor_alarms()
+		. += AH.minor_alarms()
 
-	return all_alarms
+	return .
 
 /datum/nano_module/alarm_monitor/Topic(ref, href_list)
 	if(..())

@@ -36,7 +36,6 @@ var/global/universe_has_ended = 0
 
 // Apply changes when entering state
 /datum/universal_state/supermatter_cascade/OnEnter()
-	set background = 1
 	to_world("<span class='sinister' style='font-size:22pt'>You are blinded by a brilliant flash of energy.</span>")
 	sound_to(world, sound('sound/effects/cascade.ogg'))
 
@@ -55,7 +54,7 @@ var/global/universe_has_ended = 0
 	cult.allow_narsie = 0
 
 	PlayerSet()
-
+	CHECK_TICK
 	new /obj/singularity/narsie/large/exit(pick(endgame_exits))
 	spawn(rand(30,60) SECONDS)
 		var/txt = {"
@@ -81,24 +80,36 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 	for(var/area/A)
 		if(!istype(A,/area) || istype(A, /area/space) || istype(A,/area/beach))
 			continue
-
 		A.update_icon()
+		CHECK_TICK
 
 /datum/universal_state/supermatter_cascade/OverlayAndAmbientSet()
 	spawn(0)
+//		convert_all_parallax()
 		for(var/datum/lighting_corner/L in world)
 			if(L.z in GLOB.using_map.admin_levels)
 				L.update_lumcount(1,1,1)
 			else
 				L.update_lumcount(0.0, 0.4, 1)
+			CHECK_TICK
 
 		for(var/turf/space/T)
 			OnTurfChange(T)
+			CHECK_TICK
+/*
+/datum/universal_state/supermatter_cascade/proc/convert_all_parallax()
+	for(var/client/C in GLOB.clients)
+		var/obj/screen/plane_master/parallax_spacemaster/PS = locate() in C.screen
+		if(PS)
+			convert_parallax(PS)
+		CHECK_TICK
+*/
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()
 	for (var/obj/machinery/firealarm/alm in SSmachines.machinery)
 		if (!(alm.stat & BROKEN))
 			alm.ex_act(2)
+			CHECK_TICK
 
 /datum/universal_state/supermatter_cascade/proc/APCSet()
 	for (var/obj/machinery/power/apc/APC in SSmachines.machinery)
@@ -108,6 +119,7 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 				APC.cell.charge = 0
 			APC.emagged = 1
 			APC.queue_icon_update()
+			CHECK_TICK
 
 /datum/universal_state/supermatter_cascade/proc/PlayerSet()
 	for(var/datum/mind/M in GLOB.player_list)

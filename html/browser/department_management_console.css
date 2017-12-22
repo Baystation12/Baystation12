@@ -1,0 +1,56 @@
+body {
+	background: url(uiBackground.png) -200px 0px no-repeat #272727;
+	margin: 0;
+}
+
+h1 {
+	color: rgba(255, 255, 255, 0.75);
+	font-size: small;
+	margin: 8px;
+}
+
+ul {
+	list-style: none;
+	padding: 5;
+}
+
+li {
+	color: rgba(255, 255, 255, 0.75);
+	border: solid rgba(255, 255, 255, 0.75) 1px;
+	padding: 5px;
+	border-radius: 10px;
+	background: hsla(0, 0%, 40%, 0.2);
+	margin: -1px 0px 0px 0px;
+	overflow: auto;
+}
+
+a {
+	color: #ffffff; 
+	text-decoration: none;
+	background: #40628a;
+	border: 1px solid #161616;
+	padding: 1px 4px 1px 4px;
+	margin: 0 2px 0 0;
+	font-size: small;
+	border-radius: 3px;
+	float: right;
+}
+
+a, a:visited{
+	text-decoration: none;
+	color: #DEDEDE;
+}
+
+a:hover, a:active {
+	color: #B3B3B3;
+}
+
+a:active {
+	background-color: #8A803F;
+}
+
+input { 
+    background: grey;
+	border: none;
+	border-radius: 4px;
+}

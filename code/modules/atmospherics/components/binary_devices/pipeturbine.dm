@@ -67,7 +67,7 @@
 				air_in.merge(air_all.remove(volume_ratio))
 				air_out.merge(air_all)
 
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 		if (network1)
 			network1.update = 1
@@ -203,14 +203,14 @@
 		return 1
 
 	return_network_air(datum/pipe_network/reference)
-		var/list/results = list()
+		. = list()
 
 		if(network1 == reference)
-			results += air_in
+			. += air_in
 		if(network2 == reference)
-			results += air_out
+			. += air_out
 
-		return results
+		return .
 
 	disconnect(obj/machinery/atmospherics/reference)
 		if(reference==node1)

@@ -9,11 +9,10 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 1000)
 	var/obj/item/weapon/implant/imp = null
 
-/obj/item/weapon/implanter/New()
+/obj/item/weapon/implanter/Initialize()
 	if(ispath(imp))
 		imp = new imp(src)
-	..()
-	update_icon()
+	. = ..()
 
 /obj/item/weapon/implanter/update_icon()
 	if (imp)

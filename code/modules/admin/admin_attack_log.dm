@@ -55,7 +55,7 @@
 		attacker.last_attacked_ = mob_repository.get_lite_mob(victim)
 		attack_location = get_turf(attacker)
 	if(victim)
-		if(attacker)
+		if(attacker && ismob(attacker))
 			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[key_name(attacker)] - [victim_message] [intent]</font>")
 		else
 			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[victim_message]</font>")

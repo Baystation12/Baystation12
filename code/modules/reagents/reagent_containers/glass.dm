@@ -42,9 +42,9 @@
 		/obj/machinery/radiocarbon_spectrometer
 	)
 
-/obj/item/weapon/reagent_containers/glass/New()
-	..()
-	base_name = name
+	Initialize()
+		. = ..()
+		base_name = name
 
 /obj/item/weapon/reagent_containers/glass/examine(var/mob/user)
 	if(!..(user, 2))
@@ -112,8 +112,8 @@
 	center_of_mass = "x=15;y=10"
 	matter = list("glass" = 500)
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		desc += " Can hold up to [volume] units."
 
 	on_reagent_change()
@@ -121,11 +121,11 @@
 
 	pickup(mob/user)
 		..()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	dropped(mob/user)
 		..()
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	attack_hand()
 		..()

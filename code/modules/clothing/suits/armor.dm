@@ -176,21 +176,21 @@
 	blood_overlay_type = "armor"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 
-/obj/item/clothing/suit/armor/reactive/New()
-	..()
+/obj/item/clothing/suit/armor/reactive/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/armor/reactive/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(prob(50))
 		user.visible_message("<span class='danger'>The reactive teleport system flings [user] clear of the attack!</span>")
 		var/list/turfs = new/list()
-		for(var/turf/T in orange(6, user))
+		for(var/turf/T in otrange(6, user))
 			if(istype(T,/turf/space)) continue
 			if(T.density) continue
 			if(T.x>world.maxx-6 || T.x<6)	continue
 			if(T.y>world.maxy-6 || T.y<6)	continue
 			turfs += T
-		if(!turfs.len) turfs += pick(/turf in orange(6))
+		if(!turfs.len) turfs += pick(/turf in otrange(6))
 		var/turf/picked = pick(turfs)
 		if(!isturf(picked)) return
 

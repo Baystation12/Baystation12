@@ -26,7 +26,7 @@
 	icon_state = "gsensor[on]"
 
 /obj/machinery/air_sensor/Process()
-	if(on)
+	if(on && id_tag)
 		var/datum/signal/signal = new
 		signal.transmission_method = 1 //radio signal
 		signal.data["tag"] = id_tag

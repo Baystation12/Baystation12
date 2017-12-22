@@ -10,11 +10,11 @@
 	active_power_usage = 5
 	var/mob/living/carbon/human/victim = null
 	var/strapped = 0.0
-
+	var/next_process_time = 0
 	var/obj/machinery/computer/operating/computer = null
 
-/obj/machinery/optable/New()
-	..()
+/obj/machinery/optable/Initialize()
+	. = ..()
 	for(dir in list(NORTH,EAST,SOUTH,WEST))
 		computer = locate(/obj/machinery/computer/operating, get_step(src, dir))
 		if (computer)
@@ -67,18 +67,20 @@
 	return
 
 /obj/machinery/optable/proc/check_victim()
-	if(locate(/mob/living/carbon/human, src.loc))
-		var/mob/living/carbon/human/M = locate(/mob/living/carbon/human, src.loc)
-		if(M.lying)
-			src.victim = M
-			icon_state = M.pulse() ? "table2-active" : "table2-idle"
-			return 1
-	src.victim = null
-	icon_state = "table2-idle"
+	var/mob/living/carbon/human/M = locate() in src.loc
+	if(M && M.lying)
+		src.victim = M
+		icon_state = M.pulse() ? "table2-active" : "table2-idle"
+		return 1
+	else
+		src.victim = null
+		icon_state = "table2-idle"
 	return 0
 
 /obj/machinery/optable/Process()
-	check_victim()
+	if(next_process_time <= world.time)
+		next_process_time = world.time + 40		// 4 second delays between process updates
+		check_victim()
 
 /obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)
 	if (C == user)

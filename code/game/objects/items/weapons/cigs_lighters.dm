@@ -46,17 +46,18 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	attack_verb = list("burnt", "singed")
 
 /obj/item/weapon/flame/match/Process()
-	if(isliving(loc))
-		var/mob/living/M = loc
-		M.IgniteMob()
-	var/turf/location = get_turf(src)
-	smoketime--
-	if(smoketime < 1)
-		burn_out()
-		return
-	if(location)
-		location.hotspot_expose(700, 5)
-		return
+	if(lit)
+		if(isliving(loc))
+			var/mob/living/M = loc
+			M.IgniteMob()
+		smoketime--
+		if(smoketime < 1)
+			burn_out()
+			return
+		var/turf/location = get_turf(src)
+		if(location)
+			location.hotspot_expose(700, 5)
+			return
 
 /obj/item/weapon/flame/match/dropped(mob/user as mob)
 	//If dropped, put ourselves out
@@ -113,18 +114,22 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(reagents && reagents.total_volume) // check if it has any reagents at all
 		if(ishuman(loc))
 			var/mob/living/carbon/human/C = loc
+			var/toxiccycle = C.check_head_coverage_airtight() //IT DOES NOT EVEN RETURN AN OBJECT YOU BAYSTATION NERDS
+			if (toxiccycle && prob(33))
+				C.apply_damages(tox = 3, oxy = 4)
+				to_chat(C, "<span class='warning'>You feel toxic smoke circulate in your helmet.</span>")
 			if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
 				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // Most of it is not inhaled... balance reasons.
 		else // else just remove some of the reagents
 			reagents.remove_any(REM)
 
 /obj/item/clothing/mask/smokable/Process()
-	var/turf/location = get_turf(src)
-	smoke(1)
-	if(smoketime < 1)
-		die()
-		return
-	if(location)
+	if(lit)
+		var/turf/location = get_turf(src)
+		smoke(1)
+		if(smoketime < 1)
+			die()
+			return
 		location.hotspot_expose(700, 5)
 
 /obj/item/clothing/mask/smokable/update_icon()
@@ -472,8 +477,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	weldermes = "<span class='notice'>USER recklessly lights NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
 
-/obj/item/clothing/mask/smokable/pipe/New()
-	..()
+/obj/item/clothing/mask/smokable/pipe/Initialize()
+	. = ..()
 	name = "empty [initial(name)]"
 
 /obj/item/clothing/mask/smokable/pipe/light(var/flavor_text = "[usr] lights the [name].")

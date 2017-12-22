@@ -11,6 +11,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_ID | SLOT_BELT
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/id.dmi')
 
 	//Main variables
 	var/owner = null
@@ -47,6 +48,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/new_message = 0			//To remove hackish overlay check
 	var/new_news = 0
 	var/list/tempmessage = list() // Used to store message in memory if sending failed
+	var/list/ntprofilecache = list()
 
 	var/active_feed				// The selected feed
 	var/list/warrant			// The warrant as we last knew it
@@ -471,6 +473,32 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_job"] = sanitize(c["job"])
 				break
 
+	if(mode==41)
+		data["crew_manifest"] = html_crew_manifest(1, 0)
+
+	if(mode==31)
+		if(!user || !user.client)	return
+		var/recommends = ""
+		for(var/N in user:CharRecords.display_employeerecords())
+			recommends += "[N]<br>"
+
+		var/datum/job/job = job_master.GetJob(user:job)
+		data["ntprofile"] = list(\
+			"name" = "[owner]",\
+			"department" = "[get_department(user:CharRecords.char_department, 1)]",\
+			"deptrank" = "[calculate_department_rank(user)] ([get_department_rank_title(get_department(user:CharRecords.char_department, 1), user:CharRecords.department_rank)])",\
+			"job" = "[user:job]",\
+			"basepay" = "[job.base_pay]",\
+			"bank" = "[user:CharRecords.bank_balance]",\
+			"paycheck" = "[calculate_paycheck(user)]",\
+			"pension" = "[user:CharRecords.pension_balance]",\
+			"activehours" = "[round(user:CharRecords.department_playtime/3600, 0.1)]",\
+			"recommendations" = "[recommends]",\
+			"neurallaces" = "[user:CharRecords.neurallaces]",\
+			"permadeath" = "[user:CharRecords.permadeath]"\
+			)
+		ntprofilecache = data["ntprofile"] //Cacheing for saving unneeded shit?
+
 	if(mode==3)
 		var/turf/T = get_turf(user.loc)
 		if(!isnull(T))
@@ -615,6 +643,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					active_conversation = null
 				if(mode==4)//Fix for cartridges. Redirects to hub.
 					mode = 0
+				if(mode==31)
+					mode = 0
 				else if(mode >= 40 && mode <= 49)//Fix for cartridges. Redirects to refresh the menu.
 					cartridge.mode = mode
 		if ("Authenticate")//Checks for ID
@@ -673,6 +703,27 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				scanmode = 0
 			else if((!isnull(cartridge)) && (cartridge.access_atmos))
 				scanmode = 5
+//NT PROFILE FUNCTIONALITY===================================
+		if("Neurallace")
+			var/mob/living/carbon/human/M = usr
+			if(M && M.client && owner == M.name)
+				switch(alert("Would you like to buy a neural lace for $3,000?", "Buy Neural Lace", "Yes", "Abort"))
+					if("Yes")
+						if(M.CharRecords.bank_balance < 3000) //Insufficient in bank.
+							if((M.CharRecords.bank_balance+M.CharRecords.pension_balance) < 3000)
+								to_chat(M, "You do not have sufficient funds for this!.")
+								return
+							else
+								var/topay = (3000-M.CharRecords.bank_balance)
+								M.CharRecords.bank_balance -= (3000-topay)
+								M.CharRecords.pension_balance -= topay
+						else
+							M.CharRecords.bank_balance -= 3000
+						M.CharRecords.neurallaces++ //Buy neural lace.
+						M.CharRecords.save_persistent()
+					if("Abort")
+						to_chat(M, "Purchase Aborted.")
+						return
 
 //MESSENGER/NOTE FUNCTIONS===================================
 
@@ -787,7 +838,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if("Toggle Door")
 			if(cartridge && cartridge.access_remote_door)
-				for(var/obj/machinery/door/blast/M in world)
+				for(var/obj/machinery/door/blast/M in button_machines)
 					if(M.id == cartridge.remote_door_id)
 						if(M.density)
 							M.open()
@@ -865,11 +916,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if (mode == 2||mode == 21)//To clear message overlays.
 		new_message = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	if (mode == 6||mode == 61)//To clear news overlays.
 		new_news = 0
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	if ((honkamt > 0) && (prob(60)))//For clown virus.
 		honkamt--
@@ -1061,7 +1112,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if(!news_silent)
 		new_news = 1
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/item/device/pda/ai/new_news(var/message)
 	// Do nothing
@@ -1075,7 +1126,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
 	new_message = 1
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/device/pda/ai/new_message(var/atom/movable/sending_unit, var/sender, var/sender_job, var/message)
 	if(!istype(sending_unit))

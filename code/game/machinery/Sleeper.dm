@@ -20,30 +20,30 @@
 /obj/machinery/sleeper/Initialize()
 	. = ..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/sleeper/Process()
 	if(stat & (NOPOWER|BROKEN))
 		return
-
-	if(filtering > 0)
-		if(beaker)
-			if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
-				var/pumped = 0
-				for(var/datum/reagent/x in occupant.reagents.reagent_list)
-					occupant.reagents.trans_to_obj(beaker, 3)
-					pumped++
-				if(ishuman(occupant))
-					occupant.vessel.trans_to_obj(beaker, pumped + 1)
-		else
-			toggle_filter()
-	if(pump > 0)
-		if(beaker && istype(occupant))
-			if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
-				for(var/datum/reagent/x in occupant.ingested.reagent_list)
-					occupant.ingested.trans_to_obj(beaker, 3)
-		else
-			toggle_pump()
+	if(occupant)
+		if(filtering > 0)
+			if(beaker)
+				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
+					var/pumped = 0
+					for(var/datum/reagent/x in occupant.reagents.reagent_list)
+						occupant.reagents.trans_to_obj(beaker, 3)
+						pumped++
+					if(ishuman(occupant))
+						occupant.vessel.trans_to_obj(beaker, pumped + 1)
+			else
+				toggle_filter()
+		if(pump > 0)
+			if(beaker && istype(occupant))
+				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
+					for(var/datum/reagent/x in occupant.ingested.reagent_list)
+						occupant.ingested.trans_to_obj(beaker, 3)
+			else
+				toggle_pump()
 
 /obj/machinery/sleeper/update_icon()
 	icon_state = "sleeper_[occupant ? "1" : "0"]"
@@ -195,7 +195,7 @@
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.forceMove(src)
-		update_use_power(2)
+		update_use_power(src, 2)
 		occupant = M
 		update_icon()
 
@@ -211,7 +211,7 @@
 		if(A == beaker)
 			continue
 		A.dropInto(loc)
-	update_use_power(1)
+	update_use_power(src, 1)
 	update_icon()
 	toggle_filter()
 

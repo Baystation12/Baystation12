@@ -11,12 +11,11 @@
 	var/power_use = 5 KILOWATTS
 	var/obj/effect/suspension_field/suspension_field
 
-/obj/machinery/suspension_gen/New()
-	..()
+/obj/machinery/suspension_gen/Initialize()
+	. = ..()
 	src.cell = new /obj/item/weapon/cell/high(src)
 
 /obj/machinery/suspension_gen/Process()
-	set background = 1
 	if(suspension_field)
 		cell.use(power_use * CELLRATE)
 

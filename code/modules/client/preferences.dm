@@ -50,7 +50,7 @@ datum/preferences
 	if(update_setup(loaded_preferences, loaded_character))
 		save_preferences()
 		save_character()
-
+/*
 /datum/preferences/proc/ZeroSkills(var/forced = 0)
 	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
 		if(!skills.Find(S.ID) || forced)
@@ -102,7 +102,7 @@ datum/preferences
 			return "Genius"
 		if(24 to 1000)
 			return "God"
-
+*/
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
 
@@ -288,7 +288,8 @@ datum/preferences
 
 	for(var/N in character.organs_by_name)
 		var/obj/item/organ/external/O = character.organs_by_name[N]
-		O.markings.Cut()
+		if(O)
+			O.markings.Cut()
 
 	for(var/M in body_markings)
 		var/datum/sprite_accessory/marking/mark_datum = GLOB.body_marking_styles_list[M]
@@ -332,9 +333,6 @@ datum/preferences
 	character.personal_faction = faction
 	character.religion = religion
 
-	character.skills = skills
-	character.used_skillpoints = used_skillpoints
-
 	if(!character.isSynthetic())
 		character.nutrition = rand(140,360)
 
@@ -366,4 +364,5 @@ datum/preferences
 
 /datum/preferences/proc/close_load_dialog(mob/user)
 	user << browse(null, "window=saves")
-	panel.close()
+	if(panel)
+		panel.close()

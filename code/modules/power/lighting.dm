@@ -10,7 +10,7 @@
 #define LIGHT_BURNED 3
 
 #define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
-#define LIGHTING_POWER_FACTOR 5		//5W per luminosity * range
+#define LIGHTING_POWER_FACTOR 10		//15W per luminosity * range
 
 
 #define LIGHTMODE_EMERGENCY "emergency_lighting"
@@ -225,9 +225,11 @@
 
 		if(trigger && changed && get_status() == LIGHT_OK)
 			switch_check()
+			update_icon()
 	else
 		use_power = 0
 		set_light(0)
+		update_icon()
 
 	active_power_usage = ((light_range * light_power) * LIGHTING_POWER_FACTOR)
 
@@ -372,8 +374,8 @@
 // returns whether this light has power
 // true if area has power and lightswitch is on
 /obj/machinery/light/powered()
-	var/area/A = get_area(src)
-	return A && A.lightswitch && ..(power_channel)
+	if(MyArea)
+		return MyArea.lightswitch && ..(power_channel)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return
@@ -616,7 +618,7 @@
 
 /obj/item/weapon/light/New(atom/newloc, obj/machinery/light/fixture = null)
 	..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 // attack bulb/tube with object
 // if a syringe, can inject phoron to make it explode

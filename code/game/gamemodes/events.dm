@@ -32,7 +32,7 @@ var/hadevent    = 0
 			if(!istype(A) || (A && A.inflamed))
 				continue
 			A.inflamed = 1
-			A.update_icon()
+			ADD_ICON_QUEUE(A)
 			break
 
 
@@ -100,14 +100,14 @@ var/hadevent    = 0
 
 
 	var/list/area/areas = list()
-	for(var/area/A in world)
+	for(var/area/A in all_areas)
 		if(istype(A, /area/security/prison) || istype(A, /area/security/brig))
 			areas += A
 
 	if(areas && areas.len > 0)
 
 		for(var/area/A in areas)
-			for(var/obj/machinery/light/L in A)
+			for(var/obj/machinery/light/L in A.machinecache)
 				L.flicker(10)
 
 		sleep(100)
@@ -147,22 +147,22 @@ var/hadevent    = 0
 		command_announcement.Announce("An Electrical storm has been detected in your area, please repair potential electronic overloads.","Electrical Storm Alert")
 
 	if(lightsoutAmount)
-		var/list/epicentreList = list()
+		. = list()
 
 		for(var/i=1,i<=lightsoutAmount,i++)
 			var/list/possibleEpicentres = list()
 			for(var/obj/effect/landmark/newEpicentre in landmarks_list)
-				if(newEpicentre.name == "lightsout" && !(newEpicentre in epicentreList))
+				if(newEpicentre.name == "lightsout" && !(newEpicentre in .))
 					possibleEpicentres += newEpicentre
 			if(possibleEpicentres.len)
-				epicentreList += pick(possibleEpicentres)
+				. += pick(possibleEpicentres)
 			else
 				break
 
-		if(!epicentreList.len)
+		if(!.[1]) //Check if list has at least 1 entry.
 			return
 
-		for(var/obj/effect/landmark/epicentre in epicentreList)
+		for(var/obj/effect/landmark/epicentre in .)
 			for(var/obj/machinery/power/apc/apc in range(epicentre,lightsoutRange))
 				apc.overload_lighting()
 

@@ -36,7 +36,7 @@
 		ui.open()
 
 /obj/item/weapon/airlock_electronics/ui_data(mob/user)
-	var/list/data = list()
+	. = list()
 	var/list/regions = list()
 
 	for(var/i in ACCESS_REGION_SECURITY to ACCESS_REGION_SUPPLY) //code/game/jobs/_access_defs.dm
@@ -51,12 +51,12 @@
 		region["name"] = get_region_accesses_name(i)
 		region["accesses"] = accesses
 		regions[++regions.len] = region
-	data["regions"] = regions
-	data["oneAccess"] = one_access
-	data["locked"] = locked
-	data["lockable"] = lockable
+	.["regions"] = regions
+	.["oneAccess"] = one_access
+	.["locked"] = locked
+	.["lockable"] = lockable
 
-	return data
+	return .
 
 /obj/item/weapon/airlock_electronics/ui_act(action, params)
 	if(..())

@@ -204,8 +204,6 @@ datum/preferences
 				if(job.title == job_high)
 					previewJob = job
 					break
-	else
-		return
 
 	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
 		mannequin.job = previewJob.title

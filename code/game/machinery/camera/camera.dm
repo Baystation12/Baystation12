@@ -112,7 +112,7 @@
 	if((stat & EMPED) && world.time >= affected_by_emp_until)
 		stat &= ~EMPED
 		cancelCameraAlarm()
-		update_icon()
+//		ADD_ICON_QUEUE(src) ~L: Why are we updating their icons..?
 		update_coverage()
 	return internal_process()
 
@@ -323,16 +323,16 @@
 	return 1
 
 /obj/machinery/camera/proc/can_see()
-	var/list/see = null
+	. = list()
 	var/turf/pos = get_turf(src)
 	if(!pos)
 		return list()
 
 	if(isXRay())
-		see = range(view_range, pos)
+		. = range(view_range, pos)
 	else
-		see = hear(view_range, pos)
-	return see
+		. = hear(view_range, pos)
+	return .
 
 /atom/proc/auto_turn()
 	//Automatically turns based on nearby walls.

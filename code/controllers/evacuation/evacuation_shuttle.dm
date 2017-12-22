@@ -79,13 +79,14 @@
 
 // This is largely handled by the emergency shuttle datum.
 /datum/evacuation_controller/shuttle/process()
-	if(state == EVAC_PREPPING)
-		if(!isnull(shuttle_launch_time) && world.time > shuttle_launch_time && shuttle.moving_status == SHUTTLE_IDLE)
-			shuttle.launch()
-			shuttle_launch_time = null
-		return
-	else if(state == EVAC_IN_TRANSIT)
-		return
+	switch(state)
+		if(EVAC_PREPPING)
+			if(!isnull(shuttle_launch_time) && world.time > shuttle_launch_time && shuttle.moving_status == SHUTTLE_IDLE)
+				shuttle.launch()
+				shuttle_launch_time = null
+			return
+		if(EVAC_IN_TRANSIT)
+			return
 	return ..()
 
 /datum/evacuation_controller/shuttle/can_cancel()

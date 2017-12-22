@@ -29,13 +29,13 @@ var/list/ai_status_emotions = list(
 	)
 
 /proc/get_ai_emotions(var/ckey)
-	var/list/emotions = new
+	. = list()
 	for(var/emotion_name in ai_status_emotions)
 		var/datum/ai_emotion/emotion = ai_status_emotions[emotion_name]
 		if(!emotion.ckey || emotion.ckey == ckey)
-			emotions += emotion_name
+			. += emotion_name
 
-	return emotions
+	return .
 
 /proc/set_ai_status_displays(mob/user as mob)
 	var/list/ai_emotions = get_ai_emotions(user.ckey)
@@ -44,7 +44,7 @@ var/list/ai_status_emotions = list(
 		if(istype(M, /obj/machinery/ai_status_display))
 			var/obj/machinery/ai_status_display/AISD = M
 			AISD.emotion = emote
-			AISD.update_icon()
+			ADD_ICON_QUEUE(AISD)
 		//if Friend Computer, change ALL displays
 		else if(istype(M, /obj/machinery/status_display))
 
@@ -75,7 +75,7 @@ var/list/ai_status_emotions = list(
 	src.emotion = emote
 
 /obj/machinery/ai_status_display/Process()
-	return
+	return PROCESS_KILL
 
 /obj/machinery/ai_status_display/update_icon()
 	if(stat & (NOPOWER|BROKEN))

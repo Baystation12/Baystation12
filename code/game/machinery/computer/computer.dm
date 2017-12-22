@@ -18,19 +18,11 @@
 	flags = OBJ_CLIMBABLE
 	clicksound = "keyboard"
 
-/obj/machinery/computer/New()
-	overlay_layer = layer
-	..()
-
 /obj/machinery/computer/Initialize()
 	. = ..()
+	overlay_layer = layer
 	power_change()
-	update_icon()
-
-/obj/machinery/computer/Process()
-	if(stat & (NOPOWER|BROKEN))
-		return 0
-	return 1
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/computer/emp_act(severity)
 	if(prob(20/severity)) set_broken()
@@ -83,7 +75,7 @@
 
 /obj/machinery/computer/proc/set_broken()
 	stat |= BROKEN
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/computer/proc/decode(text)
 	// Adds line breaks
@@ -116,3 +108,9 @@
 
 /obj/machinery/computer/attack_ghost(var/mob/ghost)
 	attack_hand(ghost)
+
+
+/obj/machinery/computer/Topic(href, href_list)
+	. = ..()
+	if(. && istype(usr, /mob/living/carbon) && prob(33))
+		playsound(src, 'sound/machines/keypress.ogg', 50)

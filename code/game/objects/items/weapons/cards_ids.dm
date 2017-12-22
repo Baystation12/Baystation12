@@ -96,6 +96,10 @@ var/const/NO_EMAG_ACT = -50
 	icon_state = "id"
 	item_state = "card-id"
 
+	sprite_sheets = list(
+		SPECIES_RESOMI = 'icons/mob/species/resomi/id.dmi'
+		)
+
 	var/access = list()
 	var/registered_name = "Unknown" // The name registered_name on the card
 	slot_flags = SLOT_ID
@@ -169,17 +173,19 @@ var/const/NO_EMAG_ACT = -50
 		id_card.blood_type		= dna.b_type
 		id_card.dna_hash		= dna.unique_enzymes
 		id_card.fingerprint_hash= md5(dna.uni_identity)
-	id_card.update_name()
+	id_card.update_name(src)
 
 /mob/living/carbon/human/set_id_info(var/obj/item/weapon/card/id/id_card)
 	..()
 	id_card.age = age
 
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-		id_card.military_branch = char_branch
-
-	if(GLOB.using_map.flags & MAP_HAS_RANK)
-		id_card.military_rank = char_rank
+		id_card.military_branch = src.CharRecords.char_department
+	spawn(50)
+		if(get_department(src.CharRecords.char_department, 1) == "Command")
+			id_card.name = "[id_card.registered_name]'s ID Card ([get_department_rank_title(get_department(src.CharRecords.char_department, 1), src.CharRecords.department_rank, ishead = 1)] [id_card.assignment])"
+		else
+			id_card.name = "[id_card.registered_name]'s ID Card ([get_department_rank_title(get_department(src.CharRecords.char_department, 1), src.CharRecords.department_rank)] [id_card.assignment])"
 
 /obj/item/weapon/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")
@@ -188,9 +194,9 @@ var/const/NO_EMAG_ACT = -50
 	dat += text("Age: []</A><BR>\n", age)
 
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch.name : "\[UNSET\]")
-	if(GLOB.using_map.flags & MAP_HAS_RANK)
-		dat += text("Rank: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
+		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch : "\[UNSET\]")
+//	if(GLOB.using_map.flags & MAP_HAS_RANK)
+//		dat += text("Rank: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
 
 	dat += text("Assignment: []</A><BR>\n", assignment)
 	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)

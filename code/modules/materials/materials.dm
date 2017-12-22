@@ -177,7 +177,7 @@ var/list/name_to_material
 // Return the matter comprising this material.
 /material/proc/get_matter()
 	var/list/temp_matter = list()
-	if(islist(composite_material))
+	if(length(composite_material))
 		for(var/material_string in composite_material)
 			temp_matter[material_string] = composite_material[material_string]
 	else if(SHEET_MATERIAL_AMOUNT)
@@ -312,7 +312,7 @@ var/list/name_to_material
 	if(temperature < ignition_point)
 		return 0
 	var/totalPhoron = 0
-	for(var/turf/simulated/floor/target_tile in range(2,T))
+	for(var/turf/simulated/floor/target_tile in trange(2,T))
 		var/phoronToDeduce = (temperature/30) * effect_multiplier
 		totalPhoron += phoronToDeduce
 		target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)

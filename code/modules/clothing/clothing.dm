@@ -97,7 +97,7 @@
 	//Set species_restricted list
 	switch(target_species)
 		if(SPECIES_HUMAN, SPECIES_SKRELL)	//humanoid bodytypes
-			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC) //skrell/humans/machines can wear each other's suits
+			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC, SPECIES_WRYN) //skrell/humans/machines can wear each other's suits
 		else
 			species_restricted = list(target_species)
 
@@ -113,9 +113,9 @@
 	//Set species_restricted list
 	switch(target_species)
 		if(SPECIES_SKRELL)
-			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC) //skrell helmets fit humans too
+			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC, SPECIES_WRYN) //skrell helmets fit humans too
 		if(SPECIES_HUMAN)
-			species_restricted = list(SPECIES_HUMAN, SPECIES_IPC) //human helmets fit IPCs too
+			species_restricted = list(SPECIES_HUMAN, SPECIES_IPC, SPECIES_WRYN) //human helmets fit IPCs too
 		else
 			species_restricted = list(target_species)
 
@@ -139,6 +139,7 @@
 	w_class = ITEM_SIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
+	sprite_sheets = list(SPECIES_RESOMI = 'icons/mob/species/resomi/ears.dmi')
 
 /obj/item/clothing/ears/update_clothing_icon()
 	if (ismob(src.loc))
@@ -203,7 +204,7 @@ BLIND     // can't see anything
 	var/light_protection = 0
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/eyes.dmi',
-		)
+		SPECIES_RESOMI = 'icons/mob/species/resomi/eyes.dmi')
 
 /obj/item/clothing/glasses/get_icon_state(mob/user_mob, slot)
 	if(item_state_slots && item_state_slots[slot])
@@ -237,7 +238,7 @@ BLIND     // can't see anything
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/gloves.dmi',
-		)
+		SPECIES_RESOMI = 'icons/mob/species/resomi/gloves.dmi')
 	blood_overlay_type = "bloodyhands"
 
 /obj/item/clothing/gloves/Initialize()
@@ -345,6 +346,7 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
+		SPECIES_RESOMI = 'icons/mob/species/resomi/head.dmi'
 		)
 	blood_overlay_type = "helmetblood"
 
@@ -454,6 +456,7 @@ BLIND     // can't see anything
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi',
+		SPECIES_RESOMI = 'icons/mob/species/resomi/masks.dmi'
 		)
 
 	var/voicechange = 0
@@ -536,7 +539,7 @@ BLIND     // can't see anything
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_UNATHI, SPECIES_TAJARA, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi',
-		)
+		SPECIES_RESOMI = 'icons/mob/species/resomi/shoes.dmi')
 	blood_overlay_type = "shoeblood"
 
 /obj/item/clothing/shoes/proc/draw_knife()
@@ -613,7 +616,7 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
-		)
+		SPECIES_RESOMI = 'icons/mob/species/resomi/suit.dmi')
 
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
@@ -661,8 +664,8 @@ BLIND     // can't see anything
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi',
-		SPECIES_NABBER = 'icons/mob/species/nabber/uniform.dmi'
-		)
+		SPECIES_NABBER = 'icons/mob/species/nabber/uniform.dmi',
+		SPECIES_RESOMI = 'icons/mob/species/resomi/uniform.dmi')
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.

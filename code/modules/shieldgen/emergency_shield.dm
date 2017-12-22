@@ -142,27 +142,27 @@
 	if(active) return 0 //If it's already turned on, how did this get called?
 
 	src.active = 1
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 	create_shields()
 
 	idle_power_usage = 0
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
 		idle_power_usage += shield_tile.shield_idle_power
-	update_use_power(1)
+	update_use_power(src, 1)
 
 /obj/machinery/shieldgen/proc/shields_down()
 	if(!active) return 0 //If it's already off, how did this get called?
 
 	src.active = 0
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 	collapse_shields()
 
-	update_use_power(0)
+	update_use_power(src, 0)
 
 /obj/machinery/shieldgen/proc/create_shields()
-	for(var/turf/target_tile in range(2, src))
+	for(var/turf/target_tile in trange(2, src))
 		if (istype(target_tile,/turf/space) && !(locate(/obj/machinery/shield) in target_tile))
 			if (malfunction && prob(33) || !malfunction)
 				var/obj/machinery/shield/S = new/obj/machinery/shield(target_tile)
@@ -208,10 +208,9 @@
 	if(health <= 30)
 		src.malfunction = 1
 	if(health <= 0)
-		spawn(0)
-			explosion(get_turf(src.loc), 0, 0, 1, 0, 0, 0)
+		explosion(get_turf(src.loc), 0, 0, 1, 0, 0, 0)
 		qdel(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return
 
 /obj/machinery/shieldgen/ex_act(severity)
@@ -267,7 +266,7 @@
 /obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
 	if(!malfunction)
 		malfunction = 1
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		return 1
 
 /obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)

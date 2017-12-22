@@ -79,7 +79,7 @@
 	if(!terminals.len)
 		stat |= BROKEN
 		return
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/power/smes/add_avail(var/amount)
 	if(..(amount))
@@ -97,24 +97,24 @@
 	if(stat & BROKEN)	return
 
 	overlays += image('icons/obj/power.dmi', "smes-op[outputting]")
-
-	if(inputting == 2)
-		overlays += image('icons/obj/power.dmi', "smes-oc2")
-	else if (inputting == 1)
-		overlays += image('icons/obj/power.dmi', "smes-oc1")
-	else if (input_attempt)
-		overlays += image('icons/obj/power.dmi', "smes-oc0")
+	switch(inputting)
+		if(2)
+			overlays += image('icons/obj/power.dmi', "smes-oc2")
+		if(1)
+			overlays += image('icons/obj/power.dmi', "smes-oc1")
+		else if (input_attempt)
+			overlays += image('icons/obj/power.dmi', "smes-oc0")
 
 	var/clevel = chargedisplay()
 	if(clevel)
 		overlays += image('icons/obj/power.dmi', "smes-og[clevel]")
-
-	if(outputting == 2)
-		overlays += image('icons/obj/power.dmi', "smes-op2")
-	else if (outputting == 1)
-		overlays += image('icons/obj/power.dmi', "smes-op1")
-	else
-		overlays += image('icons/obj/power.dmi', "smes-op0")
+	switch(outputting)
+		if(2)
+			overlays += image('icons/obj/power.dmi', "smes-op2")
+		if(1)
+			overlays += image('icons/obj/power.dmi', "smes-op1")
+		else
+			overlays += image('icons/obj/power.dmi', "smes-op0")
 
 /obj/machinery/power/smes/proc/chargedisplay()
 	return round(5.5*charge/(capacity ? capacity : 5e6))
@@ -149,7 +149,7 @@
 
 	// only update icon if state changed
 	if(last_disp != chargedisplay() || last_chrg != inputting || last_onln != outputting)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 	//store machine state to see if we need to update the icon overlays
 	last_disp = chargedisplay()
@@ -207,7 +207,7 @@
 	output_used -= total_restore
 
 	if(clev != chargedisplay() ) //if needed updates the icons overlay
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	return
 
 //Will return 1 on failure
@@ -468,7 +468,7 @@
 			charge = 0
 	if(prob(50))
 		energy_fail(rand(0 + (severity * 30),30 + (severity * 30)))
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	..()
 
 /obj/machinery/power/smes/bullet_act(var/obj/item/projectile/Proj)

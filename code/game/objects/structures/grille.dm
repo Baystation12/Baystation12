@@ -168,7 +168,7 @@
 		if(!destroyed)
 			set_density(0)
 			destroyed = 1
-			update_icon()
+			ADD_ICON_QUEUE(src)
 			new /obj/item/stack/rods(get_turf(src))
 
 		else

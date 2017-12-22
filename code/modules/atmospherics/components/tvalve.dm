@@ -212,7 +212,7 @@
 				node3 = target
 				break
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update_underlays()
 
 /obj/machinery/atmospherics/tvalve/build_network()
@@ -402,7 +402,7 @@
 			node3 = target
 			break
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update_underlays()
 
 /obj/machinery/atmospherics/tvalve/mirrored/update_icon(animation)

@@ -30,9 +30,8 @@
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
-		spawn( 0 )
-			src.Entered(AM)
-			return
+		src.Entered(AM)
+		return
 
 	if(dynamic_lighting)
 		luminosity = 0
@@ -41,6 +40,7 @@
 
 /turf/Destroy()
 	remove_cleanables()
+	lighting_clear_overlay()
 	..()
 	return QDEL_HINT_IWILLGC
 
@@ -203,12 +203,12 @@ var/const/enterloopsanity = 100
 		return get_dist(src,t)
 
 /turf/proc/AdjacentTurfsSpace()
-	var/L[] = new()
-	for(var/turf/t in oview(src,1))
+	. = list()
+	for(var/turf/t in otrange(src,1))
 		if(!t.density)
 			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
-				L.Add(t)
-	return L
+				. += t
+	return .
 
 /turf/proc/process()
 	return PROCESS_KILL

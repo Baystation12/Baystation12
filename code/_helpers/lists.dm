@@ -80,14 +80,14 @@ proc/listclearnulls(list/list)
 /proc/difflist(var/list/first, var/list/second, var/skiprep=0)
 	if(!islist(first) || !islist(second))
 		return
-	var/list/result = new
+	. = list()
 	if(skiprep)
 		for(var/e in first)
-			if(!(e in result) && !(e in second))
-				result += e
+			if(!(e in .) && !(e in second))
+				. += e
 	else
-		result = first - second
-	return result
+		. = first - second
+	return .
 
 /*
  * Returns list containing entries that are in either list but not both.
@@ -97,12 +97,12 @@ proc/listclearnulls(list/list)
 /proc/uniquemergelist(var/list/first, var/list/second, var/skiprep=0)
 	if(!islist(first) || !islist(second))
 		return
-	var/list/result = new
+	. = list()
 	if(skiprep)
-		result = difflist(first, second, skiprep)+difflist(second, first, skiprep)
+		. = difflist(first, second, skiprep)+difflist(second, first, skiprep)
 	else
-		result = first ^ second
-	return result
+		. = first ^ second
+	return .
 
 /proc/assoc_merge_add(var/value_a, var/value_b)
 	return value_a + value_b
@@ -168,11 +168,11 @@ proc/listclearnulls(list/list)
 
 //Reverses the order of items in the list
 /proc/reverselist(list/L)
-	var/list/output = list()
+	. = list()
 	if(L)
 		for(var/i = L.len; i >= 1; i--)
-			output += L[i]
-	return output
+			. += L[i]
+	return .
 
 //Randomize: Return the list in a random order
 /proc/shuffle(var/list/L)
@@ -331,20 +331,20 @@ proc/listclearnulls(list/list)
 
 //Converts a bitfield to a list of numbers (or words if a wordlist is provided)
 /proc/bitfield2list(bitfield = 0, list/wordlist)
-	var/list/r = list()
+	. = list()
 	if(istype(wordlist,/list))
 		var/max = min(wordlist.len,16)
 		var/bit = 1
 		for(var/i=1, i<=max, i++)
 			if(bitfield & bit)
-				r += wordlist[i]
+				. += wordlist[i]
 			bit = bit << 1
 	else
 		for(var/bit=1, bit<=65535, bit = bit << 1)
 			if(bitfield & bit)
-				r += bit
+				. += bit
 
-	return r
+	return .
 
 // Returns the key based on the index
 /proc/get_key_by_index(var/list/L, var/index)
@@ -608,7 +608,7 @@ proc/dd_sortedTextList(list/incoming)
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.
-/proc/init_subtypes(prototype, list/L)
+/proc/init_subtypes(prototype, var/list/L = list())
 	if(!istype(L))	L = list()
 	for(var/path in subtypesof(prototype))
 		L += new path()
@@ -616,7 +616,7 @@ proc/dd_sortedTextList(list/incoming)
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L as a type/instance pair.
 //if no list/L is provided, one is created.
-/proc/init_subtypes_assoc(prototype, list/L)
+/proc/init_subtypes_assoc(prototype, var/list/L = list())
 	if(!istype(L))	L = list()
 	for(var/path in subtypesof(prototype))
 		L[path] = new path()

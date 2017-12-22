@@ -198,7 +198,7 @@
 				holographic_mobs -= C
 				C.death()
 
-	if(!..())
+	if(inoperable()())
 		return
 	if(active)
 		use_power(item_power_usage * (holographic_objs.len + holographic_mobs.len))

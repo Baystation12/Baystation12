@@ -74,6 +74,54 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	resumed = 0;\
 	current_step = next_step;\
 }
+//Adding Power usage to a define removes useless proc overhead from the large number of calls.
+#define ADD_POWER_USE(Machine) \
+if (Machine.special_power_checks) { \
+	Machine.auto_use_power(); \
+} \
+else { \
+	if(Machine.use_power) { \
+		if(!Machine.MyArea) { \
+			Machine.MyArea = Machine.loc.loc; \
+		} \
+	} \
+		switch(Machine.use_power) { \
+			if(1) { \
+				switch(Machine.power_channel) { \
+					if (EQUIP) { \
+						Machine.MyArea.used_equip += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					if (LIGHT) { \
+						Machine.MyArea.used_light += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					if (ENVIRON) { \
+						Machine.MyArea.used_environ += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					else { \
+						log_debug("SSmachinery: Type '[Machine.type]' has insane channel [Machine.power_channel] (expected value in range 1-3)."); \
+						Machine.use_power = FALSE; \
+					} \
+				} \
+			} \
+			if(2) { \
+				switch(Machine.power_channel) { \
+					if (EQUIP) { \
+						Machine.MyArea.used_equip += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					if (LIGHT) { \
+						Machine.MyArea.used_light += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					if (ENVIRON) { \
+						Machine.MyArea.used_environ += Machine.use_power == 2 ? Machine.active_power_usage : Machine.idle_power_usage; \
+						} \
+					else { \
+						log_debug("SSmachinery: Type '[Machine.type]' has insane channel [Machine.power_channel] (expected value in range 1-3)."); \
+						Machine.use_power = FALSE; \
+					} \
+				} \
+			} \
+		} \
+} \
 
 /datum/controller/subsystem/machines/fire(resumed = 0)
 	var/timer = TICK_USAGE_REAL
@@ -145,7 +193,7 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	while(current_run.len)
 		var/datum/pipe_network/PN = current_run[current_run.len]
 		current_run.len--
-		if(istype(PN) && !QDELETED(PN))
+		if(!QDELETED(PN))
 			PN.Process(wait)
 		else
 			pipenets.Remove(PN)
@@ -161,9 +209,8 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	while(current_run.len)
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
-		if(istype(M) && !QDELETED(M) && !(M.Process(wait) == PROCESS_KILL))
-			if(M.use_power)
-				M.auto_use_power()
+		if(!QDELETED(M) && !(M.Process(wait) == PROCESS_KILL))
+			ADD_POWER_USE(M)
 		else
 			machinery.Remove(M)
 			M.is_processing = null
@@ -178,7 +225,7 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	while(current_run.len)
 		var/datum/powernet/PN = current_run[current_run.len]
 		current_run.len--
-		if(istype(PN) && !QDELETED(PN))
+		if(!QDELETED(PN))
 			PN.reset(wait)
 		else
 			powernets.Remove(PN)

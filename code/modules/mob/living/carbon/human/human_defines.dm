@@ -59,9 +59,6 @@
 	var/obj/item/l_store = null
 	var/obj/item/s_store = null
 
-	var/used_skillpoints = 0
-	var/list/skills = list()
-
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null
 
@@ -114,3 +111,4 @@
 
 	var/obj/item/grab/current_grab_type 	// What type of grab they use when they grab someone.
 	var/skin_state = SKIN_NORMAL
+	var/datum/ntprofile/CharRecords

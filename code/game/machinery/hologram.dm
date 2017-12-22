@@ -58,8 +58,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	var/holopadType = HOLOPAD_SHORT_RANGE //Whether the holopad is short-range or long-range.
 	var/base_icon = "holopad-B"
 
-/obj/machinery/hologram/holopad/New()
-	..()
+/obj/machinery/hologram/holopad/Initialize()
+	. = ..()
 	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[loc.loc]'"
 
 /obj/machinery/hologram/holopad/attack_hand(var/mob/living/carbon/human/user) //Carn: Hologram requests.
@@ -81,10 +81,9 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 			if(last_request + 200 < world.time) //don't spam the AI with requests you jerk!
 				last_request = world.time
 				to_chat(user, "<span class='notice'>You request an AI's presence.</span>")
-				var/area/area = get_area(src)
 				for(var/mob/living/silicon/ai/AI in GLOB.living_mob_list_)
 					if(!AI.client)	continue
-					to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area]</a>.</span>")
+					to_chat(AI, "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [MyArea]</a>.</span>")
 			else
 				to_chat(user, "<span class='notice'>A request for AI presence was already sent recently.</span>")
 		if("Holocomms")
@@ -326,9 +325,8 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			clear_holo(user)
 
 		if(HOLOPAD_MODE == AREA_BASED)
-			var/area/holo_area = get_area(src)
 			var/area/hologram_area = get_area(H)
-			if(hologram_area != holo_area)
+			if(hologram_area != MyArea)
 				clear_holo(user)
 	return 1
 

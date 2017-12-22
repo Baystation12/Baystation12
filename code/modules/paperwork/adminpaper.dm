@@ -19,8 +19,8 @@
 	var/logo_list = list("ntlogo.png","sollogo.png","terralogo.png")
 	var/logo = ""
 
-/obj/item/weapon/paper/admin/New()
-	..()
+/obj/item/weapon/paper/admin/Initialize()
+	. = ..()
 	generateInteractions()
 
 

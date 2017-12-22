@@ -380,20 +380,20 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		else
 			logged_list |= M
 		old_list.Remove(named)
-	var/list/new_list = list()
-	new_list += AI_list
-	new_list += keyclient_list
-	new_list += key_list
-	new_list += logged_list
-	new_list += Dead_list
-	return new_list
+	. = list()
+	. += AI_list
+	. += keyclient_list
+	. += key_list
+	. += logged_list
+	. += Dead_list
+	return .
 
 //Returns a list of all mobs with their name
 /proc/getmobs()
 
 	var/list/mobs = sortmobs()
 	var/list/names = list()
-	var/list/creatures = list()
+	. = list()
 	var/list/namecounts = list()
 	for(var/mob/M in mobs)
 		var/name = M.name
@@ -410,46 +410,46 @@ Turf and target are seperate in case you want to teleport some distance from a t
 				name += " \[observer\]"
 			else
 				name += " \[dead\]"
-		creatures[name] = M
+		.[name] = M
 
-	return creatures
+	return .
 
 /proc/get_follow_targets()
 	return follow_repository.get_follow_targets()
 
 //Orders mobs by type then by name
 /proc/sortmobs()
-	var/list/moblist = list()
+	. = list()
 	var/list/sortmob = sortAtom(SSmobs.mob_list)
 	for(var/mob/observer/eye/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/silicon/ai/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/silicon/pai/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/silicon/robot/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/deity/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/carbon/human/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/carbon/brain/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/carbon/alien/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/observer/ghost/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/new_player/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/carbon/slime/M in sortmob)
-		moblist.Add(M)
+		. += M
 	for(var/mob/living/simple_animal/M in sortmob)
-		moblist.Add(M)
+		. += M
 //	for(var/mob/living/silicon/hivebot/M in world)
 //		mob_list.Add(M)
 //	for(var/mob/living/silicon/hive_mainframe/M in world)
 //		mob_list.Add(M)
-	return moblist
+	return .
 
 //Forces a variable to be posative
 /proc/modulus(var/M)
@@ -529,16 +529,20 @@ proc/GaussRand(var/sigma)
 proc/GaussRandRound(var/sigma,var/roundto)
 	return round(GaussRand(sigma),roundto)
 
-//Will return the contents of an atom recursivly to a depth of 'searchDepth'
-/atom/proc/GetAllContents(searchDepth = 5)
-	var/list/toReturn = list()
-
-	for(var/atom/part in contents)
-		toReturn += part
-		if(part.contents.len && searchDepth)
-			toReturn += part.GetAllContents(searchDepth - 1)
-
-	return toReturn
+/*
+	Gets all contents of contents and returns them all in a list.
+*/
+/atom/proc/GetAllContents()
+	var/list/processing_list = list(src)
+	. = list()
+	while(processing_list.len)
+		var/atom/A = processing_list[1]
+		processing_list.Cut(1, 2)
+		//Byond does not allow things to be in multiple contents, or double parent-child hierarchies, so only += is needed
+		//This is also why we don't need to check against assembled as we go along
+		processing_list += A.contents
+		. += A
+	return .
 
 //Step-towards method of determining whether one atom can see another. Similar to viewers()
 /proc/can_see(var/atom/source, var/atom/target, var/length=5) // I couldn't be arsed to do actual raycasting :I This is horribly inaccurate.
@@ -610,10 +614,10 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		var/area/areatemp = areatype
 		areatype = areatemp.type
 
-	var/list/areas = new/list()
-	for(var/area/N in world)
-		if(istype(N, areatype)) areas += N
-	return areas
+	. = list()
+	for(var/area/N in all_areas)
+		if(istype(N, areatype)) . += N
+	return .
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all atoms	(objs, turfs, mobs) in areas of that type of that type in the world.
@@ -624,12 +628,12 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		var/area/areatemp = areatype
 		areatype = areatemp.type
 
-	var/list/atoms = new/list()
-	for(var/area/N in world)
+	. = list()
+	for(var/area/N in all_areas)
 		if(istype(N, areatype))
 			for(var/atom/A in N)
-				atoms += A
-	return atoms
+				. += A
+	return .
 
 /area/proc/move_contents_to(var/area/A)
 	//Takes: Area.
@@ -1094,6 +1098,70 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)
 	CRASH(msg)
+
+/proc/spiral_range_turfs2(dist=0, center=usr, tick_checked)
+	. = list()
+	var/dist2 = 1
+	if(!center)	return .
+	for(var/T in trange(dist, center))
+		var/turf/TU = T
+		if(get_dist(TU, center) == dist2)
+			. += TU
+
+		dist++
+
+//similar function to RANGE_TURFS(), but will search spiralling outwards from the center (like the above, but only turfs)
+/proc/spiral_range_turfs(dist=0, center=usr, orange=0, tick_checked)
+	. = list()
+	if(!dist)
+		. += center
+		return .
+
+	var/turf/t_center = get_turf(center)
+	if(!t_center)
+		return .
+
+	var/turf/T
+	var/y
+	var/x
+	var/c_dist = 1
+
+	if(!orange)
+		. += t_center
+
+	while( c_dist <= dist )
+		y = t_center.y + c_dist
+		x = t_center.x - c_dist + 1
+		for(x in x to t_center.x+c_dist)
+			T = locate(x,y,t_center.z)
+			if(T)
+				. += T
+
+		y = t_center.y + c_dist - 1
+		x = t_center.x + c_dist
+		for(y in t_center.y-c_dist to y)
+			T = locate(x,y,t_center.z)
+			if(T)
+				. += T
+
+		y = t_center.y - c_dist
+		x = t_center.x + c_dist - 1
+		for(x in t_center.x-c_dist to x)
+			T = locate(x,y,t_center.z)
+			if(T)
+				. += T
+
+		y = t_center.y - c_dist + 1
+		x = t_center.x - c_dist
+		for(y in y to t_center.y+c_dist)
+			T = locate(x,y,t_center.z)
+			if(T)
+				. += T
+		c_dist++
+		if(tick_checked)
+			CHECK_TICK
+
+	return .
 
 /proc/pass()
 	return

@@ -9,7 +9,7 @@
 #define SS_PRIORITY_MOB            100	// Mob Life().
 #define SS_PRIORITY_MACHINERY      100	// Machinery + powernet ticks.
 #define SS_PRIORITY_AIR            80	// ZAS processing.
-#define SS_PRIORITY_AIRFLOW        15	// Object movement from ZAS airflow.
+#define SS_PRIORITY_AIRFLOW        20	// Object movement from ZAS airflow.
 
 // SS_BACKGROUND
 #define SS_PRIORITY_PROCESSING    25	// Generic datum processor. Replaces objects processor.

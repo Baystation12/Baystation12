@@ -39,6 +39,8 @@
 	power_channel = ENVIRON
 	use_power = 1
 	idle_power_usage = 5
+	glass = 1
+	visible = 1
 
 	var/list/tile_info[4]
 	var/list/dir_alerts[4] // 4 dirs, bitflags
@@ -315,7 +317,7 @@
 		if(dir_alerts != old_alerts)
 			changed = 1
 		if(changed)
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 /obj/machinery/door/firedoor/proc/latetoggle()
 	if(operating || !nextstate)

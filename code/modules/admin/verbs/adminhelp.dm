@@ -1,6 +1,7 @@
 
 //This is a list of words which are ignored by the parser when comparing message contents for names. MUST BE IN LOWER CASE!
 var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","alien","as")
+var/adminhelps_unanswered = 0
 
 /proc/generate_ahelp_key_words(var/mob/mob, var/msg)
 	var/list/surnames = list()
@@ -118,6 +119,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
+	adminhelps_unanswered++ //Assuming unanswered until taken..
 
 	for(var/client/X in GLOB.admins)
 		if((R_ADMIN|R_MOD|R_MENTOR) & X.holder.rights)

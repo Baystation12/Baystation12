@@ -18,7 +18,7 @@
 
 /obj/item/device/flashlight/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/device/flashlight/update_icon()
 	if(on)
@@ -262,7 +262,7 @@
 	if(!fuel)
 		turn_off()
 		STOP_PROCESSING(SSobj, src)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/item/device/flashlight/glowstick/proc/turn_off()
 	on = 0

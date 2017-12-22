@@ -6,7 +6,7 @@
 	item_state = "syndie_helm"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.3
-	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC, SPECIES_WRYN)
 	camera = /obj/machinery/camera/network/mercenary
 	light_overlay = "helmet_light_green" //todo: species-specific light overlays
 
@@ -22,13 +22,13 @@
 	armor = list(melee = 60, bullet = 50, laser = 50, energy = 15, bomb = 35, bio = 100, rad = 60)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.3
-	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC, SPECIES_WRYN)
 
 /obj/item/clothing/suit/space/void/merc/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
-/obj/item/clothing/suit/space/void/merc/prepared/New()
+/obj/item/clothing/suit/space/void/merc/prepared
 	..()
-	helmet = new /obj/item/clothing/head/helmet/space/void/merc
-	boots = new /obj/item/clothing/shoes/magboots
+	helmet = /obj/item/clothing/head/helmet/space/void/merc
+	boots = /obj/item/clothing/shoes/magboots

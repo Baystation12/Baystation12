@@ -13,15 +13,13 @@
 	var/title = "Mass Driver Controls"
 
 
-/obj/machinery/computer/pod/New()
-	..()
-	spawn( 5 )
-		for(var/obj/machinery/mass_driver/M in world)
-			if(M.id == id)
-				connected = M
-			else
-		return
-	return
+/obj/machinery/computer/pod/Initialize()
+	. = ..()
+	for(var/obj/machinery/mass_driver/M in button_machines)
+		if(M.id == id)
+			connected = M
+		else
+			return
 
 
 /obj/machinery/computer/pod/proc/alarm()
@@ -32,19 +30,19 @@
 		to_chat(viewers(null, null), "Cannot locate mass driver connector. Cancelling firing sequence!")
 		return
 
-	for(var/obj/machinery/door/blast/M in world)
+	for(var/obj/machinery/door/blast/M in button_machines)
 		if(M.id == id)
 			M.open()
 
 	sleep(20)
 
-	for(var/obj/machinery/mass_driver/M in world)
+	for(var/obj/machinery/mass_driver/M in button_machines)
 		if(M.id == id)
 			M.power = connected.power
 			M.drive()
 
 	sleep(50)
-	for(var/obj/machinery/door/blast/M in world)
+	for(var/obj/machinery/door/blast/M in button_machines)
 		if(M.id == id)
 			M.close()
 			return
@@ -144,7 +142,7 @@
 
 
 /obj/machinery/computer/pod/Process()
-	if(!..())
+	if(inoperable())
 		return
 	if(timing)
 		if(time > 0)

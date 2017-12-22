@@ -9,6 +9,7 @@
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/keep_sprite = 0
+	plane = SPACE_PLANE
 //	heat_capacity = 700000 No.
 
 /turf/space/Initialize()
@@ -16,6 +17,12 @@
 	if((icon_state == "0") && (!keep_sprite))
 		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	update_starlight()
+	var/image/I = image('icons/turf/space_parallax1.dmi',"[icon_state]")
+	I.plane = PLANE_SPACE_DUST
+	I.alpha = 75
+	I.blend_mode = BLEND_ADD
+	overlays += I
+
 	if(!HasBelow(z))
 		return
 	var/turf/below = GetBelow(src)
@@ -47,7 +54,7 @@
 /turf/space/proc/update_starlight()
 	if(!config.starlight)
 		return
-	if(locate(/turf/simulated) in orange(src,1))
+	if(locate(/turf/simulated) in otrange(1,src))
 		set_light(config.starlight)
 	else
 		set_light(0)

@@ -111,7 +111,7 @@
 		S.gen = src
 		S.flags_updated()
 		field_segments |= S
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 // Recalculates and updates the upkeep multiplier
@@ -375,11 +375,11 @@
 
 
 /obj/machinery/power/shield_generator/proc/get_flag_descriptions()
-	var/list/all_flags = list()
+	. = list()
 	for(var/datum/shield_mode/SM in mode_list)
 		if(SM.hacked_only && !hacked)
 			continue
-		all_flags.Add(list(list(
+		. += (list(list(
 			"name" = SM.mode_name,
 			"desc" = SM.mode_desc,
 			"flag" = SM.mode_flag,
@@ -387,14 +387,14 @@
 			"hacked" = SM.hacked_only,
 			"multiplier" = SM.multiplier
 		)))
-	return all_flags
+	return .
 
 
 // These two procs determine tiles that should be shielded given the field range. They are quite CPU intensive and may trigger BYOND infinite loop checks, therefore they are set
 // as background procs to prevent locking up the server. They are only called when the field is generated, or when hull mode is toggled on/off.
 /obj/machinery/power/shield_generator/proc/fieldtype_square()
-	set background = 1
-	var/list/out = list()
+	set background = BACKGROUND_ENABLED
+	. = list()
 	var/list/base_turfs = get_base_turfs()
 
 	for(var/turf/gen_turf in base_turfs)
@@ -402,23 +402,22 @@
 		for (var/x_offset = -field_radius; x_offset <= field_radius; x_offset++)
 			T = locate(gen_turf.x + x_offset, gen_turf.y - field_radius, gen_turf.z)
 			if(T)
-				out += T
+				. += T
 			T = locate(gen_turf.x + x_offset, gen_turf.y + field_radius, gen_turf.z)
 			if(T)
-				out += T
+				. += T
 
 		for (var/y_offset = -field_radius+1; y_offset < field_radius; y_offset++)
 			T = locate(gen_turf.x - field_radius, gen_turf.y + y_offset, gen_turf.z)
 			if(T)
-				out += T
+				. += T
 			T = locate(gen_turf.x + field_radius, gen_turf.y + y_offset, gen_turf.z)
 			if(T)
-				out += T
-	return out
+				. += T
+	return .
 
 
 /obj/machinery/power/shield_generator/proc/fieldtype_hull()
-	set background = 1
 	. = list()
 	var/list/base_turfs = get_base_turfs()
 
@@ -433,7 +432,7 @@
 				continue
 
 			// Find adjacent space/shuttle tiles and cover them. Shuttles won't be blocked if shield diffuser is mapped in and turned on.
-			for(var/turf/TN in orange(1, T))
+			for(var/turf/TN in otrange(1, T))
 				TA = get_area(TN)
 				if ((istype(TN, /turf/space) || (istype(TN, /turf/simulated/open) && (istype(TA, /area/space) || TA.flags & AREA_EXTERNAL))))
 					. |= TN
@@ -441,28 +440,28 @@
 
 // Returns a list of turfs from which a field will propagate. If multi-Z mode is enabled, this will return a "column" of turfs above and below the generator.
 /obj/machinery/power/shield_generator/proc/get_base_turfs()
-	var/list/turfs = list()
+	. = list()
 	var/turf/T = get_turf(src)
 
 	if(!istype(T))
 		return
 
-	turfs.Add(T)
+	. += T
 
 	// Multi-Z mode is disabled
 	if(!check_flag(MODEFLAG_MULTIZ))
-		return turfs
+		return .
 
 	while(HasAbove(T.z))
 		T = GetAbove(T)
 		if(istype(T))
-			turfs.Add(T)
+			. += T
 
 	T = get_turf(src)
 
 	while(HasBelow(T.z))
 		T = GetBelow(T)
 		if(istype(T))
-			turfs.Add(T)
+			. += T
 
-	return turfs
+	return .

@@ -70,8 +70,9 @@ var/global/list/narsie_list = list()
 		mezzer()
 
 /obj/singularity/narsie/large/eat()
-	for (var/turf/A in orange(consume_range, src))
+	for (var/turf/A in otrange(consume_range, src))
 		consume(A)
+		CHECK_TICK
 
 /obj/singularity/narsie/mezzer()
 	for(var/mob/living/carbon/M in oviewers(8, src))
@@ -81,6 +82,7 @@ var/global/list/narsie_list = list()
 			if(!iscultist(M))
 				to_chat(M, "<span class='danger'> You feel your sanity crumble away in an instant as you gaze upon [src.name]...</span>")
 				M.apply_effect(3, STUN)
+		CHECK_TICK
 
 
 /obj/singularity/narsie/large/Bump(atom/A)

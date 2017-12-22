@@ -910,6 +910,13 @@
 	icon_state = "vox_longquills"
 	species_allowed = list(SPECIES_VOX)
 
+	// Apollo-specific
+		//Wryn antennae
+/datum/sprite_accessory/hair/wry_antennae_default
+	name = "Antennae"
+	icon_state = "wryn_antennae"
+	species_allowed = list(SPECIES_WRYN)
+
 //facial hair
 
 /datum/sprite_accessory/facial_hair/taj_sideburns

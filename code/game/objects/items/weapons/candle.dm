@@ -45,6 +45,7 @@
 /obj/item/weapon/flame/candle/proc/light(var/flavor_text = "<span class='notice'>\The [usr] lights the [name].</span>")
 	if(!src.lit)
 		src.lit = 1
+		update_icon()
 		//src.damtype = "fire"
 		for(var/mob/O in viewers(usr, null))
 			O.show_message(flavor_text, 1)
@@ -59,7 +60,6 @@
 	if(!wax)
 		new/obj/item/trash/candle(src.loc)
 		qdel(src)
-	update_icon()
 	if(istype(loc, /turf)) //start a fire if possible
 		var/turf/T = loc
 		T.hotspot_expose(700, 5)

@@ -23,9 +23,9 @@
 	var/ideal_character_age = 30
 	var/create_record = 1                 // Do we announce/make records for people who spawn on this job?
 
-	var/account_allowed = 1               // Does this job type come with a station account?
-	var/economic_modifier = 2             // With how much does this job modify the initial account amount?
-
+	var/account_allowed = 1				  // Does this job type come with a station account?
+	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
+	var/base_pay = 12 					  // Always minimum wage at all times. Also base = 1 hr, paychecks calculate base * 4
 	var/outfit_type                       // The outfit the employee will be dressed in, if any
 
 	var/loadout_allowed = TRUE            // Whether or not loadout equipment is allowed and to be created when joining.
@@ -169,18 +169,18 @@
  *  branch_name - String key for the branch to check
  */
 /datum/job/proc/is_branch_allowed(var/branch_name)
-	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
+	if(!GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
 		return 1
-	if(branch_name == "None")
+	if(branch_name == "None" || !branch_name)
 		return 0
 
-	var/datum/mil_branch/branch = mil_branches.get_branch(branch_name)
-
-	if(!branch)
-		crash_with("unknown branch \"[branch_name]\" passed to is_branch_allowed()")
+	if(branch_name == department)
+		return 1
+	else
 		return 0
 
-	if(is_type_in_list(branch, allowed_branches))
+/datum/job/proc/is_valid_department(var/dept_flag)
+	if(dept_flag == department_flag || dept_flag == department)
 		return 1
 	else
 		return 0
@@ -228,3 +228,39 @@
 			continue
 		res += initial(R.name)
 	return english_list(res)
+
+/proc/get_department(var/department_flag, var/bit)
+	if(!department_flag) return null
+	switch(bit)
+		if(1)
+			switch(department_flag)
+				if(COM)
+					return "Command"
+				if(SEC)
+					return "Security"
+				if(SCI)
+					return "Science"
+				if(ENG)
+					return "Engineering"
+				if(SRV)
+					return "Service"
+				if(CIV)
+					return "Civilian"
+				if(MED)
+					return "Medical"
+		if(0)
+			switch(department_flag)
+				if("Command")
+					return COM
+				if("Security")
+					return SEC
+				if("Science")
+					return SCI
+				if("Engineering")
+					return ENG
+				if("Service")
+					return SRV
+				if("Civilian")
+					return CIV
+				if("Medical")
+					return MED

@@ -11,8 +11,8 @@ var/list/z_levels = list()// Each bit re... haha just kidding this is a list of 
 		z_levels[i] = TRUE
 
 /obj/effect/landmark/map_data/Initialize()
-	..()
-	return INITIALIZE_HINT_QDEL
+    . = ..()
+    return INITIALIZE_HINT_QDEL
 
 /proc/HasAbove(var/z)
 	if(z >= world.maxz || z < 1 || z > z_levels.len)

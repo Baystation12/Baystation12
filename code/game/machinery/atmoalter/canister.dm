@@ -187,7 +187,7 @@ update_flag
 		src.destroyed = 1
 		playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
 		src.set_density(0)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 		if (src.holding)
 			src.holding.dropInto(loc)
@@ -199,7 +199,7 @@ update_flag
 
 /obj/machinery/portable_atmospherics/canister/Process()
 	if (destroyed)
-		return
+		return PROCESS_KILL
 
 	..()
 
@@ -219,7 +219,7 @@ update_flag
 
 			var/returnval = pump_gas_passive(src, air_contents, environment, transfer_moles)
 			if(returnval >= 0)
-				src.update_icon()
+				ADD_ICON_QUEUE(src)
 
 	if(air_contents.return_pressure() < 1)
 		can_label = 1
@@ -371,14 +371,14 @@ update_flag
 	..()
 
 	src.air_contents.adjust_gas("phoron", MolesForPressure())
-	src.update_icon()
+	ADD_ICON_QUEUE(src)
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/oxygen/New()
 	..()
 
 	src.air_contents.adjust_gas("oxygen", MolesForPressure())
-	src.update_icon()
+	ADD_ICON_QUEUE(src)
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/hydrogen/New()
@@ -390,14 +390,14 @@ update_flag
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled/New()
 	..()
 	src.air_contents.temperature = 80
-	src.update_icon()
+	ADD_ICON_QUEUE(src)
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/sleeping_agent/New()
 	..()
 
 	air_contents.adjust_gas("sleeping_agent", MolesForPressure())
-	src.update_icon()
+	ADD_ICON_QUEUE(src)
 	return 1
 
 //Dirty way to fill room with gas. However it is a bit easier to do than creating some floor/engine/n2o -rastaf0
@@ -416,19 +416,19 @@ update_flag
 /obj/machinery/portable_atmospherics/canister/nitrogen/New()
 	..()
 	src.air_contents.adjust_gas("nitrogen", MolesForPressure())
-	src.update_icon()
+	update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/nitrogen/prechilled/New()
 	..()
 	src.air_contents.temperature = 80
-	src.update_icon()
+	update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/New()
 	..()
 	src.air_contents.adjust_gas("carbon_dioxide", MolesForPressure())
-	src.update_icon()
+	update_icon()
 	return 1
 
 
@@ -437,7 +437,7 @@ update_flag
 	var/list/air_mix = StandardAirMix()
 	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
 
-	src.update_icon()
+	update_icon()
 	return 1
 
 
@@ -446,17 +446,17 @@ update_flag
 /obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup/New()
 	..()
 	src.air_contents.adjust_gas("nitrogen", MolesForPressure())
-	src.update_icon()
+	update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup/New()
 	..()
 	src.air_contents.adjust_gas("carbon_dioxide", MolesForPressure())
-	src.update_icon()
+	update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/phoron/engine_setup/New()
 	..()
 	src.air_contents.adjust_gas("phoron", MolesForPressure())
-	src.update_icon()
+	update_icon()
 	return 1

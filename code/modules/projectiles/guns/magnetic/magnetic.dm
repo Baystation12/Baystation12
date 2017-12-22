@@ -24,7 +24,7 @@
 	START_PROCESSING(SSobj, src)
 	if(capacitor)
 		power_per_tick = (power_cost*0.15) * capacitor.rating
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	. = ..()
 
 /obj/item/weapon/gun/magnetic/Destroy()
@@ -41,25 +41,25 @@
 				capacitor.charge(power_per_tick)
 		else
 			capacitor.use(capacitor.charge * 0.05)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/item/weapon/gun/magnetic/update_icon()
-	var/list/overlays_to_add = list()
+	. = list()
 	if(removable_components)
 		if(cell)
-			overlays_to_add += image(icon, "[icon_state]_cell")
+			. += image(icon, "[icon_state]_cell")
 		if(capacitor)
-			overlays_to_add += image(icon, "[icon_state]_capacitor")
+			. += image(icon, "[icon_state]_capacitor")
 	if(!cell || !capacitor)
-		overlays_to_add += image(icon, "[icon_state]_red")
+		. += image(icon, "[icon_state]_red")
 	else if(capacitor.charge < power_cost)
-		overlays_to_add += image(icon, "[icon_state]_amber")
+		. += image(icon, "[icon_state]_amber")
 	else
-		overlays_to_add += image(icon, "[icon_state]_green")
+		. += image(icon, "[icon_state]_green")
 	if(loaded)
-		overlays_to_add += image(icon, "[icon_state]_loaded")
+		. += image(icon, "[icon_state]_loaded")
 
-	overlays = overlays_to_add
+	overlays = .
 	..()
 
 /obj/item/weapon/gun/magnetic/proc/show_ammo(var/mob/user)

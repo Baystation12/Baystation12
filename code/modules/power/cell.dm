@@ -15,6 +15,7 @@
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
 	var/overlay_state
+	var/global/list/overlay_cache = list()
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 
@@ -26,7 +27,10 @@
 
 /obj/item/weapon/cell/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
+	if(!overlay_cache.len)
+		overlay_cache["cell-o2"] = image('icons/obj/power.dmi', "cell-o2")
+		overlay_cache["cell-o1"] = image('icons/obj/power.dmi', "cell-o1")
 
 /obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/power = 0)
 
@@ -50,9 +54,9 @@
 
 	if(new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
-		overlays.Cut()
+		overlays.len = 0
 		if(overlay_state)
-			overlays += image('icons/obj/power.dmi', overlay_state)
+			overlays += overlay_cache["[overlay_state]"]
 
 /obj/item/weapon/cell/proc/percent()		// return % charge of cell
 	return maxcharge && (100.0*charge/maxcharge)
@@ -68,7 +72,7 @@
 /obj/item/weapon/cell/proc/use(var/amount)
 	var/used = min(charge, amount)
 	charge -= used
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return used
 
 // Checks if the specified amount can be provided. If it can, it removes the amount
@@ -83,7 +87,7 @@
 	if(maxcharge < amount)	return 0
 	var/amount_used = min(maxcharge-charge,amount)
 	charge += amount_used
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	return amount_used
 
 /obj/item/weapon/cell/examine(mob/user)
@@ -175,7 +179,7 @@
 	name = "APC power cell"
 	desc = "A special power cell designed for heavy-duty use in area power controllers."
 	origin_tech = list(TECH_POWER = 1)
-	maxcharge = 500
+	maxcharge = 600
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 

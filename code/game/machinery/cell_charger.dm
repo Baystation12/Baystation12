@@ -46,10 +46,7 @@
 			to_chat(user, "<span class='warning'>There is already a cell in the charger.</span>")
 			return
 		else
-			var/area/a = loc.loc // Gets our locations location, like a dream within a dream
-			if(!isarea(a))
-				return
-			if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
+			if(MyArea.power_equip == 0) // There's no APC in this area, don't try to cheat power!
 				to_chat(user, "<span class='warning'>The [name] blinks red as you try to insert the cell!</span>")
 				return
 
@@ -103,13 +100,13 @@
 //	log_debug("ccpt [charging] [stat]")
 
 	if((stat & (BROKEN|NOPOWER)) || !anchored)
-		update_use_power(0)
+		update_use_power(src, 0)
 		return
 
 	if (charging && !charging.fully_charged())
 		charging.give(active_power_usage*CELLRATE)
-		update_use_power(2)
+		update_use_power(src, 2)
 
-		update_icon()
+		ADD_ICON_QUEUE(src)
 	else
-		update_use_power(1)
+		update_use_power(src, 1)

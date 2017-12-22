@@ -27,7 +27,7 @@ Small, little HP, poisonous.
 	faction = SPECIES_VOX
 
 /mob/living/simple_animal/hostile/voxslug/ListTargets(var/dist = 7)
-	var/list/L = list()
+	. = list()
 	for(var/a in hearers(src, dist))
 		if(istype(a,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = a
@@ -37,13 +37,13 @@ Small, little HP, poisonous.
 			var/mob/living/M = a
 			if(M.faction == faction)
 				continue
-		L += a
+		. += a
 
 	for (var/obj/mecha/M in mechas_list)
 		if (M.z == src.z && get_dist(src, M) <= dist)
-			L += M
+			. += M
 
-	return L
+	return .
 
 /mob/living/simple_animal/hostile/voxslug/get_scooped(var/mob/living/carbon/grabber)
 	if(grabber.species.get_bodytype() != SPECIES_VOX)

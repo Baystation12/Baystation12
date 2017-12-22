@@ -54,6 +54,7 @@
 			map[check_cell] = EMPTY_CHAR // Rare mineral block.
 			empty_count += 1
 		ore_count--
+		CHECK_TICK2(95)
 
 	game_log("ASGEN", "Set [door_count] turfs to random minerals.")
 	game_log("ASGEN", "Set [empty_count] turfs to high-chance random minerals.")

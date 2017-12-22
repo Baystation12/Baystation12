@@ -26,6 +26,8 @@
 	var/is_stealthed = C.is_stealthed()
 
 	var/ooc_style = "everyone"
+	if(C.donator)
+		ooc_style = "donator"
 	if(holder && !is_stealthed)
 		ooc_style = "elevated"
 		if(holder.rights & R_MOD)

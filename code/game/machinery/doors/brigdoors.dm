@@ -27,6 +27,7 @@
 	var/picture_state		// icon_state of alert picture, if not displaying text/numbers
 	var/list/obj/machinery/targets = list()
 	var/timetoset = 0		// Used to set releasetime upon starting the timer
+	var/next_cycle = 0
 
 	maptext_height = 26
 	maptext_width = 32
@@ -50,7 +51,7 @@
 
 	if(targets.len==0)
 		stat |= BROKEN
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 //Main door timer loop, if it's timing and time is >0 reduce time by 1.
 // if it's less than 0, open door, reset timer
@@ -71,11 +72,15 @@
 			src.timer_end() // open doors, reset timer, clear status screen
 			src.timing = 0
 
-		src.update_icon()
+		ADD_ICON_QUEUE(src)
 
 	else
-		timer_end()
-
+		if(world.time < next_cycle)
+			return
+		else
+			if(!timing) //Low-processing state.
+				next_cycle = world.time + 10 SECONDS
+				timer_end()
 	return
 
 
@@ -153,12 +158,12 @@
 	tg_ui_interact(user)
 
 /obj/machinery/door_timer/ui_data(mob/user)
-	var/list/data = list()
+	. = list()
 
-	data["timing"] = timing
-	data["releasetime"] = releasetime
-	data["timetoset"] = timetoset
-	data["timeleft"] = timeleft()
+	.["timing"] = timing
+	.["releasetime"] = releasetime
+	.["timetoset"] = timetoset
+	.["timeleft"] = timeleft()
 
 	var/list/flashes = list()
 
@@ -170,8 +175,8 @@
 			flashdata["status"] = 1
 		flashes[++flashes.len] = flashdata
 
-	data["flashes"] = flashes
-	return data
+	.["flashes"] = flashes
+	return .
 
 
 /obj/machinery/door_timer/ui_act(action, params)

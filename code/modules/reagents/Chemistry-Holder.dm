@@ -7,6 +7,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	var/atom/my_atom = null
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
+	if(!my_atom)	return
 	if(!istype(my_atom))
 		CRASH("Invalid reagents holder: [log_info_line(my_atom)]")
 	..()

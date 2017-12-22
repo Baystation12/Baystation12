@@ -20,7 +20,9 @@ var/list/solars_list = list()
 	var/adir = SOUTH // actual dir
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
+	var/next_process_time = 0
 	var/obj/machinery/power/solar_control/control = null
+	var/global/list/status_overlays
 
 /obj/machinery/power/solar/drain_power()
 	return -1
@@ -55,7 +57,7 @@ var/list/solars_list = list()
 	S.loc = src
 	if(S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
 		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 
@@ -89,11 +91,17 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar/update_icon()
 	..()
+	if (!status_overlays)
+		status_overlays = new/list()
+		status_overlays.len = 2
+		status_overlays[1] = image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = FLY_LAYER)
+		status_overlays[2] = image('icons/obj/power.dmi', icon_state = "solar_panel", layer = FLY_LAYER)
+
 	overlays.Cut()
 	if(stat & BROKEN)
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = FLY_LAYER)
+		overlays += status_overlays[1]
 	else
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = FLY_LAYER)
+		overlays += status_overlays[2]
 		src.set_dir(angle2dir(adir))
 	return
 
@@ -120,8 +128,9 @@ var/list/solars_list = list()
 		return
 	if(!GLOB.sun || !control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
 		return
-
-	if(powernet)
+	if(obscured)
+		next_process_time = world.time + 150 // 15 second delay because obscured any way
+	if(powernet && next_process_time <= world.time)
 		if(powernet == control.powernet)//check if the panel is still connected to the computer
 			if(obscured) //get no light from the sun, so don't generate power
 				return
@@ -139,7 +148,7 @@ var/list/solars_list = list()
 	var/obj/item/solar_assembly/S = locate() in src
 	S.glass_type = null
 	unset_control()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 /obj/machinery/power/solar/ex_act(severity)
@@ -499,9 +508,9 @@ var/list/solars_list = list()
 	for(var/obj/machinery/power/solar/S in connected_panels)
 		S.adir = cdir //instantly rotates the panel
 		S.occlusion()//and
-		S.update_icon() //update it
+		ADD_ICON_QUEUE(S) //update it
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 /obj/machinery/power/solar_control/proc/broken()

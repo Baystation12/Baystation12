@@ -76,13 +76,13 @@
 	if(!powernet)
 		return
 
-	var/list/L = list()
+	. = list()
 	for(var/obj/machinery/power/terminal/term in powernet.nodes)
 		if(istype(term.master, /obj/machinery/power/apc))
 			var/obj/machinery/power/apc/A = term.master
-			L += A
+			. += A
 
-	return L
+	return .
 
 
 // Proc: return_reading_text()

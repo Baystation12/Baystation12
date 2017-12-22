@@ -33,6 +33,8 @@
 
 /atom/proc/update_light()
 	set waitfor = FALSE
+	if(QDELETED(src))
+		return
 
 	if(!light_power || !light_range)
 		if(light)

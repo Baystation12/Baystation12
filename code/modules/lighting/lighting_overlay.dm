@@ -17,6 +17,7 @@
 	var/lum_b = 0
 
 	var/needs_update = FALSE
+	var/turf/myturf
 
 /atom/movable/lighting_overlay/Initialize()
 	// doesn't need special init
@@ -24,14 +25,15 @@
 	return INITIALIZE_HINT_NORMAL
 
 /atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
-	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays outside of turfs.
-	if(T.dynamic_lighting)
+	myturf = loc //If this runtimes atleast we'll know what's creating overlays outside of turfs.
+	if(myturf.dynamic_lighting)
 		. = ..()
 		verbs.Cut()
 		total_lighting_overlays++
-
-		T.lighting_overlay = src
-		T.luminosity = 0
+		if (myturf.lighting_overlay)
+			qdel(myturf.lighting_overlay)
+		myturf.lighting_overlay = src
+		myturf.luminosity = 0
 		if(no_update)
 			return
 		update_overlay()
@@ -40,16 +42,18 @@
 
 /atom/movable/lighting_overlay/proc/update_overlay()
 	set waitfor = FALSE
-	var/turf/T = loc
-
+	if (loc != myturf || !isturf(loc))
+		qdel(src, TRUE)
+		return
+/*
 	if(!istype(T))
 		if(loc)
 			log_debug("A lighting overlay realised its loc was NOT a turf (actual loc: [loc][loc ? ", " + loc.type : "null"]) in update_overlay() and got qdel'ed!")
 		else
 			log_debug("A lighting overlay realised it was in nullspace in update_overlay() and got pooled!")
 		qdel(src)
-		return
-	if(!T.dynamic_lighting)
+		return*/
+	if(!myturf.dynamic_lighting)
 		qdel(src)
 		return
 
@@ -63,10 +67,10 @@
 
 	// See LIGHTING_CORNER_DIAGONAL in lighting_corner.dm for why these values are what they are.
 	// No I seriously cannot think of a more efficient method, fuck off Comic.
-	var/datum/lighting_corner/cr = T.corners[3] || dummy_lighting_corner
-	var/datum/lighting_corner/cg = T.corners[2] || dummy_lighting_corner
-	var/datum/lighting_corner/cb = T.corners[4] || dummy_lighting_corner
-	var/datum/lighting_corner/ca = T.corners[1] || dummy_lighting_corner
+	var/datum/lighting_corner/cr = myturf.corners[3] || dummy_lighting_corner
+	var/datum/lighting_corner/cg = myturf.corners[2] || dummy_lighting_corner
+	var/datum/lighting_corner/cb = myturf.corners[4] || dummy_lighting_corner
+	var/datum/lighting_corner/ca = myturf.corners[1] || dummy_lighting_corner
 
 	var/max = max(cr.cache_mx, cg.cache_mx, cb.cache_mx, ca.cache_mx)
 
@@ -125,11 +129,14 @@
 	global.lighting_update_overlays     -= src
 	global.lighting_update_overlays_old -= src
 
-	var/turf/T = loc
-	if(istype(T))
-		T.lighting_overlay = null
+	if (loc != myturf)
+		warning("A lighting object was qdeleted with a different loc then it is suppose to have (REDAC -> REDAC)")
+	if (isturf(myturf))
+		myturf.lighting_overlay = null
+		myturf.luminosity = 1
+	myturf = null
 
-	. = ..()
+	return . = ..()
 
 /atom/movable/lighting_overlay/forceMove()
 	return 0 //should never move

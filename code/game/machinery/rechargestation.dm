@@ -20,9 +20,10 @@
 
 	var/weld_power_use = 2300	// power used per point of brute damage repaired. 2.3 kW ~ about the same power usage of a handheld arc welder
 	var/wire_power_use = 500	// power used per point of burn damage repaired.
+	special_power_checks = TRUE
 
-/obj/machinery/recharge_station/New()
-	..()
+/obj/machinery/recharge_station/Initialize()
+	. = ..()
 
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/recharge_station(src)
@@ -35,7 +36,7 @@
 
 	RefreshParts()
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/recharge_station/proc/has_cell_power()
 	return cell && cell.percent() > 0
@@ -49,7 +50,7 @@
 	if((stat & NOPOWER) && !has_cell_power()) // No power and cell is dead.
 		if(icon_update_tick)
 			icon_update_tick = 0 //just rebuild the overlay once more only
-			update_icon()
+			ADD_ICON_QUEUE(src)
 		return
 
 	//First, draw from the internal power cell to recharge/repair/etc the occupant
@@ -71,7 +72,7 @@
 		icon_update_tick++
 
 	if(occupant || recharge_amount)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 //since the recharge station can still be on even with NOPOWER. Instead it draws from the internal cell.
 /obj/machinery/recharge_station/auto_use_power()

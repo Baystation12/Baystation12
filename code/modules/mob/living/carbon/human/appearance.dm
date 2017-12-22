@@ -138,7 +138,7 @@
 	dna.ready_dna(src)
 
 /mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
-	var/list/valid_species = new()
+	. = list()
 	for(var/current_species_name in all_species)
 		var/datum/species/current_species = all_species[current_species_name]
 
@@ -152,9 +152,9 @@
 		if(blacklist.len && (current_species_name in blacklist))
 			continue
 
-		valid_species += current_species_name
+		. += current_species_name
 
-	return valid_species
+	return .
 
 /mob/living/carbon/human/proc/generate_valid_hairstyles(var/check_gender = 1)
 
@@ -162,7 +162,7 @@
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
 	if(H) use_species = H.species.get_bodytype(src)
 
-	var/list/valid_hairstyles = new()
+	. = list()
 	for(var/hairstyle in hair_styles_list)
 		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
 
@@ -174,9 +174,9 @@
 
 		if(!(use_species in S.species_allowed))
 			continue
-		valid_hairstyles += hairstyle
+		. += hairstyle
 
-	return valid_hairstyles
+	return .
 
 /mob/living/carbon/human/proc/generate_valid_facial_hairstyles()
 
@@ -184,7 +184,7 @@
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
 	if(H) use_species = H.species.get_bodytype(src)
 
-	var/list/valid_facial_hairstyles = new()
+	. = list()
 	for(var/facialhairstyle in facial_hair_styles_list)
 		var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
 
@@ -197,9 +197,9 @@
 		if(!(use_species in S.species_allowed))
 			continue
 
-		valid_facial_hairstyles += facialhairstyle
+		. += facialhairstyle
 
-	return valid_facial_hairstyles
+	return .
 
 /mob/living/carbon/human/proc/force_update_limbs()
 	for(var/obj/item/organ/external/O in organs)

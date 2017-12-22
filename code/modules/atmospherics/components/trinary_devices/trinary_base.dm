@@ -94,7 +94,7 @@ obj/machinery/atmospherics/trinary
 					node3 = target
 					break
 
-		update_icon()
+		ADD_ICON_QUEUE(src)
 		update_underlays()
 
 	build_network()
@@ -139,16 +139,16 @@ obj/machinery/atmospherics/trinary
 		return 1
 
 	return_network_air(datum/pipe_network/reference)
-		var/list/results = list()
+		. = list()
 
 		if(network1 == reference)
-			results += air1
+			. += air1
 		if(network2 == reference)
-			results += air2
+			. += air2
 		if(network3 == reference)
-			results += air3
+			. += air3
 
-		return results
+		return .
 
 	disconnect(obj/machinery/atmospherics/reference)
 		if(reference==node1)

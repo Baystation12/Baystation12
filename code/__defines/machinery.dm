@@ -105,3 +105,16 @@ var/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,"Secret
 #define SUPERMATTER_DANGER 4		// Integrity < 50%
 #define SUPERMATTER_EMERGENCY 5		// Integrity < 25%
 #define SUPERMATTER_DELAMINATING 6	// Pretty obvious.
+
+// Misc process flags.
+#define M_PROCESSES 0x1
+#define M_USES_POWER 0x2
+
+// If this is returned from a machine's process() proc, the machine will stop processing but
+// will continue to have power calculations done.
+
+#define update_use_power(Machine, new_power)            \
+	if(Machine)               \
+	{                          \
+		Machine.use_power = new_power             \
+	}

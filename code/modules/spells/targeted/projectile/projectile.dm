@@ -42,12 +42,12 @@ If the spell_projectile is seeking, it will update its target every process and 
 	return
 
 /spell/targeted/projectile/proc/choose_prox_targets(mob/user = usr, var/atom/movable/spell_holder)
-	var/list/targets = list()
+	. = list()
 	for(var/mob/living/M in range(spell_holder, cast_prox_range))
 		if(M == user && !(spell_flags & INCLUDEUSER))
 			continue
-		targets += M
-	return targets
+		. += M
+	return .
 
 /spell/targeted/projectile/proc/prox_cast(var/list/targets, var/atom/movable/spell_holder)
 	return targets

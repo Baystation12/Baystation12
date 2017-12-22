@@ -31,21 +31,22 @@
 		return 0
 
 	var/env_pressure = environment.return_pressure()
-	if(env_pressure <= 0.15*ONE_ATMOSPHERE)
-		icon_state = "meter0"
-	else if(env_pressure <= 1.8*ONE_ATMOSPHERE)
-		var/val = round(env_pressure/(ONE_ATMOSPHERE*0.3) + 0.5)
-		icon_state = "meter1_[val]"
-	else if(env_pressure <= 30*ONE_ATMOSPHERE)
-		var/val = round(env_pressure/(ONE_ATMOSPHERE*5)-0.35) + 1
-		icon_state = "meter2_[val]"
-	else if(env_pressure <= 59*ONE_ATMOSPHERE)
-		var/val = round(env_pressure/(ONE_ATMOSPHERE*5) - 6) + 1
-		icon_state = "meter3_[val]"
-	else
-		icon_state = "meter4"
+	switch(env_pressure)
+		if(0 to 0.15*ONE_ATMOSPHERE)
+			icon_state = "meter0"
+		if(0.15 to 1.8*ONE_ATMOSPHERE)
+			var/val = round(env_pressure/(ONE_ATMOSPHERE*0.3) + 0.5)
+			icon_state = "meter1_[val]"
+		if(1.8 to 30*ONE_ATMOSPHERE)
+			var/val = round(env_pressure/(ONE_ATMOSPHERE*5)-0.35) + 1
+			icon_state = "meter2_[val]"
+		if(30 to 59*ONE_ATMOSPHERE)
+			var/val = round(env_pressure/(ONE_ATMOSPHERE*5) - 6) + 1
+			icon_state = "meter3_[val]"
+		else
+			icon_state = "meter4"
 
-	if(frequency)
+	if(id && frequency)
 		var/datum/radio_frequency/radio_connection = radio_controller.return_frequency(frequency)
 
 		if(!radio_connection) return
@@ -102,11 +103,6 @@
 		qdel(src)
 
 // TURF METER - REPORTS A TILE'S AIR CONTENTS
-
-/obj/machinery/meter/turf/New()
-	..()
-	src.target = loc
-	return 1
 
 
 /obj/machinery/meter/turf/Initialize()

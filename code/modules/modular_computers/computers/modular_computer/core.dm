@@ -60,7 +60,7 @@
 	install_default_hardware()
 	if(hard_drive)
 		install_default_programs()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update_verbs()
 	..()
 

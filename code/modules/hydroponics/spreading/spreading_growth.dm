@@ -72,7 +72,6 @@
 			return
 
 	var/turf/simulated/T = get_turf(src)
-
 	if(grow)
 		// Handle life.
 		if(istype(T))
@@ -138,7 +137,7 @@
 		child.anchored = 0
 		child.Move(target_turf)
 		child.anchored = 1
-		child.update_icon()
+		ADD_ICON_QUEUE(child)
 
 		//see if anything is there
 		for(var/thing in child.loc)

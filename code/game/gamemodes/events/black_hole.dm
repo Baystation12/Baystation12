@@ -25,7 +25,7 @@
 		for(var/obj/O in orange(1,src))
 			qdel(O)
 		var/base_turf = get_base_turf_by_area(src)
-		for(var/turf/simulated/ST in orange(1,src))
+		for(var/turf/simulated/ST in otrange(1,src))
 			if(ST.type == base_turf)
 				continue
 			ST.ChangeTurf(base_turf)

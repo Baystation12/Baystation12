@@ -80,8 +80,8 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
 
-/obj/item/weapon/gun/New()
-	..()
+/obj/item/weapon/gun/Initialize()
+	. = ..()
 	for(var/i in 1 to firemodes.len)
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
 
@@ -173,7 +173,12 @@
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
-
+/*	var/mob/living/special_mobs/rexus/R in view()
+	if(R)
+		R.gunshots++
+		R.people["[user.real_name]"]
+		user.
+*/
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
 	user.setMoveCooldown(shoot_time) //no moving while shooting either
@@ -274,8 +279,7 @@
 					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
 	if(screen_shake)
-		spawn()
-			shake_camera(user, screen_shake+1, screen_shake)
+		shake_camera(user, screen_shake+1, screen_shake)
 	update_icon()
 
 

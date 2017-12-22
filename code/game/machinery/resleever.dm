@@ -26,8 +26,8 @@
 	var/occupant_name = null // Put in seperate var to prevent runtime.
 	var/lace_name = null
 
-/obj/machinery/resleever/New()
-	..()
+/obj/machinery/resleever/Initialize()
+	. = ..()
 	component_parts = list()
 	component_parts += new /obj/item/stack/cable_coil(src, 2)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
@@ -35,7 +35,7 @@
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 
 	RefreshParts()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/resleever/Destroy()
 	eject_occupant()
@@ -48,10 +48,10 @@ obj/machinery/resleever/Process()
 	if(occupant)
 		occupant.Paralyse(4) // We need to always keep the occupant sleeping if they're in here.
 	if(stat & (NOPOWER|BROKEN) || !anchored)
-		update_use_power(0)
+		update_use_power(src, 0)
 		return
 	if(resleeving)
-		update_use_power(2)
+		update_use_power(src, 2)
 		if(remaining < timetosleeve)
 			remaining += 1
 
@@ -60,12 +60,12 @@ obj/machinery/resleever/Process()
 		else
 			remaining = 0
 			resleeving = 0
-			update_use_power(1)
+			update_use_power(src, 1)
 			eject_occupant()
 			playsound(loc, 'sound/machines/ping.ogg', 100, 1)
 			visible_message("\The [src] pings as it completes its procedure!", 3)
 			return
-	update_use_power(0)
+	update_use_power(src, 0)
 	return
 
 /obj/machinery/resleever/proc/isOccupiedEjectable()
@@ -115,7 +115,7 @@ obj/machinery/resleever/Process()
 		ui.open()
 
 /obj/machinery/resleever/ui_data()
-	var/list/data = list(
+	. = list(
 		"name" = occupant_name,
 		"lace" = lace_name,
 		"isOccupiedEjectable" = isOccupiedEjectable(),
@@ -126,7 +126,7 @@ obj/machinery/resleever/Process()
 		"ready" = readyToBegin()
 	)
 
-	return data
+	return .
 
 /obj/machinery/resleever/ui_act(action, params)
 	if(..())

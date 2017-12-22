@@ -118,8 +118,8 @@
 	max_w_class = ITEM_SIZE_SMALL
 	use_to_pickup = 1
 
-/obj/item/weapon/storage/excavation/New()
-	..()
+/obj/item/weapon/storage/excavation/Initialize()
+	. = ..()
 	new /obj/item/weapon/pickaxe/brush(src)
 	new /obj/item/weapon/pickaxe/one_pick(src)
 	new /obj/item/weapon/pickaxe/two_pick(src)

@@ -30,6 +30,26 @@
 
 	return 0
 
+/datum/language/wryn
+	name = "Wryn Hivemind"
+	desc = "Wryn have the strange ability to commune over a psychic hivemind."
+	speech_verb = "chitters"
+	ask_verb = "chitters"
+	exclaim_verb = "chitters"
+	colour = "alien"
+	key = "y"
+	flags = RESTRICTED | HIVEMIND
+
+/datum/language/wryn/check_special_condition(var/mob/other)
+
+	var/mob/living/carbon/M = other
+	if(!istype(M))
+		return 1
+	if(locate(/obj/item/organ/wryn/hivenode) in M.internal_organs)
+		return 1
+
+	return 0
+
 /datum/language/ling
 	name = "Changeling"
 	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."

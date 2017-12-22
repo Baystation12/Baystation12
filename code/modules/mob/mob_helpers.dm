@@ -410,11 +410,11 @@ proc/is_blind(A)
 			M.show_message("<span class='info'>\icon[icon] [message]</span>", 1)
 
 /proc/mobs_in_area(var/area/A)
-	var/list/mobs = new
+	. = list()
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(get_area(M) == A)
-			mobs += M
-	return mobs
+			. += M
+	return .
 
 //Announces that a ghost has joined/left, mainly for use with wizards
 /proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")
@@ -564,8 +564,8 @@ proc/is_blind(A)
 /proc/get_both_hands(mob/living/carbon/M)
 	if(!istype(M))
 		return
-	var/list/hands = list(M.l_hand, M.r_hand)
-	return hands
+	. = list(M.l_hand, M.r_hand)
+	return .
 
 /mob/proc/refresh_client_images()
 	if(client)
@@ -602,6 +602,14 @@ proc/is_blind(A)
 
 /mob/proc/ssd_check()
 	return !client && !teleop
+
+
+/proc/isAdminGhost(A)
+	if(isobserver(A))
+		var/mob/observer/O = A
+		if(check_rights(R_ADMIN|R_FUN, 0, O))
+			return 1
+	return 0
 
 /mob/proc/jittery_damage()
 	return //Only for living/carbon/human/

@@ -327,8 +327,8 @@
 	if (com)
 		com.icon_state = "tele1"
 		use_power(5000)
-		update_use_power(2)
-		com.update_use_power(2)
+		update_use_power(src, 2)
+		update_use_power(com, 2)
 		for(var/mob/O in hearers(src, null))
 			O.show_message("<span class='notice'>Teleporter engaged!</span>", 2)
 	src.add_fingerprint(usr)
@@ -341,8 +341,8 @@
 
 	if (com)
 		com.icon_state = "tele0"
-		com.update_use_power(1)
-		update_use_power(1)
+		update_use_power(com, 1)
+		update_use_power(src, 1)
 		for(var/mob/O in hearers(src, null))
 			O.show_message("<span class='notice'>Teleporter disengaged!</span>", 2)
 	src.add_fingerprint(usr)

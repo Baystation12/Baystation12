@@ -63,10 +63,12 @@
 	return parent.return_network(reference)
 
 /obj/machinery/atmospherics/pipe/Destroy()
-	QDEL_NULL(parent)
+	if(parent)
+		qdel(parent)
+	parent = null
 	if(air_temporary)
 		loc.assume_air(air_temporary)
-
+	air_temporary = null
 	. = ..()
 
 /obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -314,7 +316,7 @@
 
 	var/turf/T = loc
 	if(level == 1 && !T.is_plating()) hide(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/simple/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)
@@ -596,7 +598,7 @@
 
 	var/turf/T = get_turf(src)
 	if(level == 1 && !T.is_plating()) hide(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold/visible
 	icon_state = "map"
@@ -861,7 +863,7 @@
 
 	var/turf/T = get_turf(src)
 	if(level == 1 && !T.is_plating()) hide(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible
 	icon_state = "map_4way"
@@ -1021,7 +1023,7 @@
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level == 1 && !T.is_plating()) hide(1)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/cap/visible
 	level = 2
@@ -1300,7 +1302,7 @@
 				node1 = target
 				break
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/atmospherics/pipe/vent/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)

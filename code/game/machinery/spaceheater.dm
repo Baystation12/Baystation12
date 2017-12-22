@@ -13,12 +13,13 @@
 	var/heating_power = 40 KILOWATTS
 	flags = OBJ_CLIMBABLE
 	clicksound = "switch"
+	special_power_checks = TRUE
 
 
-/obj/machinery/space_heater/New()
-	..()
+/obj/machinery/space_heater/Initialize()
+	. = ..()
 	cell = new/obj/item/weapon/cell/high(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/space_heater/update_icon(var/rebuild_overlay = 0)
 	if(!on)
@@ -190,8 +191,9 @@
 					active = heat_transfer
 
 				env.merge(removed)
+			ADD_ICON_QUEUE(src)
 		else
 			on = 0
 			active = 0
 			power_change()
-		update_icon()
+			ADD_ICON_QUEUE(src)

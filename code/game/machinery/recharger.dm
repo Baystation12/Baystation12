@@ -79,12 +79,12 @@ obj/machinery/recharger/attack_hand(mob/user as mob)
 
 obj/machinery/recharger/Process()
 	if(stat & (NOPOWER|BROKEN) || !anchored)
-		update_use_power(0)
+		update_use_power(src, 0)
 		icon_state = icon_state_idle
 		return
 
 	if(!charging)
-		update_use_power(1)
+		update_use_power(src, 1)
 		icon_state = icon_state_idle
 	else
 		var/cell = charging
@@ -118,10 +118,10 @@ obj/machinery/recharger/Process()
 			if(!C.fully_charged())
 				icon_state = icon_state_charging
 				C.give(active_power_usage*CELLRATE)
-				update_use_power(2)
+				update_use_power(src, 2)
 			else
 				icon_state = icon_state_charged
-				update_use_power(1)
+				update_use_power(src, 1)
 			return
 
 obj/machinery/recharger/emp_act(severity)

@@ -171,7 +171,6 @@ obj/item/device/suit_sensor_jammer/ui_act(action, params)
 			disable()
 	else
 		disable()
-	update_icon()
 
 /obj/item/device/suit_sensor_jammer/proc/enable()
 	if(active)

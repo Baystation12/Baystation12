@@ -74,9 +74,9 @@
 /obj/machinery/computer/message_monitor/Initialize()
 	//Is the server isn't linked to a server, and there's a server available, default it to the first one in the list.
 	if(!linkedServer)
-		if(message_servers && message_servers.len > 0)
-			linkedServer = message_servers[1]
-	return ..()
+		if(GLOB.message_servers && GLOB.message_servers.len > 0)
+			linkedServer = GLOB.message_servers[1]
+	return . = ..()
 
 /obj/machinery/computer/message_monitor/attack_hand(var/mob/living/user as mob)
 	if(stat & (NOPOWER|BROKEN))
@@ -508,8 +508,8 @@
 /obj/item/weapon/paper/monitorkey/New()
 	..()
 	spawn(10)
-		if(message_servers)
-			for(var/obj/machinery/message_server/server in message_servers)
+		if(GLOB.message_servers)
+			for(var/obj/machinery/message_server/server in GLOB.message_servers)
 				if(!isnull(server))
 					if(!isnull(server.decryptkey))
 						info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>This key is only intended for personnel granted access to the messaging server. Keep it safe.<br>If necessary, change the password to a more secure one."

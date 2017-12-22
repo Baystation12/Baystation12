@@ -37,11 +37,11 @@
 	var/list/receiver_reception = new
 
 /proc/get_message_server(z)
-	if(message_servers)
+	if(GLOB.message_servers)
 		var/list/zlevels = GLOB.using_map.contact_levels
 		if(z)
 			zlevels = GetConnectedZlevels(z)
-		for (var/obj/machinery/message_server/MS in message_servers)
+		for (var/obj/machinery/message_server/MS in GLOB.message_servers)
 			if(MS.active && (MS.z in zlevels))
 				return MS
 	return null

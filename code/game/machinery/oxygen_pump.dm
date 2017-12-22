@@ -88,7 +88,7 @@
 		if(tank)
 			tank.forceMove(C)
 		breather = C
-		spawn(1)
+		sleep(3)
 		if(!breather.internal && tank)
 			breather.internal = tank
 			if(breather.internals)

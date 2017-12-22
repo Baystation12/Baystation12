@@ -35,12 +35,12 @@ var/datum/antagonist/xenos/xenomorphs
 	if(config.aliens_allowed) ..()
 
 /datum/antagonist/xenos/proc/get_vents()
-	var/list/vents = list()
+	. = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in SSmachines.machinery)
 		if(!temp_vent.welded && temp_vent.network && (temp_vent.loc.z in GLOB.using_map.station_levels))
 			if(temp_vent.network.normal_members.len > 50)
-				vents += temp_vent
-	return vents
+				. += temp_vent
+	return .
 
 /datum/antagonist/xenos/create_objectives(var/datum/mind/player)
 	if(!..())

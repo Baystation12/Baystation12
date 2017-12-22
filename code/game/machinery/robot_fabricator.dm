@@ -115,7 +115,7 @@ Please wait until completion...</TT><BR>
 			if (!isnull(building))
 				if (src.metal_amount >= build_cost)
 					src.operating = 1
-					src.update_use_power(2)
+					update_use_power(src, 2)
 
 					src.metal_amount = max(0, src.metal_amount - build_cost)
 
@@ -128,7 +128,7 @@ Please wait until completion...</TT><BR>
 						if (!isnull(src.being_built))
 							src.being_built.loc = get_turf(src)
 							src.being_built = null
-						src.update_use_power(1)
+						update_use_power(src, 1)
 						src.operating = 0
 						src.overlays -= "fab-active"
 		return

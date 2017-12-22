@@ -86,7 +86,7 @@
 				node = target
 				break
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	update_underlays()
 
 /obj/machinery/atmospherics/portables_connector/build_network()
@@ -114,12 +114,12 @@
 	return 1
 
 /obj/machinery/atmospherics/portables_connector/return_network_air(datum/pipe_network/reference)
-	var/list/results = list()
+	. = list()
 
 	if(connected_device)
-		results += connected_device.air_contents
+		. += connected_device.air_contents
 
-	return results
+	return .
 
 /obj/machinery/atmospherics/portables_connector/disconnect(obj/machinery/atmospherics/reference)
 	if(reference==node)

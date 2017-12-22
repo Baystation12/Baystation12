@@ -10,7 +10,7 @@ obj/machinery/door/airlock
 
 obj/machinery/door/airlock/Process()
 	..()
-	if (arePowerSystemsOn())
+	if (arePowerSystemsOn() && cur_command)
 		execute_current_command()
 
 obj/machinery/door/airlock/receive_signal(datum/signal/signal)
@@ -31,9 +31,9 @@ obj/machinery/door/airlock/proc/command(var/new_command)
 obj/machinery/door/airlock/proc/execute_current_command()
 	if(operating)
 		return //emagged or busy doing something else
-
-	if (!cur_command)
-		return
+//	~L: Checked in Process()
+//	if (!cur_command)
+//		return
 
 	do_command(cur_command)
 	if (command_completed(cur_command))
@@ -132,23 +132,16 @@ obj/machinery/door/airlock/proc/set_frequency(new_frequency)
 		frequency = new_frequency
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
-
 obj/machinery/door/airlock/Initialize()
 	. = ..()
-	if(frequency)
+	if(frequency || radio_controller)
 		set_frequency(frequency)
 
 	//wireless connection
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 
-	update_icon()
-
-obj/machinery/door/airlock/New()
-	..()
-
-	if(radio_controller)
-		set_frequency(frequency)
+	ADD_ICON_QUEUE(src)
 
 obj/machinery/door/airlock/Destroy()
 	if(frequency && radio_controller)
@@ -210,7 +203,7 @@ obj/machinery/airlock_sensor/Process()
 
 			alert = (pressure < ONE_ATMOSPHERE*0.8)
 
-			update_icon()
+			ADD_ICON_QUEUE(src)
 
 obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)

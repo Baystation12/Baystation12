@@ -23,7 +23,7 @@
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/weapon/book))
 			I.forceMove(src)
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	. = ..()
 
 /obj/structure/bookcase/attackby(obj/O as obj, mob/user as mob)
@@ -97,20 +97,20 @@
 /obj/structure/bookcase/manuals/medical
 	name = "Medical Manuals bookcase"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		new /obj/item/weapon/book/manual/medical_cloning(src)
 		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
 		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
 		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 
 /obj/structure/bookcase/manuals/engineering
 	name = "Engineering Manuals bookcase"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		new /obj/item/weapon/book/manual/engineering_construction(src)
 		new /obj/item/weapon/book/manual/engineering_particle_accelerator(src)
 		new /obj/item/weapon/book/manual/engineering_hacking(src)
@@ -118,15 +118,15 @@
 		new /obj/item/weapon/book/manual/atmospipes(src)
 		new /obj/item/weapon/book/manual/engineering_singularity_safety(src)
 		new /obj/item/weapon/book/manual/evaguide(src)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 /obj/structure/bookcase/manuals/research_and_development
 	name = "R&D Manuals bookcase"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		new /obj/item/weapon/book/manual/research_and_development(src)
-		update_icon()
+		ADD_ICON_QUEUE(src)
 
 
 /*

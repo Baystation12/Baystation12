@@ -169,20 +169,20 @@
 // Parameters: None
 // Description: Returns a list of all unhacked APCs. APCs on station Zs are on top of the list.
 /proc/get_unhacked_apcs(var/mob/living/silicon/ai/user)
-	var/list/station_apcs = list()
+	. = list()
 	var/list/offstation_apcs = list()
 
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
 		if(A.hacker && A.hacker == user)
 			continue
 		if(A.z in GLOB.using_map.station_levels)
-			station_apcs.Add(A)
+			. += A
 		else
 			offstation_apcs.Add(A)
 
 	// Append off-station APCs to the end of station APCs list and return it.
-	station_apcs.Add(offstation_apcs)
-	return station_apcs
+	. += offstation_apcs
+	return .
 
 
 // Helper procs which return lists of relevant mobs.
@@ -190,14 +190,14 @@
 	if(!A || !istype(A))
 		return
 
-	var/list/L = list()
+	.= list()
 	for(var/mob/living/silicon/robot/RB in SSmobs.mob_list)
 		if(istype(RB, /mob/living/silicon/robot/drone))
 			continue
 		if(RB.connected_ai == A)
 			continue
-		L.Add(RB)
-	return L
+		. += RB
+	return .
 
 /proc/get_linked_cyborgs(var/mob/living/silicon/ai/A)
 	if(!A || !istype(A))
@@ -208,12 +208,12 @@
 	if(!A || !istype(A))
 		return
 
-	var/list/L = list()
+	. = list()
 	for(var/mob/living/silicon/ai/AT in SSmobs.mob_list)
-		if(L == A)
+		if(. == A)
 			continue
-		L.Add(AT)
-	return L
+		. += AT
+	return .
 
 /proc/log_ability_use(var/mob/living/silicon/ai/A, var/ability_name, var/atom/target = null, var/notify_admins = 1)
 	var/message

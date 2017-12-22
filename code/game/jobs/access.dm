@@ -171,14 +171,14 @@
 	return AS[num2text(id)]
 
 /proc/get_all_jobs()
-	var/list/all_jobs = list()
+	. = list()
 	var/list/all_datums = typesof(/datum/job)
 	all_datums -= exclude_jobs
 	var/datum/job/jobdatum
 	for(var/jobtype in all_datums)
 		jobdatum = new jobtype
-		all_jobs.Add(jobdatum.title)
-	return all_jobs
+		. += jobdatum.title
+	return .
 
 /proc/get_all_centcom_jobs()
 	return list("VIP Guest",

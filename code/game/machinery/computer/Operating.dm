@@ -60,5 +60,5 @@
 	onclose(user, "op")
 
 /obj/machinery/computer/operating/Process()
-	if(..())
+	if(operable() && table.victim)
 		src.updateDialog()

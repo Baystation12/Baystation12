@@ -42,11 +42,11 @@
 	return parts
 
 /mob/living/silicon/robot/proc/get_damageable_components()
-	var/list/rval = new
+	. = list()
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
-		if(C.installed == 1) rval += C
-	return rval
+		if(C.installed == 1) . += C
+	return .
 
 /mob/living/silicon/robot/proc/get_armour()
 

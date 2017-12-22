@@ -17,6 +17,36 @@
 	else
 		A.move_camera_by_click()
 
+/mob/living/carbon/human/DblClickOn(var/atom/A, params)
+	if(stat == 2 || lying == 0 || get_dist(src, A) > 1) return
+	if(world.time <= next_click)
+		return
+	next_click = world.time + 20 //Small cooldown for the effort.
+	if(incapacitated(INCAPACITATION_KNOCKDOWN))
+		if(isturf(A)) // If its a turf and our little spaceman is downed
+			visible_message("<span class='danger'>\The [src] is trying to crawl to the [A.name]</span>")
+			var/crawltime = rand(20, 45)
+			if(do_after(src, crawltime, A, incapacitation_flags = 0))
+				visible_message("<span class='danger'>[src] crawls away to the [A.name]!</span>")
+				if(src.pull_damage())
+					if(prob(50))
+						adjustBruteLoss(rand(1, 4))
+						visible_message("<span class='danger'>\The [src]'s [src.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged across the floor!</span>")
+						A.add_blood(src)
+						var/blood_volume = round(src.vessel.get_reagent_amount(/datum/reagent/blood))
+						if(blood_volume > 0)
+							src.vessel.remove_reagent(/datum/reagent/blood, rand(1, 2))
+				Move(A, get_dir(src, A))
+			else
+				visible_message("<span class='danger'>[src] tried to crawl but failed!</span>")
+				if(src.pull_damage())
+					if(prob(20))
+						src.adjustBruteLoss(rand(2, 5))
+						visible_message("<span class='danger'>\The [src]'s [src.isSynthetic() ? "state" : "wounds"] worsen terribly from attempting to crawl to the [A.name]!</span>")
+						A.add_blood(src)
+						var/blood_volume = round(src.vessel.get_reagent_amount(/datum/reagent/blood))
+						if(blood_volume > 0)
+							src.vessel.remove_reagent(/datum/reagent/blood, rand(1, 2))
 
 /mob/living/silicon/ai/ClickOn(var/atom/A, params)
 	if(world.time <= next_click)

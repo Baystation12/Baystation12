@@ -33,17 +33,24 @@
 	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 	if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-		if(ready)
-			output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
+		if(client.prefs.char_lock)
+			if(ready)
+				output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
+			else
+				output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]</p>"
 		else
-			output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]</p>"
+			output +="<p> <span class='link'>Lock Char to Ready</span> </p>"
+
 
 	else
-		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
-		output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
+		output += "<p><a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A></p>"
+		if(client.prefs.char_lock)
+			output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
+		else
+			output += "<p> <span class='link'>Lock Char to Join</span> </p>"
 
 	output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
-
+/*
 	if(!IsGuestKey(src.key))
 		establish_db_connection()
 		if(dbcon.IsConnected())
@@ -61,6 +68,8 @@
 				output += "<p><b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b></p>"
 			else
 				output += "<p><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A></p>"
+*/
+	output += "<p><a href='byond://?src=\ref[src];refresh=1'>Refresh</a></p>"
 
 	output += "</div>"
 
@@ -98,14 +107,21 @@
 	if(!client)	return 0
 
 	if(href_list["show_preferences"])
-		client.prefs.ShowChoices(src)
+		if(!finished_init)
+			return to_chat(src, "Server is still initializing, please hold..")
+		else
+			client.prefs.ShowChoices(src)
 		return 1
 
 	if(href_list["ready"])
-		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
-			ready = text2num(href_list["ready"])
-		else
-			ready = 0
+		if(client.prefs.char_lock)
+			if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
+				ready = text2num(href_list["ready"])
+			else
+				ready = 0
+
+		panel.close()
+		new_player_panel_proc()
 
 	if(href_list["refresh"])
 		panel.close()
@@ -142,8 +158,6 @@
 			observer.set_appearance(mannequin)
 			qdel(mannequin)
 
-			if(client.prefs.be_random_name)
-				client.prefs.real_name = random_name(client.prefs.gender)
 			observer.real_name = client.prefs.real_name
 			observer.name = observer.real_name
 			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -154,11 +168,15 @@
 			return 1
 
 	if(href_list["late_join"])
+		if(client.prefs.char_lock)
+			if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
+				to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
+				return
+			LateChoices() //show the latejoin job selection menu
+		else
+			panel.close()
+			new_player_panel_proc()
 
-		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
-			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
-			return
-		LateChoices() //show the latejoin job selection menu
 
 	if(href_list["manifest"])
 		ViewManifest()
@@ -184,7 +202,7 @@
 		AttemptLateSpawn(job, client.prefs.spawnpoint)
 		return
 
-	if(href_list["privacy_poll"])
+/*	if(href_list["privacy_poll"])
 		establish_db_connection()
 		if(!dbcon.IsConnected())
 			return
@@ -286,7 +304,7 @@
 				for(var/optionid = id_min; optionid <= id_max; optionid++)
 					if(!isnull(href_list["option_[optionid]"]))	//Test if this optionid was selected
 						vote_on_poll(pollid, optionid, 1)
-
+*/
 /mob/new_player/proc/IsJobAvailable(var/datum/job/job)
 	if(!job)	return 0
 	if(!job.is_position_available()) return 0
@@ -294,6 +312,12 @@
 	if(!job.player_old_enough(src.client))	return 0
 
 	return 1
+
+/mob/new_player/proc/IsJobRestricted(var/datum/job/job, var/branch_pref)
+	if(job.department == branch_pref)
+		return 0
+	else
+		return 1
 
 /mob/new_player/proc/get_branch_pref()
 	if(client)
@@ -316,8 +340,15 @@
 	if(!IsJobAvailable(job))
 		alert("[job.title] is not available. Please try another.")
 		return 0
-	if(job.is_restricted(client.prefs, src))
-		return
+//	if(!job.is_branch_allowed(client.mob:CharRecords.char_department))
+//		alert("Wrong branch of service for [job.title]. Valid branches is: [job.department].")
+//		return 0
+	if(!job.is_valid_department(get_department(client.prefs.prefs_department, 0)))
+		alert("Wrong branch of service for [job.title]. Valid branches is: [client.prefs.prefs_department].")
+		return 0
+	if(!job.is_rank_allowed(client.prefs.char_branch, client.prefs.char_rank))
+		alert("Wrong rank for [job.title]. Valid ranks in [client.prefs.char_branch] are: [job.get_ranks(client.prefs.char_branch)].")
+		return 0
 
 	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job.title)
 	var/turf/spawn_turf = pick(spawnpoint.turfs)
@@ -349,6 +380,8 @@
 
 	character = job_master.EquipRank(character, job.title, 1)					//equips the human
 	equip_custom_items(character)
+
+	character:CharRecords = new(character)
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
 	if(character.mind.assigned_role == "AI")
@@ -393,7 +426,6 @@
 		log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
 /mob/new_player/proc/LateChoices()
-	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
 
 	var/list/dat = list("<html><body><center>")
 	dat += "<b>Welcome, [name].<br></b>"
@@ -420,7 +452,7 @@
 			for(var/mob/M in GLOB.player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
 				active++
 
-			if(job.is_restricted(client.prefs))
+			if(!job.is_valid_department(get_department(src.client.prefs.prefs_department, 0)))
 				if(show_invalid_jobs)
 					dat += "<tr><td><a style='text-decoration: line-through' href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title]</a></td><td>[job.current_positions]</td><td>(Active: [active])</td></tr>"
 			else

@@ -120,7 +120,7 @@ var/global/datum/controller/occupations/job_master
 
 	proc/FindOccupationCandidates(datum/job/job, level, flag)
 		Debug("Running FOC, Job: [job], Level: [level], Flag: [flag]")
-		var/list/candidates = list()
+		. = list()
 		for(var/mob/new_player/player in unassigned)
 			if(jobban_isbanned(player, job.title))
 				Debug("FOC isbanned failed, Player: [player]")
@@ -136,8 +136,8 @@ var/global/datum/controller/occupations/job_master
 				continue
 			if(player.client.prefs.CorrectLevel(job,level))
 				Debug("FOC pass, Player: [player], Level:[level]")
-				candidates += player
-		return candidates
+				. += player
+		return .
 
 	proc/GiveRandomJob(var/mob/new_player/player)
 		Debug("GRJ Giving random job, Player: [player]")

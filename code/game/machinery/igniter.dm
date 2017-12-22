@@ -14,11 +14,10 @@
 
 /obj/machinery/igniter/New()
 	..()
-	update_icon()
 
 /obj/machinery/igniter/Initialize()
 	. = ..()
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	if(_wifi_id)
 		wifi_receiver = new(_wifi_id, src)
 
@@ -51,7 +50,7 @@
 /obj/machinery/igniter/proc/ignite()
 	use_power(50)
 	on = !on
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 
 // Wall mounted remote-control igniter.

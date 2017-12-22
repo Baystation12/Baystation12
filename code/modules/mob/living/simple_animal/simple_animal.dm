@@ -198,19 +198,19 @@
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/stack/medical))
 		if(stat != DEAD)
-			var/obj/item/stack/medical/MED = O
-			if(!MED.animal_heal)
-				to_chat(user, "<span class='notice'>That [MED] won't help \the [src] at all!</span>")
+			var/obj/item/stack/medical/MEDI = O
+			if(!MEDI.animal_heal)
+				to_chat(user, "<span class='notice'>That [MEDI] won't help \the [src] at all!</span>")
 				return
 			if(health < maxHealth)
-				if(MED.amount >= 1)
-					adjustBruteLoss(-MED.animal_heal)
-					MED.amount -= 1
-					if(MED.amount <= 0)
-						qdel(MED)
+				if(MEDI.amount >= 1)
+					adjustBruteLoss(-MEDI.animal_heal)
+					MEDI.amount -= 1
+					if(MEDI.amount <= 0)
+						qdel(MEDI)
 					for(var/mob/M in viewers(src, null))
 						if ((M.client && !( M.blinded )))
-							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
+							M.show_message("<span class='notice'>[user] applies the [MEDI] on [src].</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>")
 		return

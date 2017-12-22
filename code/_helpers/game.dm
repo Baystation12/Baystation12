@@ -33,7 +33,7 @@
 		.= res
 
 /proc/get_area_name(N) //get area by its name
-	for(var/area/A in world)
+	for(var/area/A in all_areas)
 		if(A.name == N)
 			return A
 	return 0
@@ -56,10 +56,11 @@
 	var/lum = source.luminosity
 	source.luminosity = 6
 
-	var/list/heard = view(range, source)
+	. = list()
+	. = view(range, source)
 	source.luminosity = lum
 
-	return heard
+	return .
 
 /proc/isStationLevel(var/level)
 	return level in GLOB.using_map.station_levels
@@ -82,32 +83,32 @@
 /proc/circlerange(center=usr,radius=3)
 
 	var/turf/centerturf = get_turf(center)
-	var/list/turfs = new/list()
+	. = list()
 	var/rsq = radius * (radius+0.5)
 
-	for(var/atom/T in range(radius, centerturf))
+	for(var/atom/T in trange(radius, centerturf))
 		var/dx = T.x - centerturf.x
 		var/dy = T.y - centerturf.y
 		if(dx*dx + dy*dy <= rsq)
-			turfs += T
+			. += T
 
 	//turfs += centerturf
-	return turfs
+	return .
 
 /proc/circleview(center=usr,radius=3)
 
 	var/turf/centerturf = get_turf(center)
-	var/list/atoms = new/list()
+	. = list()
 	var/rsq = radius * (radius+0.5)
 
 	for(var/atom/A in view(radius, centerturf))
 		var/dx = A.x - centerturf.x
 		var/dy = A.y - centerturf.y
 		if(dx*dx + dy*dy <= rsq)
-			atoms += A
+			. += A
 
 	//turfs += centerturf
-	return atoms
+	return .
 
 /proc/trange(rad = 0, turf/centre = null) //alternative to range (ONLY processes turfs and thus less intensive)
 	if(!centre)
@@ -116,6 +117,14 @@
 	var/turf/x1y1 = locate(((centre.x-rad)<1 ? 1 : centre.x-rad),((centre.y-rad)<1 ? 1 : centre.y-rad),centre.z)
 	var/turf/x2y2 = locate(((centre.x+rad)>world.maxx ? world.maxx : centre.x+rad),((centre.y+rad)>world.maxy ? world.maxy : centre.y+rad),centre.z)
 	return block(x1y1,x2y2)
+
+/proc/otrange(rad = 0, turf/centre = null) //alternative to range (ONLY processes turfs and thus less intensive)
+	if(!centre)
+		return
+
+	var/turf/x1y1 = locate(((centre.x-rad)<1 ? 1 : centre.x-rad),((centre.y-rad)<1 ? 1 : centre.y-rad),centre.z)
+	var/turf/x2y2 = locate(((centre.x+rad)>world.maxx ? world.maxx : centre.x+rad),((centre.y+rad)>world.maxy ? world.maxy : centre.y+rad),centre.z)
+	return block(x1y1,x2y2)-centre
 
 /proc/get_dist_euclidian(atom/Loc1 as turf|mob|obj,atom/Loc2 as turf|mob|obj)
 	var/dx = Loc1.x - Loc2.x
@@ -128,28 +137,28 @@
 /proc/circlerangeturfs(center=usr,radius=3)
 
 	var/turf/centerturf = get_turf(center)
-	var/list/turfs = new/list()
+	. = list()
 	var/rsq = radius * (radius+0.5)
 
-	for(var/turf/T in range(radius, centerturf))
+	for(var/turf/T in trange(radius, centerturf))
 		var/dx = T.x - centerturf.x
 		var/dy = T.y - centerturf.y
 		if(dx*dx + dy*dy <= rsq)
-			turfs += T
-	return turfs
+			. += T
+	return .
 
 /proc/circleviewturfs(center=usr,radius=3)		//Is there even a diffrence between this proc and circlerangeturfs()?
 
 	var/turf/centerturf = get_turf(center)
-	var/list/turfs = new/list()
+	. = list()
 	var/rsq = radius * (radius+0.5)
 
 	for(var/turf/T in view(radius, centerturf))
 		var/dx = T.x - centerturf.x
 		var/dy = T.y - centerturf.y
 		if(dx*dx + dy*dy <= rsq)
-			turfs += T
-	return turfs
+			. += T
+	return .
 
 
 
@@ -159,62 +168,62 @@
 // It will keep doing this until it checks every content possible. This will fix any problems with mobs, that are inside objects,
 // being unable to hear people due to being in a box within a bag.
 
-/proc/recursive_content_check(var/atom/O,  var/list/L = list(), var/recursion_limit = 3, var/client_check = 1, var/sight_check = 1, var/include_mobs = 1, var/include_objects = 1)
+/proc/recursive_content_check(var/atom/O,  . = list(), var/recursion_limit = 3, var/client_check = 1, var/sight_check = 1, var/include_mobs = 1, var/include_objects = 1)
 
 	if(!recursion_limit)
-		return L
+		return .
 
 	for(var/I in O.contents)
 
 		if(ismob(I))
 			if(!sight_check || isInSight(I, O))
-				L |= recursive_content_check(I, L, recursion_limit - 1, client_check, sight_check, include_mobs, include_objects)
+				. |= recursive_content_check(I, ., recursion_limit - 1, client_check, sight_check, include_mobs, include_objects)
 				if(include_mobs)
 					if(client_check)
 						var/mob/M = I
 						if(M.client)
-							L |= M
+							. |= M
 					else
-						L |= I
+						. |= I
 
 		else if(istype(I,/obj/))
 			if(!sight_check || isInSight(I, O))
-				L |= recursive_content_check(I, L, recursion_limit - 1, client_check, sight_check, include_mobs, include_objects)
+				. |= recursive_content_check(I, ., recursion_limit - 1, client_check, sight_check, include_mobs, include_objects)
 				if(include_objects)
-					L |= I
+					. |= I
 
-	return L
+	return .
 
 // Returns a list of mobs and/or objects in range of R from source. Used in radio and say code.
 
 /proc/get_mobs_or_objects_in_view(var/R, var/atom/source, var/include_mobs = 1, var/include_objects = 1)
 
 	var/turf/T = get_turf(source)
-	var/list/hear = list()
+	. = list()
 
 	if(!T)
-		return hear
+		return .
 
 	var/list/range = hear(R, T)
 
 	for(var/I in range)
 		if(ismob(I))
-			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
+			. |= recursive_content_check(I, ., 3, 1, 0, include_mobs, include_objects)
 			if(include_mobs)
 				var/mob/M = I
 				if(M.client)
-					hear += M
+					. += M
 		else if(istype(I,/obj/))
-			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
+			. |= recursive_content_check(I, ., 3, 1, 0, include_mobs, include_objects)
 			if(include_objects)
-				hear += I
+				. += I
 
-	return hear
+	return .
 
 
 /proc/get_mobs_in_radio_ranges(var/list/obj/item/device/radio/radios)
 
-	set background = 1
+	set background = BACKGROUND_ENABLED
 
 	. = list()
 	// Returns a list of mobs who can hear any of the radios given in @radios

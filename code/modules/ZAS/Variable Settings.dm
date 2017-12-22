@@ -1,11 +1,11 @@
 var/global/vs_control/vsc = new
 
 /vs_control
-	var/fire_consuption_rate = 0.25
+	var/fire_consuption_rate = 0.20
 	var/fire_consuption_rate_NAME = "Fire - Air Consumption Ratio"
 	var/fire_consuption_rate_DESC = "Ratio of air removed and combusted per tick."
 
-	var/fire_firelevel_multiplier = 25
+	var/fire_firelevel_multiplier = 28
 	var/fire_firelevel_multiplier_NAME = "Fire - Firelevel Constant"
 	var/fire_firelevel_multiplier_DESC = "Multiplied by the equation for firelevel, affects mainly the extingiushing of fires."
 
@@ -30,7 +30,7 @@ var/global/vs_control/vsc = new
 	var/airflow_medium_pressure_NAME = "Airflow - Heavy Movement Threshold %"
 	var/airflow_medium_pressure_DESC = "Percent of 1 Atm. at which items with the largest weight classes will move."
 
-	var/airflow_heavy_pressure = 65
+	var/airflow_heavy_pressure = 60
 	var/airflow_heavy_pressure_NAME = "Airflow - Mob Movement Threshold %"
 	var/airflow_heavy_pressure_DESC = "Percent of 1 Atm. at which mobs will move."
 
@@ -54,7 +54,7 @@ var/global/vs_control/vsc = new
 	var/airflow_damage_NAME = "Airflow Impact - Damage"
 	var/airflow_damage_DESC = "Damage from airflow impacts."
 
-	var/airflow_speed_decay = 1.5
+	var/airflow_speed_decay = 1.2
 	var/airflow_speed_decay_NAME = "Airflow Speed Decay"
 	var/airflow_speed_decay_DESC = "How rapidly the speed gained from airflow decays."
 

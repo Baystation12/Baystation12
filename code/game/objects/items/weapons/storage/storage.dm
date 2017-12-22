@@ -61,17 +61,17 @@
 
 /obj/item/weapon/storage/proc/return_inv()
 
-	var/list/L = list(  )
+	. = list()
 
-	L += src.contents
+	. += src.contents
 
 	for(var/obj/item/weapon/storage/S in src)
-		L += S.return_inv()
+		. += S.return_inv()
 	for(var/obj/item/weapon/gift/G in src)
-		L += G.gift
+		. += G.gift
 		if (istype(G.gift, /obj/item/weapon/storage))
-			L += G.gift:return_inv()
-	return L
+			. += G.gift:return_inv()
+	return .
 
 /obj/item/weapon/storage/proc/show_to(mob/user as mob)
 	storage_ui.show_to(user)

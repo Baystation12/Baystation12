@@ -93,14 +93,14 @@
 
 /datum/nano_module/program/card_mod/proc/format_jobs(list/jobs)
 	var/obj/item/weapon/card/id/id_card = program.computer.card_slot ? program.computer.card_slot.stored_card : null
-	var/list/formatted = list()
+	. = list()
 	for(var/job in jobs)
-		formatted.Add(list(list(
+		. += list(
 			"display_name" = replacetext(job, " ", "&nbsp"),
 			"target_rank" = id_card && id_card.assignment ? id_card.assignment : "Unassigned",
-			"job" = job)))
+			"job" = job)
 
-	return formatted
+	return .
 
 /datum/nano_module/program/card_mod/proc/get_accesses(var/is_centcom = 0)
 	return null

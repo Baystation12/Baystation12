@@ -189,6 +189,7 @@
 #define BP_POLYP    "polyp segment"
 #define BP_ANCHOR   "anchoring ligament"
 #define BP_PHORON   "phoron filter"
+#define BP_HIVENODE "hive node"
 
 // Robo Organs.
 #define BP_POSIBRAIN	"posibrain"
@@ -250,6 +251,7 @@
 #define CORPSE_CAN_REENTER_AND_RESPAWN 2
 
 #define SPECIES_HUMAN "Human"
+#define SPECIES_RESOMI "Resomi"
 #define SPECIES_TAJARA "Tajara"
 #define SPECIES_DIONA "Diona"
 #define SPECIES_VOX "Vox"
@@ -260,6 +262,7 @@
 #define SPECIES_PROMETHEAN "Promethean"
 #define SPECIES_BOGANI "Bogani"
 #define SPECIES_EGYNO "Egyno"
+#define SPECIES_WRYN "Wryn"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1

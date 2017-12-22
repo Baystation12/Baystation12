@@ -125,7 +125,7 @@
 
 // Builds a list of potential antags without actually setting them. Used to test mode viability.
 /datum/antagonist/proc/get_potential_candidates(var/datum/game_mode/mode, var/ghosts_only)
-	var/candidates = list()
+	. = list()
 
 	// Keeping broken up for readability
 	for(var/datum/mind/player in mode.get_players_for_role(role_type, id))
@@ -136,9 +136,9 @@
 		else if(!can_become_antag(player))
 		else if(player_is_antag(player))
 		else
-			candidates |= player
+			. |= player
 
-	return candidates
+	return .
 
 /datum/antagonist/proc/attempt_random_spawn()
 	update_current_antag_max()
