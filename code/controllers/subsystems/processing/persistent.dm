@@ -48,31 +48,35 @@ SUBSYSTEM_DEF(persistent)
 			if(M.stat != 2) // Not fucking dead either, and must be working for NT.
 				var/paycheck = calculate_paycheck(M)
 				if(paycheck)
-					var/sender = "NanoTrasen Financial Department"
 					var/message = {"
-						<b>!WARNING: CONFIDENTIAL!</b>\n
-						--------------------\n
-						Employee Name: [M.name] <br>Employee Assignment: [M.job]\n
-						Total work time: [M.CharRecords.department_playtime]\n
-						Current Department Rank: [get_department_rank_title(get_department(M.CharRecords.char_department, 1), calculate_department_rank(M))]\n
-						--------------------\n
-						Gross Paycheck: $[paycheck]\n
-						<b>Taxes:</b>\n
-						Income Tax: $-[get_tax_deduction("income", paycheck)] (20%)\n
-						Pension Tax: $-[get_tax_deduction("pension", paycheck, M.CharRecords.permadeath ? 1 : 0)] ([M.CharRecords.permadeath ? 16 : 10]%)\n
-						Net Income: $[send_paycheck(M, paycheck)]\n
-						"}
-					SendPDAMessage(M, sender, message)
+<html>
+<body>
+<b>!WARNING: CONFIDENTIAL!</b><br>
+<hr>
+Employee Name: [M.name] <br>Employee Assignment: [M.job]<br>
+Total work time: [round(M.CharRecords.department_playtime/3600, 0.1)]<br>
+Current Department Rank: [get_department_rank_title(get_department(M.CharRecords.char_department, 1), calculate_department_rank(M))]<br>
+<hr>
+<b>Gross Paycheck:</b> $[paycheck]<br>
+<b>Taxes:</b><br>
+Income Tax: $-[get_tax_deduction("income", paycheck)] (20%)<br>
+Pension Tax: $-[get_tax_deduction("pension", paycheck, M.CharRecords.permadeath ? 1 : 0)] ([M.CharRecords.permadeath ? 16 : 10]%)<br>
+Net Income: $[send_paycheck(M, paycheck)]<br>
+</body>
+</html>
+"}
+					SendPDAMessage(M, message)
 
 /datum/controller/subsystem/persistent/proc/InitializePDA()
 	NTpda = new(src)
 	NTpda.owner = "NanoTrasen"
+	NTpda.name = "NanoTrasen Messages"
 	NTpda.message_silent = 1
 	NTpda.news_silent = 1
-	NTpda.hidden = 1
-	NTpda.ownjob = "NanoTrasen"
+	NTpda.hidden = 0
+	NTpda.ownjob = "NanoTrasen Administration"
 
-/datum/controller/subsystem/persistent/proc/SendPDAMessage(var/mob/living/carbon/M, var/sender, var/message)
+/datum/controller/subsystem/persistent/proc/SendPDAMessage(var/mob/living/carbon/M, var/message)
 	var/obj/item/device/pda/PDARec = null
 	for (var/obj/item/device/pda/P in PDAs)
 		if (!P.owner || P.toff || P.hidden)	continue
@@ -80,14 +84,14 @@ SUBSYSTEM_DEF(persistent)
 			PDARec = P
 			//Sender isn't faking as someone who exists
 			if(!isnull(PDARec))
-				linkedServer.send_pda_message("[P.owner]", "NanoTrasen Administrative Dept.","[message]")
-				P.new_message("NanoTrasen Administrative Dept.", "NanoTrasen Administrative Dept.", "NanoTrasen", message)
-				P.new_message_from_pda(NTpda, message)
-				P.tnote.Add(list(list("sent" = 0, "owner" = "NanoTrasen", "job" = "NanoTrasen Administrative Dept.", "message" = "[message]", "target" = "\ref[src]")))
-				NTpda.tnote.Add(list(list("sent" = 1, "owner" = "NanoTrasen", "job" = "NanoTrasen Administrative Dept.", "message" = "[message]", "target" = "\ref[src]")))
+				linkedServer.send_pda_message("[P.owner]", "[NTpda.owner]","[message]")
+//				P.new_message(NTpda, "NanoTrasen Administration.", "NanoTrasen", message)
+				NTpda.tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[message]", "target" = "\ref[P]")))
+				P.tnote.Add(list(list("sent" = 0, "owner" = "[NTpda.owner]", "job" = "[NTpda.ownjob]", "message" = "[message]", "target" = "\ref[NTpda]")))
 			if(!NTpda.conversations.Find("\ref[P]"))
 				NTpda.conversations.Add("\ref[P]")
 			if(!P.conversations.Find("\ref[NTpda]"))
 				P.conversations.Add("\ref[NTpda]")
-				if (!P.message_silent)
-					playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
+			P.new_message_from_pda(NTpda, message)
+			if (!P.message_silent)
+				playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
