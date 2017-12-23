@@ -1048,7 +1048,7 @@ obj/random/hostile/spawn_choices()
 	return list(/mob/living/simple_animal/hostile/viscerator,
 				/mob/living/simple_animal/hostile/carp,
 				/mob/living/simple_animal/hostile/carp/pike,
-				/mob/living/simple_animal/hostile/vagrant/swarm)
+				/mob/living/simple_animal/hostile/mehren/swarm)
 
 /*
 	Selects one spawn point out of a group of points with the same ID and asks it to generate its items
