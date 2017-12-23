@@ -180,7 +180,7 @@
 				W.active = 0
 				visible_message("<span class = 'warning'>[name] lowers their [W.name].</span>")
 
-	if(!get_active_weapon())//Move slower if you have a weapon readied.
+	if(get_active_weapon())//Move slower if you have a weapon readied.
 		speed = 10
 	else
 		speed = initial(speed)
