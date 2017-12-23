@@ -62,6 +62,3 @@
 		spawn(10)
 			explosion(get_turf(src), 2, 5, 8, 14, z_transfer = 0)
 			qdel(src)
-
-/obj/item/device/landmine/proc/triggered(var/turf/trigger_turf, var/atom/movable/trigger_atom, var/atom/old_loc)
-	world << "blah"
