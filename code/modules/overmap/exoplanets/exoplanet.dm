@@ -20,8 +20,8 @@
 	var/repopulating = 0
 	var/repopulate_types = list() // animals which have died that may come back
 
-	var/max_features = 2
-	var/list/possible_features //pre-defined list of features to pick from, will use all types otherwise
+	var/features_budget = 2
+	var/list/possible_features = list(/datum/map_template/ruin/exoplanet/monolith) //pre-defined list of features templates to pick from
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
@@ -38,7 +38,11 @@
 	map_z = GetConnectedZlevels(z)
 	for(var/zlevel in map_z)
 		map_sectors["[zlevel]"] = src
-
+	var/list/feature_types = possible_features.Copy()
+	possible_features.Cut()
+	for(var/T in feature_types)
+		var/datum/map_template/ruin/exoplanet/ruin = new T
+		possible_features[ruin.id] = ruin
 	..()
 
 /obj/effect/overmap/sector/exoplanet/proc/build_level()
@@ -110,28 +114,7 @@
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_features()
-	if(!possible_features)
-		possible_features = subtypesof(/datum/random_map/feature)
-	for(var/F in possible_features)
-		var/datum/random_map/feature/FT = F
-		if(initial(FT.unique) && map_count[initial(FT.descriptor)])
-			possible_features -= F
-		if(initial(FT.limit_x) + 2 * TRANSITIONEDGE > maxx)
-			possible_features -= F
-		if(initial(FT.limit_y) + 2 * TRANSITIONEDGE > maxy)
-			possible_features -= F
-
-	max_features = rand(0,max_features)
-	for(var/zlevel in map_z)
-		for(var/i = 1 to max_features)
-			if(!possible_features.len)
-				return
-			var/datum/random_map/feature/F = pick(possible_features)
-			var/tx = rand(TRANSITIONEDGE, maxx - TRANSITIONEDGE - initial(F.limit_x))
-			var/ty = rand(TRANSITIONEDGE, maxy - TRANSITIONEDGE - initial(F.limit_y))
-			var/turf/T = locate(tx,ty,zlevel)
-			if(T)
-				F = new F(null,tx,ty,zlevel)
+	seedRuins(map_z, features_budget, /area/exoplanet, possible_features)
 
 /obj/effect/overmap/sector/exoplanet/proc/get_biostuff(var/datum/random_map/noise/exoplanet/random_map)
 	seeds += random_map.small_flora_types
@@ -315,6 +298,8 @@
 
 	..()
 
+	GLOB.using_map.base_turf_by_z[num2text(tz)] = land_type
+
 /datum/random_map/noise/exoplanet/proc/noise2value(var/value)
 	return min(9,max(0,round((value/cell_range)*10)))
 
@@ -326,7 +311,7 @@
 		if(istype(T, /turf/simulated))
 			var/turf/simulated/S = T
 			S.blocks_air = 1
-			
+
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)

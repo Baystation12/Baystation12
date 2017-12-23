@@ -1,6 +1,9 @@
-/datum/random_map/feature
-	target_turf_type = /turf/simulated/floor/exoplanet
-	var/unique = 0
+/datum/map_template/ruin/exoplanet/monolith
+	name = "Monolith Ring"
+	id = "planetsite_monoliths"
+	description = "Bunch of monoliths surrounding an artifact."
+	suffixes = list("monoliths/monoliths.dmm")
+	cost = 1
 
 /obj/structure/monolith
 	name = "monolith"
@@ -53,67 +56,17 @@
 						vision += pick(E.actors) + " " + pick("killing","dying","gored","expiring","exploding","mauled","burning","flayed","in agony") + ". "
 					to_chat(H, "<span class='danger'><font size=2>[uppertext(vision)]</font></span>")
 					H.Paralyse(2)
-					H.hallucinations += 10
+					H.hallucination(20, 100)
 				return
 	to_chat(user, "<span class='notice'>\The [src] is still.</span>")
 	return ..()
 
-/datum/random_map/feature/monoliths
-	descriptor = "Monoliths"
-	limit_x = 15
-	limit_y = 15
-	initial_wall_cell = 0
+/turf/simulated/floor/fixed/alium/ruin
+	name = "ancient alien plating"
+	desc = "This obviously wasn't made for your feet. Looks pretty old."
+	initial_gas = null
 
-/datum/random_map/feature/monoliths/generate_map()
-	var/center_x = round(limit_x/2) + 1
-	var/center_y = round(limit_y/2) + 1
-
-	map[get_map_cell(center_x,center_y)] = 6
-
-	var/list/monoliths
-	switch(rand(1,3))
-		if(1)
-			monoliths = list(
-				get_map_cell(center_x + 2,center_y + 2),
-				get_map_cell(center_x + 2,center_y - 2),
-				get_map_cell(center_x - 2,center_y + 2),
-				get_map_cell(center_x - 2,center_y - 2),
-				get_map_cell(center_x,center_y + 5),
-				get_map_cell(center_x,center_y - 5),
-				get_map_cell(center_x + 5,center_y),
-				get_map_cell(center_x - 5,center_y)
-				)
-		if(2)
-			monoliths = list(
-				get_map_cell(center_x + 2,center_y + 3),
-				get_map_cell(center_x + 2,center_y - 3),
-				get_map_cell(center_x + 2,center_y),
-				get_map_cell(center_x - 2,center_y + 3),
-				get_map_cell(center_x - 2,center_y - 3),
-				get_map_cell(center_x - 2,center_y)
-				)
-		if(3)
-			monoliths = list(
-				get_map_cell(center_x + 3,center_y + 3),
-				get_map_cell(center_x + 3,center_y - 3),
-				get_map_cell(center_x - 3,center_y + 3),
-				get_map_cell(center_x - 3,center_y - 3),
-				get_map_cell(center_x,center_y + 5),
-				get_map_cell(center_x,center_y - 5),
-				get_map_cell(center_x + 5,center_y),
-				get_map_cell(center_x - 5,center_y)
-				)
-
-	for(var/coors in monoliths)
-		map[coors] = 4
-
-
-/datum/random_map/feature/monoliths/get_appropriate_path(var/value)
-	return
-
-/datum/random_map/feature/monoliths/get_additional_spawns(var/value, var/turf/T)
-	switch(value)
-		if(6)
-			new /obj/machinery/artifact(T)
-		if(4)
-			new /obj/structure/monolith(T)
+/turf/simulated/floor/fixed/alium/ruin/Initialize()
+	. = ..()
+	if(prob(10))
+		ChangeTurf(get_base_turf_by_area(src))
