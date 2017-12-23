@@ -3,6 +3,8 @@
 #define FOOTSTEP_PLATING 	"plating"
 #define FOOTSTEP_WOOD 		"wood"
 #define FOOTSTEP_ASTEROID 	"asteroid"
+#define FOOTSTEP_GRASS 		"grass"
+#define FOOTSTEP_WATER		"water"
 
 /turf/simulated/floor/var/global/list/footstep_sounds = list(
 	FOOTSTEP_WOOD = list(
@@ -34,8 +36,20 @@
 		'sound/effects/footstep/asteroid2.ogg',
 		'sound/effects/footstep/asteroid3.ogg',
 		'sound/effects/footstep/asteroid4.ogg',
-		'sound/effects/footstep/asteroid5.ogg')
+		'sound/effects/footstep/asteroid5.ogg'),
+	FOOTSTEP_GRASS = list(
+		'sound/effects/footstep/grass1.ogg',
+		'sound/effects/footstep/grass2.ogg',
+		'sound/effects/footstep/grass3.ogg',
+		'sound/effects/footstep/grass4.ogg'
+	),
+	FOOTSTEP_WATER = list(
+		'sound/effects/footstep/water1.ogg',
+		'sound/effects/footstep/water2.ogg',
+		'sound/effects/footstep/water3.ogg',
+		'sound/effects/footstep/water4.ogg'
 	)
+)
 
 /decl/flooring/var/footstep_type
 /decl/flooring/carpet/footstep_type = FOOTSTEP_CARPET
@@ -55,6 +69,12 @@
 
 /turf/simulated/floor/exoplanet/get_footstep_sound()
 	return safepick(footstep_sounds[FOOTSTEP_CARPET])
+
+/turf/simulated/floor/exoplanet/grass/get_footstep_sound()
+	return safepick(footstep_sounds[FOOTSTEP_GRASS])
+
+/turf/simulated/floor/exoplanet/water/shallow/get_footstep_sound()
+	return safepick(footstep_sounds[FOOTSTEP_WATER])
 
 /turf/simulated/floor/Entered(var/mob/living/carbon/human/H)
 	..()

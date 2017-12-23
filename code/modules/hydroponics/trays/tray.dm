@@ -547,6 +547,7 @@
 	else if(O.force && seed)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [O]!</span>")
+		playsound(get_turf(src), O.hitsound, 100, 1)
 		if(!dead)
 			health -= O.force
 			check_health()
