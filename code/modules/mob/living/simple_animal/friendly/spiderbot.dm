@@ -49,35 +49,41 @@
 
 /mob/living/simple_animal/spiderbot/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
-	if(istype(O, /obj/item/device/mmi))
-		var/obj/item/device/mmi/B = O
+	if(istype(O, /obj/item/device/mmi) || istype(O, /obj/item/organ/internal/posibrain))
+		var/mob/living/carbon/brain/B
+		if(istype(O, /obj/item/device/mmi))
+			var/obj/item/device/mmi/M = O
+			B = M.brainmob
+		else
+			var/obj/item/organ/internal/posibrain/P = O
+			B = P.brainmob
 		if(src.mmi)
 			to_chat(user, "<span class='warning'>There's already a brain in [src]!</span>")
 			return
-		if(!B.brainmob)
+		if(!B)
 			to_chat(user, "<span class='warning'>Sticking an empty MMI into the frame would sort of defeat the purpose.</span>")
 			return
-		if(!B.brainmob.key)
+		if(!B.key)
 			var/ghost_can_reenter = 0
-			if(B.brainmob.mind)
+			if(B.mind)
 				for(var/mob/observer/ghost/G in GLOB.player_list)
-					if(G.can_reenter_corpse && G.mind == B.brainmob.mind)
+					if(G.can_reenter_corpse && G.mind == B.mind)
 						ghost_can_reenter = 1
 						break
 			if(!ghost_can_reenter)
 				to_chat(user, "<span class='notice'>[O] is completely unresponsive; there's no point.</span>")
 				return
 
-		if(B.brainmob.stat == DEAD)
+		if(B.stat == DEAD)
 			to_chat(user, "<span class='warning'>[O] is dead. Sticking it into the frame would sort of defeat the purpose.</span>")
 			return
 
-		if(jobban_isbanned(B.brainmob, "Cyborg"))
+		if(jobban_isbanned(B, "Cyborg"))
 			to_chat(user, "<span class='warning'>\The [O] does not seem to fit.</span>")
 			return
 
 		to_chat(user, "<span class='notice'>You install \the [O] in \the [src]!</span>")
-		if(istype(O, /obj/item/device/mmi/digital))
+		if(istype(O, /obj/item/organ/internal/posibrain))
 			positronic = 1
 			add_language("Robot Talk")
 
