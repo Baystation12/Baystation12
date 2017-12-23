@@ -201,6 +201,7 @@
 
 /mob/living/simple_animal/lekgolo/mgalekgolo/death()
 	. = ..()
+	explosion(loc,0,3,5,7)
 	qdel(src)
 
 //Mgalekgolo Weapon Datum//
