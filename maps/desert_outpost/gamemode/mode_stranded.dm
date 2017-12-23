@@ -11,6 +11,7 @@
 
 	allowed_ghost_roles = list(/datum/ghost_role/flood_combat_form)
 
+	var/player_faction = "UNSC"
 	var/wave_num = 0
 	var/area/planet/daynight/planet_area
 	var/list/flood_spawn_turfs = list()
@@ -73,22 +74,6 @@
 
 	var/list/available_resupply_points = list()
 
-/datum/game_mode/stranded/pre_setup()
-	GLOB.hostile_attackables += /obj/structure/evac_pelican
-	GLOB.hostile_attackables += /obj/structure/tanktrap
-
-	//loop over the map creating resupply spawn points
-	var/resup_dist = 20
-	for(var/curx = 1, curx < world.maxx, curx += resup_dist + pick(-7,0,7))
-		for(var/cury = 1, cury < world.maxy, cury += resup_dist)
-			var/turf/T = locate(curx, cury, 1)
-			//if there is a scavenge_spawn_skip landmark, skip this spot (place one eg near the player base)
-			var/obj/effect/landmark/scavenge_spawn_skip/N = locate() in range(resup_dist, T)
-			if(N)
-				continue
-			var/obj/effect/landmark/scavenge_spawn/S = new(T)
-			available_resupply_points.Add(S)
-
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time
 
@@ -97,6 +82,12 @@
 	process_spawning()
 	process_resupply()
 	process_evac()
+
+/datum/game_mode/stranded/proc/get_num_survivors()
+	. = 0
+	for(var/mob/M in GLOB.player_list)
+		if(M.client && M.stat == CONSCIOUS && M.faction == src.player_faction)
+			.++
 
 #include "mode_stranded_attackers_process.dm"
 #include "mode_stranded_attackers_spawn.dm"
