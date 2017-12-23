@@ -11,7 +11,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	faction = "Covenant"
 
 /datum/language/sangheili
-	name = "Sangheili"
+	name = LANGUAGE_SANGHEILI
 	desc = "The language of the Sangheili"
 	native = 1
 	syllables = list("ree","wortwortwort","wort","nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
