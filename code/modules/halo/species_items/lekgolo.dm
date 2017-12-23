@@ -224,7 +224,8 @@
 /mob/living/simple_animal/lekgolo/mgalekgolo/death()
 	. = ..()
 	spawn(10)
-		explosion(loc,0,3,5,7)
+		visible_message("<span class = 'danger'>[name]'s fuel cell storage overloads!</span>")
+		explosion(loc,0,0,0,10)
 		qdel(src)
 
 //Mgalekgolo Weapon Datum//
