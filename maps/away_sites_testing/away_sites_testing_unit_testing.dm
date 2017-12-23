@@ -32,8 +32,15 @@
 		/area/casino/casino_solar_control = NO_SCRUBBER,
 		/area/casino/casino_maintenance = NO_SCRUBBER,
 		/area/casino/casino_hangar = NO_SCRUBBER,
+		/area/bluespaceriver/underground = NO_SCRUBBER|NO_VENT,
+		/area/bluespaceriver/ground = NO_SCRUBBER|NO_VENT,
+		/area/casino/casino_hangar = NO_SCRUBBER,
+		/area/bluespaceriver/underground = NO_SCRUBBER|NO_VENT,
 		/area/slavers_base/hangar = NO_SCRUBBER,
 		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
+		/area/slavers_base/hangar = NO_SCRUBBER,
+		/area/slavers_base/hangar = NO_SCRUBBER,
+		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(
