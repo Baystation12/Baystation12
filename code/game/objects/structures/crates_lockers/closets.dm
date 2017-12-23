@@ -24,7 +24,7 @@
 	var/close_sound = 'sound/effects/locker_close.ogg'
 
 	var/storage_types = CLOSET_STORAGE_ALL
-	var/setup
+	var/setup = CLOSET_CAN_BE_WELDED
 
 	// TODO: Turn these into flags. Skipped it for now because it requires updating 100+ locations...
 	var/broken = FALSE
@@ -308,7 +308,7 @@
 		src.welded = !src.welded
 		src.update_icon()
 		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
-	if(setup & CLOSET_HAS_LOCK)
+	else if(setup & CLOSET_HAS_LOCK)
 		src.togglelock(user, W)
 	else
 		src.attack_hand(user)
@@ -509,7 +509,7 @@
 		update_icon()
 		return TRUE
 	else
-		to_chat(user, "<span class='warning'>Access Denied</span>")
+		to_chat(user, "<span class='warning'>Access denied!</span>")
 		return FALSE
 
 /obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/weapon/card/id/id_card)

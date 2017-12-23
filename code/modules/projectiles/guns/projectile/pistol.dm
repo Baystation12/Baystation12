@@ -15,6 +15,13 @@
 	accuracy = 0.35
 	fire_delay = 6.5
 
+/obj/item/weapon/gun/projectile/colt/officer/update_icon()
+	..()
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
+		icon_state = "usp"
+	else
+		icon_state = "usp-e"
+
 /obj/item/weapon/gun/projectile/sec
 	name = ".45 pistol"
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."

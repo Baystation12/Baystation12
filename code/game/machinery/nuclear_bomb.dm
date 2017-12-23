@@ -401,24 +401,27 @@ var/bomb_set
 
 //====the nuclear football (holds the disk and instructions)====
 /obj/item/weapon/storage/secure/briefcase/nukedisk
+	desc = "A large briefcase with a digital locking system."
 	startswith = list(
 		/obj/item/weapon/disk/nuclear,
 		/obj/item/weapon/pinpointer,
-		/obj/item/smallDelivery/nuke_instructions,
+		/obj/item/weapon/folder/envelope/nuke_instructions,
 		/obj/item/modular_computer/laptop/preset/custom_loadout/cheap/
 	)
-	desc = "A large briefcase with a digital locking system. On closer inspection, you see an \
-	Expeditionary Corps emblem is etched into the front of it."
 
-/obj/item/smallDelivery/nuke_instructions
-	name = "classified instructions"
+/obj/item/weapon/storage/secure/briefcase/nukedisk/examine(var/user)
+	..()
+	to_chat(user,"On closer inspection, you see \a [GLOB.using_map.company_name] emblem is etched into the front of it.")
+
+/obj/item/weapon/folder/envelope/nuke_instructions
+	name = "instructions envelope"
 	desc = "A small envelope. The label reads 'open only in event of high emergency'."
 
-/obj/item/smallDelivery/nuke_instructions/Initialize()
+/obj/item/weapon/folder/envelope/nuke_instructions/Initialize()
 	. = ..()
 	var/obj/item/weapon/paper/R = new(src)
 	R.set_content("<center><img src=sollogo.png><br><br>\
-	<b>Warning: Classified<br>SEV Torch Self Destruct System - Instructions</b></center><br><br>\
+	<b>Warning: Classified<br>[GLOB.using_map.station_name] Self Destruct System - Instructions</b></center><br><br>\
 	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's \
 	on-board nuclear self destruct system. Please read carefully.<br><br>\
 	1) (Optional) Announce the imminent activation to any surviving crew members, and begin evacuation procedures.<br>\
@@ -445,7 +448,6 @@ var/bomb_set
 	R.stamped += /obj/item/weapon/stamp
 	R.overlays += stampoverlay
 	R.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
-	src.wrapped = R
 
 //====vessel self-destruct system====
 /obj/machinery/nuclearbomb/station

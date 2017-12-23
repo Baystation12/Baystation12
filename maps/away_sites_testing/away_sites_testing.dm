@@ -13,7 +13,7 @@
 	#include "../away/casino/casino.dm"
 	#include "../away/magshield/magshield.dm"
 	#include "../away/blueriver/blueriver.dm"
-
+	#include "../away/slavers/slavers_base.dm"
 
 	#include "../../code/modules/lobby_music/absconditus.dm"
 
