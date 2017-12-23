@@ -151,6 +151,23 @@
 		return
 	. = ..()
 
+/mob/living/simple_animal/lekgolo/mgalekgolo/ex_act(severity)
+	if(!blinded)
+		flash_eyes()
+
+	var/damage
+	switch (severity)
+		if (1.0)
+			damage = 100
+
+		if (2.0)
+			damage = 50
+
+		if(3.0)
+			damage = 20
+
+	adjustBruteLoss(damage)
+
 //Mgalekgolo ranged-attacks //
 
 /mob/living/simple_animal/lekgolo/mgalekgolo/proc/get_active_weapon()
@@ -190,7 +207,11 @@
 	var/datum/mgalekgolo_weapon/active_weapon = get_active_weapon()
 	if(isnull(active_weapon))
 		return
+	if(active_weapon.next_shot > world.time)
+		to_chat(src,"<span class = 'warning'>Your [active_weapon.name] is still charging.</span>")
+		return
 	if((active_weapon.charge_amount - active_weapon.charge_drain) <= 0)
+		visible_message("<span class = 'warning'>[name]'s [active_weapon.name] fizzles weakly.</span>")
 		return
 	var/obj/item/projectile/new_proj = new active_weapon.proj (loc)
 	new_proj.permutated += src //A workaround for the projectile colliding with the 64x64 bounds of the sprite.
@@ -198,11 +219,13 @@
 	if(active_weapon.fire_sound)
 		playsound_local(loc,active_weapon.fire_sound,110,1,,5)
 	active_weapon.charge_amount -= active_weapon.charge_drain
+	active_weapon.next_shot = world.time + (active_weapon.shot_delay SECONDS)
 
 /mob/living/simple_animal/lekgolo/mgalekgolo/death()
 	. = ..()
-	explosion(loc,0,3,5,7)
-	qdel(src)
+	spawn(10)
+		explosion(loc,0,3,5,7)
+		qdel(src)
 
 //Mgalekgolo Weapon Datum//
 /datum/mgalekgolo_weapon
@@ -216,6 +239,10 @@
 	var/charge_max = 100 //The max charge in their weapon.
 	var/charge_amount = 100
 	var/charge_recharge_amount = 5 //The amount of "charge" to recharge each life tick.
+
+	var/next_shot
+	var/shot_delay = 2 //Delay between each shot, in seconds.
+
 
 /datum/mgalekgolo_weapon/fuel_rod_cannon
 	name = "Fuel Rod Cannon"
