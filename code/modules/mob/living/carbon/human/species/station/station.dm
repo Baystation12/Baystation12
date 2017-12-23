@@ -153,16 +153,16 @@
 
 	//Heals normal damage.
 	if(H.getBruteLoss())
-		H.adjustBruteLoss(-4)
-		H.nutrition -= 4
+		H.adjustBruteLoss(-2 * config.organ_regeneration_multiplier)	//Heal brute better than other ouchies.
+		H.nutrition -= 1
 	if(H.getFireLoss())
-		H.adjustFireLoss(-3)
-		H.nutrition -= 4
+		H.adjustFireLoss(-1 * config.organ_regeneration_multiplier)
+		H.nutrition -= 1
 	if(H.getToxLoss())
-		H.adjustToxLoss(-2)
-		H.nutrition -= 4
+		H.adjustToxLoss(-1 * config.organ_regeneration_multiplier)
+		H.nutrition -= 1
 
-	if(prob(10) && H.nutrition > 150 && !H.getBruteLoss() && !H.getFireLoss())
+	if(prob(5) && H.nutrition > 150 && !H.getBruteLoss() && !H.getFireLoss())
 		var/obj/item/organ/external/head/D = H.organs_by_name["head"]
 		if (D.disfigured)
 			D.disfigured = 0
@@ -184,7 +184,7 @@
 				if(prob(5))
 					to_chat(H, "<span class='warning'>You feel a soothing sensation as your [regen_organ] mends...</span>")
 
-	if(prob(5) && H.nutrition > 150)
+	if(prob(2) && H.nutrition > 150)
 		for(var/limb_type in has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
 			if(E && !E.is_usable())
