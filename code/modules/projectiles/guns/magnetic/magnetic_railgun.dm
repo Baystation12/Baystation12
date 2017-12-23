@@ -1,19 +1,19 @@
 /obj/item/weapon/gun/magnetic/railgun
 	name = "railgun"
-	desc = "The Mars Military Industries MI-76 Thunderclap. A man-portable mass driver for squad support anti-armour and destruction of fortifications and emplacements."
-	gun_unreliable = 0
+	desc = "The HelTek Arms LM-76 Thunderclap. A portable linear motor cannon produced during the Gaia Conflict for anti-armour and anti-fortification operations. Today, it sees wide use among private militaries, and is a staple on the black market."
+	gun_unreliable = 1 // 1% chance to explode >:D
 	icon_state = "railgun"
-	removable_components = FALSE
+	removable_components = TRUE // Can swap out the capacitor for more shots, or cell for longer usage before recharge
 	load_type = /obj/item/weapon/rcd_ammo
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_MAGNET = 4)
 	projectile_type = /obj/item/projectile/bullet/magnetic/slug
 	power_cost = 300
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BELT
-	loaded = /obj/item/weapon/rcd_ammo/large
+	loaded = /obj/item/weapon/rcd_ammo/large // ~30 shots
 
 	var/initial_cell_type = /obj/item/weapon/cell/hyper
-	var/initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv
+	var/initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
 	var/slowdown_held = 2
 	var/slowdown_worn = 1
 
@@ -24,6 +24,8 @@
 
 	cell = new initial_cell_type(src)
 	if (ispath(loaded))
+		if(load_sheet_max > 1)
+			loaded = new loaded(src,load_sheet_max)
 		loaded = new loaded
 	slowdown_per_slot[slot_l_hand] =  slowdown_held
 	slowdown_per_slot[slot_r_hand] =  slowdown_held
@@ -59,10 +61,51 @@
 	loaded = null
 	visible_message("<span class='warning'>\The [src] beeps and ejects its empty cartridge.</span>")
 
+/obj/item/weapon/gun/magnetic/railgun/tcc // Oppa! Should only be available to TCC shock troops or high-budget mercs.
+	name = "advanced railgun"
+	desc = "The HelTek Arms HR-22 Hammerhead. A man-portable helical rail cannon; favorite weapon of Terran shock troops and anti-tank personnel."
+	icon_state = "railgun-tcc"
+	removable_components = TRUE // Railgunners are expected to be able to completely disassemble and reassemble their weapons in the field. But we don't have that mechanic, so the cell and capacitor will do.
+	gun_unreliable = 0 // Quality engineering, and not 15 years old
+
+	initial_cell_type = /obj/item/weapon/cell/hyper // Standard power
+	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
+	power_cost = 280 // Same number of shots, but it'll seem to recharge slightly faster
+
+	loaded = /obj/item/stack/rods
+	load_type = /obj/item/stack/rods // The Confederation learned that chunks of metal work just as well as fancy matter cartridges
+	load_sheet_max = 10 // Fewer shots per "magazine", but more abundant than matter cartridges.
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 3, TECH_MAGNET = 5)
+	slowdown_worn = 2 // Little slower when worn
+
+/obj/item/weapon/gun/magnetic/railgun/tcc/show_ammo(var/mob/user)
+	var/obj/item/stack/rods/ammo = loaded
+	if(istype(ammo))
+		to_chat(user, "<span class='notice'>It has [ammo.amount] shots loaded.</span>")
+
+/obj/item/weapon/gun/magnetic/railgun/tcc/check_ammo()
+	var/obj/item/stack/rods/ammo = loaded
+	return ammo && ammo.amount
+
+/obj/item/weapon/gun/magnetic/railgun/tcc/out_of_ammo()
+	qdel(loaded)
+	loaded = null
+	spawn(3)
+		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
+	visible_message("<span class='warning'>\The [src] beeps, before clanging as the ammunition bank resets.</span>")
+
+/obj/item/weapon/gun/magnetic/railgun/tcc/use_ammo()
+	var/obj/item/stack/rods/ammo = loaded
+	ammo.use(1)
+	if(!istype(ammo))
+		out_of_ammo()
+
 /obj/item/weapon/gun/magnetic/railgun/automatic // Adminspawn only, this shit is absurd.
-	name = "\improper RHR accelerator"
-	desc = "The Mars Military Industries MI-227 Meteor. Originally a vehicle-mounted turret weapon for heavy anti-vehicular and anti-structural fire, the fact that it was made man-portable is mindboggling in itself."
+	name = "LMRA autocannon"
+	desc = "The HelTek Arms LMRA-14A Meteor. Originally a vehicle-mounted turret weapon used by the Confederation in the Gaia Conflict for anti-vehicular operations, the fact that it was made man-portable is mindboggling in itself."
 	icon_state = "heavy_railgun"
+	removable_components = FALSE // Absolutely not. This has an infinity cell.
+	gun_unreliable = 0 // If it wasn't OP enough.
 
 	initial_cell_type = /obj/item/weapon/cell/infinite
 	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/super
@@ -89,6 +132,8 @@
 	desc = "The MI-12 Skadi is a burst fire capable railgun that fires flechette rounds at high velocity. Deadly against armour, but much less effective against soft targets."
 	icon_state = "flechette_gun"
 	item_state = "z8carbine"
+	removable_components = FALSE
+	gun_unreliable = 0 // High-tech, quality engineering. This is some good shit. Shame it isn't Terran.
 	initial_cell_type = /obj/item/weapon/cell/hyper
 	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv
 	slot_flags = SLOT_BACK

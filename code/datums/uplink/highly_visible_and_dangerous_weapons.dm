@@ -112,3 +112,15 @@
 	item_cost = 60
 	antag_costs = list(MODE_MERCENARY = 20)
 	path = /obj/item/weapon/gun/magnetic/railgun/flechette
+
+/datum/uplink_item/item/visible_weapons/railgun // Like a semi-auto AMR
+	name = "Railgun"
+	item_cost = 76
+	antag_costs = list(MODE_MERCENARY = 68)
+	path = /obj/item/weapon/gun/magnetic/railgun
+
+/datum/uplink_item/item/visible_weapons/railguntcc // Only slightly better than the normal railgun; but cooler looking
+	name = "Advanced Railgun"
+	item_cost = 92 // This high price is to make it less common for normal tators, and make it "seem" scarier
+	antag_costs = list(MODE_MERCENARY = 76) // This, on the other hand, is to encourage usage specifically by mercs with high budgets.
+	path = /obj/item/weapon/gun/magnetic/railgun/tcc
