@@ -1022,7 +1022,7 @@
 
 	access = list(access_research, access_mining_office,
 						access_mining_station, access_nanotrasen, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
-						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
+						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_mining)
 /datum/job/scientist
 	title = "Scientist"
 	total_positions = 6

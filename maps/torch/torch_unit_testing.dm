@@ -1,13 +1,6 @@
 /datum/map/torch
 	// Unit test exemptions
 	apc_test_exempt_areas = list(
-		/area/AIsattele = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/constructionsite = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/constructionsite/ai = NO_SCRUBBER|NO_VENT,
-		/area/constructionsite/atmospherics = NO_SCRUBBER,
-		/area/constructionsite/teleporter = NO_SCRUBBER,
-		/area/derelict/ship = NO_SCRUBBER|NO_VENT,
-		/area/djstation = NO_SCRUBBER|NO_APC,
 		/area/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
 		/area/engineering/auxpower = NO_SCRUBBER|NO_VENT,
 		/area/engineering/drone_fabrication = NO_SCRUBBER|NO_VENT,
@@ -67,25 +60,10 @@
 		/area/exoplanet/grass    = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/exoplanet/snow     = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/exoplanet/garbage  = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/ship/scrap/maintenance/engine/port = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/maintenance/engine/starboard = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/crew/hallway/port= NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/crew/hallway/starboard= NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/maintenance/hallway = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/maintenance/lower = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/maintenance/atmos = NO_SCRUBBER,
-		/area/ship/scrap/escape_port = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT,
-		/area/marooned/marooned_snow = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/marooned/marooned_hut = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/lost_supply_base_solar = NO_SCRUBBER,
 		/area/smugglers/base = NO_SCRUBBER,
 		/area/smugglers/dorms = NO_SCRUBBER|NO_VENT,
 		/area/smugglers/office = NO_SCRUBBER|NO_VENT,
-		/area/casino/casino_solar_control = NO_SCRUBBER,
-		/area/casino/casino_maintenance = NO_SCRUBBER
+		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -103,17 +81,16 @@
 
 	)
 
-	area_coherency_test_subarea_count = list(
-			/area/constructionsite = 7,
-			/area/constructionsite/maintenance = 14,
-			/area/solar/constructionsite = 3,
-	)
+	area_coherency_test_subarea_count = list()
 
 	area_usage_test_exempted_areas = list(
+		/area/AIsattele,
+		/area/djstation,
+		/area/outpost,
+		/area/outpost/abandoned,
 		/area/overmap,
 		/area/shuttle/escape/centcom,
 		/area/shuttle/escape,
-		/area/turbolift,
 		/area/security/prison,
 		/area/shuttle/syndicate_elite/station,
 		/area/shuttle/escape/centcom,
@@ -132,7 +109,21 @@
 		/area/exoplanet/garbage,
 		/area/template_noop,
 		/area/map_template,
-		/area/map_template/little_house
+		/area/map_template/little_house,
+	)
+
+	// not an away site? you probably want to be using area_usage_test_exempted_areas
+	area_usage_test_exempted_root_areas = list(
+		/area/casino,
+		/area/constructionsite,
+		/area/derelict,
+		/area/lost_supply_base,
+		/area/magshield,
+		/area/marooned,
+		/area/mine,
+		/area/ship,
+		/area/smugglers,
+		/area/slavers_base,
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber

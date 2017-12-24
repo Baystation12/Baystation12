@@ -648,7 +648,8 @@
 					/obj/item/weapon/reagent_containers/food/drinks/tea = 15,
 					/obj/item/weapon/glass_extra/stick = 15,
 					/obj/item/weapon/glass_extra/straw = 15)
-	contraband = list()
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine = 2,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka = 2)
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
@@ -793,6 +794,9 @@
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 2,
 					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 2,
 					/obj/item/weapon/storage/fancy/cigarettes/professionals = 2,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello = 2,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello/mint = 2,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello/variety = 2,
 					/obj/item/weapon/storage/box/matches = 10,
 					/obj/item/weapon/flame/lighter/random = 4,
 					/obj/item/clothing/mask/smokable/ecig/simple = 10,
@@ -816,6 +820,9 @@
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 55,
 					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 65,
 					/obj/item/weapon/storage/fancy/cigarettes/professionals = 70,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello = 85,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello/mint = 85,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello/variety = 85,
 					/obj/item/weapon/storage/box/matches = 2,
 					/obj/item/weapon/flame/lighter/random = 5,
 					/obj/item/clothing/mask/smokable/ecig/simple = 50,

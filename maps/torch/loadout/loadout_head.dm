@@ -36,11 +36,6 @@
 	path = /obj/item/clothing/head/beret/guard
 	allowed_roles = list(/datum/job/guard)
 
-/datum/gear/head/solhat
-	display_name = "Sol Central Government Cap"
-	path = /obj/item/clothing/head/soft/solgov
-	allowed_roles = SOLGOV_ROLES
-
 /datum/gear/head/veteranhat
 	display_name = "veteran hat"
 	path = /obj/item/clothing/head/soft/solgov/veteranhat
@@ -136,6 +131,7 @@
 	var/informalhats = list()
 	informalhats["cowboy hat"] = /obj/item/clothing/head/cowboy_hat
 	informalhats["ushanka"] = /obj/item/clothing/head/ushanka
+	informalhats["TCC ushanka"] = /obj/item/clothing/head/ushanka/tcc
 	gear_tweaks += new/datum/gear_tweak/path(informalhats)
 
 /datum/gear/head/hairflower/New()

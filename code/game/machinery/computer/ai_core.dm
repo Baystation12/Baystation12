@@ -134,21 +134,27 @@
 				laws.add_inherent_law(M.newFreeFormLaw)
 				to_chat(usr, "Added a freeform law.")
 
-			if(istype(P, /obj/item/device/mmi))
-				var/obj/item/device/mmi/M = P
-				if(!M.brainmob)
+			if(istype(P, /obj/item/device/mmi) || istype(P, /obj/item/organ/internal/posibrain))
+				var/mob/living/carbon/brain/B
+				if(istype(P, /obj/item/device/mmi))
+					var/obj/item/device/mmi/M = P
+					B = M.brainmob
+				else
+					var/obj/item/organ/internal/posibrain/PB = P
+					B = PB.brainmob
+				if(!B)
 					to_chat(user, "<span class='warning'>Sticking an empty [P] into the frame would sort of defeat the purpose.</span>")
 					return
-				if(M.brainmob.stat == 2)
+				if(B.stat == 2)
 					to_chat(user, "<span class='warning'>Sticking a dead [P] into the frame would sort of defeat the purpose.</span>")
 					return
 
-				if(jobban_isbanned(M.brainmob, "AI"))
+				if(jobban_isbanned(B, "AI"))
 					to_chat(user, "<span class='warning'>This [P] does not seem to fit.</span>")
 					return
 
-				if(M.brainmob.mind)
-					clear_antag_roles(M.brainmob.mind, 1)
+				if(B.mind)
+					clear_antag_roles(B.mind, 1)
 
 				user.drop_item()
 				P.loc = src

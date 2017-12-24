@@ -546,9 +546,9 @@
 	item_state = "c_tube"
 	matter = list("glass" = 100)
 
-	brightness_range = 6	// luminosity when on, also used in power calculation
-	brightness_power = 3
-	brightness_color = "#ffffff"
+	brightness_range = 7	// luminosity when on, also used in power calculation
+	brightness_power = 6
+	brightness_color = "#fffee0"
 	lighting_modes = list(
 		LIGHTMODE_EMERGENCY = list(l_range = 4, l_power = 1, l_color = "#da0205"),
 		)
@@ -557,8 +557,8 @@
 /obj/item/weapon/light/tube/large
 	w_class = ITEM_SIZE_SMALL
 	name = "large light tube"
-	brightness_range = 8
-	brightness_power = 3
+	brightness_range = 9
+	brightness_power = 6
 
 /obj/item/weapon/light/bulb
 	name = "light bulb"
@@ -570,7 +570,7 @@
 	matter = list("glass" = 100)
 
 	brightness_range = 4
-	brightness_power = 2
+	brightness_power = 4
 	brightness_color = "#a0a080"
 	lighting_modes = list(
 		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = "#da0205"),
@@ -582,7 +582,7 @@
 
 /obj/item/weapon/light/bulb/red/readylight
 	brightness_range = 5
-	brightness_power = 1
+	brightness_power = 2
 	lighting_modes = list(
 		LIGHTMODE_READY = list(l_range = 5, l_power = 1, l_color = "#00ff00"),
 		)
@@ -599,7 +599,7 @@
 	item_state = "egg4"
 	matter = list("glass" = 100)
 	brightness_range = 4
-	brightness_power = 2
+	brightness_power = 4
 
 // update the icon state and description of the light
 /obj/item/weapon/light/update_icon()

@@ -18,6 +18,8 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
+	sexybits_location = BP_GROIN
+
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
@@ -84,10 +86,12 @@
 	strength = STR_HIGH
 	slowdown = 0.5
 	brute_mod = 0.8
+	blood_volume = 800
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_UNATHI)
 	name_language = LANGUAGE_UNATHI
 	health_hud_intensity = 2
+	hunger_factor = DEFAULT_HUNGER_FACTOR * 3
 
 	min_age = 18
 	max_age = 260
@@ -132,9 +136,79 @@
 		)
 	breathing_sound = 'sound/voice/lizard.ogg'
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/diona_heal_toggle
+		)
+
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
+
+/datum/species/unathi/handle_environment_special(var/mob/living/carbon/human/H)
+	if(H.in_stasis || H.stat == DEAD)
+		return
+	if(H.nutrition < 50)
+		H.adjustToxLoss(2,0)
+		return
+	if(!H.innate_heal)
+		return
+
+	//Heals normal damage.
+	if(H.getBruteLoss())
+		H.adjustBruteLoss(-2 * config.organ_regeneration_multiplier)	//Heal brute better than other ouchies.
+		H.nutrition -= 1
+	if(H.getFireLoss())
+		H.adjustFireLoss(-1 * config.organ_regeneration_multiplier)
+		H.nutrition -= 1
+	if(H.getToxLoss())
+		H.adjustToxLoss(-1 * config.organ_regeneration_multiplier)
+		H.nutrition -= 1
+
+	if(prob(5) && H.nutrition > 150 && !H.getBruteLoss() && !H.getFireLoss())
+		var/obj/item/organ/external/head/D = H.organs_by_name["head"]
+		if (D.disfigured)
+			D.disfigured = 0
+			H.nutrition -= 20
+
+	if(H.nutrition <= 100)
+		return
+
+	for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
+
+		var/obj/item/organ/internal/regen_organ = H.internal_organs_by_name[bpart]
+
+		if(regen_organ.robotic >= ORGAN_ROBOT)
+			continue
+		if(istype(regen_organ))
+			if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
+				regen_organ.damage = max(regen_organ.damage - 5, 0)
+				H.nutrition -= 5
+				if(prob(5))
+					to_chat(H, "<span class='warning'>You feel a soothing sensation as your [regen_organ] mends...</span>")
+
+	if(prob(2) && H.nutrition > 150)
+		for(var/limb_type in has_limbs)
+			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
+			if(E && !E.vital && !E.is_usable())
+				E.removed()
+				qdel(E)
+				E= null
+			if(!E)
+				var/list/organ_data = has_limbs[limb_type]
+				var/limb_path = organ_data["path"]
+				var/obj/item/organ/O = new limb_path(H)
+				organ_data["descriptor"] = O.name
+				to_chat(H, "<span class='danger'>With a shower of fresh blood, a new [O.name] forms.</span>")
+				H.visible_message("<span class='danger'>With a shower of fresh blood, a length of biomass shoots from [H], forming a new [O.name]</span>")
+				H.nutrition -= 50
+				var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
+				blood_splatter(H,B,1)
+				H.update_body()
+				return
+			else
+				for(var/datum/wound/W in E.wounds)
+					if(W.wound_damage() == 0 && prob(50))
+						E.wounds -= W
 
 /datum/species/tajaran
 	name = SPECIES_TAJARA
@@ -151,7 +225,8 @@
 	burn_mod =  1.15
 	gluttonous = GLUT_TINY
 	num_alternate_languages = 2
-	secondary_langs = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR)
+	secondary_langs = list(LANGUAGE_SIIK_TAJR)
+	additional_langs = list(LANGUAGE_SIIK_MAAS)
 	name_language = LANGUAGE_SIIK_MAAS
 	health_hud_intensity = 1.75
 
@@ -193,6 +268,8 @@
 		"Your overheated skin itches."
 		)
 	cold_discomfort_level = 275
+
+	sexybits_location = BP_GROIN
 
 /datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
@@ -402,8 +479,8 @@
 			if(I.damage > 0)
 				I.damage = max(I.damage - 2, 0)
 				H.nutrition -= 2
-				if (prob(1))
-					to_chat(H, "<span class='warning'>You sense your [I.name] regenerating...</span>")
+				if (prob(5))
+					to_chat(H, "<span class='warning'>You sense your nymphs shifting internally to regenerate your [I.name]...</span>")
 
 		if (prob(10) && H.nutrition > 70)
 			for(var/limb_type in has_limbs)
@@ -415,7 +492,7 @@
 				if(!E)
 					var/list/organ_data = has_limbs[limb_type]
 					var/limb_path = organ_data["path"]
-					var/obj/item/organ/O = new limb_path(src)
+					var/obj/item/organ/O = new limb_path(H)
 					organ_data["descriptor"] = O.name
 					to_chat(H, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
 					H.nutrition -= 60

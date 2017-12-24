@@ -20,10 +20,12 @@
 
 /datum/map_template/proc/preload_size()
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
+	var/z_offset = 1 // needed to calculate z-bounds correctly
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), 1, 1, 1, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE)
+		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), 1, 1, z_offset, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE)
 		if(M)
 			bounds = extend_bounds_if_needed(bounds, M.bounds)
+			z_offset++
 		else
 			return FALSE
 	width = bounds[MAP_MAXX] - bounds[MAP_MINX] + 1
@@ -67,10 +69,6 @@
 		shuttle_controller.initialise_shuttle(shuttle_type)
 
 /datum/map_template/proc/load_new_z()
-
-	if (tallness > 1) // aka this template has multiple zlevels and needs to be linked by the zlevel system...
-		if (tallness + world.maxz > GLOB.HIGHEST_CONNECTABLE_ZLEVEL_INDEX) // aka it's too tall to fit in the system...
-			return  // fug!
 
 	var/x = round((world.maxx - width)/2)
 	var/y = round((world.maxy - height)/2)

@@ -3,6 +3,7 @@
 	desc = "A large gas-powered cannon."
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_HUGE
 	flags =  CONDUCT

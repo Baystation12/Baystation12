@@ -7,9 +7,11 @@ SUBSYSTEM_DEF(mapping)
 
 	var/list/space_ruins_templates = list()
 	var/list/exoplanet_ruins_templates = list()
+	var/list/away_sites_templates = list()
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	preloadTemplates()
+	GLOB.using_map.build_away_sites()
 	..()
 
 /datum/controller/subsystem/mapping/Recover()
@@ -17,6 +19,7 @@ SUBSYSTEM_DEF(mapping)
 	map_templates = SSmapping.map_templates
 	space_ruins_templates = SSmapping.space_ruins_templates
 	exoplanet_ruins_templates = SSmapping.exoplanet_ruins_templates
+	away_sites_templates = SSmapping.away_sites_templates
 
 /datum/controller/subsystem/mapping/proc/preloadTemplates(path = "maps/templates/") //see master controller setup
 	var/list/filelist = flist(path)
@@ -29,7 +32,7 @@ SUBSYSTEM_DEF(mapping)
 	// Still supporting bans by filename
 	var/list/banned_exoplanet_dmms = generateMapList("config/exoplanet_ruin_blacklist.txt")
 	var/list/banned_space_dmms = generateMapList("config/space_ruin_blacklist.txt")
-	var/list/banned_away_site_dmms = generateMapList("config/away_site_blacklist.txt") // still not yet implemented
+	var/list/banned_away_site_dmms = generateMapList("config/away_site_blacklist.txt")
 
 	if (!banned_exoplanet_dmms || !banned_space_dmms || !banned_away_site_dmms)
 		report_progress("One or more map blacklist files are not present in the config directory!")
@@ -57,3 +60,5 @@ SUBSYSTEM_DEF(mapping)
 			exoplanet_ruins_templates[R.name] = R
 		else if(istype(R, /datum/map_template/ruin/space))
 			space_ruins_templates[R.name] = R
+		else if(istype(R, /datum/map_template/ruin/away_site))
+			away_sites_templates[R.name] = R

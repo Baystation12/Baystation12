@@ -2,23 +2,17 @@
 	name = "altar"
 	desc = "A structure made for the express purpose of religion."
 	health = 50
-	power_adjustment = 10
-	important_structure = 1
-	build_cost = 500
+	power_adjustment = 5
+	deity_flags = DEITY_STRUCTURE_ALONE
+	build_cost = 1000
 	var/mob/living/target
 	var/cycles_before_converted = 5
 	var/next_cycle = 0
-
-/obj/structure/deity/altar/New()
-	..()
-	if(linked_god)
-		linked_god.power_min += 10
 
 /obj/structure/deity/altar/Destroy()
 	if(target)
 		remove_target()
 	if(linked_god)
-		linked_god.power_min -= 10
 		to_chat(src, "<span class='danger'>You've lost an altar!</span>")
 	return ..()
 

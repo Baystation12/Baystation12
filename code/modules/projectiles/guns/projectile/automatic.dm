@@ -21,7 +21,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/machine_pistol
 	name = ".45 machine pistol"
-	desc = "An uncommon machine pistol, sometimes refered to as an 'uzi' by the backwater spacers it is often associated with, though its origins have been lost to time. Uses .45 rounds."
+	desc = "The Lumoco Arms MP6 Vesper, A fairly common machine pistol. Sometimes refered to as an 'uzi' by the backwater spacers it is often associated with. Uses .45 rounds."
 	icon_state = "mpistolen"
 	item_state = "wt550"
 	w_class = ITEM_SIZE_NORMAL
@@ -47,7 +47,7 @@
 		icon_state = "mpistolen-empty"
 
 /obj/item/weapon/gun/projectile/automatic/c20r
-	name = "submachine gun"
+	name = "10mm submachine gun"
 	desc = "The C-20r is a lightweight and rapid firing SMG, for when you REALLY need someone dead. Uses 10mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
 	icon_state = "c20r"
 	item_state = "c20r"
@@ -107,8 +107,8 @@
 	..()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
-	name = "9mm machine pistol"
-	desc = "The W-T 550 Saber is a cheap self-defense weapon, mass-produced by Ward-Takahashi for paramilitary and private use. Uses 9mm rounds."
+	name = "9mm submachine gun"
+	desc = "The WT-550 Saber is a cheap self-defense weapon, mass-produced by Ward-Takahashi for paramilitary and private use. Uses 9mm rounds."
 	icon_state = "wt550"
 	item_state = "wt550"
 	w_class = ITEM_SIZE_NORMAL

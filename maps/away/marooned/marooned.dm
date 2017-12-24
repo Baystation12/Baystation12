@@ -1,5 +1,4 @@
 #include "marooned_areas.dm"
-#include "marooned.dmm"
 #include "../mining/mining_areas.dm"
 
 /turf/simulated/floor/marooned/snow
@@ -21,6 +20,13 @@
 		"nav_marooned_2",
 		"nav_marooned_antag"
 	)
+
+/datum/map_template/ruin/away_site/marooned
+	name = "Marooned"
+	id = "awaysite_marooned"
+	description = "A snowy wasteland."
+	suffixes = list("marooned/marooned.dmm")
+	cost = 1
 
 /obj/effect/shuttle_landmark/nav_marooned/nav1
 	name = "Planetside Navpoint #1"

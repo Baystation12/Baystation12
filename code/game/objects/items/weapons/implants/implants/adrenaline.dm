@@ -1,6 +1,7 @@
 /obj/item/weapon/implant/adrenalin
 	name = "adrenalin"
 	desc = "Removes all stuns and knockdowns."
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 2)
 	var/uses
 
 /obj/item/weapon/implant/adrenalin/get_data()

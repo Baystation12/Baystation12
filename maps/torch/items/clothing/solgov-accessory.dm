@@ -67,6 +67,12 @@ medals
 	desc = "A white heart emblazoned with a red cross awarded to members of the SCG for service as a medical professional in a combat zone."
 	icon_state = "white_heart"
 
+/obj/item/clothing/accessory/solgov/torch_patch
+	name = "\improper Torch mission patch"
+	desc = "A fire resistant shoulder patch, worn by the personnel involved in the Torch Project."
+	icon_state = "torchpatch"
+	slot = ACCESSORY_SLOT_INSIGNIA
+
 /******
 ribbons
 ******/
@@ -213,7 +219,7 @@ armour attachments
 	desc = "An emblem depicting the Sol Central Government's flag."
 	icon_override = 'maps/torch/icons/obj/solgov-accessory.dmi'
 	icon = 'maps/torch/icons/obj/solgov-accessory.dmi'
-	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/solgov-accessory.dmi')
+	accessory_icons = list(slot_tie_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_w_uniform_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/solgov-accessory.dmi')
 	icon_state = "solflag"
 	slot = ACCESSORY_SLOT_ARMOR_M
 
@@ -236,6 +242,10 @@ armour attachments
 	name = "\improper POLICE tag"
 	desc = "An armor tag with the words POLICE printed in gold lettering on it."
 	icon_state = "comsectag"
+
+/obj/item/clothing/accessory/armor/helmcover/blue/sol
+	name = "peacekeeper helmet cover"
+	desc = "A fabric cover for armored helmets. This one is in SCG peacekeeper colors."
 
 /**************
 department tags
@@ -487,8 +497,8 @@ ranks - fleet
 	desc = "Insignia denoting the elusive rank of Warrant Officer. Too bad it's obviously fake."
 
 /obj/item/clothing/accessory/solgov/rank/fleet/officer/o2
-	name = "ranks (O-2 lieutenant junior grade)"
-	desc = "Insignia denoting the rank of Lieutenant Junior Grade."
+	name = "ranks (O-2 sub-lieutenant)"
+	desc = "Insignia denoting the rank of Sub-lieutenant."
 
 /obj/item/clothing/accessory/solgov/rank/fleet/officer/o3
 	name = "ranks (O-3 lieutenant)"
@@ -508,13 +518,13 @@ ranks - fleet
 	icon_state = "fleetrank_command"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/flag
-	name = "ranks (O-7 rear admiral lower half)"
-	desc = "Insignia denoting the rank of Rear Admiral Lower Half."
+	name = "ranks (O-7 commodore)"
+	desc = "Insignia denoting the rank of Commodore."
 	icon_state = "fleetrank_command"
 
 /obj/item/clothing/accessory/solgov/rank/fleet/flag/o8
-	name = "ranks (O-8 rear admiral upper half)"
-	desc = "Insignia denoting the rank of Rear Admiral Upper Half."
+	name = "ranks (O-8 rear admiral)"
+	desc = "Insignia denoting the rank of Rear Admiral."
 
 /obj/item/clothing/accessory/solgov/rank/fleet/flag/o9
 	name = "ranks (O-9 vice admiral)"

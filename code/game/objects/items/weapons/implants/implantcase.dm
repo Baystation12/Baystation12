@@ -14,9 +14,17 @@
 /obj/item/weapon/implantcase/New()
 	if(ispath(imp))
 		imp = new imp(src)
-		desc = "A case containing \a [imp]."
+		update_description()
 	..()
 	update_icon()
+
+/obj/item/weapon/implantcase/proc/update_description()
+	if (imp)
+		desc = "A case containing \a [imp]."
+		origin_tech = imp.origin_tech
+	else
+		desc = "A case for implants."
+		origin_tech.Cut()
 
 /obj/item/weapon/implantcase/update_icon()
 	if (imp)
@@ -52,12 +60,14 @@
 			imp.forceMove(M)
 			M.imp = src.imp
 			imp = null
+		update_description()
 		update_icon()
 		M.update_icon()
 	else if (istype(I, /obj/item/weapon/implant))
 		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
 		user.drop_from_inventory(I,src)
 		imp = I
+		update_description()
 		update_icon()
 	else
 		return ..()

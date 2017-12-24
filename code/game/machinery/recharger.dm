@@ -10,7 +10,7 @@ obj/machinery/recharger
 	idle_power_usage = 4
 	active_power_usage = 30 KILOWATTS
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/gun/magnetic/railgun, /obj/item/weapon/melee/baton, /obj/item/weapon/cell, /obj/item/modular_computer/, /obj/item/device/suit_sensor_jammer, /obj/item/weapon/computer_hardware/battery_module, /obj/item/weapon/shield_diffuser)
+	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/gun/magnetic/railgun, /obj/item/weapon/melee/baton, /obj/item/weapon/cell, /obj/item/modular_computer/, /obj/item/device/suit_sensor_jammer, /obj/item/weapon/computer_hardware/battery_module, /obj/item/weapon/shield_diffuser, /obj/item/clothing/mask/smokable/ecig)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -109,6 +109,9 @@ obj/machinery/recharger/Process()
 		else if(istype(charging, /obj/item/weapon/gun/magnetic/railgun))
 			var/obj/item/weapon/gun/magnetic/railgun/RG = charging
 			cell = RG.cell
+		else if(istype(charging, /obj/item/clothing/mask/smokable/ecig))
+			var/obj/item/clothing/mask/smokable/ecig/CIG = charging
+			cell = CIG.cigcell
 
 		if(istype(cell, /obj/item/weapon/cell))
 			var/obj/item/weapon/cell/C = cell

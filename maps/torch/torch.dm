@@ -80,6 +80,8 @@
 	#include "../away/smugglers/smugglers.dm"
 	#include "../away/magshield/magshield.dm"
 	#include "../away/casino/casino.dm"
+	#include "../away/yacht/yacht.dm"
+	#include "../away/slavers/slavers_base.dm"
 
 	#include "../../code/modules/lobby_music/chasing_time.dm"
 	#include "../../code/modules/lobby_music/human.dm"

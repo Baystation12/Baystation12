@@ -1,10 +1,6 @@
 // Alien clothing.
-/datum/gear/head/zhan_scarf
-	display_name = "Zhan headscarf (Tajara)"
-	path = /obj/item/clothing/head/tajaran/scarf
-	whitelisted = list(SPECIES_TAJARA)
-	sort_category = "Xenowear"
 
+// Unathi clothing
 /datum/gear/suit/unathi_mantle
 	display_name = "hide mantle (Unathi)"
 	path = /obj/item/clothing/suit/unathi/mantle
@@ -86,18 +82,20 @@
 	var/list/valid_colors = list("#c20c00", "#0227f7", "#6262ff", "#454545", "#009900", "#e17291")
 	gear_tweaks = list(new/datum/gear_tweak/color(valid_colors))
 
-/datum/gear/uniform/harness
-	display_name = "gear harness (Full Body Prosthetic, Diona, Giant Armoured Serpentid)"
-	path = /obj/item/clothing/under/harness
-	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_IPC,SPECIES_DIONA, SPECIES_NABBER)
-
+// IPC clothing
 /datum/gear/mask/ipc_monitor
 	display_name = "display monitor (IPC)"
 	path = /obj/item/clothing/mask/monitor
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_IPC)
 	cost = 0
+
+// Misc clothing
+/datum/gear/uniform/harness
+	display_name = "gear harness (Full Body Prosthetic, Diona, Giant Armoured Serpentid)"
+	path = /obj/item/clothing/under/harness
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_IPC,SPECIES_DIONA, SPECIES_NABBER)
 
 /datum/gear/shoes/toeless
 	display_name = "toeless jackboots"
@@ -109,6 +107,7 @@
 	path = /obj/item/clothing/shoes/workboots/toeless
 	sort_category = "Xenowear"
 
+// Taj clothing
 /datum/gear/eyes/tajblind/med
 	display_name = "medical veil (Tajara)"
 	path = /obj/item/clothing/glasses/hud/health/tajblind
@@ -146,6 +145,12 @@
 	caligae["grey sock"] = /obj/item/clothing/shoes/sandal/tajaran/caligae/grey
 	caligae["white sock"] = /obj/item/clothing/shoes/sandal/tajaran/caligae/white
 	gear_tweaks += new/datum/gear_tweak/path(caligae)
+
+/datum/gear/head/zhan_scarf
+	display_name = "Zhan headscarf (Tajara)"
+	path = /obj/item/clothing/head/tajaran/scarf
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
 
 // Pre-modified gloves
 
@@ -202,3 +207,11 @@
 	path = /obj/item/clothing/gloves/thick/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
+
+// Vox clothing
+/datum/gear/mask/gas/vox
+	display_name = "vox breathing mask"
+	path = /obj/item/clothing/mask/gas/vox
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_VOX)
+	allowed_roles = list(/datum/job/merchant) //Since that is the only role vox can be beside stowaway.
