@@ -167,6 +167,10 @@
 			internal = s_store
 		else if(istype(belt, /obj/item/weapon/tank))
 			internal = belt
+		else if(istype(wear_suit,/obj/item/clothing/suit/armor/special))
+			var/obj/item/clothing/suit/armor/special/suit_special = wear_suit
+			for(var/datum/armourspecials/internal_air_tank/tank in suit_special.specials)
+				internal = tank.internal_air_tank
 
 	if(internal)
 		visible_message("<span class='warning'>\The [src] is now running on internals!</span>")
