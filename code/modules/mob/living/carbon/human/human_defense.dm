@@ -6,6 +6,7 @@ ex_act
 meteor_act
 supression_act
 attack_generic override.
+cloak disrupt override
 
 */
 
@@ -502,3 +503,9 @@ attack_generic override.
 		return
 
 	return ..()
+
+/mob/living/carbon/human/disrupt_cloak_if_required()
+	var/obj/item/clothing/suit/armor/special/suit_special = wear_suit
+	if(istype(suit_special))
+		for(var/datum/armourspecials/cloaking/cloak in suit_special.specials)
+			cloak.disrupt_cloak(cloak.cloak_recover_time*1.5)

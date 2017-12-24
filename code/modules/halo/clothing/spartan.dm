@@ -51,10 +51,6 @@
 	sprite_sheets = list("Spartan" = 'code/modules/halo/clothing/spartan.dmi')
 	species_restricted = list("Spartan")
 
-/obj/item/clothing/suit/armor/special/spartan/ui_action_click()
-	for(var/datum/armourspecials/special in specials)
-		special.try_item_action()
-
 /obj/item/clothing/suit/armor/special/spartan/red
 	icon_state = "markIVmaleR"
 	armor = list(melee = 60, bullet = 75, laser = 40, energy = 40, bomb = 60, bio = 25, rad = 25) //lowered armour values for slayer.

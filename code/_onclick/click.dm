@@ -110,6 +110,7 @@
 			if(ismob(A)) // No instant mob attacking
 				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, 1)
+			disrupt_cloak_if_required()
 
 		trigger_aiming(TARGET_CAN_CLICK)
 		return 1
@@ -132,6 +133,7 @@
 					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, 1)
 
+			disrupt_cloak_if_required()
 			trigger_aiming(TARGET_CAN_CLICK)
 			return
 		else // non-adjacent click
@@ -139,6 +141,7 @@
 				W.afterattack(A, src, 0, params) // 0: not Adjacent
 			else
 				RangedAttack(A, params)
+			disrupt_cloak_if_required()
 
 			trigger_aiming(TARGET_CAN_CLICK)
 	return 1
@@ -263,7 +266,7 @@
 
 /mob/proc/TurfAdjacent(var/turf/T)
 	return T.AdjacentQuick(src)
-    
+
 /mob/observer/ghost/TurfAdjacent(var/turf/T)
 	if(!isturf(loc) || !client)
 		return FALSE

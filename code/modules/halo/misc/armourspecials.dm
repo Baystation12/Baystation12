@@ -3,13 +3,18 @@
 	var/mob/living/carbon/human/user
 
 /obj/effect/overlay/shields
-	icon = 'code/modules/halo/icons/elitearmour.dmi'
+	icon = 'code/modules/halo/icons/species/Sangheili_Combat_Harness.dmi'
 	icon_state = "shield"
+	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/effect/overlay/shields/spartan
 	icon = 'code/modules/halo/clothing/mob_spartansuit.dmi'
 	icon_state = "Spartan Shields"
+
+/obj/effect/overlay/shields/unggoy
+	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
+	icon_state = "shield"
 
 /datum/armourspecials/shields
 	var/shieldstrength
@@ -44,12 +49,12 @@
 
 /datum/armourspecials/shields/handle_shield(mob/m,damage,atom/damage_source)
 	GLOB.processing_objects += src
+	user.overlays -= shieldoverlay
 	if(checkshields(damage))
 		user.overlays += shieldoverlay
 		connectedarmour.armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0) //This is needed because shields don't work if armour absorbs the blow instead.
 		return 1
 	else
-		user.overlays -= shieldoverlay
 		connectedarmour.armor =  armourvalue
 		return 0
 
@@ -94,6 +99,9 @@
 
 /datum/armourspecials/shields/spartan
 	shieldoverlay = new /obj/effect/overlay/shields/spartan
+
+/datum/armourspecials/shields/unggoy
+	shieldoverlay = new /obj/effect/overlay/shields/unggoy
 
 /datum/armourspecials/dispenseitems
 	var/stored_items[0]
@@ -162,6 +170,90 @@
 /datum/armourspecials/internal_jumpsuit/spartan
 	internal_jumpsuit_type = /obj/item/clothing/under/spartan_internal
 
-/datum/armourspecials/cloaking // Placeholders for later stuff.
+/datum/armourspecials/internal_jumpsuit/unggoy
+	internal_jumpsuit_type = /obj/item/clothing/under/unggoy_internal
+
+//An internal air tank: Refillable at specialised machinery. (TODO: CODE SPECIAL MACHINERY)
+/datum/armourspecials/internal_air_tank
+	var/obj/item/weapon/tank/internal_air_tank
+	var/equip_slot = slot_back //The slot to equip the air tank to.
+
+/datum/armourspecials/internal_air_tank/New()
+	internal_air_tank = new internal_air_tank
+	return ..()
+
+/datum/armourspecials/internal_air_tank/on_equip(var/obj/source_armour)
+	. = ..()
+	if(user.wear_suit != source_armour)
+		return
+	if(!user.equip_to_slot_if_possible(internal_air_tank,equip_slot))
+		to_chat(user,"<span class = 'warning'>Back obstructed. Internal air tank functionality may be diminished.</span>")
+		return
+
+/datum/armourspecials/internal_air_tank/on_drop()
+	. = ..()
+	user.drop_from_inventory(internal_air_tank)
+	internal_air_tank.loc = null
+
+/datum/armourspecials/internal_air_tank/unggoy
+	internal_air_tank = /obj/item/weapon/tank/methane/unggoy_internal
+
+/datum/armourspecials/cloaking
+	var/cloak_active = 0
+	var/min_alpha = 40 //The minimum level of alpha to reach.
+	var/cloak_recover_time = 5 //The time in seconds it takes to recover to full cloak after being hit.
+	var/cloak_toggle_time = 2 //The time in seconds it takes to enable/disable the cloaking device.
+	var/cloak_disrupted = 0 //Is the cloak currently disrupted?
+
+/datum/armourspecials/cloaking/proc/activate_cloak(var/voluntary = 1)
+	src.cloak_active = 1
+	animate(user,alpha = min_alpha,time = (cloak_toggle_time SECONDS),flags = ANIMATION_END_NOW)
+	if(cloak_disrupted)//This stops span from cloak disruption, but still applies the affects.
+		return
+	if(voluntary)
+		user.visible_message("<span class = 'warning'>[user] activates their active camoflage</span>")
+	else
+		to_chat(user,"<span class = 'danger'>Your active camoflage recovers!</span>")
+		user.visible_message("<span calss = 'warning'>[user]'s active camoflage lets out a soft ping and [user] starts to fade.</span>")
+
+/datum/armourspecials/cloaking/proc/deactivate_cloak(var/voluntary = 1)
+	src.cloak_active = 0
+	animate(user,alpha = 255,time = (cloak_toggle_time SECONDS),flags = ANIMATION_END_NOW)
+	if(cloak_disrupted)//This stops span from cloak disruption, but still applies the affects.
+		return
+	if(voluntary)
+		user.visible_message("<span class = 'warning'>[user] deactivates their active camoflage</span>")
+	else
+		to_chat(user,"<span class = 'danger'>Your active camoflage fails!</span>")
+		user.visible_message("<span calss = 'warning'>[user]'s active camoflage sputters and fails!</span>")
+
+/datum/armourspecials/cloaking/proc/disrupt_cloak(var/disrupt_time = cloak_recover_time)
+	if(!cloak_active)
+		return
+	src.cloak_disrupted = 1
+	deactivate_cloak(0)
+	spawn(disrupt_time SECONDS)
+		activate_cloak(0)
+		cloak_disrupted = 0
+
+/datum/armourspecials/cloaking/try_item_action()
+	if(!cloak_active)
+		if(cloak_disrupted)
+			to_chat(user,"<span class = 'warning'>You can't re-enable your cloak whilst it's being disrupted.</span>")
+			return
+		activate_cloak()
+	else
+		deactivate_cloak()
+
+/datum/armourspecials/cloaking/handle_shield(mob/m,damage,atom/damage_source)
+	disrupt_cloak()
+	return 0
+
+/datum/armourspecials/cloaking/tryemp(severity)
+	switch(severity)
+		if(1)
+			disrupt_cloak(cloak_recover_time*2)
+		if(2)
+			disrupt_cloak(cloak_recover_time*4)
 
 /datum/armourspecials/thrusters
