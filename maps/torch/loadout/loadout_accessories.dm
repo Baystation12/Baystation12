@@ -299,6 +299,21 @@
 	tags["blood patch, AB-"] = /obj/item/clothing/accessory/armor/tag/abneg
 	gear_tweaks += new/datum/gear_tweak/path(tags)
 
+/datum/gear/accessory/helm_covers
+	display_name = "helmet covers"
+	path = /obj/item/clothing/accessory/armor/helmcover
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/accessory/helm_covers/New()
+	..()
+	var/covers = list()
+	covers["green helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/green
+	covers["navy blue helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/navy
+	covers["tan helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/tan
+	covers["PCRC helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/pcrc
+	covers["SAARE helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/saare
+	gear_tweaks += new/datum/gear_tweak/path(covers)
+
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
 	path = /obj/item/clothing/accessory/toggleable/hawaii
@@ -385,3 +400,7 @@
 	flags = GEAR_HAS_COLOR_SELECTION
 	sort_category = "Accessories"
 	allowed_roles = SEMIFORMAL_ROLES
+
+/datum/gear/accessory/torch_patch
+	display_name = "Torch mission patch"
+	path = /obj/item/clothing/accessory/solgov/torch_patch

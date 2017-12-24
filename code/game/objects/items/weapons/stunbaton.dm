@@ -13,10 +13,10 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
 	var/stunforce = 0
-	var/agonyforce = 60
+	var/agonyforce = 30
 	var/status = 0		//whether the thing is on or not
 	var/obj/item/weapon/cell/bcell
-	var/hitcost = 10
+	var/hitcost = 7
 
 /obj/item/weapon/melee/baton/loaded
 	bcell = /obj/item/weapon/cell/device/high
