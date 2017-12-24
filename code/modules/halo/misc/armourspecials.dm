@@ -200,7 +200,7 @@
 
 /datum/armourspecials/cloaking
 	var/cloak_active = 0
-	var/min_alpha = 40 //The minimum level of alpha to reach.
+	var/min_alpha = 20 //The minimum level of alpha to reach.
 	var/cloak_recover_time = 5 //The time in seconds it takes to recover to full cloak after being hit.
 	var/cloak_toggle_time = 2 //The time in seconds it takes to enable/disable the cloaking device.
 	var/cloak_disrupted = 0 //Is the cloak currently disrupted?
@@ -228,13 +228,13 @@
 		user.visible_message("<span calss = 'warning'>[user]'s active camoflage sputters and fails!</span>")
 
 /datum/armourspecials/cloaking/proc/disrupt_cloak(var/disrupt_time = cloak_recover_time)
-	if(!cloak_active)
+	if(!src.cloak_active)
 		return
 	src.cloak_disrupted = 1
 	deactivate_cloak(0)
 	spawn(disrupt_time SECONDS)
 		activate_cloak(0)
-		cloak_disrupted = 0
+		src.cloak_disrupted = 0
 
 /datum/armourspecials/cloaking/try_item_action()
 	if(!cloak_active)
