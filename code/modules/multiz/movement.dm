@@ -46,7 +46,7 @@
 			to_chat(src, "<span class='warning'>\The [A] blocks you.</span>")
 			return 0
 
-	if(can_fall(FALSE, destination))
+	if(direction == UP && can_fall(FALSE, destination))
 		to_chat(src, "<span class='warning'>You see nothing to hold on to.</span>")
 		return 0
 
