@@ -71,14 +71,14 @@
 
 	layer = ABOVE_HUMAN_LAYER
 
-	maxHealth = 350
-	health = 350
+	maxHealth = 400
+	health = 400
 	unsuitable_atoms_damage = 0
 
 	stop_automated_movement = 1
 	wander = 0
 	mob_size = MOB_LARGE
-	speed = 6
+	speed = 2
 
 	bound_width = 64
 	bound_height = 64
@@ -128,12 +128,15 @@
 	return allowed_attack_dirs
 
 /mob/living/simple_animal/lekgolo/mgalekgolo/bullet_act(var/obj/item/projectile/Proj)
-	if((Proj.penetrating >= 5) && (Proj.armor_penetration >= 80)) //Values taken from sniper rifle round.
-		. = ..()
 	if(!(get_dir(src,Proj.starting) in get_allowed_attack_dirs()))
+		if((Proj.penetrating >= 5) && (Proj.armor_penetration >= 80)) //Values taken from sniper rifle round.
+			Proj.damage *= 0.5
+			. = ..()
+			Proj.damage = initial(Proj.damage)
+		return
 		if(prob(25))
 			visible_message("<span class = 'danger'>The [Proj.name] is partially reflected by \the [name]'s armor plating.</span>")
-			Proj.damage *= 0.5 //So you can theoretically just shoot the hunter to death from the front.
+			Proj.damage *= 0.25 //So you can theoretically just shoot the hunter to death from the front.
 			. = ..()
 			Proj.damage = initial(Proj.damage)
 		else
@@ -198,7 +201,7 @@
 				visible_message("<span class = 'warning'>[name] lowers their [W.name].</span>")
 
 	if(get_active_weapon())//Move slower if you have a weapon readied.
-		speed = 10
+		speed = 5
 	else
 		speed = initial(speed)
 
@@ -253,6 +256,8 @@
 
 	charge_max = 50
 	charge_amount = 50
+
+	shot_delay = 1
 
 //Lekgolo Language Define//
 /datum/language/lekgolo
