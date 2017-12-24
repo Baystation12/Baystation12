@@ -160,3 +160,39 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
+
+/obj/structure/closet/secure_closet/security_contractor
+	name = "security contractor's locker"
+	req_access = list(access_brig)
+	icon_state = "sec1"
+	icon_closed = "sec"
+	icon_locked = "sec1"
+	icon_opened = "secopen"
+	icon_broken = "secbroken"
+	icon_off = "secoff"
+
+/obj/structure/closet/secure_closet/security_contractor/WillContain()
+	return list(
+		/obj/item/clothing/under/rank/security,
+		/obj/item/clothing/suit/armor/pcarrier/medium/security,
+		/obj/item/clothing/head/helmet,
+		/obj/item/weapon/cartridge/security,
+		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/weapon/storage/belt/security,
+		/obj/item/device/flash,
+		/obj/item/weapon/reagent_containers/spray/pepper,
+		/obj/item/weapon/grenade/chem_grenade/teargas,
+		/obj/item/weapon/melee/baton/loaded,
+		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
+		/obj/item/taperoll/police,
+		/obj/item/device/hailer,
+		/obj/item/clothing/accessory/storage/black_vest,
+		/obj/item/weapon/gun/energy/taser,
+		/obj/item/device/megaphone,
+		/obj/item/clothing/gloves/thick,
+		/obj/item/clothing/accessory/holster/thigh,
+		/obj/item/device/holowarrant,
+		/obj/item/device/flashlight/maglight,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
+	)
