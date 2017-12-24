@@ -101,7 +101,7 @@
 
 /obj/item/weapon/pen/reagent/sleepy/New()
 	..()
-	reagents.add_reagent(/datum/reagent/chloralhydrate, 22)	//Used to be 100 sleep toxin//30 Chloral seems to be fatal, reducing it to 22./N
+	reagents.add_reagent(/datum/reagent/chloralhydrate, 15)	//Used to be 100 sleep toxin//30 Chloral seems to be fatal, reducing it to 22, reducing it further to 15 because fuck you OD code./N
 
 
 /*
