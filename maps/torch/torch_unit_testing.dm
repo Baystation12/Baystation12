@@ -63,7 +63,9 @@
 		/area/smugglers/base = NO_SCRUBBER,
 		/area/smugglers/dorms = NO_SCRUBBER|NO_VENT,
 		/area/smugglers/office = NO_SCRUBBER|NO_VENT,
-		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
+		/area/bluespaceriver/underground = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/bluespaceriver/ground = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -124,6 +126,7 @@
 		/area/ship,
 		/area/smugglers,
 		/area/slavers_base,
+		/area/bluespaceriver
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
