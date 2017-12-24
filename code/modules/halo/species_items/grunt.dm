@@ -1,5 +1,11 @@
 #define GRUNT_GEAR_ICON 'code/modules/halo/icons/species/grunt_gear.dmi'
 
+/mob/living/carbon/human/covenant/unggoy/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
+	..(new_loc,"unggoy")							//Code breaks if not placed in species folder,
+	name = pick(GLOB.first_names_kig_yar);name += " ";name += pick(GLOB.first_names_kig_yar)
+	real_name = name
+	faction = "Covenant"
+
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness
 	name = "Unggoy Combat Harness (Minor)"
 	desc = "A combat harness with an inbuilt gas tank"
