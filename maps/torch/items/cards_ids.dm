@@ -70,8 +70,10 @@
 	job_access_type = /datum/job/warden
 
 /obj/item/weapon/card/id/torch/crew/security/forensic
-	job_access_type = /datum/job/detective
+	job_access_type = /datum/job/forensic_tech
 
+/obj/item/weapon/card/id/torch/crew/contractor/forensic
+	job_access_type = /datum/job/detective
 
 /obj/item/weapon/card/id/torch/silver/engineering
 	job_access_type = /datum/job/chief_engineer

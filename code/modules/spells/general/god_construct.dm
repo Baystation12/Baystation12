@@ -26,13 +26,10 @@
 		var/choice = input("Construct to build.", "Construction") as null|anything in possible_targets
 		if(!choice)
 			return
-		var/list/buildable = possible_targets[choice]
 		if(locate(/obj/structure/deity) in get_turf(holder))
 			return
 
-		charge_max = buildable[CONSTRUCT_SPELL_COST]
-
-		return list(buildable[CONSTRUCT_SPELL_TYPE])
+		return possible_targets[choice]
 	else
 		return
 
@@ -40,19 +37,18 @@
 	if(!..())
 		return 0
 	var/turf/T = get_turf(user)
-	for(var/obj/O in T)
-		if(O.density)
-			to_chat(user, "<span class='warning'>Something here is blocking your construction!</span>")
-			return 0
-	if(connected_god && !connected_god.near_structure(T))
-		to_chat(user, "<span class='warning'>You need to be near an important structure for this to work!</span>")
+	if(skipcharge && !valid_deity_structure_spot(targets[CONSTRUCT_SPELL_TYPE], T, connected_god, user))
 		return 0
+	else
+		for(var/obj/O in T)
+			if(O.density)
+				to_chat(user, "<span class='warning'>Something here is blocking your construction!</span>")
+				return 0
 	return 1
 
-
 /spell/construction/cast(var/target, mob/user)
-	if(islist(target))
-		target = target[1]
+	charge_max = target[CONSTRUCT_SPELL_COST]
+	target = target[CONSTRUCT_SPELL_TYPE]
 	var/turf/T = get_turf(user)
 	new target(T, connected_god)
 #undef CONSTRUCT_SPELL_COST

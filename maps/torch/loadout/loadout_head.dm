@@ -34,12 +34,7 @@
 /datum/gear/head/whitentberet
 	display_name = "beret, NanoTrasen security"
 	path = /obj/item/clothing/head/beret/guard
-	allowed_roles = list(/datum/job/guard)
-
-/datum/gear/head/solhat
-	display_name = "Sol Central Government Cap"
-	path = /obj/item/clothing/head/soft/solgov
-	allowed_roles = SOLGOV_ROLES
+	allowed_roles = list(/datum/job/guard, /datum/job/detective)
 
 /datum/gear/head/veteranhat
 	display_name = "veteran hat"

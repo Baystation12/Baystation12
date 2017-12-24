@@ -33,6 +33,7 @@
 #define ACCESSORY_SLOT_ARMOR_L  "Leg armor"
 #define ACCESSORY_SLOT_ARMOR_S  "Armor storage"
 #define ACCESSORY_SLOT_ARMOR_M  "Misc armor"
+#define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 
 // Flags bitmasks.
 #define NOBLUDGEON         0x1   // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
