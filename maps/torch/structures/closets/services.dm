@@ -24,7 +24,6 @@
 	icon_closed = "hydrosecure"
 	icon_locked = "hydrosecure1"
 	icon_opened = "hydrosecureopen"
-	icon_broken = "hydrosecurebroken"
 	icon_off = "hydrosecureoff"
 
 /obj/structure/closet/secure_closet/hydroponics_torch/WillContain()

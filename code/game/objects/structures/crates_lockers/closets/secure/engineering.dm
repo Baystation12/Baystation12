@@ -5,7 +5,6 @@
 	icon_closed = "securece"
 	icon_locked = "securece1"
 	icon_opened = "secureceopen"
-	icon_broken = "securecebroken"
 	icon_off = "secureceoff"
 
 /obj/structure/closet/secure_closet/engineering_chief/WillContain()
@@ -37,7 +36,6 @@
 	icon_closed = "secureengelec"
 	icon_locked = "secureengelec1"
 	icon_opened = "toolclosetopen"
-	icon_broken = "secureengelecbroken"
 	icon_off = "secureengelecoff"
 
 /obj/structure/closet/secure_closet/engineering_electrical/WillContain()
@@ -56,7 +54,6 @@
 	icon_closed = "secureengweld"
 	icon_locked = "secureengweld1"
 	icon_opened = "toolclosetopen"
-	icon_broken = "secureengweldbroken"
 	icon_off = "secureengweldoff"
 
 /obj/structure/closet/secure_closet/engineering_welding/WillContain()
@@ -75,7 +72,6 @@
 	icon_closed = "secureeng"
 	icon_locked = "secureeng1"
 	icon_opened = "secureengopen"
-	icon_broken = "secureengbroken"
 	icon_off = "secureengoff"
 
 /obj/structure/closet/secure_closet/engineering_personal/WillContain()
@@ -99,7 +95,6 @@
 	icon_closed = "secureatm"
 	icon_locked = "secureatm1"
 	icon_opened = "secureatmopen"
-	icon_broken = "secureatmbroken"
 	icon_off = "secureatmoff"
 
 /obj/structure/closet/secure_closet/atmos_personal/WillContain()

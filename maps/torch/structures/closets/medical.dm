@@ -9,7 +9,6 @@
 	icon_closed = "cmosecure"
 	icon_locked = "cmosecure1"
 	icon_opened = "cmosecureopen"
-	icon_broken = "cmosecurebroken"
 	icon_off = "cmosecureoff"
 
 /obj/structure/closet/secure_closet/CMO_torch/WillContain()
@@ -50,7 +49,6 @@
 	icon_closed = "securesenmed"
 	icon_locked = "securesenmed1"
 	icon_opened = "securesenmedopen"
-	icon_broken = "securesenmedbroken"
 	icon_off = "securesenmedoff"
 
 /obj/structure/closet/secure_closet/medical_torchsenior/WillContain()
@@ -83,7 +81,6 @@
 	icon_closed = "securemed"
 	icon_locked = "securemed1"
 	icon_opened = "securemedopen"
-	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
 
 /obj/structure/closet/secure_closet/medical_torch/WillContain()
@@ -114,7 +111,6 @@
 	icon_closed = "securemed"
 	icon_locked = "securemed1"
 	icon_opened = "securemedopen"
-	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
 
 /obj/structure/closet/secure_closet/medical_contractor/WillContain()

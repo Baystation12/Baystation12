@@ -10,7 +10,7 @@
 	var/icon_opened = "open"
 
 	var/icon_locked
-	var/icon_broken
+	var/icon_broken = "sparks"
 	var/icon_off
 
 	var/welded = 0
@@ -393,6 +393,7 @@
 	if(!opened)
 		if(broken && icon_off)
 			icon_state = icon_off
+			overlays += icon_broken
 		else if((setup & CLOSET_HAS_LOCK) && locked && icon_locked)
 			icon_state = icon_locked
 		else
@@ -542,9 +543,6 @@
 /obj/structure/closet/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")
 	if(make_broken())
 		update_icon()
-		if(icon_broken)
-			flick(icon_broken, src)
-
 		if(visual_feedback)
 			visible_message(visual_feedback, audible_feedback)
 		else if(user && emag_source)
