@@ -5,8 +5,6 @@
 	name = pick(GLOB.first_names_kig_yar);name += " ";name += pick(GLOB.first_names_kig_yar)
 	real_name = name
 	faction = "Covenant"
-	spawn(10)
-		species.equip_survival_gear(src)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness
 	name = "Unggoy Combat Harness (Minor)"
