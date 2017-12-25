@@ -56,6 +56,18 @@
 	bandanas["gold bandana"] = /obj/item/clothing/mask/bandana/gold
 	bandanas["skull bandana"] = /obj/item/clothing/mask/bandana/skull
 	gear_tweaks += new/datum/gear_tweak/path(bandanas)
+	
+/datum/gear/head/oldbandana
+	display_name = "old bandana selection"
+	path = /obj/item/clothing/head
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/head/oldbandana/New()
+	..()
+	var/bandana = list()
+	bandana["green bandana"] = /obj/item/clothing/head/greenbandana
+	bandana["orange bandana"] = /obj/item/clothing/head/orangebandana
+	bandana["pirate bandana"] = /obj/item/clothing/head/bandana
 
 /datum/gear/head/bow
 	display_name = "hair bow, colour select"
