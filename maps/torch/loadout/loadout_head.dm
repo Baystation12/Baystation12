@@ -24,7 +24,6 @@
 	berets["home guard beret"] = /obj/item/clothing/head/beret/solgov/homeguard
 	berets["gateway administration beret"] = /obj/item/clothing/head/beret/solgov/gateway
 	berets["customs and trade beret"] = /obj/item/clothing/head/beret/solgov/customs
-	berets["orbital assault beret"] = /obj/item/clothing/head/beret/solgov/orbital
 	berets["government research beret"] = /obj/item/clothing/head/beret/solgov/research
 	berets["health service beret"] = /obj/item/clothing/head/beret/solgov/health
 	berets["diplomatic security beret"] = /obj/item/clothing/head/beret/solgov/diplomatic
