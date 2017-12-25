@@ -55,8 +55,12 @@
 	icon_state = "Needler Shot"
 	embed = 1
 	sharp = 1
+	var/mob/locked_target
 
 /obj/item/projectile/bullet/covenant/needles/attack_mob(var/mob/living/carbon/human/L)
+	if(!istype(L))
+		. = ..()
+		return
 	var/list/embedded_shards[0]
 	for(var/obj/shard in L.contents )
 		if(!istype(shard,/obj/item/weapon/material/shard))
@@ -67,9 +71,26 @@
 			explosion(L.loc,0,1,2,5)
 			for(var/I in embedded_shards)
 				qdel(I)
-	if(prob(20)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
+	if(prob(30)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
 		var/obj/shard = new /obj/item/weapon/material/shard/shrapnel
 		var/obj/item/organ/external/embed_organ = pick(L.organs)
 		shard.name = "Needle shrapnel"
 		embed_organ.embed(shard)
 	..()
+
+/obj/item/projectile/bullet/covenant/needles/launch_from_gun(var/atom/target)
+	if(ismob(target))
+		locked_target = target //Setting target directly if we've clicked on them.
+	if(isturf(target))
+		for(var/mob/M in target.contents)//Otherwise search the contents of the clicked turf, and take the first mob we find as a target.
+			locked_target = M
+			break
+	. = ..()
+
+/obj/item/projectile/bullet/covenant/needles/attack_mob()
+	. = ..()
+	locked_target = null //No more homing if we miss.
+
+/obj/item/projectile/bullet/covenant/needles/before_move()
+	if(locked_target)
+		redirect(locked_target.x,locked_target.y,loc)
