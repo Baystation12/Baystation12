@@ -44,7 +44,7 @@
 			new /obj/item/weapon/storage/firstaid/unsc(B)
 		H.equip_to_slot_or_del(B,slot_belt)
 
-	..()
+	. = ..()
 
 /decl/hierarchy/outfit/job/stranded_unsc/tech
 	name = OUTFIT_JOB_NAME("UNSC technician survivor outfit")
