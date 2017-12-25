@@ -30,9 +30,10 @@
 	planet_area = locate() in world
 
 	//lighting and day/night cycle
-	time_lightchange = world.time + duration_day
-	is_daytime = 1
-	//set_ambient_light(daytime_brightness)
+	solar_cycle_start = world.time
+	var/turf/light_turf = locate(1,1,1)
+	ambient_light = new(src, light_turf)
+	ambient_light.apply_lum()
 
 /datum/game_mode/stranded/announce()
 	..()
@@ -45,3 +46,4 @@
 	time_pelican_leave = time_pelican_arrive + pelican_load_time
 	time_wave_cycle = world.time + duration_rest_base / 2
 	time_next_resupply = world.time + interval_resupply
+	//time_new_cycle = world.time + solar_cycle_duration - solar_cycle_duration * threshold_dawn

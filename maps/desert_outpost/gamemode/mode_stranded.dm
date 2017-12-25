@@ -36,32 +36,27 @@
 	var/time_wave_cycle = 0
 	var/interval_resupply = 2000
 	var/time_next_resupply = 0
-	//
-	var/duration_day = 3000
-	var/duration_night = 3000
-	//var/daynight_start = 0
-	//var/daynight_end = 0
-	var/threshold_dusk = 0.75
-	var/threshold_dawn = 0.75
-	var/is_daytime = 1
-	var/current_light_level = 1
-	var/time_lightchange = 0
-	//
 
-	var/worldtime_offset = 0
+	//day night cycle stuff
+	var/solar_cycle_start = 0			//deciseconds, calculated using world.time
+	var/solar_cycle_duration = 6000		//deciseconds
+	var/solar_cycle_offset = 1500		//deciseconds
+	var/threshold_dawn = 0.25			//percent
+	var/threshold_dusk = 0.75			//percent
+	var/light_change_amount = 0.1		//set this to 2 for light changes to be 100% instead of a dawn/dusk period
+	//var/current_light_level = 9
+	var/do_daynight_cycle = 1			//for testing
+	var/time_light_update = 0			//deciseconds, calculated using world.time
+	var/solar_announcement_status = 0
+	//
+	var/datum/light_source/ambient/ambient_light
+	var/list/light_sources
+	var/light_power = 0
+	var/light_range = 255
+	var/light_color = "#ffffff"
 
 	var/latest_tick_time = 0
 	var/round_start
-
-	var/do_daynight_cycle = 0
-	var/datum/light_source/ambient/ambient_light
-	var/list/light_sources
-	var/light_power = 1
-	var/light_range = 255
-	var/light_color = 0//"#ffff00"
-	var/daytime_brightness = 2
-	var/dawn_brightness = 0.5
-	var/dusk_brightness = 0.5
 
 	var/survive_duration = 18000
 	var/pelican_load_time = 600
