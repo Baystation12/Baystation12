@@ -88,8 +88,8 @@
 	mob_swap_flags = HEAVY
 	mob_push_flags = HEAVY
 
-	melee_damage_lower = 40
-	melee_damage_upper = 70
+	melee_damage_lower = 30
+	melee_damage_upper = 50
 	attacktext = "attacked"
 	resistance = 35 //5 below an active energy sword
 
