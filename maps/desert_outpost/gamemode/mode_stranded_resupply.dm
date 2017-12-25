@@ -89,7 +89,8 @@ var/debris_objs = list(\
 	var/max_dist = 10
 	for(var/turf/spawn_turf in range(max_dist, epicentre))
 		//closer to the center has more goodies
-		var/spawn_chance = 100 * (max_dist - (get_dist(epicentre, spawn_turf)))
+		var/cur_dist = get_dist(epicentre, spawn_turf)
+		var/spawn_chance = 100 * ((max_dist - cur_dist) / max_dist)
 		spawn_chance = Clamp(spawn_chance, 0, 100)
 		if(prob(spawn_chance))
 			//low chance to spawn a useful supply crate
