@@ -609,7 +609,7 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/marine/e4,
 		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/marine/e5
+		/datum/mil_rank/marine/e5,
 	)
 
 	access = list(access_security, access_brig, access_forensics_lockers,
