@@ -495,12 +495,14 @@ cloak disrupt override
 			visible_message("<span class = 'danger'>The [P.name] whizzes past [src]!</span>")
 	time_last_supressed = world.time
 
-/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message)
+/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message,environment_smash)
 	if(!damage || !istype(user))
 		return
 
 	if(check_shields(damage, user, user, attack_text = attack_message))
 		return
+
+	adjustBruteLoss(damage)
 
 	return ..()
 

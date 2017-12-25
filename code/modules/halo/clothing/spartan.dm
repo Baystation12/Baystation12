@@ -55,7 +55,7 @@
 	icon_state = "markIVmaleR"
 	armor = list(melee = 60, bullet = 75, laser = 40, energy = 40, bomb = 60, bio = 25, rad = 25) //lowered armour values for slayer.
 	specials = list(/datum/armourspecials/internal_jumpsuit/spartan,/datum/armourspecials/shields/spartan,/datum/armourspecials/dispenseitems/spartanmeds,/datum/armourspecials/shieldmonitor)
-	totalshields = 150
+	totalshields = 100
 	canremove = 0 //To disallow stripping of armour for impersonation in slayer.
 	action_button_name = "Dispense Medicine"
 
@@ -63,7 +63,7 @@
 	icon_state = "markIVmaleB"
 	armor = list(melee = 60, bullet = 75, laser = 40, energy = 40, bomb = 60, bio = 25, rad = 25) //lowered armour values for slayer.
 	specials = list(/datum/armourspecials/internal_jumpsuit/spartan,/datum/armourspecials/shields/spartan,/datum/armourspecials/dispenseitems/spartanmeds,/datum/armourspecials/shieldmonitor)
-	totalshields = 150
+	totalshields = 100
 	canremove = 0
 	action_button_name = "Dispense Medicine"
 
