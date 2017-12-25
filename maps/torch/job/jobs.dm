@@ -366,6 +366,8 @@
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/w4,
+		/datum/mil_rank/fleet/w3,
 		/datum/mil_rank/ec/o1
 	)
 
@@ -434,6 +436,10 @@
 		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/marine
 	)
 	allowed_ranks = list(
+		/datum/mil_rank/fleet/w4,
+		/datum/mil_rank/marine/w5,
+		/datum/mil_rank/fleet/w3,
+		/datum/mil_rank/marine/w3,
 		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/ec/e7,
@@ -609,7 +615,7 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/marine/e4,
 		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/marine/e5
+		/datum/mil_rank/marine/e5,
 	)
 
 	access = list(access_security, access_brig, access_forensics_lockers,
@@ -800,6 +806,10 @@
 		/datum/mil_rank/marine/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/marine/o2,
+		/datum/mil_rank/fleet/w3,
+		/datum/mil_rank/marine/w3,
+		/datum/mil_rank/fleet/w4,
+		/datum/mil_rank/marine/w5,
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/marine/e5,
 		/datum/mil_rank/fleet/e6,

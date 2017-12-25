@@ -138,6 +138,9 @@
 		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/fleet/e9,
 		/datum/mil_rank/fleet/e9_alt1,
+		/datum/mil_rank/fleet/w2,
+		/datum/mil_rank/fleet/w3,
+		/datum/mil_rank/fleet/w4,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
@@ -194,6 +197,9 @@
 		/datum/mil_rank/marine/e8_alt,
 		/datum/mil_rank/marine/e9,
 		/datum/mil_rank/marine/e9_alt1,
+		/datum/mil_rank/marine/w1,
+		/datum/mil_rank/marine/w3,
+		/datum/mil_rank/marine/w5,
 		/datum/mil_rank/marine/o1,
 		/datum/mil_rank/marine/o2,
 		/datum/mil_rank/marine/o3,
@@ -319,26 +325,31 @@
 /datum/mil_rank/fleet/w1
 	name = "Warrant Officer 1"
 	name_short = "WO1"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/warrant, /obj/item/clothing/accessory/solgov/specialty/warrant)
 	sort_order = -1
 
 /datum/mil_rank/fleet/w2
 	name = "Chief Warrant Officer 2"
 	name_short = "CWO2"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/warrant/w2, /obj/item/clothing/accessory/solgov/specialty/warrant)
 	sort_order = -2
 
 /datum/mil_rank/fleet/w3
 	name = "Chief Warrant Officer 3"
 	name_short = "CWO3"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/warrant/w3, /obj/item/clothing/accessory/solgov/specialty/warrant)
 	sort_order = -3
 
 /datum/mil_rank/fleet/w4
 	name = "Chief Warrant Officer 4"
 	name_short = "CWO4"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/warrant/w4, /obj/item/clothing/accessory/solgov/specialty/warrant)
 	sort_order = -4
 
 /datum/mil_rank/fleet/w5
 	name = "Chief Warrant Officer 5"
 	name_short = "CWO5"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/fleet/warrant/w5, /obj/item/clothing/accessory/solgov/specialty/warrant)
 	sort_order = -5
 
 /datum/mil_rank/fleet/o1
@@ -545,26 +556,31 @@
 /datum/mil_rank/marine/w1
 	name = "Warrant Officer 1"
 	name_short = "WO"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/warrant)
 	sort_order = -1
 
 /datum/mil_rank/marine/w2
 	name = "Chief Warrant Officer 2"
 	name_short = "CWO2"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/warrant/w2)
 	sort_order = -2
 
 /datum/mil_rank/marine/w3
 	name = "Chief Warrant Officer 3"
 	name_short = "CWO3"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/warrant/w3)
 	sort_order = -3
 
 /datum/mil_rank/marine/w4
 	name = "Chief Warrant Officer 4"
 	name_short = "CWO4"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/warrant/w4)
 	sort_order = -4
 
 /datum/mil_rank/marine/w5
 	name = "Chief Warrant Officer 5"
 	name_short = "CWO5"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/warrant/w5)
 	sort_order = -5
 
 /datum/mil_rank/marine/o1
