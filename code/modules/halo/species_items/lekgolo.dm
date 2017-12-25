@@ -13,6 +13,7 @@
 	melee_damage_lower = 1
 	melee_damage_upper = 2
 	attacktext = "ineffectively pushed"
+	a_intent = I_HURT
 
 	languages = list(LANGUAGE_SANGHEILI,LANGUAGE_LEKGOLO)
 
@@ -63,7 +64,7 @@
 //Mgalekgolo defines//
 /mob/living/simple_animal/lekgolo/mgalekgolo
 	name = "mgalekgolo"
-	desc = "RUN"
+	desc = "A hulking monstrosity of flowing worms encased in starship-grade alloy."
 
 	icon = 'code/modules/halo/icons/species/hunters.dmi'
 	icon_state = "hunter_fuel_rod"
@@ -87,8 +88,8 @@
 	mob_swap_flags = HEAVY
 	mob_push_flags = HEAVY
 
-	melee_damage_lower = 10
-	melee_damage_upper = 20
+	melee_damage_lower = 40
+	melee_damage_upper = 70
 	attacktext = "attacked"
 	resistance = 35 //5 below an active energy sword
 
@@ -257,7 +258,7 @@
 	charge_max = 50
 	charge_amount = 50
 
-	shot_delay = 1
+	shot_delay = 1.5
 
 //Lekgolo Language Define//
 /datum/language/lekgolo
