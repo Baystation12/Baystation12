@@ -148,6 +148,11 @@ specialty pins
 	desc = "An iron pin denoting some special qualification."
 	icon_state = "fleetpin_enlisted"
 
+/obj/item/clothing/accessory/solgov/specialty/warrant
+	name = "warrant officer's qualification pin"
+	desc = "An iron pin with a golden stripe denoting some special qualification."
+	icon_state = "fleetpin_warrant"
+
 /obj/item/clothing/accessory/solgov/specialty/officer
 	name = "officer's qualification pin"
 	desc = "A golden pin denoting some special qualification."
@@ -487,6 +492,31 @@ ranks - fleet
 	name = "ranks (E-9 master chief petty officer of the Fleet)"
 	desc = "Insignia denoting the rank of Master Chief Petty Officer of the Fleet."
 
+/obj/item/clothing/accessory/solgov/rank/fleet/warrant
+	name = "ranks (W-1 warrant officer 1)"
+	desc = "Insignia denoting the rank of Warrant Officer 1."
+	icon_state = "fleetrank_w1"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/warrant/w2
+	name = "ranks (W-2 chief warrant officer 2)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer 2."
+	icon_state = "fleetrank_w2"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/warrant/w3
+	name = "ranks (W-3 chief warrant officer 3)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer 3."
+	icon_state = "fleetrank_w3"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/warrant/w4
+	name = "ranks (W-4 chief warrant officer 4)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer 4."
+	icon_state = "fleetrank_w4"
+
+/obj/item/clothing/accessory/solgov/rank/fleet/warrant/w5
+	name = "ranks (W-5 chief warrant officer 5)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer 5."
+	icon_state = "fleetrank_w5"
+
 /obj/item/clothing/accessory/solgov/rank/fleet/officer
 	name = "ranks (O-1 ensign)"
 	desc = "Insignia denoting the rank of Ensign."
@@ -595,6 +625,31 @@ ranks - marines
 /obj/item/clothing/accessory/solgov/rank/marine/enlisted/e9_alt2
 	name = "ranks (E-9 sergeant major of the Marine Corps)"
 	desc = "Insignia denoting the rank of Sergeant Major of the Marine Corps."
+
+/obj/item/clothing/accessory/solgov/rank/marine/warrant
+	name = "ranks (W-1 warrant officer 1)"
+	desc = "Insignia denoting the rank of Warrant Officer 1."
+	icon_state = "marinerank_w1"
+
+/obj/item/clothing/accessory/solgov/rank/marine/warrant/w2
+	name = "ranks (W-2 chief warrant officer 2)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer 2."
+	icon_state = "marinerank_w2"
+
+/obj/item/clothing/accessory/solgov/rank/marine/warrant/w3
+	name = "ranks (W-3 chief warrant officer 3)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer 3."
+	icon_state = "marinerank_w3"
+
+/obj/item/clothing/accessory/solgov/rank/marine/warrant/w4
+	name = "ranks (W-1 chief warrant officer 4)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer 4."
+	icon_state = "marinerank_w4"
+
+/obj/item/clothing/accessory/solgov/rank/marine/warrant/w5
+	name = "ranks (W-5 warrant officer 5)"
+	desc = "Insignia denoting the rank of Chief Warrant Officer 5."
+	icon_state = "marinerank_w5"
 
 /obj/item/clothing/accessory/solgov/rank/marine/officer
 	name = "ranks (O-1 second lieutenant)"
