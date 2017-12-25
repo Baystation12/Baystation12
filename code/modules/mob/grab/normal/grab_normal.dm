@@ -29,7 +29,7 @@
 	assailant.put_in_active_hand(src)
 	assailant.do_attack_animation(affecting)
 	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-	visible_message("<span class='warning'>[assailant] has grabbed [affecting] passively!</span>")
+	visible_message("<span class='warning'>[assailant] has grabbed [affecting][(last_target == "l_hand" || last_target == "r_hand")? " by their hand":" passively"]!</span>")
 	affecting.grabbed_by += src
 
 /datum/grab/normal
