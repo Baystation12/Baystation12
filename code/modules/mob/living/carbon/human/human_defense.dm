@@ -105,7 +105,10 @@ cloak disrupt override
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
 			if(istype(C) && C.body_parts_covered & def_zone.body_part)
-				protection = add_armor(protection, C.armor[type])
+				var/effective_armor_thickness = 1
+				if(!isnull(initial(C.armor_thickness)))
+					effective_armor_thickness = (C.armor_thickness/10) + 1
+				protection = add_armor(protection, (C.armor[type] * effective_armor_thickness))
 	return protection
 
 /mob/living/carbon/human/proc/check_head_coverage()
