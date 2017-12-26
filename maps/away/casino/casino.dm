@@ -140,3 +140,23 @@
 
 /obj/structure/casino/craps/craps_down
 	icon_state = "craps_down"
+
+//========================used bullet casings=======================
+/obj/item/ammo_casing/a556/used/Initialize()
+	. = ..()
+	expend()
+	pixel_x = rand(-10, 10)
+	pixel_y = rand(-10, 10)
+
+
+/obj/item/ammo_casing/c45/used/Initialize()
+	. = ..()
+	expend()
+	pixel_x = rand(-10, 10)
+	pixel_y = rand(-10, 10)
+
+/obj/item/ammo_casing/a50/used/Initialize()
+	. = ..()
+	expend()
+	pixel_x = rand(-10, 10)
+	pixel_y = rand(-10, 10)
