@@ -16,6 +16,8 @@
 
 /decl/hierarchy/outfit/job/stranded_unsc/marine/equip_base(mob/living/carbon/human/H)
 
+	. = ..()
+
 	var/list/random_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum = /obj/item/ammo_magazine/m127_saphe,\
 		/obj/item/weapon/gun/projectile/ma5b_ar = /obj/item/ammo_magazine/m762_ap,\
 		/obj/item/weapon/gun/projectile/m7_smg = /obj/item/ammo_magazine/m5,\
@@ -43,8 +45,6 @@
 			B = new /obj/item/weapon/storage/belt/marine_medic(H)
 			new /obj/item/weapon/storage/firstaid/unsc(B)
 		H.equip_to_slot_or_del(B,slot_belt)
-
-	. = ..()
 
 /decl/hierarchy/outfit/job/stranded_unsc/tech
 	name = OUTFIT_JOB_NAME("UNSC technician survivor outfit")
