@@ -1,17 +1,4 @@
 
-/mob/verb/update_lights()
-	if(ticker.mode:ambient_light)
-		world << "Calling apply_lum()..."
-		ticker.mode:ambient_light:apply_lum()
-
-/*
-	var/solar_cycle_duration = 6000
-	var/threshold_dusk = 0.25
-	var/threshold_dawn = 0.75
-	var/daytime_brightness = 9
-	var/current_light_level = 1
-	*/
-
 //this is about how long it takes under the server settings i tested to do a full light switchover
 #define DURATION_LIGHTING_CHANGE 200
 #define DAYTIME_BRIGHTNESS 2

@@ -16,11 +16,11 @@
 	flood_spawner = new(src, max_flood, respawn_delay)
 	icon_state = "biomass[rand(1,3)]"
 
-/obj/structure/biomass/Bump(var/atom/movable/AM)
-	world << "[src] [src.type] Bump()'d by [AM] [AM.type]"
+//not necessary if they all spawn in the bottom left corner
+/*/obj/structure/biomass/Bump(var/atom/movable/AM)
 	. = ..()
 	if(istype(AM, /mob/living/simple_animal/hostile/flood))
-		AM.loc = get_step(AM, AM.dir)
+		AM.loc = get_step(AM, AM.dir)*/
 
 /obj/structure/biomass/medium
 	icon = 'flood_bio_med.dmi'
