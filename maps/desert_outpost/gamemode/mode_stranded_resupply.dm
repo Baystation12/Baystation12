@@ -6,6 +6,37 @@
 /obj/effect/landmark/scavenge_spawn_skip
 	icon_state = "x"
 
+/datum/game_mode/stranded
+	var/list/supply_crate_procs = list(\
+		/datum/game_mode/stranded/proc/spawn_gun_crate,\
+		/datum/game_mode/stranded/proc/spawn_heavygun_crate,\
+		/datum/game_mode/stranded/proc/spawn_sniper_crate,\
+		/datum/game_mode/stranded/proc/spawn_armour_crate,\
+		/datum/game_mode/stranded/proc/spawn_medic_crate,\
+		/datum/game_mode/stranded/proc/spawn_turret_crate,\
+		/datum/game_mode/stranded/proc/spawn_misc_crate,\
+		/datum/game_mode/stranded/proc/spawn_material_crate)
+
+	var/debris_structures = list(\
+		/obj/structure/girder,\
+		/obj/structure/girder/displaced,\
+		/obj/structure/grille,\
+		/obj/structure/grille/broken,\
+		/obj/structure/foamedmetal,\
+		/obj/structure/lattice,\
+		/obj/structure/barrel)
+
+	var/debris_objs = list(\
+		/obj/item/stack/material/steel/ten,\
+		/obj/item/stack/rods,\
+		/obj/item/stack/material/steel/ten,\
+		/obj/item/stack/rods,\
+		/obj/item/stack/material/steel/ten,\
+		/obj/item/stack/rods,\
+		/obj/item/stack/cable_coil/random,\
+		/obj/item/weapon/weldingtool,\
+		/obj/item/weapon/wrench)
+
 /datum/game_mode/stranded/proc/process_resupply()
 	if(world.time > time_next_resupply)
 		time_next_resupply = world.time + interval_resupply
@@ -48,42 +79,6 @@
 			</span>")
 
 		qdel(S)
-
-var/list/supply_crate_procs = list(\
-	/datum/game_mode/stranded/proc/spawn_gun_crate,\
-	/datum/game_mode/stranded/proc/spawn_heavygun_crate,\
-	/datum/game_mode/stranded/proc/spawn_sniper_crate,\
-	/datum/game_mode/stranded/proc/spawn_armour_crate,\
-	/datum/game_mode/stranded/proc/spawn_medic_crate,\
-	/datum/game_mode/stranded/proc/spawn_turret_crate,\
-	/datum/game_mode/stranded/proc/spawn_misc_crate,\
-	/datum/game_mode/stranded/proc/spawn_material_crate)
-
-/obj/structure/closet/crate/verb/call_all_spawns()
-	while(supply_crate_procs.len)
-		var/chosen_proc = pick(supply_crate_procs)
-		supply_crate_procs -= chosen_proc
-		call(src, chosen_proc)(get_turf(usr))
-
-var/debris_structures = list(\
-	/obj/structure/girder,\
-	/obj/structure/girder/displaced,\
-	/obj/structure/grille,\
-	/obj/structure/grille/broken,\
-	/obj/structure/foamedmetal,\
-	/obj/structure/lattice,\
-	/obj/structure/barrel)
-
-var/debris_objs = list(\
-	/obj/item/stack/material/steel/ten,\
-	/obj/item/stack/rods,\
-	/obj/item/stack/material/steel/ten,\
-	/obj/item/stack/rods,\
-	/obj/item/stack/material/steel/ten,\
-	/obj/item/stack/rods,\
-	/obj/item/stack/cable_coil/random,\
-	/obj/item/weapon/weldingtool,\
-	/obj/item/weapon/wrench)
 
 /datum/game_mode/stranded/proc/spawn_ship_debris(var/turf/epicentre)
 	var/max_dist = 10
