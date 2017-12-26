@@ -10,6 +10,7 @@
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
 
+	armor_thickness = 20
 
 /obj/item/clothing/suit/armor/vest/old //just realized these had never been removed
 	name = "armor"

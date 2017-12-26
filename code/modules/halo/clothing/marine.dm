@@ -42,6 +42,7 @@
 	icon_override = MARINE_OVERRIDE
 	icon_state = "M52B Body Armor"
 	blood_overlay_type = "armor"
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 45, laser = 4, energy = 4, bomb = 60, bio = 0, rad = 0)
 
 /obj/item/clothing/shoes/marine
@@ -55,6 +56,7 @@
 	armor = list(melee = 40, bullet = 60, laser = 5, energy = 4, bomb = 40, bio = 0, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
+	body_parts_covered = FEET|LEGS
 
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
