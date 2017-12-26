@@ -201,7 +201,7 @@ var/list/event_last_fired = list()
 					active_with_role["Security"]++
 				else if(istype(R.module, /obj/item/weapon/robot_module/medical))
 					active_with_role["Medical"]++
-				else if(istype(R.module, /obj/item/weapon/robot_module/research))
+				else if(istype(R.module, /obj/item/weapon/robot_module/exploration))
 					active_with_role["Scientist"]++
 
 		if(M.mind.assigned_role in GLOB.engineering_positions)

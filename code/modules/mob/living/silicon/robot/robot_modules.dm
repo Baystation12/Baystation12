@@ -2,14 +2,13 @@ var/global/list/robot_modules = list(
 	"Standard"		= /obj/item/weapon/robot_module/standard,
 	"Service" 		= /obj/item/weapon/robot_module/clerical/butler,
 	"Clerical" 		= /obj/item/weapon/robot_module/clerical/general,
-	"Research" 		= /obj/item/weapon/robot_module/research,
-	"Miner" 		= /obj/item/weapon/robot_module/miner,
 	"Crisis" 		= /obj/item/weapon/robot_module/medical/crisis,
 	"Surgeon" 		= /obj/item/weapon/robot_module/medical/surgeon,
 	"Security" 		= /obj/item/weapon/robot_module/security/general,
 	"Combat" 		= /obj/item/weapon/robot_module/security/combat,
 	"Engineering"	= /obj/item/weapon/robot_module/engineering/general,
-	"Janitor" 		= /obj/item/weapon/robot_module/janitor
+	"Janitor" 		= /obj/item/weapon/robot_module/janitor,
+	"Exploration"   = /obj/item/weapon/robot_module/exploration
 	)
 
 /obj/item/weapon/robot_module
@@ -567,21 +566,24 @@ var/global/list/robot_modules = list(
 		var/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/B = src.emag
 		B.reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 2 * amount)
 
-/obj/item/weapon/robot_module/miner
-	name = "miner robot module"
+/obj/item/weapon/robot_module/exploration
+	name = "exploration robot module"
 	subsystems = list(/datum/nano_module/supply)
-	channels = list("Supply" = 1, "Science" = 1)
+	channels = list("Supply" = 1, "Science" = 1, "Exploration" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(
-					"Basic" = "Miner_old",
-					"Advanced Droid" = "droid-miner",
-					"Treadhead" = "Miner",
-					"Drone" = "drone-miner",
-					"Doot" = "eyebot-miner"
+					"Miner - Basic" = "Miner_old",
+					"Miner - Advanced Droid" = "droid-miner",
+					"Miner - Treadhead" = "Miner",
+					"Miner - Drone" = "drone-miner",
+					"Miner - Doot" = "eyebot-miner",
+					"Research - Droid" = "droid-science",
+					"Research - Drone" = "drone-science",
+					"Research - Doot" = "eyebot-science"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
-/obj/item/weapon/robot_module/miner/New()
+/obj/item/weapon/robot_module/exploration/New()
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/meson(src)
 	src.modules += new /obj/item/weapon/wrench(src)
@@ -592,47 +594,52 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/gripper/miner(src)
 	src.modules += new /obj/item/weapon/mining_scanner(src)
 	src.modules += new /obj/item/weapon/crowbar(src)
-	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
-	..()
-
-/obj/item/weapon/robot_module/research
-	name = "research module"
-	channels = list("Science" = 1)
-	networks = list(NETWORK_RESEARCH)
-	sprites = list(
-					"Droid" = "droid-science",
-					"Drone" = "drone-science",
-					"Doot" = "eyebot-science"
-					)
-
-/obj/item/weapon/robot_module/research/New()
-	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/weapon/portable_destructive_analyzer(src)
 	src.modules += new /obj/item/weapon/gripper/research(src)
 	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
 	src.modules += new /obj/item/device/robotanalyzer(src)
 	src.modules += new /obj/item/weapon/card/robot(src)
-	src.modules += new /obj/item/weapon/wrench(src)
-	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/weldingtool/mini(src)
 	src.modules += new /obj/item/weapon/wirecutters(src)
-	src.modules += new /obj/item/weapon/crowbar(src)
+	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/weapon/scalpel/laser3(src)
 	src.modules += new /obj/item/weapon/circular_saw(src)
-	src.modules += new /obj/item/weapon/extinguisher/mini(src)
+	src.modules += new /obj/item/weapon/extinguisher(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/gripper/chemistry(src)
-	src.emag = new /obj/prefab/hand_teleporter(src)
+	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src)
+	src.modules += new /obj/item/weapon/pickaxe/laser(src)
+	src.modules += new /obj/item/device/measuring_tape(src)
+	src.modules += new /obj/item/device/gps(src)
+	src.modules += new /obj/item/device/ano_scanner(src)
+	src.modules += new /obj/item/device/depth_scanner(src)
+	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
+
 
 	var/datum/matter_synth/nanite = new /datum/matter_synth/nanite(10000)
+	var/datum/matter_synth/metal = new /datum/matter_synth/metal(10000)
+	var/datum/matter_synth/glass = new /datum/matter_synth/glass(10000)
+	var/datum/matter_synth/wire = new /datum/matter_synth/wire(10)
 	synths += nanite
+	synths += metal
+	synths += glass
+	synths += wire
 
-	var/obj/item/stack/nanopaste/N = new /obj/item/stack/nanopaste(src)
+	var/obj/item/stack/nanopaste/N = new(src)
 	N.uses_charge = 1
 	N.charge_costs = list(1000)
 	N.synths = list(nanite)
-	src.modules += N
+	var/obj/item/stack/material/cyborg/steel/S = new(src)
+	S.synths = list(metal)
+	var/obj/item/stack/material/cyborg/glass/G = new(src)
+	G.synths = list(glass)
+	var/obj/item/stack/cable_coil/cyborg/C = new(src)
+	C.synths = list(wire)
 
+	src.modules += C
+	src.modules += G
+	src.modules += N
+	src.modules += S
 	..()
 
 /obj/item/weapon/robot_module/syndicate
