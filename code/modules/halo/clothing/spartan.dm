@@ -41,7 +41,7 @@
 		slot_r_hand_str = "spartan5_r",
 		)
 	blood_overlay_type = "armor"
-	armor = list(melee = 80, bullet = 95, laser = 50, energy = 50, bomb = 60, bio = 25, rad = 25)
+	armor = list(melee = 80, bullet = 95, laser = 70, energy = 70, bomb = 60, bio = 25, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL

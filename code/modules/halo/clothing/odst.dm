@@ -27,7 +27,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
-	armor = list(melee = 60, bullet = 35, laser = 55,energy = 15, bomb = 25, bio = 0, rad = 5)
+	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 25, bio = 0, rad = 5)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
@@ -45,7 +45,7 @@
 	icon_state = "Odst Armour"
 	icon_override = ODST_OVERRIDE
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 50, laser = 50, energy = 55, bomb = 50, bio = 30, rad = 25)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 55, bomb = 50, bio = 30, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
