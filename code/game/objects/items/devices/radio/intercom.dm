@@ -5,7 +5,7 @@
 	randpixel = 0
 	anchored = 1
 	w_class = ITEM_SIZE_HUGE
-	canhear_range = 2
+	canhear_range = 7
 	flags = CONDUCT | NOBLOODY
 	layer = ABOVE_WINDOW_LAYER
 	var/number = 0
