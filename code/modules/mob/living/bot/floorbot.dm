@@ -143,7 +143,6 @@
 				F.ReplaceWithLattice()
 				addTiles(1)
 		target = null
-		busy = 0
 		update_icons()
 	else if(istype(A, /turf/simulated/floor))
 		var/turf/simulated/floor/F = A
@@ -166,7 +165,6 @@
 					F.set_flooring(get_flooring_data(floor_build_type))
 					addTiles(-1)
 			target = null
-			busy = 0
 			update_icons()
 	else if(istype(A, /obj/item/stack/tile/floor) && amount < maxAmount)
 		var/obj/item/stack/tile/floor/T = A
@@ -179,7 +177,6 @@
 				T.use(eaten)
 				addTiles(eaten)
 		target = null
-		busy = 0
 		update_icons()
 	else if(istype(A, /obj/item/stack/material) && amount + 4 <= maxAmount)
 		var/obj/item/stack/material/M = A
@@ -215,6 +212,8 @@
 		amount = 0
 	else if(amount > maxAmount)
 		amount = maxAmount
+	busy = FALSE
+
 
 /* Assembly */
 
