@@ -195,6 +195,6 @@
 
 //shield subtype defines//
 
-/obj/item/weapon/shield_gauntlet/kigyar
+/obj/item/clothing/gloves/shield_gauntlet/kigyar
 	name = "Kig-Yar Point Defense Gauntlet"
 	desc = "A wrist-worn gauntlet that contains a directional shield generator, allowing it to provide protection from gunfire in the direction the user is facing."
