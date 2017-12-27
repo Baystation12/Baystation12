@@ -7,6 +7,9 @@
 	icon_state = "x"
 
 /datum/game_mode/stranded
+	var/sound/sound_crash = sound('sound/effects/crash.ogg')
+	var/sound/sound_flyby = sound('sound/effects/start.ogg')
+	var/list/impact_crater_images
 	var/list/supply_crate_procs = list(\
 		/datum/game_mode/stranded/proc/spawn_gun_crate,\
 		/datum/game_mode/stranded/proc/spawn_heavygun_crate,\
@@ -18,24 +21,20 @@
 		/datum/game_mode/stranded/proc/spawn_material_crate)
 
 	var/debris_structures = list(\
-		/obj/structure/girder,\
-		/obj/structure/girder/displaced,\
-		/obj/structure/grille,\
-		/obj/structure/grille/broken,\
-		/obj/structure/foamedmetal,\
-		/obj/structure/lattice,\
-		/obj/structure/barrel)
+		/obj/structure/grille/broken=5,\
+		/obj/structure/grille=4,\
+		/obj/structure/lattice=3,\
+		/obj/structure/barrel=2,\
+		/obj/structure/girder=1,\
+		/obj/structure/foamedmetal=1)
 
 	var/debris_objs = list(\
-		/obj/item/stack/material/steel/ten,\
-		/obj/item/stack/rods,\
-		/obj/item/stack/material/steel/ten,\
-		/obj/item/stack/rods,\
-		/obj/item/stack/material/steel/ten,\
-		/obj/item/stack/rods,\
-		/obj/item/stack/cable_coil/random,\
-		/obj/item/weapon/weldingtool,\
-		/obj/item/weapon/wrench)
+		/obj/item/metalscrap=5,
+		/obj/item/stack/rods/ten=3,\
+		/obj/item/stack/material/steel/ten=2,\
+		/obj/item/stack/cable_coil/random=1,\
+		/obj/item/weapon/weldingtool=1,\
+		/obj/item/weapon/wrench=1)
 
 /datum/game_mode/stranded/proc/process_resupply()
 	if(world.time > time_next_resupply)
@@ -94,11 +93,21 @@
 				call(src, chosen_proc)(spawn_turf)
 			else
 				//spawn some random crap
-				var/spawn_type = pick(debris_structures + debris_objs)
+				var/spawn_type = pickweight(debris_structures + debris_objs)
 				new spawn_type(spawn_turf)
 				if(prob(10))
 					spawn_type = pick(debris_objs)
 					new spawn_type(spawn_turf)
+
+			//chuck an impact crater overlay on that turf
+			var/image/I = pick(impact_crater_images)
+			I.pixel_x = rand(-8,8)
+			I.pixel_y = rand(-8,8)
+			spawn_turf.overlays += I
+
+	//play a cool sound to everyone
+	for(var/mob/M in GLOB.player_list)
+		sound_to(M, sound_crash)
 
 /datum/game_mode/stranded/proc/spawn_resupply(var/turf/epicentre)
 	var/num_crates = rand(3,5)
@@ -117,8 +126,18 @@
 		//spawn a crate
 		var/chosen_proc = pick(supply_crate_procs)
 		call(src, chosen_proc)(spawn_turf)
-		//supply_crate_procs -= chosen_proc
+
+		//chuck an impact crater overlay on that turf
+		var/image/I = pick(impact_crater_images)
+		I.pixel_x = rand(-8,8)
+		I.pixel_y = rand(-8,8)
+		spawn_turf.overlays += I
+
 		num_crates -= 1
+
+	//play a cool sound to everyone
+	for(var/mob/M in GLOB.player_list)
+		sound_to(M, sound_flyby)
 
 /datum/game_mode/stranded/proc/spawn_gun_crate(var/turf/spawn_turf)
 	var/obj/structure/closet/crate/C = new(spawn_turf)

@@ -34,6 +34,9 @@
 	var/turf/light_turf = locate(1,1,1)
 	ambient_light = new(src, light_turf)
 	ambient_light.apply_lum()
+	impact_crater_images = list()
+	impact_crater_images += image('code/modules/halo/icons/scrap/base.dmi',"crater_s")
+	impact_crater_images += image('code/modules/halo/icons/scrap/base.dmi',"crater_l")
 
 /datum/game_mode/stranded/announce()
 	..()

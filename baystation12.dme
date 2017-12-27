@@ -1431,7 +1431,7 @@
 #include "code\modules\halo\misc\explosives.dm"
 #include "code\modules\halo\misc\gunvendors.dm"
 #include "code\modules\halo\misc\payload.dm"
-#include "code\modules\halo\misc\supersmes.dm"
+#include "code\modules\halo\misc\scrap.dm"
 #include "code\modules\halo\misc\tools_items_gear.dm"
 #include "code\modules\halo\power\cooling_manifold.dm"
 #include "code\modules\halo\power\fuel_packet.dm"
