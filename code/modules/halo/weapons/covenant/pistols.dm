@@ -28,8 +28,8 @@
 
 
 /obj/item/weapon/gun/projectile/needler // Uses "magazines" to reload rather than inbuilt cells.
-	name = "Needler"
-	desc = "A Type 33 Guided Munitions Launcher"
+	name = "Type-33 Guided Munitions Launcher"
+	desc = "This weapon fire razor-sharp crystalline shards which can explode violently when embedded into targets."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Needler"
 	item_state = "needler"

@@ -2,6 +2,7 @@
 /obj/item/projectile/covenant
 	name = "Plasma Bolt"
 	desc = "A searing hot bolt of plasma."
+	check_armour = "energy"
 
 /obj/item/projectile/covenant/attack_mob()
 	damage_type = BURN
@@ -28,6 +29,8 @@
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 
+//Covenant Magazine-Fed defines//
+
 /obj/item/ammo_magazine/needles
 	name = "Needles"
 	desc = "A small pack of crystalline needles."
@@ -49,7 +52,7 @@
 /obj/item/projectile/bullet/covenant/needles
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
-	damage = 15 // Low damage, special effect would do the most damage.
+	damage = 20 // Low damage, special effect would do the most damage.
 	accuracy = 0
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Needler Shot"
@@ -73,3 +76,36 @@
 		shard.name = "Needle shrapnel"
 		embed_organ.embed(shard)
 	..()
+
+/obj/item/ammo_magazine/type51mag
+	name = "Type-51 Carbine magazine"
+	desc = "A magazine containing 18 rounds for the Type-51 Carbine."
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "carbine_magazine"
+	max_ammo = 18
+	ammo_type = /obj/item/ammo_casing/type51carbine
+	caliber = "cov_carbine"
+	mag_type = MAGAZINE
+
+/obj/item/ammo_casing/type51carbine
+	name = "Type-51 Carbine round"
+	desc = "A faintly glowing round that leaves a green trail in its wake."
+	caliber = "cov_carbine"
+	projectile_type = /obj/item/projectile/bullet/covenant/type51carbine
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "carbine_projectile"
+
+/obj/item/projectile/bullet/covenant/type51carbine
+	name = "Glowing Projectile"
+	desc = "This projectile leaves a green trail in its wake."
+	damage = 40
+	accuracy = 1
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "carbine_projectile"
+	check_armour = "energy"
+	tracer_type = /obj/effect/projectile/type51carbine
+	tracer_delay_time = 1.5 SECONDS
+
+/obj/effect/projectile/type51carbine
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "carbine_trail"
