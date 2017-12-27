@@ -126,6 +126,7 @@
 		/area/ship,
 		/area/smugglers,
 		/area/slavers_base,
+		/area/yacht,
 		/area/bluespaceriver
 	)
 
