@@ -28,10 +28,10 @@
 
 /proc/living_observers_present(var/list/zlevels)
 	if(LAZYLEN(zlevels))
-		for(var/client/C) //if a tree ticks on the empty zlevel does it really tick
+		for(var/client/C in GLOB.clients) //if a tree ticks on the empty zlevel does it really tick
 			if(isliving(C.mob)) //(no it doesn't)
-				var/mob/M = C.mob
-				if(M.z in zlevels)
+				var/turf/T = get_turf(C.mob)
+				if(T && (T.z in zlevels))
 					return TRUE
 	return FALSE
 

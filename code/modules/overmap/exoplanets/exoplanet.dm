@@ -305,7 +305,7 @@
 
 /datum/random_map/noise/exoplanet/apply_to_turf(var/x,var/y)
 	var/turf/T = ..()
-	if(limit_x < world.maxx && (T.y == limit_y || T.x == limit_x))
+	if(T && limit_x < world.maxx && (T.y == limit_y || T.x == limit_x))
 		T.set_density(1)
 		T.set_opacity(1)
 		if(istype(T, /turf/simulated))
