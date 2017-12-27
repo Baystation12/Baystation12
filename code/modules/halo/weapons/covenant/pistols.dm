@@ -1,7 +1,7 @@
 
 /obj/item/weapon/gun/energy/plasmapistol
-	name = "Plasma Pistol"
-	desc = "A Type 25 Directed Energy Pistol"
+	name = "Type-25 Directed Energy Pistol"
+	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Plasma Pistol"
 	slot_flags = SLOT_BELT||SLOT_HOLSTER
@@ -28,8 +28,8 @@
 
 
 /obj/item/weapon/gun/projectile/needler // Uses "magazines" to reload rather than inbuilt cells.
-	name = "Needler"
-	desc = "A Type 33 Guided Munitions Launcher"
+	name = "Type-33 Guided Munitions Launcher"
+	desc = "This weapon fire razor-sharp crystalline shards which can explode violently when embedded into targets."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Needler"
 	item_state = "needler"
