@@ -29,6 +29,22 @@
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 
+/obj/item/projectile/covenant/beamrifle
+	name = "energy beam"
+	desc = ""
+	damage = 75
+	accuracy = 1
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "carbine_casing"
+	step_delay = 0.3
+	tracer_type = /obj/effect/projectile/beam_rifle
+	tracer_delay_time = 1 SECOND
+	invisibility = 101
+
+/obj/effect/projectile/beam_rifle
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "beam_rifle_trail"
+
 //Covenant Magazine-Fed defines//
 
 /obj/item/ammo_magazine/needles
@@ -93,7 +109,7 @@
 	caliber = "cov_carbine"
 	projectile_type = /obj/item/projectile/bullet/covenant/type51carbine
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
-	icon_state = "carbine_projectile"
+	icon_state = "carbine_casing"
 
 /obj/item/projectile/bullet/covenant/type51carbine
 	name = "Glowing Projectile"
@@ -101,10 +117,11 @@
 	damage = 40
 	accuracy = 1
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
-	icon_state = "carbine_projectile"
+	icon_state = "carbine_casing"
 	check_armour = "energy"
 	tracer_type = /obj/effect/projectile/type51carbine
 	tracer_delay_time = 1.5 SECONDS
+	invisibility = 101
 
 /obj/effect/projectile/type51carbine
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
