@@ -487,6 +487,8 @@ BLIND     // can't see anything
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
 
+/obj/item/clothing/mask/proc/post_internals_breathe(datum/gas_mixture/air_removed,obj/item/tank/tank_removed_from)
+
 /obj/item/clothing/mask/proc/adjust_mask(var/mob/user)
 	if(!user.incapacitated())
 		if(!pull_mask)
