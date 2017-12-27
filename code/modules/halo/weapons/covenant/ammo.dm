@@ -114,7 +114,6 @@
 	if(locked_target)
 		redirect(locked_target.x,locked_target.y,loc)
 
-
 /obj/item/ammo_magazine/type51mag
 	name = "Type-51 Carbine magazine"
 	desc = "A magazine containing 18 rounds for the Type-51 Carbine."
