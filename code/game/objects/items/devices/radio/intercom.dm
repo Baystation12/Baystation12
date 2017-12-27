@@ -11,6 +11,17 @@
 	var/number = 0
 	var/last_tick //used to delay the powercheck
 
+/obj/item/device/radio/intercom/update_icon()
+	..()
+	overlays.Cut()
+	if(!on)
+		icon_state = "intercom-p"
+		return
+
+	icon_state = "intercom"
+	overlays.Add("intercom-spkr-[listening ? "on" : "off"]")
+	overlays.Add("intercom-mic-[broadcasting ? "on" : "off"]")
+
 /obj/item/device/radio/intercom/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
@@ -134,11 +145,7 @@
 				on = 0
 			else
 				on = A.powered(EQUIP) // set "on" to the power status
-
-		if(!on)
-			icon_state = "intercom-p"
-		else
-			icon_state = "intercom"
+		update_icon()
 
 /obj/item/device/radio/intercom/broadcasting
 	broadcasting = 1
