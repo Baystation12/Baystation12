@@ -40,6 +40,7 @@
 	desc = "an armored protective vest worn by the members of the UNSC Marine Corps."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
+	item_state = "armor"
 	icon_state = "M52B Body Armor"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
@@ -50,7 +51,7 @@
 	desc = "standard issue combat boots for the UNSC Marines, worn as a part of the Marine BDU."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "VZG7 Armored Legs"
+	item_state = "boots"
 	icon_state = "boots"
 	force = 5
 	armor = list(melee = 40, bullet = 60, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
