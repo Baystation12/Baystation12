@@ -192,3 +192,9 @@
 /obj/item/weapon/gauntlet_shield/equipped()
 	if(inhand_check())
 		creator_gauntlet.on_shield_equipped()
+
+//shield subtype defines//
+
+/obj/item/weapon/shield_gauntlet/kigyar
+	name = "Kig-Yar Point Defense Gauntlet"
+	desc = "A wrist-worn gauntlet that contains a directional shield generator, allowing it to provide protection from gunfire in the direction the user is facing."
