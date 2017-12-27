@@ -1,7 +1,7 @@
 
 /obj/item/weapon/gun/energy/plasmapistol
-	name = "Plasma Pistol"
-	desc = "A Type 25 Directed Energy Pistol"
+	name = "Type-25 Directed Energy Pistol"
+	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Plasma Pistol"
 	slot_flags = SLOT_BELT||SLOT_HOLSTER
