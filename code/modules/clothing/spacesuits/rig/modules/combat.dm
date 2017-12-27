@@ -169,6 +169,8 @@
 	desc = "A powerful cutting beam projector."
 	icon_state = "eblade"
 
+	suit_overlay = null
+
 	activate_string = "Project Blade"
 	deactivate_string = "Cancel Blade"
 

@@ -95,7 +95,7 @@
 		/obj/item/rig_module/voice,
 		/obj/item/rig_module/fabricator/energy_net,
 		/obj/item/rig_module/chem_dispenser,
-		/obj/item/rig_module/grenade_launcher,
+		/obj/item/rig_module/grenade_launcher/ninja,
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/power_sink,
 		/obj/item/rig_module/datajack,
