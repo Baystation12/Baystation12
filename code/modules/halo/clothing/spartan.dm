@@ -41,7 +41,7 @@
 		slot_r_hand_str = "spartan5_r",
 		)
 	blood_overlay_type = "armor"
-	armor = list(melee = 80, bullet = 95, laser = 50, energy = 50, bomb = 60, bio = 25, rad = 25)
+	armor = list(melee = 80, bullet = 95, laser = 70, energy = 70, bomb = 60, bio = 25, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
@@ -55,7 +55,7 @@
 	icon_state = "markIVmaleR"
 	armor = list(melee = 60, bullet = 75, laser = 40, energy = 40, bomb = 60, bio = 25, rad = 25) //lowered armour values for slayer.
 	specials = list(/datum/armourspecials/internal_jumpsuit/spartan,/datum/armourspecials/shields/spartan,/datum/armourspecials/dispenseitems/spartanmeds,/datum/armourspecials/shieldmonitor)
-	totalshields = 150
+	totalshields = 100
 	canremove = 0 //To disallow stripping of armour for impersonation in slayer.
 	action_button_name = "Dispense Medicine"
 
@@ -63,7 +63,7 @@
 	icon_state = "markIVmaleB"
 	armor = list(melee = 60, bullet = 75, laser = 40, energy = 40, bomb = 60, bio = 25, rad = 25) //lowered armour values for slayer.
 	specials = list(/datum/armourspecials/internal_jumpsuit/spartan,/datum/armourspecials/shields/spartan,/datum/armourspecials/dispenseitems/spartanmeds,/datum/armourspecials/shieldmonitor)
-	totalshields = 150
+	totalshields = 100
 	canremove = 0
 	action_button_name = "Dispense Medicine"
 

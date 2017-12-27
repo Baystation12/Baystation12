@@ -14,6 +14,8 @@
 	icon_state = "combatharness_minor"
 	item_state = "combatharness_minor"
 
+	armor = list(melee = 40, bullet = 55, laser = 30, energy = 30, bomb = 60, bio = 0, rad = 0)
+
 	species_restricted = list("unggoy")
 
 	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy)

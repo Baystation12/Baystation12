@@ -21,6 +21,7 @@
 	var/totalshields
 	var/nextcharge
 	var/warned
+	var/shield_recharge_delay = 2//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
 	var/shieldoverlay = new /obj/effect/overlay/shields
 	var/obj/item/clothing/suit/armor/special/connectedarmour
 	var/list/armourvalue
@@ -58,16 +59,17 @@
 		connectedarmour.armor =  armourvalue
 		return 0
 
-/datum/armourspecials/shields/proc/checkshields(var/damage,var/damage_source)
+/datum/armourspecials/shields/proc/checkshields(var/damage,var/display_message = 1)
 	if(shieldstrength> 0)
 		shieldstrength -= damage
-		user.visible_message("<span class='warning'>[user]'s shields absorbs the force of the impact</span>","<span class = 'notice'>Your shields absorbs the force of the impact</span>")
+		if(display_message)
+			user.visible_message("<span class='warning'>[user]'s shields absorbs the force of the impact</span>","<span class = 'notice'>Your shields absorbs the force of the impact</span>")
 		return 1
 	if(shieldstrength<= 0)
-		if(!warned) //Stops spam and constant resetting
+		if(!warned && display_message) //Stops spam and constant resetting
 			user.visible_message("<span class ='warning'>[user]'s shield collapses!</span>","<span class ='userdanger'>Your shields fizzle and spark, losing their protective ability!</span>")
 		warned = 1
-		nextcharge = world.time + 30 // 3 seconds
+		nextcharge = world.time + ((shield_recharge_delay SECONDS)*1.5)
 		return 0
 
 /datum/armourspecials/shields/proc/tryshields(var/mob/living/m)
@@ -82,16 +84,19 @@
 		shieldstrength += 10
 		if(prob(30)&& !isnull(m)) //Stops runtime when no mob to display message to.
 			m.visible_message("<span class = 'notice'>A faint ping emanates from [m.name]'s armour.</span>","<span class ='notice'>Current shield level: [(shieldstrength/totalshields)*100]%</span>")
-		nextcharge = world.time + 20 // 2 seconds.
+		nextcharge = world.time + (shield_recharge_delay SECONDS)
 		warned = 0
 		return 1
 
 /datum/armourspecials/shields/tryemp(severity)
 	switch(severity)
 		if(1)
-			shieldstrength -= totalshields /4
+			checkshields(totalshields/2,0)
+			user.visible_message("<span class = 'warning'>[user.name]'s shields momentarily fail, the internal capacitors barely recovering.</span>")
 		if(2)
-			shieldstrength -= totalshields/2
+			checkshields(totalshields,0)
+			user.visible_message("<span class = 'warning'>[user.name]'s shields violently spark, the internal capacitors shorting out.</span>")
+	nextcharge = world.time + (shield_recharge_delay SECONDS *2)
 
 /datum/armourspecials/shields/process()
 	tryshields(user)

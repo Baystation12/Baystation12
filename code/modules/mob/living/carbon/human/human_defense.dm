@@ -105,7 +105,10 @@ cloak disrupt override
 		if(gear && istype(gear ,/obj/item/clothing))
 			var/obj/item/clothing/C = gear
 			if(istype(C) && C.body_parts_covered & def_zone.body_part)
-				protection = add_armor(protection, C.armor[type])
+				var/effective_armor_thickness = 1
+				if(!isnull(initial(C.armor_thickness)))
+					effective_armor_thickness = (C.armor_thickness/10) + 1
+				protection = add_armor(protection, (C.armor[type] * effective_armor_thickness))
 	return protection
 
 /mob/living/carbon/human/proc/check_head_coverage()
@@ -495,12 +498,14 @@ cloak disrupt override
 			visible_message("<span class = 'danger'>The [P.name] whizzes past [src]!</span>")
 	time_last_supressed = world.time
 
-/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message)
+/mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message,environment_smash)
 	if(!damage || !istype(user))
 		return
 
 	if(check_shields(damage, user, user, attack_text = attack_message))
 		return
+
+	adjustBruteLoss(damage)
 
 	return ..()
 

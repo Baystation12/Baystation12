@@ -322,8 +322,8 @@ var/list/name_to_material
 
 
 /material/stone
-	name = "sandstone"
-	stack_type = /obj/item/stack/material/sandstone
+	name = "stone"
+	stack_type = /obj/item/stack/material/stone
 	icon_base = "stone"
 	icon_reinf = "reinf_stone"
 	icon_colour = "#D9C179"
@@ -335,6 +335,10 @@ var/list/name_to_material
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	conductive = 0
+
+/material/stone/sandstone
+	name = "sandstone"
+	stack_type = /obj/item/stack/material/sandstone
 
 /material/stone/marble
 	name = "marble"

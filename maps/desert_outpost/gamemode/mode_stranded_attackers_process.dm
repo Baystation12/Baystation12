@@ -26,4 +26,5 @@
 			//
 			wave_num++
 			spawns_per_tick_current = wave_num * spawn_wave_multi
+			spawns_per_tick_current += max((get_num_survivors() - 1), 0)
 			spawn_feral_chance = wave_num * 0.2
