@@ -1,5 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - bugfix: "Mounted flashers will no longer permanently scramble ghosts' movement."
-  - rscadd: "Added missing eye blurring effect to mounted flashers."
