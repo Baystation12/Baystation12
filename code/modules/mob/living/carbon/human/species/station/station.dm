@@ -189,8 +189,8 @@
 	if(prob(2) && H.nutrition > 150)
 		for(var/limb_type in has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-			if(E && !E.vital && !E.is_usable())
-				E.removed()
+			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits... 
+				E.removed()			//...because no one wants their head to explode to make way for a new one.
 				qdel(E)
 				E= null
 			if(!E)
