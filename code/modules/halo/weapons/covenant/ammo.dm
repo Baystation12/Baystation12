@@ -11,7 +11,7 @@
 
 /obj/item/projectile/covenant/plasmapistol
 	damage = 25
-	accuracy = -1
+	accuracy = 1
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
 
@@ -33,10 +33,10 @@
 	name = "energy beam"
 	desc = ""
 	damage = 75
-	accuracy = 1
+	accuracy = 3
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
-	step_delay = 0.3
+	step_delay = 0.1
 	tracer_type = /obj/effect/projectile/beam_rifle
 	tracer_delay_time = 1 SECOND
 	invisibility = 101
@@ -69,7 +69,7 @@
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
 	damage = 20 // Low damage, special effect would do the most damage.
-	accuracy = 0
+	accuracy = 1
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Needler Shot"
 	embed = 1
@@ -136,7 +136,7 @@
 	name = "Glowing Projectile"
 	desc = "This projectile leaves a green trail in its wake."
 	damage = 40
-	accuracy = 1
+	accuracy = 2
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"
