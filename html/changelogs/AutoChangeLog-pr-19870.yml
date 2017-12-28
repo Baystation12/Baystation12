@@ -1,5 +1,0 @@
-author: "BlueNexus"
-delete-after: True
-changes: 
-  - spellcheck: "Renamed the 9mm machine pistol to the 9mm submachine gun"
-  - bugfix: "Fixed the WT45's empty icon not showing"
