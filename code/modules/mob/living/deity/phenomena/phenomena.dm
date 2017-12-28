@@ -3,6 +3,8 @@
 	var/cost = 0
 	var/mob/living/deity/linked
 	var/flags = 0
+	var/cooldown = 0
+	var/refresh_time = 0
 	var/expected_type
 
 /datum/phenomena/New(var/master)
@@ -16,10 +18,14 @@
 /datum/phenomena/proc/Click(var/atom/target)
 	if(can_activate(target))
 		linked.take_cost(cost)
+		refresh_time = world.time + cooldown
 		activate(target)
 
 /datum/phenomena/proc/can_activate(var/atom/target)
 	if(!linked)
+		return 0
+	if(refresh_time > world.time)
+		to_chat(linked, "<span class='warning'>\The [src] is still on cooldown for [round((refresh_time - world.time)/10))] more seconds!</span>")
 		return 0
 
 	if(!linked.form)
@@ -30,7 +36,7 @@
 		return 0
 
 	if(flags & PHENOMENA_NEAR_STRUCTURE)
-		if(!linked.near_structure(target))
+		if(!linked.near_structure(target, 1))
 			to_chat(linked, "<span class='warning'>\The [target] needs to be near a holy structure for your powers to work!</span>")
 			return 0
 

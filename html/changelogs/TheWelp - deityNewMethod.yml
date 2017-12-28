@@ -1,4 +1,5 @@
 author: TheWelp
 delete-after: True
 changes: 
-  - rscadd: "Reworks early game deity. No longer have to dole out spells and you regenerate power 100% faster."
+  - rscadd: "Adds band-aid fix to deity spam via cooldowns. Will add graphical indicator to show what the cooldown is later."
+  - rscadd: "Modifies phenomena near structure logic to include all deity structures, not just altars."
