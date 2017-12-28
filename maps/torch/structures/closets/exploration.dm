@@ -10,7 +10,6 @@
 	icon_closed = "pathsecure"
 	icon_locked = "pathsecure1"
 	icon_opened = "pathsecureopen"
-	icon_broken = "pathsecurebroken"
 	icon_off = "pathsecureoff"
 
 /obj/structure/closet/secure_closet/solgovpilot/WillContain()
@@ -38,7 +37,6 @@
 	icon_closed = "pathsecure"
 	icon_locked = "pathsecure1"
 	icon_opened = "pathsecureopen"
-	icon_broken = "pathsecurebroken"
 	icon_off = "pathsecureoff"
 
 /obj/structure/closet/secure_closet/pathfinder/WillContain()
@@ -78,7 +76,6 @@
 	icon_closed = "exp"
 	icon_locked = "exp1"
 	icon_opened = "expopen"
-	icon_broken = "expbroken"
 	icon_off = "expoff"
 
 /obj/structure/closet/secure_closet/explorer/WillContain()

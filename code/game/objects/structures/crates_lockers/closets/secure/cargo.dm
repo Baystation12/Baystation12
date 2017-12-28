@@ -5,7 +5,6 @@
 	icon_closed = "securecargo"
 	icon_locked = "securecargo1"
 	icon_opened = "securecargoopen"
-	icon_broken = "securecargobroken"
 	icon_off = "securecargooff"
 
 /obj/structure/closet/secure_closet/cargotech/WillContain()
@@ -26,7 +25,6 @@
 	icon_closed = "secureqm"
 	icon_locked = "secureqm1"
 	icon_opened = "secureqmopen"
-	icon_broken = "secureqmbroken"
 	icon_off = "secureqmoff"
 
 /obj/structure/closet/secure_closet/quartermaster/WillContain()
