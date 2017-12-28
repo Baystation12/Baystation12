@@ -408,9 +408,9 @@
 		if(2)
 			update_overlay |= APC_UPOVERLAY_CHARGEING2
 
-		update_overlay_chan["Equipment"] = equipment
-		update_overlay_chan["Lighting"] = lighting
-		update_overlay_chan["Enviroment"] = environ
+	update_overlay_chan["Equipment"] = equipment
+	update_overlay_chan["Lighting"] = lighting
+	update_overlay_chan["Enviroment"] = environ
 
 	var/results = 0
 	if(last_update_state == update_state && last_update_overlay == update_overlay && last_update_overlay_chan == update_overlay_chan)

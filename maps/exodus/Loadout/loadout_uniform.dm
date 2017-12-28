@@ -66,17 +66,17 @@
 
 /datum/gear/uniform/scrubs
 	display_name = "medical scrubs"
-	path = /obj/item/clothing/under/rank/medical/black
+	path = /obj/item/clothing/under/rank/medical/scrubs/black
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
 
 /datum/gear/uniform/scrubs/New()
 	..()
 	var/scrubcolor = list()
-	scrubcolor["black scrubs"] = /obj/item/clothing/under/rank/medical/black
-	scrubcolor["blue scrubs"] = /obj/item/clothing/under/rank/medical/blue
-	scrubcolor["green scrubs"] = /obj/item/clothing/under/rank/medical/green
-	scrubcolor["navy blue scrubs"] = /obj/item/clothing/under/rank/medical/navyblue
-	scrubcolor["purple scrubs"] = /obj/item/clothing/under/rank/medical/purple
+	scrubcolor["black scrubs"] = /obj/item/clothing/under/rank/medical/scrubs/black
+	scrubcolor["blue scrubs"] = /obj/item/clothing/under/rank/medical/scrubs/blue
+	scrubcolor["green scrubs"] = /obj/item/clothing/under/rank/medical/scrubs/green
+	scrubcolor["navy blue scrubs"] = /obj/item/clothing/under/rank/medical/scrubs/navyblue
+	scrubcolor["purple scrubs"] = /obj/item/clothing/under/rank/medical/scrubs/purple
 	gear_tweaks += new/datum/gear_tweak/path(scrubcolor)
 
 /datum/gear/uniform/dress

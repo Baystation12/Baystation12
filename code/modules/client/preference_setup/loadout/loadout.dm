@@ -217,7 +217,7 @@ var/list/gear_datums = list()
 
 /datum/category_item/player_setup_item/loadout/proc/GetMaxGearCost(var/client/C)
 	if(C && C.donator)
-		return MAX_GEAR_COST+(C.donator*4)
+		return config.max_gear_cost+(C.donator*4)
 
 /datum/category_item/player_setup_item/loadout/OnTopic(href, href_list, user)
 	if(href_list["toggle_gear"])

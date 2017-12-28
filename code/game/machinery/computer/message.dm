@@ -303,11 +303,11 @@
 		if(auth) linkedServer.active = !linkedServer.active
 	//Find a server
 	if (href_list["find"])
-		if(message_servers && message_servers.len > 1)
-			src.linkedServer = input(usr,"Please select a server.", "Select a server.", null) as null|anything in message_servers
+		if(GLOB.message_servers && GLOB.message_servers.len > 1)
+			src.linkedServer = input(usr,"Please select a server.", "Select a server.", null) as null|anything in GLOB.message_servers
 			message = "<span class='alert'>NOTICE: Server selected.</span>"
-		else if(message_servers && message_servers.len > 0)
-			linkedServer = message_servers[1]
+		else if(GLOB.message_servers && GLOB.message_servers.len > 0)
+			linkedServer = GLOB.message_servers[1]
 			message =  "<span class='notice'>NOTICE: Only Single Server Detected - Server selected.</span>"
 		else
 			message = noserver
