@@ -47,10 +47,11 @@
 		return
 	if(amount > 0)
 		eyeobj.visualnet.add_source(source)
-		if(isobj(source))
+		if(istype(source, /obj/structure/deity))
 			structures |= source
 	else
-		if(isobj(source))
+		eyeobj.visualnet.remove_source(source)
+		if(istype(source, /obj/structure/deity))
 			structures -= source
 
 /mob/living/deity/proc/is_follower(var/mob/living/L, var/silent = 0)

@@ -25,7 +25,7 @@
 	if(!linked)
 		return 0
 	if(refresh_time > world.time)
-		to_chat(linked, "<span class='warning'>\The [src] is still on cooldown for [round((refresh_time - world.time)/10))] more seconds!</span>")
+		to_chat(linked, "<span class='warning'>\The [src] is still on cooldown for [round((refresh_time - world.time)/10)] more seconds!</span>")
 		return 0
 
 	if(!linked.form)
