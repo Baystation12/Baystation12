@@ -189,17 +189,17 @@
 	if(prob(2) && H.nutrition > 150)
 		for(var/limb_type in has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-			if(E && !E.vital && !E.is_usable())
-				E.removed()
+			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits... 
+				E.removed()			//...because no one wants their head to explode to make way for a new one.
 				qdel(E)
 				E= null
 			if(!E)
 				var/list/organ_data = has_limbs[limb_type]
 				var/limb_path = organ_data["path"]
-				var/obj/item/organ/O = new limb_path(H)
+				var/obj/item/organ/external/O = new limb_path(H)
 				organ_data["descriptor"] = O.name
 				to_chat(H, "<span class='danger'>With a shower of fresh blood, a new [O.name] forms.</span>")
-				H.visible_message("<span class='danger'>With a shower of fresh blood, a length of biomass shoots from [H], forming a new [O.name]</span>")
+				H.visible_message("<span class='danger'>With a shower of fresh blood, a length of biomass shoots from [H]'s [O.amputation_point], forming a new [O.name]!</span>")
 				H.nutrition -= 50
 				var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
 				blood_splatter(H,B,1)
