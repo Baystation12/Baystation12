@@ -109,7 +109,7 @@
 	last_power_draw = 0
 	//TODO Add overlay with F-P-R letter to display current state
 	if (phase == "filling")//filling tank
-		var/pressure_delta = air1.return_pressure() - target_pressure
+		var/pressure_delta = target_pressure - inner_tank.return_pressure()
 		if (pressure_delta > 0.01 && air1.temperature > 0)
 			var/transfer_moles = calculate_transfer_moles(air1, inner_tank, pressure_delta)
 			power_draw = pump_gas(src, air1, inner_tank, transfer_moles, power_rating*power_setting) * intake_power_efficiency
@@ -124,6 +124,7 @@
 	if (phase == "processing")//processing CO2 in tank
 		if (inner_tank.gas["carbon_dioxide"])
 			var/co2_intake = between(0, inner_tank.gas["carbon_dioxide"], power_setting*delay/10)
+			last_flow_rate = co2_intake
 			inner_tank.adjust_gas("carbon_dioxide", -co2_intake, 1)
 			var/datum/gas_mixture/new_oxygen = new
 			new_oxygen.adjust_gas("oxygen",  co2_intake)
@@ -172,10 +173,18 @@
 	var/data[0]
 	data["on"] = use_power ? 1 : 0
 	data["powerSetting"] = power_setting
-	data["gasPressure"] = round(air1.return_pressure())
-	data["gasTemperature"] = round(air1.temperature)
 	data["gasProcessed"] = last_flow_rate
-
+	data["air1Pressure"] = round(air1.return_pressure())
+	data["air2Pressure"] = round(air2.return_pressure())
+	data["tankPressure"] = round(inner_tank.return_pressure())
+	data["targetPressure"] = round(target_pressure)
+	data["phase"] = phase
+	if (inner_tank.total_moles > 0)
+		data["co2"] = round(100 * inner_tank.gas["carbon_dioxide"]/inner_tank.total_moles)
+		data["o2"] = round(100 * inner_tank.gas["oxygen"]/inner_tank.total_moles)
+	else
+		data["co2"] = 0
+		data["o2"] = 0
 		// update the ui if it exists, returns null if no ui is passed/found
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
