@@ -1,7 +1,11 @@
+/decl/hierarchy/outfit/sangheili
+	name = "Sangheili"
+
+	uniform = /obj/item/clothing/under/covenant/sangheili
+
 /decl/hierarchy/outfit/sangheili/minor
 	name = "Sangheili (Minor)"
 
-	uniform = /obj/item/clothing/under/covenant/sangheili
 	suit = /obj/item/clothing/suit/armor/special/combatharness/minor
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
@@ -17,7 +21,6 @@
 /decl/hierarchy/outfit/sangheili/major
 	name = "Sangheili (Major)"
 
-	uniform = /obj/item/clothing/under/covenant/sangheili
 	suit = /obj/item/clothing/suit/armor/special/combatharness/major
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
@@ -31,7 +34,6 @@
 /decl/hierarchy/outfit/sangheili/ultra
 	name = "Sangheili (Ultra)"
 
-	uniform = /obj/item/clothing/under/covenant/sangheili
 	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra
 	suit_store = /obj/item/weapon/gun/projectile/type51carbine
 	l_hand = /obj/item/weapon/melee/energysword
@@ -47,7 +49,6 @@
 /decl/hierarchy/outfit/sangheili/zealot
 	name = "Sangheili (Zealot)"
 
-	uniform = /obj/item/clothing/under/covenant/sangheili
 	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	l_hand = /obj/item/weapon/melee/energysword
@@ -64,7 +65,6 @@
 /decl/hierarchy/outfit/sangheili/specops
 	name = "Sangheili (Spec-Ops)"
 
-	uniform = /obj/item/clothing/under/covenant/sangheili
 	suit = /obj/item/clothing/suit/armor/special/combatharness/specops
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/projectile/type51carbine
@@ -79,7 +79,6 @@
 /decl/hierarchy/outfit/sangheili/eva
 	name = "Sangheili (EVA)"
 
-	uniform = /obj/item/clothing/under/covenant/sangheili
 	suit = /obj/item/clothing/suit/armor/special/combatharness/eva
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
