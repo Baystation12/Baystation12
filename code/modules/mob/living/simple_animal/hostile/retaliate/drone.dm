@@ -3,8 +3,8 @@
 /mob/living/simple_animal/hostile/retaliate/malf_drone
 	name = "combat drone"
 	desc = "An automated combat drone armed with state of the art weaponry and shielding."
-	icon_state = "drone3"
-	icon_living = "drone3"
+	icon_state = "drone"
+	icon_living = "drone"
 	icon_dead = "drone_dead"
 	ranged = 1
 	rapid = 1
@@ -25,7 +25,8 @@
 	destroy_surroundings = 0
 	var/datum/effect/effect/system/trail/ion_trail
 
-	//the drone randomly switches between these states because it's malfunctioning
+	//the drone randomly switches between these states if it's malfunctioning
+	var/malfunctioning = 1
 	var/hostile_drone = 0
 	//0 - retaliate, only attack enemies that attack it
 	//1 - hostile, attack everything that comes near
@@ -55,6 +56,15 @@
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Allow_Spacemove(var/check_drift = 0)
 	return 1
 
+/mob/living/simple_animal/hostile/retaliate/malf_drone/proc/Haywire()
+	if(prob(disabled ? 0 : 1) && malfunctioning)
+		if(hostile_drone)
+			src.visible_message("<span class='notice'>\icon[src] [src] retracts several targetting vanes, and dulls it's running lights.</span>")
+			hostile_drone = 0
+		else
+			src.visible_message("<span class='warning'>\icon[src] [src] suddenly lights up, and additional targetting vanes slide into place.</span>")
+			hostile_drone = 1
+
 /mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets()
 	if(hostile_drone)
 		return view(src, 10)
@@ -67,13 +77,13 @@
 	//emps and lots of damage can temporarily shut us down
 	if(disabled > 0)
 		set_stat(UNCONSCIOUS)
-		icon_state = "drone_dead"
+		icon_state = "[initial(icon_state)]_dead"
 		disabled--
 		wander = 0
 		speak_chance = 0
 		if(disabled <= 0)
 			set_stat(CONSCIOUS)
-			icon_state = "drone0"
+			icon_state = "[initial(icon_state)]0"
 			wander = 1
 			speak_chance = 5
 
@@ -92,29 +102,23 @@
 		s.start()
 
 	//sometimes our targetting sensors malfunction, and we attack anyone nearby
-	if(prob(disabled ? 0 : 1))
-		if(hostile_drone)
-			src.visible_message("<span class='notice'>\icon[src] [src] retracts several targetting vanes, and dulls it's running lights.</span>")
-			hostile_drone = 0
-		else
-			src.visible_message("<span class='warning'>\icon[src] [src] suddenly lights up, and additional targetting vanes slide into place.</span>")
-			hostile_drone = 1
+	Haywire()
 
 	if(health / maxHealth > 0.9)
-		icon_state = "drone3"
+		icon_state = "[initial(icon_state)]"
 		explode_chance = 0
 	else if(health / maxHealth > 0.7)
-		icon_state = "drone2"
+		icon_state = "[initial(icon_state)]2"
 		explode_chance = 0
 	else if(health / maxHealth > 0.5)
-		icon_state = "drone1"
+		icon_state = "[initial(icon_state)]1"
 		explode_chance = 0.5
 	else if(health / maxHealth > 0.3)
-		icon_state = "drone0"
+		icon_state = "[initial(icon_state)]0"
 		explode_chance = 5
 	else if(health > 0)
 		//if health gets too low, shut down
-		icon_state = "drone_dead"
+		icon_state = "[initial(icon_state)]_dead"
 		exploding = 0
 		if(!disabled)
 			if(prob(50))
