@@ -169,6 +169,8 @@ var/list/gear_datums = list()
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td><font size=2>[G.description]</font>"
 		var/allowed = 1
+
+		// Role whitelist
 		if(G.allowed_roles)
 			var/good_job = 0
 			var/bad_job = 0
@@ -186,6 +188,36 @@ var/list/gear_datums = list()
 					bad_job = 1
 			allowed = good_job || !bad_job
 			entry += "</i>"
+
+		// Branch whitelist
+		var/datum/mil_branch/charBranch
+		if (G.allowed_branch)
+			charBranch = mil_branches.get_branch(pref.char_branch)
+			entry += "<br><i>"
+			if (!charBranch)
+				entry += "<font color=cc5555>No Branch</font>"
+				allowed = 0
+			else if (charBranch in G.allowed_branch)
+				entry += "<font color=55cc55>[charBranch.name]</font>"
+			else
+				entry += "<font color=cc5555>[charBranch.name]</font>"
+				allowed = 0
+			entry += "</i>"
+
+		// Rank whitelist - get_rank requires branch to be set
+		if ((G.allowed_ranks) && (G.allowed_branch))
+			entry += "<br><i>"
+			var/datum/mil_rank/charRank = mil_branches.get_rank(charBranch, pref.char_rank)
+			if (!charRank)
+				entry += "<font color=cc5555>No Rank</font>"
+				allowed = 0
+			else if (charRank.rank_type in G.allowed_ranks)
+				entry += "<font color=55cc55>[charRank.name]</font>"
+			else
+				entry += "<font color=cc5555>[charRank.name]</font>"
+				allowed = 0
+			entry += "</i>"
+
 		entry += "</tr>"
 		if(ticked)
 			entry += "<tr><td colspan=3>"
@@ -290,6 +322,8 @@ var/list/gear_datums = list()
 	var/cost = 1           //Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
 	var/slot               //Slot to equip to.
 	var/list/allowed_roles //Roles that can spawn with this item.
+	var/list/allowed_branch // Branches that can spawn with this item
+	var/allowed_ranks       // Ranks that can spawn with this item - Not a list as this uses a text flag
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
 	var/flags              //Special tweaks in new

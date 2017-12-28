@@ -45,3 +45,17 @@
 #undef ARMED_ROLES
 
 #undef ARMORED_ROLES
+
+
+/* Branch/Rank defines */
+#undef MILITARY_BRANCH
+
+#undef CIVILIAN_BRANCH
+
+#undef ENLISTED_RANKS
+
+#undef OFFICER_RANKS
+
+#undef NANOTRASEN_RANKS
+
+#undef NOT_NANOTRASEN_RANKS

@@ -144,7 +144,7 @@
 				user_outfit = child
 				break
 
-		if(user_rank.sort_order >= 11) //user is an officer
+		if (user_rank.rank_type == RANK_TYPE_OFFICER) // User is an officer
 			if(user_outfit.children[1]) // officer outfit exists
 				user_outfit = user_outfit.children[1]
 

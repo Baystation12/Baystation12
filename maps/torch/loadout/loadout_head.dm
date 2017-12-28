@@ -5,17 +5,17 @@
 	category = /datum/gear/head
 
 /datum/gear/head/beret
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_branch = CIVILIAN_BRANCH
 	display_name = "beret, colour select"
 	path = /obj/item/clothing/head/beret/plaincolor
 	flags = GEAR_HAS_COLOR_SELECTION
 	description = "A simple, solid color beret. This one has no emblems or insignia on it."
 
 /datum/gear/head/solberet
+	allowed_branch = MILITARY_BRANCH
 	display_name = "SolGov beret selection"
 	description = "A beret denoting service in an organization within SolGov."
 	path = /obj/item/clothing/head/beret/solgov
-	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/head/solberet/New()
 	..()
