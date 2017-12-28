@@ -8,6 +8,8 @@
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
 
+	hierarchy_type = /decl/hierarchy/outfit/unggoy
+
 /decl/hierarchy/outfit/unggoy/post_equip(mob/living/carbon/human/H)
 	. = ..()
 	H.internal = H.back
@@ -22,6 +24,8 @@
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
 
+	hierarchy_type = /decl/hierarchy/outfit/unggoy/major
+
 /decl/hierarchy/outfit/unggoy/ultra
 	name = "Unggoy (Ultra)"
 
@@ -32,6 +36,8 @@
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
 
+	hierarchy_type = /decl/hierarchy/outfit/unggoy/ultra
+
 /decl/hierarchy/outfit/unggoy/specops
 	name = "Unggoy (Spec-Ops)"
 
@@ -41,3 +47,5 @@
 	mask = /obj/item/clothing/mask/rebreather/unggoy_spec_ops
 	l_pocket = /obj/item/ammo_magazine/type51mag
 	r_pocket = /obj/item/ammo_magazine/type51mag
+
+	hierarchy_type = /decl/hierarchy/outfit/unggoy/specops
