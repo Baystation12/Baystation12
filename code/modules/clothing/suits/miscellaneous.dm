@@ -379,6 +379,15 @@
 	icon_open = "brown_jacket_nt_open"
 	icon_closed = "brown_jacket_nt"
 
+/obj/item/clothing/suit/storage/toggle/marshal_jacket
+	name = "colonial marshal jacket"
+	desc = "A black leather jacket belonging to an agent of the Colonial Marshal Bureau."
+	icon_state = "marshal_jacket"
+	item_state = "marshal_jacket"
+	icon_open = "marshal_jacket_open"
+	icon_closed = "marshal_jacket"
+	body_parts_covered = UPPER_TORSO|ARMS
+
 /obj/item/clothing/suit/storage/toggle/hoodie
 	name = "hoodie"
 	desc = "A warm sweatshirt."

@@ -600,7 +600,8 @@
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marine
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marine,
+		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/civ
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e3,
@@ -609,7 +610,8 @@
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/marine/e4,
 		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/marine/e5
+		/datum/mil_rank/marine/e5,
+		/datum/mil_rank/civ/marshal
 	)
 
 	access = list(access_security, access_brig, access_forensics_lockers,
