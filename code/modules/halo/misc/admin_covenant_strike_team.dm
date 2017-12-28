@@ -26,7 +26,6 @@
 			var/ckey_selected = input(user,"Choose a Ckey for the mob.","Ckey Selection",null)
 			var/list/rank_list_to_use
 			var/decl/hierarchy/outfit/chosen_outfit
-			world << mob_selected
 			if(mob_selected == /mob/living/carbon/human/covenant/sangheili)
 				rank_list_to_use = SANGHEILI_RANK_OUTFITS
 			else if(mob_selected == /mob/living/carbon/human/covenant/kigyar)
