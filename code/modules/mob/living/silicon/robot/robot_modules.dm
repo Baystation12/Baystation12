@@ -1,14 +1,14 @@
 var/global/list/robot_modules = list(
-	"Standard"		= /obj/item/weapon/robot_module/standard,
-	"Service" 		= /obj/item/weapon/robot_module/clerical/butler,
-	"Clerical" 		= /obj/item/weapon/robot_module/clerical/general,
-	"Crisis" 		= /obj/item/weapon/robot_module/medical/crisis,
-	"Surgeon" 		= /obj/item/weapon/robot_module/medical/surgeon,
-	"Security" 		= /obj/item/weapon/robot_module/security/general,
-	"Combat" 		= /obj/item/weapon/robot_module/security/combat,
-	"Engineering"	= /obj/item/weapon/robot_module/engineering/general,
-	"Janitor" 		= /obj/item/weapon/robot_module/janitor,
-	"Exploration"   = /obj/item/weapon/robot_module/exploration
+	"Standard"		= /obj/item/weapon/robot_module/robot/standard,
+	"Service" 		= /obj/item/weapon/robot_module/robot/clerical/butler,
+	"Clerical" 		= /obj/item/weapon/robot_module/robot/clerical/general,
+	"Crisis" 		= /obj/item/weapon/robot_module/robot/medical/crisis,
+	"Surgeon" 		= /obj/item/weapon/robot_module/robot/medical/surgeon,
+	"Security" 		= /obj/item/weapon/robot_module/robot/security/general,
+	"Combat" 		= /obj/item/weapon/robot_module/robot/security/combat,
+	"Engineering"	= /obj/item/weapon/robot_module/robot/engineering/general,
+	"Janitor" 		= /obj/item/weapon/robot_module/robot/janitor,
+	"Exploration"   = /obj/item/weapon/robot_module/robot/exploration
 	)
 
 /obj/item/weapon/robot_module
@@ -170,7 +170,14 @@ var/global/list/robot_modules = list(
 	if(!can_be_pushed)
 		R.status_flags |= CANPUSH
 
-/obj/item/weapon/robot_module/standard
+// Items shared by all robot modules (not counting drones)
+/obj/item/weapon/robot_module/robot/New()
+	src.modules += new /obj/item/device/flash(src)
+	src.modules += new /obj/item/weapon/crowbar(src)
+	src.modules += new /obj/item/weapon/extinguisher(src)
+	..()
+
+/obj/item/weapon/robot_module/robot/standard
 	name = "standard robot module"
 	sprites = list(	"Basic" = "robot_old",
 					"Android" = "droid",
@@ -179,24 +186,21 @@ var/global/list/robot_modules = list(
 					"Doot" = "eyebot-standard"
 				  )
 
-/obj/item/weapon/robot_module/standard/New()
-	src.modules += new /obj/item/device/flash(src)
+/obj/item/weapon/robot_module/robot/standard/New()
 	src.modules += new /obj/item/weapon/melee/baton/loaded(src)
-	src.modules += new /obj/item/weapon/extinguisher(src)
 	src.modules += new /obj/item/weapon/wrench(src)
-	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.emag = new /obj/item/weapon/melee/energy/sword(src)
 	..()
 
-/obj/item/weapon/robot_module/medical
+/obj/item/weapon/robot_module/robot/medical
 	name = "medical robot module"
 	channels = list("Medical" = 1)
 	networks = list(NETWORK_MEDICAL)
 	subsystems = list(/datum/nano_module/crew_monitor)
 	can_be_pushed = 0
 
-/obj/item/weapon/robot_module/medical/surgeon
+/obj/item/weapon/robot_module/robot/medical/surgeon
 	name = "surgeon robot module"
 	sprites = list(
 					"Basic" = "Medbot",
@@ -207,8 +211,7 @@ var/global/list/robot_modules = list(
 					"Doot" = "eyebot-medical"
 					)
 
-/obj/item/weapon/robot_module/medical/surgeon/New()
-	src.modules += new /obj/item/device/flash(src)
+/obj/item/weapon/robot_module/robot/medical/surgeon/New()
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/surgeon(src)
 	src.modules += new /obj/item/weapon/scalpel/manager(src)
@@ -243,13 +246,13 @@ var/global/list/robot_modules = list(
 
 	..()
 
-/obj/item/weapon/robot_module/medical/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/weapon/robot_module/robot/medical/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
 		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
 	..()
 
-/obj/item/weapon/robot_module/medical/crisis
+/obj/item/weapon/robot_module/robot/medical/crisis
 	name = "crisis robot module"
 	sprites = list(
 					"Basic" = "Medbot",
@@ -261,9 +264,7 @@ var/global/list/robot_modules = list(
 					"Doot" = "eyebot-medical"
 					)
 
-/obj/item/weapon/robot_module/medical/crisis/New()
-	src.modules += new /obj/item/weapon/crowbar(src)
-	src.modules += new /obj/item/device/flash(src)
+/obj/item/weapon/robot_module/robot/medical/crisis/New()
 	src.modules += new /obj/item/borg/sight/hud/med(src)
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.modules += new /obj/item/device/reagent_scanner/adv(src)
@@ -273,7 +274,6 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/reagent_containers/dropper/industrial(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/gripper/chemistry(src)
-	src.modules += new /obj/item/weapon/extinguisher/mini(src)
 	src.modules += new /obj/item/taperoll/medical(src)
 	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src) // Allows usage of inflatables. Since they are basically robotic alternative to EMTs, they should probably have them.
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
@@ -301,7 +301,7 @@ var/global/list/robot_modules = list(
 
 	..()
 
-/obj/item/weapon/robot_module/medical/crisis/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/weapon/robot_module/robot/medical/crisis/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/weapon/reagent_containers/syringe/S = locate() in src.modules
 	if(S.mode == 2)
 		S.reagents.clear_reagents()
@@ -316,7 +316,7 @@ var/global/list/robot_modules = list(
 	..()
 
 
-/obj/item/weapon/robot_module/engineering
+/obj/item/weapon/robot_module/robot/engineering
 	name = "engineering robot module"
 	channels = list("Engineering" = 1)
 	networks = list(NETWORK_ENGINEERING)
@@ -332,14 +332,11 @@ var/global/list/robot_modules = list(
 					)
 	no_slip = 1
 
-/obj/item/weapon/robot_module/engineering/general/New()
-	src.modules += new /obj/item/device/flash(src)
+/obj/item/weapon/robot_module/robot/engineering/general/New()
 	src.modules += new /obj/item/borg/sight/meson(src)
-	src.modules += new /obj/item/weapon/extinguisher(src)
 	src.modules += new /obj/item/weapon/weldingtool/largetank(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/wrench(src)
-	src.modules += new /obj/item/weapon/crowbar(src)
 	src.modules += new /obj/item/weapon/wirecutters(src)
 	src.modules += new /obj/item/device/multitool(src)
 	src.modules += new /obj/item/device/t_scanner(src)
@@ -398,12 +395,12 @@ var/global/list/robot_modules = list(
 
 	..()
 
-/obj/item/weapon/robot_module/engineering/general/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/weapon/robot_module/robot/engineering/general/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
 	LR.Charge(R, amount)
 	..()
 
-/obj/item/weapon/robot_module/security
+/obj/item/weapon/robot_module/robot/security
 	name = "security robot module"
 	channels = list("Security" = 1)
 	networks = list(NETWORK_SECURITY)
@@ -411,7 +408,7 @@ var/global/list/robot_modules = list(
 	can_be_pushed = 0
 	supported_upgrades = list(/obj/item/borg/upgrade/tasercooler)
 
-/obj/item/weapon/robot_module/security/general
+/obj/item/weapon/robot_module/robot/security/general
 	sprites = list(
 					"Basic" = "secborg",
 					"Red Knight" = "Security",
@@ -423,8 +420,7 @@ var/global/list/robot_modules = list(
 					"Tridroid" = "orb-security"
 				)
 
-/obj/item/weapon/robot_module/security/general/New()
-	src.modules += new /obj/item/device/flash(src)
+/obj/item/weapon/robot_module/robot/security/general/New()
 	src.modules += new /obj/item/borg/sight/hud/sec(src)
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
@@ -434,7 +430,7 @@ var/global/list/robot_modules = list(
 	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src)
 	..()
 
-/obj/item/weapon/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/weapon/robot_module/robot/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in src.modules
 	if(T && T.power_supply)
@@ -448,7 +444,7 @@ var/global/list/robot_modules = list(
 	if(B && B.bcell)
 		B.bcell.give(amount)
 
-/obj/item/weapon/robot_module/janitor
+/obj/item/weapon/robot_module/robot/janitor
 	name = "janitorial robot module"
 	channels = list("Service" = 1)
 	sprites = list(
@@ -459,8 +455,7 @@ var/global/list/robot_modules = list(
 					"Doot" = "eyebot-janitor"
 					)
 
-/obj/item/weapon/robot_module/janitor/New()
-	src.modules += new /obj/item/device/flash(src)
+/obj/item/weapon/robot_module/robot/janitor/New()
 	src.modules += new /obj/item/weapon/soap/nanotrasen(src)
 	src.modules += new /obj/item/weapon/storage/bag/trash(src)
 	src.modules += new /obj/item/weapon/mop(src)
@@ -470,7 +465,7 @@ var/global/list/robot_modules = list(
 	src.emag.name = "Lube spray"
 	..()
 
-/obj/item/weapon/robot_module/janitor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/weapon/robot_module/robot/janitor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
 	LR.Charge(R, amount)
@@ -478,7 +473,7 @@ var/global/list/robot_modules = list(
 		var/obj/item/weapon/reagent_containers/spray/S = src.emag
 		S.reagents.add_reagent(/datum/reagent/lube, 20 * amount)
 
-/obj/item/weapon/robot_module/clerical
+/obj/item/weapon/robot_module/robot/clerical
 	name = "service robot module"
 	channels = list("Service" = 1)
 	languages = list(
@@ -493,7 +488,7 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SPACER = 1
 					)
 
-/obj/item/weapon/robot_module/clerical/butler
+/obj/item/weapon/robot_module/robot/clerical/butler
 	sprites = list(	"Waitress" = "Service",
 					"Kent" = "toiletbot",
 					"Bro" = "Brobot",
@@ -504,8 +499,7 @@ var/global/list/robot_modules = list(
 					"Doot" = "eyebot-standard"
 				  	)
 
-/obj/item/weapon/robot_module/clerical/butler/New()
-	src.modules += new /obj/item/device/flash(src)
+/obj/item/weapon/robot_module/robot/clerical/butler/New()
 	src.modules += new /obj/item/weapon/gripper/service(src)
 	src.modules += new /obj/item/weapon/reagent_containers/glass/bucket(src)
 	src.modules += new /obj/item/weapon/material/minihoe(src)
@@ -535,7 +529,7 @@ var/global/list/robot_modules = list(
 	src.emag.name = "Mickey Finn's Special Brew"
 	..()
 
-/obj/item/weapon/robot_module/clerical/general
+/obj/item/weapon/robot_module/robot/clerical/general
 	name = "clerical robot module"
 	sprites = list(
 					"Waitress" = "Service",
@@ -547,8 +541,7 @@ var/global/list/robot_modules = list(
 					"Doot" = "eyebot-standard"
 					)
 
-/obj/item/weapon/robot_module/clerical/general/New()
-	src.modules += new /obj/item/device/flash(src)
+/obj/item/weapon/robot_module/robot/clerical/general/New()
 	src.modules += new /obj/item/weapon/pen/robopen(src)
 	src.modules += new /obj/item/weapon/form_printer(src)
 	src.modules += new /obj/item/weapon/gripper/paperwork(src)
@@ -558,7 +551,7 @@ var/global/list/robot_modules = list(
 	src.emag = new /obj/item/weapon/stamp/chameleon(src)
 	..()
 
-/obj/item/weapon/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/weapon/robot_module/robot/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
 	E.reagents.add_reagent(/datum/reagent/enzyme, 2 * amount)
@@ -566,7 +559,7 @@ var/global/list/robot_modules = list(
 		var/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/B = src.emag
 		B.reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 2 * amount)
 
-/obj/item/weapon/robot_module/exploration
+/obj/item/weapon/robot_module/robot/exploration
 	name = "exploration robot module"
 	subsystems = list(/datum/nano_module/supply)
 	channels = list("Supply" = 1, "Science" = 1, "Exploration" = 1)
@@ -583,18 +576,14 @@ var/global/list/robot_modules = list(
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
-/obj/item/weapon/robot_module/exploration/New()
-	src.modules += new /obj/item/device/flash(src)
+/obj/item/weapon/robot_module/robot/exploration/New()
 	src.modules += new /obj/item/borg/sight/meson(src)
 	src.modules += new /obj/item/weapon/wrench(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/storage/ore(src)
 	src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
 	src.modules += new /obj/item/weapon/storage/sheetsnatcher/borg(src)
-	src.modules += new /obj/item/weapon/gripper/miner(src)
 	src.modules += new /obj/item/weapon/mining_scanner(src)
-	src.modules += new /obj/item/weapon/crowbar(src)
-	src.modules += new /obj/item/weapon/portable_destructive_analyzer(src)
 	src.modules += new /obj/item/weapon/gripper/research(src)
 	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
 	src.modules += new /obj/item/device/robotanalyzer(src)
@@ -602,9 +591,6 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/weldingtool/mini(src)
 	src.modules += new /obj/item/weapon/wirecutters(src)
 	src.modules += new /obj/item/weapon/gripper(src)
-	src.modules += new /obj/item/weapon/scalpel/laser3(src)
-	src.modules += new /obj/item/weapon/circular_saw(src)
-	src.modules += new /obj/item/weapon/extinguisher(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/gripper/chemistry(src)
 	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src)
@@ -614,7 +600,6 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/ano_scanner(src)
 	src.modules += new /obj/item/device/depth_scanner(src)
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
-
 
 	var/datum/matter_synth/nanite = new /datum/matter_synth/nanite(10000)
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal(10000)
@@ -642,7 +627,7 @@ var/global/list/robot_modules = list(
 	src.modules += S
 	..()
 
-/obj/item/weapon/robot_module/syndicate
+/obj/item/weapon/robot_module/robot/syndicate
 	name = "illegal robot module"
 	hide_on_manifest = 1
 	sprites = list(
@@ -650,9 +635,8 @@ var/global/list/robot_modules = list(
 				)
 	var/id
 
-/obj/item/weapon/robot_module/syndicate/New(var/mob/living/silicon/robot/R)
+/obj/item/weapon/robot_module/robot/syndicate/New(var/mob/living/silicon/robot/R)
 	loc = R
-	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/weapon/melee/energy/sword(src)
 	src.modules += new /obj/item/weapon/gun/energy/pulse_rifle/destroyer(src)
 	src.modules += new /obj/item/weapon/card/emag(src)
@@ -664,18 +648,17 @@ var/global/list/robot_modules = list(
 	src.modules += id
 	..()
 
-/obj/item/weapon/robot_module/syndicate/Destroy()
+/obj/item/weapon/robot_module/robot/syndicate/Destroy()
 	src.modules -= id
 	id = null
 	return ..()
 
-/obj/item/weapon/robot_module/security/combat
+/obj/item/weapon/robot_module/robot/security/combat
 	name = "combat robot module"
 	hide_on_manifest = 1
 	sprites = list("Combat Android" = "droid-combat")
 
 /obj/item/weapon/robot_module/security/combat/New()
-	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/thermal(src)
 	src.modules += new /obj/item/weapon/gun/energy/laser/mounted(src)
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)

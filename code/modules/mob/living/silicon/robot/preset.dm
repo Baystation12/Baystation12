@@ -6,7 +6,7 @@
 	lawchannel = "State"
 	laws = /datum/ai_laws/syndicate_override
 	idcard = /obj/item/weapon/card/id/syndicate
-	module = /obj/item/weapon/robot_module/syndicate
+	module = /obj/item/weapon/robot_module/robot/syndicate
 	silicon_radio = /obj/item/device/radio/borg/syndicate
 	spawn_sound = 'sound/mecha/nominalsyndi.ogg'
 	cell = /obj/item/weapon/cell/super

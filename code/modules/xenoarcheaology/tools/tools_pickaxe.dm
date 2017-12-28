@@ -99,7 +99,7 @@
 /obj/item/weapon/pickaxe/laser
 	name = "laser pickaxe"
 	icon = 'icons/obj/xenoarchaeology.dmi'
-	icon_state = "pick_hand"
+	icon_state = "pick_laser"
 	item_state = "syringe_0"
 	digspeed = 20
 	desc = "A small laser enhanced pickaxe with internal power source for precise excavations."
@@ -110,12 +110,13 @@
 
 /obj/item/weapon/pickaxe/laser/examine(var/mob/user)
 	. = ..()
-	to_chat(user, "It is set to excavate [excavation_amount]cm")
+	to_chat(user, "It is set to excavate [excavation_amount] cm.")
 
 /obj/item/weapon/pickaxe/laser/attack_self(var/mob/user)
-	var/new_setting = input("Please select excavation depth") as null|anything in list(1, 2, 4, 6, 8, 10, 12, 30)
+	var/new_setting = input("Please select excavation depth.") as null|anything in list(1, 2, 4, 6, 8, 10, 12, 30)
 	if(new_setting)
 		excavation_amount = new_setting
+		digspeed = 20 + ((excavation_amount > 12) ? 10 : 0)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pack for holding pickaxes
