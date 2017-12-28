@@ -37,7 +37,7 @@
 				chosen_outfit = input(user,"Pick a rank","Rank Selection",null) as anything in rank_list_to_use
 			var/mob/new_mob = new mob_selected
 			new_mob.loc = user.loc
-			if(!isnull(custom_name))
+			if(!isnull(custom_name) || custom_name == "" || custom_name == " ")
 				new_mob.name = custom_name
 				new_mob.real_name = custom_name
 			if(!isnull(ckey_selected))
