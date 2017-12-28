@@ -24,6 +24,7 @@
 				end_selection = 1
 				break
 			var/ckey_selected = input(user,"Choose a Ckey for the mob.","Ckey Selection",null)
+			var/custom_name = input(user,"Pick a custom name for this mob. (Leave null to randomly generate)","Name selection",null)
 			var/list/rank_list_to_use
 			var/decl/hierarchy/outfit/chosen_outfit
 			if(mob_selected == /mob/living/carbon/human/covenant/sangheili)
@@ -36,6 +37,9 @@
 				chosen_outfit = input(user,"Pick a rank","Rank Selection",null) as anything in rank_list_to_use
 			var/mob/new_mob = new mob_selected
 			new_mob.loc = user.loc
+			if(!isnull(custom_name))
+				new_mob.name = custom_name
+				new_mob.real_name = custom_name
 			if(!isnull(ckey_selected))
 				new_mob.ckey = ckey_selected
 			if(!isnull(chosen_outfit))
