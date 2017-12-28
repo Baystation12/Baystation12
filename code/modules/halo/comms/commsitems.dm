@@ -85,5 +85,6 @@
 #undef TEAMCOM_NAME
 #undef SQUADCOM_NAME
 #undef FLEETCOM_NAME
+#undef COV_COMMON_NAME
 #undef EBAND_NAME
 #undef CIV_NAME
