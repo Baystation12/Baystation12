@@ -204,9 +204,8 @@ var/global/list/string_slot_flags = list(
 
 	paths = typesof(/obj/item/grab) - /obj/item/grab
 	for(var/T in paths)
-		var/obj/item/grab/G = new T
-		if(G.type_name)
-			all_grabobjects[G.type_name] = T
+		var/obj/item/grab/G = T
+		all_grabobjects[initial(G.type_name)] = T
 
 	for(var/grabstate_name in all_grabstates)
 		var/datum/grab/G = all_grabstates[grabstate_name]

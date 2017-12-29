@@ -3,23 +3,6 @@
 	type_name = GRAB_NORMAL
 	start_grab_name = NORM_PASSIVE
 
-
-
-/obj/item/grab/normal/can_grab()
-
-	if(assailant.anchored || affecting.anchored)
-		return 0
-
-	if(!assailant.Adjacent(affecting))
-		return 0
-
-	for(var/obj/item/grab/G in affecting.grabbed_by)
-		if(G.assailant == assailant)
-			to_chat(assailant, "<span class='notice'>You already grabbed [src].</span>")
-			return 0
-
-	return 1
-
 /obj/item/grab/normal/init()
 	..()
 
@@ -29,7 +12,8 @@
 	assailant.put_in_active_hand(src)
 	assailant.do_attack_animation(affecting)
 	playsound(affecting.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-	visible_message("<span class='warning'>[assailant] has grabbed [affecting] passively!</span>")
+	var/obj/O = get_targeted_organ()
+	visible_message("<span class='warning'>[assailant] has grabbed [affecting]'s [O.name]!</span>")
 	affecting.grabbed_by += src
 
 /datum/grab/normal
@@ -130,18 +114,20 @@
 			G.attacking = 0
 			return 0
 
-	else
+	else if (O.dislocated > 0)
 		to_chat(assailant, "<span class='warning'>[affecting]'s [O.joint] is already dislocated!</span>")
+		return 0
+	else
+		to_chat(assailant, "<span class='warning'>You can't dislocate [affecting]'s [O.joint]!</span>")
 		return 0
 
 /datum/grab/normal/resolve_openhand_attack(var/obj/item/grab/G)
 	if(G.assailant.a_intent != I_HELP)
-		var/hit_zone = G.assailant.zone_sel.selecting
-		switch(hit_zone)
-			if(BP_EYES)
+		if(G.target_zone == BP_HEAD)
+			if(G.assailant.zone_sel.selecting == BP_EYES)
 				if(attack_eye(G))
 					return 1
-			if(BP_HEAD)
+			else
 				if(headbutt(G))
 					if(drop_headbutt)
 						let_go()
@@ -214,6 +200,8 @@
 
 // Handles when they change targeted areas and something is supposed to happen.
 /datum/grab/normal/special_target_change(var/obj/item/grab/G, var/diff_zone)
+	if(G.target_zone != BP_HEAD && G.target_zone != BP_CHEST)
+		return
 	switch(diff_zone)
 		if(BP_MOUTH)
 			G.assailant.visible_message("<span class='warning'>\The [G.assailant] covers [G.affecting]'s mouth!</span>")
@@ -234,12 +222,11 @@
 	return 1
 
 /datum/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I)
-	var/target_zone = user.zone_sel.selecting
-	switch(target_zone)
+	switch(G.target_zone)
 		if(BP_HEAD)
 			return attack_throat(G, I, user)
 		else
-			return attack_tendons(G, I, user, target_zone)
+			return attack_tendons(G, I, user, G.target_zone)
 
 
 
@@ -294,7 +281,7 @@
 	if(!W.edge || !W.force || W.damtype != BRUTE)
 		return 0 //unsuitable weapon
 
-	var/obj/item/organ/external/O = affecting.get_organ(target_zone)
+	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(!O || O.is_stump() || !O.has_tendon || (O.status & ORGAN_TENDON_CUT))
 		return FALSE
 
