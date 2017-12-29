@@ -2,7 +2,7 @@
 /obj/item/weapon/melee/combat_knife
 	name = "combat knife"
 	desc = "Multipurpose knife for utility use and close quarters combat"
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "Knife"
 	item_state = "butterflyknife_open"
 	w_class = 2
@@ -15,7 +15,7 @@
 /obj/item/weapon/melee/baton/humbler
 	name = "humbler stun device"
 	desc = "Multipurpose knife for utility use and close quarters combat"
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "humbler stun device"
 	item_state = "classic_baton"
 	w_class = 2		//smaller while we're folded up
