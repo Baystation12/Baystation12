@@ -36,9 +36,10 @@
 		/area/bluespaceriver/ground = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/casino/casino_hangar = NO_SCRUBBER,
 		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
-		/area/slavers_base/hangar = NO_SCRUBBER
+		/area/slavers_base/hangar = NO_SCRUBBER,
+		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC,
 	)
-	
+
 	area_coherency_test_exempt_areas = list(
 		/area/space,
 		/area/mine/explored,
