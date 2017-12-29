@@ -67,7 +67,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 
 //Sangheili Armour Subtype Defines//
 
-/obj/item/clothing/head/sangheili/minor
+/obj/item/clothing/head/helmet/sangheili/minor
 	name = "Sangheili Helmet (Minor)"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon = SANGHEILI_ARMOUR_ICON
@@ -83,7 +83,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon_state = "minor_legs"
 
-/obj/item/clothing/head/sangheili/major
+/obj/item/clothing/head/helmet/sangheili/major
 	name = "Sangheili Helmet (Major)"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon = SANGHEILI_ARMOUR_ICON
@@ -99,7 +99,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon_state = "major_legs"
 
-/obj/item/clothing/head/sangheili/ultra
+/obj/item/clothing/head/helmet/sangheili/ultra
 	name = "Sangheili Helmet (Ultra)"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon = SANGHEILI_ARMOUR_ICON
@@ -115,7 +115,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon_state = "ultra_legs"
 
-/obj/item/clothing/head/sangheili/zealot
+/obj/item/clothing/head/helmet/sangheili/zealot
 	name = "Sangheili Helmet (Zealot)"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon = SANGHEILI_ARMOUR_ICON
@@ -131,7 +131,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon_state = "zealot_legs"
 
-/obj/item/clothing/head/sangheili/specops
+/obj/item/clothing/head/helmet/sangheili/specops
 	name = "Sangheili Helmet (Spec-Ops)"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon = SANGHEILI_ARMOUR_ICON
@@ -149,7 +149,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon_state = "specops_legs"
 
-/obj/item/clothing/head/sangheili/eva
+/obj/item/clothing/head/helmet/sangheili/eva
 	name = "Sangheili Helmet (EVA)"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon = SANGHEILI_ARMOUR_ICON
@@ -214,7 +214,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)
 	new /obj/item/clothing/suit/armor/special/combatharness/minor (src.loc)
 	new /obj/item/clothing/shoes/sangheili/minor (src.loc)
-	new /obj/item/clothing/head/sangheili/minor (src.loc)
+	new /obj/item/clothing/head/helmet/sangheili/minor (src.loc)
 	qdel(src)
 
 #undef SANGHEILI_ARMOUR_ICON
