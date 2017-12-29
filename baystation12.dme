@@ -2324,7 +2324,6 @@
 #include "code\modules\spells\vampire\targeted\bloodheal.dm"
 #include "code\modules\spells\vampire\targeted\disease.dm"
 #include "code\modules\spells\vampire\targeted\dominate.dm"
-#include "code\modules\spells\vampire\targeted\embrace.dm"
 #include "code\modules\spells\vampire\targeted\enthrall.dm"
 #include "code\modules\spells\vampire\targeted\frenzyleap.dm"
 #include "code\modules\spells\vampire\targeted\hypnotize.dm"

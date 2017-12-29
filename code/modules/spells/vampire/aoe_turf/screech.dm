@@ -15,12 +15,12 @@
 	hud_state = "MAKEASPRITE"
 
 /spell/aoe_turf/vampire/screech/cast()
-	visible_message("<span class='danger'>[src.name] lets out an ear piercin shriek!</span>", "<span class='danger'>You let out an ear-shattering shriek!</span>", "<span class='danger'>You hear a painfully loud shriek!</span>")
-	playsound(src.loc, 'sound/effects/creepyshriek.ogg', 100, 1) //Spell sound needs to be loud and long-range, so we do not override the cast sound above.
+	visible_message("<span class='danger'>[usr.name] lets out an ear piercin shriek!</span>", "<span class='danger'>You let out an ear-shattering shriek!</span>", "<span class='danger'>You hear a painfully loud shriek!</span>")
+	playsound(usr.loc, 'sound/effects/creepyshriek.ogg', 100, 1) //Spell sound needs to be loud and long-range, so we do not override the cast sound above.
 	var/list/victims = list()
 
-	for (var/mob/living/carbon/human/T in hearers(inner_radius, src))
-		if (T == src)
+	for (var/mob/living/carbon/human/T in hearers(inner_radius, usr))
+		if (T == usr)
 			continue
 
 		if (istype(T) && (T:l_ear || T:r_ear) && istype((T:l_ear || T:r_ear), /obj/item/clothing/ears/earmuffs))
@@ -44,6 +44,6 @@
 		L.broken()
 
 	if (victims.len)
-		admin_attacker_log_many_victims(src, victims, "used chriopteran screech to stun", "was stunned by [key_name(src)] using chriopteran screech", "used chiropteran screech to stun")
+		admin_attacker_log_many_victims(usr, victims, "used chriopteran screech to stun", "was stunned by [key_name(usr)] using chriopteran screech", "used chiropteran screech to stun")
 	else
 		log_and_message_admins("used chiropteran screech.")

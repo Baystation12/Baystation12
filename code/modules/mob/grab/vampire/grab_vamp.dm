@@ -54,20 +54,19 @@
 
 /datum/grab/normal/kill/vamp/process_effect(var/obj/item/grab/G)
 	..()
-	var/mob/living/carbon/human/assailant = G.assailant
-	var/mob/living/carbon/human/affecting = G.affecting
+	var/mob/living/carbon/human/aff = G.affecting
 
-	affecting.Stun(3)
+	aff.Stun(3)
 
-	affecting.drop_l_hand()
-	affecting.drop_r_hand()
+	aff.drop_l_hand()
+	aff.drop_r_hand()
 
-	if(affecting.lying)
-		affecting.Weaken(4)
+	if(aff.lying)
+		aff.Weaken(4)
 
 /datum/grab/normal/kill/vamp/on_hit_harm(var/obj/item/grab/G, var/zone)
-	var/mob/living/carbon/human/assailant = G.assailant
-	var/mob/living/carbon/human/affecting = G.affecting
-	if(!isSynthetic(G.affecting))
-		to_chat(src, "<span class = warn> You sink your teeth into [G.affecting]'s [zone], only to tear the flesh away shortly after. </span>","<span class = warn>[G.assailant] sinks their teeth into [G.affecting]'s [zone], tearing at their flesh!</span>", "<span class = warn>You hear meat being ripped and torn.</span>")
+	var/mob/living/carbon/human/ass = G.assailant
+	var/mob/living/carbon/human/aff = G.affecting
+	if(do_after(5 SECONDS))
+		visible_message("<span class = 'warning'> You sink your teeth into [G.affecting]'s [zone], only to tear the flesh away shortly after. </span>","<span class = 'warning'>[G.assailant] sinks their teeth into [G.affecting]'s [zone], tearing at their flesh!</span>", "<span class = 'warning'>You hear meat being ripped and torn.</span>")
 		//Do some crazy brute after a bit of time. Comparable to a throatslit. More damage if feral.

@@ -1,9 +1,11 @@
 // Dominate a victim, imbed a thought into their mind.
-/mob/living/carbon/human/proc/vampire_dominate()
-	set category = "Vampire"
-	set name = "Dominate (25)"
-	set desc = "Dominate the mind of a victim, make them obey your will."
+/spell/targeted/vampire/dominate
+	name = "Dominate (25)"
+	desc = "Dominate the mind of a victim, make them obey your will."
+	blood_cost = 25
+	charge_max = 180 SECONDS
 
+/spell/targeted/vampire/dominate/cast()
 	var/datum/vampire/vampire = vampire_power(25, 0)
 	if (!vampire)
 		return
@@ -47,8 +49,3 @@
 	show_browser(T, "<center>You feel a strong presence enter your mind. For a moment, you hear nothing but what it says, <b>and are compelled to follow its direction without question or hesitation:</b><br>[command]</center>", "window=vampiredominate")
 	to_chat(src, "<span class='notice'>You command [T], and they will obey.</span>")
 	emote("me", 1, "whispers.")
-
-	vampire.use_blood(25)
-	verbs -= /mob/living/carbon/human/proc/vampire_dominate
-
-	do_vamp_cooldown(/mob/living/carbon/human/proc/vampire_dominate, 180 SECONDS)
