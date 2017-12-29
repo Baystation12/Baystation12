@@ -205,7 +205,7 @@
 
 /datum/armourspecials/cloaking
 	var/cloak_active = 0
-	var/min_alpha = 15 //The minimum level of alpha to reach.
+	var/min_alpha = 10 //The minimum level of alpha to reach.
 	var/cloak_recover_time = 5 //The time in seconds it takes to recover to full cloak after being hit.
 	var/cloak_toggle_time = 2 //The time in seconds it takes to enable/disable the cloaking device.
 	var/cloak_disrupted = 0 //Is the cloak currently disrupted?

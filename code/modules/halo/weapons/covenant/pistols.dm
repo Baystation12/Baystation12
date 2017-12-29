@@ -11,6 +11,7 @@
 	max_shots = 20
 	var/overcharge = 0
 	projectile_type = /obj/item/projectile/covenant/plasmapistol
+	screen_shake = 0
 
 /obj/item/weapon/gun/energy/plasmapistol/attack_self(var/mob/user)
 	if(overcharge) //tell user overcharge deactivated, reset stats.

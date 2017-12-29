@@ -2,6 +2,7 @@
 	name = "Sangheili"
 
 	uniform = /obj/item/clothing/under/covenant/sangheili
+	l_ear = /obj/item/device/radio/headset/covenant
 
 /decl/hierarchy/outfit/sangheili/minor
 	name = "Sangheili (Minor)"
@@ -49,14 +50,14 @@
 /decl/hierarchy/outfit/sangheili/zealot
 	name = "Sangheili (Zealot)"
 
-	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra
+	suit = /obj/item/clothing/suit/armor/special/combatharness/zealot
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	l_hand = /obj/item/weapon/melee/energysword
 	r_hand = /obj/item/weapon/melee/energysword
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
-	shoes = /obj/item/clothing/shoes/sangheili/ultra
-	head = /obj/item/clothing/head/sangheili/ultra
+	shoes = /obj/item/clothing/shoes/sangheili/zealot
+	head = /obj/item/clothing/head/sangheili/zealot
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
 

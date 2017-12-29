@@ -108,6 +108,8 @@ cloak disrupt override
 				var/effective_armor_thickness = 1
 				if(!isnull(initial(C.armor_thickness)))
 					effective_armor_thickness = (C.armor_thickness/10) + 1
+					if(type in C.armor_thickness_modifiers)
+						effective_armor_thickness *= C.armor_thickness_modifiers[type]
 				protection = add_armor(protection, (C.armor[type] * effective_armor_thickness))
 	return protection
 

@@ -76,6 +76,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi')
 	species_restricted = list("Kig-Yar")
 	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
+	armor_thickness_modifiers = list()
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/organ/external/arm/hollow_bones
