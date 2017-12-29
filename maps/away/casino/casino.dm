@@ -15,7 +15,12 @@
 		"nav_casino_2",
 		"nav_casino_3",
 		"nav_casino_4",
-		"nav_casino_antag"
+		"nav_casino_antag",
+		"nav_casino_hangar",
+
+	restricted_waypoints = list(
+		"Casino Cutter" = list("nav_casino_hangar"),
+	)
 	)
 
 /datum/map_template/ruin/away_site/casino
@@ -67,7 +72,7 @@
 	name = "In transit"
 	landmark_tag = "nav_casino_transit"
 
-/obj/machinery/computer/shuttle_control/casino_cutter
+/obj/machinery/computer/shuttle_control/explore/casino_cutter
 	name = "cutter control console"
 	shuttle_tag = "Casino Cutter"
 
