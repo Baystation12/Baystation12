@@ -150,7 +150,7 @@
 	var/list/valid_helmets = list(/obj/item/clothing/head/helmet/spartan) //This should work for the slayer helms too. IIRC, Istype also counts subtypes.
 
 /datum/armourspecials/shieldmonitor/sangheili
-	valid_helmets = list(/obj/item/clothing/head/sangheili)
+	valid_helmets = list(/obj/item/clothing/head/helmet/sangheili)
 
 /datum/armourspecials/internal_jumpsuit
 	//Created for spartan armour to allow them to carry things in slots which require a jumpsuit.
