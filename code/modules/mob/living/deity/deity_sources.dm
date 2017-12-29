@@ -47,10 +47,11 @@
 		return
 	if(amount > 0)
 		eyeobj.visualnet.add_source(source)
-		if(isobj(source))
+		if(istype(source, /obj/structure/deity))
 			structures |= source
 	else
-		if(isobj(source))
+		eyeobj.visualnet.remove_source(source)
+		if(istype(source, /obj/structure/deity))
 			structures -= source
 
 /mob/living/deity/proc/is_follower(var/mob/living/L, var/silent = 0)
@@ -73,12 +74,13 @@
 	return 1
 
 //Whether we are near an important structure.
-/mob/living/deity/proc/near_structure(var/mob/living/L)
-	var/turf/T = get_turf(L)
+/mob/living/deity/proc/near_structure(var/atom/A, var/all_structures = 0)
+	var/turf/T = get_turf(A)
 	for(var/s in structures)
-		var/obj/structure/deity/D = s
-		if(D.deity_flags & DEITY_STRUCTURE_NEAR_IMPORTANT)//If it needs to be near an important structure, it isn't important.
-			continue
+		if(!all_structures)
+			var/obj/structure/deity/D = s
+			if(D.deity_flags & DEITY_STRUCTURE_NEAR_IMPORTANT)//If it needs to be near an important structure, it isn't important.
+				continue
 
 		if(get_dist(T, s) <= 3)
 			return 1

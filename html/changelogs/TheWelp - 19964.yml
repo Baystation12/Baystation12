@@ -1,0 +1,5 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds band-aid fix to deity spam via cooldowns. Will add graphical indicator to show what the cooldown is later."
+  - rscadd: "Modifies phenomena near structure logic to include all deity structures, not just altars."
