@@ -101,9 +101,9 @@
 	else
 		return ..()
 
-/obj/item/weapon/defibrillator/emag_act(mob/user)
+/obj/item/weapon/defibrillator/emag_act(var/uses, var/mob/user)
 	if(paddles)
-		return paddles.emag_act(user)
+		return paddles.emag_act(uses, user, src)
 	return NO_EMAG_ACT
 
 //Paddle stuff
@@ -441,18 +441,18 @@
 /obj/item/weapon/shockpaddles/proc/make_announcement(var/message, var/msg_class)
 	audible_message("<b>\The [src]</b> [message]", "\The [src] vibrates slightly.")
 
-/obj/item/weapon/shockpaddles/emag_act(mob/user)
+/obj/item/weapon/shockpaddles/emag_act(var/uses, var/mob/user, var/obj/item/weapon/defibrillator/base)
 	if(safety)
 		safety = 0
 		to_chat(user, "<span class='warning'>You silently disable \the [src]'s safety protocols with the cryptographic sequencer.</span>")
 		burn_damage_amt *= 3
-		update_icon()
+		base.update_icon()
 		return 1
 	else
 		safety = 1
 		to_chat(user, "<span class='notice'>You silently enable \the [src]'s safety protocols with the cryptographic sequencer.</span>")
 		burn_damage_amt = initial(burn_damage_amt)
-		update_icon()
+		base.update_icon()
 		return 1
 
 /obj/item/weapon/shockpaddles/emp_act(severity)
