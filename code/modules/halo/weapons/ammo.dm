@@ -165,6 +165,12 @@
 	penetrating = 5
 	armor_penetration = 80
 	accuracy = 6
+	tracer_type = /obj/effect/projectile/srs99
+	tracer_delay_time = 2 SECONDS
+
+/obj/effect/projectile/srs99
+	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon_state = "sniper_trail"
 
 /obj/item/weapon/storage/box/m145_ap
 	name = "box of 14.5mm M112 magazines"

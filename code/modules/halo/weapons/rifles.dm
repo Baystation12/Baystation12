@@ -73,6 +73,13 @@
 		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
 		)
 
+/obj/item/weapon/gun/projectile/br85/verb/scope()
+	set category = "Object"
+	set name = "Use Scope (1.15x)"
+	set popup_menu = 1
+
+	toggle_scope(usr, 1.15)
+
 /obj/item/weapon/gun/projectile/br85/update_icon()
 	if(ammo_magazine)
 		icon_state = "Br85"
