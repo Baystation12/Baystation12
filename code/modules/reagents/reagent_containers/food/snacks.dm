@@ -1622,6 +1622,7 @@
 	center_of_mass = "x=16;y=14"
 
 	var/wrapped = 0
+	var/growing = 0
 	var/monkey_type = /mob/living/carbon/human/monkey
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/New()
@@ -1633,10 +1634,12 @@
 		Unwrap(user)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Expand()
-	src.visible_message("<span class='notice'>\The [src] expands!</span>")
-	var/mob/monkey = new monkey_type
-	monkey.dropInto(src.loc)
-	qdel(src)
+	if(!growing)
+		growing = 1
+		src.visible_message("<span class='notice'>\The [src] expands!</span>")
+		var/mob/monkey = new monkey_type
+		monkey.dropInto(src.loc)
+		qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Unwrap(var/mob/user)
 	icon_state = "monkeycube"

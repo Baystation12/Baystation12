@@ -191,7 +191,7 @@
 		return species.can_fall(src)
 
 /atom/movable/proc/handle_fall(var/turf/landing)
-	Move(landing)
+	forceMove(landing)
 	if(locate(/obj/structure/stairs) in landing)
 		return 1
 	else

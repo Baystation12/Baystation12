@@ -62,7 +62,6 @@
 	to_chat(user, "Storage capacity: [used_capacity]/[max_capacity]GQ")
 
 // Use this proc to add file to the drive. Returns 1 on success and 0 on failure. Contains necessary sanity checks.
-var/list/badchars = list("/","\\",":","*","?","\"","<",">","|","#", ".")
 /obj/item/weapon/computer_hardware/hard_drive/proc/store_file(var/datum/computer_file/F)
 	if(!F || !istype(F))
 		return 0
@@ -76,6 +75,7 @@ var/list/badchars = list("/","\\",":","*","?","\"","<",">","|","#", ".")
 	if(!stored_files)
 		return 0
 
+	var/list/badchars = list("/","\\",":","*","?","\"","<",">","|","#", ".")
 	for(var/char in badchars)
 		if(findtext(F.filename, char))
 			return 0

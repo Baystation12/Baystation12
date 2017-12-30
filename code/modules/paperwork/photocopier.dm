@@ -179,6 +179,7 @@
 		toner--
 	if(toner == 0)
 		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
+	c.update_icon()
 	return c
 
 
