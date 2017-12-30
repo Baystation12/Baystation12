@@ -3,7 +3,7 @@
 	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
 	var/datum/pipeline/parent
 	var/volume = 0
-	var/leaking = 0
+	var/leaking = 0		// Do not set directly, use set_leaking(TRUE/FALSE)
 	use_power = 0
 
 	var/alert_pressure = 170*ONE_ATMOSPHERE
@@ -24,6 +24,23 @@
 
 /obj/machinery/atmospherics/pipe/hides_under_flooring()
 	return level != 2
+
+/obj/machinery/atmospherics/pipe/proc/set_leaking(var/new_leaking)
+	if(new_leaking && !leaking)
+		START_PROCESSING(SSmachines, src)
+		leaking = TRUE
+		if(parent)
+			parent.leaks |= src
+			if(parent.network)
+				parent.network.leaks |= src
+	else if (!new_leaking && leaking)
+		STOP_PROCESSING(SSmachines, src)
+		leaking = FALSE
+		if(parent)
+			parent.leaks -= src
+			if(parent.network)
+				parent.network.leaks -= src
+
 
 /obj/machinery/atmospherics/pipe/proc/pipeline_expansion()
 	return null
@@ -273,13 +290,10 @@
 		qdel(src)
 	else if(node1 && node2)
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]")
-		if(leaking)
-			leaking = 0
+		set_leaking(FALSE)
 	else
 		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed[node1?1:0][node2?1:0][icon_connect_type]")
-		if(!leaking)
-			leaking = 1
-			START_PROCESSING(SSmachines, src)
+		set_leaking(TRUE)
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
@@ -515,6 +529,7 @@
 	if(!check_icon_cache())
 		return
 
+	set_leaking(!(node1 && node2 && node3))
 	alpha = 255
 
 	if(!node1 && !node2 && !node3)
@@ -773,6 +788,7 @@
 	if(!check_icon_cache())
 		return
 
+	set_leaking(!(node1 && node2 && node3 && node4))
 	alpha = 255
 
 	if(!node1 && !node2 && !node3 && !node4)
