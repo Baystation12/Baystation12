@@ -45,6 +45,10 @@
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
 
+/obj/item/weapon/material/hatchet/machete/red
+	icon_state = "macheteR"
+	item_state = "machete"
+
 /obj/item/weapon/material/hatchet/machete/deluxe
 	name = "deluxe machete"
 	desc = "A fine example of a machete, with a polished blade, wooden handle and a leather cord loop."

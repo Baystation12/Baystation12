@@ -4,7 +4,7 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds
 	name = "packet of seeds"
 	icon = 'icons/obj/seeds.dmi'
-	icon_state = "blank"
+	icon_state = "seedy"
 	w_class = ITEM_SIZE_SMALL
 
 	var/seed_type

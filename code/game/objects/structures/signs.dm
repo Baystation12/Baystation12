@@ -144,7 +144,7 @@
 
 /obj/structure/sign/warning/lethal_turrets/New()
 	..()
-	desc += " Enter at own risk!."
+	desc += " Enter at own risk!"
 
 /obj/structure/sign/warning/mail_delivery
 	name = "\improper MAIL DELIVERY"
@@ -161,6 +161,14 @@
 /obj/structure/sign/warning/nosmoking_2
 	name = "\improper NO SMOKING"
 	icon_state = "nosmoking2"
+
+/obj/structure/sign/warning/smoking
+	name = "\improper SMOKING"
+	icon_state = "smoking"
+
+/obj/structure/sign/warning/smoking/Initialize()
+	. = ..()
+	desc += " Hell yeah."
 
 /obj/structure/sign/warning/pods
 	name = "\improper ESCAPE PODS"
