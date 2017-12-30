@@ -15,6 +15,7 @@
 	#include "../away/slavers/slavers_base.dm"
 	#include "../away/blueriver/blueriver.dm"
 	#include "../away/hydro/hydro.dm"
+	#include "../away/mobius_rift/mobius_rift.dm"
 
 	#include "../../code/modules/lobby_music/absconditus.dm"
 

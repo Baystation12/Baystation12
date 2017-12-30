@@ -37,7 +37,8 @@
 		/area/bluespaceriver/ground = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/slavers_base/hangar = NO_SCRUBBER,
 		/area/hydro = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/hydro/station = NO_SCRUBBER
+		/area/hydro/station = NO_SCRUBBER,
+		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC,
 	)
 
 	area_coherency_test_exempt_areas = list(
