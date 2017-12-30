@@ -90,7 +90,7 @@
 	desc = "The oldest and wisest of goats; king of his race, peerless in dignity and power. His golden fleece radiates nobility."
 	icon_state = "king_goat"
 	icon_living = "king_goat"
-	icon_dead = "king_goat_dead"
+	icon_dead = "goat_dead"
 	speak_emote = list("brays in a booming voice")
 	emote_hear = list("brays in a booming voice")
 	emote_see = list("stamps a mighty foot, shaking the surroundings")
@@ -110,6 +110,11 @@
 	..()
 	if(stat == CONSCIOUS)
 		visible_message("<span class='warning'>[src] bellows indignantly, with a judgemental gleam in their eye.</span>")
+
+/mob/living/simple_animal/hostile/retaliate/goat/king/death()
+	..()
+	visible_message("<span class='warning'>\The [src] shrieks as the seal on their power breaks and his wool peels off!</span>")
+	new /obj/item/weapon/towel/fleece(src.loc)
 
 //cow
 /mob/living/simple_animal/cow
