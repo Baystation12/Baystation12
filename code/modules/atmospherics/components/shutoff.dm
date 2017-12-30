@@ -4,7 +4,6 @@
 
 	name = "automatic shutoff valve"
 	desc = "An automatic valve with control circuitry and pipe integrity sensor, capable of automatically isolating damaged segments of the pipe network."
-	var/closed_auto = 0
 	var/override_open = FALSE	// If true it will be always open
 	level = 1
 	connect_types = CONNECT_TYPE_SCRUBBER | CONNECT_TYPE_SUPPLY | CONNECT_TYPE_REGULAR
@@ -47,7 +46,7 @@
 			close()
 		return
 
-	closed_auto = (network_node1.leaks.len || network_node2.leaks.len || override_open)
+	var/closed_auto = (network_node1.leaks.len || network_node2.leaks.len || override_open)
 
 	if(closed_auto && open)
 		close()
