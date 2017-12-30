@@ -751,3 +751,23 @@ default behaviour is:
 		layer = HIDING_MOB_LAYER
 	else
 		..()
+
+/mob/living/update_icons()
+	if(auras)
+		overlays |= auras
+
+/mob/living/proc/add_aura(var/obj/aura/aura)
+	if(!auras)
+		auras = list()
+	auras |= aura
+	update_icons()
+	return 1
+
+/mob/living/proc/remove_aura(var/obj/aura/aura)
+	if(!auras)
+		return 0
+	auras -= aura
+	if(auras.len == 0)
+		auras.Cut()
+	update_icons()
+	return 1

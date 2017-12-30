@@ -30,6 +30,8 @@
 		//stuff in the stomach
 		handle_stomach()
 
+		aura_check("Life")
+
 		. = 1
 
 	//Handle temperature/pressure differences between body and environment

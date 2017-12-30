@@ -91,6 +91,20 @@
 
 	return absorb
 
+/mob/living/proc/aura_check(var/type)
+	if(!auras)
+		return 1
+	. = 1
+	var/list/newargs = args - args[1]
+	for(var/a in auras)
+		var/obj/aura/aura = a
+		var/result = aura.attack_type(type,newargs)
+		if(result & AURA_FALSE)
+			. = 0
+		if(result & AURA_CANCEL)
+			break
+
+
 //Handles the effects of "stun" weapons
 /mob/living/proc/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon=null)
 	flash_pain()
@@ -151,6 +165,8 @@
 
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)//Standardization and logging -Sieve
+	if(!aura_check("Thrown", AM, speed))
+		return
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 		var/dtype = O.damtype

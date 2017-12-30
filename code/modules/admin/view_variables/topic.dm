@@ -526,7 +526,24 @@
 		var/datum/D = locate(href_list["call_proc"])
 		if(istype(D) || istype(D, /client)) // can call on clients too, not just datums
 			callproc_targetpicked(1, D)
-
+	else if(href_list["addaura"])
+		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/L = locate(href_list["addaura"])
+		var/choice = input("Please choose an aura to add", "Auras", null) as null|anything in typesof(/obj/aura)
+		if(!choice || !L)
+			return
+		var/obj/o = new choice(L)
+		log_admin("[key_name(usr)] added [o] to \the [L].")
+		message_admins("<span class='notice'>[key_name(usr)] added [o] to \the [L].</span>")
+	else if(href_list["removeaura"])
+		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/L = locate(href_list["removeaura"])
+		var/choice = input("Please choose an aura to remove", "Auras", null) as null|anything in L.auras
+		if(!choice || !L)
+			return
+		log_admin("[key_name(usr)] removed [choice] from \the [L].")
+		message_admins("<span class='notice'>[key_name(usr)] removed [choice] from \the [L].</span>")
+		qdel(choice)
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])
 		if(istype(DAT, /datum) || istype(DAT, /client))

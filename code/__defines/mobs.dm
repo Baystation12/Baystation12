@@ -258,3 +258,5 @@
 #define SURGERY_RETRACTED 2
 #define SURGERY_ENCASED 3
 
+#define AURA_CANCEL 1
+#define AURA_FALSE  2
