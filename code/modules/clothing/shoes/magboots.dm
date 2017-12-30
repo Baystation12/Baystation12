@@ -34,6 +34,7 @@
 		set_slowdown()
 		force = 5
 		if(icon_base) icon_state = "[icon_base]1"
+		playsound(get_turf(src), 'sound/effects/magnetclamp.ogg', 20)
 		to_chat(user, "You enable the mag-pulse traction system.")
 	user.update_inv_shoes()	//so our mob-overlays update
 	user.update_action_buttons()
