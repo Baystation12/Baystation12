@@ -96,6 +96,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
 	var/num_exoplanets = 0
+	var/list/planet_size  //dimensions of planet zlevel, defaults to world size. Due to how maps are generated, must be (2^n+1) e.g. 17,33,65,129 etc. Map will just round up to those if set to anything other.
 	var/away_site_budget = 0
 
 	//Economy stuff
@@ -154,6 +155,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		map_levels = station_levels.Copy()
 	if(!allowed_jobs)
 		allowed_jobs = subtypesof(/datum/job)
+	if(!planet_size)
+		planet_size = list(world.maxx, world.maxy)
 
 /datum/map/proc/setup_map()
 	var/list/lobby_music_tracks = subtypesof(/lobby_music)
@@ -196,7 +199,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	for(var/i = 0, i < num_exoplanets, i++)
 		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/sector/exoplanet))
-		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type
+		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type(null, planet_size[1], planet_size[2])
 		new_planet.build_level()
 
 // Used to apply various post-compile procedural effects to the map.
@@ -210,7 +213,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		M.update_icon()
 	for(var/thing in mining_floors["[zlevel]"])
 		var/turf/simulated/floor/asteroid/M = thing
-		if (istype(M))
+		if(istype(M))
 			M.updateMineralOverlays()
 
 /datum/map/proc/get_network_access(var/network)

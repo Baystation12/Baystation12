@@ -21,6 +21,7 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	attack_verb = list("chopped", "torn", "cut")
 	applies_material_colour = 0
+	hitsound = "chop"
 
 /obj/item/weapon/material/hatchet/unathiknife
 	name = "duelling knife"

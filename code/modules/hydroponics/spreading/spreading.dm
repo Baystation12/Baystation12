@@ -239,6 +239,7 @@
 		..()
 		if(W.force)
 			health -= W.force
+		playsound(get_turf(src), W.hitsound, 100, 1)
 	check_health()
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases
