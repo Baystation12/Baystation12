@@ -95,7 +95,7 @@
 			O.eye_blurry += flash_time
 			O.confused += (flash_time + 2)
 			O.Stun(flash_time / 2)
-			O.Weaken(3)
+			O.Weaken(10)
 
 /obj/machinery/flasher/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

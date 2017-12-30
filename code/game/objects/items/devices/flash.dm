@@ -83,8 +83,8 @@
 					if(flash_strength > 3)
 						M.drop_l_hand()
 						M.drop_r_hand()
-					if(flash_strength > 5)
-						M.Weaken(2)
+					if(flash_strength > 4)
+						M.Weaken(5)
 			else
 				flashfail = 1
 
@@ -196,5 +196,5 @@
 	desc = "A device that produces a very bright flash of light. This is an advanced and expensive version often issued to VIPs."
 	icon_state = "advflash"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
-	str_min = 3
+	str_min = 4
 	str_max = 8
