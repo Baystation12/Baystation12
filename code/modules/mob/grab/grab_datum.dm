@@ -77,7 +77,7 @@
 	if(!upgrab)
 		return
 
-	if (can_upgrade())
+	if (can_upgrade(G))
 		upgrade_effect(G)
 		admin_attack_log(G.assailant, G.affecting, "tightens their grip on their victim to [upgrab.state_name]", "was grabbed more tightly to [upgrab.state_name]", "tightens grip to [upgrab.state_name] on")
 		return upgrab

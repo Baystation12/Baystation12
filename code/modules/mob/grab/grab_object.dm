@@ -16,6 +16,7 @@
 	var/special_target_functional = 1
 
 	var/attacking = 0
+	var/target_zone
 
 	w_class = ITEM_SIZE_NO_CONTAINER
 /*
@@ -26,9 +27,17 @@
 
 	assailant = attacker
 	affecting = victim
+	target_zone = attacker.zone_sel.selecting
+	var/obj/item/O = get_targeted_organ()
+	name = "[name] ([O.name])"
 
 	if(start_grab_name)
 		current_grab = all_grabstates[start_grab_name]
+
+/obj/item/grab/examine(var/user)
+	..()
+	var/obj/item/O = get_targeted_organ()
+	to_chat(user,"A grab on \the [affecting]'s [O.name].")
 
 /obj/item/grab/Process()
 	current_grab.process(src)
@@ -64,7 +73,8 @@
 */
 /obj/item/grab/proc/target_change()
 	var/hit_zone = assailant.zone_sel.selecting
-
+	if(src != assailant.get_active_hand())
+		return 0
 	if(hit_zone && hit_zone != last_target)
 		last_target = hit_zone
 		special_target_functional = current_grab.check_special_target(src)
@@ -77,6 +87,20 @@
 	assailant.drop_from_inventory(src)
 
 /obj/item/grab/proc/can_grab()
+
+	if(assailant.anchored || affecting.anchored)
+		return 0
+
+	if(!assailant.Adjacent(affecting))
+		return 0
+
+	for(var/obj/item/grab/G in affecting.grabbed_by)
+		if(G.assailant == assailant && G.target_zone == target_zone)
+			var/obj/O = G.get_targeted_organ()
+			to_chat(assailant, "<span class='notice'>You already grabbed [affecting]'s [O.name].</span>")
+			return 0
+
+	return 1
 
 // This is for all the sorts of things that need to be checked for pretty much every
 // grab made. Feel free to override it but it stops a lot of situations that could
@@ -109,7 +133,7 @@
 
 // Returns the organ of the grabbed person that the grabber is targeting
 /obj/item/grab/proc/get_targeted_organ()
-	return (affecting.get_organ(assailant.zone_sel.selecting))
+	return (affecting.get_organ(target_zone))
 
 /obj/item/grab/proc/resolve_item_attack(var/mob/living/M, var/obj/item/I, var/target_zone)
 	if((M && ishuman(M)) && I)

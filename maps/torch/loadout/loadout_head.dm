@@ -174,9 +174,34 @@
 
 /datum/gear/head/fleethat
 	display_name = "fleet cap"
-	path = /obj/item/clothing/head/solgov/utility/fleet
+	path = /obj/item/clothing/head/soft/solgov/fleet
 	cost = 0
 	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/fleetfur
+	display_name = "fleet fur hat"
+	path = /obj/item/clothing/head/ushanka/solgov/fleet
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/fleetberet
+	display_name = "fleet beret selection"
+	path = /obj/item/clothing/head/beret/solgov
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/fleetberet/New()
+	..()
+	var/fleetberets = list()
+	fleetberets["fleet beret"] = /obj/item/clothing/head/beret/solgov/fleet
+	fleetberets["fleet security beret"] = /obj/item/clothing/head/beret/solgov/fleet/security
+	fleetberets["fleet medical beret"] = /obj/item/clothing/head/beret/solgov/fleet/medical
+	fleetberets["fleet engineering beret"] = /obj/item/clothing/head/beret/solgov/fleet/engineering
+	fleetberets["fleet supply beret"] = /obj/item/clothing/head/beret/solgov/fleet/supply
+	fleetberets["fleet service beret"] = /obj/item/clothing/head/beret/solgov/fleet/service
+	fleetberets["fleet exploration beret"] = /obj/item/clothing/head/beret/solgov/fleet/exploration
+	fleetberets["fleet officer's beret"] = /obj/item/clothing/head/beret/solgov/fleet/command
+	gear_tweaks  += new/datum/gear_tweak/path(fleetberets)
 
 /datum/gear/head/marinehat
 	display_name = "marine cap"
@@ -184,9 +209,46 @@
 	cost = 0
 	allowed_roles = SOLGOV_ROLES
 
+/datum/gear/head/marinefur
+	display_name = "marine fur hat"
+	path = /obj/item/clothing/head/ushanka/solgov/marine
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/marinegreenfur
+	display_name = "green marine fur hat"
+	path = /obj/item/clothing/head/ushanka/solgov/marine/green
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
 /datum/gear/head/echat
 	display_name = "EC cap"
 	path = /obj/item/clothing/head/soft/solgov/expedition
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/ecberet
+	display_name = "EC beret selection"
+	path = /obj/item/clothing/head/beret/solgov
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
+/datum/gear/head/ecberet/New()
+	..()
+	var/ecberets = list()
+	ecberets["expeditionary beret"] = /obj/item/clothing/head/beret/solgov/expedition
+	ecberets["expeditionary security beret"] = /obj/item/clothing/head/beret/solgov/expedition/security
+	ecberets["expeditionary medical beret"] = /obj/item/clothing/head/beret/solgov/expedition/medical
+	ecberets["expeditionary engineering beret"] = /obj/item/clothing/head/beret/solgov/expedition/engineering
+	ecberets["expeditionary supply beret"] = /obj/item/clothing/head/beret/solgov/expedition/supply
+	ecberets["expeditionary service beret"] = /obj/item/clothing/head/beret/solgov/expedition/service
+	ecberets["expeditionary exploration beret"] = /obj/item/clothing/head/beret/solgov/expedition/exploration
+	ecberets["expeditionary officer's beret"] = /obj/item/clothing/head/beret/solgov/expedition/command
+	gear_tweaks += new/datum/gear_tweak/path(ecberets)
+
+/datum/gear/head/ecfur
+	display_name = "EC fur hat"
+	path = /obj/item/clothing/head/ushanka/solgov
 	cost = 0
 	allowed_roles = SOLGOV_ROLES
 
