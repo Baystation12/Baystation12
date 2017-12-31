@@ -12,7 +12,7 @@
 	var/list/events_by_turf = get_event_turfs_by_z_level(z_level)
 	var/list/candidate_turfs = block(locate(OVERMAP_EDGE, OVERMAP_EDGE, z_level),locate(overmap_size - OVERMAP_EDGE, overmap_size - OVERMAP_EDGE,z_level))
 	candidate_turfs -= events_by_turf
-	candidate_turfs = filter(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap)
+	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap)
 
 	for(var/i = 1 to number_of_events)
 		if(!candidate_turfs.len)
