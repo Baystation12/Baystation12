@@ -3,12 +3,15 @@
 
 //CD: 80 SECONDS
 
-/spell/targeted/vampire/grapple
+/datum/actionbutton
 	name = "Grapple"
 	desc = "Lunge towards a target like an animal, and grapple them."
 	charge_max = 80 SECONDS
 
 /spell/targeted/vampire/grapple/cast()
+	VAMPMACRO(grapple())
+
+/mob/living/carbon/human/proc/grapple()
 
 	if (status_flags & LEAPING)
 		return

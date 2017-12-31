@@ -6,7 +6,10 @@
 	invocation_type = SpI_NONE
 
 /spell/targeted/vampire/bloodheal/cast()
+	var/mob/living/carbon/human/H = usr
+	H.bloodheal()
 
+/mob/living/carbon/human/proc/bloodheal()
 
 	var/datum/vampire/vampire = vampire_power(0, 0)
 	if (!vampire)

@@ -1,5 +1,12 @@
 //More or less only exists to set a few shared values and flags for vampire spells. Possibly the worst, but most apt name for this file. Might not even be necessary.
 
+#define VAMPMACRO(A) var/mob/living/carbon/human/M = usr;M.A
+
+
+/datum/actionbutton/vampire
+	name = "CHAOKO FORGOT TO NAME THIS FUCKING BUTTON"
+	action_type = AB_GENERIC
+
 
 /spell/vampire
 	spell_flags = NEEDSVAMPIRE | IGNOREDENSE

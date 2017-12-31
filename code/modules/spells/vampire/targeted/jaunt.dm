@@ -8,7 +8,7 @@
 	blood_cost = 80
 
 /spell/targeted/vampire/jaunt/cast()
-	var/datum/vampire/vampire = vampire_power(0, 0, 1)
+	var/datum/vampire/vampire = usr.mind.vampire_power(0, 0, 1)
 	if(!vampire)
 		return
 
@@ -49,7 +49,7 @@
 		return
 
 	var/turf/new_loc = get_step(src, direction)
-	if(new_loc.flags & NOJAUNT || newloc.holy)
+	if(new_loc.flags & NOJAUNT || newloc.blessed)
 		to_chat(usr, "<span class='warning'>Some strange aura is blocking the way!</span>")
 		return
 

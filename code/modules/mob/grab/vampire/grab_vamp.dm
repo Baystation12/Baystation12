@@ -68,5 +68,5 @@
 	var/mob/living/carbon/human/ass = G.assailant
 	var/mob/living/carbon/human/aff = G.affecting
 	if(do_after(5 SECONDS))
-		visible_message("<span class = 'warning'> You sink your teeth into [G.affecting]'s [zone], only to tear the flesh away shortly after. </span>","<span class = 'warning'>[G.assailant] sinks their teeth into [G.affecting]'s [zone], tearing at their flesh!</span>", "<span class = 'warning'>You hear meat being ripped and torn.</span>")
+		G.assailant.visible_message("<span class = 'warning'> You sink your teeth into [G.affecting]'s [zone], only to tear the flesh away shortly after. </span>","<span class = 'warning'>[G.assailant] sinks their teeth into [G.affecting]'s [zone], tearing at their flesh!</span>", "<span class = 'warning'>You hear meat being ripped and torn.</span>")
 		//Do some crazy brute after a bit of time. Comparable to a throatslit. More damage if feral.

@@ -9,7 +9,6 @@
 	charge_max = 80 SECONDS
 	cast_sound = ""
 	invocation_type = SpI_EMOTE
-	invocation = "<span class='danger'>[src.name]'s eyes emit a blinding flash!</span>"
 	hud_state = "MAKEASPRITE"
 	blood_cost = 0
 
@@ -27,6 +26,7 @@
 		to_chat(src, "<span class='warning'>You're blindfolded!</span>")
 		return
 
+	to_chat(src, "<span class='danger'>[src.name]'s eyes emit a blinding flash!</span>")
 	var/list/victims = list()
 	for (var/mob/living/carbon/human/H in view(range))
 		if (H == src)

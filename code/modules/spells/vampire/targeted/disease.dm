@@ -6,7 +6,7 @@
 	blood_cost = 100
 	charge_max = 3 MINUTES
 
-/spell/targeted/vampire/jaunt/cast()
+/spell/targeted/vampire/jaunt/cast(usr = /mob/living/carbon/)
 	var/datum/vampire/vampire = vampire_power(100, 0)
 	if (!vampire)
 		return

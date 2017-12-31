@@ -1,8 +1,8 @@
 // Makes the vampire appear 'friendlier' to others.
 /spell/aoe_turf/vampire/presence
-	set category = "Vampire"
-	set name = "Presence (10)"
-	set desc = "Influences those weak of mind to look at you in a friendlier light."
+	name = "Presence (10)"
+	desc = "Influences those weak of mind to look at you in a friendlier light."
+	blood_cost = 10
 
 /spell/vampire/presence/cast()
 	var/datum/vampire/vampire = vampire_power(0, 0)

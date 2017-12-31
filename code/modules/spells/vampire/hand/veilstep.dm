@@ -3,7 +3,7 @@
 	school = "vampirism"
 	name = "Veil Step"
 	desc = "For a moment, move through the Veil and emerge at a shadow of your choice."
-	invokation = SpI_NONE
+	invocation = SpI_NONE
 	blood_cost = 20
 	charge_max = 30 SECONDS
 
