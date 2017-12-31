@@ -4,12 +4,13 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 3)
 	var/activation_emote
 
-/obj/item/weapon/implant/uplink/New()
-	hidden_uplink = new(src, telecrystals = round((DEFAULT_TELECRYSTAL_AMOUNT / 2) * 0.8))
+/obj/item/weapon/implant/uplink/New(var/loc, var/amount)
+	amount = amount || IMPLANT_TELECRYSTAL_AMOUNT(DEFAULT_TELECRYSTAL_AMOUNT)
+	hidden_uplink = new(src, telecrystals = amount)
 	..()
 
 /obj/item/weapon/implant/uplink/implanted(mob/source)
-	activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
+	activation_emote = input("Choose activation emote:", "Uplink Implant Setup") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
 	source.mind.store_memory("Uplink implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
 	to_chat(source, "The implanted uplink implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")
 	hidden_uplink.uplink_owner = source.mind
