@@ -52,13 +52,20 @@
 	icon_state = "[initial(icon_state)]_open"
 	apply_icon_and_offsets(get_occupant())
 
+/obj/structure/drop_pods/proc/check_occupied(var/mob/h)
+	if(get_occupant())
+		to_chat(h,"<span class ='notice'>Someone's already in that [name]!</span>")
+		return 1
+	return 0
+
 /obj/structure/drop_pods/proc/proc_enter_pod(var/mob/living/carbon/human/h)
 	if(!istype(h))//Making sure the entering mob is a human.
 		return
-	if(get_occupant())
-		to_chat(h,"<span class ='notice'>Someone's already in that [name]!</span>")
+	if(check_occupied(h))
 		return
 	if(do_after(h,board_time SECONDS,src))
+		if(check_occupied(h))
+			return
 		visible_message("<span class ='notice'>[h.name] enters the [name]</span>")
 		contents += h
 		verbs += /obj/structure/drop_pods/proc/exit_pod
@@ -66,6 +73,8 @@
 		close_pod()
 
 /obj/structure/drop_pods/proc/proc_exit_pod(var/mob/living/carbon/human/h)
+	if(!istype(h))//Making sure the entering mob is a human.
+		return
 	if(h != get_occupant())
 		open_pod()
 		var/mob/occupant = get_occupant()
