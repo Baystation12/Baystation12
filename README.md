@@ -91,9 +91,3 @@ For a basic setup, simply copy every file from config/example to config.
 The SQL backend for the library/stats and bans requires a MySQL server.  Your server details go in config/dbconfig.txt.
 
 For initial setup and migrations refer to sql/README.md
-
----
-
-### IRC Bot Setup
-
-Included in the repo is an IRC bot capable of relaying adminhelps to a specified IRC channel/server (thanks to Skibiliano).  Instructions for bot setup are included in the /bot/ folder along with the bot/relay script itself.
