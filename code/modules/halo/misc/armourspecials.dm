@@ -150,7 +150,7 @@
 	var/list/valid_helmets = list(/obj/item/clothing/head/helmet/spartan) //This should work for the slayer helms too. IIRC, Istype also counts subtypes.
 
 /datum/armourspecials/shieldmonitor/sangheili
-	valid_helmets = list(/obj/item/clothing/head/sangheili)
+	valid_helmets = list(/obj/item/clothing/head/helmet/sangheili)
 
 /datum/armourspecials/internal_jumpsuit
 	//Created for spartan armour to allow them to carry things in slots which require a jumpsuit.
@@ -205,7 +205,7 @@
 
 /datum/armourspecials/cloaking
 	var/cloak_active = 0
-	var/min_alpha = 15 //The minimum level of alpha to reach.
+	var/min_alpha = 10 //The minimum level of alpha to reach.
 	var/cloak_recover_time = 5 //The time in seconds it takes to recover to full cloak after being hit.
 	var/cloak_toggle_time = 2 //The time in seconds it takes to enable/disable the cloaking device.
 	var/cloak_disrupted = 0 //Is the cloak currently disrupted?

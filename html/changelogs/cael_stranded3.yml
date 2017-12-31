@@ -1,0 +1,12 @@
+
+author: Cael_Aislinn
+
+delete-after: True
+changes: 
+  - wip: "Adds UNSC landmines to Stranded mode."
+  - experiment: "Reworks material recipes. They should be more restricted now (no more cloth blades!)."
+  - bugfix: "Spent bullet casings should now be scattered around the turf randomly again."
+  - bugfix: "Should fix the annoying dark spots on Stranded gamemode."
+  - tweak: "Stranded now scales up the Flood spawn rate with the player count, it should be significantly harder."
+  - maptweak: "Adds several flavours of unsimulated turfs for mappers to play with."
+  

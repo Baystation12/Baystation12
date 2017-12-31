@@ -15,6 +15,7 @@
 	item_state = "combatharness_minor"
 
 	armor = list(melee = 40, bullet = 55, laser = 30, energy = 30, bomb = 60, bio = 0, rad = 0)
+	armor_thickness_modifiers = list()
 
 	species_restricted = list("unggoy")
 
@@ -31,6 +32,8 @@
 	species_restricted = list("unggoy")
 
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
+	armor = list(melee = 10,bullet = 15,laser = 10,energy = 10,bomb = 5,bio = 0,rad = 0)
+	armor_thickness = 10
 
 	var/rebreath_efficiency = 50 //Rebreather efficiency: Percentile
 

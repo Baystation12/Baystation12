@@ -291,10 +291,6 @@
 	else
 		return ..()
 
-/material/cloth/generate_recipes()
-	..()
-	recipes += new/datum/stack_recipe("empty sandbags", /obj/item/empty_sandbags, 1, time = 30)
-
 /obj/structure/bardbedwire
 	name = "barbed wire coil"
 	icon = 'maps/desert_outpost/gamemode/desert_outpost.dmi'
@@ -369,12 +365,6 @@
 		new /obj/structure/bardbedwire(user.loc)
 		user.visible_message("<span class='info'>[user] spools out from a coil of barbed wire.</span>",\
 			"<span class = 'info'>You spool out from the coil of barbed wire.</span>")
-
-
-/material/steel/generate_recipes()
-	..()
-	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, time = 30)
-	recipes += new/datum/stack_recipe("tank trap", /obj/structure/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
 
 
 /obj/item/metalscraps
