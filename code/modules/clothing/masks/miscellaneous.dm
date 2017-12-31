@@ -42,6 +42,9 @@
 	down_body_parts_covered = null
 	down_icon_state = "steriledown"
 	pull_mask = 1
+	sprite_sheets = list(
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi'
+		)
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
@@ -256,3 +259,59 @@
 	item_state = "spirit_mask"
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE|EYES
+	
+/obj/item/clothing/mask/bandana
+	name = "black bandana"
+	desc = "A fine black bandana with nanotech lining. Can be worn on the head or face."
+	flags_inv = HIDEFACE
+	slot_flags = SLOT_MASK|SLOT_HEAD
+	body_parts_covered = FACE
+	icon_state = "bandblack"
+	item_state = "bandblack"
+	sprite_sheets = list(
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi'
+		)
+
+/obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
+	switch(slot)
+		if(slot_wear_mask) //Mask is the default for all the settings
+			flags_inv = initial(flags_inv)
+			body_parts_covered = initial(body_parts_covered)
+			icon_state = initial(icon_state)
+
+		if(slot_head)
+			flags_inv = 0
+			body_parts_covered = HEAD
+			icon_state = "[initial(icon_state)]_up"
+
+	return ..()
+
+/obj/item/clothing/mask/bandana/red
+	name = "red bandana"
+	desc = "A fine red bandana with nanotech lining. Can be worn on the head or face."
+	icon_state = "bandred"
+	item_state = "bandred"
+
+/obj/item/clothing/mask/bandana/blue
+	name = "blue bandana"
+	desc = "A fine blue bandana with nanotech lining. Can be worn on the head or face."
+	icon_state = "bandblue"
+	item_state = "bandblue"
+	
+/obj/item/clothing/mask/bandana/green
+	name = "green bandana"
+	desc = "A fine green bandana with nanotech lining. Can be worn on the head or face."
+	icon_state = "bandgreen"
+	item_state = "bandgreen"
+
+/obj/item/clothing/mask/bandana/gold
+	name = "gold bandana"
+	desc = "A fine gold bandana with nanotech lining. Can be worn on the head or face."
+	icon_state = "bandgold"
+	item_state = "bandgold"
+
+/obj/item/clothing/mask/bandana/skull
+	name = "skull bandana"
+	desc = "A fine black bandana with nanotech lining and a skull emblem. Can be worn on the head or face."
+	icon_state = "bandskull"
+	item_state = "bandskull"

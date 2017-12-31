@@ -48,10 +48,25 @@
 /datum/gear/head/bandana/New()
 	..()
 	var/bandanas = list()
-	bandanas["green bandana"] = /obj/item/clothing/head/greenbandana
-	bandanas["orange bandana"] = /obj/item/clothing/head/orangebandana
-	bandanas["pirate bandana"] = /obj/item/clothing/head/bandana
+	bandanas["black bandana"] = /obj/item/clothing/mask/bandana
+	bandanas["blue bandana"] = /obj/item/clothing/mask/bandana/blue
+	bandanas["red bandana"] = /obj/item/clothing/mask/bandana/red
+	bandanas["green bandana"] = /obj/item/clothing/mask/bandana/green
+	bandanas["gold bandana"] = /obj/item/clothing/mask/bandana/gold
+	bandanas["skull bandana"] = /obj/item/clothing/mask/bandana/skull
 	gear_tweaks += new/datum/gear_tweak/path(bandanas)
+	
+/datum/gear/head/oldbandana
+	display_name = "old bandana selection"
+	path = /obj/item/clothing/head
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/head/oldbandana/New()
+	..()
+	var/bandana = list()
+	bandana["green bandana"] = /obj/item/clothing/head/greenbandana
+	bandana["orange bandana"] = /obj/item/clothing/head/orangebandana
+	bandana["pirate bandana"] = /obj/item/clothing/head/bandana
 
 /datum/gear/head/bow
 	display_name = "hair bow, colour select"
@@ -214,3 +229,4 @@
 	welding_masks += /obj/item/clothing/head/welding/knight
 	welding_masks += /obj/item/clothing/head/welding/carp
 	gear_tweaks += new/datum/gear_tweak/path(assoc_by_proc(welding_masks, /proc/get_initial_name))
+	

@@ -20,6 +20,9 @@
 	icon_state = "medical"
 	item_state = "medical"
 	permeability_coefficient = 0.01
+	sprite_sheets = list(
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi'
+		)
 
 /obj/item/clothing/mask/breath/anesthetic
 	desc = "A close-fitting sterile mask that is used by the anesthetic wallmounted pump."
