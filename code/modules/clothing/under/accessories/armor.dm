@@ -55,7 +55,7 @@
 	icon = 'icons/obj/clothing/modular_armor.dmi'
 	icon_state = "armor_light"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 25, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_C
 
 /obj/item/clothing/accessory/armorplate/medium

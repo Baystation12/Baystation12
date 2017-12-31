@@ -295,7 +295,7 @@
 	desc = "An armor vest made of synthetic fibers."
 	icon_state = "kvest"
 	item_state = "armor"
-	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 25, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
 /obj/item/clothing/suit/armor/vest/nt
