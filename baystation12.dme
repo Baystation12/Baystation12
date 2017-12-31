@@ -343,6 +343,7 @@
 #include "code\datums\uplink\telecrystals.dm"
 #include "code\datums\uplink\uplink_categories.dm"
 #include "code\datums\uplink\uplink_items.dm"
+#include "code\datums\uplink\uplink_sources.dm"
 #include "code\datums\uplink\deity\_defines.dm"
 #include "code\datums\uplink\deity\deity_categories.dm"
 #include "code\datums\uplink\deity\deity_items.dm"

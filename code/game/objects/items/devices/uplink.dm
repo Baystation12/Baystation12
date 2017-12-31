@@ -241,9 +241,9 @@
 // Includes normal radio uplink, multitool uplink,
 // implant uplink (not the implant tool) and a preset headset uplink.
 
-/obj/item/device/radio/uplink/New(var/loc, var/owner)
+/obj/item/device/radio/uplink/New(var/loc, var/owner, var/amount)
 	..()
-	hidden_uplink = new(src, owner)
+	hidden_uplink = new(src, owner, amount)
 	icon_state = "radio"
 
 /obj/item/device/radio/uplink/attack_self(mob/user as mob)
