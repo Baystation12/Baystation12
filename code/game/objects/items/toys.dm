@@ -16,6 +16,7 @@
  *		Plushies
  *		Toy cult sword
  *		Marshalling wand
+ *		Ring bell
  */
 
 
@@ -25,7 +26,6 @@
 	throw_speed = 4
 	throw_range = 20
 	force = 0
-
 
 /*
  * Balloons
@@ -822,6 +822,24 @@
 
 /obj/item/toy/torchmodel
 	name = "table-top SEV Torch model"
-	desc = "This is an SEV Torch replica in scale 1:250 on wooden stand. Small lights blink on the hull and at the engine exhaust."
+	desc = "This is a replica of the SEV Torch, in 1:250th scale, on a handsome wooden stand. Small lights blink on the hull and at the engine exhaust."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "torch_model_figure"
+
+/obj/item/toy/ringbell
+	name = "ringside bell"
+	desc = "A bell used to signal the beginning and end of various ring sports."
+	icon = 'icons/obj/toy.dmi'
+	icon_state= "ringbell"
+	anchored = 1
+
+/obj/item/toy/ringbell/attack_hand(mob/user as mob)
+	if (user.a_intent == I_HELP)
+		user.visible_message("<span class='notice'>[user] rings \the [src], signalling the beginning of the contest.</span>")
+		playsound(user.loc, 'sound/items/oneding.ogg', 60, 1)
+	else if (user.a_intent == I_DISARM)
+		user.visible_message("<span class='notice'>[user] rings \the [src] three times, signalling the end of the contest!</span>")
+		playsound(user.loc, 'sound/items/threedings.ogg', 60, 1)
+	else if (user.a_intent == I_HURT)
+		user.visible_message("<span class='warning'>[user] rings \the [src] repeatedly, signalling a disqualification!</span>")
+		playsound(user.loc, 'sound/items/manydings.ogg', 60, 1)
