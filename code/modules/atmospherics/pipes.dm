@@ -1107,10 +1107,10 @@
 	initialize_directions = SOUTH
 	density = 1
 
-/obj/machinery/atmospherics/pipe/tank/New()
+/obj/machinery/atmospherics/pipe/tank/Initialize()
 	icon_state = "air"
 	initialize_directions = dir
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/pipe/tank/Process()
 	if(!parent)
