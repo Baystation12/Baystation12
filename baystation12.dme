@@ -2262,6 +2262,7 @@
 #include "code\modules\spells\general\god_construct.dm"
 #include "code\modules\spells\general\god_vision.dm"
 #include "code\modules\spells\general\mark_recall.dm"
+#include "code\modules\spells\general\radiant_aura.dm"
 #include "code\modules\spells\general\return_master.dm"
 #include "code\modules\spells\general\tear_veil.dm"
 #include "code\modules\spells\hand\blood_shards.dm"

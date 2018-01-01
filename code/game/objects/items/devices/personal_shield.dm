@@ -7,10 +7,10 @@
 	var/obj/aura/personal_shield/device/shield
 
 /obj/item/device/personal_shield/attack_self(var/mob/living/user)
-	if(shield)
-		qdel(shield)
-	else if(uses)
+	if(uses)
 		shield = new(user,src)
+	else
+		QDEL_NULL(shield)
 
 /obj/item/device/personal_shield/Move()
 	QDEL_NULL(shield)
@@ -24,5 +24,11 @@
 	if(!--uses)
 		QDEL_NULL(shield)
 		to_chat(loc,"<span class='danger'>\The [src] begins to spark as it breaks!</span>")
-		icon_state = "battererburnt"
+		update_icon()
 		return
+
+/obj/item/device/personal_shield/update_icon()
+	if(uses)
+		icon_state = "batterer"
+	else
+		icon_state = "battererburnt"
