@@ -121,7 +121,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		"Nyx",
 		"Tau Ceti",
 		"Epsilon Ursae Minoris",
-		"S'randarr",
+		"Zamsiin-lr",
 		"Gilgamesh"
 		)
 
@@ -137,7 +137,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		"Grayson Manufactories Ltd.",
 		"Aether Atmospherics",
 		"Zeng-Hu Pharmaceuticals",
-		"Hephaestus Industries"
+		"Hephaestus Industries",
+		"Commonwealth of Ahdomai"
 		)
 
 	var/list/religion_choices = list(
