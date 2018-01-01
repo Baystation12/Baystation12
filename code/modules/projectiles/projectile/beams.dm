@@ -26,7 +26,7 @@
 	eyeblur = 2
 
 /obj/item/projectile/beam/smalllaser
-	damage = 25
+	damage = 35
 
 /obj/item/projectile/beam/midlaser
 	damage = 50
