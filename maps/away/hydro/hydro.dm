@@ -44,26 +44,37 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/hydro //these goats are powerful but are not the king of goats
 	name = "strange goat"
-	desc = "Goat is as one can see... right?"
+	desc = "An impressive goat, both in size and coat. His horns look pretty serious!"
 	health = 350
 	maxHealth = 350
-	melee_damage_lower = 25
+	melee_damage_lower = 20
 	melee_damage_upper = 45
+	faction = "farmbots"
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro
 	name = "Farmbot"
-	desc = "The botanist's best friend. There's something slightly off about the way it moves."
+	desc = "The botanist's best friend. There's something slightly odd about the way it moves."
 	icon = 'maps/away/hydro/hydro.dmi'
+	speak = list("Initiating harvesting subrout-ine-ine.", "Connection timed out.", "Connection with master AI syst-tem-tem lost.", "Core systems override enab-...")
+	emote_see = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")
 	icon_state = "farmbot"
 	icon_living = "farmbot"
 	icon_dead = "farmbot_dead"
 	faction = "farmbots"
+	rapid = 0
 	health = 200
 	maxHealth = 200
 	malfunctioning = 0
 
+/mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/emp_act(severity)
+	health -= rand(5,10) * (severity + 1)
+	disabled = rand(15, 30)
+	malfunctioning = 1
+	hostile_drone = 1
+	walk(src,0)
+
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/ListTargets()
 	if(hostile_drone)
-		return view(src, 2)
+		return view(src, 3)
 	else
 		return ..()

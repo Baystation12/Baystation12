@@ -35,6 +35,10 @@
 	name = "\improper Growing Zone D"
 	icon_state = "D"
 
+/area/hydro/station/growF
+	name = "\improper Growing Zone F"
+	icon_state = "F"
+
 /area/hydro/station/growX
 	name = "\improper Growing Zone X"
 	icon_state = "X"
