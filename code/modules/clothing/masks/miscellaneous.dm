@@ -42,6 +42,9 @@
 	down_body_parts_covered = null
 	down_icon_state = "steriledown"
 	pull_mask = 1
+	sprite_sheets = list(
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi'
+		)
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
