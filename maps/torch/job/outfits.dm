@@ -315,6 +315,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/marshal_jacket
 	shoes = /obj/item/clothing/shoes/dress
 
+/decl/hierarchy/outfit/job/torch/crew/security/analyst
+	name = OUTFIT_JOB_NAME("Crime Scene Analyst")
+	uniform = /obj/item/clothing/under/det
+	suit = /obj/item/clothing/suit/storage/forensics/blue
+	shoes = /obj/item/clothing/shoes/laceup
+	id_type = /obj/item/weapon/card/id/torch/contractor/security
+	pda_type = /obj/item/device/pda/detective
+
 /decl/hierarchy/outfit/job/torch/crew/security/maa
 	name = OUTFIT_JOB_NAME("Master at Arms")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security

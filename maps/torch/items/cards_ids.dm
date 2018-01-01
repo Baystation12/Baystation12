@@ -72,6 +72,9 @@
 /obj/item/weapon/card/id/torch/crew/security/forensic
 	job_access_type = /datum/job/detective
 
+/obj/item/weapon/card/id/torch/contractor/security
+	job_access_type = /datum/job/analyst
+
 
 /obj/item/weapon/card/id/torch/silver/engineering
 	job_access_type = /datum/job/chief_engineer
