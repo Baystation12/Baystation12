@@ -757,17 +757,17 @@ default behaviour is:
 		overlays |= auras
 
 /mob/living/proc/add_aura(var/obj/aura/aura)
-	if(!auras)
-		auras = list()
-	auras |= aura
+	LAZYDISTINCTADD(auras,aura)
 	update_icons()
 	return 1
 
 /mob/living/proc/remove_aura(var/obj/aura/aura)
-	if(!auras)
-		return 0
-	auras -= aura
-	if(auras.len == 0)
-		auras.Cut()
+	LAZYREMOVE(auras,aura)
 	update_icons()
 	return 1
+
+/mob/living/Destroy()
+	if(auras)
+		for(var/a in auras)
+			remove_aura(a)
+	return ..()

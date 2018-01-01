@@ -177,7 +177,7 @@
 	var/result = PROJECTILE_FORCE_MISS
 	if(hit_zone)
 		def_zone = hit_zone //set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
-		if(!target_mob.aura_check("Bullet", src,def_zone))
+		if(!target_mob.aura_check(AURA_TYPE_BULLET, src,def_zone))
 			return 1
 		result = target_mob.bullet_act(src, def_zone)
 

@@ -73,7 +73,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
-	if(!user.aura_check("Item", src, user))
+	if(!user.aura_check(AURA_TYPE_WEAPON, src, user))
 		return 0
 
 	var/hit_zone = M.resolve_item_attack(src, user, target_zone)

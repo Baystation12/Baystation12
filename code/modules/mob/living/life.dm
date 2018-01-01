@@ -30,7 +30,7 @@
 		//stuff in the stomach
 		handle_stomach()
 
-		aura_check("Life")
+		aura_check(AURA_TYPE_LIFE)
 
 		. = 1
 
