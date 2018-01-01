@@ -2,6 +2,7 @@
 /decl/hierarchy/outfit/unggoy
 	name = "Unggoy"
 
+	l_ear = /obj/item/device/radio/headset/covenant
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	mask = /obj/item/clothing/mask/rebreather

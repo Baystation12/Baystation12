@@ -12,9 +12,9 @@
 	recharge_time = 5
 	burst = 3
 	projectile_type = /obj/item/projectile/covenant/plasmarifle
+	screen_shake = 0
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
 		)
-
