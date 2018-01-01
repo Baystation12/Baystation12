@@ -49,7 +49,7 @@
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/roles/poncho/security
-	allowed_roles = list(/datum/job/guard, /datum/job/merchant)
+	allowed_roles = list(/datum/job/guard, /datum/job/analyst, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/medical
 	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/psychiatrist, /datum/job/merchant)
