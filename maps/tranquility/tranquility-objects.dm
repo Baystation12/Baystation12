@@ -1,4 +1,4 @@
-/obj/payload/inactive
+/obj/structure/payload/inactive
 	name = "Inactive Nuclear Warhead"
 	desc = "A dust covered nuclear warhead. Banging this thing around might be the last thing you do."
 	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'

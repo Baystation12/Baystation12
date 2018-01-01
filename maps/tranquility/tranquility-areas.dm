@@ -108,3 +108,21 @@
 /area/tranquility/checkpoint
 	name = "\improper sec checkpoint"
 	icon_state = "checkpoint"
+/area/tranquility/warehouse1
+	name = "\improper warehouse1"
+	icon_state = "warehouse1"
+/area/tranquility/warehouse2
+	name = "\improper warehouse2"
+	icon_state = "warehouse2"
+/area/tranquility/warehouse3
+	name = "\improper warehous3"
+	icon_state = "warehouse3"
+/area/tranquility/control
+	name = "\improper control room"
+	icon_state = "control"
+/area/tranquility/shaftmaint
+	name = "\improper shaft maint"
+	icon_state = "shaftmaint"
+/area/tranquility/bar
+	name = "\improper bar"
+	icon_state = "bar"

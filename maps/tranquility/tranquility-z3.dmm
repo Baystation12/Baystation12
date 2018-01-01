@@ -1,54 +1,371 @@
-"a" = (/turf/space,/area/space)
+"aa" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/tranquility/walls2)
+"ab" = (/turf/unsimulated/wall,/area/tranquility/warehouse1)
+"ac" = (/turf/unsimulated/wall,/area/tranquility/shaft)
+"ad" = (/obj/structure/sign/deck/third,/turf/unsimulated/wall,/area/tranquility/shaft)
+"ae" = (/obj/effect/floor_decal/industrial/outline,/obj/effect/decal/cleanable/cobweb,/obj/structure/closet/crate/secure/weapon,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"af" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"ag" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"ah" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/payload/inactive,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"ai" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/machinery/light/spot{dir = 1},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"aj" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/closet/crate/secure,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"ak" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/closet/crate,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"al" = (/obj/structure/sign/warning/bomb_range{name = "\improper EXPLOSIVE ORDINANCE"},/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/maint1)
+"am" = (/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/maint1)
+"an" = (/turf/unsimulated/wall,/area/tranquility/armory)
+"ao" = (/turf/simulated/open,/area/tranquility/shaft)
+"ap" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/open,/area/tranquility/shaft)
+"aq" = (/obj/structure/lattice,/turf/simulated/open,/area/tranquility/shaft)
+"ar" = (/obj/effect/floor_decal/industrial/outline,/obj/effect/decal/cleanable/dirt,/obj/structure/closet/crate/secure/weapon,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"as" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"at" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/payload/inactive,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"au" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"av" = (/obj/effect/floor_decal/industrial/outline,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"aw" = (/obj/effect/floor_decal/sign/m,/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"ax" = (/obj/machinery/door/airlock/halo_maint,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/warehouse1)
+"ay" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint1)
+"az" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint1)
+"aA" = (/obj/structure/table/rack,/obj/item/ammo_magazine/chaingun_boxmag,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aB" = (/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aC" = (/obj/structure/table/rack,/obj/item/turret_deploy_kit/HMG,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aD" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/rack,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aE" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aF" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aG" = (/turf/unsimulated/wall,/area/tranquility/shaftmaint)
+"aH" = (/obj/structure/sign/deck/third,/turf/unsimulated/wall,/area/tranquility/shaftmaint)
+"aI" = (/turf/unsimulated/mask,/area/turbolift/tranquility_level3)
+"aJ" = (/obj/effect/floor_decal/industrial/outline,/obj/effect/decal/cleanable/dirt,/obj/structure/closet/crate,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"aK" = (/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/bar)
+"aL" = (/obj/structure/table/rack,/obj/item/ammo_magazine/HMG_boxmag,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aM" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/rack,/obj/item/turret_deploy_kit/chaingun,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aN" = (/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
+"aO" = (/obj/machinery/light/small{dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
+"aP" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
+"aQ" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/closet/crate/secure/weapon,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"aR" = (/obj/machinery/shower{tag = "icon-shower (EAST)"; icon_state = "shower"; dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"aS" = (/obj/structure/closet/secure_closet/personal/empty,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"aT" = (/obj/structure/bed,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"aU" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aV" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aW" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aX" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"aY" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
+"aZ" = (/obj/structure/ladder/updown,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
+"ba" = (/obj/effect/floor_decal/industrial/outline,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot{dir = 8},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"bb" = (/obj/effect/floor_decal/industrial/outline,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"bc" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/machinery/light/spot{dir = 4},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"bd" = (/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint1)
+"be" = (/obj/effect/decal/cleanable/dirt,/obj/structure/curtain/open/shower,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"bf" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"bg" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"bh" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"bi" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/rack,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"bj" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
+"bk" = (/obj/effect/decal/cleanable/generic,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
+"bl" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/open,/area/tranquility/shaft)
+"bm" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/open,/area/tranquility/shaft)
+"bn" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"bo" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"bp" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"bq" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"br" = (/obj/structure/extinguisher_cabinet,/turf/unsimulated/wall,/area/tranquility/warehouse1)
+"bs" = (/obj/structure/closet/crate/bin,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"bt" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/rack,/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/frag/m9_hedp,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/armory)
+"bu" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"bv" = (/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"bw" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse1)
+"bx" = (/obj/machinery/door/unpowered/simple/wood,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"by" = (/obj/effect/decal/cleanable/dirt,/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (EAST)"; icon_state = "wooden_chair_preview"; dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"bz" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"bA" = (/obj/structure/reagent_dispensers/beerkeg,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"bB" = (/turf/unsimulated/wall,/area/tranquility/halls2)
+"bC" = (/obj/machinery/door/airlock/multi_tile/halo,/turf/unsimulated/wall,/area/tranquility/armory)
+"bD" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/wall,/area/tranquility/armory)
+"bE" = (/obj/structure/sign/warning/secure_area/armory,/turf/unsimulated/wall,/area/tranquility/armory)
+"bF" = (/obj/structure/extinguisher_cabinet,/turf/unsimulated/wall,/area/tranquility/halls2)
+"bG" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/halls2)
+"bH" = (/obj/structure/sign/warning/moving_parts,/turf/unsimulated/wall,/area/tranquility/halls2)
+"bI" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"bJ" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"bK" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"bL" = (/obj/structure/sign/warning/fall,/turf/unsimulated/wall,/area/tranquility/halls2)
+"bM" = (/obj/machinery/button/remote/blast_door{id = 4},/turf/unsimulated/wall,/area/tranquility/warehouse1)
+"bN" = (/obj/machinery/door/blast/regular{id = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/warehouse1)
+"bO" = (/obj/machinery/door/blast/regular{id = 4},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/warehouse1)
+"bP" = (/obj/machinery/door/blast/regular{id = 4},/obj/effect/decal/cleanable/blood/oil,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/warehouse1)
+"bQ" = (/obj/structure/sign/warning/bomb_range{name = "\improper EXPLOSIVE ORDINANCE"},/turf/unsimulated/wall,/area/tranquility/warehouse1)
+"bR" = (/obj/structure/table/woodentable,/obj/item/weapon/flame/lighter/zippo,/obj/machinery/light/small,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"bS" = (/obj/structure/closet/secure_closet/bar,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/bar)
+"bT" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"bU" = (/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"bV" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"bW" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"bX" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"bY" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (EAST)"; icon_state = "corner_white"; dir = 4},/obj/effect/decal/cleanable/blood/oil,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"bZ" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"ca" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cb" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTH)"; icon_state = "corner_white"; dir = 1},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cc" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cd" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/item/weapon/caution/cone,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"ce" = (/obj/machinery/vending/cigarette,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cf" = (/obj/effect/floor_decal/sign/m,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cg" = (/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"ch" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"ci" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cj" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"ck" = (/obj/effect/decal/cleanable/dirt,/obj/effect/floor_decal/industrial/outline/yellow,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cl" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint1)
+"cm" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/tranquility/halls2)
+"cn" = (/obj/effect/floor_decal/corner/yellow/three_quarters,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"co" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cp" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/obj/effect/decal/cleanable/blood/oil,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cq" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cr" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cs" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"ct" = (/obj/effect/floor_decal/corner/yellow,/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cu" = (/obj/effect/decal/cleanable/dirt,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cv" = (/obj/machinery/vending/coffee,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cw" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (EAST)"; icon_state = "maint"; dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint1)
+"cx" = (/obj/structure/ladder/up,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint1)
+"cy" = (/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/maint2)
+"cz" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"cA" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/obj/item/weapon/caution/cone,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cB" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cC" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/item/weapon/caution/cone,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cD" = (/obj/structure/sign/directions/supply{tag = "icon-direction_supply (EAST)"; icon_state = "direction_supply"; dir = 4},/turf/unsimulated/wall,/area/tranquility/halls2)
+"cE" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cF" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint1)
+"cG" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"cH" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cI" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cJ" = (/obj/structure/sign/directions/infirmary,/turf/unsimulated/wall,/area/tranquility/halls2)
+"cK" = (/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/maint4)
+"cL" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cM" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cN" = (/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"cO" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small/red{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"cP" = (/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"cQ" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"cR" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"cS" = (/obj/structure/sign/warning/caution,/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/maint4)
+"cT" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"cU" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint1)
+"cV" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (EAST)"; icon_state = "maint"; dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"cW" = (/obj/structure/ladder/updown,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"cX" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"cY" = (/obj/machinery/door/airlock/halo_maint,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/halls2)
+"cZ" = (/obj/effect/floor_decal/sign/m,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"da" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (EAST)"; icon_state = "maint"; dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"db" = (/obj/structure/ladder,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"dc" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"dd" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"de" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/obj/effect/floor_decal/sign/m,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"df" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dg" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/item/weapon/caution/cone,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dh" = (/obj/structure/sign/warning/caution,/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/maint1)
+"di" = (/obj/machinery/space_heater,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"dj" = (/obj/effect/decal/cleanable/generic,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"dk" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"dl" = (/obj/structure/sign/directions/supply,/turf/unsimulated/wall,/area/tranquility/halls2)
+"dm" = (/turf/unsimulated/wall,/area/tranquility/warehouse2)
+"dn" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/warehouse2)
+"do" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dp" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/obj/effect/decal/cleanable/blood/oil,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dq" = (/obj/machinery/space_heater,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dr" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 1},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"ds" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dt" = (/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"du" = (/obj/machinery/light/spot{dir = 1},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dv" = (/obj/effect/floor_decal/sign/m,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dw" = (/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dx" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/item/weapon/caution/cone,/obj/item/weapon/caution/cone,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dy" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dz" = (/obj/machinery/button/remote/blast_door{id = 3},/turf/unsimulated/wall,/area/tranquility/warehouse2)
+"dA" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dB" = (/obj/effect/floor_decal/industrial/warning/dust/corner,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dC" = (/obj/effect/floor_decal/industrial/warning/dust,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dD" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (WEST)"; icon_state = "warningcorner_dust"; dir = 8},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dE" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"dF" = (/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"dG" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (EAST)"; icon_state = "corner_white"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dH" = (/obj/machinery/door/blast/regular{id = 3},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/warehouse2)
+"dI" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dJ" = (/obj/effect/floor_decal/industrial/outline,/obj/effect/decal/cleanable/dirt,/obj/structure/closet/crate/secure,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dK" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dL" = (/obj/effect/floor_decal/industrial/outline,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dM" = (/obj/structure/ladder/up,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"dN" = (/obj/structure/sign/directions/bridge,/turf/unsimulated/wall,/area/tranquility/halls2)
+"dO" = (/obj/machinery/light{dir = 1},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dP" = (/obj/machinery/door/blast/regular{id = 3},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/warehouse2)
+"dQ" = (/obj/effect/decal/cleanable/blood/oil,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dR" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dS" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"dT" = (/obj/effect/floor_decal/corner/yellow/three_quarters,/obj/effect/floor_decal/sign/m,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dU" = (/obj/effect/floor_decal/corner/yellow{tag = "icon-corner_white (SOUTHWEST)"; icon_state = "corner_white"; dir = 10},/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"dV" = (/obj/machinery/door/blast/regular{id = 3},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/warehouse2)
+"dW" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/closet/crate/secure,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dX" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dY" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/closet/crate/secure/large/reinforced,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"dZ" = (/turf/unsimulated/wall,/area/tranquility/medical1)
+"ea" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/medical1)
+"eb" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/medical1)
+"ec" = (/obj/structure/sign/bluecross_2,/turf/unsimulated/wall,/area/tranquility/medical1)
+"ed" = (/obj/structure/sign/warning/caution,/turf/unsimulated/wall,/area/tranquility/warehouse2)
+"ee" = (/obj/effect/floor_decal/industrial/outline,/obj/structure/closet/crate/secure/large/reinforced,/obj/machinery/light/spot{dir = 4},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"ef" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/obj/machinery/vending/sovietsoda{active = 0},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"eg" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"eh" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/firstaid/toxin,/obj/item/weapon/storage/firstaid/toxin,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"ei" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"ej" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/reinforced,/obj/item/weapon/storage/firstaid/fire,/obj/item/weapon/storage/firstaid/fire,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"ek" = (/obj/machinery/light{dir = 1},/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"el" = (/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"em" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/firstaid/regular,/obj/item/weapon/storage/firstaid/regular,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"en" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/reinforced,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/storage/firstaid/surgery,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eo" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/reinforced,/obj/item/weapon/defibrillator/loaded,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"ep" = (/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/maint3)
+"eq" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint3)
+"er" = (/obj/structure/sign/warning/caution,/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/maint3)
+"es" = (/obj/effect/floor_decal/industrial/outline,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"et" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eu" = (/obj/structure/closet/wall_medical,/turf/unsimulated/wall,/area/tranquility/medical1)
+"ev" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint3)
+"ew" = (/obj/vehicle/train/cargo/trolley,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"ex" = (/obj/effect/floor_decal/industrial/outline,/obj/effect/decal/cleanable/dirt,/obj/structure/closet/crate/secure/large/reinforced,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"ey" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/medical1)
+"ez" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint3)
+"eA" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint3)
+"eB" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small/red{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"eC" = (/obj/structure/ladder,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"eD" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eE" = (/obj/structure/sign/directions/supply{tag = "icon-direction_supply (NORTH)"; icon_state = "direction_supply"; dir = 1},/turf/unsimulated/wall,/area/tranquility/halls2)
+"eF" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (EAST)"; icon_state = "maint"; dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint3)
+"eG" = (/obj/structure/ladder,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint3)
+"eH" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint3)
+"eI" = (/obj/machinery/door/airlock/halo_maint,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/warehouse2)
+"eJ" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"eK" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"eL" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"eM" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"eN" = (/obj/structure/table/reinforced,/obj/machinery/cell_charger,/obj/item/weapon/cell,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eO" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/backpack/medic,/obj/item/weapon/storage/backpack/medic,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eP" = (/obj/structure/table/reinforced,/obj/item/roller,/obj/item/roller,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eQ" = (/obj/structure/bed,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eR" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/vending/medical,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eS" = (/obj/structure/closet/crate/bin,/obj/item/weapon/reagent_containers/blood/empty,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eT" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/pill_bottle/paracetamol,/obj/item/weapon/storage/pill_bottle/iron,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eU" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/pill_bottle/paracetamol,/obj/item/weapon/storage/pill_bottle/spaceacillin,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eV" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/pill_bottle/inaprovaline,/obj/item/weapon/storage/pill_bottle/tramadol,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eW" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint3)
+"eX" = (/obj/machinery/light/spot,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/tranquility/warehouse2)
+"eY" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/tranquility/warehouse2)
+"eZ" = (/obj/structure/sign/warning/fall,/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/tranquility/maint3)
+"fa" = (/turf/unsimulated/wall,/area/tranquility/hanger)
+"fb" = (/obj/machinery/door/airlock/multi_tile/halo,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fc" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fd" = (/obj/machinery/door/airlock/halo_maint,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fe" = (/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"ff" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"fg" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fh" = (/obj/machinery/light/spot{dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fi" = (/obj/effect/floor_decal/sign/m,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fj" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fk" = (/turf/unsimulated/wall,/area/tranquility/control)
+"fl" = (/obj/machinery/door/airlock/multi_tile/halo,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/control)
+"fm" = (/obj/machinery/door/airlock/halo,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/control)
+"fn" = (/obj/structure/sign/warning/detailed{name = "\improper AUTHORIZED PERSONNEL ONLY"},/turf/unsimulated/wall,/area/tranquility/control)
+"fo" = (/obj/machinery/light/spot{dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fp" = (/obj/structure/lattice,/turf/simulated/open,/area/tranquility/hanger)
+"fq" = (/turf/simulated/open,/area/tranquility/hanger)
+"fr" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot{dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fs" = (/obj/effect/decal/cleanable/cobweb,/obj/structure/table/standard,/obj/item/weapon/melee/classic_baton,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"ft" = (/obj/item/weapon/stool,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fu" = (/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fv" = (/obj/structure/table/standard,/obj/item/weapon/pen/red,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fw" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/control)
+"fx" = (/obj/structure/sign/halo_floorsign/maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"fy" = (/obj/structure/filingcabinet/chestdrawer,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fz" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fA" = (/obj/structure/table/standard,/obj/item/weapon/paper_bundle,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fB" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"fC" = (/obj/structure/ladder,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"fD" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fE" = (/obj/structure/table/standard,/obj/item/trash/chips,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fF" = (/obj/machinery/light/small/red,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"fG" = (/obj/machinery/vending/snack,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fH" = (/obj/structure/filingcabinet/filingcabinet,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fI" = (/obj/structure/sign/warning/moving_parts,/turf/unsimulated/wall,/area/tranquility/hanger)
+"fJ" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/structure/sign/warning/detailed{name = "\improper AUTHORIZED PERSONNEL ONLY"},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fK" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fL" = (/obj/structure/closet/crate/bin,/obj/item/weapon/paper/crumpled,/obj/item/weapon/paper/crumpled,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fM" = (/obj/machinery/space_heater,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fN" = (/obj/structure/table/reinforced,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fO" = (/obj/structure/extinguisher_cabinet,/turf/unsimulated/wall,/area/tranquility/control)
+"fP" = (/obj/effect/decal/cleanable/generic,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fQ" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fR" = (/obj/machinery/light/spot{dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fS" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fT" = (/obj/effect/decal/cleanable/dirt,/obj/structure/bed/chair/office/dark,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fU" = (/obj/structure/table/reinforced,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"fV" = (/obj/structure/table/standard,/obj/item/weapon/storage/lunchbox/syndicate,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fW" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fX" = (/obj/structure/table/standard,/obj/item/weapon/storage/wallet/leather,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fY" = (/obj/structure/filingcabinet,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fZ" = (/obj/structure/sign/warning/fall,/turf/unsimulated/wall,/area/tranquility/hanger)
+"ga" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/structure/sign/warning/nosmoking_2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"gb" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"gc" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"gd" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"ge" = (/obj/machinery/space_heater,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"gf" = (/obj/machinery/light/spot,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacadacacacacabaeafagahahaiagajakafabalamamamaaaaaaaaaaaaaaaa
+aaaaaaaaananananananananaaaaaaaaacaoaoaoapaqapaoaoaoabarafasahatauagavajawaxayayazamaaaaaaaaaaaaaaaa
+aaaaaaaaanaAaBaCaDaEaFanaGaGaHaGaGaoaoaIaIaIaIaIaoaoabarauagahatauasajaJafabamamazamaaaKaKaKaKaKaKaa
+aaaaaaaaanaLaEaMaDaBaFanaGaNaOaPaGaoaoaIaIaIaIaIaoaoabaQafagahatafasajaJafabaaamayamamaKaRaKaSaTaKaa
+aaaaaaaaanaUaEaVaWaBaXanaGaYaZaYaGaqaqaIaIaIaIaIaqaqabbaafasatavauagajbbbcabaaamayaybdaKbeaKbfbgaKaK
+aaaaaaaaanbhaEaBaBaEbianaGaYbjbkaGblaoaIaIaIaIaIaobmabbbafbnbobobpbqbobobpbraaamamamazaKbfbfbfbfbsaK
+aaaaaaaaanbtaEaBaEaEbtanaGaGaPaGaGaoaoaIaIaIaIaIaoaoabavaububvbwbvbubvbvbvabaaaaaaamaybxbgbybzbgbAaK
+aaaabBbBanananbCbDbEananbFbBbGbBbBbBbHbBbIbJbKbBbLbBabababababbMbNbObPbQabababaaaaamayaKbfbybRbgbSaK
+aaaabBbTbUbUbUbUbUbUbUbUbUbTbTbUbUbUbVbWbXbUbYbZbZbZbZbZbZbZbZcacbbTcccdbVcebBamamamayaKaKaKaKaKaKaK
+aaaabBbTcfbTbUcgbTbTbTbUcgbUbUbUbUcgbVchbXbUbUbUbUbUbUbUbUbUbUbTbTbTcicjckcfbGayazayazamazclbdamaaaa
+aaaabBbBbGbBbBbBcmbBbBbBbBbBbUbUbBbBbBchcncococococpcqcocococrcrcsbUctcjcucvbBamamayayazcwcxayamaaaa
+aaaaaacyczcyaaaaaaaaaaaaaabBbUbTbBaabBcAcBcBcBcCcDbBbBbBbBcmbBbBcEbUcibBbBbBbBaaamamamamazcFazamaaaa
+aaaaaacycGcycycycycycyaaaabBbUcHbBaabBbBbBcIcIcJbBcKcKcKcKcKaabBcLbUcicjcMbBaaaaaaaaaaamamazamamaaaa
+aaaaaacycGcycycNcOcGcycycybBbUbTbBaaaaaabBbTbTbBcKcKcPcQcRcKcSbBcEbUcccTcIbFaaaaaaaaaaamcUazamaaaaaa
+aaaaaacycGcGczcVcWcXczcGczcYcZbUbBaaaaaabBbUcZbGcRcRdadbdccRddcYdebTcidfdgbBaaaaaaaaaaamaydhamaaaaaa
+aaaaaacycycycydicGdjcycycybBbUbUbBaaaaaabFbUbUbBcKcKdddkcRcKcKbBcEbTccdlbBbBdmdmdmdmdmdmdndmdmaaaaaa
+aaaaaaaaaaaacycycycycyaaaabBdobUbBaaaaaabBbUbUbBaacKcKddcKcKaabBdpbUcibBdqdrdmdsdtdudsdsdvdwdmaaaaaa
+aaaaaaaaaacycycycycyaaaaaabBbTbTbBaaaaaabBbTbTbBaaaacKcRcKaaaabBcLbUcibBdxdydzdAdBdCdCdDdBdCdmaaaaaa
+aaaaaaaaaacycGdEdFcyaaaaaabBbTbUbBbBbBbBbBbUbTbBbBbBbBcYbBcDbBbBcEbUdGbZbZcadHdtdIdJdJdKdIdLdmaaaaaa
+aaaaaaaaaacycGdMczcyaaaaaadNbUbUbUbUdrbTbUbUbUdObUbTbUcZdObTcIchbXbUbTbTbUbUdPdQdIdLdJdRdIdLdmaaaaaa
+aaaaaaaaaacyczdSczcyaaaaaacmbTbUbUbTbTbUbUbUbUbUbTbTbUbUbUbTcIbWdTcocodUcrcrdVdtdIdLdWdRdXdYdmaaaaaa
+aaaaaaaaaacycyczcycybBbFbBbBbTbTdZeaeaeadZebeceaeaeadZbBbUbTbBbBcYbBbBbBcBbJeddtdIdWdWdKdXeedmaaaaaa
+aaaaaaaaaaaacycGcycybBbUefbBegbUdZeheiejekelelemeneodZbBbUbUbBepeqeraabBcmbBdmdtdIesdJdKdIdLdmaaaaaa
+aaaacycycycycycGcGczcYcZbTbBbUbUeceleleteleleleleleleubFegbUbBepevepepepepepdmewdXdJdLdRdIexdmaaaaaa
+aaaacycGczczcycGcycybBbUbUbBbUbUeyeleteteleleleteleleubBbTbUcmepevepeqezeAerdmewdIdWdLdRdXexdmaaaaaa
+aaaacyeBeCcXczczcyaabBbTbUbUbTbTdZeleleleleteDeteleteubBbTbUeEepeveqeFeGeHeveIdteJeKeLeMdIexdmaaaaaa
+aaaacyczczcGcycGcyaabBdobUbUbUbTdZeNeOePeQeReSeTeUeVdZbBbTbUbBepepepeqeWeqepdmdsdseXdsdsdIdLdmaaaaaa
+aaaacycycycycycGcyaabBbTbUbBbBbBdZdZdZdZdZdZdZdZdZdZdZbBbUcHbBaaaaepepeqepepdmdmdmdmeYdmdmdmdmaaaaaa
+aaaaaaaaaaaacyczcyaabBbUbUdNaaaaaaaaaaaaaaaaaaaaaaaaaabHbUbTbLaaaaaaepeqeZaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaabBbBbBcYbBbBbBbUbTbBbBbBcmbBfafafafafafafafafafafbfcfafafafafafdfafafafafafafafafafafafaaaaa
+aaaaaaaabBfebTcfbUdObUbUbTbUbUdObUfffafcfgfcfcfcfcfhfcfcfgfcfcfcfcfhfcfifcfcfgfcfcfcfcfcfcfgfjfaaaaa
+aaaaaaaabBbUcZbTbTbUbUbUbTbUbUbUbUbTfafgfgfcfcfcfcfcfcfcfcfgfcfcfgfgfcfcfgfgfgfgfcfcfcfcfcfcfgfaaaaa
+aaaaaaaabBbBcYbBfkfkfkflfmfnfkfkbTbTfafofcfpfqfqfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfcfrfaaaaa
+aaaaaaaacycyczcyfkfsftfufuftfvfwbUbUfafcfcfpfqfqfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfcfcfaaaaa
+aaaaaaaacyczfxdFfkfyfufzfzfufAfwbUfBfafgfcfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfcfcfaaaaa
+aaaaaaaacydjfCcGfkfDftfzfzftfEfwbUbUfafcfcfpfqfqfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfgfgfaaaaa
+aaaaaaaacyczfFczfkfGfufzfzfufHfwbUbUfIfcfcfJfKfKfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfcfcfaaaaa
+aaaaaaaacycycycyfkfLfufzfzfufMfkbUbTfafofgfgfNfKfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfcfcfaaaaa
+aaaaaaaaaaaaaaaafOfPfzfzfzfzfufmbUbTfQfcfgfcfcfKfpfpfqfqfqfqfqfqfqfpfpfpfpfpfqfqfqfqfqfqfqfcfRfaaaaa
+aaaaaaaaaaaaaaaafkfSfTfzfzfTfufnbUbUfafofgfgfUfKfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfgfgfaaaaa
+aaaaaaaaaaaaaaaafkfHfvfVfWfXfYfkbUbUfZfcfcgafKfKfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfcfgfaaaaa
+aaaaaaaaaaaaaaaafkfkfkfkfkfkfkfkbUbUfafcfcfpfqfqfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfcfgfaaaaa
+aaaaaaaaaaaaaaaaaaaacKcKcKcKcKcmbUfBfafgfgfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfpfcfcfaaaaa
+aaaaaaaaaaaaaaaaaaaacKcRcRgbcKbBbUbTfafcfgfpfqfqfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfcfcfaaaaa
+aaaaaaaaaaaaaaaaaaaacKgcdbgdcRcYcZbTfafofcfpfqfqfqfpfqfqfqfqfqfqfqfpfqfqfqfpfqfqfqfqfqfqfqfcfRfaaaaa
+aaaaaaaaaaaaaaaaaaaacKgeddddcKbBbUbUfafcfcfcfcfgfcfcfcfcfcfgfcfcfcfcfcfgfcfcfcfcfcfcfcfcfcfcfgfaaaaa
+aaaaaaaaaaaaaaaaaaaacKcKcKcKcKbBbBbBfafgfcfcfgfgfcgffcfcfcfgfgfcfcfcfggffcfcfcfcfcfcfcfcfgfgfgfaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafaaaaa
 "}
