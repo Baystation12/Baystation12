@@ -42,3 +42,6 @@
 	new_projectile_fired.permutated += linked_vehicle
 	new_projectile_fired.loc = pick(linked_vehicle.locs)
 	new_projectile_fired.launch(target)
+
+#undef REFILL_SUCCEED
+#undef REFILL_FAIL

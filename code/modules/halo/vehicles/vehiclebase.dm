@@ -23,7 +23,6 @@
 	var/list/fuel_drainrates = list()
 	var/vehicle_move_delay = 2 //The move delay in ticks.
 
-
 /obj/vehicles/New()
 	controller = new controller (src)
 	for(var/i in fuels)
@@ -119,7 +118,7 @@
 		return
 	if(!driver)
 		assign_driver(user)
-	else if(gunners.len < passengers[1] + 1)
+	else if(gunners.len < gunners[1] + 1)
 		assign_gunner(user)
 	else if(passengers.len < passengers[1] + 1)
 		passengers += user
