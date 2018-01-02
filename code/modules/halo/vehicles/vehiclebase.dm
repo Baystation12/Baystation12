@@ -13,9 +13,10 @@
 	var/list/passengers = list(0)//A list storing the passengers of the vehicle. First entry defines the maximum.
 	var/list/gunners = list(0)//Ditto, but for gunners.
 	var/list/gunner_weapons = list()
+	var/list/exposed_positions = list("driver","gunners","passengers") //A list defining which positions are exposed to gunfire/boarding.
 	var/block_entry_exit // A variable that, when set, will stop people entering/leaving the vehicle.
 
-	var/damage_modifiers = list("brute" = 1.0, "burn" = 1.0,"emp" = 1.0)
+	var/damage_resistances = list("brute" = 1.0, "burn" = 1.0,"emp" = 1.0)
 	var/datum/vehicle_control/controller = /datum/vehicle_control/base
 	var/sprite_offsets = list("1" = list(0,0),"2" = list(0,0),"4" = list(0,0),"8" = list(0,0)) //Sprite offsets, handled on subtype basis. Format: string:Vehicle_dir - list(x,y)
 
@@ -25,9 +26,11 @@
 
 /obj/vehicles/New()
 	controller = new controller (src)
+	verbs += /obj/vehicles/proc/exit_vehicle
 	for(var/i in fuels)
 		fuels += new i
 		fuels -= i
+
 
 /obj/vehicles/attack_hand(var/mob/user)
 	controller.on_click(null,user)
@@ -109,11 +112,12 @@
 	explosion(loc,-1,-1,2,3)
 	qdel(src)
 
-/obj/vehicles/verb/enter_vehicle(var/mob/user)
+/obj/vehicles/verb/enter_vehicle()
 	set name = "Enter Vehicle"
 	set category = "Vehicle"
 	set src in range(1)
 
+	var/mob/user = usr
 	if(block_entry_exit)
 		return
 	if(!driver)
@@ -124,12 +128,14 @@
 		passengers += user
 		contents += user
 	render_mob_sprites()
+	user.visible_message("<span class = 'notice'>[user] enters [src]</span>")
 
-/obj/vehicles/verb/exit_vehicle(var/mob/user)
+/obj/vehicles/proc/exit_vehicle(var/mob/user,var/override_message = 0)
 	set name = "Exit Vehicle"
 	set category = "Vehicle"
 	set src in range(1)
-
+	if(!user)
+		user = usr
 	if(block_entry_exit)
 		return
 	if(driver == user)
@@ -140,6 +146,34 @@
 		unassign_gunner(user)
 	user.loc = src.loc
 	render_mob_sprites()
+	if(!override_message)
+		user.visible_message("<span class = 'notice'>[user] exits [name]</span>")
+
+/obj/vehicles/verb/hijack_vehicle()
+	set name = "Hijack Vehicle"
+	set category = "Vehicle"
+	set src in range(1)
+
+	var/mob/user = usr
+	if(block_entry_exit)
+		return
+	if(user in contents)
+		to_chat(user,"<span class = 'werning'>You can't hijack [src.name] from the inside.</span>")
+		return
+	var/mob/mob_to_remove
+	if(driver)
+		mob_to_remove = driver
+	if(passengers.len > 1)
+		mob_to_remove = pick(passengers.Copy(2,passengers.len))
+	if(gunners.len > 1)
+		mob_to_remove = pick(gunners.Copy(2,gunners.len))
+	if(!istype(mob_to_remove))
+		return
+	if(!do_after(user,vehicle_move_delay*2 SECONDS,src,1,same_direction = 1))
+		return
+	else
+		exit_vehicle(mob_to_remove,1)
+		mob_to_remove.visible_message("<span class = 'danger'>[user] forcefully pulls [mob_to_remove] out of [name]!</span>")
 
 /obj/vehicles/emp_act(var/severity)
 	. = controller.on_emp(severity)
@@ -183,6 +217,8 @@
 
 /datum/vehicle_control/proc/on_emp(var/severity)
 
+/datum/vehicle_control/proc/process_occupant_hit(var/obj/item/projectile/P,var/def_zone)
+
 /datum/vehicle_control/proc/on_bullet_act(var/obj/item/projectile/P,var/def_zone)
 
 /datum/vehicle_control/proc/on_enter_vehicle()
@@ -218,8 +254,8 @@
 
 		//Or do damage
 		var/damage_resist_amount = 0
-		if(inhand_item.damtype in vehicle.damage_modifiers)
-			damage_resist_amount = vehicle.damage_modifiers[inhand_item.damtype]
+		if(inhand_item.damtype in vehicle.damage_resistances)
+			damage_resist_amount = vehicle.damage_resistances[inhand_item.damtype]
 		if(inhand_item.force > damage_resist_amount)
 			vehicle.health[1] -= inhand_item.force
 			vehicle.visible_message("<span class = 'danger'>[user] [pick(inhand_item.attack_verb)] [vehicle.name]</span>")
@@ -232,18 +268,41 @@
 			on_enter_vehicle(user)
 
 /datum/vehicle_control/base/on_emp(var/severity)
-	vehicle.vehicle_move_delay = vehicle.vehicle_move_delay * 2 * severity * vehicle.damage_modifiers["emp"]
+	vehicle.vehicle_move_delay = vehicle.vehicle_move_delay * 2 * severity * (vehicle.damage_resistances["emp"]/100)
 	spawn(vehicle.vehicle_move_delay)
 		vehicle.vehicle_move_delay = initial(vehicle.vehicle_move_delay)
 
+/datum/vehicle_control/process_occupant_hit(var/obj/item/projectile/P,var/def_zone)
+	var/list/mobs_pickfrom = list()
+	for(var/mob/M in vehicle.contents)
+		var/valid_addition = 0
+		if((vehicle.driver == M) && ("driver" in vehicle.exposed_positions))
+			valid_addition = 1
+		if((M in vehicle.passengers) && ("passengers" in vehicle.exposed_positions))
+			valid_addition = 1
+		if((M in vehicle.gunners) && ("gunners" in vehicle.exposed_positions))
+			valid_addition = 1
+		if(valid_addition)
+			mobs_pickfrom += M
+
+	if(!mobs_pickfrom)
+		return
+	var/mob/mob_to_hit = pick(mobs_pickfrom)
+	mob_to_hit.bullet_act(P,def_zone)
+
 /datum/vehicle_control/on_bullet_act(var/obj/item/projectile/P,var/def_zone)
 	var/damage_resist_amount = 0
-	if(P.damtype in vehicle.damage_modifiers)
-		damage_resist_amount = vehicle.damage_modifiers[P.damtype]
-	if(P.damage > damage_resist_amount)
-		vehicle.health[1] -= P.damage
-		vehicle.process_health_damage()
-		vehicle.visible_message("<span class = 'danger'>[vehicle.name] is hit by [P.name]</span>")
+	if(P.damtype in vehicle.damage_resistances)
+		damage_resist_amount = vehicle.damage_resistances[P.damtype]
+	if(prob(100 - damage_resist_amount))
+		process_occupant_hit(P,def_zone)
+	else
+		if(P.damage > damage_resist_amount - P.armor_penetration)
+			vehicle.health[1] -= P.damage
+			vehicle.process_health_damage()
+			vehicle.visible_message("<span class = 'danger'>[vehicle.name] is hit by [P.name]</span>")
+		else
+			vehicle.visible_message("<span class = 'warning'>[P.name] bounces off the armor of [vehicle.name]</span>")
 		return 1
 
 /datum/vehicle_control/base/gunner_turret_drop(var/mob/user)
