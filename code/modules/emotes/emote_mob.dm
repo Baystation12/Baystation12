@@ -60,7 +60,7 @@
 		if (I.implanted)
 			I.trigger(act, src)
 
-/datum/proc/format_emote(var/source = null, var/message = null)
+/mob/proc/format_emote(var/source = null, var/message = null)
 	var/pretext
 	var/subtext
 	var/nametext
@@ -122,7 +122,6 @@
 		input = message
 
 	if(input)
-		//message = "<B>[src]</B> [input]"
 		message = format_emote(src, message)
 	else
 		return
