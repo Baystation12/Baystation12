@@ -32,3 +32,7 @@
 		icon_state = "batterer"
 	else
 		icon_state = "battererburnt"
+
+/obj/item/device/personal_shield/Destroy()
+	QDEL_NULL(shield)
+	return ..()

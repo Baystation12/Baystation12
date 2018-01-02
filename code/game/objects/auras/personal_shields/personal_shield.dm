@@ -30,7 +30,5 @@
 	shield = user_shield
 
 /obj/aura/personal_shield/device/Destroy()
-	if(shield)
-		shield.shield = null
-		shield = null
+	shield = null
 	return ..()
