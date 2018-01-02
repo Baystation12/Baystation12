@@ -178,9 +178,6 @@
 		/datum/mil_rank/marine/o3,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/marine/o2,
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/marine/o1
 	)
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -221,9 +218,6 @@
 		/datum/mil_rank/marine/o3,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/marine/o2,
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/marine/o1
 	)
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
