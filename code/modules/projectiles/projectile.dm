@@ -148,7 +148,12 @@
 		qdel(src)
 		return 0
 
-	loc = get_turf(user) //move the projectile out into the world
+	if(istype(user.loc,/obj/vehicles))
+		var/obj/vehicles/V = user.loc
+		permutated += V
+		loc = pick(user.locs)
+	else
+		loc = get_turf(user) //move the projectile out into the world
 
 	firer = user
 	shot_from = launcher.name
