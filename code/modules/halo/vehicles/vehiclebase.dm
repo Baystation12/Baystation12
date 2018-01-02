@@ -285,7 +285,7 @@
 		if(valid_addition)
 			mobs_pickfrom += M
 
-	if(!mobs_pickfrom)
+	if(!mobs_pickfrom.len)
 		return
 	var/mob/mob_to_hit = pick(mobs_pickfrom)
 	mob_to_hit.bullet_act(P,def_zone)
@@ -294,10 +294,10 @@
 	var/damage_resist_amount = 0
 	if(P.damtype in vehicle.damage_resistances)
 		damage_resist_amount = vehicle.damage_resistances[P.damtype]
-	if(prob(100 - damage_resist_amount))
+	if(prob(100 - damage_resist_amount) && (/mob in vehicle.contents))
 		process_occupant_hit(P,def_zone)
 	else
-		if(P.damage > damage_resist_amount - P.armor_penetration)
+		if(P.damage >= damage_resist_amount - P.armor_penetration)
 			vehicle.health[1] -= P.damage
 			vehicle.process_health_damage()
 			vehicle.visible_message("<span class = 'danger'>[vehicle.name] is hit by [P.name]</span>")
