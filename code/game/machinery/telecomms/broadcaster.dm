@@ -259,7 +259,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		for(var/antag_freq in ANTAG_FREQS)
 			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(antag_freq)
 			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
-				if(R.receive_range(antag_freq, level) > -1)
+				if(R.intercept && R.receive_range(antag_freq, level) > -1)
 					radios += R
 
 	// --- Broadcast to ALL radio devices ---
