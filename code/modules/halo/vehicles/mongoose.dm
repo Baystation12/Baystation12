@@ -14,6 +14,7 @@
 	bound_width = 32
 
 	sprite_offsets = list("1" = list(0,3),"2" = list(0,3),"4" = list(0,3),"8" = list(0,3))
+	damage_resistances = list("brute" = 30.0, "burn" = 25.0,"emp" = 15.0)
 
 	controller = /datum/vehicle_control/base
 
