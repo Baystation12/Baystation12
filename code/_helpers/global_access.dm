@@ -417,6 +417,8 @@
 			return global.doppler_arrays;
 		if("dreams")
 			return global.dreams;
+		if("dropship_landing_controller")
+			return global.dropship_landing_controller;
 		if("dummy_lighting_corner")
 			return global.dummy_lighting_corner;
 		if("economic_species_modifier")
@@ -1636,6 +1638,8 @@
 			global.doppler_arrays=newval;
 		if("dreams")
 			global.dreams=newval;
+		if("dropship_landing_controller")
+			global.dropship_landing_controller=newval;
 		if("dummy_lighting_corner")
 			global.dummy_lighting_corner=newval;
 		if("economic_species_modifier")
@@ -2646,6 +2650,7 @@
 	"dna_genes",
 	"doppler_arrays",
 	"dreams",
+	"dropship_landing_controller",
 	"dummy_lighting_corner",
 	"economic_species_modifier",
 	"economy_init",
