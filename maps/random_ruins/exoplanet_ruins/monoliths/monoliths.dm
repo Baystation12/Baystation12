@@ -7,7 +7,7 @@
 
 /obj/structure/monolith
 	name = "monolith"
-	desc = "An obviously artifical structure of unknown origin."
+	desc = "An obviously artifical structure of unknown origin. The symbols '<font face='Shage'>DWNbTX</font>' are engraved on the base."
 	icon = 'icons/obj/monolith.dmi'
 	icon_state = "jaggy1"
 	plane = ABOVE_HUMAN_PLANE
