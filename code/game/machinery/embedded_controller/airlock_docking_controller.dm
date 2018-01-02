@@ -18,7 +18,7 @@
 			code = "N/A"
 		else
 			code = stars(code)
-		to_chat(user,"[W]'s scren displays '[docking_program.docking_codes ? docking_program.docking_codes : "N/A"]'")
+		to_chat(user,"[W]'s scren displays '[code]'")
 	else
 		..()
 

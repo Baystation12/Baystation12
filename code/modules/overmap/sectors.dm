@@ -29,6 +29,7 @@ var/list/points_of_interest = list()
 		map_sectors["[zlevel]"] = src
 
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
+	..()
 
 /obj/effect/overmap/Initialize()
 	. = ..()

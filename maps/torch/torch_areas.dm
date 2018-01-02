@@ -457,7 +457,7 @@
 //Merchant
 
 /area/shuttle/merchant/home
-	name = "\improper Merchant Vessel - Home"
+	name = "\improper Merchant Vessel"
 	icon_state = "shuttlegrn"
 
 //Merc
