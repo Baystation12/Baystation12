@@ -11,6 +11,7 @@ var/list/points_of_interest = list()
 
 	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
 	var/list/restricted_waypoints = list() //waypoints for specific shuttles
+	var/docking_codes
 
 	var/start_x			//coordinates on the
 	var/start_y			//overmap zlevel
@@ -18,6 +19,16 @@ var/list/points_of_interest = list()
 	var/base = 0		//starting sector, counts as station_levels
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
+
+/obj/effect/overmap/New()
+	if(!GLOB.using_map.use_overmap)
+		return
+
+	map_z = GetConnectedZlevels(z)
+	for(var/zlevel in map_z)
+		map_sectors["[zlevel]"] = src
+
+	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
 
 /obj/effect/overmap/Initialize()
 	. = ..()
@@ -28,15 +39,11 @@ var/list/points_of_interest = list()
 	if(!GLOB.using_map.overmap_z)
 		build_overmap()
 
-	map_z = GetConnectedZlevels(z)
-	for(var/zlevel in map_z)
-		map_sectors["[zlevel]"] = src
-
 	start_x = start_x || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 
 	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
-	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
+	//testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
 	points_of_interest += name
 
 	GLOB.using_map.player_levels |= map_z
@@ -47,6 +54,8 @@ var/list/points_of_interest = list()
 	if(base)
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
+	
+
 	//handle automatic waypoints that spawned before us
 	for(var/obj/effect/shuttle_landmark/automatic/L in world)
 		if(L.z in map_z)
@@ -75,7 +84,7 @@ var/list/points_of_interest = list()
 	for(var/obj/machinery/computer/sensors/S in SSmachines.machinery)
 		if (S.z in map_z)
 			S.linked = src
-			testing("Sensor console at level [S.z] linked to overmap object '[name]'.")
+			//testing("Sensor console at level [S.z] linked to overmap object '[name]'.")
 
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
 	. = generic_waypoints.Copy()

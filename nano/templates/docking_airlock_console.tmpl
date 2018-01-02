@@ -92,5 +92,6 @@
 	</div>
 	<div class="item" style="padding-top: 10px; width: 100%">
 			{{:helper.link('Abort', 'cancel', {'command' : 'abort'}, (data.processing && !data.airlock_disabled) ? null : 'disabled', (data.processing && !data.airlock_disabled) ? 'redButton' : null)}}
+			{{:helper.link("Dock", null, {'command' : 'dock'}, data.docking_status == "undocked" ? null : 'disabled', null)}}
 	</div>
 </div>

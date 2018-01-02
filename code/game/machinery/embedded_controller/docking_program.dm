@@ -70,12 +70,22 @@
 	
 	var/override_enabled = 0	//when enabled, do not open/close doors or cycle airlocks and wait for the player to do it manually
 	var/received_confirm = 0	//for undocking, whether the server has recieved a confirmation from the client
+	var/docking_codes			//would only allow docking when receiving signal with these, if set
 
 /datum/computer/file/embedded_program/docking/New(var/obj/machinery/embedded_controller/M)
 	..()
 	if(id_tag)
 		tag = id_tag //set tags for initialization
 
+/datum/computer/file/embedded_program/docking/receive_user_command(command)
+	if(command == "dock")
+		var/datum/signal/signal = new()
+		signal.data["tag"] = tag_target
+		signal.data["command"] = "request_dock"
+		signal.data["recipient"] = id_tag
+		signal.data["code"] = docking_codes
+		receive_signal(signal)
+	
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
 	var/command = signal.data["command"]
@@ -103,12 +113,18 @@
 		
 		if ("request_dock")
 			if (control_mode == MODE_NONE && dock_state == STATE_UNDOCKED)
+				tag_target = receive_tag
+				
+				if(docking_codes)
+					var/code = signal.data["code"]
+					if(code != docking_codes)
+						return
+
 				control_mode = MODE_SERVER
 				
 				dock_state = STATE_DOCKING
 				broadcast_docking_status()
 				
-				tag_target = receive_tag
 				if (!override_enabled)
 					prepare_for_docking()
 				send_docking_command(tag_target, "confirm_dock")	//acknowledge the request
@@ -264,6 +280,7 @@
 	signal.data["tag"] = id_tag
 	signal.data["command"] = command
 	signal.data["recipient"] = recipient
+	signal.data["code"] = docking_codes
 	post_signal(signal)
 
 /datum/computer/file/embedded_program/docking/proc/broadcast_docking_status()

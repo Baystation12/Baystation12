@@ -99,6 +99,7 @@
 
 /obj/item/weapon/folder/envelope/captain/Initialize()
 	. = ..()
+	var/obj/effect/overmap/torch = map_sectors["[z]"]
 	var/memo = {"
 	<tt><center><b><font color='red'>SECRET - CODE WORDS: TORCH</font></b>
 	<h3>SOL CENTRAL GOVERNMENT EXPEDITIONARY COMMAND</h3>
@@ -124,6 +125,7 @@
 	None of these systems are claimed by any entity recognized by the SCG, so you have full salvage rights on any derelicts discovered.<br>
 	Investigate and mark any prospective colony worlds as per usual procedures.<br>
 	There is no SCG presence in that area. In case of distress calls, you will be the only vessel available; do not ignore them. We cannot afford any more PR backlash.<br>
+	The current docking code is: [torch.docking_codes]
 	Report all findings via bluespace comm buoys during inter-system jumps.<br>
 
 	<i>ADM Lau.</i></tt>

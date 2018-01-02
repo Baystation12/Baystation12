@@ -45,12 +45,13 @@
 	return list(
 		"shuttle_status" = shuttle_status,
 		"shuttle_state" = shuttle_state,
-		"has_docking" = shuttle.active_docking_controller? 1 : 0,
-		"docking_status" = shuttle.active_docking_controller? shuttle.active_docking_controller.get_docking_status() : null,
-		"docking_override" = shuttle.active_docking_controller? shuttle.active_docking_controller.override_enabled : null,
+		"has_docking" = shuttle.shuttle_docking_controller? 1 : 0,
+		"docking_status" = shuttle.shuttle_docking_controller? shuttle.active_docking_controller.get_docking_status() : null,
+		"docking_override" = shuttle.shuttle_docking_controller? shuttle.active_docking_controller.override_enabled : null,
 		"can_launch" = shuttle.can_launch(),
 		"can_cancel" = shuttle.can_cancel(),
 		"can_force" = shuttle.can_force(),
+		"docking_codes" = shuttle.docking_codes
 	)
 
 /obj/machinery/computer/shuttle_control/proc/handle_topic_href(var/datum/shuttle/autodock/shuttle, var/list/href_list)
@@ -66,6 +67,10 @@
 		shuttle.force_launch(src)
 	else if(href_list["cancel"])
 		shuttle.cancel_launch(src)
+	else if(href_list["set_codes"])
+		var/newcode = input("Input new docking codes", "Docking codes", shuttle.docking_codes) as text|null
+		if (newcode)
+			shuttle.set_docking_codes(uppertext(newcode))
 
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/datum/shuttle/autodock/shuttle = shuttle_controller.shuttles[shuttle_tag]
