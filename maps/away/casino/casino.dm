@@ -104,3 +104,4 @@
 
 /obj/structure/casino/craps/craps_down
 	icon_state = "craps_down"
+
