@@ -297,6 +297,8 @@
 		if (STATE_UNDOCKING) return "undocking"
 		if (STATE_DOCKED) return "docked"
 
+/datum/computer/file/embedded_program/docking/proc/get_name()
+	return "[get_area(master)] ([master.x], [master.y])"
 
 #undef STATE_UNDOCKED
 #undef STATE_DOCKING

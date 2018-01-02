@@ -72,6 +72,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 	hard_drive.store_file(new/datum/computer_file/program/records())
 	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	hard_drive.store_file(new/datum/computer_file/program/docking())
 
 // Security
 /obj/item/modular_computer/console/preset/security/install_default_programs()
@@ -97,6 +98,19 @@
 /obj/item/modular_computer/console/preset/civilian/professional/install_default_hardware()
 	..()
 	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
+
+//Dock control
+/obj/item/modular_computer/console/preset/dock/install_default_hardware()
+	..()
+	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
+
+/obj/item/modular_computer/console/preset/dock/install_default_programs()
+	..()
+	hard_drive.store_file(new/datum/computer_file/program/nttransfer())
+	hard_drive.store_file(new/datum/computer_file/program/email_client())
+	hard_drive.store_file(new/datum/computer_file/program/supply())
+	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	hard_drive.store_file(new/datum/computer_file/program/docking())
 
 // Crew-facing supply ordering computer
 /obj/item/modular_computer/console/preset/supply/install_default_hardware()
