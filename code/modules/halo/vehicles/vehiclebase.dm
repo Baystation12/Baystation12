@@ -77,7 +77,7 @@
 /obj/vehicles/proc/remove_gunner_weapon(var/mob/living/carbon/human/user)
 	if(!istype(user))
 		return
-	for(var/obj/item/weapon/gun/vehicle_turret/gun in list(user.l_hand,user.r_hand))
+	for(var/obj/item/weapon/gun/vehicle_turret/gun in user.contents)
 		user.drop_from_inventory(gun)
 
 /obj/vehicles/proc/assign_gunner(var/mob/user)
@@ -225,6 +225,10 @@
 
 /datum/vehicle_control/proc/on_exit_vehicle()
 
+/datum/vehicle_control/proc/get_occupant_position(var/mob/user)
+
+/datum/vehicle_control/proc/get_position_exposed(var/position)
+
 //Basic control datum//
 
 /datum/vehicle_control/base
@@ -272,7 +276,28 @@
 	spawn(vehicle.vehicle_move_delay)
 		vehicle.vehicle_move_delay = initial(vehicle.vehicle_move_delay)
 
-/datum/vehicle_control/process_occupant_hit(var/obj/item/projectile/P,var/def_zone)
+/datum/vehicle_control/base/get_occupant_position(var/mob/user)
+	if(!(user in vehicle.contents))
+		return
+	if((vehicle.driver == user))
+		return "driver"
+	if((user in vehicle.passengers))
+		return "passenger"
+	if((user in vehicle.gunners))
+		return "gunner"
+
+/datum/vehicle_control/base/get_position_exposed(var/position)
+	if(!position)
+		return 0
+	if((position == "driver") && ("driver" in vehicle.exposed_positions))
+		return 1
+	if((position == "passenger") && ("passengers" in vehicle.exposed_positions))
+		return 1
+	if((position == "gunner") && ("gunners" in vehicle.exposed_positions))
+		return 1
+	return 0
+
+/datum/vehicle_control/base/process_occupant_hit(var/obj/item/projectile/P,var/def_zone)
 	var/list/mobs_pickfrom = list()
 	for(var/mob/M in vehicle.contents)
 		var/valid_addition = 0
@@ -290,7 +315,7 @@
 	var/mob/mob_to_hit = pick(mobs_pickfrom)
 	mob_to_hit.bullet_act(P,def_zone)
 
-/datum/vehicle_control/on_bullet_act(var/obj/item/projectile/P,var/def_zone)
+/datum/vehicle_control/base/on_bullet_act(var/obj/item/projectile/P,var/def_zone)
 	var/damage_resist_amount = 0
 	if(P.damtype in vehicle.damage_resistances)
 		damage_resist_amount = vehicle.damage_resistances[P.damtype]

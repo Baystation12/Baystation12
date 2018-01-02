@@ -167,7 +167,19 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
-	if(target.z != user.z) return
+	if(istype(user.loc,/obj/vehicles))
+		var/obj/vehicles/V = user.loc
+		var/user_position = V.controller.get_occupant_position(user)
+		if(isnull(user_position)) return
+		if(user_position == "driver")
+			to_chat(user,"<span class = 'warning'>You can't fire from the driver's position!</span>")
+			return
+		if(!V.controller.get_position_exposed(user_position))
+			to_chat(user,"<span class = 'warning'>You can't fire [src.name] from this position in [V.name].</span>")
+			return
+		if(target.z != V.z) return
+	else
+		if(target.z != user.z) return
 
 	add_fingerprint(user)
 
