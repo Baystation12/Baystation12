@@ -8,18 +8,41 @@
 	unique = 1
 	carved = 2 // Don't carve it
 
-/obj/item/weapon/book/tome/attack_self(var/mob/user)
+/obj/item/weapon/book/tome/attack_self(var/mob/living/carbon/human/user)
+	if(!istype(user))
+		to_chat(user, "The pages of \the [src] are tauntingly blank. It's not meant for your eyes.")
+		return
+	cult.reveal_cult(user)
 	if(!iscultist(user))
-		to_chat(user, "\The [src] seems full of illegible scribbles. Is this a joke?")
+		if(user.insanity < 10)
+			to_chat(user, "You look through the pages of \the [src]. There are various rituals listed, most involving blood and a price to pay, and promising great powers in return. Your mind feels fuzzy... You'll need to read it again to learn more.")
+			user.set_insanity(10)
+			return
+		else if(user.insanity < 25)
+			to_chat(user, "You look through the pages of \the [src], trying to memorize the rituals listed. You don't feel like yourself...")
+			user.set_insanity(25)
+			return
+		else
+			to_chat(user, "There is nothing more to gain from looking at the pages. If you want more, you'll have to perform one of the rituals.")
+			return
 	else
+		if(user.insanity < 40)
+			to_chat(user, "You look through the pages of \the [src], refreshing your memory.")
+			user.set_insanity(40)
+			return
 		to_chat(user, "Hold \the [src] in your hand while drawing a rune to use it.")
 
 /obj/item/weapon/book/tome/examine(var/mob/user)
 	. = ..()
+	cult.reveal_cult(user)
 	if(!iscultist(user))
 		to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
 	else
 		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
+
+/obj/item/weapon/book/tome/pickup(var/mob/living/user)
+	. = ..()
+	cult.reveal_cult(user)
 
 /obj/item/weapon/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))
@@ -139,13 +162,12 @@
 	return species.blood_color
 
 var/list/Tier1Runes = list(
-	/mob/proc/convert_rune,
+	/mob/proc/induce_rune,
 	/mob/proc/teleport_rune,
 	/mob/proc/tome_rune,
 	/mob/proc/wall_rune,
 	/mob/proc/ajorney_rune,
 	/mob/proc/defile_rune,
-	/mob/proc/emp_imbue,
 	/mob/proc/cult_communicate
 	)
 
@@ -153,8 +175,7 @@ var/list/Tier2Runes = list(
 	/mob/proc/armor_rune,
 	/mob/proc/offering_rune,
 	/mob/proc/drain_rune,
-	/mob/proc/emp_rune,
-	/mob/proc/massdefile_rune
+	/mob/proc/emp_rune
 	)
 
 var/list/Tier3Runes = list(
@@ -169,11 +190,11 @@ var/list/Tier4Runes = list(
 	/mob/proc/tearreality_rune
 	)
 
-/mob/proc/convert_rune()
+/mob/proc/induce_rune()
 	set category = "Cult Magic"
-	set name = "Rune: Convert"
+	set name = "Rune: Induce"
 
-	make_rune(/obj/effect/rune/convert, tome_required = 1)
+	make_rune(/obj/effect/rune/induce, tome_required = 1)
 
 /mob/proc/teleport_rune()
 	set category = "Cult Magic"
@@ -205,12 +226,6 @@ var/list/Tier4Runes = list(
 
 	make_rune(/obj/effect/rune/defile, tome_required = 1)
 
-/mob/proc/massdefile_rune()
-	set category = "Cult Magic"
-	set name = "Rune: Mass Defile"
-
-	make_rune(/obj/effect/rune/massdefile, tome_required = 1, cost = 20)
-
 /mob/proc/armor_rune()
 	set category = "Cult Magic"
 	set name = "Rune: Summon Robes"
@@ -222,8 +237,6 @@ var/list/Tier4Runes = list(
 	set name = "Rune: Offering"
 
 	make_rune(/obj/effect/rune/offering, tome_required = 1)
-
-
 
 /mob/proc/drain_rune()
 	set category = "Cult Magic"
@@ -272,12 +285,6 @@ var/list/Tier4Runes = list(
 	set name = "Rune: Tear Reality"
 
 	make_rune(/obj/effect/rune/tearreality, cost = 50, tome_required = 1)
-
-/mob/proc/emp_imbue()
-	set category = "Cult Magic"
-	set name = "Imbue: EMP"
-
-	make_rune(/obj/effect/rune/imbue/emp)
 
 /mob/proc/cult_communicate()
 	set category = "Cult Magic"

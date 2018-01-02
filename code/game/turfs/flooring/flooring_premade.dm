@@ -134,16 +134,6 @@
 /turf/simulated/floor/reinforced/n20
 	initial_gas = list("sleeping_agent" = ATMOSTANK_NITROUSOXIDE)
 
-
-/turf/simulated/floor/cult
-	name = "engraved floor"
-	icon = 'icons/turf/flooring/cult.dmi'
-	icon_state = "cult"
-	initial_flooring = /decl/flooring/reinforced/cult
-
-/turf/simulated/floor/cult/cultify()
-	return
-
 /turf/simulated/floor/tiled/dark
 	name = "dark floor"
 	icon_state = "dark"

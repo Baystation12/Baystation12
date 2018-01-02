@@ -18,6 +18,7 @@ var/global/list/narsie_list = list()
 
 /obj/singularity/narsie/New()
 	..()
+	cult.add_cultiness(CULT_MAX_CULTINESS)
 	narsie_list.Add(src)
 
 /obj/singularity/narsie/Destroy()

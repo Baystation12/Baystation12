@@ -142,13 +142,14 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		)
 
 	var/list/religion_choices = list(
-		"Unitarianism",
+		"Christianity",
+		"Islam",
 		"Hinduism",
-		"Buddhist",
-		"Islamic",
-		"Christian",
-		"Agnostic",
-		"Deist"
+		"Buddhism",
+		"Unitarianism",
+		"Agnosticism",
+		"Deism",
+		"Atheism"
 		)
 
 /datum/map/New()

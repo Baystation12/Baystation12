@@ -95,15 +95,16 @@ What is the naming convention for planes or layers?
 
 	#define HOLOMAP_LAYER               1 // NOTE: ENSURE this is equal to the one at ABOVE_PLATING_PLANE!
 	#define DECAL_LAYER                 2
-	#define RUNE_LAYER                  3
-	#define ABOVE_TILE_LAYER            4
-	#define EXPOSED_PIPE_LAYER          5
-	#define EXPOSED_WIRE_LAYER          6
-	#define EXPOSED_WIRE_TERMINAL_LAYER 7
-	#define CATWALK_LAYER               8
-	#define BLOOD_LAYER                 9
-	#define MOUSETRAP_LAYER             10
-	#define PLANT_LAYER                 11
+	#define CULT_FLOOR_LAYER            3
+	#define RUNE_LAYER                  4
+	#define ABOVE_TILE_LAYER            5
+	#define EXPOSED_PIPE_LAYER          6
+	#define EXPOSED_WIRE_LAYER          7
+	#define EXPOSED_WIRE_TERMINAL_LAYER 8
+	#define CATWALK_LAYER               9
+	#define BLOOD_LAYER                 10
+	#define MOUSETRAP_LAYER             11
+	#define PLANT_LAYER                 12
 
 #define HIDING_MOB_PLANE              -16 // for hiding mobs like MoMMIs or spiders or whatever, under most objects but over pipes & such.
 

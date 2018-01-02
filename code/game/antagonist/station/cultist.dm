@@ -1,5 +1,6 @@
 #define CULTINESS_PER_CULTIST 40
 #define CULTINESS_PER_SACRIFICE 40
+#define CULTINESS_PER_NEOPHYTE 20
 #define CULTINESS_PER_TURF 1
 
 #define CULT_RUNES_1 200
@@ -10,23 +11,49 @@
 #define CULT_GHOSTS_2 800
 #define CULT_GHOSTS_3 1200
 
-#define CULT_MAX_CULTINESS 1200 // When this value is reached, the game stops checking for updates so we don't recheck every time a tile is converted in endgame
+#define CULT_RADIO_1 1500
+#define CULT_RADIO_2 2500
+
+#define CULT_REVEAL_CHAPLAIN 100
+#define CULT_REVEAL_GLOBAL 2000
+
+#define CULT_ATHEISTS_CAN_PRAY 400
+#define PRAYER_COOLDOWN_1 400
+#define PRAYER_COOLDOWN_2 1200
+#define PRAYER_COOLDOWN_3 1600
+
+#define CULT_MAX_CULTINESS 2500 // When this value is reached, the game stops checking for updates so we don't recheck every time a tile is converted in endgame
+
+/datum/antagonist/cultist/var/list/cult_rating_bounds = list(CULT_RUNES_1, CULT_RUNES_2, CULT_RUNES_3, CULT_GHOSTS_1, CULT_GHOSTS_2, CULT_GHOSTS_3, CULT_RADIO_1, CULT_RADIO_2, CULT_REVEAL_CHAPLAIN, CULT_REVEAL_GLOBAL, CULT_ATHEISTS_CAN_PRAY, PRAYER_COOLDOWN_1, PRAYER_COOLDOWN_2, PRAYER_COOLDOWN_3)
+
 
 var/datum/antagonist/cultist/cult
 
 /proc/iscultist(var/mob/player)
 	if(!cult || !player.mind)
 		return 0
+	if(player.mind in cult.faction_members)
+		return 0
 	if(player.mind in cult.current_antagonists)
 		return 1
+
+/proc/isneophyte(var/mob/player)
+	if(!cult || !player.mind)
+		return 0
+	if(player.mind in cult.faction_members)
+		return 1
+
+/proc/isnotcultist(var/mob/player)
+	return !(iscultist(player) || isneophyte(player))
+
 
 /datum/antagonist/cultist
 	id = MODE_CULTIST
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
-	restricted_jobs = list(/datum/job/lawyer, /datum/job/captain, /datum/job/hos)
+	restricted_jobs = list(/datum/job/lawyer, /datum/job/captain, /datum/job/hos, /datum/job/chaplain, /datum/job/psychiatrist)
 	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/chaplain, /datum/job/psychiatrist)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg)
 	feedback_tag = "cult_objective"
 	antag_indicator = "hudcultist"
 	welcome_text = "You have a tome in your possession; one that will help you start the cult. Use it well and remember - there are others."
@@ -41,6 +68,13 @@ var/datum/antagonist/cultist/cult
 	initial_spawn_target = 6
 	antaghud_indicator = "hudcultist"
 
+	faction_role_text = "Neophyte"
+	faction_descriptor = "Survival"
+	faction_welcome = "Through curiosity or insanity, you became immersed in the arcane arts. Help the cult members in hopes of becoming one, seek salvation, or simply try to survive."
+	faction_indicator = "hudrevolutionary" // TODO
+	faction_invisible = 1
+	faction = "cult"
+
 	var/allow_narsie = 1
 	var/powerless = 0
 	var/datum/mind/sacrifice_target
@@ -48,9 +82,12 @@ var/datum/antagonist/cultist/cult
 	var/list/rune_strokes = list()
 	var/list/sacrificed = list()
 	var/cult_rating = 0
-	var/list/cult_rating_bounds = list(CULT_RUNES_1, CULT_RUNES_2, CULT_RUNES_3, CULT_GHOSTS_1, CULT_GHOSTS_2, CULT_GHOSTS_3)
 	var/max_cult_rating = 0
-	var/conversion_blurb = "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
+	var/distort_announcements = 0
+	var/distort_radio = 0
+	var/atheist_prayer = 0
+	var/prayer_cooldown = 2000
+	var/endgame = FALSE
 
 	faction = "cult"
 
@@ -108,7 +145,10 @@ var/datum/antagonist/cultist/cult
 /datum/antagonist/cultist/add_antagonist(var/datum/mind/player, var/ignore_role, var/do_not_equip, var/move_to_spawn, var/do_not_announce, var/preserve_appearance)
 	. = ..()
 	if(.)
-		to_chat(player, "<span class='cult'>[conversion_blurb]</span>")
+		to_chat(player, "<span class='cult'>You give up your sanity and embrance the truth.</span>")
+		if(ishuman(player))
+			var/mob/living/carbon/human/H = player
+			H.insanity = 100
 		if(player.current && !istype(player.current, /mob/living/simple_animal/construct))
 			player.current.add_language(LANGUAGE_CULT)
 
@@ -157,15 +197,29 @@ var/datum/antagonist/cultist/cult
 		for(var/mob/observer/ghost/D in SSmobs.mob_list)
 			add_ghost_magic(D)
 
-/datum/antagonist/cultist/proc/offer_uncult(var/mob/M)
-	if(!iscultist(M) || !M.mind)
-		return
+	if(CULT_REVEAL_CHAPLAIN in to_update)
+		for(var/mob/living/carbon/human/H in SSmobs.mob_list)
+			if(H.mind.assigned_job.is_holy)
+				reveal_cult(H)
 
-	to_chat(M, "<span class='cult'>Do you want to abandon the cult of Nar'Sie? <a href='?src=\ref[src];confirmleave=1'>ACCEPT</a></span>")
+	if(CULT_REVEAL_GLOBAL in to_update)
+		for(var/mob/living/carbon/human/H in SSmobs.mob_list)
+			reveal_cult(H)
 
-/datum/antagonist/cultist/Topic(href, href_list)
-	if(href_list["confirmleave"])
-		cult.remove_antagonist(usr.mind, 1)
+	if(CULT_RADIO_1 in to_update)
+		distort_radio = TRUE
+	if(CULT_RADIO_2 in to_update)
+		distort_announcements = TRUE
+
+	if(CULT_ATHEISTS_CAN_PRAY in to_update)
+		atheist_prayer = TRUE
+
+	if(PRAYER_COOLDOWN_1 in to_update)
+		prayer_cooldown = 1800
+	if(PRAYER_COOLDOWN_2 in to_update)
+		prayer_cooldown = 1600
+	if(PRAYER_COOLDOWN_3 in to_update)
+		prayer_cooldown = 1200
 
 /datum/antagonist/cultist/proc/remove_cultiness(var/amount)
 	cult_rating = max(0, cult_rating - amount)
@@ -187,3 +241,20 @@ var/datum/antagonist/cultist/cult
 	M.verbs -= Tier2Runes
 	M.verbs -= Tier3Runes
 	M.verbs -= Tier4Runes
+
+/datum/antagonist/cultist/proc/reveal_cult(var/mob/living/carbon/human/M)
+	if(M.insanity > -1)
+		return
+	M.insanity = 0
+	to_chat(M, "<span class='danger'>You feel uneasy.</span>") // "[pick("You feel uneasy", "Your suddenly feel scared for a moment", "You have a peculiar feeling, but it passes")]"
+	M.verbs += /mob/living/carbon/human/proc/prayer
+
+/datum/antagonist/cultist/proc/make_neophyte(var/mob/living/carbon/human/M)
+	var/datum/mind/player = M.mind
+	if(!src.can_become_antag(player, 1))
+		return
+
+	if(src.is_antagonist(player))
+		src.remove_antagonist(player, show_message = 0)
+
+	src.add_antagonist_mind(player, 0, src.faction_role_text, src.faction_welcome)

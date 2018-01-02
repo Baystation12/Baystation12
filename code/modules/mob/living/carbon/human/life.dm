@@ -79,6 +79,9 @@
 
 		handle_medical_side_effects()
 
+		if(insanity > -1)
+			handle_insanity()
+
 		if(!client && !mind)
 			species.handle_npc(src)
 

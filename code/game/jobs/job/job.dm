@@ -34,6 +34,7 @@
 
 	var/announced = TRUE                  //If their arrival is announced on radio
 	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
+	var/is_holy = FALSE
 
 	var/hud_icon						  //icon used for Sec HUD overlay
 

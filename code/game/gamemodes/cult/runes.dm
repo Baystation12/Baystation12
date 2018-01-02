@@ -8,6 +8,8 @@
 	plane = ABOVE_TURF_PLANE
 	layer = RUNE_LAYER
 
+	blood_DNA = list("66666666666666666666666666666666")
+
 	var/blood
 	var/bcolor
 	var/strokes = 2 // IF YOU EVER SET THIS TO MORE THAN TEN, EVERYTHING WILL BREAK
@@ -41,6 +43,7 @@
 
 /obj/effect/rune/examine(var/mob/user)
 	. = ..()
+	cult.reveal_cult(user)
 	if(iscultist(user))
 		to_chat(user, "This is \a [cultname] rune.")
 
@@ -55,6 +58,7 @@
 		return
 
 /obj/effect/rune/attack_hand(var/mob/living/user)
+	cult.reveal_cult(user)
 	if(!iscultist(user))
 		to_chat(user, "You can't mouth the arcane scratchings without fumbling over them.")
 		return
@@ -67,6 +71,7 @@
 	cast(user)
 
 /obj/effect/rune/attack_ai(var/mob/living/user) // Cult borgs!
+	cult.reveal_cult(user)
 	if(Adjacent(user))
 		attack_hand(user)
 
@@ -93,11 +98,11 @@
 
 /* Tier 1 runes below */
 
-/obj/effect/rune/convert
-	cultname = "convert"
+/obj/effect/rune/induce
+	cultname = "induce"
 	var/spamcheck = 0
 
-/obj/effect/rune/convert/cast(var/mob/living/user)
+/obj/effect/rune/induce/cast(var/mob/living/user)
 	if(spamcheck)
 		return
 
@@ -114,17 +119,13 @@
 	target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
 
 	to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
-	if(!cult.can_become_antag(target.mind, 1))
-		to_chat(target, "<span class='danger'>Are you going insane?</span>")
-	else
-		to_chat(target, "<span class='cult'>Do you want to join the cult of Nar'Sie? You can choose to ignore offer... <a href='?src=\ref[src];join=1'>Join the cult</a>.</span>")
+	cult.reveal_cult(target)
 
 	spamcheck = 1
 	spawn(40)
 		spamcheck = 0
-		if(!iscultist(target) && target.loc == get_turf(src)) // They hesitated, resisted, or can't join, and they are still on the rune - burn them
+		if(!iscultist(target) && target.loc == get_turf(src))
 			if(target.stat == CONSCIOUS)
-				target.take_overall_damage(0, 10)
 				switch(target.getFireLoss())
 					if(0 to 25)
 						to_chat(target, "<span class='danger'>Your blood boils as you force yourself to resist the corruption invading every corner of your mind.</span>")
@@ -137,11 +138,6 @@
 					if(75 to 100)
 						to_chat(target, "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>")
 						target.take_overall_damage(0, 10)
-
-/obj/effect/rune/convert/Topic(href, href_list)
-	if(href_list["join"])
-		if(usr.loc == loc && !iscultist(usr))
-			cult.add_antagonist(usr.mind, ignore_role = 1, do_not_equip = 1)
 
 /obj/effect/rune/teleport
 	cultname = "teleport"
@@ -352,11 +348,13 @@
 
 /obj/effect/rune/defile/cast(var/mob/living/user)
 	speak_incantation(user, "Ia! Ia! Zasan therium viortia!")
-	for(var/turf/T in range(1, src))
+	for(var/turf/T in view(3, src))
 		if(T.holy)
 			T.holy = 0
-		else
-			T.cultify()
+			continue
+		if(T.density) // No walls
+			continue
+		T.cultify()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
@@ -764,7 +762,7 @@
 	log_and_message_admins_many(cultists, "started summoning Nar-sie.")
 
 	var/area/A = get_area(src)
-	command_announcement.Announce("High levels of bluespace interference detected at \the [A]. Suspected wormhole forming. Investigate it immediately.")
+	command_announcement.Announce("[pick("The Hell is coming. ", "You are all going to die. ")]The end is here. There is no salva- -have to stop them, they are doing it at [A], this is your only cha- -is is hopeless.[pick("", " You cannot escape your destiny.")] You will all die.")
 	while(cultists.len > 4 || the_end_comes)
 		cultists = get_cultists()
 		if(cultists.len > 8)
@@ -786,8 +784,9 @@
 
 	if(the_end_comes >= the_time_has_come)
 		HECOMES = new /obj/singularity/narsie/large(get_turf(src))
+		cult.endgame = TRUE
 	else
-		command_announcement.Announce("Bluespace anomaly has ceased.")
+		command_announcement.Announce("Bluespace anomaly has ceased.") // TODO
 		qdel(src)
 
 /obj/effect/rune/tearreality/attack_hand(var/mob/living/user)
@@ -814,32 +813,3 @@
 	if(the_end_comes)
 		return
 	..()
-
-/* Imbue runes */
-
-/obj/effect/rune/imbue
-	cultname = "otherwordly abomination that shouldn't exist and that you should report to your local god as soon as you see it, along with the instructions for making this"
-	var/papertype
-
-/obj/effect/rune/imbue/cast(var/mob/living/user)
-	var/obj/item/weapon/paper/target
-	var/tainted = 0
-	for(var/obj/item/weapon/paper/P in get_turf(src))
-		if(!P.info)
-			target = P
-			break
-		else
-			tainted = 1
-	if(!target)
-		if(tainted)
-			to_chat(user, "<span class='warning'>The blank is tainted. It is unsuitable.</span>")
-		return fizzle(user)
-	speak_incantation(user, "H'drak v[pick("'","`")]loso, mir'kanas verbot!")
-	visible_message("<span class='warning'>The rune forms into an arcane image on the paper.</span>")
-	new papertype(get_turf(src))
-	qdel(target)
-	qdel(src)
-
-/obj/effect/rune/imbue/emp
-	cultname = "destroy technology imbue"
-	papertype = /obj/item/weapon/paper/talisman/emp
