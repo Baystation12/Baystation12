@@ -513,12 +513,10 @@
 	selection_color = "#5b4d20"
 	alt_titles = list(
 		"Maintenance Assistant",
-		"Mechanical Systems Contractor",
+		"Structural Integrity Specialist",
 		"Electrical Systems Specialist",
 		"Information Systems Technician",
-		"EVA Operations Specialist",
-		"Fusion Systems Technician",
-		"Supermatter Technician",
+		"Reactor Technician",
 		"Life Support Systems Specialist")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
