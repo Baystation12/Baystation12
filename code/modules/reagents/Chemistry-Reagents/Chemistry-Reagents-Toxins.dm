@@ -10,25 +10,17 @@
 	metabolism = REM * 0.25 // 0.05 by default. They last a while and slowly kill you.
 
 	var/target_organ
-	var/strength = 4 // How much damage it deals per unit
+	var/strength = 3 // How much damage it deals per unit
 
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(strength && alien != IS_DIONA)
 		M.add_chemical_effect(CE_TOXIN, strength)
 		var/dam = (strength * removed)
-		if(target_organ && ishuman(M))
+		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/internal/I = H.internal_organs_by_name[target_organ]
-			if(I)
-				var/can_damage = I.max_damage - I.damage
-				if(can_damage > 0)
-					if(dam > can_damage)
-						I.take_damage(can_damage, silent=TRUE)
-						dam -= can_damage
-					else
-						I.take_damage(dam, silent=TRUE)
-						dam = 0
-		if(dam)
+			if(target_organ)
+				H.add_tox_effect(target_organ, strength / 4)
+		else
 			M.adjustToxLoss(target_organ ? (dam * 0.75) : dam)
 
 /datum/reagent/toxin/plasticide
@@ -37,7 +29,7 @@
 	taste_description = "plastic"
 	reagent_state = LIQUID
 	color = "#cf3600"
-	strength = 5
+	strength = 4
 
 /datum/reagent/toxin/amatoxin
 	name = "Amatoxin"
@@ -45,7 +37,7 @@
 	taste_description = "mushroom"
 	reagent_state = LIQUID
 	color = "#792300"
-	strength = 10
+	strength = 6
 
 /datum/reagent/toxin/carpotoxin
 	name = "Carpotoxin"
@@ -54,7 +46,7 @@
 	reagent_state = LIQUID
 	color = "#003333"
 	target_organ = BP_BRAIN
-	strength = 10
+	strength = 6
 
 /datum/reagent/toxin/phoron
 	name = "Phoron"
@@ -62,7 +54,7 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#ff3300"
-	strength = 30
+	strength = 15
 	touch_met = 5
 	var/fire_mult = 5
 
@@ -72,7 +64,7 @@
 	reagent_state = LIQUID
 	taste_description = "bleach"
 	color = "#707C13"
-	strength = 15
+	strength = 8
 	metabolism = REM
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)

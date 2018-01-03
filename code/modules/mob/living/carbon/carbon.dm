@@ -477,3 +477,15 @@
 	for(var/source in stasis_sources)
 		stasis_value += stasis_sources[source]
 	stasis_sources.Cut()
+
+/mob/living/carbon/proc/add_filter_effect(var/effect, var/magnitude = 1)
+	return
+
+/mob/living/carbon/proc/add_up_to_filter_effect(var/effect, var/magnitude = 1)
+	return
+
+/mob/living/carbon/proc/add_tox_effect(var/effect, var/magnitude = 1)
+	return
+
+/mob/living/carbon/proc/add_up_to_tox_effect(var/effect, var/magnitude = 1)
+	return

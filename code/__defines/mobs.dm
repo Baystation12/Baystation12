@@ -271,8 +271,24 @@
 #define STASIS_COLD "cold"
 
 #define AURA_CANCEL 1
-#define AURA_FALSE  2 
-#define AURA_TYPE_BULLET "Bullet" 
-#define AURA_TYPE_WEAPON "Weapon" 
-#define AURA_TYPE_THROWN "Thrown" 
+#define AURA_FALSE  2
+#define AURA_TYPE_BULLET "Bullet"
+#define AURA_TYPE_WEAPON "Weapon"
+#define AURA_TYPE_THROWN "Thrown"
 #define AURA_TYPE_LIFE   "Life"
+
+#define TOX_GENERAL "tox_gen"
+
+#define TOX_GENERAL_THRESHOLD 20
+#define TOX_GENERAL_MAX 200
+
+#define TOX_PASSIVE_BUILDUP 2
+
+#define FILT_PRIO_BRAIN     1
+#define FILT_PRIO_HEART     2
+#define FILT_PRIO_RESP      3
+#define FILT_PRIO_VITAL     4
+#define FILT_PRIO_NONVITAL  5
+#define FILT_PRIO_FILTER    6
+
+#define ORGAN_HEAL_THRESHOLD 6

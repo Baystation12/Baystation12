@@ -52,6 +52,7 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#ff8000"
+	metabolism = REM * 2
 	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -62,30 +63,60 @@
 
 /datum/reagent/dylovene
 	name = "Dylovene"
-	description = "Dylovene is a broad-spectrum antitoxin used to neutralize poisons before they can do significant harm."
+	description = "Dylovene acts like a shield to assist in protecting internal organs from the effects of toxin buildup."
 	taste_description = "a roll of gauze"
 	reagent_state = LIQUID
 	color = "#00a000"
 	scannable = 1
-	flags = IGNORE_MOB_SIZE
-	var/static/list/remove_toxins = list(
-		/datum/reagent/toxin/zombiepowder
-	)
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
 	M.drowsyness = max(0, M.drowsyness - 6 * removed)
 	M.adjust_hallucination(-9 * removed)
+	M.add_filter_effect(TOX_GENERAL, 1)
 	M.add_up_to_chemical_effect(CE_ANTITOX, 1)
+
+/datum/reagent/hytritium
+	name = "Hytritium"
+	description = "Hytritium has been formulated to remove unnatural reagents in humans."
+	taste_description = "bitterness"
+	reagent_state = LIQUID
+	color = "#94dd94"
+	metabolism = REM * 0.5
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+	overdose = REAGENTS_OVERDOSE
+	var/static/list/remove_exclude = list(
+		/datum/reagent/hormone,
+		/datum/reagent/hytritium,
+		/datum/reagent/dylovene
+		)
+
+/datum/reagent/hytritium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+
+	if(alien == IS_NABBER)
+		M.add_chemical_effect(CE_TOXIN, 2)
+		return
+
+	M.add_chemical_effect(CE_PULSE, 1)
+	M.add_chemical_effect(CE_BREATHLOSS, 1)
+
+	var/list/all_exclude = list()
+
+	for(var/reagent_path in remove_exclude)
+		all_exclude ^= typesof(reagent_path)
 
 	var/removing = (4 * removed)
 	for(var/datum/reagent/R in M.ingested.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+		if(!(R.type in all_exclude))
 			M.ingested.remove_reagent(R.type, removing)
 			return
 	for(var/datum/reagent/R in M.reagents.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+		if(!(R.type in all_exclude))
 			M.reagents.remove_reagent(R.type, removing)
 			return
 

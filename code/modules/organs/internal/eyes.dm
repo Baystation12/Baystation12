@@ -74,3 +74,8 @@
 
 /obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
 	return -1
+
+/obj/item/organ/internal/eyes/take_tox(var/amount)
+	if(prob(amount * 2))
+		to_chat(owner, "<span class='warning'>Your eyes sting and burn.</span>")
+	..()

@@ -540,6 +540,137 @@
 
 	return //TODO: DEFERRED
 
+#define GET_TOX(N, L) log(10, max(0.1, (N - (N % L)) / L - (TOX_GENERAL_THRESHOLD / L))) / 1.5
+
+/mob/living/carbon/human/handle_toxins()
+	if(!internal_organs.len)	return
+	add_tox_effect(TOX_GENERAL, TOX_PASSIVE_BUILDUP + chem_effects[CE_TOXIN])
+	// Takes filter stuff away directly from bodypart specific toxins.
+	for(var/m in tox_add)
+		if(tox_filter[m])
+			tox_add[m] = tox_add[m] - tox_filter[m]
+			tox_filter -= m
+		if(tox_add[m] <= 0)
+			tox_filter[m] = -tox_add[m]
+			tox_add -= m
+
+	tox_buildup[TOX_GENERAL] = min(tox_buildup[TOX_GENERAL] + tox_add[TOX_GENERAL], TOX_GENERAL_MAX)
+	for(var/m in tox_add)
+		var/target = m
+		if(!should_have_organ(m))
+			continue
+		else
+			var/obj/item/organ/internal/O = internal_organs_by_name[m]
+			if(O.status & ORGAN_DEAD)
+				target = TOX_GENERAL
+		if(tox_buildup[m])
+			tox_buildup[target] += tox_add[m]
+		else
+			tox_buildup[target] = tox_add[m]
+
+		if(tox_buildup[target] > TOX_GENERAL_MAX)
+			tox_buildup[target] = TOX_GENERAL_MAX
+
+	if(chem_effects[CE_ANTITOX])
+		add_filter_effect(TOX_GENERAL, chem_effects[CE_ANTITOX])
+
+	var/general_filter = 0
+	for(var/m in tox_filter)
+		general_filter += tox_filter[m]
+
+	var/tox_mitigate = general_filter
+
+	var/total_tox = 0
+	for(var/m in tox_buildup)
+		total_tox += tox_buildup[m]
+
+	if(total_tox <= general_filter)
+		for(var/obj/item/organ/internal/I in internal_organs)
+
+			if(I.is_damaged() && I.damage < ORGAN_HEAL_THRESHOLD && prob(10))
+				I.damage -= 1
+		tox_filter.Cut()
+		tox_buildup.Cut()
+		tox_add.Cut()
+		return
+
+	var/list/poison_organs = internal_organs.Copy()
+	for(var/obj/item/organ/internal/O in poison_organs)
+		if(O.status & ORGAN_DEAD)
+			poison_organs -= O
+
+	var/list/dam_order = list()
+	for(var/i = 1, i <= FILT_PRIO_FILTER && poison_organs.len, i++)
+		var/temp_list = list()
+		for(var/obj/item/organ/internal/O in poison_organs)
+			if(O.filter_priority == i)
+				temp_list += O
+				poison_organs -= O
+		dam_order += shuffle(temp_list)
+
+	var/general_tox = 0
+	if(tox_buildup[TOX_GENERAL] && tox_buildup[TOX_GENERAL] > TOX_GENERAL_THRESHOLD)
+		general_tox = GET_TOX(tox_buildup[TOX_GENERAL], dam_order.len)
+
+	poison_organs.Cut()
+
+	for(var/obj/item/organ/internal/O in dam_order)
+		poison_organs[O.organ_tag] = general_tox
+
+	if(general_filter)
+		for(var/m in poison_organs)
+			poison_organs[m] = poison_organs[m] - general_filter
+			if(poison_organs[m] < 0)
+				general_filter = -poison_organs[m]
+				poison_organs[m] = 0
+			else
+				general_filter = 0
+				break
+
+	tox_buildup[TOX_GENERAL] = tox_buildup[TOX_GENERAL] - (tox_mitigate - general_filter)
+	tox_mitigate = general_filter
+
+	for(var/m in tox_buildup)
+		if(m == TOX_GENERAL)
+			continue
+		if(isnull(poison_organs[m]))
+			add_tox_effect(TOX_GENERAL, tox_buildup[m])
+			continue
+		var/dam = GET_TOX(tox_buildup[m], poison_organs.len)
+		poison_organs[m] = max(dam, dam + poison_organs[m])
+
+	if(general_filter)
+		for(var/m in poison_organs)
+			if(poison_organs[m])
+				var/mitigated = poison_organs[m]
+				poison_organs[m] = poison_organs[m] - general_filter
+				if(poison_organs[m] < 0)
+					general_filter = -poison_organs[m]
+					poison_organs[m] = 0
+					tox_buildup[m] -= mitigated
+				else
+					tox_buildup[m] -= general_filter
+					general_filter = 0
+					break
+
+	for(var/m in poison_organs)
+		var/obj/item/organ/internal/O = internal_organs_by_name[m]
+		O.take_tox(poison_organs[m])
+
+	while(general_filter > 0.1)
+		tox_mitigate = general_filter / tox_buildup.len
+		general_filter = 0
+		for(var/m in tox_buildup)
+			tox_buildup[m] = tox_buildup[m] - tox_mitigate
+			if(tox_buildup[m] < 0)
+				general_filter -= tox_buildup[m]
+				tox_buildup -= m
+
+	tox_filter.Cut()
+	tox_add.Cut()
+
+#undef GET_TOX
+
 // Check if we should die.
 /mob/living/carbon/human/proc/handle_death_check()
 	if(should_have_organ(BP_BRAIN))

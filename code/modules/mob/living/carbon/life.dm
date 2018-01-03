@@ -18,6 +18,9 @@
 		//Chemicals in the body
 		handle_chemicals_in_body()
 
+		//Toxin handling
+		handle_toxins()
+
 		//Random events (vomiting etc)
 		handle_random_events()
 

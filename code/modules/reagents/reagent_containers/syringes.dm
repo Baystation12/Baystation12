@@ -375,5 +375,5 @@
 
 /obj/item/weapon/reagent_containers/syringe/steroid/New()
 	..()
-		reagents.add_reagent(/datum/reagent/hormone/adrenaline,5)
+	reagents.add_reagent(/datum/reagent/hormone/adrenaline,5)
 	reagents.add_reagent(/datum/reagent/hyperzine, 10)

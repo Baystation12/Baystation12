@@ -9,6 +9,9 @@
 	var/list/datum/language/assists_languages = list()
 	var/min_bruised_damage = 10       // Damage before considered bruised
 
+	var/filter_strength = 0   // How much toxin this organ filters from the blood
+	var/filter_priority = FILT_PRIO_NONVITAL  // How high on the priority list this organ is to have toxins removed (lower is better)
+
 /obj/item/organ/internal/New(var/mob/living/carbon/holder)
 	if(max_damage)
 		min_bruised_damage = Floor(max_damage / 4)
@@ -34,6 +37,18 @@
 		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
 		if(istype(E)) E.internal_organs -= src
 	return ..()
+
+/obj/item/organ/internal/Process()
+	..()
+
+	if(!owner)
+		return
+
+	if(filter_strength && !(status & ORGAN_DEAD))
+		if(is_bruised())
+			owner.add_filter_effect(organ_tag, filter_strength / 2)
+		else if(is_usable())
+			owner.add_filter_effect(organ_tag, filter_strength)
 
 //disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
 //TODO move this to organ/internal once the FPB port comes through
@@ -101,11 +116,6 @@
 	min_bruised_damage += 5
 	min_broken_damage += 10
 
-/obj/item/organ/internal/proc/getToxLoss()
-	if(isrobotic())
-		return damage * 0.5
-	return damage
-
 /obj/item/organ/internal/proc/bruise()
 	damage = max(damage, min_bruised_damage)
 
@@ -114,6 +124,11 @@
 
 /obj/item/organ/internal/proc/is_bruised()
 	return damage >= min_bruised_damage
+
+/obj/item/organ/internal/proc/take_tox(var/amount)
+	if(amount > 0)
+		take_damage(amount)
+
 
 /obj/item/organ/internal/take_damage(amount, var/silent=0)
 	if(isrobotic())

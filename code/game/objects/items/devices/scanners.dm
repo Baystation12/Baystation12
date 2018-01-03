@@ -139,7 +139,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	if(H.getOxyLoss() > 50)
 		. += "<font color='blue'><b>Severe oxygen deprivation detected.</b></font>"
 	if(H.getToxLoss() > 50)
-		. += "<font color='green'><b>Major systemic organ failure detected.</b></font>"
+		. += "<font color='green'><b>Major systemic toxin buildup detected.</b></font>"
 	if(H.getFireLoss() > 50)
 		. += "<font color='#ffa500'><b>Severe burn damage detected.</b></font>"
 	if(H.getBruteLoss() > 50)

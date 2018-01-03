@@ -82,6 +82,7 @@
 	dexalin_p	spawn_reagent = /datum/reagent/dexalinp
 	tricord		spawn_reagent = /datum/reagent/tricordrazine
 	dylovene	spawn_reagent = /datum/reagent/dylovene
+	hytritium	spawn_reagent = /datum/reagent/hytritium
 	synaptizine	spawn_reagent = /datum/reagent/synaptizine
 	hyronalin	spawn_reagent = /datum/reagent/hyronalin
 	arithrazine	spawn_reagent = /datum/reagent/arithrazine
@@ -97,3 +98,6 @@
 	chloral		spawn_reagent = /datum/reagent/chloralhydrate
 	cryoxadone	spawn_reagent = /datum/reagent/cryoxadone
 	clonexadone	spawn_reagent = /datum/reagent/clonexadone
+
+	// Toxins
+	toxin		spawn_reagent = /datum/reagent/toxin
