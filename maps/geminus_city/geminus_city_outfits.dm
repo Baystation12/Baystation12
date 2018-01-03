@@ -28,6 +28,7 @@
 /decl/hierarchy/outfit/job/colonist/equip_id(mob/living/carbon/human/H)
 	var/obj/item/weapon/card/id/C = ..()
 	C.assignment = "Colonist"
+	H.set_id_info(C)
 
 /decl/hierarchy/outfit/job/colonist/proc/equip_special(mob/living/carbon/human/H)
 	if(prob(25))
@@ -49,7 +50,7 @@
 
 	. = ..()
 
-/decl/hierarchy/outfit/job/innie_sympathiser
+/decl/hierarchy/outfit/job/colonist/innie_sympathiser
 	name = "Insurrectionist Sympathiser"
 
 	mask = /obj/item/clothing/mask/innie/shemagh
