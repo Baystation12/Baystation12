@@ -3,7 +3,7 @@
 
 /datum/category_item/player_setup_item/player_global/settings
 	name = "Settings"
-	sort_order = 2
+	sort_order = 5
 
 /datum/category_item/player_setup_item/player_global/settings/load_preferences(var/savefile/S)
 	from_file(S["lastchangelog"], pref.lastchangelog)
