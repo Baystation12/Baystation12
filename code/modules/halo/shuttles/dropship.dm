@@ -28,6 +28,13 @@
 	var/obj/target_location
 	var/obj/effect/landmark/dropship_land_point/current_location
 
+/obj/structure/dropship/proc/generate_current_landpoint()
+	if(current_location)
+		return
+	for(var/turf/T in locs)
+		for(var/obj/effect/landmark/dropship_land_point/L in T.contents)
+			current_location = L
+
 /obj/structure/dropship/proc/assign_pilot(var/mob/user,var/override)
 	if(!pilot || override)
 		unassign_pilot(pilot)
@@ -110,6 +117,7 @@
 	reachable_landing_locations = possible_land_locations
 
 /obj/structure/dropship/proc/change_landing_location(var/obj/new_land_location)
+	generate_current_landpoint()
 	target_location = new_land_location
 	if(pilot)
 		to_chat(pilot,"<span class = 'warning'>Landing target changed to [target_location.name]</span>")
