@@ -10,6 +10,7 @@
 	spawn_positions = 1
 	selection_color = "#777777"
 	req_admin_notify = 1
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/CO
 	//job_guide = "Commander on deck! This is your ship, and your word is law. Subject matter experts have theoretical authority in their area of expertise, but otherwise everyone on the ship is a tool to complete the mission and the more that go home the better."
 
 	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,

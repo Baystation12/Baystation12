@@ -10,7 +10,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/gunnery
-	name = "Crew Chief (Gunnery)"
+	name = "Gunnery Specialist"
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/tactical
