@@ -11,8 +11,12 @@
 
 	#include "geminus_city_outfits.dm"
 	#include "geminus_city_jobs.dm"
+	#include "geminus_city_spawns.dm"
+
+	#include "../insurrection/unsc_staging_areas.dm"
 
 	#include "geminuscity_2.dmm"
+	#include "unsc_staging.dmm"
 
 	#define using_map_DATUM /datum/map/geminus_city
 

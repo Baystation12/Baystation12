@@ -2531,7 +2531,6 @@
 #include "maps\far_isle\far_isle_turfs.dm"
 #include "maps\geminus_city\geminus_city.dm"
 #include "maps\geminus_city\geminus_city_map.dm"
-#include "maps\geminus_city\geminus_city_spawns.dm"
 #include "maps\insurrection\innie_base_map.dm"
 #include "maps\insurrection\insurrection.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
