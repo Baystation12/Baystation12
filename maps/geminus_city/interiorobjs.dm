@@ -56,7 +56,7 @@
 		if (H.hand)
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			H << "<span class='notice'>You try to move your [temp.name], but cannot!"
+			to_chat(H,"<span class='notice'>You try to move your [temp.name], but cannot!</span>")
 			return
 
 	if(user.a_intent == "hurt")

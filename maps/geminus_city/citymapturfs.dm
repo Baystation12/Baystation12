@@ -1,3 +1,5 @@
+/datum/map/geminus_city
+	base_turf_by_z = list("1" = /turf/simulated/floor/planet/dirt)
 
 /turf/simulated/floor/pavement
 	name = "Pavement"

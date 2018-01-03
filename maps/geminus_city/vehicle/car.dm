@@ -49,11 +49,11 @@
 	if(on && cell.charge < charge_use)
 		turn_off()
 		if(load)
-			load << "<span class='warning'>The engine briefly whines, then drones to a stop.</span>"
+			to_chat(load,"<span class='warning'>The engine briefly whines, then drones to a stop.</span>")
 	if(on && health <= 10)
 		turn_off()
 		if(load)
-			load << "<span class='warning'>The engine makes a loud clanking noise before going quiet.</span>"
+			to_chat(load,"<span class='warning'>The engine makes a loud clanking noise before going quiet.</span>")
 	if(!on)
 		return 0
 
@@ -112,7 +112,7 @@
 		M.apply_effects(5, 5)				//||knock people down if you hit them
 		M.apply_damages(20 / move_delay)	//||and do damage according to how fast the car is going
 		if(istype(load, /mob/living/carbon/human))
-			D << "<span class='userdanger'>You hit [M]!</span>"
+			to_chat(D,"<span class='userdanger'>You hit [M]!</span>")
 			add_logs(D, M, "hit", src)
 			msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 		return
@@ -125,7 +125,7 @@
 		src.take_damage(15 / move_delay)	//||and do damage according to how fast the car is going
 		if(istype(C.load, /mob/living/carbon/human))
 			var/mob/living/L = C.load
-			D << "<span class='userdanger'>You hit [C]!</span>"
+			to_chat(D,"<span class='userdanger'>You hit [C]!</span>")
 			add_logs(D, L, "hit","[load]'s [C]", src)
 			msg_admin_attack("[D.name] ([D.ckey]) hit [L.name]([L.ckey])'s \the [C] with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 		return
@@ -177,7 +177,7 @@
 			src.take_damage(1)
 			return
 
-		if(lastbumped != Obstacle) load << "<span class='userdanger'>You crash [src] into the [A]!</span>"
+		if(lastbumped != Obstacle) to_chat(load,"<span class='userdanger'>You crash [src] into the [A]!</span>")
 		src.take_damage(1)
 		return
 
@@ -210,9 +210,9 @@
 	//okay, so the trunk is shut... resist!!!
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
-	user << "<span class='notice'>You lean against the roof of [src]'s trunk and start forcing it open. (this will take about [breakout_time] minutes.)</span>"
+	to_chat(user,"<span class='notice'>You lean against the roof of [src]'s trunk and start forcing it open. (this will take about [breakout_time] minutes.)</span>")
 	for(var/mob/O in hearers(src))
-		O << "<span class='warning'>You hear a banging sound coming from [src]'s trunk!</span>"
+		to_chat(O,"<span class='warning'>You hear a banging sound coming from [src]'s trunk!</span>")
 	if(do_after(user,(breakout_time*60*10), target = src)) //minutes * 60seconds * 10deciseconds
 		if(!user || user.stat != CONSCIOUS || user.loc != src || trunk_open )
 			return
@@ -223,7 +223,7 @@
 		unload(trunk, "trunk")
 		trunk_opened()
 	else
-		user << "<span class='warning'>You fail to break out of [src]'s trunk!</span>"
+		to_chat(user,"<span class='warning'>You fail to break out of [src]'s trunk!</span>")
 
 //-------------------------------------------
 // Car procs
@@ -282,20 +282,20 @@
 /obj/vehicle/car/swap(mob/M)
 	if(M == load)
 		if(passenger)
-			M << "<span class='warning'>The passenger's seat is already occupied!</span>"
+			to_chat(M,"<span class='warning'>The passenger's seat is already occupied!</span>")
 			return
 		unload(M, "driver")
 		load(M, "passenger")
-		M << "<span class='notice'>You climb into the passenger's seat.</span>"
+		to_chat(M,"<span class='notice'>You climb into the passenger's seat.</span>")
 		update_dir_car_overlays()
 		return
 	if(M == passenger)
 		unload(M, "passenger")
 		if(load)
-			M << "<span class='warning'>The driver's seat is already occupied!</span>"
+			to_chat(M,"<span class='warning'>The driver's seat is already occupied!</span>")
 			return
 		load(M, "driver")
-		M << "<span class='notice'>You climb into the driver's seat.</span>"
+		to_chat(M,"<span class='notice'>You climb into the driver's seat.</span>")
 		update_dir_car_overlays()
 		return
 
@@ -325,28 +325,28 @@
 		var/mob/living/carbon/human/H = passenger
 		animate(H, pixel_x = passenger_offset_x + pixel_x_diff, pixel_y = passenger_offset_y + pixel_y_diff, time = 5, loop = 1, easing = ELASTIC_EASING)
 		H.adjustBruteLossByPart(3,"head")
-		H << "<span class='userdanger'>Your head bangs against the dashboard!</span>"
+		to_chat(H,"<span class='userdanger'>Your head bangs against the dashboard!</span>")
 		shake_camera(H, 3, 1)
 	if(load && ismob(load))
 		var/mob/living/carbon/human/H = load
 		animate(H, pixel_x = mob_offset_x + pixel_x_diff, pixel_y = mob_offset_y + pixel_y_diff, time = 5, loop = 1, easing = ELASTIC_EASING)
 		H.adjustBruteLossByPart(3,"head")
-		H << "<span class='userdanger'>Your head bangs against the dashboard!</span>"
+		to_chat(H,"<span class='userdanger'>Your head bangs against the dashboard!</span>")
 		shake_camera(H, 3, 1)
 	if(trunk && ismob(trunk))
 		var/mob/living/carbon/human/H = trunk
 		if(trunk_open)
-			H << "<span class='userdanger'>You fall out of the trunk!</span>"
+			to_chat(H,"<span class='userdanger'>You fall out of the trunk!</span>")
 			H.take_overall_damage(3,0)
 			shake_camera(H, 3, 1)
 			unload(H, "trunk")
 			H.Weaken(3)
 		else
-			H << "<span class='userdanger'>Your body slams against something!</span>"
+			to_chat(H,"<span class='userdanger'>Your body slams against something!</span>")
 			H.take_overall_damage(1,0)
 			shake_camera(H, 3, 1)
 			for(var/mob/O in hearers(src))
-				O << "<span class='warning'>You hear a loud thud. It sounded like it was coming from [src]'s trunk!</span>"
+				to_chat(O,"<span class='warning'>You hear a loud thud. It sounded like it was coming from [src]'s trunk!</span>")
 
 //-------------------------------------------
 // Interaction procs
@@ -367,11 +367,11 @@
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
-	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
-	user << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
-	user << "Car integrity is at [health? round(100.0*health/maxhealth, 0.01) : 0]%"
+	to_chat(user,"The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition.")
+	to_chat(user,"The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%")
+	to_chat(user,"Car integrity is at [health? round(100.0*health/maxhealth, 0.01) : 0]%")
 	if(trunk_open)
-		user << "<span class='notice'>The trunk has been left open.</span>"
+		to_chat(user,"<span class='notice'>The trunk has been left open.</span>")
 
 //-------------------------------------------------------
 // Verbs
@@ -389,7 +389,7 @@
 		return
 
 	if(on)
-		usr << "<span class='warning'>The engine is already running.</span>"
+		to_chat(usr,"<span class='warning'>The engine is already running.</span>")
 		return
 
 	if(!spam_flag)
@@ -398,16 +398,16 @@
 		turn_on()
 		if (on)
 			playsound(src.loc, engine_start, 80, 0, 10)
-			usr << "<span class='notice'>You start [src]'s engine.</span>"
+			to_chat(usr,"<span class='notice'>You start [src]'s engine.</span>")
 			spawn(cooldowntime)
 				spam_flag = 0
 		else
 			if(cell.charge < charge_use)
-				usr << "<span class='warning'>[src] is out of power.</span>"
+				to_chat(usr,"<span class='warning'>[src] is out of power.</span>")
 			else
 				spam_flag = 1
 				cooldowntime = 50
-				usr << "<span class='warning'>[src]'s engine won't start.</span>"
+				to_chat(usr,"<span class='warning'>[src]'s engine won't start.</span>")
 				playsound(src.loc, engine_fail, 80, 0, 10)
 				spawn(cooldowntime)
 					spam_flag = 0
@@ -424,12 +424,12 @@
 		return
 
 	if(!on)
-		usr << "<span class='warning'>The engine is already stopped.</span>"
+		to_chat(usr,"<span class='warning'>The engine is already stopped.</span>")
 		return
 
 	turn_off()
 	if (!on)
-		usr << "<span class='notice'>You stop [src]'s engine.</span>"
+		to_chat(usr,"<span class='notice'>You stop [src]'s engine.</span>")
 
 /obj/vehicle/car/verb/remove_key()
 	set name = "Remove key"
@@ -475,7 +475,7 @@
 		spam_flag = 1
 		cooldowntime = 10
 		if(trunk_opened())
-			usr << "<span class='notice'>You pop open the trunk.</span>"
+			to_chat(usr,"<span class='notice'>You pop open the trunk.</span>")
 			playsound(src.loc, 'sound/vehicles/boot-open.ogg', 100, 0, 22050)
 			spawn(cooldowntime)
 				spam_flag = 0
@@ -493,7 +493,7 @@
 		spam_flag = 1
 		cooldowntime = 10
 		if(trunk_closed())
-			usr << "<span class='notice'>You close the trunk.</span>"
+			to_chat(usr,"<span class='notice'>You close the trunk.</span>")
 			playsound(src.loc, 'sound/vehicles/boot-shut.ogg', 100, 0, 22050)
 			spawn(cooldowntime)
 				spam_flag = 0
@@ -510,11 +510,11 @@
 		return
 
 	if(!on)
-		usr << "<span class='warning'>Turn on the engine.</span>"
+		to_chat(usr,"<span class='warning'>Turn on the engine.</span>")
 		return
 
 	honk_horn()
-	usr << "<span class='notice'>You honk the horn. Hmm...must be broken.</span>"
+	to_chat(usr,"<span class='notice'>You honk the horn. Hmm...must be broken.</span>")
 
 
 //-------------------------------------------
@@ -526,7 +526,7 @@
 		return 0
 
 	if(!istype(C, /mob/living/carbon/human))
-		usr << "<span class='notice'>You load [C] into the trunk.</span>"
+		to_chat(usr,"<span class='notice'>You load [C] into the trunk.</span>")
 	switch(who)
 		if("driver")
 			if(load) return 0

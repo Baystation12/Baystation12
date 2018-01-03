@@ -10,8 +10,6 @@
 	lobby_icon = 'code/modules/halo/splashworks/title6.png'
 	id_hud_icons = 'maps/insurrection/insurrection_hud_icons.dmi'
 
-	base_turf_by_z = list("1" = /turf/simulated/floor/planet/dirt)
-
 	station_name  = "Geminus City"
 	station_short = "Geminus"
 	dock_name     = "Landing Pad"
