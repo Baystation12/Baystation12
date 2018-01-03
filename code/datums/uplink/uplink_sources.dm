@@ -1,3 +1,5 @@
+#define NO_GUARANTEE_NO_EXTRA_COST_DESC(X) "Installs an uplink into " + X + " if, and only if, found on your person. Has no TC cost."
+
 GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	/decl/uplink_source/pda,
 	/decl/uplink_source/radio,
@@ -12,6 +14,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /decl/uplink_source/pda
 	name = "PDA"
+	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a PDA")
 
 /decl/uplink_source/pda/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/device/pda/P = find_in_mob(M, /obj/item/device/pda)
@@ -27,6 +30,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /decl/uplink_source/radio
 	name = "Radio"
+	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a radio")
 
 /decl/uplink_source/radio/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/device/radio/R = find_in_mob(M, /obj/item/device/radio)
@@ -53,7 +57,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /decl/uplink_source/implant
 	name = "Implant"
-	desc = "Teleports an uplink implant into your head, costing at least half the initial TC amount."
+	desc = "Teleports an uplink implant into your head. Costs at least half the initial TC amount."
 
 /decl/uplink_source/implant/setup_uplink_source(var/mob/living/carbon/human/H, var/amount)
 	if(!istype(H))
@@ -74,7 +78,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /decl/uplink_source/unit
 	name = "Uplink Unit"
-	desc = "Teleports an uplink unit to your location, costing 10% of the initial TC amount."
+	desc = "Teleports an uplink unit to your location. Costs 10% of the initial TC amount."
 
 /decl/uplink_source/unit/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/device/radio/uplink/U = new(M, M.mind, round(amount * 0.9))
@@ -128,3 +132,5 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 	to_chat(M, "<span class='warning'>Either by choice or circumstance you will be without an uplink.</span>")
 	return FALSE
+
+#undef NO_EXTRA_COST_NO_GUARANTEE_DESC
