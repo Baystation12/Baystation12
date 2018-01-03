@@ -5,6 +5,9 @@
 #define BOMB_ACTIVE -1
 #define ROUND_ENDED -2
 
+#define WARN_BOMB 2
+#define WARN_GENERAL 1
+
 /datum/game_mode/insurrection
 	name = "Insurrection"
 	round_description = "The UNSC has located an Insurrection base..."
@@ -15,6 +18,7 @@
 	var/prepare_time =  5 MINUTES //The amount of time the insurrectionists have to prepare for the ODST assault, in ticks
 	var/last_assault = 0 //This is also set to -1 when a bomb is active.
 	var/autolaunchtime = 12 MINUTES //At runtime, this stores the time in ticks after roundstart will launch at.
+	var/pods_launched = 0
 	var/warned = 0 //To stop bomb detonation warning spam
 
 /datum/game_mode/insurrection/proc/lockdown_bombs()
@@ -68,7 +72,7 @@
 	last_assault = TRUE
 	deny_respawn = 1 //No more respawn
 	modify_pod_launch(1)
-	warned = 1
+	warned = WARN_GENERAL
 
 /datum/game_mode/insurrection/proc/check_pods_left()
 	return remaining_pods.len
@@ -107,10 +111,14 @@
 	for(var/obj/payload/b in bombs)
 		if(b.exploding == 1)
 			last_assault = BOMB_ACTIVE
-		if((((b.explode_at - world.time)/10) <b.seconds_to_disarm) && (!warned))
+		if(!b.exploding)
+			return 0
+		if(!b.explode_at)
+			return 0
+		if((((b.explode_at - world.time)/10) <b.seconds_to_disarm) && (warned != WARN_BOMB))
 			message_faction("UNSC","<span class = 'danger'>Insurrectionist self destruct nearing time of detonation. Exfiltration craft arriving at evacuation wing.</span>")
 			message_faction("Insurrection","<span class='danger'>Integrated self destruct device reports nearing time of detonation. Relocate all personnel to the evacuation wing.</span>")
-			warned = TRUE
+			warned = WARN_BOMB
 
 /datum/game_mode/insurrection/proc/bomb_exploded()
 	if(last_assault == BOMB_ACTIVE)
@@ -152,15 +160,14 @@
 	if(bombs[1] < world.time)
 		update_bomb_status()
 		update_bomb_timer()
-	if(autolaunchtime < world.time)
-		if(!warned)
-			message_faction("UNSC","<span class = 'danger'>Assault pods auto-locked..</span>")
+	if(autolaunchtime < world.time && !pods_launched)
+		message_faction("UNSC","<span class = 'danger'>Assault pods auto-locked..</span>")
+		pods_launched = 1
 		for(var/obj/structure/drop_pods/p in remaining_pods)
 			p.launched = 1
 			remaining_pods -= p
 			update_pod_status()
-		warned = 1
-	if((check_pods_left() == 0) && (world.time > autolaunchtime) && (!warned))
+	if((check_pods_left() == 0) && (world.time > autolaunchtime) && (warned != WARN_GENERAL))
 		inform_last_assault()
 		last_assault()
 
@@ -184,6 +191,12 @@
 			return 1
 	else
 		return 0
+
+#undef BOMB_ACTIVE
+#undef ROUND_ENDED
+
+#undef WARN_BOMB
+#undef WARN_GENERAL
 
 #undef LAUNCH_ABORTED
 #undef LAUNCH_UNDERWAY

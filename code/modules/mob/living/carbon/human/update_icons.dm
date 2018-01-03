@@ -605,6 +605,10 @@ var/global/list/damage_icon_parts = list()
 			hud_used.hidden_inventory_update() 	//Updates the screenloc of the items on the 'other' inventory bar
 
 
+/mob/living/carbon/human/proc/apply_hand_offsets(var/image/image)
+	image.pixel_x = species.item_icon_offsets[1]
+	image.pixel_y = species.item_icon_offsets[2]
+
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)
 		overlays_standing[HANDCUFF_LAYER] = handcuffed.get_mob_overlay(src,slot_handcuffed_str)
@@ -615,6 +619,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_r_hand(var/update_icons=1)
 	if(r_hand)
 		var/image/standing = r_hand.get_mob_overlay(src,slot_r_hand_str)
+		apply_hand_offsets(standing)
 		if(standing)
 			standing.appearance_flags |= RESET_ALPHA
 		overlays_standing[R_HAND_LAYER] = standing
@@ -629,6 +634,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_l_hand(var/update_icons=1)
 	if(l_hand)
 		var/image/standing = l_hand.get_mob_overlay(src,slot_l_hand_str)
+		apply_hand_offsets(standing)
 		if(standing)
 			standing.appearance_flags |= RESET_ALPHA
 		overlays_standing[L_HAND_LAYER] = standing

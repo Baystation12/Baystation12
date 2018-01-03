@@ -19,6 +19,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	wander = 0
 	melee_damage_lower = 5
 	melee_damage_upper = 10
+	var/datum/flood_spawner/flood_spawner
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()
@@ -56,6 +57,12 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 			stop_automated_movement = 0
 		else
 			wander = 0
+
+/mob/living/simple_animal/hostile/flood/death()
+	. = ..()
+	if(flood_spawner)
+		flood_spawner.flood_die(src)
+		flood_spawner = null
 
 /mob/living/simple_animal/hostile/flood/infestor
 	name = "Flood infestor"

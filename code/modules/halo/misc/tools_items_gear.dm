@@ -43,8 +43,7 @@
 		/obj/item/weapon/storage/pill_bottle/inaprovaline,
 		/obj/item/weapon/reagent_containers/syringe/biofoam,
 		/obj/item/weapon/reagent_containers/syringe/biofoam,
-		/obj/item/weapon/reagent_containers/syringe/biofoam,
-		/obj/item/weapon/reagent_containers/syringe/biofoam,
+		/obj/item/weapon/storage/pill_bottle/iron,
 		/obj/item/weapon/storage/pill_bottle/tramadol,
 		/obj/item/device/healthanalyzer
 		)

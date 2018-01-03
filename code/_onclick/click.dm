@@ -114,14 +114,20 @@
 		trigger_aiming(TARGET_CAN_CLICK)
 		return 1
 
-	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
+	if(!istype(loc,/obj/vehicles) && !isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
 
 	//Atoms on turfs (not on your person)
 	// A is a turf or is on a turf, or in something on a turf (pen in a box); but not something in something on a turf (pen in a box in a backpack)
 	sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
-		if(A.Adjacent(src)) // see adjacent.dm
+		var/adjacent = FALSE
+		for(var/turf/T in locs) //Now supports multi-tile mob melee
+			if(A.Adjacent(T)) // see adjacent.dm
+				adjacent = TRUE
+				break
+
+		if(adjacent)
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = W.resolve_attackby(A,src, params)
@@ -132,6 +138,7 @@
 					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, 1)
 
+			disrupt_cloak_if_required()
 			trigger_aiming(TARGET_CAN_CLICK)
 			return
 		else // non-adjacent click
@@ -139,6 +146,7 @@
 				W.afterattack(A, src, 0, params) // 0: not Adjacent
 			else
 				RangedAttack(A, params)
+			disrupt_cloak_if_required()
 
 			trigger_aiming(TARGET_CAN_CLICK)
 	return 1
@@ -263,7 +271,7 @@
 
 /mob/proc/TurfAdjacent(var/turf/T)
 	return T.AdjacentQuick(src)
-    
+
 /mob/observer/ghost/TurfAdjacent(var/turf/T)
 	if(!isturf(loc) || !client)
 		return FALSE

@@ -1,0 +1,10 @@
+
+author: Cael_Aislinn
+
+delete-after: True
+changes: 
+  - wip: "Adds periodic resupply drops to Stranded. Weapons, medical supplies, resources and ship debris can all come crashing down from orbit around the map."
+  - wip: "Adds back in the day night cycle to Stranded. When it gets dark, you better have a source of light..."
+  - wip: "Adds deployable landmines to the UNSC arsenal. Watch that friendly fire!"
+  - bugfix: "Fixes some sprite issues with marine gear."
+  - imageadd: "Placeholder sprites are in place for landmines and some flood stuff."

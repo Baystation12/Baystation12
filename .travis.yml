@@ -19,6 +19,7 @@ env:
     - TEST=MAP MAP_PATH=unsc_frigate
     - TEST=MAP MAP_PATH=desert_outpost
     - TEST=MAP MAP_PATH=far_isle
+    - TEST=MAP MAP_PATH=geminus_city
 
 cache:
   directories:

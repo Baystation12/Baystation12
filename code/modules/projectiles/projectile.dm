@@ -45,12 +45,14 @@
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
 
 	var/hitscan = 0		// whether the projectile should be hitscan
-	var/step_delay = 1	// the delay between iterations if not a hitscan projectile
+	var/step_delay = 0.5	// the delay between iterations if not a hitscan projectile
 
 	// effect types to be used
 	var/muzzle_type
 	var/tracer_type
 	var/impact_type
+
+	var/tracer_delay_time //If defined tracer effects will wait this time before being deleted.
 
 	var/fire_sound
 
@@ -146,7 +148,12 @@
 		qdel(src)
 		return 0
 
-	loc = get_turf(user) //move the projectile out into the world
+	if(istype(user.loc,/obj/vehicles))
+		var/obj/vehicles/V = user.loc
+		permutated += V
+		loc = pick(user.locs)
+	else
+		loc = get_turf(user) //move the projectile out into the world
 
 	firer = user
 	shot_from = launcher.name
@@ -374,7 +381,9 @@
 			P.set_transform(M)
 			P.pixel_x = location.pixel_x
 			P.pixel_y = location.pixel_y
-			if(!hitscan)
+			if(tracer_delay_time)
+				P.activate(tracer_delay_time)
+			else if(!hitscan)
 				P.activate(step_delay)	//if not a hitscan projectile, remove after a single delay
 			else
 				P.activate()
