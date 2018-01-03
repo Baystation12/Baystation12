@@ -71,6 +71,7 @@
 	var/override_enabled = 0	//when enabled, do not open/close doors or cycle airlocks and wait for the player to do it manually
 	var/received_confirm = 0	//for undocking, whether the server has recieved a confirmation from the client
 	var/docking_codes			//would only allow docking when receiving signal with these, if set
+	var/display_name			//how would it show up on docking monitoring program, area name + coordinates if unset
 
 /datum/computer/file/embedded_program/docking/New(var/obj/machinery/embedded_controller/M)
 	..()
@@ -298,7 +299,7 @@
 		if (STATE_DOCKED) return "docked"
 
 /datum/computer/file/embedded_program/docking/proc/get_name()
-	return "[get_area(master)] ([master.x], [master.y])"
+	return display_name ? display_name : "[get_area(master)] ([master.x], [master.y])"
 
 #undef STATE_UNDOCKED
 #undef STATE_DOCKING
