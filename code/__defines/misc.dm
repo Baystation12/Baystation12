@@ -207,4 +207,3 @@
 #define RAD_LEVEL_VERY_HIGH 75
 
 #define RADIATION_THRESHOLD_CUTOFF 0.1	// Radiation will not affect a tile when below this value.
-
