@@ -961,7 +961,7 @@
 	icon_state = "panelsS"
 
 /area/aux_eva
-	name = "\improper Auxiliary EVA Storage"
+	name = "\improper Command EVA Storage"
 	icon_state = "eva"
 
 /area/thruster
