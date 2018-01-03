@@ -21,6 +21,7 @@
 
 	head = null
 	uniform = null
+	belt = null
 	shoes = /obj/item/clothing/shoes/brown
 
 	flags = 0
