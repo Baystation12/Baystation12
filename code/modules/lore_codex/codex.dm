@@ -1,7 +1,7 @@
 // Inherits from /book/ so it can fit on bookshelves.
 /obj/item/weapon/book/codex
-	name = "The Explorer's Guide to the Universe(12th Edition)"
-	desc = "Contains useful information about the world around you. It seems to have been written mostly for the Expeditionary Corps, but a small SPACE logo sits at the bottom of the cover. It says Sol Gov Approved across the top"
+	name = "The Explorer's Guide to the Universe (12th Edition)"
+	desc = "Contains useful information about the world around you. It seems to have been written mostly for the Expeditionary Corps, but a small SPACE logo sits at the bottom of the cover. It says Sol Gov Approved across the top."
 	icon_state = "codex"
 	unique = TRUE
 	var/datum/lore/codex/home = null         // Top-most page.

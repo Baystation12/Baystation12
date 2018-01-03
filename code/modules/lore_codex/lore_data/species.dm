@@ -19,8 +19,7 @@
 	data = "One of the more prominent species in our area of the Galaxy, Humanity has certainly expanded across the stars since their first contact with the [quick_link("Skrell")] in the \
 	25th century. Since then, they have spread out, colonized or conquered, and built for themselves several great nations, such as [quick_link("Sol Gov")], based out of the heart of Human Politics, \
 	the Terran Commonwealth, or the [quick_link("Terran Confederacy")]. [quick_link("TSC")]s push Humanity into further reaches of space, and are at the bleeding edge of new \
-	technology. In recent days, the discovery of the phoron giant in Nyx have fueled investments and jobs, bringing many Humans to the outer rim of their controlled systems, \
-	as well as many subversive organizations that have a variety of different agendas."
+	technology. In recent years, a renewed interest in exploration by SCG has brought many humans to the edges of known space and beyond, looking to make their mark on the stars."
 
 /datum/lore/codex/page/skrell/add_content()
 	name = "Skrell"
@@ -33,8 +32,8 @@
 /datum/lore/codex/page/unathi/add_content()
 	name = "Unathi"
 	keywords += list("Unathi")
-	data = "a proud race of reptilians hailing from the desert planet of [quick_link("Moghes")], the Unathi are a recent addition to the International Community. They are a \
-	highly sexist society, and to some, considered xenophobic too. They are very much in keeping with their own traditions and staying out of intergalactic affairs, and as such, \
+	data = "A honor and tradition based species of reptilians hailing from the desert planet of [quick_link("Moghes")], the Unathi are a young member of the Interstellar Community. They live in a \
+	brutal and conservative society, which to outsiders can seem savage.. They keep with their own traditions and generally stay out of intergalactic affairs. As such, \
 	it is rare to see them out in the stars and away from home."
 
 /datum/lore/codex/page/tajara/add_content()
@@ -72,17 +71,17 @@
 
 /datum/lore/codex/page/gas/add_content()
 	name = "Giant Armoured Serpentids"
-	keywords += list("GAS", "Giant Armoured Serpentids", "Nabbers")
-	data = "With such a long name, giant armoured serpentids are often written as GAS for short and are sometimes informally called Nabbers.\
+	keywords += list("GAS", "giant armoured serpentids", "nabbers")
+	data = "With such a long name, giant armoured serpentids are often written as GAS for short and are sometimes informally called nabbers.\
 	Standing at a terrifying nine feet above the ground, these massive creatures look like some nightmarish hybrid of a snake, millipede, and praying mantis. Their discovery has \
 	only recently been released to the public as part of a long-term project to teach them how to work with humans. Will the project be successful? Only time will tell."
 
 /datum/lore/codex/page/bogani/add_content()
 	name = "The Bogani Imperiate"
 	keywords += list("Bogani", "Imperiate")
-	data = "The Bogani Imperiate is a vast empire far away from Known Space that recently made contact with the known species with a grand invasion of the [quick_link("Positronic")] Union, and \
+	data = "The Bogani Imperiate is a previously unknown species not before seen in Known Space that recently made contact with the known species by a grand invasion of the [quick_link("Positronic")] Union, and \
 	assaults in both [quick_link("Skrell")] Space and [quick_link("Sol Gov")]. To the common man, not much is known, but they are a omnicidal, highly theocratic species that think other species \
-	are a scourge on the Universe, and they are there to destroy them or enslave them. Eugenics is probably the best thing ever to them. They also have a subspecies that has been \
+	are a scourge on the Universe, and they are there to destroy them or enslave them. Eugenics is the best thing ever to their society. They also several slave species at their disposal that have been \
 	genetically engineered into slavery. They breath Chlorine, and they hate everyone."
 
 

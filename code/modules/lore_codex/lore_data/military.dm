@@ -11,9 +11,10 @@
 /datum/lore/codex/page/fleet/add_content()
 	name = "Sol Gov Fleet"
 	keywords += list("Fleet")
-	data = "The Fleet is the backbone of the SGDF. It maintains border sovereignty while also combatting piracy and insurgents. It is the most commonly seen branch, and in recent \
-	years has built up significantly, more strictly patrolling borders and trade lanes in the wake of the Gaia Conflict. There are Five Fleets, the first being for Reserves and \
-	the other four in action along [quick_link("Sol Gov")]'s border."
+	data = "The Sol Gov Fleet is the backbone of the Defense Forces, providing defense along SCG's Borders, and protection from piracy along trade routes through SCG. It is the most commonly seen branch, and in recent \
+	years has built up significantly.. There are Five Fleets, the first being for Reserves and \
+	the other four in action along [quick_link("Sol Gov")]'s border. The Fleet is reminiscent of the Navy's of Old Earth back when sea and air warfare were the backbone of armed conflict. \
+	Members of the Fleet have their own culture to them held together by a strict and traditional military code, and sleek design."
 
 /datum/lore/codex/page/army/add_content()
 	name = "Sol Gov Army"
@@ -31,6 +32,6 @@
 	name = "Sol Gov Expeditionary Corps"
 	keywords += list("Expeditionary", "EC")
 	data = "The Expeditionary Corps is a non-military, uniformed organization of [quick_link("Sol Gov")], reporting to the Committee for Diplomatic Relations. It is governed by some military laws,\
-	 but has its own customs, regulations, and traditions that at times put it at odd with the Defense Forces.The focus of expeditionary personnel is on science and exploration instead of military objectives. \
+	 but has its own customs, regulations, and traditions that at times put it at odd with the Defense Forces. The focus of expeditionary personnel is on science and exploration instead of military objectives. \
 	 Corpsmen are often highly specialized for the roles they take on their missions, and they are known for their experimentality and ability to improvise. With the launch of the \
 	 Torch Project, the Expeditionary Corps is beginning the greatest mission for discovery since Humanity first left Sol."
