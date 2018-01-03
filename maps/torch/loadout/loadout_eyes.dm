@@ -57,7 +57,6 @@
 /datum/gear/eyes/medical/prescription
 	display_name = "Medical HUD, prescription"
 	path = /obj/item/clothing/glasses/hud/health/prescription
-	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/eyes/meson
 	display_name = "Meson Goggles"

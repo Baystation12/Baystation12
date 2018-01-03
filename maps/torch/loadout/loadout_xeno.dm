@@ -108,29 +108,23 @@
 	sort_category = "Xenowear"
 
 // Taj clothing
-/datum/gear/eyes/tajblind/med
+/datum/gear/eyes/medical/tajblind
 	display_name = "medical veil (Tajara)"
 	path = /obj/item/clothing/glasses/hud/health/tajblind
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
-	cost = 1
-	allowed_roles = MEDICAL_ROLES
 
-/datum/gear/eyes/tajblind/meson
+/datum/gear/eyes/meson/tajblind
 	display_name = "industrial veil (Tajara)"
 	path = /obj/item/clothing/glasses/meson/prescription/tajblind
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
-	cost = 1
-	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/engineer, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/pathfinder, /datum/job/explorer, /datum/job/scientist, /datum/job/rd, /datum/job/senior_scientist)
 
-/datum/gear/eyes/tajblind/sec
+/datum/gear/eyes/security/tajblind
 	display_name = "sleek veil (Tajara)"
 	path = /obj/item/clothing/glasses/sunglasses/sechud/tajblind
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
-	cost = 1
-	allowed_roles = SECURITY_ROLES
 
 /datum/gear/shoes/caligae
 	display_name = "caligae (Tajara)"
