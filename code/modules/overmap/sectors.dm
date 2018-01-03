@@ -44,7 +44,7 @@ var/list/points_of_interest = list()
 	start_y = start_y || rand(OVERMAP_EDGE, GLOB.using_map.overmap_size - OVERMAP_EDGE)
 
 	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
-	//testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
+	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
 	points_of_interest += name
 
 	GLOB.using_map.player_levels |= map_z
@@ -85,7 +85,6 @@ var/list/points_of_interest = list()
 	for(var/obj/machinery/computer/sensors/S in SSmachines.machinery)
 		if (S.z in map_z)
 			S.linked = src
-			//testing("Sensor console at level [S.z] linked to overmap object '[name]'.")
 
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
 	. = generic_waypoints.Copy()

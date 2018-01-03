@@ -5,7 +5,7 @@
 	nanomodule_path = /datum/nano_module/docking
 	program_icon_state = "supply"
 	program_menu_icon = "triangle-2-e-w"
-	extended_desc = "A management tool that lets you se the status of the docking ports."
+	extended_desc = "A management tool that lets you see the status of the docking ports."
 	size = 10
 	available_on_ntnet = 1
 	requires_ntnet = 1
@@ -56,18 +56,20 @@
 	data["docks"] = docks
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "docking.tmpl", name, 1050, 800, state = state)
+		ui = new(user, src, ui_key, "docking.tmpl", name, 600, 450, state = state)
 		ui.set_auto_update(1)
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/docking/Topic(href, href_list)
+/datum/nano_module/docking/Topic(href, href_list, state)
 	if(..())
 		return 1
 	if(href_list["edit_code"])
 		var/datum/computer/file/embedded_program/docking/P = locate(href_list["edit_code"])
 		if(P)
 			var/newcode = input("Input new docking codes", "Docking codes", P.docking_codes) as text|null
+			if(!CanInteract(usr,state)) 
+				return
 			if (newcode)
 				P.docking_codes = uppertext(newcode)
 		return 1
