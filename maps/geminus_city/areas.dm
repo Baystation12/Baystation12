@@ -43,22 +43,9 @@
 	name = "\improper Abandoned Metro"
 	icon_state = "green"
 
-
-/area/planets/Geminus/outdoor/teleporter
-	name = "\improper Geminus Planetary Escape Area"
-	icon_state = "Holodeck"
-
-/area/planets/Geminus/outdoor/teleporter/mysterious
-	name = "\improper Mysterious Teleporter"
-	icon_state = "Holodeck"
-
 /area/planets/Geminus/indoor
 	name = "\improper Geminus Interior"
 	icon_state = "yellow"
-
-/area/planets/Geminus/indoor/maintenance
-	name = "\improper Maintenance Tunnel"
-	icon_state = "maintcentral"
 
 /area/planets/Geminus/indoor/arrivalbus
 	name = "\improper Arrival Bus"
@@ -124,17 +111,9 @@
 	name = "\improper Security - Prison Wing"
 	icon_state = "sec_prison"
 
-/area/planets/Geminus/indoor/xenobiology
-	name = "\improper Xenobiology Lab"
-	icon_state = "xeno_lab"
-
 /area/planets/Geminus/indoor/xenoflora
 	name = "\improper Xenoflora Lab"
 	icon_state = "xeno_f_lab"
-
-/area/planets/Geminus/indoor/xenoflora_storage
-	name = "\improper Xenoflora Storage"
-	icon_state = "xeno_f_store"
 
 /area/planets/Geminus/indoor/city_hall
 	name = "\improper City Hall"

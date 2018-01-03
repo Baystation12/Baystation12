@@ -9,6 +9,7 @@
 	#include "signs.dm"
 	#include "streetobjs.dm"
 
+	#include "unit_tests.dm"
 	#include "geminus_city_outfits.dm"
 	#include "geminus_city_jobs.dm"
 	#include "geminus_city_spawns.dm"

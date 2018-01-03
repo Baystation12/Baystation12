@@ -8,7 +8,7 @@
 	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.png'
-	id_hud_icons = 'maps/insurrection/insurrection_hud_icons.dmi'
+	id_hud_icons = 'maps/geminus_city/geminus_hud_icons.dmi'
 
 	station_name  = "Geminus City"
 	station_short = "Geminus"
