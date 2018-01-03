@@ -1,8 +1,11 @@
+/*
+ * BASE TYPE
+ */
 /obj/item/weapon/rig/command
 	name = "command HCM"
 	suit_type = "command hardsuit"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
-	desc = "A specialized hardsuit rig control module issued to officers of the Expeditionary Corps and their peers."
+	desc = "A specialized hardsuit rig control module issued to command staff of the Expeditionary Corps and their peers."
 	icon_state = "command_rig"
 	armor = list(melee = 25, bullet = 25, laser = 15, energy = 25, bomb = 40, bio = 100, rad = 40)
 	online_slowdown = 0.50
@@ -15,8 +18,7 @@
 	glove_type = /obj/item/clothing/gloves/rig/command
 
 	allowed = list(/obj/item/weapon/gun, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit)
-
-	req_access = list(19) //bridge
+	req_access = list(access_heads) //bridge
 
 /obj/item/clothing/head/helmet/space/rig/command
 	light_overlay = "helmet_light_dual"
@@ -40,72 +42,102 @@
 	item_icons = list(slot_gloves_str = 'maps/torch/icons/mob/solgov-hands.dmi')
 	species_restricted = list(SPECIES_HUMAN)
 
+
 /obj/item/weapon/rig/command/equipped
 
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/flash)
 
-/obj/item/weapon/rig/command/exec //executive command - CO and XO
-	name = "executive command HCM"
-	suit_type = "executive command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to high ranking officers of the Expeditionary Corps."
-	icon_state = "command_exe_rig"
-	armor = list(melee = 50, bullet = 40, laser = 30, energy = 25, bomb = 40, bio = 100, rad = 50)
+/*
+ * EXECUTIVE OFFICER
+ */
+/obj/item/weapon/rig/command/xo
+	name = "officer's command HCM"
+	suit_type = "advanced command hardsuit"
+	desc = "A specialized hardsuit rig control module issued to high ranking officers of the Expeditionary Corps and their peers."
+	icon_state = "command_XO_rig"
+	armor = list(melee = 45, bullet = 35, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 50)
 
-	chest_type = /obj/item/clothing/suit/space/rig/command/exec
-	helm_type = /obj/item/clothing/head/helmet/space/rig/command/exec
+	chest_type = /obj/item/clothing/suit/space/rig/command/xo
+	helm_type = /obj/item/clothing/head/helmet/space/rig/command/xo
+	boot_type = /obj/item/clothing/shoes/magboots/rig/command
+	glove_type = /obj/item/clothing/gloves/rig/command
+
+	allowed = list(/obj/item/weapon/gun, /obj/item/ammo_magazine, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit, /obj/item/weapon/storage/secure/briefcase)
+	req_access = list(access_hop)
+
+/obj/item/clothing/head/helmet/space/rig/command/xo
+	icon_state = "command_XO_rig"
+/obj/item/clothing/suit/space/rig/command/xo
+	icon_state = "command_XO_rig"
+/obj/item/clothing/shoes/magboots/rig/command/xo
+/obj/item/clothing/gloves/rig/command/xo
+
+
+/obj/item/weapon/rig/command/xo/equipped
+	initial_modules = list(
+		/obj/item/rig_module/maneuvering_jets,
+		/obj/item/rig_module/device/flash)
+
+/*
+ * COMMANDING OFFICER
+ */
+/obj/item/weapon/rig/command/co
+	name = "commanding officer's command HCM"
+	suit_type = "advanced command hardsuit"
+	desc = "A specialized hardsuit rig control module issued to commanding officers of the Expeditionary Corps."
+	icon_state = "command_CO_rig"
+	armor = list(melee = 50, bullet = 40, laser = 30, energy = 20, bomb = 40, bio = 100, rad = 50)
+
+	chest_type = /obj/item/clothing/suit/space/rig/command/co
+	helm_type = /obj/item/clothing/head/helmet/space/rig/command/co
 	boot_type = /obj/item/clothing/shoes/magboots/rig/command
 	glove_type = /obj/item/clothing/gloves/rig/command
 
 	allowed = list(/obj/item/weapon/gun, /obj/item/ammo_magazine, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit, /obj/item/weapon/storage/secure/briefcase)
 
-	req_access = list(57) //head of personnel (XO)
+	req_access = list(access_captain)
 
-/obj/item/clothing/head/helmet/space/rig/command/exec
-	icon_state = "command_exe_rig"
-
-/obj/item/clothing/suit/space/rig/command/exec
-	icon_state = "command_exe_rig"
-
-/obj/item/clothing/shoes/magboots/rig/command/exec
-
-/obj/item/clothing/gloves/rig/command/exec
+/obj/item/clothing/head/helmet/space/rig/command/co
+	icon_state = "command_CO_rig"
+/obj/item/clothing/suit/space/rig/command/co
+	icon_state = "command_CO_rig"
+/obj/item/clothing/shoes/magboots/rig/command/co
+/obj/item/clothing/gloves/rig/command/co
 
 
-/obj/item/weapon/rig/command/exec/equipped
-
+/obj/item/weapon/rig/command/co/equipped
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/flash,
-		/obj/item/rig_module/mounted/egun)
+		/obj/item/rig_module/device/flash)
 
-/obj/item/weapon/rig/command/medical //CMO
+/*
+ * CHIEF MEDICAL OFFICER
+ */
+/obj/item/weapon/rig/command/medical
 	name = "medical command HCM"
 	suit_type = "medical command hardsuit"
 	desc = "A specialized hardsuit rig control module issued to ranking medical officers of the Expeditionary Corps and their peers."
 	icon_state = "command_med_rig"
-	armor = list(melee = 40, bullet = 25, laser = 30, energy = 25, bomb = 40, bio = 100, rad = 100)
+	armor = list(melee = 35, bullet = 25, laser = 25, energy = 25, bomb = 40, bio = 100, rad = 100)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/medical
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/medical
 
 	allowed = list(/obj/item/weapon/gun, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit, /obj/item/weapon/storage/firstaid, /obj/item/device/healthanalyzer, /obj/item/stack/medical, /obj/item/roller)
 
-	req_access = list(40) //chief medical officer
+	req_access = list(access_cmo)
 
 /obj/item/clothing/head/helmet/space/rig/command/medical
 	icon_state = "command_med_rig"
-
 /obj/item/clothing/suit/space/rig/command/medical
 	icon_state = "command_med_rig"
 /obj/item/clothing/shoes/magboots/rig/command/medical
-
 /obj/item/clothing/gloves/rig/command/medical
 
 
 /obj/item/weapon/rig/command/medical/equipped
-
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/flash,
@@ -113,33 +145,32 @@
 		/obj/item/rig_module/chem_dispenser/injector,
 		/obj/item/rig_module/vision/medhud)
 
-/obj/item/weapon/rig/command/security //CoS
+/*
+* CHIEF OF SECURITY
+*/
+/obj/item/weapon/rig/command/security
 	name = "security command HCM"
 	suit_type = "security command hardsuit"
 	desc = "A specialized hardsuit rig control module issued to ranking security officers of the Expeditionary Corps and their peers."
 	icon_state = "command_sec_rig"
-	armor = list(melee = 45, bullet = 35, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 60)
+	armor = list(melee = 45, bullet = 35, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 40)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/security
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/security
 
 	allowed = list(/obj/item/weapon/gun, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/handcuffs, /obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/suit_cooling_unit, /obj/item/weapon/melee/baton)
 
-	req_access = list(58) //head of security (CoS)
+	req_access = list(access_hos)
 
 /obj/item/clothing/head/helmet/space/rig/command/security
 	icon_state = "command_sec_rig"
-
 /obj/item/clothing/suit/space/rig/command/security
 	icon_state = "command_sec_rig"
-
 /obj/item/clothing/shoes/magboots/rig/command/security
-
 /obj/item/clothing/gloves/rig/command/security
 
 
 /obj/item/weapon/rig/command/security/equipped
-
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/flash,
