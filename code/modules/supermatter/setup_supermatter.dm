@@ -6,7 +6,8 @@
 
 #define ENERGY_NITROGEN 115			// Roughly 8 emitter shots.
 #define ENERGY_CARBONDIOXIDE 150	// Roughly 10 emitter shots.
-#define ENERGY_PHORON 300			// Roughly 20 emitter shots. Phoron can take more but this is enough to max out both SMESs anyway.
+#define ENERGY_HYDROGEN 300			// Roughly 20 emitter shots.
+#define ENERGY_PHORON 500			// Roughly 40 emitter shots.
 
 
 /datum/admins/proc/setup_supermatter()
@@ -20,7 +21,7 @@
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
-	var/response = input(usr, "Are you sure? This will start up the engine with selected gas as coolant.", "Engine setup") as null|anything in list("N2", "CO2", "PH", "Abort")
+	var/response = input(usr, "Are you sure? This will start up the engine with selected gas as coolant.", "Engine setup") as null|anything in list("N2", "CO2", "PH", "H2", "Abort")
 	if(!response || response == "Abort")
 		return
 
@@ -43,6 +44,9 @@
 			if("PH")
 				C.canister_type = /obj/machinery/portable_atmospherics/canister/phoron/engine_setup/
 				continue
+			if("H2")
+				C.canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup/
+				continue
 
 	for(var/obj/effect/engine_setup/core/C in world)
 		switch(response)
@@ -54,6 +58,9 @@
 				continue
 			if("PH")
 				C.energy_setting = ENERGY_PHORON
+				continue
+			if("H2")
+				C.energy_setting = ENERGY_HYDROGEN
 				continue
 
 	for(var/obj/effect/engine_setup/filter/F in world)
@@ -206,7 +213,7 @@
 
 
 
-// Sets up filters. This assumes filters are set to filter out N2 back to the core loop by default!
+// Sets up filters. This assumes filters are set to filter out CO2 back to the core loop by default!
 /obj/effect/engine_setup/filter/
 	name = "Omni Filter Marker"
 	var/coolant = null
@@ -221,16 +228,19 @@
 		log_and_message_admins("## WARNING: No coolant type set at [x] [y] [z]!")
 		return SETUP_WARNING
 
-	// Non-nitrogen coolant, adjust the filter's config first.
-	if(coolant != "N2")
+	// Non-co2 coolant, adjust the filter's config first.
+	if(coolant != "CO2")
 		for(var/datum/omni_port/P in F.ports)
-			if(P.mode != ATM_N2)
+			if(P.mode != ATM_CO2)
 				continue
 			if(coolant == "PH")
 				P.mode = ATM_P
 				break
-			else if(coolant == "CO2")
-				P.mode = ATM_CO2
+			else if(coolant == "N2")
+				P.mode = ATM_N2
+				break
+			else if(coolant == "H2")
+				P.mode = ATM_H2
 				break
 			else
 				log_and_message_admins("## WARNING: Inapropriate filter coolant type set at [x] [y] [z]!")
@@ -248,4 +258,5 @@
 #undef SETUP_DELAYED
 #undef ENERGY_NITROGEN
 #undef ENERGY_CARBONDIOXIDE
+#undef ENERGY_HYDROGEN
 #undef ENERGY_PHORON
