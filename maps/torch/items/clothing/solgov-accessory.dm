@@ -113,6 +113,9 @@ specialty pins
 	icon_state = "marinerank_command"
 	slot = ACCESSORY_SLOT_INSIGNIA
 
+/obj/item/clothing/accessory/solgov/specialty/get_fibers()
+	return null
+
 /obj/item/clothing/accessory/solgov/specialty/janitor
 	name = "custodial blazes"
 	desc = "Purple blazes denoting a custodial technician."
@@ -373,6 +376,9 @@ ranks - ec
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_RANK
 	gender = PLURAL
+
+/obj/item/clothing/accessory/solgov/rank/get_fibers()
+	return null
 
 /obj/item/clothing/accessory/solgov/rank/ec
 	name = "explorer ranks"

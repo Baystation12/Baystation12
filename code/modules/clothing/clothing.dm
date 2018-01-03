@@ -49,6 +49,15 @@
 	. = ..()
 	gunshot_residue = null
 
+/obj/item/clothing/proc/get_fibers()
+	. = "material from \a [name]"
+	var/list/acc = list()
+	for(var/obj/item/clothing/accessory/A in accessories)
+		if(prob(40) && A.get_fibers())
+			acc += A.get_fibers()
+	if(acc.len)
+		. += " with traces of [english_list(acc)]"
+
 /obj/item/clothing/New()
 	..()
 	if(starting_accessories)
@@ -258,6 +267,9 @@ BLIND     // can't see anything
 		if (cell.charge < 0)
 			cell.charge = 0
 	..()
+
+/obj/item/clothing/gloves/get_fibers()
+	return "material from a pair of [name]."
 
 // Called just before an attack_hand(), in mob/UnarmedAttack()
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
