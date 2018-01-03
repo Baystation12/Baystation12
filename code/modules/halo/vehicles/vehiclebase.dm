@@ -26,14 +26,30 @@
 
 /obj/vehicles/New()
 	controller = new controller (src)
-	verbs += /obj/vehicles/proc/exit_vehicle
+	verbs += /obj/vehicles/proc/enter_exit_vehicle
 	for(var/i in fuels)
 		fuels += new i
 		fuels -= i
 
 
+/obj/vehicles/proc/enter_exit_vehicle(var/mob/user)
+	set name = "Enter/Exit Vehicle"
+	set category = "Vehicle"
+	set src in range(1)
+
+	if(!user)
+		user = usr
+	if(user in contents)
+		exit_vehicle(user)
+		controller.on_exit_vehicle()
+	else
+		enter_vehicle(user)
+		controller.on_enter_vehicle(user)
+
 /obj/vehicles/attack_hand(var/mob/user)
 	controller.on_click(null,user)
+	enter_exit_vehicle(user)
+
 
 /obj/vehicles/attackby(var/obj/item/W,var/mob/living/user)
 	controller.on_click(W,user)
@@ -112,12 +128,7 @@
 	explosion(loc,-1,-1,2,3)
 	qdel(src)
 
-/obj/vehicles/verb/enter_vehicle()
-	set name = "Enter Vehicle"
-	set category = "Vehicle"
-	set src in range(1)
-
-	var/mob/user = usr
+/obj/vehicles/proc/enter_vehicle(var/mob/user)
 	if(block_entry_exit)
 		return
 	if(!driver)
@@ -131,11 +142,6 @@
 	user.visible_message("<span class = 'notice'>[user] enters [src]</span>")
 
 /obj/vehicles/proc/exit_vehicle(var/mob/user,var/override_message = 0)
-	set name = "Exit Vehicle"
-	set category = "Vehicle"
-	set src in range(1)
-	if(!user)
-		user = usr
 	if(block_entry_exit)
 		return
 	if(driver == user)
@@ -263,13 +269,6 @@
 		if(inhand_item.force > damage_resist_amount)
 			vehicle.health[1] -= inhand_item.force
 			vehicle.visible_message("<span class = 'danger'>[user] [pick(inhand_item.attack_verb)] [vehicle.name]</span>")
-	else
-		if(user in vehicle.contents)
-			vehicle.exit_vehicle(user)
-			on_exit_vehicle()
-		else
-			vehicle.enter_vehicle(user)
-			on_enter_vehicle(user)
 
 /datum/vehicle_control/base/on_emp(var/severity)
 	vehicle.vehicle_move_delay = vehicle.vehicle_move_delay * 2 * severity * (vehicle.damage_resistances["emp"]/100)
