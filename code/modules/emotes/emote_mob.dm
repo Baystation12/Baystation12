@@ -89,7 +89,7 @@
 
 	// Auto-capitalize our pretext if there is any.
 	if(pretext)
-		pretext = uppertext(copytext(pretext, 1, 2)) + copytext(pretext, 2, lentext(pretext) + 1)
+		pretext = capitalize(pretext)
 		// Add a space at the end if we didn't already supply one.
 		end_char = copytext(pretext, lentext(pretext), lentext(pretext) + 1)
 		if(end_char != " ")
