@@ -201,7 +201,8 @@
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/hos
 	title = "Chief of Security"
@@ -344,7 +345,8 @@
 							 /datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
 							 /datum/computer_file/program/alarm_monitor,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/solgov_pilot
 	title = "SolGov Pilot"
@@ -454,7 +456,8 @@
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer
 	title = "Engineer"
@@ -501,7 +504,8 @@
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer_contractor
 	title = "Maintenance Assistant"
@@ -530,7 +534,8 @@
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/roboticist
 	title = "Roboticist"

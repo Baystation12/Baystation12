@@ -14,6 +14,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/atmos_control())
 	hard_drive.store_file(new/datum/computer_file/program/rcon_console())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	hard_drive.store_file(new/datum/computer_file/program/shields_monitor())
 
 // Medical
 /obj/item/modular_computer/console/preset/medical/install_default_programs()
