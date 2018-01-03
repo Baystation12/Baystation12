@@ -1,6 +1,6 @@
 /datum/category_item/player_setup_item/player_global/pai
 	name = "pAI"
-	sort_order = 4
+	sort_order = 3
 
 	var/datum/paiCandidate/candidate
 
