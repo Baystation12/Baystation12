@@ -248,7 +248,7 @@
 "eN" = (/obj/structure/table/reinforced,/obj/machinery/cell_charger,/obj/item/weapon/cell,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
 "eO" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/backpack/medic,/obj/item/weapon/storage/backpack/medic,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
 "eP" = (/obj/structure/table/reinforced,/obj/item/roller,/obj/item/roller,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
-"eQ" = (/obj/structure/bed,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
+"eQ" = (/obj/structure/bed,/obj/item/weapon/bedsheet/medical,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
 "eR" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/vending/medical,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
 "eS" = (/obj/structure/closet/crate/bin,/obj/item/weapon/reagent_containers/blood/empty,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
 "eT" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/pill_bottle/paracetamol,/obj/item/weapon/storage/pill_bottle/iron,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/medical1)
@@ -262,47 +262,47 @@
 "fb" = (/obj/machinery/door/airlock/multi_tile/halo,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
 "fc" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
 "fd" = (/obj/machinery/door/airlock/halo_maint,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
-"fe" = (/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
-"ff" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
-"fg" = (/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fh" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fi" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fj" = (/obj/structure/ladder,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fk" = (/obj/machinery/light/spot{dir = 1},/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fl" = (/obj/effect/floor_decal/sign/m,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fm" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fn" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk3,/area/tranquility/hanger)
-"fo" = (/turf/unsimulated/floor/tranquility/catwalk3,/area/tranquility/hanger)
-"fp" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor/tranquility/catwalk3,/area/tranquility/hanger)
-"fq" = (/obj/effect/decal/cleanable/dirt,/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk3,/area/tranquility/hanger)
-"fr" = (/turf/unsimulated/wall,/area/tranquility/control)
-"fs" = (/obj/machinery/door/airlock/multi_tile/halo,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/control)
-"ft" = (/obj/machinery/door/airlock/halo,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/control)
-"fu" = (/obj/structure/sign/warning/detailed{name = "\improper AUTHORIZED PERSONNEL ONLY"},/turf/unsimulated/wall,/area/tranquility/control)
-"fv" = (/obj/machinery/light/spot{dir = 8},/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fw" = (/turf/unsimulated/floor/tranquility/catwalk5,/area/tranquility/hanger)
-"fx" = (/obj/structure/lattice,/turf/simulated/open,/area/tranquility/hanger)
-"fy" = (/turf/simulated/open,/area/tranquility/hanger)
-"fz" = (/turf/unsimulated/floor/tranquility/catwalk1,/area/tranquility/hanger)
-"fA" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot{dir = 4},/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fB" = (/obj/effect/decal/cleanable/cobweb,/obj/structure/table/standard,/obj/item/weapon/melee/classic_baton,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"fC" = (/obj/item/weapon/stool,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"fD" = (/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"fE" = (/obj/structure/table/standard,/obj/item/weapon/pen/red,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"fF" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/control)
-"fG" = (/obj/structure/sign/halo_floorsign/maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
-"fH" = (/obj/structure/filingcabinet/chestdrawer,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"fI" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"fJ" = (/obj/structure/table/standard,/obj/item/weapon/paper_bundle,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"fK" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
-"fL" = (/obj/effect/decal/cleanable/dirt,/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"fM" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk5,/area/tranquility/hanger)
-"fN" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk1,/area/tranquility/hanger)
-"fO" = (/obj/structure/ladder,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
-"fP" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"fQ" = (/obj/structure/table/standard,/obj/item/trash/chips,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"fR" = (/turf/unsimulated/floor/tranquility/catwalk9,/area/tranquility/hanger)
-"fS" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor/tranquility/catwalk1,/area/tranquility/hanger)
+"fe" = (/turf/unsimulated/wall,/area/tranquility/walls2)
+"ff" = (/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"fg" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"fh" = (/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fi" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fj" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fk" = (/obj/structure/ladder,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fl" = (/obj/machinery/light/spot{dir = 1},/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fm" = (/obj/effect/floor_decal/sign/m,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fn" = (/obj/effect/decal/cleanable/dirt,/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fo" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fp" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk3,/area/tranquility/hanger)
+"fq" = (/turf/unsimulated/floor/tranquility/catwalk3,/area/tranquility/hanger)
+"fr" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor/tranquility/catwalk3,/area/tranquility/hanger)
+"fs" = (/obj/effect/decal/cleanable/dirt,/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk3,/area/tranquility/hanger)
+"ft" = (/turf/unsimulated/wall,/area/tranquility/control)
+"fu" = (/obj/machinery/door/airlock/multi_tile/halo,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/control)
+"fv" = (/obj/machinery/door/airlock/halo,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/control)
+"fw" = (/obj/structure/sign/warning/detailed{name = "\improper AUTHORIZED PERSONNEL ONLY"},/turf/unsimulated/wall,/area/tranquility/control)
+"fx" = (/obj/machinery/light/spot{dir = 8},/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fy" = (/turf/unsimulated/floor/tranquility/catwalk5,/area/tranquility/hanger)
+"fz" = (/obj/structure/lattice,/turf/simulated/open,/area/tranquility/hanger)
+"fA" = (/turf/simulated/open,/area/tranquility/hanger)
+"fB" = (/turf/unsimulated/floor/tranquility/catwalk1,/area/tranquility/hanger)
+"fC" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot{dir = 4},/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"fD" = (/obj/effect/decal/cleanable/cobweb,/obj/structure/table/standard,/obj/item/weapon/melee/classic_baton,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fE" = (/obj/item/weapon/stool,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fF" = (/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fG" = (/obj/structure/table/standard,/obj/item/weapon/pen/red,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fH" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/control)
+"fI" = (/obj/structure/sign/halo_floorsign/maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"fJ" = (/obj/structure/filingcabinet/chestdrawer,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fK" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fL" = (/obj/structure/table/standard,/obj/item/weapon/paper_bundle,/obj/item/weapon/stamp/denied,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fM" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/tranquility/halls2)
+"fN" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk5,/area/tranquility/hanger)
+"fO" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk1,/area/tranquility/hanger)
+"fP" = (/obj/structure/ladder,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
+"fQ" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fR" = (/obj/structure/table/standard,/obj/item/trash/chips,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"fS" = (/turf/unsimulated/floor/tranquility/catwalk9,/area/tranquility/hanger)
 "fT" = (/obj/machinery/light/small/red,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint2)
 "fU" = (/obj/machinery/photocopier,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
 "fV" = (/obj/structure/filingcabinet/filingcabinet,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
@@ -314,32 +314,34 @@
 "gb" = (/obj/machinery/space_heater,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
 "gc" = (/obj/machinery/light/spot{dir = 8},/obj/structure/lattice,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
 "gd" = (/obj/effect/decal/cleanable/dirt,/obj/structure/lattice,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
-"ge" = (/obj/structure/table/reinforced,/obj/structure/lattice,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"ge" = (/obj/structure/table/reinforced,/obj/structure/lattice,/obj/item/weapon/stamp/denied,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
 "gf" = (/obj/structure/extinguisher_cabinet,/turf/unsimulated/wall,/area/tranquility/control)
 "gg" = (/obj/effect/decal/cleanable/generic,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
 "gh" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
-"gi" = (/obj/machinery/light/spot{dir = 4},/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"gj" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"gk" = (/obj/effect/decal/cleanable/dirt,/obj/structure/bed/chair/office/dark,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"gl" = (/obj/structure/table/reinforced,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/obj/structure/lattice,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
-"gm" = (/obj/structure/table/standard,/obj/item/weapon/storage/lunchbox/syndicate,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"gn" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"go" = (/obj/structure/table/standard,/obj/item/weapon/storage/wallet/leather,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"gp" = (/obj/structure/filingcabinet,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
-"gq" = (/obj/structure/sign/warning/fall,/turf/unsimulated/wall,/area/tranquility/hanger)
-"gr" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/structure/sign/warning/nosmoking_2,/obj/structure/lattice,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
-"gs" = (/turf/unsimulated/floor/tranquility/catwalk4,/area/tranquility/hanger)
-"gt" = (/turf/unsimulated/floor/tranquility/catwalk2,/area/tranquility/hanger)
-"gu" = (/obj/effect/decal/cleanable/dirt,/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk5,/area/tranquility/hanger)
-"gv" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
-"gw" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor/tranquility/catwalk5,/area/tranquility/hanger)
-"gx" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
-"gy" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
-"gz" = (/obj/machinery/space_heater,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
-"gA" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk4,/area/tranquility/hanger)
-"gB" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor/tranquility/catwalk4,/area/tranquility/hanger)
-"gC" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
-"gD" = (/obj/machinery/light/spot,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"gi" = (/obj/structure/lattice,/obj/item/weapon/stool/padded,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"gj" = (/obj/structure/lattice,/obj/structure/table/reinforced,/obj/machinery/deployable/barrier{name = "BUTTON PLACEHOLDER"},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"gk" = (/obj/machinery/light/spot{dir = 4},/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"gl" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"gm" = (/obj/effect/decal/cleanable/dirt,/obj/structure/bed/chair/office/dark,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"gn" = (/obj/structure/table/reinforced,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/obj/structure/lattice,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"go" = (/obj/structure/table/standard,/obj/item/weapon/storage/lunchbox/syndicate,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"gp" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"gq" = (/obj/structure/table/standard,/obj/item/weapon/storage/wallet/leather,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"gr" = (/obj/structure/filingcabinet,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/tranquility/control)
+"gs" = (/obj/structure/sign/warning/fall,/turf/unsimulated/wall,/area/tranquility/hanger)
+"gt" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/structure/sign/warning/nosmoking_2,/obj/structure/lattice,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/hanger)
+"gu" = (/turf/unsimulated/floor/tranquility/catwalk4,/area/tranquility/hanger)
+"gv" = (/turf/unsimulated/floor/tranquility/catwalk2,/area/tranquility/hanger)
+"gw" = (/obj/effect/decal/cleanable/dirt,/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk5,/area/tranquility/hanger)
+"gx" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"gy" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor/tranquility/catwalk5,/area/tranquility/hanger)
+"gz" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"gA" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"gB" = (/obj/machinery/space_heater,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
+"gC" = (/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk4,/area/tranquility/hanger)
+"gD" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor/tranquility/catwalk4,/area/tranquility/hanger)
+"gE" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
+"gF" = (/obj/machinery/light/spot,/turf/unsimulated/floor/tranquility/catwalk8,/area/tranquility/hanger)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -373,23 +375,23 @@ aaaacyeBeCcXczczcyaabBbTbUbUbTbTdZeleleleleteDeteleteubBbTbUeEepeveqeFeGeHeveIdt
 aaaacyczczcGcycGcyaabBdobUbUbUbTdZeNeOePeQeReSeTeUeVdZbBbTbUbBepepepeqeWeqepdmdsdseXdsdsdIdLdmaaaaaa
 aaaacycycycycycGcyaabBbTbUbBbBbBdZdZdZdZdZdZdZdZdZdZdZbBbUcHbBaaaaepepeqepepdmdmdmdmeYdmdmdmdmaaaaaa
 aaaaaaaaaaaacyczcyaabBbUbUdNaaaaaaaaaaaaaaaaaaaaaaaaaabHbUbTbLaaaaaaepeqeZaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaabBbBbBcYbBbBbBbUbTbBbBbBcmbBfafafafafafafafafafafbfcfafafafafafdfafafafafafafafafafafafaaaaa
-aaaaaaaabBfebTcfbUdObUbUbTbUbUdObUfffafgfhfifjfgfgfkfgfgfhfgfgfgfgfkfgflfgfifhfgfgfgfgfgfgfhfmfaaaaa
-aaaaaaaabBbUcZbTbTbUbUbUbTbUbUbUbUbTfafhfhfnfofofofnfofofofpfofofpfqfofofpfqfpfpfofofofofofgfhfaaaaa
-aaaaaaaabBbBcYbBfrfrfrfsftfufrfrbTbTfafvfwfxfyfyfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfzfAfaaaaa
-aaaaaaaacycyczcyfrfBfCfDfDfCfEfFbUbUfafgfwfxfyfyfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfzfgfaaaaa
-aaaaaaaacyczfGdFfrfHfDfIfIfDfJfFbUfKfafLfMfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfNfifaaaaa
-aaaaaaaacydjfOcGfrfPfCfIfIfCfQfFbUbUfafofRfxfyfyfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfSfhfaaaaa
-aaaaaaaacyczfTczfrfUfDfIfIfDfVfFbUbUfWfXfXfYfZfZfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfzfgfaaaaa
-aaaaaaaacycycycyfrgafDfIfIfDgbfrbUbTfagcgdgdgefZfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfzfgfaaaaa
-aaaaaaaaaaaaaaaagfggfIfIfIfIfDftbUbTghfXgdfXfXfZfxfxfyfyfyfyfyfyfyfxfxfxfxfxfyfyfyfyfyfyfyfzgifaaaaa
-aaaaaaaaaaaaaaaafrgjgkfIfIgkfDfubUbUfagcgdgdglfZfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfSfhfaaaaa
-aaaaaaaaaaaaaaaafrfVfEgmgngogpfrbUbUgqfXfXgrfZfZfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfzfhfaaaaa
-aaaaaaaaaaaaaaaafrfrfrfrfrfrfrfrbUbUfagsgtfxfyfyfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfzfhfaaaaa
-aaaaaaaaaaaaaaaaaaaacKcKcKcKcKcmbUfKfafLgufxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfxfNfifaaaaa
-aaaaaaaaaaaaaaaaaaaacKcRcRgvcKbBbUbTfafggwfxfyfyfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfzfgfaaaaa
-aaaaaaaaaaaaaaaaaaaacKgxdbgycRcYcZbTfafvfwfxfyfyfyfxfyfyfyfyfyfyfyfxfyfyfyfxfyfyfyfyfyfyfyfzgifaaaaa
-aaaaaaaaaaaaaaaaaaaacKgzddddcKbBbUbUfafgfggAgsgBgsgAgsgsgsgBgsgsgsgAgsgBgsgAgsgsgsgsgsgsgsfgfhfaaaaa
-aaaaaaaaaaaaaaaaaaaacKcKcKcKcKbBbBbBfafhfgfifhfhfggCfgfgfgfhfhfgfgfifhgDfgfifgfgfgfgfgfgfhfhfhfaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafaaaaa
+aaaaaaaabBbBbBcYbBbBbBbUbTbBbBbBcmbBfafafafafafafafafafafbfcfafafafafafdfafafafafafafafafafafafafeaa
+aaaaaaaabBffbTcfbUdObUbUbTbUbUdObUfgfafhfifjfkfhfhflfhfhfifhfhfhfhflfhfmfhfjfifhfhfhfhfhfhfnfofofeaa
+aaaaaaaabBbUcZbTbTbUbUbUbTbUbUbUbUbTfafififpfqfqfqfpfqfqfqfrfqfqfrfsfqfqfrfsfrfrfqfqfqfqfqfpfififeaa
+aaaaaaaabBbBcYbBftftftfufvfwftftbTbTfafxfyfzfAfAfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBfCfeaa
+aaaaaaaacycyczcyftfDfEfFfFfEfGfHbUbUfafhfyfzfAfAfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBfhfeaa
+aaaaaaaacyczfIdFftfJfFfKfKfFfLfHbUfMfafnfNfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfOfjfeaa
+aaaaaaaacydjfPcGftfQfEfKfKfEfRfHbUbUfafqfSfzfAfAfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBfifeaa
+aaaaaaaacyczfTczftfUfFfKfKfFfVfHbUbUfWfXfXfYfZfZfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBfhfeaa
+aaaaaaaacycycycyftgafFfKfKfFgbftbUbTfagcgdgdgefZfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBfhfeaa
+aaaaaaaaaaaaaaaagfggfKfKfKfKfFfvbUbTghfXgdgigjfZfzfzfAfAfAfAfAfAfAfzfzfzfzfzfAfAfAfAfAfAfAfzfBgkfeaa
+aaaaaaaaaaaaaaaaftglgmfKfKgmfFfwbUbUfagcgdgdgnfZfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBfifeaa
+aaaaaaaaaaaaaaaaftfVfGgogpgqgrftbUbUgsfXfXgtfZfZfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBfifeaa
+aaaaaaaaaaaaaaaaftftftftftftftftbUbUfagugvfzfAfAfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBfifeaa
+aaaaaaaaaaaaaaaaaaaacKcKcKcKcKcmbUfMfafngwfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfzfOfjfeaa
+aaaaaaaaaaaaaaaaaaaacKcRcRgxcKbBbUbTfafhgyfzfAfAfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBfhfeaa
+aaaaaaaaaaaaaaaaaaaacKgzdbgAcRcYcZbTfafxfyfzfAfAfAfzfAfAfAfAfAfAfAfzfAfAfAfzfAfAfAfAfAfAfAfzfBgkfeaa
+aaaaaaaaaaaaaaaaaaaacKgBddddcKbBbUbUfafhfhgCgugDgugCgugugugDgugugugCgugDgugCgugugugugugugugCfififeaa
+aaaaaaaaaaaaaaaaaaaacKcKcKcKcKbBbBbBfafifhfjfififhgEfhfhfhfififhfhfjfigFfhfjfhfhfhfhfhfhfifnfififeaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafeaa
 "}

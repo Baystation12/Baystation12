@@ -1,3 +1,61 @@
-"a" = ()
+"a" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/space)
+"b" = (/turf/unsimulated/wall,/area/space)
+"c" = (/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"d" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"e" = (/obj/structure/ladder/up,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"f" = (/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"g" = (/obj/structure/stairs/east,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"h" = (/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
 
-(1,1,1, 50,50,1) = {""}
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabbbbbbbaaaaaabbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaabcccccbaaaaaabdddddddddbaaaaaaaaaaaaaaaaaaaaaaa
+aaabcccccbaabbbbbdddddddddbaaaaaaaaaaaaaaaaaaaaaaa
+aaabcccccbaabdddbdddddddddbadddaaaaaaaaaaaaaaaaaaa
+aabbbbddbbaabdedbdddddddddbadedaaaaaaaaaaaaaaaaaaa
+aabffffffbaabdddbdddddddddbadddaaaaaaaaaaaaaaaaaaa
+aabffffffbabbbdbbdddddddddbaaaaaaaaaaaaaaaaaaaaaaa
+aabbbbbffbbbbadabbbbfffbbbbaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaabfffgbbaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaabfffgbbaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaabffbbbbaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaabffbbbbaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaabffffffaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaddda
+aaaaaabffffffaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaadeda
+aaaaaabffaaaaaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaddda
+aaaaaabffaaaaaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaabffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabbbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabfffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabfffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffbbbdbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffbbbdbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffbbbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabfffgbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabfffgbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffbbbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

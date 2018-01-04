@@ -16,17 +16,17 @@
 "ap" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
 "aq" = (/obj/machinery/light/small{dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
 "ar" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
-"as" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/toxin,/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
-"at" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/obj/item/weapon/storage/firstaid/erk,/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
-"au" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/regular,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
-"av" = (/obj/structure/table/standard,/obj/item/roller,/obj/item/roller,/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
+"as" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/toxin,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
+"at" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/obj/item/weapon/storage/firstaid/erk,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
+"au" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/regular,/obj/machinery/light{dir = 1},/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
+"av" = (/obj/structure/table/standard,/obj/item/roller,/obj/item/roller,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
 "aw" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
 "ax" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
 "ay" = (/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
 "az" = (/obj/structure/ladder,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
-"aA" = (/obj/structure/closet/secure_closet/paramedic,/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
-"aB" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
-"aC" = (/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
+"aA" = (/obj/structure/closet/secure_closet/paramedic,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
+"aB" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
+"aC" = (/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
 "aD" = (/obj/structure/closet/medical_wall/filled,/turf/unsimulated/wall,/area/tranquility/infirmary)
 "aE" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (EAST)"; icon_state = "maint"; dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
 "aF" = (/obj/structure/ladder,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint4)
@@ -34,10 +34,10 @@
 "aH" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
 "aI" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/open,/area/tranquility/shaft)
 "aJ" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/open,/area/tranquility/shaft)
-"aK" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
+"aK" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/vending/medical,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
 "aL" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/tranquility/infirmary)
-"aM" = (/obj/effect/decal/cleanable/dirt,/obj/structure/closet/secure_closet/medical3,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
-"aN" = (/obj/machinery/space_heater,/turf/simulated/floor/tiled/white,/area/tranquility/infirmary)
+"aM" = (/obj/effect/decal/cleanable/dirt,/obj/structure/closet/secure_closet/medical3,/obj/machinery/light{dir = 8},/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
+"aN" = (/obj/machinery/space_heater,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/tranquility/infirmary)
 "aO" = (/turf/unsimulated/wall,/area/tranquility/halls1)
 "aP" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/tranquility/halls1)
 "aQ" = (/obj/machinery/door/airlock/halo_maint,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/shaftmaint)
@@ -152,9 +152,10 @@
 "cV" = (/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/tranquility/random2)
 "cW" = (/obj/structure/grille,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/tranquility/maint3)
 "cX" = (/obj/effect/landmark/drop_pod_landing,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/tranquility/outside)
-"cY" = (/obj/effect/landmark/drop_pod_landing,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/tranquility/random2)
+"cY" = (/turf/simulated/open,/area/tranquility/random2)
 "cZ" = (/obj/effect/landmark/test/safe_turf,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/tranquility/outside)
 "da" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/tranquility/outside)
+"db" = (/obj/effect/landmark/drop_pod_landing,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/tranquility/random2)
 
 (1,1,1) = {"
 aaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababab
@@ -193,18 +194,18 @@ ababcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVababababababcVcVcVcV
 cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
 cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
 cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
-cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
+cUcUcUcUcUcUcUcUcUcUcUcUcUcUcXcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
+cUcUcUcUcUcXcUcUcUcUcUcUcUcUcUcUcUcUcUcUcXcUcUcVcVcVcYcYcYcYcYcYcYcVcVcVcVcVcYcYcYcYcYcYcYcVcVcVcVcV
+cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcYcYcYcYcYcYcYcVcVcVcVcVcYcYcYcYcYcYcYcVcVcVcVcV
+cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcYcYcYcYcYcYcYcVcVcVcVcVcYcYcYcYcYcYcYcVcVcVcVcV
+cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcYcYcYcYcYcYcYcVcVcVcVcVcYcYcYcYcYcYcYcVcVcVcVcV
+cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcYcYcYcYcYcYcYcVcVcVcVcVcYcYcYcYcYcYcYcVcVcVcVcV
+cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcYcYcYcYcYcYcYcVcVcVcVcVcYcYcYcYcYcYcYcVcVcVcVcV
+cUcUcUcUcUcUcUcUcUcUcUcUcUcUcXcUcUcUcUcUcXcUcUcVcVcVcYcYcYcYcYcYcYcVcVcVcVcVcYcYcYcYcYcYcYcVcVcVcVcV
 cUcUcUcUcUcXcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
-cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcYcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcYcVcVcVcVcVcV
 cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
 cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
-cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
-cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
-cUcUcUcUcUcUcUcUcUcUcUcUcUcUcXcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcYcVcVcVcVcVcVcVcVcVcVcVcV
-cUcUcUcUcUcXcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
-cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
-cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcYcVcVcVcVcVcV
-cUcUcUcUcZcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcYcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
+cUcUcUcUcZcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
 cUdacUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
-cUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcUcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcVcV
+cUcUcUcUcUcUcUcUcUcUcUcUcUcUcXcUcUcUcUcUcUcUcUcVcVcVdbcVcVcVcVcVdbcVcVcVcVcVdbcVcVcVcVcVcVcVcVcVcVdb
 "}

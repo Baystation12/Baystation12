@@ -126,3 +126,18 @@
 /area/tranquility/bar
 	name = "\improper bar"
 	icon_state = "bar"
+/area/tranquility/hanger2
+	name = "\improper hanger2"
+	icon_state = "hanger2"
+/area/tranquility/engineering
+	name = "\improper engineering"
+	icon_state = "engineering"
+/area/tranquility/breakroom
+	name = "\improper breakroom"
+	icon_state = "break"
+/area/tranquility/quarters1
+	name = "\improper quarters1"
+	icon_state = "quarters1"
+/area/tranquility/laundry
+	name = "\improper laundry"
+	icon_state = "laundry"
