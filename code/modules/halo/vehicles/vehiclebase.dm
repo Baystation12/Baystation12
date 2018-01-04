@@ -162,6 +162,7 @@
 	if(user in gunners)
 		unassign_gunner(user)
 	user.loc = src.loc
+	contents -= user
 	render_mob_sprites()
 	if(!override_message)
 		user.visible_message("<span class = 'notice'>[user] exits [name]</span>")

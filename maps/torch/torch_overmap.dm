@@ -181,14 +181,14 @@
 /obj/machinery/computer/shuttle_control/explore/aquila
 	name = "aquila control console"
 	shuttle_tag = "Aquila"
-	req_access = list(access_aquila_helm)
+	req_access = list()
 
 /obj/machinery/computer/shuttle_control/explore/calypso
 	name = "calypso control console"
 	shuttle_tag = "Calypso"
-	req_access = list(access_calypso_helm)
+	req_access = list()
 
 /obj/machinery/computer/shuttle_control/explore/guppy
 	name = "guppy control console"
 	shuttle_tag = "Guppy"
-	req_access = list(access_guppy_helm)
+	req_access = list()
