@@ -35,7 +35,11 @@
 	set category = "Vehicle"
 	set src in range(1)
 
-	if(!ishuman(usr))
+	var/mob/living/carbon/human/h = usr
+	if(!istype(h))
+		return
+	if(h.incapacitated())
+		to_chat(h,"<span class = 'warning'>You can't enter [name] in your current state!</span>")
 		return
 
 	proc_enter_exit_vehicle(usr)
@@ -167,7 +171,11 @@
 	set category = "Vehicle"
 	set src in range(1)
 
-	if(!ishuman(usr))
+	var/mob/living/carbon/human/h = usr
+	if(!istype(h))
+		return
+	if(h.incapacitated())
+		to_chat(h,"<span class = 'warning'>You can't hijack [name] in your current state!</span>")
 		return
 
 	var/mob/user = usr
