@@ -69,10 +69,11 @@
 	G.ammo_magazine = new /obj/item/ammo_magazine/m127_saphp
 	H.equip_to_slot_or_del(G,slot_belt)
 
-/decl/hierarchy/outfit/job/colonist/mayor
+/decl/hierarchy/outfit/job/mayor
 	name = "Mayor"
 
 	uniform = /obj/item/clothing/under/blazer
+	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	shoes = /obj/item/clothing/shoes/black
 
 	flags = 0

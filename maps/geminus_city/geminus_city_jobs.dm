@@ -71,7 +71,7 @@
 
 	loadout_allowed = TRUE
 	announced = FALSE
-	outfit_type = /decl/hierarchy/outfit/job/colonist/mayor
+	outfit_type = /decl/hierarchy/outfit/job/mayor
 
 	latejoin_at_spawnpoints = FALSE
 
