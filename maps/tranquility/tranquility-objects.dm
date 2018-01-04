@@ -247,3 +247,25 @@
 	lift.open_doors()
 
 	qdel(src) // We're done.
+
+turf/unsimulated/floor/tranquility
+	icon = 'code/modules/halo/icons/catwalks.dmi'
+	name = "catwalk"
+turf/unsimulated/floor/tranquility/catwalk1
+	icon_state = "catwalk7"
+turf/unsimulated/floor/tranquility/catwalk2
+	icon_state = "catwalk10"
+turf/unsimulated/floor/tranquility/catwalk3
+	icon_state = "catwalk13"
+turf/unsimulated/floor/tranquility/catwalk4
+	icon_state = "catwalk14"
+turf/unsimulated/floor/tranquility/catwalk5
+	icon_state = "catwalk11"
+turf/unsimulated/floor/tranquility/catwalk6
+	icon_state = "catwalk5"
+turf/unsimulated/floor/tranquility/catwalk7
+	icon_state = "catwalk6"
+turf/unsimulated/floor/tranquility/catwalk8
+	icon_state = "catwalk15"
+turf/unsimulated/floor/tranquility/catwalk9
+	icon_state = "catwalk9"
