@@ -1,0 +1,4 @@
+author: "CountAlex"
+delete-after: True
+changes: 
+  - rscadd: "\"Adds engineering program for monitoring shield generators.\""
