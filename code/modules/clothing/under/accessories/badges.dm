@@ -75,7 +75,7 @@
 			var/obj/item/device/pda/pda = O
 			id_card = pda.id
 
-		if(access_security in id_card.access || emagged)
+		if(access_sec_guard in id_card.access || emagged)
 			to_chat(user, "You imprint your ID details onto the badge.")
 			set_name(user.real_name)
 		else
