@@ -1,4 +1,8 @@
-
+/datum/map/unsc_frigate
+	apc_test_exempt_areas = list(
+		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/unscfrigate = NO_SCRUBBER|NO_VENT
+	)
 //Top Deck
 
 /area/unscfrigate/bridge

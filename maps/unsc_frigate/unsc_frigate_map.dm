@@ -11,7 +11,7 @@
 	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.png'
-	id_hud_icons = 'maps/insurrection/insurrection_hud_icons.dmi'
+	id_hud_icons = 'maps/unsc_frigate/frigate_hud_icons.dmi'
 
 	allowed_jobs = ALL_SHIP_JOBS
 	allowed_spawns = list("Arrivals Shuttle","Cryogenic Storage")
