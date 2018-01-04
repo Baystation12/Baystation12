@@ -627,7 +627,8 @@
 	return
 
 /mob/living/proc/check_has_mouth()
-	return 1
+	// mobs do not have mouths by default
+	return 0
 
 /mob/living/carbon/human/check_has_mouth()
 	// Todo, check stomach organ when implemented.

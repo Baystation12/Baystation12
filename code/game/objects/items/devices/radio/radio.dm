@@ -17,6 +17,7 @@
 	var/list/channels = list() //see communications.dm for full list. First channel is a "default" for :h
 	var/subspace_transmission = 0
 	var/syndie = 0//Holder to see if it's a syndicate encrypted radio
+	var/intercept = 0 //can intercept other channels
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throw_speed = 2
@@ -759,3 +760,10 @@
 	..()
 	if(istype(user, /mob/living/carbon))
 		playsound(src, "button", 10)
+
+/obj/item/device/radio/intercept
+	name = "bulky radio"
+	desc = "A large radio fitted with several military-grade communication interception circuits."
+	icon_state = "radio"
+	intercept = 1
+	w_class = ITEM_SIZE_NORMAL

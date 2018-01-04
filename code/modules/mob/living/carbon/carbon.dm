@@ -457,3 +457,13 @@
 
 /mob/living/carbon/proc/need_breathe()
 	return
+
+/mob/living/carbon/check_has_mouth()
+	// carbon mobs have mouths by default
+	// behavior of this proc for humans is overridden in human.dm
+	return 1
+
+/mob/living/carbon/proc/check_mouth_coverage()
+	// carbon mobs do not have blocked mouths by default
+	// overridden in human_defense.dm
+	return null
