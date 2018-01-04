@@ -51,7 +51,8 @@
 				to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
 		else
 			to_chat(user, "<span class='warning'>\The [C] is already handcuffed!</span>")
-	..()
+	else
+		..()
 
 /obj/item/weapon/handcuffs/proc/can_place(var/mob/target, var/mob/user)
 	if(user == target || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
