@@ -43,7 +43,7 @@
 /obj/vehicles/proc/proc_enter_exit_vehicle(var/mob/user)
 	if(!user)
 		return
-	if(istype(user.loc,/obj/vehicles))
+	if(istype(user.loc,/obj/vehicles) && user.loc != src)
 		to_chat(user,"<span class = 'warning'>Exit your current vehicle first!</span>")
 		return
 	if(user in contents)
@@ -63,9 +63,9 @@
 
 /obj/vehicles/relaymove(var/turf/newloc,var/dir)
 	Move(newloc,dir)
+	render_mob_sprites()
 
 /obj/vehicles/Move(var/turf/newloc,var/dir)
-	render_mob_sprites()
 	if(!controller.try_move(newloc,dir))
 		return 0
 	. = ..()
