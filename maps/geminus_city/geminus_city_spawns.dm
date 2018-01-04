@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(colony_spawns)
 
 /datum/spawnpoint/colonist
 	display_name = "Colony Arrival Shuttle"
-	exclude_jobs = list("Marine","Marine - Squad Leader")
+	disallow_job = list("Marine","Marine - Squad Leader")
 
 /datum/spawnpoint/colonist/New()
 	..()
