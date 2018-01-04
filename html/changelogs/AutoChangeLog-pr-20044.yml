@@ -1,0 +1,4 @@
+author: "PsiOmegaDelta"
+delete-after: True
+changes: 
+  - tweak: "Can now adjust (almost) all prefix keys. These are used for language selection, emoting, etc. See Character Setup > Global > Prefix Keys"
