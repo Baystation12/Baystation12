@@ -1208,7 +1208,7 @@
 	latejoin_at_spawnpoints = 1
 	announced = FALSE
 
-	access = list(access_solgov_crew, access_maint_tunnels, access_external_airlocks,
+	access = list(access_marshal, access_solgov_crew, access_maint_tunnels, access_external_airlocks,
 					access_eva, access_emergency_storage, access_teleporter)
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant)
