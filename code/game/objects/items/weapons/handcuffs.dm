@@ -37,16 +37,21 @@
 		place_handcuffs(user, user)
 		return
 
-	if(!C.handcuffed)
-		if (C == user)
-			place_handcuffs(user, user)
-			return
+	// only carbons can be handcuffed
+	if(istype(C))
+		if(!C.handcuffed)
+			if (C == user)
+				place_handcuffs(user, user)
+				return
 
-		//check for an aggressive grab (or robutts)
-		if(can_place(C, user))
-			place_handcuffs(C, user)
+			//check for an aggressive grab (or robutts)
+			if(can_place(C, user))
+				place_handcuffs(C, user)
+			else
+				to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
 		else
-			to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
+			to_chat(user, "<span class='warning'>\The [C] is already handcuffed!</span>")
+	..()
 
 /obj/item/weapon/handcuffs/proc/can_place(var/mob/target, var/mob/user)
 	if(user == target || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
