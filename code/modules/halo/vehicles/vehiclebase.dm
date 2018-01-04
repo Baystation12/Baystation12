@@ -43,6 +43,9 @@
 /obj/vehicles/proc/proc_enter_exit_vehicle(var/mob/user)
 	if(!user)
 		return
+	if(istype(user.loc,/obj/vehicles))
+		to_chat(user,"<span class = 'warning'>Exit your current vehicle first!</span>")
+		return
 	if(user in contents)
 		exit_vehicle(user)
 		controller.on_exit_vehicle()
