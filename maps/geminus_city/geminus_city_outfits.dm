@@ -7,6 +7,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	l_pocket = /obj/item/device/encryptionkey/shipcom
 	flags = 0
 
 /decl/hierarchy/outfit/job/marine/leader

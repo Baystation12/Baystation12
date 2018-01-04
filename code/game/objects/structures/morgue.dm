@@ -415,7 +415,7 @@
 	desc = "Burn baby burn!"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "crema_switch"
-	req_access = list(access_crematorium)
+	req_access = list()
 	id = 1
 
 /obj/machinery/button/crematorium/update_icon()

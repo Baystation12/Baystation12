@@ -16,7 +16,7 @@
 	icon_opened = "medicalopen"
 	icon_broken = "medicalbroken"
 	icon_off = "medicaloff"
-	req_access = list(access_medical_equip)
+	req_access = list()
 
 /obj/structure/closet/secure_closet/medical1/WillContain()
 	return list(
@@ -40,7 +40,7 @@
 	icon_opened = "medicalopen"
 	icon_broken = "medicalbroken"
 	icon_off = "medicaloff"
-	req_access = list(access_surgery)
+	req_access = list()
 
 /obj/structure/closet/secure_closet/medical2/WillContain()
 	return list(
@@ -50,7 +50,7 @@
 
 /obj/structure/closet/secure_closet/medical3
 	name = "medical doctor's locker"
-	req_access = list(access_medical_equip)
+	req_access = list()
 	icon_state = "securemed1"
 	icon_closed = "securemed"
 	icon_locked = "securemed1"
@@ -86,7 +86,7 @@
 	icon_opened = "medicalopen"
 	icon_broken = "medicalbroken"
 	icon_off = "medicaloff"
-	req_access = list(access_medical_equip)
+	req_access = list()
 
 /obj/structure/closet/secure_closet/paramedic/WillContain()
 	return list(
@@ -114,7 +114,7 @@
 
 /obj/structure/closet/secure_closet/CMO
 	name = "chief medical officer's locker"
-	req_access = list(access_cmo)
+	req_access = list()
 	icon_state = "cmosecure1"
 	icon_closed = "cmosecure"
 	icon_locked = "cmosecure1"
@@ -150,7 +150,7 @@
 	icon_opened = "medicalopen"
 	icon_broken = "medicalbroken"
 	icon_off = "medicaloff"
-	req_access = list(access_chemistry)
+	req_access = list()
 
 /obj/structure/closet/secure_closet/chemical/WillContain()
 	return list(
@@ -171,11 +171,11 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
-	req_access = list(access_medical_equip)
+	req_access = list()
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"
-	req_access = list(access_psychiatrist,access_chapel_office)
+	req_access = list()
 	icon_state = "chaplainsecure1"
 	icon_closed = "chaplainsecure"
 	icon_locked = "chaplainsecure1"
@@ -215,7 +215,7 @@
 	icon_opened = "secureviroopen"
 	icon_broken = "securevirobroken"
 	icon_off = "securevirooff"
-	req_access = list(access_virology)
+	req_access = list()
 
 /obj/structure/closet/secure_closet/virology/WillContain()
 	return list(
@@ -246,7 +246,7 @@
 	icon_opened = "securemedopen"
 	icon_broken = "securemedbroken"
 	icon_off = "securemedoff"
-	req_access = list(64)
+	req_access = list()
 
 /obj/structure/closet/secure_closet/psychiatry/WillContain()
 	return list(
