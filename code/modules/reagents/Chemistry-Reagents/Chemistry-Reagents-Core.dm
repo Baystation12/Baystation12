@@ -220,5 +220,5 @@
 
 /datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
-		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
+		L.adjust_fire_stacks(amount / 2) // Splashing people with welding fuel to make them easy to ignite!
 

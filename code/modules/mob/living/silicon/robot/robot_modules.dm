@@ -312,7 +312,7 @@ var/global/list/robot_modules = list(
 
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
-		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
+		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 4 * amount)
 
 	..()
 

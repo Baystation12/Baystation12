@@ -82,7 +82,7 @@
 	flicker = !flicker
 
 //creates a new overlay for a scanned object
-/obj/item/device/t_scanner/proc/get_overlay(obj/scanned)
+/obj/item/device/t_scanner/proc/get_overlay(var/atom/movable/scanned)
 	//Use a cache so we don't create a whole bunch of new images just because someone's walking back and forth in a room.
 	//Also means that images are reused if multiple people are using t-rays to look at the same objects.
 	if(scanned in overlay_cache)
@@ -98,7 +98,22 @@
 			I.color = P.pipe_color
 			I.overlays += P.overlays
 			I.underlays += P.underlays
-
+		if(ismob(scanned))
+			if(ishuman(scanned))
+				var/mob/living/carbon/human/H = scanned
+				if(H.is_cloaked())
+					if(H.species.appearance_flags & HAS_SKIN_COLOR)
+						I.color = RGB(r_skin, g_skin, b_skin)
+					I.overlays += H.overlays
+					I.underlays += H.underlays
+				else return
+			else
+				var/mob/M = scanned
+				if(M.alpha < 255)
+					I.color = M.color
+					I.overlays += M.overlays
+					I.underlays += M.underlays
+				else return
 		I.alpha = 128
 		I.mouse_opacity = 0
 		. = I
