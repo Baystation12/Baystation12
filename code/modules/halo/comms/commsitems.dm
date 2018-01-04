@@ -80,6 +80,17 @@
 	spawn(6) //The convert_freq_to_numerical proc runtimes if this isn't here, it attempts to read the innie frequency
 		recieving_frequencies.Add(halo_frequencies.innie_freq)
 
+/obj/item/device/mobilecomms/commsbackpack/unsc/permanant
+	active = 1
+
+/obj/item/device/mobilecomms/commsbackpack/unsc/permanant/set_active()
+	return
+
+/obj/item/device/mobilecomms/commsbackpack/innie/permanant
+	active = 1
+
+/obj/item/device/mobilecomms/commsbackpack/innie/permanant/set_active()
+	return
 
 #undef SHIPCOM_NAME
 #undef TEAMCOM_NAME
