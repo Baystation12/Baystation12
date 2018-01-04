@@ -1,7 +1,15 @@
 /datum/map/unsc_frigate
 	apc_test_exempt_areas = list(
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/unscfrigate = NO_SCRUBBER|NO_VENT
+		/area/unscfrigate = NO_SCRUBBER|NO_VENT,
+		/area/unscfrigate/logistics = NO_SCRUBBER,
+		/area/unscfrigate/medbay = NO_SCRUBBER,
+		/area/unscfrigate/hangar_starb = NO_SCRUBBER,
+		/area/unscfrigate/central = NO_SCRUBBER,
+		/area/unscfrigate/hangar_port = NO_SCRUBBER,
+		/area/unscfrigate/tcomms = NO_SCRUBBER,
+		/area/unscfrigate/bridge = NO_SCRUBBER,
+		/area/unscfrigate/mac/cannon = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 //Top Deck
 
