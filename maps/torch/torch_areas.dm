@@ -460,6 +460,12 @@
 	name = "\improper Merchant Vessel - Home"
 	icon_state = "shuttlegrn"
 
+//Colonial Marshal
+
+/area/shuttle/marshal/home
+	name = "/improper Marshal Shuttle - Home"
+	icon_state = "shuttlered"
+
 //Merc
 
 /area/syndicate_mothership
@@ -961,7 +967,7 @@
 	icon_state = "panelsS"
 
 /area/aux_eva
-	name = "\improper Auxiliary EVA Storage"
+	name = "\improper Command EVA Storage"
 	icon_state = "eva"
 
 /area/thruster
@@ -1385,6 +1391,12 @@
 /area/merchant_station
 	name = "\improper Merchant Station"
 	icon_state = "LP"
+
+// Colonial Marshal
+
+/area/marshal_station
+	name = "/improper Marshal Station"
+	icon_state = "LPS"
 
 // Syndicate
 

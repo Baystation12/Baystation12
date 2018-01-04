@@ -4,7 +4,7 @@
 
 /datum/category_item/player_setup_item/player_global/ooc
 	name = "OOC"
-	sort_order = 5
+	sort_order = 4
 
 /datum/category_item/player_setup_item/player_global/ooc/load_preferences(var/savefile/S)
 	S["ignored_players"]	>> pref.ignored_players

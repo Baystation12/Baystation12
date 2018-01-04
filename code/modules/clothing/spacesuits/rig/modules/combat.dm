@@ -155,11 +155,11 @@
 
 	usable = 0
 
-	suit_overlay_active = "mounted-taser"
-	suit_overlay_inactive = "mounted-taser"
+	suit_overlay_active = null
+	suit_overlay_inactive = null
 
 	interface_name = "mounted taser"
-	interface_desc = "A shoulder-mounted cell-powered taser."
+	interface_desc = "A palm-mounted, cell-powered taser."
 	origin_tech = list(TECH_POWER = 5, TECH_COMBAT = 5, TECH_ENGINEERING = 6)
 	gun = /obj/item/weapon/gun/energy/taser/mounted
 

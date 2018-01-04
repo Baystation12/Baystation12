@@ -1,8 +1,8 @@
 /datum/map/torch
 	species_to_job_whitelist = list(
-		/datum/species/nabber = list(/datum/job/ai, /datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant,
+		/datum/species/nabber = list(/datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant,
 			/datum/job/roboticist, /datum/job/cargo_contractor, /datum/job/chef, /datum/job/engineer_contractor, /datum/job/doctor_contractor, /datum/job/bartender),
-		/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
+		/datum/species/vox = list(/datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
 	)
 
 #define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder, /datum/job/warden, /datum/job/marshal
@@ -25,7 +25,7 @@
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
-						/datum/job/ai, /datum/job/cyborg,
+						/datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
 						/datum/job/merchant, /datum/job/stowaway, /datum/job/marshal
 						)
@@ -178,9 +178,6 @@
 		/datum/mil_rank/marine/o3,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/marine/o2,
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/marine/o1
 	)
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -221,9 +218,6 @@
 		/datum/mil_rank/marine/o3,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/marine/o2,
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/marine/o1
 	)
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
@@ -1148,6 +1142,11 @@
 		/datum/mil_rank/civ/nt
 	)
 
+/datum/job/cyborg
+	total_positions = 3
+	spawn_positions = 3
+	supervisors = "your laws"
+
 
 /datum/job/merchant
 	title = "Merchant"
@@ -1187,7 +1186,6 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 	latejoin_at_spawnpoints = 1
-	announced = FALSE
 
 /datum/job/marshal
 	title = "Colonial Marshal"
@@ -1208,7 +1206,7 @@
 	latejoin_at_spawnpoints = 1
 	announced = FALSE
 
-	access = list(access_solgov_crew, access_maint_tunnels, access_external_airlocks,
+	access = list(access_marshal, access_solgov_crew, access_maint_tunnels, access_external_airlocks,
 					access_eva, access_emergency_storage, access_teleporter)
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant)
