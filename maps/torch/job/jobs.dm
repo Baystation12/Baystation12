@@ -5,7 +5,7 @@
 		/datum/species/vox = list(/datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
 	)
 
-#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder, /datum/job/warden
+#define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder, /datum/job/warden, /datum/job/marshal
 	species_to_job_blacklist = list(
 		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/officer, /datum/job/detective), //Other jobs unavailable via branch restrictions,
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
@@ -27,7 +27,7 @@
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
-						/datum/job/merchant, /datum/job/stowaway
+						/datum/job/merchant, /datum/job/stowaway, /datum/job/marshal
 						)
 
 
@@ -1186,4 +1186,27 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 	latejoin_at_spawnpoints = 1
+
+/datum/job/marshal
+	title = "Colonial Marshal"
+	department = "Civilian"
+	department_flag = CIV
+
+	total_positions = 2
+	spawn_positions = 2
+	availablity_chance = 20
+	supervisors = "the Sol Central Government and the SCG Charter"
+	selection_color = "#515151"
+	ideal_character_age = 30
+	minimal_player_age = 10
+	create_record = 0
+	outfit_type = /decl/hierarchy/outfit/job/torch/marshal
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/marshal)
+	latejoin_at_spawnpoints = 1
 	announced = FALSE
+
+	access = list(access_marshal, access_solgov_crew, access_maint_tunnels, access_external_airlocks,
+					access_eva, access_emergency_storage, access_teleporter)
+
+	software_on_spawn = list(/datum/computer_file/program/digitalwarrant)

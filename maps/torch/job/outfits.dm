@@ -721,3 +721,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	..()
 	var/obj/item/weapon/card/id/torch/stowaway/ID = new(H.loc)
 	H.put_in_hands(ID)
+
+/decl/hierarchy/outfit/job/torch/marshal
+	name = OUTFIT_JOB_NAME("Colonial Marshal - Torch")
+	uniform = /obj/item/clothing/under/det/grey
+	suit = /obj/item/clothing/suit/storage/toggle/marshal_jacket
+	shoes = /obj/item/clothing/shoes/dress
+	id_type = /obj/item/weapon/card/id/torch/marshal
+	pda_type = /obj/item/device/pda/detective
