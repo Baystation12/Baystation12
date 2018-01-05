@@ -133,37 +133,59 @@
 	damage_type = BURN
 	vacuum_traversal = 0
 
-/obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/carbon/M)
-
-	to_chat(M, "<span class='danger'>You hear a loud roar.</span>")
-	var/ear_safety = 0
-	var/mob/living/carbon/human/H = M
-	if(iscarbon(M))
-		if(ishuman(M))
-			if(istype(H.l_ear, /obj/item/clothing/ears/earmuffs) || istype(H.r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_safety += 2
-			if(HULK in M.mutations)
-				ear_safety += 1
-			if(istype(H.head, /obj/item/clothing/head/helmet))
-				ear_safety += 1
-	if(ear_safety == 1)
-		M.make_dizzy(120)
-	else if (ear_safety > 1)
-		M.make_dizzy(60)
-	else if (!ear_safety)
-		M.make_dizzy(300)
-		M.ear_damage += rand(1, 10)
-		M.ear_deaf = max(M.ear_deaf,15)
-	if (M.ear_damage >= 15)
-		to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
-		if (prob(M.ear_damage - 5))
-			to_chat(M, "<span class='danger'>You can't hear anything!</span>")
-			M.sdisabilities |= DEAF
-	else
-		if (M.ear_damage >= 5)
-			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
-	M.update_icons()
-
 /obj/item/projectile/energy/plasmastun/on_hit(var/atom/target)
-	bang(target)
+	target.sound_bang()
 	. = ..()
+
+/atom/proc/sound_bang()
+	return
+
+/mob/sound_bang()
+	to_chat(src, "<span class='danger'>You hear a loud roar.</span>")
+	var/safety = sound_safety()
+	sound_damage(safety)
+	update_icons()
+
+/mob/living/carbon/human/sound_bang()
+	..()
+	if (ear_damage >= 15)
+		to_chat(src, "<span class='danger'>Your ears start to ring badly!</span>")
+		if (prob(ear_damage - 5))
+			to_chat(src, "<span class='danger'>You can't hear anything!</span>")
+			sdisabilities |= DEAF
+	else
+		if (ear_damage >= 5)
+			to_chat(src, "<span class='danger'>Your ears start to ring!</span>")
+
+/atom/proc/sound_safety()
+	return 0
+
+/mob/sound_safety()
+	. = ..()
+	if(istype(get_equipped_item(slot_l_ear), /obj/item/clothing/ears/earmuffs) || istype(get_equipped_item(slot_r_ear), /obj/item/clothing/ears/earmuffs))
+		. += 2
+	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/helmet))
+		. += 1
+
+/mob/living/carbon/human/sound_safety()
+	. = ..()
+	if(HULK in mutations)
+		. += 1
+
+/atom/proc/sound_damage(var/ear_safety)
+	return
+
+/mob/sound_damage(var/ear_safety)
+	..()
+	if(ear_safety == 1)
+		make_dizzy(120)
+	else if (ear_safety > 1)
+		make_dizzy(60)
+	else if (!ear_safety)
+		make_dizzy(300)
+		ear_deaf = max(ear_deaf,15)
+
+/mob/living/carbon/human/sound_damage(var/ear_safety)
+	..()
+	if(!ear_safety)
+		ear_damage += rand(1, 10)
