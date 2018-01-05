@@ -4,29 +4,6 @@
 	icon = 'icons/turf/desert.dmi'
 	icon_state = "desert"
 
-/turf/unsimulated/floor/desert/New()
-	. = ..()
-	icon_state = "desert[rand(0,6)]"
-
-	if(prob(0.5))
-		new /obj/structure/tree/palm_giant(src)
-		return .
-
-	if(prob(1))
-		new /obj/structure/tree/palm(src)
-		return .
-
-	if(prob(2))
-		new /obj/effect/flora/desert(src)
-		return .
-
-	if(prob(1))
-		if(prob(50))
-			new /obj/effect/rocks(src)
-		else
-			new /obj/effect/rocks/small(src)
-		return .
-
 /turf/unsimulated/floor/desert/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if(!W || !user)
@@ -84,7 +61,7 @@
 
 /turf/unsimulated/floor/sand_mars/New()
 	..()
-	icon_state = "[rand(1,7)]"
+	icon_state = "[rand(2,7)]"
 
 /turf/unsimulated/floor/sand_moon
 	name = "sand"

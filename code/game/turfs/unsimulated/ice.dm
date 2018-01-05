@@ -12,3 +12,8 @@
 /turf/unsimulated/floor/ice2/New()
 	. = ..()
 	icon_state = "ice[rand(1,7)]"
+
+/turf/unsimulated/floor/ice3
+	name = "snow"
+	icon = 'code/modules/halo/icons/turfs/Ground2.dmi'
+	icon_state = "ground_frozen"

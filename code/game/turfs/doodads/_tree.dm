@@ -6,7 +6,16 @@
 	var/woodleft = 3
 	anchored = 1
 
-/obj/structure/tree/New()
+/obj/structure/tree/two
+	icon_state = "tree2"
+
+/obj/structure/tree/three
+	icon_state = "tree3"
+
+/obj/structure/tree/four
+	icon_state = "tree4"
+
+/obj/structure/tree/rand/New()
 	..()
 	icon_state = "tree[rand(1,4)]"
 
@@ -49,6 +58,15 @@
 /obj/structure/tree/bushy
 	icon_state = "bush1"
 
-/obj/structure/tree/bushy/New()
+/obj/structure/tree/bushy/two
+	icon_state = "bush2"
+
+/obj/structure/tree/bushy/rand/New()
 	..()
 	icon_state = "bush[rand(1,2)]"
+
+/obj/structure/tree/ex_act(var/severity)
+	qdel(src)
+
+/obj/structure/tree/fire_act(var/datum/gas_mixture/air, var/exposed_temperature, var/exposed_volume)
+	ex_act(1)

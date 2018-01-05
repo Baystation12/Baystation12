@@ -11,7 +11,7 @@
 
 /obj/structure/tree/snow_pine_giant
 	name = "pine tree"
-	icon = 'icons/obj/flora/pinetrees.dmi'
+	icon = 'code/modules/halo/icons/doodads/trees.dmi'
 	icon_state = "pine1"
 	woodleft = 5
 
@@ -28,13 +28,3 @@
 /obj/structure/tree/snow_dead/New()
 	..()
 	icon_state = "tree_[rand(1,6)]"
-
-/obj/effect/flora/snow
-	name = "snowy grass"
-	icon = 'icons/obj/flora/snowflora.dmi'
-	icon_state = "snowgrass1bb"
-
-/obj/effect/flora/snow/pick_icon_state()
-	..()
-	if(findtext(icon_state,"snowbush"))
-		name = "snowy bush"

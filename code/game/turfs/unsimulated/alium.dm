@@ -12,7 +12,7 @@
 /turf/unsimulated/floor/alien_curved
 	name = "alien plating"
 	icon = 'icons/turf/flooring/alium.dmi'
-	icon_state = "curved"
+	icon_state = "curvy"
 
 /turf/unsimulated/floor/alien_curved/New()
 	. = ..()

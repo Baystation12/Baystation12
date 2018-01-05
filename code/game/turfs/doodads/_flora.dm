@@ -7,11 +7,7 @@
 
 /obj/effect/flora/New()
 	..()
-	pick_icon_state()
-
-/obj/effect/flora/proc/pick_icon_state()
-	var/list/possible_icon_states = icon_states(src.icon)
-	icon_state = pick(possible_icon_states)
+	icon_state = "firstbush_[rand(1,4)]"
 
 /obj/effect/flora/attackby(obj/item/I as obj, mob/user as mob)
 	. = 1
@@ -41,3 +37,9 @@
 				qdel(src)
 	else
 		to_chat(user,"<span class='warning'>You need something sharp to clear away [src]</span>")
+
+/obj/effect/flora/ex_act(var/severity)
+	qdel(src)
+
+/obj/effect/flora/fire_act(var/datum/gas_mixture/air, var/exposed_temperature, var/exposed_volume)
+	ex_act(1)
