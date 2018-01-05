@@ -58,7 +58,7 @@
 		qdel(src)
 		return
 	if (istype(M, /atom/movable))
-		if(dangerous) //oh dear a problem, put em in deep space
+		if(dangerous && prob(failchance)) //oh dear a problem, put em in deep space
 			var/destination_z = GLOB.using_map.get_transit_zlevel(z)
 			do_teleport(M, locate(rand(TRANSITIONEDGE, world.maxx - TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy -TRANSITIONEDGE), destination_z), 0)
 		else
