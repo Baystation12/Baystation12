@@ -3,7 +3,7 @@
 	name = "Sandy terrain turf generator"
 
 /obj/effect/landmark/biome/sand_turf/New()
-	..()
+	. = ..()
 	atom_types = list(pick(\
 		/turf/unsimulated/floor/desert,\
 		/turf/unsimulated/floor/desert2,\
@@ -20,7 +20,7 @@
 	name = "Sandy terrain turf generator for sand type 1"
 
 /obj/effect/landmark/biome/sand_turf/sand1/New()
-	..()
+	. = ..()
 	atom_types = list(/turf/unsimulated/floor/desert)
 
 
@@ -28,7 +28,7 @@
 	name = "Sandy terrain turf generator for sand type 2"
 
 /obj/effect/landmark/biome/sand_turf/sand2/New()
-	..()
+	. = ..()
 	atom_types = list(/turf/unsimulated/floor/desert2)
 
 
@@ -36,7 +36,7 @@
 	name = "Sandy terrain turf generator for sand_mars"
 
 /obj/effect/landmark/biome/sand_turf/sand_mars/New()
-	..()
+	. = ..()
 	atom_types = list(/turf/unsimulated/floor/sand_mars)
 
 
@@ -44,5 +44,5 @@
 	name = "Sandy terrain turf generator for sand_moon"
 
 /obj/effect/landmark/biome/sand_turf/sand_moon/New()
-	..()
+	. = ..()
 	atom_types = list(/turf/unsimulated/floor/sand_moon)

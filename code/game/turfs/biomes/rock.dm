@@ -3,7 +3,7 @@
 	name = "Rocky terrain turf generator"
 
 /obj/effect/landmark/biome/rock_turf/New()
-	..()
+	. = ..()
 	atom_types = list(pick(\
 		/turf/unsimulated/floor/rock,\
 		/turf/unsimulated/floor/rock2,\
