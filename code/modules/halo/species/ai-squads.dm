@@ -14,7 +14,7 @@
 	name = "Grunt"
 	desc = "" //Need suggestions for a good description
 	faction = "Covenant"
-	icon = 'code/modules/halo/species/icons/Grunt.dmi'
+	icon = 'code/modules/halo/icons/Grunt.dmi'
 	icon_state = "Grunt_mob"
 	icon_living = "Grunt_mob"
 	icon_dead = "Grunt_mob_dead"
