@@ -111,6 +111,9 @@
 /obj/item/clothing/under/solgov/utility/fleet/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
 
+/obj/item/clothing/under/solgov/utility/fleet/command/pilot
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/speciality/pilot)
+
 /obj/item/clothing/under/solgov/utility/fleet/engineering
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
 
@@ -128,9 +131,6 @@
 
 /obj/item/clothing/under/solgov/utility/fleet/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
-
-/obj/item/clothing/under/solgov/utility/fleet/exploration/pilot
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet, /obj/item/clothing/accessory/solgov/speciality/pilot)
 
 /obj/item/clothing/under/solgov/utility/fleet/combat
 	name = "fleet fatigues"

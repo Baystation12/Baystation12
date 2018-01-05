@@ -108,9 +108,6 @@
 /obj/item/weapon/card/id/torch/crew/service/chef
 	job_access_type = /datum/job/chef
 
-/obj/item/weapon/card/id/torch/crew/solgov_pilot
-	job_access_type = /datum/job/solgov_pilot
-
 /obj/item/weapon/card/id/torch/contractor/service //unused
 	job_access_type = /datum/job/assistant
 

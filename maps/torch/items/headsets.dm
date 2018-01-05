@@ -45,12 +45,12 @@
 	desc = "A box full of executive officer headsets."
 	startswith = list(/obj/item/device/radio/headset/heads/torchxo = 7)
 
-/obj/item/device/radio/headset/pilot
-	name = "pilot's headset"
+/obj/item/device/radio/headset/bridgeofficer
+	name = "bridge officer's headset"
 	desc = "A headset with access to the command, engineering and exploration channels."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/pilot
+	ks2type = /obj/item/device/encryptionkey/bridgeofficer
 
 /obj/item/device/radio/headset/exploration
 	name = "exploration headset"
