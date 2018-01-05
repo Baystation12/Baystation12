@@ -25,7 +25,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 /datum/halo_frequencies/New()
 	if(GLOB.using_map.use_global_covenant_comms)
-		new /obj/item/device/mobilecomms/commsbackpack (locate(1,1,1))
+		new /obj/item/device/mobilecomms/commsbackpack/covenant (locate(1,1,1))
 	setup_com_channels()
 
 /datum/halo_frequencies/proc/setup_com_channel_list()

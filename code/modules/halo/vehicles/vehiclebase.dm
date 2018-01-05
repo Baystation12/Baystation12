@@ -26,19 +26,30 @@
 
 /obj/vehicles/New()
 	controller = new controller (src)
-	verbs += /obj/vehicles/proc/enter_exit_vehicle
 	for(var/i in fuels)
 		fuels += new i
 		fuels -= i
 
-
-/obj/vehicles/proc/enter_exit_vehicle(var/mob/user)
+/obj/vehicles/verb/enter_exit_vehicle()
 	set name = "Enter/Exit Vehicle"
 	set category = "Vehicle"
 	set src in range(1)
 
+	var/mob/living/carbon/human/h = usr
+	if(!istype(h))
+		return
+	if(h.incapacitated())
+		to_chat(h,"<span class = 'warning'>You can't enter [name] in your current state!</span>")
+		return
+
+	proc_enter_exit_vehicle(usr)
+
+/obj/vehicles/proc/proc_enter_exit_vehicle(var/mob/user)
 	if(!user)
-		user = usr
+		return
+	if(istype(user.loc,/obj/vehicles) && user.loc != src)
+		to_chat(user,"<span class = 'warning'>Exit your current vehicle first!</span>")
+		return
 	if(user in contents)
 		exit_vehicle(user)
 		controller.on_exit_vehicle()
@@ -56,9 +67,9 @@
 
 /obj/vehicles/relaymove(var/turf/newloc,var/dir)
 	Move(newloc,dir)
+	render_mob_sprites()
 
 /obj/vehicles/Move(var/turf/newloc,var/dir)
-	render_mob_sprites()
 	if(!controller.try_move(newloc,dir))
 		return 0
 	. = ..()
@@ -151,6 +162,7 @@
 	if(user in gunners)
 		unassign_gunner(user)
 	user.loc = src.loc
+	contents -= user
 	render_mob_sprites()
 	if(!override_message)
 		user.visible_message("<span class = 'notice'>[user] exits [name]</span>")
@@ -159,6 +171,13 @@
 	set name = "Hijack Vehicle"
 	set category = "Vehicle"
 	set src in range(1)
+
+	var/mob/living/carbon/human/h = usr
+	if(!istype(h))
+		return
+	if(h.incapacitated())
+		to_chat(h,"<span class = 'warning'>You can't hijack [name] in your current state!</span>")
+		return
 
 	var/mob/user = usr
 	if(block_entry_exit)

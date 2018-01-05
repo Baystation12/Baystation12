@@ -4,7 +4,7 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "power_key"
 	icon_screen = "power"
-	req_access = list(access_engine_equip)
+	req_access = list()
 	circuit = /obj/item/weapon/circuitboard/drone_control
 
 	//Used when pinging drones.

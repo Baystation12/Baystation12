@@ -7,6 +7,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	l_pocket = /obj/item/device/encryptionkey/shipcom
 	flags = 0
 
 /decl/hierarchy/outfit/job/marine/leader
@@ -69,10 +70,11 @@
 	G.ammo_magazine = new /obj/item/ammo_magazine/m127_saphp
 	H.equip_to_slot_or_del(G,slot_belt)
 
-/decl/hierarchy/outfit/job/colonist/mayor
+/decl/hierarchy/outfit/job/mayor
 	name = "Mayor"
 
 	uniform = /obj/item/clothing/under/blazer
+	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	shoes = /obj/item/clothing/shoes/black
 
 	flags = 0

@@ -9,7 +9,7 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/ert
 	glove_type = /obj/item/clothing/gloves/rig/ert
 
-	req_access = list(access_cent_specops)
+	req_access = list()
 
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 100)
 	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs, /obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/crowbar, \

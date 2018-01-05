@@ -128,7 +128,7 @@
 	set_density(0)
 	update_icon()
 	update_nearby_tiles()
-	
+
 	if(operating == 1) //emag again
 		src.operating = 0
 	return 1
@@ -269,7 +269,7 @@
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
-	req_access = list(access_security)
+	req_access = list()
 	var/id = null
 	maxhealth = 300
 	health = 300.0 //Stronger doors for prison (regular window door health is 150)

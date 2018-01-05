@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(colony_spawns)
 
 /datum/spawnpoint/colonist
 	display_name = "Colony Arrival Shuttle"
-	restrict_job = list("Colonist","Colonist - Insurrectionist Sympathiser","Colonist - Insurrectionist Recruiter","Mayor")
+	disallow_job = list("Marine","Marine - Squad Leader")
 
 /datum/spawnpoint/colonist/New()
 	..()
@@ -41,17 +41,21 @@ GLOBAL_LIST_EMPTY(unsc_leader_spawns)
 /obj/effect/landmark/start/unsc
 	name = "Marine"
 
-/datum/spawnpoint/unsc
+/obj/effect/landmark/start/unsc/New()
+	..()
+	GLOB.unsc_spawns += loc
+
+/datum/spawnpoint/unsc/leader
 	display_name = "UNSC Peacekeeping Ship - Leader Quarters"
 	restrict_job = list("Marine - Squad Leader")
 
-/datum/spawnpoint/unsc/New()
+/datum/spawnpoint/unsc/leader/New()
 	..()
 	turfs = GLOB.unsc_leader_spawns
 
-/obj/effect/landmark/start/unsc/New()
-	..()
-	GLOB.unsc_leader_spawns += loc
-
 /obj/effect/landmark/start/unsc/leader
 	name = "Marine - Squad Leader"
+
+/obj/effect/landmark/start/unsc/leader/New()
+	..()
+	GLOB.unsc_leader_spawns += loc
