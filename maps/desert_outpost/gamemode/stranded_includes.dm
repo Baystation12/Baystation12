@@ -5,7 +5,6 @@
 #include "misc.dm"
 #include "mode_stranded_attackers_process.dm"
 #include "mode_stranded_attackers_spawn.dm"
-#include "mode_stranded_daynight.dm"
 #include "mode_stranded_evac.dm"
 #include "mode_stranded_start.dm"
 #include "mode_stranded_finish.dm"
