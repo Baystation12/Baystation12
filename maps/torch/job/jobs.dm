@@ -536,8 +536,8 @@
 	department = "Engineering"
 	department_flag = ENG
 
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief Engineer"
 	selection_color = "#5b4d20"
 	economic_modifier = 6
