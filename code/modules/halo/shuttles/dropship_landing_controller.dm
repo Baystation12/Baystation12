@@ -34,6 +34,14 @@ var/global/datum/dropship_landing_controller/dropship_landing_controller = new /
 		potential_landing_points &= get_faction_land_points(faction_check)
 	return potential_landing_points
 
+/datum/dropship_landing_controller/proc/get_potential_landing_points_overmap(var/check_active = 1,var/check_occupied = 1,var/faction_check,var/obj/structure/dropship/overmap/dropship)
+	if(isnull(dropship.current_location))
+		return
+	var/list/potential_landing_points = ..()
+	for(var/obj/l in potential_landing_points)
+		if(get_dist(dropship.current_location.z,l.z) > dropship.overmap_range)
+			potential_landing_points -= l
+
 /datum/dropship_landing_controller/proc/add_land_point(var/obj/land_point)
 	land_points += land_point
 
