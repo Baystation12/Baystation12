@@ -56,6 +56,9 @@
 
 	handle_regular_hud_updates()
 
+	if(mind && mind.vampire)
+		handle_vampire()
+
 /mob/living/proc/handle_breathing()
 	return
 

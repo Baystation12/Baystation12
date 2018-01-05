@@ -85,7 +85,7 @@ var/list/possible_cable_coil_colours
 	d2 = text2num( copytext( icon_state, dash+1 ) )
 
 	var/turf/T = src.loc			// hide if turf is not intact
-	if(level==1) hide(!T.is_plating())
+	if(level==1 && !T.is_hole) hide(!T.is_plating())
 	cable_list += src //add it to the global cable list
 
 

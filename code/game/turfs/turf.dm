@@ -22,6 +22,7 @@
 	var/icon_old = null
 	var/pathweight = 1          // How much does it cost to pathfind over this turf?
 	var/blessed = 0             // Has the turf been blessed?
+	var/is_hole = 0             // If true, turf will be treated as space or a hole.
 
 	var/list/decals
 

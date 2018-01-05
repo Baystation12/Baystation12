@@ -82,6 +82,8 @@
 		choices |= "Blood"
 	if(istype(A, /obj/item/clothing))
 		choices |= "Gunshot Residue"
+	if(LAZYLEN(A.other_DNA))
+		choices |= "Saliva"
 
 	var/choice
 	if(!choices.len)

@@ -21,7 +21,7 @@
 	desc = "This spell summons a flock of spooky space bats."
 	feedback = "SB"
 
-	charge_max = 1200 //2 minutes
+	charge_max = 2 MINUTES
 	spell_flags = NEEDSCLOTHES
 	invocation = "Bla'yo daya!"
 	invocation_type = SpI_SHOUT

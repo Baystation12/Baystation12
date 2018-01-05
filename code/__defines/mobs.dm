@@ -19,6 +19,7 @@
 #define GRAB_NORMAL			"normal"
 #define GRAB_NAB			"nab"
 #define GRAB_NAB_SPECIAL	"special nab"
+#define GRAB_VAMP			"vampire grab"
 
 // Grab levels.
 #define NORM_PASSIVE    "normal passive"
@@ -29,6 +30,11 @@
 #define NAB_PASSIVE		"nab passive"
 #define NAB_AGGRESSIVE	"nab aggressive"
 #define NAB_KILL		"nab kill"
+
+#define VAMP_PASSIVE 	"vampire passive"
+#define VAMP_AGGRESSIVE "vampire aggressive"
+#define VAMP_NECK 		"vampire neck"
+#define VAMP_KILL		"vampire kill"
 
 #define BORGMESON 0x1
 #define BORGTHERM 0x2

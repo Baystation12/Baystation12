@@ -13,6 +13,7 @@
 	number_of_channels = 3
 	cast_sound = 'sound/effects/squelch2.ogg'
 	hud_state = "const_rune"
+	var/volume = 10 //Blood to remove. Overridden by the children.
 
 /spell/aoe_turf/drain_blood/cast(var/list/targets, var/mob/user)
 	for(var/t in targets)
@@ -22,9 +23,9 @@
 			//Hurt target
 			if(istype(L, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = L
-				H.vessel.remove_reagent(/datum/reagent/blood, 10)
+				H.vessel.remove_reagent(/datum/reagent/blood, volume)
 			else
-				L.adjustBruteLoss(10)
+				L.adjustBruteLoss(volume)
 			to_chat(L, "<span class='danger'>You feel your lifeforce being ripping out of your body!</span>")
 
 			//Do effect
@@ -40,9 +41,9 @@
 				if(amount > 0)
 					H.vessel.add_reagent(/datum/reagent/blood, amount)
 					continue
-			L.adjustBruteLoss(-5)
-			L.adjustFireLoss(-2.5)
-			L.adjustToxLoss(-2.5)
+			L.adjustBruteLoss(volume * -0.5)
+			L.adjustFireLoss(volume * -0.25)
+			L.adjustToxLoss(volume * -0.25)
 
 /obj/item/projectile/beam/blood_effect
 	name = "blood jet"

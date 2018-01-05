@@ -58,9 +58,11 @@
 	if(kickstand)
 		usr.visible_message("\The [usr] puts up \the [src]'s kickstand.")
 	else
-		if(istype(src.loc,/turf/space))
-			to_chat(usr, "<span class='warning'> You don't think kickstands work in space...</span>")
-			return
+		if(isturf(loc)	)
+			var/turf/T = loc
+			if (T.is_hole)
+				to_chat(usr, "<span class='warning'> You don't think kickstands work without something to stand on...</span>")
+				return
 		usr.visible_message("\The [usr] puts down \the [src]'s kickstand.")
 		if(pulledby)
 			pulledby.stop_pulling()

@@ -44,6 +44,8 @@
 #define MODE_TRAITOR "traitor"
 #define MODE_DEITY "deity"
 #define MODE_GODCULTIST "god cultist"
+#define MODE_VAMPIRE "vampire"
+#define MODE_THRALL "thrall"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 130
 #define IMPLANT_TELECRYSTAL_AMOUNT(x) (round(x * 0.49)) // If this cost is ever greater than half of DEFAULT_TELECRYSTAL_AMOUNT then it is possible to buy more TC than you spend
@@ -59,6 +61,7 @@
 #define Z2NOCAST		0x8		//if this is added, the spell can't be cast at centcomm
 #define STATALLOWED		0x10	//if set, the user doesn't have to be conscious to cast. Required for ghost spells
 #define IGNOREPREV		0x20	//if set, each new target does not overlap with the previous one
+#define NEEDSVAMPIRE	0x40	//if set, only vampires may cast, or even learn the spell.
 //The following flags only affect different types of spell, and therefore overlap
 //Targeted spells
 #define INCLUDEUSER		0x40	//does the spell include the caster in its target selection?
@@ -90,3 +93,14 @@
 #define INITIALIZATION_HAS_BEGUN 2
 #define INITIALIZATION_COMPLETE 4
 #define INITIALIZATION_NOW_AND_COMPLETE (INITIALIZATION_NOW|INITIALIZATION_COMPLETE)
+
+/////////////////
+//// Vampire ////
+/////////////////
+
+#define VAMP_DRAINING   0x1
+#define VAMP_HEALING    0x2
+#define VAMP_PRESENCE   0x4
+#define VAMP_FRENZIED   0x8
+#define VAMP_ISTHRALL   0x10
+#define VAMP_FULLPOWER 0x20
