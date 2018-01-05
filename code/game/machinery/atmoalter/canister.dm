@@ -51,9 +51,10 @@
 
 /obj/machinery/portable_atmospherics/canister/hydrogen
 	name = "\improper Canister: \[Hydrogen\]"
-	icon_state = "purple"
-	canister_color = "purple"
+	icon_state = "redhs" //red hydrogen stripe
+	canister_color = "redhs"
 	can_label = 0
+
 
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "\improper Canister \[Phoron\]"
@@ -105,10 +106,10 @@
 /obj/machinery/portable_atmospherics/canister/empty/sleeping_agent
 	icon_state = "redws"
 	canister_type = /obj/machinery/portable_atmospherics/canister/sleeping_agent
-/obj/machinery/portable_atmospherics/canister/empty/hydrogen
-	icon_state = "purple"
-	canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen
 
+/obj/machinery/portable_atmospherics/canister/empty/hydrogen
+	icon_state = "redhs"
+	canister_type = /obj/machinery/portable_atmospherics/canister/hydrogen
 
 
 
@@ -350,10 +351,10 @@ update_flag
 		var/list/colors = list(\
 			"\[N2O\]" = "redws", \
 			"\[N2\]" = "red", \
+			"\[Hydrogen\]" = "redhs", \
 			"\[O2\]" = "blue", \
 			"\[Phoron\]" = "orange", \
 			"\[CO2\]" = "black", \
-			"\[H2\]" = "purple", \
 			"\[Air\]" = "grey", \
 			"\[CAUTION\]" = "yellow", \
 		)
@@ -463,8 +464,3 @@ update_flag
 	src.air_contents.adjust_gas("phoron", MolesForPressure())
 	src.update_icon()
 	return 1
-
-/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup/New()
-	..()
-	src.air_contents.adjust_gas("hydrogen", MolesForPressure())
-	src.update_icon()
