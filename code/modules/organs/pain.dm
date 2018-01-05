@@ -1,5 +1,6 @@
-mob/proc/flash_pain()
-	flick("pain",pain)
+mob/proc/flash_pain(var/target)
+	animate(pain, alpha = target, time = 15, easing = ELASTIC_EASING)
+	animate(pain, alpha = 0, time = 20)
 
 mob/var/last_pain_message
 mob/var/next_pain_time = 0
@@ -57,10 +58,10 @@ mob/living/carbon/human/proc/handle_pain()
 			if(1 to 10)
 				msg =  "Your [damaged_organ.name] [burning ? "burns" : "hurts"]."
 			if(11 to 90)
-				flash_weak_pain()
+				flash_pain(127)
 				msg = "<font size=2>Your [damaged_organ.name] [burning ? "burns" : "hurts"] badly!</font>"
 			if(91 to 10000)
-				flash_pain()
+				flash_pain(255)
 				msg = "<font size=3>OH GOD! Your [damaged_organ.name] is [burning ? "on fire" : "hurting terribly"]!</font>"
 		custom_pain(msg, 0, prob(10), affecting = damaged_organ)
 
