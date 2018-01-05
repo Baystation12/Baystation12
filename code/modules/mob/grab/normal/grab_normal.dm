@@ -31,7 +31,7 @@
 /datum/grab/normal/on_hit_help(var/obj/item/grab/normal/G)
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(O)
-		return O.inspect(G.affecting, G.assailant)
+		return O.inspect(G.assailant)
 
 /datum/grab/normal/on_hit_disarm(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
@@ -73,7 +73,7 @@
 
 		G.attacking = 0
 		G.action_used()
-		O.jointlock(affecting, assailant)
+		O.jointlock(assailant)
 		assailant.visible_message("<span class='danger'>[affecting]'s [O.name] is twisted!</span>")
 		playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		return 1
