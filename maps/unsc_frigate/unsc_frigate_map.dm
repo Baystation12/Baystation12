@@ -1,6 +1,3 @@
-#if !defined(ALL_SHIP_JOBS)
-	#define ALL_SHIP_JOBS list() //A define so things don't throw errors due to missing define
-#endif
 
 /datum/map/unsc_frigate
 	name = "Frigate"
@@ -12,9 +9,6 @@
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.png'
 	id_hud_icons = 'maps/unsc_frigate/frigate_hud_icons.dmi'
-
-	allowed_jobs = ALL_SHIP_JOBS
-	allowed_spawns = list("Arrivals Shuttle","Cryogenic Storage")
 
 	station_name  = "UNSC Frigate"
 	station_short = "Frigate"
