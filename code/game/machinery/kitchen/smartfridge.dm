@@ -164,7 +164,7 @@
 			if(S.dried_type == S.type)
 				S.dry = 1
 				S.name = "dried [S.name]"
-				S.color = "#aaaaaa"
+				S.color = "#a38463"
 				stock_item(S)
 			else
 				var/D = S.dried_type
