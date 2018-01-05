@@ -60,7 +60,7 @@
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/pill,
-		/obj/item/weapon/reagent_containers/blood,
+		/obj/item/weapon/reagent_containers/ivbag,
 		/obj/item/weapon/storage/pill_bottle,
 		)
 
