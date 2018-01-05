@@ -512,13 +512,13 @@
 	minimal_player_age = 7
 	selection_color = "#5b4d20"
 	alt_titles = list(
-+		"Maintenance Assistant",
-+		"Structural Integrity Specialist",
--		"Information Systems Technician",
-+		"Electrical Systems Specialist",
-+		"Information Systems Technician",
-+		"Reactor Technician",
-+		"Life Support Systems Specialist")
+		"Maintenance Assistant",
+		"Structural Integrity Specialist",
+		"Information Systems Technician",
+		"Electrical Systems Specialist",
+		"Information Systems Technician",
+		"Reactor Technician",
+		"Life Support Systems Specialist")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
