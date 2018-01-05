@@ -187,6 +187,7 @@
 		/obj/item/weapon/reagent_containers/spray/luminol,
 		/obj/item/weapon/reagent_containers/syringe,
 		/obj/item/device/flashlight/maglight,
+		/obj/item/weapon/storage/briefcase/crimekit,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
