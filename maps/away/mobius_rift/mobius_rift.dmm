@@ -15,7 +15,7 @@
 "o" = (/obj/structure/flora/ausbushes/pointybush,/turf/simulated/floor/grass,/area/mobius_rift)
 "p" = (/obj/structure/flora/ausbushes/sunnybush,/turf/simulated/floor/grass,/area/mobius_rift)
 "q" = (/mob/living/simple_animal/hostile/vagrant,/turf/unsimulated/beach/sand,/area/mobius_rift)
-"r" = (/obj/effect/mobius_rift/portals_setup,/obj/effect/shuttle_landmark/mobius_rift/nav1,/turf/unsimulated/beach/sand,/area/mobius_rift)
+"r" = (/obj/effect/mobius_rift/portals_setup,/obj/effect/shuttle_landmark/mobius_rift/nav1,/obj/effect/overmap/sector/mobius_rift,/turf/unsimulated/beach/sand,/area/mobius_rift)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
