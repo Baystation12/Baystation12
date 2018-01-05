@@ -514,7 +514,6 @@
 	alt_titles = list(
 		"Maintenance Assistant",
 		"Structural Integrity Specialist",
-		"Information Systems Technician",
 		"Electrical Systems Specialist",
 		"Information Systems Technician",
 		"Reactor Technician",
