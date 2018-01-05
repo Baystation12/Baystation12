@@ -24,10 +24,10 @@
 	containername = "\improper Blood pack crate"
 
 /decl/hierarchy/supply_pack/medical/blood
-	name = "O- blood crate"
-	contains = list(/obj/item/weapon/reagent_containers/blood/OMinus = 4)
+	name = "Nanoblood crate"
+	contains = list(/obj/item/weapon/reagent_containers/ivbag/nanoblood = 4)
 	cost = 15
-	containername = "\improper O- blood crate"
+	containername = "\improper Nanoblood crate"
 
 /decl/hierarchy/supply_pack/medical/bodybag
 	name = "Body bag crate"

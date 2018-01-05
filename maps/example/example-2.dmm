@@ -1,7 +1,7 @@
 "a" = (/turf/space,/area/space)
 "b" = (/obj/effect/landmark/map_data{height = 2},/turf/space,/area/space)
 "c" = (/turf/simulated/wall,/area/medical/surgery)
-"d" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/iv_drip,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/turf/simulated/floor/tiled/white,/area/medical/surgery)
+"d" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/iv_drip,/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,/turf/simulated/floor/tiled/white,/area/medical/surgery)
 "e" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{pixel_y = 32},/turf/simulated/floor/tiled/white,/area/medical/surgery)
 "f" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/computer/operating,/turf/simulated/floor/tiled/white,/area/medical/surgery)
 "g" = (/obj/machinery/light{dir = 1},/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/table/glass,/obj/item/weapon/storage/box/syringes,/obj/item/weapon/storage/box/freezer,/turf/simulated/floor/tiled/white,/area/medical/surgery)

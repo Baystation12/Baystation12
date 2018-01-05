@@ -1935,3 +1935,9 @@
 	result = /datum/reagent/antidexafen
 	required_reagents = list(/datum/reagent/paracetamol = 1, /datum/reagent/carbon = 1)
 	result_amount = 2
+
+/datum/chemical_reaction/nanoblood
+	name = "Nanoblood"
+	result = /datum/reagent/nanoblood
+	required_reagents = list(/datum/reagent/dexalinp = 1, /datum/reagent/iron = 1, /datum/reagent/blood = 1)
+	result_amount = 3

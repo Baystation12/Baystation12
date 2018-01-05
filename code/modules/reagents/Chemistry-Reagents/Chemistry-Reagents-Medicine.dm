@@ -732,3 +732,21 @@
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)
 		M.resuscitate()
+
+/datum/reagent/nanoblood
+	name = "Nanoblood"
+	description = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
+	taste_description = "blood with bubbles"
+	reagent_state = LIQUID
+	color = "#c10158"
+	scannable = 1
+	overdose = 5
+	metabolism = 1
+
+/datum/reagent/nanoblood/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
+		return
+	M.regenerate_blood(4 * removed)
+	M.immunity = max(M.immunity - 1, 0)
+	if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
+		M.immunity = max(M.immunity - 4, 0)
