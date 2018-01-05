@@ -76,8 +76,10 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 						brain_result = "<span class='notice'>minor brain damage</span>"
 					if(3 to 5)
 						brain_result = "<span class='warning'>weak</span>"
-					if(6 to INFINITY)
+					if(6 to 8)
 						brain_result = "<span class='danger'>extremely weak</span>"
+					if(9 to INFINITY)
+						brain_result = "<span class='danger'>fading</span>"
 					else
 						brain_result = "<span class='danger'>ERROR - Hardware fault</span>"
 	else
@@ -131,7 +133,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	if(H.is_asystole())
 		. += "<span class='danger'>Patient is suffering from cardiovascular shock. Administer CPR immediately.</span>"
 	else if(H.shock_stage > 80)
-		. += "<span class='warning'>Patient is at serious risk of entering cardiovascular shock.</span>"
+		. += "<span class='warning'>Patient is at serious risk of going into shock. Pain relief recommended.</span>"
 
 	// Other general warnings.
 	if(H.getOxyLoss() > 50)
