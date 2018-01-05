@@ -24,6 +24,7 @@
 	uniform = null
 	belt = null
 	shoes = /obj/item/clothing/shoes/brown
+	pda_slot = slot_r_store
 
 	flags = 0
 
@@ -58,7 +59,7 @@
 	mask = /obj/item/clothing/mask/innie/shemagh
 
 	l_pocket = /obj/item/ammo_magazine/m127_saphp
-	r_pocket = /obj/item/device/encryptionkey/inniecom
+	r_ear = /obj/item/device/encryptionkey/inniecom
 
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser/equip_special()
 	return
