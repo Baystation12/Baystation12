@@ -396,6 +396,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		return 1
 
 	H.set_fullscreen(H.eye_blind && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
+	H.set_fullscreen(H.stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
 	if(config.welder_vision)
 		H.set_fullscreen(H.equipment_tint_total, "welder", /obj/screen/fullscreen/impaired, H.equipment_tint_total)
