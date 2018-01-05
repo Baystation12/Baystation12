@@ -165,3 +165,29 @@
 		return FALSE
 
 	return pulse > PULSE_NONE || robotic == ORGAN_ROBOT || (owner.status_flags & FAKEDEATH)
+
+/obj/item/organ/internal/heart/listen()
+	if(robotic == ORGAN_ROBOT && is_working())
+		if(is_bruised())
+			return "sputtering pump"
+		else
+			return "steady whirr of the pump"
+
+	if(!pulse || (owner.status_flags & FAKEDEATH))
+		return "no pulse"
+
+	var/pulsesound = "normal"
+	if(is_bruised())
+		pulsesound = "irregular"
+
+	switch(pulse)
+		if(PULSE_SLOW)
+			pulsesound = "slow"
+		if(PULSE_FAST)
+			pulsesound = "fast"
+		if(PULSE_2FAST)
+			pulsesound = "very fast"
+		if(PULSE_THREADY)
+			pulsesound = "extremely fast and faint"
+
+	. = "[pulsesound] pulse"
