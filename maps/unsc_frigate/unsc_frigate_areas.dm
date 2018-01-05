@@ -10,10 +10,14 @@
 		/area/unscfrigate/medbay/recovery = NO_VENT,
 		/area/unscfrigate/medbay/exam = 0,
 		/area/unscfrigate/medbay/patient1 = 0,
-
-		/area/unscfrigate/hangar_starb = NO_SCRUBBER|NO_VENT,
+		/area/unscfrigate/logistics/hangar_aftstarb = NO_SCRUBBER,
+		/area/unscfrigate/logistics/hangar_forestarb = NO_SCRUBBER,
+		/area/unscfrigate/medbay/surgeryprep = NO_SCRUBBER,
+		/area/unscfrigate/logistics/hangar_aftport = NO_SCRUBBER,
+		/area/unscfrigate/logistics/hangar_foreport = NO_SCRUBBER,
+		/area/unscfrigate/hangar_starb = NO_SCRUBBER,
 		/area/unscfrigate/central = NO_SCRUBBER,
-		/area/unscfrigate/hangar_port = NO_SCRUBBER|NO_VENT,
+		/area/unscfrigate/hangar_port = NO_SCRUBBER,
 		/area/unscfrigate/tcomms = NO_SCRUBBER,
 		/area/unscfrigate/bridge = NO_SCRUBBER,
 		/area/unscfrigate/mac/cannon = NO_SCRUBBER|NO_VENT|NO_APC
