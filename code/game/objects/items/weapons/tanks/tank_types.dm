@@ -4,6 +4,7 @@
  *		Anesthetic
  *		Air
  *		Phoron
+ *		Hydrogen
  *		Emergency Oxygen
  */
 
@@ -83,7 +84,22 @@
 	src.air_contents.adjust_gas("phoron", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
 	return
 
-/obj/item/weapon/tank/phoron/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/*
+ * Hydrogen
+ */
+/obj/item/weapon/tank/hydrogen
+	name = "hydrogen tank"
+	desc = "Contains hydrogen. Warning: flammable."
+	icon_state = "hydrogen"
+	gauge_icon = null
+	flags = CONDUCT
+	slot_flags = null
+
+/obj/item/weapon/tank/hydrogen/New()
+	..()
+	src.air_contents.adjust_gas("hydrogen", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
+
+/obj/item/weapon/tank/hydrogen/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
 	if (istype(W, /obj/item/weapon/flamethrower))
