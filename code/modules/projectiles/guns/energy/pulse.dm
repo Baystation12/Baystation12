@@ -56,7 +56,7 @@
 	desc = "A heavy-duty, pulse-based energy weapon. Because of its complexity and cost, it is rarely seen in use except by specialists."
 	cell_type = /obj/item/weapon/cell/super
 	fire_delay = 25
-	projectile_type=/obj/item/projectile/beam/energy/destroy
+	projectile_type=/obj/item/projectile/energy/destroy
 	charge_cost= 40
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
