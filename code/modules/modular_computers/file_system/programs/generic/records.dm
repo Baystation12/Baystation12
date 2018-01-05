@@ -21,7 +21,7 @@
 	if(active_record)
 		user << browse_rsc(active_record.photo_front, "front_[active_record.uid].png")
 		user << browse_rsc(active_record.photo_side, "side_[active_record.uid].png")
-		data["pic_edit"] = check_access(user, access_heads) 
+		data["pic_edit"] = check_access(user, access_heads) || check_access(user, access_security)
 		data["uid"] = active_record.uid
 		var/list/fields = list()
 		for(var/record_field/F in active_record.fields)
@@ -46,7 +46,7 @@
 			)))
 		data["all_records"] = all_records
 		data["creation"] = check_access(user, access_heads) 
-		data["dnasearch"] = check_access(user, access_medical) 
+		data["dnasearch"] = check_access(user, access_medical) || check_access(user, access_forensics)
 		data["fingersearch"] = check_access(user, access_security) 
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
