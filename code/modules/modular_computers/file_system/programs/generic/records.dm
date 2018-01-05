@@ -21,7 +21,7 @@
 	if(active_record)
 		user << browse_rsc(active_record.photo_front, "front_[active_record.uid].png")
 		user << browse_rsc(active_record.photo_side, "side_[active_record.uid].png")
-		data["pic_edit"] = check_access(user, access_heads) || check_access(user, access_forensics)
+		data["pic_edit"] = check_access(user, access_heads) || check_access(user, access_security)
 		data["uid"] = active_record.uid
 		var/list/fields = list()
 		for(var/record_field/F in active_record.fields)
