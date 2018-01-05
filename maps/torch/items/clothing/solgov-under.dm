@@ -3,6 +3,8 @@
 	desc = "You shouldn't be seeing this."
 	icon = 'maps/torch/icons/obj/solgov-under.dmi'
 	item_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/solgov-under.dmi')
+	armor = list(melee = 5, bullet = 0, laser = 5, energy = 5, bomb = 0, bio = 5, rad = 5)
+	siemens_coefficient = 0.8
 
 //PT
 /obj/item/clothing/under/solgov/pt
@@ -10,8 +12,6 @@
 	desc = "Shorts! Shirt! Miami! Sexy!"
 	icon_state = "miami"
 	worn_state = "miami"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	siemens_coefficient = 0.9
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/solgov/pt/expeditionary
@@ -41,15 +41,12 @@
 	icon_state = "blackutility"
 	item_state = "bl_suit"
 	worn_state = "blackutility"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/solgov/utility/expeditionary
 	name = "expeditionary uniform"
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim."
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 10)
 
 /obj/item/clothing/under/solgov/utility/expeditionary/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command)
@@ -105,8 +102,6 @@
 	icon_state = "navyutility"
 	item_state = "jensensuit"
 	worn_state = "navyutility"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 10, bomb = 0, bio = 0, rad = 0)
-	siemens_coefficient = 0.7
 
 /obj/item/clothing/under/solgov/utility/fleet/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
@@ -137,8 +132,6 @@
 	desc = "Alternative utility uniform of the SCG Fleet, for when coveralls are impractical."
 	icon_state = "navycombat"
 	worn_state = "navycombat"
-	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
-	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/solgov/utility/fleet/combat/security
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
@@ -153,7 +146,6 @@
 	icon_state = "greenutility"
 	item_state = "jensensuit"
 	worn_state = "greenutility"
-	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/under/solgov/utility/marine/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/marine)
@@ -200,7 +192,7 @@
 	desc = "A service uniform of some kind."
 	icon_state = "whiteservice"
 	worn_state = "whiteservice"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 5, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 5, rad = 0)
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/solgov/service/expeditionary_skirt
@@ -263,7 +255,7 @@
 	desc = "A dress uniform of some kind."
 	icon_state = "greydress"
 	worn_state = "greydress"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 5, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 5, rad = 0)
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/solgov/mildress/expeditionary
