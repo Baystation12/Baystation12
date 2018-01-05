@@ -2,6 +2,7 @@
 /decl/hierarchy/outfit/kigyar
 	name = "Kig-Yar"
 
+	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/covenant/kigyar/armless
 	suit = /obj/item/clothing/suit/armor/covenant/kigyar
 	back = null

@@ -2,6 +2,7 @@
 	name = "Sangheili"
 
 	uniform = /obj/item/clothing/under/covenant/sangheili
+	l_ear = /obj/item/device/radio/headset/covenant
 
 /decl/hierarchy/outfit/sangheili/minor
 	name = "Sangheili (Minor)"
@@ -11,7 +12,7 @@
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = null
 	shoes = /obj/item/clothing/shoes/sangheili/minor
-	head = /obj/item/clothing/head/sangheili/minor
+	head = /obj/item/clothing/head/helmet/sangheili/minor
 	mask = null
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = null
@@ -26,7 +27,7 @@
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	shoes = /obj/item/clothing/shoes/sangheili/major
-	head = /obj/item/clothing/head/sangheili/major
+	head = /obj/item/clothing/head/helmet/sangheili/major
 	l_pocket = /obj/item/weapon/grenade/plasma
 
 	hierarchy_type = /decl/hierarchy/outfit/sangheili/major
@@ -40,7 +41,7 @@
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	shoes = /obj/item/clothing/shoes/sangheili/ultra
-	head = /obj/item/clothing/head/sangheili/ultra
+	head = /obj/item/clothing/head/helmet/sangheili/ultra
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/ammo_magazine/type51mag
 
@@ -49,14 +50,14 @@
 /decl/hierarchy/outfit/sangheili/zealot
 	name = "Sangheili (Zealot)"
 
-	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra
+	suit = /obj/item/clothing/suit/armor/special/combatharness/zealot
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	l_hand = /obj/item/weapon/melee/energysword
 	r_hand = /obj/item/weapon/melee/energysword
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
-	shoes = /obj/item/clothing/shoes/sangheili/ultra
-	head = /obj/item/clothing/head/sangheili/ultra
+	shoes = /obj/item/clothing/shoes/sangheili/zealot
+	head = /obj/item/clothing/head/helmet/sangheili/zealot
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
 
@@ -70,7 +71,7 @@
 	back = /obj/item/weapon/gun/projectile/type51carbine
 	belt = /obj/item/weapon/melee/energysword
 	shoes = /obj/item/clothing/shoes/sangheili/specops
-	head = /obj/item/clothing/head/sangheili/specops
+	head = /obj/item/clothing/head/helmet/sangheili/specops
 	l_pocket = /obj/item/ammo_magazine/type51mag
 	r_pocket = /obj/item/ammo_magazine/type51mag
 
@@ -84,7 +85,7 @@
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/melee/energysword
 	shoes = /obj/item/clothing/shoes/sangheili/eva
-	head = /obj/item/clothing/head/sangheili/eva
+	head = /obj/item/clothing/head/helmet/sangheili/eva
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
 

@@ -53,6 +53,7 @@
 //deadly but inaccurate
 /obj/item/projectile/bullet/a127_saphp
 	damage = 20
+	armor_penetration = 35
 	accuracy = 1
 
 /obj/item/weapon/storage/box/m127_saphp
@@ -169,7 +170,7 @@
 	tracer_delay_time = 2 SECONDS
 
 /obj/effect/projectile/srs99
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "sniper_trail"
 
 /obj/item/weapon/storage/box/m145_ap

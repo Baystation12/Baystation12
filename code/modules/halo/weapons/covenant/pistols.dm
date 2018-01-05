@@ -11,6 +11,7 @@
 	max_shots = 20
 	var/overcharge = 0
 	projectile_type = /obj/item/projectile/covenant/plasmapistol
+	screen_shake = 0
 
 /obj/item/weapon/gun/energy/plasmapistol/attack_self(var/mob/user)
 	if(overcharge) //tell user overcharge deactivated, reset stats.
@@ -42,6 +43,6 @@
 	burst = 3
 
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
