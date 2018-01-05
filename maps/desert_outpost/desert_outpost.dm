@@ -8,8 +8,6 @@
 	#include "desert_outpost_spawns.dm"
 	#include "unit_test.dm"
 
-	#include "../~turfs/desert.dm"
-
 	#include "desert_outpost.dmm"
 
 

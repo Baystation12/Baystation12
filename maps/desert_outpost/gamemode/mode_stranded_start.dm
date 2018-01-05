@@ -34,10 +34,6 @@
 	var/turf/light_turf = locate(1,1,1)
 	ambient_light = new(src, light_turf)
 	ambient_light.apply_lum()
-	impact_crater_images = list()
-	impact_crater_images += image('code/modules/halo/icons/scrap/base.dmi',"crater_s")
-	impact_crater_images += image('code/modules/halo/icons/scrap/base.dmi',"crater_l")
-
 /datum/game_mode/stranded/announce()
 	..()
 	to_world("<span class='notice'>You must survive for [round(survive_duration/600)] minutes until the evacuation pelican arrives. \

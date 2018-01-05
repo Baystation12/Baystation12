@@ -9,7 +9,6 @@
 /datum/game_mode/stranded
 	var/sound/sound_crash = sound('sound/effects/crash.ogg')
 	var/sound/sound_flyby = sound('sound/effects/start.ogg')
-	var/list/impact_crater_images
 	var/list/supply_crate_procs = list(\
 		/datum/game_mode/stranded/proc/spawn_gun_crate,\
 		/datum/game_mode/stranded/proc/spawn_heavygun_crate,\
@@ -99,12 +98,6 @@
 					spawn_type = pick(debris_objs)
 					new spawn_type(spawn_turf)
 
-			//chuck an impact crater overlay on that turf
-			var/image/I = pick(impact_crater_images)
-			I.pixel_x = rand(-8,8)
-			I.pixel_y = rand(-8,8)
-			spawn_turf.overlays += I
-
 	//play a cool sound to everyone
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, sound_crash)
@@ -126,12 +119,6 @@
 		//spawn a crate
 		var/chosen_proc = pick(supply_crate_procs)
 		call(src, chosen_proc)(spawn_turf)
-
-		//chuck an impact crater overlay on that turf
-		var/image/I = pick(impact_crater_images)
-		I.pixel_x = rand(-8,8)
-		I.pixel_y = rand(-8,8)
-		spawn_turf.overlays += I
 
 		num_crates -= 1
 
