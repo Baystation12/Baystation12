@@ -68,7 +68,7 @@
 	InitializeHud()
 
 	next_move = 1
-	set_sight(sight|SEE_SELF)
+	set_sight(sight|DEFAULT_SIGHT)
 	..()
 
 	my_client = client
