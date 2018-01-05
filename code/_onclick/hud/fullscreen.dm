@@ -139,3 +139,7 @@
 /obj/screen/fullscreen/fishbed
 	icon_state = "fishbed"
 	allstate = 1
+
+/obj/screen/fullscreen/pain
+	icon_state = "brutedamageoverlay6"
+	alpha = 0
