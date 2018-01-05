@@ -27,6 +27,11 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 			to_chat(src, "<span class='danger'>[message]</span>")
 		else
 			to_chat(src, "<span class='warning'>[message]</span>")
+
+		if(prob(sqrt(power)))
+			spawn()
+				alert(src,"Your pain distracts you, momentarily occupying you mind before all other things.",,"Okay")
+
 	next_pain_time = world.time + (100-power)
 
 mob/living/carbon/human/proc/handle_pain()
