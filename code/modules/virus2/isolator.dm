@@ -126,8 +126,6 @@
 	var/mob/user = usr
 	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
 
-	src.add_fingerprint(user)
-
 	if (href_list["close"])
 		user.unset_machine()
 		ui.close()

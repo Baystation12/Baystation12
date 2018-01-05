@@ -118,7 +118,7 @@
 
 
 /obj/machinery/door/unpowered/simple/attackby(obj/item/I as obj, mob/user as mob)
-	src.add_fingerprint(user)
+	src.add_fingerprint(user, 0, I)
 	if(istype(I, /obj/item/weapon/key) && lock)
 		var/obj/item/weapon/key/K = I
 		if(!lock.toggle(I))

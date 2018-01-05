@@ -760,8 +760,6 @@
 			return 1
 
 /obj/machinery/alarm/attackby(obj/item/W as obj, mob/user as mob)
-	src.add_fingerprint(user)
-
 	switch(buildstage)
 		if(2)
 			if(isScrewdriver(W))  // Opening that Air Alarm up.
@@ -925,8 +923,6 @@ FIRE ALARM
 	..()
 
 /obj/machinery/firealarm/attackby(obj/item/W as obj, mob/user as mob)
-	src.add_fingerprint(user)
-
 	if(isScrewdriver(W) && buildstage == 2)
 		wiresexposed = !wiresexposed
 		update_icon()
@@ -1070,8 +1066,6 @@ FIRE ALARM
 			src.time = min(max(round(src.time), 0), 120)
 
 		src.updateUsrDialog()
-
-		src.add_fingerprint(usr)
 	else
 		usr << browse(null, "window=firealarm")
 		return
@@ -1219,8 +1213,6 @@ Just a object used in constructing fire alarms
 						time += tp
 						time = min(max(round(time), 0), 120)
 		updateUsrDialog()
-
-		add_fingerprint(usr)
 	else
 		usr << browse(null, "window=partyalarm")
 		return

@@ -37,7 +37,6 @@
 		return
 
 	usr.set_machine(src)
-	src.add_fingerprint(usr)
 
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks

@@ -180,7 +180,7 @@
 				close()
 
 /obj/machinery/door/firedoor/attackby(obj/item/weapon/C as obj, mob/user as mob)
-	add_fingerprint(user)
+	add_fingerprint(user, 0, C)
 	if(operating)
 		return//Already doing something.
 	if(isWelder(C) && !repairing)

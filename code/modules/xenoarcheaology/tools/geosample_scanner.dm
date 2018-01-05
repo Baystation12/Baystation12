@@ -358,6 +358,4 @@
 		if(scanned_item)
 			scanned_item.loc = src.loc
 			scanned_item = null
-
-	add_fingerprint(usr)
 	return 1 // update UIs attached to this object

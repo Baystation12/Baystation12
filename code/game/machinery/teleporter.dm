@@ -140,7 +140,6 @@
 	src.locked = L[desc]
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='notice'>Locked In</span>", 2)
-	src.add_fingerprint(usr)
 	return
 
 /obj/machinery/computer/teleporter/verb/set_id(t as text)

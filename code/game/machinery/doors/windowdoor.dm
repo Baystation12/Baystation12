@@ -249,7 +249,7 @@
 		return
 
 
-	src.add_fingerprint(user)
+	src.add_fingerprint(user, 0, I)
 
 	if (src.allowed(user))
 		if (src.density)

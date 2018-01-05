@@ -930,8 +930,6 @@ About the new airlock wires panel:
 	if(istype(C, /obj/item/taperoll))
 		return
 
-	src.add_fingerprint(user)
-
 	if (!repairing && (stat & BROKEN) && src.locked) //bolted and broken
 		if (!cut_bolts(C,user))
 			..()
