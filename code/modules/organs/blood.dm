@@ -192,6 +192,16 @@
 		//AB is a universal receiver.
 	return 0
 
+/mob/living/carbon/human/proc/regenerate_blood(amount)
+	var/blood_volume_raw = vessel.get_reagent_amount(/datum/reagent/blood)
+	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
+	if(amount)
+		var/datum/reagent/blood/B = get_blood(vessel)
+		if(istype(B))
+			B.volume += amount
+			vessel.update_total()
+	return amount
+
 proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
 
 	var/obj/effect/decal/cleanable/blood/B
