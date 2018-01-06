@@ -75,7 +75,7 @@
 	var/radiation_mod =  1                    // Radiation modifier
 	var/flash_mod =      1                    // Stun from blindness modifier.
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
-	var/vision_flags = SEE_SELF               // Same flags as glasses.
+	var/vision_flags = DEFAULT_SIGHT               // Same flags as glasses.
 
 	// Death vars.
 	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
