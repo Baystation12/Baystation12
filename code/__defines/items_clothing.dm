@@ -44,6 +44,7 @@
 #define PHORONGUARD        0x20  // Does not get contaminated by phoron.
 #define	NOREACT            0x40  // Reagents don't react inside this container.
 #define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
+#define NOPRINT            0x100 // Does not leave user's fingerprints/fibers when used on things?
 
 //Flags for items (equipment)
 #define THICKMATERIAL          0x1  // Prevents syringes, reagent pens, and hyposprays if equiped to slot_suit or slot_head.

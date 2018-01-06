@@ -85,7 +85,7 @@
 	return
 
 /obj/machinery/space_heater/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
+	..()
 	interact(user)
 
 /obj/machinery/space_heater/interact(mob/user as mob)

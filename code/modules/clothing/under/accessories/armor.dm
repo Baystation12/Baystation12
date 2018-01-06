@@ -58,6 +58,9 @@
 	armor = list(melee = 25, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_C
 
+/obj/item/clothing/accessory/armorplate/get_fibers()
+	return null	//plates do not shed
+
 /obj/item/clothing/accessory/armorplate/medium
 	name = "medium armor plate"
 	desc = "A plasteel-reinforced synthetic armor plate, providing good protection. Attaches to a plate carrier."

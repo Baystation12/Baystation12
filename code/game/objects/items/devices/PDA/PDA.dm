@@ -594,7 +594,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			ui.close()
 		return 0
 
-	add_fingerprint(U)
 	U.set_machine(src)
 
 	switch(href_list["choice"])

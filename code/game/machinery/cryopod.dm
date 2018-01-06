@@ -45,9 +45,9 @@
 /obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
 	if(stat & (NOPOWER|BROKEN))
 		return
+	..()
 
 	user.set_machine(src)
-	src.add_fingerprint(usr)
 
 	var/dat
 
@@ -70,8 +70,6 @@
 		return
 
 	var/mob/user = usr
-
-	src.add_fingerprint(user)
 
 	if(href_list["log"])
 

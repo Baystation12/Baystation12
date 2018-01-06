@@ -318,9 +318,6 @@
 			src.eject_occupant(usr)
 			src.updateUsrDialog()
 			src.update_icon()
-	/*if (href_list["refresh"])
-		src.updateUsrDialog()*/
-	src.add_fingerprint(usr)
 	return
 
 
@@ -932,9 +929,6 @@
 	return 1
 
 /obj/machinery/suit_cycler/attack_hand(mob/user as mob)
-
-	add_fingerprint(user)
-
 	if(..() || stat & (BROKEN|NOPOWER))
 		return
 

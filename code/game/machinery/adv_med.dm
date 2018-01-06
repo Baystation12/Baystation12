@@ -74,6 +74,8 @@
 	return
 
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
+	if(!istype(G))
+		return ..()
 	if (!ismob(G.affecting))
 		return
 	if (src.occupant)

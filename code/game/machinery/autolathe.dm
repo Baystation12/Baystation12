@@ -218,7 +218,6 @@
 		return
 
 	usr.set_machine(src)
-	add_fingerprint(usr)
 
 	if(busy)
 		to_chat(usr, "<span class='notice'>The autolathe is busy. Please wait for completion of previous operation.</span>")

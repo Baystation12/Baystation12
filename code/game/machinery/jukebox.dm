@@ -173,9 +173,8 @@ datum/track/New(var/title_name, var/audio)
 	qdel(src)
 
 /obj/machinery/media/jukebox/attackby(obj/item/W as obj, mob/user as mob)
-	src.add_fingerprint(user)
-
 	if(isWrench(W))
+		add_fingerprint(user)
 		wrench_floor_bolts(user, 0)
 		power_change()
 		return
