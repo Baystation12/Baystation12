@@ -21,7 +21,7 @@
 			code = "N/A"
 		else
 			code = stars(code)
-		to_chat(user,"[W]'s scren displays '[code]'")
+		to_chat(user,"[W]'s screen displays '[code]'")
 	else
 		..()
 
