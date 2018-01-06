@@ -59,7 +59,7 @@
 	welcome_text += "Next system targeted for jump:<br /><b>[generate_system_name()]</b><br />"
 	welcome_text += "Travel time to Sol:<br /><b>[rand(15,45)] days</b><br />"
 	welcome_text += "Time since last port visit:<br /><b>[rand(60,180)] days</b><br />"
-	welcome_text += "Scan results:<br />"
+	welcome_text += "Scan results show following points of interest:<br />"
 	var/list/scan_results = list()
 	for(var/poi in points_of_interest)
 		if(poi == "SEV Torch")
@@ -74,6 +74,7 @@
 			welcome_text += "\A <b>[result]</b><br />"
 		else
 			welcome_text += "[count] <b>[result]\s</b><br />"
+	welcome_text += "<br>No distress calls logged.<br />"
 
 	post_comm_message("SEV Torch Sensor Readings", welcome_text)
 	minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
