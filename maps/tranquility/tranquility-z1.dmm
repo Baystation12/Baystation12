@@ -1,61 +1,177 @@
-"a" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/space)
-"b" = (/turf/unsimulated/wall,/area/space)
-"c" = (/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
-"d" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
-"e" = (/obj/structure/ladder/up,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
-"f" = (/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
-"g" = (/obj/structure/stairs/east,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
-"h" = (/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"aa" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/space)
+"ab" = (/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/space)
+"ac" = (/turf/unsimulated/wall,/area/space)
+"ad" = (/obj/structure/sign/deck/first,/turf/unsimulated/wall,/area/space)
+"ae" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"af" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"ag" = (/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"ah" = (/obj/machinery/light/spot{dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"ai" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/obj/machinery/light/spot{dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"aj" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"ak" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"al" = (/obj/machinery/space_heater,/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"am" = (/obj/structure/ladder/up,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"an" = (/obj/effect/decal/cleanable/generic,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"ao" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small/red{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"ap" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"aq" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"ar" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot{dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"as" = (/obj/machinery/light/spot{dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"at" = (/obj/turbolift_map_holder/tranquility,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"au" = (/obj/structure/extinguisher_cabinet,/turf/unsimulated/wall,/area/space)
+"av" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"aw" = (/obj/structure/sign/warning/moving_parts,/turf/unsimulated/wall,/area/space)
+"ax" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"ay" = (/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"az" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/space)
+"aA" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aB" = (/obj/structure/stairs/east,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aC" = (/obj/machinery/light{dir = 1},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aD" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aE" = (/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aF" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aG" = (/obj/machinery/door/airlock/halo_maint,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"aH" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (NORTH)"; icon_state = "stairs"; dir = 1},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aI" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aJ" = (/obj/structure/sign/halo_floorsign/maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"aK" = (/obj/structure/sign/directions/supply{tag = "icon-direction_supply (EAST)"; icon_state = "direction_supply"; dir = 4},/turf/unsimulated/wall,/area/space)
+"aL" = (/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"aM" = (/obj/effect/floor_decal/sign/m,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aN" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"aO" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"aP" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aQ" = (/obj/structure/sign/directions/supply{tag = "icon-direction_supply (NORTH)"; icon_state = "direction_supply"; dir = 1},/turf/unsimulated/wall,/area/space)
+"aR" = (/obj/effect/decal/cleanable/cobweb,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aS" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"aT" = (/obj/structure/sign/warning/secure_area/armory,/turf/unsimulated/wall,/area/space)
+"aU" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"aV" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"aW" = (/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"aX" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"aY" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"aZ" = (/obj/structure/bed,/obj/item/weapon/bedsheet/brown,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"ba" = (/obj/structure/bed,/obj/item/weapon/bedsheet/blue,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bb" = (/obj/machinery/space_heater,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bc" = (/obj/structure/bed,/obj/item/weapon/bedsheet/mime,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bd" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"be" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bf" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bg" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bh" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bi" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bj" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bk" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bl" = (/obj/machinery/door/airlock/halo,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"bm" = (/obj/effect/decal/cleanable/generic,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bn" = (/obj/structure/sign/poster,/turf/unsimulated/wall,/area/space)
+"bo" = (/obj/item/turret_deploy_kit/chaingun,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bp" = (/obj/structure/table/rack,/obj/item/ammo_magazine/chaingun_boxmag,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bq" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"br" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bs" = (/obj/item/turret_deploy_kit/HMG,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bt" = (/obj/structure/table/rack,/obj/item/ammo_magazine/HMG_boxmag,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bu" = (/obj/structure/bed,/obj/item/weapon/bedsheet/ce,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bv" = (/obj/structure/bed,/obj/item/weapon/bedsheet/yellow,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bw" = (/obj/structure/bed,/obj/item/weapon/bedsheet/purple,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bx" = (/obj/structure/sign/halo_floorsign/stairs,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"by" = (/obj/effect/decal/cleanable/generic,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"bz" = (/obj/effect/floor_decal/sign/m,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"bA" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"bB" = (/obj/structure/closet/wall_medical,/turf/unsimulated/wall,/area/space)
+"bC" = (/obj/structure/closet/crate/freezer,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bD" = (/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bE" = (/obj/structure/closet/secure_closet/medical2,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bF" = (/obj/machinery/optable,/obj/machinery/light{dir = 1},/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bG" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/storage/firstaid/surgery,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bH" = (/obj/machinery/vending/medical,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bI" = (/obj/structure/filingcabinet/medical,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bJ" = (/obj/structure/sign/bluecross_2,/turf/unsimulated/wall,/area/space)
+"bK" = (/obj/machinery/iv_drip,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bL" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bM" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"bN" = (/obj/machinery/space_heater,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bO" = (/obj/effect/decal/cleanable/generic,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/space)
+"bP" = (/obj/machinery/door/airlock/halo,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"bQ" = (/obj/structure/skele_stand,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bR" = (/obj/structure/closet/secure_closet/medical3,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bS" = (/obj/structure/table/standard,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bT" = (/obj/machinery/vending/medical,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bU" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bV" = (/obj/structure/closet/secure_closet/medical1,/turf/unsimulated/floor{tag = "icon-white"; icon_state = "white"},/area/space)
+"bW" = (/obj/structure/closet/crate,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/grenade/frag/high_yield,/obj/item/weapon/grenade/frag/high_yield,/obj/item/weapon/grenade/frag/high_yield,/obj/item/weapon/grenade/frag/high_yield,/obj/item/weapon/grenade/frag/high_yield,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bX" = (/obj/effect/landmark/start/Insurrectionist,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bY" = (/obj/effect/landmark/start/Insurrectionist,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"bZ" = (/obj/structure/closet/crate,/obj/item/weapon/gun/projectile/m739_lmg,/obj/item/weapon/gun/projectile/m739_lmg,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"ca" = (/obj/machinery/space_heater,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"cb" = (/obj/structure/closet/crate,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"cc" = (/obj/structure/closet/crate,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"cd" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"ce" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"cf" = (/obj/structure/sign/warning/high_voltage,/turf/unsimulated/wall{tag = "icon-0"; icon_state = "0"},/area/space)
+"cg" = (/obj/structure/closet/crate,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"ch" = (/obj/structure/closet/crate,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/storage/belt/marine_medic,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/space)
+"ci" = (/obj/machinery/power/smes,/obj/machinery/power/terminal,/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"cj" = (/obj/structure/cable/blue{tag = "icon-1-10"; icon_state = "1-10"},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"ck" = (/obj/item/weapon/storage/toolbox/mechanical,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/space)
+"cl" = (/obj/effect/landmark/start/Insurrectionist_Leader,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/space)
+"cm" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/space)
+"cn" = (/obj/machinery/light/small{dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"co" = (/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/space)
+"cp" = (/obj/effect/landmark/innie_bomb,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/space)
+"cq" = (/obj/structure/cable/blue{tag = "icon-2-10"; icon_state = "2-10"},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"cr" = (/obj/structure/cable/blue{tag = "icon-2-4"; icon_state = "2-4"},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
+"cs" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/space)
+"ct" = (/obj/machinery/power/smes,/obj/machinery/power/terminal{dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/space)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabbbbbbbaaaaaabbbbbbbbbbbaaaaaaaaaaaaaaaaaaaaaaa
-aaabcccccbaaaaaabdddddddddbaaaaaaaaaaaaaaaaaaaaaaa
-aaabcccccbaabbbbbdddddddddbaaaaaaaaaaaaaaaaaaaaaaa
-aaabcccccbaabdddbdddddddddbadddaaaaaaaaaaaaaaaaaaa
-aabbbbddbbaabdedbdddddddddbadedaaaaaaaaaaaaaaaaaaa
-aabffffffbaabdddbdddddddddbadddaaaaaaaaaaaaaaaaaaa
-aabffffffbabbbdbbdddddddddbaaaaaaaaaaaaaaaaaaaaaaa
-aabbbbbffbbbbadabbbbfffbbbbaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaabfffgbbaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaabfffgbbaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaabffbbbbaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaabffbbbbaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaabffffffaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaddda
-aaaaaabffffffaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaadeda
-aaaaaabffaaaaaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaddda
-aaaaaabffaaaaaaaaaaafffaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaabffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabbbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabfffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabfffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffbbbdbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffbhhhhhbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffbbbdbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffbbbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabfffgbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabfffgbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffbbbbffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaabbbbbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacadacacacacacaaaaaaaaaaaaaaabaeafafaeaeafafafafabaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacagafafahaeaiaeafafacaaaaaaaaaaaaaaabaeabababababababaeabaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaacacadacacafajafafafafafaeafacabababababaaaaabafabaaaaaaaaaaabaeabaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaacagakaeacafafafafafafafaeaeacabalaeafababababafabaaaaaaaaaaabaeabababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaacafamafacajafafafafafafanaeacabaoamapafafaeaeafabaaaaaaaaaaabafafafaeaeabaa
+aaaaaaaaaaaaaaaaaaaaaaaaacaeaqafacaraeafafafafafanasacabafafafababababababaaaaaaaaaaabababababaeabaa
+aaaaaaaaaaaaaaaaaaaaaaacacacafacacaeanatafafafafajaeacabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaabafabaa
+aaaaaaaaaaaaacauacacacacacacavacacacawacaxaxayacacacacacacacauacacacacacacazacacacacacacaaaaabafabaa
+aaaaaaaaaaaaacaAaxayaBacacayaxayayayayayayaxayayayaxaxaxayaCayaxayayayayayayayayayayaDacaaaaabafabaa
+aaaaaaaaaaaaazaxaxayaBacacayayayayayayayayayayayaxaxayayayayayayayayayaxaxaxaxaEayayaxacaaaaabaeabaa
+aaaaaaaaaaaaacayaFacacacacayaxacacacacacayayayacacacacaGacacacacacacacacacacacacacayayacaaaaabaeabaa
+aaaaaaaaaaaaacaHaHacacacacayaIacaaaaaaacayayayacaaaaabafabaaaaaaaaaaaaaaaaaaaaaaacayayacaaababaeabab
+aaaaaaaaaaaaacayayaxayayayayaxacaaaaaaacayayaFacaaababafababaaaaaaaaaaaaaaaaaaaaacayayacababagaJaeab
+aaaaaaaaaaaaaKaxaxaxayayaxayayacaaaaaaacayaxaxacaaabafaJaLabaaaaaaaaaaaaaaaaaaaaacayaMavaeafafamaNab
+aaaaaaaaaaaaacayayacacacauacacacaaaaaaazayayayacaaabaoamafabaaaaaaaaaaaaaaaaaaaaacayaxacababafaqafab
+aaaaaaaaaaaaacayayacaaaaaaaaaaaaaaaaaaacayayayacaaabafaOafabaaaaaaaaaaaaaaaaaaaaacaPayacaaababafabab
+aaaaaaaaaaaaacayayacaaaaaaaaaaaaaaaaaaacayayayaQaaababafababaaaaaaaaaaaaaaaaaaaaacayayacaaaaabaeabaa
+aaaaaaacacacacayaFacacacacacacacacacacacayaxaxacacacacaGacacacacacacacazacacacacacayayacaaaaabaeabaa
+aaaaaaacaRayayaxaxayayayayayayayaCayayayayaxayayayaxaxayayaCaxaxayayayayayayayayaxayayacaaaaabaeabaa
+aaaaaaacayaxayaxayayayayayayayayayayayayaxayayayaEaxayayayayaxayayayayayaxaSayayaMayayacaaaaabafabaa
+aaaaaaacaxaxacacaTaUacacacacacacacacacacayayayacacacacacacacacacauacacacacacacacavacacacaaaaabaeabaa
+aaaaaaacaxayacaVaWaXaWaYacaaaaaaaaaaaaauayayayacaZaXbabbbcaWbdacaaaaaaaaaaaaaaabafababababababaeabaa
+aaaaaaacaPayacbeaWbfaWbgacaaaaaaaaaaaaacayaxaxacbhaXaXaWaWaWaWacaaaaaaaaaaaaaaabafafafaeaeaeafafabaa
+aaaaaaauayayacbiaWbjaWbkacaaaaaaaaaaaaazayaxayblaWaWaWaWaWbmaWbnaaaaaaaaaaaaaaabafababababababababaa
+aaaaaaacayayacboaWbpaXbqacaaaaaaaaaaaaacaPayayacaWaWaWaWaWaXbracaaaaaaaaaaaaaaabaeabaaaaaaaaaaaaaaaa
+aaaaaaacaxaxacbsaWaWaWbtacaaaaaaaaaaaaacayayayacbubmbvaWbwaXaZacaaabababababababaeabaaaaaaaaaaaaaaaa
+aaaaaaacayayacacacaUaTacacacacacacacacacayayayacacacacacacacacacaaabagafaeaeafafaeabaaaaaaaaaaaaaaaa
+aaaaaaacayayayayayaxayaCayaxayayayaxayayayaxaxacababababababababababafabababababababaaaaaaaaaaaaaaaa
+aaaaaaacbxbxayayaxaxayaybyaxaxaxayaSayayaxaxbzavaeaeafafaeaeaeafafaeaeabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaacayaxacacacacayayacacacacacacacacayayayacababababababababababaeabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaacbAayayaBacacaxaxacaaaaaaaaaaaaacayayayacacbBacacacacacacaaabaeabaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaazaxayayaBacauayaxacaaaaaaaaaaaaaQayayaFacbCbDbEbFbGbHbIacaaabafabababababaaaaaaaaaaaaaaaaaaaa
+aaaaaaacaxaxacacacacayayacacacazacacacacayayaybJbKbDbLbDbDbDbDacaaabafaeaeaeaLabaaaaaaaaaaaaaaaaaaaa
+aaaaaaacaHaHayayayayaybyayaxayayayayayaxayayaybMbDbDbLbDbDbDbNacaaabababababafabaaaaaaaaaaaaaaaaaaaa
+aaaaaaacayayayaSbOaxayayaybOayayaEaxaxayaybzayacbDbDbLbLbDbDbLacaaaaaaaaaaabafabaaaaaaaaaaaaaaaaaaaa
+aaaaaaacacacacacacacbPacacacacacacacacacacavacacbQbRbSbDbTbUbVacaaaaaaaaaaabafabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacbWbXaWbYbZacaaaaaaaaaaaaabaeabacacacacacacacacacaaaaaaaaaaabafabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaccabmaWaXaWacaaaaaaaaaaaaabaeabaaaaaaaaaaababababababababababafabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaccbbXaWbYccacaaaaaaaaaaaaabaeabaaaaaaaaaaabcdafafafafafafafaeaeabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacaXaWaWbmceacaaaaaaaaaaaaabafabaaaaaaaaaaabaeabababababababcfavabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaccgbYaWbXchacaaaaaaaaaaaaabafabaaaaaaaaaaabafabaaaaaaaaabciaeafabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacacacbMacacacaaaaaaaaaaaaabafabababababababafabaaaaaaaaabcjafafabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacckclcmacaaaaaaaaaaaaaaabafafafaeaeaeafafafabaaaaaaaaabcnafafabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaccocpcmacaaaaaaaaaaaaaaabababababababababababaaaaaaaaabcqaecrabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaccocscoacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabctafctabaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
