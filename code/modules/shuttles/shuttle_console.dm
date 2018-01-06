@@ -54,28 +54,35 @@
 		"docking_codes" = shuttle.docking_codes
 	)
 
-/obj/machinery/computer/shuttle_control/proc/handle_topic_href(var/datum/shuttle/autodock/shuttle, var/list/href_list)
+/obj/machinery/computer/shuttle_control/proc/handle_topic_href(var/datum/shuttle/autodock/shuttle, var/list/href_list, var/user)
 	if(!istype(shuttle))
-		return
+		return TOPIC_NOACTION
 
 	if(href_list["move"])
 		if(!shuttle.next_location.is_valid(shuttle))
-			to_chat(usr, "<span class='warning'>Destination zone is invalid or obstructed.</span>")
-			return
+			to_chat(user, "<span class='warning'>Destination zone is invalid or obstructed.</span>")
+			return TOPIC_HANDLED
 		shuttle.launch(src)
-	else if(href_list["force"])
+		return TOPIC_REFRESH
+
+	if(href_list["force"])
 		shuttle.force_launch(src)
-	else if(href_list["cancel"])
+		return TOPIC_REFRESH
+
+	if(href_list["cancel"])
 		shuttle.cancel_launch(src)
-	else if(href_list["set_codes"])
+		return TOPIC_REFRESH
+
+	if(href_list["set_codes"])
 		var/newcode = input("Input new docking codes", "Docking codes", shuttle.docking_codes) as text|null
-		if (newcode)
+		if (newcode && CanInteract(usr, GLOB.default_state))
 			shuttle.set_docking_codes(uppertext(newcode))
+		return TOPIC_REFRESH
 
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/datum/shuttle/autodock/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
-		to_chat(usr,"<span class='warning'>Unable to establish link with the shuttle.</span>")
+		to_chat(user,"<span class='warning'>Unable to establish link with the shuttle.</span>")
 		return
 
 	var/list/data = get_ui_data(shuttle)
@@ -87,11 +94,8 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/shuttle_control/Topic(href, href_list)
-	if(..())
-		return 1
-
-	handle_topic_href(shuttle_controller.shuttles[shuttle_tag], href_list)
+/obj/machinery/computer/shuttle_control/OnTopic(user, href_list)
+	return handle_topic_href(shuttle_controller.shuttles[shuttle_tag], href_list, user)
 
 /obj/machinery/computer/shuttle_control/emag_act(var/remaining_charges, var/mob/user)
 	if (!hacked)

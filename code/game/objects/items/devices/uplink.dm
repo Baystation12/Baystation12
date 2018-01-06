@@ -145,29 +145,28 @@
 	return ..()
 
 // The purchasing code.
-/obj/item/device/uplink/Topic(href, href_list)
-	if(..())
-		return 1
-
-	var/mob/user = usr
+/obj/item/device/uplink/OnTopic(user, href_list)
 	if(href_list["buy_item"])
 		var/datum/uplink_item/UI = (locate(href_list["buy_item"]) in uplink.items)
 		UI.buy(src, usr)
+		. = TOPIC_REFRESH
 	else if(href_list["lock"])
 		toggle()
-		var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
-		ui.close()
+		GLOB.nanomanager.close_user_uis(user, src, "main")
+		. = TOPIC_HANDLED
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)
+		. = TOPIC_REFRESH
 	else if(href_list["menu"])
 		nanoui_menu = text2num(href_list["menu"])
 		if(href_list["id"])
 			exploit_id = text2num(href_list["id"])
 		if(href_list["category"])
 			category = locate(href_list["category"]) in uplink.categories
+		. = TOPIC_REFRESH
 
-	update_nano_data()
-	return 1
+	if(. == TOPIC_REFRESH)
+		update_nano_data()
 
 /obj/item/device/uplink/proc/update_nano_data()
 	if(nanoui_menu == 0)

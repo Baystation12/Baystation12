@@ -142,32 +142,34 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/atmospherics/unary/cryo_cell/Topic(href, href_list)
-	if(usr == occupant)
-		return 0 // don't update UIs attached to this object
-
-	if(..())
-		return 0 // don't update UIs attached to this object
-
+/obj/machinery/atmospherics/unary/cryo_cell/OnTopic(user, href_list)
+	if(user == occupant)
+		return STATUS_CLOSE
+	return ..()
+	    
+/obj/machinery/atmospherics/unary/cryo_cell/OnTopic(user, href_list)
 	if(href_list["switchOn"])
 		on = 1
 		update_icon()
+		return TOPIC_REFRESH
 
 	if(href_list["switchOff"])
 		on = 0
 		update_icon()
+		return TOPIC_REFRESH
 
 	if(href_list["ejectBeaker"])
 		if(beaker)
 			beaker.forceMove(get_step(loc, SOUTH))
 			beaker = null
+		return TOPIC_REFRESH
 
 	if(href_list["ejectOccupant"])
-		if(!occupant || isslime(usr) || ispAI(usr))
-			return 0 // don't update UIs attached to this object
+		if(!occupant || isslime(user) || ispAI(user))
+			return TOPIC_HANDLED // don't update UIs attached to this object
 		go_out()
+		return TOPIC_REFRESH
 
-	return 1 // update UIs attached to this object
 
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user as mob)
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))

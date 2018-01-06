@@ -113,8 +113,7 @@
 			src.visible_message("<b>[name]</b> states, \"Battery dump completed.\"")
 			icon_state = "incubator"
 
-/obj/machinery/artifact_harvester/Topic(href, href_list)
-
+/obj/machinery/artifact_harvester/OnTopic(user, href_list)
 	if (href_list["harvest"])
 		if(!inserted_battery)
 			src.visible_message("<b>[src]</b> states, \"Cannot harvest. No battery inserted.\"")
@@ -211,8 +210,9 @@
 								//copy the new datum into the battery
 								inserted_battery.battery_effect = E
 								inserted_battery.stored_charge = 0
+		. = TOPIC_REFRESH
 
-	if (href_list["stopharvest"])
+	else if (href_list["stopharvest"])
 		if(harvesting)
 			if(harvesting < 0 && inserted_battery.battery_effect && inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate()
@@ -222,12 +222,14 @@
 			cur_artifact = null
 			src.visible_message("<b>[name]</b> states, \"Energy harvesting interrupted.\"")
 			icon_state = "incubator"
+		. = TOPIC_REFRESH
 
-	if (href_list["ejectbattery"])
-		src.inserted_battery.loc = src.loc
+	else if (href_list["ejectbattery"])
+		src.inserted_battery.dropInto(loc)
 		src.inserted_battery = null
+		. = TOPIC_REFRESH
 
-	if (href_list["drainbattery"])
+	else if (href_list["drainbattery"])
 		if(inserted_battery)
 			if(inserted_battery.battery_effect && inserted_battery.stored_charge > 0)
 				if(alert("This action will dump all charge, safety gear is recommended before proceeding","Warning","Continue","Cancel"))
@@ -245,9 +247,11 @@
 		else
 			var/message = "<b>[src]</b> states, \"Cannot dump energy. No battery inserted.\""
 			src.visible_message(message)
+		. = TOPIC_REFRESH
 
-	if(href_list["close"])
-		usr << browse(null, "window=artharvester")
-		usr.unset_machine(src)
+	else if(href_list["close"])
+		close_browser(user, "window=artharvester")
+		return TOPIC_HANDLED
 
-	updateDialog()
+	if(. == TOPIC_REFRESH)
+		interact(user)

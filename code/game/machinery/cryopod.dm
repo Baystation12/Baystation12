@@ -65,22 +65,16 @@
 	user << browse(dat, "window=cryopod_console")
 	onclose(user, "cryopod_console")
 
-/obj/machinery/computer/cryopod/Topic(href, href_list)
-	if((. = ..()))
-		return
-
-	var/mob/user = usr
-
+/obj/machinery/computer/cryopod/OnTopic(user, href_list, state)
 	if(href_list["log"])
-
 		var/dat = "<b>Recently stored [storage_type]</b><br/><hr/><br/>"
 		for(var/person in frozen_crew)
 			dat += "[person]<br/>"
 		dat += "<hr/>"
+		show_browser(user, dat, "window=cryolog")
+		. = TOPIC_REFRESH
 
-		user << browse(dat, "window=cryolog")
-
-	if(href_list["view"])
+	else if(href_list["view"])
 		if(!allow_items) return
 
 		var/dat = "<b>Recently stored objects</b><br/><hr/><br/>"
@@ -88,43 +82,45 @@
 			dat += "[I.name]<br/>"
 		dat += "<hr/>"
 
-		user << browse(dat, "window=cryoitems")
+		show_browser(user, dat, "window=cryoitems")
+		. = TOPIC_HANDLED
 
 	else if(href_list["item"])
 		if(!allow_items) return
 
 		if(frozen_items.len == 0)
 			to_chat(user, "<span class='notice'>There is nothing to recover from storage.</span>")
-			return
+			return TOPIC_HANDLED
 
-		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
-		if(!I)
-			return
+		var/obj/item/I = input(user, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
+		if(!I || !CanUseTopic(user, state))
+			return TOPIC_HANDLED
 
 		if(!(I in frozen_items))
 			to_chat(user, "<span class='notice'>\The [I] is no longer in storage.</span>")
-			return
+			return TOPIC_HANDLED
 
 		visible_message("<span class='notice'>The console beeps happily as it disgorges \the [I].</span>", 3)
 
-		I.forceMove(get_turf(src))
+		I.dropInto(loc)
 		frozen_items -= I
+		. = TOPIC_REFRESH
 
 	else if(href_list["allitems"])
-		if(!allow_items) return
+		if(!allow_items) return TOPIC_HANDLED
 
 		if(frozen_items.len == 0)
 			to_chat(user, "<span class='notice'>There is nothing to recover from storage.</span>")
-			return
+			return TOPIC_HANDLED
 
 		visible_message("<span class='notice'>The console beeps happily as it disgorges the desired objects.</span>", 3)
 
 		for(var/obj/item/I in frozen_items)
-			I.forceMove(get_turf(src))
+			I.dropInto(loc)
 			frozen_items -= I
+		. = TOPIC_REFRESH
 
-	src.updateUsrDialog()
-	return
+	attack_hand(user)
 
 /obj/item/weapon/circuitboard/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"

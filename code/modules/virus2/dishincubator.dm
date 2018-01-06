@@ -145,52 +145,46 @@
 					break
 			GLOB.nanomanager.update_uis(src)
 
-/obj/machinery/disease2/incubator/Topic(href, href_list)
-	if (..()) return 1
-
-	var/mob/user = usr
-	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
-
+/obj/machinery/disease2/incubator/OnTopic(user, href_list)
 	if (href_list["close"])
-		user.unset_machine()
-		ui.close()
-		return 0
+		GLOB.nanomanager.close_user_uis(user, src, "main")
+		return TOPIC_HANDLED
 
 	if (href_list["ejectchem"])
 		if(beaker)
-			beaker.loc = src.loc
+			beaker.dropInto(loc)
 			beaker = null
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["power"])
 		if (dish)
 			on = !on
 			icon_state = on ? "incubator_on" : "incubator"
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["ejectdish"])
 		if(dish)
-			dish.loc = src.loc
+			dish.dropInto(loc)
 			dish = null
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["rad"])
 		radiation = min(100, radiation + 10)
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["flush"])
 		radiation = 0
 		toxins = 0
 		foodsupply = 0
-		return 1
+		return TOPIC_REFRESH
 
 	if(href_list["virus"])
 		if (!dish)
-			return 1
+			return TOPIC_HANDLED
 
 		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in beaker.reagents.reagent_list
 		if (!B)
-			return 1
+			return TOPIC_HANDLED
 
 		if (!B.data["virus2"])
 			B.data["virus2"] = list()
@@ -199,6 +193,4 @@
 		B.data["virus2"] += virus
 
 		ping("\The [src] pings, \"Injection complete.\"")
-		return 1
-
-	return 0
+		return TOPIC_REFRESH

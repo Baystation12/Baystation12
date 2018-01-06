@@ -90,30 +90,32 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/sleeper/Topic(href, href_list)
-	if(..())
-		return 1
-
-	if(usr == occupant)
+/obj/machinery/sleeper/CanUseTopic(user)
+	if(user == occupant)
 		to_chat(usr, "<span class='warning'>You can't reach the controls from the inside.</span>")
-		return
-
+		return STATUS_CLOSE
+	return ..()
+	    
+/obj/machinery/sleeper/OnTopic(user, href_list)
 	if(href_list["eject"])
 		go_out()
+		return TOPIC_REFRESH
 	if(href_list["beaker"])
 		remove_beaker()
+		return TOPIC_REFRESH
 	if(href_list["filter"])
 		if(filtering != text2num(href_list["filter"]))
 			toggle_filter()
+			return TOPIC_REFRESH
 	if(href_list["pump"])
 		if(filtering != text2num(href_list["pump"]))
 			toggle_pump()
+			return TOPIC_REFRESH
 	if(href_list["chemical"] && href_list["amount"])
 		if(occupant && occupant.stat != DEAD)
 			if(href_list["chemical"] in available_chemicals) // Your hacks are bad and you should feel bad
-				inject_chemical(usr, href_list["chemical"], text2num(href_list["amount"]))
-
-	return 1
+				inject_chemical(user, href_list["chemical"], text2num(href_list["amount"]))
+				return TOPIC_REFRESH
 
 /obj/machinery/sleeper/attack_ai(var/mob/user)
 	return attack_hand(user)

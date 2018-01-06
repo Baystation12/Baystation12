@@ -30,12 +30,10 @@
 /obj/structure/sign/ecplaque/CanUseTopic()
 	return STATUS_INTERACTIVE
 
-/obj/structure/sign/ecplaque/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/structure/sign/ecplaque/OnTopic(href, href_list)
 	if(href_list["show_info"])
 		to_chat(usr, directives)
-		return 1
+		return TOPIC_HANDLED
 
 /obj/effect/floor_decal/scglogo
 	alpha = 230

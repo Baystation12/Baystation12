@@ -132,12 +132,12 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 					if(Sp_CHARGES)
 						type = "C"
 				info += "<font color='#33cc33'>[type]</font>"
-			dat += "<A href='byond://?src=\ref[src];path=[spellbook.spells[i]]'>[name]</a>"
+			dat += "<A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]]'>[name]</a>"
 			if(length(info))
 				dat += " ([info])"
 			dat += " ([spellbook.spells[spellbook.spells[i]]] spell slot[spellbook.spells[spellbook.spells[i]] > 1 ? "s" : "" ])"
 			if(spellbook.book_flags & CAN_MAKE_CONTRACTS)
-				dat += " <A href='byond://?src=\ref[src];path=[spellbook.spells[i]];contract=1;'>Make Contract</a>"
+				dat += " <A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]];contract=1;'>Make Contract</a>"
 			dat += "<br><i>[desc]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
 		if(spellbook.book_flags & INVESTABLE)
@@ -150,50 +150,46 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
 	user << browse(dat,"window=spellbook")
 
-/obj/item/weapon/spellbook/Topic(href,href_list)
-	..()
-
-	var/mob/living/carbon/human/H = usr
-
-	if(H.stat || H.restrained())
-		return
-
+/obj/item/weapon/spellbook/CanUseTopic(var/mob/living/carbon/human/H)
 	if(!istype(H))
-		return
+		return STATUS_CLOSE
 
-	if(H.mind && spellbook.book_flags & LOCKED && H.mind.special_role == "apprentice") //make sure no scrubs get behind the lock
-		return
+	if(H.mind && (spellbook.book_flags & LOCKED) && H.mind.special_role == "apprentice") //make sure no scrubs get behind the lock
+		return STATUS_CLOSE
 
-	if(!H.contents.Find(src))
-		H << browse(null,"window=spellbook")
-		return
+	return ..()
 
+/obj/item/weapon/spellbook/OnTopic(var/mob/living/carbon/human/user, href_list)
 	if(href_list["lock"])
 		if(spellbook.book_flags & LOCKED)
 			spellbook.book_flags &= ~LOCKED
 		else
 			spellbook.book_flags |= LOCKED
+		. = TOPIC_REFRESH
 
-	if(href_list["temp"])
+	else if(href_list["temp"])
 		temp = null
+		. = TOPIC_REFRESH        
 
-	if(href_list["book"])
+	else if(href_list["book"])
 		if(initial(spellbook.max_uses) != spellbook.max_uses || uses != spellbook.max_uses)
 			temp = "You've already purchased things using this spellbook!"
 		else
 			src.set_spellbook(/datum/spellbook)
 			temp = "You have reverted back to the Book of Tomes."
+		. = TOPIC_REFRESH
 
-	if(href_list["invest"])
+	else if(href_list["invest"])
 		temp = invest()
+		. = TOPIC_REFRESH
 
-	if(href_list["path"])
-		var/path = text2path(href_list["path"])
-		if(!(path in spellbook.spells))
-			return
+	else if(href_list["path"])
+		var/path = locate(href_list["path"]) in spellbook.spells
+		if(!path)
+			return TOPIC_HANDLED
 		if(uses < spellbook.spells[path])
-			to_chat(usr, "<span class='notice'>You do not have enough spell slots to purchase this.</span>")
-			return
+			to_chat(user, "<span class='notice'>You do not have enough spell slots to purchase this.</span>")
+			return TOPIC_HANDLED
 		send_feedback(path) //feedback stuff
 		if(ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
@@ -204,33 +200,36 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 					return //no
 				uses -= spellbook.spells[path]
 				spellbook.max_uses -= spellbook.spells[path] //no basksies
-				var/obj/O = new /obj/item/weapon/contract/boon(get_turf(usr),path)
+				var/obj/O = new /obj/item/weapon/contract/boon(get_turf(user),path)
 				temp = "You have purchased \the [O]."
 			else
 				if(ispath(path,/spell))
-					temp = src.add_spell(usr,path)
+					temp = src.add_spell(user,path)
 					if(temp)
 						uses -= spellbook.spells[path]
 				else
-					var/obj/O = new path(get_turf(usr))
+					var/obj/O = new path(get_turf(user))
 					temp = "You have purchased \a [O]."
 					uses -= spellbook.spells[path]
 					spellbook.max_uses -= spellbook.spells[path]
 					//finally give it a bit of an oomf
-					playsound(get_turf(usr),'sound/effects/phasein.ogg',50,1)
-	if(href_list["reset"])
-		var/area/wizard_station/A = locate()
-		if(usr in A.contents)
+					playsound(get_turf(user),'sound/effects/phasein.ogg',50,1)
+		. = TOPIC_REFRESH
+
+	else if(href_list["reset"])
+		var/area/wizard_station/A = get_area(user)
+		if(istype(A))
 			uses = spellbook.max_uses
 			investing_time = 0
 			has_sacrificed = 0
-			H.spellremove()
+			user.spellremove()
 			temp = "All spells and investments have been removed. You may now memorize a new set of spells."
 			feedback_add_details("wizard_spell_learned","UM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 		else
-			to_chat(usr, "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>")
+			to_chat(user, "<span class='warning'>You must be in the wizard academy to re-memorize your spells.</span>")
+		. = TOPIC_REFRESH
 
-	src.interact(usr)
+	src.interact(user)
 
 /obj/item/weapon/spellbook/proc/invest()
 	if(uses < 1)

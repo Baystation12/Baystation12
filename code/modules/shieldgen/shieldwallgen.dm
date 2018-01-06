@@ -41,25 +41,23 @@
 	else
 		icon_state = "Shield_Gen +a"
 
-/obj/machinery/shieldwallgen/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/machinery/shieldwallgen/OnTopic(var/mob/user, href_list)
 	if(href_list["toggle"])
 		if(src.active >= 1)
 			src.active = 0
 			update_icon()
 
-			usr.visible_message("\The [usr] turned the shield generator off.", \
+			user.visible_message("\The [user] turned the shield generator off.", \
 				"You turn off the shield generator.", \
 				"You hear heavy droning fade out.")
 			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
 		else
 			src.active = 1
 			update_icon()
-			usr.visible_message("\The [usr] turned the shield generator on.", \
+			user.visible_message("\The [user] turned the shield generator on.", \
 				"You turn on the shield generator.", \
 				"You hear heavy droning.")
-	return 1
+		return TOPIC_REFRESH
 
 /obj/machinery/shieldwallgen/ex_act(var/severity)
 	switch(severity)

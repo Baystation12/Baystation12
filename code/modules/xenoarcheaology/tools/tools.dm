@@ -204,15 +204,12 @@
 	user << browse(dat,"window=depth_scanner;size=300x500")
 	onclose(user, "depth_scanner")
 
-/obj/item/device/depth_scanner/Topic(href, href_list)
-	if(..())
-		return 1
-	usr.set_machine(src)
-
+/obj/item/device/depth_scanner/OnTopic(user, href_list)
 	if(href_list["select"])
 		var/index = text2num(href_list["select"])
 		if(index && index <= positive_locations.len)
 			current = positive_locations[index]
+		. = TOPIC_REFRESH
 	else if(href_list["clear"])
 		var/index = text2num(href_list["clear"])
 		if(index)
@@ -223,11 +220,10 @@
 		else
 			//GC will hopefully pick them up before too long
 			positive_locations = list()
-			qdel(current)
+			QDEL_NULL(current)
+		. = TOPIC_REFRESH
 	else if(href_list["close"])
-		usr.unset_machine()
-		usr << browse(null, "window=depth_scanner")
-
+		close_browser(user, "window=depth_scanner")
 	updateSelfDialog()
 
 /obj/item/device/beacon_locator
@@ -307,22 +303,20 @@
 	user << browse(dat,"window=locater;size=300x150")
 	onclose(user, "locater")
 
-/obj/item/device/beacon_locator/Topic(href, href_list)
-	if(..())
-		return 1
-	usr.set_machine(src)
-
+/obj/item/device/beacon_locator/OnTopic(user, href_list)
 	if(href_list["reset_tracking"])
 		scan_ticks = 1
 		target_radio = null
+		. = TOPIC_REFRESH
 	else if(href_list["freq"])
 		var/new_frequency = (frequency + text2num(href_list["freq"]))
 		if (frequency < 1200 || frequency > 1600)
 			new_frequency = sanitize_frequency(new_frequency, 1499)
 		frequency = new_frequency
-
+		. = TOPIC_REFRESH
 	else if(href_list["close"])
-		usr.unset_machine()
-		usr << browse(null, "window=locater")
+		close_browser(user, "window=locater")
+		return TOPIC_HANDLED
 
-	updateSelfDialog()
+	if(. == TOPIC_REFRESH)
+		interact(user)

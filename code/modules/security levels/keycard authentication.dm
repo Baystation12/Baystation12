@@ -48,7 +48,7 @@
 		icon_state = "auth_off"
 
 /obj/machinery/keycard_auth/attack_hand(mob/user as mob)
-	if(user.stat || stat & (NOPOWER|BROKEN))
+	if(stat & (NOPOWER|BROKEN))
 		to_chat(user, "This device is not powered.")
 		return
 	if(!user.IsAdvancedToolUser())
@@ -83,23 +83,26 @@
 		user << browse(dat, "window=keycard_auth;size=500x250")
 	return
 
-
-/obj/machinery/keycard_auth/Topic(href, href_list)
-	..()
+/obj/machinery/keycard_auth/CanUseTopic(var/mob/user, href_list)
 	if(busy)
-		to_chat(usr, "This device is busy.")
-		return
-	if(usr.stat || stat & (BROKEN|NOPOWER))
-		to_chat(usr, "This device is without power.")
-		return
+		to_chat(user, "This device is busy.")
+		return STATUS_CLOSE
+	if(!user.IsAdvancedToolUser())
+		to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
+		return min(..(), STATUS_UPDATE)
+	return ..()
+
+/obj/machinery/keycard_auth/OnTopic(user, href_list)
 	if(href_list["triggerevent"])
 		event = href_list["triggerevent"]
 		screen = 2
+		. = TOPIC_REFRESH
 	if(href_list["reset"])
 		reset()
+		. = TOPIC_REFRESH
 
-	updateUsrDialog()
-	return
+	if(. == TOPIC_REFRESH)
+		attack_hand(user)
 
 /obj/machinery/keycard_auth/proc/reset()
 	active = 0
