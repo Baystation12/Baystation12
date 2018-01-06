@@ -45,3 +45,5 @@
 	enter_time = 3
 	takeoff_time = 5
 
+	overmap_range = 1
+

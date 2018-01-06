@@ -58,7 +58,7 @@
 	mask = /obj/item/clothing/mask/innie/shemagh
 
 	l_pocket = /obj/item/ammo_magazine/m127_saphp
-	r_pocket = /obj/item/device/encryptionkey/inniecom
+	l_ear = /obj/item/device/radio/headset/insurrection
 
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser/equip_special()
 	return
