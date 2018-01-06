@@ -95,7 +95,7 @@
 		return
 
 	//Dead or cryosleep people do not pump the blood.
-	if(!owner || owner.in_stasis || owner.stat == DEAD || owner.bodytemperature < 170)
+	if(!owner || owner.InStasis() || owner.stat == DEAD || owner.bodytemperature < 170)
 		return
 
 	if(pulse != PULSE_NONE || robotic >= ORGAN_ROBOT)

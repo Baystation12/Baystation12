@@ -214,6 +214,7 @@
 /obj/machinery/cryopod/lifepod/Initialize()
 	. = ..()
 	airtank = new()
+	airtank.temperature = T0C
 	airtank.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
 	airtank.adjust_gas("nitrogen", MOLES_N2STANDARD)
 
@@ -299,6 +300,10 @@
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
 /obj/machinery/cryopod/Process()
 	if(occupant)
+		if(applies_stasis && iscarbon(occupant))
+			var/mob/living/carbon/C = occupant
+			C.SetStasis(20)
+
 		//Allow a ten minute gap between entering the pod and actually despawning.
 		if(world.time - time_entered < time_till_despawn)
 			return
@@ -454,21 +459,7 @@
 			if(do_after(user, 20, src))
 				if(!M || !grab || !grab.affecting) return
 
-				M.forceMove(src)
-
-				if(M.client)
-					M.client.perspective = EYE_PERSPECTIVE
-					M.client.eye = src
-
-			icon_state = occupied_icon_state
-
-			to_chat(M, "<span class='notice'>[on_enter_occupant_message]</span>")
-			to_chat(M, "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>")
 			set_occupant(M)
-			time_entered = world.time
-			if(ishuman(M) && applies_stasis)
-				var/mob/living/carbon/human/H = M
-				H.in_stasis = 1
 
 			// Book keeping!
 			var/turf/location = get_turf(src)
@@ -529,21 +520,7 @@
 			to_chat(usr, "<span class='notice'><B>\The [src] is in use.</B></span>")
 			return
 
-		usr.stop_pulling()
-		usr.client.perspective = EYE_PERSPECTIVE
-		usr.client.eye = src
-		usr.forceMove(src)
 		set_occupant(usr)
-		if(ishuman(usr) && applies_stasis)
-			var/mob/living/carbon/human/H = occupant
-			H.in_stasis = 1
-
-		icon_state = occupied_icon_state
-
-		to_chat(usr, "<span class='notice'>[on_enter_occupant_message]</span>")
-		to_chat(usr, "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>")
-
-		time_entered = world.time
 
 		src.add_fingerprint(usr)
 
@@ -559,17 +536,28 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 
 	occupant.forceMove(get_turf(src))
-	if(ishuman(occupant) && applies_stasis)
-		var/mob/living/carbon/human/H = occupant
-		H.in_stasis = 0
 	set_occupant(null)
 
 	icon_state = base_icon_state
 
 	return
 
-/obj/machinery/cryopod/proc/set_occupant(var/occupant)
+/obj/machinery/cryopod/proc/set_occupant(var/mob/living/carbon/occupant)
 	src.occupant = occupant
-	name = initial(name)
-	if(occupant)
-		name = "[name] ([occupant])"
+	if(!occupant)
+		name = initial(name)
+		return
+
+	occupant.stop_pulling()
+	if(occupant.client)
+		to_chat(occupant, "<span class='notice'>[on_enter_occupant_message]</span>")
+		to_chat(occupant, "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>")
+		occupant.client.perspective = EYE_PERSPECTIVE
+		occupant.client.eye = src
+	occupant.forceMove(src)
+	time_entered = world.time
+
+	name = "[name] ([occupant])"
+	icon_state = occupied_icon_state
+
+

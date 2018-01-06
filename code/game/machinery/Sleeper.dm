@@ -12,6 +12,8 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
 	var/pump
+	var/list/stasis_settings = list(1, 3, 5)
+	var/stasis = 1
 
 	use_power = 1
 	idle_power_usage = 15
@@ -44,6 +46,9 @@
 					occupant.ingested.trans_to_obj(beaker, 3)
 		else
 			toggle_pump()
+
+	if(iscarbon(occupant) && stasis > 1)
+		occupant.SetStasis(stasis)
 
 /obj/machinery/sleeper/update_icon()
 	icon_state = "sleeper_[occupant ? "1" : "0"]"
@@ -82,6 +87,7 @@
 		data["beaker"] = -1
 	data["filtering"] = filtering
 	data["pump"] = pump
+	data["stasis"] = stasis
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
@@ -116,6 +122,11 @@
 			if(href_list["chemical"] in available_chemicals) // Your hacks are bad and you should feel bad
 				inject_chemical(user, href_list["chemical"], text2num(href_list["amount"]))
 				return TOPIC_REFRESH
+	if(href_list["stasis"])
+		var/nstasis = text2num(href_list["stasis"])
+		if(stasis != nstasis && nstasis in stasis_settings)
+			stasis = text2num(href_list["stasis"])
+			return TOPIC_REFRESH
 
 /obj/machinery/sleeper/attack_ai(var/mob/user)
 	return attack_hand(user)

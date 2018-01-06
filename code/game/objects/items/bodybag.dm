@@ -82,17 +82,18 @@
 		return 1
 	return 0
 
+/obj/structure/closet/body_bag/proc/fold(var/user)
+	if(!ishuman(user))	return 0
+	if(opened)	return 0
+	if(contents.len)	return 0
+	visible_message("[user] folds up the [name]")
+	. = new item_path(get_turf(src))
+	qdel(src)
+
 /obj/structure/closet/body_bag/MouseDrop(over_object, src_location, over_location)
 	..()
 	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
-		if(!ishuman(usr))	return
-		if(opened)	return 0
-		if(contents.len)	return 0
-		visible_message("[usr] folds up the [src.name]")
-		new item_path(get_turf(src))
-		spawn(0)
-			qdel(src)
-		return
+		fold(usr)
 
 /obj/structure/closet/body_bag/update_icon()
 	if(opened)
@@ -102,75 +103,3 @@
 			icon_state = "bodybag_closed1"
 		else
 			icon_state = icon_closed
-
-
-/obj/item/bodybag/cryobag
-	name = "stasis bag"
-	desc = "A folded, non-reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
-	a hostile enviroment."
-	icon = 'icons/obj/cryobag.dmi'
-	icon_state = "bodybag_folded"
-	origin_tech = list(TECH_BIO = 4)
-
-/obj/item/bodybag/cryobag/attack_self(mob/user)
-	var/obj/structure/closet/body_bag/cryobag/R = new /obj/structure/closet/body_bag/cryobag(user.loc)
-	R.add_fingerprint(user)
-	qdel(src)
-
-/obj/structure/closet/body_bag/cryobag
-	name = "stasis bag"
-	desc = "A non-reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
-	a hostile enviroment."
-	icon = 'icons/obj/cryobag.dmi'
-	item_path = /obj/item/bodybag/cryobag
-
-	storage_types = CLOSET_STORAGE_MOBS
-
-	var/used = 0
-	var/obj/item/weapon/tank/tank = null
-
-/obj/structure/closet/body_bag/cryobag/New()
-	tank = new /obj/item/weapon/tank/emergency/oxygen(null) //It's in nullspace to prevent ejection when the bag is opened.
-	..()
-
-/obj/structure/closet/body_bag/cryobag/Destroy()
-	qdel(tank)
-	tank = null
-	return ..()
-
-/obj/structure/closet/body_bag/cryobag/open()
-	. = ..()
-	if(used)
-		new/obj/item/usedcryobag(src.loc)
-		qdel(src)
-
-/obj/structure/closet/body_bag/cryobag/Entered(atom/movable/AM)
-	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
-		H.in_stasis = 1
-		src.used = 1
-	..()
-
-/obj/structure/closet/body_bag/cryobag/Exited(atom/movable/AM)
-	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
-		H.in_stasis = 0
-	. = ..()
-
-/obj/structure/closet/body_bag/cryobag/return_air() //Used to make stasis bags protect from vacuum.
-	if(tank)
-		return tank.air_contents
-	..()
-
-/obj/structure/closet/body_bag/cryobag/examine(mob/user)
-	. = ..()
-	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
-		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
-		for(var/mob/living/L in contents)
-			L.examine(user)
-
-/obj/item/usedcryobag
-	name = "used stasis bag"
-	desc = "Pretty useless now.."
-	icon_state = "bodybag_used"
-	icon = 'icons/obj/cryobag.dmi'

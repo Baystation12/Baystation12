@@ -9,15 +9,6 @@
 		default_language = all_languages[species_language]
 	..()
 
-/mob/living/carbon/Life()
-	..()
-
-	handle_viruses()
-
-	// Increase germ_level regularly
-	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
-		germ_level++
-
 /mob/living/carbon/Destroy()
 	QDEL_NULL(ingested)
 	QDEL_NULL(touching)
@@ -467,3 +458,20 @@
 	// carbon mobs do not have blocked mouths by default
 	// overridden in human_defense.dm
 	return null
+/mob/living/carbon/proc/SetStasis(var/factor, var/source = "misc")
+	if((species && (species.flags & NO_SCAN)) || isSynthetic())
+		return
+	stasis_sources[source] = factor
+
+/mob/living/carbon/proc/GetStasis()
+	if((species && (species.flags & NO_SCAN)) || isSynthetic())
+		return 0
+	. = 0
+	for(var/source in stasis_sources)
+		. += stasis_sources[source]
+
+/mob/living/carbon/proc/InStasis()
+	var/stasis = GetStasis()
+	if(!stasis)
+		return FALSE
+	return life_tick % stasis
