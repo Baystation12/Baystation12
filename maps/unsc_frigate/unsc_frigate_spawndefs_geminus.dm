@@ -8,5 +8,5 @@
 /datum/job/UNSC_ship/ops_chief,/datum/job/UNSC_ship/ops,/datum/job/UNSC_ship/cmdr_wing,/datum/job/UNSC_ship/cmdr_sqr,\
 /datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,/datum/job/UNSC_ship/gunnery_chief,/datum/job/UNSC_ship/gunnery,\
 /datum/job/UNSC_ship/technician_chief,/datum/job/UNSC_ship/technician)
-	allowed_spawns = list("UNSC Frigate Spawn","Colony Arrival Shuttle")
+	allowed_spawns = list("UNSC Frigate","Colony Arrival Shuttle")
 	base_turf_by_z = list("5" = /turf/simulated/floor/planet/dirt)
