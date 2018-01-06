@@ -9,7 +9,7 @@
 
 /obj/structure/dropship/overmap/perform_move_sequence(var/obj/move_to_obj = target_location)
 	if(!dropship_landing_controller.overmap_range_check(src,move_to_obj))
-		to_chat(pilot,"<span class = 'warning>Your targeted location has moved out of range!</span>")
+		to_chat(pilot,"<span class = 'warning'>Your targeted location has moved out of range!</span>")
 		target_location = null
 		return
 	. = ..()
