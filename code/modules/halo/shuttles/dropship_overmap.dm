@@ -5,7 +5,7 @@
 
 /obj/structure/dropship/overmap/update_reachable_landing()
 	generate_current_landpoint()
-	reachable_landing_locations = dropship_landing_controller.get_potential_landing_points_overmap(dropship = src)
+	reachable_landing_locations = dropship_landing_controller.get_potential_landing_points_overmap(1,1,1,faction,src)
 
 /obj/structure/dropship/overmap/perform_move_sequence(var/obj/move_to_obj = target_location)
 	if(!dropship_landing_controller.overmap_range_check(src,move_to_obj))

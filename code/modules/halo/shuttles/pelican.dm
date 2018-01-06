@@ -47,3 +47,15 @@
 
 	overmap_range = 1
 
+/obj/structure/dropship/overmap/pelican/civ
+	overmap_range = 999
+	desc = "A versatile aircraft usually used by the UNSC. This one has been modified to allow for fast transit between civillian endpoints."
+	faction = "civillian"
+
+/obj/structure/dropship/overmap/pelican/innie
+	overmap_range = 999
+	desc = "A versatile aircraft usually used by the UNSC. This one has been modified to allow for fast transit between civillian endpoints. This one appears to have a red fist on the wings."
+	faction = "innie"
+
+/obj/structure/dropship/overmap/pelican/unsc
+	faction = "unsc"

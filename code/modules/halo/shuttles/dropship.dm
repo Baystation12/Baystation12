@@ -11,6 +11,8 @@
 
 	layer = ABOVE_HUMAN_LAYER
 	plane = ABOVE_HUMAN_PLANE
+	var/faction = null //The faction this ship belongs to. Setting this will restrict landing to faction-owned and civillian points only
+
 
 	var/takeoff_overlay_icon_state
 	var/takeoff_sound
@@ -88,7 +90,7 @@
 		to_chat(user,"<span class ='notice'>You need to be inside the vehicle to exit it.</span>")
 		return
 	if(pilot == user)
-		assign_pilot(user)
+		unassign_pilot(user)
 	do_exit_vehicle(user)
 
 /obj/structure/dropship/verb/verb_change_landing_location()
@@ -118,7 +120,7 @@
 //All Transit Related Procs//
 /obj/structure/dropship/proc/update_reachable_landing()
 	generate_current_landpoint()
-	var/list/possible_land_locations = dropship_landing_controller.get_potential_landing_points()
+	var/list/possible_land_locations = dropship_landing_controller.get_potential_landing_points(1,1,1,faction)
 	reachable_landing_locations = possible_land_locations
 
 /obj/structure/dropship/proc/change_landing_location(var/obj/new_land_location)
