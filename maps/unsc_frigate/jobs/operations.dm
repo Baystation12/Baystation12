@@ -4,24 +4,15 @@
 	min_rank = RANK_CWO
 	default_rank = RANK_CWO
 	max_rank = RANK_CWO
-	flag = OPSCO
-	department_flag = ENGSEC
+	department_flag = OPSCO
 	total_positions = 1
 	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ops_chief
 	selection_color = "#33ccff"
-	idtype = /obj/item/weapon/card/id/silver
 
-	job_guide = "Your responsibility is to supervise general ship and bridge operations including navigation and helm control. Unfortuantely you don't have much content, but more is coming soon."
+	//job_guide = "Your responsibility is to supervise general ship and bridge operations including navigation and helm control. Unfortuantely you don't have much content, but more is coming soon."
 
 	access = list(access_unsc_bridge, access_unsc_crew, access_unsc_ops)
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/unsc(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/unsc/operations(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		return 1
 
 //specialist technicians for the bridge
 /datum/job/UNSC_ship/ops
@@ -29,23 +20,15 @@
 	min_rank = RANK_RECRUIT
 	default_rank = RANK_CREWMAN
 	max_rank = RANK_PETTYM
-	flag = OPS
-	department_flag = ENGSEC
+	department_flag = OPS
 	total_positions = -1
 	spawn_positions = 2
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ops
 	selection_color = "#33ccff"
 	alt_titles = list("Sensor Operator", "Electronic Warfare Specialist","Cryptologic Specialist","Signals Analyst","Navigator","Helmsman")
-	job_guide = "Your job is general ship and bridge operations like navigation and helm control. Unfortunately you don't have much content but more is coming soon."
+	//job_guide = "Your job is general ship and bridge operations like navigation and helm control. Unfortunately you don't have much content but more is coming soon."
 
 	access = list(access_unsc_bridge, access_unsc_crew, access_unsc_ops)
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/unsc(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/unsc/operations(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		return 1
 
 /obj/structure/closet/unsc_wardrobe/ops
 	name = "operations uniforms closet"
