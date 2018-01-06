@@ -1,15 +1,18 @@
 //quality code theft
 #include "blueriver_areas.dm"
 /obj/effect/overmap/sector/arcticplanet
-	name = "Arctic Planet"
+	name = "arctic planetoid"
 	desc = "Sensor array detects an arctic planet with a small vessle on the planet's surface. Scans further indicate strange energy levels below the planet's surface."
-	name = "Arctic Planet"
 	generic_waypoints = list(
 		"nav_blueriv_1",
 		"nav_blueriv_2",
 		"nav_blueriv_3",
 		"nav_blueriv_antag"
 	)
+
+/obj/effect/overmap/sector/marooned/New(nloc, max_x, max_y)
+	name = "[generate_planet_name()], \a [name]"
+	..()
 
 /datum/map_template/ruin/away_site/blueriver
  	name = "Bluespace River"
