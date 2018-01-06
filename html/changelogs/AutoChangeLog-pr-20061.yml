@@ -1,0 +1,5 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "As a cost-cutting measure, all Sol uniforms are now cut from the same cloth. Armour values have been genericised."
+  - rscdel: "Sol uniform hats no longer provide any armour."
