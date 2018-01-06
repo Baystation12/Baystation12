@@ -24,6 +24,7 @@
 	uniform = null
 	belt = null
 	shoes = /obj/item/clothing/shoes/brown
+	pda_slot = slot_r_store
 
 	flags = 0
 
