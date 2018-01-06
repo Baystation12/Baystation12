@@ -27,9 +27,9 @@
 		for(var/record_field/F in active_record.fields)
 			if(F.can_see(user_access))
 				fields.Add(list(list(
-					"key" = F.type, 
-					"name" = F.name, 
-					"val" = F.get_display_value(), 
+					"key" = F.type,
+					"name" = F.name,
+					"val" = F.get_display_value(),
 					"editable" = F.can_edit(user_access),
 					"large" = (F.valtype == EDIT_LONGTEXT)
 				)))
@@ -45,9 +45,9 @@
 				"id" = R.uid
 			)))
 		data["all_records"] = all_records
-		data["creation"] = check_access(user, access_heads) 
-		data["dnasearch"] = check_access(user, access_medical) || check_access(user, access_forensics)
-		data["fingersearch"] = check_access(user, access_security) 
+		data["creation"] = check_access(user, access_heads)
+		data["dnasearch"] = check_access(user, access_medical) || check_access(user, access_forensics_lockers)
+		data["fingersearch"] = check_access(user, access_security)
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -64,7 +64,7 @@
 	if(istype(PC) && PC.computer_emagged)
 		user_access = user_access.Copy()
 		user_access |= access_syndicate
-	
+
 	return user_access
 
 /datum/nano_module/records/proc/edit_field(var/mob/user, var/field)
