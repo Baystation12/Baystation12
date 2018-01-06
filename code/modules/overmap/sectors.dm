@@ -20,6 +20,9 @@ var/list/points_of_interest = list()
 	var/in_space = 1	//can be accessed via lucky EVA
 
 /obj/effect/overmap/Initialize()
+
+	. = ..()
+
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 
@@ -65,8 +68,6 @@ var/list/points_of_interest = list()
 			else
 				log_error("Sector \"[name]\" containing Z [english_list(map_z)] could not find waypoint with tag [waypoint_tag]!")
 		restricted_waypoints[shuttle_name] = found_waypoints
-
-	. = ..()
 
 /obj/effect/overmap/proc/get_waypoints(var/shuttle_name)
 	. = generic_waypoints.Copy()

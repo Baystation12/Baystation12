@@ -1,54 +1,35 @@
 
 //default civilian headset
 /obj/item/device/radio/headset
-	channelkeys_spawn = list(\
-	/obj/item/device/encryptionkey/public,\
-	/obj/item/device/encryptionkey/eband)
+	ks1type = /obj/item/device/encryptionkey/public
+	ks2type = null
 
 //insurrectionist headset
 /obj/item/device/radio/headset/insurrection
-	channelkeys_spawn = list(\
-	/obj/item/device/encryptionkey/inniecom,\
-	/obj/item/device/encryptionkey/public,\
-	/obj/item/device/encryptionkey/eband)
+	ks1type = /obj/item/device/encryptionkey/public
+	ks2type = /obj/item/device/encryptionkey/inniecom
 
 //unsc crew headset
 /obj/item/device/radio/headset/unsc
-	channelkeys_spawn = list(\
-	/obj/item/device/encryptionkey/shipcom,\
-	/obj/item/device/encryptionkey/public,\
-	/obj/item/device/encryptionkey/eband)
+	ks1type = /obj/item/device/encryptionkey/public
+	ks2type = /obj/item/device/encryptionkey/shipcom
 
 //unsc pilot headset
 /obj/item/device/radio/headset/unsc/pilot
-	channelkeys_spawn = list(\
-	/obj/item/device/encryptionkey/shipcom,\
-	/obj/item/device/encryptionkey/squadcom,\
-	/obj/item/device/encryptionkey/public,\
-	/obj/item/device/encryptionkey/eband)
+	ks1type = /obj/item/device/encryptionkey/public
+	ks2type = /obj/item/device/encryptionkey/squadcom
 
 //unsc marine headset
 /obj/item/device/radio/headset/unsc/marine
-	channelkeys_spawn = list(\
-	/obj/item/device/encryptionkey/shipcom,\
-	/obj/item/device/encryptionkey/teamcom,\
-	/obj/item/device/encryptionkey/public,\
-	/obj/item/device/encryptionkey/eband)
+	ks1type = /obj/item/device/encryptionkey/public
+	ks2type = /obj/item/device/encryptionkey/teamcom
 
 //unsc officer headset
 /obj/item/device/radio/headset/unsc/officer
-	channelkeys_spawn = list(\
-	/obj/item/device/encryptionkey/shipcom,\
-	/obj/item/device/encryptionkey/fleetcom,\
-	/obj/item/device/encryptionkey/public,\
-	/obj/item/device/encryptionkey/eband)
+	ks1type = /obj/item/device/encryptionkey/public
+	ks2type = /obj/item/device/encryptionkey/officercom
 
 //unsc senior officer headset
 /obj/item/device/radio/headset/unsc/commander
-	channelkeys_spawn = list(\
-	/obj/item/device/encryptionkey/shipcom,\
-	/obj/item/device/encryptionkey/fleetcom,\
-	/obj/item/device/encryptionkey/teamcom,\
-	/obj/item/device/encryptionkey/squadcom,\
-	/obj/item/device/encryptionkey/public,\
-	/obj/item/device/encryptionkey/eband)
+	ks1type = /obj/item/device/encryptionkey/public
+	ks2type = /obj/item/device/encryptionkey/fleetcom

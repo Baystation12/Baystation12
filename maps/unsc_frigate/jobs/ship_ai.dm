@@ -1,20 +1,12 @@
 /datum/job/UNSC_ship/ai
 	title = "AI"
-	flag = SHIPAI
-	department_flag = ENGSEC
+	department_flag = SHIPAI
 	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/ship_ai
 	selection_color = "#ccffcc"
 	req_admin_notify = 1
-	job_guide = "Your responsibility is to aid the captain and ship's crew and you are given a vast amount of autonomy to that end. You are entirely loyal to the UNSC and your current mission however."
+	//job_guide = "Your responsibility is to aid the captain and ship's crew and you are given a vast amount of autonomy to that end. You are entirely loyal to the UNSC and your current mission however."
 	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		return 1
-
-	equip_survival(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		return 1
-
-	equip_backpack(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		return 1
 
