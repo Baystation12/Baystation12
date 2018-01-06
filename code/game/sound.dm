@@ -143,7 +143,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 				S.environment = DIZZY
 			else if (M.confused)
 				S.environment = DIZZY
-			else if (M.sleeping)
+			else if (M.stat == UNCONSCIOUS)
 				S.environment = UNDERWATER
 			else if (pressure_factor < 0.5)
 				S.environment = SPACE
