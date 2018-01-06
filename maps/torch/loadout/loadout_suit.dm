@@ -108,6 +108,12 @@
 	gear_tweaks += new/datum/gear_tweak/path(hoodies)
 
 /datum/gear/suit/labcoat
+	display_name = "labcoat, colour select"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat
+	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/suit/labcoat/coat
 	display_name = "coat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/coat
 	flags = GEAR_HAS_COLOR_SELECTION
