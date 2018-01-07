@@ -1,0 +1,6 @@
+author: "Chinsky"
+delete-after: True
+changes: 
+  - rscadd: "Shuttles now need proper docking codes set in their console, or the docking won't initiate."
+  - rscadd: "Codes can be found in CO's orders, or by using multitool on docking controllers. You can also hit the button on docking controller from inside to initiate docking."
+  - rscadd: "There is also a program that shows status of all docking ports and their codes, can be used to remotely let people dock if they're waiting outside."
