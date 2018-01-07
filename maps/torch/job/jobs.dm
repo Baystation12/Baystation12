@@ -27,7 +27,7 @@
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
-						/datum/job/merchant, /datum/job/stowaway
+						/datum/job/merchant, /datum/job/stowaway, /datum/job/marshal
 						)
 
 
@@ -1215,3 +1215,27 @@
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 	latejoin_at_spawnpoints = 1
 	announced = FALSE
+
+/datum/job/marshal
+	title = "Colonial Marshal"
+	department = "Civilian"
+	department_flag = CIV
+
+	total_positions = 2
+	spawn_positions = 2
+	availablity_chance = 20
+	supervisors = "the Sol Central Government and SCG Law"
+	selection_color = "#515151"
+	ideal_character_age = 30
+	minimal_player_age = 10
+	create_record = 0
+	outfit_type = /decl/hierarchy/outfit/job/torch/marshal
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/marshal)
+	latejoin_at_spawnpoints = 1
+	announced = FALSE
+
+	access = list(access_marshal, access_solgov_crew, access_hangar, access_teleporter, access_eva, access_maint_tunnels, access_external_airlocks)
+
+	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
+							 /datum/computer_file/program/camera_monitor)

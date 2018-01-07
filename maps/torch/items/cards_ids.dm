@@ -196,3 +196,9 @@
 	dna_hash = md5(fingerprint_hash)
 	blood_type = RANDOM_BLOOD_TYPE
 	update_name()
+
+//Colonial Marshal
+/obj/item/weapon/card/id/torch/marshal
+	desc = "An identification card issued to members of the Colonial Marshal Bureau."
+	icon_state = "solgov"
+	job_access_type = /datum/job/marshal
