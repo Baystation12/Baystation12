@@ -3,6 +3,7 @@
 	name = "docking port controller"
 	var/datum/computer/file/embedded_program/airlock/docking/airlock_program
 	var/datum/computer/file/embedded_program/docking/airlock/docking_program
+	var/display_name			//how would it show up on docking monitoring program, area name + coordinates if unset
 	tag_secure = 1
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/New()
@@ -10,6 +11,19 @@
 	airlock_program = new/datum/computer/file/embedded_program/airlock/docking(src)
 	docking_program = new/datum/computer/file/embedded_program/docking/airlock(src, airlock_program)
 	program = docking_program
+	if(display_name)
+		docking_program.display_name = display_name
+
+/obj/machinery/embedded_controller/radio/airlock/docking_port/attackby(obj/item/W, mob/user)
+	if(istype(W,/obj/item/device/multitool)) //give them part of code, would take few tries to get full
+		var/code = docking_program.docking_codes
+		if(!code)
+			code = "N/A"
+		else
+			code = stars(code)
+		to_chat(user,"[W]'s screen displays '[code]'")
+	else
+		..()
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
@@ -22,6 +36,8 @@
 		"docking_status" = docking_program.get_docking_status(),
 		"airlock_disabled" = !(docking_program.undocked() || docking_program.override_enabled),
 		"override_enabled" = docking_program.override_enabled,
+		"docking_codes" = docking_program.docking_codes,
+		"name" = docking_program.get_name()
 	)
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -51,6 +67,8 @@
 		if("abort")
 			clean = 1
 		if("toggle_override")
+			clean = 1
+		if("dock")
 			clean = 1
 
 	if(clean)
