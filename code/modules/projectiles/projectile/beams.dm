@@ -180,7 +180,6 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	check_armour = "energy"
 	sharp = 0 //not a laser
-	taser_effect = 1
 	agony = 40
 	damage_type = STUN
 
