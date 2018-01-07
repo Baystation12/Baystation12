@@ -1,0 +1,4 @@
+author: "Casper3667"
+delete-after: True
+changes: 
+  - rscadd: "Cameras can now be found in the loadout."
