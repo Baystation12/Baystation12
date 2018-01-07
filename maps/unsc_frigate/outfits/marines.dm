@@ -7,6 +7,7 @@
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/armor/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
 
 	flags = 0
 
@@ -18,6 +19,7 @@
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/armor/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
 
 	flags = 0
 
@@ -29,6 +31,7 @@
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/armor/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
 
 	flags = 0
 
@@ -40,5 +43,7 @@
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/armor/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
 
 	flags = 0
+e
