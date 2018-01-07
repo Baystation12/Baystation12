@@ -61,22 +61,22 @@
 	
 /obj/item/clothing/accessory/shouldercape/grunt
 	name = "modir cape"
-	desc = "A simple looking cape with very few runes weaved into the fabric."
+	desc = "A simple looking cape with a couple of runes woven into the fabric."
 	icon_state = "gruntcape" // Again, just in case it is changed.
 
 /obj/item/clothing/accessory/shouldercape/officer
 	name = "nraji cape"
-	desc = "A decorated cape. Runed patterns have been weaved into the fabric."
+	desc = "A decorated cape. Runed patterns have been woven into the fabric."
 	icon_state = "officercape"
 
 /obj/item/clothing/accessory/shouldercape/command
 	name = "hejun cape"
-	desc = "A heavily decorated cape with rank emblems on the shoulders signifying positions within the Tajaran govenment. An ornate runed design has been weaved into the fabric of it."
+	desc = "A heavily decorated cape with rank emblems on the shoulders signifying positions within the Tajaran govenment. An ornate runed design has been woven into the fabric of it"
 	icon_state = "commandcape"
 
 /obj/item/clothing/accessory/shouldercape/general
 	name = "ginajir cape"
-	desc = "An extremely decorated cape with an intricately runed design has been weaved into the fabric of this cape with great care. This cape can only be found within the Tajaran elite."
+	desc = "An extremely decorated cape with an intricately runed design has been woven into the fabric of this cape with great care. This cape can only be found within the Tajaran elite."
 	icon_state = "leadercape"
 
 //Voxclothing
