@@ -129,6 +129,7 @@
 /datum/gear/shoes/caligae
 	display_name = "caligae (Tajara)"
 	path = /obj/item/clothing/shoes/sandal/tajaran/caligae
+	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 
 /datum/gear/shoes/caligae/New()
@@ -145,6 +146,20 @@
 	path = /obj/item/clothing/head/tajaran/scarf
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
+
+/datum/gear/accessory/capes
+	display_name = "shoulder capes (Tajara)"
+	path = /obj/item/clothing/accessory/shouldercape
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
+
+/datum/gear/accessory/capes/New()
+	..()
+	var/capes = list()
+	capes["simple cape"] = /obj/item/clothing/accessory/shouldercape/grunt
+	capes["decorated cape"] = /obj/item/clothing/accessory/shouldercape/officer
+	capes["government cape"] = /obj/item/clothing/accessory/shouldercape/command
+	gear_tweaks += new/datum/gear_tweak/path(capes)
 
 // Pre-modified gloves
 
