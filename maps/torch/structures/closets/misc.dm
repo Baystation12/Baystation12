@@ -110,3 +110,39 @@
 		/obj/item/weapon/gun/energy/gun = 2,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/gun/energy/gun, /obj/item/weapon/gun/energy/gun/small))
 	)
+
+/obj/structure/closet/secure_closet/marshal
+	name = "colonial marshal's locker"
+	req_access = list(access_marshal)
+	icon_state = "solsecure1"
+	icon_closed = "solsecure"
+	icon_locked = "solsecure1"
+	icon_opened = "solsecureopen"
+	icon_off = "solsecureoff"
+
+/obj/structure/closet/secure_closet/marshal/WillContain()
+	return list(
+		/obj/item/clothing/suit/armor/pcarrier/medium/security,
+		/obj/item/clothing/head/helmet/solgov/security,
+		/obj/item/device/radio/headset,
+		/obj/item/weapon/storage/belt/security,
+		/obj/item/device/flash,
+		/obj/item/weapon/reagent_containers/spray/pepper,
+		/obj/item/weapon/grenade/chem_grenade/teargas,
+		/obj/item/weapon/melee/baton/loaded,
+		/obj/item/clothing/glasses/sunglasses/sechud,
+		/obj/item/taperoll/police,
+		/obj/item/weapon/storage/box/handcuffs,
+		/obj/item/clothing/accessory/storage/black_vest,
+		/obj/item/device/megaphone,
+		/obj/item/weapon/gun/energy,
+		/obj/item/clothing/gloves/forensic,
+		/obj/item/device/megaphone,
+		/obj/item/clothing/accessory/holster/thigh,
+		/obj/item/device/holowarrant,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
+	)
+
+
+
