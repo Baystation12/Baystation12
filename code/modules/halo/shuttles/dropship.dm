@@ -120,7 +120,7 @@
 //All Transit Related Procs//
 /obj/structure/dropship/proc/update_reachable_landing()
 	generate_current_landpoint()
-	var/list/possible_land_locations = dropship_landing_controller.get_potential_landing_points(1,1,1,faction)
+	var/list/possible_land_locations = dropship_landing_controller.get_potential_landing_points(1,1,faction)
 	reachable_landing_locations = possible_land_locations
 
 /obj/structure/dropship/proc/change_landing_location(var/obj/new_land_location)
