@@ -36,6 +36,7 @@
 	for(var/turf/T in locs)
 		for(var/obj/effect/landmark/dropship_land_point/L in T.contents)
 			current_location = L
+			current_location.occupied = 1
 
 /obj/structure/dropship/proc/assign_pilot(var/mob/user,var/override)
 	if(!pilot || override)
