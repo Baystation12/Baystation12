@@ -274,6 +274,26 @@
 	landmark_tag = "nav_merchant_out"
 	docking_controller = "merchant_shuttle_station_dock"
 
+//Colonial Marshal
+
+/datum/shuttle/autodock/ferry/marshal
+	name = "Colonial Marshal"
+	warmup_time = 10
+	shuttle_area = /area/shuttle/marshal/home
+	waypoint_station = "nav_marshal_start"
+	waypoint_offsite = "nav_marshal_out"
+	dock_target = "marshal_ship_dock"
+
+/obj/effect/shuttle_landmark/marshal/start
+	name = "Marshal Outpost"
+	landmark_tag = "nav_marshal_start"
+	docking_controller = "marshal_outpost_dock"
+
+/obj/effect/shuttle_landmark/marshal/out
+	name = "Docking Bay"
+	landmark_tag = "nav_marshal_out"
+	docking_controller = "marshal_shuttle_station_dock"
+
 //Admin
 
 /datum/shuttle/autodock/ferry/administration
