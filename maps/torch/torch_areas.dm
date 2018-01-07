@@ -5,11 +5,6 @@
 
 	post_round_safe_areas = list (
 		/area/centcom,
-		/area/shuttle/escape/centcom,
-		/area/shuttle/escape_pod1/centcom,
-		/area/shuttle/escape_pod2/centcom,
-		/area/shuttle/escape_pod3/centcom,
-		/area/shuttle/escape_pod5/centcom,
 		/area/shuttle/transport1/centcom,
 		/area/shuttle/administration/centcom,
 		/area/shuttle/specops/centcom,
@@ -1018,9 +1013,6 @@
 /area/centcom/creed
 	name = "Creed's Office"
 
-/area/centcom/evac
-	name = "\improper Centcom Emergency Shuttle"
-
 /area/centcom/ferry
 	name = "\improper Centcom Transport Shuttle"
 
@@ -1261,18 +1253,6 @@
 /area/shuttle/administration/centcom
 	name = "\improper Administration Shuttle"
 	icon_state = "shuttlered"
-
-/area/shuttle/escape_pod1/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/escape_pod2/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/escape_pod3/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/escape_pod5/centcom
-	icon_state = "shuttle"
 
 /area/supply/dock
 	name = "Supply Shuttle"
