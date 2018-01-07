@@ -1,0 +1,5 @@
+author: "Techhead"
+delete-after: True
+changes: 
+  - rscadd: "You now receive pain-flashes for all pain sources."
+  - bugfix: "Possibly fixes an infinite paincrit bug."
