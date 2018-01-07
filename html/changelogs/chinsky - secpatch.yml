@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Modular computer programs were patched to allow more abuse. Now they use the access of user who started them, instead of constantly checking for current user's."
+

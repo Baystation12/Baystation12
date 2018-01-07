@@ -3,6 +3,7 @@
 	var/datum/host
 	var/available_to_ai = TRUE
 	var/datum/topic_manager/topic_manager
+	var/list/using_access
 
 /datum/nano_module/New(var/datum/host, var/topic_manager)
 	..()
@@ -21,6 +22,12 @@
 /datum/nano_module/proc/check_access(var/mob/user, var/access)
 	if(!access)
 		return 1
+
+	if(using_access)
+		if(access in using_access)
+			return 1
+		else
+			return 0
 
 	if(!istype(user))
 		return 0
