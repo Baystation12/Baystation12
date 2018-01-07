@@ -111,7 +111,6 @@
 	display_name = "coat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/coat
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = FORMAL_ROLES
 
 /datum/gear/suit/leather
 	display_name = "jacket selection"
