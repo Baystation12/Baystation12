@@ -729,15 +729,9 @@ var/list/name_to_material
 /material/cult/place_dismantled_girder(var/turf/target)
 	new /obj/structure/girder/cult(target)
 
-/material/cult/place_dismantled_product(var/turf/target)
-	new /obj/effect/decal/cleanable/blood(target)
-
 /material/cult/reinf
 	name = "cult2"
-	display_name = "human remains"
-
-/material/cult/reinf/place_dismantled_product(var/turf/target)
-	new /obj/item/remains/human(target)
+	display_name = "runic inscriptions"
 
 /material/resin
 	name = "resin"

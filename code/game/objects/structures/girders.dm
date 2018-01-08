@@ -228,7 +228,6 @@
 	cover = 70
 
 /obj/structure/girder/cult/dismantle()
-	new /obj/item/remains/human(get_turf(src))
 	qdel(src)
 
 /obj/structure/girder/cult/attackby(obj/item/W as obj, mob/user as mob)
