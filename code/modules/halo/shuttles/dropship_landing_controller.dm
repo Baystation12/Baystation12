@@ -26,12 +26,12 @@ var/global/datum/dropship_landing_controller/dropship_landing_controller = new /
 
 /datum/dropship_landing_controller/proc/get_potential_landing_points(var/check_active = 1,var/check_occupied = 1,var/faction_check)
 	var/list/potential_landing_points = land_points.Copy()
+	if(faction_check)
+		potential_landing_points &= (get_faction_land_points(faction_check) + get_faction_land_points("civillian"))
 	if(check_active)
 		potential_landing_points &= get_active_land_points()
 	if(check_occupied)
 		potential_landing_points &= get_unoccupied_land_points()
-	if(faction_check)
-		potential_landing_points &= (get_faction_land_points(faction_check) + get_faction_land_points("civillian"))
 	return potential_landing_points
 
 /datum/dropship_landing_controller/proc/overmap_range_check(var/obj/structure/dropship/overmap/dropship,var/obj/l)
