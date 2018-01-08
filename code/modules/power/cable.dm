@@ -41,12 +41,6 @@ var/list/possible_cable_coil_colours
 	color = COLOR_RED
 	var/obj/machinery/power/breakerbox/breaker_box
 
-/obj/structure/cable/hide(var/do_hide)
-	if(do_hide && level == 1)
-		plane = ABOVE_PLATING_PLANE
-		layer = WIRE_LAYER
-	else
-		reset_plane_and_layer()
 
 /obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
 
@@ -157,7 +151,7 @@ var/list/possible_cable_coil_colours
 	if(!T.is_plating())
 		return
 
-	if(istype(W, /obj/item/weapon/wirecutters))
+	if(isWirecutter(W))
 		if(d1 == UP || d2 == UP)
 			to_chat(user, "<span class='warning'>You must cut this cable from above.</span>")
 			return
@@ -190,14 +184,14 @@ var/list/possible_cable_coil_colours
 		return
 
 
-	else if(istype(W, /obj/item/stack/cable_coil))
+	else if(isCoil(W))
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.get_amount() < 1)
 			to_chat(user, "Not enough cable")
 			return
 		coil.cable_join(src, user)
 
-	else if(istype(W, /obj/item/device/multitool))
+	else if(isMultitool(W))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
 			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")

@@ -1,7 +1,5 @@
 #define HUMAN_STRIP_DELAY        40   // Takes 40ds = 4s to strip someone.
 
-#define SHOES_SLOWDOWN          -1.0  // How much shoes slow you down by default. Negative values speed you up.
-
 #define CANDLE_LUM 3 // For how bright candles are.
 
 // Item inventory slot bitmasks.
@@ -35,6 +33,7 @@
 #define ACCESSORY_SLOT_ARMOR_L  "Leg armor"
 #define ACCESSORY_SLOT_ARMOR_S  "Armor storage"
 #define ACCESSORY_SLOT_ARMOR_M  "Misc armor"
+#define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 
 // Flags bitmasks.
 #define NOBLUDGEON         0x1   // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
@@ -45,6 +44,7 @@
 #define PHORONGUARD        0x20  // Does not get contaminated by phoron.
 #define	NOREACT            0x40  // Reagents don't react inside this container.
 #define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
+#define NOPRINT            0x100 // Does not leave user's fingerprints/fibers when used on things?
 
 //Flags for items (equipment)
 #define THICKMATERIAL          0x1  // Prevents syringes, reagent pens, and hyposprays if equiped to slot_suit or slot_head.

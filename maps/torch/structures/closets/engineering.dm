@@ -9,7 +9,6 @@
 	icon_closed = "securece"
 	icon_locked = "securece1"
 	icon_opened = "secureceopen"
-	icon_broken = "securecebroken"
 	icon_off = "secureceoff"
 
 /obj/structure/closet/secure_closet/engineering_chief_torch/WillContain()
@@ -42,6 +41,7 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/yellow,
 		/obj/item/weapon/storage/box/armband/engine,
+		/obj/item/weapon/storage/box/secret_project_disks,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
 	)
@@ -53,7 +53,6 @@
 	icon_closed = "secureeng"
 	icon_locked = "secureeng1"
 	icon_opened = "secureengopen"
-	icon_broken = "secureengbroken"
 	icon_off = "secureengoff"
 
 /obj/structure/closet/secure_closet/engineering_torch/WillContain()
@@ -81,7 +80,6 @@
 	icon_closed = "secureeng"
 	icon_locked = "secureeng1"
 	icon_opened = "secureengopen"
-	icon_broken = "secureengbroken"
 	icon_off = "secureengoff"
 
 /obj/structure/closet/secure_closet/engineering_contractor/WillContain()
@@ -106,7 +104,6 @@
 	icon_closed = "secureseneng"
 	icon_locked = "secureseneng1"
 	icon_opened = "securesenengopen"
-	icon_broken = "securesenengbroken"
 	icon_off = "securesenengoff"
 
 /obj/structure/closet/secure_closet/engineering_senior/WillContain()
@@ -138,7 +135,6 @@
 	icon_closed = "secureatm"
 	icon_locked = "secureatm1"
 	icon_opened = "secureatmopen"
-	icon_broken = "secureatmbroken"
 	icon_off = "secureatmoff"
 
 /obj/structure/closet/secure_closet/atmos_torch/WillContain()

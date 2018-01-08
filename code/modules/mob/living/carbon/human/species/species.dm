@@ -38,6 +38,7 @@
 	var/pixel_offset_y = 0                    // Used for offsetting large icons.
 
 	var/mob_size	= MOB_MEDIUM
+	var/strength    = STR_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/virus_immune
 	var/short_sighted                         // Permanent weldervision.
@@ -74,7 +75,7 @@
 	var/radiation_mod =  1                    // Radiation modifier
 	var/flash_mod =      1                    // Stun from blindness modifier.
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
-	var/vision_flags = SEE_SELF               // Same flags as glasses.
+	var/vision_flags = DEFAULT_SIGHT               // Same flags as glasses.
 
 	// Death vars.
 	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
@@ -183,6 +184,28 @@
 
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
+	var/list/equip_adjust = list()
+	var/list/equip_overlays = list()
+
+	var/sexybits_location	//organ tag where they are located if they can be kicked for increased pain
+/*
+These are all the things that can be adjusted for equipping stuff and
+each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
+the direction to shift the thing and what direction.
+
+example:
+	equip_adjust = list(
+		slot_back_str = list(NORTH = list(SOUTH = 12, EAST = 7), EAST = list(SOUTH = 2, WEST = 12))
+			)
+
+This would shift back items (backpacks, axes, etc.) when the mob
+is facing either north or east.
+When the mob faces north the back item icon is shifted 12 pixes down and 7 pixels to the right.
+When the mob faces east the back item icon is shifted 2 pixels down and 12 pixels to the left.
+
+The slots that you can use are found in items_clothing.dm and are the inventory slot string ones, so make sure
+	you use the _str version of the slot.
+*/
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return
@@ -214,12 +237,12 @@
 	return sanitizeName(name)
 
 /datum/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
-	if(H.backbag == 1)
-		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
-		else	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
-	else
+	if(istype(H.get_equipped_item(slot_back), /obj/item/weapon/storage/backpack))
 		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H.back), slot_in_backpack)
 		else	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+	else
+		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
+		else	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
@@ -373,6 +396,7 @@
 		return 1
 
 	H.set_fullscreen(H.eye_blind && !H.equipment_prescription, "blind", /obj/screen/fullscreen/blind)
+	H.set_fullscreen(H.stat == UNCONSCIOUS, "blackout", /obj/screen/fullscreen/blackout)
 
 	if(config.welder_vision)
 		H.set_fullscreen(H.equipment_tint_total, "welder", /obj/screen/fullscreen/impaired, H.equipment_tint_total)
@@ -486,3 +510,10 @@
 /datum/species/proc/disfigure_msg(var/mob/living/carbon/human/H) //Used for determining the message a disfigured face has on examine. To add a unique message, just add this onto a specific species and change the "return" message.
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] face is horribly mangled!</span>\n"
+
+/datum/species/proc/max_skin_tone()
+	if(appearance_flags & HAS_SKIN_TONE_GRAV)
+		return 100
+	if(appearance_flags & HAS_SKIN_TONE_SPCR)
+		return 165
+	return 220

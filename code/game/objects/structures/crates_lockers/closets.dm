@@ -10,7 +10,7 @@
 	var/icon_opened = "open"
 
 	var/icon_locked
-	var/icon_broken
+	var/icon_broken = "sparks"
 	var/icon_off
 
 	var/welded = 0
@@ -24,7 +24,7 @@
 	var/close_sound = 'sound/effects/locker_close.ogg'
 
 	var/storage_types = CLOSET_STORAGE_ALL
-	var/setup
+	var/setup = CLOSET_CAN_BE_WELDED
 
 	// TODO: Turn these into flags. Skipped it for now because it requires updating 100+ locations...
 	var/broken = FALSE
@@ -265,7 +265,7 @@
 			return 0
 		if(istype(W,/obj/item/tk_grab))
 			return 0
-		if(istype(W, /obj/item/weapon/weldingtool))
+		if(isWelder(W))
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.isOn())
 				slice_into_parts(WT, user)
@@ -297,7 +297,7 @@
 			open()
 	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
-	else if(istype(W, /obj/item/weapon/weldingtool) && (setup & CLOSET_CAN_BE_WELDED))
+	else if(isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(0,user))
 			if(!WT.isOn())
@@ -308,7 +308,7 @@
 		src.welded = !src.welded
 		src.update_icon()
 		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
-	if(setup & CLOSET_HAS_LOCK)
+	else if(setup & CLOSET_HAS_LOCK)
 		src.togglelock(user, W)
 	else
 		src.attack_hand(user)
@@ -367,6 +367,12 @@
 	if(!src.toggle())
 		to_chat(usr, "<span class='notice'>It won't budge!</span>")
 
+/obj/structure/closet/attack_ghost(mob/ghost)
+	if(ghost.client && ghost.client.inquisitive_ghost)
+		ghost.examinate(src)
+		if (!src.opened)
+			to_chat(ghost, "It contains: [english_list(contents)].")
+
 /obj/structure/closet/verb/verb_toggleopen()
 	set src in oview(1)
 	set category = "Object"
@@ -387,6 +393,7 @@
 	if(!opened)
 		if(broken && icon_off)
 			icon_state = icon_off
+			overlays += icon_broken
 		else if((setup & CLOSET_HAS_LOCK) && locked && icon_locked)
 			icon_state = icon_locked
 		else
@@ -503,7 +510,7 @@
 		update_icon()
 		return TRUE
 	else
-		to_chat(user, "<span class='warning'>Access Denied</span>")
+		to_chat(user, "<span class='warning'>Access denied!</span>")
 		return FALSE
 
 /obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/weapon/card/id/id_card)
@@ -514,6 +521,9 @@
 		togglelock(user)
 	else
 		return ..()
+
+/obj/structure/closet/CtrlAltClick(var/mob/user)
+	verb_toggleopen()
 
 /obj/structure/closet/emp_act(severity)
 	for(var/obj/O in src)
@@ -533,9 +543,6 @@
 /obj/structure/closet/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")
 	if(make_broken())
 		update_icon()
-		if(icon_broken)
-			flick(icon_broken, src)
-
 		if(visual_feedback)
 			visible_message(visual_feedback, audible_feedback)
 		else if(user && emag_source)

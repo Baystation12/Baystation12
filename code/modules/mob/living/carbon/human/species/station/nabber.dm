@@ -47,6 +47,7 @@
 	burn_mod =  1.35
 	gluttonous = GLUT_SMALLER
 	mob_size = MOB_LARGE
+	strength = STR_HIGH
 	breath_pressure = 25
 	blood_volume = 840
 	spawns_with_stack = 0
@@ -102,20 +103,26 @@
 		/mob/living/carbon/human/proc/threat_display
 		)
 
+	equip_adjust = list(
+		slot_back_str = list(NORTH = list("x" = 0, "y" = 7), EAST = list("x" = 0, "y" = 8), SOUTH = list("x" = 0, "y" = 8), WEST = list("x" = 0, "y" = 8))
+			)
+
 /datum/species/nabber/get_eyes(var/mob/living/carbon/human/H)
 	var/obj/item/organ/internal/eyes/nabber/O = H.internal_organs_by_name[BP_EYES]
 	if(!O || !istype(O))
 		return
-
-	var/image/eye_overlay = eye_overlays["[O.eyes_shielded] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"]
+	var/store_string = "[O.eyes_shielded] [H.is_cloaked()] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"
+	var/image/eye_overlay = eye_overlays[store_string]
 	if(!eye_overlay)
+		var/icon/I = new('icons/mob/nabber_face.dmi', "eyes_nabber")
+		I.Blend(rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3]), ICON_ADD)
 		if(O.eyes_shielded)
-			eye_overlay = image('icons/mob/nabber_face.dmi', "eyes_nabber_shielded")
-		else
-			var/icon/I = new('icons/mob/nabber_face.dmi', "eyes_nabber")
-			I.Blend(rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3]), ICON_ADD)
-			eye_overlay = image(I)
-		eye_overlays["[O.eyes_shielded] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"] = eye_overlay
+			I.Blend(rgb(125, 125, 125), ICON_MULTIPLY)
+		eye_overlay = image(I)
+		if(H.is_cloaked())
+			eye_overlay.alpha = 100
+
+		eye_overlays[store_string] = eye_overlay
 	return(eye_overlay)
 
 /datum/species/nabber/get_blood_name()

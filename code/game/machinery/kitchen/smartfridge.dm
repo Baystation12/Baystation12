@@ -164,7 +164,7 @@
 			if(S.dried_type == S.type)
 				S.dry = 1
 				S.name = "dried [S.name]"
-				S.color = "#aaaaaa"
+				S.color = "#a38463"
 				stock_item(S)
 			else
 				var/D = S.dried_type
@@ -191,7 +191,7 @@
 ********************/
 
 /obj/machinery/smartfridge/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/screwdriver))
+	if(isScrewdriver(O))
 		panel_open = !panel_open
 		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
 		overlays.Cut()
@@ -200,7 +200,7 @@
 		GLOB.nanomanager.update_uis(src)
 		return
 
-	if(istype(O, /obj/item/device/multitool)||istype(O, /obj/item/weapon/wirecutters))
+	if(isMultitool(O) || isWirecutter(O))
 		if(panel_open)
 			attack_hand(user)
 		return
@@ -297,8 +297,6 @@
 
 	var/mob/user = usr
 	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
-
-	src.add_fingerprint(user)
 
 	if(href_list["close"])
 		user.unset_machine()

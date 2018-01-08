@@ -2,13 +2,12 @@
 	name = "secure locker"
 	desc = "It's a card-locked storage unit."
 
-	setup = CLOSET_HAS_LOCK
+	setup = CLOSET_HAS_LOCK | CLOSET_CAN_BE_WELDED
 	locked = TRUE
 
 	icon_state = "secure1"
 	icon_closed = "secure"
 	icon_locked = "secure1"
-	icon_broken = "securebroken"
 	icon_off = "secureoff"
 
 	icon_opened = "secureopen"

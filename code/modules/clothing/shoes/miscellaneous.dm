@@ -110,7 +110,7 @@
 
 /obj/item/clothing/shoes/clown_shoes/New()
 	..()
-	slowdown_per_slot[slot_shoes]  = SHOES_SLOWDOWN+1
+	slowdown_per_slot[slot_shoes]  = 1
 
 /obj/item/clothing/shoes/clown_shoes/handle_movement(var/turf/walking, var/running)
 	if(running)
@@ -172,7 +172,7 @@
 
 /obj/item/clothing/shoes/swimmingfins/New()
 	..()
-	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN+1
+	slowdown_per_slot[slot_shoes] = 1
 
 /obj/item/clothing/shoes/athletic
 	name = "athletic shoes"

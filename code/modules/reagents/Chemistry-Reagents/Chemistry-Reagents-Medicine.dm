@@ -573,12 +573,12 @@
 
 /datum/reagent/nicotine
 	name = "Nicotine"
-	description = "Stimulates and relaxes the mind and body."
-	taste_description = "smoke"
+	description = "A sickly yellow liquid sourced from tobacco leaves. Stimulates and relaxes the mind and body."
+	taste_description = "peppery bitterness"
 	reagent_state = LIQUID
-	color = "#181818"
+	color = "#efebaa"
 	metabolism = REM * 0.002
-	overdose = 5
+	overdose = 6
 	scannable = 1
 	data = 0
 
@@ -598,6 +598,35 @@
 /datum/reagent/nicotine/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
+
+/datum/reagent/tobacco
+	name = "Tobacco"
+	description = "Cut and processed tobacco leaves."
+	taste_description = "tobacco"
+	reagent_state = SOLID
+	color = "#684b3c"
+	scannable = 1
+	var/nicotine = REM * 0.2
+
+/datum/reagent/tobacco/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.reagents.add_reagent(/datum/reagent/nicotine, nicotine)
+
+/datum/reagent/tobacco/fine
+	name = "Fine Tobacco"
+	taste_description = "fine tobacco"
+
+/datum/reagent/tobacco/bad
+	name = "Terrible Tobacco"
+	taste_description = "acrid smoke"
+
+/datum/reagent/tobacco/liquid
+	name = "Nicotine Solution"
+	description = "A diluted nicotine solution."
+	reagent_state = LIQUID
+	taste_mult = 0
+	color = "#fcfcfc"
+	nicotine = REM * 0.1
 
 /datum/reagent/menthol
 	name = "Menthol"
@@ -685,7 +714,7 @@
 	reagent_state = LIQUID
 	color = "#c8a5dc"
 	scannable = 1
-	overdose = 10
+	overdose = 20
 	metabolism = 0.1
 
 /datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
@@ -698,8 +727,26 @@
 	else if(M.chem_doses[type] < 1)
 		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
 	M.add_chemical_effect(CE_PULSE, 2)
-	if(M.chem_doses[type] > 5)
+	if(M.chem_doses[type] > 10)
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)
 		M.resuscitate()
+
+/datum/reagent/nanoblood
+	name = "Nanoblood"
+	description = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
+	taste_description = "blood with bubbles"
+	reagent_state = LIQUID
+	color = "#c10158"
+	scannable = 1
+	overdose = 5
+	metabolism = 1
+
+/datum/reagent/nanoblood/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
+		return
+	M.regenerate_blood(4 * removed)
+	M.immunity = max(M.immunity - 1, 0)
+	if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
+		M.immunity = max(M.immunity - 4, 0)

@@ -20,7 +20,7 @@
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/accessory/zhongshan
-	display_name = "zhongshan jacket"
+	display_name = "zhongshan jacket, colour select"
 	path = /obj/item/clothing/accessory/toggleable/zhongshan
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
@@ -37,31 +37,31 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/sherwani
-	display_name = "sherwani"
+	display_name = "sherwani, colour select"
 	path = /obj/item/clothing/accessory/sherwani
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/qipao
-	display_name = "qipao blouse"
+	display_name = "qipao blouse, colour select"
 	path = /obj/item/clothing/accessory/qipao
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/sweater
-	display_name = "turtleneck sweater"
+	display_name = "turtleneck sweater, colour select"
 	path = /obj/item/clothing/accessory/sweater
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/tangzhuang
-	display_name = "tangzhuang jacket"
+	display_name = "tangzhuang jacket, colour select"
 	path = /obj/item/clothing/accessory/tangzhuang
 	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/necklace
-	display_name = "necklace"
+	display_name = "necklace, colour select"
 	path = /obj/item/clothing/accessory/necklace
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -71,7 +71,7 @@
 	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/bowtie/color
-	display_name = "bowtie, colored"
+	display_name = "bowtie, colour select"
 	path = /obj/item/clothing/accessory/bowtie/color
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -124,7 +124,7 @@
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
+	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender, /datum/job/analyst)
 
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
@@ -132,7 +132,7 @@
 	allowed_roles = SOLGOV_ROLES
 
 /datum/gear/accessory/wallet
-	display_name = "wallet"
+	display_name = "wallet, colour select"
 	path = /obj/item/weapon/storage/wallet
 	flags = GEAR_HAS_COLOR_SELECTION
 
@@ -203,7 +203,7 @@
 	display_name = "webbing, security"
 	path = /obj/item/clothing/accessory/storage/black_vest
 	cost = 3
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
+	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/analyst, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
 
 /datum/gear/accessory/white_vest
 	display_name = "webbing, medical"
@@ -222,7 +222,7 @@
 	display_name = "drop pouches, security"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/black
 	cost = 3
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
+	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/analyst, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
 
 /datum/gear/accessory/white_drop_pouches
 	display_name = "drop pouches, medical"
@@ -298,6 +298,21 @@
 	tags["blood patch, AB+"] = /obj/item/clothing/accessory/armor/tag/abpos
 	tags["blood patch, AB-"] = /obj/item/clothing/accessory/armor/tag/abneg
 	gear_tweaks += new/datum/gear_tweak/path(tags)
+
+/datum/gear/accessory/helm_covers
+	display_name = "helmet covers"
+	path = /obj/item/clothing/accessory/armor/helmcover
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/accessory/helm_covers/New()
+	..()
+	var/covers = list()
+	covers["green helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/green
+	covers["navy blue helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/navy
+	covers["tan helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/tan
+	covers["PCRC helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/pcrc
+	covers["SAARE helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/saare
+	gear_tweaks += new/datum/gear_tweak/path(covers)
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
@@ -385,3 +400,7 @@
 	flags = GEAR_HAS_COLOR_SELECTION
 	sort_category = "Accessories"
 	allowed_roles = SEMIFORMAL_ROLES
+
+/datum/gear/accessory/torch_patch
+	display_name = "Torch mission patch"
+	path = /obj/item/clothing/accessory/solgov/torch_patch

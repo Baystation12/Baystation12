@@ -25,6 +25,7 @@
 	name = "plant"
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "blank"
+	var/list/connected_zlevels //cached for checking if we someone is obseving us so we should process 
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/New(var/newloc,var/datum/seed/newseed, var/start_mature)
 	..()
@@ -38,6 +39,16 @@
 	if(seed)
 		name = seed.display_name
 	check_health()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize()
+	. = ..()
+	connected_zlevels = GetConnectedZlevels(z)
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()
+	if(z in GLOB.using_map.station_levels) //plants on station always tick
+		return ..()
+	if(living_observers_present(connected_zlevels))
+		return ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/remove_dead()
 	..()

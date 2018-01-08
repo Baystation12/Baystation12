@@ -239,10 +239,10 @@
 	return 0
 
 //creates a new stack with the specified amount
-/obj/item/stack/proc/split(var/tamount)
+/obj/item/stack/proc/split(var/tamount, var/force=FALSE)
 	if (!amount)
 		return null
-	if(uses_charge)
+	if(uses_charge && !force)
 		return null
 
 	var/transfer = max(min(tamount, src.amount, initial(max_amount)), 0)

@@ -41,6 +41,13 @@
 		return
 
 	var/datum/map_template/template = SSmapping.map_templates[map]
+
+	if (template.loaded && !template.allow_duplicates)
+		var/jesus_take_the_wheel = alert(usr, "That template has already been loaded and doesn't want to be loaded again. \
+			Proceeding may unpredictably break things and cause runtimes.", "Confirm load", "Cancel load", "Do you see any cops around?") == "Do you see any cops around?"
+		if (!jesus_take_the_wheel)
+			return
+
 	var/new_z_centre = template.load_new_z()
 	if (new_z_centre)
 		log_and_message_admins("has placed a map template ([template.name]) on a new zlevel.", location=new_z_centre)
@@ -62,7 +69,7 @@
 		return
 
 	var/datum/map_template/M = new(map, "[map]")
-	if(M.preload_size(map))
+	if(M.preload_size())
 		to_chat(usr, "Map template '[map]' ready to place ([M.width]x[M.height])")
 		SSmapping.map_templates[M.name] = M
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] has uploaded a map template ([map])</span>")

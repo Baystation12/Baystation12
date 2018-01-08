@@ -1,12 +1,13 @@
 #include "marooned_areas.dm"
-#include "marooned.dmm"
 #include "../mining/mining_areas.dm"
 
 /turf/simulated/floor/marooned/snow
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
-	temperature = T20C - 40
+	temperature = T0C - 30
+	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	dynamic_lighting = 0
 
 /obj/effect/overmap/sector/marooned
 	name = "Glacier planet with power signature in polar region"
@@ -19,6 +20,13 @@
 		"nav_marooned_2",
 		"nav_marooned_antag"
 	)
+
+/datum/map_template/ruin/away_site/marooned
+	name = "Marooned"
+	id = "awaysite_marooned"
+	description = "A snowy wasteland."
+	suffixes = list("marooned/marooned.dmm")
+	cost = 1
 
 /obj/effect/shuttle_landmark/nav_marooned/nav1
 	name = "Planetside Navpoint #1"
@@ -37,17 +45,16 @@
 
 /obj/item/clothing/under/magintka_uniform
 	name = "Magnitka fleet officer uniform"
-	desc = "Dark uniform coat worn by Magnitka fleet officers."
+	desc = "A dark uniform coat worn by Magnitka fleet officers."
 	icon_state = "magnitka_officer"
-	item_state = "magnitka_officer_on"
-	worn_state = "magnitka_officer"
-	icon = 'marooned_sprites.dmi'
+	icon = 'maps/away/marooned/marooned_sprites.dmi'
+	item_icons = list(slot_w_uniform_str = 'maps/away/marooned/marooned_sprites.dmi')
 
 /obj/item/clothing/accessory/medal/silver/marooned_medal
-	name = "\improper marooned officer's  medal"
+	name = "marooned officer's medal"
 	desc = "An silver round medal of marooned officer. It has inscription \"For Distinguished Service\" in lower part. On medal's plank it's engraved \"H. Warda\""
 	icon_state = "marooned_medal"
-	icon = 'marooned_sprites.dmi'
+	icon = 'maps/away/marooned/marooned_sprites.dmi'
 
 /obj/effect/landmark/corpse/marooned_officer
 	name = "Marooned Magnitka's fleet officer"

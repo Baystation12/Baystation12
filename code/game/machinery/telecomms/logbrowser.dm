@@ -115,8 +115,6 @@
 		if(..())
 			return
 
-
-		add_fingerprint(usr)
 		usr.set_machine(src)
 
 		if(href_list["viewserver"])
@@ -189,7 +187,7 @@
 		return
 
 	attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
-		if(istype(D, /obj/item/weapon/screwdriver))
+		if(isScrewdriver(D))
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			if(do_after(user, 20, src))
 				if (src.stat & BROKEN)

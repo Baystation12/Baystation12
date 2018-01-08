@@ -208,6 +208,8 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	storage_types = CLOSET_STORAGE_ITEMS
+	setup = 0
 
 /obj/structure/closet/hydrant/New()
 	..()
@@ -226,12 +228,14 @@
 /obj/structure/closet/medical_wall //wall mounted medical closet
 	name = "first-aid closet"
 	desc = "It's a wall-mounted storage unit for first aid supplies."
-	icon_state = "medical_wall"
-	icon_closed = "medical_wall"
-	icon_opened = "medical_wall_open"
+	icon_state = "medical_wall_first_aid"
+	icon_closed = "medical_wall_first_aid"
+	icon_opened = "medical_wall_first_aid_open"
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	storage_types = CLOSET_STORAGE_ITEMS
+	setup = 0
 
 /obj/structure/closet/medical_wall/update_icon()
 	if(!opened)
@@ -255,6 +259,8 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	storage_types = CLOSET_STORAGE_ITEMS
+	setup = 0
 
 /obj/structure/closet/shipping_wall/update_icon()
 	if(!opened)

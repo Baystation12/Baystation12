@@ -91,10 +91,10 @@ var/list/global/base_miss_chance = list(
 	BP_HEAD = 40,
 	BP_CHEST = 10,
 	BP_GROIN = 20,
-	BP_L_LEG = 20,
-	BP_R_LEG = 20,
-	BP_L_ARM = 20,
-	BP_R_ARM = 20,
+	BP_L_LEG = 30,
+	BP_R_LEG = 30,
+	BP_L_ARM = 30,
+	BP_R_ARM = 30,
 	BP_L_HAND = 50,
 	BP_R_HAND = 50,
 	BP_L_FOOT = 50,
@@ -160,6 +160,9 @@ var/list/global/organ_rel_size = list(
 	zone = check_zone(zone)
 
 	if(!ranged_attack)
+		// target isn't trying to fight
+		if(target.a_intent == I_HELP)
+			return zone
 		// you cannot miss if your target is prone or restrained
 		if(target.buckled || target.lying)
 			return zone

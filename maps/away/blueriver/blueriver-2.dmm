@@ -1,0 +1,237 @@
+"aa" = (/turf/unsimulated/mineral{temperature = 233},/area/bluespaceriver/ground)
+"ab" = (/turf/unsimulated/mask{temperature = 230},/area/bluespaceriver/ground)
+"ac" = (/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"ad" = (/obj/structure/flora/grass/brown,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"ae" = (/obj/structure/flora/tree/pine,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"af" = (/obj/structure/flora/bush,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"ag" = (/obj/structure/flora/bush,/obj/structure/flora/grass/both,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"ah" = (/obj/structure/flora/grass/green,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"ai" = (/obj/structure/flora/grass/both,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"aj" = (/obj/structure/flora/ausbushes/brflowers,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"ak" = (/obj/effect/shuttle_landmark/nav_blueriv/nav3,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"al" = (/obj/effect/overmap/sector/arcticplanet{desc = "Sensor array an arctic planet with a small vessle on the surface. The vessle is located in the western region of a plateu surrounded by mineral rich mountains on all four sides. Scans further indicate strange energy levels below the planet's surface. Sunrise expected in 56 hours."},/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"am" = (/obj/effect/shuttle_landmark/nav_blueriv/nav1,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"an" = (/obj/effect/wingrille_spawn/reinforced/full,/turf/simulated/floor,/area/bluespaceriver/ship)
+"ao" = (/obj/machinery/computer/power_monitor,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"ap" = (/obj/machinery/computer/helm,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aq" = (/obj/machinery/computer/sensors,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"ar" = (/obj/machinery/computer/engines,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"as" = (/obj/machinery/light,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ship)
+"at" = (/obj/structure/table/reinforced,/obj/machinery/recharger/wallcharger{pixel_y = -24},/obj/item/weapon/storage/pill_bottle/antitox,/obj/item/weapon/cell,/obj/item/weapon/storage/box/matches,/obj/random/maintenance/clean,/obj/random/cash,/obj/item/weapon/paper{info = "We've landed, and aside from the permafrost, there's not a lot to mention on this rock. The readings are strongest in the middle of an open field near the ship, but there's nothing there, meaning we really only have one choice. Digging down. One of the others thinks theres a good chance that it's underground, so we might as well see if they're onto something. We don't have any other decent plans, and we need this find. Fortunate we brought the larger scale excavation equipment."},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"au" = (/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"av" = (/obj/structure/bed/chair/comfy/black{dir = 1},/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aw" = (/obj/structure/bed/chair/comfy/black{dir = 1},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"ax" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/obj/machinery/light,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"ay" = (/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"az" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"aA" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"aB" = (/obj/machinery/door/airlock/command,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aC" = (/obj/machinery/vending/boozeomat,/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"aD" = (/obj/machinery/computer/rdconsole,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aE" = (/obj/machinery/r_n_d/server,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aF" = (/obj/structure/handrai,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aG" = (/obj/machinery/door/airlock/science,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aH" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/handrai,/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aI" = (/obj/machinery/vending/wallmed1{name = "Emergency NanoMed"; pixel_x = 0; pixel_y = 29},/obj/structure/table/woodentable,/obj/item/pizzabox,/obj/machinery/light{dir = 1},/obj/item/weapon/material/knife,/obj/item/weapon/paper{info = "Well, it didn't take the three days I was betting on, so i'm out twenty bucks, but we managed to punch through into a cave of some sort with the drilling equipment. We're lowering a ladder down now and sending one of the guards down to check that there's no spiders in there or anything. Once they report back, we'll Move the whole basecamp down there, and- SO, We've moved down into the cave now, and what we've found is astounding! It looks a LOT like a lake or river of blue goo, but... not? I took some scans, but couldn't pick anything up aside from radiation spikes from the pool. I also lowered a swab into the fluid to take a sample, but when I touched the swab to the surface of the... Fluid? the Swab just... Ceased And yes, that's the best way to describe it. it just stopped existing in my hand. We figure it's best we DON'T touch the blue stuff for now. one of our help has started moving supplies down into the cave to build a bridge of sorts though across the pool. We spotted some sort of structure on the far side, and the bridge is the only way to get to it, so now we wait."},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aJ" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aK" = (/obj/random/maintenance/clean,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aL" = (/obj/structure/table/steel,/obj/machinery/chemical_dispenser/bar_coffee,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aM" = (/obj/machinery/r_n_d/protolathe,/obj/item/weapon/paper{info = "Well, it only took three weeks... this trip... but we finally found something worth investigating! An energy signature, just on or under the planet's surface. It's bizarre, similar to a bluespace signature, but... not. I'll need to get down there to really get a reading on it, but this could be the kind of discovery that makes a career. We've identified a landing site, so our pilot is setting the ship down there in the next couple of hours. it'll take some more time after that to set up a base camp and such."},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aN" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aO" = (/obj/machinery/smartfridge/chemistry,/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"aP" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aQ" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/lunchbox/nt,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aR" = (/obj/structure/table/steel,/obj/item/weapon/storage/box/glasses/mug,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aS" = (/obj/structure/table/steel,/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aT" = (/obj/machinery/r_n_d/destructive_analyzer,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aU" = (/obj/machinery/chemical_dispenser,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aV" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aW" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/alarm{alarm_id = "petrov3"; dir = 4; pixel_x = -25; pixel_y = 0; rcon_setting = 3},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aX" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aY" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"aZ" = (/obj/structure/table/steel,/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/atmospherics/unary/vent_scrubber/on,/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/random/maintenance/clean,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"ba" = (/obj/effect/wingrille_spawn/reinforced/full,/turf/simulated/floor/plating,/area/bluespaceriver/ship)
+"bb" = (/obj/machinery/r_n_d/circuit_imprinter,/obj/item/device/ano_scanner,/obj/item/weapon/paper{info = "I don't understand where they could have gone, but one of the researchers and a guard disappeared last night. We've started looking for them, figuring maybe they got trapped somewhere in the ruins, maybe a booby trap or something that was still functioning, but we haven't seen any sign of them. their equipment, both of their equipment, is still in the ship, and there's no signs of anything grabbing them in the night, they're just... Gone.  Tomorrow morning we head back into space to go resupply and submit what we've found so far, but when we come back we'll have more than enough manpower to really dig into this place."},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bc" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/obj/item/weapon/reagent_containers/spray,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bd" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4; layer = 2.4; level = 2},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"be" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/artifact_harvester,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bf" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"bg" = (/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bh" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/obj/structure/closet/emcloset,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bi" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bj" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/light,/obj/structure/filingcabinet,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bk" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bl" = (/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bm" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"bn" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/rd,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8; layer = 2.4; level = 2},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bo" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ship)
+"bp" = (/obj/machinery/autolathe,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bq" = (/obj/structure/bed/chair/office/light,/obj/machinery/light,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"br" = (/obj/machinery/artifact_analyser,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bs" = (/obj/structure/toilet{dir = 4},/obj/structure/sink{pixel_y = 24},/obj/machinery/shower{dir = 1},/obj/random/soap,/turf/simulated/floor/tiled/freezer,/area/bluespaceriver/ship)
+"bt" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bu" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bv" = (/obj/structure/curtain/open/bed,/obj/structure/bed/padded,/obj/item/weapon/bedsheet/brown,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bw" = (/obj/structure/curtain/open/bed,/obj/structure/bed/padded,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bx" = (/obj/structure/closet/hydrant,/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"by" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bz" = (/obj/structure/bed/chair/comfy/red{dir = 4},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bA" = (/obj/structure/table/glass,/obj/item/weapon/pen,/obj/item/weapon/storage/secure/briefcase/money{code = "63214"},/obj/item/weapon/form_printer,/obj/item/weapon/gun/energy/gun/small,/obj/item/weapon/rig/hazmat/equipped,/obj/random/cash,/obj/item/weapon/paper{info = "We've finished the bridge and began our initial investigation into the site. Thus far, we're finding a lot of structures clearly made by a sapient species, one that from all indications was relatively advanced, but no signs of what actually happened to them. There's clear signs of habitation, but no signs of what caused abandonment. We're setting up camp in the ruins tonight so that we can continue studying as long as possible before our scheduled departure for refueling, but I feel confident we'll have enough to secure funds for the forseeable future at least!"},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bB" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ship)
+"bC" = (/obj/structure/shuttle/engine/propulsion{icon_state = "propulsion_l"},/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"bD" = (/obj/machinery/door/window/northright,/obj/machinery/door/window/southleft,/turf/simulated/floor/reinforced,/area/bluespaceriver/ship)
+"bE" = (/obj/machinery/door/airlock,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bF" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/random/toolbox,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bG" = (/turf/simulated/floor/reinforced,/area/bluespaceriver/ship)
+"bH" = (/obj/structure/bookcase/manuals/research_and_development,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bI" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/red,/obj/item/weapon/storage/secure/safe{pixel_y = 24},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bJ" = (/obj/structure/curtain/open/bed,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bK" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bL" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/structure/handrai,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bM" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/green,/obj/item/weapon/storage/secure/safe{pixel_y = 24},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bN" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/power/apc{dir = 8; pixel_x = -24},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"bO" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 8},/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"bP" = (/obj/structure/fuel_port,/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"bQ" = (/obj/machinery/artifact_scanpad,/turf/simulated/floor/reinforced,/area/bluespaceriver/ship)
+"bR" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bS" = (/obj/machinery/vending/wallmed1{layer = 3.3; name = "Emergency NanoMed"; pixel_x = 28; pixel_y = 0; req_access = newlist()},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8; layer = 2.4; level = 2},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/item/weapon/mop,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bT" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/structure/cable,/obj/machinery/power/smes/buildable{charge = 0; RCon_tag = "Solar - Port"},/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"bU" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"bV" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal{icon_state = "map_universal"; dir = 4},/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"bW" = (/obj/machinery/atmospherics/unary/outlet_injector{dir = 8; use_power = 1},/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ship)
+"bX" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/yellow,/obj/item/weapon/storage/secure/safe{pixel_y = 24},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bY" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/captain,/obj/item/weapon/storage/secure/safe{pixel_y = 24},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"bZ" = (/obj/structure/table/woodentable,/obj/random/energy,/obj/item/weapon/storage/pill_bottle/happy,/obj/random/contraband,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"ca" = (/obj/machinery/door/blast/shutters,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"cb" = (/obj/machinery/door/blast/shutters,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
+"cc" = (/obj/structure/closet/excavation,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cd" = (/obj/machinery/light{dir = 1},/obj/structure/closet/wardrobe/science_white,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"ce" = (/obj/structure/closet/radiation,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cf" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cg" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"ch" = (/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"ci" = (/obj/machinery/light{dir = 1},/obj/random/maintenance/clean,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cj" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/shieldwallgen,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"ck" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/shieldwallgen,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cl" = (/obj/structure/sign/warning/vacuum,/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
+"cm" = (/obj/machinery/door/airlock/glass_external/bolted,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cn" = (/obj/structure/closet/secure_closet/scientist,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"co" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1; layer = 2.4; level = 2},/obj/machinery/floodlight,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cp" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/obj/machinery/suspension_gen,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cq" = (/obj/structure/dispenser/oxygen,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cr" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cs" = (/obj/random/maintenance/clean,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"ct" = (/obj/structure/ore_box,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cu" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"cv" = (/obj/machinery/mining/brace,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"cw" = (/obj/machinery/mining/drill,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"cx" = (/obj/effect/shuttle_landmark/nav_blueriv/nav4,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"cy" = (/obj/structure/ladder,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"cz" = (/obj/item/remains/human,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"cA" = (/obj/structure/flora/grass/both,/obj/structure/flora/grass/both,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"cB" = (/obj/structure/flora/grass/both,/obj/structure/flora/bush,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"cC" = (/obj/effect/shuttle_landmark/nav_blueriv/nav2,/turf/simulated/floor/exoplanet/snow{temperature = 240},/area/bluespaceriver/ground)
+"cD" = (/obj/effect/landmark/map_data{height = 2},/obj/effect/landmark/random_gen/asteroid{generation_height = 100; generation_width = 100},/turf/unsimulated/mineral{temperature = 233},/area/bluespaceriver/ground)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababacacacabababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababacacacacacababacacababababababacabababacacacacacababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababacacacacacacabacacacacacabababacabacadacacacacaeacababababababababacabababacacacacacacacababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababacacacacacaeacacacacacacacacababacacacacacacacacacacacababababababababacabababacacacacacacacacabababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababacacacacacacacacacacacacacaeacabacacacacacacacacacacacacacabababacacacacababababacacacacacacacacababababababababababababababababababababaa
+aaababababababababababababababacacacacacacababababacabababababacacacacacacacacacacacacacafacacacacacacacacacacacacacacababababacacacacacabacabacacacacacacababababababababababababababababababababababaa
+aaababababababababababababababacacacacacacacabababacacacacacaeacacacacacacacacacadacacacacacacacacacacacacacacacacacacababacacacacacacacacacacacacacacacacababababababababababababababababababababababaa
+aaababababababababababababababacacacacagacacabababacacacacacacacacacahacacacadacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababababababababababababaa
+aaababababababababababababababacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacadacacacacacacacacacacacacacacacacacacacacacacacacababacacacabacacababababababababababababababaa
+aaababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacadacacacacacacacacacadacacacacacacacacacababacababababababababababababaa
+aaababababababababababababacacacacacacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabacacacacababababababababababaa
+aaababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacafacacacacacacacacadacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaababababababababababababacacacacacacacacaeacaiacacacacacacacacacacacacacacacafacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaababababababababababababacacacacacacafacahacacaiacacacacacacacacacacacacafaeacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacabababababababababababaa
+aaababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacabababababababababaa
+aaabababababababababababacacacacafacacacacacacacacacacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacababababababababababaa
+aaabababababababababababacacacafacacacacacacacacacacacacacacacacafacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababaa
+aaabababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacababababababababababaa
+aaabababababababababababacacacacacacacacacacacacajacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaababababababababababababacacacacacacacacacacacacacacacacadacacacacacacacacacacacafacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababaa
+aaababababababababababacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacakacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaababababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacadacacacaeaiacacacacacababababababababababaa
+aaababababababababacacacacadacahacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaababababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacahacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababaa
+aaababababababacacacacacacacacacacacacacacacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababaa
+aaabababababababacacacacacacacacacacacacacacacacacacacacacahacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaabababababacabacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaabababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacahacacacacacacacacacacacacacacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaababababababacacacacacacacacacacacacacacacalacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacamacacacacacacacacacacacacacacababababababababababaa
+aaababababababacacacacacacacacacacacacacananananananacacacacacacacacacacacacacacacacacacacacacacacahacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacababababababababababaa
+aaababababababacacacacacacacacacacacacananaoapaqarananacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaababababababacacacacacacacacacacasananatauavawaxauananasacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaababababababacacacacacacacacacacayanayayayazayaAaBaCanayacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababaa
+aaababababababacacacacacacacacacanayaDaEaFaGaHaIaJauaKaLayanacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaabababababacacacacacacacacacananaMaNauaNaOaPaQaJauauaRaSananacacacacacacacaiacacacacacacacacacacacacacafacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaabababababacacacacacacacacananaTauauaUaVayaWauaXaYauauaZayananacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacabababababababaa
+aaabababababacacacacacacacbababbbcbdbebfbfbfbgbhbibjbkbkblbmbnananacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababaa
+aaabababababacacadacacboayaybpaNaubqbraybsbtbuaAbvaybwbxbyaGbzbAayaybBacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaababababababacacacacacbCbCayaybDayayayayaybEaAayayayaybFayayaybCbCacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaababababababacacacacacacacbCaybGbGaybHbIbJbKbLbJbMbHaybNbObPbCacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacababababababababaa
+aaababababababacacacacacacacacayaybQayayayaybRbSayayayaybTbUbVbWacacacacacacacacacacacacacahacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacaiabababababababababaa
+aaababababacacacacacacacacacacbCayayaybHbXbJbuaXbJbYbZayayaybCacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacafacacacacacacacaiacacacacacacacaiacacacacacacacacacabababababababababaa
+aaababababacacacacacacacacacacacbCayayayayaycacbayayayayaybCacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiaiacacacacacacacacacacacacacacacacacacababababababababaa
+aaababababababahacacacacacacacacacayaycccdcecfcgchcichayayacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacababababababababaa
+aaabababababababacacacacacacacacacbCaychchchcjckclcmcmaybCacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababaa
+aaabababababababababacacacacacacacacaycmaycncocpaychcqayacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababaa
+aaabababababababababacacacacacacacacaychclcrchcsaychctayacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaabababababababababacacacacacacacacaycmaycucucuaycmcmayacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaabababababababababacacacacacaccvacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaabababababababababacacacacacacaccwacacacacacacacacacacacacacacacacacacacacacacacacacacaccxacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababaa
+aaababababababababababacacacaccvacacaccvacaccyacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaababababababababababacahacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababaa
+aaababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababaa
+aaabababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacabababababababababaa
+aaababababababacacacacacacacacacacacczacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababaa
+aaabababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababaa
+aaababababacacacacacacacacacacacacacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababaa
+aaababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaababababacabacacacacacacaiacaccAaccBacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaccCacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaababababababacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababaa
+aaabababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababaa
+aaabababababacacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacabababababababaa
+aaabababababacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacafaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacababababababaa
+aaabababababacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababaa
+aaabababababacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababaa
+aaabababababacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababaa
+aaabababababacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababaa
+aaabababababacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababaa
+aaababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacaeacacacacacacacacacacacacacacacaiacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabacababababababababababaa
+aaababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababaa
+aaababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacacacacacabababababababababababababaa
+aaababababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababababaa
+aaabababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacafacacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababababaa
+aaabababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababababaa
+aaababababacacacacacacacacacacacacacacacacacaeacacacacaiacaiacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababababaa
+aaababababababacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababababaa
+aaabababababababacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababababababababaa
+aaabababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeacacacacacacacacacacacacacacacacacacacacabababababababababababababababababaa
+aaabababababababacacacacacacacacacacacacacacaiacacacacacacacacacacacacacacacacacababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababababababababababababababaa
+aaabababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababacacacacafacacacacacacacacacacacacacacacacacacacacacacacacababababacabababababababababababababababababababababaa
+aaabababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababacacacacacacacacacacacacacacacacacacacacacacacacacacacabababababababababababababababababababababababababababaa
+aaababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababababababababacacacababacacacacacacacacacacacacaiacabacacacacacacacabababababababababababababababababababababababababababaa
+aaabababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacababababababababacacacabababacacacacacacacacacacacaiacabababacacacacababababababababababababababababababababababababababababaa
+aaababababababababababababababababacacacacacacacacacacacacacacacacacacabababababababababababacacababababacacacacacacacacacacacacababababacababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababacacacacacababababacacacabababababababababababababacababababababacacacacacacacacacacababababababababababababababababababababababababababababababababababababaa
+aaabababababababababababababababababababababababababababababababababababababababababababababacababababababacacabacacacacacababababababababababababababababababababababababababababababababababababababaa
+aaabababababababababababababababababababababababababababababababababababababababababababababababababababababababacacacababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+cDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

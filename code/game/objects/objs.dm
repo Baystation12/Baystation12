@@ -182,7 +182,7 @@
 
 /obj/attackby(obj/item/O as obj, mob/user as mob)
 	if(flags & OBJ_ANCHORABLE)
-		if(istype(O, /obj/item/weapon/wrench))
+		if(isWrench(O))
 			wrench_floor_bolts(user)
 			update_icon()
 			return
@@ -199,3 +199,8 @@
 		to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 		anchored = !anchored
 	return 1
+
+/obj/attack_hand(mob/living/user)
+	if(Adjacent(user))
+		add_fingerprint(user)
+	..()

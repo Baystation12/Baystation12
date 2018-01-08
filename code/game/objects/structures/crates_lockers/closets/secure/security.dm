@@ -5,7 +5,6 @@
 	icon_closed = "capsecure"
 	icon_locked = "capsecure1"
 	icon_opened = "capsecureopen"
-	icon_broken = "capsecurebroken"
 	icon_off = "capsecureoff"
 
 /obj/structure/closet/secure_closet/captains/WillContain()
@@ -37,7 +36,6 @@
 	icon_closed = "hopsecure"
 	icon_locked = "hopsecure1"
 	icon_opened = "hopsecureopen"
-	icon_broken = "hopsecurebroken"
 	icon_off = "hopsecureoff"
 
 /obj/structure/closet/secure_closet/hop/WillContain()
@@ -59,7 +57,6 @@
 	icon_closed = "hopsecure"
 	icon_locked = "hopsecure1"
 	icon_opened = "hopsecureopen"
-	icon_broken = "hopsecurebroken"
 	icon_off = "hopsecureoff"
 
 /obj/structure/closet/secure_closet/hop2/WillContain()
@@ -86,7 +83,6 @@
 	icon_closed = "hossecure"
 	icon_locked = "hossecure1"
 	icon_opened = "hossecureopen"
-	icon_broken = "hossecurebroken"
 	icon_off = "hossecureoff"
 
 /obj/structure/closet/secure_closet/hos/WillContain()
@@ -124,7 +120,6 @@
 	icon_closed = "wardensecure"
 	icon_locked = "wardensecure1"
 	icon_opened = "wardensecureopen"
-	icon_broken = "wardensecurebroken"
 	icon_off = "wardensecureoff"
 
 /obj/structure/closet/secure_closet/warden/WillContain()
@@ -160,7 +155,6 @@
 	icon_closed = "sec"
 	icon_locked = "sec1"
 	icon_opened = "secopen"
-	icon_broken = "secbroken"
 	icon_off = "secoff"
 
 /obj/structure/closet/secure_closet/security/WillContain()
@@ -213,7 +207,7 @@
 	icon_closed = "cabinetdetective"
 	icon_locked = "cabinetdetective_locked"
 	icon_opened = "cabinetdetective_open"
-	icon_broken = "cabinetdetective_broken"
+	icon_broken = "cabinetdetective_sparks"
 	icon_off = "cabinetdetective_broken"
 
 /obj/structure/closet/secure_closet/detective/WillContain()

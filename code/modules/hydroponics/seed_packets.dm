@@ -4,7 +4,7 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds
 	name = "packet of seeds"
 	icon = 'icons/obj/seeds.dmi'
-	icon_state = "blank"
+	icon_state = "seedy"
 	w_class = ITEM_SIZE_SMALL
 
 	var/seed_type
@@ -261,5 +261,20 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/tobaccoseed
 	seed_type = "tobacco"
 
+/obj/item/seeds/finetobaccoseed
+	seed_type = "finetobacco"
+
+/obj/item/seeds/puretobaccoseed
+	seed_type = "puretobacco"
+
 /obj/item/seeds/kudzuseed
 	seed_type = "kudzu"
+
+/obj/item/seeds/peppercornseed
+	seed_type = "peppercorn"
+
+/obj/item/seeds/garlicseed
+	seed_type = "garlic"
+
+/obj/item/seeds/onionseed
+	seed_type = "onion"

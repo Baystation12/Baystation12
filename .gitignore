@@ -19,3 +19,4 @@ __pycache__
 # ignore config, but not subdirs
 config/*
 !config/*/
+sql/test_db

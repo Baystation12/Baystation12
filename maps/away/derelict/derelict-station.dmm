@@ -220,7 +220,6 @@
 "el" = (/obj/machinery/portable_atmospherics/canister/air,/obj/structure/window/basic{icon_state = "window"; dir = 8},/obj/structure/window/basic{icon_state = "window"; dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "em" = (/obj/machinery/portable_atmospherics/canister/air,/obj/structure/window/basic{icon_state = "window"; dir = 4},/obj/structure/window/basic{icon_state = "window"; dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "en" = (/obj/structure/table/reinforced,/obj/machinery/light{icon_state = "tube1"; dir = 1},/obj/item/stack/material/steel{amount = 50; pixel_x = 0; pixel_y = 0},/obj/item/stack/material/steel{amount = 50; pixel_x = 0; pixel_y = 0},/obj/item/stack/material/steel{amount = 50; pixel_x = 0; pixel_y = 0},/obj/item/stack/material/steel{amount = 50; pixel_x = 0; pixel_y = 0},/obj/item/stack/material/steel{amount = 50; pixel_x = 0; pixel_y = 0},/obj/random/tech_supply,/obj/random/maintenance,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
-"eo" = (/obj/structure/table/reinforced,/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/random/tech_supply,/obj/machinery/camera/motion/engineering_outpost{c_tag = "Construction Site Teleporter"},/obj/random/maintenance,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "ep" = (/obj/structure/table/reinforced,/obj/item/stack/material/plasteel{amount = 50},/obj/random/tech_supply,/obj/random/maintenance,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "eq" = (/obj/structure/table/reinforced,/obj/random/powercell,/obj/random/tech_supply,/obj/random/tech_supply,/obj/random/maintenance,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "er" = (/obj/structure/table/rack,/obj/random/maintenance,/obj/random/toolbox,/turf/simulated/floor/airless,/area/constructionsite/storage)
@@ -251,7 +250,6 @@
 "eQ" = (/obj/machinery/door/airlock/glass_science{name = "Research"},/obj/machinery/door/blast/shutters,/turf/simulated/floor/airless,/area/constructionsite/hallway/fore)
 "eR" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "constructionsite_outer"; locked = 1; req_access = list(10)},/turf/simulated/floor,/area/constructionsite/teleporter)
 "eS" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{frequency = 1379; id_tag = "constructionsite_vent"},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 9},/turf/simulated/floor,/area/constructionsite/teleporter)
-"eT" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{frequency = 1379; id_tag = "constructionsite_vent"},/obj/machinery/camera/network/engineering_outpost{c_tag = "Construction Site Teleporter Airlock"},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 5},/turf/simulated/floor,/area/constructionsite/teleporter)
 "eU" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "constructionsite_inner"; locked = 1; req_access = list(10)},/turf/simulated/floor,/area/constructionsite/teleporter)
 "eV" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/turf/simulated/floor/tiled,/area/constructionsite/teleporter)
 "eW" = (/obj/structure/cable/blue,/obj/machinery/power/port_gen/pacman,/obj/machinery/power/terminal,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
@@ -295,25 +293,25 @@
 "fI" = (/obj/machinery/teleport/station,/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "fJ" = (/obj/machinery/teleport/hub,/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
 "fK" = (/obj/structure/girder/displaced,/turf/simulated/floor/airless,/area/constructionsite/maintenance)
-"fL" = (/turf/simulated/wall,/area/solar/constructionsite)
+"fL" = (/turf/simulated/wall,/area/constructionsite/solar)
 "fM" = (/obj/random/closet,/obj/random/material,/obj/random/contraband,/turf/simulated/floor/airless,/area/constructionsite/hallway/fore)
-"fN" = (/turf/simulated/floor/airless,/area/solar/constructionsite)
-"fO" = (/obj/structure/lattice,/turf/space,/area/solar/constructionsite)
-"fP" = (/turf/simulated/floor/tiled/dark/airless,/area/solar/constructionsite)
+"fN" = (/turf/simulated/floor/airless,/area/constructionsite/solar)
+"fO" = (/obj/structure/lattice,/turf/space,/area/constructionsite/solar)
+"fP" = (/turf/simulated/floor/tiled/dark/airless,/area/constructionsite/solar)
 "fQ" = (/turf/simulated/floor/tiled/dark/airless,/area/constructionsite/maintenance)
 "fR" = (/obj/structure/extinguisher_cabinet{pixel_y = 30},/turf/simulated/floor/airless,/area/constructionsite/hallway/fore)
 "fS" = (/obj/random/junk,/turf/simulated/floor/tiled/dark/airless,/area/constructionsite/hallway/fore)
-"fT" = (/obj/effect/overmap/sector/derelict,/turf/simulated/floor/airless,/area/solar/constructionsite)
-"fU" = (/turf/space,/area/solar/constructionsite)
-"fV" = (/turf/simulated/floor/airless{icon_state = "dmg2"},/area/solar/constructionsite)
-"fW" = (/obj/random/trash,/turf/simulated/floor/airless,/area/solar/constructionsite)
+"fT" = (/obj/effect/overmap/sector/derelict,/turf/simulated/floor/airless,/area/constructionsite/solar)
+"fU" = (/turf/space,/area/constructionsite/solar)
+"fV" = (/turf/simulated/floor/airless{icon_state = "dmg2"},/area/constructionsite/solar)
+"fW" = (/obj/random/trash,/turf/simulated/floor/airless,/area/constructionsite/solar)
 "fX" = (/obj/structure/grille,/turf/simulated/floor/tiled/dark/airless,/area/constructionsite/hallway/fore)
-"fY" = (/obj/structure/grille,/turf/simulated/floor/airless,/area/solar/constructionsite)
-"fZ" = (/obj/structure/grille/broken,/turf/simulated/floor/airless,/area/solar/constructionsite)
+"fY" = (/obj/structure/grille,/turf/simulated/floor/airless,/area/constructionsite/solar)
+"fZ" = (/obj/structure/grille/broken,/turf/simulated/floor/airless,/area/constructionsite/solar)
 "ga" = (/obj/random/junk,/turf/simulated/floor/airless,/area/constructionsite/maintenance)
 "gb" = (/obj/effect/shuttle_landmark/derelict/nav3,/turf/space,/area/space)
 "gc" = (/obj/random/firstaid,/turf/simulated/floor/airless,/area/constructionsite/maintenance)
-"gd" = (/obj/structure/lattice,/obj/random/maintenance,/turf/space,/area/solar/constructionsite)
+"gd" = (/obj/structure/lattice,/obj/random/maintenance,/turf/space,/area/constructionsite/solar)
 "ge" = (/obj/structure/table/rack,/obj/random/plushie,/obj/random/loot,/turf/simulated/floor/airless,/area/constructionsite/maintenance)
 "gf" = (/obj/machinery/door/airlock/highsecurity{icon_state = "door_closed"; locked = 0; name = "AI Upload Access"; req_access = list(16)},/turf/simulated/floor/bluegrid/airless,/area/constructionsite/hallway/fore)
 "gg" = (/turf/simulated/wall,/area/constructionsite/ai)
@@ -626,6 +624,8 @@
 "mb" = (/obj/machinery/power/emitter{anchored = 1; dir = 8; state = 2},/turf/simulated/floor/airless,/area/constructionsite/engineering)
 "mc" = (/obj/machinery/the_singularitygen,/turf/simulated/floor/airless,/area/constructionsite/engineering)
 "md" = (/obj/effect/shuttle_landmark/derelict/nav7,/turf/space,/area/space)
+"nb" = (/obj/structure/table/reinforced,/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/random/tech_supply,/obj/random/maintenance,/obj/machinery/camera/motion{c_tag = "Construction Site Teleporter"},/turf/simulated/floor/tiled/dark,/area/constructionsite/teleporter)
+"ob" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{frequency = 1379; id_tag = "constructionsite_vent"},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 5},/obj/machinery/camera/motion{c_tag = "Construction Site Teleporter Airlock"},/turf/simulated/floor,/area/constructionsite/teleporter)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -669,10 +669,10 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadOaRaRaaaaaaaRdvcNcwcwcwdzdzdzdzdAdzdzdzdzdzdzdzdzdzdzcwcNcwdzdzdzdzdzdzdzdzdzdzdAdzdzdzdzcwcNcNdWdvaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRaRaRaRaRaaaaaRdzdzcNcwdzdzbobobobobubobobobobobobobodzcNcycNdzbobobobHbobobobobobobobobodzdzcwcNdzdzaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRaRaRaaaaaRaRaRdvcwcNdzbobodYdYdYdYdYdYdYdZdYdYbobodzcNcNeadzboboebebebebebebebebebebbHbodzcNcNdvaRaRaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRdOaRaRaRaaaaaaaRdvcNcNdzbodYdYecedeeefegeheheidYbobudzcwcNcNdzboboebejekelemeneoepeqebebbodzcNcwdPaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRdOaRaRaRaaaaaaaRdvcNcNdzbodYdYecedeeefegeheheidYbobudzcwcNcNdzboboebejekelemennbepeqebebbodzcNcwdPaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRaRaRaaaaaaaaaRdPcNcwdzbodYereseheteheheheseudYboevdzcwcNcwdzbobHebewexeyezeAeAeAeBeCebbodzcwcNdvaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRdOaRaRaRaaaRaRaRdvcNcydzbodYeDeDeDeDeEeDeFeDeDdYdYdYeGcycweHebebebebeIeJeJeJeJeJeJeAeKebbodzcwcwdvaRaRaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadOaRaRdOaaaaaaaRdPcwcNdzbodYeLeheheMeheNeheheOePeheheQcwcwcweReSeTeUeVeJeJeJeJeJeJeJeWebbodzcycNdPaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadOaRaRdOaaaaaaaRdPcwcNdzbodYeLeheheMeheNeheheOePeheheQcwcwcweReSobeUeVeJeJeJeJeJeJeJeWebbodzcycNdPaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRdOaRaRaRaaaaaaaRdvcNcNdzbueXeheheYehehehehehehePeheseZcNcNcNeRfafbfcfdfefffgeJeJeJeJfhebbodzcNcNdvaRaaaaaaaaaaaaaaaaaafiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadOaRaRaaaaaRaRaRdPcwcNdzbodYfjfkfjeDflfjfmeFeDdYdYdYeGcNcycwebebebebfnfoeJfpfqfqfqfrfsebbodzcwcwdvaRaRaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaRaaaRaaaRaRdOaRaRdOaaaaaaaRdPcycNdzbodYehehehehehehesftehdYbobodAcwcNcwdAboboebfufveAeAeAeAeAeAfwebbodzcwcydPaRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

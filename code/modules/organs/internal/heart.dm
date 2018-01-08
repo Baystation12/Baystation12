@@ -48,9 +48,6 @@
 		pulse_mod++
 	if(oxy < BLOOD_VOLUME_BAD) //MOAR
 		pulse_mod++
-	if(pulse && oxy <= BLOOD_VOLUME_SURVIVE && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
-		pulse = PULSE_THREADY	
-		return
 
 	if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
 		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
@@ -68,6 +65,9 @@
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
 			pulse = PULSE_NONE
 			return
+	if(pulse && oxy <= BLOOD_VOLUME_SURVIVE && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
+		pulse = PULSE_THREADY
+		return
 
 	pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
 	if(pulse != PULSE_NORM && owner.chem_effects[CE_STABLE])
@@ -165,3 +165,29 @@
 		return FALSE
 
 	return pulse > PULSE_NONE || robotic == ORGAN_ROBOT || (owner.status_flags & FAKEDEATH)
+
+/obj/item/organ/internal/heart/listen()
+	if(robotic == ORGAN_ROBOT && is_working())
+		if(is_bruised())
+			return "sputtering pump"
+		else
+			return "steady whirr of the pump"
+
+	if(!pulse || (owner.status_flags & FAKEDEATH))
+		return "no pulse"
+
+	var/pulsesound = "normal"
+	if(is_bruised())
+		pulsesound = "irregular"
+
+	switch(pulse)
+		if(PULSE_SLOW)
+			pulsesound = "slow"
+		if(PULSE_FAST)
+			pulsesound = "fast"
+		if(PULSE_2FAST)
+			pulsesound = "very fast"
+		if(PULSE_THREADY)
+			pulsesound = "extremely fast and faint"
+
+	. = "[pulsesound] pulse"

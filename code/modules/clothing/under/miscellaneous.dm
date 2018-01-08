@@ -582,9 +582,10 @@
 	icon_state = "mbill"
 	worn_state = "mbill"
 
+// Replace this with actual uniform when someone wants to sprite one
 /obj/item/clothing/under/confederacy
-	name = "\improper Confederacy uniform"
-	desc = "A military uniform belonging to the Confederacy of Man, an independent human government."
+	name = "\improper Confederate uniform"
+	desc = "A military uniform belonging to the Terran Colonial Confederation, an independent human government."
 	icon_state = "confed"
 	worn_state = "confed"
 

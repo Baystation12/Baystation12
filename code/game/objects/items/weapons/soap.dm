@@ -13,11 +13,11 @@
 
 /obj/item/weapon/soap/New()
 	..()
-	create_reagents(10)
+	create_reagents(30)
 	wet()
 
 /obj/item/weapon/soap/proc/wet()
-	reagents.add_reagent(/datum/reagent/space_cleaner, 5)
+	reagents.add_reagent(/datum/reagent/space_cleaner, 15)
 
 /obj/item/weapon/soap/Crossed(AM as mob|obj)
 	if (istype(AM, /mob/living))

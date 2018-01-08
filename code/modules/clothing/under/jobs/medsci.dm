@@ -111,40 +111,43 @@
 	worn_state = "medical_short"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
-/obj/item/clothing/under/rank/medical/blue
-	name = "medical scrubs"
-	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in baby blue."
-	icon_state = "scrubsblue"
-	item_state = "b_suit"
-	worn_state = "scrubsblue"
+/obj/item/clothing/under/rank/medical/scrubs
+	name = "scrubs"
+	desc = "A loose-fitting garment designed to provide minor protection against biohazards."
+	icon_state = "scrubs"
+	worn_state = "scrubs"
 
-/obj/item/clothing/under/rank/medical/green
-	name = "medical scrubs"
-	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in dark green."
-	icon_state = "scrubsgreen"
-	item_state = "g_suit"
-	worn_state = "scrubsgreen"
+/obj/item/clothing/under/rank/medical/scrubs/blue
+	name = "blue scrubs"
+	color = "#4891e1"
 
-/obj/item/clothing/under/rank/medical/purple
-	name = "medical scrubs"
-	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in deep purple."
-	icon_state = "scrubspurple"
-	item_state = "p_suit"
-	worn_state = "scrubspurple"
+/obj/item/clothing/under/rank/medical/scrubs/green
+	name = "green scrubs"
+	color = "#255a3e"
 
-/obj/item/clothing/under/rank/medical/black
-	name = "medical scrubs"
-	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in black."
-	icon_state = "scrubsblack"
-	item_state = "bl_suit"
-	worn_state = "scrubsblack"
+/obj/item/clothing/under/rank/medical/scrubs/purple
+	name = "purple scrubs"
+	color = "#7a1b3f"
 
-/obj/item/clothing/under/rank/medical/navyblue
-	name = "medical scrubs"
-	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in navy blue."
-	icon_state = "scrubsnavyblue"
-	item_state = "b_suit"
-	worn_state = "scrubsnavyblue"
+/obj/item/clothing/under/rank/medical/scrubs/black
+	name = "black scrubs"
+	color = "#242424"
+
+/obj/item/clothing/under/rank/medical/scrubs/navyblue
+	name = "navy blue scrubs"
+	color = "#1f3a69"
+
+/obj/item/clothing/under/rank/medical/scrubs/lilac
+	name = "lilac scrubs"
+	color = "#c8a2c8"
+
+/obj/item/clothing/under/rank/medical/scrubs/teal
+	name = "teal scrubs"
+	color = "#008080"
+
+/obj/item/clothing/under/rank/medical/scrubs/heliodor
+	name = "heliodor scrubs"
+	color = "#aad539"
 
 /obj/item/clothing/under/rank/psych
 	desc = "A basic white jumpsuit. It has turqouise markings that denote the wearer as a psychiatrist."

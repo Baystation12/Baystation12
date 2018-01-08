@@ -176,7 +176,7 @@ var/list/organ_cache = list()
 		return
 	if(dna)
 		if(!rejecting)
-			if(blood_incompatible(dna.b_type, owner.dna.b_type, species, owner.species))
+			if(owner.blood_incompatible(dna.b_type, species))
 				rejecting = 1
 		else
 			rejecting++ //Rejection severity increases over time.
@@ -354,3 +354,7 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/isrobotic()
 	return robotic >= ORGAN_ROBOT
+
+//used by stethoscope
+/obj/item/organ/proc/listen()
+	return

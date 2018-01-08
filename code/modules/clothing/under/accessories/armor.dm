@@ -55,8 +55,11 @@
 	icon = 'icons/obj/clothing/modular_armor.dmi'
 	icon_state = "armor_light"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 25, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_C
+
+/obj/item/clothing/accessory/armorplate/get_fibers()
+	return null	//plates do not shed
 
 /obj/item/clothing/accessory/armorplate/medium
 	name = "medium armor plate"
@@ -172,6 +175,12 @@
 	desc = "An armor tag with the acronym SAARE printed in olive-green lettering on it."
 	icon_state = "saaretag"
 
+/obj/item/clothing/accessory/armor/tag/press
+	name = "\improper PRESS tag"
+	desc = "A tag with the word PRESS printed in white lettering on it."
+	icon_state = "presstag"
+	slot_flags = SLOT_BELT
+
 /obj/item/clothing/accessory/armor/tag/opos
 	name = "\improper O+ blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as O POSITIVE."
@@ -211,3 +220,47 @@
 	name = "\improper AB- blood patch"
 	desc = "An embroidered patch indicating the wearer's blood type as AB NEGATIVE."
 	icon_state = "abnegtag"
+
+/obj/item/clothing/accessory/armor/helmcover
+	name = "helmet cover"
+	desc = "A fabric cover for armored helmets."
+	icon_override = 'icons/mob/modular_armor.dmi'
+	icon = 'icons/obj/clothing/modular_armor.dmi'
+	accessory_icons = list(slot_tie_str = 'icons/mob/modular_armor.dmi', slot_head_str = 'icons/mob/modular_armor.dmi')
+	icon_state = "null"
+	slot = ACCESSORY_SLOT_HELM_C
+
+/obj/item/clothing/accessory/armor/helmcover/blue
+	name = "blue helmet cover"
+	desc = "A fabric cover for armored helmets in a bright blue color."
+	icon_state = "helmcover_blue"
+
+/obj/item/clothing/accessory/armor/helmcover/navy
+	name = "navy blue helmet cover"
+	desc = "A fabric cover for armored helmets. This one is colored navy blue."
+	icon_state = "helmcover_navy"
+
+/obj/item/clothing/accessory/armor/helmcover/green
+	name = "green helmet cover"
+	desc = "A fabric cover for armored helmets. This one has a woodland camouflage pattern."
+	icon_state = "helmcover_green"
+
+/obj/item/clothing/accessory/armor/helmcover/tan
+	name = "tan helmet cover"
+	desc = "A fabric cover for armored helmets. This one has a desert camouflage pattern."
+	icon_state = "helmcover_tan"
+
+/obj/item/clothing/accessory/armor/helmcover/nt
+	name = "\improper NanoTrasen helmet cover"
+	desc = "A fabric cover for armored helmets. This one has NanoTrasen's colors."
+	icon_state = "helmcover_nt"
+
+/obj/item/clothing/accessory/armor/helmcover/pcrc
+	name = "\improper PCRC helmet cover"
+	desc = "A fabric cover for armored helmets. This one is colored navy blue and has a tag in the back with the words PROXIMA CENTAURI RISK CONTROL printed in cyan lettering on it."
+	icon_state = "helmcover_pcrc"
+
+/obj/item/clothing/accessory/armor/helmcover/saare
+	name = "\improper SAARE helmet cover"
+	desc = "A fabric cover for armored helmets. This one has SAARE's colors."
+	icon_state = "helmcover_saare"

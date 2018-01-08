@@ -10,11 +10,47 @@
 	cost = 20
 	containername = "\improper Wizard costume crate"
 
-/decl/hierarchy/supply_pack/miscellaneous/carpet
-	name = "Imported carpet"
+/decl/hierarchy/supply_pack/miscellaneous/carpetbrown
+	name = "Brown carpet"
 	contains = list(/obj/item/stack/tile/carpet/fifty)
 	cost = 15
-	containername = "\improper Imported carpet crate"
+	containername = "\improper Brown carpet crate"
+
+/decl/hierarchy/supply_pack/miscellaneous/carpetblue
+	name = "Blue and gold carpet"
+	contains = list(/obj/item/stack/tile/carpetblue/fifty)
+	cost = 15
+	containername = "\improper Blue and gold carpet crate"
+
+/decl/hierarchy/supply_pack/miscellaneous/carpetblue2
+	name = "Blue and silver carpet"
+	contains = list(/obj/item/stack/tile/carpetblue2/fifty)
+	cost = 15
+	containername = "\improper Blue and silver carpet crate"
+
+/decl/hierarchy/supply_pack/miscellaneous/carpetpurple
+	name = "Purple carpet"
+	contains = list(/obj/item/stack/tile/carpetpurple/fifty)
+	cost = 15
+	containername = "\improper Purple carpet crate"
+
+/decl/hierarchy/supply_pack/miscellaneous/carpetorange
+	name = "Orange carpet"
+	contains = list(/obj/item/stack/tile/carpetorange/fifty)
+	cost = 15
+	containername = "\improper Orange carpet crate"
+
+/decl/hierarchy/supply_pack/miscellaneous/carpetgreen
+	name = "Green carpet"
+	contains = list(/obj/item/stack/tile/carpetgreen/fifty)
+	cost = 15
+	containername = "\improper Green carpet crate"
+
+/decl/hierarchy/supply_pack/miscellaneous/carpetred
+	name = "Red carpet"
+	contains = list(/obj/item/stack/tile/carpetred/fifty)
+	cost = 15
+	containername = "\improper Red carpet crate"
 
 /decl/hierarchy/supply_pack/miscellaneous/linoleum
 	name = "Linoleum"
@@ -80,8 +116,8 @@
 /decl/hierarchy/supply_pack/miscellaneous/formal_wear
 	contains = list(/obj/item/clothing/head/bowler,
 					/obj/item/clothing/head/that,
-					/obj/item/clothing/suit/storage/toggle/lawyer/bluejacket,
-					/obj/item/clothing/suit/storage/lawyer/purpjacket,
+					/obj/item/clothing/suit/storage/toggle/suit/blue,
+					/obj/item/clothing/suit/storage/toggle/suit/purple,
 					/obj/item/clothing/under/suit_jacket,
 					/obj/item/clothing/under/suit_jacket/female,
 					/obj/item/clothing/under/suit_jacket/really_black,

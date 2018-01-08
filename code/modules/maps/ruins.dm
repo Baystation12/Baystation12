@@ -95,7 +95,6 @@
 		for(var/mob/living/simple_animal/monster in T)
 			qdel(monster)
 	template.load(central_turf,centered = TRUE)
-	template.loaded++
 	var/datum/map_template/ruin = template
 	if(istype(ruin))
 		new /obj/effect/landmark/ruin(central_turf, ruin)

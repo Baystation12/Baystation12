@@ -318,9 +318,6 @@
 			src.eject_occupant(usr)
 			src.updateUsrDialog()
 			src.update_icon()
-	/*if (href_list["refresh"])
-		src.updateUsrDialog()*/
-	src.add_fingerprint(usr)
 	return
 
 
@@ -597,7 +594,7 @@
 /obj/machinery/suit_storage_unit/attackby(obj/item/I as obj, mob/user as mob)
 	if(!src.ispowered)
 		return
-	if(istype(I, /obj/item/weapon/screwdriver))
+	if(isScrewdriver(I))
 		src.panelopen = !src.panelopen
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		to_chat(user, text("<span class='notice'>You [] the unit's maintenance panel.</span>",(src.panelopen ? "open up" : "close") ))
@@ -826,7 +823,7 @@
 			return
 
 	//Hacking init.
-	if(istype(I, /obj/item/device/multitool) || istype(I, /obj/item/weapon/wirecutters))
+	if(isMultitool(I) || isWirecutter(I))
 		if(panel_open)
 			attack_hand(user)
 		return
@@ -862,7 +859,7 @@
 			src.updateUsrDialog()
 
 			return
-	else if(istype(I,/obj/item/weapon/screwdriver))
+	else if(isScrewdriver(I))
 
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ?  "open" : "close"] the maintenance panel.")
@@ -932,9 +929,6 @@
 	return 1
 
 /obj/machinery/suit_cycler/attack_hand(mob/user as mob)
-
-	add_fingerprint(user)
-
 	if(..() || stat & (BROKEN|NOPOWER))
 		return
 

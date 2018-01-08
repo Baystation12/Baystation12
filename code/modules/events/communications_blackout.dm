@@ -11,10 +11,11 @@
 		to_chat(A, "<span class='warning'><b>[alert]</b></span>")
 		to_chat(A, "<br>")
 
-	if(prob(30))	//most of the time, we don't want an announcement, so as to allow AIs to fake blackouts.
+	if(prob(80))	//Announce most of the time, just not always to give some wiggle room for possible sabotages.
 		command_announcement.Announce(alert, new_sound = sound('sound/misc/interference.ogg', volume=25))
 
 
 /datum/event/communications_blackout/start()
 	for(var/obj/machinery/telecomms/T in telecomms_list)
-		T.emp_act(1)
+		if(prob(T.outage_probability))
+			T.overloaded_for = max(severity * rand(90, 120), T.overloaded_for)

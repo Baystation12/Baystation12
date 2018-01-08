@@ -16,3 +16,7 @@
 /area/outpost/abandoned
 	name = "Abandoned Outpost"
 	icon_state = "dark"
+
+/area/djstation
+	name = "\improper Listening Post"
+	icon_state = "LP"

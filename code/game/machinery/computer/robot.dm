@@ -1,14 +1,12 @@
 /obj/machinery/computer/robotics
 	name = "robotics control console"
-	desc = "Used to remotely lockdown or detonate linked cyborgs."
+	desc = "Used to remotely lockdown or monitor linked synthetics."
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "tech_key"
 	icon_screen = "robot"
 	light_color = "#a97faa"
 	req_access = list(access_robotics)
 	circuit = /obj/item/weapon/circuitboard/robotics
-
-	var/safety = 1
 
 /obj/machinery/computer/robotics/attack_ai(var/mob/user as mob)
 	ui_interact(user)
@@ -19,10 +17,7 @@
 /obj/machinery/computer/robotics/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 	data["robots"] = get_cyborgs(user)
-	data["safety"] = safety
-	// Also applies for cyborgs. Hides the manual self-destruct button.
 	data["is_ai"] = issilicon(user)
-
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -38,37 +33,6 @@
 	if(!src.allowed(user))
 		to_chat(user, "Access Denied")
 		return
-
-	// Destroys the cyborg
-	if(href_list["detonate"])
-		var/mob/living/silicon/robot/target = get_cyborg_by_name(href_list["detonate"])
-		if(!target || !istype(target))
-			return
-		if(isAI(user) && (target.connected_ai != user))
-			to_chat(user, "Access Denied. This robot is not linked to you.")
-			return
-		// Cyborgs may blow up themselves via the console
-		if(isrobot(user) && user != target)
-			to_chat(user, "Access Denied.")
-			return
-		var/choice = input("Really detonate [target.name]?") in list ("Yes", "No")
-		if(choice != "Yes")
-			return
-		if(!target || !istype(target))
-			return
-
-		// Antagonistic cyborgs? Left here for downstream
-		if(target.mind && target.mind.special_role && target.emagged)
-			to_chat(target, "Extreme danger.  Termination codes detected.  Scrambling security codes and automatic AI unlink triggered.")
-			target.ResetSecurityCodes()
-		else
-			message_admins("<span class='notice'>[key_name_admin(usr)] detonated [target.name]!</span>")
-			log_game("[key_name(usr)] detonated [target.name]!")
-			to_chat(target, "<span class='danger'>Self-destruct command received.</span>")
-			spawn(10)
-				target.self_destruct()
-
-
 
 	// Locks or unlocks the cyborg
 	else if (href_list["lockdown"])
@@ -128,37 +92,18 @@
 		target.emagged = 1
 		to_chat(target, "<span class='notice'>Failsafe protocols overriden. New tools available.</span>")
 
-	// Arms the emergency self-destruct system
-	else if(href_list["arm"])
-		if(istype(user, /mob/living/silicon))
-			to_chat(user, "Access Denied")
+	else if (href_list["message"])
+		var/mob/living/silicon/robot/target = get_cyborg_by_name(href_list["message"])
+		if(!target || !istype(target))
 			return
 
-		safety = !safety
-		to_chat(user, "You [safety ? "disarm" : "arm"] the emergency self destruct")
-
-	// Destroys all accessible cyborgs if safety is disabled
-	else if(href_list["nuke"])
-		if(istype(user, /mob/living/silicon))
-			to_chat(user, "Access Denied")
-			return
-		if(safety)
-			to_chat(user, "Self-destruct aborted - safety active")
+		var/message = sanitize(input("Enter message to transmit to the synthetic.") as null|text)
+		if(!message || !istype(target))
 			return
 
-		message_admins("<span class='notice'>[key_name_admin(usr)] detonated all cyborgs!</span>")
-		log_game("[key_name(usr)] detonated all cyborgs!")
-
-		for(var/mob/living/silicon/robot/R in GLOB.silicon_mob_list)
-			if(istype(R, /mob/living/silicon/robot/drone))
-				continue
-			// Ignore antagonistic cyborgs
-			if(R.scrambledcodes)
-				continue
-			to_chat(R, "<span class='danger'>Self-destruct command received.</span>")
-			spawn(10)
-				R.self_destruct()
-
+		log_and_message_admins("[key_name_admin(usr)] sent message '[message]' to [target.name] using robotics control console!")
+		to_chat(target, "<span class='notice'>New remote message received using R-SSH protocol:</span>")
+		to_chat(target, message)
 
 // Proc: get_cyborgs()
 // Parameters: 1 (operator - mob which is operating the console.)
@@ -176,6 +121,14 @@
 
 		var/list/robot = list()
 		robot["name"] = R.name
+		var/turf/T = get_turf(R)
+		var/area/A = get_area(T)
+
+		if(istype(T) && istype(A) && (T.z in GLOB.using_map.contact_levels))
+			robot["location"] = "[A.name] ([T.x], [T.y])"
+		else
+			robot["location"] = "Unknown"
+
 		if(R.stat)
 			robot["status"] = "Not Responding"
 		else if (!R.canmove)

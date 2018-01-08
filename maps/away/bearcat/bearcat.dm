@@ -1,6 +1,4 @@
 #include "bearcat_areas.dm"
-#include "bearcat-1.dmm"
-#include "bearcat-2.dmm"
 
 /obj/effect/overmap/ship/bearcat
 	name = "FTV Bearcat"
@@ -17,6 +15,14 @@
 		GLOB.using_map.area_purity_test_exempt_areas += A.type
 	..()
 
+/datum/map_template/ruin/away_site/bearcat_wreck
+	name = "Bearcat Wreck"
+	id = "awaysite_bearcat_wreck"
+	description = "A wrecked light freighter."
+	suffixes = list("bearcat/bearcat-1.dmm", "bearcat/bearcat-2.dmm")
+	cost = 1
+	shuttles_to_initialise = list(/datum/shuttle/autodock/ferry/lift)
+
 /datum/shuttle/autodock/ferry/lift
 	name = "Cargo Lift"
 	shuttle_area = /area/ship/scrap/shuttle/lift
@@ -27,6 +33,7 @@
 	sound_landing = 'sound/effects/lift_heavy_stop.ogg'
 	ceiling_type = null
 	knockdown = 0
+	defer_initialisation = TRUE
 
 /obj/machinery/computer/shuttle_control/lift
 	name = "cargo lift controls"

@@ -5,8 +5,8 @@
 	icon_state = "catwalk"
 	density = 0
 	anchored = 1.0
-	plane = ABOVE_PLATING_PLANE
-	layer = LATTICE_LAYER
+	plane = ABOVE_TURF_PLANE
+	layer = CATWALK_LAYER
 
 /obj/structure/catwalk/Initialize()
 	. = ..()
@@ -57,12 +57,14 @@
 			qdel(src)
 
 /obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
-	if (istype(C, /obj/item/weapon/weldingtool))
+	if(isWelder(C))
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Slicing catwalk joints ...</span>")
 			new /obj/item/stack/rods(src.loc)
 			new /obj/item/stack/rods(src.loc)
-			new /obj/structure/lattice/(src.loc)
+			//Lattice would delete itself, but let's save ourselves a new obj
+			if(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open))
+				new /obj/structure/lattice/(src.loc)
 			qdel(src)

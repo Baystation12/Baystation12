@@ -15,6 +15,8 @@
 	brute_mod =     0.85
 	slowdown =      1
 
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_GRAV | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
 /datum/species/human/spacer
 	name = "Space-Adapted Human"
 	name_plural = "Space-Adapted Humans"
@@ -29,6 +31,8 @@
 	brute_mod = 1.1
 	burn_mod =  1.1
 	darksight = 6
+
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/human/vatgrown
 	name = "Vat-Grown Human"

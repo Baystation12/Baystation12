@@ -98,8 +98,6 @@
 		to_chat(usr, "<span class='warning'>You can't reach the controls from the inside.</span>")
 		return
 
-	add_fingerprint(usr)
-
 	if(href_list["eject"])
 		go_out()
 	if(href_list["beaker"])
@@ -121,8 +119,8 @@
 	return attack_hand(user)
 
 /obj/machinery/sleeper/attackby(var/obj/item/I, var/mob/user)
-	add_fingerprint(user)
 	if(istype(I, /obj/item/weapon/reagent_containers/glass))
+		add_fingerprint(user)
 		if(!beaker)
 			beaker = I
 			user.drop_item()
@@ -131,6 +129,8 @@
 		else
 			to_chat(user, "<span class='warning'>\The [src] has a beaker already.</span>")
 		return
+	else
+		..()
 
 /obj/machinery/sleeper/MouseDrop_T(var/mob/target, var/mob/user)
 	if(!CanMouseDrop(target, user))

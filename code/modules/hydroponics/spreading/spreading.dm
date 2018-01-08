@@ -222,7 +222,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	START_PROCESSING(SSvines, src)
 
-	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
+	if(isWirecutter(W) || istype(W, /obj/item/weapon/scalpel))
 		if(sampled)
 			to_chat(user, "<span class='warning'>You cannot take another sample from \the [src].</span>")
 			return
@@ -239,6 +239,7 @@
 		..()
 		if(W.force)
 			health -= W.force
+		playsound(get_turf(src), W.hitsound, 100, 1)
 	check_health()
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases

@@ -78,3 +78,8 @@
 	icon_state = "blue_edge_labcoat_open"
 	icon_open = "blue_edge_labcoat_open"
 	icon_closed = "blue_edge_labcoat"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/coat
+	name = "coat"
+	desc = "A cozy overcoat."
+	color = "#292929"

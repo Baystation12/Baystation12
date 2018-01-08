@@ -45,9 +45,9 @@
 /obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
 	if(stat & (NOPOWER|BROKEN))
 		return
+	..()
 
 	user.set_machine(src)
-	src.add_fingerprint(usr)
 
 	var/dat
 
@@ -70,8 +70,6 @@
 		return
 
 	var/mob/user = usr
-
-	src.add_fingerprint(user)
 
 	if(href_list["log"])
 
@@ -221,7 +219,7 @@
 	. = ..()
 	airtank = new()
 	airtank.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
-	airtank.adjust_gas("nitrogen", MOLES_N2STANDARD, 0)
+	airtank.adjust_gas("nitrogen", MOLES_N2STANDARD)
 
 /obj/machinery/cryopod/lifepod/return_air()
 	return airtank

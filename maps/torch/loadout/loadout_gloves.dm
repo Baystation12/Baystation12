@@ -29,7 +29,7 @@
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/gloves/evening
-	display_name = "gloves, evening"
+	display_name = "gloves, evening, colour select"
 	path = /obj/item/clothing/gloves/color/evening
 	flags = GEAR_HAS_COLOR_SELECTION
 	allowed_roles = FORMAL_ROLES

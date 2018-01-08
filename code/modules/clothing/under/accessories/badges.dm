@@ -5,18 +5,13 @@
 */
 
 /obj/item/clothing/accessory/badge
-	name = "detective's badge"
-	desc = "A simple badge, made from gold."
-	icon_state = "goldbadge"
+	name = "private investigator's badge"
+	desc = "A leather-backed badge, with gold trimmings."
+	icon_state = "detectivebadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
-	var/stored_name
 	var/badge_string = "Private Investigator"
-
-/obj/item/clothing/accessory/badge/old
-	name = "faded badge"
-	desc = "A faded badge, backed with leather. Looks crummy."
-	icon_state = "badge_round"
+	var/stored_name
 
 /obj/item/clothing/accessory/badge/proc/set_name(var/new_name)
 	stored_name = new_name
@@ -25,7 +20,7 @@
 /obj/item/clothing/accessory/badge/attack_self(mob/user as mob)
 
 	if(!stored_name)
-		to_chat(user, "You polish your [src.name] fondly, shining up the surface.")
+		to_chat(user, "You inspect your [src.name]. Everything seems to be in order and you give it a quick cleaning with your hand.")
 		set_name(user.real_name)
 		return
 
@@ -37,9 +32,11 @@
 
 /obj/item/clothing/accessory/badge/attack(mob/living/carbon/human/M, mob/living/user)
 	if(isliving(user))
-		user.visible_message("<span class='danger'>[user] invades [M]'s personal space, thrusting [src] into their face insistently.</span>","<span class='danger'>You invade [M]'s personal space, thrusting [src] into their face insistently.</span>")
+		user.visible_message("<span class='danger'>[user] invades [M]'s personal space, thrusting \the [src] into their face insistently.</span>","<span class='danger'>You invade [M]'s personal space, thrusting \the [src] into their face insistently.</span>")
 
-//.Holobadges.
+/*
+ *Holobadges
+ */
 /obj/item/clothing/accessory/badge/holo
 	name = "holobadge"
 	desc = "This glowing blue badge marks the holder as a member of corporate security."
@@ -88,7 +85,7 @@
 
 /obj/item/weapon/storage/box/holobadge
 	name = "holobadge box"
-	desc = "A box claiming to contain holobadges."
+	desc = "A box containing holobadges."
 	New()
 		new /obj/item/clothing/accessory/badge/holo(src)
 		new /obj/item/clothing/accessory/badge/holo(src)
@@ -99,29 +96,40 @@
 		..()
 		return
 
+/obj/item/clothing/accessory/badge/old
+	name = "faded badge"
+	desc = "A faded badge, backed with leather. Looks crummy."
+	icon_state = "badge_round"
+	badge_string = "Unknown"
+
 /obj/item/clothing/accessory/badge/defenseintel
 	name = "investigator's badge"
 	desc = "A leather-backed silver badge bearing the crest of the Defense Intelligence Agency."
 	icon_state = "diabadge"
-	slot_flags = SLOT_TIE
 	badge_string = "Defense Intelligence Agency"
 
 /obj/item/clothing/accessory/badge/interstellarintel
 	name = "agent's badge"
 	desc = "A synthleather holographic badge bearing the crest of the Office of Interstellar Intelligence."
 	icon_state = "intelbadge"
-	slot_flags = SLOT_TIE
 	badge_string = "Office of Interstellar Intelligence"
 
 /obj/item/clothing/accessory/badge/nanotrasen
 	name = "\improper NanoTrasen badge"
 	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a NanoTrasen corporate executive."
 	icon_state = "ntbadge"
-	slot_flags = SLOT_TIE
 	badge_string = "NanoTrasen"
 
 /obj/item/clothing/accessory/badge/marshal
-	name = "marshal's badge"
+	name = "colonial marshal's badge"
 	desc = "A leather-backed gold badge displaying the crest of the Colonial Marshals."
 	icon_state = "marshalbadge"
+	slot_flags = SLOT_BELT | SLOT_TIE
+	slot = ACCESSORY_SLOT_INSIGNIA
 	badge_string = "Colonial Marshal Bureau"
+	
+/obj/item/clothing/accessory/badge/press
+	name = "press badge"
+	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."
+	icon_state = "pressbadge"
+	badge_string = "Journalist"
