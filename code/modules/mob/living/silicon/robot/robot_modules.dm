@@ -590,7 +590,6 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/card/robot(src)
 	src.modules += new /obj/item/weapon/weldingtool/mini(src)
 	src.modules += new /obj/item/weapon/wirecutters(src)
-	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/gripper/chemistry(src)
 	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src)
