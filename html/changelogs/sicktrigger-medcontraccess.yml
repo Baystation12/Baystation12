@@ -1,0 +1,6 @@
+author: sick trigger
+
+delete-after: True
+
+changes: 
+  - tweak: "'Medical Contractor' job now has less access. Pick a specialised alt-title if you want into chemistry/virology/etc."

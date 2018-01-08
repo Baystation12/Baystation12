@@ -401,10 +401,12 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus
 	name = OUTFIT_JOB_NAME("Mortician")
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
+	id_type = /obj/item/weapon/card/id/torch/contractor/medical/mortus
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist
 	name = OUTFIT_JOB_NAME("Virologist - Torch")
 	uniform = /obj/item/clothing/under/rank/virologist
+	id_type = /obj/item/weapon/card/id/torch/contractor/medical/virologist
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist/New()
 	..()
@@ -418,11 +420,13 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_hand = /obj/item/weapon/storage/firstaid/adv
 	belt = /obj/item/weapon/storage/belt/medical/emt
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	id_type = /obj/item/weapon/card/id/torch/contractor/medical/paramedic
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	name = OUTFIT_JOB_NAME("Chemist - Torch")
 	uniform = /obj/item/clothing/under/rank/chemist
 	shoes = /obj/item/clothing/shoes/white
+	id_type = /obj/item/weapon/card/id/torch/contractor/medical/chemist
 	pda_type = /obj/item/device/pda/chemist
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist/New()
