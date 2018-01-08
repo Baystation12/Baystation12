@@ -141,3 +141,6 @@
 /area/tranquility/laundry
 	name = "\improper laundry"
 	icon_state = "laundry"
+/area/tranquility/halls4
+	name = "\improper halls4"
+	icon_state = "halls4"
