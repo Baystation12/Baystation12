@@ -691,8 +691,8 @@
 //  verb for humans to switch between any hairstyle with HAIR_TIEABLE flag
 /mob/living/carbon/human/verb/tie_hair()
 	set name = "Tie Hair"
-	set desc = "Tie your hair up"
-	set category = "IC"
+	set desc = "Tie your hair up."
+	set category = "Object"
 
 	if(!(species.get_bodytype() == SPECIES_HUMAN))
 		to_chat(src, "<span class='notice'>Only humans can use this verb.</span>")
