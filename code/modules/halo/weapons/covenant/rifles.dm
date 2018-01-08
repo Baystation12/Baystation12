@@ -15,6 +15,6 @@
 	screen_shake = 0
 
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)

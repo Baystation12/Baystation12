@@ -37,24 +37,6 @@
 	var/interval_resupply = 2000
 	var/time_next_resupply = 0
 
-	//day night cycle stuff
-	var/solar_cycle_start = 0			//deciseconds, calculated using world.time
-	var/solar_cycle_duration = 6000		//deciseconds
-	var/solar_cycle_offset = 1500		//deciseconds
-	var/threshold_dawn = 0.25			//percent
-	var/threshold_dusk = 0.75			//percent
-	var/light_change_amount = 0.1		//set this to 2 for light changes to be 100% instead of a dawn/dusk period
-	//var/current_light_level = 9
-	var/do_daynight_cycle = 1			//for testing
-	var/time_light_update = 0			//deciseconds, calculated using world.time
-	var/solar_announcement_status = 0
-	//
-	var/datum/light_source/ambient/ambient_light
-	var/list/light_sources
-	var/light_power = 0
-	var/light_range = 255
-	var/light_color = "#ffffff"
-
 	var/latest_tick_time = 0
 	var/round_start
 
@@ -72,8 +54,6 @@
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time
 
-	if(do_daynight_cycle)
-		process_daynight()
 	process_spawning()
 	process_resupply()
 	process_evac()
@@ -86,7 +66,6 @@
 
 #include "mode_stranded_attackers_process.dm"
 #include "mode_stranded_attackers_spawn.dm"
-#include "mode_stranded_daynight.dm"
 #include "mode_stranded_evac.dm"
 #include "mode_stranded_finish.dm"
 #include "mode_stranded_start.dm"
