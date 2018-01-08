@@ -5,9 +5,11 @@
 
 /obj/structure/dropship/overmap/update_reachable_landing()
 	generate_current_landpoint()
-	reachable_landing_locations = dropship_landing_controller.get_potential_landing_points_overmap(1,1,1,faction,src)
+	reachable_landing_locations = dropship_landing_controller.get_potential_landing_points_overmap(1,1,faction,src)
 
 /obj/structure/dropship/overmap/perform_move_sequence(var/obj/move_to_obj = target_location)
+	if(isnull(move_to_obj))
+		return
 	if(!dropship_landing_controller.overmap_range_check(src,move_to_obj))
 		to_chat(pilot,"<span class = 'warning'>Your targeted location has moved out of range!</span>")
 		target_location = null
