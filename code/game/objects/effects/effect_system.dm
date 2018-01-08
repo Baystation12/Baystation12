@@ -507,9 +507,9 @@ steam.start() -- spawns the effect
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
-/obj/effect/temporary/New(var/newloc, var/duration = 30, var/_icon = 'icons/effects/effects.dmi', var/_state)
-	..()
-	spawn(duration)
-		qdel(src)
+/obj/effect/temporary/Initialize(var/mapload, var/duration = 30, var/_icon = 'icons/effects/effects.dmi', var/_state)
+	. = ..()
 	icon = _icon
 	icon_state = _state
+	spawn(duration)
+		qdel(src)

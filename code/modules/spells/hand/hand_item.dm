@@ -62,6 +62,6 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	qdel(src)
 
 /obj/item/magic_hand/Destroy() //better save than sorry.
-	hand_spell.hand = null
+	hand_spell.cancel_hand()
 	hand_spell = null
 	return ..()
