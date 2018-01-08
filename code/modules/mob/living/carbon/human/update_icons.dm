@@ -183,6 +183,9 @@ Please contact me on #coderbus IRC. ~Carn x
 			if(species.has_floating_eyes)
 				overlays |= species.get_eyes(src)
 
+	if(auras)
+		overlays |= auras
+
 	var/matrix/M = matrix()
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
 		M.Turn(90)

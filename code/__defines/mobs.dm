@@ -266,3 +266,9 @@
 #define SURGERY_RETRACTED 2
 #define SURGERY_ENCASED 3
 
+#define AURA_CANCEL 1
+#define AURA_FALSE  2
+#define AURA_TYPE_BULLET "Bullet"
+#define AURA_TYPE_WEAPON "Weapon"
+#define AURA_TYPE_THROWN "Thrown"
+#define AURA_TYPE_LIFE   "Life"

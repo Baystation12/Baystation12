@@ -19,6 +19,7 @@
 				/spell/targeted/genetic/mutate = 					1,
 				/spell/aoe_turf/conjure/mirage = 					1,
 				/spell/targeted/shapeshift/corrupt_form = 			1,
+				/spell/radiant_aura =								1,
 				/spell/noclothes = 									1,
 				/obj/structure/closet/wizard/armor = 				1,
 				/obj/item/weapon/gun/energy/staff/focus = 			1,
