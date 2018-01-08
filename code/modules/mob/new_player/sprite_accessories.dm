@@ -722,7 +722,6 @@
         head.owner.h_style = selected_string
         head.owner.regenerate_icons()
 
-
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
