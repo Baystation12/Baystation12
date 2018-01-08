@@ -31,7 +31,7 @@ var/global/datum/dropship_landing_controller/dropship_landing_controller = new /
 	if(check_occupied)
 		potential_landing_points &= get_unoccupied_land_points()
 	if(faction_check)
-		potential_landing_points &= get_faction_land_points(faction_check)
+		potential_landing_points &= (get_faction_land_points(faction_check) + get_faction_land_points("civillian"))
 	return potential_landing_points
 
 /datum/dropship_landing_controller/proc/overmap_range_check(var/obj/structure/dropship/overmap/dropship,var/obj/l)
@@ -56,7 +56,7 @@ var/global/datum/dropship_landing_controller/dropship_landing_controller = new /
 
 /obj/effect/landmark/dropship_land_point
 	name = "Dropship Land Point"
-	var/faction //The faction this landing point belongs to. Null for all-factions.
+	var/faction = "civillian"//The faction this landing point belongs to. Null for all-factions.
 	var/active = 1 //Is this landing point available.
 	var/occupied = 0 //Is this landing point currently occupied?
 
