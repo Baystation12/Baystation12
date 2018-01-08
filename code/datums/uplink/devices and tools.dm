@@ -108,3 +108,9 @@
 	item_cost = 60
 	antag_costs = list(MODE_MERCENARY = 30)
 	path = /obj/item/clothing/mask/ai
+
+/datum/uplink_item/item/tools/personal_shield
+	name = "Personal Shield"
+	item_cost = 30
+	antag_costs = list(MODE_MERCENARY = 15)
+	path = /obj/item/device/personal_shield

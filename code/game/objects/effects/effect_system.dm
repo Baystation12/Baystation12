@@ -497,3 +497,19 @@ steam.start() -- spawns the effect
 				round(min(light, BOMBCAP_LIGHT_RADIUS)),
 				round(min(flash, BOMBCAP_FLASH_RADIUS))
 				)
+
+//A temporary effect that does not DO anything except look pretty.
+/obj/effect/temporary
+	anchored = 1
+	unacidable = 1
+	mouse_opacity = 0
+	density = 0
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+
+/obj/effect/temporary/New(var/newloc, var/duration = 30, var/_icon = 'icons/effects/effects.dmi', var/_state)
+	..()
+	spawn(duration)
+		qdel(src)
+	icon = _icon
+	icon_state = _state
