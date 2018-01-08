@@ -1,13 +1,13 @@
 //The following is a list of defs to be used for the Torch loadout.
 
 //For all SolGov personnel, representative included
-#define SOLGOV_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/representative, /datum/job/solgov_pilot, /datum/job/pathfinder, /datum/job/explorer)
+#define SOLGOV_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/representative, /datum/job/pathfinder, /datum/job/explorer)
 
 //For EC/Fleet/Marines
-#define MILITARY_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/solgov_pilot, /datum/job/pathfinder, /datum/job/explorer)
+#define MILITARY_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/pathfinder, /datum/job/explorer)
 
 //For EC/Fleet/Marine Officers
-#define MILITARY_OFFICER_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/senior_doctor, /datum/job/qm, /datum/job/solgov_pilot, /datum/job/pathfinder)
+#define MILITARY_OFFICER_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/bridgeofficer, /datum/job/senior_doctor, /datum/job/qm, /datum/job/pathfinder)
 
 //For EC/Fleet/Marine Enlisted
 #define MILITARY_ENLISTED_ROLES list(/datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/explorer)
@@ -67,4 +67,4 @@
 #define ARMED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/sea, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/guard, /datum/job/merchant)
 
 //For jobs that spawn with armor in their lockers
-#define ARMORED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/guard, /datum/job/merchant)
+#define ARMORED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/guard, /datum/job/merchant)
