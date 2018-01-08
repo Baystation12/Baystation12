@@ -4,10 +4,10 @@
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	max_shots = 5
-	projectile_type = /obj/item/projectile/beam/stun
+	projectile_type = /obj/item/projectile/energy/electrode/taser
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode/taser),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		)
 

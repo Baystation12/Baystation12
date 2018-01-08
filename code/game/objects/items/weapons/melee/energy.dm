@@ -6,6 +6,11 @@
 	edge = 0
 	armor_penetration = 50
 	flags = NOBLOODY
+	var/attack_sound = 'sound/weapons/blade1.ogg' //Snowflakey, but adding unique sounds to everything south of /item/ would be a large undertaking.
+
+/obj/item/weapon/melee/energy/attack(var/mob/living/M, var/mob/living/user)
+	playsound(get_turf(user), 50, 1)
+	..()
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	anchored = 1
@@ -61,11 +66,8 @@
 	name = "energy axe"
 	desc = "An energised battle axe."
 	icon_state = "axe0"
-	//active_force = 150 //holy...
 	active_force = 60
 	active_throwforce = 35
-	//force = 40
-	//throwforce = 25
 	force = 20
 	throwforce = 10
 	throw_speed = 1
@@ -95,7 +97,7 @@
 	name = "energy sword"
 	desc = "May the force be within you."
 	icon_state = "sword0"
-	active_force = 30
+	active_force = 45
 	active_throwforce = 20
 	force = 3
 	throwforce = 5
@@ -143,14 +145,20 @@
 	icon_state = initial(icon_state)
 
 /obj/item/weapon/melee/energy/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
-	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
-		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.flags & NO_BLOCK)
+			return 0
+
+	if(active && default_parry_check(user, attacker, damage_source) && prob(60))
+		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		return 1
+
 	return 0
 
 /obj/item/weapon/melee/energy/sword/pirate
