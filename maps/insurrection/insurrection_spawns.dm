@@ -16,7 +16,7 @@ GLOBAL_LIST_EMPTY(Innie_turfs)
 
 /datum/spawnpoint/insurrectionist
 	display_name = "Insurrectionist"
-	restrict_job = list(/datum/job/Insurrectionist)
+	restrict_job = list("Insurrectionist")
 
 /datum/spawnpoint/insurrectionist/New()
 	..()
@@ -31,7 +31,7 @@ GLOBAL_LIST_EMPTY(Innie_turfs)
 
 /datum/spawnpoint/insurrectionist_Leader
 	display_name = "Insurrectionist Leader"
-	restrict_job = list(/datum/job/Insurrectionist_leader)
+	restrict_job = list("Insurrectionist Leader")
 
 /datum/spawnpoint/insurrectionist_Leader/New()
 	..()
@@ -50,7 +50,7 @@ GLOBAL_LIST_EMPTY(UNSC_turfs)
 
 /datum/spawnpoint/UNSC_A_S_M
 	display_name = "ODST Assault Squad Member"
-	restrict_job = list(/datum/job/UNSC_assault)
+	restrict_job = list("ODST Assault Squad Member")
 
 /datum/spawnpoint/UNSC_A_S_M/New()
 	..()
@@ -65,7 +65,7 @@ GLOBAL_LIST_EMPTY(UNSC_turfs)
 
 /datum/spawnpoint/UNSC_A_S_L
 	display_name = "ODST Assault Squad Lead"
-	restrict_job = list(/datum/job/UNSC_Squad_Lead)
+	restrict_job = list("ODST Assault Squad Lead")
 
 /datum/spawnpoint/UNSC_A_S_L/New()
 	..()
@@ -80,7 +80,7 @@ GLOBAL_LIST_EMPTY(UNSC_turfs)
 
 /datum/spawnpoint/UNSC_A_T_L
 	display_name = "ODST Assault Team Lead"
-	restrict_job = list(/datum/job/UNSC_Team_Lead)
+	restrict_job = list("ODST Assault Team Lead")
 
 /datum/spawnpoint/UNSC_A_T_L/New()
 	..()

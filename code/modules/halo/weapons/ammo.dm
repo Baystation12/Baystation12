@@ -53,6 +53,7 @@
 //deadly but inaccurate
 /obj/item/projectile/bullet/a127_saphp
 	damage = 20
+	armor_penetration = 35
 	accuracy = 1
 
 /obj/item/weapon/storage/box/m127_saphp

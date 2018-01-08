@@ -114,7 +114,7 @@
 		trigger_aiming(TARGET_CAN_CLICK)
 		return 1
 
-	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
+	if(!istype(loc,/obj/vehicles) && !isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
 
 	//Atoms on turfs (not on your person)
