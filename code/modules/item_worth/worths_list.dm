@@ -172,7 +172,6 @@ var/list/worths = list(
 					/obj/item/weapon/vampiric = 666,
 					/obj/item/weapon/anobattery = 1800,
 					/obj/item/weapon/anodevice = 3300,
-					/obj/item/weapon/scrying = 1000,
 					/obj/item/weapon/magic_rock = 1500,
 					/obj/item/weapon/virusdish = 65,
 					/obj/item/weapon/diseasedisk = 100,
