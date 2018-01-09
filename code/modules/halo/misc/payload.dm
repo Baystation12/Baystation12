@@ -2,7 +2,7 @@
 /obj/payload
 	name = "Nuclear Warhead Payload"
 	desc = "The word 'UNSC' is scratched out, replaced with a spraypainted image of a skull"
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "MFDD"
 	anchored = 0
 	density = 1

@@ -10,3 +10,7 @@
 		'sound/effects/wind/wind_4_2.ogg',\
 		'sound/effects/wind/wind_5_1.ogg'\
 		)
+
+/area/planet/stranded_outpost
+	name = "Stranded Outpost"
+	icon_state = "security"

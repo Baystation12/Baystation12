@@ -58,3 +58,11 @@
 
 /obj/item/ammo_box/shotgun/update_icon()
 	desc = "[initial(desc)] It has [contents.len] shells left."
+
+/obj/item/ammo_box/shotgun/slug
+	name = "Shotgun Slug Box"
+	desc = "A box of shotgun slug to assist in loading pump-action shotguns"
+	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun)
+
+/obj/item/ammo_box/shotgun/slug/update_icon()
+	desc = "[initial(desc)] It has [contents.len] slugs left."

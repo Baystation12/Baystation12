@@ -2,6 +2,9 @@
 	name = "floor"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "Floor3"
+	var/dug = 0
+	var/underneath_type
+	var/dug_state
 
 /turf/unsimulated/floor/bluespace //non-doomsday version of bluespace for transit and wizden
 	name = "\improper bluespace"

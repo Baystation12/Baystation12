@@ -216,7 +216,7 @@
 	fuel_drainrates = list(1)
 
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret)
-	icon = 'code/modules/halo/icons/Warthog.dmi'
+	icon = 'code/modules/halo/vehicles/Warthog.dmi'
 	icon_state = "Base, no wheels"
 	bound_height = 64
 	bound_width = 64
