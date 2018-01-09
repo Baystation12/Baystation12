@@ -35,5 +35,29 @@
 	track_players = 1
 	selection_color = "#ffff00"
 
+/datum/job/team_slayer_covenant
+	title = "Elites"
+	//latejoin_at_spawnpoints = 1
+	create_record = 0
+	account_allowed = 0
+	generate_email = 0
+	outfit_type = /decl/hierarchy/outfit/sangheili_slayer
+	total_positions = -1
+	spawn_positions = -1
+	track_players = 1
+	selection_color = "#ffff00"
+
+/datum/job/slayer_spartan_covenant
+	title = "Spartans"
+	//latejoin_at_spawnpoints = 1
+	create_record = 0
+	account_allowed = 0
+	generate_email = 0
+	outfit_type = /decl/hierarchy/outfit/job/slayer/spartan_slayer_covenant
+	total_positions = -1
+	spawn_positions = -1
+	track_players = 1
+	selection_color = "#ffff00"
+
 /datum/map/teamslayer_asteroid
-	allowed_jobs = list(/datum/job/team_slayer_red, /datum/job/team_slayer_blue, /datum/job/slayer_ffa)
+	allowed_jobs = list(/datum/job/team_slayer_red, /datum/job/team_slayer_blue, /datum/job/slayer_ffa,/datum/job/slayer_spartan_covenant,/datum/job/team_slayer_covenant)
