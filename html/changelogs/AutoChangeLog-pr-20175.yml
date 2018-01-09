@@ -1,0 +1,4 @@
+author: "comma"
+delete-after: True
+changes: 
+  - balance: "Attacks against legs and heads are now more likely to miss."
