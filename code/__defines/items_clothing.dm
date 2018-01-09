@@ -42,9 +42,11 @@
 #define NOBLOODY           0x8   // Used for items if they don't want to get a blood overlay.
 #define OPENCONTAINER      0x10  // Is an open container for chemistry purposes.
 #define PHORONGUARD        0x20  // Does not get contaminated by phoron.
-#define	NOREACT            0x40  // Reagents don't react inside this container.
+#define NOREACT            0x40  // Reagents don't react inside this container.
 #define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
-#define NOPRINT            0x100 // Does not leave user's fingerprints/fibers when used on things?
+#define NOPRINT            0x100 // This object does not leave the user's prints/fibres when using it
+#define OBJ_ANCHORABLE     0x200 // This object can be stuck in place with a tool
+#define OBJ_CLIMBABLE      0x400 // This object can be climbed on
 
 //Flags for items (equipment)
 #define THICKMATERIAL          0x1  // Prevents syringes, reagent pens, and hyposprays if equiped to slot_suit or slot_head.
