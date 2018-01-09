@@ -4,7 +4,7 @@
 
 /obj/structure/closet/secure_closet/security_torch
 	name = "master at arms' locker"
-	req_access = list(access_brig)
+	req_access = list()
 	icon_state = "sec1"
 	icon_closed = "sec"
 	icon_locked = "sec1"
@@ -40,7 +40,7 @@
 
 /obj/structure/closet/secure_closet/cos
 	name = "chief of security's locker"
-	req_access = list(access_hos)
+	req_access = list()
 	icon_state = "hossecure1"
 	icon_closed = "hossecure"
 	icon_locked = "hossecure1"
@@ -80,7 +80,7 @@
 
 /obj/structure/closet/secure_closet/brigofficer
 	name = "brig officer's locker"
-	req_access = list(access_armory)
+	req_access = list()
 	icon_state = "wardensecure1"
 	icon_closed = "wardensecure"
 	icon_locked = "wardensecure1"
@@ -117,7 +117,7 @@
 
 /obj/structure/closet/secure_closet/forensics
 	name = "forensics technician's locker"
-	req_access = list(access_forensics_lockers)
+	req_access = list()
 	icon_state = "sec1"
 	icon_closed = "sec"
 	icon_locked = "sec1"

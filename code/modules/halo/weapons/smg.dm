@@ -6,7 +6,7 @@
 /obj/item/weapon/gun/projectile/m7_smg
 	name = "M7 submachine gun"
 	desc = "The M7/Caseless Submachine Gun is a fully automatic close quarters infantry and special operations weapon. Takes 5mm calibre magazines."
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "m7smg"
 	item_state = "m7"
 	caliber = "5mm"
@@ -22,8 +22,8 @@
 	accuracy = -1
 
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
 	firemodes = list(

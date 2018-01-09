@@ -86,7 +86,7 @@
 	//var/image/I = image(icon = 'pilot_head.dmi', icon_state = "head")
 	to_world("\
 		<span class='radio'>\
-			<span class='name'>D77-TC Pilot</span> \
+			<span class='name'>D77-TC Pelican Pilot</span> \
 			\icon[src] \
 			<b>\[UNSC Emergency Freq\]</b> \
 			<span class='message'>\"[pilot_message]\"</span>\

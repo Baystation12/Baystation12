@@ -215,6 +215,11 @@
 	if(!mob.canmove)
 		return
 
+	if(mob.driving)
+		mob.driving.relaymove(n,direct)
+		move_delay = world.time + mob.driving.vehicle_move_delay
+		return
+
 	if(isliving(mob))
 		var/mob/living/L = mob
 		if(L.incorporeal_move)//Move though walls
@@ -283,15 +288,6 @@
 			if("walk")
 				move_delay += 7+config.walk_speed
 		move_delay += mob.movement_delay()
-
-		if(istype(mob.buckled, /obj/vehicle))
-			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
-			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
-			move_delay = world.time
-			//drunk driving
-			if(mob.confused && prob(20)) //vehicles tend to keep moving in the same direction
-				direct = turn(direct, pick(90, -90))
-			return mob.buckled.relaymove(mob,direct)
 
 		if(istype(mob.machine, /obj/machinery))
 			if(mob.machine.relaymove(mob,direct))

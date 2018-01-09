@@ -1,8 +1,8 @@
  // make unweildy to use for marines.
  //Ideas: Half damage, make two handed.
 /obj/item/weapon/melee/energysword
-	name = "Energy Sword"
-	desc = "Type 1 Energy Weapon"
+	name = "Type-1 Energy Weapon"
+	desc = "A small handle conceals the equipment required to generate a long shimmering blade of shaped plasma, capable of burning through most armor with ease."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "T1EW Handle"
 	var/deployed = 0
@@ -23,7 +23,7 @@
 /obj/item/weapon/melee/energysword/proc/activate()
 		playsound(src.loc,'code/modules/halo/sounds/Energysworddeploy.ogg',75)
 		icon_state = "T1EW-deployed"
-		force = 25
+		force = 40
 		throwforce = 12
 		w_class = 4
 		deployed = 1

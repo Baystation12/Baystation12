@@ -298,7 +298,9 @@
 			internal = null
 
 		if(internal)
-			return internal.remove_air_volume(volume_needed)
+			var/datum/gas_mixture/air_removed = internal.remove_air_volume(volume_needed)
+			wear_mask.post_internals_breathe(air_removed,internal)
+			return air_removed
 		else if(internals)
 			internals.icon_state = "internal0"
 	return null
