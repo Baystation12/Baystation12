@@ -1,6 +1,7 @@
 /mob/living/bot/floorbot
 	name = "Floorbot"
 	desc = "A little floor repairing robot, he looks so excited!"
+	icon = 'icons/mob/bot/floorbot.dmi'
 	icon_state = "floorbot0"
 	req_one_access = list(access_construction, access_robotics)
 	wait_if_pulled = 1
@@ -13,10 +14,18 @@
 	var/eattiles = 0
 	var/maketiles = 0
 	var/floor_build_type = /decl/flooring/tiling // Basic steel floor.
+	var/boxtype = "blue"
 
 /mob/living/bot/floorbot/premade
 	name = "Rusty"
+	boxtype = "yellow"
 	on = 0
+
+/mob/living/bot/floorbot/Initialize()
+	. = ..()
+	var/image/B = image(src, boxtype)
+	src.underlays += B
+
 
 /mob/living/bot/floorbot/update_icons()
 	if(busy)
@@ -194,16 +203,35 @@
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	var/obj/item/weapon/storage/toolbox/mechanical/N = new /obj/item/weapon/storage/toolbox/mechanical(Tsec)
-	N.contents = list()
-	new /obj/item/device/assembly/prox_sensor(Tsec)
+
+	var/list/things = list()
+	for(var/atom/A in orange(5, src.loc))
+		things += A
+
+	var/list/shrapnel = list()
+
+	for(var/I = 3, I<3 , I++) //Toolbox shatters.
+		var/obj/item/weapon/material/shrapnel/S = new /obj/item/weapon/material/shrapnel(Tsec) //Todo: unique sprites per-toolbox.
+		shrapnel += S
+
+	for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
+		var/obj/item/stack/tile/floor/T = new /obj/item/stack/tile/floor(Tsec)
+		shrapnel += T
+
 	if(prob(50))
-		new /obj/item/robot_parts/l_arm(Tsec)
-	var/obj/item/stack/tile/floor/T = new /obj/item/stack/tile/floor(Tsec)
-	T.amount = amount
+		var/obj/item/robot_parts/l_arm/LA = new /obj/item/robot_parts/l_arm(Tsec)
+		shrapnel += LA
+
+	var/obj/item/device/assembly/prox_sensor/PS = new /obj/item/device/assembly/prox_sensor(Tsec) //Not bad, but this line looks ugly for whatever reason.
+	shrapnel += PS
+
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
+
+	for(var/atom/movable/AM in shrapnel)
+		AM.throw_at(pick(things),5)
+
 	qdel(src)
 
 /mob/living/bot/floorbot/proc/addTiles(var/am)
@@ -217,7 +245,7 @@
 
 /* Assembly */
 
-/obj/item/weapon/storage/toolbox/mechanical/attackby(var/obj/item/stack/tile/floor/T, mob/user as mob)
+/obj/item/weapon/storage/toolbox/attackby(var/obj/item/stack/tile/floor/T, mob/user as mob)
 	if(!istype(T, /obj/item/stack/tile/floor))
 		..()
 		return
@@ -228,6 +256,7 @@
 		user.s_active.close(user)
 	if(T.use(10))
 		var/obj/item/weapon/toolbox_tiles/B = new /obj/item/weapon/toolbox_tiles
+		B.boxtype = icon_state
 		user.put_in_hands(B)
 		to_chat(user, "<span class='notice'>You add the tiles into the empty toolbox. They protrude from the top.</span>")
 		user.drop_from_inventory(src)
@@ -239,16 +268,17 @@
 /obj/item/weapon/toolbox_tiles
 	desc = "It's a toolbox with tiles sticking out the top."
 	name = "tiles and toolbox"
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/floorbot.dmi'
 	icon_state = "toolbox_tiles"
 	force = 3.0
 	throwforce = 10.0
 	throw_speed = 2
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
+	var/boxtype = ""
 	var/created_name = "Floorbot"
 
-/obj/item/weapon/toolbox_tiles/attackby(var/obj/item/W, mob/user as mob)
+/obj/item/weapon/toolbox_tiles/attackby(var/obj/item/W, mob/user)
 	..()
 	if(isprox(W))
 		qdel(W)
@@ -257,6 +287,7 @@
 		user.put_in_hands(B)
 		to_chat(user, "<span class='notice'>You add the sensor to the toolbox and tiles!</span>")
 		user.drop_from_inventory(src)
+		B.boxtype = src.boxtype
 		qdel(src)
 	else if (istype(W, /obj/item/weapon/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
@@ -269,7 +300,7 @@
 /obj/item/weapon/toolbox_tiles_sensor
 	desc = "It's a toolbox with tiles sticking out the top and a sensor attached."
 	name = "tiles, toolbox and sensor arrangement"
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/floorbot.dmi'
 	icon_state = "toolbox_tiles_sensor"
 	force = 3.0
 	throwforce = 10.0
@@ -277,6 +308,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
 	var/created_name = "Floorbot"
+	var/boxtype = ""
 
 /obj/item/weapon/toolbox_tiles_sensor/attackby(var/obj/item/W, mob/user as mob)
 	..()
@@ -286,6 +318,7 @@
 		var/mob/living/bot/floorbot/A = new /mob/living/bot/floorbot(T)
 		A.SetName(created_name)
 		to_chat(user, "<span class='notice'>You add the robot arm to the odd looking toolbox assembly! Boop beep!</span>")
+		A.boxtype = src.boxtype
 		user.drop_from_inventory(src)
 		qdel(src)
 	else if(istype(W, /obj/item/weapon/pen))

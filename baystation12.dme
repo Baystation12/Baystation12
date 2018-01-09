@@ -1596,7 +1596,7 @@
 #include "code\modules\mob\living\bot\ed209bot.dm"
 #include "code\modules\mob\living\bot\farmbot.dm"
 #include "code\modules\mob\living\bot\floorbot.dm"
-#include "code\modules\mob\living\bot\medbot.dm"
+#include "code\modules\mob\living\bot\medibot.dm"
 #include "code\modules\mob\living\bot\mulebot.dm"
 #include "code\modules\mob\living\bot\remotebot.dm"
 #include "code\modules\mob\living\bot\secbot.dm"

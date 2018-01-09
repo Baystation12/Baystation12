@@ -20,11 +20,9 @@
 
 /obj/item/weapon/storage/toolbox/emergency
 	name = "emergency toolbox"
-	icon_state = "red"
-	item_state = "toolbox_red"
 
-/obj/item/weapon/storage/toolbox/emergency/New()
-	..()
+/obj/item/weapon/storage/toolbox/emergency/Initialize()
+	.= ..()
 	new /obj/item/weapon/crowbar/red(src)
 	new /obj/item/weapon/extinguisher/mini(src)
 	var/item = pick(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare,  /obj/item/device/flashlight/glowstick/red))
@@ -37,8 +35,8 @@
 	icon_state = "blue"
 	item_state = "toolbox_blue"
 
-/obj/item/weapon/storage/toolbox/mechanical/New()
-	..()
+/obj/item/weapon/storage/toolbox/mechanical/Initialize()
+	. = ..()
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
@@ -52,8 +50,8 @@
 	icon_state = "yellow"
 	item_state = "toolbox_yellow"
 
-/obj/item/weapon/storage/toolbox/electrical/New()
-	..()
+/obj/item/weapon/storage/toolbox/electrical/Initialize()
+	. = ..()
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wirecutters(src)
 	new /obj/item/device/t_scanner(src)
