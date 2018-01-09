@@ -99,8 +99,10 @@
 		return
 
 	if(alien == IS_NABBER)
-		M.add_chemical_effect(CE_TOXIN, 2)
-		return
+		M.add_chemical_effect(CE_TOXIN, 4)
+		M.apply_effect(2, PAIN, 0)
+		if(prob(5))
+			to_chat(M, "<span class='danger'>You feel like your insides are melting!</span>")
 
 	M.add_chemical_effect(CE_PULSE, 1)
 	M.add_chemical_effect(CE_BREATHLOSS, 1)
@@ -758,7 +760,7 @@
 		return
 	if(alien == IS_NABBER)
 		M.add_chemical_effect(CE_TOXIN, 5)
-		M.apply_effect(2, PAIN, 0)
+		M.apply_effect(1, PAIN, 0)
 		if(prob(5))
 			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	M.regenerate_blood(4 * removed)

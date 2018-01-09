@@ -180,7 +180,7 @@
 	return max(amount, 0)
 
 /mob/living/carbon/human/proc/getFilter()
-	if((species.flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
+	if((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
 		return 0
 	var/amount = 0
 	for(var/m in tox_filter)

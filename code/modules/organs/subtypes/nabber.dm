@@ -58,8 +58,7 @@
 	organ_tag = BP_PHORON
 	parent_organ = BP_CHEST
 	filter_priority = FILT_PRIO_VITAL
-	var/dexalin_level = 10
-	var/phoron_level = 0.5
+	var/phoron_level = 5
 
 /obj/item/organ/internal/phoron/Process()
 	if(owner)
@@ -69,10 +68,9 @@
 		else if(is_bruised())
 			amount *= 0.1
 
-		var/dexalin_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/dexalin)
 		var/phoron_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/toxin/phoron)
 
-		if((dexalin_volume_raw < dexalin_level || !dexalin_volume_raw) && (phoron_volume_raw < phoron_level || !phoron_volume_raw))
+		if(phoron_volume_raw < phoron_level || !phoron_volume_raw)
 			owner.reagents.add_reagent(/datum/reagent/toxin/phoron, amount)
 	..()
 
@@ -87,6 +85,7 @@
 	organ_tag = BP_ACETONE
 	parent_organ = BP_GROIN
 	filter_priority = FILT_PRIO_VITAL
+	var/dexalin_level = 12
 	var/acetone_level = 20
 
 /obj/item/organ/internal/acetone/Process()
@@ -98,12 +97,13 @@
 		else if(is_bruised())
 			amount *= 0.1
 
+		var/dexalin_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/dexalin)
 		var/acetone_volume_raw = owner.reagents.get_reagent_amount(/datum/reagent/acetone)
 		var/breath_fail_ratio = 1
 		var/obj/item/organ/internal/lungs/nabber/totally_not_lungs_I_swear = owner.internal_organs_by_name[BP_TRACH]
 		if(totally_not_lungs_I_swear)
 			breath_fail_ratio = totally_not_lungs_I_swear.breath_fail_ratio
-		if((acetone_volume_raw < acetone_level || !acetone_volume_raw) && breath_fail_ratio < 0.25)
+		if((dexalin_volume_raw < dexalin_level || !dexalin_volume_raw) && (acetone_volume_raw < acetone_level || !acetone_volume_raw) && breath_fail_ratio < 0.25)
 			owner.reagents.add_reagent(/datum/reagent/acetone, amount)
 
 // These are not actually lungs and shouldn't be thought of as such despite the claims of the parent.

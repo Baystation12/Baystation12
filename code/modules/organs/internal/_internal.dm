@@ -44,11 +44,12 @@
 	if(!owner)
 		return
 
-	if(filter_strength && !(status & ORGAN_DEAD))
-		if(is_bruised())
-			owner.add_filter_effect(organ_tag, filter_strength / 2)
-		else if(is_usable())
-			owner.add_filter_effect(organ_tag, filter_strength)
+	if(filter_strength)
+		if(is_usable())
+			if(is_bruised())
+				owner.add_filter_effect(organ_tag, filter_strength / 2)
+			else
+				owner.add_filter_effect(organ_tag, filter_strength)
 
 //disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
 //TODO move this to organ/internal once the FPB port comes through

@@ -103,7 +103,7 @@
 	result_amount = 3
 
 /datum/chemical_reaction/hytritium
-	name = "Dylovene"
+	name = "Hytritium"
 	result = /datum/reagent/hytritium
 	required_reagents = list(/datum/reagent/acid/polyacid = 1, /datum/reagent/silicate = 1, /datum/reagent/toxin/phoron = 0.1)
 	catalysts = list(/datum/reagent/dylovene = 20)

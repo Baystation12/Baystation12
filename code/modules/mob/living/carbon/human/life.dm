@@ -65,6 +65,10 @@
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !InStasis())
+
+		//Toxin handling
+		handle_toxins()
+
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
@@ -542,7 +546,7 @@
 
 #define GET_TOX(N, L) log(10, max(0.1, (N - (N % L)) / L - (TOX_GENERAL_THRESHOLD / L))) / 1.5
 
-/mob/living/carbon/human/handle_toxins()
+/mob/living/carbon/human/proc/handle_toxins()
 	if(!internal_organs.len)	return
 	add_tox_effect(TOX_GENERAL, TOX_PASSIVE_BUILDUP + chem_effects[CE_TOXIN])
 	// Takes filter stuff away directly from bodypart specific toxins.
