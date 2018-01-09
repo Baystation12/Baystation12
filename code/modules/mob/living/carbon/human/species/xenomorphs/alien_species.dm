@@ -57,7 +57,7 @@
 	breath_type = null
 	poison_type = null
 
-	vision_flags = DEFAULT_SIGHT|SEE_MOBS
+	vision_flags = SEE_SELF|SEE_MOBS
 
 	has_organ = list(
 		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
