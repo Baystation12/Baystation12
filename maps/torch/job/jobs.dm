@@ -476,7 +476,7 @@
 							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer_contractor
-	title = "Maintenance Assistant"
+	title = "Engineering Contractor"
 	department = "Engineering"
 	department_flag = ENG
 
@@ -486,9 +486,12 @@
 	minimal_player_age = 7
 	selection_color = "#5b4d20"
 	alt_titles = list(
-		"Mechanic",
-		"Supermatter Specialist",
-		"Information Systems Technician")
+		"Maintenance Assistant",
+		"Structural Integrity Specialist",
+		"Electrical Systems Specialist",
+		"Information Systems Technician",
+		"Reactor Technician",
+		"Life Support Systems Specialist")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
