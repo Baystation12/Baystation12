@@ -1,0 +1,4 @@
+author: "Kelenius"
+delete-after: True
+changes: 
+  - rscadd: "Syringes can now inject people in body bags and cryo bags."
