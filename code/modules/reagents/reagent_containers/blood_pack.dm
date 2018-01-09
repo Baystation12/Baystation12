@@ -13,7 +13,7 @@
 	volume = 120
 	possible_transfer_amounts = "0.2;1;2"
 	amount_per_transfer_from_this = REM
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 	var/mob/living/carbon/human/attached
 
