@@ -159,7 +159,7 @@
 	desc = "Protects your hearing from loud noises, and quiet ones as well."
 	icon_state = "earmuffs"
 	item_state = "earmuffs"
-	slot_flags = SLOT_EARS | SLOT_TWOEARS
+	slot_flags = SLOT_EARS
 
 /obj/item/clothing/ears/earmuffs/headphones
 	name = "headphones"
@@ -167,7 +167,7 @@
 	var/headphones_on = 0
 	icon_state = "headphones_off"
 	item_state = "headphones_off"
-	slot_flags = SLOT_EARS | SLOT_TWOEARS
+	slot_flags = SLOT_EARS
 
 /obj/item/clothing/ears/earmuffs/headphones/verb/togglemusic()
 	set name = "Toggle Headphone Music"
