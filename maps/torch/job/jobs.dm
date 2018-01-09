@@ -7,7 +7,7 @@
 
 #define HUMAN_ONLY_JOBS /datum/job/captain, /datum/job/hop, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder, /datum/job/warden
 	species_to_job_blacklist = list(
-		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/officer, /datum/job/detective, /datum/job/analyst), //Other jobs unavailable via branch restrictions,
+		/datum/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/officer, /datum/job/detective), //Other jobs unavailable via branch restrictions,
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
 		/datum/species/tajaran = list(HUMAN_ONLY_JOBS),
 		/datum/species/machine = list(HUMAN_ONLY_JOBS),
@@ -19,7 +19,7 @@
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea,
 						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
-						/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/analyst,
+						/datum/job/officer, /datum/job/warden, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
@@ -221,7 +221,7 @@
 		/datum/mil_rank/marine/o2,
 	)
 
-	access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_forensics,
+	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
@@ -555,7 +555,7 @@
 		/datum/mil_rank/marine/e5
 	)
 
-	access = list(access_security, access_brig, access_armory, access_forensics_lockers, access_forensics,
+	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_eva, access_sec_doors, access_solgov_crew, access_gun)
 	minimal_access = list()
@@ -590,36 +590,13 @@
 		/datum/mil_rank/civ/marshal
 	)
 
-	access = list(access_security, access_brig, access_forensics_lockers, access_forensics,
+	access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
 			            access_sec_doors, access_solgov_crew, access_morgue)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
 							 /datum/computer_file/program/camera_monitor)
-
-/datum/job/analyst
-	title = "Crime Scene Analyst"
-	department = "Security"
-	department_flag = SEC
-
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the Chief of Security and Security Personnel"
-	selection_color = "#601c1c"
-	economic_modifier = 5
-	minimal_player_age = 5
-	ideal_character_age = 30
-	alt_titles = list("Lab Technician")
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/analyst
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-
-	access = list(access_security, access_analyst_lockers, access_forensics,
-						access_maint_tunnels, access_emergency_storage, access_sec_doors,
-						access_morgue, access_solgov_crew)
-
-	software_on_spawn = list(/datum/computer_file/program/camera_monitor)
 
 /datum/job/officer
 	title = "Master at Arms"
