@@ -69,3 +69,8 @@
 	path = /obj/item/clothing/shoes/hightops
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
+	
+/datum/gear/shoes/sandal
+	display_name = "wooden sandals"
+	path = /obj/item/clothing/shoes/sandal
+	allowed_roles = NON_MILITARY_ROLES
