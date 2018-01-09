@@ -69,11 +69,6 @@
 		src.visible_message("<span class='warning'>[src] triggers their deadman's switch!</span>")
 		signaler.signal()
 
-	//Stun Beams
-	if(P.taser_effect)
-		stun_effect_act(0, P.agony, def_zone, P)
-//		to_chat(src, "<span class='warning'>You have been hit by [P]!</span>")
-
 	//Armor
 	var/damage = P.damage
 	var/flags = P.damage_flags()
