@@ -618,6 +618,9 @@
 /datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
+	if(alien == IS_NABBER)
+		M.add_chemical_effect(CE_TOXIN, 5)
+	M.add_tox_effect(BP_HEART, 1)
 	if(prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
 	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
@@ -753,6 +756,11 @@
 /datum/reagent/nanoblood/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
+	if(alien == IS_NABBER)
+		M.add_chemical_effect(CE_TOXIN, 5)
+		M.apply_effect(2, PAIN, 0)
+		if(prob(5))
+			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	M.regenerate_blood(4 * removed)
 	M.immunity = max(M.immunity - 1, 0)
 	if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies

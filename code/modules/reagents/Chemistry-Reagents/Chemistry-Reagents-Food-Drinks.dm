@@ -34,8 +34,7 @@
 
 /datum/reagent/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!injectable)
-		M.adjustToxLoss(0.2 * removed)
-		return
+		M.add_chemical_effect(CE_TOXIN, 3)
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
@@ -694,9 +693,12 @@
 	if(alien == IS_DIONA)
 		return
 	..()
+	M.add_tox_effect(BP_KIDNEYS, 1)
 	if(alien == IS_TAJARA)
-		M.adjustToxLoss(0.5 * removed)
+		M.add_chemical_effect(CE_TOXIN, 3)
 		M.make_jittery(4) //extra sensitive to caffine
+	if(alien == IS_NABBER)
+		M.add_chemical_effect(CE_TOXIN, 5)
 	if(adj_temp > 0)
 		holder.remove_reagent(/datum/reagent/frostoil, 10 * removed)
 	if(volume > 15)
@@ -705,7 +707,7 @@
 /datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_TAJARA)
-		M.adjustToxLoss(2 * removed)
+		M.add_chemical_effect(CE_TOXIN, 5)
 		M.make_jittery(4)
 		return
 	M.add_chemical_effect(CE_PULSE, 2)
@@ -714,7 +716,7 @@
 	if(alien == IS_DIONA)
 		return
 	if(alien == IS_TAJARA)
-		M.adjustToxLoss(4 * REM)
+		M.add_chemical_effect(CE_TOXIN, 7)
 		M.apply_effect(3, STUTTER)
 	M.make_jittery(5)
 	M.add_chemical_effect(CE_PULSE, 2)
@@ -1149,12 +1151,12 @@
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 	if(alien == IS_TAJARA)
-		M.adjustToxLoss(0.5 * removed)
+		M.add_chemical_effect(CE_TOXIN, 3)
 		M.make_jittery(4) //extra sensitive to caffine
 
 /datum/reagent/ethanol/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_TAJARA)
-		M.adjustToxLoss(2 * removed)
+		M.add_chemical_effect(CE_TOXIN, 5)
 		M.make_jittery(4)
 		return
 	..()
@@ -1163,7 +1165,7 @@
 	if(alien == IS_DIONA)
 		return
 	if(alien == IS_TAJARA)
-		M.adjustToxLoss(4 * REM)
+		M.add_chemical_effect(CE_TOXIN, 7)
 		M.apply_effect(3, STUTTER)
 	M.make_jittery(5)
 
@@ -1239,6 +1241,7 @@
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
 	M.make_jittery(5)
 	M.add_chemical_effect(CE_PULSE, 2)
+	M.add_tox_effect(BP_KIDNEYS, 2)
 
 /datum/reagent/ethanol/vermouth
 	name = "Vermouth"
@@ -1845,15 +1848,9 @@
 /datum/reagent/ethanol/pwine/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(M.chem_doses[type] > 30)
-		M.adjustToxLoss(2 * removed)
+		M.add_chemical_effect(CE_TOXIN, 5)
 	if(M.chem_doses[type] > 60 && ishuman(M) && prob(5))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
-		if (L && istype(L))
-			if(M.chem_doses[type] < 120)
-				L.take_damage(10 * removed, 0)
-			else
-				L.take_damage(100, 0)
+		M.add_tox_effect(BP_HEART, 3)
 
 /datum/reagent/ethanol/red_mead
 	name = "Red Mead"

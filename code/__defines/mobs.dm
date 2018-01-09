@@ -171,7 +171,7 @@
 #define BP_EYES     "eyes"
 #define BP_HEART    "heart"
 #define BP_LUNGS    "lungs"
-#define BP_TRACH	"tracheae"
+#define BP_TRACH    "tracheae"
 #define BP_BRAIN    "brain"
 #define BP_LIVER    "liver"
 #define BP_KIDNEYS  "kidneys"
@@ -189,6 +189,7 @@
 #define BP_POLYP    "polyp segment"
 #define BP_ANCHOR   "anchoring ligament"
 #define BP_PHORON   "phoron filter"
+#define BP_ACETONE  "acetone reactor"
 
 // Robo Organs.
 #define BP_POSIBRAIN	"posibrain"
