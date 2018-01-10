@@ -105,42 +105,43 @@ var/list/parallax_icon[(GRID_WIDTH**2)*3]
 		0,0,0,1)
 
 /datum/hud/proc/update_parallax_values()
-	var/client/C = mymob.client
-	if(!parallax_initialized)
-		return
+	if(mymob && mymob.client)
+		var/client/C = mymob.client
+		if(!parallax_initialized)
+			return
+		var/turf/loc = get_turf(C.eye)
+		if(!(locate(/turf/space) in RANGE_TURFS(C.view,loc)))
+			return
 
-	if(!(locate(/turf/space) in trange(C.view,get_turf(C.eye))))
-		return
+		//ACTUALLY MOVING THE PARALLAX
+		var/turf/posobj = get_turf(C.eye)
 
-	//ACTUALLY MOVING THE PARALLAX
-	var/turf/posobj = get_turf(C.eye)
+		if(!C.previous_turf || (C.previous_turf.z != posobj.z))
+			C.previous_turf = posobj
 
-	if(!C.previous_turf || (C.previous_turf.z != posobj.z))
+		//Doing it this way prevents parallax layers from "jumping" when you change Z-Levels.
+		var/offsetx = C.parallax_offset["horizontal"] + posobj.x - C.previous_turf.x
+		var/offsety = C.parallax_offset["vertical"] + posobj.y - C.previous_turf.y
+		C.parallax_offset["horizontal"] = offsetx
+		C.parallax_offset["vertical"] = offsety
+
 		C.previous_turf = posobj
 
-	//Doing it this way prevents parallax layers from "jumping" when you change Z-Levels.
-	var/offsetx = C.parallax_offset["horizontal"] + posobj.x - C.previous_turf.x
-	var/offsety = C.parallax_offset["vertical"] + posobj.y - C.previous_turf.y
-	C.parallax_offset["horizontal"] = offsetx
-	C.parallax_offset["vertical"] = offsety
+		for(var/obj/screen/parallax/bgobj in C.parallax_movable)
+			var/accumulated_offset_x = bgobj.base_offset_x - round(offsetx * bgobj.parallax_speed * 2)
+			var/accumulated_offset_y = bgobj.base_offset_y - round(offsety * bgobj.parallax_speed * 2)
 
-	C.previous_turf = posobj
+			if(accumulated_offset_x > PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE)
+				accumulated_offset_x -= PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*GRID_WIDTH //3x3 grid, 15 tiles * 64 icon_size * 3 grid size
+			if(accumulated_offset_x < -(PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*2))
+				accumulated_offset_x += PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*GRID_WIDTH
 
-	for(var/obj/screen/parallax/bgobj in C.parallax_movable)
-		var/accumulated_offset_x = bgobj.base_offset_x - round(offsetx * bgobj.parallax_speed * 2)
-		var/accumulated_offset_y = bgobj.base_offset_y - round(offsety * bgobj.parallax_speed * 2)
+			if(accumulated_offset_y > PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE)
+				accumulated_offset_y -= PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*GRID_WIDTH
+			if(accumulated_offset_y < -(PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*2))
+				accumulated_offset_y += PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*GRID_WIDTH
 
-		if(accumulated_offset_x > PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE)
-			accumulated_offset_x -= PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*GRID_WIDTH //3x3 grid, 15 tiles * 64 icon_size * 3 grid size
-		if(accumulated_offset_x < -(PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*2))
-			accumulated_offset_x += PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*GRID_WIDTH
-
-		if(accumulated_offset_y > PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE)
-			accumulated_offset_y -= PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*GRID_WIDTH
-		if(accumulated_offset_y < -(PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*2))
-			accumulated_offset_y += PARALLAX_IMAGE_WIDTH*WORLD_ICON_SIZE*GRID_WIDTH
-
-		bgobj.screen_loc = "CENTER:[accumulated_offset_x],CENTER:[accumulated_offset_y]"
+			bgobj.screen_loc = "CENTER:[accumulated_offset_x],CENTER:[accumulated_offset_y]"
 
 //Parallax generation code below
 

@@ -148,7 +148,7 @@
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
 
 	FinalizeInstantiation(ui_style, ui_color, ui_alpha)
-	mymob.instantiate_hud(src, ui_style, ui_color, ui_alpha)
+//	mymob.hud.instantiate_hud(src, ui_style, ui_color, ui_alpha)
 	update_parallax_existence()
 
 /datum/hud/proc/FinalizeInstantiation(var/ui_style, var/ui_color, var/ui_alpha)
@@ -254,6 +254,7 @@
 	update_action_buttons()
 
 /mob/proc/add_click_catcher()
+	if(!client)	return
 	if(!client.void)
 		client.void = create_click_catcher()
 	if(!client.screen)

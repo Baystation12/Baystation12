@@ -40,7 +40,7 @@
 			fixture_type = fixture.type
 		fixture.transfer_fingerprints_to(src)
 
-	update_icon()
+	ADD_ICON_QUEUE(src)
 
 /obj/machinery/light_construct/update_icon()
 	switch(stage)
@@ -192,8 +192,11 @@
 			broken(1)
 
 	on = powered()
+/*
+/obj/machinery/light/Initialize()
+	. = ..()
 	update_icon(0)
-
+*/
 /obj/machinery/light/Destroy()
 	QDEL_NULL(lightbulb)
 	QDEL_NULL(s)
@@ -225,11 +228,11 @@
 
 		if(trigger && changed && get_status() == LIGHT_OK)
 			switch_check()
-			update_icon()
+//			update_icon()
 	else
 		use_power = 0
 		set_light(0)
-		update_icon()
+//		update_icon()
 
 	active_power_usage = ((light_range * light_power) * LIGHTING_POWER_FACTOR)
 
@@ -571,7 +574,7 @@
 	broken_chance = 5
 	matter = list("glass" = 100)
 
-	brightness_range = 4
+	brightness_range = 5
 	brightness_power = 4
 	brightness_color = "#a0a080"
 	lighting_modes = list(

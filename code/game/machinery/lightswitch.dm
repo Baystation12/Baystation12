@@ -10,7 +10,7 @@
 	use_power = 1
 	idle_power_usage = 20
 	power_channel = LIGHT
-	var/on = 0
+	var/on = 1
 	var/area/connected_area = null
 	var/other_area = null
 	var/image/overlay

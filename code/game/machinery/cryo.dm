@@ -26,7 +26,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell/New()
 	..()
 	icon = 'icons/obj/cryogenics_split.dmi'
-	update_icon()
+	ADD_ICON_QUEUE(src)
 	initialize_directions = dir
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
