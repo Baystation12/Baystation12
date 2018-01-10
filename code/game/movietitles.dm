@@ -112,11 +112,8 @@ client
 		if(GetAssignment(H) != "Unassigned")
 			job = ", [uppertext(GetAssignment(H))]"
 		var/used_name = H.real_name
-		var/datum/computer_file/crew_record/R = get_crewmember_record(H.real_name)
-		if(R && R.get_rank())
-			var/datum/mil_rank/rank = mil_branches.get_rank(R.get_branch(), R.get_rank())
-			if(rank.name_short)
-				used_name = "[rank.name_short] [used_name]"
+		if(H.CharRecords)
+			used_name = "[get_department_rank_title(get_department(H.CharRecords.char_department, 1), H.CharRecords.department_rank)] [H.job] [used_name]"
 		if(prob(90))
 			var/actor_name = H.species.get_random_name(H.gender)
 			if(!(H.species.spawn_flags & SPECIES_CAN_JOIN) || prob(10)) //sometimes can't get actor of thos species
