@@ -1,0 +1,4 @@
+author: "rainbowEscapist"
+delete-after: True
+changes: 
+  - rscadd: "Adds the alt title 'Trainer' to the Passenger loadout."
