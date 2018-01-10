@@ -20,16 +20,21 @@
 	icon_state = "healthhud"
 	body_parts_covered = 0
 
-
 /obj/item/clothing/glasses/hud/health/process_hud(var/mob/M)
 	process_med_hud(M, 1)
 
 /obj/item/clothing/glasses/hud/health/prescription
 	name = "prescription health scanner HUD"
-	desc = "A medical HUD integrated with a set of prescription glasses"
+	desc = "A medical HUD integrated with a set of prescription glasses."
 	prescription = 7
 	icon_state = "healthhudpresc"
 	item_state = "glasses"
+
+/obj/item/clothing/glasses/hud/health/visor
+	name = "medical HUD visor"
+	desc = "A medical HUD integrated with a wide visor."
+	icon_state = "medhud_visor"
+	item_state = "medhud_visor"
 
 /obj/item/clothing/glasses/hud/security
 	name = "security HUD"
