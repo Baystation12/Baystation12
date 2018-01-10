@@ -2,7 +2,7 @@
 	name = "laser"
 	icon_state = "laser"
 	fire_sound='sound/weapons/Laser.ogg'
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 40
 	damage_type = BURN
 	sharp = 1 //concentrated burns
@@ -19,7 +19,7 @@
 	name = "laser"
 	icon_state = "laser"
 	fire_sound = 'sound/weapons/Taser.ogg'
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 2
 	damage_type = BURN
 	check_armour = "laser"
@@ -108,7 +108,7 @@
 /obj/item/projectile/beam/lastertag/blue
 	name = "lasertag beam"
 	icon_state = "bluelaser"
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
 	no_attack_log = 1
 	damage_type = BURN
@@ -128,7 +128,7 @@
 /obj/item/projectile/beam/lastertag/red
 	name = "lasertag beam"
 	icon_state = "laser"
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
 	no_attack_log = 1
 	damage_type = BURN
@@ -144,7 +144,7 @@
 /obj/item/projectile/beam/lastertag/omni//A laser tag bolt that stuns EVERYONE
 	name = "lasertag beam"
 	icon_state = "omnilaser"
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
 	damage_type = BURN
 	check_armour = "laser"

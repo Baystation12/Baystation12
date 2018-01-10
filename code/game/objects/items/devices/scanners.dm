@@ -14,7 +14,7 @@ REAGENT SCANNER
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
 	icon_state = "health"
 	item_state = "analyzer"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 3
 	w_class = ITEM_SIZE_SMALL
@@ -292,7 +292,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	icon_state = "atmos"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
 	throw_speed = 4
@@ -338,7 +338,8 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT | OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
 	throw_speed = 4
@@ -407,7 +408,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
 	throw_speed = 4
@@ -477,7 +478,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
 /obj/item/device/slime_scanner/proc/list_gases(var/gases)

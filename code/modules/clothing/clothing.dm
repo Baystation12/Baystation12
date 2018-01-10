@@ -250,7 +250,7 @@ BLIND     // can't see anything
 	blood_overlay_type = "bloodyhands"
 
 /obj/item/clothing/gloves/Initialize()
-	if(item_flags & PREMODIFIED)
+	if(item_flags & ITEM_FLAG_PREMODIFIED)
 		cut_fingertops()
 
 	. = ..()

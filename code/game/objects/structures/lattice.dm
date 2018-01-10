@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	plane = ABOVE_PLATING_PLANE
 	layer = LATTICE_LAYER
-	//	flags = CONDUCT
+	//	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/structure/lattice/Initialize()
 	. = ..()

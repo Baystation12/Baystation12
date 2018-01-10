@@ -6,7 +6,8 @@
 	anchored = 1
 	w_class = ITEM_SIZE_HUGE
 	canhear_range = 2
-	flags = CONDUCT | NOBLOODY
+	atom_flags = ATOM_FLAG_NO_BLOOD
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	layer = ABOVE_WINDOW_LAYER
 	var/number = 0
 	var/last_tick //used to delay the powercheck

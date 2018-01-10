@@ -44,13 +44,13 @@
 
 	. += "\n"
 
-	if(flags & AIRTIGHT)
+	if(item_flags & ITEM_FLAG_AIRTIGHT)
 		. += "It is airtight. \n"
 
-	if(flags & STOPPRESSUREDAMAGE)
+	if(item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE)
 		. += "Wearing this will protect you from the vacuum of space. \n"
 
-	if(flags & THICKMATERIAL)
+	if(item_flags & ITEM_FLAG_THICKMATERIAL)
 		. += "The material is exceptionally thick. \n"
 
 	if(max_heat_protection_temperature == FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE)

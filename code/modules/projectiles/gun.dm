@@ -38,7 +38,7 @@
 		)
 	icon_state = "detective"
 	item_state = "gun"
-	flags =  CONDUCT
+	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	w_class = ITEM_SIZE_NORMAL

@@ -38,7 +38,7 @@
 		var/area/A = get_area(C)
 		if(!A)
 			continue
-		if(A.flags & AREA_RAD_SHIELDED)
+		if(A.area_flags & AREA_FLAG_RAD_SHIELDED)
 			continue
 		if(istype(C,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = C

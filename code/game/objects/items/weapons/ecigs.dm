@@ -207,7 +207,7 @@ obj/item/clothing/mask/smokable/ecig/deluxe/examine(mob/user)
 	icon_state = "ecartridge"
 	matter = list("metal" = 50, "glass" = 10)
 	volume = 20
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/New()
 	create_reagents(volume)

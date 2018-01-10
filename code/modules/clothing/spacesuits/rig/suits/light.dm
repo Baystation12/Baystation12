@@ -9,7 +9,7 @@
 	siemens_coefficient = 0.4
 	emp_protection = 10
 	online_slowdown = 0
-	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL
 	offline_slowdown = TINT_NONE
 	offline_vision_restriction = TINT_NONE
 
@@ -59,14 +59,14 @@
 //The cybersuit is not space-proof. It does however, have good siemens_coefficient values
 /obj/item/clothing/head/lightrig/hacker
 	name = "HUD"
-	flags = 0
+	item_flags = 0
 
 /obj/item/clothing/suit/lightrig/hacker
 	siemens_coefficient = 0.2
 
 /obj/item/clothing/shoes/lightrig/hacker
 	siemens_coefficient = 0.2
-	flags = NOSLIP //All the other rigs have magboots anyways, hopefully gives the hacker suit something more going for it.
+	item_flags = ITEM_FLAG_NOSLIP //All the other rigs have magboots anyways, hopefully gives the hacker suit something more going for it.
 
 /obj/item/clothing/gloves/lightrig/hacker
 	siemens_coefficient = 0

@@ -7,7 +7,7 @@
 	icon_state = "telecrystal"
 	w_class = ITEM_SIZE_TINY
 	max_amount = 50
-	flags = NOBLUDGEON
+	item_flags = ITEM_FLAG_NO_BLUDGEON
 	origin_tech = list(TECH_MATERIAL = 6, TECH_BLUESPACE = 4)
 
 /obj/item/stack/telecrystal/afterattack(var/obj/item/I as obj, mob/user as mob, proximity)

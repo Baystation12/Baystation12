@@ -35,7 +35,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags = NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_EMBED
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED
 	appearance_flags = HAS_EYE_COLOR | HAS_SKIN_COLOR
 
 	spawn_flags = SPECIES_IS_RESTRICTED

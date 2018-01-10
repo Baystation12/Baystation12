@@ -17,7 +17,7 @@
 	remains_type = /obj/effect/decal/cleanable/ash
 	death_message = "dissolves into ash..."
 
-	flags = NO_SCAN | NO_SLIP | NO_POISON | NO_EMBED
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED
 	spawn_flags = SPECIES_IS_RESTRICTED
 
 	genders = list(NEUTER)
