@@ -1,3 +1,31 @@
+/datum/shuttle/autodock/ferry/emergency/evac
+	name = "Escape"
+	location = 1
+	warmup_time = 10
+	shuttle_area = /area/shuttle/escape/centcom
+	waypoint_offsite = "nav_evac_start"
+	waypoint_station = "nav_evac_station"
+	landmark_transition = "nav_evac_transit"
+	dock_target = "escape_shuttle"
+
+
+/obj/effect/shuttle_landmark/evac/start
+	name = "CentCom Dock"
+//	base_area = /area/shuttle/escape/centcom
+	landmark_tag = "nav_evac_start"
+	docking_controller = "centcom_dock"
+
+/obj/effect/shuttle_landmark/evac/transit
+	name = "In transit"
+//	base_area = /area/shuttle/escape/transit
+	landmark_tag = "nav_evac_transit"
+
+/obj/effect/shuttle_landmark/evac/out
+	name = "Docked to station"
+	landmark_tag = "nav_evac_station"
+//	base_area = /area/shuttle/escape/station
+	docking_controller = "escape_dock"
+
 /*
 // Escape shuttle and pods
 /datum/shuttle/autodock/ferry/emergency/centcom

@@ -35,7 +35,7 @@
 
 	return ..()
 
-/datum/shuttle/autodock/shuttle_moved()
+/datum/shuttle/autodock/shuttle_moved(var/obj/effect/shuttle_landmark/destination, var/list/turf_translation)
 	force_undock() //bye!
 	..()
 

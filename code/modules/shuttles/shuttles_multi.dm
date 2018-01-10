@@ -43,7 +43,7 @@
 	else
 		home_waypoint = current_location
 
-/datum/shuttle/autodock/multi/antag/shuttle_moved()
+/datum/shuttle/autodock/multi/antag/shuttle_moved(var/obj/effect/shuttle_landmark/destination, var/list/turf_translation)
 	if(current_location == home_waypoint)
 		announce_arrival()
 	else if(next_location == home_waypoint)

@@ -27,11 +27,11 @@
 /datum/shuttle/autodock/ferry/emergency/long_jump(var/destination, var/interim, var/travel_time, var/direction)
 	..(destination, interim, emergency_controller.get_long_jump_time(), direction)
 
-/datum/shuttle/autodock/ferry/emergency/shuttle_moved()
-	if(next_location != waypoint_station)
+/datum/shuttle/autodock/ferry/emergency/shuttle_moved(var/obj/effect/shuttle_landmark/destination, var/list/turf_translation)
+	if(current_location == waypoint_station && destination == landmark_transition)
 		emergency_controller.shuttle_leaving() // This is a hell of a line. v
 		priority_announcement.Announce(replacetext(replacetext((emergency_controller.emergency_evacuation ? GLOB.using_map.emergency_shuttle_leaving_dock : GLOB.using_map.shuttle_leaving_dock), "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(emergency_controller.get_eta()/60,1)] minute\s"))
-	else if(next_location == waypoint_offsite && emergency_controller.has_evacuated())
+	else if(destination == waypoint_offsite && emergency_controller.has_evacuated())
 		emergency_controller.shuttle_evacuated()
 	..()
 
