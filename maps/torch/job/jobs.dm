@@ -1115,6 +1115,7 @@
 		"Entertainer",
 		"Independent Observer",
 		"Sociologist",
+		"Trainer",
 		"Off-Duty")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/passenger
 	allowed_branches = list(/datum/mil_branch/civilian)
