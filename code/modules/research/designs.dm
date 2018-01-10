@@ -661,7 +661,7 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/xray/pistol
 	sort_string = "TAFAA"
 
-/datum/design/item/weapon/xraypistol
+/datum/design/item/weapon/xrayrifle
 	id = "xrayrifle"
 	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "uranium" = 1000)
@@ -703,19 +703,12 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/toxgun
 	sort_string = "TAJAA"
 
-/datum/design/item/weapon/mindflayer
-	id = "mindflayer"
-	req_tech = list(TECH_COMBAT = 5, TECH_MAGNET = 4)
-	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "uranium" = 1000)
-	build_path = /obj/item/weapon/gun/energy/mindflayer
-	sort_string = "TAJAB"
-
 /datum/design/item/weapon/decloner
 	id = "decloner"
 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 7, TECH_BIO = 5, TECH_POWER = 6)
 	materials = list("gold" = 5000,"uranium" = 10000, "mutagen" = 40)
 	build_path = /obj/item/weapon/gun/energy/decloner
-	sort_string = "TAJAC"
+	sort_string = "TAJAB"
 
 /datum/design/item/weapon/smg
 	id = "smg"
