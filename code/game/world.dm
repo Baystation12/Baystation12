@@ -112,7 +112,8 @@
 	populate_material_list()
 /*
 	if(config.generate_map)
-		GLOB.using_map.perform_map_generation()
+		if(GLOB.using_map.perform_map_generation())
+			GLOB.using_map.refresh_mining_turfs()
 	GLOB.using_map.build_exoplanets()
 */
 	// Create robolimbs for chargen.
@@ -177,27 +178,35 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["roundduration"] = roundduration2text()
 		s["map"] = GLOB.using_map.full_name
 
-		var/active = 0
-		var/list/players = list()
-		var/list/admins = list()
-		var/legacy = input["status"] != "2"
-		for(var/client/C in GLOB.clients)
-			if(C.holder)
-				if(C.is_stealthed())
-					continue	//so stealthmins aren't revealed by the hub
-				admins[C.key] = C.holder.rank
-			if(legacy)
-				s["player[players.len]"] = C.key
-			players += C.key
-			if(istype(C.mob, /mob/living))
-				active++
+		if(input["status"] == "2")
+			var/list/players = list()
+			var/list/admins = list()
 
-		s["players"] = players.len
-		s["admins"] = admins.len
-		if(!legacy)
+			for(var/client/C in GLOB.clients)
+				if(C.holder)
+					if(C.is_stealthed())
+						continue
+					admins[C.key] = C.holder.rank
+				players += C.key
+
+			s["players"] = players.len
 			s["playerlist"] = list2params(players)
+			s["admins"] = admins.len
 			s["adminlist"] = list2params(admins)
-			s["active_players"] = active
+		else
+			var/n = 0
+			var/admins = 0
+
+			for(var/client/C in GLOB.clients)
+				if(C.holder)
+					if(C.is_stealthed())
+						continue	//so stealthmins aren't revealed by the hub
+					admins++
+				s["player[n]"] = C.key
+				n++
+
+			s["players"] = n
+			s["admins"] = admins
 
 		return list2params(s)
 
@@ -554,7 +563,7 @@ var/global/cpustate = "Unknown"
 				cpustate = "Terrible Performance"
 			if(100 to 1000)
 				cpustate = "Server Overloaded"
-		sleep(50)
+		sleep(30)
 
 /proc/load_configuration()
 	config = new /datum/configuration()

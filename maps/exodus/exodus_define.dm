@@ -7,6 +7,7 @@
 	lobby_icon = 'maps/exodus/exodus_lobby.dmi'
 
 	load_legacy_saves = TRUE
+	use_overmap = 0
 
 	station_levels = list(1, 2)
 	admin_levels = list(3)
