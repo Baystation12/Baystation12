@@ -278,7 +278,7 @@
 		else if(dist <= consume_range)
 			consume(X)
 
-	//for (var/turf/T in trange(grav_pull, src)) //TODO: Create a similar trange for orange to prevent snowflake of self check.
+	//for (var/turf/T in RANGE_TURFS(grav_pull, src)) //TODO: Create a similar RANGE_TURFS for orange to prevent snowflake of self check.
 	//	consume(T)
 
 	return

@@ -1098,70 +1098,17 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)
 	CRASH(msg)
-
+/*
 /proc/spiral_range_turfs2(dist=0, center=usr, tick_checked)
 	. = list()
 	var/dist2 = 1
 	if(!center)	return .
-	for(var/T in trange(dist, center))
+	for(var/T in RANGE_TURFS(dist, center))
 		var/turf/TU = T
 		if(get_dist(TU, center) == dist2)
 			. += TU
 
 		dist++
-
-//similar function to RANGE_TURFS(), but will search spiralling outwards from the center (like the above, but only turfs)
-/proc/spiral_range_turfs(dist=0, center=usr, orange=0, tick_checked)
-	. = list()
-	if(!dist)
-		. += center
-		return .
-
-	var/turf/t_center = get_turf(center)
-	if(!t_center)
-		return .
-
-	var/turf/T
-	var/y
-	var/x
-	var/c_dist = 1
-
-	if(!orange)
-		. += t_center
-
-	while( c_dist <= dist )
-		y = t_center.y + c_dist
-		x = t_center.x - c_dist + 1
-		for(x in x to t_center.x+c_dist)
-			T = locate(x,y,t_center.z)
-			if(T)
-				. += T
-
-		y = t_center.y + c_dist - 1
-		x = t_center.x + c_dist
-		for(y in t_center.y-c_dist to y)
-			T = locate(x,y,t_center.z)
-			if(T)
-				. += T
-
-		y = t_center.y - c_dist
-		x = t_center.x + c_dist - 1
-		for(x in t_center.x-c_dist to x)
-			T = locate(x,y,t_center.z)
-			if(T)
-				. += T
-
-		y = t_center.y - c_dist + 1
-		x = t_center.x - c_dist
-		for(y in y to t_center.y+c_dist)
-			T = locate(x,y,t_center.z)
-			if(T)
-				. += T
-		c_dist++
-		if(tick_checked)
-			CHECK_TICK
-
-	return .
-
+*/
 /proc/pass()
 	return

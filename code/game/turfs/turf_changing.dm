@@ -64,7 +64,7 @@
 
 	SSair.mark_for_update(src) //handle the addition of the new turf.
 
-	for(var/turf/space/S in trange(1,W))
+	for(var/turf/space/S in RANGE_TURFS(1,W))
 		S.update_starlight()
 
 	W.post_change()

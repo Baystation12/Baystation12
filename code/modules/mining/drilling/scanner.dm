@@ -27,7 +27,8 @@
 		"exotic matter" = 0
 		)
 	var/new_data = 0
-	for(var/turf/simulated/T in trange(2, get_turf(user)))
+	var/turf/loc = get_turf(user)
+	for(var/turf/simulated/T in RANGE_TURFS(2, loc))
 
 		if(!T.has_resources)
 			continue

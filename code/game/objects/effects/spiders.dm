@@ -237,7 +237,7 @@
 
 	if(isturf(loc))
 		if(prob(25))
-			var/list/nearby = trange(5, src) - loc
+			var/list/nearby = RANGE_TURFS(5, src) - loc
 			if(nearby.len)
 				var/target_atom = pick(nearby)
 				walk_to(src, target_atom, 5)

@@ -70,7 +70,7 @@
 	if(continuous)
 		fitting_turfs = origin_turf.CardinalTurfs(FALSE)
 	else
-		fitting_turfs = trange(range, origin_turf)
+		fitting_turfs = RANGE_TURFS(range, origin_turf)
 	fitting_turfs = shuffle(fitting_turfs)
 	for(var/turf/T in fitting_turfs)
 		if(T in candidate_turfs)
