@@ -1,0 +1,4 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - bugfix: "Synths can no longer fill mechfabs with their matter synths."
