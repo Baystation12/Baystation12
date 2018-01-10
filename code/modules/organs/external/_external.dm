@@ -42,7 +42,7 @@
 	var/list/markings = list()         // Markings (body_markings) to apply to the icon
 
 	// Wound and structural data.
-	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
+	var/wound_update_accuracy = 2      // how often wounds should be updated, a higher number means less often
 	var/list/wounds = list()           // wound datum list.
 	var/number_wounds = 0              // number of wounds, which is NOT wounds.len!
 	var/obj/item/organ/external/parent // Master-limb.
