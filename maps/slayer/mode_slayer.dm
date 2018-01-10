@@ -51,7 +51,8 @@
 
 /datum/game_mode/slayer/proc/get_assigned_species(var/job_name)
 	for(var/species in species_included)
-		if(job_name in species_included[species])
+		var/list/species_job_list = species_included[species]
+		if(job_name in species_job_list)
 			return species
 
 /datum/game_mode/slayer/proc/make_correct_species()
@@ -59,10 +60,11 @@
 		if(H.species.name in species_included)
 			continue
 		var/new_species_name = get_assigned_species(H.mind.assigned_role) //Choose which species datum we're going to use.
-		if(!new_species_name)
-			new_species_name = pick(species_included)
 		var/wanted_outfit_name = "[H.mind.assigned_role] [new_species_name]" //Create a string for the wanted outfit name
 		var/decl/hierarchy/outfit/outfit = get_outfit_datum(wanted_outfit_name) //Get the outfit
+		if(isnull(outfit))
+			error("Slayer Outfitter failed to find outfit with outfit name [wanted_outfit_name]")
+			return
 		H.set_species(new_species_name)
 		outfit.equip(H)
 

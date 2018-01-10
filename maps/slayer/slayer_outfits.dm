@@ -49,10 +49,8 @@ The name of the outfit will need to be "[job name] [species name]"
 	shoes = /obj/item/clothing/shoes/sangheili/minor
 	head = /obj/item/clothing/head/helmet/sangheili/minor
 
-	hierarchy_type = /decl/hierarchy/outfit/sangheili_slayer
-
 /decl/hierarchy/outfit/job/slayer/spartan_slayer_covenant
 	name = "Spartans Spartan"
 	uniform = null
-	suit = /obj/item/clothing/suit/armor/special/spartan/red
-	head = /obj/item/clothing/head/helmet/spartan/red
+	suit = /obj/item/clothing/suit/armor/special/spartan/slayer
+	head = /obj/item/clothing/head/helmet/spartan

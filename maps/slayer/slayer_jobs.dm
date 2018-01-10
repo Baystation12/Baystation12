@@ -25,7 +25,6 @@
 
 /datum/job/slayer_ffa
 	title = "Spartan Slayer"
-	//latejoin_at_spawnpoints = 1
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
@@ -37,7 +36,6 @@
 
 /datum/job/team_slayer_covenant
 	title = "Elites"
-	//latejoin_at_spawnpoints = 1
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
@@ -49,7 +47,6 @@
 
 /datum/job/slayer_spartan_covenant
 	title = "Spartans"
-	//latejoin_at_spawnpoints = 1
 	create_record = 0
 	account_allowed = 0
 	generate_email = 0
