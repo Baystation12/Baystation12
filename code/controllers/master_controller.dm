@@ -28,7 +28,7 @@ datum/controller/game_controller/New()
 		job_master = new /datum/controller/occupations()
 		job_master.SetupOccupations(setup_titles=1)
 		job_master.LoadJobs("config/jobs.txt")
-		admin_notice("<span class='danger'>Job setup complete</span>", R_DEBUG)
+		report_progress("Job setup complete")
 
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
@@ -38,9 +38,7 @@ datum/controller/game_controller/proc/setup()
 		createRandomZlevel()
 
 	setup_objects()
-	CHECK_TICK
 	setupgenetics()
-	CHECK_TICK
 	SetupXenoarch()
 
 	transfer_controller = new
@@ -49,44 +47,21 @@ datum/controller/game_controller/proc/setup()
 	initialization_stage |= INITIALIZATION_COMPLETE
 
 datum/controller/game_controller/proc/setup_objects()
-	set background=1
+	set background = 1
 
 	// Do these first since character setup will rely on them
 
 	initialization_stage |= INITIALIZATION_HAS_BEGUN
 
-	if(config.generate_map)
-		report_progress("Performing mining outpost generation..")
-		if(GLOB.using_map.perform_map_generation())
-			GLOB.using_map.refresh_mining_turfs()
-	CHECK_TICK
 	if(GLOB.using_map.use_overmap)
 		report_progress("Initializing overmap events")
 		overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
 
-/*
-	CHECK_TICK
-	report_progress("Initializing atmos machinery")
-	for(var/obj/machinery/atmospherics/A in SSmachines.machinery)
-		A.atmos_init()
-		CHECK_SLEEP_MASTER
-	CHECK_TICK
-	for(var/obj/machinery/atmospherics/unary/U in SSmachines.machinery)
-		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
-			var/obj/machinery/atmospherics/unary/vent_pump/T = U
-			T.broadcast_status()
-		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
-			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
-			T.broadcast_status()
-		CHECK_SLEEP_MASTER
-	CHECK_TICK
-	report_progress("Initializing pipe networks")
-	for(var/obj/machinery/atmospherics/machine in SSmachines.machinery)
-		machine.build_network()
-		CHECK_SLEEP_MASTER
-	CHECK_TICK
->>>>>>> Apollo-Dev
-*/
+	if(config.generate_map)
+		report_progress("Performing mining outpost generation..")
+		if(GLOB.using_map.perform_map_generation())
+			GLOB.using_map.refresh_mining_turfs()
+
 	report_progress("Initializing lathe recipes")
 	populate_lathe_recipes()
 

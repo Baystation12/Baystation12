@@ -27,13 +27,12 @@
 
 /area/Initialize()
 	. = ..()
+	initmachinelist()
 	if(!requires_power || !apc)
 		power_light = 0
 		power_equip = 0
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
-	initmachinelist()
-
 /area/proc/get_contents()
 	return contents
 
@@ -217,7 +216,7 @@
 /area/proc/set_lightswitch(var/new_switch)
 	if(lightswitch != new_switch)
 		lightswitch = new_switch
-		for(var/obj/machinery/light_switch/L in src)
+		for(var/obj/machinery/light_switch/L in machinecache)
 			L.sync_state()
 		update_icon()
 		power_change()
