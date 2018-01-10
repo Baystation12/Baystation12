@@ -20,7 +20,8 @@
 	var/adminhelped = 0
 
 	var/staffwarn = null
-
+	var/lastping = 0
+	var/avgping = 0
 		///////////////
 		//SOUND STUFF//
 		///////////////

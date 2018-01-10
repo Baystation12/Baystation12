@@ -632,6 +632,10 @@
 			stat("Local Date", stationdate2text())
 			stat("Round Duration", roundduration2text())
 			stat("CPU Status", cpustate)
+		if(client)
+			winset(client, null, "command=.update_ping+[world.time+world.tick_lag*TICK_USAGE_REAL/100]")
+			stat("Ping: [round(client.lastping, 1)]ms (Average: [round(client.avgping, 1)]ms)")
+
 		if(client.holder || isghost(client.mob))
 			stat("Location:", "([x], [y], [z]) [loc]")
 			stat("Enf. Score:", "[enfmods.modscore]")
