@@ -27,9 +27,9 @@
 		if(pulse)
 			handle_heartbeat()
 			if(pulse == PULSE_2FAST && prob(1))
-				take_damage(0.5)
+				take_damage(rand(0.4, 0.6)
 			if(pulse == PULSE_THREADY && prob(5))
-				take_damage(0.5)
+				take_damage(rand(0.5, 1.5))
 		handle_blood()
 	..()
 
