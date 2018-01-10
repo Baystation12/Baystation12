@@ -11,6 +11,10 @@
 		"nav_icarus_antag"
 	)
 
+/obj/effect/overmap/sector/icarus/New(nloc, max_x, max_y)
+	name = "[generate_planet_name()], \a [name]"
+	..()
+
 obj/effect/icarus/irradiate
 	var/radiation_power = 20//20 Bq. Dangerous but survivable for 10-15 minutes if crew is too lazy to read away map description
 	var/datum/radiation_source/S

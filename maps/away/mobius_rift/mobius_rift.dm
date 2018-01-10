@@ -1,7 +1,7 @@
 #include "mobius_rift_areas.dm"
 
 /obj/effect/overmap/sector/mobius_rift
-	name = "Hollow asteroid."
+	name = "unusual asteroid"
 	desc = "Sensors error: ERROR #E0x003141592: recursive stack overflow for CALCULATE_APPROXIMATE_SIZE()."
 	icon_state = "object"
 	known = 0
