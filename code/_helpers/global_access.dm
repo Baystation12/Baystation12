@@ -49,8 +49,10 @@
 			return global.SSlegacy;
 		if("SSmachines")
 			return global.SSmachines;
-		if("SSmapping")
-			return global.SSmapping;
+		if("SSlighting")
+			return global.SSmachines;
+//		if("SSmapping")
+//			return global.SSmapping;
 		if("SSmobs")
 			return global.SSmobs;
 		if("SSobj")
@@ -1092,8 +1094,10 @@
 			global.SSlegacy=newval;
 		if("SSmachines")
 			global.SSmachines=newval;
-		if("SSmapping")
-			global.SSmapping=newval;
+		if("SSlighting")
+			global.SSlighting=newval;
+//		if("SSmapping")
+//			global.SSmapping=newval;
 		if("SSmobs")
 			global.SSmobs=newval;
 		if("SSobj")
@@ -2110,6 +2114,7 @@
 	"SSfastprocess",
 	"SSgarbage",
 	"SSlegacy",
+	"SSlighting",
 	"SSmachines",
 	"SSmapping",
 	"SSmobs",

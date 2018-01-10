@@ -107,7 +107,7 @@
 //Returns an assoc list that describes how turfs would be changed if the
 //turfs in turfs_src were translated by shifting the src_origin to the dst_origin
 /proc/get_turf_translation(turf/src_origin, turf/dst_origin, list/turfs_src)
-	. = list()
+	var/list/L = list()
 	for(var/turf/source in turfs_src)
 		var/x_pos = (source.x - src_origin.x)
 		var/y_pos = (source.y - src_origin.y)
@@ -116,9 +116,9 @@
 		var/turf/target = locate(dst_origin.x + x_pos, dst_origin.y + y_pos, dst_origin.z + z_pos)
 		if(!target)
 			error("Null turf in translation @ ([dst_origin.x + x_pos], [dst_origin.y + y_pos], [dst_origin.z + z_pos])")
-		.[source] = target //if target is null, preserve that information in the turf map
+		L[source] = target //if target is null, preserve that information in the turf map
 
-	return .
+	return L
 
 
 /proc/translate_turfs(var/list/translation, var/area/base_area = null, var/turf/base_turf)

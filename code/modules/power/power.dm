@@ -83,7 +83,8 @@
 	if(check_area)
 		return check_area.powered(chan)			// return power status of the area
 	else
-		return MyArea.powered(chan)			// return power status of the area
+		if(MyArea)
+			return MyArea.powered(chan)			// return power status of the area
 
 // increment the power usage stats for an area
 /obj/machinery/proc/use_power(var/amount, var/chan = -1) // defaults to power_channel
@@ -130,7 +131,7 @@
 //almost never called, overwritten by all power machines but terminal and generator
 /obj/machinery/power/attackby(obj/item/weapon/W, mob/user)
 
-	if(isCoil(W))
+	if(istype(W, /obj/item/stack/cable_coil))
 
 		var/obj/item/stack/cable_coil/coil = W
 
