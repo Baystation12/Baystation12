@@ -212,25 +212,23 @@
 	user.set_machine(src)
 	interact(user)
 
-/obj/machinery/autolathe/Topic(href, href_list)
-
-	if(..())
-		return
-
-	usr.set_machine(src)
-
+/obj/machinery/autolathe/CanUseTopic(user, href_list)
 	if(busy)
-		to_chat(usr, "<span class='notice'>The autolathe is busy. Please wait for completion of previous operation.</span>")
-		return
+		to_chat(user, "<span class='notice'>The autolathe is busy. Please wait for completion of previous operation.</span>")
+		return min(STATUS_UPDATE, ..())
+	return ..()
 
+/obj/machinery/autolathe/OnTopic(user, href_list, state)
+	set waitfor = 0
 	if(href_list["change_category"])
-
 		var/choice = input("Which category do you wish to display?") as null|anything in autolathe_categories+"All"
-		if(!choice) return
+		if(!choice || !CanUseTopic(user, state))
+			return TOPIC_HANDLED
 		show_category = choice
+		. = TOPIC_REFRESH
 
-	if(href_list["make"] && machine_recipes)
-
+	else if(href_list["make"] && machine_recipes)
+		. = TOPIC_REFRESH
 		var/index = text2num(href_list["make"])
 		var/multiplier = text2num(href_list["multiplier"])
 		var/datum/autolathe/recipe/making
@@ -240,10 +238,8 @@
 
 		//Exploit detection, not sure if necessary after rewrite.
 		if(!making || multiplier < 0 || multiplier > 100)
-			var/turf/exploit_loc = get_turf(usr)
-			message_admins("[key_name_admin(usr)] tried to exploit an autolathe to duplicate an item! ([exploit_loc ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[exploit_loc.x];Y=[exploit_loc.y];Z=[exploit_loc.z]'>JMP</a>" : "null"])", 0)
-			log_admin("EXPLOIT : [key_name(usr)] tried to exploit an autolathe to duplicate an item!")
-			return
+			log_and_message_admins("tried to exploit an autolathe to duplicate an item!", user)
+			return TOPIC_HANDLED
 
 		busy = 1
 		update_use_power(2)
@@ -252,7 +248,7 @@
 		for(var/material in making.resources)
 			if(!isnull(stored_material[material]))
 				if(stored_material[material] < round(making.resources[material] * mat_efficiency) * multiplier)
-					return
+					return TOPIC_REFRESH
 
 		//Consume materials.
 		for(var/material in making.resources)
@@ -268,7 +264,7 @@
 		update_use_power(1)
 
 		//Sanity check.
-		if(!making || !src) return
+		if(!making || !QDELETED(src)) return TOPIC_HANDLED
 
 		//Create the desired item.
 		var/obj/item/I = new making.path(loc)
@@ -277,7 +273,8 @@
 			S.amount = multiplier
 			S.update_icon()
 
-	updateUsrDialog()
+	if(. == TOPIC_REFRESH)
+		interact(user)
 
 /obj/machinery/autolathe/update_icon()
 	icon_state = (panel_open ? "autolathe_t" : "autolathe")

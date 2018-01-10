@@ -84,9 +84,7 @@
 			A.being_used = 0
 			scanned_object = null
 
-/obj/machinery/artifact_analyser/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/machinery/artifact_analyser/OnTopic(user, href_list)
 	if(href_list["begin_scan"])
 		if(!owned_scanner)
 			reconnect_scanner()
@@ -115,15 +113,18 @@
 				break
 			if(!scanned_object)
 				src.visible_message("<b>[name]</b> states, \"Unable to isolate scan target.\"")
-	if(href_list["halt_scan"])
+		. = TOPIC_REFRESH
+	else if(href_list["halt_scan"])
 		scan_in_progress = 0
 		src.visible_message("<b>[name]</b> states, \"Scanning halted.\"")
+		. = TOPIC_REFRESH
 
-	if(href_list["close"])
-		usr.unset_machine(src)
-		usr << browse(null, "window=artanalyser")
+	else if(href_list["close"])
+		close_browser(user, "window=artanalyser")
+		return TOPIC_HANDLED
 
-	updateDialog()
+	if(. == TOPIC_REFRESH)
+		interact(user)
 
 //hardcoded responses, oh well
 /obj/machinery/artifact_analyser/proc/get_scan_info(var/obj/scanned_obj)

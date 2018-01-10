@@ -137,29 +137,28 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/chemical_dispenser/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/chemical_dispenser/OnTopic(user, href_list)
 	if(href_list["amount"])
 		amount = round(text2num(href_list["amount"]), 1) // round to nearest 1
 		amount = max(0, min(120, amount)) // Since the user can actually type the commands himself, some sanity checking
+		return TOPIC_REFRESH
 
-	else if(href_list["dispense"])
+	if(href_list["dispense"])
 		var/label = href_list["dispense"]
 		if(cartridges[label] && container && container.is_open_container())
 			var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = cartridges[label]
 			C.reagents.trans_to(container, amount)
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
 
 	else if(href_list["ejectBeaker"])
 		if(container)
 			var/obj/item/weapon/reagent_containers/B = container
-			B.loc = loc
+			B.dropInto(loc)
 			container = null
 			update_icon()
-
-	add_fingerprint(usr)
-	return 1 // update UIs attached to this object
+			return TOPIC_REFRESH
+		return TOPIC_HANDLED
 
 /obj/machinery/chemical_dispenser/attack_ai(mob/user as mob)
 	ui_interact(user)

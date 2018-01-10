@@ -272,13 +272,10 @@ var/list/global/tank_gauge_cache = list()
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/item/weapon/tank/Topic(href, href_list)
+/obj/item/weapon/tank/Topic(user, href_list, state = GLOB.inventory_state)
 	..()
-	if (usr.stat|| usr.restrained())
-		return 0
-	if (src.loc != usr)
-		return 0
 
+/obj/item/weapon/tank/OnTopic(user, href_list)
 	if (href_list["dist_p"])
 		if (href_list["dist_p"] == "reset")
 			src.distribute_pressure = TANK_DEFAULT_RELEASE_PRESSURE
@@ -288,11 +285,12 @@ var/list/global/tank_gauge_cache = list()
 			var/cp = text2num(href_list["dist_p"])
 			src.distribute_pressure += cp
 		src.distribute_pressure = min(max(round(src.distribute_pressure), 0), TANK_MAX_RELEASE_PRESSURE)
+		return TOPIC_REFRESH
+
 	if (href_list["stat"])
 		toggle_valve(usr)
+		return TOPIC_REFRESH
 
-	src.add_fingerprint(usr)
-	return 1
 
 /obj/item/weapon/tank/proc/toggle_valve(var/mob/user)
 	if(istype(loc,/mob/living/carbon))

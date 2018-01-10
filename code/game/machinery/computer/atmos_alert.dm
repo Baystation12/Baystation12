@@ -57,10 +57,7 @@ var/global/list/minor_air_alarms = list()
 				icon_screen = initial(icon_screen)
 	..()
 
-/obj/machinery/computer/atmos_alert/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/computer/atmos_alert/OnTopic(user, href_list)
 	if(href_list["clear_alarm"])
 		var/datum/alarm/alarm = locate(href_list["clear_alarm"]) in atmosphere_alarm.alarms
 		if(alarm)
@@ -68,8 +65,8 @@ var/global/list/minor_air_alarms = list()
 				var/obj/machinery/alarm/air_alarm = alarm_source.source
 				if(istype(air_alarm))
 					var/list/new_ref = list("atmos_reset" = 1)
-					air_alarm.Topic(href, new_ref, state = air_alarm_topic)
-		return 1
+					air_alarm.Topic(air_alarm, new_ref, state = air_alarm_topic)
+		return TOPIC_REFRESH
 
 
 var/datum/topic_state/air_alarm_topic/air_alarm_topic = new()

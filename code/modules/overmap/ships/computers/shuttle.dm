@@ -78,8 +78,8 @@
 		)
 
 /obj/machinery/computer/shuttle_control/explore/handle_topic_href(var/datum/shuttle/autodock/overmap/shuttle, var/list/href_list)
-	if(..())
-		return 1
+	if((. = ..()) != null)
+		return
 
 	if(href_list["pick"])
 		var/list/possible_d = shuttle.get_possible_destinations()
@@ -91,3 +91,4 @@
 		possible_d = shuttle.get_possible_destinations()
 		if(CanInteract(usr, GLOB.default_state) && (D in possible_d))
 			shuttle.set_destination(possible_d[D])
+		return TOPIC_REFRESH

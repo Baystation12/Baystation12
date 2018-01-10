@@ -42,26 +42,19 @@
 	user << browse(dat, "window=freezegun;size=450x300;can_resize=1;can_close=1;can_minimize=1")
 	onclose(user, "window=freezegun", src)
 
+/obj/item/weapon/gun/energy/temperature/Topic(user, href_list, state = GLOB.inventory_state)
+	..()
 
-/obj/item/weapon/gun/energy/temperature/Topic(href, href_list)
-	if (..())
-		return 1
-	usr.set_machine(src)
-	src.add_fingerprint(usr)
-
-
-
+/obj/item/weapon/gun/energy/temperature/OnTopic(user, href_list)
 	if(href_list["temp"])
 		var/amount = text2num(href_list["temp"])
 		if(amount > 0)
 			src.current_temperature = min(500, src.current_temperature+amount)
 		else
 			src.current_temperature = max(0, src.current_temperature+amount)
-	if (istype(src.loc, /mob))
-		attack_self(src.loc)
-	src.add_fingerprint(usr)
-	return
+		. = TOPIC_REFRESH
 
+		attack_self(user)
 
 /obj/item/weapon/gun/energy/temperature/Process()
 	switch(temperature)

@@ -173,26 +173,23 @@
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
-/obj/item/weapon/gun/projectile/dartgun/Topic(href, href_list)
-	if(..()) return 1
-
-	if(!Adjacent(usr) || usr.incapacitated())
-		return
-
-	src.add_fingerprint(usr)
-
+/obj/item/weapon/gun/projectile/dartgun/OnTopic(user, href_list)
 	if(href_list["stop_mix"])
 		var/index = text2num(href_list["stop_mix"])
 		mixing -= beakers[index]
+		. = TOPIC_REFRESH
 	else if (href_list["mix"])
 		var/index = text2num(href_list["mix"])
 		mixing |= beakers[index]
+		. = TOPIC_REFRESH
 	else if (href_list["eject"])
 		var/index = text2num(href_list["eject"])
 		if(beakers[index])
 			remove_beaker(beakers[index], usr)
+		. = TOPIC_REFRESH
 	else if (href_list["eject_cart"])
 		unload_ammo(usr)
+		. = TOPIC_REFRESH
 
 	Interact(usr)
 

@@ -17,56 +17,6 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/Topic(href, href_list, var/datum/topic_state/state = GLOB.default_state)
-	if(..())
-		return 1
-
-	// In the far future no checks are made in an overriding Topic() beyond if(..()) return
-	// Instead any such checks are made in CanUseTopic()
-	if(CanUseTopic(usr, state, href_list) == STATUS_INTERACTIVE)
-		CouldUseTopic(usr)
-		return 0
-
-	CouldNotUseTopic(usr)
-	return 1
-
-/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state)
-	if(user.CanUseObjTopic(src))
-		return ..()
-	to_chat(user, "<span class='danger'>\icon[src]Access Denied!</span>")
-	return STATUS_CLOSE
-
-/mob/living/silicon/CanUseObjTopic(var/obj/O)
-	var/id = src.GetIdCard()
-	return O.check_access(id)
-
-/mob/proc/CanUseObjTopic()
-	return 1
-
-/obj/proc/CouldUseTopic(var/mob/user)
-	user.AddTopicPrint(src)
-
-/mob/proc/AddTopicPrint(var/atom/target)
-	if(!istype(target))
-		return
-	target.add_hiddenprint(src)
-
-/mob/living/AddTopicPrint(var/atom/target)
-	if(!istype(target))
-		return
-	if(Adjacent(target))
-		target.add_fingerprint(src)
-	else
-		target.add_hiddenprint(src)
-
-/mob/living/silicon/ai/AddTopicPrint(var/atom/target)
-	if(!istype(target))
-		return
-	target.add_hiddenprint(src)
-
-/obj/proc/CouldNotUseTopic(var/mob/user)
-	// Nada
-
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
 /obj/assume_air(datum/gas_mixture/giver)
