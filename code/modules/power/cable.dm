@@ -202,7 +202,7 @@ var/list/possible_cable_coil_colours
 		shock(user, 5, 0.2)
 
 	else
-		if (W.flags & CONDUCT)
+		if (W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 			shock(user, 50, 0.7)
 
 	src.add_fingerprint(user)
@@ -477,7 +477,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	throw_speed = 2
 	throw_range = 5
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 20)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")

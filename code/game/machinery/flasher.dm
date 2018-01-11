@@ -14,7 +14,7 @@
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 2
-	flags = PROXMOVE
+	movable_flags = MOVABLE_FLAG_PROXMOVE
 	var/_wifi_id
 	var/datum/wifi/receiver/button/flasher/wifi_receiver
 

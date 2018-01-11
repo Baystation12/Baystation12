@@ -12,7 +12,8 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60"
 	w_class = ITEM_SIZE_SMALL
-	flags = 0
+	item_flags = 0
+	obj_flags = 0
 	volume = 60
 
 	on_reagent_change()

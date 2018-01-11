@@ -6,7 +6,7 @@
 	max_shells = 4
 	w_class = ITEM_SIZE_HUGE
 	force = 10
-	flags =  CONDUCT
+	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	caliber = "shotgun"
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
@@ -63,7 +63,7 @@
 	max_shells = 2
 	w_class = ITEM_SIZE_HUGE
 	force = 10
-	flags =  CONDUCT
+	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	caliber = "shotgun"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)

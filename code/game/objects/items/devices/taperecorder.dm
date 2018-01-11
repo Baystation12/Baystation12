@@ -13,7 +13,7 @@
 	var/playsleepseconds = 0.0
 	var/obj/item/device/tape/mytape = /obj/item/device/tape/random
 	var/canprint = 1
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 2
 	throw_speed = 4

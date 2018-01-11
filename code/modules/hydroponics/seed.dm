@@ -65,7 +65,7 @@
 	spawn(5)
 		sleep(-1)
 		update_growth_stages()
-	
+
 	uid = plant_controller.seeds.len + 1
 
 /datum/seed/proc/get_trait(var/trait)
@@ -120,7 +120,7 @@
 	var/blocked = target.run_armor_check(target_limb, "melee")
 	var/obj/item/organ/external/affecting = target.get_organ(target_limb)
 
-	if(blocked >= 100 || (target.species && target.species.flags & (NO_EMBED|NO_MINOR_CUT)))
+	if(blocked >= 100 || (target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))
 		to_chat(target, "<span class='danger'>\The [fruit]'s thorns scratch against the armour on your [affecting.name]!</span>")
 		return
 
@@ -154,10 +154,10 @@
 		var/obj/item/organ/external/affecting = pick(target.organs)
 
 		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
-			if(C && (C.body_parts_covered & affecting) && (C.item_flags & THICKMATERIAL))
+			if(C && (C.body_parts_covered & affecting) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 				affecting = null
 
-		if(!(target.species && target.species.flags & (NO_EMBED|NO_MINOR_CUT)))	affecting = null
+		if(!(target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))	affecting = null
 
 		if(affecting)
 			to_chat(target, "<span class='danger'>You are stung by \the [fruit] in your [affecting.name]!</span>")

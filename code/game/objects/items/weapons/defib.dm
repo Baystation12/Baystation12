@@ -257,7 +257,7 @@
 
 //Checks for various conditions to see if the mob is revivable
 /obj/item/weapon/shockpaddles/proc/can_defib(mob/living/carbon/human/H) //This is checked before doing the defib operation
-	if((H.species.flags & NO_SCAN) || H.isSynthetic())
+	if((H.species.species_flags & SPECIES_FLAG_NO_SCAN) || H.isSynthetic())
 		return "buzzes, \"Unrecogized physiology. Operation aborted.\""
 
 	if(!check_contact(H))
@@ -270,7 +270,7 @@
 /obj/item/weapon/shockpaddles/proc/check_contact(mob/living/carbon/human/H)
 	if(!combat)
 		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
-			if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & THICKMATERIAL))
+			if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & ITEM_FLAG_THICKMATERIAL))
 				return FALSE
 	return TRUE
 

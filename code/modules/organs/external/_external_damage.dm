@@ -105,7 +105,7 @@
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	var/datum/wound/created_wound
-	var/block_cut = !(brute > 15 || !(species.flags & NO_MINOR_CUT))
+	var/block_cut = !(brute > 15 || !(species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
 
 	if(brute)
 		var/to_create = BRUISE
@@ -172,10 +172,10 @@
 
 // Geneloss/cloneloss.
 /obj/item/organ/external/proc/get_genetic_damage()
-	return ((species && (species.flags & NO_SCAN)) || robotic >= ORGAN_ROBOT) ? 0 : genetic_degradation
+	return ((species && (species.species_flags & SPECIES_FLAG_NO_SCAN)) || robotic >= ORGAN_ROBOT) ? 0 : genetic_degradation
 
 /obj/item/organ/external/proc/remove_genetic_damage(var/amount)
-	if((species.flags & NO_SCAN) || robotic >= ORGAN_ROBOT)
+	if((species.species_flags & SPECIES_FLAG_NO_SCAN) || robotic >= ORGAN_ROBOT)
 		genetic_degradation = 0
 		status &= ~ORGAN_MUTATED
 		return
@@ -188,7 +188,7 @@
 	return -(genetic_degradation - last_gene_dam)
 
 /obj/item/organ/external/proc/add_genetic_damage(var/amount)
-	if((species.flags & NO_SCAN) || robotic >= ORGAN_ROBOT)
+	if((species.species_flags & SPECIES_FLAG_NO_SCAN) || robotic >= ORGAN_ROBOT)
 		genetic_degradation = 0
 		status &= ~ORGAN_MUTATED
 		return

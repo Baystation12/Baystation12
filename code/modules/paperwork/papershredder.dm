@@ -5,7 +5,8 @@
 	icon_state = "papershredder0"
 	density = 1
 	anchored = 1
-	flags = OBJ_ANCHORABLE|OBJ_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/max_paper = 10
 	var/paperamount = 0
 	var/list/shred_amounts = list(

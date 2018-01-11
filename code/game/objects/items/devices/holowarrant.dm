@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 4
 	throw_range = 10
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	var/datum/computer_file/data/warrant/active
 

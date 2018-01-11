@@ -17,7 +17,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
 	matter = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 5000)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 
@@ -30,7 +30,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
 	matter = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 2500)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("attacked", "pinched")
@@ -44,7 +44,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
 	matter = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 2500)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("burnt")
@@ -59,7 +59,7 @@
 	icon_state = "drill"
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	matter = list(DEFAULT_WALL_MATERIAL = 15000, "glass" = 10000)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 15.0
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
@@ -73,7 +73,7 @@
 	desc = "Cut, cut, and once more cut."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 10.0
 	sharp = 1
 	edge = 1
@@ -124,7 +124,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "saw3"
 	hitsound = 'sound/weapons/circsawhit.ogg'
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 15.0
 	w_class = ITEM_SIZE_NORMAL
 	throwforce = 9.0

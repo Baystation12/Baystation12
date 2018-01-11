@@ -6,7 +6,6 @@
 	var/obj/wrapped = null
 	density = 1
 	var/sortTag = null
-	flags = NOBLUDGEON
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	var/examtext = null
 	var/nameset = 0
@@ -340,7 +339,7 @@
 	var/currTag = 0
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	matter = list(DEFAULT_WALL_MATERIAL = 100, "glass" = 34)
 

@@ -4,7 +4,7 @@
 	icon_state = "electropack0"
 	item_state = "electropack"
 	frequency = 1449
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_HUGE
 

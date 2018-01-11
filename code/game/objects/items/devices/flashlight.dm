@@ -5,7 +5,7 @@
 	icon_state = "flashlight"
 	item_state = "flashlight"
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
@@ -124,7 +124,7 @@
 	desc = "A pen-sized light, used by medical staff."
 	icon_state = "penlight"
 	item_state = ""
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_EARS
 	brightness_on = 2
 	w_class = ITEM_SIZE_TINY
@@ -144,7 +144,7 @@
 	desc = "A miniature lamp, that might be used by small robots."
 	icon_state = "penlight"
 	item_state = ""
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	brightness_on = 2
 	w_class = ITEM_SIZE_TINY
 
@@ -157,7 +157,7 @@
 	item_state = "lamp"
 	brightness_on = 5
 	w_class = ITEM_SIZE_LARGE
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 	on = 1
 

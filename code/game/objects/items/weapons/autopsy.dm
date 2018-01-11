@@ -7,7 +7,7 @@
 	desc = "Used to gather information on wounds."
 	icon = 'icons/obj/autopsy_scanner.dmi'
 	icon_state = ""
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	var/list/datum/autopsy_data_scanner/wdata = list()

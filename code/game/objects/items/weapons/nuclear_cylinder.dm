@@ -4,7 +4,7 @@ obj/item/weapon/nuclear_cylinder
 	icon = 'icons/obj/nuclear_cylinder.dmi'
 	icon_state = "nuclear_cylinder"
 	item_state = "nuclear"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 10.0
 	w_class = ITEM_SIZE_HUGE
 	throwforce = 15.0

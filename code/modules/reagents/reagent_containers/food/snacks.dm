@@ -1615,7 +1615,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube
 	name = "monkey cube"
 	desc = "Just add water!"
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	icon_state = "monkeycube"
 	bitesize = 12
 	filling_color = "#adac7f"
@@ -1643,7 +1643,7 @@
 	desc = "Just add water!"
 	to_chat(user, "You unwrap the cube.")
 	wrapped = 0
-	flags |= OPENCONTAINER
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/On_Consume(var/mob/M)
 	if(ishuman(M))
@@ -1660,7 +1660,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped
 	desc = "Still wrapped in some paper."
 	icon_state = "monkeycubewrap"
-	flags = 0
+	item_flags = 0
+	obj_flags = 0
 	wrapped = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/farwacube

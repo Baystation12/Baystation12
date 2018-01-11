@@ -668,13 +668,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		dat += "</br><b>Does not have blood.</b>"
 	if(!current_species.has_organ[BP_LUNGS])
 		dat += "</br><b>Does not breathe.</b>"
-	if(current_species.flags & NO_SCAN)
+	if(current_species.species_flags & SPECIES_FLAG_NO_SCAN)
 		dat += "</br><b>Does not have DNA.</b>"
-	if(current_species.flags & NO_PAIN)
+	if(current_species.species_flags & SPECIES_FLAG_NO_PAIN)
 		dat += "</br><b>Does not feel pain.</b>"
-	if(current_species.flags & NO_SLIP)
+	if(current_species.species_flags & SPECIES_FLAG_NO_SLIP)
 		dat += "</br><b>Has excellent traction.</b>"
-	if(current_species.flags & NO_POISON)
+	if(current_species.species_flags & SPECIES_FLAG_NO_POISON)
 		dat += "</br><b>Immune to most poisons.</b>"
 	if(current_species.appearance_flags & HAS_A_SKIN_TONE)
 		dat += "</br><b>Has a variety of skin tones.</b>"
@@ -682,7 +682,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		dat += "</br><b>Has a variety of skin colours.</b>"
 	if(current_species.appearance_flags & HAS_EYE_COLOR)
 		dat += "</br><b>Has a variety of eye colours.</b>"
-	if(current_species.flags & IS_PLANT)
+	if(current_species.species_flags & SPECIES_FLAG_IS_PLANT)
 		dat += "</br><b>Has a plantlike physiology.</b>"
 	dat += "</small></td>"
 	dat += "</tr>"

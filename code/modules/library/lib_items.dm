@@ -17,7 +17,7 @@
 	anchored = 1
 	density = 1
 	opacity = 1
-	flags = OBJ_ANCHORABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 /obj/structure/bookcase/Initialize()
 	for(var/obj/item/I in loc)

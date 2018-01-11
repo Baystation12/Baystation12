@@ -37,7 +37,7 @@
 	var/emagged = 0
 	var/obj/item/held_item = null //Storage for single item they can hold.
 	speed = -1                    //Spiderbots gotta go fast.
-	pass_flags = PASSTABLE
+	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("beeps","clicks","chirps")
 
 /mob/living/simple_animal/spiderbot/New()
