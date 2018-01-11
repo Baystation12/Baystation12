@@ -28,7 +28,7 @@
 		qdel(H)
 
 /datum/species/shadow/handle_environment_special(var/mob/living/carbon/human/H)
-	if(H.in_stasis || H.stat == DEAD || H.isSynthetic())
+	if(H.InStasis() || H.stat == DEAD || H.isSynthetic())
 		return
 	var/light_amount = 0
 	if(isturf(H.loc))

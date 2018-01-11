@@ -37,7 +37,6 @@
 	var/fire_alert = 0
 	var/pressure_alert = 0
 	var/temperature_alert = 0
-	var/in_stasis = 0
 	var/heartbeat = 0
 
 /mob/living/carbon/human/Life()
@@ -65,7 +64,7 @@
 	voice = GetVoice()
 
 	//No need to update all of these procs if the guy is dead.
-	if(stat != DEAD && !in_stasis)
+	if(stat != DEAD && !InStasis())
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
@@ -102,7 +101,7 @@
 /mob/living/carbon/human/breathe()
 	var/species_organ = species.breathing_organ
 
-	if(!in_stasis && species_organ)
+	if(species_organ)
 		var/active_breaths = 0
 		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
 		if(L)
@@ -186,9 +185,6 @@
 				emote("cough")
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
-	if(in_stasis)
-		return
-
 	if(getFireLoss())
 		if((COLD_RESISTANCE in mutations) || (prob(1)))
 			heal_organ_damage(0,1)
@@ -388,14 +384,16 @@
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
-		if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			var/burn_dam = 0
-			if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_1))
-				burn_dam = COLD_DAMAGE_LEVEL_1
-			else if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_3))
-				burn_dam = COLD_DAMAGE_LEVEL_2
-			else
-				burn_dam = COLD_DAMAGE_LEVEL_3
+		var/burn_dam = 0
+
+		if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_2))
+			burn_dam = COLD_DAMAGE_LEVEL_1
+		else if(bodytemperature > getSpeciesOrSynthTemp(COLD_LEVEL_3))
+			burn_dam = COLD_DAMAGE_LEVEL_2
+		else
+			burn_dam = COLD_DAMAGE_LEVEL_3
+		SetStasis(getCryogenicFactor(bodytemperature), STASIS_COLD)
+		if(!chem_effects[CE_CRYO])
 			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
 			fire_alert = max(fire_alert, 1)
 
@@ -521,9 +519,6 @@
 	if(status_flags & GODMODE)
 		return 0
 
-	if(in_stasis)
-		return
-
 	if(isSynthetic())
 		return
 
@@ -589,7 +584,6 @@
 			set_stat(UNCONSCIOUS)
 			animate_tail_reset()
 			adjustHalLoss(-3)
-
 			if(sleeping)
 				handle_dreams()
 				if (mind)
@@ -627,9 +621,10 @@
 		if (drowsyness > 0)
 			drowsyness = max(0, drowsyness-1)
 			eye_blurry = max(2, eye_blurry)
-			if (prob(5))
-				sleeping += 1
-				Paralyse(5)
+			if ((prob(5) || drowsyness >= 60))
+				if(stat == CONSCIOUS)
+					to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
+				Sleeping(5)
 
 		confused = max(0, confused - 1)
 
@@ -647,6 +642,12 @@
 		// nutrition decrease
 		if (nutrition > 0)
 			nutrition = max (0, nutrition - species.hunger_factor)
+		
+		var/stasis = GetStasis()
+		if(stasis > 1 && drowsyness < stasis*5)
+			drowsyness += min(stasis, 3)
+			if(!stat && prob(1))
+				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
 
 	return 1
 
@@ -823,9 +824,6 @@
 	return 1
 
 /mob/living/carbon/human/handle_random_events()
-	if(in_stasis)
-		return
-
 	// Puke if toxloss is too high
 	var/vomit_score = 0
 	for(var/tag in list(BP_LIVER,BP_KIDNEYS))

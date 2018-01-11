@@ -112,6 +112,7 @@
 		scan = replacetext(scan,"'notice'","'white'")
 		scan = replacetext(scan,"'warning'","'average'")
 		scan = replacetext(scan,"'danger'","'bad'")
+		scan += "<br>Cryostasis factor: [occupant.GetStasis()]x"
 		data["occupant"] = scan
 
 	data["cellTemperature"] = round(air_contents.temperature)
@@ -225,24 +226,16 @@
 		occupant.bodytemperature = max(occupant.bodytemperature, air_contents.temperature) // this is so ugly i'm sorry for doing it i'll fix it later i promise
 		occupant.set_stat(UNCONSCIOUS)
 		if(occupant.bodytemperature < T0C)
-			occupant.sleeping = max(5, (1/occupant.bodytemperature)*2000)
-			occupant.Paralyse(max(5, (1/occupant.bodytemperature)*3000))
-			if(air_contents.gas["oxygen"] > 2)
-				if(occupant.getOxyLoss()) occupant.adjustOxyLoss(-1)
-			else
-				occupant.adjustOxyLoss(-1)
 			//severe damage should heal waaay slower without proper chemicals
 			if(occupant.bodytemperature < 225)
 				if (occupant.getToxLoss())
-					occupant.adjustToxLoss(max(-1, -20/occupant.getToxLoss()))
+					occupant.adjustToxLoss(max(-1, -10/occupant.getToxLoss()))
 				var/heal_brute = occupant.getBruteLoss() ? min(1, 20/occupant.getBruteLoss()) : 0
 				var/heal_fire = occupant.getFireLoss() ? min(1, 20/occupant.getFireLoss()) : 0
 				occupant.heal_organ_damage(heal_brute,heal_fire)
-		var/has_cryo = occupant.reagents.get_reagent_amount(/datum/reagent/cryoxadone) >= 1
-		var/has_clonexa = occupant.reagents.get_reagent_amount(/datum/reagent/clonexadone) >= 1
-		var/has_cryo_medicine = has_cryo || has_clonexa
+		var/has_cryo_medicine = occupant.reagents.has_any_reagent(list(/datum/reagent/cryoxadone, /datum/reagent/clonexadone)) >= REM
 		if(beaker && !has_cryo_medicine)
-			beaker.reagents.trans_to_mob(occupant, 1, CHEM_BLOOD, 10)
+			beaker.reagents.trans_to_mob(occupant, REM, CHEM_BLOOD)
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
 	if(air_contents.total_moles < 1)
@@ -360,7 +353,9 @@
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/return_air()
-	return air_contents
+	if(on)
+		return air_contents
+	..()
 
 //This proc literally only exists for cryo cells.
 /atom/proc/return_air_for_internal_lifeform()

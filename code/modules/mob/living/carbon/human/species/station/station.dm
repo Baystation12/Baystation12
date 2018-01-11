@@ -145,7 +145,7 @@
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
 /datum/species/unathi/handle_environment_special(var/mob/living/carbon/human/H)
-	if(H.in_stasis || H.stat == DEAD)
+	if(H.InStasis() || H.stat == DEAD)
 		return
 	if(H.nutrition < 50)
 		H.adjustToxLoss(2,0)
@@ -456,7 +456,7 @@
 	return "sap"
 
 /datum/species/diona/handle_environment_special(var/mob/living/carbon/human/H)
-	if(H.in_stasis || H.stat == DEAD)
+	if(H.InStasis() || H.stat == DEAD)
 		return
 	if(H.nutrition < 10)
 		H.take_overall_damage(2,0)
