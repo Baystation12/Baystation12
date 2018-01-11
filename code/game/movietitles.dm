@@ -1,5 +1,5 @@
 #define CREDIT_ROLL_SPEED 185
-#define CREDIT_SPAWN_SPEED 10
+#define CREDIT_SPAWN_SPEED 20
 #define CREDIT_ANIMATE_HEIGHT (14 * world.icon_size)
 #define CREDIT_EASE_DURATION 22
 
@@ -101,10 +101,12 @@ client
 	possible_titles += "[pick("SPACE", "SEXY", "DRAGON", "WARLOCK", "LAUNDRY", "GUN", "ADVERTISING", "DOG", "CARBON MONOXIDE", "NINJA", "WIZARD", "SOCRATIC", "JUVENILE DELIQUENCY", "POLITICALLY MOTIVATED", "RADTACULAR SICKNASTY")] [pick("QUEST", "FORCE", "ADVENTURE")]"
 	possible_titles += "[pick("THE DAY [uppertext(GLOB.using_map.station_short)] STOOD STILL", "HUNT FOR THE GREEN WEENIE", "ALIEN VS VENDOMAT", "SPACE TRACK")]"
 	titles += "<center><h1>EPISODE [rand(1,1000)]<br>[pick(possible_titles)]<h1></h1></h1></center>"
-	for(var/mob/living/carbon/human/H in world)
+	for(var/mob/living/carbon/human/H in GLOB.living_mob_list_|GLOB.dead_mob_list_)
 		if(findtext(H.real_name,"(mannequin)"))
 			continue
 		if(H.isMonkey() && findtext(H.real_name,"[lowertext(H.species.name)]")) //no monki
+			continue
+		if(H.timeofdeath && H.timeofdeath < 5 MINUTES) //don't mention these losers (prespawned corpses mostly)
 			continue
 		if(!cast.len && !chunksize)
 			chunk += "CAST:"
@@ -139,6 +141,8 @@ client
 	var/list/corpses = list()
 	var/list/monkies = list()
 	for(var/mob/living/carbon/human/H in GLOB.dead_mob_list_)
+		if(H.timeofdeath < 5 MINUTES) //no prespawned corpses
+			continue
 		if(H.isMonkey() && findtext(H.real_name,"[lowertext(H.species.name)]"))
 			monkies[H.species.name] += 1
 		else if(H.real_name)
