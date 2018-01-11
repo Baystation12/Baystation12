@@ -39,6 +39,10 @@
 		return TRUE
 	. = ..()
 
+/datum/nano_module/proc/get_host_z()
+	var/atom/host = nano_host()
+	return istype(host) ? get_z(host) : 0
+
 /datum/nano_module/proc/print_text(var/text, var/mob/user)
 	var/obj/item/modular_computer/MC = nano_host()
 	if(istype(MC))
