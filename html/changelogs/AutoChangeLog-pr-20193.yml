@@ -1,0 +1,5 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "RCON program no longer shows SMES units and breakers offsite the Torch."
+  - tweak: "Alarm monitoring program no longer shows alerts offsite the Torch."
