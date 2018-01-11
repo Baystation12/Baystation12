@@ -442,6 +442,12 @@
 	audible_message("<b>\The [src]</b> [message]", "\The [src] vibrates slightly.")
 
 /obj/item/weapon/shockpaddles/emag_act(var/uses, var/mob/user, var/obj/item/weapon/defibrillator/base)
+	if(istype(src, /obj/item/weapon/shockpaddles/linked))
+		var/obj/item/weapon/shockpaddles/linked/dfb = src
+		if(dfb.base_unit)
+			base = dfb.base_unit
+	if(!base)
+		return
 	if(safety)
 		safety = 0
 		to_chat(user, "<span class='warning'>You silently disable \the [src]'s safety protocols with the cryptographic sequencer.</span>")

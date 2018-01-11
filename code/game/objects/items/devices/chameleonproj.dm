@@ -140,7 +140,7 @@
 				spawn(20) can_move = 1
 			else
 				spawn(25) can_move = 1
-		if(!loc.density)
+		if(isturf(loc))
 			step(src, direction)
 	return
 
