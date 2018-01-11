@@ -58,6 +58,11 @@
 	display_name = "Medical HUD, prescription"
 	path = /obj/item/clothing/glasses/hud/health/prescription
 
+/datum/gear/eyes/medical/visor
+	display_name = "Medical HUD, Visor"
+	path = /obj/item/clothing/glasses/hud/health/visor
+	cost = 2
+
 /datum/gear/eyes/meson
 	display_name = "Meson Goggles"
 	path = /obj/item/clothing/glasses/meson
