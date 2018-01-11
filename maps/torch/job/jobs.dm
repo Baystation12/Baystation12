@@ -1,6 +1,6 @@
 /datum/map/torch
 	species_to_job_whitelist = list(
-		/datum/species/nabber = list(/datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant,
+		/datum/species/nabber = list(/datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/chemist,
 			/datum/job/roboticist, /datum/job/cargo_contractor, /datum/job/chef, /datum/job/engineer_contractor, /datum/job/doctor_contractor, /datum/job/bartender),
 		/datum/species/vox = list(/datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
 	)
@@ -20,7 +20,7 @@
 						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
-						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
+						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
@@ -704,29 +704,45 @@
 	department = "Medical"
 	department_flag = MED
 
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief Medical Officer and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_modifier = 3
 	ideal_character_age = 30
 	alt_titles = list(
 		"Orderly" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly,
-		"Mortician" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus,
 		"Virologist" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist,
 		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon,
-		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic,
-		"Chemist" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist)
+		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
-		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks, access_chemistry)
+		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks)
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 
+/datum/job/chemist
+	title = "Chemist"
+	department = "Medical"
+	department_flag = MED
+
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Chief Medical Officer and Medical Personnel"
+	selection_color = "#013d3b"
+	economic_modifier = 4
+	ideal_character_age = 30
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+
+	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry)
+	minimal_access = list()
+	
 /datum/job/psychiatrist
 	title = "Counselor"
 	total_positions = 1
