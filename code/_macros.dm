@@ -160,3 +160,6 @@
 //Currently used in SDQL2 stuff
 #define send_output(target, msg, control) target << output(msg, control)
 #define send_link(target, url) target << link(url)
+
+// Spawns multiple objects of the same type
+#define cast_new(type, num, args...) if((num) == 1) { new type(args) } else { for(var/i=0;i<(num),i++) { new type(args) } }

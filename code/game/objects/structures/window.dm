@@ -44,6 +44,7 @@
 			to_chat(user, "<span class='notice'>It is covered in silicate.</span>")
 		else
 			to_chat(user, "<span class='notice'>There is a thick layer of silicate covering it.</span>")
+
 /obj/structure/window/proc/take_damage(var/damage = 0,  var/sound_effect = 1)
 	var/initialhealth = health
 
@@ -87,16 +88,9 @@
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] shatters!")
-	if(dir == SOUTHWEST)
-		var/index = null
-		index = 0
-		while(index < 2)
-			new shardtype(loc) //todo pooling?
-			if(reinf) new /obj/item/stack/rods(loc)
-			index++
-	else
-		new shardtype(loc) //todo pooling?
-		if(reinf) new /obj/item/stack/rods(loc)
+
+	cast_new(shardtype, is_fulltile() ? 4 : 1, loc)
+	if(reinf) cast_new(/obj/item/stack/rods, is_fulltile() ? 4 : 1, loc)
 	qdel(src)
 	return
 
@@ -311,6 +305,9 @@
 
 	if (start_dir)
 		set_dir(start_dir)
+
+	if(is_fulltile())
+		maxhealth *= 4
 
 	health = maxhealth
 
