@@ -112,5 +112,8 @@
 
 /obj/machinery/computer/Topic(href, href_list)
 	. = ..()
-	if(. && istype(usr, /mob/living/carbon) && prob(33))
-		playsound(src, 'sound/machines/keypress.ogg', 50)
+	if(. && iscarbon(usr) && prob(33))
+		playsound(src, pick('sound/machines/keyboard/keypress1.ogg',\
+			'sound/machines/keyboard/keypress2.ogg',\
+			'sound/machines/keyboard/keypress3.ogg',\
+			'sound/machines/keyboard/keypress4.ogg'))
