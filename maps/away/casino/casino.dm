@@ -17,10 +17,9 @@
 		"nav_casino_4",
 		"nav_casino_antag",
 		"nav_casino_hangar",
-
+	)
 	restricted_waypoints = list(
 		"Casino Cutter" = list("nav_casino_hangar"),
-	)
 	)
 
 /obj/effect/overmap/ship/casino/New(nloc, max_x, max_y)
