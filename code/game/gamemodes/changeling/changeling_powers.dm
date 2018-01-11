@@ -601,6 +601,12 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!chosen_dna)
 		return
 
+	var/datum/species/spec = all_species[chosen_dna.speciesName]
+
+	if(spec && spec.flags & NEED_DIRECT_ABSORB)
+		to_chat(src, "<span class='notice'>That species must be absorbed directly.</span>")
+		return
+
 	changeling.chem_charges -= 10
 	hivemind_bank += chosen_dna
 	to_chat(src, "<span class='notice'>We channel the DNA of [S] to the air.</span>")
@@ -796,6 +802,10 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if((HUSK in T.mutations) || (T.species.flags & NO_SCAN))
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
 		return 0
+
+	if(T.species.flags & NEED_DIRECT_ABSORB)
+		to_chat(src, "<span class='notice'>That species must be absorbed directly.</span>")
+		return
 
 	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages)
 	absorbDNA(newDNA)
