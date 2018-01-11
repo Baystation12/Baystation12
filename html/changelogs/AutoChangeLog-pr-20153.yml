@@ -1,4 +1,0 @@
-author: "Sbotkin"
-delete-after: True
-changes: 
-  - tweak: "RCA, Shield Generator and Emitter crates now require engine access."
