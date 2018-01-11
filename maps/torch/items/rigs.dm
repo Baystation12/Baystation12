@@ -78,7 +78,8 @@
 /obj/item/weapon/rig/command/xo/equipped
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/flash)
+		/obj/item/rig_module/device/flash/advanced,
+		/obj/item/rig_module/grenade_launcher/smoke)
 
 /*
  * COMMANDING OFFICER
@@ -109,8 +110,10 @@
 
 /obj/item/weapon/rig/command/co/equipped
 	initial_modules = list(
+		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/flash)
+		/obj/item/rig_module/device/flash/advanced,
+		/obj/item/rig_module/grenade_launcher/smoke)
 
 /*
  * CHIEF MEDICAL OFFICER

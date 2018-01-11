@@ -155,7 +155,8 @@
 		/obj/item/rig_module/device/plasmacutter,
 		/obj/item/rig_module/device/rcd,
 		/obj/item/rig_module/device/flash,
-		/obj/item/rig_module/vision/meson
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/grenade_launcher/mfoam,
 		)
 
 /obj/item/clothing/head/helmet/space/rig/ce
