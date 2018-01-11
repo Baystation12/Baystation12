@@ -9,6 +9,7 @@
 #define NO_EMBED          0x80   // Can step on broken glass with no ill-effects and cannot have shrapnel embedded in it.
 #define CAN_NAB           0x100  // Uses the special set of grab rules.
 #define NO_BLOCK          0x200  // Unable to block or defend itself from attackers.
+#define NEED_DIRECT_ABSORB 0x400  // This species can only have their DNA taken by direct absorption.
 // unused: 0x8000 - higher than this will overflow
 
 // Species spawn flags
