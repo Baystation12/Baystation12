@@ -104,6 +104,9 @@
 			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
 			filling.color = reagents.get_color()
 			overlays += filling
+	else
+		name = initial(name)
+		desc = initial(desc)
 
 
 ////////////////////////////////////////////////////////////////////////////////
