@@ -14,8 +14,8 @@
 	var/round_end_time = 0
 	var/round_length = 6000
 	var/nextrespawn
-	var/species_included = list("Spartan") //This has to be an exact name taken from the datum
-	disabled_jobs = list(/datum/job/team_slayer_red, /datum/job/team_slayer_blue)
+	var/species_included = list("Spartan" = list("Spartan Slayer","Blue Team Spartan","Red Team Spartan")) //This has to be an exact name taken from the datum
+	disabled_jobs = list(/datum/job/team_slayer_red, /datum/job/team_slayer_blue,/datum/job/team_slayer_covenant,/datum/job/slayer_spartan_covenant)
 
 /datum/game_mode/slayer/pre_setup()
 	..()
@@ -49,13 +49,22 @@
 		if(outfit_decl.name == wanted_outfit_name)
 			return outfit_decl
 
+/datum/game_mode/slayer/proc/get_assigned_species(var/job_name)
+	for(var/species in species_included)
+		var/list/species_job_list = species_included[species]
+		if(job_name in species_job_list)
+			return species
+
 /datum/game_mode/slayer/proc/make_correct_species()
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(H.species.name in species_included)
 			continue
-		var/new_species_name = "[pick(species_included)]" //Choose which species datum we're going to use.
+		var/new_species_name = get_assigned_species(H.mind.assigned_role) //Choose which species datum we're going to use.
 		var/wanted_outfit_name = "[H.mind.assigned_role] [new_species_name]" //Create a string for the wanted outfit name
 		var/decl/hierarchy/outfit/outfit = get_outfit_datum(wanted_outfit_name) //Get the outfit
+		if(isnull(outfit))
+			error("Slayer Outfitter failed to find outfit with outfit name [wanted_outfit_name]")
+			return
 		H.set_species(new_species_name)
 		outfit.equip(H)
 
