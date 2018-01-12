@@ -5,13 +5,13 @@
 	item_state = "pulse"
 	slot_flags = SLOT_BACK
 	force = 12
-	projectile_type = /obj/item/projectile/energy/pulse/heavy
+	projectile_type = /obj/item/projectile/energy/pulse
 	max_shots = 108
 	w_class = ITEM_SIZE_HUGE
 	one_hand_penalty=8
 	multi_aim = 1
-	burst_delay = 1.5
-	burst = 9
+	burst_delay = 1
+	burst = 6
 	move_delay = 4
 	wielded_item_state = "gun_wielded"
 	accuracy = -4
@@ -23,11 +23,9 @@
 	icon_state = "pulse_carbine"
 	slot_flags = SLOT_BACK|SLOT_BELT
 	force = 8
-	projectile_type = /obj/item/projectile/energy/pulse/mid
 	max_shots = 72
 	w_class = ITEM_SIZE_LARGE
 	one_hand_penalty=3
-	burst_delay = 1.25
 	move_delay = 2
 	accuracy = -2
 
@@ -37,11 +35,9 @@
 	icon_state = "pulse_pistol"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	force = 6
-	projectile_type = /obj/item/projectile/energy/pulse
 	max_shots = 21
 	w_class = ITEM_SIZE_NORMAL
 	one_hand_penalty=1 //a bit heavy
-	burst_delay = 1
 	move_delay = 1
 	wielded_item_state = null
 	accuracy = -1
