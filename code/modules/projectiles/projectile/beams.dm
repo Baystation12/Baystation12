@@ -32,7 +32,7 @@
 	eyeblur = 2
 
 /obj/item/projectile/beam/smalllaser
-	damage = 23
+	damage = 25
 	fire_sound = 'sound/weapons/Laser.ogg'
 
 /obj/item/projectile/beam/midlaser
