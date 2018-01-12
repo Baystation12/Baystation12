@@ -148,7 +148,7 @@
 
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(H.flags & NO_BLOCK)
+		if(H.species.flags & SPECIES_FLAG_NO_BLOCK)
 			return 0
 
 	if(active && default_parry_check(user, attacker, damage_source) && prob(60))
