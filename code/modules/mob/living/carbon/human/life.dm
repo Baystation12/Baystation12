@@ -621,7 +621,7 @@
 		if (drowsyness > 0)
 			drowsyness = max(0, drowsyness-1)
 			eye_blurry = max(2, eye_blurry)
-			if ((prob(5) || drowsyness >= 60))
+			if (drowsyness > 10 && (prob(5) || drowsyness >= 60))
 				if(stat == CONSCIOUS)
 					to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
 				Sleeping(5)

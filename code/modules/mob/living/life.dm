@@ -12,17 +12,17 @@
 	if(machine && !CanMouseDrop(machine, src))
 		machine = null
 
+	//Handle temperature/pressure differences between body and environment
+	var/datum/gas_mixture/environment = loc.return_air()
+	if(environment)
+		handle_environment(environment)
+
 	blinded = 0 // Placing this here just show how out of place it is.
 	// human/handle_regular_status_updates() needs a cleanup, as blindness should be handled in handle_disabilities()
 	handle_regular_status_updates() // Status & health update, are we dead or alive etc.
 
 	if(stat != DEAD)
 		aura_check(AURA_TYPE_LIFE)
-
-	//Handle temperature/pressure differences between body and environment
-	var/datum/gas_mixture/environment = loc.return_air()
-	if(environment)
-		handle_environment(environment)
 
 	//Check if we're on fire
 	handle_fire()
