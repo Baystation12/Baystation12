@@ -184,7 +184,7 @@
 	name = "pulse"
 	icon_state = "pulse"
 	fire_sound='sound/weapons/pulse.ogg'
-	damage = 4 //lower damage, but fires in bursts
+	damage = 10 //lower damage, but fires in bursts
 	hitscan = 0
 
 	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
@@ -195,12 +195,6 @@
 	..()
 	if(isturf(target))
 		playsound(target.loc, 'sound/weapons/effects/searwall.ogg', 50, 2)
-
-/obj/item/projectile/energy/pulse/mid
-	damage = 6
-
-/obj/item/projectile/energy/pulse/heavy
-	damage = 8
 
 /obj/item/projectile/energy/pulse/destroy
 	name = "destroyer pulse"
