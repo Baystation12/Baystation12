@@ -9,7 +9,7 @@
 	var/attack_sound = 'sound/weapons/blade1.ogg' //Snowflakey, but adding unique sounds to everything south of /item/ would be a large undertaking.
 
 /obj/item/weapon/melee/energy/attack(var/mob/living/M, var/mob/living/user)
-	playsound(get_turf(user), 50, 1)
+	playsound(get_turf(user), attack_sound, 40, 1)
 	..()
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
