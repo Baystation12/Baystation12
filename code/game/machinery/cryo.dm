@@ -18,7 +18,7 @@
 	clickvol = 30
 
 	var/temperature_archived
-	var/mob/living/carbon/occupant = null
+	var/mob/living/carbon/human/occupant = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 
 	var/current_heat_capacity = 50
@@ -112,7 +112,7 @@
 		scan = replacetext(scan,"'notice'","'white'")
 		scan = replacetext(scan,"'warning'","'average'")
 		scan = replacetext(scan,"'danger'","'bad'")
-		scan += "<br>Cryostasis factor: [occupant.GetStasis()]x"
+		scan += "<br>Cryostasis factor: [occupant.getCryogenicFactor(occupant.bodytemperature)]x"
 		data["occupant"] = scan
 
 	data["cellTemperature"] = round(air_contents.temperature)
