@@ -6,7 +6,7 @@
 	var/obj/item/device/radio/electropack/part2 = null
 	var/status = 0
 	w_class = ITEM_SIZE_HUGE
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/assembly/shock_kit/Destroy()
 	qdel(part1)

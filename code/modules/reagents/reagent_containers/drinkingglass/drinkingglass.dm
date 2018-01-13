@@ -23,7 +23,7 @@
 
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = "5;10;15;30"
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
 	. = ..()

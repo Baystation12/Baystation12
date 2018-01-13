@@ -62,7 +62,7 @@
 		return 1
 	else
 		for(var/atom/a in src.loc)
-			if(a.flags & OBJ_CLIMBABLE)
+			if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
 				return 1
 
 		//Last check, list of items that could plausibly be used to climb but aren't climbable themselves

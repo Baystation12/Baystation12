@@ -73,7 +73,7 @@
 	desc = "A fuel-powered engine used to power a small vehicle."
 	icon_state = "engine_fuel"
 	trail_type = /datum/effect/effect/system/trail/thermal
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	var/obj/temp_reagents_holder
 	var/fuel_points = 0
 	//fuel points are determined by differing reagents
@@ -86,7 +86,7 @@
 	create_reagents(500)
 	temp_reagents_holder = new()
 	temp_reagents_holder.create_reagents(15)
-	temp_reagents_holder.flags |= OPENCONTAINER
+	temp_reagents_holder.atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/engine/thermal/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I,/obj/item/weapon/reagent_containers) && I.is_open_container())

@@ -69,13 +69,13 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return 0
 	if(!my_atom.loc) //No reactions inside GC'd containers
 		return 0
-	if(my_atom.flags & NOREACT) // No reactions here
+	if(my_atom.atom_flags & ATOM_FLAG_NO_REACT) // No reactions here
 		return 0
 
 	var/reaction_occured = 0
-	
+
 	var/list/datum/chemical_reaction/eligible_reactions = list()
-	
+
 	for(var/datum/reagent/R in reagent_list)
 		eligible_reactions |= chemical_reactions_list[R.type]
 
@@ -108,7 +108,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 	if(reaction_occured)
 		process_reactions() // Check again in case the new reagents can react again
-	
+
 	return reaction_occured
 
 /* Holder-to-chemical */

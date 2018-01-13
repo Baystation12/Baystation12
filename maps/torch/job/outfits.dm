@@ -416,6 +416,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/chemist
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/chemist
+	id_type = /obj/item/weapon/card/id/torch/contractor/chemist
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist/New()
 	..()

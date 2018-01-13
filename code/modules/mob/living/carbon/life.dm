@@ -2,6 +2,8 @@
 	if(!..())
 		return
 
+	UpdateStasis()
+
 	// Increase germ_level regularly
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
@@ -26,7 +28,7 @@
 		handle_disabilities()
 
 		//all special effects, stunned, weakened, jitteryness, hallucination, sleeping, etc
-		handle_statuses() 
+		handle_statuses()
 
 		handle_viruses()
 
@@ -34,4 +36,3 @@
 
 		if(!client && !mind && species)
 			species.handle_npc(src)
-	stasis_sources.Cut()

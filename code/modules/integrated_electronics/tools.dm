@@ -12,7 +12,7 @@
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "wirer-wire"
 	matter = list("metal" = 147, "glass" = 64)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
@@ -96,7 +96,7 @@
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "debugger"
 	matter = list("metal" = 151, "glass" = 82)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	description_info = "Ref scanning is done by click-drag-dropping the debugger unto an adjacent object that you wish to scan."
 	var/weakref/data_to_write = null
@@ -160,7 +160,7 @@
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "analyzer"
 	matter = list("metal" = 156, "glass" = 67)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = 2
 	var/last_scan = ""
 

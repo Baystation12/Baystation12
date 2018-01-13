@@ -155,7 +155,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, "<span class='warning'>[T] is not compatible with our biology.</span>")
 		return
 
-	if(T.species.flags & NO_SCAN)
+	if(T.species.species_flags & SPECIES_FLAG_NO_SCAN)
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
 		return
 
@@ -603,7 +603,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 
 	var/datum/species/spec = all_species[chosen_dna.speciesName]
 
-	if(spec && spec.flags & NEED_DIRECT_ABSORB)
+	if(spec && spec.species_flags & SPECIES_FLAG_NEED_DIRECT_ABSORB)
 		to_chat(src, "<span class='notice'>That species must be absorbed directly.</span>")
 		return
 
@@ -799,11 +799,11 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 
 	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
 	if(!T)	return 0
-	if((HUSK in T.mutations) || (T.species.flags & NO_SCAN))
+	if((HUSK in T.mutations) || (T.species.species_flags & SPECIES_FLAG_NO_SCAN))
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
 		return 0
 
-	if(T.species.flags & NEED_DIRECT_ABSORB)
+	if(T.species.species_flags & SPECIES_FLAG_NEED_DIRECT_ABSORB)
 		to_chat(src, "<span class='notice'>That species must be absorbed directly.</span>")
 		return
 

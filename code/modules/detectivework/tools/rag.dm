@@ -23,7 +23,8 @@
 	possible_transfer_amounts = "5"
 	volume = 10
 	can_be_placed_into = null
-	flags = OPENCONTAINER | NOBLUDGEON
+	item_flags = ITEM_FLAG_NO_BLUDGEON
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	unacidable = 0
 
 	var/on_fire = 0

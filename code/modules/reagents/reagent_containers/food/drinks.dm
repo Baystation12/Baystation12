@@ -6,7 +6,7 @@
 	desc = "Yummy!"
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = null
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	amount_per_transfer_from_this = 5
 	volume = 50
 	var/filling_states   // List of percentages full that have icons
@@ -24,15 +24,15 @@
 /obj/item/weapon/reagent_containers/food/drinks/proc/open(mob/user)
 	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
 	to_chat(user, "<span class='notice'>You open \the [src] with an audible pop!</span>")
-	flags |= OPENCONTAINER
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/open(mob/user)
 	playsound(loc,'sound/effects/bonebreak1.ogg', rand(10,50), 1)
 	to_chat(user, "<span class='notice'>You twist open \the [src], destroying the safety seal!</span>")
-	flags |= OPENCONTAINER
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(force && !(flags & NOBLUDGEON) && user.a_intent == I_HURT)
+	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return ..()
 
 	if(standard_feed_mob(user, M))
@@ -104,6 +104,9 @@
 			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
 			filling.color = reagents.get_color()
 			overlays += filling
+	else
+		name = initial(name)
+		desc = initial(desc)
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -121,7 +124,8 @@
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = null
 	volume = 150
-	flags = CONDUCT | OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 ///////////////////////////////////////////////Drinks
 //Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be ingested directly
@@ -361,7 +365,8 @@
 	desc = "A metal coffee cup. You're not sure which metal."
 	icon_state = "coffeecup_metal"
 	base_name = "metal cup"
-	flags = CONDUCT | OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/STC
 	name = "TCC coffee cup"

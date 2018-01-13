@@ -12,7 +12,7 @@
 	var/locked = 1
 	var/max_range = 8
 	var/storedpower = 0
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	//There have to be at least two posts, so these are effectively doubled
 	var/power_draw = 30 KILOWATTS //30 kW. How much power is drawn from powernet. Increase this to allow the generator to sustain longer shields, at the cost of more power draw.
 	var/max_stored_power = 50 KILOWATTS //50 kW
@@ -341,7 +341,7 @@
 /obj/machinery/shieldwall/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 
-	if(istype(mover) && mover.checkpass(PASSGLASS))
+	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return prob(20)
 	else
 		if (istype(mover, /obj/item/projectile))

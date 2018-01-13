@@ -343,7 +343,7 @@
 		if(prob(1 + W.force * 5))
 
 			user.visible_message("<span class='warning'>[user.name] smashed the light!</span>", "<span class='warning'>You smash the light!</span>", "You hear a tinkle of breaking glass")
-			if(on && (W.flags & CONDUCT))
+			if(on && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 				if (prob(12))
 					electrocute_mob(user, get_area(src), src, 0.3)
 			broken()
@@ -361,7 +361,7 @@
 			return
 
 		to_chat(user, "You stick \the [W] into the light socket!")
-		if(powered() && (W.flags & CONDUCT))
+		if(powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()

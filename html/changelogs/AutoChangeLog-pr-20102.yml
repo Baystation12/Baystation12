@@ -1,9 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "Added advanced flash, smoke grenade, and metal foam grenade launcher hardsuit modules."
-  - tweak: "The captain's hardsuit now has an AI container, advanced flash and smoke grenade launcher."
-  - tweak: "The XO's hardsuit now has an advanced flash and smoke grenade launcher."
-  - tweak: "The CE's hardsuit now has a metal foam grenade launcher."
-  - bugfix: "The rig mounted RCD's use cost has been reduced from 100,000 to 300."
-  - bugfix: "The correct voidsuits can now be found in command EVA."

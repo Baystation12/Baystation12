@@ -12,7 +12,7 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
 	var/pump
-	var/list/stasis_settings = list(1, 3, 5)
+	var/list/stasis_settings = list(1, 2, 5)
 	var/stasis = 1
 
 	use_power = 1

@@ -65,7 +65,7 @@ var/const/tk_maxrange = 15
 	desc = "Magic."
 	icon = 'icons/obj/magic.dmi'//Needs sprites
 	icon_state = "2"
-	flags = NOBLUDGEON
+	item_flags = ITEM_FLAG_NO_BLUDGEON
 	//item_state = null
 	w_class = ITEM_SIZE_NO_CONTAINER
 
