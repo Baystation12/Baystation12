@@ -198,6 +198,10 @@
 	agony  = 5
 	fire_sound='sound/weapons/pulse.ogg'
 
+	muzzle_type = /obj/effect/projectile/shock/muzzle
+	tracer_type = /obj/effect/projectile/shock/tracer
+	impact_type = /obj/effect/projectile/shock/impact
+
 /obj/item/projectile/beam/stun/shock/heavy
 	name = "heavy shock beam"
 	damage = 20
