@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "Bridge Officers now additionally have basic explorer access."
