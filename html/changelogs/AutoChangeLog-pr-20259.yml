@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - bugfix: "Autolathes now function as normal."
