@@ -252,7 +252,7 @@
 	name = "unusual potted plant"
 	desc = "This is an unusual plant. It's bulbous ends emit a soft blue light."
 	icon_state = "plant-09"
-	set_light(l_range = 1, l_power = 0.5, l_color = "#0000ff")
+	set_light(l_range = 2, l_power = 2, l_color = "#007fff")
 
 /obj/structure/flora/pottedplant/orientaltree
 	name = "potted oriental tree"
@@ -270,7 +270,7 @@
 	icon_state = "plant-12"
 
 /obj/structure/flora/pottedplant/sticky
-	name = "styicky potted plant"
+	name = "sticky potted plant"
 	desc = "This is an odd plant. Its sticky leaves trap insects."
 	icon_state = "plant-13"
 
