@@ -10,10 +10,10 @@
 
 				"trade_complete"    = "Remember to give them attention and food. They are living beings, and you should treat them like so.",
 				"trade_blacklist"   = "Legally I can' do that. Morally, I refuse to do that.",
-				"trade_found_unwanted" = "I only want animals. I don't need food, shiny things, I'm looking for specific ones at that. Ones I already have the cage and food for.",
+				"trade_found_unwanted" = "I only want animals. I don't need food or shiny things. I'm looking for specific ones at that. Ones I already have the cage and food for.",
 				"trade_not_enough"   = "I'd give you the animal for free, but I need the money to feed the others. So you must pay in full.",
-				"how_much"          = "This is a fine specimin, I believe it will cost you VALUE thalers.",
-				"what_want"         = "I have the facilities currently to support",
+				"how_much"          = "This is a fine specimen. I believe it will cost you VALUE thalers.",
+				"what_want"         = "I have the facilities, currently, to support",
 
 				"compliment_deny"   = "That was almost charming.",
 				"compliment_accept" = "Thank you. I needed that.",
@@ -72,8 +72,8 @@
 	origin = "Prank Shop"
 	compliment_increase = 0
 	insult_drop = 0
-	possible_origins = list("Yacks and Yucks Shop", "The Shop From Which I Sell Humorous Items", "The Prank Gestalt", "The Clown's Armory")
-	speech = list("hail_generic" = "We welcome you to our shop of humorous items, we invite you to partake in the experience of being pranked, and pranking someone else.",
+	possible_origins = list("Yacks and Yucks Shop", "The Shop From Which I Sell Humorous Items", "The Prank Gestalt", "The Clown's Armory", "Uncle Knuckle's Chuckle Bunker", "A Place from Which to do Humorous Business")
+	speech = list("hail_generic" = "We welcome you to our shop of humorous items. We invite you to partake in the divine experience of being pranked, and pranking someone else.",
 				"hail_Diona"     = "Welcome, other gestalt. We invite you to learn of our experiences, and teach us of your own.",
 				"hail_deny"      = "We cannot do business with you. We are sorry.",
 
@@ -88,7 +88,7 @@
 				"insult_good"    = "You are attempting to insult us, correct?",
 				"insult_bad"     = "We do not understand.",
 
-				"bribe_refusal"  = "We are sorry but we cannot accept.",
+				"bribe_refusal"  = "We are sorry, but we cannot accept.",
 				"bribe_accept"   = "We are happy to say that we accept this bribe.",
 				)
 	possible_trading_items = list(/obj/item/clothing/mask/gas/clown_hat = TRADER_THIS_TYPE,
@@ -112,24 +112,24 @@
 	name = "Replica Store Owner"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Replica Store"
-	possible_origins = list("Ye-Old Armory", "Knights and Knaves", "The Blacksmith", "Historical Human Apparel and Items", "The Pointy End")
-	speech = list("hail_generic" = "Welcome, welcome! You look like a man who appreciates human history. Come in, and learn! Maybe even.... buy?",
-				"hail_Unathi"    = "Ah, you look like a lizard who knows his way around martial combat. Come in! Our stuff may not be as high quality as you are used to, but feel free to look around.",
-				"hail_deny"      = "A man who does not appreciate history does not appreciate me. Goodbye.",
+	possible_origins = list("Ye-Old Armory", "Knights and Knaves", "The Blacksmith", "Historical Human Apparel and Items", "The Pointy End", "Fight Knight's Knightly Nightly Knight Fights", "Elminster's Fine Steel", "The Arms of King Duordan", "Queen's Edict")
+	speech = list("hail_generic" = "Greetings, traveler! You've the look of one with a keen hunger for human history. Come in, and learn! Mayhaps even... buy?",
+				"hail_Unathi"    = "Ah, you've the look of a lizard who knows his way around martial combat. Come in! We can only hope our steel meets the formidable Moghedi standards.",
+				"hail_deny"      = "I shan't palaver with a man who thumbs his nose at the annals of history. Goodbye.",
 
-				"trade_complete" = "Now remember, these may be replicas, but they are still a bit sharp!",
-				"trade_blacklist"= "No, I don't deal in that.",
-				"trade_not_enough"="Hm. Well, I need more money than that.",
-				"how_much"       = "This fine piece of craftsmanship costs about VALUE thalers.",
-				"what_want"      = "I want",
+				"trade_complete" = "Thank you, mighty warrior. And remember - these may be replicas, but their edges are honed to razor sharpness!",
+				"trade_blacklist"= "Nay, we accept only the thaler. Or sovereigns of the king's mint, of course.",
+				"trade_not_enough"="Alas, traveler, my fine wares cost more than that.",
+				"how_much"       = "For VALUE thalers, I can part with this finest of goods.",
+				"what_want"      = "I have ever longed for",
 
 				"compliment_deny"= "Oh ho ho! Aren't you quite the jester.",
-				"compliment_accept"="Hard to tell, isn't it? I make them all myself.",
-				"insult_good"    = "They aren't JUST replicas!",
-				"insult_bad"     = "Well, I'll never!",
+				"compliment_accept"="Why, thank you, traveler! Long have I slaved over the anvil to produce these goods.",
+				"insult_good"    = "Hey, bro, I'm just tryin' to make a living here, okay? The Camelot schtick is part of my brand.",
+				"insult_bad"     = "Man, fuck you, then.",
 
-				"bribe_refusal"  = "Well. I'd love to stay, but I've got an Unathi client somewhere else, and they are not known for patience.",
-				"bribe_accept"   = "Sure, I'll stay a bit longer. Just for you, though.",
+				"bribe_refusal"  = "Alas, traveler - I could stay all eve, but I've an Unathi client in waiting, and they are not known for patience.",
+				"bribe_accept"   = "Mayhaps I could set a spell longer, and rest my weary feet.",
 				)
 	possible_trading_items = list(/obj/item/clothing/head/wizard/magus = TRADER_THIS_TYPE,
 								/obj/item/weapon/shield/buckler        = TRADER_THIS_TYPE,
