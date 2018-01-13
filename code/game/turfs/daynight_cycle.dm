@@ -1,6 +1,6 @@
 
 //this is about how long it takes under the server settings i tested to do a full light switchover
-#define DURATION_LIGHTING_CHANGE 200
+#define DURATION_LIGHTING_CHANGE 400
 #define DAYTIME_BRIGHTNESS 2
 
 /obj/effect/landmark/day_night_zcontroller
@@ -11,7 +11,7 @@
 	var/solar_cycle_offset = 1500		//deciseconds
 	var/threshold_dawn = 0.25			//percent
 	var/threshold_dusk = 0.75			//percent
-	var/light_change_amount = 0.2		//set this to 2 for light changes to be 100% instead of a dawn/dusk period
+	var/light_change_amount = 0.4		//set this to 2 for light changes to be 100% instead of a dawn/dusk period
 	var/dusk_threshold_time
 	var/dawn_threshold_time
 	//var/current_light_level = 9
