@@ -56,6 +56,9 @@
 /obj/item/weapon/card/id/torch/contractor/medical
 	job_access_type = /datum/job/doctor_contractor
 
+/obj/item/weapon/card/id/torch/contractor/chemist
+	job_access_type = /datum/job/chemist
+
 /obj/item/weapon/card/id/torch/contractor/medical/counselor
 	job_access_type = /datum/job/psychiatrist
 
