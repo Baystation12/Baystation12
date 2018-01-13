@@ -37,5 +37,6 @@
 	var/list/organs = list()
 	var/list/organs_by_name = list() // map organ names to organs
 	var/list/internal_organs_by_name = list() // so internal organs have less ickiness too
-	
+
 	var/list/stasis_sources = list()
+	var/stasis_value

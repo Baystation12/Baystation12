@@ -642,10 +642,9 @@
 		// nutrition decrease
 		if (nutrition > 0)
 			nutrition = max (0, nutrition - species.hunger_factor)
-		
-		var/stasis = GetStasis()
-		if(stasis > 1 && drowsyness < stasis*5)
-			drowsyness += min(stasis, 3)
+
+		if(stasis_value > 1 && drowsyness < stasis_value * 5)
+			drowsyness += min(stasis_value, 3)
 			if(!stat && prob(1))
 				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
 

@@ -431,6 +431,17 @@
 	playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
 	sleep(5) // wait for animation to finish
 
+	if(prob(35))
+		for(var/mob/living/carbon/human/L in src)
+			var/list/obj/item/organ/external/crush = L.get_damageable_organs()
+			if(!crush.len)
+				return
+
+			var/obj/item/organ/external/E = pick(crush)
+
+			E.take_damage(45, used_weapon = "Blunt Trauma")
+			to_chat(L, "\The [src]'s mechanisms crush your [E.name]!")
+
 	H.init(src)	// copy the contents of disposer to holder
 
 	H.start(src) // start the holder processing movement
