@@ -136,10 +136,26 @@
 /obj/item/clothing/get_examine_line()
 	. = ..()
 	var/list/ties = list()
-	for(var/accessory in accessories)
-		ties += "\icon[accessory] \a [accessory]"
+	for(var/obj/item/clothing/accessory/accessory in accessories)
+		if(accessory.high_visibility)
+			ties += "\icon[accessory] \a [accessory]"
 	if(ties.len)
 		.+= " with [english_list(ties)] attached"
+	if(accessories.len > ties.len)
+		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
+
+/obj/item/clothing/CanUseTopic(var/user)
+	if(user in view(get_turf(src)))
+		return STATUS_INTERACTIVE
+
+/obj/item/clothing/OnTopic(var/user, var/list/href_list, var/datum/topic_state/state)
+	if(href_list["list_ungabunga"])
+		if(accessories.len)
+			var/list/ties = list()
+			for(var/accessory in accessories)
+				ties += "\icon[accessory] \a [accessory]"
+			to_chat(user, "Attached to \the [src] are [english_list(ties)].")
+		return TOPIC_HANDLED
 
 ///////////////////////////////////////////////////////////////////////
 // Ears: headsets, earmuffs and tiny objects

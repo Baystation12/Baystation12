@@ -3,6 +3,7 @@
 	desc = "A handgun holster."
 	icon_state = "holster"
 	slot = ACCESSORY_SLOT_HOLSTER
+	high_visibility = 1
 	var/obj/item/holstered = null
 	var/list/can_hold
 
