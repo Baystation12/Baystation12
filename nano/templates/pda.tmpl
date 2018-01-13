@@ -257,9 +257,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     {{for data.messages}}
                         {{if data.active_conversation == value.target}}
                             {{if value.sent==0}}
-                                <span class="average"><B>Them</B>: {{:value.message}}</span><br>
+                                <span class="average">{{:value.timestamp}}- <B>Them</B>: {{:value.message}}</span><br>
                             {{else}}
-                                <span class="good"><B>You</B>: {{:value.message}}</span><br>
+                                <span class="good">{{:value.timestamp}}- <B>You</B>: {{:value.message}}</span><br>
                             {{/if}}
                         {{/if}}
                     {{/for}}
