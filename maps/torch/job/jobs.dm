@@ -1103,7 +1103,7 @@
 	spawn_positions = 12
 	supervisors = "the Executive Officer"
 	selection_color = "#515151"
-	economic_modifier = 1
+	economic_modifier = 6
 	alt_titles = list(
 		"Private Investigator" = /decl/hierarchy/outfit/job/torch/passenger/passenger/PI,
 		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,
