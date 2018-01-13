@@ -849,6 +849,8 @@
 	var/area/A = get_area(src)
 	if(client && world.time >= client.played + 600)
 		A.play_ambience(src)
+	if(stat == UNCONSCIOUS && world.time - l_move_time < 5 && prob(10))
+		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)
