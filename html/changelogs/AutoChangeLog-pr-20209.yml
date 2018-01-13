@@ -1,0 +1,5 @@
+author: "comma"
+delete-after: True
+changes: 
+  - tweak: "Chemist is now its own job slot. Medical Contractor slots lowered by one."
+  - rscdel: "Removed Mortician because you don't get more useless than that."
