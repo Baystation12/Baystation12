@@ -742,7 +742,7 @@
 
 	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry)
 	minimal_access = list()
-	
+
 /datum/job/psychiatrist
 	title = "Counselor"
 	total_positions = 1
@@ -1125,7 +1125,7 @@
 		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,
 		"Historian",
 		"Botanist",
-		"Investor",
+		"Investor" = /decl/hierarchy/outfit/job/torch/passenger/passenger/investor,
 		"Naturalist",
 		"Ecologist",
 		"Entertainer",
