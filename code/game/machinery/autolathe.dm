@@ -264,7 +264,7 @@
 		update_use_power(1)
 
 		//Sanity check.
-		if(!making || !QDELETED(src)) return TOPIC_HANDLED
+		if(!making || QDELETED(src)) return TOPIC_HANDLED
 
 		//Create the desired item.
 		var/obj/item/I = new making.path(loc)
