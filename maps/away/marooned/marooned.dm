@@ -12,7 +12,7 @@
 /obj/effect/overmap/sector/marooned
 	name = "glacial planetoid"
 	desc = "Moon-sized planet with breathable atmosphere. Sensors are picking up a weak radio signal from the surface."
-	icon_state = "object"
+	icon_state = "globe"
 	known = 0
 
 	generic_waypoints = list(
@@ -22,7 +22,7 @@
 	)
 
 /obj/effect/overmap/sector/marooned/New(nloc, max_x, max_y)
-	name = "[generate_planet_name()], \a [name]"
+	name = "[generate_planet_name()], \a [initial(name)]"
 	..()
 
 /datum/map_template/ruin/away_site/marooned

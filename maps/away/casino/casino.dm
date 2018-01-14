@@ -23,7 +23,7 @@
 	)
 
 /obj/effect/overmap/ship/casino/New(nloc, max_x, max_y)
-	name = "IPV [pick("Fortuna","Gold Rush","Ebisu","Lucky Paw","Four Leaves")], \a [name]"
+	name = "IPV [pick("Fortuna","Gold Rush","Ebisu","Lucky Paw","Four Leaves")],\a [initial(name)]"
 	..()
 
 /datum/map_template/ruin/away_site/casino

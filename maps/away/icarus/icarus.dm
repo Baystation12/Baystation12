@@ -1,7 +1,7 @@
 #include "icarus_areas.dm"
 
 /obj/effect/overmap/sector/icarus
-	name = "lush expolanet"
+	name = "jungle planetoid"
 	desc = "Sensors detect anomalous radiation area with the presence of artificial structures."
 	icon_state = "globe"
 	known = 0
@@ -12,7 +12,7 @@
 	)
 
 /obj/effect/overmap/sector/icarus/New(nloc, max_x, max_y)
-	name = "[generate_planet_name()], \a [name]"
+	name = "[generate_planet_name()], \a [initial(name)]"
 	..()
 
 obj/effect/icarus/irradiate
