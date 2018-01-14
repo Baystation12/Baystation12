@@ -1458,27 +1458,13 @@ datum/objective/silence
 		if(!emergency_shuttle.returned())
 			return 0
 
-		var/area/shuttle = locate(/area/shuttle/escape/centcom)
-		var/area/pod1 =    locate(/area/shuttle/escape_pod1/centcom)
-		var/area/pod2 =    locate(/area/shuttle/escape_pod2/centcom)
-		var/area/pod3 =    locate(/area/shuttle/escape_pod3/centcom)
-		var/area/pod4 =    locate(/area/shuttle/escape_pod5/centcom)
-
-		for(var/mob/living/player in world)
+		for(var/mob/living/player in player_list)
 			if (player == owner.current)
 				continue
-			if (player.mind)
-				if (player.stat != 2)
-					if (get_turf(player) in shuttle)
-						return 0
-					if (get_turf(player) in pod1)
-						return 0
-					if (get_turf(player) in pod2)
-						return 0
-					if (get_turf(player) in pod3)
-						return 0
-					if (get_turf(player) in pod4)
-						return 0
+			if (player.stat != DEAD)
+				var/area/A = get_area(player)
+				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
+					return 0
 		return 1
 
 #undef FRAME_PROBABILITY

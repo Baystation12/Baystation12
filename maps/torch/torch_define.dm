@@ -8,10 +8,9 @@
 
 	station_levels = list(1,2,3,4,5)
 	contact_levels = list(1,2,3,4,5)
-	player_levels = list(1,2,3,4,5,8)
-	admin_levels = list(6,7)
-	empty_levels = list(8)
-	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"8"=30)
+	player_levels = list(1,2,3,4,5,7)
+	admin_levels = list(6)
+	empty_levels = list(7)
 	overmap_size = 40
 	overmap_event_areas = 30
 	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "torch.marine.mil", "freemail.nt")
