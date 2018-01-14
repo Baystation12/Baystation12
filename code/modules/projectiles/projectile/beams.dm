@@ -39,9 +39,9 @@
 	damage = 60
 	armor_penetration = 30
 
-	muzzle_type = /obj/effect/projectile/laser_heavy/muzzle
-	tracer_type = /obj/effect/projectile/laser_heavy/tracer
-	impact_type = /obj/effect/projectile/laser_heavy/impact
+	muzzle_type = /obj/effect/projectile/laser/heavy/muzzle
+	tracer_type = /obj/effect/projectile/laser/heavy/tracer
+	impact_type = /obj/effect/projectile/laser/heavy/impact
 
 /obj/item/projectile/beam/xray
 	name = "x-ray beam"
@@ -51,9 +51,9 @@
 	armor_penetration = 30
 	penetration_modifier = 0.8
 
-	muzzle_type = /obj/effect/projectile/xray/muzzle
-	tracer_type = /obj/effect/projectile/xray/tracer
-	impact_type = /obj/effect/projectile/xray/impact
+	muzzle_type = /obj/effect/projectile/laser/xray/muzzle
+	tracer_type = /obj/effect/projectile/laser/xray/tracer
+	impact_type = /obj/effect/projectile/laser/xray/impact
 
 /obj/item/projectile/beam/xray/midlaser
 	damage = 30
@@ -65,9 +65,9 @@
 	fire_sound='sound/weapons/pulse.ogg'
 	damage = 15 //lower damage, but fires in bursts
 
-	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
-	tracer_type = /obj/effect/projectile/laser_pulse/tracer
-	impact_type = /obj/effect/projectile/laser_pulse/impact
+	muzzle_type = /obj/effect/projectile/laser/pulse/muzzle
+	tracer_type = /obj/effect/projectile/laser/pulse/tracer
+	impact_type = /obj/effect/projectile/laser/pulse/impact
 
 /obj/item/projectile/beam/pulse/mid
 	damage = 20
@@ -91,9 +91,9 @@
 	fire_sound='sound/weapons/blaster.ogg'
 	damage = 30
 
-	muzzle_type = /obj/effect/projectile/laser_bogani/muzzle
-	tracer_type = /obj/effect/projectile/laser_bogani/tracer
-	impact_type = /obj/effect/projectile/laser_bogani/impact
+	muzzle_type = /obj/effect/projectile/laser/bogani/muzzle
+	tracer_type = /obj/effect/projectile/laser/bogani/tracer
+	impact_type = /obj/effect/projectile/laser/bogani/impact
 
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"
@@ -101,9 +101,9 @@
 	fire_sound = 'sound/weapons/emitter.ogg'
 	damage = 0 // The actual damage is computed in /code/modules/power/singularity/emitter.dm
 
-	muzzle_type = /obj/effect/projectile/emitter/muzzle
-	tracer_type = /obj/effect/projectile/emitter/tracer
-	impact_type = /obj/effect/projectile/emitter/impact
+	muzzle_type = /obj/effect/projectile/laser/emitter/muzzle
+	tracer_type = /obj/effect/projectile/laser/emitter/tracer
+	impact_type = /obj/effect/projectile/laser/emitter/impact
 
 /obj/item/projectile/beam/lastertag/blue
 	name = "lasertag beam"
@@ -114,9 +114,9 @@
 	damage_type = BURN
 	check_armour = "laser"
 
-	muzzle_type = /obj/effect/projectile/laser_blue/muzzle
-	tracer_type = /obj/effect/projectile/laser_blue/tracer
-	impact_type = /obj/effect/projectile/laser_blue/impact
+	muzzle_type = /obj/effect/projectile/laser/blue/muzzle
+	tracer_type = /obj/effect/projectile/laser/blue/tracer
+	impact_type = /obj/effect/projectile/laser/blue/impact
 
 /obj/item/projectile/beam/lastertag/blue/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
@@ -149,9 +149,9 @@
 	damage_type = BURN
 	check_armour = "laser"
 
-	muzzle_type = /obj/effect/projectile/laser_omni/muzzle
-	tracer_type = /obj/effect/projectile/laser_omni/tracer
-	impact_type = /obj/effect/projectile/laser_omni/impact
+	muzzle_type = /obj/effect/projectile/laser/omni/muzzle
+	tracer_type = /obj/effect/projectile/laser/omni/tracer
+	impact_type = /obj/effect/projectile/laser/omni/impact
 
 /obj/item/projectile/beam/lastertag/omni/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
@@ -170,9 +170,9 @@
 	weaken = 3
 	stutter = 3
 
-	muzzle_type = /obj/effect/projectile/xray/muzzle
-	tracer_type = /obj/effect/projectile/xray/tracer
-	impact_type = /obj/effect/projectile/xray/impact
+	muzzle_type = /obj/effect/projectile/laser/xray/muzzle
+	tracer_type = /obj/effect/projectile/laser/xray/tracer
+	impact_type = /obj/effect/projectile/laser/xray/impact
 
 /obj/item/projectile/beam/stun
 	name = "stun beam"
