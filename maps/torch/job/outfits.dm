@@ -251,13 +251,21 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/crew/security/forensic
 	pda_type = /obj/item/device/pda/detective
 
+/decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor
+	name = OUTFIT_JOB_NAME("Forensic Technician - Contractor")
+	head = /obj/item/clothing/head/det
+	uniform = /obj/item/clothing/under/det
+	suit = /obj/item/clothing/suit/storage/det_trench/ft
+	shoes = /obj/item/clothing/shoes/laceup
+	backpack_contents = list(/obj/item/clothing/accessory/badge = 1)
+
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet
 	name = OUTFIT_JOB_NAME("Forensic Technician - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/civ
-	name = OUTFIT_JOB_NAME("Forensic Technician - Civilian")
+/decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marshal
+	name = OUTFIT_JOB_NAME("Forensic Technician - Colonial Marshal")
 	uniform = /obj/item/clothing/under/det/grey
 	suit = /obj/item/clothing/suit/storage/toggle/marshal_jacket
 	shoes = /obj/item/clothing/shoes/dress
@@ -600,10 +608,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/device/pda
 	id_type = /obj/item/weapon/card/id/torch/passenger
-
-/decl/hierarchy/outfit/job/torch/passenger/passenger/PI
-	name = OUTFIT_JOB_NAME("Private Investigator - Torch")
-	backpack_contents = list(/obj/item/clothing/accessory/badge/PI = 1)
 
 /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist
 	name = OUTFIT_JOB_NAME("Journalist - Torch")
