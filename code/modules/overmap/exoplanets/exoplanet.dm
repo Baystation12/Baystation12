@@ -25,7 +25,6 @@
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
-		qdel(src)
 		return
 
 	maxx = max_x ? max_x : world.maxx
@@ -35,9 +34,7 @@
 
 	world.maxz++
 	forceMove(locate(1,1,world.maxz))
-	map_z = GetConnectedZlevels(z)
-	for(var/zlevel in map_z)
-		map_sectors["[zlevel]"] = src
+
 	var/list/feature_types = possible_features.Copy()
 	possible_features.Cut()
 	for(var/T in feature_types)

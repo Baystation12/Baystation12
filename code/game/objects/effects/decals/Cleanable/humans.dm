@@ -122,7 +122,6 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
 	..()
 	if (amount && istype(user))
-		add_fingerprint(user)
 		if (user.gloves)
 			return
 		var/taken = rand(1,amount)

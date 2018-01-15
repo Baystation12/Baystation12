@@ -12,7 +12,7 @@
 	var/locked = 1
 	var/max_range = 8
 	var/storedpower = 0
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	//There have to be at least two posts, so these are effectively doubled
 	var/power_draw = 30 KILOWATTS //30 kW. How much power is drawn from powernet. Increase this to allow the generator to sustain longer shields, at the cost of more power draw.
 	var/max_stored_power = 50 KILOWATTS //50 kW
@@ -41,25 +41,23 @@
 	else
 		icon_state = "Shield_Gen +a"
 
-/obj/machinery/shieldwallgen/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/machinery/shieldwallgen/OnTopic(var/mob/user, href_list)
 	if(href_list["toggle"])
 		if(src.active >= 1)
 			src.active = 0
 			update_icon()
 
-			usr.visible_message("\The [usr] turned the shield generator off.", \
+			user.visible_message("\The [user] turned the shield generator off.", \
 				"You turn off the shield generator.", \
 				"You hear heavy droning fade out.")
 			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
 		else
 			src.active = 1
 			update_icon()
-			usr.visible_message("\The [usr] turned the shield generator on.", \
+			user.visible_message("\The [user] turned the shield generator on.", \
 				"You turn on the shield generator.", \
 				"You hear heavy droning.")
-	return 1
+		return TOPIC_REFRESH
 
 /obj/machinery/shieldwallgen/ex_act(var/severity)
 	switch(severity)
@@ -343,7 +341,7 @@
 /obj/machinery/shieldwall/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 
-	if(istype(mover) && mover.checkpass(PASSGLASS))
+	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return prob(20)
 	else
 		if (istype(mover, /obj/item/projectile))

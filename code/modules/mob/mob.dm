@@ -18,7 +18,7 @@
 		spellremove(src)
 	ghostize()
 	..()
-	return QDEL_HINT_HARDDEL_NOW
+	return QDEL_HINT_HARDDEL
 
 /mob/proc/remove_screen_obj_references()
 	hands = null
@@ -848,9 +848,6 @@
 
 /mob/proc/get_species()
 	return ""
-
-/mob/proc/flash_weak_pain()
-	flick("weak_pain",pain)
 
 /mob/proc/get_visible_implants(var/class = 0)
 	var/list/visible_implants = list()

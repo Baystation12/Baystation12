@@ -4,6 +4,7 @@
  *		Anesthetic
  *		Air
  *		Phoron
+ *		Hydrogen
  *		Emergency Oxygen
  */
 
@@ -73,7 +74,7 @@
 	desc = "Contains dangerous phoron. Do not inhale. Warning: extremely flammable."
 	icon_state = "phoron"
 	gauge_icon = null
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null	//they have no straps!
 
 
@@ -83,7 +84,22 @@
 	src.air_contents.adjust_gas("phoron", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
 	return
 
-/obj/item/weapon/tank/phoron/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/*
+ * Hydrogen
+ */
+/obj/item/weapon/tank/hydrogen
+	name = "hydrogen tank"
+	desc = "Contains hydrogen. Warning: flammable."
+	icon_state = "hydrogen"
+	gauge_icon = null
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = null
+
+/obj/item/weapon/tank/hydrogen/New()
+	..()
+	src.air_contents.adjust_gas("hydrogen", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
+
+/obj/item/weapon/tank/hydrogen/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
 	if (istype(W, /obj/item/weapon/flamethrower))
@@ -103,7 +119,7 @@
 	icon_state = "emergency"
 	gauge_icon = "indicator_emergency"
 	gauge_cap = 4
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	force = 4

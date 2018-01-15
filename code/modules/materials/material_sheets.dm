@@ -31,9 +31,9 @@
 		color = material.icon_colour
 
 	if(material.conductive)
-		flags |= CONDUCT
+		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
-		flags &= (~CONDUCT)
+		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 
 	matter = material.get_matter()
 	update_strings()

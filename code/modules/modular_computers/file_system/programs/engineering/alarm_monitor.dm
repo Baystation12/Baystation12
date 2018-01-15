@@ -108,6 +108,9 @@
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		categories[++categories.len] = list("category" = AH.category, "alarms" = list())
 		for(var/datum/alarm/A in AH.major_alarms())
+			if(!AreConnectedZLevels(get_host_z(), A.alarm_z()))
+				continue
+
 			var/cameras[0]
 			var/lost_sources[0]
 

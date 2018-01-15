@@ -145,7 +145,7 @@
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
 /datum/species/unathi/handle_environment_special(var/mob/living/carbon/human/H)
-	if(H.in_stasis || H.stat == DEAD)
+	if(H.InStasis() || H.stat == DEAD)
 		return
 	if(H.nutrition < 50)
 		H.adjustToxLoss(2,0)
@@ -189,7 +189,7 @@
 	if(prob(2) && H.nutrition > 150)
 		for(var/limb_type in has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits... 
+			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits...
 				E.removed()			//...because no one wants their head to explode to make way for a new one.
 				qdel(E)
 				E= null
@@ -402,7 +402,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_IS_PLANT | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SLIP
 	appearance_flags = 0
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
 
@@ -456,7 +456,7 @@
 	return "sap"
 
 /datum/species/diona/handle_environment_special(var/mob/living/carbon/human/H)
-	if(H.in_stasis || H.stat == DEAD)
+	if(H.InStasis() || H.stat == DEAD)
 		return
 	if(H.nutrition < 10)
 		H.take_overall_damage(2,0)

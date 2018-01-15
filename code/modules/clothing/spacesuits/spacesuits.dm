@@ -6,7 +6,7 @@
 	name = "Space helmet"
 	icon_state = "space"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
-	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	flags_inv = BLOCKHAIR
 	item_state_slots = list(
 		slot_l_hand_str = "s_helmet",
@@ -77,7 +77,7 @@
 	w_class = ITEM_SIZE_LARGE//large item
 	gas_transfer_coefficient = 0
 	permeability_coefficient = 0
-	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/device/suit_cooling_unit)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)

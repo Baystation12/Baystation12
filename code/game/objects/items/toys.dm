@@ -289,7 +289,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "katana"
 	item_state = "katana"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 5
 	throwforce = 5
@@ -836,10 +836,10 @@
 /obj/item/toy/ringbell/attack_hand(mob/user as mob)
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] rings \the [src], signalling the beginning of the contest.</span>")
-		playsound(user.loc, 'sound/items/oneding.ogg', 60, 1)
+		playsound(user.loc, 'sound/items/oneding.ogg', 60)
 	else if (user.a_intent == I_DISARM)
 		user.visible_message("<span class='notice'>[user] rings \the [src] three times, signalling the end of the contest!</span>")
-		playsound(user.loc, 'sound/items/threedings.ogg', 60, 1)
+		playsound(user.loc, 'sound/items/threedings.ogg', 60)
 	else if (user.a_intent == I_HURT)
 		user.visible_message("<span class='warning'>[user] rings \the [src] repeatedly, signalling a disqualification!</span>")
-		playsound(user.loc, 'sound/items/manydings.ogg', 60, 1)
+		playsound(user.loc, 'sound/items/manydings.ogg', 60)

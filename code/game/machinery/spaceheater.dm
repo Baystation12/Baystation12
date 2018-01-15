@@ -11,7 +11,7 @@
 	var/set_temperature = T0C + 20	//K
 	var/active = 0
 	var/heating_power = 40 KILOWATTS
-	flags = OBJ_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	clicksound = "switch"
 
 
@@ -85,7 +85,7 @@
 	return
 
 /obj/machinery/space_heater/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
+	..()
 	interact(user)
 
 /obj/machinery/space_heater/interact(mob/user as mob)

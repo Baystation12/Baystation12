@@ -1,0 +1,4 @@
+author: "CountAlex"
+delete-after: True
+changes: 
+  - tweak: "\"Refactoring corpse spawners.\""

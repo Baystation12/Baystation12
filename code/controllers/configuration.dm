@@ -196,8 +196,6 @@ var/list/gamemode_cache = list()
 
 	var/aggressive_changelog = 0
 
-	var/list/language_prefixes = list(",","#","-")//Default language prefixes
-
 	var/ghosts_can_possess_animals = 0
 	var/delist_when_no_admins = FALSE
 
@@ -679,11 +677,6 @@ var/list/gamemode_cache = list()
 
 				if("aggressive_changelog")
 					config.aggressive_changelog = 1
-
-				if("default_language_prefixes")
-					var/list/values = splittext(value, " ")
-					if(values.len > 0)
-						language_prefixes = values
 
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE

@@ -81,7 +81,7 @@
 				valid_lawsets[ai_law_name] = law_set_type
 
 		// Post selection
-		var/chosen_lawset = input(user, "Choose a law set:", "Character Preference", pref.laws)  as null|anything in valid_lawsets
+		var/chosen_lawset = input(user, "Choose a law set:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.laws)  as null|anything in valid_lawsets
 		if(chosen_lawset)
 			var/path = valid_lawsets[chosen_lawset]
 			var/datum/ai_laws/lawset = new path()

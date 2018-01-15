@@ -22,7 +22,7 @@
 	if(istype(below, /turf/space))
 		return
 	var/area/A = below.loc
-	if(A.flags & AREA_EXTERNAL)
+	if(A.area_flags & AREA_FLAG_EXTERNAL)
 		return
 	if(!below.density && istype(below.loc, /area/space))
 		return

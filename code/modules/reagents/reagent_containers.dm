@@ -111,25 +111,28 @@
 		to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
 		return 1
 
-	if(target == user)
-		if(istype(user, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			if(!H.check_has_mouth())
-				to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
-				return
-			var/obj/item/blocked = H.check_mouth_coverage()
-			if(blocked)
-				to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
-				return
+	// only carbons can eat
+	if(istype(target, /mob/living/carbon))
+		if(target == user)
+			if(istype(user, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = user
+				if(!H.check_has_mouth())
+					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
+					return
+				var/obj/item/blocked = H.check_mouth_coverage()
+				if(blocked)
+					to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
+					return
 
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
-		self_feed_message(user)
-		reagents.trans_to_mob(user, issmall(user) ? ceil(amount_per_transfer_from_this/2) : amount_per_transfer_from_this, CHEM_INGEST)
-		feed_sound(user)
-		return 1
-	else
-		if(istype(user, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = target
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN) //puts a limit on how fast people can eat/drink things
+			self_feed_message(user)
+			reagents.trans_to_mob(user, issmall(user) ? ceil(amount_per_transfer_from_this/2) : amount_per_transfer_from_this, CHEM_INGEST)
+			feed_sound(user)
+			return 1
+
+
+		else
+			var/mob/living/carbon/H = target
 			if(!H.check_has_mouth())
 				to_chat(user, "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!")
 				return
@@ -138,20 +141,22 @@
 				to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 				return
 
-		other_feed_message_start(user, target)
+			other_feed_message_start(user, target)
 
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(!do_mob(user, target))
-			return
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			if(!do_mob(user, target))
+				return
 
-		other_feed_message_finish(user, target)
+			other_feed_message_finish(user, target)
 
-		var/contained = reagentlist()
-		admin_attack_log(user, target, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
+			var/contained = reagentlist()
+			admin_attack_log(user, target, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 
-		reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INGEST)
-		feed_sound(user)
-		return 1
+			reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INGEST)
+			feed_sound(user)
+			return 1
+
+	return 0
 
 /obj/item/weapon/reagent_containers/proc/standard_pour_into(var/mob/user, var/atom/target) // This goes into afterattack and yes, it's atom-level
 	if(!target.reagents)

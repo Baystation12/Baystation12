@@ -1270,7 +1270,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	item_state = "electronic"
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/machinery/power/apc/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()

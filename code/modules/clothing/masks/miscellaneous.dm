@@ -16,8 +16,8 @@
 	item_state = null
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/clothing/mask/muzzle/New()
-	..()
+/obj/item/clothing/mask/muzzle/Initialize()
+	. = ..()
 	say_messages = list("Mmfph!", "Mmmf mrrfff!", "Mmmf mnnf!")
 	say_verbs = list("mumbles", "says")
 
@@ -34,7 +34,7 @@
 	item_state = "sterile"
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
@@ -69,7 +69,7 @@
 	icon_state = "blueneckscarf"
 	item_state = "blueneckscarf"
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
@@ -79,7 +79,7 @@
 	icon_state = "redwhite_scarf"
 	item_state = "redwhite_scarf"
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
@@ -89,7 +89,7 @@
 	icon_state = "green_scarf"
 	item_state = "green_scarf"
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
@@ -99,7 +99,7 @@
 	icon_state = "ninja_scarf"
 	item_state = "ninja_scarf"
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 	siemens_coefficient = 0

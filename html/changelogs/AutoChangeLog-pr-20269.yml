@@ -1,0 +1,8 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - rscadd: "Lasers and muzzle flashes now illuminate their surroundings."
+  - tweak: "Beams are not visible quite as long due to vast optimizations in how they are rendered."
+  - tweak: "Muzzle flashes will now appear over lighting, and do not last nearly as long."
+  - tweak: "Bullets now fly more smoothly towards their targets."
+  - bugfix: "Fixes a bug that caused the L6 SAW to load an empty sprite when closed without a box magazine inside."

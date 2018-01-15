@@ -20,7 +20,7 @@
 	w_class = ITEM_SIZE_HUGE
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0
-	item_flags = STOPPRESSUREDAMAGE
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/weapon/tank/emergency, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
 	armor = list(melee = 65, bullet = 50, laser = 50, energy = 25, bomb = 50, bio = 100, rad = 50)
@@ -43,7 +43,7 @@
 		slot_r_hand_str = "syndicate-helm-black-red",
 		)
 	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 100, rad = 60)
-	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.6
 
@@ -53,7 +53,7 @@
 	desc = "Ho ho ho. Merrry X-mas!"
 	icon_state = "santahat"
 	item_state = "santahat"
-	item_flags = STOPPRESSUREDAMAGE
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD
 
@@ -61,7 +61,7 @@
 	name = "Santa's suit"
 	desc = "Festive!"
 	icon_state = "santa"
-	item_flags = STOPPRESSUREDAMAGE
+	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE
 	allowed = list(/obj/item) //for stuffing exta special presents
 
 /obj/item/clothing/suit/space/santa/New()

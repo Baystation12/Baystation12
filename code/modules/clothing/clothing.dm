@@ -49,6 +49,15 @@
 	. = ..()
 	gunshot_residue = null
 
+/obj/item/clothing/proc/get_fibers()
+	. = "material from \a [name]"
+	var/list/acc = list()
+	for(var/obj/item/clothing/accessory/A in accessories)
+		if(prob(40) && A.get_fibers())
+			acc += A.get_fibers()
+	if(acc.len)
+		. += " with traces of [english_list(acc)]"
+
 /obj/item/clothing/New()
 	..()
 	if(starting_accessories)
@@ -127,10 +136,26 @@
 /obj/item/clothing/get_examine_line()
 	. = ..()
 	var/list/ties = list()
-	for(var/accessory in accessories)
-		ties += "\icon[accessory] \a [accessory]"
+	for(var/obj/item/clothing/accessory/accessory in accessories)
+		if(accessory.high_visibility)
+			ties += "\icon[accessory] \a [accessory]"
 	if(ties.len)
 		.+= " with [english_list(ties)] attached"
+	if(accessories.len > ties.len)
+		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
+
+/obj/item/clothing/CanUseTopic(var/user)
+	if(user in view(get_turf(src)))
+		return STATUS_INTERACTIVE
+
+/obj/item/clothing/OnTopic(var/user, var/list/href_list, var/datum/topic_state/state)
+	if(href_list["list_ungabunga"])
+		if(accessories.len)
+			var/list/ties = list()
+			for(var/accessory in accessories)
+				ties += "\icon[accessory] \a [accessory]"
+			to_chat(user, "Attached to \the [src] are [english_list(ties)].")
+		return TOPIC_HANDLED
 
 ///////////////////////////////////////////////////////////////////////
 // Ears: headsets, earmuffs and tiny objects
@@ -241,7 +266,7 @@ BLIND     // can't see anything
 	blood_overlay_type = "bloodyhands"
 
 /obj/item/clothing/gloves/Initialize()
-	if(item_flags & PREMODIFIED)
+	if(item_flags & ITEM_FLAG_PREMODIFIED)
 		cut_fingertops()
 
 	. = ..()
@@ -258,6 +283,9 @@ BLIND     // can't see anything
 		if (cell.charge < 0)
 			cell.charge = 0
 	..()
+
+/obj/item/clothing/gloves/get_fibers()
+	return "material from a pair of [name]."
 
 // Called just before an attack_hand(), in mob/UnarmedAttack()
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)

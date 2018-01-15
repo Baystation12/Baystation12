@@ -303,6 +303,20 @@
 	item_state = "taqiyah"
 	body_parts_covered = 0
 
+/obj/item/clothing/head/tank
+	name = "padded cap"
+	desc = "A padded skullcup for those prone to bumping their heads against hard surfaces."
+	icon_state = "tank"
+	flags_inv = BLOCKHEADHAIR
+	color = "#5f5f5f"
+	armor = list(melee = 20)
+
+/obj/item/clothing/head/tank/olive
+	color = "#727c58"
+
+/obj/item/clothing/head/tank/tan
+	color = "#ae9f79"
+
 /obj/item/clothing/head/helmet/facecover
 	name = "face cover"
 	desc = "A helmet made of plastic. It's completely opaque. This will stop the stare."

@@ -31,7 +31,7 @@
 /datum/grab/normal/on_hit_help(var/obj/item/grab/normal/G)
 	var/obj/item/organ/external/O = G.get_targeted_organ()
 	if(O)
-		return O.inspect(G.affecting, G.assailant)
+		return O.inspect(G.assailant)
 
 /datum/grab/normal/on_hit_disarm(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
@@ -73,7 +73,7 @@
 
 		G.attacking = 0
 		G.action_used()
-		O.jointlock(affecting, assailant)
+		O.jointlock(assailant)
 		assailant.visible_message("<span class='danger'>[affecting]'s [O.name] is twisted!</span>")
 		playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		return 1
@@ -249,7 +249,7 @@
 	var/damage_mod = 1
 	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
 	var/obj/item/clothing/head/helmet = affecting.get_equipped_item(slot_head)
-	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.flags & STOPPRESSUREDAMAGE))
+	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE))
 		//we don't do an armor_check here because this is not an impact effect like a weapon swung with momentum, that either penetrates or glances off.
 		damage_mod = 1.0 - (helmet.armor["melee"]/100)
 

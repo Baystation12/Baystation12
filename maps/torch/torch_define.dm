@@ -12,8 +12,8 @@
 	admin_levels = list(6,7)
 	empty_levels = list(8)
 	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"8"=30)
-	overmap_size = 40
-	overmap_event_areas = 30
+	overmap_size = 35
+	overmap_event_areas = 22
 	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "torch.marine.mil", "freemail.nt")
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
@@ -42,7 +42,7 @@
 	num_exoplanets = 1
 	planet_size = list(129,129)
 
-	away_site_budget = 4
+	away_site_budget = 3
 
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 	lobby_screens = list("title","title2")
@@ -59,7 +59,7 @@
 	welcome_text += "Next system targeted for jump:<br /><b>[generate_system_name()]</b><br />"
 	welcome_text += "Travel time to Sol:<br /><b>[rand(15,45)] days</b><br />"
 	welcome_text += "Time since last port visit:<br /><b>[rand(60,180)] days</b><br />"
-	welcome_text += "Scan results:<br />"
+	welcome_text += "Scan results show the following points of interest:<br />"
 	var/list/scan_results = list()
 	for(var/poi in points_of_interest)
 		if(poi == "SEV Torch")
@@ -74,6 +74,7 @@
 			welcome_text += "\A <b>[result]</b><br />"
 		else
 			welcome_text += "[count] <b>[result]\s</b><br />"
+	welcome_text += "<br>No distress calls logged.<br />"
 
 	post_comm_message("SEV Torch Sensor Readings", welcome_text)
 	minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")

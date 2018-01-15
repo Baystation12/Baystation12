@@ -46,7 +46,7 @@
 			to_chat(src, "<span class='warning'>\The [A] blocks you.</span>")
 			return 0
 
-	if(direction == UP && can_fall(FALSE, destination))
+	if(direction == UP && area.has_gravity() && can_fall(FALSE, destination))
 		to_chat(src, "<span class='warning'>You see nothing to hold on to.</span>")
 		return 0
 
@@ -62,7 +62,7 @@
 		return 1
 	else
 		for(var/atom/a in src.loc)
-			if(a.flags & OBJ_CLIMBABLE)
+			if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
 				return 1
 
 		//Last check, list of items that could plausibly be used to climb but aren't climbable themselves

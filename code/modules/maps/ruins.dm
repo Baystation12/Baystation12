@@ -48,7 +48,7 @@
 
 			for(var/turf/check in ruin.get_affected_turfs(T,1))
 				var/area/new_area = get_area(check)
-				if(!(istype(new_area, whitelist)) || check.flags & NORUINS)
+				if(!(istype(new_area, whitelist)) || check.turf_flags & TURF_FLAG_NORUINS)
 					valid = FALSE
 					break
 

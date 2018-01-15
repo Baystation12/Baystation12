@@ -48,12 +48,12 @@
 
 				"trade_complete"     = "Hahahahahahaha! Thankyouthankyouthankyou!",
 				"trade_no_money"     = "I d-don't NEED cash.",
-				"trade_not_enough"   = "N-no, no no no. M-more than that.... more...",
-				"trade_found_unwanted" = "I d-don't think you GET what I want, from your offer.",
-				"how_much"           = "Meat. I want meat. The kind they don't serve i-in teh mess hall.",
-				"what_want"          = "Long p-pork. Yes... thats what I want...",
+				"trade_not_enough"   = "N-no, no no no. M-more than that... more...",
+				"trade_found_unwanted" = "I d-don't think you GET what I want, fr- from your offer.",
+				"how_much"           = "Meat. I want meat. The kind they don't serve in the- the mess hall.",
+				"what_want"          = "Long p-pork. Yes... that's what I want...",
 
-				"compliment_deny"    = "Your lies won't c-change what I did.",
+				"compliment_deny"    = "Your lies won't ch-change what I did.",
 				"compliment_accept"  = "Yes... I suppose you're right.",
 				"insult_good"        = "I... probably deserve that.",
 				"insult_bad"         = "Maybe you should c-come here and say that. You'd be worth s-something then.",
@@ -63,7 +63,7 @@
 
 /datum/trader/ship/unique/rock
 	name = "Bobo"
-	origin = "Floating Rock"
+	origin = "Floating rock"
 
 	possible_wanted_items  = list(/obj/item/weapon/ore                        = TRADER_ALL)
 	possible_trading_items = list(/obj/machinery/power/supermatter            = TRADER_ALL,
@@ -89,8 +89,9 @@
 
 //probably could stick soem Howl references in here but like, eh. Haven't seen it in years.
 /datum/trader/ship/unique/wizard
-	name = "Wizard"
-	origin = "A Moving Castle"
+	name = "Sorcerer"
+	origin = "A moving castle"
+	possible_origins = list("An indistinct location", "Unknown location", "The Diamond Sphere", "Beyond the Veil", "Deadverse")
 	name_language = TRADER_DEFAULT_NAME
 
 	possible_wanted_items = list(/mob/living/simple_animal/construct            = TRADER_SUBTYPES_ONLY,
@@ -114,10 +115,10 @@
 								) //Probably see about getting some more wizard based shit
 
 	speech = list("hail_generic"     = "Hello! Are you here on pleasure or business?",
-				"hail_Golem"         = "Interesting... how incredibly interesting.... come! Let us do business!",
+				"hail_Golem"         = "Interesting... how incredibly interesting... come! Let us do business!",
 				"hail_deny"          = "I'm sorry, but I REALLY don't want to speak to you.",
 
-				"trade_complete"     = "Pleasure doing business with you! Just don't feed it after midnight!",
+				"trade_complete"     = "Pleasure doing business with you!",
 				"trade_no_money"     = "Cash? Ha! What's cash to a man like me?",
 				"trade_not_enough"   = "Hm, well I do enjoy what you're offering, I prefer a fair trade.",
 				"trade_found_unwanted" = "What? I want oddities! Don't you understand?",

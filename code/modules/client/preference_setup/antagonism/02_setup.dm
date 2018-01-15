@@ -6,25 +6,16 @@
 	name = "Setup"
 	sort_order = 2
 
-	var/static/list/uplink_sources
 	var/static/list/uplink_sources_by_name
 
 /datum/category_item/player_setup_item/antagonism/basic/New()
 	..()
-	if(!uplink_sources_by_name)
-		uplink_sources = list()
-		uplink_sources_by_name = list()
-
-		var/uplink_sources_by_type = decls_repository.get_decls_of_subtype(/decl/uplink_source)
-		for(var/uplink_source_type in uplink_sources_by_type)
-			var/decl/uplink_source/uplink_source = uplink_sources_by_type[uplink_source_type]
-			uplink_sources += uplink_source
-			uplink_sources_by_name[uplink_source.name] = uplink_source
+	SETUP_SUBTYPE_DECLS_BY_NAME(/decl/uplink_source, uplink_sources_by_name)
 
 /datum/category_item/player_setup_item/antagonism/basic/load_character(var/savefile/S)
 	var/list/uplink_order
-	S["uplink_sources"] >> uplink_order
-	S["exploit_record"] >> pref.exploit_record
+	from_file(S["uplink_sources"], uplink_order)
+	from_file(S["exploit_record"], pref.exploit_record)
 
 	if(istype(uplink_order))
 		pref.uplink_sources = list()
@@ -39,8 +30,8 @@
 		var/decl/uplink_source/UL = entry
 		uplink_order += UL.name
 
-	S["uplink_sources"] << uplink_order
-	S["exploit_record"] << pref.exploit_record
+	to_file(S["uplink_sources"], uplink_order)
+	to_file(S["exploit_record"], pref.exploit_record)
 
 /datum/category_item/player_setup_item/antagonism/basic/sanitize_character()
 	if(!istype(pref.uplink_sources))
@@ -67,7 +58,7 @@
 
 /datum/category_item/player_setup_item/antagonism/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["add_source"])
-		var/source_selection = input(user, "Select Uplink Source to Add", "Character Setup") as null|anything in (uplink_sources - pref.uplink_sources)
+		var/source_selection = input(user, "Select Uplink Source to Add", CHARACTER_PREFERENCE_INPUT_TITLE) as null|anything in (list_values(uplink_sources_by_name) - pref.uplink_sources)
 		if(source_selection && CanUseTopic(user))
 			pref.uplink_sources |= source_selection
 			return TOPIC_REFRESH

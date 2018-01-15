@@ -111,7 +111,13 @@
 	display_name = "labcoat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = NON_MILITARY_ROLES
+	allowed_roles = STERILE_ROLES
+
+/datum/gear/suit/coat
+	display_name = "coat, colour select"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/coat
+	flags = GEAR_HAS_COLOR_SELECTION
+	allowed_roles = FORMAL_ROLES
 
 /datum/gear/suit/leather
 	display_name = "jacket selection"

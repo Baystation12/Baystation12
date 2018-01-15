@@ -89,7 +89,7 @@
 "bK" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
 "bL" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/obj/structure/handrai,/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
 "bM" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/green,/obj/item/weapon/storage/secure/safe{pixel_y = 24},/turf/simulated/floor/tiled,/area/bluespaceriver/ship)
-"bN" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/power/apc{dir = 8; pixel_x = -24},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
+"bN" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{ icon_state = "intact"; dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/power/apc{dir = 8; pixel_x = -24},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
 "bO" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 8},/turf/simulated/floor/tiled/dark,/area/bluespaceriver/ship)
 "bP" = (/obj/structure/fuel_port,/turf/simulated/wall/titanium,/area/bluespaceriver/ship)
 "bQ" = (/obj/machinery/artifact_scanpad,/turf/simulated/floor/reinforced,/area/bluespaceriver/ship)

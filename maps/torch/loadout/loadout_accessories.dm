@@ -197,7 +197,7 @@
 	path = /obj/item/clothing/accessory/storage/brown_vest
 	cost = 3
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/solgov_pilot, /datum/job/nt_pilot)
+						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/nt_pilot)
 
 /datum/gear/accessory/black_vest
 	display_name = "webbing, security"
@@ -404,3 +404,8 @@
 /datum/gear/accessory/torch_patch
 	display_name = "Torch mission patch"
 	path = /obj/item/clothing/accessory/solgov/torch_patch
+
+/datum/gear/accessory/pilot_pin
+	display_name = "pilot's qualification pin"
+	path = /obj/item/clothing/accessory/solgov/speciality/pilot
+	allowed_roles = list(/datum/job/bridgeofficer)

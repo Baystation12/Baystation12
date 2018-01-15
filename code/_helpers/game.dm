@@ -35,6 +35,10 @@
 					return TRUE
 	return FALSE
 
+/proc/get_z(O)
+	var/turf/loc = get_turf(O)
+	return loc ? loc.z : 0
+
 /proc/get_area(O)
 	var/turf/loc = get_turf(O)
 	if(loc)

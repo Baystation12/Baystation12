@@ -86,12 +86,12 @@
 
 	var/obj/item/weapon/stuck = null
 
-/obj/item/weapon/ducttape/New()
-	..()
-	flags |= NOBLUDGEON
+/obj/item/weapon/ducttape/Initialize()
+	. = ..()
+	item_flags |= ITEM_FLAG_NO_BLUDGEON
 
 /obj/item/weapon/ducttape/examine(mob/user)
-	return stuck.examine(user)
+	return stuck ? stuck.examine(user) : ..()
 
 /obj/item/weapon/ducttape/proc/attach(var/obj/item/weapon/W)
 	stuck = W

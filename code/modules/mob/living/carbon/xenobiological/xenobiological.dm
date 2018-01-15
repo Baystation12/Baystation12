@@ -2,7 +2,7 @@
 	name = "baby slime"
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey baby slime"
-	pass_flags = PASSTABLE
+	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("chirps")
 
 	maxHealth = 150
@@ -299,6 +299,9 @@
 	return
 
 /mob/living/carbon/slime/has_eyes()
+	return 0
+
+/mob/living/carbon/slime/check_has_mouth()
 	return 0
 
 /mob/living/carbon/slime/proc/gain_nutrition(var/amount)

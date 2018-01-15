@@ -25,12 +25,6 @@
 
 #undef NONSENSICAL_VALUE
 
-/atom/movable/New()
-	. = ..()
-	var/turf/simulated/T = loc
-	if(istype(T))
-		T.opaque_counter += opacity
-
 /atom/proc/update_light()
 	set waitfor = FALSE
 
@@ -62,13 +56,22 @@
 		if(istype(T))
 			T.handle_opacity_change(src)
 
-/atom/movable/Move()
-	var/turf/old_loc = loc
-	. = ..()
+#define LIGHT_MOVE_UPDATE \
+var/turf/old_loc = loc;\
+. = ..();\
+if(loc != old_loc) {\
+	for(var/datum/light_source/L in light_sources) {\
+		L.source_atom.update_light();\
+	}\
+}
 
-	if(loc != old_loc)
-		for(var/datum/light_source/L in light_sources)
-			L.source_atom.update_light()
+/atom/movable/Move()
+	LIGHT_MOVE_UPDATE
+
+/atom/movable/forceMove()
+	LIGHT_MOVE_UPDATE
+
+#undef LIGHT_MOVE_UPDATE
 
 /obj/item/equipped()
 	. = ..()

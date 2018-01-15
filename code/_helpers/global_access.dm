@@ -195,8 +195,6 @@
 			return global.ascii_reset;
 		if("ascii_yellow")
 			return global.ascii_yellow;
-		if("ashtray_cache")
-			return global.ashtray_cache;
 		if("asset_cache")
 			return global.asset_cache;
 		if("asset_datums")
@@ -1053,7 +1051,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1250,8 +1248,6 @@
 			global.ascii_reset=newval;
 		if("ascii_yellow")
 			global.ascii_yellow=newval;
-		if("ashtray_cache")
-			global.ashtray_cache=newval;
 		if("asset_cache")
 			global.asset_cache=newval;
 		if("asset_datums")
@@ -2108,7 +2104,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",

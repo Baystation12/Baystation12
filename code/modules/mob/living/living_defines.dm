@@ -46,5 +46,6 @@
 	var/slurring = null		//Carbon
 
 	var/job = null//Living
+	var/list/obj/aura/auras = null //Basically a catch-all aura/force-field thing.
 
 	var/obj/screen/cells = null

@@ -10,7 +10,7 @@
 	layer = BELOW_OBJ_LAYER
 	anchored = 1
 	density = 1
-	flags = OBJ_ANCHORABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	clicksound = "button"
 	clickvol = 40
 
@@ -193,7 +193,7 @@
 		if(src.panel_open)
 			attack_hand(user)
 		return
-	else if((flags & OBJ_ANCHORABLE) && isWrench(W))
+	else if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(W))
 		wrench_floor_bolts(user)
 		power_change()
 		return
@@ -437,7 +437,6 @@
 		else if ((href_list["togglevoice"]) && (src.panel_open))
 			src.shut_up = !src.shut_up
 
-		src.add_fingerprint(usr)
 		GLOB.nanomanager.update_uis(src)
 
 /obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
