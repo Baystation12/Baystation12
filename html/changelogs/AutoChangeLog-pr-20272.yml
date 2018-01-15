@@ -1,6 +1,0 @@
-author: "comma"
-delete-after: True
-changes: 
-  - tweak: "Overmap size has been decreased."
-  - tweak: "Number of overmap events has been decreased."
-  - tweak: "Potential number of away missions has been decreased."
