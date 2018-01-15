@@ -86,6 +86,7 @@
 	#include "../away/hydro/hydro.dm"
 
 	#include "../../code/modules/lobby_music/chasing_time.dm"
+	#include "../../code/modules/lobby_music/Torch.dm"
 	#include "../../code/modules/lobby_music/human.dm"
 	#include "../../code/modules/lobby_music/marhaba.dm"
 	#include "../../code/modules/lobby_music/treacherous_voyage.dm"
