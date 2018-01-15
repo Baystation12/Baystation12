@@ -1,0 +1,4 @@
+author: "comma"
+delete-after: True
+changes: 
+  - tweak: "Torch now starts at a random location on the overmap"
