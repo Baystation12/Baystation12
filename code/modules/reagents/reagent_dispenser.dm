@@ -143,7 +143,7 @@
 			overlays += test
 
 	else if(isflamesource(W))
-		to_chat(user, "<span class='warning'>Are you crazy? Don't go near that with an open flame!")
+		to_chat(user, "<span class='warning'>Are you crazy? Don't go near that with an open flame!</span>")
 		return
 
 	return ..()
