@@ -1,0 +1,4 @@
+author: "comma"
+delete-after: True
+changes: 
+  - bugfix: "Ashtrays now empty their contents when thrown."
