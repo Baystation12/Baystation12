@@ -59,42 +59,73 @@
 	icon_state = "dirty_mattress"
 	anchored = 0
 
+/decl/hierarchy/outfit/corpse/slavers_base
+	name = "Basic slaver output"
+
 /obj/effect/landmark/corpse/slavers_base/slaver1
 	name = "Slaver"
-	corpseuniform = /obj/item/clothing/suit/johnny_coat
-	corpseshoes = /obj/item/clothing/shoes/black
-	corpseglasses = /obj/item/clothing/glasses/sunglasses
+	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver1
+
+/decl/hierarchy/outfit/corpse/slavers_base/slaver1
+	name = "Dead Slaver 1"
+	uniform = /obj/item/clothing/under/johnny
+	shoes = /obj/item/clothing/shoes/black
+	glasses = /obj/item/clothing/glasses/sunglasses
 
 /obj/effect/landmark/corpse/slavers_base/slaver2
 	name = "Slaver"
-	corpseuniform = /obj/item/clothing/under/grayson
-	corpseshoes = /obj/item/clothing/shoes/blue
+	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver2
+
+/decl/hierarchy/outfit/corpse/slavers_base/slaver2
+	name = "Dead Slaver 2"
+	uniform = /obj/item/clothing/under/grayson
+	shoes = /obj/item/clothing/shoes/blue
 
 /obj/effect/landmark/corpse/slavers_base/slaver3
 	name = "Slaver"
-	corpseuniform = /obj/item/clothing/under/pirate
-	corpseshoes = /obj/item/clothing/shoes/brown
+	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver3
+
+/decl/hierarchy/outfit/corpse/slavers_base/slaver3
+	name = "Dead Slaver 3"
+	uniform = /obj/item/clothing/under/pirate
+	shoes = /obj/item/clothing/shoes/brown
 
 /obj/effect/landmark/corpse/slavers_base/slaver4
 	name = "Slaver"
-	corpseuniform = /obj/item/clothing/under/psyche
-	corpseshoes = /obj/item/clothing/shoes/brown
+	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver4
+
+/decl/hierarchy/outfit/corpse/slavers_base/slaver4
+	name = "Dead Slaver 4"
+	uniform = /obj/item/clothing/under/redcoat
+	shoes = /obj/item/clothing/shoes/brown
 
 /obj/effect/landmark/corpse/slavers_base/slaver5
 	name = "Slaver"
-	corpseuniform = /obj/item/clothing/under/sterile
-	corpseshoes = /obj/item/clothing/shoes/orange
-	corpsemask = /obj/item/clothing/mask/surgical
+	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver5
+
+/decl/hierarchy/outfit/corpse/slavers_base/slaver5
+	name = "Dead Slaver 5"
+	uniform = /obj/item/clothing/under/sterile
+	shoes = /obj/item/clothing/shoes/orange
+	mask = /obj/item/clothing/mask/surgical
 
 /obj/effect/landmark/corpse/slavers_base/slaver6
 	name = "Slaver"
-	corpseuniform = /obj/item/clothing/under/frontier
-	corpseshoes = /obj/item/clothing/shoes/orange
+	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver6
+
+/decl/hierarchy/outfit/corpse/slavers_base/slaver6
+	name = "Dead Slaver 6"
+	uniform = /obj/item/clothing/under/frontier
+	shoes = /obj/item/clothing/shoes/orange
 
 /obj/effect/landmark/corpse/slavers_base/slave
 	name = "Slave"
-	corpseuniform = /obj/item/clothing/under/color/orange
-	corpseshoes = /obj/item/clothing/shoes/tactical
+	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slave
+
+/decl/hierarchy/outfit/corpse/slavers_base/slave
+	name = "Dead Slave"
+	uniform = /obj/item/clothing/under/color/orange
+	shoes = /obj/item/clothing/shoes/tactical
 
 /mob/living/simple_animal/hostile/abolition_extremist
 	name = "abolition extremist"
@@ -116,7 +147,7 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	unsuitable_atoms_damage = 15
-	var/corpse = /obj/effect/landmark/mobcorpse/abolitionist
+	var/corpse = /obj/effect/landmark/corpse/abolitionist
 	var/weapon = /obj/item/weapon/gun/energy/laser
 	projectilesound = 'sound/weapons/laser.ogg'
 	ranged = 1
@@ -132,11 +163,15 @@
 		new weapon(loc)
 	qdel(src)
 
-/obj/effect/landmark/mobcorpse/abolitionist
+/obj/effect/landmark/corpse/abolitionist
 	name = "abolitionist"
-	corpseuniform = /obj/item/clothing/under/abol_uniform
-	corpseshoes = /obj/item/clothing/shoes/jackboots
-	corpsehelmet = /obj/item/clothing/head/helmet/merc
+	corpse_outfit = /decl/hierarchy/outfit/corpse/abolitionist
+
+/decl/hierarchy/outfit/corpse/abolitionist
+	name = "Dead abolitionist"
+	uniform = /obj/item/clothing/under/abol_uniform
+	shoes = /obj/item/clothing/shoes/jackboots
+	head = /obj/item/clothing/head/helmet/merc
 
 /obj/item/clothing/under/abol_uniform
 	name = "abolitionist combat suit"
@@ -146,4 +181,3 @@
 	item_icons = list(slot_w_uniform_str = 'maps/away/slavers/slavers_base_sprites.dmi')
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 30, bullet = 25, laser = 10, energy = 10, bomb = 5, bio = 0, rad = 0)
-

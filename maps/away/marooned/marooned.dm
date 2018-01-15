@@ -62,12 +62,16 @@
 
 /obj/effect/landmark/corpse/marooned_officer
 	name = "Marooned Magnitka's fleet officer"
-	corpseuniform = /obj/item/clothing/under/magintka_uniform
-	corpsesuit = /obj/item/clothing/suit/storage/hooded/wintercoat
-	corpseshoes = /obj/item/clothing/shoes/jungleboots
-	corpsegloves = /obj/item/clothing/gloves/thick
-	corpsehelmet = /obj/item/clothing/head/beret
-	corpsepocket1 = /obj/item/weapon/material/butterfly/switchblade
+	corpse_outfit = /decl/hierarchy/outfit/corpse/marooned_officer
+
+/decl/hierarchy/outfit/corpse/marooned_officer
+	name = "Dead Magnitka's fleet officer"
+	uniform = /obj/item/clothing/under/magintka_uniform
+	suit = /obj/item/clothing/suit/storage/hooded/wintercoat
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick
+	head = /obj/item/clothing/head/beret
+	l_pocket = /obj/item/weapon/material/butterfly/switchblade
 
 /obj/item/weapon/paper/marooned/note1
 	name = "Marooned note 1"
