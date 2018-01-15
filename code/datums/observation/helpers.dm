@@ -19,6 +19,14 @@
 /datum/proc/qdel_self()
 	qdel(src)
 
+/proc/kill_unpossessed_mob(var/mob/M)
+	if(!M.ckey && !M.client)
+		M.death()
+		if(M.stat != DEAD)
+			crash_with("Invalid /Death() implementation: [log_info_line(M)]")
+		return TRUE
+	return FALSE
+
 /proc/register_all_movement(var/event_source, var/listener)
 	GLOB.moved_event.register(event_source, listener, /atom/movable/proc/recursive_move)
 	GLOB.dir_set_event.register(event_source, listener, /atom/proc/recursive_dir_set)

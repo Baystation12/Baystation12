@@ -181,5 +181,4 @@
 
 //Procs for grabbing players.
 /mob/living/simple_animal/borer/proc/request_player()
-	var/datum/ghosttrap/G = get_ghost_trap("cortical borer")
-	G.request_player(src, "A cortical borer needs a player.")
+	SSghosttraps.RequestCandidates(/decl/ghost_trap/cortical_borer, "Cortical borer needs a player.", src)

@@ -47,6 +47,8 @@
 			return global.SSfastprocess;
 		if("SSgarbage")
 			return global.SSgarbage;
+		if("SSghosttraps")
+			return global.SSghosttraps;
 		if("SSlegacy")
 			return global.SSlegacy;
 		if("SSmachines")
@@ -443,8 +445,6 @@
 			return global.ghost_darkness_images;
 		if("ghost_sightless_images")
 			return global.ghost_sightless_images;
-		if("ghost_traps")
-			return global.ghost_traps;
 		if("global_message_listener")
 			return global.global_message_listener;
 		if("global_vars_")
@@ -1090,6 +1090,8 @@
 			global.SSfastprocess=newval;
 		if("SSgarbage")
 			global.SSgarbage=newval;
+		if("SSghosttraps")
+			global.SSghosttraps=newval;
 		if("SSlegacy")
 			global.SSlegacy=newval;
 		if("SSmachines")
@@ -1486,8 +1488,6 @@
 			global.ghost_darkness_images=newval;
 		if("ghost_sightless_images")
 			global.ghost_sightless_images=newval;
-		if("ghost_traps")
-			global.ghost_traps=newval;
 		if("global_message_listener")
 			global.global_message_listener=newval;
 		if("global_vars_")
@@ -2109,6 +2109,7 @@
 	"SSatoms",
 	"SSfastprocess",
 	"SSgarbage",
+	"SSghosttraps",
 	"SSlegacy",
 	"SSmachines",
 	"SSmapping",
@@ -2307,7 +2308,6 @@
 	"gender_datums",
 	"ghost_darkness_images",
 	"ghost_sightless_images",
-	"ghost_traps",
 	"global_message_listener",
 	"global_vars_",
 	"godcult",

@@ -49,29 +49,18 @@
 			to_chat(user, "This book is out of uses.")
 			return TOPIC_HANDLED
 
-		var/datum/ghosttrap/ghost = get_ghost_trap("wizard familiar")
-		var path = locate(href_list["path"]) in monster
-		if(!ispath(path))
+		var/path = locate(href_list["path"]) in monster
+		if(!ispath(path, /mob/living/simple_animal/familiar))
 			crash_with("Invalid mob path in [src]. Contact a coder.")
 			return TOPIC_HANDLED
+		var/turf/T = get_turf(src)
+		if(!T)
+			return TOPIC_HANDLED
 
-		var/mob/living/simple_animal/familiar/F = new path(get_turf(src))
-		temp = "You have attempted summoning \the [F]"
-		ghost.request_player(F,"A wizard is requesting a familiar.", 60 SECONDS)
-		spawn(600)
-			if(F)
-				if(!F.ckey || !F.client)
-					F.visible_message("With no soul to keep \the [F] linked to this plane, it fades away.")
-					qdel(F)
-				else
-					F.faction = usr.faction
-					F.add_spell(new /spell/contract/return_master(usr), "const_spell_ready")
-					to_chat(F, "<span class='notice'>You are a familiar.</span>")
-					to_chat(F, "<b>You have been summoned by the wizard [usr] to assist in all matters magical and not.</b>")
-					to_chat(F, "<b>Do their bidding and help them with their goals.</b>")
-					uses--
+		var/obj/effect/wizard_summon_circle/WSC = new(T)
+		if(!SSghosttraps.RequestCandidates(/decl/ghost_trap/wizard_familiar, "A wizard is requesting a familiar.", WSC, user, src, path))
+			qdel(WSC)
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)
 		interact(user)
-

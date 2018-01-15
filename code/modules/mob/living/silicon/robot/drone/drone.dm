@@ -330,7 +330,7 @@ var/list/mob_hat_cache = list()
 		to_chat(src, "<span class='warning'>Someone issues a remote kill order for this unit, but you disregard it.</span>")
 		return
 
-	if(stat != 2)
+	if(stat != DEAD)
 		if(emagged)
 			to_chat(src, "<span class='danger'>You feel a system kill order percolate through your tiny brain, but it doesn't seem like a good idea to you.</span>")
 		else
@@ -348,10 +348,7 @@ var/list/mob_hat_cache = list()
 //Reboot procs.
 
 /mob/living/silicon/robot/drone/proc/request_player()
-	if(too_many_active_drones())
-		return
-	var/datum/ghosttrap/G = get_ghost_trap("maintenance drone")
-	G.request_player(src, "Someone is attempting to reboot a maintenance drone.", 30 SECONDS)
+	SSghosttraps.RequestCandidates(/decl/ghost_trap/maintenance_drone, "Someone is attempting to reboot a maintenance drone.", src)
 
 /mob/living/silicon/robot/drone/proc/transfer_personality(var/client/player)
 	if(!player) return

@@ -20,3 +20,5 @@
 #define SS_PRIORITY_GARBAGE       25	// Garbage collection.
 #define SS_PRIORITY_VINES         25	// Spreading vine effects.
 #define SS_PRIORITY_WIRELESS      10	// Wireless connection setup.
+#define SS_PRIORITY_GHOST_TRAPS    1	// Ghost trap handling
+
