@@ -143,7 +143,16 @@
 			overlays += test
 
 	else if(isflamesource(W))
-		to_chat(user, "<span class='warning'>Are you crazy? Don't go near that with an open flame!</span>")
+		if(user.a_intent != I_HURT)
+			to_chat(user, "<span class='warning'>You almost got [W] too close to [src]! That could have ended very badly for you.</span>")
+			return
+
+		user.visible_message("<span class='warning'>[user] draws closer to the fueltank with [W].</span>", "<span class='warning'>You draw closer to the fueltank with [W].</span>")
+		if(do_after(user, 50, src))
+			log_and_message_admins("triggered a fueltank explosion with [W].")
+			user.visible_message("<span class='danger'>[user] puts [W] to [src]!</span>", "<span class='danger'>You put \the [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
+			src.explode()
+
 		return
 
 	return ..()
