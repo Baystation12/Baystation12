@@ -343,7 +343,6 @@ var/list/gear_datums = list()
 	else if(H.put_in_hands(item))
 		to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
 	else
-		to_chat(H, "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>")
-		to_chat(H, "<span class='notice'>Dropping \the [item] on the ground!</span>")
+		to_chat(H, "<span class='danger'>Dropping \the [item] on the ground!</span>")
 		item.forceMove(get_turf(H))
 		item.add_fingerprint(H)
