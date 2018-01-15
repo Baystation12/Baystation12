@@ -261,22 +261,6 @@
 	pouches["tan pouches"] = /obj/item/clothing/accessory/storage/pouches/tan
 	gear_tweaks += new/datum/gear_tweak/path(pouches)
 
-/datum/gear/accessory/large_pouches
-	display_name = "armor large pouches"
-	path = /obj/item/clothing/accessory/storage/pouches/large
-	cost = 5
-	allowed_roles = ARMORED_ROLES
-
-/datum/gear/accessory/large_pouches/New()
-	..()
-	var/lpouches = list()
-	lpouches["black pouches"] = /obj/item/clothing/accessory/storage/pouches/large
-	lpouches["blue pouches"] = /obj/item/clothing/accessory/storage/pouches/large/blue
-	lpouches["navy blue pouches"] = /obj/item/clothing/accessory/storage/pouches/large/navy
-	lpouches["green pouches"] = /obj/item/clothing/accessory/storage/pouches/large/green
-	lpouches["tan pouches"] = /obj/item/clothing/accessory/storage/pouches/large/tan
-	gear_tweaks += new/datum/gear_tweak/path(lpouches)
-
 /datum/gear/accessory/armor_deco
 	display_name = "armor customization"
 	path = /obj/item/clothing/accessory/armor/tag
