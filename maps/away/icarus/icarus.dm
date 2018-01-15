@@ -1,10 +1,11 @@
 #include "icarus_areas.dm"
 
 /obj/effect/overmap/sector/icarus
-	name = "lush expolanet"
+	name = "forest planetoid"
 	desc = "Sensors detect anomalous radiation area with the presence of artificial structures."
 	icon_state = "globe"
 	known = 0
+	in_space = 0
 	generic_waypoints = list(
 		"nav_icarus_1",
 		"nav_icarus_2",

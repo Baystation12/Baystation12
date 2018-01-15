@@ -14,6 +14,7 @@
 	desc = "Moon-sized planet with breathable atmosphere. Sensors are picking up a weak radio signal from the surface."
 	icon_state = "object"
 	known = 0
+	in_space = 0
 
 	generic_waypoints = list(
 		"nav_marooned_1",
