@@ -178,12 +178,6 @@
 	cost = 0
 	allowed_roles = SOLGOV_ROLES
 
-/datum/gear/head/marinehat
-	display_name = "marine cap"
-	path = /obj/item/clothing/head/solgov/utility/marine
-	cost = 0
-	allowed_roles = SOLGOV_ROLES
-
 /datum/gear/head/echat
 	display_name = "EC cap"
 	path = /obj/item/clothing/head/soft/solgov/expedition
