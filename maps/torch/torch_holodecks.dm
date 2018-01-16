@@ -39,6 +39,8 @@
 		"theatre"          = new/datum/holodeck_program(/area/holodeck/source_theatre),
 		"meetinghall"      = new/datum/holodeck_program(/area/holodeck/source_meetinghall),
 		"courtroom"        = new/datum/holodeck_program(/area/holodeck/source_courtroom, list('sound/music/traitor.ogg')),
+		"cafe"             = new/datum/holodeck_program(/area/holodeck/source_cafe),
+		"surgerytraining"  = new/datum/holodeck_program(/area/holodeck/source_surgerytraining),
 		"wildlifecarp"     = new/datum/holodeck_program(/area/holodeck/source_wildlife, list()),
 		"turnoff"          = new/datum/holodeck_program(/area/holodeck/source_plating, list())
 	)
@@ -57,7 +59,9 @@
 			"Snow Field"        = "snowfield",
 			"Theatre"           = "theatre",
 			"Meeting Hall"      = "meetinghall",
-			"Courtroom"         = "courtroom"
+			"Courtroom"         = "courtroom",
+			"French Cafe"       = "cafe",
+			"Surgery Training"  = "surgerytraining"
 		)
 
 	)
