@@ -22,10 +22,6 @@
 	name = "\improper Sol Central Government rubber stamp"
 	icon_state = "stamp-intaff"
 
-/obj/item/weapon/stamp/nt
-	name = "\improper NanoTrasen rubber stamp"
-	icon_state = "stamp-intaff"
-
 /obj/item/weapon/stamp/deckoff
 	name = "deck officer's rubber stamp"
 	icon_state = "stamp-qm"

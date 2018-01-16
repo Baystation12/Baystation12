@@ -68,7 +68,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research/rd
 	name = OUTFIT_JOB_NAME("Research Director - Torch")
-	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
+	l_ear = /obj/item/device/radio/headset/heads/torchscicommand
 	uniform = /obj/item/clothing/under/rank/research_director
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/brown
@@ -130,13 +130,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/research/cl
-	name = OUTFIT_JOB_NAME("NanoTrasen Liaison")
-	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
-	uniform = /obj/item/clothing/under/suit_jacket/nt
+	name = OUTFIT_JOB_NAME("Corporate Liaison")
+	l_ear = /obj/item/device/radio/headset/heads/torchscicommand
+	uniform = /obj/item/clothing/under/suit_jacket/really_black
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/liaison
 	pda_type = /obj/item/device/pda/heads
+	backpack_contents = list(/obj/item/clothing/accessory/badge/corporate = 1)
 
 /decl/hierarchy/outfit/job/torch/crew/representative
 	name = OUTFIT_JOB_NAME("SolGov Representative")
@@ -510,7 +511,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/research
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/passenger/research
-	l_ear = /obj/item/device/radio/headset/torchnanotrasen
+	l_ear = /obj/item/device/radio/headset/torchscience
 
 /decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist
 	name = OUTFIT_JOB_NAME("Senior Researcher")
@@ -518,25 +519,25 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/heads/rd
-	id_type = /obj/item/weapon/card/id/torch/passenger/research/senior_scientist
+	id_type = /obj/item/weapon/card/id/torch/contractor/research/senior_scientist
 
 /decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist/New()
 	..()
 	BACKPACK_OVERRIDE_RESEARCH
 
-/decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot //pending better uniform
-	name = OUTFIT_JOB_NAME("NanoTrasen Pilot")
-	uniform = /obj/item/clothing/under/rank/ntpilot
-	suit = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
+/decl/hierarchy/outfit/job/torch/passenger/research/pilot //pending better uniform
+	name = OUTFIT_JOB_NAME("Corporate Pilot")
+	uniform = /obj/item/clothing/under/rank/pilot
+	suit = /obj/item/clothing/suit/storage/toggle/brown_jacket
 	shoes = /obj/item/clothing/shoes/workboots
-	id_type = /obj/item/weapon/card/id/torch/passenger/research/nt_pilot
+	id_type = /obj/item/weapon/card/id/torch/contractor/research/pilot
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	name = OUTFIT_JOB_NAME("Scientist - Torch")
 	uniform = /obj/item/clothing/under/rank/scientist
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/science
-	id_type = /obj/item/weapon/card/id/torch/passenger/research/scientist
+	id_type = /obj/item/weapon/card/id/torch/contractor/research/scientist
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/New()
 	..()
@@ -550,7 +551,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Prospector")
 	uniform = /obj/item/clothing/under/rank/ntwork
 	shoes = /obj/item/clothing/shoes/workboots
-	id_type = /obj/item/weapon/card/id/torch/passenger/research/mining
+	id_type = /obj/item/weapon/card/id/torch/contractor/research/mining
 	pda_type = /obj/item/device/pda/shaftminer
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
@@ -562,7 +563,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Security Guard")
 	uniform = /obj/item/clothing/under/rank/guard
 	shoes = /obj/item/clothing/shoes/jackboots
-	id_type = /obj/item/weapon/card/id/torch/passenger/research/guard
+	id_type = /obj/item/weapon/card/id/torch/contractor/research/guard
 	pda_type = /obj/item/device/pda/security
 
 /decl/hierarchy/outfit/job/torch/passenger/research/guard/New()

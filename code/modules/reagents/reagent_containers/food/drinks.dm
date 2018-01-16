@@ -342,11 +342,11 @@
 	icon_state = "coffeecup_SCG"
 	base_name = "SCG cup"
 
-/obj/item/weapon/reagent_containers/food/drinks/coffeecup/NT
-	name = "NT coffee cup"
-	desc = "A red NanoTrasen coffee cup. 90% Guaranteed to not be laced with mind-control drugs."
-	icon_state = "coffeecup_NT"
-	base_name = "NT cup"
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/red
+	name = "red coffee cup"
+	desc = "A red coffee cup. There's absolutely nothing special about it."
+	icon_state = "coffeecup_red"
+	base_name = "red cup"
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/one
 	name = "#1 coffee cup"

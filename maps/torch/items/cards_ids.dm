@@ -133,39 +133,39 @@
 /obj/item/weapon/card/id/torch/crew/explorer
 	job_access_type = /datum/job/explorer
 
-//NanoTrasen and Passengers
+
+/obj/item/weapon/card/id/torch/silver/research
+	job_access_type = /datum/job/rd
+
+/obj/item/weapon/card/id/torch/contractor/research
+	job_access_type = /datum/job/scientist_assistant
+
+/obj/item/weapon/card/id/torch/contractor/research/senior_scientist
+	job_access_type = /datum/job/senior_scientist
+
+/obj/item/weapon/card/id/torch/contractor/research/pilot
+	job_access_type = /datum/job/pilot
+
+/obj/item/weapon/card/id/torch/contractor/research/scientist
+	job_access_type = /datum/job/scientist
+
+/obj/item/weapon/card/id/torch/contractor/research/mining
+	job_access_type = /datum/job/mining
+
+/obj/item/weapon/card/id/torch/contractor/research/guard
+	job_access_type = /datum/job/guard
+
+/obj/item/weapon/card/id/torch/passenger/research/liaison
+	icon_state = "corporate"
+	desc = "An identification card issued to corporate executives aboard the SEV Torch."
+	job_access_type = /datum/job/liaison
+
+//Passengers
 
 /obj/item/weapon/card/id/torch/passenger
 	desc = "A card issued to passengers and off-duty personnel aboard the SEV Torch."
 	icon_state = "id"
 	job_access_type = /datum/job/assistant
-
-/obj/item/weapon/card/id/torch/passenger/research
-	desc = "A card issued to NanoTrasen personnel aboard the SEV Torch."
-	icon_state = "corporate"
-	job_access_type = /datum/job/scientist_assistant
-
-/obj/item/weapon/card/id/torch/silver/research
-	job_access_type = /datum/job/rd
-
-/obj/item/weapon/card/id/torch/passenger/research/senior_scientist
-	job_access_type = /datum/job/senior_scientist
-
-/obj/item/weapon/card/id/torch/passenger/research/nt_pilot
-	job_access_type = /datum/job/nt_pilot
-
-/obj/item/weapon/card/id/torch/passenger/research/scientist
-	job_access_type = /datum/job/scientist
-
-/obj/item/weapon/card/id/torch/passenger/research/mining
-	job_access_type = /datum/job/mining
-
-/obj/item/weapon/card/id/torch/passenger/research/guard
-	job_access_type = /datum/job/guard
-
-/obj/item/weapon/card/id/torch/passenger/research/liaison
-	job_access_type = /datum/job/liaison
-
 
 //Merchant
 /obj/item/weapon/card/id/torch/merchant

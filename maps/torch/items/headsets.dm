@@ -1,9 +1,9 @@
-/obj/item/device/radio/headset/torchnanotrasen
-	name = "nanotrasen headset"
+/obj/item/device/radio/headset/torchscience
+	name = "research headset"
 	desc = "A headset for corporate drones."
-	icon_state = "nt_headset"
+	icon_state = "sci_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_torchnt
+	ks2type = /obj/item/device/encryptionkey/headset_torchsci
 
 /obj/item/device/radio/headset/heads/torchcaptain
 	name = "commanding officer's headset"
@@ -19,10 +19,10 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/heads/torchxo
 
-/obj/item/device/radio/headset/heads/torchntcommand
-	name = "nanotrasen command headset"
+/obj/item/device/radio/headset/heads/torchscicommand
+	name = "research command headset"
 	desc = "Headset of the corporate overlords."
-	icon_state = "nt_headset"
+	icon_state = "sci_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_torchrd
 
