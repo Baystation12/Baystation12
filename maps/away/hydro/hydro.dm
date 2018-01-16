@@ -1,5 +1,6 @@
 #include "hydro_areas.dm"
 
+// Map setup //
 /obj/effect/overmap/sector/hydro
 	name = "unregistered hydroponics station"
 	desc = "A hydroponics station of unknown origin."
@@ -38,13 +39,18 @@
 	cost = 0.75
 	accessibility_weight = 10
 
+// Objs //
 /obj/structure/closet/secure_closet/hydroponics/hydro
 	name = "hydroponics supplies locker"
 	req_access = list()
 
+/obj/item/projectile/beam/drone/weak
+	damage = 5 //1/3rd of regular projectile
+
+// Mobs //
 /mob/living/simple_animal/hostile/retaliate/goat/king/hydro //these goats are powerful but are not the king of goats
 	name = "strange goat"
-	desc = "An impressive goat, both in size and coat. His horns look pretty serious!"
+	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
 	health = 350
 	maxHealth = 350
 	melee_damage_lower = 20
@@ -66,11 +72,18 @@
 	maxHealth = 200
 	malfunctioning = 0
 
+/mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/Initialize()
+	. = ..()
+	if(prob(15))
+		projectiletype = /obj/item/projectile/beam/drone/weak
+
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/emp_act(severity)
 	health -= rand(5,10) * (severity + 1)
 	disabled = rand(15, 30)
 	malfunctioning = 1
 	hostile_drone = 1
+	destroy_surroundings = 1
+	projectiletype = initial(projectiletype)
 	walk(src,0)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/ListTargets()
