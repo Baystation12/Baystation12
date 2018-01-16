@@ -14,6 +14,7 @@
 
 	projectile_type = /obj/item/projectile/temp
 	cell_type = /obj/item/weapon/cell/high
+	combustion = 0
 
 
 /obj/item/weapon/gun/energy/temperature/Initialize()

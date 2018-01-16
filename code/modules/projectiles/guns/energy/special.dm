@@ -13,6 +13,7 @@
 	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
 	wielded_item_state = "ionrifle-wielded"
+	combustion = 0
 
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess
@@ -39,6 +40,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_POWER = 3)
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
+	combustion = 0
 
 /obj/item/weapon/gun/energy/floragun
 	name = "floral somatoray"
@@ -52,6 +54,7 @@
 	modifystate = "floramut"
 	self_recharge = 1
 	var/decl/plantgene/gene = null
+	combustion = 0
 
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
@@ -102,6 +105,7 @@
 	self_recharge = 1
 	recharge_time = 5 //Time it takes for shots to recharge (in ticks)
 	charge_meter = 0
+	combustion = 0
 
 /obj/item/weapon/gun/energy/meteorgun/pen
 	name = "meteor pen"

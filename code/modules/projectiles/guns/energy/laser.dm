@@ -108,6 +108,7 @@ obj/item/weapon/gun/energy/retro
 	charge_cost = 15
 	max_shots = 10
 	wielded_item_state = "gun_wielded"
+	combustion = 0
 
 /obj/item/weapon/gun/energy/xray/pistol
 	name = "x-ray laser gun"
