@@ -1,4 +1,0 @@
-author: "chaoko99"
-delete-after: True
-changes: 
-  - bugfix: "Lasers will no longer fail to disappear during bluespace jump."
