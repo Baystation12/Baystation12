@@ -4,235 +4,165 @@
 
 //To do: Allow corpses to appear mangled, bloody, etc. Allow customizing the bodies appearance (they're all bald and white right now).
 
+#define CORPSE_SPAWNER_RANDOM_NAME       0x0001
+#define CORPSE_SPAWNER_CUT_SURVIVAL      0x0002
+#define CORPSE_SPAWNER_CUT_ID_PDA        0x0003
+#define CORPSE_SPAWNER_PLAIN_HEADSET     0x0004
+
+#define CORPSE_SPAWNER_RANDOM_SKIN_TONE    0x0008
+#define CORPSE_SPAWNER_RANDOM_SKIN_COLOR   0x0010
+#define CORPSE_SPAWNER_RANDOM_HAIR_COLOR   0x0020
+#define CORPSE_SPAWNER_RANDOM_HAIR_STYLE   0x0040
+#define CORPSE_SPAWNER_RANDOM_FACIAL_STYLE 0x0080
+#define CORPSE_SPAWNER_RANDOM_EYE_COLOR    0x0100
+
+#define CORPSE_SPAWNER_NO_RANDOMIZATION ~(CORPSE_SPAWNER_RANDOM_NAME|CORPSE_SPAWNER_RANDOM_SKIN_TONE|CORPSE_SPAWNER_RANDOM_SKIN_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_STYLE|CORPSE_SPAWNER_RANDOM_FACIAL_STYLE|CORPSE_SPAWNER_RANDOM_EYE_COLOR)
+
+
 /obj/effect/landmark/corpse
 	name = "Unknown"
-	var/decl/hierarchy/outfit/corpse_outfit = /decl/hierarchy/outfit/corpse
-	var/mobname = "Unknown"  //Unused now but it'd fuck up maps to remove it now
-	var/species = SPECIES_HUMAN
+	var/species = list(SPECIES_HUMAN)                 // List of species to pick from.
+	var/corpse_outfits = list(/decl/hierarchy/outfit) // List of outfits to pick from. Uses pickweight()
+	var/spawn_flags = (~0)
+
+	var/skin_colors_per_species   = list() // Custom skin colors, per species -type-, if any. For example if you want dead Tajaran to always have brown fur, or similar
+	var/eye_colors_per_species    = list() // Custom eye colors, per species -type-, if any. See above as to why.
+	var/hair_colors_per_species   = list() // Custom hair colors, per species -type-, if any. See above as to why.
+	var/hair_styles_per_species   = list() // Custom hair styles, per species -type-, if any. For example if you want a punk gang with handlebars.
+	var/facial_styles_per_species = list() // Custom facial hair styles, per species -type-, if any. See above as to why
 
 /obj/effect/landmark/corpse/Initialize()
-	createCorpse()
-	. = ..()
+	..()
 
-/obj/effect/landmark/corpse/proc/createCorpse() //Creates a mob and checks for gear in each slot before attempting to equip it.
-	var/mob/living/carbon/human/M = new /mob/living/carbon/human (src.loc)
-	M.set_species(species)
-	M.real_name = src.name
+	var/mob/living/carbon/human/M = new /mob/living/carbon/human(loc)
+
+	randomize_appearance(M)
+	equip_outfit(M)
+
 	M.adjustOxyLoss(M.maxHealth)//cease life functions
 	M.setBrainLoss(M.maxHealth)
 	var/obj/item/organ/internal/heart/corpse_heart = M.internal_organs_by_name[BP_HEART]
 	corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
-	corpse_outfit = outfit_by_type(corpse_outfit)
-	corpse_outfit.equip(M)
-	//removes spawning survival kit. Find better way to do it
-	var/obj/item/weapon/storage/box/survival/SB = locate() in get_turf(src)
-	if (SB)
-		qdel(SB)
-	scramble(1,M,100)//randomizes appearence, not sure how to add random hairstyle yet
-	M.h_style = random_hair_style(M.gender, species)
-	M.f_style = random_facial_hair_style(M.gender, species)
-	qdel(src)
 
-/decl/hierarchy/outfit/corpse
-	name = "Basic corpse outfit datum"
-// I'll work on making a list of corpses people request for maps, or that I think will be commonly used. Syndicate operatives for example.
-/obj/effect/landmark/corpse/syndicatesoldier
-	name = "Syndicate Operative"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/syndicatesoldier
+	M.update_icon()
 
-/decl/hierarchy/outfit/corpse/syndicatesoldier
-	name = "Dead Syndicate Operative - Soldier"
-	uniform = /obj/item/clothing/under/syndicate
-	suit = /obj/item/clothing/suit/armor/vest
-	shoes = /obj/item/clothing/shoes/swat
-	gloves = /obj/item/clothing/gloves/thick/swat
-	l_ear =  /obj/item/device/radio/headset
-	mask = /obj/item/clothing/mask/gas
-	head = /obj/item/clothing/head/helmet/swat
-	back = /obj/item/weapon/storage/backpack
-	id_type = /obj/item/weapon/card/id/syndicate
-	id_desc = "Syndicate Operative"
-	id_slot = slot_wear_id
+	return INITIALIZE_HINT_QDEL
 
-/obj/effect/landmark/corpse/syndicatecommando
-	name = "Syndicate Commando"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/syndicatecommando
+#define HEX_COLOR_TO_RGB_ARGS(X) arglist(GetHexColors(X))
+/obj/effect/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M)
+	M.set_species(pickweight(species))
+	scramble(1, M, 100) //randomizes appearence
 
-/decl/hierarchy/outfit/corpse/syndicatecommando
-	name = "Dead Syndicate Operative - Commando"
-	uniform = /obj/item/clothing/under/syndicate
-	suit = /obj/item/clothing/suit/space/void/merc
-	shoes = /obj/item/clothing/shoes/swat
-	gloves = /obj/item/clothing/gloves/thick/swat
-	l_ear =  /obj/item/device/radio/headset
-	mask = /obj/item/clothing/mask/gas/syndicate
-	head = /obj/item/clothing/head/helmet/space/void/merc
-	back = /obj/item/weapon/tank/jetpack/oxygen
-	l_pocket = /obj/item/weapon/tank/emergency/oxygen
-	id_type = /obj/item/weapon/card/id/syndicate
-	id_desc = "Syndicate Operative"
-	id_slot = slot_wear_id
+	if((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_TONE))
+		M.randomize_skin_tone()
 
-///////////Civilians//////////////////////
+	if((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_COLOR))
+		if(M.species.type in skin_colors_per_species)
+			M.change_skin_color(HEX_COLOR_TO_RGB_ARGS(pickweight(skin_colors_per_species[M.species.type])))
+		else
+			M.s_tone = random_skin_tone(M.species)
+
+	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_COLOR))
+		if(M.species.type in hair_colors_per_species)
+			M.change_hair_color(HEX_COLOR_TO_RGB_ARGS(pickweight(hair_colors_per_species[M.species.type])))
+		else
+			M.randomize_hair_color()
+		M.change_facial_hair_color(M.r_hair, M.g_hair, M.b_hair)
+
+	if((spawn_flags & CORPSE_SPAWNER_RANDOM_HAIR_STYLE))
+		if(M.species.type in hair_styles_per_species)
+			M.change_hair(pickweight(hair_styles_per_species[M.species.type]))
+		else
+			M.randomize_hair_style()
+
+	if((spawn_flags & CORPSE_SPAWNER_RANDOM_FACIAL_STYLE))
+		if(M.species.type in facial_styles_per_species)
+			M.change_facial_hair(pickweight(facial_styles_per_species[M.species.type]))
+		else
+			M.randomize_facial_hair_style()
+
+	if((spawn_flags & CORPSE_SPAWNER_RANDOM_EYE_COLOR))
+		if(M.species.type in eye_colors_per_species)
+			M.change_eye_color(HEX_COLOR_TO_RGB_ARGS(pickweight(eye_colors_per_species[M.species.type])))
+		else
+			M.randomize_eye_color()
+
+	M.name = (CORPSE_SPAWNER_RANDOM_NAME & spawn_flags) ? M.species.get_random_name(M.gender) : name
+	M.real_name = M.name
+
+#undef HEX_COLOR_TO_RGB_ARGS
+
+/obj/effect/landmark/corpse/proc/equip_outfit(var/mob/living/carbon/human/M)
+	var/adjustments = 0
+	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_SURVIVAL)  ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR) : adjustments
+	adjustments = (spawn_flags & CORPSE_SPAWNER_CUT_ID_PDA)    ? (adjustments|OUTFIT_ADJUSTMENT_SKIP_ID_PDA)        : adjustments
+	adjustments = (spawn_flags & CORPSE_SPAWNER_PLAIN_HEADSET) ? (adjustments|OUTFIT_ADJUSTMENT_PLAIN_HEADSET)      : adjustments
+
+	var/decl/hierarchy/outfit/corpse_outfit = outfit_by_type(pickweight(corpse_outfits))
+	corpse_outfit.equip(M, equip_adjustments = adjustments)
 
 /obj/effect/landmark/corpse/chef
 	name = "Chef"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/chef
-
-/decl/hierarchy/outfit/corpse/chef
-	name = "Dead Chef"
-	uniform = /obj/item/clothing/under/rank/chef
-	suit = /obj/item/clothing/suit/chef/classic
-	shoes = /obj/item/clothing/shoes/black
-	head = /obj/item/clothing/head/chefhat
-	back = /obj/item/weapon/storage/backpack
-	l_ear =  /obj/item/device/radio/headset
+	corpse_outfits = list(/decl/hierarchy/outfit/job/service/chef)
 
 /obj/effect/landmark/corpse/doctor
 	name = "Doctor"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/doctor
-
-/decl/hierarchy/outfit/corpse/doctor
-	name = "Dead Doctor"
-	l_ear =  /obj/item/device/radio/headset/headset_med
-	uniform = /obj/item/clothing/under/rank/medical
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-	back = /obj/item/weapon/storage/backpack/medic
-	l_pocket = /obj/item/device/flashlight/pen
-	shoes = /obj/item/clothing/shoes/black
+	corpse_outfits = list(/decl/hierarchy/outfit/job/medical/doctor)
 
 /obj/effect/landmark/corpse/engineer
 	name = "Engineer"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/engineer
-
-/decl/hierarchy/outfit/corpse/engineer
-	name = "Dead Engineer"
-	l_ear =  /obj/item/device/radio/headset/headset_eng
-	uniform = /obj/item/clothing/under/rank/engineer
-	back = /obj/item/weapon/storage/backpack/industrial
-	shoes = /obj/item/clothing/shoes/orange
-	belt = /obj/item/weapon/storage/belt/utility/full
-	gloves = /obj/item/clothing/gloves/insulated
-	head = /obj/item/clothing/head/hardhat
-
-/obj/effect/landmark/corpse/engineer/rig
-	corpse_outfit = /decl/hierarchy/outfit/corpse/engineer/rig
-
-/decl/hierarchy/outfit/corpse/engineer/rig
-	name = "Dead Engineer- RIG"
-	suit = /obj/item/clothing/suit/space/void/engineering
-	mask = /obj/item/clothing/mask/breath
-	head = /obj/item/clothing/head/helmet/space/void/engineering
-
-/obj/effect/landmark/corpse/clown
-	name = "Clown"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/clown
-
-/decl/hierarchy/outfit/corpse/clown
-	name = "Dead Clown"
-	uniform = /obj/item/clothing/under/rank/clown
-	shoes = /obj/item/clothing/shoes/clown_shoes
-	l_ear =  /obj/item/device/radio/headset
-	mask = /obj/item/clothing/mask/gas/clown_hat
-	l_pocket = /obj/item/weapon/bikehorn
-	back = /obj/item/weapon/storage/backpack/clown
+	corpse_outfits = list(/decl/hierarchy/outfit/job/engineering/engineer)
 
 /obj/effect/landmark/corpse/scientist
 	name = "Scientist"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/scientist
+	corpse_outfits = list(/decl/hierarchy/outfit/job/science/scientist)
 
-/decl/hierarchy/outfit/corpse/scientist
-	name = "Dead Scientist"
-	l_ear =  /obj/item/device/radio/headset/headset_sci
-	uniform = /obj/item/clothing/under/rank/scientist
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
-	back = /obj/item/weapon/storage/backpack
-	shoes = /obj/item/clothing/shoes/white
+/obj/effect/landmark/corpse/engineer/rig
+	corpse_outfits = list(/decl/hierarchy/outfit/job/engineering/engineer/void)
+
+/obj/effect/landmark/corpse/clown
+	name = "Clown"
+	corpse_outfits = list(/decl/hierarchy/outfit/clown)
 
 /obj/effect/landmark/corpse/miner
 	name = "Miner"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/miner
-
-/decl/hierarchy/outfit/corpse/miner
-	name = "Dead Miner"
-	l_ear =  /obj/item/device/radio/headset/headset_cargo
-	uniform = /obj/item/clothing/under/rank/miner
-	gloves = /obj/item/clothing/gloves/thick
-	back = /obj/item/weapon/storage/backpack/industrial
-	shoes = /obj/item/clothing/shoes/black
+	corpse_outfits = list(/decl/hierarchy/outfit/job/cargo/mining)
 
 /obj/effect/landmark/corpse/miner/rig
-	corpse_outfit = /decl/hierarchy/outfit/corpse/miner/rig
+	corpse_outfits = list(/decl/hierarchy/outfit/job/cargo/mining/void)
 
-/decl/hierarchy/outfit/corpse/miner/rig
-	name = "Dead Miner - RIG"
-	suit = /obj/item/clothing/suit/space/void/mining
-	mask = /obj/item/clothing/mask/breath
-	head = /obj/item/clothing/head/helmet/space/void/mining
-
-/////////////////Officers//////////////////////
 
 /obj/effect/landmark/corpse/bridgeofficer
 	name = "Bridge Officer"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/bridgeofficer
-
-/decl/hierarchy/outfit/corpse/bridgeofficer
-	name = "Dead Bridge Officer"
-	l_ear =  /obj/item/device/radio/headset/heads/hop
-	uniform = /obj/item/clothing/under/rank/centcom_officer
-	suit = /obj/item/clothing/suit/armor/bulletproof
-	shoes = /obj/item/clothing/shoes/black
-	glasses = /obj/item/clothing/glasses/sunglasses
+	corpse_outfits = list(/decl/hierarchy/outfit/nanotrasen/officer)
 
 /obj/effect/landmark/corpse/commander
 	name = "Commander"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/commander
+	corpse_outfits = list(/decl/hierarchy/outfit/nanotrasen/commander)
 
-/decl/hierarchy/outfit/corpse/commander
-	name = "Dead Commander"
-	uniform = /obj/item/clothing/under/rank/centcom_captain
-	suit = /obj/item/clothing/suit/armor/bulletproof
-	l_ear =  /obj/item/device/radio/headset/heads/captain
-	glasses = /obj/item/clothing/glasses/eyepatch
-	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
-	head = /obj/item/clothing/head/centhat
-	gloves = /obj/item/clothing/gloves/thick/swat
-	shoes = /obj/item/clothing/shoes/swat
-	l_pocket = /obj/item/weapon/flame/lighter/zippo
 
 /obj/effect/landmark/corpse/pirate
 	name = "Pirate"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/pirate
-
-/decl/hierarchy/outfit/corpse/pirate
-	name = "Dead pirate"
-	uniform = /obj/item/clothing/under/pirate
-	shoes = /obj/item/clothing/shoes/jackboots
-	glasses = /obj/item/clothing/glasses/eyepatch
-	head = /obj/item/clothing/head/bandana
+	corpse_outfits = list(/decl/hierarchy/outfit/pirate/norm)
+	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION
 
 /obj/effect/landmark/corpse/pirate/ranged
 	name = "Pirate Gunner"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/pirate/ranged
-
-/decl/hierarchy/outfit/corpse/pirate/ranged
-	name = "Dead pirate - ranged"
-	suit = /obj/item/clothing/suit/pirate
-	head = /obj/item/clothing/head/pirate
+	corpse_outfits = list(/decl/hierarchy/outfit/pirate/space)
 
 /obj/effect/landmark/corpse/russian
 	name = "Russian"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/russian
-
-/decl/hierarchy/outfit/corpse/russian
-	name = "Dead russian"
-	uniform = /obj/item/clothing/under/soviet
-	shoes = /obj/item/clothing/shoes/jackboots
-	head = /obj/item/clothing/head/bearpelt
+	corpse_outfits = list(/decl/hierarchy/outfit/soviet_soldier)
+	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION
 
 /obj/effect/landmark/corpse/russian/ranged
-	corpse_outfit = /decl/hierarchy/outfit/corpse/russian/ranged
+	corpse_outfits = list(/decl/hierarchy/outfit/soviet_soldier)
 
-/decl/hierarchy/outfit/corpse/russian/ranged
-	name = "Dead russian - ranged"
-	head = /obj/item/clothing/head/ushanka
+/obj/effect/landmark/corpse/syndicate
+	name = "Syndicate Operative"
+	corpse_outfits = list(/decl/hierarchy/outfit/mercenary/syndicate)
+	spawn_flags = CORPSE_SPAWNER_NO_RANDOMIZATION
+
+/obj/effect/landmark/corpse/syndicate/commando
+	name = "Syndicate Commando"
+	corpse_outfits = list(/decl/hierarchy/outfit/mercenary/syndicate/commando)

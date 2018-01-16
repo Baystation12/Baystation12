@@ -62,8 +62,9 @@
 	icon = 'maps/away/marooned/marooned_sprites.dmi'
 
 /obj/effect/landmark/corpse/marooned_officer
-	name = "Marooned Magnitka's fleet officer"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/marooned_officer
+	name = "Horazy Warda"
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/marooned_officer)
+	spawn_flags = ~CORPSE_SPAWNER_RANDOM_NAME
 
 /decl/hierarchy/outfit/corpse/marooned_officer
 	name = "Dead Magnitka's fleet officer"

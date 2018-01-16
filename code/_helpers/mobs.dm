@@ -93,15 +93,17 @@ proc/random_name(gender, species = SPECIES_HUMAN)
 	else
 		return current_species.get_random_name(gender)
 
-proc/random_skin_tone()
+proc/random_skin_tone(var/datum/species/current_species)
+	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
 	switch(pick(60;"caucasian", 15;"afroamerican", 10;"african", 10;"latino", 5;"albino"))
 		if("caucasian")		. = -10
 		if("afroamerican")	. = -115
 		if("african")		. = -165
 		if("latino")		. = -55
 		if("albino")		. = 34
-		else				. = rand(-185,34)
-	return min(max( .+rand(-25, 25), -185),34)
+		else				. = rand(species_tone,34)
+
+	return min(max(. + rand(-25, 25), species_tone), 34)
 
 proc/skintone2racedescription(tone)
 	switch (tone)

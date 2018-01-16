@@ -27,6 +27,12 @@
 	id_type = /obj/item/weapon/card/id/engineering
 	pda_type = /obj/item/device/pda/engineering
 
+/decl/hierarchy/outfit/job/engineering/engineer/void
+	name = OUTFIT_JOB_NAME("Engineer - Voidsuit")
+	head = /obj/item/clothing/head/helmet/space/void/engineering
+	mask = /obj/item/clothing/mask/breath
+	suit = /obj/item/clothing/suit/space/void/engineering
+
 /decl/hierarchy/outfit/job/engineering/atmos
 	name = OUTFIT_JOB_NAME("Atmospheric technician")
 	uniform = /obj/item/clothing/under/rank/atmospheric_technician
