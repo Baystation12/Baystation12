@@ -1,0 +1,4 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - rscadd: "cloaked mobs (ninjas and whatnot/Mehren) can now be spotted via T-ray."
