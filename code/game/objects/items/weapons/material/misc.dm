@@ -46,9 +46,9 @@
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
 
-/obj/item/weapon/material/hatchet/machete/red
-	icon_state = "macheteR"
-	item_state = "machete"
+/obj/item/weapon/material/hatchet/machete/Initialize()
+	icon_state = "machete[pick("","_red","_blue", "_black", "_olive")]"
+	. = ..()
 
 /obj/item/weapon/material/hatchet/machete/deluxe
 	name = "deluxe machete"

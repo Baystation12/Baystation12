@@ -194,7 +194,7 @@
 "tc" = (/obj/structure/catwalk,/obj/machinery/portable_atmospherics/hydroponics,/obj/item/seeds/eggplantseed,/turf/simulated/floor/fixed/alium/curves,/area/hydro/station/growC)
 "td" = (/obj/structure/catwalk,/obj/machinery/light,/obj/machinery/portable_atmospherics/hydroponics,/obj/item/seeds/riceseed,/turf/simulated/floor/fixed/alium/curves,/area/hydro/station/growC)
 "te" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 10},/turf/simulated/floor/exoplanet/concrete,/area/hydro/solars)
-"tf" = (/obj/structure/closet/secure_closet/hydroponics/hydro,/obj/item/weapon/material/hatchet/machete/red,/turf/simulated/floor/tiled,/area/hydro/station/growF)
+"tf" = (/obj/structure/closet/secure_closet/hydroponics/hydro,/obj/item/weapon/material/hatchet/machete,/turf/simulated/floor/tiled,/area/hydro/station/growF)
 "tg" = (/obj/item/weapon/cigbutt,/turf/simulated/floor/tiled/white,/area/hydro/station/growB)
 "ub" = (/obj/structure/catwalk,/obj/machinery/portable_atmospherics/hydroponics,/obj/item/seeds/tobaccoseed,/turf/simulated/floor/bluegrid,/area/hydro/station/growA)
 "uc" = (/obj/structure/catwalk,/obj/machinery/portable_atmospherics/hydroponics,/obj/item/seeds/cornseed,/turf/simulated/floor/fixed/alium/curves,/area/hydro/station/growC)
