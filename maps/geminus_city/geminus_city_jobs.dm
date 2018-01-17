@@ -1,6 +1,6 @@
 
 /datum/map/geminus_city
-	allowed_jobs = list(/datum/job/colonist,/datum/job/innie_sympathiser,/datum/job/insurrectionist_recruiter,/datum/job/colonist_mayor,/datum/job/marine,/datum/job/marine_leader)
+	allowed_jobs = list(/datum/job/colonist,/datum/job/innie_sympathiser,/datum/job/insurrectionist_recruiter,/datum/job/colonist_mayor,/datum/job/marine,/datum/job/marine_leader,/datum/job/police)
 	allowed_spawns = list("Colony Arrival Shuttle","UNSC Peacekeeping Ship","UNSC Peacekeeping Ship - Leader Quarters")
 
 	default_spawn = "UNSC Peacekeeping Ship"
@@ -107,5 +107,22 @@
 	loadout_allowed = TRUE
 	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/marine/leader
+
+	latejoin_at_spawnpoints = FALSE
+
+/datum/job/police
+	title = "UEG Police Officer"
+	total_positions = 6
+	selection_color = "#000000"
+
+	supervisors = " the Colony Mayor"
+
+	create_record = 0
+	account_allowed = 0
+	generate_email = 0
+
+	loadout_allowed = TRUE
+	announced = FALSE
+	outfit_type = /decl/hierarchy/outfit/job/police
 
 	latejoin_at_spawnpoints = FALSE
