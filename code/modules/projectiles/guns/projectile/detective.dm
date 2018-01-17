@@ -22,8 +22,8 @@
 		else
 			icon_state = "[initial(icon_state)]-e"
 
-/obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
-	set name = "Name Gun"
+/obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun_detective()
+	set name = "Name Gun (Detective)"
 	set category = "Object"
 	set desc = "Rename your gun. If you're the detective."
 
