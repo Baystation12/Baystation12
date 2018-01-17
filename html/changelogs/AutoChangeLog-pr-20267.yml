@@ -1,0 +1,7 @@
+author: "Orelbon"
+delete-after: True
+changes: 
+  - bugfix: "Suit storage units now check for access."
+  - tweak: "Suit storage units don't drop items when the powers fails anymore."
+  - tweak: "Suit storage units can now be pried open when they are powered off and not locked."
+  - tweak: "Suit storage units can now dispense items when they are offline."
