@@ -12,7 +12,7 @@
 /obj/effect/overmap/sector/marooned
 	name = "glacial planetoid"
 	desc = "Moon-sized planet with breathable atmosphere. Sensors are picking up a weak radio signal from the surface."
-	icon_state = "object"
+	icon_state = "globe"
 	known = 0
 	in_space = 0
 
