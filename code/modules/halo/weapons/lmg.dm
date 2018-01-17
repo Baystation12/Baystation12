@@ -4,6 +4,8 @@
 //M739 Light Machine Gun
 
 /obj/item/weapon/gun/projectile/m739_lmg
+	var/unique_name
+	var/static/list/gun_options
 	name = "\improper M739 Light Machine Gun"
 	desc = "Standard-issue squad automatic weapon, designed for use in heavy engagements. Takes 7.62mm calibre ordinary and box type magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
@@ -35,3 +37,22 @@
 		icon_state = "M739"
 	else
 		icon_state = "M739_unloaded"
+
+/obj/item/weapon/gun/projectile/m739_lmg/verb/rename_gun()
+	set name = "Name Gun"
+	set category = "Object"
+	set desc = "Rename your gun."
+
+	var/mob/M = usr
+	if(!M.mind)	return 0
+	if(M.incapacitated()) return 0
+
+	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
+
+	if(src && input && !M.incapacitated() && in_range(M,src))
+		if(!findtext(input, "the", 1, 4))
+			input = "\improper [input]"
+		name = input
+		unique_name = input
+		to_chat(M, "Your gun is now named '[input]'.")
+		return 1

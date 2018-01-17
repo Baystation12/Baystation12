@@ -4,6 +4,8 @@
 //MA5B assault rifle
 
 /obj/item/weapon/gun/projectile/ma5b_ar
+	var/unique_name
+	var/static/list/gun_options
 	name = "\improper MA5B Assault Rifle"
 	desc = "Standard-issue service rifle of the UNSC Marines. Takes 7.62mm calibre magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
@@ -49,9 +51,31 @@
 	else
 		icon_state = "MA37_unloaded"
 
+
+/obj/item/weapon/gun/projectile/ma5b_ar/verb/rename_gun()
+	set name = "Name Gun"
+	set category = "Object"
+	set desc = "Rename your gun."
+
+	var/mob/M = usr
+	if(!M.mind)	return 0
+	if(M.incapacitated()) return 0
+
+	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
+
+	if(src && input && !M.incapacitated() && in_range(M,src))
+		if(!findtext(input, "the", 1, 4))
+			input = "\improper [input]"
+		name = input
+		unique_name = input
+		to_chat(M, "Your gun is now named '[input]'.")
+		return 1
+
 //BR85 battle
 
 /obj/item/weapon/gun/projectile/br85
+	var/unique_name
+	var/static/list/gun_options
 	name = "\improper BR85 Battle Rifle"
 	desc = "When nothing else gets the job done, the BR85 Battle Rifle will do. Takes 9.5mm calibre magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
@@ -85,3 +109,22 @@
 		icon_state = "Br85"
 	else
 		icon_state = "Br85_unloaded"
+
+/obj/item/weapon/gun/projectile/br85/verb/rename_gun()
+	set name = "Name Gun"
+	set category = "Object"
+	set desc = "Rename your gun."
+
+	var/mob/M = usr
+	if(!M.mind)	return 0
+	if(M.incapacitated()) return 0
+
+	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
+
+	if(src && input && !M.incapacitated() && in_range(M,src))
+		if(!findtext(input, "the", 1, 4))
+			input = "\improper [input]"
+		name = input
+		unique_name = input
+		to_chat(M, "Your gun is now named '[input]'.")
+		return 1

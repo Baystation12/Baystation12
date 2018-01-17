@@ -4,6 +4,8 @@
 //M7 submachine gun
 
 /obj/item/weapon/gun/projectile/m7_smg
+	var/unique_name
+	var/static/list/gun_options
 	name = "M7 submachine gun"
 	desc = "The M7/Caseless Submachine Gun is a fully automatic close quarters infantry and special operations weapon. Takes 5mm calibre magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
@@ -36,6 +38,26 @@
 		icon_state = "m7smg"
 	else
 		icon_state = "m7smg_unloaded"
+
+/obj/item/weapon/gun/projectile/m7_smg/verb/rename_gun()
+	set name = "Name Gun"
+	set category = "Object"
+	set desc = "Rename your gun."
+
+	var/mob/M = usr
+	if(!M.mind)	return 0
+	if(M.incapacitated()) return 0
+
+	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
+
+	if(src && input && !M.incapacitated() && in_range(M,src))
+		if(!findtext(input, "the", 1, 4))
+			input = "\improper [input]"
+		name = input
+		unique_name = input
+		to_chat(M, "Your gun is now named '[input]'.")
+		return 1
+
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced
 	name = "M7S submachine gun"
