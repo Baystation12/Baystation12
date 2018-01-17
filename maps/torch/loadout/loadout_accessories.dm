@@ -124,7 +124,7 @@
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
+	allowed_roles = CONTRACTOR_ROLES
 
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
@@ -197,7 +197,7 @@
 	path = /obj/item/clothing/accessory/storage/brown_vest
 	cost = 3
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/nt_pilot)
+						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/pilot)
 
 /datum/gear/accessory/black_vest
 	display_name = "webbing, security"
@@ -369,20 +369,20 @@
 	solminors["instructor ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/instructor
 	gear_tweaks += new/datum/gear_tweak/path(solminors)
 
-/datum/gear/accessory/ntaward
-	display_name = "NanoTrasen award selection"
-	description = "A medal or ribbon awarded to NanoTrasen personnel for significant accomplishments."
+/datum/gear/accessory/corpaward
+	display_name = "corporate award selection"
+	description = "A medal or ribbon awarded to corporate personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal
 	cost = 8
-	allowed_roles = NANOTRASEN_ROLES
+	allowed_roles = CONTRACTOR_ROLES
 
-/datum/gear/accessory/ntaward/New()
+/datum/gear/accessory/corpaward/New()
 	..()
-	var/ntawards = list()
-	ntawards["sciences medal"] = /obj/item/clothing/accessory/medal/bronze/nanotrasen
-	ntawards["nanotrasen service"] = /obj/item/clothing/accessory/medal/silver/nanotrasen
-	ntawards["command medal"] = /obj/item/clothing/accessory/medal/gold/nanotrasen
-	gear_tweaks += new/datum/gear_tweak/path(ntawards)
+	var/corpawards = list()
+	corpawards["sciences medal"] = /obj/item/clothing/accessory/medal/bronze/corporate
+	corpawards["nanotrasen service"] = /obj/item/clothing/accessory/medal/silver/corporate
+	corpawards["command medal"] = /obj/item/clothing/accessory/medal/gold/corporate
+	gear_tweaks += new/datum/gear_tweak/path(corpawards)
 
 /datum/gear/accessory/tags
 	display_name = "dog tags"

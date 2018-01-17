@@ -601,6 +601,20 @@
 	icon_state = "frontier"
 	worn_state = "frontier"
 
+/obj/item/clothing/under/rank/pilot
+	name = "flightsuit"
+	desc = "A sleek dark red flightsuit. It proudly sports three different patches, as well as several unnecessary looking flaps and pockets for effect."
+	icon_state = "pilot"
+	worn_state = "pilot"
+
+/obj/item/clothing/under/rank/guard
+	name = "security uniform"
+	desc = "A durable uniform worn by corporate security."
+	icon_state = "guard"
+	worn_state = "guard"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
+
 /obj/item/clothing/under/aether
 	name = "\improper Aether jumpsuit"
 	desc = "A jumpsuit belonging to Aether Atmospherics and Recycling, a Trans-Stellar that supplies recycling and atmospheric systems to colonies."

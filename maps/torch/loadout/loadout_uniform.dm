@@ -176,9 +176,7 @@
 /datum/gear/uniform/corporate
 	display_name = "corporate uniform selection"
 	path = /obj/item/clothing/under
-	allowed_roles = list(/datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
-						/datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor,
-						/datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant, /datum/job/assistant)
+	allowed_roles = CONTRACTOR_ROLES
 
 /datum/gear/uniform/corporate/New()
 	..()

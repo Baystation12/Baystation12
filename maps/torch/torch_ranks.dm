@@ -148,7 +148,6 @@
 
 	rank_types = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/marshal,
@@ -157,7 +156,6 @@
 
 	spawn_rank_types = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/marshal,
@@ -414,9 +412,6 @@
 /datum/mil_rank/civ/civ
 	name = "Civilian"
 	name_short = null
-
-/datum/mil_rank/civ/nt
-	name = "NanoTrasen Employee"
 
 /datum/mil_rank/civ/contractor
 	name = "Contractor"

@@ -49,10 +49,10 @@
 	desc = "SolGov Crew"
 	region = ACCESS_REGION_GENERAL
 
-/var/const/access_nanotrasen = 81
-/datum/access/nanotrasen
-	id = access_nanotrasen
-	desc = "NanoTrasen Personnel"
+/var/const/access_corporate = 81
+/datum/access/corporate
+	id = access_corporate
+	desc = "Research Personnel"
 	region = ACCESS_REGION_RESEARCH
 
 /var/const/access_robotics_engineering = 82 //two accesses so that you can give access to the lab without giving access to the borgs
@@ -70,7 +70,7 @@
 /var/const/access_liaison = 84
 /datum/access/liaison
 	id = access_liaison
-	desc = "NanoTrasen Liaison"
+	desc = "Corporate Liaison"
 	region = ACCESS_REGION_COMMAND
 	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO and RD cannot enter
 

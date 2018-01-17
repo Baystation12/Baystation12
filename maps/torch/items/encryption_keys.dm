@@ -8,14 +8,14 @@
 	icon_state = "hop_cypherkey"
 	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1)
 
-/obj/item/device/encryptionkey/headset_torchnt
-	name = "nanotrasen radio encryption key"
-	icon_state = "nt_cypherkey"
+/obj/item/device/encryptionkey/headset_torchsci
+	name = "research radio encryption key"
+	icon_state = "sci_cypherkey"
 	channels = list("Science" = 1)
 
 /obj/item/device/encryptionkey/headset_torchrd
-	name = "nanotrasen command radio encryption key"
-	icon_state = "nt_cypherkey"
+	name = "research command radio encryption key"
+	icon_state = "sci_cypherkey"
 	channels = list("Science" = 1, "Command" = 1)
 
 /obj/item/device/encryptionkey/headset_deckofficer

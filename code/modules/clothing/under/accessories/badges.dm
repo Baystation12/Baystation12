@@ -120,6 +120,26 @@
 	icon_state = "ntbadge"
 	badge_string = "NanoTrasen"
 
+/obj/item/clothing/accessory/badge/corporate
+	name = "corporate badge"
+	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a corporate executive."
+	icon_state = "corpbadge"
+	badge_string = ""
+
+/obj/item/clothing/accessory/badge/corporate/proc/set_faction(var/faction)
+    badge_string = "[faction]"
+
+/obj/item/clothing/accessory/badge/corporate/attack_self(mob/living/carbon/human/H)
+	if(!badge_string)
+		set_faction(H.personal_faction)
+	..()
+
+/obj/item/clothing/accessory/badge/corporate/attack_self(mob/user as mob)
+	if(badge_string == "None")
+		to_chat(user, "Waving around a badge with no business printed would be pretty pointless.")
+		return
+	return ..()
+
 /obj/item/clothing/accessory/badge/marshal
 	name = "colonial marshal's badge"
 	desc = "A leather-backed gold badge displaying the crest of the Colonial Marshals."
@@ -127,7 +147,7 @@
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	badge_string = "Colonial Marshal Bureau"
-	
+
 /obj/item/clothing/accessory/badge/press
 	name = "press badge"
 	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."

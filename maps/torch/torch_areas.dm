@@ -383,7 +383,7 @@
 //Petrov
 
 /area/shuttle/petrov
-	name = "\improper NSV Petrov"
+	name = "\improper SSV Petrov"
 	requires_power = 1
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED
@@ -392,13 +392,13 @@
 	icon_state = "shuttlered"
 
 /area/shuttle/petrov/cell1
-	name = "\improper NSV Petrov - Isolation Cell 1"
+	name = "\improper SSV Petrov - Isolation Cell 1"
 	icon_state = "shuttle"
 /area/shuttle/petrov/cell2
-	name = "\improper NSV Petrov - Isolation Cell 2"
+	name = "\improper SSV Petrov - Isolation Cell 2"
 	icon_state = "shuttlegrn"
 /area/shuttle/petrov/cell3
-	name = "\improper NSV Petrov - Isolation Cell 3"
+	name = "\improper SSV Petrov - Isolation Cell 3"
 	icon_state = "shuttle"
 
 //Turbolift

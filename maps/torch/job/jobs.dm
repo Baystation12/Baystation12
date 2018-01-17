@@ -24,8 +24,8 @@
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
-						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
-						/datum/job/ai, /datum/job/cyborg,
+						/datum/job/senior_scientist, /datum/job/pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
+						/datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
 						/datum/job/merchant, /datum/job/stowaway
 						)
@@ -110,17 +110,17 @@
 
 /datum/job/rd
 	title = "Research Director"
-	supervisors = "NanoTrasen and the Commanding Officer"
+	supervisors = "the Commanding Officer and the Executive Officer"
 	economic_modifier = 20
 	minimal_player_age = 14
 	ideal_character_age = 60
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/rd
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_heads, access_rd,
 						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard,
+						access_RC_announce, access_keycard_auth, access_xenoarch, access_sec_guard,
 						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
 	minimal_access = list()
 
@@ -224,23 +224,23 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/liaison
-	title = "NanoTrasen Liaison"
+	title = "Corporate Liaison"
 	department = "Support"
 	department_flag = SPT
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "NanoTrasen and Corporate Regulations"
+	supervisors = "the economy and Corporate Regulations"
 	selection_color = "#2f2f7f"
 	economic_modifier = 15
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/cl
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
-	access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research,
+	access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research, access_corporate,
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard,
+						access_xenoarch, access_sec_guard,
 						access_hangar, access_petrov, access_petrov_helm)
 
 /datum/job/representative
@@ -928,32 +928,32 @@
 		"Research Supervisor")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
-						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen,
+						access_mining_station, access_xenobiology, access_xenoarch, access_corporate,
 						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
 
-/datum/job/nt_pilot
-	title = "NanoTrasen Pilot"
+/datum/job/pilot
+	title = "Corporate Pilot"
 	supervisors = "the Research Director"
 	department = "Science"
 	department_flag = SCI
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Research Director and NanoTrasen Personnel"
+	supervisors = "the Research Director and Research Personnel"
 	selection_color = "#633d63"
 	economic_modifier = 10
 	minimal_player_age = 5
 	ideal_character_age = 40
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot
+	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/pilot
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
-	access = list(access_research, access_mining_office,
-						access_mining_station, access_nanotrasen, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
-						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_mining)
+	access = list(access_research, access_mining_office, access_corporate,
+					access_mining_station, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
+					access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_mining)
 /datum/job/scientist
 	title = "Scientist"
 	total_positions = 6
@@ -972,11 +972,11 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
+	access = list(access_tox, access_tox_storage, access_research, access_corporate, access_petrov, access_petrov_helm,
 						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
-						access_xenoarch, access_nanotrasen, access_expedition_shuttle, access_guppy, access_hangar)
+						access_xenoarch, access_expedition_shuttle, access_guppy, access_hangar)
 	minimal_access = list()
 
 
@@ -997,10 +997,10 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/prospector
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_research, access_mining, access_mining_office, access_mining_station, access_nanotrasen,
-						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_guppy_helm)
+	access = list(access_research, access_corporate, access_mining, access_mining_office, access_mining_station,
+					access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_guppy_helm)
 	minimal_access = list()
 
 
@@ -1011,17 +1011,17 @@
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Research Director and NanoTrasen Personnel"
+	supervisors = "the Research Director and Research Personnel"
 	selection_color = "#633d63"
 	economic_modifier = 6
 	minimal_player_age = 3
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/guard
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_tox, access_tox_storage,access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_expedition_shuttle, access_guppy)
+	access = list(access_tox, access_tox_storage, access_research, access_corporate, access_mining, access_mining_office, access_mining_station, access_xenobiology,
+					access_xenoarch, access_sec_guard, access_hangar, access_petrov, access_expedition_shuttle, access_guppy)
 
 
 /datum/job/scientist_assistant
@@ -1031,7 +1031,7 @@
 
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Research Director and NanoTrasen Personnel"
+	supervisors = "the Research Director and Research Personnel"
 	selection_color = "#633d63"
 	economic_modifier = 3
 	ideal_character_age = 30
@@ -1045,9 +1045,9 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/assist
 	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy)
+	access = list(access_research, access_mining_office, access_corporate, access_petrov, access_expedition_shuttle, access_guppy)
 
 
 /datum/job/assistant
@@ -1074,8 +1074,7 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/offduty,
-		/datum/mil_rank/civ/nt
+		/datum/mil_rank/civ/offduty
 	)
 
 /datum/job/cyborg

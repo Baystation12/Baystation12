@@ -65,7 +65,7 @@
 
 		"}
 
-/obj/item/weapon/folder/nt/rd
+/obj/item/weapon/folder/sci/rd
 
 /obj/item/weapon/folder/envelope/blanks
 	desc = "A thick envelope. The Nanotrasen logo is stamped in the corner, along with 'CONFIDENTIAL'."
@@ -78,8 +78,8 @@
 	name = "RE: Regarding testing supplies"
 	info = {"
 	<tt><center><b><font color='red'>CONFIDENTIAL: UPPER MANAGEMENT ONLY</font></b>
-	<h3>NANOTRASEN RESEARCH DIVISION</h3>
-	<img src = ntlogo.png>
+	<h3>SEV TORCH RESEARCH DIVISION</h3>
+	<img src = sollogo.png>
 	</center>
 	<b>FROM:</b> Hieronimus Blackstone, Overseer of Torch Cooperation Project<br>
 	<b>TO:</b> Research Director of SEV Torch branch<br>
