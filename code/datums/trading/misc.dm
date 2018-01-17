@@ -100,6 +100,7 @@
 								/obj/item/weapon/stamp/clown            = TRADER_THIS_TYPE,
 								/obj/item/weapon/storage/backpack/clown = TRADER_THIS_TYPE,
 								/obj/item/weapon/bananapeel             = TRADER_THIS_TYPE,
+								/obj/item/weapon/gun/launcher/money     = TRADER_THIS_TYPE,
 								/obj/item/weapon/reagent_containers/food/snacks/pie = TRADER_THIS_TYPE,
 								/obj/item/weapon/bikehorn               = TRADER_THIS_TYPE,
 								/obj/item/weapon/reagent_containers/spray/waterflower = TRADER_THIS_TYPE,
