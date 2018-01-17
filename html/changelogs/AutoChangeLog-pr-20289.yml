@@ -1,0 +1,5 @@
+author: "author: PrismaticGynoid"
+delete-after: True
+changes: 
+  - rscadd: "Adds the ability to 'crawl' to an adjacent turf by click-dragging yourself to it, after a delay. This can be used to move while unable to stand. You can also do this with other movable objects, if you really wanted to."
+  - tweak: "Conscious mobs lying on the ground can now buckle themselves to chairs/beds. This includes people missing legs."
