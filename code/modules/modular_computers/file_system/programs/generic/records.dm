@@ -58,7 +58,7 @@
 
 
 /datum/nano_module/records/proc/get_record_access(var/mob/user)
-	var/list/user_access = user.GetAccess()
+	var/list/user_access = using_access || user.GetAccess()
 
 	var/obj/item/modular_computer/PC = nano_host()
 	if(istype(PC) && PC.computer_emagged)
