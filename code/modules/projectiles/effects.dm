@@ -133,6 +133,21 @@
 	illum_color = COLOR_DEEP_SKY_BLUE
 
 //----------------------------
+// Treye beam
+//----------------------------
+/obj/effect/projectile/trilaser/
+	illum_color = COLOR_LUMINOL
+
+/obj/effect/projectile/trilaser/tracer
+	icon_state = "plasmacutter"
+
+/obj/effect/projectile/trilaser/muzzle
+	icon_state = "muzzle_plasmacutter"
+
+/obj/effect/projectile/trilaser/impact
+	icon_state = "impact_plasmacutter"
+
+//----------------------------
 // laser/emitter beam
 //----------------------------
 /obj/effect/projectile/laser/emitter/

@@ -70,7 +70,7 @@
 				to_chat(user, "<span class='notice'>You secured the girder!</span>")
 				reset_girder()
 
-	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
 		if(do_after(user,30,src))
 			if(!src) return
@@ -238,7 +238,7 @@
 			to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 			dismantle()
 
-	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
 		if(do_after(user,30,src))
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")

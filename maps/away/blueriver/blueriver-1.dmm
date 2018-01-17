@@ -9,7 +9,7 @@
 "i" = (/obj/item/weapon/pickaxe/six_pick,/obj/item/device/measuring_tape,/turf/simulated/floor/away/blueriver/alienfloor,/area/bluespaceriver/underground)
 "j" = (/obj/item/device/camera,/turf/simulated/floor/away/blueriver/alienfloor,/area/bluespaceriver/underground)
 "k" = (/turf/simulated/floor/asteroid,/area/bluespaceriver/underground)
-"l" = (/obj/item/weapon/pickaxe/plasmacutter,/obj/item/device/depth_scanner,/turf/simulated/floor/asteroid,/area/bluespaceriver/underground)
+"l" = (/obj/item/weapon/gun/energy/plasmacutter,/obj/item/device/depth_scanner,/turf/simulated/floor/asteroid,/area/bluespaceriver/underground)
 "m" = (/mob/living/simple_animal/hostile/hive_alien/defender,/turf/simulated/floor/away/blueriver/alienfloor,/area/bluespaceriver/underground)
 "n" = (/obj/item/roller,/turf/simulated/floor/asteroid,/area/bluespaceriver/underground)
 "o" = (/obj/structure/ladder/up,/turf/simulated/floor/asteroid,/area/bluespaceriver/underground)
