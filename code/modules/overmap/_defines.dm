@@ -64,11 +64,11 @@ proc/toggle_move_stars(zlevel, direction)
 
 	if (moving_levels["[zlevel]"] != gen_dir)
 		moving_levels["[zlevel]"] = gen_dir
-		
+
 		var/list/spaceturfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
 		for(var/turf/space/T in spaceturfs)
 			if(!gen_dir)
-				T.icon_state = "[((T.x + T.y) ^ ~(T.x * T.y)) % 25]"
+				T.icon_state = "white"
 			else
 				T.icon_state = "speedspace_[gen_dir]_[rand(1,15)]"
 				for(var/atom/movable/AM in T)
