@@ -27,6 +27,10 @@
 		return 0
 	if(!istype(M) || (M.loc != loc) || M.buckled || M.pinned.len || (buckle_require_restraints && !M.restrained()))
 		return 0
+	if(ismob(src))
+		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
+		if(M != src && C.incapacitated())
+			return 0
 
 	M.buckled = src
 	M.facing_dir = null
@@ -61,7 +65,7 @@
 	if(!ticker) //why do we need to check this?
 		to_chat(user, "<span class='warning'>You can't buckle anyone in before the game starts.</span>")
 		return 0
-	if(!user.Adjacent(M) || user.restrained() || user.lying || user.stat || istype(user, /mob/living/silicon/pai))
+	if(!user.Adjacent(M) || user.restrained() || user.stat || istype(user, /mob/living/silicon/pai))
 		return 0
 	if(M == buckled_mob)
 		return 0
