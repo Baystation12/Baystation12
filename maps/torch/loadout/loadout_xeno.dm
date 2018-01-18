@@ -90,6 +90,14 @@
 	whitelisted = list(SPECIES_IPC)
 	cost = 0
 
+/datum/gear/suit/lab_xyn_machine
+	display_name = "Xynergy labcoat"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/xyn_machine
+	slot = slot_wear_suit
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_IPC)
+	allowed_roles = NON_MILITARY_ROLES
+
 // Misc clothing
 /datum/gear/uniform/harness
 	display_name = "gear harness (Full Body Prosthetic, Diona, Giant Armoured Serpentid)"
