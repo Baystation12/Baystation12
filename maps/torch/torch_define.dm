@@ -69,10 +69,13 @@
 		space_things |= O
 	
 	for(var/obj/effect/overmap/O in space_things)
-		var/heading = round(90 - Atan2(O.x - torch.x, O.y - torch.y),5) //fucking triangles how do they work
-		if(heading < 0)
-			heading += 360
-		welcome_text += "<li>\A <b>[O.name]</b>, heading [heading]"
+		var/location_desc = " at present co-ordinates."
+		if (O.loc != torch.loc)
+			var/bearing = round(90 - Atan2(O.x - torch.x, O.y - torch.y),5) //fucking triangles how do they work
+			if(bearing < 0)
+				bearing += 360
+			location_desc = ", bearing [bearing]."
+		welcome_text += "<li>\A <b>[O.name]</b>[location_desc]</li>"
 	welcome_text += "<br>No distress calls logged.<br />"
 
 	post_comm_message("SEV Torch Sensor Readings", welcome_text)
