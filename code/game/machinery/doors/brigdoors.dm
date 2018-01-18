@@ -18,7 +18,7 @@
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
 	desc = "A remote control for a door."
-	req_access = list(access_brig)
+	req_access = list()
 	anchored = 1.0    		// can't pick it up
 	density = 0       		// can walk through it.
 	var/id = null     		// id of door it controls.

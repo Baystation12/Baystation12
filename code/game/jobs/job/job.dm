@@ -37,6 +37,7 @@
 	var/generate_email = 1
 	var/track_players = 0
 	var/list/assigned_players = list()
+	var/spawn_faction
 
 /datum/job/New()
 	..()
@@ -52,6 +53,9 @@
 	if(!outfit)
 		return FALSE
 	. = outfit.equip(H, title, alt_title)
+
+	if(spawn_faction)
+		H.faction = spawn_faction
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	if(alt_title && alt_titles)

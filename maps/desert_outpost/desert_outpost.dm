@@ -2,7 +2,6 @@
 
 	#include "gamemode/stranded_includes.dm"
 
-	#include "flora.dm"
 	#include "jobs.dm"
 	#include "outfits.dm"
 	#include "turfs_areas.dm"

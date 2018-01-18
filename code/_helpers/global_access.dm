@@ -417,6 +417,8 @@
 			return global.doppler_arrays;
 		if("dreams")
 			return global.dreams;
+		if("dropship_landing_controller")
+			return global.dropship_landing_controller;
 		if("dummy_lighting_corner")
 			return global.dummy_lighting_corner;
 		if("economic_species_modifier")
@@ -521,6 +523,8 @@
 			return global.gender_datums;
 		if("ghost_darkness_images")
 			return global.ghost_darkness_images;
+		if("ghost_role_manager")
+			return global.ghost_role_manager;
 		if("ghost_sightless_images")
 			return global.ghost_sightless_images;
 		if("ghost_traps")
@@ -1634,6 +1638,8 @@
 			global.doppler_arrays=newval;
 		if("dreams")
 			global.dreams=newval;
+		if("dropship_landing_controller")
+			global.dropship_landing_controller=newval;
 		if("dummy_lighting_corner")
 			global.dummy_lighting_corner=newval;
 		if("economic_species_modifier")
@@ -1738,6 +1744,8 @@
 			global.gender_datums=newval;
 		if("ghost_darkness_images")
 			global.ghost_darkness_images=newval;
+		if("ghost_role_manager")
+			global.ghost_role_manager=newval;
 		if("ghost_sightless_images")
 			global.ghost_sightless_images=newval;
 		if("ghost_traps")
@@ -2642,6 +2650,7 @@
 	"dna_genes",
 	"doppler_arrays",
 	"dreams",
+	"dropship_landing_controller",
 	"dummy_lighting_corner",
 	"economic_species_modifier",
 	"economy_init",
@@ -2694,6 +2703,7 @@
 	"gear_tweak_free_color_choice_",
 	"gender_datums",
 	"ghost_darkness_images",
+	"ghost_role_manager",
 	"ghost_sightless_images",
 	"ghost_traps",
 	"global_message_listener",

@@ -39,7 +39,7 @@
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space
 	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
-	req_access = list(access_eva)
+	req_access = list()
 
 /obj/machinery/suit_storage_unit/atmos
 	name = "Atmospherics Voidsuit Storage Unit"
@@ -48,7 +48,7 @@
 	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
 	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
-	req_access = list(access_atmospherics)
+	req_access = list()
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/atmos/alt
@@ -62,7 +62,7 @@
 	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
 	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
-	req_access = list(access_engine)
+	req_access = list()
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/engineering/alt
@@ -82,7 +82,7 @@
 	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
 	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
-	req_access = list(access_medical)
+	req_access = list()
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/medical/alt
@@ -97,7 +97,7 @@
 	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
 	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
-	req_access = list(access_mining)
+	req_access = list()
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/mining/alt
@@ -112,7 +112,7 @@
 	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
 	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
-	req_access = list(access_xenoarch)
+	req_access = list()
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/security
@@ -122,7 +122,7 @@
 	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
 	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
-	req_access = list(access_security)
+	req_access = list()
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/security/alt
@@ -137,7 +137,7 @@
 	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
 	TANK_TYPE = /obj/item/weapon/tank/oxygen
 	MASK_TYPE = /obj/item/clothing/mask/breath
-	req_access = list(access_syndicate)
+	req_access = list()
 	islocked = 1
 
 
@@ -728,7 +728,7 @@
 	icon = 'icons/obj/suitstorage.dmi'
 	icon_state = "suitstorage000000100"
 
-	req_access = list(access_captain,access_heads)
+	req_access = list()
 
 	var/active = 0          // PLEASE HOLD.
 	var/safeties = 1        // The cycler won't start with a living thing inside it unless safeties are off.
@@ -769,42 +769,42 @@
 /obj/machinery/suit_cycler/engineering
 	name = "Engineering suit cycler"
 	model_text = "Engineering"
-	req_access = list(access_construction)
+	req_access = list()
 	departments = list("Engineering","Atmos")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI) //Add Unathi when sprites exist for their suits.
 
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
 	model_text = "Mining"
-	req_access = list(access_mining)
+	req_access = list()
 	departments = list("Mining")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/science
 	name = "Excavation suit cycler"
 	model_text = "Excavation"
-	req_access = list(access_xenoarch)
+	req_access = list()
 	departments = list("Science")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/security
 	name = "Security suit cycler"
 	model_text = "Security"
-	req_access = list(access_security)
+	req_access = list()
 	departments = list("Security")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/medical
 	name = "Medical suit cycler"
 	model_text = "Medical"
-	req_access = list(access_medical)
+	req_access = list()
 	departments = list("Medical")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 
 /obj/machinery/suit_cycler/syndicate
 	name = "Nonstandard suit cycler"
 	model_text = "Nonstandard"
-	req_access = list(access_syndicate)
+	req_access = list()
 	departments = list("Mercenary")
 	species = list(SPECIES_HUMAN,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_UNATHI)
 	can_repair = 1

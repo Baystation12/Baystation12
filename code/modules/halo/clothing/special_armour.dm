@@ -33,6 +33,16 @@
 		i.on_drop(src)
 		i.user = null
 
+/obj/item/clothing/suit/armor/special/ui_action_click()
+	var/mob/living/carbon/human/h = usr
+	if(!istype(h))
+		return
+	if(h.wear_suit != src)
+		to_chat(h,"<span class = 'notice'>You need to wear [src.name] to do that!</span>")
+		return
+	for(var/datum/armourspecials/special in specials)
+		special.try_item_action()
+
 /obj/item/clothing/suit/armor/special/Destroy()
 	GLOB.processing_objects -= src
 	for(var/item in specials)

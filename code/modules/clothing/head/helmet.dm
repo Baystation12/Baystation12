@@ -17,6 +17,8 @@
 	siemens_coefficient = 0.7
 	w_class = ITEM_SIZE_NORMAL
 
+	armor_thickness = 20
+
 /obj/item/clothing/head/helmet/solgov
 	name = "\improper Sol Central Government helmet"
 	desc = "A helmet painted in Peacekeeper blue. Stands out like a sore thumb."

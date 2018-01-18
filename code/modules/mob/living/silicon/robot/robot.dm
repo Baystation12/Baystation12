@@ -71,7 +71,7 @@
 	var/radio_key_type = null
 	var/spawn_sound = 'sound/voice/liveagain.ogg'
 	var/pitch_toggle = 1
-	var/list/req_access = list(access_robotics)
+	var/list/req_access = list()
 	var/ident = 0
 	var/viewalerts = 0
 	var/modtype = "Default"

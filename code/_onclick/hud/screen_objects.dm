@@ -264,6 +264,15 @@
 									nicename |= "hardsuit"
 									tankcheck |= rig.air_supply
 
+							if(ishuman(C))
+								var/mob/living/carbon/human/H = C
+								if(istype(H.wear_suit,/obj/item/clothing/suit/armor/special))
+									var/obj/item/clothing/suit/armor/special/suit_special = H.wear_suit
+									for(var/datum/armourspecials/internal_air_tank/tank in suit_special.specials)
+										from = "in"
+										nicename |= "[suit_special.name]'s internal air supply."
+										tankcheck |= tank.internal_air_tank
+
 							for(var/i=1, i<tankcheck.len+1, ++i)
 								if(istype(tankcheck[i], /obj/item/weapon/tank))
 									var/obj/item/weapon/tank/t = tankcheck[i]
@@ -289,6 +298,11 @@
 										if ("carbon dioxide")
 											if(t.air_contents.gas["carbon_dioxide"] && !t.air_contents.gas["phoron"])
 												contents.Add(t.air_contents.gas["carbon_dioxide"])
+											else
+												contents.Add(0)
+										if ("methane")
+											if(t.air_contents.gas["methane"] && !t.air_contents.gas["phoron"])
+												contents.Add(t.air_contents.gas["methane"])
 											else
 												contents.Add(0)
 

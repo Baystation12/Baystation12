@@ -5,7 +5,7 @@
 
 /obj/structure/closet/secure_closet/CO
 	name = "commanding officer's locker"
-	req_access = list(access_captain)
+	req_access = list()
 	icon_state = "capsecure1"
 	icon_closed = "capsecure"
 	icon_locked = "capsecure1"
@@ -35,7 +35,7 @@
 
 /obj/structure/closet/secure_closet/XO
 	name = "executive officer's locker"
-	req_access = list(access_hop)
+	req_access = list()
 	icon_state = "twosolsecure1"
 	icon_closed = "twosolsecure"
 	icon_locked = "twosolsecure1"
@@ -68,7 +68,7 @@
 
 /obj/structure/closet/secure_closet/sea
 	name = "senior enlisted advisor's locker"
-	req_access = list(access_senadv)
+	req_access = list()
 	icon_state = "sol1"
 	icon_closed = "sol"
 	icon_locked = "sol1"
@@ -97,7 +97,7 @@
 
 /obj/structure/closet/secure_closet/bridgeofficer
 	name = "bridge officer's locker"
-	req_access = list(19)
+	req_access = list()
 	icon_state = "sol1"
 	icon_closed = "sol"
 	icon_locked = "sol1"
@@ -126,7 +126,7 @@
 
 /obj/structure/closet/secure_closet/solgovpilot
 	name = "sol gov pilot's locker"
-	req_access = list(79)
+	req_access = list()
 	icon_state = "sol1"
 	icon_closed = "sol"
 	icon_locked = "sol1"
