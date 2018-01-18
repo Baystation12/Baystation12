@@ -91,7 +91,7 @@
 /obj/item/weapon/gun/launcher/money/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/spacecash/))
 		var/obj/item/weapon/spacecash/bling = W
-		if(!bling.worth || bling.worth < 1)
+		if(bling.worth < 1)
 			to_chat(user, "<span class='warning'>You can't seem to get the bills to slide into the receptacle.</span>")
 			return
 
