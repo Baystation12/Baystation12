@@ -69,9 +69,9 @@
 		space_things |= O
 	
 	for(var/obj/effect/overmap/O in space_things)
-		var/heading = abs(round(90 - Atan2(O.x - torch.x, O.y - torch.y),5)) //fucking triangles how do they work
-		if(O.x < torch.x)
-			heading += 180
+		var/heading = round(90 - Atan2(O.x - torch.x, O.y - torch.y),5) //fucking triangles how do they work
+		if(heading < 0)
+			heading += 360
 		welcome_text += "<li>\A <b>[O.name]</b>, heading [heading]"
 	welcome_text += "<br>No distress calls logged.<br />"
 
