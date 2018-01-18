@@ -9,6 +9,10 @@
 
 	var/active = 1
 	var/health = list(100,100) //In format Health / Maxhealth
+	var/list/momentum = list(0,0) //Format X,Y
+	var/max_momentum = 4 //Stores the maximum momentum this vehicle can have.
+	var/acceleration = 1 //The amount this vehicle accelerates. Higher than inertia will cause vehicle to slide to a stop.
+	var/inertia = 1 //The amount this vehicle slows down when not actively accelerating
 	var/mob/living/driver
 	var/list/passengers = list(0)//A list storing the passengers of the vehicle. First entry defines the maximum.
 	var/list/gunners = list(0)//Ditto, but for gunners.
@@ -23,6 +27,7 @@
 	var/list/fuels = list() //fuels required for a vehicle to run. Format fuel_datum
 	var/list/fuel_drainrates = list()
 	var/vehicle_move_delay = 2 //The move delay in ticks.
+	var/currently_automoving = 0
 
 /obj/vehicles/New()
 	controller = new controller (src)
@@ -65,14 +70,76 @@
 /obj/vehicles/attackby(var/obj/item/W,var/mob/living/user)
 	controller.on_click(W,user)
 
+/obj/vehicles/proc/inertia_slowdown()
+	if(momentum[1] < 0)
+		add_momentum(inertia,0)
+	if(momentum[1] > 0)
+		add_momentum(-inertia,0)
+	if(momentum[2]< 0)
+		add_momentum(0,inertia)
+	if(momentum[2] > 0)
+		add_momentum(0,-inertia)
+
+/obj/vehicles/proc/start_momentum_automove()
+	spawn()
+		if(currently_automoving) return
+		currently_automoving = 1
+		while(1)
+			var/new_x = x
+			var/new_y = y
+			if(momentum[1] > 0)
+				new_x += 1
+			else if(momentum[1] < 0)
+				new_x -= 1
+			if(momentum[2] > 0)
+				new_y += 1
+			else if(momentum[2] < 0)
+				new_y -= 1
+			var/turf/newloc = locate(new_x,new_y,z)
+			if(!moved_recently)
+				inertia_slowdown() //If we didn't accelerate recently, slow us down.
+			moved_recently = 0
+			if(momentum[1] + momentum[2] != 0) //Make sure the inertia hasn't dropped the momentum to 0
+				Move(newloc,get_dir(src,newloc))
+			else
+				currently_automoving = 0
+				return
+			sleep(vehicle_move_delay+0.5)
+
+/obj/vehicles/proc/add_momentum(var/momentum_x = 0,var/momentum_y = 0)
+	momentum[1] += momentum_x
+	momentum[2] += momentum_y
+	if(momentum[1] > max_momentum)
+		momentum[1] = max_momentum
+	if(momentum[1] < -max_momentum)
+		momentum[1] = -max_momentum
+	if(momentum[2] > max_momentum)
+		momentum[2] = max_momentum
+	if(momentum[2] < -max_momentum)
+		momentum[2] = -max_momentum
+
 /obj/vehicles/relaymove(var/turf/newloc,var/dir)
-	Move(newloc,dir)
+	var/list/old_momentum = momentum.Copy()
+	moved_recently = 1
+	if(newloc.x < x)
+		add_momentum(-acceleration,0)
+	if(newloc.x > x)
+		add_momentum(acceleration,0)
+	if(newloc.y < y)
+		add_momentum(0,-acceleration)
+	if(newloc.y > y)
+		add_momentum(0,acceleration)
+	if(old_momentum[1] + old_momentum[2] == 0)
+		start_momentum_automove()
 	render_mob_sprites()
 
 /obj/vehicles/Move(var/turf/newloc,var/dir)
+	render_mob_sprites()
 	if(!controller.try_move(newloc,dir))
 		return 0
 	. = ..()
+	if(!.)
+		momentum = list(0,0) //If we were stopped for some reason, reduce momentum to 0. (Could be used for later collision-damage)
 
 /obj/vehicles/proc/on_gunner_turret_drop(var/mob/user)
 	controller.gunner_turret_drop(user)
