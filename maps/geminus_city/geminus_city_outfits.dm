@@ -79,3 +79,19 @@
 	shoes = /obj/item/clothing/shoes/black
 
 	flags = 0
+
+/decl/hierarchy/outfit/job/police
+	name = "UEG Police Officer"
+
+	head = /obj/item/clothing/head/helmet/tactical
+	mask = /obj/item/clothing/mask/balaclava/tactical
+	uniform = /obj/item/clothing/under/tactical
+	suit = /obj/item/clothing/suit/storage/vest/tactical
+	belt = /obj/item/weapon/storage/belt/security/tactical
+	shoes = /obj/item/clothing/shoes/tactical
+	pda_slot = slot_r_store
+	l_pocket = /obj/item/ammo_magazine/m762_ap/MA37
+	back = /obj/item/weapon/gun/projectile/ma5b_ar/MA37
+	gloves = /obj/item/clothing/gloves/tactical
+
+	flags = 0

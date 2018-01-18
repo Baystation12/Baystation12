@@ -64,6 +64,7 @@
 	var/list/dispersion = list(0)
 	var/one_hand_penalty // -1 is used for "unable to fire unless twohandable".
 	var/wielded_item_state
+	var/can_rename = 1 //Can this weapon be renamed by the user?
 
 	var/next_fire_time = 0
 
@@ -108,6 +109,27 @@
 			else
 				item_state_slots[slot_l_hand_str] = initial(item_state)
 				item_state_slots[slot_r_hand_str] = initial(item_state)
+
+/obj/item/weapon/gun/verb/rename_gun()
+	set name = "Name Gun"
+	set category = "Object"
+	set desc = "Rename your gun."
+
+	var/mob/M = usr
+	if(!can_rename)
+		to_chat(M,"<span class = 'notice'>You can't rename [name]</span>")
+		return 0
+	if(!M.mind)	return 0
+	if(M.incapacitated()) return 0
+
+	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
+
+	if(src && input && !M.incapacitated() && in_range(M,src))
+		if(!findtext(input, "the", 1, 4))
+			input = "\improper [input]"
+		name = input
+		to_chat(M, "Your gun is now named '[input]'.")
+		return 1
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.

@@ -2,6 +2,7 @@
 	var/unique_name
 	var/datum/detective_gun_skin/unique_reskin
 	var/static/list/gun_options
+	can_rename = 0 //This handles weapon-renaming on it's own basis.
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
 /obj/item/weapon/gun/projectile/colt/detective/New()
@@ -21,8 +22,8 @@
 		else
 			icon_state = "[initial(icon_state)]-e"
 
-/obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
-	set name = "Name Gun"
+/obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun_detective()
+	set name = "Name Gun (Detective)"
 	set category = "Object"
 	set desc = "Rename your gun. If you're the detective."
 
