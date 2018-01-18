@@ -511,7 +511,7 @@
 	name = "lift (upper deck)"
 	lift_floor_label = "Deck 1"
 	lift_floor_name = "Operations Deck"
-	lift_announce_str = "Arriving at Operations Deck: Infirmary. Research Wing. Auxiliary Cryogenic Storage. Emergency Armory. Diplomatic Quarters. Captain's Mess. Pilot's Lounge."
+	lift_announce_str = "Arriving at Operations Deck: Infirmary. Research Wing. Auxiliary Cryogenic Storage. Emergency Armory. Diplomatic Quarters. Captain's Mess. Pathfinder's Office."
 
 /area/turbolift/torch_second
 	name = "lift (maintenance)"
@@ -543,8 +543,8 @@
 	icon_state = "bar"
 	sound_env = MEDIUM_SOFTFLOOR
 
-/area/command/pilot
-	name = "\improper Pilot Lounge"
+/area/command/pathfinder
+	name = "\improper Pathfinder's Office"
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
