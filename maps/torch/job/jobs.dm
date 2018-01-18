@@ -150,7 +150,7 @@
 			            access_teleporter, access_eva, access_heads,
 			            access_chapel_office, access_crematorium, access_chemistry, access_virology,
 			            access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
-			            access_medical_equip, access_solgov_crew, access_senmed)
+			            access_medical_equip, access_solgov_crew, access_senmed, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -397,7 +397,7 @@
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_tcomsat, access_solgov_crew, access_seneng)
+			            access_tcomsat, access_solgov_crew, access_seneng, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
@@ -439,7 +439,7 @@
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_solgov_crew)
+			            access_solgov_crew, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
@@ -572,6 +572,7 @@
 	economic_modifier = 4
 	minimal_player_age = 10
 	ideal_character_age = 25
+	alt_titles = null
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/maa
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -653,7 +654,7 @@
 	)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_surgery, access_medical_equip, access_solgov_crew)
+			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,

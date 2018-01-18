@@ -152,6 +152,9 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/heads/torchxo		
+	id_type = /obj/item/weapon/card/id/torch/crew/sea		
+	pda_type = /obj/item/device/pda/heads
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	name = OUTFIT_JOB_NAME("Bridge Officer")
