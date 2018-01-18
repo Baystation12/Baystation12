@@ -60,25 +60,23 @@
 	welcome_text += "Travel time to Sol:<br /><b>[rand(15,45)] days</b><br />"
 	welcome_text += "Time since last port visit:<br /><b>[rand(60,180)] days</b><br />"
 	welcome_text += "Scan results show the following points of interest:<br />"
-	var/list/scan_results = list()
-	for(var/poi in points_of_interest)
-		if(poi == "SEV Torch")
+	var/list/space_things = list()
+	var/obj/effect/overmap/torch = map_sectors["1"]
+	for(var/zlevel in map_sectors)
+		var/obj/effect/overmap/O = map_sectors[zlevel]
+		if(O.name == torch.name)
 			continue
-		if(isnull(scan_results[poi]))
-			scan_results[poi] = 1
-		else
-			scan_results[poi] += 1
-	for(var/result in scan_results)
-		var/count = scan_results[result]
-		if(count == 1)
-			welcome_text += "\A <b>[result]</b><br />"
-		else
-			welcome_text += "[count] <b>[result]\s</b><br />"
+		space_things |= O
+	
+	for(var/obj/effect/overmap/O in space_things)
+		var/heading = abs(round(90 - Atan2(O.x - torch.x, O.y - torch.y),5)) //fucking triangles how do they work
+		if(O.x < torch.x)
+			heading += 180
+		welcome_text += "<li>\A <b>[O.name]</b>, heading [heading]"
 	welcome_text += "<br>No distress calls logged.<br />"
 
 	post_comm_message("SEV Torch Sensor Readings", welcome_text)
 	minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
-
 
 //Overriding event containers to remove random versions of overmap events - electrical storm, dust and meteor
 /datum/event_container/mundane
