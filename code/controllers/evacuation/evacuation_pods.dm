@@ -105,6 +105,9 @@
 	if (evacuation_controller.is_evacuating())
 		to_chat(user, "Jump preparation already in progress.")
 		return
+	if(world.time < config.vote_autotransfer_initial)
+		to_chat(user, "Bluespace drive is stabilizing, estimated time until operational: [round((config.vote_autotransfer_initial - world.time)/600)] minutes.")
+		return
 	if (evacuation_controller.call_evacuation(user, 0))
 		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has initiated bluespace jump preparation.")
 
