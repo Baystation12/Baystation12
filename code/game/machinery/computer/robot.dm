@@ -2,7 +2,7 @@
 	name = "robotics control console"
 	desc = "Used to remotely lockdown or monitor linked synthetics."
 	icon = 'icons/obj/computer.dmi'
-	icon_keyboard = "tech_key"
+	icon_keyboard = "mining_key"
 	icon_screen = "robot"
 	light_color = "#a97faa"
 	req_access = list(access_robotics)
