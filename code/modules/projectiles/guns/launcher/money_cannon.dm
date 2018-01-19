@@ -10,16 +10,25 @@
 	fire_sound_text = "a whoosh and a crisp, papery rustle"
 	fire_delay = 1
 	fire_sound = 'sound/weapons/gunshot/money_launcher.ogg'
+	var/emagged = 0
 
 	var/receptacle_value = 0
 	var/dispensing = 20
 
+/obj/item/weapon/gun/launcher/money/hacked
+	emagged = 1
+
 /obj/item/weapon/gun/launcher/money/proc/vomit_cash(var/mob/vomit_onto, var/projectile_vomit)
-	var/bundle_worth = receptacle_value / 10
+	var/bundle_worth = Floor(receptacle_value / 10)
 	var/turf/T = get_turf(vomit_onto)
 	for(var/i = 1 to 10)
+		var/nv = bundle_worth
+		if (i <= (receptacle_value - 10 * bundle_worth))
+			nv++
+		if (!nv)
+			break
 		var/obj/item/weapon/spacecash/bundle/bling = new(T)
-		bling.worth = bundle_worth
+		bling.worth = nv
 		bling.update_icon()
 		if(projectile_vomit)
 			for(var/j = 1, j <= rand(2, 4), j++)
@@ -39,6 +48,14 @@
 /obj/item/weapon/gun/launcher/money/proc/make_it_rain(var/mob/user)
 	vomit_cash(user, receptacle_value >= 10)
 
+/obj/item/weapon/gun/launcher/money/update_release_force()
+	if(!emagged)
+		release_force = 0
+		return
+
+	// Must launch at least 100 thaler to incur damage.
+	release_force = dispensing / 100
+
 /obj/item/weapon/gun/launcher/money/proc/unload_receptacle(mob/user)
 	if(receptacle_value < 1)
 		to_chat(user, "<span class='warning'>There's no money in [src].</span>")
@@ -51,10 +68,9 @@
 	to_chat(user, "<span class='notice'>You eject [receptacle_value] thaler from [src]'s receptacle.</span>")
 	receptacle_value = 0
 
-/obj/item/weapon/gun/launcher/money/proc/absorb_cash(obj/item/C as obj, mob/user as mob)
-	var/obj/item/weapon/spacecash/bling = C
-	if(!bling || !bling.worth || bling.worth < 1)
-		to_chat(user, "<span class='warning'>[src] refuses to pick up [C].</span>")
+/obj/item/weapon/gun/launcher/money/proc/absorb_cash(var/obj/item/weapon/spacecash/bling, mob/user)
+	if(!istype(bling) || !bling.worth || bling.worth < 1)
+		to_chat(user, "<span class='warning'>[src] refuses to pick up [bling].</span>")
 		return
 
 	src.receptacle_value += bling.worth
@@ -75,6 +91,12 @@
 		receptacle_value = 0
 
 	bling.update_icon()
+	update_release_force(bling.worth)
+	if(release_force >= 1)
+		var/datum/effect/effect/system/spark_spread/s = new()
+		s.set_up(3, 1, src)
+		s.start()
+
 	return bling
 
 /obj/item/weapon/gun/launcher/money/attack_self(mob/user as mob)
@@ -112,6 +134,9 @@
 	else
 		to_chat(user, "The receptacle is empty.")
 
+	if(emagged)
+		to_chat(user, "<span class='notice'>Its motors are severely overloaded.</span>")
+
 /obj/item/weapon/gun/launcher/money/handle_suicide(mob/living/user)
 	if(!ishuman(user))
 		return
@@ -125,4 +150,13 @@
 
 	src.make_it_rain(user)
 
-	return
+/obj/item/weapon/gun/launcher/money/emag_act(var/remaining_charges, var/mob/user)
+	// Overloads the motors, causing it to shoot money harder and do harm.
+	if(!emagged)
+		emagged = 1
+		to_chat(user, "<span class='notice'>You slide the sequencer into [src]... only for it to spit it back out and emit a motorized squeal!</span>")
+		var/datum/effect/effect/system/spark_spread/s = new()
+		s.set_up(3, 1, src)
+		s.start()
+	else
+		to_chat(user, "<span class='notice'>[src] seems to have been tampered with already.</span>")
