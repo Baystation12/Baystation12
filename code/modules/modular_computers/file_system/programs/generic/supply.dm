@@ -65,24 +65,16 @@
 		if(4)// Order processing
 			var/list/cart[0]
 			var/list/requests[0]
+			var/list/done[0]
 			for(var/datum/supply_order/SO in supply_controller.shoppinglist)
-				cart.Add(list(list(
-					"id" = SO.ordernum,
-					"object" = SO.object.name,
-					"orderer" = SO.orderedby,
-					"cost" = SO.object.cost,
-					"reason" = SO.reason
-				)))
+				cart.Add(order_to_nanoui(SO))
 			for(var/datum/supply_order/SO in supply_controller.requestlist)
-				requests.Add(list(list(
-					"id" = SO.ordernum,
-					"object" = SO.object.name,
-					"orderer" = SO.orderedby,
-					"cost" = SO.object.cost,
-					"reason" = SO.reason
-					)))
+				requests.Add(order_to_nanoui(SO))
+			for(var/datum/supply_order/SO in supply_controller.donelist)
+				done.Add(order_to_nanoui(SO))
 			data["cart"] = cart
 			data["requests"] = requests
+			data["done"] = done
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -203,6 +195,14 @@
 				break
 		return 1
 
+	if(href_list["delete_order"])
+		var/id = text2num(href_list["delete_order"])
+		for(var/datum/supply_order/SO in supply_controller.donelist)
+			if(SO.ordernum == id)
+				supply_controller.donelist -= SO
+				break
+		return 1
+
 /datum/nano_module/supply/proc/generate_categories()
 	category_names = list()
 	category_contents = list()
@@ -232,6 +232,14 @@
 		return "Docked"
 	return "Docking/Undocking"
 
+/datum/nano_module/supply/proc/order_to_nanoui(var/datum/supply_order/SO)
+	return list(list(
+		"id" = SO.ordernum,
+		"object" = SO.object.name,
+		"orderer" = SO.orderedby,
+		"cost" = SO.object.cost,
+		"reason" = SO.reason
+		))
 
 /datum/nano_module/supply/proc/can_print()
 	var/obj/item/modular_computer/MC = nano_host()
