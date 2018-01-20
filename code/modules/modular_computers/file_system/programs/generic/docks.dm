@@ -4,6 +4,7 @@
 	required_access = access_heads
 	nanomodule_path = /datum/nano_module/docking
 	program_icon_state = "supply"
+	program_key_state = "rd_key"
 	program_menu_icon = "triangle-2-e-w"
 	extended_desc = "A management tool that lets you see the status of the docking ports."
 	size = 10
@@ -47,10 +48,10 @@
 		if(P)
 			var/docking_attempt = P.tag_target && !P.dock_state
 			docks.Add(list(list(
-				"tag"=P.id_tag, 
-				"location" = P.get_name(), 
-				"status" = capitalize(P.get_docking_status()), 
-				"docking_attempt" = docking_attempt, 
+				"tag"=P.id_tag,
+				"location" = P.get_name(),
+				"status" = capitalize(P.get_docking_status()),
+				"docking_attempt" = docking_attempt,
 				"codes" = P.docking_codes ? P.docking_codes : "Unset"
 				)))
 	data["docks"] = docks
@@ -68,7 +69,7 @@
 		var/datum/computer/file/embedded_program/docking/P = locate(href_list["edit_code"])
 		if(P)
 			var/newcode = input("Input new docking codes", "Docking codes", P.docking_codes) as text|null
-			if(!CanInteract(usr,state)) 
+			if(!CanInteract(usr,state))
 				return
 			if (newcode)
 				P.docking_codes = uppertext(newcode)
