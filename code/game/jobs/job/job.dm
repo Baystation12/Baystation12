@@ -51,17 +51,19 @@
 	if(!hud_icon)
 		hud_icon = "hud[ckey(title)]"
 
-/datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
+/datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(!outfit)
 		return FALSE
 	. = outfit.equip(H, title, alt_title)
 
-/datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
+/datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
 		. = alt_titles[alt_title]
 	if(allowed_branches && branch)
 		. = allowed_branches[branch.type] || .
+	if(allowed_ranks && grade)
+		. = allowed_ranks[grade.type] || .
 	. = . || outfit_type
 	. = outfit_by_type(.)
 
