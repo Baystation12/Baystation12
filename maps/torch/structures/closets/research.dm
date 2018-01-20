@@ -165,6 +165,7 @@
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/melee/baton/loaded,
 		/obj/item/weapon/handcuffs = 2,
+		/obj/item/device/flashlight/maglight,
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/glasses/tacgoggles,
 		/obj/item/clothing/mask/balaclava,
