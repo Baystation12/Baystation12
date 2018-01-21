@@ -1149,6 +1149,14 @@
 	has_gravity = 0
 	sound_env = SPACE
 
+/area/holodeck/source_cafe
+	name = "\improper Holodeck - Cafe"
+	sound_env = AUDITORIUM
+
+/area/holodeck/source_surgerytraining
+	name = "\improper Holodeck - Surgery Training"
+	sound_env = SMALL_ENCLOSED
+
 // Engineering
 
 /area/engineering/atmos/storage
