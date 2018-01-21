@@ -462,32 +462,3 @@
 	new /obj/item/weapon/storage/briefcase(src)
 	return
 
-/obj/structure/closet/wardrobe/police
-	name = "GCPD locker"
-	icon_state = "black"
-	icon_closed = "black"
-
-/obj/structure/closet/wardrobe/police/New()
-	..()
-	new /obj/item/clothing/head/soft/sec/corp(src)
-	new /obj/item/clothing/under/police(src)
-	new /obj/item/clothing/suit/armor/vest/police(src)
-	new /obj/item/weapon/storage/belt/security(src)
-	new /obj/item/clothing/shoes/dutyboots(src)
-	new /obj/item/clothing/gloves/guards(src)
-	new /obj/item/clothing/glasses/sunglasses(src)
-	new /obj/item/device/flash(src)
-	new /obj/item/weapon/grenade/chem_grenade/teargas(src)
-	new /obj/item/weapon/grenade/flashbang(src)
-	new /obj/item/weapon/melee/telebaton(src)
-	new /obj/item/taperoll/police(src)
-	new /obj/item/device/holowarrant(src)
-	new /obj/item/ammo_box/shotgun/beanbag(src)
-	new /obj/item/ammo_box/shotgun/flash(src)
-	new /obj/item/clothing/accessory/badge/security(src)
-	new /obj/item/device/flashlight/glowstick/yellow(src)
-	new /obj/item/weapon/handcuffs(src)
-	new /obj/item/ammo_magazine/m127_saphp(src)
-	new /obj/item/weapon/gun/projectile/m6c_magnum_s(src)
-	new /obj/item/clothing/accessory/holster/thigh(src)
-	return
