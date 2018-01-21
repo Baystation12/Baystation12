@@ -461,3 +461,4 @@
 	new /obj/item/weapon/storage/briefcase(src)
 	new /obj/item/weapon/storage/briefcase(src)
 	return
+
