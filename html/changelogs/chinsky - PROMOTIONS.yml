@@ -1,0 +1,8 @@
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - tweak: "Expeditionary Corps paygrades were adjusted - Explorers are now E3, Senior Explorers are now E5. Brings Explorers more in line with 'default' rank of other branch(es), Crewman/PFC."
+  - tweak: "Senior Explorers: can no longer be Janitors, Masters at Arms. Can be Brig Officers, Deck Officers, Senior Engineers."
+  - tweak: "Explorers: Can be Corpsmen, Forensic Techs."
