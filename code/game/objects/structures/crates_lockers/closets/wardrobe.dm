@@ -483,6 +483,7 @@
 	new /obj/item/taperoll/police(src)
 	new /obj/item/device/holowarrant(src)
 	new /obj/item/ammo_box/shotgun/beanbag(src)
+	new /obj/item/ammo_box/shotgun/flash(src)
 	new /obj/item/clothing/accessory/badge/security(src)
 	new /obj/item/device/flashlight/glowstick/yellow(src)
 	new /obj/item/weapon/handcuffs(src)
