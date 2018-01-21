@@ -40,6 +40,10 @@
 		to_chat(user, "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>")
 		qdel(src)
 
+	else if(istype(W, /obj/item/weapon/gun/launcher/money))
+		var/obj/item/weapon/gun/launcher/money/L = W
+		L.absorb_cash(src, user)
+
 /obj/item/weapon/spacecash/proc/getMoneyImages()
 	if(icon_state)
 		return list(icon_state)

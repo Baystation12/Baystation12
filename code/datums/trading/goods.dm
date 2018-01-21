@@ -40,7 +40,8 @@
 								/obj/item/weapon/deck                 = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/pack                 = TRADER_SUBTYPES_ONLY,
 								/obj/item/weapon/dice                 = TRADER_ALL,
-								/obj/item/weapon/dice/d20/cursed      = TRADER_BLACKLIST)
+								/obj/item/weapon/dice/d20/cursed      = TRADER_BLACKLIST,
+								/obj/item/weapon/gun/launcher/money   = TRADER_THIS_TYPE)
 
 /datum/trader/ship/electronics
 	name = "Electronic Shop Employee"
