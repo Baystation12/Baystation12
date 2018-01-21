@@ -234,6 +234,10 @@
 	selection_color = "#2f2f7f"
 	economic_modifier = 15
 	minimal_player_age = 10
+	alt_titles = list(
+		"NanoTrasen Representative",
+		"NanoTrasen Executive"
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/cl
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
@@ -254,6 +258,10 @@
 	selection_color = "#2f2f7f"
 	economic_modifier = 15
 	minimal_player_age = 10
+	alt_titles = list(
+		"SolGov Ombudsman",
+		"Inspector General"
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
