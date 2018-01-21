@@ -9,24 +9,26 @@
 /decl/hierarchy/outfit/job/Insurrectionist
 	name = "Insurrectionist"
 
-	head = /obj/item/clothing/head/helmet/innie
-	mask = /obj/item/clothing/mask/innie/shemagh
-	suit = /obj/item/clothing/suit/armor/innie
-	uniform = /obj/item/clothing/under/innie/jumpsuit
-	shoes = /obj/item/clothing/shoes/jackboots
+	head = /obj/item/clothing/head/helmet/tactical
+	mask = /obj/item/clothing/mask/balaclava/tactical
+	suit = /obj/item/clothing/suit/storage/vest/tactical
+	uniform = /obj/item/clothing/under/tactical
+	shoes = /obj/item/clothing/shoes/tactical
 	l_ear = /obj/item/device/radio/headset/insurrection
+	gloves = /obj/item/clothing/gloves/tactical
 
 	flags = 0
 
 /decl/hierarchy/outfit/job/Insurrectionist_leader
 	name = "Insurrectionist Leader"
 
-	head = /obj/item/clothing/head/helmet/innie
-	mask = /obj/item/clothing/mask/innie/shemagh
-	suit = /obj/item/clothing/suit/armor/innie
-	uniform = /obj/item/clothing/under/innie/jumpsuit
-	shoes = /obj/item/clothing/shoes/jackboots
+	head = /obj/item/clothing/head/helmet/tactical
+	mask = /obj/item/clothing/mask/balaclava/tactical
+	suit = /obj/item/clothing/suit/storage/vest/tactical
+	uniform = /obj/item/clothing/under/tactical
+	shoes = /obj/item/clothing/shoes/tactical
 	l_ear = /obj/item/device/radio/headset/insurrection
+	gloves = /obj/item/clothing/gloves/tactical
 
 	l_hand = /obj/item/turret_deploy_kit/chaingun
 

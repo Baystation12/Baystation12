@@ -25,3 +25,13 @@
 	req_access = list()
 	products = list(/obj/item/ammo_magazine/m145_ap = 6,/obj/item/ammo_magazine/a762_box_ap = 10,/obj/item/weapon/gun/projectile/m739_lmg = 2
 	,/obj/item/weapon/gun/projectile/srs99_sniper = 2)
+
+/obj/machinery/vending/armory/police
+	name = "Shell Vendor"
+	desc = "A locker for different kinds of shotgun shells."
+	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
+	icon_state ="ironhammer" // SPRITES
+	icon_deny = "ironhammer-deny"
+	vend_delay = 6
+	products = list(/obj/item/ammo_box/shotgun = 4, /obj/item/ammo_box/shotgun/slug = 4,/obj/item/ammo_box/shotgun/emp = 2
+					,/obj/item/ammo_box/shotgun/beanbag = 6, /obj/item/ammo_box/shotgun/flash = 6, /obj/item/ammo_box/shotgun/practice = 4)
