@@ -79,7 +79,7 @@
 	body_parts_covered = 0
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/suit/pirate
+/obj/item/clothing/suit/space/pirate
 	name = "pirate coat"
 	desc = "Yarr."
 	icon_state = "pirate"

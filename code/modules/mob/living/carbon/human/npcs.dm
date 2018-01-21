@@ -23,6 +23,7 @@
 	suit = /obj/item/clothing/suit/straight_jacket
 
 /decl/hierarchy/outfit/blank_subject/post_equip(mob/living/carbon/human/H)
+	..()
 	var/obj/item/clothing/under/color/white/C = locate() in H
 	if(C)
 		C.has_sensor  = SUIT_LOCKED_SENSORS

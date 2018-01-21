@@ -59,12 +59,19 @@
 	icon_state = "dirty_mattress"
 	anchored = 0
 
+/decl/hierarchy/outfit/corpse
+	name = "Corpse Clothing"
+	
+/decl/hierarchy/outfit/corpse/New()
+	..()
+	hierarchy_type = type
+
 /decl/hierarchy/outfit/corpse/slavers_base
 	name = "Basic slaver output"
 
 /obj/effect/landmark/corpse/slavers_base/slaver1
 	name = "Slaver"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver1
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver1)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver1
 	name = "Dead Slaver 1"
@@ -74,7 +81,7 @@
 
 /obj/effect/landmark/corpse/slavers_base/slaver2
 	name = "Slaver"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver2
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver2)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver2
 	name = "Dead Slaver 2"
@@ -83,7 +90,7 @@
 
 /obj/effect/landmark/corpse/slavers_base/slaver3
 	name = "Slaver"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver3
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver3)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver3
 	name = "Dead Slaver 3"
@@ -92,7 +99,7 @@
 
 /obj/effect/landmark/corpse/slavers_base/slaver4
 	name = "Slaver"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver4
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver4)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver4
 	name = "Dead Slaver 4"
@@ -101,7 +108,7 @@
 
 /obj/effect/landmark/corpse/slavers_base/slaver5
 	name = "Slaver"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver5
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver5)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver5
 	name = "Dead Slaver 5"
@@ -111,7 +118,7 @@
 
 /obj/effect/landmark/corpse/slavers_base/slaver6
 	name = "Slaver"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slaver6
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slaver6)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver6
 	name = "Dead Slaver 6"
@@ -120,7 +127,7 @@
 
 /obj/effect/landmark/corpse/slavers_base/slave
 	name = "Slave"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/slavers_base/slave
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/slavers_base/slave)
 
 /decl/hierarchy/outfit/corpse/slavers_base/slave
 	name = "Dead Slave"
@@ -165,7 +172,7 @@
 
 /obj/effect/landmark/corpse/abolitionist
 	name = "abolitionist"
-	corpse_outfit = /decl/hierarchy/outfit/corpse/abolitionist
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/abolitionist)
 
 /decl/hierarchy/outfit/corpse/abolitionist
 	name = "Dead abolitionist"
