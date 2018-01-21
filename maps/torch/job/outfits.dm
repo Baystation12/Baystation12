@@ -403,6 +403,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/crew/supply/deckofficer
 	pda_type = /obj/item/device/pda/quartermaster
 
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/comissioned
+	name = OUTFIT_JOB_NAME("Deck Officer - EC Officer")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
+
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
 	name = OUTFIT_JOB_NAME("Deck Officer - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/supply
