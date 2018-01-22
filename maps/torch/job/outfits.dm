@@ -152,8 +152,8 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
-	l_ear = /obj/item/device/radio/headset/heads/torchxo		
-	id_type = /obj/item/weapon/card/id/torch/crew/sea		
+	l_ear = /obj/item/device/radio/headset/heads/torchxo
+	id_type = /obj/item/weapon/card/id/torch/crew/sea
 	pda_type = /obj/item/device/pda/heads
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
@@ -371,6 +371,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Psychiatrist - Torch")
 	uniform = /obj/item/clothing/under/rank/psych
 
+/decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychologist
+	name = OUTFIT_JOB_NAME("Psychologist - Torch")
+	uniform = /obj/item/clothing/under/rank/psych/sweatervest
+	shoes = /obj/item/clothing/shoes/black
+
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain
 	name = OUTFIT_JOB_NAME("Chaplain - Torch")
 	uniform = /obj/item/clothing/under/rank/chaplain
@@ -548,10 +553,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/New()
 	..()
 	BACKPACK_OVERRIDE_RESEARCH
-
-/decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych
-	name = OUTFIT_JOB_NAME("Psychologist - Torch")
-	uniform = /obj/item/clothing/under/rank/psych
 
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector
 	name = OUTFIT_JOB_NAME("Prospector")

@@ -716,7 +716,8 @@
 	supervisors = "the Chief Medical Officer"
 	alt_titles = list(
 		"Psychiatrist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychiatrist,
-		"Chaplain" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain,
+		"Psychologist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/psychologist,
+		"Chaplain" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/chaplain
 	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	allowed_branches = list(
@@ -968,8 +969,7 @@
 		"Anomalist",
 		"Researcher",
 		"Xenobiologist",
-		"Xenobotanist",
-		"Psychologist" = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych)
+		"Xenobotanist")
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	allowed_branches = list(/datum/mil_branch/civilian)
