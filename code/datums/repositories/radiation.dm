@@ -18,7 +18,7 @@ var/global/repository/radiation/radiation_repository = new()
 /datum/radiation_source/Destroy()
 	radiation_repository.sources -= src
 	if(radiation_repository.sources_assoc[src.source_turf] == src)
-		radiation_repository.sources -= src.source_turf
+		radiation_repository.sources_assoc -= src.source_turf
 	src.source_turf = null
 	. = ..()
 
