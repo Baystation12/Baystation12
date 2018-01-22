@@ -171,13 +171,49 @@
 	if((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
 		return 0
 	var/amount = 0
-	for(var/obj/item/organ/internal/I in internal_organs)
-		amount += I.getToxLoss()
+	for(var/m in tox_buildup)
+		amount += tox_buildup[m]
+	for(var/m in tox_filter)
+		amount -= tox_filter[m]
+	for(var/m in tox_add)
+		amount += tox_add[m]
+	return max(amount, 0)
+
+/mob/living/carbon/human/proc/getFilter()
+	if((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
+		return 0
+	var/amount = 0
+	for(var/m in tox_filter)
+		amount += tox_filter[m]
 	return amount
 
 /mob/living/carbon/human/setToxLoss(var/amount)
 	if(!(species.species_flags & SPECIES_FLAG_NO_POISON) && !isSynthetic())
 		adjustToxLoss(getToxLoss()-amount)
+
+/mob/living/carbon/human/add_filter_effect(var/effect, var/magnitude = 1)
+	if(effect in tox_filter)
+		tox_filter[effect] += magnitude
+	else
+		tox_filter[effect] = magnitude
+
+/mob/living/carbon/human/add_up_to_filter_effect(var/effect, var/magnitude = 1)
+	if(effect in tox_filter)
+		tox_filter[effect] = max(magnitude, chem_effects[effect])
+	else
+		tox_filter[effect] = magnitude
+
+/mob/living/carbon/human/add_tox_effect(var/effect, var/magnitude = 1)
+	if(effect in tox_add)
+		tox_add[effect] += magnitude
+	else
+		tox_add[effect] = magnitude
+
+/mob/living/carbon/human/add_up_to_tox_effect(var/effect, var/magnitude = 1)
+	if(effect in tox_add)
+		tox_add[effect] = max(magnitude, tox_add[effect])
+	else
+		tox_add[effect] = magnitude
 
 // TODO: better internal organ damage procs.
 /mob/living/carbon/human/adjustToxLoss(var/amount)
@@ -185,50 +221,10 @@
 	if((species.species_flags & SPECIES_FLAG_NO_POISON) || isSynthetic())
 		return
 
-	var/heal = amount < 0
-	amount = abs(amount)
-
-	if(!heal && (CE_ANTITOX in chem_effects))
-		amount *= 1 - (chem_effects[CE_ANTITOX] * 0.25)
-
-	var/list/pick_organs = shuffle(internal_organs.Copy())
-
-	// Prioritize damaging our filtration organs first.
-	var/obj/item/organ/internal/kidneys/kidneys = internal_organs_by_name[BP_KIDNEYS]
-	if(kidneys)
-		pick_organs -= kidneys
-		pick_organs.Insert(1, kidneys)
-	var/obj/item/organ/internal/liver/liver = internal_organs_by_name[BP_LIVER]
-	if(liver)
-		pick_organs -= liver
-		pick_organs.Insert(1, liver)
-
-	// Move the brain to the very end since damage to it is vastly more dangerous
-	// (and isn't technically counted as toxloss) than general organ damage.
-	var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
-	if(brain)
-		pick_organs -= brain
-		pick_organs += brain
-
-	for(var/obj/item/organ/internal/I in pick_organs)
-		if(amount <= 0)
-			break
-		if(heal)
-			if(I.damage < amount)
-				amount -= I.damage
-				I.damage = 0
-			else
-				I.damage -= amount
-				amount = 0
-		else
-			var/cap_dam = I.max_damage - I.damage
-			if(amount >= cap_dam)
-				I.take_damage(cap_dam, silent=TRUE)
-				amount -= cap_dam
-			else
-				I.take_damage(amount, silent=TRUE)
-				amount = 0
-
+	if(amount > 0)
+		add_tox_effect(TOX_GENERAL, amount)
+	if(amount < 0)
+		add_filter_effect(TOX_GENERAL, -amount)
 /mob/living/carbon/human/proc/can_autoheal(var/dam_type)
 	if(!species || !dam_type) return FALSE
 
@@ -386,7 +382,7 @@ This function restores all organs.
 		damage *= blocked_mult(blocked)
 
 	if(damage > 15 && prob(damage*4))
-		make_adrenaline(round(damage/10))
+		make_hormone(round(damage/10), /datum/reagent/hormone/adrenaline, list(CONSCIOUS))
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)

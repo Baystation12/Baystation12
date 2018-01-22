@@ -52,6 +52,7 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#ff8000"
+	metabolism = REM * 2
 	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -62,30 +63,62 @@
 
 /datum/reagent/dylovene
 	name = "Dylovene"
-	description = "Dylovene is a broad-spectrum antitoxin used to neutralize poisons before they can do significant harm."
+	description = "Dylovene acts like a shield to assist in protecting internal organs from the effects of toxin buildup."
 	taste_description = "a roll of gauze"
 	reagent_state = LIQUID
 	color = "#00a000"
 	scannable = 1
-	flags = IGNORE_MOB_SIZE
-	var/static/list/remove_toxins = list(
-		/datum/reagent/toxin/zombiepowder
-	)
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
 	M.drowsyness = max(0, M.drowsyness - 6 * removed)
 	M.adjust_hallucination(-9 * removed)
+	M.add_filter_effect(TOX_GENERAL, 1)
 	M.add_up_to_chemical_effect(CE_ANTITOX, 1)
+
+/datum/reagent/hytritium
+	name = "Hytritium"
+	description = "Hytritium has been formulated to remove unnatural reagents in humans."
+	taste_description = "bitterness"
+	reagent_state = LIQUID
+	color = "#94dd94"
+	metabolism = REM * 0.5
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+	overdose = REAGENTS_OVERDOSE
+	var/static/list/remove_exclude = list(
+		/datum/reagent/hormone,
+		/datum/reagent/hytritium,
+		/datum/reagent/dylovene
+		)
+
+/datum/reagent/hytritium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+
+	if(alien == IS_NABBER)
+		M.add_chemical_effect(CE_TOXIN, 4)
+		M.apply_effect(2, PAIN, 0)
+		if(prob(5))
+			to_chat(M, "<span class='danger'>You feel like your insides are melting!</span>")
+
+	M.add_chemical_effect(CE_PULSE, 1)
+	M.add_chemical_effect(CE_BREATHLOSS, 1)
+
+	var/list/all_exclude = list()
+
+	for(var/reagent_path in remove_exclude)
+		all_exclude ^= typesof(reagent_path)
 
 	var/removing = (4 * removed)
 	for(var/datum/reagent/R in M.ingested.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+		if(!(R.type in all_exclude))
 			M.ingested.remove_reagent(R.type, removing)
 			return
 	for(var/datum/reagent/R in M.reagents.reagent_list)
-		if(istype(R, /datum/reagent/toxin) || (R.type in remove_toxins))
+		if(!(R.type in all_exclude))
 			M.reagents.remove_reagent(R.type, removing)
 			return
 
@@ -587,6 +620,9 @@
 /datum/reagent/nicotine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
+	if(alien == IS_NABBER)
+		M.add_chemical_effect(CE_TOXIN, 5)
+	M.add_tox_effect(BP_HEART, 1)
 	if(prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
 	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
@@ -709,32 +745,6 @@
 	M.hallucination(60, 20)
 	M.druggy = max(M.druggy, 2)
 
-/datum/reagent/adrenaline
-	name = "Adrenaline"
-	description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
-	taste_description = "rush"
-	reagent_state = LIQUID
-	color = "#c8a5dc"
-	scannable = 1
-	overdose = 20
-	metabolism = 0.1
-
-/datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
-	if(M.chem_doses[type] < 0.2)	//not that effective after initial rush
-		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
-		M.add_chemical_effect(CE_PULSE, 1)
-	else if(M.chem_doses[type] < 1)
-		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
-	M.add_chemical_effect(CE_PULSE, 2)
-	if(M.chem_doses[type] > 10)
-		M.make_jittery(5)
-	if(volume >= 5 && M.is_asystole())
-		remove_self(5)
-		M.resuscitate()
-
 /datum/reagent/nanoblood
 	name = "Nanoblood"
 	description = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
@@ -748,6 +758,11 @@
 /datum/reagent/nanoblood/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
+	if(alien == IS_NABBER)
+		M.add_chemical_effect(CE_TOXIN, 5)
+		M.apply_effect(1, PAIN, 0)
+		if(prob(5))
+			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
 	M.regenerate_blood(4 * removed)
 	M.immunity = max(M.immunity - 1, 0)
 	if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies

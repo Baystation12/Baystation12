@@ -9,6 +9,7 @@
 	min_broken_damage = 45
 	max_damage = 70
 	relative_size = 60
+	filter_priority = FILT_PRIO_RESP
 
 	var/active_breathing = 1
 

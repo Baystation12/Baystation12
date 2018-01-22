@@ -36,7 +36,7 @@
 					occupant.reagents.trans_to_obj(beaker, 3)
 					pumped++
 				if(ishuman(occupant))
-					occupant.vessel.trans_to_obj(beaker, pumped + 1)
+					occupant.vessel.trans_to_obj(beaker, pumped + 2)
 		else
 			toggle_filter()
 	if(pump > 0)
@@ -101,7 +101,7 @@
 		to_chat(usr, "<span class='warning'>You can't reach the controls from the inside.</span>")
 		return STATUS_CLOSE
 	return ..()
-	    
+
 /obj/machinery/sleeper/OnTopic(user, href_list)
 	if(href_list["eject"])
 		go_out()

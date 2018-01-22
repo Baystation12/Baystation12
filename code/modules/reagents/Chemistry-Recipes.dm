@@ -102,6 +102,13 @@
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/potassium = 1, /datum/reagent/ammonia = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/hytritium
+	name = "Hytritium"
+	result = /datum/reagent/hytritium
+	required_reagents = list(/datum/reagent/acid/polyacid = 1, /datum/reagent/silicate = 1, /datum/reagent/toxin/phoron = 0.1)
+	catalysts = list(/datum/reagent/dylovene = 20)
+	result_amount = 1
+
 /datum/chemical_reaction/tramadol
 	name = "Tramadol"
 	result = /datum/reagent/tramadol

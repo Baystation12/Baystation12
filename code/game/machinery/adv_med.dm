@@ -194,29 +194,6 @@
 			break
 	return ..()
 
-/*
-
-/obj/machinery/body_scanconsole/process() //not really used right now
-	if(stat & (NOPOWER|BROKEN))
-		return
-	//use_power(250) // power stuff
-
-//	var/mob/M //occupant
-//	if (!( src.status )) //remove this
-//		return
-//	if ((src.connected && src.connected.occupant)) //connected & occupant ok
-//		M = src.connected.occupant
-//	else
-//		if (istype(M, /mob))
-//		//do stuff
-//		else
-///			src.temphtml = "Process terminated due to lack of occupant in scanning chamber."
-//			src.status = null
-//	src.updateDialog()
-//	return
-
-*/
-
 /obj/machinery/body_scanconsole/attack_ai(user as mob)
 	return src.attack_hand(user)
 
@@ -265,7 +242,7 @@
 		return TOPIC_REFRESH
 
 /proc/get_severity(amount)
-	if(!amount)
+	if(!amount || amount <= 0)
 		return "none"
 	. = "minor"
 	if(amount > 50)
@@ -313,8 +290,10 @@
 
 	dat += "<b>Physical Trauma:</b>\t[get_severity(H.getBruteLoss())]"
 	dat += "<b>Burn Severity:</b>\t[get_severity(H.getFireLoss())]"
-	dat += "<b>Systematic Organ Failure:</b>\t[get_severity(H.getToxLoss())]"
 	dat += "<b>Oxygen Deprivation:</b>\t[get_severity(H.getOxyLoss())]"
+
+	dat += "<b>Toxin Buildup:</b>\t[get_severity(H.getToxLoss())]"
+	dat += "<b>Filtration Efficiency:</b>\t[H.getFilter()]"
 
 	dat += "<b>Radiation Level:</b>\t[get_severity(H.radiation/5)]"
 	dat += "<b>Genetic Tissue Damage:</b>\t[get_severity(H.getCloneLoss())]"
@@ -363,6 +342,8 @@
 			table += "Severe"
 		else if(I.is_bruised())
 			table += "Moderate"
+		else if(I.damage < ORGAN_HEAL_THRESHOLD && I.damage > 0)
+			table += "Negligible"
 		else if(I.is_damaged())
 			table += "Minor"
 		else

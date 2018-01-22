@@ -13,6 +13,7 @@
 	origin_tech = list(TECH_BIO = 3)
 	attack_verb = list("attacked", "slapped", "whacked")
 	relative_size = 60
+	filter_priority = FILT_PRIO_BRAIN
 
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
@@ -25,9 +26,6 @@
 
 /obj/item/organ/internal/brain/mechassist()
 	replace_self_with(/obj/item/organ/internal/mmi_holder)
-
-/obj/item/organ/internal/brain/getToxLoss()
-	return 0
 
 /obj/item/organ/internal/brain/proc/replace_self_with(replace_path)
 	var/mob/living/carbon/human/tmp_owner = owner

@@ -114,3 +114,7 @@
 
 	var/obj/item/grab/current_grab_type 	// What type of grab they use when they grab someone.
 	var/skin_state = SKIN_NORMAL
+
+	var/list/tox_buildup = list()
+	var/list/tox_add = list()
+	var/list/tox_filter = list()

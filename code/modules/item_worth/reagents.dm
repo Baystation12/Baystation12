@@ -480,7 +480,7 @@
 /datum/reagent/uranium
 	value = 9
 
-/datum/reagent/adrenaline
+/datum/reagent/hormone/adrenaline
 	value = 2
 
 

@@ -110,7 +110,7 @@
 		L.adjust_fire_stacks(amount / 15)
 
 /datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustToxLoss(removed * 2 * toxicity)
+	M.add_chemical_effect(CE_TOXIN, 3)
 	return
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
@@ -120,8 +120,11 @@
 		strength_mod *= 5
 	if(alien == IS_DIONA)
 		strength_mod = 0
+	if(alien == IS_NABBER)
+		M.add_chemical_effect(CE_TOXIN, 4)
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
+	M.add_up_to_tox_effect(BP_LIVER, 1)
 	var/effective_dose = M.chem_doses[type] * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
 
 	if(effective_dose >= strength) // Early warning
@@ -139,6 +142,7 @@
 		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
 		M.drowsyness = max(M.drowsyness, 20)
 	if(effective_dose >= strength * 6) // Toxic dose
+		M.add_up_to_tox_effect(BP_LIVER, max(toxicity + 2, 3))
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity)
 	if(effective_dose >= strength * 7) // Pass out
 		M.Paralyse(20)
