@@ -262,7 +262,7 @@
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
 
 
-/datum/job/sea
+/datum/job/boatswain
 	title = "Boatswain"
 	department = "Support"
 	department_flag = SPT
@@ -277,10 +277,10 @@
 	alt_titles = list(
 		"Senior Enlisted Advisor"
 	)
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/boatswain
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/sea
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/boatswain/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e7,
