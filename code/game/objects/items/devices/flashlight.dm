@@ -110,6 +110,14 @@
 
 	//if someone wants to implement inspecting robot eyes here would be the place to do it.
 
+/obj/item/device/flashlight/upgraded
+	name = "\improper LED flashlight"
+	desc = "An energy efficient flashlight."
+	icon_state = "biglight"
+	item_state = "biglight"
+	brightness_on = 6
+	flashlight_power = 3
+
 /obj/item/device/flashlight/flashdark
 	name = "flashdark"
 	desc = "A strange device manufactured with mysterious elements that somehow emits darkness. Or maybe it just sucks in light? Nobody knows for sure."
