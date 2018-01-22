@@ -25,9 +25,14 @@
 	var/flesh_color = "#ffc896"               // Pink.
 	var/blood_oxy = 1
 	var/base_color                            // Used by changelings. Should also be used for icon previes..
+	var/limb_blend = ICON_ADD
 	var/tail                                  // Name of tail state in species effects icon file.
 	var/tail_animation                        // If set, the icon to obtain tail animation states from.
+	var/tail_blend = ICON_ADD
 	var/tail_hair
+
+	var/eye_icon = "eyes_s"
+	var/eye_icon_location = 'icons/mob/human_face.dmi'
 
 	var/default_h_style = "Bald"
 	var/default_f_style = "Shaved"

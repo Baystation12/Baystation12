@@ -126,6 +126,10 @@
 
 	return ..()
 
+/obj/item/organ/external/set_dna(var/datum/dna/new_dna)
+	..()
+	s_col_blend = species.limb_blend
+
 /obj/item/organ/external/emp_act(severity)
 	var/burn_damage = 0
 	switch (severity)
