@@ -263,7 +263,7 @@
 
 
 /datum/job/sea
-	title = "Senior Enlisted Advisor"
+	title = "Boatswain"
 	department = "Support"
 	department_flag = SPT
 
@@ -274,11 +274,16 @@
 	minimal_player_age = 21
 	economic_modifier = 8
 	ideal_character_age = 45
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
+	alt_titles = list(
+		"Senior Enlisted Advisor"
+	)
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea
 	allowed_branches = list(
-		/datum/mil_branch/fleet
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/sea
 	)
 	allowed_ranks = list(
+		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/fleet/e9,
 		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/fleet/e8
