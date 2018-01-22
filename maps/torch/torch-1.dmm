@@ -262,7 +262,7 @@
 "gc" = (/obj/structure/disposalpipe/segment{dir = 4; icon_state = "pipe-c"},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22; pixel_y = 0},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/forestarboard)
 "gd" = (/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/obj/structure/closet/firecloset/full,/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/turf/simulated/floor/plating,/area/maintenance/fourthdeck/forestarboard)
 "ge" = (/obj/item/weapon/reagent_containers/spray/sterilizine,/turf/simulated/floor/tiled/white,/area/vacant/infirmary)
-"gf" = (/obj/machinery/iv_drip,/turf/simulated/floor/plating,/area/vacant/infirmary)
+"gf" = (/obj/structure/iv_drip,/turf/simulated/floor/plating,/area/vacant/infirmary)
 "gg" = (/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{pixel_y = -32},/turf/simulated/floor/tiled/white,/area/vacant/infirmary)
 "gh" = (/obj/structure/table,/turf/simulated/floor/plating,/area/vacant/infirmary)
 "gi" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/autoinjectors,/turf/simulated/floor/tiled/white,/area/vacant/infirmary)

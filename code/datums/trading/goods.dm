@@ -353,7 +353,7 @@ Sells devices, odds and ends, and medical stuff
 								  /obj/item/weapon/storage/firstaid/toxin  = TRADER_THIS_TYPE,
 								  /obj/item/weapon/storage/firstaid/adv  = TRADER_THIS_TYPE,
 								  /obj/item/weapon/storage/box/bloodpacks  = TRADER_THIS_TYPE,
-								  /obj/item/weapon/reagent_containers/blood  = TRADER_SUBTYPES_ONLY,
+								  /obj/item/weapon/reagent_containers/ivbag  = TRADER_SUBTYPES_ONLY,
 								  /obj/item/weapon/retractor = TRADER_THIS_TYPE,
 								  /obj/item/weapon/hemostat = TRADER_THIS_TYPE,
 								  /obj/item/weapon/cautery = TRADER_THIS_TYPE,

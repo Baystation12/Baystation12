@@ -565,7 +565,7 @@
 "lp" = (/obj/structure/table/rack,/obj/random/maintenance/solgov,/obj/random/tool,/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
 "lq" = (/obj/structure/sign/warning/secure_area,/turf/simulated/wall,/area/engineering/atmos/aux)
 "lr" = (/obj/machinery/door/airlock/atmos{name = "Auxiliary Atmospherics"; req_access = list(24); secured_wires = 1},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/plating,/area/engineering/atmos/aux)
-"ls" = (/obj/machinery/iv_drip,/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
+"ls" = (/obj/structure/iv_drip,/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
 "lt" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/ladder/updown,/turf/simulated/floor/plating,/area/maintenance/thirddeck/forestarboard)
 "lu" = (/turf/unsimulated/mask,/area/hallway/primary/thirddeck/center)
 "lw" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/effect/floor_decal/spline/fancy/wood{dir = 8},/turf/simulated/floor/lino,/area/crew_quarters/bar)
