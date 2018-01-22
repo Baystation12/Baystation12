@@ -237,8 +237,10 @@
 		sampled = 1
 	else
 		..()
-		if(W.force)
-			health -= W.force
+		var/damage = W.force
+		if(W.edge)
+			damage *= 2
+		health -= damage
 		playsound(get_turf(src), W.hitsound, 100, 1)
 	check_health()
 
