@@ -1,0 +1,4 @@
+author: "comma"
+delete-after: True
+changes: 
+  - rscadd: "Sharp things are now better at cutting plants, doing double damage."
