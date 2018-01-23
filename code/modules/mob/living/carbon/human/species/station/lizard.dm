@@ -1,17 +1,12 @@
 /datum/species/unathi
 	name = SPECIES_UNATHI
 	name_plural = SPECIES_UNATHI
-	icon_template = 'icons/mob/human_races/r_template_tall.dmi'
+	icon_template = 'icons/mob/human_races/r_nabber_template.dmi'
 	icobase = 'icons/mob/human_races/r_lizard.dmi'
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
 	tail = "sogtail"
 	tail_animation = 'icons/mob/species/unathi/tail.dmi'
-	limb_blend = ICON_MULTIPLY
 	tail_blend = ICON_MULTIPLY
-
-	eye_icon = "eyes_lizard"
-	eye_icon_location = 'icons/mob/lizard_face.dmi'
-
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/tail, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	primitive_form = "Stok"
 	darksight = 3
@@ -68,6 +63,21 @@
 		"Your scales bristle against the cold."
 		)
 	breathing_sound = 'sound/voice/lizard.ogg'
+
+	has_limbs = list(
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest/lizard),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin/lizard),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/lizard),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/lizard),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/lizard),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/lizard),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/lizard),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand/lizard),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/lizard),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/lizard),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/lizard)
+		)
+
 
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/diona_heal_toggle

@@ -22,11 +22,6 @@
 
 	var/has_lips
 
-/obj/item/organ/external/head/set_dna(var/datum/dna/new_dna)
-	..()
-	eye_icon = species.eye_icon
-	eye_icon_location = species.eye_icon_location
-
 /obj/item/organ/external/head/get_agony_multiplier()
 	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
