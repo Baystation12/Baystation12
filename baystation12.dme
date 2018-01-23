@@ -1953,7 +1953,6 @@
 #include "code\modules\organs\external\diona.dm"
 #include "code\modules\organs\external\head.dm"
 #include "code\modules\organs\external\machine.dm"
-#include "code\modules\organs\external\skrell.dm"
 #include "code\modules\organs\external\standard.dm"
 #include "code\modules\organs\external\stump.dm"
 #include "code\modules\organs\external\unbreakable.dm"
