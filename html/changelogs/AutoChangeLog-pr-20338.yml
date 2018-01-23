@@ -1,0 +1,4 @@
+author: "Sbotkin"
+delete-after: True
+changes: 
+  - rscadd: "Adds mounted cooling units, available in all hardsuits."
