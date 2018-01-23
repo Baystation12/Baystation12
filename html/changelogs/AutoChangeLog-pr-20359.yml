@@ -1,0 +1,14 @@
+author: "Novacat"
+delete-after: True
+changes: 
+  - spellcheck: "Fixed capitalization issue with Radiant Aura"
+  - rscadd: "Added telepath (mRemoteSay) contract to all spellbooks"
+  - tweak: "Added 1 point to all spellbooks"
+  - rscadd: "Added Teleport, Cure Light Wounds, and Noclothes to all spellbooks that lacked them"
+  - rscdel: "Removed Mage Armor from Standard spellbook, and Cure Light Wounds from Cleric spellbook"
+  - tweak: "Swapped Focus staff for Scrying orb in Cleric book"
+  - rscadd: "Added X-ray contract to Battlemage book, parrot transformation to Druid book"
+  - rscdel: "Removed Student spellbook"
+  - tweak: "Made staves slightly smaller, so that they are more portable"
+  - rscadd: "Overhauled cure spells to be more effective"
+  - tweak: "Reduced cost of Spatial's magic missile to 1"
