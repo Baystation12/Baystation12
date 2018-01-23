@@ -511,5 +511,4 @@ steam.start() -- spawns the effect
 	. = ..()
 	icon = _icon
 	icon_state = _state
-	spawn(duration)
-		qdel(src)
+	addtimer(CALLBACK(src,/datum/proc/qdel_self), duration)

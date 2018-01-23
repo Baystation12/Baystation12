@@ -815,8 +815,6 @@
 			return global.runtime_diary;
 		if("same_wires")
 			return global.same_wires;
-		if("scheduler")
-			return global.scheduler;
 		if("secondary_mode")
 			return global.secondary_mode;
 		if("secret_force_mode")
@@ -929,8 +927,6 @@
 			return global.tank_gauge_cache;
 		if("tape_roll_applications")
 			return global.tape_roll_applications;
-		if("task_triggered_event")
-			return global.task_triggered_event;
 		if("telecomms_list")
 			return global.telecomms_list;
 		if("tertiary_mode")
@@ -975,6 +971,8 @@
 			return global.ticket_panels;
 		if("tickets")
 			return global.tickets;
+		if("timer")
+			return global.SStimer;
 		if("total_lighting_corners")
 			return global.total_lighting_corners;
 		if("total_lighting_overlays")
@@ -1870,8 +1868,6 @@
 			global.runtime_diary=newval;
 		if("same_wires")
 			global.same_wires=newval;
-		if("scheduler")
-			global.scheduler=newval;
 		if("secondary_mode")
 			global.secondary_mode=newval;
 		if("secret_force_mode")
@@ -1984,8 +1980,6 @@
 			global.tank_gauge_cache=newval;
 		if("tape_roll_applications")
 			global.tape_roll_applications=newval;
-		if("task_triggered_event")
-			global.task_triggered_event=newval;
 		if("telecomms_list")
 			global.telecomms_list=newval;
 		if("tertiary_mode")
@@ -2030,6 +2024,8 @@
 			global.ticket_panels=newval;
 		if("tickets")
 			global.tickets=newval;
+		if("timer")
+			global.SStimer=newval;
 		if("total_lighting_corners")
 			global.total_lighting_corners=newval;
 		if("total_lighting_overlays")

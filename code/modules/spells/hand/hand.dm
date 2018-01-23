@@ -82,22 +82,12 @@
 /spell/hand/duration
 	var/hand_duration = 600 //THIS MUST BE LESS THAN COOLDOWN
 	var/hand_amount = 0 //Simple way of making sure we don't delete a newly created hand
-	var/datum/scheduled_task/source/remove_hand
-
-/spell/hand/duration/New()
-	..()
-	remove_hand = new(0,src,/spell/hand/proc/cancel_hand)
+	var/timer_id
 
 /spell/hand/duration/cast(var/list/targets, var/mob/user)
 	if(..())
-		remove_hand.trigger_task_in(hand_duration)
-		scheduler.schedule(remove_hand)
+		timer_id = addtimer(CALLBACK(src,/spell/hand/proc/cancel_hand),hand_duration,TIMER_STOPPABLE)
 
 /spell/hand/duration/cancel_hand()
-	scheduler.unschedule(remove_hand)
+	deltimer(timer_id)
 	..()
-
-/spell/hand/duration/Destroy()
-	scheduler.unschedule(remove_hand)
-	QDEL_NULL(remove_hand)
-	return ..()
