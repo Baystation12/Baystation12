@@ -1,5 +1,0 @@
-author: "Novacat"
-delete-after: True
-changes: 
-  - tweak: "Boosts healing spells ability to purge radiation"
-  - tweak: "Fixes sacrifice self-damage"

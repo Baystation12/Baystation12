@@ -1,9 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Can now use IV bags to give IV to people - drag it onto them to start. Only works when bag is held in hand by someone."
-  - rscadd: "Can now use syringes to change contents of IV bags."
-  - tweak: "IV bags now hold 120u instead of 200u. Their size is dynamic - tiny item when empty, turning into normal sized (doesn't fit in pockets etc) when over 60u inside."
-  - rscadd: "Can now set transfer rate of IV drips with a verb."
-  - tweak: "Blood bags in medical and orderable crates were replaced with NANOBLOOD. The normal blood was just not as efficient with size/transfer rate changes. Using NANOBLOOD nets you more or less same re-blooding speed."
-  
