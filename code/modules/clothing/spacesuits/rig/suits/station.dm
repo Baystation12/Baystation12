@@ -29,7 +29,8 @@
 		/obj/item/rig_module/device/flash,
 		/obj/item/rig_module/device/paperdispenser,
 		/obj/item/rig_module/device/pen,
-		/obj/item/rig_module/device/stamp
+		/obj/item/rig_module/device/stamp,
+		/obj/item/rig_module/cooling_unit
 		)
 
 	glove_type = null
@@ -79,7 +80,8 @@
 		/obj/item/rig_module/device/drill,
 		/obj/item/rig_module/device/orescanner,
 		/obj/item/rig_module/device/rcd,
-		/obj/item/rig_module/vision/meson
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/weapon/rig/eva
@@ -119,11 +121,14 @@
 
 /obj/item/weapon/rig/eva/equipped
 
+	req_access = list(access_engine_equip)
+
 	initial_modules = list(
 		/obj/item/rig_module/device/plasmacutter,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/rcd,
-		/obj/item/rig_module/vision/meson
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/weapon/rig/ce
@@ -157,6 +162,7 @@
 		/obj/item/rig_module/device/flash,
 		/obj/item/rig_module/vision/meson,
 		/obj/item/rig_module/grenade_launcher/mfoam,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/clothing/head/helmet/space/rig/ce
@@ -206,7 +212,8 @@
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/anomaly_scanner
+		/obj/item/rig_module/device/anomaly_scanner,
+		/obj/item/rig_module/cooling_unit,
 		)
 
 /obj/item/weapon/rig/medical
@@ -250,7 +257,8 @@
 		/obj/item/rig_module/chem_dispenser/injector,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/healthscanner,
-		/obj/item/rig_module/vision/medhud
+		/obj/item/rig_module/vision/medhud,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/weapon/rig/hazard
@@ -293,5 +301,6 @@
 		/obj/item/rig_module/vision/sechud,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/grenade_launcher,
-		/obj/item/rig_module/mounted/taser
+		/obj/item/rig_module/mounted/taser,
+		/obj/item/rig_module/cooling_unit
 		)

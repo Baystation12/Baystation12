@@ -457,3 +457,31 @@
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
 	device_type = /obj/item/weapon/matter_decompiler
+
+
+
+/obj/item/rig_module/cooling_unit
+	name = "mounted cooling unit"
+	toggleable = 1
+	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 5)
+	interface_name = "mounted cooling unit"
+	interface_desc = "A heat sink with liquid cooled radiator."
+	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module
+	var/charge_consumption = 0.5 KILOWATTS
+	var/max_cooling = 12
+	var/thermostat = T20C
+
+/obj/item/rig_module/cooling_unit/Process()
+	if(!active)
+		return passive_power_cost
+
+	var/mob/living/carbon/human/H = holder.wearer
+
+	var/temp_adj = min(H.bodytemperature - thermostat, max_cooling) //Actually copies the original CU code
+
+	if (temp_adj < 0.5)
+		return passive_power_cost
+
+	H.bodytemperature -= temp_adj
+	active_power_cost = round((temp_adj/max_cooling)*charge_consumption)
+	return active_power_cost

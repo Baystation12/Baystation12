@@ -1618,6 +1618,15 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/rig_module/stealth_field
 	sort_string = "WCLAA"
 
+/datum/design/item/rig/cooling_unit
+	name = "Cooling Unit"
+	desc = "A suit cooling unit, mountable on a RIG."
+	id = "rig_cooler"
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_ENGINEERING = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 3500, "plastic" = 2000)
+	build_path = /obj/item/rig_module/cooling_unit
+	sort_string = "WCLAB"
+
 
 /datum/design/prefab
 	name = "Device"
