@@ -61,6 +61,8 @@
 			return global.SSopen_space;
 		if("SSprocessing")
 			return global.SSprocessing;
+		if("SStimer")
+			return global.SStimer;
 		if("SSvines")
 			return global.SSvines;
 		if("Tier1Runes")
@@ -971,8 +973,6 @@
 			return global.ticket_panels;
 		if("tickets")
 			return global.tickets;
-		if("timer")
-			return global.SStimer;
 		if("total_lighting_corners")
 			return global.total_lighting_corners;
 		if("total_lighting_overlays")
@@ -1114,6 +1114,8 @@
 			global.SSopen_space=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
+		if("SStimer")
+			global.SStimer=newval;
 		if("SSvines")
 			global.SSvines=newval;
 		if("Tier1Runes")
@@ -2024,8 +2026,6 @@
 			global.ticket_panels=newval;
 		if("tickets")
 			global.tickets=newval;
-		if("timer")
-			global.SStimer=newval;
 		if("total_lighting_corners")
 			global.total_lighting_corners=newval;
 		if("total_lighting_overlays")
@@ -2136,6 +2136,7 @@
 	"SSobj",
 	"SSopen_space",
 	"SSprocessing",
+	"SStimer",
 	"SSvines",
 	"Tier1Runes",
 	"Tier2Runes",
@@ -2513,7 +2514,6 @@
 	"rune_list",
 	"runtime_diary",
 	"same_wires",
-	"scheduler",
 	"secondary_mode",
 	"secret_force_mode",
 	"send_emergency_team",
@@ -2570,7 +2570,6 @@
 	"tail_icon_cache",
 	"tank_gauge_cache",
 	"tape_roll_applications",
-	"task_triggered_event",
 	"telecomms_list",
 	"tertiary_mode",
 	"text_tag_icons",

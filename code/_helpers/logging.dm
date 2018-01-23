@@ -19,7 +19,7 @@
 	var/msg = "[subsystem]: [text]"
 	game_log("SS", msg)
 	if (log_world)
-		world.log << "SS[subsystem]: [text]"
+		to_world_log("SS[subsystem]: [text]")
 
 /proc/log_ss_init(text)
 	game_log("SS", "[text]")
