@@ -11,6 +11,7 @@
 	player_levels = list()
 
 	allowed_spawns = list()
+	cascade_speed = 5 //Arbitrarily added. Map will produce runtimes without this being defined.
 
 /datum/map/away_sites_testing/build_away_sites()
 	var/list/unsorted_sites = list_values(SSmapping.away_sites_templates)

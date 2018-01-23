@@ -11,8 +11,10 @@
 #define SS_PRIORITY_AIR            80	// ZAS processing.
 #define SS_PRIORITY_AIRFLOW        15	// Object movement from ZAS airflow.
 
+
 // SS_BACKGROUND
 #define SS_PRIORITY_PROCESSING    25	// Generic datum processor. Replaces objects processor.
 #define SS_PRIORITY_OBJECTS       15	// processing_objects processing.
-#define SS_PRIORITY_GARBAGE       15	// Garbage collection.
-#define SS_PRIORITY_VINES         15	// Spreading vine effects.
+#define SS_PRIORITY_GARBAGE       14	// Garbage collection.
+#define SS_PRIORITY_VINES         13	// Spreading vine effects.
+#define SS_PRIORITY_DISASTER      10	//Singularity, Nar-sie. Alleviates most lag therein.

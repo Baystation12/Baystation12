@@ -1,56 +1,61 @@
-// QUALITY COPYPASTA
+// QUALITY COPYPASTA. Originally called blob.dm.
 /turf/unsimulated/wall/supermatter
 	name = "Bluespace"
 	desc = "THE END IS right now actually."
 
 	icon = 'icons/turf/space.dmi'
-	icon_state = "bluespace"
+	icon_state = "unstableBS" //Why unstable? Because we're at the rim of a growing bluespace.
 
-	//luminosity = 5
-	//l_color="#0066ff"
+	light_range = 5
+	light_color="#0066ff"
 	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	layer = SUPERMATTER_WALL_LAYER
-
-	var/next_check=0
 	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST,UP,DOWN)
 
-/turf/unsimulated/wall/supermatter/New()
-	..()
-	processing_turfs.Add(src)
-	next_check = world.time + 5 SECONDS
+/turf/unsimulated/wall/supermatter/Initialize()
+	. = ..()
+	START_PROCESSING(SSdisaster, src)
 
 	// Nom.
 	for(var/atom/movable/A in src)
 		Consume(A)
 
 /turf/unsimulated/wall/supermatter/Destroy()
-	processing_turfs.Remove(src)
-	..()
+	STOP_PROCESSING(SSdisaster, src)
+	return ..()
 
-/turf/unsimulated/wall/supermatter/process()
-	// Only check infrequently.
-	if(next_check>world.time) return
+/turf/unsimulated/wall/supermatter/Process()
+	set waitfor = 0
 
-	// No more available directions? Shut down process().
+	// No more available directions? Bail.
 	if(!avail_dirs.len)
 		return PROCESS_KILL
-
-	// We're checking, reset the timer.
-	next_check = world.time + 5 SECONDS
 
 	// Choose a direction.
 	var/pdir = pick(avail_dirs)
 	avail_dirs -= pdir
-	var/turf/T = get_zstep(src,pdir)
-
+	var/turf/T = get_step(src, pdir)
 	// EXPAND
 	if(T && !istype(T,type))
 		// Do pretty fadeout animation for 1s.
 		new /obj/effect/overlay/bluespacify(T)
-		spawn(1 SECOND)
-			if(istype(T,type)) // In case another blob came first, don't create another blob
-				return
-			T.ChangeTurf(type)
+		sleep(1 SECOND)
+		after_tick(T)
+
+/turf/unsimulated/wall/supermatter/proc/after_tick(turf/T)
+	if(istype(T,/turf/unsimulated/wall/supermatter))
+		return
+	T.lighting_clear_overlay()
+	for(var/atom/movable/A in T)
+		if(A.simulated)
+			qdel(A)
+		else if(istype(A, /mob)) // Observers, AI cameras.
+			continue
+		else
+			qdel(A)
+
+		CHECK_TICK
+	T.ChangeTurf(type)
 
 /turf/unsimulated/wall/supermatter/attack_generic(mob/user as mob)
 	if(istype(user))

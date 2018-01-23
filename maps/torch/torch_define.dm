@@ -47,6 +47,8 @@
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 	lobby_screens = list("title","title2")
 
+	cascade_speed = 16 //Torch is a bit more compact than the original map, should be enough to accomodate.
+
 /datum/map/torch/setup_map()
 	..()
 	system_name = generate_system_name()

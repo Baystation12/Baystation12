@@ -43,6 +43,8 @@
 			return global.SSairflow;
 		if("SSatoms")
 			return global.SSatoms;
+		if("SSdisaster")
+			return global.SSdisaster;
 		if("SSfastprocess")
 			return global.SSfastprocess;
 		if("SSgarbage")
@@ -1049,7 +1051,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1094,6 +1096,8 @@
 			global.SSairflow=newval;
 		if("SSatoms")
 			global.SSatoms=newval;
+		if("SSdisaster")
+			global.SSdisaster=newval;
 		if("SSfastprocess")
 			global.SSfastprocess=newval;
 		if("SSgarbage")
@@ -2100,7 +2104,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2123,6 +2127,7 @@
 	"SSair",
 	"SSairflow",
 	"SSatoms",
+	"SSdisaster",
 	"SSfastprocess",
 	"SSgarbage",
 	"SSlegacy",
@@ -2199,7 +2204,6 @@
 	"ascii_red",
 	"ascii_reset",
 	"ascii_yellow",
-	"ashtray_cache",
 	"asset_cache",
 	"asset_datums",
 	"assigned",

@@ -30,24 +30,23 @@
 
 	var/chained = 0//Adminbus chain-grab
 
-/obj/singularity/New(loc, var/starting_energy = 50, var/temp = 0)
+/obj/singularity/Initialize(mapload, loc, var/starting_energy = 50, var/temp = 0)
 	//CARN: admin-alert for chuckle-fuckery.
 	admin_investigate_setup()
 	energy = starting_energy
-
+	. = ..()
 	if (temp)
-		spawn (temp)
-			qdel(src)
-
-	..()
-	START_PROCESSING(SSobj, src)
+		return INITIALIZE_HINT_QDEL
+	START_PROCESSING(SSdisaster, src)
+	SSdisaster.singularities += src
 	for(var/obj/machinery/power/singularity_beacon/singubeacon in SSmachines.machinery)
 		if(singubeacon.active)
 			target = singubeacon
 			break
 
 /obj/singularity/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	STOP_PROCESSING(SSdisaster, src)
+	SSdisaster.singularities -= src
 	. = ..()
 
 /obj/singularity/attack_hand(mob/user as mob)
@@ -82,6 +81,10 @@
 	eat()
 	dissipate()
 	check_energy()
+	if(energy < 5)
+		qdel(src)
+		message_admins("\A [src] has run out of energy and dissipated at ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
+
 
 	if (current_size >= STAGE_TWO)
 		move()
@@ -98,7 +101,7 @@
 	var/count = locate(/obj/machinery/containment_field) in orange(30, src)
 
 	if (!count)
-		message_admins("A singulo has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
+		message_admins("\A [src] has been created without containment fields active ([x], [y], [z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>).")
 
 	investigate_log("was created. [count ? "" : "<font color='red'>No containment fields were active.</font>"]", I_SINGULO)
 
