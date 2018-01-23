@@ -34,8 +34,6 @@
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
 
-	var/blend = ICON_ADD
-
 
 /*
 ////////////////////////////
@@ -810,25 +808,6 @@
 	icon_state = "soghun_horns"
 	species_allowed = list(SPECIES_UNATHI)
 
-/datum/sprite_accessory/hair/una
-	name = "Demon Horns"
-	icon = 'icons/mob/lizard_face.dmi'
-	icon_state = "demon_horn"
-	blend = ICON_MULTIPLY
-	species_allowed = list(SPECIES_UNATHI)
-
-/datum/sprite_accessory/hair/una/swept_horn
-	name = "Swept Horns"
-	icon_state = "swept_horn"
-
-/datum/sprite_accessory/hair/una/ram_horn
-	name = "Ram Horns"
-	icon_state = "ram_horn"
-
-/datum/sprite_accessory/hair/una/fin_hawk
-	name = "Fin Hawk"
-	icon_state = "fin_hawk"
-
 /datum/sprite_accessory/hair/skr_tentacle_m
 	name = "Skrell Male Tentacles"
 	icon_state = "skrell_hair_m"
@@ -1007,8 +986,6 @@
 /datum/sprite_accessory/marking
 	icon = 'icons/mob/human_races/markings.dmi'
 	do_colouration = 1 //Almost all of them have it, COLOR_ADD
-
-	var/layer_blend = ICON_OVERLAY
 
 	//Empty list is unrestricted. Should only restrict the ones that make NO SENSE on other species,
 	//like Tajara inner-ear coloring overlay stuff.
