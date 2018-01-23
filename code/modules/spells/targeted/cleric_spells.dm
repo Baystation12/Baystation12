@@ -51,7 +51,7 @@
 	amt_blood  = 28
 	amt_organ = 5
 	amt_brain  = -5
-	amt_radiation  = 5
+	amt_radiation  = -5
 	amt_dam_tox = -20
 	amt_dam_oxy = -14
 	amt_dam_brute = -35
@@ -110,7 +110,7 @@
 
 	amt_organ = 25
 	amt_brain  = -25
-	amt_radiation  = 25
+	amt_radiation  = -25
 
 
 
