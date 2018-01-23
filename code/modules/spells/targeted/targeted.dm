@@ -17,17 +17,15 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 	var/amt_confused = 0
 	var/amt_stuttering = 0
 
-		//set to negatives for healing
+		//set to negatives for healing unless commented otherwise
 	var/amt_dam_fire = 0
 	var/amt_dam_brute = 0
 	var/amt_dam_oxy = 0
 	var/amt_dam_tox = 0
-	
-		//used for advanced healing
+	var/amt_brain = 0
+	var/amt_radiation = 0
 	var/amt_blood = 0 //Positive numbers to add blood
-	var/amt_brain = 0 //Negative numbers to reduce brain damage
-	var/amt_radiation = 0 //Positive numbers to reduce radiation
-	var/amt_organ = 0 //Positive numbers to reduce organ damage
+	var/amt_organ = 0 //Positive numbers for healing
 
 	var/amt_eye_blind = 0
 	var/amt_eye_blurry = 0
@@ -144,7 +142,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 				affecting.heal_damage(amt_organ, amt_organ)
 		H.vessel.add_reagent(/datum/reagent/blood,amt_blood)
 		H.adjustBrainLoss(amt_brain)
-		H.radiation -= min(H.radiation, amt_radiation)
+		H.radiation += min(H.radiation, amt_radiation)
 		H.fixblood()
 	target.regenerate_icons()
 	//disabling

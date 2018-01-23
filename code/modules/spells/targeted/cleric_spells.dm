@@ -14,16 +14,16 @@
 	cooldown_reduc = 50
 	hud_state = "heal_minor"
 
-	amt_dam_brute = -15 //-3
-	amt_dam_fire = -5 //-1
+	amt_dam_brute = -15
+	amt_dam_fire = -5
 
 	message = "You feel a pleasant rush of heat move through your body."
 
 /spell/targeted/heal_target/empower_spell()
 	if(!..())
 		return 0
-	amt_dam_brute -= 15 //3
-	amt_dam_fire -= 15 //3
+	amt_dam_brute -= 15
+	amt_dam_fire -= 15
 
 	return "[src] will now heal more."
 
@@ -39,8 +39,8 @@
 	cooldown_reduc = 100
 	hud_state = "heal_major"
 
-	amt_dam_brute = -75 //-15
-	amt_dam_fire  = -50 //-5
+	amt_dam_brute = -75
+	amt_dam_fire  = -50
 	amt_blood  = 28
 
 	message = "Your body feels like a furnace."
@@ -52,8 +52,8 @@
 	amt_organ = 5
 	amt_brain  = -5
 	amt_radiation  = 5
-	amt_dam_tox = -20 //-10
-	amt_dam_oxy = -14 //-7
+	amt_dam_tox = -20
+	amt_dam_oxy = -14
 	amt_dam_brute = -35
 	amt_dam_fire  = -35
 
@@ -72,14 +72,14 @@
 	cooldown_reduc = 300
 	hud_state = "heal_area"
 
-	amt_dam_brute = -25 //-5
-	amt_dam_fire = -25 //-5
+	amt_dam_brute = -25
+	amt_dam_fire = -25
 
 /spell/targeted/heal_target/area/empower_spell()
 	if(!..())
 		return 0
-	amt_dam_brute -= 15 //3
-	amt_dam_fire -= 15 //3
+	amt_dam_brute -= 15
+	amt_dam_fire -= 15
 	range += 2
 
 	return "[src] now heals more in a wider area."
@@ -96,10 +96,10 @@
 	holder_var_amount = 100
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 0, Sp_POWER = 1)
 
-	amt_dam_brute = -1000 //-50
-	amt_dam_fire = -1000 //-50
-	amt_dam_oxy = -100 //-50
-	amt_dam_tox = -100 //-50
+	amt_dam_brute = -1000
+	amt_dam_fire = -1000
+	amt_dam_oxy = -100
+	amt_dam_tox = -100
 	amt_blood  = 280
 
 	hud_state = "gen_dissolve"
@@ -111,13 +111,6 @@
 	amt_organ = 25
 	amt_brain  = -25
 	amt_radiation  = 25
-
-	//holder_var_amount *= 2
-
-	//amt_dam_brute *= 2
-	//amt_dam_fire *= 2
-	//amt_dam_oxy *= 2
-	//amt_dam_tox *= 2
 
 
 
