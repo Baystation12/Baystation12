@@ -19,12 +19,16 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/slime/cut_flesh
 	allowed_tools = list(
+	/obj/item/weapon/scalpel/manager = 350, \
+	/obj/item/weapon/scalpel/laser3 = 250, \
+	/obj/item/weapon/scalpel/laser2 = 200, \
+	/obj/item/weapon/scalpel/laser1 = 150, \
 	/obj/item/weapon/scalpel = 100,		\
 	/obj/item/weapon/material/knife = 75,	\
 	/obj/item/weapon/material/shard = 50, 		\
 	)
 
-	min_duration = 30
+	min_duration = 5
 	max_duration = 50
 
 /datum/surgery_step/slime/cut_flesh/can_use(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
@@ -48,12 +52,16 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/slime/cut_innards
 	allowed_tools = list(
+	/obj/item/weapon/scalpel/manager = 350, \
+	/obj/item/weapon/scalpel/laser3 = 250, \
+	/obj/item/weapon/scalpel/laser2 = 200, \
+	/obj/item/weapon/scalpel/laser1 = 150, \
 	/obj/item/weapon/scalpel = 100,		\
 	/obj/item/weapon/material/knife = 75,	\
 	/obj/item/weapon/material/shard = 50, 		\
 	)
 
-	min_duration = 30
+	min_duration = 5
 	max_duration = 50
 
 /datum/surgery_step/slime/cut_innards/can_use(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
@@ -77,11 +85,12 @@
 //////////////////////////////////////////////////////////////////
 /datum/surgery_step/slime/saw_core
 	allowed_tools = list(
+	/obj/item/weapon/scalpel/manager = 200, \
 	/obj/item/weapon/circular_saw = 100, \
 	/obj/item/weapon/material/hatchet = 75
 	)
 
-	min_duration = 50
+	min_duration = 10
 	max_duration = 70
 
 /datum/surgery_step/slime/saw_core/can_use(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
