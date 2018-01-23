@@ -364,8 +364,8 @@
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e2,
-		/datum/mil_rank/ec/e4
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5
 	)
 
 	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
@@ -392,7 +392,8 @@
 		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/fleet/e5
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/ec/e5
 	)
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -431,9 +432,9 @@
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/ec/e4,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2
 	)
 
@@ -520,6 +521,7 @@
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e5
@@ -550,7 +552,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/ec/e4,
+		/datum/mil_rank/ec/e5,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/civ/marshal
@@ -579,10 +582,9 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/ec/e4,
 		/datum/mil_rank/fleet/e4
 	)
 
@@ -646,7 +648,8 @@
 		/datum/mil_branch/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e4,
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5,
@@ -755,6 +758,7 @@
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8
 	)
@@ -781,10 +785,9 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/ec/e4
+		/datum/mil_rank/fleet/e4
 	)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
@@ -831,10 +834,9 @@
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/ec/e4
+		/datum/mil_rank/fleet/e4
 	)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
@@ -859,10 +861,9 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/ec/e4,
 		/datum/mil_rank/fleet/e4
 	)
 
@@ -903,10 +904,9 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/ec/e4,
 		/datum/mil_rank/fleet/e4
 	)
 

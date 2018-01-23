@@ -392,15 +392,15 @@ ranks - ec
 	desc = "Insignia denoting the rank of Apprentice Explorer."
 	icon_state = "ecrank_e1"
 
-/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e2
-	name = "ranks (E-2 explorer)"
+/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e3
+	name = "ranks (E-3 explorer)"
 	desc = "Insignia denoting the rank of Explorer."
-	icon_state = "ecrank_e2"
+	icon_state = "ecrank_e3"
 
-/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e4
-	name = "ranks (E-4 senior explorer)"
+/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e5
+	name = "ranks (E-5 senior explorer)"
 	desc = "Insignia denoting the rank of Senior Explorer."
-	icon_state = "ecrank_e4"
+	icon_state = "ecrank_e5"
 
 /obj/item/clothing/accessory/solgov/rank/ec/enlisted/e7
 	name = "ranks (E-7 chief explorer)"
