@@ -51,7 +51,7 @@
 	amt_blood  = 28
 	amt_organ = 5
 	amt_brain  = -5
-	amt_radiation  = -5
+	amt_radiation  = -25
 	amt_dam_tox = -20
 	amt_dam_oxy = -14
 	amt_dam_brute = -35
@@ -92,7 +92,7 @@
 	spell_flags = SELECTABLE
 	invocation = "Ei'Nath Borv Di'Nath!"
 	charge_type = Sp_HOLDVAR
-	holder_var_type = "FireLoss"
+	holder_var_type = "fireloss"
 	holder_var_amount = 100
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 0, Sp_POWER = 1)
 
@@ -110,7 +110,7 @@
 
 	amt_organ = 25
 	amt_brain  = -25
-	amt_radiation  = -25
+	amt_radiation  = -100
 
 
 
