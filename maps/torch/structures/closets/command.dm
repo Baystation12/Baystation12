@@ -69,16 +69,16 @@
 		/obj/item/weapon/storage/box/imprinting
 	)
 
-/obj/structure/closet/secure_closet/sea
-	name = "senior enlisted advisor's locker"
-	req_access = list(access_senadv)
+/obj/structure/closet/secure_closet/boatswain
+	name = "boatswain's locker"
+	req_access = list(access_boatswain)
 	icon_state = "sol1"
 	icon_closed = "sol"
 	icon_locked = "sol1"
 	icon_opened = "solopen"
 	icon_off = "soloff"
 
-/obj/structure/closet/secure_closet/sea/WillContain()
+/obj/structure/closet/secure_closet/boatswain/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/weapon/cartridge/hop,

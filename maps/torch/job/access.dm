@@ -117,10 +117,10 @@
 	desc = "Physician"
 	region = ACCESS_REGION_MEDBAY
 
-/var/const/access_senadv = 92
-/datum/access/senadv
-	id = access_senadv
-	desc = "Senior Enlisted Advisor"
+/var/const/access_boatswain = 92
+/datum/access/boatswain
+	id = access_boatswain
+	desc = "Boatswain"
 	region = ACCESS_REGION_COMMAND
 
 /var/const/access_explorer = 93

@@ -121,8 +121,8 @@
 /obj/item/weapon/card/id/torch/crew/representative
 	job_access_type = /datum/job/representative
 
-/obj/item/weapon/card/id/torch/crew/sea
-	job_access_type = /datum/job/sea
+/obj/item/weapon/card/id/torch/crew/boatswain
+	job_access_type = /datum/job/boatswain
 
 /obj/item/weapon/card/id/torch/crew/bridgeofficer
 	job_access_type = /datum/job/bridgeofficer
