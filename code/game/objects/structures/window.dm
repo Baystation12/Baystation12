@@ -7,7 +7,7 @@
 
 	layer = SIDE_WINDOW_LAYER
 	anchored = 1.0
-	flags = ON_BORDER
+	atom_flags = ATOM_FLAG_CHECKS_BORDER
 	var/maxhealth = 14.0
 	var/maximal_heat = T0C + 100 		// Maximal heat before this window begins taking damage from fire
 	var/damage_per_fire_tick = 2.0 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
@@ -44,6 +44,7 @@
 			to_chat(user, "<span class='notice'>It is covered in silicate.</span>")
 		else
 			to_chat(user, "<span class='notice'>There is a thick layer of silicate covering it.</span>")
+
 /obj/structure/window/proc/take_damage(var/damage = 0,  var/sound_effect = 1)
 	var/initialhealth = health
 
@@ -87,16 +88,9 @@
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] shatters!")
-	if(dir == SOUTHWEST)
-		var/index = null
-		index = 0
-		while(index < 2)
-			new shardtype(loc) //todo pooling?
-			if(reinf) new /obj/item/stack/rods(loc)
-			index++
-	else
-		new shardtype(loc) //todo pooling?
-		if(reinf) new /obj/item/stack/rods(loc)
+
+	cast_new(shardtype, is_fulltile() ? 4 : 1, loc)
+	if(reinf) cast_new(/obj/item/stack/rods, is_fulltile() ? 4 : 1, loc)
 	qdel(src)
 	return
 
@@ -131,7 +125,7 @@
 	return (dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST)
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover) && mover.checkpass(PASSGLASS))
+	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
 	if(is_full_window())
 		return 0	//full tile window, you can't move into it!
@@ -142,7 +136,7 @@
 
 
 /obj/structure/window/CheckExit(atom/movable/O as mob|obj, target as turf)
-	if(istype(O) && O.checkpass(PASSGLASS))
+	if(istype(O) && O.checkpass(PASS_FLAG_GLASS))
 		return 1
 	if(get_dir(O.loc, target) == dir)
 		return 0
@@ -213,7 +207,7 @@
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
 
-	if(W.flags & NOBLUDGEON) return
+	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
 	if(isScrewdriver(W))
 		if(reinf && state >= 1)
@@ -311,6 +305,9 @@
 
 	if (start_dir)
 		set_dir(start_dir)
+
+	if(is_fulltile())
+		maxhealth *= 4
 
 	health = maxhealth
 

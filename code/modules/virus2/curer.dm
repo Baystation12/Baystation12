@@ -79,19 +79,17 @@
 				createcure(container)
 	return
 
-/obj/machinery/computer/curer/Topic(href, href_list)
-	if(..())
-		return 1
-	usr.machine = src
-
+/obj/machinery/computer/curer/OnTopic(user, href_list)
 	if (href_list["antibody"])
 		curing = 10
+		. = TOPIC_REFRESH
 	else if(href_list["eject"])
-		container.loc = src.loc
+		container.dropInto(loc)
 		container = null
+		. = TOPIC_REFRESH
 
-	src.updateUsrDialog()
-
+	if(. == TOPIC_REFRESH)
+		attack_hand(user)
 
 /obj/machinery/computer/curer/proc/createcure(var/obj/item/weapon/reagent_containers/container)
 	var/obj/item/weapon/reagent_containers/glass/beaker/product = new(src.loc)

@@ -120,37 +120,31 @@
 			GLOB.nanomanager.update_uis(src)
 			update_icon()
 
-/obj/machinery/disease2/isolator/Topic(href, href_list)
-	if (..()) return 1
-
-	var/mob/user = usr
-	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
-
+/obj/machinery/disease2/isolator/OnTopic(user, href_list)
 	if (href_list["close"])
-		user.unset_machine()
-		ui.close()
-		return 0
+		GLOB.nanomanager.close_user_uis(user, src, "main")
+		return TOPIC_HANDLED
 
 	if (href_list[HOME])
 		state = HOME
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list[LIST])
 		state = LIST
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list[ENTRY])
 		if (istype(locate(href_list["view"]), /datum/computer_file/data/virus_record))
 			entry = locate(href_list["view"])
 
 		state = ENTRY
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["print"])
 		print(user)
-		return 1
+		return TOPIC_REFRESH
 
-	if(!sample) return 1
+	if(!sample) return TOPIC_HANDLED
 
 	if (href_list["isolate"])
 		var/datum/disease2/disease/V = locate(href_list["isolate"])
@@ -158,13 +152,13 @@
 			virus2 = V
 			isolating = 20
 			update_icon()
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["eject"])
-		sample.loc = src.loc
+		sample.dropInto(loc)
 		sample = null
 		update_icon()
-		return 1
+		return TOPIC_REFRESH
 
 /obj/machinery/disease2/isolator/proc/print(var/mob/user)
 	var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(loc)

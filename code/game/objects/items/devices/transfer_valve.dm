@@ -11,7 +11,7 @@
 	var/mob/attacher = null
 	var/valve_open = 0
 	var/toggle = 1
-	flags = PROXMOVE
+	movable_flags = MOVABLE_FLAG_PROXMOVE
 
 /obj/item/device/transfer_valve/proc/process_activation(var/obj/item/device/D)
 

@@ -42,7 +42,7 @@
 	name = "mining drill"
 	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
 	icon = 'icons/obj/tools.dmi'
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	force = 15.0
 	throwforce = 4.0
@@ -99,20 +99,6 @@
 	desc = "This makes no metallurgic sense."
 	drill_verb = "picking"
 
-/obj/item/weapon/pickaxe/plasmacutter
-	name = "plasma cutter"
-	icon_state = "plasmacutter"
-	item_state = "gun"
-	w_class = ITEM_SIZE_NORMAL //it is smaller than the pickaxe
-	damtype = "fire"
-	digspeed = 20 //Can slice though normal walls, all girders, or be used in reinforced wall deconstruction/ light thermite on fire
-	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
-	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
-	drill_verb = "cutting"
-	drill_sound = 'sound/items/Welder.ogg'
-	sharp = 1
-	edge = 1
-
 /obj/item/weapon/pickaxe/diamond
 	name = "diamond pickaxe"
 	icon_state = "dpickaxe"
@@ -146,7 +132,7 @@
 	desc = "A large tool for digging and moving dirt."
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "shovel"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	force = 8.0
 	throwforce = 4.0
@@ -275,3 +261,63 @@
 	icon_state = initial(icon_state)
 	overlays.Cut()
 	set_light(0)
+
+
+
+/**************************Plasma Cutter*****************************/
+
+/obj/item/weapon/gun/energy/plasmacutter/mounted
+	name = "mounted plasma cutter"
+	self_recharge = 1
+	use_external_power = 1
+
+/obj/item/rig_module/mounted/plasmacutter
+	name = "mounted plasma cutter"
+	desc = "A knee-mounted plasma cutter. Don't question it."
+	icon_state = "plasmacutter"
+	interface_name = "mounted plasma cutter"
+	interface_desc = "A knee-mounted suit-powered plasma cutter. Don't question it."
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
+	gun = /obj/item/weapon/gun/energy/plasmacutter/mounted
+
+/obj/item/weapon/gun/energy/plasmacutter
+	name = "plasma cutter"
+	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+	charge_meter = 0
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "plasmacutter"
+	item_state = "plasmacutter"
+	fire_sound = 'sound/weapons/plasma_cutter.ogg'
+	slot_flags = SLOT_BELT|SLOT_BACK
+	w_class = 3
+	force = 15
+	sharp = 1
+	edge = 1
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
+	matter = list(DEFAULT_WALL_MATERIAL = 4000)
+	projectile_type = /obj/item/projectile/beam/plasmacutter
+	max_shots = 10
+	self_recharge = 1
+
+/obj/item/projectile/beam/plasmacutter
+	name = "plasma arc"
+	icon_state = "omnilaser"
+	damage = 15
+	damage_type = BURN
+	check_armour = "laser"
+	kill_count = 5
+	pass_flags = PASS_FLAG_TABLE
+
+	muzzle_type = /obj/effect/projectile/trilaser/muzzle
+	tracer_type = /obj/effect/projectile/trilaser/tracer
+	impact_type = /obj/effect/projectile/trilaser/impact
+
+/obj/item/projectile/beam/plasmacutter/on_impact(var/atom/A)
+	if(istype(A, /turf/simulated/mineral))
+		var/turf/simulated/mineral/M = A
+		if(prob(33))
+			M.GetDrilled(1)
+			return
+		else
+			M.emitter_blasts_taken += 2
+	. = ..()

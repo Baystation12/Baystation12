@@ -128,23 +128,22 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/portable_atmospherics/powered/scrubber/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/portable_atmospherics/powered/scrubber/OnTopic(user, href_list)
 	if(href_list["power"])
 		on = !on
-		. = 1
+		. = TOPIC_REFRESH
 	if (href_list["remove_tank"])
 		if(holding)
 			holding.dropInto(loc)
 			holding = null
-		. = 1
+		. = TOPIC_REFRESH
 	if (href_list["volume_adj"])
 		var/diff = text2num(href_list["volume_adj"])
 		volume_rate = Clamp(volume_rate+diff, minrate, maxrate)
-		. = 1
-	update_icon()
+		. = TOPIC_REFRESH
+
+	if(.)
+		update_icon()
 
 
 //Huge scrubber

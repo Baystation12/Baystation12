@@ -5,7 +5,9 @@ Basically: I can use it to target things where I click. I can then pass these ta
 /obj/item/magic_hand
 	name = "Magic Hand"
 	icon = 'icons/mob/screen1.dmi'
-	flags = 0
+	atom_flags = 0
+	item_flags = 0
+	obj_flags = 0
 	simulated = 0
 	icon_state = "spell"
 	var/next_spell_time = 0

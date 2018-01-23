@@ -1,7 +1,6 @@
 /obj/item/clothing/glasses/hud
 	name = "HUD"
 	desc = "A heads-up display that provides important info in (almost) real time."
-	flags = 0 //doesn't protect eyes because it's a monocle, duh
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 2)
 	var/list/icon/current = list() //the current hud icons
 	electric = 1
@@ -20,16 +19,21 @@
 	icon_state = "healthhud"
 	body_parts_covered = 0
 
-
 /obj/item/clothing/glasses/hud/health/process_hud(var/mob/M)
 	process_med_hud(M, 1)
 
 /obj/item/clothing/glasses/hud/health/prescription
 	name = "prescription health scanner HUD"
-	desc = "A medical HUD integrated with a set of prescription glasses"
+	desc = "A medical HUD integrated with a set of prescription glasses."
 	prescription = 7
 	icon_state = "healthhudpresc"
 	item_state = "glasses"
+
+/obj/item/clothing/glasses/hud/health/visor
+	name = "medical HUD visor"
+	desc = "A medical HUD integrated with a wide visor."
+	icon_state = "medhud_visor"
+	item_state = "medhud_visor"
 
 /obj/item/clothing/glasses/hud/security
 	name = "security HUD"

@@ -3,7 +3,8 @@
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = "holder"
 	item_state = "assembly"
-	flags = CONDUCT | PROXMOVE
+	movable_flags = MOVABLE_FLAG_PROXMOVE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	throwforce = 5
 	w_class = ITEM_SIZE_SMALL
 	throw_speed = 3

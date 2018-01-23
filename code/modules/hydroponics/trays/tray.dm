@@ -4,7 +4,7 @@
 	icon_state = "hydrotray3"
 	density = 1
 	anchored = 1
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 100
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
@@ -165,7 +165,7 @@
 	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
-	temp_chem_holder.flags |= OPENCONTAINER
+	temp_chem_holder.atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	create_reagents(200)
 	if(mechanical)
 		connect()
@@ -201,7 +201,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 
-	if(istype(mover) && mover.checkpass(PASSTABLE))
+	if(istype(mover) && mover.checkpass(PASS_FLAG_TABLE))
 		return 1
 	else
 		return !density

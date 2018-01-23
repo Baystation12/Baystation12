@@ -11,6 +11,7 @@ The answer was five and a half years -ZeroBits
 	filedesc = "Library"
 	extended_desc = "This program can be used to view e-books from an external archive."
 	program_icon_state = "word"
+	program_key_state = "atmos_key"
 	program_menu_icon = "note"
 	size = 6
 	requires_ntnet = 1

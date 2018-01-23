@@ -107,67 +107,64 @@
 	onclose(user, "guestpass")
 
 
-/obj/machinery/computer/guestpass/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/computer/guestpass/OnTopic(var/mob/user, href_list, state)
 	if (href_list["mode"])
 		mode = text2num(href_list["mode"])
-		. = 1
+		. = TOPIC_REFRESH
 
-	if (href_list["choice"])
+	else if (href_list["choice"])
 		switch(href_list["choice"])
 			if ("giv_name")
-				var/nam = sanitize(input("Person pass is issued to", "Name", giv_name) as text|null)
-				if (nam)
+				var/nam = sanitize(input(user, "Person pass is issued to", "Name", giv_name) as text|null)
+				if (nam && CanUseTopic(user, state))
 					giv_name = nam
 			if ("reason")
-				var/reas = sanitize(input("Reason why pass is issued", "Reason", reason) as text|null)
-				if(reas)
+				var/reas = sanitize(input(user, "Reason why pass is issued", "Reason", reason) as text|null)
+				if(reas && CanUseTopic(user, state))
 					reason = reas
 			if ("duration")
-				var/dur = input("Duration (in minutes) during which pass is valid (up to 30 minutes).", "Duration") as num|null
-				if (dur)
+				var/dur = input(user, "Duration (in minutes) during which pass is valid (up to 30 minutes).", "Duration") as num|null
+				if (dur && CanUseTopic(user, state))
 					if (dur > 0 && dur <= 30)
 						duration = dur
 					else
-						to_chat(usr, "<span class='warning'>Invalid duration.</span>")
+						to_chat(user, "<span class='warning'>Invalid duration.</span>")
 			if ("access")
 				var/A = text2num(href_list["access"])
 				if (A in accesses)
 					accesses.Remove(A)
 				else if(giver && (A in giver.access))
 					accesses.Add(A)
-		. = 1
-	if (href_list["action"])
+		. = TOPIC_REFRESH
+	else if (href_list["action"])
 		switch(href_list["action"])
 			if ("id")
 				if (giver)
-					giver.forceMove(usr.loc)
-					if(ishuman(usr))
-						usr.put_in_hands(giver)
+					giver.dropInto(user.loc)
+					if(ishuman(user))
+						user.put_in_hands(giver)
 					giver = null
 					accesses.Cut()
 				else
-					var/obj/item/I = usr.get_active_hand()
-					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
+					var/obj/item/I = user.get_active_hand()
+					if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I))
 						I.forceMove(src)
 						giver = I
-				. = 1
+				. = TOPIC_REFRESH
 			if ("print")
 				var/dat = "<h3>Activity log of guest pass terminal #[uid]</h3><br>"
 				for (var/entry in internal_log)
 					dat += "[entry]<br><hr>"
-//				to_chat(usr, "Printing the log, standby...")
+//				to_chat(user, "Printing the log, standby...")
 				//sleep(50)
 				var/obj/item/weapon/paper/P = new/obj/item/weapon/paper( loc )
 				P.name = "activity log"
 				P.info = dat
-				. = 1
+				. = TOPIC_REFRESH
 
 			if ("issue")
 				if (giver && accesses.len)
-					var/number = add_zero(random_id("guestpass_id_number",0,9999), 4)
+					var/number = add_zero(random_id("guestpass_id_number",1000,9999), 4)
 					var/entry = "\[[stationtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Granted access to following areas: "
 					var/list/access_descriptors = list()
 					for (var/A in accesses)
@@ -185,10 +182,10 @@
 					pass.name = "guest pass #[number]"
 					pass.assignment = "Guest"
 					playsound(src.loc, 'sound/machines/ping.ogg', 25, 0)
-					. = 1
+					. = TOPIC_REFRESH
 				else if(!giver)
-					to_chat(usr, "<span class='warning'>Cannot issue pass without issuing ID.</span>")
+					to_chat(user, "<span class='warning'>Cannot issue pass without issuing ID.</span>")
 				else if(!accesses.len)
-					to_chat(usr, "<span class='warning'>Cannot issue pass without at least one granted access permission.</span>")
+					to_chat(user, "<span class='warning'>Cannot issue pass without at least one granted access permission.</span>")
 	if(.)
-		updateUsrDialog()
+		attack_hand(user)

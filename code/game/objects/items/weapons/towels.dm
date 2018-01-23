@@ -21,3 +21,4 @@
 	name = "golden fleece"
 	desc = "The legendary Golden Fleece of Jason made real."
 	color = "#ffd700"
+	attack_verb = list("smote", "whipped")

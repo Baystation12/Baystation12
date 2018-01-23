@@ -45,8 +45,6 @@
 	initial_gas = null
 	temperature = TCMB
 
-/turf/simulated/floor/fixed/alium/curves
-	icon_state = "curvy"
 /turf/simulated/floor/fixed/alium/ex_act(severity)
 	var/material/A = get_material_by_name("alien alloy")
 	if(prob(A.explosion_resistance))

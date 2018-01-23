@@ -66,8 +66,8 @@
 
 //MINING-2 // SIGNAL
 /obj/effect/overmap/sector/away
-	name = "faint signal"
-	desc = "Faint signal detected, originating from the site's surface."
+	name = "faint signal from an asteroid"
+	desc = "Faint signal detected, originating from the human-made structures on the site's surface."
 	icon_state = "sector"
 	generic_waypoints = list(
 		"nav_away_1",

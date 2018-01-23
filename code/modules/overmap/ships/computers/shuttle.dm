@@ -1,6 +1,7 @@
 //Shuttle controller computer for shuttles going between sectors
 /obj/machinery/computer/shuttle_control/explore
 	name = "general shuttle control console"
+	icon_state = "thick"
 
 /obj/machinery/computer/shuttle_control/explore/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -78,8 +79,8 @@
 		)
 
 /obj/machinery/computer/shuttle_control/explore/handle_topic_href(var/datum/shuttle/autodock/overmap/shuttle, var/list/href_list)
-	if(..())
-		return 1
+	if((. = ..()) != null)
+		return
 
 	if(href_list["pick"])
 		var/list/possible_d = shuttle.get_possible_destinations()
@@ -91,3 +92,4 @@
 		possible_d = shuttle.get_possible_destinations()
 		if(CanInteract(usr, GLOB.default_state) && (D in possible_d))
 			shuttle.set_destination(possible_d[D])
+		return TOPIC_REFRESH

@@ -31,7 +31,7 @@
 /var/const/access_forensics_lockers = 4
 /datum/access/forensics_lockers
 	id = access_forensics_lockers
-	desc = "Forensics Lockers"
+	desc = "Forensics"
 	region = ACCESS_REGION_SECURITY
 
 /var/const/access_medical = 5
@@ -383,18 +383,6 @@
 	id = access_medical_equip
 	desc = "Medical Equipment"
 	region = ACCESS_REGION_MEDBAY
-
-/var/const/access_analyst_lockers = 67
-/datum/access/analyst_lockers
-	id = access_analyst_lockers
-	desc = "Crime Scene Analyst"
-	region = ACCESS_REGION_SECURITY
-
-/var/const/access_forensics = 68
-/datum/access/forensics
-	id = access_forensics
-	desc = "Forensics"
-	region = ACCESS_REGION_SECURITY
 
 /******************
 * Central Command *

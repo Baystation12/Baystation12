@@ -47,7 +47,9 @@
 
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/flash)
+		/obj/item/rig_module/device/flash,
+		/obj/item/rig_module/cooling_unit
+		)
 
 /*
  * EXECUTIVE OFFICER
@@ -78,7 +80,9 @@
 /obj/item/weapon/rig/command/xo/equipped
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/flash)
+		/obj/item/rig_module/device/flash/advanced,
+		/obj/item/rig_module/grenade_launcher/smoke,
+		/obj/item/rig_module/cooling_unit)
 
 /*
  * COMMANDING OFFICER
@@ -109,8 +113,11 @@
 
 /obj/item/weapon/rig/command/co/equipped
 	initial_modules = list(
+		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/flash)
+		/obj/item/rig_module/device/flash/advanced,
+		/obj/item/rig_module/grenade_launcher/smoke,
+		/obj/item/rig_module/cooling_unit)
 
 /*
  * CHIEF MEDICAL OFFICER
@@ -143,7 +150,8 @@
 		/obj/item/rig_module/device/flash,
 		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/chem_dispenser/injector,
-		/obj/item/rig_module/vision/medhud)
+		/obj/item/rig_module/vision/medhud,
+		/obj/item/rig_module/cooling_unit)
 
 /*
 * CHIEF OF SECURITY
@@ -174,4 +182,5 @@
 	initial_modules = list(
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/flash,
-		/obj/item/rig_module/vision/sechud)
+		/obj/item/rig_module/vision/sechud,
+		/obj/item/rig_module/cooling_unit)

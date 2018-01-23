@@ -1,7 +1,10 @@
 /obj/machinery/computer/fusion_fuel_control
 	name = "fuel injection control computer"
-	icon = 'icons/obj/machines/power/fusion.dmi'
-	icon_state = "fuel"
+	icon_keyboard = "rd_key"
+	icon_screen = "fuel_screen"
+	light_color = COLOR_ORANGE
+	idle_power_usage = 250
+	active_power_usage = 500
 
 	var/id_tag
 	var/scan_range = 25

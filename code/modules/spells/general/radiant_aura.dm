@@ -1,5 +1,5 @@
 /spell/radiant_aura
-	name = "radiant aura"
+	name = "Radiant aura"
 	desc = "Form a protective layer of light around you, making you immune to laser fire."
 	school = "transmutation"
 	feedback = "ra"

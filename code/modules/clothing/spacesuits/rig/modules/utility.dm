@@ -7,8 +7,6 @@
  * /obj/item/rig_module/device/rcd
  * /obj/item/rig_module/device/anomaly_scanner
  * /obj/item/rig_module/maneuvering_jets
- * /obj/item/rig_module/foam_sprayer
- * /obj/item/rig_module/device/broadcaster
  * /obj/item/rig_module/chem_dispenser
  * /obj/item/rig_module/chem_dispenser/injector
  * /obj/item/rig_module/voice
@@ -38,7 +36,7 @@
 	suit_overlay_inactive = "plasmacutter"
 	use_power_cost = 50
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6)
-	device_type = /obj/item/weapon/pickaxe/plasmacutter
+	device_type = /obj/item/weapon/gun/energy/plasmacutter
 
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
@@ -96,7 +94,7 @@
 	interface_desc = "A device for building or removing walls. Cell-powered."
 	usable = 1
 	engage_string = "Configure RCD"
-	use_power_cost = 100 KILOWATTS // Matter fabrication is a very energy-demanding process.
+	use_power_cost = 300
 	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
 	device_type = /obj/item/weapon/rcd/mounted
 
@@ -390,8 +388,6 @@
 	jets.holder = null
 	jets.ion_trail.set_up(jets)
 
-/obj/item/rig_module/foam_sprayer
-
 /obj/item/rig_module/device/paperdispenser
 	name = "hardsuit paper dispenser"
 	desc = "Crisp sheets."
@@ -461,3 +457,31 @@
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
 	device_type = /obj/item/weapon/matter_decompiler
+
+
+
+/obj/item/rig_module/cooling_unit
+	name = "mounted cooling unit"
+	toggleable = 1
+	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 5)
+	interface_name = "mounted cooling unit"
+	interface_desc = "A heat sink with liquid cooled radiator."
+	module_cooldown = 0 SECONDS //no cd because its critical for a life-support module
+	var/charge_consumption = 0.5 KILOWATTS
+	var/max_cooling = 12
+	var/thermostat = T20C
+
+/obj/item/rig_module/cooling_unit/Process()
+	if(!active)
+		return passive_power_cost
+
+	var/mob/living/carbon/human/H = holder.wearer
+
+	var/temp_adj = min(H.bodytemperature - thermostat, max_cooling) //Actually copies the original CU code
+
+	if (temp_adj < 0.5)
+		return passive_power_cost
+
+	H.bodytemperature -= temp_adj
+	active_power_cost = round((temp_adj/max_cooling)*charge_consumption)
+	return active_power_cost

@@ -1,8 +1,6 @@
 //===================================================================================
 //Overmap object representing zlevel(s)
 //===================================================================================
-var/list/points_of_interest = list()
-
 /obj/effect/overmap
 	name = "map object"
 	icon = 'icons/obj/overmap.dmi'
@@ -45,7 +43,6 @@ var/list/points_of_interest = list()
 
 	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
-	points_of_interest += name
 
 	GLOB.using_map.player_levels |= map_z
 

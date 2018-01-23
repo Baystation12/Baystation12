@@ -281,12 +281,12 @@
 		. = IC_TOPIC_REFRESH
 
 	else
-		. = OnTopic(href_list, usr)
+		. = OnICTopic(href_list, usr)
 
 	if(. == IC_TOPIC_REFRESH)
 		interact_with_assembly(usr)
 
-/obj/item/integrated_circuit/proc/OnTopic(href_list, var/mob/user)
+/obj/item/integrated_circuit/proc/OnICTopic(href_list, var/mob/user)
 	return IC_TOPIC_UNHANDLED
 
 /obj/item/integrated_circuit/proc/get_topic_data(mob/user)

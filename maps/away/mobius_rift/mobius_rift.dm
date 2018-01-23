@@ -1,14 +1,10 @@
 #include "mobius_rift_areas.dm"
 
 /obj/effect/overmap/sector/mobius_rift
-	name = "Hollow asteroid."
+	name = "unusual asteroid"
 	desc = "Sensors error: ERROR #E0x003141592: recursive stack overflow for CALCULATE_APPROXIMATE_SIZE()."
 	icon_state = "object"
 	known = 0
-
-	generic_waypoints = list(
-		"nav_mobius_rift_1",
-	)
 
 /datum/map_template/ruin/away_site/mobius_rift
 	name = "Mobius rift"
@@ -16,10 +12,6 @@
 	description = "Non-euclidian mess."
 	suffixes = list("mobius_rift/mobius_rift.dmm")
 	cost = 1
-
-/obj/effect/shuttle_landmark/mobius_rift/nav1
-	name = "Hollow Asteroid Navpoint #1"
-	landmark_tag = "nav_mobius_rift_1"
 
 /obj/effect/step_trigger/mobius_rift/seamless_portal
 	var/obj/effect/step_trigger/mobius_rift/seamless_portal/dest

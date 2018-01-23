@@ -9,15 +9,6 @@
 		default_language = all_languages[species_language]
 	..()
 
-/mob/living/carbon/Life()
-	..()
-
-	handle_viruses()
-
-	// Increase germ_level regularly
-	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
-		germ_level++
-
 /mob/living/carbon/Destroy()
 	QDEL_NULL(ingested)
 	QDEL_NULL(touching)
@@ -450,7 +441,7 @@
 /mob/living/carbon/proc/can_feel_pain(var/check_organ)
 	if(isSynthetic())
 		return 0
-	return !(species && species.flags & NO_PAIN)
+	return !(species && species.species_flags & SPECIES_FLAG_NO_PAIN)
 
 /mob/living/carbon/proc/get_adjusted_metabolism(metabolism)
 	return metabolism
@@ -467,3 +458,22 @@
 	// carbon mobs do not have blocked mouths by default
 	// overridden in human_defense.dm
 	return null
+
+/mob/living/carbon/proc/SetStasis(var/factor, var/source = "misc")
+	if((species && (species.species_flags & SPECIES_FLAG_NO_SCAN)) || isSynthetic())
+		return
+	stasis_sources[source] = factor
+
+/mob/living/carbon/proc/InStasis()
+	if(!stasis_value)
+		return FALSE
+	return life_tick % stasis_value
+
+// call only once per run of life
+/mob/living/carbon/proc/UpdateStasis()
+	stasis_value = 0
+	if((species && (species.species_flags & SPECIES_FLAG_NO_SCAN)) || isSynthetic())
+		return
+	for(var/source in stasis_sources)
+		stasis_value += stasis_sources[source]
+	stasis_sources.Cut()

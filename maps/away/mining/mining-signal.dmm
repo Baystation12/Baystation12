@@ -371,7 +371,7 @@
 "hs" = (/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/random/loot,/turf/simulated/floor/tiled/airless,/area/outpost/abandoned)
 "ht" = (/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/airless,/area/outpost/abandoned)
 "hu" = (/obj/machinery/light/small/emergency,/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/airless,/area/outpost/abandoned)
-"hv" = (/obj/item/weapon/pickaxe/plasmacutter,/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/airless,/area/outpost/abandoned)
+"hv" = (/obj/item/weapon/gun/energy/plasmacutter,/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/airless,/area/outpost/abandoned)
 "hw" = (/obj/machinery/power/solar_control/autostart,/obj/structure/cable/orange{icon_state = "0-4"},/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/tiled/airless,/area/outpost/abandoned)
 "hx" = (/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/wall/titanium,/area/outpost/abandoned)
 "hy" = (/obj/structure/cable/orange{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/unsimulated/mask,/area/outpost/abandoned)

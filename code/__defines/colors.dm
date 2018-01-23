@@ -42,6 +42,13 @@
 #define COLOR_WHITE            "#ffffff"
 #define COLOR_NT_RED           "#9d2300"
 #define COLOR_GUNMETAL         "#80868e"
+#define COLOR_MUZZLE_FLASH     "#ffffb2"
+#define COLOR_CHESTNUT         "#996633"
+#define COLOR_BEASTY_BROWN     "#663300"
+#define COLOR_WHEAT            "#ffff99"
+#define COLOR_CYAN_BLUE        "#3366cc"
+#define COLOR_LIGHT_CYAN       "#66ccff"
+#define COLOR_PAKISTAN_GREEN   "#006600"
 
 #define	PIPE_COLOR_GREY        "#ffffff"	//yes white is grey
 #define	PIPE_COLOR_RED         "#ff0000"

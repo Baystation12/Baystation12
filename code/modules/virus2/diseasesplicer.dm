@@ -123,16 +123,10 @@
 			ping("\The [src] pings, \"Backup disk saved.\"")
 			GLOB.nanomanager.update_uis(src)
 
-/obj/machinery/computer/diseasesplicer/Topic(href, href_list)
-	if(..()) return 1
-
-	var/mob/user = usr
-	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
-
+/obj/machinery/computer/diseasesplicer/OnTopic(user, href_list)
 	if (href_list["close"])
-		user.unset_machine()
-		ui.close()
-		return 0
+		GLOB.nanomanager.close_user_uis(user, src, "main")
+		return TOPIC_HANDLED
 
 	if (href_list["grab"])
 		if (dish)
@@ -141,7 +135,7 @@
 			analysed = dish.analysed
 			dish = null
 			scanning = 10
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["affected_species"])
 		if (dish)
@@ -150,13 +144,13 @@
 			analysed = dish.analysed
 			dish = null
 			scanning = 10
-		return 1
+		return TOPIC_REFRESH
 
 	if(href_list["eject"])
 		if (dish)
-			dish.loc = src.loc
+			dish.dropInto(loc)
 			dish = null
-		return 1
+		return TOPIC_REFRESH
 
 	if(href_list["splice"])
 		if(dish)
@@ -183,14 +177,12 @@
 				dish.virus2.affected_species = species_buffer
 
 			else
-				return
+				return TOPIC_HANDLED
 
 			splicing = 10
 			dish.virus2.uniqueID = rand(0,10000)
-		return 1
+		return TOPIC_REFRESH
 
 	if(href_list["disk"])
 		burning = 10
-		return 1
-
-	return 0
+		return TOPIC_REFRESH

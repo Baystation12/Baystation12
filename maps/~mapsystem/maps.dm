@@ -188,6 +188,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if (!selected_site)
 			break
 		sites_by_spawn_weight -= selected_site
+		if(selected_site.cost > away_site_budget)
+			continue
 		if (selected_site.load_new_z())
 			report_progress("Loaded away site [selected_site]!")
 			away_site_budget -= selected_site.cost

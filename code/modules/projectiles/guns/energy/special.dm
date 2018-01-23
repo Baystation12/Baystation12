@@ -6,13 +6,14 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 4)
 	w_class = ITEM_SIZE_HUGE
 	force = 10
-	flags =  CONDUCT
+	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
 	one_hand_penalty = 4
 	charge_cost = 30
 	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
 	wielded_item_state = "ionrifle-wielded"
+	combustion = 0
 
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess
@@ -39,6 +40,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_POWER = 3)
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
+	combustion = 0
 
 /obj/item/weapon/gun/energy/floragun
 	name = "floral somatoray"
@@ -52,6 +54,7 @@
 	modifystate = "floramut"
 	self_recharge = 1
 	var/decl/plantgene/gene = null
+	combustion = 0
 
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
@@ -102,6 +105,7 @@
 	self_recharge = 1
 	recharge_time = 5 //Time it takes for shots to recharge (in ticks)
 	charge_meter = 0
+	combustion = 0
 
 /obj/item/weapon/gun/energy/meteorgun/pen
 	name = "meteor pen"
@@ -138,9 +142,9 @@
 	icon_state = "staffofchange"
 	item_state = "staffofchange"
 	fire_sound = 'sound/weapons/emitter.ogg'
-	flags =  CONDUCT
-	slot_flags = SLOT_BACK
-	w_class = ITEM_SIZE_HUGE
+	obj_flags =  OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_BELT|SLOT_BACK
+	w_class = ITEM_SIZE_LARGE
 	max_shots = 5
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null
@@ -173,7 +177,8 @@ obj/item/weapon/gun/energy/staff/focus
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "focus"
 	item_state = "focus"
-	slot_flags = SLOT_BACK
+	slot_flags = SLOT_BELT|SLOT_BACK
+	w_class = ITEM_SIZE_LARGE
 	projectile_type = /obj/item/projectile/forcebolt
 	/*
 	attack_self(mob/living/user as mob)

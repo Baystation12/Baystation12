@@ -18,7 +18,7 @@
 /obj/item/integrated_circuit/input/button/get_topic_data(mob/user)
 	return list("Press" = "press=1")
 
-/obj/item/integrated_circuit/input/button/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/button/OnICTopic(href_list, user)
 	if(href_list["press"])
 		to_chat(user, "<span class='notice'>You press the button labeled '[src.name]'.</span>")
 		activate_pin(1)
@@ -39,7 +39,7 @@
 /obj/item/integrated_circuit/input/toggle_button/get_topic_data(mob/user)
 	return list("Toggle [get_pin_data(IC_OUTPUT, 1) ? "Off" : "On"]" = "toggle=1")
 
-/obj/item/integrated_circuit/input/toggle_button/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/toggle_button/OnICTopic(href_list, user)
 	if(href_list["toggle"])
 		set_pin_data(IC_OUTPUT, 1, !get_pin_data(IC_OUTPUT, 1))
 		activate_pin(1)
@@ -60,7 +60,7 @@
 /obj/item/integrated_circuit/input/numberpad/get_topic_data(mob/user)
 	return list("Enter Number" = "enter_number=1")
 
-/obj/item/integrated_circuit/input/numberpad/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/numberpad/OnICTopic(href_list, user)
 	if(href_list["enter_number"])
 		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
 		if(isnum(new_input) && CanInteract(user, GLOB.physical_state))
@@ -80,7 +80,7 @@
 /obj/item/integrated_circuit/input/textpad/get_topic_data(mob/user)
 	return list("Enter Words" = "enter_words=1")
 
-/obj/item/integrated_circuit/input/textpad/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/textpad/OnICTopic(href_list, user)
 	if(href_list["enter_words"])
 		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
 		if(istext(new_input) && CanInteract(user, GLOB.physical_state))
@@ -335,7 +335,7 @@
 			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
 	.["None (Dangerous)"] = "tport=random"
 
-/obj/item/integrated_circuit/input/teleporter_locator/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/teleporter_locator/OnICTopic(href_list, user)
 	if(href_list["tport"])
 		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
 		set_pin_data(IC_OUTPUT, 1, output && weakref(output))
@@ -413,7 +413,7 @@
 /obj/item/integrated_circuit/input/access_scanner/get_topic_data(mob/user)
 	return contained_id ? ..() : list("Access Scan" = "access_scan=1")
 
-/obj/item/integrated_circuit/input/access_scanner/OnTopic(href_list, var/mob/user)
+/obj/item/integrated_circuit/input/access_scanner/OnICTopic(href_list, var/mob/user)
 	if(href_list["access_scan"])
 		if(contained_id)
 			return

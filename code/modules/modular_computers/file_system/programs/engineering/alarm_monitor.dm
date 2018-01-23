@@ -4,6 +4,7 @@
 	nanomodule_path = /datum/nano_module/alarm_monitor/engineering
 	ui_header = "alarm_green.gif"
 	program_icon_state = "alert-green"
+	program_key_state = "atmos_key"
 	program_menu_icon = "alert"
 	extended_desc = "This program provides visual interface for the alarm system."
 	requires_ntnet = 1
@@ -26,7 +27,6 @@
 			ui_header = "alarm_green.gif"
 			update_computer_icon()
 			has_alert = 0
-	return 1
 
 /datum/nano_module/alarm_monitor
 	name = "Alarm monitor"
@@ -108,6 +108,9 @@
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		categories[++categories.len] = list("category" = AH.category, "alarms" = list())
 		for(var/datum/alarm/A in AH.major_alarms())
+			if(!AreConnectedZLevels(get_host_z(), A.alarm_z()))
+				continue
+
 			var/cameras[0]
 			var/lost_sources[0]
 
