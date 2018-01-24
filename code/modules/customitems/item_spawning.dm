@@ -104,10 +104,10 @@
 	//This has to be done before we touch any of item's vars
 	if(!("[item_icon]_l" in available_states))
 		new_item_state_slots[slot_l_hand_str] = get_state(item, slot_l_hand_str, "_l")
-		new_item_icons[slot_l_hand_str] = get_icon(item, slot_l_hand_str, 'icons/mob/items/lefthand.dmi')
+		new_item_icons[slot_l_hand_str] = get_icon(item, slot_l_hand_str, 'icons/mob/onmob/items/lefthand.dmi')
 	if(!("[item_icon]_r" in available_states))
 		new_item_state_slots[slot_r_hand_str] = get_state(item, slot_r_hand_str, "_r")
-		new_item_icons[slot_r_hand_str] = get_icon(item, slot_r_hand_str, 'icons/mob/items/righthand.dmi')
+		new_item_icons[slot_r_hand_str] = get_icon(item, slot_r_hand_str, 'icons/mob/onmob/items/righthand.dmi')
 
 	item.item_state_slots = new_item_state_slots
 	item.item_icons = new_item_icons
