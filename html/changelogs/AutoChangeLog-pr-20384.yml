@@ -1,0 +1,5 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - bugfix: "Attacks will no longer phase through dead or otherwise incapacitated slimes."
+  - tweak: "Slime surgery is generally faster and now supports researched scalpels and incision managers."
