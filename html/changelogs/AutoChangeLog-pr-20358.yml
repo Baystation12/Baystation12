@@ -1,4 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - rscadd: "You can now move down onto turfs containing climbable atoms (tables, machinery)."
