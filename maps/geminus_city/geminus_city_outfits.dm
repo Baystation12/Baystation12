@@ -81,7 +81,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/police
-	name = "UEG Police Officer"
+	name = "GCPD Officer"
 
 	head = /obj/item/clothing/head/soft/sec/corp
 	uniform = /obj/item/clothing/under/police
