@@ -290,11 +290,10 @@
 
 /obj/random/handgun/spawn_choices()
 	return list(/obj/item/weapon/gun/projectile/sec = 3,
-				/obj/item/weapon/gun/energy/gun = 2,
 				/obj/item/weapon/gun/projectile/colt = 2,
 				/obj/item/weapon/gun/projectile/pistol = 2,
-				/obj/item/weapon/gun/energy/retro = 1,
-				/obj/item/weapon/gun/projectile/sec/wood = 1)
+				/obj/item/weapon/gun/projectile/sec/wood = 1,
+				/obj/item/weapon/gun/projectile/m6d_magnum =1)
 
 /obj/random/ammo
 	name = "Random Ammunition"

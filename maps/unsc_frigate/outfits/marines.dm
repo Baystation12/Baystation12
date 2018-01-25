@@ -32,6 +32,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/armor/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/combat
 
 	flags = 0
 
@@ -44,6 +45,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/armor/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/combat
 
 	flags = 0
 e

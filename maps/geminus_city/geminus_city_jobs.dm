@@ -111,7 +111,7 @@
 	latejoin_at_spawnpoints = FALSE
 
 /datum/job/police
-	title = "UEG Police Officer"
+	title = "GCPD Officer"
 	total_positions = 6
 	selection_color = "#000000"
 
