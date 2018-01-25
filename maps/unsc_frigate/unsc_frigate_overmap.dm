@@ -11,6 +11,7 @@
 /obj/effect/landmark/dropship_land_point/frigate_hangar
 	name = "UNSC Frigate Hangar"
 	faction = "unsc"
+	occupied = 1
 
 /obj/effect/landmark/dropship_land_point/frigate_hangar/north
 	name = "UNSC Frigate Hangar - North"
