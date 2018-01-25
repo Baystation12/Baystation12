@@ -22,9 +22,9 @@ SUBSYSTEM_DEF(skybox)
 	BGrot = RANDOM_RIGHT_ANGLE
 
 /datum/controller/subsystem/skybox/Recover()
-	BGrot = BGrot
-	BGcolor = BGcolor
-	skyboxes = skyboxes
+	BGrot = SSskybox.BGrot
+	BGcolor = SSskybox.BGcolor
+	skyboxes = SSskybox.skyboxes
 
 //Update skyboxes. Called by universes, for now. Won't be going back to their original appearance in such a case... So be aware of this.
 /datum/controller/subsystem/skybox/proc/reinstate_skyboxes(var/state, var/using_stars)
