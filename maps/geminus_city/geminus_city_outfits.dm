@@ -79,3 +79,32 @@
 	shoes = /obj/item/clothing/shoes/black
 
 	flags = 0
+
+/decl/hierarchy/outfit/job/police
+	name = "GCPD Officer"
+
+	head = /obj/item/clothing/head/soft/sec/corp
+	uniform = /obj/item/clothing/under/police
+	suit = /obj/item/clothing/suit/armor/vest/police
+	belt = /obj/item/weapon/storage/belt/security
+	shoes = /obj/item/clothing/shoes/dutyboots
+	pda_slot = slot_r_store
+	back = /obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/police
+	gloves = /obj/item/clothing/gloves/guards
+	l_pocket = /obj/item/clothing/accessory/badge/security
+
+	flags = 0
+
+/obj/item/clothing/suit/armor/vest/police
+	name = "ballistic padding"
+	desc = "GCPD shoulder and torso padding designed for bullet resistance."
+	icon_state = "ertarmor_cmd"
+	item_state = "armor"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	armor = list(melee = 40, bullet = 35, laser = 15, energy = 15, bomb = 40, bio = 0, rad = 0)
+
+/obj/item/clothing/under/police
+	name = "police uniform"
+	desc = "A black uniform worn by the GCPD."
+	icon_state = "blackutility_com"
+	worn_state = "blackutility_com"

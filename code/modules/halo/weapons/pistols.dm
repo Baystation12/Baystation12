@@ -22,8 +22,6 @@
 	else
 		icon_state = "magnum_unloaded"
 
-
-
 //Magnum M6S silenced pistol
 
 /obj/item/weapon/gun/projectile/m6c_magnum_s

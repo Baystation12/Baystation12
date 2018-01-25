@@ -17,3 +17,7 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+
+
+/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/police
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
