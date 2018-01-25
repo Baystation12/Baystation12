@@ -413,3 +413,9 @@
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/speciality/pilot
 	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder)
+
+/datum/gear/accessory/fleetpatch
+	display_name = "fleet patch"
+	path = /obj/item/clothing/accessory/solgov/fleet_patch
+	flags = GEAR_HAS_TYPE_SELECTION
+	allowed_roles = MILITARY_ROLES
