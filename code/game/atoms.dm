@@ -1,3 +1,4 @@
+#define BASE_ELEVATION 1
 /atom
 	var/level = 2
 	var/flags = 0
@@ -7,6 +8,7 @@
 	var/last_bumped = 0
 	var/pass_flags = 0
 	var/throwpass = 0
+	var/elevation = BASE_ELEVATION //base_elevation = on ground, base_elevation + 1 = low-flying
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 	var/simulated = 1 //filter for actions - used by lighting overlays
 	var/fluorescent // Shows up under a UV light.
@@ -538,3 +540,8 @@ its easier to just keep the beam vertical.
 		do_climb(target)
 	else
 		return ..()
+
+/atom/proc/change_elevation(var/amount = 1)
+	var/new_alpha = alpha - (50 * amount)
+	animate(src,alpha = new_alpha,time = 2 SECONDS)
+	elevation += amount
