@@ -901,29 +901,9 @@
 	icon_state = "hair_messy"
 	species_allowed = list(SPECIES_TAJARA)
 
-/datum/sprite_accessory/hair/taj_ears_curls
-	name = "Tajara Curly"
-	icon_state = "hair_curly"
-	species_allowed = list(SPECIES_TAJARA)
-
-/datum/sprite_accessory/hair/taj_ears_wife
-	name = "Tajara Housewife"
-	icon_state = "hair_wife"
-	species_allowed = list(SPECIES_TAJARA)
-
-/datum/sprite_accessory/hair/taj_ears_victory
-	name = "Tajara Victory Curls"
-	icon_state = "hair_victory"
-	species_allowed = list(SPECIES_TAJARA)
-
 /datum/sprite_accessory/hair/taj_ears_bob
 	name = "Tajara Bob"
 	icon_state = "hair_tbob"
-	species_allowed = list(SPECIES_TAJARA)
-
-/datum/sprite_accessory/hair/taj_ears_fingercurl
-	name = "Tajara Finger Curls"
-	icon_state = "hair_fingerwave"
 	species_allowed = list(SPECIES_TAJARA)
 
 /datum/sprite_accessory/hair/vox_quills_long
