@@ -35,7 +35,7 @@
 	item_state = "CH252 Visor Helmet"
 	icon_state = "helmet"
 
-/obj/item/clothing/suit/armor/marine
+/obj/item/clothing/suit/storage/marine
 	name = "M52B Body Armor"
 	desc = "an armored protective vest worn by the members of the UNSC Marine Corps."
 	icon = ITEM_INHAND
@@ -45,6 +45,10 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	var/slots = 4
+	allowed = list(/obj/item/ammo_magazine/,/obj/item/weapon/melee/combat_knife)
+	var/max_w_class = ITEM_SIZE_SMALL
+	armor_thickness = 20
 
 /obj/item/clothing/shoes/marine
 	name = "VZG7 Armored Boots"

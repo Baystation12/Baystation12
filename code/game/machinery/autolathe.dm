@@ -21,10 +21,21 @@
 	var/busy = 0
 
 	var/mat_efficiency = 1
+
 	var/build_time = 50
 
 	var/datum/wires/autolathe/wires = null
 
+/obj/machinery/autolathe/proc/GenerateResourceCosts()
+	for(var/datum/autolathe/recipe/r in machine_recipes)
+		if(r.resources)
+			continue
+		var/obj/item/I = new r.path
+		if(I.matter && !r.resources) //This can be overidden in the datums.
+			r.resources = list()
+			for(var/material in I.matter)
+				r.resources[material] = I.matter[material]*1.25 // More expensive to produce than they are to recycle.
+		qdel(I)
 
 /obj/machinery/autolathe/New()
 
@@ -39,7 +50,7 @@
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	RefreshParts()
-	
+
 /obj/machinery/autolathe/Destroy()
 	qdel(wires)
 	wires = null
@@ -52,6 +63,7 @@
 /obj/machinery/autolathe/interact(mob/user as mob)
 
 	update_recipe_list()
+	GenerateResourceCosts()
 
 	if(..() || (disabled && !panel_open))
 		to_chat(user, "<span class='danger'>\The [src] is disabled!</span>")

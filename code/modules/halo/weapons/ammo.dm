@@ -148,7 +148,7 @@
 	icon_state = "SRS99mag"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/a145_ap
-	matter = list(DEFAULT_WALL_MATERIAL = 3000) //7.62mm casing = 50 metal each
+	matter = list(DEFAULT_WALL_MATERIAL = 4000) //7.62mm casing = 50 metal each
 	caliber = "14.5mm"
 	max_ammo = 4
 	multiple_sprites = 1
