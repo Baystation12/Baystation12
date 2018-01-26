@@ -28,12 +28,13 @@
 
 /obj/machinery/autolathe/proc/GenerateResourceCosts()
 	for(var/datum/autolathe/recipe/r in machine_recipes)
-		var/obj/item/I = new r.path (null)
+		var/obj/item/I = new r.path
 		if(I.matter && !r.resources) //This can be overidden in the datums.
 			r.resources = list()
 			for(var/material in I.matter)
 				r.resources[material] = I.matter[material]*1.25 // More expensive to produce than they are to recycle.
-		qdel(I)
+		spawn(5)//Delay this qdel for a short time to allow for New() to finish. Travis gets mad otherwise.
+			qdel(I)
 
 /obj/machinery/autolathe/New()
 
