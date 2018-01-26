@@ -1,3 +1,11 @@
+/datum/autolathe/recipe
+	var/name = "object"
+	var/path
+	var/list/resources
+	var/hidden
+	var/category
+	var/power_use = 0
+	var/is_stack
 
 /datum/autolathe/recipe/m255_sap_he
 	name = "magazine (12.7mm) M225 SAP-HE"
