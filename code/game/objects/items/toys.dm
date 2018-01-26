@@ -142,8 +142,8 @@
 	icon_state = "crossbow"
 	item_state = "crossbow"
 	item_icons = list(
-		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
-		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
+		icon_l_hand = 'icons/mob/onmob/items/lefthand_guns.dmi',
+		icon_r_hand = 'icons/mob/onmob/items/righthand_guns.dmi',
 		)
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
@@ -790,8 +790,8 @@
 	item_state = "marshallingwand"
 	icon = 'icons/obj/toy.dmi'
 	item_icons = list(
-		icon_l_hand = 'icons/mob/items/lefthand.dmi',
-		icon_r_hand = 'icons/mob/items/righthand.dmi',
+		icon_l_hand = 'icons/mob/onmob/items/lefthand.dmi',
+		icon_r_hand = 'icons/mob/onmob/items/righthand.dmi',
 		)
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL

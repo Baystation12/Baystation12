@@ -42,7 +42,7 @@
 		return 0
 
 	for(var/atom/A in destination)
-		if(!A.CanPass(src, start, 1.5, 0))
+		if(!A.CanMoveOnto(src, start, 1.5, direction))
 			to_chat(src, "<span class='warning'>\The [A] blocks you.</span>")
 			return 0
 
@@ -50,8 +50,15 @@
 		to_chat(src, "<span class='warning'>You see nothing to hold on to.</span>")
 		return 0
 
-	Move(destination)
+	forceMove(destination)
 	return 1
+
+
+/atom/proc/CanMoveOnto(atom/movable/mover, turf/target, height=1.5, direction = 0)
+	//Purpose: Determines if the object can move through this
+	//Uses regular limitations plus whatever we think is an exception for the purpose of
+	//moving up and down z levles
+	return CanPass(mover, target, height, 0) || (direction == DOWN && (atom_flags & ATOM_FLAG_CLIMBABLE))
 
 /mob/proc/can_overcome_gravity()
 	return FALSE

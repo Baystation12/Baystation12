@@ -61,6 +61,8 @@
 			return global.SSopen_space;
 		if("SSprocessing")
 			return global.SSprocessing;
+		if("SSskybox")
+			return global.SSskybox;
 		if("SStimer")
 			return global.SStimer;
 		if("SSvines")
@@ -1110,6 +1112,8 @@
 			global.SSopen_space=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
+		if("SSskybox")
+			global.SSskybox=newval;
 		if("SStimer")
 			global.SStimer=newval;
 		if("SSvines")
@@ -2128,6 +2132,7 @@
 	"SSobj",
 	"SSopen_space",
 	"SSprocessing",
+	"SSskybox",
 	"SStimer",
 	"SSvines",
 	"Tier1Runes",
