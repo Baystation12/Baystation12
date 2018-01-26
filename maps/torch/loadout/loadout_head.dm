@@ -42,16 +42,9 @@
 
 /datum/gear/head/bandana
 	display_name = "bandana selection"
-	path = /obj/item/clothing/head
+	path = /obj/item/clothing/mask/bandana
 	allowed_roles = NON_MILITARY_ROLES
-
-/datum/gear/head/bandana/New()
-	..()
-	var/bandanas = list()
-	bandanas["green bandana"] = /obj/item/clothing/head/greenbandana
-	bandanas["orange bandana"] = /obj/item/clothing/head/orangebandana
-	bandanas["pirate bandana"] = /obj/item/clothing/head/bandana
-	gear_tweaks += new/datum/gear_tweak/path(bandanas)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/head/bow
 	display_name = "hair bow, colour select"
