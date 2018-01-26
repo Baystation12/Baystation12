@@ -23,10 +23,15 @@
 	var/expandType = /obj/effect/blob
 	var/secondary_core_growth_chance = 5 //% chance to grow a secondary blob core instead of whatever was suposed to grown. Secondary cores are considerably weaker, but still nasty.
 
-/obj/effect/blob/New(loc)
+/obj/effect/blob/Initialize(loc)
+	START_PROCESSING(SSdisaster, src)
 	health = maxHealth
 	update_icon()
 	return ..(loc)
+
+/obj/effect/blob/Destroy()
+	STOP_PROCESSING(SSdisaster, src)
+	return ..()
 
 /obj/effect/blob/CanPass(var/atom/movable/mover, vra/turf/target, var/height = 0, var/air_group = 0)
 	if(air_group || height == 0)
@@ -187,13 +192,6 @@
 		if(-INFINITY to 33)
 			icon_state = "blob_factory"
 
-/obj/effect/blob/core/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
-
-/obj/effect/blob/core/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	return ..()
 
 /obj/effect/blob/core/Process()
 	set waitfor = 0
