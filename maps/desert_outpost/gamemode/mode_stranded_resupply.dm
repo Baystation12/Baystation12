@@ -197,7 +197,7 @@
 	else
 		new /obj/item/clothing/head/helmet/marine/visor(C)
 
-	new /obj/item/clothing/suit/armor/marine(C)
+	new /obj/item/clothing/suit/storage/marine(C)
 
 	if(prob(50))
 		var/obj/item/weapon/storage/belt/B = new /obj/item/weapon/storage/belt/marine_ammo(C)

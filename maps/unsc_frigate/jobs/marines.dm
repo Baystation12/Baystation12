@@ -102,4 +102,4 @@
 	new /obj/item/clothing/shoes/marine(src)
 	new /obj/item/device/radio/headset/unsc/marine(src)
 	new /obj/item/clothing/head/helmet/marine(src)
-	new /obj/item/clothing/suit/armor/marine(src)
+	new /obj/item/clothing/suit/storage/marine(src)

@@ -48,6 +48,7 @@
 	var/slots = 4
 	allowed = list(/obj/item/ammo_magazine/,/obj/item/weapon/melee/combat_knife)
 	var/max_w_class = ITEM_SIZE_SMALL
+	armor_thickness = 20
 
 /obj/item/clothing/shoes/marine
 	name = "VZG7 Armored Boots"
