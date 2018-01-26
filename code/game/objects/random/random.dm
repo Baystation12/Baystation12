@@ -302,15 +302,18 @@
 	icon_state = "45-10"
 
 /obj/random/ammo/spawn_choices()
-	return list(/obj/item/weapon/storage/box/beanbags = 6,
+	return list(/obj/item/weapon/storage/box/beanbags = 3,
 				/obj/item/weapon/storage/box/shotgunammo = 2,
-				/obj/item/weapon/storage/box/shotgunshells = 4,
-				/obj/item/weapon/storage/box/stunshells = 1,
+				/obj/item/weapon/storage/box/shotgunshells = 3,
 				/obj/item/ammo_magazine/c45m = 2,
-				/obj/item/ammo_magazine/c45m/rubber = 4,
-				/obj/item/ammo_magazine/c45m/flash = 4,
+				/obj/item/ammo_magazine/c45m/rubber = 3,
+				/obj/item/ammo_magazine/c45m/flash = 3,
 				/obj/item/ammo_magazine/mc9mmt = 2,
-				/obj/item/ammo_magazine/mc9mmt/rubber = 6)
+				/obj/item/ammo_magazine/mc9mmt/rubber = 3,
+				/obj/item/ammo_magazine/m127_saphe = 2,
+				/obj/item/ammo_magazine/m127_saphp = 2,
+				/obj/item/ammo_magazine/m762_ap = 1,
+				/obj/item/ammo_magazine/m95_sap = 1)
 
 /obj/random/action_figure
 	name = "random action figure"
