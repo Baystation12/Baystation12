@@ -314,7 +314,7 @@
 	
 /obj/item/clothing/mask/bandana/purple
 	name = "purple bandana"
-	icon_state = "bandgpurple"
+	icon_state = "bandpurple"
 	item_state = "bandpurple"
 	
 /obj/item/clothing/mask/bandana/botany
