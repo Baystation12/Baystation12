@@ -22,19 +22,13 @@
 
 	var/mat_efficiency = 1
 
-
-
-
-
-
-
 	var/build_time = 50
 
 	var/datum/wires/autolathe/wires = null
 
 /obj/machinery/autolathe/proc/GenerateResourceCosts()
 	for(var/datum/autolathe/recipe/r in machine_recipes)
-		var/obj/item/I = new r.path
+		var/obj/item/I = new r.path (null)
 		if(I.matter && !r.resources) //This can be overidden in the datums.
 			r.resources = list()
 			for(var/material in I.matter)
