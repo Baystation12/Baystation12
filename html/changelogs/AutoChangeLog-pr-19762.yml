@@ -1,4 +1,0 @@
-author: "chaoko99"
-delete-after: True
-changes: 
-  - rscadd: "Added a parallaxing background space that changes colors every round."
