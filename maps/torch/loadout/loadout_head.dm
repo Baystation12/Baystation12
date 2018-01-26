@@ -40,7 +40,7 @@
 	path = /obj/item/clothing/head/soft/solgov/veteranhat
 	allowed_roles = NON_MILITARY_ROLES
 
-/datum/gear/head/bandana
+/datum/gear/mask/bandana
 	display_name = "bandana selection"
 	path = /obj/item/clothing/mask/bandana
 	allowed_roles = NON_MILITARY_ROLES
