@@ -180,7 +180,7 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
-	var/list/genders = list(MALE, FEMALE)
+	var/list/genders = list(MALE, FEMALE, PLURAL)
 
 	// Bump vars
 	var/bump_flag = HUMAN	// What are we considered to be when bumped?
