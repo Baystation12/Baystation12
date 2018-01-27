@@ -1,0 +1,5 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - rscadd: "Adds the decorated harness, an Unathi-exclusive accessory complete with two dueling knives, to the loadout."
+  - tweak: "Changed the dueling knife to a piss-weak variation of the kitchen knife."
