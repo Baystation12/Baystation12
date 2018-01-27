@@ -89,6 +89,42 @@
 	airlock_type = "/maintenance"
 	glass = -1
 
+/obj/structure/door_assembly/door_assembly_malt
+	base_icon_state = "malt"
+	base_name = "Maintenance Airlock"
+	airlock_type = "/maintenance_alt"
+	glass = -1
+
+/obj/structure/door_assembly/door_assembly_mcom
+	base_icon_state = "mcom"
+	base_name = "Maintenance Airlock"
+	airlock_type = "/maintenance_command"
+	glass = -1
+
+/obj/structure/door_assembly/door_assembly_msec
+	base_icon_state = "msec"
+	base_name = "Maintenance Airlock"
+	airlock_type = "/maintenance_security"
+	glass = -1
+
+/obj/structure/door_assembly/door_assembly_mmed
+	base_icon_state = "mmed"
+	base_name = "Maintenance Airlock"
+	airlock_type = "/maintenance_medical"
+	glass = -1
+
+/obj/structure/door_assembly/door_assembly_meng
+	base_icon_state = "meng"
+	base_name = "Maintenance Airlock"
+	airlock_type = "/maintenance_engineering"
+	glass = -1
+
+/obj/structure/door_assembly/door_assembly_mnt
+	base_icon_state = "mnt"
+	base_name = "Maintenance Airlock"
+	airlock_type = "/maintenance_nt"
+	glass = -1
+
 /obj/structure/door_assembly/door_assembly_fre
 	base_icon_state = "fre"
 	base_name = "Freezer Airlock"

@@ -101,6 +101,36 @@
 	icon = 'icons/obj/doors/Doormaint.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_mai
 
+/obj/machinery/door/airlock/maintenance_alt
+	name = "Maintenance Access"
+	icon = 'icons/obj/doors/Doormaint_alt.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_malt
+
+/obj/machinery/door/airlock/maintenance_com
+	name = "Maintenance Access"
+	icon = 'icons/obj/doors/Doormaint_comm.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_mcom
+
+/obj/machinery/door/airlock/maintenance_sec
+	name = "Maintenance Access"
+	icon = 'icons/obj/doors/Doormaint_sec.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_msec
+
+/obj/machinery/door/airlock/maintenance_med
+	name = "Maintenance Access"
+	icon = 'icons/obj/doors/Doormaint_med.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_mmed
+
+/obj/machinery/door/airlock/maintenance_eng
+	name = "Maintenance Access"
+	icon = 'icons/obj/doors/Doormaint_eng.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_meng
+
+/obj/machinery/door/airlock/maintenance_nt
+	name = "Maintenance Access"
+	icon = 'icons/obj/doors/Doormaint_nt.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_mnt
+
 /obj/machinery/door/airlock/external
 	name = "External Airlock"
 	icon = 'icons/obj/doors/Doorext.dmi'
