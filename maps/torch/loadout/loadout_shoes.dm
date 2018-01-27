@@ -8,7 +8,6 @@
 /datum/gear/shoes/whitedress
 	display_name = "dress shoes, white"
 	path = /obj/item/clothing/shoes/dress/white
-	allowed_roles = MILITARY_ROLES
 
 /datum/gear/shoes/athletic
 	display_name = "athletic shoes, colour select"
@@ -56,7 +55,6 @@
 /datum/gear/shoes/dress
 	display_name = "dress shoes"
 	path = /obj/item/clothing/shoes/dress
-	allowed_roles = MILITARY_ROLES
 
 /datum/gear/shoes/flats
 	display_name = "flats, colour select"
@@ -69,7 +67,7 @@
 	path = /obj/item/clothing/shoes/hightops
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
-	
+
 /datum/gear/shoes/sandal
 	display_name = "wooden sandals"
 	path = /obj/item/clothing/shoes/sandal
