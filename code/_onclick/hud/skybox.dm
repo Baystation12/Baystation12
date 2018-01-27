@@ -9,10 +9,9 @@
 	var/image/image
 	var/image/stars
 
-/obj/skybox/Initialize(mob/M)
+/obj/skybox/Initialize()
+	. = ..()
 	SSskybox.skyboxes += src
-	owner = M
-	owner.skybox = src
 	color = SSskybox.BGcolor
 	image = image('icons/turf/skybox.dmi', src, "background_[SSskybox.BGstate]")
 	overlays += image
@@ -23,13 +22,13 @@
 		overlays += stars
 	DoRotate()
 	update()
-	. = ..(null)
 
 /obj/skybox/proc/update()
 	if(!owner || !owner.client)
 		qdel(src)
-	var/turf/T = get_turf(owner.client.eye)
-	screen_loc = "CENTER:[-224-(T&&T.x)],CENTER:[-224-(T&&T.y)]"
+	else
+		var/turf/T = get_turf(owner.client.eye)
+		screen_loc = "CENTER:[-224-(T&&T.x)],CENTER:[-224-(T&&T.y)]"
 
 /obj/skybox/proc/DoRotate()
 	var/matrix/rotation = matrix()
@@ -54,7 +53,8 @@
 
 /mob/Login()
 	if(!skybox)
-		skybox = new(src)
+		skybox = new
+		skybox.owner = src
 	client.screen += skybox
 	..()
 
