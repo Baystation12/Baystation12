@@ -61,8 +61,6 @@
 			return global.SSopen_space;
 		if("SSprocessing")
 			return global.SSprocessing;
-		if("SSskybox")
-			return global.SSskybox;
 		if("SSvines")
 			return global.SSvines;
 		if("Tier1Runes")
@@ -1051,7 +1049,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1114,8 +1112,6 @@
 			global.SSopen_space=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
-		if("SSskybox")
-			global.SSskybox=newval;
 		if("SSvines")
 			global.SSvines=newval;
 		if("Tier1Runes")
@@ -2104,7 +2100,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2136,7 +2132,6 @@
 	"SSobj",
 	"SSopen_space",
 	"SSprocessing",
-	"SSskybox",
 	"SSvines",
 	"Tier1Runes",
 	"Tier2Runes",
@@ -2204,6 +2199,7 @@
 	"ascii_red",
 	"ascii_reset",
 	"ascii_yellow",
+	"ashtray_cache",
 	"asset_cache",
 	"asset_datums",
 	"assigned",
