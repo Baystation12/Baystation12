@@ -15,6 +15,13 @@
 	whitelisted = list(SPECIES_UNATHI)
 	sort_category = "Xenowear"
 
+/datum/gear/suit/knifeharness
+	display_name = "decorated harness"
+	path = /obj/item/clothing/accessory/storage/knifeharness
+	cost = 5
+	whitelisted = list(SPECIES_UNATHI)
+	sort_category = "Xenowear"
+
 //Skrell Chains
 /datum/gear/ears/skrell/chains
 	display_name = "headtail chain selection (Skrell)"
