@@ -23,8 +23,8 @@
 	pushdirection = SOUTH  // south because the space tile is scrolling south
 	var/static/list/phase_shift_by_x
 
-/turf/space/transit/north/New()
-	..()
+/turf/space/transit/north/Initialize()
+	. = ..()
 	if(!phase_shift_by_x)
 		phase_shift_by_x = get_cross_shift_list(15)
 

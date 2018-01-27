@@ -15,6 +15,7 @@ SUBSYSTEM_DEF(skybox)
 	var/star_path = 'icons/turf/skybox.dmi'
 	var/star_state = "stars"
 	var/list/skyboxes = list() //Keep track of all existing skyboxes.
+	var/list/rockboxes = list() //Keep track of all existing rockboxes.
 
 /datum/controller/subsystem/skybox/Initialize(timeofday)
 	..(timeofday)

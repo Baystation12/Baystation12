@@ -66,8 +66,8 @@ What is the naming convention for planes or layers?
 #define SKYBOX_PLANE SPACE_PLANE + 1
 
 #define DUST_PLANE SPACE_PLANE + 2
-	#define DUST_LAYER 1
-	#define DEBRIS_LAYER 2
+	#define DEBRIS_LAYER 1
+	#define DUST_LAYER 2
 
 //Reserve planes for openspace
 #define OPENSPACE_PLANE_START -462

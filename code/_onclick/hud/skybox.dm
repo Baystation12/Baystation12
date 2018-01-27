@@ -11,6 +11,9 @@
 
 /obj/skybox/Initialize()
 	. = ..()
+	var/mob/M = loc
+	owner = M
+	loc = null
 	SSskybox.skyboxes += src
 	color = SSskybox.BGcolor
 	image = image('icons/turf/skybox.dmi', src, "background_[SSskybox.BGstate]")
@@ -24,7 +27,7 @@
 	update()
 
 /obj/skybox/proc/update()
-	if(!owner || !owner.client)
+	if(isnull(owner) || isnull(owner.client))
 		qdel(src)
 	else
 		var/turf/T = get_turf(owner.client.eye)
@@ -33,9 +36,11 @@
 /obj/skybox/proc/DoRotate()
 	var/matrix/rotation = matrix()
 	rotation.TurnTo(SSskybox.BGrot)
+	appearance = rotation
 
 /obj/skybox/Destroy()
 	owner = null
+	SSskybox.skyboxes -= src
 	return ..()
 
 /mob
@@ -53,7 +58,7 @@
 
 /mob/Login()
 	if(!skybox)
-		skybox = new
+		skybox = new(src)
 		skybox.owner = src
 	client.screen += skybox
 	..()
