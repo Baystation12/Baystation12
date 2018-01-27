@@ -14,7 +14,7 @@
 		/obj/item/clothing/under/rank/hydroponics,
 		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/device/radio/headset/headset_service,
-		/obj/item/clothing/head/greenbandana,
+		/obj/item/clothing/mask/bandana/botany,
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
 		/obj/item/weapon/wirecutters/clippers,
