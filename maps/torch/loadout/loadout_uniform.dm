@@ -41,33 +41,33 @@
 /datum/gear/uniform/suit/New()
 	..()
 	var/suits = list()
-	suits["amish suit"] = /obj/item/clothing/under/sl_suit
-	suits["black suit"] = /obj/item/clothing/under/suit_jacket
-	suits["blue suit"] = /obj/item/clothing/under/lawyer/blue
-	suits["burgundy suit"] = /obj/item/clothing/under/suit_jacket/burgundy
-	suits["charcoal suit"] = /obj/item/clothing/under/suit_jacket/charcoal
-	suits["checkered suit"] = /obj/item/clothing/under/suit_jacket/checkered
-	suits["executive suit"] = /obj/item/clothing/under/suit_jacket/really_black
-	suits["female executive suit"] = /obj/item/clothing/under/suit_jacket/female
-	suits["gentleman suit"] = /obj/item/clothing/under/gentlesuit
-	suits["navy suit"] = /obj/item/clothing/under/suit_jacket/navy
-	suits["old man suit"] = /obj/item/clothing/under/lawyer/oldman
-	suits["purple suit"] = /obj/item/clothing/under/lawyer/purpsuit
-	suits["red suit"] = /obj/item/clothing/under/suit_jacket/red
-	suits["red lawyer suit"] = /obj/item/clothing/under/lawyer/red
-	suits["shiny black suit"] = /obj/item/clothing/under/lawyer/black
-	suits["tan suit"] = /obj/item/clothing/under/suit_jacket/tan
-	suits["white suit"] = /obj/item/clothing/under/scratch
-	suits["white-blue suit"] = /obj/item/clothing/under/lawyer/bluesuit
-	suits["formal outfit"] = /obj/item/clothing/under/rank/internalaffairs/plain
-	suits["blue blazer"] = /obj/item/clothing/under/blazer
-	suits["black jumpskirt"] = /obj/item/clothing/under/blackjumpskirt
-	suits["kilt"] = /obj/item/clothing/under/kilt
-	suits["human resources dress"] = /obj/item/clothing/under/dress/dress_hr
-	suits["detective's suit"] = /obj/item/clothing/under/det
-	suits["black detective's suit"] = /obj/item/clothing/under/det/black
-	suits["grey detective's suit"] = /obj/item/clothing/under/det/grey
-	gear_tweaks += new/datum/gear_tweak/path(suits)
+	suits += /obj/item/clothing/under/sl_suit
+	suits += /obj/item/clothing/under/suit_jacket
+	suits += /obj/item/clothing/under/lawyer/blue
+	suits += /obj/item/clothing/under/suit_jacket/burgundy
+	suits += /obj/item/clothing/under/suit_jacket/charcoal
+	suits += /obj/item/clothing/under/suit_jacket/checkered
+	suits += /obj/item/clothing/under/suit_jacket/really_black
+	suits += /obj/item/clothing/under/suit_jacket/female
+	suits += /obj/item/clothing/under/gentlesuit
+	suits += /obj/item/clothing/under/suit_jacket/navy
+	suits += /obj/item/clothing/under/lawyer/oldman
+	suits += /obj/item/clothing/under/lawyer/purpsuit
+	suits += /obj/item/clothing/under/suit_jacket/red
+	suits += /obj/item/clothing/under/lawyer/red
+	suits += /obj/item/clothing/under/lawyer/black
+	suits += /obj/item/clothing/under/suit_jacket/tan
+	suits += /obj/item/clothing/under/scratch
+	suits += /obj/item/clothing/under/lawyer/bluesuit
+	suits += /obj/item/clothing/under/rank/internalaffairs/plain
+	suits += /obj/item/clothing/under/blazer
+	suits += /obj/item/clothing/under/blackjumpskirt
+	suits += /obj/item/clothing/under/kilt
+	suits += /obj/item/clothing/under/dress/dress_hr
+	suits += /obj/item/clothing/under/det
+	suits += /obj/item/clothing/under/det/black
+	suits += /obj/item/clothing/under/det/grey
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(suits)
 
 /datum/gear/uniform/scrubs
 	display_name = "standard medical scrubs"
@@ -87,14 +87,14 @@
 /datum/gear/uniform/dress/New()
 	..()
 	var/dresses = list()
-	dresses["white sundress"] = /obj/item/clothing/under/sundress_white
-	dresses["flame dress"] = /obj/item/clothing/under/dress/dress_fire
-	dresses["green dress"] = /obj/item/clothing/under/dress/dress_green
-	dresses["orange dress"] = /obj/item/clothing/under/dress/dress_orange
-	dresses["pink dress"] = /obj/item/clothing/under/dress/dress_pink
-	dresses["purple dress"] = /obj/item/clothing/under/dress/dress_purple
-	dresses["sundress"] = /obj/item/clothing/under/sundress
-	gear_tweaks += new/datum/gear_tweak/path(dresses)
+	dresses += /obj/item/clothing/under/sundress_white
+	dresses += /obj/item/clothing/under/dress/dress_fire
+	dresses += /obj/item/clothing/under/dress/dress_green
+	dresses += /obj/item/clothing/under/dress/dress_orange
+	dresses += /obj/item/clothing/under/dress/dress_pink
+	dresses += /obj/item/clothing/under/dress/dress_purple
+	dresses += /obj/item/clothing/under/sundress
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(dresses)
 
 /datum/gear/uniform/cheongsam
 	display_name = "cheongsam, colour select"
@@ -183,16 +183,16 @@
 /datum/gear/uniform/corporate/New()
 	..()
 	var/corps = list()
-	corps["major bill's shipping uniform"] = /obj/item/clothing/under/mbill
-	corps["SAARE uniform"] = /obj/item/clothing/under/saare
-	corps["aether atmospherics uniform"] = /obj/item/clothing/under/aether
-	corps["hephaestus uniform"] = /obj/item/clothing/under/hephaestus
-	corps["PCRC uniform"] = /obj/item/clothing/under/pcrc
-	corps["ward-takahashi uniform"] = /obj/item/clothing/under/wardt
-	corps["grayson uniform"] = /obj/item/clothing/under/grayson
-	corps["focal point uniform"] = /obj/item/clothing/under/focal
-	corps["nanotrasen"] = /obj/item/clothing/under/rank/ntwork
-	gear_tweaks += new/datum/gear_tweak/path(corps)
+	corps += /obj/item/clothing/under/mbill
+	corps += /obj/item/clothing/under/saare
+	corps += /obj/item/clothing/under/aether
+	corps += /obj/item/clothing/under/hephaestus
+	corps += /obj/item/clothing/under/pcrc
+	corps += /obj/item/clothing/under/wardt
+	corps += /obj/item/clothing/under/grayson
+	corps += /obj/item/clothing/under/focal
+	corps += /obj/item/clothing/under/rank/ntwork
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(corps)
 
 /datum/gear/uniform/sterile
 	display_name = "sterile jumpsuit"
