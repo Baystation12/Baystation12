@@ -331,7 +331,7 @@
 	display_name = "scarf"
 	path = /obj/item/clothing/accessory/scarf
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = SEMIFORMAL_ROLES
+	allowed_roles = SEMIANDFORMAL_ROLES
 
 /datum/gear/accessory/solawardmajor
 	display_name = "SolGov major award selection"
