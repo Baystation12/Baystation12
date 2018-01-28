@@ -470,3 +470,9 @@
 	id = access_merchant
 	desc = "Merchant"
 	access_type = ACCESS_TYPE_NONE
+
+/var/const/access_cameras = 202
+/datum/access/cameras
+	id = access_cameras
+	desc = "Cameras"
+	access_type = ACCESS_TYPE_STATION

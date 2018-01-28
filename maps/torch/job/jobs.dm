@@ -91,7 +91,7 @@
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_explorer, access_pathfinder)
+			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_explorer, access_pathfinder, access_cameras)
 	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_heads,
@@ -216,7 +216,7 @@
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_gun, access_emergency_armory)
+			            access_solgov_crew, access_gun, access_emergency_armory, access_cameras)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -241,7 +241,7 @@
 	access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research,
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard,
-						access_hangar, access_petrov, access_petrov_helm)
+						access_hangar, access_petrov, access_petrov_helm, access_cameras)
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -259,7 +259,7 @@
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 
 	access = list(access_representative, access_security,access_medical, access_engine,
-			            access_heads, access_cargo, access_solgov_crew, access_hangar)
+			            access_heads, access_cargo, access_solgov_crew, access_hangar, access_cameras)
 
 
 /datum/job/sea
@@ -288,7 +288,7 @@
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads, access_all_personal_lockers, access_janitor,
 			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_guppy_helm,
-			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory)
+			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory, access_cameras)
 
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor)
 
@@ -318,7 +318,7 @@
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
 			            access_heads, access_janitor, access_kitchen, access_cargo, access_RC_announce, access_keycard_auth,
 			            access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
-			            access_eva, access_hangar, access_cent_creed, access_explorer)
+			            access_eva, access_hangar, access_cent_creed, access_explorer, access_cameras)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/suit_sensors,
@@ -529,7 +529,7 @@
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew, access_gun)
+			            access_eva, access_sec_doors, access_solgov_crew, access_gun, access_cameras)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
@@ -561,7 +561,7 @@
 
 	access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
-			            access_sec_doors, access_solgov_crew, access_morgue)
+			            access_sec_doors, access_solgov_crew, access_morgue, access_cameras)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
@@ -591,7 +591,7 @@
 
 	access = list(access_security, access_brig, access_maint_tunnels,
 						access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew)
+			            access_eva, access_sec_doors, access_solgov_crew, access_cameras)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
