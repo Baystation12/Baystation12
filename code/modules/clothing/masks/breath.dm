@@ -21,7 +21,8 @@
 	item_state = "medical"
 	permeability_coefficient = 0.01
 	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi'
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
 		)
 
 /obj/item/clothing/mask/breath/anesthetic
@@ -30,6 +31,9 @@
 	icon_state = "medical"
 	item_state = "medical"
 	permeability_coefficient = 0.01
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/breath/emergency
 	desc = "A close-fitting  mask that is used by the wallmounted emergency oxygen pump."
