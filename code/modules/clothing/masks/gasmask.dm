@@ -81,8 +81,9 @@
 	name = "clown wig and mask"
 	desc = "A true prankster's facial attire. A clown is incomplete without their wig and mask."
 	icon_state = "clown"
-	item_state = "clown_hat'
-	sprite_sheets = list( SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+	item_state = "clown_hat"
+	sprite_sheets = list(
+	SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
 	)
 	
 
