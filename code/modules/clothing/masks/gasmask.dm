@@ -38,6 +38,7 @@
 	armor = list(melee = 10, bullet = 10, laser = 10, energy = 0, bomb = 0, bio = 55, rad = 0)
 	sprite_sheets = list(
 		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
 		)
 
 //Plague Dr suit can be found in clothing/suits/bio.dm
@@ -48,6 +49,9 @@
 	item_state = "gas_mask"
 	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 90, rad = 0)
 	body_parts_covered = HEAD|FACE|EYES
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/gas/swat
 	name = "\improper SWAT mask"
@@ -62,6 +66,9 @@
 	desc = "Clearly not designed for a human face."
 	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask.
 	species_restricted = list(SPECIES_VOX)
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/gas/syndicate
 	name = "tactical mask"
@@ -74,7 +81,11 @@
 	name = "clown wig and mask"
 	desc = "A true prankster's facial attire. A clown is incomplete without their wig and mask."
 	icon_state = "clown"
-	item_state = "clown_hat"
+	item_state = "clown_hat'
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
+	
 
 /obj/item/clothing/mask/gas/sexyclown
 	name = "sexy-clown wig and mask"
@@ -117,6 +128,9 @@
 	desc = "Twoooo!"
 	icon_state = "owl"
 	body_parts_covered = HEAD|FACE|EYES
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/gas/vox
 	name = "vox breathing mask"
@@ -126,3 +140,6 @@
 	body_parts_covered = 0
 	species_restricted = list(SPECIES_VOX)
 	filtered_gases = list("phoron", "sleeping_agent", "oxygen")
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
