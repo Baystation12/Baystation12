@@ -22,4 +22,7 @@ GLOBAL_DATUM_INIT(name_set_event, /decl/observ/name_set, new)
 	var/old_name = name
 	if(old_name != new_name)
 		name = new_name
+		if(has_extension(src, /datum/extension/labels))
+			var/datum/extension/labels/L = get_extension(src, /datum/extension/labels)
+			name = L.AppendLabelsToName(name)
 		GLOB.name_set_event.raise_event(src, old_name, new_name)
