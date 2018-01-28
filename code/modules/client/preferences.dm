@@ -253,7 +253,7 @@ datum/preferences
 				O.robotize()
 		else //normal organ
 			O.force_icon = null
-			O.name = initial(O.name)
+			O.SetName(initial(O.name))
 			O.desc = initial(O.desc)
 	//For species that don't care about your silly prefs
 	character.species.handle_limbs_setup(character)

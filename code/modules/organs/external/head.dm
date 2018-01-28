@@ -41,7 +41,7 @@
 
 /obj/item/organ/external/head/removed()
 	if(owner)
-		name = "[owner.real_name]'s head"
+		SetName("[owner.real_name]'s head")
 		owner.drop_from_inventory(owner.glasses)
 		owner.drop_from_inventory(owner.head)
 		owner.drop_from_inventory(owner.l_ear)

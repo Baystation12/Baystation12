@@ -7,7 +7,7 @@
 		else
 			name = "[seed.seed_name]"
 	else
-		name = initial(name)
+		SetName(initial(name))
 
 	if(labelled)
 		name += " ([labelled])"

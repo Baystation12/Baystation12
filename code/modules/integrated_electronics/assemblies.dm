@@ -171,7 +171,7 @@
 	var/input = sanitizeSafe(input("What do you want to name this?", "Rename", src.name) as null|text, MAX_NAME_LEN)
 	if(src && input && input != name && CanInteract(M, GLOB.physical_state))
 		to_chat(M, "<span class='notice'>The machine now has a label reading '[input]'.</span>")
-		name = input
+		SetName(input)
 
 /obj/item/device/electronic_assembly/update_icon()
 	if(applied_shell)

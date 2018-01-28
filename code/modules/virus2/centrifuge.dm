@@ -163,7 +163,7 @@
 
 /obj/machinery/computer/centrifuge/proc/print(var/mob/user)
 	var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(loc)
-	P.name = "paper - Pathology Report"
+	P.SetName("paper - Pathology Report")
 	P.info = {"
 		[virology_letterhead("Pathology Report")]
 		<large><u>Sample:</u></large> [sample.name]<br>

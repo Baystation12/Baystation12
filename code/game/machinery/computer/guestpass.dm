@@ -158,7 +158,7 @@
 //				to_chat(user, "Printing the log, standby...")
 				//sleep(50)
 				var/obj/item/weapon/paper/P = new/obj/item/weapon/paper( loc )
-				P.name = "activity log"
+				P.SetName("activity log")
 				P.info = dat
 				. = TOPIC_REFRESH
 
@@ -179,7 +179,7 @@
 					pass.registered_name = giv_name
 					pass.expiration_time = world.time + duration MINUTES
 					pass.reason = reason
-					pass.name = "guest pass #[number]"
+					pass.SetName("guest pass #[number]")
 					pass.assignment = "Guest"
 					playsound(src.loc, 'sound/machines/ping.ogg', 25, 0)
 					. = TOPIC_REFRESH

@@ -23,7 +23,7 @@
 
 	if(species)
 		real_name = species.get_random_name(gender)
-		name = real_name
+		SetName(real_name)
 		if(mind)
 			mind.name = real_name
 

@@ -18,7 +18,7 @@
 		if(get_id_name("Unknown") != GetVoice())
 			alt_name = "(as [get_id_name("Unknown")])"
 		else
-			name = get_id_name("Unknown")
+			SetName(get_id_name("Unknown"))
 
 	whisper_say(message, alt_name = alt_name)
 

@@ -95,7 +95,7 @@
 
 	if (reagents.reagent_list.len > 0)
 		var/datum/reagent/R = reagents.get_master_reagent()
-		name = "[base_name] of [R.glass_name ? R.glass_name : "something"]"
+		SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
 		desc = R.glass_desc ? R.glass_desc : initial(desc)
 
 		var/list/under_liquid = list()
@@ -128,7 +128,7 @@
 		for(var/k in over_liquid)
 			underlays += image(DRINK_ICON_FILE, src, k, -1)
 	else
-		name = initial(name)
+		SetName(initial(name))
 		desc = initial(desc)
 
 	var/side = "left"

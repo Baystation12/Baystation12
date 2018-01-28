@@ -163,7 +163,7 @@
 			if(S.dry || !I.get_specific_product(get_turf(src), S)) continue
 			if(S.dried_type == S.type)
 				S.dry = 1
-				S.name = "dried [S.name]"
+				S.SetName("dried [S.name]")
 				S.color = "#a38463"
 				stock_item(S)
 			else

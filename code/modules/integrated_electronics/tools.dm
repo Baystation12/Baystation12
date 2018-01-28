@@ -248,7 +248,7 @@
 
 /obj/item/weapon/storage/bag/circuits/debug/Initialize()
 	. = ..()
-	name = "[name] - not intended for general use"
+	SetName("[name] - not intended for general use")
 	desc = "[desc] - not intended for general use"
 	for(var/subtype in subtypesof(/obj/item/integrated_circuit))
 		var/obj/item/integrated_circuit/ic = subtype

@@ -812,5 +812,5 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	req_access = list(access_robotics)
 
 /obj/machinery/computer/rdconsole/core
-	name = "сore fabricator console"
+	name = "?ore fabricator console"
 	id = 1

@@ -532,13 +532,13 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		color = possible_cable_coil_colours[pick(possible_cable_coil_colours)]
 	if(amount == 1)
 		icon_state = "coil1"
-		name = "cable piece"
+		SetName("cable piece")
 	else if(amount == 2)
 		icon_state = "coil2"
-		name = "cable piece"
+		SetName("cable piece")
 	else
-		icon_state = "coil"
-		name = "cable coil"
+		icon_state = initial(icon_state)
+		SetName(initial(name))
 
 /obj/item/stack/cable_coil/proc/set_cable_color(var/selected_color, var/user)
 	if(!selected_color)

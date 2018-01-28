@@ -122,7 +122,7 @@
 
 	alien_number++ //Keep track of how many aliens we've had so far.
 	H.real_name = "alien [caste_name] ([alien_number])"
-	H.name = H.real_name
+	H.SetName(H.real_name)
 
 	..()
 
@@ -317,10 +317,10 @@
 	// Make sure only one official queen exists at any point.
 	if(!alien_queen_exists(1,H))
 		H.real_name = "alien queen ([alien_number])"
-		H.name = H.real_name
+		H.SetName(H.real_name)
 	else
 		H.real_name = "alien princess ([alien_number])"
-		H.name = H.real_name
+		H.SetName(H.real_name)
 
 /datum/hud_data/alien
 

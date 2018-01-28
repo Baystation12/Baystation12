@@ -46,11 +46,11 @@
 	singular_name = material.sheet_singular_name
 
 	if(amount>1)
-		name = "[material.use_name] [material.sheet_plural_name]"
+		SetName("[material.use_name] [material.sheet_plural_name]")
 		desc = "A stack of [material.use_name] [material.sheet_plural_name]."
 		gender = PLURAL
 	else
-		name = "[material.use_name] [material.sheet_singular_name]"
+		SetName("[material.use_name] [material.sheet_singular_name]")
 		desc = "A [material.sheet_singular_name] of [material.use_name]."
 		gender = NEUTER
 

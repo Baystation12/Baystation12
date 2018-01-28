@@ -511,7 +511,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		new /obj/effect/decal/cleanable/ash(location)
 		smoketime = 0
 		reagents.clear_reagents()
-		name = "empty [initial(name)]"
+		SetName("empty [initial(name)]")
 
 /obj/item/clothing/mask/smokable/pipe/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/melee/energy/sword))
@@ -530,7 +530,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		smoketime = 1000
 		if(G.reagents)
 			G.reagents.trans_to_obj(src, G.reagents.total_volume)
-		name = "[G.name]-packed [initial(name)]"
+		SetName("[G.name]-packed [initial(name)]")
 		qdel(G)
 
 	else if(istype(W, /obj/item/weapon/flame/lighter))

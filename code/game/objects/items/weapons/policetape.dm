@@ -290,7 +290,7 @@ var/list/tape_roll_applications = list()
 	if(!crumpled)
 		crumpled = 1
 		update_icon()
-		name = "crumpled [name]"
+		SetName("crumpled [name]")
 
 /obj/item/tape/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(!lifted && ismob(mover))
