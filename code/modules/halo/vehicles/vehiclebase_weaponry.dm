@@ -28,6 +28,8 @@
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
+	if(!linked_vehicle.controller.gunner_turret_check(user,target))
+		return
 	for(var/i = 0,i<burst,i++)
 		linked_vehicle.controller.gunner_turret_fire(user,target)
 		if(i == 0) //First shot: Don't delay.

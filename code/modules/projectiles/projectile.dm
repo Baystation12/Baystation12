@@ -229,6 +229,8 @@
 	if((bumped && !forced) || (A in permutated))
 		return 0
 
+	if(A.elevation != src.elevation) return 0
+
 	var/passthrough = 0 //if the projectile should continue flying
 	var/distance = get_dist(starting,loc)
 
@@ -314,7 +316,12 @@
 
 		before_move()
 		Move(location.return_turf())
-		if(first_step != 1)
+		//Deals with moving a projectile up / down to hit targets on the ground or in air
+		if(elevation != original.elevation)
+			var/elevation_mod = original.elevation - elevation
+			change_elevation(elevation_mod)
+
+		if(first_step != 1 && src.elevation <= BASE_ELEVATION + 1)
 			spawn()
 				do_supression_aoe(loc)
 
