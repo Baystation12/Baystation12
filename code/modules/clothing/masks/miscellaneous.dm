@@ -47,7 +47,7 @@
 	pull_mask = 1
 	sprite_sheets = list(
 		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi',
-		SPECIES_VOX = 'icons/mob/species/vox/mask.dmi'
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
 		)
 
 /obj/item/clothing/mask/fakemoustache
