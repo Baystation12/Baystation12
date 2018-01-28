@@ -67,8 +67,8 @@
 	desc = "A suit that protects against low pressure environments."
 	icon_state = "space"
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand_spacesuits.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand_spacesuits.dmi',
+		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_spacesuits.dmi',
+		slot_r_hand_str = 'icons/mob/onmob/items/righthand_spacesuits.dmi',
 		)
 	item_state_slots = list(
 		slot_l_hand_str = "s_suit",

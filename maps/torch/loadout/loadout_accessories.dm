@@ -124,7 +124,11 @@
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
+	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,
+						/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
+						/datum/job/roboticist, /datum/job/engineer_contractor,
+						/datum/job/psychiatrist, /datum/job/doctor_contractor, /datum/job/chemist,
+						/datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
 
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
@@ -331,7 +335,7 @@
 	display_name = "scarf"
 	path = /obj/item/clothing/accessory/scarf
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = SEMIFORMAL_ROLES
+	allowed_roles = SEMIANDFORMAL_ROLES
 
 /datum/gear/accessory/solawardmajor
 	display_name = "SolGov major award selection"
@@ -408,4 +412,4 @@
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/speciality/pilot
-	allowed_roles = list(/datum/job/bridgeofficer)
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/bridgeofficer, /datum/job/pathfinder)

@@ -102,6 +102,16 @@
 		return
 	return ..()
 
+/obj/item/weapon/material/kitchen/utensil/knife/unathiknife
+	name = "dueling knife"
+	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "unathiknife"
+	item_state = "knife"
+	attack_verb = list("ripped", "torn", "cut")
+	applies_material_colour = 0
+	unbreakable = 1
+
 /obj/item/weapon/material/kitchen/utensil/knife/plastic
 	default_material = "plastic"
 

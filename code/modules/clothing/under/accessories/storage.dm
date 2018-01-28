@@ -112,8 +112,8 @@
 		/obj/item/weapon/material/butterfly,
 	)
 
-	new /obj/item/weapon/material/hatchet/unathiknife(hold)
-	new /obj/item/weapon/material/hatchet/unathiknife(hold)
+	new /obj/item/weapon/material/kitchen/utensil/knife/unathiknife(hold)
+	new /obj/item/weapon/material/kitchen/utensil/knife/unathiknife(hold)
 
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"

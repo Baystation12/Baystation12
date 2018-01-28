@@ -279,7 +279,7 @@
 /mob/living/carbon/slime/attackby(var/obj/item/W, var/mob/user)
 	if(W.force > 0)
 		attacked += 10
-		if(prob(25))
+		if(!(stat) && prob(25)) //Only run this check if we're alive or otherwise motile, otherwise surgery will be agonizing for xenobiologists.
 			to_chat(user, "<span class='danger'>\The [W] passes right through \the [src]!</span>")
 			return
 
