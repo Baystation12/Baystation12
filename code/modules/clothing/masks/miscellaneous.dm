@@ -7,6 +7,9 @@
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 	voicechange = 1
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/muzzle/tape
 	name = "length of tape"
@@ -43,7 +46,8 @@
 	down_icon_state = "steriledown"
 	pull_mask = 1
 	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi'
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/mask.dmi'
 		)
 
 /obj/item/clothing/mask/fakemoustache
@@ -142,6 +146,9 @@
 	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5)
 	var/active = FALSE
 	var/mob/observer/eye/cameranet/eye
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/ai/New()
 	eye = new(src)
