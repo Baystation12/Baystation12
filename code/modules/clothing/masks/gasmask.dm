@@ -81,12 +81,11 @@
 	name = "clown wig and mask"
 	desc = "A true prankster's facial attire. A clown is incomplete without their wig and mask."
 	icon_state = "clown"
-	item_state = "clown_hat"
+	item_state = "clown_hat" 
 	sprite_sheets = list(
-	SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
-	)
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 	
-
 /obj/item/clothing/mask/gas/sexyclown
 	name = "sexy-clown wig and mask"
 	desc = "A feminine clown mask for the dabbling crossdressers or female entertainers."
@@ -127,10 +126,10 @@
 	name = "owl mask"
 	desc = "Twoooo!"
 	icon_state = "owl"
-	body_parts_covered = HEAD|FACE|EYES 
+	body_parts_covered = HEAD|FACE|EYES 	
 	sprite_sheets = list(
-	SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
-	)
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/gas/vox
 	name = "vox breathing mask"
@@ -140,6 +139,6 @@
 	body_parts_covered = 0
 	species_restricted = list(SPECIES_VOX)
 	filtered_gases = list("phoron", "sleeping_agent", "oxygen") 
-	sprite_sheets = list( 
-	SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
-	)
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
