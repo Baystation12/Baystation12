@@ -59,7 +59,10 @@
 	icon_state = "swat"
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE|EYES
-	armor = list(melee = 15, bullet = 15, laser = 15, energy = 0, bomb = 0, bio = 75, rad = 0)
+	armor = list(melee = 15, bullet = 15, laser = 15, energy = 0, bomb = 0, bio = 75, rad = 0) 
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/gas/swat/vox
 	name = "alien mask"
@@ -75,7 +78,10 @@
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
 	siemens_coefficient = 0.7
-	armor = list(melee = 15, bullet = 15, laser = 15, energy = 0, bomb = 0, bio = 75, rad = 0)
+	armor = list(melee = 15, bullet = 15, laser = 15, energy = 0, bomb = 0, bio = 75, rad = 0) 
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"
@@ -115,12 +121,18 @@
 	name = "Death Commando Mask"
 	icon_state = "death_commando_mask"
 	item_state = "death_commando_mask"
-	siemens_coefficient = 0.2
+	siemens_coefficient = 0.2 
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/gas/cyborg
 	name = "cyborg visor"
 	desc = "Beep boop!"
-	icon_state = "death"
+	icon_state = "death" 
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi'
+		)
 
 /obj/item/clothing/mask/gas/owl_mask
 	name = "owl mask"
