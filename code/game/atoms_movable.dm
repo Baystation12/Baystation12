@@ -6,7 +6,6 @@
 
 	var/last_move = null
 	var/anchored = 0
-	// var/elevation = 2    - not used anywhere
 	var/move_speed = 10
 	var/l_move_time = 1
 	var/m_flag = 1
@@ -96,6 +95,7 @@
 	if(src.throwing)
 		for(var/atom/A in get_turf(src))
 			if(A == src) continue
+			if(A.elevation != src.elevation) continue
 			if(istype(A,/mob/living))
 				if(A:lying) continue
 				src.throw_impact(A,speed)

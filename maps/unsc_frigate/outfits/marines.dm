@@ -6,7 +6,7 @@
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
-	suit = /obj/item/clothing/suit/armor/marine
+	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 
 	flags = 0
@@ -18,7 +18,7 @@
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
-	suit = /obj/item/clothing/suit/armor/marine
+	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 
 	flags = 0
@@ -30,7 +30,7 @@
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
-	suit = /obj/item/clothing/suit/armor/marine
+	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/combat
 
@@ -43,7 +43,7 @@
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
-	suit = /obj/item/clothing/suit/armor/marine
+	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/combat
 

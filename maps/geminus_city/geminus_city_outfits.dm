@@ -3,7 +3,7 @@
 	name = "Marine"
 
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
-	suit = /obj/item/clothing/suit/armor/marine
+	suit = /obj/item/clothing/suit/storage/marine
 	head = /obj/item/clothing/head/helmet/marine
 	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
