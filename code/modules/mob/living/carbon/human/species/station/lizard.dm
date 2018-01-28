@@ -142,6 +142,7 @@
 				H.nutrition -= 50
 				var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
 				blood_splatter(H,B,1)
+				O.set_dna(H.dna)
 				H.update_body()
 				return
 			else
