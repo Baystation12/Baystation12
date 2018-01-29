@@ -280,6 +280,9 @@ department tags
 	desc = "Insignia denoting assignment to the engineering department. These fit Expeditionary Corps uniforms."
 	color = "#ff7f00"
 
+/obj/item/clothing/accessory/solgov/department/engineering/service
+	icon_state = "dept_exped_service"
+
 /obj/item/clothing/accessory/solgov/department/engineering/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the engineering department. These fit Fleet uniforms."
@@ -294,6 +297,9 @@ department tags
 	name = "security insignia"
 	desc = "Insignia denoting assignment to the security department. These fit Expeditionary Corps uniforms."
 	color = "#bf0000"
+
+/obj/item/clothing/accessory/solgov/department/security/service
+	icon_state = "dept_exped_service"
 
 /obj/item/clothing/accessory/solgov/department/security/fleet
 	icon_state = "dept_fleet"
@@ -310,6 +316,9 @@ department tags
 	desc = "Insignia denoting assignment to the medical department. These fit Expeditionary Corps uniforms."
 	color = "#4c9ce4"
 
+/obj/item/clothing/accessory/solgov/department/medical/service
+	icon_state = "dept_exped_service"
+
 /obj/item/clothing/accessory/solgov/department/medical/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the medical department. These fit Fleet uniforms."
@@ -324,6 +333,9 @@ department tags
 	name = "supply insignia"
 	desc = "Insignia denoting assignment to the supply department. These fit Expeditionary Corps uniforms."
 	color = "#bb9042"
+
+/obj/item/clothing/accessory/solgov/department/supply/service
+	icon_state = "dept_exped_service"
 
 /obj/item/clothing/accessory/solgov/department/supply/fleet
 	icon_state = "dept_fleet"
@@ -340,6 +352,9 @@ department tags
 	desc = "Insignia denoting assignment to the service department. These fit Expeditionary Corps uniforms."
 	color = "#6eaa2c"
 
+/obj/item/clothing/accessory/solgov/department/service/service
+	icon_state = "dept_exped_service"
+
 /obj/item/clothing/accessory/solgov/department/service/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the service department. These fit Fleet uniforms."
@@ -354,6 +369,9 @@ department tags
 	name = "exploration insignia"
 	desc = "Insignia denoting assignment to the exploration department. These fit Expeditionary Corps uniforms."
 	color = "#68099e"
+
+/obj/item/clothing/accessory/solgov/department/exploration/service
+	icon_state = "dept_exped_service"
 
 /obj/item/clothing/accessory/solgov/department/exploration/fleet
 	icon_state = "dept_fleet"
