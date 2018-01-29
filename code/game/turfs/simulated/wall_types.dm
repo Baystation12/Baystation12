@@ -6,8 +6,19 @@
 	icon_state = "rgeneric"
 /turf/simulated/wall/ocp_wall/New(var/newloc)
 	..(newloc, "osmium-carbide plasteel", "osmium-carbide plasteel")
+/turf/simulated/wall/strong
+	name = "wall"
+	desc = "A huge chunk of metal used to seperate rooms."
+	icon_state = "generic"
+/turf/simulated/wall/strong/New(var/newloc)
+	..(newloc, "plasteel")
 
-
+/turf/simulated/wall/stronger
+	name = "wall"
+	desc = "A huge chunk of metal used to seperate rooms."
+	icon_state = "generic"
+/turf/simulated/wall/stronger/New(var/newloc)
+	..(newloc, "plasteel","titanium")
 
 
 /turf/simulated/wall/cult
@@ -75,3 +86,4 @@
 	if(prob(explosion_resistance))
 		return
 	..()
+
