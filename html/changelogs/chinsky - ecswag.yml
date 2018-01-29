@@ -1,6 +1,0 @@
-author: Chinsky
-
-delete-after: True
-
-changes: 
-  - tweak: "Shuffled around EC uniforms. SERVICE uniform is now a thing of its own, NOT a mix of utility+service. DRESS uniform is now service uniform + dress jacket + gloves."
