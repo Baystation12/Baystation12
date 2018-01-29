@@ -265,6 +265,9 @@ department tags
 	desc = "Insignia denoting assignment to the command department. These fit Expeditionary Corps uniforms."
 	color = "#e5ea4f"
 
+/obj/item/clothing/accessory/solgov/department/command/service
+	icon_state = "dept_exped_service"
+
 /obj/item/clothing/accessory/solgov/department/command/fleet
 	icon_state = "dept_fleet"
 	desc = "Insignia denoting assignment to the command department. These fit Fleet uniforms."
