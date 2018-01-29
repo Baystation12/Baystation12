@@ -57,6 +57,7 @@
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
 	icon_state = "ecservice_officer"
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/service)
 
 
 /obj/item/clothing/suit/storage/solgov/service/marine
