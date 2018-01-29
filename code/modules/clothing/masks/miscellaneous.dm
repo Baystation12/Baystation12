@@ -270,6 +270,7 @@
 	icon_state = "bandblack"
 	item_state = "bandblack"
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
+	w_class = ITEM_SIZE_SMALL
 
 /obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
 	switch(slot)
