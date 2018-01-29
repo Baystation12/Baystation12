@@ -28,7 +28,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 */
 
 /obj/machinery/computer/rdconsole
-	name = "R&D control console"
+	name = "fabrication control console"
+	desc = "Console controlling the various fabrication devices. Uses self-learning matrix to hold and optimize blueprints. Prone to corrupting said matrix, so back up often."
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
@@ -410,9 +411,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		. = TOPIC_HANDLED
 		spawn(20)
 			var/obj/item/weapon/paper/PR = new/obj/item/weapon/paper
-			PR.name = "list of researched technologies"
-			PR.info = "<center><b>[station_name()] Science Laboratories</b>"
-			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Research Progress Report</h2>"
+			PR.name = "fabricator report"
+			PR.info = "<center><b>[station_name()] Fabricator Laboratory</b>"
+			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Fabricator Status Report</h2>"
 			PR.info += "<i>report prepared at [stationtime2text()] local time</i></center><br>"
 			if(text2num(href_list["print"]) == 2)
 				PR.info += GetResearchListInfo()
@@ -493,15 +494,15 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Imprinting Circuit. Please Wait..."
 
 		if(0.5)
-			dat += "Printing Research Information. Please Wait..."
+			dat += "Printing. Please Wait..."
 
 		if(1.0) //Main Menu
 			dat += "Main Menu:<BR><BR>"
 			dat += "Loaded disk: "
 			dat += (t_disk || d_disk) ? (t_disk ? "technology storage disk" : "design storage disk") : "none"
 			dat += "<HR><UL>"
-			dat += "<LI><A href='?src=\ref[src];menu=1.1'>Current Research Levels</A>"
-			dat += "<LI><A href='?src=\ref[src];menu=5.0'>View Researched Technologies</A>"
+			dat += "<LI><A href='?src=\ref[src];menu=1.1'>Current Fabricator Learning Matrix Status</A>"
+			dat += "<LI><A href='?src=\ref[src];menu=5.0'>View Available Designs</A>"
 			if(t_disk)
 				dat += "<LI><A href='?src=\ref[src];menu=1.2'>Disk Operations</A>"
 			else if(d_disk)
@@ -520,7 +521,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(1.1) //Research viewer
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];print=1'>Print This Page</A><HR>"
-			dat += "Current Research Levels:<BR><BR>"
+			dat += "Fabricator Learning Matrix Proficiency Levels:<BR><BR>"
 			dat += GetResearchLevelsInfo()
 			dat += "</UL>"
 
@@ -588,9 +589,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<UL>"
 			if(sync)
 				dat += "<LI><A href='?src=\ref[src];sync=1'>Sync Database with Network</A><BR>"
-				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Disconnect from Research Network</A><BR>"
+				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Disconnect from Fabrication Network</A><BR>"
 			else
-				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Connect to Research Network</A><BR>"
+				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Connect to Fabrication Network</A><BR>"
 			dat += "<LI><A href='?src=\ref[src];menu=1.7'>Device Linkage Menu</A><BR>"
 			dat += "<LI><A href='?src=\ref[src];lock=0.2'>Lock Console</A><BR>"
 			dat += "<LI><A href='?src=\ref[src];reset=1'>Reset R&D Database</A><BR>"
@@ -799,17 +800,17 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(5.0)
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];print=2'>Print This Page</A><HR>"
-			dat += "List of Researched Technologies and Designs:"
+			dat += "List of Available Designs:"
 			dat += GetResearchListInfo()
 
-	user << browse("<TITLE>Research and Development Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
+	user << browse("<TITLE>Fabrication Control Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
 	onclose(user, "rdconsole")
 
 /obj/machinery/computer/rdconsole/robotics
-	name = "Robotics R&D Console"
+	name = "robotics fabrication console"
 	id = 2
 	req_access = list(access_robotics)
 
 /obj/machinery/computer/rdconsole/core
-	name = "Core R&D Console"
+	name = "сore fabricator console"
 	id = 1

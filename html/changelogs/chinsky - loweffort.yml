@@ -1,0 +1,6 @@
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - tweak: "R&D lab refluffing. No longer 'Research', it is now called 'Fabrication' Lab. You are not 'discovering' things anymore. You are using high-tech fabricator that uses self-learning matrix to direct nanobots. Problem is, IT KEEPS GETTING MEMORY CORRUPTION. You are re-training bots by letting them practice on less complicated things before they can tackle more challenging blueprints."
