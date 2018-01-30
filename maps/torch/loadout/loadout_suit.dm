@@ -25,11 +25,7 @@
 
 /datum/gear/suit/medcoat/New()
 	..()
-	var/medcoats = list()
-	medcoats["jacket, first responder"] = /obj/item/clothing/suit/storage/toggle/fr_jacket
-	medcoats["labcoat, medical"] = /obj/item/clothing/suit/storage/toggle/labcoat/blue
-	medcoats["apron, surgical"] = /obj/item/clothing/suit/surgicalapron
-	gear_tweaks += new/datum/gear_tweak/path(medcoats)
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/labcoat/blue, /obj/item/clothing/suit/surgicalapron)
 
 /datum/gear/suit/trenchcoat
 	display_name = "trenchcoat selection"
@@ -40,10 +36,10 @@
 /datum/gear/suit/trenchcoat/New()
 	..()
 	var/trenchcoats = list()
-	trenchcoats["trenchcoat, brown"] = /obj/item/clothing/suit/storage/det_trench
-	trenchcoats["trenchcoat, grey"] = /obj/item/clothing/suit/storage/det_trench/grey
-	trenchcoats["coat, duster"] = /obj/item/clothing/suit/leathercoat
-	gear_tweaks += new/datum/gear_tweak/path(trenchcoats)
+	trenchcoats += /obj/item/clothing/suit/storage/det_trench
+	trenchcoats += /obj/item/clothing/suit/storage/det_trench/grey
+	trenchcoats += /obj/item/clothing/suit/leathercoat
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(trenchcoats)
 
 /datum/gear/suit/poncho
 	allowed_roles = RESTRICTED_ROLES
@@ -71,10 +67,10 @@
 /datum/gear/suit/suit_jacket/New()
 	..()
 	var/suitjackets = list()
-	suitjackets["black suit jacket"] = /obj/item/clothing/suit/storage/toggle/suit/black
-	suitjackets["blue suit jacket"] = /obj/item/clothing/suit/storage/toggle/suit/blue
-	suitjackets["purple suit jacket"] = /obj/item/clothing/suit/storage/toggle/suit/purple
-	gear_tweaks += new/datum/gear_tweak/path(suitjackets)
+	suitjackets += /obj/item/clothing/suit/storage/toggle/suit/black
+	suitjackets += /obj/item/clothing/suit/storage/toggle/suit/blue
+	suitjackets += /obj/item/clothing/suit/storage/toggle/suit/purple
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(suitjackets)
 
 /datum/gear/suit/custom_suit_jacket
 	display_name = "suit jacket, colour select"
@@ -101,11 +97,11 @@
 /datum/gear/suit/hoodie_sel/New()
 	..()
 	var/hoodies = list()
-	hoodies["CTI hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/cti
-	hoodies["Mariner University hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/mu
-	hoodies["NanoTrasen hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/nt
-	hoodies["Space Mountain Wind hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/smw
-	gear_tweaks += new/datum/gear_tweak/path(hoodies)
+	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/cti
+	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/mu
+	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/nt
+	hoodies += /obj/item/clothing/suit/storage/toggle/hoodie/smw
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(hoodies)
 
 /datum/gear/suit/labcoat
 	display_name = "labcoat, colour select"
@@ -127,13 +123,13 @@
 /datum/gear/suit/leather/New()
 	..()
 	var/jackets = list()
-	jackets["bomber jacket"] = /obj/item/clothing/suit/storage/toggle/bomber
-	jackets["corporate black jacket"] = /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
-	jackets["corporate brown jacket"] = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
-	jackets["black jacket"] = /obj/item/clothing/suit/storage/leather_jacket
-	jackets["brown jacket"] = /obj/item/clothing/suit/storage/toggle/brown_jacket
-	jackets["major bill's shipping jacket"] = /obj/item/clothing/suit/storage/mbill
-	gear_tweaks += new/datum/gear_tweak/path(jackets)
+	jackets += /obj/item/clothing/suit/storage/toggle/bomber
+	jackets += /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
+	jackets += /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
+	jackets += /obj/item/clothing/suit/storage/leather_jacket
+	jackets += /obj/item/clothing/suit/storage/toggle/brown_jacket
+	jackets += /obj/item/clothing/suit/storage/mbill
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(jackets)
 
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
@@ -181,7 +177,7 @@
 /datum/gear/suit/pcarrier/New()
 	..()
 	var/armors = list()
-	armors["green plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/green
-	armors["navy blue plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/navy
-	armors["tan plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/tan
-	gear_tweaks += new/datum/gear_tweak/path(armors)
+	armors += /obj/item/clothing/suit/armor/pcarrier/green
+	armors += /obj/item/clothing/suit/armor/pcarrier/navy
+	armors += /obj/item/clothing/suit/armor/pcarrier/tan
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(armors)

@@ -42,21 +42,12 @@
 
 /datum/gear/mask/bandana
 	display_name = "bandana selection"
-	path = /obj/item/clothing/mask/bandana
-	allowed_roles = NON_MILITARY_ROLES
-	flags = GEAR_HAS_TYPE_SELECTION
-	
-/datum/gear/head/bandana
-	display_name = "old bandana selection"
-	path = /obj/item/clothing/head	
+	path = /obj/item/clothing
 	allowed_roles = NON_MILITARY_ROLES
 
-/datum/gear/head/bandana/New()
-	..()		
-	var/bandanas = list()		
-	bandanas["orange bandana"] = /obj/item/clothing/head/orangebandana
-	bandanas["pirate bandana"] = /obj/item/clothing/head/bandana
-	gear_tweaks += new/datum/gear_tweak/path(bandanas)
+/datum/gear/mask/bandana/New()
+	..()
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(typesof(/obj/item/clothing/mask/bandana) + typesof(/obj/item/clothing/head/bandana))
 
 /datum/gear/head/bow
 	display_name = "hair bow, colour select"
@@ -212,8 +203,8 @@
 	welding_masks += /obj/item/clothing/head/welding/fancy
 	welding_masks += /obj/item/clothing/head/welding/knight
 	welding_masks += /obj/item/clothing/head/welding/carp
-	gear_tweaks += new/datum/gear_tweak/path(assoc_by_proc(welding_masks, /proc/get_initial_name))
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(welding_masks)
 
 /datum/gear/head/tankccap
 	display_name = "padded cap"
-	path = /obj/item/clothing/head/tank 
+	path = /obj/item/clothing/head/tank

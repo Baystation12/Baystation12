@@ -48,13 +48,33 @@
 	var/list/valid_paths
 
 /datum/gear_tweak/path/New(var/list/valid_paths)
-	if(istype(valid_paths))
-		src.valid_paths = valid_paths
-	else if(ispath(valid_paths))
-		src.valid_paths = atomtype2nameassoclist(valid_paths)
-	else
-		CRASH("[valid_paths] is of an unhandled type.")
-	..()
+	if(!valid_paths.len)
+		CRASH("No type paths given")
+	var/list/duplicate_keys = duplicates(valid_paths)
+	if(duplicate_keys.len)
+		CRASH("Duplicate names found: [english_list(duplicate_keys)]")
+	var/list/duplicate_values = duplicates(list_values(valid_paths))
+	if(duplicate_values.len)
+		CRASH("Duplicate types found: [english_list(duplicate_values)]")
+	for(var/path_name in valid_paths)
+		if(!istext(path_name))
+			CRASH("Expected a text key, was [log_info_line(path_name)]")
+		var/selection_type = valid_paths[path_name]
+		if(!ispath(selection_type, /obj/item))
+			CRASH("Expected an /obj/item path, was [log_info_line(selection_type)]")
+	src.valid_paths = sortAssoc(valid_paths)
+
+/datum/gear_tweak/path/type/New(var/type_path)
+	..(atomtype2nameassoclist(type_path))
+
+/datum/gear_tweak/path/subtype/New(var/type_path)
+	..(atomtypes2nameassoclist(subtypesof(type_path)))
+
+/datum/gear_tweak/path/specified_types_list/New(var/type_paths)
+	..(atomtypes2nameassoclist(type_paths))
+
+/datum/gear_tweak/path/specified_types_args/New()
+	..(atomtypes2nameassoclist(args))
 
 /datum/gear_tweak/path/get_contents(var/metadata)
 	return "Type: [metadata]"
