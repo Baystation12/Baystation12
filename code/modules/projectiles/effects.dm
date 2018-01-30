@@ -4,13 +4,9 @@
 	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	layer = BEAM_PROJECTILE_LAYER //Muzzle flashes would be above the lighting plane anyways.
 	//Standard compiletime light vars aren't working here, so we've made some of our own.
-	var/illum_range = 2
-	var/illum_strength = 1
-	var/illum_color = "#FF00DC"
-
-/obj/effect/projectile/Initialize()
-	. = ..()
-	set_light(illum_range, illum_strength, illum_color)
+	light_range = 2
+	light_power = 1
+	light_color = "#FF00DC"
 
 /obj/effect/projectile/proc/set_transform(var/matrix/M)
 	if(istype(M))
@@ -20,7 +16,7 @@
 // Laser beam
 //----------------------------
 /obj/effect/projectile/laser/
-	illum_color = COLOR_RED_LIGHT
+	light_color = COLOR_RED_LIGHT
 
 /obj/effect/projectile/laser/tracer
 	icon_state = "beam"
@@ -35,7 +31,7 @@
 // Blue laser beam
 //----------------------------
 /obj/effect/projectile/laser/blue
-	illum_color = COLOR_BLUE_LIGHT
+	light_color = COLOR_BLUE_LIGHT
 
 /obj/effect/projectile/laser/blue/tracer
 	icon_state = "beam_blue"
@@ -50,7 +46,7 @@
 // Omni laser beam
 //----------------------------
 /obj/effect/projectile/laser/omni
-	illum_color = COLOR_LUMINOL
+	light_color = COLOR_LUMINOL
 
 /obj/effect/projectile/laser/omni/tracer//tracer
 	icon_state = "beam_omni"
@@ -65,7 +61,7 @@
 // Xray laser beam
 //----------------------------
 /obj/effect/projectile/laser/xray
-	illum_color = "#00cc00"
+	light_color = "#00cc00"
 
 /obj/effect/projectile/laser/xray/tracer
 	icon_state = "xray"
@@ -80,7 +76,7 @@
 // Heavy laser beam
 //----------------------------
 /obj/effect/projectile/laser/heavy
-	illum_strength = 3
+	light_power = 3
 
 /obj/effect/projectile/laser/heavy/tracer
 	icon_state = "beam_heavy"
@@ -95,8 +91,8 @@
 // Pulse laser beam
 //----------------------------
 /obj/effect/projectile/laser/pulse
-	illum_strength = 2
-	illum_color = COLOR_DEEP_SKY_BLUE
+	light_power = 2
+	light_color = COLOR_DEEP_SKY_BLUE
 
 /obj/effect/projectile/laser/pulse/tracer
 	icon_state = "u_laser"
@@ -112,8 +108,8 @@
 // Bogani Pulsar beam
 //----------------------------
 /obj/effect/projectile/laser/bogani/
-	illum_strength = 2
-	illum_color = COLOR_VIOLET
+	light_power = 2
+	light_color = COLOR_VIOLET
 
 /obj/effect/projectile/laser/bogani/tracer
 	icon_state = "bogb"
@@ -129,14 +125,14 @@
 //----------------------------
 /obj/effect/projectile/pulse/muzzle
 	icon_state = "muzzle_pulse"
-	illum_strength = 2
-	illum_color = COLOR_DEEP_SKY_BLUE
+	light_power = 2
+	light_color = COLOR_DEEP_SKY_BLUE
 
 //----------------------------
 // Treye beam
 //----------------------------
 /obj/effect/projectile/trilaser/
-	illum_color = COLOR_LUMINOL
+	light_color = COLOR_LUMINOL
 
 /obj/effect/projectile/trilaser/tracer
 	icon_state = "plasmacutter"
@@ -151,8 +147,8 @@
 // laser/emitter beam
 //----------------------------
 /obj/effect/projectile/laser/emitter/
-	illum_strength = 3
-	illum_color = "#00cc00"
+	light_power = 3
+	light_color = "#00cc00"
 
 /obj/effect/projectile/laser/emitter/tracer
 	icon_state = "laser/emitter"
@@ -167,7 +163,7 @@
 // Stun beam
 //----------------------------
 /obj/effect/projectile/stun/
-	illum_color = COLOR_YELLOW
+	light_color = COLOR_YELLOW
 
 /obj/effect/projectile/stun/tracer
 	icon_state = "stun"
@@ -183,6 +179,6 @@
 //----------------------------
 /obj/effect/projectile/bullet/muzzle
 	icon_state = "muzzle_bullet"
-	illum_range = 5
-	illum_strength = 1
-	illum_color = COLOR_MUZZLE_FLASH
+	light_range = 5
+	light_power = 1
+	light_color = COLOR_MUZZLE_FLASH
