@@ -22,7 +22,7 @@
 
 	break_chance_table = list(3, 18, 45, 100)
 
-/datum/grab/normal/aggressive/process_effect(var/obj/item/grab/G)
+/datum/grab/normal/neck/process_effect(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 
 	affecting.drop_l_hand()
