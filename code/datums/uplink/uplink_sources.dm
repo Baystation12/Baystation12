@@ -1,5 +1,7 @@
 #define NO_GUARANTEE_NO_EXTRA_COST_DESC(X) "Installs an uplink into " + X + " if, and only if, found on your person. Has no TC cost."
 
+#define SETUP_FAILED TRUE
+
 GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	/decl/uplink_source/pda,
 	/decl/uplink_source/radio,
@@ -10,7 +12,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	var/desc
 
 /decl/uplink_source/proc/setup_uplink_source(var/mob/M, var/amount)
-	return FALSE
+	return SETUP_FAILED
 
 /decl/uplink_source/pda
 	name = "PDA"
@@ -19,7 +21,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 /decl/uplink_source/pda/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/device/pda/P = find_in_mob(M, /obj/item/device/pda)
 	if(!P)
-		return FALSE
+		return SETUP_FAILED
 
 	var/pda_pass = "[rand(100,999)] [pick(GLOB.greek_letters)]"
 	var/obj/item/device/uplink/T = new(P, M.mind, amount)
@@ -35,7 +37,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 /decl/uplink_source/radio/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/device/radio/R = find_in_mob(M, /obj/item/device/radio)
 	if(!R)
-		return FALSE
+		return SETUP_FAILED
 
 	var/freq = PUBLIC_LOW_FREQ
 	var/list/freqlist = list()
@@ -53,19 +55,17 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features.</span>")
 	M.mind.store_memory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).")
 
-	return TRUE
-
 /decl/uplink_source/implant
 	name = "Implant"
 	desc = "Teleports an uplink implant into your head. Costs at least half the initial TC amount."
 
 /decl/uplink_source/implant/setup_uplink_source(var/mob/living/carbon/human/H, var/amount)
 	if(!istype(H))
-		return FALSE
+		return SETUP_FAILED
 
 	var/obj/item/organ/external/head = H.organs_by_name[BP_HEAD]
 	if(!head)
-		return FALSE
+		return SETUP_FAILED
 
 	var/obj/item/weapon/implant/uplink/U = new(H, IMPLANT_TELECRYSTAL_AMOUNT(amount))
 	U.imp_in = H
@@ -74,7 +74,6 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	head.implants += U
 
 	U.implanted(H) // This proc handles the installation feedback
-	return TRUE
 
 /decl/uplink_source/unit
 	name = "Uplink Unit"
@@ -83,7 +82,6 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 /decl/uplink_source/unit/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/device/radio/uplink/U = new(M, M.mind, round(amount * 0.9))
 	put_on_mob(M, U, "\A [U]")
-	return TRUE
 
 /decl/uplink_source/telecrystals
 	name = "Telecrystals"
@@ -92,7 +90,6 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 /decl/uplink_source/telecrystals/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/stack/telecrystal/TC = new(M, amount)
 	put_on_mob(M, TC, "[amount] telecrystal\s")
-	return TRUE
 
 /decl/uplink_source/proc/find_in_mob(var/mob/M, var/type)
 	for(var/item in M.get_equipped_items(TRUE))
@@ -127,10 +124,11 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 	for(var/entry in priority_order)
 		var/decl/uplink_source/US = entry
-		if(US.setup_uplink_source(M, amount))
+		if(US.setup_uplink_source(M, amount) != SETUP_FAILED)
 			return TRUE
 
 	to_chat(M, "<span class='warning'>Either by choice or circumstance you will be without an uplink.</span>")
 	return FALSE
 
 #undef NO_EXTRA_COST_NO_GUARANTEE_DESC
+#undef SETUP_FAILED
