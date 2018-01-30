@@ -1,0 +1,4 @@
+author: "comma"
+delete-after: True
+changes: 
+  - rscadd: "\"Added Fleet patches for their respective Fleets of origin to loadaout. Check https://wiki.baystation12.net/Defence_Forces#The_Fleet for more deets\""
