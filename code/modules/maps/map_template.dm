@@ -11,6 +11,8 @@
 	var/accessibility_weight = 0
 
 /datum/map_template/New(var/list/paths = null, var/rename = null)
+	if(paths && !islist(paths))
+		crash_with("Non-list paths passed into map template constructor.")
 	if(paths)
 		mappaths = paths
 	if(mappaths)
