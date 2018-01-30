@@ -1,4 +1,0 @@
-author: "chaoko99"
-delete-after: True
-changes: 
-  - rscadd: "The T-Ray scanner now can be toggled via an action button."
