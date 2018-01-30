@@ -470,9 +470,21 @@
 	name = "Short Bangs"
 	icon_state = "hair_shortbangs"
 
+/datum/sprite_accessory/hair/shavedbun
+	name = "Shaved Bun"
+	icon_state = "hair_shavedbun"
+
 /datum/sprite_accessory/hair/halfshaved
-	name = "Half-Shaved Emo"
+	name = "Half-Shaved"
 	icon_state = "hair_halfshaved"
+
+/datum/sprite_accessory/hair/halfshavedemo
+	name = "Half-Shaved Emo"
+	icon_state = "hair_halfshavedemo"
+
+/datum/sprite_accessory/hair/longsideemo
+	name = "Long Side Emo"
+	icon_state = "hair_longsideemo"
 
 /datum/sprite_accessory/hair/bun
 	name = "Low Bun"
@@ -640,6 +652,22 @@
 /datum/sprite_accessory/hair/averagejoe
 	name = "Average Joe"
 	icon_state = "hair_averagejoe"
+
+/datum/sprite_accessory/hair/sideswept
+	name = "Sideswept Hair"
+	icon_state = "hair_sideswept"
+
+/datum/sprite_accessory/hair/mohawkshaved
+	name = "Shaved Mohawk"
+	icon_state = "hair_mohawkshaved"
+
+/datum/sprite_accessory/hair/mohawkshaved2
+	name = "Tight Shaved Mohawk"
+	icon_state = "hair_mohawkshaved2"
+
+/datum/sprite_accessory/hair/mohawkshavednaomi
+	name = "Naomi Mohawk"
+	icon_state = "hair_mohawkshavednaomi"
 
 /*
 ///////////////////////////////////
