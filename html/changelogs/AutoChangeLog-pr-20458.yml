@@ -1,0 +1,6 @@
+author: "Memescope"
+delete-after: True
+changes: 
+  - rscadd: "Added new hairstyles, some ported from Eris."
+  - tweak: "Low Bun back sprite tweaked."
+  - tweak: "Half-Shaved Emo renamed to Long Side Emo."
