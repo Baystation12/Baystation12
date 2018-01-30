@@ -321,8 +321,14 @@
 					return istype(G.hud, /obj/item/clothing/glasses/hud/health) || istype(G, /obj/item/clothing/glasses/hud/health)
 				else
 					return FALSE
+			if("science")
+				if(istype(H.glasses,/obj/item/clothing/glasses))
+					var/obj/item/clothing/glasses/G = H.glasses
+					if(istype(G, /obj/item/clothing/glasses/science) && G.active == TRUE)
+						return TRUE
 			else
-				return 0
+				return FALSE
+
 	else if(istype(M, /mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
 		switch(hudtype)
@@ -331,9 +337,9 @@
 			if("medical")
 				return istype(R.module_state_1, /obj/item/borg/sight/hud/med) || istype(R.module_state_2, /obj/item/borg/sight/hud/med) || istype(R.module_state_3, /obj/item/borg/sight/hud/med)
 			else
-				return 0
+				return FALSE
 	else
-		return 0
+		return FALSE
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"
