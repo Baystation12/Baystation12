@@ -191,6 +191,7 @@
 // Hair Flags
 #define VERY_SHORT 0x1
 #define HAIR_TRIPPABLE 0x2
+#define HAIR_TIEABLE 0x4
 
 // Storage
 
