@@ -1,4 +1,0 @@
-author: "CountAlex"
-delete-after: True
-changes: 
-  - tweak: "\"Lowered the temperature at which a mob receives lung damage from -13C to -30C.\""

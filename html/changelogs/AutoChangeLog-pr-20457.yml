@@ -1,0 +1,4 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - bugfix: "Lasers now exist long enough that the game is likely to actually render them most of the time. I blame our tickrate."

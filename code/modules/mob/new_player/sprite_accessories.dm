@@ -470,9 +470,21 @@
 	name = "Short Bangs"
 	icon_state = "hair_shortbangs"
 
+/datum/sprite_accessory/hair/shavedbun
+	name = "Shaved Bun"
+	icon_state = "hair_shavedbun"
+
 /datum/sprite_accessory/hair/halfshaved
-	name = "Half-Shaved Emo"
+	name = "Half-Shaved"
 	icon_state = "hair_halfshaved"
+
+/datum/sprite_accessory/hair/halfshavedemo
+	name = "Half-Shaved Emo"
+	icon_state = "hair_halfshavedemo"
+
+/datum/sprite_accessory/hair/longsideemo
+	name = "Long Side Emo"
+	icon_state = "hair_longsideemo"
 
 /datum/sprite_accessory/hair/bun
 	name = "Low Bun"
@@ -640,6 +652,22 @@
 /datum/sprite_accessory/hair/averagejoe
 	name = "Average Joe"
 	icon_state = "hair_averagejoe"
+
+/datum/sprite_accessory/hair/sideswept
+	name = "Sideswept Hair"
+	icon_state = "hair_sideswept"
+
+/datum/sprite_accessory/hair/mohawkshaved
+	name = "Shaved Mohawk"
+	icon_state = "hair_mohawkshaved"
+
+/datum/sprite_accessory/hair/mohawkshaved2
+	name = "Tight Shaved Mohawk"
+	icon_state = "hair_mohawkshaved2"
+
+/datum/sprite_accessory/hair/mohawkshavednaomi
+	name = "Naomi Mohawk"
+	icon_state = "hair_mohawkshavednaomi"
 
 /*
 ///////////////////////////////////
@@ -901,29 +929,9 @@
 	icon_state = "hair_messy"
 	species_allowed = list(SPECIES_TAJARA)
 
-/datum/sprite_accessory/hair/taj_ears_curls
-	name = "Tajara Curly"
-	icon_state = "hair_curly"
-	species_allowed = list(SPECIES_TAJARA)
-
-/datum/sprite_accessory/hair/taj_ears_wife
-	name = "Tajara Housewife"
-	icon_state = "hair_wife"
-	species_allowed = list(SPECIES_TAJARA)
-
-/datum/sprite_accessory/hair/taj_ears_victory
-	name = "Tajara Victory Curls"
-	icon_state = "hair_victory"
-	species_allowed = list(SPECIES_TAJARA)
-
 /datum/sprite_accessory/hair/taj_ears_bob
 	name = "Tajara Bob"
 	icon_state = "hair_tbob"
-	species_allowed = list(SPECIES_TAJARA)
-
-/datum/sprite_accessory/hair/taj_ears_fingercurl
-	name = "Tajara Finger Curls"
-	icon_state = "hair_fingerwave"
 	species_allowed = list(SPECIES_TAJARA)
 
 /datum/sprite_accessory/hair/vox_quills_long

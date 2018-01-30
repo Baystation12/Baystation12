@@ -163,3 +163,5 @@
 
 // Spawns multiple objects of the same type
 #define cast_new(type, num, args...) if((num) == 1) { new type(args) } else { for(var/i=0;i<(num),i++) { new type(args) } }
+
+#define FLAGS_EQUALS(flag, flags) ((flag & (flags)) == (flags))

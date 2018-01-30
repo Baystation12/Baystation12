@@ -74,6 +74,16 @@
 		slot_r_hand_str = "helmet")
 	body_parts_covered = 0
 
+/obj/item/clothing/head/solgov/service/expedition
+	name = "expedition peaked cap"
+	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps."
+	icon_state = "greydresscap"
+
+/obj/item/clothing/head/solgov/service/expedition/command
+	name = "expedition officer's peaked cap"
+	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
+	icon_state = "greydresscap_com"
+
 /obj/item/clothing/head/solgov/service/marine
 	name = "marine wheel cover"
 	desc = "A green service uniform cover with an SCG Marine Corps crest."
@@ -109,16 +119,6 @@
 		slot_l_hand_str = "helmet",
 		slot_r_hand_str = "helmet")
 	body_parts_covered = 0
-
-/obj/item/clothing/head/solgov/dress/expedition
-	name = "expedition dress cap"
-	desc = "A peaked grey dress uniform cap belonging to the SCG Expeditionary Corps."
-	icon_state = "greydresscap"
-
-/obj/item/clothing/head/solgov/dress/expedition/command
-	name = "expedition officer's dress cap"
-	desc = "A peaked grey dress uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
-	icon_state = "greydresscap_com"
 
 /obj/item/clothing/head/solgov/dress/fleet
 	name = "fleet dress wheel cover"

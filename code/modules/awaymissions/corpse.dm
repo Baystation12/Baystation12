@@ -42,7 +42,8 @@
 	M.adjustOxyLoss(M.maxHealth)//cease life functions
 	M.setBrainLoss(M.maxHealth)
 	var/obj/item/organ/internal/heart/corpse_heart = M.internal_organs_by_name[BP_HEART]
-	corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
+	if (corpse_heart)
+		corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
 
 	M.update_icon()
 

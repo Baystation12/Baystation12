@@ -42,17 +42,17 @@
 	utility_hat = /obj/item/clothing/head/soft/solgov/expedition
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition, /obj/item/clothing/head/ushanka/solgov, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov, /obj/item/clothing/shoes/jackboots/unathi)
 
-	service_under = /obj/item/clothing/under/solgov/utility/expeditionary
-	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary_skirt
+	service_under = /obj/item/clothing/under/solgov/service/expeditionary
+	service_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt
 	service_over = /obj/item/clothing/suit/storage/solgov/service/expeditionary
 	service_shoes = /obj/item/clothing/shoes/dress
-	service_hat = /obj/item/clothing/head/soft/solgov/expedition
+	service_hat = /obj/item/clothing/head/solgov/service/expedition
 
-	dress_under = /obj/item/clothing/under/solgov/mildress/expeditionary
-	dress_skirt = /obj/item/clothing/under/solgov/mildress/expeditionary/skirt
+	dress_under = /obj/item/clothing/under/solgov/service/expeditionary
+	dress_skirt = /obj/item/clothing/under/solgov/service/expeditionary/skirt
 	dress_over = /obj/item/clothing/suit/dress/solgov/expedition
 	dress_shoes = /obj/item/clothing/shoes/dress
-	dress_hat = /obj/item/clothing/head/solgov/dress/expedition
+	dress_hat = /obj/item/clothing/head/solgov/service/expedition
 	dress_gloves = /obj/item/clothing/gloves/white
 
 /decl/hierarchy/mil_uniform/fleet
