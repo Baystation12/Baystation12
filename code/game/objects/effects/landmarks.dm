@@ -7,9 +7,9 @@
 	simulated = 0
 	invisibility = 101
 	var/delete_me = 0
-	var/list/my_mobs = list()
 	var/listening
 	var/datum/proximity_trigger/prox_trigger
+	var/list/my_mobs
 
 /obj/effect/landmark/New()
 	..()
