@@ -1,10 +1,7 @@
 /datum/gear/accessory/dashiki
 	display_name = "dashiki selection"
 	path = /obj/item/clothing/accessory/dashiki
-
-/datum/gear/accessory/dashiki/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/dashiki)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/thawb
 	display_name = "thawb"
@@ -47,10 +44,7 @@
 	display_name = "holster selection"
 	path = /obj/item/clothing/accessory/holster
 	cost = 1
-
-/datum/gear/accessory/holster/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/holster)
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/guns
 	display_name = "guns"

@@ -8,7 +8,6 @@
 /datum/gear/shoes/whitedress
 	display_name = "dress shoes, white"
 	path = /obj/item/clothing/shoes/dress/white
-	allowed_roles = MILITARY_ROLES
 
 /datum/gear/shoes/athletic
 	display_name = "athletic shoes, colour select"
@@ -24,12 +23,12 @@
 /datum/gear/shoes/boots/New()
 	..()
 	var/boots = list()
-	boots["jackboots"] = /obj/item/clothing/shoes/jackboots
-	boots["workboots"] = /obj/item/clothing/shoes/workboots
-	boots["duty boots"] = /obj/item/clothing/shoes/dutyboots
-	boots["jungle boots"] = /obj/item/clothing/shoes/jungleboots
-	boots["desert boots"] = /obj/item/clothing/shoes/desertboots
-	gear_tweaks += new/datum/gear_tweak/path(boots)
+	boots += /obj/item/clothing/shoes/jackboots
+	boots += /obj/item/clothing/shoes/workboots
+	boots += /obj/item/clothing/shoes/dutyboots
+	boots += /obj/item/clothing/shoes/jungleboots
+	boots += /obj/item/clothing/shoes/desertboots
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(boots)
 
 /datum/gear/shoes/color
 	display_name = "shoe selection"
@@ -39,24 +38,23 @@
 /datum/gear/shoes/color/New()
 	..()
 	var/shoes = list()
-	shoes["black shoes"] = /obj/item/clothing/shoes/black
-	shoes["blue shoes"] = /obj/item/clothing/shoes/blue
-	shoes["brown shoes"] = /obj/item/clothing/shoes/brown
-	shoes["laceup shoes"] = /obj/item/clothing/shoes/laceup
-	shoes["green shoes"] = /obj/item/clothing/shoes/green
-	shoes["leather shoes"] = /obj/item/clothing/shoes/leather
-	shoes["orange shoes"] = /obj/item/clothing/shoes/orange
-	shoes["purple shoes"] = /obj/item/clothing/shoes/purple
-	shoes["rainbow shoes"] = /obj/item/clothing/shoes/rainbow
-	shoes["red shoes"] = /obj/item/clothing/shoes/red
-	shoes["white shoes"] = /obj/item/clothing/shoes/white
-	shoes["yellow shoes"] = /obj/item/clothing/shoes/yellow
-	gear_tweaks += new/datum/gear_tweak/path(shoes)
+	shoes += /obj/item/clothing/shoes/black
+	shoes += /obj/item/clothing/shoes/blue
+	shoes += /obj/item/clothing/shoes/brown
+	shoes += /obj/item/clothing/shoes/laceup
+	shoes += /obj/item/clothing/shoes/green
+	shoes += /obj/item/clothing/shoes/leather
+	shoes += /obj/item/clothing/shoes/orange
+	shoes += /obj/item/clothing/shoes/purple
+	shoes += /obj/item/clothing/shoes/rainbow
+	shoes += /obj/item/clothing/shoes/red
+	shoes += /obj/item/clothing/shoes/white
+	shoes += /obj/item/clothing/shoes/yellow
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(shoes)
 
 /datum/gear/shoes/dress
 	display_name = "dress shoes"
 	path = /obj/item/clothing/shoes/dress
-	allowed_roles = MILITARY_ROLES
 
 /datum/gear/shoes/flats
 	display_name = "flats, colour select"
@@ -69,7 +67,7 @@
 	path = /obj/item/clothing/shoes/hightops
 	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_TYPE_SELECTION
-	
+
 /datum/gear/shoes/sandal
 	display_name = "wooden sandals"
 	path = /obj/item/clothing/shoes/sandal

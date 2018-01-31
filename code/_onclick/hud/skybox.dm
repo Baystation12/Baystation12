@@ -12,6 +12,7 @@
 /obj/skybox/Initialize()
 	. = ..()
 	var/mob/M = loc
+	SSskybox.skyboxes += src
 	owner = M
 	loc = null
 	SSskybox.skyboxes += src

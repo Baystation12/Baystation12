@@ -743,7 +743,7 @@
 	icon_state = "toxstorage"
 
 /area/rnd/development
-	name = "\improper Development Lab"
+	name = "\improper Fabricator Lab"
 	icon_state = "devlab"
 
 /area/rnd/entry

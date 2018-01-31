@@ -48,6 +48,18 @@
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
 
+/obj/item/clothing/under/solgov/utility/expeditionary_skirt
+	name = "expeditionary skirt"
+	desc = "A black turtleneck and skirt, the elusive ladies' uniform of the Expeditionary Corps."
+	icon_state = "blackservicef"
+	worn_state = "blackservicef"
+
+/obj/item/clothing/under/solgov/utility/expeditionary_skirt/officer
+	name = "expeditionary officer skirt"
+	desc = "A black turtleneck and skirt, the elusive ladies' uniform of the Expeditionary Corps. This one has gold trim."
+	icon_state = "blackservicef_com"
+	worn_state = "blackservicef_com"
+
 /obj/item/clothing/under/solgov/utility/expeditionary/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command)
 
@@ -195,17 +207,29 @@
 	armor = list(melee = 5, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 5, rad = 0)
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/solgov/service/expeditionary_skirt
-	name = "expeditionary service skirt"
-	desc = "A black turtleneck and skirt, the optional ladies' service uniform of the Expeditionary Corps."
-	icon_state = "blackservicef"
-	worn_state = "blackservicef"
+/obj/item/clothing/under/solgov/service/expeditionary
+	name = "expeditionary service uniform"
+	desc = "The service uniform of the SCG Expeditionary Corps in silver trim."
+	icon_state = "greydress"
+	worn_state = "greydress"
 
-/obj/item/clothing/under/solgov/service/expeditionary_skirt/officer
-	name = "expeditionary officer service skirt"
-	desc = "A black turtleneck and skirt, the optional ladies' service uniform of the Expeditionary Corps. This one has gold trim."
-	icon_state = "blackservicef_com"
-	worn_state = "blackservicef_com"
+/obj/item/clothing/under/solgov/service/expeditionary/skirt
+	name = "expeditionary service skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps service uniform in silver trim."
+	icon_state = "greydressfem"
+	worn_state = "greydressfem"
+
+/obj/item/clothing/under/solgov/service/expeditionary/command
+	name = "expeditionary officer's service uniform"
+	desc = "The service uniform of the SCG Expeditionary Corps in gold trim."
+	icon_state = "greydress_com"
+	worn_state = "greydress_com"
+
+/obj/item/clothing/under/solgov/service/expeditionary/command/skirt
+	name = "expeditionary officer's service skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps service uniform in gold trim."
+	icon_state = "greydressfem_com"
+	worn_state = "greydressfem_com"
 
 /obj/item/clothing/under/solgov/service/fleet
 	name = "fleet service uniform"
@@ -257,30 +281,6 @@
 	worn_state = "greydress"
 	armor = list(melee = 5, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 5, rad = 0)
 	siemens_coefficient = 0.9
-
-/obj/item/clothing/under/solgov/mildress/expeditionary
-	name = "expeditionary dress uniform"
-	desc = "The dress uniform of the SCG Expeditionary Corps in silver trim."
-	icon_state = "greydress"
-	worn_state = "greydress"
-
-/obj/item/clothing/under/solgov/mildress/expeditionary/skirt
-	name = "expeditionary dress skirt"
-	desc = "A feminine version of the SCG Expeditionary Corps dress uniform in silver trim."
-	icon_state = "greydressfem"
-	worn_state = "greydressfem"
-
-/obj/item/clothing/under/solgov/mildress/expeditionary/command
-	name = "expeditionary officer's dress uniform"
-	desc = "The dress uniform of the SCG Expeditionary Corps in gold trim."
-	icon_state = "greydress_com"
-	worn_state = "greydress_com"
-
-/obj/item/clothing/under/solgov/mildress/expeditionary/command/skirt
-	name = "expeditionary officer's dress skirt"
-	desc = "A feminine version of the SCG Expeditionary Corps dress uniform in gold trim."
-	icon_state = "greydressfem_com"
-	worn_state = "greydressfem_com"
 
 /obj/item/clothing/under/solgov/mildress/marine
 	name = "marine dress uniform"
