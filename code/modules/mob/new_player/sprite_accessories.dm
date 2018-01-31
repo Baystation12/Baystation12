@@ -669,6 +669,30 @@
 	name = "Naomi Mohawk"
 	icon_state = "hair_mohawkshavednaomi"
 
+/datum/sprite_accessory/hair/amazon
+	name = "Amazon"
+	icon_state = "hair_amazon"
+
+/datum/sprite_accessory/hair/straightlong
+	name = "Straight Long"
+	icon_state = "hair_straightlong"
+
+/*I'm sorry I made this hairstyle,
+May God have mercy.
+*/
+
+/datum/sprite_accessory/hair/marysue
+	name = "Mary Sue"
+	icon_state = "hair_marysue"
+
+/datum/sprite_accessory/hair/messyhair2
+	name = "Messy Hair 2"
+	icon_state = "hair_messyhair2"
+
+/datum/sprite_accessory/hair/buzzcut2
+	name = "Buzzcut 2"
+	icon_state = "hair_buzzcut2"
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
@@ -804,6 +828,14 @@
 /datum/sprite_accessory/facial_hair/braided
 	name = "Braided Beard"
 	icon_state = "facial_biker"
+
+/datum/sprite_accessory/facial_hair/seadog
+	name = "Sea Dog"
+	icon_state = "facial_seadog"
+
+/datum/sprite_accessory/facial_hair/lumberjack
+	name = "Lumberjack"
+	icon_state = "facial_lumberjack"
 
 /*
 ///////////////////////////////////
