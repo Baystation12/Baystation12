@@ -22,8 +22,10 @@
 /datum/grab/normal/aggressive/process_effect(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 
-	affecting.drop_l_hand()
-	affecting.drop_r_hand()
+	if(G.target_zone in list(BP_L_HAND, BP_R_HAND))
+		affecting.drop_l_hand()
+		affecting.drop_r_hand()
+		affecting.Stun(3)
 
 	// Keeps those who are on the ground down
 	if(affecting.lying)

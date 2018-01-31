@@ -150,8 +150,8 @@
 /obj/item/grab/proc/check_upgrade_cooldown()
 	return (world.time >= last_upgrade + current_grab.upgrade_cooldown)
 
-/obj/item/grab/proc/upgrade()
-	if(!check_upgrade_cooldown())
+/obj/item/grab/proc/upgrade(var/bypass_cooldown = FALSE)
+	if(!check_upgrade_cooldown() && !bypass_cooldown)
 		to_chat(assailant, "<span class='danger'>It's too soon to upgrade.</span>")
 		return
 
@@ -161,6 +161,7 @@
 		last_upgrade = world.time
 		adjust_position()
 		update_icons()
+		current_grab.enter_as_up(src)
 
 /obj/item/grab/proc/downgrade()
 	var/datum/grab/downgrab = current_grab.downgrade(src)

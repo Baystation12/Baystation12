@@ -249,6 +249,9 @@
 /datum/grab/proc/resolve_openhand_attack(var/obj/item/grab/G)
 	return 0
 
+// Used when you want an effect to happen when the grab enters this state as an upgrade
+/datum/grab/proc/enter_as_up(var/obj/item/grab/G)
+
 /datum/grab/proc/item_attack(var/obj/item/grab/G, var/obj/item)
 
 /datum/grab/proc/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I, var/target_zone)
