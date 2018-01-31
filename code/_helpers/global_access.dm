@@ -63,8 +63,12 @@
 			return global.SSprocessing;
 		if("SSskybox")
 			return global.SSskybox;
+		if("SSsun")
+			return global.SSsun;
 		if("SSvines")
 			return global.SSvines;
+		if("SSwireless")
+			return global.SSwireless;
 		if("Tier1Runes")
 			return global.Tier1Runes;
 		if("Tier2Runes")
@@ -529,8 +533,6 @@
 			return global.lighting_update_overlays_old;
 		if("limb_icon_cache")
 			return global.limb_icon_cache;
-		if("list_of_ais")
-			return global.list_of_ais;
 		if("loadout_categories")
 			return global.loadout_categories;
 		if("lobby_image")
@@ -1019,8 +1021,6 @@
 			return global.whitelisted_species;
 		if("wireColours")
 			return global.wireColours;
-		if("wirelessProcess")
-			return global.wirelessProcess;
 		if("wizards")
 			return global.wizards;
 		if("world_topic_spam_protect_ip")
@@ -1104,8 +1104,12 @@
 			global.SSprocessing=newval;
 		if("SSskybox")
 			global.SSskybox=newval;
+		if("SSsun")
+			global.SSsun=newval;
 		if("SSvines")
 			global.SSvines=newval;
+		if("SSwireless")
+			global.SSwireless=newval;
 		if("Tier1Runes")
 			global.Tier1Runes=newval;
 		if("Tier2Runes")
@@ -1570,8 +1574,6 @@
 			global.lighting_update_overlays_old=newval;
 		if("limb_icon_cache")
 			global.limb_icon_cache=newval;
-		if("list_of_ais")
-			global.list_of_ais=newval;
 		if("loadout_categories")
 			global.loadout_categories=newval;
 		if("lobby_image")
@@ -2060,8 +2062,6 @@
 			global.whitelisted_species=newval;
 		if("wireColours")
 			global.wireColours=newval;
-		if("wirelessProcess")
-			global.wirelessProcess=newval;
 		if("wizards")
 			global.wizards=newval;
 		if("world_topic_spam_protect_ip")
@@ -2113,7 +2113,9 @@
 	"SSopen_space",
 	"SSprocessing",
 	"SSskybox",
+	"SSsun",
 	"SSvines",
+	"SSwireless",
 	"Tier1Runes",
 	"Tier2Runes",
 	"Tier3Runes",
@@ -2346,7 +2348,6 @@
 	"lighting_update_overlays",
 	"lighting_update_overlays_old",
 	"limb_icon_cache",
-	"list_of_ais",
 	"loadout_categories",
 	"lobby_image",
 	"log_end",
@@ -2591,7 +2592,6 @@
 	"whitelist",
 	"whitelisted_species",
 	"wireColours",
-	"wirelessProcess",
 	"wizards",
 	"world_topic_spam_protect_ip",
 	"world_topic_spam_protect_time",

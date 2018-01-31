@@ -4,7 +4,7 @@ SUBSYSTEM_DEF(processing)
 	name = "Processing"
 	priority = SS_PRIORITY_PROCESSING
 	flags = SS_BACKGROUND|SS_POST_FIRE_TIMING|SS_NO_INIT
-	wait = 10
+	wait = 1 SECOND
 
 	var/list/processing = list()
 	var/list/current_run = list()
@@ -59,6 +59,6 @@ SUBSYSTEM_DEF(processing)
 	var/tick_time = world.time - start_tick
 	var/tick_use_limit = world.tick_usage - start_tick_usage - 100 // Current tick use - starting tick use - 100% (a full tick excess)
 	if(tick_time > 0)
-		CRASH("[log_info_line(subsystem.debug_last_thing)] slept during processing. Spent [tick_time] tick\s.")
+		crash_with("[log_info_line(subsystem.debug_last_thing)] slept during processing. Spent [tick_time] tick\s.")
 	if(tick_use_limit > 0)
-		CRASH("[log_info_line(subsystem.debug_last_thing)] took longer than a tick to process. Exceeded with [tick_use_limit]%")
+		crash_with("[log_info_line(subsystem.debug_last_thing)] took longer than a tick to process. Exceeded with [tick_use_limit]%")
