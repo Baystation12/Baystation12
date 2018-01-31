@@ -1,0 +1,4 @@
+author: "FTangSteve"
+delete-after: True
+changes: 
+  - rscadd: "\"Upgrading to aggressive or initiating normal grab now enters struggle if victim isn't on help intent.\""
