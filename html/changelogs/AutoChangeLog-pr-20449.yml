@@ -1,0 +1,5 @@
+author: "ZeroBits"
+delete-after: True
+changes: 
+  - bugfix: "\"Heat Exchange Pipes can now be properly constructed.\""
+  - tweak: "\"Heat Exchange Junctions will now exchange heat.\""
