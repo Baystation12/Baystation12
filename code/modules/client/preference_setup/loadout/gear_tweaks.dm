@@ -13,6 +13,9 @@
 /datum/gear_tweak/proc/tweak_item(var/obj/item/I, var/metadata)
 	return
 
+/datum/gear_tweak/proc/tweak_description(var/description, var/metadata)
+	return description
+
 /*
 * Color adjustment
 */
@@ -89,6 +92,12 @@
 	if(!(metadata in valid_paths))
 		return
 	gear_data.path = valid_paths[metadata]
+
+/datum/gear_tweak/path/tweak_description(var/description, var/metadata)
+	if(!(metadata in valid_paths))
+		return ..()
+	var/obj/O = valid_paths[metadata]
+	return initial(O.desc) || description
 
 /*
 * Content adjustment
