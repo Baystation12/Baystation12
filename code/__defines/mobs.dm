@@ -22,6 +22,7 @@
 
 // Grab levels.
 #define NORM_PASSIVE    "normal passive"
+#define NORM_STRUGGLE   "normal struggle"
 #define NORM_AGGRESSIVE "normal aggressive"
 #define NORM_NECK       "normal neck"
 #define NORM_KILL       "normal kill"
@@ -271,8 +272,8 @@
 #define STASIS_COLD "cold"
 
 #define AURA_CANCEL 1
-#define AURA_FALSE  2 
-#define AURA_TYPE_BULLET "Bullet" 
-#define AURA_TYPE_WEAPON "Weapon" 
-#define AURA_TYPE_THROWN "Thrown" 
+#define AURA_FALSE  2
+#define AURA_TYPE_BULLET "Bullet"
+#define AURA_TYPE_WEAPON "Weapon"
+#define AURA_TYPE_THROWN "Thrown"
 #define AURA_TYPE_LIFE   "Life"

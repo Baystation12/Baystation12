@@ -16,6 +16,9 @@
 	visible_message("<span class='warning'>[assailant] has grabbed [affecting]'s [O.name]!</span>")
 	affecting.grabbed_by += src
 
+	if(!(affecting.a_intent == I_HELP))
+		upgrade(TRUE)
+
 /datum/grab/normal
 	type_name = GRAB_NORMAL
 
