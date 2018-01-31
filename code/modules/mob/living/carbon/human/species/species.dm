@@ -182,7 +182,6 @@
 
 	// The basic skin colours this species uses
 	var/list/base_skin_colours
-	var/list/valid_base_colours = list()
 
 	var/list/genders = list(MALE, FEMALE)
 
@@ -241,9 +240,6 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		var/list/organ_data = has_limbs[limb_type]
 		var/obj/item/organ/limb_path = organ_data["path"]
 		organ_data["descriptor"] = initial(limb_path.name)
-
-	for(var/m in base_skin_colours)
-		valid_base_colours += m
 
 /datum/species/proc/sanitize_name(var/name)
 	return sanitizeName(name)
