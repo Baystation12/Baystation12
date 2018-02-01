@@ -10,7 +10,6 @@
 	stop_move = 1
 	reverse_facing = 0
 	can_absorb = 0
-	shield_assailant = 1
 	point_blank_mult = 1
 	same_tile = 0
 	breakability = 3
@@ -31,7 +30,7 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
-	if(affecting.incapacitated(INCAPACITATION_ALL) || affecting.a_intent == I_HELP)
+	if(affecting.incapacitated() || affecting.a_intent == I_HELP)
 		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
 		done_struggle = TRUE
 		G.upgrade(TRUE)
@@ -40,7 +39,7 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
-	if(affecting.incapacitated(INCAPACITATION_ALL) || affecting.a_intent == I_HELP)
+	if(affecting.incapacitated() || affecting.a_intent == I_HELP)
 		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
 		done_struggle = TRUE
 		G.upgrade(TRUE)
