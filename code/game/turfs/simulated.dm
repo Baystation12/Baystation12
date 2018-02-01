@@ -32,13 +32,12 @@
 		wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
 		overlays += wet_overlay
 
-	deltimer(timer_id)
-	timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor),8 SECONDS, TIMER_STOPPABLE)
+	timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor),8 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
 
 /turf/simulated/proc/unwet_floor(var/check_very_wet = TRUE)
 	if(check_very_wet && wet >= 2)
 		wet--
-		timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, TIMER_STOPPABLE)
+		timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
 		return
 
 	wet = 0
