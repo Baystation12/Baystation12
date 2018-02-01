@@ -10,15 +10,9 @@
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
 	icon_state = "generic"
+	density = 1
 /turf/simulated/wall/strong/New(var/newloc)
 	..(newloc, "plasteel")
-
-/turf/simulated/wall/stronger
-	name = "wall"
-	desc = "A huge chunk of metal used to seperate rooms."
-	icon_state = "generic"
-/turf/simulated/wall/stronger/New(var/newloc)
-	..(newloc, "plasteel","titanium")
 
 
 /turf/simulated/wall/cult
