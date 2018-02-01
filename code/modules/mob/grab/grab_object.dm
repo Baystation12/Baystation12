@@ -239,6 +239,9 @@
 /obj/item/grab/proc/assailant_moved()
 	current_grab.assailant_moved(src)
 
+/obj/item/grab/proc/restrains()
+	return current_grab.restrains
+
 /obj/item/grab/proc/resolve_openhand_attack()
 		return current_grab.resolve_openhand_attack(src)
 

@@ -91,6 +91,9 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		return
 	if(isanimal(user) && O != user)
 		return
+	for (var/obj/item/grab/G in user.grabbed_by)
+		if(G.stop_move())
+			return
 	if (do_after(user, 25 + (5 * user.weakened), incapacitation_flags = ~INCAPACITATION_FORCELYING))
 		step_towards(O, src)
 

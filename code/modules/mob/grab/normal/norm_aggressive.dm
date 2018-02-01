@@ -15,17 +15,17 @@
 	same_tile = 0
 	can_throw = 1
 	force_danger = 1
+	breakability = 3
 
 	icon_state = "reinforce1"
 
-	break_chance_table = list(15, 60, 100)
+	break_chance_table = list(5, 20, 40, 80, 100)
 /datum/grab/normal/aggressive/process_effect(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 
 	if(G.target_zone in list(BP_L_HAND, BP_R_HAND))
 		affecting.drop_l_hand()
 		affecting.drop_r_hand()
-		affecting.Stun(3)
 
 	// Keeps those who are on the ground down
 	if(affecting.lying)

@@ -21,6 +21,7 @@
 	var/downgrade_on_action = 0					// If the grab needs to be downgraded when the grabber does stuff.
 	var/downgrade_on_move = 0					// If the grab needs to be downgraded when the grabber moves.
 	var/force_danger = 0						// If the grab is strong enough to be able to force someone to do something harmful to them.
+	var/restrains = 0							// If the grab acts like cuffs and prevents action from the victim.
 
 	var/grab_slowdown = 7
 
@@ -261,9 +262,14 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
+	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
+		to_chat(G.assailant, "<span class='warning'>You can't resist in your current state!</span>")
+
 	var/break_strength = breakability + size_difference(affecting, assailant)
 
-	if(affecting.lying)
+	if(affecting.incapacitated(INCAPACITATION_ALL))
+		break_strength--
+	if(affecting.confused)
 		break_strength--
 
 	if(break_strength < 1)
