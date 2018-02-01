@@ -38,13 +38,18 @@
 		var/group_size = rand(group_size_min, group_size_max)
 		if(prob(96))
 			for (var/j = 1, j <= group_size, j++)
-				spawned_carp.Add(new /mob/living/simple_animal/hostile/carp(spawn_locations[i]))
+				for(var/obj/effect/landmark/CS in spawn_locations)
+					var/mob/living/simple_animal/hostile/carp/C = new(CS.loc)
+					spawned_carp.Add(CS.link_a_mob_spawn(C))
 			i++
 		else
 			group_size = max(1,round(group_size/6))
 			group_size = min(spawn_locations.len-i+1,group_size)
 			for(var/j = 1, j <= group_size, j++)
-				spawned_carp.Add(new /mob/living/simple_animal/hostile/carp/pike(spawn_locations[i+j]))
+				for(spawn_locations)
+					var/obj/effect/landmark/PS = spawn_locations[i]
+					var/mob/living/simple_animal/hostile/carp/pike/P = new(PS.loc)
+					spawned_carp.Add(PS.link_a_mob_spawn(P))
 			i += group_size
 
 /datum/event/carp_migration/end()

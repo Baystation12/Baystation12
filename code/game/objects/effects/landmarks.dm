@@ -7,6 +7,9 @@
 	simulated = 0
 	invisibility = 101
 	var/delete_me = 0
+	var/listening
+	var/datum/proximity_trigger/prox_trigger
+	var/list/my_mobs
 
 /obj/effect/landmark/New()
 	..()
@@ -75,8 +78,26 @@
 		return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/Destroy()
+	my_mobs = null
 	landmarks_list -= src
+	QDEL_NULL(prox_trigger)
 	return ..()
+
+/obj/effect/landmark/proc/link_a_mob_spawn(var/mob/M)
+	LAZYINITLIST(my_mobs)
+	my_mobs += M
+	STOP_PROCESSING(SSmobs, M)
+	if(!listening)
+		prox_trigger = new(src, /obj/effect/landmark/proc/on_turf_entered,, world.view * 1.5, PROXIMITY_EXCLUDE_HOLDER_TURF)
+
+		listening = 1
+
+/obj/effect/landmark/proc/on_turf_entered(var/atom/movable/AM)
+	if(!(AM in my_mobs) && isliving(AM))
+		listening = 0
+		for(var/mob/M in my_mobs)
+			START_PROCESSING(SSmobs, M)
+		prox_trigger.unregister_turfs()
 
 /obj/effect/landmark/start
 	name = "start"
