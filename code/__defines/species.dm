@@ -30,6 +30,7 @@
 #define RADIATION_GLOWS                                                           0x40   // Radiation causes this character to glow.
 #define HAS_SKIN_TONE_GRAV                                                        0x80   // Skin tone selectable in chargen for grav-adapted humans (0-100)
 #define HAS_SKIN_TONE_SPCR                                                        0x100  // Skin tone selectable in chargen for spacer humans (0-165)
+#define HAS_BASE_SKIN_COLOURS                                                     0x200  // Has multiple base skin sprites to go off of
 #define HAS_A_SKIN_TONE (HAS_SKIN_TONE_NORMAL | HAS_SKIN_TONE_GRAV | HAS_SKIN_TONE_SPCR) // Species has a numeric skintone
 
 // Skin Defines

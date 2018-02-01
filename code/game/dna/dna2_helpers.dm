@@ -171,6 +171,10 @@
 				var/list/marklist = dna.body_markings[tag]
 				E.markings = marklist.Copy()
 
+		//Base skin and blend
+		for(var/obj/item/organ/external/E in H.organs)
+			E.set_dna(E.dna)
+
 		//Hair
 		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,hair_styles_list.len)
 		if((0 < hair) && (hair <= hair_styles_list.len))
