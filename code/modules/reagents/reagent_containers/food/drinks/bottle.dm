@@ -28,9 +28,9 @@
 	..()
 
 	var/mob/M = thrower
-	if(isGlass && istype(M) && M.a_intent == I_HURT)
+	if(isGlass && istype(M) && M.a_intent != I_HELP)
 		var/throw_dist = get_dist(throw_source, loc)
-		if(speed >= throw_speed && smash_check(throw_dist)) //not as reliable as smashing directly
+		if(speed > throw_speed || smash_check(throw_dist)) //not as reliable as smashing directly
 			if(reagents)
 				hit_atom.visible_message("<span class='notice'>The contents of \the [src] splash all over [hit_atom]!</span>")
 				reagents.splash(hit_atom, reagents.total_volume)
@@ -40,7 +40,7 @@
 	if(!isGlass || !smash_duration)
 		return 0
 
-	var/list/chance_table = list(95, 95, 90, 85, 75, 55, 35) //starting from distance 0
+	var/list/chance_table = list(95, 95, 90, 85, 75, 60, 40, 15) //starting from distance 0
 	var/idx = max(distance + 1, 1) //since list indices start at 1
 	if(idx > chance_table.len)
 		return 0
