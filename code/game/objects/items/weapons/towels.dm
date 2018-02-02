@@ -3,7 +3,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "towel"
 	slot_flags = SLOT_HEAD | SLOT_BELT | SLOT_OCLOTHING
-	force = 3.0
+	force = 0.1
 	w_class = ITEM_SIZE_NORMAL
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
