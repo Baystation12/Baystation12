@@ -10,48 +10,51 @@
 	stop_move = 1
 	reverse_facing = 0
 	can_absorb = 0
-	shield_assailant = 0
 	point_blank_mult = 1
 	same_tile = 0
+	breakability = 3
 
-	downgrade_on_action = 1
-	downgrade_on_move = 1
+	grab_slowdown = 10
+	upgrade_cooldown = 20
+
 	can_downgrade_on_resist = 0
 
 	icon_state = "reinforce"
 
 	var/done_struggle = FALSE
 
-	break_chance_table = list(15, 30, 70)
+	break_chance_table = list(5, 20, 30, 80, 100)
+
+
+/datum/grab/normal/struggle/process_effect(var/obj/item/grab/G)
+	var/mob/living/carbon/human/affecting = G.affecting
+	var/mob/living/carbon/human/assailant = G.assailant
+
+	if(affecting.incapacitated() || affecting.a_intent == I_HELP)
+		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
+		done_struggle = TRUE
+		G.upgrade(TRUE)
 
 /datum/grab/normal/struggle/enter_as_up(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
-	if(affecting.stat || affecting.a_intent == I_HELP || affecting.lying)
+	if(affecting.incapacitated() || affecting.a_intent == I_HELP)
 		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
 		done_struggle = TRUE
 		G.upgrade(TRUE)
 	else
-		affecting.Stun(1)
 		affecting.visible_message("<span class='warning'>[affecting] struggles against [assailant]!</span>")
 		spawn(10)
 			handle_resist(G)
-		if(do_mob(assailant, affecting, upgrade_cooldown, G.target_zone))
+		if(do_after(assailant, upgrade_cooldown, G, can_move = 1))
 			done_struggle = TRUE
 			G.upgrade(TRUE)
 		else
-			let_go(G)
-
-/datum/grab/normal/struggle/let_go_effect(var/obj/item/grab/G)
-	var/mob/living/carbon/human/affecting = G.affecting
-	var/mob/living/carbon/human/assailant = G.assailant
-	affecting.Stun(1)
-	assailant.Stun(1)
+			G.downgrade()
 
 /datum/grab/normal/struggle/can_upgrade(var/obj/item/grab/G)
 	return done_struggle
-
 
 /datum/grab/normal/struggle/on_hit_disarm(var/obj/item/grab/normal/G)
 	to_chat(G.assailant, "<span class='warning'>Your grip isn't strong enough to pin.</span>")
