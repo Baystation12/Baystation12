@@ -13,8 +13,8 @@ obj/machinery/atmospherics/trinary
 	var/datum/pipe_network/network2
 	var/datum/pipe_network/network3
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		switch(dir)
 			if(NORTH)
 				initialize_directions = EAST|NORTH|SOUTH

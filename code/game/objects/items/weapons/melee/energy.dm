@@ -114,19 +114,24 @@
 	if(!istype(loc,/mob))
 		deactivate(user)
 
-/obj/item/weapon/melee/energy/sword/New()
+/obj/item/weapon/melee/energy/sword/Initialize()
+	. = ..()
 	blade_color = pick("red","blue","green","purple")
 
-/obj/item/weapon/melee/energy/sword/green/New()
+/obj/item/weapon/melee/energy/sword/green/Initialize()
+	. = ..()
 	blade_color = "green"
 
-/obj/item/weapon/melee/energy/sword/red/New()
+/obj/item/weapon/melee/energy/sword/red/Initialize()
+	. = ..()
 	blade_color = "red"
 
-/obj/item/weapon/melee/energy/sword/blue/New()
+/obj/item/weapon/melee/energy/sword/blue/Initialize()
+	. = ..()
 	blade_color = "blue"
 
-/obj/item/weapon/melee/energy/sword/purple/New()
+/obj/item/weapon/melee/energy/sword/purple/Initialize()
+	. = ..()
 	blade_color = "purple"
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
@@ -197,8 +202,8 @@
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system
 
-/obj/item/weapon/melee/energy/blade/New()
-	..()
+/obj/item/weapon/melee/energy/blade/Initialize()
+	. = ..()
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)

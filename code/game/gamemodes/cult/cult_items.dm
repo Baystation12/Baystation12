@@ -88,8 +88,8 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	armor = list(melee = 75, bullet = 50, laser = 55, energy = 40, bomb = 50, bio = 10, rad = 0)
 
-/obj/item/clothing/suit/cultrobes/magusred/New()
-	..()
+/obj/item/clothing/suit/cultrobes/magusred/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/head/helmet/space/cult
@@ -108,6 +108,6 @@
 	siemens_coefficient = 0.2
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
 
-/obj/item/clothing/suit/space/cult/New()
-	..()
+/obj/item/clothing/suit/space/cult/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1

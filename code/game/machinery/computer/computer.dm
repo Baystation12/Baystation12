@@ -18,9 +18,10 @@
 	atom_flags = ATOM_FLAG_CLIMBABLE
 	clicksound = "keyboard"
 
-/obj/machinery/computer/New()
+/obj/machinery/computer/Initialize()
+	. = ..()
 	overlay_layer = layer
-	..()
+
 
 /obj/machinery/computer/Initialize()
 	. = ..()

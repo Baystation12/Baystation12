@@ -74,6 +74,6 @@
 	volume = 120
 	amount_per_transfer_from_this = 30
 
-/obj/item/weapon/reagent_containers/food/drinks/zombiedrink/New()
-	..()
+/obj/item/weapon/reagent_containers/food/drinks/zombiedrink/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/corrupting,120)

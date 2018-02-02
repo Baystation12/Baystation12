@@ -37,9 +37,9 @@
 	icon_state = "waterballoon-e"
 	item_state = "balloon-empty"
 
-/obj/item/toy/water_balloon/New()
+/obj/item/toy/water_balloon/Initialize()
 	create_reagents(10)
-	..()
+	. = ..()
 
 /obj/item/toy/water_balloon/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return
@@ -102,8 +102,8 @@
 	item_state = "syndballoon"
 	w_class = ITEM_SIZE_HUGE
 
-/obj/item/toy/balloon/New()
-	..()
+/obj/item/toy/balloon/Initialize()
+	. = ..()
 	desc = "Across the balloon is printed: \"[desc]\""
 
 /obj/item/toy/balloon/nanotrasen

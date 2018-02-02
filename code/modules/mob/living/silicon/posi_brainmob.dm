@@ -12,11 +12,11 @@
 		/datum/nano_module/law_manager
 	)
 
-/mob/living/silicon/sil_brainmob/New()
+/mob/living/silicon/sil_brainmob/Initialize()
 	reagents = new/datum/reagents(1000, src)
 	if(istype(loc, /obj/item/organ/internal/posibrain))
 		container = loc
-	..()
+	.=..()
 
 /mob/living/silicon/sil_brainmob/Destroy()
 	if(key)				//If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.

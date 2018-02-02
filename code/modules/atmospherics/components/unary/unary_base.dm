@@ -10,8 +10,8 @@
 
 	var/datum/pipe_network/network
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		initialize_directions = dir
 		air_contents = new
 

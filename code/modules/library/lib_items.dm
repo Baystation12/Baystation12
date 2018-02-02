@@ -97,8 +97,8 @@
 /obj/structure/bookcase/manuals/medical
 	name = "Medical Manuals bookcase"
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		new /obj/item/weapon/book/manual/medical_cloning(src)
 		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
 		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
@@ -109,8 +109,8 @@
 /obj/structure/bookcase/manuals/engineering
 	name = "Engineering Manuals bookcase"
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		new /obj/item/weapon/book/manual/engineering_construction(src)
 		new /obj/item/weapon/book/manual/engineering_particle_accelerator(src)
 		new /obj/item/weapon/book/manual/engineering_hacking(src)
@@ -123,8 +123,8 @@
 /obj/structure/bookcase/manuals/research_and_development
 	name = "R&D Manuals bookcase"
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		new /obj/item/weapon/book/manual/research_and_development(src)
 		update_icon()
 

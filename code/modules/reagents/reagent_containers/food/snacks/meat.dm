@@ -5,8 +5,8 @@
 	health = 180
 	filling_color = "#ff1c1c"
 	center_of_mass = "x=16;y=14"
-	New()
-		..()
+	Initialize()
+		.=..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
 		src.bitesize = 3
 

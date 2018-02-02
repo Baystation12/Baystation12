@@ -22,7 +22,7 @@
 			return
 		if(length(tmp_label) > 10)
 			to_chat(user, "<span class='notice'>The label can be at most 10 characters long.</span>")
-		else 
+		else
 			if(length(tmp_label))
 				to_chat(user, "<span class='notice'>You set the label to \"[tmp_label]\".</span>")
 				label_text = tmp_label
@@ -32,7 +32,7 @@
 				label_text = null
 				on_reagent_change()
 		return
-		
+
 
 
 /obj/item/weapon/reagent_containers/food/condiment/attack_self(var/mob/user as mob)
@@ -138,29 +138,29 @@
 		center_of_mass = "x=16;y=6"
 	if(label_text)
 		name = addtext(name," ([label_text])")
-	
+
 	return
 
 /obj/item/weapon/reagent_containers/food/condiment/enzyme
 	name = "Universal Enzyme"
 	desc = "Used in cooking various dishes."
 	icon_state = "enzyme"
-	
-/obj/item/weapon/reagent_containers/food/condiment/enzyme/New()
-	. = ..()
+
+/obj/item/weapon/reagent_containers/food/condiment/enzyme/Initialize()
+	.=..()
 	reagents.add_reagent(/datum/reagent/enzyme, 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/barbecue
 	name = "Barbecue Sauce"
 	desc = "Barbecue sauce, it's labeled 'sweet and spicy'"
 	icon_state = "barbecue"
-	
-/obj/item/weapon/reagent_containers/food/condiment/barbecue/New()
-	. = ..()
+
+/obj/item/weapon/reagent_containers/food/condiment/barbecue/Initialize()
+	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/barbecue, 50)
 
-/obj/item/weapon/reagent_containers/food/condiment/sugar/New()
-	. = ..()
+/obj/item/weapon/reagent_containers/food/condiment/sugar/Initialize()
+	.=..()
 	reagents.add_reagent(/datum/reagent/sugar, 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/small
@@ -176,9 +176,9 @@
 	desc = "Salt. From space oceans, presumably."
 	icon_state = "saltshakersmall"
 	center_of_mass = "x=16;y=9"
-	
-/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker/New()
-	..()
+
+/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker/Initialize()
+	.=..()
 	reagents.add_reagent(/datum/reagent/sodiumchloride, 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/peppermill
@@ -186,9 +186,9 @@
 	desc = "Often used to flavor food or make people sneeze."
 	icon_state = "peppermillsmall"
 	center_of_mass = "x=16;y=8"
-	
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill/New()
-	..()
+
+/obj/item/weapon/reagent_containers/food/condiment/small/peppermill/Initialize()
+	.=..()
 	reagents.add_reagent(/datum/reagent/blackpepper, 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar
@@ -196,9 +196,9 @@
 	desc = "Sweetness in a bottle"
 	icon_state = "sugarsmall"
 	center_of_mass = "x=17;y=9"
-	
-/obj/item/weapon/reagent_containers/food/condiment/small/sugar/New()
-	. = ..()
+
+/obj/item/weapon/reagent_containers/food/condiment/small/sugar/Initialize()
+	.=..()
 	reagents.add_reagent(/datum/reagent/sugar, 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/flour
@@ -208,10 +208,10 @@
 	icon_state = "flour"
 	item_state = "flour"
 	randpixel = 10
-	
+
 /obj/item/weapon/reagent_containers/food/condiment/flour/on_reagent_change()
 	return
-	
-/obj/item/weapon/reagent_containers/food/condiment/flour/New()
-	..()
+
+/obj/item/weapon/reagent_containers/food/condiment/flour/Initialize()
+	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/flour, 30)

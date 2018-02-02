@@ -6,8 +6,8 @@
 	var/_output_on = FALSE
 	cur_coils = 0
 
-/obj/machinery/power/smes/buildable/preset/New()
-	..()
+/obj/machinery/power/smes/buildable/preset/Initialize()
+	.=..()
 	configure_and_install_coils()
 	recalc_coils()
 	if(_input_maxed)

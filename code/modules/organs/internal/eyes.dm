@@ -16,8 +16,8 @@
 	robotic = ORGAN_ROBOT
 	organ_tag = BP_OPTICS
 
-/obj/item/organ/internal/eyes/optics/New()
-	..()
+/obj/item/organ/internal/eyes/optics/Initialize()
+	.=..()
 	robotize()
 
 /obj/item/organ/internal/eyes/robotize()
@@ -31,8 +31,8 @@
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
 
-/obj/item/organ/internal/eyes/robot/New()
-	..()
+/obj/item/organ/internal/eyes/robot/Initialize()
+	.=..()
 	robotize()
 
 /obj/item/organ/internal/eyes/replaced(var/mob/living/carbon/human/target)

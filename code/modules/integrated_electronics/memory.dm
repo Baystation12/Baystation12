@@ -9,12 +9,12 @@
 	category = /obj/item/integrated_circuit/memory
 	var/memory_pins = 1
 
-/obj/item/integrated_circuit/memory/New()
+/obj/item/integrated_circuit/memory/Initialize()
+	.=..()
 	for(var/i = 1 to memory_pins)
 		inputs += "input [i]"
 		outputs += "output [i]"
 	complexity = memory_pins
-	..()
 
 /obj/item/integrated_circuit/memory/internal_examine(mob/user)
 	..()

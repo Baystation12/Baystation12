@@ -9,8 +9,8 @@
 	w_class = ITEM_SIZE_NORMAL
 	high_visibility = 1
 
-/obj/item/clothing/accessory/storage/New()
-	..()
+/obj/item/clothing/accessory/storage/Initialize()
+	.=..()
 	create_storage()
 
 /obj/item/clothing/accessory/storage/proc/create_storage()
@@ -103,8 +103,8 @@
 	slots = 2
 	max_w_class = ITEM_SIZE_NORMAL //for knives
 
-/obj/item/clothing/accessory/storage/knifeharness/New()
-	..()
+/obj/item/clothing/accessory/storage/knifeharness/Initialize()
+	.=..()
 	hold.can_hold = list(
 		/obj/item/weapon/material/hatchet,
 		/obj/item/weapon/material/kitchen/utensil/knife,
@@ -122,8 +122,8 @@
 	slots = 10
 	max_w_class = ITEM_SIZE_NORMAL
 
-/obj/item/clothing/accessory/storage/bandolier/New()
-	..()
+/obj/item/clothing/accessory/storage/bandolier/Initialize()
+	.=..()
 	hold.can_hold = list(
 		/obj/item/ammo_casing,
 		/obj/item/weapon/grenade,
@@ -146,8 +146,8 @@
 		/obj/item/weapon/reagent_containers/glass/beaker/vial
 	)
 
-/obj/item/clothing/accessory/storage/bandolier/safari/New()
-	..()
+/obj/item/clothing/accessory/storage/bandolier/safari/Initialize()
+	.=..()
 
 	for(var/i = 0, i < slots, i++)
 		new /obj/item/weapon/net_shell(hold)

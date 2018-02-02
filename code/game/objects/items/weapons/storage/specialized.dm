@@ -64,8 +64,8 @@
 
 	allow_quick_empty = 1 // this function is superceded
 	use_to_pickup = 1
-	New()
-		..()
+	Initialize()
+		. = ..()
 		//verbs -= /obj/item/weapon/storage/verb/quick_empty
 		//verbs += /obj/item/weapon/storage/sheetsnatcher/quick_empty
 

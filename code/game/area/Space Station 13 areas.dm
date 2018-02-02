@@ -34,7 +34,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/debug = 0
 	var/requires_power = 1
-	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
+	var/always_unpowered = 0	//this gets overriden to 1 for space in area/Initialize()
 
 	var/power_equip = 1
 	var/power_light = 1
@@ -198,8 +198,8 @@ area/space/atmosalert()
 	requires_power = 0
 	var/sound/mysound = null
 
-/area/beach/New()
-	..()
+/area/beach/Initialize()
+	. = ..()
 	var/sound/S = new/sound()
 	mysound = S
 	S.file = 'sound/ambience/shore.ogg'

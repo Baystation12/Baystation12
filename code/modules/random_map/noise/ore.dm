@@ -49,7 +49,7 @@
 			var/turf/simulated/T = locate(tx+j, ty+i, origin_z)
 			if(!istype(T) || !T.has_resources)
 				continue
-			if(!priority_process) 
+			if(!priority_process)
 				CHECK_TICK
 			T.resources = list()
 			T.resources["silicates"] = rand(3,5)

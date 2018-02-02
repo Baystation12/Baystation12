@@ -2,7 +2,7 @@
 	luminosity           = TRUE
 	var/dynamic_lighting = TRUE
 
-/area/New()
-	..()
+/area/Initialize()
+	.=..()
 	if(dynamic_lighting)
 		luminosity = FALSE

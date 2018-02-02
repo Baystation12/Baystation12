@@ -32,8 +32,8 @@ var/list/ghost_traps
 	var/list/request_timeouts
 
 /datum/ghosttrap/New()
-	request_timeouts = list()
 	..()
+	request_timeouts = list()
 
 // Check for bans, proper atom types, etc.
 /datum/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target, var/feedback = TRUE)
@@ -170,8 +170,8 @@ var/list/ghost_traps
 	list_as_special_role = FALSE
 
 /datum/ghosttrap/drone/New()
-	minutes_since_death = DRONE_SPAWN_DELAY
 	..()
+	minutes_since_death = DRONE_SPAWN_DELAY
 
 datum/ghosttrap/drone/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target)
 	. = ..()

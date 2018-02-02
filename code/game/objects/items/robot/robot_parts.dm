@@ -106,8 +106,8 @@
 	var/parts = list()
 	var/created_name = ""
 
-/obj/item/robot_parts/robot_suit/New()
-	..()
+/obj/item/robot_parts/robot_suit/Initialize()
+	. = ..()
 	src.update_icon()
 
 /obj/item/robot_parts/robot_suit/update_icon()

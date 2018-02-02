@@ -53,8 +53,8 @@ obj/machinery/atmospherics/mains_pipe
 	var/fatigue_pressure = 170*ONE_ATMOSPHERE
 	alert_pressure = 170*ONE_ATMOSPHERE
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 
 		supply = new(src)
 		supply.volume = volume
@@ -116,9 +116,9 @@ obj/machinery/atmospherics/mains_pipe/simple
 	dir = SOUTH
 	initialize_mains_directions = SOUTH|NORTH
 
-	New()
+	Initialize()
 		nodes.len = 2
-		..()
+		. = ..()
 		switch(dir)
 			if(SOUTH || NORTH)
 				initialize_mains_directions = SOUTH|NORTH
@@ -198,9 +198,9 @@ obj/machinery/atmospherics/mains_pipe/manifold
 	initialize_mains_directions = EAST|NORTH|WEST
 	volume = 105
 
-	New()
+	Initialize()
 		nodes.len = 3
-		..()
+		. ..()
 		initialize_mains_directions = (NORTH|SOUTH|EAST|WEST) & ~dir
 
 	atmos_init()
@@ -263,9 +263,9 @@ obj/machinery/atmospherics/mains_pipe/manifold4w
 	initialize_mains_directions = EAST|NORTH|WEST|SOUTH
 	volume = 105
 
-	New()
+	Initialize()
 		nodes.len = 4
-		..()
+		. = ..()
 
 	atmos_init()
 		for(var/obj/machinery/atmospherics/mains_pipe/target in get_step(src,NORTH))
@@ -313,9 +313,9 @@ obj/machinery/atmospherics/mains_pipe/split
 	var/obj/machinery/atmospherics/node3
 	var/icon_type
 
-	New()
+	Initialize()
 		nodes.len = 2
-		..()
+		. = ..()
 		initialize_mains_directions = turn(dir, 90) | turn(dir, -90)
 		initialize_directions = dir // actually have a normal connection too
 
@@ -364,8 +364,8 @@ obj/machinery/atmospherics/mains_pipe/split
 	supply
 		icon_type = "supply"
 
-		New()
-			..()
+		Initialize()
+			. = ..()
 			split_node = supply
 
 		hidden
@@ -379,8 +379,8 @@ obj/machinery/atmospherics/mains_pipe/split
 	scrubbers
 		icon_type = "scrubbers"
 
-		New()
-			..()
+		Initialize()
+			. =..()
 			split_node = scrubbers
 
 		hidden
@@ -394,8 +394,8 @@ obj/machinery/atmospherics/mains_pipe/split
 	aux
 		icon_type = "aux"
 
-		New()
-			..()
+		Initialize()
+			.=..()
 			split_node = aux
 
 		hidden
@@ -414,9 +414,9 @@ obj/machinery/atmospherics/mains_pipe/split3
 	var/obj/machinery/atmospherics/scrubbers_node
 	var/obj/machinery/atmospherics/aux_node
 
-	New()
+	Initialize()
 		nodes.len = 1
-		..()
+		.=..()
 		initialize_mains_directions = dir
 		initialize_directions = GLOB.cardinal & ~dir // actually have a normal connection too
 
@@ -506,9 +506,9 @@ obj/machinery/atmospherics/mains_pipe/cap
 	initialize_directions = SOUTH
 	volume = 35
 
-	New()
+	Initialize()
 		nodes.len = 1
-		..()
+		.=..()
 		initialize_mains_directions = dir
 
 	update_icon()

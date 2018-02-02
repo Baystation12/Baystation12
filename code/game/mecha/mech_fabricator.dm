@@ -25,8 +25,8 @@
 	var/manufacturer = null
 	var/sync_message = ""
 
-/obj/machinery/mecha_part_fabricator/New()
-	..()
+/obj/machinery/mecha_part_fabricator/Initialize()
+	. = ..()
 
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/mechfab(src)

@@ -212,8 +212,8 @@
 		return 1
 
 
-/obj/item/device/assembly_holder/New()
-	..()
+/obj/item/device/assembly_holder/Initialize()
+	. = ..()
 	GLOB.listening_objects += src
 
 /obj/item/device/assembly_holder/Destroy()
@@ -233,8 +233,8 @@
 /obj/item/device/assembly_holder/timer_igniter
 	name = "timer-igniter assembly"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 
 		var/obj/item/device/assembly/igniter/ign = new(src)
 		ign.secured = 1

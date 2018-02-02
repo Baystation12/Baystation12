@@ -16,34 +16,34 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	density = 1
 	anchored = 1
 
-	Bump(atom/clong)
-		if(istype(clong, /turf/simulated/shuttle)) //Skip shuttles without actually deleting the rod
-			return
+/obj/effect/immovablerod/Bump(atom/clong)
+	if(istype(clong, /turf/simulated/shuttle)) //Skip shuttles without actually deleting the rod
+		return
 
-		else if (istype(clong, /turf) && !istype(clong, /turf/unsimulated))
-			if(clong.density)
-				clong.ex_act(2)
-				for (var/mob/O in hearers(src, null))
-					O.show_message("CLANG", 2)
+	else if (istype(clong, /turf) && !istype(clong, /turf/unsimulated))
+		if(clong.density)
+			clong.ex_act(2)
+			for (var/mob/O in hearers(src, null))
+				O.show_message("CLANG", 2)
 
-		else if (istype(clong, /obj))
-			if(clong.density)
-				clong.ex_act(2)
-				for (var/mob/O in hearers(src, null))
-					O.show_message("CLANG", 2)
+	else if (istype(clong, /obj))
+		if(clong.density)
+			clong.ex_act(2)
+			for (var/mob/O in hearers(src, null))
+				O.show_message("CLANG", 2)
 
-		else if (istype(clong, /mob))
-			if(clong.density || prob(10))
-				clong.ex_act(2)
-		else
-			qdel(src)
+	else if (istype(clong, /mob))
+		if(clong.density || prob(10))
+			clong.ex_act(2)
+	else
+		qdel(src)
 
-		if(clong && prob(25))
-			src.forceMove(clong.loc)
+	if(clong && prob(25))
+		src.forceMove(clong.loc)
 
-	Destroy()
-		walk(src, 0) // Because we might have called walk_towards, we must stop the walk loop or BYOND keeps an internal reference to us forever.
-		return ..()
+/obj/effect/immovablerod/Destroy()
+	walk(src, 0) // Because we might have called walk_towards, we must stop the walk loop or BYOND keeps an internal reference to us forever.
+	return ..()
 
 /proc/immovablerod()
 	var/startx = 0

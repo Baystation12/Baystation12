@@ -28,8 +28,8 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 
-/obj/item/clothing/suit/fire/New()
-	..()
+/obj/item/clothing/suit/fire/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 1.0
 
 /obj/item/clothing/suit/fire/firefighter
@@ -50,8 +50,8 @@
 	)
 	w_class = ITEM_SIZE_HUGE//bulky item
 
-/obj/item/clothing/suit/fire/heavy/New()
-	..()
+/obj/item/clothing/suit/fire/heavy/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 1.5
 
 /*
@@ -80,8 +80,8 @@
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
 
-/obj/item/clothing/suit/bomb_suit/New()
-	..()
+/obj/item/clothing/suit/bomb_suit/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 2
 
 /obj/item/clothing/head/bomb_hood/security
@@ -121,6 +121,6 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 100)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
 
-/obj/item/clothing/suit/radiation/New()
-	..()
+/obj/item/clothing/suit/radiation/Initialize()
+	.=..()
 	slowdown_per_slot[slot_shoes] = 1.5

@@ -233,8 +233,8 @@
 	brute_resist = 1
 	fire_resist = 2
 	laser_resist = 6
-/obj/effect/blob/shield/New()
-	..()
+/obj/effect/blob/shield/Initialize()
+	. = ..()
 	update_nearby_tiles()
 
 /obj/effect/blob/shield/Destroy()

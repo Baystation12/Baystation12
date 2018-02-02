@@ -654,8 +654,8 @@
 		for(var/obj/item/tool in tools)
 			to_chat(usr, "\icon[tool] - [tool.name][tools[current_tool]==tool?" (selected)":""]")
 
-/obj/item/weapon/combitool/New()
-	..()
+/obj/item/weapon/combitool/Initialize()
+	. = ..()
 	for(var/type in spawn_tools)
 		tools |= new type(src)
 

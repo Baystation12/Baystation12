@@ -10,8 +10,8 @@
 	sharp = 1
 	edge =  1
 
-/obj/item/weapon/material/star/New()
-	..()
+/obj/item/weapon/material/star/Initialize()
+	. = ..()
 
 /obj/item/weapon/material/star/throw_impact(atom/hit_atom)
 	..()

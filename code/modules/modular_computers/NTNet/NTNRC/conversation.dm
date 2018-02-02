@@ -9,11 +9,11 @@ var/global/ntnrc_uid = 0
 	var/password
 
 /datum/ntnet_conversation/New()
+	..()
 	id = ntnrc_uid
 	ntnrc_uid++
 	if(ntnet_global)
 		ntnet_global.chat_channels.Add(src)
-	..()
 
 /datum/ntnet_conversation/proc/add_message(var/message, var/username)
 	message = "[stationtime2text()] [username]: [message]"

@@ -8,9 +8,8 @@
 	var/min_range = 0
 	var/max_range = 3
 
-/obj/item/integrated_circuit/sensor/New()
-	..()
-
+/obj/item/integrated_circuit/sensor/Initialize()
+	.=..()
 	if(min_range != max_range && max_range)
 		extended_desc = "This sensor has a variable detection range from [min_range] to [max_range] meters away from its location."
 	else if(min_range == max_range)
@@ -25,8 +24,8 @@
 	var/datum/proximity_trigger/proximity_trigger
 	category = /obj/item/integrated_circuit/sensor/proximity
 
-/obj/item/integrated_circuit/sensor/proximity/New()
-	..()
+/obj/item/integrated_circuit/sensor/proximity/Initialize()
+	.=..()
 	var/datum/integrated_io/range = inputs[2]
 	range.data = between(min_range, range.data, max_range)
 

@@ -87,8 +87,8 @@
 	else
 		return ..()
 
-/obj/item/weapon/storage/wallet/random/New()
-	..()
+/obj/item/weapon/storage/wallet/random/Initialize()
+	. = ..()
 	var/item1_type = pick( /obj/item/weapon/spacecash/bundle/c10,/obj/item/weapon/spacecash/bundle/c100,/obj/item/weapon/spacecash/bundle/c1000,/obj/item/weapon/spacecash/bundle/c20,/obj/item/weapon/spacecash/bundle/c200,/obj/item/weapon/spacecash/bundle/c50, /obj/item/weapon/spacecash/bundle/c500)
 	var/item2_type
 	if(prob(50))
@@ -108,8 +108,8 @@
 	name = "polychromic wallet"
 	desc = "You can recolor it! Fancy! The future is NOW!"
 
-/obj/item/weapon/storage/wallet/poly/New()
-	..()
+/obj/item/weapon/storage/wallet/poly/Initialize()
+	. = ..()
 	color = get_random_colour()
 	update_icon()
 

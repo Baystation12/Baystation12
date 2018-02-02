@@ -29,10 +29,10 @@
 	var/colorshift
 
 /datum/random_map/automata/cave_system/mountains/New()
+	..()
 	colorshift = round(rand(0,360),20)
 	target_turf_type = world.turf
 	floor_type = world.turf
-	..()
 
 /datum/random_map/automata/cave_system/mountains/get_additional_spawns(var/value, var/turf/T)
 	..()

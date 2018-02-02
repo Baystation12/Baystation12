@@ -38,8 +38,8 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = list(SPECIES_VOX)
 
-/obj/item/clothing/suit/space/vox/New()
-	..()
+/obj/item/clothing/suit/space/vox/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 2
 
 /obj/item/clothing/head/helmet/space/vox

@@ -161,8 +161,8 @@ var/global/list/image/splatter_cache=list()
 	amount = 0
 	var/message
 
-/obj/effect/decal/cleanable/blood/writing/New()
-	..()
+/obj/effect/decal/cleanable/blood/writing/Initialize()
+	. = ..()
 	if(LAZYLEN(random_icon_states))
 		for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
 			random_icon_states.Remove(W.icon_state)
@@ -240,7 +240,7 @@ var/global/list/image/splatter_cache=list()
 	var/list/datum/disease2/disease/virus2 = list()
 	var/dry=0 // Keeps the lag down
 
-/obj/effect/decal/cleanable/mucus/New()
-	..()
+/obj/effect/decal/cleanable/mucus/Initialize()
+	. = ..()
 	spawn(DRYING_TIME * 2)
 		dry=1

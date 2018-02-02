@@ -7,14 +7,14 @@
 	var/cell_smooth_amt = 5
 	var/random_variance_chance = 25 // % chance of applying random_element.
 	var/random_element = 0.5        // Determines the variance when smoothing out cell values.
-	var/cell_base                   // Set in New()
-	var/initial_cell_range          // Set in New()
+	var/cell_base                   // Set in Initialize()
+	var/initial_cell_range          // Set in Initialize()
 	var/smoothing_iterations = 0
 
 /datum/random_map/noise/New()
+	..()
 	initial_cell_range = cell_range/5
 	cell_base = cell_range/2
-	..()
 
 /datum/random_map/noise/set_map_size()
 	// Make sure the grid is a square with limits that are
@@ -104,7 +104,7 @@
 
  	// Recurse until size is too small to subdivide.
 	if(isize>3)
-		if(!priority_process) 
+		if(!priority_process)
 			CHECK_TICK
 		iteration++
 		subdivide(iteration, x,       y,       hsize)

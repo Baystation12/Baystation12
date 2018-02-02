@@ -23,8 +23,8 @@
 	desc = "Directions for use: Requires two people, one to pull each end."
 	var/cracked = 0
 
-/obj/item/weapon/toy/xmas_cracker/New()
-	..()
+/obj/item/weapon/toy/xmas_cracker/Initialize()
+	. = ..()
 
 /obj/item/weapon/toy/xmas_cracker/attack(mob/target, mob/user)
 	if( !cracked && istype(target,/mob/living/carbon/human) && (target.stat == CONSCIOUS) && !target.get_active_hand() )

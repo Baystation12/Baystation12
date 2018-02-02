@@ -1,4 +1,4 @@
-/mob/living/carbon/New()
+/mob/living/carbon/Initialize()
 	//setup reagent holders
 	bloodstr = new/datum/reagents/metabolism(1000, src, CHEM_BLOOD)
 	ingested = new/datum/reagents/metabolism(1000, src, CHEM_INGEST)
@@ -7,7 +7,7 @@
 
 	if (!default_language && species_language)
 		default_language = all_languages[species_language]
-	..()
+	.=..()
 
 /mob/living/carbon/Destroy()
 	QDEL_NULL(ingested)

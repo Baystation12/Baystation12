@@ -13,8 +13,8 @@
 	user.visible_message(text("<span class='notice'>[] uses [] to towel themselves off.</span>", user, src))
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 
-/obj/item/weapon/towel/random/New()
-	..()
+/obj/item/weapon/towel/random/Initialize()
+	. = ..()
 	color = get_random_colour()
 
 /obj/item/weapon/towel/fleece // loot from the king of goats. it's a golden towel

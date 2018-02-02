@@ -31,9 +31,9 @@
 	var/max_pill_count = 20
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
-/obj/machinery/chem_master/New()
+/obj/machinery/chem_master/Initialize()
+	.=..()
 	create_reagents(120)
-	..()
 
 /obj/machinery/chem_master/ex_act(severity)
 	switch(severity)
@@ -319,8 +319,8 @@
 		/obj/item/stack/material/mhydrogen = /datum/reagent/hydrazine
 		)
 
-/obj/machinery/reagentgrinder/New()
-	..()
+/obj/machinery/reagentgrinder/Initialize()
+	.=..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	return
 

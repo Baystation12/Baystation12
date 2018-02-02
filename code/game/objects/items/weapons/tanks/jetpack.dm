@@ -14,8 +14,8 @@
 	var/volume_rate = 500              //Needed for borg jetpack transfer
 	action_button_name = "Toggle Jetpack"
 
-/obj/item/weapon/tank/jetpack/New()
-	..()
+/obj/item/weapon/tank/jetpack/Initialize()
+	. = ..()
 	src.ion_trail = new /datum/effect/effect/system/trail/ion()
 	src.ion_trail.set_up(src)
 
@@ -79,8 +79,8 @@
 	icon_state = "jetpack-void"
 	item_state =  "jetpack-void"
 
-/obj/item/weapon/tank/jetpack/void/New()
-	..()
+/obj/item/weapon/tank/jetpack/void/Initialize()
+	. = ..()
 	air_contents.adjust_gas("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 	return
 
@@ -90,8 +90,8 @@
 	icon_state = "jetpack"
 	item_state = "jetpack"
 
-/obj/item/weapon/tank/jetpack/oxygen/New()
-	..()
+/obj/item/weapon/tank/jetpack/oxygen/Initialize()
+	. = ..()
 	air_contents.adjust_gas("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 	return
 
@@ -102,8 +102,8 @@
 	icon_state = "jetpack-black"
 	item_state =  "jetpack-black"
 
-/obj/item/weapon/tank/jetpack/carbondioxide/New()
-	..()
+/obj/item/weapon/tank/jetpack/carbondioxide/Initialize()
+	. = ..()
 	air_contents.adjust_gas("carbon_dioxide", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 	return
 

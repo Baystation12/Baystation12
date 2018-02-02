@@ -10,44 +10,42 @@
 	idle_power_usage = 0
 	var/obj/item/device/radio/beacon/Beacon
 
-	New()
-		..()
+/obj/machinery/bluespace_beacon/Initialize()
+	. = ..()
+	var/turf/T = loc
+	Beacon = new /obj/item/device/radio/beacon
+	Beacon.invisibility = INVISIBILITY_MAXIMUM
+	Beacon.loc = T
+
+	hide(!T.is_plating())
+
+/obj/machinery/bluespace_beacon/Destroy()
+	QDEL_NULL(Beacon)
+	. = ..()
+
+// update the invisibility and icon
+/obj/machinery/bluespace_beacon/hide(var/intact)
+	set_invisibility(intact ? 101 : 0)
+	update_icon()
+
+// update the icon_state
+/obj/machinery/bluespace_beacon/update_icon()
+	var/state="floor_beacon"
+
+	if(invisibility)
+		icon_state = "[state]f"
+
+	else
+		icon_state = "[state]"
+
+/obj/machinery/bluespace_beacon/Process()
+	if(!Beacon)
 		var/turf/T = loc
 		Beacon = new /obj/item/device/radio/beacon
-		Beacon.invisibility = INVISIBILITY_MAXIMUM
+		Beacon.set_invisibility(INVISIBILITY_MAXIMUM)
 		Beacon.loc = T
+	if(Beacon)
+		if(Beacon.loc != loc)
+			Beacon.loc = loc
 
-		hide(!T.is_plating())
-
-	Destroy()
-		QDEL_NULL(Beacon)
-		. = ..()
-
-	// update the invisibility and icon
-	hide(var/intact)
-		set_invisibility(intact ? 101 : 0)
-		update_icon()
-
-	// update the icon_state
 	update_icon()
-		var/state="floor_beacon"
-
-		if(invisibility)
-			icon_state = "[state]f"
-
-		else
-			icon_state = "[state]"
-
-	Process()
-		if(!Beacon)
-			var/turf/T = loc
-			Beacon = new /obj/item/device/radio/beacon
-			Beacon.set_invisibility(INVISIBILITY_MAXIMUM)
-			Beacon.loc = T
-		if(Beacon)
-			if(Beacon.loc != loc)
-				Beacon.loc = loc
-
-		update_icon()
-
-

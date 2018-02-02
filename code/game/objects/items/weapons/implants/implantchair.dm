@@ -26,8 +26,8 @@
 		add_implants()
 
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		add_implants()
 
 

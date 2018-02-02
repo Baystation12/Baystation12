@@ -86,15 +86,14 @@
 /obj/item/weapon/storage/box/holobadge
 	name = "holobadge box"
 	desc = "A box containing holobadges."
-	New()
+	Initialize()
+		.=..()
 		new /obj/item/clothing/accessory/badge/holo(src)
 		new /obj/item/clothing/accessory/badge/holo(src)
 		new /obj/item/clothing/accessory/badge/holo(src)
 		new /obj/item/clothing/accessory/badge/holo(src)
 		new /obj/item/clothing/accessory/badge/holo/cord(src)
 		new /obj/item/clothing/accessory/badge/holo/cord(src)
-		..()
-		return
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
@@ -127,7 +126,7 @@
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	badge_string = "Colonial Marshal Bureau"
-	
+
 /obj/item/clothing/accessory/badge/press
 	name = "press badge"
 	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."

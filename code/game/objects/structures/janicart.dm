@@ -15,7 +15,8 @@
 	var/signs = 0	//maximum capacity hardcoded below
 
 
-/obj/structure/janitorialcart/New()
+/obj/structure/janitorialcart/Initialize()
+	. = ..()
 	create_reagents(180)
 
 
@@ -176,7 +177,8 @@
 	var/callme = "pimpin' ride"	//how do people refer to it?
 
 
-/obj/structure/bed/chair/janicart/New()
+/obj/structure/bed/chair/janicart/Initialize()
+	. = ..()
 	create_reagents(100)
 
 

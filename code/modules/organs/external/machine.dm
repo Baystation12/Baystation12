@@ -12,11 +12,11 @@
 	var/servo_cost = 0.8
 
 
-/obj/item/organ/internal/cell/New()
+/obj/item/organ/internal/cell/Initialize()
+	.=..()
 	robotize()
 	if(ispath(cell))
 		cell = new cell(src)
-	..()
 
 /obj/item/organ/internal/cell/proc/percent()
 	if(!cell)

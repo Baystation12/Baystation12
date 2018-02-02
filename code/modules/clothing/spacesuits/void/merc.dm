@@ -24,11 +24,11 @@
 	siemens_coefficient = 0.3
 	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC)
 
-/obj/item/clothing/suit/space/void/merc/New()
-	..()
+/obj/item/clothing/suit/space/void/merc/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
-/obj/item/clothing/suit/space/void/merc/prepared/New()
-	..()
+/obj/item/clothing/suit/space/void/merc/prepared/Initialize()
+	.=..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/merc
 	boots = new /obj/item/clothing/shoes/magboots

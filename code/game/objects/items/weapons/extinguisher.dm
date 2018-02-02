@@ -34,10 +34,10 @@
 	max_water = 1000
 	sprite_name = "miniFE"
 
-/obj/item/weapon/extinguisher/New()
+/obj/item/weapon/extinguisher/Initialize()
 	create_reagents(max_water)
 	reagents.add_reagent(/datum/reagent/water, max_water)
-	..()
+	. = ..()
 
 /obj/item/weapon/extinguisher/examine(mob/user)
 	if(..(user, 0))
@@ -61,10 +61,10 @@
 
 		src.last_use = world.time
 		reagents.splash(M, min(reagents.total_volume, spray_amount))
-		
+
 		user.visible_message("<span class='notice'>\The [user] sprays \the [M] with \the [src].</span>")
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
-		
+
 		return 1 // No afterattack
 	return ..()
 

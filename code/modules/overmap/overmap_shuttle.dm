@@ -108,7 +108,8 @@
 	var/opened = 0
 	var/parent_shuttle
 
-/obj/structure/fuel_port/New()
+/obj/structure/fuel_port/Initialize()
+	.=..()
 	src.contents.Add(new/obj/item/weapon/tank/hydrogen)
 
 /obj/structure/fuel_port/attack_hand(mob/user as mob)

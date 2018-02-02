@@ -45,9 +45,9 @@
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
 
-/turf/simulated/floor/exoplanet/snow/New()
+/turf/simulated/floor/exoplanet/snow/Initialize()
+	.=..()
 	icon_state = pick("snow[rand(1,12)]","snow0")
-	..()
 
 /turf/simulated/floor/exoplanet/snow/fire_act(datum/gas_mixture/air, temperature, volume)
 	name = "permafrost"

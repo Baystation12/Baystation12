@@ -67,7 +67,8 @@
 	name = "reinforced holofloor"
 	icon_state = "reinforced"
 
-/turf/simulated/floor/holofloor/space/New()
+/turf/simulated/floor/holofloor/space/Initialize()
+	.=..()
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
 /turf/simulated/floor/holofloor/beach
@@ -104,8 +105,8 @@
 	base_icon = 'icons/turf/flooring/asteroid.dmi'
 	initial_flooring = null
 
-/turf/simulated/floor/holofloor/desert/New()
-	..()
+/turf/simulated/floor/holofloor/desert/Initialize()
+	.=..()
 	if(prob(10))
 		overlays += "asteroid[rand(0,9)]"
 
@@ -221,12 +222,10 @@
 	var/item_color
 
 /obj/item/weapon/holo/esword/green
-	New()
-		item_color = "green"
+	item_color = "green"
 
 /obj/item/weapon/holo/esword/red
-	New()
-		item_color = "red"
+	item_color = "red"
 
 /obj/item/weapon/holo/esword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
@@ -239,7 +238,7 @@
 		return 1
 	return 0
 
-/obj/item/weapon/holo/esword/New()
+/obj/item/weapon/holo/esword/Initialize()
 	item_color = pick("red","blue","green","purple")
 
 /obj/item/weapon/holo/esword/attack_self(mob/living/user as mob)
@@ -315,8 +314,8 @@
 	to_chat(user, "The AI is not to interact with these devices!")
 	return
 
-/obj/machinery/readybutton/New()
-	..()
+/obj/machinery/readybutton/Initialize()
+	.=..()
 
 
 /obj/machinery/readybutton/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -381,8 +380,8 @@
 	meat_amount = 0
 	meat_type = null
 
-/mob/living/simple_animal/hostile/carp/holodeck/New()
-	..()
+/mob/living/simple_animal/hostile/carp/holodeck/Initialize()
+	.=..()
 	set_light(2) //hologram lighting
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)

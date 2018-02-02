@@ -38,8 +38,8 @@
 		if(owner.ckey)
 			ownerckey = owner.ckey
 
-/obj/item/organ/internal/stack/New()
-	..()
+/obj/item/organ/internal/stack/Initialize()
+	.=..()
 	do_backup()
 	robotize()
 

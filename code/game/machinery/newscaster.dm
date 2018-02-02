@@ -59,6 +59,7 @@
 	var/datum/feed_message/wanted_issue
 
 /datum/feed_network/New()
+	..()
 	CreateFeedChannel("Announcements", "SS13", 1, 1, "New Announcement Available")
 
 /datum/feed_network/proc/CreateFeedChannel(var/channel_name, var/author, var/locked, var/adminChannel = 0, var/announcement_message)
@@ -173,13 +174,13 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	name = "Security Newscaster"
 	securityCaster = 1
 
-/obj/machinery/newscaster/New()         //Constructor, ho~
+/obj/machinery/newscaster/Initialize()  //Constructor, ho~
 	allCasters += src
 	src.paper_remaining = 15            // Will probably change this to something better
 	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters) // Let's give it an appropriate unit number
 		src.unit_no++
 	src.update_icon() //for any custom ones on the map...
-	..()                                //I just realised the newscasters weren't in the global machines list. The superconstructor call will tend to that
+	. = ..()                                //I just realised the newscasters weren't in the global machines list. The superconstructor call will tend to that
 
 /obj/machinery/newscaster/Destroy()
 	allCasters -= src

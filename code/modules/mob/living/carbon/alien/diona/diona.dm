@@ -43,9 +43,8 @@
 /mob/living/carbon/alien/diona/IsAdvancedToolUser()
 	return FALSE
 
-/mob/living/carbon/alien/diona/New()
-
-	..()
+/mob/living/carbon/alien/diona/Initialize()
+	.=..()
 	species = all_species[SPECIES_DIONA]
 	add_language(LANGUAGE_ROOTGLOBAL)
 	add_language(LANGUAGE_GALCOM)

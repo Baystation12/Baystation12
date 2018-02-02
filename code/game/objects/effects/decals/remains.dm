@@ -30,12 +30,12 @@
 	desc = "They look like the remains of a small rodent."
 	icon_state = "lizard"
 
-/obj/item/remains/attack_hand(mob/user as mob)
+/obj/item/remains/attack_hand(mob/user)
 	to_chat(user, "<span class='notice'>[src] sinks together into a pile of ash.</span>")
 	var/turf/simulated/floor/F = get_turf(src)
 	if (istype(F))
 		new /obj/effect/decal/cleanable/ash(F)
 	qdel(src)
 
-/obj/item/remains/robot/attack_hand(mob/user as mob)
+/obj/item/remains/robot/attack_hand(mob/user)
 	return

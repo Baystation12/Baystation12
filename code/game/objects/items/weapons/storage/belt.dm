@@ -60,8 +60,8 @@
 		)
 
 
-/obj/item/weapon/storage/belt/utility/full/New()
-	..()
+/obj/item/weapon/storage/belt/utility/full/Initialize()
+	. = ..()
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
@@ -70,8 +70,8 @@
 	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
 
 
-/obj/item/weapon/storage/belt/utility/atmostech/New()
-	..()
+/obj/item/weapon/storage/belt/utility/atmostech/Initialize()
+	. = ..()
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
@@ -157,8 +157,8 @@
 		/obj/item/device/soulstone
 		)
 
-/obj/item/weapon/storage/belt/soulstone/full/New()
-	..()
+/obj/item/weapon/storage/belt/soulstone/full/Initialize()
+	. = ..()
 	new /obj/item/device/soulstone(src)
 	new /obj/item/device/soulstone(src)
 	new /obj/item/device/soulstone(src)
@@ -203,6 +203,6 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = ITEM_SIZE_NORMAL * 4
 
-/obj/item/weapon/storage/belt/waistpack/big/New()
-	..()
+/obj/item/weapon/storage/belt/waistpack/big/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_belt] = 3

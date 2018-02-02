@@ -52,8 +52,8 @@
 	if(printing)
 		overlays += "bioprinter_working"
 
-/obj/machinery/organ_printer/New()
-	..()
+/obj/machinery/organ_printer/Initialize()
+	. = ..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -136,8 +136,8 @@
 		new /obj/item/stack/material/steel(get_turf(src), Floor(stored_matter/matter_amount_per_sheet))
 	return ..()
 
-/obj/machinery/organ_printer/robot/New()
-	..()
+/obj/machinery/organ_printer/robot/Initialize()
+	. = ..()
 	component_parts += new /obj/item/weapon/circuitboard/roboprinter
 
 /obj/machinery/organ_printer/robot/print_organ(var/choice)
@@ -194,8 +194,8 @@
 			new /obj/item/weapon/reagent_containers/food/snacks/meat(T)
 	return ..()
 
-/obj/machinery/organ_printer/flesh/New()
-	..()
+/obj/machinery/organ_printer/flesh/Initialize()
+	. = ..()
 	component_parts += new /obj/item/device/healthanalyzer
 	component_parts += new /obj/item/weapon/circuitboard/bioprinter
 
@@ -212,7 +212,7 @@
 			O = ..()
 		O.set_dna(H.dna)
 		if(O.species)
-			// This is a very hacky way of doing of what organ/New() does if it has an owner
+			// This is a very hacky way of doing of what organ/Initialize() does if it has an owner
 			O.w_class = max(O.w_class + mob_size_difference(O.species.mob_size, MOB_MEDIUM), 1)
 
 	visible_message("<span class='info'>\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O].</span>")

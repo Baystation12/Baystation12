@@ -285,8 +285,8 @@
 	var/skin = null //Same as medbot, set to tox or ointment for the respective kits.
 	w_class = ITEM_SIZE_NORMAL
 
-/obj/item/weapon/firstaid_arm_assembly/New()
-	..()
+/obj/item/weapon/firstaid_arm_assembly/Initialize()
+	.=..()
 	spawn(5) // Terrible. TODO: fix
 		if(skin)
 			overlays += image('icons/obj/aibots.dmi', "kit_skin_[src.skin]")

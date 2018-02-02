@@ -3,8 +3,8 @@
 	health = 1
 	var/triggered = 0
 
-/obj/structure/deity/trap/New()
-	..()
+/obj/structure/deity/trap/Initialize()
+	. = ..()
 	GLOB.entered_event.register(get_turf(src),src,/obj/structure/deity/trap/proc/trigger)
 
 /obj/structure/deity/trap/Destroy()

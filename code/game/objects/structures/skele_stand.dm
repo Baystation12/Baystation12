@@ -6,8 +6,8 @@
 	desc = "It's an anatomical model of a human skeletal system made of plaster."
 	var/list/swag = list()
 
-/obj/structure/skele_stand/New()
-	..()
+/obj/structure/skele_stand/Initialize()
+	. = ..()
 	gender = pick(MALE, FEMALE)
 
 /obj/structure/skele_stand/proc/rattle_bones(mob/user, atom/thingy)

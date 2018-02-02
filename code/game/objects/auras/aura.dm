@@ -6,8 +6,8 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura
 	var/mob/living/user
 
-/obj/aura/New(var/mob/living/target)
-	..()
+/obj/aura/Initialize(var/mob/living/target)
+	. = ..()
 	user = target
 	user.add_aura(src)
 

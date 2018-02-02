@@ -23,6 +23,7 @@ GLOBAL_DATUM_INIT(event_manager, /datum/event_manager, new)
 	var/datum/event_meta/new_event = new
 
 /datum/event_manager/New()
+	..()
 	allEvents = typesof(/datum/event) - /datum/event
 
 /datum/event_manager/proc/event_complete(var/datum/event/E)

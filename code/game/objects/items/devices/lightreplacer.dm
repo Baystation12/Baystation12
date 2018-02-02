@@ -57,12 +57,7 @@
 	var/max_uses = 32
 	var/uses = 32
 	var/emagged = 0
-	var/failmsg = ""
 	var/charge = 0
-
-/obj/item/device/lightreplacer/New()
-	failmsg = "The [name]'s refill light blinks red."
-	..()
 
 /obj/item/device/lightreplacer/examine(mob/user)
 	if(..(user, 2))
@@ -130,7 +125,7 @@
 	if(target.get_status() == LIGHT_OK)
 		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
 	else if(!CanUse(U))
-		to_chat(U, failmsg)
+		to_chat(U, "The [name]'s refill light blinks red.")
 	else if(Use(U))
 		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
 

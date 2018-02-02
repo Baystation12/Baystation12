@@ -37,8 +37,8 @@
 	var/frustration = 0
 	var/max_frustration = 0
 
-/mob/living/bot/New()
-	..()
+/mob/living/bot/Initialize()
+	.=..()
 	update_icons()
 
 	botcard = new /obj/item/weapon/card/id(src)

@@ -1,8 +1,8 @@
 /obj/item/clothing/suit/storage
 	var/obj/item/weapon/storage/internal/pockets/pockets
 
-/obj/item/clothing/suit/storage/New()
-	..()
+/obj/item/clothing/suit/storage/Initialize()
+	.=..()
 	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 2, slot_size = 2) //two slots, fit only pocket sized items
 
 /obj/item/clothing/suit/storage/Destroy()
@@ -49,13 +49,13 @@
 		update_clothing_icon()	//so our overlays update
 
 
-/obj/item/clothing/suit/storage/vest/merc/New()
-	..()
+/obj/item/clothing/suit/storage/vest/merc/Initialize()
+	.=..()
 	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 4, slot_size = 2)
 
 
-/obj/item/clothing/suit/storage/vest/tactical/New()
-	..()
+/obj/item/clothing/suit/storage/vest/tactical/Initialize()
+	.=..()
 	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots = 4, slot_size = 2)
 
 

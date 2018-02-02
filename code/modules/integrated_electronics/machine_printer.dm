@@ -19,8 +19,8 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 	var/static/list/recipe_list
 	var/mode = "Circuits"
 
-/obj/machinery/integrated_circuit_printer/New()
-	..()
+/obj/machinery/integrated_circuit_printer/Initialize()
+	.=..()
 	if(!recipe_list)
 		recipe_list = list("Circuits" = typesof(/obj/item/integrated_circuit) - integrated_circuit_blacklist,
 						"Assemblies" = typesof(/obj/item/device/electronic_assembly))

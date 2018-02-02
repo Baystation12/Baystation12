@@ -189,10 +189,10 @@
 	var/spray_amount = 5	//units of liquid per particle. 5 is enough to wet the floor - it's a big fire extinguisher, so should be fine
 	var/max_water = 1000
 
-	New()
+	Initialize()
 		create_reagents(max_water)
 		reagents.add_reagent(/datum/reagent/water, max_water)
-		..()
+		. = ..()
 
 	action(atom/target) //copypasted from extinguisher. TODO: Rewrite from scratch.
 		if(!action_checks(target) || get_dist(chassis, target)>3) return
@@ -599,8 +599,8 @@
 	var/icon/droid_overlay
 	var/list/repairable_damage = list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH)
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		pr_repair_droid = new /datum/global_iterator/mecha_repair_droid(list(src),0)
 		pr_repair_droid.set_delay(equip_cooldown)
 		return
@@ -692,8 +692,8 @@
 	var/coeff = 100
 	var/list/use_channels = list(EQUIP,ENVIRON,LIGHT)
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		pr_energy_relay = new /datum/global_iterator/mecha_energy_relay(list(src),0)
 		pr_energy_relay.set_delay(equip_cooldown)
 		return
@@ -781,8 +781,8 @@
 	var/fuel_per_cycle_active = 500
 	var/power_per_cycle = 1 KILOWATTS
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		init()
 		return
 
@@ -1151,10 +1151,10 @@
 	var/max_cable = 1000
 	required_type = /obj/mecha/working
 
-/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/New()
+/obj/item/mecha_parts/mecha_equipment/tool/cable_layer/Initialize()
 	cable = new(src)
 	cable.amount = 0
-	..()
+	. = ..()
 
 /obj/item/mecha_parts/mecha_equipment/tool/cable_layer/attach()
 	..()

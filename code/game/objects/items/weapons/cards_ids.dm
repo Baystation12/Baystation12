@@ -118,8 +118,8 @@ var/const/NO_EMAG_ACT = -50
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
 
-/obj/item/weapon/card/id/New()
-	..()
+/obj/item/weapon/card/id/Initialize()
+	. = ..()
 	if(job_access_type)
 		var/datum/job/j = job_master.GetJobByType(job_access_type)
 		if(j)
@@ -254,9 +254,9 @@ var/const/NO_EMAG_ACT = -50
 	registered_name = "Captain"
 	assignment = "Captain"
 
-/obj/item/weapon/card/id/captains_spare/New()
+/obj/item/weapon/card/id/captains_spare/Initialize()
 	access = get_all_station_access()
-	..()
+	. = ..()
 
 /obj/item/weapon/card/id/synthetic
 	name = "\improper Synthetic ID"
@@ -265,9 +265,9 @@ var/const/NO_EMAG_ACT = -50
 	item_state = "tdgreen"
 	assignment = "Synthetic"
 
-/obj/item/weapon/card/id/synthetic/New()
+/obj/item/weapon/card/id/synthetic/Initialize()
 	access = get_all_station_access() + access_synth
-	..()
+	. = ..()
 
 /obj/item/weapon/card/id/centcom
 	name = "\improper CentCom. ID"
@@ -275,20 +275,20 @@ var/const/NO_EMAG_ACT = -50
 	icon_state = "centcom"
 	registered_name = "Central Command"
 	assignment = "General"
-/obj/item/weapon/card/id/centcom/New()
+/obj/item/weapon/card/id/centcom/Initialize()
 	access = get_all_centcom_access()
-	..()
+	. = ..()
 
-/obj/item/weapon/card/id/centcom/station/New()
-	..()
+/obj/item/weapon/card/id/centcom/station/Initialize()
+	. = ..()
 	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"
 	assignment = "Emergency Response Team"
 
-/obj/item/weapon/card/id/centcom/ERT/New()
-	..()
+/obj/item/weapon/card/id/centcom/ERT/Initialize()
+	. = ..()
 	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/all_access
@@ -298,9 +298,9 @@ var/const/NO_EMAG_ACT = -50
 	item_state = "tdgreen"
 	registered_name = "Administrator"
 	assignment = "Administrator"
-/obj/item/weapon/card/id/all_access/New()
+/obj/item/weapon/card/id/all_access/Initialize()
+	. = ..()
 	access = get_access_ids()
-	..()
 
 // Department-flavor IDs
 /obj/item/weapon/card/id/medical

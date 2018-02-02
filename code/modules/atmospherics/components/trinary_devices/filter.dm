@@ -37,8 +37,8 @@
 	if(frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/atmospherics/trinary/filter/New()
-	..()
+/obj/machinery/atmospherics/trinary/filter/Initialize()
+	. = ..()
 	switch(filter_type)
 		if(0) //removing hydrocarbons
 			filtered_out = list("phoron")
@@ -239,8 +239,8 @@
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH|EAST
 
-obj/machinery/atmospherics/trinary/filter/m_filter/New()
-	..()
+obj/machinery/atmospherics/trinary/filter/m_filter/Initialize()
+	. = ..()
 	switch(dir)
 		if(NORTH)
 			initialize_directions = WEST|NORTH|SOUTH

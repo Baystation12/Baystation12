@@ -39,10 +39,10 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	name = "drinking glass"
 	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/square
 	category = "General"
-	New()
-		..()
-		var/obj/O = path
-		name = initial(O.name) // generic recipes yay
+/datum/autolathe/recipe/drinkingglass/New()
+	..()
+	var/obj/O = path
+	name = initial(O.name) // generic recipes yay
 
 /datum/autolathe/recipe/drinkingglass/rocks
 	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/rocks

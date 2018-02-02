@@ -21,8 +21,8 @@
 	var/problem = 0				// If this is not 0 there is some sort of issue in the powernet. Monitors will display warnings.
 
 /datum/powernet/New()
-	START_PROCESSING_POWERNET(src)
 	..()
+	START_PROCESSING_POWERNET(src)
 
 /datum/powernet/Destroy()
 	for(var/obj/structure/cable/C in cables)

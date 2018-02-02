@@ -23,8 +23,8 @@
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
 
-/obj/item/clothing/suit/space/void/engineering/New()
-	..()
+/obj/item/clothing/suit/space/void/engineering/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/space/void/engineering/prepared
@@ -162,8 +162,8 @@
 	icon_state = "rig-engineeringalt"
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 45, bio = 100, rad = 100)
 
-/obj/item/clothing/suit/space/void/engineering/alt/New()
-	..()
+/obj/item/clothing/suit/space/void/engineering/alt/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 2
 
 /obj/item/clothing/suit/space/void/engineering/alt/prepared
@@ -203,8 +203,8 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical)
 	armor = list(melee = 30, bullet = 5, laser = 10,energy = 5, bomb = 5, bio = 100, rad = 60)
 
-/obj/item/clothing/suit/space/void/medical/alt/New()
-	..()
+/obj/item/clothing/suit/space/void/medical/alt/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 0
 
 /obj/item/clothing/suit/space/void/medical/alt/prepared

@@ -51,8 +51,8 @@
 //	log_debug("[src] has unwielded force [force_unwielded], wielded force [force_wielded] and throwforce [throwforce] when made from default material [material.name]")
 
 
-/obj/item/weapon/material/twohanded/New()
-	..()
+/obj/item/weapon/material/twohanded/Initialize()
+	. = ..()
 	update_icon()
 
 //Allow a small chance of parrying melee attacks when wielded - maybe generalize this to other weapons someday

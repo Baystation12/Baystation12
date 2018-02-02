@@ -8,7 +8,8 @@
 	will_assist_languages = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
 
 
-/obj/item/organ/internal/voicebox/nabber/New()
+/obj/item/organ/internal/voicebox/nabber/Initialize()
+	.=..()
 	for(var/L in will_assist_languages)
 		assists_languages += all_languages[L]
 	robotize()

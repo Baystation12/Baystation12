@@ -40,8 +40,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	speak_emote = list("beeps","clicks","chirps")
 
-/mob/living/simple_animal/spiderbot/New()
-	..()
+/mob/living/simple_animal/spiderbot/Initialize()
+	.=..()
 	add_language(LANGUAGE_GALCOM)
 	default_language = all_languages[LANGUAGE_GALCOM]
 	verbs |= /mob/living/proc/ventcrawl
@@ -188,14 +188,12 @@
 	eject_brain()
 	..()
 
-/mob/living/simple_animal/spiderbot/New()
-
+/mob/living/simple_animal/spiderbot/Initialize()
+	.=..()
 	radio = new /obj/item/device/radio/borg(src)
 	camera = new /obj/machinery/camera(src)
 	camera.c_tag = "spiderbot-[real_name]"
 	camera.replace_networks(list("SS13"))
-
-	..()
 
 /mob/living/simple_animal/spiderbot/death()
 	switch_from_living_to_dead_mob_list()

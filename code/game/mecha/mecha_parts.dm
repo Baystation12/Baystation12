@@ -33,9 +33,10 @@
 /obj/item/mecha_parts/chassis/ripley
 	name = "Ripley Chassis"
 
-	New()
-		..()
-		construct = new /datum/construction/mecha/ripley_chassis(src)
+/obj/item/mecha_parts/chassis/ripley/Initialize()
+	. = ..()
+
+	construct = new /datum/construction/mecha/ripley_chassis(src)
 
 /obj/item/mecha_parts/part/ripley_torso
 	name="Ripley Torso"
@@ -72,9 +73,9 @@
 /obj/item/mecha_parts/chassis/gygax
 	name = "Gygax Chassis"
 
-	New()
-		..()
-		construct = new /datum/construction/mecha/gygax_chassis(src)
+/obj/item/mecha_parts/chassis/gygax/Initialize()
+	. =..()
+	construct = new /datum/construction/mecha/gygax_chassis(src)
 
 /obj/item/mecha_parts/part/gygax_torso
 	name="Gygax Torso"
@@ -121,8 +122,8 @@
 /obj/item/mecha_parts/chassis/durand
 	name = "Durand Chassis"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		construct = new /datum/construction/mecha/durand_chassis(src)
 
 /obj/item/mecha_parts/part/durand_torso
@@ -167,8 +168,8 @@
 /obj/item/mecha_parts/chassis/firefighter
 	name = "Firefighter Chassis"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		construct = new /datum/construction/mecha/firefighter_chassis(src)
 /*
 /obj/item/mecha_parts/part/firefighter_torso
@@ -198,8 +199,8 @@
 	name = "Phazon Chassis"
 	origin_tech = list(TECH_MATERIAL = 7)
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		construct = new /datum/construction/mecha/phazon_chassis(src)
 
 /obj/item/mecha_parts/part/phazon_torso
@@ -250,8 +251,8 @@
 /obj/item/mecha_parts/chassis/odysseus
 	name = "Odysseus Chassis"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		construct = new /datum/construction/mecha/odysseus_chassis(src)
 
 /obj/item/mecha_parts/part/odysseus_head

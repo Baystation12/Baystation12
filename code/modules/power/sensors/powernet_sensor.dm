@@ -19,11 +19,11 @@
 	var/name_tag = "#UNKN#" // ID tag displayed in list of powernet sensors. Each sensor should have it's own tag!
 	var/long_range = 0		// If 1, sensor reading will show on all computers, regardless of Zlevel
 
-// Proc: New()
+// Proc: Initialize()
 // Parameters: None
 // Description: Automatically assigns name according to ID tag.
-/obj/machinery/power/sensor/New()
-	..()
+/obj/machinery/power/sensor/Initialize()
+	.=..()
 	auto_set_name()
 
 // Proc: auto_set_name()

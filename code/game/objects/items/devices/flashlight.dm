@@ -203,9 +203,9 @@
 	var/produce_heat = 1500
 	activation_sound = 'sound/effects/flare.ogg'
 
-/obj/item/device/flashlight/flare/New()
+/obj/item/device/flashlight/flare/Initialize()
 	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.
-	..()
+	. = ..()
 
 /obj/item/device/flashlight/flare/Process()
 	var/turf/pos = get_turf(src)
@@ -256,10 +256,10 @@
 	var/fuel = 0
 	activation_sound = null
 
-/obj/item/device/flashlight/glowstick/New()
+/obj/item/device/flashlight/glowstick/Initialize()
 	fuel = rand(1600, 2000)
 	light_color = color
-	..()
+	. = ..()
 
 /obj/item/device/flashlight/glowstick/Destroy()
 	. = ..()
@@ -332,9 +332,9 @@
 	desc = "A party-grade glowstick."
 	color = "#ff00ff"
 
-/obj/item/device/flashlight/glowstick/random/New()
+/obj/item/device/flashlight/glowstick/random/Initialize()
 	color = rgb(rand(50,255),rand(50,255),rand(50,255))
-	..()
+	. = ..()
 
 /obj/item/device/flashlight/slime
 	gender = PLURAL
@@ -347,8 +347,8 @@
 	brightness_on = 6
 	on = 1 //Bio-luminesence has one setting, on.
 
-/obj/item/device/flashlight/slime/New()
-	..()
+/obj/item/device/flashlight/slime/Initialize()
+	. = ..()
 	set_light(brightness_on)
 
 /obj/item/device/flashlight/slime/update_icon()

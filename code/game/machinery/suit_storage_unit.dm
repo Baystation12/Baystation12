@@ -702,8 +702,8 @@
 
 	var/datum/wires/suit_storage_unit/wires = null
 
-/obj/machinery/suit_cycler/New()
-	..()
+/obj/machinery/suit_cycler/Initialize()
+	. = ..()
 
 	wires = new(src)
 	target_department = departments[1]

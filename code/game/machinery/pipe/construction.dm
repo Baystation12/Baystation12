@@ -580,7 +580,6 @@ Buildable meters
 			M.pipe_color = color
 			M.set_dir(dir)
 			M.initialize_directions = pipe_dir
-			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
 			M.atmos_init()
@@ -603,7 +602,6 @@ Buildable meters
 			M.color = color
 			M.set_dir(dir)
 			M.initialize_directions = pipe_dir
-			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
 			M.atmos_init()
@@ -626,7 +624,6 @@ Buildable meters
 			M.color = color
 			M.set_dir(dir)
 			M.initialize_directions = pipe_dir
-			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
 			M.atmos_init()
@@ -649,7 +646,6 @@ Buildable meters
 			M.color = color
 			M.set_dir(dir)
 			M.initialize_directions = pipe_dir
-			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
 			M.atmos_init()
@@ -672,7 +668,6 @@ Buildable meters
 			M.pipe_color = color
 			M.set_dir(dir)
 			M.initialize_directions = pipe_dir
-			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
 			M.atmos_init()
@@ -699,7 +694,6 @@ Buildable meters
 			M.set_dir(dir)
 			M.initialize_directions = pipe_dir
 			M.connect_types = src.connect_types
-			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
 			M.atmos_init()
@@ -726,7 +720,6 @@ Buildable meters
 			M.set_dir(dir)
 			M.initialize_directions = pipe_dir
 			M.connect_types = src.connect_types
-			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
 			M.atmos_init()
@@ -753,7 +746,6 @@ Buildable meters
 			M.set_dir(dir)
 			M.initialize_directions = pipe_dir
 			M.connect_types = src.connect_types
-			//M.New()
 			var/turf/T = M.loc
 			M.level = !T.is_plating() ? 2 : 1
 			M.atmos_init()

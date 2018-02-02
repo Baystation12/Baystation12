@@ -50,6 +50,7 @@ research holder datum.
 	var/list/known_designs = list()			//List of available designs.
 
 /datum/research/New()		//Insert techs into possible_tech here. Known_tech automatically updated.
+	..()
 	for(var/T in typesof(/datum/tech) - /datum/tech)
 		known_tech += new T(src)
 	for(var/D in typesof(/datum/design) - /datum/design)
@@ -59,6 +60,7 @@ research holder datum.
 /datum/research/techonly
 
 /datum/research/techonly/New()
+	..()
 	for(var/T in typesof(/datum/tech) - /datum/tech)
 		known_tech += new T(src)
 	RefreshResearch()
@@ -123,12 +125,12 @@ research holder datum.
 	return
 
 // A simple helper proc to find the name of a tech with a given ID.
-/proc/CallTechName(var/ID) 
+/proc/CallTechName(var/ID)
 	for(var/T in subtypesof(/datum/tech))
 		var/datum/tech/check_tech = T
 		if(initial(check_tech.id) == ID)
 			return  initial(check_tech.name)
-	
+
 /***************************************************************
 **						Technology Datums					  **
 **	Includes all the various technoliges and what they make.  **

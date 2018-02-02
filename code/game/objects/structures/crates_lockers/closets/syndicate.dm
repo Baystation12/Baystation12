@@ -9,8 +9,8 @@
 /obj/structure/closet/syndicate/personal
 	desc = "It's a storage unit for operative gear."
 
-/obj/structure/closet/syndicate/personal/New()
-	..()
+/obj/structure/closet/syndicate/personal/Initialize()
+	. = ..()
 	new /obj/item/weapon/tank/jetpack/oxygen(src)
 	new /obj/item/clothing/mask/gas/syndicate(src)
 	new /obj/item/clothing/under/syndicate(src)
@@ -27,8 +27,8 @@
 /obj/structure/closet/syndicate/suit
 	desc = "It's a storage unit for voidsuits."
 
-/obj/structure/closet/syndicate/suit/New()
-	..()
+/obj/structure/closet/syndicate/suit/Initialize()
+	. = ..()
 	new /obj/item/weapon/tank/jetpack/oxygen(src)
 	new /obj/item/clothing/shoes/magboots(src)
 	new /obj/item/clothing/suit/space/void/merc(src)
@@ -39,8 +39,8 @@
 /obj/structure/closet/syndicate/nuclear
 	desc = "It's a storage unit for nuclear-operative gear."
 
-/obj/structure/closet/syndicate/nuclear/New()
-	..()
+/obj/structure/closet/syndicate/nuclear/Initialize()
+	. = ..()
 
 	new /obj/item/ammo_magazine/a10mm(src)
 	new /obj/item/ammo_magazine/a10mm(src)
@@ -67,8 +67,8 @@
 /obj/structure/closet/syndicate/resources/
 	desc = "An old, dusty locker."
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/common_min = 30 //Minimum amount of minerals in the stack for common minerals
 		var/common_max = 50 //Maximum amount of HONK in the stack for HONK common minerals
 		var/rare_min = 5  //Minimum HONK of HONK in the stack HONK HONK rare minerals
@@ -125,7 +125,8 @@
 /obj/structure/closet/syndicate/resources/everything
 	desc = "It's an emergency storage closet for repairs."
 
-	New()
+	Initialize()
+		. = ..()
 		var/list/resources = list(
 		/obj/item/stack/material/steel,
 		/obj/item/stack/material/glass,
@@ -144,4 +145,3 @@
 				var/obj/item/stack/R = new res(src)
 				R.amount = R.max_amount
 
-		return

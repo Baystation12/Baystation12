@@ -9,6 +9,6 @@
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 0.6
 
-/obj/item/clothing/suit/space/void/swat/New()
-	..()
+/obj/item/clothing/suit/space/void/swat/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 1

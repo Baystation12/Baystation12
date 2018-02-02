@@ -56,8 +56,8 @@
 	hardware_size = 1
 	battery_rating = 3000
 
-/obj/item/weapon/computer_hardware/battery_module/lambda/New()
-	..()
+/obj/item/weapon/computer_hardware/battery_module/lambda/Initialize()
+	.=..()
 	battery = new/obj/item/weapon/cell/infinite(src)
 
 
@@ -65,11 +65,11 @@
 	..()
 	to_chat(user, "Internal battery charge: [battery.charge]/[battery.maxcharge] CU")
 
-/obj/item/weapon/computer_hardware/battery_module/New()
+/obj/item/weapon/computer_hardware/battery_module/Initialize()
+	.=..()
 	battery = new/obj/item/weapon/cell(src)
 	battery.maxcharge = battery_rating
 	battery.charge = 0
-	..()
 
 /obj/item/weapon/computer_hardware/battery_module/Destroy()
 	QDEL_NULL(battery)

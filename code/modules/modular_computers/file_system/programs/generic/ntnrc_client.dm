@@ -19,6 +19,7 @@
 	var/netadmin_mode = 0		// Administrator mode (invisible to other users + bypasses passwords)
 
 /datum/computer_file/program/chatclient/New()
+	..()
 	username = "DefaultUser[rand(100, 999)]"
 
 /datum/computer_file/program/chatclient/Topic(href, href_list)

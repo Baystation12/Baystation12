@@ -16,8 +16,8 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_BELT
 
-///obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
-//	..()
+///obj/item/weapon/reagent_containers/hypospray/Initialize() //comment this to make hypos start off empty
+//	.=..()
 //	reagents.add_reagent(/datum/reagent/tricordrazine, 30)
 //	return
 
@@ -65,8 +65,8 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker/vial/loaded_vial
 	volume = 0
 
-/obj/item/weapon/reagent_containers/hypospray/vial/New()
-	..()
+/obj/item/weapon/reagent_containers/hypospray/vial/Initialize()
+	.=..()
 	loaded_vial = new /obj/item/weapon/reagent_containers/glass/beaker/vial(src)
 	volume = loaded_vial.volume
 	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
@@ -118,8 +118,8 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
 	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
-	..()
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/Initialize()
+	.=..()
 	for(var/T in starts_with)
 		reagents.add_reagent(T, starts_with[T])
 	update_icon()

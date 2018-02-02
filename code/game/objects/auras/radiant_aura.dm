@@ -5,8 +5,8 @@
 	plane = OBJ_PLANE
 	layer = ABOVE_WINDOW_LAYER
 
-/obj/aura/radiant_aura/New()
-	..()
+/obj/aura/radiant_aura/Initialize()
+	. = ..()
 	to_chat(user,"<span class='notice'>A bubble of light appears around you, exuding protection and warmth.</span>")
 	set_light(6,6, "#e09d37")
 

@@ -116,11 +116,11 @@
 	category = /obj/item/integrated_circuit/logic
 	var/number_of_inputs = 2
 
-/obj/item/integrated_circuit/logic/multiplexer/New()
+/obj/item/integrated_circuit/logic/multiplexer/Initialize()
+	.=..()
 	for(var/i = 1 to number_of_inputs)
 		inputs += "input [i]"
 	complexity = number_of_inputs
-	..()
 	desc += " It has [number_of_inputs] input pins."
 	extended_desc += " This multiplexer has a range from 1 to [inputs.len - 1]."
 
@@ -156,12 +156,11 @@
 	category = /obj/item/integrated_circuit/logic
 	var/number_of_outputs = 2
 
-/obj/item/integrated_circuit/logic/demultiplexer/New()
+/obj/item/integrated_circuit/logic/demultiplexer/Initialize()
+	.=..()
 	for(var/i = 1 to number_of_outputs)
 		outputs += "output [i]"
 	complexity = number_of_outputs
-
-	..()
 	desc += " It has [number_of_outputs] output pins."
 	extended_desc += " This demultiplexer has a range from 1 to [outputs.len]."
 
@@ -198,14 +197,14 @@
 	category = /obj/item/integrated_circuit/logic/unary/access_verifier
 	var/cached_ui_data
 
-/obj/item/integrated_circuit/logic/unary/access_verifier/New()
-	..()
+/obj/item/integrated_circuit/logic/unary/access_verifier/Initialize()
+	.=..()
 	checked_accesses = list()
 	available_accesses = available_accesses || list()
 
-/obj/item/integrated_circuit/logic/unary/access_verifier/station/New()
+/obj/item/integrated_circuit/logic/unary/access_verifier/station/Initialize()
+	.=..()
 	available_accesses = get_all_station_access()
-	..()
 
 /obj/item/integrated_circuit/logic/unary/access_verifier/attack_self(var/mob/user)
 	tg_ui_interact(user)

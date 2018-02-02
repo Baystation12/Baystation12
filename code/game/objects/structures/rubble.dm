@@ -13,9 +13,9 @@
 	var/emptyprob = 30
 	var/health = 40
 
-/obj/structure/rubble/New()
-	..()
-	if(prob(emptyprob)) 
+/obj/structure/rubble/Initialize()
+	. = ..()
+	if(prob(emptyprob))
 		lootleft = 0
 
 /obj/structure/rubble/Initialize()
@@ -55,7 +55,7 @@
 		lootleft--
 		update_icon()
 		to_chat(user, "<span class='notice'>You find \a [booty] and pull it carefully out of \the [src].</span>")
-		
+
 /obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
 	if (istype(I, /obj/item/weapon/pickaxe))
 		var/obj/item/weapon/pickaxe/P = I
@@ -66,7 +66,7 @@
 				var/obj/item/booty = pick(loot)
 				booty = new booty(loc)
 			qdel(src)
-	else 
+	else
 		..()
 		health -= I.force
 		if(health < 1)

@@ -2,8 +2,8 @@
 	name = "Mask of God"
 	desc = "A terrible fracture of reality coinciding into a mirror to another world."
 
-/mob/observer/eye/cult/New()
-	..()
+/mob/observer/eye/cult/Initialize()
+	.=..()
 	visualnet = new /datum/visualnet/cultnet()
 
 /mob/observer/eye/cult/Destroy()

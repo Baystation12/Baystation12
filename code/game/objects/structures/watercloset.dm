@@ -12,7 +12,8 @@
 	var/w_items = 0			//the combined w_class of all the items in the cistern
 	var/mob/living/swirlie = null	//the mob being given a swirlie
 
-/obj/structure/toilet/New()
+/obj/structure/toilet/Initialize()
+	. = ..()
 	open = round(rand(0, 1))
 	update_icon()
 
@@ -90,8 +91,8 @@
 	var/is_washing = 0
 	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
 
-/obj/machinery/shower/New()
-	..()
+/obj/machinery/shower/Initialize()
+	. = ..()
 	create_reagents(50)
 
 //add heat controls? when emagged, you can freeze to death in it?

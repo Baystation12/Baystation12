@@ -399,7 +399,8 @@
 			if (A.x <= TRANSITIONEDGE || A.x >= (sector.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (sector.maxy - TRANSITIONEDGE + 1))
 				sector.process_map_edge(A)
 
-/turf/simulated/floor/exoplanet/New()
+/turf/simulated/floor/exoplanet/Initialize()
+	.=..()
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
@@ -409,7 +410,7 @@
 			if(E.lightlevel)
 				light_power = E.lightlevel
 				light_range = 2
-	..()
+
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
 	if(diggable && istype(C,/obj/item/weapon/shovel))
