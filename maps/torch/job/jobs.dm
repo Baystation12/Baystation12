@@ -867,7 +867,7 @@
 		/datum/mil_rank/fleet/e4
 	)
 
-	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew)
+	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew, access_bar)
 	minimal_access = list()
 
 /datum/job/bartender
@@ -880,7 +880,7 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_hydroponics, access_bar, access_solgov_crew)
+	access = list(access_hydroponics, access_bar, access_solgov_crew, access_kitchen)
 	minimal_access = list()
 
 
