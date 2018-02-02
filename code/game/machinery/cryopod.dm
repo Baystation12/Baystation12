@@ -253,9 +253,9 @@
 			launch()
 		..()
 
-/obj/machinery/cryopod/New()
+/obj/machinery/cryopod/Initialize()
 	announce = new /obj/item/device/radio/intercom(src)
-	..()
+	. = ..()
 
 /obj/machinery/cryopod/Destroy()
 	if(occupant)

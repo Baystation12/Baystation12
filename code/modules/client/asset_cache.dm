@@ -150,6 +150,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	return asset_datums[type]
 
 /datum/asset/New()
+	..()
 	asset_datums[type] = src
 
 /datum/asset/proc/register()
@@ -265,8 +266,8 @@ var/decl/asset_cache/asset_cache = new()
 /decl/asset_cache
 	var/list/cache
 
-/decl/asset_cache/New()
-	..()
+/decl/asset_cache/Initialize()
+	. = ..()
 	cache = new
 
 /hook/roundstart/proc/send_assets()

@@ -5,7 +5,7 @@ var/global/list/map_count = list()
 /datum/random_map
 
 	// Strings.
-	var/name                        // Set in New()
+	var/name                        // Set in Initialize()
 	var/descriptor = "random map"   // Display name.
 
 	// Locator/value vars.

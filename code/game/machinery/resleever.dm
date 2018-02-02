@@ -26,8 +26,8 @@
 	var/occupant_name = null // Put in seperate var to prevent runtime.
 	var/lace_name = null
 
-/obj/machinery/resleever/New()
-	..()
+/obj/machinery/resleever/Initialize()
+	. = ..()
 	component_parts = list()
 	component_parts += new /obj/item/stack/cable_coil(src, 2)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)

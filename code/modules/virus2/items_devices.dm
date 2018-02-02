@@ -48,8 +48,8 @@
 /obj/item/weapon/virusdish/random
 	name = "virus sample"
 
-/obj/item/weapon/virusdish/random/New()
-	..()
+/obj/item/weapon/virusdish/random/Initialize()
+	.=..()
 	src.virus2 = new /datum/disease2/disease
 	src.virus2.makerandom()
 	growth = rand(5, 50)
@@ -102,7 +102,8 @@
 	var/stage = 1
 	var/analysed = 1
 
-/obj/item/weapon/diseasedisk/premade/New()
+/obj/item/weapon/diseasedisk/premade/Initialize()
+	.=..()
 	name = "blank GNA disk (stage: [stage])"
 	effect = new /datum/disease2/effect/invisible
 	effect.stage = stage

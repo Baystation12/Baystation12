@@ -29,9 +29,9 @@
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
-/mob/living/silicon/New()
+/mob/living/silicon/Initialize()
+	.=..()
 	GLOB.silicon_mob_list += src
-	..()
 
 	if(silicon_radio)
 		silicon_radio = new silicon_radio(src)

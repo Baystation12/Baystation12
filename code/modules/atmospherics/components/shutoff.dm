@@ -16,10 +16,10 @@
 	..()
 	to_chat(user, "The automatic shutoff circuit is [override_open ? "disabled" : "enabled"].")
 
-/obj/machinery/atmospherics/valve/shutoff/New()
+/obj/machinery/atmospherics/valve/shutoff/Initialize()
 	open()
 	hide(1)
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/valve/shutoff/attack_hand(var/mob/user as mob)
 	override_open = !override_open

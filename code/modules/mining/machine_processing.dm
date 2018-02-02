@@ -11,8 +11,8 @@
 	var/machinedir = EAST
 	var/show_all_ores = 0
 
-/obj/machinery/mineral/processing_unit_console/New()
-	..()
+/obj/machinery/mineral/processing_unit_console/Initialize()
+	.=..()
 	spawn(7)
 		src.machine = locate(/obj/machinery/mineral/processing_unit, get_step(src, machinedir))
 		if (machine)
@@ -115,8 +115,8 @@
 	var/static/list/alloy_data
 	var/active = 0
 
-/obj/machinery/mineral/processing_unit/New()
-	..()
+/obj/machinery/mineral/processing_unit/Initialize()
+	.=..()
 
 	// initialize static alloy_data list
 	if(!alloy_data)

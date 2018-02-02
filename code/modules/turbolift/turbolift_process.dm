@@ -3,8 +3,8 @@ var/datum/controller/process/turbolift/turbolift_controller
 /datum/controller/process/turbolift
 	var/list/moving_lifts = list()
 
-/datum/controller/process/turbolift/New()
-	..()
+/datum/controller/process/turbolift/Initialize()
+	.=..()
 	turbolift_controller = src
 
 /datum/controller/process/turbolift/setup()

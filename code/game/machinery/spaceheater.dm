@@ -15,8 +15,8 @@
 	clicksound = "switch"
 
 
-/obj/machinery/space_heater/New()
-	..()
+/obj/machinery/space_heater/Initialize()
+	. = ..()
 	cell = new/obj/item/weapon/cell/high(src)
 	update_icon()
 

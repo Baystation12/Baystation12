@@ -41,7 +41,7 @@
 /datum/gear/utility/paicard
 	display_name = "personal AI device"
 	path = /obj/item/device/paicard
-	
+
 /datum/gear/utility/camera
 	display_name = "camera"
 	path = /obj/item/device/camera

@@ -14,8 +14,8 @@ LEGACY_RECORD_STRUCTURE(virus_records, virus_record)
 	var/list/affected_species = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_SKRELL,SPECIES_TAJARA)
 
 /datum/disease2/disease/New()
-	uniqueID = rand(0,10000)
 	..()
+	uniqueID = rand(0,10000)
 
 /datum/disease2/disease/proc/makerandom(var/severity=2)
 	var/list/excludetypes = list()

@@ -5,8 +5,8 @@
 	name = "bottle of Happy pills"
 	desc = "Highly illegal drug. When you want to see the rainbow."
 
-/obj/item/weapon/storage/pill_bottle/happy/New()
-	..()
+/obj/item/weapon/storage/pill_bottle/happy/Initialize()
+	. = ..()
 	new /obj/item/weapon/reagent_containers/pill/happy( src )
 	new /obj/item/weapon/reagent_containers/pill/happy( src )
 	new /obj/item/weapon/reagent_containers/pill/happy( src )
@@ -19,8 +19,8 @@
 	name = "bottle of Zoom pills"
 	desc = "Highly illegal drug. Trade brain for speed."
 
-/obj/item/weapon/storage/pill_bottle/zoom/New()
-	..()
+/obj/item/weapon/storage/pill_bottle/zoom/Initialize()
+	. = ..()
 	new /obj/item/weapon/reagent_containers/pill/zoom( src )
 	new /obj/item/weapon/reagent_containers/pill/zoom( src )
 	new /obj/item/weapon/reagent_containers/pill/zoom( src )
@@ -40,8 +40,8 @@
 		list(/datum/reagent/impedrezene = 15)                                  = 2,
 		list(/datum/reagent/toxin/zombiepowder = 10)                           = 1)
 
-/obj/item/weapon/reagent_containers/glass/beaker/vial/random/New()
-	..()
+/obj/item/weapon/reagent_containers/glass/beaker/vial/random/Initialize()
+	. = ..()
 	if(is_open_container())
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 

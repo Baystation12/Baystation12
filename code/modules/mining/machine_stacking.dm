@@ -9,10 +9,8 @@
 	var/obj/machinery/mineral/stacking_machine/machine = null
 	var/machinedir = SOUTHEAST
 
-/obj/machinery/mineral/stacking_unit_console/New()
-
-	..()
-
+/obj/machinery/mineral/stacking_unit_console/Initialize()
+	.=..()
 	spawn(7)
 		src.machine = locate(/obj/machinery/mineral/stacking_machine, get_step(src, machinedir))
 		if (machine)
@@ -78,8 +76,8 @@
 	var/list/stack_paths[0]
 	var/stack_amt = 50; // Amount to stack before releassing
 
-/obj/machinery/mineral/stacking_machine/New()
-	..()
+/obj/machinery/mineral/stacking_machine/Initialize()
+	.=..()
 
 	for(var/stacktype in subtypesof(/obj/item/stack/material))
 		var/obj/item/stack/S = stacktype

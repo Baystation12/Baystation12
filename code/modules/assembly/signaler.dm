@@ -17,9 +17,9 @@
 	var/datum/radio_frequency/radio_connection
 	var/deadman = 0
 
-/obj/item/device/assembly/signaler/New()
-	..()
-	spawn(40)
+/obj/item/device/assembly/signaler/Initialize()
+	. = ..()
+	spawn(4 SECONDS)
 		set_frequency(frequency)
 	return
 
@@ -27,7 +27,7 @@
 /obj/item/device/assembly/signaler/activate()
 	if(cooldown > 0)	return 0
 	cooldown = 2
-	spawn(10)
+	spawn(1 SECOND)
 		process_cooldown()
 
 	signal()

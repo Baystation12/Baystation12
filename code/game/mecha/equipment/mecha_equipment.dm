@@ -23,8 +23,8 @@
 		return 1
 	return 0
 
-/obj/item/mecha_parts/mecha_equipment/New()
-	..()
+/obj/item/mecha_parts/mecha_equipment/Initialize()
+	. = ..()
 	return
 
 /obj/item/mecha_parts/mecha_equipment/proc/update_chassis_page()

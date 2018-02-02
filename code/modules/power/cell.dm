@@ -18,14 +18,11 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
 
-/obj/item/weapon/cell/New()
+/obj/item/weapon/cell/Initialize()
+	.=..()
 	if(isnull(charge))
 		charge = maxcharge
 	c_uid = sequential_id(/obj/item/weapon/cell)
-	..()
-
-/obj/item/weapon/cell/Initialize()
-	. = ..()
 	update_icon()
 
 /obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/power = 0)
@@ -165,9 +162,6 @@
 	origin_tech = list(TECH_POWER = 0)
 	maxcharge = 250
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 40)
-
-/obj/item/weapon/cell/crap/empty/New()
-	..()
 	charge = 0
 
 
@@ -186,9 +180,6 @@
 	icon_state = "hcell"
 	maxcharge = 1000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
-
-/obj/item/weapon/cell/high/empty/New()
-	..()
 	charge = 0
 
 
@@ -208,9 +199,6 @@
 	icon_state = "scell"
 	maxcharge = 2000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
-
-/obj/item/weapon/cell/super/empty/New()
-	..()
 	charge = 0
 
 
@@ -221,9 +209,6 @@
 	icon_state = "hpcell"
 	maxcharge = 3000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
-
-/obj/item/weapon/cell/hyper/empty/New()
-	..()
 	charge = 0
 
 

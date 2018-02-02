@@ -17,7 +17,8 @@
 	var/edit = 1
 	var/repeat = 0
 
-/obj/structure/device/piano/New()
+/obj/structure/device/piano/Initialize()
+	. = ..()
 	if(prob(50))
 		name = "space minimoog"
 		desc = "This is a minimoog, like a space piano, but more spacey!"

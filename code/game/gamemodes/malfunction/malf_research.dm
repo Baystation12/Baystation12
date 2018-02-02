@@ -9,6 +9,7 @@
 	var/datum/malf_research_ability/focus = null	// Currently researched item
 
 /datum/malf_research/New()
+	..()
 	setup_abilities()
 	last_tick = world.time
 

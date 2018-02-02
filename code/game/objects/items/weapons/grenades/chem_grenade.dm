@@ -15,7 +15,8 @@
 	var/list/allowed_containers = list(/obj/item/weapon/reagent_containers/glass/beaker, /obj/item/weapon/reagent_containers/glass/bottle)
 	var/affected_area = 3
 
-	New()
+	Initialize()
+		. = ..()
 		create_reagents(1000)
 
 	attack_self(mob/user as mob)
@@ -197,8 +198,8 @@
 	path = 1
 	stage = 2
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
@@ -218,8 +219,8 @@
 	path = 1
 	stage = 2
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
@@ -241,8 +242,8 @@
 	path = 1
 	stage = 2
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
@@ -263,8 +264,8 @@
 	stage = 2
 	path = 1
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
@@ -284,8 +285,8 @@
 	stage = 2
 	path = 1
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/obj/item/weapon/reagent_containers/glass/beaker/large/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/large/B2 = new(src)
 

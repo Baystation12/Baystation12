@@ -11,8 +11,8 @@
 	throw_range = 20
 	var/key_data
 
-/obj/item/weapon/soap/New()
-	..()
+/obj/item/weapon/soap/Initialize()
+	. = ..()
 	create_reagents(30)
 	wet()
 
@@ -78,9 +78,9 @@
 /obj/item/weapon/soap/deluxe
 	icon_state = "soapdeluxe"
 
-/obj/item/weapon/soap/deluxe/New()
+/obj/item/weapon/soap/deluxe/Initialize()
+	.=..()
 	desc = "A deluxe Waffle Co. brand bar of soap. Smells of [pick("lavender", "vanilla", "strawberry", "chocolate" ,"space")]."
-	..()
 
 /obj/item/weapon/soap/syndie
 	desc = "An untrustworthy bar of soap. Smells of fear."

@@ -14,8 +14,8 @@
 	var/next_check=0
 	var/list/avail_dirs = list(NORTH,SOUTH,EAST,WEST,UP,DOWN)
 
-/turf/unsimulated/wall/supermatter/New()
-	..()
+/turf/unsimulated/wall/supermatter/Initialize()
+	. = ..()
 	processing_turfs.Add(src)
 	next_check = world.time + 5 SECONDS
 

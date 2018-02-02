@@ -211,9 +211,9 @@
 	var/atom/master = null
 	anchored = 1
 
-/atom/movable/overlay/New()
+/atom/movable/overlay/Initialize()
 	src.verbs.Cut()
-	..()
+	. = ..()
 
 /atom/movable/overlay/Destroy()
 	master = null

@@ -41,8 +41,8 @@
 
 // the inlet stage of the gas turbine electricity generator
 
-/obj/machinery/compressor/New()
-	..()
+/obj/machinery/compressor/Initialize()
+	.=..()
 
 	gas_contained = new
 	inturf = get_step(src, dir)
@@ -98,8 +98,8 @@
 		overlays += image('icons/obj/pipes.dmi', "comp-o1", FLY_LAYER)
 	 //TODO: DEFERRED
 
-/obj/machinery/power/turbine/New()
-	..()
+/obj/machinery/power/turbine/Initialize()
+	.=..()
 
 	outturf = get_step(src, dir)
 

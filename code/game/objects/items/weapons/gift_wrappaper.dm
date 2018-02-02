@@ -15,8 +15,8 @@
 	item_state = "gift1"
 	randpixel = 10
 
-/obj/item/weapon/a_gift/New()
-	..()
+/obj/item/weapon/a_gift/Initialize()
+	. = ..()
 	if(w_class > 0 && w_class < ITEM_SIZE_HUGE)
 		icon_state = "gift[w_class]"
 	else

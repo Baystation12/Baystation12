@@ -24,8 +24,8 @@
 	// Humans think they can wear Bogani stuff? Try again.
 	return
 
-/obj/item/clothing/suit/space/void/bogani/prepared/New()
-	..()
+/obj/item/clothing/suit/space/void/bogani/prepared/Initialize()
+	.=..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/bogani
 	boots = new /obj/item/clothing/shoes/magboots
 
@@ -41,8 +41,8 @@
 	icon_state = "highbogsuit"
 	armor = list(melee = 80, bullet = 50, laser = 50,energy = 30, bomb = 70, bio = 100, rad = 100)
 
-/obj/item/clothing/suit/space/void/bogani/advanced/prepared/New()
-	..()
+/obj/item/clothing/suit/space/void/bogani/advanced/prepared/Initialize()
+	.=..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/bogani/advanced
 	boots = new /obj/item/clothing/shoes/magboots
 
@@ -52,8 +52,8 @@
 	icon_state = "bogarmor"
 	armor = list(melee = 80, bullet = 60, laser = 60,energy = 40, bomb = 90, bio = 120, rad = 120)
 
-/obj/item/clothing/suit/space/void/bogani/armored/prepared/New()
-	..()
+/obj/item/clothing/suit/space/void/bogani/armored/prepared/Initialize()
+	.=..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/bogani
 	boots = new /obj/item/clothing/shoes/magboots
 
@@ -63,7 +63,7 @@
 	icon_state = "highbogarmor"
 	armor = list(melee = 100, bullet = 80, laser = 80,energy = 70, bomb = 100, bio = 140, rad = 140)
 
-/obj/item/clothing/suit/space/void/bogani/ultimate/prepared/New()
-	..()
+/obj/item/clothing/suit/space/void/bogani/ultimate/prepared/Initialize()
+	.=..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/bogani/advanced
 	boots = new /obj/item/clothing/shoes/magboots

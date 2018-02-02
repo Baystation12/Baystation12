@@ -62,8 +62,8 @@
 	return smes_amt / CELLRATE
 
 
-/obj/machinery/power/smes/New()
-	..()
+/obj/machinery/power/smes/Initialize()
+	.=..()
 	if(!should_be_mapped)
 		warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
 

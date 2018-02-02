@@ -9,8 +9,8 @@
 	var/list/accept_mobs = list(/mob/living/simple_animal/lizard, /mob/living/simple_animal/mouse)
 	var/contains = 0 // 0 = nothing, 1 = money, 2 = animal, 3 = spiderling
 
-/obj/item/glass_jar/New()
-	..()
+/obj/item/glass_jar/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/item/glass_jar/afterattack(var/atom/A, var/mob/user, var/proximity)

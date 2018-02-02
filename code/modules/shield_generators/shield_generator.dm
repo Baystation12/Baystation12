@@ -35,8 +35,8 @@
 		icon_state = "generator0"
 
 
-/obj/machinery/power/shield_generator/New()
-	..()
+/obj/machinery/power/shield_generator/Initialize()
+	.=..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/shield_generator(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)			// Capacitor. Improves shield mitigation when better part is used.

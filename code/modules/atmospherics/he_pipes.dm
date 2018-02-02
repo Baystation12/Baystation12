@@ -20,8 +20,8 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	can_buckle = 1
 	buckle_lying = 1
 
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/New()
-	..()
+obj/machinery/atmospherics/pipe/simple/heat_exchanging/Initialize()
+	. = ..()
 	initialize_directions_he = initialize_directions	// The auto-detection from /pipe is good enough for a simple HE pipe
 	color = "#404040" //we don't make use of the fancy overlay system for colours, use this to set the default.
 
@@ -112,8 +112,8 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_HE
 
 // Doubling up on initialize_directions is necessary to allow HE pipes to connect
-obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/New()
-	.. ()
+obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/Initialize()
+	. = ..()
 	switch (dir)
 		if (SOUTH)
 			initialize_directions_he = SOUTH

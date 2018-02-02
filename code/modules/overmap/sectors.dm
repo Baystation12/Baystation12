@@ -18,7 +18,8 @@
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
 
-/obj/effect/overmap/New()
+/obj/effect/overmap/Initialize()
+	.=..()
 	if(!GLOB.using_map.use_overmap)
 		return
 
@@ -27,7 +28,6 @@
 		map_sectors["[zlevel]"] = src
 
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
-	..()
 
 /obj/effect/overmap/Initialize()
 	. = ..()
@@ -52,7 +52,7 @@
 	if(base)
 		GLOB.using_map.station_levels |= map_z
 		GLOB.using_map.contact_levels |= map_z
-	
+
 
 	//handle automatic waypoints that spawned before us
 	for(var/obj/effect/shuttle_landmark/automatic/L in world)

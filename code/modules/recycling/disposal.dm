@@ -31,8 +31,8 @@
 
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
-/obj/machinery/disposal/New()
-	..()
+/obj/machinery/disposal/Initialize()
+	.=..()
 	spawn(5)
 		trunk = locate() in src.loc
 		if(!trunk)
@@ -665,7 +665,7 @@
 	var/sortType = ""
 	var/subtype = 0
 	// new pipe, set the icon_state as on map
-	New()
+	Initialize()
 		..()
 		alpha = 255
 		plane = ABOVE_PLATING_PLANE
@@ -969,8 +969,8 @@
 /obj/structure/disposalpipe/segment
 	icon_state = "pipe-s"
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		if(icon_state == "pipe-s")
 			dpdir = dir | turn(dir, 180)
 		else
@@ -983,8 +983,8 @@
 /obj/structure/disposalpipe/up
 	icon_state = "pipe-u"
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		dpdir = dir
 		update()
 		return
@@ -1034,7 +1034,7 @@
 	icon_state = "pipe-d"
 
 	New()
-		..()
+		.=..()
 		dpdir = dir
 		update()
 		return
@@ -1088,8 +1088,8 @@
 /obj/structure/disposalpipe/junction
 	icon_state = "pipe-j1"
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		if(icon_state == "pipe-j1")
 			dpdir = dir | turn(dir, -90) | turn(dir,180)
 		else if(icon_state == "pipe-j2")
@@ -1146,7 +1146,7 @@
 		else
 			name = initial(name)
 
-	New()
+	Initialize()
 		. = ..()
 		dpdir = dir | turn(dir, 180)
 		if(sort_tag) GLOB.tagger_locations |= sort_tag
@@ -1287,8 +1287,8 @@
 
 	dpdir = sortdir | inactive_dir | active_dir
 
-/obj/structure/disposalpipe/diversion_junction/New()
-	..()
+/obj/structure/disposalpipe/diversion_junction/Initialize()
+	.=..()
 
 	updatedir()
 	updatedesc()
@@ -1374,7 +1374,7 @@
 
 		dpdir = sortdir | posdir | negdir
 
-	New()
+	Initialize()
 		. = ..()
 		if(sortType) GLOB.tagger_locations |= sortType
 
@@ -1464,8 +1464,8 @@
 	icon_state = "pipe-t"
 	var/obj/linked 	// the linked obj/machinery/disposal or obj/disposaloutlet
 
-/obj/structure/disposalpipe/trunk/New()
-	..()
+/obj/structure/disposalpipe/trunk/Initialize()
+	.=..()
 	dpdir = dir
 	spawn(1)
 		getlinked()
@@ -1569,8 +1569,8 @@
 					// i.e. will be treated as an empty turf
 	desc = "A broken piece of disposal pipe."
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		update()
 		return
 
@@ -1596,8 +1596,8 @@
 	var/mode = 0
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
-	New()
-		..()
+	Initialize()
+		.=..()
 
 		spawn(1)
 			target = get_ranged_target_turf(src, dir, 10)

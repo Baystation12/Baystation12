@@ -43,8 +43,8 @@
 	operation_req_access = list(access_syndicate)
 	wreckage = /obj/effect/decal/mecha_wreckage/mauler
 
-/obj/mecha/combat/marauder/New()
-	..()
+/obj/mecha/combat/marauder/Initialize()
+	. = ..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
 	ME.attach(src)
 	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive
@@ -57,8 +57,8 @@
 	src.smoke_system.attach(src)
 	return
 
-/obj/mecha/combat/marauder/seraph/New()
-	..()//Let it equip whatever is needed.
+/obj/mecha/combat/marauder/seraph/Initialize()
+	. = ..()//Let it equip whatever is needed.
 	var/obj/item/mecha_parts/mecha_equipment/ME
 	if(equipment.len)//Now to remove it and equip anew.
 		for(ME in equipment)

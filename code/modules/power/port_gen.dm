@@ -122,8 +122,8 @@
 	if(anchored)
 		connect_to_network()
 
-/obj/machinery/power/port_gen/pacman/New()
-	..()
+/obj/machinery/power/port_gen/pacman/Initialize()
+	.=..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
@@ -455,9 +455,9 @@
 	board_path = /obj/item/weapon/circuitboard/pacman/super/potato
 	anchored = 1
 
-/obj/machinery/power/port_gen/pacman/super/potato/New()
+/obj/machinery/power/port_gen/pacman/super/potato/Initialize()
+	.=..()
 	create_reagents(120)
-	..()
 
 /obj/machinery/power/port_gen/pacman/super/potato/examine(mob/user)
 	..()

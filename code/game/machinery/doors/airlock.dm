@@ -1295,7 +1295,7 @@ About the new airlock wires panel:
 	icon = 'icons/obj/doors/Doorhatchmaint2.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_mhatch
 
-/obj/machinery/door/airlock/autoname/New()
+/obj/machinery/door/airlock/autoname/Initialize()
 	var/area/A = get_area(src)
 	name = A.name
-	..()
+	. = ..()

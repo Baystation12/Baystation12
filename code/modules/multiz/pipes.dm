@@ -23,8 +23,8 @@ obj/machinery/atmospherics/pipe/zpipe
 
 		level = 1
 
-obj/machinery/atmospherics/pipe/zpipe/New()
-	..()
+obj/machinery/atmospherics/pipe/zpipe/Initialize()
+	.=..()
 	switch(dir)
 		if(SOUTH)
 			initialize_directions = SOUTH

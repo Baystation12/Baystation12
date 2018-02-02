@@ -11,8 +11,8 @@
 	deflect_chance = 15
 	var/obj/item/clothing/glasses/hud/health/mech/hud
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		hud = new /obj/item/clothing/glasses/hud/health/mech(src)
 		return
 
@@ -123,8 +123,8 @@
 
 			C.images += holder
 
-/obj/mecha/medical/odysseus/loaded/New()
-	..()
+/obj/mecha/medical/odysseus/loaded/Initialize()
+	. = ..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tool/sleeper
 	ME.attach(src)
 	ME = new /obj/item/mecha_parts/mecha_equipment/tool/sleeper

@@ -22,8 +22,8 @@
 /obj/machinery/gibber/autogibber
 	var/turf/input_plate
 
-/obj/machinery/gibber/autogibber/New()
-	..()
+/obj/machinery/gibber/autogibber/Initialize()
+	. = ..()
 	spawn(5)
 		for(var/i in GLOB.cardinal)
 			var/obj/machinery/mineral/input/input_obj = locate( /obj/machinery/mineral/input, get_step(src.loc, i) )

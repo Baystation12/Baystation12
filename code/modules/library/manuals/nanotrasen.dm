@@ -5,8 +5,8 @@
 	author = "NanoTrasen"
 	title = "NanoTrasen Regulations"
 
-/obj/item/weapon/book/manual/nt_regs/New()
-	..()
+/obj/item/weapon/book/manual/nt_regs/Initialize()
+	.=..()
 	dat = {"
 
 		<html><head>

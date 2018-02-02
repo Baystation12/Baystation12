@@ -40,8 +40,8 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
 
-/obj/machinery/media/jukebox/New()
-	..()
+/obj/machinery/media/jukebox/Initialize()
+	. = ..()
 	update_icon()
 	sound_id = "[type]_[sequential_id(type)]"
 

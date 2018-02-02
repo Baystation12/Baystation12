@@ -10,8 +10,8 @@
 	..()
 	access = syndicate_access.Copy()
 
-/obj/item/weapon/card/id/syndicate/station_access/New()
-	..() // Same as the normal Syndicate id, only already has all station access
+/obj/item/weapon/card/id/syndicate/station_access/Initialize()
+	. = ..() // Same as the normal Syndicate id, only already has all station access
 	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/syndicate/Destroy()

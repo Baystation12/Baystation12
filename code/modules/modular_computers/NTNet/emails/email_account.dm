@@ -15,8 +15,8 @@
 		size += stored_message.size
 
 /datum/computer_file/data/email_account/New()
-	ntnet_global.email_accounts.Add(src)
 	..()
+	ntnet_global.email_accounts.Add(src)
 
 /datum/computer_file/data/email_account/Destroy()
 	ntnet_global.email_accounts.Remove(src)

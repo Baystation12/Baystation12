@@ -58,9 +58,9 @@
 /turf/simulated/floor/exoplanet/desert
 	name = "sand"
 
-/turf/simulated/floor/exoplanet/desert/New()
+/turf/simulated/floor/exoplanet/desert/Initialize()
+	.=..()
 	icon_state = "desert[rand(0,5)]"
-	..()
 
 /turf/simulated/floor/exoplanet/desert/fire_act(datum/gas_mixture/air, temperature, volume)
 	if((temperature > T0C + 1700 && prob(5)) || temperature > T0C + 3000)
@@ -79,9 +79,9 @@
 	var/exposed = 0
 	var/busy
 
-/obj/structure/quicksand/New()
+/obj/structure/quicksand/Initialize()
+	.=..()
 	icon_state = "intact[rand(0,2)]"
-	..()
 
 /obj/structure/quicksand/user_unbuckle_mob(mob/user)
 	if(buckled_mob && !user.stat && !user.restrained())

@@ -214,7 +214,7 @@
 					if(!F)
 						continue
 					rec_fields.Add(list(list(
-						"name" = html_encode(F.name), 
+						"name" = html_encode(F.name),
 						"val" = F.get_display_value()
 					)))
 				nanoui_data["exploit"]["fields"] =  rec_fields

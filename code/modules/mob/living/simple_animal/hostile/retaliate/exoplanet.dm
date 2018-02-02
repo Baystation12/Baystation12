@@ -159,5 +159,6 @@
 	speak_chance = 1
 	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
 
-/mob/living/simple_animal/hostile/jelly/New()
+/mob/living/simple_animal/hostile/jelly/Initialize()
+	.=..()
 	color = color_rotation(round(rand(0,360),20))

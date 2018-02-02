@@ -3,10 +3,10 @@
 	build_path = /obj/machinery/computer/station_alert
 	var/list/alarm_handlers
 
-/obj/item/weapon/circuitboard/stationalert/New()
+/obj/item/weapon/circuitboard/stationalert/Initialize()
 	alarm_handlers = new()
 	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/circuitboards/stationalert)
-	..()
+	. = ..()
 
 /obj/item/weapon/circuitboard/stationalert/construct(var/obj/machinery/computer/station_alert/SA)
 	if(..(SA))

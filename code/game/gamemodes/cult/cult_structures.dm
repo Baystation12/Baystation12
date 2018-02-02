@@ -121,7 +121,8 @@
 		/mob/living/simple_animal/hostile/faithless/cult
 	)
 
-/obj/effect/gateway/active/New()
+/obj/effect/gateway/active/Initialize()
+	. = ..()
 	spawn(rand(30,60) SECONDS)
 		var/t = pick(spawnable)
 		new t(src.loc)

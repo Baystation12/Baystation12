@@ -316,8 +316,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
  *	The Actual PDA
  */
 
-/obj/item/device/pda/New()
-	..()
+/obj/item/device/pda/Initialize()
+	. = ..()
 	PDAs += src
 	PDAs = sortAtom(PDAs)
 	if(default_cartridge)
@@ -1411,8 +1411,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdabox"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		new /obj/item/device/pda(src)
 		new /obj/item/device/pda(src)
 		new /obj/item/device/pda(src)

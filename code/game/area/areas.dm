@@ -8,11 +8,11 @@
 	var/uid
 	var/area_flags
 
-/area/New()
+/area/Initialize()
+	. = ..()
 	icon_state = ""
 	uid = ++global_uid
-
-	if(!requires_power)
+	if(!requires_power || !apc)
 		power_light = 0
 		power_equip = 0
 		power_environ = 0
@@ -22,14 +22,6 @@
 	else
 		luminosity = 1
 
-	..()
-
-/area/Initialize()
-	. = ..()
-	if(!requires_power || !apc)
-		power_light = 0
-		power_equip = 0
-		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 
 /area/proc/get_contents()

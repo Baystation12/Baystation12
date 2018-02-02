@@ -1,8 +1,8 @@
 /obj/aura/personal_shield
 	name = "personal shield"
 
-/obj/aura/personal_shield/New(var/mob/living/user)
-	..()
+/obj/aura/personal_shield/Initialize(var/mob/living/user)
+	. = ..()
 	playsound(user,'sound/weapons/flash.ogg',35,1)
 	to_chat(user,"<span class='notice'>You feel your body prickle as \the [src] comes online.</span>")
 

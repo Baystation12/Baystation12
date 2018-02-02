@@ -33,8 +33,8 @@
 		return
 	return ..()
 
-/turf/simulated/floor/fixed/alium/New()
-	..()
+/turf/simulated/floor/fixed/alium/Initialize()
+	. = ..()
 	var/material/A = get_material_by_name("alien alloy")
 	if(!A)
 		return

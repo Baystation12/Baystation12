@@ -27,7 +27,7 @@
 		set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
 	..()
 
-/obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W, mob/user)
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	return ..()
@@ -49,22 +49,19 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
 
-	New()
-		..()
-		return
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/weapon/storage/backpack/holding))
-			to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
-			qdel(W)
-			return 1
-		return ..()
+/obj/item/weapon/storage/backpack/holding/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W, /obj/item/weapon/storage/backpack/holding))
+		to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
+		qdel(W)
+		return 1
+	return ..()
 
-	//Please don't clutter the parent storage item with stupid hacks.
-	can_be_inserted(obj/item/W as obj, stop_messages = 0)
-		if(istype(W, /obj/item/weapon/storage/backpack/holding))
-			return 1
-		return ..()
+//Please don't clutter the parent storage item with stupid hacks.
+/obj/item/weapon/storage/backpack/holding/can_be_inserted(obj/item/W as obj, stop_messages = 0)
+	if(istype(W, /obj/item/weapon/storage/backpack/holding))
+		return 1
+	return ..()
 
 /obj/item/weapon/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
@@ -148,8 +145,8 @@
 	w_class = ITEM_SIZE_HUGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 
-/obj/item/weapon/storage/backpack/dufflebag/New()
-	..()
+/obj/item/weapon/storage/backpack/dufflebag/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_back] = 3
 	slowdown_per_slot[slot_r_hand] = 1
 	slowdown_per_slot[slot_l_hand] = 1
@@ -159,8 +156,8 @@
 	desc = "A large dufflebag for holding extra tactical supplies."
 	icon_state = "duffle_syndie"
 
-/obj/item/weapon/storage/backpack/dufflebag/syndie/New()
-	..()
+/obj/item/weapon/storage/backpack/dufflebag/syndie/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_back] = 1
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/med

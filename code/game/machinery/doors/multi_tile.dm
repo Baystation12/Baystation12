@@ -3,8 +3,8 @@
 	width = 2
 	appearance_flags = 0
 
-/obj/machinery/door/airlock/multi_tile/New()
-	..()
+/obj/machinery/door/airlock/multi_tile/Initialize()
+	. = ..()
 	SetBounds()
 
 /obj/machinery/door/airlock/multi_tile/Move()

@@ -14,8 +14,8 @@
 	var/list/dummy_terminals = list()
 	var/cycle_to_external_air = 0
 
-/obj/machinery/embedded_controller/radio/airlock/New()
-	..()
+/obj/machinery/embedded_controller/radio/airlock/Initialize()
+	. = ..()
 	program = new/datum/computer/file/embedded_program/airlock(src)
 
 /obj/machinery/embedded_controller/radio/airlock/Destroy()

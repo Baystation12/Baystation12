@@ -90,6 +90,6 @@
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA, "Xenophage")
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
-/obj/item/clothing/suit/space/New()
-	..()
+/obj/item/clothing/suit/space/Initialize()
+	.=..()
 	slowdown_per_slot[slot_wear_suit] = 1

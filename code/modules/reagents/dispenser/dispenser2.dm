@@ -5,8 +5,7 @@
 	clicksound = "button"
 	clickvol = 20
 
-	var/list/spawn_cartridges = null // Set to a list of types to spawn one of each on New()
-
+	var/list/spawn_cartridges = null // Set to a list of types to spawn one of each on Initialize()
 	var/list/cartridges = list() // Associative, label -> cartridge
 	var/obj/item/weapon/reagent_containers/container = null
 
@@ -21,8 +20,8 @@
 	anchored = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
 
-/obj/machinery/chemical_dispenser/New()
-	..()
+/obj/machinery/chemical_dispenser/Initialize()
+	.=..()
 
 	if(spawn_cartridges)
 		for(var/type in spawn_cartridges)

@@ -219,6 +219,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	return
 
 /datum/species/New()
+	..()
 	if(hud_type)
 		hud = new hud_type()
 	else

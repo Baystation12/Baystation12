@@ -20,8 +20,8 @@
 	var/set_temperature = T20C		// Thermostat
 	var/cooling = 0
 
-/obj/machinery/atmospherics/unary/freezer/New()
-	..()
+/obj/machinery/atmospherics/unary/freezer/Initialize()
+	. = ..()
 	initialize_directions = dir
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/unary_atmos/cooler(src)

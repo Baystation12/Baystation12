@@ -15,8 +15,8 @@
 	wreckage = /obj/effect/decal/mecha_wreckage/durand
 
 /*
-/obj/mecha/combat/durand/New()
-	..()
+/obj/mecha/combat/durand/Initialize()
+	. = ..()
 	weapons += new /datum/mecha_weapon/ballistic/lmg(src)
 	weapons += new /datum/mecha_weapon/ballistic/scattershot(src)
 	selected_weapon = weapons[1]

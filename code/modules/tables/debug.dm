@@ -3,9 +3,9 @@
 // This file is not #included in the .dme.
 
 /obj/structure/table/debug
-	New()
+	Initialize
 		material = get_material_by_name("debugium")
-		..()
+		.=..()
 
 /material/debug
 	name = "debugium"

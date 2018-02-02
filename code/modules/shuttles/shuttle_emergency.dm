@@ -4,7 +4,7 @@
 	var/datum/evacuation_controller/shuttle/emergency_controller
 
 /datum/shuttle/autodock/ferry/emergency/New()
-	. = ..()
+	..()
 	emergency_controller = evacuation_controller
 	if(!istype(emergency_controller))
 		CRASH("Escape shuttle created without the appropriate controller type.")

@@ -14,8 +14,8 @@
 	icon_state = "bottle-4"
 	reagent = /datum/reagent/inaprovaline
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		reagents.add_reagent(/datum/reagent/inaprovaline, 60)
 		update_icon()
 
@@ -27,8 +27,8 @@
 	icon_state = "bottle-4"
 	reagent = /datum/reagent/dylovene
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		reagents.add_reagent(/datum/reagent/dylovene, 60)
 		update_icon()
 

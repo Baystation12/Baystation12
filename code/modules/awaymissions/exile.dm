@@ -27,8 +27,8 @@
 	name = "Exile Implants"
 	req_access = list(access_hos)
 
-	New()
-		..()
+	Initialize()
+		.=..()
 		sleep(2)
 		new /obj/item/weapon/implanter/exile(src)
 		new /obj/item/weapon/implantcase/exile(src)

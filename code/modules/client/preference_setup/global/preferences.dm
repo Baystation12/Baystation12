@@ -65,7 +65,7 @@ var/list/_client_preferences_by_type
 	var/default_value
 
 /datum/client_preference/New()
-	. = ..()
+	..()
 
 	if(!default_value)
 		default_value = options[1]

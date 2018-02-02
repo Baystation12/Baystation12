@@ -35,7 +35,7 @@ var/global/list/ores_by_type = list()
 	var/list/origin_tech = list(TECH_MATERIAL = 1)
 
 /ore/New()
-	. = ..()
+	..()
 	if(!display_name)
 		display_name = name
 	if(!material)

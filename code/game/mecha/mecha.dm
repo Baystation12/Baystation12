@@ -91,8 +91,8 @@
 
 	return cell.drain_power(drain_check)
 
-/obj/mecha/New()
-	..()
+/obj/mecha/Initialize()
+	. = ..()
 	events = new
 
 	icon_state += "-open"

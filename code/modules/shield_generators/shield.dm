@@ -8,7 +8,8 @@
 	density = 0
 
 
-/obj/effect/shield_impact/New()
+/obj/effect/shield_impact/Initialize()
+	.=..()
 	spawn(2 SECONDS)
 		qdel(src)
 
@@ -47,8 +48,8 @@
 	return 0
 
 
-/obj/effect/shield/New()
-	..()
+/obj/effect/shield/Initialize()
+	.=..()
 	update_nearby_tiles()
 
 

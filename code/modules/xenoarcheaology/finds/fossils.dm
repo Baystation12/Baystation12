@@ -9,7 +9,8 @@
 	desc = "It's a fossil."
 	var/animal = 1
 
-/obj/item/weapon/fossil/base/New()
+/obj/item/weapon/fossil/base/Initialize()
+	.=..()
 	var/list/l = list(/obj/item/weapon/fossil/bone=9,/obj/item/weapon/fossil/skull=3,
 	/obj/item/weapon/fossil/skull/horned=2)
 	var/t = pickweight(l)
@@ -51,7 +52,8 @@
 	var/bstate = 0
 	var/plaque_contents = "Unnamed alien creature"
 
-/obj/skeleton/New()
+/obj/skeleton/Initialize()
+	.=..()
 	src.breq = rand(6)+3
 	src.desc = "An incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
 
@@ -98,5 +100,6 @@
 	desc = " A fossilised shred of alien plant matter."
 	animal = 0
 
-/obj/item/weapon/fossil/plant/New()
+/obj/item/weapon/fossil/plant/Initialize()
+	.=..()
 	icon_state = "plant[rand(1,4)]"

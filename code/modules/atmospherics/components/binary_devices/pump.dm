@@ -4,7 +4,7 @@ Every cycle, the pump uses the air in air_in to try and make air_out the perfect
 node1, air1, network1 correspond to input
 node2, air2, network2 correspond to output
 
-Thus, the two variables affect pump operation are set in New():
+Thus, the two variables affect pump operation are set in Initialize():
 	air1.volume
 		This is the volume of gas available to the pump that may be transfered to the output
 	air2.volume
@@ -34,8 +34,8 @@ Thus, the two variables affect pump operation are set in New():
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/atmospherics/binary/pump/New()
-	..()
+/obj/machinery/atmospherics/binary/pump/Initialize()
+	. = ..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
 

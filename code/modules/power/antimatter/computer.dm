@@ -15,9 +15,9 @@
 	var/obj/machinery/power/am_engine/injector/connected_I = null
 	var/state = STATE_DEFAULT
 
-/obj/machinery/computer/am_engine/New()
-	..()
-	spawn( 24 )
+/obj/machinery/computer/am_engine/Initialize()
+	.=..()
+	spawn(24)
 		for(var/obj/machinery/power/am_engine/engine/E in world)
 			if(E.engine_id == src.engine_id)
 				src.connected_E = E

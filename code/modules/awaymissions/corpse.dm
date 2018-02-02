@@ -32,7 +32,7 @@
 	var/facial_styles_per_species = list() // Custom facial hair styles, per species -type-, if any. See above as to why
 
 /obj/effect/landmark/corpse/Initialize()
-	..()
+	.=..()
 
 	var/mob/living/carbon/human/M = new /mob/living/carbon/human(loc)
 

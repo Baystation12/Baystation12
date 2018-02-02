@@ -49,8 +49,8 @@
 	icon_state = "healthhud"
 	icon = 'icons/obj/clothing/glasses.dmi'
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		hud = new /obj/item/clothing/glasses/hud/health(src)
 		return
 
@@ -60,7 +60,7 @@
 	icon_state = "securityhud"
 	icon = 'icons/obj/clothing/glasses.dmi'
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		hud = new /obj/item/clothing/glasses/hud/security(src)
 		return

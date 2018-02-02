@@ -79,8 +79,8 @@
 	name = "Gygax wreckage"
 	icon_state = "gygax-broken"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/list/parts = list(/obj/item/mecha_parts/part/gygax_torso,
 									/obj/item/mecha_parts/part/gygax_head,
 									/obj/item/mecha_parts/part/gygax_left_arm,
@@ -115,8 +115,9 @@
 	name = "Ripley wreckage"
 	icon_state = "ripley-broken"
 
-	New()
-		..()
+
+	Initialize()
+		. = ..()
 		var/list/parts = list(/obj/item/mecha_parts/part/ripley_torso,
 									/obj/item/mecha_parts/part/ripley_left_arm,
 									/obj/item/mecha_parts/part/ripley_right_arm,
@@ -133,8 +134,8 @@
 	name = "Firefighter wreckage"
 	icon_state = "firefighter-broken"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/list/parts = list(/obj/item/mecha_parts/part/ripley_torso,
 									/obj/item/mecha_parts/part/ripley_left_arm,
 									/obj/item/mecha_parts/part/ripley_right_arm,
@@ -156,8 +157,8 @@
 	name = "Durand wreckage"
 	icon_state = "durand-broken"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/list/parts = list(
 									/obj/item/mecha_parts/part/durand_torso,
 									/obj/item/mecha_parts/part/durand_head,
@@ -181,8 +182,8 @@
 	name = "Odysseus wreckage"
 	icon_state = "odysseus-broken"
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		var/list/parts = list(
 									/obj/item/mecha_parts/part/odysseus_torso,
 									/obj/item/mecha_parts/part/odysseus_head,

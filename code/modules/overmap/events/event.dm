@@ -3,8 +3,8 @@
 /decl/overmap_event_handler
 	var/list/event_turfs_by_z_level
 
-/decl/overmap_event_handler/New()
-	..()
+/decl/overmap_event_handler/Initialize()
+	.=..()
 	event_turfs_by_z_level = list()
 
 /decl/overmap_event_handler/proc/create_events(var/z_level, var/overmap_size, var/number_of_events)

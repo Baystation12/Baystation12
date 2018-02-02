@@ -223,8 +223,8 @@
 	destroyed = 1
 	icon_state = "grille-b"
 	density = 0
-	New()
-		..()
+	Initialize()
+		. = ..()
 		health = rand(-5, -1) //In the destroyed but not utterly threshold.
 		healthcheck() //Send this to healthcheck just in case we want to do something else with it.
 

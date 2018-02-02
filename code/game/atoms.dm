@@ -22,7 +22,7 @@
 
 	var/initialized = FALSE
 
-/atom/New(loc, ...)
+/atom/New(loc, ...) //Don't use this.
 	//. = ..() //uncomment if you are dumb enough to add a /datum/New() proc
 
 	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()

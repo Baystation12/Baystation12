@@ -79,11 +79,11 @@ var/list/mechtoys = list(
 	name = "airtight plastic flaps"
 	desc = "Heavy duty, airtight, plastic flaps."
 
-	New() //set the turf below the flaps to block air
+	Initialize() //set the turf below the flaps to block air
 		var/turf/T = get_turf(loc)
 		if(T)
 			T.blocks_air = 1
-		..()
+		. = ..()
 
 	Destroy() //lazy hack to set the turf to allow air to pass if it's a simulated floor
 		var/turf/T = get_turf(loc)
@@ -146,7 +146,7 @@ var/list/point_source_descriptions = list(
 	var/movetime = 1200
 	var/datum/shuttle/autodock/ferry/supply/shuttle
 
-	New()
+	Initialize()
 		ordernum = rand(1,9000)
 
 		//Build master supply list

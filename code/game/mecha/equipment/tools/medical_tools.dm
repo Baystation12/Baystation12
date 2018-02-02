@@ -13,8 +13,8 @@
 	required_type = /obj/mecha/medical
 	salvageable = 0
 
-/obj/item/mecha_parts/mecha_equipment/tool/sleeper/New()
-	..()
+/obj/item/mecha_parts/mecha_equipment/tool/sleeper/Initialize()
+	. = ..()
 	pr_mech_sleeper = new /datum/global_iterator/mech_sleeper(list(src),0)
 	pr_mech_sleeper.set_delay(equip_cooldown)
 	return
@@ -236,8 +236,8 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4, TECH_MAGNET = 4, TECH_DATA = 3)
 	required_type = /obj/mecha/medical
 
-/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun/New()
-	..()
+/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun/Initialize()
+	. = ..()
 	atom_flags |= ATOM_FLAG_NO_REACT
 	syringes = new
 	known_reagents = list(/datum/reagent/inaprovaline="Inaprovaline",/datum/reagent/dylovene="Dylovene")

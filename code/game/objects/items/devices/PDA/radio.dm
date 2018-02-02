@@ -8,8 +8,8 @@
 	var/on = 0 //Are we currently active??
 	var/menu_message = ""
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		if (istype(loc.loc, /obj/item/device/pda))
 			hostpda = loc.loc
 
@@ -44,8 +44,8 @@
 	var/control_freq = BOT_FREQ
 
 	// create a new QM cartridge, and register to receive bot control & beacon message
-	New()
-		..()
+	Initialize()
+		. = ..()
 		spawn(5)
 			if(radio_controller)
 				radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)

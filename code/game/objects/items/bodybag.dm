@@ -17,8 +17,8 @@
 	name = "body bags"
 	desc = "This box contains body bags."
 	icon_state = "bodybags"
-	New()
-		..()
+	Initialize()
+		. = ..()
 		new /obj/item/bodybag(src)
 		new /obj/item/bodybag(src)
 		new /obj/item/bodybag(src)

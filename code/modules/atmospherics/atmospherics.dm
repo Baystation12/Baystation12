@@ -32,7 +32,7 @@ Pipelines + Other Objects -> Pipe network
 
 	var/atmos_initalized = FALSE
 
-/obj/machinery/atmospherics/New()
+/obj/machinery/atmospherics/Initialize()
 	if(!icon_manager)
 		icon_manager = new()
 
@@ -42,7 +42,7 @@ Pipelines + Other Objects -> Pipe network
 
 	if(!pipe_color_check(pipe_color))
 		pipe_color = null
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/proc/atmos_init()
 	atmos_initalized = TRUE

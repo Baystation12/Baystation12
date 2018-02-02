@@ -34,8 +34,8 @@
 		/obj/item/weapon/storage/pill_bottle/paracetamol
 		)
 
-/obj/item/weapon/storage/firstaid/fire/New()
-	..()
+/obj/item/weapon/storage/firstaid/fire/Initialize()
+	. = ..()
 	icon_state = pick("ointment","firefirstaid")
 
 /obj/item/weapon/storage/firstaid/regular
@@ -62,8 +62,8 @@
 		/obj/item/device/healthanalyzer,
 		)
 
-/obj/item/weapon/storage/firstaid/toxin/New()
-	..()
+/obj/item/weapon/storage/firstaid/toxin/Initialize()
+	. = ..()
 	icon_state = pick("antitoxin","antitoxfirstaid","antitoxfirstaid2","antitoxfirstaid3")
 
 /obj/item/weapon/storage/firstaid/o2

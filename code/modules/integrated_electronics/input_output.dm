@@ -355,8 +355,8 @@
 	var/datum/encrypted_ic_data/scanned_access
 	var/obj/item/weapon/card/id/contained_id
 
-/obj/item/integrated_circuit/input/access_scanner/New()
-	..()
+/obj/item/integrated_circuit/input/access_scanner/Initialize()
+	.=..()
 	scanned_access = new()
 
 /obj/item/integrated_circuit/input/access_scanner/Destroy()
@@ -577,8 +577,8 @@
 	var/list/sounds = list()
 	category = /obj/item/integrated_circuit/output/sound
 
-/obj/item/integrated_circuit/output/sound/New()
-	..()
+/obj/item/integrated_circuit/output/sound/Initialize()
+	.=..()
 	extended_desc = list()
 	extended_desc += "The first input pin determines which sound is used. The choices are; "
 	extended_desc += jointext(sounds, ", ")

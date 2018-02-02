@@ -16,8 +16,8 @@ var/global/list/narsie_list = list()
 	consume_range = 3 //How many tiles out do we eat
 
 
-/obj/singularity/narsie/New()
-	..()
+/obj/singularity/narsie/Initialize()
+	. = ..()
 	narsie_list.Add(src)
 
 /obj/singularity/narsie/Destroy()
@@ -40,8 +40,8 @@ var/global/list/narsie_list = list()
 	var/announce=1
 	var/cause_hell = 1
 
-/obj/singularity/narsie/large/New()
-	..()
+/obj/singularity/narsie/large/Initialize()
+	. = ..()
 	if(announce)
 		to_world("<font size='15' color='red'><b>[uppertext(name)] HAS RISEN</b></font>")
 		sound_to(world, sound('sound/effects/wind/wind_5_1.ogg'))

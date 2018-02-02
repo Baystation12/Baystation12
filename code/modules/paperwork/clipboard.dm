@@ -12,7 +12,8 @@
 	slot_flags = SLOT_BELT
 	matter = list(DEFAULT_WALL_MATERIAL = 70)
 
-/obj/item/weapon/clipboard/New()
+/obj/item/weapon/clipboard/Initialize()
+	.=..()
 	update_icon()
 
 /obj/item/weapon/clipboard/MouseDrop(obj/over_object as obj) //Quick clipboard fix. -Agouri

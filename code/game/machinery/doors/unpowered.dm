@@ -13,7 +13,7 @@
 	if(src.locked)	return
 	..()
 	return
-	
+
 /obj/machinery/door/unpowered/emag_act()
 	return -1
 

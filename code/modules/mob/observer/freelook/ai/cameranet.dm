@@ -9,8 +9,9 @@
 	valid_source_types = list(/obj/machinery/camera, /mob/living/silicon/ai)
 
 /datum/visualnet/camera/New()
-	cameras = list()
 	..()
+	cameras = list()
+
 
 /datum/visualnet/camera/Destroy()
 	cameras.Cut()

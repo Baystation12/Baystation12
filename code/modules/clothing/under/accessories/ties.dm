@@ -49,9 +49,10 @@
 //Bowties
 /obj/item/clothing/accessory/bowtie
 	var/icon_tied
-/obj/item/clothing/accessory/bowtie/New()
+/obj/item/clothing/accessory/bowtie/Initialize()
+	.=..()
 	icon_tied = icon_tied || icon_state
-	..()
+
 
 /obj/item/clothing/accessory/bowtie/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()

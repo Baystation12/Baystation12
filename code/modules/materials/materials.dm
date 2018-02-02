@@ -767,6 +767,7 @@ var/list/name_to_material
 	sheet_plural_name = "chunks"
 
 /material/aliumium/New()
+	..()
 	icon_base = pick("jaggy","curvy")
 	icon_colour = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
@@ -775,7 +776,6 @@ var/list/name_to_material
 	hardness = rand(15,100)
 	integrity = rand(200,400)
 	melting_point = rand(400,10000)
-	..()
 
 /material/aliumium/place_dismantled_girder(var/turf/target, var/material/reinf_material)
 	return

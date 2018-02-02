@@ -55,11 +55,12 @@
 /obj/item/integrated_circuit/proc/any_examine(mob/user)
 	return
 
-/obj/item/integrated_circuit/New()
+/obj/item/integrated_circuit/Initialize()
+	.=..()
 	setup_io(inputs, /datum/integrated_io/input)
 	setup_io(outputs, /datum/integrated_io/output)
 	setup_io(activators, /datum/integrated_io/activate)
-	..()
+
 
 /obj/item/integrated_circuit/ex_act(severity)
 	..(max(1, severity - 1)) // Circuits are weak

@@ -147,7 +147,7 @@
 	if(!P)
 		log_and_message_admins("## WARNING: Unable to locate connector port at [x] [y] [z]!")
 		return SETUP_WARNING
-	new/obj/machinery/portable_atmospherics/canister(get_turf(src)) // Canisters automatically connect to connectors in New()
+	new/obj/machinery/portable_atmospherics/canister(get_turf(src)) // Canisters automatically connect to connectors in Initialize()
 	return SETUP_OK
 
 

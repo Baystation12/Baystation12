@@ -16,8 +16,8 @@ var/list/fuel_injectors = list()
 	var/injecting = 0
 	var/obj/item/weapon/fuel_assembly/cur_assembly
 
-/obj/machinery/fusion_fuel_injector/New()
-	..()
+/obj/machinery/fusion_fuel_injector/Initialize()
+	.=..()
 	fuel_injectors += src
 	tag = null
 

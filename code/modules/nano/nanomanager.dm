@@ -17,6 +17,7 @@ GLOBAL_DATUM_INIT(nanomanager, /datum/nanomanager, new) // NanoManager, the mana
   * @return /nanomanager new nanomanager object
   */
 /datum/nanomanager/New()
+	..()
 	var/list/nano_asset_dirs = list(\
 		"nano/css/",\
 		"nano/images/",\
