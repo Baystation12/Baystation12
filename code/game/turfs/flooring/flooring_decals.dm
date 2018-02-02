@@ -351,13 +351,47 @@ var/list/floor_decals = list()
 	name = "hazard stripes"
 	icon_state = "warningcorner_dust"
 
+/obj/effect/floor_decal/industrial/quarter_hatch
+	name = "quarter hatch"
+	icon_state = "quarter_hatch"
+	alpha = 229
+
+/obj/effect/floor_decal/industrial/quarter_hatch/yellow
+	color = "#d2d53d"
+
+/obj/effect/floor_decal/industrial/quarter_hatch/red
+	color = COLOR_RED_GRAY
+
+/obj/effect/floor_decal/industrial/quarter_hatch/orange
+	color = COLOR_DARK_ORANGE
+
+/obj/effect/floor_decal/industrial/quarter_hatch/blue
+	color = COLOR_BLUE_GRAY
+
+/obj/effect/floor_decal/industrial/half_hatch
+	name = "half hatch"
+	icon_state = "half_hatch"
+	alpha = 229
+
+/obj/effect/floor_decal/industrial/half_hatch/yellow
+	color = "#d2d53d"
+
+/obj/effect/floor_decal/industrial/half_hatch/red
+	color = COLOR_RED_GRAY
+
+/obj/effect/floor_decal/industrial/half_hatch/orange
+	color = COLOR_DARK_ORANGE
+
+/obj/effect/floor_decal/industrial/half_hatch/blue
+	color = COLOR_BLUE_GRAY
+
 /obj/effect/floor_decal/industrial/hatch
 	name = "hatched marking"
 	icon_state = "delivery"
 	alpha = 229
 
 /obj/effect/floor_decal/industrial/hatch/yellow
-	color = "#cfcf55"
+	color = "#d2d53d"
 
 /obj/effect/floor_decal/industrial/hatch/red
 	color = COLOR_RED_GRAY
@@ -383,7 +417,7 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/industrial/outline/yellow
 	name = "yellow outline"
-	color = "#cfcf55"
+	color = "#d2d53d"
 
 /obj/effect/floor_decal/industrial/outline/grey
 	name = "grey outline"
@@ -524,8 +558,6 @@ var/list/floor_decals = list()
 	icon_state = "snowfloor"
 
 /obj/effect/floor_decal/floordetail
-	plane = TURF_PLANE
-	layer = TURF_DETAIL_LAYER
 	color = COLOR_GUNMETAL
 	icon_state = "manydot"
 	appearance_flags = 0
@@ -545,6 +577,9 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/floordetail/traction
 	icon_state = "traction"
+
+/obj/effect/floor_decal/floordetail/ridge
+	icon_state = "ridge"
 
 /obj/effect/floor_decal/ntlogo
 	icon_state = "ntlogo"

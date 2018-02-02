@@ -61,6 +61,12 @@
 	icon_state = "steel"
 	initial_flooring = /decl/flooring/tiling
 
+/turf/simulated/floor/tiled/mono
+	name = "steel floor"
+	icon = 'icons/turf/flooring/tiles.dmi'
+	icon_state = "monotile"
+	initial_flooring = /decl/flooring/tiling/mono
+
 /turf/simulated/floor/carpet
 	name = "brown carpet"
 	icon = 'icons/turf/flooring/carpet.dmi'
@@ -162,6 +168,16 @@
 	name = "white floor"
 	icon_state = "white"
 	initial_flooring = /decl/flooring/tiling/white
+
+/turf/simulated/floor/tiled/mono/dark
+	name = "dark floor"
+	icon_state = "monotile"
+	initial_flooring = /decl/flooring/tiling/dark/mono
+
+/turf/simulated/floor/tiled/mono/white
+	name = "white floor"
+	icon_state = "monotile"
+	initial_flooring = /decl/flooring/tiling/white/mono
 
 /turf/simulated/floor/tiled/freezer
 	name = "tiles"
