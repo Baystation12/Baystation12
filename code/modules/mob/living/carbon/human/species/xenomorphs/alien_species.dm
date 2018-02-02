@@ -1,6 +1,6 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
-	name = "Xenophage"
+	name = SPECIES_XENO
 	name_plural = "Xenophages"
 
 	default_language = "Xenophage"
@@ -35,7 +35,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 	appearance_flags = HAS_EYE_COLOR | HAS_SKIN_COLOR
 
 	spawn_flags = SPECIES_IS_RESTRICTED
