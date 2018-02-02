@@ -434,7 +434,7 @@
 	desc = "It looks rather strong. Might take a few good hits to shatter it."
 	icon_state = "rwindow"
 	basestate = "rwindow"
-	maxhealth = 400.0
+	maxhealth = 40.0
 	reinf = 1
 	maximal_heat = T0C + 750
 	damage_per_fire_tick = 2.0
@@ -548,3 +548,14 @@
 
 /obj/machinery/button/windowtint/update_icon()
 	icon_state = "light[active]"
+
+obj/structure/window/reinforced/treated
+	name = "treated window"
+	desc = "It looks so dense it's almost solid. Nothing short of a rocket will break it."
+	maxhealth = 400
+	icon_state = "rwindow"
+	basestate = "rwindow"
+	reinf = 1
+	maximal_heat = T0C + 750
+	damage_per_fire_tick = 2.0
+	glasstype = /obj/item/stack/material/glass/reinforced
