@@ -71,8 +71,7 @@
 /obj/item/weapon/storage/belt/marine_ammo
 	name = "Ammunition Storage Belt"
 	desc = "A belt with many various pouches to hold ammunition"
-	icon = ITEM_INHAND
-	icon_override = MARINE_OVERRIDE
+	icon = 'code/modules/halo/clothing/marine_items.dmi'
 	icon_state = "UNSC Marine Ammo Belt item"
 	item_state = "UNSC Marine Ammo Belt"
 	storage_slots = 6
