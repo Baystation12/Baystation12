@@ -1258,7 +1258,7 @@
 
 /mob/living/carbon/human/check_slipmove()
 	if(h_style)
-		var/datum/sprite_accessory/hair/S = hair_styles_list[h_style]
+		var/datum/sprite_accessory/hair/S = GLOB.hair_styles_list[h_style]
 		if(S && S.flags & HAIR_TRIPPABLE && prob(0.4))
 			slip(S, 4)
 			return TRUE

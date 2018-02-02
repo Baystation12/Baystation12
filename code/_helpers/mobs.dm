@@ -30,43 +30,18 @@
 proc/random_hair_style(gender, species = SPECIES_HUMAN)
 	var/h_style = "Bald"
 
-	var/list/valid_hairstyles = list()
-	for(var/hairstyle in hair_styles_list)
-		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-
-		if(gender != NEUTER && gender != PLURAL)
-			if(gender == MALE && S.gender == FEMALE)
-				continue
-			if(gender == FEMALE && S.gender == MALE)
-				continue
-
-		if( !(species in S.species_allowed))
-			continue
-		valid_hairstyles[hairstyle] = hair_styles_list[hairstyle]
-
+	var/datum/species/mob_species = all_species[species]
+	var/list/valid_hairstyles = mob_species.get_hair_styles()
 	if(valid_hairstyles.len)
 		h_style = pick(valid_hairstyles)
 
 	return h_style
 
-proc/random_facial_hair_style(gender, species = SPECIES_HUMAN)
+proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 	var/f_style = "Shaved"
 
-	var/list/valid_facialhairstyles = list()
-	for(var/facialhairstyle in facial_hair_styles_list)
-		var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-
-		if(gender != NEUTER && gender != PLURAL)
-			if(gender == MALE && S.gender == FEMALE)
-				continue
-			if(gender == FEMALE && S.gender == MALE)
-				continue
-
-		if( !(species in S.species_allowed))
-			continue
-
-		valid_facialhairstyles[facialhairstyle] = facial_hair_styles_list[facialhairstyle]
-
+	var/datum/species/mob_species = all_species[species]
+	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
 	if(valid_facialhairstyles.len)
 		f_style = pick(valid_facialhairstyles)
 
