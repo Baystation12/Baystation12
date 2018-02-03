@@ -219,7 +219,7 @@
 		var/obj/item/weapon/storage/bag/P = O
 		var/plants_loaded = 0
 		for(var/obj/G in P.contents)
-			if(P.remove_from_storage(G, src) && accept_check(G))
+			if(accept_check(G) && P.remove_from_storage(G, src))
 				plants_loaded++
 				stock_item(G)
 
