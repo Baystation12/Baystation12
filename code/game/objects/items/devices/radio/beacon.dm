@@ -27,6 +27,18 @@
 	return
 
 
+/obj/item/device/radio/beacon/anchored
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "floor_magnet"
+	anchored = TRUE
+	randpixel = 0
+
+/obj/item/device/radio/beacon/anchored/Initialize()
+	. = ..()
+	var/turf/T = get_turf(src)
+	hide(hides_under_flooring() && !T.is_plating())
+
+
 /obj/item/device/radio/beacon/bacon //Probably a better way of doing this, I'm lazy.
 	proc/digest_delay()
 		spawn(600)
