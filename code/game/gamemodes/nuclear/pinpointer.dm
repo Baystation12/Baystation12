@@ -59,6 +59,8 @@
 	if(beeping == 0)
 		var/turf/here = get_turf(src)
 		var/turf/there = get_turf(target.resolve())
+		if(!istype(there))
+			return
 		var/distance = max(1,get_dist(here, there))
 		var/freq_mod = 1
 		if(distance < world.view)
@@ -81,6 +83,9 @@
 
 	var/turf/here = get_turf(src)
 	var/turf/there = get_turf(target.resolve())
+	if(!istype(there))
+		overlays += image(icon,"pin_invalid")
+		return
 
 	if(here == there)
 		overlays += image(icon,"pin_here")
