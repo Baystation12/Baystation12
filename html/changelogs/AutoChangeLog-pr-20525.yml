@@ -1,0 +1,4 @@
+author: "TheTrollDoctor"
+delete-after: True
+changes: 
+  - rscadd: "Gives Engineering Contractor, Medical Contractor and Research Assistant access to the hangar."
