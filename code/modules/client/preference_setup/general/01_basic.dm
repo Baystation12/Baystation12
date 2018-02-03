@@ -74,8 +74,11 @@ datum/preferences
 
 	else if(href_list["gender"])
 		var/new_gender = input(user, "Choose your character's gender:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.gender) as null|anything in S.genders
-		if(new_gender && CanUseTopic(user))
+		S = all_species[pref.species]
+		if(new_gender && CanUseTopic(user) && (new_gender in S.genders))
 			pref.gender = new_gender
+			if(!(pref.f_style in S.get_facial_hair_styles(pref.gender)))
+				ResetFacialHair()
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["age"])

@@ -11,6 +11,7 @@
 	item_state = "electronic"
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
+	action_button_name = "Toggle T-Ray scanner"
 
 	var/scan_range = 1
 
@@ -35,6 +36,7 @@
 
 /obj/item/device/t_scanner/attack_self(mob/user)
 	set_active(!on)
+	user.update_action_buttons()
 
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active

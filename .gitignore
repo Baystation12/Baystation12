@@ -17,6 +17,6 @@ atupdate
 __pycache__
 
 # ignore config, but not subdirs
-config/*
 !config/*/
+config/*
 sql/test_db

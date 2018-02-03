@@ -11,6 +11,8 @@
 		return
 	if(QDELETED(D))
 		return
+	if(istype(D, /weakref))
+		return D
 	if(!D.weakref)
 		D.weakref = new/weakref(D)
 	return D.weakref

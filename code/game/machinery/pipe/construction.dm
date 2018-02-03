@@ -777,7 +777,7 @@ Buildable meters
 		if(PIPE_JUNCTION)
 			var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction/P = new ( src.loc )
 			P.set_dir(src.dir)
-			P.initialize_directions = src.get_pdir()
+			P.initialize_directions = src.get_pdir() | src.get_hdir()
 			P.initialize_directions_he = src.get_hdir()
 			P.atmos_init()
 			if (QDELETED(P))

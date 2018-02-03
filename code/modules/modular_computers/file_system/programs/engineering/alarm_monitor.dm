@@ -27,6 +27,7 @@
 			ui_header = "alarm_green.gif"
 			update_computer_icon()
 			has_alert = 0
+	return 1
 
 /datum/nano_module/alarm_monitor
 	name = "Alarm monitor"
@@ -64,21 +65,21 @@
 /datum/nano_module/alarm_monitor/proc/all_alarms()
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		all_alarms += AH.alarms
+		all_alarms += AH.alarms(get_host_z())
 
 	return all_alarms
 
 /datum/nano_module/alarm_monitor/proc/major_alarms()
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		all_alarms += AH.major_alarms()
+		all_alarms += AH.major_alarms(get_host_z())
 
 	return all_alarms
 
 // Modified version of above proc that uses slightly less resources, returns 1 if there is a major alarm, 0 otherwise.
 /datum/nano_module/alarm_monitor/proc/has_major_alarms()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		if(AH.has_major_alarms())
+		if(AH.has_major_alarms(get_host_z()))
 			return 1
 
 	return 0
@@ -86,7 +87,7 @@
 /datum/nano_module/alarm_monitor/proc/minor_alarms()
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
-		all_alarms += AH.minor_alarms()
+		all_alarms += AH.minor_alarms(get_host_z())
 
 	return all_alarms
 
@@ -107,9 +108,7 @@
 	var/categories[0]
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		categories[++categories.len] = list("category" = AH.category, "alarms" = list())
-		for(var/datum/alarm/A in AH.major_alarms())
-			if(!AreConnectedZLevels(get_host_z(), A.alarm_z()))
-				continue
+		for(var/datum/alarm/A in AH.major_alarms(get_host_z()))
 
 			var/cameras[0]
 			var/lost_sources[0]

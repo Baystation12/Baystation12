@@ -35,6 +35,7 @@
 	var/icon/mob_icon                  // Cached icon for use in mob overlays.
 	var/gendered_icon = 0              // Whether or not the icon state appends a gender.
 	var/s_tone                         // Skin tone.
+	var/s_base = ""                    // Skin base.
 	var/list/s_col                     // skin colour
 	var/s_col_blend = ICON_ADD         // How the skin colour is applied.
 	var/list/h_col                     // hair colour
@@ -129,6 +130,7 @@
 /obj/item/organ/external/set_dna(var/datum/dna/new_dna)
 	..()
 	s_col_blend = species.limb_blend
+	s_base = new_dna.s_base
 
 /obj/item/organ/external/emp_act(severity)
 	var/burn_damage = 0

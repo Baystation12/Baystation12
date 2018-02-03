@@ -135,10 +135,7 @@
 	name = "Fleet command support"
 	departments = SPT
 
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/command, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
-
-	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 
 	dress_extra = list(/obj/item/weapon/material/sword/replica/officersword/pettyofficer)
 

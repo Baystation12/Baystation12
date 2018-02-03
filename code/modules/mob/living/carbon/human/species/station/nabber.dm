@@ -62,7 +62,7 @@
 	heat_level_3 = 800 //Default 1000
 
 	species_flags = SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_CAN_NAB | SPECIES_FLAG_NO_BLOCK | SPECIES_FLAG_NO_MINOR_CUT | SPECIES_FLAG_NEED_DIRECT_ABSORB
-	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR
+	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_SKIN_TONE_NORMAL | HAS_BASE_SKIN_COLOURS
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
 
 	bump_flag = HEAVY
@@ -98,6 +98,11 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/nabber),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/nabber)
 		)
+
+	base_skin_colours = list(
+		"Grey"   = "",
+		"Green"  = "_green"
+	)
 
 	unarmed_types = list(/datum/unarmed_attack/nabber)
 

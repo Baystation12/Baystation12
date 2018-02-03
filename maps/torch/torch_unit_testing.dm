@@ -135,6 +135,7 @@
 		/area/bluespaceriver,
 		/area/mobius_rift,
 		/area/icarus,
+		/area/errant_pisces,
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber

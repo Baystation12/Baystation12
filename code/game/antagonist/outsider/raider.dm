@@ -48,7 +48,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/head/bearpelt,
 		/obj/item/clothing/head/ushanka,
 		/obj/item/clothing/head/pirate,
-		/obj/item/clothing/head/bandana,
+		/obj/item/clothing/mask/bandana/red,
 		/obj/item/clothing/head/hgpiratecap,
 		)
 
