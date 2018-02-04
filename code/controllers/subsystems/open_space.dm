@@ -7,7 +7,7 @@ GLOBAL_DATUM_INIT(over_OS_darkness, /image, image('icons/turf/open_space.dmi', "
 
 
 SUBSYSTEM_DEF(open_space)
-	name = "openspace"
+	name = "Open Space"
 	init_order = INIT_OPEN_SPACE
 	var/list/turfs_to_process = list()		// List of turfs queued for update.
 	var/list/turfs_to_process_old = list()  //List of previous turfs that is set to update
