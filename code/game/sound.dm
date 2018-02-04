@@ -60,8 +60,7 @@ GLOBAL_LIST_INIT(chop_sound,list('sound/weapons/chop1.ogg','sound/weapons/chop2.
 	if(isarea(source))
 		error("[source] is an area and is trying to make the sound: [soundin]")
 		return
-
-	frequency = isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
+	frequency = vary && isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
 	var/turf/turf_source = get_turf(source)
 
  	// Looping through the player list has the added bonus of working for mobs inside containers
