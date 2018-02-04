@@ -31,7 +31,7 @@
 
 	alarms |= existing
 	alarms_assoc[origin] = existing
-	LAZYADD(alarms_by_z["[existing.alarm_z()]"], existing)
+	LAZYDISTINCTADD(alarms_by_z["[existing.alarm_z()]"], existing)
 	if(new_alarm)
 		alarms = dd_sortedObjectList(alarms)
 		on_alarm_change(existing, ALARM_RAISED)
