@@ -49,7 +49,7 @@
 	var/name = input(user, "Would you like to rename \the [L]?", "Dociler", L.name) as text
 	if(length(name))
 		L.real_name = name
-		L.name = name
+		L.SetName(name)
 
 	loaded = 0
 	icon_state = "animal_tagger0"

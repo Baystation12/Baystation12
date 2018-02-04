@@ -297,7 +297,7 @@ var/list/organ_cache = list()
 
 	user.drop_from_inventory(src)
 	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
-	O.name = name
+	O.SetName(name)
 	O.appearance = src
 	reagents.trans_to(O, reagents.total_volume)
 	if(fingerprints)

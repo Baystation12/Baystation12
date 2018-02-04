@@ -151,7 +151,7 @@
 		src.mind = M.brainmob.mind
 		src.mind.key = M.brainmob.key
 		src.ckey = M.brainmob.ckey
-		src.name = "spider-bot ([M.brainmob.name])"
+		src.SetName("spider-bot ([M.brainmob.name])")
 
 /mob/living/simple_animal/spiderbot/proc/explode() //When emagged.
 	src.visible_message("<span class='danger'>\The [src] makes an odd warbling noise, fizzles, and explodes!</span>")
@@ -179,7 +179,7 @@
 		if(mind)	mind.transfer_to(mmi.brainmob)
 		mmi = null
 		real_name = initial(real_name)
-		name = real_name
+		SetName(real_name)
 		update_icon()
 	remove_language("Robot Talk")
 	positronic = null

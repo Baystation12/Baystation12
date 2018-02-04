@@ -58,10 +58,10 @@
 			to_chat(user, "<span class='warning'>The inscription can be at most 20 characters long.</span>")
 		else if(!label_text)
 			to_chat(user, "<span class='notice'>You scratch the inscription off of [initial(BB)].</span>")
-			BB.name = initial(BB.name)
+			BB.SetName(initial(BB.name))
 		else
 			to_chat(user, "<span class='notice'>You inscribe \"[label_text]\" into \the [initial(BB.name)].</span>")
-			BB.name = "[initial(BB.name)] (\"[label_text]\")"
+			BB.SetName("[initial(BB.name)] (\"[label_text]\")")
 	else ..()
 
 /obj/item/ammo_casing/update_icon()

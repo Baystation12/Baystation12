@@ -68,10 +68,10 @@ var/global/list/stool_cache = list() //haha stool
 	overlays = noverlays
 	// Strings.
 	if(padding_material)
-		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
+		SetName("[padding_material.display_name] [initial(name)]") //this is not perfect but it will do for now.
 		desc = "A padded stool. Apply butt. It's made of [material.use_name] and covered with [padding_material.use_name]."
 	else
-		name = "[material.display_name] [initial(name)]"
+		SetName("[material.display_name] [initial(name)]")
 		desc = "A stool. Apply butt with care. It's made of [material.use_name]."
 
 /obj/item/weapon/stool/proc/add_padding(var/padding_type)

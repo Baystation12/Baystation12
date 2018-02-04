@@ -112,7 +112,7 @@
 	src.audible_message("<b>\The [src]</b> states, \"Your [text] is ready!\"")
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	var/atom/A = new type(src.loc)
-	A.name = text
+	A.SetName(text)
 	A.desc = "Looks... actually pretty good."
 	use_power(75000)
 	return 1

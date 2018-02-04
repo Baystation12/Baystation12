@@ -49,7 +49,7 @@
 
 	overlays.Cut()
 
-	name = base_name
+	SetName(base_name)
 	desc = base_desc
 	icon = base_icon
 	icon_state = base_icon_state

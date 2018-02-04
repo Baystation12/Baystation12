@@ -103,7 +103,7 @@
 	update_icon()
 	if(bloodsamp)
 		var/obj/item/weapon/paper/P = new(src)
-		P.name = "[src] report #[++report_num]: [bloodsamp.name]"
+		P.SetName("[src] report #[++report_num]: [bloodsamp.name]")
 		P.stamped = list(/obj/item/weapon/stamp)
 		P.overlays = list("paper_stamped")
 		//dna data itself

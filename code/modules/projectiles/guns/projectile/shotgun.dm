@@ -105,7 +105,7 @@
 			one_hand_penalty = 0
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 			slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.
-			name = "sawn-off shotgun"
+			SetName("sawn-off shotgun")
 			desc = "Omar's coming!"
 			to_chat(user, "<span class='warning'>You shorten the barrel of \the [src]!</span>")
 	else

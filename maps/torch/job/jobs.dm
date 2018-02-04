@@ -474,7 +474,7 @@
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_solgov_crew)
+			            access_solgov_crew, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
@@ -684,7 +684,7 @@
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
-		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks)
+		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
@@ -1048,7 +1048,7 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
 
-	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy)
+	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy, access_hangar)
 
 
 /datum/job/assistant

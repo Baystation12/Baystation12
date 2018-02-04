@@ -166,7 +166,7 @@
 	switch (state)
 		if (HOME)
 			if (!sample) return
-			P.name = "paper - Patient Diagnostic Report"
+			P.SetName("paper - Patient Diagnostic Report")
 			P.info = {"
 				[virology_letterhead("Patient Diagnostic Report")]
 				<center><small><font color='red'><b>CONFIDENTIAL MEDICAL REPORT</b></font></small></center><br>
@@ -198,7 +198,7 @@
 "}
 
 		if (LIST)
-			P.name = "paper - Virus List"
+			P.SetName("paper - Virus List")
 			P.info = {"
 				[virology_letterhead("Virus List")]
 "}
@@ -216,7 +216,7 @@
 "}
 
 		if (ENTRY)
-			P.name = "paper - Viral Profile"
+			P.SetName("paper - Viral Profile")
 			P.info = {"
 				[virology_letterhead("Viral Profile")]
 				[entry.fields["description"]]

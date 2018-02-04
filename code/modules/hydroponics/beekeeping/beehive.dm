@@ -270,7 +270,7 @@ var/global/list/datum/stack_recipe/wax_recipes = list( \
 
 /obj/item/bee_pack/proc/fill()
 	full = initial(full)
-	name = initial(name)
+	SetName(initial(name))
 	desc = initial(desc)
 	overlays.Cut()
 	overlays += "beepack-full"

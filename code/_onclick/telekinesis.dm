@@ -152,7 +152,7 @@ var/const/tk_maxrange = 15
 /obj/item/tk_grab/proc/apply_focus_overlay()
 	if(!focus)	return
 	var/obj/effect/overlay/O = new /obj/effect/overlay(locate(focus.x,focus.y,focus.z))
-	O.name = "sparkles"
+	O.SetName("sparkles")
 	O.anchored = 1
 	O.set_density(0)
 	O.layer = FLY_LAYER

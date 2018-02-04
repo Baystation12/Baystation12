@@ -921,7 +921,7 @@ other types of metals and chemistry for reagents).
 	id = "beacon_locator"
 	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 500)
-	build_path = /obj/item/device/beacon_locator
+	build_path = /obj/item/weapon/pinpointer/radio
 	sort_string = "VADAC"
 
 /datum/design/item/bluespace/ano_scanner

@@ -151,7 +151,7 @@
 	sleep(10)
 
 	var/obj/item/weapon/paper/P = new(usr.loc)
-	P.name = "Autopsy Data ([target_name])"
+	P.SetName("Autopsy Data ([target_name])")
 	P.info = "<tt>[scan_data]</tt>"
 	P.icon_state = "paper_words"
 

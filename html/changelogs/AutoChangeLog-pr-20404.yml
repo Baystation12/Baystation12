@@ -1,5 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Fixes alert monitors being red for away mission alerts."
-  - bugfix: "Fixes nonmodular atmos/alert consoles showing away mission alerts."

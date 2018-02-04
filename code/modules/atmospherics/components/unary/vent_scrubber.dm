@@ -108,7 +108,7 @@
 	if(!initial_loc.air_scrub_names[id_tag])
 		var/new_name = "[initial_loc.name] Air Scrubber #[initial_loc.air_scrub_names.len+1]"
 		initial_loc.air_scrub_names[id_tag] = new_name
-		src.name = new_name
+		src.SetName(new_name)
 	initial_loc.air_scrub_info[id_tag] = signal.data
 	radio_connection.post_signal(src, signal, radio_filter_out)
 
@@ -242,7 +242,7 @@
 	scrubbing_gas ^= toggle
 
 	if(signal.data["init"] != null)
-		name = signal.data["init"]
+		SetName(signal.data["init"])
 		return
 
 	if(signal.data["status"] != null)

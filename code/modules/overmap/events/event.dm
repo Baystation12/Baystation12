@@ -29,7 +29,7 @@
 			GLOB.exited_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_exited)
 
 			var/obj/effect/overmap_event/event = new(event_turf)
-			event.name = overmap_event.name
+			event.SetName(overmap_event.name)
 			event.icon_state = pick(overmap_event.event_icon_states)
 			event.opacity =  overmap_event.opacity
 

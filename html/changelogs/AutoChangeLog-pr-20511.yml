@@ -1,4 +1,0 @@
-author: "Techhead"
-delete-after: True
-changes: 
-  - bugfix: "Antag preferences default to Low again instead of Never. Relatedly, your preferences will now longer display Never when they haven't actually been set as such, fixing a bug causing unwilling players to be drafted for antag status."
