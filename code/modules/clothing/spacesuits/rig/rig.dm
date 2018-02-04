@@ -102,8 +102,8 @@
 		if(open)
 			to_chat(usr, "It's equipped with [english_list(installed_modules)].")
 
-/obj/item/weapon/rig/New()
-	..()
+/obj/item/weapon/rig/Initialize()
+	. = ..()
 
 	item_state = icon_state
 	wires = new(src)
