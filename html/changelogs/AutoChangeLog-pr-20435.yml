@@ -1,0 +1,5 @@
+author: "PsiOmegaDelta"
+delete-after: True
+changes: 
+  - tweak: "Labels that have been attached using a hand labeler will now be remain even if the name changes."
+  - rscadd: "Attached labels can now be removed using the \"Remove Label\" verb in the \"Object\" category."
