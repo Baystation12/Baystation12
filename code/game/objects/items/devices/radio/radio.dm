@@ -637,7 +637,7 @@
 
 	for (var/ch_name in src.channels)
 		if(!radio_controller)
-			src.name = "broken radio"
+			src.SetName("broken radio")
 			return
 
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)

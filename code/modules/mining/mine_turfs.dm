@@ -11,7 +11,7 @@ var/list/mining_floors = list()
 	opacity = 1
 
 /turf/simulated/mineral //wall piece
-	name = "Rock"
+	name = "rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock"
 	initial_gas = null
@@ -59,10 +59,10 @@ var/list/mining_floors = list()
 
 /turf/simulated/mineral/update_icon(var/update_neighbors)
 	if(!mineral)
-		name = "rock"
+		SetName(initial(name))
 		icon_state = "rock"
 	else
-		name = "[mineral.display_name] deposit"
+		SetName("[mineral.display_name] deposit")
 
 	overlays.Cut()
 

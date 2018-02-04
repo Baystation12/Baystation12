@@ -34,7 +34,7 @@
 		user.put_in_hands(syringe)
 		syringe = null
 		sharp = initial(sharp)
-		name = initial(name)
+		SetName(initial(name))
 		update_icon()
 
 /obj/item/weapon/syringe_cartridge/proc/prime()

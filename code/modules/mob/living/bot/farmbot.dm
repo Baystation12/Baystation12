@@ -316,21 +316,21 @@
 	if((istype(W, /obj/item/device/analyzer/plant_analyzer)) && (build_step == 0))
 		build_step++
 		to_chat(user, "You add the plant analyzer to [src].")
-		name = "farmbot assembly"
+		SetName("farmbot assembly")
 		user.remove_from_mob(W)
 		qdel(W)
 
 	else if((istype(W, /obj/item/weapon/reagent_containers/glass/bucket)) && (build_step == 1))
 		build_step++
 		to_chat(user, "You add a bucket to [src].")
-		name = "farmbot assembly with bucket"
+		SetName("farmbot assembly with bucket")
 		user.remove_from_mob(W)
 		qdel(W)
 
 	else if((istype(W, /obj/item/weapon/material/minihoe)) && (build_step == 2))
 		build_step++
 		to_chat(user, "You add a minihoe to [src].")
-		name = "farmbot assembly with bucket and minihoe"
+		SetName("farmbot assembly with bucket and minihoe")
 		user.remove_from_mob(W)
 		qdel(W)
 
@@ -338,7 +338,7 @@
 		build_step++
 		to_chat(user, "You complete the Farmbot! Beep boop.")
 		var/mob/living/bot/farmbot/S = new /mob/living/bot/farmbot(get_turf(src), tank)
-		S.name = created_name
+		S.SetName(created_name)
 		user.remove_from_mob(W)
 		qdel(W)
 		qdel(src)

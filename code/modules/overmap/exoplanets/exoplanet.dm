@@ -146,10 +146,10 @@
 
 /obj/effect/overmap/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
 	if(species[A.type])
-		A.name = species[A.type]
+		A.SetName(species[A.type])
 		A.real_name = species[A.type]
 	else
-		A.name = "alien creature"
+		A.SetName("alien creature")
 		A.real_name = "alien creature"
 		A.verbs |= /mob/living/simple_animal/proc/name_species
 	A.minbodytemp = atmosphere.temperature - 20
@@ -172,7 +172,7 @@
 	log_and_message_admins("renamed [species_type] to [newname]")
 	for(var/mob/living/simple_animal/A in animals)
 		if(istype(A,species_type))
-			A.name = newname
+			A.SetName(newname)
 			A.real_name = newname
 			A.verbs -= /mob/living/simple_animal/proc/name_species
 	return TRUE

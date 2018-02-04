@@ -29,7 +29,7 @@
 	affecting = victim
 	target_zone = attacker.zone_sel.selecting
 	var/obj/item/O = get_targeted_organ()
-	name = "[name] ([O.name])"
+	SetName("[name] ([O.name])")
 
 	if(start_grab_name)
 		current_grab = all_grabstates[start_grab_name]

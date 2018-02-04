@@ -26,7 +26,7 @@
 	update_icon()
 
 	if(material.shard_type)
-		name = "[material.display_name] [material.shard_type]"
+		SetName("[material.display_name] [material.shard_type]")
 		desc = "A small piece of [material.display_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
 		switch(material.shard_type)
 			if(SHARD_SPLINTER, SHARD_SHRAPNEL)

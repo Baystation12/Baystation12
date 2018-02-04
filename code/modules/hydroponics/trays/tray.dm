@@ -37,7 +37,6 @@
 	var/closed_system          // If set, the tray will attempt to take atmos from a pipe.
 	var/force_update           // Set this to bypass the cycle time check.
 	var/obj/temp_chem_holder   // Something to hold reagents during process_reagents()
-	var/labelled
 
 	// Seed details/line data.
 	var/datum/seed/seed = null // The currently planted seed
@@ -360,23 +359,6 @@
 		seed = seed.diverge()
 	seed.mutate(severity,get_turf(src))
 
-	return
-
-/obj/machinery/portable_atmospherics/hydroponics/verb/remove_label()
-
-	set name = "Remove Label"
-	set category = "Object"
-	set src in view(1)
-
-	if(usr.incapacitated())
-		return
-	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
-		if(labelled)
-			to_chat(usr, "You remove the label.")
-			labelled = null
-			update_icon()
-		else
-			to_chat(usr, "There is no label to remove.")
 	return
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/setlight()

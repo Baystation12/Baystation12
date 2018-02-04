@@ -105,7 +105,7 @@
 	if(!name) return
 	var/obj/screen/ability/new_button = new /obj/screen/ability
 	new_button.ability_master = src
-	new_button.name = name_given
+	new_button.SetName(name_given)
 	new_button.ability_icon_state = name_given
 	new_button.update_icon(1)
 	ability_objects.Add(new_button)
@@ -249,7 +249,7 @@
 	A.object_used = object_given
 	A.verb_to_call = verb_given
 	A.ability_icon_state = ability_icon_given
-	A.name = name_given
+	A.SetName(name_given)
 	if(arguments)
 		A.arguments_to_use = arguments
 	ability_objects.Add(A)
@@ -273,7 +273,7 @@
 	A.object_used = object_given
 	A.verb_to_call = verb_given
 	A.ability_icon_state = ability_icon_given
-	A.name = name_given
+	A.SetName(name_given)
 	if(arguments)
 		A.arguments_to_use = arguments
 	ability_objects.Add(A)
@@ -306,7 +306,7 @@
 	A.ability_master = src
 	A.object = object_given
 	A.ability_icon_state = ability_icon_given
-	A.name = object_given.name
+	A.SetName(object_given.name)
 	ability_objects.Add(A)
 	if(my_mob.client)
 		toggle_open(2) //forces the icons to refresh on screen
@@ -336,7 +336,7 @@
 	var/obj/screen/ability/spell/A = new()
 	A.ability_master = src
 	A.spell = spell
-	A.name = spell.name
+	A.SetName(spell.name)
 
 	if(!spell.override_base) //if it's not set, we do basic checks
 		if(spell.spell_flags & CONSTRUCT_CHECK)

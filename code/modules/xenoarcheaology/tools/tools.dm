@@ -46,7 +46,7 @@
 	..()
 	for(var/i = 1 to 7)
 		var/obj/item/weapon/evidencebag/S = new(src)
-		S.name = "sample bag"
+		S.SetName("sample bag")
 		S.desc = "a bag for holding research samples."
 
 /obj/item/device/ano_scanner

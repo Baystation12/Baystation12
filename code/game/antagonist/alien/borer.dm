@@ -49,7 +49,7 @@ var/datum/antagonist/xenos/borer/borers
 				borer.forceMove(head)
 				if(!borer.host_brain)
 					borer.host_brain = new(borer)
-				borer.host_brain.name = host.name
+				borer.host_brain.SetName(host.name)
 				borer.host_brain.real_name = host.real_name
 				return
 	..() // Place them at a vent if they can't get a host.

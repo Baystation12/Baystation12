@@ -61,11 +61,11 @@
 
 /obj/item/weapon/reagent_containers/glass/rag/proc/update_name()
 	if(on_fire)
-		name = "burning [initial(name)]"
+		SetName("burning [initial(name)]")
 	else if(reagents.total_volume)
-		name = "damp [initial(name)]"
+		SetName("damp [initial(name)]")
 	else
-		name = "dry [initial(name)]"
+		SetName("dry [initial(name)]")
 
 /obj/item/weapon/reagent_containers/glass/rag/update_icon()
 	if(on_fire)

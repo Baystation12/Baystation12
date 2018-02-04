@@ -112,5 +112,5 @@
 /mob/living/simple_animal/mouse/brown/Tom/New()
 	..()
 	// Change my name back, don't want to be named Tom (666)
-	name = initial(name)
+	SetName(initial(name))
 	real_name = name

@@ -240,7 +240,7 @@
 	if(!initial_loc.air_vent_names[id_tag])
 		var/new_name = "[initial_loc.name] Vent Pump #[initial_loc.air_vent_names.len+1]"
 		initial_loc.air_vent_names[id_tag] = new_name
-		src.name = new_name
+		src.SetName(new_name)
 	initial_loc.air_vent_info[id_tag] = signal.data
 
 	radio_connection.post_signal(src, signal, radio_filter_out)
@@ -317,7 +317,7 @@
 		external_pressure_bound = between(0,external_pressure_bound + text2num(signal.data["adjust_external_pressure"]),MAX_PUMP_PRESSURE)
 
 	if(signal.data["init"] != null)
-		name = signal.data["init"]
+		SetName(signal.data["init"])
 		return
 
 	if(signal.data["status"] != null)

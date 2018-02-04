@@ -107,17 +107,17 @@
 			d.analysed = analysed
 			if(analysed)
 				if (memorybank)
-					d.name = "[memorybank.name] GNA disk (Stage: [memorybank.stage])"
+					d.SetName("[memorybank.name] GNA disk (Stage: [memorybank.stage])")
 					d.effect = memorybank
 				else if (species_buffer)
-					d.name = "[jointext(species_buffer, ", ")] GNA disk"
+					d.SetName("[jointext(species_buffer, ", ")] GNA disk")
 					d.species = species_buffer
 			else
 				if (memorybank)
-					d.name = "Unknown GNA disk (Stage: [memorybank.stage])"
+					d.SetName("Unknown GNA disk (Stage: [memorybank.stage])")
 					d.effect = memorybank
 				else if (species_buffer)
-					d.name = "Unknown Species GNA disk"
+					d.SetName("Unknown Species GNA disk")
 					d.species = species_buffer
 
 			ping("\The [src] pings, \"Backup disk saved.\"")

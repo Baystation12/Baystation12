@@ -28,7 +28,7 @@
 	if(!seed)
 		return INITIALIZE_HINT_QDEL
 
-	name = "[seed.seed_name]"
+	SetName("[seed.seed_name]")
 	trash = seed.get_trash_type()
 	if(!dried_type)
 		dried_type = type

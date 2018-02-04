@@ -118,7 +118,7 @@
 	. = ..()
 
 /obj/structure/sign/poster/proc/set_poster(var/datum/poster/design)
-	name = "[initial(name)] - [design.name]"
+	SetName("[initial(name)] - [design.name]")
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state // poster[serial_number]
 
@@ -148,7 +148,7 @@
 		playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
 		ruined = 1
 		icon_state = "poster_ripped"
-		name = "ripped poster"
+		SetName("ripped poster")
 		desc = "You can't make out anything from the poster's original print. It's ruined."
 		add_fingerprint(user)
 
