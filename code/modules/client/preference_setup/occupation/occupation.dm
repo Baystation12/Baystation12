@@ -303,7 +303,7 @@
 		if(job.department)
 			dat += "<b>Department:</b> [job.department]."
 			if(job.head_position)
-				dat += "You are in charge of this deparmtent."
+				dat += "You are in charge of this department."
 
 		dat += "You answer to <b>[job.supervisors]</b> normally."
 
