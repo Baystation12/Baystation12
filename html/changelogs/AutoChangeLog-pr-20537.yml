@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - bugfix: "NanoTrasen security staff can now use their provided holobadges."
