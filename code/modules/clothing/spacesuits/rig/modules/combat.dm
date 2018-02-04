@@ -141,8 +141,8 @@
 
 	var/obj/item/weapon/gun/gun = /obj/item/weapon/gun/energy/lasercannon/mounted
 
-/obj/item/rig_module/mounted/New()
-	..()
+/obj/item/rig_module/mounted/Initialize()
+	. = ..()
 	if(gun)
 		gun = new gun(src)
 
