@@ -47,7 +47,8 @@
 		generate_atmosphere()
 		generate_map()
 		generate_features()
-		generate_landing()
+		for(var/i = 0 to 3)
+			generate_landing()
 		update_biome()
 		START_PROCESSING(SSobj, src)
 
