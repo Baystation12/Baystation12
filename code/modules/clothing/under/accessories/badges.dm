@@ -1,16 +1,16 @@
 /*
-	Badges are worn on the belt or neck, and can be used to show that the holder is an authorized
-	Security agent - the user details can be imprinted on holobadges with a Security-access ID card,
+	Badges are worn on the belt or neck, and can be used to show the user's credentials.
+	The user' details can be imprinted on holobadges with the relevant ID card,
 	or they can be emagged to accept any ID for use in disguises.
 */
 
 /obj/item/clothing/accessory/badge
-	name = "private investigator's badge"
+	name = "badge"
 	desc = "A leather-backed badge, with gold trimmings."
 	icon_state = "detectivebadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
-	var/badge_string = "Private Investigator"
+	var/badge_string = "Detective"
 	var/stored_name
 
 /obj/item/clothing/accessory/badge/proc/set_name(var/new_name)
@@ -34,18 +34,35 @@
 	if(isliving(user))
 		user.visible_message("<span class='danger'>[user] invades [M]'s personal space, thrusting \the [src] into their face insistently.</span>","<span class='danger'>You invade [M]'s personal space, thrusting \the [src] into their face insistently.</span>")
 
+/obj/item/clothing/accessory/badge/PI
+	name = "private investigator's badge"
+	badge_string = "Private Investigator"
+
 /*
  *Holobadges
  */
 /obj/item/clothing/accessory/badge/holo
 	name = "holobadge"
-	desc = "This glowing blue badge marks the holder as a member of corporate security."
+	desc = "This glowing blue badge marks the holder as a member of security."
+	color = COLOR_PALE_BLUE_GRAY
 	icon_state = "holobadge"
 	item_state = "holobadge"
+	badge_string = "Security"
+	var/badge_access = access_security
+	var/emagged //emag_act removes access requirements
+
+/obj/item/clothing/accessory/badge/holo/NT
+	name = "\improper NT holobadge"
+	desc = "This glowing red badge marks the holder as a member of NanoTrasen corporate security."
+	color = "#b7310b" //brighter COLOR_NT_RED
 	badge_string = "NanoTrasen Security"
-	var/emagged //Emagging removes Sec check.
+	badge_access = access_research
 
 /obj/item/clothing/accessory/badge/holo/cord
+	icon_state = "holobadge-cord"
+	slot_flags = SLOT_MASK | SLOT_TIE
+
+/obj/item/clothing/accessory/badge/holo/NT/cord
 	icon_state = "holobadge-cord"
 	slot_flags = SLOT_MASK | SLOT_TIE
 
@@ -75,26 +92,25 @@
 			var/obj/item/device/pda/pda = O
 			id_card = pda.id
 
-		if(access_security in id_card.access || emagged)
+		if((badge_access in id_card.access) || emagged)
 			to_chat(user, "You imprint your ID details onto the badge.")
 			set_name(user.real_name)
 		else
-			to_chat(user, "[src] rejects your insufficient access rights.")
+			to_chat(user, "[src] rejects your ID, and flashes 'Insufficient access!'")
 		return
 	..()
 
 /obj/item/weapon/storage/box/holobadge
 	name = "holobadge box"
-	desc = "A box containing holobadges."
-	New()
-		new /obj/item/clothing/accessory/badge/holo(src)
-		new /obj/item/clothing/accessory/badge/holo(src)
-		new /obj/item/clothing/accessory/badge/holo(src)
-		new /obj/item/clothing/accessory/badge/holo(src)
-		new /obj/item/clothing/accessory/badge/holo/cord(src)
-		new /obj/item/clothing/accessory/badge/holo/cord(src)
-		..()
-		return
+	desc = "A box containing security holobadges."
+	startswith = list(/obj/item/clothing/accessory/badge/holo = 4,
+					  /obj/item/clothing/accessory/badge/holo/cord = 2)
+
+/obj/item/weapon/storage/box/holobadgeNT
+	name = "\improper NT holobadge box"
+	desc = "A box containing NanoTrasen security holobadges."
+	startswith = list(/obj/item/clothing/accessory/badge/holo/NT = 4,
+					  /obj/item/clothing/accessory/badge/holo/NT/cord = 2)
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
@@ -103,13 +119,13 @@
 	badge_string = "Unknown"
 
 /obj/item/clothing/accessory/badge/defenseintel
-	name = "investigator's badge"
+	name = "\improper DIA investigator's badge"
 	desc = "A leather-backed silver badge bearing the crest of the Defense Intelligence Agency."
 	icon_state = "diabadge"
 	badge_string = "Defense Intelligence Agency"
 
 /obj/item/clothing/accessory/badge/interstellarintel
-	name = "agent's badge"
+	name = "\improper OII agent's badge"
 	desc = "A synthleather holographic badge bearing the crest of the Office of Interstellar Intelligence."
 	icon_state = "intelbadge"
 	badge_string = "Office of Interstellar Intelligence"
@@ -118,7 +134,7 @@
 	name = "\improper NanoTrasen badge"
 	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a NanoTrasen corporate executive."
 	icon_state = "ntbadge"
-	badge_string = "NanoTrasen"
+	badge_string = "NanoTrasen Corporate"
 
 /obj/item/clothing/accessory/badge/marshal
 	name = "colonial marshal's badge"
@@ -127,7 +143,7 @@
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
 	badge_string = "Colonial Marshal Bureau"
-	
+
 /obj/item/clothing/accessory/badge/press
 	name = "press badge"
 	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."

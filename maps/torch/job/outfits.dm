@@ -602,7 +602,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/passenger/passenger/PI
 	name = OUTFIT_JOB_NAME("Private Investigator - Torch")
-	backpack_contents = list(/obj/item/clothing/accessory/badge = 1)
+	backpack_contents = list(/obj/item/clothing/accessory/badge/PI = 1)
 
 /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist
 	name = OUTFIT_JOB_NAME("Journalist - Torch")
