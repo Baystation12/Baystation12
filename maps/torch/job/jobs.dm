@@ -274,14 +274,16 @@
 	minimal_player_age = 21
 	economic_modifier = 8
 	ideal_character_age = 45
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea
 	allowed_branches = list(
-		/datum/mil_branch/fleet
+		/datum/mil_branch/fleet,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/command/sea/ec
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e9,
 		/datum/mil_rank/fleet/e9_alt1,
-		/datum/mil_rank/fleet/e8
+		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/ec/e9
 	)
 
 
