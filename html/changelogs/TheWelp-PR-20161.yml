@@ -1,0 +1,5 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds lil special effects to spells to make them more apparent."
+  - bugfix: "Fixed shield projector and auras in general."
