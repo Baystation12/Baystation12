@@ -81,7 +81,6 @@
 	whisper_verb = "whispers"
 	colour = "solcom"
 	key = "1"
-	flags = WHITELISTED
 
 	//syllables are at the bottom of the file
 
