@@ -1,14 +1,30 @@
-/datum/controller/game_controller
-	var/list/artifact_spawning_turfs = list()
-	var/list/digsite_spawning_turfs = list()
-
 #define XENOARCH_SPAWN_CHANCE 0.5
 #define DIGSITESIZE_LOWER 4
 #define DIGSITESIZE_UPPER 12
 #define ARTIFACTSPAWNNUM_LOWER 6
 #define ARTIFACTSPAWNNUM_UPPER 12
 
-/datum/controller/game_controller/proc/SetupXenoarch()
+//
+// Xenoarch subsystem handles initialization of Xenoarcheaology artifacts and digsites.
+//
+SUBSYSTEM_DEF(xenoarch)
+	name = "Xenoarch"
+	init_order = INIT_ORDER_XENOARCH
+	flags = SS_NO_FIRE
+	var/list/artifact_spawning_turfs = list()
+	var/list/digsite_spawning_turfs = list()
+
+/datum/controller/subsystem/xenoarch/Initialize(timeofday)
+	SetupXenoarch()
+	..()
+
+/datum/controller/subsystem/xenoarch/Recover()
+	if (istype(SSxenoarch.artifact_spawning_turfs))
+		artifact_spawning_turfs = SSxenoarch.artifact_spawning_turfs
+	if (istype(SSxenoarch.digsite_spawning_turfs))
+		digsite_spawning_turfs = SSxenoarch.digsite_spawning_turfs
+
+/datum/controller/subsystem/xenoarch/proc/SetupXenoarch()
 	for(var/turf/simulated/mineral/M in world)
 		if(!M.density)
 			continue

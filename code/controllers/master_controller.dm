@@ -39,7 +39,6 @@ datum/controller/game_controller/proc/setup()
 
 	setup_objects()
 	setupgenetics()
-	SetupXenoarch()
 
 	transfer_controller = new
 
