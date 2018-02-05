@@ -60,8 +60,7 @@ GLOBAL_LIST_INIT(chop_sound,list('sound/weapons/chop1.ogg','sound/weapons/chop2.
 	if(isarea(source))
 		error("[source] is an area and is trying to make the sound: [soundin]")
 		return
-
-	frequency = isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
+	frequency = vary && isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
 	var/turf/turf_source = get_turf(source)
 
  	// Looping through the player list has the added bonus of working for mobs inside containers
@@ -86,11 +85,10 @@ var/const/FALLOFF_SOUNDS = 0.5
 		S.channel = 0 //Any channel
 		S.volume = vol
 		S.environment = -1
-		if (vary)
-			if(frequency)
-				S.frequency = frequency
-			else
-				S.frequency = get_rand_frequency()
+		if(frequency)
+			S.frequency = frequency
+		else if (vary)
+			S.frequency = get_rand_frequency()
 
 	//sound volume falloff with pressure
 	var/pressure_factor = 1.0

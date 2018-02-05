@@ -4,7 +4,7 @@
 		if(get_id_name("Unknown") != GetVoice())
 			alt_name = "(as [get_id_name("Unknown")])"
 		else
-			name = get_id_name("Unknown")
+			SetName(get_id_name("Unknown"))
 
 	//parse the language code and consume it
 	if(!speaking)

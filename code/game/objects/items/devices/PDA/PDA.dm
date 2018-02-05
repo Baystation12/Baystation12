@@ -238,7 +238,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		ownrank = newrank
 	else
 		ownrank = ownjob
-	name = newname + " (" + ownjob + ")"
+	SetName(newname + " (" + ownjob + ")")
 
 
 //AI verb and proc for sending PDA messages.
@@ -1214,7 +1214,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			return
 		if(!owner)
 			set_owner_rank_job(idcard.registered_name, idcard.rank, idcard.assignment)
-			name = "PDA-[owner] ([ownjob])"
+			SetName("PDA-[owner] ([ownjob])")
 			to_chat(user, "<span class='notice'>Card scanned.</span>")
 		else
 			//Basic safety check. If either both objects are held by user or PDA is on ground and card is in hand.
@@ -1395,7 +1395,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		var/name = P.owner
 		if (name in names)
 			namecounts[name]++
-			name = text("[name] ([namecounts[name]])")
+			SetName(text("[name] ([namecounts[name]])"))
 		else
 			names.Add(name)
 			namecounts[name] = 1

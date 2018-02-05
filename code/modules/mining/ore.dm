@@ -17,7 +17,7 @@
 		update_ore()
 
 /obj/item/weapon/ore/proc/update_ore()
-	name = ore.display_name
+	SetName(ore.display_name)
 	icon_state = "ore_[ore.icon_tag]"
 	origin_tech = ore.origin_tech.Copy()
 

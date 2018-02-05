@@ -270,7 +270,6 @@ armour attachments
 /obj/item/clothing/accessory/armor/tag/solgov/com/sec
 	name = "\improper POLICE tag"
 	desc = "An armor tag with the words POLICE printed in gold lettering on it."
-	icon_state = "comsectag"
 
 /obj/item/clothing/accessory/armor/helmcover/blue/sol
 	name = "peacekeeper helmet cover"

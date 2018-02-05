@@ -23,7 +23,7 @@
 
 	if(species)
 		real_name = species.get_random_name(gender)
-		name = real_name
+		SetName(real_name)
 		if(mind)
 			mind.name = real_name
 
@@ -177,9 +177,16 @@
 /mob/living/carbon/human/restrained()
 	if (handcuffed)
 		return 1
+	if(grab_restrained())
+		return 1
 	if (istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
 		return 1
 	return 0
+
+/mob/living/carbon/human/proc/grab_restrained()
+	for (var/obj/item/grab/G in grabbed_by)
+		if(G.restrains())
+			return TRUE
 
 /mob/living/carbon/human/var/co2overloadtime = null
 /mob/living/carbon/human/var/temperature_resistance = T0C+75
@@ -1251,7 +1258,7 @@
 
 /mob/living/carbon/human/check_slipmove()
 	if(h_style)
-		var/datum/sprite_accessory/hair/S = hair_styles_list[h_style]
+		var/datum/sprite_accessory/hair/S = GLOB.hair_styles_list[h_style]
 		if(S && S.flags & HAIR_TRIPPABLE && prob(0.4))
 			slip(S, 4)
 			return TRUE

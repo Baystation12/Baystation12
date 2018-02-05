@@ -51,15 +51,15 @@
 			return
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if (t)
-			src.name = "body bag - "
+			src.SetName("body bag - ")
 			src.name += t
 			src.overlays += image(src.icon, "bodybag_label")
 		else
-			src.name = "body bag"
+			src.SetName("body bag")
 	//..() //Doesn't need to run the parent. Since when can fucking bodybags be welded shut? -Agouri
 		return
 	else if(isWirecutter(W))
-		src.name = "body bag"
+		src.SetName("body bag")
 		src.overlays.Cut()
 		to_chat(user, "You cut the tag off \the [src].")
 		return

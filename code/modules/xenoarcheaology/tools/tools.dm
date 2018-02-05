@@ -12,6 +12,11 @@
 	var/turf/T = get_turf(src)
 	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[T.x]:[T.y]:[T.z]</i>.</span>")
 
+/obj/item/device/gps/examine(var/mob/user)
+	..()
+	var/turf/T = get_turf(src)
+	to_chat(user, "<span class='notice'>\The [src]'s screen shows: <i>[T.x]:[T.y]:[T.z]</i>.</span>")
+
 /obj/item/device/measuring_tape
 	name = "measuring tape"
 	desc = "A coiled metallic tape used to check dimensions and lengths."
@@ -41,7 +46,7 @@
 	..()
 	for(var/i = 1 to 7)
 		var/obj/item/weapon/evidencebag/S = new(src)
-		S.name = "sample bag"
+		S.SetName("sample bag")
 		S.desc = "a bag for holding research samples."
 
 /obj/item/device/ano_scanner
@@ -226,97 +231,56 @@
 		close_browser(user, "window=depth_scanner")
 	updateSelfDialog()
 
-/obj/item/device/beacon_locator
-	name = "locater device"
+//Radio beacon locator
+/obj/item/weapon/pinpointer/radio
+	name = "locator device"
 	desc = "Used to scan and locate signals on a particular frequency."
-	icon = 'icons/obj/device.dmi'
-	icon_state = "pinoff"	//pinonfar, pinonmedium, pinonclose, pinondirect, pinonnull
-	item_state = "electronic"
-	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
-	matter = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 500)
-	var/frequency = PUB_FREQ
-	var/scan_ticks = 0
-	var/obj/item/device/radio/target_radio
+	var/tracking_freq = PUB_FREQ
 
-/obj/item/device/beacon_locator/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
+/obj/item/weapon/pinpointer/radio/acquire_target()
+	var/turf/T = get_turf(src)
+	var/zlevels = GetConnectedZlevels(T.z)
+	var/cur_dist = world.maxx+world.maxy
+	for(var/obj/item/device/radio/beacon/R in world)
+		if((R.z in zlevels) && R.frequency == tracking_freq)
+			var/check_dist = get_dist(src,R)
+			if(check_dist < cur_dist)
+				cur_dist = check_dist
+				. = weakref(R)
 
-/obj/item/device/beacon_locator/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	return ..()
+/obj/item/weapon/pinpointer/radio/attack_self(var/mob/user as mob)
+	interact(user)
 
-/obj/item/device/beacon_locator/Process()
-	if(target_radio)
-		set_dir(get_dir(src,target_radio))
-		switch(get_dist(src,target_radio))
-			if(0 to 3)
-				icon_state = "pinondirect"
-			if(4 to 10)
-				icon_state = "pinonclose"
-			if(11 to 30)
-				icon_state = "pinonmedium"
-			if(31 to INFINITY)
-				icon_state = "pinonfar"
-	else
-		if(scan_ticks)
-			icon_state = "pinonnull"
-			scan_ticks++
-			if(prob(scan_ticks * 10))
-				spawn(0)
-					set background = 1
-					if(src in SSobj.processing)
-						//scan radios in the world to try and find one
-						var/cur_dist = 999
-						for(var/obj/item/device/radio/beacon/R in world)
-							if(R.z == src.z && R.frequency == src.frequency)
-								var/check_dist = get_dist(src,R)
-								if(check_dist < cur_dist)
-									cur_dist = check_dist
-									target_radio = R
-
-						scan_ticks = 0
-						var/turf/T = get_turf(src)
-						if(target_radio)
-							T.visible_message("\icon[src] [src] [pick("chirps","chirrups","cheeps")] happily.")
-						else
-							T.visible_message("\icon[src] [src] [pick("chirps","chirrups","cheeps")] sadly.")
-		else
-			icon_state = "pinoff"
-
-/obj/item/device/beacon_locator/attack_self(var/mob/user as mob)
-	return src.interact(user)
-
-/obj/item/device/beacon_locator/interact(var/mob/user as mob)
+/obj/item/weapon/pinpointer/radio/interact(var/mob/user)
 	var/dat = "<b>Radio frequency tracker</b><br>"
 	dat += {"
+				Tracking: <A href='byond://?src=\ref[src];toggle=1'>[active ? "Enabled" : "Disabled"]</A><BR>
 				<A href='byond://?src=\ref[src];reset_tracking=1'>Reset tracker</A><BR>
 				Frequency:
 				<A href='byond://?src=\ref[src];freq=-10'>-</A>
 				<A href='byond://?src=\ref[src];freq=-2'>-</A>
-				[format_frequency(frequency)]
+				[format_frequency(tracking_freq)]
 				<A href='byond://?src=\ref[src];freq=2'>+</A>
 				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 				"}
-
-	dat += "<A href='?src=\ref[src];close=1'>Close</a><br>"
 	user << browse(dat,"window=locater;size=300x150")
 	onclose(user, "locater")
 
-/obj/item/device/beacon_locator/OnTopic(user, href_list)
+/obj/item/weapon/pinpointer/radio/OnTopic(user, href_list)
+	if(href_list["toggle"])
+		toggle(user)
+		. = TOPIC_REFRESH
+
 	if(href_list["reset_tracking"])
-		scan_ticks = 1
-		target_radio = null
+		target = acquire_target()
 		. = TOPIC_REFRESH
+
 	else if(href_list["freq"])
-		var/new_frequency = (frequency + text2num(href_list["freq"]))
-		if (frequency < 1200 || frequency > 1600)
+		var/new_frequency = (tracking_freq + text2num(href_list["freq"]))
+		if (new_frequency < 1200 || new_frequency > 1600)
 			new_frequency = sanitize_frequency(new_frequency, 1499)
-		frequency = new_frequency
+		tracking_freq = new_frequency
 		. = TOPIC_REFRESH
-	else if(href_list["close"])
-		close_browser(user, "window=locater")
-		return TOPIC_HANDLED
 
 	if(. == TOPIC_REFRESH)
 		interact(user)

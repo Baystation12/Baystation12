@@ -29,7 +29,7 @@
 	affecting = victim
 	target_zone = attacker.zone_sel.selecting
 	var/obj/item/O = get_targeted_organ()
-	name = "[name] ([O.name])"
+	SetName("[name] ([O.name])")
 
 	if(start_grab_name)
 		current_grab = all_grabstates[start_grab_name]
@@ -238,6 +238,9 @@
 
 /obj/item/grab/proc/assailant_moved()
 	current_grab.assailant_moved(src)
+
+/obj/item/grab/proc/restrains()
+	return current_grab.restrains
 
 /obj/item/grab/proc/resolve_openhand_attack()
 		return current_grab.resolve_openhand_attack(src)

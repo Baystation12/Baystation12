@@ -69,5 +69,5 @@
 			src.locked = 1
 			src.icon_state = src.icon_locked
 			src.registered_name = null
-			src.name = initial(name)
+			src.SetName(initial(name))
 			src.desc = initial(desc)

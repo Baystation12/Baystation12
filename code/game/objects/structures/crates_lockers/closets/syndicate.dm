@@ -81,7 +81,7 @@
 		//Sad trombone
 		if(pickednum == 1)
 			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(src)
-			P.name = "IOU"
+			P.SetName("IOU")
 			P.info = "Sorry man, we needed the money so we sold your stash. It's ok, we'll double our money for sure this time!"
 
 		//Metal (common ore)

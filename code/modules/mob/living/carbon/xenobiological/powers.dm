@@ -134,7 +134,7 @@
 			maxHealth = 200
 			amount_grown = 0
 			regenerate_icons()
-			name = text("[colour] [is_adult ? "adult" : "baby"] slime ([number])")
+			SetName(text("[colour] [is_adult ? "adult" : "baby"] slime ([number])"))
 		else
 			to_chat(src, "<span class='notice'>I am not ready to evolve yet...</span>")
 	else

@@ -45,7 +45,7 @@
 		D2.loc = src
 		a_left = D
 		a_right = D2
-		name = "[D.name]-[D2.name] assembly"
+		SetName("[D.name]-[D2.name] assembly")
 		update_icon()
 		usr.put_in_hands(src)
 
@@ -59,7 +59,7 @@
 /*		if(O:Attach_Holder())
 			special_assembly = O
 			update_icon()
-			src.name = "[a_left.name] [a_right.name] [special_assembly.name] assembly"
+			src.SetName("[a_left.name] [a_right.name] [special_assembly.name] assembly")
 */
 		return
 
@@ -248,7 +248,7 @@
 		a_right = ign
 		secured = 1
 		update_icon()
-		name = initial(name) + " ([tmr.time] secs)"
+		SetName(initial(name) + " ([tmr.time] secs)")
 
 		loc.verbs += /obj/item/device/assembly_holder/timer_igniter/verb/configure
 
@@ -279,7 +279,7 @@
 				var/ntime = input("Enter desired time in seconds", "Time", "5") as num
 				if (ntime>0 && ntime<1000)
 					tmr.time = ntime
-					name = initial(name) + "([tmr.time] secs)"
+					SetName(initial(name) + "([tmr.time] secs)")
 					to_chat(usr, "<span class='notice'>Timer set to [tmr.time] seconds.</span>")
 				else
 					to_chat(usr, "<span class='notice'>Timer can't be [ntime<=0?"negative":"more than 1000 seconds"].</span>")

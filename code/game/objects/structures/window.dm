@@ -15,6 +15,7 @@
 	var/ini_dir = null
 	var/state = 2
 	var/reinf = 0
+	var/polarized = 0
 	var/basestate
 	var/shardtype = /obj/item/weapon/material/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
@@ -238,6 +239,15 @@
 				mats.amount = is_fulltile() ? 4 : 2
 			else
 				new glasstype(loc)
+			qdel(src)
+	else if(isCoil(W) && reinf && !polarized)
+		var/obj/item/stack/cable_coil/C = W
+		if (C.use(1))
+			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
+			var/obj/structure/window/reinforced/polarized/P = new(loc)
+			P.set_dir(dir)
+			P.health = health
+			P.state = state
 			qdel(src)
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -485,10 +495,25 @@
 	name = "electrochromic window"
 	desc = "Adjusts its tint with voltage. Might take a few good hits to shatter it."
 	var/id
+	polarized = 1
 
 /obj/structure/window/reinforced/polarized/full
 	dir = 5
 	icon_state = "fwindow"
+
+/obj/structure/window/reinforced/polarized/attackby(obj/item/W as obj, mob/user as mob)
+	if(isMultitool(W))
+		var/t = sanitizeSafe(input(user, "Enter the ID for the window.", src.name, null), MAX_NAME_LEN)
+		if (user.get_active_hand() != W)
+			return
+		if (!in_range(src, user) && src.loc != user)
+			return
+		t = sanitizeSafe(t, MAX_NAME_LEN)
+		if (t)
+			src.id = t
+			to_chat(user, "<span class='notice'>The new ID of the window is [id]</span>")
+		return
+	..()
 
 /obj/structure/window/reinforced/polarized/proc/toggle()
 	if(opacity)
@@ -528,6 +553,11 @@
 		return 1
 
 	toggle_tint()
+
+/obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
+	if(isMultitool(W))
+		to_chat(user, "<span class='notice'>The ID of the button: [id]</span>")
+		return
 
 /obj/machinery/button/windowtint/proc/toggle_tint()
 	use_power(5)

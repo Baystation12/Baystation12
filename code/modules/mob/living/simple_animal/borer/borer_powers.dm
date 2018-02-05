@@ -315,7 +315,7 @@ GLOBAL_LIST_INIT(borer_reagent_types_by_name, setup_borer_reagents())
 
 			host_brain.ckey = host.ckey
 
-			host_brain.name = host.name
+			host_brain.SetName(host.name)
 
 			if(!host_brain.computer_id)
 				host_brain.computer_id = h2b_id

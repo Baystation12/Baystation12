@@ -280,7 +280,7 @@ var/list/ai_verbs_default = list(
 	..()
 	announcement.announcer = pickedName
 	if(eyeobj)
-		eyeobj.name = "[pickedName] (AI Eye)"
+		eyeobj.SetName("[pickedName] (AI Eye)")
 
 	// Set ai pda name
 	if(aiPDA)

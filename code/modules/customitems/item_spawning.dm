@@ -32,7 +32,7 @@
 	var/kit_desc
 	var/kit_icon
 	var/additional_data
-	
+
 /datum/custom_item/proc/is_valid(var/checker)
 	if(!item_path)
 		to_chat(checker, "<span class='warning'>The given item path, [item_path_as_string], is invalid and does not exist.</span>")
@@ -51,7 +51,7 @@
 	if(!item)
 		return
 	if(name)
-		item.name = name
+		item.SetName(name)
 	if(item_desc)
 		item.desc = item_desc
 	if(item_icon)
@@ -206,7 +206,7 @@
 		// Check for requisite ckey and character name.
 		if((lowertext(citem.assoc_key) != lowertext(M.ckey)) || (lowertext(citem.character_name) != lowertext(M.real_name)))
 			continue
-			
+
 		// Once we've decided that the custom item belongs to this player, validate it
 		if(!citem.is_valid(M))
 			return

@@ -88,7 +88,7 @@
 		else
 			M.randomize_eye_color()
 
-	M.name = (CORPSE_SPAWNER_RANDOM_NAME & spawn_flags) ? M.species.get_random_name(M.gender) : name
+	M.SetName((CORPSE_SPAWNER_RANDOM_NAME & spawn_flags) ? M.species.get_random_name(M.gender) : name)
 	M.real_name = M.name
 
 #undef HEX_COLOR_TO_RGB_ARGS

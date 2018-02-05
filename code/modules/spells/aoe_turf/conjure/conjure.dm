@@ -51,7 +51,7 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 		else
 			summoned_object = new summoned_object_type(spawn_place)
 		var/atom/movable/overlay/animation = new /atom/movable/overlay(spawn_place)
-		animation.name = "conjure"
+		animation.SetName("conjure")
 		animation.set_density(0)
 		animation.anchored = 1
 		animation.icon = 'icons/effects/effects.dmi'

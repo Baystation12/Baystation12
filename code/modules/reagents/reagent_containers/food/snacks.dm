@@ -380,7 +380,7 @@
 		if(prob(30))
 			src.icon_state = "donut2"
 			src.overlay_state = "box-donut2"
-			src.name = "frosted donut"
+			src.SetName("frosted donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 			center_of_mass = "x=19;y=16"
 
@@ -419,7 +419,7 @@
 		if(prob(30))
 			src.icon_state = "donut2"
 			src.overlay_state = "box-donut2"
-			src.name = "Frosted Chaos Donut"
+			src.SetName("Frosted Chaos Donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
 
@@ -438,7 +438,7 @@
 		if(prob(30))
 			src.icon_state = "jdonut2"
 			src.overlay_state = "box-donut2"
-			src.name = "Frosted Jelly Donut"
+			src.SetName("Frosted Jelly Donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/donut/slimejelly
@@ -456,7 +456,7 @@
 		if(prob(30))
 			src.icon_state = "jdonut2"
 			src.overlay_state = "box-donut2"
-			src.name = "Frosted Jelly Donut"
+			src.SetName("Frosted Jelly Donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly
@@ -474,7 +474,7 @@
 		if(prob(30))
 			src.icon_state = "jdonut2"
 			src.overlay_state = "box-donut2"
-			src.name = "Frosted Jelly Donut"
+			src.SetName("Frosted Jelly Donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/egg
@@ -755,7 +755,7 @@
 		for(var/reagent in heated_reagents)
 			reagents.add_reagent(reagent, heated_reagents[reagent])
 		bitesize = 6
-		name = "Warm " + name
+		SetName("Warm " + name)
 		cooltime()
 
 	proc/cooltime()
@@ -764,7 +764,7 @@
 				src.warm = 0
 				for(var/reagent in heated_reagents)
 					src.reagents.del_reagent(reagent)
-				src.name = initial(name)
+				src.SetName(initial(name))
 		return
 
 /obj/item/weapon/reagent_containers/food/snacks/brainburger

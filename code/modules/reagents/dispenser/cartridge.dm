@@ -44,12 +44,12 @@
 			to_chat(user, "<span class='notice'>You set the label on \the [src] to '[L]'.</span>")
 
 		label = L
-		name = "[initial(name)] - '[L]'"
+		SetName("[initial(name)] - '[L]'")
 	else
 		if(user)
 			to_chat(user, "<span class='notice'>You clear the label on \the [src].</span>")
 		label = ""
-		name = initial(name)
+		SetName(initial(name))
 
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/attack_self()
 	..()

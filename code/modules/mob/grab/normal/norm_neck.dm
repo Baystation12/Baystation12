@@ -17,6 +17,7 @@
 	same_tile = 1
 	can_throw = 1
 	force_danger = 1
+	restrains = 1
 
 	icon_state = "kill"
 
@@ -31,5 +32,4 @@
 	if(affecting.lying)
 		affecting.Weaken(4)
 
-	affecting.Stun(3)
 	affecting.adjustOxyLoss(1)

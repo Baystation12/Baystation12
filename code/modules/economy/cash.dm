@@ -82,9 +82,9 @@
 
 	src.desc = "They are worth [worth] Thalers."
 	if(worth in denominations)
-		src.name = "[worth] Thaler"
+		src.SetName("[worth] Thaler")
 	else
-		src.name = "pile of [worth] thalers"
+		src.SetName("pile of [worth] thalers")
 
 	if(overlays.len <= 2)
 		w_class = ITEM_SIZE_TINY

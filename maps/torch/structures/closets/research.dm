@@ -173,7 +173,7 @@
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/accessory/holster/thigh,
-		/obj/item/clothing/accessory/badge/holo,
+		/obj/item/clothing/accessory/badge/holo/NT,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/gun/energy/stunrevolver,
 		/obj/item/clothing/shoes/jackboots,

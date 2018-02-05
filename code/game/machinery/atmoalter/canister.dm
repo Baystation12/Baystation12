@@ -357,7 +357,7 @@ update_flag
 		if (label && CanUseTopic(user, state))
 			canister_color = colors[label]
 			icon_state = colors[label]
-			name = "\improper Canister: [label]"
+			SetName("\improper Canister: [label]")
 		update_icon()
 		. = TOPIC_REFRESH
 

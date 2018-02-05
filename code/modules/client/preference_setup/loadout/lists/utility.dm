@@ -1,20 +1,11 @@
 // "Useful" items - I'm guessing things that might be used at work?
 /datum/gear/utility
+	sort_category = "Utility"
+	category = /datum/gear/utility
+
+/datum/gear/utility/briefcase
 	display_name = "briefcase"
 	path = /obj/item/weapon/storage/briefcase
-	sort_category = "Utility"
-
-/datum/gear/utility/waistpack
-	display_name = "waist pack"
-	path = /obj/item/weapon/storage/belt/waistpack
-	slot = slot_belt
-	cost = 2
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/utility/waistpack/big
-	display_name = "large waist pack"
-	path = /obj/item/weapon/storage/belt/waistpack/big
-	cost = 4
 
 /datum/gear/utility/clipboard
 	display_name = "clipboard"
@@ -41,10 +32,15 @@
 /datum/gear/utility/paicard
 	display_name = "personal AI device"
 	path = /obj/item/device/paicard
-	
+
 /datum/gear/utility/camera
 	display_name = "camera"
 	path = /obj/item/device/camera
+
+/datum/gear/accessory/stethoscope
+	display_name = "stethoscope (medical)"
+	path = /obj/item/clothing/accessory/stethoscope
+	cost = 2
 
 /****************
 modular computers

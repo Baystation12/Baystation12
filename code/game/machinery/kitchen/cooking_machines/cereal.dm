@@ -9,7 +9,7 @@
 
 /obj/machinery/cooker/cereal/change_product_strings(var/obj/item/weapon/reagent_containers/food/snacks/product)
 	. = ..()
-	product.name = "box of [cooking_obj.name] cereal"
+	product.SetName("box of [cooking_obj.name] cereal")
 
 /obj/machinery/cooker/cereal/change_product_appearance(var/obj/item/weapon/reagent_containers/food/snacks/product)
 	product.icon = 'icons/obj/food.dmi'

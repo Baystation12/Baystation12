@@ -34,6 +34,11 @@
 	if(!. && feedback_receiver)
 		to_chat(feedback_receiver, "<span class='warning'>Value must be a numeral.</span>")
 
+/proc/is_text_predicate(var/value, var/feedback_receiver)
+	. = !value || istext(value)
+	if(!. && feedback_receiver)
+		to_chat(feedback_receiver, "<span class='warning'>Value must be a text.</span>")
+
 /proc/is_dir_predicate(var/value, var/feedback_receiver)
 	. = (value in GLOB.alldirs)
 	if(!. && feedback_receiver)
