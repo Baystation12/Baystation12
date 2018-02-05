@@ -63,13 +63,13 @@
 	desc = "It's a storage unit for bar equipment."
 	req_access = list(access_bar)
 
-/obj/structure/closet/secure_closet/bar/WillContain()
+/obj/structure/closet/secure_closet/bar_torch/WillContain()
 	return list(
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/weapon/reagent_containers/food/drinks/shaker,
 		/obj/item/glass_jar,
 		/obj/item/weapon/book/manual/barman_recipes,
 		/obj/item/clothing/under/rank/bartender,
-		/obj/item/clothing/shoes/laceup,
+		/obj/item/clothing/shoes/laceup
 	)
 
