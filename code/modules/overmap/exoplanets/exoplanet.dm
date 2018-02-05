@@ -112,7 +112,7 @@
 /obj/effect/overmap/sector/exoplanet/proc/generate_map()
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_features()
-	seedRuins(map_z, features_budget, /area/exoplanet, possible_features)
+	seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
 
 /obj/effect/overmap/sector/exoplanet/proc/get_biostuff(var/datum/random_map/noise/exoplanet/random_map)
 	seeds += random_map.small_flora_types
