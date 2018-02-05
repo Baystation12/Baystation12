@@ -1,7 +1,7 @@
 /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp
 	name = "hydraulic clamp"
 	icon_state = "mecha_clamp"
-	equip_cooldown = 15
+	equip_cooldown = 5
 	energy_drain = 1 KILOWATTS
 	var/dam_force = 20
 	var/obj/mecha/working/ripley/cargo_holder
@@ -74,7 +74,7 @@
 	name = "drill"
 	desc = "This is the drill that'll pierce the heavens! (Can be attached to: Combat and Engineering Exosuits)"
 	icon_state = "mecha_drill"
-	equip_cooldown = 30
+	equip_cooldown = 15
 	energy_drain = 10
 	force = 15
 	required_type = list(/obj/mecha/working/ripley, /obj/mecha/combat)
@@ -131,7 +131,7 @@
 	desc = "This is an upgraded version of the drill that'll pierce the heavens! (Can be attached to: Combat and Engineering Exosuits)"
 	icon_state = "mecha_diamond_drill"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
-	equip_cooldown = 20
+	equip_cooldown = 5
 	force = 15
 
 	action(atom/target)
@@ -185,9 +185,9 @@
 	energy_drain = 0
 	range = MELEE|RANGED
 	required_type = /obj/mecha/working
-	var/spray_particles = 5
-	var/spray_amount = 5	//units of liquid per particle. 5 is enough to wet the floor - it's a big fire extinguisher, so should be fine
-	var/max_water = 1000
+	var/spray_particles = 6
+	var/spray_amount = 50	//units of liquid per particle. 5 is enough to wet the floor - it's a big fire extinguisher, so should be fine
+	var/max_water = 30000
 
 	New()
 		create_reagents(max_water)
@@ -1148,7 +1148,7 @@
 	var/turf/old_turf
 	var/obj/structure/cable/last_piece
 	var/obj/item/stack/cable_coil/cable
-	var/max_cable = 1000
+	var/max_cable = 10000
 	required_type = /obj/mecha/working
 
 /obj/item/mecha_parts/mecha_equipment/tool/cable_layer/New()
