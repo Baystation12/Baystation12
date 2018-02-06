@@ -1112,10 +1112,10 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	availablity_chance = 20
+	availablity_chance = 30
 	supervisors = "yourself"
 	selection_color = "#515151"
-	ideal_character_age = 30
+	ideal_character_age = 18
 	minimal_player_age = 7
 	create_record = 0
 	account_allowed = 0
