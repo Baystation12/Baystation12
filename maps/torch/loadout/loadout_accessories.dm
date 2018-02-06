@@ -41,9 +41,10 @@
 	gear_tweaks += new/datum/gear_tweak/path(solminors)
 
 /datum/gear/accessory/tags
-	display_name = "dog tags"
-	path = /obj/item/clothing/accessory/badge/solgov/tags
+	display_name = "dog tags with identification"
+	path = /obj/item/clothing/accessory/badge/solgov/tags/
 	allowed_roles = MILITARY_ROLES
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/torch_patch
 	display_name = "Torch mission patch"
@@ -104,7 +105,7 @@
 						/datum/job/roboticist, /datum/job/engineer_contractor,
 						/datum/job/psychiatrist, /datum/job/doctor_contractor, /datum/job/chemist,
 						/datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
-					
+
 /datum/gear/accessory/ntaward
 	allowed_roles = NANOTRASEN_ROLES
 
