@@ -136,6 +136,7 @@
 		/area/mobius_rift,
 		/area/icarus,
 		/area/errant_pisces,
+		/area/lar_maria,
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
