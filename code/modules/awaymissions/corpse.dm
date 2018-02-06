@@ -47,7 +47,7 @@
 	var/obj/item/organ/internal/heart/corpse_heart = M.internal_organs_by_name[BP_HEART]
 	if (corpse_heart)
 		corpse_heart.pulse = PULSE_NONE//actually stops heart to make worried explorers not care too much
-
+	M.update_dna()
 	M.update_icon()
 
 	return INITIALIZE_HINT_QDEL
@@ -55,7 +55,6 @@
 #define HEX_COLOR_TO_RGB_ARGS(X) arglist(GetHexColors(X))
 /obj/effect/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M)
 	M.set_species(pickweight(species))
-	scramble(1, M, 100) //randomizes appearence
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
 		if(M.species.type in genders_per_species)
