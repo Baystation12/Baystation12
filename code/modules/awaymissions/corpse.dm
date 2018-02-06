@@ -15,6 +15,7 @@
 #define CORPSE_SPAWNER_RANDOM_HAIR_STYLE   0x0040
 #define CORPSE_SPAWNER_RANDOM_FACIAL_STYLE 0x0080
 #define CORPSE_SPAWNER_RANDOM_EYE_COLOR    0x0100
+#define CORPSE_SPAWNER_RANDOM_GENDER       0x0200
 
 #define CORPSE_SPAWNER_NO_RANDOMIZATION ~(CORPSE_SPAWNER_RANDOM_NAME|CORPSE_SPAWNER_RANDOM_SKIN_TONE|CORPSE_SPAWNER_RANDOM_SKIN_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_COLOR|CORPSE_SPAWNER_RANDOM_HAIR_STYLE|CORPSE_SPAWNER_RANDOM_FACIAL_STYLE|CORPSE_SPAWNER_RANDOM_EYE_COLOR)
 
@@ -26,10 +27,12 @@
 	var/spawn_flags = (~0)
 
 	var/skin_colors_per_species   = list() // Custom skin colors, per species -type-, if any. For example if you want dead Tajaran to always have brown fur, or similar
+	var/skin_tones_per_species    = list() // Custom skin tones, per species -type-, if any. See above as to why.
 	var/eye_colors_per_species    = list() // Custom eye colors, per species -type-, if any. See above as to why.
 	var/hair_colors_per_species   = list() // Custom hair colors, per species -type-, if any. See above as to why.
 	var/hair_styles_per_species   = list() // Custom hair styles, per species -type-, if any. For example if you want a punk gang with handlebars.
 	var/facial_styles_per_species = list() // Custom facial hair styles, per species -type-, if any. See above as to why
+	var/genders_per_species       = list() // For gender biases per species -type-
 
 /obj/effect/landmark/corpse/Initialize()
 	..()
@@ -54,8 +57,17 @@
 	M.set_species(pickweight(species))
 	scramble(1, M, 100) //randomizes appearence
 
+	if((spawn_flags & CORPSE_SPAWNER_RANDOM_GENDER))
+		if(M.species.type in genders_per_species)
+			M.change_gender(pickweight(genders_per_species[M.species.type]))
+		else
+			M.randomize_gender()
+
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_TONE))
-		M.randomize_skin_tone()
+		if(M.species.type in skin_tones_per_species)
+			M.change_skin_tone(pickweight(skin_tones_per_species[M.species.type]))
+		else
+			M.randomize_skin_tone()
 
 	if((spawn_flags & CORPSE_SPAWNER_RANDOM_SKIN_COLOR))
 		if(M.species.type in skin_colors_per_species)
