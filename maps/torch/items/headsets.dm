@@ -65,3 +65,10 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/pathfinder
+
+/obj/item/device/radio/headset/torchroboticist
+	name = "roboticist's headset"
+	desc = "A headset with access to the engineering and medical channels."
+	icon_state = "eng_headset"
+	item_state = "headset"
+	ks2type = /obj/item/device/encryptionkey/headset_torchroboticist
