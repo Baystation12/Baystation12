@@ -4,7 +4,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray //obsolete, use hypospray/vial for the actual hypospray item
 	name = "hypospray"
-	desc = "The DeForest Medical Corporation hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
+	desc = "The DeForest Medical Corporation, a subsidiary of Zeng-Hu Pharmaceuticals, hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "hypo"
 	icon_state = "hypo"
@@ -61,7 +61,7 @@
 /obj/item/weapon/reagent_containers/hypospray/vial
 	name = "hypospray"
 	item_state = "autoinjector"
-	desc = "The DeForest Medical Corporation hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replacable 30u vial."
+	desc = "The DeForest Medical Corporation, a subsidiary of Zeng-Hu Pharmaceuticals, hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replacable 30u vial."
 	var/obj/item/weapon/reagent_containers/glass/beaker/vial/loaded_vial
 	volume = 0
 
