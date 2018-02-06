@@ -1,7 +1,4 @@
-#define RANDOMIZE(X) Clamp(X + rand(min_random_span, max_random_span), 0, 255)
-#define RANDOMIZE_RGB(R,G,B) list(RANDOMIZE(R), RANDOMIZE(G), RANDOMIZE(B))
-
-/decl/color_generator
+decl/color_generator
 	var/color = COLOR_WHITE
 	var/min_random_span = -25
 	var/max_random_span = 25
@@ -12,7 +9,9 @@
 
 /decl/color_generator/proc/GenerateRGB()
 	. = create_color()
-	. = RANDOMIZE_RGB(.[1], .[2], .[3])
+	for(var/i in 1 to 3)
+		.[i] += rand(min_random_span, max_random_span)
+		.[i] = Clamp(.[i], 0, 255)
 
 /decl/color_generator/proc/create_color()
 	return GetHexColors(color)
@@ -60,6 +59,3 @@
 
 /decl/color_generator/white
 	color = COLOR_WHITE
-
-#undef RANDOMIZE_RGB
-#undef RANDOMIZE
