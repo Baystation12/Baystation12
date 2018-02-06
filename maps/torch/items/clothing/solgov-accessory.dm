@@ -202,6 +202,7 @@ badges
 	slot_flags = SLOT_TIE
 	badge_string = "Sol Central Government"
 
+
 /obj/item/clothing/accessory/badge/solgov/tags
 	name = "dog tags"
 	desc = "Plain identification tags made from a durable metal. Stamped with a variety of informational details."
@@ -209,6 +210,46 @@ badges
 	icon_state = "tags"
 	badge_string = "Sol Central Government"
 	slot_flags = SLOT_MASK | SLOT_TIE
+
+/obj/item/clothing/accessory/badge/solgov/tags/bloodt_o_pos
+	name = "dog tag o+"
+	desc = "O+ dog type identification tag made from a durable metal. Stamped with O+ blood type"
+	icon_state = "opos"
+
+/obj/item/clothing/accessory/badge/solgov/tags/bloodt_o_neg
+	name = "dog tag o-"
+	desc = "O- dog type identification tag made from a durable metal. Stamped with O- blood type"
+	icon_state = "oneg"
+
+/obj/item/clothing/accessory/badge/solgov/tags/bloodt_ab_pos
+	name = "dog tag ab+"
+	desc = "AB+ dog type identification tag made from a durable metal. Stamped with AB+ blood type"
+	icon_state = "abpos"
+
+/obj/item/clothing/accessory/badge/solgov/tags/bloodt_ab_neg
+	name = "dog tag ab-"
+	desc = "AB- dog type identification tag made from a durable metal. Stamped with AB- blood type"
+	icon_state = "abneg"
+
+/obj/item/clothing/accessory/badge/solgov/tags/bloodt_a_pos
+	name = "dog tag a+"
+	desc = "A+ dog type identification tag made from a durable metal. Stamped with A+ blood type"
+	icon_state = "apos"
+
+/obj/item/clothing/accessory/badge/solgov/tags/bloodt_a_neg
+	name = "dog tag a-"
+	desc = "A- dog type identification tag made from a durable metal. Stamped with A- blood type"
+	icon_state = "aneg"
+
+/obj/item/clothing/accessory/badge/solgov/tags/bloodt_b_pos
+	name = "dog tag b+"
+	desc = "B+ dog type identification tag made from a durable metal. Stamped with B+ blood type"
+	icon_state = "bpos"
+
+/obj/item/clothing/accessory/badge/solgov/tags/bloodt_b_neg
+	name = "dog tag b-"
+	desc = "B- dog type identification tag made from a durable metal. Stamped with B- blood type"
+	icon_state = "bneg"
 
 /obj/item/clothing/accessory/badge/solgov/representative
 	name = "representative's badge"
