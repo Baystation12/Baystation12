@@ -566,19 +566,19 @@
 
 /obj/item/clothing/under/grayson
 	name = "\improper Grayson overalls"
-	desc = "A set of overalls belonging to Grayson Manufactories, a mining Trans-Stellar."
+	desc = "A set of overalls belonging to Grayson Manufactories, a manufacturing and mining company."
 	icon_state = "grayson"
 	worn_state = "grayson"
 
 /obj/item/clothing/under/wardt
 	name = "\improper Ward-Takahashi jumpsuit"
-	desc = "A jumpsuit belonging to Ward-Takahashi, a Trans-Stellar in the consumer goods market."
+	desc = "A jumpsuit belonging to Ward-Takahashi, a megacorp in the consumer goods and research market."
 	icon_state = "wardt"
 	worn_state = "wardt"
 
 /obj/item/clothing/under/mbill
 	name = "\improper Major Bill's uniform"
-	desc = "A uniform belonging to Major Bill's Transportation, a shipping megacorporation."
+	desc = "A uniform belonging to Major Bill's Transportation, a major shipping company."
 	icon_state = "mbill"
 	worn_state = "mbill"
 
@@ -603,19 +603,19 @@
 
 /obj/item/clothing/under/aether
 	name = "\improper Aether jumpsuit"
-	desc = "A jumpsuit belonging to Aether Atmospherics and Recycling, a Trans-Stellar that supplies recycling and atmospheric systems to colonies."
+	desc = "A jumpsuit belonging to Aether Atmospherics and Recycling, a company that supplies recycling and atmospheric systems to colonies."
 	icon_state = "aether"
 	worn_state = "aether"
 
 /obj/item/clothing/under/focal
 	name = "\improper Focal Point jumpsuit"
-	desc = "A jumpsuit belonging to Focal Point Energistics, an engineering megacorporation."
+	desc = "A jumpsuit belonging to Focal Point Energistics, an engineering corporation."
 	icon_state = "focal"
 	worn_state = "focal"
 
 /obj/item/clothing/under/hephaestus
 	name = "\improper Hephaestus jumpsuit"
-	desc = "A jumpsuit belonging to Hephaestus Industries, a Trans-Stellar best known for its arms production."
+	desc = "A jumpsuit belonging to Hephaestus Industries, a megacorp best known for its arms production."
 	icon_state = "heph"
 	worn_state = "heph"
 
