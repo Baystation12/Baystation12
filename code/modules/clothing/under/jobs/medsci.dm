@@ -163,6 +163,12 @@
 	item_state = "b_suit"
 	worn_state = "psychturtle"
 
+/obj/item/clothing/under/rank/psych/sweatervest
+	desc = "A red buttoned down shirt and pair of khakis with a black sweater vest worn over it."
+	name = "red buttoned down shirt"
+	icon_state = "psychvest"
+	item_state = "r_suit"
+	worn_state = "psychvest"
 
 /*
  * Medsci, unused (i think) stuff
