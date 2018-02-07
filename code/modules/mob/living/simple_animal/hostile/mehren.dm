@@ -1,12 +1,12 @@
 
-/mob/living/simple_animal/hostile/vagrant
+/mob/living/simple_animal/hostile/mehren
 	name = "creature"
 	desc = "You get the feeling you should run."
 	icon = 'icons/mob/mob.dmi'
-	icon_state = "vagrant"
-	icon_living = "vagrant"
-	icon_dead = "vagrant"
-	icon_gib = "vagrant"
+	icon_state = "mehren"
+	icon_living = "mehren"
+	icon_dead = "mehren"
+	icon_gib = "mehren"
 	maxHealth = 65
 	health = 40
 	speed = 5
@@ -17,7 +17,7 @@
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
 	break_stuff_probability = 0
-	faction = "vagrant"
+	faction = "mehren"
 	harm_intent_damage = 3
 	melee_damage_lower = 3
 	melee_damage_upper = 4
@@ -33,16 +33,16 @@
 	var/blood_per_tick = 4.25
 	var/health_per_tick = 0.8
 
-/mob/living/simple_animal/hostile/vagrant/Initialize()
+/mob/living/simple_animal/hostile/mehren/Initialize()
 	. = ..()
 	if(prob(40))
 		carried = new/datum/disease2/disease()
 		carried.makerandom(rand(2, 4))
 
-/mob/living/simple_animal/hostile/vagrant/Allow_Spacemove(var/check_drift = 0)
+/mob/living/simple_animal/hostile/mehren/Allow_Spacemove(var/check_drift = 0)
 	return 1
 
-/mob/living/simple_animal/hostile/vagrant/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/simple_animal/hostile/mehren/bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
 	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
@@ -50,7 +50,7 @@
 		turns_per_move = 2
 		MoveToTarget()
 
-/mob/living/simple_animal/hostile/vagrant/Life()
+/mob/living/simple_animal/hostile/mehren/Life()
 	. = ..()
 	if(gripping)
 		if(!(get_turf(src) == get_turf(gripping)))
@@ -73,15 +73,15 @@
 		cloaked = 1
 		update_icon()
 	if(health == maxHealth)
-		new/mob/living/simple_animal/hostile/vagrant(src.loc)
-		new/mob/living/simple_animal/hostile/vagrant(src.loc)
+		new/mob/living/simple_animal/hostile/mehren(src.loc)
+		new/mob/living/simple_animal/hostile/mehren(src.loc)
 		gib()
 		return
 	if(health < 1)
 		gib() //Leave no identifiable evidence.
 		return
 
-/mob/living/simple_animal/hostile/vagrant/update_icon()
+/mob/living/simple_animal/hostile/mehren/update_icon()
 	if(cloaked) //It's fun time
 		alpha = 45
 		set_light(0)
@@ -89,11 +89,11 @@
 		move_to_delay = initial(move_to_delay)
 	else //It's fight time
 		alpha = 255
-		icon_state = "vagrant_glowing"
+		icon_state = "mehren_glowing"
 		set_light(4)
 		move_to_delay = 2
 
-/mob/living/simple_animal/hostile/vagrant/AttackingTarget()
+/mob/living/simple_animal/hostile/mehren/AttackingTarget()
 	. = ..()
 	if(ishuman(.))
 		var/mob/living/carbon/human/H = .
@@ -113,7 +113,7 @@
 			src.loc = gripping.loc
 			return
 
-/mob/living/simple_animal/hostile/vagrant/swarm/Initialize()
+/mob/living/simple_animal/hostile/mehren/swarm/Initialize()
 	. = ..()
-	if(prob(75)) new/mob/living/simple_animal/hostile/vagrant(loc)
-	if(prob(50)) new/mob/living/simple_animal/hostile/vagrant(loc)
+	if(prob(75)) new/mob/living/simple_animal/hostile/mehren(loc)
+	if(prob(50)) new/mob/living/simple_animal/hostile/mehren(loc)
