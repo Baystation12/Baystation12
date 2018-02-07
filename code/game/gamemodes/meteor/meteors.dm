@@ -70,22 +70,13 @@
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/pick_meteor_start(var/startSide = pick(GLOB.cardinal))
-	var/startLevel = pick(GLOB.using_map.station_levels)
-	var/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
-
-	return list(startLevel, pickedstart)
-
-/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide)
+/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide, var/zlevel)
 	for(var/i = 0; i < number; i++)
-		spawn_meteor(meteortypes, startSide)
+		spawn_meteor(meteortypes, startSide, zlevel)
 
-/proc/spawn_meteor(var/list/meteortypes, var/startSide)
-	var/start = pick_meteor_start(startSide)
-
-	var/startLevel = start[1]
-	var/turf/pickedstart = start[2]
-	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, startLevel)
+/proc/spawn_meteor(var/list/meteortypes, var/startSide, var/zlevel)
+	var/turf/pickedstart = spaceDebrisStartLoc(startSide, zlevel)
+	var/turf/pickedgoal = spaceDebrisFinishLoc(pickedstart, zlevel)
 
 	var/Me = pickweight(meteortypes)
 	var/obj/effect/meteor/M = new Me(pickedstart)
