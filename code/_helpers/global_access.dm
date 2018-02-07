@@ -69,6 +69,8 @@
 			return global.SSvines;
 		if("SSwireless")
 			return global.SSwireless;
+		if("SSxenoarch")
+			return global.SSxenoarch;
 		if("Tier1Runes")
 			return global.Tier1Runes;
 		if("Tier2Runes")
@@ -1110,6 +1112,8 @@
 			global.SSvines=newval;
 		if("SSwireless")
 			global.SSwireless=newval;
+		if("SSxenoarch")
+			global.SSxenoarch=newval;
 		if("Tier1Runes")
 			global.Tier1Runes=newval;
 		if("Tier2Runes")
@@ -2116,6 +2120,7 @@
 	"SSsun",
 	"SSvines",
 	"SSwireless",
+	"SSxenoarch",
 	"Tier1Runes",
 	"Tier2Runes",
 	"Tier3Runes",
