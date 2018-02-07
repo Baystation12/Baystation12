@@ -45,6 +45,8 @@
 /datum/event_meta/extended_penalty/get_weight()
 	return ..() - (ticker && istype(ticker.mode, /datum/game_mode/extended) ? penalty : 0)
 
+/datum/event_meta/no_overmap/get_weight() //these events have overmap equivalents, and shouldn't fire randomly if overmap is used
+	return GLOB.using_map.use_overmap ? 0 : ..()
 
 /datum/event	//NOTE: Times are measured in master controller ticks!
 	var/startWhen		= 0	//When in the lifetime to call start().
