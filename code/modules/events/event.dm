@@ -57,6 +57,7 @@
 	var/startedAt		= 0 //When this event started.
 	var/endedAt			= 0 //When this event ended.
 	var/datum/event_meta/event_meta = null
+	var/list/affecting_z
 
 /datum/event/nothing
 
@@ -144,5 +145,15 @@
 
 	startedAt = world.time
 
+	if(!affecting_z)
+		affecting_z = GLOB.using_map.station_levels
+
 	setup()
 	..()
+
+/datum/event/proc/location_name()
+	if(!GLOB.using_map.use_overmap)
+		return station_name()
+
+	var/obj/effect/overmap/O = map_sectors["[pick(affecting_z)]"]
+	return O ? O.name : "Unknown Location"

@@ -9,7 +9,6 @@
 	default_delay = 30 SECONDS
 	speed_mod = 5 SECONDS
 	burn_delay = 20 SECONDS
-	triggers_events = 0
 	generic_waypoints = list(
 		"nav_casino_1",
 		"nav_casino_2",
