@@ -162,6 +162,14 @@
 	name = "\improper NO SMOKING"
 	icon_state = "nosmoking2"
 
+/obj/structure/sign/warning/nosmoking_burned
+	name = "\improper NO SMOKING"
+	icon_state = "nosmoking2_b"
+
+/obj/structure/sign/warning/nosmoking_burned/Initialize()
+	. = ..()
+	desc += " It looks charred."
+
 /obj/structure/sign/warning/smoking
 	name = "\improper SMOKING"
 	icon_state = "smoking"
