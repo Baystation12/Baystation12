@@ -88,11 +88,12 @@
 	damage = 5
 	damage_type = TOX
 	weaken = 5
-
+	fire_sound = 'sound/weapons/radxbow.ogg'
 
 /obj/item/projectile/energy/bolt
 	name = "bolt"
 	icon_state = "cbbolt"
+	fire_sound = 'sound/weapons/radxbow.ogg'
 	damage = 10
 	damage_type = TOX
 	nodamage = 0
@@ -115,8 +116,8 @@
 
 /obj/item/projectile/energy/phoron
 	name = "phoron bolt"
-	icon_state = "energy"
-	fire_sound = 'sound/effects/stealthoff.ogg'
+	icon_state = "radbolt"
+	fire_sound = 'sound/weapons/laser_c.ogg'
 	damage = 20
 	damage_type = TOX
 	irradiate = 20
@@ -124,7 +125,7 @@
 /obj/item/projectile/energy/plasmastun
 	name = "plasma pulse"
 	icon_state = "plasma_stun"
-	fire_sound = 'sound/weapons/blaster.ogg'
+	fire_sound = 'sound/weapons/laser_e.ogg'
 	armor_penetration = 10
 	kill_count = 4
 	damage = 5

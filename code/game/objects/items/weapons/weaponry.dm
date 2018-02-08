@@ -4,7 +4,7 @@
 	icon_state = "nullrod"
 	item_state = "nullrod"
 	slot_flags = SLOT_BELT
-	force = 15
+	force = 8
 	throw_speed = 1
 	throw_range = 4
 	throwforce = 10
@@ -14,6 +14,13 @@
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
+	if(user.a_intent == I_HELP)
+		M.visible_message("<span class='notice'>\The [user] waves \the [src] over \the [M]'s head.</span>")
+		if(cult && iscultist(M))
+			cult.offer_uncult(M)
+		return
+
 	user.do_attack_animation(M)
 	//if(user != M)
 	if(M.mind && M.mind.learned_spells)
@@ -29,11 +36,6 @@
 		to_chat(user, "<span class='danger'>The rod slips out of your hand and hits your head.</span>")
 		user.take_organ_damage(10)
 		user.Paralyse(20)
-		return
-
-	if(cult && iscultist(M))
-		M.visible_message("<span class='notice'>\The [user] waves \the [src] over \the [M]'s head.</span>")
-		cult.offer_uncult(M)
 		return
 
 	..()
