@@ -19,10 +19,14 @@
 	var/corner_overlay_state = "diagonalWall"
 	var/image/corner_overlay
 
-/turf/simulated/shuttle/wall/corner/New()
-	..()
+//DO NOT MAP THESE AS CARDINAL. EVER. EVERRRRR.
+/turf/simulated/shuttle/wall/corner/Initialize()
+	. = ..()
 	reset_base_appearance()
 	reset_overlay()
+	underlay_turf()
+	if( !(dir in list(NORTHEAST, NORTHWEST, SOUTHWEST, SOUTHEAST)) )
+		CRASH("A diagonal wall has been mapped in a cardinal direction at [x], [y], [z]") //So it fails Travis when people do this.
 
 //Grabs the base turf type from our area and copies its appearance
 /turf/simulated/shuttle/wall/corner/proc/reset_base_appearance()
@@ -31,6 +35,19 @@
 
 	icon = initial(base_type.icon)
 	icon_state = initial(base_type.icon_state)
+
+/turf/simulated/shuttle/wall/corner/proc/underlay_turf()
+	var/turf/T = get_step(src, dir)//Gets the turf normal to the diagonal.
+	var/image/I = image(icon = T.icon, loc = src, icon_state = T.icon_state, dir = T.dir)
+	if(iswall(T)) //Underlay a plating if that turf is a wall.
+		I.icon = 'icons/turf/flooring/plating.dmi'
+		I.icon_state = "plating"
+		I.plane = PLATING_PLANE
+	else //Otherwise, use that.
+		I.plane = T.plane
+		I.layer = T.layer
+	underlays += I
+	icon_state = "blank"
 
 /turf/simulated/shuttle/wall/corner/proc/reset_overlay()
 	if(corner_overlay)
