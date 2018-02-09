@@ -14,7 +14,7 @@
 					/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
 					/obj/item/weapon/storage/box/syringes,
 					/obj/item/weapon/storage/box/autoinjectors)
-	cost = 10
+	cost = 30
 	containername = "\improper Medical crate"
 
 /decl/hierarchy/supply_pack/medical/bloodpack
@@ -67,7 +67,7 @@
 					/obj/item/device/healthanalyzer,
 					/obj/item/device/flashlight/pen,
 					/obj/item/weapon/reagent_containers/syringe)
-	cost = 60
+	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Chief medical officer equipment"
 	access = access_cmo
@@ -271,7 +271,7 @@
 	contains = list(/obj/item/clothing/suit/space/void/medical/alt,
 					/obj/item/clothing/head/helmet/space/void/medical/alt,
 					/obj/item/clothing/shoes/magboots)
-	cost = 120
+	cost = 40
 	containername = "\improper Medical voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_medical_equip

@@ -249,7 +249,7 @@
 	contains = list(/obj/item/clothing/suit/space/void/engineering/alt,
 					/obj/item/clothing/head/helmet/space/void/engineering/alt,
 					/obj/item/clothing/shoes/magboots)
-	cost = 120
+	cost = 40
 	containername = "\improper Engineering voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_engine

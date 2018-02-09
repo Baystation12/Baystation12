@@ -12,7 +12,7 @@
 /decl/hierarchy/supply_pack/science/coolanttank
 	name = "Coolant tank crate"
 	contains = list(/obj/structure/reagent_dispensers/coolanttank)
-	cost = 16
+	cost = 15
 	containertype = /obj/structure/largecrate
 	containername = "\improper coolant tank crate"
 
@@ -21,7 +21,7 @@
 	contains = list(/obj/item/weapon/book/manual/ripley_build_and_repair,
 					/obj/item/weapon/circuitboard/mecha/ripley/main, //TEMPORARY due to lack of circuitboard printer,
 					/obj/item/weapon/circuitboard/mecha/ripley/peripherals) //TEMPORARY due to lack of circuitboard printer
-	cost = 30
+	cost = 25
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper APLU \"Ripley\" Circuit Crate"
 	access = access_robotics
