@@ -207,6 +207,8 @@ var/list/organ_cache = list()
 			mechassist()
 		else if(status == "mechanical")
 			robotize()
+		else if(status == "amputated")
+			remove_rejuv()
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()

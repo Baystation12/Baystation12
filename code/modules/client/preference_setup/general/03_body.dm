@@ -198,6 +198,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ_name = BP_LIVER
 			if(BP_KIDNEYS)
 				organ_name = BP_KIDNEYS
+			if(BP_APPENDIX)
+				organ_name = BP_APPENDIX
 			if(BP_CHEST)
 				organ_name = "upper body"
 			if(BP_GROIN)
@@ -564,7 +566,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["organs"])
-		var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes", "Lungs", "Liver", "Kidneys")
+		var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes", "Lungs", "Liver", "Kidneys", "Appendix")
 		if(!organ_name) return
 
 		var/organ = null
@@ -579,8 +581,18 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ = BP_LIVER
 			if("Kidneys")
 				organ = BP_KIDNEYS
+			if("Appendix")
+				organ = BP_APPENDIX
 
 		var/list/organ_choices = list("Normal","Assisted","Synthetic")
+		if(organ == BP_APPENDIX)
+			organ_choices -= "Assisted"
+			organ_choices -= "Synthetic"
+			organ_choices += "Amputated"
+
+		if(organ == BP_EYES)
+			organ_choices += "Amputated"
+
 		if(pref.organ_data[BP_CHEST] == "cyborg")
 			organ_choices -= "Normal"
 			organ_choices += "Synthetic"
@@ -595,6 +607,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				pref.organ_data[organ] = "assisted"
 			if("Synthetic")
 				pref.organ_data[organ] = "mechanical"
+			if("Amputated")
+				pref.organ_data[organ] = "amputated"
 		return TOPIC_REFRESH
 
 	else if(href_list["disabilities"])
