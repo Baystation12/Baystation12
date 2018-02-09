@@ -44,16 +44,6 @@ GLOBAL_DATUM_INIT(moved_event, /decl/observ/moved, new)
 	. = ..()
 	if(. && !loc)
 		GLOB.moved_event.raise_event(src, old_loc, null)
-	if(!.) //On-Move Elevation Handling.//
-		var/list/changed_atoms = list() //Used to track the atoms we've changed the density of, to allow for a later revert.
-		for(var/atom/movable/AM in newloc.contents)
-			if(AM.elevation != src.elevation && AM.density != 0)
-				changed_atoms.Add(AM)
-				AM.density = 0
-		. = ..() //Recalling the move once we've made the atoms non-dense.
-		if(!.)
-			for(var/atom/movable/AM in changed_atoms)
-				AM.density = 1 //If it still fails here, reset the changed atoms
 
 /atom/movable/forceMove(atom/destination)
 	var/old_loc = loc
