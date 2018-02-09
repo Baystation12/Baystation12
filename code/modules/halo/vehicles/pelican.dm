@@ -8,11 +8,11 @@
 
 	density = 1
 
-	bound_height = 64
-	bound_width = 64
+	bound_height = 128
+	bound_width = 128
 
-	pixel_x = -64
-	pixel_y = -64
+	pixel_x = -32
+	pixel_y = -32
 
 	takeoff_overlay_icon_state = "thrust"
 	takeoff_sound = 'code/modules/halo/shuttles/pelican_takeoff.ogg'
@@ -48,11 +48,11 @@
 
 	density = 1
 
-	bound_height = 64
-	bound_width = 64
+	bound_height = 128
+	bound_width = 128
 
-	pixel_x = -64
-	pixel_y = -64
+	pixel_x = -32
+	pixel_y = -32
 
 	overmap_range = 1
 
