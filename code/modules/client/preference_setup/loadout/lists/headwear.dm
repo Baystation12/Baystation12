@@ -18,7 +18,7 @@
 	path = /obj/item/clothing
 
 /datum/gear/head/bandana/New()
-	..()		
+	..()
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(typesof(/obj/item/clothing/mask/bandana) + typesof(/obj/item/clothing/head/bandana))
 
 /datum/gear/head/bow
@@ -107,18 +107,22 @@
 /datum/gear/head/hijab
 	display_name = "hijab, colour select"
 	path = /obj/item/clothing/head/hijab
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/kippa
 	display_name = "kippa, colour select"
 	path = /obj/item/clothing/head/kippa
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/turban
 	display_name = "turban, colour select"
 	path = /obj/item/clothing/head/turban
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/taqiyah
 	display_name = "taqiyah, colour select"
 	path = /obj/item/clothing/head/taqiyah
+	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/surgical
 	display_name = "standard surgical caps"
@@ -145,4 +149,4 @@
 
 /datum/gear/head/tankccap
 	display_name = "padded cap"
-	path = /obj/item/clothing/head/tank 
+	path = /obj/item/clothing/head/tank
