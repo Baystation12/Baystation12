@@ -202,3 +202,13 @@
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()
 	return (moving_status == SHUTTLE_INTRANSIT)
+
+/datum/shuttle/autodock/proc/get_location_name()
+	if(moving_status == SHUTTLE_INTRANSIT)
+		return "In transit"
+	return current_location.name
+
+/datum/shuttle/autodock/proc/get_destination_name()
+	if(!next_location)
+		return "None"
+	return next_location.name

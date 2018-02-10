@@ -139,6 +139,7 @@
 	var/datum/event/E = new event(EM)
 	E.startWhen = 0
 	E.endWhen = INFINITY
+	E.affecting_z = victim.map_z
 	victims[victim] = E
 
 /datum/overmap_event/proc/leave(victim)
