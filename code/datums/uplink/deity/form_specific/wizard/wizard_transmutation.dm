@@ -35,10 +35,10 @@
 
 //Level 2
 /datum/uplink_item/deity/boon/single_charge/transmutation/knock
-	name = "Knock"
-	desc = "Allows a follower to open nearby doors without the keys."
+	name = "Skeleton Key"
+	desc = "Allows a follower to open nearby doors and lockers and access consoles without an ID."
 	item_cost = 25
-	path = /spell/aoe_turf/knock
+	path = /spell/targeted/equip_item/knock
 	required_feats = list(DEITY_LEVELED_TRANSMUTATION = 2)
 
 /datum/uplink_item/deity/boon/single_charge/transmutation/burning_grip

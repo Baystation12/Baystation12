@@ -19,6 +19,10 @@
 
 	hud_state = "wiz_tele"
 
+/spell/area_teleport/cleric
+	charge_max = 1000
+	cooldown_min = 600 //100 deciseconds reduction per rank
+
 /spell/area_teleport/before_cast()
 	return
 

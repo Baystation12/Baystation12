@@ -638,3 +638,18 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	..()
 	var/obj/item/weapon/card/id/torch/stowaway/ID = new(H.loc)
 	H.put_in_hands(ID)
+
+/decl/hierarchy/outfit/job/torch/cleric
+	name = OUTFIT_JOB_NAME("Cleric - Torch")
+	uniform = /obj/item/clothing/under/color/grey
+	l_ear = /obj/item/device/radio/headset
+	shoes = /obj/item/clothing/shoes/black
+	pda_type = /obj/item/device/pda
+	id_type = /obj/item/weapon/card/id/torch/passenger
+
+/decl/hierarchy/outfit/job/torch/cleric/post_equip(var/mob/living/carbon/human/H)
+	..()
+	var/obj/item/weapon/spellbook/cleric/cleric = new(H.loc)
+	H.put_in_hands(cleric)
+	if(H.mind)
+		H.mind.special_role = "cleric"

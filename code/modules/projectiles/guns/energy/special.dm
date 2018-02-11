@@ -144,7 +144,7 @@
 	fire_sound = 'sound/weapons/emitter.ogg'
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_SMALL
 	max_shots = 5
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null
@@ -152,7 +152,7 @@
 	charge_meter = 0
 
 /obj/item/weapon/gun/energy/staff/special_check(var/mob/user)
-	if((user.mind && !wizards.is_antagonist(user.mind)))
+	if((user.mind && !wizards.is_antagonist(user.mind) && user.mind.special_role != "cleric"))
 		to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
 		return 0
 
@@ -178,7 +178,7 @@ obj/item/weapon/gun/energy/staff/focus
 	icon_state = "focus"
 	item_state = "focus"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_SMALL
 	projectile_type = /obj/item/projectile/forcebolt
 	/*
 	attack_self(mob/living/user as mob)
