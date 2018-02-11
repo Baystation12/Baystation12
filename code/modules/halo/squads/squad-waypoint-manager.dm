@@ -6,6 +6,7 @@
 	name = "Squad Waypoint Manager"
 	icon = 'code/modules/halo/squads/waypoint_manager.dmi'
 	icon_state = "waypoint_manager"
+	w_class = ITEM_SIZE_SMALL
 	var/datum/waypoint_controller/linked_controller
 	var/waypoint_limit = 5
 
