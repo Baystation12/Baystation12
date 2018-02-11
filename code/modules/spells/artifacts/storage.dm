@@ -26,6 +26,16 @@
 	new /obj/item/clothing/suit/space/void/wizard(src)
 	new /obj/item/clothing/head/helmet/space/void/wizard(src)
 
+/obj/structure/closet/wizard/robes
+	name = "Basic Robe Set"
+	desc = "This closet contains a basic set of spellcasting robes, perfect for an aspiring apprentice, or a master who needs a new bathrobe."
+
+/obj/structure/closet/wizard/robes/New()
+	..()
+	new /obj/item/clothing/shoes/sandal(src) //In case they've lost them.
+	new /obj/item/clothing/suit/wizrobe(src)
+	new /obj/item/clothing/head/wizard(src)
+
 /obj/structure/closet/wizard/scrying
 	name = "Scrying Orb"
 	desc = "An incandescent orb of crackling energy, using it will allow you to ghost while alive, allowing you to reconnoiter with ease. In addition, buying it will permanently grant you x-ray vision."

@@ -11,7 +11,7 @@
 	invocation_type = SpI_SHOUT
 	range = 20
 
-	level_max = list(Sp_TOTAL = 5, Sp_SPEED = 0, Sp_POWER = 5)
+	level_max = list(Sp_TOTAL = 3, Sp_SPEED = 0, Sp_POWER = 3)
 
 	spell_flags = 0
 

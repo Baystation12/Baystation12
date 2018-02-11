@@ -46,7 +46,12 @@
 	if(user.mind.special_role == "apprentice")
 		to_chat(user, "<span class='warning'>You are already a wizarding apprentice!</span>")
 		return 0
+	if(user.mind.special_role == "cleric")
+		to_chat(user, "<span class='warning'>You feel a strong compulsion to not sign this contract.</span>")
+		return 0
 	if(wizards.add_antagonist_mind(user.mind,1,"apprentice","<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
+		var/obj/item/weapon/spellbook/student/student = new(user.loc)
+		user.put_in_hands(student)
 		to_chat(user, "<span class='notice'>With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry.</span>")
 		return 1
 	return 0
@@ -150,6 +155,10 @@
 /obj/item/weapon/contract/boon/wizard/knock
 	path = /spell/aoe_turf/knock
 	desc = "This contract is hard to hold still."
+
+/obj/item/weapon/contract/boon/wizard/skeleton_key
+	path = /spell/targeted/equip_item/skeleton_key
+	desc = "This contract radiates authority."
 
 /obj/item/weapon/contract/boon/wizard/horsemask
 	path = /spell/targeted/equip_item/horsemask

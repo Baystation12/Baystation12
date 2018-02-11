@@ -9,8 +9,8 @@
 	title = "Book of Spells and Artefacts"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
 	book_desc = "A general wizard's spellbook. All its spells are easy to use but hard to master."
-	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
-	max_uses = 6
+	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE|STANDARD
+	max_uses = 7
 
 	spells = list(/spell/targeted/projectile/magic_missile = 			1,
 							/spell/targeted/projectile/dumbfire/fireball = 		1,

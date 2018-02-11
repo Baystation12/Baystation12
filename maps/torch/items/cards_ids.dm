@@ -30,6 +30,10 @@
 	access = get_all_station_access()
 	..()
 
+/obj/item/weapon/card/id/silver/skeleton_key
+	name = "Skeleton Key ID"
+	desc = "Allows a wizard to go anywhere, and do anything."
+	icon_state = "syndicate"
 
 // SolGov Crew and Contractors
 /obj/item/weapon/card/id/torch/crew

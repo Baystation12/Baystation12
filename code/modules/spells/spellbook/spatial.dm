@@ -10,7 +10,7 @@
 	book_desc = "Movement and teleportation. Run from your problems!"
 	title = "Manual of Spatial Transportation"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
-	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
+	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE|STANDARD
 	max_uses = 11
 
 	spells = list(/spell/targeted/ethereal_jaunt = 				1,
@@ -25,6 +25,7 @@
 				/spell/aoe_turf/conjure/forcewall = 			1,
 				/spell/aoe_turf/smoke = 						1,
 				/spell/aoe_turf/conjure/summon/bats = 			3,
+				/spell/targeted/equip_item/skeleton_key = 		3,
 				/spell/noclothes = 								1,
 				/obj/item/weapon/contract/wizard/tk = 			5,
 				/obj/item/weapon/dice/d20/cursed = 				1,

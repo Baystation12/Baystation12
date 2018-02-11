@@ -15,6 +15,10 @@
 
 	hud_state = "wiz_jaunt"
 
+/spell/targeted/ethereal_jaunt/cleric
+	charge_max = 600
+	cooldown_min = 300 //100 deciseconds reduction per rank
+
 /spell/targeted/ethereal_jaunt/cast(list/targets) //magnets, so mostly hardcoded
 	for(var/mob/living/target in targets)
 		target.transforming = 1 //protects the mob from being transformed (replaced) midjaunt and getting stuck in bluespace
