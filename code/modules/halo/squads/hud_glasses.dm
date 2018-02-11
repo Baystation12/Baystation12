@@ -18,6 +18,8 @@
 	process_hud()
 
 /obj/item/clothing/glasses/hud/tactical/proc/remove_all_pointers(var/mob/user)
+	if(!user.client)
+		return
 	for(var/pointer in waypoint_pointers)
 		waypoint_pointers -= pointer
 		user.client.screen -= pointer
