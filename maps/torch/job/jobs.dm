@@ -1139,7 +1139,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	availablity_chance = 30
-	supervisors = "the Executive Officer"
+	supervisors = "yourself"
 	selection_color = "#515151"
 	economic_modifier = 3
 	outfit_type = /decl/hierarchy/outfit/job/torch/cleric
