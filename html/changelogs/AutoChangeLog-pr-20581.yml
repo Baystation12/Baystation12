@@ -1,7 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - tweak: "There is now an announcement when the rampant brand intelligence was successfully gotten rid of."
-  - tweak: "The origin vending machine now shoots a lot more aggressively."
-  - tweak: "Blinking red light on a vending machine now means that it shoots."
-  - bugfix: "Hacker event: Hacker was destined to always lose. Fixed."
