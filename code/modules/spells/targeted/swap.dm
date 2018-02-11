@@ -5,8 +5,6 @@
 	school = "conjuration"
 
 	charge_type = Sp_HOLDVAR
-	holder_var_type = "brainloss"
-	holder_var_amount = 10
 
 	invocation = "Joyo!"
 	invocation_type = SpI_WHISPER

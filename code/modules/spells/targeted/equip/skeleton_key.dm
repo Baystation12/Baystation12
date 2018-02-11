@@ -1,10 +1,10 @@
-/spell/targeted/equip_item/knock
+/spell/targeted/equip_item/skeleton_key
 	name = "Skeleton Key"
-	desc = "This spell gives full access to the SEV Torch's systems."
+	desc = "This spell gives full access to electronic-powered systems and machines."
 	feedback = "KN"
 	school = "transmutation"
 	charge_type = Sp_RECHARGE
-	charge_max = 600
+	charge_max = 1200
 	spell_flags = NEEDSCLOTHES | INCLUDEUSER
 	invocation = "Aulie Oxin Fiera."
 	invocation_type = SpI_WHISPER
@@ -16,14 +16,14 @@
 	delete_old = 0
 	compatible_mobs = list(/mob/living/carbon/human)
 	hud_state = "wiz_knock"
-	equipped_summons = list("active hand" = /obj/item/weapon/card/id/torch/captains_spare/skeleton_key)
+	equipped_summons = list("active hand" = /obj/item/weapon/card/id/silver/skeleton_key)
 
-/spell/targeted/equip_item/knock/cast(list/targets, mob/user = usr)
+/spell/targeted/equip_item/skeleton_key/cast(list/targets, mob/user = usr)
 	..()
 	for(var/mob/M in targets)
 		M.visible_message("An unusual card appears in \the [M]'s hand!")
 
-/spell/targeted/equip_item/knock/empower_spell()
+/spell/targeted/equip_item/skeleton_key/empower_spell()
 	if(!..())
 		return 0
 

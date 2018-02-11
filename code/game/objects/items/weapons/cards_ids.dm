@@ -259,7 +259,7 @@ var/const/NO_EMAG_ACT = -50
 	access = get_all_station_access()
 	..()
 
-/obj/item/weapon/card/id/torch/captains_spare/skeleton_key
+/obj/item/weapon/card/id/silver/skeleton_key
 	name = "Skeleton Key ID"
 	desc = "Allows a wizard to go anywhere, and do anything."
 	icon_state = "syndicate"

@@ -64,7 +64,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			if(!wizards.is_antagonist(user.mind))
 				to_chat(user, "You can't make heads or tails of this book.")
 				return
-		if(spellbook.book_flags & STANDARD)
 			if(spellbook.book_flags & LOCKED)
 				if(user.mind.special_role == "apprentice")
 					to_chat(user, "<span class='warning'>Drat! This spellbook's apprentice proof lock is on!.</span>")
@@ -313,7 +312,11 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	var/max_uses = 1
 	var/title = "Book of Tomes"
 	var/title_desc = "This tome marks down all the available tomes for use. Choose wisely, there are no refunds."
-	var/list/spells = list(/datum/spellbook/standard = 1) //spell's path = cost of spell
+	var/list/spells = list(/datum/spellbook/standard = 1,
+				/datum/spellbook/battlemage = 1,
+				/datum/spellbook/spatial = 1,
+				/datum/spellbook/druid = 1
+				) //spell's path = cost of spell
 
 	var/list/sacrifice_reagents
 	var/list/sacrifice_objects

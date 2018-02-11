@@ -153,8 +153,12 @@
 	desc = "This contract has a dedication to mimes everywhere at the top."
 
 /obj/item/weapon/contract/boon/wizard/knock
-	path = /spell/targeted/equip_item/knock
+	path = /spell/aoe_turf/knock
 	desc = "This contract is hard to hold still."
+
+/obj/item/weapon/contract/boon/wizard/skeleton_key
+	path = /spell/targeted/equip_item/skeleton_key
+	desc = "This contract radiates authority."
 
 /obj/item/weapon/contract/boon/wizard/horsemask
 	path = /spell/targeted/equip_item/horsemask

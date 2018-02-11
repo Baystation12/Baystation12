@@ -27,7 +27,7 @@
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
-						/datum/job/merchant, /datum/job/stowaway, /datum/job/cleric
+						/datum/job/merchant, /datum/job/stowaway
 						)
 
 
@@ -1130,19 +1130,4 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
 	latejoin_at_spawnpoints = 1
-	announced = FALSE
-
-/datum/job/cleric
-	title = "Cleric"
-	department = "Civilian"
-	department_flag = CIV
-	total_positions = 1
-	spawn_positions = 1
-	availablity_chance = 30
-	supervisors = "yourself"
-	selection_color = "#515151"
-	economic_modifier = 3
-	outfit_type = /decl/hierarchy/outfit/job/torch/cleric
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/civ)
 	announced = FALSE
