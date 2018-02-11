@@ -24,6 +24,7 @@
 	vendingMachines.Remove(originMachine)
 	originMachine.shut_up = 0
 	originMachine.shoot_inventory = 1
+	originMachine.shooting_chance = 15
 
 
 /datum/event/brand_intelligence/tick()
@@ -50,6 +51,10 @@
 								 "You don't want to buy anything? Yeah, well I didn't want to buy your mom either."))
 
 /datum/event/brand_intelligence/end()
+	originMachine.shut_up = 1
+	originMachine.shooting_chance = initial(originMachine.shooting_chance)
 	for(var/obj/machinery/vending/infectedMachine in infectedVendingMachines)
 		infectedMachine.shut_up = 1
 		infectedMachine.shoot_inventory = 0
+	spawn(2 SECONDS)
+		command_announcement.Announce("All traces of the rampant brand intelligence have disappeared from the systems.", "[location_name()] Firewall Subroutines")
