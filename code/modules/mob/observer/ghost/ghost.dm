@@ -96,6 +96,17 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 			if(istype(target))
 				ManualFollow(target)
 
+	else if(href_list["playercoordteleport"])
+		var/x = text2num(href_list["X"])
+		var/y = text2num(href_list["Y"])
+		var/z = text2num(href_list["Z"])
+		sleep(2)
+		var/turf/T = locate(x, y, z)
+		if(T)
+			ghost_to_turf(T)
+		else
+			to_chat(src, "<span class='warning'>Invalid coordinates.</span>")
+
 /*
 Transfer_mind is there to check if mob is being deleted/not going to have a body.
 Works together with spawning an observer, noted above.
@@ -208,6 +219,16 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	mind.current.reload_fullscreen()
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
+	return 1
+
+/mob/observer/ghost/verb/check_awayjobs()
+	set category = "Ghost"
+	set name = "Find away-site jobs"
+	if(!client)
+		return
+	to_chat(src, "<span class='notice'> Located [GLOB.awayjobs.len] away jobs.")
+	for(var/obj/effect/awayjob/T in GLOB.awayjobs)
+		to_chat(src, "<span class='notice'>Off-station job located at [T.loc.loc] <a href='byond://?src=\ref[src];playercoordteleport=1;X=[T.x];Y=[T.y];Z=[T.z]'>(JUMP)</a></span>")
 	return 1
 
 /mob/observer/ghost/verb/toggle_medHUD()
