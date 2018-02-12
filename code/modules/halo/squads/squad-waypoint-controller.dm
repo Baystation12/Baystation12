@@ -19,6 +19,19 @@
 	if(!(src in GLOB.processing_objects))
 		GLOB.processing_objects += src
 
+/datum/waypoint_controller/proc/cole_protocol() //This wipes the controller, removing all waypoints and linked devices before deleting itself.
+	for(var/obj/item/clothing/glasses/hud/tactical/device in linked_devices)
+		device.update_known_waypoints(list())
+		var/mob/m = device.loc
+		if(istype(m))
+			to_chat(m,"<span class = 'warning'>[squad_name] Alert: Squad Management device reset. Manual re-link required.</span>")
+	linked_devices.Cut()
+	for(var/obj/wp in active_waypoints)
+		qdel(wp)
+	active_waypoints.Cut()
+	controller_manager_device = null
+	qdel(src)
+
 /datum/waypoint_controller/proc/inform_waypoint_modification(var/obj/effect/waypoint_holder/waypoint,var/delete = 0,var/name_change = null)
 	for(var/obj/device in linked_devices)
 		if(ismob(device.loc))

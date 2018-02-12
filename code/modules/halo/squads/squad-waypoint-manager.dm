@@ -63,6 +63,8 @@
 		linked_controller.linked_devices -= device
 		device.update_known_waypoints(list())
 	else if(option == "Reset Manager")
+		if(linked_controller.controller_manager_device == src)
+			linked_controller.cole_protocol()
 		linked_controller = new(src)
 
 /obj/item/squad_manager/proc/squad_management_options(var/mob/user)
@@ -93,6 +95,7 @@
 			to_chat(user,"<span class = 'notice'>[A.name] added to linker.</span>")
 		else if(istype(A,/obj/item/squad_manager) && (A != src))
 			var/obj/item/squad_manager/manager = A
+			linked_controller.cole_protocol()
 			linked_controller = manager.linked_controller
 			to_chat(user,"<span class = 'notice'>[name] linked to [manager.name]'s internal controller.</span>")
 	else
