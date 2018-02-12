@@ -17,3 +17,4 @@ GLOBAL_LIST_EMPTY(prisonsecuritywarp) // Prison security goes to these.
 GLOBAL_LIST_EMPTY(prisonwarped) // List of players already warped.
 
 GLOBAL_LIST_EMPTY(awaydestinations) // Away missions. A list of landmarks that the warpgate can take you to.
+GLOBAL_LIST_EMPTY(awayjobs) //away mission jobs
