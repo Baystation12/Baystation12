@@ -126,8 +126,8 @@
 					return 1
 				M.op_stage.in_progress += zone
 				S.begin_step(user, M, zone, src)		//start on it
-				//We had proper tools! (or RNG smiled.) and user did not move or change hands.
-				if(prob(S.success_chance(user, M, src)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
+				//We had proper tools! (or RNG smiled.) and user did not move, change hands, or change target.
+				if(prob(S.success_chance(user, M, src)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration), zone))
 					S.end_step(user, M, zone, src)		//finish successfully
 				else if ((src in user.contents) && user.Adjacent(M))			//or
 					S.fail_step(user, M, zone, src)		//malpractice~
