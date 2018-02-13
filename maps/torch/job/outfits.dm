@@ -189,6 +189,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/crew/engineering/senior
 	pda_type = /obj/item/device/pda/heads/ce
 
+/decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/comissioned
+	name = OUTFIT_JOB_NAME("Senior Engineer - EC Officer")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering
+
 /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/fleet
 	name = OUTFIT_JOB_NAME("Senior Engineer - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
@@ -238,6 +242,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/security/brigofficer
 	pda_type = /obj/item/device/pda/warden
+
+/decl/hierarchy/outfit/job/torch/crew/security/brig_officer/comissioned
+	name = OUTFIT_JOB_NAME("Brig Officer - EC Officer")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/security
 
 /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet
 	name = OUTFIT_JOB_NAME("Brig Officer - Fleet")
