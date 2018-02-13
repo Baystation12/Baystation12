@@ -400,7 +400,9 @@
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/ec/e5
+		/datum/mil_rank/ec/e5,
+		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/comissioned,
+		/datum/mil_rank/fleet/o1
 	)
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -526,6 +528,8 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet
 	)
 	allowed_ranks = list(
+		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/comissioned,
+		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/e8,
 		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/ec/e5,
