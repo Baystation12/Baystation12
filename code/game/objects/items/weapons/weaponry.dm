@@ -1,13 +1,13 @@
 /obj/item/weapon/nullrod
-	name = "null rod"
-	desc = "A rod of pure obsidian, its very presence disrupts and dampens the powers of paranormal phenomenae."
+	name = "null sceptre"
+	desc = "A small, plain rod of pure black obsidian. Some religious groups claim it disrupts and dampens the powers of paranormal phenomenae."
 	icon_state = "nullrod"
 	item_state = "nullrod"
 	slot_flags = SLOT_BELT
-	force = 15
-	throw_speed = 1
-	throw_range = 4
-	throwforce = 10
+	force = 4
+	throw_speed = 2
+	throw_range = 6
+	throwforce = 3
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
@@ -16,7 +16,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
 	//if(user != M)
-	if(M.mind && M.mind.learned_spells)
+	if(M.mind && LAZYLEN(M.mind.learned_spells))
 		M.silence_spells(300) //30 seconds
 		to_chat(M, "<span class='danger'>You've been silenced!</span>")
 		return
