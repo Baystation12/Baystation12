@@ -71,8 +71,10 @@
 
 /obj/structure/table/proc/flip(var/direction)
 	if( !straight_table_check(turn(direction,90)) || !straight_table_check(turn(direction,-90)) )
-		return 0
+		return FALSE
 
+	if(!do_after(usr, 1 SECOND, src))
+		return FALSE
 	verbs -=/obj/structure/table/verb/do_flip
 	verbs +=/obj/structure/table/proc/do_put
 
@@ -97,9 +99,11 @@
 	update_connections(1)
 	update_icon()
 
-	return 1
+	return TRUE
 
 /obj/structure/table/proc/unflip()
+	if(!do_after(usr, 1 SECOND, src))
+		return FALSE
 	verbs -=/obj/structure/table/proc/do_put
 	verbs +=/obj/structure/table/verb/do_flip
 
@@ -115,4 +119,10 @@
 	update_connections(1)
 	update_icon()
 
-	return 1
+	return TRUE
+
+/obj/structure/table/CtrlClick()
+	if(!flipped)
+		do_flip()
+	else
+		do_put()
