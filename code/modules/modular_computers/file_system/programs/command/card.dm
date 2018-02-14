@@ -164,8 +164,11 @@
 					else
 						computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
 		if("eject")
-			if(computer && computer.card_slot)
-				computer.proc_eject_id(user)
+			if(computer)
+				if(computer.card_slot && computer.card_slot.stored_card)
+					computer.proc_eject_id(user)
+				else
+					computer.attackby(user.get_active_hand(), user)
 		if("terminate")
 			if(computer && can_run(user, 1))
 				id_card.assignment = "Terminated"
