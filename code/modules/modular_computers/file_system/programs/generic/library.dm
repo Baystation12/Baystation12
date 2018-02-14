@@ -1,11 +1,4 @@
-/*
-In reply to this set of comments on lib_machines.dm:
-// TODO: Make this an actual /obj/machinery/computer that can be crafted from circuit boards and such
-// It is August 22nd, 2012... This TODO has already been here for months.. I wonder how long it'll last before someone does something about it.
-
-The answer was five and a half years -ZeroBits
-*/
-
+// Library computer program
 /datum/computer_file/program/library
 	filename = "library"
 	filedesc = "Library"
@@ -25,6 +18,9 @@ The answer was five and a half years -ZeroBits
 	var/current_book
 	var/obj/machinery/libraryscanner/scanner
 	var/sort_by = "id"
+	var/desc_sort = 1
+	var/list/categories = list("Fiction", "Non-Fiction", "Reference", "Religion")
+	var/list/emag_categories = list("Adult", "Classified") // Only staff can upload to these categories, and only emagged consoles display them
 
 /datum/nano_module/library/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
@@ -39,7 +35,31 @@ The answer was five and a half years -ZeroBits
 		if(!dbcon_old.IsConnected())
 			error_message = "Unable to contact External Archive. Please contact your system administrator for assistance."
 		else
-			var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library ORDER BY "+sanitizeSQL(sort_by))
+			// Start constructing the DB Query
+			var/query_sql = "SELECT id, author, title, category FROM library"
+
+			// Limit to the listed categories (for e-mag categories, and future separated archives)
+			var/add_sql = " WHERE approved=1 AND "
+			for(var/cat=1,cat<categories.len,cat++)
+				add_sql += "category=[categories[cat]] OR "
+			add_sql += "category=[categories[categories.len]]"
+
+			// If we're e-magged, then give us access to the hot stuff
+			var/obj/item/modular_computer/PC = nano_host()
+			if(istype(PC) && PC.computer_emagged)
+				add_sql += " OR "
+				for(var/cat=1,cat<emag_categories.len,cat++)
+					add_sql += "category=[emag_categories[cat]] OR "
+				add_sql += "category=[emag_categories[categories.len]]"
+
+			add_sql += " ORDER BY "
+			add_sql += sort_by
+			if(desc_sort)
+				add_sql += " DESC"
+
+			query_sql += add_sql
+
+			var/DBQuery/query = dbcon_old.NewQuery(query_sql)
 			query.Execute()
 
 			while(query.NextRow())
@@ -66,7 +86,7 @@ The answer was five and a half years -ZeroBits
 		view_book(href_list["viewbook"])
 		return 1
 	if(href_list["viewid"])
-		view_book(sanitizeSQL(input("Enter USBN:") as num|null))
+		view_book(input("Enter USBN:") as num)
 		return 1
 	if(href_list["closebook"])
 		current_book = null
@@ -106,28 +126,37 @@ The answer was five and a half years -ZeroBits
 		if(!B.title)
 			B.title = "Untitled"
 
-		var/choice = input(usr, "Upload [B.name] by [B.author] to the External Archive?") in list("Yes", "No")
-		if(choice == "Yes")
+		var/upload_category = input(usr, "Upload to which category?") in categories
+
+		var/choice = input(usr, "Submit [B.name] by [B.author] to the Library?") in list("Submit", "Cancel")
+		if(choice == "Submit")
 			establish_old_db_connection()
 			if(!dbcon_old.IsConnected())
 				error_message = "Network Error: Connection to the Archive has been severed."
 				return 1
 
-			var/upload_category = input(usr, "Upload to which category?") in list("Fiction", "Non-Fiction", "Reference", "Religion")
-
 			var/sqltitle = sanitizeSQL(B.name)
 			var/sqlauthor = sanitizeSQL(B.author)
-			var/sqlcontent = sanitizeSQL(B.dat)
+
+			var/copied = html_decode(B.dat)
+			copied = replacetext(copied, "<font face=\"[PAPER_DEFAULT_FONT]\" color=", "<font face=\"[PAPER_DEFAULT_FONT]\" nocolor=")
+			copied = replacetext(copied, "<font face=\"[PAPER_CRAYON_FONT]\" color=", "<font face=\"[PAPER_CRAYON_FONT]\" nocolor=")
+			copied = replacetext(copied, "<font face=\"[PAPER_SIGN_FONT]\" color=", "<font face=\"[PAPER_SIGN_FONT]\" nocolor=")
+
+			var/sqlcontent = sanitizeSQL(copied)
+
 			var/sqlcategory = sanitizeSQL(upload_category)
-			var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO library (author, title, content, category) VALUES ('[sqlauthor]', '[sqltitle]', '[sqlcontent]', '[sqlcategory]')")
+			var/sqluploader = sanitizeSQL(usr.key)
+
+			var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO library (author, title, content, category, uploader, approved) VALUES ('[sqlauthor]', '[sqltitle]', '[sqlcontent]', '[sqlcategory]', '[sqluploader]', 0)")
 			if(!query.Execute())
 				to_chat(usr, query.ErrorMsg())
 				error_message = "Network Error: Unable to upload to the Archive. Contact your system Administrator for assistance."
 				return 1
 			else
-				log_and_message_admins("has uploaded the book titled [B.name], [length(B.dat)] signs")
+				log_and_message_staff("has uploaded the book titled [B.name], [length(B.dat)] signs")
 				log_game("[usr.name]/[usr.key] has uploaded the book titled [B.name], [length(B.dat)] signs")
-				alert("Upload Complete.")
+				alert("Upload Complete. The staff team may now review your book to make sure it meets our quality standards before approval.")
 			return 1
 
 		return 0
@@ -137,7 +166,7 @@ The answer was five and a half years -ZeroBits
 			error_message = "Software Error: Unable to print; book not found."
 			return 1
 
-		//PRINT TO BINDER
+		//Print to binder
 		if(!nano_host())
 			return 1
 		for(var/d in GLOB.cardinal)
@@ -154,16 +183,21 @@ The answer was five and a half years -ZeroBits
 				return 1
 
 		//Regular printing
-		print_text("<i>Author: [current_book["author"]]<br>USBN: [current_book["id"]]</i><br><h3>[current_book["title"]]</h3><br>[current_book["content"]]", usr)
+		print_text("<i>Author: [current_book["author"]]<br>USBN: [current_book["id"]]</i><br><h2>[current_book["title"]]</h2><br>[current_book["content"]]", usr)
 		return 1
 	if(href_list["sortby"])
-		sort_by = href_list["sortby"]
+		if(sort_by == href_list["sortby"])
+			desc_sort = !desc_sort
+		else
+			sort_by = sanitizeSQL(href_list["sortby"])
+			desc_sort = 0
 		return 1
 	if(href_list["reseterror"])
 		if(error_message)
 			current_book = null
 			scanner = null
 			sort_by = "id"
+			desc_sort = 1
 			error_message = ""
 		return 1
 
@@ -177,7 +211,7 @@ The answer was five and a half years -ZeroBits
 		error_message = "Network Error: Connection to the Archive has been severed."
 		return 1
 
-	var/DBQuery/query = dbcon_old.NewQuery("SELECT * FROM library WHERE id=[sqlid]")
+	var/DBQuery/query = dbcon_old.NewQuery("SELECT * FROM library WHERE id=[sqlid] AND approved=1")
 	query.Execute()
 
 	while(query.NextRow())
