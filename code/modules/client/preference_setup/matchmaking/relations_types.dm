@@ -6,6 +6,29 @@
 /datum/relation/friend/get_desc_string()
 	return "[holder] and [other.holder] seem to be on good terms."
 
+/datum/relation/kid_friend
+	name = "Childhood Friend"
+	desc = "You have known them since you were both young."
+
+/datum/relation/kid_friend/get_desc_string()
+	return "[holder] and [other.holder] knew each other when they were both young."
+
+/datum/relation/kid_friend/get_candidates()
+	var/list/creche = ..()
+	var/mob/living/carbon/human/holdermob = holder.current
+	
+	if(istype(holdermob))
+		for(var/datum/relation/kid in creche)
+			var/mob/living/carbon/human/kidmob = kid.holder.current
+			if(!istype(kidmob))
+				continue
+			if(abs(holdermob.age - kidmob.age) > 3)
+				creche -= kid		//No creepers please, it's okay if the pool is small.
+				continue
+			if(holdermob.home_system && kidmob.home_system && (holdermob.home_system != kidmob.home_system))
+				creche -= kid		//No trans-galactic shennanigans either.
+	return creche
+
 /datum/relation/enemy
 	name = "Enemy"
 	desc = "You have known the fellow for a while now, and you really can't stand each other."
