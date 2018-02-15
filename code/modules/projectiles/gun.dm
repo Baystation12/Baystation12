@@ -50,6 +50,7 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
+	var/unique_name
 	var/burst = 1
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again
 	var/burst_delay = 2	//delay between shots, if firing in bursts
@@ -88,12 +89,15 @@
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 
+	if(!unique_name)
+		unique_name = name
+
 /obj/item/weapon/gun/update_twohanding()
 	if(one_hand_penalty)
 		var/mob/living/M = loc
 		if(istype(M))
 			if(M.can_wield_item(src) && src.is_held_twohanded(M))
-				name = "[initial(name)] (wielded)"
+				name = "[unique_name] (wielded)"
 			else
 				name = initial(name)
 		update_icon() // In case item_state is set somewhere else.
@@ -128,6 +132,7 @@
 		if(!findtext(input, "the", 1, 4))
 			input = "\improper [input]"
 		name = input
+		unique_name = input
 		to_chat(M, "Your gun is now named '[input]'.")
 		return 1
 
