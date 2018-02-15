@@ -202,3 +202,26 @@
 	name = "heavy shock beam"
 	damage = 20
 	agony  = 10
+
+/obj/item/projectile/beam/plasmacutter
+	name = "plasma arc"
+	icon_state = "omnilaser"
+	damage = 15
+	damage_type = BURN
+	check_armour = "laser"
+	kill_count = 5
+	pass_flags = PASS_FLAG_TABLE
+
+	muzzle_type = /obj/effect/projectile/trilaser/muzzle
+	tracer_type = /obj/effect/projectile/trilaser/tracer
+	impact_type = /obj/effect/projectile/trilaser/impact
+
+/obj/item/projectile/beam/plasmacutter/on_impact(var/atom/A)
+	if(istype(A, /turf/simulated/mineral))
+		var/turf/simulated/mineral/M = A
+		if(prob(33))
+			M.GetDrilled(1)
+			return
+		else
+			M.emitter_blasts_taken += 2
+	. = ..()

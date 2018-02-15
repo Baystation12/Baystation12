@@ -1,6 +1,5 @@
 /* Contains:
  * /obj/item/rig_module/device
- * /obj/item/rig_module/device/plasmacutter
  * /obj/item/rig_module/device/healthscanner
  * /obj/item/rig_module/device/drill
  * /obj/item/rig_module/device/orescanner
@@ -25,18 +24,6 @@
 
 	var/device_type
 	var/obj/item/device
-
-/obj/item/rig_module/device/plasmacutter
-	name = "hardsuit plasma cutter"
-	desc = "A lethal-looking industrial cutter."
-	icon_state = "plasmacutter"
-	interface_name = "plasma cutter"
-	interface_desc = "A self-sustaining plasma arc capable of cutting through walls."
-	suit_overlay_active = "plasmacutter"
-	suit_overlay_inactive = "plasmacutter"
-	use_power_cost = 50
-	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6)
-	device_type = /obj/item/weapon/gun/energy/plasmacutter
 
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
@@ -118,7 +105,6 @@
 	if(!resolved && device && target)
 		device.afterattack(target,holder.wearer,1)
 	return 1
-
 
 
 /obj/item/rig_module/chem_dispenser

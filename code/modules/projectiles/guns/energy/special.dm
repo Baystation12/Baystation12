@@ -191,3 +191,27 @@ obj/item/weapon/gun/energy/staff/focus
 			to_chat(user, "<span class='warning'>The [src.name] will now strike only a single person.</span>")
 			projectile_type = /obj/item/projectile/forcebolt"
 	*/
+
+/obj/item/weapon/gun/energy/plasmacutter
+	name = "plasma cutter"
+	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+	charge_meter = 0
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "plasmacutter"
+	item_state = "plasmacutter"
+	fire_sound = 'sound/weapons/plasma_cutter.ogg'
+	slot_flags = SLOT_BELT|SLOT_BACK
+	w_class = 3
+	force = 15
+	sharp = 1
+	edge = 1
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
+	matter = list(DEFAULT_WALL_MATERIAL = 4000)
+	projectile_type = /obj/item/projectile/beam/plasmacutter
+	max_shots = 10
+	self_recharge = 1
+
+/obj/item/weapon/gun/energy/plasmacutter/mounted
+	name = "mounted plasma cutter"
+	use_external_power = 1
+	max_shots = 4
