@@ -329,7 +329,7 @@
 "agq" = (/obj/structure/closet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun,/obj/item/ammo_casing/shotgun,/obj/item/weapon/gun/projectile/shotgun/doublebarrel{desc = "For keeping pesky varmints and bankers off your land."},/turf/simulated/floor/wood,/area/planets/Geminus/outdoor/north)
 "agr" = (/obj/structure/toilet{dir = 8},/turf/simulated/floor/wood,/area/planets/Geminus/outdoor/north)
 "ags" = (/obj/machinery/door/airlock{name = "105 Candlelight Drive"},/turf/simulated/floor/plating,/area/planets/Geminus/outdoor/north)
-"agt" = (/obj/machinery/door/airlock{name = "100 Candlelight Drive"},/turf/simulated/wall/tech,/area/planets/Geminus/outdoor/north)
+"agt" = (/obj/machinery/door/airlock{name = "100 Candlelight Drive"},/turf/simulated/floor/wood,/area/planets/Geminus/outdoor/north)
 "agu" = (/obj/machinery/light/colored/red{tag = "icon-red1 (EAST)"; icon_state = "red1"; dir = 4},/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/police_station)
 "agv" = (/obj/machinery/light/colored/red,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/police_station)
 "agw" = (/obj/random/hat,/turf/simulated/floor,/area/planets/Geminus/indoor/science)

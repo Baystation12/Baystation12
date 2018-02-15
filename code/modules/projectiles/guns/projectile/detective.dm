@@ -1,5 +1,4 @@
 /obj/item/weapon/gun/projectile/colt/detective
-	var/unique_name
 	var/datum/detective_gun_skin/unique_reskin
 	var/static/list/gun_options
 	can_rename = 0 //This handles weapon-renaming on it's own basis.

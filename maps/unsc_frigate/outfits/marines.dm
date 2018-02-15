@@ -3,6 +3,8 @@
 	name = "Marine Commanding Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
+	l_hand = /obj/item/squad_manager
+	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
@@ -15,6 +17,8 @@
 	name = "Marine Executive Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
+	l_hand = /obj/item/squad_manager
+	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
@@ -27,6 +31,8 @@
 	name = "Marine Squad Leader"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
+	l_hand = /obj/item/squad_manager
+	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
@@ -40,6 +46,7 @@
 	name = "Marine"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
 	head = /obj/item/clothing/head/helmet/marine
