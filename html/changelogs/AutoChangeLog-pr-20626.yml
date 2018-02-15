@@ -1,5 +1,0 @@
-author: "Techhead"
-delete-after: True
-changes: 
-  - rscadd: "Adds a new matchmaking relation, Childhood Friend. It'll only pick people from the same home system with the same approximate age."
-  - tweak: "Served Together now prefers to match people with others in the same branch."
