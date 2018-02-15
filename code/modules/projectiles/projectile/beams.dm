@@ -206,7 +206,10 @@
 /obj/item/projectile/beam/plasmacutter
 	name = "plasma arc"
 	icon_state = "omnilaser"
+	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	damage = 15
+	sharp = 1
+	edge = 1
 	damage_type = BURN
 	check_armour = "laser"
 	kill_count = 5

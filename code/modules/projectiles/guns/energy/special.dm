@@ -201,10 +201,8 @@ obj/item/weapon/gun/energy/staff/focus
 	item_state = "plasmacutter"
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = 3
-	force = 15
-	sharp = 1
-	edge = 1
+	w_class = ITEM_SIZE_NORMAL
+	force = 8
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 4000)
 	projectile_type = /obj/item/projectile/beam/plasmacutter
