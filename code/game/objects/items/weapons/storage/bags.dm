@@ -85,7 +85,7 @@
 	name = "cash bag"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "cashbag"
-	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
+	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front - whatever that is."
 	max_storage_space = 100
 	max_w_class = ITEM_SIZE_HUGE
 	w_class = ITEM_SIZE_SMALL
