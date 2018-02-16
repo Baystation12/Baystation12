@@ -1,5 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "The mounted plasma cutter found on hardsuits has been converted to a projectile weapon, like the stand-alone item."
-  - balance: "The hardsuit mounted plasma cutter's ammo capacity has been reduced to 4 from 10."
