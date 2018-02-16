@@ -1502,11 +1502,11 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/rig/plasmacutter
 	name = "Plasma Cutter"
-	desc = "A rock cutter that uses bursts of hot plasma, mountable on a RIG."
+	desc = "A rock cutter that projects bursts of hot plasma, mountable on a RIG."
 	id = "rig_plasmacutter"
-	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6)
+	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000, "plastic" = 1000, "gold" = 700, "phoron" = 500)
-	build_path = /obj/item/rig_module/device/plasmacutter
+	build_path = /obj/item/rig_module/mounted/plasmacutter
 	sort_string = "VCCAB"
 
 /datum/design/item/rig/orescanner
