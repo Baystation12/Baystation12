@@ -35,13 +35,13 @@
 /decl/hierarchy/supply_pack/materials/plasteel50
 	name = "50 plasteel sheets"
 	contains = list(/obj/item/stack/material/plasteel/fifty)
-	cost = 60
+	cost = 65
 	containername = "\improper Plasteel sheets crate"
 
 /decl/hierarchy/supply_pack/materials/ocp50
 	name = "50 osmium carbide plasteel sheets"
 	contains = list(/obj/item/stack/material/ocp/fifty)
-	cost = 50
+	cost = 80
 	containername = "\improper Osmium carbide plasteel sheets crate"
 
 // Material sheets (10 - Smaller amounts, less cost efficient)
@@ -60,7 +60,7 @@
 /decl/hierarchy/supply_pack/materials/ocp10
 	name = "10 osmium carbide plasteel sheets"
 	contains = list(/obj/item/stack/material/ocp/ten)
-	cost = 15
+	cost = 20
 	containername = "\improper Osmium carbide plasteel sheets crate"
 
 // Material sheets of expensive materials. These are very expensive and therefore pretty hard
