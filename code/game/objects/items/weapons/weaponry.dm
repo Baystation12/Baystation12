@@ -1,14 +1,14 @@
 /obj/item/weapon/nullrod
 	name = "null sceptre"
-	desc = "A small, plain rod of pure black obsidian. Some religious groups claim it disrupts and dampens the powers of paranormal phenomenae."
+	desc = "A sceptre of pure black obsidian capped at both ends with silver ferrules. Some religious groups claim it disrupts and dampens the powers of paranormal phenomenae."
 	icon_state = "nullrod"
 	item_state = "nullrod"
 	slot_flags = SLOT_BELT
-	force = 4
-	throw_speed = 2
-	throw_range = 6
-	throwforce = 3
-	w_class = ITEM_SIZE_SMALL
+	force = 10
+	throw_speed = 1
+	throw_range = 4
+	throwforce = 7
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
@@ -41,10 +41,17 @@
 /obj/item/weapon/nullrod/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity)
 		return
+
 	if(istype(A, /turf/simulated/wall/cult))
 		var/turf/simulated/wall/cult/W = A
-		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src] and it starts fizzling and shifting.</span>", "<span class='notice'>You touch \the [A] with \the [src] and it starts fizzling and shifting.</span>")
+		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
 		W.ChangeTurf(/turf/simulated/wall)
+
+	if(istype(A, /turf/simulated/floor/cult))
+		var/turf/simulated/floor/cult/F = A
+		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
+		F.ChangeTurf(/turf/simulated/floor)
+
 
 /obj/item/weapon/energy_net
 	name = "energy net"
