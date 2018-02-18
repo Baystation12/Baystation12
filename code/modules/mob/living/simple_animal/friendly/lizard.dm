@@ -16,3 +16,4 @@
 	response_harm   = "stomps on"
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
+	can_escape = 1 //very small
