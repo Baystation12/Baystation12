@@ -1,4 +1,0 @@
-author: "Techhead0"
-delete-after: True
-changes: 
-  - bugfix: "PDAs and Air Alarms should now detect exotic gases a little better. Phoron is now counted as an exotic gas for these purposes."
