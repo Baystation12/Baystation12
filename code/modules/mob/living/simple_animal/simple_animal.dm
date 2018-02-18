@@ -172,7 +172,11 @@
 	if(!Proj || Proj.nodamage)
 		return
 
-	adjustBruteLoss(Proj.damage)
+	var/damage = Proj.damage
+	if(Proj.damtype == STUN)
+		damage = (Proj.damage / 8)
+
+	adjustBruteLoss(damage)
 	return 0
 
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
@@ -229,12 +233,14 @@
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user]!</span>")
 
 	if(O.force <= resistance)
-		to_chat(user, "<span class='danger'>This weapon is ineffective, it does no damage.</span>")
+		to_chat(user, "<span class='danger'>This weapon is ineffective; it does no damage.</span>")
 		return 2
 
 	var/damage = O.force
 	if (O.damtype == PAIN)
 		damage = 0
+	if (O.damtype == STUN)
+		damage = (O.force / 8)
 	if(supernatural && istype(O,/obj/item/weapon/nullrod))
 		damage *= 2
 		purge = 3
