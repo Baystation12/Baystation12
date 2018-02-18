@@ -112,6 +112,7 @@
 	status_flags = 0
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
+	can_escape = 1
 
 /mob/living/simple_animal/construct/armoured/Life()
 	weakened = 0
@@ -218,6 +219,7 @@
 	var/energy = 0
 	var/max_energy = 1000
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
+	can_escape = 1
 
 ////////////////////////Harvester////////////////////////////////
 
