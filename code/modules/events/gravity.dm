@@ -18,7 +18,7 @@
 		gravity_is_on = 1
 
 		for(var/area/A in world)
-			if(A.z in GLOB.using_map.station_levels)
+			if((A.z in GLOB.using_map.station_levels) && initial(A.has_gravity))
 				A.gravitychange(gravity_is_on)
 
 		command_announcement.Announce("Gravity generators are again functioning within normal parameters. Sorry for any inconvenience.", "Gravity Restored", zlevels = affecting_z)
