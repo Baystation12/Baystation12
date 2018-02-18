@@ -1,20 +1,3 @@
-/datum/phenomena/animate
-	name = "Animate"
-	cost = 15
-	flags = PHENOMENA_NEAR_STRUCTURE
-	expected_type = /obj
-
-/datum/phenomena/animate/can_activate(var/atom/a)
-	if(!..())
-		return 0
-	return istype(a, /obj/structure) || istype(a, /obj/item)
-
-/datum/phenomena/animate/activate(var/atom/a)
-	..()
-	a.visible_message("\The [a] begins to shift and twist...")
-	var/mob/living/simple_animal/hostile/mimic/mimic = new(get_turf(a), a)
-	mimic.faction = linked.form.faction
-
 /datum/phenomena/warp
 	name = "Warp Body"
 	cost = 25

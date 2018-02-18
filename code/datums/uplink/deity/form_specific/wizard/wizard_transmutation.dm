@@ -27,12 +27,6 @@
 	item_cost = 10
 	path = /spell/aoe_turf/smoke
 
-/datum/uplink_item/deity/feat/phenomena/transmutation/animation
-	name = "Phenomena: Animation"
-	desc = "Gain the ability to transform objects into mimics."
-	item_cost = 75
-	path = /datum/phenomena/animate
-
 //Level 2
 /datum/uplink_item/deity/boon/single_charge/transmutation/knock
 	name = "Knock"
