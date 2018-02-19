@@ -27,6 +27,7 @@
 	var/ex_flash = 5
 
 	hud_state = "wiz_fireball"
+	cast_sound = 'sound/magic/fireball.ogg'
 
 /spell/targeted/projectile/dumbfire/fireball/prox_cast(var/list/targets, spell_holder)
 	for(var/mob/living/M in targets)

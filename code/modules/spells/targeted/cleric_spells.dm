@@ -13,6 +13,8 @@
 
 	cooldown_reduc = 50
 	hud_state = "heal_minor"
+	cast_sound = 'sound/magic/staff_healing.ogg'
+
 
 	amt_dam_brute = -15
 	amt_dam_fire = -5
@@ -107,6 +109,8 @@
 	amt_blood  = 280
 
 	hud_state = "gen_dissolve"
+	cast_sound = 'sound/magic/disintegrate.ogg'
+
 
 /spell/targeted/heal_target/sacrifice/empower_spell()
 	if(!..())

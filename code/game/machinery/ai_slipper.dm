@@ -1,7 +1,7 @@
 /obj/machinery/ai_slipper
 	name = "\improper AI Liquid Dispenser"
 	icon = 'icons/obj/device.dmi'
-	icon_state = "motion0"
+	icon_state = "ai-slipper"
 	anchored = 1.0
 	use_power = 1
 	idle_power_usage = 10
@@ -21,9 +21,9 @@
 
 /obj/machinery/ai_slipper/update_icon()
 	if (stat & NOPOWER || stat & BROKEN)
-		icon_state = "motion0"
+		icon_state = "[initial(icon_state)]1"
 	else
-		icon_state = disabled ? "motion0" : "motion3"
+		icon_state = initial(icon_state)
 
 /obj/machinery/ai_slipper/proc/setState(var/enabled, var/uses)
 	src.disabled = disabled

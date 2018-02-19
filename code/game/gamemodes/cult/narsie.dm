@@ -45,6 +45,7 @@ var/global/list/narsie_list = list()
 	if(announce)
 		to_world("<font size='15' color='red'><b>[uppertext(name)] HAS RISEN</b></font>")
 		sound_to(world, sound('sound/effects/wind/wind_5_1.ogg'))
+	sound_to(world, sound('sound/creatures/narsie_rises.ogg'))
 
 	narsie_spawn_animation()
 

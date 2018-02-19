@@ -6,6 +6,7 @@
 	edge = 0
 	armor_penetration = 50
 	atom_flags = ATOM_FLAG_NO_BLOOD
+	var/attack_verb_on
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	anchored = 1
@@ -14,6 +15,8 @@
 	active = 1
 	force = active_force
 	throwforce = active_throwforce
+	if(attack_verb_on)
+		attack_verb = attack_verb_on
 	sharp = 1
 	edge = 1
 	slot_flags |= SLOT_DENYPOCKET
@@ -30,6 +33,7 @@
 	sharp = initial(sharp)
 	edge = initial(edge)
 	slot_flags = initial(slot_flags)
+	attack_verb = initial(attack_verb)
 
 /obj/item/weapon/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
@@ -74,7 +78,7 @@
 	atom_flags = ATOM_FLAG_NO_BLOOD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4)
-	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
+	attack_verb = list("strikes", "chops", "slices", "rends", "dices", "cuts", "cleaves")
 	sharp = 1
 	edge = 1
 
@@ -91,7 +95,7 @@
 /*
  * Energy Sword
  */
-/obj/item/weapon/melee/energy/sword
+/obj/item/weapon/melee/energy/sword //This really aught to be a subtype of sword, rather than just sword.
 	color
 	name = "energy sword"
 	desc = "May the force be within you."
@@ -107,7 +111,9 @@
 	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	sharp = 1
 	edge = 1
+	attack_verb_on = list("strikes", "slashes", "stabs", "slices", "rends", "dices", "cuts", "cleaves")
 	var/blade_color
+	var/parrysound = 'sound/weapons/saberon.ogg'
 
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
@@ -133,8 +139,8 @@
 	if(!active)
 		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 	..()
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	icon_state = "sword[blade_color]"
+	if(blade_color)
+		icon_state = "sword[blade_color]"
 
 /obj/item/weapon/melee/energy/sword/deactivate(mob/living/user)
 	if(active)
@@ -150,7 +156,7 @@
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
-		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
+		playsound(user.loc, parrysound, 50, 1)
 		return 1
 	return 0
 
@@ -173,6 +179,49 @@
 	..()
 	icon_state = "bog_sword"
 
+/obj/item/weapon/melee/energy/sword/HF
+	name = "\improper H.F. sword"
+	desc = "An easily maintained high-tech sword. While high-frequency blades were initially created for use in the kitchen, this technology was rapidly adapted for cutting people as well. \
+	The weapon has been applied a non-stick coating, so all the gore just slides <i>right</i> off!"
+	description_antag = "A powerful melee weapon. Light enough to block with, and contains an ID locking mechanism. It will be nearly useless when used against you."
+	icon_state = "hfrequency0"
+	force = 5
+	active_force = 40
+	armor_penetration = 60
+	w_class = ITEM_SIZE_LARGE
+	slot_flags = SLOT_BELT
+	origin_tech = list(TECH_MAGNET = 5, TECH_ILLEGAL = 5)
+	attack_verb = list("strikes", "beats", "smacks", "hits", "whacks")
+	var/owner //the real_name of our original owner. Emagging and/or EMP will reset this.
+	parrysound = 'sound/weapons/parry.ogg'
+
+
+
+/obj/item/weapon/melee/energy/sword/HF/emp_act()
+	emag_act()
+/obj/item/weapon/melee/energy/sword/HF/emag_act()
+	deactivate()
+	audible_message("<span class = 'notice'>\the [src] buzzes oddly.</span>")
+	owner = null
+
+/obj/item/weapon/melee/energy/sword/HF/activate(mob/user)
+	if(active)
+		return
+	if(isnull(owner))
+		to_chat(user, "<span class = 'notice'>\the [src] registers you as its owner. It will not activate for anyone else.</span>")
+		owner = user.real_name
+	if(user.real_name != owner)
+		audible_message("\the [src] beeps once, then does nothing.")
+		return
+	else
+		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
+		icon_state = "hfrequency1"
+		..()
+
+/obj/item/weapon/melee/energy/sword/HF/dropped(var/mob/user)
+	..()
+	if(!istype(loc,/mob))
+		deactivate(user)
 
 /*
  *Energy Blade
@@ -193,7 +242,7 @@
 	throw_range = 1
 	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
 	atom_flags = ATOM_FLAG_NO_BLOOD
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	attack_verb = list("strikes", "slashes", "stabs", "slices", "rends", "rends", "dices", "cuts", "cleaves")
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system
 

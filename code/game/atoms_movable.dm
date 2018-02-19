@@ -105,7 +105,7 @@
 				if(A.density && !A.throwpass)	// **TODO: Better behaviour for windows which are dense, but shouldn't always stop movement
 					src.throw_impact(A,speed)
 
-/atom/movable/proc/throw_at(atom/target, range, speed, thrower)
+/atom/movable/proc/throw_at(atom/target, range, speed, thrower, var/spinoverride)
 	if(!target || !src)
 		return 0
 	if(target.z != src.z)
@@ -118,9 +118,13 @@
 	if(usr)
 		if(HULK in usr.mutations)
 			src.throwing = 2 // really strong throw!
+			spinoverride = TRUE
+	if(!(ishuman(src)) || spinoverride)
+		src.SpinAnimation(0.5 SECONDS, 0)
 
 	var/dist_x = abs(target.x - src.x)
 	var/dist_y = abs(target.y - src.y)
+
 
 	var/dx
 	if (target.x > src.x)

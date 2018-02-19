@@ -478,7 +478,6 @@ obj/random/closet/spawn_choices()
 				/obj/item/toy/snappop,
 				/obj/item/toy/sword,
 				/obj/item/toy/water_balloon,
-				/obj/item/toy/crossbow,
 				/obj/item/toy/blink,
 				/obj/item/weapon/reagent_containers/spray/waterflower,
 				/obj/item/toy/prize/ripley,

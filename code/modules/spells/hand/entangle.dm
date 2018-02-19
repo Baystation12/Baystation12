@@ -16,6 +16,7 @@
 	compatible_targets = list(/mob)
 
 	hud_state = "wiz_entangle"
+	cast_sound = 'sound/magic/staff_door.ogg'
 	show_message = " points towards the ground, causing plants to erupt"
 	var/datum/seed/seed
 

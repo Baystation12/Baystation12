@@ -319,6 +319,7 @@ Class Procs:
 						break
 			update_icon()
 			RefreshParts()
+			playsound(loc, 'sound/items/rped.ogg', 50, 1)
 	else
 		display_parts(user)
 	return 1

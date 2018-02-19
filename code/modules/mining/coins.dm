@@ -68,6 +68,7 @@
 	else ..()
 
 /obj/item/weapon/coin/attack_self(mob/user as mob)
+	playsound(loc, 'sound/items/coinflip.ogg', 55, 2)
 	var/result = rand(1, sides)
 	var/comment = ""
 	if(result == 1)

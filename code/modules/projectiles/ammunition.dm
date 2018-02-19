@@ -14,6 +14,7 @@
 	var/projectile_type					//The bullet type to create when New() is called
 	var/obj/item/projectile/BB = null	//The loaded bullet - make it so that the projectiles are created only when needed?
 	var/spent_icon = "s-casing-spent"
+	var/casing_sound = 'sound/weapons/casings/casing_drop.ogg' //Todo: Shotgun shell sound.
 
 /obj/item/ammo_casing/New()
 	..()
@@ -45,6 +46,12 @@
 			G.gunshot_residue = caliber
 		else
 			H.gunshot_residue = caliber
+
+/obj/item/ammo_casing/throw_impact()
+	..()
+	if(isturf(loc))
+		playsound(loc, casing_sound, 50, 1)
+
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isScrewdriver(W))

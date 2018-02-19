@@ -186,13 +186,13 @@ Please contact me on #coderbus IRC. ~Carn x
 
 	var/matrix/M = matrix()
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
-		M.Turn(90)
-		M.Scale(size_multiplier)
+		M.TurnTo(90)
 		M.Translate(1,-6)
-	else
-		M.Scale(size_multiplier)
+	else if(lying != lying_prev)
+		M.TurnTo(-90) //Matrix isn't maintained between runs of this proc, thus we have to turn ourselves 90, THEN animate.
 		M.Translate(0, 16*(size_multiplier-1))
-	transform = M
+	M.Scale(size_multiplier)
+	animate(src,transform = M, 2, easing = EASE_IN|EASE_OUT)
 
 var/global/list/damage_icon_parts = list()
 

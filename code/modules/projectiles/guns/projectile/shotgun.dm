@@ -16,6 +16,7 @@
 	one_hand_penalty = 2
 	var/recentpump = 0 // to prevent spammage
 	wielded_item_state = "gun_wielded"
+	load_sound = 'sound/weapons/shotguninsert.ogg'
 
 /obj/item/weapon/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
@@ -88,7 +89,7 @@
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
 	..(user, allow_dump=1)
 
-//this is largely hacky and bad :(	-Pete
+
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/attackby(var/obj/item/A as obj, mob/user as mob)
 	if(w_class > 3 && (istype(A, /obj/item/weapon/circular_saw) || istype(A, /obj/item/weapon/melee/energy) || istype(A, /obj/item/weapon/gun/energy/plasmacutter)))
 		to_chat(user, "<span class='notice'>You begin to shorten the barrel of \the [src].</span>")
@@ -98,15 +99,10 @@
 			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
 			return
 		if(do_after(user, 30, src))	//SHIT IS STEALTHY EYYYYY
-			icon_state = "sawnshotgun"
-			item_state = "sawnshotgun"
-			w_class = ITEM_SIZE_NORMAL
-			force = 5
-			one_hand_penalty = 0
-			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
-			slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.
-			SetName("sawn-off shotgun")
-			desc = "Omar's coming!"
+			var/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn/G = new /obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn(src.loc)
+			G.loaded = src.loaded
+			qdel(src)
+			user.put_in_hands(G)
 			to_chat(user, "<span class='warning'>You shorten the barrel of \the [src]!</span>")
 	else
 		..()

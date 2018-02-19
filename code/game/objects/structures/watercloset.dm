@@ -109,11 +109,16 @@
 	on = !on
 	update_icon()
 	if(on)
+		START_PROCESSING(SSobj, src)
+		playsound(loc, 'sound/machines/shower/shower_start.ogg', 50, 1)
 		if (M.loc == loc)
 			wash(M)
 			process_heat(M)
 		for (var/atom/movable/G in src.loc)
 			G.clean_blood()
+	else
+		playsound(loc, 'sound/machines/shower/shower_end.ogg', 50, 1)
+		STOP_PROCESSING(SSobj, src)
 
 /obj/machinery/shower/attackby(obj/item/I as obj, mob/user as mob)
 	if(I.type == /obj/item/device/analyzer)
@@ -138,7 +143,7 @@
 		if(temperature_settings[watertemp] < T20C)
 			return //no mist for cold water
 		if(!ismist)
-			spawn(50)
+			spawn(5 SECONDS)
 				if(src && on)
 					ismist = 1
 					mymist = new /obj/effect/mist(loc)
@@ -148,7 +153,7 @@
 	else if(ismist)
 		ismist = 1
 		mymist = new /obj/effect/mist(loc)
-		spawn(250)
+		spawn(25 SECONDS)
 			if(src && !on)
 				qdel(mymist)
 				mymist = null
@@ -249,8 +254,6 @@
 	reagents.splash(O, 10)
 
 /obj/machinery/shower/Process()
-	if(!on) return
-
 	for(var/thing in loc)
 		var/atom/movable/AM = thing
 		var/mob/living/L = thing
@@ -260,16 +263,19 @@
 				process_heat(L)
 	wash_floor()
 	reagents.add_reagent(/datum/reagent/water, reagents.get_free_space())
+	if(prob(20))
+		playsound(loc, "shower_sound", 50, 1)
 
 /obj/machinery/shower/proc/wash_floor()
+	set waitfor = FALSE
 	if(!ismist && is_washing)
 		return
 	is_washing = 1
 	var/turf/T = get_turf(src)
 	reagents.splash(T, reagents.total_volume)
 	T.clean(src)
-	spawn(100)
-		is_washing = 0
+	sleep(10 SECONDS)
+	is_washing = FALSE
 
 /obj/machinery/shower/proc/process_heat(mob/living/M)
 	if(!on || !istype(M)) return
@@ -284,6 +290,9 @@
 			to_chat(H, "<span class='danger'>The water is searing hot!</span>")
 		else if(temperature <= H.species.cold_level_1)
 			to_chat(H, "<span class='warning'>The water is freezing cold!</span>")
+/obj/machinery/shower/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
 
 /obj/item/weapon/bikehorn/rubberducky
 	name = "rubber ducky"

@@ -21,6 +21,7 @@
 		if(target.buckled)
 			target.buckled.unbuckle_mob()
 		spawn(0)
+
 			var/mobloc = get_turf(target.loc)
 			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( mobloc )
 			var/atom/movable/overlay/animation = new /atom/movable/overlay( mobloc )
@@ -68,9 +69,11 @@
 /spell/targeted/ethereal_jaunt/proc/jaunt_disappear(var/atom/movable/overlay/animation, var/mob/living/target)
 	animation.icon_state = "liquify"
 	flick("liquify",animation)
+	playsound(target.loc, 'sound/magic/ethereal_enter.ogg', 30)
 
 /spell/targeted/ethereal_jaunt/proc/jaunt_reappear(var/atom/movable/overlay/animation, var/mob/living/target)
 	flick("reappear",animation)
+	playsound(target.loc, 'sound/magic/ethereal_exit.ogg', 30)
 
 /spell/targeted/ethereal_jaunt/proc/jaunt_steam(var/mobloc)
 	var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()

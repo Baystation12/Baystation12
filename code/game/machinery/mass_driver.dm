@@ -42,7 +42,7 @@
 				break
 			use_power(500)
 			spawn( 0 )
-				O.throw_at(target, drive_range * power, power)
+				O.throw_at(target, drive_range * power, power, TRUE) //Override the spin check for the contents. It's a massdriver. Why wouldn't a human mob spin a bit?
 	flick("mass_driver1", src)
 	return
 

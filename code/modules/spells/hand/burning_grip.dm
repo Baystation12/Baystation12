@@ -9,6 +9,7 @@
 	show_message = " throws sparks from their hands"
 	spell_delay = 120
 	hud_state = "wiz_burn"
+	cast_sound = 'sound/magic/fireball.ogg'
 	compatible_targets = list(/mob/living/carbon/human)
 
 /spell/hand/burning_grip/valid_target(var/mob/living/L, var/mob/user)

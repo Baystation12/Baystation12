@@ -328,6 +328,7 @@ var/list/mining_floors = list()
 	if(istype(N))
 		N.overlay_detail = "asteroid[rand(0,9)]"
 		N.updateMineralOverlays(1)
+	playsound(src, 'sound/effects/break_stone.ogg', 50)
 
 /turf/simulated/mineral/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)
 
