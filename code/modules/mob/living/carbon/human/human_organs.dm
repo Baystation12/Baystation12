@@ -71,6 +71,11 @@
 	if (istype(buckled, /obj/structure/bed))
 		return
 
+	// Can't fall if nothing pulls you down
+	var/area/area = get_area(src)
+	if (!area.has_gravity())
+		return
+
 	var/limb_pain
 	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 		var/obj/item/organ/external/E = organs_by_name[limb_tag]
