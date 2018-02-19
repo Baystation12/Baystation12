@@ -19,7 +19,7 @@
 	var/accnr_hidden = "***[copytext("[affected_account.account_number]", -3)]"
 	var/message = "A brute force hack has been detected (in progress since [stationtime2text()]). The target of the attack is: Financial account #[accnr_hidden], \
 	without intervention this attack will succeed in approximately 10 minutes. Required intervention: temporary suspension of affected accounts until the attack has ceased. \
-	Notifications will be sent as updates occur.<br>"
+	Notifications will be sent as updates occur."
 	command_announcement.Announce(message, "[location_name()] Firewall Subroutines")
 
 
