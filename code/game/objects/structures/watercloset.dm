@@ -93,6 +93,7 @@
 /obj/machinery/shower/New()
 	..()
 	create_reagents(50)
+	STOP_PROCESSING(SSmachines, src)
 
 //add heat controls? when emagged, you can freeze to death in it?
 
@@ -109,7 +110,7 @@
 	on = !on
 	update_icon()
 	if(on)
-		START_PROCESSING(SSobj, src)
+		START_PROCESSING(SSmachines, src)
 		playsound(loc, 'sound/machines/shower/shower_start.ogg', 50, 1)
 		if (M.loc == loc)
 			wash(M)
@@ -118,7 +119,7 @@
 			G.clean_blood()
 	else
 		playsound(loc, 'sound/machines/shower/shower_end.ogg', 50, 1)
-		STOP_PROCESSING(SSobj, src)
+		STOP_PROCESSING(SSmachines, src)
 
 /obj/machinery/shower/attackby(obj/item/I as obj, mob/user as mob)
 	if(I.type == /obj/item/device/analyzer)
@@ -263,8 +264,7 @@
 				process_heat(L)
 	wash_floor()
 	reagents.add_reagent(/datum/reagent/water, reagents.get_free_space())
-	if(prob(20))
-		playsound(loc, "shower_sound", 50, 1)
+	playsound(loc, get_sfx("shower_sound"), 50, 1)
 
 /obj/machinery/shower/proc/wash_floor()
 	set waitfor = FALSE
@@ -291,7 +291,7 @@
 		else if(temperature <= H.species.cold_level_1)
 			to_chat(H, "<span class='warning'>The water is freezing cold!</span>")
 /obj/machinery/shower/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	STOP_PROCESSING(SSmachines, src)
 	. = ..()
 
 /obj/item/weapon/bikehorn/rubberducky

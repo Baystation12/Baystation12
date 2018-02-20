@@ -122,7 +122,7 @@
 		vent_icon += "off"
 
 	else
-		vent_icon += "[use_power() ? "[pump_direction ? "out" : "in"]" : "off"]"
+		vent_icon += "[use_power ? "[pump_direction ? "out" : "in"]" : "off"]"
 
 	overlays += icon_manager.get_atmos_icon("device", , , vent_icon)
 

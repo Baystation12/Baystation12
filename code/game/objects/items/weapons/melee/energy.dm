@@ -7,26 +7,42 @@
 	armor_penetration = 50
 	atom_flags = ATOM_FLAG_NO_BLOOD
 	var/attack_verb_on
+	var/active_state
+	var/active_sound = 'sound/weapons/saberon.ogg'
+	var/deactivate_sound = 'sound/weapons/saberoff.ogg'
+	var/lighthue
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	anchored = 1
 	if(active)
 		return
 	active = 1
-	force = active_force
-	throwforce = active_throwforce
+
+	if(active_state)
+		icon_state = active_state
+
 	if(attack_verb_on)
 		attack_verb = attack_verb_on
+
+	if(lighthue)
+		set_light(5, 1, lighthue)
+
+	force = active_force
+	throwforce = active_throwforce
 	sharp = 1
 	edge = 1
 	slot_flags |= SLOT_DENYPOCKET
-	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
+	playsound(user, active_sound, 50, 1)
+	to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
 	anchored = 0
 	if(!active)
 		return
-	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
+	icon_state = initial(icon_state)
+	if(lighthue)
+		set_light(0)
+	playsound(user, deactivate_sound, 50, 1)
 	active = 0
 	force = initial(force)
 	throwforce = initial(throwforce)
@@ -34,6 +50,7 @@
 	edge = initial(edge)
 	slot_flags = initial(slot_flags)
 	attack_verb = initial(attack_verb)
+	to_chat(user, "<span class='notice'>\The [src] deactivates!</span>")
 
 /obj/item/weapon/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
@@ -65,11 +82,9 @@
 	name = "energy axe"
 	desc = "An energised battle axe."
 	icon_state = "axe0"
-	//active_force = 150 //holy...
+	active_state = "axe1"
 	active_force = 60
 	active_throwforce = 35
-	//force = 40
-	//throwforce = 25
 	force = 20
 	throwforce = 10
 	throw_speed = 1
@@ -81,73 +96,12 @@
 	attack_verb = list("strikes", "chops", "slices", "rends", "dices", "cuts", "cleaves")
 	sharp = 1
 	edge = 1
+	lighthue = COLOR_CYAN
 
-/obj/item/weapon/melee/energy/axe/activate(mob/living/user)
-	..()
-	icon_state = "axe1"
-	to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 
-/obj/item/weapon/melee/energy/axe/deactivate(mob/living/user)
-	..()
-	icon_state = initial(icon_state)
-	to_chat(user, "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>")
-
-/*
- * Energy Sword
- */
-/obj/item/weapon/melee/energy/sword //This really aught to be a subtype of sword, rather than just sword.
-	color
-	name = "energy sword"
-	desc = "May the force be within you."
-	icon_state = "sword0"
-	active_force = 30
-	active_throwforce = 20
-	force = 3
-	throwforce = 5
-	throw_speed = 1
-	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
-	atom_flags = ATOM_FLAG_NO_BLOOD
-	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
-	sharp = 1
-	edge = 1
-	attack_verb_on = list("strikes", "slashes", "stabs", "slices", "rends", "dices", "cuts", "cleaves")
-	var/blade_color
+/obj/item/weapon/melee/energy/sword
+	name = "DO NOT SPAWN ME I AM A PLACEHOLDER"
 	var/parrysound = 'sound/weapons/saberon.ogg'
-
-/obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
-	..()
-	if(!istype(loc,/mob))
-		deactivate(user)
-
-/obj/item/weapon/melee/energy/sword/New()
-	blade_color = pick("red","blue","green","purple")
-
-/obj/item/weapon/melee/energy/sword/green/New()
-	blade_color = "green"
-
-/obj/item/weapon/melee/energy/sword/red/New()
-	blade_color = "red"
-
-/obj/item/weapon/melee/energy/sword/blue/New()
-	blade_color = "blue"
-
-/obj/item/weapon/melee/energy/sword/purple/New()
-	blade_color = "purple"
-
-/obj/item/weapon/melee/energy/sword/activate(mob/living/user)
-	if(!active)
-		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
-	..()
-	if(blade_color)
-		icon_state = "sword[blade_color]"
-
-/obj/item/weapon/melee/energy/sword/deactivate(mob/living/user)
-	if(active)
-		to_chat(user, "<span class='notice'>\The [src] deactivates!</span>")
-	..()
-	attack_verb = list()
-	icon_state = initial(icon_state)
 
 /obj/item/weapon/melee/energy/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
@@ -164,20 +118,14 @@
 	name = "energy cutlass"
 	desc = "Arrrr matey."
 	icon_state = "cutlass0"
-
-/obj/item/weapon/melee/energy/sword/pirate/activate(mob/living/user)
-	..()
-	icon_state = "cutlass1"
-
+	active_state = "cutlass1"
+	lighthue = COLOR_RED
 
 /obj/item/weapon/melee/energy/sword/bogsword
 	name = "alien sword"
 	desc = "A strange, strange energy sword."
 	icon_state = "sword0"
-
-/obj/item/weapon/melee/energy/sword/bogswrd/activate(mob/living/user)
-	..()
-	icon_state = "bog_sword"
+	active_state = "bog_sword"
 
 /obj/item/weapon/melee/energy/sword/HF
 	name = "\improper H.F. sword"
@@ -185,6 +133,7 @@
 	The weapon has been applied a non-stick coating, so all the gore just slides <i>right</i> off!"
 	description_antag = "A powerful melee weapon. Light enough to block with, and contains an ID locking mechanism. It will be nearly useless when used against you."
 	icon_state = "hfrequency0"
+	active_state = "hfrequency1"
 	force = 5
 	active_force = 40
 	armor_penetration = 60
@@ -194,7 +143,8 @@
 	attack_verb = list("strikes", "beats", "smacks", "hits", "whacks")
 	var/owner //the real_name of our original owner. Emagging and/or EMP will reset this.
 	parrysound = 'sound/weapons/parry.ogg'
-
+	active_sound = 'sound/weapons/HFon.ogg'
+	deactivate_sound = 'sound/weapons/HFoff.ogg'
 
 
 /obj/item/weapon/melee/energy/sword/HF/emp_act()
@@ -214,8 +164,6 @@
 		audible_message("\the [src] beeps once, then does nothing.")
 		return
 	else
-		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
-		icon_state = "hfrequency1"
 		..()
 
 /obj/item/weapon/melee/energy/sword/HF/dropped(var/mob/user)
@@ -245,6 +193,9 @@
 	attack_verb = list("strikes", "slashes", "stabs", "slices", "rends", "rends", "dices", "cuts", "cleaves")
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system
+	light_range = 1
+	light_power = 5
+	light_color = COLOR_GREEN
 
 /obj/item/weapon/melee/energy/blade/New()
 	..()
@@ -285,3 +236,59 @@
 			host.embedded -= src
 			host.drop_from_inventory(src)
 		spawn(1) if(src) qdel(src)
+
+/*
+ * Energy Sword
+ */
+/obj/item/weapon/melee/energy/sword/saber
+	color
+	name = "energy sword"
+	desc = "A blade comprised of entangled photons in a crystalline structure. The first of its kind, these photon crystal\
+	implements were swiftly adopted for the use in medicine. Famous for its ease of concealment,\"energy\" blades have been considered contraband since the year 2086."
+	icon_state = "sword0"
+	active_force = 30
+	active_throwforce = 20
+	force = 3
+	throwforce = 5
+	throw_speed = 1
+	throw_range = 5
+	w_class = ITEM_SIZE_SMALL
+	atom_flags = ATOM_FLAG_NO_BLOOD
+	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
+	sharp = 1
+	edge = 1
+	attack_verb_on = list("strikes", "slashes", "stabs", "slices", "rends", "dices", "cuts", "cleaves")
+	var/blade_color
+
+/obj/item/weapon/melee/energy/sword/saber/activate(mob/living/user)
+	..()
+	if(blade_color)
+		icon_state = "sword[blade_color]"
+
+/obj/item/weapon/melee/energy/sword/saber/dropped(var/mob/user)
+	..()
+	if(!istype(loc,/mob))
+		deactivate(user)
+
+/obj/item/weapon/melee/energy/sword/saber/Initialize()
+	. = ..()
+	if(isnull(blade_color))
+		var/obj/item/weapon/melee/energy/sword/saber/myproduct = pick(subtypesof(src))
+		blade_color = initial(myproduct.blade_color)
+		lighthue = initial(myproduct.lighthue)
+
+/obj/item/weapon/melee/energy/sword/saber/green
+	blade_color = "green"
+	lighthue = COLOR_GREEN //Todo: Light colors.
+
+/obj/item/weapon/melee/energy/sword/saber/red
+	blade_color = "red"
+	lighthue = COLOR_RED_LIGHT
+
+/obj/item/weapon/melee/energy/sword/saber/blue
+	blade_color = "blue"
+	lighthue = COLOR_BLUE_LIGHT
+
+/obj/item/weapon/melee/energy/sword/saber/purple
+	blade_color = "purple"
+	lighthue = COLOR_PURPLE //Todo: Light colors.

@@ -1,3 +1,7 @@
+/obj/item/weapon/gun/projectile/shotgun
+	load_sound = 'sound/weapons/shotguninsert.ogg'
+	unload_sound = 'sound/weapons/bulletinsert.ogg'
+
 /obj/item/weapon/gun/projectile/shotgun/pump
 	name = "shotgun"
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
@@ -16,7 +20,6 @@
 	one_hand_penalty = 2
 	var/recentpump = 0 // to prevent spammage
 	wielded_item_state = "gun_wielded"
-	load_sound = 'sound/weapons/shotguninsert.ogg'
 
 /obj/item/weapon/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
@@ -32,7 +35,7 @@
 	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
 
 	if(chambered)//We have a shell in the chamber
-		chambered.loc = get_turf(src)//Eject casing
+		handle_ejection(chambered, 2, 2)
 		chambered = null
 
 	if(loaded.len)
@@ -61,6 +64,7 @@
 	//In principle someone could make a speedloader for it, so it makes sense.
 	load_method = SINGLE_CASING|SPEEDLOADER
 	handle_casings = CYCLE_CASINGS
+	ejection_dir = SOUTHWEST
 	max_shells = 2
 	w_class = ITEM_SIZE_HUGE
 	force = 10
@@ -98,7 +102,7 @@
 				Fire(user, user)	//will this work? //it will. we call it twice, for twice the FUN
 			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
 			return
-		if(do_after(user, 30, src))	//SHIT IS STEALTHY EYYYYY
+		if(do_after(user, 30, src))
 			var/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn/G = new /obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn(src.loc)
 			G.loaded = src.loaded
 			qdel(src)

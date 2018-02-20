@@ -56,6 +56,8 @@
 	var/move_delay = 1
 	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/load_sound = 'sound/weapons/empty.ogg'
+	var/single_load_sound = 'sound/weapons/bulletinsert.ogg'
+	var/unload_sound = 'sound/weapons/empty.ogg'
 	var/fire_sound_text = "gunshot"
 	var/fire_anim = null
 	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
@@ -230,7 +232,7 @@
 		user.visible_message("*click click*", "<span class='danger'>*click*</span>")
 	else
 		src.visible_message("*click click*")
-	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
+	playsound(get_turf(src), 'sound/weapons/empty.ogg', 100, 1)
 
 //called after successfully firing
 /obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
@@ -379,9 +381,9 @@
 		user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
 		var/shot_sound = in_chamber.fire_sound? in_chamber.fire_sound : fire_sound
 		if(silenced)
-			playsound(user, shot_sound, 10, 1)
+			playsound(get_turf(src), shot_sound, 10, 1)
 		else
-			playsound(user, shot_sound, 50, 1)
+			playsound(get_turf(src), shot_sound, 50, 1)
 		if(istype(in_chamber, /obj/item/projectile/beam/lastertag))
 			user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 			mouthshoot = 0

@@ -4,6 +4,7 @@
 	icon_state = "revolver"
 	item_state = "revolver"
 	caliber = "357"
+	ejection_dir = null
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	handle_casings = CYCLE_CASINGS
 	max_shells = 6

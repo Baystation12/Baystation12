@@ -17,7 +17,7 @@
 /datum/uplink_item/item/visible_weapons/energy_sword
 	name = "Energy Sword"
 	item_cost = 32
-	path = /obj/item/weapon/melee/energy/sword
+	path = /obj/item/weapon/melee/energy/sword/saber
 
 /datum/uplink_item/item/visible_weapons/g9mm
 	name = "Silenced Holdout Pistol"

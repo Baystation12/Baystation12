@@ -86,9 +86,14 @@
 	qdel(src)
 
 /obj/item/weapon/plastique/proc/run_timer() //Basically exists so the C4 will beep when running. Better idea than putting sleeps in attackby.
-	for(var/T = timer*10, T <= 0, T--)
+	var/T = timer
+	while(T > 0)
 		sleep(1 SECOND)
-		playsound(loc, 'sound/items/timer.ogg', 50, 1)
+		if(target)
+			playsound(target, 'sound/items/timer.ogg', 50)
+		else
+			playsound(loc, 'sound/items/timer.ogg', 50)
+		T--
 	explode(get_turf(target))
 
 /obj/item/weapon/plastique/attack(mob/M as mob, mob/user as mob, def_zone)

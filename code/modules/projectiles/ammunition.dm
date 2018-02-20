@@ -47,11 +47,30 @@
 		else
 			H.gunshot_residue = caliber
 
+/obj/item/ammo_casing/throw_at(var/atom/target)
+	..()
+	if(isturf(target))
+
+		var/Xplusbound = 34
+		var/Yplusbound = 34
+
+		var/Xminusbound = -34
+		var/Yminusbound = -34
+
+//Add diagonals if it winds up mattering.
+		if(isturf(get_step(src, NORTH)))
+			Yplusbound = 15
+		if(isturf(get_step(src, EAST)))
+			Xplusbound = 15
+		if(isturf(get_step(src, SOUTH)))
+			Yminusbound = -15
+		if(isturf(get_step(src, WEST)))
+			Xminusbound = -15
+		animate(src, pixel_x = rand(Xminusbound,Xplusbound), pixel_y = rand(Yminusbound,Yplusbound), time = 5, easing = BOUNCE_EASING, flags = ANIMATION_PARALLEL )
+
 /obj/item/ammo_casing/throw_impact()
 	..()
-	if(isturf(loc))
-		playsound(loc, casing_sound, 50, 1)
-
+	playsound(loc, casing_sound, 50, 5)
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
@@ -148,10 +167,11 @@
 	if(!stored_ammo.len)
 		to_chat(user, "<span class='notice'>[src] is already empty!</span>")
 		return
-	to_chat(user, "<span class='notice'>You empty [src].</span>")
+	to_chat(user, "<span class='notice'>You empty the contents of \the [src] onto \the [get_turf(src)].</span>")
 	for(var/obj/item/ammo_casing/C in stored_ammo)
 		C.forceMove(user.loc)
 		C.set_dir(pick(GLOB.alldirs))
+		C.throw_at_random(maxrange = 1, speed = 2)
 	stored_ammo.Cut()
 	update_icon()
 

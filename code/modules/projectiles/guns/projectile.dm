@@ -17,6 +17,7 @@
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
 	var/load_method = SINGLE_CASING|SPEEDLOADER //1 = Single shells, 2 = box or quick loader, 3 = magazine
 	var/obj/item/ammo_casing/chambered = null
+	var/ejection_dir = WEST //Well, technically "left". This is used to keep the direction the gun ejects from fairly consistent. For whatever reason, you will need to input a dir opposite to what you want.
 
 	//For SINGLE_CASING or SPEEDLOADER guns
 	var/max_shells = 0			//the number of casings that will fit inside
@@ -82,9 +83,10 @@
 	if (!chambered) return
 
 	switch(handle_casings)
+
 		if(EJECT_CASINGS) //eject casing onto ground.
-			chambered.loc = get_turf(src)
-			playsound(chambered.loc, chambered.casing_sound, 50, 1)
+			handle_ejection(chambered, 2, 2)
+
 		if(CYCLE_CASINGS) //cycle the casing back to the end.
 			if(ammo_magazine)
 				ammo_magazine.stored_ammo += chambered
@@ -116,7 +118,7 @@
 				AM.loc = src
 				ammo_magazine = AM
 				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
-				playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+				playsound(get_turf(src), load_sound, 50, 1)
 			if(SPEEDLOADER)
 				if(loaded.len >= max_shells)
 					to_chat(user, "<span class='warning'>[src] is full!</span>")
@@ -132,7 +134,7 @@
 						count++
 				if(count)
 					user.visible_message("[user] reloads [src].", "<span class='notice'>You load [count] round\s into [src].</span>")
-					playsound(src.loc, load_sound, 50, 1)
+					playsound(get_turf(src), single_load_sound, 50, 1)
 		AM.update_icon()
 	else if(istype(A, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = A
@@ -146,7 +148,7 @@
 		C.loc = src
 		loaded.Insert(1, C) //add to the head of the list
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
-		playsound(src.loc, load_sound, 50, 1)
+		playsound(get_turf(src), load_sound, 50, 1)
 
 	update_icon()
 	return TRUE
@@ -158,28 +160,29 @@
 		if(!do_after(user, 4, src))
 			return
 		is_jammed = 0
-		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+		playsound(get_turf(src), 'sound/weapons/flipblade.ogg', 50, 1)
 	if(ammo_magazine)
 		user.put_in_hands(ammo_magazine)
 		user.visible_message("[user] removes [ammo_magazine] from [src].", "<span class='notice'>You remove [ammo_magazine] from [src].</span>")
-		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
+		playsound(get_turf(src), unload_sound, 50, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
 	else if(loaded.len)
 		//presumably, if it can be speed-loaded, it can be speed-unloaded.
 		if(allow_dump && (load_method & SPEEDLOADER))
 			var/count = 0
-			var/turf/T = get_turf(user)
+			var/turf/T = get_turf(src)
 			if(T)
 				for(var/obj/item/ammo_casing/C in loaded)
-					C.loc = T
-					playsound(C.loc, C.casing_sound, 30, 1) //Arbitrarily quieter because it'll be playing several times.
+					sleep(rand(0, 0.2)) //So there's some slight delay rather than all the sounds playing at once. This is technically a perfect random operation due to how floats behave as sleeps.
+					handle_ejection(C, range = 2, speed = 1)
 					count++
 				loaded.Cut()
 			if(count)
 				user.visible_message("[user] unloads [src].", "<span class='notice'>You unload [count] round\s from [src].</span>")
 		else if(load_method & SINGLE_CASING)
 			var/obj/item/ammo_casing/C = loaded[loaded.len]
+			playsound(src.loc, unload_sound, 50, 1)
 			loaded.len--
 			user.put_in_hands(C)
 			user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
@@ -234,6 +237,15 @@
 	if(chambered)
 		bullets += 1
 	return bullets
+
+/obj/item/weapon/gun/projectile/proc/handle_ejection(var/atom/movable/AM, var/range, var/speed)
+	var/ejection_target
+	if(!isnull(ejection_dir))
+		ejection_target = get_step(get_turf(loc), turn(loc.dir, dir2angle(ejection_dir)))
+	else
+		ejection_target = get_turf(src)
+	AM.loc = get_turf(AM)
+	AM.throw_at(ejection_target, range, speed)
 
 /* Unneeded -- so far.
 //in case the weapon has firemodes and can't unload using attack_hand()

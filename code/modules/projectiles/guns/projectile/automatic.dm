@@ -249,10 +249,10 @@
 
 	if(cover_open)
 		to_chat(user, "<span class='notice'>You open [src]'s cover.</span>")
-		playsound(src.loc, 'sound/weapons/sawopen.ogg')
+		playsound(get_turf(src), 'sound/weapons/sawopen.ogg', 50)
 	else
 		to_chat(user, "<span class='notice'>You close [src]'s cover.</span>")
-		playsound(src.loc, 'sound/weapons/sawclose.ogg')
+		playsound(get_turf(src), 'sound/weapons/sawclose.ogg', 50)
 
 	update_icon()
 

@@ -54,11 +54,11 @@ GLOBAL_LIST_INIT(button_sound,list('sound/machines/button1.ogg','sound/machines/
 GLOBAL_LIST_INIT(chop_sound,list('sound/weapons/chop1.ogg','sound/weapons/chop2.ogg','sound/weapons/chop3.ogg'))
 GLOBAL_LIST_INIT(flop_sound, list('sound/effects/bodyfall1.ogg','sound/effects/bodyfall2.ogg','sound/effects/bodyfall3.ogg','sound/effects/bodyfall4.ogg'))
 GLOBAL_LIST_INIT(generic_gunshot, list('sound/weapons/gunshot/pistolshot.ogg', 'sound/weapons/gunshot/pistolshot2.ogg', 'sound/weapons/gunshot/pistolshot3.ogg', 'sound/weapons/gunshot/pistolshot4.ogg'))
-GLOBAL_LIST_INIT(shower_sound, list('sound/machines/shower/shower_mid1.ogg', 'sound/machines/shower/shower_mid2.ogg', 'sound/machines/shower/shower_mid3.ogg'))
+GLOBAL_LIST_INIT(shower_sound, list('sound/machines/shower/shower_mid1.ogg', 'sound/machines/shower/shower_mid3.ogg'))
 GLOBAL_LIST_INIT(generator_sound, list('sound/machines/generator/generator_mid1.ogg', 'sound/machines/generator/generator_mid2.ogg', 'sound/machines/generator/generator_mid3.ogg'))
 GLOBAL_LIST_INIT(bullet_flyby, list('sound/weapons/flyby/bulletflyby.ogg', 'sound/weapons/flyby/bulletflyby2.ogg', 'sound/weapons/flyby/bulletflyby3.ogg'))
 
-/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency, var/is_ambiance = 0)
+/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num,  falloff, var/is_global, var/frequency, var/is_ambiance = 0)
 
 	soundin = get_sfx(soundin) // same sound for everyone
 
