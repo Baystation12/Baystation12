@@ -61,8 +61,16 @@
 			return global.SSopen_space;
 		if("SSprocessing")
 			return global.SSprocessing;
+		if("SSskybox")
+			return global.SSskybox;
+		if("SSsun")
+			return global.SSsun;
 		if("SSvines")
 			return global.SSvines;
+		if("SSwireless")
+			return global.SSwireless;
+		if("SSxenoarch")
+			return global.SSxenoarch;
 		if("Tier1Runes")
 			return global.Tier1Runes;
 		if("Tier2Runes")
@@ -195,8 +203,6 @@
 			return global.ascii_reset;
 		if("ascii_yellow")
 			return global.ascii_yellow;
-		if("ashtray_cache")
-			return global.ashtray_cache;
 		if("asset_cache")
 			return global.asset_cache;
 		if("asset_datums")
@@ -377,12 +383,6 @@
 			return global.explosion_in_progress;
 		if("explosion_turfs")
 			return global.explosion_turfs;
-		if("facial_hair_styles_female_list")
-			return global.facial_hair_styles_female_list;
-		if("facial_hair_styles_list")
-			return global.facial_hair_styles_list;
-		if("facial_hair_styles_male_list")
-			return global.facial_hair_styles_male_list;
 		if("failed_db_connections")
 			return global.failed_db_connections;
 		if("failed_old_db_connections")
@@ -459,12 +459,6 @@
 			return global.gzn_check;
 		if("hadevent")
 			return global.hadevent;
-		if("hair_styles_female_list")
-			return global.hair_styles_female_list;
-		if("hair_styles_list")
-			return global.hair_styles_list;
-		if("hair_styles_male_list")
-			return global.hair_styles_male_list;
 		if("hazard_overlays")
 			return global.hazard_overlays;
 		if("hidden_skill_types")
@@ -541,8 +535,6 @@
 			return global.lighting_update_overlays_old;
 		if("limb_icon_cache")
 			return global.limb_icon_cache;
-		if("list_of_ais")
-			return global.list_of_ais;
 		if("loadout_categories")
 			return global.loadout_categories;
 		if("lobby_image")
@@ -713,8 +705,6 @@
 			return global.playable_species;
 		if("point_source_descriptions")
 			return global.point_source_descriptions;
-		if("points_of_interest")
-			return global.points_of_interest;
 		if("possible_cable_coil_colours")
 			return global.possible_cable_coil_colours;
 		if("possible_changeling_IDs")
@@ -1033,8 +1023,6 @@
 			return global.whitelisted_species;
 		if("wireColours")
 			return global.wireColours;
-		if("wirelessProcess")
-			return global.wirelessProcess;
 		if("wizards")
 			return global.wizards;
 		if("world_topic_spam_protect_ip")
@@ -1116,8 +1104,16 @@
 			global.SSopen_space=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
+		if("SSskybox")
+			global.SSskybox=newval;
+		if("SSsun")
+			global.SSsun=newval;
 		if("SSvines")
 			global.SSvines=newval;
+		if("SSwireless")
+			global.SSwireless=newval;
+		if("SSxenoarch")
+			global.SSxenoarch=newval;
 		if("Tier1Runes")
 			global.Tier1Runes=newval;
 		if("Tier2Runes")
@@ -1250,8 +1246,6 @@
 			global.ascii_reset=newval;
 		if("ascii_yellow")
 			global.ascii_yellow=newval;
-		if("ashtray_cache")
-			global.ashtray_cache=newval;
 		if("asset_cache")
 			global.asset_cache=newval;
 		if("asset_datums")
@@ -1432,12 +1426,6 @@
 			global.explosion_in_progress=newval;
 		if("explosion_turfs")
 			global.explosion_turfs=newval;
-		if("facial_hair_styles_female_list")
-			global.facial_hair_styles_female_list=newval;
-		if("facial_hair_styles_list")
-			global.facial_hair_styles_list=newval;
-		if("facial_hair_styles_male_list")
-			global.facial_hair_styles_male_list=newval;
 		if("failed_db_connections")
 			global.failed_db_connections=newval;
 		if("failed_old_db_connections")
@@ -1514,12 +1502,6 @@
 			global.gzn_check=newval;
 		if("hadevent")
 			global.hadevent=newval;
-		if("hair_styles_female_list")
-			global.hair_styles_female_list=newval;
-		if("hair_styles_list")
-			global.hair_styles_list=newval;
-		if("hair_styles_male_list")
-			global.hair_styles_male_list=newval;
 		if("hazard_overlays")
 			global.hazard_overlays=newval;
 		if("hidden_skill_types")
@@ -1596,8 +1578,6 @@
 			global.lighting_update_overlays_old=newval;
 		if("limb_icon_cache")
 			global.limb_icon_cache=newval;
-		if("list_of_ais")
-			global.list_of_ais=newval;
 		if("loadout_categories")
 			global.loadout_categories=newval;
 		if("lobby_image")
@@ -1768,8 +1748,6 @@
 			global.playable_species=newval;
 		if("point_source_descriptions")
 			global.point_source_descriptions=newval;
-		if("points_of_interest")
-			global.points_of_interest=newval;
 		if("possible_cable_coil_colours")
 			global.possible_cable_coil_colours=newval;
 		if("possible_changeling_IDs")
@@ -2088,8 +2066,6 @@
 			global.whitelisted_species=newval;
 		if("wireColours")
 			global.wireColours=newval;
-		if("wirelessProcess")
-			global.wirelessProcess=newval;
 		if("wizards")
 			global.wizards=newval;
 		if("world_topic_spam_protect_ip")
@@ -2140,7 +2116,11 @@
 	"SSobj",
 	"SSopen_space",
 	"SSprocessing",
+	"SSskybox",
+	"SSsun",
 	"SSvines",
+	"SSwireless",
+	"SSxenoarch",
 	"Tier1Runes",
 	"Tier2Runes",
 	"Tier3Runes",
@@ -2207,7 +2187,6 @@
 	"ascii_red",
 	"ascii_reset",
 	"ascii_yellow",
-	"ashtray_cache",
 	"asset_cache",
 	"asset_datums",
 	"assigned",
@@ -2298,9 +2277,6 @@
 	"exclude_jobs",
 	"explosion_in_progress",
 	"explosion_turfs",
-	"facial_hair_styles_female_list",
-	"facial_hair_styles_list",
-	"facial_hair_styles_male_list",
 	"failed_db_connections",
 	"failed_old_db_connections",
 	"failed_unit_tests",
@@ -2339,9 +2315,6 @@
 	"gyrotrons",
 	"gzn_check",
 	"hadevent",
-	"hair_styles_female_list",
-	"hair_styles_list",
-	"hair_styles_male_list",
 	"hazard_overlays",
 	"hidden_skill_types",
 	"hivemind_bank",
@@ -2380,7 +2353,6 @@
 	"lighting_update_overlays",
 	"lighting_update_overlays_old",
 	"limb_icon_cache",
-	"list_of_ais",
 	"loadout_categories",
 	"lobby_image",
 	"log_end",
@@ -2466,7 +2438,6 @@
 	"plant_seed_sprites",
 	"playable_species",
 	"point_source_descriptions",
-	"points_of_interest",
 	"possible_cable_coil_colours",
 	"possible_changeling_IDs",
 	"poster_designs",
@@ -2626,7 +2597,6 @@
 	"whitelist",
 	"whitelisted_species",
 	"wireColours",
-	"wirelessProcess",
 	"wizards",
 	"world_topic_spam_protect_ip",
 	"world_topic_spam_protect_time",

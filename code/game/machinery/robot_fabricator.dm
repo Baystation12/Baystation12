@@ -65,7 +65,6 @@ Please wait until completion...</TT><BR>
 		return
 
 	usr.set_machine(src)
-	src.add_fingerprint(usr)
 
 	if (href_list["make"])
 		if (!src.operating)

@@ -3,29 +3,40 @@
 	icon = 'icons/turf/space.dmi'
 
 	name = "\proper space"
-	icon_state = "0"
+	icon_state = "white"
 	dynamic_lighting = 0
-
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
-	var/keep_sprite = 0
-//	heat_capacity = 700000 No.
+	var/static/list/dust_cache
+
+/turf/space/proc/build_dust_cache()
+	LAZYINITLIST(dust_cache)
+	for (var/i in 0 to 25)
+		var/image/im = image('icons/turf/space_dust.dmi',"[i]")
+		im.plane = DUST_PLANE
+		im.alpha = 80
+		im.blend_mode = BLEND_ADD
+		dust_cache["[i]"] = im
+
 
 /turf/space/Initialize()
 	. = ..()
-	if((icon_state == "0") && (!keep_sprite))
-		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
 	update_starlight()
+	if (!dust_cache)
+		build_dust_cache()
+	overlays += dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
+
 	if(!HasBelow(z))
 		return
 	var/turf/below = GetBelow(src)
+
 	if(istype(below, /turf/space))
 		return
 	var/area/A = below.loc
-	if(A.flags & AREA_EXTERNAL)
+
+	if(A.area_flags & AREA_FLAG_EXTERNAL)
 		return
-	if(!below.density && istype(below.loc, /area/space))
-		return
+
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
 
@@ -212,4 +223,3 @@
 /turf/space/bluespace
 	name = "bluespace"
 	icon_state = "bluespace"
-	keep_sprite = 1

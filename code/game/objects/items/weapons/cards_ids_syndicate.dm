@@ -181,7 +181,7 @@
 					electronic_warfare = initial(electronic_warfare)
 					fingerprint_hash = initial(fingerprint_hash)
 					icon_state = initial(icon_state)
-					name = initial(name)
+					SetName(initial(name))
 					registered_name = initial(registered_name)
 					unset_registered_user()
 					sex = initial(sex)

@@ -40,6 +40,10 @@
 		to_chat(user, "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>")
 		qdel(src)
 
+	else if(istype(W, /obj/item/weapon/gun/launcher/money))
+		var/obj/item/weapon/gun/launcher/money/L = W
+		L.absorb_cash(src, user)
+
 /obj/item/weapon/spacecash/proc/getMoneyImages()
 	if(icon_state)
 		return list(icon_state)
@@ -78,9 +82,9 @@
 
 	src.desc = "They are worth [worth] Thalers."
 	if(worth in denominations)
-		src.name = "[worth] Thaler"
+		src.SetName("[worth] Thaler")
 	else
-		src.name = "pile of [worth] thalers"
+		src.SetName("pile of [worth] thalers")
 
 	if(overlays.len <= 2)
 		w_class = ITEM_SIZE_TINY

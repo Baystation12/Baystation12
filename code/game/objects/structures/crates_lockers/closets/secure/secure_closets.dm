@@ -8,7 +8,6 @@
 	icon_state = "secure1"
 	icon_closed = "secure"
 	icon_locked = "secure1"
-	icon_broken = "securebroken"
 	icon_off = "secureoff"
 
 	icon_opened = "secureopen"

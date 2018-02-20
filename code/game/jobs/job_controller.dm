@@ -359,7 +359,7 @@ var/global/datum/controller/occupations/job_master
 
 			//Equip job items.
 			job.setup_account(H)
-			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
+			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
 			job.apply_fingerprints(H)
 
 			// Equip custom gear loadout, replacing any job items

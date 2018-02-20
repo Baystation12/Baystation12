@@ -68,7 +68,7 @@
 		to_chat(usr, "Bad map file: [map]")
 		return
 
-	var/datum/map_template/M = new(map, "[map]")
+	var/datum/map_template/M = new(list(map), "[map]")
 	if(M.preload_size())
 		to_chat(usr, "Map template '[map]' ready to place ([M.width]x[M.height])")
 		SSmapping.map_templates[M.name] = M

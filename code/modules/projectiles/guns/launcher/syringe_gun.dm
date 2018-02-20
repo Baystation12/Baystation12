@@ -5,7 +5,7 @@
 	icon_state = "syringe-cartridge"
 	var/icon_flight = "syringe-cartridge-flight" //so it doesn't look so weird when shot
 	matter = list(DEFAULT_WALL_MATERIAL = 125, "glass" = 375)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 3
 	force = 3
@@ -34,7 +34,7 @@
 		user.put_in_hands(syringe)
 		syringe = null
 		sharp = initial(sharp)
-		name = initial(name)
+		SetName(initial(name))
 		update_icon()
 
 /obj/item/weapon/syringe_cartridge/proc/prime()

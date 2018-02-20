@@ -6,7 +6,7 @@
 	icon_state = "health"
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/device/antibody_scanner/attack(mob/M as mob, mob/user as mob)
 	if(!istype(M,/mob/living/carbon/))
@@ -71,13 +71,10 @@
 	if(basic_info)
 		to_chat(user, "[basic_info] : <a href='?src=\ref[src];info=1'>More Information</a>")
 
-/obj/item/weapon/virusdish/Topic(href, href_list)
-	. = ..()
-	if(.) return 1
-
+/obj/item/weapon/virusdish/OnTopic(user, href_list)
 	if(href_list["info"])
-		usr << browse(info, "window=info_\ref[src]")
-		return 1
+		show_browser(user, info, "window=info_\ref[src]")
+		return TOPIC_HANDLED
 
 /obj/item/weapon/ruinedvirusdish
 	name = "ruined virus sample"

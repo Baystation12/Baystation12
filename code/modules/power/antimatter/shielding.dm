@@ -192,7 +192,7 @@ proc/cardinalrange(var/center)
 	icon_state = "box"
 	item_state = "electronic"
 	w_class = ITEM_SIZE_HUGE
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 2

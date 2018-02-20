@@ -23,7 +23,7 @@
 	icon_closed = "cabinetdetective"
 	icon_locked = "cabinetdetective_locked"
 	icon_opened = "cabinetdetective_open"
-	icon_broken = "cabinetdetective_broken"
+	icon_broken = "cabinetdetective_sparks"
 	icon_off = "cabinetdetective_broken"
 
 /obj/structure/closet/secure_closet/personal/cabinet/WillContain()
@@ -69,5 +69,5 @@
 			src.locked = 1
 			src.icon_state = src.icon_locked
 			src.registered_name = null
-			src.name = initial(name)
+			src.SetName(initial(name))
 			src.desc = initial(desc)

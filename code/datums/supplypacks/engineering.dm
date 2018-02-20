@@ -77,7 +77,7 @@
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Emitter crate"
-	access = access_ce
+	access = access_engine_equip
 
 /decl/hierarchy/supply_pack/engineering/field_gen
 	name = "Field Generator crate"
@@ -101,7 +101,7 @@
 	cost = 6
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Collector crate"
-	access = access_ce
+	access = access_engine_equip
 
 /decl/hierarchy/supply_pack/engineering/PA
 	name = "Particle Accelerator crate"
@@ -145,7 +145,7 @@
 	cost = 75
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Mk1 TEG crate"
-	access = access_engine
+	access = access_engine_equip
 
 /decl/hierarchy/supply_pack/engineering/circulator
 	name = "Binary atmospheric circulator"
@@ -153,7 +153,7 @@
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "\improper Atmospheric circulator crate"
-	access = access_engine
+	access = access_atmospherics
 
 /decl/hierarchy/supply_pack/engineering/air_dispenser
 	name = "Pipe Dispenser"
@@ -177,7 +177,7 @@
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper shield generator construction kit crate"
-	access = access_ce
+	access = access_engine
 
 /decl/hierarchy/supply_pack/engineering/smbig
 	name = "Supermatter Core"

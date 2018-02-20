@@ -45,7 +45,7 @@
 /decl/backpack_outfit/New()
 	tweaks = tweaks || list()
 
-	if((flags&(BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))==(BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))
+	if(FLAGS_EQUALS(flags, BACKPACK_HAS_TYPE_SELECTION|BACKPACK_HAS_SUBTYPE_SELECTION))
 		CRASH("May not have both type and subtype selection tweaks")
 
 	if(flags & BACKPACK_HAS_TYPE_SELECTION)
@@ -77,7 +77,7 @@
 /datum/backpack_tweak/proc/get_default_metadata()
 	return
 
-/datum/backpack_tweak/proc/get_metadata(var/user, var/metadata, var/title = "Character Preference")
+/datum/backpack_tweak/proc/get_metadata(var/user, var/metadata, var/title = CHARACTER_PREFERENCE_INPUT_TITLE)
 	return
 
 /datum/backpack_tweak/proc/validate_metadata(var/metadata)
@@ -129,7 +129,7 @@
 /datum/backpack_tweak/selection/validate_metadata(var/metadata)
 	return (metadata in selections) ? metadata : ..()
 
-/datum/backpack_tweak/selection/get_metadata(var/user, var/metadata, var/title = "Character Preference")
+/datum/backpack_tweak/selection/get_metadata(var/user, var/metadata, var/title = CHARACTER_PREFERENCE_INPUT_TITLE)
 	return input(user, "Choose a type.", title, metadata) as null|anything in selections
 
 /datum/backpack_tweak/selection/get_backpack_type(var/given_backpack_type, var/metadata)

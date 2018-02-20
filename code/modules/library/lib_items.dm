@@ -17,7 +17,7 @@
 	anchored = 1
 	density = 1
 	opacity = 1
-	flags = OBJ_ANCHORABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 
 /obj/structure/bookcase/Initialize()
 	for(var/obj/item/I in loc)
@@ -36,7 +36,7 @@
 		if(!newname)
 			return
 		else
-			name = ("bookcase ([newname])")
+			SetName("bookcase ([newname])")
 	else if(isScrewdriver(O))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 		to_chat(user, "<span class='notice'>You begin dismantling \the [src].</span>")
@@ -191,7 +191,7 @@
 					to_chat(usr, "The title is invalid.")
 					return
 				else
-					src.name = newtitle
+					src.SetName(newtitle)
 					src.title = newtitle
 			if("Contents")
 				var/content = sanitize(input("Write your book's contents (HTML NOT allowed):") as message|null, MAX_BOOK_MESSAGE_LEN)

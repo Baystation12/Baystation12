@@ -5,10 +5,11 @@
 	icon_state = "portal"
 	density = 1
 	unacidable = 1//Can't destroy energy portals.
-	var/failchance = 5
 	var/obj/item/target = null
 	var/creator = null
 	anchored = 1.0
+	var/dangerous = 0
+	var/failchance = 0
 
 /obj/effect/portal/Bumped(mob/M as mob|obj)
 	spawn(0)
@@ -28,10 +29,16 @@
 		return
 	return
 
-/obj/effect/portal/New(var/start, var/end, var/delete_after = 300)
+/obj/effect/portal/New(var/start, var/end, var/delete_after = 300, var/failure_rate)
 	..()
+	if(failure_rate)
+		failchance = failure_rate
+		if(prob(failchance))
+			icon_state = "portal1"
+			dangerous = 1
 	playsound(src, 'sound/effects/phasein.ogg', 25, 1)
 	target = end
+
 	if(delete_after)
 		spawn(delete_after)
 			qdel(src)
@@ -51,8 +58,7 @@
 		qdel(src)
 		return
 	if (istype(M, /atom/movable))
-		if(prob(failchance)) //oh dear a problem, put em in deep space
-			src.icon_state = "portal1"
+		if(dangerous && prob(failchance)) //oh dear a problem, put em in deep space
 			var/destination_z = GLOB.using_map.get_transit_zlevel(z)
 			do_teleport(M, locate(rand(TRANSITIONEDGE, world.maxx - TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy -TRANSITIONEDGE), destination_z), 0)
 		else

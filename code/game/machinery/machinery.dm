@@ -143,7 +143,7 @@ Class Procs:
 		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
 		pulse2.icon = 'icons/effects/effects.dmi'
 		pulse2.icon_state = "empdisable"
-		pulse2.name = "emp sparks"
+		pulse2.SetName("emp sparks")
 		pulse2.anchored = 1
 		pulse2.set_dir(pick(GLOB.cardinal))
 
@@ -238,8 +238,6 @@ Class Procs:
 		else if(prob(H.getBrainLoss()))
 			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
 			return 1
-
-	src.add_fingerprint(user)
 
 	return ..()
 

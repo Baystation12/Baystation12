@@ -6,6 +6,9 @@
 	//slot_flags = SLOT_EYES
 	//var/vision_flags = 0
 	//var/darkness_view = 0//Base human is 2
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/eyes.dmi'
+		)
 	var/prescription = 0
 	var/toggleable = 0
 	var/off_state = "degoggles"
@@ -379,9 +382,7 @@
 	name = "thermoncle"
 	desc = "A monocle thermal."
 	icon_state = "thermoncle"
-	flags = null //doesn't protect eyes because it's a monocle, duh
-
-	body_parts_covered = 0
+	body_parts_covered = 0 //doesn't protect eyes because it's a monocle, duh
 
 /obj/item/clothing/glasses/thermal/plain/eyepatch
 	name = "optical thermal eyepatch"

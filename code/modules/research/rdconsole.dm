@@ -28,7 +28,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 */
 
 /obj/machinery/computer/rdconsole
-	name = "R&D control console"
+	name = "fabrication control console"
+	desc = "Console controlling the various fabrication devices. Uses self-learning matrix to hold and optimize blueprints. Prone to corrupting said matrix, so back up often."
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
@@ -142,22 +143,22 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		to_chat(user, "<span class='notice'>You you disable the security protocols.</span>")
 		return 1
 
-/obj/machinery/computer/rdconsole/Topic(href, href_list)
-	if(..())
-		return 1
-
-	add_fingerprint(usr)
-
-	usr.set_machine(src)
-	if(href_list["menu"]) //Switches menu screens. Converts a sent text string into a number. Saves a LOT of code.
+/obj/machinery/computer/rdconsole/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
+	if(href_list["menu"])
 		var/temp_screen = text2num(href_list["menu"])
-		if(temp_screen <= 1.1 || (3 <= temp_screen && 4.9 >= temp_screen) || allowed(usr) || emagged) //Unless you are making something, you need access.
-			screen = temp_screen
-		else
+		if(!(temp_screen <= 1.1 || (3 <= temp_screen && 4.9 >= temp_screen) || allowed(usr) || emagged))
 			to_chat(usr, "Unauthorized Access.")
+			return STATUS_CLOSE
+	return ..()
+
+/obj/machinery/computer/rdconsole/OnTopic(user, href_list)
+	if(href_list["menu"]) //Switches menu screens. Converts a sent text string into a number. Saves a LOT of code.
+		screen = text2num(href_list["menu"])
+		. = TOPIC_REFRESH
 
 	else if(href_list["updt_tech"]) //Update the research holder with information from the technology disk.
 		screen = 0.0
+		. = TOPIC_REFRESH
 		spawn(50)
 			screen = 1.2
 			files.AddTech2Known(t_disk.stored)
@@ -166,11 +167,13 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	else if(href_list["clear_tech"]) //Erase data on the technology disk.
 		t_disk.stored = null
+		. = TOPIC_REFRESH
 
 	else if(href_list["eject_tech"]) //Eject the technology disk.
-		t_disk.loc = loc
+		t_disk.dropInto(loc)
 		t_disk = null
 		screen = 1.0
+		. = TOPIC_REFRESH
 
 	else if(href_list["copy_tech"]) //Copys some technology data from the research holder to the disk.
 		for(var/datum/tech/T in files.known_tech)
@@ -178,9 +181,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				t_disk.stored = T
 				break
 		screen = 1.2
+		. = TOPIC_REFRESH
 
 	else if(href_list["updt_design"]) //Updates the research holder with design data from the design disk.
 		screen = 0.0
+		. = TOPIC_REFRESH
 		spawn(50)
 			screen = 1.4
 			files.AddDesign2Known(d_disk.blueprint)
@@ -189,9 +194,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	else if(href_list["clear_design"]) //Erases data on the design disk.
 		d_disk.blueprint = null
+		. = TOPIC_REFRESH
 
 	else if(href_list["eject_design"]) //Eject the design disk.
-		d_disk.loc = loc
+		d_disk.dropInto(loc)
 		d_disk = null
 		screen = 1.0
 
@@ -201,6 +207,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				d_disk.blueprint = D
 				break
 		screen = 1.4
+		. = TOPIC_REFRESH
 
 	else if(href_list["eject_item"]) //Eject the item inside the destructive analyzer.
 		if(linked_destroy)
@@ -208,10 +215,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				to_chat(usr, "<span class='notice'>The destructive analyzer is busy at the moment.</span>")
 
 			else if(linked_destroy.loaded_item)
-				linked_destroy.loaded_item.loc = linked_destroy.loc
+				linked_destroy.loaded_item.dropInto(linked_destroy.loc)
 				linked_destroy.loaded_item = null
 				linked_destroy.icon_state = "d_analyzer"
 				screen = 2.1
+		. = TOPIC_REFRESH
 
 	else if(href_list["deconstruct"]) //Deconstruct the item in the destructive analyzer and update the research holder.
 		if(linked_destroy)
@@ -222,7 +230,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					return
 				linked_destroy.busy = 1
 				screen = 0.1
-				updateUsrDialog()
+				. = TOPIC_REFRESH
 				flick("d_analyzer_process", linked_destroy)
 				spawn(24)
 					if(linked_destroy)
@@ -260,19 +268,22 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 						use_power(linked_destroy.active_power_usage)
 						screen = 1.0
-						updateUsrDialog()
+						attack_hand(user)
+		. = TOPIC_REFRESH
 
 	else if(href_list["lock"]) //Lock the console from use by anyone without tox access.
 		if(allowed(usr))
 			screen = text2num(href_list["lock"])
 		else
 			to_chat(usr, "Unauthorized Access.")
+		. = TOPIC_REFRESH
 
 	else if(href_list["sync"]) //Sync the research holder with all the R&D consoles in the game that aren't sync protected.
 		screen = 0.0
 		if(!sync)
 			to_chat(usr, "<span class='notice'>You must connect to the network first.</span>")
 		else
+			. = TOPIC_HANDLED
 			griefProtection() //Putting this here because I dont trust the sync process
 			spawn(30)
 				if(src)
@@ -295,10 +306,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						if(!istype(S, /obj/machinery/r_n_d/server/centcom) && server_processed)
 							S.produce_heat()
 					screen = 1.6
-					updateUsrDialog()
+					attack_hand(user)
 
 	else if(href_list["togglesync"]) //Prevents the console from being synced by other consoles. Can still send data.
 		sync = !sync
+		. = TOPIC_REFRESH
 
 	else if(href_list["build"]) //Causes the Protolathe to build something.
 		if(linked_lathe)
@@ -311,7 +323,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				linked_lathe.addToQueue(being_built)
 
 		screen = 3.1
-		updateUsrDialog()
+		. = TOPIC_REFRESH
 
 	else if(href_list["imprint"]) //Causes the Circuit Imprinter to build something.
 		if(linked_imprinter)
@@ -323,42 +335,51 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(being_built)
 				linked_imprinter.addToQueue(being_built)
 		screen = 4.1
-		updateUsrDialog()
+		. = TOPIC_REFRESH
 
 	else if(href_list["disposeI"] && linked_imprinter)  //Causes the circuit imprinter to dispose of a single reagent (all of it)
 		var/datum/reagent/R = locate(href_list["disposeI"]) in linked_imprinter.reagents.reagent_list
 		if(R)
 			linked_imprinter.reagents.del_reagent(href_list["dispose"])
+		. = TOPIC_REFRESH
 
 	else if(href_list["disposeallI"] && linked_imprinter) //Causes the circuit imprinter to dispose of all it's reagents.
 		linked_imprinter.reagents.clear_reagents()
+		. = TOPIC_REFRESH
 
 	else if(href_list["removeI"] && linked_lathe)
 		linked_imprinter.removeFromQueue(text2num(href_list["removeI"]))
+		. = TOPIC_REFRESH
 
 	else if(href_list["disposeP"] && linked_lathe)  //Causes the protolathe to dispose of a single reagent (all of it)
 		var/datum/reagent/R = locate(href_list["disposeP"]) in linked_lathe.reagents.reagent_list
 		if(R)
 			linked_lathe.reagents.del_reagent(R.type)
+		. = TOPIC_REFRESH
 
 	else if(href_list["disposeallP"] && linked_lathe) //Causes the protolathe to dispose of all it's reagents.
 		linked_lathe.reagents.clear_reagents()
+		. = TOPIC_REFRESH
 
 	else if(href_list["removeP"] && linked_lathe)
 		linked_lathe.removeFromQueue(text2num(href_list["removeP"]))
+		. = TOPIC_REFRESH
 
 	else if(href_list["lathe_ejectsheet"] && linked_lathe) //Causes the protolathe to eject a sheet of material
 		linked_lathe.eject(href_list["lathe_ejectsheet"], text2num(href_list["amount"]))
+		. = TOPIC_REFRESH
 
 	else if(href_list["imprinter_ejectsheet"] && linked_imprinter) //Causes the protolathe to eject a sheet of material
 		linked_imprinter.eject(href_list["imprinter_ejectsheet"], text2num(href_list["amount"]))
+		. = TOPIC_REFRESH
 
 	else if(href_list["find_device"]) //The R&D console looks for devices nearby to link up with.
 		screen = 0.0
+		. = TOPIC_HANDLED
 		spawn(10)
 			SyncRDevices()
 			screen = 1.7
-			updateUsrDialog()
+			attack_hand(user)
 
 	else if(href_list["disconnect"]) //The R&D console disconnects with a specific device.
 		switch(href_list["disconnect"])
@@ -371,25 +392,28 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if("imprinter")
 				linked_imprinter.linked_console = null
 				linked_imprinter = null
+		. = TOPIC_REFRESH
 
 	else if(href_list["reset"]) //Reset the R&D console's database.
 		griefProtection()
 		var/choice = alert("R&D Console Database Reset", "Are you sure you want to reset the R&D console's database? Data lost cannot be recovered.", "Continue", "Cancel")
+		. = TOPIC_HANDLED
 		if(choice == "Continue")
 			screen = 0.0
 			qdel(files)
 			files = new /datum/research(src)
 			spawn(20)
 				screen = 1.6
-				updateUsrDialog()
+				attack_hand(user)
 
 	else if (href_list["print"]) //Print research information
 		screen = 0.5
+		. = TOPIC_HANDLED
 		spawn(20)
 			var/obj/item/weapon/paper/PR = new/obj/item/weapon/paper
-			PR.name = "list of researched technologies"
-			PR.info = "<center><b>[station_name()] Science Laboratories</b>"
-			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Research Progress Report</h2>"
+			PR.name = "fabricator report"
+			PR.info = "<center><b>[station_name()] Fabricator Laboratory</b>"
+			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Fabricator Status Report</h2>"
 			PR.info += "<i>report prepared at [stationtime2text()] local time</i></center><br>"
 			if(text2num(href_list["print"]) == 2)
 				PR.info += GetResearchListInfo()
@@ -397,13 +421,13 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				PR.info += GetResearchLevelsInfo()
 			PR.info_links = PR.info
 			PR.icon_state = "paper_words"
-			PR.loc = src.loc
+			PR.dropInto(loc)
 			spawn(10)
 				screen = ((text2num(href_list["print"]) == 2) ? 5.0 : 1.1)
-				updateUsrDialog()
+				attack_hand(user)
 
-	updateUsrDialog()
-	return
+	if(. == TOPIC_REFRESH)
+		attack_hand(user)
 
 /obj/machinery/computer/rdconsole/proc/GetResearchLevelsInfo()
 	var/dat
@@ -470,15 +494,15 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Imprinting Circuit. Please Wait..."
 
 		if(0.5)
-			dat += "Printing Research Information. Please Wait..."
+			dat += "Printing. Please Wait..."
 
 		if(1.0) //Main Menu
 			dat += "Main Menu:<BR><BR>"
 			dat += "Loaded disk: "
 			dat += (t_disk || d_disk) ? (t_disk ? "technology storage disk" : "design storage disk") : "none"
 			dat += "<HR><UL>"
-			dat += "<LI><A href='?src=\ref[src];menu=1.1'>Current Research Levels</A>"
-			dat += "<LI><A href='?src=\ref[src];menu=5.0'>View Researched Technologies</A>"
+			dat += "<LI><A href='?src=\ref[src];menu=1.1'>Current Fabricator Learning Matrix Status</A>"
+			dat += "<LI><A href='?src=\ref[src];menu=5.0'>View Available Designs</A>"
 			if(t_disk)
 				dat += "<LI><A href='?src=\ref[src];menu=1.2'>Disk Operations</A>"
 			else if(d_disk)
@@ -497,7 +521,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(1.1) //Research viewer
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];print=1'>Print This Page</A><HR>"
-			dat += "Current Research Levels:<BR><BR>"
+			dat += "Fabricator Learning Matrix Proficiency Levels:<BR><BR>"
 			dat += GetResearchLevelsInfo()
 			dat += "</UL>"
 
@@ -565,9 +589,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<UL>"
 			if(sync)
 				dat += "<LI><A href='?src=\ref[src];sync=1'>Sync Database with Network</A><BR>"
-				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Disconnect from Research Network</A><BR>"
+				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Disconnect from Fabrication Network</A><BR>"
 			else
-				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Connect to Research Network</A><BR>"
+				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Connect to Fabrication Network</A><BR>"
 			dat += "<LI><A href='?src=\ref[src];menu=1.7'>Device Linkage Menu</A><BR>"
 			dat += "<LI><A href='?src=\ref[src];lock=0.2'>Lock Console</A><BR>"
 			dat += "<LI><A href='?src=\ref[src];reset=1'>Reset R&D Database</A><BR>"
@@ -776,17 +800,17 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(5.0)
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];print=2'>Print This Page</A><HR>"
-			dat += "List of Researched Technologies and Designs:"
+			dat += "List of Available Designs:"
 			dat += GetResearchListInfo()
 
-	user << browse("<TITLE>Research and Development Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
+	user << browse("<TITLE>Fabrication Control Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
 	onclose(user, "rdconsole")
 
 /obj/machinery/computer/rdconsole/robotics
-	name = "Robotics R&D Console"
+	name = "robotics fabrication console"
 	id = 2
 	req_access = list(access_robotics)
 
 /obj/machinery/computer/rdconsole/core
-	name = "Core R&D Console"
+	name = "?ore fabricator console"
 	id = 1

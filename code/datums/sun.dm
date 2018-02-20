@@ -15,7 +15,7 @@
 	if(prob(50))					// same chance to rotate clockwise than counter-clockwise
 		rate = -rate
 	solar_next_update = world.time	// init the timer
-	angle = rand (0,360)			// the station position to the sun is randomised at round start
+	angle = rand (0,359)			// the station position to the sun is randomised at round start
 
 /*/hook/startup/proc/createSun() // handled in scheduler
 	sun = new /datum/sun()
@@ -29,7 +29,7 @@
 	if(world.time < solar_next_update) //if less than 60 game secondes have passed, do nothing
 		return;
 
-	angle = (360 + angle + rate * 6) % 360	 // increase/decrease the angle to the sun, adjusted by the rate
+	angle = (angle + rate * 6) % 360	 // increase/decrease the angle to the sun, adjusted by the rate
 
 	solar_next_update += SOLAR_UPDATE_TIME // since we updated the angle, set the proper time for the next loop
 

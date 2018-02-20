@@ -10,5 +10,5 @@
 	var/obj/item/clothing/C
 	C = new /obj/item/clothing/under/solgov/utility/expeditionary/monkey(src)
 	equip_to_appropriate_slot(C)
-	put_in_hands(new /obj/item/weapon/clipboard)
+	put_in_hands(new /obj/item/weapon/reagent_containers/food/drinks/coffeecup/punitelli)
 	equip_to_appropriate_slot(new /obj/item/clothing/mask/smokable/cigarette/jerichos)

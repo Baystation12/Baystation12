@@ -37,7 +37,6 @@
 	if(..())
 		return
 
-	src.add_fingerprint(user)
 	if(stat & (NOPOWER|BROKEN))
 		return
 

@@ -27,7 +27,7 @@
 	var/list/allowed_objects = list(/obj/structure/closet)
 	active_power_usage = 2200	//the pneumatic pump power. 3 HP ~ 2200W
 	idle_power_usage = 100
-	flags = OBJ_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 
 // create a new disposal
 // find the attached trunk (if present) and init gas resvr.
@@ -55,7 +55,7 @@
 	if(stat & BROKEN || !I || !user)
 		return
 
-	src.add_fingerprint(user)
+	add_fingerprint(user, 0, I)
 	if(mode<=0) // It's off
 		if(isScrewdriver(I))
 			if(contents.len > 0)
@@ -281,49 +281,43 @@
 
 // handle machine interaction
 
-/obj/machinery/disposal/Topic(href, href_list)
+/obj/machinery/disposal/CanUseTopic(user, state, href_list)
 	if(usr.loc == src)
 		to_chat(usr, "<span class='warning'>You cannot reach the controls from inside.</span>")
-		return
-
+		return STATUS_CLOSE
+	if(isAI(user) && (href_list["handle"] || href_list["eject"]))
+		return min(STATUS_UPDATE, ..())
 	if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
-		to_chat(usr, "<span class='warning'>The disposal units power is disabled.</span>")
-		return
-	if(..())
-		return
+		to_chat(user, "<span class='warning'>The disposal units power is disabled.</span>")
+		return min(STATUS_UPDATE, ..())
+	if(flushing)
+		return min(STATUS_UPDATE, ..())
+	return ..()
 
-	if(stat & BROKEN)
-		return
-	if(usr.stat || usr.restrained() || src.flushing)
-		return
+/obj/machinery/disposal/OnTopic(user, href_list)
+	if(href_list["close"])
+		close_browser(user, "window=disposal")
+		return TOPIC_HANDLED
 
-	if(istype(src.loc, /turf))
-		usr.set_machine(src)
+	if(href_list["pump"])
+		if(text2num(href_list["pump"]))
+			mode = 1
+		else
+			mode = 0
+		update_icon()
+		. = TOPIC_REFRESH
 
-		if(href_list["close"])
-			usr.unset_machine()
-			usr << browse(null, "window=disposal")
-			return
+	else if(href_list["handle"])
+		flush = text2num(href_list["handle"])
+		update_icon()
+		. = TOPIC_REFRESH
 
-		if(href_list["pump"])
-			if(text2num(href_list["pump"]))
-				mode = 1
-			else
-				mode = 0
-			update_icon()
+	else if(href_list["eject"])
+		eject()
+		. = TOPIC_REFRESH
 
-		if(!isAI(usr))
-			if(href_list["handle"])
-				flush = text2num(href_list["handle"])
-				update_icon()
-
-			if(href_list["eject"])
-				eject()
-	else
-		usr << browse(null, "window=disposal")
-		usr.unset_machine()
-		return
-	return
+	if(. == TOPIC_REFRESH)
+		interact(user)
 
 // eject the contents of the disposal unit
 /obj/machinery/disposal/proc/eject()
@@ -878,7 +872,7 @@
 		var/turf/T = src.loc
 		if(!T.is_plating())
 			return		// prevent interaction with T-scanner revealed pipes
-		src.add_fingerprint(user)
+		src.add_fingerprint(user, 0, I)
 		if(istype(I, /obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/W = I
 
@@ -1148,9 +1142,9 @@
 
 	proc/updatename()
 		if(sort_tag)
-			name = "[initial(name)] ([sort_tag])"
+			SetName("[initial(name)] ([sort_tag])")
 		else
-			name = initial(name)
+			SetName(initial(name))
 
 	New()
 		. = ..()
@@ -1365,9 +1359,9 @@
 
 	proc/updatename()
 		if(sortType)
-			name = "[initial(name)] ([sortType])"
+			SetName("[initial(name)] ([sortType])")
 		else
-			name = initial(name)
+			SetName(initial(name))
 
 	proc/updatedir()
 		posdir = dir
@@ -1518,7 +1512,7 @@
 	var/turf/T = src.loc
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
-	src.add_fingerprint(user)
+	src.add_fingerprint(user, 0, I)
 	if(istype(I, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/W = I
 
@@ -1600,7 +1594,7 @@
 	var/active = 0
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
-	flags = OBJ_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 
 	New()
 		..()
@@ -1637,7 +1631,7 @@
 	attackby(var/obj/item/I, var/mob/user)
 		if(!I || !user)
 			return
-		src.add_fingerprint(user)
+		src.add_fingerprint(user, 0, I)
 		if(isScrewdriver(I))
 			if(mode==0)
 				mode=1

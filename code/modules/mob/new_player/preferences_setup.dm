@@ -1,4 +1,6 @@
-datum/preferences
+#define ASSIGN_LIST_TO_COLORS(L, R, G, B) if(L) { R = L[1]; G = L[2]; B = L[3]; }
+
+/datum/preferences
 	//The mob should have a gender you want before running this proc. Will run fine without H
 	proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
 		var/datum/species/current_species = all_species[species]
@@ -9,18 +11,23 @@ datum/preferences
 		f_style = random_facial_hair_style(gender, species)
 		if(current_species)
 			if(current_species.appearance_flags & HAS_A_SKIN_TONE)
-				s_tone = random_skin_tone()
-			if(current_species.appearance_flags & HAS_SKIN_COLOR)
-				r_skin = rand (0,255)
-				g_skin = rand (0,255)
-				b_skin = rand (0,255)
+				s_tone = current_species.get_random_skin_tone() || s_tone
 			if(current_species.appearance_flags & HAS_EYE_COLOR)
-				randomize_eyes_color()
+				ASSIGN_LIST_TO_COLORS(current_species.get_random_eye_color(), r_eyes, g_eyes, b_eyes)
 			if(current_species.appearance_flags & HAS_SKIN_COLOR)
-				randomize_skin_color()
+				ASSIGN_LIST_TO_COLORS(current_species.get_random_skin_color(), r_skin, g_skin, b_skin)
 			if(current_species.appearance_flags & HAS_HAIR_COLOR)
-				randomize_hair_color("hair")
-				randomize_hair_color("facial")
+				var/hair_colors = current_species.get_random_hair_color()
+				if(hair_colors)
+					ASSIGN_LIST_TO_COLORS(hair_colors, r_hair, g_hair, b_hair)
+
+					if(prob(75))
+						r_facial = r_hair
+						g_facial = g_hair
+						b_facial = b_hair
+					else
+						ASSIGN_LIST_TO_COLORS(current_species.get_random_facial_hair_color(), r_facial, g_facial, b_facial)
+
 		if(current_species.appearance_flags & HAS_UNDERWEAR)
 			all_underwear.Cut()
 			for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
@@ -33,162 +40,7 @@ datum/preferences
 		if(H)
 			copy_to(H)
 
-
-	proc/randomize_hair_color(var/target = "hair")
-		if(prob (75) && target == "facial") // Chance to inherit hair color
-			r_facial = r_hair
-			g_facial = g_hair
-			b_facial = b_hair
-			return
-
-		var/red
-		var/green
-		var/blue
-
-		var/col = pick ("blonde", "black", "chestnut", "copper", "brown", "wheat", "old", "punk")
-		switch(col)
-			if("blonde")
-				red = 255
-				green = 255
-				blue = 0
-			if("black")
-				red = 0
-				green = 0
-				blue = 0
-			if("chestnut")
-				red = 153
-				green = 102
-				blue = 51
-			if("copper")
-				red = 255
-				green = 153
-				blue = 0
-			if("brown")
-				red = 102
-				green = 51
-				blue = 0
-			if("wheat")
-				red = 255
-				green = 255
-				blue = 153
-			if("old")
-				red = rand (100, 255)
-				green = red
-				blue = red
-			if("punk")
-				red = rand (0, 255)
-				green = rand (0, 255)
-				blue = rand (0, 255)
-
-		red = max(min(red + rand (-25, 25), 255), 0)
-		green = max(min(green + rand (-25, 25), 255), 0)
-		blue = max(min(blue + rand (-25, 25), 255), 0)
-
-		switch(target)
-			if("hair")
-				r_hair = red
-				g_hair = green
-				b_hair = blue
-			if("facial")
-				r_facial = red
-				g_facial = green
-				b_facial = blue
-
-	proc/randomize_eyes_color()
-		var/red
-		var/green
-		var/blue
-
-		var/col = pick ("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
-		switch(col)
-			if("black")
-				red = 0
-				green = 0
-				blue = 0
-			if("grey")
-				red = rand (100, 200)
-				green = red
-				blue = red
-			if("brown")
-				red = 102
-				green = 51
-				blue = 0
-			if("chestnut")
-				red = 153
-				green = 102
-				blue = 0
-			if("blue")
-				red = 51
-				green = 102
-				blue = 204
-			if("lightblue")
-				red = 102
-				green = 204
-				blue = 255
-			if("green")
-				red = 0
-				green = 102
-				blue = 0
-			if("albino")
-				red = rand (200, 255)
-				green = rand (0, 150)
-				blue = rand (0, 150)
-
-		red = max(min(red + rand (-25, 25), 255), 0)
-		green = max(min(green + rand (-25, 25), 255), 0)
-		blue = max(min(blue + rand (-25, 25), 255), 0)
-
-		r_eyes = red
-		g_eyes = green
-		b_eyes = blue
-
-	proc/randomize_skin_color()
-		var/red
-		var/green
-		var/blue
-
-		var/col = pick ("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
-		switch(col)
-			if("black")
-				red = 0
-				green = 0
-				blue = 0
-			if("grey")
-				red = rand (100, 200)
-				green = red
-				blue = red
-			if("brown")
-				red = 102
-				green = 51
-				blue = 0
-			if("chestnut")
-				red = 153
-				green = 102
-				blue = 0
-			if("blue")
-				red = 51
-				green = 102
-				blue = 204
-			if("lightblue")
-				red = 102
-				green = 204
-				blue = 255
-			if("green")
-				red = 0
-				green = 102
-				blue = 0
-			if("albino")
-				red = rand (200, 255)
-				green = rand (0, 150)
-				blue = rand (0, 150)
-
-		red = max(min(red + rand (-25, 25), 255), 0)
-		green = max(min(green + rand (-25, 25), 255), 0)
-		blue = max(min(blue + rand (-25, 25), 255), 0)
-
-		r_skin = red
-		g_skin = green
-		b_skin = blue
+#undef ASSIGN_LIST_TO_COLORS
 
 /datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/mannequin)
 	var/update_icon = FALSE
@@ -249,15 +101,15 @@ datum/preferences
 	preview_icon.Scale(48+32, 16+32)
 
 	mannequin.dir = NORTH
-	var/icon/stamp = getFlatIcon(mannequin)
+	var/icon/stamp = getFlatIcon(mannequin, NORTH, always_use_defdir = 1)
 	preview_icon.Blend(stamp, ICON_OVERLAY, 25, 17)
 
 	mannequin.dir = WEST
-	stamp = getFlatIcon(mannequin)
+	stamp = getFlatIcon(mannequin, WEST, always_use_defdir = 1)
 	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 9)
 
 	mannequin.dir = SOUTH
-	stamp = getFlatIcon(mannequin)
+	stamp = getFlatIcon(mannequin, SOUTH, always_use_defdir = 1)
 	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1)
 
 	preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.

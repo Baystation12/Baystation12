@@ -123,7 +123,7 @@
 
 	switch (temp_allowed_size)
 		if (STAGE_ONE)
-			name = "gravitational singularity"
+			SetName("gravitational singularity")
 			desc = "A gravitational singularity."
 			current_size = STAGE_ONE
 			icon = 'icons/obj/singularity.dmi'
@@ -140,7 +140,7 @@
 				overlays = "chain_s1"
 			visible_message("<span class='notice'>The singularity has shrunk to a rather pitiful size.</span>")
 		if (STAGE_TWO) //1 to 3 does not check for the turfs if you put the gens right next to a 1x1 then its going to eat them.
-			name = "gravitational singularity"
+			SetName("gravitational singularity")
 			desc = "A gravitational singularity."
 			current_size = STAGE_TWO
 			icon = 'icons/effects/96x96.dmi'
@@ -161,7 +161,7 @@
 				visible_message("<span class='notice'>The singularity has shrunk to a less powerful size.</span>")
 		if (STAGE_THREE)
 			if ((check_turfs_in(1, 2)) && (check_turfs_in(2, 2)) && (check_turfs_in(4, 2)) && (check_turfs_in(8, 2)))
-				name = "gravitational singularity"
+				SetName("gravitational singularity")
 				desc = "A gravitational singularity."
 				current_size = STAGE_THREE
 				icon = 'icons/effects/160x160.dmi'
@@ -182,7 +182,7 @@
 					visible_message("<span class='notice'>The singularity has returned to a safe size.</span>")
 		if(STAGE_FOUR)
 			if ((check_turfs_in(1, 3)) && (check_turfs_in(2, 3)) && (check_turfs_in(4, 3)) && (check_turfs_in(8, 3)))
-				name = "gravitational singularity"
+				SetName("gravitational singularity")
 				desc = "A gravitational singularity."
 				current_size = STAGE_FOUR
 				icon = 'icons/effects/224x224.dmi'
@@ -202,7 +202,7 @@
 				else
 					visible_message("<span class='notice'>Miraculously, the singularity reduces in size, and can be contained.</span>")
 		if(STAGE_FIVE) //This one also lacks a check for gens because it eats everything.
-			name = "gravitational singularity"
+			SetName("gravitational singularity")
 			desc = "A gravitational singularity."
 			current_size = STAGE_FIVE
 			icon = 'icons/effects/288x288.dmi'
@@ -220,7 +220,7 @@
 			else
 				visible_message("<span class='warning'>The singularity miraculously reduces in size and loses its supermatter properties.</span>")
 		if(STAGE_SUPER)//SUPERSINGULO
-			name = "super gravitational singularity"
+			SetName("super gravitational singularity")
 			desc = "A gravitational singularity with the properties of supermatter. <b>It has the power to destroy worlds.</b>"
 			current_size = STAGE_SUPER
 			icon = 'icons/effects/352x352.dmi'

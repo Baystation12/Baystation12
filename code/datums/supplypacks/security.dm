@@ -43,47 +43,50 @@
 	containername = "\improper Tactical armor crate"
 	access = access_armory
 
-/decl/hierarchy/supply_pack/security/armguards
-	name = "Armor - Black arm guards"
-	contains = list(/obj/item/clothing/accessory/armguards = 4)
+/decl/hierarchy/supply_pack/security/blackguards
+	name = "Armor - Arm and leg guards, black"
+	contains = list(/obj/item/clothing/accessory/armguards = 2,
+					/obj/item/clothing/accessory/legguards = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Arm guards crate"
+	containername = "\improper Arm and leg guards crate"
 	access = access_armory
 
-/decl/hierarchy/supply_pack/security/legguards
-	name = "Armor - Black leg guards"
-	contains = list(/obj/item/clothing/accessory/legguards = 4)
+/decl/hierarchy/supply_pack/security/blueguards
+	name = "Armor - Arm and leg guards, blue"
+	contains = list(/obj/item/clothing/accessory/armguards/blue = 2,
+					/obj/item/clothing/accessory/legguards/blue = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Leg guards crate"
+	containername = "\improper Arm and leg guards crate"
 	access = access_armory
 
-/decl/hierarchy/supply_pack/security/armguards_random
-	name = "Armor - Assorted arm guards"
-	num_contained = 4
-	contains = list(/obj/item/clothing/accessory/armguards/blue,
-					/obj/item/clothing/accessory/armguards/navy,
-					/obj/item/clothing/accessory/armguards/green,
-					/obj/item/clothing/accessory/armguards/tan)
+/decl/hierarchy/supply_pack/security/greenguards
+	name = "Armor - Arm and leg guards, green"
+	contains = list(/obj/item/clothing/accessory/armguards/green = 2,
+					/obj/item/clothing/accessory/legguards/green = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Arm guards crate"
+	containername = "\improper Arm and leg guards crate"
 	access = access_armory
-	supply_method = /decl/supply_method/randomized
 
-/decl/hierarchy/supply_pack/security/legguards_random
-	name = "Armor - Assorted leg guards"
-	num_contained = 4
-	contains = list(/obj/item/clothing/accessory/legguards/blue,
-					/obj/item/clothing/accessory/legguards/navy,
-					/obj/item/clothing/accessory/legguards/green,
-					/obj/item/clothing/accessory/legguards/tan)
+/decl/hierarchy/supply_pack/security/navyguards
+	name = "Armor - Arm and leg guards, navy blue"
+	contains = list(/obj/item/clothing/accessory/armguards/navy = 2,
+					/obj/item/clothing/accessory/legguards/navy = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Leg guards crate"
+	containername = "\improper Arm and leg guards crate"
 	access = access_armory
-	supply_method = /decl/supply_method/randomized
+
+/decl/hierarchy/supply_pack/security/tanguards
+	name = "Armor - Arm and leg guards, tan"
+	contains = list(/obj/item/clothing/accessory/armguards/tan = 2,
+					/obj/item/clothing/accessory/legguards/tan = 2)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "\improper Arm and leg guards crate"
+	access = access_armory
 
 /decl/hierarchy/supply_pack/security/riotarmor
 	name = "Armor - Riot gear"

@@ -108,11 +108,10 @@
 	desc = "An energized net meant to subdue animals."
 
 	anchored = 0
-	health = 1
+	health = 5
 	temporary = 0
-	min_free_time = 0
-	max_free_time = 0
-
+	min_free_time = 5
+	max_free_time = 10
 
 /obj/effect/energy_net/teleport
 	countdown = 60
@@ -161,13 +160,6 @@
 		if(!C.handcuffed)
 			C.handcuffed = src
 	return 1
-
-/obj/effect/energy_net/safari/capture_mob(mob/living/M)
-	if(istype(M, /mob/living/simple_animal))
-		. = ..()
-	else
-		visible_message("\The [src] fails to contain \the [M]!")
-		qdel(src)
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
 	if(buckled_mob)

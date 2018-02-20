@@ -13,6 +13,9 @@
 /datum/gear_tweak/proc/tweak_item(var/obj/item/I, var/metadata)
 	return
 
+/datum/gear_tweak/proc/tweak_description(var/description, var/metadata)
+	return description
+
 /*
 * Color adjustment
 */
@@ -30,7 +33,7 @@
 /datum/gear_tweak/color/get_default()
 	return valid_colors ? valid_colors[1] : COLOR_WHITE
 
-/datum/gear_tweak/color/get_metadata(var/user, var/metadata, var/title = "Character Preference")
+/datum/gear_tweak/color/get_metadata(var/user, var/metadata, var/title = CHARACTER_PREFERENCE_INPUT_TITLE)
 	if(valid_colors)
 		return input(user, "Choose a color.", title, metadata) as null|anything in valid_colors
 	return input(user, "Choose a color.", title, metadata) as color|null
@@ -48,13 +51,33 @@
 	var/list/valid_paths
 
 /datum/gear_tweak/path/New(var/list/valid_paths)
-	if(istype(valid_paths))
-		src.valid_paths = valid_paths
-	else if(ispath(valid_paths))
-		src.valid_paths = atomtype2nameassoclist(valid_paths)
-	else
-		CRASH("[valid_paths] is of an unhandled type.")
-	..()
+	if(!valid_paths.len)
+		CRASH("No type paths given")
+	var/list/duplicate_keys = duplicates(valid_paths)
+	if(duplicate_keys.len)
+		CRASH("Duplicate names found: [english_list(duplicate_keys)]")
+	var/list/duplicate_values = duplicates(list_values(valid_paths))
+	if(duplicate_values.len)
+		CRASH("Duplicate types found: [english_list(duplicate_values)]")
+	for(var/path_name in valid_paths)
+		if(!istext(path_name))
+			CRASH("Expected a text key, was [log_info_line(path_name)]")
+		var/selection_type = valid_paths[path_name]
+		if(!ispath(selection_type, /obj/item))
+			CRASH("Expected an /obj/item path, was [log_info_line(selection_type)]")
+	src.valid_paths = sortAssoc(valid_paths)
+
+/datum/gear_tweak/path/type/New(var/type_path)
+	..(atomtype2nameassoclist(type_path))
+
+/datum/gear_tweak/path/subtype/New(var/type_path)
+	..(atomtypes2nameassoclist(subtypesof(type_path)))
+
+/datum/gear_tweak/path/specified_types_list/New(var/type_paths)
+	..(atomtypes2nameassoclist(type_paths))
+
+/datum/gear_tweak/path/specified_types_args/New()
+	..(atomtypes2nameassoclist(args))
 
 /datum/gear_tweak/path/get_contents(var/metadata)
 	return "Type: [metadata]"
@@ -63,12 +86,18 @@
 	return valid_paths[1]
 
 /datum/gear_tweak/path/get_metadata(var/user, var/metadata)
-	return input(user, "Choose a type.", "Character Preference", metadata) as null|anything in valid_paths
+	return input(user, "Choose a type.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in valid_paths
 
 /datum/gear_tweak/path/tweak_gear_data(var/metadata, var/datum/gear_data/gear_data)
 	if(!(metadata in valid_paths))
 		return
 	gear_data.path = valid_paths[metadata]
+
+/datum/gear_tweak/path/tweak_description(var/description, var/metadata)
+	if(!(metadata in valid_paths))
+		return ..()
+	var/obj/O = valid_paths[metadata]
+	return initial(O.desc) || description
 
 /*
 * Content adjustment
@@ -94,7 +123,7 @@
 	for(var/i = metadata.len to (valid_contents.len - 1))
 		metadata += "Random"
 	for(var/i = 1 to valid_contents.len)
-		var/entry = input(user, "Choose an entry.", "Character Preference", metadata[i]) as null|anything in (valid_contents[i] + list("Random", "None"))
+		var/entry = input(user, "Choose an entry.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata[i]) as null|anything in (valid_contents[i] + list("Random", "None"))
 		if(entry)
 			. += entry
 		else
@@ -136,7 +165,7 @@
 	return "Random"
 
 /datum/gear_tweak/reagents/get_metadata(var/user, var/list/metadata)
-	. = input(user, "Choose an entry.", "Character Preference", metadata) as null|anything in (valid_reagents + list("Random", "None"))
+	. = input(user, "Choose an entry.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in (valid_reagents + list("Random", "None"))
 	if(!.)
 		return metadata
 
@@ -195,7 +224,7 @@
 		else
 			names["None"] = counter++
 
-	var/entry = input(user, "Choose a processor.", "Character Preference") in names
+	var/entry = input(user, "Choose a processor.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
 	names = list()
@@ -207,7 +236,7 @@
 		else
 			names["None"] = counter++
 
-	entry = input(user, "Choose a battery.", "Character Preference") in names
+	entry = input(user, "Choose a battery.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
 	names = list()
@@ -219,7 +248,7 @@
 		else
 			names["None"] = counter++
 
-	entry = input(user, "Choose a hard drive.", "Character Preference") in names
+	entry = input(user, "Choose a hard drive.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
 	names = list()
@@ -231,7 +260,7 @@
 		else
 			names["None"] = counter++
 
-	entry = input(user, "Choose a network card.", "Character Preference") in names
+	entry = input(user, "Choose a network card.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
 	names = list()
@@ -243,7 +272,7 @@
 		else
 			names["None"] = counter++
 
-	entry = input(user, "Choose a nanoprinter.", "Character Preference") in names
+	entry = input(user, "Choose a nanoprinter.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
 	names = list()
@@ -255,7 +284,7 @@
 		else
 			names["None"] = counter++
 
-	entry = input(user, "Choose a card slot.", "Character Preference") in names
+	entry = input(user, "Choose a card slot.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
 	names = list()
@@ -267,7 +296,7 @@
 		else
 			names["None"] = counter++
 
-	entry = input(user, "Choose a tesla link.", "Character Preference") in names
+	entry = input(user, "Choose a tesla link.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
 /datum/gear_tweak/tablet/get_default()

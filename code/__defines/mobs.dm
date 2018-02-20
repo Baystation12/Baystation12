@@ -22,6 +22,7 @@
 
 // Grab levels.
 #define NORM_PASSIVE    "normal passive"
+#define NORM_STRUGGLE   "normal struggle"
 #define NORM_AGGRESSIVE "normal aggressive"
 #define NORM_NECK       "normal neck"
 #define NORM_KILL       "normal kill"
@@ -249,20 +250,31 @@
 #define CORPSE_CAN_REENTER 1
 #define CORPSE_CAN_REENTER_AND_RESPAWN 2
 
-#define SPECIES_HUMAN "Human"
-#define SPECIES_TAJARA "Tajara"
-#define SPECIES_DIONA "Diona"
-#define SPECIES_VOX "Vox"
-#define SPECIES_IPC "Machine"
-#define SPECIES_UNATHI "Unathi"
-#define SPECIES_SKRELL "Skrell"
-#define SPECIES_NABBER "Giant Armoured Serpentid"
-#define SPECIES_PROMETHEAN "Promethean"
-#define SPECIES_BOGANI "Bogani"
-#define SPECIES_EGYNO "Egyno"
+#define SPECIES_HUMAN       "Human"
+#define SPECIES_TAJARA      "Tajara"
+#define SPECIES_DIONA       "Diona"
+#define SPECIES_VOX         "Vox"
+#define SPECIES_IPC         "Machine"
+#define SPECIES_UNATHI      "Unathi"
+#define SPECIES_SKRELL      "Skrell"
+#define SPECIES_NABBER      "Giant Armoured Serpentid"
+#define SPECIES_PROMETHEAN  "Promethean"
+#define SPECIES_BOGANI      "Bogani"
+#define SPECIES_EGYNO       "Egyno"
+#define SPECIES_XENO        "Xenophage"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
 #define SURGERY_RETRACTED 2
 #define SURGERY_ENCASED 3
 
+#define STASIS_MISC     "misc"
+#define STASIS_CRYOBAG  "cryobag"
+#define STASIS_COLD     "cold"
+
+#define AURA_CANCEL 1
+#define AURA_FALSE  2
+#define AURA_TYPE_BULLET "Bullet"
+#define AURA_TYPE_WEAPON "Weapon"
+#define AURA_TYPE_THROWN "Thrown"
+#define AURA_TYPE_LIFE   "Life"

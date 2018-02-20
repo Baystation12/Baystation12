@@ -63,7 +63,12 @@
 		/area/smugglers/base = NO_SCRUBBER,
 		/area/smugglers/dorms = NO_SCRUBBER|NO_VENT,
 		/area/smugglers/office = NO_SCRUBBER|NO_VENT,
+		/area/bluespaceriver/underground = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/bluespaceriver/ground = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
+		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/icarus/vessel = NO_APC,
+		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC,
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -77,8 +82,9 @@
 		/area/exoplanet/grass,
 		/area/exoplanet/snow,
 		/area/exoplanet/garbage,
-		/area/marooned/marooned_snow
-
+		/area/marooned/marooned_snow,
+		/area/icarus/vessel,
+		/area/icarus/open,
 	)
 
 	area_coherency_test_subarea_count = list()
@@ -124,6 +130,13 @@
 		/area/ship,
 		/area/smugglers,
 		/area/slavers_base,
+		/area/hydro,
+		/area/yacht,
+		/area/bluespaceriver,
+		/area/mobius_rift,
+		/area/icarus,
+		/area/errant_pisces,
+		/area/lar_maria,
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber

@@ -183,6 +183,9 @@ Please contact me on #coderbus IRC. ~Carn x
 			if(species.has_floating_eyes)
 				overlays |= species.get_eyes(src)
 
+	if(auras)
+		overlays |= auras
+
 	var/matrix/M = matrix()
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
 		M.Turn(90)
@@ -286,6 +289,7 @@ var/global/list/damage_icon_parts = list()
 			icon_key += "[part.species.get_race_key(part.owner)]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
 			icon_key += "[part.s_tone]"
+			icon_key += "[part.s_base]"
 			if(part.s_col && part.s_col.len >= 3)
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
 				icon_key += "[part.s_col_blend]"
@@ -355,11 +359,11 @@ var/global/list/damage_icon_parts = list()
 	//END CACHED ICON GENERATION.
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 
-	if(update_icons)
-		update_icons()
-
 	//tail
 	update_tail_showing(0)
+
+	if(update_icons)
+		update_icons()
 
 //UNDERWEAR OVERLAY
 
@@ -663,7 +667,7 @@ var/global/list/damage_icon_parts = list()
 		var/species_tail_anim = species.get_tail_animation(src)
 		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
 		tail_icon = new/icon(species_tail_anim)
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species.tail_blend)
 		// The following will not work with animated tails.
 		var/use_species_tail = species.get_tail_hair(src)
 		if(use_species_tail)

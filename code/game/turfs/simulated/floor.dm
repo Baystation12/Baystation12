@@ -12,6 +12,7 @@
 	var/base_desc = "The naked hull."
 	var/base_icon = 'icons/turf/flooring/plating.dmi'
 	var/base_icon_state = "plating"
+	var/base_color = COLOR_WHITE
 
 	// Flooring data.
 	var/flooring_override
@@ -25,7 +26,7 @@
 
 /turf/simulated/floor/is_plating()
 	return !flooring
-	
+
 /turf/simulated/floor/protects_atom(var/atom/A)
 	return (A.level <= 1 && !is_plating()) || ..()
 
@@ -48,10 +49,11 @@
 
 	overlays.Cut()
 
-	name = base_name
+	SetName(base_name)
 	desc = base_desc
 	icon = base_icon
 	icon_state = base_icon_state
+	color = base_color
 	plane = PLATING_PLANE
 
 	if(flooring)

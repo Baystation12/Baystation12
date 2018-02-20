@@ -5,7 +5,7 @@
 	var/list/obj/machinery/atmospherics/normal_members = list()
 	var/list/datum/pipeline/line_members = list()
 		//membership roster to go through for updates and what not
-
+	var/list/leaks = list()
 	var/update = 1
 
 /datum/pipe_network/Destroy()
@@ -15,6 +15,7 @@
 	for(var/obj/machinery/atmospherics/normal_member in normal_members)
 		normal_member.reassign_network(src, null)
 	gases.Cut()  // Do not qdel the gases, we don't own them
+	leaks.Cut()
 	return ..()
 
 /datum/pipe_network/Process()
@@ -50,6 +51,8 @@
 	normal_members |= giver.normal_members
 
 	line_members |= giver.line_members
+
+	leaks |= giver.leaks
 
 	for(var/obj/machinery/atmospherics/normal_member in giver.normal_members)
 		normal_member.reassign_network(giver, src)

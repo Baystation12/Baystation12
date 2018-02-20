@@ -10,7 +10,6 @@
 	icon_closed = "capsecure"
 	icon_locked = "capsecure1"
 	icon_opened = "capsecureopen"
-	icon_broken = "capsecurebroken"
 	icon_off = "capsecureoff"
 
 /obj/structure/closet/secure_closet/CO/WillContain()
@@ -42,7 +41,6 @@
 	icon_closed = "twosolsecure"
 	icon_locked = "twosolsecure1"
 	icon_opened = "twosolsecureopen"
-	icon_broken = "twosolsecurebroken"
 	icon_off = "twosolsecureoff"
 
 /obj/structure/closet/secure_closet/XO/WillContain()
@@ -78,7 +76,6 @@
 	icon_closed = "sol"
 	icon_locked = "sol1"
 	icon_opened = "solopen"
-	icon_broken = "solbroken"
 	icon_off = "soloff"
 
 /obj/structure/closet/secure_closet/sea/WillContain()
@@ -107,7 +104,6 @@
 	icon_closed = "sol"
 	icon_locked = "sol1"
 	icon_opened = "solopen"
-	icon_broken = "solbroken"
 	icon_off = "soloff"
 
 /obj/structure/closet/secure_closet/bridgeofficer/WillContain()
@@ -122,7 +118,7 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/blue,
 		/obj/item/modular_computer/tablet/preset/custom_loadout/standard,
-		/obj/item/device/radio/headset/headset_com,
+		/obj/item/device/radio/headset/bridgeofficer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger)),
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/glowstick/random))

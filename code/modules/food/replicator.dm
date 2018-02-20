@@ -7,7 +7,7 @@
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 40
-	flags = OBJ_ANCHORABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/biomass = 100
 	var/biomass_max = 100
 	var/biomass_per = 10
@@ -112,7 +112,7 @@
 	src.audible_message("<b>\The [src]</b> states, \"Your [text] is ready!\"")
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	var/atom/A = new type(src.loc)
-	A.name = text
+	A.SetName(text)
 	A.desc = "Looks... actually pretty good."
 	use_power(75000)
 	return 1

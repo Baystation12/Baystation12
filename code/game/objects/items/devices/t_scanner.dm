@@ -11,6 +11,7 @@
 	item_state = "electronic"
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
+	action_button_name = "Toggle T-Ray scanner"
 
 	var/scan_range = 1
 
@@ -29,8 +30,13 @@
 /obj/item/device/t_scanner/update_icon()
 	icon_state = "t-ray[on]"
 
+/obj/item/device/t_scanner/emp_act()
+	audible_message(src, "<span class = 'notice'> \The [src] buzzes oddly.</span>")
+	set_active(FALSE)
+
 /obj/item/device/t_scanner/attack_self(mob/user)
 	set_active(!on)
+	user.update_action_buttons()
 
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active
@@ -82,7 +88,7 @@
 	flicker = !flicker
 
 //creates a new overlay for a scanned object
-/obj/item/device/t_scanner/proc/get_overlay(obj/scanned)
+/obj/item/device/t_scanner/proc/get_overlay(var/atom/movable/scanned)
 	//Use a cache so we don't create a whole bunch of new images just because someone's walking back and forth in a room.
 	//Also means that images are reused if multiple people are using t-rays to look at the same objects.
 	if(scanned in overlay_cache)
@@ -98,6 +104,16 @@
 			I.color = P.pipe_color
 			I.overlays += P.overlays
 			I.underlays += P.underlays
+
+		if(ismob(scanned))
+			if(ishuman(scanned))
+				var/mob/living/carbon/human/H = scanned
+				if(H.species.appearance_flags & HAS_SKIN_COLOR)
+					I.color = rgb(H.r_skin, H.g_skin, H.b_skin)
+			var/mob/M = scanned
+			I.color = M.color
+			I.overlays += M.overlays
+			I.underlays += M.underlays
 
 		I.alpha = 128
 		I.mouse_opacity = 0
@@ -115,6 +131,16 @@
 	if(!center) return
 
 	for(var/turf/T in range(scan_range, center))
+		for(var/mob/M in T.contents)
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				if(H.is_cloaked())
+					. += M
+			else if(M.alpha < 255)
+				. += M
+			else if(round_is_spooky() && isobserver(M))
+				. += M
+
 		if(!!T.is_plating())
 			continue
 
@@ -124,6 +150,8 @@
 			if(!O.invisibility)
 				continue //if it's already visible don't need an overlay for it
 			. += O
+
+
 
 /obj/item/device/t_scanner/proc/set_user_client(var/client/new_client)
 	if(new_client == user_client)

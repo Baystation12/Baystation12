@@ -10,7 +10,7 @@
 	speak_emote = list("squeeks","squeeks","squiks")
 	emote_hear = list("squeeks","squeaks","squiks")
 	emote_see = list("runs in a circle", "shakes", "scritches at something")
-	pass_flags = PASSTABLE
+	pass_flags = PASS_FLAG_TABLE
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
@@ -112,5 +112,5 @@
 /mob/living/simple_animal/mouse/brown/Tom/New()
 	..()
 	// Change my name back, don't want to be named Tom (666)
-	name = initial(name)
+	SetName(initial(name))
 	real_name = name

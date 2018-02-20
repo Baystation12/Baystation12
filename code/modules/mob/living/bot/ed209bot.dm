@@ -94,7 +94,7 @@
 				qdel(W)
 				build_step++
 				to_chat(user, "<span class='notice'>You add the robot leg to [src].</span>")
-				name = "legs/frame assembly"
+				SetName("legs/frame assembly")
 				if(build_step == 1)
 					item_state = "ed209_leg"
 					icon_state = "ed209_leg"
@@ -112,7 +112,7 @@
 				qdel(W)
 				build_step++
 				to_chat(user, "<span class='notice'>You add [W] to [src].</span>")
-				name = "vest/legs/frame assembly"
+				SetName("vest/legs/frame assembly")
 				item_state = "ed209_shell"
 				icon_state = "ed209_shell"
 
@@ -121,7 +121,7 @@
 				var/obj/item/weapon/weldingtool/WT = W
 				if(WT.remove_fuel(0, user))
 					build_step++
-					name = "shielded frame assembly"
+					SetName("shielded frame assembly")
 					to_chat(user, "<span class='notice'>You welded the vest to [src].</span>")
 		if(4)
 			if(istype(W, /obj/item/clothing/head/helmet))
@@ -129,7 +129,7 @@
 				qdel(W)
 				build_step++
 				to_chat(user, "<span class='notice'>You add the helmet to [src].</span>")
-				name = "covered and shielded frame assembly"
+				SetName("covered and shielded frame assembly")
 				item_state = "ed209_hat"
 				icon_state = "ed209_hat"
 
@@ -139,7 +139,7 @@
 				qdel(W)
 				build_step++
 				to_chat(user, "<span class='notice'>You add the prox sensor to [src].</span>")
-				name = "covered, shielded and sensored frame assembly"
+				SetName("covered, shielded and sensored frame assembly")
 				item_state = "ed209_prox"
 				icon_state = "ed209_prox"
 
@@ -154,12 +154,12 @@
 					if(C.use(1))
 						build_step++
 						to_chat(user, "<span class='notice'>You wire the ED-209 assembly.</span>")
-						name = "wired ED-209 assembly"
+						SetName("wired ED-209 assembly")
 				return
 
 		if(7)
 			if(istype(W, /obj/item/weapon/gun/energy/taser))
-				name = "taser ED-209 assembly"
+				SetName("taser ED-209 assembly")
 				build_step++
 				to_chat(user, "<span class='notice'>You add [W] to [src].</span>")
 				item_state = "ed209_taser"
@@ -175,7 +175,7 @@
 				sleep(40)
 				if(get_turf(user) == T && build_step == 8)
 					build_step++
-					name = "armed [name]"
+					SetName("armed [name]")
 					to_chat(user, "<span class='notice'>Taser gun attached.</span>")
 
 		if(9)

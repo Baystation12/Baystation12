@@ -24,7 +24,7 @@
 	if(isScrewdriver(tool) && !istype(src, /obj/structure/sign/double))
 		to_chat(user, "You unfasten the sign with your [tool.name].")
 		var/obj/item/sign/S = new(src.loc)
-		S.name = name
+		S.SetName(name)
 		S.desc = desc
 		S.icon_state = icon_state
 		S.sign_state = icon_state
@@ -53,7 +53,7 @@
 			if("West")
 				S.pixel_x = -32
 			else return
-		S.name = name
+		S.SetName(name)
 		S.desc = desc
 		S.icon_state = sign_state
 		to_chat(user, "You fasten \the [S] with your [tool].")
@@ -144,7 +144,7 @@
 
 /obj/structure/sign/warning/lethal_turrets/New()
 	..()
-	desc += " Enter at own risk!."
+	desc += " Enter at own risk!"
 
 /obj/structure/sign/warning/mail_delivery
 	name = "\improper MAIL DELIVERY"
@@ -161,6 +161,22 @@
 /obj/structure/sign/warning/nosmoking_2
 	name = "\improper NO SMOKING"
 	icon_state = "nosmoking2"
+
+/obj/structure/sign/warning/nosmoking_burned
+	name = "\improper NO SMOKING"
+	icon_state = "nosmoking2_b"
+
+/obj/structure/sign/warning/nosmoking_burned/Initialize()
+	. = ..()
+	desc += " It looks charred."
+
+/obj/structure/sign/warning/smoking
+	name = "\improper SMOKING"
+	icon_state = "smoking"
+
+/obj/structure/sign/warning/smoking/Initialize()
+	. = ..()
+	desc += " Hell yeah."
 
 /obj/structure/sign/warning/pods
 	name = "\improper ESCAPE PODS"

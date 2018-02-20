@@ -6,7 +6,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_HUGE
-	flags =  CONDUCT
+	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	fire_sound_text = "a loud whoosh of moving air"
 	fire_delay = 50
 	fire_sound = 'sound/weapons/tablehit1.ogg'
@@ -25,7 +25,7 @@
 /obj/item/weapon/gun/launcher/pneumatic/New()
 	..()
 	item_storage = new(src)
-	item_storage.name = "hopper"
+	item_storage.SetName("hopper")
 	item_storage.max_w_class = max_w_class
 	item_storage.max_storage_space = max_storage_space
 	item_storage.use_sound = null

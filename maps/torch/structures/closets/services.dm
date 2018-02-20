@@ -24,7 +24,6 @@
 	icon_closed = "hydrosecure"
 	icon_locked = "hydrosecure1"
 	icon_opened = "hydrosecureopen"
-	icon_broken = "hydrosecurebroken"
 	icon_off = "hydrosecureoff"
 
 /obj/structure/closet/secure_closet/hydroponics_torch/WillContain()
@@ -58,3 +57,19 @@
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/weapon/soap/nanotrasen
 	)
+
+/obj/structure/closet/secure_closet/bar_torch
+	name = "bar locker"
+	desc = "It's a storage unit for bar equipment."
+	req_access = list(access_bar)
+
+/obj/structure/closet/secure_closet/bar_torch/WillContain()
+	return list(
+		/obj/item/device/radio/headset/headset_service,
+		/obj/item/weapon/reagent_containers/food/drinks/shaker,
+		/obj/item/glass_jar,
+		/obj/item/weapon/book/manual/barman_recipes,
+		/obj/item/clothing/under/rank/bartender,
+		/obj/item/clothing/shoes/laceup
+	)
+

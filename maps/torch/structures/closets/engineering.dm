@@ -9,7 +9,6 @@
 	icon_closed = "securece"
 	icon_locked = "securece1"
 	icon_opened = "secureceopen"
-	icon_broken = "securecebroken"
 	icon_off = "secureceoff"
 
 /obj/structure/closet/secure_closet/engineering_chief_torch/WillContain()
@@ -31,10 +30,6 @@
 		/obj/item/weapon/crowbar/brace_jack,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/glasses/welding/superior,
-		/obj/item/weapon/gun/projectile/colt/officer,
-		/obj/item/ammo_magazine/c45m,
-		/obj/item/ammo_magazine/c45m,
-		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/weapon/clipboard,
@@ -54,7 +49,6 @@
 	icon_closed = "secureeng"
 	icon_locked = "secureeng1"
 	icon_opened = "secureengopen"
-	icon_broken = "secureengbroken"
 	icon_off = "secureengoff"
 
 /obj/structure/closet/secure_closet/engineering_torch/WillContain()
@@ -82,7 +76,6 @@
 	icon_closed = "secureeng"
 	icon_locked = "secureeng1"
 	icon_opened = "secureengopen"
-	icon_broken = "secureengbroken"
 	icon_off = "secureengoff"
 
 /obj/structure/closet/secure_closet/engineering_contractor/WillContain()
@@ -92,7 +85,7 @@
 		/obj/item/weapon/storage/belt/utility/full,
 		/obj/item/device/radio/headset/headset_eng,
 		/obj/item/clothing/suit/storage/hazardvest,
-		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/mask/gas,
 		/obj/item/weapon/cartridge/engineering,
 		/obj/item/device/flashlight,
 		/obj/item/taperoll/engineering,
@@ -107,7 +100,6 @@
 	icon_closed = "secureseneng"
 	icon_locked = "secureseneng1"
 	icon_opened = "securesenengopen"
-	icon_broken = "securesenengbroken"
 	icon_off = "securesenengoff"
 
 /obj/structure/closet/secure_closet/engineering_senior/WillContain()
@@ -119,9 +111,7 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/weapon/storage/belt/utility/full,
 		/obj/item/clothing/glasses/meson,
-		/obj/item/weapon/cartridge/engineering,
 		/obj/item/taperoll/engineering,
-		/obj/item/weapon/cartridge/atmos,
 		/obj/item/taperoll/atmos,
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/device/flash,
@@ -139,7 +129,6 @@
 	icon_closed = "secureatm"
 	icon_locked = "secureatm1"
 	icon_opened = "secureatmopen"
-	icon_broken = "secureatmbroken"
 	icon_off = "secureatmoff"
 
 /obj/structure/closet/secure_closet/atmos_torch/WillContain()

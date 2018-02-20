@@ -142,15 +142,16 @@
 	taste_description = "sludge"
 	reagent_state = LIQUID
 	color = "#8080ff"
-	metabolism = REM * 0.5
+	metabolism = REM * 0.05
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_CRYO, 1)
 	if(M.bodytemperature < 170)
-		M.adjustCloneLoss(-10 * removed)
+		M.adjustCloneLoss(-100 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
-		M.heal_organ_damage(10 * removed, 10 * removed)
+		M.heal_organ_damage(100 * removed, 100 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
 
 /datum/reagent/clonexadone
@@ -159,15 +160,16 @@
 	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#80bfff"
-	metabolism = REM * 0.5
+	metabolism = REM * 0.05
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_CRYO, 1)
 	if(M.bodytemperature < 170)
-		M.adjustCloneLoss(-30 * removed)
+		M.adjustCloneLoss(-300 * removed)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
-		M.heal_organ_damage(30 * removed, 30 * removed)
+		M.heal_organ_damage(300 * removed, 300 * removed)
 		M.add_chemical_effect(CE_PULSE, -2)
 
 /* Painkillers */
@@ -692,7 +694,7 @@
 	color = "#c8a5dc"
 	overdose = 60
 	scannable = 1
-	metabolism = 0.02
+	metabolism = REM * 0.05
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/antidexafen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -732,3 +734,21 @@
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)
 		M.resuscitate()
+
+/datum/reagent/nanoblood
+	name = "Nanoblood"
+	description = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."
+	taste_description = "blood with bubbles"
+	reagent_state = LIQUID
+	color = "#c10158"
+	scannable = 1
+	overdose = 5
+	metabolism = 1
+
+/datum/reagent/nanoblood/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
+		return
+	if(M.regenerate_blood(4 * removed))
+		M.immunity = max(M.immunity - 0.1, 0)
+		if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
+			M.immunity = max(M.immunity - 0.5, 0)

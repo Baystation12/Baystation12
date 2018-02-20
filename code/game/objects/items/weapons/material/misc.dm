@@ -21,13 +21,7 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	attack_verb = list("chopped", "torn", "cut")
 	applies_material_colour = 0
-
-/obj/item/weapon/material/hatchet/unathiknife
-	name = "duelling knife"
-	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "unathiknife"
-	attack_verb = list("ripped", "torn", "cut")
+	hitsound = "chop"
 
 /obj/item/weapon/material/hatchet/tacknife
 	name = "tactical knife"
@@ -41,15 +35,21 @@
 /obj/item/weapon/material/hatchet/machete
 	name = "machete"
 	desc = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
-	icon_state = "machete"
+	item_state = "machete"
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
+
+/obj/item/weapon/material/hatchet/machete/Initialize()
+	icon_state = "machete[pick("","_red","_blue", "_black", "_olive")]"
+	. = ..()
 
 /obj/item/weapon/material/hatchet/machete/deluxe
 	name = "deluxe machete"
 	desc = "A fine example of a machete, with a polished blade, wooden handle and a leather cord loop."
+
+/obj/item/weapon/material/hatchet/machete/deluxe/Initialize()
+	. = ..()
 	icon_state = "machetedx"
-	item_state = "machete"
 
 /obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"

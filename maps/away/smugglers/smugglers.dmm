@@ -6,7 +6,6 @@
 "af" = (/turf/simulated/wall/r_wall,/area/smugglers/base)
 "ag" = (/obj/machinery/door/airlock/external{frequency = 1503; icon_state = "door_closed"; locked = 0},/turf/simulated/floor,/area/smugglers/base)
 "ah" = (/turf/simulated/floor/asteroid,/area/space)
-"ai" = (/obj/effect/landmark/corpse,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/asteroid,/area/mine/explored)
 "aj" = (/obj/item/ammo_casing/a50{pixel_x = 5; pixel_y = 5},/obj/item/ammo_casing/a50,/obj/item/weapon/shovel{pixel_x = 10; pixel_y = -5},/obj/effect/decal/cleanable/blood,/turf/simulated/floor/asteroid,/area/mine/explored)
 "ak" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/asteroid,/area/mine/explored)
 "al" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/turf/simulated/wall/r_wall,/area/smugglers/base)
@@ -133,6 +132,7 @@
 "cC" = (/obj/effect/shuttle_landmark/nav_asteroid_base/nav2,/turf/space,/area/space)
 "cD" = (/obj/effect/landmark/random_gen/asteroid{generation_height = 50; generation_width = 50},/turf/space,/area/space)
 "cE" = (/obj/effect/shuttle_landmark/nav_asteroid_base/nav1,/turf/space,/area/space)
+"db" = (/obj/effect/decal/cleanable/blood,/obj/effect/landmark/corpse/doctor,/turf/simulated/floor/asteroid,/area/mine/explored)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -162,7 +162,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaababacaaaaaaaaaaacaaababacaaaaaaacacaaacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacacaaaaaaaaaaaaaaaaaaaaaaaaabababababacacaaaaaaacacacabacaaadaaacacaaacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababacaaaaaaaeaaaaaaaaaaaaaaaaaaabacacababababaaaaaaacacacabaaaaaaaaacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacababaaaaafagafaaaaahaaaaaaaaaaabacacababaaabaaaaaaacacaiajakakaaaaacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacababaaaaafagafaaaaahaaaaaaaaaaabacacababaaabaaaaaaacacdbajakakaaaaacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabababalamafaaahanaoapaaaaaaacacacabababacacacacacacabacacabababababacacababacababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacababacafaqafafafafafarasatafafafafafafafauacacacacabacacacabababababacababacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababafavawaxayazaAaBaCaDaEaFaGaHaIaJaKaLababacacabacababaMabababababababacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

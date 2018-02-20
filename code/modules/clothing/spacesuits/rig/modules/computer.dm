@@ -243,8 +243,8 @@
 	interface_desc = "An induction-powered high-throughput datalink suitable for hacking encrypted networks."
 	var/list/stored_research
 
-/obj/item/rig_module/datajack/New()
-	..()
+/obj/item/rig_module/datajack/Initialize()
+	. =..()
 	stored_research = list()
 
 /obj/item/rig_module/datajack/engage(atom/target)

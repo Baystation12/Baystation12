@@ -308,7 +308,7 @@
 					qdel(W)
 					build_step++
 					to_chat(user, "<span class='notice'>You add the health sensor to [src].</span>")
-					name = "First aid/robot arm/health analyzer assembly"
+					SetName("First aid/robot arm/health analyzer assembly")
 					overlays += image('icons/obj/aibots.dmi', "na_scanner")
 
 			if(1)
@@ -319,7 +319,7 @@
 					var/turf/T = get_turf(src)
 					var/mob/living/bot/medbot/S = new /mob/living/bot/medbot(T)
 					S.skin = skin
-					S.name = created_name
+					S.SetName(created_name)
 					S.update_icons() // apply the skin
 					user.drop_from_inventory(src)
 					qdel(src)

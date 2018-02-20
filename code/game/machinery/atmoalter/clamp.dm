@@ -52,7 +52,7 @@
 	. = ..()
 
 /obj/machinery/clamp/proc/open()
-	if(open)
+	if(open || !target)
 		return 0
 
 	target.build_network()

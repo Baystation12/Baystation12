@@ -7,10 +7,7 @@
 		else
 			name = "[seed.seed_name]"
 	else
-		name = initial(name)
-
-	if(labelled)
-		name += " ([labelled])"
+		SetName(initial(name))
 
 	overlays.Cut()
 	var/new_overlays = list()

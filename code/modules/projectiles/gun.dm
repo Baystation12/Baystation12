@@ -33,12 +33,12 @@
 	desc = "Its a gun. It's pretty terrible, though."
 	icon = 'icons/obj/gun.dmi'
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand_guns.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand_guns.dmi',
+		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns.dmi',
+		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns.dmi',
 		)
 	icon_state = "detective"
 	item_state = "gun"
-	flags =  CONDUCT
+	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	w_class = ITEM_SIZE_NORMAL
@@ -65,6 +65,7 @@
 	var/list/dispersion = list(0)
 	var/one_hand_penalty
 	var/wielded_item_state
+	var/combustion	//whether it creates hotspot when fired
 
 	var/next_fire_time = 0
 
@@ -276,6 +277,11 @@
 	if(screen_shake)
 		spawn()
 			shake_camera(user, screen_shake+1, screen_shake)
+
+	if(combustion)
+		var/turf/curloc = get_turf(src)
+		curloc.hotspot_expose(700, 5)
+
 	update_icon()
 
 

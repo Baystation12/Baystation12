@@ -16,8 +16,8 @@
 	item_state = null
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/clothing/mask/muzzle/New()
-	..()
+/obj/item/clothing/mask/muzzle/Initialize()
+	. = ..()
 	say_messages = list("Mmfph!", "Mmmf mrrfff!", "Mmmf mnnf!")
 	say_verbs = list("mumbles", "says")
 
@@ -34,7 +34,7 @@
 	item_state = "sterile"
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
@@ -42,6 +42,9 @@
 	down_body_parts_covered = null
 	down_icon_state = "steriledown"
 	pull_mask = 1
+	sprite_sheets = list(
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi'
+		)
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
@@ -66,7 +69,7 @@
 	icon_state = "blueneckscarf"
 	item_state = "blueneckscarf"
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
@@ -76,7 +79,7 @@
 	icon_state = "redwhite_scarf"
 	item_state = "redwhite_scarf"
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
@@ -86,7 +89,7 @@
 	icon_state = "green_scarf"
 	item_state = "green_scarf"
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 
@@ -96,7 +99,7 @@
 	icon_state = "ninja_scarf"
 	item_state = "ninja_scarf"
 	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 	w_class = ITEM_SIZE_SMALL
 	gas_transfer_coefficient = 0.90
 	siemens_coefficient = 0
@@ -256,3 +259,78 @@
 	item_state = "spirit_mask"
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE|EYES
+	
+// Bandanas below
+/obj/item/clothing/mask/bandana
+	name = "black bandana"
+	desc = "A fine bandana with nanotech lining. Can be worn on the head or face."
+	flags_inv = HIDEFACE
+	slot_flags = SLOT_MASK|SLOT_HEAD
+	body_parts_covered = FACE
+	icon_state = "bandblack"
+	item_state = "bandblack"
+	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
+	w_class = ITEM_SIZE_SMALL
+
+/obj/item/clothing/mask/bandana/equipped(var/mob/user, var/slot)
+	switch(slot)
+		if(slot_wear_mask) //Mask is the default for all the settings
+			flags_inv = initial(flags_inv)
+			body_parts_covered = initial(body_parts_covered)
+			icon_state = initial(icon_state)
+			sprite_sheets = list(SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi')
+
+		if(slot_head)
+			flags_inv = 0
+			body_parts_covered = HEAD
+			icon_state = "[initial(icon_state)]_up"
+			sprite_sheets = list()
+
+	return ..()
+
+/obj/item/clothing/mask/bandana/red
+	name = "red bandana"
+	icon_state = "bandred"
+	item_state = "bandred"
+
+/obj/item/clothing/mask/bandana/blue
+	name = "blue bandana"
+	icon_state = "bandblue"
+	item_state = "bandblue"
+
+/obj/item/clothing/mask/bandana/green
+	name = "green bandana"
+	icon_state = "bandgreen"
+	item_state = "bandgreen"
+
+/obj/item/clothing/mask/bandana/gold
+	name = "gold bandana"
+	icon_state = "bandgold"
+	item_state = "bandgold"
+	
+/obj/item/clothing/mask/bandana/orange
+	name = "orange bandana"
+	icon_state = "bandorange"
+	item_state = "bandorange"
+	
+/obj/item/clothing/mask/bandana/purple
+	name = "purple bandana"
+	icon_state = "bandpurple"
+	item_state = "bandpurple"
+	
+/obj/item/clothing/mask/bandana/botany
+	name = "botany bandana"
+	icon_state = "bandbotany"
+	item_state = "bandbotany"
+	
+/obj/item/clothing/mask/bandana/camo
+	name = "camo bandana"
+	icon_state = "bandcamo"
+	item_state = "bandcamo"
+
+/obj/item/clothing/mask/bandana/skull
+	name = "skull bandana"
+	desc = "A fine black bandana with nanotech lining and a skull emblem. Can be worn on the head or face."
+	icon_state = "bandskull"
+	item_state = "bandskull"
+	

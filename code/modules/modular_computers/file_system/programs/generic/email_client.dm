@@ -3,6 +3,7 @@
 	filedesc = "Email Client"
 	extended_desc = "This program may be used to log in into your email account."
 	program_icon_state = "generic"
+	program_key_state = "generic_key"
 	program_menu_icon = "mail-closed"
 	size = 7
 	requires_ntnet = 1

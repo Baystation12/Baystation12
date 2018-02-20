@@ -1,7 +1,7 @@
 #include "bearcat_areas.dm"
 
 /obj/effect/overmap/ship/bearcat
-	name = "FTV Bearcat"
+	name = "light freighter"
 	color = "#00FFFF"
 	vessel_mass = 60
 	default_delay = 3 MINUTES
@@ -13,6 +13,7 @@
 	for(var/area/ship/scrap/A)
 		A.name = "\improper [name] - [A.name]"
 		GLOB.using_map.area_purity_test_exempt_areas += A.type
+	name = "[name], \a [initial(name)]"
 	..()
 
 /datum/map_template/ruin/away_site/bearcat_wreck

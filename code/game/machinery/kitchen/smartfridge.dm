@@ -11,7 +11,7 @@
 	use_power = 1
 	idle_power_usage = 5
 	active_power_usage = 100
-	flags = NOREACT
+	atom_flags = ATOM_FLAG_NO_REACT
 	var/global/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
 	var/icon_on = "smartfridge"
 	var/icon_off = "smartfridge-off"
@@ -163,8 +163,8 @@
 			if(S.dry || !I.get_specific_product(get_turf(src), S)) continue
 			if(S.dried_type == S.type)
 				S.dry = 1
-				S.name = "dried [S.name]"
-				S.color = "#aaaaaa"
+				S.SetName("dried [S.name]")
+				S.color = "#a38463"
 				stock_item(S)
 			else
 				var/D = S.dried_type
@@ -219,7 +219,7 @@
 		var/obj/item/weapon/storage/bag/P = O
 		var/plants_loaded = 0
 		for(var/obj/G in P.contents)
-			if(P.remove_from_storage(G, src) && accept_check(G))
+			if(accept_check(G) && P.remove_from_storage(G, src))
 				plants_loaded++
 				stock_item(G)
 
@@ -297,8 +297,6 @@
 
 	var/mob/user = usr
 	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
-
-	src.add_fingerprint(user)
 
 	if(href_list["close"])
 		user.unset_machine()

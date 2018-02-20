@@ -43,7 +43,7 @@ var/list/mechtoys = list(
 		)
 
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
-	if(istype(A) && A.checkpass(PASSGLASS))
+	if(istype(A) && A.checkpass(PASS_FLAG_GLASS))
 		return prob(60)
 
 	var/obj/structure/bed/B = A
@@ -140,6 +140,7 @@ var/list/point_source_descriptions = list(
 	var/ordernum
 	var/list/shoppinglist = list()
 	var/list/requestlist = list()
+	var/list/donelist = list()
 	var/list/master_supply_list = list()
 	//shuttle movement
 	var/movetime = 1200
@@ -239,12 +240,13 @@ var/list/point_source_descriptions = list(
 			var/turf/pickedloc = clear_turfs[i]
 			clear_turfs.Cut(i,i+1)
 			shoppinglist -= S
+			donelist += S
 
 			var/datum/supply_order/SO = S
 			var/decl/hierarchy/supply_pack/SP = SO.object
 
 			var/obj/A = new SP.containertype(pickedloc)
-			A.name = "[SP.containername][SO.comment ? " ([SO.comment])":"" ]"
+			A.SetName("[SP.containername][SO.comment ? " ([SO.comment])":"" ]")
 			//supply manifest generation begin
 
 			var/obj/item/weapon/paper/manifest/slip

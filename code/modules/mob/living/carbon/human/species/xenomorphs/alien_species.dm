@@ -1,6 +1,6 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
-	name = "Xenophage"
+	name = SPECIES_XENO
 	name_plural = "Xenophages"
 
 	default_language = "Xenophage"
@@ -35,7 +35,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags = NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_EMBED
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_POISON | SPECIES_FLAG_NO_EMBED | SPECIES_FLAG_NO_TANGLE
 	appearance_flags = HAS_EYE_COLOR | HAS_SKIN_COLOR
 
 	spawn_flags = SPECIES_IS_RESTRICTED
@@ -122,7 +122,7 @@
 
 	alien_number++ //Keep track of how many aliens we've had so far.
 	H.real_name = "alien [caste_name] ([alien_number])"
-	H.name = H.real_name
+	H.SetName(H.real_name)
 
 	..()
 
@@ -317,10 +317,10 @@
 	// Make sure only one official queen exists at any point.
 	if(!alien_queen_exists(1,H))
 		H.real_name = "alien queen ([alien_number])"
-		H.name = H.real_name
+		H.SetName(H.real_name)
 	else
 		H.real_name = "alien princess ([alien_number])"
-		H.name = H.real_name
+		H.SetName(H.real_name)
 
 /datum/hud_data/alien
 

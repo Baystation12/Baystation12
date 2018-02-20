@@ -141,7 +141,7 @@
 	burn_damage = 0
 
 	if(!can_breach || !breaches || !breaches.len)
-		name = initial(name)
+		SetName(initial(name))
 		return 0
 
 	for(var/datum/breach/B in breaches)
@@ -157,13 +157,13 @@
 
 	if(damage >= 3)
 		if(brute_damage >= 3 && brute_damage > burn_damage)
-			name = "punctured [initial(name)]"
+			SetName("punctured [initial(name)]")
 		else if(burn_damage >= 3 && burn_damage > brute_damage)
-			name = "scorched [initial(name)]"
+			SetName("scorched [initial(name)]")
 		else
-			name = "damaged [initial(name)]"
+			SetName("damaged [initial(name)]")
 	else
-		name = initial(name)
+		SetName(initial(name))
 
 	return damage
 

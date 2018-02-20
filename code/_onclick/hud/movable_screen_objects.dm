@@ -99,7 +99,7 @@
 	set name = "Spawn Movable UI Object"
 
 	var/obj/screen/movable/M = new()
-	M.name = "Movable UI Object"
+	M.SetName("Movable UI Object")
 	M.icon_state = "block"
 	M.maptext = "Movable"
 	M.maptext_width = 64
@@ -118,7 +118,7 @@
 	set name = "Spawn Snap UI Object"
 
 	var/obj/screen/movable/snap/S = new()
-	S.name = "Snap UI Object"
+	S.SetName("Snap UI Object")
 	S.icon_state = "block"
 	S.maptext = "Snap"
 	S.maptext_width = 64

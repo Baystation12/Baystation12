@@ -98,6 +98,10 @@
 		owner.set_stat(CONSCIOUS)
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
+/obj/item/organ/internal/cell/listen()
+	if(get_charge())
+		return "faint hum of the power bank"
+
 // Used for an MMI or posibrain being installed into a human.
 /obj/item/organ/internal/mmi_holder
 	name = "brain interface"
@@ -129,8 +133,8 @@
 		stored_mmi.brainobj = new(stored_mmi)
 		stored_mmi.brainmob.container = stored_mmi
 		stored_mmi.brainmob.real_name = owner.real_name
-		stored_mmi.brainmob.name = stored_mmi.brainmob.real_name
-		stored_mmi.name = "[initial(stored_mmi.name)] ([owner.real_name])"
+		stored_mmi.brainmob.SetName(stored_mmi.brainmob.real_name)
+		stored_mmi.SetName("[initial(stored_mmi.name)] ([owner.real_name])")
 
 	if(!owner) return
 

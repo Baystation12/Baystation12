@@ -44,21 +44,21 @@
 			to_chat(user, "<span class='notice'>You set the label on \the [src] to '[L]'.</span>")
 
 		label = L
-		name = "[initial(name)] - '[L]'"
+		SetName("[initial(name)] - '[L]'")
 	else
 		if(user)
 			to_chat(user, "<span class='notice'>You clear the label on \the [src].</span>")
 		label = ""
-		name = initial(name)
+		SetName(initial(name))
 
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/attack_self()
 	..()
 	if (is_open_container())
 		to_chat(usr, "<span class = 'notice'>You put the cap on \the [src].</span>")
-		flags ^= OPENCONTAINER
+		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
 		to_chat(usr, "<span class = 'notice'>You take the cap off \the [src].</span>")
-		flags |= OPENCONTAINER
+		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/reagent_containers/chem_disp_cartridge/afterattack(obj/target, mob/user , flag)
 	if (!is_open_container() || !flag)

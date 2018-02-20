@@ -29,7 +29,7 @@
 	return
 
 /obj/item/device/mmi
-	name = "man-machine interface"
+	name = "\improper Man-Machine Interface"
 	desc = "A complex life support shell that interfaces between a brain and electronic devices."
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "mmi_empty"
@@ -67,9 +67,9 @@
 
 		user.drop_item()
 		brainobj = O
-		brainobj.loc = src
+		brainobj.forceMove(src)
 
-		name = "man-machine interface ([brainmob.real_name])"
+		SetName("[initial(name)]: ([brainmob.real_name])")
 		icon_state = "mmi_full"
 
 		locked = 1
@@ -100,7 +100,7 @@
 		to_chat(user, "<span class='notice'>You upend the MMI, spilling the brain onto the floor.</span>")
 		var/obj/item/organ/internal/brain/brain
 		if (brainobj)	//Pull brain organ out of MMI.
-			brainobj.loc = user.loc
+			brainobj.forceMove(user.loc)
 			brain = brainobj
 			brainobj = null
 		else	//Or make a new one if empty.
@@ -112,16 +112,16 @@
 		brainmob = null//Set mmi brainmob var to null
 
 		icon_state = "mmi_empty"
-		name = "man-machine interface"
+		SetName(initial(name))
 
 /obj/item/device/mmi/proc/transfer_identity(var/mob/living/carbon/human/H)//Same deal as the regular brain proc. Used for human-->robot people.
 	brainmob = new(src)
-	brainmob.name = H.real_name
+	brainmob.SetName(H.real_name)
 	brainmob.real_name = H.real_name
 	brainmob.dna = H.dna
 	brainmob.container = src
 
-	name = "Man-Machine Interface: [brainmob.real_name]"
+	SetName("[initial(name)]: [brainmob.real_name]")
 	icon_state = "mmi_full"
 	locked = 1
 	return

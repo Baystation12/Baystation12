@@ -292,7 +292,7 @@ About the Tools:
 			'pouring' our reagents into something else.
 
 		atom/proc/is_open_container()
-			Checks atom/var/flags & OPENCONTAINER.
+			Checks atom/var/obj_flags & OBJ_FLAG_OPEN_CONTAINER.
 			If this returns 1 , you can use syringes, beakers etc
 			to manipulate the contents of this object.
 			If it's 0, you'll need to write your own custom reagent
