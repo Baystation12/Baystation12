@@ -6,6 +6,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	var/list/surnames = list()
 	var/list/forenames = list()
 	var/list/ckeys = list()
+	var/pure_msg = msg
 
 	//explode the input msg into a list
 	var/list/msglist = splittext(msg, " ")
@@ -60,6 +61,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 							continue
 			msg += "[original_word] "
 
+	msg = pure_msg
 	return msg
 
 /client/verb/adminhelp(msg as text)

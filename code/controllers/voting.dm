@@ -132,11 +132,11 @@ datum/controller/vote
 		var/third = list()
 		for(var/option in choices)
 			if(choices[option] == greatest_votes && greatest_votes)
-				first += option
+				first = utf8_to_cp1251(option)
 			else if(choices[option] == second_greatest_votes && second_greatest_votes)
-				second += option
+				second += utf8_to_cp1251(option)
 			else if(choices[option] == third_greatest_votes && third_greatest_votes)
-				third += option
+				third += utf8_to_cp1251(option)
 		return list(first, second, third)
 
 	proc/announce_result()
@@ -356,10 +356,10 @@ datum/controller/vote
 					for(var/name in GLOB.all_maps)
 						choices.Add(name)
 				if("custom")
-					question = sanitizeSafe(input(usr,"What is the vote for?") as text|null)
+					question = cp1251_to_utf8(sanitizeSafe(input(usr,"What is the vote for?") as text|null))
 					if(!question)	return 0
 					for(var/i=1,i<=10,i++)
-						var/option = capitalize(sanitize(input(usr,"Please enter an option or hit cancel to finish") as text|null))
+						var/option = cp1251_to_utf8(capitalize(sanitize(input_cp1251(usr,"Please enter an option or hit cancel to finish"))))
 						if(!option || mode || !usr.client)	break
 						choices.Add(option)
 				else
@@ -369,7 +369,7 @@ datum/controller/vote
 			started_time = world.time
 			var/text = "[capitalize(mode)] vote started by [initiator]."
 			if(mode == "custom")
-				text += "\n[question]"
+				text += "\n[utf8_to_cp1251(question)]"
 
 			log_vote(text)
 			to_world("<font color='purple'><b>[text]</b>\nType <b>vote</b> or click <a href='?src=\ref[src]'>here</a> to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>")

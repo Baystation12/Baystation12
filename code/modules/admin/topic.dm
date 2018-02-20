@@ -1503,7 +1503,7 @@
 		faxreply = P
 
 		P.admindatum = src
-		P.origin = replyorigin
+		P.origin = russian_to_utf8(replyorigin)
 		P.destination = fax
 		P.sender = sender
 
@@ -1732,7 +1732,7 @@
 		src.access_news_network()
 
 	else if(href_list["ac_set_new_message"])
-		src.admincaster_feed_message.body = sanitize(input(usr, "Write your Feed story", "Network Channel Handler", ""))
+		src.admincaster_feed_message.body = sanitize(input_utf8(usr, "Write your Feed story", "Network Channel Handler", ""))
 		src.access_news_network()
 
 	else if(href_list["ac_submit_new_message"])

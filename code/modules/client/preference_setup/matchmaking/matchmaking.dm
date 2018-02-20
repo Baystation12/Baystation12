@@ -188,7 +188,7 @@ var/global/datum/matchmaker/matchmaker = new()
 	if(href_list["info_relation"])
 		var/datum/relation/R = locate(href_list["info_relation"])
 		if(istype(R))
-			var/info = sanitize(input("What would you like the other party for this connection to know about your character?","Character info",R.info) as message|null)
+			var/info = sanitize(input_utf8("What would you like the other party for this connection to know about your character?","Character info",R.info))
 			if(info)
 				R.info = info
 				see_relationship_info()

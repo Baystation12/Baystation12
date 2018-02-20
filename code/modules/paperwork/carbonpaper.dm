@@ -32,7 +32,7 @@
 
 	if (copied == 0)
 		var/obj/item/weapon/paper/carbon/c = src
-		var/copycontents = html_decode(c.info)
+		var/copycontents = rhtml_decode(c.info)
 		var/obj/item/weapon/paper/carbon/copy = new /obj/item/weapon/paper/carbon (usr.loc)
 		// <font>
 		copycontents = replacetext(copycontents, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action

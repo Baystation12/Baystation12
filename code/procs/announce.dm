@@ -57,7 +57,7 @@ datum/announcement/proc/FormMessage(message as text, message_title as text)
 	. = "<h2 class='alert'>[message_title]</h2>"
 	. += "<br><span class='alert'>[message]</span>"
 	if (announcer)
-		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
+		. += "<br><span class='alert'> -[rhtml_encode(announcer)]</span>"
 
 datum/announcement/minor/FormMessage(message as text, message_title as text)
 	. = "<b>[message]</b>"
@@ -66,7 +66,7 @@ datum/announcement/priority/FormMessage(message as text, message_title as text)
 	. = "<h1 class='alert'>[message_title]</h1>"
 	. += "<br><span class='alert'>[message]</span>"
 	if(announcer)
-		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
+		. += "<br><span class='alert'> -[rhtml_encode(announcer)]</span>"
 	. += "<br>"
 
 datum/announcement/priority/command/FormMessage(message as text, message_title as text)
