@@ -95,7 +95,7 @@
 	backpack_type = /obj/item/weapon/storage/backpack/satchel_cap
 
 /decl/cardborg_appearance/syndicate
-	icon_state = "droid-combat"
+	icon_state = "motile-combat"
 	backpack_type = /obj/item/weapon/storage/backpack/dufflebag/syndie
 
 /decl/cardborg_appearance/syndicate/med
