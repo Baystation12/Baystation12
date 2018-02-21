@@ -176,8 +176,7 @@ var/global/list/robot_modules = list(
 	sprites = list(	"Basic" = "robot_old",
 					"Android" = "droid",
 					"Default" = "robot",
-					"Drone" = "drone-standard",
-					"Doot" = "eyebot-standard"
+					"Drone" = "drone-standard"
 				  )
 
 /obj/item/weapon/robot_module/standard/New()
@@ -204,8 +203,7 @@ var/global/list/robot_modules = list(
 					"Standard" = "surgeon",
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
-					"Drone" = "drone-surgery",
-					"Doot" = "eyebot-medical"
+					"Drone" = "drone-surgery"
 					)
 
 /obj/item/weapon/robot_module/medical/surgeon/New()
@@ -258,8 +256,7 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
 					"Drone - Medical" = "drone-medical",
-					"Drone - Chemistry" = "drone-chemistry",
-					"Doot" = "eyebot-medical"
+					"Drone - Chemistry" = "drone-chemistry"
 					)
 
 /obj/item/weapon/robot_module/medical/crisis/New()
@@ -328,8 +325,7 @@ var/global/list/robot_modules = list(
 					"Antique" = "engineerrobot",
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
-					"Drone" = "drone-engineer",
-					"Doot" = "eyebot-engineering"
+					"Drone" = "drone-engineer"
 					)
 	no_slip = 1
 
@@ -419,9 +415,7 @@ var/global/list/robot_modules = list(
 					"Black Knight" = "securityrobot",
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
-					"Drone" = "drone-sec",
-					"Doot" = "eyebot-security",
-					"Tridroid" = "orb-security"
+					"Drone" = "drone-sec"
 				)
 
 /obj/item/weapon/robot_module/security/general/New()
@@ -457,7 +451,6 @@ var/global/list/robot_modules = list(
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
 					"Drone" = "drone-janitor",
-					"Doot" = "eyebot-janitor"
 					)
 
 /obj/item/weapon/robot_module/janitor/New()
@@ -501,8 +494,7 @@ var/global/list/robot_modules = list(
 					"Rich" = "maximillion",
 					"Default" = "Service2",
 					"Drone - Service" = "drone-service",
-					"Drone - Hydro" = "drone-hydro",
-					"Doot" = "eyebot-standard"
+					"Drone - Hydro" = "drone-hydro"
 				  	)
 
 /obj/item/weapon/robot_module/clerical/butler/New()
@@ -544,8 +536,7 @@ var/global/list/robot_modules = list(
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
 					"Default" = "Service2",
-					"Drone" = "drone-service",
-					"Doot" = "eyebot-standard"
+					"Drone" = "drone-service"
 					)
 
 /obj/item/weapon/robot_module/clerical/general/New()
@@ -576,8 +567,7 @@ var/global/list/robot_modules = list(
 					"Basic" = "Miner_old",
 					"Advanced Droid" = "droid-miner",
 					"Treadhead" = "Miner",
-					"Drone" = "drone-miner",
-					"Doot" = "eyebot-miner"
+					"Drone" = "drone-miner"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
@@ -601,8 +591,7 @@ var/global/list/robot_modules = list(
 	networks = list(NETWORK_RESEARCH)
 	sprites = list(
 					"Droid" = "droid-science",
-					"Drone" = "drone-science",
-					"Doot" = "eyebot-science"
+					"Drone" = "drone-science"
 					)
 
 /obj/item/weapon/robot_module/research/New()
@@ -665,7 +654,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/security/combat
 	name = "combat robot module"
 	hide_on_manifest = 1
-	sprites = list("Combat Android" = "droid-combat")
+	sprites = list("Combat Android" = "motile-combat")
 
 /obj/item/weapon/robot_module/security/combat/New()
 	src.modules += new /obj/item/device/flash(src)
