@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Fixes gravity event bringing people to fall in areas that do not usually have gravitation."
