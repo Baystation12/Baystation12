@@ -1,4 +1,4 @@
-GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
+GLOBAL_DATUM_INIT(using_map, /datum/map, new USING_MAP_DATUM)
 GLOBAL_LIST_EMPTY(all_maps)
 
 var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable

@@ -124,6 +124,9 @@ area/space/atmosalert()
 	name = "\improper Security - Brig"
 	icon_state = "brig"
 
+
+
+
 /area/security/prison
 	name = "\improper Security - Prison Wing"
 	icon_state = "sec_prison"
