@@ -1,5 +1,5 @@
 var/list/floor_light_cache = list()
-
+GLOBAL_LIST_INIT(floor_lights, list())
 /obj/machinery/floor_light
 	name = "floor light"
 	icon = 'icons/obj/machines/floor_light.dmi'
@@ -15,18 +15,47 @@ var/list/floor_light_cache = list()
 	matter = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
 
 	var/on
+	var/pressure_sensor = TRUE
+	var/uses_shutoff_timer = FALSE
+	var/shutoff_timer = 0 SECONDS
 	var/damaged
 	var/default_light_range = 4
 	var/default_light_power = 2
 	var/default_light_colour = "#ffffff"
+//For networking.
+	var/ID
+	var/supplied //Set to true if unneeding to be added to a network. Basically used to keep the network proc from running in a loop.
 
 /obj/machinery/floor_light/prebuilt
 	anchored = 1
+
+/obj/machinery/floor_light/Initialize()
+	. = ..()
+	GLOB.floor_lights += src
+	ID = pick(1,99999) //This is probably excessive, but I don't think iterating through the list each time would be preferable.
+	if(anchored)
+		create_network()
+/obj/machinery/floor_light/proc/create_network()
+	if(supplied)
+		return
+	for(var/obj/machinery/floor_light/F in range(2))
+		if(F.ID == ID)
+			return
+		else
+			F.ID = ID
+			F.supplied = TRUE
+			supplied = TRUE
+			F.create_network()
 
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
 	if(isScrewdriver(W))
 		anchored = !anchored
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
+		if(anchored)
+			supplied = FALSE
+			create_network()
+	else if(isMultitool(W))
+		configure(user)
 	else if(isWelder(W) && (damaged || (stat & BROKEN)))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
@@ -59,24 +88,32 @@ var/list/floor_light_cache = list()
 		update_brightness()
 		return
 	else
+		toggle_active()
 
-		if(!anchored)
-			to_chat(user, "<span class='warning'>\The [src] must be screwed down first.</span>")
-			return
+/obj/machinery/floor_light/proc/toggle_active(mob/user, var/force_off)
+	if(!anchored)
+		to_chat(user, "<span class='warning'>\The [src] must be screwed down first.</span>")
+		return
 
-		if(stat & BROKEN)
-			to_chat(user, "<span class='warning'>\The [src] is too damaged to be functional.</span>")
-			return
+	if(stat & BROKEN)
+		to_chat(user, "<span class='warning'>\The [src] is too damaged to be functional.</span>")
+		return
 
-		if(stat & NOPOWER)
-			to_chat(user, "<span class='warning'>\The [src] is unpowered.</span>")
-			return
+	if(stat & NOPOWER)
+		to_chat(user, "<span class='warning'>\The [src] is unpowered.</span>")
+		return
 
-		on = !on
-		if(on) use_power = 2
-		visible_message("<span class='notice'>\The [user] turns \the [src] [on ? "on" : "off"].</span>")
+	if(force_off)
+		on = FALSE
 		update_brightness()
 		return
+	on = !on
+	if(on)
+		use_power = 2
+	else if(uses_shutoff_timer && shutoff_timer)
+		sleep(shutoff_timer)
+	update_brightness()
+
 
 /obj/machinery/floor_light/Process()
 	..()
@@ -90,6 +127,14 @@ var/list/floor_light_cache = list()
 		need_update = 1
 	if(need_update)
 		update_brightness()
+
+/obj/machinery/floor_light/Crossed(var/atom/A)
+	if(!on && anchored && pressure_sensor && isliving(A))
+		toggle_active(A)
+
+/obj/machinery/floor_light/Uncrossed(var/atom/A)
+	if(on && uses_shutoff_timer && pressure_sensor && isliving(A))
+		toggle_active(A)
 
 /obj/machinery/floor_light/proc/update_brightness()
 	if(on && use_power == 2)
@@ -130,6 +175,49 @@ var/list/floor_light_cache = list()
 /obj/machinery/floor_light/proc/broken()
 	return (stat & (BROKEN|NOPOWER))
 
+#define CONFIRM_CONDITIONS(A) \
+	if(A.incapacitated() || !(locate(/obj/item/device/multitool/) in A) || !(A in range(2)))\
+		return
+/obj/machinery/floor_light/proc/configure(mob/user)
+	var/I
+	I = input("What would you like to change?", "[src] configuration", I) in list("Toggle pressure sensor", "Toggle light deavtivation timer", "Configure timer length", "Cancel")
+	var/msg = "" //Mesage broken into multiple lines for code readability.
+	switch(I)
+
+		if("Toggle pressure sensor")
+			CONFIRM_CONDITIONS(user)
+			pressure_sensor = !pressure_sensor
+			msg +="<span class = 'notice'>You [pressure_sensor ? "enable" : "disable"] the [src]'s pressure sensor.</span>"
+			if(uses_shutoff_timer)
+				msg += "<span class = 'notice'> It will deactivate after [shutoff_timer ? "[shutoff_timer / 10] seconds of" : ""] being stepped off of.</span>"
+
+		if("Toggle light deavtivation timer")
+			CONFIRM_CONDITIONS(user)
+			uses_shutoff_timer = !uses_shutoff_timer
+			msg += "<span class = 'notice'>You [uses_shutoff_timer ? "enable" : "disable"] the [src]'s shutoff timer.</span>"
+			if(pressure_sensor)
+				msg += "<span class = 'notice'> It will deactivate [shutoff_timer ? "after [shutoff_timer] second(s) of" : ""] being stepped off of.</span>"
+
+		if("Configure timer length")
+			CONFIRM_CONDITIONS(user)
+			var/T
+			T = input("Input timer length in seconds.", "Set timer", T) as num
+			msg += "<span class = 'notice'>Shutoff timer set to [T] second(s).</span>"
+			shutoff_timer = T*10 //deciseconds into seconds.
+		if("Cancel")
+			return
+	if(msg)
+		to_chat(user, msg)
+	for(var/obj/machinery/floor_light/F in GLOB.floor_lights)
+		if(F.ID == ID)
+			F.pressure_sensor = pressure_sensor
+			F.uses_shutoff_timer = uses_shutoff_timer
+			F.shutoff_timer = shutoff_timer
+			toggle_active(user, TRUE)
+
+
+
+
 /obj/machinery/floor_light/ex_act(severity)
 	switch(severity)
 		if(1)
@@ -154,3 +242,5 @@ var/list/floor_light_cache = list()
 	if(A)
 		on = 0
 	. = ..()
+
+#undef CONFIRM_CONDITIONS
