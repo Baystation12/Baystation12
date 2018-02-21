@@ -1,4 +1,4 @@
-/datum/proc/extra_ghost_link(var/prefix, var/sufix, var/short_links)
+/datum/proc/extra_ghost_link(var/atom/ghost, var/prefix, var/sufix, var/short_links)
 	return list()
 
 /atom/movable/extra_ghost_link(var/atom/ghost, var/prefix, var/sufix, var/short_links)

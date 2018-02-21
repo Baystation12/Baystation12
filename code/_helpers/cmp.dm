@@ -57,3 +57,6 @@
 
 /proc/cmp_ruincost_priority(datum/map_template/ruin/A, datum/map_template/ruin/B)
 	return initial(A.cost) - initial(B.cost)
+
+/proc/cmp_ghost_trap_setup(var/datum/ghost_trap_setup/a, var/datum/ghost_trap_setup/b)
+	return sorttext(b.name, a.name)
