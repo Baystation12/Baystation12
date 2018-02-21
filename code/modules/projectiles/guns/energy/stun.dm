@@ -8,8 +8,8 @@
 	combustion = 0
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
+		list(mode_name="stun", projectile_type = /obj/item/projectile/beam/stun),
+		list(mode_name="shock", projectile_type = /obj/item/projectile/beam/stun/shock),
 		)
 
 /obj/item/weapon/gun/energy/taser/carbine
