@@ -1463,6 +1463,7 @@
 #include "code\modules\halo\power\reactor.dm"
 #include "code\modules\halo\shuttles\dropship.dm"
 #include "code\modules\halo\shuttles\dropship_landing_controller.dm"
+#include "code\modules\halo\shuttles\dropship_landing_points.dm"
 #include "code\modules\halo\shuttles\dropship_overmap.dm"
 #include "code\modules\halo\shuttles\pelican.dm"
 #include "code\modules\halo\species\ai-squads.dm"

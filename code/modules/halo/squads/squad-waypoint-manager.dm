@@ -1,5 +1,5 @@
 #define SQUAD_MANAGEMENT_OPTIONS list("Change Squad Name","Modify Waypoint Name","Modify Waypoint Icon","Delete Waypoint","Remove Squad Members","Reset Manager")
-#define WAYPOINT_ICONS list("waypoint","waypointred")
+#define WAYPOINT_ICONS list("waypoint","waypointred","waypointgreen","waypointorange","waypointyellow")
 
 /obj/item/squad_manager
 
