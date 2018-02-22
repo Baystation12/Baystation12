@@ -32,13 +32,12 @@
 
 	if (copied == 0)
 		var/obj/item/weapon/paper/carbon/c = src
-		var/copycontents = html_decode(c.info)
+		var/copied = html_decode(c.info)
 		var/obj/item/weapon/paper/carbon/copy = new /obj/item/weapon/paper/carbon (usr.loc)
-		// <font>
-		copycontents = replacetext(copycontents, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
-		copycontents = replacetext(copycontents, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
-		copy.info += copycontents
-		copy.info += "</font>"
+		copied = replacetext(copied, "<font face=\"[PAPER_DEFAULT_FONT]\" color=", "<font face=\"[PAPER_DEFAULT_FONT]\" nocolor=")	//state of the art techniques in action
+		copied = replacetext(copied, "<font face=\"[PAPER_CRAYON_FONT]\" color=", "<font face=\"[PAPER_CRAYON_FONT]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
+		copied = replacetext(copied, "<font face=\"[PAPER_SIGN_FONT]\" color=", "<font face=\"[PAPER_SIGN_FONT]\" nocolor=") //Added signature coloration
+		copy.info = copied
 		copy.SetName("Copy - " + c.name)
 		copy.fields = c.fields
 		copy.updateinfolinks()

@@ -515,6 +515,8 @@
 			return global.last_round_duration;
 		if("last_tick_duration")
 			return global.last_tick_duration;
+		if("library_panels")
+			return global.library_panels;
 		if("license_to_url")
 			return global.license_to_url;
 		if("light_overlay_cache")
@@ -1558,6 +1560,8 @@
 			global.last_round_duration=newval;
 		if("last_tick_duration")
 			global.last_tick_duration=newval;
+		if("library_panels")
+			global.library_panels=newval;
 		if("license_to_url")
 			global.license_to_url=newval;
 		if("light_overlay_cache")
@@ -2343,6 +2347,7 @@
 	"last_message_id",
 	"last_round_duration",
 	"last_tick_duration",
+	"library_panels",
 	"license_to_url",
 	"light_overlay_cache",
 	"lighting_overlays_initialised",
