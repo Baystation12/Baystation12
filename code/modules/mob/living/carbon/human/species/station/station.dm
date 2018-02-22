@@ -75,7 +75,6 @@
 		return "staring blankly, not reacting to your presence"
 	return ..()
 
-
 /datum/species/tajaran
 	name = SPECIES_TAJARA
 	name_plural = "Tajaran"

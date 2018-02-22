@@ -514,7 +514,7 @@
 	icon_state = "hair_shavedbun"
 
 /datum/sprite_accessory/hair/halfshaved
-	name = "Half-Shaved Emo"
+	name = "Half-Shaved"
 	icon_state = "hair_halfshaved"
 	flags = HAIR_TIEABLE
 
@@ -737,50 +737,6 @@
 /datum/sprite_accessory/hair/buzzcut2
 	name = "Buzzcut 2"
 	icon_state = "hair_buzzcut2"
-
-//  verb for humans to switch between any hairstyle with HAIR_TIEABLE flag
-/mob/living/carbon/human/proc/tie_hair()
-	set name = "Tie Hair"
-	set desc = "Tie your hair up."
-	set category = "IC"
-
-	if(!(species.get_bodytype() == SPECIES_HUMAN))
-		to_chat(src, "<span class='notice'>Only humans can use this verb.</span>")
-		return
-
-	if(incapacitated())
-		to_chat(src, "<span class='warning'>You can't mess with your hair right now!</span>")
-		world << "L751 incap check failed."
-		return
-
-	if(h_style)
-		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[h_style]
-		var/selected_string
-		if(!(hair_style.flags & HAIR_TIEABLE))
-			to_chat(src, "<span class ='warning'>Your hair isn't long enough to tie.</span>")
-			world << "Hair length check failed."
-			return
-		else
-			var/list/datum/sprite_accessory/hair/valid_hairstyles = list()
-			for(var/temp_style in GLOB.hair_styles_list)
-				var/hair_string = temp_style
-				var/list/datum/sprite_accessory/hair/test = GLOB.hair_styles_list[hair_string]
-				if(test.flags & HAIR_TIEABLE)
-					valid_hairstyles.Add(hair_string)
-			selected_string = input("Select a new hairstyle", "Your hairstyle", hair_style) as null|anything in valid_hairstyles
-			world << "[selected_string] chosen - current style [h_style]..."
-		if(incapacitated() && species.get_bodytype() == SPECIES_HUMAN)
-			to_chat(src, "<span class='warning'>You can't mess with your hair right now!</span>")
-			world << "L772 incap/human check failed."
-			return
-		else if(selected_string && h_style != selected_string)
-			world << "L775 check passed - [selected_string] chosen, using [h_style]"
-			h_style = selected_string
-			regenerate_icons()
-		else
-			to_chat(src, "<span class ='notice'>Your're already using that style.</span>")
-			world << "L775 check failed."
-
 
 /*
 ///////////////////////////////////
