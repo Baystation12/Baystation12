@@ -5,6 +5,7 @@
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	suit = /obj/item/clothing/suit/storage/marine
 	head = /obj/item/clothing/head/helmet/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
 	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	l_pocket = /obj/item/device/encryptionkey/shipcom
@@ -14,6 +15,7 @@
 	name = "Marine - Squad Leader"
 
 	head = /obj/item/clothing/head/helmet/marine/visor
+	r_pocket = /obj/item/squad_manager
 
 	flags = 0
 
