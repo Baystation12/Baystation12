@@ -20,6 +20,9 @@
 
 	sexybits_location = BP_GROIN
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/tie_hair)
+
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
@@ -71,6 +74,7 @@
 	if(H.stat == CONSCIOUS)
 		return "staring blankly, not reacting to your presence"
 	return ..()
+
 
 /datum/species/tajaran
 	name = SPECIES_TAJARA
