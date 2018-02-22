@@ -274,6 +274,9 @@
 /obj/vehicles/bullet_act(var/obj/item/projectile/P,var/def_zone)
 	. = controller.on_bullet_act(P,def_zone)
 
+/obj/vehicles/ex_act(var/severity)
+	. = controller.on_explosion_act(severity)
+
 /obj/vehicles/debug
 	name = "debug vehicle"
 
@@ -316,6 +319,8 @@
 /datum/vehicle_control/proc/process_occupant_hit(var/obj/item/projectile/P,var/def_zone)
 
 /datum/vehicle_control/proc/on_bullet_act(var/obj/item/projectile/P,var/def_zone)
+
+/datum/vehicle_control/proc/on_explosion_act(var/severity)
 
 /datum/vehicle_control/proc/on_enter_vehicle()
 
@@ -403,12 +408,17 @@
 		return
 	var/mob/mob_to_hit = pick(mobs_pickfrom)
 	mob_to_hit.bullet_act(P,def_zone)
+	vehicle.visible_message("<span class = 'danger'>[mob_to_hit] is hit by [P.name]</span>")
+
+/datum/vehicle_control/base/proc/has_occupants()
+	if(!isnull(vehicle.driver) || vehicle.gunners.len > 1 || vehicle.passengers.len > 1)
+		return 1
 
 /datum/vehicle_control/base/on_bullet_act(var/obj/item/projectile/P,var/def_zone)
 	var/damage_resist_amount = 0
 	if(P.damtype in vehicle.damage_resistances)
 		damage_resist_amount = vehicle.damage_resistances[P.damtype]
-	if(prob(100 - damage_resist_amount) && (/mob in vehicle.contents))
+	if(prob(100 - damage_resist_amount) && has_occupants())
 		process_occupant_hit(P,def_zone)
 	else
 		if(P.damage >= damage_resist_amount - P.armor_penetration)
@@ -418,6 +428,16 @@
 		else
 			vehicle.visible_message("<span class = 'warning'>[P.name] bounces off the armor of [vehicle.name]</span>")
 		return 1
+
+/datum/vehicle_control/base/on_explosion_act(var/severity)
+	var/resist_required = 100/severity //This runs with the assumption that severity 1 is the most severe explosion.
+	var/combo_resistances = (vehicle.damage_resistances["brute"]/2 + vehicle.damage_resistances["burn"]/2)
+	if(combo_resistances < resist_required)
+		vehicle.health[1] -= (resist_required - combo_resistances)
+		vehicle.process_health_damage()
+		vehicle.visible_message("<span class = 'danger'>The [vehicle.name]'s armor buckles under the explosion!</span>")
+	else
+		vehicle.visible_message("<span class = 'danger'>The [vehicle.name] withstands the explosion!</span>")
 
 /datum/vehicle_control/base/gunner_turret_drop(var/mob/user)
 	vehicle.unassign_gunner(user)
