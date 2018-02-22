@@ -103,3 +103,5 @@
 
 #define MAX_PUMP_PRESSURE		15000	// Maximal pressure setting for pumps and vents
 #define MAX_OMNI_PRESSURE		7500	// Maximal output(s) pressure for omni devices (filters/mixers)
+
+#define STANDARD_UNWRENCH_DELAY	1 SECOND //Standardized delay for unsecuring pipes.

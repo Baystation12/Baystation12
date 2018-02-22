@@ -425,7 +425,7 @@ Buildable meters
 /obj/item/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	..()
 	//*
-	if(!isWrench(W))
+	if(!isWrench(W) && !isJack(W))
 		return ..()
 	if (!isturf(src.loc))
 		return 1
