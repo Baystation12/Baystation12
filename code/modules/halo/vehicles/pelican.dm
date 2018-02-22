@@ -22,8 +22,11 @@
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
 
 	health = list(300,300) //Actually pretty fragile if you can get past the armor.
-	exposed_positions = list("passengers")//Passengers could technically be hit by bullets through the troop bay.
+	exposed_positions = list("driver","passengers")//Passengers could technically be hit by bullets through the troop bay.
 	damage_resistances = list("brute" = 70.0, "burn" = 65.0,"emp" = 50.0)//Brute resistance is equal to HMG bullets
+
+/obj/vehicles/air/pelican/unsc
+	faction = "unsc"
 
 /obj/item/weapon/gun/vehicle_turret/pelican_autocannon
 	name = "M370 Autocannon"
@@ -64,7 +67,7 @@
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
 
 	health = list(300,300) //Actually pretty fragile if you can get past the armor.
-	exposed_positions = list("passengers")//Passengers could technically be hit by bullets through the troop bay.
+	exposed_positions = list("driver","passengers")//Passengers could technically be hit by bullets through the troop bay.
 	damage_resistances = list("brute" = 70.0, "burn" = 65.0,"emp" = 50.0)//Brute resistance is equal to HMG bullets
 
 /obj/vehicles/air/overmap/pelican/unsc
