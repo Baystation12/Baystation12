@@ -90,11 +90,13 @@
 	handle_supernatural()
 
 	if(buckled && can_escape)
-		var/restraint = buckled
-		if(rand(0,100) >= 75)
-			escape(src, restraint)
-		else
-			visible_message("<span class='warning'>\The [src] struggles against \the [restraint]!</span>")
+		if(istype(buckled, /obj/effect/energy_net))
+			var/obj/effect/energy_net/Net = buckled
+			Net.escape_net(src)
+		else if(prob(50))
+			escape(src, buckled)
+		else if(prob(50))
+			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
 
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
@@ -164,7 +166,6 @@
 
 /mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
 	O.unbuckle_mob(M)
-	reset_plane_and_layer(M)
 	visible_message("<span class='danger'>\The [M] escapes from \the [O]!</span>")
 
 /mob/living/simple_animal/proc/handle_supernatural()
