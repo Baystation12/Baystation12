@@ -211,8 +211,7 @@
 	var/list/shrapnel = list()
 
 	for(var/I = 3, I<3 , I++) //Toolbox shatters.
-		var/obj/item/weapon/material/shrapnel/S = new /obj/item/weapon/material/shrapnel(Tsec) //Todo: unique sprites per-toolbox.
-		shrapnel += S
+		shrapnel += new /obj/item/weapon/material/shrapnel(Tsec)
 
 	for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
 		var/obj/item/stack/tile/floor/T = new /obj/item/stack/tile/floor(Tsec)
