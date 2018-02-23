@@ -126,3 +126,13 @@
 	outfit_type = /decl/hierarchy/outfit/job/police
 
 	latejoin_at_spawnpoints = FALSE
+
+	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
+			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_teleporter, access_eva, access_heads,
+			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors)
+
+	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
+			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_teleporter, access_eva, access_heads,
+			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors)
