@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/liaison
 	name = "\improper NanoTrasen liaison's locker"
-	req_access = list(access_liaison)
+	req_access = list()
 	icon_state = "nanottwo1"
 	icon_closed = "nanottwo"
 	icon_locked = "nanottwo1"
@@ -29,7 +29,7 @@
 
 /obj/structure/closet/secure_closet/representative
 	name = "\improper Sol Central Government representative's locker"
-	req_access = list(access_representative)
+	req_access = list()
 	icon_state = "solsecure1"
 	icon_closed = "solsecure"
 	icon_locked = "solsecure1"
@@ -61,7 +61,7 @@
 
 /obj/structure/closet/secure_closet/crew
 	name = "crew equipment locker"
-	req_access = list(access_solgov_crew)
+	req_access = list()
 	icon_state = "sol1"
 	icon_closed = "sol"
 	icon_locked = "sol1"
@@ -79,7 +79,7 @@
 
 /obj/structure/closet/secure_closet/crew/research
 	name = "research equipment locker"
-	req_access = list(access_nanotrasen)
+	req_access = list()
 	icon_state = "nanot1"
 	icon_closed = "nanot"
 	icon_locked = "nanot1"
@@ -90,7 +90,7 @@
 /obj/structure/closet/secure_closet/guncabinet/sidearm
 	name = "sidearm cabinet"
 	req_access = list()
-	req_one_access = list(access_armory,access_emergency_armory,access_hos,access_hop,access_ce,access_cmo,access_rd,access_senadv)
+	req_one_access = list()
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/WillContain()
 	return list(/obj/item/weapon/gun/energy/gun = 3)

@@ -36,3 +36,21 @@ The name of the outfit will need to be "[job name] [species name]"
 	uniform = null
 	suit = /obj/item/clothing/suit/armor/special/spartan/blue
 	head = /obj/item/clothing/head/helmet/spartan/blue
+
+/decl/hierarchy/outfit/sangheili_slayer
+	name = "Elites Sangheili"
+
+	uniform = /obj/item/clothing/under/covenant/sangheili
+	l_ear = /obj/item/device/radio/headset/covenant
+	suit = /obj/item/clothing/suit/armor/special/combatharness/minor
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	shoes = /obj/item/clothing/shoes/sangheili/minor
+	head = /obj/item/clothing/head/helmet/sangheili/minor
+
+/decl/hierarchy/outfit/job/slayer/spartan_slayer_covenant
+	name = "Spartans Spartan"
+	uniform = null
+	suit = /obj/item/clothing/suit/armor/special/spartan/slayer
+	head = /obj/item/clothing/head/helmet/spartan

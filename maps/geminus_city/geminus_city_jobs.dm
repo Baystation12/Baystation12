@@ -1,9 +1,9 @@
 
 /datum/map/geminus_city
-	allowed_jobs = list(/datum/job/colonist,/datum/job/innie_sympathiser,/datum/job/insurrectionist_recruiter,/datum/job/colonist_mayor,/datum/job/marine,/datum/job/marine_leader)
-	allowed_spawns = list("Colony Arrival Shuttle","UNSC Peacekeeping Ship")
+	allowed_jobs = list(/datum/job/colonist,/datum/job/innie_sympathiser,/datum/job/insurrectionist_recruiter,/datum/job/colonist_mayor,/datum/job/marine,/datum/job/marine_leader,/datum/job/police)
+	allowed_spawns = list("Colony Arrival Shuttle","UNSC Peacekeeping Ship","UNSC Peacekeeping Ship - Leader Quarters")
 
-	default_spawn = "Colony Arrival Shuttle"
+	default_spawn = "UNSC Peacekeeping Ship"
 
 /datum/job/colonist
 	title = "Colonist"
@@ -13,7 +13,7 @@
 	supervisors = " the Colony Mayor"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
@@ -30,7 +30,7 @@
 	supervisors = " the Colony Mayor and your local insurrection contact"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
@@ -48,7 +48,7 @@
 	supervisors = " the Insurrection"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
@@ -66,12 +66,12 @@
 	supervisors = " your citizens"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
 	announced = FALSE
-	outfit_type = /decl/hierarchy/outfit/job/colonist/mayor
+	outfit_type = /decl/hierarchy/outfit/job/mayor
 
 	latejoin_at_spawnpoints = FALSE
 
@@ -83,7 +83,7 @@
 	supervisors = "the Marine Squad Leader"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
@@ -101,11 +101,28 @@
 	supervisors = "UNSC Highcom"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
 	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/marine/leader
+
+	latejoin_at_spawnpoints = FALSE
+
+/datum/job/police
+	title = "GCPD Officer"
+	total_positions = 6
+	selection_color = "#000000"
+
+	supervisors = " the Colony Mayor"
+
+	create_record = 0
+	account_allowed = 1
+	generate_email = 0
+
+	loadout_allowed = TRUE
+	announced = FALSE
+	outfit_type = /decl/hierarchy/outfit/job/police
 
 	latejoin_at_spawnpoints = FALSE

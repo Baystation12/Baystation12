@@ -50,6 +50,7 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
+	var/unique_name
 	var/burst = 1
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again
 	var/burst_delay = 2	//delay between shots, if firing in bursts
@@ -64,6 +65,7 @@
 	var/list/dispersion = list(0)
 	var/one_hand_penalty // -1 is used for "unable to fire unless twohandable".
 	var/wielded_item_state
+	var/can_rename = 1 //Can this weapon be renamed by the user?
 
 	var/next_fire_time = 0
 
@@ -87,12 +89,15 @@
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 
+	if(!unique_name)
+		unique_name = name
+
 /obj/item/weapon/gun/update_twohanding()
 	if(one_hand_penalty)
 		var/mob/living/M = loc
 		if(istype(M))
 			if(M.can_wield_item(src) && src.is_held_twohanded(M))
-				name = "[initial(name)] (wielded)"
+				name = "[unique_name] (wielded)"
 			else
 				name = initial(name)
 		update_icon() // In case item_state is set somewhere else.
@@ -108,6 +113,28 @@
 			else
 				item_state_slots[slot_l_hand_str] = initial(item_state)
 				item_state_slots[slot_r_hand_str] = initial(item_state)
+
+/obj/item/weapon/gun/verb/rename_gun()
+	set name = "Name Gun"
+	set category = "Object"
+	set desc = "Rename your gun."
+
+	var/mob/M = usr
+	if(!can_rename)
+		to_chat(M,"<span class = 'notice'>You can't rename [name]</span>")
+		return 0
+	if(!M.mind)	return 0
+	if(M.incapacitated()) return 0
+
+	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
+
+	if(src && input && !M.incapacitated() && in_range(M,src))
+		if(!findtext(input, "the", 1, 4))
+			input = "\improper [input]"
+		name = input
+		unique_name = input
+		to_chat(M, "Your gun is now named '[input]'.")
+		return 1
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.

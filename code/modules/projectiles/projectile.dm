@@ -312,8 +312,13 @@
 			qdel(src)
 			return
 
+		//Deals with moving a projectile up / down to hit targets on the ground or in air
+		if(elevation != original.elevation)
+			var/elevation_mod = original.elevation - elevation
+			change_elevation(elevation_mod)
 		before_move()
 		Move(location.return_turf())
+
 		if(first_step != 1)
 			spawn()
 				do_supression_aoe(loc)

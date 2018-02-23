@@ -167,3 +167,20 @@
 /obj/effect/landmark/drop_pod_landing
 	name = "Drop Pod landing Marker"
 	invisibility = 101
+
+//Overmap-Capable drop pod //
+/obj/structure/drop_pods/overmap/search_compatible_drop_points()
+	var/list/valid_points = list()
+	for(var/obj/effect/landmark/drop_pod_landing/l in world)
+		valid_points += l
+	if(isnull(valid_points))
+		log_error("ERROR: Drop pods placed on map but no /obj/effect/drop_pod_landing markers present!")
+		return
+	for(var/obj/O in valid_points)
+		if(map_sectors["[z]"] != map_sectors["[O.z]"])
+			valid_points -= O
+	if(isnull(valid_points))
+		visible_message("<span class = 'warning'>[name] emits a warning: \"No safe drop trajectories availiable.\"</span>")
+		drop_point = null
+	else
+		drop_point = pick(valid_points)

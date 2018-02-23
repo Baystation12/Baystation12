@@ -1,8 +1,8 @@
 /obj/item/weapon/grenade/smokebomb
 	desc = "It is set to detonate in 2 seconds."
-	name = "smoke bomb"
+	name = "smoke grenade"
 	icon = 'icons/obj/grenade.dmi'
-	icon_state = "flashbang"
+	icon_state = "fragshell"
 	det_time = 20
 	item_state = "flashbang"
 	slot_flags = SLOT_BELT

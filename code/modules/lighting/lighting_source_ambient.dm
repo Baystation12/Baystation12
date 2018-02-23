@@ -1,7 +1,7 @@
 
 /datum/light_source/ambient
 	var/list/turfs_to_update_lum = list()
-	var/turfs_per_tick = 5000		//seems to be a non-laggy number
+	var/turfs_per_tick = 3000
 	var/update_gen = 1
 
 /datum/light_source/ambient/apply_lum()

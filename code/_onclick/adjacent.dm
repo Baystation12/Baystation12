@@ -83,6 +83,10 @@ Quick adjacency (to turf):
 /atom/movable/Adjacent(var/atom/neighbor)
 	if(neighbor == loc) return 1
 	if(!isturf(loc)) return 0
+	if(istype(neighbor,/atom/movable)) //Handling for elevation during adjacency checks.
+		var/atom/movable/AM = neighbor
+		if(AM.elevation != src.elevation)
+			return 0
 	for(var/turf/T in locs)
 		if(isnull(T)) continue
 		if(T.Adjacent(neighbor,src)) return 1

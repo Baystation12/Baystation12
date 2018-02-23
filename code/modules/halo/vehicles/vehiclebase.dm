@@ -9,6 +9,10 @@
 
 	var/active = 1
 	var/health = list(100,100) //In format Health / Maxhealth
+	var/list/momentum = list(0,0) //Format X,Y
+	var/max_momentum = 4 //Stores the maximum momentum this vehicle can have.
+	var/acceleration = 1 //The amount this vehicle accelerates per relaymove input.
+	var/inertia = 1 //The amount this vehicle slows down when not actively accelerating. Setting this higher than acceleration will cause issues.
 	var/mob/living/driver
 	var/list/passengers = list(0)//A list storing the passengers of the vehicle. First entry defines the maximum.
 	var/list/gunners = list(0)//Ditto, but for gunners.
@@ -23,22 +27,34 @@
 	var/list/fuels = list() //fuels required for a vehicle to run. Format fuel_datum
 	var/list/fuel_drainrates = list()
 	var/vehicle_move_delay = 2 //The move delay in ticks.
+	var/currently_automoving = 0
 
 /obj/vehicles/New()
 	controller = new controller (src)
-	verbs += /obj/vehicles/proc/enter_exit_vehicle
 	for(var/i in fuels)
 		fuels += new i
 		fuels -= i
 
-
-/obj/vehicles/proc/enter_exit_vehicle(var/mob/user)
+/obj/vehicles/verb/enter_exit_vehicle()
 	set name = "Enter/Exit Vehicle"
 	set category = "Vehicle"
 	set src in range(1)
 
+	var/mob/living/carbon/human/h = usr
+	if(!istype(h))
+		return
+	if(h.incapacitated())
+		to_chat(h,"<span class = 'warning'>You can't enter [name] in your current state!</span>")
+		return
+
+	proc_enter_exit_vehicle(usr)
+
+/obj/vehicles/proc/proc_enter_exit_vehicle(var/mob/user)
 	if(!user)
-		user = usr
+		return
+	if(istype(user.loc,/obj/vehicles) && user.loc != src)
+		to_chat(user,"<span class = 'warning'>Exit your current vehicle first!</span>")
+		return
 	if(user in contents)
 		exit_vehicle(user)
 		controller.on_exit_vehicle()
@@ -54,14 +70,77 @@
 /obj/vehicles/attackby(var/obj/item/W,var/mob/living/user)
 	controller.on_click(W,user)
 
+/obj/vehicles/proc/inertia_slowdown()
+	if(momentum[1] < 0)
+		add_momentum(inertia,0)
+	if(momentum[1] > 0)
+		add_momentum(-inertia,0)
+	if(momentum[2]< 0)
+		add_momentum(0,inertia)
+	if(momentum[2] > 0)
+		add_momentum(0,-inertia)
+
+/obj/vehicles/proc/start_momentum_automove()
+	spawn()
+		if(currently_automoving) return
+		currently_automoving = 1
+		while(1)
+			var/new_x = src.x
+			var/new_y = src.y
+			if(momentum[1] > 0)
+				new_x += 1
+			if(momentum[1] < 0)
+				new_x -= 1
+			if(momentum[2] > 0)
+				new_y += 1
+			if(momentum[2] < 0)
+				new_y -= 1
+			var/turf/newloc = locate(new_x,new_y,z)
+			if(!moved_recently)
+				inertia_slowdown() //If we didn't accelerate recently, slow us down.
+			if(momentum[1] + momentum[2] != 0) //Make sure the inertia hasn't dropped the momentum to 0
+				Move(newloc,get_dir(src.loc,newloc))
+			else
+				currently_automoving = 0
+				return
+			sleep(vehicle_move_delay + 0.5)
+
+/obj/vehicles/proc/add_momentum(var/momentum_x = 0,var/momentum_y = 0)
+	momentum[1] += momentum_x
+	momentum[2] += momentum_y
+	if(momentum[1] > max_momentum)
+		momentum[1] = max_momentum
+	if(momentum[1] < -max_momentum)
+		momentum[1] = -max_momentum
+	if(momentum[2] > max_momentum)
+		momentum[2] = max_momentum
+	if(momentum[2] < -max_momentum)
+		momentum[2] = -max_momentum
+
 /obj/vehicles/relaymove(var/turf/newloc,var/dir)
-	Move(newloc,dir)
+	var/list/old_momentum = momentum.Copy()
+	moved_recently = 1
+	spawn(vehicle_move_delay-0.5)
+		moved_recently = 0
+	if(newloc.x < x)
+		add_momentum(-acceleration,0)
+	if(newloc.x > x)
+		add_momentum(acceleration,0)
+	if(newloc.y < y)
+		add_momentum(0,-acceleration)
+	if(newloc.y > y)
+		add_momentum(0,acceleration)
+	if(old_momentum[1] + old_momentum[2] == 0 && !currently_automoving)
+		start_momentum_automove()
+	render_mob_sprites()
 
 /obj/vehicles/Move(var/turf/newloc,var/dir)
 	render_mob_sprites()
 	if(!controller.try_move(newloc,dir))
 		return 0
 	. = ..()
+	if(!.)
+		momentum = list(0,0) //If we were stopped for some reason, reduce momentum to 0. (Could be used for later collision-damage)
 
 /obj/vehicles/proc/on_gunner_turret_drop(var/mob/user)
 	controller.gunner_turret_drop(user)
@@ -151,6 +230,7 @@
 	if(user in gunners)
 		unassign_gunner(user)
 	user.loc = src.loc
+	contents -= user
 	render_mob_sprites()
 	if(!override_message)
 		user.visible_message("<span class = 'notice'>[user] exits [name]</span>")
@@ -159,6 +239,13 @@
 	set name = "Hijack Vehicle"
 	set category = "Vehicle"
 	set src in range(1)
+
+	var/mob/living/carbon/human/h = usr
+	if(!istype(h))
+		return
+	if(h.incapacitated())
+		to_chat(h,"<span class = 'warning'>You can't hijack [name] in your current state!</span>")
+		return
 
 	var/mob/user = usr
 	if(block_entry_exit)
@@ -187,6 +274,9 @@
 /obj/vehicles/bullet_act(var/obj/item/projectile/P,var/def_zone)
 	. = controller.on_bullet_act(P,def_zone)
 
+/obj/vehicles/ex_act(var/severity)
+	. = controller.on_explosion_act(severity)
+
 /obj/vehicles/debug
 	name = "debug vehicle"
 
@@ -197,7 +287,7 @@
 	fuel_drainrates = list(1)
 
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret)
-	icon = 'code/modules/halo/icons/Warthog.dmi'
+	icon = 'code/modules/halo/vehicles/Warthog.dmi'
 	icon_state = "Base, no wheels"
 	bound_height = 64
 	bound_width = 64
@@ -221,11 +311,16 @@
 
 /datum/vehicle_control/proc/gunner_turret_fire(var/mob/user,var/atom/target)
 
+/datum/vehicle_control/proc/gunner_turret_check(var/mob/user,var/atom/target) //Used for pre-fire special checks, such as directions.
+	return 1
+
 /datum/vehicle_control/proc/on_emp(var/severity)
 
 /datum/vehicle_control/proc/process_occupant_hit(var/obj/item/projectile/P,var/def_zone)
 
 /datum/vehicle_control/proc/on_bullet_act(var/obj/item/projectile/P,var/def_zone)
+
+/datum/vehicle_control/proc/on_explosion_act(var/severity)
 
 /datum/vehicle_control/proc/on_enter_vehicle()
 
@@ -313,12 +408,17 @@
 		return
 	var/mob/mob_to_hit = pick(mobs_pickfrom)
 	mob_to_hit.bullet_act(P,def_zone)
+	vehicle.visible_message("<span class = 'danger'>[mob_to_hit] is hit by [P.name]</span>")
+
+/datum/vehicle_control/base/proc/has_occupants()
+	if(!isnull(vehicle.driver) || vehicle.gunners.len > 1 || vehicle.passengers.len > 1)
+		return 1
 
 /datum/vehicle_control/base/on_bullet_act(var/obj/item/projectile/P,var/def_zone)
 	var/damage_resist_amount = 0
 	if(P.damtype in vehicle.damage_resistances)
 		damage_resist_amount = vehicle.damage_resistances[P.damtype]
-	if(prob(100 - damage_resist_amount) && (/mob in vehicle.contents))
+	if(prob(100 - damage_resist_amount) && has_occupants())
 		process_occupant_hit(P,def_zone)
 	else
 		if(P.damage >= damage_resist_amount - P.armor_penetration)
@@ -328,6 +428,16 @@
 		else
 			vehicle.visible_message("<span class = 'warning'>[P.name] bounces off the armor of [vehicle.name]</span>")
 		return 1
+
+/datum/vehicle_control/base/on_explosion_act(var/severity)
+	var/resist_required = 100/severity //This runs with the assumption that severity 1 is the most severe explosion.
+	var/combo_resistances = (vehicle.damage_resistances["brute"]/2 + vehicle.damage_resistances["burn"]/2)
+	if(combo_resistances < resist_required)
+		vehicle.health[1] -= (resist_required - combo_resistances)
+		vehicle.process_health_damage()
+		vehicle.visible_message("<span class = 'danger'>The [vehicle.name]'s armor buckles under the explosion!</span>")
+	else
+		vehicle.visible_message("<span class = 'danger'>The [vehicle.name] withstands the explosion!</span>")
 
 /datum/vehicle_control/base/gunner_turret_drop(var/mob/user)
 	vehicle.unassign_gunner(user)

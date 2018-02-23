@@ -53,7 +53,7 @@
 
 /obj/structure/closet/secure_closet/xenoarchaeologist
 	name = "Xenoarchaeologist Locker"
-	req_access = list(access_xenoarch)
+	req_access = list()
 	icon_state = "secureres1"
 	icon_closed = "secureres"
 	icon_locked = "secureres1"
@@ -74,7 +74,7 @@
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/glasses/science(src)
 	new /obj/item/device/radio/headset/headset_sci(src)
-	new /obj/item/clothing/mask/gas(src) 
+	new /obj/item/clothing/mask/gas(src)
 	new /obj/item/weapon/clipboard(src)
 	new /obj/item/weapon/storage/belt/archaeology(src)
 	new /obj/item/weapon/storage/excavation(src)
@@ -106,7 +106,7 @@
 	new /obj/item/taperoll/research(src)
 
 /obj/machinery/alarm/isolation
-	req_one_access = list(access_research, access_atmospherics, access_engine_equip)
+	req_one_access = list()
 
 /obj/machinery/alarm/monitor/isolation
-	req_one_access = list(access_research, access_atmospherics, access_engine_equip)
+	req_one_access = list()

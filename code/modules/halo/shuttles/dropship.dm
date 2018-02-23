@@ -11,6 +11,8 @@
 
 	layer = ABOVE_HUMAN_LAYER
 	plane = ABOVE_HUMAN_PLANE
+	var/faction = null //The faction this ship belongs to. Setting this will restrict landing to faction-owned and civillian points only
+
 
 	var/takeoff_overlay_icon_state
 	var/takeoff_sound
@@ -34,6 +36,7 @@
 	for(var/turf/T in locs)
 		for(var/obj/effect/landmark/dropship_land_point/L in T.contents)
 			current_location = L
+			L.occupied = 1
 
 /obj/structure/dropship/proc/assign_pilot(var/mob/user,var/override)
 	if(!pilot || override)
@@ -62,29 +65,33 @@
 	contents -= user
 	user.loc = src.loc
 
-/obj/structure/dropship/verb/enter_vehicle(var/mob/user)
+/obj/structure/dropship/verb/enter_vehicle()
 	set name = "Enter Vehicle"
 	set category = "Vehicle"
 	set src in range(1)
 
+	var/mob/user
 	if(!user)
 		user = usr
 	if(!do_after(user,enter_time SECONDS,src))
 		return
 	do_enter_vehicle(user)
-	assign_pilot(user)
+	if(!pilot)
+		assign_pilot(user)
 
-/obj/structure/dropship/verb/exit_vehicle(var/mob/user)
+/obj/structure/dropship/verb/exit_vehicle()
 	set name = "Exit Vehicle"
 	set category = "Vehicle"
 	set src in range(1)
 
+	var/mob/user
 	if(!user)
 		user = usr
 	if(!(user in occupants))
 		to_chat(user,"<span class ='notice'>You need to be inside the vehicle to exit it.</span>")
 		return
-	unassign_pilot(user)
+	if(pilot == user)
+		unassign_pilot(user)
 	do_exit_vehicle(user)
 
 /obj/structure/dropship/verb/verb_change_landing_location()
@@ -113,11 +120,11 @@
 
 //All Transit Related Procs//
 /obj/structure/dropship/proc/update_reachable_landing()
-	var/list/possible_land_locations = dropship_landing_controller.get_potential_landing_points()
+	generate_current_landpoint()
+	var/list/possible_land_locations = dropship_landing_controller.get_potential_landing_points(1,1,faction)
 	reachable_landing_locations = possible_land_locations
 
 /obj/structure/dropship/proc/change_landing_location(var/obj/new_land_location)
-	generate_current_landpoint()
 	target_location = new_land_location
 	if(pilot)
 		to_chat(pilot,"<span class = 'warning'>Landing target changed to [target_location.name]</span>")

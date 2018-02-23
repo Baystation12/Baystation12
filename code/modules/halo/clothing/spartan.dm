@@ -67,6 +67,11 @@
 	canremove = 0
 	action_button_name = "Dispense Medicine"
 
+/obj/item/clothing/suit/armor/special/spartan/slayer
+	armor = list(melee = 60, bullet = 75, laser = 40, energy = 40, bomb = 60, bio = 25, rad = 25) //lowered armour values for slayer.
+	specials = list(/datum/armourspecials/internal_jumpsuit/spartan,/datum/armourspecials/shields/spartan,/datum/armourspecials/shieldmonitor)
+	totalshields = 100
+
 /obj/item/clothing/under/spartan_internal
 	name = "Spartan Undersuit"
 	desc = ""

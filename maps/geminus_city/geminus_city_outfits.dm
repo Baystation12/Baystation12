@@ -3,16 +3,19 @@
 	name = "Marine"
 
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
-	suit = /obj/item/clothing/suit/armor/marine
+	suit = /obj/item/clothing/suit/storage/marine
 	head = /obj/item/clothing/head/helmet/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
 	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	l_pocket = /obj/item/device/encryptionkey/shipcom
 	flags = 0
 
 /decl/hierarchy/outfit/job/marine/leader
 	name = "Marine - Squad Leader"
 
 	head = /obj/item/clothing/head/helmet/marine/visor
+	r_pocket = /obj/item/squad_manager
 
 	flags = 0
 
@@ -23,6 +26,7 @@
 	uniform = null
 	belt = null
 	shoes = /obj/item/clothing/shoes/brown
+	pda_slot = slot_r_store
 
 	flags = 0
 
@@ -57,7 +61,7 @@
 	mask = /obj/item/clothing/mask/innie/shemagh
 
 	l_pocket = /obj/item/ammo_magazine/m127_saphp
-	r_pocket = /obj/item/device/encryptionkey/inniecom
+	l_ear = /obj/item/device/radio/headset/insurrection
 
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser/equip_special()
 	return
@@ -69,10 +73,40 @@
 	G.ammo_magazine = new /obj/item/ammo_magazine/m127_saphp
 	H.equip_to_slot_or_del(G,slot_belt)
 
-/decl/hierarchy/outfit/job/colonist/mayor
+/decl/hierarchy/outfit/job/mayor
 	name = "Mayor"
 
 	uniform = /obj/item/clothing/under/blazer
+	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	shoes = /obj/item/clothing/shoes/black
 
 	flags = 0
+
+/decl/hierarchy/outfit/job/police
+	name = "GCPD Officer"
+
+	head = /obj/item/clothing/head/soft/sec/corp
+	uniform = /obj/item/clothing/under/police
+	suit = /obj/item/clothing/suit/armor/vest/police
+	belt = /obj/item/weapon/storage/belt/security
+	shoes = /obj/item/clothing/shoes/dutyboots
+	pda_slot = slot_r_store
+	back = /obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/police
+	gloves = /obj/item/clothing/gloves/guards
+	l_pocket = /obj/item/clothing/accessory/badge/security
+
+	flags = 0
+
+/obj/item/clothing/suit/armor/vest/police
+	name = "ballistic padding"
+	desc = "GCPD shoulder and torso padding designed for bullet resistance."
+	icon_state = "ertarmor_cmd"
+	item_state = "armor"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	armor = list(melee = 40, bullet = 35, laser = 15, energy = 15, bomb = 40, bio = 0, rad = 0)
+
+/obj/item/clothing/under/police
+	name = "police uniform"
+	desc = "A black uniform worn by the GCPD."
+	icon_state = "blackutility_com"
+	worn_state = "blackutility_com"

@@ -22,7 +22,7 @@
 
 /obj/item/weapon/rig/light/internalaffairs/equipped
 
-	req_access = list(access_lawyer)
+	req_access = list()
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
@@ -147,7 +147,7 @@
 
 /obj/item/weapon/rig/ce/equipped
 
-	req_access = list(access_ce)
+	req_access = list()
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
@@ -199,7 +199,7 @@
 
 /obj/item/weapon/rig/hazmat/equipped
 
-	req_access = list(access_rd)
+	req_access = list()
 
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
@@ -242,7 +242,7 @@
 
 /obj/item/weapon/rig/medical/equipped
 
-	req_access = list(access_medical_equip)
+	req_access = list()
 
 	initial_modules = list(
 		/obj/item/rig_module/chem_dispenser/injector,

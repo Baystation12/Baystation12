@@ -1,5 +1,5 @@
 
-/obj/item/device/mobilecomms/commsbackpack
+/obj/item/device/mobilecomms/commsbackpack/covenant
 	name = "hyperwave communicator"
 	desc = "A machine that handles the transmission of covenant hyperwave channels"
 	icon = null
@@ -7,7 +7,7 @@
 	recieving_frequencies = list("Battlenet")
 	active = 1
 
-/obj/item/device/mobilecomms/commsbackpack/set_active()
+/obj/item/device/mobilecomms/commsbackpack/covenant/set_active()
 	return
 
 /obj/item/device/radio/headset/covenant

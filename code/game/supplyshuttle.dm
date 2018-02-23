@@ -259,7 +259,7 @@ var/list/point_source_descriptions = list(
 			//spawn the stuff, finish generating the manifest while you're at it
 			if(SP.access)
 				if(isnum(SP.access))
-					A.req_access = list(SP.access)
+					A.req_access = list()
 				else if(islist(SP.access))
 					var/list/L = SP.access // access var is a plain var, we need a list
 					A.req_access = L.Copy()
