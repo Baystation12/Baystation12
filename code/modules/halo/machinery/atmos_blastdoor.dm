@@ -19,6 +19,8 @@
 	if(!istype(turf_underneath,/turf/simulated))
 		return
 	var/datum/gas_mixture/turf_gas = turf_underneath.air
+	if(isnull(turf_gas))
+		return
 	if((turf_gas.gas["oxygen"] < 16)||(turf_gas.return_pressure() < WARNING_LOW_PRESSURE))
 		close()
 
