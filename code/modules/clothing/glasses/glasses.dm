@@ -1,4 +1,3 @@
-
 /obj/item/clothing/glasses
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
@@ -9,6 +8,7 @@
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/eyes.dmi'
 		)
+	var/hud_type = HUD_NO_HUD
 	var/prescription = FALSE
 	var/toggleable = FALSE
 	var/off_state = "degoggles"
@@ -96,6 +96,7 @@
 	desc = "Goggles fitted with a portable analyzer capable of determining the fabricator training potential of an item or components of a machine. Sensitive to EMP."
 	icon_state = "purple"
 	item_state = "glasses"
+	hud_type = HUD_SCIENCE
 	toggleable = TRUE
 	electric = TRUE
 
