@@ -94,6 +94,8 @@
 	back = /obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/police
 	gloves = /obj/item/clothing/gloves/guards
 	l_pocket = /obj/item/clothing/accessory/badge/security
+	l_ear = /obj/item/device/radio/headset/police
+	id_type = /obj/item/weapon/card/id/security/warden
 
 	flags = 0
 
