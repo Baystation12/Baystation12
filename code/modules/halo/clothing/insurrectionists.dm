@@ -23,7 +23,7 @@
 	icon_state = "helmet"
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
-	armor = list(melee = 40, bullet = 25, laser = 40,energy = 5, bomb = 15, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 30, laser = 40,energy = 5, bomb = 15, bio = 0, rad = 0)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
@@ -36,7 +36,7 @@
 	icon_state = "armor1"
 	icon_override = INNIE_OVERRIDE
 	blood_overlay_type = "armor1"
-	armor = list(melee = 45, bullet = 45, laser = 40, energy = 40, bomb = 40, bio = 20, rad = 15)
+	armor = list(melee = 45, bullet = 40, laser = 40, energy = 40, bomb = 40, bio = 20, rad = 15)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = THICKMATERIAL
 	flags_inv = HIDETAIL

@@ -123,7 +123,17 @@
 	return
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
-/atom/movable/Move(newloc, direct)
+/atom/movable/Move(var/turf/newloc , direct)
+	if(newloc.density == 0) //No need to deal with elevation if there's a wall in the way. This also fixes projectiles phasing through walls.
+		var/list/changed_atoms = list() //Used to track the atoms we've changed the density of, to allow for a later revert.
+		for(var/atom/movable/AM in newloc.contents)
+			if(AM.elevation != src.elevation && AM.density != 0)
+				changed_atoms.Add(AM)
+				AM.density = 0
+		spawn(1)//Delay for a very short time.
+			for(var/atom/movable/AM in changed_atoms)
+				AM.density = 1 //Reset the changed atoms
+
 	if (direct & (direct - 1))
 		if (direct & 1)
 			if (direct & 4)
@@ -215,6 +225,11 @@
 	if(!mob.canmove)
 		return
 
+	if(mob.driving)
+		mob.driving.relaymove(n,direct)
+		move_delay = world.time + mob.driving.vehicle_move_delay
+		return
+
 	if(isliving(mob))
 		var/mob/living/L = mob
 		if(L.incorporeal_move)//Move though walls
@@ -283,15 +298,6 @@
 			if("walk")
 				move_delay += 7+config.walk_speed
 		move_delay += mob.movement_delay()
-
-		if(istype(mob.buckled, /obj/vehicle))
-			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
-			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
-			move_delay = world.time
-			//drunk driving
-			if(mob.confused && prob(20)) //vehicles tend to keep moving in the same direction
-				direct = turn(direct, pick(90, -90))
-			return mob.buckled.relaymove(mob,direct)
 
 		if(istype(mob.machine, /obj/machinery))
 			if(mob.machine.relaymove(mob,direct))

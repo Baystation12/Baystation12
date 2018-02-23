@@ -5,6 +5,9 @@
 #define BOMB_ACTIVE -1
 #define ROUND_ENDED -2
 
+#define WARN_BOMB 2
+#define WARN_GENERAL 1
+
 /datum/game_mode/insurrection
 	name = "Insurrection"
 	round_description = "The UNSC has located an Insurrection base..."
@@ -69,7 +72,7 @@
 	last_assault = TRUE
 	deny_respawn = 1 //No more respawn
 	modify_pod_launch(1)
-	warned = 1
+	warned = WARN_GENERAL
 
 /datum/game_mode/insurrection/proc/check_pods_left()
 	return remaining_pods.len
@@ -108,12 +111,14 @@
 	for(var/obj/payload/b in bombs)
 		if(b.exploding == 1)
 			last_assault = BOMB_ACTIVE
+		if(!b.exploding)
+			return 0
 		if(!b.explode_at)
 			return 0
-		if((((b.explode_at - world.time)/10) <b.seconds_to_disarm) && (!warned))
+		if((((b.explode_at - world.time)/10) <b.seconds_to_disarm) && (warned != WARN_BOMB))
 			message_faction("UNSC","<span class = 'danger'>Insurrectionist self destruct nearing time of detonation. Exfiltration craft arriving at evacuation wing.</span>")
 			message_faction("Insurrection","<span class='danger'>Integrated self destruct device reports nearing time of detonation. Relocate all personnel to the evacuation wing.</span>")
-			warned = TRUE
+			warned = WARN_BOMB
 
 /datum/game_mode/insurrection/proc/bomb_exploded()
 	if(last_assault == BOMB_ACTIVE)
@@ -162,7 +167,7 @@
 			p.launched = 1
 			remaining_pods -= p
 			update_pod_status()
-	if((check_pods_left() == 0) && (world.time > autolaunchtime) && (!warned))
+	if((check_pods_left() == 0) && (world.time > autolaunchtime) && (warned != WARN_GENERAL))
 		inform_last_assault()
 		last_assault()
 
@@ -186,6 +191,12 @@
 			return 1
 	else
 		return 0
+
+#undef BOMB_ACTIVE
+#undef ROUND_ENDED
+
+#undef WARN_BOMB
+#undef WARN_GENERAL
 
 #undef LAUNCH_ABORTED
 #undef LAUNCH_UNDERWAY

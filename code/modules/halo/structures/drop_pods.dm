@@ -52,13 +52,20 @@
 	icon_state = "[initial(icon_state)]_open"
 	apply_icon_and_offsets(get_occupant())
 
+/obj/structure/drop_pods/proc/check_occupied(var/mob/h)
+	if(get_occupant())
+		to_chat(h,"<span class ='notice'>Someone's already in that [name]!</span>")
+		return 1
+	return 0
+
 /obj/structure/drop_pods/proc/proc_enter_pod(var/mob/living/carbon/human/h)
 	if(!istype(h))//Making sure the entering mob is a human.
 		return
-	if(get_occupant())
-		to_chat(h,"<span class ='notice'>Someone's already in that [name]!</span>")
+	if(check_occupied(h))
 		return
 	if(do_after(h,board_time SECONDS,src))
+		if(check_occupied(h))
+			return
 		visible_message("<span class ='notice'>[h.name] enters the [name]</span>")
 		contents += h
 		verbs += /obj/structure/drop_pods/proc/exit_pod
@@ -66,6 +73,8 @@
 		close_pod()
 
 /obj/structure/drop_pods/proc/proc_exit_pod(var/mob/living/carbon/human/h)
+	if(!istype(h))//Making sure the entering mob is a human.
+		return
 	if(h != get_occupant())
 		open_pod()
 		var/mob/occupant = get_occupant()
@@ -158,3 +167,20 @@
 /obj/effect/landmark/drop_pod_landing
 	name = "Drop Pod landing Marker"
 	invisibility = 101
+
+//Overmap-Capable drop pod //
+/obj/structure/drop_pods/overmap/search_compatible_drop_points()
+	var/list/valid_points = list()
+	for(var/obj/effect/landmark/drop_pod_landing/l in world)
+		valid_points += l
+	if(isnull(valid_points))
+		log_error("ERROR: Drop pods placed on map but no /obj/effect/drop_pod_landing markers present!")
+		return
+	for(var/obj/O in valid_points)
+		if(map_sectors["[z]"] != map_sectors["[O.z]"])
+			valid_points -= O
+	if(isnull(valid_points))
+		visible_message("<span class = 'warning'>[name] emits a warning: \"No safe drop trajectories availiable.\"</span>")
+		drop_point = null
+	else
+		drop_point = pick(valid_points)

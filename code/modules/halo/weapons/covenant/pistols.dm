@@ -1,7 +1,7 @@
 
 /obj/item/weapon/gun/energy/plasmapistol
-	name = "Plasma Pistol"
-	desc = "A Type 25 Directed Energy Pistol"
+	name = "Type-25 Directed Energy Pistol"
+	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Plasma Pistol"
 	slot_flags = SLOT_BELT||SLOT_HOLSTER
@@ -11,6 +11,7 @@
 	max_shots = 20
 	var/overcharge = 0
 	projectile_type = /obj/item/projectile/covenant/plasmapistol
+	screen_shake = 0
 
 /obj/item/weapon/gun/energy/plasmapistol/attack_self(var/mob/user)
 	if(overcharge) //tell user overcharge deactivated, reset stats.
@@ -28,8 +29,8 @@
 
 
 /obj/item/weapon/gun/projectile/needler // Uses "magazines" to reload rather than inbuilt cells.
-	name = "Needler"
-	desc = "A Type 33 Guided Munitions Launcher"
+	name = "Type-33 Guided Munitions Launcher"
+	desc = "This weapon fire razor-sharp crystalline shards which can explode violently when embedded into targets."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Needler"
 	item_state = "needler"
@@ -39,8 +40,9 @@
 	handle_casings = CLEAR_CASINGS
 	caliber = "needler"
 	load_method = MAGAZINE
+	burst = 3
 
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)

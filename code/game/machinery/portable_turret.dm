@@ -89,7 +89,7 @@
 /obj/machinery/porta_turret/New()
 	..()
 	req_access.Cut()
-	req_one_access = list(access_security, access_heads)
+	req_one_access = list()
 
 	//Sets up a spark system
 	spark_system = new /datum/effect/effect/system/spark_spread
@@ -101,7 +101,7 @@
 /obj/machinery/porta_turret/crescent/New()
 	..()
 	req_one_access.Cut()
-	req_access = list(access_cent_specops)
+	req_access = list()
 
 /obj/machinery/porta_turret/Destroy()
 	qdel(spark_system)

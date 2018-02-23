@@ -61,7 +61,7 @@
 	desc = "Tan boots with extra padding and armor."
 	icon_state = "jungle"
 	force = 3
-	armor = list(melee = 40, bullet = 30, laser = 40,energy = 25, bomb = 50, bio = 0, rad = 0)
+	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 	can_hold_knife = 1
 

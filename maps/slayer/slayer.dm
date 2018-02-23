@@ -5,9 +5,9 @@
 	#include "death_asteroid_areas.dm"
 	#include "death_asteroid_spawns.dm"
 
-
 	#include "mode_teamslayer.dm"
 	#include "mode_slayer.dm"
+	#include "mode_teamslayer_covenantvspartan.dm"
 	#include "slayer_jobs.dm"
 	#include "slayer_outfits.dm"
 

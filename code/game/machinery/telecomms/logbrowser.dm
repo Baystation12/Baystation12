@@ -16,7 +16,7 @@
 
 	var/universal_translate = 0 // set to 1 if it can translate nonhuman speech
 
-	req_access = list(access_tcomsat)
+	req_access = list()
 
 	attack_hand(mob/user as mob)
 		if(stat & (BROKEN|NOPOWER))

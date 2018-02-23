@@ -39,7 +39,7 @@ GLOBAL_DATUM_INIT(moved_event, /decl/observ/moved, new)
 	GLOB.moved_event.unregister(src, am, /atom/movable/proc/recursive_move)
 
 // Entered() typically lifts the moved event, but in the case of null-space we'll have to handle it.
-/atom/movable/Move()
+/atom/movable/Move(turf/newloc,dir)
 	var/old_loc = loc
 	. = ..()
 	if(. && !loc)

@@ -290,11 +290,10 @@
 
 /obj/random/handgun/spawn_choices()
 	return list(/obj/item/weapon/gun/projectile/sec = 3,
-				/obj/item/weapon/gun/energy/gun = 2,
 				/obj/item/weapon/gun/projectile/colt = 2,
 				/obj/item/weapon/gun/projectile/pistol = 2,
-				/obj/item/weapon/gun/energy/retro = 1,
-				/obj/item/weapon/gun/projectile/sec/wood = 1)
+				/obj/item/weapon/gun/projectile/sec/wood = 1,
+				/obj/item/weapon/gun/projectile/m6d_magnum =1)
 
 /obj/random/ammo
 	name = "Random Ammunition"
@@ -303,15 +302,18 @@
 	icon_state = "45-10"
 
 /obj/random/ammo/spawn_choices()
-	return list(/obj/item/weapon/storage/box/beanbags = 6,
-				/obj/item/weapon/storage/box/shotgunammo = 2,
+	return list(/obj/item/weapon/storage/box/beanbags = 4,
+				/obj/item/weapon/storage/box/shotgunammo = 3,
 				/obj/item/weapon/storage/box/shotgunshells = 4,
-				/obj/item/weapon/storage/box/stunshells = 1,
-				/obj/item/ammo_magazine/c45m = 2,
+				/obj/item/ammo_magazine/c45m = 3,
 				/obj/item/ammo_magazine/c45m/rubber = 4,
 				/obj/item/ammo_magazine/c45m/flash = 4,
-				/obj/item/ammo_magazine/mc9mmt = 2,
-				/obj/item/ammo_magazine/mc9mmt/rubber = 6)
+				/obj/item/ammo_magazine/mc9mmt = 3,
+				/obj/item/ammo_magazine/mc9mmt/rubber = 4,
+				/obj/item/ammo_magazine/m127_saphe = 1,
+				/obj/item/ammo_magazine/m127_saphp = 3,
+				/obj/item/ammo_magazine/m762_ap = 1,
+				/obj/item/ammo_magazine/m95_sap = 1)
 
 /obj/random/action_figure
 	name = "random action figure"

@@ -17,6 +17,8 @@
 	siemens_coefficient = 0.7
 	w_class = ITEM_SIZE_NORMAL
 
+	armor_thickness = 20
+
 /obj/item/clothing/head/helmet/solgov
 	name = "\improper Sol Central Government helmet"
 	desc = "A helmet painted in Peacekeeper blue. Stands out like a sore thumb."
@@ -51,7 +53,7 @@
 	name = "tactical helmet"
 	desc = "A tan helmet made from advanced ceramic. Comfortable and robust."
 	icon_state = "helmet_tac"
-	armor = list(melee = 50, bullet = 60, laser = 60, energy = 45, bomb = 30, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 30, laser = 40,energy = 5, bomb = 15, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/head/helmet/merc

@@ -186,15 +186,15 @@
 /*
 /obj/machinery/computer/telecomms/traffic/innie
 	network = "innie_base"
-	req_access = list(access_innie_boss)
+	req_access = list()
 
 /obj/machinery/computer/telecomms/monitor/innie
 	network = "innie_base"
-	req_access = list(access_innie_boss)
+	req_access = list()
 
 /obj/machinery/computer/telecomms/server/innie
 	network = "innie_base"
-	req_access = list(access_innie)
+	req_access = list()
 */
 
 ///////////////////

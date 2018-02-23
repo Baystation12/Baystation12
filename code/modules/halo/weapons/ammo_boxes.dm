@@ -53,8 +53,48 @@
 
 /obj/item/ammo_box/shotgun
 	name = "Shotgun Shell Box"
-	desc = "A box of shotgun shells to assist in loading pump-action shotguns"
+	desc = "A box of shells to assist in loading pump-action shotguns"
 	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/pellet)
 
 /obj/item/ammo_box/shotgun/update_icon()
 	desc = "[initial(desc)] It has [contents.len] shells left."
+
+/obj/item/ammo_box/shotgun/slug
+	name = "Shotgun Slug Box"
+	desc = "A box of slugs to assist in loading pump-action shotguns"
+	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun)
+
+/obj/item/ammo_box/shotgun/slug/update_icon()
+	desc = "[initial(desc)] It has [contents.len] slugs left."
+
+/obj/item/ammo_box/shotgun/emp
+	name = "Shotgun EMP Box"
+	desc = "A box of EMP shells to assist in loading pump-action shotguns"
+	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/emp)
+
+/obj/item/ammo_box/shotgun/emp/update_icon()
+	desc = "[initial(desc)] It has [contents.len] EMP shells left."
+
+/obj/item/ammo_box/shotgun/beanbag
+	name = "Shotgun Beanbag Box"
+	desc = "A box of beanbag shells to assist in loading pump-action shotguns"
+	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/beanbag)
+
+/obj/item/ammo_box/shotgun/beanbag/update_icon()
+	desc = "[initial(desc)] It has [contents.len] beanbag shells left."
+
+/obj/item/ammo_box/shotgun/flash
+	name = "Shotgun Flash Box"
+	desc = "A box of flash shells to assist in loading pump-action shotguns"
+	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/flash)
+
+/obj/item/ammo_box/shotgun/flash/update_icon()
+	desc = "[initial(desc)] It has [contents.len] flash shells left."
+
+/obj/item/ammo_box/shotgun/practice
+	name = "Shotgun Practice Box"
+	desc = "A box of practice shells to assist in loading pump-action shotguns"
+	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/practice)
+
+/obj/item/ammo_box/shotgun/flash/update_icon()
+	desc = "[initial(desc)] It has [contents.len] practice shells left."

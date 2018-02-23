@@ -11,13 +11,6 @@
 		autolathe_recipes += recipe
 		autolathe_categories |= recipe.category
 
-		var/obj/item/I = new recipe.path
-		if(I.matter && !recipe.resources) //This can be overidden in the datums.
-			recipe.resources = list()
-			for(var/material in I.matter)
-				recipe.resources[material] = I.matter[material]*1.25 // More expensive to produce than they are to recycle.
-		qdel(I)
-
 /datum/autolathe/recipe
 	var/name = "object"
 	var/path
