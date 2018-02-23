@@ -204,11 +204,24 @@ badges
 
 /obj/item/clothing/accessory/badge/solgov/tags
 	name = "dog tags"
-	desc = "Plain identification tags made from a durable metal. Stamped with a variety of informational details."
+	desc = "Plain identification tags made from a durable metal. They are stamped with a variety of informational details."
 	gender = PLURAL
 	icon_state = "tags"
 	badge_string = "Sol Central Government"
 	slot_flags = SLOT_MASK | SLOT_TIE
+
+/obj/item/clothing/accessory/badge/solgov/tags/Initialize()
+	. = ..()
+	var/mob/living/carbon/human/H
+	H = get_holder_of_type(src, /mob/living/carbon/human)
+	if(H)
+		set_name(H.real_name)
+		set_desc(H)
+
+/obj/item/clothing/accessory/badge/solgov/tags/set_desc(var/mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species()])[H.char_branch ? "\nBranch: [H.char_branch.name]" : ""]\nReligion: [H.religion]\nBlood type: [H.b_type]"
 
 /obj/item/clothing/accessory/badge/solgov/representative
 	name = "representative's badge"
