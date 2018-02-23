@@ -9,6 +9,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define EBAND_NAME "EBAND"
 #define COV_COMMON_NAME "Battlenet"
 #define CIV_NAME "Common"
+#define SEC_NAME "Police"
 
 /datum/halo_frequencies
 	var/innie_channel = "INNIECOM"
@@ -20,8 +21,9 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	var/const/eband_freq = 1160
 	var/const/civ_freq = 1459
 	var/covenant_battlenet_freq = -1
+	var/police_freq = -1
 	var/list/used_freqs = list()
-	var/list/frequencies = list("INNIECOM",SHIPCOM_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,COV_COMMON_NAME)
+	var/list/frequencies = list("INNIECOM",SHIPCOM_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,COV_COMMON_NAME,SEC_NAME)
 
 /datum/halo_frequencies/New()
 	if(GLOB.using_map.use_global_covenant_comms)
@@ -38,6 +40,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	frequencies[EBAND_NAME] = eband_freq
 	frequencies[CIV_NAME] = civ_freq
 	frequencies[COV_COMMON_NAME] = covenant_battlenet_freq
+	frequencies[SEC_NAME] = police_freq
 	radiochannels = frequencies
 
 /datum/halo_frequencies/proc/setup_com_channels()
@@ -88,6 +91,11 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 		covenant_battlenet_freq = rand(1460, 9998)
 	used_freqs += "[covenant_battlenet_freq]"
 
+	police_freq = rand(1001, 9998)
+	while(used_freqs.Find("[police_freq]"))
+		police_freq = rand(1001, 9998)
+	used_freqs += "[police_freq]"
+
 	setup_com_channel_list()
 
 	return 1
@@ -101,6 +109,9 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 /obj/item/device/encryptionkey/shipcom
 	channels = list(SHIPCOM_NAME = 1,EBAND_NAME = 1)
+
+/obj/item/device/encryptionkey/police
+	channels = list(SEC_NAME = 1,EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/fleetcom
 	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,FLEETCOM_NAME = 1,EBAND_NAME = 1)

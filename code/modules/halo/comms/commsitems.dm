@@ -100,6 +100,15 @@
 /obj/item/device/mobilecomms/commsbackpack/innie/permanant/set_active()
 	return
 
+/obj/item/device/mobilecomms/commsbackpack/sec
+	recieving_frequencies = list(SEC_NAME,EBAND_NAME)
+
+/obj/item/device/mobilecomms/commsbackpack/sec/permanent
+	active = 1
+
+/obj/item/device/mobilecomms/commsbackpack/sec/permanent/set_active()
+	return
+
 #undef SHIPCOM_NAME
 #undef TEAMCOM_NAME
 #undef SQUADCOM_NAME
@@ -107,3 +116,4 @@
 #undef COV_COMMON_NAME
 #undef EBAND_NAME
 #undef CIV_NAME
+#undef SEC_NAME
