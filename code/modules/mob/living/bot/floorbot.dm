@@ -46,7 +46,7 @@
 /mob/living/bot/floorbot/GetInteractPanel()
 	. = "Improves floors: <a href='?src=\ref[src];command=improve'>[improvefloors ? "Yes" : "No"]</a>"
 	. += "<br>Finds tiles: <a href='?src=\ref[src];command=tiles'>[eattiles ? "Yes" : "No"]</a>"
-	. += "<br>Make singles pieces of metal into tiles when empty: <a href='?src=\ref[src];command=make'>[maketiles ? "Yes" : "No"]</a>"
+	. += "<br>Make single pieces of metal into tiles when empty: <a href='?src=\ref[src];command=make'>[maketiles ? "Yes" : "No"]</a>"
 
 /mob/living/bot/floorbot/GetInteractMaintenance()
 	. = "Disassembly mode: "
@@ -109,6 +109,7 @@
 				return
 
 /mob/living/bot/floorbot/confirmTarget(var/atom/A) // The fact that we do some checks twice may seem confusing but remember that the bot's settings may be toggled while it's moving and we want them to stop in that case
+	anchored = FALSE
 	if(!..())
 		return 0
 
@@ -159,9 +160,11 @@
 			busy = 1
 			update_icons()
 			visible_message("<span class='notice'>[src] begins to remove the broken floor.</span>")
+			anchored = TRUE
 			if(do_after(src, 50, F))
 				if(F.broken || F.burnt)
 					F.make_plating()
+			anchored = FALSE
 			target = null
 			busy = 0
 			update_icons()
@@ -169,10 +172,12 @@
 			busy = 1
 			update_icons()
 			visible_message("<span class='notice'>[src] begins to improve the floor.</span>")
+			anchored = TRUE
 			if(do_after(src, 50, F))
 				if(!F.flooring)
 					F.set_flooring(get_flooring_data(floor_build_type))
 					addTiles(-1)
+			anchored = FALSE
 			target = null
 			update_icons()
 	else if(istype(A, /obj/item/stack/tile/floor) && amount < maxAmount)
@@ -180,11 +185,13 @@
 		visible_message("<span class='notice'>\The [src] begins to collect tiles.</span>")
 		busy = 1
 		update_icons()
+		anchored = TRUE
 		if(do_after(src, 20))
 			if(T)
 				var/eaten = min(maxAmount - amount, T.get_amount())
 				T.use(eaten)
 				addTiles(eaten)
+		anchored = FALSE
 		target = null
 		update_icons()
 	else if(istype(A, /obj/item/stack/material) && amount + 4 <= maxAmount)
@@ -192,11 +199,13 @@
 		if(M.get_material_name() == DEFAULT_WALL_MATERIAL)
 			visible_message("<span class='notice'>\The [src] begins to make tiles.</span>")
 			busy = 1
+			anchored = TRUE
 			update_icons()
 			if(do_after(src, 50))
 				if(M)
 					M.use(1)
 					addTiles(4)
+			anchored = FALSE
 
 /mob/living/bot/floorbot/explode()
 	turn_off()
@@ -214,15 +223,11 @@
 		shrapnel += new /obj/item/weapon/material/shrapnel(Tsec)
 
 	for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
-		var/obj/item/stack/tile/floor/T = new /obj/item/stack/tile/floor(Tsec)
-		shrapnel += T
+		shrapnel += /obj/item/stack/tile/floor(Tsec)
 
 	if(prob(50))
-		var/obj/item/robot_parts/l_arm/LA = new /obj/item/robot_parts/l_arm(Tsec)
-		shrapnel += LA
-
-	var/obj/item/device/assembly/prox_sensor/PS = new /obj/item/device/assembly/prox_sensor(Tsec) //Not bad, but this line looks ugly for whatever reason.
-	shrapnel += PS
+		shrapnel += new /obj/item/robot_parts/l_arm(Tsec)
+	shrapnel += new /obj/item/device/assembly/prox_sensor(Tsec)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
