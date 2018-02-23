@@ -223,7 +223,7 @@
 		shrapnel += new /obj/item/weapon/material/shrapnel(Tsec)
 
 	for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
-		shrapnel += /obj/item/stack/tile/floor(Tsec)
+		shrapnel += new /obj/item/stack/tile/floor(Tsec)
 
 	if(prob(50))
 		shrapnel += new /obj/item/robot_parts/l_arm(Tsec)
