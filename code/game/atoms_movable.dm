@@ -120,7 +120,8 @@
 			src.throwing = 2 // really strong throw!
 			spinoverride = TRUE
 	if(!(ishuman(src)) || spinoverride)
-		src.SpinAnimation(0.5 SECONDS, 0)
+		var/time = 0.5 SECONDS / get_dist(target, thrower)
+		src.SpinAnimation(time, 0, run_concurrent = TRUE)
 
 	var/dist_x = abs(target.x - src.x)
 	var/dist_y = abs(target.y - src.y)

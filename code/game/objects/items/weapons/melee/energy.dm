@@ -139,7 +139,7 @@
 	armor_penetration = 60
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BELT
-	origin_tech = list(TECH_MAGNET = 5, TECH_ILLEGAL = 5)
+	origin_tech = list(TECH_MAGNET = 5, TECH_ILLEGAL = 5, TECH_COMBAT = 4, TECH_MATERIAL = 5)
 	attack_verb = list("strikes", "beats", "smacks", "hits", "whacks")
 	var/owner //the real_name of our original owner. Emagging and/or EMP will reset this.
 	parrysound = 'sound/weapons/parry.ogg'
@@ -216,11 +216,11 @@
 
 /obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)
 	user.drop_from_inventory(src)
-	spawn(1) if(src) qdel(src)
+	QDEL_IN(src, 1)
 
 /obj/item/weapon/melee/energy/blade/dropped()
 	..()
-	spawn(1) if(src) qdel(src)
+	QDEL_IN(src, 1)
 
 /obj/item/weapon/melee/energy/blade/Process()
 	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
@@ -235,13 +235,11 @@
 			host.pinned -= src
 			host.embedded -= src
 			host.drop_from_inventory(src)
-		spawn(1) if(src) qdel(src)
-
+		QDEL_IN(src, 1)
 /*
  * Energy Sword
  */
 /obj/item/weapon/melee/energy/sword/saber
-	color
 	name = "energy sword"
 	desc = "A blade comprised of entangled photons in a crystalline structure. The first of its kind, these photon crystal\
 	implements were swiftly adopted for the use in medicine. Famous for its ease of concealment,\"energy\" blades have been considered contraband since the year 2086."
@@ -252,8 +250,6 @@
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
-	atom_flags = ATOM_FLAG_NO_BLOOD
 	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	sharp = 1
 	edge = 1

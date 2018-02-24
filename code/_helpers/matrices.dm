@@ -3,7 +3,7 @@
 	Turn(.) //BYOND handles cases such as -270, 360, 540 etc. DOES NOT HANDLE 180 TURNS WELL, THEY TWEEN AND LOOK LIKE SHIT
 
 
-/atom/proc/SpinAnimation(speed = 10, loops = -1)
+/atom/proc/SpinAnimation(speed = 10, loops = -1, var/run_concurrent)
 	var/matrix/m120 = matrix(transform)
 	m120.Turn(120)
 	var/matrix/m240 = matrix(transform)
@@ -12,9 +12,19 @@
 	speed /= 3      //Gives us 3 equal time segments for our three turns.
 	                //Why not one turn? Because byond will see that the start and finish are the same place and do nothing
 	                //Why not two turns? Because byond will do a flip instead of a turn
-	animate(src, transform = m120, time = speed, loops)
-	animate(transform = m240, time = speed)
-	animate(transform = m360, time = speed)
+	if(run_concurrent) //So we don't have to run  it in a horrible setup that's too slow.
+
+		do_spin(m120, speed)
+		addtimer(CALLBACK(src, .proc/do_spin, m240, speed), speed)
+		addtimer(CALLBACK(src, .proc/do_spin, m360, speed), speed)
+
+	else
+		animate(src, transform = m120, time = speed, loops)
+		animate(transform = m240, time = speed)
+		animate(transform = m360, time = speed)
+
+/atom/proc/do_spin(var/matrix/M, var/S)
+	animate(src, transform = M, time = S, flags = ANIMATION_PARALLEL)
 
 /atom/proc/shake_animation(var/intensity = 8)
 	var/init_px = pixel_x

@@ -26,7 +26,7 @@
 	var/base_icon
 	var/base_name
 	var/unwielded_force_divisor = 0.25
-	var/parrysound = null
+	var/parrysound = 'sound/weapons/punchmiss.ogg'
 
 /obj/item/weapon/material/twohanded/update_twohanding()
 	var/mob/living/M = loc
