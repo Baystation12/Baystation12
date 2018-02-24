@@ -1,0 +1,6 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - bugfix: "Fixes the handheld teleporter only working as expected when adjacent to teleporter hub."
+  - bugfix: "Fixes the ref2name converter only working when adjacent to target."
+  - tweak: "Medical scanner integrated circuits now work in vision range."
