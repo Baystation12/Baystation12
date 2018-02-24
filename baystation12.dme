@@ -1917,6 +1917,7 @@
 #include "code\modules\modular_computers\file_system\programs\research\email_administration.dm"
 #include "code\modules\modular_computers\file_system\programs\research\ntmonitor.dm"
 #include "code\modules\modular_computers\file_system\programs\security\digitalwarrant.dm"
+#include "code\modules\modular_computers\file_system\programs\security\forceauthorization.dm"
 #include "code\modules\modular_computers\hardware\_hardware.dm"
 #include "code\modules\modular_computers\hardware\ai_slot.dm"
 #include "code\modules\modular_computers\hardware\battery_module.dm"

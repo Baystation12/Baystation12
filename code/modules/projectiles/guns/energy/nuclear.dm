@@ -16,13 +16,47 @@
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
 		)
 
+/obj/item/weapon/gun/energy/secure/gun
+	name = "energy gun"
+	desc = "A more secure LAEP90, the LAEP90-S is designed to please paranoid constituents. Body cam not included."
+	icon_state = "energystun100"
+	item_state = null	//so the human update icon uses the icon_state instead.
+	max_shots = 10
+	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
+
+	projectile_type = /obj/item/projectile/beam/stun
+	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
+	modifystate = "energystun"
+	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
+
+	firemodes = list(
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun"),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
+		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
+		)
+
 /obj/item/weapon/gun/energy/gun/small
 	name = "small energy gun"
-	desc = "A smaller model of the versatile LAEP90 Perun, packing considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
+	desc = "A smaller model of the versatile LAEP90 Perun, the LAEP90-C packs considerable utility in a smaller package. Best used in situations where full-sized sidearms are inappropriate."
 	icon_state = "smallgunstun"
 	max_shots = 5
 	w_class = ITEM_SIZE_SMALL
 	force = 2 //it's the size of a car key, what did you expect?
+	modifystate = "smallgunstun"
+
+	firemodes = list(
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="smallgunstun"),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="smallgunshock"),
+		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam/smalllaser, modifystate="smallgunkill"),
+		)
+
+/obj/item/weapon/gun/energy/secure/gun/small
+	name = "small energy gun"
+	desc = "Combining the two LAEP90 variants, the secure and compact LAEP90-CS is the next best thing to keeping your security forces on a literal leash."
+	icon_state = "smallgunstun"
+	max_shots = 5
+	w_class = ITEM_SIZE_SMALL
+	force = 2
 	modifystate = "smallgunstun"
 
 	firemodes = list(
