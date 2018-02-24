@@ -97,6 +97,8 @@
 	outputs = list("total health %", "total missing health")
 	activators = list("scan")
 
+	dist_check = /decl/dist_check/in_view
+
 /obj/item/integrated_circuit/input/med_scanner/do_work()
 	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living/carbon/human)
 	if(!istype(H)) //Invalid input
@@ -126,6 +128,8 @@
 		"clone damage"
 	)
 	activators = list("scan")
+
+	dist_check = /decl/dist_check/in_view
 
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
 	var/datum/integrated_io/I = inputs[1]

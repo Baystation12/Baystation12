@@ -288,6 +288,8 @@
 	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 10000)
 
+	dist_check = /decl/dist_check/omni
+
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
 	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
 	var/step_dir = get_pin_data(IC_INPUT, 2)
