@@ -1,3 +1,4 @@
+/*
 /datum/species/nabber
 	name = SPECIES_NABBER
 	name_plural = "Giant Armoured Serpentids"
@@ -284,3 +285,4 @@
 	H.pulling_punches = TRUE
 	H.nabbing = FALSE
 
+*/
