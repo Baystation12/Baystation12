@@ -4,7 +4,7 @@ decl/color_generator
 	var/max_random_span = 25
 
 /decl/color_generator/proc/GenerateHex()
-	. = create_color()
+	. = GenerateRGB()
 	. = rgb(.[1], .[2], .[3])
 
 /decl/color_generator/proc/GenerateRGB()
