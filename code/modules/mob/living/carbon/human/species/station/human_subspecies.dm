@@ -1,4 +1,4 @@
-/datum/species/human/gravworlder
+/* /datum/species/human/gravworlder
 	name = "Grav-Adapted Human"
 	name_plural = "Grav-Adapted Humans"
 	blurb = "Heavier and stronger than a baseline human, gravity-adapted people have \
@@ -77,4 +77,6 @@
 	name_plural = "uplifted Chimpanzees"
 	blurb = "Ook ook."
 	icobase = 'icons/mob/human_races/subspecies/r_upliftedchimp.dmi'
+*/
+
 */
