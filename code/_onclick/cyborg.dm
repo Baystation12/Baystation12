@@ -11,10 +11,6 @@
 		return
 	next_click = world.time + 1
 
-	if(stat || lockcharge || weakened || stunned || paralysis)
-		to_chat(src, "<span class='userdanger'>Unable to establish connection.</span>")
-		return
-
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
@@ -30,6 +26,9 @@
 		return
 	if(modifiers["ctrl"])
 		CtrlClickOn(A)
+		return
+
+	if(incapacitated())
 		return
 
 	if(!canClick())
@@ -124,7 +123,6 @@
 
 /obj/machinery/door/airlock/BorgShiftClick()  // Opens and closes doors! Forwards to AI code.
 	AIShiftClick()
-
 
 /atom/proc/BorgCtrlClick(var/mob/living/silicon/robot/user) //forward to human click if not overriden
 	CtrlClick(user)
