@@ -43,6 +43,8 @@
 			return global.SSairflow;
 		if("SSatoms")
 			return global.SSatoms;
+		if("SScolormap")
+			return global.SScolormap;
 		if("SSfastprocess")
 			return global.SSfastprocess;
 		if("SSgarbage")
@@ -1084,6 +1086,8 @@
 			global.SSairflow=newval;
 		if("SSatoms")
 			global.SSatoms=newval;
+		if("SScolormap")
+			global.SScolormap=newval;
 		if("SSfastprocess")
 			global.SSfastprocess=newval;
 		if("SSgarbage")
@@ -2103,6 +2107,7 @@
 	"SSair",
 	"SSairflow",
 	"SSatoms",
+	"SScolormap",
 	"SSfastprocess",
 	"SSgarbage",
 	"SSlegacy",
