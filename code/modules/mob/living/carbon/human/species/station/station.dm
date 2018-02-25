@@ -71,7 +71,7 @@
 	if(H.stat == CONSCIOUS)
 		return "staring blankly, not reacting to your presence"
 	return ..()
-
+/*
 /datum/species/tajaran
 	name = SPECIES_TAJARA
 	name_plural = "Tajaran"
@@ -364,3 +364,4 @@
 					for(var/datum/wound/W in E.wounds)
 						if (W.wound_damage() == 0 && prob(50))
 							E.wounds -= W
+*/

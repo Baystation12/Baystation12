@@ -74,3 +74,18 @@
 	if(prob(explosion_resistance))
 		return
 	..()
+
+
+
+// THIS IS THE ENTRANCE ZONE WALLS
+/turf/simulated/wall/entrancezone/entrance_up
+	icon_state = "entrance_up"
+
+/turf/simulated/wall/entrancezone/entrance_down
+	icon_state = "entrance_down"
+
+/turf/simulated/wall/entrancezone/entrance_left
+	icon_state = "entrance_left"
+
+/turf/simulated/wall/entrancezone/entrance_right
+	icon_state = "entrance_right"
