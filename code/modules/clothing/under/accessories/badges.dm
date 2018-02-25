@@ -17,11 +17,14 @@
 	stored_name = new_name
 	name = "[initial(name)] ([stored_name])"
 
+/obj/item/clothing/accessory/badge/proc/set_desc(var/mob/living/carbon/human/H)
+
 /obj/item/clothing/accessory/badge/attack_self(mob/user as mob)
 
 	if(!stored_name)
 		to_chat(user, "You inspect your [src.name]. Everything seems to be in order and you give it a quick cleaning with your hand.")
 		set_name(user.real_name)
+		set_desc(user)
 		return
 
 	if(isliving(user))
