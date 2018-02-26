@@ -19,7 +19,7 @@
 	
 	assume_control(user)
 
-/mob/living/silicon/robot/drone/assume_control(var/mob/living/silicon/ai/user)
+/mob/living/silicon/robot/drone/proc/assume_control(var/mob/living/silicon/ai/user)
 	user.controlling_drone = src
 	controlling_ai = user
 	verbs += /mob/living/silicon/robot/drone/proc/release_ai_control_verb
