@@ -96,9 +96,13 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='notice'>[user] has constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>",)
-
 	affected.createwound(CUT, affected.min_broken_damage/2, 1)
 	affected.clamp()
+	var/datum/wound/W = affected.get_incision()
+	W.open_wound(min(W.damage * 2, W.damage_list[1] - W.damage)) //damage up to the max of the wound.
+	if(!affected.encased)
+		for(var/obj/item/weapon/implant/I in affected.implants)
+			I.exposed()
 
 /datum/surgery_step/generic/incision_manager/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
