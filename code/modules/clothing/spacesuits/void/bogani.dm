@@ -66,4 +66,4 @@
 /obj/item/clothing/suit/space/void/bogani/ultimate/prepared/New()
 	..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/bogani/advanced
-	boots = new /obj/item/clothing/shoes/magboots
+	//boots = new /obj/item/clothing/shoes/magboots

@@ -109,11 +109,13 @@
 /obj/effect/shuttle_landmark/supply/centcom
 	name = "Centcom"
 	landmark_tag = "nav_cargo_start"
+	autoset = 0
 
 /obj/effect/shuttle_landmark/supply/station
 	name = "Dock Station"
 	landmark_tag = "nav_cargo_station"
 	docking_controller = "cargo_bay"
+	autoset = 1
 
 //Research Shuttle
 
@@ -121,7 +123,7 @@
 	name = "Research"
 	warmup_time = 10
 	location = 0
-	shuttle_area = /area/shuttle/research/station
+	shuttle_area = /area/shuttle/research
 	dock_target = "research_shuttle"
 	waypoint_offsite = "nav_research_start"
 	waypoint_station = "nav_research_station"
@@ -130,21 +132,23 @@
 /obj/effect/shuttle_landmark/research/station
 	name = "Station"
 	landmark_tag = "nav_research_start"
+	docking_controller = "rsearch_dock"
+	autoset = 0
 
 /obj/effect/shuttle_landmark/research/asteroid
 	name = "Asteroid"
 	landmark_tag = "nav_research_station"
-	docking_controller = "research_bay"
-
+	docking_controller = "research_outpost_dock"
+	autoset = 1
 
 //Engineer Shuttle
 
 /datum/shuttle/autodock/ferry/engie
-	name = "Engineer Shuttle"
+	name = "Engineering"
 	warmup_time = 10
 	location = 0
 	shuttle_area = /area/shuttle/constructionsite
-	dock_target = "engineer_shuttle"
+	dock_target = "engineering_shuttle"
 	waypoint_station = "nav_engie_station"
 	waypoint_offsite = "nav_engie_outpost"
 
@@ -158,6 +162,7 @@
 	name = "Asteroid Outpost"
 	landmark_tag = "nav_engie_outpost"
 	docking_controller = "engineering_dock_airlock"
+	autoset = 1
 
 
 //Mining shuttle
@@ -189,7 +194,7 @@
 	name = "Escape"
 	location = 1
 	warmup_time = 10
-	shuttle_area = /area/shuttle/escape/centcom
+	shuttle_area = /area/shuttle/escape
 	dock_target = "escape_shuttle"
 	landmark_transition = "nav_escape_transition"
 	waypoint_offsite = "nav_centcom_dock"
@@ -199,16 +204,18 @@
 	name = "Centcom"
 	landmark_tag = "nav_centcom_dock"
 	docking_controller = "centcom_dock"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/escape/internim
 	name = "In transit"
 	landmark_tag = "nav_escape_transition"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/escape/station
 	name = "Station"
 	landmark_tag = "nav_escape_dock"
 	docking_controller = "escape_dock"
-
+	autoset = 1
 /**
 /datum/shuttle/autodock/multi/antag/mercenary
 	name = "Mercenary"
