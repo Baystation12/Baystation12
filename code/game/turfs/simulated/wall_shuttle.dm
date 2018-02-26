@@ -31,14 +31,15 @@
 
 	icon = initial(base_type.icon)
 	icon_state = initial(base_type.icon_state)
+	plane = initial(base_type.plane)
 
 /turf/simulated/shuttle/wall/corner/proc/reset_overlay()
 	if(corner_overlay)
 		overlays -= corner_overlay
 	else
 		corner_overlay = image(icon = 'icons/turf/shuttle.dmi', icon_state = corner_overlay_state, dir = src.dir)
-		corner_overlay.plane = plane
-		corner_overlay.layer = layer
+		corner_overlay.plane = initial(src.plane)
+		corner_overlay.layer = initial(src.layer)
 	overlays += corner_overlay
 
 //Predefined Shuttle Corners
