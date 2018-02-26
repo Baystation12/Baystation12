@@ -1,7 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "The null rod can now purify cult floors in addition to walls."
-  - balance: "The null rod's damage has been reduced."
-  - tweak: "Maw creatures, ghost dogs, faithless and shades are now take additional damage from the null rod."
-  - tweak: "The null rod is now the null sceptre, a normal sized item."
