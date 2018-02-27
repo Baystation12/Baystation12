@@ -130,7 +130,6 @@
 		/area/ship,
 		/area/smugglers,
 		/area/slavers_base,
-		/area/hydro,
 		/area/yacht,
 		/area/bluespaceriver,
 		/area/mobius_rift,

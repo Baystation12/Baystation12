@@ -21,7 +21,9 @@
 	var/repopulate_types = list() // animals which have died that may come back
 
 	var/features_budget = 2
-	var/list/possible_features = list(/datum/map_template/ruin/exoplanet/monolith) //pre-defined list of features templates to pick from
+	//pre-defined list of features templates to pick from
+	var/list/possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+									  /datum/map_template/ruin/exoplanet/hydrobase)
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
