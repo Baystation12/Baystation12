@@ -89,6 +89,7 @@ var/global/Holiday = null
 
 		if(10)	//Oct
 			switch(DD)
+				if(3)							Holiday = "German Unity Day"
 				if(4)							Holiday = "Animal's Day"
 				if(7)							Holiday = "Smiling Day"
 				if(16)							Holiday = "Boss' Day"
