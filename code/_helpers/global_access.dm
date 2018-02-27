@@ -465,8 +465,6 @@
 			return global.hazard_overlays;
 		if("hidden_skill_types")
 			return global.hidden_skill_types;
-		if("hivemind_bank")
-			return global.hivemind_bank;
 		if("holder_mob_icon_cache")
 			return global.holder_mob_icon_cache;
 		if("host")
@@ -709,16 +707,10 @@
 			return global.point_source_descriptions;
 		if("possible_cable_coil_colours")
 			return global.possible_cable_coil_colours;
-		if("possible_changeling_IDs")
-			return global.possible_changeling_IDs;
 		if("poster_designs")
 			return global.poster_designs;
 		if("power_alarm")
 			return global.power_alarm;
-		if("powerinstances")
-			return global.powerinstances;
-		if("powers")
-			return global.powers;
 		if("preferences_datums")
 			return global.preferences_datums;
 		if("priority_air_alarms")
@@ -1506,8 +1498,6 @@
 			global.hazard_overlays=newval;
 		if("hidden_skill_types")
 			global.hidden_skill_types=newval;
-		if("hivemind_bank")
-			global.hivemind_bank=newval;
 		if("holder_mob_icon_cache")
 			global.holder_mob_icon_cache=newval;
 		if("host")
@@ -1750,16 +1740,10 @@
 			global.point_source_descriptions=newval;
 		if("possible_cable_coil_colours")
 			global.possible_cable_coil_colours=newval;
-		if("possible_changeling_IDs")
-			global.possible_changeling_IDs=newval;
 		if("poster_designs")
 			global.poster_designs=newval;
 		if("power_alarm")
 			global.power_alarm=newval;
-		if("powerinstances")
-			global.powerinstances=newval;
-		if("powers")
-			global.powers=newval;
 		if("preferences_datums")
 			global.preferences_datums=newval;
 		if("priority_air_alarms")
@@ -2314,7 +2298,6 @@
 	"hadevent",
 	"hazard_overlays",
 	"hidden_skill_types",
-	"hivemind_bank",
 	"holder_mob_icon_cache",
 	"host",
 	"href_logfile",
@@ -2436,11 +2419,8 @@
 	"playable_species",
 	"point_source_descriptions",
 	"possible_cable_coil_colours",
-	"possible_changeling_IDs",
 	"poster_designs",
 	"power_alarm",
-	"powerinstances",
-	"powers",
 	"preferences_datums",
 	"priority_air_alarms",
 	"priority_announcement",
