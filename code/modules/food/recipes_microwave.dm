@@ -840,6 +840,13 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sausage
 
+/datum/recipe/brat
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/sausage,
+		/obj/item/weapon/reagent_containers/food/snacks/meat,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/brat
+
 /datum/recipe/fishfingers
 	reagents = list(/datum/reagent/nutriment/flour = 10)
 	items = list(
