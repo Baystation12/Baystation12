@@ -719,7 +719,7 @@
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/sausage
+/obj/item/weapon/reagent_containers/food/snacks/brat
 	name = "Brat"
 	desc = "Schöne weiner."
 	icon_state = "bratsausage"
