@@ -3,7 +3,7 @@
 	icon = 'icons/turf/space.dmi'
 
 	name = "\proper space"
-	icon_state = "white"
+	icon_state = "default"
 	dynamic_lighting = 0
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -22,6 +22,7 @@
 
 /turf/space/Initialize()
 	. = ..()
+	icon_state = "white"
 	update_starlight()
 	if (!dust_cache)
 		build_dust_cache()
