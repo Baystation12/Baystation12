@@ -2577,24 +2577,12 @@
 #include "maps\crashsite_zeta\crashsite_zeta_map.dm"
 #include "maps\desert_outpost\__desert_outpost_map.dm"
 #include "maps\example\example_define.dm"
-<<<<<<< HEAD
-#include "maps\far_isle\far_isle_map.dm"
-#include "maps\far_isle\far_isle_turfs.dm"
-<<<<<<< HEAD
-#include "maps\insurrection\innie_base_areas.dm"
-=======
 #include "maps\geminus_city\geminus_city.dm"
-=======
->>>>>>> fd4f056db8a9272ce88eb0c92240c759029bf306
 #include "maps\geminus_city\geminus_city_map.dm"
 #include "maps\geminus_city\geminus_city_overmap.dm"
 #include "maps\geminus_city\unit_tests.dm"
 #include "maps\insurrection\innie_base_map.dm"
-<<<<<<< HEAD
->>>>>>> 7744439d988169fd747e51645d5fa78f99de63fa
-=======
 #include "maps\insurrection\innie_base_overmap.dm"
->>>>>>> fd4f056db8a9272ce88eb0c92240c759029bf306
 #include "maps\insurrection\insurrection.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\slayer\__death_asteroid_map.dm"
