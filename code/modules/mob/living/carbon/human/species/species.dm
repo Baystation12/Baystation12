@@ -199,6 +199,8 @@
 	var/list/equip_overlays = list()
 
 	var/sexybits_location	//organ tag where they are located if they can be kicked for increased pain
+
+	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
