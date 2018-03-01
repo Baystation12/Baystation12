@@ -9,6 +9,7 @@
 	var/list/shuttles_to_initialise = list()
 	var/base_turf_for_zs = null
 	var/accessibility_weight = 0
+	var/clean_slate = null //templates with this var set will always attempt to clear_contents when automatically loaded
 
 /datum/map_template/New(var/list/paths = null, var/rename = null)
 	if(paths && !islist(paths))
@@ -113,6 +114,8 @@
 		return
 	if(T.y+height > world.maxy)
 		return
+	if(clean_slate)
+		clear_contents = 1
 
 	var/list/atoms_to_initialise = list()
 

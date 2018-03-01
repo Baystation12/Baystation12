@@ -3,8 +3,9 @@
 	id = "exoplanet_hydrobase"
 	description = "hydroponics base with random plants and a lot of enemies"
 	suffixes = list("hydrobase/hydrobase.dmm")
-	cost = 1
+	cost = 1.5
 	allow_duplicates = 0 //this doesnt work
+	clean_slate = 1
 
 /datum/map_template/ruin/exoplanet/hydrobase/New()
 	name = "[pick("IRB","IB")] [pick("Persephone", "Demeter", "Lakshmi")]"
@@ -18,6 +19,13 @@
 	name = "\improper Hydrobase"
 	icon_state = "hydro"
 	icon = 'maps/random_ruins/exoplanet_ruins/hydrobase/hydro.dmi'
+
+/area/map_template/hydrobase/New()
+	name = "[pick("Persephone", "Demeter", "Lakshmi")] [pick("Base", "Plantation")]"
+	for(var/area/map_template/hydrobase/A)
+		A.name = "\improper [name] - [A.name]"
+		GLOB.using_map.area_purity_test_exempt_areas += A.type
+	..()
 
 /area/map_template/hydrobase/solars
 	name = "\improper Solar Array"
@@ -85,8 +93,8 @@
 /mob/living/simple_animal/hostile/retaliate/goat/king/hydro //these goats are powerful but are not the king of goats
 	name = "strange goat"
 	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
-	health = 350
-	maxHealth = 350
+	health = 450
+	maxHealth = 450
 	melee_damage_lower = 20
 	melee_damage_upper = 45
 	faction = "farmbots"
