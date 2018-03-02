@@ -28,8 +28,8 @@
 
 	startswith = list(
 		/obj/item/device/healthanalyzer,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/stack/medical/ointment,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 1,
+		/obj/item/stack/medical/ointment = 3,
 		/obj/item/weapon/storage/pill_bottle/kelotane,
 		/obj/item/weapon/storage/pill_bottle/paracetamol
 		)
@@ -45,7 +45,7 @@
 		/obj/item/stack/medical/bruise_pack = 2,
 		/obj/item/stack/medical/ointment = 1,
 		/obj/item/device/healthanalyzer,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 2,
 		/obj/item/weapon/storage/pill_bottle/antidexafen,
 		/obj/item/weapon/storage/pill_bottle/paracetamol
 		)
@@ -57,8 +57,9 @@
 	item_state = "firstaid-toxin"
 
 	startswith = list(
-		/obj/item/weapon/reagent_containers/syringe/antitoxin = 3,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox = 4,
 		/obj/item/weapon/storage/pill_bottle/antitox,
+		/obj/item/weapon/storage/pill_bottle/hyronalin,
 		/obj/item/device/healthanalyzer,
 		)
 
@@ -74,8 +75,9 @@
 
 	startswith = list(
 		/obj/item/weapon/storage/pill_bottle/dexalin,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
-		/obj/item/weapon/reagent_containers/syringe/inaprovaline,
+		/obj/item/weapon/storage/pill_bottle/inaprovaline,
+		/obj/item/weapon/reagent_containers/pill/sugariron = 2,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 4,
 		/obj/item/device/healthanalyzer,
 		)
 
@@ -86,7 +88,7 @@
 	item_state = "firstaid-advanced"
 
 	startswith = list(
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 1,
 		/obj/item/stack/medical/advanced/bruise_pack = 3,
 		/obj/item/stack/medical/advanced/ointment = 2,
 		/obj/item/stack/medical/splint
@@ -252,3 +254,21 @@
 	desc = "Mild painkiller, also known as Tylenol. Won't fix the cause of your headache (unlike cyanide), but might make it bearable."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/paracetamol = 21)
+
+/obj/item/weapon/storage/pill_bottle/hyronalin
+	name = "bottle of Hyronalin pills"
+	desc = "Contains pills used to treat radiation poisoning."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/hyronalin = 7)
+
+/obj/item/weapon/storage/pill_bottle/stox
+	name = "bottle of Soporific pills"
+	desc = "Commonly used to treat insomnia."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/stox = 14)
+
+/obj/item/weapon/storage/pill_bottle/sugariron
+	name = "bottle of Sugar-Iron pills"
+	desc = "Used to help the body naturally replenish blood."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/sugariron = 14)

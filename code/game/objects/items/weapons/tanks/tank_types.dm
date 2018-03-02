@@ -99,7 +99,7 @@
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
 	icon_state = "emergency"
 	gauge_icon = "indicator_emergency"
-	starting_pressure = list("oxygen" = 3*ONE_ATMOSPHERE)
+	starting_pressure = list("oxygen" = 10*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/emergency/oxygen/engi
 	name = "extended-capacity emergency oxygen tank"
@@ -117,7 +117,7 @@
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon_state = "emergency_nitro"
 	gauge_icon = "indicator_emergency"
-	starting_pressure = list("nitrogen" = 3*ONE_ATMOSPHERE)
+	starting_pressure = list("nitrogen" = 10*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/emergency/nitrogen/double
 	name = "double emergency nitrogen tank"
@@ -133,4 +133,4 @@
 	desc = "A tank of nitrogen."
 	icon_state = "oxygen_fr"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	starting_pressure = list("nitrogen" = 3*ONE_ATMOSPHERE)
+	starting_pressure = list("nitrogen" = 6*ONE_ATMOSPHERE)
