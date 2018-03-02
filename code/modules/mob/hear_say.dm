@@ -243,7 +243,15 @@
 		return 0
 
 	if(say_understands(speaker, language))
-		message = "<B>[speaker]</B> [verb], \"[message]\""
+		var/nverb = null
+		switch(src.get_preference_value(/datum/client_preference/language_display))
+			if(GLOB.PREF_FULL) // Full language name
+				nverb = "[verb] in [language.name]"
+			if(GLOB.PREF_SHORTHAND) //Shorthand codes
+				nverb = "[verb] ([language.shorthand])"
+			if(GLOB.PREF_OFF)//Regular output
+				nverb = verb
+		message = "<B>[speaker]</B> [nverb], \"[message]\""
 	else
 		var/adverb
 		var/length = length(message) * pick(0.8, 0.9, 1.0, 1.1, 1.2)	//Inserts a little fuzziness.

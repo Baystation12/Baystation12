@@ -73,3 +73,4 @@
 	colour = "say_quote"
 	key = "s"
 	flags = SIGNLANG | NO_STUTTER | NONVERBAL
+	shorthand = "HS"
