@@ -68,7 +68,11 @@
 				to_chat(src, "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear \him.")
 	else
 		if(language)
-			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
+			if(!say_understands(speaker,language) || language.name == "Galactic Common") //Check to see if we can understand what the speaker is saying. If so, add the name of the language after the verb. Don't do this for Galactic Common.
+				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
+			else
+				var/newverb = "[verb] in [language.name]"
+				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, newverb)]</span>")
 		else
 			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
@@ -185,7 +189,11 @@
 
 	var/formatted
 	if(language)
-		formatted = language.format_message_radio(message, verb)
+		if(!say_understands(speaker,language) || language.name == "Galactic Common") //Check if we understand the message. If so, add the language name after the verb. Don't do this for Galactic Common.
+			formatted = language.format_message_radio(message, verb)
+		else
+			var/nverb = "[verb] in [language.name]"
+			formatted = language.format_message_radio(message, nverb)
 	else
 		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
 	if(sdisabilities & DEAF || ear_deaf)
