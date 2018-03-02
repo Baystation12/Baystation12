@@ -15,8 +15,6 @@
 	var/damage_state = "00"            // Modifier used for generating the on-mob damage overlay for this limb.
 
 	// Damage vars.
-	var/brute_mod = 1                  // Multiplier for incoming brute damage.
-	var/burn_mod = 1                   // As above for burn.
 	var/brute_dam = 0                  // Actual current brute damage.
 	var/brute_ratio = 0                // Ratio of current brute damage to max damage.
 	var/burn_dam = 0                   // Actual current burn damage.
@@ -141,7 +139,7 @@
 			burn_damage = 7
 		if (3)
 			burn_damage = 3
-	burn_damage *= robotic/burn_mod //ignore burn mod for EMP damage
+	burn_damage *= robotic/species.burn_mod //ignore burn mod for EMP damage
 
 	var/power = 4 - severity //stupid reverse severity
 	for(var/obj/item/I in implants)
