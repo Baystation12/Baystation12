@@ -5,6 +5,7 @@
 	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
 	icon_state = "chaingun_obj"
 	item_state = "chaingun_obj"
+	w_class = ITEM_SIZE_LARGE
 	can_rename = 0
 
 	var/obj/vehicles/linked_vehicle
