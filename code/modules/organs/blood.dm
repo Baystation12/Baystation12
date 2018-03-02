@@ -306,7 +306,7 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	if(chem_effects[CE_OXYGENATED] == 1) // Dexalin.
 		oxygenated_mult = 0.60
 	else if(chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
-		oxygenated_mult = 0.85
+		oxygenated_mult = 0.80
 	blood_volume_mod = blood_volume_mod + oxygenated_mult - (blood_volume_mod * oxygenated_mult)
 	blood_volume = blood_volume * blood_volume_mod
 	return min(blood_volume, 100)
