@@ -8,6 +8,7 @@
 	key = "q"
 	flags = RESTRICTED
 	syllables = list("hs","zt","kr","st","sh")
+	shorthand = "RT"
 
 /datum/language/diona/get_random_name()
 	var/new_name = "[pick(list("To Sleep Beneath","Wind Over","Embrace of","Dreams of","Witnessing","To Walk Beneath","Approaching the"))]"
@@ -39,6 +40,7 @@
 		"ra", "ar", "re", "er", "ri", "ir", "ro", "or", "ru", "ur", "rs", "sr",
 		"a",  "a",  "e",  "e",  "i",  "i",  "o",  "o",  "u",  "u",  "s",  "s"
 	)
+	shorthand = "UT"
 
 /datum/language/tajaran
 	name = LANGUAGE_SIIK_MAAS
@@ -53,6 +55,7 @@
 	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r",
 	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah",
 	"hal","ket","jurl","mah","tul","cresh","azu","ragh","mro","mra","mrro","mrra")
+	shorthand = "TJ"
 
 /datum/language/tajaran/get_random_name(var/gender)
 
@@ -73,6 +76,7 @@
 	key = "k"
 	flags = WHITELISTED
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
+	shorthand = "SK"
 
 /datum/language/human
 	name = LANGUAGE_SOL_COMMON
@@ -82,6 +86,7 @@
 	colour = "solcom"
 	key = "1"
 	flags = WHITELISTED
+	shorthand = "Sol"
 
 	//syllables are at the bottom of the file
 
@@ -113,6 +118,7 @@
 	flags = NO_STUTTER
 	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
 	space_chance = 10
+	shorthand = "EAL"
 
 /datum/language/machine/can_speak_special(var/mob/living/speaker)
 	return speaker.isSynthetic()
@@ -200,6 +206,7 @@
 	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
 	"danya","da","mied","zan","das","krem","myka","to","st","no","na","ni",
 	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")
+	shorthand = "CF"
 
 /datum/language/nabber
 	name = LANGUAGE_NABBER
@@ -223,3 +230,4 @@
 	syllables = list ("die", "en", "skei", "van", "son", "der", "aar", "ch", "op", "ruk", "aa", "be", "ne", "het",
  	"ek", "ras", "ver", "zan", "das", "waa", "geb", "vol", "lu", "min", "breh", "rus", "stv", "ee", "goe", "sk",
  	"la", "ver", "we", "ge", "luk", "an", "ar", "at", "es", "et", "bel", "du", "jaa", "ch", "kk", "gh", "ll", "uu", "wat")
+	shorthand = "SP"
