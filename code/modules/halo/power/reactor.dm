@@ -193,5 +193,5 @@
 	log_admin("A fusion reactor overloaded at [src.x], [src.y], [src.z] with max damage [max_damage]")
 
 	disconnect_from_network()
-	//spawn(0)
-	//	explosion(get_turf(src), max_damage - 6, max_damage - 3, max_damage - 1, max_damage + 1) These explosions seem to cause widespread devastation on the innie_base maps. Commenting out for now.
+	spawn(0)
+		explosion(get_turf(src), max_damage - 6, max_damage - 3, max_damage - 1, max_damage + 1)

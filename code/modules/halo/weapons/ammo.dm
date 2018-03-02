@@ -191,14 +191,33 @@
 	max_ammo = 60
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/m5/rubber
+	name = "magazine (5mm) M443 Caseless Rubber"
+	desc = "Rubber bullets for riot suppression."
+	ammo_type = /obj/item/ammo_casing/m5/rubber
+
 /obj/item/ammo_casing/m5
 	desc = "A 5mm bullet casing."
 	caliber = "5mm"
 	projectile_type = /obj/item/projectile/bullet/m5
 
+/obj/item/ammo_casing/m5/rubber
+	desc = "A 5mm bullet casing."
+	caliber = "5mm"
+	projectile_type = /obj/item/projectile/bullet/m5/rubber
+
 /obj/item/projectile/bullet/m5
 	damage = 15
 	accuracy = -3
+
+/obj/item/projectile/bullet/m5/rubber //"rubber" bullets
+	name = "rubber bullet"
+	check_armour = "melee"
+	damage = 5
+	agony = 25
+	embed = 0
+	sharp = 0
+
 
 /obj/item/weapon/storage/box/m5
 	name = "box of 5mm M443 magazines"

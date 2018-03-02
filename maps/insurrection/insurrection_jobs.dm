@@ -53,7 +53,7 @@
 /datum/job/UNSC_Squad_Lead
 	title = "ODST Assault Squad Lead"
 	head_position = 1
-	total_positions = 5
+	total_positions = 2
 	selection_color = "#000000"
 
 	supervisors = "the ODST Assault Team Lead"
@@ -71,7 +71,7 @@
 /datum/job/UNSC_Team_Lead
 	title = "ODST Assault Team Lead"
 	head_position = 1
-	total_positions = 1
+	total_positions = 4
 	selection_color = "#000000"
 
 	create_record = 0
