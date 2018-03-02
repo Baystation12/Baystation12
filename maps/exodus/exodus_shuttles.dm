@@ -123,7 +123,7 @@
 	name = "Research"
 	warmup_time = 10
 	location = 0
-	shuttle_area = /area/shuttle/research
+	shuttle_area = /area/shuttle/research/station
 	dock_target = "research_shuttle"
 	waypoint_offsite = "nav_research_start"
 	waypoint_station = "nav_research_station"
@@ -194,7 +194,7 @@
 	name = "Escape"
 	location = 1
 	warmup_time = 10
-	shuttle_area = /area/shuttle/escape
+	shuttle_area = /area/shuttle/escape/centcom
 	dock_target = "escape_shuttle"
 	landmark_transition = "nav_escape_transition"
 	waypoint_offsite = "nav_centcom_dock"
@@ -204,7 +204,7 @@
 	name = "Centcom"
 	landmark_tag = "nav_centcom_dock"
 	docking_controller = "centcom_dock"
-	autoset = 1
+	autoset = 0
 
 /obj/effect/shuttle_landmark/escape/internim
 	name = "In transit"

@@ -228,3 +228,24 @@ var/list/default_onmob_icons = list(
 		slot_s_store_str = 'icons/mob/onmob/belt_mirror.dmi',
 		slot_tie_str = 'icons/mob/onmob/ties.dmi'
 		)
+
+var/list/slim_onmob_icons = list(
+		//slot_l_hand_str = 'icons/mob/onmob/items/lefthand_slim.dmi',
+		//slot_r_hand_str = 'icons/mob/onmob/items/righthand_slim.dmi',
+		//slot_belt_str = 'icons/mob/onmob/belt_slim.dmi',
+	//	slot_back_str = 'icons/mob/onmob/back_slim.dmi',
+		//slot_l_ear_str = 'icons/mob/onmob/ears.dmi',
+		//slot_r_ear_str = 'icons/mob/onmob/ears.dmi',
+		//slot_glasses_str = 'icons/mob/onmob/eyes_slim.dmi',
+		//slot_wear_id_str = 'icons/mob/onmob/id_slim.dmi',
+		slot_w_uniform_str = 'icons/mob/onmob/uniform_slim.dmi'
+		//slot_wear_suit_str = 'icons/mob/onmob/suit_slim.dmi',
+		//slot_head_str = 'icons/mob/onmob/head_slim.dmi',
+		//slot_shoes_str = 'icons/mob/onmob/feet_slim.dmi',
+		//slot_wear_mask_str = 'icons/mob/onmob/mask_slim.dmi',
+		//slot_handcuffed_str = 'icons/mob/onmob/misc_slim.dmi',
+		//slot_legcuffed_str = 'icons/mob/onmob/misc_slim.dmi',
+		//slot_gloves_str = 'icons/mob/onmob/hands_slim.dmi',
+		//slot_s_store_str = 'icons/mob/onmob/belt_mirror_slim.dmi',
+		//slot_tie_str = 'icons/mob/onmob/ties_slim.dmi'
+		)

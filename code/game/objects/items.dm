@@ -712,6 +712,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_icon = item_icons[slot]
 	else
 		mob_icon = default_onmob_icons[slot]
+	if(user_human.gender == FEMALE && user_human.species == SPECIES_HUMAN)
+		mob_icon = slim_onmob_icons[slot]
 
 	var/image/ret_overlay = overlay_image(mob_icon,mob_state,color,RESET_COLOR)
 	if(user_human && user_human.species && user_human.species.equip_adjust.len && !spritesheet)
