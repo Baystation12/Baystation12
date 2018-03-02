@@ -134,7 +134,7 @@
 		overall_stored_charge[2] += capacitor.capacitor[2]
 		capacitor.restart_power_drain()
 	if(overall_stored_charge[1] < overall_stored_charge[2])
-		to_chat(user,"<span class = 'warning>The capacitors are not sufficiently charged to fire!</span>")
+		to_chat(user,"<span class = 'warning'>The capacitors are not sufficiently charged to fire!</span>")
 		return 0
 	return 1
 
