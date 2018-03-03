@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Some simple_animals, most notably humanoid enemies, can now escape nets."
