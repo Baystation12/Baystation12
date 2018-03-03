@@ -41,7 +41,7 @@
 //todo: should this be a sniper?
 /obj/item/weapon/gun/projectile/m392_dmr
 	name = "M392 Designated Marksman Rifle"
-	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance.  Takes 7.62mm calibre magazines."
+	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance. Has an inbuilt underbarrel flashlight.  Takes 7.62mm calibre magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M395"
 	item_state = "m392"

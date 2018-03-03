@@ -3,14 +3,14 @@
 //nothing special here, basically just a resprite
 /obj/item/weapon/gun/projectile/shotgun/pump/m90_ts
 	name = "M90 tactical shotgun"
-	desc = "The UNSC's primary shotgun and one of the most effective close range infantry weapons used by front line forces."
+	desc = "The UNSC's primary shotgun and one of the most effective close range infantry weapons used by front line forces. Has an inbuilt side mounted flashlight."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M45 TS"		//pretend it's the M90
 	item_state = "m90"
 	fire_sound = 'code/modules/halo/sounds/Shotgun_Shot_Sound_Effect.ogg'
 	reload_sound = 'code/modules/halo/sounds/Shotgun_Pump_Slide.ogg'
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
-	max_shells = 6
+	max_shells = 8
 	one_hand_penalty = -1
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'

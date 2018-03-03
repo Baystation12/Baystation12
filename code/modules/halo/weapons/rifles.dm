@@ -5,7 +5,7 @@
 
 /obj/item/weapon/gun/projectile/ma5b_ar
 	name = "\improper MA5B Assault Rifle"
-	desc = "Standard-issue service rifle of the UNSC Marines. Takes 7.62mm calibre magazines."
+	desc = "Standard-issue service rifle of the UNSC Marines. Has an inbuilt underbarrel flashlight. Takes 7.62mm calibre magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "MA5B"
 	item_state = "ma5b"
@@ -40,6 +40,16 @@
 	else
 		icon_state = "MA5B_unloaded"
 
+/obj/item/weapon/gun/projectile/ma5b_ar/New()
+	..()
+	add_flashlight()
+
+/obj/item/weapon/gun/projectile/ma5b_ar/proc/add_flashlight()
+	verbs += /obj/item/weapon/gun/projectile/ma5b_ar/proc/toggle_light
+
+/obj/item/weapon/gun/projectile/ma5b_ar/MA37/add_flashlight()
+	return
+
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37
 	name = "\improper MA37 ICWS"
 	desc = "Also formally known as the MA5."
@@ -52,7 +62,7 @@
 	else
 		icon_state = "MA37_unloaded"
 
-/obj/item/weapon/gun/projectile/ma5b_ar/verb/toggle_light()
+/obj/item/weapon/gun/projectile/ma5b_ar/proc/toggle_light()
 	set category = "Object"
 	set name = "Toggle Gun Light"
 	on = !on
