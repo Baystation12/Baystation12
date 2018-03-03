@@ -43,7 +43,6 @@
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
-	allowed_roles = MILITARY_ROLES
 
 /datum/gear/accessory/torch_patch
 	display_name = "Torch mission patch"
