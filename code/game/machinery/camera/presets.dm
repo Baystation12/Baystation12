@@ -19,6 +19,9 @@
 /obj/machinery/camera/network/security
 	network = list(NETWORK_SECURITY)
 
+/obj/machinery/camera/network/cameras
+	network = list(NETWORK_CAMERAS)
+
 /obj/machinery/camera/network/thunder
 	network = list(NETWORK_THUNDER)
 

@@ -42,6 +42,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_RESEARCH "Research"
 #define NETWORK_ROBOTS "Robots"
 #define NETWORK_SECURITY "Security"
+#define NETWORK_CAMERAS "Cameras"
 #define NETWORK_THUNDER "Thunderdome"
 
 #define NETWORK_ALARM_ATMOS "Atmosphere Alarms"
