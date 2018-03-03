@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - rscadd: "The access decrypter now allows the user to choose an access code instead of picking one by random."
