@@ -1,0 +1,6 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - tweak: "The shield generator's emergency shutdown function is now hidden behind a hackable wire."
+  - tweak: "Cut down the shield generator's emergency shutdown time by 50%."
+  - tweak: "The EMP from the emergency shutdown scales with current charge--and is guarenteed to happen."
