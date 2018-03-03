@@ -466,6 +466,11 @@ ranks - ec
 	desc = "Insignia denoting the rank of Chief Explorer."
 	icon_state = "ecrank_e7"
 
+/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e9
+	name = "ranks (E-9 master explorer)"
+	desc = "Insignia denoting the rank of Master Explorer."
+	icon_state = "ecrank_e9"
+
 /obj/item/clothing/accessory/solgov/rank/ec/officer
 	name = "ranks (O-1 ensign)"
 	desc = "Insignia denoting the rank of Ensign."

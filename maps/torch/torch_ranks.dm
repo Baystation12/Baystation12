@@ -67,6 +67,7 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/e9,
 		/datum/mil_rank/ec/o1,
 		/datum/mil_rank/ec/o3,
 		/datum/mil_rank/ec/o5,
@@ -77,6 +78,7 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/e9,
 		/datum/mil_rank/ec/o1,
 		/datum/mil_rank/ec/o3,
 		/datum/mil_rank/ec/o5,
@@ -375,6 +377,12 @@
 	name_short = "CXPL"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e7)
 	sort_order = 7
+
+/datum/mil_rank/ec/e9
+	name = "Master Explorer"
+	name_short = "MXPL"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e9)
+	sort_order = 9
 
 /datum/mil_rank/ec/o1
 	name = "Ensign"
