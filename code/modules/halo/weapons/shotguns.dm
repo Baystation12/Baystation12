@@ -12,6 +12,8 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	max_shells = 6
 	one_hand_penalty = -1
+	var/on = 0
+	var/activation_sound = 'sound/effects/flashlight.ogg'
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -21,3 +23,13 @@
 
 /obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/police
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+
+/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/verb/toggle_light()
+	set category = "Object"
+	set name = "Toggle Gun Light"
+	on = !on
+	if(on && activation_sound)
+		playsound(src.loc, activation_sound, 75, 1)
+		set_light(4)
+	else
+		set_light(0)

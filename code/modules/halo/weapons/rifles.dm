@@ -20,6 +20,9 @@
 	burst = 3
 	burst_delay = 2
 	one_hand_penalty = -1
+	var/on = 0
+	var/activation_sound = 'sound/effects/flashlight.ogg'
+
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -48,6 +51,17 @@
 		icon_state = "MA37"
 	else
 		icon_state = "MA37_unloaded"
+
+/obj/item/weapon/gun/projectile/ma5b_ar/verb/toggle_light()
+	set category = "Object"
+	set name = "Toggle Gun Light"
+	on = !on
+	if(on && activation_sound)
+		playsound(src.loc, activation_sound, 75, 1)
+		set_light(4)
+	else
+		set_light(0)
+
 
 //BR85 battle
 
