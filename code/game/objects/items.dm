@@ -169,7 +169,29 @@
 			size = "bulky"
 		if(ITEM_SIZE_HUGE + 1 to INFINITY)
 			size = "huge"
-	return ..(user, distance, "", "It is a [size] item.")
+	var/desc_comp = "" //For "description composite"
+	desc_comp += "It is a [size] item."
+
+	if(hasHUD(user, "science")) //Mob has a research scanner active.
+		desc_comp += "<BR>*--------* <BR>"
+
+		if(origin_tech)
+			desc_comp += "<span class='notice'>Testing potentials:</span><BR>"
+			//var/list/techlvls = params2list(origin_tech)
+			for(var/T in origin_tech)
+				desc_comp += "Tech: Level [origin_tech[T]] [CallTechName(T)] <BR>"
+		else
+			desc_comp += "No tech origins detected.<BR>"
+
+		if(LAZYLEN(matter))
+			desc_comp += "<span class='notice'>Extractable materials:</span><BR>"
+			for(var/mat in matter)
+				desc_comp += "[get_material_by_name(mat)]<BR>"
+		else
+			desc_comp += "<span class='danger'>No extractable materials detected.</span><BR>"
+		desc_comp += "*--------*"
+
+	return ..(user, distance, "", desc_comp)
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return

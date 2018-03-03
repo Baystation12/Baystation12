@@ -116,6 +116,8 @@
 	amount_per_transfer_from_this = 5
 	volume = 5
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
+	slot_flags = SLOT_BELT | SLOT_EARS
+	w_class = ITEM_SIZE_TINY
 	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()

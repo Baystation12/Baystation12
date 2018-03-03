@@ -33,6 +33,7 @@
 	var/response_disarm = "tries to disarm"
 	var/response_harm   = "tries to hurt"
 	var/harm_intent_damage = 3
+	var/can_escape = 0 // 'smart' simple animals such as human enemies, or things small, big, sharp or strong enough to power out of a net
 
 	//Temperature effect
 	var/minbodytemp = 250
@@ -76,7 +77,6 @@
 			set_density(1)
 		return 0
 
-
 	if(health <= 0)
 		death()
 		return
@@ -88,6 +88,15 @@
 	handle_weakened()
 	handle_paralysed()
 	handle_supernatural()
+
+	if(buckled && can_escape)
+		if(istype(buckled, /obj/effect/energy_net))
+			var/obj/effect/energy_net/Net = buckled
+			Net.escape_net(src)
+		else if(prob(50))
+			escape(src, buckled)
+		else if(prob(50))
+			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
 
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
@@ -154,6 +163,10 @@
 	if(!atmos_suitable)
 		adjustBruteLoss(unsuitable_atoms_damage)
 	return 1
+
+/mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
+	O.unbuckle_mob(M)
+	visible_message("<span class='danger'>\The [M] escapes from \the [O]!</span>")
 
 /mob/living/simple_animal/proc/handle_supernatural()
 	if(purge)

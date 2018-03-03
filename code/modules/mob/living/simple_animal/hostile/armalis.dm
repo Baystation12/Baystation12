@@ -19,6 +19,7 @@
 	attack_sound = 'sound/effects/bamf.ogg'
 	melee_damage_lower = 15
 	melee_damage_upper = 20
+	can_escape = 1
 
 	min_gas = null
 	max_gas = null
