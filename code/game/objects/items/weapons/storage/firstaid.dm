@@ -76,7 +76,6 @@
 	startswith = list(
 		/obj/item/weapon/storage/pill_bottle/dexalin,
 		/obj/item/weapon/storage/pill_bottle/inaprovaline,
-		/obj/item/weapon/reagent_containers/pill/sugariron = 2,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 4,
 		/obj/item/device/healthanalyzer,
 		)
@@ -88,7 +87,7 @@
 	item_state = "firstaid-advanced"
 
 	startswith = list(
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 1,
+		/obj/item/weapon/storage/pill_bottle/assorted,
 		/obj/item/stack/medical/advanced/bruise_pack = 3,
 		/obj/item/stack/medical/advanced/ointment = 2,
 		/obj/item/stack/medical/splint
@@ -261,14 +260,16 @@
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/hyronalin = 7)
 
-/obj/item/weapon/storage/pill_bottle/stox
-	name = "bottle of Soporific pills"
-	desc = "Commonly used to treat insomnia."
+/obj/item/weapon/storage/pill_bottle/assorted
+	name = "bottle of assorted pills"
+	desc = "Commonly found on paramedics, these assorted pill bottles contain all the basics."
 
-	startswith = list(/obj/item/weapon/reagent_containers/pill/stox = 14)
-
-/obj/item/weapon/storage/pill_bottle/sugariron
-	name = "bottle of Sugar-Iron pills"
-	desc = "Used to help the body naturally replenish blood."
-
-	startswith = list(/obj/item/weapon/reagent_containers/pill/sugariron = 14)
+	startswith = list(
+			/obj/item/weapon/reagent_containers/pill/inaprovaline = 6,
+			/obj/item/weapon/reagent_containers/pill/dylovene = 6,
+			/obj/item/weapon/reagent_containers/pill/sugariron = 2,
+			/obj/item/weapon/reagent_containers/pill/tramadol = 2,
+			/obj/item/weapon/reagent_containers/pill/dexalin = 2,
+			/obj/item/weapon/reagent_containers/pill/kelotane = 2,
+			/obj/item/weapon/reagent_containers/pill/hyronalin
+		)
