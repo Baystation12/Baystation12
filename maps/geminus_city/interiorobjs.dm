@@ -81,6 +81,7 @@
 /obj/structure/closet/wardrobe/police/New()
 	..()
 	new /obj/item/clothing/head/soft/sec/corp(src)
+	new /obj/item/clothing/head/beret/sec/corporate/hos(src)
 	new /obj/item/clothing/under/police(src)
 	new /obj/item/clothing/shoes/dutyboots(src)
 	new /obj/item/clothing/glasses/sunglasses(src)
