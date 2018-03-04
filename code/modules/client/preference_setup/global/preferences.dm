@@ -21,6 +21,7 @@ GLOBAL_VAR_CONST(PREF_CTRL_CLICK, "ctrl click")
 GLOBAL_VAR_CONST(PREF_CTRL_SHIFT_CLICK, "ctrl shift click")
 GLOBAL_VAR_CONST(PREF_HEAR, "Hear")
 GLOBAL_VAR_CONST(PREF_SILENT, "Silent")
+GLOBAL_VAR_CONST(PREF_SHORTHAND, "Shorthand")
 
 var/list/_client_preferences
 var/list/_client_preferences_by_key
@@ -117,6 +118,11 @@ var/list/_client_preferences_by_type
 	description ="Ghost radio"
 	key = "CHAT_GHOSTRADIO"
 	options = list(GLOB.PREF_ALL_CHATTER, GLOB.PREF_NEARBY)
+
+/datum/client_preference/language_display
+	description = "Display Language Names"
+	key = "LANGUAGE_DISPLAY"
+	options = list(GLOB.PREF_FULL, GLOB.PREF_SHORTHAND, GLOB.PREF_OFF)
 
 /datum/client_preference/ghost_follow_link_length
 	description ="Ghost Follow Links"
