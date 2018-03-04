@@ -20,8 +20,8 @@
 	var/breakout = 0 //if someone is currently breaking out. mutex
 	var/storage_capacity = 2 * MOB_MEDIUM //This is so that someone can't pack hundreds of items in a locker/crate
 							  //then open it in a populated area to crash clients.
-	var/open_sound = 'sound/effects/locker_open.ogg'
-	var/close_sound = 'sound/effects/locker_close.ogg'
+	var/open_sound = 'sound/effects/closet_open.ogg'
+	var/close_sound = 'sound/effects/closet_close.ogg'
 
 	var/storage_types = CLOSET_STORAGE_ALL
 	var/setup = CLOSET_CAN_BE_WELDED
@@ -114,7 +114,7 @@
 	src.dump_contents()
 
 	src.opened = 1
-	playsound(src.loc, open_sound, 15, 1, -3)
+	playsound(src.loc, open_sound, 50, 1, -3)
 	density = 0
 	update_icon()
 	return 1
@@ -128,7 +128,7 @@
 	store_contents()
 	src.opened = 0
 
-	playsound(src.loc, close_sound, 25, 0, -3)
+	playsound(src.loc, close_sound, 50, 0, -3)
 	density = 1
 
 	update_icon()

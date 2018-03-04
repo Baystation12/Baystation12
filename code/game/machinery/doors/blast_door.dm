@@ -19,8 +19,8 @@
 	var/icon_state_closed = null
 	var/icon_state_closing = null
 
-	var/open_sound = 'sound/machines/airlock_heavy.ogg'
-	var/close_sound = 'sound/machines/AirlockClose_heavy.ogg'
+	var/open_sound = 'sound/machines/blastdoor_open.ogg'
+	var/close_sound = 'sound/machines/blastdoor_close.ogg'
 
 	closed_layer = ABOVE_WINDOW_LAYER
 	var/id = 1.0
