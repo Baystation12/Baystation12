@@ -41,7 +41,7 @@
 //todo: should this be a sniper?
 /obj/item/weapon/gun/projectile/m392_dmr
 	name = "M392 Designated Marksman Rifle"
-	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance.  Takes 7.62mm calibre magazines."
+	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance. Has an inbuilt underbarrel flashlight.  Takes 7.62mm calibre magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M395"
 	item_state = "m392"
@@ -56,6 +56,8 @@
 
 	accuracy = 1
 	scoped_accuracy = 2
+	var/on = 0
+	var/activation_sound = 'sound/effects/flashlight.ogg'
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -74,3 +76,13 @@
 		icon_state = "M395"
 	else
 		icon_state = "M395_unloaded"
+
+/obj/item/weapon/gun/projectile/m392_dmr/verb/toggle_light()
+	set category = "Object"
+	set name = "Toggle Gun Light"
+	on = !on
+	if(on && activation_sound)
+		playsound(src.loc, activation_sound, 75, 1)
+		set_light(4)
+	else
+		set_light(0)
