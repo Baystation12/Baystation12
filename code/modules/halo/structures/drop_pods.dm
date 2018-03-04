@@ -176,8 +176,13 @@
 	if(isnull(valid_points))
 		log_error("ERROR: Drop pods placed on map but no /obj/effect/drop_pod_landing markers present!")
 		return
+	var/obj/current_o_obj = map_sectors["[z]"]
+	var/obj/targ_o_obj
 	for(var/obj/O in valid_points)
-		if(map_sectors["[z]"] != map_sectors["[O.z]"])
+		targ_o_obj = map_sectors["[O.z]"]
+		if(isnull(targ_o_obj))
+			continue
+		if(get_dist(current_o_obj.loc,targ_o_obj.loc) >2)
 			valid_points -= O
 	if(isnull(valid_points))
 		visible_message("<span class = 'warning'>[name] emits a warning: \"No safe drop trajectories availiable.\"</span>")
