@@ -21,6 +21,7 @@
 	var/obj/item/inventory_head
 	var/obj/item/inventory_mask
 	possession_candidate = 1
+	can_escape = 1 //snip snip
 
 /mob/living/simple_animal/crab/Life()
 	..()

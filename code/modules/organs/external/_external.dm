@@ -357,6 +357,7 @@
 	switch(damage_type)
 		if(BRUTE) src.heal_damage(repair_amount, 0, 0, 1)
 		if(BURN)  src.heal_damage(0, repair_amount, 0, 1)
+	owner.regenerate_icons()
 	if(user == src.owner)
 		user.visible_message("<span class='notice'>\The [user] patches [damage_desc] on \his [src.name] with [tool].</span>")
 	else
@@ -542,9 +543,9 @@ I would set INFECTION_LEVEL_TWO to 100*e^(15*60/1000) = 245. Note that this is t
 the actual time is dependent on RNG.
 
 INFECTION_LEVEL_ONE		below this germ level nothing happens, and the infection doesn't grow
-INFECTION_LEVEL_TWO		above this germ level the infection will start to spread to internal and adjacent organs
+INFECTION_LEVEL_TWO		above this germ level the infection will start to spread to internal and adjacent organs and rest will be required to recover
 INFECTION_LEVEL_THREE	above this germ level the player will take additional toxin damage per second, and will die in minutes without
-						antitox. also, above this germ level you will need to overdose on spaceacillin to reduce the germ_level.
+						antitox. also, above this germ level you will need to overdose on spaceacillin and get rest to reduce the germ_level.
 
 Note that amputating the affected organ does in fact remove the infection from the player's body.
 */
@@ -617,7 +618,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if (parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
 					parent.germ_level++
 
-	if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < 30)	//overdosing is necessary to stop severe infections
+	if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < REAGENTS_OVERDOSE)	//overdosing is necessary to stop severe infections
 		if (!(status & ORGAN_DEAD))
 			status |= ORGAN_DEAD
 			to_chat(owner, "<span class='notice'>You can't feel your [name] anymore...</span>")

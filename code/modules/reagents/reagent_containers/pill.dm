@@ -313,3 +313,24 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 	..()
 	reagents.add_reagent(/datum/reagent/paroxetine, 10)
 	color = reagents.get_color()
+
+
+/obj/item/weapon/reagent_containers/pill/hyronalin
+	name = "Hyronalin (7u)"
+	desc = "Used to treat radiation poisoning."
+	icon_state = "pill1"
+/obj/item/weapon/reagent_containers/pill/hyronalin/New()
+	..()
+	reagents.add_reagent(/datum/reagent/hyronalin, 7)
+	color = reagents.get_color()
+
+
+/obj/item/weapon/reagent_containers/pill/sugariron
+	name = "Sugar-Iron (10u)"
+	desc = "Used to help the body naturally replenish blood."
+	icon_state = "pill1"
+/obj/item/weapon/reagent_containers/pill/sugariron/New()
+	..()
+	reagents.add_reagent(/datum/reagent/iron, 5)
+	reagents.add_reagent(/datum/reagent/sugar, 5)
+	color = reagents.get_color()
