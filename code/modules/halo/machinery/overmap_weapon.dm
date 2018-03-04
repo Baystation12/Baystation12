@@ -55,14 +55,17 @@
 /obj/machinery/overmap_weapon_console/proc/get_linked_device_damage_mod()//Defined on a weapon-by-weapon basis.
 	return 0
 
-/obj/machinery/overmap_weapon_console/proc/fire_projectile(var/atom/target,var/mob/user)
-
+/obj/machinery/overmap_weapon_console/proc/fire_projectile(var/atom/target,var/mob/user,var/directly_above = 0)
 	var/obj/item/projectile/new_projectile = new fired_projectile
 	new_projectile.damage += get_linked_device_damage_mod()
 	new_projectile.loc = map_sectors["[z]"]
 	new_projectile.permutated = map_sectors["[z]"] //Ensuring we don't hit ourselves somehow
 	new_projectile.firer = user
-	new_projectile.launch(target)
+	if(directly_above)
+		new_projectile.on_impact(target)
+		qdel(new_projectile)
+	else
+		new_projectile.launch(target)
 
 /obj/machinery/overmap_weapon_console/proc/play_fire_sound()
 	if(isnull(fire_sound))
@@ -77,7 +80,7 @@
 	var/obj/overmap_sector = map_sectors["[z]"]
 	if(!overmap_sector)
 		return 0
-	if(target.loc == overmap_sector.loc)
+	if(target == overmap_sector)
 		to_chat(user,"<span class = 'warning'>You can't fire at yourself!</span>")
 		return 0
 	if(direction_locked && (get_dir(overmap_sector,target) != overmap_sector.dir)) //Direction lock check.
@@ -85,8 +88,11 @@
 		return 0
 	if(!consume_loaded_ammo(user))
 		return 0
+	var/directly_above = 0
+	if(target.loc == overmap_sector.loc)
+		directly_above = 1
 
-	fire_projectile(target,user)
+	fire_projectile(target,user,directly_above)
 	return 1
 
 //Overmap Weapon Aim Tool//

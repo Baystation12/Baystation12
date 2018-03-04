@@ -78,7 +78,7 @@
 
 /obj/structure/oxy_dispenser/eng
 	icon_state = "dispenser_eng"
-	contents_type = /obj/item/weapon/storage/firstaid/erk/eng
+	contents_type = /obj/item/weapon/storage/firstaid/erk
 
 /obj/structure/oxy_dispenser/large
 	icon = 'code/modules/halo/structures/emtankdispenser.dmi'
