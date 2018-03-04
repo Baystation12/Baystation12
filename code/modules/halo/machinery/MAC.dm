@@ -165,12 +165,12 @@
 		if(istype(target,/obj/effect/overmap))
 			play_fire_sound(target)
 
-/obj/machinery/overmap_weapon_console/mac/play_fire_sound(var/obj/effect/overmap/overmap_object = map_sectors["[z]"])
+/obj/machinery/overmap_weapon_console/mac/play_fire_sound(var/obj/effect/overmap/overmap_object = map_sectors["[z]"],var/turf/loc_soundfrom = src.loc)
 	if(isnull(src.fire_sound))
 		return
 
 	for(var/z_level in overmap_object.map_z)
-		playsound(locate(x,y,z_level), src.fire_sound, 100,1, 255)
+		playsound(locate(loc_soundfrom.x,loc_soundfrom.y,z_level), src.fire_sound, 100,1, 255)
 
 /obj/machinery/overmap_weapon_console/mac/get_linked_device_damage_mod()
 	var/damage_mod = 0
@@ -234,8 +234,9 @@
 		var/turf/target_turf = target.loc
 
 		play_fire_sound()
-		play_fire_sound(map_sectors["[target.z]"])
-		explosion(target_turf,3,4,5,10)
+		var/obj/effect/overmap/targ_overmap = map_sectors["target.z"]
+		play_fire_sound(targ_overmap,target_turf)
+		explosion(target_turf,4,5,6,20)
 
 //MAC OVERMAP PROJECTILE//
 /obj/item/projectile/overmap/mac
