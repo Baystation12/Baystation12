@@ -1,7 +1,7 @@
 //Helpers for the pods
 //If you want to make a new one
 //Just copy paste the pod 1 code and change 1 for 2 and so on
-/*
+
 /datum/shuttle/autodock/ferry/escape_pod
 	category = /datum/shuttle/autodock/ferry/escape_pod
 	sound_takeoff = 'sound/effects/rocket.ogg'
@@ -53,7 +53,36 @@
 	number = 1
 /obj/effect/shuttle_landmark/escape_pod/transit/pod1
 	number = 1
-*/
+
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod2
+	shuttle_area = /area/shuttle/escape_pod2/station
+	number = 2
+/obj/effect/shuttle_landmark/escape_pod/start/pod2
+	number = 2
+/obj/effect/shuttle_landmark/escape_pod/out/pod2
+	number = 2
+/obj/effect/shuttle_landmark/escape_pod/transit/pod2
+	number = 2
+
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod3
+	shuttle_area = /area/shuttle/escape_pod3/station
+	number = 3
+/obj/effect/shuttle_landmark/escape_pod/start/pod3
+	number = 3
+/obj/effect/shuttle_landmark/escape_pod/out/pod3
+	number = 3
+/obj/effect/shuttle_landmark/escape_pod/transit/pod3
+	number = 3
+
+/datum/shuttle/autodock/ferry/escape_pod/escape_pod5
+	shuttle_area = /area/shuttle/escape_pod5/station
+	number = 5
+/obj/effect/shuttle_landmark/escape_pod/start/pod5
+	number = 5
+/obj/effect/shuttle_landmark/escape_pod/out/pod5
+	number = 5
+/obj/effect/shuttle_landmark/escape_pod/transit/pod5
+	number = 5
 
 // ERT - Shuttle
 
@@ -122,7 +151,7 @@
 /datum/shuttle/autodock/ferry/research
 	name = "Research"
 	warmup_time = 10
-	location = 0
+	location = 1
 	shuttle_area = /area/shuttle/research/station
 	dock_target = "research_shuttle"
 	waypoint_offsite = "nav_research_start"
@@ -132,7 +161,7 @@
 /obj/effect/shuttle_landmark/research/station
 	name = "Station"
 	landmark_tag = "nav_research_start"
-	docking_controller = "rsearch_dock"
+	docking_controller = "research_station"
 	autoset = 0
 
 /obj/effect/shuttle_landmark/research/asteroid
@@ -209,26 +238,26 @@
 /obj/effect/shuttle_landmark/escape/internim
 	name = "In transit"
 	landmark_tag = "nav_escape_transition"
-	autoset = 1
+	autoset = 0
 
 /obj/effect/shuttle_landmark/escape/station
 	name = "Station"
 	landmark_tag = "nav_escape_dock"
 	docking_controller = "escape_dock"
 	autoset = 1
-/**
+
 /datum/shuttle/autodock/multi/antag/mercenary
 	name = "Mercenary"
 	warmup_time = 0
-	destinations = list(
+	destination_tags = list(
 		"nav_merc_start",
 		"nav_merc_dock",
 		"nav_merc_coupole",
 		"nav_merc_minage",
 		"nav_merc_residentiel",
 		)
-	shuttle_area = /area/shuttle/merc/start
-	dock_target = "ship_merc"
+	shuttle_area = /area/syndicate_station/start
+	dock_target = "merc_shuttle"
 	current_location = "nav_merc_start"
 	landmark_transition = "nav_merc_transition"
 	announcer = "Chasseur Huon"
@@ -239,68 +268,36 @@
 /obj/effect/shuttle_landmark/merc/start
 	name = "Mercenary Base"
 	landmark_tag = "nav_merc_start"
-	docking_controller = "dock_merc"
+	docking_controller = "merc_base"
 
 /obj/effect/shuttle_landmark/merc/internim
 	name = "In transit"
 	landmark_tag = "nav_merc_transition"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/merc/dock
-	name = "Docking Port"
+	name = "Northwest"
 	landmark_tag = "nav_merc_dock"
-	docking_controller = "dock2"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/merc/coupole
-	name = "Near the Dome"
+	name = "South"
 	landmark_tag = "nav_merc_coupole"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/merc/minage
-	name = "At the mining airlock"
+	name = "Southwest"
 	landmark_tag = "nav_merc_minage"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/merc/residentiel
-	name = "Near the Residential Access"
+	name = "North"
 	landmark_tag = "nav_merc_residentiel"
+	autoset = 1
 
-/datum/shuttle/autodock/multi/antag/ninja
-	name = "Ninja"
-	warmup_time = 0
-	destinations = list(
-		"nav_ninja_adm",
-		"nav_ninja_eng",
-		"nav_ninja_asteroid",
-		"nav_ninja_start"
-		)
-	shuttle_area = /area/syndicate_mothership/ninja
-	current_location = "nav_ninja_start"
-	landmark_transition = "nav_ninja_transition"
-	announcer = "Colonial Magistrate Authority"
-	arrival_message = "Attention, anomalous sensor reading detected entering station proximity."
-	departure_message = "Attention, anomalous sensor reading detected leaving station proximity."
-
-/obj/effect/shuttle_landmark/ninja/start
-	name = "Away Asteroid Belt"
-	landmark_tag = "nav_ninja_start"
-
-/obj/effect/shuttle_landmark/ninja/internim
-	name = "In transit"
-	landmark_tag = "nav_ninja_transition"
-
-/obj/effect/shuttle_landmark/ninja/civ
-	name = "North of Administrative Deck"
-	landmark_tag = "nav_ninja_adm"
-
-/obj/effect/shuttle_landmark/ninja/eng
-	name = "Southwest of Engineering"
-	landmark_tag = "nav_ninja_eng"
-
-/obj/effect/shuttle_landmark/ninja/asteroid
-	name = "Asteroids on Industrial Deck"
-	landmark_tag = "nav_ninja_asteroid"
-**/
 
 //Skipjack
-
+/*
 /datum/shuttle/autodock/multi/antag/skipjack
     name = "Skipjack"
     warmup_time = 0
@@ -339,3 +336,4 @@
 /obj/effect/shuttle_landmark/skipjack/ind
     name = "Mining Airlock"
     landmark_tag = "nav_skipjack_ind"
+*/
