@@ -151,6 +151,8 @@
 	if(silent || (sdisabilities & MUTE))
 		message_data[1] = ""
 		. = 1
+	else if(istype(wear_mask, /obj/item/clothing/mask/muzzle) && isSynthetic())
+		. = (message_data)
 
 	else if(istype(wear_mask, /obj/item/clothing/mask))
 		var/obj/item/clothing/mask/M = wear_mask
