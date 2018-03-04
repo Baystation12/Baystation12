@@ -1,0 +1,5 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - rscadd: "Research goggles now readoff research levels, as well as an item's matter contents. When used to examine reagent containers (Beakers, burgers, bloodbags), it will read off the contents. But . . ."
+  - bugfix: "get_reagent() no longer returns a given reagent's path."
