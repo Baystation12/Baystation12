@@ -140,7 +140,8 @@
 				spawn(20) can_move = 1
 			else
 				spawn(25) can_move = 1
-		step(src, direction)
+		if(isturf(loc))
+			step(src, direction)
 	return
 
 /obj/effect/dummy/chameleon/Destroy()
