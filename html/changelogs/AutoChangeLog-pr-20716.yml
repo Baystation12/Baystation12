@@ -1,0 +1,11 @@
+author: "Novacat"
+delete-after: True
+changes: 
+  - tweak: "Advanced First Aid Kit: Swaps inaprovaline autoinjector for assorted pill bottle."
+  - tweak: "Burn First Aid Kit: Adds three ointment kits, swaps inaprovaline autoinjector for tramadol autoinjector"
+  - tweak: "Oxygen first aid kits now contain inaprovaline pill bottle, dexalin pill bottle, and four inaprovaline autoinjectors"
+  - tweak: "Toxin first aid kits now contain a dylovene pill bottle, three hyronalin pills, and four autoinjectors of dylovene"
+  - tweak: "Autoinjectors are now the same size as syringes"
+  - tweak: "Emergency Oxygen/Nitrogen Tanks now start off full"
+  - tweak: "Regular Nitrogen tank starts off at the same level as oxygen tanks"
+  - tweak: "Paracemetol's painkiller effect increased from 25 to 35"
