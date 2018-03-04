@@ -59,7 +59,7 @@
 	startswith = list(
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox = 4,
 		/obj/item/weapon/storage/pill_bottle/antitox,
-		/obj/item/weapon/storage/pill_bottle/hyronalin,
+		/obj/item/weapon/reagent_containers/pill/hyronalin = 3,
 		/obj/item/device/healthanalyzer,
 		)
 
@@ -253,12 +253,6 @@
 	desc = "Mild painkiller, also known as Tylenol. Won't fix the cause of your headache (unlike cyanide), but might make it bearable."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/paracetamol = 21)
-
-/obj/item/weapon/storage/pill_bottle/hyronalin
-	name = "bottle of Hyronalin pills"
-	desc = "Contains pills used to treat radiation poisoning."
-
-	startswith = list(/obj/item/weapon/reagent_containers/pill/hyronalin = 7)
 
 /obj/item/weapon/storage/pill_bottle/assorted
 	name = "bottle of assorted pills"
