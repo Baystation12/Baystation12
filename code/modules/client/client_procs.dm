@@ -76,7 +76,7 @@
 		if(isnull(ticket))
 			return
 
-		ticket.close(client_repository.get_lite_client(usr.client))
+		ticket.close(usr.client)
 
 
 
