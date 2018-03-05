@@ -18,7 +18,7 @@
 	one_hand_penalty = -1
 	scoped_accuracy = 3
 	screen_shake = 0
-
+	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -53,7 +53,7 @@
 	fire_sound = 'code/modules/halo/sounds/DMR_ShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
-
+	w_class = ITEM_SIZE_LARGE
 	accuracy = 1
 	scoped_accuracy = 2
 	var/on = 0

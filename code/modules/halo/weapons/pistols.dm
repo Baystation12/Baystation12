@@ -15,6 +15,7 @@
 	fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/MagnumReloadSoundEffect.ogg'
 	load_method = MAGAZINE
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/weapon/gun/projectile/m6d_magnum/update_icon()
 	if(ammo_magazine)
