@@ -618,6 +618,23 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	var/obj/item/weapon/storage/secure/briefcase/money/case = new(H.loc)
 	H.put_in_hands(case)
 
+/decl/hierarchy/outfit/job/torch/offduty
+	name = OUTFIT_JOB_NAME("Off-Duty - Torch")
+	uniform = /obj/item/clothing/under/solgov/service/expeditionary
+	l_ear = /obj/item/device/radio/headset
+	shoes = /obj/item/clothing/shoes/dress
+	pda_type = /obj/item/device/pda
+	id_type = /obj/item/weapon/card/id/torch/offduty
+
+/decl/hierarchy/outfit/job/torch/offduty/officer
+	name = OUTFIT_JOB_NAME("Off-Duty - Officer")
+	uniform = /obj/item/clothing/under/solgov/service/expeditionary/command
+
+/decl/hierarchy/outfit/job/torch/offduty/fleet
+	name = OUTFIT_JOB_NAME("Off-Duty - Fleet")
+	uniform = /obj/item/clothing/under/solgov/service/fleet
+	shoes = /obj/item/clothing/shoes/dress/white
+
 /decl/hierarchy/outfit/job/torch/merchant
 	name = OUTFIT_JOB_NAME("Merchant - Torch")
 	uniform = /obj/item/clothing/under/color/black
