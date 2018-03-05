@@ -5,7 +5,6 @@
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	use_to_pickup = 1
-	slot_flags = SLOT_BELT
 
 /obj/item/weapon/storage/bag/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
 	. = ..()
@@ -73,8 +72,8 @@
 	icon_state = "plasticbag"
 	item_state = "plasticbag"
 
-	w_class = ITEM_SIZE_TINY
-	max_w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_LARGE
+	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)

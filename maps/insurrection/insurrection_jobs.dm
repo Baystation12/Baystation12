@@ -49,6 +49,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_Assault
 
 	latejoin_at_spawnpoints = TRUE
+	access = list(access_unsc_crew,
+		access_unsc_armoury, access_unsc_marine)
 
 /datum/job/UNSC_Squad_Lead
 	title = "ODST Assault Squad Lead"
@@ -67,6 +69,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_Assault
 
 	latejoin_at_spawnpoints = TRUE
+	access = list(access_unsc_crew,
+		access_unsc_armoury, access_unsc_marine)
 
 /datum/job/UNSC_Team_Lead
 	title = "ODST Assault Team Lead"
@@ -83,3 +87,5 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_Assault
 
 	latejoin_at_spawnpoints = TRUE
+	access = list(access_unsc_crew,
+		access_unsc_armoury, access_unsc_marine)

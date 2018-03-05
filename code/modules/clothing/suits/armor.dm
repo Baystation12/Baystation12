@@ -383,6 +383,7 @@
 	icon_state = "tacwebvest"
 	item_state = "tacwebvest"
 	armor = list(melee = 45, bullet = 40, laser = 40, energy = 40, bomb = 40, bio = 20, rad = 15)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 
 /obj/item/clothing/suit/storage/vest/merc
 	name = "heavy combat armor"
