@@ -3,29 +3,15 @@
 	id = "exoplanet_hydrobase"
 	description = "hydroponics base with random plants and a lot of enemies"
 	suffixes = list("hydrobase/hydrobase.dmm")
-	cost = 1.5
-	allow_duplicates = 0 //this doesnt work
+	cost = 1
+	allow_duplicates = FALSE //this doesnt work
 	clean_slate = 1
-
-/datum/map_template/ruin/exoplanet/hydrobase/New()
-	name = "[pick("IRB","IB")] [pick("Persephone", "Demeter", "Lakshmi")]"
-	for(var/area/map_template/hydrobase/A)
-		A.name = "\improper [name] - [A.name]"
-		GLOB.using_map.area_purity_test_exempt_areas += A.type
-	..()
 
 // Areas //
 /area/map_template/hydrobase
 	name = "\improper Hydrobase"
 	icon_state = "hydro"
 	icon = 'maps/random_ruins/exoplanet_ruins/hydrobase/hydro.dmi'
-
-/area/map_template/hydrobase/New()
-	name = "[pick("Persephone", "Demeter", "Lakshmi")] [pick("Base", "Plantation")]"
-	for(var/area/map_template/hydrobase/A)
-		A.name = "\improper [name] - [A.name]"
-		GLOB.using_map.area_purity_test_exempt_areas += A.type
-	..()
 
 /area/map_template/hydrobase/solars
 	name = "\improper Solar Array"
