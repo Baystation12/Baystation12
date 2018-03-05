@@ -1,5 +1,8 @@
+#define CLOSE_REASON_OTHER "other"
+
 var/list/tickets = list()
 var/list/ticket_panels = list()
+GLOBAL_LIST_INIT(ticket_close_reasons, list("ticket is fully resolved", "ticket has been rejected", "ticket is no longer relevant"))
 
 /datum/ticket
 	var/owner
@@ -9,6 +12,7 @@ var/list/ticket_panels = list()
 	var/closed_by
 	var/id
 	var/opened_time
+	var/close_reason
 
 /datum/ticket/New(var/owner)
 	src.owner = owner
@@ -29,12 +33,19 @@ var/list/ticket_panels = list()
 	if(status == TICKET_ASSIGNED && !closed_by.holder) // non-admins can only close a ticket if no admin has taken it
 		return
 
+	close_reason = input(closed_by, "Please provide a close reason:", "Close ticket") in (GLOB.ticket_close_reasons | CLOSE_REASON_OTHER)
+	if(close_reason == CLOSE_REASON_OTHER)
+		close_reason = sanitize(input(closed_by, "Enter a custom close reason:", "Close ticket") as text)
+
+	if(!close_reason)
+		close_reason = "ticket closed for no reason"
+
 	src.status = TICKET_CLOSED
 	src.closed_by = closed_by.ckey
 
-	to_chat(client_by_ckey(src.owner), "<span class='notice'><b>Your ticket has been closed by [closed_by].</b></span>")
-	message_staff("<span class='notice'><b>[src.owner]</b>'s ticket has been closed by <b>[key_name(closed_by)]</b>.</span>")
-	send2adminirc("[src.owner]'s ticket has been closed by [key_name(closed_by)].")
+	to_chat(client_by_ckey(src.owner), "<span class='notice'><b>Your ticket has been closed by [closed_by] with the reason: [close_reason].</b></span>")
+	message_staff("<span class='notice'><b>[src.owner]</b>'s ticket has been closed by <b>[key_name(closed_by)]</b> with the reason: <b>[close_reason]</b>.</span>")
+	send2adminirc("[src.owner]'s ticket has been closed by [key_name(closed_by)] with the reason: [close_reason].")
 
 	update_ticket_panels()
 
@@ -120,7 +131,7 @@ proc/get_open_ticket_by_ckey(var/owner)
 					status = "Assigned to [english_list(ticket.assigned_admins, "no one")]"
 					color = "#ffffff"
 				if(TICKET_CLOSED)
-					status = "Closed by [ticket.closed_by]"
+					status = "Closed by [ticket.closed_by], reason: [ticket.close_reason]."
 					color = "#cc2222"
 			ticket_dat += "<li style='padding-bottom:10px;color:[color]'>"
 			if(open_ticket && open_ticket == ticket)
@@ -223,3 +234,5 @@ proc/get_open_ticket_by_ckey(var/owner)
 		else
 			ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat())
 			ticket_panel.ticket_panel_window.update()
+
+#undef CLOSE_REASON_OTHER
