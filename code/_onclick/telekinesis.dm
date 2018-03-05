@@ -65,7 +65,7 @@ var/const/tk_maxrange = 15
 	desc = "Magic."
 	icon = 'icons/obj/magic.dmi'//Needs sprites
 	icon_state = "2"
-	flags = NOBLUDGEON
+	item_flags = ITEM_FLAG_NO_BLUDGEON
 	//item_state = null
 	w_class = ITEM_SIZE_NO_CONTAINER
 
@@ -152,7 +152,7 @@ var/const/tk_maxrange = 15
 /obj/item/tk_grab/proc/apply_focus_overlay()
 	if(!focus)	return
 	var/obj/effect/overlay/O = new /obj/effect/overlay(locate(focus.x,focus.y,focus.z))
-	O.name = "sparkles"
+	O.SetName("sparkles")
 	O.anchored = 1
 	O.set_density(0)
 	O.layer = FLY_LAYER

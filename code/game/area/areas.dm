@@ -6,6 +6,7 @@
 /area
 	var/global/global_uid = 0
 	var/uid
+	var/area_flags
 
 /area/New()
 	icon_state = ""
@@ -317,7 +318,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 	if(istype(mob,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = mob
-		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP))
+		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & ITEM_FLAG_NOSLIP))
 			return
 
 		if(H.m_intent == "run")

@@ -69,7 +69,7 @@ obj/machinery/recharger/attack_hand(mob/user as mob)
 	if(istype(user,/mob/living/silicon))
 		return
 
-	add_fingerprint(user)
+	..()
 
 	if(charging)
 		charging.update_icon()

@@ -18,7 +18,7 @@ var/global/repository/radiation/radiation_repository = new()
 /datum/radiation_source/Destroy()
 	radiation_repository.sources -= src
 	if(radiation_repository.sources_assoc[src.source_turf] == src)
-		radiation_repository.sources -= src.source_turf
+		radiation_repository.sources_assoc -= src.source_turf
 	src.source_turf = null
 	. = ..()
 
@@ -47,8 +47,8 @@ var/global/repository/radiation/radiation_repository = new()
 		if(dist > source.range)
 			continue // Too far to possibly affect
 		if(source.respect_maint)
-			var/atom/A = T.loc
-			if(A.flags & AREA_RAD_SHIELDED)
+			var/area/A = T.loc
+			if(A.area_flags & AREA_FLAG_RAD_SHIELDED)
 				continue // In shielded area
 		if(source.flat)
 			. = max(., source.rad_power)

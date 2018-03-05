@@ -174,7 +174,7 @@
 		qdel(O)
 		var/turf/T = get_turf(loc)
 		var/mob/living/bot/cleanbot/A = new /mob/living/bot/cleanbot(T)
-		A.name = created_name
+		A.SetName(created_name)
 		to_chat(user, "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>")
 		user.drop_from_inventory(src)
 		qdel(src)

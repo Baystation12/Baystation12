@@ -1,45 +1,28 @@
-var/global/list/ashtray_cache = list()
-
 /obj/item/weapon/material/ashtray
 	name = "ashtray"
+	desc = "A thing to keep your butts in."
 	icon = 'icons/obj/objects.dmi'
-	icon_state = "blank"
+	icon_state = "ashtray"
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 	randpixel = 5
-	var/image/base_image
 	var/max_butts = 10
 
-/obj/item/weapon/material/ashtray/New(var/newloc, var/material_name)
-	..(newloc, material_name)
-	if(!material)
-		qdel(src)
-		return
-	max_butts = round(material.hardness/10) //This is arbitrary but whatever.
-	update_icon()
+/obj/item/weapon/material/ashtray/examine(mob/user)
+	..()
+	if(material)
+		to_chat(user, "It's made of [material.display_name].")
+	if(contents.len >= max_butts)
+		to_chat(user, "It's full.")
+	else if(contents.len)
+		to_chat(user, "It has [contents.len] cig butts in it.")
 
 /obj/item/weapon/material/ashtray/update_icon()
-	color = null
 	overlays.Cut()
-	var/cache_key = "base-[material.name]"
-	if(!ashtray_cache[cache_key])
-		var/image/I = image('icons/obj/objects.dmi',"ashtray")
-		I.color = material.icon_colour
-		ashtray_cache[cache_key] = I
-	overlays |= ashtray_cache[cache_key]
-
 	if (contents.len == max_butts)
-		if(!ashtray_cache["full"])
-			ashtray_cache["full"] = image('icons/obj/objects.dmi',"ashtray_full")
-		overlays |= ashtray_cache["full"]
-		desc = "It's stuffed full."
-	else if (contents.len > max_butts/2)
-		if(!ashtray_cache["half"])
-			ashtray_cache["half"] = image('icons/obj/objects.dmi',"ashtray_half")
-		overlays |= ashtray_cache["half"]
-		desc = "It's half-filled."
-	else
-		desc = "An ashtray made of [material.display_name]."
+		overlays |= image('icons/obj/objects.dmi',"ashtray_full")
+	else if (contents.len >= max_butts/2)
+		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
 
 /obj/item/weapon/material/ashtray/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (health <= 0)
@@ -48,41 +31,35 @@ var/global/list/ashtray_cache = list()
 		if (contents.len >= max_butts)
 			to_chat(user, "\The [src] is full.")
 			return
-		user.remove_from_mob(W)
-		W.loc = src
 
 		if (istype(W,/obj/item/clothing/mask/smokable/cigarette))
 			var/obj/item/clothing/mask/smokable/cigarette/cig = W
 			if (cig.lit == 1)
-				src.visible_message("[user] crushes [cig] in \the [src], putting it out.")
-				var/obj/item/butt = new cig.type_butt(src)
-				cig.transfer_fingerprints_to(butt)
-				qdel(cig)
-				W = butt
-				//spawn(1)
-				//	TemperatureAct(150)
+				visible_message("[user] crushes [cig] in [src], putting it out.")
+				W = cig.die(1)
 			else if (cig.lit == 0)
 				to_chat(user, "You place [cig] in [src] without even smoking it. Why would you do that?")
 
-		src.visible_message("[user] places [W] in [src].")
+		user.remove_from_mob(W, src)
+
+		visible_message("[user] places [W] in [src].")
 		user.update_inv_l_hand()
 		user.update_inv_r_hand()
 		add_fingerprint(user)
 		update_icon()
 	else
+		..()
 		health = max(0,health - W.force)
-		to_chat(user, "You hit [src] with [W].")
 		if (health < 1)
 			shatter()
-	return
 
 /obj/item/weapon/material/ashtray/throw_impact(atom/hit_atom)
 	if (health > 0)
 		health = max(0,health - 3)
 		if (contents.len)
-			src.visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
-		for (var/obj/item/clothing/mask/smokable/cigarette/O in contents)
-			O.loc = src.loc
+			visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
+			for (var/obj/O in contents)
+				O.dropInto(loc)
 		if (health < 1)
 			shatter()
 			return

@@ -29,6 +29,7 @@ In short:
 	//Separated into separate procs for profiling
 	MiscSet()
 	KillMobs()
+	SSskybox.reinstate_skyboxes("narsie", FALSE)
 
 /datum/universal_state/hell/proc/MiscSet()
 	for(var/turf/simulated/floor/T)

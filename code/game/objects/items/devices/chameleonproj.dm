@@ -1,7 +1,7 @@
 /obj/item/device/chameleon
 	name = "chameleon projector"
 	icon_state = "shield0"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "electronic"
 	throwforce = 5.0
@@ -140,7 +140,8 @@
 				spawn(20) can_move = 1
 			else
 				spawn(25) can_move = 1
-		step(src, direction)
+		if(isturf(loc))
+			step(src, direction)
 	return
 
 /obj/effect/dummy/chameleon/Destroy()

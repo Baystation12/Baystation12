@@ -128,12 +128,12 @@
 		GLOB.nanomanager.update_uis(src)
 
 	if(beaker)
-		if(foodsupply < 100 && beaker.reagents.remove_reagent(/datum/reagent/nutriment/virus_food,5))
-			if(foodsupply + 10 <= 100)
-				foodsupply += 10
-			else
-				beaker.reagents.add_reagent(/datum/reagent/nutriment/virus_food,(100 - foodsupply)/2)
-				foodsupply = 100
+		if (foodsupply < 100 && beaker.reagents.has_reagent(/datum/reagent/nutriment/virus_food))
+			var/food_needed = min(10, 100 - foodsupply) / 2
+			var/food_taken = min(food_needed, beaker.reagents.get_reagent_amount(/datum/reagent/nutriment/virus_food))
+
+			beaker.reagents.remove_reagent(/datum/reagent/nutriment/virus_food, food_taken)
+			foodsupply = min(100, foodsupply+(food_taken * 2))
 			GLOB.nanomanager.update_uis(src)
 
 		if (locate(/datum/reagent/toxin) in beaker.reagents.reagent_list && toxins < 100)
@@ -145,54 +145,46 @@
 					break
 			GLOB.nanomanager.update_uis(src)
 
-/obj/machinery/disease2/incubator/Topic(href, href_list)
-	if (..()) return 1
-
-	var/mob/user = usr
-	var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
-
-	src.add_fingerprint(user)
-
+/obj/machinery/disease2/incubator/OnTopic(user, href_list)
 	if (href_list["close"])
-		user.unset_machine()
-		ui.close()
-		return 0
+		GLOB.nanomanager.close_user_uis(user, src, "main")
+		return TOPIC_HANDLED
 
 	if (href_list["ejectchem"])
 		if(beaker)
-			beaker.loc = src.loc
+			beaker.dropInto(loc)
 			beaker = null
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["power"])
 		if (dish)
 			on = !on
 			icon_state = on ? "incubator_on" : "incubator"
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["ejectdish"])
 		if(dish)
-			dish.loc = src.loc
+			dish.dropInto(loc)
 			dish = null
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["rad"])
 		radiation = min(100, radiation + 10)
-		return 1
+		return TOPIC_REFRESH
 
 	if (href_list["flush"])
 		radiation = 0
 		toxins = 0
 		foodsupply = 0
-		return 1
+		return TOPIC_REFRESH
 
 	if(href_list["virus"])
 		if (!dish)
-			return 1
+			return TOPIC_HANDLED
 
 		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in beaker.reagents.reagent_list
 		if (!B)
-			return 1
+			return TOPIC_HANDLED
 
 		if (!B.data["virus2"])
 			B.data["virus2"] = list()
@@ -201,6 +193,4 @@
 		B.data["virus2"] += virus
 
 		ping("\The [src] pings, \"Injection complete.\"")
-		return 1
-
-	return 0
+		return TOPIC_REFRESH

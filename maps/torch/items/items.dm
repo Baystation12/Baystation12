@@ -10,21 +10,14 @@ Random item spawning
 
 /obj/random/solgov/spawn_choices()
 	return list(/obj/item/clothing/head/solgov/utility/fleet = 4,
-				/obj/item/clothing/head/solgov/utility/marine = 4,
-				/obj/item/clothing/head/solgov/utility/marine/tan = 3,
-				/obj/item/clothing/head/solgov/utility/marine/urban = 3,
 				/obj/item/clothing/head/soft/solgov/expedition = 2,
 				/obj/item/clothing/head/soft/solgov/fleet = 4,
 				/obj/item/clothing/head/helmet/solgov = 1,
 				/obj/item/clothing/suit/storage/vest/solgov = 2,
-				/obj/item/clothing/under/solgov/utility/marine/tan = 2,
-				/obj/item/clothing/under/solgov/utility/marine/urban = 2,
-				/obj/item/clothing/under/solgov/utility/marine = 3,
 				/obj/item/clothing/under/solgov/utility = 5,
 				/obj/item/clothing/under/solgov/utility/fleet = 3,
 				/obj/item/clothing/under/solgov/pt/expeditionary = 4,
-				/obj/item/clothing/under/solgov/pt/marine = 2,
-				/obj/item/clothing/under/solgov/pt/fleet = 4,
+				/obj/item/clothing/under/solgov/pt/fleet = 4
 				)
 
 /obj/random/maintenance/solgov

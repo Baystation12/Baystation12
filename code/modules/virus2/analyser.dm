@@ -34,7 +34,7 @@
 				ping("\The [src] pings, \"New pathogen added to data bank.\"")
 
 			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(src.loc)
-			P.name = "paper - [dish.virus2.name()]"
+			P.SetName("paper - [dish.virus2.name()]")
 
 			var/r = dish.virus2.get_info()
 			P.info = {"
@@ -45,7 +45,7 @@
 "}
 			dish.basic_info = dish.virus2.get_basic_info()
 			dish.info = r
-			dish.name = "[initial(dish.name)] ([dish.virus2.name()])"
+			dish.SetName("[initial(dish.name)] ([dish.virus2.name()])")
 			dish.analysed = 1
 			dish.loc = src.loc
 			dish = null

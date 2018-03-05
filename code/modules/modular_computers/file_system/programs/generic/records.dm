@@ -3,6 +3,7 @@
 	filedesc = "Crew Records"
 	extended_desc = "This program allows access to the crew's various records."
 	program_icon_state = "generic"
+	program_key_state = "generic_key"
 	size = 14
 	requires_ntnet = 1
 	available_on_ntnet = 1
@@ -21,15 +22,15 @@
 	if(active_record)
 		user << browse_rsc(active_record.photo_front, "front_[active_record.uid].png")
 		user << browse_rsc(active_record.photo_side, "side_[active_record.uid].png")
-		data["pic_edit"] = check_access(user, access_heads) 
+		data["pic_edit"] = check_access(user, access_heads) || check_access(user, access_security)
 		data["uid"] = active_record.uid
 		var/list/fields = list()
 		for(var/record_field/F in active_record.fields)
 			if(F.can_see(user_access))
 				fields.Add(list(list(
-					"key" = F.type, 
-					"name" = F.name, 
-					"val" = F.get_display_value(), 
+					"key" = F.type,
+					"name" = F.name,
+					"val" = F.get_display_value(),
 					"editable" = F.can_edit(user_access),
 					"large" = (F.valtype == EDIT_LONGTEXT)
 				)))
@@ -45,9 +46,9 @@
 				"id" = R.uid
 			)))
 		data["all_records"] = all_records
-		data["creation"] = check_access(user, access_heads) 
-		data["dnasearch"] = check_access(user, access_medical) 
-		data["fingersearch"] = check_access(user, access_security) 
+		data["creation"] = check_access(user, access_heads)
+		data["dnasearch"] = check_access(user, access_medical) || check_access(user, access_forensics_lockers)
+		data["fingersearch"] = check_access(user, access_security)
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -58,13 +59,13 @@
 
 
 /datum/nano_module/records/proc/get_record_access(var/mob/user)
-	var/list/user_access = user.GetAccess()
+	var/list/user_access = using_access || user.GetAccess()
 
 	var/obj/item/modular_computer/PC = nano_host()
 	if(istype(PC) && PC.computer_emagged)
 		user_access = user_access.Copy()
 		user_access |= access_syndicate
-	
+
 	return user_access
 
 /datum/nano_module/records/proc/edit_field(var/mob/user, var/field)

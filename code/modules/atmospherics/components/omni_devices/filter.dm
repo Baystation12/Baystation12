@@ -5,7 +5,7 @@
 	name = "omni gas filter"
 	icon_state = "map_filter"
 
-	var/list/filters = new()
+	var/list/gas_filters = new()
 	var/datum/omni_port/input
 	var/datum/omni_port/output
 	var/max_output_pressure = MAX_OMNI_PRESSURE
@@ -14,8 +14,8 @@
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 7500			//7500 W ~ 10 HP
 
-	var/max_flow_rate = 200
-	var/set_flow_rate = 200
+	var/max_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
+	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
 
@@ -28,7 +28,7 @@
 /obj/machinery/atmospherics/omni/filter/Destroy()
 	input = null
 	output = null
-	filters.Cut()
+	gas_filters.Cut()
 	. = ..()
 
 /obj/machinery/atmospherics/omni/filter/sort_ports()
@@ -38,22 +38,22 @@
 				output = null
 			if(input == P)
 				input = null
-			if(filters.Find(P))
-				filters -= P
+			if(P in gas_filters)
+				gas_filters -= P
 
-			P.air.volume = 200
+			P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
 			switch(P.mode)
 				if(ATM_INPUT)
 					input = P
 				if(ATM_OUTPUT)
 					output = P
-				if(ATM_O2 to ATM_N2O)
-					filters += P
+				if(ATM_O2 to ATM_H2)
+					gas_filters += P
 
 /obj/machinery/atmospherics/omni/filter/error_check()
-	if(!input || !output || !filters)
+	if(!input || !output || !gas_filters)
 		return 1
-	if(filters.len < 1) //requires at least 1 filter ~otherwise why are you using a filter?
+	if(gas_filters.len < 1) //requires at least 1 filter ~otherwise why are you using a filter?
 		return 1
 
 	return 0
@@ -67,7 +67,7 @@
 
 	var/delta = between(0, (output_air ? (max_output_pressure - output_air.return_pressure()) : 0), max_output_pressure)
 	var/transfer_moles_max = calculate_transfer_moles(input_air, output_air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0)
-	for(var/datum/omni_port/filter_output in filters)
+	for(var/datum/omni_port/filter_output in gas_filters)
 		delta = between(0, (filter_output.air ? (max_output_pressure - filter_output.air.return_pressure()) : 0), max_output_pressure)
 		transfer_moles_max = min(transfer_moles_max, (calculate_transfer_moles(input_air, filter_output.air, delta, (filter_output && filter_output.network && filter_output.network.volume) ? filter_output.network.volume : 0)))
 
@@ -86,7 +86,7 @@
 			input.network.update = 1
 		if(output.network)
 			output.network.update = 1
-		for(var/datum/omni_port/P in filters)
+		for(var/datum/omni_port/P in gas_filters)
 			if(P.network)
 				P.network.update = 1
 
@@ -129,7 +129,7 @@
 			if(ATM_OUTPUT)
 				output = 1
 				filter = 0
-			if(ATM_O2 to ATM_N2O)
+			if(ATM_O2 to ATM_H2)
 				f_type = mode_send_switch(P.mode)
 
 		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
@@ -158,6 +158,8 @@
 			return "Phoron" //*cough* Plasma *cough*
 		if(ATM_N2O)
 			return "Nitrous Oxide"
+		if(ATM_H2)
+			return "Hydrogen"
 		else
 			return null
 
@@ -183,7 +185,7 @@
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
 			if("switch_filter")
-				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in list("None", "Oxygen", "Nitrogen", "Carbon Dioxide", "Phoron", "Nitrous Oxide")
+				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in list("None", "Oxygen", "Nitrogen", "Carbon Dioxide", "Phoron", "Nitrous Oxide", "Hydrogen")
 				switch_filter(dir_flag(href_list["dir"]), mode_return_switch(new_filter))
 
 	update_icon()
@@ -202,6 +204,8 @@
 			return ATM_P
 		if("Nitrous Oxide")
 			return ATM_N2O
+		if("Hydrogen")
+			return ATM_H2
 		if("in")
 			return ATM_INPUT
 		if("out")

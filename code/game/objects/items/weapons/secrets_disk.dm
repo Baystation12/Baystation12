@@ -61,7 +61,7 @@
 		var/input = sanitize(input(usr, "What would you like to change the project codename to?", "Classified Project Data Disk"))
 		if(!input || input == "")
 			return
-		name = "'[input]' project data disk"
+		SetName("'[input]' project data disk")
 	else
 		to_chat(usr, "<span class='warning'>The disk's screen flashes 'Access Denied'. It is locked.</span>")
 

@@ -5,6 +5,7 @@
  *
  *  Human suffocation in Space.
  *  Mob damage Template
+ *  Species sprite options
  *
  */
 
@@ -532,3 +533,52 @@ datum/unit_test/robot_module_icons/start_test()
 #undef IMMUNE
 #undef SUCCESS
 #undef FAILURE
+
+datum/unit_test/species_base_skin
+	name = "MOB: Species base skin presence"
+//	async = 1
+	var/failcount = 0
+
+datum/unit_test/species_base_skin/start_test()
+	for(var/species_name in all_species)
+		var/datum/species/S = all_species[species_name]
+		if(S.base_skin_colours)
+			if(!(S.appearance_flags & HAS_BASE_SKIN_COLOURS))
+				log_unit_test("[S.name] has a skin colour list but no HAS_BASE_SKIN_COLOURS flag.")
+				failcount++
+				continue
+			if(!(S.base_skin_colours.len >= 2))
+				log_unit_test("[S.name] needs at least two items in the base_skin_colour list.")
+				failcount++
+				continue
+			var/to_fail = FALSE
+			for(var/tag in S.has_limbs)
+				var/list/paths = S.has_limbs[tag]
+				var/obj/item/organ/external/E = paths["path"]
+				var/list/gender_test = list("")
+				if(initial(E.gendered_icon))
+					gender_test = list("_m", "_f")
+				var/icon_name = initial(E.icon_name)
+
+				for(var/base in S.base_skin_colours)
+					for(var/gen in gender_test)
+						if(!("[icon_name][gen][S.base_skin_colours[base]]" in icon_states(S.icobase)))
+							to_fail = TRUE
+							log_debug("[S.name] has missing icon: [icon_name][gen][S.base_skin_colours[base]] for base [base] and limb tag [tag].")
+			if(to_fail)
+				log_unit_test("[S.name] is missing one or more base icons.")
+				failcount++
+				continue
+
+		else if(S.appearance_flags & HAS_BASE_SKIN_COLOURS)
+			log_unit_test("[S.name] has a HAS_BASE_SKIN_COLOURS flag but no skin colour list.")
+			failcount++
+			continue
+
+	if(failcount)
+		fail("[failcount] species had bad base skin colour.")
+	else
+		pass("All species had correct skin colour setups.")
+
+	return 1	// return 1 to show we're done and don't want to recheck the result.
+

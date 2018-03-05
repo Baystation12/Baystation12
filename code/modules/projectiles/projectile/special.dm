@@ -90,7 +90,7 @@
 		var/mob/living/M = target
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = M
-			if((H.species.flags & IS_PLANT) && (H.nutrition < 500))
+			if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 				if(prob(15))
 					H.apply_effect((rand(30,80)),IRRADIATE,blocked = H.getarmor(null, "rad"))
 					H.Weaken(5)
@@ -134,7 +134,7 @@
 		var/mob/M = target
 		if(ishuman(target)) //These rays make plantmen fat.
 			var/mob/living/carbon/human/H = M
-			if((H.species.flags & IS_PLANT) && (H.nutrition < 500))
+			if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 				H.nutrition += 30
 		else if (istype(target, /mob/living/carbon/))
 			M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")

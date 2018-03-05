@@ -19,6 +19,7 @@
 	var/recharge_time = 4
 	var/charge_tick = 0
 	var/icon_rounder = 25
+	combustion = 1
 
 /obj/item/weapon/gun/energy/switch_firemodes()
 	. = ..()

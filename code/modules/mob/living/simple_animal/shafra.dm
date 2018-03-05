@@ -1,7 +1,7 @@
 /mob/living/simple_animal/shafra
 	name = "Shafra"
 	real_name = "Shafra"
-	desc = "A Bogani Hunting Dog"
+	desc = "A Bogani hunting dog."
 	icon = 'icons/mob/shafra.dmi'
 	icon_state = "shafra"
 	icon_living = "shafra"

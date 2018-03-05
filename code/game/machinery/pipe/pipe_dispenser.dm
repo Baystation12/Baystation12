@@ -86,14 +86,12 @@
 		usr << browse(null, "window=pipedispenser")
 		return
 	usr.set_machine(src)
-	src.add_fingerprint(usr)
 	if(href_list["make"])
 		if(!wait)
 			var/p_type = text2num(href_list["make"])
 			var/p_dir = text2num(href_list["dir"])
 			var/obj/item/pipe/P = new (/*usr.loc*/ src.loc, pipe_type=p_type, dir=p_dir)
 			P.update()
-			P.add_fingerprint(usr)
 			wait = 1
 			spawn(10)
 				wait = 0
@@ -106,13 +104,14 @@
 	return
 
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
-	src.add_fingerprint(usr)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
 		to_chat(usr, "<span class='notice'>You put \the [W] back into \the [src].</span>")
 		user.drop_item()
+		add_fingerprint(usr)
 		qdel(W)
 		return
 	else if(isWrench(W))
+		add_fingerprint(usr)
 		if (unwrenched==0)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You begin to unfasten \the [src] from the floor...</span>")
@@ -206,7 +205,6 @@ Nah
 	if(..())
 		return
 	usr.set_machine(src)
-	src.add_fingerprint(usr)
 	if(href_list["dmake"])
 		if(unwrenched || !usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 			usr << browse(null, "window=pipedispenser")
@@ -258,7 +256,6 @@ Nah
 					if(22)
 						C.ptype = 12
 ///// Z-Level stuff
-				C.add_fingerprint(usr)
 				C.update()
 			wait = 1
 			spawn(15)

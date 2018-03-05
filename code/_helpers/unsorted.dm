@@ -880,7 +880,7 @@ var/global/list/common_tools = list(
 		return 1
 	return 0
 
-proc/is_hot(obj/item/W as obj)
+/proc/is_hot(obj/item/W as obj)
 	switch(W.type)
 		if(/obj/item/weapon/weldingtool)
 			var/obj/item/weapon/weldingtool/WT = W
@@ -903,7 +903,7 @@ proc/is_hot(obj/item/W as obj)
 				return 1000
 			else
 				return 0
-		if(/obj/item/weapon/pickaxe/plasmacutter)
+		if(/obj/item/weapon/gun/energy/plasmacutter)
 			return 3800
 		if(/obj/item/weapon/melee/energy)
 			return 3500
@@ -1080,6 +1080,10 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	see_in_dark = 1e6
 
 	virtual_mob = null
+
+/mob/dview/Destroy()
+	crash_with("Prevented attempt to delete dview mob: [log_info_line(src)]")
+	return QDEL_HINT_LETMELIVE // Prevents destruction
 
 /atom/proc/get_light_and_color(var/atom/origin)
 	if(origin)

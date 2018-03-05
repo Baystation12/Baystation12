@@ -1,7 +1,0 @@
-author: "Orelbon"
-delete-after: True
-changes: 
-  - tweak: "Laser carbine has 10 more damage and +2 accuracy."
-  - tweak: "Taser carbine now has 12 shots, +1 accuracy and looses its 10 armor penetration."
-  - tweak: "Stun rifle now has 10 shots, +1 accuracy,+10 armor penetration,+5 burn damage and looses 10 agony."
-  - tweak: "Stun revolver now has 6 shots and 50 agony."

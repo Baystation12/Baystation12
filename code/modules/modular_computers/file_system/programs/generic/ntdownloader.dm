@@ -2,6 +2,7 @@
 	filename = "ntndownloader"
 	filedesc = "NTNet Software Download Tool"
 	program_icon_state = "generic"
+	program_key_state = "generic_key"
 	program_menu_icon = "arrowthickstop-1-s"
 	extended_desc = "This program allows downloads of software from official NT repositories"
 	unsendable = 1

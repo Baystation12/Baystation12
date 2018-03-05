@@ -53,7 +53,7 @@
 	desc = "Suit for a cyborg costume."
 	icon_state = "death"
 	item_state = "death"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	fire_resist = T0C+5200
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 
@@ -378,6 +378,16 @@
 	icon_state = "brown_jacket_nt"
 	icon_open = "brown_jacket_nt_open"
 	icon_closed = "brown_jacket_nt"
+
+/obj/item/clothing/suit/storage/toggle/marshal_jacket
+	name = "colonial marshal jacket"
+	desc = "A black leather jacket belonging to an agent of the Colonial Marshal Bureau."
+	icon_state = "marshal_jacket"
+	item_state = "marshal_jacket"
+	icon_open = "marshal_jacket_open"
+	icon_closed = "marshal_jacket"
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+	body_parts_covered = UPPER_TORSO|ARMS
 
 /obj/item/clothing/suit/storage/toggle/hoodie
 	name = "hoodie"

@@ -65,10 +65,10 @@ var/global/list/image/splatter_cache=list()
 	if(basecolor == "rainbow") basecolor = get_random_colour(1)
 	color = basecolor
 	if(basecolor == SYNTH_BLOOD_COLOUR)
-		name = "oil"
+		SetName("oil")
 		desc = "It's black and greasy."
 	else
-		name = initial(name)
+		SetName(initial(name))
 		desc = initial(desc)
 
 /obj/effect/decal/cleanable/blood/Crossed(mob/living/carbon/human/perp)
@@ -122,7 +122,6 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
 	..()
 	if (amount && istype(user))
-		add_fingerprint(user)
 		if (user.gloves)
 			return
 		var/taken = rand(1,amount)

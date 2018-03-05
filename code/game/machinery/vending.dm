@@ -10,7 +10,7 @@
 	layer = BELOW_OBJ_LAYER
 	anchored = 1
 	density = 1
-	flags = OBJ_ANCHORABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	clicksound = "button"
 	clickvol = 40
 
@@ -64,6 +64,7 @@
 	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
 	var/seconds_electrified = 0 //Shock customers like an airlock.
 	var/shoot_inventory = 0 //Fire items at customers! We're broken!
+	var/shooting_chance = 2 //The chance that items are being shot per tick
 
 	var/scan_id = 1
 	var/obj/item/weapon/coin/coin
@@ -193,7 +194,7 @@
 		if(src.panel_open)
 			attack_hand(user)
 		return
-	else if((flags & OBJ_ANCHORABLE) && isWrench(W))
+	else if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(W))
 		wrench_floor_bolts(user)
 		power_change()
 		return
@@ -437,7 +438,6 @@
 		else if ((href_list["togglevoice"]) && (src.panel_open))
 			src.shut_up = !src.shut_up
 
-		src.add_fingerprint(usr)
 		GLOB.nanomanager.update_uis(src)
 
 /obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
@@ -527,7 +527,7 @@
 		src.speak(slogan)
 		src.last_slogan = world.time
 
-	if(src.shoot_inventory && prob(2))
+	if(src.shoot_inventory && prob(shooting_chance))
 		src.throw_item()
 
 	return
@@ -573,7 +573,7 @@
 	if(!target)
 		return 0
 
-	for(var/datum/stored_items/vending_products/R in src.product_records)
+	for(var/datum/stored_items/vending_products/R in shuffle(src.product_records))
 		throw_item = R.get_product(loc)
 		if (throw_item)
 			break

@@ -34,6 +34,11 @@
 	if(!. && feedback_receiver)
 		to_chat(feedback_receiver, "<span class='warning'>Value must be a numeral.</span>")
 
+/proc/is_text_predicate(var/value, var/feedback_receiver)
+	. = !value || istext(value)
+	if(!. && feedback_receiver)
+		to_chat(feedback_receiver, "<span class='warning'>Value must be a text.</span>")
+
 /proc/is_dir_predicate(var/value, var/feedback_receiver)
 	. = (value in GLOB.alldirs)
 	if(!. && feedback_receiver)
@@ -46,7 +51,7 @@
 	return !(locate(container_thing) in container) // We could just do !can_locate(container, container_thing) but BYOND is pretty awful when it comes to deep proc calls
 
 
-/proc/filter(var/list/list_to_filter, var/list/predicates, var/list/extra_predicate_input)
+/proc/where(var/list/list_to_filter, var/list/predicates, var/list/extra_predicate_input)
 	. = list()
 	for(var/entry in list_to_filter)
 		var/predicate_input

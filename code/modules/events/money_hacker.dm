@@ -15,14 +15,12 @@
 		kill()
 
 /datum/event/money_hacker/announce()
-	var/message = "A brute force hack has been detected (in progress since [stationtime2text()]). The target of the attack is: Financial account #[affected_account.account_number], \
+	// Hide the account number for now since it's all you need to access a standard-security account. Change when that's no longer the case.
+	var/accnr_hidden = "***[copytext("[affected_account.account_number]", -3)]"
+	var/message = "A brute force hack has been detected (in progress since [stationtime2text()]). The target of the attack is: Financial account #[accnr_hidden], \
 	without intervention this attack will succeed in approximately 10 minutes. Required intervention: temporary suspension of affected accounts until the attack has ceased. \
-	Notifications will be sent as updates occur.<br>"
-	var/my_department = "[station_name()] firewall subroutines"
-
-	for(var/obj/machinery/message_server/MS in world)
-		if(!MS.active) continue
-		MS.send_rc_message("Head of Personnel's Desk", my_department, message, "", "", 2)
+	Notifications will be sent as updates occur."
+	command_announcement.Announce(message, "[location_name()] Firewall Subroutines")
 
 
 /datum/event/money_hacker/tick()
@@ -33,7 +31,7 @@
 
 /datum/event/money_hacker/end()
 	var/message
-	if(affected_account && !affected_account)
+	if(affected_account && !affected_account.suspended)
 		//hacker wins
 		message = "The hack attempt has succeeded."
 
@@ -58,9 +56,4 @@
 	else
 		//crew wins
 		message = "The attack has ceased, the affected accounts can now be brought online."
-
-	var/my_department = "[station_name()] firewall subroutines"
-
-	for(var/obj/machinery/message_server/MS in world)
-		if(!MS.active) continue
-		MS.send_rc_message("Head of Personnel's Desk", my_department, message, "", "", 2)
+	command_announcement.Announce(message, "[location_name()] Firewall Subroutines")

@@ -838,7 +838,7 @@ About the new airlock wires panel:
 			return 0
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
-	else if(istype(item,/obj/item/weapon/pickaxe/plasmacutter))
+	else if(istype(item,/obj/item/weapon/gun/energy/plasmacutter)) //They could probably just shoot them out, but who cares!
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
 		cut_delay *= 0.66
@@ -929,8 +929,6 @@ About the new airlock wires panel:
 				return
 	if(istype(C, /obj/item/taperoll))
 		return
-
-	src.add_fingerprint(user)
 
 	if (!repairing && (stat & BROKEN) && src.locked) //bolted and broken
 		if (!cut_bolts(C,user))
@@ -1193,9 +1191,9 @@ About the new airlock wires panel:
 
 		//get the name from the assembly
 		if(assembly.created_name)
-			name = assembly.created_name
+			SetName(assembly.created_name)
 		else
-			name = "[istext(assembly.glass) ? "[assembly.glass] airlock" : assembly.base_name]"
+			SetName("[istext(assembly.glass) ? "[assembly.glass] airlock" : assembly.base_name]")
 
 		//get the dir from the assembly
 		set_dir(assembly.dir)

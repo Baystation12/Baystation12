@@ -2,7 +2,7 @@
 	state_name = NORM_PASSIVE
 	fancy_desc = "holding"
 
-	upgrab_name = NORM_AGGRESSIVE
+	upgrab_name = NORM_STRUGGLE
 
 	shift = 8
 
@@ -16,8 +16,6 @@
 	icon_state = "reinforce"
 
 	break_chance_table = list(15, 60, 100)
-
-/datum/grab/normal/passive/upgrade_effect(var/obj/item/grab/normal/G)
 
 /datum/grab/normal/passive/on_hit_disarm(var/obj/item/grab/normal/G)
 	to_chat(G.assailant, "<span class='warning'>Your grip isn't strong enough to pin.</span>")

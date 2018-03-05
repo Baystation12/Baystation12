@@ -18,13 +18,18 @@
 	icon_state = "nt_cypherkey"
 	channels = list("Science" = 1, "Command" = 1)
 
+/obj/item/device/encryptionkey/headset_torchroboticist
+	name = "roboticist's encryption key"
+	icon_state = "eng_cypherkey"
+	channels = list("Engineering" = 1, "Medical" = 1)
+
 /obj/item/device/encryptionkey/headset_deckofficer
 	name = "deck officer's encryption key"
 	icon_state = "qm_cypherkey"
 	channels = list("Supply" = 1, "Command" = 1)
 
-/obj/item/device/encryptionkey/pilot
-	name = "pilot's encryption key"
+/obj/item/device/encryptionkey/bridgeofficer
+	name = "bridge officer's encryption key"
 	icon_state = "com_cypherkey"
 	channels = list("Command" = 1, "Engineering" = 1, "Exploration" = 1)
 

@@ -2,6 +2,7 @@
 	filename = "nt_accrypt"
 	filedesc = "NTNet Access Decrypter"
 	program_icon_state = "hostile"
+	program_key_state = "security_key"
 	program_menu_icon = "unlocked"
 	extended_desc = "This highly advanced script can very slowly decrypt operational codes used in almost any network. These codes can be downloaded to an ID card to expand the available access. The system administrator will probably notice this."
 	size = 34
@@ -13,6 +14,7 @@
 	var/running = FALSE
 	var/progress = 0
 	var/target_progress = 300
+	var/datum/access/target_access = null
 
 /datum/computer_file/program/access_decrypter/kill_program(var/forced)
 	reset()
@@ -39,12 +41,12 @@
 	progress += CPU.max_idle_programs
 	if(progress >= target_progress)
 		reset()
-		var/datum/access/A = get_access_by_id(pick(get_all_station_access()))
-		RFID.stored_card.access |= A.id
+		RFID.stored_card.access |= target_access.id
 		if(ntnet_global.intrusion_detection_enabled)
-			ntnet_global.add_log("IDS WARNING - Unauthorised access to primary keycode database from device: [computer.network_card.get_network_tag()]  - downloaded access codes for: [A.desc].")
+			ntnet_global.add_log("IDS WARNING - Unauthorised access to primary keycode database from device: [computer.network_card.get_network_tag()]  - downloaded access codes for: [target_access.desc].")
 			ntnet_global.intrusion_detection_alarm = 1
-		message = "Successfully decrypted and saved operational key codes. Downloaded access codes for: [A.desc]"
+		message = "Successfully decrypted and saved operational key codes. Downloaded access codes for: [target_access.desc]"
+		target_access = null
 
 /datum/computer_file/program/access_decrypter/Topic(href, href_list)
 	if(..())
@@ -55,6 +57,8 @@
 	if(href_list["PRG_execute"])
 		if(running)
 			return 1
+		if(text2num(href_list["allowed"]))
+			return 1
 		var/obj/item/weapon/computer_hardware/processor_unit/CPU = computer.processor_unit
 		var/obj/item/weapon/computer_hardware/card_slot/RFID = computer.card_slot
 		if(!istype(CPU) || !CPU.check_functionality() || !istype(RFID) || !RFID.check_functionality())
@@ -64,6 +68,7 @@
 			message = "RFID card is not present in the device. Operation aborted."
 			return
 		running = TRUE
+		target_access = get_access_by_id(text2num(href_list["PRG_execute"]))
 		if(ntnet_global.intrusion_detection_enabled)
 			ntnet_global.add_log("IDS WARNING - Unauthorised access attempt to primary keycode database from device: [computer.network_card.get_network_tag()]")
 			ntnet_global.intrusion_detection_alarm = 1
@@ -71,6 +76,7 @@
 
 /datum/nano_module/program/access_decrypter
 	name = "NTNet Access Decrypter"
+	var/list/restricted_access_codes = list(access_change_ids, access_network) // access codes that are not hackable due to balance reasons
 
 /datum/nano_module/program/access_decrypter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	if(!ntnet_global)
@@ -96,6 +102,23 @@
 				string = "[string][prob(percentage)]"
 			strings.Add(string)
 		data["dos_strings"] = strings
+	else if(program.computer.card_slot && program.computer.card_slot.stored_card)
+		var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
+		var/list/regions = list()
+		for(var/i = 1; i <= 7; i++)
+			var/list/accesses = list()
+			for(var/access in get_region_accesses(i))
+				if (get_access_desc(access))
+					accesses.Add(list(list(
+						"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
+						"ref" = access,
+						"allowed" = (access in id_card.access) ? 1 : 0,
+						"blocked" = (access in restricted_access_codes) ? 1 : 0)))
+
+			regions.Add(list(list(
+				"name" = get_region_accesses_name(i),
+				"accesses" = accesses)))
+		data["regions"] = regions
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

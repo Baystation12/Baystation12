@@ -101,9 +101,9 @@
 	else
 		return ..()
 
-/obj/item/weapon/defibrillator/emag_act(mob/user)
+/obj/item/weapon/defibrillator/emag_act(var/uses, var/mob/user)
 	if(paddles)
-		return paddles.emag_act(user)
+		return paddles.emag_act(uses, user, src)
 	return NO_EMAG_ACT
 
 //Paddle stuff
@@ -228,10 +228,10 @@
 	var/mob/living/M = loc
 	if(istype(M) && is_held_twohanded(M))
 		wielded = 1
-		name = "[initial(name)] (wielded)"
+		SetName("[initial(name)] (wielded)")
 	else
 		wielded = 0
-		name = initial(name)
+		SetName(initial(name))
 	update_icon()
 	..()
 
@@ -257,7 +257,7 @@
 
 //Checks for various conditions to see if the mob is revivable
 /obj/item/weapon/shockpaddles/proc/can_defib(mob/living/carbon/human/H) //This is checked before doing the defib operation
-	if((H.species.flags & NO_SCAN) || H.isSynthetic())
+	if((H.species.species_flags & SPECIES_FLAG_NO_SCAN) || H.isSynthetic())
 		return "buzzes, \"Unrecogized physiology. Operation aborted.\""
 
 	if(!check_contact(H))
@@ -270,7 +270,7 @@
 /obj/item/weapon/shockpaddles/proc/check_contact(mob/living/carbon/human/H)
 	if(!combat)
 		for(var/obj/item/clothing/cloth in list(H.wear_suit, H.w_uniform))
-			if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & THICKMATERIAL))
+			if((cloth.body_parts_covered & UPPER_TORSO) && (cloth.item_flags & ITEM_FLAG_THICKMATERIAL))
 				return FALSE
 	return TRUE
 
@@ -441,18 +441,24 @@
 /obj/item/weapon/shockpaddles/proc/make_announcement(var/message, var/msg_class)
 	audible_message("<b>\The [src]</b> [message]", "\The [src] vibrates slightly.")
 
-/obj/item/weapon/shockpaddles/emag_act(mob/user)
+/obj/item/weapon/shockpaddles/emag_act(var/uses, var/mob/user, var/obj/item/weapon/defibrillator/base)
+	if(istype(src, /obj/item/weapon/shockpaddles/linked))
+		var/obj/item/weapon/shockpaddles/linked/dfb = src
+		if(dfb.base_unit)
+			base = dfb.base_unit
+	if(!base)
+		return
 	if(safety)
 		safety = 0
 		to_chat(user, "<span class='warning'>You silently disable \the [src]'s safety protocols with the cryptographic sequencer.</span>")
 		burn_damage_amt *= 3
-		update_icon()
+		base.update_icon()
 		return 1
 	else
 		safety = 1
 		to_chat(user, "<span class='notice'>You silently enable \the [src]'s safety protocols with the cryptographic sequencer.</span>")
 		burn_damage_amt = initial(burn_damage_amt)
-		update_icon()
+		base.update_icon()
 		return 1
 
 /obj/item/weapon/shockpaddles/emp_act(severity)

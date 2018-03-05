@@ -380,7 +380,7 @@
 		if(prob(30))
 			src.icon_state = "donut2"
 			src.overlay_state = "box-donut2"
-			src.name = "frosted donut"
+			src.SetName("frosted donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 			center_of_mass = "x=19;y=16"
 
@@ -419,7 +419,7 @@
 		if(prob(30))
 			src.icon_state = "donut2"
 			src.overlay_state = "box-donut2"
-			src.name = "Frosted Chaos Donut"
+			src.SetName("Frosted Chaos Donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
 
@@ -438,7 +438,7 @@
 		if(prob(30))
 			src.icon_state = "jdonut2"
 			src.overlay_state = "box-donut2"
-			src.name = "Frosted Jelly Donut"
+			src.SetName("Frosted Jelly Donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/donut/slimejelly
@@ -456,7 +456,7 @@
 		if(prob(30))
 			src.icon_state = "jdonut2"
 			src.overlay_state = "box-donut2"
-			src.name = "Frosted Jelly Donut"
+			src.SetName("Frosted Jelly Donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly
@@ -474,7 +474,7 @@
 		if(prob(30))
 			src.icon_state = "jdonut2"
 			src.overlay_state = "box-donut2"
-			src.name = "Frosted Jelly Donut"
+			src.SetName("Frosted Jelly Donut")
 			reagents.add_reagent(/datum/reagent/nutriment/sprinkles, 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/egg
@@ -755,7 +755,7 @@
 		for(var/reagent in heated_reagents)
 			reagents.add_reagent(reagent, heated_reagents[reagent])
 		bitesize = 6
-		name = "Warm " + name
+		SetName("Warm " + name)
 		cooltime()
 
 	proc/cooltime()
@@ -764,7 +764,7 @@
 				src.warm = 0
 				for(var/reagent in heated_reagents)
 					src.reagents.del_reagent(reagent)
-				src.name = initial(name)
+				src.SetName(initial(name))
 		return
 
 /obj/item/weapon/reagent_containers/food/snacks/brainburger
@@ -1615,13 +1615,14 @@
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube
 	name = "monkey cube"
 	desc = "Just add water!"
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	icon_state = "monkeycube"
 	bitesize = 12
 	filling_color = "#adac7f"
 	center_of_mass = "x=16;y=14"
 
 	var/wrapped = 0
+	var/growing = 0
 	var/monkey_type = /mob/living/carbon/human/monkey
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/New()
@@ -1633,17 +1634,19 @@
 		Unwrap(user)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Expand()
-	src.visible_message("<span class='notice'>\The [src] expands!</span>")
-	var/mob/monkey = new monkey_type
-	monkey.dropInto(src.loc)
-	qdel(src)
+	if(!growing)
+		growing = 1
+		src.visible_message("<span class='notice'>\The [src] expands!</span>")
+		var/mob/monkey = new monkey_type
+		monkey.dropInto(src.loc)
+		qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Unwrap(var/mob/user)
 	icon_state = "monkeycube"
 	desc = "Just add water!"
 	to_chat(user, "You unwrap the cube.")
 	wrapped = 0
-	flags |= OPENCONTAINER
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/On_Consume(var/mob/M)
 	if(ishuman(M))
@@ -1660,7 +1663,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped
 	desc = "Still wrapped in some paper."
 	icon_state = "monkeycubewrap"
-	flags = 0
+	item_flags = 0
+	obj_flags = 0
 	wrapped = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/farwacube

@@ -62,7 +62,6 @@
 	icon_state = "spark"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	nodamage = 1
-	taser_effect = 1
 	agony = 50
 	damage_type = PAIN
 	//Damage will be handled on the MOB side, to prevent window shattering.

@@ -18,7 +18,7 @@
 	clickvol = 30
 
 	var/temperature_archived
-	var/mob/living/carbon/occupant = null
+	var/mob/living/carbon/human/occupant = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 
 	var/current_heat_capacity = 50
@@ -112,6 +112,7 @@
 		scan = replacetext(scan,"'notice'","'white'")
 		scan = replacetext(scan,"'warning'","'average'")
 		scan = replacetext(scan,"'danger'","'bad'")
+		scan += "<br>Cryostasis factor: [occupant.stasis_value]x"
 		data["occupant"] = scan
 
 	data["cellTemperature"] = round(air_contents.temperature)
@@ -142,33 +143,34 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/machinery/atmospherics/unary/cryo_cell/Topic(href, href_list)
-	if(usr == occupant)
-		return 0 // don't update UIs attached to this object
-
-	if(..())
-		return 0 // don't update UIs attached to this object
-
+/obj/machinery/atmospherics/unary/cryo_cell/OnTopic(user, href_list)
+	if(user == occupant)
+		return STATUS_CLOSE
+	return ..()
+	    
+/obj/machinery/atmospherics/unary/cryo_cell/OnTopic(user, href_list)
 	if(href_list["switchOn"])
 		on = 1
 		update_icon()
+		return TOPIC_REFRESH
 
 	if(href_list["switchOff"])
 		on = 0
 		update_icon()
+		return TOPIC_REFRESH
 
 	if(href_list["ejectBeaker"])
 		if(beaker)
 			beaker.forceMove(get_step(loc, SOUTH))
 			beaker = null
+		return TOPIC_REFRESH
 
 	if(href_list["ejectOccupant"])
-		if(!occupant || isslime(usr) || ispAI(usr))
-			return 0 // don't update UIs attached to this object
+		if(!occupant || isslime(user) || ispAI(user))
+			return TOPIC_HANDLED // don't update UIs attached to this object
 		go_out()
+		return TOPIC_REFRESH
 
-	add_fingerprint(usr)
-	return 1 // update UIs attached to this object
 
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user as mob)
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
@@ -220,28 +222,16 @@
 	if(occupant)
 		if(occupant.stat == DEAD)
 			return
-		occupant.bodytemperature += 2*(air_contents.temperature - occupant.bodytemperature)*current_heat_capacity/(current_heat_capacity + air_contents.heat_capacity())
-		occupant.bodytemperature = max(occupant.bodytemperature, air_contents.temperature) // this is so ugly i'm sorry for doing it i'll fix it later i promise
 		occupant.set_stat(UNCONSCIOUS)
-		if(occupant.bodytemperature < T0C)
-			occupant.sleeping = max(5, (1/occupant.bodytemperature)*2000)
-			occupant.Paralyse(max(5, (1/occupant.bodytemperature)*3000))
-			if(air_contents.gas["oxygen"] > 2)
-				if(occupant.getOxyLoss()) occupant.adjustOxyLoss(-1)
-			else
-				occupant.adjustOxyLoss(-1)
-			//severe damage should heal waaay slower without proper chemicals
-			if(occupant.bodytemperature < 225)
-				if (occupant.getToxLoss())
-					occupant.adjustToxLoss(max(-1, -20/occupant.getToxLoss()))
-				var/heal_brute = occupant.getBruteLoss() ? min(1, 20/occupant.getBruteLoss()) : 0
-				var/heal_fire = occupant.getFireLoss() ? min(1, 20/occupant.getFireLoss()) : 0
-				occupant.heal_organ_damage(heal_brute,heal_fire)
-		var/has_cryo = occupant.reagents.get_reagent_amount(/datum/reagent/cryoxadone) >= 1
-		var/has_clonexa = occupant.reagents.get_reagent_amount(/datum/reagent/clonexadone) >= 1
-		var/has_cryo_medicine = has_cryo || has_clonexa
+		if(occupant.bodytemperature < 225)
+			if (occupant.getToxLoss())
+				occupant.adjustToxLoss(max(-1, -10/occupant.getToxLoss()))
+			var/heal_brute = occupant.getBruteLoss() ? min(1, 20/occupant.getBruteLoss()) : 0
+			var/heal_fire = occupant.getFireLoss	() ? min(1, 20/occupant.getFireLoss()) : 0
+			occupant.heal_organ_damage(heal_brute,heal_fire)
+		var/has_cryo_medicine = occupant.reagents.has_any_reagent(list(/datum/reagent/cryoxadone, /datum/reagent/clonexadone)) >= REM
 		if(beaker && !has_cryo_medicine)
-			beaker.reagents.trans_to_mob(occupant, 1, CHEM_BLOOD, 10)
+			beaker.reagents.trans_to_mob(occupant, REM, CHEM_BLOOD)
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
 	if(air_contents.total_moles < 1)
@@ -359,7 +349,9 @@
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/return_air()
-	return air_contents
+	if(on)
+		return air_contents
+	..()
 
 //This proc literally only exists for cryo cells.
 /atom/proc/return_air_for_internal_lifeform()

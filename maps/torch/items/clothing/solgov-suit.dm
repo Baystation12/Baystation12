@@ -14,86 +14,50 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/analyzer,/obj/item/device/radio,/obj/item/taperoll)
-	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary
 	name = "expeditionary jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons."
-	icon_state = "blackservice_crew"
-	item_state = "blackservice_crew"
+	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps."
+	icon_state = "ecservice_crew"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical
-	name = "expeditionary medical jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons and blue trim."
-	icon_state = "blackservice_med"
-	item_state = "blackservice_med"
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical/command
-	name = "expeditionary medical command jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and blue trim."
-	icon_state = "blackservice_medcom"
-	item_state = "blackservice_medcom"
+	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering
-	name = "expeditionary engineering jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons and orange trim."
-	icon_state = "blackservice_eng"
-	item_state = "blackservice_eng"
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering/command
-	name = "expeditionary engineering command jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and orange trim."
-	icon_state = "blackservice_engcom"
-	item_state = "blackservice_engcom"
+	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/supply
-	name = "expeditionary supply jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons and brown trim."
-	icon_state = "blackservice_sup"
-	item_state = "blackservice_sup"
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/security
-	name = "expeditionary security jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons and red trim."
-	icon_state = "blackservice_sec"
-	item_state = "blackservice_sec"
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/security/command
-	name = "expeditionary security command jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and red trim."
-	icon_state = "blackservice_seccom"
-	item_state = "blackservice_seccom"
+	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/service
-	name = "expeditionary service jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons and green trim."
-	icon_state = "blackservice_srv"
-	item_state = "blackservice_srv"
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/service/command
-	name = "expeditionary service command jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and green trim."
-	icon_state = "blackservice_srvcom"
-	item_state = "blackservice_srvcom"
+	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration
-	name = "expeditionary exploration jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has silver buttons and purple trim."
-	icon_state = "blackservice_exp"
-	item_state = "blackservice_exp"
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration/command
-	name = "expeditionary exploration command jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and purple trim."
-	icon_state = "blackservice_expcom"
-	item_state = "blackservice_expcom"
+	icon_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
-	name = "expeditionary command jacket"
-	desc = "A uniform service jacket belonging to the SCG Expeditionary Corps. It has gold buttons and gold trim."
-	icon_state = "blackservice_com"
-	item_state = "blackservice_com"
+	icon_state = "ecservice_officer"
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/service)
 
 
 /obj/item/clothing/suit/storage/solgov/service/marine

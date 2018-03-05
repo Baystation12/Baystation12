@@ -127,7 +127,7 @@
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
 
-	if(!istype(W) || W.flags & NOBLUDGEON) return
+	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
 	if(istype(W, /obj/item/weapon/screwdriver))
 		to_chat(user, ("<span class='notice'>It's a holowindow, you can't unfasten it!</span>"))
@@ -216,7 +216,7 @@
 	throw_range = 5
 	throwforce = 0
 	w_class = ITEM_SIZE_SMALL
-	flags = NOBLOODY
+	atom_flags = ATOM_FLAG_NO_BLOOD
 	var/active = 0
 	var/item_color
 

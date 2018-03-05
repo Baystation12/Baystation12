@@ -6,7 +6,6 @@
 	var/obj/wrapped = null
 	density = 1
 	var/sortTag = null
-	flags = NOBLUDGEON
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	var/examtext = null
 	var/nameset = 0
@@ -52,7 +51,7 @@
 				user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
 				"<span class='notice'>You title \the [src]: \"[str]\"</span>",\
 				"You hear someone scribbling a note.")
-				name = "[name] ([str])"
+				SetName("[name] ([str])")
 				if(!examtext && !nameset)
 					nameset = 1
 					update_icon()
@@ -177,7 +176,7 @@
 				user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
 				"<span class='notice'>You title \the [src]: \"[str]\"</span>",\
 				"You hear someone scribbling a note.")
-				name = "[name] ([str])"
+				SetName("[name] ([str])")
 				if(!examtext && !nameset)
 					nameset = 1
 					update_icon()
@@ -277,16 +276,16 @@
 			if(i in list(1,2,3,4,5))
 				P.icon_state = "deliverycrate[i]"
 				switch(i)
-					if(1) P.name = "tiny parcel"
-					if(3) P.name = "normal-sized parcel"
-					if(4) P.name = "large parcel"
-					if(5) P.name = "huge parcel"
+					if(1) P.SetName("tiny parcel")
+					if(3) P.SetName("normal-sized parcel")
+					if(4) P.SetName("large parcel")
+					if(5) P.SetName("huge parcel")
 			if(i < 1)
 				P.icon_state = "deliverycrate1"
-				P.name = "tiny parcel"
+				P.SetName("tiny parcel")
 			if(i > 5)
 				P.icon_state = "deliverycrate5"
-				P.name = "huge parcel"
+				P.SetName("huge parcel")
 			P.add_fingerprint(usr)
 			O.add_fingerprint(usr)
 			src.add_fingerprint(usr)
@@ -340,7 +339,7 @@
 	var/currTag = 0
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	matter = list(DEFAULT_WALL_MATERIAL = 100, "glass" = 34)
 
@@ -361,19 +360,24 @@
 
 /obj/item/device/destTagger/attack_self(mob/user as mob)
 	openwindow(user)
-	return
 
-/obj/item/device/destTagger/Topic(href, href_list)
-	src.add_fingerprint(usr)
+/obj/item/device/destTagger/OnTopic(user, href_list, state)
 	if(href_list["nextTag"] && href_list["nextTag"] in GLOB.tagger_locations)
 		src.currTag = href_list["nextTag"]
+		. = TOPIC_REFRESH
 	if(href_list["nextTag"] == "CUSTOM")
-		var/dest = input("Please enter custom location.", "Location", src.currTag ? src.currTag : "None")
-		if(dest != "None")
-			src.currTag = dest
+		var/dest = input(user, "Please enter custom location.", "Location", src.currTag ? src.currTag : "None")
+		if(CanUseTopic(user, state))
+			if(dest != "None")
+				src.currTag = dest
+			else
+				src.currTag = 0
+			. = TOPIC_REFRESH
 		else
-			src.currTag = 0
-	openwindow(usr)
+			. = TOPIC_HANDLED
+
+	if(. == TOPIC_REFRESH)
+		openwindow(user)
 
 /obj/machinery/disposal/deliveryChute
 	name = "Delivery chute"
@@ -426,6 +430,17 @@
 	sleep(10)
 	playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
 	sleep(5) // wait for animation to finish
+
+	if(prob(35))
+		for(var/mob/living/carbon/human/L in src)
+			var/list/obj/item/organ/external/crush = L.get_damageable_organs()
+			if(!crush.len)
+				return
+
+			var/obj/item/organ/external/E = pick(crush)
+
+			E.take_damage(45, used_weapon = "Blunt Trauma")
+			to_chat(L, "\The [src]'s mechanisms crush your [E.name]!")
 
 	H.init(src)	// copy the contents of disposer to holder
 

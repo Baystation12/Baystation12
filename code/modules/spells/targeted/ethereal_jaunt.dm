@@ -24,7 +24,7 @@
 			var/mobloc = get_turf(target.loc)
 			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( mobloc )
 			var/atom/movable/overlay/animation = new /atom/movable/overlay( mobloc )
-			animation.name = "water"
+			animation.SetName("water")
 			animation.set_density(0)
 			animation.anchored = 1
 			animation.icon = 'icons/mob/mob.dmi'
@@ -100,7 +100,7 @@
 /obj/effect/dummy/spell_jaunt/relaymove(var/mob/user, direction)
 	if (!src.canmove || reappearing) return
 	var/turf/newLoc = get_step(src,direction)
-	if(!(newLoc.flags & NOJAUNT))
+	if(!(newLoc.turf_flags & TURF_FLAG_NOJAUNT))
 		loc = newLoc
 		var/turf/T = get_turf(loc)
 		if(!T.contains_dense_objects())

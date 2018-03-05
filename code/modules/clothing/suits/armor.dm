@@ -2,7 +2,7 @@
 /obj/item/clothing/suit/armor
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	item_flags = THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 
 	cold_protection = UPPER_TORSO|LOWER_TORSO
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
@@ -37,111 +37,6 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
-
-
-/obj/item/clothing/suit/armor/riot
-	name = "riot suit"
-	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
-	icon_state = "riot"
-	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
-	//item_state = "swat_suit"
-	w_class = ITEM_SIZE_LARGE
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
-	siemens_coefficient = 0.5
-
-/obj/item/clothing/suit/armor/riot/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
-/obj/item/clothing/suit/armor/riot/vest
-	name = "stab vest"
-	desc = "An armored vest with heavy padding to protect against melee attacks."
-	icon_state = "riotvest"
-	//item_state = "armor"
-	blood_overlay_type = "armor"
-	w_class = ITEM_SIZE_NORMAL
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-
-/obj/item/clothing/suit/armor/riot/vest/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 0
-
-/obj/item/clothing/suit/armor/bulletproof
-	name = "ballistic suit"
-	desc = "A suit of armor with heavy plates to protect against ballistic projectiles. Looks like it might impair movement."
-	icon_state = "bulletproof"
-	//item_state = "swat_suit"
-	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
-	w_class = ITEM_SIZE_LARGE
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
-	siemens_coefficient = 0.7
-
-/obj/item/clothing/suit/armor/bulletproof/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
-/obj/item/clothing/suit/armor/bulletproof/vest
-	name = "ballistic vest"
-	desc = "A vest that excels in protecting the wearer against high-velocity solid projectiles."
-	icon_state = "bulletproofvest"
-	//item_state = "armor"
-	blood_overlay_type = "armor"
-	w_class = ITEM_SIZE_NORMAL
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-
-/obj/item/clothing/suit/armor/bulletproof/vest/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 0
-
-/obj/item/clothing/suit/armor/laserproof
-	name = "ablative suit"
-	desc = "A suit of armor with advanced shielding to protect against energy weapons. Looks like it might impair movement."
-	icon_state = "reflect"
-	//item_state = "swat_suit"
-	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
-	w_class = ITEM_SIZE_LARGE
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 35, bullet = 35, laser = 75, energy = 50, bomb = 0, bio = 0, rad = 0)
-	siemens_coefficient = 0
-
-/obj/item/clothing/suit/armor/laserproof/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
-/obj/item/clothing/suit/armor/laserproof/vest
-	name = "ablative vest"
-	desc = "A vest that excels in protecting the wearer against energy projectiles."
-	icon_state = "reflectvest"
-	//item_state = "armor_reflec"
-	blood_overlay_type = "armor"
-	w_class = ITEM_SIZE_NORMAL
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-
-/obj/item/clothing/suit/armor/laserproof/vest/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 0
-
-/obj/item/clothing/suit/armor/laserproof/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
-	if(istype(damage_source, /obj/item/projectile/energy) || istype(damage_source, /obj/item/projectile/beam))
-		var/obj/item/projectile/P = damage_source
-
-		var/reflectchance = 40 - round(damage/3)
-		if(!(def_zone in list(BP_CHEST, BP_GROIN))) //not changing this so arm and leg shots reflect, gives some incentive to not aim center-mass
-			reflectchance /= 2
-		if(P.starting && prob(reflectchance))
-			visible_message("<span class='danger'>\The [user]'s [src.name] reflects [attack_text]!</span>")
-
-			// Find a turf near or on the original location to bounce to
-			var/new_x = P.starting.x + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
-			var/new_y = P.starting.y + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
-			var/turf/curloc = get_turf(user)
-
-			// redirect the projectile
-			P.redirect(new_x, new_y, curloc, user)
-
-			return PROJECTILE_CONTINUE // complete projectile permutation
 
 /obj/item/clothing/suit/armor/swat/officer
 	name = "officer jacket"
@@ -295,7 +190,7 @@
 	desc = "An armor vest made of synthetic fibers."
 	icon_state = "kvest"
 	item_state = "armor"
-	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 25, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
 /obj/item/clothing/suit/armor/vest/nt
@@ -326,7 +221,7 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	item_flags = THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 	cold_protection = UPPER_TORSO|LOWER_TORSO
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = UPPER_TORSO|LOWER_TORSO
@@ -375,7 +270,7 @@
 	name = "plate carrier"
 	desc = "A lightweight black plate carrier vest. It can be equipped with armor plates, but provides no protection of its own."
 	icon = 'icons/obj/clothing/modular_armor.dmi'
-	item_icons = list(slot_wear_suit_str = 'icons/mob/modular_armor.dmi')
+	item_icons = list(slot_wear_suit_str = 'icons/mob/onmob/modular_armor.dmi')
 	icon_state = "pcarrier"
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_C, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L, ACCESSORY_SLOT_ARMOR_S, ACCESSORY_SLOT_ARMOR_M)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_C, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L, ACCESSORY_SLOT_ARMOR_S)
@@ -423,6 +318,68 @@
 /obj/item/clothing/suit/armor/pcarrier/merc
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate/merc, /obj/item/clothing/accessory/armguards/merc, /obj/item/clothing/accessory/legguards/merc, /obj/item/clothing/accessory/storage/pouches/large)
 
+//Modular specialty armor
+/obj/item/clothing/suit/armor/riot
+	name = "riot vest"
+	desc = "An armored vest with heavy padding to protect against melee attacks."
+	icon = 'icons/obj/clothing/modular_armor.dmi'
+	item_icons = list(slot_wear_suit_str = 'icons/mob/onmob/modular_armor.dmi')
+	icon_state = "riot"
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	siemens_coefficient = 0.5
+	starting_accessories = list(/obj/item/clothing/accessory/armguards/riot, /obj/item/clothing/accessory/legguards/riot)
+
+/obj/item/clothing/suit/armor/bulletproof
+	name = "ballistic vest"
+	desc = "An armored vest with heavy plates to protect against ballistic projectiles."
+	icon = 'icons/obj/clothing/modular_armor.dmi'
+	item_icons = list(slot_wear_suit_str = 'icons/mob/onmob/modular_armor.dmi')
+	icon_state = "ballistic"
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
+	siemens_coefficient = 0.7
+	starting_accessories = list(/obj/item/clothing/accessory/armguards/ballistic, /obj/item/clothing/accessory/legguards/ballistic)
+
+/obj/item/clothing/suit/armor/bulletproof/vest //because apparently some map uses this somewhere and I'm too lazy to go looking for and replacing it.
+	starting_accessories = null
+
+/obj/item/clothing/suit/armor/laserproof
+	name = "ablative vest"
+	desc = "An armored vest with advanced shielding to protect against energy weapons."
+	icon = 'icons/obj/clothing/modular_armor.dmi'
+	item_icons = list(slot_wear_suit_str = 'icons/mob/onmob/modular_armor.dmi')
+	icon_state = "ablative"
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_ARMOR_A, ACCESSORY_SLOT_ARMOR_L)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	armor = list(melee = 35, bullet = 35, laser = 75, energy = 50, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0
+	starting_accessories = list(/obj/item/clothing/accessory/armguards/ablative, /obj/item/clothing/accessory/legguards/ablative)
+
+/obj/item/clothing/suit/armor/laserproof/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	if(istype(damage_source, /obj/item/projectile/energy) || istype(damage_source, /obj/item/projectile/beam))
+		var/obj/item/projectile/P = damage_source
+
+		var/reflectchance = 40 - round(damage/3)
+		if(!(def_zone in list(BP_CHEST, BP_GROIN))) //not changing this so arm and leg shots reflect, gives some incentive to not aim center-mass
+			reflectchance /= 2
+		if(P.starting && prob(reflectchance))
+			visible_message("<span class='danger'>\The [user]'s [src.name] reflects [attack_text]!</span>")
+
+			// Find a turf near or on the original location to bounce to
+			var/new_x = P.starting.x + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+			var/new_y = P.starting.y + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+			var/turf/curloc = get_turf(user)
+
+			// redirect the projectile
+			P.redirect(new_x, new_y, curloc, user)
+
+			return PROJECTILE_CONTINUE // complete projectile permutation
 
 //All of the armor below is mostly unused
 

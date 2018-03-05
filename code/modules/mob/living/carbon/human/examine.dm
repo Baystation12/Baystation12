@@ -214,7 +214,7 @@
 				break
 
 		if(hidden && user != src)
-			if(E.status & ORGAN_BLEEDING && !(hidden.item_flags & THICKMATERIAL)) //not through a spacesuit
+			if(E.status & ORGAN_BLEEDING && !(hidden.item_flags & ITEM_FLAG_THICKMATERIAL)) //not through a spacesuit
 				wound_flavor_text[hidden.name] = "<span class='danger'>[T.He] [T.has] blood soaking through [hidden]!</span><br>"
 		else
 			if(E.is_stump())
@@ -234,9 +234,17 @@
 				wound_flavor_text[E.name] += "[T.His] [E.name] is dented and swollen!<br>"
 
 		for(var/datum/wound/wound in E.wounds)
-			if(wound.embedded_objects.len)
-				shown_objects += wound.embedded_objects
-				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [english_list(wound.embedded_objects, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"
+			var/list/embedlist = wound.embedded_objects
+			if(embedlist.len)
+				shown_objects += embedlist
+				var/parsedembed[0]
+				for(var/obj/embedded in embedlist)
+					if(!parsedembed.len || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
+						parsedembed.Add(embedded.name)
+					else if(!parsedembed.Find("multiple [embedded.name]"))
+						parsedembed.Remove(embedded.name)
+						parsedembed.Add("multiple "+embedded.name)
+				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [english_list(parsedembed, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"
 
 	msg += "<span class='warning'>"
 	for(var/limb in wound_flavor_text)
@@ -308,32 +316,33 @@
 /proc/hasHUD(mob/M as mob, hudtype)
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		switch(hudtype)
-			if("security")
-				if(istype(H.glasses,/obj/item/clothing/glasses))
-					var/obj/item/clothing/glasses/G = H.glasses
-					return istype(G.hud, /obj/item/clothing/glasses/hud/security) || istype(G, /obj/item/clothing/glasses/hud/security)
-				else
-					return FALSE
-			if("medical")
-				if(istype(H.glasses,/obj/item/clothing/glasses))
-					var/obj/item/clothing/glasses/G = H.glasses
-					return istype(G.hud, /obj/item/clothing/glasses/hud/health) || istype(G, /obj/item/clothing/glasses/hud/health)
-				else
-					return FALSE
-			else
-				return 0
+		var/obj/item/clothing/glasses/G = H.glasses
+		if(G.hud_type == hudtype)
+			return TRUE
+		else
+			return FALSE
+
 	else if(istype(M, /mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
-		switch(hudtype)
-			if("security")
-				return istype(R.module_state_1, /obj/item/borg/sight/hud/sec) || istype(R.module_state_2, /obj/item/borg/sight/hud/sec) || istype(R.module_state_3, /obj/item/borg/sight/hud/sec)
-			if("medical")
-				return istype(R.module_state_1, /obj/item/borg/sight/hud/med) || istype(R.module_state_2, /obj/item/borg/sight/hud/med) || istype(R.module_state_3, /obj/item/borg/sight/hud/med)
-			else
-				return 0
+		var/obj/item/borg/sight/sight
+
+//These borg slots really should be a list.
+		if(istype(R.module_state_1, /obj/item/borg/sight/))
+			sight = R.module_state_1
+		if(istype(R.module_state_2, /obj/item/borg/sight/))
+			sight = R.module_state_2
+		if(istype(R.module_state_3, /obj/item/borg/sight/))
+			sight = R.module_state_3
+
+		if(sight == initial(sight)) //Prevent runtimes if nothing was found.
+			return FALSE
+
+		if(sight.hud_type == hudtype)
+			return TRUE
+		else
+			return FALSE
 	else
-		return 0
+		return FALSE
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"

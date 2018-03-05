@@ -12,6 +12,7 @@
 	screen_shake = 0
 	throw_distance = 7
 	release_force = 5
+	combustion = 1
 
 	var/obj/item/weapon/grenade/chambered
 	var/list/grenades = new/list()

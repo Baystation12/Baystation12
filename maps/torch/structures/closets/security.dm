@@ -9,7 +9,6 @@
 	icon_closed = "sec"
 	icon_locked = "sec1"
 	icon_opened = "secopen"
-	icon_broken = "secbroken"
 	icon_off = "secoff"
 
 /obj/structure/closet/secure_closet/security_torch/WillContain()
@@ -45,7 +44,6 @@
 	icon_closed = "hossecure"
 	icon_locked = "hossecure1"
 	icon_opened = "hossecureopen"
-	icon_broken = "hossecurebroken"
 	icon_off = "hossecureoff"
 
 /obj/structure/closet/secure_closet/cos/WillContain()
@@ -62,9 +60,7 @@
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/melee/baton/loaded,
-		/obj/item/weapon/gun/projectile/colt/officer,
-		/obj/item/ammo_magazine/c45m,
-		/obj/item/ammo_magazine/c45m,
+		/obj/item/weapon/gun/energy/gun,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/weapon/reagent_containers/spray/pepper,
@@ -87,7 +83,6 @@
 	icon_closed = "wardensecure"
 	icon_locked = "wardensecure1"
 	icon_opened = "wardensecureopen"
-	icon_broken = "wardensecurebroken"
 	icon_off = "wardensecureoff"
 
 /obj/structure/closet/secure_closet/brigofficer/WillContain()
@@ -124,7 +119,6 @@
 	icon_closed = "sec"
 	icon_locked = "sec1"
 	icon_opened = "secopen"
-	icon_broken = "secbroken"
 	icon_off = "secoff"
 
 /obj/structure/closet/secure_closet/forensics/WillContain()

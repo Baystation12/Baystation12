@@ -252,7 +252,7 @@ proc/cmd_admin_mute(mob/M as mob, mute_type)
 		M.client.prefs.muted |= mute_type
 
 	log_admin("[key_name(usr)] has [muteunmute] [key_name(M)] from [mute_string]")
-	message_admins("[key_name_admin(usr)] has [muteunmute] [key_name_admin(M)] from [mute_string].", 1)
+	message_staff("[key_name_admin(usr)] has [muteunmute] [key_name_admin(M)] from [mute_string].", 1)
 	to_chat(M, "<span class = 'alert'>You have been [muteunmute] from [mute_string].</span>")
 	feedback_add_details("admin_verb","MUTE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -450,7 +450,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			new_character.real_name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 		else
 			new_character.real_name = capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
-	new_character.name = new_character.real_name
+	new_character.SetName(new_character.real_name)
 
 	if(G_found.mind && !G_found.mind.active)
 		G_found.mind.transfer_to(new_character)	//be careful when doing stuff like this! I've already checked the mind isn't in use

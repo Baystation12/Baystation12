@@ -47,7 +47,7 @@
 
 /datum/category_item/player_setup_item/player_global/ui/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["select_style"])
-		var/UI_style_new = input(user, "Choose UI style.", "Character Preference", pref.UI_style) as null|anything in all_ui_styles
+		var/UI_style_new = input(user, "Choose UI style.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.UI_style) as null|anything in all_ui_styles
 		if(!UI_style_new || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_style = UI_style_new
 		return TOPIC_REFRESH

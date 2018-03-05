@@ -20,6 +20,7 @@
 		/area/maintenance/seconddeck/aftport = NO_SCRUBBER,
 		/area/maintenance/seconddeck/forestarboard = NO_SCRUBBER,
 		/area/maintenance/thirddeck/aftstarboard = NO_SCRUBBER,
+		/area/janitor = NO_SCRUBBER|NO_VENT,
 		/area/mine/explored = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/mine/unexplored = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/ninja_dojo = NO_SCRUBBER |NO_VENT | NO_APC,
@@ -40,7 +41,6 @@
 		/area/storage/tools = 0,
 		/area/supply = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/syndicate_station = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/teleporter/seconddeck = NO_SCRUBBER|NO_VENT,,
 		/area/thruster = NO_SCRUBBER,
 		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/turret_protected/ai = NO_SCRUBBER|NO_VENT,
@@ -63,7 +63,12 @@
 		/area/smugglers/base = NO_SCRUBBER,
 		/area/smugglers/dorms = NO_SCRUBBER|NO_VENT,
 		/area/smugglers/office = NO_SCRUBBER|NO_VENT,
+		/area/bluespaceriver/underground = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/bluespaceriver/ground = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
+		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/icarus/vessel = NO_APC,
+		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC,
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -77,8 +82,9 @@
 		/area/exoplanet/grass,
 		/area/exoplanet/snow,
 		/area/exoplanet/garbage,
-		/area/marooned/marooned_snow
-
+		/area/marooned/marooned_snow,
+		/area/icarus/vessel,
+		/area/icarus/open,
 	)
 
 	area_coherency_test_subarea_count = list()
@@ -124,6 +130,13 @@
 		/area/ship,
 		/area/smugglers,
 		/area/slavers_base,
+		/area/hydro,
+		/area/yacht,
+		/area/bluespaceriver,
+		/area/mobius_rift,
+		/area/icarus,
+		/area/errant_pisces,
+		/area/lar_maria,
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
