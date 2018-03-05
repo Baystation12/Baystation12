@@ -47,18 +47,18 @@
 //Flashing everyone
 		if(eye_safety < FLASH_PROTECTION_MODERATE)
 			if(get_dist(M,T) <= 2)
-				M.flash_eyes(50)
+				M.flash_eyes(,,,,,50)//5 seconds flash max
 			else if(get_dist(M,T) <= 5)
-				M.flash_eyes(40)
+				M.flash_eyes(,,,,,40)
 			else if(get_dist(M,T) <= 7)
-				M.flash_eyes(35)
+				M.flash_eyes(,,,,,35)
 			else
-				M.flash_eyes(30)
+				M.flash_eyes(,,,,,30)
 
 //Now applying sound
-		if((get_dist(M, T) <= 2 || src.loc == M.loc || src.loc == M))
-			if(ear_safety > 0)
-				M.custom_pain("Your ears ring painfully!", 50, 1)
+			if((get_dist(M, T) <= 2 || src.loc == M.loc || src.loc == M))
+				if(ear_safety > 0)
+					M.custom_pain("Your ears ring painfully!", 50, 1)
 			else
 				if ((prob(14) || (M == src.loc && prob(70))))
 					M.ear_damage += rand(1, 15)
