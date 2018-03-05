@@ -35,6 +35,11 @@
 		if(istype(E)) E.internal_organs -= src
 	return ..()
 
+/obj/item/organ/internal/set_dna(var/datum/dna/new_dna)
+	..()
+	if(species && species.organs_icon)
+		icon = species.organs_icon
+
 //disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
 //TODO move this to organ/internal once the FPB port comes through
 /obj/item/organ/proc/cut_away(var/mob/living/user)
