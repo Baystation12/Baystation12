@@ -44,10 +44,12 @@
 
 /obj/item/weapon/storage/toolbox/electrical/Initialize()
 	. = ..()
+	new /obj/item/stack/cable_coil/random(src,30)
+	new /obj/item/stack/cable_coil/random(src,30)
 	if(prob(5))
 		new /obj/item/clothing/gloves/insulated(src)
 	else
-		new /obj/item/stack/cable_coil/random(src,90)
+		new /obj/item/stack/cable_coil/random(src,30)
 
 /obj/item/weapon/storage/toolbox/syndicate
 	name = "black and red toolbox"
