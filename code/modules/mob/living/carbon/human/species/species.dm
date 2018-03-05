@@ -37,6 +37,8 @@
 	var/eye_icon = "eyes_s"
 	var/eye_icon_location = 'icons/mob/human_face.dmi'
 
+	var/organs_icon		//species specific internal organs icons
+
 	var/default_h_style = "Bald"
 	var/default_f_style = "Shaved"
 
