@@ -4,7 +4,7 @@
 	/datum/job/insurrectionist_recruiter,/datum/job/colonist_mayor,/datum/job/UNSC_ship/commander,/datum/job/UNSC_ship/exo,\
 	/datum/job/UNSC_ship/bridge,\
 /datum/job/UNSC_ship/marine_co,/datum/job/UNSC_ship/marine_xo,\
-/datum/job/UNSC_ship/marine_sl,/datum/job/UNSC_ship/marine_sl/weapons,/datum/job/UNSC_ship/marine,\
+/datum/job/UNSC_ship/marine_sl,/datum/job/UNSC_ship/weapons,/datum/job/UNSC_ship/marine,\
 /datum/job/UNSC_ship/medical_chief,/datum/job/UNSC_ship/medical,/datum/job/UNSC_ship/security_chief,/datum/job/UNSC_ship/security,\
 /datum/job/UNSC_ship/cmdr_sqr,\
 /datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,\

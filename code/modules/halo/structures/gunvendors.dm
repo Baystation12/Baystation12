@@ -24,7 +24,7 @@
 	icon_deny = "ironhammer-deny"
 	req_access = list()
 	products = list(/obj/item/ammo_magazine/m145_ap = 6,/obj/item/ammo_magazine/a762_box_ap = 10,/obj/item/weapon/gun/projectile/m739_lmg = 2
-	,/obj/item/weapon/gun/projectile/srs99_sniper = 2)
+	,/obj/item/weapon/gun/projectile/srs99_sniper = 2, /obj/item/weapon/gun/launcher/rocket/m41_ssr = 2, /obj/item/ammo_casing/rocket = 6)
 
 /obj/machinery/vending/armory/police
 	name = "Shell Vendor"
