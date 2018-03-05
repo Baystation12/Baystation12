@@ -599,7 +599,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/gps(src)
 	src.modules += new /obj/item/device/ano_scanner(src)
 	src.modules += new /obj/item/device/depth_scanner(src)
-	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
+	src.emag = new /obj/item/weapon/gun/energy/plasmacutter(src)
 
 	var/datum/matter_synth/nanite = new /datum/matter_synth/nanite(10000)
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal(10000)
