@@ -76,7 +76,7 @@
 
 /proc/spawn_meteor(var/list/meteortypes, var/startSide, var/zlevel)
 	var/turf/pickedstart = spaceDebrisStartLoc(startSide, zlevel)
-	var/turf/pickedgoal = spaceDebrisFinishLoc(pickedstart, zlevel)
+	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, zlevel)
 
 	var/Me = pickweight(meteortypes)
 	var/obj/effect/meteor/M = new Me(pickedstart)
