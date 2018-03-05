@@ -563,7 +563,7 @@ var/global/list/robot_modules = list(
 	name = "exploration robot module"
 	subsystems = list(/datum/nano_module/supply)
 	channels = list("Supply" = 1, "Science" = 1, "Exploration" = 1)
-	networks = list(NETWORK_MINE)
+	networks = list(NETWORK_EXPLO)
 	sprites = list(
 					"Miner - Basic" = "Miner_old",
 					"Miner - Advanced Droid" = "droid-miner",
