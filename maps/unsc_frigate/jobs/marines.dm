@@ -57,6 +57,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine_sl
 	selection_color = "#667700"
 	//job_guide = "You, master guns, know your weaponry better than almost any human alive. It's too bad you get treated like a glorified desk jockey whose main responsibility is doling out responsible portions of weaponry to needy marines."
+	access = list(access_unsc_crew,
+	access_unsc_armoury, access_unsc_marine)
 
 /datum/job/UNSC_ship/marine
 	title = "Marine"
