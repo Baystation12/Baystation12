@@ -68,14 +68,20 @@
 		new/datum/stack_recipe("atmospherics airlock assembly", /obj/structure/door_assembly/door_assembly_atmo, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("research airlock assembly", /obj/structure/door_assembly/door_assembly_research, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("medical airlock assembly", /obj/structure/door_assembly/door_assembly_med, 4, time = 50, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("maintenance airlock assembly", /obj/structure/door_assembly/door_assembly_mai, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("external airlock assembly", /obj/structure/door_assembly/door_assembly_ext, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("freezer airlock assembly", /obj/structure/door_assembly/door_assembly_fre, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("airtight hatch assembly", /obj/structure/door_assembly/door_assembly_hatch, 4, time = 50, one_per_turf = 1, on_floor = 1), \
-		new/datum/stack_recipe("maintenance hatch assembly", /obj/structure/door_assembly/door_assembly_mhatch, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("high security airlock assembly", /obj/structure/door_assembly/door_assembly_highsecurity, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("emergency shutter", /obj/structure/firedoor_assembly, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("multi-tile airlock assembly", /obj/structure/door_assembly/multi_tile, 4, time = 50, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("maintenance hatch assembly", /obj/structure/door_assembly/door_assembly_mhatch, 4, time = 50, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("maintenance airlock assembly", /obj/structure/door_assembly/door_assembly_mai, 4, time = 50, one_per_turf = 1, on_floor = 1),
+		new/datum/stack_recipe("vertical maintenance airlock assembly", /obj/structure/door_assembly/door_assembly_malt, 4, time = 50, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("command maintenance airlock assembly", /obj/structure/door_assembly/door_assembly_mcom, 4, time = 50, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("security maintenance airlock assembly", /obj/structure/door_assembly/door_assembly_msec, 4, time = 50, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("medical maintenance airlock assembly", /obj/structure/door_assembly/door_assembly_mmed, 4, time = 50, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("research maintenance airlock assembly", /obj/structure/door_assembly/door_assembly_mnt, 4, time = 50, one_per_turf = 1, on_floor = 1), \
+		new/datum/stack_recipe("engineering maintenance airlock assembly", /obj/structure/door_assembly/door_assembly_meng, 4, time = 50, one_per_turf = 1, on_floor = 1),\
 		))
 
 	recipes += new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade)
