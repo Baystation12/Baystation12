@@ -182,7 +182,7 @@
 			return
 
 		if(istype(src.loc,/mob/living))
-			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
+			to_chat(user, "<span class='warning'>How do you intend to patch a voidsuit while someone is wearing it?</span>")
 			return
 
 		if(!damage || !burn_damage)
@@ -198,7 +198,7 @@
 	else if(isWelder(W))
 
 		if(istype(src.loc,/mob/living))
-			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
+			to_chat(user, "<span class='warning'>How do you intend to patch a voidsuit while someone is wearing it?</span>")
 			return
 
 		if (!damage || ! brute_damage)
@@ -211,6 +211,33 @@
 			return
 
 		repair_breaches(BRUTE, 3, user)
+		return
+
+	else if(istype(W, /obj/item/weapon/tape_roll))
+
+		if(istype(src.loc,/mob/living))
+			to_chat(user, "<span class='warning'>How do you intend to patch a voidsuit while someone is wearing it?</span>")
+			return
+
+		if (!damage || ! brute_damage)
+			to_chat(user, "There is no structural damage on \the [src] to patch.")
+			return
+
+		repair_breaches(BRUTE, 3, user)
+		return
+
+	else if(istype(W, /obj/item/weapon/ducttape))
+
+		if(istype(src.loc,/mob/living))
+			to_chat(user, "<span class='warning'>How do you intend to patch a voidsuitsuit while someone is wearing it?</span>")
+			return
+
+		if (!damage || ! brute_damage)
+			to_chat(user, "There is no structural damage on \the [src] to patch.")
+			return
+
+		repair_breaches(BRUTE, 3, user)
+		qdel(W)
 		return
 
 	..()
