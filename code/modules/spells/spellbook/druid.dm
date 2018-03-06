@@ -10,17 +10,18 @@
 	book_desc = "Summons, nature, and a bit o' healin."
 	title = "Druidic Guide on how to be smug about nature"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
-	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
+	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE|STANDARD
 	max_uses = 6
 
 	spells = list(/spell/targeted/heal_target = 					1,
-				/spell/targeted/heal_target/sacrifice = 			1,
+				/spell/targeted/shapeshift/baleful_polymorph = 		1,
 				/spell/aoe_turf/conjure/mirage = 					1,
 				/spell/aoe_turf/conjure/summon/bats = 				1,
 				/spell/aoe_turf/conjure/summon/bear = 				1,
 				/spell/targeted/equip_item/party_hardy = 			1,
 				/spell/targeted/equip_item/seed = 					1,
 				/spell/targeted/shapeshift/avian = 					1,
+				/spell/targeted/heal_target/major = 				2,
 				/spell/aoe_turf/disable_tech = 						1,
 				/spell/hand/charges/entangle = 						1,
 				/spell/aoe_turf/conjure/grove/sanctuary = 			1,
