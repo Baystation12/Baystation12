@@ -63,6 +63,14 @@
 			if(!T.place_handcuffs(H, user))
 				user.unEquip(T)
 				qdel(T)
+
+		else if(user.zone_sel.selecting == BP_CHEST)
+			if(H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
+				if(H == user || do_mob(user, H, 10))	//Skip the time-check if patching your own suit, that's handled in attackby()
+					H.wear_suit.attackby(src, user)
+			else
+				to_chat(user, "<span class='warning'>\The [H] isn't wearing a spacesuit for you to reseal.</span>")
+
 		else
 			return ..()
 		return 1
