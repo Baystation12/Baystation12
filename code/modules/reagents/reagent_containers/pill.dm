@@ -151,12 +151,12 @@
 
 
 /obj/item/weapon/reagent_containers/pill/inaprovaline
-	name = "Inaprovaline (30u)"
+	name = "Inaprovaline (15u)"
 	desc = "Used to stabilize patients."
 	icon_state = "pill1"
 /obj/item/weapon/reagent_containers/pill/inaprovaline/New()
 	..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 30)
+	reagents.add_reagent(/datum/reagent/inaprovaline, 15)
 	color = reagents.get_color()
 
 
@@ -197,16 +197,6 @@
 /obj/item/weapon/reagent_containers/pill/dylovene/New()
 	..()
 	reagents.add_reagent(/datum/reagent/dylovene, 15)
-	color = reagents.get_color()
-
-
-/obj/item/weapon/reagent_containers/pill/inaprovaline
-	name = "Inaprovaline (30u)"
-	desc = "Used to stabilize patients."
-	icon_state = "pill2"
-/obj/item/weapon/reagent_containers/pill/inaprovaline/New()
-	..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 30)
 	color = reagents.get_color()
 
 
