@@ -2,6 +2,8 @@
 #define LOCKED 				2
 #define CAN_MAKE_CONTRACTS	4
 #define INVESTABLE			8
+#define STANDARD			16
+#define STUDENT				32
 //spells/spellbooks have a variable for this but as artefacts are literal items they do not.
 //so we do this instead.
 var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
@@ -46,15 +48,24 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 /obj/item/weapon/spellbook/attack_self(mob/user as mob)
 	if(user.mind)
-		if(!wizards.is_antagonist(user.mind))
-			to_chat(user, "You can't make heads or tails of this book.")
-			return
-		if(spellbook.book_flags & LOCKED)
-			if(user.mind.special_role == "apprentice")
-				to_chat(user, "<span class='warning'>Drat! This spellbook's apprentice proof lock is on!.</span>")
+		if(spellbook.book_flags & STUDENT)
+			if(user.mind.special_role != "apprentice")
+				if(!wizards.is_antagonist(user.mind))
+					to_chat(user, "You can't make heads or tails of this book.")
+					return
+				else
+					to_chat(user, "This spellbook is simple and basic, there is nothing you can learn from it.")
+					return
+		if(spellbook.book_flags & STANDARD)
+			if(!wizards.is_antagonist(user.mind))
+				to_chat(user, "You can't make heads or tails of this book.")
 				return
-			else
-				to_chat(user, "You notice the apprentice proof lock is on. Luckily you are beyond such things and can open it anyways.")
+			if(spellbook.book_flags & LOCKED)
+				if(user.mind.special_role == "apprentice")
+					to_chat(user, "<span class='warning'>Drat! This spellbook's apprentice proof lock is on!.</span>")
+					return
+				else
+					to_chat(user, "You notice the apprentice proof lock is on. Luckily you are beyond such things and can open it anyways.")
 
 	interact(user)
 
@@ -293,7 +304,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	var/desc = "The legendary book of spells of the wizard."
 	var/book_desc = "Holds information on the various tomes available to a wizard"
 	var/feedback = "" //doesn't need one.
-	var/book_flags = NOREVERT
+	var/book_flags = NOREVERT|STANDARD
 	var/max_uses = 1
 	var/title = "Book of Tomes"
 	var/title_desc = "This tome marks down all the available tomes for use. Choose wisely, there are no refunds."

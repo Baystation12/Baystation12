@@ -16,6 +16,7 @@
 
 	amt_dam_brute = -15
 	amt_dam_fire = -5
+	amt_blood  = 14
 
 	message = "You feel a pleasant rush of heat move through your body."
 
@@ -51,9 +52,9 @@
 	amt_blood  = 28
 	amt_organ = 5
 	amt_brain  = -5
-	amt_radiation  = -25
-	amt_dam_tox = -20
-	amt_dam_oxy = -14
+	amt_radiation  = -50
+	amt_dam_tox = -10
+	amt_dam_oxy = -7
 	amt_dam_brute = -35
 	amt_dam_fire  = -35
 
@@ -74,6 +75,7 @@
 
 	amt_dam_brute = -25
 	amt_dam_fire = -25
+	amt_blood  = 14
 
 /spell/targeted/heal_target/area/empower_spell()
 	if(!..())
@@ -110,7 +112,7 @@
 
 	amt_organ = 25
 	amt_brain  = -25
-	amt_radiation  = -100
+	amt_radiation  = -200
 
 
 

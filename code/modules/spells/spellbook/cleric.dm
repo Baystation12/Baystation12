@@ -9,7 +9,7 @@
 	book_desc = "All about healing. Mobility and offense comes at a higher price but not impossible."
 	title = "Cleric's Tome of Healing"
 	title_desc = "Buy spells using your available spell slots. Artefacts may also be bought however their cost is permanent."
-	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE
+	book_flags = CAN_MAKE_CONTRACTS|INVESTABLE|STANDARD
 	max_uses = 7
 
 	spells = list(/spell/targeted/heal_target/major = 				1,
@@ -23,10 +23,10 @@
 				/spell/radiant_aura =								1,
 				/spell/targeted/equip_item/holy_relic = 			1,
 				/spell/aoe_turf/conjure/grove/sanctuary = 			1,
-				/spell/targeted/projectile/dumbfire/fireball = 		2,
 				/spell/area_teleport = 								2,
 				/spell/aoe_turf/conjure/forcewall = 				1,
 				/spell/noclothes = 									1,
+				/obj/item/weapon/gun/energy/staff/focus = 			2,
 				/obj/item/weapon/magic_rock = 						1,
 				/obj/structure/closet/wizard/scrying = 				2,
 				/obj/item/weapon/contract/wizard/telepathy = 		1,
