@@ -46,36 +46,36 @@
 
 //Flashing everyone
 		if(eye_safety < FLASH_PROTECTION_MODERATE)
-			M.flash_eyes()
-			M.Stun(2)
-			M.Weaken(10)
-
-
+			if(get_dist(M,T) <= 2)
+				M.flash_eyes(,,,,,50)//5 seconds flash max
+			else if(get_dist(M,T) <= 5)
+				M.flash_eyes(,,,,,40)
+			else if(get_dist(M,T) <= 7)
+				M.flash_eyes(,,,,,35)
+			else
+				M.flash_eyes(,,,,,30)
 
 //Now applying sound
-		if((get_dist(M, T) <= 2 || src.loc == M.loc || src.loc == M))
-			if(ear_safety > 0)
-				M.Stun(2)
-				M.Weaken(1)
+			if((get_dist(M, T) <= 2 || src.loc == M.loc || src.loc == M))
+				if(ear_safety > 0)
+					M.custom_pain("Your ears ring painfully!", 50, 1)
 			else
-				M.Stun(10)
-				M.Weaken(3)
 				if ((prob(14) || (M == src.loc && prob(70))))
-					M.ear_damage += rand(1, 10)
+					M.ear_damage += rand(1, 15)
 				else
-					M.ear_damage += rand(0, 5)
-					M.ear_deaf = max(M.ear_deaf,15)
+					M.ear_damage += rand(0, 6)
+					M.ear_deaf = max(M.ear_deaf,20)
 
 		else if(get_dist(M, T) <= 5)
 			if(!ear_safety)
-				M.Stun(8)
-				M.ear_damage += rand(0, 3)
-				M.ear_deaf = max(M.ear_deaf,10)
+				M.custom_pain("You can barely hear anything!", 25, 1)
+				M.ear_damage += rand(0, 4)
+				M.ear_deaf = max(M.ear_deaf,15)
 
 		else if(!ear_safety)
-			M.Stun(4)
-			M.ear_damage += rand(0, 1)
-			M.ear_deaf = max(M.ear_deaf,5)
+			M.custom_pain("You momentarily find it hard to hear anything!", 20, 1)
+			M.ear_damage += rand(0, 2)
+			M.ear_deaf = max(M.ear_deaf,10)
 
 //This really should be in mob not every check
 		if(ishuman(M))

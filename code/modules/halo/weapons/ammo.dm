@@ -160,8 +160,6 @@
 
 /obj/item/projectile/bullet/a145_ap
 	damage = 80
-	stun = 1
-	weaken = 1
 	step_delay = 0.3
 	penetrating = 5
 	armor_penetration = 80
