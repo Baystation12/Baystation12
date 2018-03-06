@@ -22,7 +22,7 @@
 
 /obj/effect/shuttle_landmark/escape_pod/start
 	name = "Docked"
-
+	autoset = 1
 /obj/effect/shuttle_landmark/escape_pod/start/New()
 	landmark_tag = "escape_pod_[number]_start"
 	docking_controller = "escape_pod_[number]_berth"
@@ -30,6 +30,7 @@
 
 /obj/effect/shuttle_landmark/escape_pod/transit
 	name = "In transit"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/escape_pod/transit/New()
 	landmark_tag = "escape_pod_[number]_internim"
@@ -37,6 +38,7 @@
 
 /obj/effect/shuttle_landmark/escape_pod/out
 	name = "Escaped"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/escape_pod/out/New()
 	landmark_tag = "escape_pod_[number]_out"
@@ -87,42 +89,28 @@
 // ERT - Shuttle
 
 
-/datum/shuttle/autodock/multi/antag/rescue
+/datum/shuttle/autodock/ferry/rescue
 	name = "Rescue"
 	warmup_time = 0
-	destination_tags = list(
-		"nav_lavalette_coupole",
-		"nav_lavalette_xenoarch",
-		"nav_lavalette_residen",
-		"nav_lavalette_start",
-		)
-	current_location = "nav_specops_start"
-	landmark_transition = "nav_specops_transition"
-	home_waypoint = "nav_specops_start"
+	dock_target = "specops_shuttle_port"
 	shuttle_area = /area/shuttle/specops/centcom
-	announcer = "CMA"
-	arrival_message = "You guys fucked it all up. CMA units are on the way to fix you're mistake."
-	departure_message = "The units."
+	waypoint_offsite = "nav_specops_start"
+	waypoint_station = "nav_specops_xenoarch"
+	location = 1
+
 
 /obj/effect/shuttle_landmark/specops/start
-	name = "Patrol Area"
+	name = "Centcomm"
 	landmark_tag = "nav_specops_start"
+	docking_controller = "specops_centcom_dock"
+	autoset = 0
 
-/obj/effect/shuttle_landmark/specops/internim
-	name = "In transit"
-	landmark_tag = "nav_specops_transition"
 
 /obj/effect/shuttle_landmark/specops/xenoarch
-	name = "To the Xenoarcheology Airlock"
+	name = "To station"
 	landmark_tag = "nav_specops_xenoarch"
-
-/obj/effect/shuttle_landmark/specops/coupole
-	name =  "Near the Dome"
-	landmark_tag = "nav_specops_coupole"
-
-/obj/effect/shuttle_landmark/specops/residentiel
-	name = "Near the Residential Access"
-	landmark_tag = "nav_specops_residen"
+	docking_controller = "rescue_shuttle_dock_airlock"
+	autoset = 1
 
 //Cargo shuttle
 
@@ -238,7 +226,7 @@
 /obj/effect/shuttle_landmark/escape/internim
 	name = "In transit"
 	landmark_tag = "nav_escape_transition"
-	autoset = 0
+	autoset = 1
 
 /obj/effect/shuttle_landmark/escape/station
 	name = "Station"

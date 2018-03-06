@@ -16,7 +16,7 @@
 	owner = M
 	loc = null
 	SSskybox.skyboxes += src
-	color = SSskybox.BGcolor
+	//color = SSskybox.BGcolor
 	image = image('icons/turf/skybox.dmi', src, "background_[SSskybox.BGstate]")
 	overlays += image
 

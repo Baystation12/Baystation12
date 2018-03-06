@@ -30,11 +30,7 @@
 	#include "exodus-6.dmm"
 	#include "exodus-7.dmm"
 
-	#include "../../code/modules/lobby_music/absconditus.dm"
-	#include "../../code/modules/lobby_music/clouds_of_fire.dm"
-	#include "../../code/modules/lobby_music/endless_space.dm"
-	#include "../../code/modules/lobby_music/dilbert.dm"
-	#include "../../code/modules/lobby_music/space_oddity.dm"
+	#include "../../code/modules/lobby_music/my_imagination.dm"
 
 	#define USING_MAP_DATUM /datum/map/exodus
 

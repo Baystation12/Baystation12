@@ -132,7 +132,7 @@ datum/controller/vote
 		var/third = list()
 		for(var/option in choices)
 			if(choices[option] == greatest_votes && greatest_votes)
-				first = utf8_to_cp1251(option)
+				first += utf8_to_cp1251(option)
 			else if(choices[option] == second_greatest_votes && second_greatest_votes)
 				second += utf8_to_cp1251(option)
 			else if(choices[option] == third_greatest_votes && third_greatest_votes)

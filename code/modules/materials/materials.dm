@@ -358,7 +358,7 @@ var/list/name_to_material
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
-	hitsound = 'sound/weapons/smash.ogg'
+	hitsound = 'sound/weapons/Genhit.ogg'
 
 /material/diona
 	name = "biomass"

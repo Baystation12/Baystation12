@@ -69,6 +69,10 @@
 	name = "\improper Special Ops Shuttle"
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
+/area/shuttle/specops/station
+	name = "Station dock"
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
 /area/shuttle/administration
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
@@ -1276,6 +1280,11 @@ area/rnd/test_area
 	icon_state = "shuttle3"
 
 /area/supply/dock
+	name = "Supply Shuttle"
+	icon_state = "shuttle3"
+	requires_power = 0
+
+/area/supply/station
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	requires_power = 0

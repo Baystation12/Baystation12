@@ -316,7 +316,7 @@
 "gd" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 5},/turf/simulated/floor/tiled,/area/space)
 "ge" = (/obj/machinery/door/airlock/external{frequency = 1381; icon_state = "door_locked"; id_tag = "telecoms_outer"; locked = 1; name = "External Access"; req_access = list(10,13)},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/airless,/area/space)
 "gf" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/table/standard,/obj/item/stack/material/glass{amount = 50},/obj/item/stack/cable_coil/random,/obj/item/stack/cable_coil/random,/turf/simulated/floor/plating,/area/space)
-"gg" = (/obj/machinery/atmospherics/pipe/simple/visible/universal,/turf/simulated/floor/plating,/area/space)
+"gg" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/turf/simulated/floor/plating,/area/space)
 "gh" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/space)
 "gi" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/obj/machinery/power/sensor{long_range = 1; name_tag = "Telecommunications"},/turf/simulated/floor/plating,/area/space)
 "gj" = (/obj/item/weapon/cell,/obj/effect/floor_decal/industrial/warning/corner{dir = 1},/turf/simulated/floor/tiled,/area/space)
