@@ -16,6 +16,7 @@
 	slowdown =      1
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_GRAV | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	spawn_flags = SPECIES_IS_RESTRICTED
 
 /datum/species/human/spacer
 	name = "Space-Adapted Human"
@@ -33,6 +34,7 @@
 	darksight = 6
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	spawn_flags = SPECIES_IS_RESTRICTED
 
 /datum/species/human/vatgrown
 	name = "Vat-Grown Human"
@@ -51,6 +53,7 @@
 		BP_BRAIN =    /obj/item/organ/internal/brain,
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
+	spawn_flags = SPECIES_IS_RESTRICTED
 
 /datum/species/human/vatgrown/sanitize_name(name)
 	return sanitizeName(name, allow_numbers=TRUE)
