@@ -1,8 +1,0 @@
-author: "chaoko99"
-delete-after: True
-changes: 
-  - tweak: "Most bots will now render below a human."
-  - rscadd: "Floorbots will now assume the colors of the toolboxes used to make them."
-  - imageadd: "Added a Syndicate floorbot. Sadly, he is not evil."
-  - imageadd: "Advanced trauma medibot added."
-  - bugfix: "Cleanbot works now."
