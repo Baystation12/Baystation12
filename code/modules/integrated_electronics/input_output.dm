@@ -286,34 +286,41 @@
 	desc = "Signals from a signaler can be received with this, allowing for remote control.  Additionally, it can send signals as well."
 	extended_desc = "When a signal is received from another signaler with the right id tag, the 'on signal received' activator pin will be pulsed and the command output is updated.  \
 	The two input pins are to configure the integrated signaler's settings.  Note that the frequency should not have a decimal in it.  \
-	Meaning the default frequency is expressed as 1457, not 145.7.  To send a signal, pulse the 'send signal' activator pin. Set the command output to set the message recieved"
+	Meaning the default frequency is expressed as 1457, not 145.7.  To send a signal, pulse the 'send signal' activator pin. Set the command output to set the message received."
 	complexity = 8
-	inputs = list("frequency", "code", "command", "id tag")
-	outputs = list("recieved command")
+	inputs = list("frequency", "id tag", "command")
+	outputs = list("received command")
 
 /obj/item/integrated_circuit/input/signaler/advanced/Initialize()
 	. = ..()
 	var/datum/integrated_io/new_com = inputs[3]
-	var/datum/integrated_io/new_id = inputs[4]
+	var/datum/integrated_io/new_id = inputs[2]
 	var/datum/integrated_io/new_rec = outputs[1]
 	new_com.data = "ACTIVATE"
 	new_id.data = "Integrated_Circuit"
 	new_rec.data = "ACTIVATE"
 
+/obj/item/integrated_circuit/input/signaler/signal_good(var/datum/signal/signal)
+	. = ..()
+	var/datum/integrated_io/id_tag = inputs[2]
+	if(!id_tag.data || id_tag.data != signal.data["tag"])
+		return 0
+
 /obj/item/integrated_circuit/input/signaler/advanced/create_signal()
 	var/datum/signal/signal = ..()
+	var/datum/integrated_io/new_id = inputs[2]
 	var/datum/integrated_io/new_com = inputs[3]
-	var/datum/integrated_io/new_id = inputs[4]
-	signal.data["command"] = new_com.data
 	signal.data["tag"] = new_id.data
+	signal.data["command"] = new_com.data
+	signal.encryption = null
 	return signal
 
 /obj/item/integrated_circuit/input/signaler/advanced/receive_signal(var/datum/signal/signal)
-	if(!..())
+	if(!signal_good(signal))
 		return 0
 	if(signal.data["command"])
 		set_pin_data(IC_OUTPUT, 1, signal.data["command"])
-	return 1
+	return ..()
 
 /obj/item/integrated_circuit/input/teleporter_locator
 	name = "teleporter locator"

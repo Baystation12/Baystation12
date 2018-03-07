@@ -302,7 +302,9 @@
 	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
 		rift_location = get_step(rift_location, step_dir) || rift_location
 	else
-		rift_location = get_step(rift_location, dir) || rift_location
+		var/obj/item/device/electronic_assembly/assembly = get_assembly(src)
+		if(assembly)
+			rift_location = get_step(rift_location, assembly.dir) || rift_location
 
 	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
 		new /obj/effect/portal(rift_location, get_turf(tporter.locked))
