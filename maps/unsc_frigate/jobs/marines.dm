@@ -58,7 +58,7 @@
 	selection_color = "#667700"
 	//job_guide = "You, master guns, know your weaponry better than almost any human alive. It's too bad you get treated like a glorified desk jockey whose main responsibility is doling out responsible portions of weaponry to needy marines."
 	access = list(access_unsc_crew,
-	access_unsc_armoury, access_unsc_marine)
+		access_unsc_armoury, access_unsc_marine)
 
 /datum/job/UNSC_ship/marine
 	title = "Marine"
@@ -107,3 +107,15 @@
 	new /obj/item/device/radio/headset/unsc/marine(src)
 	new /obj/item/clothing/head/helmet/marine(src)
 	new /obj/item/clothing/suit/storage/marine(src)
+
+/datum/job/UNSC_ship/odst
+	title = "ODST Rifleman"
+	department_flag = MAR
+	total_positions = 4
+	spawn_positions = 4
+	selection_color = "#667700"
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odst
+	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist")
+	access = list(access_unsc_crew,
+		access_unsc_armoury, access_unsc_marine)
+	latejoin_at_spawnpoints = TRUE

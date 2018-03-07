@@ -23,6 +23,13 @@
 	else
 		icon_state = "magnum_unloaded"
 
+/obj/item/weapon/gun/projectile/m6d_magnum/verb/scope()
+	set category = "Object"
+	set name = "Use Scope (1.1x)"
+	set popup_menu = 1
+
+	toggle_scope(usr, 1.1)
+
 //Magnum M6S silenced pistol
 
 /obj/item/weapon/gun/projectile/m6c_magnum_s
