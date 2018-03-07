@@ -145,8 +145,11 @@
 
 	if(owner)
 		if(damage > max_damage / 2 && healed_threshold)
-			spawn()
-				alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
+			if(fake_brain)
+				to_chat(owner, "<span class='warning'>Your brain has taken massive damage. Not like you care, but it might be good for acting.</span>")
+			else
+				spawn()
+					alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 			healed_threshold = 0
 
 		if(damage < (max_damage / 4))
