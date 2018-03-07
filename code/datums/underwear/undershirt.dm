@@ -186,3 +186,4 @@
 /datum/category_item/underwear/undershirt/polo_nt
 	name = "Polo, NanoTrasen"
 	icon_state = "ntpolo"
+

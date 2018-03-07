@@ -24,6 +24,7 @@ var/list/gamemode_cache = list()
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
 	var/ert_admin_call_only = 0
+	var/panic_DB_log = TRUE //Logging Panic Bunker
 	var/allow_vote_mode = 0				// allow votes to change mode
 	var/allow_admin_jump = 1			// allows admin jumping
 	var/allow_admin_spawning = 1		// allows admin item spawning
@@ -59,6 +60,7 @@ var/list/gamemode_cache = list()
 	var/hostedby = null
 	var/respawn_delay = 30
 	var/guest_jobban = 1
+	var/panic_bunker = 0
 	var/usewhitelist = 0
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
 	var/mods_can_tempban = 0
@@ -677,6 +679,9 @@ var/list/gamemode_cache = list()
 
 				if("aggressive_changelog")
 					config.aggressive_changelog = 1
+
+				if("panic_bunker")
+					config.panic_bunker = 1
 
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE
