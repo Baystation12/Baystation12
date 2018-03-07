@@ -26,7 +26,7 @@
 	uniform = null
 	belt = null
 	shoes = /obj/item/clothing/shoes/brown
-	pda_slot = slot_r_store
+	pda_slot = null
 
 	flags = 0
 
@@ -39,8 +39,8 @@
 	if(prob(25))
 		H.equip_to_slot_or_del(/obj/item/clothing/mask/innie/shemagh)
 	if(prob(30))
-		var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/m6d_magnum
-		G.ammo_magazine = new /obj/item/ammo_magazine/m127_saphp
+		var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/colt
+		G.ammo_magazine = new /obj/item/ammo_magazine/c45m
 		H.equip_to_slot_or_del(G,slot_belt)
 
 
@@ -79,6 +79,7 @@
 	uniform = /obj/item/clothing/under/blazer
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	shoes = /obj/item/clothing/shoes/black
+	pda_slot = null
 
 	flags = 0
 
@@ -89,7 +90,7 @@
 	uniform = /obj/item/clothing/under/police
 	belt = /obj/item/weapon/gun/projectile/m7_smg/rubber
 	shoes = /obj/item/clothing/shoes/dutyboots
-	pda_slot = slot_r_store
+	pda_slot = null
 	l_pocket = /obj/item/clothing/accessory/badge/police
 	l_ear = /obj/item/device/radio/headset/police
 	id_type = /obj/item/weapon/card/id/security/warden
@@ -119,7 +120,7 @@
 	uniform = /obj/item/clothing/under/police
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	shoes = /obj/item/clothing/shoes/dutyboots
-	pda_slot = slot_r_store
+	pda_slot = null
 	l_pocket = /obj/item/clothing/accessory/badge/police
 	l_ear = /obj/item/device/radio/headset/police
 	id_type = /obj/item/weapon/card/id/security/head
