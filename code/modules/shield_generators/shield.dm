@@ -1,18 +1,3 @@
-/obj/effect/shield_impact
-	name = "shield impact"
-	icon = 'icons/obj/machines/shielding.dmi'
-	icon_state = "shield_impact"
-	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
-	layer = ABOVE_HUMAN_LAYER
-	density = 0
-
-
-/obj/effect/shield_impact/New()
-	spawn(2 SECONDS)
-		qdel(src)
-
-
 /obj/effect/shield
 	name = "energy shield"
 	desc = "An impenetrable field of energy, capable of blocking anything as long as it's active."
@@ -142,7 +127,7 @@
 
 	damage = round(damage)
 
-	new/obj/effect/shield_impact(get_turf(src))
+	new /obj/effect/temporary(get_turf(src), 2 SECONDS,'icons/obj/machines/shielding.dmi',"shield_impact")
 
 	var/list/field_segments = gen.field_segments
 	switch(gen.take_damage(damage, damtype))

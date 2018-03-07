@@ -25,6 +25,9 @@
 	if(H.r_hand)
 		targets += BP_R_HAND
 
+	var/obj/O = new /obj/effect/temporary(get_turf(H),3, 'icons/effects/effects.dmi', "fire_goon")
+	O.alpha = 150
+
 	for(var/organ in targets)
 		var/obj/item/organ/external/E = H.get_organ(organ)
 		E.take_damage(burn=10, used_weapon = "hot iron")
