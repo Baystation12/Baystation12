@@ -1,6 +1,7 @@
 /mob/living/bot/cleanbot
 	name = "Cleanbot"
 	desc = "A little cleaning robot, he looks so excited!"
+	icon = 'icons/mob/bot/cleanbot.dmi'
 	icon_state = "cleanbot0"
 	req_one_access = list(access_janitor, access_robotics)
 	botcard_access = list(access_janitor, access_maint_tunnels)
@@ -36,7 +37,7 @@
 			ignore_list -= g
 
 /mob/living/bot/cleanbot/lookForTargets()
-	for(var/obj/effect/decal/cleanable/D in view(world.view, src)) // There was some odd code to make it start with nearest decals, it's unnecessary, this works
+	for(var/obj/effect/decal/cleanable/D in view(world.view + 1)) // There was some odd code to make it start with nearest decals, it's unnecessary, this works
 		if(confirmTarget(D))
 			target = D
 			return
@@ -158,7 +159,7 @@
 /obj/item/weapon/bucket_sensor
 	desc = "It's a bucket. With a sensor attached."
 	name = "proxy bucket"
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/cleanbot.dmi'
 	icon_state = "bucket_proxy"
 	force = 3.0
 	throwforce = 10.0

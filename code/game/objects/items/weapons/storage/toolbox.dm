@@ -20,44 +20,30 @@
 
 /obj/item/weapon/storage/toolbox/emergency
 	name = "emergency toolbox"
-	icon_state = "red"
-	item_state = "toolbox_red"
+	startswith = list(/obj/item/weapon/crowbar/red, /obj/item/weapon/extinguisher/mini, /obj/item/device/radio)
 
-/obj/item/weapon/storage/toolbox/emergency/New()
-	..()
-	new /obj/item/weapon/crowbar/red(src)
-	new /obj/item/weapon/extinguisher/mini(src)
+/obj/item/weapon/storage/toolbox/emergency/Initialize()
+	. = ..()
 	var/item = pick(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare,  /obj/item/device/flashlight/glowstick/red))
 	new item(src)
-	new /obj/item/device/radio(src)
+
 
 /obj/item/weapon/storage/toolbox/mechanical
 	name = "mechanical toolbox"
 	desc = "Bright blue toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "blue"
 	item_state = "toolbox_blue"
-
-/obj/item/weapon/storage/toolbox/mechanical/New()
-	..()
-	new /obj/item/weapon/screwdriver(src)
-	new /obj/item/weapon/wrench(src)
-	new /obj/item/weapon/weldingtool(src)
-	new /obj/item/weapon/crowbar(src)
-	new /obj/item/device/analyzer(src)
-	new /obj/item/weapon/wirecutters(src)
+	startswith = list(/obj/item/weapon/screwdriver, /obj/item/weapon/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/device/analyzer, /obj/item/weapon/wirecutters)
 
 /obj/item/weapon/storage/toolbox/electrical
 	name = "electrical toolbox"
 	desc = "Bright yellow toolboxes like these are one of the most common sights in maintenance corridors on virtually every ship in the galaxy."
 	icon_state = "yellow"
 	item_state = "toolbox_yellow"
+	startswith = list(/obj/item/weapon/screwdriver, /obj/item/weapon/wirecutters, /obj/item/device/t_scanner, /obj/item/weapon/crowbar)
 
-/obj/item/weapon/storage/toolbox/electrical/New()
-	..()
-	new /obj/item/weapon/screwdriver(src)
-	new /obj/item/weapon/wirecutters(src)
-	new /obj/item/device/t_scanner(src)
-	new /obj/item/weapon/crowbar(src)
+/obj/item/weapon/storage/toolbox/electrical/Initialize()
+	. = ..()
 	new /obj/item/stack/cable_coil/random(src,30)
 	new /obj/item/stack/cable_coil/random(src,30)
 	if(prob(5))
@@ -72,13 +58,4 @@
 	item_state = "toolbox_syndi"
 	origin_tech = list(TECH_COMBAT = 1, TECH_ILLEGAL = 1)
 	force = 7.0
-
-/obj/item/weapon/storage/toolbox/syndicate/New()
-	..()
-	new /obj/item/clothing/gloves/insulated(src)
-	new /obj/item/weapon/screwdriver(src)
-	new /obj/item/weapon/wrench(src)
-	new /obj/item/weapon/weldingtool(src)
-	new /obj/item/weapon/crowbar(src)
-	new /obj/item/weapon/wirecutters(src)
-	new /obj/item/device/multitool(src)
+	startswith = list(/obj/item/clothing/gloves/insulated, /obj/item/weapon/screwdriver, /obj/item/weapon/wrench, /obj/item/weapon/weldingtool, /obj/item/weapon/crowbar, /obj/item/weapon/wirecutters, /obj/item/device/multitool)
