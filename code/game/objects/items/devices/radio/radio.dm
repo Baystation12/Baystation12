@@ -182,11 +182,13 @@
 		. = 1
 	else if (href_list["talk"])
 		ToggleBroadcast()
+		update_icon()
 		. = 1
 	else if (href_list["listen"])
 		var/chan_name = href_list["ch_name"]
 		if (!chan_name)
 			ToggleReception()
+			update_icon()
 		else
 			if (channels[chan_name] & FREQ_LISTENING)
 				channels[chan_name] &= ~FREQ_LISTENING

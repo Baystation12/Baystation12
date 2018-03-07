@@ -5,12 +5,23 @@
 	randpixel = 0
 	anchored = 1
 	w_class = ITEM_SIZE_HUGE
-	canhear_range = 2
+	canhear_range = 7
 	atom_flags = ATOM_FLAG_NO_BLOOD
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	layer = ABOVE_WINDOW_LAYER
 	var/number = 0
 	var/last_tick //used to delay the powercheck
+
+/obj/item/device/radio/intercom/update_icon()
+	..()
+	overlays.Cut()
+	if(!on)
+		icon_state = "intercom-p"
+		return
+
+	icon_state = "intercom"
+	overlays.Add("intercom-spkr-[listening ? "on" : "off"]")
+	overlays.Add("intercom-mic-[broadcasting ? "on" : "off"]")
 
 /obj/item/device/radio/intercom/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
@@ -135,11 +146,7 @@
 				on = 0
 			else
 				on = A.powered(EQUIP) // set "on" to the power status
-
-		if(!on)
-			icon_state = "intercom-p"
-		else
-			icon_state = "intercom"
+		update_icon()
 
 /obj/item/device/radio/intercom/broadcasting
 	broadcasting = 1
