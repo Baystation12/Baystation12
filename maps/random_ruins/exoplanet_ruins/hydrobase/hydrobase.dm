@@ -4,65 +4,65 @@
 	description = "hydroponics base with random plants and a lot of enemies"
 	suffixes = list("hydrobase/hydrobase.dmm")
 	cost = 1
-	allow_duplicates = FALSE //this doesnt work
+	allow_duplicates = FALSE
 	clean_slate = 1
 
 // Areas //
 /area/map_template/hydrobase
-	name = "\improper Hydrobase"
+	name = "\improper Hydroponics Base X207"
 	icon_state = "hydro"
 	icon = 'maps/random_ruins/exoplanet_ruins/hydrobase/hydro.dmi'
 
 /area/map_template/hydrobase/solars
-	name = "\improper Solar Array"
+	name = "\improper X207 Solar Array"
 	icon_state = "solar"
 
 /area/map_template/hydrobase/station/processing
-	name = "\improper Processing Area"
+	name = "\improper X207 Processing Area"
 	icon_state = "processing"
 
 /area/map_template/hydrobase/station/shipaccess
-	name = "\improper Shipping Access"
+	name = "\improper X207 Shipping Access"
 	icon_state = "shipping"
 
 /area/map_template/hydrobase/station/shower
-	name = "\improper Clean Room"
+	name = "\improper X207 Clean Room"
 	icon_state = "shower"
 
 /area/map_template/hydrobase/station/growA
-	name = "\improper Growing Zone A"
+	name = "\improper X207 Growing Zone A"
 	icon_state = "A"
 
 /area/map_template/hydrobase/station/growB
-	name = "\improper Growing Zone B"
+	name = "\improper X207 Growing Zone B"
 	icon_state = "B"
 
 /area/map_template/hydrobase/station/growC
-	name = "\improper Growing Zone C"
+	name = "\improper X207 Growing Zone C"
 	icon_state = "C"
 
 /area/map_template/hydrobase/station/growD
-	name = "\improper Growing Zone D"
+	name = "\improper X207 Growing Zone D"
 	icon_state = "D"
 
-/area/map_template/hydrobase/station/growF
-	name = "\improper Growing Zone F"
+/area/map_template/hydrobase/station/growF //nobody knows what happened to growing zone e
+	name = "\improper X207 Growing Zone F"
 	icon_state = "F"
 
 /area/map_template/hydrobase/station/growX
-	name = "\improper Growing Zone X"
+	name = "\improper X207 Growing Zone X"
 	icon_state = "X"
 
 /area/map_template/hydrobase/station/goatzone
-	name = "\improper Containment Zone"
+	name = "\improper X207 Containment Zone"
 	icon_state = "goatzone"
 
 /area/map_template/hydrobase/station/dockport
-	name = "\improper Access Port"
+	name = "\improper X207 Access Port"
 	icon_state = "airlock"
 
 /area/map_template/hydrobase/station/solarlock
-	name = "\improper External Airlock"
+	name = "\improper X207 External Airlock"
 	icon_state = "airlock"
 
 
@@ -72,7 +72,7 @@
 	req_access = list()
 
 /obj/item/projectile/beam/drone/weak
-	damage = 5 //1/3rd of regular projectile
+	damage = 7
 
 
 // Mobs //
@@ -81,7 +81,7 @@
 	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
 	health = 450
 	maxHealth = 450
-	melee_damage_lower = 20
+	melee_damage_lower = 25
 	melee_damage_upper = 45
 	faction = "farmbots"
 
@@ -96,8 +96,8 @@
 	icon_dead = "farmbot_dead"
 	faction = "farmbots"
 	rapid = 0
-	health = 200
-	maxHealth = 200
+	health = 225
+	maxHealth = 225
 	malfunctioning = 0
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/Initialize()

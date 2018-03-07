@@ -3,7 +3,8 @@
 	id = "planetsite_monoliths"
 	description = "Bunch of monoliths surrounding an artifact."
 	suffixes = list("monoliths/monoliths.dmm")
-	cost = 100000000000000000000000000000000000000000000
+	cost = 1
+	allow_duplicates = FALSE
 
 /obj/structure/monolith
 	name = "monolith"

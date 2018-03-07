@@ -58,15 +58,12 @@
 			log_world("Ruin \"[ruin.name]\" placed at ([T.x], [T.y], [T.z])")
 
 			var/obj/effect/ruin_loader/R = new /obj/effect/ruin_loader(T)
-			if(ruin.loaded && !ruin.allow_duplicates)
-				sanity--
-				continue
 			R.Load(ruins,ruin)
 			if(ruin.cost >= 0)
 				budget -= ruin.cost
 			if(!ruin.allow_duplicates)
 				for(var/m in ruins)
-					var/datum/map_template/ruin/exoplanet/ruin_to_remove = ruins[m]
+					var/datum/map_template/ruin/ruin_to_remove = ruins[m]
 					if(ruin_to_remove.id == ruin.id) //remove all ruins with the same ID, to make sure that ruins with multiple variants work properly
 						ruins -= ruin_to_remove.name
 						last_checked_ruin_index--
