@@ -1457,6 +1457,8 @@
 #include "code\modules\halo\machinery\overmap_projectile.dm"
 #include "code\modules\halo\machinery\overmap_weapon.dm"
 #include "code\modules\halo\machinery\overmap_weapon_ammo.dm"
+#include "code\modules\halo\machinery\buttons\basic_weapon_vendor_unlock.dm"
+#include "code\modules\halo\machinery\buttons\heavy_weapon_vendor_unlock.dm"
 #include "code\modules\halo\machinery\covenant\consoles.dm"
 #include "code\modules\halo\machinery\covenant\lights.dm"
 #include "code\modules\halo\misc\admin_covenant_strike_team.dm"
