@@ -122,4 +122,3 @@
 	access = list(access_unsc_crew,
 		access_unsc_armoury, access_unsc_marine)
 	latejoin_at_spawnpoints = TRUE
-	flags = RESTRICTED
