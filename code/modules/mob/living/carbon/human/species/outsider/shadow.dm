@@ -23,9 +23,7 @@
 	genders = list(NEUTER)
 
 /datum/species/shadow/handle_death(var/mob/living/carbon/human/H)
-	spawn(1)
-		new /obj/effect/decal/cleanable/ash(H.loc)
-		qdel(H)
+	H.dust()
 
 /datum/species/shadow/handle_environment_special(var/mob/living/carbon/human/H)
 	if(H.InStasis() || H.stat == DEAD || H.isSynthetic())
