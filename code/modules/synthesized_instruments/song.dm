@@ -180,7 +180,7 @@
 			if (src.player && src.player.actual_instrument)
 				var/obj/structure/synthesized_instrument/S = src.player.actual_instrument // Fuck, this is horrible.
 				if (S.song_editor)
-					nanomanager.update_uis(S.song_editor)
+					GLOB.nanomanager.update_uis(S.song_editor)
 			for (var/notes in splittext(lowertext(line), ","))
 				var/list/components = splittext(notes, "/")
 				var/delta = components.len==2 && text2num(components[2]) ? text2num(components[2]) : 1
