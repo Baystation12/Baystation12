@@ -259,7 +259,7 @@ datum/preferences
 	//For species that don't care about your silly prefs
 	character.species.handle_limbs_setup(character)
 	if(!is_preview_copy)
-		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS))
+		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_APPENDIX))
 			var/status = organ_data[name]
 			if(!status)
 				continue
@@ -269,6 +269,8 @@ datum/preferences
 					I.mechassist()
 				else if(status == "mechanical")
 					I.robotize()
+				else if(status == "amputated")
+					I.remove_rejuv()
 
 	QDEL_NULL_LIST(character.worn_underwear)
 	character.worn_underwear = list()
