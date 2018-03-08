@@ -114,9 +114,12 @@
 	department_flag = MAR
 	total_positions = 4
 	spawn_positions = 4
+	ideal_character_age = 40
+	minimal_player_age = 21
 	selection_color = "#667700"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odst
 	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist")
 	access = list(access_unsc_crew,
 		access_unsc_armoury, access_unsc_marine)
 	latejoin_at_spawnpoints = TRUE
+	flags = RESTRICTED
