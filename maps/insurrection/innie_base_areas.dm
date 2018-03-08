@@ -99,3 +99,7 @@
 /area/asteroid_base/south_airlock_1
 	name = "\improper South Airlock Deck 1"
 	icon_state = "eva"
+
+//MAC//
+/area/asteroid_base/mac_gun
+	name = "\improper MAC Gun"

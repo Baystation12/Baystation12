@@ -87,6 +87,7 @@
 		if(new_stored > capacitor[2])
 			capacitor[1] = capacitor[2]
 			recharging = 0
+			return
 		else
 			capacitor[1] = new_stored
 		recharging = world.time + 1 SECOND
