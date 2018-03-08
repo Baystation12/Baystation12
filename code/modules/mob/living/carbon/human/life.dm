@@ -371,7 +371,7 @@
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 		var/burn_dam = 0
-		if(bodytemperature < getSpeciesOrSynthTemp(HEAT_LEVEL_1))
+		if(bodytemperature < getSpeciesOrSynthTemp(HEAT_LEVEL_2))
 			burn_dam = HEAT_DAMAGE_LEVEL_1
 		else if(bodytemperature < getSpeciesOrSynthTemp(HEAT_LEVEL_3))
 			burn_dam = HEAT_DAMAGE_LEVEL_2
