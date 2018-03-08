@@ -153,7 +153,7 @@
 "cW" = (/obj/structure/bed/chair,/obj/structure/cable/blue{icon_state = "4-8"},/obj/effect/landmark/start{name = "Bridge Officer"},/turf/simulated/floor/tiled,/area/unscfrigate/bridge)
 "cX" = (/obj/structure/bed/chair,/obj/structure/cable/blue{icon_state = "4-8"},/obj/effect/landmark/start{name = "Forward Strike Controller"},/turf/simulated/floor/tiled,/area/unscfrigate/bridge)
 "cY" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/bed/chair,/obj/structure/cable/blue{icon_state = "4-8"},/obj/effect/landmark/start{name = "Operations Specialist"},/turf/simulated/floor/tiled,/area/unscfrigate/bridge)
-"cZ" = (/obj/machinery/door/airlock/halo{name = "Bridge"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/unscfrigate/bridge)
+"cZ" = (/obj/machinery/door/airlock/halo{name = "Bridge"; req_access = list(300)},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/unscfrigate/bridge)
 "da" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 6},/turf/simulated/floor/plating,/area/unscfrigate/bridge)
 "db" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 8; frequency = 1379; id_tag = "solar_tool_pump"},/turf/simulated/floor/plating,/area/unscfrigate/bridge)
 "dc" = (/obj/machinery/access_button{command = "cycle_interior"; frequency = 1379; master_tag = "solar_tool_airlock"; name = "interior access button"; pixel_x = -25; pixel_y = -25; req_access = list(11,13)},/turf/simulated/floor/reinforced/airless,/area/space)

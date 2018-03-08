@@ -26,6 +26,7 @@
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc
 	shoes = /obj/item/clothing/shoes/black
+	pda_slot = null
 
 	id_type = /obj/item/weapon/card/id
 
