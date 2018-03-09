@@ -27,6 +27,10 @@
 
 	return "[src] will now heal more."
 
+/spell/targeted/heal_target/apply_spell_damage(mob/living/target)
+	..()
+	new /obj/effect/temporary(get_turf(target),5, 'icons/effects/effects.dmi', "green_sparkles")
+
 /spell/targeted/heal_target/major
 	name = "Cure Major Wounds"
 	desc = "A spell used to fix others that cannot be fixed with regular medicine."
