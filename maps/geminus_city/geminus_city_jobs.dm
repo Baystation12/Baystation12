@@ -22,6 +22,7 @@
 
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_janitor, access_maint_tunnels, access_research)
+	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Construction Worker","Surgeon","Store Owner","Nightclub Owner","Secretary","Cargo Worker","Bartender","Cook","Chef","Farmer")
 
 /datum/job/innie_sympathiser
 	title = "Colonist - Insurrectionist Sympathiser"
@@ -83,6 +84,7 @@
 			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_qm, access_hydroponics, access_lawyer,
 			            access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
+	alt_titles = list("Governer")
 
 /datum/job/marine
 	title = "Marine"
@@ -139,6 +141,7 @@
 	access = list(access_security, access_brig, access_maint_tunnels,
 						access_external_airlocks, access_emergency_storage,
 			            access_eva, access_sec_doors)
+	alt_titles = list("GCPD SWAT Officer","GCPD Cadet","GCPD Detective")
 
 /datum/job/cop
 	title = "Chief of Police"
