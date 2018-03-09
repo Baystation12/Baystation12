@@ -280,7 +280,7 @@
 			return
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if(t)
-			src.name = text("Crematorium- '[]'", t)
+			src.SetName(text("Crematorium- '[]'", t))
 		else
 			src.SetName("Crematorium")
 	src.add_fingerprint(user)
