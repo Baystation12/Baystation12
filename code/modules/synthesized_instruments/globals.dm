@@ -1,4 +1,4 @@
-var/global/datum/musical_config/musical_config = new
+GLOBAL_DATUM_INIT(musical_config, /datum/musical_config, new)
 
 /datum/musical_config
 	var/highest_octave = 9
@@ -202,9 +202,6 @@ Bit flags that modify the behavior of above properties
 	var/free_channels_populated = 0
 	var/list/nn2no = list(0,2,4,5,7,9,11) // Maps note num onto note offset
 
-	var/debug_password_hash = "8b8f3ec1d8feb4a093848fec88ecdf96" // Change to whatever MD5 hash you like.
-	var/debug_active = 0 // Disabled for now
-	var/debug_max_reports = 10000
 
 
 /datum/musical_config/proc/n2t(key) // Used instead of num2text for faster access in sample_map

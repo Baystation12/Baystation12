@@ -6,7 +6,7 @@
 	var/autorepeat = 0
 	var/current_line = 0
 
-	var/obj/sound_player/player // Not a physical thing
+	var/datum/sound_player/player // Not a physical thing
 	var/datum/instrument/instrument_data
 
 	var/list/free_channels = list()
@@ -19,15 +19,12 @@
 	var/octave_range_min
 	var/octave_range_max
 
-	var/datum/musical_debug/debug_panel
 
-
-/datum/synthesized_song/New(obj/sound_player/playing_object, datum/instrument/instrument)
+/datum/synthesized_song/New(datum/sound_player/playing_object, datum/instrument/instrument)
 	src.player = playing_object
 	src.instrument_data = instrument
-	src.octave_range_min = global.musical_config.lowest_octave
-	src.octave_range_max = global.musical_config.highest_octave
-	src.debug_panel = new (src)
+	src.octave_range_min = GLOB.musical_config.lowest_octave
+	src.octave_range_max = GLOB.musical_config.highest_octave
 
 	instrument.create_full_sample_deviation_map()
 	src.occupy_channels()
@@ -39,14 +36,14 @@
 
 
 /datum/synthesized_song/proc/occupy_channels()
-	if (!global.musical_config.free_channels_populated)
+	if (!GLOB.musical_config.free_channels_populated)
 		for (var/i=1 to 1024) // Currently only 1024 channels are allowed
-			global.musical_config.free_channels += i
-		global.musical_config.free_channels_populated = 1 // Only once
+			GLOB.musical_config.free_channels += i
+		GLOB.musical_config.free_channels_populated = 1 // Only once
 
-	for (var/i=1 to global.musical_config.channels_per_instrument)
-		if (global.musical_config.free_channels.len)
-			src.free_channel(pick_n_take(global.musical_config.free_channels))
+	for (var/i=1 to GLOB.musical_config.channels_per_instrument)
+		if (GLOB.musical_config.free_channels.len)
+			src.free_channel(pick_n_take(GLOB.musical_config.free_channels))
 
 
 /datum/synthesized_song/proc/take_any_channel()
@@ -59,23 +56,23 @@
 
 
 /datum/synthesized_song/proc/return_all_channels()
-	global.musical_config.free_channels |= src.free_channels
+	GLOB.musical_config.free_channels |= src.free_channels
 	src.free_channels.Cut()
 
 
 /datum/synthesized_song/proc/play_synthesized_note(note, acc, oct, duration, where, which_one)
-	if (oct < global.musical_config.lowest_octave || oct > global.musical_config.highest_octave)	return
+	if (oct < GLOB.musical_config.lowest_octave || oct > GLOB.musical_config.highest_octave)	return
 	if (oct < src.octave_range_min || oct > src.octave_range_max)	return
 
 	var/delta1 = acc == "b" ? -1 : acc == "#" ? 1 : acc == "s" ? 1 : acc == "n" ? 0 : 0
 	var/delta2 = 12 * oct
 
-	var/note_num = delta1+delta2+global.musical_config.nn2no[note]
+	var/note_num = delta1+delta2+GLOB.musical_config.nn2no[note]
 	if (note_num < 0 || note_num > 127)
-		src.debug_panel.append_message(text("Play synthesized note failed because of 0..127 condition, [] [] []", note, acc, oct))
+		CRASH("play_synthesized note failed because of 0..127 condition, [note], [acc], [oct]")
 		return
 
-	var/datum/sample_pair/pair = src.instrument_data.sample_map[global.musical_config.n2t(note_num)]
+	var/datum/sample_pair/pair = src.instrument_data.sample_map[GLOB.musical_config.n2t(note_num)]
 	#define Q 0.083 // 1/12
 	var/freq = 2**(Q*pair.deviation)
 	var/chan = src.take_any_channel()
@@ -83,7 +80,6 @@
 		if (!src.player.channel_overload())
 			src.playing = 0
 			src.autorepeat = 0
-			src.debug_panel.append_message("All channels were exhausted")
 			return
 	#undef Q
 	var/list/mob/to_play_for = src.player.who_to_play_for()
@@ -104,32 +100,10 @@
 	sound_copy.channel = channel
 	player.apply_modifications_for(who, sound_copy, which, where, which_one)
 
-	who << sound_copy
+	sound_to(who, sound_copy)
 	#if DM_VERSION < 511
 	sound_copy.frequency = 1
 	#endif
-	/*
-	spawn(duration)
-		var/delta_volume = player.volume / sustain_timer
-		var/stored_soft_coeff = soft_coeff
-		var/stored_linear_decay = linear_decay
-		while (playing)
-			sleep(1)
-			if (stored_linear_decay)
-				sound_copy.volume = max(sound_copy.volume - delta_volume, 0)
-			else
-				sound_copy.volume = max(round(sound_copy.volume / stored_soft_coeff), 0)
-			if (sound_copy.volume > 0)
-				sound_copy.status |= SOUND_UPDATE
-				who << sound_copy
-			else
-				break
-		free_channel(sound_copy.channel)
-		who << sound(channel=sound_copy.channel, wait=0)
-
-		// Made obsolete by new manual event scheduler
-		// Also lagged as shit
-	*/
 	var/delta_volume = player.volume / src.sustain_timer
 	var/current_volume = max(round(sound_copy.volume), 0)
 	var/tick = duration
@@ -137,12 +111,9 @@
 		var/new_volume = current_volume
 		tick += world.tick_lag
 		if (delta_volume <= 0)
-			src.debug_panel.append_message("Delta Volume somehow was non-positive: [delta_volume]")
-			break
+			CRASH("Delta Volume somehow was non-positive: [delta_volume]")
 		if (src.soft_coeff <= 1)
-			src.debug_panel.append_message("Soft Coeff somehow was <=1: [src.soft_coeff]")
-			break
-
+			CRASH("Soft Coeff somehow was <=1: [src.soft_coeff]")
 		if (src.linear_decay)
 			new_volume = new_volume - delta_volume
 		else

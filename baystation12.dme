@@ -2494,7 +2494,6 @@
 #include "code\modules\surgery\slimes.dm"
 #include "code\modules\surgery\surgery.dm"
 #include "code\modules\surgery\~defines.dm"
-#include "code\modules\synthesized_instruments\debug.dm"
 #include "code\modules\synthesized_instruments\event_manager.dm"
 #include "code\modules\synthesized_instruments\globals.dm"
 #include "code\modules\synthesized_instruments\instruments.dm"
