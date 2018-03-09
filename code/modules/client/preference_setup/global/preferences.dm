@@ -177,10 +177,6 @@ var/list/_client_preferences_by_type
 	key = "BROWSER_STYLED"
 	options = list(GLOB.PREF_FANCY, GLOB.PREF_PLAIN)
 
-/datum/client_preference/autohiss
-	description = "Autohiss"
-	key = "AUTOHISS"
-	options = list(GLOB.PREF_OFF, GLOB.PREF_BASIC, GLOB.PREF_FULL)
 
 /datum/client_preference/hardsuit_activation
 	description = "Hardsuit Module Activation Key"

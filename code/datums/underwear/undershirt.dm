@@ -60,13 +60,6 @@
 	icon_state = "shirt_long_s"
 	has_color = TRUE
 
-/datum/category_item/underwear/undershirt/shirt_expedition
-	name = "Shirt, Expeditionary Corps"
-	icon_state = "expedition_s"
-
-/datum/category_item/underwear/undershirt/shirt_heart
-	name = "Shirt, heart"
-	icon_state = "lover_s"
 
 /datum/category_item/underwear/undershirt/shirt_love_nt
 	name = "Shirt, I<3NT"
@@ -133,55 +126,6 @@
 	name = "Undershirt, Female"
 	icon_state = "undershirt_female"
 	has_color = TRUE
-
-/datum/category_item/underwear/undershirt/tanktop_female
-	name = "Tanktop, Female"
-	icon_state = "tanktop_female"
-	has_color = TRUE
-
-/datum/category_item/underwear/undershirt/shortsleeve_female
-	name = "Shortsleeve Shirt, Female"
-	icon_state = "shortsleeve_female"
-	has_color = TRUE
-
-/datum/category_item/underwear/undershirt/shirt_long_female
-	name = "Button Down Shirt, Female"
-	icon_state = "shirt_long_female_s"
-	has_color = TRUE
-
-/datum/category_item/underwear/undershirt/undershirt_long_female
-	name = "Longsleeve Shirt, Female"
-	icon_state = "undershirt_long_female"
-	has_color = TRUE
-
-/datum/category_item/underwear/undershirt/turtleneck
-	name = "Turtleneck Sweater"
-	icon_state = "turtleneck_s"
-	has_color = TRUE
-
-/datum/category_item/underwear/undershirt/tanktop_alt_female
-	name = "Tanktop alt, Female"
-	underwear_name = "tanktop"
-	icon_state = "tanktop_alt_female"
-	has_color = TRUE
-
-/datum/category_item/underwear/undershirt/polo_female
-	name = "Polo, Female"
-	icon_state = "polo_female"
-	has_color = TRUE
-
-/datum/category_item/underwear/undershirt/tank_fleet_female
-	name = "Tank top, Fleet, Female"
-	underwear_name = "tanktop"
-	icon_state = "tank_fleet_female_s"
-
-/datum/category_item/underwear/undershirt/marine_female
-	name = "Shirt, Marine Corps, Female"
-	icon_state = "marine_female_s"
-
-/datum/category_item/underwear/undershirt/expedition_female
-	name = "Shirt, Expeditionary Corps, Female"
-	icon_state = "expedition_female_s"
 
 /datum/category_item/underwear/undershirt/polo_nt
 	name = "Polo, NanoTrasen"

@@ -61,7 +61,7 @@
 
 /client/verb/staffwho()
 	set category = "Admin"
-	set name = "Staffwho"
+	set name = "Adminwho"
 
 	var/list/msg = list()
 	var/active_staff = 0
