@@ -11,7 +11,7 @@ Virtual instruments should follow this structure: /datum/instrument/category_nam
 
 Refer to any file in ./instrument_data to see how it's done.
 ---
-Sound player inherits from /obj/sound_player
+Sound player inherits from /datum/sound_player
 ---
 For synthesized song only use /datum/synthesized_song
 ---

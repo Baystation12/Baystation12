@@ -1,19 +1,19 @@
 /obj/structure/synthesized_instrument
-	var/obj/sound_player/player
+	var/datum/sound_player/player
 	var/datum/nano_module/song_editor/song_editor
 	var/datum/nano_module/usage_info/usage_info
 	var/maximum_lines
 	var/maximum_line_length
 
 
-/obj/structure/synthesized_instrument/New()
+/obj/structure/synthesized_instrument/Initialize()
 	..()
-	src.maximum_lines = global.musical_config.max_lines
-	src.maximum_line_length = global.musical_config.max_line_length
+	src.maximum_lines = GLOB.musical_config.max_lines
+	src.maximum_line_length = GLOB.musical_config.max_line_length
 
 
 /obj/structure/synthesized_instrument/Destroy()
-	qdel(player)
+	qdel(src.player)
 	..()
 
 
@@ -40,7 +40,7 @@
 	var/target = href_list["target"]
 	var/value = text2num(href_list["value"])
 	if (href_list["value"] && !isnum(value))
-		src.player.song.debug_panel.append_message("Non-numeric value was supplied")
+		to_chat(usr, "Non-numeric value was given")
 		return 0
 
 	src.add_fingerprint(usr)
@@ -77,12 +77,12 @@
 				else
 					src.player.song.tempo = src.player.song.sanitize_tempo(5) // default 120 BPM
 				if(src.player.song.lines.len > maximum_lines)
-					usr << "Too many lines!"
+					to_chat(usr,"Too many lines!")
 					src.player.song.lines.Cut(maximum_lines+1)
 				var/linenum = 1
 				for(var/l in src.player.song.lines)
 					if(length(l) > maximum_line_length)
-						usr << "Line [linenum] too long!"
+						to_chat(usr, "Line [linenum] too long!")
 						src.player.song.lines.Remove(l)
 					else
 						linenum++
@@ -95,17 +95,6 @@
 			if (!src.usage_info)
 				src.usage_info = new (src, src.player)
 			src.usage_info.ui_interact(usr)
-
-		if ("debug")
-			if (src.player.song.debug_panel)
-				var/password = input(usr, "Enter password to access debug") as text
-				var/hash = md5(password)
-				if (global.musical_config.debug_password_hash == hash)
-					src.player.song.debug_panel.access_panel(usr)
-				else
-					usr << "Wrong password"
-			else
-				usr << "Debug flag is set to 0."
 		else
 			return 0
 
@@ -114,21 +103,21 @@
 
 
 /obj/item/device/synthesized_instrument
-	var/obj/sound_player/player
+	var/datum/sound_player/player
 	var/datum/nano_module/song_editor/song_editor
 	var/datum/nano_module/usage_info/usage_info
 	var/maximum_lines
 	var/maximum_line_length
 
 
-/obj/item/device/synthesized_instrument/New()
+/obj/item/device/synthesized_instrument/Initialize()
 	..()
-	src.maximum_lines = global.musical_config.max_lines
-	src.maximum_line_length = global.musical_config.max_line_length
+	src.maximum_lines = GLOB.musical_config.max_lines
+	src.maximum_line_length = GLOB.musical_config.max_line_length
 
 
 /obj/item/device/synthesized_instrument/Destroy()
-	qdel(player)
+	qdel(src.player)
 	..()
 
 
@@ -154,7 +143,7 @@
 	var/target = href_list["target"]
 	var/value = text2num(href_list["value"])
 	if (href_list["value"] && !isnum(value))
-		src.player.song.debug_panel.append_message("Non-numeric value was supplied")
+		to_chat(usr, "Non-numeric value was given")
 		return 0
 
 	src.add_fingerprint(usr)
@@ -191,12 +180,12 @@
 				else
 					src.player.song.tempo = src.player.song.sanitize_tempo(5) // default 120 BPM
 				if(src.player.song.lines.len > maximum_lines)
-					usr << "Too many lines!"
+					to_chat(usr, "Too many lines!")
 					src.player.song.lines.Cut(maximum_lines+1)
 				var/linenum = 1
 				for(var/l in src.player.song.lines)
 					if(length(l) > maximum_line_length)
-						usr << "Line [linenum] too long!"
+						to_chat(usr, "Line [linenum] too long!")
 						src.player.song.lines.Remove(l)
 					else
 						linenum++
@@ -209,17 +198,6 @@
 			if (!src.usage_info)
 				src.usage_info = new (src, src.player)
 			src.usage_info.ui_interact(usr)
-
-		if ("debug")
-			if (src.player.song.debug_panel)
-				var/password = input(usr, "Enter password to access debug") as text
-				var/hash = md5(password)
-				if (global.musical_config.debug_password_hash == hash)
-					src.player.song.debug_panel.access_panel(usr)
-				else
-					usr << "Wrong password"
-			else
-				usr << "Debug flag is set to 0."
 		else
 			return 0
 
