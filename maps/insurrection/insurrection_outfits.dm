@@ -37,5 +37,6 @@
 
 	l_hand = /obj/item/turret_deploy_kit/chaingun
 	l_pocket = /obj/item/squad_manager
+	r_pocket = /obj/item/device/spy_monitor
 
 	flags = 0
