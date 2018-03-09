@@ -123,8 +123,8 @@
 	var/protected = 0
 
 	//anomaly suits give best protection, but excavation suits are almost as good
-	if(istype(H.back,/obj/item/weapon/rig/hazmat))
-		var/obj/item/weapon/rig/hazmat/rig = H.back
+	if(istype(H.back,/obj/item/weapon/rig/hazmat) || istype(H.back, /obj/item/weapon/rig/hazard))
+		var/obj/item/weapon/rig/rig = H.back
 		if(rig.suit_is_deployed() && !rig.offline)
 			protected += 1
 
