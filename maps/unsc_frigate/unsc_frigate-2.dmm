@@ -907,7 +907,7 @@
 "rw" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/unscfrigate/flight/vehicle_shop)
 "rx" = (/obj/effect/wingrille_spawn/reinforced,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/unscfrigate/flight/vehicle_shop)
 "ry" = (/obj/effect/landmark/start{name = "Crew Chief (flight)"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/unscfrigate/flight/vehicle_shop)
-"rz" = (/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled,/area/unscfrigate/flight/vehicle_shop)
+"rz" = (/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled,/area/unscfrigate/flight/vehicle_shop)
 "rA" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/unscfrigate/flight/vehicle_shop)
 "rB" = (/obj/machinery/vending/tool,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/tiled,/area/unscfrigate/aft_engineering)
 "rC" = (/obj/machinery/vending/engivend,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tiled,/area/unscfrigate/aft_engineering)
