@@ -136,7 +136,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/liaison
-	pda_type = /obj/item/device/pda/heads
+	pda_type = /obj/item/device/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
 
 /decl/hierarchy/outfit/job/torch/crew/representative
@@ -146,7 +146,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/torch/crew/representative
-	pda_type = /obj/item/device/pda/heads
+	pda_type = /obj/item/device/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/solgov/representative = 1)
 
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
