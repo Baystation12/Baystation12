@@ -159,6 +159,18 @@
 	min_age = 19
 	max_age = 90
 
+	burn_mod = 0.9
+	oxy_mod = 1.3
+	flash_mod = 1.1
+	toxins_mod = 0.8
+	siemens_coefficient = 1.3
+	warning_low_pressure = WARNING_LOW_PRESSURE * 1.4
+	hazard_low_pressure = HAZARD_LOW_PRESSURE * 2
+	warning_high_pressure = WARNING_HIGH_PRESSURE / 0.8125
+	hazard_high_pressure = HAZARD_HIGH_PRESSURE / 0.84615
+
+	body_temperature = null // cold-blooded, implemented the same way nabbers do it
+
 	darksight = 4
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
