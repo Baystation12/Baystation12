@@ -73,7 +73,7 @@
 
 	// Can't fall if nothing pulls you down
 	var/area/area = get_area(src)
-	if (!area.has_gravity())
+	if (!area || !area.has_gravity())
 		return
 
 	var/limb_pain
