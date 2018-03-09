@@ -953,6 +953,9 @@ area/rnd/test_area
 
 // Telecommunications Satellite
 
+/area/tcommsat
+	requires_power = 0
+
 /area/tcommsat/entrance
 	name = "\improper Telecoms Teleporter"
 	icon_state = "tcomsatentrance"
