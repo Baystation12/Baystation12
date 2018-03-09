@@ -566,9 +566,10 @@
 
 /obj/item/clothing/under/grayson
 	name = "\improper Grayson overalls"
-	desc = "A set of overalls belonging to Grayson Manufactories, a manufacturing and mining company."
+	desc = "A set of overalls belonging to Grayson Manufactories, a mining and mineral processing company."
 	icon_state = "grayson"
 	worn_state = "grayson"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/wardt
 	name = "\improper Ward-Takahashi jumpsuit"
@@ -609,7 +610,7 @@
 
 /obj/item/clothing/under/focal
 	name = "\improper Focal Point jumpsuit"
-	desc = "A jumpsuit belonging to Focal Point Energistics, an engineering corporation."
+	desc = "A jumpsuit belonging to Focal Point Energistics, an electrics corporation."
 	icon_state = "focal"
 	worn_state = "focal"
 
@@ -618,6 +619,7 @@
 	desc = "A jumpsuit belonging to Hephaestus Industries, a megacorp best known for its arms production."
 	icon_state = "heph"
 	worn_state = "heph"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/punpun
 	name = "fancy uniform"
