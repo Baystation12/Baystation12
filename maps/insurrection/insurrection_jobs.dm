@@ -7,7 +7,7 @@
 	supervisors = " the Insurrectionist Leader"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
@@ -24,7 +24,7 @@
 	supervisors = " the Insurrection"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
