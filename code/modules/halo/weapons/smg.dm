@@ -6,11 +6,11 @@
 /obj/item/weapon/gun/projectile/m7_smg
 	name = "M7 submachine gun"
 	desc = "The M7/Caseless Submachine Gun is a fully automatic close quarters infantry and special operations weapon. Takes 5mm calibre magazines."
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "m7smg"
 	item_state = "m7"
 	caliber = "5mm"
-	slot_flags = SLOT_BACK
+	slot_flags = SLOT_BACK|SLOT_BELT
 	fire_sound = 'code/modules/halo/sounds/SMG_Mini_Burst_Sound_Effect.ogg'
 	//fire_sound_burst = 'code/modules/halo/sounds/SMG_Short_Burst_Sound_Effect.ogg'
 	reload_sound = 'code/modules/halo/sounds/SMG_Reload_Sound_Effect.ogg'
@@ -20,10 +20,11 @@
 	burst = 3
 	burst_delay = 2
 	accuracy = -1
-
+	allowed_magazines = list(/obj/item/ammo_magazine/m5, /obj/item/ammo_magazine/m5/rubber)
+	w_class = ITEM_SIZE_NORMAL
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
 	firemodes = list(
@@ -39,5 +40,8 @@
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced
 	name = "M7S submachine gun"
-	desc = "The M7S is a special operations variant of with inbuilt suppressor and host of other . Takes 5mm calibre magazines."
+	desc = "The M7S is a special operations variant of the M7 submachine gun with inbuilt suppressor and host of other attachments. Takes 5mm calibre magazines."
 	silenced = 1
+
+/obj/item/weapon/gun/projectile/m7_smg/rubber
+	magazine_type = /obj/item/ammo_magazine/m5/rubber

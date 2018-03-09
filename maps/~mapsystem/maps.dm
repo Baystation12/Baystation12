@@ -93,6 +93,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
+	var/use_global_covenant_comms = 1
+
 	var/num_exoplanets = 0
 
 /datum/map/New()

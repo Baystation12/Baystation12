@@ -44,7 +44,9 @@
 		if(internal)
 			if (internals)
 				internals.icon_state = "internal1"
-			return internal.remove_air_volume(volume_needed)
+			var/datum/gas_mixture/removed_gas = internal.remove_air_volume(volume_needed)
+			wear_mask.post_internals_breathe(removed_gas,internal)
+			return removed_gas
 		else
 			if (internals)
 				internals.icon_state = "internal0"

@@ -6,7 +6,7 @@
 /obj/item/weapon/gun/projectile/srs99_sniper
 	name = "SRS99 sniper rifle"
 	desc = "Special Applications Rifle, system 99 Anti-Matériel. Deadly at extreme range.  Takes 14.5mm calibre magazines."
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "SRS99"
 	item_state = "SRS99"
 	load_method = MAGAZINE
@@ -18,10 +18,10 @@
 	one_hand_penalty = -1
 	scoped_accuracy = 3
 	screen_shake = 0
-
+	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
 /obj/item/weapon/gun/projectile/srs99_sniper/verb/scope()
@@ -37,14 +37,12 @@
 	else
 		icon_state = "SRS99_unloaded"
 
-
-
 //M392 designated marksman rifle
 //todo: should this be a sniper?
 /obj/item/weapon/gun/projectile/m392_dmr
 	name = "M392 Designated Marksman Rifle"
-	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance.  Takes 7.62mm calibre magazines."
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance. Has an inbuilt underbarrel flashlight.  Takes 7.62mm calibre magazines."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M395"
 	item_state = "m392"
 	load_method = MAGAZINE
@@ -55,13 +53,15 @@
 	fire_sound = 'code/modules/halo/sounds/DMR_ShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
-
+	w_class = ITEM_SIZE_LARGE
 	accuracy = 1
 	scoped_accuracy = 2
+	var/on = 0
+	var/activation_sound = 'sound/effects/flashlight.ogg'
 
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
@@ -76,3 +76,13 @@
 		icon_state = "M395"
 	else
 		icon_state = "M395_unloaded"
+
+/obj/item/weapon/gun/projectile/m392_dmr/verb/toggle_light()
+	set category = "Object"
+	set name = "Toggle Gun Light"
+	on = !on
+	if(on && activation_sound)
+		playsound(src.loc, activation_sound, 75, 1)
+		set_light(4)
+	else
+		set_light(0)

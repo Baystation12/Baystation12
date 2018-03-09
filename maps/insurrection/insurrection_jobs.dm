@@ -7,7 +7,7 @@
 	supervisors = " the Insurrectionist Leader"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
@@ -24,7 +24,7 @@
 	supervisors = " the Insurrection"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
@@ -49,11 +49,13 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_Assault
 
 	latejoin_at_spawnpoints = TRUE
+	access = list(access_unsc_crew,
+		access_unsc_armoury, access_unsc_marine)
 
 /datum/job/UNSC_Squad_Lead
 	title = "ODST Assault Squad Lead"
 	head_position = 1
-	total_positions = 5
+	total_positions = 2
 	selection_color = "#000000"
 
 	supervisors = "the ODST Assault Team Lead"
@@ -67,11 +69,13 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_Assault
 
 	latejoin_at_spawnpoints = TRUE
+	access = list(access_unsc_crew,
+		access_unsc_armoury, access_unsc_marine)
 
 /datum/job/UNSC_Team_Lead
 	title = "ODST Assault Team Lead"
 	head_position = 1
-	total_positions = 1
+	total_positions = 4
 	selection_color = "#000000"
 
 	create_record = 0
@@ -83,3 +87,5 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_Assault
 
 	latejoin_at_spawnpoints = TRUE
+	access = list(access_unsc_crew,
+		access_unsc_armoury, access_unsc_marine)

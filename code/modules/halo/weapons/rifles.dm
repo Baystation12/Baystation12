@@ -5,8 +5,8 @@
 
 /obj/item/weapon/gun/projectile/ma5b_ar
 	name = "\improper MA5B Assault Rifle"
-	desc = "Standard-issue service rifle of the UNSC Marines. Takes 7.62mm calibre magazines."
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	desc = "Standard-issue service rifle of the UNSC Marines. Has an inbuilt underbarrel flashlight. Takes 7.62mm calibre magazines."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "MA5B"
 	item_state = "ma5b"
 	caliber = "a762"
@@ -20,10 +20,13 @@
 	burst = 3
 	burst_delay = 2
 	one_hand_penalty = -1
+	var/on = 0
+	var/activation_sound = 'sound/effects/flashlight.ogg'
+	w_class = ITEM_SIZE_LARGE
 
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
 	firemodes = list(
@@ -37,6 +40,16 @@
 	else
 		icon_state = "MA5B_unloaded"
 
+/obj/item/weapon/gun/projectile/ma5b_ar/New()
+	..()
+	add_flashlight()
+
+/obj/item/weapon/gun/projectile/ma5b_ar/proc/add_flashlight()
+	verbs += /obj/item/weapon/gun/projectile/ma5b_ar/proc/toggle_light
+
+/obj/item/weapon/gun/projectile/ma5b_ar/MA37/add_flashlight()
+	return
+
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37
 	name = "\improper MA37 ICWS"
 	desc = "Also formally known as the MA5."
@@ -49,12 +62,23 @@
 	else
 		icon_state = "MA37_unloaded"
 
+/obj/item/weapon/gun/projectile/ma5b_ar/proc/toggle_light()
+	set category = "Object"
+	set name = "Toggle Gun Light"
+	on = !on
+	if(on && activation_sound)
+		playsound(src.loc, activation_sound, 75, 1)
+		set_light(4)
+	else
+		set_light(0)
+
+
 //BR85 battle
 
 /obj/item/weapon/gun/projectile/br85
 	name = "\improper BR85 Battle Rifle"
 	desc = "When nothing else gets the job done, the BR85 Battle Rifle will do. Takes 9.5mm calibre magazines."
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "Br85"
 	item_state = "br85"
 	caliber = "9.5mm"
@@ -67,11 +91,18 @@
 	burst = 3
 	burst_delay = 1
 	accuracy = 1
-
+	w_class = ITEM_SIZE_LARGE
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+
+/obj/item/weapon/gun/projectile/br85/verb/scope()
+	set category = "Object"
+	set name = "Use Scope (1.15x)"
+	set popup_menu = 1
+
+	toggle_scope(usr, 1.15)
 
 /obj/item/weapon/gun/projectile/br85/update_icon()
 	if(ammo_magazine)

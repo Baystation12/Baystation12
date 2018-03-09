@@ -8,7 +8,7 @@
 
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
-	req_access = list(access_robotics)
+	req_access = list()
 	locked = 0
 	mecha = null//This does not appear to be used outside of reference in mecha.dm.
 

@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/cargotech
 	name = "cargo technician's locker"
-	req_access = list(access_cargo)
+	req_access = list()
 	icon_state = "securecargo1"
 	icon_closed = "securecargo"
 	icon_locked = "securecargo1"
@@ -10,8 +10,6 @@
 
 /obj/structure/closet/secure_closet/cargotech/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75,  /obj/item/weapon/storage/backpack/satchel_norm = 25)),
-		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag, 25),
 		/obj/item/clothing/under/rank/cargotech,
 		/obj/item/clothing/shoes/black,
 		/obj/item/device/radio/headset/headset_cargo,
@@ -21,7 +19,7 @@
 
 /obj/structure/closet/secure_closet/quartermaster
 	name = "quartermaster's locker"
-	req_access = list(access_qm)
+	req_access = list()
 	icon_state = "secureqm1"
 	icon_closed = "secureqm"
 	icon_locked = "secureqm1"
@@ -31,8 +29,6 @@
 
 /obj/structure/closet/secure_closet/quartermaster/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75,  /obj/item/weapon/storage/backpack/satchel_norm = 25)),
-		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag, 25),
 		/obj/item/clothing/under/rank/cargotech,
 		/obj/item/clothing/shoes/brown,
 		/obj/item/device/radio/headset/headset_cargo,

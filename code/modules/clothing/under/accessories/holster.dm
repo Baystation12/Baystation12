@@ -73,43 +73,7 @@
 	else
 		to_chat(user, "It is empty.")
 
-/obj/item/clothing/accessory/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
-	..()
-	has_suit.verbs += /obj/item/clothing/accessory/holster/verb/holster_verb
-
-/obj/item/clothing/accessory/holster/on_removed(mob/user as mob)
-	if(has_suit)
-		has_suit.verbs -= /obj/item/clothing/accessory/holster/verb/holster_verb
-	..()
-
-//For the holster hotkey
-/obj/item/clothing/accessory/holster/verb/holster_verb()
-	set name = "Holster"
-	set category = "Object"
-	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-
-	//can't we just use src here?
-	var/obj/item/clothing/accessory/holster/H = null
-	if (istype(src, /obj/item/clothing/accessory/holster))
-		H = src
-	else if (istype(src, /obj/item/clothing/under))
-		var/obj/item/clothing/under/S = src
-		if (S.accessories.len)
-			H = locate() in S.accessories
-
-	if (!H)
-		to_chat(usr, "<span class='warning'>Something is very wrong.</span>")
-
-	if(!H.holstered)
-		var/obj/item/W = usr.get_active_hand()
-		if(!istype(W, /obj/item))
-			to_chat(usr, "<span class='warning'>You need your gun equiped to holster it.</span>")
-			return
-		H.holster(W, usr)
-	else
-		H.unholster(usr)
+//Holster hokey handling moved to human_helpers.dm, verb/holster_verb.//
 
 /obj/item/clothing/accessory/holster/armpit
 	name = "armpit holster"

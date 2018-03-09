@@ -113,8 +113,8 @@
 	icon_state = "beret_corporate_officer"
 
 /obj/item/clothing/head/beret/sec/corporate/hos
-	name = "corporate security commander beret"
-	desc = "A corporate black beret with a commander's rank emblem. For officers that are more inclined towards style than safety."
+	name = "security beret"
+	desc = "A black beret with a GCPD emblem. For officers that are more inclined towards style than safety."
 	icon_state = "beret_corporate_hos"
 
 /obj/item/clothing/head/beret/sec/corporate/warden

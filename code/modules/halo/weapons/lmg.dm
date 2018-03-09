@@ -6,7 +6,7 @@
 /obj/item/weapon/gun/projectile/m739_lmg
 	name = "\improper M739 Light Machine Gun"
 	desc = "Standard-issue squad automatic weapon, designed for use in heavy engagements. Takes 7.62mm calibre ordinary and box type magazines."
-	icon = 'code/modules/halo/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M739"
 	item_state = "SAW"
 	caliber = "a762"
@@ -19,10 +19,10 @@
 	one_hand_penalty = -1
 	burst = 5
 	burst_delay = 3
-
+	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/Weapon_Inhands_right.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
 	firemodes = list(

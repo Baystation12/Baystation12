@@ -1,5 +1,5 @@
 /datum/map/teamslayer_asteroid
-	allowed_spawns = list("Red Spawn","Blue Spawn","Neutral Spawn")
+	allowed_spawns = list("Red Spawn","Blue Spawn","Neutral Spawn","Covenant Spawn")
 	default_spawn = "Neutral Spawn"
 
 
@@ -30,7 +30,7 @@ GLOBAL_LIST_EMPTY(latejoin_slayer_red)
 
 /datum/spawnpoint/slayer_red
 	display_name = "Red Spawn"
-	disallow_job = list("Blue Team Soldier")
+	disallow_job = list("Blue Team Spartan")
 
 /datum/spawnpoint/slayer_red/New()
 	..()
@@ -52,7 +52,7 @@ GLOBAL_LIST_EMPTY(latejoin_slayer_blue)
 
 /datum/spawnpoint/slayer_blue
 	display_name = "Blue Spawn"
-	disallow_job = list("Red Team Soldier")
+	disallow_job = list("Red Team Spartan")
 
 /datum/spawnpoint/slayer_blue/New()
 	..()
@@ -66,3 +66,36 @@ GLOBAL_LIST_EMPTY(latejoin_slayer_blue)
 /obj/effect/landmark/start/slayer_blue/New()
 	..()
 	GLOB.latejoin_slayer_blue += src.loc
+
+//Covenant Spawns//
+GLOBAL_LIST_EMPTY(latejoin_slayer_covenant)
+
+/datum/spawnpoint/slayer_covenant
+	display_name = "Covenant Spawn"
+	disallow_job = list("Spartans")
+
+/datum/spawnpoint/slayer_covenant/New()
+	..()
+	turfs = GLOB.latejoin_slayer_covenant
+
+/obj/effect/landmark/start/slayer_covenant
+	name = "Elites"
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "x2"
+
+/obj/effect/landmark/start/slayer_covenant/New()
+	..()
+	GLOB.latejoin_slayer_covenant += src.loc
+
+//Spartans Spawns - Covenant V Spartans //
+
+/datum/spawnpoint/slayer_spartan_covenant
+	display_name = "Spartans"
+	disallow_job = list("Elites")
+
+/datum/spawnpoint/slayer_blue/New()
+	..()
+	turfs = GLOB.latejoin_slayer_red
+
+/obj/effect/landmark/start/slayer_red/spartan_covenant
+	name = "Spartans"

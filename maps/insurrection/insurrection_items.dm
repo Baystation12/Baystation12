@@ -6,7 +6,7 @@
 /obj/machinery/podcontrol
 	name = "Assault Pod Controller"
 	desc = "Controls the launching of the assault pod. One way only."
-	icon = 'code/modules/halo/icons/computer.dmi'
+	icon = 'code/modules/halo/icons/machinery/computer.dmi'
 	icon_state = "computer"
 	density = 1
 	anchored = 1

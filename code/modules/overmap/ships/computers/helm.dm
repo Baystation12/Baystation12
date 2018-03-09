@@ -145,7 +145,7 @@
 			qdel(R)
 
 	if (href_list["setx"])
-		var/newx = input("Input new destiniation x coordinate", "Coordinate input", dx) as num|null
+		var/newx = input("Input new destination x coordinate", "Coordinate input", dx) as num|null
 		if (newx)
 			dx = Clamp(newx, 1, world.maxx)
 

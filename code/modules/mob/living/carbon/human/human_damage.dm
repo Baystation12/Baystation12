@@ -354,6 +354,22 @@ This function restores all organs.
 /mob/living/carbon/human/proc/get_organ(var/zone)
 	return organs_by_name[check_zone(zone)]
 
+/mob/living/carbon/human/proc/degrade_affected_armor(var/damage,var/damage_type = BRUTE,var/obj/item/organ/external/def_zone = null)
+	def_zone = get_organ(def_zone)
+	//Code (mostly) ripped from human_defense.dm's getarmor_organ proc.
+	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
+	for(var/gear in protective_gear)
+		var/obj/item/clothing/C = gear
+		if(gear && istype(C))
+			if(C.body_parts_covered & def_zone.body_part)
+				if(C.armor_thickness == 0 || isnull(C.armor_thickness))
+					return
+				if(C.degrade_armor_thickness(damage,damage_type))
+					C.visible_message("<span class = 'warning'>[src]'s [C.name]'s armor plating is [damage_type == BURN ? "melted away" : "destroyed"]! </span>")
+				else
+					C.visible_message("<span class = 'warning'>[src]'s [C.name]'s armor plating is [damage_type == BURN ? "scorched" : "damaged"]! </span>")
+				C.update_damage_description(damage_type)
+
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/damage_flags = 0, var/obj/used_weapon = null)
 
 	var/obj/item/organ/external/organ = null
@@ -368,6 +384,8 @@ This function restores all organs.
 		..(damage, damagetype, def_zone, blocked)
 		return 1
 
+	if(damagetype in list(BRUTE,BURN))//We don't want pure-pain damage degrading armor.
+		degrade_affected_armor(damage,damagetype,def_zone)
 	handle_suit_punctures(damagetype, damage, def_zone)
 
 	if(blocked >= 100)	return 0
