@@ -8,6 +8,7 @@ var/list/gamemode_cache = list()
 	var/log_access = 0					// log login/logout
 	var/log_say = 0						// log client say
 	var/log_admin = 0					// log admin actions
+	var/log_asay = 0					// log admin/mod say
 	var/log_debug = 1					// log debug output
 	var/log_game = 0					// log game events
 	var/log_vote = 0					// log voting
@@ -301,6 +302,9 @@ var/list/gamemode_cache = list()
 
 				if ("log_admin")
 					config.log_admin = 1
+
+				if ("log_asay")
+					config.log_asay = 1
 
 				if ("log_debug")
 					config.log_debug = text2num(value)

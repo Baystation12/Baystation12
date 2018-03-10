@@ -36,6 +36,9 @@ LOG_SAY
 ## log admin actions
 LOG_ADMIN
 
+## log asay/msay
+LOG_ASAY
+
 ## log client access (logon/logoff)
 LOG_ACCESS
 
