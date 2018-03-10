@@ -153,43 +153,45 @@
 					GLOB.nanomanager.update_uis(S.song_editor)
 			for (var/notes in splittext(lowertext(line), ","))
 				var/list/components = splittext(notes, "/")
-				var/delta = components.len==2 && text2num(components[2]) ? text2num(components[2]) : 1
-				var/note_str = splittext(components[1], "-")
+				var/duration = sanitize_tempo(src.tempo)
+				if (components.len)
+					var/delta = components.len==2 && text2num(components[2]) ? text2num(components[2]) : 1
+					var/note_str = splittext(components[1], "-")
 
-				var/duration = sanitize_tempo(src.tempo / delta)
-				src.player.event_manager.suspended = 1
-				for (var/note in note_str)
-					if (!note)	continue // wtf, empty note
-					var/note_sym = CP(note, 1)
-					var/note_off = 0
-					if (note_sym in note_off_delta)
-						note_off = text2ascii(note_sym) - note_off_delta[note_sym]
-					else
-						continue // Shitty note, move along and avoid runtimes
+					duration = sanitize_tempo(src.tempo / delta)
+					src.player.event_manager.suspended = 1
+					for (var/note in note_str)
+						if (!note)	continue // wtf, empty note
+						var/note_sym = CP(note, 1)
+						var/note_off = 0
+						if (note_sym in note_off_delta)
+							note_off = text2ascii(note_sym) - note_off_delta[note_sym]
+						else
+							continue // Shitty note, move along and avoid runtimes
 
-					var/octave = cur_octaves[note_off]
-					var/accidental = cur_accidentals[note_off]
+						var/octave = cur_octaves[note_off]
+						var/accidental = cur_accidentals[note_off]
 
-					switch (length(note))
-						if (3)
-							accidental = CP(note, 2)
-							octave = CP(note, 3)
-							if (!(accidental in allowed_suff) || !IS_DIGIT(octave))
-								continue
-							else
-								octave = text2num(octave)
-						if (2)
-							if (IS_DIGIT(CP(note, 2)))
-								octave = text2num(CP(note, 2))
-							else
+						switch (length(note))
+							if (3)
 								accidental = CP(note, 2)
-								if (!(accidental in allowed_suff))
+								octave = CP(note, 3)
+								if (!(accidental in allowed_suff) || !IS_DIGIT(octave))
 									continue
-					cur_octaves[note_off] = octave
-					cur_accidentals[note_off] = accidental
-					play_synthesized_note(note_off, accidental, octave+transposition, duration, src.current_line, cur_note)
-					if (src.player.event_manager.is_overloaded())
-						goto Stop
+								else
+									octave = text2num(octave)
+							if (2)
+								if (IS_DIGIT(CP(note, 2)))
+									octave = text2num(CP(note, 2))
+								else
+									accidental = CP(note, 2)
+									if (!(accidental in allowed_suff))
+										continue
+						cur_octaves[note_off] = octave
+						cur_accidentals[note_off] = accidental
+						play_synthesized_note(note_off, accidental, octave+transposition, duration, src.current_line, cur_note)
+						if (src.player.event_manager.is_overloaded())
+							goto Stop
 				cur_note++
 				src.player.event_manager.suspended = 0
 				if (!src.playing || src.player.shouldStopPlaying(user)) goto Stop
