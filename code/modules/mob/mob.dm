@@ -1001,7 +1001,6 @@ mob/proc/yank_out_object()
 	. = stat != new_stat
 	stat = new_stat
 
-/*
 /mob/verb/northfaceperm()
 	set hidden = 1
 	set_face_dir(client.client_dir(NORTH))
@@ -1017,7 +1016,6 @@ mob/proc/yank_out_object()
 /mob/verb/westfaceperm()
 	set hidden = 1
 	set_face_dir(client.client_dir(WEST))
-*/
 
 /mob/proc/adjustEarDamage()
 	return
