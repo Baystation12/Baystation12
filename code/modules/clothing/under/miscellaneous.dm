@@ -582,6 +582,12 @@
 	icon_state = "mbill"
 	worn_state = "mbill"
 
+/obj/item/clothing/under/morpheus
+	name = "\improper Morpheus Cyberkinetics uniform"
+	desc = "A pair of overalls belonging to Morpheus Cyberkinetics, an IPC manufacturing company. It doesn't look like it would be comfortable on a human."
+	icon_state = "morpheus"
+	worn_state = "morpheus"
+
 // Replace this with actual uniform when someone wants to sprite one
 /obj/item/clothing/under/confederacy
 	name = "\improper Confederate uniform"
