@@ -22,6 +22,7 @@
 	universal_understand = 1
 	holder_type = /obj/item/weapon/holder/borer
 	mob_size = MOB_SMALL
+	can_escape = 1
 
 	var/generation = 1
 	var/static/list/borer_names = list(
