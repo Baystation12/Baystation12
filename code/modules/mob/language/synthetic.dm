@@ -7,6 +7,7 @@
 	exclaim_verb = "declares"
 	key = "b"
 	flags = RESTRICTED | HIVEMIND
+	shorthand = "N/A"
 	var/drone_only
 
 /datum/language/binary/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
@@ -61,3 +62,4 @@
 	key = "d"
 	flags = RESTRICTED | HIVEMIND
 	drone_only = 1
+	shorthand = "N/A"
