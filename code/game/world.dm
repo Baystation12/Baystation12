@@ -66,9 +66,6 @@
 
 #define RECOMMENDED_VERSION 511
 /world/New()
-	//set window title
-	name = "[server_name] - [GLOB.using_map.full_name]"
-
 	//logs
 	SetupLogs()
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
