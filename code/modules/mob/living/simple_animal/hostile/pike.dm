@@ -20,6 +20,5 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 20
 	melee_damage_upper = 25
-	can_escape = 1
 
 	break_stuff_probability = 35

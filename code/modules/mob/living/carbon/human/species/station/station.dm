@@ -20,9 +20,6 @@
 
 	sexybits_location = BP_GROIN
 
-	inherent_verbs = list(
-		/mob/living/carbon/human/proc/tie_hair)
-
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
