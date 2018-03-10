@@ -156,6 +156,8 @@ var/list/gamemode_cache = list()
 
 	var/comms_password = ""
 	var/ban_comms_password = null
+	var/webhook_address
+	var/webhook_key
 
 	var/login_export_addr = null
 
@@ -595,6 +597,12 @@ var/list/gamemode_cache = list()
 
 				if("ban_comms_password")
 					config.ban_comms_password = value
+
+				if("webhook_address")
+					config.webhook_address = value
+
+				if("webhook_key")
+					config.webhook_key = value
 
 				if("login_export_addr")
 					config.login_export_addr = value
