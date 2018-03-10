@@ -676,5 +676,5 @@
 	else if(prob(min(60, switchcount*switchcount*0.01)))
 		status = LIGHT_BURNED
 	else if(sound_on)
-		playsound(get_turf(src),sound_on, 40)
+		playsound(src, sound_on, 75)
 	return status
