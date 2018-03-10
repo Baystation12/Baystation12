@@ -120,5 +120,5 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odst
 	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist")
 	access = list(access_unsc_crew,
-		access_unsc_armoury, access_unsc_marine)
+		access_unsc_supplies, access_unsc_marine)
 	latejoin_at_spawnpoints = TRUE
