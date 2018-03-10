@@ -5,7 +5,7 @@
   <link rel="stylesheet" type="text/css" href="changelog.css">
   <base target="_blank" />
   <script type='text/javascript'>
-  
+
 	function changeText(tagID, newText, linkTagID){
 		var tag = document.getElementById(tagID);
 		tag.innerHTML = newText;
@@ -13,8 +13,8 @@
 		linkTag.removeAttribute("href");
 		linkTag.removeAttribute("onclick");
 	}
-	
-  </script>  
+
+  </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
@@ -24,7 +24,7 @@
 	<tr>
 		<td valign='top'>
 			<div align='center'><font size='3'><b>Space Station 13</b></font></div>
-			
+
 			<p><div align='center'><font size='3'><a href="http://wiki.baystation12.net/">Wiki</a> | <a href="https://github.com/Baystation12/Baystation12/">Source code</a></font></div></p>
             <font size='2'>Code licensed under <a href="http://www.gnu.org/licenses/agpl.html">AGPLv3</a>. Content licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.<br><br>
 			<font size='2'><b>Visit our IRC channel:</b> #bs12 on irc.sorcery.net</font>
@@ -49,19 +49,100 @@
 </table>
 
 		<!--
-		
-		TO ADD AN ENTRY, ADD AND MAINTAIN YOUR OWN changelog/USERNAME.yml FILE. 
-		
+
+		TO ADD AN ENTRY, ADD AND MAINTAIN YOUR OWN changelog/USERNAME.yml FILE.
+
 		*** DO NOT MODIFY THIS FILE OR YOU WILL CAUSE MERGE CONFLICTS. ***
-		
+
 		-->
 		<div class="commit sansserif">
+      <h2 class="date">11 March 2018</h2>
+			<h3 class="author">Epicus updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Мерж различных фич с Baystation 12 c 20 февраля до 10 марта с переводом изменений (смотри ниже).</li>
+        <li class="bugfix">Мерж кучи фиксов ошибок, приводивших к вылету игры.</li>
+        <li class="bugfix">Мерж фикса сдвига спрайта Unathi</li>
+        <li class="bugfix">Мерж фикса спрайта Tajara</li>
+        <li class="bugfix">Мерж кучи других мелких фиксов</li>
+			</ul>
+
+      <h2 class="date">10 March 2018</h2>
+      <h3 class="author">Rebruiza updated:</h3>
+      <ul class="changes bgimages16">
+        <li class="soundadd">Теперь у APC проигрывается нормальный звук при разрядке.</li>
+        <li class="soundadd">Теперь в техтоннелях свой эмбиент.</li>
+        <li class="soundadd">Новый звук у пожарных тревог.</li>
+        <li class="soundadd">Новый звук у шлюзов и болтов.</li>
+        <li class="soundadd">Новый звук у Blast doors.</li>
+        <li class="soundadd">Новый звук у различных карманов костюмов.</li>
+        <li class="soundadd">Новый звук для шкафов.</li>
+        <li class="soundadd">Новый звук касания металлических стен.</li>
+        <li class="tweak">Повышена громкость звука включения света.</li>
+      </ul>
+
+      <h3 class="author">Techhead0 updated:</h3>
+      <ul class="changes bgimages16">
+        <li class="rscadd">Появилась возможность восстанавливать герметичность скафандра с помощью изоленты. Либо кликните по самому костюму, либо нацельтесь на грудь и щелкните по другому мобу. Осторожно, дополнительный урон может сбить заплатку.</li>
+      </ul>
+
+      <h2 class="date">06 March 2018</h2>
+      <h3 class="author">thefrostycoder updated:</h3>
+      <ul class="changes bgimages16">
+        <li class="bugfix">Починили случайные капли крови на шлюзах.</li>
+      </ul>
+
+      <h2 class="date">05 March 2018</h2>
+      <h3 class="author">thefrostycoder updated:</h3>
+      <ul class="changes bgimages16">
+        <li class="rscadd">Теперь в чате явно видно название языка, который вы слышите и понимаете.</li>
+      </ul>
+
+			<h2 class="date">04 March 2018</h2>
+			<h3 class="author">Banditoz updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">У генератор щита можно экстренно отключить, взломав его.</li>
+				<li class="tweak">Время перезарядки щита после экстенного отключения уменьшено.</li>
+				<li class="tweak">Теперь экстренное отключение щита вызывает ЭМИ, зависящий от его заряда.</li>
+			</ul>
+
+			<h2 class="date">27 February 2018</h2>
+			<h3 class="author">sabiram updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Теперь можно развеевать проклятые полы культа с помощью null rod, также как и стены.</li>
+				<li class="tweak">Maw creatures, ghost dogs, faithless и shades получают дополнительный урон от null rod.</li>
+				<li class="tweak">null rod теперь называется null sceptre и стал четь больше в размерах.</li>
+			</ul>
+
+			<h2 class="date">25 February 2018</h2>
+			<h3 class="author">Hubblenaut updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="tweak">Схемы медицинского сканнера теперь работает в зоне видимости.</li>
+				<li class="bugfix">Изоленту теперь опять можно поднять.</li>
+			</ul>
+
+			<h2 class="date">22 February 2018</h2>
+			<h3 class="author">Hubblenaut updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">Ивент потери гравитации больше не роняет людей, которые итак находятся в космосе.</li>
+			</ul>
+
+			<h3 class="author">chaoko99 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="rscadd">Щелчек по столу с зажатым контролом перевернет стол.</li>
+			</ul>
+
+			<h2 class="date">19 February 2018</h2>
+			<h3 class="author">Techhead0 updated:</h3>
+			<ul class="changes bgimages16">
+				<li class="bugfix">ПДА больше не показывает количество Форона.</li>
+			</ul>
+
 			<h2 class="date">10 March 2018</h2>
 			<h3 class="author">BombanyTI updated:</h3>
 			<ul class="changes bgimages16">
 				<li class="bugfix">Фикс хоткеев, автохисса, телекомов, отвалившихся спрайтов, лоадаута и несколько мелких правок карты</li>
 			</ul>
-			
+
 			<h2 class="date">19 February 2018</h2>
 			<h3 class="author">Techhead0 updated:</h3>
 			<ul class="changes bgimages16">
