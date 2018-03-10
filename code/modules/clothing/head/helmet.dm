@@ -55,6 +55,7 @@
 	icon_state = "helmet_tac"
 	armor = list(melee = 40, bullet = 30, laser = 40,energy = 5, bomb = 15, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
+	item_flags = THICKMATERIAL
 
 /obj/item/clothing/head/helmet/merc
 	name = "combat helmet"
