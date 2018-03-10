@@ -131,7 +131,6 @@
 
 #define CP(L, S) copytext(L, S, S+1)
 #define IS_DIGIT(L) (L >= "0" && L <= "9" ? 1 : 0)
-#define SAFETY_CHECK if (!src.lines.len || src.player.event_manager.is_overloaded()) {goto Stop}
 
 /datum/synthesized_song/proc/play_song(mob/user)
 	// This code is really fucking horrible.
@@ -165,6 +164,8 @@
 					var/note_off = 0
 					if (note_sym in note_off_delta)
 						note_off = text2ascii(note_sym) - note_off_delta[note_sym]
+					else
+						continue // Shitty note, move along and avoid runtimes
 
 					var/octave = cur_octaves[note_off]
 					var/accidental = cur_accidentals[note_off]
@@ -205,4 +206,3 @@
 
 #undef CP
 #undef IS_DIGIT
-#undef SAFETY_CHECK
