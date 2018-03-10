@@ -88,6 +88,10 @@
 
 /obj/item/grab/proc/can_grab()
 
+	// can't grab non-carbon/human/'s
+	if(!istype(affecting))
+		return 0
+
 	if(assailant.anchored || affecting.anchored)
 		return 0
 
