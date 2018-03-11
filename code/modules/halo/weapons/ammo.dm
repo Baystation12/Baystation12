@@ -80,6 +80,7 @@
 
 /obj/item/ammo_magazine/m762_ap/MA37
 	icon_state = "MA37_mag"
+	max_ammo = 32
 
 /obj/item/ammo_casing/a762_ap
 	desc = "A 7.62mm bullet casing."
