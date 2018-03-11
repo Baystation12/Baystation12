@@ -288,6 +288,8 @@
 	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 10000)
 
+	dist_check = /decl/dist_check/omni
+
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
 	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
 	var/step_dir = get_pin_data(IC_INPUT, 2)
@@ -300,7 +302,9 @@
 	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
 		rift_location = get_step(rift_location, step_dir) || rift_location
 	else
-		rift_location = get_step(rift_location, dir) || rift_location
+		var/obj/item/device/electronic_assembly/assembly = get_assembly(src)
+		if(assembly)
+			rift_location = get_step(rift_location, assembly.dir) || rift_location
 
 	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
 		new /obj/effect/portal(rift_location, get_turf(tporter.locked))

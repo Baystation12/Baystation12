@@ -3,6 +3,8 @@
  *		Pens
  *		Sleepy Pens
  *		Parapens
+ *		Crayons
+ *		Fountain pens
  */
 
 
@@ -177,6 +179,14 @@
 	var/instant = 0
 	var/colourName = "red" //for updateIcon purposes
 
-	New()
-		name = "[colourName] crayon"
-		..()
+/obj/item/weapon/pen/crayon/Initialize()
+	name = "[colourName] crayon"
+	. = ..()
+
+/obj/item/weapon/pen/fancy
+	name = "fancy pen"
+	desc = "A high quality traditional fountain pen with an internal reservoir and an extra fine gold-platinum nib. Guaranteed never to leak."
+	icon_state = "fancy"
+	throwforce = 1 //pointy
+	colour = "#1c1713" //dark ashy brownish
+	matter = list(DEFAULT_WALL_MATERIAL = 15)

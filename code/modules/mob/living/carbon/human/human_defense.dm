@@ -452,8 +452,7 @@ meteor_act
 	if(!wear_suit) return
 	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
 	var/obj/item/clothing/suit/space/SS = wear_suit
-	var/penetrated_dam = max(0,(damage - SS.breach_threshold))
-	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)
+	SS.create_breaches(damtype, damage)
 
 /mob/living/carbon/human/reagent_permeability()
 	var/perm = 0

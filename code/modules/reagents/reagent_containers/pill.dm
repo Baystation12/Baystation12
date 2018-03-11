@@ -71,7 +71,7 @@
 /// Pills. END
 ////////////////////////////////////////////////////////////////////////////////
 
-//Pills
+//We lied - it's pills all the way down
 /obj/item/weapon/reagent_containers/pill/antitox
 	name = "Dylovene (25u)"
 	desc = "Neutralizes many common toxins."
@@ -132,7 +132,7 @@
 
 /obj/item/weapon/reagent_containers/pill/paracetamol
 	name = "Paracetamol (15u)"
-	desc = "Tylenol! A painkiller for the ages. Chewables!"
+	desc = "A painkiller for the ages. Chewables!"
 	icon_state = "pill3"
 /obj/item/weapon/reagent_containers/pill/paracetamol/New()
 	..()
@@ -197,16 +197,6 @@
 /obj/item/weapon/reagent_containers/pill/dylovene/New()
 	..()
 	reagents.add_reagent(/datum/reagent/dylovene, 15)
-	color = reagents.get_color()
-
-
-/obj/item/weapon/reagent_containers/pill/inaprovaline
-	name = "Inaprovaline (30u)"
-	desc = "Used to stabilize patients."
-	icon_state = "pill2"
-/obj/item/weapon/reagent_containers/pill/inaprovaline/New()
-	..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 30)
 	color = reagents.get_color()
 
 

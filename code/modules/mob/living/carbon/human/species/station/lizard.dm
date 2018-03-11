@@ -72,13 +72,9 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
-/*
-	equip_adjust = list(
-		slot_glasses_str =   list(NORTH = list("x" = 0, "y" = 2),   EAST = list("x" = 0, "y" = 2),   SOUTH = list("x" = 0, "y" = 2),   WEST = list("x" = 0, "y" = 2)),
-		slot_head_str =      list(NORTH = list("x" = 0, "y" = 2),   EAST = list("x" = 0, "y" = 2),   SOUTH = list("x" = 0, "y" = 2),   WEST = list("x" = 0, "y" = 2))
-			)
 
-*/
+	prone_overlay_offset = list(-4, -4)
+
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
