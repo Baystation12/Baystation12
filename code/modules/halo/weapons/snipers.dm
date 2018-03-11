@@ -67,10 +67,10 @@
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
 	set category = "Object"
-	set name = "Use Scope (1.25x)"
+	set name = "Use Scope (1.35x)"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.25)
+	toggle_scope(usr, 1.35)
 
 /obj/item/weapon/gun/projectile/m392_dmr/update_icon()
 	if(ammo_magazine)
