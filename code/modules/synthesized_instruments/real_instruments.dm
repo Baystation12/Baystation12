@@ -13,8 +13,8 @@
 
 
 /obj/structure/synthesized_instrument/Destroy()
-	qdel(src.player)
-	..()
+	QDEL_NULL(src.player)
+	. = ..()
 
 
 /obj/structure/synthesized_instrument/attack_hand(mob/user)
@@ -117,8 +117,8 @@
 
 
 /obj/item/device/synthesized_instrument/Destroy()
-	qdel(src.player)
-	..()
+	QDEL_NULL(src.player)
+	. = ..()
 
 
 /obj/item/device/synthesized_instrument/attack_hand(mob/user)

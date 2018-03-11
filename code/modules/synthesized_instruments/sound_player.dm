@@ -45,12 +45,11 @@
 	src.stored_locations.Cut()
 	src.actual_instrument = null
 	src.instrument = null
-	sleep(1)
 	for (var/channel in src.song.free_channels)
 		GLOB.musical_config.free_channels += channel // Deoccupy channels
 	song = null
-	qdel(song)
-	return ..()
+	QDEL_NULL(song)
+	. = ..()
 
 
 /datum/sound_player/proc/apply_modifications_for(mob/who, sound/what, note_num, which_line, which_note) // You don't need to override this
