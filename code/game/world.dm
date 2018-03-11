@@ -134,6 +134,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
 
 	var/input[] = params2list(T)
+	var/key_valid = config.comms_password && input["key"] == config.comms_password
 
 	if (T == "ping")
 		var/x = 1
@@ -320,6 +321,37 @@ var/world_topic_spam_protect_time = world.timeofday
 			for(var/mob/M in match)
 				ret[M.key] = M.name
 			return list2params(ret)
+
+	else if("who" in input)
+		var/result = "Current players:\n"
+		var/num = 0
+		for(var/client/C in GLOB.clients)
+			if(C.holder)
+				if(C.is_stealthed() && !key_valid)
+					continue	//so stealthmins aren't revealed by the hub
+			result += "\t [C]\n"
+			num++
+		return result
+	else if ("ooc" in input)
+		if(!key_valid)
+			if(abs(world_topic_spam_protect_time - world.time) < 50)
+				sleep(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
+			world_topic_spam_protect_time = world.time
+			return "Bad Key"
+		ckey = input["ckey"]
+		if(!ckey)
+			return
+		if(!config.vars["ooc_allowed"]&&!input["isadmin"])
+			return "globally muted"
+		var/sent_message = "[create_text_tag("DISCORD OOC:")] <EM>[ckey]:</EM> <span class='message'>[message]</span>"
+		for(var/client/target in GLOB.clients)
+			if(!target)
+				continue //sanity
+			if(target.is_key_ignored(ckey)||target.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE) // If we're ignored by this person, then do nothing.
+				continue //if it shouldn't see then it doesn't
+			to_chat(target, "<span class='ooc'>[sent_message]</span>")
 
 	else if(copytext(T,1,9) == "adminmsg")
 
