@@ -328,10 +328,19 @@ var/world_topic_spam_protect_time = world.timeofday
 		for(var/client/C in GLOB.clients)
 			if(C.holder)
 				if(C.is_stealthed() && !key_valid)
-					continue	//so stealthmins aren't revealed by the hub
+					continue
 			result += "\t [C]\n"
 			num++
 		return result
+
+	else if("adminwho" in input)
+		var/result = "Current admins:\n"
+		for(var/client/C in GLOB.clients)
+			if(C.holder)
+				if(!C.is_stealthed())
+					result += "\t [C], [C.holder.rank]\n"
+		return result
+
 	else if ("ooc" in input)
 		if(!key_valid)
 			if(abs(world_topic_spam_protect_time - world.time) < 50)
@@ -353,20 +362,20 @@ var/world_topic_spam_protect_time = world.timeofday
 				continue //if it shouldn't see then it doesn't
 			to_chat(target, "<span class='ooc'>[sent_message]</span>")
 
-	else if(copytext(T,1,9) == "adminmsg")
+	else if ("asay" in input)
+		return "not supported" //simply no asay on bay
 
-		if(input["key"] != config.comms_password)
+	else if("adminhelp" in input)
+		if(!key_valid)
 			if(abs(world_topic_spam_protect_time - world.time) < 50)
 				sleep(50)
 				world_topic_spam_protect_time = world.time
 				return "Bad Key (Throttled)"
-
 			world_topic_spam_protect_time = world.time
-
 			return "Bad Key"
 
 		var/client/C
-		var/req_ckey = ckey(input["adminmsg"])
+		var/req_ckey = ckey(input["ckey"])
 
 		for(var/client/K in GLOB.clients)
 			if(K.ckey == req_ckey)
@@ -375,17 +384,13 @@ var/world_topic_spam_protect_time = world.timeofday
 		if(!C)
 			return "No client with that name on server"
 
-		var/rank = input["rank"]
-		if(!rank)
-			rank = "Admin"
-		if(rank == "Unknown")
-			rank = "Staff"
+		var/rank = "Discord Admin"
 
-		var/message =	"<font color='red'>[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a></b>: [input["msg"]]</font>"
-		var/amessage =  "<font color='blue'>[rank] PM from <a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
+		var/message =	"<font color='red'>[rank] PM from <b><a href='?irc_msg=[input["admin"]]'>[input["admin"]]</a></b>: [russian_to_cp1251(input["response"])]</font>"
+		var/amessage =  "<font color='blue'>[rank] PM from <a href='?irc_msg=[input["admin"]]'>[input["admin"]]</a> to <b>[key_name(C)]</b> : [russian_to_cp1251(input["response"])]</font>"
 
 		C.received_irc_pm = world.time
-		C.irc_admin = input["sender"]
+		C.irc_admin = input["admin"]
 
 		sound_to(C, 'sound/effects/adminhelp.ogg')
 		to_chat(C, message)
@@ -394,6 +399,22 @@ var/world_topic_spam_protect_time = world.timeofday
 			if(A != C)
 				to_chat(A, amessage)
 		return "Message Successful"
+
+	else if("OOC" in input)
+		if(!key_valid)
+			if(abs(world_topic_spam_protect_time - world.time) < 50)
+				sleep(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
+			world_topic_spam_protect_time = world.time
+			return "Bad Key"
+		config.ooc_allowed = !(config.ooc_allowed)
+		if (config.ooc_allowed)
+			to_world("<B>The OOC channel has been globally enabled!</B>")
+		else
+			to_world("<B>The OOC channel has been globally disabled!</B>")
+		log_and_message_admins("discord toggled OOC.")
+		return config.ooc_allowed ? "ON" : "OFF"
 
 	else if(copytext(T,1,6) == "notes")
 		/*
