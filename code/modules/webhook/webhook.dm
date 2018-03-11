@@ -31,8 +31,8 @@
 	webhook_send("token", query)
 
 /proc/webhook_send(var/method, var/data)
-	if(!webhook_address || !webhook_key)
+	if(!config.webhook_address || !config.webhook_key)
 		return
-	var/query = "[webhook_address]?key=[webhook_key]&method=[method]&data=[url_encode(json_encode(data))]"
+	var/query = "[config.webhook_address]?key=[config.webhook_key]&method=[method]&data=[url_encode(json_encode(data))]"
 	spawn(-1)
 		world.Export(query)

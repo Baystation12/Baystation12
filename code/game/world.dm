@@ -331,6 +331,7 @@ var/world_topic_spam_protect_time = world.timeofday
 					continue
 			result += "\t [C]\n"
 			num++
+		result += "Total players: [num]"
 		return result
 
 	else if("adminwho" in input)
@@ -349,8 +350,9 @@ var/world_topic_spam_protect_time = world.timeofday
 				return "Bad Key (Throttled)"
 			world_topic_spam_protect_time = world.time
 			return "Bad Key"
-		ckey = input["ckey"]
-		if(!ckey)
+		var/ckey = input["ckey"]
+		var/message = input["ooc"]
+		if(!ckey||!message)
 			return
 		if(!config.vars["ooc_allowed"]&&!input["isadmin"])
 			return "globally muted"
