@@ -20,7 +20,48 @@
 	var/eye_icon = "eyes_s"
 	var/eye_icon_location = 'icons/mob/human_face.dmi'
 
-	var/has_lips
+	var/has_lips = 1
+
+	var/forehead_graffiti
+	var/graffiti_style
+
+/obj/item/organ/external/head/examine(mob/user)
+	. = ..()
+
+	if(forehead_graffiti && graffiti_style)
+		to_chat(user, "<span class='notice'>It has \"[forehead_graffiti]\" written on it in [graffiti_style]!</span>")
+
+/obj/item/organ/external/head/proc/write_on(var/mob/penman, var/style)
+	var/head_name = name
+	var/atom/target = src
+	if(owner)
+		head_name = "[owner]'s [name]"
+		target = owner
+
+	if(forehead_graffiti)
+		to_chat(penman, "<span class='notice'>There is no room left to write on [head_name]!</span>")
+		return
+
+	var/graffiti = sanitizeSafe(input(penman, "Enter a message to write on [head_name]:") as text|null, MAX_NAME_LEN)
+	if(graffiti)
+		if(!target.Adjacent(penman))
+			to_chat(penman, "<span class='notice'>[head_name] is too far away.</span>")
+			return
+
+		if(owner && owner.check_head_coverage())
+			to_chat(penman, "<span class='notice'>[head_name] is covered up.</span>")
+			return
+
+		penman.visible_message("<span class='warning'>[penman] begins writing something on [head_name]!</span>", "You begin writing something on [head_name].")
+
+		if(do_after(penman, 3 SECONDS, target))
+			if(owner && owner.check_head_coverage())
+				to_chat(penman, "<span class='notice'>[head_name] is covered up.</span>")
+				return
+
+			penman.visible_message("<span class='warning'>[penman] writes something on [head_name]!</span>", "You write something on [head_name].")
+			forehead_graffiti = graffiti
+			graffiti_style = style
 
 /obj/item/organ/external/head/set_dna(var/datum/dna/new_dna)
 	..()
