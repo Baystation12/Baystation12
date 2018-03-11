@@ -105,6 +105,9 @@
 	var/germ_level = user.germ_level
 	if(user.gloves)
 		germ_level = user.gloves.germ_level
+		user.gloves.germ_level = max(germ_level, E.germ_level) // if the wound is dirty, make sure the user gets some of that, too
+	else
+		user.germ_level = max(germ_level, E.germ_level)
 
 	E.germ_level = max(germ_level,E.germ_level) //as funny as scrubbing microbes out with clean gloves is - no.
 
