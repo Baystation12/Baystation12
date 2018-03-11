@@ -1,0 +1,7 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - rscadd: "Cremation now takes time. Doing so with a live subject inside will cause it to rattle around violently. You monster."
+  - rscadd: "You can now resist out of a crematorium on a short timer. You may also eject someone from a crematorium from outside it on a similar timer."
+  - bugfix: "Crematorium now uses a glowing sprite when active."
+  - imageadd: "Changes the crematorium and morgue slab sprites to something cleaner."
