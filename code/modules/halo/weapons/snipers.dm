@@ -17,6 +17,7 @@
 	reload_sound = 'code/modules/halo/sounds/SniperRifleReloadSoundEffect.ogg'
 	one_hand_penalty = -1
 	scoped_accuracy = 3
+	accuracy = -2
 	screen_shake = 0
 	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
@@ -54,8 +55,8 @@
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
 	w_class = ITEM_SIZE_LARGE
-	accuracy = 1
-	scoped_accuracy = 2
+	accuracy = 2
+	scoped_accuracy = 3
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 
