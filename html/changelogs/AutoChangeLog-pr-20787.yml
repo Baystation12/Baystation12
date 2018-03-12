@@ -1,0 +1,4 @@
+author: "chinsky & sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Belts and towels can now be worn on the belt slot, even with no clothing equipped."
