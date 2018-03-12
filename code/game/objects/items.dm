@@ -172,7 +172,7 @@
 	var/desc_comp = "" //For "description composite"
 	desc_comp += "It is a [size] item."
 
-	if(hasHUD(user, "science")) //Mob has a research scanner active.
+	if(hasHUD(user, HUD_SCIENCE)) //Mob has a research scanner active.
 		desc_comp += "<BR>*--------* <BR>"
 
 		if(origin_tech)
