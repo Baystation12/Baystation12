@@ -1,53 +1,55 @@
 <!--
-	If a specific field doesn't apply, remove it!
-	Anything inside tags like these is a comment and will not be displayed in the final issue.
-	Be careful not to write inside them!
-	Joke or spammed issues can and will result in punishment.
-	
-	PUT YOUR ANSWERS ON THE BLANK LINES BELOW THE HEADERS 
-	(The lines with four #'s) 
-	Don't edit them or delete them it's part of the formatting
+  Все что находится внутри специальных тегов, как это сообщение, не будет отображено в итогом репорте.
+  Не напишите, случайно, что-нибудь в них!
+  За шутки и спам будем ругаться.
+
+  ЗАПИШИТЕ СВОИ ОТВЕТЫ НА ПУСТЫХ СТРОЧКАХ ПОД ЗАГОЛОВКАМИ
+  (строки, которые начинаются с #)
+  Не редактируйте и не удаляйте их - это часть форматирования.
 -->
 
-#### Description of issue
+#### Описание проблемы
+
+
+#### Разница между реальным поведением и ожидаемым
 
 
 
-#### Difference between expected and actual behavior
+#### Как воспроизвести проблему?
 
 
 
-#### Steps to reproduce 
+#### Конкретная информация
+<!-- например, название объекта, с которым связана проблема, различные логи и тексты ошибок... -->
 
 
 
-#### Specific information for locating
-<!-- e.g. an object name, paste specific message outputs... -->
-
-
-
-#### Length of time in which bug has been known to occur
+#### Как долго известно о проблеме?
 <!--
-	Be specific if you approximately know the time it's been occurring
-	for—this can speed up finding the source. If you're not sure
-	about it, tell us too!
+  Постарайтесь дать как можно более точное время. После вчерашнего обновления или
+  проблема была с тех пор, как поставили билд? Во всех билдах SS13 есть эта проблема?
+  Чем точнее напишите - тем проще будет найти источник. Если не уверены, то так и напишите.
 -->
 
 
 
-#### Client version, Server revision & Game ID
-<!-- Found with the "Show server revision" verb in the OOC tab in game. -->
+#### Версия клиента, версия сервера и идентификатор игры
+<!--
+  Если часть информации не касается бага - можете опустить, но лучше заполнить.
+  Версия клиента - смотрите информацию в самом клиенте BYOND.
+  Версию сервера - команда "Show server revision" в вкладке ООС на сервере
+  ID игры - там же.
+ -->
 
 
+#### Дополнительная информация
 
-#### Issue bingo
+<!-- Пожалуйста, отметьте то, что верно для вашей ошибки. Чем больше отметите - тем быстрее решим проблему. -->
 
-Please check whatever applies. More checkboxes checked increase your chances of the issue being looked at sooner.
-
-<!-- Check these by writing an x inside the [ ] (like this: [x])-->
-<!-- Don't forget to remove the space between the brackets, or it won't work! -->
-- [ ] Issue could be reproduced at least once
-- [ ] Issue could be reproduced by different players
-- [ ] Issue could be reproduced in multiple rounds
-- [ ] Issue happened in a recent (less than 7 days ago) round
-- [ ] [Couldn't find an existing issue about this](https://github.com/Baystation12/Baystation12/issues)
+<!-- Отмечайте с помощью x внутри квадратика (Вот так: [x])-->
+<!-- Не забудьте удалить пробел! Иначе все сломается. -->
+- [ ] Проблему можно воспроизвести хотя бы один раз
+- [ ] Проблема может быть воспроизведена разными игроками (не зависит от конкретного игрока)
+- [ ] Проблема может быть воспроизведена в нескольких раундах (не зависит от конкретного раунда)
+- [ ] Проблема случилась в недавнем раунде (прошло меньше недели)
+- [ ] [Не получилось найти похожую проблему в списке](https://github.com/Rampoch/Chaotic-Onyx/issues)
