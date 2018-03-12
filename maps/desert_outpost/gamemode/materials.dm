@@ -1,4 +1,14 @@
 
+#if !defined(MATERIAL_RECIPES_OVERRIDE)
+	#define MATERIAL_RECIPES_OVERRIDE 1
+
+/material/proc/get_recipes()
+	if(!recipes)
+		generate_recipes()
+	return recipes
+
+/material/proc/generate_recipes()
+	recipes = list()
 
 /material/steel/generate_recipes()
 	recipes = list()
@@ -44,3 +54,9 @@
 	recipes = list()
 
 	recipes += new/datum/stack_recipe("empty sandbags", /obj/item/empty_sandbags, 1, time = 30)
+
+#else
+
+	#warn Recipes conflict, unable to use stranded gamemode recipes
+
+#endif

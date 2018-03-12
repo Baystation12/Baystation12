@@ -1623,7 +1623,6 @@
 #include "code\modules\maps\reader.dm"
 #include "code\modules\maps\swapmaps.dm"
 #include "code\modules\maps\writer.dm"
-#include "code\modules\materials\material_recipes.dm"
 #include "code\modules\materials\material_sheets.dm"
 #include "code\modules\materials\material_synth.dm"
 #include "code\modules\materials\materials.dm"
@@ -2603,6 +2602,7 @@
 #include "maps\~mapsystem\maps_areas.dm"
 #include "maps\~mapsystem\maps_jobs.dm"
 #include "maps\~mapsystem\maps_unit_testing.dm"
+#include "maps\~mapsystem\material_recipes.dm"
 #include "maps\~unit_tests\unit_testing.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE

@@ -5,7 +5,7 @@
 
 /material/proc/generate_recipes()
 	recipes = list()
-/*
+
 	// If is_brittle() returns true, these are only good for a single strike.
 	recipes += new/datum/stack_recipe("[display_name] baseball bat", /obj/item/weapon/material/twohanded/baseballbat, 10, time = 20, one_per_turf = 0, on_floor = 1, supplied_material = "[name]")
 	recipes += new/datum/stack_recipe("[display_name] ashtray", /obj/item/weapon/material/ashtray, 2, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
@@ -87,9 +87,12 @@
 		new/datum/stack_recipe("modular laptop frame", /obj/item/modular_computer/laptop, 10),\
 		new/datum/stack_recipe("modular tablet frame", /obj/item/modular_computer/tablet, 5),\
 	))
+	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/barrel, 10, time = 50, one_per_turf = 1)
+	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, time = 30)
+	recipes += new/datum/stack_recipe("tank trap", /obj/structure/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
 /material/plasteel/generate_recipes()
 	..()
-	recipes += new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1)
+	//recipes += new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("Metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("knife grip", /obj/item/weapon/material/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1, supplied_material = "[name]")
 	recipes += new/datum/stack_recipe("dark floor tile", /obj/item/stack/tile/floor_dark, 1, 4, 20)
@@ -132,8 +135,8 @@
 	recipes += new/datum/stack_recipe("light tubes box", /obj/item/weapon/storage/box/lights/tubes/empty)
 	recipes += new/datum/stack_recipe("light bulbs box", /obj/item/weapon/storage/box/lights/bulbs/empty)
 	recipes += new/datum/stack_recipe("mouse traps box", /obj/item/weapon/storage/box/mousetraps/empty)
-	recipes += new/datum/stack_recipe("cardborg suit", /obj/item/clothing/suit/cardborg, 3)
-	recipes += new/datum/stack_recipe("cardborg helmet", /obj/item/clothing/head/cardborg)
+	//recipes += new/datum/stack_recipe("cardborg suit", /obj/item/clothing/suit/cardborg, 3)
+	//recipes += new/datum/stack_recipe("cardborg helmet", /obj/item/clothing/head/cardborg)
 	recipes += new/datum/stack_recipe("pizza box", /obj/item/pizzabox)
 	recipes += new/datum/stack_recipe_list("folders",list( \
 		new/datum/stack_recipe("blue folder", /obj/item/weapon/folder/blue), \
@@ -142,4 +145,8 @@
 		new/datum/stack_recipe("white folder", /obj/item/weapon/folder/white), \
 		new/datum/stack_recipe("yellow folder", /obj/item/weapon/folder/yellow), \
 		))
-*/
+
+/material/cloth/generate_recipes()
+	recipes = list()
+
+	recipes += new/datum/stack_recipe("empty sandbags", /obj/item/empty_sandbags, 1, time = 30)
