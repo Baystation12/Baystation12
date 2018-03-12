@@ -443,7 +443,7 @@
 			return
 
 		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
-		shake_animation()
+		animate_shake()
 		add_fingerprint(escapee)
 
 	//Well then break it!
@@ -452,7 +452,7 @@
 	visible_message("<span class='danger'>\The [escapee] successfully broke out of \the [src]!</span>")
 	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 	break_open()
-	shake_animation()
+	animate_shake()
 
 /obj/structure/closet/proc/break_open()
 	welded = 0
@@ -465,6 +465,12 @@
 		var/obj/structure/bigDelivery/BD = loc
 		BD.unwrap()
 	open()
+
+/obj/structure/closet/proc/animate_shake()
+	var/init_px = pixel_x
+	var/shake_dir = pick(-1, 1)
+	animate(src, transform=turn(matrix(), 8*shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
+	animate(transform=null, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
 
 /obj/structure/closet/onDropInto(var/atom/movable/AM)
 	return

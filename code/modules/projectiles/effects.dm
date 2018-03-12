@@ -48,13 +48,13 @@
 /obj/effect/projectile/laser/omni
 	light_color = COLOR_LUMINOL
 
-/obj/effect/projectile/laser/omni/tracer
+/obj/effect/projectile/laser/omni/tracer//tracer
 	icon_state = "beam_omni"
 
-/obj/effect/projectile/laser/omni/muzzle
+/obj/effect/projectile/laser/omni/muzzle//muzzle
 	icon_state = "muzzle_omni"
 
-/obj/effect/projectile/laser/omni/impact
+/obj/effect/projectile/laser/omni/impact//impact
 	icon_state = "impact_omni"
 
 //----------------------------
@@ -144,20 +144,20 @@
 	icon_state = "impact_plasmacutter"
 
 //----------------------------
-// Emitter beam
+// laser/emitter beam
 //----------------------------
 /obj/effect/projectile/laser/emitter/
 	light_power = 3
 	light_color = "#00cc00"
 
 /obj/effect/projectile/laser/emitter/tracer
-	icon_state = "emitter"
+	icon_state = "laser/emitter"
 
 /obj/effect/projectile/laser/emitter/muzzle
-	icon_state = "muzzle_emitter"
+	icon_state = "muzzle_laser/emitter"
 
 /obj/effect/projectile/laser/emitter/impact
-	icon_state = "impact_emitter"
+	icon_state = "impact_laser/emitter"
 
 //----------------------------
 // Stun beam

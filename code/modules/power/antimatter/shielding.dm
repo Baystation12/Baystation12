@@ -60,7 +60,8 @@ proc/cardinalrange(var/center)
 			spawn(20)
 				controllerscan(1)//Last chance
 			return
-		QDEL_IN(src, 0)
+		spawn(0)
+			qdel(src)
 	return
 
 

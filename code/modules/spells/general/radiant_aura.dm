@@ -18,4 +18,5 @@
 
 /spell/radiant_aura/cast(var/list/targets, var/mob/user)
 	var/obj/aura/radiant_aura/A = new(user)
-	QDEL_IN(A,duration)
+	spawn(duration)
+		qdel(A)

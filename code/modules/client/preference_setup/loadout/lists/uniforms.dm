@@ -162,7 +162,6 @@
 	corps += /obj/item/clothing/under/grayson
 	corps += /obj/item/clothing/under/focal
 	corps += /obj/item/clothing/under/rank/ntwork
-	corps += /obj/item/clothing/under/morpheus
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(corps)
 
 /datum/gear/uniform/sterile
