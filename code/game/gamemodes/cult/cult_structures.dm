@@ -93,6 +93,16 @@
 	anchored = 1.0
 	var/spawnable = null
 
+/obj/effect/gateway/Bumped(mob/M as mob|obj)
+	spawn(0)
+		return
+	return
+
+/obj/effect/gateway/Crossed(AM as mob|obj)
+	spawn(0)
+		return
+	return
+
 /obj/effect/gateway/active
 	light_range=5
 	light_color="#ff0000"
@@ -112,14 +122,10 @@
 	)
 
 /obj/effect/gateway/active/New()
-	..()
-	addtimer(CALLBACK(src, .proc/create_and_delete), rand(30,60) SECONDS)
-
-
-/obj/effect/gateway/active/proc/create_and_delete()
-	var/t = pick(spawnable)
-	new t(src.loc)
-	qdel(src)
+	spawn(rand(30,60) SECONDS)
+		var/t = pick(spawnable)
+		new t(src.loc)
+		qdel(src)
 
 /obj/effect/gateway/active/Crossed(var/atom/A)
 	if(!istype(A, /mob/living))

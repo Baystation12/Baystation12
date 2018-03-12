@@ -359,5 +359,5 @@ Class Procs:
 
 /obj/machinery/examine(mob/user)
 	. = ..(user)
-	if(component_parts && hasHUD(user, HUD_SCIENCE))
+	if(component_parts && hasHUD(user, "science"))
 		display_parts(user)

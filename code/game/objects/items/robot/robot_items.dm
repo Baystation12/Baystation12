@@ -15,7 +15,7 @@
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "securearea"
 	var/sight_mode = null
-	var/hud_type
+	var/hud_type = HUD_NO_HUD
 
 
 /obj/item/borg/sight/xray

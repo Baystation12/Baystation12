@@ -172,7 +172,7 @@
 	var/desc_comp = "" //For "description composite"
 	desc_comp += "It is a [size] item."
 
-	if(hasHUD(user, HUD_SCIENCE)) //Mob has a research scanner active.
+	if(hasHUD(user, "science")) //Mob has a research scanner active.
 		desc_comp += "<BR>*--------* <BR>"
 
 		if(origin_tech)
@@ -364,10 +364,8 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
 				return 0
-		if(slot_belt, slot_wear_id)
-			if(slot == slot_belt && (item_flags & ITEM_FLAG_IS_BELT))
-				return 1
-			else if(!H.w_uniform && (slot_w_uniform in mob_equip))
+		if(slot_wear_id, slot_belt)
+			if(!H.w_uniform && (slot_w_uniform in mob_equip))
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>")
 				return 0
