@@ -542,7 +542,7 @@
 
 // Check if we should die.
 /mob/living/carbon/human/proc/handle_death_check()
-	if(should_have_organ(BP_BRAIN))
+	if(should_have_organ(BP_BRAIN) && !has_fake_brain())
 		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
 		if(!brain || (brain.status & ORGAN_DEAD))
 			return TRUE
