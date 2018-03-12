@@ -704,10 +704,10 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!(T in view(changeling.sting_range))) return
 	if(!sting_can_reach(T, changeling.sting_range)) return
 	if(!changeling_power(required_chems)) return
-	if(T.isSynthetic())
-		to_chat(src, "<span class='warning'>[T] is not compatible with our biology.</span>")
+	var/obj/item/organ/external/target_limb = T.get_organ(src.zone_sel.selecting)
+	if (!target_limb)
+		to_chat(src, "<span class='warning'>[T] is missing that limb.</span>")
 		return
-
 	changeling.chem_charges -= required_chems
 	changeling.sting_range = 1
 	src.verbs -= verb_path
@@ -715,8 +715,15 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!loud)
 		to_chat(src, "<span class='notice'>We stealthily sting [T].</span>")
 	else
-		visible_message("<span class='danger'>[src] fires an organic shard into [T]'s chest, puncturing the stinger into their skin!</span>")
-	if(!T.mind || !T.mind.changeling)	return T	//T will be affected by the sting
+		visible_message("<span class='danger'>[src] fires an organic shard into [T]!</span>")
+
+	for(var/obj/item/clothing/clothes in list(T.head, T.wear_mask, T.wear_suit, T.w_uniform, T.gloves, T.shoes))
+		if(istype(clothes) && (clothes.body_parts_covered & target_limb.body_part) && (clothes.item_flags & ITEM_FLAG_THICKMATERIAL))
+			to_chat(src, "<span class='warning'>[T]'s armor has protected them.</span>")
+			return //thick clothes will protect from the sting
+
+	if(T.isSynthetic() || target_limb.isrobotic()) return
+	if(!T.mind || !T.mind.changeling) return T	//T will be affected by the sting
 	to_chat(T, "<span class='warning'>You feel a tiny prick.</span>")
 	return
 
