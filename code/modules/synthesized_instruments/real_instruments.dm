@@ -7,7 +7,7 @@
 
 
 /obj/structure/synthesized_instrument/Initialize()
-	..()
+	. = ..()
 	src.maximum_lines = GLOB.musical_config.max_lines
 	src.maximum_line_length = GLOB.musical_config.max_line_length
 
@@ -111,7 +111,7 @@
 
 
 /obj/item/device/synthesized_instrument/Initialize()
-	..()
+	. = ..()
 	src.maximum_lines = GLOB.musical_config.max_lines
 	src.maximum_line_length = GLOB.musical_config.max_line_length
 
