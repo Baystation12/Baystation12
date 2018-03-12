@@ -308,6 +308,26 @@
 		src.welded = !src.welded
 		src.update_icon()
 		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
+	else if(istype(W, /obj/item/device/multitool))
+		var/obj/item/device/multitool/multi = W
+		if(multi.in_use)
+			user << "<span class='warning'>This multitool is already in use!</span>"
+			return
+		multi.in_use = 1
+		for(var/i in 1 to rand(4,8))
+			user.visible_message(
+				"<span class='warning'>[user] picks in wires of the [src.name] with a multitool.</span>",
+				"<span class='warning'>I am trying to reset circuitry lock module ([i])...</span>"
+				)
+			if(!do_after(user,200)||!locked)
+				multi.in_use=0
+				return
+		locked = 0
+		broken = 1
+		src.update_icon()
+		multi.in_use=0
+		user.visible_message("<span class='warning'>[user] [locked?"locks":"unlocks"] [name] with a multitool.</span>",
+			"<span class='warning'>I [locked?"enable":"disable"] the locking modules.</span>")
 	else if(setup & CLOSET_HAS_LOCK)
 		src.togglelock(user, W)
 	else
