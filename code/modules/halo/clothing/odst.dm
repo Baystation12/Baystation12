@@ -125,5 +125,9 @@
 	.=..()
 	return INITIALIZE_HINT_QDEL
 
+/obj/item/clothing/accessory/storage/odst
+	name = "Tactical Webbing"
+	icon_state = "Tactical Webbing"
+
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND
