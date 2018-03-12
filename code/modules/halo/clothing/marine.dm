@@ -91,5 +91,14 @@
 
 	can_hold = list(/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphe,/obj/item/weapon/storage/firstaid/unsc)
 
+/obj/item/clothing/mask/marine
+	name = "marine bandana"
+	desc = "For masking your identity, keeping your face warm, and blocking dust or sand. Comes in a stylish olice drab marine camo."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	icon_state = "marinemask"
+	item_state = "marinemask"
+	w_class = ITEM_SIZE_SMALL
+
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND

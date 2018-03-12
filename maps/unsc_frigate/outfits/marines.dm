@@ -56,6 +56,10 @@
 
 	flags = 0
 
+/decl/hierarchy/outfit/job/UNSC_ship/marine/proc/equip_special(mob/living/carbon/human/H)
+	if(prob(25))
+		H.equip_to_slot_or_del(/obj/item/clothing/mask/marine)
+
 /decl/hierarchy/outfit/job/UNSC_ship/odst
 	name = "ODST Rifleman"
 	l_ear = /obj/item/device/radio/headset/unsc/marine
