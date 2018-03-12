@@ -49,22 +49,21 @@
 		return
 	toggle_open(user)
 
-/obj/structure/fireaxecabinet/MouseDrop(over_object, src_location, over_location)
-	if(over_object == usr)
-		var/mob/user = over_object
-		if(!istype(user))
+/obj/structure/fireaxecabinet/MouseDrop(over_object, src_location)
+	if(over_object == usr && CanMouseDrop(usr))
+		if(!istype(usr, /mob))
 			return
 
 		if(!open)
-			to_chat(user, "<span class='warning'>\The [src] is closed.</span>")
+			to_chat(usr, "<span class='warning'>\The [src] is closed.</span>")
 			return
 
 		if(!fireaxe)
-			to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
+			to_chat(usr, "<span class='warning'>\The [src] is empty.</span>")
 			return
 
-		fireaxe.forceMove(get_turf(user))
-		user.put_in_hands(fireaxe)
+		fireaxe.forceMove(get_turf(usr))
+		usr.put_in_hands(fireaxe)
 		fireaxe = null
 		update_icon()
 
