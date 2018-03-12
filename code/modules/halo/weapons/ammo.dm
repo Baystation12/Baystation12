@@ -64,7 +64,7 @@
 
 /obj/item/ammo_magazine/m762_ap
 	name = "magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 shots. Standard issue."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 shots. Fits both the MA5B and M392."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M395mag"
 	mag_type = MAGAZINE
@@ -75,19 +75,36 @@
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/m762_ap/MA5B
+	name = "MA5B magazine (7.62mm) M118 FMJ-AP"
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 shots. Specific to the MA5B."
 	icon_state = "MA5B_mag"
 	max_ammo = 60
 
+/obj/item/ammo_magazine/m762_ap/M392
+	name = "M392 magazine (7.62mm) M118 FMJ-AP"
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 shots. Specific to the M392."
+	ammo_type = /obj/item/ammo_casing/a762_m392
+
 /obj/item/ammo_magazine/m762_ap/MA37
 	icon_state = "MA37_mag"
+	max_ammo = 32
 
 /obj/item/ammo_casing/a762_ap
 	desc = "A 7.62mm bullet casing."
 	caliber = "a762"
 	projectile_type = /obj/item/projectile/bullet/a762_ap
 
+/obj/item/ammo_casing/a762_m392
+	desc = "A 7.62mm bullet casing."
+	caliber = "a762"
+	projectile_type = /obj/item/projectile/bullet/a762/M392
+
 /obj/item/projectile/bullet/a762_ap
 	damage = 30
+
+/obj/item/projectile/bullet/a762/M392
+	damage = 35
+	armor_penetration = 10
 
 /obj/item/weapon/storage/box/m762_ap
 	name = "box of 7.62mm M118 magazines"

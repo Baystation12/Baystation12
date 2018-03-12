@@ -13,7 +13,7 @@
 	burst = 3
 	projectile_type = /obj/item/projectile/covenant/plasmarifle
 	screen_shake = 0
-
+	dispersion=list(0.0, 0.6, 0.8)
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',

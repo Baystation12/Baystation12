@@ -91,5 +91,42 @@
 
 	can_hold = list(/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphe,/obj/item/weapon/storage/firstaid/unsc)
 
+/obj/item/clothing/mask/marine
+	name = "marine bandana"
+	desc = "For masking your identity, keeping your face warm, and blocking dust or sand. Comes in a stylish olice drab marine camo."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	icon_state = "marinemask"
+	item_state = "marinemask"
+	w_class = ITEM_SIZE_SMALL
+
+/obj/item/clothing/suit/space/void/unsc
+	name = "\improper Salvage Suit"
+	desc = "A universal suit used in EVA runs on derelicts."
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
+	flags_inv = HIDESHOES|HIDEJUMPSUIT
+	siemens_coefficient = 0.6
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	icon_state = "salvage_void"
+	item_state = "salvage_void"
+	w_class = ITEM_SIZE_HUGE
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
+	armor = list(melee = 60, bullet = 30, laser = 60, energy = 25, bomb = 50, bio = 100, rad = 100)
+
+/obj/item/clothing/head/helmet/space/void/unsc
+	name = "\improper Salvage Helmet"
+	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	armor = list(melee = 30, bullet = 10, laser = 20, energy = 5, bomb = 35, bio = 100, rad = 50)
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	icon_state = "rig0-salvage"
+	item_state = "rig0-salvage"
+
+/obj/item/clothing/suit/space/void/unsc/prepared/New()
+	..()
+	helmet = new /obj/item/clothing/head/helmet/space/void/unsc
+
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND

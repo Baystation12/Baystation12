@@ -17,6 +17,7 @@
 	reload_sound = 'code/modules/halo/sounds/SniperRifleReloadSoundEffect.ogg'
 	one_hand_penalty = -1
 	scoped_accuracy = 3
+	accuracy = -2
 	screen_shake = 0
 	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
@@ -48,14 +49,14 @@
 	load_method = MAGAZINE
 	caliber = "a762"
 	slot_flags = SLOT_BACK
-	magazine_type = /obj/item/ammo_magazine/m762_ap
+	magazine_type = /obj/item/ammo_magazine/m762_ap/M392
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap) //Disallows loading LMG boxmags into the DMR.
 	fire_sound = 'code/modules/halo/sounds/DMR_ShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
 	w_class = ITEM_SIZE_LARGE
-	accuracy = 1
-	scoped_accuracy = 2
+	accuracy = 2
+	scoped_accuracy = 3
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 
@@ -66,10 +67,10 @@
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
 	set category = "Object"
-	set name = "Use Scope (1.25x)"
+	set name = "Use Scope (1.35x)"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.25)
+	toggle_scope(usr, 1.35)
 
 /obj/item/weapon/gun/projectile/m392_dmr/update_icon()
 	if(ammo_magazine)
