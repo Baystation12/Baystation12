@@ -1,5 +1,0 @@
-author: "mkalash"
-delete-after: True
-changes: 
-  - rscadd: "Added secure energy guns, which require registration to a user and are locked to stun without additional per-mode authorization. Secure small energy guns replace security's tasers."
-  - rscadd: "NTsec now also get a shock mode for their revolvers, which is also locked behind command authorization."
