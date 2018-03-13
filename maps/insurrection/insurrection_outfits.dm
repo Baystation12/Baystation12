@@ -34,8 +34,6 @@
 	l_ear = /obj/item/device/radio/headset/insurrection
 	gloves = /obj/item/clothing/gloves/tactical
 	pda_slot = null
-
-	l_hand = /obj/item/turret_deploy_kit/chaingun
 	l_pocket = /obj/item/squad_manager
 	r_pocket = /obj/item/device/spy_monitor
 
