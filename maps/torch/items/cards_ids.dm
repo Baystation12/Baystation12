@@ -136,9 +136,14 @@
 //NanoTrasen and Passengers
 
 /obj/item/weapon/card/id/torch/passenger
-	desc = "A card issued to passengers and off-duty personnel aboard the SEV Torch."
+	desc = "A card issued to passengers aboard the SEV Torch."
 	icon_state = "id"
 	job_access_type = /datum/job/assistant
+
+/obj/item/weapon/card/id/torch/offduty
+	desc = "A card issued to off-duty personnel aboard the SEV Torch."
+	icon_state = "id"
+	job_access_type = /datum/job/offduty
 
 /obj/item/weapon/card/id/torch/passenger/research
 	desc = "A card issued to NanoTrasen personnel aboard the SEV Torch."
