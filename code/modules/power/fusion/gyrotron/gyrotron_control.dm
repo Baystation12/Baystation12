@@ -16,6 +16,11 @@
 	add_fingerprint(user)
 	interact(user)
 
+/obj/machinery/computer/gyrotron_control/attack_ghost(var/mob/observer/ghost/user)
+	if(check_rights(R_ADMIN, 0, user))
+		..()
+	else return
+
 /obj/machinery/computer/gyrotron_control/interact(var/mob/user)
 
 	if(!id_tag)
