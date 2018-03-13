@@ -59,6 +59,8 @@
 /decl/hierarchy/outfit/job/UNSC_ship/marine/proc/equip_special(mob/living/carbon/human/H)
 	if(prob(25))
 		H.equip_to_slot_or_del(/obj/item/clothing/mask/marine)
+	if(prob(25))
+		H.equip_to_slot_or_del(/obj/item/clothing/head/helmet/marine/visor)
 
 /decl/hierarchy/outfit/job/UNSC_ship/odst
 	name = "ODST Rifleman"
