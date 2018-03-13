@@ -85,6 +85,7 @@
 #include "code\_helpers\global_access.dm"
 #include "code\_helpers\global_lists.dm"
 #include "code\_helpers\icons.dm"
+#include "code\_helpers\json.dm"
 #include "code\_helpers\lists.dm"
 #include "code\_helpers\logging.dm"
 #include "code\_helpers\maths.dm"

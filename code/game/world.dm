@@ -125,6 +125,8 @@
 	spawn(1)
 		initialize_unit_tests()
 #endif
+	
+	webhook_send_roundstatus("lobby")
 
 #undef RECOMMENDED_VERSION
 
