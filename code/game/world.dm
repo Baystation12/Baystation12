@@ -125,6 +125,8 @@
 	spawn(1)
 		initialize_unit_tests()
 #endif
+	
+	webhook_send_roundstatus("lobby")
 
 #undef RECOMMENDED_VERSION
 
@@ -360,7 +362,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		for(var/client/target in GLOB.clients)
 			if(!target)
 				continue //sanity
-			if(target.is_key_ignored(ckey)||target.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE) // If we're ignored by this person, then do nothing.
+			if(target.is_key_ignored(ckey) || target.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE || target.get_preference_value(/datum/client_preference/show_discord_ooc) == GLOB.PREF_HIDE) // If we're ignored by this person, then do nothing.
 				continue //if it shouldn't see then it doesn't
 			to_chat(target, "<span class='ooc'>[sent_message]</span>")
 

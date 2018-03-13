@@ -140,6 +140,8 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	else
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
 
+	webhook_send_ahelp(src.ckey, original_msg + " - heard by [admin_number_present] non-AFK admins.")
+
 	feedback_add_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
