@@ -27,7 +27,7 @@
 
 /obj/item/weapon/gun/projectile/srs99_sniper/verb/scope()
 	set category = "Object"
-	set name = "Use Scope (2x)"
+	set name = "Use Scope"
 	set popup_menu = 1
 
 	toggle_scope(usr, 2.0)
@@ -67,7 +67,7 @@
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
 	set category = "Object"
-	set name = "Use Scope (1.35x)"
+	set name = "Use Scope"
 	set popup_menu = 1
 
 	toggle_scope(usr, 1.35)

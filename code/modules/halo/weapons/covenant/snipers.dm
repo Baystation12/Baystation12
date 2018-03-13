@@ -21,7 +21,7 @@
 
 /obj/item/weapon/gun/projectile/type51carbine/verb/scope()
 	set category = "Object"
-	set name = "Use Scope (1.25x)"
+	set name = "Use Scope"
 	set popup_menu = 1
 
 	toggle_scope(usr, 1.25)
