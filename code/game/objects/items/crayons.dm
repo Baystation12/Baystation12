@@ -3,36 +3,42 @@
 	colour = "#da0000"
 	shadeColour = "#810c0c"
 	colourName = "red"
+	color_description = "red crayon"
 
 /obj/item/weapon/pen/crayon/orange
 	icon_state = "crayonorange"
 	colour = "#ff9300"
 	shadeColour = "#a55403"
 	colourName = "orange"
+	color_description = "orange crayon"
 
 /obj/item/weapon/pen/crayon/yellow
 	icon_state = "crayonyellow"
 	colour = "#fff200"
 	shadeColour = "#886422"
 	colourName = "yellow"
+	color_description = "yellow crayon"
 
 /obj/item/weapon/pen/crayon/green
 	icon_state = "crayongreen"
 	colour = "#a8e61d"
 	shadeColour = "#61840f"
 	colourName = "green"
+	color_description = "green crayon"
 
 /obj/item/weapon/pen/crayon/blue
 	icon_state = "crayonblue"
 	colour = "#00b7ef"
 	shadeColour = "#0082a8"
 	colourName = "blue"
+	color_description = "blue crayon"
 
 /obj/item/weapon/pen/crayon/purple
 	icon_state = "crayonpurple"
 	colour = "#da00ff"
 	shadeColour = "#810cff"
 	colourName = "purple"
+	color_description = "purple crayon"
 
 /obj/item/weapon/pen/crayon/random/Initialize()
 	..()
@@ -46,6 +52,7 @@
 	colour = "#ffffff"
 	shadeColour = "#000000"
 	colourName = "mime"
+	color_description = "white crayon"
 	uses = 0
 
 /obj/item/weapon/pen/crayon/mime/attack_self(mob/living/user as mob) //inversion
@@ -64,6 +71,7 @@
 	colour = "#fff000"
 	shadeColour = "#000fff"
 	colourName = "rainbow"
+	color_description = "rainbow crayon"
 	uses = 0
 
 /obj/item/weapon/pen/crayon/rainbow/attack_self(mob/living/user as mob)
