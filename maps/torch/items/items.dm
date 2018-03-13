@@ -51,6 +51,12 @@ Torch specific items
 /obj/item/device/pda/pathfinder
 	icon_state = "pda-pathfinder"
 
+/obj/item/device/pda/heads/hop
+	pen = /obj/item/weapon/pen/multi/cmd/xo
+
+/obj/item/device/pda/captain
+	pen = /obj/item/weapon/pen/multi/cmd/co
+
 /***********
 Unique items
 ***********/
