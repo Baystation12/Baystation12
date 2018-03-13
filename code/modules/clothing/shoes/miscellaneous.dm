@@ -60,11 +60,12 @@
 	name = "tactical boots"
 	desc = "Tan boots with extra padding and armor."
 	icon_state = "jungle"
-	force = 3
-	armor = list(melee = 30, bullet = 20, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
+	force = 5
+	armor = list(melee = 30, bullet = 30, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 	can_hold_knife = 1
 	body_parts_covered = FEET|LEGS
+	item_flags = NOSLIP
 
 /obj/item/clothing/shoes/dress
 	name = "dress shoes"
