@@ -142,6 +142,11 @@ var/list/_client_preferences_by_type
 	key = "CHAT_OOC"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
+/datum/client_preference/show_discord_ooc
+	description ="Discord OOC chat"
+	key = "CHAT_DISCORD_OOC"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
 /datum/client_preference/show_aooc
 	description ="AOOC chat"
 	key = "CHAT_AOOC"
