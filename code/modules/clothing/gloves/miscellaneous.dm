@@ -109,7 +109,7 @@
 
 /obj/item/clothing/gloves/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
-	name = "work gloves"
+	name = "combat gloves"
 	icon_state = "work"
 	item_state = "wgloves"
 	siemens_coefficient = 0.50

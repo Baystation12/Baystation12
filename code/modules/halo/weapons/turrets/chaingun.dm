@@ -1,13 +1,13 @@
 
 /obj/structure/turret/chaingun
-	name = "Chaingun Turret"
-	desc = "A Chaingun Turret"
+	name = "Confetti Maker Chaingun Turret"
+	desc = "A chaingun turret nicknamed the Confetti Maker due to it's inaccuracy and extraordinary rate of fire."
 
 	icon_state = "chaingunturret"
 	turret_gun = /obj/item/weapon/gun/projectile/turret/chaingun
 
 /obj/item/weapon/gun/projectile/turret/chaingun
-	name = "Chaingun Turret"
+	name = "Confetti Maker Chaingun Turret"
 	desc = "Dakka."
 
 	icon_state = "chaingun_obj"
