@@ -96,7 +96,7 @@
 	icon_state = "streetlamp1"
 	base_state = "streetlamp"
 	desc = "A street lighting fixture."
-	brightness_range = 10
+	brightness_range = 8
 	brightness_color = "#0080ff"
 	density = 1
 
