@@ -16,6 +16,11 @@
 	add_fingerprint(user)
 	interact(user)
 
+/obj/machinery/computer/fusion_fuel_control/attack_ghost(var/mob/observer/ghost/user)
+	if(check_rights(R_ADMIN, 0, user))
+		..()
+	else return
+
 /obj/machinery/computer/fusion_fuel_control/interact(var/mob/user)
 
 	if(stat & (BROKEN|NOPOWER))

@@ -28,6 +28,11 @@
 	add_fingerprint(user)
 	interact(user)
 
+/obj/machinery/computer/fusion_core_control/attack_ghost(var/mob/observer/ghost/user)
+	if(check_rights(R_ADMIN, 0, user))
+		..()
+	else return
+
 /obj/machinery/computer/fusion_core_control/interact(mob/user)
 
 	if(!cur_viewed_device || !check_core_status(cur_viewed_device))
