@@ -1,0 +1,5 @@
+author: "mustafakalash"
+delete-after: True
+changes: 
+  - rscadd: "You can now deface people's heads by targeting it with help intent and using a pen, crayon, or lipstick -- even if it's no longer attached. Heads with shoulders below them can be gentrified using a shower, or in a sink otherwise."
+  - bugfix: "You can no longer apply lipstick to things without lips."
