@@ -55,7 +55,6 @@
 		slot_r_hand_str = null,
 		)
 	armor_thickness = 20
-	slowdown_general = 1
 
 //Defines for armour subtypes//
 

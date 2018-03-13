@@ -60,7 +60,7 @@
 	item_state = "boots"
 	icon_state = "boots"
 	force = 5
-	armor = list(melee = 40, bullet = 50, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
