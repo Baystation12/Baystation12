@@ -52,6 +52,7 @@
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	hard_drive.store_file(new/datum/computer_file/program/card_mod())
+	hard_drive.store_file(new/datum/computer_file/program/forceauthorization())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/email_client())
 	hard_drive.store_file(new/datum/computer_file/program/records())

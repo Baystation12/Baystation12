@@ -85,3 +85,17 @@ Weapons
 	fire_delay = 5.7 //Autorevolver. Also synced with the animation
 	fire_anim = "mosley_fire"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+
+/obj/item/weapon/gun/energy/secure/stunrevolver
+	name = "stun revolver"
+	desc = "This LAEP20 is fitted with an NT1019 chip, a component that allows remote authorization of weapon functionality, created by NanoTrasen following the Baetiff Incident."
+	icon_state = "stunrevolver"
+	item_state = "stunrevolver"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
+	projectile_type = /obj/item/projectile/energy/electrode
+	max_shots = 8
+	firemodes = list(
+		list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode, modifystate="stunrevolver"),
+		list(mode_name="shock", projectile_type=/obj/item/projectile/energy/electrode/stunshot, modifystate="stunrevolver")
+		)
+	req_access = list(access_sec_guard)
