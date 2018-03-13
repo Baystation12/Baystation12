@@ -108,50 +108,47 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/station_departments = list()//Gets filled automatically depending on jobs allowed
 
 	//Factions prefs stuff
+	var/list/faction_choices = list(
+		"NanoTrasen",
+		"Liu-Je Green Terraforming Industries",
+		"Charcoal TestLabs Ltd.",
+		"Blue Oceanic Explorers",
+		"Milky Way Trade Union",
+		"Redknight & Company Dominance Tech",
+		"Indigo Special Research Collaboration"
+	)
+
 	var/list/citizenship_choices = list(
-		"Earth",
-		"Mars",
-		"Terra",
-		"Gaia",
+		"NanoTrasen",
+		"Nova Magnitka Government",
+		"Gaia Magna",
 		"Moghes",
 		"Ahdomai",
-		"Qerrbalak"
+		"Qerrbalak",
+		"Parish of the Parthenonnus Ark"
 	)
 
 	var/list/home_system_choices = list(
-		"Sol",
-		"Nyx",
+		"Nova Magnitka",
 		"Tau Ceti",
 		"Epsilon Ursae Minoris",
-		"Zamsiin-lr",
-		"Gilgamesh"
-		)
-
-	var/list/faction_choices = list(
-		"Sol Central Government",
-		"Terran Colonial Confederation",
-		"Vey Med",
-		"Einstein Engines",
-		"Free Trade Union",
-		"NanoTrasen",
-		"Ward-Takahashi GMB",
-		"Gilthari Exports",
-		"Grayson Manufactories Ltd.",
-		"Aether Atmospherics",
-		"Zeng-Hu Pharmaceuticals",
-		"Hephaestus Industries",
-		"Commonwealth of Ahdomai"
-		)
+		"Zermig VIII",
+		"Arcturia",
+		"Gaia Magna",
+		"Parthenonnus Ark Space Vessel"
+	)
 
 	var/list/religion_choices = list(
-		"Unitarianism",
-		"Hinduism",
-		"Buddhist",
-		"Islamic",
-		"Christian",
-		"Agnostic",
-		"Deist"
-		)
+		"Pan-Christian United Church",
+		"Mahadeva Marga",
+		"Buddhism",
+		"Allah Chosen Devotees",
+		"A-Kami",
+		"Geng Hao Dao",
+		"Jesus Witnesses",
+		"Agnosticism",
+		"Atheism"
+	)
 
 /datum/map/New()
 	if(!map_levels)
