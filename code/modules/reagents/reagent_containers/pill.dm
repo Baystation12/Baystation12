@@ -324,3 +324,12 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 	reagents.add_reagent(/datum/reagent/iron, 5)
 	reagents.add_reagent(/datum/reagent/sugar, 5)
 	color = reagents.get_color()
+
+/obj/item/weapon/reagent_containers/pill/detergent
+	name = "detergent pod"
+	desc = "Put in water to get space cleaner. Do not eat. Really."
+	icon_state = "pill21"
+
+/obj/item/weapon/reagent_containers/pill/detergent/New()
+	..()
+	reagents.add_reagent(/datum/reagent/ammonia, 30)
