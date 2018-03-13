@@ -47,7 +47,6 @@
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
 	var/slots = 4
-	slowdown_general = 1
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)

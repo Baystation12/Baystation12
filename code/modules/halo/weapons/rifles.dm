@@ -50,6 +50,9 @@
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37/add_flashlight()
 	return
 
+/obj/item/weapon/gun/projectile/ma5b_ar/training
+	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B/TTR
+
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37
 	name = "\improper MA37 ICWS"
 	desc = "Also formally known as the MA5."
