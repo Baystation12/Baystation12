@@ -621,10 +621,12 @@
 		if (drowsyness > 0)
 			drowsyness = max(0, drowsyness-1)
 			eye_blurry = max(2, eye_blurry)
-			if (drowsyness > 10 && (prob(5) || drowsyness >= 60))
-				if(stat == CONSCIOUS)
-					to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
-				Sleeping(5)
+			if(drowsyness > 10)
+				var/zzzchance = min(5, 5*drowsyness/30)
+				if((prob(zzzchance) || drowsyness >= 60))
+					if(stat == CONSCIOUS)
+						to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
+					Sleeping(5)
 
 		confused = max(0, confused - 1)
 
@@ -643,7 +645,7 @@
 		if (nutrition > 0)
 			nutrition = max (0, nutrition - species.hunger_factor)
 
-		if(stasis_value > 1 && drowsyness < stasis_value * 5)
+		if(stasis_value > 1 && drowsyness < stasis_value * 4)
 			drowsyness += min(stasis_value, 3)
 			if(!stat && prob(1))
 				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
