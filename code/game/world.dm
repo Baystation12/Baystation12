@@ -362,9 +362,9 @@ var/world_topic_spam_protect_time = world.timeofday
 		for(var/client/target in GLOB.clients)
 			if(!target)
 				continue //sanity
-			if(target.is_key_ignored(ckey) || target.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE || target.get_preference_value(/datum/client_preference/show_discord_ooc) == GLOB.PREF_HIDE) // If we're ignored by this person, then do nothing.
+			if(target.is_key_ignored(ckey) || target.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE || target.get_preference_value(/datum/client_preference/show_discord_ooc) == GLOB.PREF_HIDE  && !input["isadmin"]) // If we're ignored by this person, then do nothing.
 				continue //if it shouldn't see then it doesn't
-			to_chat(target, "<span class='ooc'>[sent_message]</span>")
+			to_chat(target, "<span class='ooc'><span class='everyone'>[russian_to_cp1251(sent_message)]</span></span>")
 
 	else if ("asay" in input)
 		return "not supported" //simply no asay on bay
@@ -390,11 +390,9 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		var/rank = "Discord Admin"
 
-		var/message =	"<font color='red'>[rank] PM from <b><a href='?irc_msg=[input["admin"]]'>[input["admin"]]</a></b>: [russian_to_cp1251(input["response"])]</font>"
-		var/amessage =  "<font color='blue'>[rank] PM from <a href='?irc_msg=[input["admin"]]'>[input["admin"]]</a> to <b>[key_name(C)]</b> : [russian_to_cp1251(input["response"])]</font>"
-
-		C.received_irc_pm = world.time
-		C.irc_admin = input["admin"]
+		var/message =	"<font color='red'>[rank] PM from <b>[input["admin"]]</b>: [russian_to_cp1251(input["response"])]</font>"
+		var/amessage =  "<font color='blue'>[rank] PM from [input["admin"]] to <b>[key_name(C)]</b> : [russian_to_cp1251(input["response"])]</font>"
+		webhook_send_ahelp("[input["admin"]] -> [req_ckey]", russian_to_cp1251(input["response"]))
 
 		sound_to(C, 'sound/effects/adminhelp.ogg')
 		to_chat(C, message)
