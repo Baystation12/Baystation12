@@ -58,6 +58,7 @@
 	desc = "Also formally known as the MA5."
 	icon_state = "MA37"
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
+	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA37)
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37/update_icon()
 	if(ammo_magazine)
@@ -66,7 +67,7 @@
 		icon_state = "MA37_unloaded"
 
 /obj/item/weapon/gun/projectile/ma5b_ar/proc/toggle_light()
-	set category = "Object"
+	set category = "Weapon"
 	set name = "Toggle Gun Light"
 	on = !on
 	if(on && activation_sound)
@@ -102,7 +103,7 @@
 		)
 
 /obj/item/weapon/gun/projectile/br85/verb/scope()
-	set category = "Object"
+	set category = "Weapon"
 	set name = "Use Scope"
 	set popup_menu = 1
 

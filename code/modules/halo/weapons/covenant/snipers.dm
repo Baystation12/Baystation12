@@ -20,7 +20,7 @@
 		)
 
 /obj/item/weapon/gun/projectile/type51carbine/verb/scope()
-	set category = "Object"
+	set category = "Weapon"
 	set name = "Use Scope"
 	set popup_menu = 1
 
