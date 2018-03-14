@@ -1,0 +1,4 @@
+author: afterthought
+delete-after: True
+changes: 
+  - bugfix: "Slipping out of mechas during gravity failure fixed."
