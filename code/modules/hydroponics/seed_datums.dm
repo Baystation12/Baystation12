@@ -657,7 +657,7 @@
 	name = "peppercorn"
 	seed_name = "peppercorn"
 	display_name = "black pepper"
-	chems = list(blackpepper = list(10,10))
+	chems = list(/datum/reagent/blackpepper = list(10,10))
 
 /datum/seed/peppercorn/New()
 	..()
