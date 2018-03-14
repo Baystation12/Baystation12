@@ -262,6 +262,31 @@
 	pain_power = 200
 	effective_dose = 2
 
+/datum/reagent/deletrathol
+	name = "Deletrathol"
+	description = "An effective painkiller that causes confusion."
+	taste_description = "confusion"
+	color = "#800080"
+	reagent_state = LIQUID
+	overdose = 15
+	scannable = 1
+	metabolism = 0.02
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/deletrathol/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
+	H.add_chemical_effect(CE_PAINKILLER, 80)
+	H.add_chemical_effect(CE_SLOWDOWN, 1)
+	H.make_dizzy(2)
+	if(prob(75))
+		H.drowsyness++
+	if(prob(25))
+		H.confused++
+
+/datum/reagent/deletrathol/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.druggy = max(M.druggy, 2)
+	M.add_chemical_effect(CE_PAINKILLER, 10)
+
 /* Other medicine */
 
 /datum/reagent/synaptizine
