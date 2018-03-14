@@ -9,6 +9,7 @@
 	show_message = " snaps their fingers."
 	spell_delay = 50
 	hud_state = "gen_ice"
+	cast_sound = 'sound/magic/summonitems_generic.ogg'
 
 /spell/hand/slippery_surface/cast_hand(var/atom/a, var/mob/user)
 	for(var/turf/simulated/T in view(1,a))

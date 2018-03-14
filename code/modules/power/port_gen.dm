@@ -4,15 +4,15 @@
 	desc = "A portable generator for emergency backup power."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
-	density = 1
-	anchored = 0
-	use_power = 0
+	density = TRUE
+	anchored = FALSE
+	use_power = FALSE
 
-	var/active = 0
+	var/active = FALSE
 	var/power_gen = 5000
-	var/open = 0
-	var/recent_fault = 0
-	var/power_output = 1
+	var/open = FALSE
+	var/recent_fault = FALSE
+	var/power_output = TRUE
 	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/machinery/power/port_gen/proc/IsBroken()
@@ -28,15 +28,28 @@
 	return
 
 /obj/machinery/power/port_gen/proc/handleInactive()
+	playsound(loc, 'sound/machines/generator/generator_end.ogg', 50, 1)
+	STOP_PROCESSING(SSmachines, src)
 	return
 
+/obj/machinery/power/port_gen/Initialize()
+	. = ..()
+	START_PROCESSING(SSmachines, src)
+
+/obj/machinery/power/port_gen/Destroy()
+	STOP_PROCESSING(SSmachines, src)
+	. = ..()
+
 /obj/machinery/power/port_gen/Process()
+	if(!active) return
 	if(active && HasFuel() && !IsBroken() && anchored && powernet)
 		add_avail(power_gen * power_output)
 		UseFuel()
 		src.updateDialog()
+		if(prob(40))
+			playsound(loc, "generator_sound", 60, 2)
 	else
-		active = 0
+		active = FALSE
 		handleInactive()
 	update_icon()
 
@@ -64,7 +77,7 @@
 /obj/machinery/power/port_gen/emp_act(severity)
 	if(!active)
 		return
-	var/duration = 6000 //ten minutes
+	var/duration = 10 MINUTES
 	switch(severity)
 		if(1)
 			stat &= BROKEN
@@ -121,9 +134,6 @@
 	. = ..()
 	if(anchored)
 		connect_to_network()
-
-/obj/machinery/power/port_gen/pacman/New()
-	..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
@@ -156,8 +166,8 @@
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet
 	if(sheets >= needed_sheets - sheet_left)
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 //Removes one stack's worth of material from the generator.
 /obj/machinery/power/port_gen/pacman/DropFuel()
@@ -232,6 +242,7 @@
 
 	if(overheating)
 		overheating--
+	..()
 
 /obj/machinery/power/port_gen/pacman/proc/overheat()
 	overheating++
@@ -256,8 +267,8 @@
 		explode() //if they're foolish enough to emag while it's running
 
 	if (!emagged)
-		emagged = 1
-		return 1
+		emagged = TRUE
+		return TRUE
 
 /obj/machinery/power/port_gen/pacman/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, sheet_path))
@@ -385,12 +396,15 @@
 	if(href_list["action"])
 		if(href_list["action"] == "enable")
 			if(!active && HasFuel() && !IsBroken())
-				active = 1
+				active = TRUE
 				update_icon()
+				playsound(loc, 'sound/machines/generator/generator_start.ogg', 50, 1)
+				START_PROCESSING(SSmachines, src)
 		if(href_list["action"] == "disable")
 			if (active)
-				active = 0
+				active = FALSE
 				update_icon()
+				handleInactive()
 		if(href_list["action"] == "eject")
 			if(!active)
 				DropFuel()
@@ -420,7 +434,7 @@
 /obj/machinery/power/port_gen/pacman/super/update_icon()
 	if(..())
 		set_light(0)
-		return 1
+		return TRUE
 	overlays.Cut()
 	if(power_output >= max_safe_output)
 		var/image/I = image(icon,"[initial(icon_state)]rad")
@@ -453,7 +467,7 @@
 	rad_power = 6
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	board_path = /obj/item/weapon/circuitboard/pacman/super/potato
-	anchored = 1
+	anchored = TRUE
 
 /obj/machinery/power/port_gen/pacman/super/potato/New()
 	create_reagents(120)

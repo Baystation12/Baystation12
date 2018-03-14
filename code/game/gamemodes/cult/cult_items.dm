@@ -9,7 +9,7 @@
 	force = 30
 	throwforce = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	attack_verb = list("strikes", "slashes", "stabs", "slices", "rends", "dices", "cuts", "cleaves")
 
 /obj/item/weapon/melee/cultblade/attack(mob/living/M, mob/living/user, var/target_zone)
 	if(iscultist(user) || (user.mind in godcult.current_antagonists))
@@ -44,6 +44,11 @@
 		to_chat(user, "<span class='warning'>An overwhelming feeling of dread comes over you as you pick up the cultist's sword. It would be wise to be rid of this blade quickly.</span>")
 		user.make_dizzy(120)
 
+/obj/item/weapon/melee/cultblade/equipped(mob/user, var/slot)
+	if(slot == slot_l_hand || slot == slot_r_hand)
+		playsound(loc, 'sound/items/unsheath.ogg', 55, 1)
+	else if(slot == slot_belt)
+		playsound(loc, 'sound/items/sheath.ogg', 40, 1)
 
 /obj/item/clothing/head/culthood
 	name = "cult hood"

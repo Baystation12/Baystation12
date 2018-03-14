@@ -687,6 +687,7 @@
 	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 		canmove = 1
+		canflop = 1
 	else if(buckled)
 		anchored = 1
 		canmove = 0
@@ -698,6 +699,7 @@
 			if(buckled.buckle_movable)
 				anchored = 0
 				canmove = 1
+				canflop = 1
 	else
 		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 		canmove = !incapacitated(INCAPACITATION_DISABLED)
@@ -708,6 +710,7 @@
 		if(r_hand) unEquip(r_hand)
 	else
 		set_density(initial(density))
+		canflop = 1
 	reset_layer()
 
 	for(var/obj/item/grab/G in grabbed_by)
@@ -725,6 +728,10 @@
 		regenerate_icons()
 	else if( lying != lying_prev )
 		update_icons()
+
+	if(lying && !resting && canflop) //Play our knockdown sound.
+		playsound(get_turf(src), "bodyfall", 50, 1)
+		canflop = 0
 
 	return canmove
 

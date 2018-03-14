@@ -221,6 +221,8 @@
 			for(var/mob/living/M in landing.contents)
 				visible_message("\The [src] hits \the [M.name]!")
 				M.take_overall_damage(fall_damage())
+				playsound(landing, get_sfx("bodyfall"), 50, 1)
+
 
 /atom/movable/proc/fall_damage()
 	return 0

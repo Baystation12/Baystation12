@@ -21,6 +21,7 @@
 	var/uses_charge = 0
 	var/list/charge_costs = null
 	var/list/datum/matter_synth/synths = null
+	var/multiple_sprites //Used by material stacks. Go to matstacks.dmi to get an idea of the naming scheme.
 
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
@@ -28,6 +29,7 @@
 		stacktype = type
 	if (amount)
 		src.amount = amount
+	update_icon()
 
 /obj/item/stack/Destroy()
 	if(uses_charge)
@@ -194,7 +196,9 @@
 		for(var/i = 1 to charge_costs.len)
 			var/datum/matter_synth/S = synths[i]
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
+		update_icon()
 		return 1
+	update_icon()
 	return 0
 
 /obj/item/stack/proc/add(var/extra)
@@ -210,6 +214,19 @@
 		for(var/i = 1 to uses_charge)
 			var/datum/matter_synth/S = synths[i]
 			S.add_charge(charge_costs[i] * extra)
+	update_icon()
+
+/obj/item/stack/update_icon()
+	if(multiple_sprites)
+		if(get_amount() <= (get_max_amount()* 0.33))
+			icon_state = initial(icon_state)
+			return
+		else if(get_amount() <= (get_max_amount()* 0.66))
+			icon_state = "[initial(icon_state)]_2"
+			return
+		else
+			icon_state = "[initial(icon_state)]_3"
+
 
 /*
 	The transfer and split procs work differently than use() and add().
@@ -235,7 +252,9 @@
 			transfer_fingerprints_to(S)
 			if(blood_DNA)
 				S.blood_DNA |= blood_DNA
+		update_icon()
 		return transfer
+	update_icon()
 	return 0
 
 //creates a new stack with the specified amount
@@ -255,7 +274,9 @@
 			transfer_fingerprints_to(newstack)
 			if(blood_DNA)
 				newstack.blood_DNA |= blood_DNA
+		update_icon()
 		return newstack
+	update_icon()
 	return null
 
 /obj/item/stack/proc/get_amount()
@@ -301,6 +322,7 @@
 			to_chat(user, "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>")
 		if(!amount)
 			break
+	update_icon()
 
 /obj/item/stack/get_storage_cost()	//Scales storage cost to stack size
 	. = ..()
@@ -316,6 +338,7 @@
 				user.put_in_hands(F)
 				src.add_fingerprint(user)
 				F.add_fingerprint(user)
+				update_icon()
 				spawn(0)
 					if (src && usr.machine==src)
 						src.interact(usr)

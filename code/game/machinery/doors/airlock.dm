@@ -41,7 +41,7 @@
 
 	var/close_sound_powered = 'sound/machines/airlock_close.ogg'
 	var/close_sound_unpowered = 'sound/machines/airlock_close_force.ogg'
-	var/close_failure_blocked = 'sound/machines/triple_beep.ogg'
+	var/close_failure_blocked = 'sound/machines/buzz-two.ogg'
 
 	var/bolts_rising = 'sound/machines/bolts_up.ogg'
 	var/bolts_dropping = 'sound/machines/bolts_down.ogg'

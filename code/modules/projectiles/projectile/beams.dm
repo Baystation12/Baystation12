@@ -163,7 +163,7 @@
 /obj/item/projectile/beam/sniper
 	name = "sniper beam"
 	icon_state = "xray"
-	fire_sound = 'sound/weapons/marauder.ogg'
+	fire_sound = 'sound/weapons/beam_sniper.ogg'
 	damage = 50
 	armor_penetration = 10
 	stun = 3

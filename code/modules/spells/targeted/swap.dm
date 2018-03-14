@@ -1,12 +1,10 @@
 /spell/targeted/swap
 	name = "swap"
-	desc = "This spell swaps the positions of the wizard and a target. Causes brain damage."
+	desc = "This spell swaps the positions of the wizard and a target."
 	feedback = "SW"
 	school = "conjuration"
 
 	charge_type = Sp_HOLDVAR
-	holder_var_type = "brainloss"
-	holder_var_amount = 10
 
 	invocation = "Joyo!"
 	invocation_type = SpI_WHISPER
@@ -20,7 +18,7 @@
 
 	hud_state = "wiz_swap"
 
-	cast_sound = 'sound/effects/bamf.ogg'
+	cast_sound = 'sound/magic/mandswap.ogg'
 
 /spell/targeted/swap/cast(var/list/targets, mob/user)
 	for(var/mob/T in targets)

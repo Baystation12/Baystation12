@@ -18,6 +18,7 @@
 	var/loss = 30
 
 	hud_state = "wiz_horse"
+	cast_sound = 'sound/magic/cowhead_curse.ogg' //Hardly a good sound, but probably the most horrifying.
 
 
 /spell/targeted/torment/cast(var/list/targets, var/mob/user)

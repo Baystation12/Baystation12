@@ -10,6 +10,7 @@
 	invocation_type = SpI_SHOUT
 	var/reagent_type = /datum/reagent/acid/hydrochloric
 	hud_state = "wiz_acid"
+	cast_sound = 'sound/magic/disintegrate.ogg'
 
 /spell/acid_spray/choose_targets()
 	return list(holder)

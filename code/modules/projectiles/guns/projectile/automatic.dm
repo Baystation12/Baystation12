@@ -11,6 +11,7 @@
 	ammo_type = /obj/item/ammo_casing/c9mm
 	multi_aim = 1
 	burst_delay = 2
+	load_sound = 'sound/weapons/autoguninsert.ogg'
 
 	//machine pistol, easier to one-hand with
 	firemodes = list(
@@ -245,7 +246,14 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/proc/toggle_cover(mob/user)
 	cover_open = !cover_open
-	to_chat(user, "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>")
+
+	if(cover_open)
+		to_chat(user, "<span class='notice'>You open [src]'s cover.</span>")
+		playsound(get_turf(src), 'sound/weapons/sawopen.ogg', 50)
+	else
+		to_chat(user, "<span class='notice'>You close [src]'s cover.</span>")
+		playsound(get_turf(src), 'sound/weapons/sawclose.ogg', 50)
+
 	update_icon()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/attack_self(mob/user as mob)

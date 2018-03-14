@@ -16,6 +16,7 @@
 	var/emp_light = 5
 
 	hud_state = "wiz_tech"
+	cast_sound = 'sound/magic/disable_tech.ogg'
 
 /spell/aoe_turf/disable_tech/cast(list/targets)
 

@@ -96,6 +96,7 @@
 		weakened = max(weakened-1,0)
 		if(!weakened)
 			update_icons()
+			canflop++ //We're no longer weakened. We can play the body flop sound again without it behaving oddly.
 	return weakened
 
 /mob/living/proc/handle_stuttering()

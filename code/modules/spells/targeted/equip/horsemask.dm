@@ -17,6 +17,7 @@
 	compatible_mobs = list(/mob/living/carbon/human)
 
 	hud_state = "wiz_horse"
+	cast_sound = 'sound/magic/horsehead_curse.ogg'
 
 /spell/targeted/equip_item/horsemask/New()
 	..()

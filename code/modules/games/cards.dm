@@ -151,6 +151,7 @@
 
 	cards = shuffle(cards)
 	user.visible_message("\The [user] shuffles [src].")
+	playsound(get_turf(src), 'sound/items/cardshuffle.ogg', 40, 1)
 
 /obj/item/weapon/deck/MouseDrop(atom/over)
 	if(!usr || !over) return

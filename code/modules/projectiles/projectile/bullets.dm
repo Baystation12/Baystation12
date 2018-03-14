@@ -1,7 +1,7 @@
 /obj/item/projectile/bullet
 	name = "bullet"
 	icon_state = "bullet"
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot4.ogg'
 	damage = 50
 	damage_type = BRUTE
 	nodamage = 0
@@ -12,6 +12,14 @@
 	var/mob_passthrough_check = 0
 
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
+
+/obj/item/projectile/bullet/Move()
+	..()
+	if(is_below_sound_pressure(get_turf(src)))
+		return
+	else
+		for(var/mob/M in range(2))
+			playsound(M, "bullet_flyby", 50)
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
@@ -127,25 +135,25 @@
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 
 /obj/item/projectile/bullet/pistol
-	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
+	fire_sound = 'sound/weapons/gunshot/pistolshot.ogg'
 	damage = 25 //9mm, .38, etc
 	armor_penetration = 13.5
 
 /obj/item/projectile/bullet/pistol/medium
+	fire_sound = 'sound/weapons/gunshot/pistolshot2.ogg'
 	damage = 26.5 //.45
 	armor_penetration = 14.5
 
 /obj/item/projectile/bullet/pistol/medium/smg
-	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
 	damage = 28 //10mm
 	armor_penetration = 18
 
 /obj/item/projectile/bullet/pistol/medium/revolver
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 	damage = 30 //.44 magnum or something
 
 /obj/item/projectile/bullet/pistol/strong //matebas
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 	damage = 60 //.50AE
 	armor_penetration = 30
 

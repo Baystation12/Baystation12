@@ -215,6 +215,7 @@
 /obj/item/weapon/grenade/chem_grenade/incendiary
 	name = "incendiary grenade"
 	desc = "Used for clearing rooms of living things."
+	icon_state = "pyrog"
 	path = 1
 	stage = 2
 
@@ -281,6 +282,7 @@
 /obj/item/weapon/grenade/chem_grenade/teargas
 	name = "tear gas grenade"
 	desc = "Concentrated Capsaicin. Contents under pressure. Use with caution."
+	icon_state = "smokered"
 	stage = 2
 	path = 1
 

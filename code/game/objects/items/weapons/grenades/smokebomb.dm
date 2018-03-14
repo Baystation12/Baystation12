@@ -2,7 +2,7 @@
 	desc = "It is set to detonate in 2 seconds."
 	name = "smoke bomb"
 	icon = 'icons/obj/grenade.dmi'
-	icon_state = "flashbang"
+	icon_state = "smokewhite"
 	det_time = 20
 	item_state = "flashbang"
 	slot_flags = SLOT_BELT
@@ -34,6 +34,6 @@
 		var/damage = round(30/(get_dist(B,src)+1))
 		B.health -= damage
 		B.update_icon()
-	sleep(80)
+	sleep(8 SECONDS)
 	qdel(src)
 	return

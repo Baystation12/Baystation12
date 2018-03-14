@@ -143,6 +143,9 @@ Please contact me on #coderbus IRC. ~Carn x
 //////////////////////////////////
 
 /mob/living/carbon/human
+	var/lying_lastcheck //Were we lying as of the last check? Skips the falling animation to accomidate for dir changes. \
+	You'd think that is what lying prev did, but no. It's a needless variable that could be accomplished with implicit logic, \
+	you can't lie down twice.
 	var/list/overlays_standing[TOTAL_LAYERS]
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
 
@@ -185,14 +188,27 @@ Please contact me on #coderbus IRC. ~Carn x
 		overlays |= auras
 
 	var/matrix/M = matrix()
+	var/turn_angle = 1 //Exists to invert a value.
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
-		M.Turn(90)
-		M.Scale(size_multiplier)
+		turn_angle = dircheck(turn_angle)
+		M.TurnTo(90 * turn_angle)
 		M.Translate(1,-6)
-	else
-		M.Scale(size_multiplier)
+	else if(lying != lying_prev)
+		turn_angle = dircheck(turn_angle)
+		M.TurnTo(-90 * turn_angle)
 		M.Translate(0, 16*(size_multiplier-1))
-	transform = M
+	M.Scale(size_multiplier)
+	if(lying_lastcheck != lying)
+		animate(src,transform = M, 2, easing = QUAD_EASING|EASE_IN|EASE_OUT)
+	lying_lastcheck = lying
+
+/mob/living/carbon/human/proc/dircheck(var/N = 1) //Basically to prevent you from falling on your side. It looks bad. Also makes sure you always fall on your face, rather than backwards.
+	if(dir != EAST && dir != WEST)
+		dir = pick(EAST, WEST)
+	if(dir == EAST)
+		return N * -1
+	else
+		return N
 
 var/global/list/damage_icon_parts = list()
 

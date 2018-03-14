@@ -37,7 +37,7 @@
 #define SPACE UNDERWATER
 
 GLOBAL_LIST_INIT(shatter_sound,list('sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg'))
-GLOBAL_LIST_INIT(explosion_sound,list('sound/effects/Explosion1.ogg','sound/effects/Explosion2.ogg'))
+GLOBAL_LIST_INIT(explosion_sound,list('sound/effects/Explosion1.ogg','sound/effects/Explosion2.ogg', 'sound/effects/Explosion3.ogg'))
 GLOBAL_LIST_INIT(spark_sound,list('sound/effects/sparks1.ogg','sound/effects/sparks2.ogg','sound/effects/sparks3.ogg','sound/effects/sparks4.ogg'))
 GLOBAL_LIST_INIT(rustle_sound,list('sound/effects/rustle1.ogg','sound/effects/rustle2.ogg','sound/effects/rustle3.ogg','sound/effects/rustle4.ogg','sound/effects/rustle5.ogg'))
 GLOBAL_LIST_INIT(punch_sound,list('sound/weapons/punch1.ogg','sound/weapons/punch2.ogg','sound/weapons/punch3.ogg','sound/weapons/punch4.ogg'))
@@ -52,8 +52,13 @@ GLOBAL_LIST_INIT(keystroke_sound,list('sound/machines/keyboard/keystroke1.ogg','
 GLOBAL_LIST_INIT(switch_sound,list('sound/machines/switch1.ogg','sound/machines/switch2.ogg','sound/machines/switch3.ogg','sound/machines/switch4.ogg'))
 GLOBAL_LIST_INIT(button_sound,list('sound/machines/button1.ogg','sound/machines/button2.ogg','sound/machines/button3.ogg','sound/machines/button4.ogg'))
 GLOBAL_LIST_INIT(chop_sound,list('sound/weapons/chop1.ogg','sound/weapons/chop2.ogg','sound/weapons/chop3.ogg'))
+GLOBAL_LIST_INIT(flop_sound, list('sound/effects/bodyfall1.ogg','sound/effects/bodyfall2.ogg','sound/effects/bodyfall3.ogg','sound/effects/bodyfall4.ogg'))
+GLOBAL_LIST_INIT(generic_gunshot, list('sound/weapons/gunshot/pistolshot.ogg', 'sound/weapons/gunshot/pistolshot2.ogg', 'sound/weapons/gunshot/pistolshot3.ogg', 'sound/weapons/gunshot/pistolshot4.ogg'))
+GLOBAL_LIST_INIT(shower_sound, list('sound/machines/shower/shower_mid1.ogg', 'sound/machines/shower/shower_mid3.ogg'))
+GLOBAL_LIST_INIT(generator_sound, list('sound/machines/generator/generator_mid1.ogg', 'sound/machines/generator/generator_mid2.ogg', 'sound/machines/generator/generator_mid3.ogg'))
+GLOBAL_LIST_INIT(bullet_flyby, list('sound/weapons/flyby/bulletflyby.ogg', 'sound/weapons/flyby/bulletflyby2.ogg', 'sound/weapons/flyby/bulletflyby3.ogg'))
 
-/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency, var/is_ambiance = 0)
+/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num,  falloff, var/is_global, var/frequency, var/is_ambiance = 0)
 
 	soundin = get_sfx(soundin) // same sound for everyone
 
@@ -182,5 +187,6 @@ var/const/FALLOFF_SOUNDS = 0.5
 			if ("keystroke") soundin = pick(GLOB.keystroke_sound)
 			if ("switch") soundin = pick(GLOB.switch_sound)
 			if ("button") soundin = pick(GLOB.button_sound)
+			if ("bodyfall") soundin = pick(GLOB.flop_sound)
 			if ("chop") soundin = pick(GLOB.chop_sound)
 	return soundin

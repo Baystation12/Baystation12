@@ -49,6 +49,9 @@
 		"cold"
 	)
 
+	var/open_sound = 'sound/machines/shutters_open.ogg'
+	var/close_sound = 'sound/machines/shutters_close.ogg'
+
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()
 	for(var/obj/machinery/door/firedoor/F in loc)
@@ -375,8 +378,10 @@
 	switch(animation)
 		if("opening")
 			flick("door_opening", src)
+			playsound(loc, open_sound, 40, 1)
 		if("closing")
 			flick("door_closing", src)
+			playsound(loc, close_sound, 40, 1)
 	return
 
 

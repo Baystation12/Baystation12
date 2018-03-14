@@ -8,11 +8,14 @@
 	max_amount = 60
 	center_of_mass = null
 	randpixel = 3
+	icon = 'icons/obj/matstacks.dmi'
+	multiple_sprites = TRUE
 
 	var/default_type = DEFAULT_WALL_MATERIAL
 	var/material/material
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
+
 
 /obj/item/stack/material/Initialize()
 	. = ..()
@@ -302,14 +305,14 @@
 	name = "borosilicate glass"
 	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures."
 	singular_name = "borosilicate glass sheet"
-	icon_state = "sheet-phoronglass"
+	icon_state = "sheet-pglass"
 	default_type = "phglass"
 
 /obj/item/stack/material/glass/phoronrglass
 	name = "reinforced borosilicate glass"
 	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures. It is reinforced with few rods."
 	singular_name = "reinforced borosilicate glass sheet"
-	icon_state = "sheet-phoronrglass"
+	icon_state = "sheet-prglass"
 	default_type = "rphglass"
 
 /obj/item/stack/material/glass/phoronrglass/ten
