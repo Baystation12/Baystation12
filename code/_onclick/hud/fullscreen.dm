@@ -147,5 +147,5 @@
 	allstate = 1
 
 /obj/screen/fullscreen/pain
-	icon_state = "brutedamageoverlay6"
+	icon_state = "pain"
 	alpha = 0
