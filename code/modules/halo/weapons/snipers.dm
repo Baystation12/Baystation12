@@ -27,7 +27,7 @@
 
 /obj/item/weapon/gun/projectile/srs99_sniper/verb/scope()
 	set category = "Object"
-	set name = "Use Scope (2x)"
+	set name = "Use Scope"
 	set popup_menu = 1
 
 	toggle_scope(usr, 2.0)
@@ -50,7 +50,7 @@
 	caliber = "a762"
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/m762_ap/M392
-	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap) //Disallows loading LMG boxmags into the DMR.
+	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392) //Disallows loading LMG boxmags into the DMR.
 	fire_sound = 'code/modules/halo/sounds/DMR_ShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
@@ -67,7 +67,7 @@
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
 	set category = "Object"
-	set name = "Use Scope (1.35x)"
+	set name = "Use Scope"
 	set popup_menu = 1
 
 	toggle_scope(usr, 1.35)

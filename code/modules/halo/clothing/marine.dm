@@ -34,6 +34,7 @@
 	icon_override = MARINE_OVERRIDE
 	item_state = "CH252 Visor Helmet"
 	icon_state = "helmet"
+	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/suit/storage/marine
 	name = "M52B Body Armor"
@@ -46,7 +47,6 @@
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
 	var/slots = 4
-	allowed = list(/obj/item/ammo_magazine/,/obj/item/weapon/melee/combat_knife)
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
@@ -59,11 +59,11 @@
 	item_state = "boots"
 	icon_state = "boots"
 	force = 5
-	armor = list(melee = 40, bullet = 60, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
-
+	can_hold_knife = 1
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET

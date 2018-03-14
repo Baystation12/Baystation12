@@ -16,7 +16,7 @@
 	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B
-	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap) //Disallows loading LMG boxmags into the MA5B
+	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA5B) //Disallows loading LMG boxmags into the MA5B
 	burst = 3
 	burst_delay = 2
 	one_hand_penalty = -1
@@ -49,6 +49,9 @@
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37/add_flashlight()
 	return
+
+/obj/item/weapon/gun/projectile/ma5b_ar/training
+	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B/TTR
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37
 	name = "\improper MA37 ICWS"
@@ -100,7 +103,7 @@
 
 /obj/item/weapon/gun/projectile/br85/verb/scope()
 	set category = "Object"
-	set name = "Use Scope (1.15x)"
+	set name = "Use Scope"
 	set popup_menu = 1
 
 	toggle_scope(usr, 1.15)

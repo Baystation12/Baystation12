@@ -76,9 +76,14 @@
 
 /obj/item/ammo_magazine/m762_ap/MA5B
 	name = "MA5B magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 shots. Specific to the MA5B."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 60 shots. Specific to the MA5B."
 	icon_state = "MA5B_mag"
 	max_ammo = 60
+
+/obj/item/ammo_magazine/m762_ap/MA5B/TTR
+	name = "MA5B magazine (7.62mm) Tactical Training Rounds"
+	desc = "7.62x51mm Tactical Training Rounds, powerful chemicals inside of a plastic polymer shell that disperse upon impact and render the target immobile."
+	ammo_type = /obj/item/ammo_casing/a762_ttr
 
 /obj/item/ammo_magazine/m762_ap/M392
 	name = "M392 magazine (7.62mm) M118 FMJ-AP"
@@ -88,6 +93,11 @@
 /obj/item/ammo_magazine/m762_ap/MA37
 	icon_state = "MA37_mag"
 	max_ammo = 32
+
+/obj/item/ammo_casing/a762_ttr
+	desc = "A 7.62mm bullet casing."
+	caliber = "a762"
+	projectile_type = /obj/item/projectile/bullet/a762_ttr
 
 /obj/item/ammo_casing/a762_ap
 	desc = "A 7.62mm bullet casing."
@@ -101,6 +111,12 @@
 
 /obj/item/projectile/bullet/a762_ap
 	damage = 30
+
+/obj/item/projectile/bullet/a762_ttr
+	armor_penetration = 1
+	nodamage = 1
+	agony = 10
+	damage_type = PAIN
 
 /obj/item/projectile/bullet/a762/M392
 	damage = 35
@@ -141,14 +157,14 @@
 
 /obj/item/ammo_magazine/a762_box_ap
 	name = "box magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 50 shots. Designed for heavier use."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 72 shots. Designed for heavier use."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	mag_type = MAGAZINE
 	icon_state = "M739mag"
 	ammo_type = /obj/item/ammo_casing/a762_ap
 	matter = list(DEFAULT_WALL_MATERIAL = 5000) //7.62mm casing = 50 metal each
 	caliber = "a762"
-	max_ammo = 50
+	max_ammo = 72
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/a762_box_ap/empty
