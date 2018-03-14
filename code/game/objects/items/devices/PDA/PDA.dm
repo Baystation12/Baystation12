@@ -60,7 +60,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above - this is assignment (potentially alt title)
 	var/ownrank = null // this one is rank, never alt title
-	var/fancypen = 0 //for PDAs that spawn with fancy pens
+	var/pen = /obj/item/weapon/pen //determines what kind of pen spawns in a PDA
 
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
@@ -123,7 +123,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	news_silent = 1
 
 /obj/item/device/pda/heads/paperpusher
-	fancypen = 1
+	pen = /obj/item/weapon/pen/fancy
 
 /obj/item/device/pda/heads/hop
 	default_cartridge = /obj/item/weapon/cartridge/hop
@@ -326,10 +326,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	PDAs = sortAtom(PDAs)
 	if(default_cartridge)
 		cartridge = new default_cartridge(src)
-	if(fancypen)
-		new /obj/item/weapon/pen/fancy(src)
-	else
-		new /obj/item/weapon/pen(src)
+	new pen(src)
 
 /obj/item/device/pda/proc/can_use()
 
