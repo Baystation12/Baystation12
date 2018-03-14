@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - maptweak: "The pens that previously spawned in the CO and XO's offices now spawn in their PDAs, instead."
