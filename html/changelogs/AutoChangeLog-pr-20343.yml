@@ -1,0 +1,5 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - tweak: "Forensic Technicians can now be Civilian Contractors."
+  - rscdel: "Private Investigator has been removed as an alternate title from Passenger."
