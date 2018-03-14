@@ -280,3 +280,18 @@ proc/age2agedescription(age)
 				selected = M
 				break
 	return selected
+
+//Makes a crab. When used on a movable atom, it makes it into a crab. Works fine on players too.
+/atom/proc/make_crab(var/atom/A)
+	if(isnull(A))
+		A = src
+	if(ismob(A))
+		var/mob/M = A
+		var/mob/crab = new /mob/living/simple_animal/crab (get_turf(M))
+		if(M.mind)
+			M.mind.transfer_to(crab)
+		qdel(M)
+	else
+		new /mob/living/simple_animal/crab (get_turf(A))
+		if(istype(A, /atom/movable))
+			qdel(A)
