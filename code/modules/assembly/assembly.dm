@@ -48,11 +48,10 @@
 	return
 
 
-/obj/item/device/assembly/process_cooldown()
+/obj/item/device/assembly/process_cooldown() //I hate whoever coded this. ~Chaoko99
 	cooldown--
 	if(cooldown <= 0)	return 0
-	spawn(10)
-		process_cooldown()
+	addtimer(CALLBACK(src, .proc/process_cooldown), 10)
 	return 1
 
 

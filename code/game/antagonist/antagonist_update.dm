@@ -12,9 +12,9 @@
 		if(holder) qdel(holder)
 	player.original = player.current
 	if(!preserve_appearance && (flags & ANTAG_SET_APPEARANCE))
-		spawn(3)
-			var/mob/living/carbon/human/H = player.current
-			if(istype(H)) H.change_appearance(APPEARANCE_ALL, H.loc, H, valid_species, state = GLOB.z_state)
+		var/mob/living/carbon/human/H = player.current
+		if(istype(H))
+			addtimer(CALLBACK(H, /mob/living/carbon/human/.proc/change_appearance, APPEARANCE_ALL, H.loc, H, valid_species, state = GLOB.z_state), 3)
 	return player.current
 
 /datum/antagonist/proc/update_access(var/mob/living/player)
@@ -48,30 +48,34 @@
 /datum/antagonist/proc/update_icons_added(var/datum/mind/player)
 	if(!antag_indicator || !player.current)
 		return
-	spawn(0)
+	addtimer(CALLBACK(src, .proc/do_update_icons_added, player), 0)
 
-		var/give_to_player = (!faction_invisible || !(player in faction_members))
-		for(var/datum/mind/antag in current_antagonists)
-			if(!antag.current)
-				continue
-			if(antag.current.client)
-				antag.current.client.images |= get_indicator(antag, player)
-			if(!give_to_player)
-				continue
-			if(player.current.client)
-				player.current.client.images |= get_indicator(player, antag)
+/datum/antagonist/proc/do_update_icons_added(var/datum/mind/player)
+	var/give_to_player = (!faction_invisible || !(player in faction_members))
+	for(var/datum/mind/antag in current_antagonists)
+		if(!antag.current)
+			continue
+		if(antag.current.client)
+			antag.current.client.images |= get_indicator(antag, player)
+		if(!give_to_player)
+			continue
+		if(player.current.client)
+			player.current.client.images |= get_indicator(player, antag)
 
 /datum/antagonist/proc/update_icons_removed(var/datum/mind/player)
 	if(!antag_indicator || !player.current)
 		return
-	spawn(0)
-		clear_indicators(player)
-		if(player.current && player.current.client)
-			for(var/datum/mind/antag in current_antagonists)
-				if(antag.current && antag.current.client)
-					for(var/image/I in antag.current.client.images)
-						if(I.loc == player.current)
-							qdel(I)
+	addtimer(CALLBACK(src, .proc/do_update_icons_removed, player), 0)
+
+/datum/antagonist/proc/do_update_icons_removed(var/datum/mind/player)
+	clear_indicators(player)
+	if(player.current && player.current.client)
+		for(var/datum/mind/antag in current_antagonists)
+			if(antag.current && antag.current.client)
+				for(var/image/I in antag.current.client.images)
+					if(I.loc == player.current)
+						qdel(I)
+
 
 /datum/antagonist/proc/update_current_antag_max()
 	cur_max = hard_cap

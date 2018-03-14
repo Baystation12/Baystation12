@@ -12,22 +12,15 @@
 	var/failchance = 0
 
 /obj/effect/portal/Bumped(mob/M as mob|obj)
-	spawn(0)
-		src.teleport(M)
-		return
-	return
+	addtimer(CALLBACK(src, .proc/teleport, M), 0)
 
 /obj/effect/portal/Crossed(AM as mob|obj)
-	spawn(0)
-		src.teleport(AM)
-		return
-	return
+	addtimer(CALLBACK(src, .proc/teleport, AM), 0)
+
 
 /obj/effect/portal/attack_hand(mob/user as mob)
-	spawn(0)
-		src.teleport(user)
-		return
-	return
+	addtimer(CALLBACK(src, .proc/teleport, user), 0)
+
 
 /obj/effect/portal/New(var/start, var/end, var/delete_after = 300, var/failure_rate)
 	..()
@@ -40,8 +33,7 @@
 	target = end
 
 	if(delete_after)
-		spawn(delete_after)
-			qdel(src)
+		QDEL_IN(src, delete_after)
 
 /obj/effect/portal/Destroy()
 	target = null

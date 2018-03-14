@@ -26,9 +26,11 @@
 			drilling_turf = get_turf(src)
 			src.visible_message("<span class='notice'>\The [src] begins to drill into \the [M].</span>")
 			anchored = 1
-			spawn(drill_time)
-				if(get_turf(src) == drilling_turf && active)
-					M.GetDrilled()
-					src.loc = M
-				drilling_turf = null
-				anchored = 0
+			addtimer(CALLBACK(src, .proc/do_drill, M), drill_time)
+
+/obj/machinery/giga_drill/proc/do_drill(var/turf/simulated/mineral/M)
+	if(get_turf(src) == drilling_turf && active)
+		M.GetDrilled()
+		src.loc = M
+	drilling_turf = null
+	anchored = 0

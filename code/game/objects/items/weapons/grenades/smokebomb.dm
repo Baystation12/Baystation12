@@ -21,15 +21,7 @@
 /obj/item/weapon/grenade/smokebomb/detonate()
 	playsound(src.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
 	src.smoke.set_up(10, 0, usr.loc)
-	spawn(0)
-		src.smoke.start()
-		sleep(10)
-		src.smoke.start()
-		sleep(10)
-		src.smoke.start()
-		sleep(10)
-		src.smoke.start()
-
+	addtimer(CALLBACK(src, .proc/make_smoke), 0)
 	for(var/obj/effect/blob/B in view(8,src))
 		var/damage = round(30/(get_dist(B,src)+1))
 		B.health -= damage
@@ -37,3 +29,13 @@
 	sleep(80)
 	qdel(src)
 	return
+
+/obj/item/weapon/grenade/smokebomb/proc/make_smoke()
+	set waitfor = 0
+	src.smoke.start()
+	sleep(10)
+	src.smoke.start()
+	sleep(10)
+	src.smoke.start()
+	sleep(10)
+	src.smoke.start()

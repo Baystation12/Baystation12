@@ -42,19 +42,31 @@ var/const/AUTOLATHE_DISABLE_WIRE = 4
 	switch(index)
 		if(AUTOLATHE_HACK_WIRE)
 			A.hacked = !A.hacked
-			spawn(50)
-				if(A && !IsIndexCut(index))
-					A.hacked = 0
-					Interact(usr)
+			addtimer(CALLBACK(src, .proc/handle_hack, index, usr), 5 SECONDS, TIMER_UNIQUE)
+
 		if(AUTOLATHE_SHOCK_WIRE)
 			A.shocked = !A.shocked
-			spawn(50)
-				if(A && !IsIndexCut(index))
-					A.shocked = 0
-					Interact(usr)
+			addtimer(CALLBACK(src, .proc/handle_shock, index, usr), 5 SECONDS, TIMER_UNIQUE)
+
 		if(AUTOLATHE_DISABLE_WIRE)
 			A.disabled = !A.disabled
-			spawn(50)
-				if(A && !IsIndexCut(index))
-					A.disabled = 0
-					Interact(usr)
+			addtimer(CALLBACK(src, .proc/handle_disable, index, usr), 5 SECONDS, TIMER_UNIQUE)
+
+
+/datum/wires/autolathe/proc/handle_hack(var/index, mob/user)
+	var/obj/machinery/autolathe/A = holder
+	if(A && !IsIndexCut(index))
+		A.hacked = 0
+		Interact(user)
+
+/datum/wires/autolathe/proc/handle_shock(var/index, mob/user)
+	var/obj/machinery/autolathe/A = holder
+	if(A && !IsIndexCut(index))
+		A.shocked = 0
+		Interact(user)
+
+/datum/wires/autolathe/proc/handle_disable(var/index, mob/user)
+	var/obj/machinery/autolathe/A = holder
+	if(A && !IsIndexCut(index))
+		A.disabled = 0
+		Interact(user)

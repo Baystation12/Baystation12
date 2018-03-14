@@ -46,11 +46,11 @@
 		return
 
 	use_power(5)
-	icon_state = "[initial(icon_state)]1"
+	flick("[initial(icon_state)]1",src)
+
 	desiredstate = !desiredstate
 	trigger(user)
-	spawn(15)
-		update_icon()
+	update_icon()
 
 /obj/machinery/button/remote/proc/trigger()
 	return
@@ -90,13 +90,11 @@
 		if(D.id_tag == src.id)
 			if(specialfunctions & OPEN)
 				if (D.density)
-					spawn(0)
-						D.open()
-						return
+					addtimer(CALLBACK(D, /obj/machinery/door/airlock/.proc/open), 0)
+					return
 				else
-					spawn(0)
-						D.close()
-						return
+					addtimer(CALLBACK(D, /obj/machinery/door/airlock/.proc/close), 0)
+					return
 			if(desiredstate == 1)
 				if(specialfunctions & IDSCAN)
 					D.set_idscan(0)
@@ -131,16 +129,12 @@
 	icon_state = "blastctrl"
 
 /obj/machinery/button/remote/blast_door/trigger()
-	for(var/obj/machinery/door/blast/M in world)
+	for(var/obj/machinery/door/blast/M in SSmachines.machinery)
 		if(M.id == src.id)
 			if(M.density)
-				spawn(0)
-					M.open()
-					return
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/open), 0)
 			else
-				spawn(0)
-					M.close()
-					return
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/close), 0)
 
 /*
 	Emitter remote control
@@ -150,12 +144,9 @@
 	desc = "It controls emitters, remotely."
 
 /obj/machinery/button/remote/emitter/trigger(mob/user as mob)
-	for(var/obj/machinery/power/emitter/E in world)
+	for(var/obj/machinery/power/emitter/E in SSmachines.machinery)
 		if(E.id == src.id)
-			spawn(0)
-				E.activate(user)
-				return
-
+			addtimer(CALLBACK(E, /obj/machinery/power/emitter/.proc/activate, user), 0)
 /*
 	Mass driver remote control
 */
@@ -172,9 +163,7 @@
 
 	for(var/obj/machinery/door/blast/M in SSmachines.machinery)
 		if (M.id == src.id)
-			spawn( 0 )
-				M.open()
-				return
+			addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/open), 0)
 
 	sleep(20)
 
@@ -186,14 +175,10 @@
 
 	for(var/obj/machinery/door/blast/M in SSmachines.machinery)
 		if (M.id == src.id)
-			spawn(0)
-				M.close()
-				return
+			addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/close), 0)
 
 	icon_state = "launcherbtt"
 	update_icon()
-
-	return
 
 /obj/machinery/button/remote/driver/update_icon()
 	if(!active || (stat & NOPOWER))

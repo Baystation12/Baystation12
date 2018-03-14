@@ -30,8 +30,7 @@
 		// AI's restore power routine is not running. Start it automatically.
 		if(aiRestorePowerRoutine == AI_RESTOREPOWER_IDLE)
 			aiRestorePowerRoutine = AI_RESTOREPOWER_STARTING
-			spawn(0)
-				handle_power_failure()
+			addtimer(CALLBACK(src, .proc/handle_power_failure), 0)
 
 	update_power_usage()
 	handle_power_oxyloss()

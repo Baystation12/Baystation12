@@ -1,5 +1,7 @@
 /mob/observer/ghost/Logout()
 	..()
-	spawn(0)
-		if(src && !key)	//we've transferred to another mob. This ghost should be deleted.
-			qdel(src)
+	addtimer(CALLBACK(src, .proc/complete_logout), 0)
+
+/mob/observer/ghost/proc/complete_logout()
+	if(src && !key)	//we've transferred to another mob. This ghost should be deleted.
+		qdel(src)

@@ -62,19 +62,23 @@
 /datum/shuttle/autodock/ferry/specops/shuttle_moved()
 	..()
 
-	spawn(2 SECONDS)
-		if (!location)	//just arrived home
-			for(var/turf/T in get_area_turfs(shuttle_area))
-				var/mob/M = locate(/mob) in T
-				to_chat(M, "<span class='danger'>You have arrived at [GLOB.using_map.boss_name]. Operation has ended!</span>")
-		else	//just left for the station
-			launch_mauraders()
-			for(var/turf/T in get_area_turfs(shuttle_area))
-				var/mob/M = locate(/mob) in T
-				to_chat(M, "<span class='danger'>You have arrived at [GLOB.using_map.station_name]. Commence operation!</span>")
+	addtimer(CALLBACK(src, .proc/begin_op), 2 SECONDS)
 
-				var/obj/machinery/light/small/readylight/light = locate() in T
-				if(light) light.set_state(1)
+
+/datum/shuttle/autodock/ferry/specops/proc/begin_op()
+	if (!location)	//just arrived home
+		for(var/turf/T in get_area_turfs(shuttle_area))
+			var/mob/M = locate(/mob) in T
+			to_chat(M, "<span class='danger'>You have arrived at [GLOB.using_map.boss_name]. Operation has ended!</span>")
+	else	//just left for the station
+		launch_mauraders()
+		for(var/turf/T in get_area_turfs(shuttle_area))
+			var/mob/M = locate(/mob) in T
+			to_chat(M, "<span class='danger'>You have arrived at [GLOB.using_map.station_name]. Commence operation!</span>")
+
+			var/obj/machinery/light/small/readylight/light = locate() in T
+			if(light) light.set_state(1)
+
 
 /datum/shuttle/autodock/ferry/specops/cancel_launch()
 	if (!can_cancel())
@@ -133,68 +137,57 @@
 /proc/launch_mauraders()
 	var/area/centcom/specops/special_ops = locate()//Where is the specops area located?
 	//Begin Marauder launchpad.
-	spawn(0)//So it parallel processes it.
-		for(var/obj/machinery/door/blast/M in special_ops)
-			switch(M.id)
-				if("ASSAULT0")
-					spawn(10)//1 second delay between each.
-						M.open()
-				if("ASSAULT1")
-					spawn(20)
-						M.open()
-				if("ASSAULT2")
-					spawn(30)
-						M.open()
-				if("ASSAULT3")
-					spawn(40)
-						M.open()
+	addtimer(CALLBACK(src, .proc/do_MRD_launch, special_ops), 0) //This seems like a wasteful timer.
 
-		sleep(10)
+/proc/do_MRD_launch(var/area/centcom/specops/special_ops)
+	set waitfor = FALSE
+	for(var/obj/machinery/door/blast/M in special_ops)
+		switch(M.id)
+			if("ASSAULT0")
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/open), 1 SECOND)
+			if("ASSAULT1")
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/open), 2 SECONDS)
+			if("ASSAULT2")
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/open), 3 SECONDS)
+			if("ASSAULT3")
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/open), 4 SECONDS)
+	sleep(10)
 
-		var/spawn_marauder[] = new()
-		for(var/obj/effect/landmark/L in world)
-			if(L.name == "Marauder Entry")
-				spawn_marauder.Add(L)
-		for(var/obj/effect/landmark/L in world)
-			if(L.name == "Marauder Exit")
-				var/obj/effect/portal/P = new(L.loc)
-				P.set_invisibility(101)//So it is not seen by anyone.
-				P.failchance = 0//So it has no fail chance when teleporting.
-				P.target = pick(spawn_marauder)//Where the marauder will arrive.
-				spawn_marauder.Remove(P.target)
+	var/spawn_marauder[] = new()
+	for(var/obj/effect/landmark/L in world)
+		if(L.name == "Marauder Entry")
+			spawn_marauder.Add(L)
+	for(var/obj/effect/landmark/L in world)
+		if(L.name == "Marauder Exit")
+			var/obj/effect/portal/P = new(L.loc)
+			P.set_invisibility(101)//So it is not seen by anyone.
+			P.failchance = 0//So it has no fail chance when teleporting.
+			P.target = pick(spawn_marauder)//Where the marauder will arrive.
+			spawn_marauder.Remove(P.target)
 
-		sleep(10)
+	sleep(10)
 
-		for(var/obj/machinery/mass_driver/M in special_ops)
-			switch(M.id)
-				if("ASSAULT0")
-					spawn(10)
-						M.drive()
-				if("ASSAULT1")
-					spawn(20)
-						M.drive()
-				if("ASSAULT2")
-					spawn(30)
-						M.drive()
-				if("ASSAULT3")
-					spawn(40)
-						M.drive()
+	for(var/obj/machinery/mass_driver/M in special_ops)
+		switch(M.id)
+			if("ASSAULT0")
+				addtimer(CALLBACK(M, /obj/machinery/mass_driver/.proc/drive), 1 SECOND)
+			if("ASSAULT1")
+				addtimer(CALLBACK(M, /obj/machinery/mass_driver/.proc/drive), 2 SECONDS)
+			if("ASSAULT2")
+				addtimer(CALLBACK(M, /obj/machinery/mass_driver/.proc/drive), 3 SECONDS)
+			if("ASSAULT3")
+				addtimer(CALLBACK(M, /obj/machinery/mass_driver/.proc/drive), 4 SECONDS)
 
-		sleep(50)//Doors remain open for 5 seconds.
+	sleep(50)//Doors remain open for 5 seconds.
 
-		for(var/obj/machinery/door/blast/M in special_ops)
-			switch(M.id)//Doors close at the same time.
-				if("ASSAULT0")
-					spawn(0)
-						M.close()
-				if("ASSAULT1")
-					spawn(0)
-						M.close()
-				if("ASSAULT2")
-					spawn(0)
-						M.close()
-				if("ASSAULT3")
-					spawn(0)
-						M.close()
-		special_ops.readyreset()//Reset firealarm after the team launched.
-	//End Marauder launchpad.
+	for(var/obj/machinery/door/blast/M in special_ops)
+		switch(M.id)//Doors close at the same time.
+			if("ASSAULT0")
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/close), 1 SECOND)
+			if("ASSAULT1")
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/close), 2 SECONDS)
+			if("ASSAULT2")
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/close), 3 SECONDS)
+			if("ASSAULT3")
+				addtimer(CALLBACK(M, /obj/machinery/door/blast/.proc/close), 4 SECONDS)
+	special_ops.readyreset()//Reset firealarm after the team launched.

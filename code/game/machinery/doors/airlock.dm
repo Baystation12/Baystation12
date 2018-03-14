@@ -363,9 +363,11 @@
 /obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
 	for(var/turf/simulated/floor/target_tile in range(2,loc))
 		target_tile.assume_gas("phoron", 35, 400+T0C)
-		spawn (0) target_tile.hotspot_expose(temperature, 400)
+		addtimer(CALLBACK(target_tile, /turf/simulated/floor/.proc/hotspot_expose, temperature, 400), 0)
+
 	for(var/turf/simulated/wall/W in range(3,src))
 		W.burn((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
+
 	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
 		D.ignite(temperature/4)
 	new/obj/structure/door_assembly( src.loc )
@@ -620,18 +622,14 @@ About the new airlock wires panel:
 		if("opening")
 			if(overlays) overlays.Cut()
 			if(p_open)
-				spawn(2) // The only work around that works. Downside is that the door will be gone for a millisecond.
-					flick("o_door_opening", src)  //can not use flick due to BYOND bug updating overlays right before flicking
-					update_icon()
+				addtimer(CALLBACK(src, .proc/doorflick, "o_door_opening"), 2) // The only work around that works. Downside is that the door will be gone for a millisecond.
 			else
 				flick("door_opening", src)//[stat ? "_stat":]
 				update_icon()
 		if("closing")
 			if(overlays) overlays.Cut()
 			if(p_open)
-				spawn(2)
-					flick("o_door_closing", src)
-					update_icon()
+				addtimer(CALLBACK(src, .proc/doorflick, "o_door_closing"), 2)
 			else
 				flick("door_closing", src)
 				update_icon()
@@ -644,6 +642,10 @@ About the new airlock wires panel:
 				if(secured_wires)
 					playsound(src.loc, open_failure_access_denied, 50, 0)
 	return
+
+/obj/machinery/door/airlock/proc/doorflick(var/state_to_flick)
+	flick(state_to_flick, src)  //can not use flick due to BYOND bug updating overlays right before flicking
+	update_icon()
 
 /obj/machinery/door/airlock/attack_ai(mob/user as mob)
 	ui_interact(user)
@@ -676,50 +678,52 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/hack(mob/user as mob)
 	if(src.aiHacking==0)
 		src.aiHacking=1
-		spawn(20)
-			//TODO: Make this take a minute
-			to_chat(user, "Airlock AI control has been blocked. Beginning fault-detection.")
-			sleep(50)
-			if(src.canAIControl())
-				to_chat(user, "Alert cancelled. Airlock control has been restored without our assistance.")
-				src.aiHacking=0
-				return
-			else if(!src.canAIHack(user))
-				to_chat(user, "We've lost our connection! Unable to hack airlock.")
-				src.aiHacking=0
-				return
-			to_chat(user, "Fault confirmed: airlock control wire disabled or cut.")
-			sleep(20)
-			to_chat(user, "Attempting to hack into airlock. This may take some time.")
-			sleep(200)
-			if(src.canAIControl())
-				to_chat(user, "Alert cancelled. Airlock control has been restored without our assistance.")
-				src.aiHacking=0
-				return
-			else if(!src.canAIHack(user))
-				to_chat(user, "We've lost our connection! Unable to hack airlock.")
-				src.aiHacking=0
-				return
-			to_chat(user, "Upload access confirmed. Loading control program into airlock software.")
-			sleep(170)
-			if(src.canAIControl())
-				to_chat(user, "Alert cancelled. Airlock control has been restored without our assistance.")
-				src.aiHacking=0
-				return
-			else if(!src.canAIHack(user))
-				to_chat(user, "We've lost our connection! Unable to hack airlock.")
-				src.aiHacking=0
-				return
-			to_chat(user, "Transfer complete. Forcing airlock to execute program.")
-			sleep(50)
-			//disable blocked control
-			src.aiControlDisabled = 2
-			to_chat(user, "Receiving control information from airlock.")
-			sleep(10)
-			//bring up airlock dialog
-			src.aiHacking = 0
-			if (user)
-				src.attack_ai(user)
+		addtimer(CALLBACK(src, .proc/do_hack, user), 2, TIMER_UNIQUE)
+
+/obj/machinery/door/airlock/proc/do_hack(mob/user)
+	//TODO: Make this take a minute
+	to_chat(user, "Airlock AI control has been blocked. Beginning fault-detection.")
+	sleep(50)
+	if(src.canAIControl())
+		to_chat(user, "Alert cancelled. Airlock control has been restored without our assistance.")
+		src.aiHacking=0
+		return
+	else if(!src.canAIHack(user))
+		to_chat(user, "We've lost our connection! Unable to hack airlock.")
+		src.aiHacking=0
+		return
+	to_chat(user, "Fault confirmed: airlock control wire disabled or cut.")
+	sleep(20)
+	to_chat(user, "Attempting to hack into airlock. This may take some time.")
+	sleep(200)
+	if(src.canAIControl())
+		to_chat(user, "Alert cancelled. Airlock control has been restored without our assistance.")
+		src.aiHacking=0
+		return
+	else if(!src.canAIHack(user))
+		to_chat(user, "We've lost our connection! Unable to hack airlock.")
+		src.aiHacking=0
+		return
+	to_chat(user, "Upload access confirmed. Loading control program into airlock software.")
+	sleep(170)
+	if(src.canAIControl())
+		to_chat(user, "Alert cancelled. Airlock control has been restored without our assistance.")
+		src.aiHacking=0
+		return
+	else if(!src.canAIHack(user))
+		to_chat(user, "We've lost our connection! Unable to hack airlock.")
+		src.aiHacking=0
+		return
+	to_chat(user, "Transfer complete. Forcing airlock to execute program.")
+	sleep(50)
+	//disable blocked control
+	src.aiControlDisabled = 2
+	to_chat(user, "Receiving control information from airlock.")
+	sleep(10)
+	//bring up airlock dialog
+	src.aiHacking = 0
+	if (user)
+		src.attack_ai(user)
 
 /obj/machinery/door/airlock/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (src.isElectrified())
@@ -976,9 +980,9 @@ About the new airlock wires panel:
 			to_chat(user, "<span class='notice'>The airlock's brace holds it firmly in place.</span>")
 		else
 			if(density)
-				spawn(0)	open(1)
+				addtimer(CALLBACK(src, .proc/open, 1), 0)
 			else
-				spawn(0)	close(1)
+				addtimer(CALLBACK(src, .proc/close, 1), 0)
 
 			//if door is unbroken, but at half health or less, hit with fire axe using harm intent
 	else if (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !(stat & BROKEN) && (src.health <= src.maxhealth / 2) && user.a_intent == I_HURT)
@@ -999,13 +1003,13 @@ About the new airlock wires panel:
 			if(density)
 				var/obj/item/weapon/material/twohanded/fireaxe/F = C
 				if(F.wielded)
-					spawn(0)	open(1)
+					addtimer(CALLBACK(src, .proc/open, 1), 0)
 				else
 					to_chat(user, "<span class='warning'>You need to be wielding \the [C] to do that.</span>")
 			else
 				var/obj/item/weapon/material/twohanded/fireaxe/F = C
 				if(F.wielded)
-					spawn(0)	close(1)
+					addtimer(CALLBACK(src, .proc/close, 1), 0)
 				else
 					to_chat(user, "<span class='warning'>You need to be wielding \the [C] to do that.</span>")
 
@@ -1252,8 +1256,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/emp_act(var/severity)
 	if(prob(20/severity))
-		spawn(0)
-			open()
+		addtimer(CALLBACK(src, .proc/open, 1), 0)
 	if(prob(40/severity))
 		var/duration = SecondsToTicks(30 / severity)
 		if(electrified_until > -1 && (duration + world.time) > electrified_until)

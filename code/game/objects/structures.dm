@@ -42,5 +42,5 @@
 		return 0
 	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
 	attack_animation(user)
-	spawn(1) qdel(src)
+	QDEL_IN(src, 1)
 	return 1

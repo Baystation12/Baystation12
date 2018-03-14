@@ -13,36 +13,6 @@
 	var/det_time = 50
 	var/arm_sound = 'sound/weapons/armbomb.ogg'
 
-/obj/item/weapon/grenade/proc/clown_check(var/mob/living/user)
-	if((CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>Huh? How does this thing work?</span>")
-
-		activate(user)
-		add_fingerprint(user)
-		spawn(5)
-			detonate()
-		return 0
-	return 1
-
-
-/*/obj/item/weapon/grenade/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
-	if (istype(target, /obj/item/weapon/storage)) return ..() // Trying to put it in a full container
-	if (istype(target, /obj/item/weapon/gun/grenadelauncher)) return ..()
-	if((user.get_active_hand() == src) && (!active) && (clown_check(user)) && target.loc != src.loc)
-		to_chat(user, "<span class='warning'>You prime the [name]! [det_time/10] seconds!</span>")
-		active = 1
-		icon_state = initial(icon_state) + "_active"
-		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-		spawn(det_time)
-			detonate()
-			return
-		user.set_dir(get_dir(user, target))
-		user.drop_item()
-		var/t = (isturf(target) ? target : target.loc)
-		walk_towards(src, t, 3)
-	return*/
-
-
 /obj/item/weapon/grenade/examine(mob/user)
 	if(..(user, 0))
 		if(det_time > 1)
@@ -55,16 +25,13 @@
 
 /obj/item/weapon/grenade/attack_self(mob/user as mob)
 	if(!active)
-		if(clown_check(user))
-			to_chat(user, "<span class='warning'>You prime \the [name]! [det_time/10] seconds!</span>")
+		to_chat(user, "<span class='warning'>You prime \the [name]! [det_time/10] seconds!</span>")
 
-			activate(user)
-			add_fingerprint(user)
-			if(iscarbon(user))
-				var/mob/living/carbon/C = user
-				C.throw_mode_on()
-	return
-
+		activate(user)
+		add_fingerprint(user)
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			C.throw_mode_on()
 
 /obj/item/weapon/grenade/proc/activate(mob/user as mob)
 	if(active)
