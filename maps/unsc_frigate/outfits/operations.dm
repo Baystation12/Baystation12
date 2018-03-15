@@ -5,7 +5,6 @@
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/operations
 	shoes = /obj/item/clothing/shoes/black
-	belt = /obj/item/device/pda
 
 	flags = 0
 
@@ -15,6 +14,5 @@
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/operations
 	shoes = /obj/item/clothing/shoes/black
-	belt = /obj/item/device/pda
 
 	flags = 0

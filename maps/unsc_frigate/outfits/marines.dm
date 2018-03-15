@@ -68,7 +68,6 @@
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	shoes = /obj/item/clothing/shoes/jungleboots
-	pda_slot = null
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	id_type = /obj/item/weapon/card/id/silver
 

@@ -4,7 +4,6 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/command
-	belt = /obj/item/device/pda/captain
 	shoes = /obj/item/clothing/shoes/brown
 
 	flags = 0
@@ -14,7 +13,6 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/command
-	belt = /obj/item/device/pda/captain
 	shoes = /obj/item/clothing/shoes/brown
 
 	flags = 0
@@ -24,7 +22,6 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/command
-	belt = /obj/item/device/pda
 	shoes = /obj/item/clothing/shoes/brown
 
 	flags = 0
@@ -34,7 +31,6 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/command
-	belt = /obj/item/device/pda
 	shoes = /obj/item/clothing/shoes/brown
 
 	flags = 0
