@@ -662,11 +662,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(owner.can_autoheal(dam_type))
 			W.heal_damage(heal_amt)
 
-		// Salving also helps against infection
-		if(W.germ_level > 0 && W.salved && prob(2))
-			W.disinfected = 1
-			W.germ_level = 0
-
 	// sync the organ's damage with its wounds
 	src.update_damages()
 	if (update_damstate())
