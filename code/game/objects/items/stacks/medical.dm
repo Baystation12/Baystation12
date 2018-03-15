@@ -137,6 +137,7 @@
 			                         "<span class='notice'>You salved wounds on [M]'s [affecting.name].</span>" )
 			use(1)
 			affecting.salve()
+			affecting.disinfect()
 
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
@@ -195,7 +196,7 @@
 	singular_name = "advanced burn kit"
 	desc = "An advanced treatment kit for severe burns."
 	icon_state = "burnkit"
-	heal_burn = 0
+	heal_burn = 5
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 7
 
@@ -222,6 +223,7 @@
 			affecting.heal_damage(0,heal_burn)
 			use(1)
 			affecting.salve()
+			affecting.disinfect()
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
