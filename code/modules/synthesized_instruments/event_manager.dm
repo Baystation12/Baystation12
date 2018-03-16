@@ -13,6 +13,11 @@ datum/musical_event
 	src.time = time
 	src.new_volume = volume
 
+/datum/musical_event/Destroy()
+	source = null
+	subject = null
+	object = null
+
 
 /datum/musical_event/proc/tick()
 	if (!(istype(object) && istype(subject) && istype(source)))
@@ -51,27 +56,31 @@ datum/musical_event
 		src.events += new /datum/musical_event(source, subject, object, time, volume)
 
 
+
+/datum/musical_event_manager/proc/handle_events()
+	var/list/datum/musical_event/left_events = list()
+	while (1)
+		left_events.Cut()
+		if (src.kill_loop)
+			src.active = 0
+			src.kill_loop = 0
+			break
+		if (!src.suspended)
+			for (var/datum/musical_event/event in src.events)
+				event.time -= world.tick_lag
+				if (event.time <= 0)
+					event.tick()
+				else left_events += event
+			src.events.Cut()
+			src.events += left_events
+		sleep(world.tick_lag) // High priority
+
 /datum/musical_event_manager/proc/activate()
 	if (active)	return 0
 	src.active = 1
 
-	spawn
-		var/list/datum/musical_event/left_events = list()
-		while (1)
-			left_events.Cut()
-			if (src.kill_loop)
-				src.active = 0
-				src.kill_loop = 0
-				break
-			if (!src.suspended)
-				for (var/datum/musical_event/event in src.events)
-					event.time -= world.tick_lag
-					if (event.time <= 0)
-						event.tick()
-					else left_events += event
-				src.events.Cut()
-				src.events += left_events
-			sleep(world.tick_lag) // High priority
+	addtimer(CALLBACK(src, .proc/handle_events), 0)
+
 
 
 /datum/musical_event_manager/proc/deactivate()
