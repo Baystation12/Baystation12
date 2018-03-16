@@ -75,7 +75,7 @@
 
 /obj/vehicles/air/pelican/civ
 	desc = "A civilian pelican lacking in both weapons and armor."
-	faction = "civillian"
+	faction = "police"
 	passengers = list(6)
 
 	damage_resistances = list("brute" = 50.0, "burn" = 35.0,"emp" = 20.0)//Severely reduced resistances due to being civillian.

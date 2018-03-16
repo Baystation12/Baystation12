@@ -143,8 +143,6 @@
 					return
 
 /obj/machinery/button/remote/blast_door/atmos_door
-	icon_state = "crema_switch"
-	icon = 'icons/obj/power.dmi'
 	name = "blast door control panel"
 	desc = "Controls opening or closing the atmospherics blast doors."
 	req_access = list(301)

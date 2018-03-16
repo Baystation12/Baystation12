@@ -433,7 +433,7 @@
 "aiq" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/blue,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/outdoor/north)
 "air" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet/blue,/area/planets/Geminus/outdoor/north)
 "ais" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/wood,/area/planets/Geminus/outdoor/north)
-"ait" = (/obj/vehicles/air/pelican/civ{tag = "icon-base (NORTH)"; icon_state = "base"; dir = 1},/obj/effect/landmark/dropship_land_point{name = "Geminus City - Police Landing Pad"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/police_station)
+"ait" = (/obj/vehicles/air/pelican/civ{tag = "icon-base (NORTH)"; icon_state = "base"; dir = 1},/obj/effect/landmark/dropship_land_point{faction = "police"; name = "Geminus City - Police Landing Pad"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/police_station)
 "aiu" = (/obj/structure/closet/bombclosetsecurity,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/armory)
 "aiv" = (/obj/machinery/light/colored/red{tag = "icon-red1 (WEST)"; icon_state = "red1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/armory)
 "aiw" = (/obj/machinery/door/airlock/security{name = "Riot Suppression"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/armory)
