@@ -122,6 +122,7 @@
 	nodamage = 1
 	agony = 10
 	damage_type = PAIN
+	penetrating = 0
 
 /obj/item/projectile/bullet/a762/M392
 	damage = 35
