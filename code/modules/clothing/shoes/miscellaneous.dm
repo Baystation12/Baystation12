@@ -44,7 +44,7 @@
 	desc = "A pair of durable brown boots. Waterproofed for use planetside."
 	icon_state = "jungle"
 	force = 3
-	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 10, rad = 0)
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 15, bomb = 20, bio = 10, rad = 0)
 	siemens_coefficient = 0.7
 	can_hold_knife = 1
 

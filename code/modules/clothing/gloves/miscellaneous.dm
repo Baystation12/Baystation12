@@ -72,7 +72,7 @@
 	permeability_coefficient = 0.05
 	force = 5
 	body_parts_covered = HANDS
-	armor = list(melee = 30, bullet = 15, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
@@ -113,7 +113,7 @@
 	icon_state = "work"
 	item_state = "wgloves"
 	siemens_coefficient = 0.50
-	armor = list(melee = 10, bullet = 10, laser = 10, energy = 5, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 55, bullet = 45, laser = 10, energy = 5, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/gloves/tactical
 	desc = "These brown tactical gloves are made from a durable synthetic, and have hardened knuckles."
