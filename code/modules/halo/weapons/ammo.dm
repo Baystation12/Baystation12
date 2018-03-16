@@ -87,10 +87,13 @@
 
 /obj/item/ammo_magazine/m762_ap/M392
 	name = "M392 magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 shots. Specific to the M392."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 15 shots. Specific to the M392."
 	ammo_type = /obj/item/ammo_casing/a762_m392
+	max_ammo = 15
 
 /obj/item/ammo_magazine/m762_ap/MA37
+	name = "MA37 magazine (7.62mm) M118 FMJ-AP"
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 32 shots. Specific to the MA37."
 	icon_state = "MA37_mag"
 	max_ammo = 32
 
