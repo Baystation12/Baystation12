@@ -127,6 +127,11 @@
 /obj/item/clothing/suit/space/void/unsc/prepared/New()
 	..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/unsc
+	boots = new /obj/item/clothing/shoes/magboots
+
+/obj/item/clothing/suit/space/void/unsc/New()
+	..()
+	slowdown_per_slot[slot_wear_suit] = 1
 
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND

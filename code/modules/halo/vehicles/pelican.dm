@@ -74,8 +74,8 @@
 	faction = "unsc"
 
 /obj/vehicles/air/pelican/civ
-	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has been disarmed of weapons and has had most of the armor removed."
-	faction = "civillian"
+	desc = "A civilian pelican lacking in both weapons and armor."
+	faction = "police"
 	passengers = list(6)
 
 	damage_resistances = list("brute" = 50.0, "burn" = 35.0,"emp" = 20.0)//Severely reduced resistances due to being civillian.

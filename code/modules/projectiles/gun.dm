@@ -116,7 +116,7 @@
 
 /obj/item/weapon/gun/verb/rename_gun()
 	set name = "Name Gun"
-	set category = "Object"
+	set category = "Weapon"
 	set desc = "Rename your gun."
 
 	var/mob/M = usr

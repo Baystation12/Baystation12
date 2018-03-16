@@ -26,7 +26,7 @@
 		)
 
 /obj/item/weapon/gun/projectile/srs99_sniper/verb/scope()
-	set category = "Object"
+	set category = "Weapon"
 	set name = "Use Scope"
 	set popup_menu = 1
 
@@ -66,7 +66,7 @@
 		)
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
-	set category = "Object"
+	set category = "Weapon"
 	set name = "Use Scope"
 	set popup_menu = 1
 
@@ -79,7 +79,7 @@
 		icon_state = "M395_unloaded"
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/toggle_light()
-	set category = "Object"
+	set category = "Weapon"
 	set name = "Toggle Gun Light"
 	on = !on
 	if(on && activation_sound)
