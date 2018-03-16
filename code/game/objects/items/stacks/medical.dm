@@ -98,6 +98,7 @@
 					                              "<span class='notice'>You place a bandaid over \a [W.desc] on [M]'s [affecting.name].</span>" )
 				W.bandage()
 				used++
+				spread_germs_to_organ(affecting, user)
 			affecting.update_damages()
 			if(used == amount)
 				if(affecting.is_bandaged())
@@ -137,6 +138,7 @@
 			                         "<span class='notice'>You salved wounds on [M]'s [affecting.name].</span>" )
 			use(1)
 			affecting.salve()
+			spread_germs_to_organ(affecting, user)
 
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
@@ -182,6 +184,7 @@
 				W.disinfect()
 				W.heal_damage(heal_brute)
 				used++
+				spread_germs_to_organ(affecting, user)
 			affecting.update_damages()
 			if(used == amount)
 				if(affecting.is_bandaged())
@@ -222,6 +225,7 @@
 			affecting.heal_damage(0,heal_burn)
 			use(1)
 			affecting.salve()
+			spread_germs_to_organ(affecting, user)
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
