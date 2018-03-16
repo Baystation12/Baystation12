@@ -74,7 +74,7 @@
 	faction = "unsc"
 
 /obj/vehicles/air/pelican/civ
-	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has been disarmed of weapons and has had most of the armor removed."
+	desc = "A civilian pelican lacking in both weapons and armor."
 	faction = "civillian"
 	passengers = list(6)
 

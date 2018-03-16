@@ -69,7 +69,7 @@
 	icon_state = "M395mag"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/a762_ap
-	matter = list(DEFAULT_WALL_MATERIAL = 3000) //7.62mm casing = 50 metal each
+	matter = list(DEFAULT_WALL_MATERIAL = 1500) //7.62mm casing = 50 metal each
 	caliber = "a762"
 	max_ammo = 30		//lets try 30 instead of 60 for now
 	multiple_sprites = 1
@@ -90,12 +90,14 @@
 	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 15 shots. Specific to the M392."
 	ammo_type = /obj/item/ammo_casing/a762_m392
 	max_ammo = 15
+	matter = list(DEFAULT_WALL_MATERIAL = 750)
 
 /obj/item/ammo_magazine/m762_ap/MA37
 	name = "MA37 magazine (7.62mm) M118 FMJ-AP"
 	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 32 shots. Specific to the MA37."
 	icon_state = "MA37_mag"
 	max_ammo = 32
+	matter = list(DEFAULT_WALL_MATERIAL = 1600)
 
 /obj/item/ammo_casing/a762_ttr
 	desc = "A 7.62mm bullet casing."
