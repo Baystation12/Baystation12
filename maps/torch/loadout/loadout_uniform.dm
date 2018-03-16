@@ -69,7 +69,7 @@
 /datum/gear/uniform/corporate
 	allowed_roles = list(/datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor,
-						/datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant, /datum/job/assistant)
+						/datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/detective, /datum/job/merchant, /datum/job/assistant)
 
 /datum/gear/uniform/sterile
 	allowed_roles = MEDICAL_ROLES

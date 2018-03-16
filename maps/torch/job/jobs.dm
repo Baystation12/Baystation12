@@ -762,7 +762,7 @@
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/comissioned,
+		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/commissioned,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/e5,

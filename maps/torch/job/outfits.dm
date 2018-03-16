@@ -257,7 +257,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/det
 	suit = /obj/item/clothing/suit/storage/det_trench/ft
 	shoes = /obj/item/clothing/shoes/laceup
-	backpack_contents = list(/obj/item/clothing/accessory/badge = 1)
+	backpack_contents = list(/obj/item/clothing/accessory/badge/PI = 1)
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet
 	name = OUTFIT_JOB_NAME("Forensic Technician - Fleet")
@@ -413,7 +413,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/crew/supply/deckofficer
 	pda_type = /obj/item/device/pda/quartermaster
 
-/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/comissioned
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/commissioned
 	name = OUTFIT_JOB_NAME("Deck Officer - EC Officer")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
 
