@@ -6,8 +6,9 @@
 	var/page = 1
 
 
-/datum/nano_module/song_editor/New(atom/source, datum/synthesized_song/song)
-	src.host = source
+/datum/nano_module/song_editor/New(var/host, var/topic_manager, datum/synthesized_song/song)
+	. = ..()
+	src.host = host
 	src.song = song
 
 
