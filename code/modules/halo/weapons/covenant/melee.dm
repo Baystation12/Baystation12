@@ -14,7 +14,7 @@
 
 /obj/item/weapon/melee/energy/elite_sword/activate(mob/living/user)
 	..()
-	playsound(src.loc,'code/modules/halo/sounds/Energysworddeploy.ogg',75)
+	playsound(user, 'code/modules/halo/sounds/Energysworddeploy.ogg',75, 1)
 	to_chat(user, "<span class='notice'>\The [src] bursts from it's handle.</span>")
 	icon_state = "T1EW-deployed"
 	w_class = ITEM_SIZE_HUGE
@@ -30,7 +30,7 @@
 /obj/item/weapon/melee/energy/elite_sword/deactivate(mob/living/user)
 	..()
 	icon_state = initial(icon_state)
-	to_chat(user, "<span class='notice'>\The [src] disappears.</span>")
+	to_chat(user, "<span class='notice'>\The [src] disappears in a flash of light.</span>")
 	w_class = ITEM_SIZE_SMALL
 	flags = null
 	item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
@@ -41,7 +41,7 @@
 	..()
 	if(!istype(loc,/mob))
 		deactivate(user)
-		visible_message("The [src] disappears.")
+		visible_message("The [src] disappears in a flash of light.")
 
 /obj/item/weapon/melee/energysword/attack(var/mob/m)
 	if(ismob(m))
