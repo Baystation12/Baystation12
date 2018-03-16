@@ -2590,7 +2590,6 @@
 #include "maps\geminus_city\unit_tests.dm"
 #include "maps\insurrection\innie_base_map.dm"
 #include "maps\insurrection\innie_base_overmap.dm"
-#include "maps\insurrection\unsc_staging_areas.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\slayer\__death_asteroid_map.dm"
 #include "maps\unsc_frigate\unsc_frigate_innies_geminus.dm"
