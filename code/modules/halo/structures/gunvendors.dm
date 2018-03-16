@@ -24,8 +24,8 @@
 	icon_state = "ironhammer" //SPRITES
 	icon_deny = "ironhammer-deny"
 	req_access = list(308)
-	products = list(/obj/item/ammo_magazine/m145_ap = 2,/obj/item/ammo_magazine/a762_box_ap = 10,/obj/item/weapon/gun/projectile/m739_lmg = 2
-	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/launcher/rocket/m41_ssr = 2, /obj/item/ammo_casing/rocket = 6)
+	products = list(/obj/item/ammo_magazine/m145_ap = 2,/obj/item/ammo_magazine/a762_box_ap = 5,/obj/item/weapon/gun/projectile/m739_lmg = 2
+	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/launcher/rocket/m41_ssr = 1, /obj/item/ammo_casing/rocket = 4,/obj/item/weapon/plastique = 2)
 
 /obj/machinery/vending/armory/police
 	name = "Shell Vendor"
