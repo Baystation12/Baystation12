@@ -36,8 +36,6 @@
 	H.set_id_info(C)
 
 /decl/hierarchy/outfit/job/colonist/proc/equip_special(mob/living/carbon/human/H)
-	if(prob(25))
-		H.equip_to_slot_or_del(/obj/item/clothing/mask/innie/shemagh)
 	if(prob(30))
 		var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/colt
 		G.ammo_magazine = new /obj/item/ammo_magazine/c45m
@@ -48,7 +46,11 @@
 
 	var/random_uniform = pick(/obj/item/clothing/under/serviceoveralls,\
 		/obj/item/clothing/under/frontier,\
-		/obj/item/clothing/under/overalls)
+		/obj/item/clothing/under/overalls,\
+		/obj/item/clothing/under/focal,\
+		/obj/item/clothing/under/grayson,\
+		/obj/item/clothing/under/hazard,\
+		/obj/item/clothing/under/aether)
 	H.equip_to_slot_or_del(new random_uniform(H),slot_w_uniform)
 
 	equip_special(H)
