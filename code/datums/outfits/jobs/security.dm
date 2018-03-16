@@ -2,7 +2,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job/security
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
 	l_ear = /obj/item/device/radio/headset/headset_sec
-	gloves = /obj/item/clothing/gloves/thick
+	gloves = /obj/item/clothing/gloves/thick/security
 	shoes = /obj/item/clothing/shoes/jackboots
 	backpack_contents = list(/obj/item/weapon/handcuffs = 1)
 
