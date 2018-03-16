@@ -244,7 +244,7 @@
 	projectile_type = /obj/item/projectile/bullet/m5/rubber
 
 /obj/item/projectile/bullet/m5
-	damage = 15
+	damage = 20
 	accuracy = -3
 
 /obj/item/projectile/bullet/m5/rubber //"rubber" bullets
