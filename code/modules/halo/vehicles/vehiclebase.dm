@@ -35,6 +35,10 @@
 		fuels += new i
 		fuels -= i
 
+/obj/vehicles/examine(var/mob/user)
+	. = ..()
+	vehicle_health_output(user)
+
 /obj/vehicles/verb/enter_exit_vehicle()
 	set name = "Enter/Exit Vehicle"
 	set category = "Vehicle"
@@ -66,6 +70,22 @@
 	controller.on_click(null,user)
 	enter_exit_vehicle(user)
 
+/obj/vehicles/proc/check_pilot_active()
+	var/mob/living/carbon/human/h = driver
+	if(isnull(h) || !istype(h))
+		return 0
+	if(h.stat == UNCONSCIOUS || h.stat == DEAD)
+		return 0
+	return 1
+
+/obj/vehicles/proc/inactive_pilot_effects()
+	visible_message("<span class = 'warning'>[driver.name] slumps over, falling out of the [src.name].</span>")
+	exit_vehicle(driver)
+	controller.on_exit_vehicle()
+
+/obj/vehicles/process() //Vehicle process is only used to check the driver's state.
+	if(!check_pilot_active() && !isnull(driver))
+		inactive_pilot_effects()
 
 /obj/vehicles/attackby(var/obj/item/W,var/mob/living/user)
 	controller.on_click(W,user)
@@ -152,11 +172,13 @@
 	driver.driving = src
 	contents += user
 	to_chat(user,"<span class = 'notice'>You are now the driver of [src.name]</span>")
+	GLOB.processing_objects += src
 
 /obj/vehicles/proc/unassign_driver(var/mob/user)
 	driver = null
 	user.driving = null
 	to_chat(user,"<span class = 'warning'>You are no longer the driver of [src.name]</span>")
+	GLOB.processing_objects -= src
 
 /obj/vehicles/proc/give_gunner_weapon(var/mob/user)
 	if(!(user in gunners))
@@ -186,20 +208,21 @@
 	remove_gunner_weapon(user)
 	to_chat(user,"<span class = 'warning'>You are no longer a gunner of [src.name]</span>")
 
-/obj/vehicles/proc/update_description()
+/obj/vehicles/proc/vehicle_health_output(var/mob/user)
 	var/percentile_health = health[1]/health[2]
+	var/message = null
 	if(percentile_health <= 0.75)
-		desc += "<span class = 'warning'>It is partially damaged.</span>"
+		message = "<span class = 'warning'>It is partially damaged.</span>"
 	else if(percentile_health <= 0.5)
-		desc += "<span class = 'warning'>It is badly damaged.</span>"
+		message = "<span class = 'warning'>It is badly damaged.</span>"
 	else if(percentile_health <= 0.25)
-		desc += "<span class = 'warning'>It is critically damaged.</span>"
+		message = "<span class = 'warning'>It is critically damaged.</span>"
+	if(!isnull(message))
+		to_chat(user,message)
 
 /obj/vehicles/proc/process_health_damage()
 	if(health[1] <= 0)
 		on_death()
-	else
-		update_description()
 
 /obj/vehicles/proc/on_death()
 	for(var/mob/m in contents)
@@ -312,6 +335,8 @@
 /datum/vehicle_control/proc/gunner_turret_fire(var/mob/user,var/atom/target)
 
 /datum/vehicle_control/proc/gunner_turret_check(var/mob/user,var/atom/target) //Used for pre-fire special checks, such as directions.
+	if(!vehicle.active)
+		return 0
 	return 1
 
 /datum/vehicle_control/proc/on_emp(var/severity)
@@ -431,7 +456,7 @@
 
 /datum/vehicle_control/base/on_explosion_act(var/severity)
 	var/resist_required = 100/severity //This runs with the assumption that severity 1 is the most severe explosion.
-	var/combo_resistances = (vehicle.damage_resistances["brute"]/2 + vehicle.damage_resistances["burn"]/2)
+	var/combo_resistances = (vehicle.damage_resistances["brute"]/3 + vehicle.damage_resistances["burn"]/3)
 	if(combo_resistances < resist_required)
 		vehicle.health[1] -= (resist_required - combo_resistances)
 		vehicle.process_health_damage()
