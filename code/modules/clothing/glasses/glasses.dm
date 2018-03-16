@@ -220,6 +220,11 @@
 	darkness_view = -1
 	flash_protection = FLASH_PROTECTION_MODERATE
 
+/obj/item/clothing/glasses/sunglasses/redglasses
+	name = "Crimson glasses"
+	desc = "They make you look like an elite agent."
+	icon_state = "bigredglasses"
+
 /obj/item/clothing/glasses/welding
 	name = "welding goggles"
 	desc = "Protects the eyes from welders, approved by the mad scientist association."

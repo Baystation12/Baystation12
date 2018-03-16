@@ -34,6 +34,20 @@
 	ties["striped tie"] = /obj/item/clothing/accessory/long
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
+/datum/gear/accessory/corset_color
+	display_name = "colored corset"
+	path = /obj/item/clothing/accessory/corset
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/choker_color
+	display_name = "colored choker"
+	path = /obj/item/clothing/accessory/choker
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/vynilcorset
+	display_name = "vinyl corset"
+	path = /obj/item/clothing/accessory/vynilcorset
+
 /datum/gear/accessory/locket
 	display_name = "locket"
 	path = /obj/item/clothing/accessory/locket

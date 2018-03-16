@@ -15,6 +15,11 @@
 	display_name = "glasses"
 	path = /obj/item/clothing/glasses
 
+/datum/gear/eyes/redglasses
+	display_name = "Crimson glasses"
+	path = /obj/item/clothing/glasses/sunglasses/redglasses
+	cost = 3
+
 /datum/gear/eyes/fashionglasses/New()
 	..()
 	var/glasses = list()

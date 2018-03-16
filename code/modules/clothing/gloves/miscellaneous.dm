@@ -66,6 +66,11 @@
 	force = 5
 	armor = list(melee = 80, bullet = 60, laser = 60,energy = 25, bomb = 50, bio = 10, rad = 0)
 
+/obj/item/clothing/gloves/thick/security
+	name = "\improper Security Gloves"
+	icon_state = "sec_gloves"
+
+
 /obj/item/clothing/gloves/thick/combat //Combined effect of SWAT gloves and insulated gloves
 	desc = "These tactical gloves are somewhat fire and impact resistant."
 	name = "combat gloves"

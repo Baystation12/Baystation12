@@ -352,6 +352,36 @@
 	min_cold_protection_temperature = T0C - 20
 	siemens_coefficient = 0.7
 
+
+/obj/item/clothing/suit/storage/toggle/varsity
+	name = "black varsity"
+	icon_state = "varsity_black"
+	icon_open = "varsity_black_open"
+	icon_closed = "varsity_black"
+	body_parts_covered = UPPER_TORSO|ARMS
+	cold_protection = UPPER_TORSO|ARMS
+	min_cold_protection_temperature = T0C - 20
+	siemens_coefficient = 0.7
+
+/obj/item/clothing/suit/storage/toggle/varsity/blue
+	name = "blue varsity"
+	icon_state = "varsity_blue"
+	icon_open = "varsity_blue_open"
+	icon_closed = "varsity_blue"
+
+/obj/item/clothing/suit/storage/toggle/varsity/red
+	name = "red varsity"
+	icon_state = "varsity_red"
+	icon_open = "varsity_red_open"
+	icon_closed = "varsity_red"
+
+/obj/item/clothing/suit/storage/toggle/varsity/brown
+	name = "brown varsity"
+	icon_state = "varsity_brown"
+	desc = "Where are you right now?"
+	icon_open = "varsity_brown_open"
+	icon_closed = "varsity_brown"
+
 /obj/item/clothing/suit/storage/leather_jacket
 	name = "leather jacket"
 	desc = "A black leather coat."

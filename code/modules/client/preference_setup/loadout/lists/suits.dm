@@ -46,6 +46,19 @@
 	path = /obj/item/clothing/suit/storage/toggle/suit
 	flags = GEAR_HAS_COLOR_SELECTION
 
+
+/datum/gear/suit/varsity
+	display_name = "Varsity, various colors"
+	path = /obj/item/clothing/suit/storage/toggle/varsity
+
+/datum/gear/suit/varsity/New()
+	..()
+	var/varsity = list()
+	varsity += /obj/item/clothing/suit/storage/toggle/varsity/blue
+	varsity += /obj/item/clothing/suit/storage/toggle/varsity/red
+	varsity += /obj/item/clothing/suit/storage/toggle/varsity/brown
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(varsity)
+
 /datum/gear/suit/hazard
 	display_name = "hazard vests"
 	path = /obj/item/clothing/suit/storage/hazardvest

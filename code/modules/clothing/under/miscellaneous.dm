@@ -12,6 +12,29 @@
 	worn_state = "blue_pyjamas"
 	item_state = "w_suit"
 
+
+/obj/item/clothing/under/dress/maid
+	name = "maid uniform"
+	desc = "Traditional French maid uniform."
+	icon_state = "maid"
+	worn_state = "maid"
+
+/obj/item/clothing/under/dress/bar_f
+	name = "black bartender dress"
+	desc = "A black bartender dress with a white blouse."
+	icon_state = "bar_f"
+	worn_state = "bar_f"
+
+/obj/item/clothing/under/rank/rosa
+	desc = "A dress commonly worn by the nursing staff in the medical departament"
+	name = "rosa dress"
+	icon_state = "rosa"
+	worn_state = "rosa"
+	permeability_coefficient = 0.50
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 10, rad = 0)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+
 /obj/item/clothing/under/captain_fly
 	name = "rogue's uniform"
 	desc = "For the man who doesn't care because he's still free."
