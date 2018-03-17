@@ -122,3 +122,4 @@
 	access = list(access_unsc_crew,
 		access_unsc_supplies, access_unsc_marine)
 	latejoin_at_spawnpoints = TRUE
+	is_whitelisted = 1
