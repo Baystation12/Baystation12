@@ -1110,6 +1110,7 @@
 #include "code\modules\admin\secrets\investigation\admin_pms.dm"
 #include "code\modules\admin\secrets\investigation\attack_logs.dm"
 #include "code\modules\admin\secrets\random_events\gravity.dm"
+#include "code\modules\admin\secrets\random_events\trigger_CompanyProvocation.dm"
 #include "code\modules\admin\secrets\random_events\trigger_cordical_borer_infestation.dm"
 #include "code\modules\admin\secrets\random_events\trigger_xenomorph_infestation.dm"
 #include "code\modules\admin\verbs\adminhelp.dm"

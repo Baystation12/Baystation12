@@ -46,6 +46,7 @@ var/datum/admin_secrets/admin_secrets = new()
 //
 /datum/admin_secret_item
 	var/name = ""
+	var/buttonName = ""
 	var/category = null
 	var/log = 1
 	var/feedback = 1
@@ -56,6 +57,8 @@ var/datum/admin_secrets/admin_secrets = new()
 	return "[name]"
 
 /datum/admin_secret_item/proc/name()
+	if (length(buttonName))
+		return buttonName
 	return name
 
 /datum/admin_secret_item/proc/can_view(var/mob/user)

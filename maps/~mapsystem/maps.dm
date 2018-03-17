@@ -109,14 +109,14 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	//Factions prefs stuff
 	var/list/faction_choices = list(
-		"NanoTrasen",
+		"NanoTrasen", // NanoTrasen must be first, else Company Provocation event will break
 		"Liu-Je Green Terraforming Industries",
 		"Charcoal TestLabs Ltd.",
 		"Blue Oceanic Explorers",
 		"Milky Way Trade Union",
 		"Redknight & Company Dominance Tech",
 		"Indigo Special Research Collaboration"
-	)
+		)
 
 	var/list/citizenship_choices = list(
 		"NanoTrasen",
@@ -126,7 +126,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		"Ahdomai",
 		"Qerrbalak",
 		"Parish of the Parthenonnus Ark"
-	)
+		)
 
 	var/list/home_system_choices = list(
 		"Nova Magnitka",
@@ -136,7 +136,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		"Arcturia",
 		"Gaia Magna",
 		"Parthenonnus Ark Space Vessel"
-	)
+		)
 
 	var/list/religion_choices = list(
 		"Pan-Christian United Church",
@@ -146,9 +146,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		"A-Kami",
 		"Geng Hao Dao",
 		"Jesus Witnesses",
+		"Syncretism",
+		"Neohumanism",
 		"Agnosticism",
 		"Atheism"
-	)
+		)
 
 /datum/map/New()
 	if(!map_levels)

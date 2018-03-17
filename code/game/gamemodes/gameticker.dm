@@ -160,12 +160,12 @@ var/global/datum/controller/gameticker/ticker
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
 
-	var/admins_number = 0
-	for(var/client/C)
-		if(C.holder)
-			admins_number++
-	if(admins_number == 0)
-		send2adminirc("Round has started with no admins online.")
+// 	var/admins_number = 0
+// 	for(var/client/C)
+// 		if(C.holder)
+// 			admins_number++
+// 	if(admins_number == 0)
+// 		send2adminirc("Round has started with no admins online.")
 
 
 	processScheduler.start()

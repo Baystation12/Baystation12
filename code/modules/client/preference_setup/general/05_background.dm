@@ -8,7 +8,7 @@
 	//Some faction information.
 	var/home_system = "Unset"           //System of birth.
 	var/citizenship = "None"            //Current home system.
-	var/faction = "None"                //Antag faction/general associated faction.
+	var/faction = "NanoTrasen"          //General associated faction.
 	var/religion = "None"               //Religious association.
 
 /datum/category_item/player_setup_item/general/background
@@ -26,6 +26,15 @@
 	from_file(S["nanotrasen_relation"],pref.nanotrasen_relation)
 	from_file(S["memory"],pref.memory)
 
+	// delete factions from old saves
+	var/factionExist = FALSE
+	for (var/faction in GLOB.using_map.faction_choices)
+		if (cmptext(pref.faction, faction))
+			factionExist = TRUE
+			break
+	if (!factionExist)
+		pref.faction = "NanoTrasen"
+
 /datum/category_item/player_setup_item/general/background/save_character(var/savefile/S)
 	to_file(S["med_record"],pref.med_record)
 	to_file(S["sec_record"],pref.sec_record)
@@ -40,7 +49,7 @@
 /datum/category_item/player_setup_item/general/background/sanitize_character()
 	if(!pref.home_system) pref.home_system = "Unset"
 	if(!pref.citizenship) pref.citizenship = "None"
-	if(!pref.faction)     pref.faction =     "None"
+	if(!pref.faction)     pref.faction =     "NanoTrasen"
 	if(!pref.religion)    pref.religion =    "None"
 
 	pref.nanotrasen_relation = sanitize_inlist(pref.nanotrasen_relation, COMPANY_ALIGNMENTS, initial(pref.nanotrasen_relation))
@@ -98,15 +107,10 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["faction"])
-		var/choice = input(user, "Please choose a faction to work for.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.faction) as null|anything in GLOB.using_map.faction_choices + list("None","Other")
+		var/choice = input(user, "Please choose a faction to work for.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.faction) as null|anything in GLOB.using_map.faction_choices
 		if(!choice || !CanUseTopic(user))
 			return TOPIC_NOACTION
-		if(choice == "Other")
-			var/raw_choice = sanitize(input(user, "Please enter a faction.", CHARACTER_PREFERENCE_INPUT_TITLE)  as text|null, MAX_NAME_LEN)
-			if(raw_choice)
-				pref.faction = raw_choice
-		else
-			pref.faction = choice
+		pref.faction = choice
 		return TOPIC_REFRESH
 
 	else if(href_list["religion"])
