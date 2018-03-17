@@ -93,7 +93,7 @@
 	magazine_type = /obj/item/ammo_magazine/m95_sap
 	one_hand_penalty = -1
 	burst = 3
-	burst_delay = 1
+	burst_delay = 3
 	accuracy = 1
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.0, 0.6, 0.6)

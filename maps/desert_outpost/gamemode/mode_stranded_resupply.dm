@@ -237,8 +237,8 @@
 
 /datum/game_mode/stranded/proc/spawn_misc_crate(var/turf/spawn_turf)
 	var/obj/structure/closet/crate/C = new(spawn_turf)
-	new /obj/item/weapon/melee/combat_knife(C)
-	new /obj/item/weapon/melee/combat_knife(C)
+	new /obj/item/weapon/material/knife/combat_knife(C)
+	new /obj/item/weapon/material/knife/combat_knife(C)
 
 	new /obj/item/device/flashlight/flare(C)
 	new /obj/item/device/flashlight/flare(C)

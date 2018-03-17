@@ -122,6 +122,7 @@
 	nodamage = 1
 	agony = 10
 	damage_type = PAIN
+	penetrating = 0
 
 /obj/item/projectile/bullet/a762/M392
 	damage = 35
@@ -243,7 +244,7 @@
 	projectile_type = /obj/item/projectile/bullet/m5/rubber
 
 /obj/item/projectile/bullet/m5
-	damage = 15
+	damage = 20
 	accuracy = -3
 
 /obj/item/projectile/bullet/m5/rubber //"rubber" bullets
