@@ -285,7 +285,7 @@
 /mob/new_player/proc/IsJobAvailable(var/datum/job/job)
 	if(!job)	return 0
 	if(!job.is_position_available()) return 0
-	if(jobban_isbanned(src, job.title))	return 0
+	if(jobban_isbanned(src, job.title,job.is_whitelisted))	return 0
 	if(!job.player_old_enough(src.client))	return 0
 
 	return 1

@@ -38,6 +38,7 @@
 	var/track_players = 0
 	var/list/assigned_players = list()
 	var/spawn_faction
+	var/is_whitelisted = 0
 
 /datum/job/New()
 	..()

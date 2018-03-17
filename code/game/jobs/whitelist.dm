@@ -8,13 +8,25 @@ var/list/whitelist = list()
 	return 1
 
 /proc/load_whitelist()
-	whitelist = file2list(WHITELISTFILE)
-	if(!whitelist.len)	whitelist = null
+	var/list/whitelist_base = file2list(WHITELISTFILE)
+	if(!whitelist_base.len)	whitelist = null
+	for(var/value in whitelist_base) //Added some code to handle jobs.
+		var/name_and_job = maploader.text2list(value) //Because apparently only the maploader actually has this proc.
+		if(isnull(name_and_job) || name_and_job == value)
+			whitelist += value
+		else
+			whitelist += name_and_job
 
-/proc/check_whitelist(mob/M /*, var/rank*/)
+/proc/check_whitelist(mob/M , var/rank)
 	if(!whitelist)
 		return 0
-	return ("[M.ckey]" in whitelist)
+	if(isnull(rank))
+		return ("[M.ckey]" in whitelist)
+	else
+		for(var/value in whitelist)
+			if(value == "[M.ckey]" && whitelist[value] == "[rank]")
+				return 1
+		return 0
 
 /var/list/alien_whitelist = list()
 
