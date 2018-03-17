@@ -1,5 +1,5 @@
 /obj/item/weapon/plastique
-	name = "C-12 shaped charge"
+	name = "C-12 breaching charge"
 	desc = "C-12 Shaped-charges or C-12 SCs are used mainly for heavy demolitions and can also be used as weapons. This charge is small and used for pinpoint breaching."
 	gender = PLURAL
 	icon = 'icons/obj/assemblies.dmi'
