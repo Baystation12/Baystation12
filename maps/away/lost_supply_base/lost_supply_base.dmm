@@ -324,13 +324,13 @@
 "gm" = (/obj/machinery/light,/turf/simulated/floor/airless,/area/lost_supply_base)
 "gn" = (/obj/structure/closet/crate/trashcart,/obj/item/weapon/mop,/obj/item/weapon/storage/box/lights/bulbs,/obj/machinery/atmospherics/unary/vent_pump{dir = 1; external_pressure_bound = 0; external_pressure_bound_default = 0; icon_state = "map_vent_in"; initialize_directions = 1; internal_pressure_bound = 4000; internal_pressure_bound_default = 4000; use_power = 1; pressure_checks = 2; pressure_checks_default = 2; pump_direction = 0},/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
 "go" = (/obj/item/stack/material/steel,/turf/simulated/floor/tiled/airless,/area/lost_supply_base)
-"gp" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/structure/mirror{pixel_x = -32},/obj/machinery/light/small,/turf/simulated/floor/tiled/airless{ icon_state = "steel_broken0"},/area/lost_supply_base/supply)
 "gq" = (/obj/structure/toilet{dir = 1},/obj/machinery/light/small,/turf/simulated/floor/tiled/airless,/area/lost_supply_base/supply)
 "gr" = (/obj/machinery/shower{ icon_state = "shower"; dir = 8},/obj/random/soap,/obj/machinery/light/small,/turf/simulated/floor/tiled/airless,/area/lost_supply_base/supply)
 "gs" = (/obj/effect/shuttle_landmark/nav_lost_supply_base/navantag,/turf/space,/area/space)
 "gt" = (/turf/unsimulated/mask,/area/mine/unexplored)
 "gu" = (/turf/simulated/floor/asteroid,/area/mine/explored)
 "hb" = (/obj/effect/landmark/random_gen/asteroid{generation_height = 100; generation_width = 100},/turf/space,/area/space)
+"ib" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/item/weapon/storage/mirror{pixel_x = -32},/obj/machinery/light/small,/turf/simulated/floor/tiled/airless{ icon_state = "steel_broken0"},/area/lost_supply_base/supply)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -386,7 +386,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDaDaAdiaXfHaZbabbaGaGfIfJfKfLfLbqbqbqbqaGfMfNfOfPfpfpfpfpfpflaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDaDbrbqbqbqfQbsfRbqbqbqbqaGaGbTaGaGaGaGbVaDfSfTfUfEfVfWfXfsflaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafYfZgafZfZgbgagcgdgeaGaGaGgfdmaGdmaGaGaGbVggghfOgigjfpgkfpgkflaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaglglaAaAbRaAaAaGaGeQgmaGaGaGaGaGaGgmaGaGbVgngofpgpfsfpgqfpgrflaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaglglaAaAbRaAaAaGaGeQgmaGaGaGaGaGaGgmaGaGbVgngofpibfsfpgqfpgrflaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAflflflflflflflflaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
