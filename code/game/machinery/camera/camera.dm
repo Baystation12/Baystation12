@@ -37,6 +37,11 @@
 
 	var/affected_by_emp_until = 0
 
+/obj/machinery/camera/examine(mob/user)
+	. = ..()
+	if(stat & BROKEN)
+		to_chat(user, "<span class='warning'>It is completely demolished.</span>")
+
 /obj/machinery/camera/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()
 	malf_upgraded = 1
