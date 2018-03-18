@@ -51,7 +51,7 @@
 		hit_bounds  = pick(object_hit.weapon_locations)
 
 	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
-	explosion(turf_to_explode,5,7,8,10)
+	explosion(turf_to_explode,3,5,7,10)
 
 /obj/item/projectile/overmap/proc/do_z_level_proj_spawn(var/z_level,var/obj/effect/overmap/ship/overmap_object_hit)
 	var/start_co_ords
