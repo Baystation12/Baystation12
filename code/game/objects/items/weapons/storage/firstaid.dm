@@ -109,6 +109,20 @@
 		/obj/item/stack/medical/splint,
 		)
 
+/obj/item/weapon/storage/firstaid/stab
+	name = "stabilisation first aid"
+	desc = "Stocked with medical pouches and a stasis bag."
+	icon_state = "stabfirstaid"
+	item_state = "firstaid-advanced"
+
+	startswith = list(
+		/obj/item/weapon/storage/med_pouch/trauma,
+		/obj/item/weapon/storage/med_pouch/burn,
+		/obj/item/weapon/storage/med_pouch/oxyloss,
+		/obj/item/weapon/storage/med_pouch/toxin,
+		/obj/item/bodybag/cryobag
+		)
+
 /obj/item/weapon/storage/firstaid/surgery
 	name = "surgery kit"
 	desc = "Contains tools for surgery. Has precise foam fitting for safe transport and automatically sterilizes the content between uses."

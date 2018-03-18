@@ -912,6 +912,7 @@
 #include "code\game\objects\items\weapons\storage\laundry_basket.dm"
 #include "code\game\objects\items\weapons\storage\lockbox.dm"
 #include "code\game\objects\items\weapons\storage\lunchbox.dm"
+#include "code\game\objects\items\weapons\storage\med_pouch.dm"
 #include "code\game\objects\items\weapons\storage\misc.dm"
 #include "code\game\objects\items\weapons\storage\secure.dm"
 #include "code\game\objects\items\weapons\storage\specialized.dm"
