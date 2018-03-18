@@ -18,13 +18,14 @@
 /turf/simulated/shuttle/wall/corner
 	var/corner_overlay_state = "diagonalWall"
 	var/image/corner_overlay
+	dir = NORTHWEST //Don't - ever - set this to a cardinal, it'll fuck up shuttlecode.
 
 //DO NOT MAP THESE AS CARDINAL. EVER. EVERRRRR.
 /turf/simulated/shuttle/wall/corner/Initialize()
 	. = ..()
 	reset_base_appearance()
 	reset_overlay()
-	underlay_turf()
+	addtimer(CALLBACK(src, .proc/underlay_turf), 1)
 	if( !(dir in list(NORTHEAST, NORTHWEST, SOUTHWEST, SOUTHEAST)) )
 		CRASH("A diagonal wall has been mapped in a cardinal direction at [x], [y], [z]") //So it fails Travis when people do this.
 
