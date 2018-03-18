@@ -54,8 +54,7 @@
 /obj/item/clothing/accessory/badge/holo/NT
 	name = "\improper NT holobadge"
 	desc = "This glowing red badge marks the holder as a member of NanoTrasen corporate security."
-	icon_state = "ntholobadge"
-	color = COLOR_WHITE
+	color = "#b7310b" //brighter COLOR_NT_RED
 	badge_string = "NanoTrasen Security"
 	badge_access = access_research
 
