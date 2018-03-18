@@ -1,1 +1,4 @@
 [player_ckey]=[full_job_title]
+
+Joe4444=ODST Rifleman
+Winterume=ODST Rifleman
