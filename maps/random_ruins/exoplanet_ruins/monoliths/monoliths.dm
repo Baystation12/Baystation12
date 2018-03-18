@@ -47,7 +47,7 @@
 			if(!H.isSynthetic())
 				active = 1
 				update_icon()
-				if(prob(99))
+				if(prob(70))
 					to_chat(H, "<span class='notice'>As you touch \the [src], you suddenly get a vivid image - [E.get_engravings()]</span>")
 				else
 					to_chat(H, "<span class='warning'>An overwhelming stream of information invades your mind!</span>")
