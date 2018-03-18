@@ -167,7 +167,6 @@
 			possible_spawns += /obj/item/stack/material/phoron
 			possible_spawns += /obj/item/stack/material/gold
 			possible_spawns += /obj/item/stack/material/silver
-			possible_spawns += /obj/item/stack/material/uranium
 			possible_spawns += /obj/item/stack/material/sandstone
 			possible_spawns += /obj/item/stack/material/silver
 
