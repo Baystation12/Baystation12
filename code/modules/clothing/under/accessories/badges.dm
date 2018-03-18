@@ -96,6 +96,9 @@
 			var/obj/item/device/pda/pda = O
 			id_card = pda.id
 
+		if(!id_card)
+			return
+
 		if((badge_access in id_card.access) || emagged)
 			to_chat(user, "You imprint your ID details onto the badge.")
 			set_name(user.real_name)
