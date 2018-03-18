@@ -16,39 +16,34 @@
 <A href='?src=\ref[src];make=0;dir=1'>Pipe</A><BR>
 <A href='?src=\ref[src];make=1;dir=5'>Bent Pipe</A><BR>
 <A href='?src=\ref[src];make=5;dir=1'>Manifold</A><BR>
+<A href='?src=\ref[src];make=19;dir=1'>4-Way Manifold</A><BR>
 <A href='?src=\ref[src];make=8;dir=1'>Manual Valve</A><BR>
 <A href='?src=\ref[src];make=9;dir=1'>Digital Valve</A><BR>
 <A href='?src=\ref[src];make=44;dir=1'>Automatic Shutoff Valve</A><BR>
 <A href='?src=\ref[src];make=20;dir=1'>Pipe Cap</A><BR>
-<A href='?src=\ref[src];make=19;dir=1'>4-Way Manifold</A><BR>
 <A href='?src=\ref[src];make=18;dir=1'>Manual T-Valve</A><BR>
 <A href='?src=\ref[src];make=43;dir=1'>Manual T-Valve - Mirrored</A><BR>
 <A href='?src=\ref[src];make=21;dir=1'>Upward Pipe</A><BR>
 <A href='?src=\ref[src];make=22;dir=1'>Downward Pipe</A><BR>
+<BR>
 <b>Supply pipes:</b><BR>
 <A href='?src=\ref[src];make=29;dir=1'>Pipe</A><BR>
 <A href='?src=\ref[src];make=30;dir=5'>Bent Pipe</A><BR>
 <A href='?src=\ref[src];make=33;dir=1'>Manifold</A><BR>
-<A href='?src=\ref[src];make=41;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=35;dir=1'>4-Way Manifold</A><BR>
+<A href='?src=\ref[src];make=41;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=37;dir=1'>Upward Pipe</A><BR>
 <A href='?src=\ref[src];make=39;dir=1'>Downward Pipe</A><BR>
+<BR>
 <b>Scrubbers pipes:</b><BR>
 <A href='?src=\ref[src];make=31;dir=1'>Pipe</A><BR>
 <A href='?src=\ref[src];make=32;dir=5'>Bent Pipe</A><BR>
 <A href='?src=\ref[src];make=34;dir=1'>Manifold</A><BR>
-<A href='?src=\ref[src];make=42;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=36;dir=1'>4-Way Manifold</A><BR>
+<A href='?src=\ref[src];make=42;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=38;dir=1'>Upward Pipe</A><BR>
 <A href='?src=\ref[src];make=40;dir=1'>Downward Pipe</A><BR>
-<b>Fuel pipes:</b><BR>
-<A href='?src=\ref[src];make=45;dir=1'>Pipe</A><BR>
-<A href='?src=\ref[src];make=46;dir=5'>Bent Pipe</A><BR>
-<A href='?src=\ref[src];make=47;dir=1'>Manifold</A><BR>
-<A href='?src=\ref[src];make=51;dir=1'>Pipe Cap</A><BR>
-<A href='?src=\ref[src];make=48;dir=1'>4-Way Manifold</A><BR>
-<A href='?src=\ref[src];make=49;dir=1'>Upward Pipe</A><BR>
-<A href='?src=\ref[src];make=50;dir=1'>Downward Pipe</A><BR>
+<BR>
 <b>Devices:</b><BR>
 <A href='?src=\ref[src];make=28;dir=1'>Universal pipe adapter</A><BR>
 <A href='?src=\ref[src];make=4;dir=1'>Connector</A><BR>
@@ -65,12 +60,21 @@
 <A href='?src=\ref[src];make=24;dir=1'>Gas Mixer - T</A><BR>
 <A href='?src=\ref[src];make=26;dir=1'>Omni Gas Mixer</A><BR>
 <A href='?src=\ref[src];make=27;dir=1'>Omni Gas Filter</A><BR>
+<BR>
 <b>Heat exchange:</b><BR>
 <A href='?src=\ref[src];make=2;dir=1'>Pipe</A><BR>
 <A href='?src=\ref[src];make=3;dir=5'>Bent Pipe</A><BR>
 <A href='?src=\ref[src];make=6;dir=1'>Junction</A><BR>
 <A href='?src=\ref[src];make=17;dir=1'>Heat Exchanger</A><BR>
-
+<BR>
+<b>Fuel pipes:</b><BR>
+<A href='?src=\ref[src];make=45;dir=1'>Pipe</A><BR>
+<A href='?src=\ref[src];make=46;dir=5'>Bent Pipe</A><BR>
+<A href='?src=\ref[src];make=47;dir=1'>Manifold</A><BR>
+<A href='?src=\ref[src];make=48;dir=1'>4-Way Manifold</A><BR>
+<A href='?src=\ref[src];make=51;dir=1'>Pipe Cap</A><BR>
+<A href='?src=\ref[src];make=49;dir=1'>Upward Pipe</A><BR>
+<A href='?src=\ref[src];make=50;dir=1'>Downward Pipe</A><BR>
 "}
 ///// Z-Level stuff
 //What number the make points to is in the define # at the top of construction.dm in same folder
@@ -115,7 +119,7 @@
 		if (unwrenched==0)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You begin to unfasten \the [src] from the floor...</span>")
-			if (do_after(user, 40, src))
+			if (do_after(user, STANDARD_UNWRENCH_DELAY, src))
 				user.visible_message( \
 					"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 					"<span class='notice'>You have unfastened \the [src]. Now it can be pulled somewhere else.</span>", \
@@ -128,7 +132,7 @@
 		else /*if (unwrenched==1)*/
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			to_chat(user, "<span class='notice'>You begin to fasten \the [src] to the floor...</span>")
-			if (do_after(user, 20, src))
+			if (do_after(user, 5, src))
 				user.visible_message( \
 					"<span class='notice'>\The [user] fastens \the [src].</span>", \
 					"<span class='notice'>You have fastened \the [src]. Now it can dispense pipes.</span>", \

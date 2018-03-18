@@ -689,7 +689,6 @@ var/list/worths = list(
 					/obj/machinery/atmospherics/unary/generator_input = -2500,
 					/obj/machinery/atmospherics/unary/heater = -6000,
 					/obj/machinery/atmospherics/unary/outlet_injector = -2300,
-					/obj/machinery/atmospherics/unary/oxygen_generator = -10000,
 					/obj/machinery/atmospherics/unary/vent_pump = -2000,
 					/obj/machinery/atmospherics/unary/vent_scrubber = -2300,
 					/obj/machinery/bodyscanner = -6000,
