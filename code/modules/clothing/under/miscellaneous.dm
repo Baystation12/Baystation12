@@ -588,6 +588,12 @@
 	icon_state = "morpheus"
 	worn_state = "morpheus"
 
+/obj/item/clothing/under/skinner
+	name = "\improper Skinner Catering uniform"
+	desc = "A uniform belonging to Skinner's Catering, a dining company."
+	icon_state = "skinner"
+	worn_state = "skinner"
+
 // Replace this with actual uniform when someone wants to sprite one
 /obj/item/clothing/under/confederacy
 	name = "\improper Confederate uniform"
