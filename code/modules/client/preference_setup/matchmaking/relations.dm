@@ -10,6 +10,10 @@
 	S["relations"]	>> pref.relations
 	S["relations_info"]	>> pref.relations_info
 
+	for (var/T in pref.relations)
+		if (!matchmaker.relation_types.Find(T))
+			pref.relations.Remove(T)
+
 /datum/category_item/player_setup_item/relations/save_character(var/savefile/S)
 	S["relations"]	<< pref.relations
 	S["relations_info"]	<< pref.relations_info
