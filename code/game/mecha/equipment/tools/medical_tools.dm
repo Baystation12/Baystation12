@@ -334,9 +334,9 @@
 		for(var/i=1 to known_reagents.len)
 			if(m>=synth_speed)
 				break
-			var/reagent = F.get("reagent_[i]")
-			if(reagent && (reagent in known_reagents))
-				message = "[m ? ", " : null][known_reagents[reagent]]"
+			var/reagent = known_reagents[i]
+			if(F.get("reagent_[i]"))
+				message += "[m ? ", " : null][known_reagents[reagent]]"
 				processed_reagents += reagent
 				m++
 		if(processed_reagents.len)
