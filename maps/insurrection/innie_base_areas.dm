@@ -28,10 +28,6 @@
 	name = "\improper Atmospherics Processing"
 	icon_state = "atmos"
 
-/area/asteroid_base/storage_atmos
-	name = "\improper Atmospherics Storage"
-	icon_state = "atmos_storage"
-
 /area/asteroid_base/storage_eng
 	name = "\improper Atmospherics Storage"
 	icon_state = "engineering_storage"
