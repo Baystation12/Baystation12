@@ -308,32 +308,33 @@
 /proc/hasHUD(mob/M as mob, hudtype)
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		switch(hudtype)
-			if("security")
-				if(istype(H.glasses,/obj/item/clothing/glasses))
-					var/obj/item/clothing/glasses/G = H.glasses
-					return istype(G.hud, /obj/item/clothing/glasses/hud/security) || istype(G, /obj/item/clothing/glasses/hud/security)
-				else
-					return FALSE
-			if("medical")
-				if(istype(H.glasses,/obj/item/clothing/glasses))
-					var/obj/item/clothing/glasses/G = H.glasses
-					return istype(G.hud, /obj/item/clothing/glasses/hud/health) || istype(G, /obj/item/clothing/glasses/hud/health)
-				else
-					return FALSE
-			else
-				return 0
+		var/obj/item/clothing/glasses/G = H.glasses
+		if(G.hud_type == hudtype)
+			return TRUE
+		else
+			return FALSE
+
 	else if(istype(M, /mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
-		switch(hudtype)
-			if("security")
-				return istype(R.module_state_1, /obj/item/borg/sight/hud/sec) || istype(R.module_state_2, /obj/item/borg/sight/hud/sec) || istype(R.module_state_3, /obj/item/borg/sight/hud/sec)
-			if("medical")
-				return istype(R.module_state_1, /obj/item/borg/sight/hud/med) || istype(R.module_state_2, /obj/item/borg/sight/hud/med) || istype(R.module_state_3, /obj/item/borg/sight/hud/med)
-			else
-				return 0
+		var/obj/item/borg/sight/sight
+
+//These borg slots really should be a list.
+		if(istype(R.module_state_1, /obj/item/borg/sight/))
+			sight = R.module_state_1
+		if(istype(R.module_state_2, /obj/item/borg/sight/))
+			sight = R.module_state_2
+		if(istype(R.module_state_3, /obj/item/borg/sight/))
+			sight = R.module_state_3
+
+		if(sight == initial(sight)) //Prevent runtimes if nothing was found.
+			return FALSE
+
+		if(sight.hud_type == hudtype)
+			return TRUE
+		else
+			return FALSE
 	else
-		return 0
+		return FALSE
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"

@@ -192,3 +192,8 @@
 			set_APTFT()
 	else
 		return ..()
+
+/obj/item/weapon/reagent_containers/examine(mob/user)
+	. = ..()
+	if(hasHUD(user, "science"))
+		to_chat(user, "<span class='notice'>The [src] contains: [reagents.get_reagents()].</span>")
