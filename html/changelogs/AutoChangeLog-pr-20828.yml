@@ -1,0 +1,4 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - bugfix: "Corrects a typo in the code, gives the Contractor Forensic Technician the correct badge, and gives them additional items in the loadout."
