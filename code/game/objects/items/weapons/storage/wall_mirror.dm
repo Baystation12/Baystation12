@@ -11,22 +11,24 @@
 	var/shattered = 0
 	var/list/ui_users = list()
 
-	startswith= list(
-		/obj/item/weapon/haircomb/random = 2,
+	startswith = list(
+		/obj/item/weapon/haircomb/random,
 		/obj/item/weapon/haircomb/brush,
+		/obj/random/medical/lite,
 		/obj/item/weapon/lipstick/random,
-		/obj/item/weapon/soap,
+		/obj/random/soap,
 		/obj/item/weapon/reagent_containers/spray/cleaner/deodorant,
 		/obj/item/weapon/towel/random)
 
 /obj/item/weapon/storage/mirror/MouseDrop(obj/over_object as obj)
-	..()
+	if(!(. = ..()))
+		return
 	flick("mirror_open",src)
 
 /obj/item/weapon/storage/mirror/attack_hand(var/mob/living/carbon/human/user)
-	Use_Mirror(user)
+	use_mirror(user)
 
-/obj/item/weapon/storage/mirror/proc/Use_Mirror(var/mob/living/carbon/human/user)
+/obj/item/weapon/storage/mirror/proc/use_mirror(var/mob/living/carbon/human/user)
 	if(shattered)
 		to_chat(user, "<spawn class='notice'>You enter the key combination for the style you want on the panel, but the nanomachines inside \the [src] refuse to come out.")
 		return
@@ -55,11 +57,12 @@
 			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
 	..()
 
-/obj/item/weapon/storage/mirror/attackby(obj/item/I as obj, mob/user as mob)
-	..()
+/obj/item/weapon/storage/mirror/attackby(obj/item/W as obj, mob/user as mob)
+	if(!(. = ..()))
+		return
 	flick("mirror_open",src)
-	if(prob(I.force) && (user.a_intent == I_HURT))
-		visible_message("<span class='warning'>[user] smashes [src] with [I]!</span>")
+	if(prob(W.force) && (user.a_intent == I_HURT))
+		visible_message("<span class='warning'>[user] smashes [src] with \the [W]!</span>")
 		if(!shattered)
 			shatter()
 
@@ -90,7 +93,7 @@
 	icon_state = "mirror_broke"
 	shattered = 1
 
-/obj/item/weapon/storage/mirror/raider/Use_Mirror(mob/living/carbon/human/user)
+/obj/item/weapon/storage/mirror/raider/use_mirror(mob/living/carbon/human/user)
 	if(istype(get_area(src),/area/syndicate_mothership))
 		if(istype(user) && user.mind && user.mind.special_role == "Raider" && user.species.name != SPECIES_VOX && is_alien_whitelisted(user, SPECIES_VOX))
 			var/choice = input("Do you wish to become a true Vox of the Shoal? This is not reversible.") as null|anything in list("No","Yes")

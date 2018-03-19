@@ -35,16 +35,13 @@
 	if(!canremove)
 		return
 
-	if (ishuman(usr) || issmall(usr)) //so monkeys can take off their backpacks -- Urist
+	if ((ishuman(usr) || issmall(usr)) && !usr.incapacitated())
 		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
 			src.open(usr)
-			return
+			return TRUE
 
 		if (!( istype(over_object, /obj/screen) ))
 			return ..()
-
-		if (usr.incapacitated())
-			return
 
 		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
 		if (!usr.contains(src))

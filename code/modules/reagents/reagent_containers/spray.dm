@@ -57,10 +57,10 @@
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 	if (A.density && proximity)
 		reagents.splash(A, amount_per_transfer_from_this)
-		if(A == usr)
-			A.visible_message("<span class='notice'>\The [usr] sprays themselves with \the [src].</span>")
+		if(A == user)
+			A.visible_message("<span class='notice'>\The [user] sprays themselves with \the [src].</span>")
 		else
-			A.visible_message("<span class='notice'>\The [usr] sprays \the [A] with \the [src].</span>")
+			A.visible_message("<span class='notice'>\The [user] sprays \the [A] with \the [src].</span>")
 	else
 		spawn(0)
 			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
