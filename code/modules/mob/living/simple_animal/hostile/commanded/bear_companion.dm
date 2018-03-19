@@ -15,6 +15,7 @@
 	attacktext = "swatted"
 	melee_damage_lower = 10
 	melee_damage_upper = 10
+	can_escape = 1
 
 	max_gas = list("phoron" = 2, "carbon_dioxide" = 5)
 

@@ -105,6 +105,7 @@
 	melee_damage_lower = 35
 	melee_damage_upper = 55
 	mob_size = MOB_LARGE
+	can_escape = 1 //nice try pal
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/Retaliate()
 	..()

@@ -36,7 +36,7 @@
 	desc = "A robot, this one is armed and looks tough!"
 	health = 80
 	ranged = 1
-
+	can_escape = 1
 
 /mob/living/simple_animal/hostile/hivebot/death()
 	..(null, "blows apart!")
