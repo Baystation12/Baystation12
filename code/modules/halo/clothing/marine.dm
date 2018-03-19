@@ -133,5 +133,12 @@
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
+/obj/item/weapon/card/id/unsc
+	name = "identification card"
+	desc = "An identification card worn by members of the UNSC."
+	icon = 'code/modules/halo/icons/objs/(Placeholder)card.dmi'
+	icon_state = "id"
+	item_state = "card-id"
+
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND
