@@ -2,7 +2,7 @@
 	var/unique_name
 	var/datum/detective_gun_skin/unique_reskin
 	var/static/list/gun_options
-	magazine_type = /obj/item/ammo_magazine/c45m/flash
+	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 
 /obj/item/weapon/gun/projectile/colt/detective/New()
 	..()
@@ -43,7 +43,7 @@
 		to_chat(M, "You name the gun '[input]'. Say hello to your new friend.")
 		return 1
 
-/obj/item/weapon/gun/projectile/colt/detective/verb/reskin_gun()
+/*/obj/item/weapon/gun/projectile/colt/detective/verb/reskin_gun()
 	set name = "Reskin gun"
 	set category = "Object"
 	set desc = "Click to reskin your gun."
@@ -60,13 +60,10 @@
 			SetName(choice.name)
 		to_chat(M, "Your gun is now skinned as \a [choice]. Say hello to your new friend.")
 		return 1
-
+*/
 
 //apart of reskins that have two sprites, touching may result in frustration and breaks
 /obj/item/weapon/gun/projectile/colt/detective/attack_hand(var/mob/living/user)
-	if(!unique_reskin && loc == user)
-		reskin_gun(user)
-		return
 	..()
 
 /datum/detective_gun_skin

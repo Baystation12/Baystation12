@@ -679,21 +679,21 @@
 
 /datum/sprite_accessory/hair/antenna
 	name = "Antenna Hair"
-	icon_state = " hair_antenna"
+	icon_state = "hair_antenna"
 	gender = FEMALE
 
 /datum/sprite_accessory/hair/balding
 	name = "Balding Hair"
-	icon_state = " hair_balding"
+	icon_state = "hair_balding"
 	gender = MALE
 
 /datum/sprite_accessory/hair/birdnest
 	name = "Birdnest"
-	icon_state = " hair_birdnest"
+	icon_state = "hair_birdnest"
 
 /datum/sprite_accessory/hair/birdnest2
 	name = "Birdnest 2"
-	icon_state = " hair_birdnest2"
+	icon_state = "hair_birdnest2"
 
 /datum/sprite_accessory/hair/blackswordsman
 	name = "Mercenary"
@@ -701,7 +701,7 @@
 
 /datum/sprite_accessory/hair/business
 	name = "Business Hair"
-	icon_state =  "hair_business"
+	icon_state = "hair_business"
 
 /datum/sprite_accessory/hair/business2
 	name = "Business Hair 2"
