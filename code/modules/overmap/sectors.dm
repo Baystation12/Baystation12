@@ -8,6 +8,7 @@ var/list/points_of_interest = list()
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
 	var/list/map_z = list()
+	var/list/weapon_locations = list(list(1,255,255,1)) //used for orbital unaimed MAC bombardment. Format: list(top_left_x,top_left_y,bottom_right_x,bottom_right_y) for each "visible" ground-to-ship weapon on the map.
 
 	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
 	var/list/restricted_waypoints = list() //waypoints for specific shuttles
