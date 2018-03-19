@@ -72,6 +72,9 @@
 	var/obj/effect/overmap/overmap_object = impacted
 	var/chosen_impact_z = pick(overmap_object.map_z)
 
+	if(!(starting in range(1,impacted)) && prob(overmap_object.weapon_miss_chance))
+		visible_message("<span class = 'warning'>[src] flies past [impacted].</span>")
+		return 0
 	if(istype(impacted,/obj/effect/overmap/sector))
 		do_sector_hit(chosen_impact_z,impacted)
 	else if(istype(impacted,/obj/effect/overmap/ship))
