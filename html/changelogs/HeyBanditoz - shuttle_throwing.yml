@@ -1,0 +1,4 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - rscadd: "You will now be thrown around while on a shuttle if you aren't buckled."
