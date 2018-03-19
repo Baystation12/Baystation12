@@ -110,8 +110,7 @@
 
 /decl/hierarchy/supply_pack/hydroponics/exoticseeds
 	name = "Exotic seeds crate"
-	contains = list(/obj/item/seeds/replicapod = 2,
-					/obj/item/seeds/libertymycelium,
+	contains = list(/obj/item/seeds/libertymycelium,
 					/obj/item/seeds/reishimycelium,
 					/obj/item/seeds/random = 6,
 					/obj/item/seeds/kudzuseed)
