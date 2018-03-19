@@ -152,8 +152,8 @@
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	damage = 50
-	armor_penetration = 15
+	damage = 55
+	armor_penetration = 20
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
@@ -168,8 +168,8 @@
 /obj/item/projectile/bullet/pellet/shotgun
 	name = "shrapnel"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	damage = 15
-	pellets = 6
+	damage = 20
+	pellets = 8
 	range_step = 1
 	spread_step = 10
 
