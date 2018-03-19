@@ -79,8 +79,7 @@ steam.start() -- spawns the effect
 				for(i=0, i<pick(1,2,3), i++)
 					sleep(5)
 					step(steam,direction)
-				spawn(20)
-					qdel(steam)
+				QDEL_IN(steam, 2 SECONDS)
 
 /////////////////////////////////////////////
 //SPARK SYSTEM (like steam system)
@@ -106,11 +105,7 @@ steam.start() -- spawns the effect
 
 /obj/effect/sparks/Initialize()
 	. = ..()
-	// Scheduled tasks caused serious performance issues when being qdel()ed.
-	// Replaced with spawn() until performance of scheduled tasks is improved.
-	//schedule_task_in(5 SECONDS, /proc/qdel, list(src))
-	spawn(50)
-		qdel(src)
+	QDEL_IN(src, 5 SECONDS)
 
 /obj/effect/sparks/Destroy()
 	var/turf/T = src.loc
@@ -177,8 +172,7 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/New()
 	..()
-	spawn (time_to_live)
-		qdel(src)
+	QDEL_IN(src, time_to_live)
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
 	..()

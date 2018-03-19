@@ -8,13 +8,7 @@
 
 /obj/effect/expl_particles/New()
 	..()
-	spawn (15)
-		qdel(src)
-	return
-
-/obj/effect/expl_particles/Move()
-	..()
-	return
+	QDEL_IN(src, 1 SECOND)
 
 /datum/effect/system/expl_particles
 	var/number = 10
@@ -48,9 +42,7 @@
 
 /obj/effect/explosion/New()
 	..()
-	spawn (10)
-		qdel(src)
-	return
+	QDEL_IN(src, 1 SECOND)
 
 /datum/effect/system/explosion
 	var/turf/location
@@ -64,7 +56,9 @@
 	var/datum/effect/system/expl_particles/P = new/datum/effect/system/expl_particles()
 	P.set_up(10,location)
 	P.start()
-	spawn(5)
-		var/datum/effect/effect/system/smoke_spread/S = new/datum/effect/effect/system/smoke_spread()
-		S.set_up(5,0,location,null)
-		S.start()
+	addtimer(CALLBACK(src, .proc/make_smoke), 5)
+
+/datum/effect/system/explosion/proc/make_smoke()
+	var/datum/effect/effect/system/smoke_spread/S = new/datum/effect/effect/system/smoke_spread()
+	S.set_up(5,0,location,null)
+	S.start()

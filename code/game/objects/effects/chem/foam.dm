@@ -23,17 +23,16 @@
 	spawn(3 + metal * 3)
 		Process()
 		checkReagents()
-	spawn(120)
-		STOP_PROCESSING(SSobj, src)
-		sleep(30)
-		if(metal)
-			var/obj/structure/foamedmetal/M = new(src.loc)
-			M.metal = metal
-			M.update_icon()
-		flick("[icon_state]-disolve", src)
-		sleep(5)
-		qdel(src)
-	return
+	addtimer(CALLBACK(src, .proc/remove_foam), 12 SECONDS)
+
+/obj/effect/effect/foam/proc/remove_foam()
+	STOP_PROCESSING(SSobj, src)
+	if(metal)
+		var/obj/structure/foamedmetal/M = new(src.loc)
+		M.metal = metal
+		M.update_icon()
+	flick("[icon_state]-disolve", src)
+	QDEL_IN(src, 5)
 
 /obj/effect/effect/foam/proc/checkReagents() // transfer any reagents to the floor
 	if(!metal && reagents)
