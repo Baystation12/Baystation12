@@ -74,7 +74,7 @@
 /obj/item/weapon/gun/energy/secure/special_check()
 	if(!emagged && (!authorized_modes[sel_mode] || !registered_owner))
 		audible_message("<span class='warning'>\The [src] buzzes, refusing to fire.</span>")
-		playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+		playsound(loc, 'sound/machines/buzz-sigh.ogg', 30, 0)
 		return 0
 
 	. = ..()
@@ -120,15 +120,13 @@
 
 /obj/item/weapon/gun/energy/secure/stunrevolver
 	name = "stun revolver"
-	desc = "This LAEP20 is fitted with an NT1019 chip, a component that allows remote authorization of weapon functionality, created by NanoTrasen following the Baetiff Incident."
+	desc = "This A&M X6 is fitted with an NT1019 chip, a component that allows remote authorization of weapon functionality, created by NanoTrasen following the Baetiff Incident."
 	icon_state = "revolverstun100"
-	item_state = "stunrevolver"
-	item_icons = list(
-		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns.dmi',
-		) //wip -sabira
-	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
+	modifystate = "revolverstun"
+	item_state = null
+
 	projectile_type = /obj/item/projectile/energy/electrode
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_DATA = 2)
 	max_shots = 8
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode, modifystate="revolverstun"),
@@ -140,13 +138,13 @@
 	desc = "A more secure LAEP90, the LAEP90-S is designed to please paranoid constituents. Body cam not included."
 	icon = 'icons/obj/gun_secure.dmi'
 	icon_state = "energystun100"
+	modifystate = "energystun"
 	item_state = null	//so the human update icon uses the icon_state instead.
-	max_shots = 10
-	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
 
 	projectile_type = /obj/item/projectile/beam/stun
-	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
-	modifystate = "energystun"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2, TECH_DATA = 2)
+	max_shots = 10
+	fire_delay = 10 // To balance for the fact that it is a pistol and can be used one-handed without penalty
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
 	firemodes = list(
@@ -159,10 +157,12 @@
 	name = "small energy gun"
 	desc = "Combining the two LAEP90 variants, the secure and compact LAEP90-CS is the next best thing to keeping your security forces on a literal leash."
 	icon_state = "smallgunstun100"
+	modifystate = "smallgunstun"
+
+	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 3, TECH_DATA = 2)
 	max_shots = 5
 	w_class = ITEM_SIZE_SMALL
 	force = 2
-	modifystate = "smallgunstun"
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="smallgunstun"),

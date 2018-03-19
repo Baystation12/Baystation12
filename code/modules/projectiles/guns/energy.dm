@@ -87,13 +87,16 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 
 /obj/item/weapon/gun/energy/examine(mob/user)
 	. = ..(user)
+	if(!power_supply)
+		to_chat(user, "Seems like it's dead.")
+		return
 	var/shots_remaining = round(power_supply.charge / charge_cost)
 	to_chat(user, "Has [shots_remaining] shot\s remaining.")
 	return
 
 /obj/item/weapon/gun/energy/update_icon()
 	..()
-	if(charge_meter)
+	if(charge_meter && power_supply)
 		var/ratio = power_supply.percent()
 
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
