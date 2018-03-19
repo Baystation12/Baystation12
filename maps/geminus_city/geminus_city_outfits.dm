@@ -60,10 +60,7 @@
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser
 	name = "Insurrectionist Sympathiser"
 
-	mask = /obj/item/clothing/mask/innie/shemagh
-
 	l_pocket = /obj/item/ammo_magazine/m127_saphp
-	l_ear = /obj/item/device/radio/headset/insurrection
 
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser/equip_special()
 	return
