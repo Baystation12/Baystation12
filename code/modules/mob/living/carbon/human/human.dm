@@ -474,7 +474,7 @@
 				if(hasHUD(usr, HUD_SECURITY))
 					to_chat(usr, "<b>Name:</b> [E.get_name()]")
 					to_chat(usr, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
-					to_chat(usr, "<b>Details:</b> [pencode2html(E.get_criminalStatus())]")
+					to_chat(usr, "<b>Details:</b> [pencode2html(E.get_secRecord())]")
 					read = 1
 
 			if(!read)
