@@ -1106,3 +1106,8 @@
 				to_chat(src, "Hack attempt detected.")
 			return 1
 		return
+
+/mob/living/silicon/robot/incapacitated(var/incapacitation_flags = INCAPACITATION_DEFAULT)
+	..()
+	if ((incapacitation_flags & INCAPACITATION_FORCELYING) && (lockcharge))
+		return 1
