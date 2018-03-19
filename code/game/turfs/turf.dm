@@ -89,7 +89,7 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		return
 	if(!isturf(O.loc) || !isturf(user.loc))
 		return
-	if(isanimal(user) && O != user)
+	if(!iscarbon(user) || O != user || !user.lying)
 		return
 	for (var/obj/item/grab/G in user.grabbed_by)
 		if(G.stop_move())
