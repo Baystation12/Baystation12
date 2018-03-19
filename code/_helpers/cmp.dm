@@ -57,3 +57,6 @@
 
 /proc/cmp_ruincost_priority(datum/map_template/ruin/A, datum/map_template/ruin/B)
 	return initial(A.cost) - initial(B.cost)
+
+/proc/cmp_timer(datum/timedevent/a, datum/timedevent/b)
+	return a.timeToRun - b.timeToRun

@@ -65,6 +65,8 @@
 			return global.SSskybox;
 		if("SSsun")
 			return global.SSsun;
+		if("SStimer")
+			return global.SStimer;
 		if("SSvines")
 			return global.SSvines;
 		if("SSwireless")
@@ -805,8 +807,6 @@
 			return global.runtime_diary;
 		if("same_wires")
 			return global.same_wires;
-		if("scheduler")
-			return global.scheduler;
 		if("secondary_mode")
 			return global.secondary_mode;
 		if("secret_force_mode")
@@ -919,8 +919,6 @@
 			return global.tank_gauge_cache;
 		if("tape_roll_applications")
 			return global.tape_roll_applications;
-		if("task_triggered_event")
-			return global.task_triggered_event;
 		if("telecomms_list")
 			return global.telecomms_list;
 		if("tertiary_mode")
@@ -1106,6 +1104,8 @@
 			global.SSskybox=newval;
 		if("SSsun")
 			global.SSsun=newval;
+		if("SStimer")
+			global.SStimer=newval;
 		if("SSvines")
 			global.SSvines=newval;
 		if("SSwireless")
@@ -1846,8 +1846,6 @@
 			global.runtime_diary=newval;
 		if("same_wires")
 			global.same_wires=newval;
-		if("scheduler")
-			global.scheduler=newval;
 		if("secondary_mode")
 			global.secondary_mode=newval;
 		if("secret_force_mode")
@@ -1960,8 +1958,6 @@
 			global.tank_gauge_cache=newval;
 		if("tape_roll_applications")
 			global.tape_roll_applications=newval;
-		if("task_triggered_event")
-			global.task_triggered_event=newval;
 		if("telecomms_list")
 			global.telecomms_list=newval;
 		if("tertiary_mode")
@@ -2114,6 +2110,7 @@
 	"SSprocessing",
 	"SSskybox",
 	"SSsun",
+	"SStimer",
 	"SSvines",
 	"SSwireless",
 	"SSxenoarch",
@@ -2484,7 +2481,6 @@
 	"rune_list",
 	"runtime_diary",
 	"same_wires",
-	"scheduler",
 	"secondary_mode",
 	"secret_force_mode",
 	"send_emergency_team",
@@ -2541,7 +2537,6 @@
 	"tail_icon_cache",
 	"tank_gauge_cache",
 	"tape_roll_applications",
-	"task_triggered_event",
 	"telecomms_list",
 	"tertiary_mode",
 	"text_tag_icons",
