@@ -250,7 +250,7 @@
 	if(digitalcamo)
 		msg += "[T.He] [T.is] repulsively uncanny!\n"
 
-	if(hasHUD(user,"security"))
+	if(hasHUD(user, HUD_SECURITY))
 		var/perpname = "wot"
 		var/criminal = "None"
 
@@ -271,7 +271,7 @@
 			msg += "<span class = 'deptradio'>Criminal status:</span> <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>\n"
 			msg += "<span class = 'deptradio'>Security records:</span> <a href='?src=\ref[src];secrecord=`'>\[View\]</a>\n"
 
-	if(hasHUD(user,"medical"))
+	if(hasHUD(user, HUD_MEDICAL))
 		var/perpname = "wot"
 		var/medical = "None"
 
@@ -309,32 +309,14 @@
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/clothing/glasses/G = H.glasses
-		if(G.hud_type == hudtype)
-			return TRUE
-		else
-			return FALSE
-
+		return istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))
 	else if(istype(M, /mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
-		var/obj/item/borg/sight/sight
+		for(var/obj/item/borg/sight/sight in list(R.module_state_1, R.module_state_2, R.module_state_3))
+			if(istype(sight) && (sight.hud_type & hudtype))
+				return TRUE
 
-//These borg slots really should be a list.
-		if(istype(R.module_state_1, /obj/item/borg/sight/))
-			sight = R.module_state_1
-		if(istype(R.module_state_2, /obj/item/borg/sight/))
-			sight = R.module_state_2
-		if(istype(R.module_state_3, /obj/item/borg/sight/))
-			sight = R.module_state_3
-
-		if(sight == initial(sight)) //Prevent runtimes if nothing was found.
-			return FALSE
-
-		if(sight.hud_type == hudtype)
-			return TRUE
-		else
-			return FALSE
-	else
-		return FALSE
+	return FALSE
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"
