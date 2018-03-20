@@ -1,4 +1,0 @@
-author: "mustafakalash"
-delete-after: True
-changes: 
-  - bugfix: "Using resist to unbuckle yourself no longer temporarily breaks your hands."
