@@ -21,7 +21,7 @@
 
 	..()
 
-	// Should this all be in Touch()?
+	// Should this all be in Touch()? //Yes.
 	if(istype(H))
 		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 			H.do_attack_animation(src)
@@ -142,6 +142,10 @@
 			if(!affecting || affecting.is_stump())
 				to_chat(M, "<span class='danger'>They are missing that limb!</span>")
 				return 1
+
+			if(affecting in src.organs) //Prevent the player from smacking their right hand with their right hand.
+				if( (M.hand = HAND_LEFT && ( H.zone_sel.selecting == BP_L_HAND ||  H.zone_sel.selecting == BP_L_ARM ) && affecting.orientation == ORGAN_LEFT ) || ( M.hand == HAND_RIGHT && ( H.zone_sel.selecting == BP_R_HAND ||  H.zone_sel.selecting == BP_R_ARM ) && affecting.orientation == ORGAN_RIGHT) )
+					return
 
 			switch(src.a_intent)
 				if(I_HELP)
