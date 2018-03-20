@@ -726,12 +726,6 @@
 				product.set_light(get_trait(TRAIT_BIOLUM), l_color = clr)
 
 			//Handle spawning in living, mobile products (like dionaea).
-			if(istype(product,/mob/living))
-				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
-				handle_living_product(product)
-				if(istype(product,/mob/living/simple_animal/mushroom)) // Gross.
-					var/mob/living/simple_animal/mushroom/mush = product
-					mush.seed = src
 
 // When the seed in this machine mutates/is modified, the tray seed value
 // is set to a new datum copied from the original. This datum won't actually

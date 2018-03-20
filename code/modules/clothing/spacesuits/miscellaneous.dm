@@ -105,6 +105,7 @@
 	name = "Emergency Softsuit"
 	icon_state = "syndicate-orange"
 	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
+	w_class = 3 //Smaller than a normal spacesuit due to thinness of suit
 
 /obj/item/clothing/suit/space/emergency/New()
 	..()

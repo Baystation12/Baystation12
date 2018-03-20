@@ -63,7 +63,8 @@
 /obj/structure/closet/emcloset/legacy/New()
 	..()
 	new /obj/item/weapon/tank/oxygen(src)
-	new /obj/item/clothing/mask/gas(src)
+	new /obj/item/clothing/mask/breath(src)
+	new /obj/item/clothing/suit/space/void/unsc/prepared(src)
 
 /*
  * Fire Closet

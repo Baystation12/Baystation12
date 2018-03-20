@@ -118,8 +118,17 @@ var/const/NO_EMAG_ACT = -50
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
 
-/obj/item/weapon/card/id/New()
+/obj/item/weapon/card/id/New(var/atom/L)
 	..()
+
+	if(istype(L, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = L
+		var/datum/mind/M = H.mind
+		if(istype(M) && M.assigned_role)
+			var/datum/job/role = job_master.occupations_by_title[M.assigned_role]
+			if(role)
+				access |= role.access
+
 	if(job_access_type)
 		var/datum/job/j = job_master.GetJobByType(job_access_type)
 		if(j)

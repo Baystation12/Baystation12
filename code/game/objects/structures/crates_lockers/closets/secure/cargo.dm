@@ -10,8 +10,6 @@
 
 /obj/structure/closet/secure_closet/cargotech/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75,  /obj/item/weapon/storage/backpack/satchel_norm = 25)),
-		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag, 25),
 		/obj/item/clothing/under/rank/cargotech,
 		/obj/item/clothing/shoes/black,
 		/obj/item/device/radio/headset/headset_cargo,
@@ -31,8 +29,6 @@
 
 /obj/structure/closet/secure_closet/quartermaster/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75,  /obj/item/weapon/storage/backpack/satchel_norm = 25)),
-		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag, 25),
 		/obj/item/clothing/under/rank/cargotech,
 		/obj/item/clothing/shoes/brown,
 		/obj/item/device/radio/headset/headset_cargo,

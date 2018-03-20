@@ -281,3 +281,14 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 		reagents.add_reagent(/datum/reagent/antidexafen, 10)
 		reagents.add_reagent(/datum/reagent/drink/juice/lemon, 5)
 		reagents.add_reagent(/datum/reagent/menthol, REM*0.2)
+
+/obj/item/weapon/reagent_containers/pill/rumble
+	name = "rumble drugs"
+	desc = "A dangerous cocktail of chemicals that cause the human body to go into overdrive. Most users exprience death shortly after use."
+	icon_state = "pill18"
+
+/obj/item/weapon/reagent_containers/pill/rumble/New()
+	..()
+	reagents.add_reagent(/datum/reagent/hyperzine, 40)
+	reagents.add_reagent(/datum/reagent/tramadol, 10)
+	reagents.add_reagent(/datum/reagent/adrenaline, 10)

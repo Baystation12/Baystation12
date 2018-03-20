@@ -55,4 +55,20 @@
 	gloves = /obj/item/clothing/gloves/thick/combat
 
 	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/marine/proc/equip_special(mob/living/carbon/human/H)
+	if(prob(25))
+		H.equip_to_slot_or_del(/obj/item/clothing/mask/marine)
+	if(prob(25))
+		H.equip_to_slot_or_del(/obj/item/clothing/head/helmet/marine/visor)
+
+/decl/hierarchy/outfit/job/UNSC_ship/odst
+	name = "ODST Rifleman"
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	shoes = /obj/item/clothing/shoes/jungleboots
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+
+	flags = 0
 e

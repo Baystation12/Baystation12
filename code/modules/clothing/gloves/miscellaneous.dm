@@ -71,7 +71,8 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	force = 5
-	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
+	body_parts_covered = HANDS
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
@@ -108,11 +109,11 @@
 
 /obj/item/clothing/gloves/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
-	name = "work gloves"
+	name = "combat gloves"
 	icon_state = "work"
 	item_state = "wgloves"
 	siemens_coefficient = 0.50
-	armor = list(melee = 10, bullet = 10, laser = 10, energy = 5, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 55, bullet = 45, laser = 10, energy = 5, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/gloves/tactical
 	desc = "These brown tactical gloves are made from a durable synthetic, and have hardened knuckles."
@@ -122,7 +123,8 @@
 	force = 5
 	siemens_coefficient = 0.50
 	permeability_coefficient = 0.05
-	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
+	body_parts_covered = HANDS|ARMS
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
 
 /obj/item/clothing/gloves/guards
 	desc = "A pair of synthetic gloves and arm pads reinforced with armor plating."

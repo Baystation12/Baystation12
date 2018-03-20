@@ -178,7 +178,7 @@ default behaviour is:
 		return 0
 
 	return can_move_mob(tmob, 1, 0)
-	
+
 /mob/living/verb/succumb()
 	set hidden = 1
 	if ((src.health < src.maxHealth/2)) // Health below half of maxhealth.
@@ -658,10 +658,10 @@ default behaviour is:
 	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 //called when the mob receives a bright flash
-/mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+/mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash, duration = 25)
 	if(override_blindness_check || !(disabilities & BLIND))
 		overlay_fullscreen("flash", type)
-		spawn(25)
+		spawn(duration)
 			if(src)
 				clear_fullscreen("flash", 25)
 		return 1

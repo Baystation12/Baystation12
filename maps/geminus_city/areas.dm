@@ -186,3 +186,7 @@
 /area/planets/Geminus/indoor/cmo
 	name = "\improper Chief Medical Officer Office"
 	icon_state = "cmo"
+
+//COLONY MAC//
+/area/planets/Geminus/outdoor/MAC
+	name = "\improper Geminus MAC"

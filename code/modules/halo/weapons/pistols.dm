@@ -15,12 +15,20 @@
 	fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/MagnumReloadSoundEffect.ogg'
 	load_method = MAGAZINE
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/weapon/gun/projectile/m6d_magnum/update_icon()
 	if(ammo_magazine)
 		icon_state = "magnum"
 	else
 		icon_state = "magnum_unloaded"
+
+/obj/item/weapon/gun/projectile/m6d_magnum/verb/scope()
+	set category = "Weapon"
+	set name = "Use Scope (Sidearm)"
+	set popup_menu = 1
+
+	toggle_scope(usr, 1.1)
 
 //Magnum M6S silenced pistol
 

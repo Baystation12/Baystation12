@@ -91,31 +91,21 @@
 
 /obj/structure/closet/secure_closet/hos/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		/obj/item/clothing/head/HoS,
-		/obj/item/clothing/head/helmet/nt,
-		/obj/item/clothing/suit/armor/vest/nt,
-		/obj/item/clothing/suit/storage/vest/nt/hos,
-		/obj/item/clothing/under/rank/head_of_security/jensen,
-		/obj/item/clothing/under/rank/head_of_security/corp,
 		/obj/item/clothing/suit/armor/hos/jensen,
 		/obj/item/clothing/suit/armor/hos,
-		/obj/item/clothing/head/HoS/dermal,
 		/obj/item/weapon/cartridge/hos,
-		/obj/item/device/radio/headset/heads/hos,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/weapon/shield/riot,
 		/obj/item/weapon/storage/box/flashbangs,
 		/obj/item/weapon/storage/belt/security,
 		/obj/item/device/flash,
-		/obj/item/weapon/melee/baton/loaded,
 		/obj/item/weapon/gun/projectile/ma5b_ar,
 		/obj/item/ammo_magazine/m762_ap/MA5B,
 		/obj/item/clothing/accessory/holster/waist,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/clothing/head/beret/sec/corporate/hos,
-		/obj/item/device/holowarrant
 	)
 
 /obj/structure/closet/secure_closet/warden
@@ -147,7 +137,7 @@
 		/obj/item/weapon/storage/box/teargas,
 		/obj/item/weapon/storage/belt/security,
 		/obj/item/weapon/reagent_containers/spray/pepper,
-		/obj/item/weapon/melee/baton/loaded,
+		/obj/item/weapon/melee/baton/humbler,
 		/obj/item/weapon/gun/energy/gun,
 		/obj/item/weapon/storage/box/holobadge,
 		/obj/item/clothing/head/beret/sec/corporate/warden,
@@ -175,7 +165,7 @@
 		/obj/item/device/flash,
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/weapon/grenade/chem_grenade/teargas,
-		/obj/item/weapon/melee/baton/loaded,
+		/obj/item/weapon/melee/baton/humbler,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/device/hailer,

@@ -20,7 +20,7 @@
 		/area/unscfrigate/hangar_port = NO_SCRUBBER,
 		/area/unscfrigate/tcomms = NO_SCRUBBER,
 		/area/unscfrigate/bridge = NO_SCRUBBER,
-		/area/unscfrigate/mac/cannon = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/unscfrigate/mac/cannon = NO_SCRUBBER|NO_VENT
 	)
 //Top Deck
 

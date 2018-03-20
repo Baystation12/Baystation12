@@ -8,6 +8,8 @@
 	department_flag = CO
 	total_positions = 1
 	spawn_positions = 1
+	ideal_character_age = 40
+	minimal_player_age = 21
 	selection_color = "#777777"
 	req_admin_notify = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/CO
@@ -27,6 +29,8 @@
 	department_flag = XO
 	total_positions = 1
 	spawn_positions = 1
+	ideal_character_age = 40
+	minimal_player_age = 14
 	selection_color = "#777777"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/EXO
 	req_admin_notify = 1
@@ -63,6 +67,8 @@
 	department_flag = BO
 	total_positions = -1
 	spawn_positions = 2
+	ideal_character_age = 40
+	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/BO
 	selection_color = "#777777"
 	//job_guide = "You are a bridge officer. It's your job to push buttons, supervise and generally look busy. Try and help out one of the senior officers if you can, otherwise go and bug busy crewmen elsewhere on the ship."

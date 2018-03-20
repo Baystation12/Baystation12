@@ -3,32 +3,29 @@
 	icon_state = "unsc"
 
 /obj/item/weapon/tank/emergency/oxygen/unsc
-	icon_state = "unsc_em"
+	//icon_state = "unsc_em"
 
 /obj/item/clothing/mask/gas/unsc
-	icon_state = "unsc_gasmask"
-	item_state = "unsc_gasmask"
+	icon_state = "fullgas"
 
 /obj/item/weapon/storage/firstaid/erk
 	name = "emergency response kit"
 	desc = "A hull breach kit for UNSC first responders. It appears to be bulkier than general medical kits."
-	icon_state = "emergency_response_kit"
-	item_state = "firstaid-o2"
+	icon = 'code/modules/halo/misc/halohumanmisc.dmi'
+	icon_state = "erk"
+
 	max_w_class = ITEM_SIZE_NORMAL
-	//max_storage_space = DEFAULT_LARGEBOX_STORAGE
+	max_storage_space = 20
 
-	startswith = list(
-		/obj/item/weapon/storage/pill_bottle/dexalin,
-		/obj/item/weapon/tank/emergency/oxygen/unsc,
-		/obj/item/clothing/mask/gas/unsc
-		)
-
-/obj/item/weapon/storage/firstaid/erk/eng
 	startswith = list(
 		/obj/item/weapon/crowbar,
-		/obj/item/device/flashlight/unsc
+		/obj/item/device/flashlight/unsc,
+		/obj/item/weapon/storage/pill_bottle/dexalin,
+		/obj/item/weapon/tank/emergency/oxygen/unsc,
+		/obj/item/clothing/mask/gas/unsc,
+		/obj/item/clothing/head/helmet/space/emergency,
+		/obj/item/clothing/suit/space/emergency
 		)
-
 
 /obj/item/weapon/storage/firstaid/unsc
 	name = "UNSC medkit"

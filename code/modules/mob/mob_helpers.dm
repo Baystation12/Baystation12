@@ -1,9 +1,4 @@
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
-/proc/isxenomorph(A)
-	if(istype(A, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = A
-		return istype(H.species, /datum/species/xenos)
-	return 0
 
 /proc/issmall(A)
 	if(A && istype(A, /mob/living))
@@ -88,17 +83,17 @@ proc/getsensorlevel(A)
 
 //The base miss chance for the different defence zones
 var/list/global/base_miss_chance = list(
-	BP_HEAD = 40,
+	BP_HEAD = 45,
 	BP_CHEST = 10,
 	BP_GROIN = 20,
-	BP_L_LEG = 20,
-	BP_R_LEG = 20,
-	BP_L_ARM = 20,
-	BP_R_ARM = 20,
-	BP_L_HAND = 50,
-	BP_R_HAND = 50,
-	BP_L_FOOT = 50,
-	BP_R_FOOT = 50,
+	BP_L_LEG = 40,
+	BP_R_LEG = 40,
+	BP_L_ARM = 35,
+	BP_R_ARM = 35,
+	BP_L_HAND = 60,
+	BP_R_HAND = 60,
+	BP_L_FOOT = 60,
+	BP_R_FOOT = 60,
 )
 
 //Used to weight organs when an organ is hit randomly (i.e. not a directed, aimed attack).
@@ -584,7 +579,7 @@ proc/is_blind(A)
 	if(client)
 		client.images -= image
 
-/mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+/mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash, duration = 25)
 	return
 
 /mob/proc/fully_replace_character_name(var/new_name, var/in_depth = TRUE)

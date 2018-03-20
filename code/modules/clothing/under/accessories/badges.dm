@@ -155,3 +155,9 @@
 	slot_flags = SLOT_TIE
 	badge_string = "NanoTrasen"
 
+/obj/item/clothing/accessory/badge/police
+	name = "\improper GCPD Badge"
+	desc = "Badge worn by officers to show position."
+	icon_state = "solbadge"
+	slot_flags = SLOT_TIE
+	badge_string = "Geminus City Police Department"

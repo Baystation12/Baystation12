@@ -23,6 +23,7 @@ var/global/list/map_sectors = list()
 /turf/unsimulated/map/New()
 	..()
 	name = "[x]-[y]"
+	icon_state = "[rand(0,25)]"
 	var/list/numbers = list()
 
 	if(x == 1 || x == GLOB.using_map.overmap_size)
@@ -67,7 +68,7 @@ proc/toggle_move_stars(zlevel, direction)
 
 	if (moving_levels["[zlevel]"] != gen_dir)
 		moving_levels["[zlevel]"] = gen_dir
-		
+
 		var/list/spaceturfs = block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel))
 		for(var/turf/space/T in spaceturfs)
 			if(!gen_dir)

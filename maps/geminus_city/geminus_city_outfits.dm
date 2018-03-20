@@ -26,7 +26,7 @@
 	uniform = null
 	belt = null
 	shoes = /obj/item/clothing/shoes/brown
-	pda_slot = slot_r_store
+	pda_slot = null
 
 	flags = 0
 
@@ -36,11 +36,9 @@
 	H.set_id_info(C)
 
 /decl/hierarchy/outfit/job/colonist/proc/equip_special(mob/living/carbon/human/H)
-	if(prob(25))
-		H.equip_to_slot_or_del(/obj/item/clothing/mask/innie/shemagh)
 	if(prob(30))
-		var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/m6d_magnum
-		G.ammo_magazine = new /obj/item/ammo_magazine/m127_saphp
+		var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/colt
+		G.ammo_magazine = new /obj/item/ammo_magazine/c45m
 		H.equip_to_slot_or_del(G,slot_belt)
 
 
@@ -48,7 +46,11 @@
 
 	var/random_uniform = pick(/obj/item/clothing/under/serviceoveralls,\
 		/obj/item/clothing/under/frontier,\
-		/obj/item/clothing/under/overalls)
+		/obj/item/clothing/under/overalls,\
+		/obj/item/clothing/under/focal,\
+		/obj/item/clothing/under/grayson,\
+		/obj/item/clothing/under/hazard,\
+		/obj/item/clothing/under/aether)
 	H.equip_to_slot_or_del(new random_uniform(H),slot_w_uniform)
 
 	equip_special(H)
@@ -58,10 +60,7 @@
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser
 	name = "Insurrectionist Sympathiser"
 
-	mask = /obj/item/clothing/mask/innie/shemagh
-
 	l_pocket = /obj/item/ammo_magazine/m127_saphp
-	l_ear = /obj/item/device/radio/headset/insurrection
 
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser/equip_special()
 	return
@@ -79,6 +78,7 @@
 	uniform = /obj/item/clothing/under/blazer
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	shoes = /obj/item/clothing/shoes/black
+	pda_slot = null
 
 	flags = 0
 
@@ -87,13 +87,10 @@
 
 	head = /obj/item/clothing/head/soft/sec/corp
 	uniform = /obj/item/clothing/under/police
-	suit = /obj/item/clothing/suit/armor/vest/police
-	belt = /obj/item/weapon/storage/belt/security
+	belt = /obj/item/weapon/gun/projectile/m7_smg/rubber
 	shoes = /obj/item/clothing/shoes/dutyboots
-	pda_slot = slot_r_store
-	back = /obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/police
-	gloves = /obj/item/clothing/gloves/guards
-	l_pocket = /obj/item/clothing/accessory/badge/security
+	pda_slot = null
+	l_pocket = /obj/item/clothing/accessory/badge/police
 	l_ear = /obj/item/device/radio/headset/police
 	id_type = /obj/item/weapon/card/id/security/warden
 
@@ -112,3 +109,20 @@
 	desc = "A black uniform worn by the GCPD."
 	icon_state = "blackutility_com"
 	worn_state = "blackutility_com"
+	starting_accessories = list(/obj/item/clothing/accessory/department/medical, /obj/item/clothing/accessory/holster/thigh)
+	armor = list(melee = 20, bullet = 5, laser = 0, energy = 0, bomb = 5, bio = 0, rad = 0)
+
+/decl/hierarchy/outfit/job/cop
+	name = "GCPD Chief of Police"
+
+	head = /obj/item/clothing/head/soft/sec/corp
+	uniform = /obj/item/clothing/under/police
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	shoes = /obj/item/clothing/shoes/dutyboots
+	pda_slot = null
+	l_pocket = /obj/item/clothing/accessory/badge/police
+	l_ear = /obj/item/device/radio/headset/police
+	id_type = /obj/item/weapon/card/id/security/head
+	suit = /obj/item/clothing/suit/armor/hos
+
+	flags = 0

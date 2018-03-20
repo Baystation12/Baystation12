@@ -156,6 +156,7 @@
 	name = "black dufflebag"
 	desc = "A large dufflebag for holding extra tactical supplies."
 	icon_state = "duffle_syndie"
+	slot_flags = null
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/New()
 	..()

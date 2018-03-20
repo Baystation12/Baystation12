@@ -78,9 +78,6 @@ var/global/list/plant_seed_sprites = list()
 	seed_type = seed.name
 	. = ..()
 
-/obj/item/seeds/replicapod
-	seed_type = "diona"
-	name = "diona seeds"
 /obj/item/seeds/chiliseed
 	seed_type = "chili"
 	name = "chili seeds"

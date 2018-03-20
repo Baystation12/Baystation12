@@ -9,7 +9,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define EBAND_NAME "EBAND"
 #define COV_COMMON_NAME "Battlenet"
 #define CIV_NAME "Common"
-#define SEC_NAME "Police"
+#define SEC_NAME "GCPD"
 
 /datum/halo_frequencies
 	var/innie_channel = "INNIECOM"

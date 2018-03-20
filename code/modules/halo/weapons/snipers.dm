@@ -17,16 +17,19 @@
 	reload_sound = 'code/modules/halo/sounds/SniperRifleReloadSoundEffect.ogg'
 	one_hand_penalty = -1
 	scoped_accuracy = 3
+	accuracy = -2
 	screen_shake = 0
-
+	burst = 1
+	burst_delay = 2
+	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
 /obj/item/weapon/gun/projectile/srs99_sniper/verb/scope()
-	set category = "Object"
-	set name = "Use Scope (2x)"
+	set category = "Weapon"
+	set name = "Use Scope"
 	set popup_menu = 1
 
 	toggle_scope(usr, 2.0)
@@ -41,21 +44,23 @@
 //todo: should this be a sniper?
 /obj/item/weapon/gun/projectile/m392_dmr
 	name = "M392 Designated Marksman Rifle"
-	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance.  Takes 7.62mm calibre magazines."
+	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance. Has an inbuilt underbarrel flashlight.  Takes 7.62mm calibre magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M395"
 	item_state = "m392"
 	load_method = MAGAZINE
 	caliber = "a762"
 	slot_flags = SLOT_BACK
-	magazine_type = /obj/item/ammo_magazine/m762_ap
-	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap) //Disallows loading LMG boxmags into the DMR.
+	magazine_type = /obj/item/ammo_magazine/m762_ap/M392
+	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392) //Disallows loading LMG boxmags into the DMR.
 	fire_sound = 'code/modules/halo/sounds/DMR_ShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
-
-	accuracy = 1
-	scoped_accuracy = 2
+	w_class = ITEM_SIZE_LARGE
+	accuracy = 2
+	scoped_accuracy = 3
+	var/on = 0
+	var/activation_sound = 'sound/effects/flashlight.ogg'
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -63,14 +68,24 @@
 		)
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
-	set category = "Object"
-	set name = "Use Scope (1.25x)"
+	set category = "Weapon"
+	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.25)
+	toggle_scope(usr, 1.35)
 
 /obj/item/weapon/gun/projectile/m392_dmr/update_icon()
 	if(ammo_magazine)
 		icon_state = "M395"
 	else
 		icon_state = "M395_unloaded"
+
+/obj/item/weapon/gun/projectile/m392_dmr/verb/toggle_light()
+	set category = "Weapon"
+	set name = "Toggle Gun Light"
+	on = !on
+	if(on && activation_sound)
+		playsound(src.loc, activation_sound, 75, 1)
+		set_light(4)
+	else
+		set_light(0)

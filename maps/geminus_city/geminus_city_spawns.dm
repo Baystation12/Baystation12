@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(colony_spawns)
 
 /datum/spawnpoint/colonist
 	display_name = "Colony Arrival Shuttle"
-	restrict_job = list("Colonist","Colonist - Insurrectionist Sympathiser","Colonist - Insurrectionist Recruiter","Mayor","GCPD Officer")
+	restrict_job = list("Colonist","Colonist - Insurrectionist Sympathiser","Colonist - Insurrectionist Recruiter","Mayor","GCPD Officer","Chief of Police")
 
 /datum/spawnpoint/colonist/New()
 	..()
@@ -27,6 +27,9 @@ GLOBAL_LIST_EMPTY(colony_spawns)
 
 /obj/effect/landmark/start/colonist/police
 	name = "GCPD Officer"
+
+/obj/effect/landmark/start/colonist/cop
+	name = "Chief of Police"
 
 //UNSC Landmarks + datums//
 

@@ -64,30 +64,69 @@
 
 /obj/item/ammo_magazine/m762_ap
 	name = "magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 shots. Standard issue."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 shots. Fits both the MA5B and M392."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M395mag"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/a762_ap
-	matter = list(DEFAULT_WALL_MATERIAL = 3000) //7.62mm casing = 50 metal each
+	matter = list(DEFAULT_WALL_MATERIAL = 1500) //7.62mm casing = 50 metal each
 	caliber = "a762"
 	max_ammo = 30		//lets try 30 instead of 60 for now
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/m762_ap/MA5B
+	name = "MA5B magazine (7.62mm) M118 FMJ-AP"
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 60 shots. Specific to the MA5B."
 	icon_state = "MA5B_mag"
 	max_ammo = 60
 
+/obj/item/ammo_magazine/m762_ap/MA5B/TTR
+	name = "MA5B magazine (7.62mm) Tactical Training Rounds"
+	desc = "7.62x51mm Tactical Training Rounds, powerful chemicals inside of a plastic polymer shell that disperse upon impact and render the target immobile."
+	ammo_type = /obj/item/ammo_casing/a762_ttr
+
+/obj/item/ammo_magazine/m762_ap/M392
+	name = "M392 magazine (7.62mm) M118 FMJ-AP"
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 15 shots. Specific to the M392."
+	ammo_type = /obj/item/ammo_casing/a762_m392
+	max_ammo = 15
+	matter = list(DEFAULT_WALL_MATERIAL = 750)
+
 /obj/item/ammo_magazine/m762_ap/MA37
+	name = "MA37 magazine (7.62mm) M118 FMJ-AP"
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 32 shots. Specific to the MA37."
 	icon_state = "MA37_mag"
+	max_ammo = 32
+	matter = list(DEFAULT_WALL_MATERIAL = 1600)
+
+/obj/item/ammo_casing/a762_ttr
+	desc = "A 7.62mm bullet casing."
+	caliber = "a762"
+	projectile_type = /obj/item/projectile/bullet/a762_ttr
 
 /obj/item/ammo_casing/a762_ap
 	desc = "A 7.62mm bullet casing."
 	caliber = "a762"
 	projectile_type = /obj/item/projectile/bullet/a762_ap
 
+/obj/item/ammo_casing/a762_m392
+	desc = "A 7.62mm bullet casing."
+	caliber = "a762"
+	projectile_type = /obj/item/projectile/bullet/a762/M392
+
 /obj/item/projectile/bullet/a762_ap
 	damage = 30
+
+/obj/item/projectile/bullet/a762_ttr
+	armor_penetration = 1
+	nodamage = 1
+	agony = 10
+	damage_type = PAIN
+	penetrating = 0
+
+/obj/item/projectile/bullet/a762/M392
+	damage = 35
+	armor_penetration = 10
 
 /obj/item/weapon/storage/box/m762_ap
 	name = "box of 7.62mm M118 magazines"
@@ -124,14 +163,14 @@
 
 /obj/item/ammo_magazine/a762_box_ap
 	name = "box magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 50 shots. Designed for heavier use."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 72 shots. Designed for heavier use."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	mag_type = MAGAZINE
 	icon_state = "M739mag"
 	ammo_type = /obj/item/ammo_casing/a762_ap
 	matter = list(DEFAULT_WALL_MATERIAL = 5000) //7.62mm casing = 50 metal each
 	caliber = "a762"
-	max_ammo = 50
+	max_ammo = 72
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/a762_box_ap/empty
@@ -160,9 +199,7 @@
 
 /obj/item/projectile/bullet/a145_ap
 	damage = 80
-	stun = 1
-	weaken = 1
-	step_delay = 0.3
+	step_delay = 0.1
 	penetrating = 5
 	armor_penetration = 80
 	accuracy = 6
@@ -191,14 +228,33 @@
 	max_ammo = 60
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/m5/rubber
+	name = "magazine (5mm) M443 Caseless Rubber"
+	desc = "Rubber bullets for riot suppression."
+	ammo_type = /obj/item/ammo_casing/m5/rubber
+
 /obj/item/ammo_casing/m5
 	desc = "A 5mm bullet casing."
 	caliber = "5mm"
 	projectile_type = /obj/item/projectile/bullet/m5
 
+/obj/item/ammo_casing/m5/rubber
+	desc = "A 5mm bullet casing."
+	caliber = "5mm"
+	projectile_type = /obj/item/projectile/bullet/m5/rubber
+
 /obj/item/projectile/bullet/m5
-	damage = 15
+	damage = 20
 	accuracy = -3
+
+/obj/item/projectile/bullet/m5/rubber //"rubber" bullets
+	name = "rubber bullet"
+	check_armour = "melee"
+	damage = 5
+	agony = 25
+	embed = 0
+	sharp = 0
+
 
 /obj/item/weapon/storage/box/m5
 	name = "box of 5mm M443 magazines"

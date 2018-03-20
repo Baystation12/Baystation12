@@ -12,7 +12,7 @@
 	fire_sound = 'code/modules/halo/sounds/RocketLauncherShotSoundEffect.ogg'
 	//reload_sound = 'code/modules/halo/sounds/RocketLauncherReloadSoundEffect.ogg'
 	one_hand_penalty = -1
-
+	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',

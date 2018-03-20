@@ -648,7 +648,7 @@
 	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/department/medical
-	name = "medical insignia"
+	name = "police insignia"
 	desc = "Insignia denoting assignment to the medical department. These fit Expeditionary Corps uniforms."
 	color = "#4C9CE4"
 
@@ -659,7 +659,7 @@
 
 /obj/item/clothing/accessory/department/medical/marine
 	icon_state = "dept_marine"
-	desc = "Insignia denoting assignment to the medical department. These fit Marine Corps uniforms."
+	desc = "Insignia denoting assignment to the police department."
 	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/department/supply

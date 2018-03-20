@@ -116,7 +116,7 @@
 
 /obj/item/weapon/gun/verb/rename_gun()
 	set name = "Name Gun"
-	set category = "Object"
+	set category = "Weapon"
 	set desc = "Rename your gun."
 
 	var/mob/M = usr
@@ -192,6 +192,10 @@
 	else
 		return ..() //Pistolwhippin'
 
+/obj/item/weapon/gun/proc/check_z_compatible(var/atom/target,var/mob/living/user)
+	if(target.z != user.z) return 0
+	return 1
+
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
 	if(istype(user.loc,/obj/vehicles))
@@ -206,7 +210,7 @@
 			return
 		if(target.z != V.z) return
 	else
-		if(target.z != user.z) return
+		if(!check_z_compatible(target,user)) return
 
 	add_fingerprint(user)
 

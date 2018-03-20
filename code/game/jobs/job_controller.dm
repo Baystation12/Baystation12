@@ -301,7 +301,7 @@ var/global/datum/controller/occupations/job_master
 					if(!job || ticker.mode.disabled_jobs.Find(job.title) )
 						continue
 
-					if(jobban_isbanned(player, job.title))
+					if(jobban_isbanned(player, job.title,job.is_whitelisted))
 						Debug("DO isbanned failed, Player: [player], Job:[job.title]")
 						continue
 
