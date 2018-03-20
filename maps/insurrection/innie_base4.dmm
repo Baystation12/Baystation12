@@ -161,18 +161,18 @@
 "de" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
 "df" = (/obj/structure/closet/crate,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/asteroid_base/east_dorms)
 "dg" = (/obj/structure/closet/crate,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/storage/belt/marine_medic,/turf/unsimulated/floor{tag = "icon-steel"; icon_state = "steel"},/area/asteroid_base/east_dorms)
-"dh" = (/obj/machinery/power/smes,/obj/machinery/power/terminal,/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
-"di" = (/obj/structure/cable/blue{tag = "icon-1-10"; icon_state = "1-10"},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
+"dh" = (/obj/machinery/power/smes,/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
+"di" = (/obj/machinery/light/small{dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
 "dj" = (/obj/item/weapon/storage/toolbox/mechanical,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/asteroid_base/east_dorms)
 "dk" = (/obj/effect/landmark/start/Insurrectionist_Leader,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/asteroid_base/east_dorms)
 "dl" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/asteroid_base/east_dorms)
 "dm" = (/obj/machinery/light/small{dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
-"dn" = (/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/asteroid_base/east_dorms)
-"do" = (/obj/effect/landmark/innie_bomb,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/asteroid_base/east_dorms)
-"dp" = (/obj/structure/cable/blue{tag = "icon-2-10"; icon_state = "2-10"},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
-"dq" = (/obj/structure/cable/blue{tag = "icon-2-4"; icon_state = "2-4"},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
-"dr" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/asteroid_base/east_dorms)
-"ds" = (/obj/machinery/power/smes,/obj/machinery/power/terminal{dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
+"dn" = (/obj/machinery/light/small{dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
+"do" = (/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/asteroid_base/east_dorms)
+"dp" = (/obj/effect/landmark/innie_bomb,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/asteroid_base/east_dorms)
+"dq" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/unsimulated/floor{tag = "icon-rockvault"; icon_state = "rockvault"},/area/asteroid_base/east_dorms)
+"dr" = (/obj/machinery/power/smes,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
+"ds" = (/obj/machinery/light/small,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/medbay)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -216,13 +216,13 @@ bzbzbzbCbCbCbCbCbCbCcJbCbCbCbCbCbCbCbCbCbCcnbCbCcKcLcMcucNcOcPbXbNbNbNbNbNbObPbO
 bzbzbzbzbzbzbzbCcQcRbEcScTbCbzbzbzbzbzbzcUcVcUbCbXbXbXbXbXbXbXbXbNbNbNbNbNbObPbObNbNbNbNbNbNbNbNbNbN
 bzbzbzbzbzbzbzbCcWcXbEbSbEbCbzbzbzbzbzbzcUcVcUbzbNbNbNbNbObObObObObObObObObObPbObNbNbNbNbNbNbNbNbNbN
 bzbzbzbzbzbzbzbCcYcRbEcScZbCbzbzbzbzbzbzcUcVcUbzbNbNbNbNbOdabPbPbPbPbPbPbPbYbYbObNbNbNbNbNbNbNbNbNbN
-bzbzbzbzbzbzbzbCbSbEbEcXdbbCbzbzbzbzbzbzcUdccUbzbNbNbNbNbObYbObObObObObObOdddebObNbNbNbNbNbNbNbNbNbN
-bzbzbzbzbzbzbzbCdfcSbEcRdgbCbzbzbzbzbzbzcUdccUbzbNbNbNbNbObPbObNbNbNbNbOdhbYbPbObNbNbNbNbNbNbNbNbNbN
-bzbzbzbzbzbzbzbCbCbCcFbCbCbCbzbzbzbzbzbzcUdccUcUbObObObObObPbObNbNbNbNbOdibPbPbObNbNbNbNbNbNbNbNbNbN
-bzbzbzbzbzbzbzbzbCdjdkdlbCbzbzbzbzbzbzbzcUdcdcdcbYbYbYbPbPbPbObNbNbNbNbOdmbPbPbObNbNbNbNbNbNbNbNbNbN
-bzbzbzbzbzbzbzbzbCdndodlbCbzbzbzbzbzbzbzcUcUcUcUbObObObObObObObNbNbNbNbOdpbYdqbObNbNbNbNbNbNbNbNbNbN
-bzbzbzbzbzbzbzbzbCdndrdnbCbzbzbzbzbzbzbzbzbzbzbzbNbNbNbNbNbNbNbNbNbNbNbOdsbPdsbObNbNbNbNbNbNbNbNbNbN
-bzbzbzbzbzbzbzbzbCbCbCbCbCbzbzbzbzbzbzbzbzbzbzbzbNbNbNbNbNbNbNbNbNbNbNbObObObObObNbNbNbNbNbNbNbNbNbN
+bzbzbzbzbzbzbzbCbSbEbEcXdbbCbzbzbzbzbzbzcUdccUbzbNbNbNbNbObYbObObObObObObOdddebObObObObObObNbNbNbNbN
+bzbzbzbzbzbzbzbCdfcSbEcRdgbCbzbzbzbzbzbzcUdccUbzbNbNbNbNbObPbObNbNbNbNbOdhbYbPbPdibPbYbPbObNbNbNbNbN
+bzbzbzbzbzbzbzbCbCbCcFbCbCbCbzbzbzbzbzbzcUdccUcUbObObObObObPbObNbNbNbNbObYbPbPbPbYbPbPbYbObNbNbNbNbN
+bzbzbzbzbzbzbzbzbCdjdkdlbCbzbzbzbzbzbzbzcUdcdcdcbYbYbYbPbPbPbObNbNbNbNbOdmbPbPbYbPbPbPdnbObNbNbNbNbN
+bzbzbzbzbzbzbzbzbCdodpdlbCbzbzbzbzbzbzbzcUcUcUcUbObObObObObObObNbNbNbNbObYbYbPbPbPbYbPbPbObNbNbNbNbN
+bzbzbzbzbzbzbzbzbCdodqdobCbzbzbzbzbzbzbzbzbzbzbzbNbNbNbNbNbNbNbNbNbNbNbOdrbPdrbPdsbPbYbPbObNbNbNbNbN
+bzbzbzbzbzbzbzbzbCbCbCbCbCbzbzbzbzbzbzbzbzbzbzbzbNbNbNbNbNbNbNbNbNbNbNbObObObObObObObObObObNbNbNbNbN
 bzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbN
 bzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbzbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbNbN
 "}
