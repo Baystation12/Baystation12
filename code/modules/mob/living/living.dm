@@ -584,8 +584,8 @@ default behaviour is:
 	set name = "Resist"
 	set category = "IC"
 
-	if(!incapacitated(INCAPACITATION_KNOCKOUT) && canClick())
-		setClickCooldown(20)
+	if(!incapacitated(INCAPACITATION_KNOCKOUT) && last_resist + 2 SECONDS <= world.time)
+		last_resist = world.time
 		resist_grab()
 		if(!weakened)
 			process_resist()
