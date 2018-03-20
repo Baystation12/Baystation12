@@ -335,7 +335,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			freq_text = tag
 
 		// Make span consistent with the channel name, not the frequency
-		var/span_class = frequency_span_class(display_freq)
+		var/span_class = "radio"
 		if(tag && radiochannels[tag])
 			span_class = frequency_span_class(radiochannels[tag])
 
@@ -528,7 +528,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if(tag)
 			freq_text = tag
 
-		var/span_class = frequency_span_class(display_freq)
+		var/span_class = "radio"
 		if(tag && radiochannels[tag])
 			span_class = frequency_span_class(radiochannels[tag])
 
