@@ -39,18 +39,22 @@
 	colour = "red"
 	color_description = "red ink"
 
+/obj/item/weapon/pen/green
+	desc = "It's a normal green ink pen."
+	icon_state = "pen_green"
+	colour = "green"
+	color_description = "green ink"
+
 /obj/item/weapon/pen/multi
 	desc = "It's a pen with multiple colors of ink!"
 	var/selectedColor = 1
-	var/colors = list("black","blue","red")
-	var/color_descriptions = list("black ink", "blue ink", "red ink")
+	var/colors = list("black","blue","red","green")
 
 /obj/item/weapon/pen/multi/attack_self(mob/user)
-	if(++selectedColor > 3)
+	if(++selectedColor > length(colors))
 		selectedColor = 1
 
 	colour = colors[selectedColor]
-	color_description = color_descriptions[selectedColor]
 
 	if(colour == "black")
 		icon_state = "pen"
