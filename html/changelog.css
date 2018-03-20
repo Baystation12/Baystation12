@@ -41,7 +41,21 @@ a img {border:none;}
 	padding:2px 0;
 	font-size:1em;
 	font-weight:bold;
-}	
+}
+.merge {
+	padding: 10px;
+	background-color: #EEEEEE;
+	border-style: solid;
+	border-width: thin;
+	margin:0;
+	font-size:0.9em;
+}
+.mergeAuthor {
+	background-color: #EEEEEE;
+	margin:0;
+	font-weight:bold;
+	font-size:1.2em;
+}
 .author {
 	padding-left:10px;
 	margin:0;
