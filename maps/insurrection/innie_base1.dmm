@@ -133,9 +133,22 @@
 "cC" = (/obj/structure/grille,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/storage_medbay)
 "cD" = (/obj/effect/landmark/drop_pod_landing,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
 "cE" = (/turf/simulated/open,/area/asteroid_base/storage_medbay)
-"cF" = (/obj/effect/landmark/test/safe_turf,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
-"cG" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
-"cH" = (/obj/effect/landmark/drop_pod_landing,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/storage_medbay)
+"cF" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/mac_gun)
+"cG" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/central_hallway_1)
+"cH" = (/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/central_hallway_2)
+"cI" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/medbay)
+"cJ" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/vault)
+"cK" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/main_hangar)
+"cL" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/north_airlock_1)
+"cM" = (/obj/effect/landmark/test/safe_turf,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
+"cN" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/west_dorms)
+"cO" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/east_dorms)
+"cP" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/mess_hall)
+"cQ" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/kitchen)
+"cR" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/generator/control)
+"cS" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/smes)
+"cT" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/canisters)
+"cU" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/atmos)
 
 (1,1,1) = {"
 aaaaaaaaaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
@@ -170,22 +183,22 @@ cococococqcqcrcocococococococococococococycycycocscscscscscscscscscscscscscscscs
 cococococococqcocococococococococococococycycycocscscscscscscscscscscscscscscscscscscscscscscwcscscs
 cococococococzcococococococococococAcAcAcAcAcAcocBcscBcBcscscscscscscscscscscscscscscscscscscwcscscs
 cococococococAcAcAcococococococAcAcAcAcAcAcAcAcAcBcBcBcBcBcscscscscscscscscBcBcscscscscscscscCcscscs
-cococAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcscscscscscscBcBcBcBcscscscscBcBcBcBcscs
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcDcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-cAcAcAcAcAcDcAcAcAcAcAcAcAcAcAcAcAcAcAcAcDcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcDcAcAcAcAcAcDcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcB
-cAcAcAcAcAcDcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-cAcAcAcAcFcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-cAcGcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-cAcAcAcAcAcAcAcAcAcAcAcAcAcAcDcAcAcAcAcAcAcAcAcAcBcBcHcBcBcBcBcBcHcBcBcBcBcBcHcBcBcBcBcBcBcBcBcBcBcH
+cocococAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcscscscscscscBcBcBcBcscscscscBcBcBcBcscs
+cococAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcs
+cocAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcs
+cococAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcs
+cococAcAcAcAcAcAcAcAcAcAcAcAcDcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcs
+cocAcAcAcAcDcAcAcAcAcAcAcAcAcAcAcAcAcAcAcDcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcscs
+cocAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcscs
+cocAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcscs
+cocococAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcs
+cocAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcs
+cocAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcs
+cocAcAcAcAcAcAcAcAcAcAcAcAcAcDcAcAcAcAcAcDcAcAcAcBcBcEcEcEcEcEcEcEcBcBcBcBcBcEcEcEcEcEcEcEcBcBcBcBcs
+cococAcAcAcDcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcscs
+cococAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcscs
+cFcGcHcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcscscs
+cIcJcKcLcMcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcAcocBcBcBcBcBcBcBcBcBcBcBcscBcBcBcBcBcBcBcBcBcBcscscscs
+cNcOcPcQcocAcAcAcAcAcAcococAcDcAcAcocAcAcAcAcAcocscscBcBcBcBcBcBcBcBcscscscscBcBcBcBcBcscscscscscscs
+cRcScTcUcococococococococococococococococococococscscscscscscscscscscscscscscscscscscscscscscscscscs
 "}

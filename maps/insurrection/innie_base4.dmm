@@ -49,7 +49,7 @@
 "aW" = (/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
 "aX" = (/obj/effect/floor_decal/sign/m,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/asteroid_base/main_hangar)
 "aY" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
-"aZ" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
+"aZ" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
 "ba" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
 "bb" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
 "bc" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/asteroid_base/main_hangar)
@@ -188,11 +188,11 @@ aaaaaaaaaaaaadaAadadadadadadaBadadadaCadaDaDaEadafafafafafafaFafafafafafafaGafaf
 aaaaaaaaaaaaadaHaDaEaIadadaEaDaEaEaEaEaEaEaDaEaEaJaKaKaKaJaLaJaKaJaJaJaJaJaJaJaJaJaJaMafababacahacab
 aaaaaaaaaaaaaNaDaDaEaIadadaEaEaEaEaEaEaEaEaEaEaEaKaKaJaJaJaJaJaJaJaJaJaKaKaKaKaOaJaJaKafababacagacab
 aaaaaaaaaaaaadaEaPadadadadaEaDadadadadadaEaEaEadafafafaQafafafafafafafafafafafafafaJaJafababacagacab
-aaaaaaaaaaaaadaRaRadadadadaEaSadaaaaaaadaEaEaEadababacahacabababababababababababafaJaJafabacacagacac
-aaaaaaaaaaaaadaEaEaDaEaEaEaEaDadaaaaaaadaEaEaPadabacacahacacababababababababababafaJaJafacacaTaUagac
-aaaaaaaaaaaaaVaDaDaDaEaEaDaEaEadaaaaaaadaEaDaDadabacahaUaWacababababababababababafaJaXaYagahahataZac
-aaaaaaaaaaaaadaEaEadadadaAadadadaaaaaaaNaEaEaEadabacasatahacababababababababababafaJaKafacacahbaahac
-aaaaaaaaaaaaadaEaEadaaaaaaaaaaaaaaaaaaadaEaEaEadabacahbbahacababababababababababafbcaJafabacacahacac
+aaaaaaaaaaaaadaRaRadadadadaEaSadaaaaaaadaEaEaEadababacahacabababababababababababafaJaJafabacacagacab
+aaaaaaaaaaaaadaEaEaDaEaEaEaEaDadaaaaaaadaEaEaPadabacacahacacababababababababababafaJaJafacacaTaUacab
+aaaaaaaaaaaaaVaDaDaDaEaEaDaEaEadaaaaaaadaEaDaDadabacahaUaWacababababababababababafaJaXaYagahahatacab
+aaaaaaaaaaaaadaEaEadadadaAadadadaaaaaaaNaEaEaEadabacasatahacababababababababababafaJaKafacacaZbaacab
+aaaaaaaaaaaaadaEaEadaaaaaaaaaaaaaaaaaaadaEaEaEadabacahbbahacababababababababababafbcaJafabacacahacab
 aaaaaaaaaaaaadaEaEadaaaaaaaaaaaaaaaaaaadaEaEaEbdabacacahacacababababababababababafaJaJafababacagacab
 aaaaaaadadadadaEaPadadadadadadadadadadadaEaDaDadafafafaQafafafafafafafaGafafafafafaJaJafababacagacab
 aaaaaaadbeaEaEaDaDaEaEaEaEaEaEaEbfaEaEaEaEaDaEaEaJaKaKaJaJaLaKaKaJaJaJaJaJaJaJaJaKaJaJafababacagacab
