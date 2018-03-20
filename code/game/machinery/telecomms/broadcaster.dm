@@ -151,7 +151,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
+							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency, signal.data["tag"],
 							  signal.data["verb"], signal.data["language"])
 		else
 			if(intercept)
@@ -159,7 +159,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency,
+							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency, signal.data["tag"],
 							  signal.data["verb"], signal.data["language"])
 
 
