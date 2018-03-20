@@ -280,3 +280,12 @@ proc/age2agedescription(age)
 				selected = M
 				break
 	return selected
+
+/mob/proc/check_soles(var/mob/M)
+	if(isnull(M))
+		M = src
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(istype(H.shoes, /obj/item/clothing/shoes/laceup/sneakies/))
+			return reverse_direction(H.dir)
+	return dir

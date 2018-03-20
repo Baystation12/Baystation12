@@ -107,10 +107,11 @@
 					H.track_blood--
 
 			if (bloodDNA)
-				src.AddTracks(H.species.get_move_trail(H),bloodDNA,H.dir,0,bloodcolor) // Coming
+
+				src.AddTracks(H.species.get_move_trail(H),bloodDNA,H.check_soles(),0,bloodcolor) // Coming
 				var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
 				if(istype(from) && from)
-					from.AddTracks(H.species.get_move_trail(H),bloodDNA,0,H.dir,bloodcolor) // Going
+					from.AddTracks(H.species.get_move_trail(H),bloodDNA,0, H.check_soles(),bloodcolor) // Going
 
 				bloodDNA = null
 
