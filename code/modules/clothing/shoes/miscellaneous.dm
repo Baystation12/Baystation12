@@ -178,3 +178,13 @@
 	name = "athletic shoes"
 	desc = "A pair of sleek atheletic shoes. Made by and for the sporty types."
 	icon_state = "sportshoe"
+
+
+/obj/item/clothing/shoes/laceup/sneakies
+	desc = "The height of fashion, and they're pre-polished. Upon further inspection, the soles appear to be on backwards."
+//	description_antag = "Originally designed to confuse Terran troops on the swamp moon of Nabier XI. Proven somewhat effective and aren't bad on a space vessel either."
+	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
+
+/obj/item/clothing/shoes/laceup/sneakies/equipped(mob/user, slot)
+	if(slot == SLOT_FEET && loc == user)
+		to_chat(user, "<span class = 'notice'>Good GOD these are uncomfortable.</span>")
