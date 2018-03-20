@@ -145,26 +145,26 @@
 	anchored = 0
 	density = 1
 
-turf/unsimulated/floor/tranquility
+turf/simulated/floor/tranquility
 	icon = 'code/modules/halo/icons/turfs/catwalks.dmi'
 	name = "catwalk"
-turf/unsimulated/floor/tranquility/catwalk1
+turf/simulated/floor/tranquility/catwalk1
 	icon_state = "catwalk7"
-turf/unsimulated/floor/tranquility/catwalk2
+turf/simulated/floor/tranquility/catwalk2
 	icon_state = "catwalk10"
-turf/unsimulated/floor/tranquility/catwalk3
+turf/simulated/floor/tranquility/catwalk3
 	icon_state = "catwalk13"
-turf/unsimulated/floor/tranquility/catwalk4
+turf/simulated/floor/tranquility/catwalk4
 	icon_state = "catwalk14"
-turf/unsimulated/floor/tranquility/catwalk5
+turf/simulated/floor/tranquility/catwalk5
 	icon_state = "catwalk11"
-turf/unsimulated/floor/tranquility/catwalk6
+turf/simulated/floor/tranquility/catwalk6
 	icon_state = "catwalk5"
-turf/unsimulated/floor/tranquility/catwalk7
+turf/simulated/floor/tranquility/catwalk7
 	icon_state = "catwalk6"
-turf/unsimulated/floor/tranquility/catwalk8
+turf/simulated/floor/tranquility/catwalk8
 	icon_state = "catwalk15"
-turf/unsimulated/floor/tranquility/catwalk9
+turf/simulated/floor/tranquility/catwalk9
 	icon_state = "catwalk9"
 
 #undef LAUNCH_ABORTED
