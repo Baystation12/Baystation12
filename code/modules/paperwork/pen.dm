@@ -50,7 +50,7 @@
     var/selectedColor = 1
     var/colors = list("black","blue","red","green")
 
-    /obj/item/weapon/pen/multi/attack_self(mob/user)
+/obj/item/weapon/pen/multi/attack_self(mob/user)
     	if(++selectedColor > length(colors))
     		selectedColor = 1
 
