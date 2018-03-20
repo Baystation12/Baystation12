@@ -61,7 +61,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"],,
-							  signal.data["compression"], signal.data["level"], signal.frequency, signal.data["tag"],
+							  signal.data["compression"], signal.data["level"], signal.frequency, signal.data["channel_tag"],
 							  signal.data["verb"], signal.data["language"]	)
 
 
@@ -70,7 +70,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if(signal.data["type"] == 1)
 
 			/* ###### Broadcast a message using signal.data ###### */
-			Broadcast_SimpleMessage(signal.data["name"], signal.frequency, signal.data["tag"],
+			Broadcast_SimpleMessage(signal.data["name"], signal.frequency, signal.data["channel_tag"],
 								  signal.data["message"],null, null,
 								  signal.data["compression"], listening_levels)
 
@@ -87,7 +87,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], signal.data["level"], signal.frequency, signal.data["tag"],
+							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], signal.data["level"], signal.frequency, signal.data["channel_tag"],
 							  signal.data["verb"], signal.data["language"])
 
 		if(!message_delay)
@@ -151,7 +151,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency, signal.data["tag"],
+							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency, signal.data["channel_tag"],
 							  signal.data["verb"], signal.data["language"])
 		else
 			if(intercept)
@@ -159,7 +159,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency, signal.data["tag"],
+							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency, signal.data["channel_tag"],
 							  signal.data["verb"], signal.data["language"])
 
 
@@ -227,7 +227,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 /proc/Broadcast_Message(var/datum/radio_frequency/connection, var/mob/M,
 						var/vmask, var/vmessage, var/obj/item/device/radio/radio,
 						var/message, var/name, var/job, var/realname, var/vname,
-						var/data, var/compression, var/list/level, var/freq, var/tag, var/verbage = "says", var/datum/language/speaking = null)
+						var/data, var/compression, var/list/level, var/freq, var/channel_tag, var/verbage = "says", var/datum/language/speaking = null)
 
 
   /* ###### Prepare the radio connection ###### */
@@ -331,13 +331,13 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	  /* --- Some miscellaneous variables to format the string output --- */
 		var/freq_text = format_frequency(display_freq)
-		if(tag)
-			freq_text = tag
+		if(channel_tag)
+			freq_text = channel_tag
 
 		// Make span consistent with the channel name, not the frequency
 		var/span_class = "radio"
-		if(tag && radiochannels[tag])
-			span_class = frequency_span_class(radiochannels[tag])
+		if(channel_tag && radiochannels[channel_tag])
+			span_class = frequency_span_class(radiochannels[channel_tag])
 
 		var/part_b_extra = ""
 		if(data == 3) // intercepted radio message
@@ -432,7 +432,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	return 1
 
-/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/tag, var/text, var/data, var/mob/M, var/compression, var/level)
+/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/channel_tag, var/text, var/data, var/mob/M, var/compression, var/level)
 
   /* ###### Prepare the radio connection ###### */
 
@@ -525,12 +525,12 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	  /* --- Some miscellaneous variables to format the string output --- */
 		var/freq_text = format_frequency(display_freq)
-		if(tag)
-			freq_text = tag
+		if(channel_tag)
+			freq_text = channel_tag
 
 		var/span_class = "radio"
-		if(tag && radiochannels[tag])
-			span_class = frequency_span_class(radiochannels[tag])
+		if(channel_tag && radiochannels[channel_tag])
+			span_class = frequency_span_class(radiochannels[channel_tag])
 
 		var/part_a = "<span class='[span_class]'><span class='name'>" // goes in the actual output
 

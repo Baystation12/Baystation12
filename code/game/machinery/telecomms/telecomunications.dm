@@ -24,7 +24,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/network = "NULL" // the network of the machinery
 
 	var/list/freq_listening = list() // list of frequencies to tune into: if none, will listen to all
-	var/list/freq_tags = list() // a list specifying what to tag packets on different frequencies
+	var/list/channel_tags = list() // a list specifying what to tag packets on different frequencies
 
 	var/machinetype = 0 // just a hacky way of preventing alike machines from pairing
 	var/toggled = 1 	// Is it toggled on
@@ -539,7 +539,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				totaltraffic += traffic // add current traffic to total traffic
 
 			// tag the signal
-			signal.data["tag"] = get_tag(signal.frequency)
+			signal.data["channel_tag"] = get_channel_tag(signal.frequency)
 
 			//Is this a test signal? Bypass logging
 			if(signal.data["type"] != 4)
@@ -639,8 +639,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	log_entries.Add(log)
 	update_logs()
 
-/obj/machinery/telecomms/server/proc/get_tag(var/freq)
-	for(var/list/rule in freq_tags)
+/obj/machinery/telecomms/server/proc/get_channel_tag(var/freq)
+	for(var/list/rule in channel_tags)
 		if(rule[1] == freq)
 			return rule[2]
 	return format_frequency(freq)

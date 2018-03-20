@@ -162,10 +162,10 @@
 
 		dat += "<br>  <a href='?src=\ref[src];input=freq'>\[Add Filter\]</a>"
 
-		dat += "<br><br>Tagging rules: <ol>"
+		dat += "<br><br>Channel Tagging Rules: <ol>"
 
-		if(length(freq_tags))
-			for(var/list/rule in freq_tags)
+		if(length(channel_tags))
+			for(var/list/rule in channel_tags)
 				dat +="<li>[format_frequency(rule[1])] - [rule[2]] <a href='?src=\ref[src];deletetagrule=[rule[1]]'>\[X\]</a></li>"
 
 		dat += "</ol>"
@@ -370,14 +370,14 @@
 						updateUsrDialog()
 						return
 
-					for(var/list/rule in freq_tags)
+					for(var/list/rule in channel_tags)
 						if(rule[1] == freq)
 							temp = "<font color = #660000>-% Tagging rule already defined %-</font>"
 							updateUsrDialog()
 							return
 
 					if(freq < 10000)
-						freq_tags.Add(list(list(freq, tag)))
+						channel_tags.Add(list(list(freq, tag)))
 						temp = "<font color = #666633>-% New tagging rule assigned:[freq] GHz -> \"[tag]\" %-</font>"
 
 	if(href_list["delete"])
@@ -392,11 +392,11 @@
 
 		var/freq = text2num(href_list["deletetagrule"])
 		var/rule_delete
-		for(var/list/rule in freq_tags)
+		for(var/list/rule in channel_tags)
 			if(rule[1] == freq)
 				rule_delete = rule
 		temp = "<font color = #666633>-% Removed tagging rule: [rule_delete[1]] -> [rule_delete[2]] %-</font>"
-		freq_tags.Remove(list(rule_delete))
+		channel_tags.Remove(list(rule_delete))
 
 	if(href_list["unlink"])
 
