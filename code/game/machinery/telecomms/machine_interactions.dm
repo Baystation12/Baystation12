@@ -367,12 +367,14 @@
 
 					if(!(freq in freq_listening))
 						temp = "<font color = #660000>-% Not filtering specified frequency %-</font>"
-						return 1
+						updateUsrDialog()
+						return
 
 					for(var/list/rule in freq_tags)
 						if(rule[1] == freq)
 							temp = "<font color = #660000>-% Tagging rule already defined %-</font>"
-							return 1
+							updateUsrDialog()
+							return
 
 					if(freq < 10000)
 						freq_tags.Add(list(list(freq, tag)))
