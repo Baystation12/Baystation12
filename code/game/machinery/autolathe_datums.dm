@@ -423,6 +423,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/pen/red
 	category = "General"
 
+/datum/autolathe/recipe/greenpen
+	name = "green ink pen"
+	path = /obj/item/weapon/pen/green
+	category = "General"
+
 /datum/autolathe/recipe/clipboard
 	name = "clipboard"
 	path = /obj/item/weapon/clipboard
