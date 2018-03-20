@@ -61,7 +61,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"],,
-							  signal.data["compression"], signal.data["level"], signal.frequency,
+							  signal.data["compression"], signal.data["level"], signal.frequency, signal.data["tag"],
 							  signal.data["verb"], signal.data["language"]	)
 
 
@@ -70,7 +70,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if(signal.data["type"] == 1)
 
 			/* ###### Broadcast a message using signal.data ###### */
-			Broadcast_SimpleMessage(signal.data["name"], signal.frequency,
+			Broadcast_SimpleMessage(signal.data["name"], signal.frequency, signal.data["tag"],
 								  signal.data["message"],null, null,
 								  signal.data["compression"], listening_levels)
 
@@ -87,7 +87,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], signal.data["level"], signal.frequency,
+							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], signal.data["level"], signal.frequency, signal.data["tag"],
 							  signal.data["verb"], signal.data["language"])
 
 		if(!message_delay)
@@ -219,12 +219,15 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	@param freq
 		The frequency of the signal
 
+	@param tag
+		The "name" of the frequency. Displayed in brackets before the message
+
 **/
 
 /proc/Broadcast_Message(var/datum/radio_frequency/connection, var/mob/M,
 						var/vmask, var/vmessage, var/obj/item/device/radio/radio,
 						var/message, var/name, var/job, var/realname, var/vname,
-						var/data, var/compression, var/list/level, var/freq, var/verbage = "says", var/datum/language/speaking = null)
+						var/data, var/compression, var/list/level, var/freq, var/tag, var/verbage = "says", var/datum/language/speaking = null)
 
 
   /* ###### Prepare the radio connection ###### */
@@ -327,12 +330,19 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if (length(heard_masked) || length(heard_normal) || length(heard_voice) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/freq_text = get_frequency_name(display_freq)
+		var/freq_text = format_frequency(display_freq)
+		if(tag)
+			freq_text = tag
+
+		// Make span consistent with the channel name, not the frequency
+		var/span_class = frequency_span_class(display_freq)
+		if(tag && radiochannels[tag])
+			span_class = frequency_span_class(radiochannels[tag])
 
 		var/part_b_extra = ""
 		if(data == 3) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
-		var/part_a = "<span class='[frequency_span_class(display_freq)]'>\icon[radio]<b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
+		var/part_a = "<span class='[span_class]'>\icon[radio]<b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
 
 		// --- Some more pre-message formatting ---
 		var/part_b = "</span> <span class='message'>" // Tweaked for security headsets -- TLE
@@ -422,7 +432,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	return 1
 
-/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level)
+/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/tag, var/text, var/data, var/mob/M, var/compression, var/level)
 
   /* ###### Prepare the radio connection ###### */
 
@@ -514,8 +524,15 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if (length(heard_normal) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/part_a = "<span class='[frequency_span_class(display_freq)]'><span class='name'>" // goes in the actual output
-		var/freq_text = get_frequency_name(display_freq)
+		var/freq_text = format_frequency(display_freq)
+		if(tag)
+			freq_text = tag
+
+		var/span_class = frequency_span_class(display_freq)
+		if(tag && radiochannels[tag])
+			span_class = frequency_span_class(radiochannels[tag])
+
+		var/part_a = "<span class='[span_class]'><span class='name'>" // goes in the actual output
 
 		// --- Some more pre-message formatting ---
 

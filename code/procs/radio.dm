@@ -8,7 +8,7 @@
 	if(radio_controller)
 		radio_controller.remove_object(source, frequency)
 
-/proc/get_frequency_name(var/display_freq)
+/proc/get_frequency_default_name(var/display_freq)
 	var/freq_text
 
 	// the name of the channel

@@ -161,6 +161,16 @@
 			dat += "NONE"
 
 		dat += "<br>  <a href='?src=\ref[src];input=freq'>\[Add Filter\]</a>"
+
+		dat += "<br><br>Tagging rules: <ol>"
+
+		if(length(freq_tags))
+			for(var/list/rule in freq_tags)
+				dat +="<li>[format_frequency(rule[1])] - [rule[2]] <a href='?src=\ref[src];deletetagrule=[rule[1]]'>\[X\]</a></li>"
+
+		dat += "</ol>"
+		dat += "<a href='?src=\ref[src];input=tagrule'>\[Add Rule\]</a>"
+
 		dat += "<hr>"
 
 		if(P)
@@ -348,6 +358,26 @@
 						freq_listening.Add(newfreq)
 						temp = "<font color = #666633>-% New frequency filter assigned: \"[newfreq] GHz\" %-</font>"
 
+			if("tagrule")
+				var/freq = input(usr, "Specify frequency to tag (GHz). Decimals assigned automatically.", src, network) as null|num
+				var/tag = input(usr, "Specify tag.", src, "") as null|text
+				if(freq && tag && canAccess(usr))
+					if(findtext(num2text(freq), "."))
+						freq *= 10
+
+					if(!(freq in freq_listening))
+						temp = "<font color = #660000>-% Not filtering specified frequency %-</font>"
+						return 1
+
+					for(var/list/rule in freq_tags)
+						if(rule[1] == freq)
+							temp = "<font color = #660000>-% Tagging rule already defined %-</font>"
+							return 1
+
+					if(freq < 10000)
+						freq_tags.Add(list(list(freq, tag)))
+						temp = "<font color = #666633>-% New tagging rule assigned:[freq] GHz -> \"[tag]\" %-</font>"
+
 	if(href_list["delete"])
 
 		// changed the layout about to workaround a pesky runtime -- Doohl
@@ -355,6 +385,16 @@
 		var/x = text2num(href_list["delete"])
 		temp = "<font color = #666633>-% Removed frequency filter [x] %-</font>"
 		freq_listening.Remove(x)
+
+	if(href_list["deletetagrule"])
+
+		var/freq = text2num(href_list["deletetagrule"])
+		var/rule_delete
+		for(var/list/rule in freq_tags)
+			if(rule[1] == freq)
+				rule_delete = rule
+		temp = "<font color = #666633>-% Removed tagging rule: [rule_delete[1]] -> [rule_delete[2]] %-</font>"
+		freq_tags.Remove(list(rule_delete))
 
 	if(href_list["unlink"])
 

@@ -176,26 +176,31 @@
 /obj/machinery/telecomms/server/presets/science
 	id = "Science Server"
 	freq_listening = list(SCI_FREQ)
+	freq_tags = list(list(SCI_FREQ, "Science"))
 	autolinkers = list("science")
 
 /obj/machinery/telecomms/server/presets/medical
 	id = "Medical Server"
 	freq_listening = list(MED_FREQ)
+	freq_tags = list(list(MED_FREQ, "Medical"))
 	autolinkers = list("medical")
 
 /obj/machinery/telecomms/server/presets/supply
 	id = "Supply Server"
 	freq_listening = list(SUP_FREQ)
+	freq_tags = list(list(SUP_FREQ, "Supply"))
 	autolinkers = list("supply")
 
 /obj/machinery/telecomms/server/presets/service
 	id = "Service Server"
 	freq_listening = list(SRV_FREQ)
+	freq_tags = list(list(SRV_FREQ, "Service"))
 	autolinkers = list("service")
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
 	freq_listening = list(PUB_FREQ, AI_FREQ, ENT_FREQ) // AI Private and Common
+	freq_tags = list(list(PUB_FREQ, "Common"), list(AI_FREQ, "AI Private"), list(ENT_FREQ, "Entertainment"))
 	autolinkers = list("common")
 
 // "Unused" channels, AKA all others.
@@ -214,21 +219,25 @@
 /obj/machinery/telecomms/server/presets/command
 	id = "Command Server"
 	freq_listening = list(COMM_FREQ)
+	freq_tags = list(list(COMM_FREQ, "Command"))
 	autolinkers = list("command")
 
 /obj/machinery/telecomms/server/presets/engineering
 	id = "Engineering Server"
 	freq_listening = list(ENG_FREQ)
+	freq_tags = list(list(ENG_FREQ, "Engineering"))
 	autolinkers = list("engineering")
 
 /obj/machinery/telecomms/server/presets/security
 	id = "Security Server"
 	freq_listening = list(SEC_FREQ)
+	freq_tags = list(list(SEC_FREQ, "Security"))
 	autolinkers = list("security")
 
 /obj/machinery/telecomms/server/presets/centcomm
 	id = "CentComm Server"
 	freq_listening = list(ERT_FREQ, DTH_FREQ)
+	freq_tags = list(list(ERT_FREQ, "ERT"), list(DTH_FREQ, "#unkn"))
 	produces_heat = 0
 	autolinkers = list("centcomm")
 
