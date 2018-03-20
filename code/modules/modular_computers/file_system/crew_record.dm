@@ -139,6 +139,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	var/acccess
 	var/acccess_edit
 	var/record_id
+	var/hidden = FALSE
 
 /record_field/New(var/datum/computer_file/crew_record/record)
 	if(!acccess_edit)
@@ -182,6 +183,8 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	return islist(used_access) ? (acccess_edit in used_access) : acccess_edit == used_access
 
 /record_field/proc/can_see(var/used_access)
+	if (hidden)
+		return FALSE
 	if(!acccess)
 		return TRUE
 	if(!used_access)
@@ -194,50 +197,50 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 // Fear not the preprocessor, for it is a friend. To add a field, use one of these, depending on value type and if you need special access to see it.
 // It will also create getter/setter procs for record datum, named like /get_[key here]() /set_[key_here](value) e.g. get_name() set_name(value)
 // Use getter setters to avoid errors caused by typoing the string key.
-#define FIELD_SHORT(NAME, KEY) /record_field/##KEY/name = ##NAME; GETTER_SETTER(##KEY)
-#define FIELD_SHORT_SECURE(NAME, KEY, ACCESS) FIELD_SHORT(##NAME, ##KEY); /record_field/##KEY/acccess = ##ACCESS
+#define FIELD_SHORT(NAME, KEY, HIDDEN) /record_field/##KEY/name = ##NAME; /record_field/##KEY/hidden = ##HIDDEN; GETTER_SETTER(##KEY)
+#define FIELD_SHORT_SECURE(NAME, KEY, HIDDEN, ACCESS) FIELD_SHORT(##NAME, ##KEY, ##HIDDEN); /record_field/##KEY/acccess = ##ACCESS
 
-#define FIELD_LONG(NAME, KEY) FIELD_SHORT(##NAME, ##KEY); /record_field/##KEY/valtype = EDIT_LONGTEXT
-#define FIELD_LONG_SECURE(NAME, KEY, ACCESS) FIELD_LONG(##NAME, ##KEY); /record_field/##KEY/acccess = ##ACCESS
+#define FIELD_LONG(NAME, KEY, HIDDEN) FIELD_SHORT(##NAME, ##KEY, ##HIDDEN); /record_field/##KEY/valtype = EDIT_LONGTEXT
+#define FIELD_LONG_SECURE(NAME, KEY, HIDDEN, ACCESS) FIELD_LONG(##NAME, ##KEY, ##HIDDEN); /record_field/##KEY/acccess = ##ACCESS
 
-#define FIELD_NUM(NAME, KEY) FIELD_SHORT(##NAME, ##KEY); /record_field/##KEY/valtype = EDIT_NUMERIC; /record_field/##KEY/value = 0
-#define FIELD_NUM_SECURE(NAME, KEY, ACCESS) FIELD_NUM(##NAME, ##KEY); /record_field/##KEY/acccess = ##ACCESS
+#define FIELD_NUM(NAME, KEY, HIDDEN) FIELD_SHORT(##NAME, ##KEY, ##HIDDEN); /record_field/##KEY/valtype = EDIT_NUMERIC; /record_field/##KEY/value = 0
+#define FIELD_NUM_SECURE(NAME, KEY, HIDDEN, ACCESS) FIELD_NUM(##NAME, ##KEY, ##HIDDEN); /record_field/##KEY/acccess = ##ACCESS
 
-#define FIELD_LIST(NAME, KEY, OPTIONS) FIELD_SHORT(##NAME, ##KEY); /record_field/##KEY/valtype = EDIT_LIST; /record_field/##KEY/get_options(){. = ##OPTIONS;}
-#define FIELD_LIST_SECURE(NAME, KEY, OPTIONS, ACCESS) FIELD_LIST(##NAME, ##KEY, ##OPTIONS); /record_field/##KEY/acccess = ##ACCESS
+#define FIELD_LIST(NAME, KEY, HIDDEN, OPTIONS) FIELD_SHORT(##NAME, ##KEY, ##HIDDEN); /record_field/##KEY/valtype = EDIT_LIST; /record_field/##KEY/get_options(){. = ##OPTIONS;}
+#define FIELD_LIST_SECURE(NAME, KEY, HIDDEN, OPTIONS, ACCESS) FIELD_LIST(##NAME, ##KEY, ##HIDDEN, ##OPTIONS); /record_field/##KEY/acccess = ##ACCESS
 
 // GENERIC RECORDS
-FIELD_SHORT("Name",name)
-FIELD_SHORT("Job",job)
-FIELD_LIST("Sex", sex, record_genders())
-FIELD_NUM("Age", age)
+FIELD_SHORT("Name",name, FALSE)
+FIELD_SHORT("Job",job, FALSE)
+FIELD_LIST("Sex", sex, FALSE, record_genders())
+FIELD_NUM("Age", age, FALSE)
 
-FIELD_LIST("Status", status, GLOB.physical_statuses)
+FIELD_LIST("Status", status, FALSE, GLOB.physical_statuses)
 /record_field/status/acccess_edit = access_medical
 
-FIELD_SHORT("Species",species)
-FIELD_LIST("Branch", branch, record_branches())
-FIELD_LIST("Rank", rank, record_ranks())
+FIELD_SHORT("Species",species, FALSE)
+FIELD_LIST("Branch", branch, TRUE, record_branches()) // hidden field
+FIELD_LIST("Rank", rank, TRUE, record_ranks()) // hidden field
 
 // MEDICAL RECORDS
-FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types)
-FIELD_LONG_SECURE("Medical Record", medRecord, access_medical)
+FIELD_LIST("Blood Type", bloodtype, FALSE, GLOB.blood_types)
+FIELD_LONG_SECURE("Medical Record", medRecord, FALSE, access_medical)
 
 // SECURITY RECORDS
-FIELD_LIST_SECURE("Criminal Status", criminalStatus, GLOB.security_statuses, access_security)
-FIELD_LONG_SECURE("Security Record", secRecord, access_security)
-FIELD_SHORT_SECURE("DNA", dna, access_security)
-FIELD_SHORT_SECURE("Fingerprint", fingerprint, access_security)
+FIELD_LIST_SECURE("Criminal Status", criminalStatus, FALSE, GLOB.security_statuses, access_security)
+FIELD_LONG_SECURE("Security Record", secRecord, FALSE, access_security)
+FIELD_SHORT_SECURE("DNA", dna, FALSE, access_security)
+FIELD_SHORT_SECURE("Fingerprint", fingerprint, FALSE, access_security)
 
 // EMPLOYMENT RECORDS
-FIELD_LONG_SECURE("Employment Record", emplRecord, access_heads)
-FIELD_SHORT_SECURE("Home System", homeSystem, access_heads)
-FIELD_SHORT_SECURE("Citizenship", citizenship, access_heads)
-FIELD_SHORT_SECURE("Faction", faction, access_heads)
-FIELD_SHORT_SECURE("Religion", religion, access_heads)
+FIELD_LONG_SECURE("Employment Record", emplRecord, FALSE, access_heads)
+FIELD_SHORT_SECURE("Home System", homeSystem, FALSE, access_heads)
+FIELD_SHORT_SECURE("Citizenship", citizenship, FALSE, access_heads)
+FIELD_SHORT_SECURE("Faction", faction, FALSE, access_heads)
+FIELD_SHORT_SECURE("Religion", religion, FALSE, access_heads)
 
 // ANTAG RECORDS
-FIELD_LONG_SECURE("Exploitable Information", antagRecord, access_syndicate)
+FIELD_LONG_SECURE("Exploitable Information", antagRecord, FALSE, access_syndicate)
 
 //Options builderes
 /record_field/rank/proc/record_ranks()
