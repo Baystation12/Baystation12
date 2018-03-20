@@ -237,7 +237,7 @@
 /obj/machinery/telecomms/server/presets/centcomm
 	id = "CentComm Server"
 	freq_listening = list(ERT_FREQ, DTH_FREQ)
-	freq_tags = list(list(ERT_FREQ, "ERT"), list(DTH_FREQ, "#unkn"))
+	freq_tags = list(list(ERT_FREQ, "Response Team"), list(DTH_FREQ, "Special Ops"))
 	produces_heat = 0
 	autolinkers = list("centcomm")
 
