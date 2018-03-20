@@ -21,6 +21,7 @@
 	name = "Ballgag"
 	desc = "For when Master wants silence."
 	icon_state = "ballgag"
+	item_state = "ballgag"
 
 /obj/item/clothing/mask/muzzle/Initialize()
 	. = ..()

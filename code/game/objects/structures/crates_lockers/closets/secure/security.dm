@@ -226,7 +226,7 @@
 		/obj/item/weapon/storage/box/evidence,
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/vest/detective,
-		/obj/item/ammo_magazine/c45m/flash,
+		/obj/item/ammo_magazine/c45m/rubber,
 		/obj/item/taperoll/police,
 		/obj/item/weapon/gun/projectile/colt/detective,
 		/obj/item/clothing/accessory/holster/armpit,

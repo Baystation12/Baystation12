@@ -69,6 +69,7 @@
 /obj/item/clothing/gloves/thick/security
 	name = "\improper Security Gloves"
 	icon_state = "sec_gloves"
+	item_state = "sec_gloves"
 
 
 /obj/item/clothing/gloves/thick/combat //Combined effect of SWAT gloves and insulated gloves
