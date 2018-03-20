@@ -1,0 +1,7 @@
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - tweak: "Non-broken ribs/skulls now protect the internal organs a bit."
+  - tweak: "Bullets no longer damage internal organs twice. As an effect organ damage from bullets is lowered significantly."
