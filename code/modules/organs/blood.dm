@@ -143,7 +143,7 @@
 	if (injected.data["antibodies"] && prob(5))
 		antibodies |= injected.data["antibodies"]
 	var/list/chems = list()
-	chems = params2list(injected.data["trace_chem"])
+	chems = injected.data["trace_chem"]
 	for(var/C in chems)
 		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
 	reagents.update_total()

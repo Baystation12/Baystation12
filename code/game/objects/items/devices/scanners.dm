@@ -377,8 +377,8 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 				to_chat(user, "<span class='warning'>The sample was contaminated! Please insert another sample</span>")
 				return
 			else
-				blood_traces = params2list(R.data["trace_chem"])
-				blood_doses = params2list(R.data["dose_chem"])
+				blood_traces = R.data["trace_chem"]
+				blood_doses = R.data["dose_chem"]
 				break
 		var/dat = "Trace Chemicals Found: "
 		for(var/T in blood_traces)
