@@ -33,3 +33,7 @@
 /obj/item/weapon/stamp/supply
 	name = "supply rubber stamp"
 	icon_state = "stamp-cargo"
+
+/obj/item/weapon/stamp/se
+	name = "senior engineer's rubber stam"
+	icon_state = "stamp-ce"
