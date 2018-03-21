@@ -538,8 +538,10 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			if(traffic > 0)
 				totaltraffic += traffic // add current traffic to total traffic
 
-			// tag the signal
-			signal.data["channel_tag"] = get_channel_tag(signal.frequency)
+			// channel tag the signal
+			var/list/data = get_channel_info(signal.frequency)
+			signal.data["channel_tag"] = data[1]
+			signal.data["channel_color"] = data[2]
 
 			//Is this a test signal? Bypass logging
 			if(signal.data["type"] != 4)
@@ -639,11 +641,11 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	log_entries.Add(log)
 	update_logs()
 
-/obj/machinery/telecomms/server/proc/get_channel_tag(var/freq)
+/obj/machinery/telecomms/server/proc/get_channel_info(var/freq)
 	for(var/list/rule in channel_tags)
 		if(rule[1] == freq)
-			return rule[2]
-	return format_frequency(freq)
+			return list(rule[2], rule[3])
+	return list(format_frequency(freq), channel_color_presets["Global Green"])
 
 
 // Simple log entry datum

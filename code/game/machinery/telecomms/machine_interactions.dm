@@ -166,7 +166,7 @@
 
 		if(length(channel_tags))
 			for(var/list/rule in channel_tags)
-				dat +="<li>[format_frequency(rule[1])] - [rule[2]] <a href='?src=\ref[src];deletetagrule=[rule[1]]'>\[X\]</a></li>"
+				dat +="<li>[format_frequency(rule[1])] -> [rule[2]] ([rule[3]]) <a href='?src=\ref[src];deletetagrule=[rule[1]]'>\[X\]</a></li>"
 
 		dat += "</ol>"
 		dat += "<a href='?src=\ref[src];input=tagrule'>\[Add Rule\]</a>"
@@ -360,8 +360,7 @@
 
 			if("tagrule")
 				var/freq = input(usr, "Specify frequency to tag (GHz). Decimals assigned automatically.", src, network) as null|num
-				var/tag = input(usr, "Specify tag.", src, "") as null|text
-				if(freq && tag && canAccess(usr))
+				if(freq && canAccess(usr))
 					if(findtext(num2text(freq), "."))
 						freq *= 10
 
@@ -376,9 +375,17 @@
 							updateUsrDialog()
 							return
 
+					var/tag = input(usr, "Specify tag.", src, "") as null|text
+					var/color = input(usr, "Select color.", src, "") as null|anything in (channel_color_presets + "Custom color")
+
+					if(color == "Custom color")
+						color = input("Select color.", src, rgb(0, 128, 0)) as null|color
+					else
+						color = channel_color_presets[color]
+
 					if(freq < 10000)
-						channel_tags.Add(list(list(freq, tag)))
-						temp = "<font color = #666633>-% New tagging rule assigned:[freq] GHz -> \"[tag]\" %-</font>"
+						channel_tags.Add(list(list(freq, tag, color)))
+						temp = "<font color = #666633>-% New tagging rule assigned:[freq] GHz -> \"[tag]\" ([color]) %-</font>"
 
 	if(href_list["delete"])
 
