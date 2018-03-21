@@ -147,9 +147,10 @@
 "cQ" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/mess_hall)
 "cR" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/kitchen)
 "cS" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/generator/control)
-"cT" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/smes)
 "cU" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/canisters)
 "cV" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/atmos)
+"lr" = (/obj/effect/overmap/sector/innie_base,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/smes)
+"Ux" = (/obj/effect/landmark/dropship_land_point{name = "Frozen Plains"},/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
 
 (1,1,1) = {"
 aaaaaaaaaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
@@ -192,7 +193,7 @@ cpcpcBcBcBcBcBcBcBcBcBcBcBcBcEcBcBcBcBcBcBcBcBcBcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcC
 cpcBcBcBcBcEcBcBcBcBcBcBcBcBcBcBcBcBcBcBcEcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcFcFcFcFcFcFcCcCcCctct
 cpcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcFcFcFcFcFcFcCcCcCctct
 cpcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcFcFcFcFcFcFcCcCcCctct
-cpcpcpcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcFcFcFcFcFcFcCcCcCcCct
+cpcpcpcBcBcBcBcBcBUxcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcFcFcFcFcFcFcCcCcCcCct
 cpcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcFcFcFcFcFcFcCcCcCcCct
 cpcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcFcFcFcFcFcFcCcCcCcCct
 cpcBcBcBcBcBcBcBcBcBcBcBcBcBcEcBcBcBcBcBcEcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcFcFcFcFcFcFcCcCcCcCct
@@ -201,5 +202,6 @@ cpcpcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcC
 cGcHcIcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCctctct
 cJcKcLcMcNcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcpcCcCcCcCcCcCcCcCcCcCcCctcCcCcCcCcCcCcCcCcCcCctctctct
 cOcPcQcRcpcBcBcBcBcBcBcpcpcBcEcBcBcpcBcBcBcBcBcpctctcCcCcCcCcCcCcCcCctctctctcCcCcCcCcCctctctctctctct
-cScTcUcVcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpctctctctctctctctctctctctctctctctctctctctctctctctctct
+cSlrcUcVcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpctctctctctctctctctctctctctctctctctctctctctctctctctct
 "}
+

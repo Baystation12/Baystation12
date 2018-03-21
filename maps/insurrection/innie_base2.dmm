@@ -325,7 +325,6 @@
 "gm" = (/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk5,/area/asteroid_base/armoury_3)
 "gn" = (/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk1,/area/asteroid_base/south_airlock_1)
 "go" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/asteroid_base/armoury_3)
-"gp" = (/obj/structure/ladder,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/armoury_3)
 "gq" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/turf/simulated/floor/tiled,/area/asteroid_base/armoury_3)
 "gr" = (/obj/structure/table/standard,/obj/item/trash/chips,/turf/simulated/floor/tiled,/area/asteroid_base/armoury_3)
 "gs" = (/turf/simulated/floor/tranquility/catwalk9,/area/asteroid_base/armoury_3)
@@ -369,6 +368,7 @@
 "he" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk4,/area/asteroid_base/south_airlock_1)
 "hf" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
 "hg" = (/obj/machinery/light/spot,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
+"LB" = (/obj/effect/decal/cleanable/dirt,/obj/structure/ladder,/turf/simulated/floor/plating,/area/asteroid_base/armoury_3)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -408,7 +408,7 @@ dZdZdZdZegeheeefefehehehefehehehehefegfzfzfJfKfKfLfMfLfLfLfNfLfLfNfOfLfLfNfOfNfN
 dZdZdZdZegegedegegegegfPfQfRegegefefegfSfTfUfVfVfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfZeteK
 dZdZdZdZeaeaeceaeggagbgbgbgcgdgeehehegfyfTfUfVfVfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfCeteK
 dZdZdZdZeaecgfggegghgbgigigbgjgeehgkegglgmfUfUfUfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXgnfGeteK
-dZdZdZdZeagogpebeggqgcgigigcgrgeehehegfKgsfUfVfVfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfEeteK
+dZdZdZdZeagoLBebeggqgcgigigcgrgeehehegfKgsfUfVfVfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfEeteK
 dZdZdZdZeaecgteceggugbgigigbgvgeehehgwececgxgygyfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfCeteK
 dZdZdZdZeaeaeaeaeggzgbgigigbgAegehefeggBebebgCgyfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfCeteK
 dZdZdZdZdZdZdZdZgDgEgigigigigbfQehefgFecebgGgHgyfXfXfWfWfWfWfWfWfWfXfXfXfXfXfWfWfWfWfWfWfWfXfYgIeteK
@@ -422,3 +422,4 @@ dZdZdZdZdZdZdZdZdZdZeagZececeaegehehegfyfyhagThbhchdhchchchehchchchdhchehchdhchc
 dZdZdZdZdZdZdZdZdZdZeaeaeaeaeaegegegegfzfyfAfzfzfChffCfCfCfEfEfCfCfGfEhgfCfGfCfCfCfCfCfCfEfHfEfEeteK
 dZdZdZdZdZdZdZdZdZdZdZdZdZdZdZdZdZdZegegegegegegeteteteteteteteteteteteteteteteteteteteteteteteteteK
 "}
+
