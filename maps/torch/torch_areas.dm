@@ -1204,6 +1204,10 @@
  	icon_state = "atmos"
  	sound_env = LARGE_ENCLOSED
 
+/area/engineering/seneng
+	name = "\improper Senior Engineer"
+	icon_state = "seneng"
+
 // Medical
 /area/medical/chemistry
 	name = "\improper Chemistry"
