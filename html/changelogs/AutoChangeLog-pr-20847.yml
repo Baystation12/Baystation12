@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - imageadd: "Secure energy guns are now visually distinct."
