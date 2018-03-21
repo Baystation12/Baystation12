@@ -61,8 +61,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"],,
-							  signal.data["compression"], signal.data["level"], signal.frequency, signal.data["channel_tag"],
-							  signal.data["verb"], signal.data["language"]	)
+							  signal.data["compression"], signal.data["level"], signal.frequency,
+							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"])
 
 
 	   /** #### - Simple Broadcast - #### **/
@@ -70,9 +70,9 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if(signal.data["type"] == 1)
 
 			/* ###### Broadcast a message using signal.data ###### */
-			Broadcast_SimpleMessage(signal.data["name"], signal.frequency, signal.data["channel_tag"],
+			Broadcast_SimpleMessage(signal.data["name"], signal.frequency,
 								  signal.data["message"],null, null,
-								  signal.data["compression"], listening_levels)
+								  signal.data["compression"], listening_levels, signal.data["channel_tag"])
 
 
 	   /** #### - Artificial Broadcast - #### **/
@@ -88,7 +88,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], signal.data["level"], signal.frequency, signal.data["channel_tag"],
-							  signal.data["verb"], signal.data["language"])
+							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"])
 
 		if(!message_delay)
 			message_delay = 1
@@ -151,16 +151,16 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency, signal.data["channel_tag"],
-							  signal.data["verb"], signal.data["language"])
+							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
+							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"])
 		else
 			if(intercept)
 				Broadcast_Message(signal.data["connection"], signal.data["mob"],
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency, signal.data["channel_tag"],
-							  signal.data["verb"], signal.data["language"])
+							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency,
+							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"])
 
 
 
@@ -227,7 +227,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 /proc/Broadcast_Message(var/datum/radio_frequency/connection, var/mob/M,
 						var/vmask, var/vmessage, var/obj/item/device/radio/radio,
 						var/message, var/name, var/job, var/realname, var/vname,
-						var/data, var/compression, var/list/level, var/freq, var/channel_tag, var/verbage = "says", var/datum/language/speaking = null)
+						var/data, var/compression, var/list/level, var/freq, var/verbage = "says", var/datum/language/speaking = null, var/channel_tag)
 
 
   /* ###### Prepare the radio connection ###### */
@@ -432,7 +432,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	return 1
 
-/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/channel_tag, var/text, var/data, var/mob/M, var/compression, var/level)
+/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level, var/channel_tag)
 
   /* ###### Prepare the radio connection ###### */
 
