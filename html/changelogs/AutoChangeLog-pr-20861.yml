@@ -1,0 +1,4 @@
+author: "Crushtoe"
+delete-after: True
+changes: 
+  - bugfix: "For the very first time, toggle-hub-visibility works."
