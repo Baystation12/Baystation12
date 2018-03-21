@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - bugfix: "Mass-spectrometers now actually display names of reagents."
