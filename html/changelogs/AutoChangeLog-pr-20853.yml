@@ -1,0 +1,4 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - rscadd: "Xenophage cultists are now a feature-- They are allowed to ventcrawl with tomes, robes, and swords. Also monkies I guess."
