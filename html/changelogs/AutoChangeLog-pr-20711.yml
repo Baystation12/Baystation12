@@ -1,0 +1,4 @@
+author: "mkalash"
+delete-after: True
+changes: 
+  - rscadd: "You can now toggle off showing end titles."
