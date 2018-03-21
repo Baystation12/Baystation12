@@ -11,7 +11,7 @@
 /decl/hierarchy/supply_pack/operations/cargotrain
 	name = "Cargo Train Tug"
 	contains = list(/obj/vehicle/train/cargo/engine)
-	cost = 45
+	cost = 25
 	containertype = /obj/structure/largecrate
 	containername = "\improper Cargo Train Tug Crate"
 
@@ -57,7 +57,7 @@
 /decl/hierarchy/supply_pack/operations/hoverpod
 	name = "Hoverpod Shipment"
 	contains = list()
-	cost = 80
+	cost = 50
 	containertype = /obj/structure/largecrate/hoverpod
 	containername = "\improper Hoverpod Crate"
 

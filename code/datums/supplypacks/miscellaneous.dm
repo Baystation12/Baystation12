@@ -139,7 +139,7 @@
 					/obj/item/weapon/pack/spaceball,
 					/obj/item/weapon/deck/holder)
 	name = "\improper Trading Card Crate"
-	cost = 20
+	cost = 10
 	containername = "\improper cards crate"
 	supply_method = /decl/supply_method/randomized
 
@@ -172,7 +172,7 @@
 					/obj/item/clothing/head/collectable/xenom,
 					/obj/item/clothing/head/collectable/petehat)
 	name = "Collectable hat crate!"
-	cost = 200
+	cost = 100
 	containername = "\improper Collectable hats crate! Brought to you by Bass.inc!"
 	supply_method = /decl/supply_method/randomized
 
@@ -243,7 +243,7 @@
 		/obj/item/device/kit/paint/ripley/flames_red,
 		/obj/item/device/kit/paint/ripley/flames_blue
 		)
-	cost = 200
+	cost = 20
 	containername = "heavy crate"
 	supply_method = /decl/supply_method/randomized
 
@@ -255,7 +255,7 @@
 		/obj/item/device/kit/paint/durand/seraph,
 		/obj/item/device/kit/paint/durand/phazon
 		)
-	cost = 200
+	cost = 20
 	containername = "heavy crate"
 	supply_method = /decl/supply_method/randomized
 
@@ -267,7 +267,7 @@
 		/obj/item/device/kit/paint/gygax/darkgygax,
 		/obj/item/device/kit/paint/gygax/recitence
 		)
-	cost = 200
+	cost = 20
 	containername = "heavy crate"
 	supply_method = /decl/supply_method/randomized
 

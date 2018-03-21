@@ -12,21 +12,21 @@
 /decl/hierarchy/supply_pack/hydroponics/farwa
 	name = "Farwa crate"
 	contains = list (/obj/item/weapon/storage/box/monkeycubes/farwacubes)
-	cost = 30
+	cost = 25
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "\improper Farwa crate"
 
 /decl/hierarchy/supply_pack/hydroponics/skrell
 	name = "Neaera crate"
 	contains = list (/obj/item/weapon/storage/box/monkeycubes/neaeracubes)
-	cost = 30
+	cost = 25
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "\improper Neaera crate"
 
 /decl/hierarchy/supply_pack/hydroponics/stok
 	name = "Stok crate"
 	contains = list (/obj/item/weapon/storage/box/monkeycubes/stokcubes)
-	cost = 30
+	cost = 25
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "\improper Stok crate"
 
@@ -40,21 +40,21 @@
 //farm animals - useless and annoying, but potentially a good source of food. expensive because they're live animals and their produce is available cheaper
 /decl/hierarchy/supply_pack/hydroponics/cow
 	name = "Cow crate"
-	cost = 80
+	cost = 30
 	containertype = /obj/structure/largecrate/animal/cow
 	containername = "\improper Cow crate"
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/hydroponics/goat
 	name = "Goat crate"
-	cost = 75
+	cost = 30
 	containertype = /obj/structure/largecrate/animal/goat
 	containername = "\improper Goat crate"
 	access = access_hydroponics
 
 /decl/hierarchy/supply_pack/hydroponics/chicken
 	name = "Chicken crate"
-	cost = 70
+	cost = 30
 	containertype = /obj/structure/largecrate/animal/chick
 	containername = "\improper Chicken crate"
 	access = access_hydroponics
@@ -140,7 +140,7 @@
 /decl/hierarchy/supply_pack/hydroponics/hydrotray
 	name = "Empty hydroponics tray"
 	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = 0})
-	cost = 30
+	cost = 15
 	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "\improper Hydroponics tray crate"
 	access = access_hydroponics

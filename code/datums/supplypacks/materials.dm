@@ -29,38 +29,38 @@
 /decl/hierarchy/supply_pack/materials/marble50
 	name = "50 slabs of marble"
 	contains = list(/obj/item/stack/material/marble/fifty)
-	cost = 60
+	cost = 40
 	containername = "\improper Marble slabs crate"
 
 /decl/hierarchy/supply_pack/materials/plasteel50
 	name = "50 plasteel sheets"
 	contains = list(/obj/item/stack/material/plasteel/fifty)
-	cost = 80
+	cost = 65
 	containername = "\improper Plasteel sheets crate"
 
 /decl/hierarchy/supply_pack/materials/ocp50
 	name = "50 osmium carbide plasteel sheets"
 	contains = list(/obj/item/stack/material/ocp/fifty)
-	cost = 100
+	cost = 80
 	containername = "\improper Osmium carbide plasteel sheets crate"
 
 // Material sheets (10 - Smaller amounts, less cost efficient)
 /decl/hierarchy/supply_pack/materials/marble10
 	name = "10 slabs of marble"
 	contains = list(/obj/item/stack/material/marble/ten)
-	cost = 20
+	cost = 10
 	containername = "\improper Marble slabs crate"
 
 /decl/hierarchy/supply_pack/materials/plasteel10
 	name = "10 plasteel sheets"
 	contains = list(/obj/item/stack/material/plasteel/ten)
-	cost = 25
+	cost = 15
 	containername = "\improper Plasteel sheets crate"
 
 /decl/hierarchy/supply_pack/materials/ocp10
 	name = "10 osmium carbide plasteel sheets"
 	contains = list(/obj/item/stack/material/ocp/ten)
-	cost = 30
+	cost = 20
 	containername = "\improper Osmium carbide plasteel sheets crate"
 
 // Material sheets of expensive materials. These are very expensive and therefore pretty hard
@@ -74,23 +74,23 @@
 /decl/hierarchy/supply_pack/materials/gold10
 	name = "10 gold sheets"
 	contains = list(/obj/item/stack/material/gold/ten)
-	cost = 100
+	cost = 50
 	containername = "\improper Gold sheets crate"
 
 /decl/hierarchy/supply_pack/materials/silver10
 	name = "10 silver sheets"
 	contains = list(/obj/item/stack/material/silver/ten)
-	cost = 100
+	cost = 50
 	containername = "\improper Silver sheets crate"
 
 /decl/hierarchy/supply_pack/materials/uranium10
 	name = "10 uranium sheets"
 	contains = list(/obj/item/stack/material/uranium/ten)
-	cost = 125
+	cost = 60
 	containername = "\improper Uranium sheets crate"
 
 /decl/hierarchy/supply_pack/materials/diamond10
 	name = "10 diamond sheets"
 	contains = list(/obj/item/stack/material/diamond/ten)
-	cost = 200
+	cost = 80
 	containername = "\improper Diamond sheets crate"
