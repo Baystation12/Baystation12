@@ -1,0 +1,4 @@
+author: "mustafakalash"
+delete-after: True
+changes: 
+  - rscadd: "Staff now have the ability to mark variables to easily view them in an auto-updating panel."
