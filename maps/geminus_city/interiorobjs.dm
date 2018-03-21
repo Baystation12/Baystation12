@@ -88,7 +88,7 @@
 	new /obj/item/device/flash(src)
 	new /obj/item/weapon/grenade/chem_grenade/teargas(src)
 	new /obj/item/weapon/grenade/flashbang(src)
-	new /obj/item/weapon/melee/telebaton(src)
+	new /obj/item/weapon/melee/baton/humbler(src)
 	new /obj/item/taperoll/police(src)
 	new /obj/item/clothing/accessory/badge/police(src)
 	new /obj/item/device/flashlight/glowstick/yellow(src)
