@@ -60,6 +60,12 @@
 /obj/item/clothing/accessory/holster/attackby(obj/item/W as obj, mob/user as mob)
 	holster(W, user)
 
+/obj/item/clothing/accessory/holster/attack_hand(mob/user as mob)
+	if (has_suit)
+		unholster(user)
+	else
+		..()
+
 /obj/item/clothing/accessory/holster/emp_act(severity)
 	if (holstered)
 		holstered.emp_act(severity)

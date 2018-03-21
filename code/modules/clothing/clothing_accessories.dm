@@ -24,18 +24,17 @@
 			to_chat(user, "<span class='warning'>You cannot attach more accessories of this type to [src].</span>")
 		return
 
-	if(accessories.len)
-		for(var/obj/item/clothing/accessory/A in accessories)
-			A.attackby(I, user)
-		return
+	for(var/obj/item/clothing/accessory/A in accessories)
+		A.attackby(I, user)
+	return
 
 	..()
 
 /obj/item/clothing/attack_hand(var/mob/user)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
 	if(accessories.len && src.loc == user)
-		for(var/obj/item/clothing/accessory/A in accessories)
-			A.attack_hand(user)
+		var/obj/item/clothing/accessory/A = accessories[accessories.len] // only upper accessory can be fast accessed
+		A.attack_hand(user)
 		return
 	return ..()
 
