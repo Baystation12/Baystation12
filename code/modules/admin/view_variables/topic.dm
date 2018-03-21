@@ -65,6 +65,27 @@
 
 		cmd_mass_modify_object_variables(A, href_list["varnamemass"])
 
+	else if(href_list["datumwatch"] && href_list["varnamewatch"])
+		var/datum/D = locate(href_list["datumwatch"])
+		if(D)
+			if(!watched_variables[D])
+				watched_variables[D] = list()
+			watched_variables[D] |= href_list["varnamewatch"]
+			watched_variables()
+
+			if(!watched_variables_window.is_processing)
+				START_PROCESSING(SSprocessing, watched_variables_window)
+
+	else if(href_list["datumunwatch"] && href_list["varnameunwatch"])
+		var/datum/D = locate(href_list["datumunwatch"])
+		if(D && watched_variables[D])
+			watched_variables[D] -= href_list["varnameunwatch"]
+			var/list/datums_watched_vars = watched_variables[D]
+			if(!datums_watched_vars.len)
+				watched_variables -= D
+		if(!watched_variables.len && watched_variables_window.is_processing)
+			STOP_PROCESSING(SSprocessing, watched_variables_window)
+
 	else if(href_list["mob_player_panel"])
 		if(!check_rights(0))	return
 
