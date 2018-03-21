@@ -54,7 +54,6 @@
 		/obj/item/clothing/under/rank/research_director,
 		/obj/item/clothing/under/rank/research_director/rdalt,
 		/obj/item/clothing/under/rank/research_director/dress_rd,
-		/obj/item/clothing/under/rank/scientist/executive,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/weapon/cartridge/rd,
 		/obj/item/clothing/shoes/white,

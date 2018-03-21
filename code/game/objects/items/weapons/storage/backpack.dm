@@ -112,6 +112,11 @@
 	item_state_slots = null
 
 /obj/item/weapon/storage/backpack/toxins
+	name = "scientist backpack"
+	desc = "It's a light backpack modeled for use in laboratories and other scientific institutions."
+	icon_state = "toxpack"
+
+/obj/item/weapon/storage/backpack/nanotrasen
 	name = "\improper NanoTrasen backpack"
 	desc = "It's a light backpack modeled for use in laboratories and other scientific institutions. The colors on it denote it as a NanoTrasen backpack."
 	icon_state = "ntpack"
@@ -286,6 +291,11 @@
 	icon_state = "satchel-gen"
 
 /obj/item/weapon/storage/backpack/satchel_tox
+	name = "scientist satchel"
+	desc = "Useful for holding research materials."
+	icon_state = "satchel-tox"
+
+/obj/item/weapon/storage/backpack/satchel_nt
 	name = "\improper NanoTrasen satchel"
 	desc = "Useful for holding research materials. The colors on it denote it as a NanoTrasen bag."
 	icon_state = "satchel-nt"
@@ -371,6 +381,11 @@
 	icon_state = "courierbagviro"
 
 /obj/item/weapon/storage/backpack/messenger/tox
+	name = "research messenger bag"
+	desc = "A backpack worn over one shoulder.  Useful for holding science materials."
+	icon_state = "courierbagtox"
+
+/obj/item/weapon/storage/backpack/messenger/nt
 	name = "\improper NanoTrasen messenger bag"
 	desc = "A backpack worn over one shoulder.  Useful for holding science materials. The colors on it denote it as a NanoTrasen bag."
 	icon_state = "courierbagnt"
