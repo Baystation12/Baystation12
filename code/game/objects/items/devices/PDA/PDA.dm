@@ -678,13 +678,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 //MESSENGER/NOTE FUNCTIONS===================================
 
 		if ("Edit")
-			var/n = input(U, "Please enter message", name, notehtml) as message
+			var/n = input_cp1251(U, "Please enter message", html_decode(name), notehtml)
 			if (in_range(src, U) && loc == U)
-				n = sanitizeSafe(n, extra = 0)
 				if (mode == 1)
-					note = rustoutf(html_decode(n))
-					notehtml = note
+					n = sanitize(n)
+					note = rustoutf(rhtml_decode(n))
 					note = replacetext(note, "\n", "<br>")
+					notehtml = n
 			else
 				ui.close()
 		if("Toggle Messenger")

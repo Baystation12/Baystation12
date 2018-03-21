@@ -154,8 +154,8 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 /record_field/proc/get_display_value()
 	if(valtype == EDIT_LONGTEXT)
-		return pencode2html(value)
-	return value
+		return rustoutf(rhtml_decode(pencode2html(value)))
+	return rustoutf(rhtml_decode(value))
 
 /record_field/proc/set_value(var/newval)
 	if(isnull(newval))
