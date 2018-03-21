@@ -342,7 +342,6 @@
 "gE" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/asteroid_base/armoury_3)
 "gF" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/turf/simulated/floor/plating,/area/asteroid_base/armoury_3)
 "gG" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/plating,/area/asteroid_base/armoury_3)
-"gH" = (/obj/structure/table/reinforced,/obj/machinery/deployable/barrier{name = "BUTTON PLACEHOLDER"},/turf/simulated/floor/plating,/area/asteroid_base/armoury_3)
 "gI" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
 "gJ" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/asteroid_base/armoury_3)
 "gK" = (/obj/effect/decal/cleanable/dirt,/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled,/area/asteroid_base/armoury_3)
@@ -369,6 +368,7 @@
 "hf" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
 "hg" = (/obj/machinery/light/spot,/turf/simulated/floor/tranquility/catwalk8,/area/asteroid_base/south_airlock_1)
 "LB" = (/obj/effect/decal/cleanable/dirt,/obj/structure/ladder,/turf/simulated/floor/plating,/area/asteroid_base/armoury_3)
+"WH" = (/obj/structure/table/reinforced,/obj/machinery/button/toggle/tranq_hangar{dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/armoury_3)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -411,7 +411,7 @@ dZdZdZdZeaecgfggegghgbgigigbgjgeehgkegglgmfUfUfUfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfX
 dZdZdZdZeagoLBebeggqgcgigigcgrgeehehegfKgsfUfVfVfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfEeteK
 dZdZdZdZeaecgteceggugbgigigbgvgeehehgwececgxgygyfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfCeteK
 dZdZdZdZeaeaeaeaeggzgbgigigbgAegehefeggBebebgCgyfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfCeteK
-dZdZdZdZdZdZdZdZgDgEgigigigigbfQehefgFecebgGgHgyfXfXfWfWfWfWfWfWfWfXfXfXfXfXfWfWfWfWfWfWfWfXfYgIeteK
+dZdZdZdZdZdZdZdZgDgEgigigigigbfQehefgFecebgGWHgyfXfXfWfWfWfWfWfWfWfXfXfXfXfXfWfWfWfWfWfWfWfXfYgIeteK
 dZdZdZdZdZdZdZdZeggJgKgigigKgbfReheheggBebebgLgyfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfEeteK
 dZdZdZdZdZdZdZdZeggvgdgMgNgOgPegehehgQececgRgygyfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfEeteK
 dZdZdZdZdZdZdZdZegegegeggSegegegeheheggTgUfUfVfVfWfXfWfWfWfWfWfWfWfXfWfWfWfXfWfWfWfWfWfWfWfXfYfEeteK
