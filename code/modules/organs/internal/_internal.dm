@@ -136,3 +136,19 @@
 				if(damage < 5)
 					degree = " a bit"
 				owner.custom_pain("Something inside your [parent.name] hurts[degree].", amount, affecting = parent)
+
+/obj/item/organ/internal/proc/get_visible_state()
+	if(damage > max_damage)
+		. = "bits and pieces of a destroyed "
+	else if(is_broken())
+		. = "broken "
+	else if(is_bruised())
+		. = "badly damaged "
+	else if(damage > 5)
+		. = "damaged "
+	if(status & ORGAN_DEAD)
+		if(can_recover())
+			. = "decaying [.]"
+		else
+			. = "necrotic [.]"
+	. = "[.][name]"
