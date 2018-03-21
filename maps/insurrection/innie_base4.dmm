@@ -161,22 +161,55 @@
 "de" = (/obj/structure/closet/crate,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
 "df" = (/obj/structure/closet/crate,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
 "dg" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"dh" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
-"di" = (/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
-"dj" = (/obj/structure/sign/warning/high_voltage,/turf/simulated/wall,/area/asteroid_base/medbay)
-"dk" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"dl" = (/obj/structure/closet/crate,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
-"dm" = (/obj/structure/closet/crate,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/storage/belt/marine_medic,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
-"dn" = (/obj/machinery/power/smes,/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"do" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"dp" = (/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
-"dq" = (/obj/effect/landmark/start/Insurrectionist_Leader,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
-"dr" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"ds" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"dt" = (/obj/effect/landmark/innie_bomb,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
-"du" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
-"dv" = (/obj/machinery/power/smes,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
-"dw" = (/obj/machinery/light/small,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dh" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{tag = "icon-2-8"; icon_state = "2-8"},/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"di" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"dj" = (/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dk" = (/obj/structure/sign/warning/high_voltage,/turf/simulated/wall,/area/asteroid_base/medbay)
+"dl" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dm" = (/obj/structure/closet/crate,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"dn" = (/obj/structure/closet/crate,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/storage/belt/marine_medic,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"do" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "2-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dp" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dq" = (/obj/structure/cable/orange{icon_state = "1-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dr" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 6},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ds" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (EAST)"; icon_state = "cooling_manifold"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dt" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 10},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"du" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dv" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dw" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/power/smes/buildable/max_cap_in_out,/obj/structure/cable/orange,/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dx" = (/obj/machinery/power/terminal{dir = 8},/obj/structure/cable/orange{d1 = 2; d2 = 16; icon_state = "0-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dy" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (NORTH)"; icon_state = "cooling_manifold"; dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dz" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/orange{icon_state = "0-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dA" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 5; icon_state = "intact"; tag = "icon-intact (SOUTHWEST)"},/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dB" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/obj/structure/cable/orange{tag = "icon-2-8"; icon_state = "2-8"},/obj/structure/cable/orange{icon_state = "2-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dC" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 10},/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dD" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/orange{icon_state = "0-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dE" = (/obj/machinery/atmospherics/binary/fusion_cooling,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dF" = (/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dG" = (/obj/effect/landmark/start/Insurrectionist_Leader,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dH" = (/obj/machinery/light/small{dir = 8},/obj/machinery/power/smes/buildable/max_cap_in_out,/obj/structure/cable/orange,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dI" = (/obj/machinery/power/terminal{dir = 8},/obj/structure/cable/orange{d1 = 2; d2 = 16; icon_state = "0-2"},/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dJ" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dK" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dL" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 4},/obj/machinery/meter,/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dM" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dN" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dO" = (/obj/effect/landmark/innie_bomb,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dP" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "1-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dQ" = (/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dR" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/orange{icon_state = "1-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dS" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 5; icon_state = "intact"; tag = "icon-intact (SOUTHWEST)"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dT" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dU" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dV" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dW" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dX" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dY" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dZ" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/red,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ea" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{tag = "icon-map (NORTH)"; icon_state = "map"; dir = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"eb" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ec" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ed" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -219,14 +252,14 @@ bFbFbFbIbHbHbHcrcNbObHbHbHcNbHbHcObObObHbHcsbHbIcAcAcIcIcAcAcIcdbTbTbTbTbTbUbVbU
 bFbFbFbIbIbIbIbIbIbIcPbIbIbIbIbIbIbIbIbIbIctbIbIcQcRcScAcTcUcVcdbTbTbTbTbTbUbVbUbTbTbTbTbTbTbTbTbTbT
 bFbFbFbFbFbFbFbIcWcXbKcYcZbIbFbFbFbFbFbFdadbdabIcdcdcdcdcdcdcdcdbTbTbTbTbTbUbVbUbTbTbTbTbTbTbTbTbTbT
 bFbFbFbFbFbFbFbIdcddbKbYbKbIbFbFbFbFbFbFdadbdabFbTbTbTbTbUbUbUbUbUbUbUbUbUbUbVbUbTbTbTbTbTbTbTbTbTbT
-bFbFbFbFbFbFbFbIdecXbKcYdfbIbFbFbFbFbFbFdadbdabFbTbTbTbTbUdgbVbVbVbVbVbVbVcecebUbTbTbTbTbTbTbTbTbTbT
-bFbFbFbFbFbFbFbIbYbKbKdddhbIbFbFbFbFbFbFdadidabFbTbTbTbTbUcebUbUbUbUbUbUbUdjdkbUbUbUbUbUbUbTbTbTbTbT
-bFbFbFbFbFbFbFbIdlcYbKcXdmbIbFbFbFbFbFbFdadidabFbTbTbTbTbUbVbUbTbTbTbTbUdncebVbVdobVcebVbUbTbTbTbTbT
-bFbFbFbFbFbFbFbIbIbIcLbIbIbIbFbFbFbFbFbFdadidadabUbUbUbUbUbVbUbTbTbTbTbUcebVbVbVcebVbVcebUbTbTbTbTbT
-bFbFbFbFbFbFbFbFbIdpdqdbbIbFbFbFbFbFbFbFdadididicececebVbVbVbUbTbTbTbTbUdrbVbVcebVbVbVdsbUbTbTbTbTbT
-bFbFbFbFbFbFbFbFbIdidtdbbIbFbFbFbFbFbFbFdadadadabUbUbUbUbUbUbUbTbTbTbTbUcecebVbVbVcebVbVbUbTbTbTbTbT
-bFbFbFbFbFbFbFbFbIdidudibIbFbFbFbFbFbFbFbFbFbFbFbTbTbTbTbTbTbTbTbTbTbTbUdvbVdvbVdwbVcebVbUbTbTbTbTbT
-bFbFbFbFbFbFbFbFbIbIbIbIbIbFbFbFbFbFbFbFbFbFbFbFbTbTbTbTbTbTbTbTbTbTbTbUbUbUbUbUbUbUbUbUbUbTbTbTbTbT
-bFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbT
+bFbFbFbFbFbFbFbIdecXbKcYdfbIbFbFbFbFbFbFdadbdabFbTbTbTbTbUdgbVbVbVbVbVbVbVcedhbUbTbTbTbTbTbTbTbTbTbT
+bFbFbFbFbFbFbFbIbYbKbKdddibIbFbFbFbFbFbFdadjdabFbTbTbTbTbUcebUbUbUbUbUbUbUdkdlbUbUbUbUbUbUbUbUbUbTbT
+bFbFbFbFbFbFbFbIdmcYbKcXdnbIbFbFbFbFbFbFdadjdabFbTbTbTbTbUbVbUbTbTbTbTbUdodpdqdrdsdtdrdudsdvbVbUbTbT
+bFbFbFbFbFbFbFbIbIbIcLbIbIbIbFbFbFbFbFbFdadjdadabUbUbUbUbUbVbUbTbTbTbTbUdwdxbVdydzdAdBdCdDdEbVbUbTbT
+bFbFbFbFbFbFbFbFbIdFdGdbbIbFbFbFbFbFbFbFdadjdjdjcececebVbVbVbUbTbTbTbTbUdHdIbVdJdKdudLdMdKdNbVbUbTbT
+bFbFbFbFbFbFbFbFbIdjdOdbbIbFbFbFbFbFbFbFdadadadabUbUbUbUbUbUbUbTbTbTbTbUcedPdQdQdQdQdRdSdtbVbVbUbTbT
+bFbFbFbFbFbFbFbFbIdjdTdjbIbFbFbFbFbFbFbFbFbFbFbFbTbTbTbTbTbTbTbTbTbTbTbUbVbVdrdUdVdWdXdYdZeadtbUbTbT
+bFbFbFbFbFbFbFbFbIbIbIbIbIbFbFbFbFbFbFbFbFbFbFbFbTbTbTbTbTbTbTbTbTbTbTbUbVbVebebebecececedededbUbTbT
+bFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbTbTbTbTbTbTbTbTbTbTbTbUbUbUbUbUbUbUbUbUbUbUbUbUbTbT
 bFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbFbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbTbT
 "}
