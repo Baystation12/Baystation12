@@ -78,7 +78,7 @@
 			to_chat(user, "<span class='warning'>[O] is dead. Sticking it into the frame would sort of defeat the purpose.</span>")
 			return
 
-		if(jobban_isbanned(B, "Cyborg"))
+		if(jobban_isbanned(B, "Robot"))
 			to_chat(user, "<span class='warning'>\The [O] does not seem to fit.</span>")
 			return
 
