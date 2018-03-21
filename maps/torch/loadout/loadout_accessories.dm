@@ -1,7 +1,7 @@
 /datum/gear/tactical/ubac
 	display_name = "ubac selection"
 	path = /obj/item/clothing/accessory/ubac
-	allowed_roles = MILITARY_ROLES
+	allowed_roles = list(MILITARY_ROLES, /datum/job/guard)
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/accessory/solawardmajor
