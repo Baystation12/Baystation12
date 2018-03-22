@@ -13,6 +13,7 @@
 	desc = "You'll have to find ammo as you go."
 
 /decl/hierarchy/outfit/job/UNSC_ship/CO/equip_base(mob/living/carbon/human/H)
+	. = ..()
 	var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/m6d_magnum/CO
 	G.ammo_magazine = null
 	H.equip_to_slot_or_del(G,slot_belt)
