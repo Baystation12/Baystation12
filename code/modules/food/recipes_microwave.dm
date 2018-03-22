@@ -301,11 +301,11 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/xemeatpie
 
-/datum/recipe/pie
+/datum/recipe/bananapie
 	fruit = list("banana" = 1)
 	reagents = list(/datum/reagent/sugar = 5)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough)
-	result = /obj/item/weapon/reagent_containers/food/snacks/pie
+	result = /obj/item/weapon/reagent_containers/food/snacks/bananapie
 
 /datum/recipe/cherrypie
 	fruit = list("cherries" = 1)

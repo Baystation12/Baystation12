@@ -715,7 +715,7 @@
 	filling_color = "#db0000"
 	center_of_mass = "x=16;y=16"
 
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/sausage/New()
 		..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
 		bitesize = 2
@@ -727,7 +727,7 @@
 	filling_color = "#db0000"
 	center_of_mass = "x=16;y=16"
 
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/fatsausage/New()
 		..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 8)
 		bitesize = 2
@@ -840,7 +840,7 @@
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/meatburger/New()
 		..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
 		bitesize = 2
@@ -854,7 +854,7 @@
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/plainburger/New()
 		..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
 		bitesize = 2
@@ -868,7 +868,7 @@
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/hamburger/New()
 		..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
 		bitesize = 2
@@ -987,7 +987,7 @@
 		..()
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/pie
+/obj/item/weapon/reagent_containers/food/snacks/bananapie
 	name = "Banana Cream Pie"
 	desc = "Just like back home, on clown planet! HONK!"
 	icon_state = "pie"
@@ -997,7 +997,7 @@
 	nutriment_desc = list("pie" = 3, "cream" = 2)
 	nutriment_amt = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/pie/New()
+/obj/item/weapon/reagent_containers/food/snacks/bananapie/New()
 	..()
 	reagents.add_reagent(/datum/reagent/drink/juice/banana,5)
 	bitesize = 3
@@ -1042,7 +1042,7 @@
 	center_of_mass = "x=15;y=11"
 	nutriment_desc = list("pancake" = 8)
 	nutriment_amt = 8
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/blupancakes/New()
 		..()
 		bitesize = 2
 
@@ -1054,7 +1054,7 @@
 	center_of_mass = "x=15;y=11"
 	nutriment_desc = list("pancake" = 8)
 	nutriment_amt = 8
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/pancakes/New()
 		..()
 		bitesize = 2
 
