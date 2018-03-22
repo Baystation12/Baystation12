@@ -976,6 +976,7 @@
 	icon_state = "dinnerware"
 	icon_vend = "dinnerware-vend"
 	products = list(
+	/obj/item/weapon/reagent_containers/glass/beaker/bowl =2,
 	/obj/item/weapon/tray = 8,
 	/obj/item/weapon/material/kitchen/utensil/fork = 6,
 	/obj/item/weapon/material/kitchen/utensil/knife = 6,
