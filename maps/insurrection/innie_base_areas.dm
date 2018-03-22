@@ -4,6 +4,8 @@
 //AREAS//
 /////////
 
+/area/asteroid_base //Temp define for Tranq.
+	requires_power = 0
 
 //engineering
 /area/asteroid_base/engine

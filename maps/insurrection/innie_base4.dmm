@@ -1,0 +1,277 @@
+"aa" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/kitchen)
+"ab" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/main_hangar)
+"ac" = (/turf/simulated/wall,/area/asteroid_base/main_hangar)
+"ad" = (/turf/unsimulated/wall,/area/asteroid_base/kitchen)
+"ae" = (/obj/structure/sign/deck/first,/turf/unsimulated/wall,/area/asteroid_base/kitchen)
+"af" = (/turf/unsimulated/wall,/area/asteroid_base/main_hangar)
+"ag" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"ah" = (/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"ai" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"aj" = (/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"ak" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"al" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"am" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"an" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"ao" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"ap" = (/obj/machinery/space_heater,/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"aq" = (/obj/structure/ladder/up,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"ar" = (/obj/effect/landmark/ghost_spawn,/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"as" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"at" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small/red{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"au" = (/obj/structure/ladder/up,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"av" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (WEST)"; icon_state = "maint"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"aw" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"ax" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"ay" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"az" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"aA" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"aB" = (/obj/structure/extinguisher_cabinet,/turf/unsimulated/wall,/area/asteroid_base/kitchen)
+"aC" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"aD" = (/obj/structure/sign/warning/moving_parts,/turf/unsimulated/wall,/area/asteroid_base/kitchen)
+"aE" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_base/kitchen)
+"aF" = (/turf/simulated/floor/tiled/dark,/area/asteroid_base/kitchen)
+"aG" = (/obj/structure/extinguisher_cabinet,/turf/unsimulated/wall,/area/asteroid_base/main_hangar)
+"aH" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/asteroid_base/main_hangar)
+"aI" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_base/kitchen)
+"aJ" = (/obj/structure/stairs/east,/turf/simulated/floor/tiled/dark,/area/asteroid_base/kitchen)
+"aK" = (/turf/simulated/floor/tiled/dark,/area/asteroid_base/main_hangar)
+"aL" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_base/main_hangar)
+"aM" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_base/main_hangar)
+"aN" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_base/main_hangar)
+"aO" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/asteroid_base/kitchen)
+"aP" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_base/main_hangar)
+"aQ" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/asteroid_base/kitchen)
+"aR" = (/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/asteroid_base/kitchen)
+"aS" = (/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/asteroid_base/kitchen)
+"aT" = (/obj/machinery/door/airlock/halo_maint,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
+"aU" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (NORTH)"; icon_state = "stairs"; dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_base/kitchen)
+"aV" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/unsimulated/floor{tag = "icon-dark"; icon_state = "dark"},/area/asteroid_base/kitchen)
+"aW" = (/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
+"aX" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"aY" = (/obj/structure/sign/halo_floorsign/maint,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"aZ" = (/obj/structure/sign/directions/supply{tag = "icon-direction_supply (EAST)"; icon_state = "direction_supply"; dir = 4},/turf/unsimulated/wall,/area/asteroid_base/kitchen)
+"ba" = (/obj/structure/sign/halo_floorsign/maint,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
+"bb" = (/obj/effect/decal/cleanable/cobweb2,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
+"bc" = (/obj/effect/floor_decal/sign/m,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_base/main_hangar)
+"bd" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"be" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small/red{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
+"bf" = (/obj/structure/ladder/up,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
+"bg" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (WEST)"; icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"bh" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/main_hangar)
+"bi" = (/obj/structure/sign/halo_floorsign/maint{tag = "icon-maint (NORTH)"; icon_state = "maint"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{tag = "icon-plating"; icon_state = "plating"},/area/asteroid_base/main_hangar)
+"bj" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_base/main_hangar)
+"bk" = (/obj/structure/sign/directions/supply{tag = "icon-direction_supply (NORTH)"; icon_state = "direction_supply"; dir = 1},/turf/unsimulated/wall,/area/asteroid_base/kitchen)
+"bl" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/dark,/area/asteroid_base/kitchen)
+"bm" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_base/kitchen)
+"bn" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_base/main_hangar)
+"bo" = (/obj/structure/sign/warning/secure_area/armory,/turf/unsimulated/wall,/area/asteroid_base/kitchen)
+"bp" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/kitchen)
+"bq" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphp,/turf/simulated/floor/tiled,/area/asteroid_base/kitchen)
+"br" = (/turf/simulated/floor/tiled,/area/asteroid_base/kitchen)
+"bs" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/asteroid_base/kitchen)
+"bt" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled,/area/asteroid_base/kitchen)
+"bu" = (/obj/structure/bed,/obj/item/weapon/bedsheet/brown,/turf/simulated/floor/tiled,/area/asteroid_base/main_hangar)
+"bv" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/asteroid_base/main_hangar)
+"bw" = (/obj/structure/bed,/obj/item/weapon/bedsheet/blue,/turf/simulated/floor/tiled,/area/asteroid_base/main_hangar)
+"bx" = (/obj/machinery/space_heater,/turf/simulated/floor/tiled,/area/asteroid_base/main_hangar)
+"by" = (/obj/structure/bed,/obj/item/weapon/bedsheet/mime,/turf/simulated/floor/tiled,/area/asteroid_base/main_hangar)
+"bz" = (/turf/simulated/floor/tiled,/area/asteroid_base/main_hangar)
+"bA" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled,/area/asteroid_base/main_hangar)
+"bB" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_base/kitchen)
+"bC" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/turf/simulated/floor/tiled,/area/asteroid_base/kitchen)
+"bD" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/asteroid_base/kitchen)
+"bE" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/turf/simulated/floor/tiled,/area/asteroid_base/kitchen)
+"bF" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/asteroid_base/main_hangar)
+"bG" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/east_dorms)
+"bH" = (/obj/structure/extinguisher_cabinet,/turf/unsimulated/wall,/area/asteroid_base/east_dorms)
+"bI" = (/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"bJ" = (/turf/unsimulated/wall,/area/asteroid_base/east_dorms)
+"bK" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"bL" = (/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"bM" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/obj/item/ammo_magazine/m95_sap,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"bN" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"bO" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/asteroid_base/east_dorms)
+"bP" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"bQ" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"bR" = (/turf/simulated/floor/tiled,/area/asteroid_base/medbay)
+"bS" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/asteroid_base/medbay)
+"bT" = (/obj/structure/sign/poster,/turf/unsimulated/wall,/area/asteroid_base/medbay)
+"bU" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/medbay)
+"bV" = (/turf/simulated/wall,/area/asteroid_base/medbay)
+"bW" = (/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"bX" = (/obj/item/turret_deploy_kit/chaingun,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"bY" = (/obj/structure/table/rack,/obj/item/ammo_magazine/chaingun_boxmag,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"bZ" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"ca" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/br85,/obj/item/weapon/gun/projectile/br85,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"cb" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cc" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/asteroid_base/medbay)
+"cd" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/asteroid_base/medbay)
+"ce" = (/turf/unsimulated/wall,/area/asteroid_base/medbay)
+"cf" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"cg" = (/obj/item/turret_deploy_kit/HMG,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"ch" = (/obj/structure/table/rack,/obj/item/ammo_magazine/HMG_boxmag,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"ci" = (/obj/structure/bed,/obj/item/weapon/bedsheet/ce,/turf/simulated/floor/tiled,/area/asteroid_base/medbay)
+"cj" = (/obj/structure/bed,/obj/item/weapon/bedsheet/yellow,/turf/simulated/floor/tiled,/area/asteroid_base/medbay)
+"ck" = (/obj/structure/bed,/obj/item/weapon/bedsheet/purple,/turf/simulated/floor/tiled,/area/asteroid_base/medbay)
+"cl" = (/obj/structure/bed,/obj/item/weapon/bedsheet/brown,/turf/simulated/floor/tiled,/area/asteroid_base/medbay)
+"cm" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"cn" = (/obj/structure/sign/warning/secure_area/armory,/turf/unsimulated/wall,/area/asteroid_base/east_dorms)
+"co" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"cp" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cq" = (/obj/structure/sign/halo_floorsign/stairs,/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cr" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cs" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"ct" = (/obj/effect/floor_decal/sign/m,/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cu" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"cv" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cw" = (/obj/structure/stairs/east,/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cx" = (/obj/structure/closet/wall_medical,/turf/unsimulated/wall,/area/asteroid_base/medbay)
+"cy" = (/obj/structure/sign/directions/supply{tag = "icon-direction_supply (NORTH)"; icon_state = "direction_supply"; dir = 1},/turf/unsimulated/wall,/area/asteroid_base/east_dorms)
+"cz" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cA" = (/obj/structure/closet/crate/freezer,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cB" = (/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cC" = (/obj/structure/closet/secure_closet/medical2,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cD" = (/obj/machinery/optable,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cE" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/storage/firstaid/surgery,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cF" = (/obj/machinery/vending/medical,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cG" = (/obj/structure/filingcabinet/medical,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cH" = (/obj/structure/sign/bluecross_2,/turf/unsimulated/wall,/area/asteroid_base/east_dorms)
+"cI" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cJ" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cK" = (/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"cL" = (/obj/structure/sign/halo_floorsign/stairs{tag = "icon-stairs (NORTH)"; icon_state = "stairs"; dir = 1},/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cM" = (/obj/machinery/door/airlock/halo_lifepod{name = "Airlock"},/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"cN" = (/obj/machinery/space_heater,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cO" = (/obj/effect/decal/cleanable/generic,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cP" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/asteroid_base/east_dorms)
+"cQ" = (/obj/machinery/door/airlock/halo,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"cR" = (/obj/structure/skele_stand,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cS" = (/obj/structure/closet/secure_closet/medical3,/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cT" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cU" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cV" = (/obj/structure/table/standard,/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cW" = (/obj/structure/closet/secure_closet/medical1,/turf/simulated/floor/tiled/white,/area/asteroid_base/medbay)
+"cX" = (/obj/structure/closet/crate,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/beartrap,/obj/item/weapon/grenade/frag/high_yield,/obj/item/weapon/grenade/frag/high_yield,/obj/item/weapon/grenade/frag/high_yield,/obj/item/weapon/grenade/frag/high_yield,/obj/item/weapon/grenade/frag/high_yield,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"cY" = (/obj/effect/landmark/start/Insurrectionist,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"cZ" = (/obj/effect/decal/cleanable/dirt,/obj/effect/landmark/start/Insurrectionist,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"da" = (/obj/structure/closet/crate,/obj/item/weapon/gun/projectile/m739_lmg,/obj/item/weapon/gun/projectile/m739_lmg,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/obj/item/ammo_magazine/a762_box_ap,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"db" = (/turf/simulated/wall,/area/asteroid_base/east_dorms)
+"dc" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dd" = (/obj/machinery/space_heater,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"de" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"df" = (/obj/structure/closet/crate,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"dg" = (/obj/structure/closet/crate,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/obj/item/ammo_magazine/m762_ap,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"dh" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"di" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{tag = "icon-2-8"; icon_state = "2-8"},/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dj" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"dk" = (/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dl" = (/obj/structure/sign/warning/high_voltage,/turf/simulated/wall,/area/asteroid_base/medbay)
+"dm" = (/obj/machinery/door/airlock/halo_maint,/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dn" = (/obj/structure/closet/crate,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/item/weapon/storage/belt/marine_ammo,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"do" = (/obj/structure/closet/crate,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/storage/belt/marine_medic,/turf/simulated/floor/tiled,/area/asteroid_base/east_dorms)
+"dp" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "2-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dq" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dr" = (/obj/structure/cable/orange{icon_state = "1-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ds" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 6},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dt" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (EAST)"; icon_state = "cooling_manifold"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"du" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 10},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dv" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 6},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dw" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dx" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dy" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/power/smes/buildable/max_cap_in_out,/obj/structure/cable/orange,/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dz" = (/obj/machinery/power/terminal{dir = 8},/obj/structure/cable/orange{d1 = 2; d2 = 16; icon_state = "0-2"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dA" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (NORTH)"; icon_state = "cooling_manifold"; dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dB" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/orange{icon_state = "0-4"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dC" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 5; icon_state = "intact"; tag = "icon-intact (SOUTHWEST)"},/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dD" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 4},/obj/structure/cable/orange{tag = "icon-2-8"; icon_state = "2-8"},/obj/structure/cable/orange{icon_state = "2-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dE" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 10},/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dF" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/orange{icon_state = "0-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dG" = (/obj/machinery/atmospherics/binary/fusion_cooling,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dH" = (/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dI" = (/obj/effect/landmark/start/Insurrectionist_Leader,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dJ" = (/obj/machinery/light/small{dir = 8},/obj/machinery/power/smes/buildable/max_cap_in_out,/obj/structure/cable/orange,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dK" = (/obj/machinery/power/terminal{dir = 8},/obj/structure/cable/orange{d1 = 2; d2 = 16; icon_state = "0-2"},/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dL" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dM" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dN" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 4},/obj/machinery/meter,/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dO" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{dir = 8},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dP" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 9},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dQ" = (/obj/effect/landmark/innie_bomb,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dR" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "1-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dS" = (/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dT" = (/obj/structure/cable/orange{icon_state = "4-8"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dU" = (/obj/machinery/atmospherics/pipe/simple/visible/blue,/obj/structure/cable/orange{icon_state = "1-8"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dV" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 5; icon_state = "intact"; tag = "icon-intact (SOUTHWEST)"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dW" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 10},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dX" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"dY" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light,/turf/simulated/floor/plating,/area/asteroid_base/east_dorms)
+"dZ" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ea" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue{dir = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"eb" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ec" = (/obj/machinery/atmospherics/pipe/manifold/visible/blue,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ed" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8; target_pressure = 15000},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ee" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/red,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ef" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{tag = "icon-map (NORTH)"; icon_state = "map"; dir = 1},/obj/machinery/meter,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"eg" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"eh" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/obj/effect/floor_decal/industrial/outline/blue,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ei" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ej" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"ek" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"el" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"em" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"BP" = (/obj/structure/cable/orange{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"Yl" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "0-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababacacacacacacacacacacacababababab
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadaeadadafafafabababababababacagahahagagahahahahacababababab
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaiajajakalamalahahafabababababababacagacacacacacacacagacababababab
+aaaaaaaaaaaaaaaaaaaaaaaaadadaeadadajanajajajajajagahafacacacacacababacahacabababababacagacababababab
+aaaaaaaaaaaaaaaaaaaaaaaaadaiaoaladajajajajajajajagagafacapagahacacacacahacabababababacagacacacacacab
+aaaaaaaaaaaaaaaaaaaaaaaaadajaqajadanajajajarajajasagafacatauavahahagagahacabababababacahahahagagacab
+aaaaaaaaaaaaaaaaaaaaaaaaadalawajadaxalajajajajajasayafacahahahacacacacacacabababababacacacacacagacab
+aaaaaaaaaaaaaaaaaaaaaaadadadajadadalazajajajajajaAagafacacacacacababababababababababababababacahacab
+aaaaaaaaaaaaadaBadadadadadadaCadadadaDadaEaEaFadafafafafafafaGafafafafafafaHafafafafafafababacahacab
+aaaaaaaaaaaaadaIaEaFaJadadaFaEaFaFaFaFaFaFaEaFaFaKaLaLaLaKaMaKaLaKaKaKaKaKaKaKaKaKaKaNafababacahacab
+aaaaaaaaaaaaaOaEaEaFaJadadaFaFaFaFaFaFaFaFaFaFaFaLaLaKaKaKaKaKaKaKaKaKaLaLaLaLaPaKaKaLafababacagacab
+aaaaaaaaaaaaadaFaQadadadadaRaSadadadadadaFaFaFadafafafaTafafafafafafafafafafafafafaKaKafababacagacab
+aaaaaaaaaaaaadaUaUadadadadaRaVadaaaaaaadaFaFaFadababacaWacabababababababababababafaKaKafabacacagacab
+aaaaaaaaaaaaadaFaFaEaFaFaFaFaEadaaaaaaadaFaFaQadabacacaWacacababababababababababafaKaKafacacaXaYacab
+aaaaaaaaaaaaaZaEaEaEaFaFaEaFaFadaaaaaaadaFaEaEadabacaWbabbacababababababababababafaKbcbdagahahauacab
+aaaaaaaaaaaaadaFaFadadadaBadadadaaaaaaaOaFaFaFadabacbebfaWacababababababababababafaKaLafacacbgbhacab
+aaaaaaaaaaaaadaFaFadaaaaaaaaaaaaaaaaaaadaFaFaFadabacaWbiaWacababababababababababafbjaKafabacacahacab
+aaaaaaaaaaaaadaFaFadaaaaaaaaaaaaaaaaaaadaFaFaFbkabacacaWacacababababababababababafaKaKafababacagacab
+aaaaaaadadadadaFaQadadadadadadadadadadadaFaEaEadafafafaTafafafafafafafaHafafafafafaKaKafababacagacab
+aaaaaaadblaFaFaEaEaFaFaFaFaFaFaFbmaFaFaFaFaEaFaFaKaLaLaKaKaMaLaLaKaKaKaKaKaKaKaKaLaKaKafababacagacab
+aaaaaaadaFaEaFaEaFaFaFaFaFaFaFaFaFaFaFaFaEaFaFaFaPaLaKaKaKaKaLaKaKaKaKaKaLbnaKaKbcaKaKafababacahacab
+aaaaaaadaEaEadadbobpadadadadadadadadadadaFaFaFadafafafafafafafafaGafafafafafafafbdafafafababacagacab
+aaaaaaadaEaFadbqbrbsbrbtadaaaaaaaaaaaaaBaFaFaFadbubvbwbxbybzbAafabababababababacahacacacacacacagacab
+aaaaaaadbBaFadbCbrbDbrbEadaaaaaaaaaaaaadaFaEaEadbFbvbvbzbzbzbzafabababababababacahahahagagagahahacab
+bGbGbGbHbIbIbJbKbLbMbLbNbJbGbGbGbGbGbGbObIbPbIbQbRbRbRbRbRbSbRbTbUbUbUbUbUbUbUbVbWbVbVbVbVbVbVbVbVbU
+bGbGbGbJbIbIbJbXbLbYbZcabJbGbGbGbGbGbGbJcbbIbIbJbRbRbRbRbRcccdcebUbUbUbUbUbUbUbVcfbVbUbUbUbUbUbUbUbU
+bGbGbGbJbPbPbJcgbLbLbLchbJbGbGbGbGbGbGbJbIbIbIbJcibScjbRckccclcebUbVbVbVbVbVbVbVcfbVbUbUbUbUbUbUbUbU
+bGbGbGbJbIbIbJbJbJcmcnbJbJbJbJbJbJbJbJbJbIbIbIbJcecececececececebUbVcobWcfcfbWbWcfbVbUbUbUbUbUbUbUbU
+bGbGbGbJbIbIbIbIbIbPbIcpbIbPbIbIbIbPbIbIbIbPbPbJbVbVbVbVbVbVbVbVbVbVbWbVbVbVbVbVbVbVbUbUbUbUbUbUbUbU
+bGbGbGbJcqcqbIbIbPbPbIbIcrbPbPbPbIcsbIbIbPbPctcucfcfbWbWcfcfcfbWbWcfcfbVbUbUbUbUbUbUbUbUbUbUbUbUbUbU
+bGbGbGbJbIbPbJbJbJbJbIbIbJbJbJbJbJbJbJbJbIbIbIbJbVbVbVbVbVbVbVbVbVbVcfbVbUbUbUbUbUbUbUbUbUbUbUbUbUbU
+bGbGbGbJcvbIbIcwbJbJbPbPbJbGbGbGbGbGbGbJbIbIbIbJcecxcecececececebUbVcfbVbUbUbUbUbUbUbUbUbUbUbUbUbUbU
+bGbGbGbObPbIbIcwbJbHbIbPbJbGbGbGbGbGbGcybIbIczbJcAcBcCcDcEcFcGcebUbVbWbVbVbVbVbVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbJbPbPbJbJbJbJbIbIbJbJbJbObJbJbJbJbIbIbIcHcIcBcJcBcBcBcBcebUbVbWcfcfcfcKbVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbJcLcLbIbIbIbIbIcrbIbPbIbIbIbIbIbPbIbIbIcMcBcBcJcBcBcBcNcebUbVbVbVbVbVbWbVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbJbIbIbIcscObPbIbIbIcObIbIcPbPbPbIbIctbIbJcBcBcJcJcBcBcJcebUbUbUbUbUbVcfbVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbJbJbJbJbJbJbJcQbJbJbJbJbJbJbJbJbJbJcubJbJcRcScTcBcUcVcWcebUbUbUbUbUbVcfbVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbGbGbGbGbJcXcYbLcZdabJbGbGbGbGbGbGdbdcdbbJcecececececececebUbUbUbUbUbVbWbVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbGbGbGbGbJdddebLbZbLbJbGbGbGbGbGbGdbdcdbbGbUbUbUbUbVbVbVbVbVbVbVbVbVbVBPbVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbGbGbGbGbJdfcYbLcZdgbJbGbGbGbGbGbGdbdcdbbGbUbUbUbUbVdhbWbWbWcfbWbWbWYldibVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbGbGbGbGbJbZbLbLdedjbJbGbGbGbGbGbGdbdkdbbGbUbUbUbUbVcfbVbVbVbVbVbVbVdldmbVbVbVbVbVbVbVbVbVbUbU
+bGbGbGbGbGbGbGbJdncZbLcYdobJbGbGbGbGbGbGdbdkdbbGbUbUbUbUbVbWbVbUbUbUbUbVdpdqdrdsdtdudvdwdtdxbWbVbUbU
+bGbGbGbGbGbGbGbJbJbJcMbJbJbJbGbGbGbGbGbGdbdkdbdbbVbVbVbVbVbWbVbUbUbUbUbVdydzbWdAdBdCdDdEdFdGcfbVbUbU
+bGbGbGbGbGbGbGbGbJdHdIdcbJbGbGbGbGbGbGbGdbdkdkdkcfcfcfbWbWbWbVbUbUbUbUbVdJdKcfdLdMdwdNdOdMdPbWbVbUbU
+bGbGbGbGbGbGbGbGbJdkdQdcbJbGbGbGbGbGbGbGdbdbdbdbbVbVbVbVbVbVbVbUbUbUbUbVcfdRdSdSdSdTdUdVdWbWdXbVbUbU
+bGbGbGbGbGbGbGbGbJdkdYdkbJbGbGbGbGbGbGbGbGbGbGbGbUbUbUbUbUbUbUbUbUbUbUbVbWbWdsdZeaebecedeeefdubVbUbU
+bGbGbGbGbGbGbGbGbJbJbJbJbJbGbGbGbGbGbGbGbGbGbGbGbUbUbUbUbUbUbUbUbUbUbUbVcfbWegeheheiejekelemelbVbUbU
+bGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbUbUbUbUbUbUbUbUbUbUbUbVbVbVbVbVbVbVbVbVbVbVbVbVbUbU
+bGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbU
+"}
+

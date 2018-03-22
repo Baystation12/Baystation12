@@ -2447,7 +2447,6 @@
 #include "code\modules\turbolift\turbolift_console.dm"
 #include "code\modules\turbolift\turbolift_door.dm"
 #include "code\modules\turbolift\turbolift_floor.dm"
-#include "code\modules\turbolift\turbolift_map.dm"
 #include "code\modules\turbolift\turbolift_process.dm"
 #include "code\modules\turbolift\turbolift_turfs.dm"
 #include "code\modules\vehicles\bike.dm"
