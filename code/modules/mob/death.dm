@@ -68,6 +68,8 @@
 	set_see_in_dark(8)
 	set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 
+	verbs += /mob/living/verb/ghost
+
 	drop_r_hand()
 	drop_l_hand()
 
