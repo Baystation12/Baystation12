@@ -1418,7 +1418,7 @@
 	filling_color = "#7a3d11"
 	center_of_mass = "x=16;y=13"
 
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/plainsteak/New()
 		..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
 		bitesize = 3
