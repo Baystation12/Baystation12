@@ -150,6 +150,7 @@
 	target_types += /obj/effect/decal/cleanable/liquid_fuel
 	target_types += /obj/effect/decal/cleanable/mucus
 	target_types += /obj/effect/decal/cleanable/dirt
+	target_types += /obj/effect/decal/cleanable/fruit_smudge
 
 	if(blood)
 		target_types += /obj/effect/decal/cleanable/blood
