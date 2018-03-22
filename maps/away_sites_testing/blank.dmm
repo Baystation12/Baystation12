@@ -1,0 +1,19 @@
+"a" = (/turf/space,/area/space)
+"b" = (/turf/simulated/wall,/area/space)
+"c" = (/turf/simulated/floor/tiled,/area/space)
+"d" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/space)
+"e" = (/obj/effect/landmark/start{name = "JoinLate"},/turf/simulated/floor/tiled,/area/space)
+"f" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
+
+(1,1,1) = {"
+aaaabbbbbb
+aaaabccccb
+aaaabcdccb
+aaaabccccb
+aaaabecccb
+aaaabbbbbb
+aaaaaaaaaa
+aaaaaaaaaa
+afaaaaaaaa
+aaaaaaaaaa
+"}

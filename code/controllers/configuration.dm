@@ -158,6 +158,7 @@ var/list/gamemode_cache = list()
 	var/login_export_addr = null
 
 	var/enter_allowed = 1
+	var/player_limit = 0
 
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
@@ -195,8 +196,6 @@ var/list/gamemode_cache = list()
 
 	var/aggressive_changelog = 0
 
-	var/list/language_prefixes = list(",","#","-")//Default language prefixes
-
 	var/ghosts_can_possess_animals = 0
 	var/delist_when_no_admins = FALSE
 
@@ -205,8 +204,9 @@ var/list/gamemode_cache = list()
 	var/wait_for_sigusr1_reboot = 0 // Don't allow reboot unless it was caused by SIGUSR1
 
 	var/radiation_decay_rate = 1 //How much radiation is reduced by each tick
-	var/radiation_resistance_multiplier = 6.5
-	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
+	var/radiation_resistance_multiplier = 1.25
+	var/radiation_material_resistance_divisor = 2 //A turf's possible radiation resistance is divided by this number, to get the real value.
+	var/radiation_lower_limit = 0.15 //If the radiation level for a turf would be below this, ignore it.
 
 	var/autostealth = 0 // Staff get automatic stealth after this many minutes
 
@@ -678,11 +678,6 @@ var/list/gamemode_cache = list()
 				if("aggressive_changelog")
 					config.aggressive_changelog = 1
 
-				if("default_language_prefixes")
-					var/list/values = splittext(value, " ")
-					if(values.len > 0)
-						language_prefixes = values
-
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE
 
@@ -715,6 +710,18 @@ var/list/gamemode_cache = list()
 					max_gear_cost = text2num(value)
 					if(max_gear_cost < 0)
 						max_gear_cost = INFINITY
+				if("radiation_decay_rate")
+					radiation_decay_rate = text2num(value)
+				if("radiation_resistance_multiplier")
+					radiation_resistance_multiplier = text2num(value)
+				if("radiation_material_resistance_divisor")
+					radiation_material_resistance_divisor = text2num(value)
+				if("radiation_lower_limit")
+					radiation_lower_limit = text2num(value)
+				if("player_limit")
+					player_limit = text2num(value)
+				if("hub")
+					world.update_hub_visibility()
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

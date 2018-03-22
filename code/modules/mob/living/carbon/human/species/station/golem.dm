@@ -7,7 +7,7 @@
 
 	language = "Sol Common" //todo?
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
-	flags = NO_PAIN | NO_SCAN | NO_POISON
+	species_flags = SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_POISON
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 
@@ -29,5 +29,5 @@
 		H.mind.assigned_role = "Golem"
 		H.mind.special_role = "Golem"
 	H.real_name = "adamantine golem ([rand(1, 1000)])"
-	H.name = H.real_name
+	H.SetName(H.real_name)
 	..()

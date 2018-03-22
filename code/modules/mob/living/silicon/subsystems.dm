@@ -102,4 +102,7 @@
 	. = ..()
 
 /stat_silicon_subsystem/Click(var/mob/given = usr)
-	subsystem.ui_interact(given, state = ui_state)
+	if (istype(given))
+		subsystem.ui_interact(given, state = ui_state)
+	else
+		subsystem.ui_interact(usr, state = ui_state)

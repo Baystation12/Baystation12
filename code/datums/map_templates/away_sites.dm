@@ -1,1 +1,0 @@
-// Hey! Listen! Update \config\away_site_blacklist.txt with your new ruins!

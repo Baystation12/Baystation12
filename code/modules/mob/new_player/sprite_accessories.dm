@@ -34,6 +34,8 @@
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
 
+	var/blend = ICON_ADD
+
 
 /*
 ////////////////////////////
@@ -52,7 +54,7 @@
 	name = "Bald"
 	icon_state = "bald"
 	gender = MALE
-	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_VOX)
 	flags = VERY_SHORT
 
 /datum/sprite_accessory/hair/short
@@ -63,6 +65,7 @@
 /datum/sprite_accessory/hair/twintail
 	name = "Twintail"
 	icon_state = "hair_twintail"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/short2
 	name = "Short Hair 2"
@@ -76,26 +79,32 @@
 /datum/sprite_accessory/hair/flair
 	name = "Flaired Hair"
 	icon_state = "hair_flair"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/long
 	name = "Shoulder-length Hair"
 	icon_state = "hair_b"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/longer
 	name = "Long Hair"
 	icon_state = "hair_vlong"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/longest
 	name = "Very Long Hair"
 	icon_state = "hair_longest"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/longfringe
 	name = "Long Fringe"
 	icon_state = "hair_longfringe"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/longestalt
 	name = "Longer Fringe"
 	icon_state = "hair_vlongfringe"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/halfbang
 	name = "Half-banged Hair"
@@ -108,35 +117,42 @@
 /datum/sprite_accessory/hair/ponytail1
 	name = "Ponytail 1"
 	icon_state = "hair_ponytail"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/ponytail2
 	name = "Ponytail 2"
 	icon_state = "hair_pa"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/ponytail3
 	name = "Ponytail 3"
 	icon_state = "hair_ponytail3"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/ponytail4
 	name = "Ponytail 4"
 	icon_state = "hair_ponytail4"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/ponytail5
 	name = "Ponytail 5"
 	icon_state = "hair_ponytail5"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/ponytail6
 	name = "Ponytail 6"
 	icon_state = "hair_ponytail6"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/sideponytail
 	name = "Side Ponytail"
 	icon_state = "hair_stail"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/parted
 	name = "Parted"
@@ -168,11 +184,13 @@
 /datum/sprite_accessory/hair/bedhead3
 	name = "Bedhead 3"
 	icon_state = "hair_bedheadv3"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/beehive
 	name = "Beehive"
 	icon_state = "hair_beehive"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/beehive2
 	name = "Beehive 2"
@@ -184,18 +202,21 @@
 	icon_state = "hair_bobcurl"
 	gender = FEMALE
 	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/bob
 	name = "Bob"
 	icon_state = "hair_bobcut"
 	gender = FEMALE
 	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/bobcutalt
 	name = "Chin Length Bob"
 	icon_state = "hair_bobcutalt"
 	gender = FEMALE
 	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI)
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/bowl
 	name = "Bowl"
@@ -283,22 +304,26 @@
 	name = "Long Emo"
 	icon_state = "hair_emolong"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/shortovereye
 	name = "Overeye Short"
 	icon_state = "hair_shortovereye"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/longovereye
 	name = "Overeye Long"
 	icon_state = "hair_longovereye"
+	flags = HAIR_TIEABLE
 
-/datum/sprite_accessory/hair/fag
+/datum/sprite_accessory/hair/flow
 	name = "Flow Hair"
 	icon_state = "hair_f"
 
 /datum/sprite_accessory/hair/feather
 	name = "Feather"
 	icon_state = "hair_feather"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/hitop
 	name = "Hitop"
@@ -324,6 +349,7 @@
 	name = "Gentle"
 	icon_state = "hair_gentle"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/spiky
 	name = "Spiky"
@@ -338,31 +364,37 @@
 	name = "Pigtails"
 	icon_state = "hair_kagami"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/himecut
 	name = "Hime Cut"
 	icon_state = "hair_himecut"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/shorthime
 	name = "Short Hime Cut"
 	icon_state = "hair_shorthime"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/grandebraid
 	name = "Grande Braid"
 	icon_state = "hair_grande"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/mbraid
 	name = "Medium Braid"
 	icon_state = "hair_shortbraid"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/braid2
 	name = "Long Braid"
 	icon_state = "hair_hbraid"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/braid
 	name = "Floorlength Braid"
@@ -374,16 +406,19 @@
 	name = "Odango"
 	icon_state = "hair_odango"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/ombre
 	name = "Ombre"
 	icon_state = "hair_ombre"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/updo
 	name = "Updo"
 	icon_state = "hair_updo"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/skinhead
 	name = "Skinhead"
@@ -405,11 +440,13 @@
 	name = "Drillruru"
 	icon_state = "hair_drillruru"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/fringetail
 	name = "Fringetail"
 	icon_state = "hair_fringetail"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/dandypomp
 	name = "Dandy Pompadour"
@@ -420,6 +457,7 @@
 	name = "Poofy"
 	icon_state = "hair_poofy"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/crono
 	name = "Chrono"
@@ -450,6 +488,7 @@
 	name = "Nitori"
 	icon_state = "hair_nitori"
 	gender = FEMALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/joestar
 	name = "Joestar"
@@ -459,30 +498,48 @@
 /datum/sprite_accessory/hair/volaju
 	name = "Volaju"
 	icon_state = "hair_volaju"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/longeralt2
 	name = "Long Hair Alt 2"
 	icon_state = "hair_longeralt2"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/shortbangs
 	name = "Short Bangs"
 	icon_state = "hair_shortbangs"
 
+/datum/sprite_accessory/hair/shavedbun
+	name = "Shaved Bun"
+	icon_state = "hair_shavedbun"
+
 /datum/sprite_accessory/hair/halfshaved
-	name = "Half-Shaved Emo"
+	name = "Half-Shaved"
 	icon_state = "hair_halfshaved"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/halfshavedemo
+	name = "Half-Shaved Emo"
+	icon_state = "hair_halfshavedemo"
+
+/datum/sprite_accessory/hair/longsideemo
+	name = "Long Side Emo"
+	icon_state = "hair_longsideemo"
 
 /datum/sprite_accessory/hair/bun
 	name = "Low Bun"
 	icon_state = "hair_bun"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/bun2
 	name = "High Bun"
 	icon_state = "hair_bun2"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/doublebun
 	name = "Double-Bun"
 	icon_state = "hair_doublebun"
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/lowfade
 	name = "Low Fade"
@@ -493,6 +550,7 @@
 /datum/sprite_accessory/hair/medfade
 	name = "Medium Fade"
 	icon_state = "hair_medfade"
+	flags = VERY_SHORT
 
 /datum/sprite_accessory/hair/highfade
 	name = "High Fade"
@@ -534,7 +592,7 @@
 	name = "Tight Bun"
 	icon_state = "hair_tightbun"
 	gender = FEMALE
-	flags = VERY_SHORT
+	flags = VERY_SHORT | HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/coffeehouse
 	name = "Coffee House Cut"
@@ -585,11 +643,13 @@
 	name = "Topknot"
 	icon_state = "hair_topknot"
 	gender = MALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/ronin
 	name = "Ronin"
 	icon_state = "hair_ronin"
 	gender = MALE
+	flags = HAIR_TIEABLE
 
 /datum/sprite_accessory/hair/bowlcut2
 	name = "Bowl2"
@@ -618,7 +678,65 @@
 	name = "Manbun"
 	icon_state = "hair_manbun"
 	gender = MALE
+	flags = HAIR_TIEABLE
 
+/datum/sprite_accessory/hair/leftsidecut
+	name = "Left Sidecut"
+	icon_state = "hair_leftside"
+
+/datum/sprite_accessory/hair/rightsidecut
+	name = "Right Sidecut"
+	icon_state = "hair_rightside"
+
+/datum/sprite_accessory/hair/slick
+	name = "Slick"
+	icon_state = "hair_slick"
+
+/datum/sprite_accessory/hair/messyhair
+	name = "Messy"
+	icon_state = "hair_messyhair"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/averagejoe
+	name = "Average Joe"
+	icon_state = "hair_averagejoe"
+
+/datum/sprite_accessory/hair/sideswept
+	name = "Sideswept Hair"
+	icon_state = "hair_sideswept"
+
+/datum/sprite_accessory/hair/mohawkshaved
+	name = "Shaved Mohawk"
+	icon_state = "hair_mohawkshaved"
+
+/datum/sprite_accessory/hair/mohawkshaved2
+	name = "Tight Shaved Mohawk"
+	icon_state = "hair_mohawkshaved2"
+
+/datum/sprite_accessory/hair/mohawkshavednaomi
+	name = "Naomi Mohawk"
+	icon_state = "hair_mohawkshavednaomi"
+
+/datum/sprite_accessory/hair/amazon
+	name = "Amazon"
+	icon_state = "hair_amazon"
+
+/datum/sprite_accessory/hair/straightlong
+	name = "Straight Long"
+	icon_state = "hair_straightlong"
+	flags = HAIR_TIEABLE
+
+/datum/sprite_accessory/hair/marysue
+	name = "Mary Sue"
+	icon_state = "hair_marysue"
+
+/datum/sprite_accessory/hair/messyhair2
+	name = "Messy Hair 2"
+	icon_state = "hair_messyhair2"
+
+/datum/sprite_accessory/hair/buzzcut2
+	name = "Buzzcut 2"
+	icon_state = "hair_buzzcut2"
 
 /*
 ///////////////////////////////////
@@ -752,6 +870,18 @@
 	name = "Chinless Beard"
 	icon_state = "facial_chinlessbeard"
 
+/datum/sprite_accessory/facial_hair/braided
+	name = "Braided Beard"
+	icon_state = "facial_biker"
+
+/datum/sprite_accessory/facial_hair/seadog
+	name = "Sea Dog"
+	icon_state = "facial_seadog"
+
+/datum/sprite_accessory/facial_hair/lumberjack
+	name = "Lumberjack"
+	icon_state = "facial_lumberjack"
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
@@ -784,6 +914,25 @@
 	name = "Unathi Horns"
 	icon_state = "soghun_horns"
 	species_allowed = list(SPECIES_UNATHI)
+
+/datum/sprite_accessory/hair/una
+	name = "Demon Horns"
+	icon = 'icons/mob/lizard_face.dmi'
+	icon_state = "demon_horn"
+	blend = ICON_MULTIPLY
+	species_allowed = list(SPECIES_UNATHI)
+
+/datum/sprite_accessory/hair/una/swept_horn
+	name = "Swept Horns"
+	icon_state = "swept_horn"
+
+/datum/sprite_accessory/hair/una/ram_horn
+	name = "Ram Horns"
+	icon_state = "ram_horn"
+
+/datum/sprite_accessory/hair/una/fin_hawk
+	name = "Fin Hawk"
+	icon_state = "fin_hawk"
 
 /datum/sprite_accessory/hair/skr_tentacle_m
 	name = "Skrell Male Tentacles"
@@ -857,29 +1006,9 @@
 	icon_state = "hair_messy"
 	species_allowed = list(SPECIES_TAJARA)
 
-/datum/sprite_accessory/hair/taj_ears_curls
-	name = "Tajara Curly"
-	icon_state = "hair_curly"
-	species_allowed = list(SPECIES_TAJARA)
-
-/datum/sprite_accessory/hair/taj_ears_wife
-	name = "Tajara Housewife"
-	icon_state = "hair_wife"
-	species_allowed = list(SPECIES_TAJARA)
-
-/datum/sprite_accessory/hair/taj_ears_victory
-	name = "Tajara Victory Curls"
-	icon_state = "hair_victory"
-	species_allowed = list(SPECIES_TAJARA)
-
 /datum/sprite_accessory/hair/taj_ears_bob
 	name = "Tajara Bob"
 	icon_state = "hair_tbob"
-	species_allowed = list(SPECIES_TAJARA)
-
-/datum/sprite_accessory/hair/taj_ears_fingercurl
-	name = "Tajara Finger Curls"
-	icon_state = "hair_fingerwave"
 	species_allowed = list(SPECIES_TAJARA)
 
 /datum/sprite_accessory/hair/vox_quills_long
@@ -963,6 +1092,8 @@
 /datum/sprite_accessory/marking
 	icon = 'icons/mob/human_races/markings.dmi'
 	do_colouration = 1 //Almost all of them have it, COLOR_ADD
+
+	var/layer_blend = ICON_OVERLAY
 
 	//Empty list is unrestricted. Should only restrict the ones that make NO SENSE on other species,
 	//like Tajara inner-ear coloring overlay stuff.

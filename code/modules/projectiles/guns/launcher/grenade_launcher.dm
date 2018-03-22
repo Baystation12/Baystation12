@@ -3,6 +3,7 @@
 	desc = "A bulky pump-action grenade launcher. Holds up to 6 grenades in a revolving magazine."
 	icon_state = "riotgun"
 	item_state = "riotgun"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 3)
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 
@@ -11,6 +12,7 @@
 	screen_shake = 0
 	throw_distance = 7
 	release_force = 5
+	combustion = 1
 
 	var/obj/item/weapon/grenade/chambered
 	var/list/grenades = new/list()

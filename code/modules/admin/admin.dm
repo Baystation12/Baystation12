@@ -784,11 +784,14 @@ var/global/floorIsLava = 0
 	if(!check_rights(R_ADMIN))
 		return
 
-	world.visibility = !(world.visibility)
-	var/long_message = " toggled hub visibility.  The server is now [world.visibility ? "visible" : "invisible"] ([world.visibility])."
+	//BYOND hates actually changing world.visibility at runtime, so let's just change if we give it the hub password.
+	world.update_hub_visibility() //proc defined in hub.dm
+	var/long_message = "toggled hub visibility. The server is now [GLOB.visibility_pref ? "visible" : "invisible"] ([GLOB.visibility_pref])."
+	if (GLOB.visibility_pref && !world.reachable)
+		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
 
 	send2adminirc("[key_name(src)]" + long_message)
-	log_and_message_admins("toggled hub visibility.")
+	log_and_message_admins(long_message)
 	feedback_add_details("admin_verb","THUB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
 /datum/admins/proc/toggletraitorscaling()
@@ -1455,7 +1458,7 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 /datum/admins/proc/faxCallback(var/obj/item/weapon/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
 	var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
-	P.name = "[P.origin] - [customname]"
+	P.SetName("[P.origin] - [customname]")
 	P.desc = "This is a paper titled '" + P.name + "'."
 
 	var/shouldStamp = 1

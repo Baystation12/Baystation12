@@ -59,7 +59,6 @@
 	icon_screen = initial(icon_screen)
 	if(!(stat & (BROKEN|NOPOWER)))
 		if(alarm_monitor)
-			var/list/alarms = alarm_monitor.major_alarms()
-			if(alarms.len)
+			if(alarm_monitor.has_major_alarms(get_z(src)))
 				icon_screen = "alert:2"
 	..()

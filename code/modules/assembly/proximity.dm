@@ -4,7 +4,7 @@
 	icon_state = "prox"
 	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 800, "glass" = 200, "waste" = 50)
-	flags = PROXMOVE
+	movable_flags = MOVABLE_FLAG_PROXMOVE
 	wires = WIRE_PULSE
 
 	secured = 0

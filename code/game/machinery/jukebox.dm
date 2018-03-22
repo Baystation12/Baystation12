@@ -38,6 +38,7 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Part A", 'sound/misc/TestLoop1.ogg'),
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
+		new/datum/track("Lasers", 'sound/music/lasers_rip_apart_the_bulkhead_looped.ogg'),
 	)
 
 /obj/machinery/media/jukebox/New()
@@ -173,9 +174,8 @@ datum/track/New(var/title_name, var/audio)
 	qdel(src)
 
 /obj/machinery/media/jukebox/attackby(obj/item/W as obj, mob/user as mob)
-	src.add_fingerprint(user)
-
-	if(istype(W, /obj/item/weapon/wrench))
+	if(isWrench(W))
+		add_fingerprint(user)
 		wrench_floor_bolts(user, 0)
 		power_change()
 		return

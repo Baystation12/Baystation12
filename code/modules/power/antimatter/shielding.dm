@@ -60,8 +60,7 @@ proc/cardinalrange(var/center)
 			spawn(20)
 				controllerscan(1)//Last chance
 			return
-		spawn(0)
-			qdel(src)
+		QDEL_IN(src, 0)
 	return
 
 
@@ -192,14 +191,14 @@ proc/cardinalrange(var/center)
 	icon_state = "box"
 	item_state = "electronic"
 	w_class = ITEM_SIZE_HUGE
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 2
 	matter = list(DEFAULT_WALL_MATERIAL = 100, "waste" = 2000)
 
 /obj/item/device/am_shielding_container/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/device/multitool) && istype(src.loc,/turf))
+	if(isMultitool(I) && istype(src.loc,/turf))
 		new/obj/machinery/am_shielding(src.loc)
 		qdel(src)
 		return

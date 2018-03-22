@@ -2,7 +2,7 @@
 	name = "Bot"
 	health = 20
 	maxHealth = 20
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/placeholder.dmi'
 	universal_speak = 1
 	density = 0
 	var/obj/item/weapon/card/id/botcard = null
@@ -36,6 +36,9 @@
 	var/target_patience = 5
 	var/frustration = 0
 	var/max_frustration = 0
+
+	plane = HIDING_MOB_PLANE
+	layer = HIDING_MOB_LAYER
 
 /mob/living/bot/New()
 	..()
@@ -91,7 +94,7 @@
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
-	else if(istype(O, /obj/item/weapon/screwdriver))
+	else if(isScrewdriver(O))
 		if(!locked)
 			open = !open
 			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
@@ -99,7 +102,7 @@
 		else
 			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return
-	else if(istype(O, /obj/item/weapon/weldingtool))
+	else if(isWelder(O))
 		if(health < maxHealth)
 			if(open)
 				health = min(maxHealth, health + 10)
@@ -406,7 +409,7 @@
 		return 1
 
 	for(var/obj/O in B)
-		if(O.density && !istype(O, /obj/machinery/door) && !(O.flags & ON_BORDER))
+		if(O.density && !istype(O, /obj/machinery/door) && !(O.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 			return 1
 
 	return 0

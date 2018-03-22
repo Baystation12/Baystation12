@@ -10,7 +10,7 @@
 	description_fluff = "The common, every day multitool is descended from certain electrical tools from Earth's early space age. Though none too cheap, they are incredibly handy, and can be found in any self-respecting technician's toolbox."
 	description_antag = "This handy little tool can get you through doors, turn off power, and anything else you might need."
 	icon_state = "multitool"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 5.0

@@ -129,7 +129,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 /obj/machinery/requests_console/Topic(href, href_list)
 	if(..())	return
 	usr.set_machine(src)
-	add_fingerprint(usr)
 
 	if(reject_bad_text(href_list["write"]))
 		recipient = href_list["write"] //write contains the string of the receiving department's name

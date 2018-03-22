@@ -1,7 +1,7 @@
 /obj/item/device/chameleon
 	name = "chameleon projector"
 	icon_state = "shield0"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	item_state = "electronic"
 	throwforce = 5.0
@@ -49,7 +49,7 @@
 		var/obj/effect/overlay/T = new /obj/effect/overlay(get_turf(src))
 		T.icon = 'icons/effects/effects.dmi'
 		flick("emppulse",T)
-		spawn(8) qdel(T)
+		QDEL_IN(T, 8)
 	else
 		playsound(get_turf(src), 'sound/effects/pop.ogg', 100, 1, -6)
 		var/obj/O = new saved_item(src)
@@ -61,7 +61,7 @@
 		var/obj/effect/overlay/T = new/obj/effect/overlay(get_turf(src))
 		T.icon = 'icons/effects/effects.dmi'
 		flick("emppulse",T)
-		spawn(8) qdel(T)
+		QDEL_IN(T, 8)
 
 /obj/item/device/chameleon/proc/disrupt(var/delete_dummy = 1)
 	if(active_dummy)
@@ -140,7 +140,8 @@
 				spawn(20) can_move = 1
 			else
 				spawn(25) can_move = 1
-		step(src, direction)
+		if(isturf(loc))
+			step(src, direction)
 	return
 
 /obj/effect/dummy/chameleon/Destroy()

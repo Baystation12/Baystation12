@@ -479,6 +479,26 @@ datum/unit_test/ladder_check/start_test()
 		pass("All simple pipes faced an appropriate direction.")
 	return 1
 
+//=======================================================================================
+
+/datum/unit_test/shutoff_valves_shall_connect_to_two_different_pipe_networks
+	name = "MAP: Shutoff valves shall connect to two different pipe networks"
+
+/datum/unit_test/shutoff_valves_shall_connect_to_two_different_pipe_networks/start_test()
+	var/failures = 0
+	for(var/obj/machinery/atmospherics/valve/shutoff/SV in SSmachines.machinery)
+		SV.close()
+	for(var/obj/machinery/atmospherics/valve/shutoff/SV in SSmachines.machinery)
+		if(SV.network_node1 == SV.network_node2)
+			log_bad("Following shutoff valve does not connect to two different pipe networks: [log_info_line(SV)]")
+			failures++
+
+	if(failures)
+		fail("[failures] shutoff valves did not connect to two different pipe networks.")
+	else
+		pass("All shutoff valves connect to two different pipe networks.")
+	return 1
+
 
 #undef SUCCESS
 #undef FAILURE

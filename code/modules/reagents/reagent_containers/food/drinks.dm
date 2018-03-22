@@ -6,7 +6,7 @@
 	desc = "Yummy!"
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = null
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	amount_per_transfer_from_this = 5
 	volume = 50
 	var/filling_states   // List of percentages full that have icons
@@ -24,15 +24,10 @@
 /obj/item/weapon/reagent_containers/food/drinks/proc/open(mob/user)
 	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
 	to_chat(user, "<span class='notice'>You open \the [src] with an audible pop!</span>")
-	flags |= OPENCONTAINER
-
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/open(mob/user)
-	playsound(loc,'sound/effects/bonebreak1.ogg', rand(10,50), 1)
-	to_chat(user, "<span class='notice'>You twist open \the [src], destroying the safety seal!</span>")
-	flags |= OPENCONTAINER
+	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/reagent_containers/food/drinks/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(force && !(flags & NOBLUDGEON) && user.a_intent == I_HURT)
+	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)
 		return ..()
 
 	if(standard_feed_mob(user, M))
@@ -98,12 +93,15 @@
 	if(reagents.reagent_list.len > 0)
 		if(base_name)
 			var/datum/reagent/R = reagents.get_master_reagent()
-			name = "[base_name] of [R.glass_name ? R.glass_name : "something"]"
+			SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
 			desc = R.glass_desc ? R.glass_desc : initial(desc)
 		if(filling_states)
 			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
 			filling.color = reagents.get_color()
 			overlays += filling
+	else
+		SetName(initial(name))
+		desc = initial(desc)
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -121,7 +119,8 @@
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = null
 	volume = 150
-	flags = CONDUCT | OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 ///////////////////////////////////////////////Drinks
 //Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be ingested directly
@@ -243,6 +242,7 @@
 	desc = "A metal shaker to mix drinks in."
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = "5;10;15;25;30;60" //Professional bartender should be able to transfer as much as needed
 	volume = 120
 	center_of_mass = "x=17;y=10"
 
@@ -350,6 +350,17 @@
 	icon_state = "coffeecup_one"
 	base_name = "#1 cup"
 
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/punitelli
+	name = "#1 monkey coffee cup"
+	desc = "A white coffee cup, prominently featuring a \"#1 monkey\"."
+	icon_state = "coffeecup_punitelli"
+	base_name = "#1 monkey cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/coffeecup/punitelli/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/juice/banana, 30)
+	update_icon()
+
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/rainbow
 	name = "rainbow coffee cup"
 	desc = "A rainbow coffee cup. The colors are almost as blinding as a welder."
@@ -361,13 +372,14 @@
 	desc = "A metal coffee cup. You're not sure which metal."
 	icon_state = "coffeecup_metal"
 	base_name = "metal cup"
-	flags = CONDUCT | OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/STC
-	name = "STC coffee cup"
-	desc = "A coffee cup adorned with the flag of the Sovereign Terran Confederacy, for when you need some espionage charges to go with your morning coffee."
+	name = "TCC coffee cup"
+	desc = "A coffee cup adorned with the flag of the Terran Colonial Confederation, for when you need some espionage charges to go with your morning coffee."
 	icon_state = "coffeecup_STC"
-	base_name = "STC cup"
+	base_name = "TCC cup"
 
 /obj/item/weapon/reagent_containers/food/drinks/coffeecup/pawn
 	name = "pawn coffee cup"

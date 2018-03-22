@@ -118,12 +118,12 @@
 	. = ..()
 
 /obj/structure/sign/poster/proc/set_poster(var/datum/poster/design)
-	name = "[initial(name)] - [design.name]"
+	SetName("[initial(name)] - [design.name]")
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state // poster[serial_number]
 
 /obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wirecutters))
+	if(isWirecutter(W))
 		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		if(ruined)
 			to_chat(user, "<span class='notice'>You remove the remnants of the poster.</span>")
@@ -148,7 +148,7 @@
 		playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
 		ruined = 1
 		icon_state = "poster_ripped"
-		name = "ripped poster"
+		SetName("ripped poster")
 		desc = "You can't make out anything from the poster's original print. It's ruined."
 		add_fingerprint(user)
 

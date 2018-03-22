@@ -61,3 +61,8 @@
 	icon_state = "malf-singularity"
 	requires_malf = TRUE
 	icon_colorize = TRUE
+
+/decl/ai_holo/malftcc
+	icon_state = "malf-TCC"
+	requires_malf = TRUE
+	icon_colorize = TRUE

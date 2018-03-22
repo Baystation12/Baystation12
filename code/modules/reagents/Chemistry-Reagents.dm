@@ -74,7 +74,8 @@
 			if(CHEM_TOUCH)
 				affect_touch(M, alien, effective)
 
-	remove_self(removed)
+	if(volume)
+		remove_self(removed)
 	return
 
 /datum/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

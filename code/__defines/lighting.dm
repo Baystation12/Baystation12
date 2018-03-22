@@ -17,6 +17,8 @@
 
 #define LIGHTING_SOFT_THRESHOLD 0.05 // If the max of the lighting lumcounts of each spectrum drops below this, disable luminosity on the lighting overlays.  This also should be the transparancy of the "soft_dark" icon state.
 
+#define LIGHTING_MULT_FACTOR 0.5
+
 // If I were you I'd leave this alone.
 #define LIGHTING_BASE_MATRIX \
 	list                     \

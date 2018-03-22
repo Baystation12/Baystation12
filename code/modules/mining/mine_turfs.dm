@@ -8,9 +8,10 @@ var/list/mining_floors = list()
 	icon_state = "rock-dark"
 	blocks_air = 1
 	density = 1
+	opacity = 1
 
 /turf/simulated/mineral //wall piece
-	name = "Rock"
+	name = "rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock"
 	initial_gas = null
@@ -37,14 +38,17 @@ var/list/mining_floors = list()
 	has_resources = 1
 
 /turf/simulated/mineral/New()
-	mining_walls += src
+	if (!mining_walls["[src.z]"])
+		mining_walls["[src.z]"] = list()
+	mining_walls["[src.z]"] += src
 	spawn(0)
 		MineralSpread()
 	spawn(2)
 		update_icon(1)
 
 /turf/simulated/mineral/Destroy()
-	mining_walls -= src
+	if (mining_walls["[src.z]"])
+		mining_walls["[src.z]"] -= src
 	return ..()
 
 /turf/simulated/mineral/can_build_cable()
@@ -55,10 +59,10 @@ var/list/mining_floors = list()
 
 /turf/simulated/mineral/update_icon(var/update_neighbors)
 	if(!mineral)
-		name = "rock"
+		SetName(initial(name))
 		icon_state = "rock"
 	else
-		name = "[mineral.display_name] deposit"
+		SetName("[mineral.display_name] deposit")
 
 	overlays.Cut()
 
@@ -426,12 +430,15 @@ var/list/mining_floors = list()
 	has_resources = 1
 
 /turf/simulated/floor/asteroid/New()
-	mining_floors += src
+	if (!mining_floors["[src.z]"])
+		mining_floors["[src.z]"] = list()
+	mining_floors["[src.z]"] += src
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
 
 /turf/simulated/floor/asteroid/Destroy()
-	mining_floors -= src
+	if (mining_floors["[src.z]"])
+		mining_floors["[src.z]"] -= src
 	return ..()
 
 /turf/simulated/floor/asteroid/ex_act(severity)

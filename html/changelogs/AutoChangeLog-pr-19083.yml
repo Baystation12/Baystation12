@@ -1,4 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - tweak: "Ordering gun crates now requiers elevated alert level, Blue for small ones, Red for big guns."

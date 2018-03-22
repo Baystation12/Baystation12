@@ -126,6 +126,13 @@
 		/obj/item/weapon/reagent_containers/syringe
 	)
 
+/obj/item/weapon/storage/box/syndie_kit/syringegun
+	startswith = list(
+		/obj/item/weapon/gun/launcher/syringe/disguised,
+		/obj/item/weapon/syringe_cartridge = 4,
+		/obj/item/weapon/reagent_containers/syringe = 4
+	)
+
 /obj/item/weapon/storage/box/syndie_kit/cigarette
 	name = "\improper Tricky smokes"
 	desc = "Comes with the following brands of cigarettes, in this order: 2xFlash, 2xSmoke, 1xMindBreaker, 1xTricordrazine. Avoid mixing them up."

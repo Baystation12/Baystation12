@@ -22,6 +22,7 @@
 
 // Grab levels.
 #define NORM_PASSIVE    "normal passive"
+#define NORM_STRUGGLE   "normal struggle"
 #define NORM_AGGRESSIVE "normal aggressive"
 #define NORM_NECK       "normal neck"
 #define NORM_KILL       "normal kill"
@@ -42,8 +43,9 @@
 #define HOSTILE_STANCE_TIRED     5
 #define HOSTILE_STANCE_INSIDE    6
 
-#define LEFT  1
-#define RIGHT 2
+#define LEFT  0x1
+#define RIGHT 0x2
+#define UNDER 0x4
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.
@@ -115,6 +117,13 @@
 #define MOB_SMALL 		10
 #define MOB_TINY 		5
 #define MOB_MINISCULE	1
+
+// Defines how strong the species is compared to humans. Think like strength in D&D
+#define STR_VHIGH       2
+#define STR_HIGH        1
+#define STR_MEDIUM      0
+#define STR_LOW        -1
+#define STR_VLOW       -2
 
 // Gluttony levels.
 #define GLUT_TINY 1       // Eat anything tiny and smaller
@@ -241,20 +250,31 @@
 #define CORPSE_CAN_REENTER 1
 #define CORPSE_CAN_REENTER_AND_RESPAWN 2
 
-#define SPECIES_HUMAN "Human"
-#define SPECIES_TAJARA "Tajara"
-#define SPECIES_DIONA "Diona"
-#define SPECIES_VOX "Vox"
-#define SPECIES_IPC "Machine"
-#define SPECIES_UNATHI "Unathi"
-#define SPECIES_SKRELL "Skrell"
-#define SPECIES_NABBER "Giant Armoured Serpentid"
-#define SPECIES_PROMETHEAN "Promethean"
-#define SPECIES_BOGANI "Bogani"
-#define SPECIES_EGYNO "Egyno"
+#define SPECIES_HUMAN       "Human"
+#define SPECIES_TAJARA      "Tajara"
+#define SPECIES_DIONA       "Diona"
+#define SPECIES_VOX         "Vox"
+#define SPECIES_IPC         "Machine"
+#define SPECIES_UNATHI      "Unathi"
+#define SPECIES_SKRELL      "Skrell"
+#define SPECIES_NABBER      "Giant Armoured Serpentid"
+#define SPECIES_PROMETHEAN  "Promethean"
+#define SPECIES_BOGANI      "Bogani"
+#define SPECIES_EGYNO       "Egyno"
+#define SPECIES_XENO        "Xenophage"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
 #define SURGERY_RETRACTED 2
 #define SURGERY_ENCASED 3
 
+#define STASIS_MISC     "misc"
+#define STASIS_CRYOBAG  "cryobag"
+#define STASIS_COLD     "cold"
+
+#define AURA_CANCEL 1
+#define AURA_FALSE  2
+#define AURA_TYPE_BULLET "Bullet"
+#define AURA_TYPE_WEAPON "Weapon"
+#define AURA_TYPE_THROWN "Thrown"
+#define AURA_TYPE_LIFE   "Life"

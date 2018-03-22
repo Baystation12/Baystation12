@@ -4,15 +4,16 @@
 
 /obj/item/weapon/reagent_containers/hypospray //obsolete, use hypospray/vial for the actual hypospray item
 	name = "hypospray"
-	desc = "The DeForest Medical Corporation hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
+	desc = "The DeForest Medical Corporation, a subsidiary of Zeng-Hu Pharmaceuticals, hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "hypo"
 	icon_state = "hypo"
+	origin_tech = list(TECH_MATERIAL = 4, TECH_BIO = 5)
 	amount_per_transfer_from_this = 5
 	unacidable = 1
 	volume = 30
 	possible_transfer_amounts = null
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_BELT
 
 ///obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
@@ -60,7 +61,7 @@
 /obj/item/weapon/reagent_containers/hypospray/vial
 	name = "hypospray"
 	item_state = "autoinjector"
-	desc = "The DeForest Medical Corporation hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replacable 30u vial."
+	desc = "The DeForest Medical Corporation, a subsidiary of Zeng-Hu Pharmaceuticals, hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replacable 30u vial."
 	var/obj/item/weapon/reagent_containers/glass/beaker/vial/loaded_vial
 	volume = 0
 
@@ -92,7 +93,7 @@
 			if(!do_after(user,10) || loaded_vial || !(W in user))
 				return 0
 			if(W.is_open_container())
-				W.flags ^= OPENCONTAINER
+				W.atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 				W.update_icon()
 			user.drop_item()
 			W.forceMove(src)
@@ -114,6 +115,9 @@
 	item_state = "autoinjector"
 	amount_per_transfer_from_this = 5
 	volume = 5
+	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
+	slot_flags = SLOT_BELT | SLOT_EARS
+	w_class = ITEM_SIZE_TINY
 	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
@@ -126,7 +130,7 @@
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
 	..()
 	if(reagents.total_volume <= 0) //Prevents autoinjectors to be refilled.
-		flags &= ~OPENCONTAINER
+		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 	return
 

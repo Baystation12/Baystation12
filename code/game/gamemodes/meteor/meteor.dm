@@ -21,8 +21,8 @@
 
 	// Moved these from defines to variables, to allow for in-round tweaking via varedit:
 	var/time_between_waves_minutes = 2
-	var/escalation_probability = 50
-	var/maximal_severity = 40
+	var/escalation_probability = 90
+	var/maximal_severity = 80
 	var/send_admin_broadcasts = FALSE	// Enables debugging/information mode, sending admin messages when waves occur and when severity escalates.
 
 	event_delay_mod_moderate = 0.5		// As a bonus, more frequent events.
@@ -56,7 +56,7 @@
 		next_wave = round_duration_in_ticks + (meteor_wave_delay * time_between_waves_minutes)
 		// Starts as barely noticeable dust impact, ends as barrage of most severe meteor types the code has to offer. Have fun.
 		spawn()
-			spawn_meteors(meteor_severity, get_meteor_types(), pick(GLOB.cardinal))
+			spawn_meteors(meteor_severity, get_meteor_types(), pick(GLOB.cardinal), pick(GLOB.using_map.station_levels))
 		var/escalated = FALSE
 		if(prob(escalation_probability) && (meteor_severity < maximal_severity))
 			meteor_severity++

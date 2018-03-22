@@ -155,7 +155,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, "<span class='warning'>[T] is not compatible with our biology.</span>")
 		return
 
-	if(T.species.flags & NO_SCAN)
+	if(T.species.species_flags & SPECIES_FLAG_NO_SCAN)
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
 		return
 
@@ -272,6 +272,18 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.chem_charges -= 5
 	changeling.geneticdamage = 30
 
+	var/S_name = chosen_dna.speciesName
+	var/datum/species/S_dat = all_species[S_name]
+	var/changeTime = 2 SECONDS
+	if(mob_size != S_dat.mob_size)
+		src.visible_message("<span class='warning'>[src]'s body begins to twist, their mass changing rapidly!</span>")
+		changeTime = 8 SECONDS
+	else
+		src.visible_message("<span class='warning'>[src]'s body begins to twist, changing rapidly!</span>")
+
+	if(!do_after(src, changeTime))
+		to_chat(src, "<span class='notice'>You fail to change shape.</span>")
+		return
 	handle_changeling_transform(chosen_dna)
 
 	src.verbs -= /mob/proc/changeling_transform
@@ -589,6 +601,12 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!chosen_dna)
 		return
 
+	var/datum/species/spec = all_species[chosen_dna.speciesName]
+
+	if(spec && spec.species_flags & SPECIES_FLAG_NEED_DIRECT_ABSORB)
+		to_chat(src, "<span class='notice'>That species must be absorbed directly.</span>")
+		return
+
 	changeling.chem_charges -= 10
 	hivemind_bank += chosen_dna
 	to_chat(src, "<span class='notice'>We channel the DNA of [S] to the air.</span>")
@@ -686,10 +704,10 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!(T in view(changeling.sting_range))) return
 	if(!sting_can_reach(T, changeling.sting_range)) return
 	if(!changeling_power(required_chems)) return
-	if(T.isSynthetic())
-		to_chat(src, "<span class='warning'>[T] is not compatible with our biology.</span>")
+	var/obj/item/organ/external/target_limb = T.get_organ(src.zone_sel.selecting)
+	if (!target_limb)
+		to_chat(src, "<span class='warning'>[T] is missing that limb.</span>")
 		return
-
 	changeling.chem_charges -= required_chems
 	changeling.sting_range = 1
 	src.verbs -= verb_path
@@ -697,8 +715,15 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!loud)
 		to_chat(src, "<span class='notice'>We stealthily sting [T].</span>")
 	else
-		visible_message("<span class='danger'>[src] fires an organic shard into [T]'s chest, puncturing the stinger into their skin!</span>")
-	if(!T.mind || !T.mind.changeling)	return T	//T will be affected by the sting
+		visible_message("<span class='danger'>[src] fires an organic shard into [T]!</span>")
+
+	for(var/obj/item/clothing/clothes in list(T.head, T.wear_mask, T.wear_suit, T.w_uniform, T.gloves, T.shoes))
+		if(istype(clothes) && (clothes.body_parts_covered & target_limb.body_part) && (clothes.item_flags & ITEM_FLAG_THICKMATERIAL))
+			to_chat(src, "<span class='warning'>[T]'s armor has protected them.</span>")
+			return //thick clothes will protect from the sting
+
+	if(T.isSynthetic() || target_limb.isrobotic()) return
+	if(!T.mind || !T.mind.changeling) return T	//T will be affected by the sting
 	to_chat(T, "<span class='warning'>You feel a tiny prick.</span>")
 	return
 
@@ -781,9 +806,13 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 
 	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
 	if(!T)	return 0
-	if((HUSK in T.mutations) || (T.species.flags & NO_SCAN))
+	if((HUSK in T.mutations) || (T.species.species_flags & SPECIES_FLAG_NO_SCAN))
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
 		return 0
+
+	if(T.species.species_flags & SPECIES_FLAG_NEED_DIRECT_ABSORB)
+		to_chat(src, "<span class='notice'>That species must be absorbed directly.</span>")
+		return
 
 	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages)
 	absorbDNA(newDNA)

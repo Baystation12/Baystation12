@@ -19,7 +19,7 @@
 	if(W.sharp && W.edge && !sharp)
 		user.visible_message("<span class='warning'>[user] sharpens [src] with [W].</span>", "<span class='warning'>You sharpen [src] using [W].</span>")
 		sharp = 1 //Sharpen stick
-		name = "sharpened " + name
+		SetName("sharpened " + name)
 		update_force()
 	return ..()
 

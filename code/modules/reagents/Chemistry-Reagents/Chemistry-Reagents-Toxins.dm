@@ -291,7 +291,7 @@
 		return
 
 	var/mob/living/carbon/human/H = M
-	if(istype(H) && (H.species.flags & NO_SCAN))
+	if(istype(H) && (H.species.species_flags & SPECIES_FLAG_NO_SCAN))
 		return
 
 	if(M.dna)

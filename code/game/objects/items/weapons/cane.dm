@@ -4,7 +4,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"
 	item_state = "stick"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0
 	throwforce = 7.0
 	w_class = ITEM_SIZE_SMALL
@@ -49,10 +49,10 @@
 
 /obj/item/weapon/cane/concealed/update_icon()
 	if(concealed_blade)
-		name = initial(name)
+		SetName(initial(name))
 		icon_state = initial(icon_state)
 		item_state = initial(item_state)
 	else
-		name = "cane shaft"
+		SetName("cane shaft")
 		icon_state = "nullrod"
 		item_state = "foldcane"

@@ -86,7 +86,7 @@
 /obj/item/organ/external/diona/leg/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || agony_amount < 5)
 		return
-	if(prob(agony_amount*2))
+	if(prob(min(agony_amount*2,50)))
 		to_chat(owner, "<span class='warning'>Your [src] buckles from the shock!</span>")
 		owner.Weaken(5)
 
@@ -112,7 +112,7 @@
 /obj/item/organ/external/diona/foot/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || agony_amount < 5)
 		return
-	if(prob(agony_amount*4))
+	if(prob(min(agony_amount*4,50)))
 		to_chat(owner, "<span class='warning'>You lose your footing as your [src] spasms!</span>")
 		owner.Weaken(5)
 

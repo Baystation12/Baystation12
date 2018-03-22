@@ -50,7 +50,7 @@
 	icon_state = "lightreplacer0"
 	item_state = "electronic"
 
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 2)
 
@@ -127,14 +127,14 @@
 
 /obj/item/device/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
 
-	if(target.status == LIGHT_OK)
+	if(target.get_status() == LIGHT_OK)
 		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
 	else if(!CanUse(U))
 		to_chat(U, failmsg)
 	else if(Use(U))
 		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
 
-		if(target.status != LIGHT_EMPTY)
+		if(target.lightbulb)
 			target.remove_bulb()
 
 		var/obj/item/weapon/light/L = new target.light_type()

@@ -46,6 +46,63 @@ var/list/floor_decals = list()
 	initialized = TRUE
 	return INITIALIZE_HINT_QDEL
 
+/obj/effect/floor_decal/carpet
+	name = "brown carpet"
+	icon = 'icons/turf/flooring/carpet.dmi'
+	icon_state = "brown_edges"
+
+/obj/effect/floor_decal/carpet/blue
+	name = "blue carpet"
+	icon_state = "blue1_edges"
+
+/obj/effect/floor_decal/carpet/blue2
+	name = "pale blue carpet"
+	icon_state = "blue2_edges"
+
+/obj/effect/floor_decal/carpet/purple
+	name = "orange carpet"
+	icon_state = "purple_edges"
+
+/obj/effect/floor_decal/carpet/orange
+	name = "orange carpet"
+	icon_state = "orange_edges"
+
+/obj/effect/floor_decal/carpet/green
+	name = "green carpet"
+	icon_state = "green_edges"
+
+/obj/effect/floor_decal/carpet/red
+	name = "red carpet"
+	icon_state = "red_edges"
+
+/obj/effect/floor_decal/carpet/corners
+	name = "brown carpet"
+	icon_state = "brown_corners"
+
+/obj/effect/floor_decal/carpet/blue/corners
+	name = "blue carpet"
+	icon_state = "blue1_corners"
+
+/obj/effect/floor_decal/carpet/blue2/corners
+	name = "pale blue carpet"
+	icon_state = "blue2_corners"
+
+/obj/effect/floor_decal/carpet/purple/corners
+	name = "purple carpet"
+	icon_state = "purple_corners"
+
+/obj/effect/floor_decal/carpet/orange/corners
+	name = "orange carpet"
+	icon_state = "orange_corners"
+
+/obj/effect/floor_decal/carpet/green/corners
+	name = "green carpet"
+	icon_state = "green_corners"
+
+/obj/effect/floor_decal/carpet/red/corners
+	name = "red carpet"
+	icon_state = "red_corners"
+
 /obj/effect/floor_decal/corner
 	icon_state = "corner_white"
 	alpha = 229
@@ -348,27 +405,6 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/plaque
 	name = "plaque"
 	icon_state = "plaque"
-
-/obj/effect/floor_decal/carpet
-	name = "carpet"
-	icon = 'icons/turf/flooring/carpet.dmi'
-	icon_state = "carpet_edges"
-
-/obj/effect/floor_decal/carpet/blue
-	name = "turquoise carpet"
-	icon = 'icons/turf/flooring/carpet.dmi'
-	icon_state = "bcarpet_edges"
-
-/obj/effect/floor_decal/carpet/blue2
-	name = "blue carpet"
-	icon = 'icons/turf/flooring/carpet.dmi'
-	icon_state = "b2carpet_edges"
-
-
-/obj/effect/floor_decal/carpet/corners
-	name = "carpet"
-	icon = 'icons/turf/flooring/carpet.dmi'
-	icon_state = "carpet_corners"
 
 /obj/effect/floor_decal/asteroid
 	name = "random asteroid rubble"

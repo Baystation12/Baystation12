@@ -65,6 +65,9 @@ var/const/EXTRA_COST_FACTOR = 1.25
 /datum/autolathe/recipe/drinkingglass/wine
 	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/wine
 
+/datum/autolathe/recipe/drinkingglass/wine
+	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/carafe
+
 /datum/autolathe/recipe/flashlight
 	name = "flashlight"
 	path = /obj/item/device/flashlight
@@ -288,6 +291,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 	path = /obj/item/weapon/reagent_containers/syringe
 	category = "Medical"
 
+/datum/autolathe/recipe/implanter
+	name = "implanter"
+	path = /obj/item/weapon/implanter
+	category = "Medical"
+
 /datum/autolathe/recipe/syringegun_ammo
 	name = "syringe gun cartridge"
 	path = /obj/item/weapon/syringe_cartridge
@@ -301,31 +309,37 @@ var/const/EXTRA_COST_FACTOR = 1.25
 /datum/autolathe/recipe/shotgun_beanbag
 	name = "ammunition (shotgun, beanbag)"
 	path = /obj/item/ammo_casing/shotgun/beanbag
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/shotgun_flash
 	name = "ammunition (shotgun, flash)"
 	path = /obj/item/ammo_casing/shotgun/flash
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_rubber
 	name = "ammunition (.45, rubber)"
 	path = /obj/item/ammo_magazine/c45m/rubber
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/speedloader_44_rubber
 	name = "speed loader (.44 magnum, rubber)"
 	path = /obj/item/ammo_magazine/c44/rubber
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_flash
 	name = "ammunition (.45, flash)"
 	path = /obj/item/ammo_magazine/c45m/flash
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_smg_rubber
 	name = "ammunition (9mm rubber top mounted)"
 	path = /obj/item/ammo_magazine/mc9mmt/rubber
+	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/consolescreen
@@ -407,6 +421,11 @@ var/const/EXTRA_COST_FACTOR = 1.25
 /datum/autolathe/recipe/redpen
 	name = "red ink pen"
 	path = /obj/item/weapon/pen/red
+	category = "General"
+
+/datum/autolathe/recipe/greenpen
+	name = "green ink pen"
+	path = /obj/item/weapon/pen/green
 	category = "General"
 
 /datum/autolathe/recipe/clipboard

@@ -31,6 +31,16 @@
 		</div>
 	{{/if}}
 	<div class="item">
+		<div class="itemLabel">
+			Stasis setting:
+		</div>
+		<div class="itemContent">
+			{{:helper.link("Off", null,  {'stasis' : 1}, null, data.stasis == 1 ? 'yellowButton' : null)}}
+			{{:helper.link("2x", null,  {'stasis' : 2}, null, data.stasis == 2 ? 'yellowButton' : null)}}
+			{{:helper.link("5x", null,  {'stasis' : 5}, null, data.stasis == 5 ? 'yellowButton' : null)}}
+		</div>
+	</div>
+	<div class="item">
 	{{for data.reagents}}
 		<div class="itemLabel">
 		{{:value.name}}

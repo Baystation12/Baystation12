@@ -456,6 +456,12 @@
 /datum/reagent/nicotine
 	value = 2
 
+/datum/reagent/nicotine/solid
+	value = 2.5
+
+/datum/reagent/nicotine/solid/fine
+	value = 3.5
+
 /datum/reagent/rezadone
 	value = 5
 

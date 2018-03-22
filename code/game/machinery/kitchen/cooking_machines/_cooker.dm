@@ -41,6 +41,7 @@
 		to_chat(usr, "You can see \a [cooking_obj] inside.")
 
 /obj/machinery/cooker/attackby(var/obj/item/I, var/mob/user)
+	set waitfor = 0  //So that any remaining parts of calling proc don't have to wait for the long cooking time ahead.
 
 	if(!cook_type || (stat & (NOPOWER|BROKEN)))
 		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
@@ -208,10 +209,10 @@
 
 /obj/machinery/cooker/proc/change_product_strings(var/obj/item/weapon/reagent_containers/food/snacks/product)
 	if(product.type == /obj/item/weapon/reagent_containers/food/snacks/variable) // Base type, generic.
-		product.name = "[cook_type] [cooking_obj.name]"
+		product.SetName("[cook_type] [cooking_obj.name]")
 		product.desc = "[cooking_obj.desc] It has been [cook_type]."
 	else
-		product.name = "[cooking_obj.name] [product.name]"
+		product.SetName("[cooking_obj.name] [product.name]")
 
 /obj/machinery/cooker/proc/change_product_appearance(var/obj/item/weapon/reagent_containers/food/snacks/product)
 	if(product.type == /obj/item/weapon/reagent_containers/food/snacks/variable) // Base type, generic.

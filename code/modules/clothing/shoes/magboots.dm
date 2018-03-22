@@ -16,24 +16,25 @@
 	randpixel = 0
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
-	slowdown_per_slot[slot_shoes] = shoes? max(SHOES_SLOWDOWN, shoes.slowdown_per_slot[slot_shoes]): SHOES_SLOWDOWN	//So you can't put on magboots to make you walk faster.
+	slowdown_per_slot[slot_shoes] = shoes? max(0, shoes.slowdown_per_slot[slot_shoes]): 0	//So you can't put on magboots to make you walk faster.
 	if (magpulse)
 		slowdown_per_slot[slot_shoes] += 3
 
 /obj/item/clothing/shoes/magboots/attack_self(mob/user)
 	if(magpulse)
-		item_flags &= ~NOSLIP
+		item_flags &= ~ITEM_FLAG_NOSLIP
 		magpulse = 0
 		set_slowdown()
 		force = 3
 		if(icon_base) icon_state = "[icon_base]0"
 		to_chat(user, "You disable the mag-pulse traction system.")
 	else
-		item_flags |= NOSLIP
+		item_flags |= ITEM_FLAG_NOSLIP
 		magpulse = 1
 		set_slowdown()
 		force = 5
 		if(icon_base) icon_state = "[icon_base]1"
+		playsound(get_turf(src), 'sound/effects/magnetclamp.ogg', 20)
 		to_chat(user, "You enable the mag-pulse traction system.")
 	user.update_inv_shoes()	//so our mob-overlays update
 	user.update_action_buttons()
@@ -85,6 +86,6 @@
 /obj/item/clothing/shoes/magboots/examine(mob/user)
 	. = ..(user)
 	var/state = "disabled"
-	if(item_flags & NOSLIP)
+	if(item_flags & ITEM_FLAG_NOSLIP)
 		state = "enabled"
 	to_chat(user, "Its mag-pulse traction system appears to be [state].")

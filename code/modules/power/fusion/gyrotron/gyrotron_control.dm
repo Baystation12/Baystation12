@@ -1,8 +1,10 @@
 /obj/machinery/computer/gyrotron_control
 	name = "gyrotron control console"
-	icon = 'icons/obj/machines/power/fusion.dmi'
-	icon_state = "engine"
+	icon_keyboard = "med_key"
+	icon_screen = "gyrotron_screen"
 	light_color = COLOR_BLUE
+	idle_power_usage = 250
+	active_power_usage = 500
 
 	var/id_tag
 	var/scan_range = 25
@@ -85,7 +87,7 @@
 	return 0
 
 /obj/machinery/computer/gyrotron_control/attackby(var/obj/item/W, var/mob/user)
-	if(ismultitool(W))
+	if(isMultitool(W))
 		var/new_ident = input("Enter a new ident tag.", "Gyrotron Control", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident

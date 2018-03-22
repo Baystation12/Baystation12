@@ -2,8 +2,6 @@
 /obj/structure/deity/pylon
 	name = "pylon"
 	desc = "A crystal platform used to communicate with the deity."
-	power_adjustment = 15
-	important_structure = 1
 	build_cost = 400
 	icon_state = "pylon"
 	var/list/intuned = list()

@@ -17,12 +17,13 @@
 	same_tile = 1
 	can_throw = 1
 	force_danger = 1
+	restrains = 1
 
 	icon_state = "kill"
 
 	break_chance_table = list(3, 18, 45, 100)
 
-/datum/grab/normal/aggressive/process_effect(var/obj/item/grab/G)
+/datum/grab/normal/neck/process_effect(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 
 	affecting.drop_l_hand()
@@ -31,5 +32,4 @@
 	if(affecting.lying)
 		affecting.Weaken(4)
 
-	affecting.Stun(3)
 	affecting.adjustOxyLoss(1)

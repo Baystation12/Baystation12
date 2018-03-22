@@ -7,7 +7,7 @@
 	item_state = "grenade"
 	throw_speed = 4
 	throw_range = 20
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	var/active = 0
 	var/det_time = 50
@@ -90,7 +90,7 @@
 
 
 /obj/item/weapon/grenade/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(isscrewdriver(W))
+	if(isScrewdriver(W))
 		switch(det_time)
 			if (1)
 				det_time = 10

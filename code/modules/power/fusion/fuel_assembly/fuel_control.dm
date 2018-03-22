@@ -1,7 +1,10 @@
 /obj/machinery/computer/fusion_fuel_control
 	name = "fuel injection control computer"
-	icon = 'icons/obj/machines/power/fusion.dmi'
-	icon_state = "fuel"
+	icon_keyboard = "rd_key"
+	icon_screen = "fuel_screen"
+	light_color = COLOR_ORANGE
+	idle_power_usage = 250
+	active_power_usage = 500
 
 	var/id_tag
 	var/scan_range = 25
@@ -94,7 +97,7 @@
 
 
 /obj/machinery/computer/fusion_fuel_control/attackby(var/obj/item/W, var/mob/user)
-	if(ismultitool(W))
+	if(isMultitool(W))
 		var/new_ident = input("Enter a new ident tag.", "Fuel Control", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident

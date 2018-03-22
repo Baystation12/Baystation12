@@ -33,7 +33,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
  * 2) Read the map line by line, parsing the result (using parse_grid)
  *
  */
-/dmm_suite/load_map(dmm_file as file, x_offset as num, y_offset as num, z_offset as num, cropMap as num, measureOnly as num, no_changeturf as num, clear_contents as num, lower_crop_x as num,  lower_crop_y as num, upper_crop_x as num, upper_crop_y as num)
+/dmm_suite/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y)
 	//How I wish for RAII
 	Master.StartLoadingMap()
 	space_key = null
@@ -107,7 +107,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 				continue
 
 			var/zexpansion = zcrd > world.maxz
-			if(zexpansion)
+			if(zexpansion && !measureOnly) // don't actually expand the world if we're only measuring bounds
 				if(cropMap)
 					continue
 				else
@@ -170,8 +170,9 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 									if(!grid_models[model_key])
 										throw EXCEPTION("Undefined model key in DMM.")
 									var/datum/grid_load_metadata/M = parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion, clear_contents)
-									atoms_to_initialise += M.atoms_to_initialise
-									atoms_to_delete += M.atoms_to_delete
+									if (M)
+										atoms_to_initialise += M.atoms_to_initialise
+										atoms_to_delete += M.atoms_to_delete
 								#ifdef TESTING
 								else
 									++turfsSkipped
@@ -191,11 +192,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		return null
 	else
 		if(!measureOnly)
-			if(!no_changeturf)
-				for(var/t in block(locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]), locate(bounds[MAP_MAXX], bounds[MAP_MAXY], bounds[MAP_MAXZ])))
-					var/turf/T = t
-					//we do this after we load everything in. if we don't; we'll have weird atmos bugs regarding atmos adjacent turfs
-					T.post_change()
 			if(clear_contents)
 				for(var/atom/to_delete in atoms_to_delete)
 					qdel(to_delete)
@@ -272,7 +268,13 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			old_position = dpos + 1
 
 			if(!atom_def) // Skip the item if the path does not exist.  Fix your crap, mappers!
-				continue
+	#ifdef UNIT_TEST
+				log_error("Couldn't find atom path specified in map: [full_def]")
+	#endif
+				if (dpos == 0)
+					break
+				else
+					continue
 
 			members += atom_def
 
@@ -369,6 +371,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			T = instance_atom(members[index],members_attributes[index],crds,no_changeturf)//instance new turf
 			T.underlays += underlay
 			index++
+			atoms_to_initialise += T
 
 	if (clear_contents && is_not_noop)
 		for (var/type_to_delete in types_to_delete())
@@ -518,12 +521,23 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		var/value = attributes[attribute]
 		if(islist(value))
 			value = deepCopyList(value)
-		what.vars[attribute] = value
+		try
+			what.vars[attribute] = value
+		catch (var/ex)
+			var/found = FALSE
+			for (var/V in what.vars)
+				if (deep_string_equals(V, attribute))
+					what.vars[V] = value
+					log_debug("Successfully performed manual var detection for var [V] \ref[V] on provided attribute [attribute] \ref[attribute] for atom [what]")
+					found = TRUE
+					break
+			if (!found)
+				throw ex
 	GLOB.use_preloader = FALSE
 
 /area/template_noop
 	name = "Area Passthrough"
-	icon_state = "space"
+	icon_state = "unknown"
 
 /turf/template_noop
 	name = "Turf Passthrough"

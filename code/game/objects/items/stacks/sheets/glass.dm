@@ -42,7 +42,6 @@
 				return
 
 			var/obj/item/stack/material/glass/reinforced/RG = new (user.loc)
-			RG.add_fingerprint(user)
 			RG.add_to_stacks(user)
 			var/obj/item/stack/material/glass/G = src
 			src = null

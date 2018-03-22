@@ -42,7 +42,7 @@
 		for(var/obj/item/weapon/paper/P in src)
 			dat += "<A href='?src=\ref[src];read=\ref[P]'>[P.name]</A> <A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A><BR>"
 		for(var/obj/item/weapon/photo/P in src)
-			dat += "<A href='?src=\ref[src];look=\ref[P]'>[P.name]</A> <A href='?src=\ref[src]; <A href='?src=\ref[src];remove=\ref[P]'>Remove</A><BR>"
+			dat += "<A href='?src=\ref[src];look=\ref[P]'>[P.name]</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A><BR>"
 		user << browse("<HEAD><TITLE>Notices</TITLE></HEAD>[dat]","window=noticeboard")
 		onclose(user, "noticeboard")
 	else

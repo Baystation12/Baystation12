@@ -14,7 +14,7 @@ REAGENT SCANNER
 	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
 	icon_state = "health"
 	item_state = "analyzer"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 3
 	w_class = ITEM_SIZE_SMALL
@@ -76,8 +76,10 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 						brain_result = "<span class='notice'>minor brain damage</span>"
 					if(3 to 5)
 						brain_result = "<span class='warning'>weak</span>"
-					if(6 to INFINITY)
+					if(6 to 8)
 						brain_result = "<span class='danger'>extremely weak</span>"
+					if(9 to INFINITY)
+						brain_result = "<span class='danger'>fading</span>"
 					else
 						brain_result = "<span class='danger'>ERROR - Hardware fault</span>"
 	else
@@ -131,7 +133,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	if(H.is_asystole())
 		. += "<span class='danger'>Patient is suffering from cardiovascular shock. Administer CPR immediately.</span>"
 	else if(H.shock_stage > 80)
-		. += "<span class='warning'>Patient is at serious risk of entering cardiovascular shock.</span>"
+		. += "<span class='warning'>Patient is at serious risk of going into shock. Pain relief recommended.</span>"
 
 	// Other general warnings.
 	if(H.getOxyLoss() > 50)
@@ -290,7 +292,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	icon_state = "atmos"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
 	throw_speed = 4
@@ -336,7 +338,8 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT | OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
 	throw_speed = 4
@@ -374,8 +377,8 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 				to_chat(user, "<span class='warning'>The sample was contaminated! Please insert another sample</span>")
 				return
 			else
-				blood_traces = params2list(R.data["trace_chem"])
-				blood_doses = params2list(R.data["dose_chem"])
+				blood_traces = R.data["trace_chem"]
+				blood_doses = R.data["dose_chem"]
 				break
 		var/dat = "Trace Chemicals Found: "
 		for(var/T in blood_traces)
@@ -405,7 +408,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
 	throw_speed = 4
@@ -451,6 +454,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	name = "price scanner"
 	desc = "Using an up-to-date database of various costs and prices, this device estimates the market price of an item up to 0.001% accuracy."
 	icon_state = "price_scanner"
+	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 0
@@ -473,8 +477,8 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 	item_state = "analyzer"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_BIO = 1)
-	flags = CONDUCT
+	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 20)
 
 /obj/item/device/slime_scanner/proc/list_gases(var/gases)

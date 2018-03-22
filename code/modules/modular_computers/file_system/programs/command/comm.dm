@@ -7,6 +7,7 @@
 	filename = "comm"
 	filedesc = "Command and Communications Program"
 	program_icon_state = "comm"
+	program_key_state = "med_key"
 	program_menu_icon = "flag"
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."

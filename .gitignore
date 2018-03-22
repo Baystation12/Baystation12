@@ -1,4 +1,4 @@
-#ignore misc BYOND files
+# ignore misc BYOND files
 Thumbs.db
 *.log
 *.int
@@ -17,5 +17,26 @@ atupdate
 __pycache__
 
 # ignore config, but not subdirs
-config/*
 !config/*/
+config/*
+sql/test_db
+
+# vscode
+.vscode/*
+.history
+
+# swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+
+# session
+Session.vim
+
+# temporary
+.netrwhist
+*~
+
+# auto-generated tag files
+tags

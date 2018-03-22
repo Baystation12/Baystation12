@@ -63,7 +63,7 @@
 /decl/prefab/ic_assembly/create(var/atom/location)
 	..()
 	var/obj/item/device/electronic_assembly/assembly = new assembly_type(location)
-	assembly.name = assembly_name || assembly.name
+	assembly.SetName(assembly_name || assembly.name)
 
 	var/list/circuits = list()
 	for(var/ic in integrated_circuits)
@@ -97,7 +97,7 @@
 
 /datum/ic_assembly_integrated_circuits/proc/create_circuit(var/obj/item/device/electronic_assembly/assembly, var/list/circuits)
 	var/obj/circuit = new circuit_type()
-	circuit.name = circuit_name || circuit.name
+	circuit.SetName(circuit_name || circuit.name)
 	circuits += circuit
 
 	assembly.opened = TRUE

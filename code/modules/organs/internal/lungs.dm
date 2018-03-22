@@ -313,3 +313,29 @@
 		species.get_environment_discomfort(owner,"heat")
 	else if(breath.temperature <= species.cold_discomfort_level)
 		species.get_environment_discomfort(owner,"cold")
+
+/obj/item/organ/internal/lungs/listen()
+	if(owner.failed_last_breath || !active_breathing)
+		return "no respiration"
+
+	if(robotic == ORGAN_ROBOT)
+		if(is_bruised())
+			return "malfunctioning fans"
+		else
+			return "air flowing"
+
+	. = list()
+	if(is_bruised())
+		. += "[pick("wheezing", "gurgling")] sounds"
+
+	var/list/breathtype = list()
+	if(get_oxygen_deprivation() > 50)
+		breathtype += pick("straining","labored")
+	if(owner.shock_stage > 50)
+		breathtype += pick("shallow and rapid")
+	if(!breathtype.len)
+		breathtype += "healthy"
+	
+	. += "[english_list(breathtype)] breathing"
+
+	return english_list(.)

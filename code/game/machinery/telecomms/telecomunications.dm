@@ -35,12 +35,14 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/circuitboard = null // string pointing to a circuitboard type
 	var/hide = 0				// Is it a hidden machine?
 	var/listening_levels = null	// null = auto set in Initialize() - these are the z levels that the machine is listening to.
+	var/overloaded_for = 0
+	var/outage_probability = 75			// Probability of failing during a ionospheric storm
 
 
 /obj/machinery/telecomms/proc/relay_information(datum/signal/signal, filter, copysig, amount = 20)
 	// relay signal to all linked machinery that are of type [filter]. If signal has been sent [amount] times, stop sending
 
-	if(!on)
+	if(!on || overloaded_for)
 		return
 //	log_debug("[src] ([src.id]) - [signal.debug_print()]")
 
@@ -153,7 +155,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 					links |= T
 
 /obj/machinery/telecomms/update_icon()
-	if(on)
+	if(on && !overloaded_for)
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]_off"
@@ -171,6 +173,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 /obj/machinery/telecomms/Process()
 	update_power()
 
+	if(overloaded_for)
+		overloaded_for--
+
 	// Check heat and generate some
 	checkheat()
 
@@ -182,11 +187,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/emp_act(severity)
 	if(prob(100/severity))
-		if(!(stat & EMPED))
-			stat |= EMPED
-			var/duration = (300 * 10)/severity
-			spawn(rand(duration - 20, duration + 20)) // Takes a long time for the machines to reboot.
-				stat &= ~EMPED
+		overloaded_for = max(round(150 / severity), overloaded_for)
 	..()
 
 /obj/machinery/telecomms/proc/checkheat()
@@ -259,6 +260,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	machinetype = 1
 	produces_heat = 0
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/receiver
+	outage_probability = 10
 
 /obj/machinery/telecomms/receiver/receive_signal(datum/signal/signal)
 
@@ -317,7 +319,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/hub
 	long_range_link = 1
 	netspeed = 40
-
+	outage_probability = 10
 
 /obj/machinery/telecomms/hub/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	if(is_freq_listening(signal))
@@ -468,20 +470,20 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	circuitboard = /obj/item/weapon/circuitboard/telecomms/processor
 	var/process_mode = 1 // 1 = Uncompress Signals, 0 = Compress Signals
 
-	receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
+/obj/machinery/telecomms/processor/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
+	if(!is_freq_listening(signal))
+		return
 
-		if(is_freq_listening(signal))
+	if(process_mode)
+		signal.data["compression"] = 0 // uncompress subspace signal
+	else
+		signal.data["compression"] = 100 // even more compressed signal
 
-			if(process_mode)
-				signal.data["compression"] = 0 // uncompress subspace signal
-			else
-				signal.data["compression"] = 100 // even more compressed signal
-
-			if(istype(machine_from, /obj/machinery/telecomms/bus))
-				relay_direct_information(signal, machine_from) // send the signal back to the machine
-			else // no bus detected - send the signal to servers instead
-				signal.data["slow"] += rand(5, 10) // slow the signal down
-				relay_information(signal, /obj/machinery/telecomms/server)
+	if(istype(machine_from, /obj/machinery/telecomms/bus))
+		relay_direct_information(signal, machine_from) // send the signal back to the machine
+	else // no bus detected - send the signal to servers instead
+		signal.data["slow"] += rand(5, 10) // slow the signal down
+		relay_information(signal, /obj/machinery/telecomms/server)
 
 
 /*

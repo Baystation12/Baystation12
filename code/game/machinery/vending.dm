@@ -10,7 +10,7 @@
 	layer = BELOW_OBJ_LAYER
 	anchored = 1
 	density = 1
-	flags = OBJ_ANCHORABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	clicksound = "button"
 	clickvol = 40
 
@@ -64,6 +64,7 @@
 	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
 	var/seconds_electrified = 0 //Shock customers like an airlock.
 	var/shoot_inventory = 0 //Fire items at customers! We're broken!
+	var/shooting_chance = 2 //The chance that items are being shot per tick
 
 	var/scan_id = 1
 	var/obj/item/weapon/coin/coin
@@ -189,11 +190,11 @@
 
 		GLOB.nanomanager.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
-	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
+	else if(isMultitool(W) || isWirecutter(W))
 		if(src.panel_open)
 			attack_hand(user)
 		return
-	else if((flags & OBJ_ANCHORABLE) && istype(W, /obj/item/weapon/wrench))
+	else if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(W))
 		wrench_floor_bolts(user)
 		power_change()
 		return
@@ -437,7 +438,6 @@
 		else if ((href_list["togglevoice"]) && (src.panel_open))
 			src.shut_up = !src.shut_up
 
-		src.add_fingerprint(usr)
 		GLOB.nanomanager.update_uis(src)
 
 /obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
@@ -479,7 +479,7 @@
 		if(prob(diona_spawn_chance)) //Hehehe
 			var/turf/T = get_turf(src)
 			var/mob/living/carbon/alien/diona/S = new(T)
-			src.visible_message("<span class='notice'>\The [src] makes an odd grinding noise before coming to screeching halt as \a [S.name] slurmps out!</span>")
+			src.visible_message("<span class='notice'>\The [src] makes an odd grinding noise before coming to a halt as \a [S.name] slurmps out from the receptacle.</span>")
 		else //Just a normal vend, then
 			R.get_product(get_turf(src))
 			src.visible_message("\The [src] whirs as it vends \the [R.item_name].")
@@ -527,7 +527,7 @@
 		src.speak(slogan)
 		src.last_slogan = world.time
 
-	if(src.shoot_inventory && prob(2))
+	if(src.shoot_inventory && prob(shooting_chance))
 		src.throw_item()
 
 	return
@@ -573,7 +573,7 @@
 	if(!target)
 		return 0
 
-	for(var/datum/stored_items/vending_products/R in src.product_records)
+	for(var/datum/stored_items/vending_products/R in shuffle(src.product_records))
 		throw_item = R.get_product(loc)
 		if (throw_item)
 			break
@@ -648,7 +648,8 @@
 					/obj/item/weapon/reagent_containers/food/drinks/tea = 15,
 					/obj/item/weapon/glass_extra/stick = 15,
 					/obj/item/weapon/glass_extra/straw = 15)
-	contraband = list()
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine = 2,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka = 2)
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
@@ -793,6 +794,9 @@
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 2,
 					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 2,
 					/obj/item/weapon/storage/fancy/cigarettes/professionals = 2,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello = 2,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello/mint = 2,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello/variety = 2,
 					/obj/item/weapon/storage/box/matches = 10,
 					/obj/item/weapon/flame/lighter/random = 4,
 					/obj/item/clothing/mask/smokable/ecig/simple = 10,
@@ -816,6 +820,9 @@
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 55,
 					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 65,
 					/obj/item/weapon/storage/fancy/cigarettes/professionals = 70,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello = 85,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello/mint = 85,
+					/obj/item/weapon/storage/fancy/cigarettes/cigarello/variety = 85,
 					/obj/item/weapon/storage/box/matches = 2,
 					/obj/item/weapon/flame/lighter/random = 5,
 					/obj/item/clothing/mask/smokable/ecig/simple = 50,
@@ -856,7 +863,7 @@
 /obj/machinery/vending/phoronresearch
 	name = "Toximate 3000"
 	desc = "All the fine parts you need in one vending machine!"
-	products = list(/obj/item/clothing/under/rank/scientist = 6,/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,
+	products = list(/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,
 					/obj/item/device/transfer_valve = 6,/obj/item/device/assembly/timer = 6,/obj/item/device/assembly/signaler = 6,
 					/obj/item/device/assembly/prox_sensor = 6,/obj/item/device/assembly/igniter = 6)
 

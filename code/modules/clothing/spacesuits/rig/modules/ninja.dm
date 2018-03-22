@@ -253,3 +253,6 @@
 			spawn(2) .()
 		if(3)
 			src.holder.set_light(1.5, 8.5, "#ff0a00")
+
+/obj/item/rig_module/grenade_launcher/ninja
+	suit_overlay = null

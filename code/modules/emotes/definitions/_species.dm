@@ -41,6 +41,13 @@
 		/decl/emote/human/stopsway
 		)
 
+/datum/species/nabber
+	default_emotes = list(
+		/decl/emote/audible/bug_hiss,
+		/decl/emote/audible/bug_buzz,
+		/decl/emote/audible/bug_chitter
+		)
+
 /mob/living/carbon/human/set_species(var/new_species, var/default_colour)
 	. = ..()
 	update_emotes()

@@ -78,3 +78,17 @@
 	icon_state = "blue_edge_labcoat_open"
 	icon_open = "blue_edge_labcoat_open"
 	icon_closed = "blue_edge_labcoat"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/coat
+	name = "coat"
+	desc = "A cozy overcoat."
+	color = "#292929"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/xyn_machine
+	name = "\improper Xynergy labcoat"
+	desc = "A stiffened, stylised labcoat designed to fit IPCs. It has blue and purple trim, denoting it as a Xynergy labcoat."
+	icon_state = "labcoat_xy"
+	icon_open = "labcoat_xy_open"
+	icon_closed = "labcoat_xy"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 20, rad = 0)
+	species_restricted = list(SPECIES_IPC)

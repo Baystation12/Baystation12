@@ -4,9 +4,10 @@
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/medical
 	pda_slot = slot_l_store
-	backpack = /obj/item/weapon/storage/backpack/medic
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_med
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/med
+
+/decl/hierarchy/outfit/job/medical/New()
+	..()
+	BACKPACK_OVERRIDE_MEDICAL
 
 /decl/hierarchy/outfit/job/medical/cmo
 	name = OUTFIT_JOB_NAME("Chief Medical Officer")
@@ -33,7 +34,7 @@
 
 /decl/hierarchy/outfit/job/medical/doctor/surgeon
 	name = OUTFIT_JOB_NAME("Surgeon")
-	uniform = /obj/item/clothing/under/rank/medical/blue
+	uniform = /obj/item/clothing/under/rank/medical/scrubs/blue
 	head = /obj/item/clothing/head/surgery/blue
 
 /decl/hierarchy/outfit/job/medical/doctor/virologist
@@ -41,8 +42,9 @@
 	uniform = /obj/item/clothing/under/rank/virologist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/virologist
 	mask = /obj/item/clothing/mask/surgical
-	backpack = /obj/item/weapon/storage/backpack/virology
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_vir
+/decl/hierarchy/outfit/job/medical/doctor/virologist/New()
+	..()
+	BACKPACK_OVERRIDE_VIROLOGY
 
 /decl/hierarchy/outfit/job/medical/doctor/nurse
 	name = OUTFIT_JOB_NAME("Nurse")
@@ -57,27 +59,32 @@
 			uniform = /obj/item/clothing/under/rank/nurse
 		head = /obj/item/clothing/head/nursehat
 	else
-		uniform = /obj/item/clothing/under/rank/medical/purple
+		uniform = /obj/item/clothing/under/rank/medical/scrubs/purple
 		head = null
 
 /decl/hierarchy/outfit/job/medical/chemist
 	name = OUTFIT_JOB_NAME("Chemist")
 	uniform = /obj/item/clothing/under/rank/chemist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/chemist
-	backpack = /obj/item/weapon/storage/backpack/chemistry
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_chem
 	id_type = /obj/item/weapon/card/id/medical/chemist
 	pda_type = /obj/item/device/pda/chemist
+
+/decl/hierarchy/outfit/job/medical/chemist/New()
+	..()
+	BACKPACK_OVERRIDE_VIROLOGY
 
 /decl/hierarchy/outfit/job/medical/geneticist
 	name = OUTFIT_JOB_NAME("Geneticist")
 	uniform = /obj/item/clothing/under/rank/geneticist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/genetics
-	backpack = /obj/item/weapon/storage/backpack/genetics
 	r_pocket = /obj/item/device/flashlight/pen
-	satchel_one = /obj/item/weapon/storage/backpack/satchel_gen
 	id_type = /obj/item/weapon/card/id/medical/geneticist
 	pda_type = /obj/item/device/pda/geneticist
+
+/decl/hierarchy/outfit/job/medical/geneticist/New()
+	..()
+	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/weapon/storage/backpack/genetics
+	backpack_overrides[/decl/backpack_outfit/satchel]  = /obj/item/weapon/storage/backpack/satchel_gen
 
 /decl/hierarchy/outfit/job/medical/psychiatrist
 	name = OUTFIT_JOB_NAME("Psychiatrist")
@@ -92,7 +99,7 @@
 
 /decl/hierarchy/outfit/job/medical/paramedic
 	name = OUTFIT_JOB_NAME("Paramedic")
-	uniform = /obj/item/clothing/under/rank/medical/black
+	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
 	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
 	shoes = /obj/item/clothing/shoes/jackboots
 	l_hand = /obj/item/weapon/storage/firstaid/adv

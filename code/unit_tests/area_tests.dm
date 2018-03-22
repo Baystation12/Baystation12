@@ -80,6 +80,8 @@
 	for(var/area_type in subtypesof(/area))
 		if(area_type in GLOB.using_map.area_usage_test_exempted_areas)
 			continue
+		if(is_path_in_list(area_type, GLOB.using_map.area_usage_test_exempted_root_areas))
+			continue
 		var/area/located_area = locate(area_type)
 		if(located_area && !located_area.z)
 			log_bad("[log_info_line(located_area)] is unused.")

@@ -12,6 +12,7 @@
 	var/regen_time = 0
 	melee_damage_lower = 1
 	melee_damage_upper = 2
+	can_escape = 1
 	var/emergency_protocols = 0
 	known_commands = list("stay", "stop", "attack", "follow", "heal", "emergency protocol")
 

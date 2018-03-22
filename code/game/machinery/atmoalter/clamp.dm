@@ -52,7 +52,7 @@
 	. = ..()
 
 /obj/machinery/clamp/proc/open()
-	if(open)
+	if(open || !target)
 		return 0
 
 	target.build_network()
@@ -136,6 +136,7 @@
 	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "pclamp0"
+	origin_tech = list(TECH_ENGINEERING = 4, TECH_MAGNET = 4)
 
 /obj/item/clamp/afterattack(var/atom/A, mob/user as mob, proximity)
 	if(!proximity)

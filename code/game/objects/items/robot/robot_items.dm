@@ -15,6 +15,7 @@
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "securearea"
 	var/sight_mode = null
+	var/hud_type
 
 
 /obj/item/borg/sight/xray
@@ -48,6 +49,7 @@
 	name = "medical hud"
 	icon_state = "healthhud"
 	icon = 'icons/obj/clothing/glasses.dmi'
+	hud_type = HUD_MEDICAL
 
 	New()
 		..()
@@ -59,6 +61,7 @@
 	name = "security hud"
 	icon_state = "securityhud"
 	icon = 'icons/obj/clothing/glasses.dmi'
+	hud_type = HUD_SECURITY
 
 	New()
 		..()

@@ -4,7 +4,7 @@
 
 	appearance_flags = PIXEL_SCALE
 	animate_movement = 2
-	flags = PROXMOVE
+	movable_flags = MOVABLE_FLAG_PROXMOVE
 
 	virtual_mob = /mob/observer/virtual/mob
 
@@ -99,9 +99,6 @@
 	var/obj/item/weapon/back = null//Human/Monkey
 	var/obj/item/weapon/storage/s_active = null//Carbon
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
-
-
-	var/datum/hud/hud_used = null
 
 	var/list/grabbed_by = list(  )
 

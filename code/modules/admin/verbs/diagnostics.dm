@@ -117,52 +117,6 @@
 	message_admins("[usr] manually reloaded Mentors")
 	world.load_mods()
 
-
-//todo:
-/client/proc/jump_to_dead_group()
-	set name = "Jump to dead group"
-	set category = "Debug"
-		/*
-	if(!holder)
-		to_chat(src, "Only administrators may use this command.")
-		return
-
-	if(!SSair)
-		to_chat(usr, "Cannot find air_system")
-		return
-	var/datum/air_group/dead_groups = list()
-	for(var/datum/air_group/group in SSair.air_groups)
-		if (!group.group_processing)
-			dead_groups += group
-	var/datum/air_group/dest_group = pick(dead_groups)
-	usr.loc = pick(dest_group.members)
-	feedback_add_details("admin_verb","JDAG") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	return
-	*/
-
-/client/proc/kill_airgroup()
-	set name = "Kill Local Airgroup"
-	set desc = "Use this to allow manual manupliation of atmospherics."
-	set category = "Debug"
-	/*
-	if(!holder)
-		to_chat(src, "Only administrators may use this command.")
-		return
-
-	if(!SSair)
-		to_chat(usr, "Cannot find air_system")
-		return
-
-	var/turf/T = get_turf(usr)
-	if(istype(T, /turf/simulated))
-		var/datum/air_group/AG = T:parent
-		AG.next_check = 30
-		AG.group_processing = 0
-	else
-		to_chat(usr, "Local airgroup is unsimulated!")
-	feedback_add_details("admin_verb","KLAG") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	*/
-
 /client/proc/print_jobban_old()
 	set name = "Print Jobban Log"
 	set desc = "This spams all the active jobban entries for the current round to standard output."

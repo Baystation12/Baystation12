@@ -71,6 +71,21 @@
 		return 1
 	return 0
 
+/obj/item/weapon/contract/wizard/telepathy
+	name = "telepathy contract"
+	desc = "The edges of the contract grow blurry when you look away from them. To be fair, actually reading it gives you a headache."
+	color = "#fcc605"
+
+/obj/item/weapon/contract/wizard/telepathy/contract_effect(mob/user as mob)
+	..()
+	if(!(mRemotetalk in user.mutations))
+		user.mutations.Add(mRemotetalk)
+		user.dna.SetSEState(GLOB.REMOTETALKBLOCK,1)
+		domutcheck(user, null, MUTCHK_FORCED)
+		to_chat(user, "<span class='notice'>You expand your mind outwards.</span>")
+		return 1
+	return 0
+
 /obj/item/weapon/contract/wizard/tk
 	name = "telekinesis contract"
 	desc = "This contract makes your mind buzz. It promises to give you the ability to move things with your mind. At a price."

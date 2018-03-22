@@ -48,9 +48,6 @@
 		pulse_mod++
 	if(oxy < BLOOD_VOLUME_BAD) //MOAR
 		pulse_mod++
-	if(pulse && oxy <= BLOOD_VOLUME_SURVIVE && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
-		pulse = PULSE_THREADY	
-		return
 
 	if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
 		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
@@ -68,6 +65,9 @@
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
 			pulse = PULSE_NONE
 			return
+	if(pulse && oxy <= BLOOD_VOLUME_SURVIVE && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
+		pulse = PULSE_THREADY
+		return
 
 	pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
 	if(pulse != PULSE_NORM && owner.chem_effects[CE_STABLE])
@@ -95,7 +95,7 @@
 		return
 
 	//Dead or cryosleep people do not pump the blood.
-	if(!owner || owner.in_stasis || owner.stat == DEAD || owner.bodytemperature < 170)
+	if(!owner || owner.InStasis() || owner.stat == DEAD || owner.bodytemperature < 170)
 		return
 
 	if(pulse != PULSE_NONE || robotic >= ORGAN_ROBOT)
@@ -128,7 +128,7 @@
 							blood_max += W.damage / 40
 
 			if(temp.status & ORGAN_ARTERY_CUT)
-				var/bleed_amount = Floor((owner.vessel.total_volume / (temp.applied_pressure ? 400 : 250))*temp.arterial_bleed_severity)
+				var/bleed_amount = Floor((owner.vessel.total_volume / (temp.applied_pressure || !open_wound ? 400 : 250))*temp.arterial_bleed_severity)
 				if(bleed_amount)
 					if(open_wound)
 						blood_max += bleed_amount
@@ -165,3 +165,29 @@
 		return FALSE
 
 	return pulse > PULSE_NONE || robotic == ORGAN_ROBOT || (owner.status_flags & FAKEDEATH)
+
+/obj/item/organ/internal/heart/listen()
+	if(robotic == ORGAN_ROBOT && is_working())
+		if(is_bruised())
+			return "sputtering pump"
+		else
+			return "steady whirr of the pump"
+
+	if(!pulse || (owner.status_flags & FAKEDEATH))
+		return "no pulse"
+
+	var/pulsesound = "normal"
+	if(is_bruised())
+		pulsesound = "irregular"
+
+	switch(pulse)
+		if(PULSE_SLOW)
+			pulsesound = "slow"
+		if(PULSE_FAST)
+			pulsesound = "fast"
+		if(PULSE_2FAST)
+			pulsesound = "very fast"
+		if(PULSE_THREADY)
+			pulsesound = "extremely fast and faint"
+
+	. = "[pulsesound] pulse"

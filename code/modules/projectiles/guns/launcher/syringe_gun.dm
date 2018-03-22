@@ -5,7 +5,7 @@
 	icon_state = "syringe-cartridge"
 	var/icon_flight = "syringe-cartridge-flight" //so it doesn't look so weird when shot
 	matter = list(DEFAULT_WALL_MATERIAL = 125, "glass" = 375)
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 3
 	force = 3
@@ -34,7 +34,7 @@
 		user.put_in_hands(syringe)
 		syringe = null
 		sharp = initial(sharp)
-		name = initial(name)
+		SetName(initial(name))
 		update_icon()
 
 /obj/item/weapon/syringe_cartridge/proc/prime()
@@ -136,3 +136,18 @@
 	icon_state = "rapidsyringegun"
 	item_state = "rapidsyringegun"
 	max_darts = 5
+
+/obj/item/weapon/gun/launcher/syringe/disguised
+	name = "deluxe electronic cigarette"
+	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
+	icon = 'icons/obj/ecig.dmi'
+	icon_state = "pcigoff1"
+	item_state = "pcigoff1"
+	w_class = ITEM_SIZE_SMALL
+	force = 3
+	throw_distance = 7
+	release_force = 7
+
+/obj/item/weapon/gun/launcher/syringe/disguised/examine(mob/user)
+	if(( . = ..(user, 0)))
+		to_chat(user, "The button is a little stiff.")

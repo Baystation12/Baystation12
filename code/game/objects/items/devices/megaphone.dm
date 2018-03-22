@@ -4,7 +4,7 @@
 	icon_state = "megaphone"
 	item_state = "radio"
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 	var/spamcheck = 0
 	var/emagged = 0
@@ -16,9 +16,6 @@
 		if(user.client.prefs.muted & MUTE_IC)
 			to_chat(src, "<span class='warning'>You cannot speak in IC (muted).</span>")
 			return
-	if(!ishuman(user))
-		to_chat(user, "<span class='warning'>You don't know how to use this!</span>")
-		return
 	if(user.silent)
 		return
 	if(spamcheck)

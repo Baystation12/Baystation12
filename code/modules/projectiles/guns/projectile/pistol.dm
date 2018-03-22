@@ -8,6 +8,20 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 
+/obj/item/weapon/gun/projectile/colt/officer
+	name = "military .45 pistol"
+	desc = "The WT45 - a mass produced kinetic sidearm well-known in films and entertainment programming for being the daily carry choice issued to officers of the Sol Central Government Defense Forces. Uses .45 rounds."
+	icon_state = "usp"
+	accuracy = 0.35
+	fire_delay = 6.5
+
+/obj/item/weapon/gun/projectile/colt/officer/update_icon()
+	..()
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
+		icon_state = "usp"
+	else
+		icon_state = "usp-e"
+
 /obj/item/weapon/gun/projectile/sec
 	name = ".45 pistol"
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
@@ -15,6 +29,8 @@
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
 	allowed_magazines = /obj/item/ammo_magazine/c45m
 	caliber = ".45"
+	accuracy = -0.35
+	fire_delay = 5.5
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
 
@@ -29,9 +45,10 @@
 	name = ".45 signal pistol"
 
 /obj/item/weapon/gun/projectile/sec/wood
-	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. This one has a sweet wooden grip. Uses .45 rounds."
+	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. This one has a sweet wooden grip, among other modifications. Uses .45 rounds."
 	name = "custom .45 Pistol"
 	icon_state = "secgundark"
+	accuracy = 0
 
 /obj/item/weapon/gun/projectile/sec/wood/update_icon()
 	..()
@@ -54,11 +71,13 @@
 
 /obj/item/weapon/gun/projectile/magnum_pistol
 	name = ".50 magnum pistol"
-	desc = "A robust handgun that uses .50 AE ammo."
+	desc = "The HelTek Magnus, a robust terran handgun that uses .50 AE ammo."
 	icon_state = "magnum"
 	item_state = "revolver"
 	force = 14.0
 	caliber = ".50"
+	fire_delay = 12
+	screen_shake = 2
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a50
 	allowed_magazines = /obj/item/ammo_magazine/a50
@@ -80,6 +99,7 @@
 	ammo_type = /obj/item/ammo_casing/a75
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a75
+	fire_delay = 25
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
@@ -225,7 +245,7 @@
 		buildstate++
 		update_icon()
 		return
-	else if(isscrewdriver(thing) && buildstate == 3)
+	else if(isScrewdriver(thing) && buildstate == 3)
 		user.visible_message("<span class='notice'>\The [user] secures the trigger assembly with \the [thing].</span>")
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		var/obj/item/weapon/gun/projectile/pirate/zipgun

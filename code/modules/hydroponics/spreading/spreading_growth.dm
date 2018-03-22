@@ -79,7 +79,8 @@
 			health -= seed.handle_environment(T,T.return_air(),null,1)
 		if(health < max_health)
 			health += 1
-			update_icon()
+			if(growth_threshold && !(health % growth_threshold))
+				update_icon()
 		if(health > max_health)
 			health = max_health
 		if(parent == src && health == max_health && !plant && istype(T) && !T.CanZPass(src, DOWN))
@@ -122,9 +123,24 @@
 
 	// We shouldn't have spawned if the controller doesn't exist.
 	check_health()
-	if(!(buckled_mob || neighbors.len || (!plant && T && !T.CanZPass(src, DOWN)) || health < max_health) && !targets_in_range())
+
+	if(should_sleep())
 		STOP_PROCESSING(SSvines, src)
 
+/obj/effect/vine/proc/should_sleep()
+	if(buckled_mob) //got a victim to fondle
+		return FALSE
+	if(neighbors.len) //got places to spread to
+		return FALSE
+	if(health < max_health) //got some growth to do
+		return FALSE
+	if(targets_in_range()) //got someone to grab
+		return FALSE
+	if(parent == src && !plant) //should settle down and spawn a tray
+		var/turf/simulated/T = get_turf(src)
+		if(T && !T.CanZPass(src, DOWN)) //yep we need to settle down here
+			return FALSE
+	return TRUE
 //spreading vines aren't created on their final turf.
 //Instead, they are created at their parent and then move to their destination.
 /obj/effect/vine/proc/spread_to(turf/target_turf)

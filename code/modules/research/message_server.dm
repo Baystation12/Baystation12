@@ -116,18 +116,16 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			if(Console.newmessagepriority < priority)
 				Console.newmessagepriority = priority
 				Console.icon_state = "req_comp[priority]"
-			switch(priority)
-				if(2)
-					if(!Console.silent)
-						playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
-						Console.audible_message(text("\icon[Console] *The Requests Console beeps: 'PRIORITY Alert in [sender]'"),,5)
-					Console.message_log += "<B><FONT color='red'>High Priority message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></FONT></B><BR>[authmsg]"
-				else
-					if(!Console.silent)
-						playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
-						Console.audible_message(text("\icon[Console] *The Requests Console beeps: 'Message from [sender]'"),,4)
-					Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
-			Console.set_light(2)
+			if(priority > 1)
+				playsound(Console.loc, 'sound/machines/chime.ogg', 80, 1)
+				Console.audible_message("\icon[Console]<span class='warning'>\The [Console] announces: 'High priority message received from [sender]!'</span>", hearing_distance = 8)
+				Console.message_log += "<FONT color='red'>High Priority message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></FONT><BR>[authmsg]"
+			else
+				if(!Console.silent)
+					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
+					Console.audible_message("\icon[Console]<span class='notice'>\The [Console] announces: 'Message received from [sender].'</span>", hearing_distance = 5)
+				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
+		Console.set_light(2)
 
 
 /obj/machinery/message_server/attack_hand(user as mob)

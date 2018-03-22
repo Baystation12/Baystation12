@@ -3,14 +3,14 @@
 	desc = "Used for building machines."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "fire_bitem"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	var/build_machine_type
 	var/refund_amt = 2
 	var/refund_type = /obj/item/stack/material/steel
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 
 /obj/item/frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
+	if(isWrench(W))
 		new refund_type( get_turf(src.loc), refund_amt)
 		qdel(src)
 		return
@@ -55,6 +55,7 @@
 
 /obj/item/frame/air_alarm
 	name = "air alarm frame"
+	icon_state = "alarm_bitem"
 	desc = "Used for building air alarms."
 	build_machine_type = /obj/machinery/alarm
 

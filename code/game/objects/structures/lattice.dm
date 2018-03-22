@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	plane = ABOVE_PLATING_PLANE
 	layer = LATTICE_LAYER
-	//	flags = CONDUCT
+	//	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/structure/lattice/Initialize()
 	. = ..()
@@ -56,7 +56,7 @@
 		var/turf/T = get_turf(src)
 		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return
-	if (istype(C, /obj/item/weapon/weldingtool))
+	if(isWelder(C))
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
 			to_chat(user, "<span class='notice'>Slicing lattice joints ...</span>")
@@ -64,15 +64,14 @@
 		qdel(src)
 	if (istype(C, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = C
-		if(R.amount <= 2)
+		if(R.use(2))
+			src.alpha = 0
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+			new /obj/structure/catwalk(src.loc)
+			qdel(src)
 			return
 		else
-			R.use(2)
-			to_chat(user, "<span class='notice'>You start connecting [R.name] to [src.name] ...</span>")
-			if(do_after(user,50))
-				src.alpha = 0
-				new /obj/structure/catwalk(src.loc)
-				qdel(src)
+			to_chat(user, "<span class='notice'>You require at least two rods to complete the catwalk.</span>")
 			return
 	return
 

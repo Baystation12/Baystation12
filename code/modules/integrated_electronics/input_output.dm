@@ -18,7 +18,7 @@
 /obj/item/integrated_circuit/input/button/get_topic_data(mob/user)
 	return list("Press" = "press=1")
 
-/obj/item/integrated_circuit/input/button/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/button/OnICTopic(href_list, user)
 	if(href_list["press"])
 		to_chat(user, "<span class='notice'>You press the button labeled '[src.name]'.</span>")
 		activate_pin(1)
@@ -39,7 +39,7 @@
 /obj/item/integrated_circuit/input/toggle_button/get_topic_data(mob/user)
 	return list("Toggle [get_pin_data(IC_OUTPUT, 1) ? "Off" : "On"]" = "toggle=1")
 
-/obj/item/integrated_circuit/input/toggle_button/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/toggle_button/OnICTopic(href_list, user)
 	if(href_list["toggle"])
 		set_pin_data(IC_OUTPUT, 1, !get_pin_data(IC_OUTPUT, 1))
 		activate_pin(1)
@@ -60,7 +60,7 @@
 /obj/item/integrated_circuit/input/numberpad/get_topic_data(mob/user)
 	return list("Enter Number" = "enter_number=1")
 
-/obj/item/integrated_circuit/input/numberpad/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/numberpad/OnICTopic(href_list, user)
 	if(href_list["enter_number"])
 		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
 		if(isnum(new_input) && CanInteract(user, GLOB.physical_state))
@@ -80,7 +80,7 @@
 /obj/item/integrated_circuit/input/textpad/get_topic_data(mob/user)
 	return list("Enter Words" = "enter_words=1")
 
-/obj/item/integrated_circuit/input/textpad/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/textpad/OnICTopic(href_list, user)
 	if(href_list["enter_words"])
 		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
 		if(istext(new_input) && CanInteract(user, GLOB.physical_state))
@@ -96,6 +96,8 @@
 	inputs = list("target ref")
 	outputs = list("total health %", "total missing health")
 	activators = list("scan")
+
+	dist_check = /decl/dist_check/in_view
 
 /obj/item/integrated_circuit/input/med_scanner/do_work()
 	var/mob/living/carbon/human/H = get_pin_data_as_type(IC_INPUT, 1, /mob/living/carbon/human)
@@ -126,6 +128,8 @@
 		"clone damage"
 	)
 	activators = list("scan")
+
+	dist_check = /decl/dist_check/in_view
 
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
 	var/datum/integrated_io/I = inputs[1]
@@ -282,34 +286,41 @@
 	desc = "Signals from a signaler can be received with this, allowing for remote control.  Additionally, it can send signals as well."
 	extended_desc = "When a signal is received from another signaler with the right id tag, the 'on signal received' activator pin will be pulsed and the command output is updated.  \
 	The two input pins are to configure the integrated signaler's settings.  Note that the frequency should not have a decimal in it.  \
-	Meaning the default frequency is expressed as 1457, not 145.7.  To send a signal, pulse the 'send signal' activator pin. Set the command output to set the message recieved"
+	Meaning the default frequency is expressed as 1457, not 145.7.  To send a signal, pulse the 'send signal' activator pin. Set the command output to set the message received."
 	complexity = 8
-	inputs = list("frequency", "code", "command", "id tag")
-	outputs = list("recieved command")
+	inputs = list("frequency", "id tag", "command")
+	outputs = list("received command")
 
 /obj/item/integrated_circuit/input/signaler/advanced/Initialize()
 	. = ..()
 	var/datum/integrated_io/new_com = inputs[3]
-	var/datum/integrated_io/new_id = inputs[4]
+	var/datum/integrated_io/new_id = inputs[2]
 	var/datum/integrated_io/new_rec = outputs[1]
 	new_com.data = "ACTIVATE"
 	new_id.data = "Integrated_Circuit"
 	new_rec.data = "ACTIVATE"
 
+/obj/item/integrated_circuit/input/signaler/signal_good(var/datum/signal/signal)
+	. = ..()
+	var/datum/integrated_io/id_tag = inputs[2]
+	if(!id_tag.data || id_tag.data != signal.data["tag"])
+		return 0
+
 /obj/item/integrated_circuit/input/signaler/advanced/create_signal()
 	var/datum/signal/signal = ..()
+	var/datum/integrated_io/new_id = inputs[2]
 	var/datum/integrated_io/new_com = inputs[3]
-	var/datum/integrated_io/new_id = inputs[4]
-	signal.data["command"] = new_com.data
 	signal.data["tag"] = new_id.data
+	signal.data["command"] = new_com.data
+	signal.encryption = null
 	return signal
 
 /obj/item/integrated_circuit/input/signaler/advanced/receive_signal(var/datum/signal/signal)
-	if(!..())
+	if(!signal_good(signal))
 		return 0
 	if(signal.data["command"])
 		set_pin_data(IC_OUTPUT, 1, signal.data["command"])
-	return 1
+	return ..()
 
 /obj/item/integrated_circuit/input/teleporter_locator
 	name = "teleporter locator"
@@ -335,7 +346,7 @@
 			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
 	.["None (Dangerous)"] = "tport=random"
 
-/obj/item/integrated_circuit/input/teleporter_locator/OnTopic(href_list, user)
+/obj/item/integrated_circuit/input/teleporter_locator/OnICTopic(href_list, user)
 	if(href_list["tport"])
 		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
 		set_pin_data(IC_OUTPUT, 1, output && weakref(output))
@@ -413,7 +424,7 @@
 /obj/item/integrated_circuit/input/access_scanner/get_topic_data(mob/user)
 	return contained_id ? ..() : list("Access Scan" = "access_scan=1")
 
-/obj/item/integrated_circuit/input/access_scanner/OnTopic(href_list, var/mob/user)
+/obj/item/integrated_circuit/input/access_scanner/OnICTopic(href_list, var/mob/user)
 	if(href_list["access_scan"])
 		if(contained_id)
 			return

@@ -145,29 +145,28 @@
 	return ..()
 
 // The purchasing code.
-/obj/item/device/uplink/Topic(href, href_list)
-	if(..())
-		return 1
-
-	var/mob/user = usr
+/obj/item/device/uplink/OnTopic(user, href_list)
 	if(href_list["buy_item"])
 		var/datum/uplink_item/UI = (locate(href_list["buy_item"]) in uplink.items)
 		UI.buy(src, usr)
+		. = TOPIC_REFRESH
 	else if(href_list["lock"])
 		toggle()
-		var/datum/nanoui/ui = GLOB.nanomanager.get_open_ui(user, src, "main")
-		ui.close()
+		GLOB.nanomanager.close_user_uis(user, src, "main")
+		. = TOPIC_HANDLED
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)
+		. = TOPIC_REFRESH
 	else if(href_list["menu"])
 		nanoui_menu = text2num(href_list["menu"])
 		if(href_list["id"])
 			exploit_id = text2num(href_list["id"])
 		if(href_list["category"])
 			category = locate(href_list["category"]) in uplink.categories
+		. = TOPIC_REFRESH
 
-	update_nano_data()
-	return 1
+	if(. == TOPIC_REFRESH)
+		update_nano_data()
 
 /obj/item/device/uplink/proc/update_nano_data()
 	if(nanoui_menu == 0)
@@ -197,8 +196,6 @@
 				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
 								 // and if it's sanitized for html.
-				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.get_antagRecord())                         		// Change stuff into html
-				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // change line breaks into <br>
 				var/list/fields = list(
 					REC_FIELD(name),
 					REC_FIELD(sex),
@@ -209,7 +206,8 @@
 					REC_FIELD(citizenship),
 					REC_FIELD(faction),
 					REC_FIELD(religion),
-					REC_FIELD(fingerprint))
+					REC_FIELD(fingerprint),
+					REC_FIELD(antagRecord))
 				var/list/rec_fields = list()
 				for(var/field in fields)
 					var/record_field/F = locate(field) in L.fields
@@ -217,7 +215,7 @@
 						continue
 					rec_fields.Add(list(list(
 						"name" = html_encode(F.name), 
-						"val" = html_encode(F.get_value())
+						"val" = F.get_display_value()
 					)))
 				nanoui_data["exploit"]["fields"] =  rec_fields
 
@@ -242,9 +240,9 @@
 // Includes normal radio uplink, multitool uplink,
 // implant uplink (not the implant tool) and a preset headset uplink.
 
-/obj/item/device/radio/uplink/New(var/loc, var/owner)
+/obj/item/device/radio/uplink/New(var/loc, var/owner, var/amount)
 	..()
-	hidden_uplink = new(src, owner)
+	hidden_uplink = new(src, owner, amount)
 	icon_state = "radio"
 
 /obj/item/device/radio/uplink/attack_self(mob/user as mob)

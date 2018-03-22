@@ -1,6 +1,0 @@
-author: sick trigger
-
-delete-after: True
-
-changes: 
-  - rscadd: "Ghosts can now Check-Radiation."

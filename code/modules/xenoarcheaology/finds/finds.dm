@@ -39,7 +39,7 @@
 		qdel(src)
 		return
 
-	if(istype(I, /obj/item/weapon/weldingtool))
+	if(isWelder(I))
 		var/obj/item/weapon/weldingtool/W = I
 		if(W.isOn())
 			if(W.get_fuel() >= 2)

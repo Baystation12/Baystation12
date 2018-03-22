@@ -217,6 +217,7 @@ datum/preferences
 	character.b_skin = b_skin
 
 	character.s_tone = s_tone
+	character.s_base = s_base
 
 	character.h_style = h_style
 	character.f_style = f_style
@@ -253,7 +254,7 @@ datum/preferences
 				O.robotize()
 		else //normal organ
 			O.force_icon = null
-			O.name = initial(O.name)
+			O.SetName(initial(O.name))
 			O.desc = initial(O.desc)
 	//For species that don't care about your silly prefs
 	character.species.handle_limbs_setup(character)
@@ -283,9 +284,8 @@ datum/preferences
 				UW.ForceEquipUnderwear(character, FALSE)
 		else
 			all_underwear -= underwear_category_name
-	if(backbag > 6 || backbag < 1)
-		backbag = 1 //Same as above
-	character.backbag = backbag
+
+	character.backpack_setup = new(backpack, backpack_metadata["[backpack]"])
 
 	for(var/N in character.organs_by_name)
 		var/obj/item/organ/external/O = character.organs_by_name[N]

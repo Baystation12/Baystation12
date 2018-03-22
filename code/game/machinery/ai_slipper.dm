@@ -84,28 +84,28 @@
 	onclose(user, "computer")
 	return
 
-/obj/machinery/ai_slipper/Topic(href, href_list)
-	..()
-	if (src.locked)
-		if (!istype(usr, /mob/living/silicon))
-			to_chat(usr, "Control panel is locked!")
-			return
+/obj/machinery/ai_slipper/CanUseTopic(user)
+	if(locked && !issilicon(user))
+		to_chat(user, "<span class='warning'>The control panel is locked!</span>")
+		return min(..(), STATUS_UPDATE)
+	return ..()
+
+/obj/machinery/ai_slipper/OnTopic(user, href_list)
 	if (href_list["toggleOn"])
 		src.disabled = !src.disabled
 		update_icon()
+		. = TOPIC_REFRESH
 	if (href_list["toggleUse"])
-		if(cooldown_on || disabled)
-			return
-		else
+		if(!(cooldown_on || disabled))
 			new /obj/effect/effect/foam(src.loc)
 			src.uses--
 			cooldown_on = 1
 			cooldown_time = world.timeofday + 100
 			slip_process()
-			return
+		. = TOPIC_REFRESH
 
-	src.attack_hand(usr)
-	return
+	if(. == TOPIC_REFRESH)
+		attack_hand(user)
 
 /obj/machinery/ai_slipper/proc/slip_process()
 	while(cooldown_time - world.timeofday > 0)

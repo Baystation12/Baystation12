@@ -73,7 +73,7 @@
 	return 1
 
 /obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(!istype(W, /obj/item/weapon/wrench))
+	if(!isWrench(W))
 		return ..()
 
 	var/int_pressure = 0
@@ -172,7 +172,7 @@
 			if(ATM_OUTPUT)
 				ic_on += "_out_glow"
 				ic_off += "_out"
-			if(ATM_O2 to ATM_N2O)
+			if(ATM_O2 to ATM_H2)
 				ic_on += "_filter"
 				ic_off += "_out"
 

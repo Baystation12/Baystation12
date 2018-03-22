@@ -93,7 +93,7 @@
 						var/datum/language/L = all_languages[vox.species.default_language]
 						newname = L.get_random_name()
 					vox.real_name = newname
-					vox.name = vox.real_name
+					vox.SetName(vox.real_name)
 					raiders.update_access(vox)
 				qdel(user)
 	..()

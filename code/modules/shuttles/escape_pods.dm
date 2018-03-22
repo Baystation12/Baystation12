@@ -71,21 +71,17 @@ var/list/escape_pods_by_name = list()
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/OnTopic(user, href_list)
 	if("manual_arm")
 		pod.arming_controller.arm()
+		return TOPIC_REFRESH
+
 	if("force_launch")
 		if (pod.can_force())
 			pod.force_launch(src)
 		else if (evacuation_controller.has_evacuated() && pod.can_launch())	//allow players to manually launch ahead of time if the shuttle leaves
 			pod.launch(src)
-
-	return 0
-
-
+		return TOPIC_REFRESH
 
 //This controller is for the escape pod berth (station side)
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth

@@ -89,34 +89,12 @@ var/list/wrapped_species_by_ref = list()
 
 	last_special = world.time + 10
 
-	var/list/valid_hairstyles = list()
-	var/list/valid_facialhairstyles = list()
-	for(var/hairstyle in hair_styles_list)
-		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-		if(gender == MALE && S.gender == FEMALE)
-			continue
-		if(gender == FEMALE && S.gender == MALE)
-			continue
-		if(!(species.get_bodytype(src) in S.species_allowed))
-			continue
-		valid_hairstyles += hairstyle
-	for(var/facialhairstyle in facial_hair_styles_list)
-		var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-		if(gender == MALE && S.gender == FEMALE)
-			continue
-		if(gender == FEMALE && S.gender == MALE)
-			continue
-		if(!(species.get_bodytype(src) in S.species_allowed))
-			continue
-		valid_facialhairstyles += facialhairstyle
-
-
 	visible_message("<span class='notice'>\The [src]'s form contorts subtly.</span>")
-	if(valid_hairstyles.len)
-		var/new_hair = input("Select a hairstyle.", "Shapeshifter Hair") as null|anything in valid_hairstyles
+	if(species.get_hair_styles())
+		var/new_hair = input("Select a hairstyle.", "Shapeshifter Hair") as null|anything in species.get_hair_styles()
 		change_hair(new_hair ? new_hair : "Bald")
-	if(valid_facialhairstyles.len)
-		var/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in valid_facialhairstyles
+	if(species.get_facial_hair_styles(gender))
+		var/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in species.get_facial_hair_styles(gender)
 		change_facial_hair(new_hair ? new_hair : "Shaved")
 
 /mob/living/carbon/human/proc/shapeshifter_select_gender()

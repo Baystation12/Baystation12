@@ -51,7 +51,7 @@
 /obj/item/weapon/circuitboard/air_management/construct(var/obj/machinery/computer/general_air_control/C)
 	if (..(C))
 		if(console_name)
-			C.name = console_name
+			C.SetName(console_name)
 		C.set_frequency(frequency)
 		C.sensors = sensors.Copy()
 		C.sensor_information = sensor_information.Copy()

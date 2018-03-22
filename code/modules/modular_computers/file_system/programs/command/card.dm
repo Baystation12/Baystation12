@@ -3,6 +3,7 @@
 	filedesc = "ID card modification program"
 	nanomodule_path = /datum/nano_module/program/card_mod
 	program_icon_state = "id"
+	program_key_state = "id_key"
 	program_menu_icon = "key"
 	extended_desc = "Program for programming crew ID cards."
 	required_access = access_change_ids
@@ -163,8 +164,11 @@
 					else
 						computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
 		if("eject")
-			if(computer && computer.card_slot)
-				computer.proc_eject_id(user)
+			if(computer)
+				if(computer.card_slot && computer.card_slot.stored_card)
+					computer.proc_eject_id(user)
+				else
+					computer.attackby(user.get_active_hand(), user)
 		if("terminate")
 			if(computer && can_run(user, 1))
 				id_card.assignment = "Terminated"
@@ -221,7 +225,7 @@
 					if(!access_allowed)
 						id_card.access += access_type
 	if(id_card)
-		id_card.name = text("[id_card.registered_name]'s ID Card ([id_card.assignment])")
+		id_card.SetName(text("[id_card.registered_name]'s ID Card ([id_card.assignment])"))
 
 	GLOB.nanomanager.update_uis(NM)
 	return 1

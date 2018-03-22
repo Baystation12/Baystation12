@@ -6,15 +6,17 @@
 	damage_type = BURN
 	nodamage = 1
 	check_armour = "energy"
-	var/pulse_range = 1
+	var/heavy_effect_range = 1
+	var/light_effect_range = 2
 
-	on_hit(var/atom/target, var/blocked = 0)
-		empulse(target, pulse_range, pulse_range)
+	on_impact(var/atom/A)
+		empulse(A, heavy_effect_range, light_effect_range)
 		return 1
 
 /obj/item/projectile/ion/small
 	name = "ion pulse"
-	pulse_range = 0
+	heavy_effect_range = 0
+	light_effect_range = 1
 
 /obj/item/projectile/bullet/gyro
 	name ="explosive bolt"
@@ -88,7 +90,7 @@
 		var/mob/living/M = target
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = M
-			if((H.species.flags & IS_PLANT) && (H.nutrition < 500))
+			if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 				if(prob(15))
 					H.apply_effect((rand(30,80)),IRRADIATE,blocked = H.getarmor(null, "rad"))
 					H.Weaken(5)
@@ -132,7 +134,7 @@
 		var/mob/M = target
 		if(ishuman(target)) //These rays make plantmen fat.
 			var/mob/living/carbon/human/H = M
-			if((H.species.flags & IS_PLANT) && (H.nutrition < 500))
+			if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 				H.nutrition += 30
 		else if (istype(target, /mob/living/carbon/))
 			M.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")

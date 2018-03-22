@@ -8,7 +8,7 @@
 	initial_flooring = null
 
 /turf/simulated/floor/fixed/attackby(var/obj/item/C, var/mob/user)
-	if(istype(C, /obj/item/stack) && !istype(C, /obj/item/stack/cable_coil))
+	if(istype(C, /obj/item/stack) && !isCoil(C))
 		return
 	return ..()
 
@@ -28,8 +28,8 @@
 	icon_state = "jaggy"
 
 /turf/simulated/floor/fixed/alium/attackby(var/obj/item/C, var/mob/user)
-	if(istype(C, /obj/item/weapon/crowbar))
-		to_chat(user, "<span class='notice'>There isn't any openings big enough to pry it away...</span>")
+	if(isCrowbar(C))
+		to_chat(user, "<span class='notice'>There aren't any openings big enough to pry it away...</span>")
 		return
 	return ..()
 
@@ -41,8 +41,10 @@
 	color = A.icon_colour
 	icon_state = "[A.icon_base][(x*y) % 7]"
 
-/turf/simulated/floor/fixed/alium/curves
-	icon_state = "curvy"
+/turf/simulated/floor/fixed/alium/airless
+	initial_gas = null
+	temperature = TCMB
+
 /turf/simulated/floor/fixed/alium/ex_act(severity)
 	var/material/A = get_material_by_name("alien alloy")
 	if(prob(A.explosion_resistance))

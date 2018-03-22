@@ -4,6 +4,7 @@
 //Torch map alert levels. Refer to security_state.dm.
 /decl/security_state/default/torchdept
 	all_security_levels = list(/decl/security_level/default/torchdept/code_green, /decl/security_level/default/torchdept/code_violet, /decl/security_level/default/torchdept/code_orange, /decl/security_level/default/torchdept/code_blue, /decl/security_level/default/torchdept/code_red, /decl/security_level/default/code_delta)
+	standard_security_levels = list(/decl/security_level/default/torchdept/code_green, /decl/security_level/default/torchdept/code_violet, /decl/security_level/default/torchdept/code_orange, /decl/security_level/default/torchdept/code_blue)
 
 /decl/security_level/default/torchdept
 	icon = 'maps/torch/icons/security_state.dmi'

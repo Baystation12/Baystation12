@@ -19,8 +19,8 @@
 	var/tag_east_con
 	var/tag_west_con
 
-	var/max_flow_rate = 200
-	var/set_flow_rate = 200
+	var/max_flow_rate = ATMOS_DEFAULT_VOLUME_MIXER
+	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_MIXER
 
 	var/list/mixing_inputs = list()
 

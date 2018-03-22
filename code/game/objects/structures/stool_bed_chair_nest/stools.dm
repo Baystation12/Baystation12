@@ -68,10 +68,10 @@ var/global/list/stool_cache = list() //haha stool
 	overlays = noverlays
 	// Strings.
 	if(padding_material)
-		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
+		SetName("[padding_material.display_name] [initial(name)]") //this is not perfect but it will do for now.
 		desc = "A padded stool. Apply butt. It's made of [material.use_name] and covered with [padding_material.use_name]."
 	else
-		name = "[material.display_name] [initial(name)]"
+		SetName("[material.display_name] [initial(name)]")
 		desc = "A stool. Apply butt with care. It's made of [material.use_name]."
 
 /obj/item/weapon/stool/proc/add_padding(var/padding_type)
@@ -122,7 +122,7 @@ var/global/list/stool_cache = list() //haha stool
 	qdel(src)
 
 /obj/item/weapon/stool/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
+	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		dismantle()
 		qdel(src)
@@ -152,7 +152,7 @@ var/global/list/stool_cache = list() //haha stool
 		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return
-	else if (istype(W, /obj/item/weapon/wirecutters))
+	else if(isWirecutter(W))
 		if(!padding_material)
 			to_chat(user, "\The [src] has no padding to remove.")
 			return

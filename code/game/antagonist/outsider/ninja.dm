@@ -92,7 +92,7 @@ var/datum/antagonist/ninja/ninjas
 	var/mob/living/carbon/human/H = player.current
 	if(istype(H))
 		H.real_name = "[ninja_title] [ninja_name]"
-		H.name = H.real_name
+		H.SetName(H.real_name)
 	player.name = H.name
 
 /datum/antagonist/ninja/equip(var/mob/living/carbon/human/player)

@@ -96,6 +96,8 @@
 	set_light(light_strength)
 	if(active_program)
 		overlays.Add(active_program.program_icon_state ? active_program.program_icon_state : icon_state_menu)
+		if(active_program.program_key_state)
+			overlays.Add(active_program.program_key_state)
 	else
 		overlays.Add(icon_state_menu)
 
@@ -152,7 +154,7 @@
 		P.kill_program(1)
 		idle_threads.Remove(P)
 	if(loud)
-		visible_message("\The [src] shuts down.")
+		visible_message("\The [src] shuts down.", range = 1)
 	enabled = 0
 	update_icon()
 

@@ -183,7 +183,7 @@
 	name = "Petrov"
 	warmup_time = 10
 	shuttle_area = list(/area/shuttle/petrov/ship,/area/shuttle/petrov/cell1,/area/shuttle/petrov/cell2,/area/shuttle/petrov/cell3)
-	dock_target = "petrov_shuttle"
+	dock_target = "petrov_shuttle_airlock"
 	waypoint_station = "nav_petrov_start"
 	waypoint_offsite = "nav_petrov_out"
 
@@ -200,7 +200,7 @@
 /datum/shuttle/autodock/multi/antag/ninja
 	name = "Ninja"
 	warmup_time = 0
-	destinations = list(
+	destination_tags = list(
 		"nav_ninja_deck1",
 		"nav_ninja_deck2",
 		"nav_ninja_deck3",
@@ -212,7 +212,11 @@
 		"nav_ninja_start",
 		"nav_lost_supply_base_antag",
 		"nav_marooned_antag",
-		"nav_smugglers_antag"
+		"nav_smugglers_antag",
+		"nav_magshield_antag",
+		"nav_casino_antag",
+		"nav_yacht_antag",
+		"nav_slavers_base_antag",
 		)
 	shuttle_area = /area/ninja_dojo/start
 	current_location = "nav_ninja_start"
@@ -318,7 +322,7 @@
 /datum/shuttle/autodock/multi/antag/mercenary
 	name = "Mercenary"
 	warmup_time = 0
-	destinations = list(
+	destination_tags = list(
 		"nav_merc_deck1",
 		"nav_merc_deck2",
 		"nav_merc_deck3",
@@ -331,7 +335,11 @@
 		"nav_merc_start",
 		"nav_lost_supply_base_antag",
 		"nav_marooned_antag",
-		"nav_smugglers_antag"
+		"nav_smugglers_antag",
+		"nav_magshield_antag",
+		"nav_casino_antag",
+		"nav_yacht_antag",
+		"nav_slavers_base_antag",
 		)
 	shuttle_area = /area/syndicate_station/start
 	dock_target = "merc_shuttle"
@@ -381,7 +389,7 @@
 /datum/shuttle/autodock/multi/antag/skipjack
 	name = "Skipjack"
 	warmup_time = 0
-	destinations = list(
+	destination_tags = list(
 		"nav_skipjack_deck1",
 		"nav_skipjack_deck2",
 		"nav_skipjack_deck3",
@@ -394,7 +402,11 @@
 		"nav_skipjack_start",
 		"nav_lost_supply_base_antag",
 		"nav_marooned_antag",
-		"nav_smugglers_antag"
+		"nav_smugglers_antag",
+		"nav_magshield_antag",
+		"nav_casino_antag",
+		"nav_yacht_antag",
+		"nav_slavers_base_antag",
 		)
 	shuttle_area =  /area/skipjack_station/start
 	dock_target = "skipjack_shuttle"
@@ -444,7 +456,7 @@
 /datum/shuttle/autodock/multi/antag/rescue
 	name = "Rescue"
 	warmup_time = 0
-	destinations = list(
+	destination_tags = list(
 		"nav_ert_deck1",
 		"nav_ert_deck2",
 		"nav_ert_deck3",
@@ -457,7 +469,11 @@
 		"nav_ert_start",
 		"nav_lost_supply_base_antag",
 		"nav_marooned_antag",
-		"nav_smugglers_antag"
+		"nav_smugglers_antag",
+		"nav_magshield_antag",
+		"nav_casino_antag",
+		"nav_yacht_antag",
+		"nav_slavers_base_antag",
 		)
 	shuttle_area = /area/rescue_base/start
 	dock_target = "rescue_shuttle"
@@ -546,9 +562,11 @@
 	name = "Charon"
 	move_time = 90
 	shuttle_area = list(/area/exploration_shuttle/cockpit, /area/exploration_shuttle/atmos, /area/exploration_shuttle/power, /area/exploration_shuttle/crew, /area/exploration_shuttle/cargo, /area/exploration_shuttle/airlock)
+	dock_target = "calypso_shuttle"
 	current_location = "nav_hangar_calypso"
 	landmark_transition = "nav_transit_calypso"
 	range = 1
+	fuel_consumption = 4
 
 /obj/effect/shuttle_landmark/torch/hangar/exploration_shuttle
 	name = "Charon Hangar"
@@ -585,10 +603,12 @@
 	warmup_time = 5
 	move_time = 30
 	shuttle_area = /area/guppy_hangar/start
+	dock_target ="guppy_shuttle"
 	current_location = "nav_hangar_guppy"
 	landmark_transition = "nav_transit_guppy"
 	sound_takeoff = 'sound/effects/rocket.ogg'
 	sound_landing = 'sound/effects/rocket_backwards.ogg'
+	fuel_consumption = 2
 
 /obj/effect/shuttle_landmark/torch/hangar/guppy
 	name = "Guppy Hangar"

@@ -1,10 +1,9 @@
-#include "smugglers.dmm"
 #include "smugglers_areas.dm"
 #include "../mining/mining_areas.dm"
 
 /obj/effect/overmap/sector/smugglers
-	name = "Abandoned smugglers den"
-	desc = "This looks like a small abandoned asteroid station."
+	name = "asteroid station"
+	desc = "A small station built into an asteroid. No radio traffic detected."
 	icon_state = "object"
 	known = 0
 
@@ -13,6 +12,13 @@
 		"nav_smugglers_antag"
 	)
 
+/datum/map_template/ruin/away_site/smugglers
+	name = "Smugglers' Base"
+	id = "awaysite_smugglers"
+	description = "Yarr."
+	suffixes = list("smugglers/smugglers.dmm")
+	cost = 1
+
 /obj/effect/shuttle_landmark/nav_asteroid_base/nav1
 	name = "Abandoned Asteroid Base Navpoint #1"
 	landmark_tag = "nav_smugglers"
@@ -20,7 +26,7 @@
 /obj/effect/shuttle_landmark/nav_asteroid_base/nav2
 	name = "Abandoned Asteroid Base Navpoint #2"
 	landmark_tag = "nav_smugglers_antag"
-
+	autoset = 1
 
 /obj/item/weapon/paper/smug_1
 	name = "suspicios note"

@@ -131,7 +131,7 @@
 
 /obj/machinery/shipsensors/attackby(obj/item/weapon/W, mob/user)
 	var/damage = max_health - health
-	if(damage && istype(W, /obj/item/weapon/weldingtool))
+	if(damage && isWelder(W))
 
 		var/obj/item/weapon/weldingtool/WT = W
 

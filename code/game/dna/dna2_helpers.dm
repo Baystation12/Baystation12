@@ -171,15 +171,19 @@
 				var/list/marklist = dna.body_markings[tag]
 				E.markings = marklist.Copy()
 
+		//Base skin and blend
+		for(var/obj/item/organ/external/E in H.organs)
+			E.set_dna(E.dna)
+
 		//Hair
-		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,hair_styles_list.len)
-		if((0 < hair) && (hair <= hair_styles_list.len))
-			H.h_style = hair_styles_list[hair]
+		var/hair = dna.GetUIValueRange(DNA_UI_HAIR_STYLE,GLOB.hair_styles_list.len)
+		if((0 < hair) && (hair <= GLOB.hair_styles_list.len))
+			H.h_style = GLOB.hair_styles_list[hair]
 
 		//Facial Hair
-		var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE,facial_hair_styles_list.len)
-		if((0 < beard) && (beard <= facial_hair_styles_list.len))
-			H.f_style = facial_hair_styles_list[beard]
+		var/beard = dna.GetUIValueRange(DNA_UI_BEARD_STYLE,GLOB.facial_hair_styles_list.len)
+		if((0 < beard) && (beard <= GLOB.facial_hair_styles_list.len))
+			H.f_style = GLOB.facial_hair_styles_list[beard]
 
 		H.force_update_limbs()
 		H.update_body()

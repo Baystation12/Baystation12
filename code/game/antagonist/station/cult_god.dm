@@ -84,13 +84,13 @@ var/datum/antagonist/godcultist/godcult
 		return 1
 
 /datum/antagonist/godcultist/proc/add_cultist(var/datum/mind/player, var/mob/living/deity/deity)
-	deity.change_follower(player.current, adding = 1)
+	deity.add_follower(player.current)
 	player.current.add_language(LANGUAGE_CULT)
 
 /datum/antagonist/godcultist/proc/remove_cultist(var/datum/mind/player)
 	var/mob/living/deity/god = get_deity(player)
 	if(god)
-		god.change_follower(player.current, adding = 0)
+		god.remove_follower(player.current)
 	player.current.remove_language(LANGUAGE_CULT)
 
 /datum/antagonist/godcultist/proc/get_deity(var/datum/mind/player)

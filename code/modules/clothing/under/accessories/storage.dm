@@ -7,6 +7,7 @@
 	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
 	var/obj/item/weapon/storage/internal/pockets/hold
 	w_class = ITEM_SIZE_NORMAL
+	high_visibility = 1
 
 /obj/item/clothing/accessory/storage/New()
 	..()
@@ -111,8 +112,8 @@
 		/obj/item/weapon/material/butterfly,
 	)
 
-	new /obj/item/weapon/material/hatchet/unathiknife(hold)
-	new /obj/item/weapon/material/hatchet/unathiknife(hold)
+	new /obj/item/weapon/material/kitchen/utensil/knife/unathiknife(hold)
+	new /obj/item/weapon/material/kitchen/utensil/knife/unathiknife(hold)
 
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"
@@ -141,7 +142,8 @@
 		/obj/item/device/multitool,
 		/obj/item/weapon/magnetic_ammo,
 		/obj/item/ammo_magazine,
-		/obj/item/weapon/net_shell
+		/obj/item/weapon/net_shell,
+		/obj/item/weapon/reagent_containers/glass/beaker/vial
 	)
 
 /obj/item/clothing/accessory/storage/bandolier/safari/New()

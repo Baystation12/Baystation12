@@ -32,7 +32,7 @@
 	icon_state = "parrot_fly"
 	icon_living = "parrot_fly"
 	icon_dead = "parrot_dead"
-	pass_flags = PASSTABLE
+	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
 
 	speak = list("Hi","Hello!","Cracker?","BAWWWWK george mellons griffing me")
@@ -693,7 +693,7 @@
 
 
 	var/message_mode=""
-	if(copytext(message,1,2) == ";")
+	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
 		message_mode = "headset"
 		message = copytext(message,2)
 
@@ -701,7 +701,7 @@
 		var/channel_prefix = copytext(message, 1 ,3)
 		message_mode = department_radio_keys[channel_prefix]
 
-	if(copytext(message,1,2) == ":")
+	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_channel_selection))
 		var/positioncut = 3
 		message = trim(copytext(message,positioncut))
 
@@ -719,14 +719,14 @@
 /mob/living/simple_animal/parrot/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	if(prob(50))
 		parrot_hear(message)
-	..(message,verb,language,alt_name,italics,speaker)
+	..()
 
 
 
 /mob/living/simple_animal/parrot/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0)
 	if(prob(50) && available_channels.len)
 		parrot_hear("[pick(available_channels)] [message]")
-	..(message,verb,language,part_a,part_b,speaker,hard_to_hear)
+	..()
 
 
 /mob/living/simple_animal/parrot/proc/parrot_hear(var/message="")

@@ -8,12 +8,17 @@
 	. = ..()
 	if(!.)
 		return
-	if(!get_turf(C.mob))
+	var/mob/M = C.mob ? C.mob.get_looc_mob() : null
+	if(!M)
+		to_chat(C, "<span class='danger'>You cannot use [name] without a mob.</span>")
+		return FALSE
+	if(!get_turf(M))
 		to_chat(C, "<span class='danger'>You cannot use [name] while in nullspace.</span>")
 		return FALSE
 
 /decl/communication_channel/ooc/looc/do_communicate(var/client/C, var/message)
-	var/list/listening_hosts = hosts_in_view_range(C.mob)
+	var/mob/M = C.mob ? C.mob.get_looc_mob() : null
+	var/list/listening_hosts = hosts_in_view_range(M)
 	var/list/listening_clients = list()
 
 	var/key = C.key
@@ -45,3 +50,12 @@
 
 /mob/observer/eye/looc_prefix()
 	return "Eye"
+
+/mob/proc/get_looc_mob()
+	return src
+
+/mob/living/silicon/ai/get_looc_mob()
+	if(!eyeobj)
+		return src
+	return eyeobj
+

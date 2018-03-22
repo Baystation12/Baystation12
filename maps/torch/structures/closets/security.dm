@@ -9,7 +9,6 @@
 	icon_closed = "sec"
 	icon_locked = "sec1"
 	icon_opened = "secopen"
-	icon_broken = "secbroken"
 	icon_off = "secoff"
 
 /obj/structure/closet/secure_closet/security_torch/WillContain()
@@ -27,7 +26,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/weapon/gun/energy/taser,
+		/obj/item/weapon/gun/energy/secure/gun/small,
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/accessory/holster/thigh,
@@ -45,12 +44,11 @@
 	icon_closed = "hossecure"
 	icon_locked = "hossecure1"
 	icon_opened = "hossecureopen"
-	icon_broken = "hossecurebroken"
 	icon_off = "hossecureoff"
 
 /obj/structure/closet/secure_closet/cos/WillContain()
 	return list(
-		/obj/item/clothing/suit/armor/pcarrier/medium/command,
+		/obj/item/clothing/suit/armor/pcarrier/medium/command/security,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/clothing/head/HoS/dermal,
 		/obj/item/weapon/cartridge/hos,
@@ -85,7 +83,6 @@
 	icon_closed = "wardensecure"
 	icon_locked = "wardensecure1"
 	icon_opened = "wardensecureopen"
-	icon_broken = "wardensecurebroken"
 	icon_off = "wardensecureoff"
 
 /obj/structure/closet/secure_closet/brigofficer/WillContain()
@@ -102,7 +99,7 @@
 		/obj/item/weapon/gun/energy/gun,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/weapon/gun/energy/taser,
+		/obj/item/weapon/gun/energy/secure/gun/small,
 		/obj/item/weapon/handcuffs,
 		/obj/item/device/hailer,
 		/obj/item/device/flash,
@@ -122,7 +119,6 @@
 	icon_closed = "sec"
 	icon_locked = "sec1"
 	icon_opened = "secopen"
-	icon_broken = "secbroken"
 	icon_off = "secoff"
 
 /obj/structure/closet/secure_closet/forensics/WillContain()
@@ -132,7 +128,7 @@
 		/obj/item/clothing/suit/armor/vest/detective,
 		/obj/item/clothing/head/helmet/solgov/security,
 		/obj/item/clothing/suit/armor/pcarrier/medium/security,
-		/obj/item/weapon/gun/energy/taser,
+		/obj/item/weapon/gun/energy/secure/gun/small,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/device/flash,
 		/obj/item/weapon/melee/baton/loaded,

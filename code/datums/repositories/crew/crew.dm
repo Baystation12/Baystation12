@@ -52,17 +52,21 @@ var/global/datum/repository/crew/crew_repository = new()
 				var/mob/living/carbon/human/H = C.loc
 				if(H.w_uniform != C)
 					continue
+			
 				var/pressure = H.get_blood_pressure()
-				var/blood_result = H.get_blood_oxygenation()
-				if(blood_result > 110)
-					blood_result = "increased"
-				else if(blood_result < 90)
-					blood_result = "low"
-				else if(blood_result < 60)
-					blood_result = "extremely low"
+				if(H.isSynthetic() || !H.should_have_organ(BP_HEART))
+					pressure = "N/A"
 				else
-					blood_result = "normal"
-				pressure += " ([blood_result] oxygenation)"
+					var/blood_result = H.get_blood_oxygenation()
+					if(blood_result > 110)
+						blood_result = "increased"
+					else if(blood_result < 90)
+						blood_result = "low"
+					else if(blood_result < 60)
+						blood_result = "extremely low"
+					else
+						blood_result = "normal"
+					pressure += " ([blood_result] oxygenation)"
 
 				var/true_pulse = H.pulse()
 				var/pulse_span = "good"

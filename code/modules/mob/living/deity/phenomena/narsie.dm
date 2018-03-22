@@ -21,6 +21,7 @@
 /datum/phenomena/hellscape
 	name = "Reveal Hellscape"
 	cost = 30
+	cooldown = 450
 	flags = PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living
 	var/static/list/creepy_notes = list("Your knees give out as an unnatural screaming rings your ears.",

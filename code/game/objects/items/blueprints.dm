@@ -133,7 +133,7 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 		to_chat(usr, "<span class='warning'>Name too long.</span>")
 		return
 	var/area/A = new
-	A.name = str
+	A.SetName(str)
 	//var/ma
 	//ma = A.master ? "[A.master]" : "(null)"
 //	log_debug(create_area: <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]")
@@ -172,7 +172,7 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 		to_chat(usr, "<span class='warning'>Text too long.</span>")
 		return
 	set_area_machinery_title(A,str,prevname)
-	A.name = str
+	A.SetName(str)
 	to_chat(usr, "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>")
 	interact()
 	return
@@ -195,15 +195,15 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 		return
 
 	for(var/obj/machinery/alarm/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.SetName(replacetext(M.name,oldtitle,title))
 	for(var/obj/machinery/power/apc/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.SetName(replacetext(M.name,oldtitle,title))
 	for(var/obj/machinery/atmospherics/unary/vent_scrubber/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.SetName(replacetext(M.name,oldtitle,title))
 	for(var/obj/machinery/atmospherics/unary/vent_pump/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.SetName(replacetext(M.name,oldtitle,title))
 	for(var/obj/machinery/door/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.SetName(replacetext(M.name,oldtitle,title))
 	//TODO: much much more. Unnamed airlocks, cameras, etc.
 
 /obj/item/blueprints/proc/check_tile_is_border(var/turf/T2,var/dir)

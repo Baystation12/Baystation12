@@ -149,3 +149,23 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Practice laser carbine crate"
 	access = access_solgov_crew
+
+/decl/hierarchy/supply_pack/security/pistolammorubber //overriding standard pack
+	name = "Ammo - Assorted Non-Lethal, Pistol"
+	contains = list(/obj/item/ammo_magazine/c45m/rubber = 2, /obj/item/ammo_magazine/c45m/flash = 2, /obj/item/ammo_magazine/c44/rubber = 2)
+	cost = 25
+	containername = "\improper Non-lethal ammunition crate"
+	access = access_heads //only heads get these
+
+/decl/hierarchy/supply_pack/security/pistolammo //overriding standard pack
+	cost = 30
+	access = access_heads
+
+/decl/hierarchy/supply_pack/security/magnum_ammo
+	name = "Ammo - .44 Magnum"
+	contains = list(/obj/item/ammo_magazine/c44 = 4)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "\improper .44 magnum ammunition crate"
+	access = access_heads
+	security_level = SUPPLY_SECURITY_ELEVATED

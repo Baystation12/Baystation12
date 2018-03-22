@@ -9,6 +9,7 @@
 	flags = RESTRICTED
 	syllables = list("sss","sSs","SSS")
 	machine_understands = 0
+	shorthand = "Xeno"
 
 /datum/language/xenos
 	name = "Hivemind"
@@ -19,6 +20,7 @@
 	colour = "alien"
 	key = "a"
 	flags = RESTRICTED | HIVEMIND
+	shorthand = "N/A"
 
 /datum/language/xenos/check_special_condition(var/mob/other)
 
@@ -37,6 +39,7 @@
 	colour = "changeling"
 	key = "g"
 	flags = RESTRICTED | HIVEMIND
+	shorthand = "N/A"
 
 /datum/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -54,6 +57,7 @@
 	colour = "alien"
 	key = "x"
 	flags = RESTRICTED | HIVEMIND
+	shorthand = "N/A"
 
 /datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -81,6 +85,7 @@
 	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
 	machine_understands = 0
+	shorthand = "Vox"
 
 /datum/language/vox/get_random_name()
 	return ..(FEMALE,1,6)
@@ -103,6 +108,7 @@
 		"gal'h'rfikk", "harfrandid", "mud'gib", "fuu", "ma'jin", "dedo", "ol'btoh", "n'ath", "reth", "sh'yro", "eth", \
 		"d'rekkathnor", "khari'd", "gual'te", "nikka", "nikt'o", "barada", "kla'atu", "barhah", "hra" ,"zar'garis")
 	machine_understands = 0
+	shorthand = "CT"
 
 /datum/language/cult
 	name = "Occult"
@@ -113,6 +119,7 @@
 	colour = "cult"
 	key = "y"
 	flags = RESTRICTED | HIVEMIND
+	shorthand = "N/A"
 
 /datum/language/bogani
 	name = LANGUAGE_BOGANI
@@ -127,3 +134,4 @@
 	"eri","erk","eok","eyl","yyl","hyk","qyb","eon","gni","shaf","bissna","goqqo","xokj","wej","nym","assah","qwssa","nieasl","qyno","shaffar",
 	"egyno","bogani","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")
 	machine_understands = 0
+	shorthand = "BG"

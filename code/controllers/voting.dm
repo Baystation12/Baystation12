@@ -324,7 +324,7 @@ datum/controller/vote
 							choices.Add("Add Antagonist")
 					else
 						var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-						if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
+						if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level) && !automatic)
 							to_chat(initiator_key, "The current alert status is too high to call for a crew transfer!")
 							return 0
 						if(ticker.current_state <= GAME_STATE_SETTING_UP)

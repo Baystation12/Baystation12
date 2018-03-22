@@ -1,6 +1,4 @@
 #include "mining_areas.dm"
-#include "mining-asteroid.dmm"
-#include "mining-signal.dmm"
 
 //MINING-1 // CLUSTER
 /obj/effect/overmap/sector/cluster
@@ -19,6 +17,22 @@
 	start_x = 4
 	start_y = 5
 	known = 0
+
+/datum/map_template/ruin/away_site/mining_asteroid
+	name = "Mining - Asteroid"
+	id = "awaysite_mining_asteroid"
+	description = "A medium-sized asteroid full of minerals."
+	suffixes = list("mining/mining-asteroid.dmm")
+	cost = 1
+	accessibility_weight = 10
+
+/datum/map_template/ruin/away_site/mining_signal
+	name = "Mining - Planetoid"
+	id = "awaysite_mining_signal"
+	description = "A mineral-rich, formerly-volcanic site on a planetoid."
+	suffixes = list("mining/mining-signal.dmm")
+	cost = 1
+	base_turf_for_zs = /turf/simulated/floor/asteroid
 
 /obj/effect/shuttle_landmark/cluster/nav1
 	name = "Asteroid Navpoint #1"
@@ -52,8 +66,8 @@
 
 //MINING-2 // SIGNAL
 /obj/effect/overmap/sector/away
-	name = "faint signal"
-	desc = "Faint signal detected, originating from the site's surface."
+	name = "faint signal from an asteroid"
+	desc = "Faint signal detected, originating from the human-made structures on the site's surface."
 	icon_state = "sector"
 	generic_waypoints = list(
 		"nav_away_1",

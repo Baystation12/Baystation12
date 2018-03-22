@@ -1,6 +1,7 @@
 /obj/item/weapon/implant/imprinting
 	name = "imprinting implant"
 	desc = "Latest word in training your peons."
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_DATA = 3)
 	var/list/instructions = list("Do your job.", "Respect your superiours.", "Wash you hands after using the toilet.")
 	var/brainwashing = 0
 	var/last_reminder
@@ -59,7 +60,7 @@
 	return TRUE
 
 /obj/item/weapon/implant/imprinting/Process()
-	if(world.time < last_reminder + 5 MINUTES) 
+	if(world.time < last_reminder + 5 MINUTES)
 		return
 	last_reminder = world.time
 	var/instruction = pick(instructions)

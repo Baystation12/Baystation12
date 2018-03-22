@@ -13,7 +13,7 @@
 		var/choice = alert(user, "Are you sure you want to wipe the disk?", "Xenobotany Data", "No", "Yes")
 		if(src && user && genes && choice && choice == "Yes" && user.Adjacent(get_turf(src)))
 			to_chat(user, "You wipe the disk data.")
-			name = initial(name)
+			SetName(initial(name))
 			desc = initial(name)
 			genes = list()
 			genesource = "unknown"
@@ -85,13 +85,13 @@
 			to_chat(user, "You load [W] into [src].")
 		return
 
-	if(istype(W,/obj/item/weapon/screwdriver))
+	if(isScrewdriver(W))
 		open = !open
 		to_chat(user, "<span class='notice'>You [open ? "open" : "close"] the maintenance panel.</span>")
 		return
 
 	if(open)
-		if(istype(W, /obj/item/weapon/crowbar))
+		if(isCrowbar(W))
 			dismantle()
 			return
 

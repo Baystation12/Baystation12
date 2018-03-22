@@ -6,7 +6,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "gripper"
 
-	flags = NOBLUDGEON
+	item_flags = ITEM_FLAG_NO_BLUDGEON
 
 	//Has a list of items that it can hold.
 	var/list/can_hold = list(
@@ -60,7 +60,7 @@
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/pill,
-		/obj/item/weapon/reagent_containers/blood,
+		/obj/item/weapon/reagent_containers/ivbag,
 		/obj/item/weapon/storage/pill_bottle,
 		)
 
@@ -77,6 +77,7 @@
 		/obj/item/borg/upgrade,
 		/obj/item/device/flash,
 		/obj/item/organ/internal/brain,
+		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
 		/obj/item/weapon/circuitboard,
 		/obj/item/slime_extract,
@@ -174,7 +175,7 @@
 
 	if(wrapped) //Already have an item.
 		//Temporary put wrapped into user so target's attackby() checks pass.
-		wrapped.loc = user //should we use forceMove() here? It is a virtual move after all, that is intended to be reset
+		wrapped.forceMove(user)
 
 		//The force of the wrapped obj gets set to zero during the attack() and afterattack().
 		var/force_holder = wrapped.force
@@ -182,18 +183,9 @@
 
 		//Pass the attack on to the target. This might delete/relocate wrapped.
 		var/resolved = wrapped.resolve_attackby(target,user,params)
-		if(!resolved && wrapped && target)
-			wrapped.afterattack(target,user,1,params)
 
-		if(wrapped)
-			wrapped.force = force_holder
-
-		//If wrapped was neither deleted nor put into target, put it back into the gripper.
-		if(wrapped && user && (wrapped.loc == user))
-			wrapped.loc = src
-		else
-			wrapped = null
-			return
+		//If resolve_attackby forces waiting before taking wrapped, we need to let it finish before doing the rest.
+		addtimer(CALLBACK(src, .proc/finish_using, target, user, params, force_holder, resolved), 0)
 
 	else if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
 
@@ -250,6 +242,20 @@
 				A.cell = null
 
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+
+/obj/item/weapon/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
+	if(!resolved && wrapped && target)
+		wrapped.afterattack(target,user,1,params)
+
+	if(wrapped)
+		wrapped.force = force_holder
+
+	//If wrapped was neither deleted nor put into target, put it back into the gripper.
+	if(wrapped && user && (wrapped.loc == user))
+		wrapped.forceMove(src)
+	else
+		wrapped = null
+		return
 
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler

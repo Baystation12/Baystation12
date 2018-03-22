@@ -84,7 +84,7 @@
 		paste.use(1)
 		return
 
-	else if(istype(W,/obj/item/stack/cable_coil))
+	else if(isCoil(W))
 
 		switch(damage)
 			if(0)
@@ -109,8 +109,8 @@
 		return
 	..()
 
-/obj/item/rig_module/New()
-	..()
+/obj/item/rig_module/Initialize()
+	. =..()
 	if(suit_overlay_inactive)
 		suit_overlay = suit_overlay_inactive
 

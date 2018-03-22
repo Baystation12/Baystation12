@@ -93,7 +93,7 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/head, blocked)
 
 /obj/item/clothing/head/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = initial(name)
+	SetName(initial(name))
 	desc = initial(desc)
 	icon_state = initial(icon_state)
 	update_icon()
@@ -129,7 +129,7 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/suit, blocked)
 
 /obj/item/clothing/suit/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = initial(name)
+	SetName(initial(name))
 	desc = initial(desc)
 	icon_state = initial(icon_state)
 	update_icon()
@@ -164,7 +164,7 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/shoes, blocked)
 
 /obj/item/clothing/shoes/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = initial(name)
+	SetName(initial(name))
 	desc = initial(desc)
 	icon_state = initial(icon_state)
 	item_state = initial(item_state)
@@ -196,11 +196,11 @@
 /obj/item/weapon/storage/backpack/chameleon/New()
 	..()
 	if(!clothing_choices)
-		var/blocked = list(src.type, /obj/item/weapon/storage/backpack/satchel/withwallet)
+		var/blocked = list(src.type, /obj/item/weapon/storage/backpack/satchel/grey/withwallet)
 		clothing_choices = generate_chameleon_choices(/obj/item/weapon/storage/backpack, blocked)
 
 /obj/item/weapon/storage/backpack/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = initial(name)
+	SetName(initial(name))
 	desc = initial(desc)
 	icon_state = initial(icon_state)
 	item_state = initial(item_state)
@@ -242,7 +242,7 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/gloves, list(src.type))
 
 /obj/item/clothing/gloves/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = initial(name)
+	SetName(initial(name))
 	desc = initial(desc)
 	icon_state = initial(icon_state)
 	item_state = initial(item_state)
@@ -278,7 +278,7 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/mask, list(src.type))
 
 /obj/item/clothing/mask/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = initial(name)
+	SetName(initial(name))
 	desc = initial(desc)
 	icon_state = initial(icon_state)
 	item_state = initial(item_state)
@@ -314,7 +314,7 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/glasses, list(src.type))
 
 /obj/item/clothing/glasses/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
-	name = initial(name)
+	SetName(initial(name))
 	desc = initial(desc)
 	icon_state = initial(icon_state)
 	item_state = initial(item_state)
@@ -365,7 +365,7 @@
 /obj/item/weapon/gun/energy/chameleon/consume_next_projectile()
 	var/obj/item/projectile/P = ..()
 	if(P && ispath(copy_projectile))
-		P.name = initial(copy_projectile.name)
+		P.SetName(initial(copy_projectile.name))
 		P.icon = initial(copy_projectile.icon)
 		P.icon_state = initial(copy_projectile.icon_state)
 		P.pass_flags = initial(copy_projectile.pass_flags)
@@ -377,7 +377,7 @@
 	return P
 
 /obj/item/weapon/gun/energy/chameleon/emp_act(severity)
-	name = initial(name)
+	SetName(initial(name))
 	desc = initial(desc)
 	icon_state = initial(icon_state)
 	update_icon()

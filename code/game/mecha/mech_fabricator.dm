@@ -170,6 +170,9 @@
 	var/stack_plural = "[stack.material.use_name] [stack.material.sheet_plural_name]" // eg "steel sheets", "wood planks"
 	var/amnt = stack.perunit
 
+	if(stack.uses_charge)
+		return
+
 	if(!(material in materials))
 		to_chat(user, "<span class=warning>\The [src] does not accept [stack_plural]!</span>")
 		return

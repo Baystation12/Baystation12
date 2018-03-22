@@ -584,8 +584,8 @@ default behaviour is:
 	set name = "Resist"
 	set category = "IC"
 
-	if(!incapacitated(INCAPACITATION_KNOCKOUT) && canClick())
-		setClickCooldown(20)
+	if(!incapacitated(INCAPACITATION_KNOCKOUT) && last_resist + 2 SECONDS <= world.time)
+		last_resist = world.time
 		resist_grab()
 		if(!weakened)
 			process_resist()
@@ -751,3 +751,23 @@ default behaviour is:
 		layer = HIDING_MOB_LAYER
 	else
 		..()
+
+/mob/living/update_icons()
+	if(auras)
+		overlays |= auras
+
+/mob/living/proc/add_aura(var/obj/aura/aura)
+	LAZYDISTINCTADD(auras,aura)
+	update_icons()
+	return 1
+
+/mob/living/proc/remove_aura(var/obj/aura/aura)
+	LAZYREMOVE(auras,aura)
+	update_icons()
+	return 1
+
+/mob/living/Destroy()
+	if(auras)
+		for(var/a in auras)
+			remove_aura(a)
+	return ..()

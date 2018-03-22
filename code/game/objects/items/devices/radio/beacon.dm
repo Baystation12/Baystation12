@@ -9,41 +9,27 @@
 /obj/item/device/radio/beacon/hear_talk()
 	return
 
-
 /obj/item/device/radio/beacon/send_hear()
 	return null
 
-
-/obj/item/device/radio/beacon/verb/alter_signal(t as text)
+/obj/item/device/radio/beacon/verb/alter_signal(newcode as text)
 	set name = "Alter Beacon's Signal"
 	set category = "Object"
 	set src in usr
 
-	if ((usr.canmove && !( usr.restrained() )))
-		src.code = t
-	if (!( src.code ))
-		src.code = "beacon"
-	src.add_fingerprint(usr)
-	return
+	var/mob/user = usr
+	if (!user.incapacitated())
+		code = newcode
+		add_fingerprint(user)
 
 
-/obj/item/device/radio/beacon/bacon //Probably a better way of doing this, I'm lazy.
-	proc/digest_delay()
-		spawn(600)
-			qdel(src)
+/obj/item/device/radio/beacon/anchored
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "floor_magnet"
+	anchored = TRUE
+	randpixel = 0
 
-
-// SINGULO BEACON SPAWNER
-
-/obj/item/device/radio/beacon/syndicate
-	name = "suspicious beacon"
-	desc = "A label on it reads: <i>Activate to have a singularity beacon teleported to your location</i>."
-	origin_tech = list(TECH_BLUESPACE = 1, TECH_ILLEGAL = 7)
-
-/obj/item/device/radio/beacon/syndicate/attack_self(mob/user as mob)
-	if(user)
-		to_chat(user, "<span class='notice'>Locked In</span>")
-		new /obj/machinery/power/singularity_beacon/syndicate( user.loc )
-		playsound(src, 'sound/effects/pop.ogg', 100, 1, 1)
-		qdel(src)
-	return
+/obj/item/device/radio/beacon/anchored/Initialize()
+	. = ..()
+	var/turf/T = get_turf(src)
+	hide(hides_under_flooring() && !T.is_plating())

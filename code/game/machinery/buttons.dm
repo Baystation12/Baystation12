@@ -148,7 +148,7 @@
 
 /obj/machinery/button/toggle/door
 	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "doorctrl0"
+	icon_state = "doorctrl"
 
 	var/_door_functions = 1
 /*	Bitflag, 	1 = open
@@ -159,9 +159,9 @@
 
 /obj/machinery/button/toggle/door/update_icon()
 	if(active)
-		icon_state = "doorctrl0"
+		icon_state = "[initial(icon_state)]"
 	else
-		icon_state = "doorctrl2"
+		icon_state = "[initial(icon_state)]2"
 
 /obj/machinery/button/toggle/door/Initialize()
 	if(_wifi_id)

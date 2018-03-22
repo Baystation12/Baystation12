@@ -84,7 +84,7 @@
 				if(stat != DEAD)
 					if(prob(15))
 						resuscitate()
-					
+
 					if(!H.check_has_mouth())
 						to_chat(H, "<span class='warning'>You don't have a mouth, you cannot do mouth-to-mouth resustication!</span>")
 						return
@@ -157,7 +157,7 @@
 				// Someone got a good grip on them, they won't be able to do much damage
 				rand_damage = max(1, rand_damage - 2)
 
-			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H || H.species.flags & NO_BLOCK)
+			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H || H.species.species_flags & SPECIES_FLAG_NO_BLOCK)
 				accurate = 1 // certain circumstances make it impossible for us to evade punches
 				rand_damage = 5
 

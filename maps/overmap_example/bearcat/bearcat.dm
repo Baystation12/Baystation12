@@ -15,7 +15,7 @@
 	speed_mod = 0.1 MINUTE
 	burn_delay = 10 SECONDS
 
-	generic_waypoints = list("nav_bearcat_below", "nav_bearcat_port_dock_shuttle")
+	generic_waypoints = list("nav_bearcat_below_bow", "nav_bearcat_below_starboardastern", "nav_bearcat_port_dock_shuttle")
 	restricted_waypoints = list(
 		"Exploration Pod" = list("nav_bearcat_starboard_dock_pod"), //pod can only dock starboard-side, b/c there's only one door.
 	)
@@ -77,10 +77,13 @@
 	base_area = /area/ship/scrap/cargo/lower
 	base_turf = /turf/simulated/floor
 
-//Not all waypoints need subtypes. This one is pretty generic, having no dock
-/obj/effect/shuttle_landmark/below_deck
-	name = "Near CSV Bearcat"
-	landmark_tag = "nav_bearcat_below"
+/obj/effect/shuttle_landmark/below_deck_bow
+	name = "Near CSV Bearcat Bow"
+	landmark_tag = "nav_bearcat_below_bow"
+
+/obj/effect/shuttle_landmark/below_deck_starboardastern
+	name = "Near CSV Bearcat Starboard Astern"
+	landmark_tag = "nav_bearcat_below_starboardastern"
 
 /turf/simulated/wall //landlubbers go home
 	name = "bulkhead"

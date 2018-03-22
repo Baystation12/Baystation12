@@ -108,8 +108,10 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	for(var/id = tickets.len, id >= 1, id--)
 		var/datum/ticket/ticket = tickets[id]
 		if(C.holder || ticket.owner.ckey == C.ckey)
+			var/client/owner_client = client_by_ckey(ticket.owner.ckey)
 			var/open = 0
 			var/status = "Unknown status"
+			var/color = "#6aa84f"
 			switch(ticket.status)
 				if(TICKET_OPEN)
 					open = 1
@@ -117,18 +119,25 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 				if(TICKET_ASSIGNED)
 					open = 2
 					status = "Assigned to [english_list(ticket.assigned_admin_ckeys(), "no one")]"
+					color = "#ffffff"
 				if(TICKET_CLOSED)
 					status = "Closed by [ticket.closed_by.ckey]"
-			ticket_dat += "<li>"
+					color = "#cc2222"
+			ticket_dat += "<li style='padding-bottom:10px;color:[color]'>"
 			if(open_ticket && open_ticket == ticket)
 				ticket_dat += "<i>"
-			ticket_dat += "Ticket #[id] - [ticket.owner.ckey] - [status]<br /><a href='byond://?src=\ref[src];action=view;ticket=\ref[ticket]'>VIEW</a>"
+			ticket_dat += "Ticket #[id] - [ticket.owner.ckey] [owner_client ? "" : "(DC)"] - [status]<br /><a href='byond://?src=\ref[src];action=view;ticket=\ref[ticket]'>VIEW</a>"
 			if(open)
 				ticket_dat += " - <a href='byond://?src=\ref[src];action=pm;ticket=\ref[ticket]'>PM</a>"
 				if(C.holder)
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=take;ticket=\ref[ticket]'>[(open == 1) ? "TAKE" : "JOIN"]</a>"
 				if(ticket.status != TICKET_CLOSED && (C.holder || ticket.status == TICKET_OPEN))
 					ticket_dat += " - <a href='byond://?src=\ref[src];action=close;ticket=\ref[ticket]'>CLOSE</a>"
+			if(C.holder)
+				var/ref_mob = ""
+				if(owner_client)
+					ref_mob = "\ref[owner_client.mob]"
+				ticket_dat += " - <A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A> - <A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A> - <A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A> - <A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>[owner_client ? "- [admin_jump_link(owner_client, src)]" : ""]"
 			if(open_ticket && open_ticket == ticket)
 				ticket_dat += "</i>"
 			ticket_dat += "</li>"
@@ -142,7 +151,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 			var/list/msg_dat = list()
 			for(var/datum/ticket_msg/msg in open_ticket.msgs)
 				var/msg_to = msg.msg_to ? msg.msg_to : "Adminhelp"
-				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [msg.msg]</li>"
+				msg_dat += "<li>\[[msg.time_stamp]\] [msg.msg_from] -> [msg_to]: [C.holder ? generate_ahelp_key_words(C.mob, msg.msg) : msg.msg]</li>"
 
 			if(msg_dat.len)
 				dat += "<ul>[jointext(msg_dat, null)]</ul></div>"
@@ -212,7 +221,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 
 	var/datum/ticket_panel/ticket_panel = new()
 	ticket_panels[src] = ticket_panel
-	ticket_panel.ticket_panel_window = new(src.mob, "ticketpanel", "Ticket Manager", 800, 600, ticket_panel)
+	ticket_panel.ticket_panel_window = new(src.mob, "ticketpanel", "Ticket Manager", 1024, 768, ticket_panel)
 
 	ticket_panel.ticket_panel_window.set_content(ticket_panel.get_dat())
 	ticket_panel.ticket_panel_window.open()

@@ -5,7 +5,6 @@
 	icon_closed = "secureres"
 	icon_locked = "secureres1"
 	icon_opened = "secureresopen"
-	icon_broken = "secureresbroken"
 	icon_off = "secureresoff"
 
 /obj/structure/closet/secure_closet/scientist/WillContain()
@@ -26,7 +25,6 @@
 	icon_closed = "secureres"
 	icon_locked = "secureres1"
 	icon_opened = "secureresopen"
-	icon_broken = "secureresbroken"
 	icon_off = "secureresoff"
 
 /obj/structure/closet/secure_closet/xenobio/WillContain()
@@ -48,7 +46,6 @@
 	icon_closed = "rdsecure"
 	icon_locked = "rdsecure1"
 	icon_opened = "rdsecureopen"
-	icon_broken = "rdsecurebroken"
 	icon_off = "rdsecureoff"
 
 /obj/structure/closet/secure_closet/RD/WillContain()

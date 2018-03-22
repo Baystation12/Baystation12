@@ -1,18 +1,20 @@
 #include "marooned_areas.dm"
-#include "marooned.dmm"
 #include "../mining/mining_areas.dm"
 
 /turf/simulated/floor/marooned/snow
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
-	temperature = T20C - 40
+	temperature = T0C - 30
+	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	dynamic_lighting = 0
 
 /obj/effect/overmap/sector/marooned
-	name = "Glacier planet with power signature in polar region"
-	desc = "Moon-sized planet with breathable atmosphere. We detect power signature on a surface."
-	icon_state = "object"
+	name = "glacial planetoid"
+	desc = "Moon-sized planet with breathable atmosphere. Sensors are picking up a weak radio signal from the surface."
+	icon_state = "globe"
 	known = 0
+	in_space = 0
 
 	generic_waypoints = list(
 		"nav_marooned_1",
@@ -20,40 +22,58 @@
 		"nav_marooned_antag"
 	)
 
+/obj/effect/overmap/sector/marooned/New(nloc, max_x, max_y)
+	name = "[generate_planet_name()], \a [name]"
+	..()
+
+/datum/map_template/ruin/away_site/marooned
+	name = "Marooned"
+	id = "awaysite_marooned"
+	description = "A snowy wasteland."
+	suffixes = list("marooned/marooned.dmm")
+	cost = 1
+
 /obj/effect/shuttle_landmark/nav_marooned/nav1
 	name = "Planetside Navpoint #1"
 	landmark_tag = "nav_marooned_1"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/nav_marooned/nav2
 	name = "Planetside Navpoint #2"
 	landmark_tag = "nav_marooned_2"
+	autoset = 1
 
 /obj/effect/shuttle_landmark/nav_marooned/nav3
 	name = "Planetside Navpoint #3"
 	landmark_tag = "nav_marooned_antag"
+	autoset = 1
 
 /obj/item/clothing/under/magintka_uniform
 	name = "Magnitka fleet officer uniform"
-	desc = "Dark uniform coat worn by Magnitka fleet officers."
+	desc = "A dark uniform coat worn by Magnitka fleet officers."
 	icon_state = "magnitka_officer"
-	item_state = "magnitka_officer_on"
-	worn_state = "magnitka_officer"
-	icon = 'marooned_sprites.dmi'
+	icon = 'maps/away/marooned/marooned_sprites.dmi'
+	item_icons = list(slot_w_uniform_str = 'maps/away/marooned/marooned_sprites.dmi')
 
 /obj/item/clothing/accessory/medal/silver/marooned_medal
-	name = "\improper marooned officer's  medal"
+	name = "marooned officer's medal"
 	desc = "An silver round medal of marooned officer. It has inscription \"For Distinguished Service\" in lower part. On medal's plank it's engraved \"H. Warda\""
 	icon_state = "marooned_medal"
-	icon = 'marooned_sprites.dmi'
+	icon = 'maps/away/marooned/marooned_sprites.dmi'
 
 /obj/effect/landmark/corpse/marooned_officer
-	name = "Marooned Magnitka's fleet officer"
-	corpseuniform = /obj/item/clothing/under/magintka_uniform
-	corpsesuit = /obj/item/clothing/suit/storage/hooded/wintercoat
-	corpseshoes = /obj/item/clothing/shoes/jungleboots
-	corpsegloves = /obj/item/clothing/gloves/thick
-	corpsehelmet = /obj/item/clothing/head/beret
-	corpsepocket1 = /obj/item/weapon/material/butterfly/switchblade
+	name = "Horazy Warda"
+	corpse_outfits = list(/decl/hierarchy/outfit/corpse/marooned_officer)
+	spawn_flags = ~CORPSE_SPAWNER_RANDOM_NAME
+
+/decl/hierarchy/outfit/corpse/marooned_officer
+	name = "Dead Magnitka's fleet officer"
+	uniform = /obj/item/clothing/under/magintka_uniform
+	suit = /obj/item/clothing/suit/storage/hooded/wintercoat
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick
+	head = /obj/item/clothing/head/beret
+	l_pocket = /obj/item/weapon/material/butterfly/switchblade
 
 /obj/item/weapon/paper/marooned/note1
 	name = "Marooned note 1"

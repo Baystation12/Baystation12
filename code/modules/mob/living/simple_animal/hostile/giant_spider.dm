@@ -31,7 +31,7 @@
 	var/poison_type = /datum/reagent/toxin
 	faction = "spiders"
 	var/busy = 0
-	pass_flags = PASSTABLE
+	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 6
 	speed = 3
 

@@ -27,6 +27,9 @@
 	update_dna()
 	return 1
 
+/mob/living/carbon/human/proc/randomize_gender()
+	change_gender(pick(species.genders))
+
 /mob/living/carbon/human/proc/change_hair(var/hair_style)
 	if(!hair_style)
 		return
@@ -34,7 +37,7 @@
 	if(h_style == hair_style)
 		return
 
-	if(!(hair_style in hair_styles_list))
+	if(!(hair_style in GLOB.hair_styles_list))
 		return
 
 	h_style = hair_style
@@ -49,7 +52,7 @@
 	if(f_style == facial_hair_style)
 		return
 
-	if(!(facial_hair_style in facial_hair_styles_list))
+	if(!(facial_hair_style in GLOB.facial_hair_styles_list))
 		return
 
 	f_style = facial_hair_style
@@ -124,7 +127,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_skin_tone(var/tone)
-	if(s_tone == tone || !(species.appearance_flags & HAS_SKIN_TONE))
+	if(s_tone == tone || !(species.appearance_flags & HAS_A_SKIN_TONE))
 		return
 
 	s_tone = tone
@@ -157,49 +160,19 @@
 	return valid_species
 
 /mob/living/carbon/human/proc/generate_valid_hairstyles(var/check_gender = 1)
-
-	var/use_species = species.get_bodytype(src)
-	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
-	if(H) use_species = H.species.get_bodytype(src)
-
-	var/list/valid_hairstyles = new()
-	for(var/hairstyle in hair_styles_list)
-		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-
-		if(check_gender && gender != NEUTER)
+	. = list()
+	var/list/hair_styles = species.get_hair_styles()
+	for(var/hair_style in hair_styles)
+		var/datum/sprite_accessory/S = hair_styles[hair_style]
+		if(check_gender)
 			if(gender == MALE && S.gender == FEMALE)
 				continue
-			else if(gender == FEMALE && S.gender == MALE)
+			if(gender == FEMALE && S.gender == MALE)
 				continue
-
-		if(!(use_species in S.species_allowed))
-			continue
-		valid_hairstyles += hairstyle
-
-	return valid_hairstyles
+		.[hair_style] = S
 
 /mob/living/carbon/human/proc/generate_valid_facial_hairstyles()
-
-	var/use_species = species.get_bodytype(src)
-	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
-	if(H) use_species = H.species.get_bodytype(src)
-
-	var/list/valid_facial_hairstyles = new()
-	for(var/facialhairstyle in facial_hair_styles_list)
-		var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-
-		if(gender != NEUTER)
-			if(gender == MALE && S.gender == FEMALE)
-				continue
-			else if(gender == FEMALE && S.gender == MALE)
-				continue
-
-		if(!(use_species in S.species_allowed))
-			continue
-
-		valid_facial_hairstyles += facialhairstyle
-
-	return valid_facial_hairstyles
+	return species.get_facial_hair_styles(gender)
 
 /mob/living/carbon/human/proc/force_update_limbs()
 	for(var/obj/item/organ/external/O in organs)

@@ -2,6 +2,7 @@
 	name = "compressed matter implant"
 	desc = "Based on compressed matter technology, can store a single item."
 	icon_state = "implant_evil"
+	origin_tech = list(TECH_MATERIAL = 4, TECH_BIO = 2, TECH_ILLEGAL = 2)
 	var/activation_emote
 	var/obj/item/scanned
 

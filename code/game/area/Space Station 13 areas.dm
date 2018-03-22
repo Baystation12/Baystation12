@@ -70,6 +70,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_equip = 0
 	power_environ = 0
 	has_gravity = 0
+	area_flags = AREA_FLAG_EXTERNAL
 	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
 
 /area/space/update_icon()
@@ -129,9 +130,10 @@ area/space/atmosalert()
 	icon_state = "sec_prison"
 
 /area/maintenance
-	flags = AREA_RAD_SHIELDED
+	area_flags = AREA_FLAG_RAD_SHIELDED
 	sound_env = TUNNEL_ENCLOSED
 	turf_initializer = /decl/turf_initializer/maintenance
+	forced_ambience = list('sound/ambience/maintambience.ogg')
 
 /area/rnd/xenobiology
 	name = "\improper Xenobiology Lab"

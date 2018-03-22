@@ -75,25 +75,32 @@
 					return
 
 	// High brute damage or sharp objects may damage internal organs
-	var/damage_amt = brute
-	var/cur_damage = brute_dam
-	if(laser)
-		damage_amt += burn
-		cur_damage += burn_dam
-	if(internal_organs && internal_organs.len && (cur_damage + damage_amt >= max_damage || (((sharp && damage_amt >= 5) || damage_amt >= 10) && prob(5))))
-		// Damage an internal organ
-		var/list/victims = list()
-		for(var/obj/item/organ/internal/I in internal_organs)
-			if(I.damage < I.max_damage && prob(I.relative_size))
-				victims += I
-		if(!victims.len)
-			victims += pick(internal_organs)
-		for(var/obj/item/organ/victim in victims)
-			brute /= 2
-			if(laser)
-				burn /= 2
-			damage_amt /= 2
-			victim.take_damage(damage_amt)
+	if(internal_organs && internal_organs.len)
+		var/damage_amt = brute
+		var/cur_damage = brute_dam
+		if(laser)
+			damage_amt += burn
+			cur_damage += burn_dam
+		var/organ_damage_threshold = 10
+		if(sharp)
+			organ_damage_threshold *= 0.5
+		var/organ_damage_prob = 5 * damage_amt/organ_damage_threshold //more damage, higher chance to damage
+		if(encased && !(status & ORGAN_BROKEN)) //ribs protect
+			organ_damage_prob *= 0.5
+		if ((cur_damage + damage_amt >= max_damage || damage_amt >= organ_damage_threshold) && prob(organ_damage_prob))
+			// Damage an internal organ
+			var/list/victims = list()
+			for(var/obj/item/organ/internal/I in internal_organs)
+				if(I.damage < I.max_damage && prob(I.relative_size))
+					victims += I
+			if(!victims.len)
+				victims += pick(internal_organs)
+			for(var/obj/item/organ/victim in victims)
+				brute /= 2
+				if(laser)
+					burn /= 2
+				damage_amt /= 2
+				victim.take_damage(damage_amt)
 
 	if(status & ORGAN_BROKEN && brute)
 		jostle_bone(brute)
@@ -105,7 +112,7 @@
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	var/datum/wound/created_wound
-	var/block_cut = !(brute > 15 || !(species.flags & NO_MINOR_CUT))
+	var/block_cut = !(brute > 15 || !(species.species_flags & SPECIES_FLAG_NO_MINOR_CUT))
 
 	if(brute)
 		var/to_create = BRUISE
@@ -172,10 +179,10 @@
 
 // Geneloss/cloneloss.
 /obj/item/organ/external/proc/get_genetic_damage()
-	return ((species && (species.flags & NO_SCAN)) || robotic >= ORGAN_ROBOT) ? 0 : genetic_degradation
+	return ((species && (species.species_flags & SPECIES_FLAG_NO_SCAN)) || robotic >= ORGAN_ROBOT) ? 0 : genetic_degradation
 
 /obj/item/organ/external/proc/remove_genetic_damage(var/amount)
-	if((species.flags & NO_SCAN) || robotic >= ORGAN_ROBOT)
+	if((species.species_flags & SPECIES_FLAG_NO_SCAN) || robotic >= ORGAN_ROBOT)
 		genetic_degradation = 0
 		status &= ~ORGAN_MUTATED
 		return
@@ -188,7 +195,7 @@
 	return -(genetic_degradation - last_gene_dam)
 
 /obj/item/organ/external/proc/add_genetic_damage(var/amount)
-	if((species.flags & NO_SCAN) || robotic >= ORGAN_ROBOT)
+	if((species.species_flags & SPECIES_FLAG_NO_SCAN) || robotic >= ORGAN_ROBOT)
 		genetic_degradation = 0
 		status &= ~ORGAN_MUTATED
 		return
@@ -243,10 +250,18 @@
 	return pain-last_pain
 
 /obj/item/organ/external/proc/stun_act(var/stun_amount, var/agony_amount)
-	return
+	if(agony_amount > 5 && owner && vital && get_pain() > 0.5 * max_damage)
+		owner.visible_message("<span class='warning'>[owner] reels in pain!</span>")
+		if(has_genitals() || get_pain() + agony_amount > max_damage)
+			owner.Weaken(6)
+		else
+			owner.Stun(6)
+			owner.drop_l_hand()
+			owner.drop_r_hand()
+		return 1
 
 /obj/item/organ/external/proc/get_agony_multiplier()
-	return 1
+	return has_genitals() ? 2 : 1
 
 /obj/item/organ/external/proc/sever_artery()
 	if(species && species.has_organ[BP_HEART])

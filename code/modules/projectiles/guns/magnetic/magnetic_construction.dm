@@ -33,7 +33,7 @@
 		increment_construction_stage()
 		return
 
-	if(istype(thing, /obj/item/weapon/weldingtool) && construction_stage == 4)
+	if(isWelder(thing) && construction_stage == 4)
 		var/obj/item/weapon/weldingtool/welder = thing
 
 		if(!welder.isOn())
@@ -49,7 +49,7 @@
 		increment_construction_stage()
 		return
 
-	if(istype(thing, /obj/item/stack/cable_coil) && construction_stage == 5)
+	if(isCoil(thing) && construction_stage == 5)
 		var/obj/item/stack/cable_coil/cable = thing
 		if(cable.get_amount() < 5)
 			to_chat(user, "<span class='warning'>You need at least 5 lengths of cable for this task.</span>")
@@ -66,7 +66,7 @@
 		increment_construction_stage()
 		return
 
-	if(isscrewdriver(thing) && construction_stage >= 9)
+	if(isScrewdriver(thing) && construction_stage >= 9)
 		user.visible_message("<span class='notice'>\The [user] secures \the [src] and finishes it off.</span>")
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		var/obj/item/weapon/gun/magnetic/coilgun = new(loc)

@@ -15,7 +15,7 @@
 	var/light_range_on = 2
 	var/light_power_on = 1
 	var/overlay_layer
-	flags = OBJ_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	clicksound = "keyboard"
 
 /obj/machinery/computer/New()
@@ -91,7 +91,7 @@
 	return text
 
 /obj/machinery/computer/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
+	if(isScrewdriver(I) && circuit)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20, src))
 			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )

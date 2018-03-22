@@ -48,7 +48,7 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/head/bearpelt,
 		/obj/item/clothing/head/ushanka,
 		/obj/item/clothing/head/pirate,
-		/obj/item/clothing/head/bandana,
+		/obj/item/clothing/mask/bandana/red,
 		/obj/item/clothing/head/hgpiratecap,
 		)
 
@@ -108,9 +108,9 @@ var/datum/antagonist/raider/raiders
 /datum/antagonist/raider/update_access(var/mob/living/player)
 	for(var/obj/item/weapon/storage/wallet/W in player.contents)
 		for(var/obj/item/weapon/card/id/id in W.contents)
-			id.name = "[player.real_name]'s Passport"
+			id.SetName("[player.real_name]'s Passport")
 			id.registered_name = player.real_name
-			W.name = "[initial(W.name)] ([id.name])"
+			W.SetName("[initial(W.name)] ([id.name])")
 
 /datum/antagonist/raider/create_global_objectives()
 
@@ -223,7 +223,7 @@ var/datum/antagonist/raider/raiders
 		equip_weapons(player)
 
 	var/obj/item/weapon/card/id/id = create_id("Visitor", player, equip = 0)
-	id.name = "[player.real_name]'s Passport"
+	id.SetName("[player.real_name]'s Passport")
 	id.assignment = "Visitor"
 	var/obj/item/weapon/storage/wallet/W = new(player)
 	W.handle_item_insertion(id)

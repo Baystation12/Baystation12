@@ -21,6 +21,6 @@
 					P.icon = 'icons/obj/objects.dmi'
 					P.failchance = 0
 					P.icon_state = "anom"
-					P.name = "wormhole"
+					P.SetName("wormhole")
 					spawn(rand(100,150))
 						qdel(P)

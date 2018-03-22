@@ -65,8 +65,7 @@
 
 	client.images = null				//remove the images such as AIs being unable to see runes
 	client.screen = list()				//remove hud items just in case
-	if(hud_used)	qdel(hud_used)		//remove the hud objects
-	hud_used = new /datum/hud(src)
+	InitializeHud()
 
 	next_move = 1
 	set_sight(sight|SEE_SELF)

@@ -3,13 +3,13 @@
 	name = "galoshes"
 	icon_state = "galoshes"
 	permeability_coefficient = 0.05
-	item_flags = NOSLIP
+	item_flags = ITEM_FLAG_NOSLIP
 	can_hold_knife = 1
 	species_restricted = null
 
-/obj/item/clothing/shoes/galoshes/New()
-	..()
-	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN+1
+/obj/item/clothing/shoes/galoshes/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_shoes] = 1
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"

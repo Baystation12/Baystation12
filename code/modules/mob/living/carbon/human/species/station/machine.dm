@@ -15,6 +15,7 @@
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
 	num_alternate_languages = 2
+	strength = STR_HIGH
 	name_language = LANGUAGE_EAL
 
 	min_age = 1
@@ -37,7 +38,7 @@
 	body_temperature = null
 	passive_temp_gain = 5  // This should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
-	flags = NO_SCAN | NO_PAIN | NO_POISON
+	species_flags = SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_PAIN | SPECIES_FLAG_NO_POISON
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_LACE
 	appearance_flags = HAS_UNDERWEAR //IPCs can wear undies too :(
 

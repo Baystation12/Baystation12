@@ -3,6 +3,7 @@
 	filedesc = "NanoWord"
 	extended_desc = "This program allows the editing and preview of text documents."
 	program_icon_state = "word"
+	program_key_state = "atmos_key"
 	size = 4
 	requires_ntnet = 0
 	available_on_ntnet = 1
@@ -96,7 +97,8 @@
 		\[cell\] - New table cell.
 		\[logo\] - Inserts NT logo image.
 		\[bluelogo\] - Inserts blue NT logo image.
-		\[solcrest\] - Inserts SCG crest image"}
+		\[solcrest\] - Inserts SCG crest image.
+		\[terraseal\] - Inserts TCC seal"}
 
 		to_chat(usr, help)
 		return 1

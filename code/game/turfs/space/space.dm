@@ -1,34 +1,46 @@
 /turf/space
 	plane = SPACE_PLANE
 	icon = 'icons/turf/space.dmi'
-	name = "\proper space"
-	icon_state = "0"
-	dynamic_lighting = 0
 
+	name = "\proper space"
+	icon_state = "default"
+	dynamic_lighting = 0
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
-	var/keep_sprite = 0
-//	heat_capacity = 700000 No.
+	var/static/list/dust_cache
 
-/turf/space/New()
-	if((icon_state == "0") && (!keep_sprite))
-		icon_state = "[((x + y) ^ ~(x * y)) % 25]"
-	update_starlight()
-	..()
+/turf/space/proc/build_dust_cache()
+	LAZYINITLIST(dust_cache)
+	for (var/i in 0 to 25)
+		var/image/im = image('icons/turf/space_dust.dmi',"[i]")
+		im.plane = DUST_PLANE
+		im.alpha = 80
+		im.blend_mode = BLEND_ADD
+		dust_cache["[i]"] = im
+
 
 /turf/space/Initialize()
 	. = ..()
+	icon_state = "white"
+	update_starlight()
+	if (!dust_cache)
+		build_dust_cache()
+	overlays += dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
+
 	if(!HasBelow(z))
 		return
 	var/turf/below = GetBelow(src)
+
 	if(istype(below, /turf/space))
 		return
 	var/area/A = below.loc
-	if(A.flags & AREA_EXTERNAL)
-		return
-	if(!below.density && istype(below.loc, /area/space))
+
+	if(!below.density && (A.area_flags & AREA_FLAG_EXTERNAL))
 		return
 
+	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
+
+/turf/space/LateInitialize()
 	// We alter area type before the turf to ensure the turf-change-event-propagation is handled as expected.
 	if(GLOB.using_map.base_floor_area)
 		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
@@ -56,7 +68,7 @@
 	if (istype(C, /obj/item/stack/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			return
+			return L.attackby(C, user)
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")
@@ -211,4 +223,3 @@
 /turf/space/bluespace
 	name = "bluespace"
 	icon_state = "bluespace"
-	keep_sprite = 1

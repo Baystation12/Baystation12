@@ -116,7 +116,7 @@
 			return
 		else if(engine && engine.attackby(W,user))
 			return 1
-		else if(istype(W, /obj/item/weapon/crowbar) && engine)
+		else if(isCrowbar(W) && engine)
 			to_chat(user, "You pop out \the [engine] from \the [src].")
 			unload_engine()
 			return 1

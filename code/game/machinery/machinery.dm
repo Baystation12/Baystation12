@@ -143,7 +143,7 @@ Class Procs:
 		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(loc)
 		pulse2.icon = 'icons/effects/effects.dmi'
 		pulse2.icon_state = "empdisable"
-		pulse2.name = "emp sparks"
+		pulse2.SetName("emp sparks")
 		pulse2.anchored = 1
 		pulse2.set_dir(pick(GLOB.cardinal))
 
@@ -239,8 +239,6 @@ Class Procs:
 			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
 			return 1
 
-	src.add_fingerprint(user)
-
 	return ..()
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
@@ -322,9 +320,7 @@ Class Procs:
 			update_icon()
 			RefreshParts()
 	else
-		to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
-		for(var/var/obj/item/C in component_parts)
-			to_chat(user, "<span class='notice'>	[C.name]</span>")
+		display_parts(user)
 	return 1
 
 /obj/machinery/proc/dismantle()
@@ -355,3 +351,13 @@ Class Procs:
 	..()
 	if(clicksound && istype(user, /mob/living/carbon))
 		playsound(src, clicksound, clickvol)
+
+/obj/machinery/proc/display_parts(mob/user)
+	to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
+	for(var/var/obj/item/C in component_parts)
+		to_chat(user, "<span class='notice'>	[C.name]</span>")
+
+/obj/machinery/examine(mob/user)
+	. = ..(user)
+	if(component_parts && hasHUD(user, HUD_SCIENCE))
+		display_parts(user)

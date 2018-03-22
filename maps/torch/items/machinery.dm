@@ -47,11 +47,11 @@
 
 /obj/machinery/suit_storage_unit/explorer
 	name = "Exploration Voidsuit Storage Unit"
-	SUIT_TYPE = /obj/item/clothing/suit/space/void/exploration
-	HELMET_TYPE = /obj/item/clothing/head/helmet/space/void/exploration
-	BOOTS_TYPE = /obj/item/clothing/shoes/magboots
-	TANK_TYPE = /obj/item/weapon/tank/oxygen
-	MASK_TYPE = /obj/item/clothing/mask/breath
+	suit_type = /obj/item/clothing/suit/space/void/exploration
+	helmet_type = /obj/item/clothing/head/helmet/space/void/exploration
+	boots_type = /obj/item/clothing/shoes/magboots
+	tank_type = /obj/item/weapon/tank/oxygen
+	mask_type = /obj/item/clothing/mask/breath
 	req_access = list(access_explorer)
 	islocked = 1
 

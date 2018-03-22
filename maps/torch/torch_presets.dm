@@ -2,7 +2,6 @@ var/const/NETWORK_AQUILA      = "Aquila"
 var/const/NETWORK_BRIDGE      = "Bridge"
 var/const/NETWORK_CALYPSO     = "Charon"
 var/const/NETWORK_EXPEDITION  = "Expedition"
-var/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
 var/const/NETWORK_FIRST_DECK  = "First Deck"
 var/const/NETWORK_FOURTH_DECK = "Fourth Deck"
 var/const/NETWORK_POD         = "General Utility Pod"
@@ -33,26 +32,25 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 /datum/map/torch
 	// Networks that will show up as options in the camera monitor program
 	station_networks = list(
-		NETWORK_AQUILA,
-		NETWORK_BRIDGE,
-		NETWORK_CALYPSO,
-		NETWORK_ENGINE,
-		NETWORK_EXPEDITION,
-		NETWORK_FIFTH_DECK,
-		NETWORK_FIRST_DECK,
-		NETWORK_FOURTH_DECK,
 		NETWORK_ROBOTS,
-		NETWORK_POD,
+		NETWORK_FIRST_DECK,
 		NETWORK_SECOND_DECK,
 		NETWORK_THIRD_DECK,
-		NETWORK_SUPPLY,
-		NETWORK_HANGAR,
-		NETWORK_EXPLO,
+		NETWORK_FOURTH_DECK,
+		NETWORK_BRIDGE,
 		NETWORK_COMMAND,
 		NETWORK_ENGINEERING,
+		NETWORK_ENGINE,
 		NETWORK_MEDICAL,
 		NETWORK_RESEARCH,
 		NETWORK_SECURITY,
+		NETWORK_SUPPLY,
+		NETWORK_EXPEDITION,
+		NETWORK_EXPLO,
+		NETWORK_HANGAR,
+		NETWORK_AQUILA,
+		NETWORK_CALYPSO,
+		NETWORK_POD,
 		NETWORK_ALARM_ATMOS,
 		NETWORK_ALARM_CAMERA,
 		NETWORK_ALARM_FIRE,
@@ -77,9 +75,6 @@ var/const/NETWORK_THIRD_DECK  = "Third Deck"
 
 /obj/machinery/camera/network/expedition
 	network = list(NETWORK_EXPEDITION)
-
-/obj/machinery/camera/network/fifth_deck
-	network = list(NETWORK_FIFTH_DECK)
 
 /obj/machinery/camera/network/first_deck
 	network = list(NETWORK_FIRST_DECK)

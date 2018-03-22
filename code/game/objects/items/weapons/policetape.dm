@@ -30,6 +30,7 @@ var/list/tape_roll_applications = list()
 	name = "tape"
 	icon = 'icons/policetape.dmi'
 	icon_state = "tape"
+	layer = ABOVE_DOOR_LAYER
 	randpixel = 0
 	anchored = 1
 	var/lifted = 0
@@ -289,7 +290,7 @@ var/list/tape_roll_applications = list()
 	if(!crumpled)
 		crumpled = 1
 		update_icon()
-		name = "crumpled [name]"
+		SetName("crumpled [name]")
 
 /obj/item/tape/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(!lifted && ismob(mover))

@@ -638,6 +638,15 @@ proc/dd_sortedTextList(list/incoming)
 
 	values += value
 
+/proc/duplicates(var/list/L)
+	. = list()
+	var/list/checked = list()
+	for(var/value in L)
+		if(value in checked)
+			. |= value
+		else
+			checked += value
+
 /proc/assoc_by_proc(var/list/plain_list, var/get_initial_value)
 	. = list()
 	for(var/entry in plain_list)
@@ -711,3 +720,5 @@ proc/dd_sortedTextList(list/incoming)
 	for(var/i = 1 to l.len)
 		if(islist(.[i]))
 			.[i] = .(.[i])
+
+#define IS_VALID_INDEX(list, index) (list.len && index > 0 && index <= list.len)

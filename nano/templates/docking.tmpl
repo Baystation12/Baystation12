@@ -1,0 +1,19 @@
+{{if data.message}}
+<p>{{:helper.link('X', null, {'clear_message' : 1})}}{{:data.message}}</p>
+{{else}}
+	<h2>Docking ports:</h2>
+	<table style="width:100%">
+	<tr><td style="width:40%">Location<th>Status<th>Docking code<th>Docking requests
+	{{for data.docks}}
+		<tr class="candystripe">
+		<td>{{:value.location}}
+		<td>{{:value.status}}
+		<td>{{:helper.link(value.codes, '', {'edit_code' : value.tag})}}
+		{{if value.docking_attempt}}
+			<td>{{:helper.link('GRANT', '', {'dock' : value.tag})}}
+		{{else}}
+			<td>
+		{{/if}}
+	{{/for}}
+	</table>
+{{/if}}

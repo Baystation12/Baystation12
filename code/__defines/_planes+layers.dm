@@ -61,7 +61,13 @@ What is the naming convention for planes or layers?
 */
 
 #define CLICKCATCHER_PLANE -500
+
 #define SPACE_PLANE -499
+#define SKYBOX_PLANE SPACE_PLANE + 1
+
+#define DUST_PLANE SPACE_PLANE + 2
+	#define DEBRIS_LAYER 1
+	#define DUST_LAYER 2
 
 //Reserve planes for openspace
 #define OPENSPACE_PLANE_START -462
@@ -100,9 +106,10 @@ What is the naming convention for planes or layers?
 	#define EXPOSED_PIPE_LAYER          5
 	#define EXPOSED_WIRE_LAYER          6
 	#define EXPOSED_WIRE_TERMINAL_LAYER 7
-	#define BLOOD_LAYER                 8
-	#define MOUSETRAP_LAYER             9
-	#define PLANT_LAYER                 10
+	#define CATWALK_LAYER               8
+	#define BLOOD_LAYER                 9
+	#define MOUSETRAP_LAYER             10
+	#define PLANT_LAYER                 11
 
 #define HIDING_MOB_PLANE              -16 // for hiding mobs like MoMMIs or spiders or whatever, under most objects but over pipes & such.
 

@@ -7,8 +7,8 @@
 	icon_living = "armalis_naked"
 	icon_dead = "armalis_naked_dead"
 
-	health = 125
-	maxHealth = 125
+	health = 225
+	maxHealth = 225
 	resistance = 5
 
 	response_help   = "pats"
@@ -19,6 +19,7 @@
 	attack_sound = 'sound/effects/bamf.ogg'
 	melee_damage_lower = 15
 	melee_damage_upper = 20
+	can_escape = 1
 
 	min_gas = null
 	max_gas = null
@@ -35,7 +36,7 @@
 	icon_living = "armalis_armored"
 	icon_dead = "armalis_armored_dead"
 
-	health = 175
-	maxHealth = 175
+	health = 275
+	maxHealth = 275
 	resistance = 8
 	speed = 3

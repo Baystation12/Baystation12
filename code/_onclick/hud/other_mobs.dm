@@ -1,27 +1,7 @@
+/mob/living/carbon/slime
+	hud_type = /datum/hud/slime
 
-/datum/hud/proc/unplayer_hud()
-	return
-
-/mob/observer/ghost/instantiate_hud(var/datum/hud/HUD)
-	HUD.ghost_hud()
-
-/datum/hud/proc/ghost_hud()
-	return
-
-/mob/living/carbon/brain/instantiate_hud(var/datum/hud/HUD)
-	return
-
-/mob/living/silicon/ai/instantiate_hud(var/datum/hud/HUD)
-	HUD.ai_hud()
-
-/datum/hud/proc/ai_hud()
-	return
-
-/mob/living/carbon/slime/instantiate_hud(var/datum/hud/HUD)
-	HUD.slime_hud()
-
-/datum/hud/proc/slime_hud(ui_style = 'icons/mob/screen1_Midnight.dmi')
-
+/datum/hud/slime/FinalizeInstantiation(ui_style = 'icons/mob/screen1_Midnight.dmi')
 	src.adding = list()
 
 	var/obj/screen/using
@@ -33,10 +13,10 @@
 	mymob.client.screen = list()
 	mymob.client.screen += src.adding
 
-/mob/living/simple_animal/construct/instantiate_hud(var/datum/hud/HUD)
-	HUD.construct_hud()
+/mob/living/simple_animal/construct
+	hud_type = /datum/hud/construct
 
-/datum/hud/proc/construct_hud()
+/datum/hud/construct/FinalizeInstantiation()
 	var/constructtype
 
 	if(istype(mymob,/mob/living/simple_animal/construct/armoured) || istype(mymob,/mob/living/simple_animal/construct/behemoth))
@@ -52,19 +32,19 @@
 		mymob.fire = new /obj/screen()
 		mymob.fire.icon = 'icons/mob/screen1_construct.dmi'
 		mymob.fire.icon_state = "fire0"
-		mymob.fire.name = "fire"
+		mymob.fire.SetName("fire")
 		mymob.fire.screen_loc = ui_construct_fire
 
 		mymob.healths = new /obj/screen()
 		mymob.healths.icon = 'icons/mob/screen1_construct.dmi'
 		mymob.healths.icon_state = "[constructtype]_health0"
-		mymob.healths.name = "health"
+		mymob.healths.SetName("health")
 		mymob.healths.screen_loc = ui_construct_health
 
 		mymob.pullin = new /obj/screen()
 		mymob.pullin.icon = 'icons/mob/screen1_construct.dmi'
 		mymob.pullin.icon_state = "pull0"
-		mymob.pullin.name = "pull"
+		mymob.pullin.SetName("pull")
 		mymob.pullin.screen_loc = ui_construct_pull
 
 		mymob.zone_sel = new /obj/screen/zone_sel()
@@ -75,7 +55,7 @@
 		mymob.purged = new /obj/screen()
 		mymob.purged.icon = 'icons/mob/screen1_construct.dmi'
 		mymob.purged.icon_state = "purge0"
-		mymob.purged.name = "purged"
+		mymob.purged.SetName("purged")
 		mymob.purged.screen_loc = ui_construct_purge
 
 	mymob.client.screen = list()

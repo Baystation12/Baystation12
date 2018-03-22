@@ -2,9 +2,6 @@
 	#include "overmap_unit_testing.dm"
 
 	#include "bearcat/bearcat.dm"
-	#include "sector/sector.dm"
-	#include "sector/sector-1.dmm"
-	#include "sector/sector-2.dmm"
 
 	#include "../../code/modules/lobby_music/businessend.dm"
 	#include "../../code/modules/lobby_music/salutjohn.dm"

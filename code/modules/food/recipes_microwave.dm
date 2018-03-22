@@ -427,6 +427,12 @@ I said no!
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat)
 	result = /obj/item/weapon/reagent_containers/food/snacks/meatsteak
 
+/datum/recipe/loadedsteak
+	reagents = list(/datum/reagent/nutriment/garlicsauce = 5)
+	fruit = list("onion" = 1, "mushroom" = 1)
+	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat)
+	result = /obj/item/weapon/reagent_containers/food/snacks/loadedsteak
+
 /datum/recipe/syntisteak
 	reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/blackpepper = 1)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh)
@@ -969,6 +975,13 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/rawsticks
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/fries
+
+/datum/recipe/onionrings
+	fruit = list("onion" = 1)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/doughslice
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/onionrings
 
 /datum/recipe/mint
 	reagents = list(/datum/reagent/sugar = 5, /datum/reagent/frostoil = 5)

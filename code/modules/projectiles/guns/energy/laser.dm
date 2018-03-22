@@ -7,6 +7,7 @@
 	w_class = ITEM_SIZE_LARGE
 	force = 10
 	one_hand_penalty = 2
+	accuracy = 2
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
@@ -84,6 +85,7 @@ obj/item/weapon/gun/energy/retro
 	max_shots = 6
 	accuracy = 2
 	fire_delay = 20
+	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/energy/lasercannon/mounted
 	name = "mounted laser cannon"
@@ -105,12 +107,15 @@ obj/item/weapon/gun/energy/retro
 	w_class = ITEM_SIZE_LARGE
 	charge_cost = 15
 	max_shots = 10
+	wielded_item_state = "gun_wielded"
+	combustion = 0
 
 /obj/item/weapon/gun/energy/xray/pistol
 	name = "x-ray laser gun"
 	icon_state = "oldxray"
 	item_state = "oldxray"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	one_hand_penalty = 1
 	w_class = ITEM_SIZE_NORMAL
@@ -132,6 +137,7 @@ obj/item/weapon/gun/energy/retro
 	w_class = ITEM_SIZE_HUGE
 	accuracy = -2 //shooting at the hip
 	scoped_accuracy = 0
+	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/energy/sniperrifle/update_icon()
 	..()

@@ -63,6 +63,8 @@
 	desc = "This circuit can convert a reference to something else to a string, specifically the name of that reference."
 	icon_state = "ref-string"
 
+	dist_check = /decl/dist_check/in_view
+
 /obj/item/integrated_circuit/converter/ref2text/do_work()
 	var/datum/integrated_io/incoming = inputs[1]
 	var/atom/A = incoming.data_as_type(/atom)

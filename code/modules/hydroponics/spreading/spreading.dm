@@ -46,7 +46,7 @@
 	icon_state = ""
 	plane = OBJ_PLANE
 	layer = OBJ_LAYER
-	pass_flags = PASSTABLE
+	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 1
 
 	var/health = 10
@@ -222,7 +222,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	START_PROCESSING(SSvines, src)
 
-	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
+	if(isWirecutter(W) || istype(W, /obj/item/weapon/scalpel))
 		if(sampled)
 			to_chat(user, "<span class='warning'>You cannot take another sample from \the [src].</span>")
 			return
@@ -237,8 +237,11 @@
 		sampled = 1
 	else
 		..()
-		if(W.force)
-			health -= W.force
+		var/damage = W.force
+		if(W.edge)
+			damage *= 2
+		health -= damage
+		playsound(get_turf(src), W.hitsound, 100, 1)
 	check_health()
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases

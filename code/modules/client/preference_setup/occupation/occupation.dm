@@ -216,7 +216,7 @@
 		if(SetJob(user, href_list["set_job"])) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["char_branch"])
-		var/choice = input(user, "Choose your branch of service.", "Character Preference", pref.char_branch) as null|anything in mil_branches.spawn_branches(preference_species())
+		var/choice = input(user, "Choose your branch of service.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.char_branch) as null|anything in mil_branches.spawn_branches(preference_species())
 		if(choice && CanUseTopic(user) && mil_branches.is_spawn_branch(choice, preference_species()))
 			pref.char_branch = choice
 			pref.char_rank = "None"
@@ -228,7 +228,7 @@
 		var/datum/mil_branch/current_branch = mil_branches.get_branch(pref.char_branch)
 
 		if(current_branch)
-			choice = input(user, "Choose your rank.", "Character Preference", pref.char_rank) as null|anything in mil_branches.spawn_ranks(pref.char_branch, preference_species())
+			choice = input(user, "Choose your rank.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.char_rank) as null|anything in mil_branches.spawn_ranks(pref.char_branch, preference_species())
 
 		if(choice && CanUseTopic(user) && mil_branches.is_spawn_rank(pref.char_branch, choice, preference_species()))
 			pref.char_rank = choice

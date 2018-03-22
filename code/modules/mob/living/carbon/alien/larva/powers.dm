@@ -53,7 +53,7 @@
 	to_chat(src, "<span class='danger'>You burrow deeply into \the [H]'s [E.name]!</span>")
 	var/obj/item/weapon/holder/holder = new (loc)
 	src.loc = holder
-	holder.name = src.name
+	holder.SetName(src.name)
 	E.embed(holder,0,"\The [src] burrows deeply into \the [H]'s [E.name]!")
 
 /mob/living/carbon/alien/larva/verb/release_host()

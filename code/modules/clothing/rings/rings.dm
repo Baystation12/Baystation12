@@ -42,7 +42,7 @@
 //Reagent Rings
 
 /obj/item/clothing/ring/reagent
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 4)
 
 /obj/item/clothing/ring/reagent/New()

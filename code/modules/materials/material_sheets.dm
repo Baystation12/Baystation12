@@ -31,9 +31,9 @@
 		color = material.icon_colour
 
 	if(material.conductive)
-		flags |= CONDUCT
+		obj_flags |= OBJ_FLAG_CONDUCTIBLE
 	else
-		flags &= (~CONDUCT)
+		obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 
 	matter = material.get_matter()
 	update_strings()
@@ -46,11 +46,11 @@
 	singular_name = material.sheet_singular_name
 
 	if(amount>1)
-		name = "[material.use_name] [material.sheet_plural_name]"
+		SetName("[material.use_name] [material.sheet_plural_name]")
 		desc = "A stack of [material.use_name] [material.sheet_plural_name]."
 		gender = PLURAL
 	else
-		name = "[material.use_name] [material.sheet_singular_name]"
+		SetName("[material.use_name] [material.sheet_singular_name]")
 		desc = "A [material.sheet_singular_name] of [material.use_name]."
 		gender = NEUTER
 
@@ -73,7 +73,7 @@
 		..()
 
 /obj/item/stack/material/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W,/obj/item/stack/cable_coil))
+	if(isCoil(W))
 		material.build_wired_product(user, W, src)
 		return
 	else if(istype(W, /obj/item/stack/rods))

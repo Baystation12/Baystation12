@@ -33,16 +33,20 @@ Used In File(s): \code\game\gamemodes\nuclear\nuclearbomb.dm
 			<div class="item">
 				<b>Safety:</b> {{:helper.link('Engaged', 'info', {'safety' : 1}, data.safety ? 'selected' : '')}}{{:helper.link('Disengaged', 'alert', {'safety' : 0}, data.safety ? '' : 'redButton')}}
 			</div>
+			{{if data.moveable_anchor}}
 			<div class="item">
 				<b>Anchor:</b> {{:helper.link('Engaged', 'locked', {'anchor' : 1}, data.anchored ? 'selected' : '')}}{{:helper.link('Disengaged', 'unlocked', {'anchor' : 0}, data.anchored ? '' : 'selected')}}
 			</div>
+			{{/if}}
 		{{else}}
 			<div class="item">
 				<b>Safety:</b> {{:helper.link('Engaged', 'info', null, 'disabled')}}{{:helper.link('Disengaged', 'alert', null, 'disabled')}}
 			</div>
+			{{if data.moveable_anchor}}
 			<div class="item">
-				<b>Anchor:</b> {{:helper.link('Engaged', 'locked', null, 'disabled')}}{{:helper.link('Disengaged', 'unlocked', null, 'disabled')}}
-			</div>	
+                		<b>Anchor:</b> {{:helper.link('Engaged', 'locked', null, 'disabled')}}{{:helper.link('Disengaged', 'unlocked', null, 'disabled')}}
+			</div>
+			{{/if}}
 		{{/if}}
 	</div>
 	<hr>

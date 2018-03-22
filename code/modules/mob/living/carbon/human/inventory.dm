@@ -152,7 +152,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 				update_inv_wear_mask(0)
 		if(src)
 			var/obj/item/clothing/mask/wear_mask = src.get_equipped_item(slot_wear_mask)
-			if(!(wear_mask && (wear_mask.item_flags & AIRTIGHT)))
+			if(!(wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)))
 				REMOVE_INTERNALS
 		update_inv_head()
 	else if (W == l_ear)
@@ -314,6 +314,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_wear_suit(redraw_mob)
 		if(slot_w_uniform)
 			src.w_uniform = W
+			if(w_uniform.flags_inv & HIDESHOES)
+				update_inv_shoes(0)
 			W.equipped(src, slot)
 			update_inv_w_uniform(redraw_mob)
 		if(slot_l_store)

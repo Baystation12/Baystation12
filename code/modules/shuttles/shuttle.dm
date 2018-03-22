@@ -19,6 +19,8 @@
 
 	var/knockdown = 1 //whether shuttle downs non-buckled people when it moves
 
+	var/defer_initialisation = FALSE //this shuttle will/won't be initialised by something after roundstart
+
 /datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(_name)
@@ -160,17 +162,16 @@
 					TA.ChangeTurf(get_base_turf_by_area(TA), 1, 1)
 		if(knockdown)
 			for(var/mob/M in A)
-				if(M.client)
-					spawn(0)
+				spawn(0)
+					if(istype(M, /mob/living/carbon))
 						if(M.buckled)
 							to_chat(M, "<span class='warning'>Sudden acceleration presses you into your chair!</span>")
 							shake_camera(M, 3, 1)
 						else
 							to_chat(M, "<span class='warning'>The floor lurches beneath you!</span>")
 							shake_camera(M, 10, 1)
-				if(istype(M, /mob/living/carbon))
-					if(!M.buckled)
-						M.Weaken(3)
+							M.visible_message("<span class='warning'>[M.name] is tossed around by the sudden acceleration!</span>")	
+							M.throw_at_random(FALSE, 4, 1)
 
 		for(var/obj/structure/cable/C in A)
 			powernets |= C.powernet
@@ -200,3 +201,13 @@
 //returns 1 if the shuttle has a valid arrive time
 /datum/shuttle/proc/has_arrive_time()
 	return (moving_status == SHUTTLE_INTRANSIT)
+
+/datum/shuttle/autodock/proc/get_location_name()
+	if(moving_status == SHUTTLE_INTRANSIT)
+		return "In transit"
+	return current_location.name
+
+/datum/shuttle/autodock/proc/get_destination_name()
+	if(!next_location)
+		return "None"
+	return next_location.name

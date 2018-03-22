@@ -1,7 +1,7 @@
 /datum/map/torch
 	species_to_job_whitelist = list(
-		/datum/species/nabber = list(/datum/job/ai, /datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant,
-			/datum/job/roboticist, /datum/job/cargo_contractor, /datum/job/chef, /datum/job/engineer_contractor, /datum/job/doctor_contractor, /datum/job/bartender),
+		/datum/species/nabber = list(/datum/job/ai, /datum/job/cyborg, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/chemist,
+		/datum/job/roboticist, /datum/job/cargo_contractor, /datum/job/chef, /datum/job/engineer_contractor, /datum/job/doctor_contractor, /datum/job/bartender),
 		/datum/species/vox = list(/datum/job/ai, /datum/job/cyborg, /datum/job/merchant, /datum/job/stowaway)
 	)
 
@@ -16,17 +16,17 @@
 #undef HUMAN_ONLY_JOBS
 
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
-						/datum/job/liaison, /datum/job/representative, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/solgov_pilot,
-						/datum/job/pathfinder, /datum/job/explorer,
+						/datum/job/liaison, /datum/job/representative, /datum/job/sea,
+						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
-						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,
+						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
 						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
-						/datum/job/crew, /datum/job/assistant,
+						/datum/job/crew, /datum/job/assistant, /datum/job/offduty,
 						/datum/job/merchant, /datum/job/stowaway
 						)
 
@@ -74,15 +74,12 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/XO
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/XO/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o5,
 		/datum/mil_rank/fleet/o5,
-		/datum/mil_rank/marine/o5,
-		/datum/mil_rank/fleet/o4,
-		/datum/mil_rank/marine/o4
+		/datum/mil_rank/fleet/o4
 	)
 
 
@@ -94,7 +91,7 @@
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm, access_explorer, access_pathfinder)
+			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_explorer, access_pathfinder)
 	minimal_access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_change_ids, access_ai_upload, access_teleporter, access_eva, access_heads,
@@ -103,7 +100,7 @@
 			            access_cmo, access_qm, access_network, access_surgery, access_mailsorting, access_heads_vault, access_ce,
 			            access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_sec_doors, access_psychiatrist,
 			            access_medical_equip, access_solgov_crew, access_robotics_engineering, access_emergency_armory, access_gun, access_expedition_shuttle, access_guppy,
-			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila, access_explorer, access_pathfinder)
+			            access_seneng, access_senmed, access_senadv, access_hangar, access_guppy_helm, access_aquila, access_aquila_helm, access_explorer, access_pathfinder)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
@@ -153,7 +150,7 @@
 			            access_teleporter, access_eva, access_heads,
 			            access_chapel_office, access_crematorium, access_chemistry, access_virology,
 			            access_cmo, access_surgery, access_RC_announce, access_keycard_auth, access_psychiatrist,
-			            access_medical_equip, access_solgov_crew, access_senmed)
+			            access_medical_equip, access_solgov_crew, access_senmed, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -169,18 +166,12 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o3,
 		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/marine/o3,
-		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/marine/o2,
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/marine/o1
+		/datum/mil_rank/fleet/o2
 	)
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -201,7 +192,8 @@
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/hos
 	title = "Chief of Security"
@@ -212,25 +204,19 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/cos
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/cos/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o3,
 		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/marine/o3,
-		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/marine/o2,
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/marine/o1
+		/datum/mil_rank/fleet/o2
 	)
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
 			            access_hos, access_RC_announce, access_keycard_auth, access_sec_doors,
-			            access_solgov_crew, access_gun)
+			            access_solgov_crew, access_gun, access_emergency_armory)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
@@ -248,6 +234,10 @@
 	selection_color = "#2f2f7f"
 	economic_modifier = 15
 	minimal_player_age = 10
+	alt_titles = list(
+		"NanoTrasen Representative",
+		"NanoTrasen Executive"
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/cl
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
@@ -268,6 +258,9 @@
 	selection_color = "#2f2f7f"
 	economic_modifier = 15
 	minimal_player_age = 10
+	alt_titles = list(
+		"Inspector General"
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
@@ -288,18 +281,14 @@
 	minimal_player_age = 21
 	economic_modifier = 8
 	ideal_character_age = 45
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
 	allowed_branches = list(
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/sea/marine
+		/datum/mil_branch/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e9,
-		/datum/mil_rank/marine/e9,
 		/datum/mil_rank/fleet/e9_alt1,
-		/datum/mil_rank/marine/e9_alt1,
-		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8_alt
+		/datum/mil_rank/fleet/e8
 	)
 
 
@@ -325,53 +314,26 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/marine/o1
+		/datum/mil_rank/fleet/o1
 	)
 
 
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
 			            access_heads, access_janitor, access_kitchen, access_cargo, access_RC_announce, access_keycard_auth,
-			            access_solgov_crew)
+			            access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
+			            access_eva, access_hangar, access_cent_creed, access_explorer)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
 							 /datum/computer_file/program/alarm_monitor,
-							 /datum/computer_file/program/camera_monitor)
-
-/datum/job/solgov_pilot
-	title = "SolGov Pilot"
-	department = "Exploration"
-	department_flag = EXP
-
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the Commanding Officer and the Executive Officer"
-	selection_color = "#68099e"
-	minimal_player_age = 5
-	economic_modifier = 7
-	ideal_character_age = 40
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/solgov_pilot
-	allowed_branches = list(
-		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/exploration/solgov_pilot/fleet,
-	)
-	allowed_ranks = list(
-		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/ec/o1
-	)
-
-
-	access = list(access_maint_tunnels, access_external_airlocks, access_eva, access_emergency_storage, access_solgov_crew, access_aquila, access_aquila_helm,
-						access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_guppy_helm, access_hangar, access_solgov_crew, access_heads, access_explorer, access_cent_creed) //Yes, the last one is weird. It's used to make intercoms work.
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/pathfinder
 	title = "Pathfinder"
@@ -393,7 +355,7 @@
 	)
 
 
-	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
+	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar, access_cent_creed)
 
 /datum/job/explorer
 	title = "Explorer"
@@ -409,8 +371,8 @@
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e2,
-		/datum/mil_rank/ec/e4
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5
 	)
 
 	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
@@ -430,31 +392,28 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/ec/e7,
 		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/marine/e6,
 		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/marine/e5
+		/datum/mil_rank/ec/e5
 	)
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_tcomsat, access_solgov_crew, access_seneng)
+			            access_tcomsat, access_solgov_crew, access_seneng, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer
 	title = "Engineer"
@@ -475,25 +434,20 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/marine/e5,
 		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/ec/e4,
-		/datum/mil_rank/marine/e4,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/marine/e3,
-		/datum/mil_rank/ec/e2,
-		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/marine/e2
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/fleet/e2
 	)
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_solgov_crew)
+			            access_solgov_crew, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
@@ -501,10 +455,11 @@
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer_contractor
-	title = "Maintenance Assistant"
+	title = "Engineering Contractor"
 	department = "Engineering"
 	department_flag = ENG
 
@@ -514,23 +469,27 @@
 	minimal_player_age = 7
 	selection_color = "#5b4d20"
 	alt_titles = list(
-		"Mechanic",
-		"Supermatter Specialist",
-		"Information Systems Technician")
+		"Maintenance Assistant",
+		"Structural Integrity Specialist",
+		"Electrical Systems Specialist",
+		"Information Systems Technician",
+		"Reactor Technician",
+		"Life Support Systems Specialist")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_solgov_crew)
+			            access_solgov_crew, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
 							 /datum/computer_file/program/alarm_monitor,
 							 /datum/computer_file/program/atmos_control,
 							 /datum/computer_file/program/rcon_console,
-							 /datum/computer_file/program/camera_monitor)
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/roboticist
 	title = "Roboticist"
@@ -564,19 +523,15 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8,
 		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/marine/e6,
-		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/marine/e5
+		/datum/mil_rank/fleet/e5
 	)
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
@@ -595,21 +550,23 @@
 	economic_modifier = 5
 	minimal_player_age = 7
 	ideal_character_age = 35
-	alt_titles = list("Criminal Investigator")
+	alt_titles = list(
+		"Criminal Investigator"
+	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marine
+		/datum/mil_branch/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/marine/e3,
-		/datum/mil_rank/ec/e4,
+		/datum/mil_rank/ec/e5,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/marine/e4,
 		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/marine/e5
+		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor,
+		/datum/mil_rank/civ/marshal = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marshal
 	)
 
 	access = list(access_security, access_brig, access_forensics_lockers,
@@ -625,26 +582,20 @@
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Chief of Security"
-	alt_titles = list(
-		"Military Police")
 	economic_modifier = 4
 	minimal_player_age = 10
 	ideal_character_age = 25
+	alt_titles = null
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/maa
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/maa/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/marine/e2,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/marine/e3,
-		/datum/mil_rank/ec/e4,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/marine/e4
+		/datum/mil_rank/fleet/e4
 	)
 
 
@@ -682,7 +633,7 @@
 		/datum/mil_rank/fleet/o1
 	)
 
-	access = list(access_medical, access_morgue, access_maint_tunnels, access_emergency_storage,
+	access = list(access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
 			            access_crematorium, access_chemistry, access_surgery,
 			            access_medical_equip, access_solgov_crew, access_senmed)
 
@@ -707,7 +658,8 @@
 		/datum/mil_branch/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e4,
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5,
@@ -715,7 +667,7 @@
 	)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_surgery, access_medical_equip, access_solgov_crew)
+			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
@@ -726,28 +678,44 @@
 	department = "Medical"
 	department_flag = MED
 
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Chief Medical Officer and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_modifier = 3
 	ideal_character_age = 30
 	alt_titles = list(
 		"Orderly" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly,
-		"Mortician" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus,
 		"Virologist" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist,
 		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon,
-		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic,
-		"Chemist" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist)
+		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
 	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
-		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks, access_chemistry)
+		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks, access_hangar)
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/chemist
+	title = "Chemist"
+	department = "Medical"
+	department_flag = MED
+
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Chief Medical Officer and Medical Personnel"
+	selection_color = "#013d3b"
+	economic_modifier = 4
+	ideal_character_age = 30
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+
+	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry)
+	minimal_access = list()
 
 /datum/job/psychiatrist
 	title = "Counselor"
@@ -791,24 +759,18 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/commissioned,
 		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/marine/o1,
 		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/marine/o2,
 		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/marine/e5,
 		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/marine/e6,
 		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/marine/e7,
-		/datum/mil_rank/fleet/e8,
-		/datum/mil_rank/marine/e8
+		/datum/mil_rank/fleet/e8
 	)
 
 	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
@@ -829,18 +791,13 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/tech
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/supply/tech/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/ec/e2,
-		/datum/mil_rank/marine/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/marine/e3,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/ec/e4,
-		/datum/mil_rank/marine/e4
+		/datum/mil_rank/fleet/e4
 	)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
@@ -875,7 +832,6 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Executive Officer"
-	minimal_player_age = 3
 	ideal_character_age = 20
 	alt_titles = list(
 		"Janitor")
@@ -883,19 +839,14 @@
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/janitor/ec,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/service/janitor/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/ec/e2,
-		/datum/mil_rank/marine/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/marine/e3,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/ec/e4,
-		/datum/mil_rank/marine/e4
+		/datum/mil_rank/fleet/e4
 	)
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
@@ -916,22 +867,17 @@
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/cook/ec,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/cook/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/service/cook/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/cook/fleet
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/marine/e2,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/marine/e3,
-		/datum/mil_rank/ec/e4,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/marine/e4
+		/datum/mil_rank/fleet/e4
 	)
 
-	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew)
+	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew, access_bar)
 	minimal_access = list()
 
 /datum/job/bartender
@@ -944,7 +890,7 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_hydroponics, access_bar, access_solgov_crew)
+	access = list(access_hydroponics, access_bar, access_solgov_crew, access_kitchen)
 	minimal_access = list()
 
 
@@ -959,24 +905,19 @@
 	selection_color = "#515151"
 	ideal_character_age = 20
 	alt_titles = list(
-		"Junior Engineer",
-		"Junior Corpsman",
+		"Engineer Trainee",
+		"Corpsman Trainee",
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet,
-		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/service/crewman/marine
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/e2,
+		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/marine/e2,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/marine/e3,
-		/datum/mil_rank/ec/e4,
-		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/marine/e4
+		/datum/mil_rank/fleet/e4
 	)
 
 
@@ -1023,7 +964,7 @@
 
 	access = list(access_research, access_mining_office,
 						access_mining_station, access_nanotrasen, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
-						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
+						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_mining)
 /datum/job/scientist
 	title = "Scientist"
 	total_positions = 6
@@ -1117,7 +1058,7 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
 
-	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy)
+	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy, access_hangar)
 
 
 /datum/job/assistant
@@ -1126,26 +1067,62 @@
 	spawn_positions = 12
 	supervisors = "the Executive Officer"
 	selection_color = "#515151"
-	economic_modifier = 1
+	economic_modifier = 6
 	alt_titles = list(
-		"Private Investigator" = /decl/hierarchy/outfit/job/torch/passenger/passenger/PI,
 		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,
 		"Historian",
 		"Botanist",
-		"Investor",
+		"Investor" = /decl/hierarchy/outfit/job/torch/passenger/passenger/investor,
 		"Naturalist",
 		"Ecologist",
 		"Entertainer",
 		"Independent Observer",
 		"Sociologist",
-		"Off-Duty")
+		"Trainer")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/passenger
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/civ,
-		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/nt
 	)
+
+/datum/job/offduty
+	title = "Off-Duty"
+	department_flag = CIV
+
+	total_positions = 6
+	spawn_positions = 6
+	supervisors = "the Executive Officer and Commanding Officer"
+	selection_color = "#515151"
+	outfit_type = /decl/hierarchy/outfit/job/torch/offduty
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/offduty/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5,
+		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/ec/o1 = /decl/hierarchy/outfit/job/torch/offduty/officer,
+		/datum/mil_rank/ec/o3 = /decl/hierarchy/outfit/job/torch/offduty/officer,
+		/datum/mil_rank/fleet/e1,
+		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/fleet/e7,
+		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/fleet/o2,
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/fleet/o4
+	)
+
+/datum/job/cyborg
+	total_positions = 3
+	spawn_positions = 3
+	supervisors = "your laws"
 
 
 /datum/job/merchant
@@ -1153,8 +1130,8 @@
 	department = "Civilian"
 	department_flag = CIV
 
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	availablity_chance = 30
 	supervisors = "the invisible hand of the market"
 	selection_color = "#515151"

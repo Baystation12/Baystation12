@@ -108,8 +108,7 @@
 	populate_material_list()
 
 	if(config.generate_map)
-		if(GLOB.using_map.perform_map_generation())
-			GLOB.using_map.refresh_mining_turfs()
+		GLOB.using_map.perform_map_generation()
 	GLOB.using_map.build_exoplanets()
 
 	// Create robolimbs for chargen.

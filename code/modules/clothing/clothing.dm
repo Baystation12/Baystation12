@@ -49,6 +49,15 @@
 	. = ..()
 	gunshot_residue = null
 
+/obj/item/clothing/proc/get_fibers()
+	. = "material from \a [name]"
+	var/list/acc = list()
+	for(var/obj/item/clothing/accessory/A in accessories)
+		if(prob(40) && A.get_fibers())
+			acc += A.get_fibers()
+	if(acc.len)
+		. += " with traces of [english_list(acc)]"
+
 /obj/item/clothing/New()
 	..()
 	if(starting_accessories)
@@ -127,10 +136,26 @@
 /obj/item/clothing/get_examine_line()
 	. = ..()
 	var/list/ties = list()
-	for(var/accessory in accessories)
-		ties += "\icon[accessory] \a [accessory]"
+	for(var/obj/item/clothing/accessory/accessory in accessories)
+		if(accessory.high_visibility)
+			ties += "\icon[accessory] \a [accessory]"
 	if(ties.len)
 		.+= " with [english_list(ties)] attached"
+	if(accessories.len > ties.len)
+		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
+
+/obj/item/clothing/CanUseTopic(var/user)
+	if(user in view(get_turf(src)))
+		return STATUS_INTERACTIVE
+
+/obj/item/clothing/OnTopic(var/user, var/list/href_list, var/datum/topic_state/state)
+	if(href_list["list_ungabunga"])
+		if(accessories.len)
+			var/list/ties = list()
+			for(var/accessory in accessories)
+				ties += "\icon[accessory] \a [accessory]"
+			to_chat(user, "Attached to \the [src] are [english_list(ties)].")
+		return TOPIC_HANDLED
 
 ///////////////////////////////////////////////////////////////////////
 // Ears: headsets, earmuffs and tiny objects
@@ -203,15 +228,15 @@ BLIND     // can't see anything
 	var/light_protection = 0
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/eyes.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/eyes.dmi',
 		)
 
-/obj/item/clothing/glasses/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
+/obj/item/clothing/glasses/get_icon_state(mob/user_mob, slot)
 	if(item_state_slots && item_state_slots[slot])
-		ret.icon_state = item_state_slots[slot]
+		return item_state_slots[slot]
 	else
-		ret.icon_state = icon_state
-	return ret
+		return icon_state
+	return ..()
 
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))
@@ -238,11 +263,12 @@ BLIND     // can't see anything
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/gloves.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/hands.dmi',
 		)
 	blood_overlay_type = "bloodyhands"
 
 /obj/item/clothing/gloves/Initialize()
-	if(item_flags & PREMODIFIED)
+	if(item_flags & ITEM_FLAG_PREMODIFIED)
 		cut_fingertops()
 
 	. = ..()
@@ -259,6 +285,9 @@ BLIND     // can't see anything
 		if (cell.charge < 0)
 			cell.charge = 0
 	..()
+
+/obj/item/clothing/gloves/get_fibers()
+	return "material from a pair of [name]."
 
 // Called just before an attack_hand(), in mob/UnarmedAttack()
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
@@ -332,8 +361,8 @@ BLIND     // can't see anything
 	name = "head"
 	icon = 'icons/obj/clothing/hats.dmi'
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand_hats.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand_hats.dmi',
+		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_hats.dmi',
+		slot_r_hand_str = 'icons/mob/onmob/items/righthand_hats.dmi',
 		)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
@@ -346,6 +375,7 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi',
 		)
 	blood_overlay_type = "helmetblood"
 
@@ -455,6 +485,7 @@ BLIND     // can't see anything
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/mask.dmi',
 		)
 
 	var/voicechange = 0
@@ -472,6 +503,7 @@ BLIND     // can't see anything
 /obj/item/clothing/mask/New()
 	if(pull_mask)
 		action_button_name = "Adjust Mask"
+		verbs += /obj/item/clothing/mask/proc/adjust_mask
 	..()
 
 /obj/item/clothing/mask/update_clothing_icon()
@@ -479,21 +511,17 @@ BLIND     // can't see anything
 		var/mob/M = src.loc
 		M.update_inv_wear_mask()
 
-/obj/item/clothing/mask/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
-	if(item_state_slots && item_state_slots[slot])
-		ret.icon_state = item_state_slots[slot]
-	else
-		ret.icon_state = icon_state
-	return ret
-
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
 
 /obj/item/clothing/mask/proc/adjust_mask(var/mob/user)
+	set category = "Object"
+	set name = "Adjust mask"
+	set src in usr
+
 	if(!user.incapacitated())
 		if(!pull_mask)
-			to_chat(usr, "<span class ='notice'>You cannot pull down your [src].</span>")
+			to_chat(usr, "<span class ='notice'>You cannot pull down your [src.name].</span>")
 			return
 		else
 			src.hanging = !src.hanging
@@ -501,31 +529,24 @@ BLIND     // can't see anything
 				gas_transfer_coefficient = down_gas_transfer_coefficient
 				body_parts_covered = down_body_parts_covered
 				icon_state = down_icon_state
+				item_state = down_icon_state
 				item_flags = down_item_flags
 				flags_inv = down_flags_inv
-				to_chat(usr, "You pull the [src] below your chin.")
+				to_chat(usr, "You pull [src] below your chin.")
 			else
 				gas_transfer_coefficient = initial(gas_transfer_coefficient)
 				body_parts_covered = initial(body_parts_covered)
 				icon_state = initial(icon_state)
+				item_state = initial(icon_state)
 				item_flags = initial(item_flags)
 				flags_inv = initial(flags_inv)
-				to_chat(usr, "You pull the [src] up to cover your face.")
+				to_chat(usr, "You pull [src] up to cover your face.")
 			update_clothing_icon()
 			user.update_action_buttons()
 
 /obj/item/clothing/mask/attack_self(mob/user)
 	if(pull_mask)
 		adjust_mask(user)
-
-/obj/item/clothing/mask/verb/toggle()
-	set category = "Object"
-	set name = "Adjust mask"
-	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-
-	adjust_mask(usr)
 
 ///////////////////////////////////////////////////////////////////////
 //Shoes
@@ -547,12 +568,9 @@ BLIND     // can't see anything
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_UNATHI, SPECIES_TAJARA, SPECIES_VOX)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/feet.dmi',
 		)
 	blood_overlay_type = "shoeblood"
-
-/obj/item/clothing/shoes/New()
-	..()
-	slowdown_per_slot[slot_shoes] = SHOES_SLOWDOWN
 
 /obj/item/clothing/shoes/proc/draw_knife()
 	set name = "Draw Boot Knife"
@@ -628,6 +646,7 @@ BLIND     // can't see anything
 
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/suit.dmi',
 		)
 
 /obj/item/clothing/suit/update_clothing_icon()
@@ -654,8 +673,8 @@ BLIND     // can't see anything
 /obj/item/clothing/under
 	icon = 'icons/obj/clothing/uniforms.dmi'
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand_uniforms.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand_uniforms.dmi',
+		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_uniforms.dmi',
+		slot_r_hand_str = 'icons/mob/onmob/items/righthand_uniforms.dmi',
 		)
 	name = "under"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -676,7 +695,8 @@ BLIND     // can't see anything
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi',
-		SPECIES_NABBER = 'icons/mob/species/nabber/uniform.dmi'
+		SPECIES_NABBER = 'icons/mob/species/nabber/uniform.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/uniform.dmi',
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
@@ -694,15 +714,13 @@ BLIND     // can't see anything
 	if(rolled_sleeves == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
 
-/obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot)
-	var/image/ret = ..()
+/obj/item/clothing/under/get_icon_state(mob/user_mob, slot)
+	var/ret
 	if(item_state_slots && item_state_slots[slot])
-		ret.icon_state = item_state_slots[slot]
+		ret = item_state_slots[slot]
 	else
-		ret.icon_state = icon_state
-	ret.icon_state = "[ret.icon_state]_s"
-	return ret
-
+		ret = icon_state
+	return "[ret]_s"
 
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(accessories && accessories.len)
@@ -775,7 +793,8 @@ BLIND     // can't see anything
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
-		M.update_inv_w_uniform()
+		M.update_inv_w_uniform(0)
+		M.update_inv_wear_id()
 
 
 /obj/item/clothing/under/examine(mob/user)

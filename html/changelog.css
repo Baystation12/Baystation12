@@ -20,6 +20,7 @@ a img {border:none;}
 .imagedel {background-image:url(image-minus.png)}
 .spellcheck {background-image:url(spell-check.png)}
 .experiment {background-image:url(burn-exclamation.png)}
+.balance {background-image:url(scales.png)}
 .maptweak {background-image:url(map-pencil.png)}
 .sansserif {font-size:12px;}
 .commit {

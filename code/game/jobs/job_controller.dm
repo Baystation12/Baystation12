@@ -31,6 +31,7 @@ var/global/datum/controller/occupations/job_master
 			occupations += job
 			occupations_by_type[job.type] = job
 			occupations_by_title[job.title] = job
+			job.current_positions = 0
 			for(var/alt_title in job.alt_titles)
 				occupations_by_title[alt_title] = job
 			if(!setup_titles) continue
@@ -358,7 +359,7 @@ var/global/datum/controller/occupations/job_master
 
 			//Equip job items.
 			job.setup_account(H)
-			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
+			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
 			job.apply_fingerprints(H)
 
 			// Equip custom gear loadout, replacing any job items

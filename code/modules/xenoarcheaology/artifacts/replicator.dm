@@ -93,7 +93,7 @@
 			var/obj/spawned_obj = new spawn_type(src.loc)
 			if(source_material)
 				if(lentext(source_material.name) < MAX_MESSAGE_LEN)
-					spawned_obj.name = "[source_material] " +  spawned_obj.name
+					spawned_obj.SetName("[source_material] " +  spawned_obj.name)
 				if(lentext(source_material.desc) < MAX_MESSAGE_LEN * 2)
 					if(spawned_obj.desc)
 						spawned_obj.desc += " It is made of [source_material]."
@@ -130,8 +130,7 @@
 	stored_materials.Add(W)
 	src.visible_message("<span class='notice'>\The [user] inserts \the [W] into \the [src].</span>")
 
-/obj/machinery/replicator/Topic(href, href_list)
-
+/obj/machinery/replicator/OnTopic(user, href_list)
 	if(href_list["activate"])
 		var/index = text2num(href_list["activate"])
 		if(index > 0 && index <= construction.len)
@@ -147,3 +146,4 @@
 				icon_state = "borgcharger1(old)"
 			else
 				src.visible_message(fail_message)
+		. = TOPIC_REFRESH
