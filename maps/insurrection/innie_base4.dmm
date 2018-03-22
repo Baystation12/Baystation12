@@ -219,6 +219,8 @@
 "ek" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 "el" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 "em" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"BP" = (/obj/structure/cable/orange{dir = 8; icon_state = "0-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
+"Yl" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/orange{icon_state = "0-4"},/turf/simulated/floor/plating,/area/asteroid_base/medbay)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababababab
@@ -260,8 +262,8 @@ bGbGbGbJcLcLbIbIbIbIbIcrbIbPbIbIbIbIbIbPbIbIbIcMcBcBcJcBcBcBcNcebUbVbVbVbVbVbWbV
 bGbGbGbJbIbIbIcscObPbIbIbIcObIbIcPbPbPbIbIctbIbJcBcBcJcJcBcBcJcebUbUbUbUbUbVcfbVbUbUbUbUbUbUbUbUbUbU
 bGbGbGbJbJbJbJbJbJbJcQbJbJbJbJbJbJbJbJbJbJcubJbJcRcScTcBcUcVcWcebUbUbUbUbUbVcfbVbUbUbUbUbUbUbUbUbUbU
 bGbGbGbGbGbGbGbJcXcYbLcZdabJbGbGbGbGbGbGdbdcdbbJcecececececececebUbUbUbUbUbVbWbVbUbUbUbUbUbUbUbUbUbU
-bGbGbGbGbGbGbGbJdddebLbZbLbJbGbGbGbGbGbGdbdcdbbGbUbUbUbUbVbVbVbVbVbVbVbVbVbVbWbVbUbUbUbUbUbUbUbUbUbU
-bGbGbGbGbGbGbGbJdfcYbLcZdgbJbGbGbGbGbGbGdbdcdbbGbUbUbUbUbVdhbWbWbWcfbWbWbWcfdibVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbGbGbGbGbJdddebLbZbLbJbGbGbGbGbGbGdbdcdbbGbUbUbUbUbVbVbVbVbVbVbVbVbVbVBPbVbUbUbUbUbUbUbUbUbUbU
+bGbGbGbGbGbGbGbJdfcYbLcZdgbJbGbGbGbGbGbGdbdcdbbGbUbUbUbUbVdhbWbWbWcfbWbWbWYldibVbUbUbUbUbUbUbUbUbUbU
 bGbGbGbGbGbGbGbJbZbLbLdedjbJbGbGbGbGbGbGdbdkdbbGbUbUbUbUbVcfbVbVbVbVbVbVbVdldmbVbVbVbVbVbVbVbVbVbUbU
 bGbGbGbGbGbGbGbJdncZbLcYdobJbGbGbGbGbGbGdbdkdbbGbUbUbUbUbVbWbVbUbUbUbUbVdpdqdrdsdtdudvdwdtdxbWbVbUbU
 bGbGbGbGbGbGbGbJbJbJcMbJbJbJbGbGbGbGbGbGdbdkdbdbbVbVbVbVbVbWbVbUbUbUbUbVdydzbWdAdBdCdDdEdFdGcfbVbUbU
@@ -272,3 +274,4 @@ bGbGbGbGbGbGbGbGbJbJbJbJbJbGbGbGbGbGbGbGbGbGbGbGbUbUbUbUbUbUbUbUbUbUbUbVcfbWegeh
 bGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbUbUbUbUbUbUbUbUbUbUbUbVbVbVbVbVbVbVbVbVbVbVbVbVbUbU
 bGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbGbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbU
 "}
+
