@@ -1001,21 +1001,21 @@
 	. = stat != new_stat
 	stat = new_stat
 
-/mob/verb/northfaceperm()
-	set hidden = 1
-	set_face_dir(client.client_dir(NORTH))
-
-/mob/verb/southfaceperm()
-	set hidden = 1
-	set_face_dir(client.client_dir(SOUTH))
-
-/mob/verb/eastfaceperm()
-	set hidden = 1
-	set_face_dir(client.client_dir(EAST))
-
-/mob/verb/westfaceperm()
-	set hidden = 1
-	set_face_dir(client.client_dir(WEST))
+// /mob/verb/northfaceperm()
+// 	set hidden = 1
+// 	set_face_dir(client.client_dir(NORTH))
+//
+// /mob/verb/southfaceperm()
+// 	set hidden = 1
+// 	set_face_dir(client.client_dir(SOUTH))
+//
+// /mob/verb/eastfaceperm()
+// 	set hidden = 1
+// 	set_face_dir(client.client_dir(EAST))
+//
+// /mob/verb/westfaceperm()
+// 	set hidden = 1
+// 	set_face_dir(client.client_dir(WEST))
 
 /mob/proc/adjustEarDamage()
 	return
