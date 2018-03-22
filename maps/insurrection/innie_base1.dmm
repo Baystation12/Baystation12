@@ -136,14 +136,13 @@
 "cF" = (/obj/structure/hangar_door,/turf/simulated/open,/area/asteroid_base/storage_medbay)
 "cG" = (/obj/effect/landmark/dropship_land_point{name = "Frozen Plains"},/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
 "cH" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/mac_gun)
-"cI" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/central_hallway_1)
-"cJ" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/vault)
-"cK" = (/obj/effect/landmark/test/safe_turf,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
-"cL" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/west_dorms)
-"cM" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/generator/control)
-"cN" = (/obj/effect/overmap/sector/innie_base,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/smes)
-"cO" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/canisters)
-"cP" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/atmos)
+"cI" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/vault)
+"cJ" = (/obj/effect/landmark/test/safe_turf,/turf/unsimulated/floor{tag = "icon-snow"; icon_state = "snow"},/area/asteroid_base/armoury_1)
+"cK" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/west_dorms)
+"cL" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/generator/control)
+"cM" = (/obj/effect/overmap/sector/innie_base,/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/smes)
+"cN" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/engine/canisters)
+"cO" = (/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/asteroid_base/atmos)
 
 (1,1,1) = {"
 aaaaaaaaaaabababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacac
@@ -192,8 +191,8 @@ cpcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcF
 cpcBcBcBcBcBcBcBcBcBcBcBcBcBcEcBcBcBcBcBcEcBcBcBcCcCcFcFcFcFcFcFcFcCcCcCcCcCcFcFcFcFcFcFcFcCcCcCcCct
 cpcpcBcBcBcEcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCctct
 cpcpcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCctct
-cHcIcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCctctct
-cpcJcpcpcKcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcpcCcCcCcCcCcCcCcCcCcCcCctcCcCcCcCcCcCcCcCcCcCctctctct
-cLcpcpcpcpcBcBcBcBcBcBcpcpcBcEcBcBcpcBcBcBcBcBcpctctcCcCcCcCcCcCcCcCctctctctcCcCcCcCcCctctctctctctct
-cMcNcOcPcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpctctctctctctctctctctctctctctctctctctctctctctctctctct
+cHcpcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCctctct
+cpcIcpcpcJcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcpcCcCcCcCcCcCcCcCcCcCcCctcCcCcCcCcCcCcCcCcCcCctctctct
+cKcpcpcpcpcBcBcBcBcBcBcpcpcBcEcBcBcpcBcBcBcBcBcpctctcCcCcCcCcCcCcCcCctctctctcCcCcCcCcCctctctctctctct
+cLcMcNcOcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpcpctctctctctctctctctctctctctctctctctctctctctctctctctct
 "}
