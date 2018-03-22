@@ -3261,7 +3261,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/plainburger/attackby(obj/item/weapon/reagent_containers/food/snacks/cutlet/W as obj, mob/user as mob)
 	if(istype(W))// && !istype(src,/obj/item/weapon/reagent_containers/food/snacks/cutlet))
 		new /obj/item/weapon/reagent_containers/food/snacks/hamburger(src)
-		to_chat(user, "You make a bamburger.")
+		to_chat(user, "You make a hamburger.")
 		qdel(W)
 		qdel(src)
 		return
