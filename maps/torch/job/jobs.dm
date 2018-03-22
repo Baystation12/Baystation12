@@ -405,7 +405,7 @@
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
-			            access_tcomsat, access_solgov_crew, access_seneng, access_hangar)
+			            access_tcomsat, access_solgov_crew, access_seneng, access_hangar, access_network)
 
 	software_on_spawn = list(/datum/computer_file/program/power_monitor,
 							 /datum/computer_file/program/supermatter_monitor,
