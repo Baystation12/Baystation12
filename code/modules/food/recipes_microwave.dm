@@ -152,7 +152,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/hotdog
 
 /datum/recipe/waffles
-	reagents = list(/datum/reagent/nutriment/cakebatter = 10)
+	reagents = list(/datum/reagent/nutriment/batter/cakebatter = 10)
 	result = /obj/item/weapon/reagent_containers/food/snacks/waffles
 
 /datum/recipe/blupancakes
@@ -652,7 +652,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/tomatosoup
 
 /datum/recipe/rofflewaffles
-	reagents = list(/datum/reagent/psilocybin = 5, /datum/reagent/nutriment/cakebatter = 10)
+	reagents = list(/datum/reagent/psilocybin = 5, /datum/reagent/nutriment/batter/cakebatter = 10)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
@@ -1004,7 +1004,7 @@ I said no!
 
 // Cakes.
 /datum/recipe/cake
-	reagents = list(/datum/reagent/nutriment/cakebatter = 30)
+	reagents = list(/datum/reagent/nutriment/batter/cakebatter = 30)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake
 
 /datum/recipe/cake/carrot

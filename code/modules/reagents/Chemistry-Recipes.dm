@@ -1253,10 +1253,6 @@
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/weapon/reagent_containers/food/snacks/tofu(location)
 
-//Conflict with existing recipe "Chocolate Cake"
-//Attempting to bypass by creating new reagent matter: "Batter/Cakebatter"
-//will require considerable rework of existing kitchen systems. - Kyos
-
 /datum/chemical_reaction/chocolate_bar
 	name = "Chocolate Bar"
 	result = null
@@ -1359,7 +1355,7 @@
 
 /datum/chemical_reaction/cakebatter
 	name = "Cake Batter"
-	result = /datum/reagent/nutriment/cakebatter
+	result = /datum/reagent/nutriment/batter/cakebatter
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/nutriment/batter = 2)
 	result_amount = 3
 
