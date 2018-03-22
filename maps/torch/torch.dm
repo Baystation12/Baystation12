@@ -96,6 +96,7 @@
 	#include "../../code/modules/lobby_music/treacherous_voyage.dm"
 	#include "../../code/modules/lobby_music/comet_haley.dm"
 	#include "../../code/modules/lobby_music/lysendraa.dm"
+	#include "../../code/modules/lobby_music/lasers.dm"
 
 	#define using_map_DATUM /datum/map/torch
 
