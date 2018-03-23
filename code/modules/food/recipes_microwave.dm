@@ -74,12 +74,12 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
 
-/datum/recipe/meatburger
+/datum/recipe/plainburger
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/bun,
 		/obj/item/weapon/reagent_containers/food/snacks/meat
 	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/meatburger
+	result = /obj/item/weapon/reagent_containers/food/snacks/plainburger
 
 /datum/recipe/brainburger
 	items = list(
@@ -152,16 +152,19 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/hotdog
 
 /datum/recipe/waffles
-	reagents = list(/datum/reagent/nutriment/batter/cakebatter = 10)
+	reagents = list(/datum/reagent/sugar = 10)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/dough,
+		/obj/item/weapon/reagent_containers/food/snacks/dough
+	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/waffles
 
-/datum/recipe/blupancakes
-	fruit = list("blueberries" = 2)
-	reagents = list(/datum/reagent/nutriment/batter = 20)
-	result = /obj/item/weapon/reagent_containers/food/snacks/blupancakes
-
 /datum/recipe/pancakes
-	reagents = list(/datum/reagent/nutriment/batter = 20)
+	fruit = list("blueberries" = 2)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough,
+		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
+	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/pancakes
 
 /datum/recipe/donkpocket
@@ -232,7 +235,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/xenomeatbread
 
 /datum/recipe/bananabread
-	fruit = list("banana" = 1)
+	fruit = list(/datum/reagent/drink/juice/banana = 1)
 	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/sugar = 15)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
@@ -278,8 +281,6 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/soylentgreen
 
-// Pies, looks like, collected them all up here.
-
 /datum/recipe/meatpie
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough,
@@ -301,11 +302,11 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/xemeatpie
 
-/datum/recipe/bananapie
-	fruit = list("banana" = 1)
+/datum/recipe/pie
+	fruit = list(/datum/reagent/drink/juice/banana = 1)
 	reagents = list(/datum/reagent/sugar = 5)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough)
-	result = /obj/item/weapon/reagent_containers/food/snacks/bananapie
+	result = /obj/item/weapon/reagent_containers/food/snacks/pie
 
 /datum/recipe/cherrypie
 	fruit = list("cherries" = 1)
@@ -321,26 +322,6 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/berryclafoutis
-
-/datum/recipe/pumpkinpie
-	fruit = list("pumpkin" = 1)
-	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/sugar = 5)
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough,
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pumpkinpie
-
-/datum/recipe/amanita_pie
-	reagents = list(/datum/reagent/toxin/amatoxin = 5)
-	items = list(/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough)
-	result = /obj/item/weapon/reagent_containers/food/snacks/amanita_pie
-
-/datum/recipe/plump_pie
-	fruit = list("plumphelmet" = 1)
-	items = list(/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough)
-	result = /obj/item/weapon/reagent_containers/food/snacks/plump_pie
-
-//pies end here
 
 /datum/recipe/wingfangchu
 	reagents = list(/datum/reagent/nutriment/soysauce = 5)
@@ -440,10 +421,6 @@ I said no!
 			if (!paper.info)
 				return 0
 		return .
-
-/datum/recipe/plainsteak
-	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat)
-	result = /obj/item/weapon/reagent_containers/food/snacks/plainsteak
 
 /datum/recipe/meatsteak
 	reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/blackpepper = 1)
@@ -555,23 +532,33 @@ I said no!
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat)
 	result = /obj/item/weapon/reagent_containers/food/snacks/coldchili
 
+/datum/recipe/amanita_pie
+	reagents = list(/datum/reagent/toxin/amatoxin = 5)
+	items = list(/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough)
+	result = /obj/item/weapon/reagent_containers/food/snacks/amanita_pie
+
+/datum/recipe/plump_pie
+	fruit = list("plumphelmet" = 1)
+	items = list(/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough)
+	result = /obj/item/weapon/reagent_containers/food/snacks/plump_pie
+
 /datum/recipe/spellburger
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meatburger,
+		/obj/item/weapon/reagent_containers/food/snacks/plainburger,
 		/obj/item/clothing/head/wizard/fake,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spellburger
 
 /datum/recipe/spellburger
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meatburger,
+		/obj/item/weapon/reagent_containers/food/snacks/plainburger,
 		/obj/item/clothing/head/wizard,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spellburger
 
 /datum/recipe/bigbiteburger
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meatburger,
+		/obj/item/weapon/reagent_containers/food/snacks/plainburger,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
@@ -594,7 +581,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/creamcheesebread
 
 /datum/recipe/monkeysdelight
-	fruit = list("banana" = 1)
+	fruit = list(/datum/reagent/drink/juice/banana = 1)
 	reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/blackpepper = 1, /datum/reagent/nutriment/flour = 10)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube
@@ -652,7 +639,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/tomatosoup
 
 /datum/recipe/rofflewaffles
-	reagents = list(/datum/reagent/psilocybin = 5, /datum/reagent/nutriment/batter/cakebatter = 10)
+	reagents = list(/datum/reagent/psilocybin = 5, /datum/reagent/sugar = 10)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
@@ -841,18 +828,10 @@ I said no!
 
 /datum/recipe/sausage
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/rawmeatball,
-		/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
+		/obj/item/weapon/reagent_containers/food/snacks/cutlet,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sausage
-
-/datum/recipe/fatsausage
-	reagents = list(/datum/reagent/blackpepper = 2)
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/rawmeatball,
-		/obj/item/weapon/reagent_containers/food/snacks/rawcutlet,
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/fatsausage
 
 /datum/recipe/fishfingers
 	reagents = list(/datum/reagent/nutriment/flour = 10)
@@ -871,6 +850,11 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/cheesewedge,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/mysterysoup
+
+/datum/recipe/pumpkinpie
+	fruit = list("pumpkin" = 1)
+	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/sugar = 5, /datum/reagent/nutriment/protein/egg = 3, /datum/reagent/nutriment/flour = 10)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pumpkinpie
 
 /datum/recipe/plumphelmetbiscuit
 	fruit = list("plumphelmet" = 1)
@@ -994,7 +978,9 @@ I said no!
 
 /datum/recipe/onionrings
 	fruit = list("onion" = 1)
-	reagents = list(/datum/reagent/nutriment/batter = 10)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/doughslice
+	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/onionrings
 
 /datum/recipe/mint
@@ -1004,7 +990,7 @@ I said no!
 
 // Cakes.
 /datum/recipe/cake
-	reagents = list(/datum/reagent/nutriment/batter/cakebatter = 30)
+	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/flour = 15, /datum/reagent/sugar = 15, /datum/reagent/nutriment/protein/egg = 9)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake
 
 /datum/recipe/cake/carrot
@@ -1020,27 +1006,26 @@ I said no!
 
 /datum/recipe/cake/orange
 	fruit = list("orange" = 1)
+	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/flour = 15, /datum/reagent/nutriment/protein/egg = 9, /datum/reagent/drink/juice/orange = 3, /datum/reagent/sugar = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/orangecake
 
 /datum/recipe/cake/lime
 	fruit = list("lime" = 1)
+	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/flour = 15, /datum/reagent/nutriment/protein/egg = 9, /datum/reagent/drink/juice/lime = 3, /datum/reagent/sugar = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/limecake
 
 /datum/recipe/cake/lemon
 	fruit = list("lemon" = 1)
+	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/flour = 15, /datum/reagent/nutriment/protein/egg = 9, /datum/reagent/drink/juice/lemon = 3, /datum/reagent/sugar = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/lemoncake
 
 /datum/recipe/cake/chocolate
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/chocolatebar)
+	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/flour = 15, /datum/reagent/nutriment/protein/egg = 9, /datum/reagent/nutriment/coco = 4, /datum/reagent/sugar = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/chocolatecake
 
-//datum/recipe/cake/birthday
-//	items = list(/obj/item/clothing/head/cakehat)
-//	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
-// please stop putting non-edibles into edible recipes. It was only funny the first time.
-
 /datum/recipe/cake/birthday
-	reagents = list(/datum/reagent/nutriment/sprinkles = 10)
+	items = list(/obj/item/clothing/head/cakehat)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
 
 /datum/recipe/cake/apple
@@ -1050,9 +1035,3 @@ I said no!
 /datum/recipe/cake/brain
 	items = list(/obj/item/organ/internal/brain)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake
-
-//Readded Chocolate Bar recipe, - Kyo
-
-/datum/recipe/cake/chocolatebar
-	reagents = list(/datum/reagent/drink/milk/chocolate = 10, /datum/reagent/nutriment/coco = 5, /datum/reagent/sugar = 5)
-	result = /obj/item/weapon/reagent_containers/food/snacks/chocolatebar

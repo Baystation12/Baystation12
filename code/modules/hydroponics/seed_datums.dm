@@ -63,7 +63,6 @@
 	display_name = "blueberry bush"
 	mutants = list("berries","poisonberries","glowberries")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/juice/berry = list(10,10))
-	kitchen_tag = "blueberries"
 
 /datum/seed/berry/blue/New()
 	..()
