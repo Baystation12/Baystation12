@@ -246,8 +246,8 @@ datum/controller/vote
 											autotransfer()
 				if("map")
 					var/datum/map/M = GLOB.all_maps[.[1]]
-					fdel("use_map")
-					text2file(M.path, "use_map")
+					fdel("data/use_map")
+					text2file("[M.type]", "data/use_map")
 
 		if(mode == "gamemode") //fire this even if the vote fails.
 			if(!round_progressing)

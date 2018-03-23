@@ -55,7 +55,7 @@ dmm_suite{
 
 		*/
 
-	proc/load_map(var/list/dmm_files, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf){
+	proc/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y){
 		// dmm_files: A list of .dmm files to load (Required).
 		// z_offset: A number representing the z-level on which to start loading the map (Optional).
 		// cropMap: When true, the map will be cropped to fit the existing world dimensions (Optional).
