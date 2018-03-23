@@ -117,7 +117,7 @@
 /obj/random/tech_supply/spawn_choices()
 	return list(/obj/random/powercell = 3,
 				/obj/random/technology_scanner = 2,
-				/obj/item/weapon/packageWrap = 1,
+				/obj/item/stack/package_wrap/twenty_five = 1,
 				/obj/item/weapon/hand_labeler = 1,
 				/obj/random/bomb_supply = 2,
 				/obj/item/weapon/extinguisher = 1,
