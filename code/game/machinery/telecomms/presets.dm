@@ -176,26 +176,35 @@
 /obj/machinery/telecomms/server/presets/science
 	id = "Science Server"
 	freq_listening = list(SCI_FREQ)
+	channel_tags = list(list(SCI_FREQ, "Science", "#993399"))
 	autolinkers = list("science")
 
 /obj/machinery/telecomms/server/presets/medical
 	id = "Medical Server"
 	freq_listening = list(MED_FREQ)
+	channel_tags = list(list(MED_FREQ, "Medical", "#008160"))
 	autolinkers = list("medical")
 
 /obj/machinery/telecomms/server/presets/supply
 	id = "Supply Server"
 	freq_listening = list(SUP_FREQ)
+	channel_tags = list(list(SUP_FREQ, "Supply", "#7F6539"))
 	autolinkers = list("supply")
 
 /obj/machinery/telecomms/server/presets/service
 	id = "Service Server"
 	freq_listening = list(SRV_FREQ)
+	channel_tags = list(list(SRV_FREQ, "Service", "#6EAA2C"))
 	autolinkers = list("service")
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
 	freq_listening = list(PUB_FREQ, AI_FREQ, ENT_FREQ) // AI Private and Common
+	channel_tags = list(
+		list(PUB_FREQ, "Common", "#008000"),
+		list(AI_FREQ, "AI Private", "#FF00FF"),
+		list(ENT_FREQ, "Entertainment", "#6EAA2C")
+	)
 	autolinkers = list("common")
 
 // "Unused" channels, AKA all others.
@@ -214,21 +223,25 @@
 /obj/machinery/telecomms/server/presets/command
 	id = "Command Server"
 	freq_listening = list(COMM_FREQ)
+	channel_tags = list(list(COMM_FREQ, "Command", "#395A9A"))
 	autolinkers = list("command")
 
 /obj/machinery/telecomms/server/presets/engineering
 	id = "Engineering Server"
 	freq_listening = list(ENG_FREQ)
+	channel_tags = list(list(ENG_FREQ, "Engineering", "#A66300"))
 	autolinkers = list("engineering")
 
 /obj/machinery/telecomms/server/presets/security
 	id = "Security Server"
 	freq_listening = list(SEC_FREQ)
+	channel_tags = list(list(SEC_FREQ, "Security", "#A30000"))
 	autolinkers = list("security")
 
 /obj/machinery/telecomms/server/presets/centcomm
 	id = "CentComm Server"
 	freq_listening = list(ERT_FREQ, DTH_FREQ)
+	channel_tags = list(list(ERT_FREQ, "Response Team", "#395A9A"), list(DTH_FREQ, "Special Ops", "#6D3F40"))
 	produces_heat = 0
 	autolinkers = list("centcomm")
 
