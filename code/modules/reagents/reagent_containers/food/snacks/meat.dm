@@ -1,6 +1,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/meat
 	name = "meat"
 	desc = "A slab of meat."
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "meat"
 	health = 180
 	filling_color = "#ff1c1c"
@@ -22,7 +23,8 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh
 	name = "synthetic meat"
-	desc = "A synthetic slab of flesh."
+	desc = "A slab of flesh synthetized from reconstituted biomass or artificially grown from chemicals."
+	icon = 'icons/obj/food.dmi'
 
 // Seperate definitions because some food likes to know if it's human.
 // TODO: rewrite kitchen code to check a var on the meat item so we can remove
