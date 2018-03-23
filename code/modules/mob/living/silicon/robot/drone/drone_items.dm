@@ -248,22 +248,22 @@
 
 /obj/item/weapon/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
 
-    if(QDELETED(wrapped))
-        wrapped.loc = null
-        wrapped = null
-    return
+	if(QDELETED(wrapped))
+		wrapped.loc = null
+		wrapped = null
+	return
 
-    if(!resolved && wrapped && target)
-        wrapped.afterattack(target, user, 1, params)
+	if(!resolved && wrapped && target)
+		wrapped.afterattack(target, user, 1, params)
 
-    if(wrapped)
-        wrapped.force = force_holder
+	if(wrapped)
+		wrapped.force = force_holder
 
-    //If wrapped was neither deleted nor put into target, put it back into the gripper.
-    if(wrapped && user && !QDELETED(wrapped) && wrapped.loc == user)
-        wrapped.forceMove(src)
-    else
-        wrapped = null
+	//If wrapped was neither deleted nor put into target, put it back into the gripper.
+	if(wrapped && user && !QDELETED(wrapped) && wrapped.loc == user)
+		wrapped.forceMove(src)
+	else
+		wrapped = null
 
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler

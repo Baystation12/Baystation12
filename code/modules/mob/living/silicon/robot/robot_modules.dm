@@ -503,7 +503,7 @@ var/global/list/robot_modules = list(
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
 					"Doot" = "eyebot-standard"
-				  	)
+					)
 
 /obj/item/weapon/robot_module/clerical/butler/New()
 	src.modules += new /obj/item/device/flash(src)
@@ -538,6 +538,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/clerical/general
 	name = "clerical robot module"
+	channels = list("Service" = 1, "Supply" = 1)
 	sprites = list(
 					"Waitress" = "Service",
 					"Kent" = "toiletbot",
