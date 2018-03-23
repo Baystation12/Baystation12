@@ -56,7 +56,7 @@
 
 	loadout_allowed = TRUE
 	announced = FALSE
-	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
+	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_recruiter
 
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_janitor, access_maint_tunnels, access_research)
