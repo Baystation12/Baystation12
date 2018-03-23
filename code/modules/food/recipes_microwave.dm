@@ -1056,10 +1056,3 @@ I said no!
 /datum/recipe/cake/chocolatebar
 	reagents = list(/datum/reagent/drink/milk/chocolate = 10, /datum/reagent/nutriment/coco = 5, /datum/reagent/sugar = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/chocolatebar
-
-//Some other recipes which I will probably have to sort into categories properly later. - Kyo
-
-//datum/recipe/frenchfries
-//	items = list(/obj/item/weapon/reagent_containers/food/snacks/rawsticks)
-//	reagents = list(/datum/reagent/sodiumchloride = 1)
-//	result = /obj/item/weapon/reagent_containers/food/snacks/frenchfries

@@ -728,9 +728,9 @@
 	center_of_mass = "x=16;y=16"
 
 /obj/item/weapon/reagent_containers/food/snacks/fatsausage/New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 8)
-		bitesize = 2
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 8)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket
 	name = "\improper Sin-pocket"
@@ -829,8 +829,8 @@
 	nutriment_desc = list("cheese" = 2, "bun" = 2)
 	nutriment_amt = 2
 	New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/meatburger
 	name = "burger"
@@ -841,37 +841,37 @@
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 /obj/item/weapon/reagent_containers/food/snacks/meatburger/New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
-		bitesize = 2
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/plainburger
 	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
-	icon = 'icons/obj/food_luna.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "burger"
 	filling_color = "#d63c3c"
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 /obj/item/weapon/reagent_containers/food/snacks/plainburger/New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
-		bitesize = 2
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/hamburger
 	name = "hamburger"
 	desc = "The cornerstone of every nutritious breakfast, now with ham!"
-	icon = 'icons/obj/food_luna.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "hamburger"
 	filling_color = "#d63c3c"
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
 /obj/item/weapon/reagent_containers/food/snacks/hamburger/New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
-		bitesize = 2
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
+	bitesize = 2
 
 
 /obj/item/weapon/reagent_containers/food/snacks/fishburger
@@ -1043,8 +1043,8 @@
 	nutriment_desc = list("pancake" = 8)
 	nutriment_amt = 8
 /obj/item/weapon/reagent_containers/food/snacks/blupancakes/New()
-		..()
-		bitesize = 2
+	..()
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/pancakes
 	name = "pancakes"
@@ -1055,8 +1055,8 @@
 	nutriment_desc = list("pancake" = 8)
 	nutriment_amt = 8
 /obj/item/weapon/reagent_containers/food/snacks/pancakes/New()
-		..()
-		bitesize = 2
+	..()
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/eggplantparm
 	name = "Eggplant Parmigiana"
@@ -1413,15 +1413,15 @@
 /obj/item/weapon/reagent_containers/food/snacks/plainsteak
 	name = "Plain steak"
 	desc = "A piece of unseasoned cooked meat."
-	icon = 'icons/obj/food_luna.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "steak"
 	filling_color = "#7a3d11"
 	center_of_mass = "x=16;y=13"
 
 /obj/item/weapon/reagent_containers/food/snacks/plainsteak/New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
-		bitesize = 3
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/meatsteak
 	name = "Meat steak"
