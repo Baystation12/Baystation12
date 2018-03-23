@@ -151,6 +151,13 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/hotdog
 
+/datum/recipe/bratwurst
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/bun,
+		/obj/item/weapon/reagent_containers/food/snacks/brat
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/bratwurst
+
 /datum/recipe/waffles
 	reagents = list(/datum/reagent/sugar = 10)
 	items = list(
@@ -833,6 +840,13 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sausage
 
+/datum/recipe/brat
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/sausage,
+		/obj/item/weapon/reagent_containers/food/snacks/meat,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/brat
+
 /datum/recipe/fishfingers
 	reagents = list(/datum/reagent/nutriment/flour = 10)
 	items = list(
@@ -987,6 +1001,9 @@ I said no!
 	reagents = list(/datum/reagent/sugar = 5, /datum/reagent/frostoil = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/mint
 
+/datum/recipe/sauerkraut
+	fruit = list("cabbage" = 1)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sauerkraut
 
 // Cakes.
 /datum/recipe/cake

@@ -719,6 +719,18 @@
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
 		bitesize = 2
 
+/obj/item/weapon/reagent_containers/food/snacks/brat
+	name = "Brat"
+	desc = "Schöne weiner."
+	icon_state = "bratsausage"
+	filling_color = "#db0000"
+	center_of_mass = "x=16;y=16"
+
+	New()
+		..()
+		reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
+		bitesize = 3
+
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket
 	name = "\improper Sin-pocket"
 	desc = "The food of choice for the veteran. Do <B>NOT</B> overconsume."
@@ -1289,6 +1301,20 @@
 	nutriment_amt = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/onionrings/New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/sauerkraut
+	name = "sauerkraut"
+	desc = "I dare say chap, we'll send those krauts running."
+	icon_state = "sauerkraut"
+	trash = /obj/item/trash/snack_bowl
+	filling_color = "#ccbb99"
+	center_of_mass = "x=16;y=11"
+	nutriment_desc = list("sauer cabbage" = 4)
+	nutriment_amt = 4
+
+/obj/item/weapon/reagent_containers/food/snacks/sauerkraut/New()
 		..()
 		bitesize = 2
 
@@ -3168,6 +3194,13 @@
 		qdel(W)
 		qdel(src)
 
+	// Bun + brat = bratwurst
+	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/brat))
+		new /obj/item/weapon/reagent_containers/food/snacks/bratwurst(src)
+		to_chat(user, "You make a bratwurst.")
+		qdel(W)
+		qdel(src)
+
 // Burger + cheese wedge = cheeseburger
 /obj/item/weapon/reagent_containers/food/snacks/plainburger/attackby(obj/item/weapon/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
 	if(istype(W))// && !istype(src,/obj/item/weapon/reagent_containers/food/snacks/cheesewedge))
@@ -3257,6 +3290,17 @@
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
+
+/obj/item/weapon/reagent_containers/food/snacks/bratwurst
+	name = "bratwurst"
+	desc = "Danke schön."
+	icon_state = "bratdog"
+	bitesize = 3
+	center_of_mass = "x=16;y=17"
+
+	New()
+		..()
+		reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
 
 /obj/item/weapon/reagent_containers/food/snacks/classichotdog
 	name = "classic hotdog"
