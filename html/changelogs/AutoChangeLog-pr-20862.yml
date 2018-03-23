@@ -1,0 +1,4 @@
+author: "Atebite"
+delete-after: True
+changes: 
+  - rscadd: "Telecommunication servers now have tagging rules which determine the radio channel name and color for a given frequency"
