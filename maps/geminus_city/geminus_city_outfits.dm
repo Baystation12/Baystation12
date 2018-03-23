@@ -72,9 +72,10 @@
 	G.ammo_magazine = new /obj/item/ammo_magazine/m127_saphp
 	H.equip_to_slot_or_del(G,slot_belt)
 
-/decl/hierarchy/outfit/job/innie_recruiter
+/decl/hierarchy/outfit/job/colonist/innie_recruiter
 	name = "Insurrectionist Recruiter"
 
+	l_pocket = /obj/item/ammo_magazine/m127_saphp
 	mask = /obj/item/clothing/mask/balaclava
 	l_ear = /obj/item/device/radio/headset/insurrection
 
