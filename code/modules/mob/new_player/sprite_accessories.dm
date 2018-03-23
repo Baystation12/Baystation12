@@ -66,8 +66,8 @@
 	name = "Twintail"
 	icon_state = "hair_twintail"
 
-/datum/sprite_accessory/hair/short2
-	name = "Short Hair 2"
+/datum/sprite_accessory/hair/short3
+	name = "Short Hair 3"
 	icon_state = "hair_shorthair3"
 
 /datum/sprite_accessory/hair/cut
