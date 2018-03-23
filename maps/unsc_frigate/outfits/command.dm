@@ -8,10 +8,6 @@
 
 	flags = 0
 
-/obj/item/weapon/gun/projectile/m6d_magnum/CO
-	name = "CO's Magnum"
-	desc = "You'll have to find ammo as you go."
-
 /decl/hierarchy/outfit/job/UNSC_ship/CO/equip_base(mob/living/carbon/human/H)
 	. = ..()
 	var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/m6d_magnum/CO
@@ -44,3 +40,7 @@
 	shoes = /obj/item/clothing/shoes/brown
 
 	flags = 0
+
+/obj/item/weapon/gun/projectile/m6d_magnum/CO
+	name = "CO's Magnum"
+	desc = "You'll have to find ammo as you go."
