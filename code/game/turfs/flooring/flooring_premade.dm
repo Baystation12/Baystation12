@@ -265,3 +265,12 @@
 /turf/simulated/floor/beach/water/New()
 	..()
 	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water5","layer"=MOB_LAYER+0.1)
+
+// Mantid.
+/turf/simulated/floor/fixed/mantid
+	name = "composite flooring"
+	icon = 'icons/turf/flooring/mantid.dmi'
+	icon_state = "floor"
+
+/turf/simulated/floor/fixed/mantid/grate
+	icon_state = "grate"

@@ -748,19 +748,21 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/image/ret_overlay = overlay_image(mob_icon,mob_state,color,RESET_COLOR)
 	if(user_human && user_human.species && user_human.species.equip_adjust.len && !spritesheet)
 		var/list/equip_adjusts = user_human.species.equip_adjust
-		if(equip_adjusts[slot])
+		var/use_key = slot
+		if(!equip_adjusts[use_key])
+			use_key = slot_all_slots_str
+		if(equip_adjusts[use_key])
 			var/image_key = "[user_human.species] [mob_icon] [mob_state] [color]"
 			ret_overlay = user_human.species.equip_overlays[image_key]
 			if(!ret_overlay)
 				var/icon/final_I = new(mob_icon, icon_state = mob_state)
-				var/list/shifts = equip_adjusts[slot]
+				var/list/shifts = equip_adjusts[use_key]
 				if(shifts && shifts.len)
 					var/shift_facing
 					for(shift_facing in shifts)
 						var/list/facing_list = shifts[shift_facing]
 						final_I = dir_shift(final_I, text2dir(shift_facing), facing_list["x"], facing_list["y"])
 				ret_overlay = overlay_image(final_I, color, flags = RESET_COLOR)
-
 				user_human.species.equip_overlays[image_key] = ret_overlay
 
 	return ret_overlay

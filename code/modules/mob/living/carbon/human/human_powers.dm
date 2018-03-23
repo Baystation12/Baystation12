@@ -134,6 +134,84 @@
 	if(src.make_grab(src, T))
 		src.visible_message("<span class='warning'><b>\The [src]</b> seizes [T]!</span>")
 
+/mob/living/carbon/human/proc/devour_head()
+	set category = "Abilities"
+	set name = "Devour Head"
+	set desc = "While grabbing someone aggressively, bite their head off."
+
+	if(last_special > world.time)
+		return
+
+	if(stat || paralysis || stunned || weakened || lying)
+		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
+		return
+
+	var/obj/item/grab/G = l_hand
+	if(!istype(G) || !G.force_danger())
+		G = r_hand
+	if(!istype(G) || !G.force_danger())
+		to_chat(src, "<span class='warning'>You need an better grip to do that.</span>")
+		return
+
+	if(istype(G.affecting,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = G.affecting
+
+		if(!H.species.has_limbs["head"])
+			to_chat(src, "<span class='warning'>\The [H] does not have a head!</span>")
+			return
+
+		var/obj/item/organ/external/affecting = H.get_organ("head")
+		if(!istype(affecting) || affecting.is_stump())
+			to_chat(src, "<span class='warning'>\The [H] does not have a head!</span>")
+			return
+
+		visible_message("<span class='danger'>\The [src] closes their jaws around \the [H]'s head!</span>")
+		affecting.droplimb(0, DROPLIMB_BLUNT)
+
+	else
+		var/mob/living/M = G.affecting
+		if(istype(M))
+			visible_message("<span class='danger'><b>\The [src]</b> rips viciously at \the [M]'s body with its claws!</span>")
+			M.gib()
+
+	last_special = world.time + 50
+	return
+
+/mob/living/carbon/human/proc/gut()
+	set category = "Abilities"
+	set name = "Gut"
+	set desc = "While grabbing someone aggressively, rip their guts out or tear them apart."
+
+	if(last_special > world.time)
+		return
+
+	if(incapacitated())
+		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
+		return
+
+	var/obj/item/grab/G = l_hand
+	if(!istype(G) || !G.force_danger())
+		G = r_hand
+	if(!istype(G) || !G.force_danger())
+		to_chat(src, "<span class='warning'>You need an better grip to do that.</span>")
+		return
+
+	last_special = world.time + 50
+
+	visible_message("<span class='danger'><b>\The [src]</b> rips viciously at \the [G.affecting]'s body with its claws!</span>")
+
+	if(istype(G.affecting,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = G.affecting
+		H.apply_damage(50,BRUTE)
+		if(H.stat == 2)
+			H.gib()
+	else
+		var/mob/living/M = G.affecting
+		if(!istype(M)) return //wut
+		M.apply_damage(50,BRUTE)
+		if(M.stat == 2)
+			M.gib()
+
 /mob/living/carbon/human/proc/commune()
 	set category = "Abilities"
 	set name = "Commune with creature"

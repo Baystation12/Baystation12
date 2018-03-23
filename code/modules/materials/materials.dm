@@ -663,6 +663,18 @@ var/list/name_to_material
 	display_name = "elevator panelling"
 	icon_colour = "#666666"
 
+/material/voxalloy/mantid
+	name = "composite"
+	display_name = "composite"
+	icon_base = "composite"
+	icon_reinf = "econ"
+	icon_colour = "#9c73dd"
+
+/material/voxalloy/mantid/reinf
+	name = "energy conduit"
+	display_name = "energy conduits"
+	icon_colour = "#00c3ff"
+
 /material/wood
 	name = "wood"
 	adjective_name = "wooden"

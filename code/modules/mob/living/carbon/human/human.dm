@@ -1076,8 +1076,12 @@
 
 	default_pixel_x = initial(pixel_x) + species.pixel_offset_x
 	default_pixel_y = initial(pixel_y) + species.pixel_offset_y
+
 	pixel_x = default_pixel_x
 	pixel_y = default_pixel_y
+
+	if(!(species.appearance_flags & HAS_UNDERWEAR))
+		worn_underwear = null
 
 	spawn(0)
 		regenerate_icons()
