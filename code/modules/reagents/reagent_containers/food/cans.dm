@@ -128,3 +128,23 @@
 /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater/New()
 	..()
 	reagents.add_reagent(/datum/reagent/drink/sodawater, 50)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/syndicolax
+	name = "soviet soda red army twist"
+	desc = "A limited supply ration of Red Army Twist brand Soviet Soda. As great Comrade Stalin himself prefers it. Luke warm."
+	icon_state = "syndi_cola_x"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/syndicolax/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/juice/potato, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/syndicola
+	name = "soviet soda"
+	desc = "A can of the only soft drink state approved for the benefit of the people's revolution. Served at room temperature regardless of ambient temperatures thanks to innovative soviet insulation technology."
+	icon_state = "syndi_cola"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/syndicola/New()
+	..()
+	reagents.add_reagent(/datum/reagent/water, 30)
