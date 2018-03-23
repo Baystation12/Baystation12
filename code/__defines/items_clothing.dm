@@ -101,6 +101,7 @@
 #define slot_glasses_str  	"slot_glasses"
 #define slot_s_store_str	"slot_s_store"
 #define slot_tie_str		"slot_tie"
+#define slot_all_slots_str  "all_slots"
 
 // Bitflags for clothing parts.
 #define HEAD        0x1

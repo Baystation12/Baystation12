@@ -15,6 +15,10 @@
 	description_info = "This is an energy weapon.  To fire the weapon, ensure your intent is *not* set to 'help', have your gun mode set to 'fire', \
 	then click where you want to fire.  Most energy weapons can fire through windows harmlessly.  To recharge this weapon, use a weapon recharger."
 
+/obj/item/weapon/gun/energy/particle
+	description_fluff = "The vicious, cephalopodan-mantid aliens known as the Ascent produce exceptionally powerful and precise energy weapons. \
+	Trading in them in human territory is strictly speaking illegal, but their value as reverse-engineerable technology is undeniable."
+
 /obj/item/weapon/gun/energy/crossbow
 	description_info = "This is an energy weapon.  To fire the weapon, ensure your intent is *not* set to 'help', have your gun mode set to 'fire', \
 	then click where you want to fire."

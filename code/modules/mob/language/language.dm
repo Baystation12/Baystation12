@@ -1,5 +1,3 @@
-#define SCRAMBLE_CACHE_LEN 20
-
 /*
 	Datum based languages. Easily editable and modular.
 */
@@ -229,5 +227,3 @@
 		if(L.flags & except_flags)
 			continue
 		target.add_language(L.name)
-
-#undef SCRAMBLE_CACHE_LEN
