@@ -1275,6 +1275,12 @@
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/weapon/reagent_containers/food/snacks/chocolatebar(location)
 
+/datum/chemical_reaction/chocolate_milk
+	name = "Chocolate Milk"
+	result = /datum/reagent/drink/milk/chocolate
+	required_reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/coco = 1)
+	result_amount = 5
+
 /datum/chemical_reaction/hot_coco
 	name = "Hot Coco"
 	result = /datum/reagent/drink/hot_coco
@@ -1296,7 +1302,7 @@
 /datum/chemical_reaction/barbecue
 	name = "Barbecue Sauce"
 	result = /datum/reagent/nutriment/barbecue
-	required_reagents = list(/datum/reagent/nutriment/ketchup = 2, "pepper" = 1, "salt" = 1)
+	required_reagents = list(/datum/reagent/nutriment/ketchup = 2, /datum/reagent/blackpepper = 1, /datum/reagent/sodiumchloride = 1)
 	result_amount = 4
 
 /datum/chemical_reaction/garlicsauce
@@ -1317,27 +1323,41 @@
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel(location)
 
-/datum/chemical_reaction/meatball
-	name = "Meatball"
+/datum/chemical_reaction/rawmeatball
+	name = "Raw Meatball"
 	result = null
 	required_reagents = list(/datum/reagent/nutriment/protein = 3, /datum/reagent/nutriment/flour = 5)
 	result_amount = 3
 
-/datum/chemical_reaction/meatball/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/rawmeatball/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/meatball(location)
+		new /obj/item/weapon/reagent_containers/food/snacks/rawmeatball(location)
 
 /datum/chemical_reaction/dough
 	name = "Dough"
 	result = null
-	required_reagents = list(/datum/reagent/nutriment/protein/egg = 3, /datum/reagent/nutriment/flour = 10, /datum/reagent/water = 5)
+	required_reagents = list(/datum/reagent/nutriment/protein/egg = 3, /datum/reagent/nutriment/flour = 10, /datum/reagent/water = 10)
 	result_amount = 1
 
 /datum/chemical_reaction/dough/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/weapon/reagent_containers/food/snacks/dough(location)
+
+//batter reaction as food precursor, for things that don't use pliable dough precursor.
+
+/datum/chemical_reaction/batter
+	name = "Batter"
+	result = /datum/reagent/nutriment/batter
+	required_reagents = list(/datum/reagent/nutriment/protein/egg = 3, /datum/reagent/nutriment/flour = 5, /datum/reagent/drink/milk = 5)
+	result_amount = 10
+
+/datum/chemical_reaction/cakebatter
+	name = "Cake Batter"
+	result = /datum/reagent/nutriment/batter/cakebatter
+	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/nutriment/batter = 2)
+	result_amount = 3
 
 /datum/chemical_reaction/syntiflesh
 	name = "Syntiflesh"
