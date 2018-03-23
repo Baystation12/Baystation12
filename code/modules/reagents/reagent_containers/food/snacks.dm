@@ -828,7 +828,7 @@
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("cheese" = 2, "bun" = 2)
 	nutriment_amt = 2
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/cheeseburger/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 
