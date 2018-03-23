@@ -139,12 +139,12 @@
 	O.loc = loc
 	O.job = "Robot"
 	if(O.mind.assigned_role == "Robot")
-		if(O.mind.role_alt_title == "Android")
-			O.mmi = new /obj/item/organ/internal/posibrain(O)
+		if(O.mind.role_alt_title == "Drone")
+			O.mmi = new /obj/item/device/mmi/digital/robot(O)
 		else if(O.mind.role_alt_title == "Cyborg")
 			O.mmi = new /obj/item/device/mmi(O)
 		else
-			O.mmi = new /obj/item/device/mmi/digital/robot(O)
+			O.mmi = new /obj/item/organ/internal/posibrain(O)
 
 		O.mmi.transfer_identity(src)
 

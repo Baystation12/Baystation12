@@ -185,7 +185,7 @@
 				to_chat(user, "<span class='warning'>Sticking a dead [W] into the frame would sort of defeat the purpose.</span>")
 				return
 
-			if(jobban_isbanned(B, "Cyborg"))
+			if(jobban_isbanned(B, "Robot"))
 				to_chat(user, "<span class='warning'>This [W] does not seem to fit.</span>")
 				return
 
@@ -204,7 +204,7 @@
 			if(O.mind && O.mind.special_role)
 				O.mind.store_memory("In case you look at this after being borged, the objectives are only here until I find a way to make them not show up for you, as I can't simply delete them without screwing up round-end reporting. --NeoFite")
 
-			O.job = "Cyborg"
+			O.job = "Robot"
 
 			var/obj/item/robot_parts/chest/chest = parts[BP_CHEST]
 			O.cell = chest.cell
