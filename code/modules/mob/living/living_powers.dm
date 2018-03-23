@@ -55,6 +55,6 @@
 		to_chat(target,"<span class='danger'>\The [src] scrapes your flesh from your bones!</span>")
 		to_chat(src,"<span class='danger'>You feed hungrily off \the [target]'s flesh.</span>")
 		target.adjustBruteLoss(25)
-		if(target.health < -target.maxHealth)
+		if(target.getBruteLoss() < -target.maxHealth)
 			target.gib()
 		src.adjustBruteLoss(-25)
