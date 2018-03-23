@@ -74,10 +74,12 @@
 	return L
 
 /obj/item/weapon/storage/proc/show_to(mob/user as mob)
-	storage_ui.show_to(user)
+	if(storage_ui)
+		storage_ui.show_to(user)
 
 /obj/item/weapon/storage/proc/hide_from(mob/user as mob)
-	storage_ui.hide_from(user)
+	if(storage_ui)
+		storage_ui.hide_from(user)
 
 /obj/item/weapon/storage/proc/open(mob/user as mob)
 	if (src.use_sound)
@@ -92,10 +94,12 @@
 
 /obj/item/weapon/storage/proc/close(mob/user as mob)
 	hide_from(user)
-	storage_ui.after_close(user)
+	if(storage_ui)
+		storage_ui.after_close(user)
 
 /obj/item/weapon/storage/proc/close_all()
-	storage_ui.close_all()
+	if(storage_ui)
+		storage_ui.close_all()
 
 /obj/item/weapon/storage/proc/storage_space_used()
 	. = 0
@@ -193,18 +197,21 @@
 
 /obj/item/weapon/storage/proc/update_ui_after_item_insertion()
 	prepare_ui()
-	storage_ui.on_insertion(usr)
+	if(storage_ui)
+		storage_ui.on_insertion(usr)
 
 /obj/item/weapon/storage/proc/update_ui_after_item_removal()
 	prepare_ui()
-	storage_ui.on_post_remove(usr)
+	if(storage_ui)
+		storage_ui.on_post_remove(usr)
 
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
 /obj/item/weapon/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, var/NoUpdate = 0)
 	if(!istype(W)) return 0
 	new_location = new_location || get_turf(src)
 
-	storage_ui.on_pre_remove(usr, W)
+	if(storage_ui)
+		storage_ui.on_pre_remove(usr, W)
 
 	if(ismob(loc))
 		W.dropped(usr)
