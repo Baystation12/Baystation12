@@ -358,6 +358,30 @@
 
 // Maintenance
 
+/area/maintenance/ghetto_bar
+    name = "\improper Ghetto Bar"
+    icon_state = "ghettobar"
+
+/area/maintenance/ghetto_library
+    name = "\improper Ghetto Library"
+    icon_state = "ghettolibrary"
+
+/area/maintenance/ghetto_toilet
+    name = "\improper Ghetto Toilets"
+    icon_state = "ghettotoilets"
+
+/area/maintenance/ghetto_dorm
+    name = "\improper Ghetto Dorm"
+    icon_state = "ghettodorm"
+
+/area/maintenance/ghetto_main
+    name = "\improper Ghetto Main"
+    icon_state = "ghettomain"
+
+/area/maintenance/ghetto_casino
+    name = "\improper Ghetto Casino"
+    icon_state = "ghettocasino"
+
 /area/maintenance/atmos_control
 	name = "\improper Atmospherics Maintenance"
 	icon_state = "fpmaint"
