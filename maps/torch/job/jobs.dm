@@ -494,11 +494,11 @@
 /datum/job/roboticist
 	title = "Roboticist"
 	department = "Engineering"
-	department_flag = ENG
+	department_flag = ENG|MED
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Engineer"
+	supervisors = "the Chief Engineer and the Chief Medical Officer"
 	selection_color = "#5b4d20"
 	economic_modifier = 6
 	alt_titles = list(
