@@ -503,7 +503,7 @@ var/global/list/robot_modules = list(
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
 					"Doot" = "eyebot-standard"
-				  	)
+					)
 
 /obj/item/weapon/robot_module/clerical/butler/New()
 	src.modules += new /obj/item/device/flash(src)
@@ -538,6 +538,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/clerical/general
 	name = "clerical robot module"
+	channels = list("Service" = 1, "Supply" = 1)
 	sprites = list(
 					"Waitress" = "Service",
 					"Kent" = "toiletbot",
@@ -552,11 +553,20 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/weapon/pen/robopen(src)
 	src.modules += new /obj/item/weapon/form_printer(src)
-	src.modules += new /obj/item/weapon/gripper/paperwork(src)
+	src.modules += new /obj/item/weapon/gripper/clerical(src)
 	src.modules += new /obj/item/weapon/hand_labeler(src)
 	src.modules += new /obj/item/weapon/stamp(src)
 	src.modules += new /obj/item/weapon/stamp/denied(src)
+	src.modules += new /obj/item/device/destTagger(src)
 	src.emag = new /obj/item/weapon/stamp/chameleon(src)
+
+	var/datum/matter_synth/package_wrap = new /datum/matter_synth/package_wrap()
+	synths += package_wrap
+
+	var/obj/item/stack/package_wrap/cyborg/PW = new /obj/item/stack/package_wrap/cyborg(src)
+	PW.synths = list(package_wrap)
+	src.modules += PW
+
 	..()
 
 /obj/item/weapon/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)

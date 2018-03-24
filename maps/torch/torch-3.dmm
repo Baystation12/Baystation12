@@ -588,7 +588,7 @@
 "lq" = (/turf/simulated/open,/area/hallway/primary/seconddeck/center)
 "lr" = (/turf/simulated/wall/r_wall,/area/maintenance/seconddeck/foreport)
 "ls" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor/plating,/area/maintenance/seconddeck/foreport)
-"ly" = (/obj/structure/table/steel,/obj/item/weapon/hand_labeler,/obj/item/weapon/packageWrap,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/obj/machinery/light/small{dir = 8},/obj/structure/extinguisher_cabinet{pixel_x = -32},/obj/item/device/destTagger,/turf/simulated/floor/tiled,/area/engineering/engineering_monitoring)
+"ly" = (/obj/structure/table/steel,/obj/item/weapon/hand_labeler,/obj/item/stack/package_wrap/twenty_five,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/obj/machinery/light/small{dir = 8},/obj/structure/extinguisher_cabinet{pixel_x = -32},/obj/item/device/destTagger,/turf/simulated/floor/tiled,/area/engineering/engineering_monitoring)
 "lz" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled,/area/engineering/engineering_monitoring)
 "lA" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled,/area/engineering/engineering_monitoring)
 "lB" = (/obj/structure/cable/green{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/obj/structure/cable/green{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled,/area/engineering/engineering_monitoring)

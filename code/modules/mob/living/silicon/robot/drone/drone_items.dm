@@ -3,6 +3,7 @@
 /obj/item/weapon/gripper
 	name = "magnetic gripper"
 	desc = "A simple grasping tool specialized in construction and engineering work."
+	description_info = "Click an item to pick it up with your gripper. Use it as you would normally use anything in your hand. The Drop Item verb will allow you to release the item."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "gripper"
 
@@ -32,6 +33,7 @@
 /obj/item/weapon/gripper/miner
 	name = "drill maintenance gripper"
 	desc = "A simple grasping tool for the maintenance of heavy drilling machines."
+
 	icon_state = "gripper-mining"
 
 	can_hold = list(
@@ -40,8 +42,8 @@
 	/obj/item/weapon/circuitboard/miningdrill
 	)
 
-/obj/item/weapon/gripper/paperwork
-	name = "paperwork gripper"
+/obj/item/weapon/gripper/clerical
+	name = "clerical gripper"
 	desc = "A simple grasping tool for clerical work."
 
 	can_hold = list(
@@ -50,7 +52,8 @@
 		/obj/item/weapon/paper_bundle,
 		/obj/item/weapon/card/id,
 		/obj/item/weapon/book,
-		/obj/item/weapon/newspaper
+		/obj/item/weapon/newspaper,
+		/obj/item/smallDelivery
 		)
 
 /obj/item/weapon/gripper/chemistry
@@ -244,18 +247,23 @@
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
 
 /obj/item/weapon/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
+
+	if(QDELETED(wrapped))
+		wrapped.loc = null
+		wrapped = null
+	return
+
 	if(!resolved && wrapped && target)
-		wrapped.afterattack(target,user,1,params)
+		wrapped.afterattack(target, user, 1, params)
 
 	if(wrapped)
 		wrapped.force = force_holder
 
 	//If wrapped was neither deleted nor put into target, put it back into the gripper.
-	if(wrapped && user && (wrapped.loc == user))
+	if(wrapped && user && !QDELETED(wrapped) && wrapped.loc == user)
 		wrapped.forceMove(src)
 	else
 		wrapped = null
-		return
 
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler
