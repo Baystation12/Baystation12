@@ -1,5 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - tweak: "Tweaks zombie turn rate. Should be non-impossible."
-  - bugfix: "Fixes zombie consume."

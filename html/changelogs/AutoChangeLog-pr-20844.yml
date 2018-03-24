@@ -1,5 +1,0 @@
-author: "Devildabeast"
-delete-after: True
-changes: 
-  - rscadd: "Adds a gyroscooter, a subtype of the space bike."
-  - maptweak: "Adds a gyroscooter to the Research Director's office."
