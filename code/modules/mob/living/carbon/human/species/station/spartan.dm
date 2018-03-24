@@ -13,6 +13,16 @@
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
 	item_icon_offsets = list(-1,3)
 
+	//Spartan's have some better organs than normal humans. Also, we'll say the UNSC cut out their appendix already
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver/spartan,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_BRAIN =    /obj/item/organ/internal/brain,
+		BP_EYES =     /obj/item/organ/internal/eyes/occipital_reversal
+		)
+
 	has_limbs =  list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest/augmented),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin/augmented),
