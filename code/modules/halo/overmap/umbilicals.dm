@@ -20,7 +20,7 @@
 	var/obj/docking_umbilical/current_connected
 
 /obj/docking_umbilical/New()
-	our_ship = map_sectors["[z]"] //TODO: This is bad!
+	our_ship = map_sectors["[z]"]
 	our_ship.connectors += src
 	broke = FALSE
 
