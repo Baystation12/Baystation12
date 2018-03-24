@@ -23,6 +23,8 @@
 	#include "../insurrection/insurrection_spawns.dm"
 
 	#include "../insurrection/innie_base_areas.dm"
+	#include "../insurrection/innie_base4.dmm"
+	#include "../insurrection/innie_base3.dmm"
 	#include "../insurrection/innie_base2.dmm"
 	#include "../insurrection/innie_base1.dmm"
 
