@@ -435,6 +435,12 @@
 			return global.global_vars_;
 		if("gravity_is_on")
 			return global.gravity_is_on;
+		if("gyne_architecture")
+			return global.gyne_architecture;
+		if("gyne_geoforms")
+			return global.gyne_geoforms;
+		if("gyne_names")
+			return global.gyne_names;
 		if("gyrotrons")
 			return global.gyrotrons;
 		if("gzn_check")
@@ -453,6 +459,8 @@
 			return global.href_logfile;
 		if("human_icon_cache")
 			return global.human_icon_cache;
+		if("hunters")
+			return global.hunters;
 		if("id_card_states")
 			return global.id_card_states;
 		if("image_repository")
@@ -1434,6 +1442,12 @@
 			global.global_vars_=newval;
 		if("gravity_is_on")
 			global.gravity_is_on=newval;
+		if("gyne_architecture")
+			global.gyne_architecture=newval;
+		if("gyne_geoforms")
+			global.gyne_geoforms=newval;
+		if("gyne_names")
+			global.gyne_names=newval;
 		if("gyrotrons")
 			global.gyrotrons=newval;
 		if("gzn_check")
@@ -1452,6 +1466,8 @@
 			global.href_logfile=newval;
 		if("human_icon_cache")
 			global.human_icon_cache=newval;
+		if("hunters")
+			global.hunters=newval;
 		if("id_card_states")
 			global.id_card_states=newval;
 		if("image_repository")
@@ -2215,6 +2231,9 @@
 	"global_message_listener",
 	"global_vars_",
 	"gravity_is_on",
+	"gyne_architecture",
+	"gyne_geoforms",
+	"gyne_names",
 	"gyrotrons",
 	"gzn_check",
 	"hadevent",
@@ -2224,6 +2243,7 @@
 	"host",
 	"href_logfile",
 	"human_icon_cache",
+	"hunters",
 	"id_card_states",
 	"image_repository",
 	"inactive_keys",

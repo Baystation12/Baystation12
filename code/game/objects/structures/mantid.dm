@@ -1,15 +1,16 @@
 /obj/structure/mantid
 	icon = 'icons/obj/mantid.dmi'
 	light_power = 0
+	density = TRUE
 
 /obj/structure/mantid/chair
 	name = "mantid chair"
 	icon_state = "chair"
-	density = 0
-	anchored = 1
-	can_buckle = 1
+	density = FALSE
+	anchored = TRUE
+	can_buckle = TRUE
 
-/obj/structure/mantid/New()
+/obj/structure/mantid/Initialize()
 	..()
 	set_light()
 
@@ -26,20 +27,26 @@
 	light_power = 3
 	light_range = 3
 	light_color = "#00FFFF"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	var/on
 
 /obj/structure/mantid/light/proc/toggle(var/mob/user)
 	if(on)
 		set_light(0)
-		icon_state = "light_off"
 	else
 		set_light()
-		icon_state = "light_on"
 	on = !on
 	if(user)
 		user.visible_message("<span class='notice'>\The [user] taps \the [src], and it [on ? "brightens" : "goes dark"].</span>")
+	update_icon()
+
+/obj/structure/mantid/light/update_icon()
+	. = ..()
+	if(on)
+		icon_state = "light_on"
+	else
+		icon_state = "light_off"
 
 /obj/structure/mantid/light/attack_hand(var/mob/user)
 	if(check_user(user))
@@ -53,15 +60,13 @@
 	light_power = 1
 	light_range = 2
 	light_color = "#00FFFF"
-	anchored = 1
-	density = 1
+	anchored = TRUE
 
 /obj/structure/mantid/door
 	name = "composite airlock"
 	icon_state = "door"
-	anchored = 1
-	density = 1
-	opacity = 1
+	anchored = TRUE
+	opacity = TRUE
 
 /obj/structure/mantid/door/Bumped(atom/user)
 	if(density && check_user(user))
@@ -74,16 +79,22 @@
 		return
 	. = ..()
 
-/obj/structure/mantid/door/proc/toggle(var/mob/user)
+/obj/structure/mantid/door/update_icon()
+	. = ..()
 	if(density)
-		density = 0
-		set_opacity(0)
 		icon_state = "door_open"
 	else
-		density = 1
-		set_opacity(1)
 		icon_state = "door"
+
+/obj/structure/mantid/door/proc/toggle(var/mob/user)
+	if(density)
+		set_density(0)
+		set_opacity(0)
+	else
+		set_density(1)
+		set_opacity(1)
 	if(user)
 		user.visible_message("<span class='notice'>\The [user] taps \the [src], and it [density ? "closes" : "opens"].</span>")
+	update_icon()
 	sleep(1)
 	update_nearby_tiles()
