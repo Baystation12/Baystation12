@@ -19,12 +19,17 @@
 	//var/id = "CHANGE ME OR SUFFER!" //ID currently not used?
 	var/obj/docking_umbilical/current_connected
 
+/obj/docking_umbilical/New()
+	. = ..()
+	if(initial(broke) == -1)
+		broke = FALSE
+
 /obj/docking_umbilical/LateInitialize()
+	. = ..()
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 	our_ship = map_sectors["[z]"]
 	our_ship.connectors += src
-	broke = FALSE
 
 /obj/docking_umbilical/proc/visual_umbi_change(var/contract = 0,var/no_message = 0)
 	if(contract == 1)
