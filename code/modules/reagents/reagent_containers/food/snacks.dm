@@ -849,7 +849,7 @@
 	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
 	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "hburger"
+	icon_state = "burger"
 	filling_color = "#d63c3c"
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("bun" = 2)
