@@ -677,3 +677,12 @@
 	reagent_state = LIQUID
 	color = "#4c3b34"
 	strength = 5
+
+/datum/reagent/toxin/bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_MANTID) . = ..()
+
+/datum/reagent/toxin/bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_MANTID) . = ..()
+
+/datum/reagent/toxin/bromide/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_MANTID) . = ..()
