@@ -13,13 +13,15 @@
 	density = 1
 	anchored = 1
 	pixel_x = -32
-	var/side = null //NORTH, SOUTH EAST WEST are valid values for this. Setting this causes side-restrictions to apply
+	var/side = null //NORTH SOUTH EAST WEST are valid values for this. Setting this causes side-restrictions to apply
 	var/obj/effect/overmap/our_ship
 	var/broke = -1 //Use -1 to stop breaking.
 	//var/id = "CHANGE ME OR SUFFER!" //ID currently not used?
 	var/obj/docking_umbilical/current_connected
 
 /obj/docking_umbilical/New()
+	if(!GLOB.using_map.use_overmap)
+		return INITIALIZE_HINT_QDEL
 	our_ship = map_sectors["[z]"]
 	our_ship.connectors += src
 	broke = FALSE
@@ -29,12 +31,12 @@
 		icon_state = "umbi_contracted"
 		flick("umbi_contract",src)
 		if(!no_message)
-			visible_message("[src] disconnects from [current_connected.our_ship.name] and starts contracting.</span>")
+			visible_message("<span class = 'notice'>[src] disconnects from [current_connected.our_ship.name] and starts contracting.</span>")
 	else
 		icon_state = "umbi_extended"
 		flick("umbi_extend",src)
 		if(!no_message)
-			visible_message("[src] starts extending towards [current_connected.our_ship.name].</span>")
+			visible_message("<span class = 'notice'>[src] starts extending towards [current_connected.our_ship.name].</span>")
 
 /obj/docking_umbilical/verb/cross_umbilical()
 	set name = "Cross Umbilical"
@@ -149,7 +151,8 @@
 		return
 	broke = TRUE
 	icon_state = "umbi_broken"
-	visible_message("<span class = 'warning'>[src] flexes and strains from movement. </span>\n</span class = 'danger'>-SNAP-</span>")
+	visible_message("<span class = 'warning'>[src] flexes and strains from movement. </span>")
+	visible_message("<span class = 'danger'>-SNAP-</span>")
 	current_connected.current_connected = null
 	current_connected = null
 
