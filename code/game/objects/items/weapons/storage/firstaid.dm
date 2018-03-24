@@ -41,7 +41,7 @@
 		/obj/item/weapon/storage/med_pouch/trauma = 4
 		)
 
-/obj/item/weapon/storage/firstaid/fire/New()
+/obj/item/weapon/storage/firstaid/trauma/New()
 	..()
 	icon_state = pick("radfirstaid", "radfirstaid2", "radfirstaid3")
 

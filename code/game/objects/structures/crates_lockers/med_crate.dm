@@ -16,7 +16,7 @@
 
 /obj/structure/closet/crate/med_crate/burn
 	name = "\improper Burn crate"
-	desc = "A crate with trauma equipment."
+	desc = "A crate with burn equipment."
 	icon_state = "med_orange"
 	icon_opened = "med_orangeopen"
 	icon_closed = "med_orange"
@@ -32,7 +32,7 @@
 
 /obj/structure/closet/crate/med_crate/oxyloss
 	name = "\improper Low oxygen crate"
-	desc = "A crate with trauma equipment."
+	desc = "A crate with low oxygen equipment."
 	icon_state = "med_blue"
 	icon_opened = "med_blueopen"
 	icon_closed = "med_blue"
@@ -45,7 +45,7 @@
 	)
 /obj/structure/closet/crate/med_crate/toxin
 	name = "\improper Toxin crate"
-	desc = "A crate with trauma equipment."
+	desc = "A crate with toxin equipment."
 	icon_state = "med_green"
 	icon_opened = "med_greenopen"
 	icon_closed = "med_green"
