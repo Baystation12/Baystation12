@@ -887,8 +887,12 @@
 	ideal_character_age = 30
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/bartender
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	allowed_branches = list(/datum/mil_branch/civilian,
+							/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/service/bartender/ec
+	)
+	allowed_ranks = list(/datum/mil_rank/civ/contractor,
+						/datum/mil_rank/ec/e3
+	)
 
 	access = list(access_hydroponics, access_bar, access_solgov_crew, access_kitchen)
 	minimal_access = list()

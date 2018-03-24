@@ -490,8 +490,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Bartender - Torch")
 	uniform = /obj/item/clothing/under/rank/bartender
 	shoes = /obj/item/clothing/shoes/laceup
-	id_type = /obj/item/weapon/card/id/torch/contractor/service/bartender
+	id_type = /obj/item/weapon/card/id/torch/crew/service/bartender
 	pda_type = /obj/item/device/pda/bar
+
+/decl/hierarchy/outfit/job/torch/crew/service/bartender/ec
+	name = OUTFIT_JOB_NAME("Bartender - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/service/bartender
 
 /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	name = OUTFIT_JOB_NAME("Crewman")
