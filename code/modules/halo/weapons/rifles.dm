@@ -20,9 +20,11 @@
 	burst = 3
 	burst_delay = 2
 	one_hand_penalty = -1
+	dispersion = list(2)//This gun spawns with a stock that counteracts this issue.
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 	w_class = ITEM_SIZE_LARGE
+	ammo_icon_state = "ma5b_mag"
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -34,11 +36,8 @@
 		list(mode_name="short bursts", 	burst=5, fire_delay=null, move_delay=6,    burst_accuracy=list(-1,-1,-2,-2,-3), dispersion=list(0.6, 1.0, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/ma5b_ar/update_icon()
-	if(ammo_magazine)
-		icon_state = "MA5B"
-	else
-		icon_state = "MA5B_unloaded"
+	attachment_slots = list("sight","stock","barrel")
+	attachments_on_spawn = list(/obj/item/weapon_attachment/stock/ma5b)
 
 /obj/item/weapon/gun/projectile/ma5b_ar/New()
 	..()
@@ -55,8 +54,10 @@
 	desc = "Also formally known as the MA5."
 	icon_state = "MA37"
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
+	ammo_icon_state = null
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37/update_icon()
+	. = ..()
 	if(ammo_magazine)
 		icon_state = "MA37"
 	else
@@ -109,3 +110,4 @@
 		icon_state = "Br85"
 	else
 		icon_state = "Br85_unloaded"
+	. = ..()

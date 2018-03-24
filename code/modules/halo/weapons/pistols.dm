@@ -22,6 +22,7 @@
 		icon_state = "magnum"
 	else
 		icon_state = "magnum_unloaded"
+	. = ..()
 
 /obj/item/weapon/gun/projectile/m6d_magnum/verb/scope()
 	set category = "Object"
@@ -52,3 +53,4 @@
 		icon_state = "SOCOM"
 	else
 		icon_state = "SOCOM_unloaded"
+	. = ..()

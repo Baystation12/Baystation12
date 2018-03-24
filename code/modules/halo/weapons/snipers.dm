@@ -36,6 +36,7 @@
 		icon_state = "SRS99"
 	else
 		icon_state = "SRS99_unloaded"
+	. = ..()
 
 //M392 designated marksman rifle
 //todo: should this be a sniper?
@@ -76,6 +77,7 @@
 		icon_state = "M395"
 	else
 		icon_state = "M395_unloaded"
+	. = ..()
 
 /obj/item/weapon/gun/projectile/m392_dmr/verb/toggle_light()
 	set category = "Object"

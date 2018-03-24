@@ -37,6 +37,7 @@
 		icon_state = "m7smg"
 	else
 		icon_state = "m7smg_unloaded"
+	. = ..()
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced
 	name = "M7S submachine gun"
