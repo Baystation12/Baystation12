@@ -104,8 +104,8 @@
 	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
-/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch)
+/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(!outfit)
 		return FALSE
 	. = outfit.equip(H, title, alt_title, OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA)
