@@ -7,6 +7,7 @@
 	online_slowdown = 0
 	offline_slowdown = 1
 	equipment_overlay_icon = null
+	air_type =   /obj/item/weapon/tank/methyl_bromide
 
 	chest_type = /obj/item/clothing/suit/space/rig/mantid
 	helm_type = /obj/item/clothing/head/helmet/space/rig/mantid
