@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Wall mirrors are now containers, and contain some things."
