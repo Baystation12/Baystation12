@@ -1,39 +1,47 @@
 /datum/species/mantid
-	name = SPECIES_MANTID_ALATE
-	name_plural = "Mantid Alates"
+
+	name =                   SPECIES_MANTID_ALATE
+	name_plural =            "Mantid Alates"
+	show_ssd =               "quiescent"
+
 	blurb = "When human explorers finally arrived at the outer reaches of Skrellian space, they hoped to find \
 	new frontiers and new planets to exploit. They were largely not expecting to have entire expeditions lost \
-	amid reports of highly advanced, astonishingly violent mantid-cephlapodean sentients with particle lances."
+	amid reports of highly advanced, astonishingly violent mantid-cephlapodean sentients with particle cannons."
 
-	icobase =            'icons/mob/human_races/r_alate.dmi'
-	deform =             'icons/mob/human_races/r_alate.dmi'
-	damage_overlays =    'icons/mob/human_races/masks/dam_alate.dmi'
-	blood_mask =         'icons/mob/human_races/masks/blood_alate.dmi'
-	eye_icon_location =  'icons/mob/human_races/r_alate.dmi'
-	eye_icon =           "eyes"
-	blood_color =        "#660066"
-	flesh_color =        "#009999"
-	hud_type =           /datum/hud_data/mantid
-	move_trail =         /obj/effect/decal/cleanable/blood/tracks/snake
+	icobase =                'icons/mob/human_races/r_alate.dmi'
+	deform =                 'icons/mob/human_races/r_alate.dmi'
+	damage_overlays =        'icons/mob/human_races/masks/dam_alate.dmi'
+	blood_mask =             'icons/mob/human_races/masks/blood_alate.dmi'
+	eye_icon_location =      'icons/mob/human_races/r_alate.dmi'
+	eye_icon =               "eyes"
+	blood_color =            "#660066"
+	flesh_color =            "#009999"
+	hud_type =               /datum/hud_data/mantid
+	move_trail =             /obj/effect/decal/cleanable/blood/tracks/snake
+	has_floating_eyes =      TRUE
 
-	min_age =             1
-	max_age =            20
-	slowdown =           -1
-	rarity_value =        3
-	gluttonous =          2
-	siemens_coefficient = 0
+	min_age =                 1
+	max_age =                20
+	slowdown =               -1
+	rarity_value =            3
+	gluttonous =              2
+	siemens_coefficient =     0
 
-	reagent_tag =         IS_MANTID
-	genders =             list(MALE)
+	breath_type =             "methyl_bromide"
+	poison_type =             "phoron"
+	exhale_type =             "methane"
+
+	reagent_tag =             IS_MANTID
+	genders =                 list(MALE)
 
 	language =                LANGUAGE_MANTID_NONVOCAL
 	default_language =        LANGUAGE_MANTID_NONVOCAL
 	secondary_langs =         list(LANGUAGE_MANTID_BROADCAST, LANGUAGE_MANTID_VOCAL)
 	num_alternate_languages = 1
 
-	appearance_flags = 0
-	species_flags =    SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT
-	spawn_flags =      SPECIES_IS_RESTRICTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
+	appearance_flags =        0
+	species_flags =           SPECIES_FLAG_NO_SCAN | SPECIES_FLAG_NO_SLIP | SPECIES_FLAG_NO_MINOR_CUT
+	spawn_flags =             SPECIES_IS_RESTRICTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_LACE
 
 	heat_discomfort_strings = list(
 		"You feel brittle and overheated.",
@@ -56,17 +64,16 @@
 
 /datum/species/mantid/gyne
 
-	name =              SPECIES_MANTID_GYNE
-	name_plural =       "Mantid Gynes"
+	name =                    SPECIES_MANTID_GYNE
+	name_plural =             "Mantid Gynes"
 
-	genders =           list(FEMALE)
-	eye_icon_location = 'icons/mob/human_races/r_gyne.dmi'
-	icobase =           'icons/mob/human_races/r_gyne.dmi'
-	deform =            'icons/mob/human_races/r_gyne.dmi'
-	icon_template =     'icons/mob/human_races/r_gyne.dmi'
-	damage_overlays =   'icons/mob/human_races/masks/dam_gyne.dmi'
-	blood_mask =        'icons/mob/human_races/masks/blood_gyne.dmi'
-
+	genders =                 list(FEMALE)
+	eye_icon_location =       'icons/mob/human_races/r_gyne.dmi'
+	icobase =                 'icons/mob/human_races/r_gyne.dmi'
+	deform =                  'icons/mob/human_races/r_gyne.dmi'
+	icon_template =           'icons/mob/human_races/r_gyne.dmi'
+	damage_overlays =         'icons/mob/human_races/masks/dam_gyne.dmi'
+	blood_mask =              'icons/mob/human_races/masks/blood_gyne.dmi'
 
 	gluttonous =              3
 	slowdown =                2
@@ -90,6 +97,11 @@
 	antaghud_offset_y =      32
 	antaghud_offset_x =      22
 
+	bump_flag =               HEAVY
+	push_flags =              ALLMOBS
+	swap_flags =              ALLMOBS
+
+
 	equip_adjust = list(
 		slot_all_slots_str = list(
 			NORTH = list("x" = 22, "y" = -2),
@@ -98,11 +110,6 @@
 			WEST =  list("x" = 22, "y" = -2)
 		)
 	)
-
-	bump_flag =  HEAVY
-	push_flags = ALLMOBS
-	swap_flags = ALLMOBS
-
 
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/gut,
