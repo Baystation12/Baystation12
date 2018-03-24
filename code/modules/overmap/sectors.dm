@@ -21,6 +21,8 @@ var/list/points_of_interest = list()
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
 
+	var/list/connectors = list() //Used for docking umbilical type-items.
+
 /obj/effect/overmap/Initialize()
 
 	. = ..()
