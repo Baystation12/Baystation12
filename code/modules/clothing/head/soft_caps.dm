@@ -38,7 +38,7 @@
 
 /obj/item/clothing/head/soft/red
 	name = "red cap"
-	desc = "It's a baseball hat in a tasteless red color."
+	desc = "It's a peaked hat in a tasteless red color."
 	icon_state = "redsoft"
 
 /obj/item/clothing/head/soft/blue
