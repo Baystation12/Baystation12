@@ -19,7 +19,7 @@
 	//var/id = "CHANGE ME OR SUFFER!" //ID currently not used?
 	var/obj/docking_umbilical/current_connected
 
-/obj/docking_umbilical/New()
+/obj/docking_umbilical/LateInitialize()
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 	our_ship = map_sectors["[z]"]
