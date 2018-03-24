@@ -34,7 +34,7 @@
 	desc = "A tank with an N2O/O2 gas mix."
 	icon_state = "anesthetic"
 	item_state = "an_tank"
-	starting_pressure = list("oxygen" = 3*ONE_ATMOSPHERE*O2STANDARD, "sleeping_agent" = 3*ONE_ATMOSPHERE*N2STANDARD) 
+	starting_pressure = list("oxygen" = 3*ONE_ATMOSPHERE*O2STANDARD, "sleeping_agent" = 3*ONE_ATMOSPHERE*N2STANDARD)
 
 /*
  * Air
@@ -43,7 +43,7 @@
 	name = "air tank"
 	desc = "Mixed anyone?"
 	icon_state = "oxygen"
-	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE*O2STANDARD, "nitrogen" = 6*ONE_ATMOSPHERE*N2STANDARD) 
+	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE*O2STANDARD, "nitrogen" = 6*ONE_ATMOSPHERE*N2STANDARD)
 
 /*
  * Phoron
@@ -134,3 +134,13 @@
 	icon_state = "oxygen_fr"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list("nitrogen" = 6*ONE_ATMOSPHERE)
+
+/*
+ * Methyl bromide
+ */
+/obj/item/weapon/tank/methyl_bromide
+	name = "bromomethane tank"
+	desc = "A tank of methyl bromide."
+	icon_state = "bromomethane"
+	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+	starting_pressure = list("methyl_bromide" = 6*ONE_ATMOSPHERE)
