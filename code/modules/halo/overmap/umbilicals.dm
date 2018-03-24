@@ -19,12 +19,17 @@
 	//var/id = "CHANGE ME OR SUFFER!" //ID currently not used?
 	var/obj/docking_umbilical/current_connected
 
+/obj/docking_umbilical/New()
+	. = ..()
+	if(initial(broke) == -1)
+		broke = FALSE
+
 /obj/docking_umbilical/LateInitialize()
+	. = ..()
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
 	our_ship = map_sectors["[z]"]
 	our_ship.connectors += src
-	broke = FALSE
 
 /obj/docking_umbilical/proc/visual_umbi_change(var/contract = 0,var/no_message = 0)
 	if(contract == 1)
@@ -130,11 +135,17 @@
 		disconnect(user)
 	else
 		var/obj/effect/overmap/entity_connect = get_player_connect_to_choice(user)
+		if(!entity_connect)
+			return
 		connect(entity_connect,user)
 
 /obj/docking_umbilical/proc/get_player_connect_to_choice(var/mob/user)
 	var/list/overmap_name_assoc = list()
-	for(var/obj/effect/overmap/obj in range(1,our_ship) - our_ship) //We should probably remove our ship from this selection.
+	var/list/objs_in_view = view(1,our_ship) - our_ship
+	if(!objs_in_view || !objs_in_view.len)
+		to_chat(user,"<span class = 'notice'>No entities in view.</span>")
+		return
+	for(var/obj/effect/overmap/obj in objs_in_view) //We should probably remove our ship from this selection.
 		overmap_name_assoc += "[obj.name]"
 		overmap_name_assoc["[obj.name]"] = obj
 	var/overmap_name_picked = input(user,"Entity connection selection.","Select an entity to connect to.","Cancel") in overmap_name_assoc + list("Cancel")
