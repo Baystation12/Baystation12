@@ -113,9 +113,16 @@
 				deltas[i] = speed[i] > 0 ? 1 : -1
 				last_movement[i] = world.time
 		var/turf/newloc = locate(x + deltas[1], y + deltas[2], z)
+		break_umbilicals()
 		if(newloc)
 			Move(newloc)
 		update_icon()
+
+/obj/effect/overmap/ship/proc/break_umbilicals()
+	for(var/obj/docking_umbilical/umbi in connectors)
+		if(umbi.current_connected)
+			umbi.current_connected.umbi_rip()
+		umbi.umbi_rip()
 
 /obj/effect/overmap/ship/update_icon()
 	if(!is_still())

@@ -187,6 +187,9 @@
 	name = "\improper Chief Medical Officer Office"
 	icon_state = "cmo"
 
+/area/planets/Geminus/outdoor/space_elevator
+	name = "\improper Space Elevator"
+
 //COLONY MAC//
 /area/planets/Geminus/outdoor/MAC
 	name = "\improper Geminus MAC"
