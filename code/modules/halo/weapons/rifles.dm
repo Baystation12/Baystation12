@@ -59,6 +59,8 @@
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA37)
+	attachment_slots = null
+	attachments_on_spawn = null
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37/update_icon()
 	. = ..()
