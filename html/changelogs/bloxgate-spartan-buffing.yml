@@ -1,0 +1,10 @@
+author: bloxgate
+delete-after: True
+changes:
+ - rscadd: "Enhanced liver for Spartans. Handles radiation and some toxins better."
+ - rscadd: "Enhanced eyes for Spartans. Better protection from some blinding effects."
+ - tweak: "Spartan's hearts can take more damage than normal humans."
+ - tweak: "Spartans have a greater temperature tolerance."
+ - experiment: "Spartans are more insulated than regular humans."
+ - bugfix: "Spartans now have their player ages restricted to a lore-friendly range."
+ 
