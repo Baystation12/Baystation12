@@ -9,9 +9,19 @@
 	path = /obj/item/ammo_magazine/m127_saphp
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/m118_fmj_ap
-	name = "magazine (7.62mm) M118 FMJ-AP"
-	path = /obj/item/ammo_magazine/m762_ap
+/datum/autolathe/recipe/m118_ma5b
+	name = "MA5B magazine (7.62mm) M118 FMJ-AP"
+	path = /obj/item/ammo_magazine/m762_ap/MA5B
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/m118_m392
+	name = "M392 magazine (7.62mm) M118 FMJ-AP"
+	path = /obj/item/ammo_magazine/m762_ap/M392
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/m118_ma37
+	name = "MA37 magazine (7.62mm) M118 FMJ-AP"
+	path = /obj/item/ammo_magazine/m762_ap/MA37
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/m634_sap

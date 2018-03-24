@@ -32,3 +32,4 @@
 	icon_state = "pdoor1"
 	maxhealth = 600
 	block_air_zones = 1
+	desc = "A huge door used to seal off breached areas. If this is closed, keep it that way."

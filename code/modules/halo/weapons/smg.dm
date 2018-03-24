@@ -17,7 +17,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m5
 	handle_casings = CLEAR_CASINGS
-	burst = 3
+	burst = 4
 	burst_delay = 2
 	accuracy = -1
 	allowed_magazines = list(/obj/item/ammo_magazine/m5, /obj/item/ammo_magazine/m5/rubber)
@@ -28,8 +28,8 @@
 		)
 
 	firemodes = list(
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1,-2,-2), dispersion=list(0.6, 1.0, 1.0, 1.0, 1.2)),
+		list(mode_name="4-round bursts", burst=4, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1,-2),       dispersion=list(0.0, 0.6, 1.0, 1.2)),
+		list(mode_name="short bursts",   burst=6, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1,-2,-2,-2), dispersion=list(0.6, 1.0, 1.0, 1.0, 1.2, 1.2)),
 		)
 
 /obj/item/weapon/gun/projectile/m7_smg/update_icon()
@@ -43,6 +43,13 @@
 	name = "M7S submachine gun"
 	desc = "The M7S is a special operations variant of the M7 submachine gun with inbuilt suppressor and host of other attachments. Takes 5mm calibre magazines."
 	silenced = 1
+	icon_state = "m7smgs"
+
+/obj/item/weapon/gun/projectile/m7_smg/silenced/update_icon()
+	if(ammo_magazine)
+		icon_state = "m7smgs"
+	else
+		icon_state = "m7smgs_unloaded"
 
 /obj/item/weapon/gun/projectile/m7_smg/rubber
 	magazine_type = /obj/item/ammo_magazine/m5/rubber

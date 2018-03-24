@@ -28,6 +28,6 @@
 	shoes = /obj/item/clothing/shoes/black
 	pda_slot = null
 
-	id_type = /obj/item/weapon/card/id
+	id_type = /obj/item/weapon/card/id/unsc
 
 	flags = 0

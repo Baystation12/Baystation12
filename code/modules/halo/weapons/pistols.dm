@@ -25,8 +25,8 @@
 	. = ..()
 
 /obj/item/weapon/gun/projectile/m6d_magnum/verb/scope()
-	set category = "Object"
-	set name = "Use Scope (1.1x)"
+	set category = "Weapon"
+	set name = "Use Scope (Sidearm)"
 	set popup_menu = 1
 
 	toggle_scope(usr, 1.1)

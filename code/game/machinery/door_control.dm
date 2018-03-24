@@ -142,6 +142,11 @@
 					M.close()
 					return
 
+/obj/machinery/button/remote/blast_door/atmos_door
+	name = "blast door control panel"
+	desc = "Controls opening or closing the atmospherics blast doors."
+	req_access = list(301)
+
 /*
 	Emitter remote control
 */

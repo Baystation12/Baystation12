@@ -6,6 +6,7 @@
 	icon_state = "hud_visor"
 	var/list/known_waypoints = list()
 	var/list/waypoint_pointers = list()
+	armor = list(melee = 5, bullet = 5, laser = 0, energy = 0, bomb = 5, bio = 0, rad = 0)
 
 /obj/item/clothing/glasses/hud/tactical/proc/get_loc_used()
 	if(!isturf(loc))

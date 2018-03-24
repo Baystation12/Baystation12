@@ -1,6 +1,6 @@
 /obj/item/weapon/plastique
-	name = "plastic explosives"
-	desc = "Used to put holes in specific areas without too much extra hole."
+	name = "C-12 breaching charge"
+	desc = "C-12 Shaped-charges or C-12 SCs are used mainly for heavy demolitions and can also be used as weapons. This charge is small and used for pinpoint breaching."
 	gender = PLURAL
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "plastic-explosive0"
@@ -55,7 +55,7 @@
 
 		if (ismob(target))
 			admin_attack_log(user, target, "Planted \a [src] with a [timer] second fuse.", "Had \a [src] with a [timer] second fuse planted on them.", "planted \a [src] with a [timer] second fuse on")
-			user.visible_message("<span class='danger'>[user.name] finished planting an explosive on [target.name]!</span>")
+			user.visible_message("<span class='danger'>[user.name] finished planting an explosive charge on [target.name]!</span>")
 			log_game("[key_name(user)] planted [src.name] on [key_name(target)] with [timer] second fuse")
 
 		else

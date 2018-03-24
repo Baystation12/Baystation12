@@ -7,7 +7,7 @@
 	supervisors = " the Insurrectionist Leader"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
@@ -15,6 +15,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/Insurrectionist
 
 	latejoin_at_spawnpoints = TRUE
+	alt_titles = list("Insurrectionist Pilot","Insurrectionist Machine Gunner","Insurrectionist Engineer","Insurrectionist Sharpshooter")
 
 /datum/job/Insurrectionist_leader
 	title = "Insurrectionist Leader"
@@ -24,7 +25,7 @@
 	supervisors = " the Insurrection"
 
 	create_record = 0
-	account_allowed = 0
+	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
