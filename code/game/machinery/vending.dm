@@ -1099,3 +1099,35 @@
 	prices = list(/obj/item/toy/blink = 3, /obj/item/toy/spinningtoy = 10, /obj/item/weapon/deck/tarot = 3, /obj/item/weapon/deck/cards = 3, /obj/item/weapon/pack/cardemon = 5, /obj/item/weapon/pack/spaceball = 5, /obj/item/weapon/storage/pill_bottle/dice_nerd = 6, /obj/item/weapon/storage/pill_bottle/dice = 6, /obj/item/weapon/storage/box/checkers = 10, /obj/item/weapon/storage/box/checkers/chess/red = 10, /obj/item/weapon/storage/box/checkers/chess = 10)
 	premium = list(/obj/item/weapon/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
 	contraband = list(/obj/item/weapon/reagent_containers/spray/waterflower = 2, /obj/item/weapon/storage/box/snappops = 3)
+
+/obj/machinery/vending/odstvend
+	name = "Armtech 5530"
+	desc = "Cold, dark, smiling with a twisted grin, and slightly depressed. Basically an ODST in vending machine form."
+	product_ads = "Life is woe;Suspect, Investigate, Terminate;CAUTION SHIP SELF DESTRUCT ACTIVATED! Just kidding."
+	icon_state = "Theater"
+	req_access = list(309)
+	products = list(
+	/obj/item/clothing/under/unsc/odst_jumpsuit = 8,
+	/obj/item/clothing/head/helmet/odst = 6,
+	/obj/item/clothing/suit/armor/odst = 6,
+	/obj/item/weapon/storage/belt/marine_ammo = 6,
+	/obj/item/weapon/storage/belt/marine_medic = 3,
+	/obj/item/clothing/accessory/storage/odst = 6,
+	/obj/item/clothing/suit/armor/odst/cqb = 3,
+	/obj/item/clothing/head/helmet/odst/cqb = 3,
+	/obj/item/clothing/suit/armor/odst/sharpshooter = 3,
+	/obj/item/clothing/head/helmet/odst/sharpshooter = 3,
+	/obj/item/clothing/suit/armor/odst/medic = 3,
+	/obj/item/clothing/head/helmet/odst/medic = 3,
+	/obj/item/weapon/material/knife/combat_knife = 6,
+	/obj/item/weapon/gun/projectile/m7_smg/silenced = 6,
+	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 3,
+	/obj/item/weapon/gun/projectile/m392_dmr = 3,
+	/obj/item/weapon/gun/projectile/srs99_sniper = 1,
+	/obj/item/weapon/plastique = 3,
+	/obj/item/weapon/storage/firstaid/unsc = 6,
+	/obj/item/device/binoculars = 3,
+	/obj/item/ammo_magazine/m127_saphe = 6,
+	/obj/item/ammo_magazine/m145_ap = 3,
+	/obj/item/ammo_magazine/m762_ap/M392 = 6,
+	/obj/item/ammo_magazine/m5 = 6)
