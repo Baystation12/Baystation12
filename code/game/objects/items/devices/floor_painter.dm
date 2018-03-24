@@ -3,7 +3,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "flpainter"
 	item_state = "fl_painter"
-	desc = "A slender and none-too-sophisticated device capable of painting, erasing, and applying decals to most types of floors."
+	desc = "A slender and none-too-sophisticated device capable of painting, erasing, and applying decals to most types of floors. It can also paint walls."
 	description_info = "Use this item in your hand to access a menu in which you may change the type of decal, applied direction, and color. Click any accessible tile on the floor to apply your choice."
 	description_fluff = "This ubiquitous maintenance-grade floor painter isn't as fancy or convenient as modern consumer models, but with an internal synthesizer it never runs out of pigment!"
 	description_antag = "This thing would be perfect for vandalism. Could you write your name in the halls?"
@@ -49,9 +49,15 @@
 	if(!proximity)
 		return
 
+	var/turf/simulated/wall/W = A
+	if(istype(W))
+		W.paint_color = paint_colour
+		W.update_icon()
+		return
+
 	var/turf/simulated/floor/F = A
 	if(!istype(F))
-		to_chat(user, "<span class='warning'>\The [src] can only be used on actual flooring.</span>")
+		to_chat(user, "<span class='warning'>\The [src] can only be used on floors or walls.</span>")
 		return
 
 	if(!F.flooring.can_paint || F.broken || F.burnt)
