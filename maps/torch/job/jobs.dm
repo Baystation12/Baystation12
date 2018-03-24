@@ -1094,6 +1094,7 @@
 	spawn_positions = 6
 	supervisors = "the Executive Officer and Commanding Officer"
 	selection_color = "#515151"
+	alt_titles = list("Retired")
 	outfit_type = /decl/hierarchy/outfit/job/torch/offduty
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
