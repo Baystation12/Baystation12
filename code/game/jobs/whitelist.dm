@@ -11,6 +11,8 @@ var/list/whitelist = list()
 	var/list/whitelist_base = file2list(WHITELISTFILE)
 	if(!whitelist_base.len)	whitelist = null
 	for(var/value in whitelist_base) //Added some code to handle jobs.
+		if(isnull(value))
+			continue
 		var/name_and_job = maploader.text2list(value) //Because apparently only the maploader actually has this proc.
 		if(isnull(name_and_job) || name_and_job == value)
 			whitelist += value
