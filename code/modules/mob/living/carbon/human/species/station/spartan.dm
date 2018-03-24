@@ -13,6 +13,22 @@
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
 	item_icon_offsets = list(-1,3)
 
+	metabolism_mod = 1.25 //Faster metabolism
+	breath_pressure = 14.5 //Better lungs!
+	darksight = 4 //Beter night vision!
+
+	//Spartans have a bit better temperature tolerance
+	siemens_coefficient = 0.9 //Better insulated against temp changes
+	heat_discomfort_level = 330 //57C
+	cold_discomfort_level = T0C
+	//Buff to temperature damage levels (5% per level)
+	heat_level_1 = 380 //~107C
+	heat_level_2 = 420 //147C
+	heat_level_3 = 1050 //777C
+	cold_level_1 = 247 //-26C
+	cold_level_2 = 190 //-83C
+	cold_level_3 = 114 //-159C
+
 	//Spartan's have some better organs than normal humans. Also, we'll say the UNSC cut out their appendix already
 	has_organ = list(
 		BP_HEART =    /obj/item/organ/internal/heart/spartan,
