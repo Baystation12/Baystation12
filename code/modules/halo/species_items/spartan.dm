@@ -54,6 +54,7 @@
 	phoron_guard = 1
 
 /obj/item/organ/internal/liver/spartan
+	name = "augmented liver"
 	//Twice as good at handling toxin damage... but not any tougher
 	toxin_danger_level = 120
 
@@ -72,5 +73,9 @@
 
 	. = ..()
 
-
-
+/obj/item/organ/internal/heart/spartan
+	name = "enhanced heart"
+	desc = "a dense mass of muscle, vaugely resembling a heart"
+	max_damage = 60
+	min_bruised_damage = 30 //Considerably tougher
+	min_broken_damage = 45

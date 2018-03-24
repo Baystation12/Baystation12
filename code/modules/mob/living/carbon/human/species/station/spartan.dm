@@ -15,7 +15,7 @@
 
 	//Spartan's have some better organs than normal humans. Also, we'll say the UNSC cut out their appendix already
 	has_organ = list(
-		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_HEART =    /obj/item/organ/internal/heart/spartan,
 		BP_LUNGS =    /obj/item/organ/internal/lungs,
 		BP_LIVER =    /obj/item/organ/internal/liver/spartan,
 		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
