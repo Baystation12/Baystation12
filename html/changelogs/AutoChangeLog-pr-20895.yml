@@ -1,0 +1,8 @@
+author: "FTangSteve"
+delete-after: True
+changes: 
+  - tweak: "changes injury specific medical kit contents to medical pouches."
+  - tweak: "advanced medical kits are now purple."
+  - rscadd: "adds small emergency medical pouches that require no medical training to use."
+  - maptweak: "adds new medical items around."
+  - tweak: "adds medical pouches to nanomeds"
