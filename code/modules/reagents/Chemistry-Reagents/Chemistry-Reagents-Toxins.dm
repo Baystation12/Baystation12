@@ -670,3 +670,10 @@
 			to_chat(M, "<span class='warning'>You feel funny...</span>")
 		else
 			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")
+/datum/reagent/toxin/bromide
+	name = "Bromide"
+	description = "A dark, nearly opaque, red-orange, toxic element."
+	taste_description = "pestkiller"
+	reagent_state = LIQUID
+	color = "#4c3b34"
+	strength = 5

@@ -676,7 +676,10 @@
 	name = "cabbage"
 	seed_name = "cabbage"
 	display_name = "cabbages"
-	chems = list(/datum/reagent/nutriment = list(1,10))
+	chems = list(
+		/datum/reagent/nutriment = list(1,10),
+		/datum/reagent/toxin/bromide = list(3,5)
+	)
 	kitchen_tag = "cabbage"
 
 /datum/seed/cabbage/New()
