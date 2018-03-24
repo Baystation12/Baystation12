@@ -91,7 +91,8 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/play_lobby_music/changed(var/mob/preference_mob, var/new_value)
 	if(new_value == GLOB.PREF_YES)
-		GLOB.using_map.lobby_music.play_to(preference_mob)
+		if(isnewplayer(preference_mob))
+			GLOB.using_map.lobby_music.play_to(preference_mob)
 	else
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))
 
