@@ -282,9 +282,6 @@
 /obj/item/clothing/suit/armor/pcarrier/light/nt
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/nt)
 
-/obj/item/clothing/suit/armor/pcarrier/light/press
-	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/press)
-
 /obj/item/clothing/suit/armor/pcarrier/medium
 	starting_accessories = list(/obj/item/clothing/accessory/armorplate/medium, /obj/item/clothing/accessory/storage/pouches)
 
@@ -295,6 +292,12 @@
 	name = "blue plate carrier"
 	desc = "A lightweight blue plate carrier vest. It can be equipped with armor plates, but provides no protection of its own."
 	icon_state = "pcarrier_blue"
+
+/obj/item/clothing/suit/armor/pcarrier/blue/light
+	starting_accessories = list(/obj/item/clothing/accessory/armorplate)
+
+/obj/item/clothing/suit/armor/pcarrier/blue/light/press
+	starting_accessories = list(/obj/item/clothing/accessory/armorplate, /obj/item/clothing/accessory/armor/tag/press)
 
 /obj/item/clothing/suit/armor/pcarrier/green
 	name = "green plate carrier"

@@ -413,15 +413,17 @@
 
 /obj/item/weapon/storage/box/glowsticks
 	name = "box of mixed glowsticks"
-	icon_state = "box"
 	startswith = list(/obj/item/device/flashlight/glowstick = 1, /obj/item/device/flashlight/glowstick/red = 1,
 					/obj/item/device/flashlight/glowstick/blue = 1, /obj/item/device/flashlight/glowstick/orange = 1,
 					/obj/item/device/flashlight/glowstick/yellow = 1, /obj/item/device/flashlight/glowstick/random = 1)
 
 /obj/item/weapon/storage/box/greenglowsticks
 	name = "box of green glowsticks"
-	icon_state = "box"
 	startswith = list(/obj/item/device/flashlight/glowstick = 6)
+
+/obj/item/weapon/storage/box/flares
+	name = "box of flares"
+	startswith = list(/obj/item/device/flashlight/flare = 6)
 
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"
