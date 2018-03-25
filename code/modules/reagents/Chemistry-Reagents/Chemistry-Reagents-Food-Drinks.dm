@@ -569,7 +569,7 @@
 /datum/reagent/drink/juice/potato
 	name = "Potato Juice"
 	description = "Juice of the potato. Bleh."
-	taste_description = "irish sadness"
+	taste_description = "irish sadness and potatoes"
 	nutrition = 2
 	color = "#302000"
 
@@ -619,6 +619,34 @@
 
 	glass_name = "watermelon juice"
 	glass_desc = "Delicious juice made from watermelon."
+
+/datum/reagent/drink/juice/turnip
+	name = "Turnip Juice"
+	description = "Delicious (?) juice made from turnips."
+	taste_description = "love of motherland and oppression"
+	color = "#b1166e"
+
+	glass_name = "turnip juice"
+	glass_desc = "Delicious (?) juice made from turnips."
+
+
+/datum/reagent/drink/juice/apple
+	name = "Apple Juice"
+	description = "Delicious sweet juice made from apples."
+	taste_description = "sweet apples"
+	color = "#c07c40"
+
+	glass_name = "apple juice"
+	glass_desc = "Delicious juice made from apples."
+
+/datum/reagent/drink/juice/pear
+	name = "Pear Juice"
+	description = "Delicious sweet juice made from pears."
+	taste_description = "sweet pears"
+	color = "#ffff66"
+
+	glass_name = "pear juice"
+	glass_desc = "Delicious juice made from pears."
 
 // Everything else
 
