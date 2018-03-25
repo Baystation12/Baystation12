@@ -581,6 +581,57 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 	return facial_hair_style_by_gender
 
+/datum/species/proc/get_description()
+	var/list/damage_types = list(
+		"physical trauma" = brute_mod,
+		"burns" = burn_mod,
+		"lack of air" = oxy_mod,
+		"poison" = toxins_mod
+	)
+	var/dat = "<center><h2>[name] \[<a href='?src=\ref[src];show_species=1'>change</a>\]</h2></center><hr/>"
+	dat += "<table padding='8px'>"
+	dat += "<tr>"
+	dat += "<td width = 400>[blurb]</td>"
+	dat += "<td width = 200 align='center'>"
+	if("preview" in icon_states(get_icobase()))
+		usr << browse_rsc(icon(get_icobase(),"preview"), "species_preview_[name].png")
+		dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
+	dat += "<b>Language:</b> [language]<br/>"
+	dat += "<small>"
+	if(spawn_flags & SPECIES_CAN_JOIN)
+		dat += "</br><b>Often present among humans.</b>"
+	if(spawn_flags & SPECIES_IS_WHITELISTED)
+		dat += "</br><b>Whitelist restricted.</b>"
+	if(!has_organ[BP_HEART])
+		dat += "</br><b>Does not have blood.</b>"
+	if(!has_organ[BP_LUNGS])
+		dat += "</br><b>Does not breathe.</b>"
+	if(species_flags & SPECIES_FLAG_NO_SCAN)
+		dat += "</br><b>Does not have DNA.</b>"
+	if(species_flags & SPECIES_FLAG_NO_PAIN)
+		dat += "</br><b>Does not feel pain.</b>"
+	if(species_flags & SPECIES_FLAG_NO_SLIP)
+		dat += "</br><b>Has excellent traction.</b>"
+	if(species_flags & SPECIES_FLAG_NO_POISON)
+		dat += "</br><b>Immune to most poisons.</b>"
+	if(appearance_flags & HAS_A_SKIN_TONE)
+		dat += "</br><b>Has a variety of skin tones.</b>"
+	if(appearance_flags & HAS_SKIN_COLOR)
+		dat += "</br><b>Has a variety of skin colours.</b>"
+	if(appearance_flags & HAS_EYE_COLOR)
+		dat += "</br><b>Has a variety of eye colours.</b>"
+	if(species_flags & SPECIES_FLAG_IS_PLANT)
+		dat += "</br><b>Has a plantlike physiology.</b>"
+	if(slowdown)
+		dat += "</br><b>Moves [slowdown > 0 ? "slower" : "faster"] than most.</b>"
+	for(var/kind in damage_types)
+		if(damage_types[kind] > 1)
+			dat += "</br><b>Vurnerable to [kind].</b>"
+		else if(damage_types[kind] < 1)
+			dat += "</br><b>Resistant to [kind].</b>"
+	dat += "</small></td>"
+	dat += "</tr>"
+	dat += "</table><center><hr/>"
 /datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
 		if(0 to 22) 	. = -1
