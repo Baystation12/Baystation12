@@ -912,6 +912,7 @@
 #include "code\game\objects\items\weapons\implants\implants\imprinting.dm"
 #include "code\game\objects\items\weapons\implants\implants\loyalty.dm"
 #include "code\game\objects\items\weapons\implants\implants\tracking.dm"
+#include "code\game\objects\items\weapons\implants\implants\translator.dm"
 #include "code\game\objects\items\weapons\implants\implants\uplink.dm"
 #include "code\game\objects\items\weapons\material\ashtray.dm"
 #include "code\game\objects\items\weapons\material\bats.dm"
