@@ -80,3 +80,15 @@
 
 	post_comm_message("SEV Torch Sensor Readings", welcome_text)
 	minor_announcement.Announce(message = "New [GLOB.using_map.company_name] Update available at all communication consoles.")
+
+/turf/simulated/wall //landlubbers go home
+	name = "bulkhead"
+
+/turf/simulated/floor
+	name = "bare deck"
+
+/turf/simulated/floor/tiled
+	name = "deck"
+
+/decl/flooring/tiling
+	name = "deck"

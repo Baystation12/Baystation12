@@ -11,7 +11,7 @@
 		/datum/species/skrell  = list(HUMAN_ONLY_JOBS),
 		/datum/species/tajaran = list(HUMAN_ONLY_JOBS),
 		/datum/species/machine = list(HUMAN_ONLY_JOBS),
-		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer, /datum/job/detective),	//Other jobs unavailable via branch restrictions,
+		/datum/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/guard, /datum/job/officer),	//Other jobs unavailable via branch restrictions,
 	)
 #undef HUMAN_ONLY_JOBS
 
@@ -494,11 +494,11 @@
 /datum/job/roboticist
 	title = "Roboticist"
 	department = "Engineering"
-	department_flag = ENG
+	department_flag = ENG|MED
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Engineer"
+	supervisors = "the Chief Engineer and the Chief Medical Officer"
 	selection_color = "#5b4d20"
 	economic_modifier = 6
 	alt_titles = list(

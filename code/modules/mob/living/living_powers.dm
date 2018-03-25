@@ -29,7 +29,7 @@
 	var/turf/T = get_turf(src)
 	var/obj/effect/effect/water/chempuff/chem = new(T)
 	chem.create_reagents(10)
-	chem.reagents.add_reagent(/datum/reagent/toxin/corrupting,30)
+	chem.reagents.add_reagent(/datum/reagent/toxin/corrupting,5)
 	chem.set_up(get_step(T, dir), 2, 10)
 	playsound(T, 'sound/hallucinations/wail.ogg',20,1)
 
@@ -51,8 +51,10 @@
 	last_special = world.time + 50
 
 	src.visible_message("<span class='danger'>\The [src] hunkers down over \the [target], tearing into their flesh.</span>")
-	if(do_after(src,target,100))
+	if(do_mob(src,target,100))
+		to_chat(target,"<span class='danger'>\The [src] scrapes your flesh from your bones!</span>")
+		to_chat(src,"<span class='danger'>You feed hungrily off \the [target]'s flesh.</span>")
 		target.adjustBruteLoss(25)
-		if(target.health < -target.maxHealth)
+		if(target.getBruteLoss() < -target.maxHealth)
 			target.gib()
 		src.adjustBruteLoss(-25)

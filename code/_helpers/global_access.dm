@@ -257,6 +257,8 @@
 			return global.cargo_supply_packs;
 		if("changelog_hash")
 			return global.changelog_hash;
+		if("channel_color_presets")
+			return global.channel_color_presets;
 		if("channel_to_radio_key")
 			return global.channel_to_radio_key;
 		if("chargen_robolimbs")
@@ -1298,6 +1300,8 @@
 			global.cargo_supply_packs=newval;
 		if("changelog_hash")
 			global.changelog_hash=newval;
+		if("channel_color_presets")
+			global.channel_color_presets=newval;
 		if("channel_to_radio_key")
 			global.channel_to_radio_key=newval;
 		if("chargen_robolimbs")
@@ -2210,6 +2214,7 @@
 	"cargo_supply_pack_root",
 	"cargo_supply_packs",
 	"changelog_hash",
+	"channel_color_presets",
 	"channel_to_radio_key",
 	"chargen_robolimbs",
 	"checked_for_inactives",

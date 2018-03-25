@@ -13,7 +13,7 @@
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun"),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
-		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
+		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
 		)
 
 /obj/item/weapon/gun/energy/gun/small
@@ -28,7 +28,7 @@
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="smallgunstun"),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="smallgunshock"),
-		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam/smalllaser, modifystate="smallgunkill"),
+		list(mode_name="kill", projectile_type=/obj/item/projectile/beam/smalllaser, modifystate="smallgunkill"),
 		)
 
 /obj/item/weapon/gun/energy/gun/mounted
@@ -51,7 +51,7 @@
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
-		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam),
+		list(mode_name="kill", projectile_type=/obj/item/projectile/beam),
 		)
 
 	var/fail_counter = 0
@@ -90,7 +90,7 @@
 	var/datum/firemode/current_mode = firemodes[sel_mode]
 	switch(current_mode.name)
 		if("stun") return "nucgun-stun"
-		if("lethal") return "nucgun-kill"
+		if("kill") return "nucgun-kill"
 
 /obj/item/weapon/gun/energy/gun/nuclear/update_icon()
 	var/list/new_overlays = list()

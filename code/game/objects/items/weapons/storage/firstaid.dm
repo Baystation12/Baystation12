@@ -20,6 +20,31 @@
 	icon_state = "firstaid"
 	name = "First-Aid (empty)"
 
+/obj/item/weapon/storage/firstaid/regular
+	icon_state = "firstaid"
+
+	startswith = list(
+		/obj/item/stack/medical/bruise_pack = 2,
+		/obj/item/stack/medical/ointment = 2,
+		/obj/item/weapon/storage/pill_bottle/antidexafen,
+		/obj/item/weapon/storage/pill_bottle/paracetamol,
+		/obj/item/stack/medical/splint
+		)
+
+/obj/item/weapon/storage/firstaid/trauma
+	name = "trauma first-aid kit"
+	desc = "It's an emergency medical kit for when people brought ballistic weapons to a laser fight."
+	icon_state = "radfirstaid"
+	item_state = "firstaid-ointment"
+
+	startswith = list(
+		/obj/item/weapon/storage/med_pouch/trauma = 4
+		)
+
+/obj/item/weapon/storage/firstaid/trauma/New()
+	..()
+	icon_state = pick("radfirstaid", "radfirstaid2", "radfirstaid3")
+
 /obj/item/weapon/storage/firstaid/fire
 	name = "fire first-aid kit"
 	desc = "It's an emergency medical kit for when the toxins lab <i>-spontaneously-</i> burns down."
@@ -27,28 +52,12 @@
 	item_state = "firstaid-ointment"
 
 	startswith = list(
-		/obj/item/device/healthanalyzer,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 1,
-		/obj/item/stack/medical/ointment = 3,
-		/obj/item/weapon/storage/pill_bottle/kelotane,
-		/obj/item/weapon/storage/pill_bottle/paracetamol
+		/obj/item/weapon/storage/med_pouch/burn = 4
 		)
 
 /obj/item/weapon/storage/firstaid/fire/New()
 	..()
 	icon_state = pick("ointment","firefirstaid")
-
-/obj/item/weapon/storage/firstaid/regular
-	icon_state = "firstaid"
-
-	startswith = list(
-		/obj/item/stack/medical/bruise_pack = 2,
-		/obj/item/stack/medical/ointment = 1,
-		/obj/item/device/healthanalyzer,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 2,
-		/obj/item/weapon/storage/pill_bottle/antidexafen,
-		/obj/item/weapon/storage/pill_bottle/paracetamol
-		)
 
 /obj/item/weapon/storage/firstaid/toxin
 	name = "toxin first aid"
@@ -57,10 +66,7 @@
 	item_state = "firstaid-toxin"
 
 	startswith = list(
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox = 4,
-		/obj/item/weapon/storage/pill_bottle/antitox,
-		/obj/item/weapon/reagent_containers/pill/hyronalin = 3,
-		/obj/item/device/healthanalyzer,
+		/obj/item/weapon/storage/med_pouch/toxin = 4
 		)
 
 /obj/item/weapon/storage/firstaid/toxin/New()
@@ -74,16 +80,13 @@
 	item_state = "firstaid-o2"
 
 	startswith = list(
-		/obj/item/weapon/storage/pill_bottle/dexalin,
-		/obj/item/weapon/storage/pill_bottle/inaprovaline,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 4,
-		/obj/item/device/healthanalyzer,
+		/obj/item/weapon/storage/med_pouch/oxyloss = 4
 		)
 
 /obj/item/weapon/storage/firstaid/adv
 	name = "advanced first-aid kit"
 	desc = "Contains advanced medical treatments."
-	icon_state = "advfirstaid"
+	icon_state = "purplefirstaid"
 	item_state = "firstaid-advanced"
 
 	startswith = list(

@@ -123,6 +123,28 @@
 		else
 			T.wet = 0
 
+/datum/reagent/nutriment/batter
+	name = "Batter"
+	description = "A gooey mixture of eggs and flour, a base for turning wheat into food."
+	taste_description = "blandness"
+	reagent_state = LIQUID
+	nutriment_factor = 3
+	color = "#ffd592"
+
+/datum/reagent/nutriment/batter/touch_turf(var/turf/simulated/T)
+	if(!istype(T, /turf/space))
+		new /obj/effect/decal/cleanable/pie_smudge(T)
+		if(T.wet > 1)
+			T.wet = min(T.wet, 1)
+		else
+			T.wet = 0
+
+/datum/reagent/nutriment/batter/cakebatter
+	name = "Cake Batter"
+	description = "A gooey mixture of eggs, flour and sugar, a important precursor to cake!"
+	taste_description = "sweetness"
+	color = "#ffe992"
+
 /datum/reagent/nutriment/coco
 	name = "Coco Powder"
 	description = "A fatty, bitter paste made from coco beans."

@@ -61,7 +61,7 @@
 
 	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
 		mannequin.job = previewJob.title
-		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], mannequin.char_branch)
+		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], mannequin.char_branch, mannequin.char_rank)
 		update_icon = TRUE
 
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))

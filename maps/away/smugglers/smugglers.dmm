@@ -111,7 +111,6 @@
 "ch" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/computer/arcade,/turf/simulated/floor/tiled,/area/smugglers/dorms)
 "ci" = (/obj/structure/closet/crate/freezer/rations,/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/smugglers/dorms)
 "cj" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/airless/ceiling,/area/smugglers/dorms)
-"ck" = (/obj/machinery/light/small{dir = 4},/obj/structure/sink{pixel_y = 15},/obj/structure/mirror{pixel_y = 30},/obj/random/soap,/turf/simulated/floor/airless/ceiling,/area/smugglers/dorms)
 "cl" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/cable,/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/simulated/floor/tiled,/area/smugglers/dorms)
 "cm" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/smugglers/dorms)
 "cn" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/smugglers/dorms)
@@ -133,6 +132,7 @@
 "cD" = (/obj/effect/landmark/random_gen/asteroid{generation_height = 50; generation_width = 50},/turf/space,/area/space)
 "cE" = (/obj/effect/shuttle_landmark/nav_asteroid_base/nav1,/turf/space,/area/space)
 "db" = (/obj/effect/decal/cleanable/blood,/obj/effect/landmark/corpse/doctor,/turf/simulated/floor/asteroid,/area/mine/explored)
+"eb" = (/obj/machinery/light/small{dir = 4},/obj/structure/sink{pixel_y = 15},/obj/item/weapon/storage/mirror{pixel_y = 30},/obj/random/soap,/turf/simulated/floor/airless/ceiling,/area/smugglers/dorms)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -175,7 +175,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacabacacacafaYaZbFbGbHbdbdbdbIbv
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacababacacafbpbdbdbdbdbMbNbdbObvbJbPbQbwacacacacacacacacacacababacacacacabacabacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacabafaYaZbRbSbTbUbVbdbWbvbXbYbZbwacabababababacacacacabacacacacacacabababaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacabcacbcccccccccccccccccabwbwbwbwacabababababacacacacababacacacacabacacabaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaccacdcecfcgchcicccjckcaacacacacacacacabacacacacacacabababacacacaMabababacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaccacdcecfcgchcicccjebcaacacacacacacacabacacacacacacabababacacacaMabababacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacacaccaclcmcmcmcmcncocpcqcaababababababacanacacacacacacacabababacacabacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababacaccacmcrcsctcucvcccacacaacacacabababacababacacacacabacacacacacacabacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacaccacwcccccccccccccaabacacacacabababababaMabacacababacacacacacababacacababababacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

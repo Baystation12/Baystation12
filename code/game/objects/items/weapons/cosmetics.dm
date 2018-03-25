@@ -9,7 +9,6 @@
 	var/colour = "red"
 	var/open = 0
 
-
 /obj/item/weapon/lipstick/purple
 	name = "purple lipstick"
 	colour = "purple"
@@ -22,14 +21,12 @@
 	name = "black lipstick"
 	colour = "black"
 
-
 /obj/item/weapon/lipstick/random
 	name = "lipstick"
 
 /obj/item/weapon/lipstick/random/New()
 	colour = pick("red","purple","jade","black")
 	name = "[colour] lipstick"
-
 
 /obj/item/weapon/lipstick/attack_self(mob/user as mob)
 	to_chat(user, "<span class='notice'>You twist \the [src] [open ? "closed" : "open"].</span>")
@@ -84,5 +81,26 @@
 	icon_state = "comb"
 	item_state = "comb"
 
-/obj/item/weapon/haircomb/attack_self(mob/user)
-	user.visible_message("<span class='notice'>[user] uses [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"].</span>")
+/obj/item/weapon/haircomb/random/Initialize()
+	. = ..()
+	color = get_random_colour(lower = 150)
+
+/obj/item/weapon/haircomb/attack_self(var/mob/living/carbon/human/user)
+	if(!user.incapacitated())
+		user.visible_message("<span class='notice'>\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"].</span>")
+
+/obj/item/weapon/haircomb/brush
+	name = "hairbrush"
+	desc = "A surprisingly decent hairbrush with a false wood handle and semi-soft bristles."
+	w_class = ITEM_SIZE_SMALL
+	slot_flags = null
+	icon_state = "brush"
+	item_state = "brush"
+
+/obj/item/weapon/haircomb/brush/attack_self(mob/living/carbon/human/user)
+	if(!user.incapacitated())
+		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[user.h_style]
+		if(hair_style.flags & VERY_SHORT)
+			user.visible_message("<span class='notice'>\The [user] just sort of runs \the [src] over their scalp.</span>")
+		else
+			user.visible_message("<span class='notice'>\The [user] meticulously brushes their hair with \the [src].</span>")

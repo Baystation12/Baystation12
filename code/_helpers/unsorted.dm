@@ -1004,7 +1004,7 @@ var/list/WALLITEMS = list(
 	/obj/machinery/status_display, /obj/machinery/requests_console, /obj/machinery/light_switch, /obj/structure/sign,
 	/obj/machinery/newscaster, /obj/machinery/firealarm, /obj/structure/noticeboard,
 	/obj/item/weapon/storage/secure/safe, /obj/machinery/door_timer, /obj/machinery/flasher, /obj/machinery/keycard_auth,
-	/obj/structure/mirror, /obj/structure/fireaxecabinet, /obj/structure/filingcabinet/wallcabinet
+	/obj/item/weapon/storage/mirror, /obj/structure/fireaxecabinet, /obj/structure/filingcabinet/wallcabinet
 	)
 /proc/gotwallitem(loc, dir)
 	for(var/obj/O in loc)

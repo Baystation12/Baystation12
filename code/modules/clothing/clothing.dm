@@ -13,6 +13,8 @@
 	var/blood_overlay_type = "uniformblood"
 	var/visible_name = "Unknown"
 
+	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
+
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return

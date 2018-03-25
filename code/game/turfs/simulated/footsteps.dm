@@ -109,6 +109,9 @@
 	if(species.silent_steps)
 		return //species is silent
 
+	if(shoes && (shoes.item_flags & ITEM_FLAG_SILENT))
+		return // quiet shoes
+
 	if(!has_gravity(src))
 		if(step_count % 3) // don't need to step as often when you hop around
 			return

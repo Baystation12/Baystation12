@@ -1,0 +1,9 @@
+author: "Earthcrusher"
+delete-after: True
+changes: 
+  - rscadd: "Adds a package wrapper synthesizer."
+  - tweak: "Clerical borgs now include a package wrapper synthesizer and destination tagger."
+  - tweak: "Clerical borgs now have a \"clerical gripper\", not a \"paperwork gripper\", and can pick up small-sized packages."
+  - tweak: "Clerical borgs now include the Supply channel, in addition to Service."
+  - tweak: "The destination tagger will now give feedback when selecting a destination."
+  - bugfix: "Back-end adjustments to how package wrappers and synth grippers are handled."

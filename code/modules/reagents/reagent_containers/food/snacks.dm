@@ -710,14 +710,27 @@
 /obj/item/weapon/reagent_containers/food/snacks/sausage
 	name = "Sausage"
 	desc = "A piece of mixed, long meat."
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "sausage"
 	filling_color = "#db0000"
 	center_of_mass = "x=16;y=16"
 
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
-		bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/sausage/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/fatsausage
+	name = "Fat Sausage"
+	desc = "A piece of mixed, long meat with some bite to it."
+	icon_state = "sausage"
+	filling_color = "#db0000"
+	center_of_mass = "x=16;y=16"
+
+/obj/item/weapon/reagent_containers/food/snacks/fatsausage/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 8)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket
 	name = "\improper Sin-pocket"
@@ -815,11 +828,11 @@
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("cheese" = 2, "bun" = 2)
 	nutriment_amt = 2
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
+/obj/item/weapon/reagent_containers/food/snacks/cheeseburger/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/plainburger
+/obj/item/weapon/reagent_containers/food/snacks/meatburger
 	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
 	icon_state = "hburger"
@@ -827,10 +840,38 @@
 	center_of_mass = "x=16;y=11"
 	nutriment_desc = list("bun" = 2)
 	nutriment_amt = 3
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
-		bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/meatburger/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/plainburger
+	name = "burger"
+	desc = "The cornerstone of every nutritious breakfast."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "burger"
+	filling_color = "#d63c3c"
+	center_of_mass = "x=16;y=11"
+	nutriment_desc = list("bun" = 2)
+	nutriment_amt = 3
+/obj/item/weapon/reagent_containers/food/snacks/plainburger/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/hamburger
+	name = "hamburger"
+	desc = "The cornerstone of every nutritious breakfast, now with ham!"
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "hamburger"
+	filling_color = "#d63c3c"
+	center_of_mass = "x=16;y=11"
+	nutriment_desc = list("bun" = 2)
+	nutriment_amt = 3
+/obj/item/weapon/reagent_containers/food/snacks/hamburger/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/fishburger
 	name = "Fillet -o- Carp Sandwich"
@@ -945,7 +986,7 @@
 		..()
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/pie
+/obj/item/weapon/reagent_containers/food/snacks/bananapie
 	name = "Banana Cream Pie"
 	desc = "Just like back home, on clown planet! HONK!"
 	icon_state = "pie"
@@ -992,15 +1033,28 @@
 		..()
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/pancakes
-	name = "pancakes"
+/obj/item/weapon/reagent_containers/food/snacks/pancakesblu
+	name = "blueberry pancakes"
 	desc = "Pancakes with blueberries, delicious."
 	icon_state = "pancakes"
 	trash = /obj/item/trash/plate
 	center_of_mass = "x=15;y=11"
 	nutriment_desc = list("pancake" = 8)
 	nutriment_amt = 8
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/pancakesblu/New()
+	..()
+	bitesize = 2
+
+
+/obj/item/weapon/reagent_containers/food/snacks/pancakes
+	name = "pancakes"
+	desc = "Pancakes without blueberries, still delicious."
+	icon_state = "pancakes"
+	trash = /obj/item/trash/plate
+	center_of_mass = "x=15;y=11"
+	nutriment_desc = list("pancake" = 8)
+	nutriment_amt = 8
+/obj/item/weapon/reagent_containers/food/snacks/pancakes/New()
 		..()
 		bitesize = 2
 
@@ -1355,6 +1409,19 @@
 		reagents.add_reagent(/datum/reagent/toxin, 1)
 		reagents.add_reagent(/datum/reagent/carbon, 3)
 		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/plainsteak
+	name = "Plain steak"
+	desc = "A piece of unseasoned cooked meat."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "steak"
+	filling_color = "#7a3d11"
+	center_of_mass = "x=16;y=13"
+
+/obj/item/weapon/reagent_containers/food/snacks/plainsteak/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/meatsteak
 	name = "Meat steak"
@@ -3189,6 +3256,22 @@
 		return
 	else
 		..()
+
+// Burger + cutlet or sausage = HAMburger
+/obj/item/weapon/reagent_containers/food/snacks/plainburger/attackby(obj/item/weapon/reagent_containers/food/snacks/cutlet/W as obj, mob/user as mob)
+	if(istype(W))// && !istype(src,/obj/item/weapon/reagent_containers/food/snacks/cutlet))
+		new /obj/item/weapon/reagent_containers/food/snacks/hamburger(src)
+		to_chat(user, "You make a hamburger.")
+		qdel(W)
+		qdel(src)
+		return
+
+	//alternatively use a sausage, but not a fat one.
+	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/sausage))
+		new /obj/item/weapon/reagent_containers/food/snacks/hamburger(src)
+		to_chat(user, "You make a hamburger.")
+		qdel(W)
+		qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/bunbun
 	name = "\improper Bun Bun"

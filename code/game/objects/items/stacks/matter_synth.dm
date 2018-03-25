@@ -59,3 +59,8 @@
 	name = "Wire Synthesizer"
 	max_energy = 50
 	recharge_rate = 2
+
+/datum/matter_synth/package_wrap
+	name = "Package Wrapper Synthesizer"
+	max_energy = 50
+	recharge_rate = 2
