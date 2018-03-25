@@ -82,3 +82,24 @@ var/global/list/datum/money_account/department_accounts = list()
 var/global/num_financial_terminals = 1
 var/global/next_account_number = 0
 var/global/list/all_money_accounts = list()
+var/global/list/transaction_devices = list()
+var/global/economy_init = 0
+
+/proc/setup_economy()
+	if(economy_init)
+		return 2
+
+	for(var/loc_type in typesof(/datum/trade_destination) - /datum/trade_destination)
+		var/datum/trade_destination/D = new loc_type
+		weighted_randomevent_locations[D] = D.viable_random_events.len
+		weighted_mundaneevent_locations[D] = D.viable_mundane_events.len
+
+	for(var/obj/item/device/retail_scanner/RS in transaction_devices)
+		if(RS.account_to_connect)
+			RS.linked_account = department_accounts[RS.account_to_connect]
+	for(var/obj/machinery/cash_register/CR in transaction_devices)
+		if(CR.account_to_connect)
+			CR.linked_account = department_accounts[CR.account_to_connect]
+
+	economy_init = 1
+	return 1
