@@ -1104,7 +1104,10 @@
 	name = "Armtech 5530"
 	desc = "Cold, dark, smiling with a twisted grin, and slightly depressed. Basically an ODST in vending machine form."
 	product_ads = "Life is woe;Suspect, Investigate, Terminate;CAUTION SHIP SELF DESTRUCT ACTIVATED! Just kidding."
-	icon_state = "Theater"
+	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
+	icon_state = "ironhammer"
+	icon_deny = "ironhammer-deny"
+	color = COLOR_DARK_GRAY
 	req_access = list(309)
 	products = list(
 	/obj/item/clothing/under/unsc/odst_jumpsuit = 8,
