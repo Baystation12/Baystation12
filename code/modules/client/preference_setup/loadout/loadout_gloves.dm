@@ -15,30 +15,25 @@
 	display_name = "gloves, colored"
 	flags = GEAR_HAS_COLOR_SELECTION
 	path = /obj/item/clothing/gloves/color
-	allowed_roles = FORMAL_ROLES
 
 /datum/gear/gloves/latex
 	display_name = "gloves, latex"
 	path = /obj/item/clothing/gloves/latex
 	cost = 3
-	allowed_roles = STERILE_ROLES
 
 /datum/gear/gloves/nitrile
 	display_name = "gloves, nitrile"
 	path = /obj/item/clothing/gloves/latex/nitrile
 	cost = 3
-	allowed_roles = STERILE_ROLES
 
 /datum/gear/gloves/rainbow
 	display_name = "gloves, rainbow"
 	path = /obj/item/clothing/gloves/rainbow
-	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/gloves/evening
 	display_name = "gloves, evening"
 	path = /obj/item/clothing/gloves/color/evening
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = FORMAL_ROLES
 
 /datum/gear/ring
 	display_name = "ring"
@@ -67,18 +62,15 @@
 	display_name = "gloves, botany"
 	path = /obj/item/clothing/gloves/thick/botany
 	cost = 3
-	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/chef, /datum/job/bartender, /datum/job/assistant, /datum/job/merchant)
 
 /datum/gear/gloves/dress
 	display_name = "gloves, dress"
 	path = /obj/item/clothing/gloves/color/white
 
-
 /datum/gear/gloves/duty
 	display_name = "gloves, duty"
 	path = /obj/item/clothing/gloves/duty
 	cost = 3
-
 
 /datum/gear/gloves/work
 	display_name = "gloves, work"

@@ -16,11 +16,9 @@
 	path = /obj/item/clothing/suit/apron/overalls
 	cost = 1
 
-
 /datum/gear/suit/medcoat
 	display_name = "medical suit selection"
 	path = /obj/item/clothing/suit/storage/toggle/fr_jacket
-
 
 /datum/gear/suit/medcoat/New()
 	..()
@@ -35,7 +33,6 @@
 	path = /obj/item/clothing/suit/storage/det_trench
 	cost = 3
 
-
 /datum/gear/suit/trenchcoat/New()
 	..()
 	var/trenchcoats = list()
@@ -46,24 +43,17 @@
 
 /datum/gear/suit/poncho
 
-
 /datum/gear/suit/roles/poncho/security
-	allowed_roles = list(/datum/job/guard, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/medical
-	allowed_roles = list(/datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/engineering
-	allowed_roles = list(/datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/science
-	allowed_roles = list(/datum/job/scientist, /datum/job/scientist_assistant, /datum/job/merchant)
 
 /datum/gear/suit/roles/poncho/cargo
-	allowed_roles = list(/datum/job/cargo_contractor, /datum/job/merchant)
 
 /datum/gear/suit/suit_jacket
-
 
 /datum/gear/suit/hazard
 	display_name = "hazard vests"
@@ -78,17 +68,16 @@
 	path = /obj/item/clothing/suit/storage/hooded/hoodie
 	flags = GEAR_HAS_COLOR_SELECTION
 
-
 /datum/gear/suit/hoodie_sel
 	display_name = "hoodies"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
-
 
 /datum/gear/suit/hoodie_sel/New()
 	..()
 	var/hoodies = list()
 	hoodies["CTI hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/cti
 	hoodies["Mariner University hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/mu
+	hoodies["Space Mountain Wind hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/smw
 	gear_tweaks += new/datum/gear_tweak/path(hoodies)
 
 /datum/gear/suit/labcoat
@@ -96,11 +85,9 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
 
-
 /datum/gear/suit/leather
 	display_name = "jacket selection"
 	path = /obj/item/clothing/suit/storage/leather_jacket
-
 
 /datum/gear/suit/leather/New()
 	..()
@@ -158,11 +145,9 @@
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 
-
 /datum/gear/suit/track
 	display_name = "track jacket selection"
 	path = /obj/item/clothing/suit/storage/toggle/track
-
 
 /datum/gear/suit/track/New()
 	..()

@@ -13,7 +13,6 @@
 	display_name = "suspenders"
 	path = /obj/item/clothing/accessory/suspenders
 
-
 /datum/gear/accessory/wcoat
 	display_name = "waistcoat"
 	path = /obj/item/clothing/accessory/wcoat
@@ -67,6 +66,7 @@
 	display_name = "bowtie, horrible"
 	path = /obj/item/clothing/accessory/bowtie/ugly
 
+
 /datum/gear/accessory/bowtie/color
 	display_name = "bowtie, colored"
 	path = /obj/item/clothing/accessory/bowtie/color
@@ -77,41 +77,33 @@
 	display_name = "security armband"
 	path = /obj/item/clothing/accessory/armband
 
-
 /datum/gear/accessory/armband_mp
 	display_name = "military police armband"
 	path = /obj/item/clothing/accessory/armband/mp
-
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
 	path = /obj/item/clothing/accessory/armband/cargo
 
-
 /datum/gear/accessory/armband_medical
 	display_name = "medical armband"
 	path = /obj/item/clothing/accessory/armband/med
-
 
 /datum/gear/accessory/armband_emt
 	display_name = "EMT armband"
 	path = /obj/item/clothing/accessory/armband/medgreen
 
-
 /datum/gear/accessory/armband_corpsman
 	display_name = "medical corps armband"
 	path = /obj/item/clothing/accessory/armband/medblue
-
 
 /datum/gear/accessory/armband_engineering
 	display_name = "engineering armband"
 	path = /obj/item/clothing/accessory/armband/engine
 
-
 /datum/gear/accessory/armband_hydro
 	display_name = "hydroponics armband"
 	path = /obj/item/clothing/accessory/armband/hydro
-
 
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
@@ -120,7 +112,6 @@
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
 	path = /obj/item/clothing/accessory/armband/bluegold
-
 
 /datum/gear/accessory/wallet
 	display_name = "wallet"
@@ -145,7 +136,6 @@
 	display_name = "ubac selection"
 	path = /obj/item/clothing/accessory/ubac
 
-
 /datum/gear/accessory/ubac/New()
 	..()
 	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/ubac)
@@ -153,7 +143,6 @@
 /datum/gear/accessory/tie
 	display_name = "tie selection"
 	path = /obj/item/clothing/accessory
-
 
 /datum/gear/accessory/tie/New()
 	..()
@@ -170,14 +159,19 @@
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
 /datum/gear/accessory/stethoscope
-	display_name = "stethoscope"
+	display_name = "stethoscope (medical)"
 	path = /obj/item/clothing/accessory/stethoscope
 	cost = 2
+
+/datum/gear/accessory/bandolier
+	display_name = "bandolier"
+	path = /obj/item/clothing/accessory/storage/bandolier
+	cost = 3
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
 	path = /obj/item/clothing/accessory/toggleable/hawaii
-	allowed_roles = SEMIFORMAL_ROLES
+
 
 /datum/gear/accessory/hawaii/New()
 	..()
@@ -219,7 +213,6 @@
 	path = /obj/item/clothing/accessory/medal/iron/sol
 	cost = 5
 
-
 /datum/gear/accessory/solawardminor/New()
 	..()
 	var/solminors = list()
@@ -232,7 +225,6 @@
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/tags
-
 
 /datum/gear/accessory/kneepads
 	display_name = "kneepads"
