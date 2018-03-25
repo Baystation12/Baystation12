@@ -437,12 +437,6 @@
 			return global.global_vars_;
 		if("gravity_is_on")
 			return global.gravity_is_on;
-		if("gyne_architecture")
-			return global.gyne_architecture;
-		if("gyne_geoforms")
-			return global.gyne_geoforms;
-		if("gyne_names")
-			return global.gyne_names;
 		if("gyrotrons")
 			return global.gyrotrons;
 		if("gzn_check")
@@ -1450,12 +1444,6 @@
 			global.global_vars_=newval;
 		if("gravity_is_on")
 			global.gravity_is_on=newval;
-		if("gyne_architecture")
-			global.gyne_architecture=newval;
-		if("gyne_geoforms")
-			global.gyne_geoforms=newval;
-		if("gyne_names")
-			global.gyne_names=newval;
 		if("gyrotrons")
 			global.gyrotrons=newval;
 		if("gzn_check")
@@ -2244,9 +2232,6 @@
 	"global_message_listener",
 	"global_vars_",
 	"gravity_is_on",
-	"gyne_architecture",
-	"gyne_geoforms",
-	"gyne_names",
 	"gyrotrons",
 	"gzn_check",
 	"hadevent",

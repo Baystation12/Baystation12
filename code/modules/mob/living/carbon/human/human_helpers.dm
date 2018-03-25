@@ -137,7 +137,7 @@
 		return 0
 	if(!species)
 		return 0
-	
+
 	if(bodytemperature > species.cold_level_1)
 		return 0
 	else if(bodytemperature > species.cold_level_2)
@@ -301,3 +301,13 @@
 
 	UNSETEMPTY(cloaking_sources)
 	return !cloaking_sources // If cloaking_sources wasn't initially null but is now, we've uncloaked
+
+// Used by equip() procs that spawn rigs directly onto the character.
+/mob/living/carbon/human/proc/set_internals_in(var/time = 0)
+	set waitfor = 0
+	sleep(time)
+	if(internal)
+		internals.icon_state = "internal1"
+	else
+		to_chat(src, "<span class='danger'>You forgot to turn on your internals! Quickly, toggle the valve!</span>")
+

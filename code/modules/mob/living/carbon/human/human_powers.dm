@@ -142,7 +142,7 @@
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying)
+	if(incapacitated())
 		to_chat(src, "<span class='warning'>You cannot do that in your current state.</span>")
 		return
 
@@ -203,7 +203,7 @@
 	if(istype(G.affecting,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = G.affecting
 		H.apply_damage(50,BRUTE)
-		if(H.stat == 2)
+		if(H.stat == DEAD)
 			H.gib()
 	else
 		var/mob/living/M = G.affecting
