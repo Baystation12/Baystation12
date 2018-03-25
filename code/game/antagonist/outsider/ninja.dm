@@ -124,12 +124,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	player.mind.store_memory("<B>Uplink Passcode:</B> [pda_pass].")
 	U.hidden_uplink.uses = 0
 	player.put_in_hands(U)
-
-	spawn(10)
-		if(player.internal)
-			player.internals.icon_state = "internal1"
-		else
-			to_chat(player, "<span class='danger'>You forgot to turn on your internals! Quickly, toggle the valve!</span>")
+	player.set_internals_in(1 SECOND)
 
 /datum/antagonist/ninja/proc/generate_ninja_directive(side)
 	var/directive = "[side=="face"?"[GLOB.using_map.company_name]":"A criminal syndicate"] is your employer. "//Let them know which side they're on.

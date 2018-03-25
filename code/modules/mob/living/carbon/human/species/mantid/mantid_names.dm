@@ -1,11 +1,10 @@
-// Vars.
-var/list/gyne_names = list()
+GLOBAL_LIST_INIT(gyne_names, list())
 
 //Thanks to:
 // - https://en.wikipedia.org/wiki/List_of_landforms
 // - https://en.wikipedia.org/wiki/Outline_of_classical_architecture
 
-var/list/gyne_geoforms = list(
+GLOBAL_LIST_INIT(gyne_geoforms, list(
 	"abime",			"abyss",			"ait", 			"anabranch", 	"arc", 				"arch", 			"archipelago", 	"arete", 			\
 	"arroyo",			"atoll",			"ayre", 		"badlands", 	"bar", 				"barchan", 			"barrier", 		"basin",  			\
 	"bay",				"bayou",			"beach", 		"bight", 		"blowhole",			"blowout", 			"bluff", 		"bornhardt", 		\
@@ -31,9 +30,9 @@ var/list/gyne_geoforms = list(
 	"thalweg", 			"tidepool",			"tombolo",		"tor", 			"towhead",			"tube", 			"tunnel", 		"turlough", 		\
 	"tuya",				"uvala", 			"vale", 		"valley",	 	"vent", 			"ventifact", 		"volcano", 		"wadi", 			\
 	"waterfall", 		"watershed"
-)
+))
 
-var/list/gyne_architecture = list(
+GLOBAL_LIST_INIT(gyne_architecture, list(
 	"barrel",			"annular",			"aynali",		"baroque",		"catalan",			"cavetto",			"catenary",		"cloister",			\
 	"corbel",			"cross",			"cycloidal",	"cylindrical",	"diamond",			"domical",			"fan",			"lierne",			\
 	"muqarnas",			"net",				"nubian",		"ogee",			"ogival",			"parabolic",		"hyperbolic",	"volute",		\
@@ -56,16 +55,16 @@ var/list/gyne_architecture = list(
 	"ethical",			"micro",			"macro",		"genetic",		"intrinsic",		"extrinsic",		"academic",		"literary",			\
 	"artisan",			"absolute",			"absolutist",	"autonomous",	"collectivist",		"bicameral",		"colonialist",	"federal",			\
 	"imperial",			"independant",		"managed",		"multilateral",	"neutral",			"nonaligned",		"parastatal"
-)
+))
 
 // Procs.
 /datum/species/mantid/get_random_name(var/gender)
-	return "[rand(10000,99999)] [gyne_names.len ? pick(gyne_names) : create_gyne_name()]"
+	return "[rand(10000,99999)] [GLOB.gyne_names.len ? pick(GLOB.gyne_names) : create_gyne_name()]"
 
 /datum/species/mantid/gyne/get_random_name(var/gender)
 	return "[rand(1,99)] [create_gyne_name()]"
 
 /proc/create_gyne_name()
-	var/gynename = "[capitalize(pick(gyne_architecture))] [capitalize(pick(gyne_geoforms))]"
-	gyne_names += gynename
+	var/gynename = "[capitalize(pick(GLOB.gyne_architecture))] [capitalize(pick(GLOB.gyne_geoforms))]"
+	GLOB.gyne_names += gynename
 	return gynename

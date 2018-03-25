@@ -72,11 +72,5 @@ var/datum/antagonist/hunter/hunters
 		if(rig)
 			rig.toggle_seals(player,1)
 			rig.seal_delay = initial(rig.seal_delay)
-
-		if(player.back == rig && rig.air_supply)
-			player.internal = rig.air_supply
-			spawn(10)
-				if(player.internal)
-					player.internals.icon_state = "internal1"
-
+		player.set_internals_in(1 SECOND)
 		player.put_in_hands(new /obj/item/weapon/gun/energy/particle)
