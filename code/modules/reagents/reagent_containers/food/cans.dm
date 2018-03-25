@@ -132,8 +132,8 @@
 //Items exclusive to the BODA machine on deck 4 and wherever else it pops up. First two are a bit jokey. Second two are genuine article.
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/syndicolax
-	name = "soviet soda red army twist"
-	desc = "A limited supply ration of Red Army Twist brand Soviet Soda. As great Comrade Stalin himself prefers it. Luke warm."
+	name = "\improper Red Army Twist!"
+	desc = "A taste of what keeps our glorious nation running! Served as Space Commissariat Stahlin prefers it! Luke warm."
 	icon_state = "syndi_cola_x"
 	center_of_mass = "x=16;y=10"
 
@@ -141,16 +141,28 @@
 	..()
 	reagents.add_reagent(/datum/reagent/drink/juice/potato, 30)
 
+/obj/item/weapon/reagent_containers/food/drinks/cans/artbru
+	name = "\improper Arstotzka Bru"
+	desc = "Just what any bureaucrat needs to get through the day. Keep stamping those papers!"
+	icon_state = "art_bru"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/artbru/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/juice/turnip, 30)
+
 /obj/item/weapon/reagent_containers/food/drinks/cans/syndicola
-	name = "soviet soda"
-	desc = "A can of the only soft drink state approved for the benefit of the people's revolution. Served at room temperature regardless of ambient temperatures thanks to innovative soviet insulation technology."
+	name = "\improper Soviet Cola"
+	desc = "A can of the only soft drink state approved for the benefit of the people's revolution. Served at room temperature regardless of ambient temperatures thanks to innovative Soviet insulation technology."
 	icon_state = "syndi_cola"
 	center_of_mass = "x=16;y=10"
+
+
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/syndicola/New()
 	..()
 	reagents.add_reagent(/datum/reagent/water, 30)
-
+	reagents.add_reagent(/datum/reagent/iron, 10)
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/square/boda
 	name = "boda"
@@ -162,10 +174,21 @@
 	reagents.add_reagent(/datum/reagent/drink/sodawater, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/square/bodaplus
-	name = "boda plus"
-	desc = "A tall glass of even more refreshing Boda!"
+	name = "tri kopeiki sirop boda"
+	desc = "A tall glass of even more refreshing Boda! Now with Sok!"
 	center_of_mass = "x=16;y=10"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/square/bodaplus/New()
 	..()
-	reagents.add_reagent(/datum/reagent/drink/sodawater, 15, /datum/reagent/drink/juice/berry, 15)
+	reagents.add_reagent(/datum/reagent/drink/sodawater, 15)
+	reagents.add_reagent(pick(list(
+				/datum/reagent/drink/kiraspecial,
+				/datum/reagent/drink/juice/grape,
+				/datum/reagent/drink/juice/orange,
+				/datum/reagent/drink/juice/lemon,
+				/datum/reagent/drink/juice/lime,
+				/datum/reagent/drink/juice/apple,
+				/datum/reagent/drink/juice/pear,
+				/datum/reagent/drink/juice/banana,
+				/datum/reagent/drink/juice/berry,
+				/datum/reagent/drink/juice/watermelon)), 15)

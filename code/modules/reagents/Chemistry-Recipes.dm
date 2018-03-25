@@ -1476,6 +1476,13 @@
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 10
 
+/datum/chemical_reaction/vodka2
+	name = "Vodka"
+	result = /datum/reagent/ethanol/vodka
+	required_reagents = list(/datum/reagent/drink/juice/turnip = 10)
+	catalysts = list(/datum/reagent/enzyme = 5)
+	result_amount = 10
+
 /datum/chemical_reaction/sake
 	name = "Sake"
 	result = /datum/reagent/ethanol/sake
