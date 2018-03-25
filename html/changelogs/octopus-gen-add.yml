@@ -1,0 +1,11 @@
+author: DoctorOctopus
+delete-after: True
+changes: 
+  - maptweak: "Revamped ODST Locker Room"
+  - rscadd: "Added ODST Vendors"
+  - rscadd: "Added SecTech vendors to the UNSC Frigate's Brig"
+  - rscadd: "Added more loadout options when creating a character." 
+  - tweak: "Changed auto-CT vote to call at two hours instead of three."
+  - experiment: "Removed secret from the gamemode vote."
+  - rscadd: "Replaces the NT Vest in Naval Security Officers lockers with a NSO Vest."
+  
