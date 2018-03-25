@@ -111,11 +111,11 @@
 /obj/item/weapon/card/id/torch/crew/service/chef
 	job_access_type = /datum/job/chef
 
+/obj/item/weapon/card/id/torch/crew/service/bartender
+	job_access_type = /datum/job/bartender
+
 /obj/item/weapon/card/id/torch/contractor/service //unused
 	job_access_type = /datum/job/assistant
-
-/obj/item/weapon/card/id/torch/contractor/service/bartender
-	job_access_type = /datum/job/bartender
 
 
 /obj/item/weapon/card/id/torch/crew/representative
