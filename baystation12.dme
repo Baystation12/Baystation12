@@ -1709,6 +1709,7 @@
 #include "code\modules\mob\living\carbon\human\species\species_random.dm"
 #include "code\modules\mob\living\carbon\human\species\species_shapeshift.dm"
 #include "code\modules\mob\living\carbon\human\species\outsider\bogani.dm"
+#include "code\modules\mob\living\carbon\human\species\outsider\random.dm"
 #include "code\modules\mob\living\carbon\human\species\outsider\shadow.dm"
 #include "code\modules\mob\living\carbon\human\species\outsider\vox.dm"
 #include "code\modules\mob\living\carbon\human\species\station\golem.dm"
