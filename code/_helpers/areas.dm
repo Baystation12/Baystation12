@@ -98,10 +98,11 @@ GLOBAL_LIST_INIT(is_contact_but_not_space_or_shuttle_area, list(/proc/is_contact
 
 GLOBAL_LIST_INIT(is_player_but_not_space_or_shuttle_area, list(/proc/is_player_area, /proc/is_not_space_area, /proc/is_not_shuttle_area))
 
+GLOBAL_LIST_INIT(is_station_area, list(/proc/is_station_area))
 
 /*
 	Misc Helpers
 */
 #define teleportlocs area_repository.get_areas_by_name_and_coords(GLOB.is_player_but_not_space_or_shuttle_area)
 #define stationlocs area_repository.get_areas_by_name(GLOB.is_player_but_not_space_or_shuttle_area)
-
+#define wizteleportlocs area_repository.get_areas_by_name(GLOB.is_station_area)
