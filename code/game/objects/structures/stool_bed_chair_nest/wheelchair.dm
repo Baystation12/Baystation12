@@ -89,13 +89,10 @@
 	driving = 0
 
 /obj/structure/bed/chair/wheelchair/Move()
-	..()
+	. = ..()
 	if(buckled_mob)
 		var/mob/living/occupant = buckled_mob
 		if(!driving)
-			occupant.buckled = null
-			occupant.Move(src.loc)
-			occupant.buckled = src
 			if (occupant && (src.loc != occupant.loc))
 				if (propelled)
 					for (var/mob/O in src.loc)
