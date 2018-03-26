@@ -165,6 +165,12 @@
 	icon_state = "greydress_com"
 	item_state = "greydress_com"
 
+/obj/item/clothing/suit/dress/solgov/fleet/sailor
+	name = "fleet dress overwear"
+	desc = "A navy blue SCG Fleet dress suit. Almost looks like a school-girl outfit."
+	icon_state = "sailordress"
+	item_state = "whitedress"
+
 /obj/item/clothing/suit/storage/toggle/dress
 	name = "clasped dress jacket"
 	desc = "A uniform dress jacket with gold toggles."
@@ -179,11 +185,11 @@
 
 /obj/item/clothing/suit/storage/toggle/dress/fleet
 	name = "fleet dress jacket"
-	desc = "A crisp white SCG Fleet dress jacket with blue and gold accents. Don't get near pasta sauce or vox."
+	desc = "A navy blue SCG Fleet dress jacket with silver accents. Don't get near pasta sauce or vox."
 
 /obj/item/clothing/suit/storage/toggle/dress/fleet/command
 	name = "fleet officer's dress jacket"
-	desc = "A crisp white SCG Fleet dress jacket dripping with gold accents. So bright it's blinding."
+	desc = "A navy blue SCG Fleet dress jacket dripping with gold accents."
 	icon_state = "whitedress_com"
 	//item_state = "labcoat"
 	icon_open = "whitedress_com_open"
