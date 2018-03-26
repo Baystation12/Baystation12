@@ -138,6 +138,19 @@
 	else
 		..()
 
+/obj/structure/bed/Move()
+	. = ..()
+	if(buckled_mob)
+		buckled_mob.forceMove(src.loc)
+
+/obj/structure/bed/forceMove()
+	. = ..()
+	if(buckled_mob)
+		if(isturf(src.loc))
+			buckled_mob.forceMove(src.loc)
+		else
+			unbuckle_mob()
+
 /obj/structure/bed/proc/remove_padding()
 	if(padding_material)
 		padding_material.place_sheet(get_turf(src))
@@ -253,14 +266,6 @@
 	qdel(held)
 	held = null
 
-
-/obj/structure/bed/roller/proc/move_buckled()
-	if(buckled_mob)
-		if(buckled_mob.buckled == src)
-			buckled_mob.forceMove(src.loc)
-		else
-			buckled_mob = null
-
 /obj/structure/bed/roller/post_buckle_mob(mob/living/M as mob)
 	if(M == buckled_mob)
 		set_density(1)
@@ -269,15 +274,6 @@
 		set_density(0)
 		icon_state = "down"
 
-	return ..()
-
-/obj/structure/bed/roller/buckle_mob()
-	. = ..()
-	if(.)
-		GLOB.moved_event.register(src, src, /obj/structure/bed/roller/proc/move_buckled)
-
-/obj/structure/bed/roller/unbuckle_mob()
-	GLOB.moved_event.unregister(src, src)
 	return ..()
 
 /obj/structure/bed/roller/MouseDrop(over_object, src_location, over_location)

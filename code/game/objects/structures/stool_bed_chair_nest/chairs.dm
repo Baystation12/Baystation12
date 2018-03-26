@@ -149,12 +149,9 @@
 	..()
 
 /obj/structure/bed/chair/office/Move()
-	..()
+	. = ..()
 	if(buckled_mob)
 		var/mob/living/occupant = buckled_mob
-		occupant.buckled = null
-		occupant.Move(src.loc)
-		occupant.buckled = src
 		if (occupant && (src.loc != occupant.loc))
 			if (propelled)
 				for (var/mob/O in src.loc)
