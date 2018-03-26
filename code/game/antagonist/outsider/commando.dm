@@ -1,4 +1,4 @@
-var/datum/antagonist/deathsquad/mercenary/commandos
+GLOBAL_DATUM_INIT(commandos, /datum/antagonist/deathsquad/mercenary, new)
 
 /datum/antagonist/deathsquad/mercenary
 	id = MODE_COMMANDO
@@ -13,11 +13,6 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	hard_cap_round = 8
 	initial_spawn_req = 4
 	initial_spawn_target = 6
-
-
-/datum/antagonist/deathsquad/mercenary/New()
-	..(1)
-	commandos = src
 
 /datum/antagonist/deathsquad/mercenary/equip(var/mob/living/carbon/human/player)
 

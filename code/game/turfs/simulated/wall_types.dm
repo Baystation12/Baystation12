@@ -25,7 +25,7 @@
 	..(newloc, 1)
 
 /turf/simulated/wall/cult/dismantle_wall()
-	cult.remove_cultiness(CULTINESS_PER_TURF)
+	GLOB.cult.remove_cultiness(CULTINESS_PER_TURF)
 	..()
 
 /turf/unsimulated/wall/cult

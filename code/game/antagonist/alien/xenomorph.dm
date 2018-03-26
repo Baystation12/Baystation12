@@ -1,4 +1,4 @@
-var/datum/antagonist/xenos/xenomorphs
+GLOBAL_DATUM_INIT(xenomorphs, /datum/antagonist/xenos, new)
 
 /datum/antagonist/xenos
 	id = MODE_XENOMORPH
@@ -24,12 +24,10 @@ var/datum/antagonist/xenos/xenomorphs
 	spawn_announcement_title = "Lifesign Alert"
 	spawn_announcement_delay = 5000
 
-/datum/antagonist/xenos/New(var/no_reference)
+/datum/antagonist/xenos/Initialize()
 	spawn_announcement = replacetext(GLOB.using_map.unidentified_lifesigns_message, "%STATION_NAME%", station_name())
 	spawn_announcement_sound = GLOB.using_map.xenomorph_spawn_sound
 	..()
-	if(!no_reference)
-		xenomorphs = src
 
 /datum/antagonist/xenos/attempt_random_spawn()
 	if(config.aliens_allowed) ..()

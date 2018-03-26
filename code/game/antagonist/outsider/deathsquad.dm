@@ -1,4 +1,4 @@
-var/datum/antagonist/deathsquad/deathsquad
+GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 
 /datum/antagonist/deathsquad
 	id = MODE_DEATHSQUAD
@@ -18,11 +18,6 @@ var/datum/antagonist/deathsquad/deathsquad
 	faction = "deathsquad"
 
 	var/deployed = 0
-
-/datum/antagonist/deathsquad/New(var/no_reference)
-	..()
-	if(!no_reference)
-		deathsquad = src
 
 /datum/antagonist/deathsquad/attempt_spawn()
 	if(..())

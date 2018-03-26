@@ -1,4 +1,4 @@
-var/datum/antagonist/wizard/wizards
+GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 /datum/antagonist/wizard
 	id = MODE_WIZARD
@@ -16,11 +16,6 @@ var/datum/antagonist/wizard/wizards
 	min_player_age = 18
 
 	faction = "wizard"
-
-
-/datum/antagonist/wizard/New()
-	..()
-	wizards = src
 
 /datum/antagonist/wizard/create_objectives(var/datum/mind/wizard)
 

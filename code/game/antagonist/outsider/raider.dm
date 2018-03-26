@@ -1,4 +1,4 @@
-var/datum/antagonist/raider/raiders
+GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 
 /datum/antagonist/raider
 	id = MODE_RAIDER
@@ -100,10 +100,6 @@ var/datum/antagonist/raider/raiders
 		/obj/item/clothing/accessory/holster/waist,
 		/obj/item/clothing/accessory/holster/hip
 		)
-
-/datum/antagonist/raider/New()
-	..()
-	raiders = src
 
 /datum/antagonist/raider/update_access(var/mob/living/player)
 	for(var/obj/item/weapon/storage/wallet/W in player.contents)

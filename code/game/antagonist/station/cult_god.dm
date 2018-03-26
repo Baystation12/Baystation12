@@ -1,4 +1,4 @@
-var/datum/antagonist/godcultist/godcult
+GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 
 /datum/antagonist/godcultist
 	id = MODE_GODCULTIST
@@ -22,10 +22,6 @@ var/datum/antagonist/godcultist/godcult
 	initial_spawn_target = 2
 	antaghud_indicator = "hudcultist"
 
-/datum/antagonist/godcultist/New()
-	..()
-	godcult = src
-
 /datum/antagonist/godcultist/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg, var/mob/living/deity/specific_god)
 	if(!..())
 		return 0
@@ -36,15 +32,15 @@ var/datum/antagonist/godcultist/godcult
 	return 1
 
 /datum/antagonist/godcultist/post_spawn()
-	if(!deity || !deity.current_antagonists.len)
+	if(!GLOB.deity || !GLOB.deity.current_antagonists.len)
 		return
 
 	var/count = 1
 	var/deity_count = 1
 	while(count <= current_antagonists.len)
-		if(deity_count > deity.current_antagonists.len)
+		if(deity_count > GLOB.deity.current_antagonists.len)
 			deity_count = 1
-		var/datum/mind/deity_mind = deity.current_antagonists[deity_count]
+		var/datum/mind/deity_mind = GLOB.deity.current_antagonists[deity_count]
 		var/datum/mind/mind = current_antagonists[count]
 		add_cultist(mind, deity_mind.current)
 		count++
@@ -65,8 +61,8 @@ var/datum/antagonist/godcultist/godcult
 		return 1
 	if(href_list["selectgod"])
 		var/list/god_list = list()
-		if(deity && deity.current_antagonists.len)
-			for(var/m in deity.current_antagonists)
+		if(GLOB.deity && GLOB.deity.current_antagonists.len)
+			for(var/m in GLOB.deity.current_antagonists)
 				var/datum/mind/mind = m
 				god_list += mind.current
 		else
@@ -94,7 +90,7 @@ var/datum/antagonist/godcultist/godcult
 	player.current.remove_language(LANGUAGE_CULT)
 
 /datum/antagonist/godcultist/proc/get_deity(var/datum/mind/player)
-	for(var/m in deity.current_antagonists)
+	for(var/m in GLOB.deity.current_antagonists)
 		var/datum/mind/mind = m
 		var/mob/living/deity/god = mind.current
 		if(god.is_follower(player.current,1))
@@ -103,10 +99,10 @@ var/datum/antagonist/godcultist/godcult
 /mob/living/proc/dpray(var/msg as text)
 	set category = "Abilities"
 
-	if(!src.mind || !godcult || !godcult.is_antagonist(mind))
+	if(!src.mind || !GLOB.godcult || !GLOB.godcult.is_antagonist(mind))
 		return
 	msg = sanitize(msg)
-	var/mob/living/deity/D = godcult.get_deity(mind)
+	var/mob/living/deity/D = GLOB.godcult.get_deity(mind)
 	if(!D || !msg)
 		return
 

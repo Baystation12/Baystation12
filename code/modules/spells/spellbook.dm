@@ -46,7 +46,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 /obj/item/weapon/spellbook/attack_self(mob/user as mob)
 	if(user.mind)
-		if(!wizards.is_antagonist(user.mind))
+		if(!GLOB.wizards.is_antagonist(user.mind))
 			to_chat(user, "You can't make heads or tails of this book.")
 			return
 		if(spellbook.book_flags & LOCKED)
@@ -169,7 +169,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 	else if(href_list["temp"])
 		temp = null
-		. = TOPIC_REFRESH        
+		. = TOPIC_REFRESH
 
 	else if(href_list["book"])
 		if(initial(spellbook.max_uses) != spellbook.max_uses || uses != spellbook.max_uses)

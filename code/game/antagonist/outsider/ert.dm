@@ -1,4 +1,4 @@
-var/datum/antagonist/ert/ert
+GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 
 /datum/antagonist/ert
 	id = MODE_ERT
@@ -28,10 +28,9 @@ var/datum/antagonist/ert/ert
 	var/mob/living/carbon/human/M = ..()
 	if(istype(M)) M.age = rand(25,45)
 
-/datum/antagonist/ert/New()
+/datum/antagonist/ert/Initialize()
 	..()
 	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to [GLOB.using_map.boss_name], and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
-	ert = src
 
 /datum/antagonist/ert/greet(var/datum/mind/player)
 	if(!..())

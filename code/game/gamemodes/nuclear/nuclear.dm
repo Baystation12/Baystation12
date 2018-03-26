@@ -27,7 +27,7 @@ var/list/nuke_disks = list()
 	return 0
 
 /datum/game_mode/nuclear/declare_completion()
-	var/datum/antagonist/merc = all_antag_types()[MODE_MERCENARY]
+	var/datum/antagonist/merc = GLOB.all_antag_types_[MODE_MERCENARY]
 	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || (merc && !merc.global_objectives.len))
 		..()
 		return
@@ -59,7 +59,7 @@ var/list/nuke_disks = list()
 		to_world("<FONT size = 3><B>[syndicate_name()] operatives have earned Darwin Award!</B></FONT>")
 		to_world("<B>[syndicate_name()] operatives blew up something that wasn't [station_name()] and got caught in the explosion.</B> Next time, don't lose the disk!")
 
-	else if (disk_rescued && mercs.antags_are_dead())
+	else if (disk_rescued && GLOB.mercs.antags_are_dead())
 		feedback_set_details("round_end_result","loss - evacuation - disk secured - syndi team dead")
 		to_world("<FONT size = 3><B>Crew Major Victory!</B></FONT>")
 		to_world("<B>The Research Staff has saved the disc and killed the [syndicate_name()] Operatives</B>")
@@ -69,7 +69,7 @@ var/list/nuke_disks = list()
 		to_world("<FONT size = 3><B>Crew Major Victory</B></FONT>")
 		to_world("<B>The Research Staff has saved the disc and stopped the [syndicate_name()] Operatives!</B>")
 
-	else if (!disk_rescued && mercs.antags_are_dead())
+	else if (!disk_rescued && GLOB.mercs.antags_are_dead())
 		feedback_set_details("round_end_result","loss - evacuation - disk not secured")
 		to_world("<FONT size = 3><B>Mercenary Minor Victory!</B></FONT>")
 		to_world("<B>The Research Staff failed to secure the authentication disk but did manage to kill most of the [syndicate_name()] Operatives!</B>")

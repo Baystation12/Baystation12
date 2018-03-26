@@ -1,4 +1,4 @@
-var/datum/antagonist/renegade/renegades
+GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 
 /datum/antagonist/renegade
 	role_text = "Renegade"
@@ -43,10 +43,6 @@ var/datum/antagonist/renegade/renegades
 		list(/obj/item/weapon/gun/projectile/revolver/detective, /obj/item/weapon/gun/projectile/revolver/deckard)
 		)
 
-/datum/antagonist/renegade/New()
-	..()
-	renegades = src
-
 /datum/antagonist/renegade/create_objectives(var/datum/mind/player)
 
 	if(!..())
@@ -84,4 +80,4 @@ var/datum/antagonist/renegade/renegades
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(H.stat == 2 || !(H.client)) continue
 		if(is_special_character(H)) continue
-		renegades.add_antagonist(H.mind)
+		GLOB.renegades.add_antagonist(H.mind)

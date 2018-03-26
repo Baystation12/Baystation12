@@ -32,7 +32,7 @@
 	. = list()
 	. += "<b>Special Role Availability:</b><br>"
 	. += "<table>"
-	var/list/all_antag_types = all_antag_types()
+	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		. += "<tr><td>[antag.role_text]: </td><td>"
@@ -96,7 +96,7 @@
 /datum/category_item/player_setup_item/antagonism/candidacy/proc/valid_special_roles()
 	var/list/private_valid_special_roles = list()
 
-	var/list/all_antag_types = all_antag_types()
+	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		private_valid_special_roles += antag.role_type

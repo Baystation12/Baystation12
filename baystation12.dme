@@ -170,6 +170,7 @@
 #include "code\controllers\ProcessScheduler\core\process.dm"
 #include "code\controllers\ProcessScheduler\core\processScheduler.dm"
 #include "code\controllers\subsystems\air.dm"
+#include "code\controllers\subsystems\antags.dm"
 #include "code\controllers\subsystems\atoms.dm"
 #include "code\controllers\subsystems\garbage.dm"
 #include "code\controllers\subsystems\legacy.dm"
