@@ -1,5 +1,0 @@
-author: Banditoz
-delete-after: True
-changes: 
-  - rscadd: "Add the ability to rename a bible, or change its icon."
-  - rscadd: "Add new bible sprites from tlc2013."

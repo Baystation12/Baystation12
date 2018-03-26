@@ -30,8 +30,14 @@
 
 /obj/item/clothing/head/soft/solgov/fleet
 	name = "fleet cap"
-	desc = "It's a navy blue ballcap with the SCG Fleet crest."
+	desc = "It's a navy blue ski cap with the SCG Fleet crest."
 	icon_state = "fleetsoft"
+/obj/item/clothing/head/soft/solgov/fleet/attack_self(mob/user)
+	..()
+	if(src.flipped)
+		flags_inv |= BLOCKHEADHAIR
+	else
+		flags_inv &= ~BLOCKHEADHAIR
 
 /obj/item/clothing/head/solgov/utility
 	name = "utility cover"

@@ -148,15 +148,16 @@ var/list/radiochannels = list(
 var/list/channel_color_presets = list(
 	"Global Green" = "#008000",
 	"Phenomenal Purple" = "#993399",
-	"Bitchin' Blue" = "#395A9A",
-	"Menacing Maroon" = "#6D3F40",
-	"Pretty Periwinkle" = "#5C5C8A",
-	"Painful Pink" = "#FF00FF",
-	"Raging Red" = "#A30000",
-	"Operational Orange" = "#A66300",
+	"Bitchin' Blue" = "#395a9a",
+	"Menacing Maroon" = "#6d3f40",
+	"Pretty Periwinkle" = "#5c5c8a",
+	"Painful Pink" = "#ff00ff",
+	"Raging Red" = "#a30000",
+	"Operational Orange" = "#a66300",
 	"Tantalizing Turquoise" = "#008160",
-	"Bemoaning Brown" = "#7F6539",
-	"Gastric Green" = "#6EAA2C"
+	"Bemoaning Brown" = "#7f6539",
+	"Gastric Green" = "#6eaa2c",
+	"Bold Brass" = "#a3a332"
 )
 
 // central command channels, i.e deathsquid & response teams
