@@ -171,7 +171,8 @@ var/list/outfits_decls_by_type_
 	if(starting_accessories && H.w_uniform)
 		for(var/T in starting_accessories)
 			var/obj/item/clothing/accessory/acc = new T(src)
-			H.w_uniform.attach_accessory(null, acc)
+			var/obj/item/clothing/uniform = H.w_uniform
+			uniform.attach_accessory(null, acc)
 
 	if(l_hand)
 		H.put_in_l_hand(new l_hand(H))
