@@ -9,6 +9,9 @@
 	max_damage = 70
 	relative_size = 60
 
+	//At what point does toxin damage become dangerous
+	var/toxin_danger_level = 60
+
 /obj/item/organ/internal/liver/robotize()
 	. = ..()
 	icon_state = "liver-prosthetic"
@@ -29,7 +32,7 @@
 	if(owner.life_tick % PROCESS_ACCURACY == 0)
 
 		//High toxins levels are dangerous
-		if(owner.getToxLoss() >= 60 && !owner.chem_effects[CE_ANTITOX])
+		if(owner.getToxLoss() >= toxin_danger_level && !owner.chem_effects[CE_ANTITOX])
 			//Healthy liver suffers on its own
 			if (src.damage < min_broken_damage)
 				src.damage += 0.2 * PROCESS_ACCURACY
