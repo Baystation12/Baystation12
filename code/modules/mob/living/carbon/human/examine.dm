@@ -187,10 +187,6 @@
 		else if(!client)
 			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>\n"
 
-	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
-	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
-		msg += "<span class='notice'>[T.He] [T.has] \"[H.forehead_graffiti]\" written on [T.his] [H.name] in [H.graffiti_style]!</span>\n"
-
 	var/list/wound_flavor_text = list()
 	var/applying_pressure = ""
 	var/list/shown_objects = list()
@@ -252,6 +248,10 @@
 						parsedembed.Remove(embedded.name)
 						parsedembed.Add("multiple "+embedded.name)
 				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [english_list(parsedembed, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"
+		
+		if(!hidden && E.writing && E.writing_style)
+			msg += "<span class='notice'>[T.He] [T.has] \"[E.writing]\" written on [T.his] [E.name] in [E.writing_style].</span>\n"
+
 	for(var/hidden in hidden_bleeders)
 		wound_flavor_text[hidden] = "[T.He] [T.has] blood soaking through [hidden] around [T.his] [english_list(hidden_bleeders[hidden])]!<br>"
 

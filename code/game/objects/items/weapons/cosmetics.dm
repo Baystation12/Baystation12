@@ -65,9 +65,9 @@
 										 "<span class='notice'>You apply \the [src].</span>")
 					H.lip_style = colour
 					H.update_body()
-	else if(istype(A, /obj/item/organ/external/head))
-		var/obj/item/organ/external/head/head = A
-		head.write_on(user, src)
+	else if(istype(A, /obj/item/organ/external))
+		var/obj/item/organ/external/E = A
+		E.write_on(user, src)
 
 //you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
 

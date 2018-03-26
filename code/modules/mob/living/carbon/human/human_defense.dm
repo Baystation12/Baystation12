@@ -83,10 +83,9 @@ meteor_act
 
 	var/siemens_coefficient = max(species.siemens_coefficient,0)
 
-	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
+	var/list/clothing_items = get_coverings(def_zone.body_part)
 	for(var/obj/item/clothing/C in clothing_items)
-		if(istype(C) && (C.body_parts_covered & def_zone.body_part)) // Is that body part being targeted covered?
-			siemens_coefficient *= C.siemens_coefficient
+		siemens_coefficient *= C.siemens_coefficient
 
 	return siemens_coefficient
 
@@ -98,26 +97,25 @@ meteor_act
 	if(!def_zone)
 		return 0
 	var/protection = 0
-	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
+	var/list/protective_gear = get_coverings(def_zone.body_part)
 	for(var/obj/item/clothing/gear in protective_gear)
-		if(gear.body_parts_covered & def_zone.body_part)
-			protection = add_armor(protection, gear.armor[type])
-		if(gear.accessories.len)
-			for(var/obj/item/clothing/accessory/bling in gear.accessories)
-				if(bling.body_parts_covered & def_zone.body_part)
-					protection = add_armor(protection, bling.armor[type])
+		protection = add_armor(protection, gear.armor[type])
 	return protection
 
-/mob/living/carbon/human/proc/check_head_coverage()
+/mob/living/carbon/human/proc/is_covered(body_part)
+	var/list/body_parts = get_coverings(body_part)
+	return (body_parts.len > 0)
 
-	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform)
-	for(var/bp in body_parts)
-		if(!bp)	continue
-		if(bp && istype(bp ,/obj/item/clothing))
-			var/obj/item/clothing/C = bp
-			if(C.body_parts_covered & HEAD)
-				return 1
-	return 0
+/mob/living/carbon/human/proc/get_coverings(body_part)
+	. = list()
+	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
+	for(var/obj/item/clothing/gear in clothing_items)
+		if(gear.body_parts_covered & body_part)
+			. |= gear
+		else if(gear.accessories.len)
+			for(var/obj/item/clothing/accessory/bling in gear.accessories)
+				if(bling.body_parts_covered & body_part)
+					. |= gear
 
 //Used to check if they can be fed food/drinks/pills
 /mob/living/carbon/human/check_mouth_coverage()

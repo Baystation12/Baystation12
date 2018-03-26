@@ -74,17 +74,17 @@
 /obj/item/weapon/pen/attack(atom/A, mob/user as mob, target_zone)
 	if(ismob(A))
 		var/mob/M = A
-		if(ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
+		if(ishuman(A) && user.a_intent == I_HELP)
 			var/mob/living/carbon/human/H = M
-			var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
-			if(istype(head))
-				head.write_on(user, src.color_description)
+			var/obj/item/organ/external/E = H.get_organ(target_zone)
+			if(istype(E))
+				E.write_on(user, src.color_description)
 		else
 			to_chat(user, "<span class='warning'>You stab [M] with the pen.</span>")
 			admin_attack_log(user, M, "Stabbed using \a [src]", "Was stabbed with \a [src]", "used \a [src] to stab")
-	else if(istype(A, /obj/item/organ/external/head))
-		var/obj/item/organ/external/head/head = A
-		head.write_on(user, src.color_description)
+	else if(istype(A, /obj/item/organ/external))
+		var/obj/item/organ/external/E = A
+		E.write_on(user, src.color_description)
 
 
 /*

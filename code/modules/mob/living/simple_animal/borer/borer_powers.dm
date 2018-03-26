@@ -89,7 +89,7 @@ GLOBAL_LIST_INIT(borer_reagent_types_by_name, setup_borer_reagents())
 			to_chat(src, "\The [H] does not seem to have an ear canal to breach.")
 			return
 
-		if(H.check_head_coverage())
+		if(H.is_covered(HEAD))
 			to_chat(src, "You cannot get through that host's protective gear.")
 			return
 

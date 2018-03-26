@@ -233,10 +233,9 @@
 					H.update_inv_belt(0)
 			H.clean_blood(washshoes)
 
-			var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
-			if(istype(head))
-				head.forehead_graffiti = null
-				head.graffiti_style = null
+			for(var/obj/item/organ/external/E in H.organs)
+				E.writing = null
+				E.writing_style = null
 		else
 			if(M.wear_mask)						//if the mob is not human, it cleans the mask without asking for bitflags
 				if(M.wear_mask.clean_blood())
@@ -408,10 +407,10 @@
 
 	O.clean_blood()
 
-	if(istype(O, /obj/item/organ/external/head))
-		var/obj/item/organ/external/head/head = O
-		head.forehead_graffiti = null
-		head.graffiti_style = null
+	if(istype(O, /obj/item/organ/external))
+		var/obj/item/organ/external/E = O
+		E.writing = null
+		E.writing_style = null
 
 	user.visible_message( \
 		"<span class='notice'>[user] washes \a [I] using \the [src].</span>", \

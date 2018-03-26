@@ -84,6 +84,10 @@
 	// HUD element variable, see organ_icon.dm get_damage_hud_image()
 	var/image/hud_damage_image
 
+	// Doodling
+	var/writing
+	var/writing_style
+
 /obj/item/organ/external/New(var/mob/living/carbon/holder)
 	..()
 	if(isnull(pain_disability_threshold))
@@ -173,13 +177,15 @@
 		return //no eating the limb until everything's been removed
 	return ..()
 
-/obj/item/organ/external/examine()
+/obj/item/organ/external/examine(mob/user)
 	. = ..()
 	if(in_range(usr, src) || isghost(usr))
 		for(var/obj/item/I in contents)
 			if(istype(I, /obj/item/organ))
 				continue
 			to_chat(usr, "<span class='danger'>There is \a [I] sticking out of it.</span>")
+	if(writing && writing_style)
+		to_chat(user, "<span class='notice'>It has \"[writing]\" written on it in [writing_style].</span>")
 	return
 
 /obj/item/organ/external/show_decay_status(mob/user)
@@ -1399,3 +1405,36 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/has_genitals()
 	return !isrobotic() && species && species.sexybits_location == organ_tag
+
+/obj/item/organ/external/proc/write_on(var/mob/penman, var/style)
+	var/target_name = name
+	var/atom/target = src
+	if(owner)
+		target_name = "[owner]'s [name]"
+		target = owner
+
+	var/maxlen = MAX_NAME_LEN + 5*(w_class - ITEM_SIZE_SMALL)
+	if(length(writing) >= maxlen)
+		to_chat(penman, "<span class='notice'>There is no room left to write on [target_name]!</span>")
+		return
+
+	var/graffiti = sanitizeSafe(input(penman, "Enter a message to write on [target_name]:") as text|null, maxlen - length(writing))
+	if(graffiti)
+		if(!target.Adjacent(penman))
+			to_chat(penman, "<span class='notice'>[target_name] is too far away.</span>")
+			return
+
+		if(owner && owner.is_covered(body_part))
+			to_chat(penman, "<span class='notice'>[target_name] is covered up.</span>")
+			return
+
+		penman.visible_message("<span class='warning'>[penman] begins writing something on [target_name]!</span>", "You begin writing something on [target_name].")
+
+		if(do_after(penman, 3 SECONDS, target))
+			if(owner && owner.is_covered(body_part))
+				to_chat(penman, "<span class='notice'>[target_name] is covered up.</span>")
+				return
+
+			penman.visible_message("<span class='warning'>[penman] writes something on [target_name]!</span>", "You write something on [target_name].")
+			writing = graffiti
+			writing_style = style
