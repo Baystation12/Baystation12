@@ -12,6 +12,19 @@
 	worn_state = "blue_pyjamas"
 	item_state = "w_suit"
 
+/obj/item/clothing/under/gorka
+	name = "Gorka"
+	desc = "A special suit designed to be cool everytime when you wear it, this one has a strange tag 'Alex Wood', i wonder who is this?"
+	icon_state = "gorka"
+	worn_state = "gorka"
+	armor = list(melee = 15, bullet = 10, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/under/gorka/mob_can_equip(mob/user)
+	.=..()
+	if(user.gender == FEMALE)
+		to_chat(user, "<span class='warning'> You aren't sure you'll fit in this men's cloth..</span>")
+		return 0
+
 
 /obj/item/clothing/under/dress/maid
 	name = "maid uniform"

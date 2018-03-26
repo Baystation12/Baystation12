@@ -536,7 +536,9 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 
 	occupant.forceMove(get_turf(src))
+	occupant.verbs -= /mob/living/verb/ghost
 	set_occupant(null)
+
 
 	icon_state = base_icon_state
 
@@ -558,4 +560,5 @@
 	time_entered = world.time
 
 	SetName("[name] ([occupant])")
+	occupant.verbs += /mob/living/verb/ghost
 	icon_state = occupied_icon_state
