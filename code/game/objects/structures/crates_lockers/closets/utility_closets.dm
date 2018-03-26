@@ -77,7 +77,7 @@
 
 /obj/structure/closet/firecloset/New()
 	..()
-
+	new /obj/item/weapon/storage/med_pouch/burn(src)
 	new /obj/item/clothing/suit/fire/firefighter(src)
 	new /obj/item/clothing/mask/gas(src)
 	new /obj/item/weapon/tank/oxygen/red(src)
@@ -86,7 +86,7 @@
 
 /obj/structure/closet/firecloset/full/New()
 	..()
-
+	new /obj/item/weapon/storage/med_pouch/burn(src)
 	new /obj/item/clothing/suit/fire/firefighter(src)
 	new /obj/item/clothing/mask/gas(src)
 	new /obj/item/device/flashlight(src)
@@ -157,6 +157,8 @@
 
 /obj/structure/closet/radiation/New()
 	..()
+	new /obj/item/weapon/storage/med_pouch/toxin(src)
+	new /obj/item/weapon/storage/med_pouch/toxin(src)
 	new /obj/item/clothing/suit/radiation(src)
 	new /obj/item/clothing/head/radiation(src)
 	new /obj/item/clothing/suit/radiation(src)
@@ -215,6 +217,8 @@
 	..()
 	new /obj/item/inflatable/door(src)
 	new /obj/item/inflatable/door(src)
+	new /obj/item/weapon/storage/med_pouch/burn(src)
+	new /obj/item/weapon/storage/med_pouch/burn(src)
 	new /obj/item/clothing/suit/fire/firefighter(src)
 	new /obj/item/clothing/mask/gas/half(src)
 	new /obj/item/device/flashlight(src)

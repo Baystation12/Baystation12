@@ -145,6 +145,7 @@ var/global/list/datum/supply_drop_loot/supply_drop
 	..()
 	contents = list(
 		/obj/item/weapon/storage/firstaid/regular,
+		/obj/item/weapon/storage/firstaid/trauma,
 		/obj/item/weapon/storage/firstaid/fire,
 		/obj/item/weapon/storage/firstaid/toxin,
 		/obj/item/weapon/storage/firstaid/o2,
