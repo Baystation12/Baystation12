@@ -67,8 +67,7 @@
 
 /proc/all_random_antag_types()
 	// No caching as the ANTAG_RANDOM_EXCEPTED flag can be added/removed mid-round.
-	var/list/all_antag_types = all_antag_types()
-	var/list/antag_candidates = all_antag_types.Copy()
+	var/list/antag_candidates = GLOB.all_antag_types_.Copy()
 	for(var/datum/antagonist/antag in antag_candidates)
 		if(antag.flags & ANTAG_RANDOM_EXCEPTED)
 			antag_candidates -= antag

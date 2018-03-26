@@ -17,10 +17,6 @@ var/datum/antagonist/rogue_ai/malf
 	antaghud_indicator = "hudmalai"
 	min_player_age = 18
 
-/datum/antagonist/rogue_ai/New()
-	..()
-	malf = src
-
 /datum/antagonist/rogue_ai/can_become_antag(var/datum/mind/player, var/ignore_role)
 	. = ..(player, ignore_role)
 	if(jobban_isbanned(player.current, "AI"))

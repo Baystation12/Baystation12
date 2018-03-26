@@ -31,9 +31,9 @@
 		user.Paralyse(20)
 		return
 
-	if(cult && iscultist(M))
+	if(GLOB.cult && iscultist(M))
 		M.visible_message("<span class='notice'>\The [user] waves \the [src] over \the [M]'s head.</span>")
-		cult.offer_uncult(M)
+		GLOB.cult.offer_uncult(M)
 		return
 
 	..()

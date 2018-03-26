@@ -46,7 +46,7 @@
 	if(user.mind.special_role == "apprentice")
 		to_chat(user, "<span class='warning'>You are already a wizarding apprentice!</span>")
 		return 0
-	if(wizards.add_antagonist_mind(user.mind,1,"apprentice","<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
+	if(GLOB.wizards.add_antagonist_mind(user.mind,1,"apprentice","<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
 		to_chat(user, "<span class='notice'>With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry.</span>")
 		return 1
 	return 0

@@ -52,7 +52,7 @@ var/global/universe_has_ended = 0
 	OverlayAndAmbientSet()
 
 	// Disable Nar-Sie.
-	cult.allow_narsie = 0
+	GLOB.cult.allow_narsie = 0
 
 	PlayerSet()
 	SSskybox.reinstate_skyboxes("cascade", FALSE)
