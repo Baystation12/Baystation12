@@ -26,7 +26,7 @@
 /obj/item/clothing/head/wizard/marisa
 	name = "Witch Hat"
 	desc = "Strange-looking hat-wear, makes you want to cast fireballs."
-	icon_state = "marisa"
+	icon_state = "violetwizard"
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/head/wizard/magus
@@ -83,7 +83,7 @@
 /obj/item/clothing/suit/wizrobe/marisa
 	name = "Witch Robe"
 	desc = "Magic is all about the spell power, ZE!"
-	icon_state = "marisa"
+	icon_state = "violetwizard"
 	item_state = "marisarobe"
 
 /obj/item/clothing/suit/wizrobe/magusblue
