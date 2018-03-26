@@ -168,10 +168,10 @@ var/list/outfits_decls_by_type_
 		H.equip_to_slot_or_del(new r_pocket(H),slot_r_store)
 	if(suit_store)
 		H.equip_to_slot_or_del(new suit_store(H),slot_s_store)
-	if(starting_accessories && H.uniform)
+	if(starting_accessories && H.w_uniform)
 		for(var/T in starting_accessories)
 			var/obj/item/clothing/accessory/acc = new T(src)
-			H.uniform.attach_accessory(null, acc)
+			H.w_uniform.attach_accessory(null, acc)
 
 	if(l_hand)
 		H.put_in_l_hand(new l_hand(H))
