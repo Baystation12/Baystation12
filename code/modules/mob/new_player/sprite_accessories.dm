@@ -1266,3 +1266,28 @@
 	icon_state = "taj_all"
 	body_parts = list(BP_HEAD)
 	species_allowed = list(SPECIES_TAJARA)
+
+//IPC specific stuff
+/datum/sprite_accessory/marking/bishopoptics
+	name = "Bishop Alt. Optics (IPC)"
+	icon_state = "bishop_alt_optics"
+	body_parts = list(BP_HEAD)
+	species_allowed = list(SPECIES_IPC)
+
+/datum/sprite_accessory/marking/takahashioptics
+	name = "Ward Takahashi Alt. Optics (IPC)"
+	icon_state = "wardtakahashi_alt_optics"
+	body_parts = list(BP_HEAD)
+	species_allowed = list(SPECIES_IPC)
+
+/datum/sprite_accessory/marking/optics/xion
+	name = "Xion Alt. Optics (IPC)"
+	icon_state = "xion_alt_optics"
+	body_parts = list(BP_HEAD)
+	species_allowed = list(SPECIES_IPC)
+
+/datum/sprite_accessory/marking/optics/morpheus
+	name = "Morpheus Optics (IPC)"
+	icon_state = "morpheus_optics"
+	body_parts = list(BP_HEAD)
+	species_allowed = list(SPECIES_IPC)
