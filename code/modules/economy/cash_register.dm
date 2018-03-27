@@ -25,14 +25,13 @@
 
 // Claim machine ID
 /obj/machinery/cash_register/Initialize()
-	. = . = ..()
-	machine_id = "[station_name()] RETAIL #[num_financial_terminals++]"
+	..()
+	machine_id = "[station_name()] RETAIL #[sequential_id(retail_machine)]"
 	cash_stored = rand(10, 70)*10
-	transaction_devices += src // Global reference list to be properly set up by /proc/setup_economy()
 
 
 /obj/machinery/cash_register/examine(mob/user as mob)
-	. = . = ..()
+	..()
 	if(cash_open)
 		if(cash_stored)
 			to_chat(user, "It holds [cash_stored] Thaler\s of money.")
