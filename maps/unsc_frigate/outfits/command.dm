@@ -5,6 +5,7 @@
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/command
 	shoes = /obj/item/clothing/shoes/brown
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o6)
 
 	flags = 0
 
@@ -20,6 +21,7 @@
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/command
 	shoes = /obj/item/clothing/shoes/brown
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o5)
 
 	flags = 0
 
@@ -38,6 +40,7 @@
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/command
 	shoes = /obj/item/clothing/shoes/brown
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer)
 
 	flags = 0
 

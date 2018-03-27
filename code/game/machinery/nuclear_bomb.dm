@@ -440,3 +440,36 @@ var/bomb_set
 				continue
 			T.icon_state = target_icon_state
 		last_turf_state = target_icon_state
+
+/obj/item/weapon/folder/envelope/nuke_instructions
+	name = "instructions envelope"
+	desc = "A small envelope. The label reads 'open only in event of high emergency'."
+
+/obj/item/weapon/folder/envelope/nuke_instructions/Initialize()
+	. = ..()
+	var/obj/item/weapon/paper/R = new(src)
+	R.set_content("<center><img src=sollogo.png><br><br>\
+	<b>CLASSIFICATION: TOP SECRET<br>Debrief on activation of United Nations Space Command Emergency Priority Order 098831A-1</b></center><br><br>\
+	In the event of an alien boarding party, this document will guide you through the activation of the vessel's \
+	on-board nuclear self destruct system. Please read carefully.<br><br>\
+	1) Order the enlisted men to secure the terminal, evacuate the Officers.<br>\
+	2) Notify your Executive officer about the Emergency Priority Order.<br>\
+	3) Proceed to the self-destruct chamber with your Executive Officer, located on Deck Three by the medbay.<br>\
+	4) Open the shutters and enter the chamber.<br>\
+	5) You and your Executive Officer should stand in front of each Keycard Authentication Device. On the KAD interface, select \
+	Activate Protocol 098831A1. Then swipe your ID cards simultaneously.<br>\
+	6) The KAD will now display the Authentication Code. Memorize this code.<br>\
+	7) Insert the authentication disk into the self-destruct terminal.<br>\
+	8) Enter the code into the self-destruct terminal.<br>\
+	9) Authentication procedures are now complete.<br>\
+	10) Enter the desired countdown time.<br>\
+	11) When ready, disable the safety switch.<br>\
+	12) Start the countdown.<br><br>\
+	This concludes the instructions.")
+
+	//stamp the paper
+	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+	stampoverlay.icon_state = "paper_stamp-hos"
+	R.stamped += /obj/item/weapon/stamp
+	R.overlays += stampoverlay
+	R.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
