@@ -22,11 +22,11 @@
 
 
 // Claim machine ID
-/obj/item/device/retail_scanner/New()
-	machine_id = "[station_name()] RETAIL #[num_financial_terminals++]"
+/obj/item/device/retail_scanner/Initialize()
+	..()
+	machine_id = "[station_name()] RETAIL #[sequential_id(retail_machine)]"
 	if(locate(/obj/structure/table) in loc)
 		pixel_y = 3
-	transaction_devices += src // Global reference list to be properly set up by /proc/setup_economy()
 
 
 // Always face the user when put on a table
