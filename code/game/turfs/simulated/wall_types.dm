@@ -10,8 +10,16 @@
 /turf/simulated/wall/r_wall/hull
 	name = "hull"
 	color = COLOR_HULL
-	paint_color = COLOR_HULL
 
+/turf/simulated/wall/r_wall/hull/Initialize()
+	. = ..()
+	paint_color = color
+	color = null //color is just for mapping
+	if(prob(40))
+		var/turf/space/S = locate() in trange(2, src)
+		var/bleach_factor = rand(20,80)/get_dist(src, S)
+		paint_color = adjust_brightness(paint_color, bleach_factor)
+	update_icon()
 
 
 
