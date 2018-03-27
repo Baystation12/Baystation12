@@ -1,0 +1,5 @@
+author: "Earthcrusher"
+delete-after: True
+changes: 
+  - tweak: "The jukebox has been resprited."
+  - rscadd: "New tracks added to the jukebox music selection; some have had their names corrected."
