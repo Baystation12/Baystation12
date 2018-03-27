@@ -1,0 +1,5 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - rscadd: "Adds a forensic belt to the Forensic Technician's locker."
+  - maptweak: "Changes the Forensics door from glass to regular."
