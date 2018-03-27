@@ -1,5 +1,5 @@
-#define TRACKING_POSSIBLE 0
-#define TRACKING_NO_COVERAGE 1
+#define TRACKING_SENSORS 0
+#define TRACKING_ON_SCREEN 1
 #define TRACKING_TERMINATE 2
 
 /mob/living/silicon/ai/var/max_locations = 10
@@ -107,7 +107,7 @@
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(M == usr)
 			continue
-		if(M.tracking_status() != TRACKING_POSSIBLE)
+		if(M.tracking_status() != TRACKING_SENSORS)
 			continue
 
 		var/name = M.name
@@ -168,10 +168,10 @@
 				return
 
 			switch(target.tracking_status())
-				if(TRACKING_NO_COVERAGE)
-					to_chat(U, "Target is not near any active cameras.")
-					sleep(100)
-					continue
+				if(TRACKING_ON_SCREEN)
+					if(!(target.near_camera()))
+						U.ai_cancel_tracking(1)
+						return
 				if(TRACKING_TERMINATE)
 					U.ai_cancel_tracking(1)
 					return
@@ -232,27 +232,29 @@ mob/living/proc/near_camera()
 	if(istype(loc,/obj/effect/dummy))
 		return TRACKING_TERMINATE
 
-	 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
-	return near_camera() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
+	 // They can be tracked if the eye can see them
+	return TRACKING_ON_SCREEN
 
 /mob/living/silicon/robot/tracking_status()
 	. = ..()
-	if(. == TRACKING_NO_COVERAGE)
-		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
+	if(. == TRACKING_ON_SCREEN)
+		return camera && camera.can_use() ? TRACKING_SENSORS : TRACKING_ON_SCREEN
 
 /mob/living/carbon/human/tracking_status()
+
 	if(is_cloaked())
-		. = TRACKING_TERMINATE
-	else
-		. = ..()
+		return TRACKING_TERMINATE
+
+	. = ..()
 
 	if(. == TRACKING_TERMINATE)
 		return
 
-	if(. == TRACKING_NO_COVERAGE)
-		var/turf/T = get_turf(src)
-		if(T && (T.z in GLOB.using_map.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
-			return TRACKING_POSSIBLE
+	var/turf/T = get_turf(src)
+	if(T && (T.z in GLOB.using_map.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
+		. = TRACKING_SENSORS
+	else
+		. = TRACKING_ON_SCREEN
 
 mob/living/proc/tracking_initiated()
 
