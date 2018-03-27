@@ -24,7 +24,7 @@
 // Claim machine ID
 /obj/item/device/retail_scanner/Initialize()
 	..()
-	machine_id = "[station_name()] RETAIL #[sequential_id(retail_machine)]"
+	machine_id = "[station_name()] RETAIL #[num_financial_terminals++]"
 	if(locate(/obj/structure/table) in loc)
 		pixel_y = 3
 
