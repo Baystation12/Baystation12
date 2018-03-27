@@ -20,7 +20,7 @@
 
 /obj/item/clothing/accessory/black
 	name = "black tie"
-	color = "#ffffff"
+	color = "#1e1e1e"
 
 /obj/item/clothing/accessory/yellow
 	name = "yellow tie"

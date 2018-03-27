@@ -246,7 +246,7 @@
 	icon_state = "whiteservice"
 	item_state = "nursesuit"
 	worn_state = "whiteservice"
-	starting_accessories = list(/obj/item/clothing/accessory/navy)
+	starting_accessories = list(/obj/item/clothing/accessory/black)
 
 /obj/item/clothing/under/solgov/service/fleet/skirt
 	name = "fleet service skirt"
