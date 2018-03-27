@@ -1,6 +1,6 @@
 
 /decl/hierarchy/outfit/job/UNSC_ship/marine_co
-	name = "Marine Commanding Officer"
+	name = "Marine Company Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	l_hand = /obj/item/squad_manager
@@ -10,11 +10,12 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o2)
 
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/marine_xo
-	name = "Marine Executive Officer"
+	name = "Marine Company Sergeant"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	l_hand = /obj/item/squad_manager
@@ -24,6 +25,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e7)
 
 	flags = 0
 
@@ -39,6 +41,7 @@
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/combat
+	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e5)
 
 	flags = 0
 
@@ -53,6 +56,7 @@
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/combat
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted)
 
 	flags = 0
 
@@ -69,6 +73,7 @@
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	shoes = /obj/item/clothing/shoes/jungleboots
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4)
 
 	flags = 0
 e

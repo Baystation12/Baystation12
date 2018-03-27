@@ -1,0 +1,15 @@
+author: DoctorOctopus
+delete-after: True
+changes: 
+  - rscadd: "Each UNSC role has been given a rank which will equip automatically (thanks to xo's god coding) as soon as they spawn."
+  - maptweak: "Small remodel of the UNSC Bridge, added lockdown system and fax machine, added new items to CO's Office, revamped gun room."
+  - maptweak: "Made it so Frigate Power lasts way longer and doesn't die out in like ten minutes."
+  - maptweak: "Renovated all deck two gun rooms."
+  - maptweak: "Added a medvend, box of body bags, defib, and a morgue to the UNSC Medbay."
+  - experiment: "Added Protocol 098831A-1 Room"
+  - rscadd: "Ported Bay's Nuclear Authentication System and Folders"
+  - tweak: "All helmets and vests now say UEG, United Earth Government, or UNSC and no longer say Sol Central, SOL, SOL CENTRAL GOVERNMENT."
+  - rscadd: "Based on a lore request Marine Commanding Officer has been renamed to Marine Company Officer"
+  - rscadd: "Based on a lore request Marine Executive Officer has been renamed to Marine Gunnery Sergeant"    
+  - rscadd: "Based on a lore request Naval Security Officer and Masters-At-Arms have switched places, NSO is now the Head, MAA is now the Officer"
+  

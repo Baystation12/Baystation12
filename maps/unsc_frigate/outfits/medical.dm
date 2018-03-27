@@ -6,6 +6,7 @@
 	uniform = /obj/item/clothing/under/unsc/medical
 	shoes = /obj/item/clothing/shoes/brown
 	l_hand = /obj/item/weapon/storage/firstaid/adv
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer)
 
 	flags = 0
 
@@ -16,5 +17,6 @@
 	uniform = /obj/item/clothing/under/unsc/medical
 	shoes = /obj/item/clothing/shoes/white
 	l_hand = /obj/item/weapon/storage/firstaid/adv
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
 
 	flags = 0

@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/marine_co
-	title = "Marine Commanding Officer"
+	title = "Marine Company Officer"
 	min_rank = RANK_CAPT
 	default_rank = RANK_COL
 	max_rank = MARINE_CO_MAX
@@ -16,7 +16,7 @@
 		access_unsc_armoury, access_unsc_officers, access_unsc_marine)
 
 /datum/job/UNSC_ship/marine_xo
-	title = "Marine Executive Officer"
+	title = "Marine Company Sergeant"
 	min_rank = MARINE_CO_MIN
 	default_rank = RANK_1LT
 	max_rank = RANK_CAPT

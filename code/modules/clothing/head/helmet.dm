@@ -20,13 +20,13 @@
 	armor_thickness = 20
 
 /obj/item/clothing/head/helmet/solgov
-	name = "\improper Sol Central Government helmet"
+	name = "\improper UEG Government helmet"
 	desc = "A helmet painted in Peacekeeper blue. Stands out like a sore thumb."
 	icon_state = "helmet_sol"
 
 /obj/item/clothing/head/helmet/solgov/command
 	name = "command helmet"
-	desc = "A helmet with 'SOL CENTRAL GOVERNMENT' printed on the back in gold lettering."
+	desc = "A helmet with 'UNITED EARTH GOVERNMENT' printed on the back in gold lettering."
 	icon_state = "helmet_command"
 
 /obj/item/clothing/head/helmet/solgov/security
