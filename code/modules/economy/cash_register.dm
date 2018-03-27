@@ -26,7 +26,7 @@
 // Claim machine ID
 /obj/machinery/cash_register/Initialize()
 	..()
-	machine_id = "[station_name()] RETAIL #[sequential_id(retail_machine)]"
+	machine_id = "[station_name()] RETAIL #[num_financial_terminals++]"
 	cash_stored = rand(10, 70)*10
 
 
