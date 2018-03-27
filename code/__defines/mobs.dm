@@ -63,6 +63,10 @@
 #define I_GRAB		"grab"
 #define I_HURT		"harm"
 
+//Hand intent flags. Literally true or false until someone adds support for more hands.
+#define HAND_LEFT	TRUE
+#define HAND_RIGHT	FALSE
+
 //These are used Bump() code for living mobs, in the mob_bump_flag, mob_swap_flags, and mob_push_flags vars to determine whom can bump/swap with whom.
 #define HUMAN 1
 #define MONKEY 2
@@ -278,3 +282,8 @@
 #define AURA_TYPE_WEAPON "Weapon"
 #define AURA_TYPE_THROWN "Thrown"
 #define AURA_TYPE_LIFE   "Life"
+
+//Tracks the orientation of an organ relative to its mob. External only.
+#define ORGAN_CENTER 0x1
+#define ORGAN_LEFT	 0x2
+#define ORGAN_RIGHT	 0x4

@@ -66,6 +66,13 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(M == user && user.a_intent != I_HURT)
 		return 0
 
+	if(ishuman(user) && M == user)
+		var/mob/living/carbon/human/H = user
+		var/obj/item/organ/external/E = H.get_organ(target_zone)
+		if(E in H.organs) //Prevent the player from smacking their right hand with their right hand.
+			if( (H.hand == HAND_LEFT && ( target_zone == BP_L_HAND ||  target_zone == BP_L_ARM ) && E.orientation == ORGAN_LEFT ) || ( H.hand == HAND_RIGHT && ( target_zone == BP_R_HAND ||  target_zone == BP_R_ARM ) && E.orientation == ORGAN_RIGHT) )
+				return
+
 	/////////////////////////
 
 	if(!no_attack_log)

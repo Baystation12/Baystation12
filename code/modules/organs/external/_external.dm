@@ -84,6 +84,9 @@
 	// HUD element variable, see organ_icon.dm get_damage_hud_image()
 	var/image/hud_damage_image
 
+	//Miscellanious variables.
+	var/orientation = ORGAN_CENTER //Track what side the organ is on.
+
 /obj/item/organ/external/New(var/mob/living/carbon/holder)
 	..()
 	if(isnull(pain_disability_threshold))
