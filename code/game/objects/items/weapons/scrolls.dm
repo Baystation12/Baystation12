@@ -83,5 +83,8 @@
 	if(!success)
 		user.forceMove(pick(L))
 
+	if(!is_station_area(get_area(user)))
+		log_and_message_admins("has teleported to [get_area(user)].")
+
 	smoke.start()
 	src.uses -= 1
