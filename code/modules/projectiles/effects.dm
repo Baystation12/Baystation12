@@ -8,6 +8,8 @@
 	light_power = 1
 	light_color = "#FF00DC"
 
+	mouse_opacity = FALSE
+
 /obj/effect/projectile/proc/set_transform(var/matrix/M)
 	if(istype(M))
 		transform = M
