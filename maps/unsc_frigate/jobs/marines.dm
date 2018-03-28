@@ -123,3 +123,19 @@
 		access_unsc_supplies, access_unsc_marine)
 	latejoin_at_spawnpoints = TRUE
 	is_whitelisted = 1
+
+/datum/job/UNSC_ship/odsto
+	title = "ONI Bridge Officer"
+	department_flag = MAR
+	total_positions = 1
+	spawn_positions = 1
+	ideal_character_age = 36
+	minimal_player_age = 27
+	selection_color = "#667700"
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odsto
+	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
+		access_unsc_ops, access_unsc_fighters, access_unsc_shuttles, access_unsc_medical,
+		access_unsc_armoury, access_unsc_supplies, access_unsc_officers, access_unsc_marine,
+		access_unsc_gunnery, access_unsc_ids, 60)
+	latejoin_at_spawnpoints = TRUE
+	is_whitelisted = 1

@@ -155,6 +155,8 @@
 	return overmap_name_assoc[overmap_name_picked]
 
 /obj/docking_umbilical/attack_hand(var/mob/user)
+	if(!our_ship)
+		our_ship = map_sectors["[z]"]
 	pick_entity_connect_disconnect(user)
 
 /obj/docking_umbilical/proc/umbi_rip()

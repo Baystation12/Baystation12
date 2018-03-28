@@ -33,6 +33,7 @@
 	var/is_jammed = 0           //Whether this gun is jammed
 	var/jam_chance = 0          //Chance it jams on fire
 	var/sound/reload_sound = 'sound/weapons/empty.ogg'
+	var/ammo_icon_state //Used to define a magazine icon state to render underneath the gun's icon.
 	//TODO generalize ammo icon states for guns
 	//var/magazine_states = 0
 	//var/list/icon_keys = list()		//keys
@@ -185,6 +186,7 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
+	. = ..()
 	load_ammo(A, user)
 
 /obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
@@ -231,6 +233,11 @@
 	if(chambered)
 		bullets += 1
 	return bullets
+
+/obj/item/weapon/gun/projectile/update_icon()
+	. = ..()
+	if(ammo_magazine && ammo_icon_state)
+		underlays += image(icon = src.icon,icon_state = src.ammo_icon_state)
 
 /* Unneeded -- so far.
 //in case the weapon has firemodes and can't unload using attack_hand()
