@@ -335,6 +335,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			pref.body_markings.Cut() // Basically same as above.
 
 			prune_occupation_prefs()
+			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["hair_color"])

@@ -16,7 +16,6 @@ var/global/datum/controller/occupations/job_master
 		//Debug info
 	var/list/job_debug = list()
 
-
 	proc/SetupOccupations(var/setup_titles = 0)
 		occupations = list()
 		occupations_by_type = list()
@@ -58,6 +57,11 @@ var/global/datum/controller/occupations/job_master
 			if(job.department_flag & MSC)
 				GLOB.nonhuman_positions |= job.title
 
+		if(!GLOB.skills.len)
+			decls_repository.get_decl(/decl/hierarchy/skill)
+		if(!GLOB.skills.len)
+			log_error("<span class='warning'>Error setting up job skill requirements, no skill datums found!</span>")
+			return 0
 		return 1
 
 
@@ -356,6 +360,11 @@ var/global/datum/controller/occupations/job_master
 		var/list/spawn_in_storage = list()
 
 		if(job)
+
+			// Transfers the skill settings for the job to the mob
+			if(job in H.client.prefs.skills_allocated)
+				H.skillset.obtain_from_allocation(job, H.client.prefs.skills_allocated[job])
+			else H.skillset.obtain_from_allocation(job)
 
 			//Equip job items.
 			job.setup_account(H)

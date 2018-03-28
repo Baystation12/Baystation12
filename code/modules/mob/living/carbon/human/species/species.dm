@@ -204,6 +204,7 @@
 	var/sexybits_location	//organ tag where they are located if they can be kicked for increased pain
 
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
+	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job recieves.
 
 /*
 These are all the things that can be adjusted for equipping stuff and
@@ -573,3 +574,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			facial_hair_style_by_gender[facialhairstyle] = S
 
 	return facial_hair_style_by_gender
+
+/datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
+	switch(age)
+		if(0 to 22) 	. = -1
+		if(23 to 30) 	. = 0
+		if(31 to 45)	. = 1
+		else			. = 2
