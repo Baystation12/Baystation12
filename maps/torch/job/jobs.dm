@@ -58,6 +58,12 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o6
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/management 	= SKILL_ADEPT,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC,
+						/decl/hierarchy/skill/general/pilot					= SKILL_BASIC)
+	skill_points = 9
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/card_mod,
@@ -81,7 +87,12 @@
 		/datum/mil_rank/fleet/o5,
 		/datum/mil_rank/fleet/o4
 	)
-
+	min_skill = list(	/decl/hierarchy/skill/organizational/management 	= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_ADEPT,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC,
+						/decl/hierarchy/skill/general/pilot					= SKILL_BASIC)
+	skill_points = 8
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_medical, access_morgue, access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -118,6 +129,15 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/rd
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	min_skill = list(	/decl/hierarchy/skill/organizational/management		= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/finance		= SKILL_ADEPT,
+						/decl/hierarchy/skill/service/botany				= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/anatomy				= SKILL_BASIC,
+						/decl/hierarchy/skill/research/devices				= SKILL_BASIC,
+						/decl/hierarchy/skill/research/science				= SKILL_BASIC)
+	skill_points = 6
 
 	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_heads, access_rd,
 						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
@@ -146,6 +166,15 @@
 		/datum/mil_rank/ec/o3,
 		/datum/mil_rank/fleet/o2
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/management 	= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/medical				= SKILL_ADEPT,
+						/decl/hierarchy/skill/medical/anatomy				= SKILL_EXPERT,
+						/decl/hierarchy/skill/medical/chemistry				= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/virology				= SKILL_BASIC)
+	skill_points = 5
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_heads,
@@ -174,6 +203,15 @@
 		/datum/mil_rank/fleet/o3,
 		/datum/mil_rank/fleet/o2
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/management 	= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/construction		= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/electrical		= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/atmos				= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/engines			= SKILL_BASIC)
+	skill_points = 10
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_ai_upload, access_teleporter, access_eva, access_heads,
@@ -212,6 +250,14 @@
 		/datum/mil_rank/fleet/o3,
 		/datum/mil_rank/fleet/o2
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/management 	= SKILL_ADEPT,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC,
+						/decl/hierarchy/skill/security/combat				= SKILL_BASIC,
+						/decl/hierarchy/skill/security/weapons				= SKILL_ADEPT,
+						/decl/hierarchy/skill/security/forensics			= SKILL_BASIC)
+	skill_points = 5
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -242,6 +288,10 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/cl
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_ADEPT,
+						/decl/hierarchy/skill/organizational/finance		= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC)
+	skill_points = 8
 
 	access = list(access_liaison, access_tox, access_tox_storage, access_heads, access_research,
 						access_mining, access_mining_office, access_mining_station, access_xenobiology,
@@ -265,6 +315,10 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_ADEPT,
+						/decl/hierarchy/skill/organizational/finance		= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC)
+	skill_points = 8
 
 	access = list(access_representative, access_security,access_medical, access_engine,
 			            access_heads, access_cargo, access_solgov_crew, access_hangar)
@@ -291,6 +345,11 @@
 		/datum/mil_rank/fleet/e9_alt1,
 		/datum/mil_rank/fleet/e8
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/management	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA			= SKILL_BASIC,
+						/decl/hierarchy/skill/security/combat		= SKILL_BASIC,
+						/decl/hierarchy/skill/security/weapons		= SKILL_BASIC)
+	skill_points = 10
 
 
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -321,6 +380,11 @@
 		/datum/mil_rank/ec/o1,
 		/datum/mil_rank/fleet/o1
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/management 	= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/pilot					= SKILL_ADEPT)
+	skill_points = 6
 
 
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
@@ -354,7 +418,12 @@
 		/datum/mil_rank/ec/o3,
 		/datum/mil_rank/ec/o1
 	)
-
+	min_skill = list(	/decl/hierarchy/skill/organizational/management	= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA			= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer		= SKILL_BASIC,
+						/decl/hierarchy/skill/general/pilot			= SKILL_BASIC)
+	skill_points = 8
 
 	access = list(access_pathfinder, access_explorer, access_eva, access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar, access_cent_creed)
 
@@ -375,6 +444,8 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5
 	)
+	min_skill = list(	/decl/hierarchy/skill/general/EVA			= SKILL_BASIC)
+	skill_points = 9
 
 	access = list(access_explorer, access_maint_tunnels, access_eva, access_emergency_storage, access_guppy_helm, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_cent_creed)
 
@@ -403,6 +474,13 @@
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/ec/e5
 	)
+	min_skill = list(	/decl/hierarchy/skill/general/computer			= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA				= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/construction	= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/electrical	= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/atmos			= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/engines		= SKILL_BASIC)
+	skill_points = 12
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
@@ -445,6 +523,13 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2
 	)
+	min_skill = list(	/decl/hierarchy/skill/general/computer			= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA				= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/construction	= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/electrical	= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/atmos			= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/engines		= SKILL_BASIC)
+	skill_points = 10
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
@@ -479,6 +564,13 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	min_skill = list(	/decl/hierarchy/skill/general/computer			= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA				= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/construction	= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/electrical	= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/atmos			= SKILL_BASIC,
+						/decl/hierarchy/skill/engineering/engines		= SKILL_BASIC)
+	skill_points = 10
 
 	access = list(access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_tech_storage, access_atmospherics, access_janitor, access_construction,
@@ -508,6 +600,10 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	min_skill = list(	/decl/hierarchy/skill/general/computer		= SKILL_ADEPT,
+						/decl/hierarchy/skill/general/mech			= SKILL_ADEPT,
+						/decl/hierarchy/skill/research/devices		= SKILL_BASIC)
+	skill_points = 6
 
 	access = list(access_robotics, access_robotics_engineering, access_tech_storage, access_morgue, access_medical, access_robotics_engineering, access_solgov_crew)
 	minimal_access = list()
@@ -534,6 +630,14 @@
 		/datum/mil_rank/fleet/e6,
 		/datum/mil_rank/fleet/e5
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/management 	= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC,
+						/decl/hierarchy/skill/security/combat				= SKILL_BASIC,
+						/decl/hierarchy/skill/security/weapons				= SKILL_BASIC,
+						/decl/hierarchy/skill/security/forensics			= SKILL_BASIC)
+	skill_points = 5
 
 	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
 			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
@@ -569,6 +673,13 @@
 		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor,
 		/datum/mil_rank/civ/marshal = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marshal
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC,
+						/decl/hierarchy/skill/security/combat				= SKILL_BASIC,
+						/decl/hierarchy/skill/security/weapons				= SKILL_BASIC,
+						/decl/hierarchy/skill/security/forensics			= SKILL_ADEPT)
+	skill_points = 5
 
 	access = list(access_security, access_brig, access_forensics_lockers,
 			            access_maint_tunnels, access_emergency_storage,
@@ -598,7 +709,12 @@
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4
 	)
-
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC,
+						/decl/hierarchy/skill/security/combat				= SKILL_BASIC,
+						/decl/hierarchy/skill/security/weapons				= SKILL_BASIC,
+						/decl/hierarchy/skill/security/forensics			= SKILL_BASIC)
+	skill_points = 6
 
 	access = list(access_security, access_brig, access_maint_tunnels,
 						access_external_airlocks, access_emergency_storage,
@@ -633,6 +749,13 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/medical				= SKILL_ADEPT,
+						/decl/hierarchy/skill/medical/anatomy				= SKILL_EXPERT,
+						/decl/hierarchy/skill/medical/chemistry				= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/virology				= SKILL_BASIC)
+	skill_points = 5
 
 	access = list(access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
 			            access_crematorium, access_chemistry, access_surgery,
@@ -666,13 +789,16 @@
 		/datum/mil_rank/fleet/e5,
 		/datum/mil_rank/fleet/e6
 	)
-
+	min_skill = list(	/decl/hierarchy/skill/general/EVA			= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/medical		= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/anatomy		= SKILL_BASIC)
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar)
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
+	skill_points = 8
 
 /datum/job/doctor_contractor
 	title = "Medical Contractor"
@@ -693,6 +819,10 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	min_skill = list(	/decl/hierarchy/skill/general/EVA			= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/medical		= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/anatomy		= SKILL_BASIC)
+	skill_points = 8
 
 	access = list(access_medical, access_morgue, access_crematorium, access_virology, access_surgery, access_medical_equip, access_solgov_crew,
 		            access_eva, access_maint_tunnels, access_emergency_storage, access_external_airlocks, access_hangar)
@@ -714,6 +844,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	min_skill = list(	/decl/hierarchy/skill/medical/medical		= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/chemistry		= SKILL_ADEPT)
+	skill_points = 7
 
 	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry)
 	minimal_access = list()
@@ -739,7 +872,10 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/ec/o1)
-
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/medical				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC)
+	skill_points = 8
 
 	access = list(access_medical, access_morgue, access_chapel_office, access_crematorium, access_psychiatrist, access_solgov_crew)
 	minimal_access = list()
@@ -773,6 +909,14 @@
 		/datum/mil_rank/fleet/e7,
 		/datum/mil_rank/fleet/e8
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/management		= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_ADEPT,
+						/decl/hierarchy/skill/organizational/finance		= SKILL_BASIC,
+						/decl/hierarchy/skill/general/hauling				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC,
+						/decl/hierarchy/skill/general/pilot					= SKILL_BASIC)
+	skill_points = 6
 
 	access = list(access_maint_tunnels, access_heads, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
 						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar)
@@ -800,6 +944,11 @@
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4
 	)
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/finance		= SKILL_BASIC,
+						/decl/hierarchy/skill/general/hauling				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC)
+	skill_points = 7
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
 						access_cargo_bot, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar)
@@ -820,6 +969,11 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/finance		= SKILL_BASIC,
+						/decl/hierarchy/skill/general/hauling				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC)
+	skill_points = 7
 
 	access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_hangar, access_guppy, access_guppy_helm, access_solgov_crew)
 
@@ -849,6 +1003,8 @@
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4
 	)
+	min_skill = list(	/decl/hierarchy/skill/general/hauling		= SKILL_BASIC)
+	skill_points = 9
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
 	minimal_access = list()
@@ -877,6 +1033,10 @@
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4
 	)
+	min_skill = list(	/decl/hierarchy/skill/service/cooking	 	= SKILL_ADEPT,
+						/decl/hierarchy/skill/service/botany		= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/chemistry		= SKILL_BASIC)
+	skill_points = 7
 
 	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew, access_bar)
 	minimal_access = list()
@@ -893,7 +1053,10 @@
 
 	access = list(access_hydroponics, access_bar, access_solgov_crew, access_kitchen)
 	minimal_access = list()
-
+	min_skill = list(	/decl/hierarchy/skill/service/cooking	 	= SKILL_BASIC,
+						/decl/hierarchy/skill/service/botany		= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/chemistry		= SKILL_BASIC)
+	skill_points = 7
 
 /datum/job/crew
 	title = "Crewman"
@@ -945,6 +1108,14 @@
 	access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
 						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen,
 						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/finance		= SKILL_BASIC,
+						/decl/hierarchy/skill/service/botany				= SKILL_BASIC,
+						/decl/hierarchy/skill/medical/anatomy				= SKILL_BASIC,
+						/decl/hierarchy/skill/research/devices				= SKILL_BASIC,
+						/decl/hierarchy/skill/research/science				= SKILL_BASIC)
+	skill_points = 8
 
 /datum/job/nt_pilot
 	title = "NanoTrasen Pilot"
@@ -966,6 +1137,11 @@
 	access = list(access_research, access_mining_office,
 						access_mining_station, access_nanotrasen, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
 						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_mining)
+	min_skill = list(	/decl/hierarchy/skill/general/EVA			= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer		= SKILL_BASIC,
+						/decl/hierarchy/skill/general/pilot			= SKILL_ADEPT)
+	skill_points = 6
+
 /datum/job/scientist
 	title = "Scientist"
 	total_positions = 6
@@ -981,6 +1157,10 @@
 		"Xenobiologist",
 		"Xenobotanist",
 		"Psychologist" = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych)
+	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
+						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
+						/decl/hierarchy/skill/organizational/finance		= SKILL_BASIC)
+	skill_points = 10
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	allowed_branches = list(/datum/mil_branch/civilian)
@@ -1006,6 +1186,10 @@
 		"Drill Technician",
 		"Shaft Miner",
 		"Salvage Technician")
+	min_skill = list(	/decl/hierarchy/skill/general/mech			= SKILL_BASIC,
+						/decl/hierarchy/skill/general/hauling		= SKILL_ADEPT,
+						/decl/hierarchy/skill/general/EVA			= SKILL_BASIC)
+	skill_points = 7
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/prospector
 	allowed_branches = list(/datum/mil_branch/civilian)
@@ -1031,6 +1215,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/guard
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/nt, /datum/mil_rank/civ/contractor)
+	min_skill = list(	/decl/hierarchy/skill/security/combat		= SKILL_BASIC,
+						/decl/hierarchy/skill/security/weapons		= SKILL_BASIC)
+	skill_points = 8
 
 	access = list(access_tox, access_tox_storage,access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
 						access_xenoarch, access_nanotrasen, access_sec_guard, access_hangar, access_petrov, access_expedition_shuttle, access_guppy)
@@ -1146,6 +1333,9 @@
 	latejoin_at_spawnpoints = 1
 	access = list(access_merchant)
 	announced = FALSE
+	min_skill = list(	/decl/hierarchy/skill/organizational/finance		= SKILL_ADEPT,
+						/decl/hierarchy/skill/general/pilot					= SKILL_BASIC)
+	skill_points = 10
 
 /datum/job/stowaway
 	title = "Stowaway"

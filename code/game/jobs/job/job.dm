@@ -36,6 +36,11 @@
 	var/latejoin_at_spawnpoints           //If this job should use roundstart spawnpoints for latejoin (offstation jobs etc)
 
 	var/hud_icon						  //icon used for Sec HUD overlay
+	
+	var/min_skill = list()				  //Minimum skills allowed for the job. List should contain skill (as in /decl/hierarchy/skill path), with values which are numbers.
+	var/max_skill = list()				  //Maximum skills allowed for the job.
+	var/skill_points = 10				  //The number of unassigned skill points the job comes with (on top of the minimum skills).
+	var/no_skill_buffs = FALSE			  //Whether skills can be buffed by age/species modifiers.
 
 /datum/job/New()
 	..()
