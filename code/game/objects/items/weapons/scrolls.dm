@@ -75,6 +75,8 @@
 	while(tempL.len)
 		attempt = pick(tempL)
 		success = user.Move(attempt)
+		if (!is_station_area(attempt))
+			log_and_message_admins("has teleported to [get_area(attempt)].")
 		if(!success)
 			tempL.Remove(attempt)
 		else
