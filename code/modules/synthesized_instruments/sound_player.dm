@@ -32,7 +32,7 @@
 	var/datum/musical_event_manager/event_manager = new
 
 
-/datum/sound_player/New(obj/where, datum/instrument/what)
+/datum/sound_player/New(datum/real_instrument/where, datum/instrument/what)
 	src.song = new (src, what)
 	src.actual_instrument = where
 	src.echo = GLOB.musical_config.echo_default.Copy()
