@@ -39,7 +39,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /zone/proc/process_fire()
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
 
-	var/firelevel = burn_gas.zburn(src, fire_tiles, force_burn = 1, no_check = 1)
+	var/firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
 
 	air.merge(burn_gas)
 
@@ -222,7 +222,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	fire_protection = world.time
 
 //Returns the firelevel
-/datum/gas_mixture/proc/zburn(zone/zone, force_burn, no_check = 0)
+/datum/gas_mixture/proc/react(zone/zone, force_burn, no_check = 0)
 	. = 0
 	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && (no_check ||check_recombustability(zone? zone.fuel_objs : null)))
 
