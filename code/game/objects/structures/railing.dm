@@ -34,15 +34,19 @@
 		L.apply_effect(round(material.radioactivity/20),IRRADIATE, blocked = L.getarmor(null, "rad"))
 
 /obj/structure/railing/Initialize()
+	. = ..()
+
 	if(!isnull(material) && !istype(material))
 		material = get_material_by_name(material)
 	if(!istype(material))
-		qdel(src)
+		return INITIALIZE_HINT_QDEL
+
 	name = "[material.display_name] [initial(name)]"
 	desc = "An unremarkable [material.display_name] railing. Guards against human stupidity."
-	maxhealth = round(material.integrity/5)
+	maxhealth = round(material.integrity / 5)
 	health = maxhealth
 	color = material.icon_colour
+
 	if(material.products_need_process())
 		START_PROCESSING(SSobj, src)
 	if(material.conductive)
@@ -164,7 +168,6 @@
 
 	set_dir(turn(dir, 90))
 	update_icon()
-	return
 
 /obj/structure/railing/verb/revrotate()
 	set name = "Rotate Railing Clockwise"
@@ -180,7 +183,6 @@
 
 	set_dir(turn(dir, -90))
 	update_icon()
-	return
 
 /obj/structure/railing/verb/flip() // This will help push railing to remote places, such as open space turfs
 	set name = "Flip Railing"
@@ -198,10 +200,9 @@
 		to_chat(usr, "<span class='warning'>You can't flip \the [src] - something is in the way.</span>")
 		return 0
 
-	src.loc = get_step(src, src.dir)
+	forceMove(get_step(src, src.dir))
 	set_dir(turn(dir, 180))
 	update_icon()
-	return
 
 /obj/structure/railing/CheckExit(var/atom/movable/O, var/turf/target)
 	if(istype(O) && O.checkpass(PASS_FLAG_TABLE))
@@ -286,7 +287,7 @@
 	if(!can_climb(user))
 		return
 
-	usr.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
+	user.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
 	climbers |= user
 
 	if(!do_after(user,(issmall(user) ? 20 : 34)))
@@ -303,11 +304,11 @@
 		return
 
 	if(get_turf(user) == get_turf(src))
-		usr.forceMove(get_step(src, src.dir))
+		user.forceMove(get_step(src, src.dir))
 	else
-		usr.forceMove(get_turf(src))
+		user.forceMove(get_turf(src))
 
-	usr.visible_message("<span class='danger'>\The [user] climbed over \the [src]!</span>")
+	user.visible_message("<span class='danger'>\The [user] climbed over \the [src]!</span>")
 	if(!anchored || material.is_brittle())
 		take_damage(maxhealth) // Fatboy
 	climbers -= user
