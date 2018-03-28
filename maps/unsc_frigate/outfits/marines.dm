@@ -80,10 +80,10 @@
 /decl/hierarchy/outfit/job/UNSC_ship/odsto
 	name = "ONI Bridge Officer"
 	l_ear = /obj/item/device/radio/headset/unsc/marine
-	uniform = /obj/item/clothing/under/unsc/operations
+	uniform = /obj/item/clothing/under/utility
 	shoes = /obj/item/clothing/shoes/dress
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/black)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5)
 
 	flags = 0
 e
