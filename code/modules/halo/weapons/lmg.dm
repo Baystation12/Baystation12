@@ -35,3 +35,4 @@
 		icon_state = "M739"
 	else
 		icon_state = "M739_unloaded"
+	. = ..()
