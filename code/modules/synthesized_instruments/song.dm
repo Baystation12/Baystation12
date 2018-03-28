@@ -142,9 +142,10 @@
 	for (var/line in lines)
 		var/cur_note = 1
 		if (src.player && src.player.actual_instrument)
-			var/obj/structure/synthesized_instrument/S = src.player.actual_instrument // Fuck, this is horrible.
-			if (S.song_editor)
-				GLOB.nanomanager.update_uis(S.song_editor)
+			var/obj/structure/synthesized_instrument/S = src.player.actual_instrument
+			var/datum/real_instrument/R = S.real_instrument
+			if (R.song_editor)
+				GLOB.nanomanager.update_uis(R.song_editor)
 		for (var/notes in splittext(lowertext(line), ","))
 			var/list/components = splittext(notes, "/")
 			var/duration = sanitize_tempo(src.tempo)
