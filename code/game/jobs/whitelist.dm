@@ -14,10 +14,11 @@ var/list/whitelist = list()
 		if(isnull(value) || value == "" || value == " ")
 			continue
 		var/name_and_job = splittext(value,"=")
-		if(isnull(name_and_job) || name_and_job == value)
+		if(isnull(name_and_job) || name_and_job[1] == value)
 			whitelist += value
 		else
-			whitelist += name_and_job
+			whitelist += lowertext(name_and_job[1])
+			whitelist[name_and_job[1]] = name_and_job[2]
 
 /proc/check_whitelist(mob/M , var/rank)
 	if(!whitelist)
