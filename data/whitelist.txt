@@ -4,3 +4,4 @@ Winterume=ODST Rifleman
 EchoCassius=ODST Rifleman
 Aeleto=ODST Rifleman
 Liam Gallagher=ODST Rifleman
+DoctorOctopus=ONI Bridge Officer
