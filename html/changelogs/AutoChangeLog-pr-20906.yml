@@ -1,5 +1,0 @@
-author: "Cakey"
-delete-after: True
-changes: 
-  - imageadd: "Fleet service and dress uniforms have been re-sprited to take on a navy blue theme. Fleet uniforms have now been split into three categories, with lower ranks recieving a sailors uniform rather than the non-commissioned officer's coat."
-  - bugfix: "Fixes service and exploration uniforms sharing the same datums."

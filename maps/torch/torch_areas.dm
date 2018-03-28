@@ -88,6 +88,10 @@
 	name = "Fourth Deck Starboard Maintenance"
 	icon_state = "smaint"
 
+/area/maintenance/fourthdeck/port
+	name = "Fourth Deck Port Maintenance"
+	icon_state = "pmaint"
+
 /area/teleporter/fourthdeck
 	name = "\improper Fourth Deck Teleporter"
 	icon_state = "teleporter"
@@ -147,6 +151,9 @@
 	name = "\improper Third Deck Safe Room"
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
+/area/crew_quarters/laundry
+	name = "\improper Laundry Room"
+	icon_state = "Sleep"
 
 //Second Deck (Z-3)
 /area/maintenance/seconddeck
@@ -730,6 +737,10 @@
 
 /area/quartermaster/shuttlefuel
 	name = "\improper Shuttle Fuel Bay"
+	icon_state = "toxstorage"
+
+/area/quartermaster/quarantine
+	name = "\improper Hangar Quarantine"
 	icon_state = "toxstorage"
 
 /area/quartermaster/hangar

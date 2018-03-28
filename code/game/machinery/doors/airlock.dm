@@ -1214,6 +1214,11 @@ About the new airlock wires panel:
 		brace = A
 		brace.airlock = src
 		brace.forceMove(src)
+		if(length(req_one_access) == 0)
+			brace.electronics.conf_access = req_access
+		else
+			brace.electronics.conf_access = req_one_access
+			brace.electronics.one_access = 1
 		update_icon()
 	. = ..()
 
