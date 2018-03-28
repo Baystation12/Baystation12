@@ -111,6 +111,7 @@
 
 /obj/structure/closet/secure_closet/medical_contractor/WillContain()
 	return list(
+		/obj/item/clothing/head/soft/mime,
 		/obj/item/clothing/under/rank/orderly,
 		/obj/item/clothing/accessory/storage/webbing,
 		/obj/item/clothing/suit/storage/toggle/labcoat,

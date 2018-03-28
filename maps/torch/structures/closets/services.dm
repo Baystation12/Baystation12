@@ -10,6 +10,7 @@
 
 /obj/structure/closet/chefcloset_torch/WillContain()
 	return list(
+		/obj/item/clothing/head/soft/mime,
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/weapon/storage/box/mousetraps = 2,
 		/obj/item/clothing/under/rank/chef,
@@ -28,6 +29,7 @@
 
 /obj/structure/closet/secure_closet/hydroponics_torch/WillContain()
 	return list(
+		/obj/item/clothing/head/soft/green,
 		/obj/item/weapon/storage/plants,
 		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/weapon/material/minihoe,
@@ -47,6 +49,7 @@
 
 /obj/structure/closet/jcloset_torch/WillContain()
 	return list(
+		/obj/item/clothing/head/soft/purple,
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/weapon/cartridge/janitor,
 		/obj/item/clothing/gloves/thick,
@@ -66,6 +69,7 @@
 
 /obj/structure/closet/secure_closet/bar_torch/WillContain()
 	return list(
+		/obj/item/clothing/head/soft/black,
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/weapon/reagent_containers/food/drinks/shaker,
 		/obj/item/glass_jar,

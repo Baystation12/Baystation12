@@ -1,3 +1,8 @@
+//Visager's tracks 'Battle!' and 'Miniboss Fight' from the album 'Songs from an Unmade World 2' are available here
+//http://freemusicarchive.org/music/Visager/Songs_From_An_Unmade_World_2/ and are made available under the CC BY 4.0 Attribution license,
+//which is available for viewing here: https://creativecommons.org/licenses/by/4.0/legalcode
+
+
 //the king and his court
 /mob/living/simple_animal/hostile/retaliate/goat/king
 	name = "king of goats"
@@ -33,6 +38,13 @@
 	melee_damage_upper = 60
 	var/spellscast = 0
 	var/phase3 = 0
+	var/datum/sound_token/boss_theme
+	var/sound_id
+
+//alright let's get stupid
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Initialize()
+	. = ..()
+	boss_theme = sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Battle.ogg', volume = 10, range = 7, falloff = 4, prefer_mute = TRUE)
 
 /mob/living/simple_animal/hostile/retaliate/goat/guard
 	name = "honour guard"
@@ -41,13 +53,15 @@
 	icon_living = "goat_guard"
 	icon_dead = "goat_guard_dead"
 	health = 125
+	turns_per_move = 8
 	melee_damage_lower = 10
 	melee_damage_upper = 15
 
 /mob/living/simple_animal/hostile/retaliate/goat/guard/master
 	name = "master of the guard"
-	desc = "A very handsome and noble beast, and the most trusted of all the king's men."
+	desc = "A very handsome and noble beast - the most trusted of all the king's men."
 	health = 200
+	turns_per_move = 10
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 
@@ -58,11 +72,11 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Retaliate()
 	..()
-	if(spellscast < 3)
-		if(prob(5) && turns_per_move != 15) //speed buff
+	if(spellscast < 5)
+		if(prob(5) && turns_per_move != 25) //speed buff
 			spellscast++
 			visible_message("<span class='cult'>\The [src] shimmers and seems to phase in and out of reality itself!</span>")
-			turns_per_move = 20
+			turns_per_move = 25
 
 		else if(prob(5) && melee_damage_lower != 50) //damage buff
 			spellscast++
@@ -84,19 +98,21 @@
 		else if(prob(5)) //EMP blast
 			spellscast++
 			visible_message("<span class='cult'>\The [src] disrupts nearby electrical equipment!</span>")
-			empulse(get_turf(src), 3, 2, 0)
+			empulse(get_turf(src), 5, 2, 0)
 
 		else return
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Life() //begin phase 3, reset spell limit and heal
 	..()
-	if(health <= 150 && !phase3 && spellscast == 3)
+	if(health <= 150 && !phase3 && spellscast == 5)
 		phase3 = 1
 		spellscast = 0
 		health = 500
 		icon_state = "king_goat3"
 		icon_living = "king_goat3"
-		visible_message("<span class='cult'>\The [src]' wounds close with a flash and he shines even more radiantly than before!</span>")
+		visible_message("<span class='cult'>\The [src]' wounds close with a flash and he shines even brighter than before!</span>")
+		QDEL_NULL(boss_theme)
+		boss_theme = sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()
 	if(prob(85))
@@ -108,8 +124,13 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/OnDeath()
 	visible_message("<span class='cult'>\The [src] shrieks as the seal on his power breaks and his wool sheds off!</span>")
+	QDEL_NULL(boss_theme)
 	new /obj/item/weapon/towel/fleece(src.loc)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/death()
 	..()
 	OnDeath()
+
+/mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Destroy()
+	QDEL_NULL(boss_theme)
+	. = ..()

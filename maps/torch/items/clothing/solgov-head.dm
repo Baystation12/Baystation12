@@ -120,6 +120,11 @@
 		slot_r_hand_str = "helmet")
 	body_parts_covered = 0
 
+/obj/item/clothing/head/solgov/dress/fleet/garrison
+	name = "fleet garrison cap"
+	desc = "A white dress uniform cap. The classic sailor's choice."
+	icon_state = "whitegarrisoncap"
+
 /obj/item/clothing/head/solgov/dress/fleet
 	name = "fleet dress wheel cover"
 	desc = "A white dress uniform cover. This one has an SCG Fleet crest."
@@ -278,6 +283,16 @@
 	name = "fleet officer's beret"
 	desc = "An SCG Fleet beret with a golden crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_command"
+
+/obj/item/clothing/head/beret/solgov/fleet/dress
+	name = "fleet dress beret"
+	desc = "A white SCG Fleet beret. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_whiterim"
+
+/obj/item/clothing/head/beret/solgov/fleet/dress/command
+	name = "fleet command dress beret"
+	desc = "A white SCG Fleet beret with a golden crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_whiterim_com"
 
 //ushanka
 

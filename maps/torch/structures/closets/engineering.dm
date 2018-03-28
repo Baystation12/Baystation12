@@ -80,6 +80,7 @@
 
 /obj/structure/closet/secure_closet/engineering_contractor/WillContain()
 	return list(
+		/obj/item/clothing/head/soft/orange,
 		/obj/item/clothing/under/rank/engineer,
 		/obj/item/clothing/accessory/storage/webbing,
 		/obj/item/weapon/storage/belt/utility/full,
