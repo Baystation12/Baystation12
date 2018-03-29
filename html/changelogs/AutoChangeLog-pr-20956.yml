@@ -1,0 +1,8 @@
+author: "PurpleMartinJCK"
+delete-after: True
+changes: 
+  - bugfix: "Fix medical crate sprites, adding back to storage.dmi"
+  - tweak: "Add pouch spawns to small medical random spawn"
+  - tweak: "Add trauma kit to medical kit spawn"
+  - bugfix: "Fix pouch names in venders"
+  - rscadd: "Add new pouch supply crates"
