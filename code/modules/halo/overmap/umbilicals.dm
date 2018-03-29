@@ -24,6 +24,11 @@
 	if(initial(broke) == -1)
 		broke = FALSE
 
+/obj/docking_umbilical/proc/ship_setup()
+	our_ship = map_sectors["[z]"]
+	if(!isnull(our_ship))
+		our_ship.connectors += src
+
 /obj/docking_umbilical/LateInitialize()
 	. = ..()
 	if(!GLOB.using_map.use_overmap)
@@ -156,7 +161,7 @@
 
 /obj/docking_umbilical/attack_hand(var/mob/user)
 	if(!our_ship)
-		our_ship = map_sectors["[z]"]
+		ship_setup()
 	pick_entity_connect_disconnect(user)
 
 /obj/docking_umbilical/proc/umbi_rip()
