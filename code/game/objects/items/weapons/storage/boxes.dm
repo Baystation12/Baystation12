@@ -500,3 +500,8 @@
 	desc = "A bag full of juicy yummy detergent pods."
 	icon_state = "detergent"
 	startswith = list(/obj/item/weapon/reagent_containers/pill/detergent = 10)
+
+/obj/item/weapon/storage/box/visa
+	name = "box of work visas"
+	desc = "A box full of work visas."
+	startswith = list(/obj/item/weapon/paper/workvisa = 7)
