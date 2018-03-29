@@ -17,8 +17,7 @@ var/list/whitelist = list()
 		if(isnull(name_and_job) || name_and_job[1] == value)
 			whitelist += value
 		else
-			whitelist += lowertext(name_and_job[1])
-			whitelist[lowertext(name_and_job[1])] = name_and_job[2]
+			whitelist[name_and_job[1]] = name_and_job[2]
 
 /proc/check_whitelist(mob/M , var/rank)
 	if(!whitelist)
@@ -27,7 +26,7 @@ var/list/whitelist = list()
 		return ("[M.ckey]" in whitelist)
 	else
 		for(var/value in whitelist)
-			if(value == "[M.ckey]" && whitelist[value] == "[rank]")
+			if(lowertext(value) == "[M.ckey]" && whitelist[value] == "[rank]")
 				return 1
 	return 0
 
