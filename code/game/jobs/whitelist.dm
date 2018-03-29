@@ -18,7 +18,7 @@ var/list/whitelist = list()
 			whitelist += value
 		else
 			whitelist += lowertext(name_and_job[1])
-			whitelist[name_and_job[1]] = name_and_job[2]
+			whitelist[lowertext(name_and_job[1])] = name_and_job[2]
 
 /proc/check_whitelist(mob/M , var/rank)
 	if(!whitelist)
