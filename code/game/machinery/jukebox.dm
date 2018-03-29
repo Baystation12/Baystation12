@@ -29,6 +29,7 @@ GLOBAL_LIST_INIT(music_tracks, list(
 		new/datum/track("THUNDERDOME", 'sound/music/THUNDERDOME.ogg'),
 		new/datum/track("Torch: A Light in the Darkness", 'sound/music/Torch.ogg'),
 		new/datum/track("Treacherous Voyage", 'sound/music/treacherous_voyage.ogg'),
+		new/datum/track("Wake", 'sound/music/wake.ogg'),
 ))
 
 datum/track/proc/GetTrack()
