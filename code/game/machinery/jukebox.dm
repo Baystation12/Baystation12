@@ -8,6 +8,29 @@
 	src.title = title
 	src.track = track
 
+GLOBAL_LIST_INIT(music_tracks, list(
+		new/datum/track("Beyond", 'sound/ambience/ambispace.ogg'),
+		new/datum/track("Clouds of Fire", 'sound/music/clouds.s3m'),
+		new/datum/track("Stage Three", 'sound/music/title2.ogg'),
+		new/datum/track("Asteroids", 'sound/ambience/song_game.ogg'),
+		new/datum/track("Floating", 'sound/music/main.ogg'),
+		new/datum/track("Endless Space", 'sound/music/space.ogg'),
+		new/datum/track("Fleet Party Theme", 'sound/misc/TestLoop1.ogg'),
+		new/datum/track("Scratch", 'sound/music/title1.ogg'),
+		new/datum/track("Absconditus", 'sound/music/traitor.ogg'),
+		new/datum/track("lasers rip apart the bulkhead", 'sound/music/lasers_rip_apart_the_bulkhead_looped.ogg'),
+		new/datum/track("Maschine Klash", 'sound/music/1.ogg'),
+		new/datum/track("Comet Halley", 'sound/music/comet_haley.ogg'),
+		new/datum/track("Please Come Back Any Time", 'sound/music/elevatormusic.ogg'),
+		new/datum/track("Human", 'sound/music/human.ogg'),
+		new/datum/track("Memories of Lysendraa", 'sound/music/lysendraa.ogg'),
+		new/datum/track("Marhaba", 'sound/music/marhaba.ogg'),
+		new/datum/track("Space Oddity", 'sound/music/space_oddity.ogg'),
+		new/datum/track("THUNDERDOME", 'sound/music/THUNDERDOME.ogg'),
+		new/datum/track("Torch: A Light in the Darkness", 'sound/music/Torch.ogg'),
+		new/datum/track("Treacherous Voyage", 'sound/music/treacherous_voyage.ogg'),
+))
+
 datum/track/proc/GetTrack()
 	if(ispath(track, /music_track))
 		var/music_track/music_track = decls_repository.get_decl(track)
@@ -61,6 +84,7 @@ datum/track/proc/GetTrack()
 		new/datum/track("Torch: A Light in the Darkness", /music_track/torch),
 		new/datum/track("Treacherous Voyage", /music_track/treacherous_voyage),
 	)
+
 
 /obj/machinery/media/jukebox/old
 	name = "space jukebox"
@@ -129,7 +153,7 @@ datum/track/proc/GetTrack()
 
 /obj/machinery/media/jukebox/ui_data()
 	var/list/juke_tracks = new
-	for(var/datum/track/T in tracks)
+	for(var/datum/track/T in GLOB.music_tracks)
 		juke_tracks.Add(T.title)
 
 	var/list/data = list(
@@ -146,7 +170,7 @@ datum/track/proc/GetTrack()
 		return TRUE
 	switch(action)
 		if("change_track")
-			for(var/datum/track/T in tracks)
+			for(var/datum/track/T in GLOB.music_tracks)
 				if(T.title == params["title"])
 					current_track = T
 					StartPlaying()
