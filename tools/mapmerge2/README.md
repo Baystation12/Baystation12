@@ -2,7 +2,7 @@
 
 **Map Merge 2** is an improvement over previous map merging scripts, with
 better merge-conflict prevention, multi-Z support, and automatic handling of
-key overflow. For up-to-date tips and tricks, also visit the [Map Merger] wiki article.
+key overflow.
 
 ## What Map Merging Is
 
@@ -23,6 +23,20 @@ running `mapmerge.bat`.
 
 For up-to-date installation and detailed troubleshooting instructions, visit
 the [Map Merger] wiki article.
+
+## Usage
+
+Assuming you've already installed the Python dependencies. Follow the steps below,
+
+1. Run Prepare Maps.bat as this provides backups before making changes to a map. It also makes the mapmerger actually work.
+
+2. Edit your map.
+
+3. Run mapmerge.bat (unless you've setup the mapmerger2 hooks)
+
+4. Commit your changes and you're done!
+
+Note: Do not open the map in dreammaker before committing the results of mapmerger - this can cause dreammaker to save back into the default dmm format. If you're having issues with your map getting stuck in dmm mode, try committing and pushing the mapmerger changes before reopening in dreammaker.
 
 ## Code Structure
 
