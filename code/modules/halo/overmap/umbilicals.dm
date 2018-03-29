@@ -23,6 +23,7 @@
 	. = ..()
 	if(initial(broke) == -1)
 		broke = FALSE
+	GLOB.processing_objects += src
 
 /obj/docking_umbilical/proc/ship_setup()
 	our_ship = map_sectors["[z]"]
@@ -33,8 +34,11 @@
 	. = ..()
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
-	our_ship = map_sectors["[z]"]
-	our_ship.connectors += src
+
+/obj/docking_umbilical/process()
+	if(isnull(our_ship))
+		ship_setup()
+		GLOB.processing_objects -= src
 
 /obj/docking_umbilical/proc/visual_umbi_change(var/contract = 0,var/no_message = 0)
 	if(contract == 1)
