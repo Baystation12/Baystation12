@@ -251,7 +251,7 @@
 	if(QDELETED(wrapped))
 		wrapped.loc = null
 		wrapped = null
-	return
+		return
 
 	if(!resolved && wrapped && target)
 		wrapped.afterattack(target, user, 1, params)
