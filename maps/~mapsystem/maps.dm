@@ -184,6 +184,12 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/sites_by_spawn_weight = list()
 	for (var/site_name in SSmapping.away_sites_templates)
 		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
+
+		if(site.spawn_guranteed && site.load_new_z()) // no check for budget, but guranteed means guranteed
+			report_progress("Loaded guranteed away site [site]!")
+			away_site_budget -= site.cost
+			continue
+
 		sites_by_spawn_weight[site] = site.spawn_weight
 	while (away_site_budget > 0 && sites_by_spawn_weight.len)
 		var/datum/map_template/ruin/away_site/selected_site = pickweight(sites_by_spawn_weight)

@@ -25,6 +25,7 @@
 	suffixes = list("mining/mining-asteroid.dmm")
 	cost = 1
 	accessibility_weight = 10
+	spawn_guranteed = TRUE
 
 /datum/map_template/ruin/away_site/mining_signal
 	name = "Mining - Planetoid"
