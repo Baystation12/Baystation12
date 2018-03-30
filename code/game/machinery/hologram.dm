@@ -192,19 +192,19 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
 			var/rendered
 			if(speaking)
-				rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>"
+				rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb, M)]</span></i>"
 			else
 				rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [verb], <span class='message'>\"[text]\"</span></span></i>"
 			master.show_message(rendered, 2)
 	var/name_used = M.GetVoice()
 	if(targetpad) //If this is the pad you're making the call from
-		var/message = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>"
+		var/message = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb, M)]</span></i>"
 		targetpad.audible_message(message)
 		targetpad.last_message = message
 	if(sourcepad) //If this is a pad receiving a call
 		if(name_used==caller_id||text==last_message||findtext(text, "Holopad received")) //prevent echoes
 			return
-		sourcepad.audible_message("<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>")
+		sourcepad.audible_message("<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb, M)]</span></i>")
 
 /obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
 	if(M)

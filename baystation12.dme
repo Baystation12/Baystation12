@@ -1695,6 +1695,7 @@
 #include "code\modules\mob\living\carbon\human\species\species_random.dm"
 #include "code\modules\mob\living\carbon\human\species\species_shapeshift.dm"
 #include "code\modules\mob\living\carbon\human\species\mantid\mantid.dm"
+#include "code\modules\mob\living\carbon\human\species\mantid\mantid_grab.dm"
 #include "code\modules\mob\living\carbon\human\species\mantid\mantid_names.dm"
 #include "code\modules\mob\living\carbon\human\species\outsider\bogani.dm"
 #include "code\modules\mob\living\carbon\human\species\outsider\shadow.dm"

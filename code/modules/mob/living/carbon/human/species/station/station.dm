@@ -155,7 +155,7 @@
 	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
 	the secrets of their empire to their allies."
 	num_alternate_languages = 2
-	secondary_langs = list(LANGUAGE_SKRELLIAN)
+	secondary_langs = list(LANGUAGE_SKRELLIAN, LANGUAGE_MANTID_VOCAL)
 	name_language = null
 	health_hud_intensity = 1.75
 

@@ -19,6 +19,8 @@
 	hud_type =               /datum/hud_data/mantid
 	move_trail =             /obj/effect/decal/cleanable/blood/tracks/snake
 	has_floating_eyes =      TRUE
+	speech_sounds = list('sound/voice/mantid1.ogg', 'sound/voice/mantid2.ogg')
+
 
 	min_age =                 1
 	max_age =                20
@@ -26,6 +28,7 @@
 	rarity_value =            3
 	gluttonous =              2
 	siemens_coefficient =     0
+	body_temperature =        null
 
 	breath_type =             "methyl_bromide"
 	poison_type =             "phoron"
@@ -36,7 +39,8 @@
 
 	language =                LANGUAGE_MANTID_NONVOCAL
 	default_language =        LANGUAGE_MANTID_NONVOCAL
-	secondary_langs =         list(LANGUAGE_MANTID_BROADCAST, LANGUAGE_MANTID_VOCAL)
+	additional_langs =         list(LANGUAGE_MANTID_BROADCAST, LANGUAGE_MANTID_VOCAL, LANGUAGE_NABBER, LANGUAGE_SKRELLIAN)
+
 	num_alternate_languages = 1
 
 	appearance_flags =        0
@@ -85,7 +89,6 @@
 	spawns_with_stack =       0
 
 	siemens_coefficient =   0.2 // Crystalline body.
-	body_temperature =      294 // Lower body temp (21C)
 	brute_mod =             1.5 // Fragile. Can be shattered.
 	burn_mod =              0.5 // Crystalline, reflective.
 	oxy_mod =               0.8 // Don't need as much breathable gas as humans.
