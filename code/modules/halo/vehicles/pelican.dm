@@ -23,6 +23,8 @@
 
 	exposed_positions = list("driver" = 10,"passengers" = 20)//Passengers could technically be hit by bullets through the troop bay.
 
+/obj/vehicles/air/pelican/update_object_sprites()
+
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/pelican
 	integrity = 300
@@ -78,6 +80,8 @@
 
 	exposed_positions = list("driver" = 10,"passengers" = 20)//Passengers could technically be hit by bullets through the troop bay.
 
+/obj/vehicles/air/pelican/update_object_sprites()
+
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"
 
@@ -106,7 +110,6 @@
 	update_object_sprites()
 
 /obj/vehicles/air/pelican/innie/update_object_sprites()
-	. = ..()
 	overlays += image(icon,"innie_overlay")
 
 /obj/item/vehicle_component/health_manager/pelican/innie
