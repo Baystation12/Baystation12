@@ -656,11 +656,11 @@
 	icon_state = "engine_monitoring"
 
 /area/vacant/prototype/control
-	name = "\improper Prototype Fusion Reactor Control Room"
+	name = "\improper Fusion Reactor Control Room"
 	icon_state = "engine_monitoring"
 
 /area/vacant/prototype/engine
-	name = "\improper Prototype Fusion Reactor Chamber"
+	name = "\improper Fusion Reactor Chamber"
 	icon_state = "firingrange"
 
 
