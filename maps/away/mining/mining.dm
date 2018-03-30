@@ -171,18 +171,21 @@
 	gender = FEMALE
 	health = 750 //how sweet it is to be a god!
 	maxHealth = 750
+	mob_size = MOB_LARGE
 	speak_emote = list("professes","speaks unto you","elaborates","proclaims")
 	emote_hear = list("sings a song to herself", "preens herself")
 	melee_damage_lower = 15
 	melee_damage_upper = 30
+	attacktext = "pecked"
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
 	universal_understand = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	see_in_dark = 7
-	default_pixel_x = -16//for resetting after attack animations
+	default_pixel_x = -16 //for resetting after attack animations
 	default_pixel_y = -16
+	can_escape = 1
 
 /mob/living/simple_animal/parrot/space/Initialize()
 	. = ..()
