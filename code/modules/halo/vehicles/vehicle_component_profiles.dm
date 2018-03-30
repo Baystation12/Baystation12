@@ -8,8 +8,10 @@
 	var/list/components = list() //Non-vital components such as armor plating, ect.
 	var/list/vital_components = newlist(/obj/item/vehicle_component/health_manager) //Vital components, engine, thrusters etc.
 
-	var/cargo_capacity = 0 //The capacity of the cargo hold. Items increase the space taken by their w_class.
-	var/cargo_allow_massive = 0 //
+	var/cargo_capacity = 0 //The capacity of the cargo hold. Items increase the space taken by  base_storage_cost(w_class) formula used in inventory_sizes.dm.
+	var/vehicle_capacity = 0 //The capacity of the vehicle hold. Vehicles increase space taken by base_storage_cost(vehicle_size + 5)
+	var/max_vehicle_size = 0//Determines the maximum vehicle size. Used alongside vehicle ferrying to determine biggest vehicle carriable and quantity.
+	var/cargo_allow_massive = 0
 	var/list/current_cargo = list()
 
 /datum/component_profile/New(var/obj/vehicles/creator)
@@ -22,20 +24,37 @@
 	for(var/obj/comp in vital_components)
 		contained_vehicle.contents += comp
 
-/datum/component_profile/proc/can_put_cargo(var/item_w_class)
+/datum/component_profile/proc/can_attach_vehicle(var/vehicle_size)
+	return can_put_cargo(vehicle_size + 5,1)//+5 to start at inventory size huge.(value of 16)
+
+/datum/component_profile/proc/can_put_cargo(var/item_w_class,var/for_vehicle = 0)
+	var/used_capacity = cargo_capacity
+	if(for_vehicle)
+		used_capacity = vehicle_capacity
+		if(item_w_class > max_vehicle_size)
+			return 0
 	if(item_w_class == ITEM_SIZE_NO_CONTAINER)
 		return 0
-	if(!cargo_allow_massive && (item_w_class == ITEM_SIZE_HUGE || ITEM_SIZE_GARGANTUAN))
-		return 0
-	var/new_used = get_cargo_used() + item_w_class
-	if(new_used > cargo_capacity)
-		return 0
+	if(!cargo_allow_massive)
+		if((item_w_class == ITEM_SIZE_HUGE || item_w_class == ITEM_SIZE_GARGANTUAN))
+			return 0
+	var/new_used = get_cargo_used(for_vehicle) + base_storage_cost(item_w_class)
+	if(for_vehicle)
+		if(new_used > vehicle_capacity)
+			return 0
+	else
+		if(new_used > used_capacity)
+			return 0
 	return 1
 
-/datum/component_profile/proc/get_cargo_used()
+/datum/component_profile/proc/get_cargo_used(var/get_vehicle = 0)
 	var/total_amount = 0
-	for(var/obj/item in current_cargo)
-		total_amount +=  item.w_class
+	if(get_vehicle)
+		for(var/obj/vehicles/vehicle in current_cargo)
+			total_amount += base_storage_cost(vehicle.vehicle_size + 5)
+	else
+		for(var/obj/item in current_cargo)
+			total_amount +=  base_storage_cost(item.w_class)
 	return total_amount
 
 /datum/component_profile/proc/get_coverage_sum()
@@ -44,17 +63,19 @@
 		coverage_sum += component.coverage * (component.integrity/initial(component.integrity))
 	return coverage_sum
 
-/datum/component_profile/proc/cargo_transfer(var/obj/item/object,var/remove = 0)
-	if(!istype(object))
-		return 0
+/datum/component_profile/proc/cargo_transfer(var/obj/object,var/remove = 0)
 	if(remove && !(object in current_cargo))
 		return 0
 	else if(remove)
 		contained_vehicle.contents -= object
-		object.loc = pick(contained_vehicle.locs)
 		current_cargo -= object
+		object.loc = pick(contained_vehicle.locs)
 		return object
 	else
+		var/obj/vehicles/vehicle = object
+		if(istype(vehicle))
+			vehicle.kick_occupants()
+		object.loc = null
 		contained_vehicle.contents += object
 		current_cargo += object
 		return 1
@@ -120,7 +141,6 @@
 		integrity = new_integ
 
 /obj/item/vehicle_component/health_manager //Essentially a way for vehicles to just use basic "health" instead of the component system.
-
 	integrity = 200
 	coverage = 10000
 

@@ -1509,6 +1509,8 @@
 #include "code\modules\halo\turfs\covenant\materials.dm"
 #include "code\modules\halo\turfs\covenant\walls.dm"
 #include "code\modules\halo\vehicles\fuel.dm"
+#include "code\modules\halo\vehicles\ghost.dm"
+#include "code\modules\halo\vehicles\mongoose.dm"
 #include "code\modules\halo\vehicles\vehicle_component_profiles.dm"
 #include "code\modules\halo\vehicles\vehiclebase.dm"
 #include "code\modules\halo\vehicles\vehiclebase_weaponry.dm"
