@@ -128,7 +128,7 @@
 
 /datum/job/police
 	title = "GCPD Officer"
-	total_positions = 8
+	total_positions = 6
 	selection_color = "#000000"
 	supervisors = " the Colony Mayor"
 	create_record = 0
