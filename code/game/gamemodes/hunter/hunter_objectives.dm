@@ -34,7 +34,7 @@
 	var/human_count = 0
 	var/dead_human_count = 0
 	for(var/mob/living/carbon/human/H in (GLOB.dead_mob_list_ + GLOB.living_mob_list_))
-		if(H.species.get_bodytype() == SPECIES_MANTID_ALATE || H.species.get_bodytype() == SPECIES_MANTID_GYNE)
+		if(H.species.name in (GLOB.hunters.queen_species|GLOB.hunters.soldier_species))
 			continue
 		human_count++
 		if(H.stat == DEAD)
@@ -46,21 +46,21 @@
 	return (dead_human_count >= round(human_count/2))
 
 /datum/objective/hunter_preserve_gyne
-	explanation_text = "Preserve the lives of any gynes present."
+	explanation_text = "Preserve the lives of any queens present."
 
 /datum/objective/hunter_preserve_gyne/check_completion()
-	var/gyne_count = 0
+	var/queen_count = 0
 	for(var/mob/living/carbon/human/H in (GLOB.dead_mob_list_ + GLOB.living_mob_list_))
-		if(H.species.get_bodytype(H) == SPECIES_MANTID_GYNE && H.stat != DEAD)
-			gyne_count++
-	return (gyne_count >= hunters.gyne_count)
+		if((H.species.name in GLOB.hunters.queen_species) && H.stat != DEAD)
+			queen_count++
+	return (queen_count >= GLOB.hunters.queen_count)
 
 /datum/objective/hunter_preserve_alates
-	explanation_text = "Preserve the lives of at least half of the alates present."
+	explanation_text = "Preserve the lives of at least half of the soldiers present."
 
 /datum/objective/hunter_preserve_alates/check_completion()
-	var/alate_count = 0
+	var/soldier_count = 0
 	for(var/mob/living/carbon/human/H in (GLOB.dead_mob_list_ + GLOB.living_mob_list_))
-		if(H.species.get_bodytype(H) == SPECIES_MANTID_ALATE && H.stat != DEAD)
-			alate_count++
-	return (alate_count >= round(hunters.alate_count/2))
+		if((H.species.name in GLOB.hunters.soldier_species) && H.stat != DEAD)
+			soldier_count++
+	return (soldier_count >= round(GLOB.hunters.soldier_count/2))

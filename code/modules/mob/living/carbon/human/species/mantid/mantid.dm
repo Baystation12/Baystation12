@@ -137,3 +137,14 @@
 		"storage2" =     list("loc" = ui_storage2,  "name" = "Right Pocket", "slot" = slot_r_store,   "state" = "pocket"),
 		"belt" =         list("loc" = ui_belt,      "name" = "Belt",         "slot" = slot_belt,      "state" = "belt")
 		)
+
+/datum/species/nabber/monarch
+	name = SPECIES_NABBER_MONARCH
+	language = LANGUAGE_NABBER
+	default_language = LANGUAGE_MANTID_VOCAL // They will only spawn alongside mantids in the antag mode, no point defaulting to nabber.
+	assisted_langs = list(LANGUAGE_MANTID_NONVOCAL)
+	additional_langs = list(LANGUAGE_MANTID_BROADCAST, LANGUAGE_MANTID_VOCAL)
+	hud_type = /datum/hud_data/mantid //todo
+
+/datum/species/nabber/monarch/get_bodytype(var/mob/living/carbon/human/H)
+	return SPECIES_NABBER
