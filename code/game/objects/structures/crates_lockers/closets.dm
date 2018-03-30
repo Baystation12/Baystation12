@@ -343,7 +343,7 @@
 	step_towards(O, src.loc)
 	if(user != O)
 		user.show_viewers("<span class='danger'>[user] stuffs [O] into [src]!</span>")
-		if(ismob(O)
+		if(ismob(O))
 			var/mob/M = O
 			M.Weaken(1) //Keeps them from instantly walking out.
 			verb_toggleopen()
