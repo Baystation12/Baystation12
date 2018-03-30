@@ -343,6 +343,10 @@
 	step_towards(O, src.loc)
 	if(user != O)
 		user.show_viewers("<span class='danger'>[user] stuffs [O] into [src]!</span>")
+		if(ismob(O))
+			var/mob/M = O
+			M.Weaken(1) //Keeps them from instantly walking out.
+			verb_toggleopen()
 	src.add_fingerprint(user)
 	return
 
@@ -384,8 +388,6 @@
 	if(ishuman(usr))
 		src.add_fingerprint(usr)
 		src.toggle(usr)
-	else
-		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
 
 /obj/structure/closet/update_icon()//Putting the welded stuff in update_icon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
 	overlays.Cut()
@@ -409,7 +411,7 @@
 	attack_animation(user)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	dump_contents()
-	spawn(1) qdel(src)
+	QDEL_IN(src, 1)
 	return 1
 
 /obj/structure/closet/proc/req_breakout()
@@ -511,8 +513,13 @@
 	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
 
 /obj/structure/closet/AltClick(var/mob/user)
-	if(!src.opened)
+	if(!src.opened && locked)
 		togglelock(user)
+		if(!locked && !opened)
+			if(issilicon(user))
+				src.toggle(usr)
+			else
+				verb_toggleopen()
 	else
 		return ..()
 
