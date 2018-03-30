@@ -1,9 +1,10 @@
 /obj/item/device/boombox
-	name = "audio player"
-	desc = "A device used to emit rhythmical sounds, colloquialy refered to as 'boombox'."
+	name = "boombox"
+	desc = "A device used to emit rhythmical sounds, colloquialy refered to as a 'boombox'."
 	icon = 'icons/obj/boombox.dmi'
 	icon_state = "off"
 	item_state = "boombox"
+	force = 5
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 1)
 	var/playing = 0
