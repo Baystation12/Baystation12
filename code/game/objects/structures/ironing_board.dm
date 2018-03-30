@@ -95,7 +95,7 @@
 	else if(istype(I,/obj/item/weapon/ironingiron))
 		var/obj/item/weapon/ironingiron/R = I
 
-		if(!R.enabled && user.drop_item())
+		if(!holding && !R.enabled && user.drop_item())
 			holding = R
 			I.forceMove(src)
 			GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
