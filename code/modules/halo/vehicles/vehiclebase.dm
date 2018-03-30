@@ -8,6 +8,9 @@
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
+	var/active = 1
+	var/block_enter_exit //Set this to block entering/exiting.
+
 	//Advanced Damage Handling
 	var/datum/component_profile/comp_prof = /datum/component_profile
 
@@ -53,10 +56,16 @@
 	for(var/mob/m in occupants)
 		exit_vehicle(m)
 
+/obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
+
 /obj/vehicles/process()
 	if(world.time % 3)
 		comp_prof.give_gunner_weapons(src)
 		update_object_sprites()
+		if(active)
+			var/list/drivers = get_occupants_in_position("driver")
+			if(!drivers.len || isnull(drivers))
+				inactive_pilot_effects()
 
 /obj/vehicles/proc/update_object_sprites() //This is modified on a vehicle-by-vehicle basis to render mobsprites etc.
 	underlays.Cut()
@@ -95,6 +104,8 @@
 	return
 
 /obj/vehicles/proc/check_position_blocked(var/position)
+	if(block_enter_exit)
+		return 1
 	var/list/occupants_in_pos = get_occupants_in_position(position)
 	if(position == "passenger" && occupants_in_pos.len + 1 > occupants[1])
 		return 1
@@ -213,6 +224,9 @@
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)
+	if(!active)
+		to_chat(user,"<span class = 'notice'>[src] needs to be active to move!</span>")
+		return
 	var/turf/new_loc = get_step(src.loc,direction)
 	var/list/driver_list = get_occupants_in_position("driver")
 	var/is_driver = FALSE
