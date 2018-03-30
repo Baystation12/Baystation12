@@ -214,8 +214,6 @@
 		/obj/item/clothing/under/det/black,
 		/obj/item/clothing/suit/storage/det_trench,
 		/obj/item/clothing/suit/storage/det_trench/grey,
-		/obj/item/clothing/suit/storage/forensics/blue,
-		/obj/item/clothing/suit/storage/forensics/red,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/head/det,
 		/obj/item/clothing/head/det/grey,
@@ -223,13 +221,13 @@
 		/obj/item/weapon/storage/box/evidence,
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/clothing/suit/armor/vest/detective,
-		/obj/item/ammo_magazine/c45m/flash,
+		/obj/item/ammo_magazine/m127_saphp,
 		/obj/item/taperoll/police,
-		/obj/item/weapon/gun/projectile/colt/detective,
+		/obj/item/weapon/gun/projectile/m6c_magnum_s,
 		/obj/item/clothing/accessory/holster/armpit,
 		/obj/item/weapon/reagent_containers/food/drinks/flask/detflask,
-		/obj/item/weapon/storage/briefcase/crimekit,
-		/obj/item/device/holowarrant
+		/obj/item/device/holowarrant,
+		/obj/item/weapon/storage/backpack/satchel
 	)
 
 /obj/structure/closet/secure_closet/injection
@@ -290,4 +288,29 @@
 		/obj/item/device/camera_film = 2,
 		/obj/item/device/taperecorder = 2,
 		/obj/item/weapon/storage/secure/briefcase = 2,
+	)
+
+/obj/structure/closet/secure_closet/ft
+	name = "forensic scientist's cabinet"
+	req_access = list()
+	icon_state = "cabinetdetective_locked"
+	icon_closed = "cabinetdetective"
+	icon_locked = "cabinetdetective_locked"
+	icon_opened = "cabinetdetective_open"
+	icon_broken = "cabinetdetective_broken"
+	icon_off = "cabinetdetective_broken"
+
+/obj/structure/closet/secure_closet/ft/WillContain()
+	return list(
+		/obj/item/clothing/head/surgery/black,
+		/obj/item/clothing/under/det/black,
+		/obj/item/clothing/suit/storage/forensics/blue,
+		/obj/item/clothing/suit/storage/forensics/red,
+		/obj/item/clothing/gloves/thick,
+		/obj/item/clothing/shoes/laceup,
+		/obj/item/clothing/shoes/white,
+		/obj/item/weapon/storage/box/evidence,
+		/obj/item/device/radio/headset/headset_sec,
+		/obj/item/taperoll/police,
+		/obj/item/weapon/storage/briefcase/crimekit
 	)

@@ -473,3 +473,30 @@ var/bomb_set
 	R.stamped += /obj/item/weapon/stamp
 	R.overlays += stampoverlay
 	R.stamps += "<HR><i>This paper has been stamped as 'Top Secret'.</i>"
+
+/obj/item/weapon/folder/nt/rd
+
+/obj/item/weapon/folder/envelope/blanks
+	desc = "A thick envelope. The Nanotrasen logo is stamped in the corner, along with 'CONFIDENTIAL'."
+
+/obj/item/weapon/folder/envelope/blanks/Initialize()
+	. = ..()
+	new/obj/item/weapon/paper/blanks(src)
+
+/obj/item/weapon/paper/blanks
+	name = "Project Theta"
+	info = {"
+	<tt><center><b><font color='red'>CONFIDENTIAL: UPPER MANAGEMENT ONLY</font></b>
+	<h3>NANOTRASEN RESEARCH DIVISION</h3>
+	<img src = ntlogo.png>
+	</center>
+	<b>FROM:</b> J.P <br>
+	<b>TO:</b> Research Director of Geminus City<br>
+	<b>SUBJECT:</b>Project Theta<br>
+	<hr>
+	We have determined to institute Project Theta and attempt to replicate the SPARTAN program.<br>
+	Seeing as how your colony is relatively remote and little to nothing happens there we have decided it best you spearhead this project at this current time. This may change at a later date however.<br>
+	Due to the nature of Project Theta, we have "borrowed" a few residents from other colonies, given them codenames, and placed them in stasis bags to use as test subjects for the augmentation process, this is as you probably guessed, highly illegal. Therefore the confidentialy of this Project is paramount to your continued employment, and life.<br>
+	We have placed them in the building behind the main science wing, in a room labeled "STORAGE" there is a bookcase, this bookcase is a holographic projection walk through it and enter Project Theta's Main Laboratory. This is where you will begin your testing procedures. As previously mentioned this location should be kept confidential and may not be revealed to anyone but you and the scientists you require to help you with this project.<br>
+	We are expecting great results from this project and it will bolster our company assets, when you are done reading this burn the paper. You have full authority to destroy the Project Theta Laboratory should it be discovered Do not disappoint us.<br>
+	<i>J.P</i></tt>"}

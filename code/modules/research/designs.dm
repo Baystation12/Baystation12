@@ -412,7 +412,7 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/beaker/bluespace
 	name = TECH_BLUESPACE
-	desc = "A bluespace beaker, powered by experimental bluespace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
+	desc = "A slipspace beaker, powered by experimental slipspace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
 	id = "bluespacebeaker"
 	req_tech = list(TECH_BLUESPACE = 2, TECH_MATERIAL = 6)
 	materials = list(DEFAULT_WALL_MATERIAL = 3000, "phoron" = 3000, "diamond" = 500)
@@ -508,35 +508,6 @@ other types of metals and chemistry for reagents).
 	materials = list(DEFAULT_WALL_MATERIAL = 4000)
 	build_path = /obj/item/weapon/gun/energy/stunrevolver
 	sort_string = "TAAAA"
-
-/datum/design/item/weapon/nuclear_gun
-	id = "nuclear_gun"
-	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
-	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "uranium" = 500)
-	build_path = /obj/item/weapon/gun/energy/gun/nuclear
-	sort_string = "TAAAB"
-
-/datum/design/item/weapon/lasercannon
-	desc = "The lasing medium of this prototype is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core."
-	id = "lasercannon"
-	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
-	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 1000, "diamond" = 2000)
-	build_path = /obj/item/weapon/gun/energy/lasercannon
-	sort_string = "TAAAC"
-
-/datum/design/item/weapon/phoronpistol
-	id = "ppistol"
-	req_tech = list(TECH_COMBAT = 5, TECH_PHORON = 4)
-	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "phoron" = 3000)
-	build_path = /obj/item/weapon/gun/energy/toxgun
-	sort_string = "TAAAD"
-
-/datum/design/item/weapon/decloner
-	id = "decloner"
-	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 7, TECH_BIO = 5, TECH_POWER = 6)
-	materials = list("gold" = 5000,"uranium" = 10000, "mutagen" = 40)
-	build_path = /obj/item/weapon/gun/energy/decloner
-	sort_string = "TAAAE"
 
 /datum/design/item/weapon/smg
 	id = "smg"
@@ -744,7 +715,7 @@ other types of metals and chemistry for reagents).
 	sort_string = "VACBB"
 
 /datum/design/item/beacon
-	name = "Bluespace tracking beacon design"
+	name = "Slipspace tracking beacon design"
 	id = "beacon"
 	req_tech = list(TECH_BLUESPACE = 1)
 	materials = list (DEFAULT_WALL_MATERIAL = 20, "glass" = 10)
@@ -771,7 +742,7 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/bag_holding
 	name = "'Bag of Holding', an infinite capacity bag prototype"
-	desc = "Using localized pockets of bluespace this bag prototype offers incredible storage capacity with the contents weighting nothing. It's a shame the bag itself is pretty heavy."
+	desc = "Using a localized pocket of slipspace this bag prototype offers incredible storage capacity with the contents weighting nothing. It's a shame the bag itself is pretty heavy."
 	id = "bag_holding"
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
 	materials = list("gold" = 3000, "diamond" = 1500, "uranium" = 250)
@@ -1191,20 +1162,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/message_monitor
 	sort_string = "HAACC"
 
-/datum/design/circuit/aiupload
-	name = "AI upload console"
-	id = "aiupload"
-	req_tech = list(TECH_DATA = 4)
-	build_path = /obj/item/weapon/circuitboard/aiupload
-	sort_string = "HAABA"
-
-/datum/design/circuit/borgupload
-	name = "cyborg upload console"
-	id = "borgupload"
-	req_tech = list(TECH_DATA = 4)
-	build_path = /obj/item/weapon/circuitboard/borgupload
-	sort_string = "HAABB"
-
 /datum/design/circuit/destructive_analyzer
 	name = "destructive analyzer"
 	id = "destructive_analyzer"
@@ -1550,13 +1507,6 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/replicator
 	sort_string = "WAAAR"
 
-/datum/design/circuit/aicore
-	name = "AI core"
-	id = "aicore"
-	req_tech = list(TECH_DATA = 4, TECH_BIO = 3)
-	build_path = /obj/item/weapon/circuitboard/aicore
-	sort_string = "XAAAA"
-
 /datum/design/circuit/integrated
 	name = "integrated circuit"
 	id = "integrated"
@@ -1573,104 +1523,6 @@ CIRCUITS BELOW
 
 /datum/design/aimodule/AssembleDesignDesc()
 	desc = "Allows for the construction of \a '[name]' AI module."
-
-/datum/design/aimodule/safeguard
-	name = "Safeguard"
-	id = "safeguard"
-	req_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
-	build_path = /obj/item/weapon/aiModule/safeguard
-	sort_string = "XABAA"
-
-/datum/design/aimodule/onehuman
-	name = "OneCrewMember"
-	id = "onehuman"
-	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 6)
-	build_path = /obj/item/weapon/aiModule/oneHuman
-	sort_string = "XABAB"
-
-/datum/design/aimodule/protectstation
-	name = "ProtectInstallation"
-	id = "protectstation"
-	req_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6)
-	build_path = /obj/item/weapon/aiModule/protectStation
-	sort_string = "XABAC"
-
-/datum/design/aimodule/notele
-	name = "TeleporterOffline"
-	id = "notele"
-	req_tech = list(TECH_DATA = 3)
-	build_path = /obj/item/weapon/aiModule/teleporterOffline
-	sort_string = "XABAD"
-
-/datum/design/aimodule/quarantine
-	name = "Quarantine"
-	id = "quarantine"
-	req_tech = list(TECH_DATA = 3, TECH_BIO = 2, TECH_MATERIAL = 4)
-	build_path = /obj/item/weapon/aiModule/quarantine
-	sort_string = "XABAE"
-
-/datum/design/aimodule/oxygen
-	name = "OxygenIsToxicToHumans"
-	id = "oxygen"
-	req_tech = list(TECH_DATA = 3, TECH_BIO = 2, TECH_MATERIAL = 4)
-	build_path = /obj/item/weapon/aiModule/oxygen
-	sort_string = "XABAF"
-
-/datum/design/aimodule/freeform
-	name = "Freeform"
-	id = "freeform"
-	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
-	build_path = /obj/item/weapon/aiModule/freeform
-	sort_string = "XABAG"
-
-/datum/design/aimodule/reset
-	name = "Reset"
-	id = "reset"
-	req_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6)
-	build_path = /obj/item/weapon/aiModule/reset
-	sort_string = "XAAAA"
-
-/datum/design/aimodule/purge
-	name = "Purge"
-	id = "purge"
-	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 6)
-	build_path = /obj/item/weapon/aiModule/purge
-	sort_string = "XAAAB"
-
-// Core modules
-/datum/design/aimodule/core
-	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 6)
-
-/datum/design/aimodule/core/AssembleDesignName()
-	name = "AI core module design ([name])"
-
-/datum/design/aimodule/core/AssembleDesignDesc()
-	desc = "Allows for the construction of \a '[name]' AI core module."
-
-/datum/design/aimodule/core/freeformcore
-	name = "Freeform"
-	id = "freeformcore"
-	build_path = /obj/item/weapon/aiModule/freeformcore
-	sort_string = "XACAA"
-
-/datum/design/aimodule/core/asimov
-	name = "Asimov"
-	id = "asimov"
-	build_path = /obj/item/weapon/aiModule/asimov
-	sort_string = "XACAB"
-
-/datum/design/aimodule/core/paladin
-	name = "P.A.L.A.D.I.N."
-	id = "paladin"
-	build_path = /obj/item/weapon/aiModule/paladin
-	sort_string = "XACAC"
-
-/datum/design/aimodule/core/tyrant
-	name = "T.Y.R.A.N.T."
-	id = "tyrant"
-	req_tech = list(TECH_DATA = 4, TECH_ILLEGAL = 2, TECH_MATERIAL = 6)
-	build_path = /obj/item/weapon/aiModule/tyrant
-	sort_string = "XACAD"
 
 /datum/design/item/pda
 	name = "PDA design"
@@ -1930,15 +1782,6 @@ CIRCUITS BELOW
 	materials = list(DEFAULT_WALL_MATERIAL = 4000, "plastic" = 2500, "glass" = 2000, "gold" = 1000)
 	build_path = /obj/item/rig_module/mounted/taser
 	sort_string = "VCAAN"
-
-/datum/design/item/rig_egun
-	name = "RIG module (Energy Gun)"
-	desc = "An energy gun, mountable on a RIG."
-	id = "rig_egun"
-	req_tech = list(TECH_POWER = 6, TECH_COMBAT = 6, TECH_ENGINEERING = 6)
-	materials = list(DEFAULT_WALL_MATERIAL = 6000, "glass" = 3000, "plastic" = 2500, "gold" = 2000, "silver" = 1000)
-	build_path = /obj/item/rig_module/mounted/egun
-	sort_string = "VCAAO"
 
 /datum/design/item/rig_enet
 	name = "RIG module (Energy Net)"

@@ -128,7 +128,7 @@
 
 /datum/job/police
 	title = "GCPD Officer"
-	total_positions = 8
+	total_positions = 6
 	selection_color = "#000000"
 	supervisors = " the Colony Mayor"
 	create_record = 0
@@ -141,7 +141,7 @@
 	access = list(access_security, access_brig, access_maint_tunnels,
 						access_external_airlocks, access_emergency_storage,
 			            access_eva, access_sec_doors)
-	alt_titles = list("GCPD SWAT Officer","GCPD Cadet","GCPD Detective")
+	alt_titles = list("GCPD SWAT Officer","GCPD Cadet","GCPD Detective","GCPD Forensic Scientist")
 
 /datum/job/cop
 	title = "Chief of Police"
