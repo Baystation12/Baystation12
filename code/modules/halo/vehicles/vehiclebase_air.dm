@@ -106,7 +106,7 @@
 		if(prob(33))
 			visible_message("<span class = 'warning'>[h.name] is violently thrown from [src]</span>")
 			exit_vehicle(h)
-			h.loc = pick(view(7,src) - view(3,src)) //Let's not throw these people into the epicenter of the ensuing explosion.
+			h.forceMove(pick(view(5,src) - view(2,src))) //Let's not throw these people into the epicenter of the ensuing explosion.
 			if(prob(5))
 				//Make it hurt, badly.
 				h.visible_message("<span class = 'danger'>[h.name] skids along [loc].</span>")
