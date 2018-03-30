@@ -1,5 +1,5 @@
 /datum/map/innie_base
-	base_turf_by_z = list("1" = /turf/simulated/floor/plating)
+	base_turf_by_z = list("1" = /turf/simulated/floor/plating,"2" = /turf/simulated/floor/plating,"3" = /turf/simulated/floor/plating,"4" = /turf/simulated/floor/plating)
 
 
 /datum/map/innie_base
