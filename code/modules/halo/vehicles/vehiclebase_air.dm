@@ -30,7 +30,7 @@
 	var/takeoff_overlay = image(icon,takeoff_overlay_icon_state)
 	overlays += takeoff_overlay
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
-	block_entry_exit = 1
+	block_enter_exit = 1
 
 /obj/vehicles/air/proc/land_vehicle(var/message_n_sound_override = 0)
 	active = 0
@@ -40,7 +40,7 @@
 		if(takeoff_sound)
 			playsound(src,takeoff_sound,100,0)
 	pass_flags = 0
-	block_entry_exit = 0
+	block_enter_exit = 0
 	overlays.Cut()
 
 /obj/vehicles/air/verb/takeoff_land()
@@ -49,7 +49,7 @@
 	set category = "Vehicle"
 	set src in range(1)
 
-	if(usr != driver)
+	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
 	if(active)
@@ -91,7 +91,7 @@
 	set category = "Vehicle"
 	set src in range(1)
 
-	if(usr != driver)
+	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
 	if(!active)
@@ -102,11 +102,10 @@
 /obj/vehicles/air/inactive_pilot_effects()
 	//Crashing this vehicle with potential casualties.
 	visible_message("<span class = 'danger'>[name] spirals towards the ground, driverless!</span>")
-	for(var/mob/living/carbon/human/h in contents)
+	for(var/mob/living/carbon/human/h in occupants)
 		if(prob(33))
 			visible_message("<span class = 'warning'>[h.name] is violently thrown from [src]</span>")
 			exit_vehicle(h)
-			controller.on_exit_vehicle()
 			h.loc = pick(view(7,src) - view(3,src)) //Let's not throw these people into the epicenter of the ensuing explosion.
 			if(prob(5))
 				//Make it hurt, badly.
