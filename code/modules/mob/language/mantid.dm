@@ -10,6 +10,30 @@
 	key = "|"
 	flags = RESTRICTED
 	shorthand = "KV"
+	var/list/correct_mouthbits = list(SPECIES_MANTID_ALATE, SPECIES_MANTID_GYNE, SPECIES_NABBER)
+
+/datum/language/mantid/proc/muddle_message(var/mob/speaker, var/message)
+	var/mob/living/S = speaker
+	if(!istype(S) || !S.isSynthetic())
+		var/mob/living/carbon/human/H = speaker
+		if(!istype(H) || !(H.species.name in correct_mouthbits))
+			message = replacetext(message, "!", ".")
+			message = replacetext(message, "?", ".")
+			message = replacetext(message, ",", "")
+			message = replacetext(message, ";", "")
+			message = replacetext(message, ":", "")
+			message = replacetext(message, ".", "...")
+			message = replacetext(message, ".", "...")
+	return message
+
+/datum/language/mantid/format_message(message, verb, var/mob/speaker)
+	. = ..(muddle_message(message), verb, speaker)
+
+/datum/language/mantid/format_message_plain(message, verb, var/mob/speaker)
+	. = ..(muddle_message(message), verb, speaker)
+
+/datum/language/mantid/format_message_radio(message, verb, var/mob/speaker)
+	. = ..(muddle_message(message), verb, speaker)
 
 /datum/language/mantid_nonvocal
 	key = "]"
@@ -50,5 +74,5 @@
 	speech_verb = "flashes"
 	ask_verb = "gleams"
 	exclaim_verb = "flares"
-	flags = RESTRICTED | NO_STUTTER | HIVEMIND
+	flags = RESTRICTED | NO_STUTTER | NONVERBAL | HIVEMIND
 	shorthand = "KB"

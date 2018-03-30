@@ -70,7 +70,7 @@
 		if(language)
 			var/nverb = null
 			if(!say_understands(speaker,language) || language.name == LANGUAGE_GALCOM) //Check to see if we can understand what the speaker is saying. If so, add the name of the language after the verb. Don't do this for Galactic Common.
-				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
+				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb, speaker)]</span>")
 			else //Check if the client WANTS to see language names.
 				switch(src.get_preference_value(/datum/client_preference/language_display))
 					if(GLOB.PREF_FULL) // Full language name
@@ -79,7 +79,7 @@
 						nverb = "[verb] ([language.shorthand])"
 					if(GLOB.PREF_OFF)//Regular output
 						nverb = verb
-				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, nverb)]</span>")
+				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, nverb, speaker)]</span>")
 
 		else
 			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
@@ -198,7 +198,7 @@
 	var/formatted
 	if(language)
 		if(!say_understands(speaker,language) || language.name == LANGUAGE_GALCOM) //Check if we understand the message. If so, add the language name after the verb. Don't do this for Galactic Common.
-			formatted = language.format_message_radio(message, verb)
+			formatted = language.format_message_radio(message, verb, speaker)
 		else
 			var/nverb = null
 			switch(src.get_preference_value(/datum/client_preference/language_display))
@@ -208,7 +208,7 @@
 					nverb = "[verb] ([language.shorthand])"
 				if(GLOB.PREF_OFF)//Regular output
 					nverb = verb
-			formatted = language.format_message_radio(message, nverb)
+			formatted = language.format_message_radio(message, nverb, speaker)
 	else
 		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
 	if(sdisabilities & DEAF || ear_deaf)

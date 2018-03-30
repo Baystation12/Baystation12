@@ -54,8 +54,6 @@ var/datum/antagonist/hunter/hunters
 				H.real_name = H.species.get_random_name()
 				H.name = H.real_name
 			alate_count++
-		H.add_language(LANGUAGE_MANTID_VOCAL)
-		H.add_language(LANGUAGE_MANTID_BROADCAST)
 
 /datum/antagonist/hunter/equip(var/mob/living/carbon/human/player)
 	. = ..()
