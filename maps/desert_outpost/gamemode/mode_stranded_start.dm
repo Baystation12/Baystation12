@@ -41,3 +41,7 @@
 	time_wave_cycle = world.time + duration_rest_base / 2
 	time_next_resupply = world.time + interval_resupply
 	//time_new_cycle = world.time + solar_cycle_duration - solar_cycle_duration * threshold_dawn
+
+	daynight_controller = locate() in world
+	if(!daynight_controller)
+		daynight_controller = new (1,1,1)

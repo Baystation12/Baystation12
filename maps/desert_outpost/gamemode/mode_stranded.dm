@@ -51,6 +51,8 @@
 
 	var/list/available_resupply_points = list()
 
+	var/obj/effect/landmark/day_night_zcontroller/daynight_controller
+
 /datum/game_mode/stranded/process()
 	latest_tick_time = world.time
 
