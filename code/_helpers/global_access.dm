@@ -457,8 +457,6 @@
 			return global.href_logfile;
 		if("human_icon_cache")
 			return global.human_icon_cache;
-		if("hunters")
-			return global.hunters;
 		if("id_card_states")
 			return global.id_card_states;
 		if("image_repository")
@@ -1464,8 +1462,6 @@
 			global.href_logfile=newval;
 		if("human_icon_cache")
 			global.human_icon_cache=newval;
-		if("hunters")
-			global.hunters=newval;
 		if("id_card_states")
 			global.id_card_states=newval;
 		if("image_repository")
@@ -2242,7 +2238,6 @@
 	"host",
 	"href_logfile",
 	"human_icon_cache",
-	"hunters",
 	"id_card_states",
 	"image_repository",
 	"inactive_keys",

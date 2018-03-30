@@ -62,6 +62,18 @@
 	light_color = "#00FFFF"
 	anchored = TRUE
 
+/obj/structure/mantid/console/leader
+	name = "leader designation console"
+
+/obj/structure/mantid/console/leader/attack_hand(var/mob/user)
+	if(ishuman(user)) GLOB.hunters.handle_leader_request(user)
+
+/obj/structure/mantid/console/crew
+	name = "cryogenic storage system"
+
+/obj/structure/mantid/console/crew/attack_hand(var/mob/user)
+	if(ishuman(user)) GLOB.hunters.handle_crew_change_request(user, src)
+
 /obj/structure/mantid/door
 	name = "composite airlock"
 	icon_state = "door"
