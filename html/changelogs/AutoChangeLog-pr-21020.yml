@@ -1,0 +1,4 @@
+author: "afterthought"
+delete-after: True
+changes: 
+  - bugfix: "PDAs with medical access once again have a handheld medical scanner scanner program."
