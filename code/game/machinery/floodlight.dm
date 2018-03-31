@@ -50,6 +50,7 @@
 	update_icon()
 	if(loud)
 		visible_message("\The [src] turns on.")
+		playsound(src.loc, 'sound/effects/flashlight.ogg', 50, 0)
 	return 1
 
 /obj/machinery/floodlight/proc/turn_off(var/loud = 0)
@@ -58,6 +59,7 @@
 	update_icon()
 	if(loud)
 		visible_message("\The [src] shuts down.")
+		playsound(src.loc, 'sound/effects/flashlight.ogg', 50, 0)
 
 /obj/machinery/floodlight/attack_ai(mob/user as mob)
 	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
@@ -68,6 +70,7 @@
 	else
 		if(!turn_on(1))
 			to_chat(user, "You try to turn on \the [src] but it does not work.")
+			playsound(src.loc, 'sound/effects/flashlight.ogg', 50, 0)
 
 
 /obj/machinery/floodlight/attack_hand(mob/user as mob)
@@ -94,6 +97,7 @@
 	else
 		if(!turn_on(1))
 			to_chat(user, "You try to turn on \the [src] but it does not work.")
+			playsound(src.loc, 'sound/effects/flashlight.ogg', 50, 0)
 
 	update_icon()
 
@@ -129,3 +133,24 @@
 				cell = W
 				to_chat(user, "You insert the power cell.")
 	update_icon()
+
+/obj/machinery/floodlight/verb/rotate()
+	set name = "Rotate Light"
+	set category = "Object"
+	set src in oview(1)
+
+	if(!usr || !Adjacent(usr))
+		return
+
+	if(usr.stat == DEAD)
+		if(!round_is_spooky())
+			to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
+			return
+	else if(usr.incapacitated())
+		return
+
+	src.set_dir(turn(src.dir, 90))
+	return
+
+/obj/machinery/floodlight/AltClick()
+	rotate()
