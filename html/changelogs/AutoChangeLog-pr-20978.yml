@@ -1,0 +1,8 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - rscadd: "Ports Grayson Arms prosthetics from Polaris."
+  - rscadd: "Ports robolimb optics from Paradise."
+  - tweak: "Vox can no longer be selected as a species when building an FBP."
+  - tweak: "Morpheus prosthetics are no longer restricted to IPCs."
+  - tweak: "The Morpheus Alt. head is now the default and the Monitor is a subtype."
