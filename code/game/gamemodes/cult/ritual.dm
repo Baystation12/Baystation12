@@ -39,7 +39,7 @@
 	else if(tome_required && mob_needs_tome())
 		to_chat(src, "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>")
 		return
-	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
+	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/hooded/cultrobes)  && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
 		has_robes = 1
 	var/turf/T = get_turf(src)
 	if(T.holy)

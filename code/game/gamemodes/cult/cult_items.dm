@@ -67,7 +67,7 @@
 /obj/item/clothing/head/culthood/alt
 	icon_state = "cult_hoodalt"
 
-/obj/item/clothing/suit/cultrobes
+/obj/item/clothing/suit/hooded/cultrobes
 	name = "cult robes"
 	desc = "A set of durable robes worn by the followers of Nar-Sie."
 	icon_state = "cultrobes"
@@ -76,11 +76,13 @@
 	armor = list(melee = 35, bullet = 30, laser = 25,energy = 20, bomb = 25, bio = 10, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.6
+	var/obj/item/clothing/head/culthood/hood
 
 /obj/item/clothing/suit/cultrobes/alt
 	icon_state = "cultrobesalt"
+	var/obj/item/clothing/head/culthood/alt/hood
 
-/obj/item/clothing/suit/cultrobes/magusred
+/obj/item/clothing/suit/magusred
 	name = "magus robes"
 	desc = "A set of plated robes worn by the followers of Nar-Sie."
 	icon_state = "magusred"
@@ -88,7 +90,7 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	armor = list(melee = 75, bullet = 50, laser = 55, energy = 40, bomb = 50, bio = 10, rad = 0)
 
-/obj/item/clothing/suit/cultrobes/magusred/New()
+/obj/item/clothing/suit/cultrobes/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
 

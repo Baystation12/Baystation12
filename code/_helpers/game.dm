@@ -403,11 +403,14 @@ proc/isInSight(var/atom/A, var/atom/B)
 				C.screen -= O
 
 /proc/flick_overlay(image/I, list/show_to, duration)
-	for(var/client/C in show_to)
+	var/client/C
+	for(C in show_to)
 		C.images += I
-	spawn(duration)
-		for(var/client/C in show_to)
-			C.images -= I
+	addtimer(CALLBACK(GLOBAL_PROC, /proc/deflick_overlay, I,  C, show_to), duration)
+
+/proc/deflick_overlay(image/I, var/client/C, list/show_to)
+	for(C in show_to)
+		C.images -= I
 
 datum/projectile_data
 	var/src_x

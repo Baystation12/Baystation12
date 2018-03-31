@@ -7,8 +7,7 @@
 	item_cost = 75
 	required_feats = list(DEITY_FORM_BLOOD_FORGE)
 	var/list/recipes = list(/obj/item/weapon/melee/cultblade = 50,
-							/obj/item/clothing/head/culthood/alt = 10,
-							/obj/item/clothing/suit/cultrobes/alt = 20
+							/obj/item/clothing/suit/cultrobes/alt = 30
 							)
 
 /datum/uplink_item/deity/feat/unlocking/blood_crafting/buy(var/obj/item/device/uplink/U, var/mob/living/deity/user)
@@ -27,7 +26,7 @@
 	desc = "Unlock the secrets to tempered blood smithing, allowing your followers to smith more powerful and expensive armaments."
 	item_cost = 75
 	required_feats = list(DEITY_BLOOD_CRAFT)
-	recipes = list(/obj/item/clothing/suit/cultrobes/magusred = 80,
+	recipes = list(/obj/item/clothing/suit/magusred = 80,
 					/obj/item/clothing/head/culthood/magus = 50,
 					/obj/structure/constructshell/cult = 70) //also shield?
 

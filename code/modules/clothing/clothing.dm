@@ -16,6 +16,8 @@
 
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 
+	var/clothing_flags //A set of flags to help for this and that. Currently only used to keep some typechecking stupidity out of cult clothing.
+
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return
