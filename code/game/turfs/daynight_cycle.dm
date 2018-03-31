@@ -42,6 +42,7 @@
 /obj/effect/landmark/day_night_zcontroller/Initialize()
 	..()
 	GLOB.processing_objects.Add(src)
+	return INITIALIZE_HINT_NORMAL
 
 /obj/effect/landmark/day_night_zcontroller/process()
 
