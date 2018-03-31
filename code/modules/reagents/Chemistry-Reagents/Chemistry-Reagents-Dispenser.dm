@@ -248,6 +248,12 @@
 	reagent_state = SOLID
 	color = "#a0a0a0"
 
+/datum/reagent/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(volume > 3)
+		M.add_chemical_effect(CE_PULSE, 1)
+	if(volume > 10)
+		M.add_chemical_effect(CE_PULSE, 1)
+
 /datum/reagent/radium
 	name = "Radium"
 	description = "Radium is an alkaline earth metal. It is extremely radioactive."
