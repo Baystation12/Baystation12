@@ -225,11 +225,6 @@
 	if(!mob.canmove)
 		return
 
-	if(mob.driving)
-		mob.driving.relaymove(n,direct)
-		move_delay = world.time + mob.driving.vehicle_move_delay
-		return
-
 	if(isliving(mob))
 		var/mob/living/L = mob
 		if(L.incorporeal_move)//Move though walls
