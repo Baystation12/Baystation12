@@ -100,6 +100,9 @@
 			to_chat(user, "<span class='notice'>You summon \the [shade].</span>")
 		if(choice == "No")
 			return
+	else if(shade.loc != src)
+		shade.forceMove(src)
+		to_chat(user, "<span class='notice'>You recall \the [shade].</span>")
 
 /obj/item/device/soulstone/proc/set_full(var/f)
 	full = f
@@ -124,11 +127,9 @@
 		if(S.shade.loc != S)
 			to_chat(user, "<span class='notice'>Recapture the shade back into \the [I] first.</span>")
 			return
-		var/construct = alert(user, "Please choose which type of construct you wish to create.",,"Artificer", "Wraith", "Juggernaut")
+		var/construct = alert(user, "Please choose which type of construct you wish to create.",, "Wraith", "Juggernaut")
 		var/ctype
 		switch(construct)
-			if("Artificer")
-				ctype = /mob/living/simple_animal/construct/builder
 			if("Wraith")
 				ctype = /mob/living/simple_animal/construct/wraith
 			if("Juggernaut")

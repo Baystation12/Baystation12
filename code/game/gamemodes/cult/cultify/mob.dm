@@ -3,9 +3,6 @@
 	var/image/narsimage = null
 	var/image/narglow = null
 
-/mob/proc/cultify()
-	return
-
 /mob/observer/ghost/cultify()
 	if(icon_state != "ghost-narsie")
 		icon = 'icons/mob/mob.dmi'

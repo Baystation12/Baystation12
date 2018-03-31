@@ -7,8 +7,8 @@
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
-/obj/effect/temporary/Initialize(var/mapload, var/duration = 30, var/_icon = 'icons/effects/effects.dmi', var/_state)
+/obj/effect/temporary/Initialize(var/mapload, var/del_in, var/_icon = 'icons/effects/effects.dmi', var/_state, var/duration = 30)
 	. = ..()
 	icon = _icon
 	icon_state = _state
-	addtimer(CALLBACK(src,/datum/proc/qdel_self), duration)
+	QDEL_IN(src, del_in)

@@ -7,7 +7,7 @@
 	item_cost = 75
 	required_feats = list(DEITY_FORM_BLOOD_FORGE)
 	var/list/recipes = list(/obj/item/weapon/melee/cultblade = 50,
-							/obj/item/clothing/suit/cultrobes/alt = 30
+							/obj/item/clothing/suit/storage/hooded/cultrobes/alt = 30
 							)
 
 /datum/uplink_item/deity/feat/unlocking/blood_crafting/buy(var/obj/item/device/uplink/U, var/mob/living/deity/user)

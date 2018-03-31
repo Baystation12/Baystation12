@@ -54,7 +54,7 @@
 	armor = list(melee = 30, bullet = 10, laser = 5,energy = 5, bomb = 0, bio = 0, rad = 0)
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.8 //That's a pretty cool opening in the hood. Also: Cloth making physical contact to the skull.
+	siemens_coefficient = 0.5
 
 /obj/item/clothing/head/culthood/magus
 	name = "magus helm"
@@ -67,20 +67,24 @@
 /obj/item/clothing/head/culthood/alt
 	icon_state = "cult_hoodalt"
 
-/obj/item/clothing/suit/hooded/cultrobes
+/obj/item/clothing/suit/storage/hooded/cultrobes
 	name = "cult robes"
 	desc = "A set of durable robes worn by the followers of Nar-Sie."
 	icon_state = "cultrobes"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	allowed = list(/obj/item/weapon/book/tome,/obj/item/weapon/melee/cultblade)
-	armor = list(melee = 35, bullet = 30, laser = 25,energy = 20, bomb = 25, bio = 10, rad = 0)
+	armor = list(melee = 40, bullet = 35, laser = 45,energy = 40, bomb = 25, bio = 10, rad = 0)
 	flags_inv = HIDEJUMPSUIT
-	siemens_coefficient = 0.6
-	var/obj/item/clothing/head/culthood/hood
+	siemens_coefficient = 0.3
+	action_button_name = "Toggle Cultist Hood"
+	hoodtype = /obj/item/clothing/head/culthood/
 
-/obj/item/clothing/suit/cultrobes/alt
+/obj/item/clothing/suit/storage/hooded/cultrobes/update_icon() //Don't inheirit this proc. I didn't want or much need to inheirit anyways.
+	return
+
+/obj/item/clothing/suit/storage/hooded/cultrobes/alt
 	icon_state = "cultrobesalt"
-	var/obj/item/clothing/head/culthood/alt/hood
+	hoodtype = /obj/item/clothing/head/culthood/alt/
 
 /obj/item/clothing/suit/magusred
 	name = "magus robes"
@@ -110,6 +114,6 @@
 	siemens_coefficient = 0.2
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
 
-/obj/item/clothing/suit/space/cult/New()
-	..()
+/obj/item/clothing/suit/space/cult/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1

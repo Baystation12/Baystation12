@@ -234,7 +234,7 @@
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
-			if(dir == SOUTHWEST)
+			if(dir == SOUTHWEST && istype(glasstype, /obj/item/stack/material/) )
 				var/obj/item/stack/material/mats = new glasstype(loc)
 				mats.amount = is_fulltile() ? 4 : 2
 			else
@@ -564,12 +564,18 @@
 
 	active = !active
 	update_icon()
+	var/obj/structure/window/reinforced/polarized/W
+	var/list/mywindows = list()
 
-	for(var/obj/structure/window/reinforced/polarized/W in range(src,range))
+	for(W in range(src,range))
 		if (W.id == src.id || !W.id)
-			spawn(0)
-				W.toggle()
-				return
+			mywindows += W
+	addtimer(CALLBACK(src, .proc/toggle_tint, mywindows), 0)
+
+/obj/machinery/button/windowtint/proc/do_tint(var/list/mywindows)
+	var/obj/structure/window/reinforced/polarized/W
+	for(W in mywindows)
+		W.toggle()
 
 /obj/machinery/button/windowtint/power_change()
 	. = ..()
@@ -578,3 +584,13 @@
 
 /obj/machinery/button/windowtint/update_icon()
 	icon_state = "light[active]"
+
+/obj/structure/window/cult
+	name = "ashen window"
+	maxhealth = 90 //BEEFY.
+	reinf = TRUE
+	shardtype = /obj/effect/decal/cleanable/ash
+	glasstype = /obj/effect/decal/cleanable/ash
+	basestate = "cultwindow"
+	icon_state = "cultwindow"
+

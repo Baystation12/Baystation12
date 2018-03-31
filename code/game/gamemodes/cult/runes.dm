@@ -12,6 +12,8 @@
 	var/bcolor
 	var/strokes = 2 // IF YOU EVER SET THIS TO MORE THAN TEN, EVERYTHING WILL BREAK
 	var/cultname = ""
+	var/wall_writable = TRUE
+	var/spent = FALSE
 
 /obj/effect/rune/New(var/loc, var/blcolor = "#c80000", var/nblood = "blood")
 	..()
@@ -61,6 +63,14 @@
 	if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle) || user.silent)
 		to_chat(user, "You are unable to speak the words of the rune.")
 		return
+
+	if(ishuman(user)) //Being on antidepressants will stop you from using a rune. A metagaming-free solution to cultists, just in case the pesky therapist took the Chaplain's slot.
+		var/mob/living/carbon/C = user
+		if(C.chem_effects[CE_MIND] > 0 && prob(80))
+			C.visible_message("[C.name] looks as if \He is [pick("contemplating", "pondering", "considering")] something, and decides to stop.", \
+			"<span class = 'notice'>You try to read the Geometer's sigils, but your mind wavers, and you question your reality briefly instead.</span>")
+			return FALSE
+
 	if(GLOB.cult.powerless)
 		to_chat(user, "You read the words, but nothing happens.")
 		return fizzle(user)
@@ -75,6 +85,11 @@
 
 /obj/effect/rune/proc/cast(var/mob/living/user)
 	fizzle(user)
+
+/obj/effect/rune/proc/cast_effect(var/duration = 5)
+	var/obj/effect/temporary/B = new (loc = get_turf(src), del_in = duration, _icon = 'icons/obj/cult.dmi', _state = "runetrigger-build")
+	B.plane = ABOVE_TURF_PLANE
+	B.layer = BLOOD_LAYER + 0.1
 
 /obj/effect/rune/proc/get_cultists()
 	. = list()
@@ -95,6 +110,7 @@
 
 /obj/effect/rune/convert
 	cultname = "convert"
+	wall_writable = FALSE
 	var/spamcheck = 0
 
 /obj/effect/rune/convert/cast(var/mob/living/user)
@@ -102,6 +118,7 @@
 		return
 
 	var/mob/living/carbon/target = null
+
 	for(var/mob/living/carbon/M in get_turf(src))
 		if(!iscultist(M) && M.stat != DEAD)
 			target = M
@@ -112,6 +129,7 @@
 
 	speak_incantation(user, "Mah[pick("'","`")]weyh pleggh at e'ntrath!")
 	target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
+	cast_effect(4 SECONDS)
 
 	to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
 	if(!GLOB.cult.can_become_antag(target.mind, 1))
@@ -120,7 +138,8 @@
 		to_chat(target, "<span class='cult'>Do you want to join the cult of Nar'Sie? You can choose to ignore offer... <a href='?src=\ref[src];join=1'>Join the cult</a>.</span>")
 
 	spamcheck = 1
-	spawn(40)
+	cast_effect(4 SECONDS)
+	spawn(4 SECONDS)
 		spamcheck = 0
 		if(!iscultist(target) && target.loc == get_turf(src)) // They hesitated, resisted, or can't join, and they are still on the rune - burn them
 			if(target.stat == CONSCIOUS)
@@ -145,6 +164,7 @@
 
 /obj/effect/rune/teleport
 	cultname = "teleport"
+	wall_writable = FALSE
 	var/destination
 
 /obj/effect/rune/teleport/New()
@@ -170,6 +190,7 @@
 		showOptions(user)
 	else if(user.loc == get_turf(src))
 		speak_incantation(user, "Sas[pick("'","`")]so c'arta forbici!")
+		cast_effect(3 SECONDS)
 		if(do_after(user, 30))
 			user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged into the dimension of Nar-Sie!</span>", "You hear a sickening crunch.")
 			user.forceMove(src)
@@ -226,6 +247,7 @@
 	cultname = "summon tome"
 
 /obj/effect/rune/tome/cast(var/mob/living/user)
+	cast_effect()
 	new /obj/item/weapon/book/tome(get_turf(src))
 	speak_incantation(user, "N[pick("'","`")]ath reth sh'yro eth d'raggathnor!")
 	visible_message("<span class='notice'>\The [src] disappears with a flash of red light, and in its place now a book lies.</span>", "You hear a pop.")
@@ -233,6 +255,7 @@
 
 /obj/effect/rune/wall
 	cultname = "wall"
+	wall_writable = FALSE
 
 	var/obj/effect/cultwall/wall = null
 
@@ -242,6 +265,7 @@
 
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
+	cast_effect()
 	if(wall)
 		if(wall.health >= wall.max_health)
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
@@ -322,11 +346,13 @@
 
 /obj/effect/rune/ajorney
 	cultname = "astral journey"
+	wall_writable = FALSE
 
 /obj/effect/rune/ajorney/cast(var/mob/living/user)
 	var/tmpkey = user.key
 	if(user.loc != get_turf(src))
 		return
+	cast_effect(5 SECONDS)
 	speak_incantation(user, "Fwe[pick("'","`")]sh mah erl nyag r'ya!")
 	user.visible_message("<span class='warning'>\The [user]'s eyes glow blue as \he freezes in place, absolutely motionless.</span>", "<span class='warning'>The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry...</span>", "You hear only complete silence for a moment.")
 	announce_ghost_joinleave(user.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade", "disturb", "disrupt", "infest", "taint", "spoil", "blight")] this place!")
@@ -351,12 +377,15 @@
 	cultname = "defile"
 
 /obj/effect/rune/defile/cast(var/mob/living/user)
+	cast_effect()
 	speak_incantation(user, "Ia! Ia! Zasan therium viortia!")
 	for(var/turf/T in range(1, src))
 		if(T.holy)
 			T.holy = 0
 		else
 			T.cultify()
+			for(var/obj/structure/S in T.contents)
+				S.cultify()
 	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
 	qdel(src)
 
@@ -366,10 +395,12 @@
 /obj/effect/rune/armor
 	cultname = "summon robes"
 	strokes = 3
+	wall_writable = FALSE
 
 /obj/effect/rune/armor/cast(var/mob/living/user)
 	speak_incantation(user, "N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
 	visible_message("<span class='warning'>\The [src] disappears with a flash of red light, and a set of armor appears on \the [user].</span>", "<span class='warning'>You are blinded by the flash of red light. After you're able to see again, you see that you are now wearing a set of armor.</span>")
+	cast_effect()
 
 	var/obj/O = user.get_equipped_item(slot_head) // This will most likely kill you if you are wearing a spacesuit, and it's 100% intended
 	if(O && !istype(O, /obj/item/clothing/head/culthood))
@@ -381,8 +412,8 @@
 	if(O && !istype(O, /obj/item/clothing/shoes/cult))
 		user.unEquip(O)
 
-	user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head)
-	user.equip_to_slot_or_del(new /obj/item/clothing/suit/cultrobes/alt(user), slot_wear_suit)
+
+	user.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/hooded/cultrobes/alt(user), slot_wear_suit)
 	user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)
 
 	O = user.get_equipped_item(slot_back)
@@ -424,12 +455,16 @@
 
 	for(var/mob/living/M in cultists)
 		M.say("Barhah hra zar[pick("'","`")]garis!")
+	var/image/I = image(icon = 'icons/obj/cult.dmi', loc = src, icon_state = "runetrigger-build")
+	I.plane = ABOVE_TURF_PLANE
+	I.layer = BLOOD_LAYER + 0.1
+	overlays += I
+
 
 	while(victim && victim.loc == T && victim.stat != DEAD)
 		var/list/mob/living/casters = get_cultists()
 		if(casters.len < 3)
 			break
-		//T.turf_animation('icons/effects/effects.dmi', "rune_sac")
 		victim.fire_stacks = max(2, victim.fire_stacks)
 		victim.IgniteMob()
 		victim.take_organ_damage(2 + casters.len, 2 + casters.len) // This is to speed up the process and also damage mobs that don't take damage from being on fire, e.g. borgs
@@ -444,6 +479,7 @@
 		for(var/mob/M in cultists | get_cultists())
 			to_chat(M, "<span class='warning'>The Geometer of Blood accepts this offering.</span>")
 		visible_message("<span class='notice'>\The [F] appears over \the [src].</span>")
+		overlays -= I
 		GLOB.cult.sacrificed += victim.mind
 		if(victim.mind == GLOB.cult.sacrifice_target)
 			for(var/datum/mind/H in GLOB.cult.current_antagonists)
@@ -470,15 +506,17 @@
 		to_chat(usr, "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>")
 		*/
 		to_chat(victim, "<span class='cult'>The Geometer of Blood claims your body.</span>")
-		victim.dust()
+		if(victim.get_client())
+			victim.ghostize()
+		victim.gib()
 	if(victim)
 		victim.ExtinguishMob() // Technically allows them to put the fire out by sacrificing them and stopping immediately, but I don't think it'd have much effect
 		victim = null
 
-
 /obj/effect/rune/drain
 	cultname = "blood drain"
 	strokes = 3
+	wall_writable = FALSE
 
 /obj/effect/rune/drain/cast(var/mob/living/user)
 	var/mob/living/carbon/human/victim
@@ -592,30 +630,13 @@
 	speak_incantation(user, "Ta'gh fara[pick("'","`")]qha fel d'amar det!")
 	qdel(src)
 
-/obj/effect/rune/massdefile //Defile but with a huge range. Bring a buddy for this, you're hitting the floor.
-	cultname = "mass defile"
-
-/obj/effect/rune/massdefile/cast(var/mob/living/user)
-	var/list/mob/living/cultists = get_cultists()
-	if(cultists.len < 3)
-		to_chat(user, "<span class='warning'>You need three cultists around this rune to make it work.</span>")
-		return fizzle(user)
-	else
-		for(var/mob/living/M in cultists)
-			M.say("Ia! Ia! Zasan therium viortia! Razan gilamrua kioha!")
-		for(var/turf/T in range(5, src))
-			if(T.holy)
-				T.holy = 0
-			else
-				T.cultify()
-	visible_message("<span class='warning'>\The [src] embeds into the floor and walls around it, changing them!</span>", "You hear liquid flow.")
-	qdel(src)
 
 /* Tier 3 runes */
 
 /obj/effect/rune/weapon
 	cultname = "summon weapon"
 	strokes = 4
+	wall_writable = FALSE
 
 /obj/effect/rune/weapon/cast(var/mob/living/user)
 	if(!istype(user.get_equipped_item(slot_head), /obj/item/clothing/head/culthood) || !istype(user.get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) || !istype(user.get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
@@ -632,6 +653,7 @@
 /obj/effect/rune/shell
 	cultname = "summon shell"
 	strokes = 4
+	wall_writable = FALSE
 
 /obj/effect/rune/shell/cast(var/mob/living/user)
 	var/turf/T = get_turf(src)
@@ -684,6 +706,7 @@
 /obj/effect/rune/revive
 	cultname = "revive"
 	strokes = 4
+	wall_writable = FALSE
 
 /obj/effect/rune/revive/cast(var/mob/living/user)
 	var/mob/living/carbon/human/target
@@ -710,6 +733,7 @@
 /obj/effect/rune/blood_boil
 	cultname = "blood boil"
 	strokes = 4
+	wall_writable = FALSE
 
 /obj/effect/rune/blood_boil/cast(var/mob/living/user)
 	var/list/mob/living/cultists = get_cultists()
@@ -744,6 +768,7 @@
 
 /obj/effect/rune/tearreality
 	cultname = "tear reality"
+	wall_writable = FALSE
 	var/the_end_comes = 0
 	var/the_time_has_come = 300
 	var/obj/singularity/narsie/large/HECOMES = null
@@ -758,6 +783,12 @@
 	var/list/mob/living/cultists = get_cultists()
 	if(cultists.len < 5)
 		return fizzle()
+
+	var/image/I = image(icon = 'icons/obj/cult.dmi', loc = src, icon_state = "runetrigger-build")
+	I.plane = ABOVE_TURF_PLANE
+	I.layer = BLOOD_LAYER + 0.1
+	overlays += I
+
 	for(var/mob/living/M in cultists)
 		M.say("Tok-lyr rqa'nap g[pick("'","`")]lt-ulotf!")
 		to_chat(M, "<span class='cult'>You are staring to tear the reality to bring Him back... stay around the rune!</span>")
@@ -779,9 +810,9 @@
 			if(prob(5))
 				M.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
 
-		for(var/turf/T in range(min(the_end_comes, 15)))
+		for(var/atom/AT in range(min(the_end_comes, 15)))
 			if(prob(the_end_comes / 3))
-				T.cultify()
+				AT.cultify()
 		sleep(10)
 
 	if(the_end_comes >= the_time_has_come)
@@ -819,6 +850,7 @@
 
 /obj/effect/rune/imbue
 	cultname = "otherwordly abomination that shouldn't exist and that you should report to your local god as soon as you see it, along with the instructions for making this"
+	wall_writable = FALSE
 	var/papertype
 
 /obj/effect/rune/imbue/cast(var/mob/living/user)
@@ -843,3 +875,33 @@
 /obj/effect/rune/imbue/emp
 	cultname = "destroy technology imbue"
 	papertype = /obj/item/weapon/paper/talisman/emp
+
+/obj/effect/rune/pylon
+	cultname = "construct pylon"
+	strokes = 4
+	wall_writable = FALSE
+
+/obj/effect/rune/pylon/cast(var/mob/living/user)
+	var/turf/T = get_turf(src)
+	if(T.icon_state != "cult" && T.icon_state != "cult-narsie")
+		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
+		return fizzle(user)
+
+	var/obj/item/device/soulstone/target
+	for(var/obj/item/device/soulstone/S in get_turf(src))
+		if(S)
+			target = S
+			break
+
+	if(!target)
+		to_chat(user, "<span class='warning'>You need a soul stone shard to construct a pylon.</span>")
+		return fizzle(user)
+
+	speak_incantation(user, "Adit P[pick("'","`")]lon Oya!")
+
+	new /obj/structure/cult/pylon/(get_turf(src))
+	visible_message("<span class='warning'>The [target] throbs gently, other shards manifesting from nothing before contensing into a large prism.</span>", "You hear a metallic sound.")
+	qdel(src)
+	qdel(target)
+
+

@@ -22,7 +22,38 @@
 	light_power = 2
 	light_range = 13
 	light_color = "#3e0000"
-	var/obj/item/wepon = null
+	var/time_last_cultification
+	var/cult_interval = 1 SECOND
+
+/obj/structure/cult/pylon/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/obj/structure/cult/pylon/Process()
+	..()
+
+	if (world.time - time_last_cultification < cult_interval)
+		return
+	cult_radius()
+	time_last_cultification = world.time
+/obj/structure/cult/pylon/proc/cult_radius()
+	var/list/cultable = list()
+
+	for(var/A in range(8, src)) //arbitrary distance. One screen... Ish... Circular?
+		if (istype(A, /obj/structure/window) && !istype(A, /obj/structure/window/cult))
+			cultable += A
+		else if (istype(A, /obj/structure/grille) && !istype(A, /obj/structure/grille/cult) )
+			cultable += A
+		else if (iswall(A) && !istype(A ,/turf/simulated/wall/cult) )
+			cultable += A
+		else if (istype(A, /turf/simulated/floor))
+			var/turf/simulated/floor/F = A
+			if(F.flooring != /decl/flooring/reinforced/cult) //This is always true, even when this is the case. Weird.
+				cultable += F
+
+	if(cultable.len)
+		var/atom/to_cult = pick(cultable)
+		to_cult.cultify()
 
 /obj/structure/cult/pylon/attack_hand(mob/M as mob)
 	attackpylon(M, 5)

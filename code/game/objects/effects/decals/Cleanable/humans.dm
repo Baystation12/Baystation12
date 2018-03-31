@@ -185,6 +185,11 @@ var/global/list/image/splatter_cache=list()
 	random_icon_states = list("gib1", "gib2", "gib3", "gib5", "gib6")
 	var/fleshcolor = "#ffffff"
 
+/obj/effect/decal/cleanable/blood/gibs/Move()
+	..()
+	if(GLOB.cult.current_antagonists.len && isturf(loc))
+		loc.cultify()
+
 /obj/effect/decal/cleanable/blood/gibs/update_icon()
 
 	var/image/giblets = new(base_icon, "[icon_state]_flesh", dir)
