@@ -626,7 +626,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		dat += "</br><b>Moves [slowdown > 0 ? "slower" : "faster"] than most.</b>"
 	for(var/kind in damage_types)
 		if(damage_types[kind] > 1)
-			dat += "</br><b>Vurnerable to [kind].</b>"
+			dat += "</br><b>Vulnerable to [kind].</b>"
 		else if(damage_types[kind] < 1)
 			dat += "</br><b>Resistant to [kind].</b>"
 	dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
@@ -634,7 +634,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	dat += "</br><b>[gas_data.name[poison_type]] is poisonous to them.</b>"
 	dat += "</small></td>"
 	dat += "</tr>"
-	dat += "</table><center><hr/>"
+	dat += "</table><hr/>"
 	return dat
 
 /mob/living/carbon/human/verb/check_species()
