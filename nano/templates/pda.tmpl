@@ -126,6 +126,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     {{if data.cartridge.radio == 2}}
                         {{:helper.link('Signaler System', 'gear', {'choice' : "40"}, null, 'fixedLeftWide')}}
                     {{/if}}
+                    {{if data.cartridge.access.access_medical==1}}
+                        {{:helper.link(data.scanmode == 1 ? 'Disable Medical Scanner' : 'Enable Medical Scanner', 'gear', {'choice' : "Medical Scan"}, null, 'fixedLeftWider')}}
+                    {{/if}}
                     {{if data.cartridge.access.access_reagent_scanner==1}}
                         {{:helper.link(data.scanmode == 3 ? 'Disable Reagent Scanner' : 'Enable Reagent Scanner', 'gear', {'choice' : "Reagent Scan"}, null, 'fixedLeftWider')}}
                     {{/if}}
