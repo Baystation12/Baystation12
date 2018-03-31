@@ -80,3 +80,39 @@
 
 	..()
 #undef RANDOM_COEF
+
+/datum/species/alium/proc/adapt_to_atmosphere(var/datum/gas_mixture/atmosphere)
+	var/temp_comfort_shift = atmosphere.temperature - body_temperature
+
+	cold_level_1 += temp_comfort_shift
+	cold_level_2 += temp_comfort_shift
+	cold_level_3 += temp_comfort_shift
+
+	heat_level_1 += temp_comfort_shift
+	heat_level_2 += temp_comfort_shift
+	heat_level_3 += temp_comfort_shift
+
+	heat_discomfort_level += temp_comfort_shift
+	cold_discomfort_level += temp_comfort_shift
+
+	body_temperature += temp_comfort_shift
+
+	var/normal_pressure = atmosphere.return_pressure()
+	hazard_high_pressure = 5 * normal_pressure
+	warning_high_pressure = 0.7 * hazard_high_pressure
+
+	hazard_low_pressure = 0.2 * normal_pressure
+	warning_low_pressure = 2.5 * hazard_low_pressure
+
+	breath_type = pick(atmosphere.gas)
+	breath_pressure = 0.8*(atmosphere.gas[breath_type]/atmosphere.total_moles)*normal_pressure
+
+	var/list/newgases = gas_data.gases.Copy()
+	newgases ^= atmosphere.gas
+	for(var/gas in newgases)
+		if(gas_data.flags[gas] & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
+			newgases -= gas
+	if(newgases.len)
+		poison_type = pick_n_take(newgases)
+	if(newgases.len)
+		exhale_type = pick_n_take(newgases)

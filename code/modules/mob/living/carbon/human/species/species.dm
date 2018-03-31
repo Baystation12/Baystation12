@@ -629,9 +629,20 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			dat += "</br><b>Vurnerable to [kind].</b>"
 		else if(damage_types[kind] < 1)
 			dat += "</br><b>Resistant to [kind].</b>"
+	dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
+	dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
+	dat += "</br><b>[gas_data.name[poison_type]] is poisonous to them.</b>"
 	dat += "</small></td>"
 	dat += "</tr>"
 	dat += "</table><center><hr/>"
+	return dat
+
+/mob/living/carbon/human/verb/check_species()
+	set name = "Check Species Information"
+	set category = "IC"
+	set src = usr
+
+	show_browser(src, species.get_description(), "window=species;size=700x400")
 /datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
 		if(0 to 22) 	. = -1
