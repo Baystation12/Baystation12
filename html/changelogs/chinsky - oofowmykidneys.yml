@@ -1,7 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - tweak: "Liver damage change. Now when it's not working right, it doesn't apply staright up damage (only for alcohol), it builds up ammonia in the blood up to toxic levels. Better get those scrubbers going."
-  - tweak: "Kidneys are doing similar thing, but with potassium."
-  - tweak: "Potassium now raises pulse, dangerously so over 10u."
-  - tweak: "Bananas now have bit of potassium in them."
