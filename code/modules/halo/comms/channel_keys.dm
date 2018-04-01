@@ -29,6 +29,16 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	if(GLOB.using_map.use_global_covenant_comms)
 		new /obj/item/device/mobilecomms/commsbackpack/covenant (locate(1,1,1))
 	setup_com_channels()
+	GLOB.processing_objects += src
+
+/datum/halo_frequencies/proc/fix_innie_dept_key()
+	for(var/key in department_radio_keys) //Department keys would bork if this isn't done.
+		if(department_radio_keys[key] == "INNIECOM")
+			department_radio_keys[key] = "[innie_channel]"
+
+/datum/halo_frequencies/proc/process()
+	fix_innie_dept_key()
+	GLOB.processing_objects -= src
 
 /datum/halo_frequencies/proc/setup_com_channel_list()
 	frequencies.Insert(frequencies.Find("INNIECOM"),innie_channel) //Find the inniecom placeholder, and place the new name at it's index.

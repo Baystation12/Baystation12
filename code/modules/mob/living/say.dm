@@ -3,6 +3,31 @@ var/list/department_radio_keys = list(
 	  ":l" = "left ear",	".l" = "left ear",
 	  ":i" = "intercom",	".i" = "intercom",
 	  ":h" = "department",	".h" = "department",
+	  ":s" = "SHIPCOM",		".s" = "SHIPCOM",
+	  ":f" = "FLEETCOM",	".f" = "FLEETCOM",
+	  ":t" = "TEAMCOM",		".t" = "TEAMCOM",
+	  ":q" = "SQUADCOM",	".q" = "SQUADCOM",
+	  ":e" = "EBAND",		".e" = "EBAND",
+	  ":g" = "GCPD",		".g" = "GCPD",
+	  ":b" = "INNIECOM",	".b" = "INNIECOM",
+
+	  ":R" = "right ear",	".R" = "right ear",
+	  ":L" = "left ear",	".L" = "left ear",
+	  ":I" = "intercom",	".I" = "intercom",
+	  ":H" = "department",	".H" = "department",
+	  ":S" = "SHIPCOM",		".S" = "SHIPCOM",
+	  ":F" = "FLEETCOM",	".F" = "FLEETCOM",
+	  ":T" = "TEAMCOM",		".T" = "TEAMCOM",
+	  ":Q" = "SQUADCOM",	".Q" = "SQUADCOM",
+	  ":E" = "EBAND",		".E" = "EBAND",
+	  ":G" = "GCPD",		".G" = "GCPD",
+	  ":B" = "INNIECOM",	".B" = "INNIECOM",
+
+	/*
+	  ":r" = "right ear",	".r" = "right ear",
+	  ":l" = "left ear",	".l" = "left ear",
+	  ":i" = "intercom",	".i" = "intercom",
+	  ":h" = "department",	".h" = "department",
 	  ":+" = "special",		".+" = "special", //activate radio-specific special functions
 	  ":c" = "Command",		".c" = "Command",
 	  ":n" = "Science",		".n" = "Science",
@@ -47,7 +72,7 @@ var/list/department_radio_keys = list(
 	  ":û" = "Security",	".û" = "Security",
 	  ":ö" = "whisper",		".ö" = "whisper",
 	  ":å" = "Mercenary",	".å" = "Mercenary",
-	  ":é" = "Supply",		".é" = "Supply",
+	  ":é" = "Supply",		".é" = "Supply",*/
 )
 
 

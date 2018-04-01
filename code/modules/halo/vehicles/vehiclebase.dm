@@ -41,6 +41,14 @@
 		if(occupants[M] in exposed_positions)
 			M.examine(user)
 
+/obj/vehicles/proc/is_atom_adjacent(var/atom/A)
+	if(A in contents || A in occupants)
+		return 1
+	for(var/turf/T in locs)
+		if(A in view(1,T) || A.loc in view(1,T))
+			return 1
+	return 0
+
 /obj/vehicles/Destroy()
 	GLOB.processing_objects -= src
 	. = ..()
@@ -119,6 +127,10 @@
 	if(check_position_blocked(position))
 		to_chat(user,"<span class = 'notice'>No [position] spaces in [src]</span>")
 		return 0
+	var/mob/living/carbon/human/h_test = user
+	if(!istype(h_test) && position == "driver")
+		to_chat(user,"<span class = 'notice'>You don't know how to drive that.</span>") //Let's assume non-human mobs can't drive.
+		return
 	var/can_enter = check_enter_invalid()
 	if(can_enter)
 		to_chat(user,"<span class = 'notice'>[can_enter]</span>")
@@ -170,12 +182,18 @@
 		enter_as_position(user,position_switchto)
 	update_object_sprites()
 
-/obj/vehicles/verb/exit_vehicle(var/mob/user)
+/obj/vehicles/verb/verb_exit_vehicle()
 	set name = "Exit Vehicle"
 	set category = "Vehicle"
 	set src in view(1)
 
-	if(!(user in occupants))
+	var/mob/user = usr
+
+	exit_vehicle(user)
+
+/obj/vehicles/proc/exit_vehicle(var/mob/user)
+
+	if(!(user in occupants) || !is_atom_adjacent(user))
 		return
 	occupants -= user
 	contents -= user
@@ -188,7 +206,7 @@
 	set src in view(1)
 
 	var/mob/user = usr
-	if(!istype(user))
+	if(!istype(user) || !is_atom_adjacent(user))
 		return
 	var/player_pos_choice = input(user,"Enter which position?","Vehicle Entry Position Select","Cancel") in ALL_VEHICLE_POSITIONS + list("Cancel")
 	if(player_pos_choice == "Cancel")
@@ -242,7 +260,7 @@
 //TODO: CARGO SYSTEM
 /obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)
 	var/confirm = alert(user,"Place [O.name] into [src.name]'s storage?",,"Yes","No")
-	if(confirm != "Yes")
+	if(confirm != "Yes" || !is_atom_adjacent(user) || !is_atom_adjacent(O))
 		return
 	var/is_vehicle = 0
 	if(istype(O,/obj/vehicles))
@@ -281,7 +299,7 @@
 /obj/vehicles/proc/handle_grab_attack(var/obj/item/grab/I, var/mob/user)
 	var/mob/living/grabbed_mob = I.affecting
 	var/mob/living/carbon/human/h = user
-	if(!istype(grabbed_mob) || !istype(h))
+	if(!istype(grabbed_mob) || !istype(h) || !is_atom_adjacent(grabbed_mob) || !is_atom_adjacent(h))
 		return
 	if(grabbed_mob.stat == CONSCIOUS)
 		if(!do_after(user, VEHICLE_LOAD_DELAY,grabbed_mob,1,1,,1))
@@ -309,7 +327,7 @@
 	if(chosen_occ_name == "Cancel")
 		return
 	var/mob/chosen_occ = all_viable_occupants[chosen_occ_name]
-	if(isnull(chosen_occ))
+	if(isnull(chosen_occ) || !is_atom_adjacent(puller) || !is_atom_adjacent(chosen_occ))
 		return
 	if(chosen_occ.stat == CONSCIOUS)
 		if(!do_after(puller, VEHICLE_LOAD_DELAY*2,src,1,1,,1))
