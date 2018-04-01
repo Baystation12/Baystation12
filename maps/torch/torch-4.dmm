@@ -17273,11 +17273,6 @@
 	pixel_y = 0
 	},
 /obj/structure/closet/crate/freezer,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
 /obj/machinery/requests_console{
 	announcementConsole = 1;
 	department = "Medbay";
@@ -17291,6 +17286,10 @@
 	icon_state = "intact";
 	dir = 5
 	},
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "cNb" = (
@@ -17816,11 +17815,11 @@
 	icon_state = "edge";
 	dir = 6
 	},
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 1
 	},
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "dEb" = (
