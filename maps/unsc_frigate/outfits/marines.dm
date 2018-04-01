@@ -73,7 +73,7 @@
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	shoes = /obj/item/clothing/shoes/jungleboots
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
 
@@ -83,7 +83,8 @@
 	uniform = /obj/item/clothing/under/utility
 	shoes = /obj/item/clothing/shoes/dress
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5)
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
 e
