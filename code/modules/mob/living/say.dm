@@ -3,31 +3,6 @@ var/list/department_radio_keys = list(
 	  ":l" = "left ear",	".l" = "left ear",
 	  ":i" = "intercom",	".i" = "intercom",
 	  ":h" = "department",	".h" = "department",
-	  ":s" = "SHIPCOM",		".s" = "SHIPCOM",
-	  ":f" = "FLEETCOM",	".f" = "FLEETCOM",
-	  ":t" = "TEAMCOM",		".t" = "TEAMCOM",
-	  ":q" = "SQUADCOM",	".q" = "SQUADCOM",
-	  ":e" = "EBAND",		".e" = "EBAND",
-	  ":g" = "GCPD",		".g" = "GCPD",
-	  ":b" = "INNIECOM",	".b" = "INNIECOM",
-
-	  ":R" = "right ear",	".R" = "right ear",
-	  ":L" = "left ear",	".L" = "left ear",
-	  ":I" = "intercom",	".I" = "intercom",
-	  ":H" = "department",	".H" = "department",
-	  ":S" = "SHIPCOM",		".S" = "SHIPCOM",
-	  ":F" = "FLEETCOM",	".F" = "FLEETCOM",
-	  ":T" = "TEAMCOM",		".T" = "TEAMCOM",
-	  ":Q" = "SQUADCOM",	".Q" = "SQUADCOM",
-	  ":E" = "EBAND",		".E" = "EBAND",
-	  ":G" = "GCPD",		".G" = "GCPD",
-	  ":B" = "INNIECOM",	".B" = "INNIECOM",
-
-	  /*
-	  ":r" = "right ear",	".r" = "right ear",
-	  ":l" = "left ear",	".l" = "left ear",
-	  ":i" = "intercom",	".i" = "intercom",
-	  ":h" = "department",	".h" = "department",
 	  ":+" = "special",		".+" = "special", //activate radio-specific special functions
 	  ":c" = "Command",		".c" = "Command",
 	  ":n" = "Science",		".n" = "Science",
@@ -61,20 +36,18 @@ var/list/department_radio_keys = list(
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right ear",	".ê" = "right ear",
-	  ":ä" = "left ear",	".ä" = "left ear",
-	  ":ø" = "intercom",	".ø" = "intercom",
-	  ":ð" = "department",	".ð" = "department",
-	  ":ñ" = "Command",		".ñ" = "Command",
-	  ":ò" = "Science",		".ò" = "Science",
-	  ":ü" = "Medical",		".ü" = "Medical",
-	  ":ó" = "Engineering",	".ó" = "Engineering",
-	  ":û" = "Security",	".û" = "Security",
-	  ":ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Mercenary",	".å" = "Mercenary",
-	  ":é" = "Supply",		".é" = "Supply",
-
-	  */
+	  ":Ãª" = "right ear",	".Ãª" = "right ear",
+	  ":Ã¤" = "left ear",	".Ã¤" = "left ear",
+	  ":Ã¸" = "intercom",	".Ã¸" = "intercom",
+	  ":Ã°" = "department",	".Ã°" = "department",
+	  ":Ã±" = "Command",		".Ã±" = "Command",
+	  ":Ã²" = "Science",		".Ã²" = "Science",
+	  ":Ã¼" = "Medical",		".Ã¼" = "Medical",
+	  ":Ã³" = "Engineering",	".Ã³" = "Engineering",
+	  ":Ã»" = "Security",	".Ã»" = "Security",
+	  ":Ã¶" = "whisper",		".Ã¶" = "whisper",
+	  ":Ã¥" = "Mercenary",	".Ã¥" = "Mercenary",
+	  ":Ã©" = "Supply",		".Ã©" = "Supply",
 )
 
 

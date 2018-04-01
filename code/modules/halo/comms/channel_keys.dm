@@ -44,7 +44,19 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	radiochannels = frequencies
 
 /datum/halo_frequencies/proc/setup_com_channels()
-	innie_channel = "INNIECOM"
+	innie_channel = pick(\
+	"ZULUCOM","OMEGACOM","RANGERCOM","BAGDERCOM",\
+	"DELCOM","KILLCOM","PANTHERCOM","HOGCOM",\
+	"LIBRACOM","LIBERTYCOM","FREECOM","MILCOM",\
+	"COBRACOM","MONSTERCOM","HARDCOM","GOCOM",\
+	"AGGCOM","MIDCOM","PITCOM","TOPCOM","VAULTCOM",\
+	"WOLFCOM","OTTERCOM","BRONZECOM","GOLDCOM",\
+	"RATCOM","TUNNELCOM","READYCOM","GROKCOM",\
+	"DRACOCOM","RAPTORCOM","PREDCOM","REDCOM",\
+	"OPCOM","OWLCOM","RAWCOM","BLUECOM","DOPECOM",\
+	"BULLCOM","SILVERCOM","DOGCOM","SNAKECOM",\
+	"EXCOM"\
+	)
 
 	//randomised the freqs but avoid collisions
 	used_freqs += "[eband_freq]"
