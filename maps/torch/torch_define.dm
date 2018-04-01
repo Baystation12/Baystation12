@@ -45,8 +45,7 @@
 	away_site_budget = 3
 
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
-	//lobby_screens = list("title","title2")
-	lobby_screens = list("bling")
+	lobby_screens = list("title","title2")
 
 /datum/map/torch/setup_map()
 	..()
@@ -68,7 +67,7 @@
 		if(O.name == torch.name)
 			continue
 		space_things |= O
-
+	
 	for(var/obj/effect/overmap/O in space_things)
 		var/location_desc = " at present co-ordinates."
 		if (O.loc != torch.loc)

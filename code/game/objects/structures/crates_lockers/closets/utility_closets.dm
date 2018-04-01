@@ -60,8 +60,6 @@
 			new /obj/item/clothing/head/helmet/space/emergency(src)
 			new /obj/item/clothing/head/helmet/space/emergency(src)
 
-	new /obj/item/weapon/gun/launcher/money/insane(src)
-
 /obj/structure/closet/emcloset/legacy/New()
 	..()
 	new /obj/item/weapon/tank/oxygen(src)
