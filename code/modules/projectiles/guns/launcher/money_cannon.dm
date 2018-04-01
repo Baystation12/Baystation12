@@ -22,6 +22,8 @@
 	emagged = 1
 
 /obj/item/weapon/gun/launcher/money/insane
+	name = "grotesquely modified money cannon"
+	desc = "This novelty money gun's quaint charms are marred somewhat by the hideous images of naked incubi and fornicating horned demons engraved on its surface. It reeks of brimstone."
 	emagged = 1
 	receptacle_value = 1.#INF // behold mammon, the demongod of lucre
 	dispensing = 2500
