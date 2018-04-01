@@ -3,8 +3,8 @@
 	name = "\improper corgi"
 	real_name = "corgi"
 	desc = "It's a corgi."
-	icon_state = "corgi_stripper"
-	icon_living = "corgi_stripper"
+	icon_state = "corgi"
+	icon_living = "corgi"
 	icon_dead = "corgi_dead"
 	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
 	speak_emote = list("barks", "woofs")
