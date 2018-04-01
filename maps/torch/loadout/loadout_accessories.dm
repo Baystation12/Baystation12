@@ -136,6 +136,9 @@
 /datum/gear/storage/white_drop_pouches
 	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/merchant)
 
+/datum/gear/tactical/holster
+	allowed_roles = ARMED_ROLES
+
 /datum/gear/tactical/large_pouches
 	allowed_roles = ARMORED_ROLES
 
@@ -191,22 +194,3 @@
 	allowed_roles = list(/datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor,
 						/datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant, /datum/job/assistant)
-
-//April special
-/datum/gear/utility/guns
-	display_name = "guns"
-	flags = GEAR_HAS_COLOR_SELECTION
-	cost = 1
-	sort_category = "Utility"
-	path = /obj/item/weapon/gun/projectile/
-
-/datum/gear/utility/guns/New()
-	..()
-	var/guns = list()
-	guns["capgun"]  = /obj/item/weapon/gun/projectile/revolver/capgun
-	guns["revolver"]= /obj/item/weapon/gun/projectile/revolver/webley
-	guns["holdout"] = /obj/item/weapon/gun/projectile/pistol
-	guns[".45 gun"] = /obj/item/weapon/gun/projectile/sec
-	guns["sawnoff"] = /obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn
-	guns["SMG"] = /obj/item/weapon/gun/projectile/automatic/machine_pistol
-	gear_tweaks += new/datum/gear_tweak/path(guns)

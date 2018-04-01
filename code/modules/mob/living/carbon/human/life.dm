@@ -81,6 +81,7 @@
 		if(!client && !mind)
 			species.handle_npc(src)
 
+
 	if(!handle_some_updates())
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
 
@@ -154,7 +155,6 @@
 	else
 		return ONE_ATMOSPHERE + pressure_difference
 
-/mob/living/carbon/human/var/next_blink
 /mob/living/carbon/human/handle_impaired_vision()
 	..()
 	//Vision
@@ -175,12 +175,6 @@
 		if(!(sdisabilities & BLIND))
 			if(equipment_tint_total >= TINT_BLIND)	// Covered eyes, heal faster
 				eye_blurry = max(eye_blurry-2, 0)
-
-	if(world.time > next_blink && vision && !vision.robotic < ORGAN_ROBOT && !blinded)
-		to_chat(src, "<span class='warning'>You hadn't blinked in a while. That is not healthy at all!.</span>")
-		if(prob(10))
-			apply_effect(1,EYE_BLUR)
-		next_blink = world.time + 5 MINUTES
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
@@ -308,7 +302,6 @@
 			internals.icon_state = "internal0"
 	return null
 
-/mob/living/carbon/var/air_warned
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
 	if(status_flags & GODMODE)
 		return
@@ -321,12 +314,6 @@
 		failed_last_breath = 1
 	else
 		failed_last_breath = L.handle_breath(breath) //if breath is null or vacuum, the lungs will handle it for us
-	if(failed_last_breath)
-		if(!air_warned)
-			air_warned = 1
-			to_chat(src, "<font size=3><b><span class ='danger'>UH HOH</span> looks like you are <span class ='danger'>SUFFOCATING</span>!</b></font>")
-			to_chat(src, "That is NOT good! If you don't breathe air, you might <span class ='danger'>DIE</span>!")
-			to_chat(src, "But don't worry, it's easy to fix! Just get some <span class='alium'>AIR</span> and breathe it in. As simple as that!")
 	return !failed_last_breath
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
