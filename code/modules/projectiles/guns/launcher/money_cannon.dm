@@ -21,6 +21,11 @@
 /obj/item/weapon/gun/launcher/money/hacked
 	emagged = 1
 
+/obj/item/weapon/gun/launcher/money/insane
+	emagged = 1
+	receptacle_value = 1.#INF // behold mammon, the demongod of lucre
+	dispensing = 2500
+
 /obj/item/weapon/gun/launcher/money/proc/vomit_cash(var/mob/vomit_onto, var/projectile_vomit)
 	var/bundle_worth = Floor(receptacle_value / 10)
 	var/turf/T = get_turf(vomit_onto)
