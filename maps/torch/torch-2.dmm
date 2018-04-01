@@ -5864,6 +5864,7 @@
 	dir = 1
 	},
 /obj/item/weapon/gun/energy/gun,
+/obj/item/weapon/gun/energy/gun,
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "lS" = (
@@ -6832,6 +6833,7 @@
 	},
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/device/flashlight/flare,
 /obj/item/device/flashlight/flare,
 /obj/item/device/flashlight/flare,
 /obj/item/device/flashlight/flare,
@@ -7827,10 +7829,14 @@
 /obj/item/clothing/suit/armor/riot,
 /obj/item/clothing/suit/armor/riot,
 /obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
 /obj/item/clothing/head/helmet/riot,
 /obj/item/clothing/head/helmet/riot,
 /obj/item/clothing/head/helmet/riot,
 /obj/item/clothing/head/helmet/riot,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/weapon/shield/riot,
+/obj/item/weapon/shield/riot,
 /obj/item/weapon/shield/riot,
 /obj/item/weapon/shield/riot,
 /obj/item/weapon/shield/riot,
@@ -7856,6 +7862,11 @@
 	pixel_x = -2;
 	pixel_y = -2
 	},
+/obj/item/clothing/suit/armor/bulletproof{
+	pixel_x = -2;
+	pixel_y = -2
+	},
+/obj/item/clothing/head/helmet/ballistic,
 /obj/item/clothing/head/helmet/ballistic,
 /obj/item/clothing/head/helmet/ballistic,
 /obj/item/clothing/head/helmet/ballistic,
@@ -7886,6 +7897,11 @@
 	pixel_x = -2;
 	pixel_y = -2
 	},
+/obj/item/clothing/suit/armor/laserproof{
+	pixel_x = -2;
+	pixel_y = -2
+	},
+/obj/item/clothing/head/helmet/ablative,
 /obj/item/clothing/head/helmet/ablative,
 /obj/item/clothing/head/helmet/ablative,
 /obj/item/clothing/head/helmet/ablative,
@@ -12817,7 +12833,8 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/security,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/secure_closet/security_torch,
 /turf/simulated/floor/tiled,
 /area/security/equipment)
 "yC" = (
@@ -12831,6 +12848,7 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = -32
 	},
+/obj/item/weapon/stool/padded,
 /turf/simulated/floor/tiled,
 /area/security/equipment)
 "yE" = (
@@ -18512,6 +18530,7 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
+/obj/item/modular_computer/console/preset/security,
 /turf/simulated/floor/tiled,
 /area/security/equipment)
 "Nn" = (
@@ -19451,6 +19470,8 @@
 /obj/item/device/radio,
 /obj/item/device/radio,
 /obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/weapon/crowbar,
 /obj/item/weapon/crowbar,
 /obj/item/weapon/crowbar,
 /obj/item/weapon/crowbar,

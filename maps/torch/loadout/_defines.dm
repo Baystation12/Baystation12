@@ -13,13 +13,13 @@
 #define MILITARY_ENLISTED_ROLES list(/datum/job/sea, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/qm, /datum/job/cargo_tech, /datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/explorer, /datum/job/officer)
 
 //For all civilians or off-duty personnel, regardless of formality of dress or job.
-#define NON_MILITARY_ROLES list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/representative, /datum/job/assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant,/datum/job/stowaway, /datum/job/offduty)
+#define NON_MILITARY_ROLES list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/representative, /datum/job/assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/officer, /datum/job/merchant, /datum/job/stowaway, /datum/job/offduty)
 
 //For jobs that allow for decorative or ceremonial clothing
 #define FORMAL_ROLES list(/datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/stowaway, /datum/job/guard, /datum/job/detective, /datum/job/offduty)
 
 //For civilian jobs that may have a uniform, but not a strict one
-#define SEMIFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/stowaway, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective, /datum/job/offduty)
+#define SEMIFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/stowaway, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective, /datum/job/officer, /datum/job/offduty)
 
 //For civilian jobs that may have a strict uniform.
 #define SEMIANDFORMAL_ROLES list(/datum/job/assistant,/datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/representative,/datum/job/stowaway, /datum/job/detective, /datum/job/offduty)
@@ -64,7 +64,7 @@
 #define RESEARCH_ROLES list(/datum/job/rd, /datum/job/liaison, /datum/job/scientist,/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/assistant, /datum/job/nt_pilot, /datum/job/senior_scientist, /datum/job/roboticist)
 
 //For jobs that spawn with weapons in their lockers
-#define ARMED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/sea, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/guard, /datum/job/merchant)
+#define ARMED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/sea, /datum/job/officer, /datum/job/warden, /datum/job/guard, /datum/job/merchant)
 
 //For jobs that spawn with armor in their lockers
 #define ARMORED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm, /datum/job/sea, /datum/job/bridgeofficer, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/guard, /datum/job/merchant)
