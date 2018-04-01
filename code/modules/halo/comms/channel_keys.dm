@@ -57,6 +57,9 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	"BULLCOM","SILVERCOM","DOGCOM","SNAKECOM",\
 	"EXCOM"\
 	)
+	for(var/key in department_radio_keys) //Department keys would bork if this isn't done.
+		if(department_radio_keys[key] == "INNIECOM")
+			department_radio_keys[key] = "[innie_channel]"
 
 	//randomised the freqs but avoid collisions
 	used_freqs += "[eband_freq]"
