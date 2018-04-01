@@ -5747,8 +5747,6 @@
 /obj/item/device/multitool{
 	pixel_x = 5
 	},
-/obj/item/weapon/cartridge/atmos,
-/obj/item/weapon/cartridge/atmos,
 /obj/item/device/pipe_painter,
 /obj/item/clamp,
 /turf/simulated/floor/tiled,

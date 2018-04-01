@@ -289,7 +289,6 @@
 /decl/hierarchy/supply_pack/security/detectivegear
 	name = "Forensics - investigation equipment"
 	contains = list(/obj/item/weapon/storage/box/evidence = 2,
-					/obj/item/weapon/cartridge/detective,
 					/obj/item/device/radio/headset/headset_sec,
 					/obj/item/taperoll/police,
 					/obj/item/clothing/glasses/sunglasses,

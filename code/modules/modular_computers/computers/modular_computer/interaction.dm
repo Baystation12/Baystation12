@@ -176,6 +176,10 @@
 		if(!ai_slot)
 			return
 		ai_slot.attackby(W, user)
+
+	if(!modifiable)
+		return ..()
+
 	if(istype(W, /obj/item/weapon/computer_hardware))
 		var/obj/item/weapon/computer_hardware/C = W
 		if(C.hardware_size <= max_hardware_size)
@@ -234,3 +238,14 @@
 		return
 
 	..()
+
+/obj/item/modular_computer/examine(var/mob/user)
+	. = ..()
+
+	if(enabled && .)
+		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
+
+/obj/item/modular_computer/MouseDrop(var/atom/over_object)
+	var/mob/M = usr
+	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
+		return attack_self(M)

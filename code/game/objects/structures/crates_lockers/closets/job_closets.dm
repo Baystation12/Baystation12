@@ -61,7 +61,6 @@
 	return list(
 		/obj/item/clothing/under/rank/janitor,
 		/obj/item/device/radio/headset/headset_service,
-		/obj/item/weapon/cartridge/janitor,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/head/soft/purple,
 		/obj/item/clothing/head/beret/purple,

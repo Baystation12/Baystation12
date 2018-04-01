@@ -13,7 +13,6 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	requires_ntnet = 1
 	available_on_ntnet = 1
 	required_access = access_security
-	usage_flags = PROGRAM_ALL
 	nanomodule_path = /datum/nano_module/digitalwarrant/
 
 /datum/nano_module/digitalwarrant/

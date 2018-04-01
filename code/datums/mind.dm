@@ -63,6 +63,8 @@
 	//put this here for easier tracking ingame
 	var/datum/money_account/initial_account
 
+	var/list/initial_email_login = list("login" = "", "password" = "")
+
 	//used for optional self-objectives that antagonists can give themselves, which are displayed at the end of the round.
 	var/ambitions
 
@@ -452,8 +454,8 @@
 		for(var/obj/item/weapon/card/id/card in current)
 			is_currently_brigged = 0
 			break // if they still have ID they're not brigged
-		for(var/obj/item/device/pda/P in current)
-			if(P.id)
+		for(var/obj/item/modular_computer/pda/P in current)
+			if(P.GetIdCard())
 				is_currently_brigged = 0
 				break // if they still have ID they're not brigged
 

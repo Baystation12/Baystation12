@@ -8,6 +8,7 @@
 	requires_ntnet = 1
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/records
+	usage_flags = PROGRAM_ALL
 
 /datum/nano_module/records
 	name = "Crew Records"

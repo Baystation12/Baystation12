@@ -10,6 +10,7 @@
 	available_on_ntnet = 1
 	var/stored_login = ""
 	var/stored_password = ""
+	usage_flags = PROGRAM_ALL
 
 	nanomodule_path = /datum/nano_module/email_client
 
@@ -20,6 +21,7 @@
 		if(NME.current_account)
 			stored_login = NME.stored_login
 			stored_password = NME.stored_password
+			NME.log_out()
 		else
 			stored_login = ""
 			stored_password = ""
@@ -27,6 +29,7 @@
 
 /datum/computer_file/program/email_client/run_program()
 	. = ..()
+
 	if(NM)
 		var/datum/nano_module/email_client/NME = NM
 		NME.stored_login = stored_login
@@ -37,6 +40,7 @@
 
 /datum/computer_file/program/email_client/proc/new_mail_notify()
 	computer.visible_message("\The [computer] beeps softly, indicating a new email has been received.", 1)
+	playsound(computer, 'sound/machines/twobeep.ogg', 50, 1)
 
 /datum/computer_file/program/email_client/process_tick()
 	..()
@@ -77,20 +81,52 @@
 	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 
+/datum/nano_module/email_client/proc/mail_received(var/datum/computer_file/data/email_message/received_message)
+	var/mob/living/L = get_holder_of_type(host, /mob/living)
+	if(L)
+		var/list/msg = list()
+		msg += "*--*\n"
+		msg += "<span class='notice'>New mail received from [received_message.source]:</span>\n"
+		msg += "<b>Subject:</b> [received_message.title]\n<b>Message:</b>\n[pencode2html(received_message.stored_data)]\n"
+		if(received_message.attachment)
+			msg += "<b>Attachment:</b> [received_message.attachment.filename].[received_message.attachment.filetype] ([received_message.attachment.size]GQ)\n"
+		msg += "<a href='?src=\ref[src];open;reply=[received_message.uid]'>Reply</a>\n"
+		msg += "*--*"
+		to_chat(L, jointext(msg, null))
+
+/datum/nano_module/email_client/Destroy()
+	log_out()
+	. = ..()
+
 /datum/nano_module/email_client/proc/log_in()
+	var/list/id_login
+
+	if(istype(host, /obj/item/modular_computer/pda))
+		var/obj/item/modular_computer/pda/pda = host
+		if(pda.GetIdCard())
+			var/obj/item/weapon/card/id/id = pda.GetIdCard()
+			id_login = id.associated_email_login.Copy()
+
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
-		if(!account.can_login)
+		if(!account || !account.can_login)
 			continue
-		if(account.login == stored_login)
-			if(account.password == stored_password)
-				if(account.suspended)
-					error = "This account has been suspended. Please contact the system administrator for assistance."
-					return 0
-				current_account = account
-				return 1
-			else
+
+		if(!(id_login && id_login["login"] == account.login && id_login["password"] == account.password))
+			if(account.login != stored_login)
+				continue
+
+			if(account.password != stored_password)
 				error = "Invalid Password"
 				return 0
+
+		if(account.suspended)
+			error = "This account has been suspended. Please contact the system administrator for assistance."
+			return 0
+
+		current_account = account
+		current_account.connected_clients |= src
+		return 1
+
 	error = "Invalid Login"
 	return 0
 
@@ -115,6 +151,8 @@
 
 
 /datum/nano_module/email_client/proc/log_out()
+	if(current_account)
+		current_account.connected_clients -= src
 	current_account = null
 	downloading = null
 	download_progress = 0
@@ -258,6 +296,10 @@
 	if(..())
 		return 1
 	var/mob/living/user = usr
+
+	if(href_list["open"])
+		ui_interact()
+
 	check_for_new_messages(1)		// Any actual interaction (button pressing) is considered as acknowledging received message, for the purpose of notification icons.
 	if(href_list["login"])
 		log_in()

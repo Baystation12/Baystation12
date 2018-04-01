@@ -35,6 +35,8 @@
 			return global.OOClog;
 		if("PDAs")
 			return global.PDAs;
+		if("SKILLS")
+			return global.SKILLS;
 		if("SSair")
 			return global.SSair;
 		if("SSairflow")
@@ -1032,6 +1034,8 @@
 			global.OOClog=newval;
 		if("PDAs")
 			global.PDAs=newval;
+		if("SKILLS")
+			global.SKILLS=newval;
 		if("SSair")
 			global.SSair=newval;
 		if("SSairflow")
@@ -2011,6 +2015,7 @@
 	"Master",
 	"OOClog",
 	"PDAs",
+	"SKILLS",
 	"SSair",
 	"SSairflow",
 	"SSantags",

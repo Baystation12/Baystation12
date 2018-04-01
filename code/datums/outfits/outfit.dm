@@ -210,8 +210,7 @@ var/list/outfits_decls_by_type_
 		return
 	if(OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)
 		return
-	var/obj/item/device/pda/heads/pda = new pda_type(H)
-	pda.set_owner_rank_job(H.real_name, rank, assignment)
+	var/obj/item/modular_computer/pda/pda = new pda_type(H)
 	if(H.equip_to_slot_or_store_or_drop(pda, pda_slot))
 		return pda
 

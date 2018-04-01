@@ -172,35 +172,6 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 //DEFINITIONS FOR ASSET DATUMS START HERE.
 
-/datum/asset/simple/pda
-	assets = list(
-		"pda_atmos.png"			= 'icons/pda_icons/pda_atmos.png',
-		"pda_back.png"			= 'icons/pda_icons/pda_back.png',
-		"pda_bell.png"			= 'icons/pda_icons/pda_bell.png',
-		"pda_blank.png"			= 'icons/pda_icons/pda_blank.png',
-		"pda_boom.png"			= 'icons/pda_icons/pda_boom.png',
-		"pda_bucket.png"		= 'icons/pda_icons/pda_bucket.png',
-		"pda_chatroom.png"      = 'icons/pda_icons/pda_chatroom.png',
-		"pda_crate.png"         = 'icons/pda_icons/pda_crate.png',
-		"pda_cuffs.png"         = 'icons/pda_icons/pda_cuffs.png',
-		"pda_eject.png"			= 'icons/pda_icons/pda_eject.png',
-		"pda_exit.png"			= 'icons/pda_icons/pda_exit.png',
-		"pda_honk.png"			= 'icons/pda_icons/pda_honk.png',
-		"pda_locked.png"        = 'icons/pda_icons/pda_locked.png',
-		"pda_mail.png"			= 'icons/pda_icons/pda_mail.png',
-		"pda_medical.png"		= 'icons/pda_icons/pda_medical.png',
-		"pda_menu.png"			= 'icons/pda_icons/pda_menu.png',
-		"pda_mule.png"			= 'icons/pda_icons/pda_mule.png',
-		"pda_notes.png"			= 'icons/pda_icons/pda_notes.png',
-		"pda_power.png"			= 'icons/pda_icons/pda_power.png',
-		"pda_rdoor.png"			= 'icons/pda_icons/pda_rdoor.png',
-		"pda_reagent.png"		= 'icons/pda_icons/pda_reagent.png',
-		"pda_refresh.png"		= 'icons/pda_icons/pda_refresh.png',
-		"pda_scanner.png"		= 'icons/pda_icons/pda_scanner.png',
-		"pda_signaler.png"		= 'icons/pda_icons/pda_signaler.png',
-		"pda_status.png"		= 'icons/pda_icons/pda_status.png'
-	)
-
 /datum/asset/simple/tgui
 	assets = list(
 		"tgui.css"	= 'tgui/assets/tgui.css',

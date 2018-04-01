@@ -8,7 +8,6 @@
 	requires_ntnet = 1
 	available_on_ntnet = 1
 	required_access = access_armory
-	usage_flags = PROGRAM_ALL
 	nanomodule_path = /datum/nano_module/forceauthorization/
 
 /datum/nano_module/forceauthorization/

@@ -312,12 +312,6 @@
 	icon_state = "id_large"
 	startswith = list(/obj/item/weapon/card/id = 14)
 
-/obj/item/weapon/storage/box/seccarts
-	name = "box of spare R.O.B.U.S.T. Cartridges"
-	desc = "A box full of R.O.B.U.S.T. Cartridges, used by Security."
-	icon_state = "pda"
-	startswith = list(/obj/item/weapon/cartridge/security = 7)
-
 /obj/item/weapon/storage/box/handcuffs
 	name = "box of spare handcuffs"
 	desc = "A box full of handcuffs."

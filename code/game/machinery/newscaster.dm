@@ -102,23 +102,6 @@
 		NEWSCASTER.newsAlert(annoncement)
 		NEWSCASTER.update_icon()
 
-	var/list/receiving_pdas = new
-	for (var/obj/item/device/pda/P in PDAs)
-		if (!P.owner)
-			continue
-		if (P.toff)
-			continue
-		receiving_pdas += P
-
-	spawn(0)	// get_receptions sleeps further down the line, spawn of elsewhere
-		var/datum/receptions/receptions = get_receptions(null, receiving_pdas) // datums are not atoms, thus we have to assume the newscast network always has reception
-
-		for(var/obj/item/device/pda/PDA in receiving_pdas)
-			if(!(receptions.receiver_reception[PDA] & TELECOMMS_RECEPTION_RECEIVER))
-				continue
-
-			PDA.new_news(annoncement)
-
 var/datum/feed_network/news_network = new /datum/feed_network     //The global news-network, which is coincidentally a global list.
 
 var/list/obj/machinery/newscaster/allCasters = list() //Global list that will contain reference to all newscasters in existence.
@@ -282,11 +265,11 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			if(6)
 				dat+="<B><FONT COLOR='maroon'>ERROR: Could not submit Feed story to Network.</B></FONT><HR><BR>"
 				if(src.channel_name=="")
-					dat+="<FONT COLOR='maroon'>•Invalid receiving channel name.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>Invalid receiving channel name.</FONT><BR>"
 				if(src.scanned_user=="Unknown")
-					dat+="<FONT COLOR='maroon'>•Channel author unverified.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>Channel author unverified.</FONT><BR>"
 				if(src.msg == "" || src.msg == "\[REDACTED\]")
-					dat+="<FONT COLOR='maroon'>•Invalid message body.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>Invalid message body.</FONT><BR>"
 
 				dat+="<BR><A href='?src=\ref[src];setScreen=[3]'>Return</A><BR>"
 			if(7)
@@ -298,18 +281,18 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					else
 						existing_authors += FC.author
 				if(src.scanned_user in existing_authors)
-					dat+="<FONT COLOR='maroon'>•There already exists a Feed channel under your name.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>There already exists a Feed channel under your name.</FONT><BR>"
 				if(src.channel_name=="" || src.channel_name == "\[REDACTED\]")
-					dat+="<FONT COLOR='maroon'>•Invalid channel name.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>Invalid channel name.</FONT><BR>"
 				var/check = 0
 				for(var/datum/feed_channel/FC in news_network.network_channels)
 					if(FC.channel_name == src.channel_name)
 						check = 1
 						break
 				if(check)
-					dat+="<FONT COLOR='maroon'>•Channel name already in use.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>Channel name already in use.</FONT><BR>"
 				if(src.scanned_user=="Unknown")
-					dat+="<FONT COLOR='maroon'>•Channel author unverified.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>Channel author unverified.</FONT><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[2]'>Return</A><BR>"
 			if(8)
 				var/total_num=length(news_network.network_channels)
@@ -424,11 +407,11 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			if(16)
 				dat+="<B><FONT COLOR='maroon'>ERROR: Wanted Issue rejected by Network.</B></FONT><HR><BR>"
 				if(src.channel_name=="" || src.channel_name == "\[REDACTED\]")
-					dat+="<FONT COLOR='maroon'>•Invalid name for person wanted.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>Invalid name for person wanted.</FONT><BR>"
 				if(src.scanned_user=="Unknown")
-					dat+="<FONT COLOR='maroon'>•Issue author unverified.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>Issue author unverified.</FONT><BR>"
 				if(src.msg == "" || src.msg == "\[REDACTED\]")
-					dat+="<FONT COLOR='maroon'>•Invalid description.</FONT><BR>"
+					dat+="<FONT COLOR='maroon'>Invalid description.</FONT><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Return</A><BR>"
 			if(17)
 				dat+="<B>Wanted Issue successfully deleted from Circulation</B><BR>"
@@ -802,7 +785,7 @@ obj/item/weapon/newspaper/attack_self(mob/user as mob)
 		switch(screen)
 			if(0) //Cover
 				dat+="<DIV ALIGN='center'><B><FONT SIZE=6>The Griffon</FONT></B></div>"
-				dat+="<DIV ALIGN='center'><FONT SIZE=2>[GLOB.using_map.company_name]-standard newspaper, for use on [GLOB.using_map.company_name]© Space Facilities</FONT></div><HR>"
+				dat+="<DIV ALIGN='center'><FONT SIZE=2>[GLOB.using_map.company_name]-standard newspaper, for use on [GLOB.using_map.company_name] Space Facilities</FONT></div><HR>"
 				if(isemptylist(src.news_content))
 					if(src.important_message)
 						dat+="Contents:<BR><ul><B><FONT COLOR='red'>**</FONT>Important Security Announcement<FONT COLOR='red'>**</FONT></B> <FONT SIZE=2>\[page [src.pages+2]\]</FONT><BR></ul>"
@@ -930,20 +913,11 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 /obj/machinery/newscaster/proc/scan_user(mob/living/user as mob)
 	if(istype(user,/mob/living/carbon/human))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
-		if(human_user.wear_id)                                      //Newscaster scans you
-			if(istype(human_user.wear_id, /obj/item/device/pda) )	//autorecognition, woo!
-				var/obj/item/device/pda/P = human_user.wear_id
-				if(P.id)
-					src.scanned_user = GetNameAndAssignmentFromId(P.id)
-				else
-					src.scanned_user = "Unknown"
-			else if(istype(human_user.wear_id, /obj/item/weapon/card/id) )
-				var/obj/item/weapon/card/id/ID = human_user.wear_id
-				src.scanned_user = GetNameAndAssignmentFromId(ID)
-			else
-				src.scanned_user ="Unknown"
+		var/obj/item/weapon/card/id/id = human_user.GetIdCard()
+		if(istype(id))                                      //Newscaster scans you
+			src.scanned_user = GetNameAndAssignmentFromId(id)
 		else
-			src.scanned_user ="Unknown"
+			src.scanned_user = "Unknown"
 	else
 		var/mob/living/silicon/ai_user = user
 		src.scanned_user = "[ai_user.name] ([ai_user.job])"
