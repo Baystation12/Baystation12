@@ -254,10 +254,11 @@
 
 /obj/item/clothing/head/helmet/space/rig/medical
 	camera = /obj/machinery/camera/network/medbay
-	species_restricted = list(SPECIES_HUMAN, SPECIES_TAJARA, SPECIES_UNATHI)
+	species_restricted = list(SPECIES_HUMAN, SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_SKRELL)
 	sprite_sheets = list(
 		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi'
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi'
 		)
 
 /obj/item/clothing/suit/space/rig/medical
