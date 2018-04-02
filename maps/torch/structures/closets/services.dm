@@ -59,7 +59,7 @@
 		/obj/item/weapon/storage/bag/trash,
 		/obj/item/clothing/shoes/galoshes,
 		/obj/item/weapon/storage/box/detergent,
-		/obj/item/weapon/soap/nanotrasen
+		/obj/item/weapon/soap
 	)
 
 /obj/structure/closet/secure_closet/bar_torch

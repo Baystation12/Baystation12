@@ -300,6 +300,16 @@
 	if(volume >= 1)
 		T.wet_floor(80)
 
+/datum/reagent/lube/oil // TODO: Robot Overhaul in general
+	name = "Oil"
+	description = "A thick greasy industrial lubricant. Commonly found in robotics."
+	taste_description = "greasy diesel"
+	color = "#000000"
+
+/datum/reagent/lube/oil/touch_turf(var/turf/simulated/T)
+	if(!istype(T, /turf/space))
+		new /obj/effect/decal/cleanable/blood/oil/streak(T)
+
 /datum/reagent/silicate
 	name = "Silicate"
 	description = "A compound that can be used to reinforce glass."
