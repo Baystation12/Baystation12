@@ -41,12 +41,15 @@
 		if(occupants[M] in exposed_positions)
 			M.examine(user)
 
-/obj/vehicles/proc/is_atom_adjacent(var/atom/A)
+/obj/vehicles/proc/is_atom_adjacent(var/atom/A,var/turf/center_turf)
 	if(A in contents || A in occupants)
 		return 1
-	for(var/turf/T in locs)
-		if(A in view(1,T) || A.loc in view(1,T))
-			return 1
+	if(center_turf)
+		return center_turf.Adjacent(A)
+	else
+		for(var/turf/T in locs)
+			if(T.Adjacent(A))
+				return 1
 	return 0
 
 /obj/vehicles/Destroy()
@@ -170,9 +173,9 @@
 	set category = "Vehicle"
 	set src in view(1)
 	var/mob/user = usr
-	if(!istype(user))
+	if(!istype(user) || !is_atom_adjacent(user))
 		return
-	var/position_switchto = input(user,"Enter which position?","Vehicle  Select","Cancel") in ALL_VEHICLE_POSITIONS + list("Cancel")
+	var/position_switchto = input(user,"Enter which position?","Vehicle Position Select","Cancel") in ALL_VEHICLE_POSITIONS + list("Cancel")
 	if(position_switchto == "Cancel")
 		return
 	if(check_position_blocked(position_switchto))
@@ -260,7 +263,7 @@
 //TODO: CARGO SYSTEM
 /obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)
 	var/confirm = alert(user,"Place [O.name] into [src.name]'s storage?",,"Yes","No")
-	if(confirm != "Yes" || !is_atom_adjacent(user) || !is_atom_adjacent(O))
+	if(confirm != "Yes" || !is_atom_adjacent(user) || !is_atom_adjacent(O,user.loc))
 		return
 	var/is_vehicle = 0
 	if(istype(O,/obj/vehicles))
@@ -299,7 +302,7 @@
 /obj/vehicles/proc/handle_grab_attack(var/obj/item/grab/I, var/mob/user)
 	var/mob/living/grabbed_mob = I.affecting
 	var/mob/living/carbon/human/h = user
-	if(!istype(grabbed_mob) || !istype(h) || !is_atom_adjacent(grabbed_mob) || !is_atom_adjacent(h))
+	if(!istype(grabbed_mob) || !istype(h) || !is_atom_adjacent(grabbed_mob,h.loc) || !is_atom_adjacent(h))
 		return
 	if(grabbed_mob.stat == CONSCIOUS)
 		if(!do_after(user, VEHICLE_LOAD_DELAY,grabbed_mob,1,1,,1))
@@ -327,7 +330,7 @@
 	if(chosen_occ_name == "Cancel")
 		return
 	var/mob/chosen_occ = all_viable_occupants[chosen_occ_name]
-	if(isnull(chosen_occ) || !is_atom_adjacent(puller) || !is_atom_adjacent(chosen_occ))
+	if(isnull(chosen_occ) || !is_atom_adjacent(puller))
 		return
 	if(chosen_occ.stat == CONSCIOUS)
 		if(!do_after(puller, VEHICLE_LOAD_DELAY*2,src,1,1,,1))
