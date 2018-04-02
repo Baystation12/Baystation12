@@ -359,7 +359,7 @@
 
 //hand portable floodlights for emergencies. Less bulky than the large ones. But also less light. Unused green variant in the sheet.
 
-/obj/item/device/flashlight/floodlamp
+/obj/item/device/flashlight/lamp/floodlamp
 	name = "flood lamp"
 	desc = "A portable emergency flood light with a ultra-bright LED."
 	icon = 'icons/obj/machines/floodlight.dmi'
@@ -391,3 +391,51 @@
 	rotate()
 
 //Lava Lamps: Because we're already stuck in the 70ies with those fax machines.
+/obj/item/device/flashlight/lamp/lava
+	name = "lava lamp"
+	desc = "A kitchy throwback decorative light. Noir Edition."
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "lavalamp"
+	on = 0
+	action_button_name = "Toggle lamp"
+	brightness_on = 3 //range of light when on
+
+/obj/item/device/flashlight/lamp/lava/red
+	desc = "A kitchy red decorative light."
+	icon_state = "redlamp"
+	light_color = "#ff0000"
+
+/obj/item/device/flashlight/lamp/lava/blue
+	desc = "A kitchy blue decorative light"
+	icon_state = "bluelamp"
+	light_color = "#0000ff"
+
+/obj/item/device/flashlight/lamp/lava/cyan
+	desc = "A kitchy cyan decorative light"
+	icon_state = "cyanlamp"
+	light_color = "#00ffff"
+
+/obj/item/device/flashlight/lamp/lava/green
+	desc = "A kitchy green decorative light"
+	icon_state = "greenlamp"
+	light_color = "#00ff00"
+
+/obj/item/device/flashlight/lamp/lava/orange
+	desc = "A kitchy orange decorative light"
+	icon_state = "orangelamp"
+	light_color = "#ff9b00"
+
+/obj/item/device/flashlight/lamp/lava/purple
+	desc = "A kitchy purple decorative light"
+	icon_state = "purplelamp"
+	light_color = "#9b00ff"
+
+/obj/item/device/flashlight/lamp/lava/pink
+	desc = "A kitchy pink decorative light"
+	icon_state = "pinklamp"
+	light_color = "#ff00ff"
+
+/obj/item/device/flashlight/lamp/lava/yellow
+	desc = "A kitchy yellow decorative light"
+	icon_state = "yellowlamp"
+	light_color = "#ffff00"

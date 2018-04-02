@@ -478,3 +478,15 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/ale, 30)
+
+//Probably not the right place for it, but no idea where else to put it without making a brand new DM and slogging through making vars from scratch.
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/oiljug
+	name = "oil jug"
+	desc = "A plastic jug of engine oil. Not for human consumption."
+	icon_state = "oil"
+	isGlass = 0
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/oiljug/New()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/lube/oil, 100)

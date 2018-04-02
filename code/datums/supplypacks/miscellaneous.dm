@@ -1,6 +1,31 @@
 /decl/hierarchy/supply_pack/miscellaneous
 	name = "Miscellaneous"
 
+/decl/hierarchy/supply_pack/miscellaneous/llamps
+	num_contained = 3
+	contains = list(/obj/item/device/flashlight/lamp/lava,
+					/obj/item/device/flashlight/lamp/lava/red,
+					/obj/item/device/flashlight/lamp/lava/orange,
+					/obj/item/device/flashlight/lamp/lava/yellow,
+					/obj/item/device/flashlight/lamp/lava/green,
+					/obj/item/device/flashlight/lamp/lava/cyan,
+					/obj/item/device/flashlight/lamp/lava/blue,
+					/obj/item/device/flashlight/lamp/lava/purple,
+					/obj/item/device/flashlight/lamp/lava/pink)
+	name = "Lava lamps"
+	cost = 10
+	containername = "\improper Lava lamp crate"
+	supply_method = /decl/supply_method/randomized
+
+/decl/hierarchy/supply_pack/miscellaneous/officetoys
+	name = "Office toys"
+	contains = list(/obj/item/toy/desk/newtoncradle,
+					/obj/item/toy/desk/fan,
+					/obj/item/toy/desk/officetoy,
+					/obj/item/toy/desk/dippingbird)
+	cost = 15
+	containername = "\improper Office toys crate"
+
 /decl/hierarchy/supply_pack/miscellaneous/wizard
 	name = "Wizard costume"
 	contains = list(/obj/item/weapon/staff,

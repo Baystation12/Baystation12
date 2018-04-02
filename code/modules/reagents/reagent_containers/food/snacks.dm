@@ -620,16 +620,23 @@
 		bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/carpmeat
+	desc = "A fillet of space carp meat."
+/obj/item/weapon/reagent_containers/food/snacks/carpmeat/New()
+		..()
+		reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
+		reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 6)
+		src.bitesize = 6
+
+/obj/item/weapon/reagent_containers/food/snacks/carpmeat/safe
 	name = "carp fillet"
-	desc = "A fillet of spess carp meat."
+	desc = "A fillet of carp meat. Synthesized from ancient Earth genetic archives."
 	icon_state = "fishfillet"
 	filling_color = "#ffdefe"
 	center_of_mass = "x=17;y=13"
 
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/carpmeat/safe/New()
 		..()
 		reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
-		reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 6)
 		src.bitesize = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/fishfingers
