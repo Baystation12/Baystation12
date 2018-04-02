@@ -97,7 +97,6 @@
 	#include "../../code/modules/lobby_music/comet_haley.dm"
 	#include "../../code/modules/lobby_music/lysendraa.dm"
 	#include "../../code/modules/lobby_music/lasers.dm"
-	#include "../../code/modules/lobby_music/businessend.dm"
 
 	#define using_map_DATUM /datum/map/torch
 
@@ -106,3 +105,4 @@
 	#warn A map has already been included, ignoring Torch
 
 #endif
+
