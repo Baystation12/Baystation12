@@ -62,7 +62,7 @@ var/list/global/tank_gauge_cache = list()
 	air_contents.update_values()
 
 	START_PROCESSING(SSobj, src)
-	update_icon()
+	update_icon(override = TRUE)
 
 /obj/item/weapon/tank/Destroy()
 	QDEL_NULL(air_contents)
@@ -123,7 +123,7 @@ var/list/global/tank_gauge_cache = list()
 		if(C.use(1))
 			wired = 1
 			to_chat(user, "<span class='notice'>You attach the wires to the tank.</span>")
-			update_icon()
+			update_icon(override = TRUE)
 
 	if(isWirecutter(W))
 		if(wired && proxyassembly.assembly)
@@ -145,7 +145,7 @@ var/list/global/tank_gauge_cache = list()
 						assy.a_right = null
 						proxyassembly.assembly = null
 						qdel(assy)
-				update_icon()
+				update_icon(override = TRUE)
 
 			else
 				to_chat(user, "<span class='danger'>You slip and bump the igniter!</span>")
@@ -156,7 +156,7 @@ var/list/global/tank_gauge_cache = list()
 			if(do_after(user, 10, src))
 				to_chat(user, "<span class='notice'>You quickly clip the wire from the tank.</span>")
 				wired = 0
-				update_icon()
+				update_icon(override = TRUE)
 
 		else
 			to_chat(user, "<span class='notice'>There are no wires to cut!</span>")
@@ -340,7 +340,9 @@ var/list/global/tank_gauge_cache = list()
 	update_icon()
 	check_status()
 
-/obj/item/weapon/tank/update_icon()
+/obj/item/weapon/tank/update_icon(var/override)
+	if(initialized && istype(loc, /obj/) && !istype(loc, /obj/item/clothing/suit/) && !override) //So we don't eat up our tick. Every tick, when we're not actually in play.
+		return
 	overlays.Cut()
 	if(proxyassembly.assembly || wired)
 		overlays += image(icon,"bomb_assembly")
@@ -506,7 +508,7 @@ var/list/global/tank_gauge_cache = list()
 	H.master = proxyassembly
 
 	H.update_icon()
-	update_icon()
+	update_icon(override = TRUE)
 
 /obj/item/weapon/tank/phoron/onetankbomb/Initialize()
 	. = ..()
