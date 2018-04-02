@@ -89,6 +89,8 @@ var/global/floorIsLava = 0
 		else
 			body += "<A href='?src=\ref[src];removestaffwarn=\ref[M]'>Remove StaffWarn</A>"
 
+		body += EAMS_GetPlayerPannelButton(src, M.client)
+
 	body += {"<br><br>
 		<A href='?src=\ref[src];jumpto=\ref[M]'><b>Jump to</b></A> |
 		<A href='?src=\ref[src];getmob=\ref[M]'>Get</A> |

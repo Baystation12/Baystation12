@@ -85,6 +85,8 @@
 
 	if(href_list["ready"])
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
+			if (!EAMS_CheckIP())
+				return
 			ready = text2num(href_list["ready"])
 		else
 			ready = 0
@@ -96,6 +98,9 @@
 	if(href_list["observe"])
 		if(!(initialization_stage&INITIALIZATION_COMPLETE))
 			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+			return
+
+		if (!EAMS_CheckIP())
 			return
 
 		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
@@ -140,6 +145,10 @@
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
 			return
+
+		if (!EAMS_CheckIP())
+			return
+
 		LateChoices() //show the latejoin job selection menu
 
 	if(href_list["manifest"])

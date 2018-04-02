@@ -62,6 +62,7 @@ var/list/gamemode_cache = list()
 	var/respawn_delay = 30
 	var/guest_jobban = 1
 	var/panic_bunker = 0
+	var/eams = 0
 	var/usewhitelist = 0
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
 	var/mods_can_tempban = 0
@@ -694,6 +695,9 @@ var/list/gamemode_cache = list()
 
 				if("panic_bunker")
 					config.panic_bunker = 1
+
+				if("eams")
+					config.eams = 0
 
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE

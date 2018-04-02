@@ -69,7 +69,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_say,			//admin-only ooc chat,
 	/datum/admins/proc/togglehubvisibility, //toggles visibility on the BYOND Hub,
 	/datum/admins/proc/PlayerNotes,
-	/client/proc/panicbunker,
+	/client/proc/panicbunker,			//toggles Panic Bunker
+	/client/proc/EAMS_toggle,			//toggles Epic Anti-Multiacc System
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/free_slot,			//frees slot for chosen job,

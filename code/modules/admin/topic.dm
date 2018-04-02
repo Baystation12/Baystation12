@@ -1982,6 +1982,8 @@
 				show_player_panel(M)
 			if("No")
 				return
+				
+	EAMS_AdminTopicProcess(src, href_list)
 
 
 mob/living/proc/can_centcom_reply()
