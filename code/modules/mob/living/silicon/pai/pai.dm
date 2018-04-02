@@ -91,7 +91,7 @@
 
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
-	verbs -= /mob/living/verb/ghost
+	verbs -= /mob/living/proc/ghost
 
 	..()
 

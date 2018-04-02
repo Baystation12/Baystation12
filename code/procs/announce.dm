@@ -37,7 +37,7 @@
 
 	if(!msg_sanitized)
 		message = sanitize(message, extra = 0)
-	message_title = sanitizeSafe(message_title)
+	message_title = rhtml_encode(message_title)
 
 	var/msg = FormMessage(message, message_title)
 	for(var/mob/M in GLOB.player_list)
