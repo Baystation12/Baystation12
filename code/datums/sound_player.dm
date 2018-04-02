@@ -28,6 +28,11 @@ var/decl/sound_player/sound_player = new()
 	source_id_uses = list()
 
 /decl/sound_player/proc/PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff, var/prefer_mute)
+	if(!istype(source))
+		CRASH("Invalid sound source given: [log_info_line(source)]")
+	if(!sound_id)
+		CRASH("No sound id given")
+
 	var/channel = PrivGetChannel(sound_id)
 	if(!channel)
 		log_warning("All available sound channels are in active use.")
