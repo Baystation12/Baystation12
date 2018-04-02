@@ -266,3 +266,10 @@
 		var/turf/T = locate(new_x, new_y, new_z)
 		if(T)
 			forceMove(T)
+
+	throwing = TT
+	if(spin && !no_spin && !no_spin_thrown)
+		SpinAnimation(5, 1)
+
+	SSthrowing.processing[src] = TT
+	TT.tick()
