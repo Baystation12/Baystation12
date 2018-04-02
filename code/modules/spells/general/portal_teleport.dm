@@ -23,7 +23,7 @@
 
 /spell/portal_teleport/choose_targets()
 	var/area/thearea
-	var/message = alert("Would you like to show station areas?",, "Yes", "No")
+	var/message = alert("Would you like to show station areas?\nNote: it can take up to 5 minutes for the away sites to load in and show up.",, "Yes", "No")
 	switch(message)
 		if("Yes")
 			select_areas = stationlocs
@@ -37,43 +37,12 @@
 
 /spell/portal_teleport/cast(area/thearea, mob/user)
 	playsound(get_turf(user),cast_sound,50,1)
-	if(!istype(thearea))
-		if(istype(thearea, /list))
-			thearea = thearea[1]
-	var/list/L = list()
-	for(var/turf/T in get_area_turfs(thearea))
-		if(!T.density)
-			var/clear = 1
-			for(var/obj/O in T)
-				if(O.density)
-					clear = 0
-					break
-			if(clear)
-				L+=T
+	var/turf/start = get_turf(user)
+	var/turf/end = user.try_teleport(thearea)
 
-	if(!L.len)
+	if(!end)
 		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
-
-	if(user && user.buckled)
-		user.buckled = null
-
-	var/attempt = null
-	var/success = 0
-	var/turf/start = get_turf(user)
-	var/turf/end
-	while(L.len)
-		attempt = pick(L)
-		success = user.Move(attempt)
-		if(!success)
-			L.Remove(attempt)
-		else
-			end = attempt
-			break
-
-	if(!success)
-		end = pick(L)
-		user.loc = end
 
 	new /obj/effect/portal/wizard(start, end, 35 MINUTES)
 	new /obj/effect/portal/wizard(end, start, 35 MINUTES)

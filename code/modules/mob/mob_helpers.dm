@@ -622,3 +622,39 @@ proc/is_blind(A)
 			to_chat(src, "<span class='danger'>The jitters are killing you! You feel your heart beating out of your chest.</span>")
 			admin_victim_log(src, "has taken <i>minor heart damage</i> at jitteriness level [src.jitteriness].")
 	return 1
+
+/mob/proc/try_teleport(var/area/thearea)
+	if(!istype(thearea))
+		if(istype(thearea, /list))
+			thearea = thearea[1]
+	var/list/L = list()
+	for(var/turf/T in get_area_turfs(thearea))
+		if(!T.density)
+			var/clear = 1
+			for(var/obj/O in T)
+				if(O.density)
+					clear = 0
+					break
+			if(clear)
+				L+=T
+
+	if(buckled)
+		buckled = null
+
+	var/attempt = null
+	var/success = 0
+	var/turf/end
+	while(L.len)
+		attempt = pick(L)
+		success = Move(attempt)
+		if(!success)
+			L.Remove(attempt)
+		else
+			end = attempt
+			break
+
+	if(!success)
+		end = pick(L)
+		forceMove(end)
+
+	return end

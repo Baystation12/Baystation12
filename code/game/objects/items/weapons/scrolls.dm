@@ -51,40 +51,10 @@
 	smoke.set_up(5, 0, user.loc)
 	smoke.attach(user)
 	smoke.start()
-	var/list/L = list()
-	for(var/turf/T in get_area_turfs(thearea))
-		if(!T.density)
-			var/clear = 1
-			for(var/obj/O in T)
-				if(O.density)
-					clear = 0
-					break
-			if(clear)
-				L+=T
+	var/turf/end = user.try_teleport(thearea)
 
-	if(!L.len)
+	if(!end)
 		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
-
-	if(user && user.buckled)
-		user.buckled.unbuckle_mob()
-
-	var/list/tempL = L
-	var/attempt = null
-	var/success = 0
-	while(tempL.len)
-		attempt = pick(tempL)
-		success = user.Move(attempt)
-		if(!success)
-			tempL.Remove(attempt)
-		else
-			break
-
-	if(!success)
-		user.forceMove(pick(L))
-
-	if(!is_station_area(get_area(user)))
-		log_and_message_admins("has teleported to [get_area(user)].")
-
 	smoke.start()
 	src.uses -= 1
