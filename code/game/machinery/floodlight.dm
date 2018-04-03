@@ -10,7 +10,10 @@
 	var/use = 200 // 200W light
 	var/unlocked = 0
 	var/open = 0
-	var/brightness_on = 8		//can't remember what the maxed out value is
+
+	var/l_max_bright = 0.8 //brightness of light when on, can be negative
+	var/l_inner_range = 1 //inner range of light when on, can be negative
+	var/l_outer_range = 6 //outer range of light when on, can be negative
 
 /obj/machinery/floodlight/New()
 	cell = new/obj/item/weapon/cell/crap(src)
@@ -30,10 +33,10 @@
 
 	// If the cell is almost empty rarely "flicker" the light. Aesthetic only.
 	if((cell.percent() < 10) && prob(5))
-		set_light(brightness_on/2, brightness_on/4)
+		set_light(l_max_bright / 2, l_inner_range, l_outer_range)
 		spawn(20)
 			if(on)
-				set_light(brightness_on, brightness_on/2)
+				set_light(l_max_bright, l_inner_range, l_outer_range)
 
 	cell.use(use*CELLRATE)
 
@@ -46,7 +49,7 @@
 		return 0
 
 	on = 1
-	set_light(brightness_on, brightness_on / 2)
+	set_light(l_max_bright, l_inner_range, l_outer_range)
 	update_icon()
 	if(loud)
 		visible_message("\The [src] turns on.")

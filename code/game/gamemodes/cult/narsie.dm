@@ -32,7 +32,7 @@ var/global/list/narsie_list = list()
 	// Pixel stuff centers Narsie.
 	pixel_x = -236
 	pixel_y = -256
-	light_range = 1
+	light_outer_range = 1
 	light_color = "#3e0000"
 
 	current_size = 6

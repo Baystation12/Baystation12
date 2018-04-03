@@ -64,6 +64,7 @@
 
 	return ..()
 
+/* lighting debugging verb
 /mob/verb/self_light()
 	set name = "set self light"
 	set category = "Light"
@@ -72,6 +73,7 @@
 	var/v3 = input(usr, "Enter outer range", "outer range", 4) as num|null
 	var/v4 = input(usr, "Enter curve", "curve", 2) as num|null
 	set_light(v1, v2, v3, v4, "#0066ff")
+*/
 
 // Kill ourselves.
 /datum/light_source/proc/destroy()
@@ -185,6 +187,7 @@
 #define APPLY_CORNER(C)              \
 	. = LUM_FALLOFF(C, source_turf); \
 	. *= (light_max_bright ** 2);    \
+	. *= light_max_bright < 0 ? -1:1;\
 	effect_str[C] = .;               \
 	C.update_lumcount                \
 	(                                \

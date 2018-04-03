@@ -161,7 +161,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		update_icon()
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
-		set_light(2, 0.25, "#e38f46")
+		set_light(0.6, 0.5, 2, 2, "#e38f46")
 		START_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/smokable/proc/die(var/nomessage = 0)
@@ -585,7 +585,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	lit = 1
 	update_icon()
 	light_effects(user)
-	set_light(2)
+	set_light(0.6, 0.5, 2)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/flame/lighter/proc/light_effects(mob/living/carbon/user)
@@ -685,7 +685,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			to_chat(loc, "<span class='warning'>[src]'s flame flickers.</span>")
 			set_light(0)
 			spawn(4)
-				set_light(2)
+				set_light(0.6, 0.5, 2)
 		reagents.remove_reagent(/datum/reagent/fuel, 0.05)
 	else
 		shutoff()

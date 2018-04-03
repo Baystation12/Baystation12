@@ -350,7 +350,7 @@
 	if(stat)
 		return 0
 	on = 1
-	set_light(light_strength)
+	set_light(0.5, 0.1, light_strength)
 	update_icons()
 	resetTarget()
 	patrol_path = list()

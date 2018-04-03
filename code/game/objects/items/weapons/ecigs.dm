@@ -129,7 +129,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	if (active)
 		item_state = icon_on
 		icon_state = icon_on
-		set_light(brightness_on)
+		set_light(0.6, 0.5, brightness_on)
 	else if (ec_cartridge)
 		set_light(0)
 		item_state = icon_off

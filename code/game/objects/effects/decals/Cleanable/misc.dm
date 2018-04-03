@@ -54,7 +54,7 @@
 	gender = PLURAL
 	density = 0
 	anchored = 1
-	light_range = 1
+	light_outer_range = 1
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenglow"
 

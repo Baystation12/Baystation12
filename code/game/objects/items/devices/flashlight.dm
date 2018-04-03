@@ -12,9 +12,10 @@
 
 	action_button_name = "Toggle Flashlight"
 	var/on = 0
-	var/brightness_on = 4 //range of light when on
 	var/activation_sound = 'sound/effects/flashlight.ogg'
-	var/flashlight_power //luminosity of light when on, can be negative
+	var/flashlight_max_bright = 0.5 //brightness of light when on, can be negative
+	var/flashlight_inner_range = 1 //inner range of light when on, can be negative
+	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
 
 /obj/item/device/flashlight/Initialize()
 	. = ..()
@@ -23,10 +24,7 @@
 /obj/item/device/flashlight/update_icon()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		if(flashlight_power)
-			set_light(l_range = brightness_on, l_power = flashlight_power)
-		else
-			set_light(brightness_on)
+		set_light(flashlight_max_bright, flashlight_inner_range, flashlight_outer_range, 2, light_color)
 	else
 		icon_state = "[initial(icon_state)]"
 		set_light(0)
@@ -115,8 +113,8 @@
 	desc = "An energy efficient flashlight."
 	icon_state = "biglight"
 	item_state = "biglight"
-	brightness_on = 6
-	flashlight_power = 3
+	flashlight_max_bright = 0.75
+	flashlight_outer_range = 4
 
 /obj/item/device/flashlight/flashdark
 	name = "flashdark"
@@ -124,8 +122,9 @@
 	icon_state = "flashdark"
 	item_state = "flashdark"
 	w_class = ITEM_SIZE_NORMAL
-	brightness_on = 8
-	flashlight_power = -6
+	flashlight_max_bright = -1
+	flashlight_outer_range = 4
+	flashlight_inner_range = 1
 
 /obj/item/device/flashlight/pen
 	name = "penlight"
@@ -134,8 +133,10 @@
 	item_state = ""
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_EARS
-	brightness_on = 2
 	w_class = ITEM_SIZE_TINY
+	flashlight_max_bright = 0.25
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 2
 
 /obj/item/device/flashlight/maglight
 	name = "maglight"
@@ -146,6 +147,8 @@
 	attack_verb = list ("smacked", "thwacked", "thunked")
 	matter = list(DEFAULT_WALL_MATERIAL = 200,"glass" = 50)
 	hitsound = "swing_hit"
+	flashlight_max_bright = 0.5
+	flashlight_outer_range = 5
 
 /obj/item/device/flashlight/drone
 	name = "low-power flashlight"
@@ -153,8 +156,10 @@
 	icon_state = "penlight"
 	item_state = ""
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	brightness_on = 2
 	w_class = ITEM_SIZE_TINY
+	flashlight_max_bright = 0.25
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 2
 
 
 // the desk lamps are a bit special
@@ -163,19 +168,19 @@
 	desc = "A desk lamp with an adjustable mount."
 	icon_state = "lamp"
 	item_state = "lamp"
-	brightness_on = 5
 	w_class = ITEM_SIZE_LARGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	flashlight_max_bright = 0.3
+	flashlight_inner_range = 2
+	flashlight_outer_range = 5
 
 	on = 1
-
 
 // green-shaded desk lamp
 /obj/item/device/flashlight/lamp/green
 	desc = "A classic green-shaded desk lamp."
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
-	brightness_on = 4
 	light_color = "#ffc58f"
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
@@ -192,8 +197,6 @@
 	name = "flare"
 	desc = "A red standard-issue flare. There are instructions on the side reading 'pull cord, make light'."
 	w_class = ITEM_SIZE_TINY
-	brightness_on = 8 // Pretty bright.
-	light_power = 3
 	light_color = "#e58775"
 	icon_state = "flare"
 	item_state = "flare"
@@ -202,6 +205,10 @@
 	var/on_damage = 7
 	var/produce_heat = 1500
 	activation_sound = 'sound/effects/flare.ogg'
+
+	flashlight_max_bright = 0.8
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 5
 
 /obj/item/device/flashlight/flare/New()
 	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.
@@ -247,14 +254,17 @@
 	name = "green glowstick"
 	desc = "A military-grade glowstick."
 	w_class = 2.0
-	brightness_on = 4
-	light_power = 2
 	color = "#49f37c"
 	icon_state = "glowstick"
 	item_state = "glowstick"
 	randpixel = 12
 	var/fuel = 0
 	activation_sound = null
+
+	flashlight_max_bright = 0.6
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 3
+
 
 /obj/item/device/flashlight/glowstick/New()
 	fuel = rand(1600, 2000)
@@ -287,7 +297,6 @@
 		I.blend_mode = BLEND_ADD
 		overlays += I
 		item_state = "glowstick-on"
-		set_light(brightness_on)
 	else
 		icon_state = "glowstick"
 	var/mob/M = loc
@@ -344,12 +353,14 @@
 	icon_state = "floor1" //not a slime extract sprite but... something close enough!
 	item_state = "slime"
 	w_class = ITEM_SIZE_TINY
-	brightness_on = 6
 	on = 1 //Bio-luminesence has one setting, on.
+
+	flashlight_max_bright = 1
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 5
 
 /obj/item/device/flashlight/slime/New()
 	..()
-	set_light(brightness_on)
 
 /obj/item/device/flashlight/slime/update_icon()
 	return
@@ -365,9 +376,13 @@
 	icon = 'icons/obj/machines/floodlight.dmi'
 	icon_state = "floodlamp"
 	item_state = "lamp"
-	brightness_on = 7
 	w_class = ITEM_SIZE_LARGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+	flashlight_max_bright = 1
+	flashlight_inner_range = 3
+	flashlight_outer_range = 7
+
 
 /obj/item/device/flashlight/floodlamp/verb/rotate()
 	set name = "Rotate Light"

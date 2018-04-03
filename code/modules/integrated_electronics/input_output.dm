@@ -536,7 +536,7 @@
 
 /obj/item/integrated_circuit/output/light/proc/update_lighting()
 	if(light_toggled)
-		set_light(l_range = light_brightness, l_power = light_brightness, l_color = light_rgb)
+		set_light(0.5, 0.1, light_brightness, l_color = light_rgb)
 	else
 		set_light(0)
 

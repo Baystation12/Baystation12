@@ -119,4 +119,4 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "m_shield_cult"
 	light_color = "#b40000"
-	light_range = 2
+	light_outer_range = 2

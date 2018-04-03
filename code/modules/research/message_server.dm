@@ -125,7 +125,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 					Console.audible_message("\icon[Console]<span class='notice'>\The [Console] announces: 'Message received from [sender].'</span>", hearing_distance = 5)
 				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
-		Console.set_light(2)
+		Console.set_light(0.3, 0.1, 2)
 
 
 /obj/machinery/message_server/attack_hand(user as mob)

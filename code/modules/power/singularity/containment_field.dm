@@ -9,7 +9,7 @@
 	density = 0
 	unacidable = 1
 	use_power = 0
-	light_range = 4
+	light_outer_range = 4
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 	var/obj/machinery/field_generator/FG1 = null
 	var/obj/machinery/field_generator/FG2 = null

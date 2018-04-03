@@ -36,7 +36,7 @@
 		I.layer = ABOVE_LIGHTING_LAYER
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += I
-		set_light(2, 1, I.color)
+		set_light(0.3, 0.1, 2, l_color = I.color)
 
 /obj/structure/monolith/attack_hand(mob/user)
 	visible_message("[user] touches \the [src].")

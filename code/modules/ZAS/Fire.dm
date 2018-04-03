@@ -135,13 +135,13 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	if(firelevel > 6)
 		icon_state = "3"
-		set_light(7, 3)
+		set_light(1, 2, 7)
 	else if(firelevel > 2.5)
 		icon_state = "2"
-		set_light(5, 2)
+		set_light(0.7, 2, 5)
 	else
 		icon_state = "1"
-		set_light(3, 1)
+		set_light(0.5, 1, 3)
 
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
@@ -192,7 +192,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
-	set_light(3, 1, color)
+	set_light(0.5, 1, 3, l_color = color)
 
 	firelevel = fl
 	SSair.active_hotspots.Add(src)

@@ -54,7 +54,7 @@
 
 /obj/structure/diona/bulb/New(var/newloc)
 	..()
-	set_light(3,3,"#557733")
+	set_light(0.3, 0.1, 3, 2, "#557733")
 
 /datum/random_map/automata/diona
 	iterations = 3
