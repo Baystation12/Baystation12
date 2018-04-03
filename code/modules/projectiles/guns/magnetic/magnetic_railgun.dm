@@ -8,7 +8,7 @@
 	projectile_type = /obj/item/projectile/bullet/magnetic/slug
 	power_cost = 300
 	w_class = ITEM_SIZE_HUGE
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BACK
 	loaded = /obj/item/weapon/rcd_ammo/large // ~30 shots
 
 	var/initial_cell_type = /obj/item/weapon/cell/hyper
@@ -61,7 +61,7 @@
 	visible_message("<span class='warning'>\The [src] beeps and ejects its empty cartridge.</span>")
 
 /obj/item/weapon/gun/magnetic/railgun/mmi
-	desc = "The Mars Military Industries MI-72 Comet. A man-portable mass driver for squad support anti-armour and destruction of fortifications and emplacements."
+	desc = "The Mars Military Industries MI-72 Comet. A man-portable mass driver for squad support, anti-armour and destruction of fortifications and emplacements."
 	icon_state = "old_railgun"
 
 /obj/item/weapon/gun/magnetic/railgun/tcc // Oppa! Should only be available to TCC shock troops or high-budget mercs.
@@ -90,7 +90,7 @@
 	return ammo && ammo.amount
 
 /obj/item/weapon/gun/magnetic/railgun/tcc/out_of_ammo()
-	qdel(loaded)
+	QDEL_NULL(loaded)
 	loaded = null
 	spawn(3)
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
