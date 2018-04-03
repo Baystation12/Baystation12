@@ -29,7 +29,8 @@
 		"Monkey" = "monkey",
 		"Rabbit" = "rabbit",
 		"Mushroom" = "mushroom",
-		"Corgi" = "corgi"
+		"Corgi" = "corgi",
+		"Crow" = "crow"
 		)
 
 	var/global/list/possible_say_verbs = list(
@@ -38,7 +39,8 @@
 		"Beep" = list("beeps","beeps loudly","boops"),
 		"Chirp" = list("chirps","chirrups","cheeps"),
 		"Feline" = list("purrs","yowls","meows"),
-		"Canine" = list("yaps", "barks", "woofs")
+		"Canine" = list("yaps", "barks", "woofs"),
+		"Corvid" = list("caws", "caws loudly", "whistles")
 		)
 
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
