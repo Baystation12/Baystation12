@@ -208,7 +208,7 @@
 					O.vars[variable]) as num|null
 			if(new_value == null) return
 
-			if(variable=="light_range")
+			if(variable=="light_outer_range")
 				O.set_light(new_value)
 			else
 				O.vars[variable] = new_value
@@ -217,7 +217,7 @@
 				if(istype(O, /mob))
 					for(var/mob/M in SSmobs.mob_list)
 						if ( istype(M , O.type) )
-							if(variable=="light_range")
+							if(variable=="light_outer_range")
 								M.set_light(new_value)
 							else
 								M.vars[variable] = O.vars[variable]
@@ -225,7 +225,7 @@
 				else if(istype(O, /obj))
 					for(var/obj/A in world)
 						if ( istype(A , O.type) )
-							if(variable=="light_range")
+							if(variable=="light_outer_range")
 								A.set_light(new_value)
 							else
 								A.vars[variable] = O.vars[variable]
@@ -233,7 +233,7 @@
 				else if(istype(O, /turf))
 					for(var/turf/A in world)
 						if ( istype(A , O.type) )
-							if(variable=="light_range")
+							if(variable=="light_outer_range")
 								A.set_light(new_value)
 							else
 								A.vars[variable] = O.vars[variable]
@@ -242,7 +242,7 @@
 				if(istype(O, /mob))
 					for(var/mob/M in SSmobs.mob_list)
 						if (M.type == O.type)
-							if(variable=="light_range")
+							if(variable=="light_outer_range")
 								M.set_light(new_value)
 							else
 								M.vars[variable] = O.vars[variable]
@@ -250,7 +250,7 @@
 				else if(istype(O, /obj))
 					for(var/obj/A in world)
 						if (A.type == O.type)
-							if(variable=="light_range")
+							if(variable=="light_outer_range")
 								A.set_light(new_value)
 							else
 								A.vars[variable] = O.vars[variable]
@@ -258,7 +258,7 @@
 				else if(istype(O, /turf))
 					for(var/turf/A in world)
 						if (A.type == O.type)
-							if(variable=="light_range")
+							if(variable=="light_outer_range")
 								A.set_light(new_value)
 							else
 								A.vars[variable] = O.vars[variable]

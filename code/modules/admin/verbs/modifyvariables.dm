@@ -513,7 +513,7 @@
 			var_value = var_new
 
 		if("num")
-			if(variable=="light_range")
+			if(variable=="light_outer_range")
 				var/var_new = input("Enter new number:","Num",O.get_variable_value(variable)) as null|num
 				if(var_new == null) return
 				O.set_light(var_new)
