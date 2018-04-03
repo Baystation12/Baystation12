@@ -123,12 +123,12 @@
 	item_state = "cigpacket"
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 6
+	max_storage_space = 10
 	throwforce = 2
 	slot_flags = SLOT_BELT
 
 	key_type = /obj/item/clothing/mask/smokable/cigarette
-	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
+	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 10)
 
 /obj/item/weapon/storage/fancy/cigarettes/New()
 	..()
