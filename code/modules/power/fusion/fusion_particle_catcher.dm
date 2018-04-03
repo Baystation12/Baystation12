@@ -27,10 +27,10 @@
 /obj/effect/fusion_particle_catcher/proc/UpdateSize()
 	if(parent.size >= mysize)
 		set_density(1)
-		name = "collector [mysize] ON"
+		SetName("collector [mysize] ON")
 	else
 		set_density(0)
-		name = "collector [mysize] OFF"
+		SetName("collector [mysize] OFF")
 
 /obj/effect/fusion_particle_catcher/bullet_act(var/obj/item/projectile/Proj)
 	parent.AddEnergy(Proj.damage)

@@ -55,12 +55,12 @@
 				res["[S.name] - [LZ.name]"] = LZ
 	return res
 
-/datum/shuttle/autodock/overmap/proc/get_location_name()
+/datum/shuttle/autodock/overmap/get_location_name()
 	if(moving_status == SHUTTLE_INTRANSIT)
 		return "In transit"
 	return "[waypoint_sector(current_location)] - [current_location]"
 
-/datum/shuttle/autodock/overmap/proc/get_destination_name()
+/datum/shuttle/autodock/overmap/get_destination_name()
 	if(!next_location)
 		return "None"
 	return "[waypoint_sector(next_location)] - [next_location]"
@@ -97,7 +97,7 @@
 
 /obj/structure/fuel_port
 	name = "fuel port"
-	desc = "The fuel input port of the shuttle. Holds one phoron tank. Use a crowbar to open and close it."
+	desc = "The fuel input port of the shuttle. Holds one fuel tank. Use a crowbar to open and close it."
 	icon = 'icons/turf/shuttle.dmi'
 	icon_state = "fuel_port"
 	density = 0
@@ -109,7 +109,7 @@
 	var/parent_shuttle
 
 /obj/structure/fuel_port/New()
-	src.contents.Add(new/obj/item/weapon/tank/phoron)
+	src.contents.Add(new/obj/item/weapon/tank/hydrogen)
 
 /obj/structure/fuel_port/attack_hand(mob/user as mob)
 	if(!opened)

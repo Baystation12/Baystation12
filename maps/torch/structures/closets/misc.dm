@@ -5,7 +5,6 @@
 	icon_closed = "nanottwo"
 	icon_locked = "nanottwo1"
 	icon_opened = "nanottwoopen"
-	icon_broken = "nanottwobroken"
 	icon_off = "nanottwooff"
 
 /obj/structure/closet/secure_closet/liaison/WillContain()
@@ -34,7 +33,6 @@
 	icon_closed = "solsecure"
 	icon_locked = "solsecure1"
 	icon_opened = "solsecureopen"
-	icon_broken = "solsecurebroken"
 	icon_off = "solsecureoff"
 
 /obj/structure/closet/secure_closet/representative/WillContain()
@@ -66,7 +64,6 @@
 	icon_closed = "sol"
 	icon_locked = "sol1"
 	icon_opened = "solopen"
-	icon_broken = "solbroken"
 	icon_off = "soloff"
 
 /obj/structure/closet/secure_closet/crew/WillContain()
@@ -84,7 +81,6 @@
 	icon_closed = "nanot"
 	icon_locked = "nanot1"
 	icon_opened = "nanotopen"
-	icon_broken = "nanotbroken"
 	icon_off = "nanotoff"
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm

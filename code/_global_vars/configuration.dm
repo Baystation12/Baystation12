@@ -28,3 +28,5 @@ var/DBConnection/dbcon_old = new() // /tg/station database (Old database) -- see
 // However it'd be ok to use for accessing attack logs and such too, which are even laggier.
 var/fileaccess_timer = 0
 var/custom_event_msg = null
+
+GLOBAL_VAR_INIT(visibility_pref, FALSE)

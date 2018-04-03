@@ -98,6 +98,8 @@
 		P.event_idremoved(1)
 
 	card_slot.stored_card.forceMove(get_turf(src))
+	if(!issilicon(user))
+		user.put_in_hands(card_slot.stored_card)
 	card_slot.stored_card = null
 	update_uis()
 	to_chat(user, "You remove the card from \the [src]")

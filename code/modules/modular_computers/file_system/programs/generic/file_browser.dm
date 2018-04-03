@@ -3,6 +3,7 @@
 	filedesc = "NTOS File Manager"
 	extended_desc = "This program allows management of files."
 	program_icon_state = "generic"
+	program_key_state = "generic_key"
 	program_menu_icon = "folder-collapsed"
 	size = 8
 	requires_ntnet = 0

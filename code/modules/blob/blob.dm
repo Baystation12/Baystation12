@@ -187,7 +187,7 @@
 		if(-INFINITY to 33)
 			icon_state = "blob_factory"
 
-/obj/effect/blob/core/Initialize(loc)
+/obj/effect/blob/core/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 

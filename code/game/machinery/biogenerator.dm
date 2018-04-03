@@ -23,7 +23,8 @@
 	var/list/products = list(
 		"Food" = list(
 			/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton = 30,
-			/obj/item/weapon/reagent_containers/food/snacks/meat = 50),
+			/obj/item/weapon/reagent_containers/food/drinks/milk = 50,
+			/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 50),
 		"Nutrients" = list(
 			/obj/item/weapon/reagent_containers/glass/bottle/eznutrient = 60,
 			/obj/item/weapon/reagent_containers/glass/bottle/left4zed = 120,
@@ -160,10 +161,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/biogenerator/Topic(href, href_list)
-	if(..())
-		return 1
-
+/obj/machinery/biogenerator/OnTopic(user, href_list)
 	switch (href_list["action"])
 		if("activate")
 			activate()
@@ -175,19 +173,18 @@
 				update_icon()
 		if("create")
 			if (state == BG_PROCESSING)
-				return 1
+				return TOPIC_REFRESH
 			var/type = href_list["type"]
 			var/product_index = text2num(href_list["product_index"])
 			if (isnull(products[type]))
-				return 1
+				return TOPIC_REFRESH
 			var/list/sub_products = products[type]
 			if (product_index < 1 || product_index > sub_products.len)
-				return 1
+				return TOPIC_REFRESH
 			create_product(type, sub_products[product_index])
-			return 1
 		if("return")
 			state = BG_READY
-	return 1
+	return TOPIC_REFRESH
 
 /obj/machinery/biogenerator/attack_hand(mob/user as mob)
 	if(stat & (BROKEN|NOPOWER))

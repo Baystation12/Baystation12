@@ -354,7 +354,7 @@ other types of metals and chemistry for reagents).
 	id = "plasmacutter"
 	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 1500, "glass" = 500, "gold" = 500, "phoron" = 500)
-	build_path = /obj/item/weapon/pickaxe/plasmacutter
+	build_path = /obj/item/weapon/gun/energy/plasmacutter
 	sort_string = "KAAAC"
 
 /datum/design/item/mining/pick_diamond
@@ -661,7 +661,7 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/xray/pistol
 	sort_string = "TAFAA"
 
-/datum/design/item/weapon/xraypistol
+/datum/design/item/weapon/xrayrifle
 	id = "xrayrifle"
 	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "uranium" = 1000)
@@ -675,26 +675,12 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/launcher/grenade
 	sort_string = "TAGAA"
 
-/datum/design/item/weapon/pneumatic
-	id = "pneumatic"
-	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
-	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 2000, "silver" = 500)
-	build_path = /obj/item/weapon/gun/launcher/pneumatic
-	sort_string = "TAGAB"
-
-/datum/design/item/weapon/railgun
-	id = "railgun"
-	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_MAGNET = 4)
-	materials = list(DEFAULT_WALL_MATERIAL = 6000, "gold" = 2000, "silver" = 2000)
-	build_path = /obj/item/weapon/gun/magnetic/railgun
-	sort_string = "TAHAA"
-
 /datum/design/item/weapon/flechette
 	id = "flechette"
 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 4, TECH_MAGNET = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 8000, "gold" = 4000, "silver" = 4000, "diamond" = 2000)
 	build_path = /obj/item/weapon/gun/magnetic/railgun/flechette
-	sort_string = "TAHAB"
+	sort_string = "TAHAA"
 
 /datum/design/item/weapon/phoronpistol
 	id = "ppistol"
@@ -703,19 +689,12 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/toxgun
 	sort_string = "TAJAA"
 
-/datum/design/item/weapon/mindflayer
-	id = "mindflayer"
-	req_tech = list(TECH_COMBAT = 5, TECH_MAGNET = 4)
-	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "uranium" = 1000)
-	build_path = /obj/item/weapon/gun/energy/mindflayer
-	sort_string = "TAJAB"
-
 /datum/design/item/weapon/decloner
 	id = "decloner"
 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 7, TECH_BIO = 5, TECH_POWER = 6)
 	materials = list("gold" = 5000,"uranium" = 10000, "mutagen" = 40)
 	build_path = /obj/item/weapon/gun/energy/decloner
-	sort_string = "TAJAC"
+	sort_string = "TAJAB"
 
 /datum/design/item/weapon/smg
 	id = "smg"
@@ -928,7 +907,7 @@ other types of metals and chemistry for reagents).
 	id = "beacon_locator"
 	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 500)
-	build_path = /obj/item/device/beacon_locator
+	build_path = /obj/item/weapon/pinpointer/radio
 	sort_string = "VADAC"
 
 /datum/design/item/bluespace/ano_scanner
@@ -1509,11 +1488,11 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/rig/plasmacutter
 	name = "Plasma Cutter"
-	desc = "A rock cutter that uses bursts of hot plasma, mountable on a RIG."
+	desc = "A rock cutter that projects bursts of hot plasma, mountable on a RIG."
 	id = "rig_plasmacutter"
-	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6)
+	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000, "plastic" = 1000, "gold" = 700, "phoron" = 500)
-	build_path = /obj/item/rig_module/device/plasmacutter
+	build_path = /obj/item/rig_module/mounted/plasmacutter
 	sort_string = "VCCAB"
 
 /datum/design/item/rig/orescanner
@@ -1624,6 +1603,15 @@ other types of metals and chemistry for reagents).
 	materials = list(DEFAULT_WALL_MATERIAL = 6000, "glass" = 3000, "diamond" = 2000, "silver" = 2000, "uranium" = 2000, "gold" = 2000, "plastic" = 2000)
 	build_path = /obj/item/rig_module/stealth_field
 	sort_string = "WCLAA"
+
+/datum/design/item/rig/cooling_unit
+	name = "Cooling Unit"
+	desc = "A suit cooling unit, mountable on a RIG."
+	id = "rig_cooler"
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_ENGINEERING = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 3500, "plastic" = 2000)
+	build_path = /obj/item/rig_module/cooling_unit
+	sort_string = "WCLAB"
 
 
 /datum/design/prefab

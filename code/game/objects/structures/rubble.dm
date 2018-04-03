@@ -12,6 +12,7 @@
 	var/lootleft = 2
 	var/emptyprob = 30
 	var/health = 40
+	var/is_rummaging = 0
 
 /obj/structure/rubble/New()
 	..()
@@ -45,16 +46,21 @@
 	overlays = parts
 
 /obj/structure/rubble/attack_hand(mob/user)
-	if(!lootleft)
-		to_chat(user, "<span class='warning'>There's nothing left in this one but unusable garbage...</span>")
-		return
-	visible_message("[user] starts rummaging through \the [src].")
-	if(do_after(user, 30))
-		var/obj/item/booty = pick(loot)
-		booty = new booty(loc)
-		lootleft--
-		update_icon()
-		to_chat(user, "<span class='notice'>You find \a [booty] and pull it carefully out of \the [src].</span>")
+	if(!is_rummaging)
+		if(!lootleft)
+			to_chat(user, "<span class='warning'>There's nothing left in this one but unusable garbage...</span>")
+			return
+		visible_message("[user] starts rummaging through \the [src].")
+		is_rummaging = 1
+		if(do_after(user, 30))
+			var/obj/item/booty = pick(loot)
+			booty = new booty(loc)
+			lootleft--
+			update_icon()
+			to_chat(user, "<span class='notice'>You find \a [booty] and pull it carefully out of \the [src].</span>")
+		is_rummaging = 0
+	else
+		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")
 		
 /obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
 	if (istype(I, /obj/item/weapon/pickaxe))

@@ -15,8 +15,9 @@
 		return
 
 	var/icon/sprite
+	var/atom/A
 	if(istype(D, /atom))
-		var/atom/A = D
+		A = D
 		if(A.icon && A.icon_state)
 			sprite = icon(A.icon, A.icon_state)
 			usr << browse_rsc(sprite, "view_vars_sprite.png")
@@ -49,6 +50,7 @@
 					<td width='50%'>
 						<div align='center'>
 							<a href='?_src_=vars;datumrefresh=\ref[D]'>Refresh</a>
+							[A ? "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[A.x];Y=[A.y];Z=[A.z]'>Jump To</a>":""]
 							<form>
 								<select name='file'
 								        size='1'
@@ -98,6 +100,47 @@
 
 	usr << browse(html, "window=variables\ref[D];size=475x650")
 
+/client
+	var/list/watched_variables = list()
+	var/datum/browser/watched_variables/watched_variables_window
+
+/client/proc/watched_variables()
+	set category = "Debug"
+	set name = "View Watched Variables"
+
+	watched_variables_window = new(usr, "watchedvariables", "Watched Variables", 640, 640, src)
+
+	watched_variables_window.set_content()
+	watched_variables_window.open()
+
+/datum/browser/watched_variables/set_content()
+	var/list/dat = list()
+
+	if(!user.client)
+		return
+
+	dat += "<style>div.var { padding: 5px; } div.var:nth-child(even) { background-color: #555; }</style>"
+	for(var/datum/D in user.client.watched_variables)
+		dat += "<h1>[make_view_variables_value(D)]</h1>"
+		for(var/v in user.client.watched_variables[D])
+			dat += "<div class='var'>"
+			dat += "(<a href='?_src_=vars;datumunwatch=\ref[D];varnameunwatch=[v]'>X</a>) "
+			dat += "[D.make_view_variables_variable_entry(v, D.get_variable_value(v), 1)] [v] = [make_view_variables_value(D.get_variable_value(v), v)]"
+			dat += "</div>"
+
+	..(jointext(dat, null))
+
+/datum/browser/watched_variables/update()
+	set_content()
+	..()
+
+/datum/browser/watched_variables/Process()
+	update()
+
+/datum/browser/watched_variables/Destroy()
+	STOP_PROCESSING(SSprocessing, src)
+
+	. = ..()
 
 /proc/make_view_variables_var_list(datum/D)
 	. = list()

@@ -110,3 +110,8 @@
 	handled_type = /atom
 	handled_vars = list("invisibility" = /atom/proc/set_invisibility)
 	predicates = list(/proc/is_num_predicate)
+
+/decl/vv_set_handler/name_handler
+	handled_type = /atom
+	handled_vars = list("name" = /atom/proc/SetName)
+	predicates = list(/proc/is_text_predicate)

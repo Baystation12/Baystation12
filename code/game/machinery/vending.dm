@@ -10,7 +10,7 @@
 	layer = BELOW_OBJ_LAYER
 	anchored = 1
 	density = 1
-	flags = OBJ_ANCHORABLE
+	obj_flags = OBJ_FLAG_ANCHORABLE
 	clicksound = "button"
 	clickvol = 40
 
@@ -64,6 +64,7 @@
 	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
 	var/seconds_electrified = 0 //Shock customers like an airlock.
 	var/shoot_inventory = 0 //Fire items at customers! We're broken!
+	var/shooting_chance = 2 //The chance that items are being shot per tick
 
 	var/scan_id = 1
 	var/obj/item/weapon/coin/coin
@@ -193,7 +194,7 @@
 		if(src.panel_open)
 			attack_hand(user)
 		return
-	else if((flags & OBJ_ANCHORABLE) && isWrench(W))
+	else if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(W))
 		wrench_floor_bolts(user)
 		power_change()
 		return
@@ -437,7 +438,6 @@
 		else if ((href_list["togglevoice"]) && (src.panel_open))
 			src.shut_up = !src.shut_up
 
-		src.add_fingerprint(usr)
 		GLOB.nanomanager.update_uis(src)
 
 /obj/machinery/vending/proc/vend(var/datum/stored_items/vending_products/R, mob/user)
@@ -527,7 +527,7 @@
 		src.speak(slogan)
 		src.last_slogan = world.time
 
-	if(src.shoot_inventory && prob(2))
+	if(src.shoot_inventory && prob(shooting_chance))
 		src.throw_item()
 
 	return
@@ -573,7 +573,7 @@
 	if(!target)
 		return 0
 
-	for(var/datum/stored_items/vending_products/R in src.product_records)
+	for(var/datum/stored_items/vending_products/R in shuffle(src.product_records))
 		throw_item = R.get_product(loc)
 		if (throw_item)
 			break
@@ -874,7 +874,15 @@
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
-	products = list(/obj/item/stack/medical/bruise_pack = 2,/obj/item/stack/medical/ointment = 2,/obj/item/weapon/reagent_containers/hypospray/autoinjector = 4)
+	products = list(
+		/obj/item/stack/medical/bruise_pack = 3,
+		/obj/item/stack/medical/ointment = 3,
+		/obj/item/weapon/reagent_containers/pill/paracetamol = 4,
+		/obj/item/weapon/storage/med_pouch/trauma,
+		/obj/item/weapon/storage/med_pouch/burn,
+		/obj/item/weapon/storage/med_pouch/oxyloss,
+		/obj/item/weapon/storage/med_pouch/toxin
+		)
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/antitoxin = 4,/obj/item/weapon/reagent_containers/syringe/antiviral = 4,/obj/item/weapon/reagent_containers/pill/tox = 1)
 
 /obj/machinery/vending/wallmed2
@@ -884,8 +892,15 @@
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
-	products = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector = 5,/obj/item/weapon/reagent_containers/syringe/antitoxin = 1,/obj/item/stack/medical/bruise_pack = 3,
-					/obj/item/stack/medical/ointment =3)
+	products = list(
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 5,
+		/obj/item/stack/medical/bruise_pack = 4,
+		/obj/item/stack/medical/ointment = 4,
+		/obj/item/weapon/storage/med_pouch/trauma,
+		/obj/item/weapon/storage/med_pouch/burn,
+		/obj/item/weapon/storage/med_pouch/oxyloss,
+		/obj/item/weapon/storage/med_pouch/toxin = 2
+		)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3, /obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 2)
 
 /obj/machinery/vending/security
@@ -976,6 +991,7 @@
 	icon_state = "dinnerware"
 	icon_vend = "dinnerware-vend"
 	products = list(
+	/obj/item/weapon/reagent_containers/glass/beaker/bowl =2,
 	/obj/item/weapon/tray = 8,
 	/obj/item/weapon/material/kitchen/utensil/fork = 6,
 	/obj/item/weapon/material/kitchen/utensil/knife = 6,
@@ -1005,8 +1021,12 @@
 	icon_state = "sovietsoda"
 	icon_vend = "sovietsoda-vend"
 	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
-	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 30) // TODO Russian soda can
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 20) // TODO Russian cola can
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cans/syndicola = 50,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/syndicolax = 30,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/artbru = 20,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/square/boda = 20,
+					/obj/item/weapon/reagent_containers/food/drinks/glass2/square/bodaplus = 20)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 300) // TODO Russian cola can
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/tool

@@ -18,7 +18,7 @@
 		/obj/item/device/depth_scanner,
 		/obj/item/device/core_sampler,
 		/obj/item/device/gps,
-		/obj/item/device/beacon_locator,
+		/obj/item/weapon/pinpointer/radio,
 		/obj/item/device/radio/beacon,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/glasses/science,

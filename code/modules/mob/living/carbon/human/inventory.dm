@@ -152,7 +152,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 				update_inv_wear_mask(0)
 		if(src)
 			var/obj/item/clothing/mask/wear_mask = src.get_equipped_item(slot_wear_mask)
-			if(!(wear_mask && (wear_mask.item_flags & AIRTIGHT)))
+			if(!(wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)))
 				REMOVE_INTERNALS
 		update_inv_head()
 	else if (W == l_ear)
@@ -336,7 +336,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.forceMove(src.back)
 		if(slot_tie)
 			var/obj/item/clothing/under/uniform = src.w_uniform
-			uniform.attackby(W,src)
+			if(uniform)
+				uniform.attackby(W,src)
 		else
 			to_chat(src, "<span class='danger'>You are trying to eqip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]</span>")
 			return

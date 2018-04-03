@@ -19,6 +19,7 @@
 	var/list/syllables                // Used when scrambling text for a non-speaker.
 	var/list/space_chance = 55        // Likelihood of getting a space in the random scramble string
 	var/machine_understands = 1       // Whether machines can parse and understand this language
+	var/shorthand = "UL"			  // Shorthand that shows up in chat for this language.
 
 /datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!syllables || !syllables.len)
@@ -168,16 +169,10 @@
 	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages))
 
 /mob/proc/get_language_prefix()
-	if(client && client.prefs.language_prefixes && client.prefs.language_prefixes.len)
-		return client.prefs.language_prefixes[1]
-
-	return config.language_prefixes[1]
+	return get_prefix_key(/decl/prefix/language)
 
 /mob/proc/is_language_prefix(var/prefix)
-	if(client && client.prefs.language_prefixes && client.prefs.language_prefixes.len)
-		return prefix in client.prefs.language_prefixes
-
-	return prefix in config.language_prefixes
+	return prefix == get_prefix_key(/decl/prefix/language)
 
 //TBD
 /mob/verb/check_languages()
@@ -189,7 +184,7 @@
 
 	for(var/datum/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
-			dat += "<b>[L.name] ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
+			dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
 
 	src << browse(dat, "window=checklanguage")
 	return
@@ -203,11 +198,11 @@
 	for(var/datum/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
 			if(L == default_language)
-				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
+				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
 			else if (can_speak(L))
-				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a><br/>[L.desc]<br/><br/>"
+				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a><br/>[L.desc]<br/><br/>"
 			else
-				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
+				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
 
 	src << browse(dat, "window=checklanguage")
 

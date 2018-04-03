@@ -1,7 +1,7 @@
 /obj/machinery/r_n_d/protolathe
 	name = "\improper Protolathe"
 	icon_state = "protolathe"
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 	use_power = 1
 	idle_power_usage = 30

@@ -25,19 +25,22 @@
 	for(var/type in recipes)
 		var/atom/a = type
 		var/cost = recipes[type]
-		dat += "<A href='?src=\ref[src];make_recipe=[type];cost=[cost];'>[initial(a.name)]</a> - [cost]<br><i>[initial(a.desc)]</i><br><br>"
+		dat += "<A href='?src=\ref[src];make_recipe=\ref[type];'>[initial(a.name)]</a> - [cost]<br><i>[initial(a.desc)]</i><br><br>"
 	show_browser(user, dat, "window=forge")
 
-/obj/structure/deity/blood_forge/Topic(var/href, var/list/href_list)
-	if(..())
-		return 1
+/obj/structure/deity/blood_forge/CanUseTopic(var/user)
+	if(!linked_god || !linked_god.is_follower(user, silent = 1) || !ishuman(user))
+		return STATUS_CLOSE
+	return ..()
 
-	if(href_list["make_recipe"] && href_list["cost"])
-		var/type = text2path(href_list["make_recipe"])
-		var/cost = text2num(href_list["cost"])
-		craft_item(type, cost, usr)
-		return 1
-	return 0
+/obj/structure/deity/blood_forge/OnTopic(var/user, var/list/href_list)
+	if(href_list["make_recipe"])
+		var/list/recipes = linked_god.feats[recipe_feat_list]
+		var/type = locate(href_list["make_recipe"]) in recipes
+		if(type)
+			var/cost = recipes[type]
+			craft_item(type, cost, user)
+		return TOPIC_REFRESH
 
 /obj/structure/deity/blood_forge/proc/craft_item(var/path, var/blood_cost, var/mob/user)
 	if(busy)

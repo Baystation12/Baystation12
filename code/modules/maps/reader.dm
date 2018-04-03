@@ -537,7 +537,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 /area/template_noop
 	name = "Area Passthrough"
-	icon_state = "space"
+	icon_state = "unknown"
 
 /turf/template_noop
 	name = "Turf Passthrough"

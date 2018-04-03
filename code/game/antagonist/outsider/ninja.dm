@@ -1,4 +1,4 @@
-var/datum/antagonist/ninja/ninjas
+GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 
 /datum/antagonist/ninja
 	id = MODE_NINJA
@@ -18,10 +18,6 @@ var/datum/antagonist/ninja/ninjas
 	id_type = /obj/item/weapon/card/id/syndicate
 
 	faction = "ninja"
-
-/datum/antagonist/ninja/New()
-	..()
-	ninjas = src
 
 /datum/antagonist/ninja/attempt_random_spawn()
 	if(config.ninjas_allowed) ..()
@@ -92,7 +88,7 @@ var/datum/antagonist/ninja/ninjas
 	var/mob/living/carbon/human/H = player.current
 	if(istype(H))
 		H.real_name = "[ninja_title] [ninja_name]"
-		H.name = H.real_name
+		H.SetName(H.real_name)
 	player.name = H.name
 
 /datum/antagonist/ninja/equip(var/mob/living/carbon/human/player)

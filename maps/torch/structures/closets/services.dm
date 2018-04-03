@@ -10,6 +10,7 @@
 
 /obj/structure/closet/chefcloset_torch/WillContain()
 	return list(
+		/obj/item/clothing/head/soft/mime,
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/weapon/storage/box/mousetraps = 2,
 		/obj/item/clothing/under/rank/chef,
@@ -24,11 +25,11 @@
 	icon_closed = "hydrosecure"
 	icon_locked = "hydrosecure1"
 	icon_opened = "hydrosecureopen"
-	icon_broken = "hydrosecurebroken"
 	icon_off = "hydrosecureoff"
 
 /obj/structure/closet/secure_closet/hydroponics_torch/WillContain()
 	return list(
+		/obj/item/clothing/head/soft/green,
 		/obj/item/weapon/storage/plants,
 		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/weapon/material/minihoe,
@@ -48,6 +49,7 @@
 
 /obj/structure/closet/jcloset_torch/WillContain()
 	return list(
+		/obj/item/clothing/head/soft/purple,
 		/obj/item/device/radio/headset/headset_service,
 		/obj/item/weapon/cartridge/janitor,
 		/obj/item/clothing/gloves/thick,
@@ -56,5 +58,23 @@
 		/obj/item/device/lightreplacer,
 		/obj/item/weapon/storage/bag/trash,
 		/obj/item/clothing/shoes/galoshes,
+		/obj/item/weapon/storage/box/detergent,
 		/obj/item/weapon/soap/nanotrasen
 	)
+
+/obj/structure/closet/secure_closet/bar_torch
+	name = "bar locker"
+	desc = "It's a storage unit for bar equipment."
+	req_access = list(access_bar)
+
+/obj/structure/closet/secure_closet/bar_torch/WillContain()
+	return list(
+		/obj/item/clothing/head/soft/black,
+		/obj/item/device/radio/headset/headset_service,
+		/obj/item/weapon/reagent_containers/food/drinks/shaker,
+		/obj/item/glass_jar,
+		/obj/item/weapon/book/manual/barman_recipes,
+		/obj/item/clothing/under/rank/bartender,
+		/obj/item/clothing/shoes/laceup
+	)
+

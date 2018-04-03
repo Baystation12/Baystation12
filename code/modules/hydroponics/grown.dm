@@ -6,6 +6,7 @@
 	randpixel = 5
 	desc = "Nutritious! Probably."
 	slot_flags = SLOT_HOLSTER
+	atom_flags = null
 
 	var/plantname
 	var/datum/seed/seed
@@ -28,7 +29,7 @@
 	if(!seed)
 		return INITIALIZE_HINT_QDEL
 
-	name = "[seed.seed_name]"
+	SetName("[seed.seed_name]")
 	trash = seed.get_trash_type()
 	if(!dried_type)
 		dried_type = type
@@ -149,7 +150,7 @@
 
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(H.shoes && H.shoes.item_flags & NOSLIP)
+				if(H.shoes && H.shoes.item_flags & ITEM_FLAG_NOSLIP)
 					return
 
 			M.stop_pulling()

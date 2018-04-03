@@ -5,6 +5,8 @@
 	var/list/obj/machinery/atmospherics/pipe/edges //Used for building networks
 
 	var/datum/pipe_network/network
+	// Leaking nodes
+	var/list/leaks = list()
 
 	var/alert_pressure = 0
 
@@ -20,11 +22,10 @@
 		qdel(air)
 	for(var/obj/machinery/atmospherics/pipe/P in members)
 		P.parent = null
-
+	leaks.Cut()
 	. = ..()
 
 /datum/pipeline/Process()//This use to be called called from the pipe networks
-
 	//Check to see if pressure is within acceptable limits
 	var/pressure = air.return_pressure()
 	if(pressure > alert_pressure)
@@ -59,6 +60,9 @@
 	else
 		air = new
 
+	if(base.leaking)
+		leaks |= base
+
 	while(possible_expansions.len>0)
 		for(var/obj/machinery/atmospherics/pipe/borderline in possible_expansions)
 
@@ -81,6 +85,9 @@
 						if(item.air_temporary)
 							air.merge(item.air_temporary)
 
+						if(item.leaking)
+							leaks |= item
+
 					edge_check--
 
 			if(edge_check>0)
@@ -98,6 +105,7 @@
 	new_network.line_members += src
 
 	network = new_network
+	network.leaks |= leaks
 
 	for(var/obj/machinery/atmospherics/pipe/edge in edges)
 		for(var/obj/machinery/atmospherics/result in edge.pipeline_expansion())

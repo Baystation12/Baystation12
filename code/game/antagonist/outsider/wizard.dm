@@ -1,4 +1,4 @@
-var/datum/antagonist/wizard/wizards
+GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 /datum/antagonist/wizard
 	id = MODE_WIZARD
@@ -16,11 +16,6 @@ var/datum/antagonist/wizard/wizards
 	min_player_age = 18
 
 	faction = "wizard"
-
-
-/datum/antagonist/wizard/New()
-	..()
-	wizards = src
 
 /datum/antagonist/wizard/create_objectives(var/datum/mind/wizard)
 
@@ -69,7 +64,7 @@ var/datum/antagonist/wizard/wizards
 	..()
 	wizard.store_memory("<B>Remember:</B> do not forget to prepare your spells.")
 	wizard.current.real_name = "[pick(GLOB.wizard_first)] [pick(GLOB.wizard_second)]"
-	wizard.current.name = wizard.current.real_name
+	wizard.current.SetName(wizard.current.real_name)
 
 /datum/antagonist/wizard/equip(var/mob/living/carbon/human/wizard_mob)
 

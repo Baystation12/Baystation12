@@ -5,6 +5,7 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	storage_slots = 7
+	item_flags = ITEM_FLAG_IS_BELT
 	max_w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
@@ -26,7 +27,7 @@
 	var/image/ret = ..()
 	if(slot == slot_belt_str && contents.len)
 		for(var/obj/item/I in contents)
-			ret.overlays += image("icon" = 'icons/mob/belt.dmi', "icon_state" = "[I.item_state ? I.item_state : I.icon_state]")
+			ret.overlays += image("icon" = 'icons/mob/onmob/belt.dmi', "icon_state" = "[I.item_state ? I.item_state : I.icon_state]")
 	return ret
 
 /obj/item/weapon/storage/belt/utility
@@ -145,6 +146,27 @@
 		/obj/item/taperoll,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/magnetic_ammo
+		)
+
+/obj/item/weapon/storage/belt/forensic
+	name = "forensic belt"
+	desc = "Can hold forensic gear like fingerprint powder and luminol."
+	icon_state = "swatbelt"
+	item_state = "swatbelt"
+	can_hold = list(
+		/obj/item/weapon/reagent_containers/spray/luminol,
+		/obj/item/device/uv_light,
+		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/weapon/forensics/swab,
+		/obj/item/weapon/sample/print,
+		/obj/item/weapon/sample/fibers,
+		/obj/item/device/taperecorder,
+		/obj/item/device/tape,
+		/obj/item/clothing/gloves/latex,
+		/obj/item/clothing/gloves/forensic,
+		/obj/item/weapon/folder,
+		/obj/item/weapon/paper,
+		/obj/item/weapon/forensics/sample_kit
 		)
 
 /obj/item/weapon/storage/belt/soulstone

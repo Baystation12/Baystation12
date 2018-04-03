@@ -43,8 +43,8 @@
 /obj/structure/skele_stand/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W,/obj/item/weapon/pen))
 		var/nuname = sanitize(input(user,"What do you want to name this skeleton as?","Skeleton Christening",name) as text|null)
-		if(nuname)
-			name = nuname
+		if(nuname && CanPhysicallyInteract(user))
+			SetName(nuname)
 			return 1
 	if(istype(W,/obj/item/clothing))
 		var/slot

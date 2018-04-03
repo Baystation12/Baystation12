@@ -21,6 +21,7 @@
 	var/downgrade_on_action = 0					// If the grab needs to be downgraded when the grabber does stuff.
 	var/downgrade_on_move = 0					// If the grab needs to be downgraded when the grabber moves.
 	var/force_danger = 0						// If the grab is strong enough to be able to force someone to do something harmful to them.
+	var/restrains = 0							// If the grab acts like cuffs and prevents action from the victim.
 
 	var/grab_slowdown = 7
 
@@ -77,7 +78,7 @@
 	if(!upgrab)
 		return
 
-	if (can_upgrade())
+	if (can_upgrade(G))
 		upgrade_effect(G)
 		admin_attack_log(G.assailant, G.affecting, "tightens their grip on their victim to [upgrab.state_name]", "was grabbed more tightly to [upgrab.state_name]", "tightens grip to [upgrab.state_name] on")
 		return upgrab
@@ -111,9 +112,17 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 
 	if(can_throw)
+		. = affecting
+		var/mob/thrower = G.loc
+		
 		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1)
 		qdel(G)
-		return affecting
+		
+		// check if we're grabbing with our inactive hand
+		G = thrower.get_inactive_hand()
+		if(!istype(G))	return
+		qdel(G)
+		return
 	return null
 
 /datum/grab/proc/hit_with_grab(var/obj/item/grab/G)
@@ -249,6 +258,9 @@
 /datum/grab/proc/resolve_openhand_attack(var/obj/item/grab/G)
 	return 0
 
+// Used when you want an effect to happen when the grab enters this state as an upgrade
+/datum/grab/proc/enter_as_up(var/obj/item/grab/G)
+
 /datum/grab/proc/item_attack(var/obj/item/grab/G, var/obj/item)
 
 /datum/grab/proc/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I, var/target_zone)
@@ -258,9 +270,14 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
+	if(affecting.incapacitated(INCAPACITATION_KNOCKOUT | INCAPACITATION_STUNNED))
+		to_chat(G.assailant, "<span class='warning'>You can't resist in your current state!</span>")
+
 	var/break_strength = breakability + size_difference(affecting, assailant)
 
-	if(affecting.lying)
+	if(affecting.incapacitated(INCAPACITATION_ALL))
+		break_strength--
+	if(affecting.confused)
 		break_strength--
 
 	if(break_strength < 1)

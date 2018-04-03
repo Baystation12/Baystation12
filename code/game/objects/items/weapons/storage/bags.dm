@@ -49,7 +49,6 @@
 	max_w_class = ITEM_SIZE_HUGE //can fit a backpack inside a trash bag, seems right
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	can_hold = list() // any
-	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
 /obj/item/weapon/storage/bag/trash/update_w_class()
 	..()
@@ -77,7 +76,6 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BOX_STORAGE
 	can_hold = list() // any
-	cant_hold = list(/obj/item/weapon/disk/nuclear)
 
 // -----------------------------
 //           Cash Bag

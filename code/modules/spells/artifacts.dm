@@ -13,7 +13,7 @@
 	hitsound = 'sound/items/welder2.ogg'
 
 /obj/item/weapon/scrying/attack_self(mob/user as mob)
-	if((user.mind && !wizards.is_antagonist(user.mind)))
+	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
 		to_chat(user, "<span class='warning'>You stare into the orb and see nothing but your own reflection.</span>")
 		return
 

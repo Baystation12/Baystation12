@@ -13,7 +13,7 @@
 	var/open = 0
 	var/recent_fault = 0
 	var/power_output = 1
-	flags = OBJ_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/machinery/power/port_gen/proc/IsBroken()
 	return (stat & (BROKEN|EMPED))
@@ -451,7 +451,7 @@
 	max_temperature = 450
 	time_per_sheet = 400
 	rad_power = 6
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	board_path = /obj/item/weapon/circuitboard/pacman/super/potato
 	anchored = 1
 

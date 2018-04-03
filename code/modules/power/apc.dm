@@ -75,6 +75,7 @@
 	use_power = 0
 	req_access = list(access_engine_equip)
 	clicksound = "switch"
+	var/needs_powerdown_sound
 	var/area/area
 	var/areastring = null
 	var/obj/item/weapon/cell/cell
@@ -179,7 +180,7 @@
 		area.apc = src
 		opened = 1
 		operating = 0
-		name = "\improper [area.name] APC"
+		SetName("\improper [area.name] APC")
 		stat |= MAINT
 		src.update_icon()
 
@@ -234,10 +235,10 @@
 	//if area isn't specified use current
 	if(isarea(A) && src.areastring == null)
 		src.area = A
-		name = "\improper [area.name] APC"
+		SetName("\improper [area.name] APC")
 	else
 		src.area = get_area_name(areastring)
-		name = "\improper [area.name] APC"
+		SetName("\improper [area.name] APC")
 	area.apc = src
 	update_icon()
 
@@ -834,6 +835,13 @@
 
 	area.power_change()
 
+	if(!cell || cell.charge <= 0)
+		if(needs_powerdown_sound == TRUE)
+			playsound(src, 'sound/machines/apc_nopower.ogg', 75, 0)
+			needs_powerdown_sound = FALSE
+		else
+			needs_powerdown_sound = TRUE
+
 /obj/machinery/power/apc/proc/isWireCut(var/wireIndex)
 	return wires.IsIndexCut(wireIndex)
 
@@ -1270,7 +1278,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	item_state = "electronic"
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/machinery/power/apc/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()

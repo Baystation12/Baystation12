@@ -4,7 +4,7 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds
 	name = "packet of seeds"
 	icon = 'icons/obj/seeds.dmi'
-	icon_state = "blank"
+	icon_state = "seedy"
 	w_class = ITEM_SIZE_SMALL
 
 	var/seed_type
@@ -51,10 +51,10 @@ var/global/list/plant_seed_sprites = list()
 	overlays |= seed_overlay
 
 	if(is_seeds)
-		src.name = "packet of [seed.seed_name] [seed.seed_noun]"
+		src.SetName("packet of [seed.seed_name] [seed.seed_noun]")
 		src.desc = "It has a picture of [seed.display_name] on the front."
 	else
-		src.name = "sample of [seed.seed_name] [seed.seed_noun]"
+		src.SetName("sample of [seed.seed_name] [seed.seed_noun]")
 		src.desc = "It's labelled as coming from [seed.display_name]."
 
 /obj/item/seeds/examine(mob/user)
@@ -68,7 +68,7 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/cutting/update_appearance()
 	..()
-	src.name = "packet of [seed.seed_name] cuttings"
+	src.SetName("packet of [seed.seed_name] cuttings")
 
 /obj/item/seeds/random
 	seed_type = null

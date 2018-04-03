@@ -129,28 +129,21 @@
 	popup.open()
 	return
 
-/obj/structure/lift/panel/Topic(href, href_list)
-	. = ..()
-	if(.)
-		return
-
-	var/panel_interact
+/obj/structure/lift/panel/OnTopic(user, href_list)
 	if(href_list["move_to_floor"])
 		lift.queue_move_to(locate(href_list["move_to_floor"]))
-		panel_interact = 1
+		. = TOPIC_REFRESH
 	if(href_list["open_doors"])
-		panel_interact = 1
 		lift.open_doors()
+		. = TOPIC_REFRESH
 	if(href_list["close_doors"])
-		panel_interact = 1
 		lift.close_doors()
+		. = TOPIC_REFRESH
 	if(href_list["emergency_stop"])
-		panel_interact = 1
 		lift.emergency_stop()
+		. = TOPIC_REFRESH
 
-	if(panel_interact)
-		pressed(usr)
-
-	return 0
+	if(. == TOPIC_REFRESH)
+		pressed(user)
 
 // End panel.

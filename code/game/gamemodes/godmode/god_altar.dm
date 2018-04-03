@@ -38,7 +38,7 @@
 	cycles_before_converted--
 	if(!cycles_before_converted)
 		src.visible_message("For one thundering moment, \the [target] cries out in pain before going limp and broken.")
-		godcult.add_antagonist_mind(target.mind,1, "Servant of [linked_god]","Your loyalty may be faulty, but you know that it now has control over you...", specific_god=linked_god)
+		GLOB.godcult.add_antagonist_mind(target.mind,1, "Servant of [linked_god]","Your loyalty may be faulty, but you know that it now has control over you...", specific_god=linked_god)
 		remove_target()
 		return
 
@@ -75,14 +75,11 @@
 	target = null
 	update_icon()
 
-/obj/structure/deity/altar/Topic(var/href, var/list/href_list)
-	if(..())
-		return 1
-
+/obj/structure/deity/altar/OnTopic(var/user, var/list/href_list)
 	if(href_list["resist"])
 		var/mob/living/M = locate(href_list["resist"])
-		if(!M || target != M || M.stat || M.last_special > world.time)
-			return
+		if(!istype(M) || target != M || M.stat || M.last_special > world.time)
+			return TOPIC_HANDLED
 
 		M.last_special = world.time + 10 SECONDS
 		M.visible_message("<span class='warning'>\The [M] writhes on top of \the [src]!</span>", "<span class='notice'>You struggle against the intruding thoughts, keeping them at bay!</span>")
@@ -92,6 +89,7 @@
 			to_chat(M, "<span class='danger'>The mental strain is too much for you! You feel your body weakening!</span>")
 			M.adjustToxLoss(15)
 			M.adjustHalLoss(30)
+		return TOPIC_REFRESH
 
 /obj/structure/deity/altar/update_icon()
 	overlays.Cut()

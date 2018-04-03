@@ -16,7 +16,7 @@
 
 /spell/construction/choose_targets()
 	var/list/possible_targets = list()
-	if(connected_god)
+	if(connected_god && connected_god.form)
 		for(var/type in connected_god.form.buildables)
 			var/cost = 10
 			if(ispath(type, /obj/structure/deity))

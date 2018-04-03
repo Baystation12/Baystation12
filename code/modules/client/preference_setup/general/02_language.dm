@@ -1,6 +1,5 @@
 /datum/preferences
 	var/list/alternate_languages //Secondary language(s)
-	var/list/language_prefixes   //Language prefix keys
 
 /datum/category_item/player_setup_item/general/language
 	name = "Language"

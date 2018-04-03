@@ -48,9 +48,6 @@
 /datum/map/proc/level_x_biohazard_sound(var/bio_level)
 	return
 
-/datum/map/proc/meteors_detected_announcement()
-	command_announcement.Announce(replacetext(meteor_detected_message, "%STATION_NAME%", station_name()), "[station_name()] Sensor Array", new_sound = meteor_detected_sound)
-
 /datum/map/proc/radiation_detected_announcement()
 	command_announcement.Announce(replacetext(radiation_detected_message, "%STATION_NAME%", station_name()), "Anomaly Alert", new_sound = radiation_detected_sound)
 

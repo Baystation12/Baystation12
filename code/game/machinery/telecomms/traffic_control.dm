@@ -121,8 +121,6 @@
 		if(..())
 			return
 
-
-		add_fingerprint(usr)
 		usr.set_machine(src)
 		if(!src.allowed(usr) && !emagged)
 			to_chat(usr, "<span class='warning'>ACCESS DENIED.</span>")

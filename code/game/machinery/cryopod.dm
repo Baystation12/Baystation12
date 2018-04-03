@@ -45,9 +45,9 @@
 /obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
 	if(stat & (NOPOWER|BROKEN))
 		return
+	..()
 
 	user.set_machine(src)
-	src.add_fingerprint(usr)
 
 	var/dat
 
@@ -65,24 +65,16 @@
 	user << browse(dat, "window=cryopod_console")
 	onclose(user, "cryopod_console")
 
-/obj/machinery/computer/cryopod/Topic(href, href_list)
-	if((. = ..()))
-		return
-
-	var/mob/user = usr
-
-	src.add_fingerprint(user)
-
+/obj/machinery/computer/cryopod/OnTopic(user, href_list, state)
 	if(href_list["log"])
-
 		var/dat = "<b>Recently stored [storage_type]</b><br/><hr/><br/>"
 		for(var/person in frozen_crew)
 			dat += "[person]<br/>"
 		dat += "<hr/>"
+		show_browser(user, dat, "window=cryolog")
+		. = TOPIC_REFRESH
 
-		user << browse(dat, "window=cryolog")
-
-	if(href_list["view"])
+	else if(href_list["view"])
 		if(!allow_items) return
 
 		var/dat = "<b>Recently stored objects</b><br/><hr/><br/>"
@@ -90,43 +82,45 @@
 			dat += "[I.name]<br/>"
 		dat += "<hr/>"
 
-		user << browse(dat, "window=cryoitems")
+		show_browser(user, dat, "window=cryoitems")
+		. = TOPIC_HANDLED
 
 	else if(href_list["item"])
 		if(!allow_items) return
 
 		if(frozen_items.len == 0)
 			to_chat(user, "<span class='notice'>There is nothing to recover from storage.</span>")
-			return
+			return TOPIC_HANDLED
 
-		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
-		if(!I)
-			return
+		var/obj/item/I = input(user, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
+		if(!I || !CanUseTopic(user, state))
+			return TOPIC_HANDLED
 
 		if(!(I in frozen_items))
 			to_chat(user, "<span class='notice'>\The [I] is no longer in storage.</span>")
-			return
+			return TOPIC_HANDLED
 
 		visible_message("<span class='notice'>The console beeps happily as it disgorges \the [I].</span>", 3)
 
-		I.forceMove(get_turf(src))
+		I.dropInto(loc)
 		frozen_items -= I
+		. = TOPIC_REFRESH
 
 	else if(href_list["allitems"])
-		if(!allow_items) return
+		if(!allow_items) return TOPIC_HANDLED
 
 		if(frozen_items.len == 0)
 			to_chat(user, "<span class='notice'>There is nothing to recover from storage.</span>")
-			return
+			return TOPIC_HANDLED
 
 		visible_message("<span class='notice'>The console beeps happily as it disgorges the desired objects.</span>", 3)
 
 		for(var/obj/item/I in frozen_items)
-			I.forceMove(get_turf(src))
+			I.dropInto(loc)
 			frozen_items -= I
+		. = TOPIC_REFRESH
 
-	src.updateUsrDialog()
-	return
+	attack_hand(user)
 
 /obj/item/weapon/circuitboard/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"
@@ -220,6 +214,7 @@
 /obj/machinery/cryopod/lifepod/Initialize()
 	. = ..()
 	airtank = new()
+	airtank.temperature = T0C
 	airtank.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
 	airtank.adjust_gas("nitrogen", MOLES_N2STANDARD)
 
@@ -305,6 +300,10 @@
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
 /obj/machinery/cryopod/Process()
 	if(occupant)
+		if(applies_stasis && iscarbon(occupant))
+			var/mob/living/carbon/C = occupant
+			C.SetStasis(3)
+
 		//Allow a ten minute gap between entering the pod and actually despawning.
 		if(world.time - time_entered < time_till_despawn)
 			return
@@ -460,21 +459,7 @@
 			if(do_after(user, 20, src))
 				if(!M || !grab || !grab.affecting) return
 
-				M.forceMove(src)
-
-				if(M.client)
-					M.client.perspective = EYE_PERSPECTIVE
-					M.client.eye = src
-
-			icon_state = occupied_icon_state
-
-			to_chat(M, "<span class='notice'>[on_enter_occupant_message]</span>")
-			to_chat(M, "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>")
 			set_occupant(M)
-			time_entered = world.time
-			if(ishuman(M) && applies_stasis)
-				var/mob/living/carbon/human/H = M
-				H.in_stasis = 1
 
 			// Book keeping!
 			var/turf/location = get_turf(src)
@@ -504,7 +489,7 @@
 	src.go_out()
 	add_fingerprint(usr)
 
-	name = initial(name)
+	SetName(initial(name))
 	return
 
 /obj/machinery/cryopod/verb/move_inside()
@@ -535,21 +520,7 @@
 			to_chat(usr, "<span class='notice'><B>\The [src] is in use.</B></span>")
 			return
 
-		usr.stop_pulling()
-		usr.client.perspective = EYE_PERSPECTIVE
-		usr.client.eye = src
-		usr.forceMove(src)
 		set_occupant(usr)
-		if(ishuman(usr) && applies_stasis)
-			var/mob/living/carbon/human/H = occupant
-			H.in_stasis = 1
-
-		icon_state = occupied_icon_state
-
-		to_chat(usr, "<span class='notice'>[on_enter_occupant_message]</span>")
-		to_chat(usr, "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>")
-
-		time_entered = world.time
 
 		src.add_fingerprint(usr)
 
@@ -565,17 +536,26 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 
 	occupant.forceMove(get_turf(src))
-	if(ishuman(occupant) && applies_stasis)
-		var/mob/living/carbon/human/H = occupant
-		H.in_stasis = 0
 	set_occupant(null)
 
 	icon_state = base_icon_state
 
 	return
 
-/obj/machinery/cryopod/proc/set_occupant(var/occupant)
+/obj/machinery/cryopod/proc/set_occupant(var/mob/living/carbon/occupant)
 	src.occupant = occupant
-	name = initial(name)
-	if(occupant)
-		name = "[name] ([occupant])"
+	if(!occupant)
+		SetName(initial(name))
+		return
+
+	occupant.stop_pulling()
+	if(occupant.client)
+		to_chat(occupant, "<span class='notice'>[on_enter_occupant_message]</span>")
+		to_chat(occupant, "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>")
+		occupant.client.perspective = EYE_PERSPECTIVE
+		occupant.client.eye = src
+	occupant.forceMove(src)
+	time_entered = world.time
+
+	SetName("[name] ([occupant])")
+	icon_state = occupied_icon_state

@@ -14,10 +14,10 @@
 	var/volume_rate = 500              //Needed for borg jetpack transfer
 	action_button_name = "Toggle Jetpack"
 
-/obj/item/weapon/tank/jetpack/New()
-	..()
-	src.ion_trail = new /datum/effect/effect/system/trail/ion()
-	src.ion_trail.set_up(src)
+/obj/item/weapon/tank/jetpack/Initialize()
+	. = ..()
+	ion_trail = new /datum/effect/effect/system/trail/ion()
+	ion_trail.set_up(src)
 
 /obj/item/weapon/tank/jetpack/Destroy()
 	qdel(ion_trail)
@@ -78,22 +78,14 @@
 	desc = "It works well in a void."
 	icon_state = "jetpack-void"
 	item_state =  "jetpack-void"
-
-/obj/item/weapon/tank/jetpack/void/New()
-	..()
-	air_contents.adjust_gas("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
-	return
+	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/jetpack/oxygen
 	name = "jetpack (oxygen)"
 	desc = "A tank of compressed oxygen for use as propulsion in zero-gravity areas. Use with caution."
 	icon_state = "jetpack"
 	item_state = "jetpack"
-
-/obj/item/weapon/tank/jetpack/oxygen/New()
-	..()
-	air_contents.adjust_gas("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
-	return
+	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/jetpack/carbondioxide
 	name = "jetpack (carbon dioxide)"
@@ -101,11 +93,7 @@
 	distribute_pressure = 0
 	icon_state = "jetpack-black"
 	item_state =  "jetpack-black"
-
-/obj/item/weapon/tank/jetpack/carbondioxide/New()
-	..()
-	air_contents.adjust_gas("carbon_dioxide", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
-	return
+	starting_pressure = list("carbon_dioxide" = 6*ONE_ATMOSPHERE)
 
 /obj/item/weapon/tank/jetpack/rig
 	name = "jetpack"
@@ -132,8 +120,6 @@
 
 	var/datum/gas_mixture/G = pressure_vessel.air_contents.remove(num)
 
-	var/allgases = G.gas["carbon_dioxide"] + G.gas["nitrogen"] + G.gas["oxygen"] + G.gas["phoron"]
-	if(allgases >= 0.005)
+	if(G.total_moles >= 0.005)
 		return 1
 	qdel(G)
-	return

@@ -4,13 +4,13 @@
 	icon_state = "white"
 
 /obj/item/clothing/gloves/color/modified
-	item_flags = PREMODIFIED
+	item_flags = ITEM_FLAG_PREMODIFIED
 
 /obj/item/clothing/gloves/color/white
 	color = COLOR_WHITE
 
 /obj/item/clothing/gloves/color/white/modified
-	item_flags = PREMODIFIED
+	item_flags = ITEM_FLAG_PREMODIFIED
 
 /obj/item/clothing/gloves/color/evening
 	desc = "A pair of gloves that reach past the elbow. Fancy!"
@@ -21,7 +21,7 @@
 	body_parts_covered = ARMS|HANDS //evening gloves don't quite cover the entire arm, but might as well differentiate the item a bit
 
 /obj/item/clothing/gloves/color/evening/modified
-	item_flags = PREMODIFIED
+	item_flags = ITEM_FLAG_PREMODIFIED
 
 /obj/item/clothing/gloves/rainbow
 	name = "rainbow gloves"
@@ -30,4 +30,4 @@
 	item_state = "rainbowgloves"
 
 /obj/item/clothing/gloves/rainbow/modified
-	item_flags = PREMODIFIED
+	item_flags = ITEM_FLAG_PREMODIFIED

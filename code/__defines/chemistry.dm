@@ -43,6 +43,7 @@
 #define CE_TOXIN         "toxins"       // Generic toxins, stops autoheal.
 #define CE_BREATHLOSS    "breathloss"   // Breathing depression, makes you need more air
 #define CE_MIND    		 "mindbending"  // Stabilizes or wrecks mind. Used for hallucinations
+#define CE_CRYO 	     "cryogenic"    // Prevents damage from being frozen
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1

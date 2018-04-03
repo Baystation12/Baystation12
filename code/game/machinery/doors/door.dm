@@ -51,11 +51,9 @@
 	. = ..()
 	if(density)
 		layer = closed_layer
-		explosion_resistance = initial(explosion_resistance)
 		update_heat_protection(get_turf(src))
 	else
 		layer = open_layer
-		explosion_resistance = 0
 
 
 	if(width > 1)
@@ -133,7 +131,7 @@
 
 /obj/machinery/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return !block_air_zones
-	if(istype(mover) && mover.checkpass(PASSGLASS))
+	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return !opacity
 	return !density
 
@@ -197,7 +195,7 @@
 	..()
 
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
-	src.add_fingerprint(user)
+	src.add_fingerprint(user, 0, I)
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(stat & BROKEN)
@@ -387,7 +385,6 @@
 	update_nearby_tiles()
 	sleep(7)
 	src.layer = open_layer
-	explosion_resistance = 0
 	update_icon()
 	set_opacity(0)
 	operating = 0
@@ -409,7 +406,6 @@
 	do_animate("closing")
 	sleep(3)
 	src.set_density(1)
-	explosion_resistance = initial(explosion_resistance)
 	src.layer = closed_layer
 	update_nearby_tiles()
 	sleep(7)

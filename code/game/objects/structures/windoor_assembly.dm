@@ -47,7 +47,7 @@ obj/structure/windoor_assembly/Destroy()
 	icon_state = "[facing]_[secure]windoor_assembly[state]"
 
 /obj/structure/windoor_assembly/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(istype(mover) && mover.checkpass(PASSGLASS))
+	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
 	if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
 		if(air_group) return 0
@@ -56,7 +56,7 @@ obj/structure/windoor_assembly/Destroy()
 		return 1
 
 /obj/structure/windoor_assembly/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
-	if(istype(mover) && mover.checkpass(PASSGLASS))
+	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
 	if(get_dir(loc, target) == dir)
 		return !density
@@ -95,9 +95,9 @@ obj/structure/windoor_assembly/Destroy()
 					to_chat(user, "<span class='notice'>You've secured the windoor assembly!</span>")
 					src.anchored = 1
 					if(src.secure)
-						src.name = "Secure Anchored Windoor Assembly"
+						src.SetName("Secure Anchored Windoor Assembly")
 					else
-						src.name = "Anchored Windoor Assembly"
+						src.SetName("Anchored Windoor Assembly")
 
 			//Unwrenching an unsecure assembly un-anchors it. Step 4 undone
 			else if(isWrench(W) && anchored)
@@ -109,9 +109,9 @@ obj/structure/windoor_assembly/Destroy()
 					to_chat(user, "<span class='notice'>You've unsecured the windoor assembly!</span>")
 					src.anchored = 0
 					if(src.secure)
-						src.name = "Secure Windoor Assembly"
+						src.SetName("Secure Windoor Assembly")
 					else
-						src.name = "Windoor Assembly"
+						src.SetName("Windoor Assembly")
 
 			//Adding plasteel makes the assembly a secure windoor assembly. Step 2 (optional) complete.
 			else if(istype(W, /obj/item/stack/rods) && !secure)
@@ -126,9 +126,9 @@ obj/structure/windoor_assembly/Destroy()
 						to_chat(user, "<span class='notice'>You reinforce the windoor.</span>")
 						src.secure = "secure_"
 						if(src.anchored)
-							src.name = "Secure Anchored Windoor Assembly"
+							src.SetName("Secure Anchored Windoor Assembly")
 						else
-							src.name = "Secure Windoor Assembly"
+							src.SetName("Secure Windoor Assembly")
 
 			//Adding cable to the assembly. Step 5 complete.
 			else if(istype(W, /obj/item/stack/cable_coil) && anchored)
@@ -140,9 +140,9 @@ obj/structure/windoor_assembly/Destroy()
 						to_chat(user, "<span class='notice'>You wire the windoor!</span>")
 						src.state = "02"
 						if(src.secure)
-							src.name = "Secure Wired Windoor Assembly"
+							src.SetName("Secure Wired Windoor Assembly")
 						else
-							src.name = "Wired Windoor Assembly"
+							src.SetName("Wired Windoor Assembly")
 			else
 				..()
 
@@ -160,9 +160,9 @@ obj/structure/windoor_assembly/Destroy()
 					new/obj/item/stack/cable_coil(get_turf(user), 1)
 					src.state = "01"
 					if(src.secure)
-						src.name = "Secure Anchored Windoor Assembly"
+						src.SetName("Secure Anchored Windoor Assembly")
 					else
-						src.name = "Anchored Windoor Assembly"
+						src.SetName("Anchored Windoor Assembly")
 
 			//Adding airlock electronics for access. Step 6 complete.
 			else if(istype(W, /obj/item/weapon/airlock_electronics) && W:icon_state != "door_electronics_smoked")
@@ -175,7 +175,7 @@ obj/structure/windoor_assembly/Destroy()
 					user.drop_item()
 					W.loc = src
 					to_chat(user, "<span class='notice'>You've installed the airlock electronics!</span>")
-					src.name = "Near finished Windoor Assembly"
+					src.SetName("Near finished Windoor Assembly")
 					src.electronics = W
 				else
 					W.loc = src.loc
@@ -189,9 +189,9 @@ obj/structure/windoor_assembly/Destroy()
 					if(!src || !src.electronics) return
 					to_chat(user, "<span class='notice'>You've removed the airlock electronics!</span>")
 					if(src.secure)
-						src.name = "Secure Wired Windoor Assembly"
+						src.SetName("Secure Wired Windoor Assembly")
 					else
-						src.name = "Wired Windoor Assembly"
+						src.SetName("Wired Windoor Assembly")
 					var/obj/item/weapon/airlock_electronics/ae = electronics
 					electronics = null
 					ae.loc = src.loc

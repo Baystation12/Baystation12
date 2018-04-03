@@ -20,7 +20,7 @@
 
 /obj/item/clothing/accessory/black
 	name = "black tie"
-	color = "#ffffff"
+	color = "#1e1e1e"
 
 /obj/item/clothing/accessory/yellow
 	name = "yellow tie"
@@ -102,3 +102,9 @@
 	name = "horrible bowtie"
 	desc = "A neosilk hand-tied bowtie. This one is disgusting."
 	icon_state = "bowtie_ugly"
+
+/obj/item/clothing/accessory/ftupin
+	name = "\improper Free Trade Union pin"
+	desc = "A pin denoting employment in the Free Trade Union, a trading company."
+	icon_state = "ftupin"
+	high_visibility = 1

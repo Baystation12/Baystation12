@@ -60,8 +60,7 @@ proc/cardinalrange(var/center)
 			spawn(20)
 				controllerscan(1)//Last chance
 			return
-		spawn(0)
-			qdel(src)
+		QDEL_IN(src, 0)
 	return
 
 
@@ -192,7 +191,7 @@ proc/cardinalrange(var/center)
 	icon_state = "box"
 	item_state = "electronic"
 	w_class = ITEM_SIZE_HUGE
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 2

@@ -63,6 +63,7 @@
 	display_name = "blueberry bush"
 	mutants = list("berries","poisonberries","glowberries")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/juice/berry = list(10,10))
+	kitchen_tag = "blueberries"
 
 /datum/seed/berry/blue/New()
 	..()
@@ -262,7 +263,7 @@
 	seed_name = "apple"
 	display_name = "apple tree"
 	mutants = list("poisonapple","goldapple")
-	chems = list(/datum/reagent/nutriment = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/juice/apple = list(10,10))
 	kitchen_tag = "apple"
 
 /datum/seed/apple/New()
@@ -657,7 +658,7 @@
 	name = "peppercorn"
 	seed_name = "peppercorn"
 	display_name = "black pepper"
-	chems = list(blackpepper = list(10,10))
+	chems = list(/datum/reagent/blackpepper = list(10,10))
 
 /datum/seed/peppercorn/New()
 	..()
@@ -697,7 +698,7 @@
 	name = "banana"
 	seed_name = "banana"
 	display_name = "banana tree"
-	chems = list(/datum/reagent/drink/juice/banana = list(10,10))
+	chems = list(/datum/reagent/drink/juice/banana = list(10,10), /datum/reagent/potassium = list(2,3))
 	trash_type = /obj/item/weapon/bananapeel
 	kitchen_tag = "banana"
 

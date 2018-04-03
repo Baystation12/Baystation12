@@ -52,6 +52,32 @@
 	desc = "The standard Tajaran footwear loosly resembles the Roman Caligae. Made of leather and rubber, their unique design allows for improved traction and protection. They don't look like they would fit on anyone but a Tajara. /This one has a black covering."
 	icon_state = "blackcaligae"
 	item_state = "blackcaligae"
+	
+/obj/item/clothing/accessory/shouldercape
+	name = "shoulder cape"
+	desc = "A simple shoulder cape."
+	icon_state = "gruntcape"
+	slot = ACCESSORY_SLOT_INSIGNIA // Adding again in case we want to change it in the future.
+	
+/obj/item/clothing/accessory/shouldercape/grunt
+	name = "modir cape"
+	desc = "A simple looking cape with a couple of runes woven into the fabric."
+	icon_state = "gruntcape" // Again, just in case it is changed.
+
+/obj/item/clothing/accessory/shouldercape/officer
+	name = "nraji cape"
+	desc = "A decorated cape. Runed patterns have been woven into the fabric."
+	icon_state = "officercape"
+
+/obj/item/clothing/accessory/shouldercape/command
+	name = "hejun cape"
+	desc = "A heavily decorated cape with rank emblems on the shoulders signifying positions within the Tajaran govenment. An ornate runed design has been woven into the fabric of it"
+	icon_state = "commandcape"
+
+/obj/item/clothing/accessory/shouldercape/general
+	name = "ginajir cape"
+	desc = "An extremely decorated cape with an intricately runed design has been woven into the fabric of this cape with great care. This cape can only be found within the Tajaran elite."
+	icon_state = "leadercape"
 
 //Voxclothing
 

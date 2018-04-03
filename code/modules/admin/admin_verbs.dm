@@ -7,6 +7,7 @@ var/list/admin_verbs_default = list(
 	/client/proc/hide_verbs,			//hides all our adminverbs,
 	/client/proc/hide_most_verbs,		//hides all our hideable adminverbs,
 	/client/proc/debug_variables,		//allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify,
+	/client/proc/watched_variables,
 	/client/proc/debug_global_variables,//as above but for global variables,
 //	/client/proc/check_antagonists,		//shows all antags,
 	/client/proc/cmd_mentor_check_new_players
@@ -300,6 +301,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_pm_context,	// right-click adminPM interface,
 	/client/proc/cmd_admin_pm_panel,	// admin-pm list,
 	/client/proc/debug_variables,		// allows us to -see- the variables of any instance in the game.,
+	/client/proc/watched_variables,
 	/client/proc/debug_global_variables,// as above but for global variables,
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/admin_ghost,			// allows us to ghost/reenter body at will,
@@ -842,12 +844,12 @@ var/list/admin_verbs_mentor = list(
 		M.s_tone =  -M.s_tone + 35
 
 	// hair
-	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in hair_styles_list
+	var/new_hstyle = input(usr, "Select a hair style", "Grooming")  as null|anything in GLOB.hair_styles_list
 	if(new_hstyle)
 		M.h_style = new_hstyle
 
 	// facial hair
-	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in facial_hair_styles_list
+	var/new_fstyle = input(usr, "Select a facial hair style", "Grooming")  as null|anything in GLOB.facial_hair_styles_list
 	if(new_fstyle)
 		M.f_style = new_fstyle
 

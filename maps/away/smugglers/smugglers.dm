@@ -2,8 +2,8 @@
 #include "../mining/mining_areas.dm"
 
 /obj/effect/overmap/sector/smugglers
-	name = "Abandoned station on small asteroid"
-	desc = "This looks like a small abandoned asteroid station."
+	name = "asteroid station"
+	desc = "A small station built into an asteroid. No radio traffic detected."
 	icon_state = "object"
 	known = 0
 

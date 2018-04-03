@@ -183,7 +183,7 @@
 	name = "Petrov"
 	warmup_time = 10
 	shuttle_area = list(/area/shuttle/petrov/ship,/area/shuttle/petrov/cell1,/area/shuttle/petrov/cell2,/area/shuttle/petrov/cell3)
-	dock_target = "petrov_shuttle"
+	dock_target = "petrov_shuttle_airlock"
 	waypoint_station = "nav_petrov_start"
 	waypoint_offsite = "nav_petrov_out"
 
@@ -562,6 +562,7 @@
 	name = "Charon"
 	move_time = 90
 	shuttle_area = list(/area/exploration_shuttle/cockpit, /area/exploration_shuttle/atmos, /area/exploration_shuttle/power, /area/exploration_shuttle/crew, /area/exploration_shuttle/cargo, /area/exploration_shuttle/airlock)
+	dock_target = "calypso_shuttle"
 	current_location = "nav_hangar_calypso"
 	landmark_transition = "nav_transit_calypso"
 	range = 1
@@ -602,6 +603,7 @@
 	warmup_time = 5
 	move_time = 30
 	shuttle_area = /area/guppy_hangar/start
+	dock_target ="guppy_shuttle"
 	current_location = "nav_hangar_guppy"
 	landmark_transition = "nav_transit_guppy"
 	sound_takeoff = 'sound/effects/rocket.ogg'

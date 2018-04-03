@@ -1,0 +1,4 @@
+author: "mustafakalash"
+delete-after: True
+changes: 
+  - tweak: "The Torch will once again always spawn on an asteroid."

@@ -68,7 +68,7 @@
 	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
 
 	if(src && input && !M.stat && in_range(M,src))
-		name = input
+		SetName(input)
 		to_chat(M, "You name the gun [input]. Say hello to your new friend.")
 		return 1
 
@@ -116,7 +116,7 @@
 
 /obj/item/weapon/gun/projectile/revolver/webley
 	name = "service revolver"
-	desc = "A rugged top break revolver based on the Webley Mk. VI model, with modern improvements. Uses .44 magnum rounds."
+	desc = "The A&M W4. A rugged top break revolver produced by al-Maliki & Mosley. Based on the Webley model, with modern improvements. Uses .44 magnum rounds."
 	icon_state = "webley"
 	item_state = "webley"
 	max_shells = 6

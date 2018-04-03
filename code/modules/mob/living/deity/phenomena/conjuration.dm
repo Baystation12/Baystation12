@@ -70,6 +70,7 @@
 /datum/phenomena/banishing_smite
 	name = "Banishing Smite"
 	cost = 25
+	cooldown = 300
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living
 

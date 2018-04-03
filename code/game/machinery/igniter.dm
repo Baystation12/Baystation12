@@ -37,9 +37,7 @@
 /obj/machinery/igniter/attack_hand(mob/user as mob)
 	if(..())
 		return
-	add_fingerprint(user)
 	ignite()
-	return
 
 /obj/machinery/igniter/Process()	//ugh why is this even in process()?
 	if (on && powered() )
@@ -102,6 +100,8 @@
 		else if(!disable)
 			user.visible_message("<span class='warning'>[user] has reconnected the [src]!</span>", "<span class='warning'>You fix the connection to the [src].</span>")
 		update_icon()
+	else
+		..()
 
 /obj/machinery/sparker/attack_ai()
 	if (anchored)

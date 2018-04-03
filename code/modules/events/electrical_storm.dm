@@ -8,17 +8,17 @@
 	..()
 	switch(severity)
 		if(EVENT_LEVEL_MUNDANE)
-			command_announcement.Announce("A minor electrical storm has been detected near the [station_name()]. Please watch out for possible electrical discharges.", "[station_name()] Sensor Array")
+			command_announcement.Announce("A minor electrical storm has been detected near the [location_name()]. Please watch out for possible electrical discharges.", "[location_name()] Sensor Array", zlevels = affecting_z)
 		if(EVENT_LEVEL_MODERATE)
-			command_announcement.Announce("The [station_name()] is about to pass through an electrical storm. Please secure sensitive electrical equipment until the storm passes.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_moderate_sound)
+			command_announcement.Announce("The [location_name()] is about to pass through an electrical storm. Please secure sensitive electrical equipment until the storm passes.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_moderate_sound, zlevels = affecting_z)
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the [station_name()]. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_major_sound)
+			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the [location_name()]. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_major_sound, zlevels = affecting_z)
 
 /datum/event/electrical_storm/start()
 	..()
 	valid_apcs = list()
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
-		if(A.z in GLOB.using_map.station_levels)
+		if(A.z in affecting_z)
 			valid_apcs.Add(A)
 	endWhen = (severity * 60) + startWhen
 
@@ -27,7 +27,7 @@
 	//See if shields can stop it first
 	var/list/shields = list()
 	for(var/obj/machinery/power/shield_generator/G in SSmachines.machinery)
-		if((G.z in GLOB.using_map.station_levels) && G.running && G.check_flag(MODEFLAG_EM))
+		if((G.z in affecting_z) && G.running && G.check_flag(MODEFLAG_EM))
 			shields += G
 	if(shields.len)
 		var/obj/machinery/power/shield_generator/shield_gen = pick(shields)
@@ -68,4 +68,4 @@
 
 /datum/event/electrical_storm/end()
 	..()
-	command_announcement.Announce("The [station_name()] has cleared the electrical storm. Please repair any electrical overloads.", "Electrical Storm Alert")
+	command_announcement.Announce("The [location_name()] has cleared the electrical storm. Please repair any electrical overloads.", "Electrical Storm Alert")

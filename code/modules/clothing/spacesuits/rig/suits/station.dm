@@ -9,7 +9,7 @@
 	offline_slowdown = 0
 	offline_vision_restriction = 0
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/briefcase,/obj/item/weapon/storage/secure/briefcase)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/briefcase, /obj/item/weapon/storage/secure/briefcase)
 
 	req_access = list()
 	req_one_access = list()
@@ -29,7 +29,8 @@
 		/obj/item/rig_module/device/flash,
 		/obj/item/rig_module/device/paperdispenser,
 		/obj/item/rig_module/device/pen,
-		/obj/item/rig_module/device/stamp
+		/obj/item/rig_module/device/stamp,
+		/obj/item/rig_module/cooling_unit
 		)
 
 	glove_type = null
@@ -75,11 +76,12 @@
 /obj/item/weapon/rig/industrial/equipped
 
 	initial_modules = list(
-		/obj/item/rig_module/device/plasmacutter,
+		/obj/item/rig_module/mounted/plasmacutter,
 		/obj/item/rig_module/device/drill,
 		/obj/item/rig_module/device/orescanner,
 		/obj/item/rig_module/device/rcd,
-		/obj/item/rig_module/vision/meson
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/weapon/rig/eva
@@ -101,29 +103,48 @@
 
 	req_access = list()
 	req_one_access = list()
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/back.dmi'
+		)
 
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/engineering
 	species_restricted = list(SPECIES_HUMAN)
+	sprite_sheets = list(
+		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi'
+		)
 
 /obj/item/clothing/suit/space/rig/eva
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/suit.dmi'
+		)
 
 /obj/item/clothing/shoes/magboots/rig/eva
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/feet.dmi'
+		)
 
 /obj/item/clothing/gloves/rig/eva
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 	siemens_coefficient = 0
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/hands.dmi'
+		)
 
 /obj/item/weapon/rig/eva/equipped
 
+	req_access = list(access_engine_equip)
+
 	initial_modules = list(
-		/obj/item/rig_module/device/plasmacutter,
+		/obj/item/rig_module/mounted/plasmacutter,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/rcd,
-		/obj/item/rig_module/vision/meson
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/weapon/rig/ce
@@ -132,7 +153,7 @@
 	suit_type = "engineering hardsuit"
 	desc = "An advanced hardsuit that protects against hazardous, low pressure environments. Shines with a high polish. Appears compatible with the physiology of most species."
 	icon_state = "ce_rig"
-	armor = list(melee = 40, bullet = 10, laser = 30,energy = 25, bomb = 40, bio = 100, rad = 100)
+	armor = list(melee = 40, bullet = 25, laser = 30, energy = 25, bomb = 40, bio = 100, rad = 100)
 	online_slowdown = 0
 	offline_slowdown = 0
 	offline_vision_restriction = TINT_HEAVY
@@ -140,7 +161,7 @@
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
 	glove_type = /obj/item/clothing/gloves/rig/ce
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/ore,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/inflatable_dispenser,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe,/obj/item/weapon/rcd)
+	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/ore,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/inflatable_dispenser,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe,/obj/item/weapon/rcd)
 
 	req_access = list()
 	req_one_access = list()
@@ -152,9 +173,12 @@
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/plasmacutter,
+		/obj/item/rig_module/mounted/plasmacutter,
 		/obj/item/rig_module/device/rcd,
-		/obj/item/rig_module/vision/meson
+		/obj/item/rig_module/device/flash,
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/grenade_launcher/mfoam,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/clothing/head/helmet/space/rig/ce
@@ -178,7 +202,7 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/hazmat
 	glove_type = /obj/item/clothing/gloves/rig/hazmat
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/excavation,/obj/item/weapon/pickaxe,/obj/item/device/healthanalyzer,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/device/beacon_locator,/obj/item/device/radio/beacon,/obj/item/weapon/pickaxe/hand,/obj/item/weapon/storage/bag/fossils)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/excavation,/obj/item/weapon/pickaxe,/obj/item/device/healthanalyzer,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/weapon/pinpointer/radio,/obj/item/device/radio/beacon,/obj/item/weapon/pickaxe/hand,/obj/item/weapon/storage/bag/fossils)
 
 	req_access = list()
 	req_one_access = list()
@@ -204,7 +228,8 @@
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/anomaly_scanner
+		/obj/item/rig_module/device/anomaly_scanner,
+		/obj/item/rig_module/cooling_unit,
 		)
 
 /obj/item/weapon/rig/medical
@@ -229,16 +254,31 @@
 
 /obj/item/clothing/head/helmet/space/rig/medical
 	camera = /obj/machinery/camera/network/medbay
-	species_restricted = list(SPECIES_HUMAN, SPECIES_TAJARA)
+	species_restricted = list(SPECIES_HUMAN, SPECIES_TAJARA, SPECIES_UNATHI, SPECIES_SKRELL)
+	sprite_sheets = list(
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi'
+		)
 
 /obj/item/clothing/suit/space/rig/medical
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA, SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/suit.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/suit.dmi'
+		)
 
 /obj/item/clothing/shoes/magboots/rig/medical
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA, SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/feet.dmi'
+		)
 
 /obj/item/clothing/gloves/rig/medical
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA)
+	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA, SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/hands.dmi'
+		)
 
 /obj/item/weapon/rig/medical/equipped
 
@@ -248,7 +288,8 @@
 		/obj/item/rig_module/chem_dispenser/injector,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/healthscanner,
-		/obj/item/rig_module/vision/medhud
+		/obj/item/rig_module/vision/medhud,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/weapon/rig/hazard
@@ -291,5 +332,6 @@
 		/obj/item/rig_module/vision/sechud,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/grenade_launcher,
-		/obj/item/rig_module/mounted/taser
+		/obj/item/rig_module/mounted/taser,
+		/obj/item/rig_module/cooling_unit
 		)

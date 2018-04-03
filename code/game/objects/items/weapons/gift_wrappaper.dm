@@ -172,7 +172,6 @@
 					var/obj/item/weapon/gift/G = new /obj/item/weapon/gift( src.loc, W )
 					G.add_fingerprint(user)
 					W.add_fingerprint(user)
-					src.add_fingerprint(user)
 					src.amount -= a_used
 
 			if (src.amount <= 0)

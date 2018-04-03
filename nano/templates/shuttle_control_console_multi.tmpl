@@ -49,6 +49,12 @@
 					<span class="bad">ERROR</span>
 				{{/if}}
 			</div>
+			<div class="itemLabel">
+				Docking Codes:
+			</div>
+			<div class="itemContent">
+				{{:helper.link(data.docking_codes ? data.docking_codes : 'Not set', null, {'set_codes' : '1'}, null , null)}}
+			</div>
 		</div>
 	</div>
 {{/if}}

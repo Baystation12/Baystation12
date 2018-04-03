@@ -10,6 +10,7 @@
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	loaded = /obj/item/weapon/rcd_ammo/large // ~30 shots
+	combustion = 1
 
 	var/initial_cell_type = /obj/item/weapon/cell/hyper
 	var/initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots

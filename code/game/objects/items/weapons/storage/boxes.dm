@@ -73,6 +73,7 @@
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/oxygen = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
+					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
@@ -82,6 +83,7 @@
 	icon_state = "survivalvox"
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/nitrogen = 1,
+					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
@@ -93,6 +95,7 @@
 					/obj/item/weapon/tank/emergency/oxygen/engi = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox = 1,
+					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
@@ -491,3 +494,9 @@
 		/obj/item/weapon/implantpad,
 		/obj/item/weapon/implantcase/imprinting = 3
 		)
+
+/obj/item/weapon/storage/box/detergent
+	name = "detergent pods bag"
+	desc = "A bag full of juicy yummy detergent pods."
+	icon_state = "detergent"
+	startswith = list(/obj/item/weapon/reagent_containers/pill/detergent = 10)

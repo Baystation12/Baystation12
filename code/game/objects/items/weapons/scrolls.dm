@@ -11,7 +11,7 @@
 	origin_tech = list(TECH_BLUESPACE = 4)
 
 /obj/item/weapon/teleportation_scroll/attack_self(mob/user as mob)
-	if((user.mind && !wizards.is_antagonist(user.mind)))
+	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
 		to_chat(usr, "<span class='warning'>You stare at the scroll but cannot make sense of the markings!</span>")
 		return
 
@@ -41,8 +41,8 @@
 	return
 
 /obj/item/weapon/teleportation_scroll/proc/teleportscroll(var/mob/user)
-	var/area/thearea = input(user, "Area to jump to", "BOOYEA") as null|anything in teleportlocs
-	thearea = thearea ? teleportlocs[thearea] : thearea
+	var/area/thearea = input(user, "Area to jump to", "BOOYEA") as null|anything in wizteleportlocs
+	thearea = thearea ? wizteleportlocs[thearea] : thearea
 
 	if (!thearea || CanUseTopic(user) != STATUS_INTERACTIVE)
 		return
@@ -82,6 +82,9 @@
 
 	if(!success)
 		user.forceMove(pick(L))
+
+	if(!is_station_area(get_area(user)))
+		log_and_message_admins("has teleported to [get_area(user)].")
 
 	smoke.start()
 	src.uses -= 1

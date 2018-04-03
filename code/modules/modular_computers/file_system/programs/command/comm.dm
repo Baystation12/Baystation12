@@ -7,6 +7,7 @@
 	filename = "comm"
 	filedesc = "Command and Communications Program"
 	program_icon_state = "comm"
+	program_key_state = "med_key"
 	program_menu_icon = "flag"
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
@@ -334,7 +335,7 @@ var/last_message_id = 0
 		to_chat(user, "<span class='notice'>Cannot establish a bluespace connection.</span>")
 		return
 
-	if(deathsquad.deployed)
+	if(GLOB.deathsquad.deployed)
 		to_chat(user, "[GLOB.using_map.boss_short] will not allow an evacuation to take place. Consider all contracts terminated.")
 		return
 

@@ -65,6 +65,27 @@
 
 		cmd_mass_modify_object_variables(A, href_list["varnamemass"])
 
+	else if(href_list["datumwatch"] && href_list["varnamewatch"])
+		var/datum/D = locate(href_list["datumwatch"])
+		if(D)
+			if(!watched_variables[D])
+				watched_variables[D] = list()
+			watched_variables[D] |= href_list["varnamewatch"]
+			watched_variables()
+
+			if(!watched_variables_window.is_processing)
+				START_PROCESSING(SSprocessing, watched_variables_window)
+
+	else if(href_list["datumunwatch"] && href_list["varnameunwatch"])
+		var/datum/D = locate(href_list["datumunwatch"])
+		if(D && watched_variables[D])
+			watched_variables[D] -= href_list["varnameunwatch"]
+			var/list/datums_watched_vars = watched_variables[D]
+			if(!datums_watched_vars.len)
+				watched_variables -= D
+		if(!watched_variables.len && watched_variables_window.is_processing)
+			STOP_PROCESSING(SSprocessing, watched_variables_window)
+
 	else if(href_list["mob_player_panel"])
 		if(!check_rights(0))	return
 
@@ -526,7 +547,26 @@
 		var/datum/D = locate(href_list["call_proc"])
 		if(istype(D) || istype(D, /client)) // can call on clients too, not just datums
 			callproc_targetpicked(1, D)
-
+	else if(href_list["addaura"])
+		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/L = locate(href_list["addaura"])
+		if(!istype(L))
+			return
+		var/choice = input("Please choose an aura to add", "Auras", null) as null|anything in typesof(/obj/aura)
+		if(!choice || !L)
+			return
+		var/obj/o = new choice(L)
+		log_and_message_admins("added \the [o] to \the [L]")
+	else if(href_list["removeaura"])
+		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/L = locate(href_list["removeaura"])
+		if(!istype(L))
+			return
+		var/choice = input("Please choose an aura to remove", "Auras", null) as null|anything in L.auras
+		if(!choice || !L)
+			return
+		log_and_message_admins("removed \the [choice] to \the [L]")
+		qdel(choice)
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])
 		if(istype(DAT, /datum) || istype(DAT, /client))

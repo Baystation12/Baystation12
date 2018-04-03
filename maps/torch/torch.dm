@@ -16,7 +16,6 @@
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
 	#include "datums/uniforms_fleet.dm"
-	#include "datums/uniforms_marine.dm"
 	#include "datums/supplypacks/security.dm"
 	#include "datums/supplypacks/science.dm"
 
@@ -28,6 +27,7 @@
 	#include "items/manuals.dm"
 	#include "items/stamps.dm"
 	#include "items/uniform_vendor.dm"
+	#include "items/rigs.dm"
 
 	#include "items/clothing/clothing.dm"
 	#include "items/clothing/solgov-accessory.dm"
@@ -81,14 +81,22 @@
 	#include "../away/magshield/magshield.dm"
 	#include "../away/casino/casino.dm"
 	#include "../away/yacht/yacht.dm"
+	#include "../away/blueriver/blueriver.dm"
 	#include "../away/slavers/slavers_base.dm"
+	#include "../away/hydro/hydro.dm"
+	#include "../away/mobius_rift/mobius_rift.dm"
+	#include "../away/icarus/icarus.dm"
+	#include "../away/errant_pisces/errant_pisces.dm"
+	#include "../away/lar_maria/lar_maria.dm"
 
 	#include "../../code/modules/lobby_music/chasing_time.dm"
+	#include "../../code/modules/lobby_music/Torch.dm"
 	#include "../../code/modules/lobby_music/human.dm"
 	#include "../../code/modules/lobby_music/marhaba.dm"
 	#include "../../code/modules/lobby_music/treacherous_voyage.dm"
 	#include "../../code/modules/lobby_music/comet_haley.dm"
 	#include "../../code/modules/lobby_music/lysendraa.dm"
+	#include "../../code/modules/lobby_music/lasers.dm"
 
 	#define using_map_DATUM /datum/map/torch
 
@@ -97,3 +105,4 @@
 	#warn A map has already been included, ignoring Torch
 
 #endif
+

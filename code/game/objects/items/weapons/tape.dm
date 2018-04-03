@@ -63,6 +63,14 @@
 			if(!T.place_handcuffs(H, user))
 				user.unEquip(T)
 				qdel(T)
+
+		else if(user.zone_sel.selecting == BP_CHEST)
+			if(H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
+				if(H == user || do_mob(user, H, 10))	//Skip the time-check if patching your own suit, that's handled in attackby()
+					H.wear_suit.attackby(src, user)
+			else
+				to_chat(user, "<span class='warning'>\The [H] isn't wearing a spacesuit for you to reseal.</span>")
+
 		else
 			return ..()
 		return 1
@@ -82,19 +90,23 @@
 	icon_state = "tape"
 	w_class = ITEM_SIZE_TINY
 	layer = ABOVE_OBJ_LAYER
-	anchored = 1 //it's sticky, no you cant move it
 
 	var/obj/item/weapon/stuck = null
 
-/obj/item/weapon/ducttape/New()
-	..()
-	flags |= NOBLUDGEON
+/obj/item/solar_assembly/attack_hand(var/mob/user)
+	anchored = FALSE // Unattach it from whereever it's on, if anything.
+	return ..()
+
+/obj/item/weapon/ducttape/Initialize()
+	. = ..()
+	item_flags |= ITEM_FLAG_NO_BLUDGEON
 
 /obj/item/weapon/ducttape/examine(mob/user)
-	return stuck.examine(user)
+	return stuck ? stuck.examine(user) : ..()
 
 /obj/item/weapon/ducttape/proc/attach(var/obj/item/weapon/W)
 	stuck = W
+	anchored = TRUE
 	W.forceMove(src)
 	icon_state = W.icon_state + "_taped"
 	name = W.name + " (taped)"

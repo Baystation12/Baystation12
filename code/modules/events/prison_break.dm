@@ -37,7 +37,7 @@
 
 /datum/event/prison_break/announce()
 	if(areas && areas.len > 0)
-		command_announcement.Announce("[pick("Gr3y.T1d3 virus","Malignant trojan")] detected in [station_name()] [(eventDept == "Security")? "imprisonment":"containment"] subroutines. Secure any compromised areas immediately. [station_name()] AI involvement is recommended.", "[eventDept] Alert")
+		command_announcement.Announce("[pick("Gr3y.T1d3 virus","Malignant trojan")] detected in [location_name()] [(eventDept == "Security")? "imprisonment":"containment"] subroutines. Secure any compromised areas immediately. [location_name()] AI involvement is recommended.", "[eventDept] Alert", zlevels = affecting_z)
 
 
 /datum/event/prison_break/start()
@@ -46,9 +46,10 @@
 			areas += A
 
 	if(areas && areas.len > 0)
-		var/my_department = "[station_name()] firewall subroutines"
+		var/my_department = "[location_name()] Firewall Subroutines"
 		var/rc_message = "An unknown malicious program has been detected in the [english_list(areaName)] lighting and airlock control systems at [stationtime2text()]. Systems will be fully compromised within approximately three minutes. Direct intervention is required immediately.<br>"
-		for(var/obj/machinery/message_server/MS in world)
+		var/obj/machinery/message_server/MS = get_message_server()
+		if(MS)
 			MS.send_rc_message("Engineering", my_department, rc_message, "", "", 2)
 		for(var/mob/living/silicon/ai/A in GLOB.player_list)
 			to_chat(A, "<span class='danger'>Malicious program detected in the [english_list(areaName)] lighting and airlock control systems by [my_department].</span>")

@@ -1,14 +1,14 @@
 /obj/item/weapon/nullrod
-	name = "null rod"
-	desc = "A rod of pure obsidian, its very presence disrupts and dampens the powers of paranormal phenomenae."
+	name = "null sceptre"
+	desc = "A sceptre of pure black obsidian capped at both ends with silver ferrules. Some religious groups claim it disrupts and dampens the powers of paranormal phenomenae."
 	icon_state = "nullrod"
 	item_state = "nullrod"
 	slot_flags = SLOT_BELT
-	force = 15
+	force = 10
 	throw_speed = 1
 	throw_range = 4
-	throwforce = 10
-	w_class = ITEM_SIZE_SMALL
+	throwforce = 7
+	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
 	admin_attack_log(user, M, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
@@ -16,7 +16,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
 	//if(user != M)
-	if(M.mind && M.mind.learned_spells)
+	if(M.mind && LAZYLEN(M.mind.learned_spells))
 		M.silence_spells(300) //30 seconds
 		to_chat(M, "<span class='danger'>You've been silenced!</span>")
 		return
@@ -31,9 +31,9 @@
 		user.Paralyse(20)
 		return
 
-	if(cult && iscultist(M))
+	if(GLOB.cult && iscultist(M))
 		M.visible_message("<span class='notice'>\The [user] waves \the [src] over \the [M]'s head.</span>")
-		cult.offer_uncult(M)
+		GLOB.cult.offer_uncult(M)
 		return
 
 	..()
@@ -41,10 +41,17 @@
 /obj/item/weapon/nullrod/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity)
 		return
+
 	if(istype(A, /turf/simulated/wall/cult))
 		var/turf/simulated/wall/cult/W = A
-		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src] and it starts fizzling and shifting.</span>", "<span class='notice'>You touch \the [A] with \the [src] and it starts fizzling and shifting.</span>")
+		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
 		W.ChangeTurf(/turf/simulated/wall)
+
+	if(istype(A, /turf/simulated/floor/cult))
+		var/turf/simulated/floor/cult/F = A
+		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
+		F.ChangeTurf(/turf/simulated/floor)
+
 
 /obj/item/weapon/energy_net
 	name = "energy net"
@@ -108,11 +115,10 @@
 	desc = "An energized net meant to subdue animals."
 
 	anchored = 0
-	health = 1
+	health = 5
 	temporary = 0
-	min_free_time = 0
-	max_free_time = 0
-
+	min_free_time = 5
+	max_free_time = 10
 
 /obj/effect/energy_net/teleport
 	countdown = 60
@@ -161,13 +167,6 @@
 		if(!C.handcuffed)
 			C.handcuffed = src
 	return 1
-
-/obj/effect/energy_net/safari/capture_mob(mob/living/M)
-	if(istype(M, /mob/living/simple_animal))
-		. = ..()
-	else
-		visible_message("\The [src] fails to contain \the [M]!")
-		qdel(src)
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
 	if(buckled_mob)
@@ -227,7 +226,7 @@ obj/effect/energy_net/user_unbuckle_mob(mob/user)
 
 /obj/effect/energy_net/proc/escape_net(mob/user as mob)
 	visible_message(
-		"<span class='danger'>\The [user] attempts to free themselves from \the [src]!</span>",
+		"<span class='warning'>\The [user] attempts to free themselves from \the [src]!</span>",
 		"<span class='warning'>You attempt to free yourself from \the [src]!</span>"
 		)
 	if(do_after(user, rand(min_free_time, max_free_time), src, incapacitation_flags = INCAPACITATION_DISABLED))

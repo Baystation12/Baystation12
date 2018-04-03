@@ -38,6 +38,9 @@
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt, var/tar = src, var/ddir)
 	if(remove_blood(amt))
+		if(bloodstr.total_volume)
+			var/chem_share = round(0.3 * amt * (bloodstr.total_volume/vessel.total_volume), 0.01)
+			bloodstr.remove_any(chem_share * bloodstr.total_volume)
 		blood_splatter(tar, src, (ddir && ddir>0), spray_dir = ddir)
 		return amt
 	return 0
@@ -140,7 +143,7 @@
 	if (injected.data["antibodies"] && prob(5))
 		antibodies |= injected.data["antibodies"]
 	var/list/chems = list()
-	chems = params2list(injected.data["trace_chem"])
+	chems = injected.data["trace_chem"]
 	for(var/C in chems)
 		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
 	reagents.update_total()
@@ -191,6 +194,16 @@
 			if(donor_antigen != "O") return 1
 		//AB is a universal receiver.
 	return 0
+
+/mob/living/carbon/human/proc/regenerate_blood(amount)
+	var/blood_volume_raw = vessel.get_reagent_amount(/datum/reagent/blood)
+	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
+	if(amount)
+		var/datum/reagent/blood/B = get_blood(vessel)
+		if(istype(B))
+			B.volume += amount
+			vessel.update_total()
+	return amount
 
 proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spray_dir)
 

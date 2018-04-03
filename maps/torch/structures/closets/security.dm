@@ -9,7 +9,6 @@
 	icon_closed = "sec"
 	icon_locked = "sec1"
 	icon_opened = "secopen"
-	icon_broken = "secbroken"
 	icon_off = "secoff"
 
 /obj/structure/closet/secure_closet/security_torch/WillContain()
@@ -27,7 +26,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/weapon/gun/energy/taser,
+		/obj/item/weapon/gun/energy/secure/gun/small,
 		/obj/item/device/megaphone,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/accessory/holster/thigh,
@@ -45,7 +44,6 @@
 	icon_closed = "hossecure"
 	icon_locked = "hossecure1"
 	icon_opened = "hossecureopen"
-	icon_broken = "hossecurebroken"
 	icon_off = "hossecureoff"
 
 /obj/structure/closet/secure_closet/cos/WillContain()
@@ -62,9 +60,7 @@
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/melee/baton/loaded,
-		/obj/item/weapon/gun/projectile/colt/officer,
-		/obj/item/ammo_magazine/c45m,
-		/obj/item/ammo_magazine/c45m,
+		/obj/item/weapon/gun/energy/gun,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/weapon/reagent_containers/spray/pepper,
@@ -87,7 +83,6 @@
 	icon_closed = "wardensecure"
 	icon_locked = "wardensecure1"
 	icon_opened = "wardensecureopen"
-	icon_broken = "wardensecurebroken"
 	icon_off = "wardensecureoff"
 
 /obj/structure/closet/secure_closet/brigofficer/WillContain()
@@ -104,7 +99,7 @@
 		/obj/item/weapon/gun/energy/gun,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/weapon/gun/energy/taser,
+		/obj/item/weapon/gun/energy/secure/gun/small,
 		/obj/item/weapon/handcuffs,
 		/obj/item/device/hailer,
 		/obj/item/device/flash,
@@ -124,7 +119,6 @@
 	icon_closed = "sec"
 	icon_locked = "sec1"
 	icon_opened = "secopen"
-	icon_broken = "secbroken"
 	icon_off = "secoff"
 
 /obj/structure/closet/secure_closet/forensics/WillContain()
@@ -134,7 +128,7 @@
 		/obj/item/clothing/suit/armor/vest/detective,
 		/obj/item/clothing/head/helmet/solgov/security,
 		/obj/item/clothing/suit/armor/pcarrier/medium/security,
-		/obj/item/weapon/gun/energy/taser,
+		/obj/item/weapon/gun/energy/secure/gun/small,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/device/flash,
 		/obj/item/weapon/melee/baton/loaded,
@@ -153,10 +147,10 @@
 		/obj/item/device/uv_light,
 		/obj/item/weapon/reagent_containers/spray/luminol,
 		/obj/item/weapon/reagent_containers/syringe,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/glasses/sunglasses/sechud/toggle,
 		/obj/item/device/holowarrant,
 		/obj/item/device/flashlight/maglight,
+		/obj/item/weapon/storage/belt/forensic,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel_sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)

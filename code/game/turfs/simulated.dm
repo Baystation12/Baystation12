@@ -13,7 +13,7 @@
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
 
-	var/datum/scheduled_task/unwet_task
+	var/timer_id
 
 /turf/simulated/post_change()
 	..()
@@ -32,23 +32,12 @@
 		wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
 		overlays += wet_overlay
 
-	if(unwet_task)
-		unwet_task.trigger_task_in(8 SECONDS)
-	else
-		unwet_task = schedule_task_in(8 SECONDS)
-		task_triggered_event.register(unwet_task, src, /turf/simulated/proc/task_unwet_floor)
+	timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor),8 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
 
-/turf/simulated/proc/task_unwet_floor(var/triggered_task, var/check_very_wet = TRUE)
-	if(triggered_task == unwet_task)
-		task_triggered_event.unregister(unwet_task, src, /turf/simulated/proc/task_unwet_floor)
-		unwet_task = null
-		unwet_floor(check_very_wet)
-
-/turf/simulated/proc/unwet_floor(var/check_very_wet)
+/turf/simulated/proc/unwet_floor(var/check_very_wet = TRUE)
 	if(check_very_wet && wet >= 2)
 		wet--
-		unwet_task = schedule_task_in(8 SECONDS)
-		task_triggered_event.register(unwet_task, src, /turf/simulated/proc/task_unwet_floor)
+		timer_id = addtimer(CALLBACK(src,/turf/simulated/proc/unwet_floor), 8 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_NO_HASH_WAIT|TIMER_OVERRIDE)
 		return
 
 	wet = 0
@@ -68,7 +57,7 @@
 	levelupdate()
 
 /turf/simulated/Destroy()
-	task_unwet_floor(unwet_task, FALSE)
+	deltimer(timer_id)
 	return ..()
 
 /turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor=COLOR_BLOOD_HUMAN)
@@ -117,7 +106,7 @@
 					bloodcolor = H.feet_blood_color
 					H.track_blood--
 
-			if (bloodDNA)
+			if (bloodDNA && H.species.get_move_trail(H))
 				src.AddTracks(H.species.get_move_trail(H),bloodDNA,H.dir,0,bloodcolor) // Coming
 				var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
 				if(istype(from) && from)

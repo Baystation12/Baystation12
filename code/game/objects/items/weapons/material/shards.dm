@@ -26,7 +26,7 @@
 	update_icon()
 
 	if(material.shard_type)
-		name = "[material.display_name] [material.shard_type]"
+		SetName("[material.display_name] [material.shard_type]")
 		desc = "A small piece of [material.display_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
 		switch(material.shard_type)
 			if(SHARD_SPLINTER, SHARD_SHRAPNEL)
@@ -66,7 +66,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 
-			if(H.species.siemens_coefficient<0.5 || (H.species.flags & (NO_EMBED|NO_MINOR_CUT))) //Thick skin.
+			if(H.species.siemens_coefficient<0.5 || (H.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT))) //Thick skin.
 				return
 
 			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )

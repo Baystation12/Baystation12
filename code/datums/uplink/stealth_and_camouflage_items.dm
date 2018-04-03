@@ -33,3 +33,8 @@
 	name = "Chameleon-Projector"
 	item_cost = 32
 	path = /obj/item/device/chameleon
+
+/datum/uplink_item/item/stealth_items/sneakies
+	name = "Sneakies"
+	item_cost = 4
+	path = /obj/item/clothing/shoes/laceup/sneakies

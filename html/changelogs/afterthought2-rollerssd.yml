@@ -1,0 +1,4 @@
+author: afterthought
+delete-after: True
+changes: 
+  - bugfix: "Fixes roller bed SSD bug."

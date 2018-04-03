@@ -7,7 +7,7 @@
 	plane = OBJ_PLANE
 	layer = BELOW_TABLE_LAYER
 
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS

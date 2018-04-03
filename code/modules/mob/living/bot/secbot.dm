@@ -5,8 +5,11 @@
 /mob/living/bot/secbot
 	name = "Securitron"
 	desc = "A little security robot.  He looks less than thrilled."
+	icon = 'icons/mob/bot/secbot.dmi'
 	icon_state = "secbot0"
 	var/attack_state = "secbot-c"
+	plane = MOB_PLANE
+	layer = MOB_LAYER
 	maxHealth = 50
 	health = 50
 	req_one_access = list(access_security, access_forensics_lockers)
@@ -217,7 +220,7 @@
 
 	var/obj/item/weapon/secbot_assembly/Sa = new /obj/item/weapon/secbot_assembly(Tsec)
 	Sa.build_step = 1
-	Sa.overlays += image('icons/obj/aibots.dmi', "hs_hole")
+	Sa.overlays += image('icons/mob/bot/secbot.dmi', "hs_hole")
 	Sa.created_name = name
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/weapon/melee/baton(Tsec)
@@ -270,7 +273,7 @@
 /obj/item/weapon/secbot_assembly
 	name = "helmet/signaler assembly"
 	desc = "Some sort of bizarre assembly."
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/secbot.dmi'
 	icon_state = "helmet_signaler"
 	item_state = "helmet"
 	var/build_step = 0
@@ -282,30 +285,30 @@
 		var/obj/item/weapon/weldingtool/WT = O
 		if(WT.remove_fuel(0, user))
 			build_step = 1
-			overlays += image('icons/obj/aibots.dmi', "hs_hole")
+			overlays += image('icons/mob/bot/secbot.dmi', "hs_hole")
 			to_chat(user, "You weld a hole in \the [src].")
 
 	else if(isprox(O) && (build_step == 1))
 		user.drop_item()
 		build_step = 2
 		to_chat(user, "You add \the [O] to [src].")
-		overlays += image('icons/obj/aibots.dmi', "hs_eye")
-		name = "helmet/signaler/prox sensor assembly"
+		overlays += image('icons/mob/bot/secbot.dmi', "hs_eye")
+		SetName("helmet/signaler/prox sensor assembly")
 		qdel(O)
 
 	else if((istype(O, /obj/item/robot_parts/l_arm) || istype(O, /obj/item/robot_parts/r_arm)) && build_step == 2)
 		user.drop_item()
 		build_step = 3
 		to_chat(user, "You add \the [O] to [src].")
-		name = "helmet/signaler/prox sensor/robot arm assembly"
-		overlays += image('icons/obj/aibots.dmi', "hs_arm")
+		SetName("helmet/signaler/prox sensor/robot arm assembly")
+		overlays += image('icons/mob/bot/secbot.dmi', "hs_arm")
 		qdel(O)
 
 	else if(istype(O, /obj/item/weapon/melee/baton) && build_step == 3)
 		user.drop_item()
 		to_chat(user, "You complete the Securitron! Beep boop.")
 		var/mob/living/bot/secbot/S = new /mob/living/bot/secbot(get_turf(src))
-		S.name = created_name
+		S.SetName(created_name)
 		qdel(O)
 		qdel(src)
 

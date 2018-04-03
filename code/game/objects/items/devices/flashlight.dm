@@ -5,7 +5,7 @@
 	icon_state = "flashlight"
 	item_state = "flashlight"
 	w_class = ITEM_SIZE_SMALL
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
@@ -103,12 +103,20 @@
 		var/list/dilating = list(/datum/reagent/space_drugs=5,/datum/reagent/mindbreaker=1,/datum/reagent/adrenaline=1)
 		if(H.reagents.has_any_reagent(pinpoint) || H.ingested.has_any_reagent(pinpoint))
 			to_chat(user, "<span class='notice'>\The [H]'s pupils are already pinpoint and cannot narrow any more.</span>")
-		else if(H.reagents.has_any_reagent(dilating) || H.ingested.has_any_reagent(dilating))
+		else if(H.shock_stage >= 30 || H.reagents.has_any_reagent(dilating) || H.ingested.has_any_reagent(dilating))
 			to_chat(user, "<span class='notice'>\The [H]'s pupils narrow slightly, but are still very dilated.</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [H]'s pupils narrow.</span>")
 
 	//if someone wants to implement inspecting robot eyes here would be the place to do it.
+
+/obj/item/device/flashlight/upgraded
+	name = "\improper LED flashlight"
+	desc = "An energy efficient flashlight."
+	icon_state = "biglight"
+	item_state = "biglight"
+	brightness_on = 6
+	flashlight_power = 3
 
 /obj/item/device/flashlight/flashdark
 	name = "flashdark"
@@ -124,7 +132,7 @@
 	desc = "A pen-sized light, used by medical staff."
 	icon_state = "penlight"
 	item_state = ""
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_EARS
 	brightness_on = 2
 	w_class = ITEM_SIZE_TINY
@@ -144,7 +152,7 @@
 	desc = "A miniature lamp, that might be used by small robots."
 	icon_state = "penlight"
 	item_state = ""
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	brightness_on = 2
 	w_class = ITEM_SIZE_TINY
 
@@ -157,7 +165,7 @@
 	item_state = "lamp"
 	brightness_on = 5
 	w_class = ITEM_SIZE_LARGE
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 	on = 1
 
@@ -348,3 +356,38 @@
 
 /obj/item/device/flashlight/slime/attack_self(mob/user)
 	return //Bio-luminescence does not toggle.
+
+//hand portable floodlights for emergencies. Less bulky than the large ones. But also less light. Unused green variant in the sheet.
+
+/obj/item/device/flashlight/floodlamp
+	name = "flood lamp"
+	desc = "A portable emergency flood light with a ultra-bright LED."
+	icon = 'icons/obj/machines/floodlight.dmi'
+	icon_state = "floodlamp"
+	item_state = "lamp"
+	brightness_on = 7
+	w_class = ITEM_SIZE_LARGE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+/obj/item/device/flashlight/floodlamp/verb/rotate()
+	set name = "Rotate Light"
+	set category = "Object"
+	set src in oview(1)
+
+	if(!usr || !Adjacent(usr))
+		return
+
+	if(usr.stat == DEAD)
+		if(!round_is_spooky())
+			to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
+			return
+	else if(usr.incapacitated())
+		return
+
+	src.set_dir(turn(src.dir, 90))
+	return
+
+/obj/item/device/flashlight/floodlamp/AltClick()
+	rotate()
+
+//Lava Lamps: Because we're already stuck in the 70ies with those fax machines.

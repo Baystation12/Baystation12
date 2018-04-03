@@ -165,7 +165,7 @@
 				thermitemelt(user)
 				return
 
-		else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+		else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 			thermitemelt(user)
 			return
 
@@ -284,7 +284,7 @@
 					else
 						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 						return
-				else if (istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+				else if (istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 					cut_cover = 1
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the metal cover.</span>")
@@ -324,7 +324,7 @@
 					else
 						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 						return
-				else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+				else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 					cut_cover = 1
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
@@ -359,7 +359,7 @@
 			dam_threshhold = ceil(max(dam_threshhold,reinf_material.integrity)/2)
 		var/dam_prob = min(100,material.hardness*1.5)
 		if(dam_prob < 100 && W.force > (dam_threshhold/10))
-			playsound(src, hitsound, 80, 1)
+			playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
 			if(!prob(dam_prob))
 				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W] and it [material.destruction_desc]!</span>")
 				dismantle_wall(1)

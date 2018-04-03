@@ -256,11 +256,11 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.layer = ABOVE_HUMAN_LAYER //Above all the other objects/mobs. Or the vast majority of them.
 	hologram.anchored = 1//So space wind cannot drag it.
 	if(caller_id)
-		hologram.name = "[caller_id.name] (Hologram)"
+		hologram.SetName("[caller_id.name] (Hologram)")
 		hologram.loc = get_step(src,1)
 		masters[caller_id] = hologram
 	else
-		hologram.name = "[A.name] (Hologram)"//If someone decides to right click.
+		hologram.SetName("[A.name] (Hologram)") //If someone decides to right click.
 		A.holo = src
 		masters[A] = hologram
 	hologram.set_light(2)	//hologram lighting

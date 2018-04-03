@@ -5,17 +5,49 @@
 /decl/hierarchy/supply_pack/medical/medical
 	name = "Medical crate"
 	contains = list(/obj/item/weapon/storage/firstaid/regular,
+					/obj/item/weapon/storage/firstaid/trauma,
 					/obj/item/weapon/storage/firstaid/fire,
 					/obj/item/weapon/storage/firstaid/toxin,
 					/obj/item/weapon/storage/firstaid/o2,
 					/obj/item/weapon/storage/firstaid/adv,
+					/obj/item/weapon/storage/firstaid/stab,
 					/obj/item/weapon/reagent_containers/glass/bottle/antitoxin,
 					/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,
 					/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
 					/obj/item/weapon/storage/box/syringes,
 					/obj/item/weapon/storage/box/autoinjectors)
-	cost = 10
+	cost = 20
 	containername = "\improper Medical crate"
+
+/decl/hierarchy/supply_pack/medical/trauma
+	name = "Trauma pouch crate"
+	contains = list(/obj/item/weapon/storage/firstaid/trauma = 3)
+	cost = 10
+	containername = "\improper Trauma pouch crate"
+
+/decl/hierarchy/supply_pack/medical/burn
+	name = "Burn pouch crate"
+	contains = list(/obj/item/weapon/storage/firstaid/fire = 3)
+	cost = 10
+	containername = "\improper Burn pouch crate"
+
+/decl/hierarchy/supply_pack/medical/toxin
+	name = "Toxin pouch crate"
+	contains = list(/obj/item/weapon/storage/firstaid/toxin = 3)
+	cost = 10
+	containername = "\improper Toxin pouch crate"
+
+/decl/hierarchy/supply_pack/medical/oxyloss
+	name = "Low oxygen pouch crate"
+	contains = list(/obj/item/weapon/storage/firstaid/o2 = 3)
+	cost = 10
+	containername = "\improper Low oxygen pouch crate"
+
+/decl/hierarchy/supply_pack/medical/stab
+	name = "Stability kit crate"
+	contains = list(/obj/item/weapon/storage/firstaid/stab = 3)
+	cost = 60
+	containername = "\improper Stability kit crate"
 
 /decl/hierarchy/supply_pack/medical/bloodpack
 	name = "Blood pack crate"
@@ -24,10 +56,10 @@
 	containername = "\improper Blood pack crate"
 
 /decl/hierarchy/supply_pack/medical/blood
-	name = "O- blood crate"
-	contains = list(/obj/item/weapon/reagent_containers/blood/OMinus = 4)
+	name = "Nanoblood crate"
+	contains = list(/obj/item/weapon/reagent_containers/ivbag/nanoblood = 4)
 	cost = 15
-	containername = "\improper O- blood crate"
+	containername = "\improper Nanoblood crate"
 
 /decl/hierarchy/supply_pack/medical/bodybag
 	name = "Body bag crate"

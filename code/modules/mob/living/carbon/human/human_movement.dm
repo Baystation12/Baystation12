@@ -40,6 +40,7 @@
 				var/item_slowdown = 0
 				item_slowdown += I.slowdown_general
 				item_slowdown += I.slowdown_per_slot[slot]
+				item_slowdown += I.slowdown_accessory
 
 				if(item_slowdown >= 0)
 					var/size_mod = 0
@@ -114,8 +115,8 @@
 	return prob_slip
 
 /mob/living/carbon/human/Check_Shoegrip()
-	if(species.flags & NO_SLIP)
+	if(species.species_flags & SPECIES_FLAG_NO_SLIP)
 		return 1
-	if(shoes && (shoes.item_flags & NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
+	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1
 	return 0

@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - rscadd: "Clicking a drinking glass with a spoon will now call the room to attention. Just be careful."

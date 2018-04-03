@@ -337,7 +337,7 @@
 
 
 /mob/living/silicon/proc/is_traitor()
-	return mind && (mind in traitors.current_antagonists)
+	return mind && (mind in GLOB.traitors.current_antagonists)
 
 /mob/living/silicon/proc/is_malf()
 	return mind && (mind in malf.current_antagonists)

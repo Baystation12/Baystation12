@@ -60,6 +60,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above - this is assignment (potentially alt title)
 	var/ownrank = null // this one is rank, never alt title
+	var/pen = /obj/item/weapon/pen //determines what kind of pen spawns in a PDA
 
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
@@ -120,6 +121,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	default_cartridge = /obj/item/weapon/cartridge/head
 	icon_state = "pda-h"
 	news_silent = 1
+
+/obj/item/device/pda/heads/paperpusher
+	pen = /obj/item/weapon/pen/fancy
 
 /obj/item/device/pda/heads/hop
 	default_cartridge = /obj/item/weapon/cartridge/hop
@@ -238,7 +242,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		ownrank = newrank
 	else
 		ownrank = ownjob
-	name = newname + " (" + ownjob + ")"
+	SetName(newname + " (" + ownjob + ")")
 
 
 //AI verb and proc for sending PDA messages.
@@ -322,7 +326,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	PDAs = sortAtom(PDAs)
 	if(default_cartridge)
 		cartridge = new default_cartridge(src)
-	new /obj/item/weapon/pen(src)
+	new pen(src)
 
 /obj/item/device/pda/proc/can_use()
 
@@ -483,15 +487,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				var/o2_level = environment.gas["oxygen"]/total_moles
 				var/n2_level = environment.gas["nitrogen"]/total_moles
 				var/co2_level = environment.gas["carbon_dioxide"]/total_moles
-				var/phoron_level = environment.gas["phoron"]/total_moles
-				var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
+				var/unknown_level =  1-(o2_level+n2_level+co2_level)
 				data["aircontents"] = list(\
 					"pressure" = "[round(pressure,0.1)]",\
 					"nitrogen" = "[round(n2_level*100,0.1)]",\
 					"oxygen" = "[round(o2_level*100,0.1)]",\
 					"carbon_dioxide" = "[round(co2_level*100,0.1)]",\
-					"phoron" = "[round(phoron_level*100,0.01)]",\
-					"other" = "[round(unknown_level, 0.01)]",\
+					"other" = "[round(unknown_level*100,0.01)]",\
 					"temp" = "[round(environment.temperature-T0C,0.1)]",\
 					"reading" = 1\
 					)
@@ -594,7 +596,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			ui.close()
 		return 0
 
-	add_fingerprint(U)
 	U.set_machine(src)
 
 	switch(href_list["choice"])
@@ -1012,8 +1013,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			tempmessage[P] = t
 			return
 
-		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
-		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
+		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "timestamp" = stationtime2text(), "target" = "\ref[P]")))
+		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "timestamp" = stationtime2text(), "target" = "\ref[src]")))
 		for(var/mob/M in GLOB.player_list)
 			if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))
@@ -1215,7 +1216,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			return
 		if(!owner)
 			set_owner_rank_job(idcard.registered_name, idcard.rank, idcard.assignment)
-			name = "PDA-[owner] ([ownjob])"
+			SetName("PDA-[owner] ([ownjob])")
 			to_chat(user, "<span class='notice'>Card scanned.</span>")
 		else
 			//Basic safety check. If either both objects are held by user or PDA is on ground and card is in hand.
@@ -1396,7 +1397,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		var/name = P.owner
 		if (name in names)
 			namecounts[name]++
-			name = text("[name] ([namecounts[name]])")
+			SetName(text("[name] ([namecounts[name]])"))
 		else
 			names.Add(name)
 			namecounts[name] = 1

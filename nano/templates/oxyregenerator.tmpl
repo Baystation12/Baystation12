@@ -20,29 +20,117 @@
 	</div>
 </div>
 
-<div class="item">
-	<div class="itemLabel">
-		Gas Pressure:
-	</div>
-	<div class="itemContent">		
-		{{:data.gasPressure}} kPa
-	</div>
-</div>
 
-<h3>Gas Temperature</h3>
-	<div class="itemLabel">
-		Current:
+{{if data.phase == "filling"}}
+	<div class="item">
+		<div class="itemLabel">
+			Processing phase:
+		</div>
+		<div class="itemContent">		
+			filling inner tank
+		</div>
 	</div>
-	<div class="itemContent">		
-		{{:data.gasTemperature}} K
+	<div class="item">
+		<div class="itemLabel">
+			Input pressure:
+		</div>
+		<div class="itemContent">		
+			{{:data.air1Pressure}} kPa
+		</div>
 	</div>
-</div>
+	<div class="item">
+		<div class="itemLabel">
+			Tank pressure:
+		</div>
+		<div class="itemContent">		
+			{{:data.tankPressure}} kPa
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Target tank pressure:
+		</div>
+		<div class="itemContent">		
+			{{:data.targetPressure}} kPa
+		</div>
+	</div>
+{{/if}}
 
-<div class="item">
-	<div class="itemLabel">
-		Processing rate:
+{{if data.phase == "processing"}}
+	<div class="item">
+		<div class="itemLabel">
+			Processing phase:
+		</div>
+		<div class="itemContent">		
+			processing gas mix
+		</div>
 	</div>
-	<div class="itemContent">		
-		{{:data.gasProcessed}} moles
+	<div class="item">
+		<div class="itemLabel">
+			Processing rate:
+		</div>
+		<div class="itemContent">		
+			{{:data.gasProcessed}} moles
+		</div>
 	</div>
-</div>
+	<div class="item">
+		<div class="itemLabel">
+			Tank pressure:
+		</div>
+		<div class="itemContent">		
+			{{:data.tankPressure}} kPa
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			CO2 content:
+		</div>
+		<div class="itemContent">		
+			{{:data.co2}} %
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			O2 content:
+		</div>
+		<div class="itemContent">		
+			{{:data.o2}} %
+		</div>
+	</div>
+{{/if}}
+
+
+{{if data.phase == "releasing"}}
+	<div class="item">
+		<div class="itemLabel">
+			Processing phase:
+		</div>
+		<div class="itemContent">		
+			releasing processed gas mix
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Tank pressure:
+		</div>
+		<div class="itemContent">		
+			{{:data.tankPressure}} kPa
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Output Pressure:
+		</div>
+		<div class="itemContent">		
+			{{:data.air2Pressure}} kPa
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Target release pressure:
+		</div>
+		<div class="itemContent">		
+			{{:data.targetPressure}} kPa
+		</div>
+	</div>
+{{/if}}

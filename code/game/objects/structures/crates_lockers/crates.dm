@@ -5,7 +5,7 @@ obj/structure/closet/crate
 	icon_state = "crate"
 	icon_opened = "crateopen"
 	icon_closed = "crate"
-	flags = OBJ_CLIMBABLE
+	atom_flags = ATOM_FLAG_CLIMBABLE
 	setup = 0
 
 	storage_types = CLOSET_STORAGE_ITEMS
@@ -14,7 +14,7 @@ obj/structure/closet/crate
 	var/rigged = 0
 
 /obj/structure/closet/crate/open()
-	if(flags & OBJ_CLIMBABLE && !opened && can_open())
+	if((atom_flags & ATOM_FLAG_OPEN_CONTAINER) && !opened && can_open())
 		object_shaken()
 	. = ..()
 	if(.)
@@ -35,10 +35,10 @@ obj/structure/closet/crate
 			devices += A
 		to_chat(user,"There are some wires attached to the lid, connected to [english_list(devices)].")
 
-/obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/crate/attackby(obj/item/W as obj, mob/user as mob)
 	if(opened)
 		return ..()
-	else if(istype(W, /obj/item/weapon/packageWrap))
+	else if(istype(W, /obj/item/stack/package_wrap))
 		return
 	else if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
@@ -105,6 +105,13 @@ obj/structure/closet/crate
 	icon_state = "o2crate"
 	icon_opened = "o2crateopen"
 	icon_closed = "o2crate"
+
+/obj/structure/closet/crate/internals/fuel
+	name = "\improper Fuel tank crate"
+	desc = "A fuel tank crate."
+
+/obj/structure/closet/crate/internals/fuel/WillContain()
+	return list(/obj/item/weapon/tank/hydrogen = 4)
 
 /obj/structure/closet/crate/trashcart
 	name = "trash cart"

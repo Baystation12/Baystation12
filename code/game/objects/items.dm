@@ -13,7 +13,7 @@
 	var/hitsound = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
-	pass_flags = PASSTABLE
+	pass_flags = PASS_FLAG_TABLE
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
 	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
@@ -43,6 +43,7 @@
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
 	var/slowdown_general = 0 // How much clothing is slowing you down. Negative values speeds you up. This is a genera##l slowdown, no matter equipment slot.
 	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. This is an associative list: item slot - slowdown
+	var/slowdown_accessory // How much an accessory will slow you down when attached to a worn article of clothing.
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
 	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/allowed = null //suit storage stuff.
@@ -168,10 +169,34 @@
 			size = "bulky"
 		if(ITEM_SIZE_HUGE + 1 to INFINITY)
 			size = "huge"
-	return ..(user, distance, "", "It is a [size] item.")
+	var/desc_comp = "" //For "description composite"
+	desc_comp += "It is a [size] item."
+
+	if(hasHUD(user, HUD_SCIENCE)) //Mob has a research scanner active.
+		desc_comp += "<BR>*--------* <BR>"
+
+		if(origin_tech)
+			desc_comp += "<span class='notice'>Testing potentials:</span><BR>"
+			//var/list/techlvls = params2list(origin_tech)
+			for(var/T in origin_tech)
+				desc_comp += "Tech: Level [origin_tech[T]] [CallTechName(T)] <BR>"
+		else
+			desc_comp += "No tech origins detected.<BR>"
+
+		if(LAZYLEN(matter))
+			desc_comp += "<span class='notice'>Extractable materials:</span><BR>"
+			for(var/mat in matter)
+				desc_comp += "[get_material_by_name(mat)]<BR>"
+		else
+			desc_comp += "<span class='danger'>No extractable materials detected.</span><BR>"
+		desc_comp += "*--------*"
+
+	return ..(user, distance, "", desc_comp)
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
+	if (anchored)
+		return ..()
 	if (hasorgans(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
@@ -339,8 +364,10 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
 				return 0
-		if(slot_wear_id, slot_belt)
-			if(!H.w_uniform && (slot_w_uniform in mob_equip))
+		if(slot_belt, slot_wear_id)
+			if(slot == slot_belt && (item_flags & ITEM_FLAG_IS_BELT))
+				return 1
+			else if(!H.w_uniform && (slot_w_uniform in mob_equip))
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>")
 				return 0
@@ -382,12 +409,20 @@ var/list/global/slot_flags_enumeration = list(
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need something you can attach \the [src] to.</span>")
 				return 0
-			var/obj/item/clothing/under/uniform = H.w_uniform
-			var/obj/item/clothing/suit/suit = H.wear_suit
-			if((uniform && !uniform.can_attach_accessory(src)) && (suit && !suit.can_attach_accessory(src)))
-				if (!disable_warning)
-					to_chat(H, "<span class='warning'>You can not equip \the [src].</span>")
-				return 0
+			if(H.w_uniform && (slot_w_uniform in mob_equip))
+				var/obj/item/clothing/under/uniform = H.w_uniform
+				if(uniform && !uniform.can_attach_accessory(src))
+					if (!disable_warning)
+						to_chat(H, "<span class='warning'>You cannot equip \the [src] to \the [uniform].</span>")
+					return 0
+				else return 1
+			if(H.wear_suit && (slot_wear_suit in mob_equip))
+				var/obj/item/clothing/suit/suit = H.wear_suit
+				if(suit && !suit.can_attach_accessory(src))
+					if (!disable_warning)
+						to_chat(H, "<span class='warning'>You cannot equip \the [src] to \the [suit].</span>")
+					return 0
+
 	return 1
 
 /obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)

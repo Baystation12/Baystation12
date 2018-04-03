@@ -120,7 +120,7 @@ var/global/list/sparring_attack_cache = list()
 	if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
 		return 0
 	for(var/obj/item/clothing/C in list(user.wear_mask, user.head, user.wear_suit))
-		if(C && (C.body_parts_covered & FACE) && (C.item_flags & THICKMATERIAL))
+		if(C && (C.body_parts_covered & FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 			return 0 //prevent biting through a space helmet or similar
 	if (user == target && (zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH))
 		return 0 //how do you bite yourself in the head?

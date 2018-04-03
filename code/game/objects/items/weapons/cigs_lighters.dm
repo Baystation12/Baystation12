@@ -100,7 +100,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/New()
 	..()
-	flags |= NOREACT // so it doesn't react until you light it
+	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
 /obj/item/clothing/mask/smokable/Destroy()
@@ -156,7 +156,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			e.start()
 			qdel(src)
 			return
-		flags &= ~NOREACT // allowing reagents to react after being lit
+		atom_flags &= ~ATOM_FLAG_NO_REACT // allowing reagents to react after being lit
 		reagents.process_reactions()
 		update_icon()
 		var/turf/T = get_turf(src)
@@ -511,7 +511,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		new /obj/effect/decal/cleanable/ash(location)
 		smoketime = 0
 		reagents.clear_reagents()
-		name = "empty [initial(name)]"
+		SetName("empty [initial(name)]")
 
 /obj/item/clothing/mask/smokable/pipe/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/melee/energy/sword))
@@ -530,7 +530,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		smoketime = 1000
 		if(G.reagents)
 			G.reagents.trans_to_obj(src, G.reagents.total_volume)
-		name = "[G.name]-packed [initial(name)]"
+		SetName("[G.name]-packed [initial(name)]")
 		qdel(G)
 
 	else if(istype(W, /obj/item/weapon/flame/lighter))
@@ -569,7 +569,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	item_state = "lighter-g"
 	w_class = ITEM_SIZE_TINY
 	throwforce = 4
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
 	var/max_fuel = 5

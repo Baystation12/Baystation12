@@ -36,30 +36,24 @@
 		for(var/i=1;i<=monster_info.len;i++)
 			var/mob/M = monster[i]
 			var/name = capitalize(initial(M.name))
-			dat += "<BR><a href='byond://?src=\ref[src];path=[monster[i]]'>[name]</a> - [monster_info[i]]</BR>"
+			dat += "<BR><a href='byond://?src=\ref[src];path=\ref[monster[i]]'>[name]</a> - [monster_info[i]]</BR>"
 	user << browse(dat,"window=monstermanual")
 	onclose(user,"monstermanual")
 
-/obj/item/weapon/monster_manual/Topic(href, href_list)
-	..()
-	if(!Adjacent(usr))
-		usr << browse(null,"window=monstermanual")
-		return
+/obj/item/weapon/monster_manual/OnTopic(user, href_list, state)
 	if(href_list["temp"])
 		temp = null
-	if(href_list["path"])
+		. = TOPIC_REFRESH
+	else if(href_list["path"])
 		if(uses == 0)
-			to_chat(usr, "This book is out of uses.")
-			return
+			to_chat(user, "This book is out of uses.")
+			return TOPIC_HANDLED
 
 		var/datum/ghosttrap/ghost = get_ghost_trap("wizard familiar")
-		var path = text2path(href_list["path"])
+		var path = locate(href_list["path"]) in monster
 		if(!ispath(path))
-			CRASH("Invalid mob path in [src]. Contact a coder.")
-			return
-
-		if(!(path in monster))
-			return
+			crash_with("Invalid mob path in [src]. Contact a coder.")
+			return TOPIC_HANDLED
 
 		var/mob/living/simple_animal/familiar/F = new path(get_turf(src))
 		temp = "You have attempted summoning \the [F]"
@@ -76,7 +70,8 @@
 					to_chat(F, "<b>You have been summoned by the wizard [usr] to assist in all matters magical and not.</b>")
 					to_chat(F, "<b>Do their bidding and help them with their goals.</b>")
 					uses--
-	if(Adjacent(usr))
-		src.interact(usr)
-	else
-		usr << browse(null,"window=monstermanual")
+		. = TOPIC_REFRESH
+
+	if(. == TOPIC_REFRESH)
+		interact(user)
+

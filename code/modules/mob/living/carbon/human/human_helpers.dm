@@ -61,21 +61,23 @@
 		process_rig(back)
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
-	if(G && G.active)
-		equipment_darkness_modifier += G.darkness_view
-		equipment_vision_flags |= G.vision_flags
+	if(G)
+		// prescription applies regardless of if the glasses are active
 		equipment_prescription += G.prescription
-		equipment_light_protection += G.light_protection
-		if(G.overlay)
-			equipment_overlays |= G.overlay
-		if(G.see_invisible >= 0)
-			if(equipment_see_invis)
-				equipment_see_invis = min(equipment_see_invis, G.see_invisible)
-			else
-				equipment_see_invis = G.see_invisible
+		if(G.active)
+			equipment_darkness_modifier += G.darkness_view
+			equipment_vision_flags |= G.vision_flags
+			equipment_light_protection += G.light_protection
+			if(G.overlay)
+				equipment_overlays |= G.overlay
+			if(G.see_invisible >= 0)
+				if(equipment_see_invis)
+					equipment_see_invis = min(equipment_see_invis, G.see_invisible)
+				else
+					equipment_see_invis = G.see_invisible
 
-		add_clothing_protection(G)
-		G.process_hud(src)
+			add_clothing_protection(G)
+			G.process_hud(src)
 
 /mob/living/carbon/human/proc/process_rig(var/obj/item/weapon/rig/O)
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
@@ -129,6 +131,25 @@
 			return isSynthetic()? SYNTH_HEAT_LEVEL_2 : species.heat_level_2
 		if(HEAT_LEVEL_3)
 			return isSynthetic()? SYNTH_HEAT_LEVEL_3 : species.heat_level_3
+
+/mob/living/carbon/human/proc/getCryogenicFactor(var/bodytemperature)
+	if(isSynthetic())
+		return 0
+	if(!species)
+		return 0
+	
+	if(bodytemperature > species.cold_level_1)
+		return 0
+	else if(bodytemperature > species.cold_level_2)
+		. = 5 * (1 - (bodytemperature - species.cold_level_2) / (species.cold_level_1 - species.cold_level_2))
+		. = max(2, .)
+	else if(bodytemperature > species.cold_level_3)
+		. = 20 * (1 - (bodytemperature - species.cold_level_3) / (species.cold_level_2 - species.cold_level_3))
+		. = max(5, .)
+	else
+		. = 80 * (1 - bodytemperature / species.cold_level_3)
+		. = max(20, .)
+	return round(.)
 
 /mob/living/carbon/human
 	var/next_sonar_ping = 0

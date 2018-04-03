@@ -81,7 +81,7 @@ obj/check_airflow_movable(n)
 	if(buckled)
 		return 0
 	var/obj/item/shoes = get_equipped_item(slot_shoes)
-	if(istype(shoes) && (shoes.item_flags & NOSLIP))
+	if(istype(shoes) && (shoes.item_flags & ITEM_FLAG_NOSLIP))
 		return 0
 	return 1
 

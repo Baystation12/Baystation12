@@ -35,16 +35,16 @@
 	var/secured_wires = 0
 	var/datum/wires/airlock/wires = null
 
-	var/open_sound_powered = 'sound/machines/airlock.ogg'
-	var/open_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
+	var/open_sound_powered = 'sound/machines/airlock_open.ogg'
+	var/open_sound_unpowered = 'sound/machines/airlock_open_force.ogg'
 	var/open_failure_access_denied = 'sound/machines/buzz-two.ogg'
 
-	var/close_sound_powered = 'sound/machines/AirlockClose.ogg'
-	var/close_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
+	var/close_sound_powered = 'sound/machines/airlock_close.ogg'
+	var/close_sound_unpowered = 'sound/machines/airlock_close_force.ogg'
 	var/close_failure_blocked = 'sound/machines/triple_beep.ogg'
 
-	var/bolts_dropping = 'sound/machines/BoltsDown.ogg'
-	var/bolts_rising = 'sound/machines/BoltsUp.ogg'
+	var/bolts_rising = 'sound/machines/bolts_up.ogg'
+	var/bolts_dropping = 'sound/machines/bolts_down.ogg'
 
 	var/door_crush_damage = DOOR_CRUSH_DAMAGE
 
@@ -129,11 +129,6 @@
 	name = "Glass Airlock"
 	icon = 'icons/obj/doors/Doorglass.dmi'
 	hitsound = 'sound/effects/Glasshit.ogg'
-
-	open_sound_powered = 'sound/machines/windowdoor.ogg'
-	close_sound_powered = 'sound/machines/windowdoor.ogg'
-
-	door_crush_damage = DOOR_CRUSH_DAMAGE*0.75
 	maxhealth = 300
 	explosion_resistance = 5
 	opacity = 0
@@ -838,7 +833,7 @@ About the new airlock wires panel:
 			return 0
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
-	else if(istype(item,/obj/item/weapon/pickaxe/plasmacutter))
+	else if(istype(item,/obj/item/weapon/gun/energy/plasmacutter)) //They could probably just shoot them out, but who cares!
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
 		cut_delay *= 0.66
@@ -929,8 +924,6 @@ About the new airlock wires panel:
 				return
 	if(istype(C, /obj/item/taperoll))
 		return
-
-	src.add_fingerprint(user)
 
 	if (!repairing && (stat & BROKEN) && src.locked) //bolted and broken
 		if (!cut_bolts(C,user))
@@ -1193,9 +1186,9 @@ About the new airlock wires panel:
 
 		//get the name from the assembly
 		if(assembly.created_name)
-			name = assembly.created_name
+			SetName(assembly.created_name)
 		else
-			name = "[istext(assembly.glass) ? "[assembly.glass] airlock" : assembly.base_name]"
+			SetName("[istext(assembly.glass) ? "[assembly.glass] airlock" : assembly.base_name]")
 
 		//get the dir from the assembly
 		set_dir(assembly.dir)
@@ -1221,6 +1214,11 @@ About the new airlock wires panel:
 		brace = A
 		brace.airlock = src
 		brace.forceMove(src)
+		if(length(req_one_access) == 0)
+			brace.electronics.conf_access = req_access
+		else
+			brace.electronics.conf_access = req_one_access
+			brace.electronics.one_access = 1
 		update_icon()
 	. = ..()
 

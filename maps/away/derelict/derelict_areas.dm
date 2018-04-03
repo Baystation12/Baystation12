@@ -50,7 +50,7 @@
 /area/constructionsite/solar
 	name = "\improper Construction Site Solars"
 	icon_state = "aft"
-	flags = AREA_EXTERNAL
+	area_flags = AREA_FLAG_EXTERNAL
 	requires_power = 1
 	always_unpowered = 1
 	has_gravity = FALSE

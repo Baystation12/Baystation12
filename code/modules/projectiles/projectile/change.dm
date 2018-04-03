@@ -67,13 +67,13 @@
 
 				if(M.gender == MALE)
 					H.gender = MALE
-					H.name = pick(GLOB.first_names_male)
+					H.SetName(pick(GLOB.first_names_male))
 				else if(M.gender == FEMALE)
 					H.gender = FEMALE
-					H.name = pick(GLOB.first_names_female)
+					H.SetName(pick(GLOB.first_names_female))
 				else
 					H.gender = NEUTER
-					H.name = pick(GLOB.first_names_female|GLOB.first_names_male)
+					H.SetName(pick(GLOB.first_names_female|GLOB.first_names_male))
 
 				H.name += " [pick(GLOB.last_names)]"
 				H.real_name = H.name

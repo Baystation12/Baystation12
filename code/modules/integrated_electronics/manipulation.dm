@@ -4,7 +4,7 @@
 	icon_state = "smoke"
 	extended_desc = "This smoke generator creates clouds of smoke on command.  It can also hold liquids inside, which will go \
 	into the smoke clouds when activated."
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	complexity = 20
 	cooldown_per_use = 30 SECONDS
 	inputs = list()
@@ -30,7 +30,7 @@
 	icon_state = "injector"
 	extended_desc = "This autoinjector can push reagents into another container or someone else outside of the machine.  The target \
 	must be adjacent to the machine, and if it is a person, they cannot be wearing thick clothing."
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	complexity = 20
 	cooldown_per_use = 6 SECONDS
 	inputs = list("target ref", "injection amount" = 5)
@@ -80,7 +80,7 @@
 	extended_desc = "This is a pump, which will move liquids from the source ref to the target ref.  The third pin determines \
 	how much liquid is moved per pulse, between 0 and 50.  The pump can move reagents to any open container inside the machine, or \
 	outside the machine if it is next to the machine.  Note that this cannot be used on entities."
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	complexity = 8
 	inputs = list("source ref", "target ref", "injection amount" = 10)
 	outputs = list()
@@ -115,7 +115,7 @@
 	desc = "Stores liquid inside, and away from electrical components.  Can store up to 60u."
 	icon_state = "reagent_storage"
 	extended_desc = "This is effectively an internal beaker."
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	complexity = 4
 	inputs = list()
 	outputs = list("volume used")
@@ -133,7 +133,8 @@
 	desc = "Stores liquid inside, and away from electrical components.  Can store up to 60u.  This will also suppress reactions."
 	icon_state = "reagent_storage_cryo"
 	extended_desc = "This is effectively an internal cryo beaker."
-	flags = OPENCONTAINER | NOREACT
+	atom_flags = ATOM_FLAG_NO_REACT
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	complexity = 8
 	inputs = list()
 	outputs = list("volume used")
@@ -287,6 +288,8 @@
 	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 10000)
 
+	dist_check = /decl/dist_check/omni
+
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
 	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
 	var/step_dir = get_pin_data(IC_INPUT, 2)
@@ -299,14 +302,16 @@
 	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
 		rift_location = get_step(rift_location, step_dir) || rift_location
 	else
-		rift_location = get_step(rift_location, dir) || rift_location
+		var/obj/item/device/electronic_assembly/assembly = get_assembly(src)
+		if(assembly)
+			rift_location = get_step(rift_location, assembly.dir) || rift_location
 
 	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
 		new /obj/effect/portal(rift_location, get_turf(tporter.locked))
 	else
 		var/turf/destination = get_random_turf_in_range(src, 10)
 		if(destination)
-			new /obj/effect/portal(rift_location, destination)
+			new /obj/effect/portal(rift_location, destination, 30 SECONDS, 33)
 		else
 			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
 

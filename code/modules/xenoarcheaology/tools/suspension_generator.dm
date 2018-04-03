@@ -73,46 +73,48 @@
 	user << browse(dat, "window=suspension;size=500x400")
 	onclose(user, "suspension")
 
-/obj/machinery/suspension_gen/Topic(href, href_list)
-	..()
-	usr.set_machine(src)
-
+/obj/machinery/suspension_gen/OnTopic(var/mob/user, href_list)
 	if(href_list["toggle_field"])
 		if(!suspension_field)
 			if(cell.charge > 0)
 				if(anchored)
 					activate()
 				else
-					to_chat(usr, "<span class='warning'>You are unable to activate [src] until it is properly secured on the ground.</span>")
+					to_chat(user, "<span class='warning'>You are unable to activate [src] until it is properly secured on the ground.</span>")
 		else
 			deactivate()
+		. = TOPIC_REFRESH
 	else if(href_list["insertcard"])
-		var/obj/item/I = usr.get_active_hand()
+		var/obj/item/I = user.get_active_hand()
 		if (istype(I, /obj/item/weapon/card))
-			usr.drop_item()
+			user.drop_item()
 			I.forceMove(src)
 			auth_card = I
-			if(attempt_unlock(I, usr))
-				to_chat(usr, "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</i>\'</span>")
+			if(attempt_unlock(I, user))
+				to_chat(user, "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</i>\'</span>")
 			else
-				to_chat(usr, "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</i>\'</span>")
+				to_chat(user, "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</i>\'</span>")
+		. = TOPIC_REFRESH
 	else if(href_list["ejectcard"])
 		if(auth_card)
-			if(ishuman(usr))
-				auth_card.loc = usr.loc
-				if(!usr.get_active_hand())
-					usr.put_in_hands(auth_card)
+			if(ishuman(user))
+				auth_card.loc = user.loc
+				if(!user.get_active_hand())
+					user.put_in_hands(auth_card)
 				auth_card = null
 			else
 				auth_card.forceMove(loc)
 				auth_card = null
+		. = TOPIC_REFRESH
 	else if(href_list["lock"])
 		locked = 1
+		. = TOPIC_REFRESH
 	else if(href_list["close"])
-		usr.unset_machine()
-		usr << browse(null, "window=suspension")
+		close_browser(user, "window=suspension")
+		return TOPIC_HANDLED
 
-	updateUsrDialog()
+	if(. == TOPIC_REFRESH)
+		interact(user)
 
 /obj/machinery/suspension_gen/attack_hand(var/mob/user)
 	if(!panel_open)

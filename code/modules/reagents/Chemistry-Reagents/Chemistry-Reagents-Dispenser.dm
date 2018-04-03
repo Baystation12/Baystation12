@@ -45,6 +45,7 @@
 	reagent_state = LIQUID
 	color = "#404030"
 	metabolism = REM * 0.5
+	overdose = 5
 
 /datum/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
@@ -246,6 +247,12 @@
 	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
 	reagent_state = SOLID
 	color = "#a0a0a0"
+
+/datum/reagent/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(volume > 3)
+		M.add_chemical_effect(CE_PULSE, 1)
+	if(volume > 10)
+		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/radium
 	name = "Radium"

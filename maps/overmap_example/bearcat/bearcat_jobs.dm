@@ -25,7 +25,7 @@
 	GLOB.using_map.station_name = "FTV [ship]"
 	var/obj/effect/overmap/ship/bearcat/B = locate() in world
 	if(B)
-		B.name = GLOB.using_map.station_name
+		B.SetName(GLOB.using_map.station_name)
 	command_announcement.Announce("Attention all hands on [GLOB.using_map.station_name]! Thank you for your attention.", "Ship re-christened")
 	verbs -= /client/proc/rename_ship
 

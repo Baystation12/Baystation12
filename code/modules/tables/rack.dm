@@ -43,3 +43,5 @@
 	can_reinforce = 0
 	flipped = -1
 
+/obj/structure/table/rack/dark
+	color = COLOR_GRAY40

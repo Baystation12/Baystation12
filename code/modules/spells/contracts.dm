@@ -46,7 +46,7 @@
 	if(user.mind.special_role == "apprentice")
 		to_chat(user, "<span class='warning'>You are already a wizarding apprentice!</span>")
 		return 0
-	if(wizards.add_antagonist_mind(user.mind,1,"apprentice","<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
+	if(GLOB.wizards.add_antagonist_mind(user.mind,1,"apprentice","<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
 		to_chat(user, "<span class='notice'>With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry.</span>")
 		return 1
 	return 0
@@ -68,6 +68,21 @@
 		user.set_see_in_dark(8)
 		user.set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 		to_chat(user, "<span class='notice'>The walls suddenly disappear.</span>")
+		return 1
+	return 0
+
+/obj/item/weapon/contract/wizard/telepathy
+	name = "telepathy contract"
+	desc = "The edges of the contract grow blurry when you look away from them. To be fair, actually reading it gives you a headache."
+	color = "#fcc605"
+
+/obj/item/weapon/contract/wizard/telepathy/contract_effect(mob/user as mob)
+	..()
+	if(!(mRemotetalk in user.mutations))
+		user.mutations.Add(mRemotetalk)
+		user.dna.SetSEState(GLOB.REMOTETALKBLOCK,1)
+		domutcheck(user, null, MUTCHK_FORCED)
+		to_chat(user, "<span class='notice'>You expand your mind outwards.</span>")
 		return 1
 	return 0
 

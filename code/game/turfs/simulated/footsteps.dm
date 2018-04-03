@@ -3,6 +3,9 @@
 #define FOOTSTEP_PLATING 	"plating"
 #define FOOTSTEP_WOOD 		"wood"
 #define FOOTSTEP_ASTEROID 	"asteroid"
+#define FOOTSTEP_GRASS 		"grass"
+#define FOOTSTEP_WATER		"water"
+#define FOOTSTEP_BLANK		"blank"
 
 /turf/simulated/floor/var/global/list/footstep_sounds = list(
 	FOOTSTEP_WOOD = list(
@@ -34,10 +37,23 @@
 		'sound/effects/footstep/asteroid2.ogg',
 		'sound/effects/footstep/asteroid3.ogg',
 		'sound/effects/footstep/asteroid4.ogg',
-		'sound/effects/footstep/asteroid5.ogg')
-	)
+		'sound/effects/footstep/asteroid5.ogg'),
+	FOOTSTEP_GRASS = list(
+		'sound/effects/footstep/grass1.ogg',
+		'sound/effects/footstep/grass2.ogg',
+		'sound/effects/footstep/grass3.ogg',
+		'sound/effects/footstep/grass4.ogg'),
+	FOOTSTEP_WATER = list(
+		'sound/effects/footstep/water1.ogg',
+		'sound/effects/footstep/water2.ogg',
+		'sound/effects/footstep/water3.ogg',
+		'sound/effects/footstep/water4.ogg'),
+	FOOTSTEP_BLANK = list(
+		'sound/effects/footstep/blank.ogg')
+)
 
 /decl/flooring/var/footstep_type
+/decl/flooring/footstep_type = FOOTSTEP_BLANK
 /decl/flooring/carpet/footstep_type = FOOTSTEP_CARPET
 /decl/flooring/tiling/footstep_type = FOOTSTEP_TILES
 /decl/flooring/linoleum/footstep_type = FOOTSTEP_TILES
@@ -47,11 +63,25 @@
 /turf/simulated/floor/proc/get_footstep_sound()
 	if(is_plating())
 		return safepick(footstep_sounds[FOOTSTEP_PLATING])
+	else if(!flooring || !flooring.footstep_type)
+		return safepick(footstep_sounds[FOOTSTEP_BLANK])
 	else
 		return safepick(footstep_sounds[flooring.footstep_type])
 
 /turf/simulated/floor/asteroid/get_footstep_sound()
 	return safepick(footstep_sounds[FOOTSTEP_ASTEROID])
+
+/turf/simulated/floor/exoplanet/get_footstep_sound()
+	return safepick(footstep_sounds[FOOTSTEP_CARPET])
+
+/turf/simulated/floor/exoplanet/grass/get_footstep_sound()
+	return safepick(footstep_sounds[FOOTSTEP_GRASS])
+
+/turf/simulated/floor/exoplanet/water/shallow/get_footstep_sound()
+	return safepick(footstep_sounds[FOOTSTEP_WATER])
+
+/turf/simulated/floor/fixed/get_footstep_sound()
+	return safepick(footstep_sounds[FOOTSTEP_PLATING])
 
 /turf/simulated/floor/Entered(var/mob/living/carbon/human/H)
 	..()
@@ -78,6 +108,9 @@
 
 	if(species.silent_steps)
 		return //species is silent
+
+	if(shoes && (shoes.item_flags & ITEM_FLAG_SILENT))
+		return // quiet shoes
 
 	if(!has_gravity(src))
 		if(step_count % 3) // don't need to step as often when you hop around

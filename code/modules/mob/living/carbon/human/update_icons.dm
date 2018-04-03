@@ -147,12 +147,12 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
 
 //UPDATES OVERLAYS FROM OVERLAYS_LYING/OVERLAYS_STANDING
-//this proc is messy as I was forced to include some old laggy cloaking code to it so that I don't break cloakers
-//I'll work on removing that stuff by rewriting some of the cloaking stuff at a later date.
 /mob/living/carbon/human/update_icons()
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
 	update_hud()		//TODO: remove the need for this
 	overlays.Cut()
+
+	var/list/visible_overlays = overlays_standing
 
 	if (icon_update)
 		if(is_cloaked())
@@ -160,28 +160,29 @@ Please contact me on #coderbus IRC. ~Carn x
 			icon = 'icons/mob/human.dmi'
 			icon_state = "blank"
 
-			for(var/entry in list(overlays_standing[R_HAND_LAYER], overlays_standing[L_HAND_LAYER]))
-				if(istype(entry, /image))
-					overlays += entry
-				else if(istype(entry, /list))
-					for(var/inner_entry in entry)
-						overlays += inner_entry
-
-			if(species.has_floating_eyes)
-				overlays |= species.get_eyes(src)
+			visible_overlays = list(visible_overlays[R_HAND_LAYER], visible_overlays[L_HAND_LAYER])
 
 		else
 			icon = stand_icon
 			icon_state = null
 
-			for(var/entry in overlays_standing)
-				if(istype(entry, /image))
-					overlays += entry
-				else if(istype(entry, /list))
-					for(var/inner_entry in entry)
-						overlays += inner_entry
-			if(species.has_floating_eyes)
-				overlays |= species.get_eyes(src)
+		var/matrix/M = matrix()
+		if(lying && (species.prone_overlay_offset[1] || species.prone_overlay_offset[2]))
+			M.Translate(species.prone_overlay_offset[1], species.prone_overlay_offset[2])
+		for(var/entry in visible_overlays)
+			if(istype(entry, /image))
+				var/image/overlay = entry
+				overlay.transform = M
+				overlays += overlay
+			else if(istype(entry, /list))
+				for(var/image/overlay in entry)
+					overlay.transform = M
+					overlays += overlay
+		if(species.has_floating_eyes)
+			overlays |= species.get_eyes(src)
+
+	if(auras)
+		overlays |= auras
 
 	var/matrix/M = matrix()
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
@@ -286,6 +287,7 @@ var/global/list/damage_icon_parts = list()
 			icon_key += "[part.species.get_race_key(part.owner)]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
 			icon_key += "[part.s_tone]"
+			icon_key += "[part.s_base]"
 			if(part.s_col && part.s_col.len >= 3)
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
 				icon_key += "[part.s_col_blend]"
@@ -355,11 +357,11 @@ var/global/list/damage_icon_parts = list()
 	//END CACHED ICON GENERATION.
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 
-	if(update_icons)
-		update_icons()
-
 	//tail
 	update_tail_showing(0)
+
+	if(update_icons)
+		update_icons()
 
 //UNDERWEAR OVERLAY
 
@@ -663,7 +665,7 @@ var/global/list/damage_icon_parts = list()
 		var/species_tail_anim = species.get_tail_animation(src)
 		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
 		tail_icon = new/icon(species_tail_anim)
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species.tail_blend)
 		// The following will not work with animated tails.
 		var/use_species_tail = species.get_tail_hair(src)
 		if(use_species_tail)
@@ -753,8 +755,8 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[SURGERY_LEVEL] = null
 	var/image/total = new
 	for(var/obj/item/organ/external/E in organs)
-		if(E.robotic < ORGAN_ROBOT && E.open())
-			var/image/I = image("icon"='icons/mob/surgery.dmi', "icon_state"="[E.icon_name][round(E.open())]", "layer"=-SURGERY_LEVEL)
+		if(E.robotic < ORGAN_ROBOT && E.how_open())
+			var/image/I = image("icon"='icons/mob/surgery.dmi', "icon_state"="[E.icon_name][round(E.how_open())]", "layer"=-SURGERY_LEVEL)
 			total.overlays += I
 	total.appearance_flags = RESET_COLOR
 	overlays_standing[SURGERY_LEVEL] = total

@@ -15,6 +15,7 @@ var/list/limb_icon_cache = list()
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
 	s_tone = null
 	s_col = null
+	s_base = ""
 	h_col = list(human.r_hair, human.g_hair, human.b_hair)
 	if(robotic >= ORGAN_ROBOT)
 		var/datum/robolimb/franchise = all_robolimbs[model]
@@ -24,12 +25,15 @@ var/list/limb_icon_cache = list()
 		return
 	if(!isnull(human.s_tone) && (human.species.appearance_flags & HAS_A_SKIN_TONE))
 		s_tone = human.s_tone
+	if(!isnull(human.s_base) && (human.species.appearance_flags & HAS_BASE_SKIN_COLOURS))
+		s_base = human.s_base
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)
 
 /obj/item/organ/external/proc/sync_colour_to_dna()
 	s_tone = null
 	s_col = null
+	s_base = dna.s_base
 	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
 	if(robotic >= ORGAN_ROBOT)
 		var/datum/robolimb/franchise = all_robolimbs[model]
@@ -53,9 +57,9 @@ var/list/limb_icon_cache = list()
 	for(var/M in markings)
 		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
 		var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-		mark_s.Blend(markings[M]["color"], ICON_ADD)
+		mark_s.Blend(markings[M]["color"], mark_style.blend)
 		overlays |= mark_s //So when it's not on your body, it has icons
-		mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
+		mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
 		icon_cache_key += "[M][markings[M]["color"]]"
 
 /obj/item/organ/external/var/icon_cache_key
@@ -69,6 +73,9 @@ var/list/limb_icon_cache = list()
 		gender = "_f"
 
 	icon_state = "[icon_name][gender]"
+	if(species.base_skin_colours && !isnull(species.base_skin_colours[s_base]))
+		icon_state += species.base_skin_colours[s_base]
+
 	icon_cache_key = "[icon_state]_[species ? species.name : SPECIES_HUMAN]"
 
 	if(force_icon)
@@ -171,7 +178,7 @@ var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#6666
 		else
 			applying.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 		icon_cache_key += "_tone_[s_tone]"
-	else
+	if(species.appearance_flags & HAS_SKIN_COLOR)
 		if(s_col && s_col.len >= 3)
 			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), s_col_blend)
 			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[s_col_blend]"

@@ -26,7 +26,7 @@
 /datum/uplink_item/item/implants/imp_uplink/New()
 	..()
 	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
-	desc = "Contains [round((DEFAULT_TELECRYSTAL_AMOUNT / 2) * 0.8)] Telecrystal\s"
+	desc = "Contains [IMPLANT_TELECRYSTAL_AMOUNT(DEFAULT_TELECRYSTAL_AMOUNT)] Telecrystal\s"
 
 /datum/uplink_item/item/implants/imp_imprinting
 	name = "Neural Imprinting Implant"

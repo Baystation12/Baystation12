@@ -41,6 +41,10 @@
 		docking_controller = locate(docking_tag)
 		if(!istype(docking_controller))
 			log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
+		if(GLOB.using_map.use_overmap)
+			var/obj/effect/overmap/location = map_sectors["[z]"]
+			if(location && location.docking_codes)
+				docking_controller.docking_codes = location.docking_codes
 	shuttle_controller.register_landmark(tag, src)
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
@@ -81,7 +85,7 @@
 /obj/effect/shuttle_landmark/automatic/proc/add_to_sector(var/obj/effect/overmap/O, var/tag_only)
 	if(!istype(O))
 		return
-	name = "[O.name] - [name]"
+	SetName("[O.name] - [name]")
 	if(shuttle_restricted)
 		if(!O.restricted_waypoints[shuttle_restricted])
 			O.restricted_waypoints[shuttle_restricted] = list()
@@ -121,7 +125,7 @@
 	active = 1
 	var/turf/T = get_turf(src)
 	var/obj/effect/shuttle_landmark/automatic/mark = new(T)
-	mark.name = "Beacon signal ([T.x],[T.y])"
+	mark.SetName("Beacon signal ([T.x],[T.y])")
 	if(ismob(loc))
 		var/mob/M = loc
 		M.drop_from_inventory(src,T)

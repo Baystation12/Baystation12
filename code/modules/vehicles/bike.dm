@@ -216,3 +216,16 @@
 /obj/vehicle/bike/electric
 	engine_type = /obj/item/weapon/engine/electric
 	prefilled = 1
+
+/obj/vehicle/bike/gyroscooter
+	name = "gyroscooter"
+	desc = "A fancy space scooter."
+	icon_state = "gyroscooter_off"
+
+	land_speed = 1
+	space_speed = 0
+	bike_icon = "gyroscooter"
+
+	trail = null
+	engine_type = /obj/item/weapon/engine/electric
+	prefilled = 1

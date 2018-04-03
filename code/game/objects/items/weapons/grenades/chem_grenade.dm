@@ -33,7 +33,7 @@
 					if(istype(B))
 						beakers -= B
 						user.put_in_hands(B)
-			name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
+			SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
 		if(stage > 1 && !active && clown_check(user))
 			to_chat(user, "<span class='warning'>You prime \the [name]!</span>")
 
@@ -68,18 +68,18 @@
 				var/obj/item/device/assembly/timer/T = detonator.a_right
 				det_time = 10*T.time
 			icon_state = initial(icon_state) +"_ass"
-			name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
+			SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
 			stage = 1
 		else if(isScrewdriver(W) && path != 2)
 			if(stage == 1)
 				path = 1
 				if(beakers.len)
 					to_chat(user, "<span class='notice'>You lock the assembly.</span>")
-					name = "grenade"
+					SetName("grenade")
 				else
 //					to_chat(user, "<span class='warning'>You need to add at least one beaker before locking the assembly.</span>")
 					to_chat(user, "<span class='notice'>You lock the empty assembly.</span>")
-					name = "fake grenade"
+					SetName("fake grenade")
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
 				icon_state = initial(icon_state) +"_locked"
 				stage = 2
@@ -91,7 +91,7 @@
 				else
 					to_chat(user, "<span class='notice'>You unlock the assembly.</span>")
 					playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
-					name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
+					SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
 					icon_state = initial(icon_state) + (detonator?"_ass":"")
 					stage = 1
 					active = 0
@@ -107,7 +107,7 @@
 					W.loc = src
 					beakers += W
 					stage = 1
-					name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
+					SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
 				else
 					to_chat(user, "<span class='warning'>\The [W] is empty.</span>")
 

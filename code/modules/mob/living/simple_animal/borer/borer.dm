@@ -18,10 +18,11 @@
 	attacktext = "nipped"
 	friendly = "prods"
 	wander = 0
-	pass_flags = PASSTABLE
+	pass_flags = PASS_FLAG_TABLE
 	universal_understand = 1
 	holder_type = /obj/item/weapon/holder/borer
 	mob_size = MOB_SMALL
+	can_escape = 1
 
 	var/generation = 1
 	var/static/list/borer_names = list(
@@ -45,7 +46,7 @@
 /mob/living/simple_animal/borer/Login()
 	..()
 	if(mind)
-		borers.add_antagonist(mind)
+		GLOB.borers.add_antagonist(mind)
 
 /mob/living/simple_animal/borer/New(atom/newloc, var/gen=1)
 	..(newloc)
@@ -164,7 +165,7 @@
 	if(!host) return
 
 	if(host.mind)
-		borers.remove_antagonist(host.mind)
+		GLOB.borers.remove_antagonist(host.mind)
 
 	src.loc = get_turf(host)
 

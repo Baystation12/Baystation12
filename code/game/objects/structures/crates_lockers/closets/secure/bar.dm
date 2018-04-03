@@ -5,7 +5,7 @@
 	icon_closed = "cabinetdetective"
 	icon_locked = "cabinetdetective_locked"
 	icon_opened = "cabinetdetective_open"
-	icon_broken = "cabinetdetective_broken"
+	icon_broken = "cabinetdetective_sparks"
 	icon_off = "cabinetdetective_broken"
 
 /obj/structure/closet/secure_closet/bar/WillContain()

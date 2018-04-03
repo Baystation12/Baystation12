@@ -245,6 +245,9 @@
 	if(!mob.lastarea)
 		mob.lastarea = get_area(mob.loc)
 
+	if(istype(mob.loc,/obj/mecha)) //mecha handles spacemove internally
+		return mob.loc.relaymove(mob, direct)
+
 	if(!mob.check_solid_ground())
 		var/allowmove = mob.Allow_Spacemove(0)
 		if(!allowmove)

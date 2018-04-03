@@ -16,6 +16,7 @@
  *		Plushies
  *		Toy cult sword
  *		Marshalling wand
+ *		Ring bell
  */
 
 
@@ -25,7 +26,6 @@
 	throw_speed = 4
 	throw_range = 20
 	force = 0
-
 
 /*
  * Balloons
@@ -142,8 +142,8 @@
 	icon_state = "crossbow"
 	item_state = "crossbow"
 	item_icons = list(
-		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
-		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
+		icon_l_hand = 'icons/mob/onmob/items/lefthand_guns.dmi',
+		icon_r_hand = 'icons/mob/onmob/items/righthand_guns.dmi',
 		)
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
@@ -175,7 +175,7 @@
 			var/obj/effect/foam_dart_dummy/D = new/obj/effect/foam_dart_dummy(get_turf(src))
 			bullets--
 			D.icon_state = "foamdart"
-			D.name = "foam dart"
+			D.SetName("foam dart")
 			playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
 
 			for(var/i=0, i<6, i++)
@@ -289,7 +289,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "katana"
 	item_state = "katana"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 5
 	throwforce = 5
@@ -790,8 +790,8 @@
 	item_state = "marshallingwand"
 	icon = 'icons/obj/toy.dmi'
 	item_icons = list(
-		icon_l_hand = 'icons/mob/items/lefthand.dmi',
-		icon_r_hand = 'icons/mob/items/righthand.dmi',
+		icon_l_hand = 'icons/mob/onmob/items/lefthand.dmi',
+		icon_r_hand = 'icons/mob/onmob/items/righthand.dmi',
 		)
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
@@ -822,6 +822,24 @@
 
 /obj/item/toy/torchmodel
 	name = "table-top SEV Torch model"
-	desc = "This is an SEV Torch replica in scale 1:250 on wooden stand. Small lights blink on the hull and at the engine exhaust."
+	desc = "This is a replica of the SEV Torch, in 1:250th scale, on a handsome wooden stand. Small lights blink on the hull and at the engine exhaust."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "torch_model_figure"
+
+/obj/item/toy/ringbell
+	name = "ringside bell"
+	desc = "A bell used to signal the beginning and end of various ring sports."
+	icon = 'icons/obj/toy.dmi'
+	icon_state= "ringbell"
+	anchored = 1
+
+/obj/item/toy/ringbell/attack_hand(mob/user as mob)
+	if (user.a_intent == I_HELP)
+		user.visible_message("<span class='notice'>[user] rings \the [src], signalling the beginning of the contest.</span>")
+		playsound(user.loc, 'sound/items/oneding.ogg', 60)
+	else if (user.a_intent == I_DISARM)
+		user.visible_message("<span class='notice'>[user] rings \the [src] three times, signalling the end of the contest!</span>")
+		playsound(user.loc, 'sound/items/threedings.ogg', 60)
+	else if (user.a_intent == I_HURT)
+		user.visible_message("<span class='warning'>[user] rings \the [src] repeatedly, signalling a disqualification!</span>")
+		playsound(user.loc, 'sound/items/manydings.ogg', 60)

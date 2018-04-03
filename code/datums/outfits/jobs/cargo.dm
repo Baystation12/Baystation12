@@ -28,3 +28,9 @@
 /decl/hierarchy/outfit/job/cargo/mining/New()
 	..()
 	BACKPACK_OVERRIDE_ENGINEERING
+
+/decl/hierarchy/outfit/job/cargo/mining/void
+	name = OUTFIT_JOB_NAME("Shaft miner - Voidsuit")
+	head = /obj/item/clothing/head/helmet/space/void/mining
+	mask = /obj/item/clothing/mask/breath
+	suit = /obj/item/clothing/suit/space/void/mining

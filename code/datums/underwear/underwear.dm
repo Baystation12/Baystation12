@@ -65,7 +65,7 @@ datum/category_group/underwear/dd_SortValue()
 		return
 
 	var/obj/item/underwear/UW = new underwear_type()
-	UW.name = underwear_name
+	UW.SetName(underwear_name)
 	UW.gender = underwear_gender
 	UW.icon = icon
 	UW.icon_state = icon_state

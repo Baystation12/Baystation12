@@ -7,6 +7,11 @@
 /turf/simulated/wall/ocp_wall/New(var/newloc)
 	..(newloc, "osmium-carbide plasteel", "osmium-carbide plasteel")
 
+/turf/simulated/wall/r_wall/hull
+	name = "hull"
+	color = COLOR_HULL
+	paint_color = COLOR_HULL
+
 
 
 
@@ -20,7 +25,7 @@
 	..(newloc, 1)
 
 /turf/simulated/wall/cult/dismantle_wall()
-	cult.remove_cultiness(CULTINESS_PER_TURF)
+	GLOB.cult.remove_cultiness(CULTINESS_PER_TURF)
 	..()
 
 /turf/unsimulated/wall/cult

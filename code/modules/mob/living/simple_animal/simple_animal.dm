@@ -33,6 +33,7 @@
 	var/response_disarm = "tries to disarm"
 	var/response_harm   = "tries to hurt"
 	var/harm_intent_damage = 3
+	var/can_escape = 0 // 'smart' simple animals such as human enemies, or things small, big, sharp or strong enough to power out of a net
 
 	//Temperature effect
 	var/minbodytemp = 250
@@ -65,7 +66,8 @@
 
 /mob/living/simple_animal/Life()
 	..()
-
+	if(!living_observers_present(GetConnectedZlevels(z)))
+		return
 	//Health
 	if(stat == DEAD)
 		if(health > 0)
@@ -74,7 +76,6 @@
 			set_stat(CONSCIOUS)
 			set_density(1)
 		return 0
-
 
 	if(health <= 0)
 		death()
@@ -87,6 +88,15 @@
 	handle_weakened()
 	handle_paralysed()
 	handle_supernatural()
+
+	if(buckled && can_escape)
+		if(istype(buckled, /obj/effect/energy_net))
+			var/obj/effect/energy_net/Net = buckled
+			Net.escape_net(src)
+		else if(prob(50))
+			escape(src, buckled)
+		else if(prob(50))
+			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
 
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
@@ -154,6 +164,10 @@
 		adjustBruteLoss(unsuitable_atoms_damage)
 	return 1
 
+/mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
+	O.unbuckle_mob(M)
+	visible_message("<span class='danger'>\The [M] escapes from \the [O]!</span>")
+
 /mob/living/simple_animal/proc/handle_supernatural()
 	if(purge)
 		purge -= 1
@@ -171,7 +185,11 @@
 	if(!Proj || Proj.nodamage)
 		return
 
-	adjustBruteLoss(Proj.damage)
+	var/damage = Proj.damage
+	if(Proj.damtype == STUN)
+		damage = (Proj.damage / 8)
+
+	adjustBruteLoss(damage)
 	return 0
 
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
@@ -181,16 +199,16 @@
 
 		if(I_HELP)
 			if (health > 0)
-				M.visible_message("<span class='notice'>[M] [response_help] \the [src]</span>")
+				M.visible_message("<span class='notice'>[M] [response_help] \the [src].</span>")
 
 		if(I_DISARM)
-			M.visible_message("<span class='notice'>[M] [response_disarm] \the [src]</span>")
+			M.visible_message("<span class='notice'>[M] [response_disarm] \the [src].</span>")
 			M.do_attack_animation(src)
 			//TODO: Push the mob away or something
 
 		if(I_HURT)
 			adjustBruteLoss(harm_intent_damage)
-			M.visible_message("<span class='warning'>[M] [response_harm] \the [src]</span>")
+			M.visible_message("<span class='warning'>[M] [response_harm] \the [src]!</span>")
 			M.do_attack_animation(src)
 
 	return
@@ -225,15 +243,17 @@
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
-	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
+	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user]!</span>")
 
 	if(O.force <= resistance)
-		to_chat(user, "<span class='danger'>This weapon is ineffective, it does no damage.</span>")
+		to_chat(user, "<span class='danger'>This weapon is ineffective; it does no damage.</span>")
 		return 2
 
 	var/damage = O.force
 	if (O.damtype == PAIN)
 		damage = 0
+	if (O.damtype == STUN)
+		damage = (O.force / 8)
 	if(supernatural && istype(O,/obj/item/weapon/nullrod))
 		damage *= 2
 		purge = 3
@@ -333,7 +353,7 @@
 	if(meat_type && actual_meat_amount>0 && (stat == DEAD))
 		for(var/i=0;i<actual_meat_amount;i++)
 			var/obj/item/meat = new meat_type(get_turf(src))
-			meat.name = "[src.name] [meat.name]"
+			meat.SetName("[src.name] [meat.name]")
 		if(issmall(src))
 			user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))

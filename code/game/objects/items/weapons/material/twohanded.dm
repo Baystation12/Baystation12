@@ -110,6 +110,7 @@
 	force = 10
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
+	applies_material_colour = 0
 
 	// 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	force_divisor = 0.33

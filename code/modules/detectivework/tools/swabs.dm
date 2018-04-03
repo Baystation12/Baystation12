@@ -114,7 +114,7 @@
 		set_used(sample_type, A)
 
 /obj/item/weapon/forensics/swab/proc/set_used(var/sample_str, var/atom/source)
-	name = "[initial(name)] ([sample_str] - [source])"
+	SetName("[initial(name)] ([sample_str] - [source])")
 	desc = "[initial(desc)] The label on the vial reads 'Sample of [sample_str] from [source].'."
 	icon_state = "swab_used"
 	used = 1

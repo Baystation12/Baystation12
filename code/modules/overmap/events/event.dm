@@ -12,7 +12,7 @@
 	var/list/events_by_turf = get_event_turfs_by_z_level(z_level)
 	var/list/candidate_turfs = block(locate(OVERMAP_EDGE, OVERMAP_EDGE, z_level),locate(overmap_size - OVERMAP_EDGE, overmap_size - OVERMAP_EDGE,z_level))
 	candidate_turfs -= events_by_turf
-	candidate_turfs = filter(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap)
+	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/effect/overmap)
 
 	for(var/i = 1 to number_of_events)
 		if(!candidate_turfs.len)
@@ -29,11 +29,9 @@
 			GLOB.exited_event.register(event_turf, src, /decl/overmap_event_handler/proc/on_turf_exited)
 
 			var/obj/effect/overmap_event/event = new(event_turf)
-			event.name = overmap_event.name
+			event.SetName(overmap_event.name)
 			event.icon_state = pick(overmap_event.event_icon_states)
 			event.opacity =  overmap_event.opacity
-
-		points_of_interest += overmap_event.name
 
 /decl/overmap_event_handler/proc/get_event_turfs_by_z_level(var/z_level)
 	var/z_level_text = num2text(z_level)
@@ -141,6 +139,7 @@
 	var/datum/event/E = new event(EM)
 	E.startWhen = 0
 	E.endWhen = INFINITY
+	E.affecting_z = victim.map_z
 	victims[victim] = E
 
 /datum/overmap_event/proc/leave(victim)

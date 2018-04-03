@@ -36,18 +36,11 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
-
 	icon = null
-	initial_loc = get_area(loc)
-	area_uid = initial_loc.uid
-	if (!id_tag)
-		assign_uid()
-		id_tag = num2text(uid)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
 	unregister_radio(src, frequency)
 	..()
-
 
 /obj/machinery/atmospherics/unary/vent_scrubber/update_icon(var/safety = 0)
 	if(!check_icon_cache())
@@ -115,7 +108,7 @@
 	if(!initial_loc.air_scrub_names[id_tag])
 		var/new_name = "[initial_loc.name] Air Scrubber #[initial_loc.air_scrub_names.len+1]"
 		initial_loc.air_scrub_names[id_tag] = new_name
-		src.name = new_name
+		src.SetName(new_name)
 	initial_loc.air_scrub_info[id_tag] = signal.data
 	radio_connection.post_signal(src, signal, radio_filter_out)
 
@@ -123,6 +116,11 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
 	. = ..()
+	initial_loc = get_area(loc)
+	area_uid = initial_loc.uid
+	if (!id_tag)
+		assign_uid()
+		id_tag = num2text(uid)
 	radio_filter_in = frequency==initial(frequency)?(RADIO_FROM_AIRALARM):null
 	radio_filter_out = frequency==initial(frequency)?(RADIO_TO_AIRALARM):null
 	if (frequency)
@@ -244,7 +242,7 @@
 	scrubbing_gas ^= toggle
 
 	if(signal.data["init"] != null)
-		name = signal.data["init"]
+		SetName(signal.data["init"])
 		return
 
 	if(signal.data["status"] != null)

@@ -161,6 +161,16 @@
 			dat += "NONE"
 
 		dat += "<br>  <a href='?src=\ref[src];input=freq'>\[Add Filter\]</a>"
+
+		dat += "<br><br>Channel Tagging Rules: <ol>"
+
+		if(length(channel_tags))
+			for(var/list/rule in channel_tags)
+				dat +="<li>[format_frequency(rule[1])] -> [rule[2]] ([rule[3]]) <a href='?src=\ref[src];deletetagrule=[rule[1]]'>\[X\]</a></li>"
+
+		dat += "</ol>"
+		dat += "<a href='?src=\ref[src];input=tagrule'>\[Add Rule\]</a>"
+
 		dat += "<hr>"
 
 		if(P)
@@ -287,7 +297,8 @@
 
 
 /obj/machinery/telecomms/Topic(href, href_list)
-
+	if(..())
+		return 1
 	if(!issilicon(usr))
 		if(!istype(usr.get_active_hand(), /obj/item/device/multitool))
 			return
@@ -347,6 +358,35 @@
 						freq_listening.Add(newfreq)
 						temp = "<font color = #666633>-% New frequency filter assigned: \"[newfreq] GHz\" %-</font>"
 
+			if("tagrule")
+				var/freq = input(usr, "Specify frequency to tag (GHz). Decimals assigned automatically.", src, network) as null|num
+				if(freq && canAccess(usr))
+					if(findtext(num2text(freq), "."))
+						freq *= 10
+
+					if(!(freq in freq_listening))
+						temp = "<font color = #660000>-% Not filtering specified frequency %-</font>"
+						updateUsrDialog()
+						return
+
+					for(var/list/rule in channel_tags)
+						if(rule[1] == freq)
+							temp = "<font color = #660000>-% Tagging rule already defined %-</font>"
+							updateUsrDialog()
+							return
+
+					var/tag = input(usr, "Specify tag.", src, "") as null|text
+					var/color = input(usr, "Select color.", src, "") as null|anything in (channel_color_presets + "Custom color")
+
+					if(color == "Custom color")
+						color = input("Select color.", src, rgb(0, 128, 0)) as null|color
+					else
+						color = channel_color_presets[color]
+
+					if(freq < 10000)
+						channel_tags.Add(list(list(freq, tag, color)))
+						temp = "<font color = #666633>-% New tagging rule assigned:[freq] GHz -> \"[tag]\" ([color]) %-</font>"
+
 	if(href_list["delete"])
 
 		// changed the layout about to workaround a pesky runtime -- Doohl
@@ -354,6 +394,16 @@
 		var/x = text2num(href_list["delete"])
 		temp = "<font color = #666633>-% Removed frequency filter [x] %-</font>"
 		freq_listening.Remove(x)
+
+	if(href_list["deletetagrule"])
+
+		var/freq = text2num(href_list["deletetagrule"])
+		var/rule_delete
+		for(var/list/rule in channel_tags)
+			if(rule[1] == freq)
+				rule_delete = rule
+		temp = "<font color = #666633>-% Removed tagging rule: [rule_delete[1]] -> [rule_delete[2]] %-</font>"
+		channel_tags.Remove(list(rule_delete))
 
 	if(href_list["unlink"])
 
@@ -398,7 +448,6 @@
 	src.Options_Topic(href, href_list)
 
 	usr.set_machine(src)
-	src.add_fingerprint(usr)
 
 	updateUsrDialog()
 

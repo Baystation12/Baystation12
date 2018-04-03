@@ -2,6 +2,8 @@
 	name = "master solgov hat"
 	icon = 'maps/torch/icons/obj/solgov-head.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
 
 //Utility
 /obj/item/clothing/head/soft/solgov
@@ -39,21 +41,17 @@
 		slot_l_hand_str = "helmet",
 		slot_r_hand_str = "helmet",
 		)
-	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
 /obj/item/clothing/head/solgov/utility/fleet
 	name = "fleet utility cover"
 	desc = "A navy blue utility cover bearing the crest of the SCG Fleet."
 	icon_state = "navyutility"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 10, bomb = 0, bio = 0, rad = 0)
-	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/solgov/utility/marine
 	name = "marine utility cover"
 	desc = "A green utility cover bearing the crest of the SCG Marine Corps."
 	icon_state = "greenutility"
-	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/head/solgov/utility/marine/tan
 	name = "tan utility cover"
@@ -73,10 +71,18 @@
 	icon_state = "greenwheelcap"
 	item_state_slots = list(
 		slot_l_hand_str = "helmet",
-		slot_r_hand_str = "helmet",
-		)
-	siemens_coefficient = 0.9
+		slot_r_hand_str = "helmet")
 	body_parts_covered = 0
+
+/obj/item/clothing/head/solgov/service/expedition
+	name = "expedition peaked cap"
+	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps."
+	icon_state = "greydresscap"
+
+/obj/item/clothing/head/solgov/service/expedition/command
+	name = "expedition officer's peaked cap"
+	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
+	icon_state = "greydresscap_com"
 
 /obj/item/clothing/head/solgov/service/marine
 	name = "marine wheel cover"
@@ -111,20 +117,13 @@
 	icon_state = "greenwheelcap"
 	item_state_slots = list(
 		slot_l_hand_str = "helmet",
-		slot_r_hand_str = "helmet",
-		)
-	siemens_coefficient = 0.9
+		slot_r_hand_str = "helmet")
 	body_parts_covered = 0
 
-/obj/item/clothing/head/solgov/dress/expedition
-	name = "expedition dress cap"
-	desc = "A peaked grey dress uniform cap belonging to the SCG Expeditionary Corps."
-	icon_state = "greydresscap"
-
-/obj/item/clothing/head/solgov/dress/expedition/command
-	name = "expedition officer's dress cap"
-	desc = "A peaked grey dress uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
-	icon_state = "greydresscap_com"
+/obj/item/clothing/head/solgov/dress/fleet/garrison
+	name = "fleet garrison cap"
+	desc = "A white dress uniform cap. The classic sailor's choice."
+	icon_state = "whitegarrisoncap"
 
 /obj/item/clothing/head/solgov/dress/fleet
 	name = "fleet dress wheel cover"
@@ -284,6 +283,16 @@
 	name = "fleet officer's beret"
 	desc = "An SCG Fleet beret with a golden crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_command"
+
+/obj/item/clothing/head/beret/solgov/fleet/dress
+	name = "fleet dress beret"
+	desc = "A white SCG Fleet beret. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_whiterim"
+
+/obj/item/clothing/head/beret/solgov/fleet/dress/command
+	name = "fleet command dress beret"
+	desc = "A white SCG Fleet beret with a golden crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_whiterim_com"
 
 //ushanka
 

@@ -25,7 +25,7 @@
 	if(!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && (affected.status & ORGAN_TENDON_CUT) && affected.open() >= SURGERY_RETRACTED
+	return affected && (affected.status & ORGAN_TENDON_CUT) && affected.how_open() >= SURGERY_RETRACTED
 
 /datum/surgery_step/fix_tendon/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -70,7 +70,7 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && (affected.status & ORGAN_ARTERY_CUT) && affected.open() >= SURGERY_RETRACTED
+	return affected && (affected.status & ORGAN_ARTERY_CUT) && affected.how_open() >= SURGERY_RETRACTED
 
 /datum/surgery_step/fix_vein/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -100,7 +100,7 @@
 	allowed_tools = list(
 		/obj/item/weapon/weldingtool = 80,
 		/obj/item/weapon/circular_saw = 60,
-		/obj/item/weapon/pickaxe/plasmacutter = 100
+		/obj/item/weapon/gun/energy/plasmacutter = 30
 		)
 
 	priority = 3

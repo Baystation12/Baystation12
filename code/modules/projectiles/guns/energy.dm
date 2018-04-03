@@ -1,3 +1,5 @@
+GLOBAL_LIST_INIT(registered_weapons, list())
+
 /obj/item/weapon/gun/energy
 	name = "energy gun"
 	desc = "A basic energy-based gun."
@@ -19,6 +21,7 @@
 	var/recharge_time = 4
 	var/charge_tick = 0
 	var/icon_rounder = 25
+	combustion = 1
 
 /obj/item/weapon/gun/energy/switch_firemodes()
 	. = ..()
@@ -84,13 +87,16 @@
 
 /obj/item/weapon/gun/energy/examine(mob/user)
 	. = ..(user)
+	if(!power_supply)
+		to_chat(user, "Seems like it's dead.")
+		return
 	var/shots_remaining = round(power_supply.charge / charge_cost)
 	to_chat(user, "Has [shots_remaining] shot\s remaining.")
 	return
 
 /obj/item/weapon/gun/energy/update_icon()
 	..()
-	if(charge_meter)
+	if(charge_meter && power_supply)
 		var/ratio = power_supply.percent()
 
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
@@ -103,4 +109,3 @@
 			icon_state = "[modifystate][ratio]"
 		else
 			icon_state = "[initial(icon_state)][ratio]"
-

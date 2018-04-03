@@ -100,6 +100,7 @@
 #define to_file(file_entry, source_var)                     file_entry << source_var
 #define from_file(file_entry, target_var)                   file_entry >> target_var
 #define show_browser(target, browser_content, browser_name) target << browse(browser_content, browser_name)
+#define close_browser(target, browser_name)                 target << browse(null, browser_name)
 #define show_image(target, image)                           target << image
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
 
@@ -122,6 +123,8 @@
 #define QDEL_NULL_LIST(x) if(x) { for(var/y in x) { qdel(y) } ; x = null }
 
 #define QDEL_NULL(x) if(x) { qdel(x) ; x = null }
+
+#define QDEL_IN(item, time) addtimer(CALLBACK(GLOBAL_PROC, .proc/qdel, item), time, TIMER_STOPPABLE)
 
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
 
@@ -159,3 +162,8 @@
 //Currently used in SDQL2 stuff
 #define send_output(target, msg, control) target << output(msg, control)
 #define send_link(target, url) target << link(url)
+
+// Spawns multiple objects of the same type
+#define cast_new(type, num, args...) if((num) == 1) { new type(args) } else { for(var/i=0;i<(num),i++) { new type(args) } }
+
+#define FLAGS_EQUALS(flag, flags) ((flag & (flags)) == (flags))

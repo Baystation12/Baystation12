@@ -70,22 +70,13 @@
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/pick_meteor_start(var/startSide = pick(GLOB.cardinal))
-	var/startLevel = pick(GLOB.using_map.station_levels)
-	var/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
-
-	return list(startLevel, pickedstart)
-
-/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide)
+/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide, var/zlevel)
 	for(var/i = 0; i < number; i++)
-		spawn_meteor(meteortypes, startSide)
+		spawn_meteor(meteortypes, startSide, zlevel)
 
-/proc/spawn_meteor(var/list/meteortypes, var/startSide)
-	var/start = pick_meteor_start(startSide)
-
-	var/startLevel = start[1]
-	var/turf/pickedstart = start[2]
-	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, startLevel)
+/proc/spawn_meteor(var/list/meteortypes, var/startSide, var/zlevel)
+	var/turf/pickedstart = spaceDebrisStartLoc(startSide, zlevel)
+	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, zlevel)
 
 	var/Me = pickweight(meteortypes)
 	var/obj/effect/meteor/M = new Me(pickedstart)
@@ -146,7 +137,7 @@
 	var/hits = 4
 	var/hitpwr = 2 //Level of ex_act to be called on hit.
 	var/dest
-	pass_flags = PASSTABLE
+	pass_flags = PASS_FLAG_TABLE
 	var/heavy = 0
 	var/z_original
 	var/meteordrop = /obj/item/weapon/ore/iron
@@ -239,7 +230,7 @@
 /obj/effect/meteor/dust
 	name = "space dust"
 	icon_state = "dust"
-	pass_flags = PASSTABLE | PASSGRILLE
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	hits = 1
 	hitpwr = 3
 	dropamt = 1

@@ -29,7 +29,7 @@
 	var/pillsprite = "1"
 	var/client/has_sprites = list()
 	var/max_pill_count = 20
-	flags = OPENCONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 /obj/machinery/chem_master/New()
 	create_reagents(120)
@@ -173,10 +173,10 @@
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
-			while (count--)
+			while (count-- && count >= 0)
 				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
 				if(!name) name = reagents.get_master_reagent_name()
-				P.name = "[name] pill"
+				P.SetName("[name] pill")
 				P.icon_state = "pill"+pillsprite
 				if(P.icon_state in list("pill1", "pill2", "pill3", "pill4", "pill5")) // if using greyscale, take colour from reagent
 					P.color = reagents.get_color()
@@ -191,7 +191,7 @@
 				var/name = sanitizeSafe(input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name()), MAX_NAME_LEN)
 				var/obj/item/weapon/reagent_containers/glass/bottle/P = new/obj/item/weapon/reagent_containers/glass/bottle(src.loc)
 				if(!name) name = reagents.get_master_reagent_name()
-				P.name = "[name] bottle"
+				P.SetName("[name] bottle")
 				P.icon_state = bottlesprite
 				reagents.trans_to_obj(P,60)
 				P.update_icon()
@@ -446,34 +446,26 @@
 	return
 
 
-/obj/machinery/reagentgrinder/Topic(href, href_list)
-	if(..())
-		return 1
-
-	switch(href_list["action"])
-		if ("grind")
-			grind()
-		if("eject")
-			eject()
-		if ("detach")
-			detach()
-	src.updateUsrDialog()
-	return 1
+/obj/machinery/reagentgrinder/OnTopic(user, href_list)
+	if(href_list["action"])
+		switch(href_list["action"])
+			if ("grind")
+				grind()
+			if("eject")
+				eject()
+			if ("detach")
+				detach()
+		interact(user)
+		return TOPIC_REFRESH
 
 /obj/machinery/reagentgrinder/proc/detach()
-
-	if (usr.stat != 0)
-		return
 	if (!beaker)
 		return
-	beaker.loc = src.loc
+	beaker.dropInto(loc)
 	beaker = null
 	update_icon()
 
 /obj/machinery/reagentgrinder/proc/eject()
-
-	if (usr.stat != 0)
-		return
 	if (!holdingitems || holdingitems.len == 0)
 		return
 

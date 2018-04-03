@@ -70,7 +70,7 @@
 				to_chat(user, "<span class='notice'>You secured the girder!</span>")
 				reset_girder()
 
-	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
 		if(do_after(user,30,src))
 			if(!src) return
@@ -100,8 +100,11 @@
 		if(do_after(user, 40,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You removed the support struts!</span>")
-			reinf_material.place_dismantled_product(get_turf(src))
-			reinf_material = null
+
+			if(reinf_material)
+				reinf_material.place_dismantled_product(get_turf(src))
+				reinf_material = null
+
 			reset_girder()
 
 	else if(isCrowbar(W) && state == 0 && anchored)
@@ -228,7 +231,6 @@
 	cover = 70
 
 /obj/structure/girder/cult/dismantle()
-	new /obj/item/remains/human(get_turf(src))
 	qdel(src)
 
 /obj/structure/girder/cult/attackby(obj/item/W as obj, mob/user as mob)
@@ -239,7 +241,7 @@
 			to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 			dismantle()
 
-	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
 		if(do_after(user,30,src))
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")

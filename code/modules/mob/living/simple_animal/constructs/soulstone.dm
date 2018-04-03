@@ -46,7 +46,7 @@
 		icon_state = "soulstone2" //TODO: A spookier sprite. Also unique sprites.
 	if(full == SOULSTONE_CRACKED)
 		icon_state = "soulstone"//TODO: cracked sprite
-		name = "cracked soulstone"
+		SetName("cracked soulstone")
 
 /obj/item/device/soulstone/attackby(var/obj/item/I, var/mob/user)
 	..()
@@ -137,7 +137,7 @@
 		C.key = S.shade.key
 		//C.cancel_camera()
 		if(S.is_evil)
-			cult.add_antagonist(C.mind)
+			GLOB.cult.add_antagonist(C.mind)
 		qdel(S)
 		qdel(src)
 

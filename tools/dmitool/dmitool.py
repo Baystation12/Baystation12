@@ -1,7 +1,8 @@
 """ Python 2.7 wrapper for dmitool.
 """
-
+from __future__ import print_function
 import os
+import re
 from subprocess import Popen, PIPE
 
 _JAVA_PATH = ["java"]
@@ -16,7 +17,7 @@ def _safe_parse(dict, key, deferred_value):
     try:
         dict[key] = deferred_value()
     except Exception as e: 
-        print "Could not parse property '%s': %s" % (key, e)
+        print("Could not parse property '%s': %s" % (key, e))
         return e
     return False
 
@@ -41,7 +42,7 @@ def info(filepath):
     stdout, stderr = subproc.communicate()
 
     result = {}
-    data = stdout.split(os.linesep)[1:]
+    data = stdout.decode('UTF-8').split(os.linesep)[1:]
     # for s in data: print s
 
     # parse header line
@@ -58,10 +59,12 @@ def info(filepath):
             continue
 
         stateinfo = {}
-        item = [x.strip() for x in item.split(",")]
-        _safe_parse(stateinfo, "name", lambda: ''.join(item[0:(len(item)-2)]).split()[1].strip(" \""))
-        _safe_parse(stateinfo, "dirs", lambda: int(item[len(item)-2].split()[0].strip()))
-        _safe_parse(stateinfo, "frames", lambda: (item[len(item)-1] if item[len(item)-1] == 'loop(infinite)' else int(item[len(item)-1].split()[0].strip())))
+        item = [x.strip() for x in re.split(r', (?=(?:"[^"]*?(?: [^"]*)*))|, (?=[^",]+(?:,|$))', item)]
+
+        frames = item[2].split()[0].strip()
+        _safe_parse(stateinfo, "name", lambda: item[0].split()[1].strip(" \""))
+        _safe_parse(stateinfo, "dirs", lambda: int(item[1].split()[0].strip()))
+        _safe_parse(stateinfo, "frames", lambda: frames if frames == 'loop(infinite)' else int(frames))
         if len(item) > 3:
             stateinfo["misc"] = item[3]
 

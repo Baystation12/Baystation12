@@ -13,7 +13,7 @@
 	slot_flags = SLOT_BACK
 
 	//copied from tank.dm
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0
 	throwforce = 10.0
 	throw_speed = 1

@@ -112,7 +112,7 @@ var/list/ghost_traps
 	if(!istype(P)) //wat
 		return
 	P.searching = 0
-	P.name = "positronic brain ([P.brainmob.name])"
+	P.SetName("positronic brain ([P.brainmob.name])")
 	P.update_icon()
 
 // Allows people to set their own name. May or may not need to be removed for posibrains if people are dumbasses.
@@ -123,7 +123,7 @@ var/list/ghost_traps
 	var/newname = sanitizeSafe(input(target,"Enter a name, or leave blank for the default name.", "Name change",target.real_name) as text, MAX_NAME_LEN)
 	if (newname && newname != "")
 		target.real_name = newname
-		target.name = target.real_name
+		target.SetName(target.real_name)
 
 /***********************************
 * Diona pods and walking mushrooms *
@@ -223,7 +223,7 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 	var/obj/item/device/soulstone/S = target.loc
 	if(istype(S))
 		if(S.is_evil)
-			cult.add_antagonist(target.mind)
+			GLOB.cult.add_antagonist(target.mind)
 			to_chat(target, "<b>Remember, you serve the one who summoned you first, and the cult second.</b>")
 		else
 			to_chat(target, "<b>This soultone has been purified. You do not belong to the cult.</b>")

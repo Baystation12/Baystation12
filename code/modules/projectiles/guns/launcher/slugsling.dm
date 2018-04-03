@@ -11,7 +11,7 @@
 	if(break_on_impact)
 		squish()
 	else
-		flags |= PROXMOVE //Dont want it active during the throw... loooots of unneeded checking.
+		movable_flags |= MOVABLE_FLAG_PROXMOVE //Dont want it active during the throw... loooots of unneeded checking.
 	return ..()
 
 /obj/item/weapon/slugegg/attack_self(var/mob/living/user)

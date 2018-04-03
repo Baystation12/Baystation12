@@ -62,7 +62,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"],,
 							  signal.data["compression"], signal.data["level"], signal.frequency,
-							  signal.data["verb"], signal.data["language"]	)
+							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"], signal.data["channel_color"])
 
 
 	   /** #### - Simple Broadcast - #### **/
@@ -72,7 +72,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			/* ###### Broadcast a message using signal.data ###### */
 			Broadcast_SimpleMessage(signal.data["name"], signal.frequency,
 								  signal.data["message"],null, null,
-								  signal.data["compression"], listening_levels)
+								  signal.data["compression"], listening_levels, signal.data["channel_tag"], signal.data["channel_color"])
 
 
 	   /** #### - Artificial Broadcast - #### **/
@@ -88,7 +88,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], signal.data["level"], signal.frequency,
-							  signal.data["verb"], signal.data["language"])
+							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"], signal.data["channel_color"])
 
 		if(!message_delay)
 			message_delay = 1
@@ -152,7 +152,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
-							  signal.data["verb"], signal.data["language"])
+							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"], signal.data["channel_color"])
 		else
 			if(intercept)
 				Broadcast_Message(signal.data["connection"], signal.data["mob"],
@@ -160,7 +160,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency,
-							  signal.data["verb"], signal.data["language"])
+							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"], signal.data["channel_color"])
 
 
 
@@ -219,12 +219,19 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	@param freq
 		The frequency of the signal
 
+	@param channel_tag
+		The "name" of the frequency. Displayed in brackets before the message
+
+	@param channel_color
+		Color of the radio message
+
 **/
 
 /proc/Broadcast_Message(var/datum/radio_frequency/connection, var/mob/M,
 						var/vmask, var/vmessage, var/obj/item/device/radio/radio,
 						var/message, var/name, var/job, var/realname, var/vname,
-						var/data, var/compression, var/list/level, var/freq, var/verbage = "says", var/datum/language/speaking = null)
+						var/data, var/compression, var/list/level, var/freq, var/verbage = "says", var/datum/language/speaking = null,
+						var/channel_tag, var/channel_color)
 
 
   /* ###### Prepare the radio connection ###### */
@@ -259,7 +266,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		for(var/antag_freq in ANTAG_FREQS)
 			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(antag_freq)
 			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
-				if(R.receive_range(antag_freq, level) > -1)
+				if(R.intercept && R.receive_range(antag_freq, level) > -1)
 					radios += R
 
 	// --- Broadcast to ALL radio devices ---
@@ -327,12 +334,18 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if (length(heard_masked) || length(heard_normal) || length(heard_voice) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/freq_text = get_frequency_name(display_freq)
+		var/freq_text = format_frequency(display_freq)
+		if(channel_tag)
+			freq_text = channel_tag
+
+		// Default to commons channel green
+		if(!channel_color)
+			channel_color = channel_color_presets["Global Green"] 
 
 		var/part_b_extra = ""
 		if(data == 3) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
-		var/part_a = "<span class='[frequency_span_class(display_freq)]'>\icon[radio]<b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
+		var/part_a = "<span style='color: [channel_color]'>\icon[radio]<b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
 
 		// --- Some more pre-message formatting ---
 		var/part_b = "</span> <span class='message'>" // Tweaked for security headsets -- TLE
@@ -422,7 +435,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	return 1
 
-/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level)
+/proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level, var/channel_tag, var/channel_color)
 
   /* ###### Prepare the radio connection ###### */
 
@@ -514,8 +527,14 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if (length(heard_normal) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/part_a = "<span class='[frequency_span_class(display_freq)]'><span class='name'>" // goes in the actual output
-		var/freq_text = get_frequency_name(display_freq)
+		var/freq_text = format_frequency(display_freq)
+		if(channel_tag)
+			freq_text = channel_tag
+
+		if(!channel_color)
+			channel_color = channel_color_presets["Global Green"] 
+
+		var/part_a = "<span style='color: [channel_color]'><span class='name'>" // goes in the actual output
 
 		// --- Some more pre-message formatting ---
 
