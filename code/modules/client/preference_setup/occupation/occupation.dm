@@ -3,6 +3,11 @@
 #define BE_ASSISTANT 1
 #define RETURN_TO_LOBBY 2
 
+#define JOB_LEVEL_NEVER  4
+#define JOB_LEVEL_LOW    3
+#define JOB_LEVEL_MEDIUM 2
+#define JOB_LEVEL_HIGH   1
+
 /datum/preferences
 	//Since there can only be 1 high job.
 	var/job_high = null
@@ -153,29 +158,30 @@
 
 		. += "</td><td width='40%'>"
 
-		. += "<a href='?src=\ref[src];set_job=[rank]'>"
-
 		if(rank == "Assistant")//Assistant is special
-			if("Assistant" in pref.job_low)
-				. += " <font color=55cc55>\[Yes]</font>"
-			else
-				. += " <font color=black>\[No]</font>"
-			if(job.alt_titles) //Blatantly cloned from a few lines down.
-				. += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'>&nbsp</td><td><a href='?src=\ref[src];select_alt_title=\ref[job]'>\[[pref.GetPlayerAltTitle(job)]\]</a></td></tr>"
-			. += "</a></td></tr>"
-			continue
-
-		if(pref.job_high == job.title)
-			. += " <font color=55cc55>\[High]</font>"
-		else if(job.title in pref.job_medium)
-			. += " <font color=eecc22>\[Medium]</font>"
-		else if(job.title in pref.job_low)
-			. += " <font color=cc5555>\[Low]</font>"
+			. += "<a href='?src=\ref[src];set_job=[rank];set_level=[JOB_LEVEL_LOW]'>"
+			. += " [rank in pref.job_low ? "<font color=55cc55>" : ""]\[Yes][rank in pref.job_low ? "</font>" : ""]"
+			. += "</a>"
+			. += "<a href='?src=\ref[src];set_job=[rank];set_level=[JOB_LEVEL_NEVER]'>"
+			. += " [!(rank in pref.job_low) ? "<font color=black>" : ""]\[No][!(rank in pref.job_low) ? "</font>" : ""]"
+			. += "</a>"
 		else
-			. += " <font color=black>\[NEVER]</font>"
+			var/current_level = JOB_LEVEL_NEVER
+			if(pref.job_high == job.title)
+				current_level = JOB_LEVEL_HIGH
+			else if(job.title in pref.job_medium)
+				current_level = JOB_LEVEL_MEDIUM
+			else if(job.title in pref.job_low)
+				current_level = JOB_LEVEL_LOW
+
+			. += " <a href='?src=\ref[src];set_job=[rank];set_level=[JOB_LEVEL_HIGH]'>[current_level == JOB_LEVEL_HIGH ? "<font color=55cc55>" : ""]\[High][current_level == JOB_LEVEL_HIGH ? "</font>" : ""]</a>"
+			. += " <a href='?src=\ref[src];set_job=[rank];set_level=[JOB_LEVEL_MEDIUM]'>[current_level == JOB_LEVEL_MEDIUM ? "<font color=eecc22>" : ""]\[Medium][current_level == JOB_LEVEL_MEDIUM ? "</font>" : ""]</a>"
+			. += " <a href='?src=\ref[src];set_job=[rank];set_level=[JOB_LEVEL_LOW]'>[current_level == JOB_LEVEL_LOW ? "<font color=cc5555>" : ""]\[Low][current_level == JOB_LEVEL_LOW ? "</font>" : ""]</a>"
+			. += " <a href='?src=\ref[src];set_job=[rank];set_level=[JOB_LEVEL_NEVER]'>[current_level == JOB_LEVEL_NEVER ? "<font color=black>" : ""]\[NEVER][current_level == JOB_LEVEL_NEVER ? "</font>" : ""]</a>"
+
 		if(job.alt_titles)
-			. += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'>&nbsp</td><td><a href='?src=\ref[src];select_alt_title=\ref[job]'>\[[pref.GetPlayerAltTitle(job)]\]</a></td></tr>"
-		. += "</a></td></tr>"
+			. += "</td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'>&nbsp</td><td><a href='?src=\ref[src];select_alt_title=\ref[job]'>\[[pref.GetPlayerAltTitle(job)]\]</a></td></tr>"
+		. += "</td></tr>"
 	. += "</td'></tr></table>"
 	. += "</center></table><center>"
 
@@ -212,8 +218,8 @@
 				SetPlayerAltTitle(job, choice)
 				return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
-	else if(href_list["set_job"])
-		if(SetJob(user, href_list["set_job"])) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+	else if(href_list["set_job"] && href_list["set_level"])
+		if(SetJob(user, href_list["set_job"], text2num(href_list["set_level"]))) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["char_branch"])
 		var/choice = input(user, "Choose your branch of service.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.char_branch) as null|anything in mil_branches.spawn_branches(preference_species())
@@ -252,43 +258,51 @@
 	if(job.title != new_title)
 		pref.player_alt_titles[job.title] = new_title
 
-/datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role)
+/datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role, level)
 	var/datum/job/job = job_master.GetJob(role)
 	if(!job)
 		return 0
 
 	if(role == "Assistant")
-		if(job.title in pref.job_low)
+		if(level == JOB_LEVEL_NEVER)
 			pref.job_low -= job.title
 		else
 			pref.job_low |= job.title
 		return 1
 
-	if(job.title == pref.job_high)
-		SetJobDepartment(job, 1)
-	else if(job.title in pref.job_medium)
-		SetJobDepartment(job, 2)
-	else if(job.title in pref.job_low)
-		SetJobDepartment(job, 3)
-	else//job = Never
-		SetJobDepartment(job, 4)
+	SetJobDepartment(job, level)
 
 	return 1
 
 /datum/category_item/player_setup_item/occupation/proc/SetJobDepartment(var/datum/job/job, var/level)
 	if(!job || !level)	return 0
-	switch(level)
-		if(1)//Only one of these should ever be active at once so clear them all here
+
+	var/current_level = JOB_LEVEL_NEVER
+	if(pref.job_high == job.title)
+		current_level = JOB_LEVEL_HIGH
+	else if(job.title in pref.job_medium)
+		current_level = JOB_LEVEL_MEDIUM
+	else if(job.title in pref.job_low)
+		current_level = JOB_LEVEL_LOW
+
+	switch(current_level)
+		if(JOB_LEVEL_HIGH)
 			pref.job_high = null
-		if(2)//Set current highs to med, then reset them
-			pref.job_medium |= pref.job_high
-			pref.job_high = job.title
+		if(JOB_LEVEL_MEDIUM)
 			pref.job_medium -= job.title
-		if(3)
-			pref.job_medium |= job.title
+		if(JOB_LEVEL_LOW)
 			pref.job_low -= job.title
-		else
+
+	switch(level)
+		if(JOB_LEVEL_HIGH)
+			if(pref.job_high)
+				pref.job_medium |= pref.job_high
+			pref.job_high = job.title
+		if(JOB_LEVEL_MEDIUM)
+			pref.job_medium |= job.title
+		if(JOB_LEVEL_LOW)
 			pref.job_low |= job.title
+
 	return 1
 
 /datum/preferences/proc/CorrectLevel(var/datum/job/job, var/level)
@@ -358,3 +372,8 @@ datum/category_item/player_setup_item/proc/prune_occupation_prefs()
 
 /datum/preferences/proc/GetPlayerAltTitle(datum/job/job)
 	return (job.title in player_alt_titles) ? player_alt_titles[job.title] : job.title
+
+#undef JOB_LEVEL_NEVER
+#undef SET_LEVE_LOW
+#undef JOB_LEVEL_MEDIUM
+#undef JOB_LEVEL_HIGH
