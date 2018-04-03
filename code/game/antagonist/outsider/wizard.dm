@@ -62,8 +62,13 @@ GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 /datum/antagonist/wizard/update_antag_mob(var/datum/mind/wizard)
 	..()
+	if(ishuman(wizard.mymob))
+		var/mob/living/carbon/human/H = wizard.mymob
+		wizard.current.real_name = "[H.get_random_name(H)] [pick(GLOB.wizard_first)]-[pick(GLOB.wizard_second)]"
+	else
+		wizard.current.real_name = "[pick(GLOB.wizard_first)]-[pick(GLOB.wizard_second)]"
+
 	wizard.store_memory("<B>Remember:</B> do not forget to prepare your spells.")
-	wizard.current.real_name = "[pick(GLOB.wizard_first)] [pick(GLOB.wizard_second)]"
 	wizard.current.SetName(wizard.current.real_name)
 
 /datum/antagonist/wizard/equip(var/mob/living/carbon/human/wizard_mob)
