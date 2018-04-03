@@ -43,7 +43,8 @@
 
 	has_floating_eyes = 1
 
-	darksight = 8
+	darksight_range = 8
+	darksight_tint = DARKTINT_GOOD
 	slowdown = -0.5
 	rarity_value = 4
 	hud_type = /datum/hud_data/nabber

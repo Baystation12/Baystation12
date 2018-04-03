@@ -37,3 +37,9 @@
 // Skin Defines
 #define SKIN_NORMAL 0
 #define SKIN_THREAT 1
+
+// Darkvision Levels these are inverted from normal so pure white is the darkest
+// possible and pure black is none
+#define DARKTINT_NONE      "#ffffff"
+#define DARKTINT_MODERATE  "#f9f9f5"
+#define DARKTINT_GOOD      "#ebebe6"
