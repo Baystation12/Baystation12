@@ -1,10 +1,10 @@
 // Epic Anti-Multiaccount System
 
-/datum/configuration/var/EAMSallowedCountries = list("ru", "am", "az", "bv", "kz", "kg", "mb", "ti", "uz", "ua", "tm")
+/datum/configuration/var/EAMSallowedCountries = list("ru", "am", "az", "by", "kz", "kg", "mb", "ti", "uz", "ua", "tm")
 
 /proc/EAMS_DBError(num)
 	config.eams = 0
-	log_and_message_admins("The Database Error #[num] has occured! Epic Anti-Multiaccount System was deactivated!")
+	log_and_message_admins("The Database Error #[num] has occured! Epic Anti-Multiaccount System was deactivated!", 0)
 
 //
 //	Toggle Verb
@@ -19,7 +19,7 @@
 		return
 
 	config.eams = !config.eams
-	log_and_message_admins("[key_name(usr)] has [config.eams ? "enabled" : "disabled"] the Epic Anti-Multiaccount System!")
+	log_and_message_admins("has [config.eams ? "enabled" : "disabled"] the Epic Anti-Multiaccount System!")
 
 //
 //	Player Panel Button
@@ -77,10 +77,10 @@
 	var/DBQuery/query = null
 
 	if (value)
-		message_admins("INSERT")
+		log_and_message_admins("added [player.ckey] to EAMS whitelist!")
 		query = dbcon.NewQuery("INSERT INTO whitelist_ckey (ckey) VALUES ('[player.ckey]')")
 	else
-		message_admins("DELETE")
+		log_and_message_admins("removed [player.ckey] from EAMS whitelist!")
 		query = dbcon.NewQuery("DELETE FROM whitelist_ckey WHERE ckey='[player.ckey]'")
 
 	if (!query.Execute())
@@ -102,8 +102,8 @@
 		EAMS_DBError(1)
 		return TRUE
 
-	//if(!lastKnownIP || client.holder) // admin or host
-	//	return TRUE
+	if(!lastKnownIP || client.holder) // admin or host
+		return TRUE
 
 	// check country
 	var/DBQuery/query = dbcon.NewQuery("SELECT country FROM ip2nation WHERE ip < INET_ATON(\"[lastKnownIP]\") ORDER BY ip DESC LIMIT 0,1")
@@ -126,7 +126,6 @@
 		return TRUE
 
 	
-
 	// Bad IP and player doesn't whitelisted.. so create Warning
 	query = dbcon.NewQuery("SELECT country FROM ip2nationcountries WHERE code = \"[countryCode]\" LIMIT 1")
 	if (query.Execute())
@@ -134,5 +133,5 @@
 			country = query.item[1]
 
 	usr << "<span class='warning'>You was blocked by EAMS! Please, contact Administrators.</span>"
-	log_and_message_admins("<span class='adminnotice'>Failed join the game: [key] ([lastKnownIP]) connected from [country] ([countryCode]) </span>")
+	log_and_message_admins("<span class='adminnotice'>Failed join the game: [key] ([lastKnownIP]) connected from [country] ([countryCode]) </span>", 0)
 	return FALSE
