@@ -90,7 +90,7 @@
 	else //It's fight time
 		alpha = 255
 		icon_state = "vagrant_glowing"
-		set_light(4)
+		set_light(0.2, 0.1, 3)
 		move_to_delay = 2
 
 /mob/living/simple_animal/hostile/vagrant/AttackingTarget()

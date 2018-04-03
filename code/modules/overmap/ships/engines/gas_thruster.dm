@@ -118,7 +118,7 @@
 	if(flame)
 		icon_state = "exhaust"
 		nloc.hotspot_expose(1000,125)
-		set_light(5, 2)
+		set_light(0.5, 1, 4)
 	set_dir(ndir)
 	spawn(20)
 		qdel(src)

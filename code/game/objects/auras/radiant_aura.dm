@@ -8,7 +8,7 @@
 /obj/aura/radiant_aura/New()
 	..()
 	to_chat(user,"<span class='notice'>A bubble of light appears around you, exuding protection and warmth.</span>")
-	set_light(6,6, "#e09d37")
+	set_light(0.6, 1, 6, 2, "#e09d37")
 
 /obj/aura/radiant_aura/Destroy()
 	to_chat(user, "<span class='warning'>Your protective aura dissipates, leaving you feeling cold and unsafe.</span>")

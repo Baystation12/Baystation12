@@ -9,7 +9,7 @@
 	density = 1
 	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = SINGULARITY_LAYER
-	light_range = 6
+	light_outer_range = 6
 	unacidable = 1 //Don't comment this out.
 
 	var/current_size = 1

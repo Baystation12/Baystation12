@@ -112,7 +112,7 @@
 	if(!linked)
 		return
 	if(sensors && sensors.use_power && sensors.powered())
-		linked.set_light(sensors.range+1, 5)
+		linked.set_light(1, sensors.range, sensors.range+1)
 	else
 		linked.set_light(0)
 

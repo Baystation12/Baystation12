@@ -10,8 +10,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "bcircuit"
 	initial_flooring = /decl/flooring/reinforced/circuit
-	light_range = 2
-	light_power = 3
+	light_outer_range = 2
+	light_max_bright = 3
 	light_color = COLOR_BLUE
 
 /turf/simulated/floor/bluegrid/airless
@@ -22,8 +22,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "gcircuit"
 	initial_flooring = /decl/flooring/reinforced/circuit/green
-	light_range = 2
-	light_power = 3
+	light_outer_range = 2
+	light_max_bright = 3
 	light_color = COLOR_GREEN
 
 /turf/simulated/floor/blackgrid
@@ -31,8 +31,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "rcircuit"
 	initial_flooring = /decl/flooring/reinforced/circuit/red
-	light_range = 2
-	light_power = 2
+	light_outer_range = 2
+	light_max_bright = 2
 	light_color = COLOR_RED
 
 /turf/simulated/floor/greengrid/airless
