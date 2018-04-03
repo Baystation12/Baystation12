@@ -1,5 +1,0 @@
-author: "chaoko99"
-delete-after: True
-changes: 
-  - bugfix: "T-rays actually work on ninjas now."
-  - tweak: "Portable atmospherics devices will now work off an APC if available."
