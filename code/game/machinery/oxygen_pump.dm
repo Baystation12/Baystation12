@@ -48,12 +48,13 @@
 		if(!can_apply_to_target(target, usr)) // There is no point in attempting to apply a mask if it's impossible.
 			return
 		usr.visible_message("\The [usr] begins placing the mask onto [target]..")
-		if(!do_mob(usr, target, 25) || !can_apply_to_target(target, usr))
-			return
-		// place mask and add fingerprints
-		usr.visible_message("\The [usr] has placed \the mask on [target]'s mouth.")
-		attach_mask(target)
-		src.add_fingerprint(usr)
+		if(do_mob(usr, target, 25))
+			if(!can_apply_to_target(target, usr))
+				return
+			// place mask and add fingerprints
+			usr.visible_message("\The [usr] has placed \the mask on [target]'s mouth.")
+			attach_mask(target)
+			src.add_fingerprint(usr)
 
 
 /obj/machinery/oxygen_pump/attack_hand(mob/user as mob)
@@ -68,15 +69,10 @@
 		to_chat(user, "<span class='warning'>There is no tank in \the [src]!</span>")
 		return
 	if(breather)
-		if(tank)
-			tank.forceMove(src)
-		breather.remove_from_mob(contained)
-		contained.forceMove(src)
-		src.visible_message("<span class='notice'>\The [user] makes \The [contained] rapidly retracts back into \the [src]!</span>")
-		if(breather.internals)
-			breather.internals.icon_state = "internal0"
-		breather = null
-		use_power = 1
+		detach_mask(user)
+	else
+		ui_interact(usr)
+
 
 /obj/machinery/oxygen_pump/attack_ai(mob/user as mob)
 	ui_interact(user)
@@ -88,12 +84,28 @@
 		if(tank)
 			tank.forceMove(C)
 		breather = C
-		spawn(1)
-		if(!breather.internal && tank)
-			breather.internal = tank
-			if(breather.internals)
-				breather.internals.icon_state = "internal1"
+
+/obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/carbon/C)
+	if(C && istype(C))
+		if(!C.internal && tank)
+			C.internal = tank
+			if(C.internals)
+				C.internals.icon_state = "internal1"
 		use_power = 2
+
+/obj/machinery/oxygen_pump/proc/detach_mask(mob/user)
+	if(tank)
+		tank.forceMove(src)
+	breather.remove_from_mob(contained)
+	contained.forceMove(src)
+	if(user)
+		visible_message("<span class='notice'>\The [user] detaches \the [contained] and it rapidly retracts back into \the [src]!</span>")
+	else
+		visible_message("<span class='notice'>\The [contained] rapidly retracts back into \the [src]!</span>")
+	if(breather.internals)
+		breather.internals.icon_state = "internal0"
+	breather = null
+	use_power = 1
 
 /obj/machinery/oxygen_pump/proc/can_apply_to_target(var/mob/living/carbon/human/target, mob/user as mob)
 	if(!user)
@@ -162,17 +174,9 @@
 /obj/machinery/oxygen_pump/Process()
 	if(breather)
 		if(!can_apply_to_target(breather))
-			if(tank)
-				tank.forceMove(src)
-			breather.remove_from_mob(contained)
-			contained.forceMove(src)
-			src.visible_message("<span class='notice'>\The [contained] rapidly retracts back into \the [src]!</span>")
-			breather = null
-			use_power = 1
+			detach_mask()
 		else if(!breather.internal && tank)
-			breather.internal = tank
-			if(breather.internals)
-				breather.internals.icon_state = "internal0"
+			set_internals(breather)
 
 
 //Create rightclick to view tank settings
