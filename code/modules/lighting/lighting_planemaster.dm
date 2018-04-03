@@ -28,6 +28,7 @@
 	blend_mode = BLEND_MULTIPLY
 
 /obj/lighting_general/Initialize()
+	. = ..()
 	var/matrix/M = matrix()
 	M.Scale(world.view*2.2)
 

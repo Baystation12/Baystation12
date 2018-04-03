@@ -130,7 +130,7 @@
 
 /obj/structure/magshield/nav_light/New()//try make flashing through the process
 	..()
-	set_light(light_max_bright, light_outer_range / 6, light_outer_range, light_color)
+	set_light(light_max_bright, light_outer_range / 6, light_outer_range, 2, light_color)
 
 /obj/structure/magshield/nav_light/red
 	desc = "Large and bright light regularly emitting red flashes."
