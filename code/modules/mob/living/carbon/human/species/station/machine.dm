@@ -17,6 +17,7 @@
 	num_alternate_languages = 2
 	strength = STR_HIGH
 	name_language = LANGUAGE_EAL
+	eye_icon = null
 
 	min_age = 1
 	max_age = 90
@@ -52,20 +53,6 @@
 		)
 
 	vision_organ = BP_OPTICS
-
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/no_eyes),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
-		)
 
 	heat_discomfort_level = 373.15
 	heat_discomfort_strings = list(

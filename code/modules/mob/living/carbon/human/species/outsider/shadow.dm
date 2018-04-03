@@ -10,6 +10,7 @@
 	darksight = 8
 	has_organ = list()
 	siemens_coefficient = 0
+	eye_icon = null
 
 	blood_color = "#cccccc"
 	flesh_color = "#aaaaaa"

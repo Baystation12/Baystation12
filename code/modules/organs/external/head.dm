@@ -17,13 +17,19 @@
 	cavity_name = "cranial"
 
 	var/can_intake_reagents = 1
-	var/eye_icon = "eyes_s"
-	var/eye_icon_location = 'icons/mob/human_face.dmi'
-
 	var/has_lips = 1
-
 	var/forehead_graffiti
 	var/graffiti_style
+
+	var/original_eye_icon
+
+/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
+	if(istype(human))
+		original_eye_icon = human.species.icobase
+	var/obj/item/organ/internal/eyes/eyes = human.internal_organs_by_name[BP_EYES]
+	if(eyes)
+		eyes.update_colour()
+	..(human)
 
 /obj/item/organ/external/head/examine(mob/user)
 	. = ..()
@@ -63,11 +69,6 @@
 			forehead_graffiti = graffiti
 			graffiti_style = style
 
-/obj/item/organ/external/head/set_dna(var/datum/dna/new_dna)
-	..()
-	eye_icon = species.eye_icon
-	eye_icon_location = species.eye_icon_location
-
 /obj/item/organ/external/head/get_agony_multiplier()
 	return (owner && owner.headcheck(organ_tag)) ? 1.50 : 1
 
@@ -76,11 +77,11 @@
 		var/datum/robolimb/R = all_robolimbs[company]
 		if(R)
 			can_intake_reagents = R.can_eat
-			eye_icon = R.use_eye_icon
-	. = ..(company, skip_prosthetics, 1)
 	has_lips = null
+	. = ..(company, skip_prosthetics, 1)
 
 /obj/item/organ/external/head/removed()
+	update_icon(1)
 	if(owner)
 		SetName("[owner.real_name]'s head")
 		owner.drop_from_inventory(owner.glasses)
@@ -90,6 +91,7 @@
 		owner.drop_from_inventory(owner.wear_mask)
 		spawn(1)
 			owner.update_hair()
+			owner.update_eyes()
 	..()
 
 /obj/item/organ/external/head/take_damage(brute, burn, damage_flags, used_weapon = null)
@@ -101,30 +103,27 @@
 		if (burn_dam > 40)
 			disfigure("burn")
 
-/obj/item/organ/external/head/no_eyes
-	eye_icon = "blank_eyes"
-
-/obj/item/organ/external/head/update_icon()
-
-	..()
+// This badly, badly needs caching.
+/obj/item/organ/external/head/update_icon(var/regenerate = 0)
+	..(regenerate)
 
 	if(owner)
-		if(eye_icon)
-			var/icon/eyes_icon = new/icon(eye_icon_location, eye_icon)
-			var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[owner.species.vision_organ ? owner.species.vision_organ : BP_EYES]
-			if(eyes)
-				eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
-			else
-				eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
-			mob_icon.Blend(eyes_icon, ICON_OVERLAY)
-			overlays |= eyes_icon
-
+		var/list/overlays_to_add = list()
+		overlays_to_add += species.get_eyes(owner)
 		if(owner.lip_style && robotic < ORGAN_ROBOT && (species && (species.appearance_flags & HAS_LIPS)))
 			var/icon/lip_icon = new/icon('icons/mob/human_face.dmi', "lips_[owner.lip_style]_s")
-			overlays |= lip_icon
+			overlays_to_add += lip_icon
 			mob_icon.Blend(lip_icon, ICON_OVERLAY)
+		overlays |= overlays_to_add
 
-		overlays |= get_hair_icon()
+	//Head markings, duplicated (sadly) below.
+	for(var/M in markings)
+		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+		var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
+		mark_s.Blend(markings[M]["color"], mark_style.blend)
+		overlays |= mark_s //So when it's not on your body, it has icons
+		mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
+		icon_cache_key += "[M][markings[M]["color"]]"
 
 	return mob_icon
 

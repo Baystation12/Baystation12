@@ -863,6 +863,7 @@ var/list/admin_verbs_mentor = list(
 			M.gender = NEUTER
 
 	M.update_hair()
+	M.update_eyes()
 	M.update_body()
 	M.check_dna(M)
 

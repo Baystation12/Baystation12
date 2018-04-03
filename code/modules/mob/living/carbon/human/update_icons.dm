@@ -128,18 +128,20 @@ Please contact me on #coderbus IRC. ~Carn x
 #define BELT_LAYER_ALT			14
 #define SUIT_STORE_LAYER		15
 #define BACK_LAYER				16
-#define HAIR_LAYER				17		//TODO: make part of head layer?
-#define GOGGLES_LAYER			18
-#define EARS_LAYER				19
-#define FACEMASK_LAYER			20
-#define HEAD_LAYER				21
-#define COLLAR_LAYER			22
-#define HANDCUFF_LAYER			23
-#define L_HAND_LAYER			24
-#define R_HAND_LAYER			25
-#define FIRE_LAYER				26		//If you're on fire
-#define TARGETED_LAYER			27		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			27
+#define EYE_LAYER				17
+#define FLOATING_EYE_LAYER		18
+#define HAIR_LAYER				19		//TODO: make part of head layer?
+#define GOGGLES_LAYER			20
+#define EARS_LAYER				21
+#define FACEMASK_LAYER			22
+#define HEAD_LAYER				23
+#define COLLAR_LAYER			24
+#define HANDCUFF_LAYER			25
+#define L_HAND_LAYER			26
+#define R_HAND_LAYER			27
+#define FIRE_LAYER				28		//If you're on fire
+#define TARGETED_LAYER			29		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			29
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -159,7 +161,6 @@ Please contact me on #coderbus IRC. ~Carn x
 
 			icon = 'icons/mob/human.dmi'
 			icon_state = "blank"
-
 			visible_overlays = list(visible_overlays[R_HAND_LAYER], visible_overlays[L_HAND_LAYER])
 
 		else
@@ -178,8 +179,6 @@ Please contact me on #coderbus IRC. ~Carn x
 				for(var/image/overlay in entry)
 					overlay.transform = M
 					overlays += overlay
-		if(species.has_floating_eyes)
-			overlays |= species.get_eyes(src)
 
 	if(auras)
 		overlays |= auras
@@ -270,11 +269,6 @@ var/global/list/damage_icon_parts = list()
 		icon_key += "[lip_style]"
 	else
 		icon_key += "nolips"
-	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
-	if(istype(eyes))
-		icon_key += "[rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])]"
-	else
-		icon_key += "#000000"
 
 	for(var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
@@ -363,6 +357,8 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		update_icons()
 
+	. = ..()
+
 //UNDERWEAR OVERLAY
 
 /mob/living/carbon/human/proc/update_underwear(var/update_icons=1)
@@ -377,6 +373,24 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[UNDERWEAR_LAYER] += I
 
 	if(update_icons)   update_icons()
+
+/mob/living/carbon/human/proc/update_eyes(var/update_icons=1)
+
+	overlays_standing[EYE_LAYER] = null
+	overlays_standing[FLOATING_EYE_LAYER] = null
+
+	if(!(head && (head.flags_inv & HIDEEYES)) && !(wear_mask && (wear_mask.flags_inv & HIDEEYES)))
+		var/image/I = species.get_eyes(src)
+		if(I)
+			if(species.has_floating_eyes)
+				I.plane = LIGHTING_PLANE
+				I.layer = ABOVE_LIGHTING_LAYER
+				overlays_standing[FLOATING_EYE_LAYER] = I
+			else
+				overlays_standing[EYE_LAYER] = I
+
+	if(update_icons)
+		update_icons()
 
 //HAIR OVERLAY
 /mob/living/carbon/human/proc/update_hair(var/update_icons=1)
@@ -441,6 +455,7 @@ var/global/list/damage_icon_parts = list()
 	update_skin(0)
 	update_underwear(0)
 	update_hair(0)
+	update_eyes(0)
 	update_inv_w_uniform(0)
 	update_inv_wear_id(0)
 	update_inv_gloves(0)
@@ -778,6 +793,8 @@ var/global/list/damage_icon_parts = list()
 #undef BELT_LAYER
 #undef SUIT_STORE_LAYER
 #undef BACK_LAYER
+#undef EYE_LAYER
+#undef FLOATING_EYE_LAYER
 #undef HAIR_LAYER
 #undef HEAD_LAYER
 #undef COLLAR_LAYER

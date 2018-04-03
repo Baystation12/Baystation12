@@ -87,4 +87,4 @@
 /obj/item/organ/external/head/unbreakable/slime
 	nonsolid = 1
 	max_damage = 15
-	eye_icon = "blank_eyes"
+
