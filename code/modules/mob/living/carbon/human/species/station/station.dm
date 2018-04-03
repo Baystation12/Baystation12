@@ -84,7 +84,8 @@
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
 	default_h_style = "Tajaran Ears"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	darksight = 8
+	darksight_range = 8
+	darksight_tint = DARKTINT_GOOD
 	slowdown = -0.5
 	brute_mod = 1.15
 	burn_mod =  1.15
@@ -174,7 +175,8 @@
 
 	body_temperature = null // cold-blooded, implemented the same way nabbers do it
 
-	darksight = 4
+	darksight_range = 4
+	darksight_tint = DARKTINT_MODERATE
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
