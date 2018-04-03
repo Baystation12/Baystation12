@@ -4,15 +4,15 @@
 
 // #define EMPDEBUG 10
 
-proc/empulse(turf/epicenter, heavy_range, light_outer_range, log=0)
+proc/empulse(turf/epicenter, heavy_range, light_range, log=0)
 	if(!epicenter) return
 
 	if(!istype(epicenter, /turf))
 		epicenter = get_turf(epicenter.loc)
 
 	if(log)
-		message_admins("EMP with size ([heavy_range], [light_outer_range]) in area [epicenter.loc.name] ")
-		log_game("EMP with size ([heavy_range], [light_outer_range]) in area [epicenter.loc.name] ")
+		message_admins("EMP with size ([heavy_range], [light_range]) in area [epicenter.loc.name] ")
+		log_game("EMP with size ([heavy_range], [light_range]) in area [epicenter.loc.name] ")
 
 	if(heavy_range > 1)
 		var/obj/effect/overlay/pulse = new/obj/effect/overlay(epicenter)
@@ -23,13 +23,13 @@ proc/empulse(turf/epicenter, heavy_range, light_outer_range, log=0)
 		spawn(20)
 			qdel(pulse)
 
-	if(heavy_range > light_outer_range)
-		light_outer_range = heavy_range
+	if(heavy_range > light_range)
+		light_range = heavy_range
 
 	for(var/mob/M in range(heavy_range, epicenter))
 		sound_to(M, 'sound/effects/EMPulse.ogg')
 
-	for(var/atom/T in range(light_outer_range, epicenter))
+	for(var/atom/T in range(light_range, epicenter))
 		#ifdef EMPDEBUG
 		var/time = world.timeofday
 		#endif
@@ -43,7 +43,7 @@ proc/empulse(turf/epicenter, heavy_range, light_outer_range, log=0)
 				T.emp_act(1)
 			else
 				T.emp_act(2)
-		else if(distance <= light_outer_range)
+		else if(distance <= light_range)
 			T.emp_act(2)
 		#ifdef EMPDEBUG
 		if((world.timeofday - time) >= EMPDEBUG)

@@ -33,7 +33,7 @@ atom: (lighting_atom.dm)
   - var/datum/light_source/light; light source datum for this atom, only present if light_range && light_power
   - var/list/light_sources; light sources in contents that are shining through this object, including this object
 
-  - proc/set_light(l_range, l_power, l_color):
+  - proc/set_light(l_max_bright, l_inner_range, l_outer_range, l_falloff_curve, l_color):
 	  - Sets light_range/power/color to non-null args and calls update_light()
   - proc/set_opacity(new_opacity):
 	  - Sets opacity to new_opacity.
