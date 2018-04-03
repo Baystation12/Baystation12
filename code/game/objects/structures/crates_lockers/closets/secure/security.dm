@@ -92,8 +92,7 @@
 /obj/structure/closet/secure_closet/hos/WillContain()
 	return list(
 		/obj/item/clothing/head/HoS,
-		/obj/item/clothing/suit/armor/hos/jensen,
-		/obj/item/clothing/suit/armor/hos,
+		/obj/item/clothing/suit/storage/vest/nt/hos,
 		/obj/item/weapon/cartridge/hos,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
@@ -220,7 +219,7 @@
 		/obj/item/clothing/shoes/laceup,
 		/obj/item/weapon/storage/box/evidence,
 		/obj/item/device/radio/headset/headset_sec,
-		/obj/item/clothing/suit/armor/vest/detective,
+		/obj/item/clothing/suit/storage/vest/nt/warden,
 		/obj/item/ammo_magazine/m127_saphp,
 		/obj/item/taperoll/police,
 		/obj/item/weapon/gun/projectile/m6c_magnum_s,
@@ -308,6 +307,7 @@
 		/obj/item/clothing/suit/storage/forensics/red,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/laceup,
+		/obj/item/clothing/suit/storage/vest/nt/warden,
 		/obj/item/clothing/shoes/white,
 		/obj/item/weapon/storage/box/evidence,
 		/obj/item/device/radio/headset/headset_sec,
