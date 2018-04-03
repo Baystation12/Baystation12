@@ -7808,16 +7808,12 @@
 /area/security/wing)
 "pv" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/table/rack,
-/obj/item/weapon/shield/riot,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
 /obj/structure/window/reinforced,
 /obj/machinery/light,
-/obj/item/weapon/shield/riot,
-/obj/item/weapon/shield/riot,
-/obj/item/weapon/shield/riot,
+/obj/machinery/mech_recharger,
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "pw" = (
@@ -7832,6 +7828,9 @@
 /obj/item/clothing/head/helmet/riot,
 /obj/item/clothing/head/helmet/riot,
 /obj/item/clothing/head/helmet/riot,
+/obj/item/weapon/shield/riot,
+/obj/item/weapon/shield/riot,
+/obj/item/weapon/shield/riot,
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "px" = (
