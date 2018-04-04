@@ -29,10 +29,10 @@
 /area/space)
 "af" = (
 /turf/simulated/wall/r_wall,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "ag" = (
 /turf/simulated/wall/r_wall,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "ah" = (
 /obj/structure/cable/yellow{
 	d2 = 2;
@@ -49,31 +49,31 @@
 /obj/structure/largecrate,
 /obj/effect/decal/cleanable/cobweb,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aj" = (
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "ak" = (
 /obj/structure/bed/chair/comfy/teal,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "al" = (
 /turf/simulated/wall,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "am" = (
 /obj/random/closet,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "an" = (
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "ao" = (
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "ap" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -86,25 +86,25 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aq" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "ar" = (
 /obj/structure/dispenser/oxygen,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "as" = (
 /obj/structure/closet,
 /obj/random/tech_supply,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "at" = (
 /obj/machinery/space_heater,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "au" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/yellow{
@@ -154,7 +154,7 @@
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "ay" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -162,7 +162,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "az" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
@@ -196,7 +196,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aB" = (
 /obj/structure/grille,
 /obj/structure/cable/green{
@@ -205,7 +205,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -228,7 +228,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -250,7 +250,7 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -267,7 +267,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -285,10 +285,10 @@
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aG" = (
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "aH" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/yellow{
@@ -314,18 +314,18 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aK" = (
 /turf/simulated/wall/r_wall,
 /area/crew_quarters/heads/cobed)
 "aL" = (
 /obj/structure/grille,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aM" = (
 /obj/structure/grille/broken,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -339,7 +339,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aO" = (
 /turf/simulated/wall/r_wall,
 /area/crew_quarters/heads/office/xo)
@@ -353,23 +353,23 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "aQ" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "aR" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "aS" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "aT" = (
 /obj/random/storage,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "aU" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -551,7 +551,7 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "bh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -573,7 +573,7 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "bi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -594,7 +594,7 @@
 	req_access = list(12)
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "bj" = (
 /obj/structure/table/woodentable_reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -608,11 +608,11 @@
 "bm" = (
 /obj/random/closet,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "bo" = (
 /obj/random/plushie/large,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "bq" = (
 /turf/simulated/wall/r_wall,
 /area/crew_quarters/heads/office/co)
@@ -659,7 +659,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "bz" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -676,7 +676,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "bB" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -694,13 +694,13 @@
 	dir = 10
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "bC" = (
 /turf/simulated/wall,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "bD" = (
 /turf/simulated/wall/r_wall,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "bE" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/yellow{
@@ -718,7 +718,7 @@
 "bG" = (
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "bH" = (
 /obj/structure/toilet{
 	dir = 4
@@ -797,15 +797,15 @@
 "cb" = (
 /obj/machinery/power/port_gen/pacman,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "cc" = (
 /obj/random/obstruction,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "cd" = (
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "ce" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -816,7 +816,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "cf" = (
 /obj/structure/cable/green{
 	d2 = 4;
@@ -837,7 +837,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "cg" = (
 /obj/effect/floor_decal/corner/grey/three_quarters,
 /obj/machinery/keycard_auth{
@@ -857,13 +857,13 @@
 	RCon_tag = "Bridge Substation Bypass"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "ci" = (
 /obj/structure/table/rack,
 /obj/random/tech_supply,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "cj" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -937,7 +937,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "cI" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -961,7 +961,7 @@
 	icon_state = "intact"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "cJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -979,7 +979,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "cK" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -1001,7 +1001,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "cL" = (
 /obj/machinery/power/terminal{
 	icon_state = "term";
@@ -1018,7 +1018,7 @@
 	d2 = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "cM" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -1041,7 +1041,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "cN" = (
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers{
 	color = "#ff0000";
@@ -1058,7 +1058,7 @@
 	},
 /obj/structure/lattice,
 /turf/simulated/open,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "cO" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/yellow{
@@ -1090,7 +1090,7 @@
 /obj/structure/table/rack,
 /obj/random/toolbox,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "cT" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -1317,7 +1317,7 @@
 	target_pressure = 200
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "ds" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -1329,11 +1329,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "dt" = (
 /obj/structure/sign/warning/high_voltage,
 /turf/simulated/wall,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "du" = (
 /obj/structure/cable/green,
 /obj/machinery/power/apc{
@@ -1345,7 +1345,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "dv" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -1356,7 +1356,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "dw" = (
 /obj/machinery/firealarm{
 	dir = 4;
@@ -1370,7 +1370,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "dx" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/green{
@@ -1528,7 +1528,7 @@
 "dZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "ea" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/green{
@@ -1617,7 +1617,7 @@
 	req_one_access = newlist()
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "en" = (
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
@@ -1922,7 +1922,7 @@
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "fe" = (
 /obj/machinery/firealarm{
 	dir = 4;
@@ -1947,7 +1947,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "fg" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -1966,7 +1966,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "fh" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -1988,7 +1988,7 @@
 	icon_state = "intact"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "fi" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/green{
@@ -2479,7 +2479,7 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "gi" = (
 /turf/simulated/wall,
 /area/shield/bridge)
@@ -3908,7 +3908,7 @@
 "ji" = (
 /obj/machinery/papershredder,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "jj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -4229,7 +4229,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "jY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
@@ -6387,7 +6387,7 @@
 /area/security/bridgecheck)
 "oh" = (
 /turf/simulated/wall,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "oi" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -6401,7 +6401,7 @@
 	req_access = list(12)
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "oj" = (
 /obj/effect/floor_decal/scglogo{
 	icon_state = "0,2";
@@ -6675,7 +6675,7 @@
 /area/security/bridgecheck)
 "oS" = (
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "oT" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -6686,7 +6686,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "oW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -8850,7 +8850,7 @@
 	RCon_tag = "Substation - Bridge Deck"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
+/area/maintenance/torch/substation/bridge)
 "tc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/plating,
@@ -8888,7 +8888,7 @@
 /area/aquila_hangar/start)
 "tg" = (
 /turf/simulated/wall/r_wall,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "th" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -9157,7 +9157,7 @@
 /area/crew_quarters/heads/office/rd)
 "tF" = (
 /turf/simulated/wall/r_wall,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "tH" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -9170,7 +9170,7 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "tI" = (
 /obj/structure/table/rack,
 /obj/random/solgov,
@@ -9233,7 +9233,7 @@
 	req_one_access = newlist()
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "tR" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -9553,7 +9553,7 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "uu" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -9572,7 +9572,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "uv" = (
 /obj/effect/floor_decal/industrial/warning/cee{
 	icon_state = "warningcee";
@@ -9590,7 +9590,7 @@
 /obj/structure/closet/toolcloset,
 /obj/random/action_figure,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "uy" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -9598,7 +9598,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "uB" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/box/lights/mixed,
@@ -9813,10 +9813,10 @@
 /area/crew_quarters/heads/office/rd)
 "uX" = (
 /turf/simulated/wall,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "uY" = (
 /turf/simulated/wall/r_wall,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "uZ" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -9841,7 +9841,7 @@
 "vc" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "vd" = (
 /obj/machinery/power/shield_generator,
 /obj/structure/cable/green{
@@ -10021,7 +10021,7 @@
 	dir = 4
 	},
 /turf/simulated/open,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "vF" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -10032,11 +10032,11 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "vG" = (
 /obj/structure/sign/warning/airlock,
 /turf/simulated/wall,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "vI" = (
 /obj/machinery/power/terminal{
 	dir = 8
@@ -10049,13 +10049,13 @@
 	dir = 1
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "vJ" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "vK" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
@@ -10071,7 +10071,7 @@
 /area/space)
 "vM" = (
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "vN" = (
 /obj/structure/curtain/open/bed,
 /turf/simulated/floor/tiled/dark,
@@ -10290,7 +10290,7 @@
 "wi" = (
 /obj/machinery/photocopier,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "wj" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/disposalpipe/segment{
@@ -10312,7 +10312,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "wk" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -10329,7 +10329,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "wl" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -10350,7 +10350,7 @@
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "wm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -10369,7 +10369,7 @@
 	pixel_x = 0
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
@@ -10385,7 +10385,7 @@
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wo" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -10397,7 +10397,7 @@
 	target_pressure = 200
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wp" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -10420,7 +10420,7 @@
 	req_access = list(11,13)
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wq" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -10439,7 +10439,7 @@
 	req_access = list(11,13)
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "ws" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -10456,7 +10456,7 @@
 	req_access = list(11,13)
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wt" = (
 /obj/machinery/access_button{
 	command = "cycle_exterior";
@@ -10711,7 +10711,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "wQ" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -10726,7 +10726,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "wR" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -10734,11 +10734,11 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "wS" = (
 /obj/structure/sign/warning/high_voltage,
 /turf/simulated/wall,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wT" = (
 /obj/structure/cable,
 /obj/machinery/power/apc{
@@ -10747,7 +10747,7 @@
 	pixel_y = -24
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wU" = (
 /obj/item/weapon/stool,
 /obj/machinery/alarm{
@@ -10756,7 +10756,7 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wV" = (
 /obj/structure/cable/yellow,
 /obj/machinery/power/solar_control{
@@ -10765,11 +10765,11 @@
 	track = 1
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wW" = (
 /obj/structure/sign/warning/airlock,
 /turf/simulated/wall/r_wall,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "wX" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -10793,20 +10793,20 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "xa" = (
 /obj/structure/closet/crate,
 /obj/random/junk,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xb" = (
 /obj/structure/closet/crate,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xc" = (
 /turf/simulated/wall,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xd" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10819,7 +10819,7 @@
 "xe" = (
 /obj/machinery/computer/arcade,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xf" = (
 /obj/effect/floor_decal/corner/blue/three_quarters,
 /obj/structure/closet/emcloset,
@@ -10843,7 +10843,7 @@
 "xh" = (
 /obj/random/junk,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xi" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -10861,7 +10861,7 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xj" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -10878,7 +10878,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xk" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -10899,7 +10899,7 @@
 	req_access = list(12)
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xl" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -10916,7 +10916,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "xm" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -10937,7 +10937,7 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "xn" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -10955,11 +10955,11 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "xo" = (
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "xp" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10973,7 +10973,7 @@
 	req_access = list(12)
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xq" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -10985,7 +10985,7 @@
 	pixel_x = -24
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xr" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10996,20 +10996,20 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xs" = (
 /obj/structure/closet,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xt" = (
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "xu" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "xv" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -11018,7 +11018,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "xw" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -11026,7 +11026,7 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xx" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -11034,7 +11034,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xy" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -11043,7 +11043,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xz" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -11066,7 +11066,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xA" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -11088,7 +11088,7 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xB" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -11107,7 +11107,7 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xD" = (
 /obj/structure/cable{
 	d1 = 32;
@@ -11116,36 +11116,36 @@
 	},
 /obj/structure/lattice,
 /turf/simulated/open,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "xE" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xF" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xG" = (
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xH" = (
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xI" = (
 /obj/structure/largecrate,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xJ" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xK" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -11153,11 +11153,11 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xL" = (
 /obj/machinery/space_heater,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "xP" = (
 /obj/effect/landmark/map_data{
 	height = 5
@@ -12229,7 +12229,7 @@
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov/clean,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "Gj" = (
 /obj/effect/floor_decal/scglogo{
 	icon_state = "2,1";
@@ -12401,7 +12401,7 @@
 "Hi" = (
 /obj/random/obstruction,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "Hj" = (
 /obj/effect/floor_decal/scglogo{
 	icon_state = "2,2";
@@ -13126,7 +13126,7 @@
 "Ji" = (
 /obj/random/obstruction,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "Jj" = (
 /obj/structure/table/woodentable,
 /turf/simulated/floor/tiled/dark,
@@ -13196,7 +13196,7 @@
 	},
 /obj/random/maintenance/solgov/clean,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "Kj" = (
 /obj/structure/bed/chair{
 	dir = 8
@@ -13230,7 +13230,7 @@
 /obj/effect/wingrille_spawn/reinforced/full,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/forestarboard)
+/area/maintenance/torch/bridge/forestarboard)
 "Ld" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -13330,7 +13330,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "Mb" = (
 /obj/effect/floor_decal/corner/purple/diagonal{
 	dir = 4
@@ -13402,7 +13402,7 @@
 /obj/effect/wingrille_spawn/reinforced/full,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/foreport)
+/area/maintenance/torch/bridge/foreport)
 "Mh" = (
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -13441,7 +13441,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "Nb" = (
 /obj/machinery/requests_console{
 	announcementConsole = 1;
@@ -13685,7 +13685,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "Pd" = (
 /obj/structure/table/woodentable,
 /obj/structure/cable/green{
@@ -13754,7 +13754,7 @@
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov/clean,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftport)
+/area/maintenance/torch/bridge/aftport)
 "Pi" = (
 /turf/simulated/wall/r_wall,
 /area/bridge/disciplinary_board_room)
@@ -13878,7 +13878,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "Qj" = (
 /obj/effect/floor_decal/corner/blue{
 	icon_state = "corner_white";
@@ -14002,7 +14002,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "Rj" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/folder/blue,
@@ -14178,7 +14178,7 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/auxsolarbridge)
+/area/maintenance/torch/auxsolarbridge)
 "Td" = (
 /obj/structure/table/steel,
 /obj/structure/cable/green{
@@ -14736,7 +14736,7 @@
 "Xi" = (
 /obj/random/junk,
 /turf/simulated/floor/plating,
-/area/maintenance/bridge/aftstarboard)
+/area/maintenance/torch/bridge/aftstarboard)
 "Xj" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;

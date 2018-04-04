@@ -98,6 +98,8 @@
 	#include "../../code/modules/lobby_music/lysendraa.dm"
 	#include "../../code/modules/lobby_music/lasers.dm"
 
+	#include "unit_test/maint_light.dm"
+
 	#define using_map_DATUM /datum/map/torch
 
 #elif !defined(MAP_OVERRIDE)
