@@ -54,3 +54,6 @@
 	var/obj/item/weapon/computer_hardware/tesla_link/tesla_link						// Tesla Link, Allows remote charging from nearest APC.
 
 	var/modifiable = TRUE	// can't be modified or damaged if false
+
+	var/stores_pen = FALSE
+	var/obj/item/weapon/pen/stored_pen

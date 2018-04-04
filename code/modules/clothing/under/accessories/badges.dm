@@ -86,15 +86,15 @@
 		return 1
 
 /obj/item/clothing/accessory/badge/holo/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/modular_computer/pda))
+	if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/modular_computer))
 
 		var/obj/item/weapon/card/id/id_card = null
 
 		if(istype(O, /obj/item/weapon/card/id))
 			id_card = O
 		else
-			var/obj/item/modular_computer/pda/pda = O
-			id_card = pda.GetIdCard()
+			var/obj/item/modular_computer/computer = O
+			id_card = computer.GetIdCard()
 
 		if(!id_card)
 			return

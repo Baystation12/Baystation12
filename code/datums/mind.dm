@@ -451,13 +451,8 @@
 	var/is_currently_brigged = 0
 	if(istype(T.loc,/area/security/brig))
 		is_currently_brigged = 1
-		for(var/obj/item/weapon/card/id/card in current)
+		if(current.GetIdCard())
 			is_currently_brigged = 0
-			break // if they still have ID they're not brigged
-		for(var/obj/item/modular_computer/pda/P in current)
-			if(P.GetIdCard())
-				is_currently_brigged = 0
-				break // if they still have ID they're not brigged
 
 	if(!is_currently_brigged)
 		brigged_since = -1

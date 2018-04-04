@@ -101,10 +101,10 @@
 /datum/nano_module/email_client/proc/log_in()
 	var/list/id_login
 
-	if(istype(host, /obj/item/modular_computer/pda))
-		var/obj/item/modular_computer/pda/pda = host
-		if(pda.GetIdCard())
-			var/obj/item/weapon/card/id/id = pda.GetIdCard()
+	if(istype(host, /obj/item/modular_computer))
+		var/obj/item/modular_computer/computer = host
+		if(computer.GetIdCard())
+			var/obj/item/weapon/card/id/id = computer.GetIdCard()
 			id_login = id.associated_email_login.Copy()
 
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)

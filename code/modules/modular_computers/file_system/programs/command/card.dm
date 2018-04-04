@@ -27,7 +27,7 @@
 		data["have_id_slot"] = !!program.computer.card_slot
 		data["have_printer"] = !!program.computer.nano_printer
 		data["authenticated"] = program.can_run(user)
-		if(!program.computer.card_slot)
+		if(!program.computer.card_slot || !program.computer.card_slot.can_write)
 			mod_mode = 0 //We can't modify IDs when there is no card reader
 	else
 		data["have_id_slot"] = 0

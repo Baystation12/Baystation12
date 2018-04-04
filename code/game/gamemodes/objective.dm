@@ -141,10 +141,7 @@ datum/objective/anti_revolution/brig
 
 /datum/objective/anti_revolution/demote/check_completion()
 	if(target && target.current && istype(target,/mob/living/carbon/human))
-		var/obj/item/weapon/card/id/I = target.current:wear_id
-		if(istype(I, /obj/item/modular_computer/pda))
-			var/obj/item/modular_computer/pda/P = I
-			I = P.GetIdCard()
+		var/obj/item/weapon/card/id/I = target.current.GetIdCard()
 
 		if(!istype(I)) return 1
 
