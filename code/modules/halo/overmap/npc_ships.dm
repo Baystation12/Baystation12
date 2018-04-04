@@ -35,6 +35,11 @@
 
 	var/list/projectiles_to_spawn = list()
 
+/obj/effect/overmap/ship/npc_ship/proc/can_board() //So this sort of stuff can be overidden later down the line for things like cargo shuttles.
+	if(ship.hull > initial(ship.hull)/4)
+		return 1
+	return 0
+
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
 	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
 		return
