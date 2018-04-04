@@ -9,6 +9,19 @@ var/datum/npc_ship_map_handler/shipmap_handler = new
 /datum/npc_ship_map_handler/proc/free_map(var/z_to_free)
 	ship_map_zs -= z_to_free
 	free_ship_map_zs += z_to_free
+	clear_z(z_to_free)
+
+/datum/npc_ship_map_handler/proc/clear_z(var/z_level)
+	if(isnull(z_level))
+		return
+	to_world("Clearing unused ship-z level:[z_level]. This may lag.")
+	spawn(-1)
+		for(var/n_x = 1 to 255)
+			for(var/n_y = 1 to 255)
+				var/turf/to_remove = locate(n_x,n_y,z_level)
+				for(var/atom/A in to_remove.contents)
+					qdel(A)
+				qdel(to_remove)
 
 /datum/npc_ship_map_handler/proc/un_free_map(var/z_to_un_free)
 	if(z_to_un_free in free_ship_map_zs)
