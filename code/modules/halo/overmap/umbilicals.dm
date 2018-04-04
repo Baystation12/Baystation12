@@ -111,6 +111,9 @@
 /obj/docking_umbilical/proc/connect(var/obj/effect/overmap/connect_to,var/mob/user,var/random_connect = 0)
 	if(istype(connect_to,/obj/effect/overmap/ship/npc_ship))
 		var/obj/effect/overmap/ship/npc_ship/ship = connect_to
+		if(ship.hull > initial(ship.hull)/4)
+			to_chat(user,"<span class = 'notice'>[ship] is too functional to force a umbilical connection.</span>")
+			return
 		ship.load_mapfile()
 	var/obj/docking_umbilical/umbi //This will be the umbilical we connect to.
 	if(random_connect)
