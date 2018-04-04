@@ -44,24 +44,6 @@ var/list/limb_icon_cache = list()
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 
-/obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
-	..()
-	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[BP_EYES]
-	if(eyes) eyes.update_colour()
-
-/obj/item/organ/external/head/removed()
-	update_icon(1)
-	..()
-
-	//Head markings, duplicated (sadly) below.
-	for(var/M in markings)
-		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
-		var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-		mark_s.Blend(markings[M]["color"], mark_style.blend)
-		overlays |= mark_s //So when it's not on your body, it has icons
-		mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-		icon_cache_key += "[M][markings[M]["color"]]"
-
 /obj/item/organ/external/var/icon_cache_key
 /obj/item/organ/external/update_icon(var/regenerate = 0)
 	var/gender = "_m"

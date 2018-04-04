@@ -20,6 +20,7 @@
 
 	var/prone_icon                            // If set, draws this from icobase when mob is prone.
 	var/has_floating_eyes                     // Eyes will overlay over darkness (glow)
+	var/eye_icon = 'icons/mob/human_races/default_eyes.dmi'
 
 	var/blood_color = COLOR_BLOOD_HUMAN               // Red.
 	var/flesh_color = "#ffc896"               // Pink.
@@ -33,9 +34,6 @@
 
 	var/list/hair_styles
 	var/list/facial_hair_styles
-
-	var/eye_icon = "eyes_s"
-	var/eye_icon_location = 'icons/mob/human_face.dmi'
 
 	var/organs_icon		//species specific internal organs icons
 
@@ -222,8 +220,25 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	you use the _str version of the slot.
 */
 
+// This is in species because ???, nabber eye behavior is defined at species level. Consistency etc.
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
-	return
+	var/image/eyes_icon
+	var/obj/item/organ/internal/eyes/eyes = H.internal_organs_by_name[vision_organ ? vision_organ : BP_EYES]
+	var/obj/item/organ/external/head/head = H.organs_by_name[BP_HEAD]
+	if(eye_icon && istype(head))
+		if(istype(eyes))
+			eyes.update_colour()
+			if(head.robotic >= ORGAN_ROBOT)
+				var/datum/robolimb/franchise = all_robolimbs[head.model]
+				if(franchise && franchise.eye_icon)
+					eyes_icon = image(icon = franchise.eye_icon, icon_state = "eyes")
+			else
+				eyes_icon = image(icon = head.original_eye_icon, icon_state = "eyes")
+			eyes_icon.color = rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])
+		else if(H.should_have_organ(BP_EYES))
+			eyes_icon = image(icon = eye_icon, icon_state = "eyes")
+			eyes_icon.color = "#800000"
+	return eyes_icon
 
 /datum/species/New()
 	if(hud_type)

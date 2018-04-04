@@ -9,9 +9,6 @@
 	limb_blend = ICON_MULTIPLY
 	tail_blend = ICON_MULTIPLY
 
-	eye_icon = "eyes_lizard"
-	eye_icon_location = 'icons/mob/lizard_face.dmi'
-
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/tail, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	primitive_form = "Stok"
 	darksight = 3

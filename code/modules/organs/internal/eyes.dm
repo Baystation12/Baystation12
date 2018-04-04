@@ -1,4 +1,3 @@
-
 /obj/item/organ/internal/eyes
 	name = "eyeballs"
 	icon_state = "eyes"

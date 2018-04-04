@@ -34,14 +34,11 @@
 	icobase = 'icons/mob/human_races/r_nabber.dmi'
 	deform = 'icons/mob/human_races/r_nabber.dmi'
 
-	eye_icon = "eyes_nabber"
-	eye_icon_location = 'icons/mob/nabber_face.dmi'
-
 	limb_blend = ICON_MULTIPLY
 
 	blood_mask = 'icons/mob/human_races/masks/blood_nabber.dmi'
 
-	has_floating_eyes = 1
+	has_floating_eyes = TRUE
 
 	darksight = 8
 	slowdown = -0.5
@@ -124,14 +121,13 @@
 	var/store_string = "[O.eyes_shielded] [H.is_cloaked()] [rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3])]"
 	var/image/eye_overlay = eye_overlays[store_string]
 	if(!eye_overlay)
-		var/icon/I = new('icons/mob/nabber_face.dmi', "eyes_nabber")
+		var/icon/I = new(icobase, "eyes")
 		I.Blend(rgb(O.eye_colour[1], O.eye_colour[2], O.eye_colour[3]), ICON_ADD)
 		if(O.eyes_shielded)
 			I.Blend(rgb(125, 125, 125), ICON_MULTIPLY)
 		eye_overlay = image(I)
 		if(H.is_cloaked())
 			eye_overlay.alpha = 100
-
 		eye_overlays[store_string] = eye_overlay
 	return(eye_overlay)
 
