@@ -109,6 +109,9 @@
 	return umbi_name_assoc[umbi_name_picked]
 
 /obj/docking_umbilical/proc/connect(var/obj/effect/overmap/connect_to,var/mob/user,var/random_connect = 0)
+	if(istype(connect_to,/obj/effect/overmap/ship/npc_ship))
+		var/obj/effect/overmap/ship/npc_ship/ship = connect_to
+		ship.load_mapfile()
 	var/obj/docking_umbilical/umbi //This will be the umbilical we connect to.
 	if(random_connect)
 		umbi = pick(get_all_umbis(connect_to))
