@@ -70,11 +70,20 @@
 
 /obj/item/projectile/overmap/on_impact(var/atom/impacted)
 	var/obj/effect/overmap/overmap_object = impacted
-	var/chosen_impact_z = pick(overmap_object.map_z)
+	var/chosen_impact_z
 
 	if(!(starting in range(1,impacted)) && prob(overmap_object.weapon_miss_chance))
 		visible_message("<span class = 'warning'>[src] flies past [impacted].</span>")
 		return 0
+	if(istype(impacted,/obj/effect/overmap/ship/npc_ship))
+		var/obj/effect/overmap/ship/npc_ship/ship = impacted
+		if(ship.unload_at)
+			chosen_impact_z = pick(overmap_object.map_z)
+			do_z_level_proj_spawn(chosen_impact_z,overmap_object)
+		else
+			ship.take_projectiles(src)
+			return 0
+	chosen_impact_z = pick(overmap_object.map_z)
 	if(istype(impacted,/obj/effect/overmap/sector))
 		do_sector_hit(chosen_impact_z,impacted)
 	else if(istype(impacted,/obj/effect/overmap/ship))
