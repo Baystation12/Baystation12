@@ -18,8 +18,8 @@ GLOBAL_DATUM_INIT(godcult, /datum/antagonist/godcultist, new)
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	hard_cap = 5
 	hard_cap_round = 6
-	initial_spawn_req = 2
-	initial_spawn_target = 2
+	initial_spawn_req = 3
+	initial_spawn_target = 3
 	antaghud_indicator = "hudcultist"
 
 /datum/antagonist/godcultist/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg, var/mob/living/deity/specific_god)
