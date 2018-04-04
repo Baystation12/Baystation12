@@ -1,4 +1,4 @@
-var/datum/npc_ship_map_handler/shipmap_handler = new
+var/global/datum/npc_ship_map_handler/shipmap_handler = new
 
 /datum/npc_ship_map_handler
 
