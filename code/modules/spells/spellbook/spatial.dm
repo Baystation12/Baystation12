@@ -16,6 +16,7 @@
 	spells = list(/spell/targeted/ethereal_jaunt = 				1,
 				/spell/aoe_turf/blink = 						1,
 				/spell/area_teleport = 							1,
+				/spell/portal_teleport = 						1,
 				/spell/targeted/projectile/dumbfire/passage = 	1,
 				/spell/mark_recall = 							1,
 				/spell/targeted/swap = 							1,

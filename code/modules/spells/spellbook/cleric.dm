@@ -25,6 +25,7 @@
 				/spell/aoe_turf/conjure/grove/sanctuary = 			1,
 				/spell/targeted/projectile/dumbfire/fireball = 		2,
 				/spell/area_teleport = 								2,
+				/spell/portal_teleport = 							2,
 				/spell/aoe_turf/conjure/forcewall = 				1,
 				/spell/noclothes = 									1,
 				/obj/item/weapon/magic_rock = 						1,
