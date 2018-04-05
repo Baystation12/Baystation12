@@ -499,8 +499,6 @@
 			return global.last_round_duration;
 		if("last_tick_duration")
 			return global.last_tick_duration;
-		if("license_to_url")
-			return global.license_to_url;
 		if("light_overlay_cache")
 			return global.light_overlay_cache;
 		if("lighting_overlays_initialised")
@@ -1504,8 +1502,6 @@
 			global.last_round_duration=newval;
 		if("last_tick_duration")
 			global.last_tick_duration=newval;
-		if("license_to_url")
-			global.license_to_url=newval;
 		if("light_overlay_cache")
 			global.light_overlay_cache=newval;
 		if("lighting_overlays_initialised")
@@ -2259,7 +2255,6 @@
 	"last_message_id",
 	"last_round_duration",
 	"last_tick_duration",
-	"license_to_url",
 	"light_overlay_cache",
 	"lighting_overlays_initialised",
 	"lighting_update_corners",
