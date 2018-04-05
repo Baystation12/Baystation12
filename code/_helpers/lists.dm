@@ -131,10 +131,10 @@ proc/listclearnulls(list/list)
 			L[item] = 1
 		total += L[item]
 
-	total = rand(1, total)
+	var/num = rand(1, total)
 	for (item in L)
-		total -=L [item]
-		if (total <= 0)
+		num -= L[item]
+		if (num <= 0)
 			return item
 
 	return null

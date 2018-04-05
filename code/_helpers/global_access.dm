@@ -807,8 +807,6 @@
 			return global.runtime_diary;
 		if("same_wires")
 			return global.same_wires;
-		if("secondary_mode")
-			return global.secondary_mode;
 		if("secret_force_mode")
 			return global.secret_force_mode;
 		if("send_emergency_team")
@@ -921,8 +919,6 @@
 			return global.tape_roll_applications;
 		if("telecomms_list")
 			return global.telecomms_list;
-		if("tertiary_mode")
-			return global.tertiary_mode;
 		if("text_tag_icons")
 			return global.text_tag_icons;
 		if("tg_admin_state")
@@ -1846,8 +1842,6 @@
 			global.runtime_diary=newval;
 		if("same_wires")
 			global.same_wires=newval;
-		if("secondary_mode")
-			global.secondary_mode=newval;
 		if("secret_force_mode")
 			global.secret_force_mode=newval;
 		if("send_emergency_team")
@@ -1960,8 +1954,6 @@
 			global.tape_roll_applications=newval;
 		if("telecomms_list")
 			global.telecomms_list=newval;
-		if("tertiary_mode")
-			global.tertiary_mode=newval;
 		if("text_tag_icons")
 			global.text_tag_icons=newval;
 		if("tg_admin_state")

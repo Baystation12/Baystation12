@@ -37,38 +37,18 @@ var/global/datum/controller/gameticker/ticker
 
 /datum/controller/gameticker/proc/pregame()
 	do
-		if(!gamemode_voted)
-			pregame_timeleft = 180
-		else
-			pregame_timeleft = 15
-			if(!isnull(secondary_mode))
-				master_mode = secondary_mode
-				secondary_mode = null
-			else if(!isnull(tertiary_mode))
-				master_mode = tertiary_mode
-				tertiary_mode = null
-			else
-				master_mode = "extended"
+		initialization_stage -= initialization_stage &  INITIALIZATION_NOW  // remove INITIALIZATION_NOW
+		pregame_timeleft = 180
 
-		to_world("<b>Trying to start [master_mode]...</b>")
 		to_world("<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
 		to_world("Please, setup your character and select ready. Game will start in [pregame_timeleft] seconds")
 
 		while(current_state == GAME_STATE_PREGAME)
 			for(var/i=0, i<10, i++)
 				sleep(1)
-				vote.process()
 			if(round_progressing)
 				pregame_timeleft--
-			if(pregame_timeleft == config.vote_autogamemode_timeleft && !gamemode_voted)
-				gamemode_voted = 1
-				if(!vote.time_remaining)
-					vote.autogamemode()	//Quit calling this over and over and over and over.
-					while(vote.time_remaining)
-						for(var/i=0, i<10, i++)
-							sleep(1)
-							vote.process()
-			if(pregame_timeleft <= 0 || ((initialization_stage & INITIALIZATION_NOW_AND_COMPLETE) == INITIALIZATION_NOW_AND_COMPLETE))
+			if(pregame_timeleft <= 0 || initialization_stage == INITIALIZATION_NOW_AND_COMPLETE)
 				current_state = GAME_STATE_SETTING_UP
 				Master.SetRunLevel(RUNLEVEL_SETUP)
 
@@ -82,16 +62,18 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.hide_mode = 0
 
-	var/list/runnable_modes = config.get_runnable_modes()
-	if((master_mode=="random") || (master_mode=="secret"))
+	if (master_mode == "random" || master_mode == "secret")
+		var/list/runnable_modes = config.get_runnable_modes()
+
 		if(!runnable_modes.len)
 			current_state = GAME_STATE_PREGAME
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
 			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby.")
-
 			return 0
-		if(secret_force_mode != "secret")
+
+		if(master_mode == "secret" && secret_force_mode != "secret")
 			src.mode = config.pick_mode(secret_force_mode)
+	
 		if(!src.mode)
 			var/list/weighted_modes = list()
 			for(var/datum/game_mode/GM in runnable_modes)
@@ -104,7 +86,6 @@ var/global/datum/controller/gameticker/ticker
 		current_state = GAME_STATE_PREGAME
 		Master.SetRunLevel(RUNLEVEL_LOBBY)
 		to_world("<span class='danger'>Serious error in mode setup!</span> Reverting to pre-game lobby.")
-
 		return 0
 
 	job_master.ResetOccupations()
@@ -125,15 +106,6 @@ var/global/datum/controller/gameticker/ticker
 
 	if(hide_mode)
 		to_world("<B>The current game mode is - Secret!</B>")
-
-		if(runnable_modes.len)
-			var/list/tmpmodes = new
-			for (var/datum/game_mode/M in runnable_modes)
-				tmpmodes+=M.name
-			tmpmodes = sortList(tmpmodes)
-			if(tmpmodes.len)
-				to_world("<B>Possibilities:</B> [english_list(tmpmodes)]")
-
 	else
 		src.mode.announce()
 

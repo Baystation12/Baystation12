@@ -205,8 +205,8 @@ datum/controller/vote
 							restart = 1
 						else
 							master_mode = .[1]
-					secondary_mode = .[2]
-					tertiary_mode = .[3]
+					//secondary_mode = .[2]
+					//tertiary_mode = .[3]
 				if("crew_transfer")
 					if(.[1] == "Initiate Crew Transfer")
 						init_autotransfer()

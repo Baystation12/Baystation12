@@ -80,6 +80,8 @@
 	if(byond_version < RECOMMENDED_VERSION)
 		world.log << "Your server's byond version does not meet the recommended requirements for this server. Please update BYOND"
 
+	load_configuration()
+
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
@@ -524,20 +526,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	callHook("shutdown")
 	return ..()
 
-/hook/startup/proc/loadMode()
-	world.load_mode()
-	return 1
-
-/world/proc/load_mode()
-	if(!fexists("data/mode.txt"))
-		return
-
-	var/list/Lines = file2list("data/mode.txt")
-	if(Lines.len)
-		if(Lines[1])
-			master_mode = Lines[1]
-			log_misc("Saved mode is '[master_mode]'")
-
 /world/proc/save_mode(var/the_mode)
 	var/F = file("data/mode.txt")
 	fdel(F)
@@ -553,6 +541,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /proc/load_configuration()
 	config = new /datum/configuration()
+	config.initialize()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
 	config.loadsql("config/dbconfig.txt")

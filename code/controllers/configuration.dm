@@ -223,7 +223,7 @@ var/list/gamemode_cache = list()
 
 	var/max_gear_cost = 10 // Used in chargen for accessory loadout limit. 0 disables loadout, negative allows infinite points.
 
-/datum/configuration/New()
+/datum/configuration/proc/initialize()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
 		// I wish I didn't have to instance the game modes in order to look up
@@ -514,6 +514,7 @@ var/list/gamemode_cache = list()
 						prob_value = copytext(value, prob_pos + 1)
 						if (prob_name in config.modes)
 							config.probabilities[prob_name] = text2num(prob_value)
+							log_misc("Probability of [prob_name] is [prob_value].")
 						else
 							log_misc("Unknown game mode probability configuration definition: [prob_name].")
 					else
