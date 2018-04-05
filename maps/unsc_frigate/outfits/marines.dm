@@ -68,7 +68,7 @@
 
 /decl/hierarchy/outfit/job/UNSC_ship/odst
 	name = "ODST Rifleman"
-	l_ear = /obj/item/device/radio/headset/unsc/marine
+	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -79,7 +79,7 @@
 
 /decl/hierarchy/outfit/job/UNSC_ship/odsto
 	name = "ONI Bridge Officer"
-	l_ear = /obj/item/device/radio/headset/unsc/marine
+	l_ear = /obj/item/device/radio/headset/unsc/odst
 	uniform = /obj/item/clothing/under/utility
 	shoes = /obj/item/clothing/shoes/dress
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s

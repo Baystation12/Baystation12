@@ -9,6 +9,7 @@ var/list/department_radio_keys = list(
 	  ":q" = "SQUADCOM",	".q" = "SQUADCOM",
 	  ":e" = "EBAND",		".e" = "EBAND",
 	  ":g" = "GCPD",		".g" = "GCPD",
+	  ":t" = "TACCOM",		".t" = "TACCOM",
 	  ":b" = "INNIECOM",	".b" = "INNIECOM",
 
 	  ":R" = "right ear",	".R" = "right ear",
@@ -21,6 +22,7 @@ var/list/department_radio_keys = list(
 	  ":Q" = "SQUADCOM",	".Q" = "SQUADCOM",
 	  ":E" = "EBAND",		".E" = "EBAND",
 	  ":G" = "GCPD",		".G" = "GCPD",
+	  ":T" = "TACCOM",		".T" = "TACCOM",
 	  ":B" = "INNIECOM",	".B" = "INNIECOM",
 
 	/*
