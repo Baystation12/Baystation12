@@ -95,6 +95,29 @@
 	drill_verb = "clearing"
 	w_class = ITEM_SIZE_SMALL
 
+// One pick to rule them all - configurable digging depth. Originally intended as a robot module.s
+/obj/item/weapon/pickaxe/laser
+	name = "laser pickaxe"
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "pick_laser"
+	item_state = "syringe_0"
+	digspeed = 20
+	desc = "A small laser enhanced pickaxe with internal power source for precise excavations."
+	excavation_amount = 30
+	drill_sound = 'sound/items/Welder.ogg'
+	drill_verb = "clearing"
+	w_class = ITEM_SIZE_NORMAL
+
+/obj/item/weapon/pickaxe/laser/examine(var/mob/user)
+	. = ..()
+	to_chat(user, "It is set to excavate [excavation_amount] cm.")
+
+/obj/item/weapon/pickaxe/laser/attack_self(var/mob/user)
+	var/new_setting = input("Please select excavation depth.") as null|anything in list(1, 2, 4, 6, 8, 10, 12, 30)
+	if(new_setting)
+		excavation_amount = new_setting
+		digspeed = 20 + ((excavation_amount > 12) ? 10 : 0)
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pack for holding pickaxes
 
