@@ -48,4 +48,5 @@
 	desc = "A vending machine with glorious attachments held within." //unga dunga
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
+	req_access = list(308)
 	products = list(/obj/item/weapon_attachment/sight/acog = 3, /obj/item/weapon_attachment/sight/rds = 5, /obj/item/weapon_attachment/stock/skeletal = 6, /obj/item/weapon_attachment/stock/ma5b = 10)
