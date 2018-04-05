@@ -1,7 +1,7 @@
 /datum/map/torch
 
 	base_floor_type = /turf/simulated/floor/reinforced/airless
-	base_floor_area = /area/maintenance/exterior
+	base_floor_area = /area/maintenance/torch/exterior
 
 	post_round_safe_areas = list (
 		/area/centcom,
@@ -14,6 +14,10 @@
 		/area/shuttle/administration/centcom,
 		/area/shuttle/specops/centcom,
 	)
+
+/area/maintenance/torch
+	var/light_exempt = FALSE
+
 /*
 //Fifth Deck (Z-1) Coming SoonTM
 /area/hallway/primary/fifthdeck/fore
@@ -28,23 +32,23 @@
 	name = "\improper Fifth Deck Aft Hallway"
 	icon_state = "hallA"
 
-/area/maintenance/fifthdeck
+/area/maintenance/torch/fifthdeck
 	name = "Fifth Deck Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/fifthdeck/aft
+/area/maintenance/torch/fifthdeck/aft
 	name = "Fifth Deck Aft Maintenance"
 	icon_state = "amaint"
 
-/area/maintenance/fifthdeck/foreport
+/area/maintenance/torch/fifthdeck/foreport
 	name = "Fifth Deck Fore Port Maintenance"
 	icon_state = "fpmaint"
 
-/area/maintenance/fifthdeck/forestarboard
+/area/maintenance/torch/fifthdeck/forestarboard
 	name = "Fifth Deck Fore Starboard Maintenance"
 	icon_state = "fsmaint"
 
-/area/maintenance/fifthdeck/starboard
+/area/maintenance/torch/fifthdeck/starboard
 	name = "Fifth Deck Starboard Maintenance"
 	icon_state = "smaint"
 
@@ -52,10 +56,14 @@
 	name = "\improper Fifth Deck Teleporter"
 	icon_state = "teleporter"
 
-/area/maintenance/substation/fifthdeck
+/area/maintenance/torch/substation/fifthdeck
 	name = "Fifth Deck Substation"
 */
 //Fourth Deck (Z-1)
+/area/petrovdock
+	name = "\improper Petrov Dock"
+	icon_state = "hallA"
+
 /area/hallway/primary/fourthdeck/fore
 	name = "\improper Fourth Deck Fore Hallway"
 	icon_state = "hallF"
@@ -68,27 +76,27 @@
 	name = "\improper Fourth Deck Aft Hallway"
 	icon_state = "hallA"
 
-/area/maintenance/fourthdeck
+/area/maintenance/torch/fourthdeck
 	name = "Fourth Deck Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/fourthdeck/aft
+/area/maintenance/torch/fourthdeck/aft
 	name = "Fourth Deck Aft Maintenance"
 	icon_state = "amaint"
 
-/area/maintenance/fourthdeck/foreport
+/area/maintenance/torch/fourthdeck/foreport
 	name = "Fourth Deck Fore Port Maintenance"
 	icon_state = "fpmaint"
 
-/area/maintenance/fourthdeck/forestarboard
+/area/maintenance/torch/fourthdeck/forestarboard
 	name = "Fourth Deck Fore Starboard Maintenance"
 	icon_state = "fsmaint"
 
-/area/maintenance/fourthdeck/starboard
+/area/maintenance/torch/fourthdeck/starboard
 	name = "Fourth Deck Starboard Maintenance"
 	icon_state = "smaint"
 
-/area/maintenance/fourthdeck/port
+/area/maintenance/torch/fourthdeck/port
 	name = "Fourth Deck Port Maintenance"
 	icon_state = "pmaint"
 
@@ -96,10 +104,20 @@
 	name = "\improper Fourth Deck Teleporter"
 	icon_state = "teleporter"
 
-/area/maintenance/substation/fourthdeck
+/area/maintenance/torch/substation/fourthdeck
 	name = "Fourth Deck Substation"
 
 //Third Deck (Z-2)
+/area/maintenance/torch/bluespacedrive
+	name = "\improper Blue Space Drive"
+	icon_state = "amaint"
+	light_exempt = TRUE
+
+/area/maintenance/torch/abandonedhead
+	name = "\improper Abandoned Head"
+	icon_state = "hallF"
+	light_exempt = TRUE
+
 /area/hallway/primary/thirddeck/fore
 	name = "\improper Third Deck Fore Hallway"
 	icon_state = "hallF"
@@ -112,31 +130,31 @@
 	name = "\improper Third Deck Aft Hallway"
 	icon_state = "hallA"
 
-/area/maintenance/thirddeck
+/area/maintenance/torch/thirddeck
 	name = "Third Deck Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/thirddeck/foreport
+/area/maintenance/torch/thirddeck/foreport
 	name = "Third Deck Fore Port Maintenance"
 	icon_state = "fpmaint"
 
-/area/maintenance/thirddeck/forestarboard
+/area/maintenance/torch/thirddeck/forestarboard
 	name = "Third Deck Fore Starboard Maintenance"
 	icon_state = "fsmaint"
 
-/area/maintenance/thirddeck/starboard
+/area/maintenance/torch/thirddeck/starboard
 	name = "Third Deck Starboard Maintenance"
 	icon_state = "smaint"
 
-/area/maintenance/thirddeck/port
+/area/maintenance/torch/thirddeck/port
 	name = "Third Deck Port Maintenance"
 	icon_state = "pmaint"
 
-/area/maintenance/thirddeck/aftstarboard
+/area/maintenance/torch/thirddeck/aftstarboard
 	name = "Third Deck Aft Starboard Maintenance"
 	icon_state = "asmaint"
 
-/area/maintenance/thirddeck/aftport
+/area/maintenance/torch/thirddeck/aftport
 	name = "Third Deck Aft Port Maintenance"
 	icon_state = "apmaint"
 
@@ -144,7 +162,7 @@
 	name = "\improper Third Deck Teleporter"
 	icon_state = "teleporter"
 
-/area/maintenance/substation/thirddeck
+/area/maintenance/torch/substation/thirddeck
 	name = "Third Deck Substation"
 
 /area/crew_quarters/safe_room/thirddeck
@@ -156,31 +174,31 @@
 	icon_state = "Sleep"
 
 //Second Deck (Z-3)
-/area/maintenance/seconddeck
+/area/maintenance/torch/seconddeck
 	name = "Second Deck Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/seconddeck/aftstarboard
+/area/maintenance/torch/seconddeck/aftstarboard
 	name = "Second Deck Aft Starboard Maintenance"
 	icon_state = "asmaint"
 
-/area/maintenance/seconddeck/aftport
+/area/maintenance/torch/seconddeck/aftport
 	name = "Second Deck Aft Port Maintenance"
 	icon_state = "apmaint"
 
-/area/maintenance/seconddeck/foreport
+/area/maintenance/torch/seconddeck/foreport
 	name = "Second Deck Fore Port Maintenance"
 	icon_state = "fpmaint"
 
-/area/maintenance/seconddeck/forestarboard
+/area/maintenance/torch/seconddeck/forestarboard
 	name = "Second Deck Fore Starboard Maintenance"
 	icon_state = "fsmaint"
 
-/area/maintenance/seconddeck/central
+/area/maintenance/torch/seconddeck/central
 	name = "Second Deck Central Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/seconddeck/hallway
+/area/maintenance/torch/seconddeck/hallway
 	name = "Second Deck Central Hallway"
 	icon_state = "hallC2"
 
@@ -192,7 +210,7 @@
 	name = "\improper Second Deck Central Stairwell"
 	icon_state = "hallC2"
 
-/area/maintenance/substation/seconddeck
+/area/maintenance/torch/substation/seconddeck
 	name = "Second Deck Substation"
 
 /area/crew_quarters/safe_room/seconddeck
@@ -201,31 +219,31 @@
 
 
 //First Deck (Z-4)
-/area/maintenance/firstdeck
+/area/maintenance/torch/firstdeck
 	name = "First Deck Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/firstdeck/aftstarboard
+/area/maintenance/torch/firstdeck/aftstarboard
 	name = "First Deck Aft Starboard Maintenance"
 	icon_state = "asmaint"
 
-/area/maintenance/firstdeck/aftport
+/area/maintenance/torch/firstdeck/aftport
 	name = "First Deck Aft Port Maintenance"
 	icon_state = "apmaint"
 
-/area/maintenance/firstdeck/forestarboard
+/area/maintenance/torch/firstdeck/forestarboard
 	name = "First Deck Fore Starboard Maintenance"
 	icon_state = "fsmaint"
 
-/area/maintenance/firstdeck/foreport
+/area/maintenance/torch/firstdeck/foreport
 	name = "First Deck Fore Port Maintenance"
 	icon_state = "fpmaint"
 
-/area/maintenance/firstdeck/centralstarboard
+/area/maintenance/torch/firstdeck/centralstarboard
 	name = "First Deck Starboard Maintenance"
 	icon_state = "smaint"
 
-/area/maintenance/firstdeck/centralport
+/area/maintenance/torch/firstdeck/centralport
 	name = "First Deck Port Maintenance"
 	icon_state = "pmaint"
 
@@ -249,27 +267,27 @@
 	name = "\improper First Deck Safe Room"
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
-/area/maintenance/substation/firstdeck // First Deck (Z-4)
+/area/maintenance/torch/substation/firstdeck // First Deck (Z-4)
 	name = "First Deck Substation"
 
 //Bridge (Z-5)
-/area/maintenance/bridge
+/area/maintenance/torch/bridge
 	name = "Bridge Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/bridge/aftstarboard
+/area/maintenance/torch/bridge/aftstarboard
 	name = "Bridge Aft Starboard Maintenance"
 	icon_state = "asmaint"
 
-/area/maintenance/bridge/aftport
+/area/maintenance/torch/bridge/aftport
 	name = "Bridge Aft Port Maintenance"
 	icon_state = "apmaint"
 
-/area/maintenance/bridge/forestarboard
+/area/maintenance/torch/bridge/forestarboard
 	name = "Bridge Fore Starboard Maintenance"
 	icon_state = "fsmaint"
 
-/area/maintenance/bridge/foreport
+/area/maintenance/torch/bridge/foreport
 	name = "Bridge Fore Port Maintenance"
 	icon_state = "fpmaint"
 
@@ -281,7 +299,7 @@
 	name = "\improper Bridge Aft Hallway"
 	icon_state = "hallA"
 
-/area/maintenance/substation/bridge // First Deck (Z-4)
+/area/maintenance/torch/substation/bridge // First Deck (Z-4)
 	name = "Bridge Substation"
 
 /area/crew_quarters/safe_room/bridge
@@ -962,10 +980,11 @@
 	icon_state = "teleporter"
 	sound_env = SMALL_ENCLOSED
 
-/area/maintenance/auxsolarbridge
+/area/maintenance/torch/auxsolarbridge
 	name = "Solar Maintenance - Bridge"
 	icon_state = "SolarcontrolS"
 	sound_env = SMALL_ENCLOSED
+	light_exempt = TRUE
 
 /area/solar/bridge
 	name = "\improper Bridge Solar Array"
@@ -1013,12 +1032,13 @@
 /area/crew_quarters/heads
 	icon_state = "head_quarters"
 
-/area/maintenance/substation
+/area/maintenance/torch/substation
 	name = "Substation"
 	icon_state = "substation"
 	sound_env = SMALL_ENCLOSED
+	light_exempt = TRUE
 
-/area/maintenance/exterior
+/area/maintenance/torch/exterior
 	name = "\improper Exterior Reinforcements"
 	icon_state = "maint_security_starboard"
 	area_flags = AREA_FLAG_EXTERNAL
@@ -1049,15 +1069,17 @@
 	name = "\improper Centcom Testing Facility"
 
 // Solars
-/area/maintenance/auxsolarport
+/area/maintenance/torch/auxsolarport
 	name = "Solar Maintenance - Port"
 	icon_state = "SolarcontrolP"
 	sound_env = SMALL_ENCLOSED
+	light_exempt = TRUE
 
-/area/maintenance/auxsolarstarboard
+/area/maintenance/torch/auxsolarstarboard
 	name = "Solar Maintenance - Starboard"
 	icon_state = "SolarcontrolS"
 	sound_env = SMALL_ENCLOSED
+	light_exempt = TRUE
 
 /area/solar
 	area_flags = AREA_FLAG_EXTERNAL
@@ -1076,13 +1098,15 @@
 
 // Maintenance
 
-/area/maintenance/disposal
+/area/maintenance/torch/disposal
 	name = "Waste Disposal"
 	icon_state = "disposal"
+	light_exempt = TRUE
 
-/area/maintenance/incinerator
+/area/maintenance/torch/incinerator
 	name = "\improper Incinerator"
 	icon_state = "disposal"
+	light_exempt = TRUE
 
 // Storage
 
