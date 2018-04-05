@@ -24,4 +24,4 @@
 	desc = "A ACOG sight which provides slight magnification and an increase in accuracy."
 	icon_state = "acog"
 
-	zoom_amount = 1.1
+	zoom_amount = 1.2
