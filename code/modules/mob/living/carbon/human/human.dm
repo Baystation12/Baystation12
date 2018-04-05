@@ -1534,3 +1534,25 @@
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
 /mob/living/carbon/human/proc/nervous_system_failure()
 	return getBrainLoss() >= maxHealth * 0.75
+
+/mob/living/carbon/human/proc/get_display_species()
+	if(species)
+		return species.get_examine_name()
+	//Else CRITICAL FAILURE!
+	return ""
+
+/mob/living/carbon/human/get_nametag_name(mob/user)
+	if(wear_id)
+		var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
+		if(I)
+			var/name
+			if(I.military_rank)
+				name += "[I.military_rank] "
+			name += I.registered_name
+			return name
+
+	return name
+
+/mob/living/carbon/human/get_nametag_desc(mob/user)
+	var/msg = get_display_species()
+	return msg
