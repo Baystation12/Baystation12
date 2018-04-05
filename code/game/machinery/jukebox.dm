@@ -60,6 +60,7 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Thunderdome", 'sound/music/THUNDERDOME.ogg'),
 		new/datum/track("To times once forgotten", 'sound/music/To_Times_Once_Forgotten.ogg'),
 		new/datum/track("Torch: A Light in the Darkness", 'sound/music/Torch.ogg'),
+		new/datum/track("Treacherous Voyage", 'sound/music/treacherous_voyage.ogg'),
 	)
 
 /obj/machinery/media/jukebox/old
