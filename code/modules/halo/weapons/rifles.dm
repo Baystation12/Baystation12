@@ -23,7 +23,7 @@
 	dispersion = list(2)//This gun spawns with a stock that counteracts this issue.
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_HUGE
 	ammo_icon_state = "ma5b_mag"
 
 	item_icons = list(
