@@ -28,7 +28,7 @@
 /turf/space,
 /area/space)
 "af" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/maintenance/bridge/forestarboard)
 "ag" = (
 /turf/simulated/wall/r_wall,
@@ -699,7 +699,7 @@
 /turf/simulated/wall,
 /area/maintenance/substation/bridge)
 "bD" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/maintenance/substation/bridge)
 "bE" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1304,6 +1304,9 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"dm" = (
+/turf/simulated/wall/r_wall/hull,
+/area/turret_protected/ai_foyer)
 "dn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9;
@@ -1522,8 +1525,11 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"dV" = (
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/auxsolarbridge)
 "dY" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/shield/bridge)
 "dZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
@@ -1606,7 +1612,7 @@
 /area/turret_protected/ai_outer_chamber)
 "ej" = (
 /obj/machinery/ai_status_display,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/turret_protected/ai_outer_chamber)
 "ek" = (
 /obj/structure/cable/green,
@@ -1793,7 +1799,7 @@
 /area/aquila_hangar/start)
 "eM" = (
 /obj/structure/sign/warning/high_voltage,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/heads/cobed)
 "eN" = (
 /obj/structure/bed/chair/office/dark{
@@ -2585,6 +2591,9 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/turret_protected/ai_outer_chamber)
+"gz" = (
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/bridge/aftstarboard)
 "gA" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -2867,7 +2876,7 @@
 /area/hallway/primary/bridge/aft)
 "gX" = (
 /obj/structure/sign/warning/airlock,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/bridge/aft)
 "gY" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -3132,9 +3141,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
-"hG" = (
-/turf/simulated/wall,
-/area/hallway/primary/bridge/aft)
 "hI" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 1;
@@ -4863,7 +4869,7 @@
 /area/turret_protected/ai_outer_chamber)
 "lk" = (
 /obj/structure/sign/warning/lethal_turrets,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/turret_protected/ai_outer_chamber)
 "ll" = (
 /obj/structure/cable/green{
@@ -6052,7 +6058,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/turret_protected/ai_outer_chamber)
 "nu" = (
 /obj/machinery/computer/teleporter{
@@ -8887,7 +8893,7 @@
 /turf/simulated/floor/tiled/white,
 /area/aquila_hangar/start)
 "tg" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/maintenance/bridge/foreport)
 "th" = (
 /obj/machinery/door/firedoor/border_only,
@@ -10768,7 +10774,7 @@
 /area/maintenance/auxsolarbridge)
 "wW" = (
 /obj/structure/sign/warning/airlock,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/maintenance/auxsolarbridge)
 "wX" = (
 /obj/effect/floor_decal/corner/blue{
@@ -11843,6 +11849,12 @@
 "Cj" = (
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"CN" = (
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/bridge/aftport)
+"CO" = (
+/turf/simulated/wall/r_wall/hull,
+/area/aux_eva)
 "Db" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Head";
@@ -11947,6 +11959,9 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
 /area/bridge/disciplinary_board_room)
+"DN" = (
+/turf/simulated/wall/r_wall/hull,
+/area/hallway/primary/bridge/aft)
 "Eb" = (
 /obj/machinery/camera/network/engineering{
 	c_tag = "Shield Generator - Bridge Deck"
@@ -12003,7 +12018,7 @@
 /obj/structure/sign/solgov{
 	pixel_x = 32
 	},
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/bridge/aft)
 "Eh" = (
 /obj/structure/table/glass,
@@ -12141,6 +12156,9 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"Fp" = (
+/turf/simulated/wall/r_wall/hull,
+/area/bridge/storage)
 "Gb" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -12537,7 +12555,7 @@
 	density = 0;
 	layer = 4
 	},
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/bridge)
 "HF" = (
 /obj/effect/floor_decal/corner/blue{
@@ -12693,7 +12711,7 @@
 /area/bridge)
 "Id" = (
 /obj/structure/sign/warning/high_voltage,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/hull,
 /area/bridge/storage)
 "Ie" = (
 /obj/machinery/door/firedoor/border_only,
@@ -14012,6 +14030,9 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"Rx" = (
+/turf/simulated/wall/r_wall/hull,
+/area/turret_protected/ai_outer_chamber)
 "Sb" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Storage";
@@ -14748,6 +14769,9 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"Xz" = (
+/turf/simulated/wall/r_wall/hull,
+/area/crew_quarters/heads/cobed)
 "Yb" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/power/port_gen/pacman{
@@ -22714,8 +22738,8 @@ aK
 aK
 aK
 aK
-aK
-aK
+Xz
+Xz
 ed
 eM
 aa
@@ -22733,8 +22757,8 @@ Bg
 Ng
 Id
 th
-qO
-qO
+Fp
+Fp
 qO
 qO
 ti
@@ -23121,8 +23145,8 @@ cT
 cT
 eN
 Ke
-aK
-aK
+Xz
+Xz
 eP
 Xc
 iG
@@ -28158,9 +28182,9 @@ aa
 aa
 aa
 aa
-ag
-ag
-ag
+gz
+gz
+gz
 aQ
 bx
 Pi
@@ -28360,9 +28384,9 @@ aa
 aa
 aa
 aa
-ag
-ag
-ag
+gz
+gz
+gz
 cb
 bx
 Pi
@@ -28398,9 +28422,9 @@ gg
 sT
 xl
 xt
-tF
-tF
-tF
+CN
+CN
+CN
 aa
 aa
 aa
@@ -28562,9 +28586,9 @@ aa
 aa
 aa
 aa
-ag
-ag
-ag
+gz
+gz
+gz
 fd
 gh
 Pi
@@ -28600,9 +28624,9 @@ wL
 sT
 xl
 xt
-tF
-tF
-tF
+CN
+CN
+CN
 aa
 aa
 aa
@@ -28764,9 +28788,9 @@ aa
 aa
 aa
 aa
-ag
-ag
-ag
+gz
+gz
+gz
 cc
 bz
 Pi
@@ -28801,10 +28825,10 @@ wg
 Nb
 sT
 xl
-tF
-tF
-tF
-tF
+CN
+CN
+CN
+CN
 aa
 aa
 aa
@@ -28967,8 +28991,8 @@ aa
 aa
 aa
 aa
-ag
-ag
+gz
+gz
 cd
 bz
 Pi
@@ -29003,9 +29027,9 @@ wh
 wN
 sT
 xm
-tF
-tF
-tF
+CN
+CN
+CN
 aa
 aa
 aa
@@ -29169,8 +29193,8 @@ aa
 aa
 aa
 aa
-ag
-ag
+gz
+gz
 aR
 bz
 Pi
@@ -29205,9 +29229,9 @@ Mb
 wO
 sT
 xl
-tF
-tF
-tF
+CN
+CN
+CN
 aa
 aa
 aa
@@ -29371,8 +29395,8 @@ aa
 aa
 aa
 aa
-ag
-ag
+gz
+gz
 aS
 bz
 aG
@@ -29407,9 +29431,9 @@ sT
 sT
 sT
 xn
-tF
-tF
-tF
+CN
+CN
+CN
 aa
 aa
 aa
@@ -29572,10 +29596,10 @@ aa
 aa
 aa
 aa
-ag
-ag
-ag
-ag
+gz
+gz
+gz
+gz
 bB
 Qi
 aG
@@ -29609,10 +29633,10 @@ vE
 wP
 wY
 wk
-tF
-tF
-tF
-tF
+CN
+CN
+CN
+CN
 aa
 aa
 aa
@@ -29773,8 +29797,8 @@ aa
 aa
 aa
 aa
-ag
-ag
+gz
+gz
 dY
 dY
 dY
@@ -29812,10 +29836,10 @@ wQ
 oT
 uu
 oS
-tF
-tF
-tF
-tF
+CN
+CN
+CN
+CN
 aa
 aa
 aa
@@ -29975,8 +29999,8 @@ aa
 aa
 aa
 aa
-ag
-ag
+gz
+gz
 dY
 Eb
 vd
@@ -30015,9 +30039,9 @@ oS
 oS
 xu
 Ki
-tF
-tF
-tF
+CN
+CN
+CN
 aa
 aa
 aa
@@ -30177,8 +30201,8 @@ aa
 aa
 aa
 ad
-ag
-ag
+gz
+gz
 dY
 Jc
 fe
@@ -30217,9 +30241,9 @@ wR
 wR
 xv
 xD
-tF
-tF
-tF
+CN
+CN
+CN
 ad
 aa
 aa
@@ -30379,9 +30403,9 @@ aa
 aa
 aa
 ad
-ag
-ag
-ag
+gz
+gz
+gz
 dY
 dY
 dY
@@ -30417,11 +30441,11 @@ wm
 wS
 uX
 xo
-tF
-tF
-tF
-tF
-tF
+CN
+CN
+CN
+CN
+CN
 ad
 aa
 aa
@@ -30583,24 +30607,24 @@ aa
 ad
 ad
 ad
-ag
-ag
-ag
-ag
+gz
+gz
+gz
+gz
 bD
 cf
 cK
 du
 bD
-ag
-ag
-ag
-ag
-fI
-hG
-hG
-hG
-hG
+gz
+gz
+gz
+gz
+DN
+DN
+DN
+DN
+DN
 kP
 aV
 mZ
@@ -30617,11 +30641,11 @@ uY
 Pc
 wn
 wT
-uY
-tF
-tF
-tF
-tF
+dV
+CN
+CN
+CN
+CN
 ad
 ad
 ad
@@ -30787,22 +30811,22 @@ ad
 ad
 ad
 ad
-ag
-ag
+gz
+gz
 bD
 tb
 cL
 dv
 bD
-ag
-ag
-ag
-ag
-fI
+gz
+gz
+gz
+gz
+DN
 xg
 ip
 ja
-hG
+DN
 kQ
 aU
 na
@@ -30819,9 +30843,9 @@ uY
 vI
 wo
 wU
-uY
-tF
-tF
+dV
+CN
+CN
 ad
 ad
 ad
@@ -30990,13 +31014,13 @@ ad
 ad
 ad
 ad
-ag
+gz
 bD
 ch
 cM
 dw
 bD
-ag
+gz
 ad
 ad
 gn
@@ -31015,14 +31039,14 @@ Yh
 Yh
 Yh
 Di
-on
-tF
-uY
+CO
+CN
+dV
 vJ
 wp
 wV
-uY
-tF
+dV
+CN
 ad
 ad
 ad
@@ -31192,13 +31216,13 @@ ad
 ad
 ad
 ad
-ag
+gz
 bD
 bD
 cN
 bD
 bD
-ag
+gz
 dx
 ea
 ea
@@ -31217,14 +31241,14 @@ hi
 ri
 zi
 pQ
-on
-tF
-uY
-uY
+CO
+CN
+dV
+dV
 wq
 wW
-uY
-tF
+dV
+CN
 ad
 ad
 ad
@@ -31408,7 +31432,7 @@ gX
 hK
 is
 jd
-fI
+DN
 kT
 lO
 nd
@@ -31419,13 +31443,13 @@ qB
 pQ
 Ai
 Ei
-on
-tF
-uY
-uY
+CO
+CN
+dV
+dV
 Tc
-uY
-uY
+dV
+dV
 ad
 ad
 ad
@@ -31605,12 +31629,12 @@ ad
 ad
 dy
 ad
-fI
-fI
-fI
-fI
-fI
-fI
+DN
+DN
+DN
+DN
+DN
+DN
 kU
 Sg
 ne
@@ -31621,12 +31645,12 @@ Uh
 si
 Bi
 Fi
-on
-tF
+CO
+CN
 ad
-uY
+dV
 ws
-uY
+dV
 ad
 ad
 ad
@@ -31807,24 +31831,24 @@ ad
 ad
 dy
 ad
-fI
-fI
-fI
-fI
-fI
-fI
-fI
+DN
+DN
+DN
+DN
+DN
+DN
+DN
 Tg
-fI
-on
-on
-on
-on
-on
-on
-on
-on
-tF
+DN
+CO
+CO
+CO
+CO
+CO
+CO
+CO
+CO
+CN
 ad
 ad
 wt
@@ -32009,24 +32033,24 @@ ad
 ad
 dy
 ad
-fI
-fI
-fI
-fI
-fI
-fI
-fI
+DN
+DN
+DN
+DN
+DN
+DN
+DN
 lR
-fI
-fI
-fI
-fI
-fI
-fI
-fI
-fI
-fI
-tF
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+CN
 eb
 vK
 cP
@@ -32219,7 +32243,7 @@ Ec
 Fc
 Eg
 Ug
-fI
+DN
 ec
 ec
 ec
@@ -36458,11 +36482,11 @@ ad
 ad
 ad
 ad
-ei
-ei
+Rx
+Rx
 ej
 nt
-ei
+Rx
 ad
 ad
 ad
@@ -36655,21 +36679,21 @@ ad
 ad
 ad
 ad
-ei
-ei
-ei
-ei
-ei
-ei
-ei
-ei
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
 nt
-ei
-ei
-ei
-ei
-ei
-ei
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
 ad
 ad
 ad
@@ -36856,23 +36880,23 @@ ad
 ad
 ad
 ad
-ei
-ei
-ei
-ei
-ei
-ei
-gt
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
+dm
 kY
 md
 nu
-gt
-ei
-ei
-ei
-ei
-ei
-ei
+dm
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
 ad
 ad
 ad
@@ -37057,9 +37081,9 @@ ad
 ad
 ad
 ad
-ei
-ei
-ei
+Rx
+Rx
+Rx
 fr
 fr
 fr
@@ -37073,9 +37097,9 @@ pm
 fr
 fr
 fr
-ei
-ei
-ei
+Rx
+Rx
+Rx
 ad
 ad
 ad
@@ -37258,9 +37282,9 @@ aI
 ad
 ad
 ad
-ei
-ei
-ei
+Rx
+Rx
+Rx
 ft
 fr
 ei
@@ -37276,9 +37300,9 @@ ei
 ei
 fr
 sv
-ei
-ei
-ei
+Rx
+Rx
+Rx
 ad
 ad
 ad
@@ -37459,9 +37483,9 @@ av
 aI
 ad
 ad
-ei
-ei
-ei
+Rx
+Rx
+Rx
 fr
 fr
 ei
@@ -37479,9 +37503,9 @@ gt
 ei
 fr
 fr
-ei
-ei
-ei
+Rx
+Rx
+Rx
 ad
 ad
 ah
@@ -37661,8 +37685,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fq
 fr
 ei
@@ -37682,8 +37706,8 @@ gt
 ei
 fr
 fq
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -37863,8 +37887,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fr
 ei
 gt
@@ -37884,8 +37908,8 @@ gt
 gt
 ei
 fr
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -38065,8 +38089,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fr
 ei
 gt
@@ -38086,8 +38110,8 @@ hd
 gt
 ei
 fr
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -38267,8 +38291,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fr
 ei
 gt
@@ -38288,8 +38312,8 @@ rF
 gt
 ei
 fr
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -38469,8 +38493,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fs
 ei
 gt
@@ -38490,8 +38514,8 @@ rG
 gt
 ei
 tP
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -38671,8 +38695,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fr
 ei
 gt
@@ -38692,8 +38716,8 @@ hd
 gt
 ei
 fr
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -38874,7 +38898,7 @@ aI
 ad
 ad
 ej
-ei
+Rx
 ft
 ei
 gt
@@ -38894,7 +38918,7 @@ rH
 gt
 ei
 sv
-ei
+Rx
 ej
 ad
 ad
@@ -39075,8 +39099,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fr
 ei
 gt
@@ -39096,8 +39120,8 @@ hd
 gt
 ei
 fr
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -39277,8 +39301,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fr
 ei
 gt
@@ -39298,8 +39322,8 @@ hh
 gt
 ei
 fr
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -39479,8 +39503,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fr
 ei
 gt
@@ -39500,8 +39524,8 @@ rF
 gt
 ei
 fr
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -39681,8 +39705,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fr
 ei
 gt
@@ -39702,8 +39726,8 @@ hd
 gt
 ei
 fr
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -39883,8 +39907,8 @@ av
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fr
 ei
 gt
@@ -39904,8 +39928,8 @@ gt
 gt
 ei
 fr
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -40085,8 +40109,8 @@ aw
 aI
 ad
 ad
-ei
-ei
+Rx
+Rx
 fq
 fr
 ei
@@ -40106,8 +40130,8 @@ gt
 ei
 fr
 fq
-ei
-ei
+Rx
+Rx
 ad
 ad
 ah
@@ -40287,9 +40311,9 @@ ad
 ad
 ad
 ad
-ei
-ei
-ei
+Rx
+Rx
+Rx
 fr
 fr
 ei
@@ -40307,9 +40331,9 @@ ei
 ei
 fr
 fr
-ei
-ei
-ei
+Rx
+Rx
+Rx
 ad
 ad
 ad
@@ -40490,9 +40514,9 @@ ad
 ad
 ad
 ad
-ei
-ei
-ei
+Rx
+Rx
+Rx
 gu
 fr
 ei
@@ -40508,9 +40532,9 @@ ei
 ei
 fr
 sw
-ei
-ei
-ei
+Rx
+Rx
+Rx
 ad
 ad
 ad
@@ -40693,9 +40717,9 @@ ad
 ad
 ad
 ad
-ei
-ei
-ei
+Rx
+Rx
+Rx
 fr
 fr
 fr
@@ -40709,9 +40733,9 @@ fr
 fr
 fr
 fr
-ei
-ei
-ei
+Rx
+Rx
+Rx
 ad
 ad
 ad
@@ -40896,23 +40920,23 @@ ad
 ad
 ad
 ad
-ei
-ei
-ei
-ei
-ei
-ei
-ei
-ei
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
 mu
-ei
-ei
-ei
-ei
-ei
-ei
-ei
-ei
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
 ad
 ad
 ad
@@ -41099,21 +41123,21 @@ ad
 ad
 ad
 ad
-ei
-ei
-ei
-ei
-ei
-ei
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
 lk
 mv
 ej
-ei
-ei
-ei
-ei
-ei
-ei
+Rx
+Rx
+Rx
+Rx
+Rx
+Rx
 ad
 ad
 ad
