@@ -10,7 +10,7 @@
 	var/fore_dir = NORTH				//what dir ship flies towards for purpose of moving stars effect procs
 
 	//This is a list used by overmap projectiles to ensure they actually hit somewhere on the ship. This should be set so projectiles can narrowly miss, but not miss by much.
-	var/list/map_bounds = list(1,1,255,255) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
+	var/list/map_bounds = list(1,255,255,1) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
 	var/obj/machinery/computer/helm/nav_control
 	var/list/engines = list()
