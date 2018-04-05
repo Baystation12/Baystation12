@@ -343,18 +343,18 @@
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/suit/storage/vest/nt
-	name = "corporate security heavy armored vest"
-	desc = "A synthetic armor vest with CORPORATE SECURITY printed in red lettering on the chest. This one has added webbing and ballistic plates."
+	name = "GCPD heavy armored vest"
+	desc = "A synthetic armor vest with GCPD printed in blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "ntwebvest"
 
 /obj/item/clothing/suit/storage/vest/nt/warden
-	name = "warden heavy armored vest"
-	desc = "A synthetic armor vest with WARDEN printed in silver lettering on the chest. This one has added webbing and ballistic plates."
+	name = "GCPD CID heavy armored vest"
+	desc = "A synthetic armor vest with CID printed in silver lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "secwebvest"
 
 /obj/item/clothing/suit/storage/vest/nt/hos
-	name = "commander heavy armored vest"
-	desc = "A synthetic armor vest with COMMANDER printed in gold lettering on the chest. This one has added webbing and ballistic plates."
+	name = "Chief of Police heavy armored vest"
+	desc = "A synthetic armor vest with Chief printed in gold lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "comwebvest"
 
 /obj/item/clothing/suit/storage/vest/solgov
