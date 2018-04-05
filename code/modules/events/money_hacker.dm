@@ -18,12 +18,11 @@
 	var/obj/machinery/message_server/MS = get_message_server()
 	if(MS)
 		// Hide the account number for now since it's all you need to access a standard-security account. Change when that's no longer the case.
-		var/accnr_hidden = "***[copytext("[affected_account.account_number]", -3)]"
-		var/message = "A brute force hack has been detected (in progress since [stationtime2text()]). The target of the attack is: Financial account #[accnr_hidden], \
+		var/message = "A brute force hack has been detected (in progress since [stationtime2text()]). The target of the attack is: Financial account #[affected_account.account_number], \
 		without intervention this attack will succeed in approximately 10 minutes. Required intervention: temporary suspension of affected accounts until the attack has ceased. \
 		Notifications will be sent as updates occur."
 		var/my_department = "[location_name()] Firewall Subroutines"
-		MS.send_rc_message("Head of Personnel's Desk", my_department, message, "", "", 2)
+		MS.send_rc_message("XO's Desk", my_department, message, "", "", 2)
 
 
 /datum/event/money_hacker/tick()
@@ -58,4 +57,4 @@
 	var/obj/machinery/message_server/MS = get_message_server()
 	if(MS)
 		var/my_department = "[location_name()] Firewall Subroutines"
-		MS.send_rc_message("Head of Personnel's Desk", my_department, message, "", "", 2)
+		MS.send_rc_message("XO's Desk", my_department, message, "", "", 2)
