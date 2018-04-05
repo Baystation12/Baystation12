@@ -168,7 +168,7 @@
 			log_out()
 			error = "Invalid Password"
 		// Banned.
-		if(current_account.suspended)
+		else if(current_account.suspended)
 			log_out()
 			error = "This account has been suspended. Please contact the system administrator for assistance."
 
@@ -344,7 +344,7 @@
 		var/oldtext = html_decode(msg_body)
 		oldtext = replacetext(oldtext, "\[editorbr\]", "\n")
 
-		var/newtext = sanitize(replacetext(input(usr, "Enter your message. You may use most tags from paper formatting", "Message Editor", oldtext) as message|null, "\n", "\[editorbr\]"), 20000)
+		var/newtext = sanitize(replacetext(input(usr, "Enter your message. You may use most tags from paper formatting", "Message Editor", oldtext) as message|null, "\n", "\[br\]"), 20000)
 		if(newtext)
 			msg_body = newtext
 		return 1
@@ -353,6 +353,11 @@
 		var/newrecipient = sanitize(input(user,"Enter recipient's email address:", "Recipient", msg_recipient), 100)
 		if(newrecipient)
 			msg_recipient = newrecipient
+			addressbook = 0
+		return 1
+
+	if(href_list["close_addressbook"])
+		addressbook = 0
 		return 1
 
 	if(href_list["edit_login"])
