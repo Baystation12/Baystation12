@@ -58,7 +58,7 @@
 		for (var/obj/item/grab/G in user.grabbed_by)
 			if(G.stop_move())
 				return
-		if(do_after(user, 5 + user.weakened, incapacitation_flags = INCAPACITATION_KNOCKDOWN))
+		if(do_after(user, 8 + (user.weakened * 2) , incapacitation_flags = INCAPACITATION_KNOCKDOWN))
 			step_towards(user, src)
 
 	if(user.restrained())
