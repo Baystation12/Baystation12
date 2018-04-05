@@ -35,4 +35,3 @@ delete-after: True
 changes: 
   - rscadd: "Adds 7 more hand-picked tracks for the jukebox."
   - spellcheck: "Songs naming via jukebox had been sorted in alphabetical order, some song names had been rewritten to avoid any FeNcE-LiKe TeXtS."
-  
