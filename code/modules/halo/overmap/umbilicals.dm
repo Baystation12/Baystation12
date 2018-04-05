@@ -175,6 +175,8 @@
 	pick_entity_connect_disconnect(user)
 
 /obj/docking_umbilical/proc/umbi_rip()
+	if(isnull(current_connected))
+		return
 	if(initial(broke) == -1)
 		current_connected.visual_umbi_change(1)
 		current_connected.current_connected = null

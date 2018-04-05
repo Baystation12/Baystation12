@@ -38,7 +38,7 @@
 
 /obj/effect/overmap/ship/npc_ship/cargo/parse_action_request(var/request,var/mob/requester)
 	if(request == "Trade with")
-		to_chat(requester,"[name] A trade? Of course. On our way.")
+		to_chat(requester,"<span class = 'comradio'>[name] A trade? Of course. On our way.</span>")
 		set_cargo_call_status(map_sectors["[requester.z]"])
 
 #undef BASE_CARGO_STAY_TIME
