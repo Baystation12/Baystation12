@@ -39,7 +39,7 @@
 	var/list/projectiles_to_spawn = list()
 
 /obj/effect/overmap/ship/npc_ship/proc/can_board() //So this sort of stuff can be overidden later down the line for things like cargo shuttles.
-	if(hull > initial(hull)/4)
+	if(hull < initial(hull)/4)
 		return 1
 	if(isnull(target_loc))
 		return 1
