@@ -579,23 +579,25 @@
 
 /datum/job/officer
 	title = "Master at Arms"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "the Chief of Security"
 	economic_modifier = 4
 	minimal_player_age = 10
 	ideal_character_age = 25
-	alt_titles = null
+	alt_titles = list("Colonial Marshal")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/maa
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet,
+		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/security/maa/marshal
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/civ/marshal
 	)
 
 

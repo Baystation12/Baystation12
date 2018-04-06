@@ -266,7 +266,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marshal
 	name = OUTFIT_JOB_NAME("Forensic Technician - Colonial Marshal")
-	uniform = /obj/item/clothing/under/det/grey
+	uniform = /obj/item/clothing/under/marshal
 	suit = /obj/item/clothing/suit/storage/toggle/marshal_jacket
 	shoes = /obj/item/clothing/shoes/dress
 
@@ -280,6 +280,12 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
 	name = OUTFIT_JOB_NAME("Master at Arms - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/security/maa/marshal
+	name = OUTFIT_JOB_NAME("Master at Arms - Colonial Marshal")
+	uniform = /obj/item/clothing/under/marshal
+	suit = /obj/item/clothing/suit/storage/toggle/marshal_jacket
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 //Medical Outfits
