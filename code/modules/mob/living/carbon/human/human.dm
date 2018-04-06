@@ -1434,6 +1434,14 @@
 		return check_organ.can_feel_pain()
 	return !(species.species_flags & SPECIES_FLAG_NO_PAIN)
 
+/mob/living/carbon/human/get_breath_volume()
+	. = ..()
+	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
+	if(H)
+		. *= (H.robotic < ORGAN_ROBOT) ? pulse()/PULSE_NORM : 1.5
+	if(species)
+		. *= species.hunger_factor/DEFAULT_HUNGER_FACTOR
+
 /mob/living/carbon/human/need_breathe()
 	if(species.breathing_organ && should_have_organ(species.breathing_organ))
 		return 1

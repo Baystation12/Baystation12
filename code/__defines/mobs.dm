@@ -48,14 +48,14 @@
 #define UNDER 0x4
 
 // Pulse levels, very simplified.
-#define PULSE_NONE    0 // So !M.pulse checks would be possible.
-#define PULSE_SLOW    1 // <60     bpm
-#define PULSE_NORM    2 //  60-90  bpm
-#define PULSE_FAST    3 //  90-120 bpm
-#define PULSE_2FAST   4 // >120    bpm
-#define PULSE_THREADY 5 // Occurs during hypovolemic shock
-#define GETPULSE_HAND 0 // Less accurate. (hand)
-#define GETPULSE_TOOL 1 // More accurate. (med scanner, sleeper, etc.)
+#define PULSE_NONE    0   // So !M.pulse checks would be possible.
+#define PULSE_SLOW    0.5 // <60     bpm
+#define PULSE_NORM    1   //  60-90  bpm
+#define PULSE_FAST    2   //  90-120 bpm
+#define PULSE_2FAST   3   // >120    bpm
+#define PULSE_THREADY 4   // Occurs during hypovolemic shock
+#define GETPULSE_HAND 0   // Less accurate. (hand)
+#define GETPULSE_TOOL 1   // More accurate. (med scanner, sleeper, etc.)
 
 //intent flags, why wasn't this done the first time?
 #define I_HELP		"help"
