@@ -9,27 +9,27 @@
 	src.track = track
 
 GLOBAL_LIST_INIT(music_tracks, list(
-		new/datum/track("Beyond", 'sound/ambience/ambispace.ogg'),
-		new/datum/track("Clouds of Fire", 'sound/music/clouds.s3m'),
-		new/datum/track("Stage Three", 'sound/music/title2.ogg'),
-		new/datum/track("Asteroids", 'sound/ambience/song_game.ogg'),
-		new/datum/track("Floating", 'sound/music/main.ogg'),
-		new/datum/track("Endless Space", 'sound/music/space.ogg'),
-		new/datum/track("Fleet Party Theme", 'sound/misc/TestLoop1.ogg'),
-		new/datum/track("Scratch", 'sound/music/title1.ogg'),
-		new/datum/track("Absconditus", 'sound/music/traitor.ogg'),
-		new/datum/track("lasers rip apart the bulkhead", 'sound/music/lasers_rip_apart_the_bulkhead_looped.ogg'),
-		new/datum/track("Maschine Klash", 'sound/music/1.ogg'),
-		new/datum/track("Comet Halley", 'sound/music/comet_haley.ogg'),
-		new/datum/track("Please Come Back Any Time", 'sound/music/elevatormusic.ogg'),
-		new/datum/track("Human", 'sound/music/human.ogg'),
-		new/datum/track("Memories of Lysendraa", 'sound/music/lysendraa.ogg'),
-		new/datum/track("Marhaba", 'sound/music/marhaba.ogg'),
-		new/datum/track("Space Oddity", 'sound/music/space_oddity.ogg'),
-		new/datum/track("THUNDERDOME", 'sound/music/THUNDERDOME.ogg'),
-		new/datum/track("Torch: A Light in the Darkness", 'sound/music/Torch.ogg'),
-		new/datum/track("Treacherous Voyage", 'sound/music/treacherous_voyage.ogg'),
-		new/datum/track("Wake", 'sound/music/wake.ogg'),
+		new/datum/track("Beyond", /music_track/ambispace),
+		new/datum/track("Clouds of Fire", /music_track/clouds_of_fire),
+		new/datum/track("Stage Three", /music_track/dilbert),
+		new/datum/track("Asteroids", /music_track/df_theme),
+		new/datum/track("Floating", /music_track/floating),
+		new/datum/track("Endless Space", /music_track/endless_space),
+		new/datum/track("Fleet Party Theme", /music_track/one_loop),
+		new/datum/track("Scratch", /music_track/level3_mod),
+		new/datum/track("Absconditus", /music_track/absconditus),
+		new/datum/track("lasers rip apart the bulkhead", /music_track/lasers),
+		new/datum/track("Maschine Klash", /music_track/digit_one),
+		new/datum/track("Comet Halley", /music_track/comet_haley),
+		new/datum/track("Please Come Back Any Time", /music_track/elevator),
+		new/datum/track("Human", /music_track/human),
+		new/datum/track("Memories of Lysendraa", /music_track/lysendraa),
+		new/datum/track("Marhaba", /music_track/marhaba),
+		new/datum/track("Space Oddity", /music_track/space_oddity),
+		new/datum/track("THUNDERDOME", /music_track/thunderdome),
+		new/datum/track("Torch: A Light in the Darkness", /music_track/torch),
+		new/datum/track("Treacherous Voyage", /music_track/treacherous_voyage),
+		new/datum/track("Wake", /music_track/wake)
 ))
 
 datum/track/proc/GetTrack()
@@ -63,28 +63,7 @@ datum/track/proc/GetTrack()
 	var/datum/sound_token/sound_token
 
 	var/datum/track/current_track
-	var/list/datum/track/tracks = list(
-		new/datum/track("Beyond", /music_track/ambispace),
-		new/datum/track("Clouds of Fire", /music_track/clouds_of_fire),
-		new/datum/track("Stage Three", /music_track/dilbert),
-		new/datum/track("Asteroids", /music_track/df_theme),
-		new/datum/track("Floating", /music_track/floating),
-		new/datum/track("Endless Space", /music_track/endless_space),
-		new/datum/track("Fleet Party Theme", /music_track/one_loop),
-		new/datum/track("Scratch", /music_track/level3_mod),
-		new/datum/track("Absconditus", /music_track/absconditus),
-		new/datum/track("lasers rip apart the bulkhead", /music_track/lasers),
-		new/datum/track("Maschine Klash", /music_track/digit_one),
-		new/datum/track("Comet Halley", /music_track/comet_haley),
-		new/datum/track("Please Come Back Any Time", /music_track/elevator),
-		new/datum/track("Human", /music_track/human),
-		new/datum/track("Memories of Lysendraa", /music_track/lysendraa),
-		new/datum/track("Marhaba", /music_track/marhaba),
-		new/datum/track("Space Oddity", /music_track/space_oddity),
-		new/datum/track("THUNDERDOME", /music_track/thunderdome),
-		new/datum/track("Torch: A Light in the Darkness", /music_track/torch),
-		new/datum/track("Treacherous Voyage", /music_track/treacherous_voyage),
-	)
+	var/list/datum/track/tracks
 
 
 /obj/machinery/media/jukebox/old
@@ -100,6 +79,10 @@ datum/track/proc/GetTrack()
 	..()
 	update_icon()
 	sound_id = "[/obj/machinery/media/jukebox]_[sequential_id(/obj/machinery/media/jukebox)]"
+
+/obj/machinery/media/jukebox/Initialize()
+	. = ..()
+	tracks = tracks || GLOB.music_tracks.Copy()
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
@@ -154,7 +137,7 @@ datum/track/proc/GetTrack()
 
 /obj/machinery/media/jukebox/ui_data()
 	var/list/juke_tracks = new
-	for(var/datum/track/T in GLOB.music_tracks)
+	for(var/datum/track/T in tracks)
 		juke_tracks.Add(T.title)
 
 	var/list/data = list(
@@ -171,7 +154,7 @@ datum/track/proc/GetTrack()
 		return TRUE
 	switch(action)
 		if("change_track")
-			for(var/datum/track/T in GLOB.music_tracks)
+			for(var/datum/track/T in tracks)
 				if(T.title == params["title"])
 					current_track = T
 					StartPlaying()

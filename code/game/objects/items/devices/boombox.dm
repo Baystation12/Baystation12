@@ -11,6 +11,7 @@
 	var/track_num = 1
 	var/volume = 40
 	var/datum/sound_token/sound_token
+	var/list/datum/track/tracks
 	var/sound_id
 
 /obj/item/device/boombox/attack_self(mob/user)
@@ -19,6 +20,10 @@
 /obj/item/device/boombox/New()
 	..()
 	sound_id = "[type]_[sequential_id(type)]"
+
+/obj/item/device/boombox/Initialize()
+	. = ..()
+	tracks = tracks || GLOB.music_tracks.Copy()
 
 /obj/item/device/boombox/Destroy()
 	stop()
@@ -45,10 +50,10 @@
 	if(href_list["tracknum"])
 		var/diff = text2num(href_list["tracknum"])
 		track_num += diff
-		if(track_num > GLOB.music_tracks.len)
+		if(track_num > tracks.len)
 			track_num = 1
 		else if (track_num < 1)
-			track_num = GLOB.music_tracks.len
+			track_num = tracks.len
 		if(playing)
 			start()
 		return TOPIC_REFRESH
@@ -69,7 +74,7 @@
 
 /obj/item/device/boombox/proc/start()
 	QDEL_NULL(sound_token)
-	var/datum/track/T = GLOB.music_tracks[track_num]
-	sound_token = sound_player.PlayLoopingSound(src, sound_id, T.sound, volume = volume, range = 7, falloff = 4, prefer_mute = TRUE)
+	var/datum/track/T = tracks[track_num]
+	sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, T.GetTrack(), volume = volume, range = 7, falloff = 4, prefer_mute = TRUE)
 	playing = 1
 	update_icon()

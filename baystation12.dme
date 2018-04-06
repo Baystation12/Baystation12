@@ -265,6 +265,7 @@
 #include "code\datums\music_tracks\title1.dm"
 #include "code\datums\music_tracks\Torch.dm"
 #include "code\datums\music_tracks\treacherous_voyage.dm"
+#include "code\datums\music_tracks\wake.dm"
 #include "code\datums\observation\_defines.dm"
 #include "code\datums\observation\death.dm"
 #include "code\datums\observation\density_set.dm"
