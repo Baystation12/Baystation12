@@ -35,7 +35,7 @@
 "aI" = (/obj/structure/closet/crate,/obj/random/tool,/turf/simulated/floor/plating,/area/om_ships/hauler)
 "aJ" = (/obj/structure/closet/cabinet,/obj/random/handgun,/obj/random/tool,/turf/simulated/floor/tiled,/area/om_ships/hauler)
 "aK" = (/turf/simulated/floor/tiled,/area/om_ships/hauler)
-"aL" = (/obj/structure/bed,/obj/item/weapon/book/manual/evaguide,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aL" = (/obj/structure/bed,/obj/item/weapon/book/manual/evaguide,/obj/effect/landmark/ship_captain_ghost_spawn,/turf/simulated/floor/tiled,/area/om_ships/hauler)
 "aM" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled,/area/om_ships/hauler)
 "aN" = (/obj/structure/closet/secure_closet/freezer/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/turf/simulated/floor/tiled,/area/om_ships/hauler)
 "aO" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/hauler)
