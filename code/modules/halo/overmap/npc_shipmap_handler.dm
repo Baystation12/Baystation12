@@ -7,6 +7,8 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 	var/list/free_ship_map_zs = list()
 
 /datum/npc_ship_map_handler/proc/free_map(var/z_to_free)
+	if(z_to_free in free_ship_map_zs)
+		return
 	ship_map_zs -= z_to_free
 	free_ship_map_zs += z_to_free
 	clear_z(z_to_free)
@@ -22,7 +24,7 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 				var/turf/to_remove = locate(n_x,n_y,z_level)
 				for(var/atom/A in to_remove.contents)
 					qdel(A)
-				qdel(to_remove)
+				new /turf/space (to_remove)
 
 /datum/npc_ship_map_handler/proc/un_free_map(var/z_to_un_free)
 	if(z_to_un_free in free_ship_map_zs)
