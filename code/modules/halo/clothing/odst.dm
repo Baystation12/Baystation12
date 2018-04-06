@@ -21,7 +21,7 @@
 	icon_override = ODST_OVERRIDE
 	item_state = "Odst Helmet"
 	icon_state = "Helmet"
-	item_flags = THICKMATERIAL
+	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
 	body_parts_covered = HEAD|FACE
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	cold_protection = HEAD

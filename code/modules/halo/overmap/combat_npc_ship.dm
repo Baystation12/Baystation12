@@ -72,7 +72,7 @@
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/parse_action_request(var/request,var/mob/requester)
 	if(request == "Cargo Inspection" || "Halt")
-		to_chat(requester,"[src.name] : Slowing do- DIE UNSC SCUM! FOR THE URF!")
+		to_chat(requester,"<span class = 'comradio'>[src.name] : Slowing do- DIE UNSC SCUM! FOR THE URF!</span>")
 		for(var/obj/effect/overmap/ship/npc_ship/combat/innie/ship in view(7,src))
 			GLOB.global_headset.autosay("FOR THE URF!","[ship.name]","[halo_frequencies.innie_channel]")
 			ship.target = map_sectors["[requester.z]"]

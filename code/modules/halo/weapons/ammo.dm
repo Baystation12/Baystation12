@@ -231,7 +231,6 @@
 /obj/item/ammo_magazine/m5/rubber
 	name = "magazine (5mm) M443 Caseless Rubber"
 	desc = "Rubber bullets for riot suppression."
-	icon_state = "m7mag2"
 	ammo_type = /obj/item/ammo_casing/m5/rubber
 
 /obj/item/ammo_casing/m5

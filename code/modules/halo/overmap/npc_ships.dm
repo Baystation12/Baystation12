@@ -39,7 +39,7 @@
 	var/list/projectiles_to_spawn = list()
 
 /obj/effect/overmap/ship/npc_ship/proc/can_board() //So this sort of stuff can be overidden later down the line for things like cargo shuttles.
-	if(hull > initial(hull)/4)
+	if(hull < initial(hull)/4)
 		return 1
 	if(isnull(target_loc))
 		return 1
@@ -53,6 +53,7 @@
 			return //Don't disappear if there's people aboard.
 	for(var/z_level in map_z)
 		shipmap_handler.free_map(z_level)
+		map_z -= z_level
 	GLOB.processing_objects -= src
 	qdel(src)
 
@@ -124,6 +125,7 @@
 		shipmap_handler.un_free_map(z_to_load_at)
 		spawn(-1)
 			maploader.load_map(link,z_to_load_at)
+			create_lighting_overlays_zlevel(z_to_load_at)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
 	for(var/zlevel in map_z)
 		map_sectors["[zlevel]"] = src

@@ -3,8 +3,8 @@
 /obj/machinery/overmap_weapon_console/npc_comms_console
 	name = "Local Comms Console"
 	desc = "A console used to communicate with local vessels if other channels are unavailable."
-	icon = 'code/modules/halo/machinery/overmap_weapon_base.dmi'
-	icon_state = "wep_base"
+	icon = 'code/modules/halo/machinery/npc_comms.dmi'
+	icon_state = "base"
 	anchored = 1
 	density = 1
 	fired_projectile = /obj/item/projectile/overmap/npc_comms_projectile
