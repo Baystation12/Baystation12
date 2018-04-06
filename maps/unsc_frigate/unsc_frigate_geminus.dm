@@ -19,6 +19,8 @@
 
 	#include "unsc_frigate_spawndefs_geminus.dm"
 
+	#include "../odst_prowler/ODST_Ship.dmm"
+
 	#define using_map_DATUM /datum/map/unsc_frigate
 
 #elif !defined(MAP_OVERRIDE)

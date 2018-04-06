@@ -7,28 +7,27 @@
 /datum/gear/accessory/vest
 	display_name = "black vest"
 	path = /obj/item/clothing/accessory/toggleable/vest
-	allowed_roles = FORMAL_ROLES
+
 
 /datum/gear/accessory/suspenders
 	display_name = "suspenders"
 	path = /obj/item/clothing/accessory/suspenders
-	allowed_roles = NON_MILITARY_ROLES
+
 
 /datum/gear/accessory/wcoat
 	display_name = "waistcoat"
 	path = /obj/item/clothing/accessory/wcoat
-	allowed_roles = FORMAL_ROLES
+
 
 /datum/gear/accessory/zhongshan
 	display_name = "zhongshan jacket"
 	path = /obj/item/clothing/accessory/toggleable/zhongshan
-	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/dashiki
 	display_name = "dashiki selection"
 	path = /obj/item/clothing/accessory/dashiki
-	allowed_roles = NON_MILITARY_ROLES
+
 
 /datum/gear/accessory/dashiki/New()
 	..()
@@ -37,30 +36,26 @@
 /datum/gear/accessory/thawb
 	display_name = "thawb"
 	path = /obj/item/clothing/accessory/thawb
-	allowed_roles = NON_MILITARY_ROLES
+
 
 /datum/gear/accessory/sherwani
 	display_name = "sherwani"
 	path = /obj/item/clothing/accessory/sherwani
-	allowed_roles = FORMAL_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/qipao
 	display_name = "qipao blouse"
 	path = /obj/item/clothing/accessory/qipao
-	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/sweater
 	display_name = "turtleneck sweater"
 	path = /obj/item/clothing/accessory/sweater
-	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/tangzhuang
 	display_name = "tangzhuang jacket"
 	path = /obj/item/clothing/accessory/tangzhuang
-	allowed_roles = NON_MILITARY_ROLES
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/necklace
@@ -71,7 +66,6 @@
 /datum/gear/accessory/bowtie
 	display_name = "bowtie, horrible"
 	path = /obj/item/clothing/accessory/bowtie/ugly
-	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/accessory/bowtie/color
 	display_name = "bowtie, colored"
@@ -82,52 +76,51 @@
 /datum/gear/accessory/armband_security
 	display_name = "security armband"
 	path = /obj/item/clothing/accessory/armband
-	allowed_roles = SECURITY_ROLES
+
 
 /datum/gear/accessory/armband_mp
 	display_name = "military police armband"
 	path = /obj/item/clothing/accessory/armband/mp
-	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/hos, /datum/job/detective)
+
 
 /datum/gear/accessory/armband_cargo
 	display_name = "cargo armband"
 	path = /obj/item/clothing/accessory/armband/cargo
-	allowed_roles = SUPPLY_ROLES
+
 
 /datum/gear/accessory/armband_medical
 	display_name = "medical armband"
 	path = /obj/item/clothing/accessory/armband/med
-	allowed_roles = MEDICAL_ROLES
+
 
 /datum/gear/accessory/armband_emt
 	display_name = "EMT armband"
 	path = /obj/item/clothing/accessory/armband/medgreen
-	allowed_roles = list(/datum/job/doctor, /datum/job/doctor_contractor)
+
 
 /datum/gear/accessory/armband_corpsman
 	display_name = "medical corps armband"
 	path = /obj/item/clothing/accessory/armband/medblue
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor)
+
 
 /datum/gear/accessory/armband_engineering
 	display_name = "engineering armband"
 	path = /obj/item/clothing/accessory/armband/engine
-	allowed_roles = ENGINEERING_ROLES
+
 
 /datum/gear/accessory/armband_hydro
 	display_name = "hydroponics armband"
 	path = /obj/item/clothing/accessory/armband/hydro
-	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/assistant)
+
 
 /datum/gear/accessory/armband_nt
 	display_name = "NanoTrasen armband"
 	path = /obj/item/clothing/accessory/armband/whitered
-	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
 
 /datum/gear/accessory/armband_solgov
 	display_name = "peacekeeper armband"
 	path = /obj/item/clothing/accessory/armband/bluegold
-	allowed_roles = SOLGOV_ROLES
+
 
 /datum/gear/accessory/wallet
 	display_name = "wallet"
@@ -143,7 +136,6 @@
 	display_name = "holster selection"
 	path = /obj/item/clothing/accessory/holster
 	cost = 3
-	allowed_roles = ARMED_ROLES
 
 /datum/gear/accessory/holster/New()
 	..()
@@ -152,7 +144,7 @@
 /datum/gear/accessory/ubac
 	display_name = "ubac selection"
 	path = /obj/item/clothing/accessory/ubac
-	allowed_roles = MILITARY_ROLES
+
 
 /datum/gear/accessory/ubac/New()
 	..()
@@ -161,7 +153,7 @@
 /datum/gear/accessory/tie
 	display_name = "tie selection"
 	path = /obj/item/clothing/accessory
-	allowed_roles = NON_MILITARY_ROLES
+
 
 /datum/gear/accessory/tie/New()
 	..()
@@ -178,63 +170,9 @@
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
 /datum/gear/accessory/stethoscope
-	display_name = "stethoscope (medical)"
+	display_name = "stethoscope"
 	path = /obj/item/clothing/accessory/stethoscope
 	cost = 2
-	allowed_roles = STERILE_ROLES
-
-/datum/gear/accessory/brown_vest
-	display_name = "webbing, engineering"
-	path = /obj/item/clothing/accessory/storage/brown_vest
-	cost = 3
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/solgov_pilot, /datum/job/nt_pilot)
-
-/datum/gear/accessory/black_vest
-	display_name = "webbing, security"
-	path = /obj/item/clothing/accessory/storage/black_vest
-	cost = 3
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
-
-/datum/gear/accessory/white_vest
-	display_name = "webbing, medical"
-	path = /obj/item/clothing/accessory/storage/white_vest
-	cost = 3
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/merchant)
-
-/datum/gear/accessory/brown_drop_pouches
-	display_name = "drop pouches, engineering"
-	path = /obj/item/clothing/accessory/storage/drop_pouches/brown
-	cost = 3
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
-						/datum/job/cargo_contractor, /datum/job/mining, /datum/job/janitor, /datum/job/scientist_assistant, /datum/job/merchant)
-
-/datum/gear/accessory/black_drop_pouches
-	display_name = "drop pouches, security"
-	path = /obj/item/clothing/accessory/storage/drop_pouches/black
-	cost = 3
-	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
-
-/datum/gear/accessory/white_drop_pouches
-	display_name = "drop pouches, medical"
-	path = /obj/item/clothing/accessory/storage/drop_pouches/white
-	cost = 3
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/merchant)
-
-/datum/gear/accessory/webbing
-	display_name = "webbing, simple"
-	path = /obj/item/clothing/accessory/storage/webbing
-	cost = 2
-
-/datum/gear/accessory/webbing_large
-	display_name = "webbing, large"
-	path = /obj/item/clothing/accessory/storage/webbing_large
-	cost = 3
-
-/datum/gear/accessory/bandolier
-	display_name = "bandolier"
-	path = /obj/item/clothing/accessory/storage/bandolier
-	cost = 3
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
@@ -253,14 +191,14 @@
 	display_name = "scarf"
 	path = /obj/item/clothing/accessory/scarf
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = SEMIFORMAL_ROLES
+
 
 /datum/gear/accessory/solawardmajor
-	display_name = "SolGov major award selection"
-	description = "A medal or ribbon awarded to SolGov personnel for significant accomplishments."
+	display_name = "UNSC major award selection"
+	description = "A medal or ribbon awarded to UNSC personnel for significant accomplishments."
 	path = /obj/item/clothing/accessory/medal/iron/star
 	cost = 8
-	allowed_roles = SOLGOV_ROLES
+
 
 /datum/gear/accessory/solawardmajor/New()
 	..()
@@ -276,11 +214,11 @@
 	gear_tweaks += new/datum/gear_tweak/path(solmajors)
 
 /datum/gear/accessory/solawardminor
-	display_name = "SolGov minor award selection"
-	description = "A medal or ribbon awarded to SolGov personnel for minor accomplishments."
+	display_name = "UNSC minor award selection"
+	description = "A medal or ribbon awarded to UNSC personnel for minor accomplishments."
 	path = /obj/item/clothing/accessory/medal/iron/sol
 	cost = 5
-	allowed_roles = SOLGOV_ROLES
+
 
 /datum/gear/accessory/solawardminor/New()
 	..()
@@ -291,25 +229,10 @@
 	solminors["instructor ribbon"] = /obj/item/clothing/accessory/ribbon/instructor
 	gear_tweaks += new/datum/gear_tweak/path(solminors)
 
-/datum/gear/accessory/ntaward
-	display_name = "NanoTrasen award selection"
-	description = "A medal or ribbon awarded to NanoTrasen personnel for significant accomplishments."
-	path = /obj/item/clothing/accessory/medal/bronze/nanotrasen
-	cost = 8
-	allowed_roles = NANOTRASEN_ROLES
-
-/datum/gear/accessory/ntaward/New()
-	..()
-	var/ntawards = list()
-	ntawards["sciences medal"] = /obj/item/clothing/accessory/medal/bronze/nanotrasen
-	ntawards["nanotrasen service"] = /obj/item/clothing/accessory/medal/silver/nanotrasen
-	ntawards["command medal"] = /obj/item/clothing/accessory/medal/gold/nanotrasen
-	gear_tweaks += new/datum/gear_tweak/path(ntawards)
-
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/tags
-	allowed_roles = MILITARY_ROLES
+
 
 /datum/gear/accessory/kneepads
 	display_name = "kneepads"
@@ -321,4 +244,3 @@
 	slot = slot_tie
 	flags = GEAR_HAS_COLOR_SELECTION
 	sort_category = "Accessories"
-	allowed_roles = SEMIFORMAL_ROLES

@@ -44,7 +44,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		//spawn(rand(-1,20))
 		if(prob(75))
 			dir = get_dir(src, assault_target)
-			Move(get_step_towards(src,assault_target))
+			var/turf/target_turf = get_step_towards(src,assault_target)
+			Move(target_turf)
 			/*else
 				var/moving_to = pick(GLOB.cardinal)
 				set_dir(moving_to)			//How about we turn them the direction they are moving, yay.

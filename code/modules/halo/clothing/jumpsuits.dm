@@ -14,6 +14,7 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+	armor = list(melee = 10, bullet = 10, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/under/unsc/command
 
@@ -55,9 +56,9 @@
 /obj/item/clothing/under/unsc/operations
 	desc = "UNSC operations uniform"
 	name = "operations uniform"
-	icon_state = "unsclightblue"
-	item_state = "unsclightblue"
-	worn_state = "unsc_lightblue"
+	icon_state = "greydress_com"
+	item_state = "greydress_com"
+	worn_state = "greydress_com_s"
 
 //doesn't fit colour scheme
 /obj/item/clothing/under/unsc/highcom //this is intended for admin usage only!

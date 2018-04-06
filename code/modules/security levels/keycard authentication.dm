@@ -70,6 +70,7 @@
 
 		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Emergency Maintenance Access'>Grant Emergency Maintenance Access</A></li>"
 		dat += "<li><A href='?src=\ref[src];triggerevent=Revoke Emergency Maintenance Access'>Revoke Emergency Maintenance Access</A></li>"
+		dat += "<li><A href='?src=\ref[src];triggerevent=Activate Protocol 098831A1 '>Activate Protocol 098831A1</A></li>"
 		dat += "</ul>"
 		user << browse(dat, "window=keycard_auth;size=500x250")
 	if(screen == 2)
@@ -156,6 +157,14 @@
 
 			trigger_armed_response_team(1)
 			feedback_inc("alert_keycard_auth_ert",1)
+
+		if("Activate Protocol 098831A1")
+			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in world
+			if(nuke)
+				to_chat(usr, "The nuclear authorization code is [nuke.r_code]")
+			else
+				to_chat(usr, "No self destruct terminal found.")
+			feedback_inc("alert_keycard_auth_nukecode",1)
 
 /obj/machinery/keycard_auth/proc/is_ert_blocked()
 	if(config.ert_admin_call_only) return 1

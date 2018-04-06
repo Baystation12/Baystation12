@@ -241,3 +241,29 @@
 	hitcost = 25
 	attack_verb = list("poked")
 	slot_flags = null
+
+//Humbler Baton
+/obj/item/weapon/melee/baton/humbler
+	name = "humbler stun device"
+	desc = "A retractable baton capable of inducing a large amount of pain via electrical shocks."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "humbler stun device"
+	item_state = "telebaton_0"
+	force = 15
+	sharp = 0
+	edge = 0
+	throwforce = 7
+	w_class = ITEM_SIZE_NORMAL
+	origin_tech = list(TECH_COMBAT = 2)
+	attack_verb = list("beaten")
+	stunforce = 0
+	agonyforce = 60
+	status = 0		//whether the thing is on or not
+	hitcost = 10
+
+
+/obj/item/weapon/melee/baton/humbler/New()
+	..()
+	bcell = new/obj/item/weapon/cell/high(src)
+	update_icon()
+	return

@@ -72,13 +72,13 @@
 /datum/gear/gloves/dress
 	display_name = "gloves, dress"
 	path = /obj/item/clothing/gloves/color/white
-	allowed_roles = MILITARY_ROLES
+
 
 /datum/gear/gloves/duty
 	display_name = "gloves, duty"
 	path = /obj/item/clothing/gloves/duty
 	cost = 3
-	allowed_roles = MILITARY_ROLES
+
 
 /datum/gear/gloves/work
 	display_name = "gloves, work"

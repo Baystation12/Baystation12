@@ -13,33 +13,23 @@ var/global/list/seen_religions = list()
 	return
 
 var/global/list/citizenship_choices = list(
-	"Earth",
-	"Mars",
-	"Moghes",
-	"Ahdomai",
-	"Qerrbalak"
+	"Inner Colonies",
+	"Outer Colonies",
+	"Unregistered Birth",
+	"Registered Spaceborn"
 	)
 
 var/global/list/home_system_choices = list(
 	"Sol",
-	"Nyx",
-	"Tau Ceti",
-	"Epsilon Ursae Minoris",
-	"S'randarr"
+	"Epsilon Eridani",
+	"Eridanus",
+	"Spaceborn UEG",
+	"Spaceborn Outer Colonies",
+	"Unspecified Outer Colony"
 	)
 
 var/global/list/faction_choices = list(
-	"Sol Central Government",
-	"Vey Med",
-	"Einstein Engines",
-	"Free Trade Union",
-	"NanoTrasen",
-	"Ward-Takahashi GMB",
-	"Gilthari Exports",
-	"Grayson Manufactories Ltd.",
-	"Aether Atmospherics",
-	"Zeng-Hu Pharmaceuticals",
-	"Hephaestus Industries"
+	"United Earth Government"
 	)
 
 var/global/list/religion_choices = list(

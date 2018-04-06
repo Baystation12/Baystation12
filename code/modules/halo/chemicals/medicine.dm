@@ -22,7 +22,7 @@
 
 			H.resuscitate()
 			holder.remove_reagent("triadrenaline", dose)
-			log_and_message_admins("Tri-adrenaline used to revive [key_name(H)]")
+			//log_and_message_admins("Tri-adrenaline used to revive [key_name(H)]")
 
 /datum/reagent/triadrenaline/overdose(var/mob/living/carbon/human/H)
 	var/obj/item/organ/internal/heart/O = H.internal_organs_by_name["heart"]

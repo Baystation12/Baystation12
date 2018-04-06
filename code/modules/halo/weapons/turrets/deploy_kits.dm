@@ -3,8 +3,8 @@
 	name = "Turret Deploy Kit"
 	desc = "Contains all the parts and single-use tools to construct a turret emplacement"
 
-	w_class = 5
-	slowdown_general = 5
+	w_class = ITEM_SIZE_HUGE
+	slowdown_general = 4
 
 	icon = 'code/modules/halo/weapons/turrets/deploy_kit_items.dmi'
 	icon_state = "hmg_kit"

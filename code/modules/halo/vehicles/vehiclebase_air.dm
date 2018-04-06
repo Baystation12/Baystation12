@@ -1,4 +1,4 @@
-
+#define VEHICLE_CONNECT_DELAY 7.5 SECONDS
 /obj/vehicles/air
 	name = "Dropship"
 	desc = "A dropship."
@@ -18,26 +18,42 @@
 
 	var/takeoff_overlay_icon_state
 	var/takeoff_sound
+	var/crash_sound
 
-/obj/vehicles/air/proc/takeoff_vehicle()
+	vehicle_size = 10//Way too big
+
+/obj/vehicles/air/MouseDrop(var/atom/over)
+	var/obj/vehicles/to_attach = over
+	var/mob/user = usr
+	if(!istype(to_attach) || !istype(user))
+		return
+	visible_message("<span class = 'warning'>[user] starts attaching [to_attach] to [src]</span>")
+	if(!do_after(user, VEHICLE_CONNECT_DELAY,to_attach,1,1,,1))
+		return
+	if(put_cargo_item(to_attach,user))
+		visible_message("<span class = 'notice'>[user] attaches [to_attach] to [src]</span>")
+
+/obj/vehicles/air/proc/takeoff_vehicle(var/message_n_sound_override = 0)
 	active = 1
 	change_elevation(2)
-	visible_message("<span class = 'warning'>[name]'s engines activate, propelling them into the air.</span>")
+	if(!message_n_sound_override)
+		visible_message("<span class = 'warning'>[name]'s engines activate, propelling them into the air.</span>")
+		if(takeoff_sound)
+			playsound(src,takeoff_sound,100,0)
 	var/takeoff_overlay = image(icon,takeoff_overlay_icon_state)
 	overlays += takeoff_overlay
-	if(takeoff_sound)
-		playsound(src,takeoff_sound,100,0)
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
-	block_entry_exit = 1
+	block_enter_exit = 1
 
-/obj/vehicles/air/proc/land_vehicle()
+/obj/vehicles/air/proc/land_vehicle(var/message_n_sound_override = 0)
 	active = 0
 	change_elevation(-2)
-	visible_message("<span class = 'warning'>[name]'s engines power down, slowly bringing them to the ground.</span>")
-	if(takeoff_sound)
-		playsound(src,takeoff_sound,100,0)
+	if(!message_n_sound_override)
+		visible_message("<span class = 'warning'>[name]'s engines power down, slowly bringing them to the ground.</span>")
+		if(takeoff_sound)
+			playsound(src,takeoff_sound,100,0)
 	pass_flags = 0
-	block_entry_exit = 0
+	block_enter_exit = 0
 	overlays.Cut()
 
 /obj/vehicles/air/verb/takeoff_land()
@@ -46,7 +62,7 @@
 	set category = "Vehicle"
 	set src in range(1)
 
-	if(usr != driver)
+	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
 	if(active)
@@ -88,10 +104,34 @@
 	set category = "Vehicle"
 	set src in range(1)
 
-	if(usr != driver)
+	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
 	if(!active)
 		to_chat(usr,"<span class = 'notice'>You need to be in the air to do that!.</span>")
 		return
 	proc_fly_to_waypoint()
+
+/obj/vehicles/air/inactive_pilot_effects()
+	//Crashing this vehicle with potential casualties.
+	visible_message("<span class = 'danger'>[name] spirals towards the ground, driverless!</span>")
+	for(var/mob/living/carbon/human/h in occupants)
+		if(prob(33))
+			visible_message("<span class = 'warning'>[h.name] is violently thrown from [src]</span>")
+			exit_vehicle(h)
+			h.forceMove(pick(view(5,src) - view(2,src))) //Let's not throw these people into the epicenter of the ensuing explosion.
+			if(prob(5))
+				//Make it hurt, badly.
+				h.visible_message("<span class = 'danger'>[h.name] skids along [loc].</span>")
+				h.adjustBruteLoss(rand(25,50))
+			else
+				h.visible_message("<span class = 'danger'>[h.name] slams into [loc].</span>")
+				h.adjustBruteLoss(rand(5,20))
+	land_vehicle(1)
+	if(crash_sound)
+		playsound(src,crash_sound,100,0)
+	explosion(src.loc,-1,3,4,7)
+
+/obj/vehicles/air/update_object_sprites()
+
+#undef VEHICLE_CONNECT_DELAY

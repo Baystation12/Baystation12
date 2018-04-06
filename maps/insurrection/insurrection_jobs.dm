@@ -15,6 +15,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/Insurrectionist
 
 	latejoin_at_spawnpoints = TRUE
+	alt_titles = list("Insurrectionist Pilot","Insurrectionist Machine Gunner","Insurrectionist Engineer","Insurrectionist Sharpshooter")
 
 /datum/job/Insurrectionist_leader
 	title = "Insurrectionist Leader"

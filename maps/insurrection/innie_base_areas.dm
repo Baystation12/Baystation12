@@ -4,25 +4,35 @@
 //AREAS//
 /////////
 
+/area/asteroid_base //Temp define for Tranq.
+	requires_power = 0
 
 //engineering
-
 /area/asteroid_base/engine
-	name = "\improper Base Power Generators"
+	name = "\improper Engineering Equipment"
 	icon_state = "engine"
+
+/area/asteroid_base/engine/generator
+	name = "\improper Engineering Power Plant"
+
+/area/asteroid_base/engine/generator/control
+	name = "\improper Engineering Power Control"
+
+/area/asteroid_base/engine/smes
+	name = "\improper Engineering Power Capicators"
+
+/area/asteroid_base/engine/canisters
+	name = "\improper Engineering Canisters Storage"
+
+
 
 /area/asteroid_base/atmos
 	name = "\improper Atmospherics Processing"
 	icon_state = "atmos"
 
-/area/asteroid_base/storage_atmos
-	name = "\improper Atmospherics Storage"
-	icon_state = "atmos_storage"
-
 /area/asteroid_base/storage_eng
 	name = "\improper Atmospherics Storage"
 	icon_state = "engineering_storage"
-
 
 //civilian
 /area/asteroid_base/west_dorms

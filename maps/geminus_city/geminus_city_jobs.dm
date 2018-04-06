@@ -22,6 +22,7 @@
 
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_janitor, access_maint_tunnels, access_research)
+	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Construction Worker","Surgeon","Store Owner","Nightclub Owner","Secretary","Cargo Worker","Bartender","Cook","Chef","Farmer","Judge","Cargo Dock Worker","Lawyer","EMT","Paramedic","Bodyguard","Janitor")
 
 /datum/job/innie_sympathiser
 	title = "Colonist - Insurrectionist Sympathiser"
@@ -55,7 +56,7 @@
 
 	loadout_allowed = TRUE
 	announced = FALSE
-	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
+	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_recruiter
 
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_janitor, access_maint_tunnels, access_research)
@@ -83,6 +84,7 @@
 			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_qm, access_hydroponics, access_lawyer,
 			            access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
+	alt_titles = list("Governer")
 
 /datum/job/marine
 	title = "Marine"
@@ -126,7 +128,7 @@
 
 /datum/job/police
 	title = "GCPD Officer"
-	total_positions = 8
+	total_positions = 6
 	selection_color = "#000000"
 	supervisors = " the Colony Mayor"
 	create_record = 0
@@ -139,6 +141,7 @@
 	access = list(access_security, access_brig, access_maint_tunnels,
 						access_external_airlocks, access_emergency_storage,
 			            access_eva, access_sec_doors)
+	alt_titles = list("GCPD SWAT Officer","GCPD Cadet","GCPD Detective","GCPD Forensic Scientist")
 
 /datum/job/cop
 	title = "Chief of Police"

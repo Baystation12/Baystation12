@@ -8,6 +8,8 @@ var/list/points_of_interest = list()
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
 	var/list/map_z = list()
+	var/list/weapon_locations = list(list(1,255,255,1)) //used for orbital unaimed MAC bombardment. Format: list(top_left_x,top_left_y,bottom_right_x,bottom_right_y) for each "visible" ground-to-ship weapon on the map.
+	var/weapon_miss_chance = 35
 
 	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
 	var/list/restricted_waypoints = list() //waypoints for specific shuttles
@@ -18,6 +20,8 @@ var/list/points_of_interest = list()
 	var/base = 0		//starting sector, counts as station_levels
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
+
+	var/list/connectors = list() //Used for docking umbilical type-items.
 
 /obj/effect/overmap/Initialize()
 

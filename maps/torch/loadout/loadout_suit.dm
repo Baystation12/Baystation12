@@ -10,18 +10,17 @@
 	display_name = "apron, blue"
 	path = /obj/item/clothing/suit/apron
 	cost = 1
-	allowed_roles = NON_MILITARY_ROLES
 
 /datum/gear/suit/overalls
 	display_name = "apron, overalls"
 	path = /obj/item/clothing/suit/apron/overalls
 	cost = 1
-	allowed_roles = NON_MILITARY_ROLES
+
 
 /datum/gear/suit/medcoat
 	display_name = "medical suit selection"
 	path = /obj/item/clothing/suit/storage/toggle/fr_jacket
-	allowed_roles = MEDICAL_ROLES
+
 
 /datum/gear/suit/medcoat/New()
 	..()
@@ -35,7 +34,7 @@
 	display_name = "trenchcoat selection"
 	path = /obj/item/clothing/suit/storage/det_trench
 	cost = 3
-	allowed_roles = RESTRICTED_ROLES
+
 
 /datum/gear/suit/trenchcoat/New()
 	..()
@@ -46,7 +45,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(trenchcoats)
 
 /datum/gear/suit/poncho
-	allowed_roles = RESTRICTED_ROLES
+
 
 /datum/gear/suit/roles/poncho/security
 	allowed_roles = list(/datum/job/guard, /datum/job/merchant)
@@ -64,7 +63,7 @@
 	allowed_roles = list(/datum/job/cargo_contractor, /datum/job/merchant)
 
 /datum/gear/suit/suit_jacket
-	allowed_roles = FORMAL_ROLES
+
 
 /datum/gear/suit/hazard
 	display_name = "hazard vests"
@@ -78,32 +77,30 @@
 	display_name = "hoodie"
 	path = /obj/item/clothing/suit/storage/hooded/hoodie
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = RESTRICTED_ROLES
+
 
 /datum/gear/suit/hoodie_sel
 	display_name = "hoodies"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
-	allowed_roles = RESTRICTED_ROLES
+
 
 /datum/gear/suit/hoodie_sel/New()
 	..()
 	var/hoodies = list()
 	hoodies["CTI hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/cti
 	hoodies["Mariner University hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/mu
-	hoodies["NanoTrasen hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/nt
-	hoodies["Space Mountain Wind hoodie"] = /obj/item/clothing/suit/storage/toggle/hoodie/smw
 	gear_tweaks += new/datum/gear_tweak/path(hoodies)
 
 /datum/gear/suit/labcoat
 	display_name = "labcoat, colored"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	flags = GEAR_HAS_COLOR_SELECTION
-	allowed_roles = NON_MILITARY_ROLES
+
 
 /datum/gear/suit/leather
 	display_name = "jacket selection"
 	path = /obj/item/clothing/suit/storage/leather_jacket
-	allowed_roles = NON_MILITARY_ROLES
+
 
 /datum/gear/suit/leather/New()
 	..()
@@ -160,12 +157,12 @@
 /datum/gear/suit/wintercoat
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
-	allowed_roles = RESTRICTED_ROLES
+
 
 /datum/gear/suit/track
 	display_name = "track jacket selection"
 	path = /obj/item/clothing/suit/storage/toggle/track
-	allowed_roles = RESTRICTED_ROLES
+
 
 /datum/gear/suit/track/New()
 	..()

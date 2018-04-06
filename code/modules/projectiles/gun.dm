@@ -50,6 +50,8 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
+	slowdown_general = 0.5 //Guns R heavy.
+
 	var/unique_name
 	var/burst = 1
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again
@@ -81,6 +83,10 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
 
+	//Attachment System Stuff//
+	var/list/attachment_slots = list()
+	var/list/attachments_on_spawn = list()
+
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
@@ -91,6 +97,52 @@
 
 	if(!unique_name)
 		unique_name = name
+
+	for(var/a in attachments_on_spawn)
+		var/obj/item/weapon_attachment/attachment = new a
+		if(!istype(attachment))
+			continue
+		attachment.attach_to(src)
+
+
+/obj/item/weapon/gun/proc/get_attachments(var/names_only = 0)
+	var/list/attachments = list()
+	for(var/obj/item/weapon_attachment/attachment in src.contents)
+		if(names_only)
+			attachments += attachment.name
+		else
+			attachments += attachment
+	return attachments
+
+/obj/item/weapon/gun/proc/get_attachment_by_name(var/wanted_name)
+	if(isnull(name))
+		return
+	for(var/obj/item/weapon_attachment/attachment in get_attachments())
+		if(attachment.name == wanted_name)
+			return attachment
+
+/obj/item/weapon/gun/proc/attachment_removal(var/obj/item/weapon_attachment/attachment_to_remove)
+	contents -= attachment_to_remove
+	if(isturf(loc))
+		attachment_to_remove.loc = loc
+	else
+		attachment_to_remove.loc = loc.loc
+	attachment_to_remove.on_removal(src)
+	update_icon()
+
+/obj/item/weapon/gun/verb/remove_attachments()
+	set name = "Remove Attachments"
+	set category = "Object"
+
+	var/attachment_name_remove = input("Pick an attachment to remove","Attachment Removal","Cancel") in get_attachments(1) + list("Cancel")
+	var/obj/item/weapon_attachment/attachment_to_remove = get_attachment_by_name(attachment_name_remove)
+	if(attachment_name_remove == "Cancel" || isnull(attachment_to_remove))
+		return
+	if(!attachment_to_remove.can_remove)
+		to_chat(usr,"<span class = 'notice'>You can only replace [attachment_to_remove.name], not remove it.</span>")
+		return
+	attachment_removal(attachment_to_remove)
+	to_chat(usr,"<span class = 'notice'>You remove the [attachment_to_remove.name] from [name]'s [attachment_to_remove.weapon_slot].</span>")
 
 /obj/item/weapon/gun/update_twohanding()
 	if(one_hand_penalty)
@@ -104,6 +156,12 @@
 	..()
 
 /obj/item/weapon/gun/update_icon()
+	for(var/image/image in overlays)
+		overlays -= image
+		qdel(image)
+	overlays = list()
+	for(var/obj/item/weapon_attachment/attachment in get_attachments())
+		attachment.attachment_sprite_modify(src)
 	if(wielded_item_state)
 		var/mob/living/M = loc
 		if(istype(M))
@@ -116,7 +174,7 @@
 
 /obj/item/weapon/gun/verb/rename_gun()
 	set name = "Name Gun"
-	set category = "Object"
+	set category = "Weapon"
 	set desc = "Rename your gun."
 
 	var/mob/M = usr
@@ -200,12 +258,12 @@
 	if(!user || !target) return
 	if(istype(user.loc,/obj/vehicles))
 		var/obj/vehicles/V = user.loc
-		var/user_position = V.controller.get_occupant_position(user)
+		var/user_position = V.occupants[user]
 		if(isnull(user_position)) return
 		if(user_position == "driver")
 			to_chat(user,"<span class = 'warning'>You can't fire from the driver's position!</span>")
 			return
-		if(!V.controller.get_position_exposed(user_position))
+		if(!(user_position in V.exposed_positions))
 			to_chat(user,"<span class = 'warning'>You can't fire [src.name] from this position in [V.name].</span>")
 			return
 		if(target.z != V.z) return
@@ -345,18 +403,42 @@
 				max_mult = G.point_blank_mult()
 	P.damage *= max_mult
 
+/obj/item/weapon/gun/proc/get_acc_or_disp_mod(var/get_disp_mod = 0)
+	var/base
+	if(get_disp_mod)
+		base = dispersion[min(burst, dispersion.len)]
+	else
+		base = burst_accuracy[min(burst, burst_accuracy.len)]
+	if(isnull(base))
+		return
+	for(var/obj/item/weapon_attachment/attach in get_attachments())
+		var/datum/attachment_profile/prof = attach.get_attachment_profile(src)
+		if(isnull(prof))
+			continue
+		var/list/attach_mods = prof.attribute_modifications[attach.name]
+		if(isnull(attach_mods))
+			continue
+		if(get_disp_mod)
+			base += attach_mods[1]
+		else
+			base += attach_mods[2]
+	return base
+
 /obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/user, atom/target, var/burst, var/held_twohanded)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
 
-	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
-	var/disp_mod = dispersion[min(burst, dispersion.len)]
+	var/acc_mod = get_acc_or_disp_mod()
+	var/disp_mod = get_acc_or_disp_mod(1)
 
 	if(one_hand_penalty)
 		if(!held_twohanded)
 			acc_mod += -ceil(one_hand_penalty/2)
-			disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
+			var/temp_one_hand_penalty = one_hand_penalty
+			if(one_hand_penalty < 0)
+				temp_one_hand_penalty = -one_hand_penalty
+			disp_mod += temp_one_hand_penalty*0.5 //dispersion per point of two-handedness
 
 	//Accuracy modifiers
 	P.accuracy = accuracy + acc_mod
@@ -489,3 +571,25 @@
 	if(new_mode)
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
+/obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
+	var/obj/item/weapon_attachment/attachment = A
+	if(istype(attachment))
+		attachment.on_attachment(src,user)
+
+/obj/item/weapon/gun/proc/use_scope()
+	set category = "Object"
+	set name = "Use Scope" //Gives slightly less info to the user but also allows for easy macro use.
+	set popup_menu = 1
+
+	var/used_zoom_amount
+	var/message = "<span class = 'notice'>You need to have a scope attached to use this.</span>"
+	for(var/obj/item/weapon_attachment/sight/s in get_attachments())
+		used_zoom_amount = s.zoom_amount
+	if(used_zoom_amount <= 1 || used_zoom_amount == 1)
+		used_zoom_amount = null
+		message = "<span class = 'notice'>Your attached scope has no magnification.</span>"
+	if(isnull(used_zoom_amount))
+		to_chat(usr,"[message]")
+		verbs -= /obj/item/weapon/gun/proc/use_scope
+		return
+	toggle_scope(usr, used_zoom_amount)

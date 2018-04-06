@@ -18,7 +18,7 @@
 	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
 		access_unsc_ops, access_unsc_fighters, access_unsc_shuttles, access_unsc_medical,
 		access_unsc_armoury, access_unsc_supplies, access_unsc_officers, access_unsc_marine,
-		access_unsc_gunnery, access_unsc_ids)
+		access_unsc_gunnery, access_unsc_ids, 60)
 
 //ship 2ic officer
 /datum/job/UNSC_ship/exo
@@ -39,7 +39,7 @@
 	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
 		access_unsc_ops, access_unsc_fighters, access_unsc_shuttles, access_unsc_medical,
 		access_unsc_armoury, access_unsc_supplies, access_unsc_officers, access_unsc_marine,
-		access_unsc_gunnery, access_unsc_ids)
+		access_unsc_gunnery, access_unsc_ids, 60)
 
 //overall commander of strike craft
 /datum/job/UNSC_ship/cag

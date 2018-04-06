@@ -9,7 +9,6 @@
 	item_state = "Jumpsuit"
 	icon_state = "Jumpsuit"
 	worn_state = "ODST Jumpsuit"
-	armor = list(melee = 10, bullet = 10, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
@@ -22,7 +21,7 @@
 	icon_override = ODST_OVERRIDE
 	item_state = "Odst Helmet"
 	icon_state = "Helmet"
-	item_flags = THICKMATERIAL
+	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
 	body_parts_covered = HEAD|FACE
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	cold_protection = HEAD
@@ -45,7 +44,7 @@
 	icon_state = "Odst Armour"
 	icon_override = ODST_OVERRIDE
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 55, bomb = 50, bio = 30, rad = 25)
+	armor = list(melee = 55, bullet = 45, laser = 55, energy = 55, bomb = 45, bio = 30, rad = 25)
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
@@ -55,6 +54,7 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+	armor_thickness = 20
 
 //Defines for armour subtypes//
 
@@ -124,6 +124,10 @@
 /obj/effect/random_ODST_set/Initialize()
 	.=..()
 	return INITIALIZE_HINT_QDEL
+
+/obj/item/clothing/accessory/storage/odst
+	name = "Tactical Webbing"
+	icon_state = "Tactical Webbing"
 
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND
