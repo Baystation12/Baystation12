@@ -53,6 +53,7 @@
 			return //Don't disappear if there's people aboard.
 	for(var/z_level in map_z)
 		shipmap_handler.free_map(z_level)
+		map_z -= z_level
 	GLOB.processing_objects -= src
 	qdel(src)
 
