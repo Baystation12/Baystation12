@@ -36,11 +36,11 @@
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
 "h" = (
-/obj/item/weapon/pickaxe/brush,
+/obj/item/weapon/pickaxe/xeno/brush,
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
 "i" = (
-/obj/item/weapon/pickaxe/six_pick,
+/obj/item/weapon/pickaxe/xeno/six_pick,
 /obj/item/device/measuring_tape,
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)

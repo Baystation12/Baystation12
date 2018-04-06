@@ -55,7 +55,7 @@
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
-	sharp = 1
+	sharp = 0
 
 	var/excavation_amount = 200
 
@@ -71,6 +71,7 @@
 	digspeed = 30
 	origin_tech = list(TECH_MATERIAL = 3)
 	desc = "This makes no metallurgic sense."
+	sharp = 1
 
 /obj/item/weapon/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!
@@ -98,6 +99,7 @@
 	origin_tech = list(TECH_MATERIAL = 4)
 	desc = "This makes no metallurgic sense."
 	drill_verb = "picking"
+	sharp = 1
 
 /obj/item/weapon/pickaxe/diamond
 	name = "diamond pickaxe"
@@ -107,6 +109,7 @@
 	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
 	desc = "A pickaxe with a diamond pick head."
 	drill_verb = "picking"
+	sharp = 1
 
 /obj/item/weapon/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"
