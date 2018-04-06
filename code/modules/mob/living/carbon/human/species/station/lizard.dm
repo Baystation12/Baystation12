@@ -24,7 +24,7 @@
 	secondary_langs = list(LANGUAGE_UNATHI)
 	name_language = LANGUAGE_UNATHI
 	health_hud_intensity = 2
-	hunger_factor = DEFAULT_HUNGER_FACTOR * 3
+	hunger_factor = DEFAULT_HUNGER_FACTOR
 
 	min_age = 18
 	max_age = 260
@@ -80,7 +80,10 @@
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
-/datum/species/unathi/handle_environment_special(var/mob/living/carbon/human/H)
+/datum/species/unathi/handle_environment_special(var/mob/living/carbon/human/unathi/H)
+	if(!istype(H))
+		return
+
 	if(H.InStasis() || H.stat == DEAD)
 		return
 	if(H.nutrition < 50)
@@ -89,61 +92,50 @@
 	if(!H.innate_heal)
 		return
 
-	//Heals normal damage.
-	if(H.getBruteLoss())
-		H.adjustBruteLoss(-2 * config.organ_regeneration_multiplier)	//Heal brute better than other ouchies.
-		H.nutrition -= 1
-	if(H.getFireLoss())
-		H.adjustFireLoss(-1 * config.organ_regeneration_multiplier)
-		H.nutrition -= 1
-	if(H.getToxLoss())
-		H.adjustToxLoss(-1 * config.organ_regeneration_multiplier)
-		H.nutrition -= 1
+	if(H.reagents.get_reagent_amount(/datum/reagent/inaprovaline) < 0.4) // keep it low to avoid not being able to inject dylo
+		H.reagents.add_reagent(/datum/reagent/inaprovaline, 0.2)
 
-	if(prob(5) && H.nutrition > 150 && !H.getBruteLoss() && !H.getFireLoss())
-		var/obj/item/organ/external/head/D = H.organs_by_name["head"]
-		if (D.disfigured)
-			D.disfigured = 0
-			H.nutrition -= 20
+	if(H.reagents.get_reagent_amount(/datum/reagent/synaptizine) < 0.2) // also low because it is easy to OD and metabolizes slowly
+		H.reagents.add_reagent(/datum/reagent/synaptizine, 0.1)
 
-	if(H.nutrition <= 100)
-		return
-
-	for(var/bpart in shuffle(H.internal_organs_by_name - BP_BRAIN))
-
-		var/obj/item/organ/internal/regen_organ = H.internal_organs_by_name[bpart]
-
-		if(regen_organ.robotic >= ORGAN_ROBOT)
-			continue
-		if(istype(regen_organ))
-			if(regen_organ.damage > 0 && !(regen_organ.status & ORGAN_DEAD))
-				regen_organ.damage = max(regen_organ.damage - 5, 0)
-				H.nutrition -= 5
-				if(prob(5))
-					to_chat(H, "<span class='warning'>You feel a soothing sensation as your [regen_organ] mends...</span>")
-
-	if(prob(2) && H.nutrition > 150)
+	if(prob(2) && !H.growing_limbs)
+		var/list/limbs_to_grow = list()
 		for(var/limb_type in has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits...
-				E.removed()			//...because no one wants their head to explode to make way for a new one.
-				qdel(E)
-				E= null
-			if(!E)
-				var/list/organ_data = has_limbs[limb_type]
-				var/limb_path = organ_data["path"]
-				var/obj/item/organ/external/O = new limb_path(H)
-				organ_data["descriptor"] = O.name
-				to_chat(H, "<span class='danger'>With a shower of fresh blood, a new [O.name] forms.</span>")
-				H.visible_message("<span class='danger'>With a shower of fresh blood, a length of biomass shoots from [H]'s [O.amputation_point], forming a new [O.name]!</span>")
+			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())
+				if(H.nutrition <= 150) // limbs that don't make it in this batch will have to wait for the next one
+					break
+
 				H.nutrition -= 50
-				var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
-				blood_splatter(H,B,1)
-				O.set_dna(H.dna)
-				H.update_body()
-				return
-			else
-				for(var/datum/wound/W in E.wounds)
-					if(W.wound_damage() == 0 && prob(50))
-						E.wounds -= W
+				limbs_to_grow |= limb_type
+				H.growing_limbs = TRUE
+
+		if(H.growing_limbs)
+			to_chat(H, "<span class='warning'>You feel a tingling sensation, a sign that your body is preparing to regrow.</span>")
+			addtimer(CALLBACK(src, .proc/regrow_limbs, H, limbs_to_grow), 14 MINUTES + 30 SECONDS)
+
+/datum/species/unathi/proc/regrow_limbs(var/mob/living/carbon/human/unathi/H, var/list/limbs_to_grow)
+	if(!istype(H))
+		return
+
+	to_chat(H, "<span class='danger'>You are overcome with pain as your body regrows!</span>")
+	H.Weaken(15)
+	sleep(30 SECONDS)
+
+	for(var/limb_type in limbs_to_grow)
+		var/obj/item/organ/external/E = H.organs_by_name[limb_type]
+		if(E) // robust unathi body doesn't care if there's a stump, a prosthetic, or nothing at all, it's going to get the limb that it wants
+			E.removed()
+			qdel(E)
+		var/list/organ_data = has_limbs[limb_type]
+		var/limb_path = organ_data["path"]
+		var/obj/item/organ/external/O = new limb_path(H)
+		organ_data["descriptor"] = O.name
+		H.visible_message("<span class='danger'>With a shower of fresh blood, a length of biomass shoots from [H]'s [O.amputation_point], forming a new [O.name]!</span>", "<span class='danger'>With a shower of fresh blood, a length of biomass shoots from your [O.amputation_point], forming a new [O.name]!</span>")
+		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
+		blood_splatter(H,B,1)
+		O.set_dna(H.dna)
+
+	H.update_body()
+	H.growing_limbs = FALSE
 
