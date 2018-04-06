@@ -95,14 +95,14 @@
 	allowed_roles = ENGINEERING_ROLES
 
 /datum/gear/accessory/armband_hydro
-	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/assistant)
+	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/assistant, /datum/job/offduty)
 
 /datum/gear/accessory/armband_nt
 	allowed_roles = list(/datum/job/rd, /datum/job/liaison, /datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist,
 						/datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/roboticist, /datum/job/engineer_contractor,
 						/datum/job/psychiatrist, /datum/job/doctor_contractor, /datum/job/chemist,
-						/datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
+						/datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender, /datum/job/offduty)
 
 /datum/gear/accessory/ntaward
 	allowed_roles = NANOTRASEN_ROLES
@@ -193,4 +193,4 @@
 /datum/gear/accessory/ftupin
 	allowed_roles = list(/datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor,
-						/datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant, /datum/job/assistant)
+						/datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant, /datum/job/assistant, /datum/job/offduty)

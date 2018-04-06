@@ -14,7 +14,7 @@
 	allowed_roles = FORMAL_ROLES
 
 /datum/gear/gloves/botany
-	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/chef, /datum/job/bartender, /datum/job/assistant, /datum/job/merchant)
+	allowed_roles = list(/datum/job/rd, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/chef, /datum/job/bartender, /datum/job/assistant, /datum/job/merchant, /datum/job/offduty)
 
 /datum/gear/gloves/dress
 	display_name = "gloves, dress"

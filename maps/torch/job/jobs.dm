@@ -1097,7 +1097,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/offduty
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/offduty/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/offduty/fleet,
+		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/offduty/civilian
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
@@ -1116,7 +1117,10 @@
 		/datum/mil_rank/fleet/o1,
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3,
-		/datum/mil_rank/fleet/o4
+		/datum/mil_rank/fleet/o4,
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/nt,
+		/datum/mil_rank/civ/marshal
 	)
 
 /datum/job/cyborg
