@@ -17,6 +17,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/default_cartridge = 0 // Access level defined by cartridge
 	var/obj/item/weapon/cartridge/cartridge = null //current cartridge
 	var/mode = 0 //Controls what menu the PDA will display. 0 is hub; the rest are either built in or based on cartridge.
+	var/obj/item/modular_computer/PDA_internal/computer	//the integrated modular computer.
 
 	var/lastmode = 0
 	var/ui_tick = 0
@@ -327,6 +328,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(default_cartridge)
 		cartridge = new default_cartridge(src)
 	new pen(src)
+	computer = new(src)
 
 /obj/item/device/pda/proc/can_use()
 
@@ -650,6 +652,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if("Light")
 			toggle_light()
+		if("apps")
+			computer.enable_computer(user)
 		if("Medical Scan")
 			if(scanmode == 1)
 				scanmode = 0
@@ -1365,6 +1369,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		QDEL_NULL(src.id)
 	QDEL_NULL(src.cartridge)
 	QDEL_NULL(src.pai)
+	QDEL_NULL(computer)
 	return ..()
 
 /obj/item/device/pda/clown/Crossed(AM as mob|obj) //Clown PDA is slippery.
@@ -1448,3 +1453,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/proc/update_label()
 	name = "PDA-[owner] ([ownjob])"
+
+/obj/item/device/pda/initial_data()		//This may be called by the attached computer.
+	return computer.initial_data()

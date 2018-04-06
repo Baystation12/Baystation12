@@ -1878,6 +1878,7 @@
 #include "code\modules\modular_computers\computers\modular_computer\variables.dm"
 #include "code\modules\modular_computers\computers\subtypes\dev_console.dm"
 #include "code\modules\modular_computers\computers\subtypes\dev_laptop.dm"
+#include "code\modules\modular_computers\computers\subtypes\dev_PDA_internal.dm"
 #include "code\modules\modular_computers\computers\subtypes\dev_tablet.dm"
 #include "code\modules\modular_computers\computers\subtypes\dev_telescreen.dm"
 #include "code\modules\modular_computers\computers\subtypes\preset_console.dm"
