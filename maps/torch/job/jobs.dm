@@ -1095,6 +1095,7 @@
 	supervisors = "the Executive Officer and Commanding Officer"
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/offduty
+	access = list(access_solgov_crew)
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/offduty/fleet
