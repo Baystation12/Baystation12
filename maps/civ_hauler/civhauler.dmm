@@ -103,7 +103,7 @@
 "bY" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/plating,/area/om_ships/hauler)
 "bZ" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/om_ships/hauler)
 "ca" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/plating,/area/om_ships/hauler)
-"cb" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/power/apc{dir = 8; name = "Engine room APC"; pixel_x = -24},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cb" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/power/apc/super/critical,/turf/simulated/floor/plating,/area/om_ships/hauler)
 "cc" = (/obj/structure/shuttle/engine/heater{icon_state = "heater"; dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/airless,/area/om_ships/hauler)
 "cd" = (/obj/structure/shuttle/engine/propulsion{icon_state = "propulsion"; dir = 8},/turf/space,/area/space)
 "ce" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/turf/simulated/floor/tiled,/area/om_ships/hauler)

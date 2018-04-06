@@ -125,6 +125,7 @@
 		shipmap_handler.un_free_map(z_to_load_at)
 		spawn(-1)
 			maploader.load_map(link,z_to_load_at)
+			create_lighting_overlays_zlevel(z_to_load_at)
 		map_z += z_to_load_at //The above proc will increase the maxz by 1 to accomodate the new map. This deals with that.
 	for(var/zlevel in map_z)
 		map_sectors["[zlevel]"] = src
