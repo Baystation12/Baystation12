@@ -15,7 +15,6 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 	if(isnull(z_level))
 		return
 	to_world("Clearing unused ship-z level:[z_level]. This may lag.")
-	sleep(10)//Ensure above message is shown.
 	spawn(-1)
 		for(var/n_x = 1 to 255)
 			for(var/n_y = 1 to 255)

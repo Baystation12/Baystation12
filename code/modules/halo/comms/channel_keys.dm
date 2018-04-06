@@ -54,7 +54,6 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	frequencies[COV_COMMON_NAME] = covenant_battlenet_freq
 	frequencies[SEC_NAME] = police_freq
 	frequencies[ODST_NAME] = odst_freq
-	GLOB.default_internal_channels["[eband_freq]"] = list()
 	radiochannels = frequencies
 
 /datum/halo_frequencies/proc/setup_com_channels()
