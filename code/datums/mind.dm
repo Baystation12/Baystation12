@@ -81,6 +81,10 @@
 		current.mind = null
 
 		GLOB.nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
+		if(current.client && ticket_panels[current.client])
+			var/datum/ticket_panel/tp = ticket_panels[current.client]
+			tp.ticket_panel_window.user = new_character
+
 	if(new_character.mind)		//remove any mind currently in our new body's mind variable
 		new_character.mind.current = null
 

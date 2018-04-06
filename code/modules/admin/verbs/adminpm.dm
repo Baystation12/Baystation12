@@ -71,34 +71,31 @@
 
 		msg = sanitize(msg)
 
-	var/datum/client_lite/receiver_lite = client_repository.get_lite_client(C)
-	var/datum/client_lite/sender_lite = client_repository.get_lite_client(src)
-
 	// searches for an open ticket, in case an outdated link was clicked
 	// I'm paranoid about the problems that could be caused by accidentally finding the wrong ticket, which is why this is strict
 	if(isnull(ticket))
 		if(holder)
-			ticket = get_open_ticket_by_client(receiver_lite) // it's more likely an admin clicked a different PM link, so check admin -> player with ticket first
+			ticket = get_open_ticket_by_ckey(C.ckey) // it's more likely an admin clicked a different PM link, so check admin -> player with ticket first
 			if(isnull(ticket) && C.holder)
-				ticket = get_open_ticket_by_client(sender_lite) // if still no dice, try an admin with ticket -> admin
+				ticket = get_open_ticket_by_ckey(src.ckey) // if still no dice, try an admin with ticket -> admin
 		else
-			ticket = get_open_ticket_by_client(sender_lite) // lastly, check player with ticket -> admin
+			ticket = get_open_ticket_by_ckey(src.ckey) // lastly, check player with ticket -> admin
 
 
 	if(isnull(ticket)) // finally, accept that no ticket exists
-		if(holder && sender_lite.ckey != receiver_lite.ckey)
-			ticket = new /datum/ticket(receiver_lite)
-			ticket.take(sender_lite)
+		if(holder && src.ckey != C.ckey)
+			ticket = new /datum/ticket(C.ckey)
+			ticket.take(src)
 		else
 			to_chat(src, "<span class='notice'>You do not have an open ticket. Please use the adminhelp verb to open a ticket.</span>")
 			return
-	else if(ticket.status != TICKET_ASSIGNED && sender_lite.ckey == ticket.owner.ckey)
+	else if(ticket.status != TICKET_ASSIGNED && src.ckey == ticket.owner)
 		to_chat(src, "<span class='notice'>Your ticket is not open for conversation. Please wait for an administrator to receive your adminhelp.</span>")
 		return
 
 	// if the sender is an admin and they're not assigned to the ticket, ask them if they want to take/join it, unless the admin is responding to their own ticket
-	if(holder && !(sender_lite.ckey in ticket.assigned_admin_ckeys()))
-		if(sender_lite.ckey != ticket.owner.ckey && !ticket.take(sender_lite))
+	if(holder && !(src.ckey in ticket.assigned_admins))
+		if(src.ckey != ticket.owner && !ticket.take(src))
 			return
 
 	var/recieve_message

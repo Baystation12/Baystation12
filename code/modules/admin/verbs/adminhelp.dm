@@ -90,15 +90,14 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	msg = generate_ahelp_key_words(mob, msg)
 
 	// handle ticket
-	var/datum/client_lite/client_lite = client_repository.get_lite_client(src)
-	var/datum/ticket/ticket = get_open_ticket_by_client(client_lite)
+	var/datum/ticket/ticket = get_open_ticket_by_ckey(ckey)
 	if(!ticket)
-		ticket = new /datum/ticket(client_lite)
+		ticket = new /datum/ticket(ckey)
 	else if(ticket.status == TICKET_ASSIGNED)
 		// manually check that the target client exists here as to not spam the usr for each logged out admin on the ticket
 		var/admin_found = 0
-		for(var/datum/client_lite/admin in ticket.assigned_admins)
-			var/client/admin_client = client_by_ckey(admin.ckey)
+		for(var/admin in ticket.assigned_admins)
+			var/client/admin_client = client_by_ckey(admin)
 			if(admin_client)
 				admin_found = 1
 				src.cmd_admin_pm(admin_client, original_msg, ticket)
