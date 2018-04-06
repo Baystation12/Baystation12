@@ -116,7 +116,7 @@
 
 	can_hold = list(
 	/obj/item/organ,
-	/obj/item/robot_parts
+	/obj/item/robot_parts,
 	/obj/item/weapon/reagent_containers/ivbag
 	)
 
