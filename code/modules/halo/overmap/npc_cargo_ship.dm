@@ -21,10 +21,15 @@
 /obj/effect/overmap/ship/npc_ship/cargo/process()
 	..()
 	if(cargo_call_target)
-		if(loc == cargo_call_target.loc && !on_call)
+		if(on_call)
+			target_loc = null
+			return
+		if(loc == cargo_call_target.loc)
+			GLOB.global_headset.autosay("Alright, we're here. Dock with us. You have [cargo_stay_time/600] minutes.","[ship.name]","Common")
 			target_loc = null
 			on_call = 1
 			spawn(cargo_stay_time)
+				GLOB.global_headset.autosay("Thanks for the trade! We're leaving now.","[ship.name]","Common")
 				cargo_call_target = null
 				on_call = 0
 				pick_target_loc()
