@@ -39,8 +39,3 @@ var/const/MARDR				=(1<<5)
 var/const/MARSPEC			=(1<<6)
 var/const/MECHCO			=(1<<7)
 var/const/MECH				=(1<<8)
-
-//Factional departments
-var/const/COLONY             =(1<<0)
-var/const/UNSC               =(1<<1)
-var/const/INNIE              =(1<<2)

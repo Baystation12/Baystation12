@@ -715,7 +715,7 @@
 	listening = 0
 	canhear_range = 0
 	channels=list("Engineering" = 1, "Security" = 1, "Medical" = 1, "Command" = 1, "Common" = 1, "Science" = 1, "Supply" = 1, "Service" = 1,\
-	"SHIPCOM" = 1,"TEAMCOM" = 1,"SQUADCOM" = 1,"FLEETCOM" = 1,"EBAND" = 1,"Battlenet" = 1,"GCPD" = 1, "INNIECOM" = 1, "TACCOM" = 1, "Colony" = 1)
+	"SHIPCOM" = 1,"TEAMCOM" = 1,"SQUADCOM" = 1,"FLEETCOM" = 1,"EBAND" = 1,"Battlenet" = 1,"GCPD" = 1)
 
 /obj/item/device/radio/announcer/Destroy()
 	crash_with("attempt to delete a [src.type] detected, and prevented.")

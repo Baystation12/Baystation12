@@ -8,7 +8,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define FLEETCOM_NAME "FLEETCOM"
 #define EBAND_NAME "EBAND"
 #define COV_COMMON_NAME "Battlenet"
-#define CIV_NAME "Colony"
+#define CIV_NAME "Common"
 #define SEC_NAME "GCPD"
 #define ODST_NAME "TACCOM"
 
@@ -54,6 +54,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	frequencies[COV_COMMON_NAME] = covenant_battlenet_freq
 	frequencies[SEC_NAME] = police_freq
 	frequencies[ODST_NAME] = odst_freq
+	GLOB.default_internal_channels["[eband_freq]"] = list()
 	radiochannels = frequencies
 
 /datum/halo_frequencies/proc/setup_com_channels()

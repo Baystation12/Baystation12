@@ -111,7 +111,7 @@
 /obj/docking_umbilical/proc/connect(var/obj/effect/overmap/connect_to,var/mob/user,var/random_connect = 0)
 	if(istype(connect_to,/obj/effect/overmap/ship/npc_ship))
 		var/obj/effect/overmap/ship/npc_ship/ship = connect_to
-		if(ship.can_board())
+		if(!ship.can_board())
 			to_chat(user,"<span class = 'notice'>[ship] is too functional to force a umbilical connection.</span>")
 			return
 		ship.load_mapfile()
@@ -175,7 +175,13 @@
 	pick_entity_connect_disconnect(user)
 
 /obj/docking_umbilical/proc/umbi_rip()
+	if(isnull(current_connected))
+		return
 	if(initial(broke) == -1)
+		current_connected.visual_umbi_change(1)
+		current_connected.current_connected = null
+		visual_umbi_change(1)
+		current_connected = null
 		return
 	broke = TRUE
 	icon_state = "umbi_broken"

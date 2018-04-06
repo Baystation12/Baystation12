@@ -56,7 +56,7 @@
 	return 0
 
 /obj/machinery/overmap_weapon_console/proc/fire_projectile(var/atom/target,var/mob/user,var/directly_above = 0)
-	var/obj/item/projectile/new_projectile = new fired_projectile
+	var/obj/item/projectile/new_projectile = new fired_projectile (src)
 	new_projectile.damage += get_linked_device_damage_mod()
 	new_projectile.loc = map_sectors["[z]"]
 	new_projectile.permutated = map_sectors["[z]"] //Ensuring we don't hit ourselves somehow

@@ -114,7 +114,6 @@
 	department_flag = MAR
 	total_positions = 4
 	spawn_positions = 4
-	announced = FALSE
 	ideal_character_age = 40
 	minimal_player_age = 21
 	selection_color = "#667700"
@@ -129,7 +128,6 @@
 	title = "ONI Bridge Officer"
 	department_flag = MAR
 	total_positions = 1
-	announced = FALSE
 	spawn_positions = 1
 	ideal_character_age = 36
 	minimal_player_age = 27

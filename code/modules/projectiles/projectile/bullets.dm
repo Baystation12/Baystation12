@@ -171,7 +171,7 @@
 	damage = 20
 	pellets = 8
 	range_step = 1
-	spread_step = 15
+	spread_step = 10
 
 /* "Rifle" rounds */
 

@@ -9,7 +9,7 @@
 	title = "Colonist"
 	total_positions = 20
 	selection_color = "#000000"
-	faction_flag = COLONY
+
 	supervisors = " the Colony Mayor"
 
 	create_record = 0
@@ -17,7 +17,9 @@
 	generate_email = 0
 
 	loadout_allowed = TRUE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/colonist
+
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_janitor, access_maint_tunnels, access_research)
 	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Construction Worker","Surgeon","Store Owner","Nightclub Owner","Secretary","Cargo Worker","Bartender","Cook","Chef","Farmer","Judge","Cargo Dock Worker","Lawyer","EMT","Paramedic","Bodyguard","Janitor")
@@ -26,12 +28,14 @@
 	title = "Colonist - Insurrectionist Sympathiser"
 	total_positions = 5
 	selection_color = "#000000"
-	faction_flag = INNIE
+
 	supervisors = " the Colony Mayor and your local insurrection contact"
 
 	create_record = 0
 	account_allowed = 1
 	generate_email = 0
+
+	loadout_allowed = TRUE
 	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_sympathiser
 
@@ -43,14 +47,15 @@
 	total_positions = 1
 	head_position = 1
 	selection_color = "#000000"
-	faction_flag = INNIE
+
 	supervisors = " the Insurrection"
 
 	create_record = 0
 	account_allowed = 1
 	generate_email = 0
-	announced = FALSE
+
 	loadout_allowed = TRUE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/colonist/innie_recruiter
 
 	latejoin_at_spawnpoints = FALSE
@@ -61,12 +66,15 @@
 	total_positions = 1
 	head_position = 1
 	selection_color = "#000000"
-	faction_flag = COLONY
+
 	supervisors = " your citizens"
 
 	create_record = 0
 	account_allowed = 1
 	generate_email = 0
+
+	loadout_allowed = TRUE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/mayor
 
 	latejoin_at_spawnpoints = FALSE
@@ -82,7 +90,7 @@
 	title = "Marine"
 	total_positions = 20
 	selection_color = "#000000"
-	faction_flag = UNSC
+
 	supervisors = "the Marine Squad Leader"
 
 	create_record = 0
@@ -90,6 +98,7 @@
 	generate_email = 0
 
 	loadout_allowed = TRUE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/marine
 
 	latejoin_at_spawnpoints = FALSE
@@ -100,7 +109,7 @@
 	head_position = 1
 	total_positions = 1
 	selection_color = "#000000"
-	faction_flag = UNSC
+
 	supervisors = "UNSC Highcom"
 
 	create_record = 0
@@ -108,6 +117,7 @@
 	generate_email = 0
 
 	loadout_allowed = TRUE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/marine/leader
 
 	latejoin_at_spawnpoints = FALSE
@@ -122,11 +132,10 @@
 	selection_color = "#000000"
 	supervisors = " the Colony Mayor"
 	create_record = 0
-	faction_flag = COLONY
 	account_allowed = 1
-	announced = TRUE
 	generate_email = 0
 	loadout_allowed = TRUE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/police
 	latejoin_at_spawnpoints = FALSE
 	access = list(access_security, access_brig, access_maint_tunnels,
@@ -139,9 +148,9 @@
 	department = "Security"
 	department_flag = SEC|COM
 	total_positions = 1
-	faction_flag = COLONY
 	head_position = 1
 	selection_color = "#000000"
+
 	supervisors = "the Colony Mayor"
 
 	create_record = 0
@@ -149,6 +158,7 @@
 	generate_email = 0
 
 	loadout_allowed = TRUE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/cop
 
 	latejoin_at_spawnpoints = FALSE

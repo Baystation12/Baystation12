@@ -3,14 +3,15 @@
 	title = "Insurrectionist"
 	total_positions = 46
 	selection_color = "#000000"
-	faction_flag = INNIE
+
 	supervisors = " the Insurrectionist Leader"
-	announced = FALSE
+
 	create_record = 0
 	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/Insurrectionist
 
 	latejoin_at_spawnpoints = TRUE
@@ -20,14 +21,15 @@
 	title = "Insurrectionist Leader"
 	total_positions = 1
 	selection_color = "#000000"
-	faction_flag = INNIE
+
 	supervisors = " the Insurrection"
-	announced = FALSE
+
 	create_record = 0
 	account_allowed = 1
 	generate_email = 0
 
 	loadout_allowed = TRUE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/Insurrectionist_leader
 
 	latejoin_at_spawnpoints = TRUE
@@ -44,6 +46,7 @@
 	generate_email = 0
 
 	loadout_allowed = FALSE
+	announced = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_Assault
 
 	latejoin_at_spawnpoints = TRUE

@@ -1,6 +1,3 @@
-/datum/job/UNSC_ship
-	title = "unknown" //For travis
-	faction_flag = UNSC //Defining here rather than in every job
 
 //ship commanding officer
 /datum/job/UNSC_ship/commander

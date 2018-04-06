@@ -1,0 +1,44 @@
+#define BASE_CARGO_STAY_TIME 10 MINUTES
+
+/obj/effect/overmap/ship/npc_ship/cargo
+	name = "Cargo Ship"
+	desc = "A ship specialised to carry cargo."
+
+	var/atom/cargo_call_target
+	var/cargo_stay_time = BASE_CARGO_STAY_TIME
+	var/on_call = 0
+
+/obj/effect/overmap/ship/npc_ship/cargo/proc/set_cargo_call_status(var/atom/call_target)//Leave target null to cancel cargo call.
+	if(on_call)
+		return
+	if(isnull(call_target))
+		cargo_call_target = null
+		pick_target_loc()
+		return
+	cargo_call_target = call_target
+	target_loc = call_target.loc
+
+/obj/effect/overmap/ship/npc_ship/cargo/process()
+	..()
+	if(cargo_call_target)
+		if(loc == cargo_call_target.loc && !on_call)
+			target_loc = null
+			on_call = 1
+			spawn(cargo_stay_time)
+				cargo_call_target = null
+				on_call = 0
+				pick_target_loc()
+		else
+			target_loc = cargo_call_target.loc
+
+/obj/effect/overmap/ship/npc_ship/cargo/get_requestable_actions(var/authority_level)
+	. = ..()
+	if(authority_level >= AUTHORITY_LEVEL_CIV)
+		. += "Trade with"
+
+/obj/effect/overmap/ship/npc_ship/cargo/parse_action_request(var/request,var/mob/requester)
+	if(request == "Trade with")
+		to_chat(requester,"<span class = 'comradio'>[name] A trade? Of course. On our way.</span>")
+		set_cargo_call_status(map_sectors["[requester.z]"])
+
+#undef BASE_CARGO_STAY_TIME
