@@ -122,7 +122,7 @@
 	for(var/obj/docking_umbilical/umbi in connectors)
 		if(umbi.current_connected)
 			umbi.current_connected.umbi_rip()
-		umbi.umbi_rip()
+			umbi.umbi_rip()
 
 /obj/effect/overmap/ship/update_icon()
 	if(!is_still())
