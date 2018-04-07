@@ -11,7 +11,10 @@
 		var/obj/machinery/embedded_controller/radio/R = M
 		var/datum/computer/file/embedded_program/P = locate(R.id_tag)
 		if(istype(P))
-			error("Duplicate program: '[R.id_tag]'")
+			if(istype(P.master))
+				error("Duplicate program: '[R.id_tag]' at ([R.x],[R.y],[R.z]) ([P.master.x],[P.master.y],[P.master.z])")
+			else
+				error("Duplicate program: '[R.id_tag]' at ([R.x],[R.y],[R.z])")
 		id_tag = R.id_tag
 
 /datum/computer/file/embedded_program/proc/receive_user_command(command)
