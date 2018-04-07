@@ -588,7 +588,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		"lack of air" = oxy_mod,
 		"poison" = toxins_mod
 	)
-	var/dat = "<center><h2>[name] \[<a href='?src=\ref[src];show_species=1'>change</a>\]</h2></center><hr/>"
+	var/dat = list()
+	dat += "<center><h2>[name] \[<a href='?src=\ref[src];show_species=1'>change</a>\]</h2></center><hr/>"
 	dat += "<table padding='8px'>"
 	dat += "<tr>"
 	dat += "<td width = 400>[blurb]</td>"
@@ -604,12 +605,14 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		dat += "</br><b>Whitelist restricted.</b>"
 	if(!has_organ[BP_HEART])
 		dat += "</br><b>Does not have blood.</b>"
-	if(!has_organ[BP_LUNGS])
+	if(!has_organ[breathing_organ])
 		dat += "</br><b>Does not breathe.</b>"
 	if(species_flags & SPECIES_FLAG_NO_SCAN)
 		dat += "</br><b>Does not have DNA.</b>"
 	if(species_flags & SPECIES_FLAG_NO_PAIN)
 		dat += "</br><b>Does not feel pain.</b>"
+	if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
+		dat += "</br><b>Has thick skin/scales.</b>"
 	if(species_flags & SPECIES_FLAG_NO_SLIP)
 		dat += "</br><b>Has excellent traction.</b>"
 	if(species_flags & SPECIES_FLAG_NO_POISON)
@@ -635,7 +638,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	dat += "</small></td>"
 	dat += "</tr>"
 	dat += "</table><hr/>"
-	return dat
+	return jointext(dat, null)
 
 /mob/living/carbon/human/verb/check_species()
 	set name = "Check Species Information"

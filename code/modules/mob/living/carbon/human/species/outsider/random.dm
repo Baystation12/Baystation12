@@ -40,9 +40,12 @@
 
 	//Gastronomic traits
 	taste_sensitivity = pick(TASTE_HYPERSENSITIVE, TASTE_SENSITIVE, TASTE_DULL, TASTE_NUMB)
-	gluttonous = pick(0, GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING) 
+	gluttonous = pick(0, GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING)
+	stomach_capacity = 5 * stomach_capacity
 	if(prob(20))
 		gluttonous |= pick(GLUT_ITEM_TINY, GLUT_ITEM_NORMAL, GLUT_ITEM_ANYTHING, GLUT_PROJECTILE_VOMIT)
+		if(gluttonous & GLUT_ITEM_ANYTHING)
+			stomach_capacity += ITEM_SIZE_HUGE
 
 	//Environment
 	var/temp_comfort_shift = rand(-50,50)
