@@ -22,6 +22,7 @@
 /mob/new_player/New()
 	..()
 	verbs += /mob/proc/toggle_antag_pool
+	verbs += /client/proc/check_round_info
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
@@ -148,6 +149,7 @@
 			observer.SetName(observer.real_name)
 			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
 				observer.verbs -= /mob/observer/ghost/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
+			observer.verbs |= /client/proc/check_round_info
 			observer.key = key
 			qdel(src)
 
