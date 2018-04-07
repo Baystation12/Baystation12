@@ -314,6 +314,30 @@
 	name = "\improper Research and Development"
 	icon_state = "research"
 
+/area/rnd/research2
+	name = "\improper Research and Development"
+	icon_state = "research"
+
+/area/rnd/research3
+	name = "\improper Research and Development"
+	icon_state = "research"
+
+/area/rnd/research4
+	name = "\improper Research and Development"
+	icon_state = "research"
+
+/area/rnd/research_locker
+	name = "\improper Research Locker Room"
+	icon_state = "research"
+
+/area/rnd/research_gateway
+	name = "\improper Research Gateway"
+	icon_state = "research"
+
+/area/rnd/restroom
+	name = "\improper Research Restroom"
+	icon_state = "research"
+
 // Derelict
 
 /area/derelict/ship
@@ -360,16 +384,20 @@
 
 // Security
 
-/area/prison/solitary
+/area/security/brig/solitary
 	name = "Solitary Confinement"
 	icon_state = "brig"
 
-/area/security/armoury
+/area/security/armory
 	name = "\improper Security - Armory"
 	icon_state = "Warden"
 
-/area/security/checkpoint2
+/area/security/checkpoint1
 	name = "\improper Security - Checkpoint"
+	icon_state = "checkpoint1"
+
+/area/security/checkpoint2
+	name = "\improper Command Security - Checkpoint"
 	icon_state = "checkpoint1"
 
 /area/security/detectives_office
@@ -384,6 +412,30 @@
 /area/security/range
 	name = "\improper Security - Firing Range"
 	icon_state = "firingrange"
+
+/area/security/brig2
+	name = "\improper Security Hallway"
+	icon_state = "brig"
+
+/area/security/brig3
+	name = "\improper Security Hallway"
+	icon_state = "brig"
+
+/area/security/sec_toilet
+	name = "\improper Security Toilets"
+	icon_state = "brig"
+
+/area/security/storage
+	name = "\improper Security Storage"
+	icon_state = "brig"
+
+/area/security/armory_lobby
+	name = "\improper Security Lobby"
+	icon_state = "brig"
+
+/area/security/sec_locker
+	name = "\improper Security Locker Room"
+	icon_state = "brig"
 
 // Cargo
 /area/quartermaster/office

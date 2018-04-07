@@ -354,6 +354,18 @@
 /area/maintenance/substation/atmospherics
 	name = "Atmospherics Substation"
 
+/area/maintenance/substation/cargo
+	name = "Cargo Substation"
+
+/area/maintenance/substation/starport
+	name = "Starport Substation"
+
+/area/maintenance/substation/hydro
+	name = "Hydroponics Substation"
+
+/area/maintenance/substation/emergency
+	name = "Emergency Substation"
+
 
 
 // Maintenance
@@ -449,8 +461,29 @@
 /area/maintenance/security_starboard
 	name = "\improper Security Maintenance - Starboard"
 	icon_state = "maint_security_starboard"
+
 /area/maintenance/exterior
 	name = "\improper Exterior"
+
+/area/maintenance/research_atmos
+	name = "\improper Research Atmospherics Maintenance"
+	icon_state = "maint_engineering"
+
+/area/maintenance/medbay_north
+	name = "\improper North Medbay Maintenance"
+	icon_state = "maint_medbay"
+
+/area/maintenance/hydro
+	name = "\improper Hydroponics Maintenance"
+	icon_state = "maint_medbay"
+
+/area/maintenance/chapel
+	name = "\improper Chapel Maintenance"
+	icon_state = "maint_security_port"
+
+/area/maintenance/getto_rnd
+	name = "\improper RnD Maintenance"
+	icon_state = "maint_cargo"
 
 
 // Dank Maintenance
@@ -544,6 +577,7 @@
 	name = "Maintenance - Below Cargo"
 	lift_announce_str = "Arriving at the maintenance level, below the Cargo department."
 	base_turf = /turf/simulated/floor/plating
+
 // Hallway
 
 /area/hallway/primary/
@@ -574,6 +608,22 @@
 	icon_state = "hallC2"
 
 /area/hallway/primary/central_three
+	name = "\improper Central Primary Hallway"
+	icon_state = "hallC3"
+
+/area/hallway/primary/central_fore
+	name = "\improper Central Primary Hallway"
+	icon_state = "hallC3"
+
+/area/hallway/primary/central_fife
+	name = "\improper Central Primary Hallway"
+	icon_state = "hallC3"
+
+/area/hallway/primary/central_six
+	name = "\improper Central Primary Hallway"
+	icon_state = "hallC3"
+
+/area/hallway/primary/central_seven
 	name = "\improper Central Primary Hallway"
 	icon_state = "hallC3"
 
@@ -704,6 +754,14 @@
 	name = "\improper Atmospherics Storage"
 	icon_state = "atmos_storage"
 
+/area/engineering/toilet
+	name = "\improper Atmospherics"
+	icon_state = "engineering_break"
+
+/area/engineering/atmos_monitoring
+	name = "\improper Atmospherics Monitoring Room"
+	icon_state = "engine_monitoring"
+
 
 // Medbay
 
@@ -808,6 +866,10 @@
 	name = "\improper Isolation C"
 	icon_state = "patients"
 
+/area/medical/patient_d
+	name = "\improper Isolation D"
+	icon_state = "patients"
+
 /area/medical/patient_wing
 	name = "\improper Patient Wing"
 	icon_state = "patients"
@@ -830,6 +892,24 @@
 /area/medical/cryo
 	name = "\improper Cryogenics"
 	icon_state = "cryo"
+
+/area/medical/med_toilet
+	name = "\improper Medbay Toilets"
+	icon_state = "medbay"
+
+/area/medical/med_mech
+	name = "\improper Medbay Mech Room"
+	icon_state = "medbay3"
+
+/area/medical/storage1
+	name = "\improper Primary Storage"
+	icon_state = "medbay4"
+	ambience = list('sound/ambience/signal.ogg')
+
+/area/medical/storage2
+	name = "\improper Medbay Storage"
+	icon_state = "medbay3"
+	ambience = list('sound/ambience/signal.ogg')
 
 //Security
 

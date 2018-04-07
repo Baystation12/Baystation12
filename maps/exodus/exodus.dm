@@ -22,12 +22,12 @@
 
 	#include "../shared/exodus_torch/_include.dm"
 
-	#include "exodus-1.dmm"
-	#include "exodus-2.dmm"
-	#include "exodus-3.dmm"
+	#include "dynamic/null-1.dmm"
+	#include "dynamic/null-2.dmm"
+	#include "dynamic/null-3.dmm"
 	#include "exodus-4.dmm"
 	#include "exodus-5.dmm"
-	#include "exodus-6.dmm"
+	#include "dynamic/null-6.dmm"
 	#include "exodus-7.dmm"
 
 	#include "../../code/modules/lobby_music/my_imagination.dm"

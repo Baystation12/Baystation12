@@ -16,6 +16,7 @@
 	empty_levels = list(6)
 	accessible_z_levels = list("1" = 5, "2" = 5, "4" = 10, "5" = 15, "7" = 60)
 	base_turf_by_z = list("6" = /turf/simulated/floor/asteroid) // Moonbase
+	dynamic_z_levels = list("1" = 'exodus-1.dmm', "2" = 'exodus-2.dmm', "3" = 'exodus-3.dmm', "6" = 'exodus-6.dmm')
 
 	station_name  = "NSS Exodus"
 	station_short = "Exodus"
@@ -24,7 +25,7 @@
 	boss_short    = "Centcomm"
 	company_name  = "NanoTrasen"
 	company_short = "NT"
-	system_name = "Nyx"
+	system_name   = "Nyx"
 
 	shuttle_docked_message = "The scheduled Crew Transfer Shuttle to %Dock_name% has docked with the station. It will depart in approximately %ETD%"
 	shuttle_leaving_dock = "The Crew Transfer Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."

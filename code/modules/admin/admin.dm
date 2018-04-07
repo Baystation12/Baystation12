@@ -686,6 +686,16 @@ var/global/floorIsLava = 0
 		world.Reboot()
 
 
+/datum/admins/proc/changemap()
+	set category = "Server"
+	set name = "Change map"
+	if(!check_rights(R_SERVER)) return
+	var/datum/map/M = GLOB.all_maps[input("Select map:","Change map",GLOB.using_map) as null|anything in GLOB.all_maps]
+	if(M)
+		log_admin("[key_name(usr)] changed map to [M.name]")
+		fdel("data/use_map")
+		text2file("[M.type]", "data/use_map")
+
 /datum/admins/proc/announce()
 	set category = "Special Verbs"
 	set name = "Announce"

@@ -131,24 +131,27 @@
 			if(base_area)
 				source.loc.contents.Add(target)
 				base_area.contents.Add(source)
-			transport_turf_contents(source, target)
+			transport_turf_contents(source, target, base_turf || get_base_turf_by_area(source))
 
 	//change the old turfs
 	for(var/turf/source in translation)
-		source.ChangeTurf(base_turf ? base_turf : get_base_turf_by_area(source), 1, 1)
+		var/base = base_turf || get_base_turf_by_area(source)
+		if(istype(source, base))
+			continue
+		source.ChangeTurf(base, 1, 1)
 
 //Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
-/proc/transport_turf_contents(turf/source, turf/target)
-
-	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
-	new_turf.transport_properties_from(source)
+/proc/transport_turf_contents(turf/source, turf/target, base)
+	if(!istype(source, base))
+		target = target.ChangeTurf(source.type, 1, 1)
+		target.transport_properties_from(source)
 
 	for(var/obj/O in source)
 		if(O.simulated)
-			O.forceMove(new_turf)
+			O.forceMove(target)
 
 	for(var/mob/M in source)
 		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
-		M.forceMove(new_turf)
+		M.forceMove(target)
 
-	return new_turf
+	return target

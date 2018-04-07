@@ -42,6 +42,7 @@
 
 /obj/effect/shuttle_landmark/escape_pod/out/New()
 	landmark_tag = "escape_pod_[number]_out"
+	docking_controller = "escape_pod_[number]_recovery"
 	..()
 
 //Actually pods
@@ -110,6 +111,31 @@
 	name = "To station"
 	landmark_tag = "nav_specops_xenoarch"
 	docking_controller = "rescue_shuttle_dock_airlock"
+	autoset = 1
+
+//Transport shuttle
+
+/datum/shuttle/autodock/ferry/transport
+	name = "Transport"
+	warmup_time = 0
+	dock_target = "centcom_transport_shuttle"
+	shuttle_area = /area/shuttle/transport1/centcom
+	waypoint_offsite = "nav_transport_start"
+	waypoint_station = "nav_transport_station"
+	location = 1
+
+
+/obj/effect/shuttle_landmark/transport/start
+	name = "Centcomm"
+	landmark_tag = "nav_transport_start"
+	docking_controller = "transport_centcom_dock"
+	autoset = 0
+
+
+/obj/effect/shuttle_landmark/transport/station
+	name = "To station"
+	landmark_tag = "nav_transport_station"
+	docking_controller = "transport_shuttle_dock_airlock"
 	autoset = 1
 
 //Cargo shuttle
