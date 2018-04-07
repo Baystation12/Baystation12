@@ -107,28 +107,38 @@
 			var/obj/item/weapon/card/id/id = computer.GetIdCard()
 			id_login = id.associated_email_login.Copy()
 
+	var/datum/computer_file/data/email_account/target
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
 		if(!account || !account.can_login)
 			continue
+		if(id_login && id_login["login"] == account.login)
+			target = account
+			break
+		if(stored_login && stored_login == account.login)
+			target = account
+			break
 
-		if(!(id_login && id_login["login"] == account.login && id_login["password"] == account.password))
-			if(account.login != stored_login)
-				continue
+	if(!target)
+		error = "Invalid Login"
+		return 0
 
-			if(account.password != stored_password)
-				error = "Invalid Password"
-				return 0
+	if(target.suspended)
+		error = "This account has been suspended. Please contact the system administrator for assistance."
+		return 0
 
-		if(account.suspended)
-			error = "This account has been suspended. Please contact the system administrator for assistance."
-			return 0
+	var/use_pass
+	if(stored_password)
+		use_pass = stored_password
+	else if(id_login)
+		use_pass = id_login["password"]
 
-		current_account = account
+	if(use_pass == target.password)
+		current_account = target
 		current_account.connected_clients |= src
 		return 1
-
-	error = "Invalid Login"
-	return 0
+	else
+		error = "Invalid Password"
+		return 0
 
 // Returns 0 if no new messages were received, 1 if there is an unread message but notification has already been sent.
 // and 2 if there is a new message that appeared in this tick (and therefore notification should be sent by the program).
@@ -165,8 +175,9 @@
 	// Password has been changed by other client connected to this email account
 	if(current_account)
 		if(current_account.password != stored_password)
-			log_out()
-			error = "Invalid Password"
+			if(!log_in())
+				log_out()
+				error = "Invalid Password"
 		// Banned.
 		else if(current_account.suspended)
 			log_out()
