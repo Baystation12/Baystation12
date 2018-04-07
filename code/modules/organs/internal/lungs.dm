@@ -87,7 +87,7 @@
 					"blood drips from <B>\the [owner]'s</B> [parent.name]!",
 				)
 
-			owner.drip(10)
+			owner.drip(1)
 		if(prob(4))
 			if(active_breathing)
 				owner.visible_message(
