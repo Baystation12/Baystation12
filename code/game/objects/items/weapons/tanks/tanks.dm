@@ -27,7 +27,7 @@ var/list/global/tank_gauge_cache = list()
 	var/valve_welded = 0
 	var/obj/item/device/tankassemblyproxy/proxyassembly
 
-	var/volume = 70
+	var/volume = 180
 	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
 						//If they have and we haven't scanned it with the PDA or gas analyzer then we might just breath whatever they put in it.
 

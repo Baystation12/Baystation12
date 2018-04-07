@@ -19,7 +19,7 @@
 	var/min_breath_pressure
 
 	var/oxygen_deprivation = 0
-	var/safe_exhaled_max = 10
+	var/safe_exhaled_max = 6
 	var/safe_toxins_max = 0.2
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
@@ -159,7 +159,7 @@
 
 	owner.oxygen_alert = failed_inhale * 2
 
-	var/inhaled_gas_used = inhaling/6
+	var/inhaled_gas_used = inhaling / 2
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 
 	if(exhale_type)
@@ -178,22 +178,25 @@
 			failed_exhale = 1
 		else if(exhaled_pp > safe_exhaled_max * 0.7)
 			word = pick("dizzy","short of breath","faint","momentarily confused")
-			warn_prob = 1
+			warn_prob = 10
 			alert = 1
 			failed_exhale = 1
 			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
 			if (owner.getOxyLoss() < 50*ratio)
 				oxyloss = HUMAN_MAX_OXYLOSS
-		else if(exhaled_pp > safe_exhaled_max * 0.6)
+		else if(exhaled_pp > safe_exhaled_max * 0.4)
 			word = pick("a little dizzy","short of breath")
-			warn_prob = 1
+			warn_prob = 10
 		else
 			owner.co2_alert = 0
 
-		if(!owner.co2_alert && word && prob(warn_prob))
-			to_chat(owner, "<span class='warning'>You feel [word].</span>")
-			owner.adjustOxyLoss(oxyloss)
-			owner.co2_alert = alert
+		if(word)
+			if(!owner.co2_alert)
+				owner.co2_alert = alert
+			if(prob(warn_prob))
+				to_chat(owner, "<span class='warning'>You feel [word].</span>")
+
+		owner.adjustOxyLoss(oxyloss)
 
 	// Too much poison in the air.
 	if(toxins_pp > safe_toxins_max)
