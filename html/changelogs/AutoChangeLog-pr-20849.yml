@@ -1,0 +1,6 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - tweak: "Crawling now occurs by clicking a turf."
+  - tweak: "Crawling is now significantly faster."
+  - bugfix: "You can no longer drag other people, forcing them to crawl."
