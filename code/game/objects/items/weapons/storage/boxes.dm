@@ -497,6 +497,6 @@
 
 /obj/item/weapon/storage/box/detergent
 	name = "detergent pods bag"
-	desc = "A bag full of juicy, yummy detergent pods. This bag has been labeled: Tod Pods a Waffle Co. product."
+	desc = "A bag full of juicy, yummy detergent pods. This bag has been labeled: Tod Pods, a Waffle Co. product."
 	icon_state = "detergent"
 	startswith = list(/obj/item/weapon/reagent_containers/pill/detergent = 10)
