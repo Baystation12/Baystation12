@@ -14625,7 +14625,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_one_access = list(24,11)
 	},
 /turf/simulated/floor/tiled,
 /area/vacant/prototype/control)
