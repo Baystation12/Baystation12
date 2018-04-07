@@ -89,7 +89,7 @@
 "bK" = (/obj/structure/window/reinforced/treated{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/fuel,/turf/simulated/floor/plating,/area/syndicate_mothership)
 "bL" = (/obj/machinery/computer/helm,/turf/simulated/floor/shuttle/black,/area/syndicate_mothership)
 "bM" = (/obj/machinery/light,/turf/simulated/floor/shuttle/darkred,/area/syndicate_mothership)
-"bN" = (/obj/structure/sign/bluecross_1{step_y = -32},/turf/simulated/floor/shuttle/darkred,/area/syndicate_mothership)
+"bN" = (/obj/structure/sign/bluecross_1{pixel_y = -32},/turf/simulated/floor/shuttle/darkred,/area/syndicate_mothership)
 "bO" = (/obj/machinery/light,/turf/simulated/floor/stairs/stairsdark/east,/area/syndicate_mothership)
 "bP" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/shuttle/darkred,/area/syndicate_mothership)
 "bQ" = (/obj/structure/table/steel_reinforced,/obj/machinery/door/window/westleft{tag = "icon-left (NORTH)"; icon_state = "left"; dir = 1},/turf/simulated/floor/shuttle/black,/area/syndicate_mothership)
