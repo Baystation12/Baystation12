@@ -3,7 +3,7 @@
 	name = "Ship Cap Ghost Spawn"
 
 /obj/effect/landmark/ship_captain_ghost_spawn/ex_act()
-	. - ..()
+	. = ..()
 	qdel(src)
 
 /decl/hierarchy/outfit/npc_ship_captain
