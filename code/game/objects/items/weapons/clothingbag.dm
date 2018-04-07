@@ -23,7 +23,7 @@
 
 /obj/item/weapon/clothingbag/rubbersuit/New()
 	..()
-	switch(rand(1,4))
+	switch(rand(1,5))
 		if(1)
 			new/obj/item/clothing/suit/rubber(src)
 			new/obj/item/clothing/mask/rubber/species(src)
@@ -36,6 +36,9 @@
 		if(4)
 			new/obj/item/clothing/suit/rubber/unathi(src)
 			new/obj/item/clothing/mask/rubber/species/unathi(src)
+		if(5)
+			new/obj/item/clothing/suit/rubber/grey(src)
+			new/obj/item/clothing/mask/rubber/species/grey(src)
 
 /obj/item/weapon/clothingbag/rubbermask
 	name = "rubber masks bag"

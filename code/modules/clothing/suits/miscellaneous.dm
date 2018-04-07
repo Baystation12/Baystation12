@@ -532,3 +532,9 @@
 	name = "unathi suit"
 	desc = "A Unathi suit made out of rubber."
 	icon_state = "lizsuit"
+
+/obj/item/clothing/suit/rubber/grey
+	name = "grey suit"
+	desc = "A Grey suit made out of rubber. Looks more like green'ish to you."
+	icon_state = "greysuit"
+	color = "#96ffc8"

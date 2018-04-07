@@ -135,3 +135,22 @@
 	"egyno","bogani","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")
 	machine_understands = 0
 	shorthand = "BG"
+
+/datum/language/grey
+	name = LANGUAGE_GREY
+	colour = "alien"
+	desc = "Psionic communication of the Grey. No verbal components. Non-greys only experience fragments of meaning."
+	speech_verb = "projects"
+	ask_verb = "demands"
+	exclaim_verb = "shrieks"
+	key = "p"
+	flags = RESTRICTED
+	syllables = list("..sight..","..sound..","..vistas..","..pain..","..terror..",
+	"..colors..","..darkness..","..light..","..shapes..","..smells..","..it hurts..",
+	"..joy..","..fear..","..screams..","..silence..","..alone..","..cold..","..burning..",
+	"..sick..","..falling..","..hungry..","..scared..","..lies..","..truth..","..sinking..",
+	"..drowning..","..choking..","..freezing..","..dying..","..hurts..","..ithurtsithurtsithurts..",
+	"..crawling..","..spiders..","..cows..","..clowns..","..carp..","..monkeys..","..lizards..","..cats..","..frogs..","..insects..",
+	"..machines..","..organs..","..blood..","..glowing..","..acrid..","..foul..","..weak..","..submit..")
+	machine_understands = 0
+	shorthand = "N/A"
