@@ -149,9 +149,9 @@
 /obj/effect/overmap/ship/npc_ship/proc/parse_action_request(var/request,var/mob/requester)
 	if(request == "Cargo Inspection" || "Halt")
 		target_loc = null
-		GLOB.global_headset.autosay("Slowing down..\nI can only give you [STOP_WAIT_TIME/600] minutes.","[name]","Common")
+		GLOB.global_headset.autosay("Slowing down..\nI can only give you [STOP_WAIT_TIME/600] minutes.","[name]","System")
 		spawn(STOP_WAIT_TIME)
-			GLOB.global_headset.autosay("I need to leave now. I'll give you [STOP_DISEMBARK_TIME/600] minutes to disembark.","[name]","Common")
+			GLOB.global_headset.autosay("I need to leave now. I'll give you [STOP_DISEMBARK_TIME/600] minutes to disembark.","[name]","System")
 			spawn(STOP_DISEMBARK_TIME)
 				pick_target_loc()
 
