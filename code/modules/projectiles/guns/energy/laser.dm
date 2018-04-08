@@ -73,7 +73,7 @@ obj/item/weapon/gun/energy/retro
 
 /obj/item/weapon/gun/energy/lasercannon
 	name = "laser cannon"
-	desc = "With the laser cannon, the lasing medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
+	desc = "With the laser cannon, the laser medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
 	icon_state = "lasercannon"
 	item_state = null
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
@@ -122,8 +122,8 @@ obj/item/weapon/gun/energy/retro
 	fire_delay = 10
 
 /obj/item/weapon/gun/energy/sniperrifle
-	name = "marksman energy rifle"
-	desc = "The HI DMR 9E is an older design of Hephaestus Industries. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
+	name = "marksman energy emitter"
+	desc = "The HI DMR 9E is an older design of Hephaestus Industries. A designated marksman emitter capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
 	icon_state = "sniper"
 	item_state = "laser"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)

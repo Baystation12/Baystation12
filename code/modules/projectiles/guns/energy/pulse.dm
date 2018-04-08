@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/pulse_rifle
-	name = "pulse rifle"
-	desc = "A weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Because of its complexity and cost, it is rarely seen in use except by specialists."
+	name = "pulse emitter"
+	desc = "A infantry weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Because of its complexity and cost, it is rarely seen in use except by specialists."
 	icon_state = "pulse"
 	item_state = "pulse"
 	slot_flags = SLOT_BACK
@@ -17,8 +17,8 @@
 	wielded_item_state = "gun_wielded"
 
 /obj/item/weapon/gun/energy/pulse_rifle/carbine
-	name = "pulse carbine"
-	desc = "A weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Less bulky than the full-sized rifle."
+	name = "pulse emitter carbine"
+	desc = "A weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Less bulky than the full-sized infantry emitter."
 	icon_state = "pulse_carbine"
 	slot_flags = SLOT_BACK|SLOT_BELT
 	force = 8
@@ -30,7 +30,7 @@
 	move_delay = 2
 
 /obj/item/weapon/gun/energy/pulse_rifle/pistol
-	name = "pulse pistol"
+	name = "pulse emitter pistol"
 	desc = "A weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Even smaller than the carbine."
 	icon_state = "pulse_pistol"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
