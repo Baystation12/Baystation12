@@ -4,6 +4,7 @@ GLOBAL_LIST_EMPTY(colony_spawns)
 /datum/spawnpoint/colonist
 	display_name = "Colony Arrival Shuttle"
 	restrict_job = list("Colonist","Colonist - Insurrectionist Sympathiser","Colonist - Insurrectionist Recruiter","Mayor","GCPD Officer","Chief of Police")
+	msg = "has arrived on the colony"
 
 /datum/spawnpoint/colonist/New()
 	..()
