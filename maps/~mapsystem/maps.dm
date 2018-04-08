@@ -188,8 +188,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	for (var/site_name in SSmapping.away_sites_templates)
 		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
 
-		if(site.spawn_guranteed && site.load_new_z()) // no check for budget, but guranteed means guranteed
-			report_progress("Loaded guranteed away site [site]!")
+		if(site.spawn_guaranteed && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
+			report_progress("Loaded guaranteed away site [site]!")
 			away_site_budget -= site.cost
 			continue
 
