@@ -114,7 +114,7 @@
 		handle_failed_breath()
 		return 1
 
-	var/breath_pressure = breath.total_moles*R_IDEAL_GAS_EQUATION*breath.temperature/BREATH_VOLUME
+	var/breath_pressure = breath.return_pressure()
 	//exposure to extreme pressures can rupture lungs
 	if(breath_pressure < species.hazard_low_pressure || breath_pressure > species.hazard_high_pressure)
 		var/datum/gas_mixture/environment = loc.return_air_for_internal_lifeform()
@@ -301,7 +301,7 @@
 		else
 			temp_adj /= (BODYTEMP_HEAT_DIVISOR * 5)	//don't raise temperature as much as if we were directly exposed
 
-		var/relative_density = breath.total_moles / (MOLES_CELLSTANDARD * BREATH_PERCENTAGE)
+		var/relative_density = breath.total_moles / (MOLES_CELLSTANDARD * breath.volume/CELL_VOLUME)
 		temp_adj *= relative_density
 
 		if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
@@ -335,7 +335,7 @@
 		breathtype += pick("shallow and rapid")
 	if(!breathtype.len)
 		breathtype += "healthy"
-	
+
 	. += "[english_list(breathtype)] breathing"
 
 	return english_list(.)
