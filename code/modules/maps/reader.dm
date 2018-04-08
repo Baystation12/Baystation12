@@ -458,7 +458,10 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 	//Check for file
 	else if(copytext(text,1,2) == "'")
-		. = file(copytext(text,2,length(text)))
+		. = cache_ref[text]
+		if(!.)
+			warning("Map referencing cache file [text]")
+			. = file(copytext(text,2,length(text)))
 
 	//Check for path
 	else if(ispath(text2path(text)))

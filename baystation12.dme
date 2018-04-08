@@ -2518,6 +2518,7 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
+#include "maps\cache_ref.dm"
 #include "maps\away\away_sites.dm"
 #include "maps\exodus\exodus.dm"
 #include "maps\exodus\exodus_define.dm"
