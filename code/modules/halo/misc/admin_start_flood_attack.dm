@@ -25,11 +25,12 @@
 	var/file_to_play
 	if(current_invasion)
 		to_chat(user,"Flood invasion halted")
-		file_to_play = FLOOD_INVASION_START
+		file_to_play = FLOOD_INVASION_END
 		qdel(current_invasion)
+		current_invasion = null
 	else
 		to_chat(user,"Flood invasion started")
-		file_to_play = FLOOD_INVASION_END
+		file_to_play = FLOOD_INVASION_START
 		current_invasion = new /datum/flood_invasion(locate(1,1,1))
 
 	make_sound(sound(file_to_play, repeat = 0, wait = 1, channel = 777))
