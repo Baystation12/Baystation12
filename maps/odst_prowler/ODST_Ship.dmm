@@ -49,7 +49,7 @@
 "aW" = (/obj/structure/curtain/open/shower,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/freezer,/area/syndicate_mothership)
 "aX" = (/obj/item/weapon/stool/bar/padded,/turf/simulated/floor/shuttle/black,/area/syndicate_mothership)
 "aY" = (/obj/structure/window/reinforced/treated{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/treated{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 6},/turf/simulated/floor/plating,/area/syndicate_mothership)
-"aZ" = (/obj/machinery/atmospherics/unary/engine{tag = "icon-nozzle (WEST)"; icon_state = "nozzle"; dir = 8},/turf/space,/area/space)
+"aZ" = (/obj/machinery/atmospherics/unary/engine{tag = "icon-nozzle (WEST)"; icon_state = "nozzle"; dir = 8},/turf/space,/area/syndicate_mothership)
 "ba" = (/obj/effect/wingrille_spawn/reinforced,/turf/space,/area/syndicate_mothership)
 "bb" = (/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/syndicate_mothership)
 "bc" = (/obj/machinery/light/colored/red,/turf/simulated/floor/shuttle/darkred,/area/syndicate_mothership)
