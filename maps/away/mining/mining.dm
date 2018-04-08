@@ -23,7 +23,6 @@
 	suffixes = list("mining/mining-asteroid.dmm")
 	cost = 1
 	accessibility_weight = 10
-	spawn_guranteed = TRUE
 
 /obj/effect/shuttle_landmark/cluster/nav1
 	name = "Asteroid Navpoint #1"
@@ -125,6 +124,8 @@
 		"nav_orb_7"
 	)
 	known = 0
+	start_x = 4
+	start_y = 5
 
 /datum/map_template/ruin/away_site/mine
 	name = "Mining - Orb"
@@ -133,6 +134,7 @@
 	suffixes = list("mining/mining-orb.dmm")
 	cost = 1
 	accessibility_weight = 10
+	spawn_guaranteed = TRUE
 
 /obj/effect/shuttle_landmark/orb
 	base_area = /area/mine/explored
