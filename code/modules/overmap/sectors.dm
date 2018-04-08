@@ -11,6 +11,9 @@ var/list/points_of_interest = list()
 	var/list/weapon_locations = list(list(1,255,255,1)) //used for orbital unaimed MAC bombardment. Format: list(top_left_x,top_left_y,bottom_right_x,bottom_right_y) for each "visible" ground-to-ship weapon on the map.
 	var/weapon_miss_chance = 35
 
+	//This is a list used by overmap projectiles to ensure they actually hit somewhere on the ship. This should be set so projectiles can narrowly miss, but not miss by much.
+	var/list/map_bounds = list(1,255,255,1) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
+
 	var/list/generic_waypoints = list()    //waypoints that any shuttle can use
 	var/list/restricted_waypoints = list() //waypoints for specific shuttles
 
