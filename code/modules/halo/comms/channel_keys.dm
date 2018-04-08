@@ -8,7 +8,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define FLEETCOM_NAME "FLEETCOM"
 #define EBAND_NAME "EBAND"
 #define COV_COMMON_NAME "Battlenet"
-#define CIV_NAME "Colony"
+#define CIV_NAME "System"
 #define SEC_NAME "GCPD"
 #define ODST_NAME "TACCOM"
 

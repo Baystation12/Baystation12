@@ -122,7 +122,7 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	if(job.faction_flag & INNIE)
 		return "INNIECOM"
 	if(job.faction_flag & COLONY)
-		return "Colony"
+		return "System"
 	/*
 	if(job.department_flag & (COM | CIV | MSC))
 		return "Common"
@@ -140,4 +140,4 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 		return "Science"
 	if(job.department_flag & SRV)
 		return "Service"*/
-	return "Colony"
+	return "System"

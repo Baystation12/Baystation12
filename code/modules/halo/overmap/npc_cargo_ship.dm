@@ -27,13 +27,13 @@
 			target_loc = null
 			return
 		if(loc == cargo_call_target.loc)
-			GLOB.global_headset.autosay("Alright, we're here. Dock with us. You have [cargo_stay_time/600] minutes.","[name]","Common")
+			GLOB.global_headset.autosay("Alright, we're here. Dock with us. You have [cargo_stay_time/600] minutes.","[name]","System")
 			target_loc = null
 			on_call = 1
 			spawn(cargo_stay_time-warn_depart_time)
-				GLOB.global_headset.autosay("I'll be leaving in [warn_depart_time/600] minutes. Better pack your stuff up.","[name]","Common")
+				GLOB.global_headset.autosay("I'll be leaving in [warn_depart_time/600] minutes. Better pack your stuff up.","[name]","System")
 			spawn(cargo_stay_time)
-				GLOB.global_headset.autosay("Thanks for the trade! We're leaving now.","[name]","Common")
+				GLOB.global_headset.autosay("Thanks for the trade! We're leaving now.","[name]","System")
 				cargo_call_target = null
 				on_call = 0
 				pick_target_loc()
