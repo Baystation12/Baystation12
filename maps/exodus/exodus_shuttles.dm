@@ -17,12 +17,13 @@
 	waypoint_offsite = "escape_pod_[number]_out"
 	..()
 
-/obj/effect/shuttle_landmark/escape_pod/
+/obj/effect/shuttle_landmark/escape_pod
 	var/number
 
 /obj/effect/shuttle_landmark/escape_pod/start
 	name = "Docked"
-	autoset = 1
+	autoset = 0
+	base_turf = /turf/space
 /obj/effect/shuttle_landmark/escape_pod/start/New()
 	landmark_tag = "escape_pod_[number]_start"
 	docking_controller = "escape_pod_[number]_berth"
