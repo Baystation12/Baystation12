@@ -31,6 +31,8 @@
 	next_fireat = world.time + fire_delay
 
 /obj/effect/overmap/ship/npc_ship/combat/process()
+	if(hull <= initial(hull)/4)
+		return
 	if(target && (target in view(7,src)))
 		if(world.time > next_fireat)
 			var/obj/effect/overmap/ship/npc_ship/targ_ship = target
