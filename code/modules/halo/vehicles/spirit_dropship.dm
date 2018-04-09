@@ -26,17 +26,14 @@
 /obj/vehicles/air/spirit_dropship/proc/update_pixel_xy()
 	pixel_x = 0
 	pixel_y = 0
-	bound_width = 0
-	bound_height = 0
+	bounds = "32,32"
 	switch (dir)
 		if(SOUTH || NORTH)
 			pixel_x = -19
-			bound_width = 128
-			bound_height = 160
+			bounds = "128,160"
 		if(EAST || WEST)
 			pixel_y = -19
-			bound_width = 160
-			bound_height = 128
+			bounds = "160,128"
 
 /obj/vehicles/air/spirit_dropship/update_object_sprites()
 	update_pixel_xy()
