@@ -85,7 +85,6 @@
 		role_type = id
 
 	cur_max = hard_cap
-	get_starting_locations()
 	if(!role_text_plural)
 		role_text_plural = role_text
 	if(config.protect_roles_from_antagonist)
