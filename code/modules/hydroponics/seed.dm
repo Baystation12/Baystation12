@@ -442,7 +442,7 @@
 			/datum/reagent/chloralhydrate/beer2
 			)
 		banned_chems += subtypesof(/datum/reagent/ethanol)
-		banned_chems += typesof(/datum/reagent/nicotine/solid)
+		banned_chems += subtypesof(/datum/reagent/tobacco)
 		banned_chems += typesof(/datum/reagent/drink)
 		banned_chems += typesof(/datum/reagent/nutriment)
 		banned_chems += typesof(/datum/reagent/toxin/fertilizer)
