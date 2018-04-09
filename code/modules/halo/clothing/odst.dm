@@ -116,9 +116,39 @@
 	item_state = "Odst Helmet Medic"
 	icon_state = "Helmet Medic"
 
+/obj/effect/odst_armour_set/engineer
+	helmet = /obj/item/clothing/head/helmet/odst/engineer
+	armour = /obj/item/clothing/suit/armor/odst/engineer
+
+/obj/item/clothing/head/helmet/odst/engineer
+	name = "ODST Engineer Helmet"
+
+	item_state = "Odst Helmet Engineer"
+	icon_state = "Helmet Engineer"
+
+/obj/item/clothing/suit/armor/odst/engineer
+	name = "ODST Engineer Armour"
+
+	icon_state = "Odst Armour Engineer"
+
+/obj/effect/odst_armour_set/squadleader
+	helmet = /obj/item/clothing/head/helmet/odst/squadleader
+	armour = /obj/item/clothing/suit/armor/odst/squadleader
+
+/obj/item/clothing/head/helmet/odst/squadleader
+	name = "ODST Squad Leader Helmet"
+
+	item_state = "Odst Helmet Squad Leader"
+	icon_state = "Helmet Squad Leader"
+
+/obj/item/clothing/suit/armor/odst/squadleader
+	name = "ODST Squad Leader Armour"
+
+	icon_state = "Odst Armor Squad Leader"
+
 /obj/effect/random_ODST_set/New()
 	.=..()
-	var/obj/armour_set = pick(list(/obj/effect/odst_armour_set/medic,/obj/effect/odst_armour_set/sharpshooter,/obj/effect/odst_armour_set/cqb,/obj/effect/odst_armour_set))
+	var/obj/armour_set = pick(list(/obj/effect/odst_armour_set/medic,/obj/effect/odst_armour_set/sharpshooter,/obj/effect/odst_armour_set/cqb,/obj/effect/odst_armour_set,/obj/effect/odst_armour_set/engineer))
 	new armour_set(src.loc)
 
 /obj/effect/random_ODST_set/Initialize()
