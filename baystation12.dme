@@ -1525,6 +1525,7 @@
 #include "code\modules\halo\vehicles\ghost.dm"
 #include "code\modules\halo\vehicles\mongoose.dm"
 #include "code\modules\halo\vehicles\pelican.dm"
+#include "code\modules\halo\vehicles\spirit_dropship.dm"
 #include "code\modules\halo\vehicles\vehicle_component_profiles.dm"
 #include "code\modules\halo\vehicles\vehiclebase.dm"
 #include "code\modules\halo\vehicles\vehiclebase_air.dm"
