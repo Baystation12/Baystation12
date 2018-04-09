@@ -268,13 +268,10 @@
 	var/confirm = alert(user,"Place [O.name] into [src.name]'s storage?",,"Yes","No")
 	if(confirm != "Yes" || !is_atom_adjacent(user) || !is_atom_adjacent(O,user.loc))
 		return
-	var/is_vehicle = 0
-	if(istype(O,/obj/vehicles))
-		is_vehicle = 1
-	if(!comp_prof.can_put_cargo(O.w_class,is_vehicle))
+	if(!comp_prof.can_put_cargo(O.w_class,istype(O,/obj/vehicles)))
 		to_chat(user,"<span class = 'notice'>[src.name] is too full to fit [O.name]</span>")
 		return
-	if(!is_vehicle)
+	if(!istype(O,/obj/vehicles))
 		user.drop_from_inventory(O)
 	comp_prof.cargo_transfer(O)
 
@@ -325,7 +322,7 @@
 	if(!istype(puller))
 		return
 
-	var/list/all_viable_occupants
+	var/list/all_viable_occupants = list()
 	for(var/mob/occ in occupants)
 		all_viable_occupants += "[occ.name]"
 		all_viable_occupants["[occ.name]"] = occ
@@ -341,6 +338,9 @@
 	exit_vehicle(chosen_occ)
 
 /obj/vehicles/attackby(var/obj/item/I,var/mob/user)
+	if(elevation > user.elevation || elevation > I.elevation)
+		to_chat(user,"<span class = 'notice'>[name] is too far away to interact with!</span>")
+		return
 	if(!istype(I))
 		return
 	if(istype(I,/obj/item/grab))

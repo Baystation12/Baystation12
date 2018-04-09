@@ -30,7 +30,7 @@
 	visible_message("<span class = 'warning'>[user] starts attaching [to_attach] to [src]</span>")
 	if(!do_after(user, VEHICLE_CONNECT_DELAY,to_attach,1,1,,1))
 		return
-	if(put_cargo_item(to_attach,user))
+	if(put_cargo_item(user,to_attach))
 		visible_message("<span class = 'notice'>[user] attaches [to_attach] to [src]</span>")
 
 /obj/vehicles/air/proc/takeoff_vehicle(var/message_n_sound_override = 0)
