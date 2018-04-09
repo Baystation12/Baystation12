@@ -44,7 +44,7 @@
 //alright let's get stupid
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Initialize()
 	. = ..()
-	boss_theme = sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Battle.ogg', volume = 10, range = 7, falloff = 4, prefer_mute = TRUE)
+	boss_theme = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Battle.ogg', volume = 10, range = 7, falloff = 4, prefer_mute = TRUE)
 
 /mob/living/simple_animal/hostile/retaliate/goat/guard
 	name = "honour guard"
@@ -112,7 +112,7 @@
 		icon_living = "king_goat3"
 		visible_message("<span class='cult'>\The [src]' wounds close with a flash and he shines even brighter than before!</span>")
 		QDEL_NULL(boss_theme)
-		boss_theme = sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
+		boss_theme = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/proc/OnDeath()
 	if(prob(85))
