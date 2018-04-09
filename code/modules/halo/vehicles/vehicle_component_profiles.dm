@@ -80,7 +80,7 @@
 		current_cargo += object
 		return 1
 
-/datum/component_profile/proc/take_component_damage(var/obj/item/projectile/P)
+/datum/component_profile/proc/take_component_damage(var/proj_damage,var/proj_damtype)
 	var/max_comp_coverage = get_coverage_sum()
 	var/obj/item/vehicle_component/comp_to_dam
 	if(!components || !components.len)
@@ -90,8 +90,20 @@
 			comp_to_dam = pick(components)
 		else if(prob(100 - max_comp_coverage))
 			comp_to_dam = pick(vital_components)
-	var/comp_resistance = comp_to_dam.get_resistance_for(P.damtype)
-	comp_to_dam.damage_integrity(P.damage*(1 - comp_resistance/100))
+	var/comp_resistance = comp_to_dam.get_resistance_for(proj_damtype)
+	comp_to_dam.damage_integrity(proj_damage*(1 - comp_resistance/100))
+
+/datum/component_profile/proc/take_comp_explosion_dam(var/ex_severity)
+	var/max_comp_coverage = get_coverage_sum()
+	var/list/comps_to_dam
+	if(!components || !components.len)
+		comps_to_dam = vital_components
+	else if(max_comp_coverage >= 100 && (components.len > 0))
+		comps_to_dam = components
+	else if(prob(100 - max_comp_coverage))
+		comps_to_dam = vital_components
+	for(var/obj/item/vehicle_component/component in comps_to_dam)
+		component.damage_integrity(initial(component.integrity)/2 /(ex_severity),)
 
 /datum/component_profile/proc/give_gunner_weapons(var/obj/vehicles/source_vehicle)
 	var/list/gunners = source_vehicle.get_occupants_in_position(pos_to_check)

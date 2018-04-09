@@ -241,7 +241,10 @@
 	if(!isnull(pos_to_dam))
 		damage_occupant(pos_to_dam,P)
 		return
-	comp_prof.take_component_damage(P)
+	comp_prof.take_component_damage(P.damage,P.damtype)
+
+/obj/vehicles/ex_act(var/severity)
+	comp_prof.take_comp_explosion_dam(severity)
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)
