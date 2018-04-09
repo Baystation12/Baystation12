@@ -784,6 +784,11 @@
 	icon_state = "bar"
 	sound_env = LARGE_SOFTFLOOR
 
+/area/crew_quarters/barbackroom
+	name = "\improper Bar Backroom"
+	icon_state = "bar"
+	sound_env = SMALL_ENCLOSED
+
 /area/crew_quarters/cryolocker
 	name = "\improper Cryogenic Storage Wardrobe"
 	icon_state = "locker"
@@ -802,6 +807,10 @@
 
 /area/crew_quarters/mess
 	name = "\improper Mess Hall"
+	icon_state = "cafeteria"
+
+/area/crew_quarters/messprivate
+	name = "\improper Private Mess Hall"
 	icon_state = "cafeteria"
 
 /area/crew_quarters/galley
