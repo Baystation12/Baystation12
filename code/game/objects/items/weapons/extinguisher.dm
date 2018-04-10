@@ -61,10 +61,10 @@
 
 		src.last_use = world.time
 		reagents.splash(M, min(reagents.total_volume, spray_amount))
-		
+
 		user.visible_message("<span class='notice'>\The [user] sprays \the [M] with \the [src].</span>")
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
-		
+
 		return 1 // No afterattack
 	return ..()
 
@@ -89,7 +89,7 @@
 /obj/item/weapon/extinguisher/afterattack(var/atom/target, var/mob/user, var/flag)
 	//TODO; Add support for reagents in water.
 
-	if( istype(target, /obj/structure/reagent_dispensers/watertank) && flag)
+	if( istype(target, /obj/structure/reagent_dispensers) && flag)
 		var/obj/o = target
 		var/amount = o.reagents.trans_to_obj(src, 500)
 		to_chat(user, "<span class='notice'>You fill [src] with [amount] units of the contents of [target].</span>")
@@ -111,21 +111,9 @@
 		var/direction = get_dir(src,target)
 
 		if(user.buckled && isobj(user.buckled))
-			spawn(0)
-				propel_object(user.buckled, user, turn(direction,180))
+			addtimer(CALLBACK(src, .proc/propel_object, user.buckled, user, turn(direction,180)), 0)
 
-		var/turf/T = get_turf(target)
-
-		var/per_particle = min(spray_amount, reagents.total_volume)/spray_particles
-		for(var/a = 1 to spray_particles)
-			spawn(0)
-				if(!src || !reagents.total_volume) return
-
-				var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(src))
-				W.create_reagents(per_particle)
-				reagents.trans_to_obj(W, per_particle)
-				W.set_color()
-				W.set_up(T)
+		addtimer(CALLBACK(src, .proc/do_spray, target), 0)
 
 		if((istype(usr.loc, /turf/space)) || (usr.lastarea.has_gravity == 0))
 			user.inertia_dir = get_dir(target, user)
@@ -133,3 +121,15 @@
 	else
 		return ..()
 	return
+
+/obj/item/weapon/extinguisher/proc/do_spray(var/atom/Target)
+	var/turf/T = get_turf(Target)
+	var/per_particle = min(spray_amount, reagents.total_volume)/spray_particles
+	for(var/a = 1 to spray_particles)
+		if(!src || !reagents.total_volume) return
+
+		var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(src))
+		W.create_reagents(per_particle)
+		reagents.trans_to_obj(W, per_particle)
+		W.set_color()
+		W.set_up(T)
