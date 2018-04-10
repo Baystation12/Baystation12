@@ -127,7 +127,7 @@
 	start_x = 4
 	start_y = 5
 
-/datum/map_template/ruin/away_site/mine
+/datum/map_template/ruin/away_site/orb
 	name = "Mining - Orb"
 	id = "awaysite_mining_orb"
 	description = "A sort of circular asteroid with a bird."
@@ -135,9 +135,6 @@
 	cost = 1
 	accessibility_weight = 10
 	spawn_guaranteed = TRUE
-
-/obj/effect/shuttle_landmark/orb
-	base_area = /area/mine/explored
 
 /obj/effect/shuttle_landmark/orb/nav1
 	name = "Landing zone #1"
