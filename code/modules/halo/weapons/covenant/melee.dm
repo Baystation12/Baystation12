@@ -39,7 +39,6 @@
 		return
 	if(!(target in view(7,user)))
 		return
-	var/mob/target_mob = target
 	if(get_dist(user,target) <= get_species_leap_dist(user))
 		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
 		var/image/user_image = image(user)
