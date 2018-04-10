@@ -2,7 +2,7 @@
 
 #define BACKPACK_SLOWDOWN_MOD 0.05 //The modifer to apply to the w_class of an item when calculating slowdown.
 
-#define SHOES_SLOWDOWN          0.0  // How much shoes slow you down by default. Negative values speed you up.
+#define SHOES_SLOWDOWN         -1.0  // How much shoes slow you down by default. Negative values speed you up.
 
 #define CANDLE_LUM 3 // For how bright candles are.
 
