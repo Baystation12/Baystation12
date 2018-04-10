@@ -1645,7 +1645,7 @@
 "FG" = (/obj/machinery/light,/turf/simulated/floor/shuttle/blue,/area/shuttle/transport1/centcom)
 "FH" = (/obj/structure/closet/crate/secure/large/reinforced,/turf/simulated/floor/shuttle/red,/area/shuttle/specops/centcom)
 "FI" = (/obj/structure/bed/chair{dir = 8},/obj/effect/floor_decal/corner/green{dir = 6},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/holding)
-"FJ" = (/obj/machinery/door/airlock/glass_command{name = "Escape Shuttle Cockpit"; req_access = list(19)},/turf/space,/area/shuttle/escape/centcom)
+"FJ" = (/obj/machinery/door/airlock/glass_command{name = "Escape Shuttle Cockpit"; req_access = list(19)},/turf/simulated/floor/shuttle/blue,/area/shuttle/escape/centcom)
 "FK" = (/turf/simulated/shuttle/wall{icon_state = "swall_straight"; dir = 4},/area/shuttle/escape/centcom)
 "FL" = (/turf/simulated/shuttle/wall{icon_state = "swall_t"; dir = 8},/area/shuttle/transport1/centcom)
 "FM" = (/turf/simulated/shuttle/wall{icon_state = "swall_straight"; dir = 4},/area/shuttle/transport1/centcom)
