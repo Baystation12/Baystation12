@@ -55,7 +55,7 @@
 
 /datum/gear/mask/bandana
 	allowed_roles = NON_MILITARY_ROLES
-	
+
 /datum/gear/head/bandana
 	allowed_roles = NON_MILITARY_ROLES
 
