@@ -1,0 +1,6 @@
+author: "FTangSteve"
+delete-after: True
+changes: 
+  - rscadd: "Makes breathing far more relevant"
+  - rscadd: "CO2 buildup is now potentially dangerous and must be scrubbed"
+  - rscadd: "Tank sizes have been adjusted and will need to be refilled more often"
