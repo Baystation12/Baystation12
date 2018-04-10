@@ -1,0 +1,5 @@
+author: "CakeQ"
+delete-after: True
+changes: 
+  - maptweak: "Replaces the conference room on deck one with a briefing room."
+  - maptweak: "Added a table/shutter combo intbetween the captain's mess and briefing room for the chef's use."
