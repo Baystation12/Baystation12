@@ -2611,7 +2611,7 @@
 #include "maps\odst_prowler\odst_ship_overmap.dm"
 #include "maps\overmap_example\overmap_example_define.dm"
 #include "maps\slayer\__death_asteroid_map.dm"
-#include "maps\unsc_frigate\unsc_frigate.dm"
+#include "maps\unsc_frigate\unsc_frigate_innies_geminus.dm"
 #include "maps\unsc_frigate\unsc_frigate_map.dm"
 #include "maps\unsc_frigate\unsc_frigate_overmap.dm"
 #include "maps\~mapsystem\map_preferences.dm"
