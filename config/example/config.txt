@@ -354,7 +354,7 @@ STARLIGHT 0
 
 
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
-# GENERATE_ASTEROID
+GENERATE_ASTEROID
 
 
 
