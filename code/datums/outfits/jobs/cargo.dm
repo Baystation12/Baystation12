@@ -19,6 +19,7 @@
 
 /decl/hierarchy/outfit/job/cargo/mining
 	name = OUTFIT_JOB_NAME("Shaft miner")
+	shoes = /obj/item/clothing/shoes/workboots
 	uniform = /obj/item/clothing/under/rank/miner
 	id_type = /obj/item/weapon/card/id/cargo/mining
 	pda_type = /obj/item/device/pda/shaftminer

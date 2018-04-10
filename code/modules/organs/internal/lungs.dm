@@ -77,7 +77,7 @@
 		if(prob(2))
 			if(active_breathing)
 				owner.visible_message(
-					"<B>\The [owner]</B> coughs up blood!",
+					"<B>\The [owner]</B> ������� ������!",
 					"<span class='warning'>You cough up blood!</span>",
 					"You hear someone coughing!",
 				)
@@ -91,7 +91,7 @@
 		if(prob(4))
 			if(active_breathing)
 				owner.visible_message(
-					"<B>\The [owner]</B> gasps for air!",
+					"<B>\The [owner]</B> ����������!",
 					"<span class='danger'>You can't breathe!</span>",
 					"You hear someone gasp for air!",
 				)
