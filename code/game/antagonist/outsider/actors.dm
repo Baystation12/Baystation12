@@ -43,6 +43,10 @@ var/datum/antagonist/actor/actor
 	set name = "Join as Actor"
 	set desc = "Join as an Actor to entertain the crew through television!"
 
+	if(!(initialization_stage&INITIALIZATION_COMPLETE))
+		to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+		return
+
 	if(!MayRespawn(1) || !actor.can_become_antag(usr.mind, 1))
 		return
 
