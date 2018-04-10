@@ -14089,6 +14089,7 @@
 	pixel_y = 1
 	},
 /obj/item/weapon/folder/envelope/blanks,
+/obj/item/weapon/pen/green,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/cl)
 "Sg" = (
@@ -14235,6 +14236,7 @@
 	pixel_y = 1
 	},
 /obj/item/weapon/folder/envelope/rep,
+/obj/item/weapon/pen/green,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sgr)
 "Tg" = (

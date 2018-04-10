@@ -555,7 +555,7 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "bg" = (
-/obj/item/weapon/pickaxe/hand{
+/obj/item/weapon/pickaxe/xeno/hand{
 	pixel_x = -15
 	},
 /turf/simulated/floor/asteroid,

@@ -1,8 +1,8 @@
-/lobby_music/lasers
+/music_track/lasers
 	artist = "Earthcrusher"
 	title = "lasers rip apart the bulkhead"
 	song = 'sound/music/lasers_rip_apart_the_bulkhead.ogg'
-	license = CC_BY_NC_SA_3_0
+	license = /decl/license/cc_by_nc_sa_3_0
 	url = "https://soundcloud.com/brendon-hollesen-591187466/lasers-rip-apart-the-bulkhead/s-3paVI"
 
 /*

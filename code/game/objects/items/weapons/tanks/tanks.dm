@@ -330,9 +330,9 @@ var/list/global/tank_gauge_cache = list()
 	if(tank_pressure < distribute_pressure)
 		distribute_pressure = tank_pressure
 
-	var/moles_needed = distribute_pressure*volume_to_return/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-
-	return remove_air(moles_needed)
+	var/datum/gas_mixture/removed = remove_air(distribute_pressure*volume_to_return/(R_IDEAL_GAS_EQUATION*air_contents.temperature))
+	removed.volume = volume_to_return
+	return removed
 
 /obj/item/weapon/tank/Process()
 	//Allow for reactions
