@@ -1,4 +1,4 @@
-#define ESWORD_LEAP_DIST
+#define ESWORD_LEAP_DIST 2
 #define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan)
 #define LUNGE_DELAY 2 SECONDS
 
@@ -28,16 +28,26 @@
 		return 5
 	return ESWORD_LEAP_DIST
 
-/obj/item/weapon/melee/energy/elite_sword/afterattack(var/atom/target,var/mob/user,var/adjacent)
-	if(adjacent)
-		return
+/obj/item/weapon/melee/energy/elite_sword/afterattack(var/atom/target,var/mob/user)
 	if(world.time < next_leapwhen)
 		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
 		return
-	if(istype(target,/turf/simulated/wall) || istype(target,/turf/unsimulated/wall))
-		to_chat(user,"<span class = 'notice'>You can't leap into walls!</span>")
-		return
-	if(!(target in view(7,user)))
+	if(!istype(target,/mob))
+		if(istype(target,/turf))
+			var/turf/targ_turf = target
+			var/list/turf_mobs = list()
+			for(var/mob/m in targ_turf.contents)
+				turf_mobs += m
+			if(turf_mobs.len > 0)
+				target = pick(turf_mobs)
+			else
+				to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
+				return
+		else
+			to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
+			return
+	if(!(target in view(7,user.loc)))
+		to_chat(user,"<span class = 'notice'>That's not in your view!</span>")
 		return
 	if(get_dist(user,target) <= get_species_leap_dist(user))
 		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
@@ -53,10 +63,7 @@
 			after_image.overlays += user_image
 			spawn(5)
 				qdel(after_image)
-		if(isturf(target))
-			user.forceMove(target)
-		else
-			user.forceMove(get_step(target,get_dir(target,user)))//If it's not a turf, jump adjacent.
+		user.forceMove(get_step(target,get_dir(target,user)))//If it's not a turf, jump adjacent.
 		if(user.Adjacent(target) && ismob(target))
 			attack(target,user)
 		next_leapwhen = world.time + LUNGE_DELAY
