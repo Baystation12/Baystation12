@@ -84,7 +84,8 @@
 /obj/item/clothing/proc/attach_accessory(mob/user, obj/item/clothing/accessory/A)
 	accessories += A
 	A.on_attached(src, user)
-	src.verbs |= /obj/item/clothing/proc/removetie_verb
+	if(A.removable)
+		src.verbs |= /obj/item/clothing/proc/removetie_verb
 	update_accessory_slowdown()
 	update_clothing_icon()
 
@@ -105,12 +106,17 @@
 	if(usr.stat) return
 	if(!accessories.len) return
 	var/obj/item/clothing/accessory/A
+	var/list/removables = list()
+	for(var/obj/item/clothing/accessory/ass in accessories)
+		if(ass.removable)
+			removables |= ass
 	if(accessories.len > 1)
-		A = input("Select an accessory to remove from [src]") as null|anything in accessories
+		A = input("Select an accessory to remove from [src]") as null|anything in removables
 	else
 		A = accessories[1]
 	src.remove_accessory(usr,A)
-	if(!accessories.len)
+	removables -= A
+	if(!removables.len)
 		src.verbs -= /obj/item/clothing/proc/removetie_verb
 
 /obj/item/clothing/emp_act(severity)
