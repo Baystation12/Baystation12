@@ -1,3 +1,52 @@
+//Consolidated sandwich file.
+/obj/item/weapon/reagent_containers/food/snacks/sandwich
+	name = "Sandwich"
+	desc = "A grand creation of meat, cheese, bread, and several leaves of lettuce! Arthur Dent would be proud."
+	icon_state = "sandwich"
+	trash = /obj/item/trash/plate
+	filling_color = "#d9be29"
+	center_of_mass = "x=16;y=4"
+	nutriment_desc = list("bread" = 3, "cheese" = 3)
+	nutriment_amt = 3
+
+
+/obj/item/weapon/reagent_containers/food/snacks/sandwich/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
+
+
+/obj/item/weapon/reagent_containers/food/snacks/toastedsandwich
+	name = "Toasted Sandwich"
+	desc = "Now if you only had a pepper bar."
+	icon_state = "toastedsandwich"
+	trash = /obj/item/trash/plate
+	filling_color = "#d9be29"
+	center_of_mass = "x=16;y=4"
+	nutriment_desc = list("toasted bread" = 3, "cheese" = 3)
+	nutriment_amt = 3
+
+
+/obj/item/weapon/reagent_containers/food/snacks/toastedsandwich/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
+	reagents.add_reagent(/datum/reagent/carbon, 2)
+
+
+/obj/item/weapon/reagent_containers/food/snacks/grilledcheese
+	name = "Grilled Cheese Sandwich"
+	desc = "Goes great with Tomato soup!"
+	icon_state = "toastedsandwich"
+	trash = /obj/item/trash/plate
+	filling_color = "#d9be29"
+	nutriment_desc = list("toasted bread" = 3, "cheese" = 3)
+	nutriment_amt = 3
+
+
+/obj/item/weapon/reagent_containers/food/snacks/grilledcheese/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
+
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/bread/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(istype(W,/obj/item/weapon/material/shard) || istype(W,/obj/item/weapon/reagent_containers/food/snacks))
@@ -6,12 +55,49 @@
 		qdel(src)
 	..()
 
+/obj/item/weapon/reagent_containers/food/snacks/jellysandwich
+	name = "Jelly Sandwich"
+	desc = "You wish you had some peanut butter to go with this..."
+	icon_state = "jellysandwich"
+	trash = /obj/item/trash/plate
+	filling_color = "#9e3a78"
+	center_of_mass = "x=16;y=8"
+	nutriment_desc = list("bread" = 2)
+	nutriment_amt = 2
+	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/slime/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/slimejelly, 5)
+
+/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/cherry/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/cherryjelly, 5)
+
+/obj/item/weapon/reagent_containers/food/snacks/cubancarp
+	name = "Cuban Carp"
+	desc = "A sandwich that burns your tongue and then leaves it numb!"
+	icon_state = "cubancarp"
+	trash = /obj/item/trash/plate
+	filling_color = "#e9adff"
+	center_of_mass = "x=12;y=5"
+	nutriment_desc = list("toasted bread" = 3)
+	nutriment_amt = 3
+	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/cubancarp/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 3)
+	reagents.add_reagent(/datum/reagent/capsaicin, 3)
+
+
+//Custom sandwiches.
 /obj/item/weapon/reagent_containers/food/snacks/csandwich
 	name = "sandwich"
 	desc = "The best thing since sliced bread."
 	icon_state = "breadslice"
 	trash = /obj/item/trash/plate
-	bitesize = 2
+
 
 	var/list/ingredients = list()
 
