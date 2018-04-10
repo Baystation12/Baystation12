@@ -40,6 +40,7 @@ var/bomb_set
 /obj/machinery/nuclearbomb/Process(var/wait)
 	if(timing)
 		timeleft = max(timeleft - (wait / 10), 0)
+		playsound(loc, 'sound/items/timer.ogg', 50)
 		if(timeleft <= 0)
 			addtimer(CALLBACK(src, .proc/explode), 0)
 		GLOB.nanomanager.update_uis(src)

@@ -49,6 +49,7 @@
 /obj/item/device/assembly/timer/Process()
 	if(timing && (time > 0))
 		time--
+		playsound(loc, 'sound/items/timer.ogg', 50)
 	if(timing && time <= 0)
 		timing = 0
 		timer_end()
