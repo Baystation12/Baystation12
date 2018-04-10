@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/pulse_rifle
-	name = "pulse emitter"
-	desc = "A infantry weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Because of its complexity and cost, it is rarely seen in use except by specialists."
+	name = "infantry pulse emitter"
+	desc = "An infantry weapon that uses advanced pulse-based beam generation technology to emit powerful laser blasts. Shorthand IPE. Because of its complexity and cost, it is rarely seen in use except by specialists."
 	icon_state = "pulse"
 	item_state = "pulse"
 	slot_flags = SLOT_BACK
