@@ -42,3 +42,11 @@
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
 	products = list(/obj/item/clothing/under/unsc/marine_fatigues = 12,/obj/item/clothing/head/helmet/marine = 8,/obj/item/clothing/head/helmet/marine/visor = 8,/obj/item/clothing/suit/storage/marine = 5,/obj/item/clothing/shoes/marine = 8,/obj/item/clothing/mask/marine = 5, /obj/item/weapon/storage/belt/marine_ammo = 8)
+
+/obj/machinery/vending/armory/attachment
+	name = "Attachment Vendor"
+	desc = "A vendor full of attachments for the MA5B."
+	icon_state ="ironhammer"
+	icon_deny = "ironhammer-deny"
+	req_access = list(308)
+	products = list(/obj/item/weapon_attachment/sight/acog = 2, /obj/item/weapon_attachment/sight/rds = 6, /obj/item/weapon_attachment/stock/ma5b = 10, /obj/item/weapon_attachment/stock/skeletal = 8)
