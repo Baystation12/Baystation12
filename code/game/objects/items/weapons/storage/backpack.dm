@@ -368,43 +368,43 @@
 /obj/item/weapon/storage/backpack/odst/regular
 	icon = ODST_OVERRIDE
 	name = "Odst Backpack"
-	icon_state = "Odst Backpack"
-	item_state = "Odst B"
+	icon_state = "odst_b"
+	item_state = "odst_b"
 	dir = 1
 
 /obj/item/weapon/storage/backpack/odst/cqb
 	icon = ODST_OVERRIDE
 	name = "Odst Backpack CQB"
-	icon_state = "Odst Backpack CQB"
-	item_state = "Odst C"
+	icon_state = "odst_c"
+	item_state = "odst_c"
 	dir = 1
 
 /obj/item/weapon/storage/backpack/odst/medic
 	icon = ODST_OVERRIDE
 	name = "Odst Backpack Medic"
-	icon_state = "Odst Backpack Medic"
-	item_state = "Odst M"
+	icon_state = "odst_m"
+	item_state = "odst_m"
 	dir = 1
 
 /obj/item/weapon/storage/backpack/odst/sharpshooter
 	icon = ODST_OVERRIDE
 	name = "Odst Backpack Sharpshooter"
-	icon_state = "Odst Backpack Sharpshooter"
-	item_state = "Odst S"
+	icon_state = "odst_s"
+	item_state = "odst_s"
 	dir = 1
 
 /obj/item/weapon/storage/backpack/odst/engineer
 	icon = ODST_OVERRIDE
 	name = "Odst Backpack Engineer"
-	icon_state = "Odst Backpack Engineer"
-	item_state = "Odst E"
+	icon_state = "odst_e"
+	item_state = "odst_e"
 	dir = 1
 
 /obj/item/weapon/storage/backpack/odst/squadlead
 	icon = ODST_OVERRIDE
 	name = "Odst Backpack Squad Leader"
-	icon_state = "Odst Backpack Squad Leader"
-	item_state = "Odst L"
+	icon_state = "odst_sl"
+	item_state = "odst_sl"
 	dir = 1
 
 #undef ODST_OVERRIDE
