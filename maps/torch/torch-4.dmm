@@ -5517,14 +5517,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "aoo" = (
-/obj/structure/closet/crate,
-/obj/random/powercell,
-/obj/random/tank,
+/obj/structure/closet/crate/mechabeacons,
+/obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "aop" = (
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
+/obj/random/powercell,
 /obj/random/powercell,
 /obj/random/powercell,
 /obj/random/powercell,
@@ -15056,11 +15056,6 @@
 "aTF" = (
 /obj/random/closet,
 /obj/item/weapon/storage/box/lights/mixed,
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftport)
-"aTG" = (
-/obj/structure/closet/crate/mechabeacons,
-/obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
 "aTH" = (
@@ -49804,7 +49799,7 @@ slb
 svb
 aSK
 aTe
-aTG
+aLu
 bDK
 bDK
 aaa
