@@ -15,7 +15,8 @@
 /datum/map/proc/private_use_legacy_saves(var/savefile/S, var/slot)
 	if(!load_legacy_saves) // Check if we're bothering with legacy saves at all
 		return FALSE
-	if(!S.dir.Find(path)) // If we cannot find the map path folder, load the legacy save
+	//if(!S.dir.Find(path)) // If we cannot find the map path folder, load the legacy save
+	if(!S.dir.Find("exodus")) // If we cannot find the map path folder, load the legacy save
 		return TRUE
 	//S.cd = "/[path]" // Finally, if we cannot find the character slot in the map path folder, load the legacy save
 	S.cd = "/exodus" // Finally, if we cannot find the character slot in the map path folder, load the legacy save
