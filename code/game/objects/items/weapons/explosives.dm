@@ -86,6 +86,7 @@
 	qdel(src)
 
 /obj/item/weapon/plastique/proc/run_timer() //Basically exists so the C4 will beep when running. Better idea than putting sleeps in attackby.
+	set waitfor = 0
 	var/T = timer
 	while(T > 0)
 		sleep(1 SECOND)
