@@ -1,6 +1,7 @@
 GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
+#define INFECT_DELAY 2 SECONDS
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
@@ -99,6 +100,30 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	pixel_y = rand(0,24)
 	spawn(30)
 		spawning = 0
+
+/mob/living/simple_animal/hostile/flood/proc/infect_mob(var/mob/living/carbon/human/h)
+	visible_message("<span class = 'danger'>[name] leaps at [h.name], tearing at their armor and burrowing through their skin!</span>")
+	adjustBruteLoss(1)
+	src = null //Just in case we get killed.
+	spawn(INFECT_DELAY)
+		h.Stun(999)
+		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
+		var/mob/living/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_human
+		new_combat_form.maxHealth = 200 //Buff their health a bit.
+		new_combat_form.health = 200
+		new_combat_form.forceMove(h.loc)
+		new_combat_form.ckey = h.ckey
+		for(var/obj/i in h.contents)
+			h.drop_from_inventory(i)
+		qdel(h)
+
+/mob/living/simple_animal/hostile/flood/infestor/Move()
+	. - ..()
+	for(var/mob/living/carbon/human/h in view(2,src))
+		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
+		if(mob_healthdam > h.maxHealth/2) //Less than half health? Jump 'em.
+			infect_mob(h)
+			return //No more than one at a time.
 
 /mob/living/simple_animal/hostile/flood/infestor/adjustBruteLoss(damage)
 	if(health > 0)
