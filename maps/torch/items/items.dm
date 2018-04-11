@@ -57,6 +57,21 @@ Torch specific items
 /obj/item/device/pda/captain
 	pen = /obj/item/weapon/pen/multi/cmd/co
 
+/obj/item/weapon/storage/backpack/explorer
+	name = "explorer backpack"
+	desc = "A rugged backpack."
+	icon_state = "exppack"
+
+/obj/item/weapon/storage/backpack/satchel_explorer
+	name = "explorer satchel"
+	desc = "A rugged satchel for field work."
+	icon_state = "satchel-exp"
+
+/obj/item/weapon/storage/backpack/messenger/explorer
+	name = "explorer messenger bag"
+	desc = "A rugged backpack worn over one shoulder."
+	icon_state = "courierbagexp"
+
 /***********
 Unique items
 ***********/
