@@ -21,6 +21,7 @@
 	slot_flags = SLOT_BACK
 	max_w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	use_dynamic_slowdown = 1
 
 /obj/item/weapon/storage/backpack/equipped()
 	if(!has_extension(src, /datum/extension/appearance))
@@ -358,3 +359,52 @@
 	name = "security messenger bag"
 	desc = "A tactical backpack worn over one shoulder. This one is in Security colors."
 	icon_state = "courierbagsec"
+
+////////////////////////////////////////////////////////
+///ODST Bags////////////////////////////////////////////
+////////////////////////////////////////////////////////
+#define ODST_OVERRIDE 'code/modules/halo/clothing/odst.dmi'
+
+/obj/item/weapon/storage/backpack/odst/regular
+	icon = ODST_OVERRIDE
+	name = "Odst Backpack"
+	icon_state = "Odst Backpack"
+	item_state = "Odst B"
+	dir = 1
+
+/obj/item/weapon/storage/backpack/odst/cqb
+	icon = ODST_OVERRIDE
+	name = "Odst Backpack CQB"
+	icon_state = "Odst Backpack CQB"
+	item_state = "Odst C"
+	dir = 1
+
+/obj/item/weapon/storage/backpack/odst/medic
+	icon = ODST_OVERRIDE
+	name = "Odst Backpack Medic"
+	icon_state = "Odst Backpack Medic"
+	item_state = "Odst M"
+	dir = 1
+
+/obj/item/weapon/storage/backpack/odst/sharpshooter
+	icon = ODST_OVERRIDE
+	name = "Odst Backpack Sharpshooter"
+	icon_state = "Odst Backpack Sharpshooter"
+	item_state = "Odst S"
+	dir = 1
+
+/obj/item/weapon/storage/backpack/odst/engineer
+	icon = ODST_OVERRIDE
+	name = "Odst Backpack Engineer"
+	icon_state = "Odst Backpack Engineer"
+	item_state = "Odst E"
+	dir = 1
+
+/obj/item/weapon/storage/backpack/odst/squadlead
+	icon = ODST_OVERRIDE
+	name = "Odst Backpack Squad Leader"
+	icon_state = "Odst Backpack Squad Leader"
+	item_state = "Odst L"
+	dir = 1
+
+#undef ODST_OVERRIDE
