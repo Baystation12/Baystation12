@@ -1,0 +1,5 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - soundadd: "C4, timers, and nukes will now make an ominous beeping noise.
+spriteadd: Porta-nuke resprited, uses the porta nuke sprite from TG."
