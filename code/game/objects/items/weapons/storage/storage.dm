@@ -26,10 +26,27 @@
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
 	var/list/startswith
 	var/datum/storage_ui/storage_ui = /datum/storage_ui/default
+	var/use_dynamic_slowdown = 0
 
 /obj/item/weapon/storage/Destroy()
 	QDEL_NULL(storage_ui)
 	. = ..()
+
+/obj/item/weapon/storage/proc/update_slowdown()
+	if(!use_dynamic_slowdown)
+		return
+	var/list/inv = return_inv()
+	var/slowdown_total = 0
+	for(var/obj/A in inv)
+		slowdown_total += base_storage_cost(A.w_class) * BACKPACK_SLOWDOWN_MOD
+	var/min_slowdown = (max_storage_space*BACKPACK_SLOWDOWN_MOD)-1 //With backpack slowdown mod of 0.05, means you can carry max 2 normal before slowdown kicks in.
+	if(slowdown_total <= min_slowdown)
+		slowdown_total = 0
+	else
+		slowdown_total -= min_slowdown
+
+	if(slowdown_general != slowdown_total)
+		slowdown_general = slowdown_total
 
 /obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
 	if(!canremove)
@@ -189,6 +206,7 @@
 		if(!NoUpdate)
 			update_ui_after_item_insertion()
 	update_icon()
+	update_slowdown()
 	return 1
 
 /obj/item/weapon/storage/proc/update_ui_after_item_insertion()
@@ -220,6 +238,7 @@
 		W.maptext = ""
 	W.on_exit_storage(src)
 	update_icon()
+	update_slowdown()
 	return 1
 
 //This proc is called when you want to place an item into the storage item.
