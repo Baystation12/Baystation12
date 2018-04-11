@@ -159,5 +159,53 @@
 	name = "Tactical Webbing"
 	icon_state = "Tactical Webbing"
 
+/obj/item/weapon/storage/backpack/odst/regular
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Odst Backpack"
+	item_state = "odst_b"
+	icon_state = "odst_ba"
+
+
+/obj/item/weapon/storage/backpack/odst/cqb
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Odst Backpack CQB"
+	item_state = "odst_c"
+	icon_state = "odst_ca"
+
+
+/obj/item/weapon/storage/backpack/odst/medic
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Odst Backpack Medic"
+	item_state = "odst_m"
+	icon_state = "odst_ma"
+
+
+/obj/item/weapon/storage/backpack/odst/sharpshooter
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Odst Backpack Sharpshooter"
+	item_state = "odst_s"
+	icon_state = "odst_sa"
+
+
+/obj/item/weapon/storage/backpack/odst/engineer
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Odst Backpack Engineer"
+	item_state = "odst_e"
+	icon_state = "odst_ea"
+
+
+/obj/item/weapon/storage/backpack/odst/squadlead
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Odst Backpack Squad Leader"
+	item_state = "odst_sl"
+	icon_state = "odst_sla"
+
+
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND
