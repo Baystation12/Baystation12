@@ -99,6 +99,7 @@
 	harm_intent_damage = 0
 
 	var/list/equipped_weapons = newlist(/datum/mgalekgolo_weapon/fuel_rod_cannon)
+	var/atom/current_target
 
 /mob/living/simple_animal/lekgolo/mgalekgolo/Life()
 	for(var/datum/mgalekgolo_weapon/W in equipped_weapons)
@@ -212,18 +213,27 @@
 	if(isnull(active_weapon))
 		return
 	if(active_weapon.next_shot > world.time)
-		to_chat(src,"<span class = 'warning'>Your [active_weapon.name] is still charging.</span>")
+		if(current_target)
+			to_chat(src,"<span class = 'notice'>You refocus your aim.</span>")
+			current_target = A
+		else
+			to_chat(src,"<span class = 'warning'>Your [active_weapon.name] is still charging.</span>")
 		return
 	if((active_weapon.charge_amount - active_weapon.charge_drain) <= 0)
 		visible_message("<span class = 'warning'>[name]'s [active_weapon.name] fizzles weakly.</span>")
 		return
-	var/obj/item/projectile/new_proj = new active_weapon.proj (loc)
-	new_proj.permutated += src //A workaround for the projectile colliding with the 64x64 bounds of the sprite.
-	new_proj.launch(A)
-	if(active_weapon.fire_sound)
-		playsound_local(loc,active_weapon.fire_sound,110,1,,5)
+	if(active_weapon.charge_sound)
+		playsound_local(loc,active_weapon.charge_sound,110,1,,5)
+	spawn(active_weapon.shot_delay)
+		var/obj/item/projectile/new_proj = new active_weapon.proj (loc)
+		new_proj.permutated += src //A workaround for the projectile colliding with the 64x64 bounds of the sprite.
+		new_proj.launch(current_target)
+		if(active_weapon.fire_sound)
+			playsound_local(loc,active_weapon.fire_sound,110,1,,5)
+		current_target = null
+	current_target = A
 	active_weapon.charge_amount -= active_weapon.charge_drain
-	active_weapon.next_shot = world.time + (active_weapon.shot_delay SECONDS)
+	active_weapon.next_shot = world.time + active_weapon.shot_delay
 
 /mob/living/simple_animal/lekgolo/mgalekgolo/death()
 	. = ..()
@@ -237,6 +247,7 @@
 	var/name = "weapon"
 
 	var/obj/item/projectile/proj
+	var/charge_sound
 	var/fire_sound
 
 	var/active = 0 //Denotes if the weapon is active.
@@ -254,11 +265,12 @@
 
 	proj = /obj/item/projectile/covenant/hunter_fuel_rod
 	fire_sound = 'code/modules/halo/sounds/hunter_cannon.ogg'
+	charge_sound = 'code/modules/halo/sounds/hunter_charge.ogg'
 
 	charge_max = 50
 	charge_amount = 50
 
-	shot_delay = 1.5
+	shot_delay = 1.5 SECONDS
 
 //Lekgolo Language Define//
 /datum/language/lekgolo
