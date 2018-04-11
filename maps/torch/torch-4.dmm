@@ -6392,6 +6392,7 @@
 	operating = 1;
 	pixel_y = -24
 	},
+/obj/structure/cable/green,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "asp" = (
@@ -6399,7 +6400,6 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/structure/cable/green,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "asq" = (
@@ -8453,7 +8453,6 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
@@ -20394,6 +20393,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/rnd/checkpoint)
+"hqX" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/structure/sign/ecplaque{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/conference)
 "hrb" = (
 /obj/effect/wingrille_spawn/reinforced,
 /obj/machinery/door/blast/shutters{
@@ -21258,6 +21266,7 @@
 	pixel_y = 7
 	},
 /obj/item/weapon/pen,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "iGb" = (
@@ -22604,6 +22613,7 @@
 	icon_state = "1,0";
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "kTb" = (
@@ -22903,6 +22913,11 @@
 	icon_state = "2,1";
 	dir = 8
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "lsb" = (
@@ -23152,6 +23167,7 @@
 	icon_state = "0,0";
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "lKb" = (
@@ -23159,13 +23175,7 @@
 	icon_state = "0,2";
 	dir = 8
 	},
-/turf/simulated/floor/tiled/dark,
-/area/command/conference)
-"lLb" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/effect/floor_decal/corner/blue{
-	dir = 6
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "lMb" = (
@@ -23250,6 +23260,7 @@
 	icon_state = "1,2";
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "lXb" = (
@@ -23273,6 +23284,7 @@
 	icon_state = "2,0";
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "lZb" = (
@@ -23284,7 +23296,6 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
@@ -23313,31 +23324,34 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "mdb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
 /obj/structure/bed/chair{
 	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "meb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/command/conference)
-"mfb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/conference)
+"mfb" = (
 /obj/structure/bed/chair{
 	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -23348,11 +23362,11 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -25873,11 +25887,6 @@
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/diplomat)
 "qya" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
 /obj/structure/bed/chair{
 	dir = 1
 	},
@@ -25885,6 +25894,12 @@
 	icon_state = "2,2";
 	dir = 8
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "qyb" = (
@@ -26869,6 +26884,7 @@
 /obj/item/weapon/tableflag{
 	pixel_x = 4
 	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "snb" = (
@@ -27655,14 +27671,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
-"wZQ" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	layer = 2.4;
-	level = 2
-	},
-/turf/simulated/floor/tiled/dark,
-/area/command/conference)
 "xPU" = (
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
@@ -36845,7 +36853,7 @@ afF
 ajN
 adK
 alX
-bxz
+hqX
 anU
 bxz
 bxz
@@ -37254,7 +37262,7 @@ lJb
 kSj
 lYb
 mdb
-wZQ
+alZ
 att
 mvb
 mEb
@@ -37856,7 +37864,7 @@ ajR
 eRH
 aAI
 bxz
-lLb
+bxz
 ayM
 lZb
 mgb
