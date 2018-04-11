@@ -30,7 +30,7 @@
 
 /obj/item/clothing/head/soft/solgov/fleet
 	name = "fleet cap"
-	desc = "It's a navy blue ballcap with the SCG Fleet crest."
+	desc = "It's a navy blue field cap with the SCG Fleet crest in a silver colour."
 	icon_state = "fleetsoft"
 
 /obj/item/clothing/head/solgov/utility
