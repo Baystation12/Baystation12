@@ -71,7 +71,7 @@
 	description = "A highly poisonous liquid. Smells strongly of bleach."
 	reagent_state = LIQUID
 	taste_description = "bleach"
-	color = "#707C13"
+	color = "#707c13"
 	strength = 15
 	metabolism = REM
 

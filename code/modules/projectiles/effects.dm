@@ -6,7 +6,7 @@
 	//Standard compiletime light vars aren't working here, so we've made some of our own.
 	light_outer_range = 2
 	light_max_bright = 1
-	light_color = "#FF00DC"
+	light_color = "#ff00dc"
 
 	mouse_opacity = 0
 
