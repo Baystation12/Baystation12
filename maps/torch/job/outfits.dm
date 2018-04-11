@@ -515,6 +515,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	pda_type = /obj/item/device/pda/pathfinder
 	l_ear = /obj/item/device/radio/headset/pathfinder
 
+/decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder/New()
+	..()
+	BACKPACK_OVERRIDE_HYDROPONICS
+
 /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
 	name = OUTFIT_JOB_NAME("Explorer")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
@@ -522,6 +526,10 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/crew/explorer
 	pda_type = /obj/item/device/pda/explorer
 	l_ear = /obj/item/device/radio/headset/exploration
+
+/decl/hierarchy/outfit/job/torch/crew/exploration/explorer/New()
+	..()
+	BACKPACK_OVERRIDE_HYDROPONICS
 
 //Passenger Outfits
 

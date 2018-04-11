@@ -29,3 +29,8 @@ backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/weapon/stora
 backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/weapon/storage/backpack/virology; \
 backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/weapon/storage/backpack/satchel_vir; \
 backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/weapon/storage/backpack/messenger/viro;
+
+#define BACKPACK_OVERRIDE_HYDROPONICS \
+backpack_overrides[/decl/backpack_outfit/backpack]		= /obj/item/weapon/storage/backpack/hydroponics; \
+backpack_overrides[/decl/backpack_outfit/satchel]		= /obj/item/weapon/storage/backpack/satchel_hyd; \
+backpack_overrides[/decl/backpack_outfit/messenger_bag]	= /obj/item/weapon/storage/backpack/messenger/hyd;
