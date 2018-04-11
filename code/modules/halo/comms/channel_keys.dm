@@ -152,3 +152,22 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 /obj/item/device/encryptionkey/public
 	channels = list(CIV_NAME = 1)
+
+/proc/halo_frequency_span_class(var/frequency)
+	//Innie channel
+	if (frequency == halo_frequencies.innie_freq)
+		return "syndradio"
+
+	// GCPD channel
+	if(frequency == halo_frequencies.police_freq)
+		return "secradio"
+
+	// ODST channel
+	if(frequency == halo_frequencies.odst_freq)
+		return "centradio"
+
+	//general ship comms
+	if(frequency == halo_frequencies.shipcom_freq)
+		return "comradio"
+
+	return "radio"
