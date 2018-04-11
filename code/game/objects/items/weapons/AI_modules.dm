@@ -141,13 +141,13 @@ AI MODULES
 	return ..()
 
 /obj/item/weapon/aiModule/oneHuman/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
-	var/law = "Only [targetName] is an crew member."
+	var/law = "Only [targetName] is a crew member."
 	if (!target.is_malf_or_traitor()) // Makes sure the AI isn't a traitor before changing their law 0. --NeoFite
 		to_chat(target, law)
 		target.set_zeroth_law(law)
 		GLOB.lawchanges.Add("The law specified [targetName]")
 	else
-		GLOB.lawchanges.Add("The law specified [targetName], but the AI's existing law 0 cannot be overriden.")
+		GLOB.lawchanges.Add("The law specified [targetName], but the AI's existing law zero cannot be overriden.")
 
 /******************** ProtectStation ********************/
 
