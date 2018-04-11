@@ -169,7 +169,7 @@
 "dm" = (/obj/machinery/door/airlock/hatch{name = "ONI Brig"},/turf/simulated/floor/plating,/area/syndicate_mothership)
 "dn" = (/obj/structure/table/glass/white,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/tiled/white,/area/syndicate_mothership)
 "do" = (/obj/machinery/light,/obj/structure/table/glass/white,/obj/item/weapon/wrench,/obj/item/device/assembly/signaler,/obj/item/device/radio/electropack,/turf/simulated/floor/tiled/white,/area/syndicate_mothership)
-"dp" = (/obj/structure/table/glass/white,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/turf/simulated/floor/tiled/white,/area/syndicate_mothership)
+"dp" = (/obj/structure/table/glass/white,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/turf/simulated/floor/tiled/white,/area/syndicate_mothership)
 "dq" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/syndicate_mothership)
 "dr" = (/obj/effect/overmap/ship/odst_prowler,/turf/space,/area/space)
 
