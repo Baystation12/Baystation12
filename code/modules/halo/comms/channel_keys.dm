@@ -168,6 +168,6 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 	//general ship comms
 	if(frequency == halo_frequencies.shipcom_freq)
-		return "srvradio"
+		return "comradio"
 
 	return "radio"
