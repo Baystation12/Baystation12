@@ -367,4 +367,5 @@
 				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W]!</span>")
 		else
 			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W], but it bounces off!</span>")
+			playsound(src, hitsound, 25, 1)
 		return
