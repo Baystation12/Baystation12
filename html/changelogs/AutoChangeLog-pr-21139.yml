@@ -1,5 +1,0 @@
-author: "chaoko99"
-delete-after: True
-changes: 
-  - bugfix: "Crawling works while lying down again."
-  - bugfix: "Crawling no longer functions in space."
