@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Can now hit APCs with heavy big things to unlock them. Doing so risks breaking them completely."
