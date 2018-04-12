@@ -110,7 +110,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	spawn(INFECT_DELAY)
 		h.Stun(999)
 		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
-		var/mob/living/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_human
+		var/mob/living/simple_animal/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_human
 		new_combat_form.maxHealth = 200 //Buff their health a bit.
 		new_combat_form.health = 200
 		new_combat_form.forceMove(h.loc)
@@ -235,7 +235,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		qdel(src)
 	return ..(0,deathmessage)
 
-/mob/living/simple_animal/hostile/flood/combat_human
+/mob/living/simple_animal/hostile/flood/combat_form/human
 	name = "Flood infested human"
 	icon = 'code/modules/halo/flood/flood_combat_human.dmi'
 	icon_state = "marine_infested"
