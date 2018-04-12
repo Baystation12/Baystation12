@@ -113,6 +113,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		new_combat_form.health = 200
 		new_combat_form.forceMove(h.loc)
 		new_combat_form.ckey = h.ckey
+		new_combat_form.name = h.real_name
 		for(var/obj/i in h.contents)
 			h.drop_from_inventory(i)
 		qdel(h)
