@@ -305,7 +305,13 @@
 		if(pointblank)
 			process_point_blank(projectile, user, target)
 
-		if(process_projectile(projectile, user, target, user.zone_sel.selecting, clickparams))
+		var/target_zone
+		if(user.zone_sel.selecting)
+			target_zone = user.zone_sel.selecting
+		else
+			target_zone = "chest"
+
+		if(process_projectile(projectile, user, target, target_zone, clickparams))
 			handle_post_fire(user, target, pointblank, reflex)
 			update_icon()
 
