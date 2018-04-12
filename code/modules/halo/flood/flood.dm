@@ -2,7 +2,7 @@ GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 #define INFECT_DELAY 13 SECONDS
-#define TO_PLAYER_INFECTED_SOUND 'code/module/halo/sounds/flood_infect_gravemind.ogg'
+#define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
