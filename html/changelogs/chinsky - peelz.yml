@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Can use pill bottle on self aiming at mouth to quick-pop a random pill from it. Yum."
