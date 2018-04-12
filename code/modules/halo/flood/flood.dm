@@ -136,6 +136,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/infestor/Move()
 	. = ..()
+	if(ckey || client)
+		return
 	attempt_nearby_infect()
 
 /mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
@@ -288,6 +290,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/Move()
 	. = ..()
+	if(ckey || client)
+		return
 	if(!our_gun)
 		for(var/obj/item/weapon/gun/G in view(1,src))
 			pickup_gun(G)
