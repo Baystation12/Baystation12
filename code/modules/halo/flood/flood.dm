@@ -1,7 +1,8 @@
 GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
-#define INFECT_DELAY 2 SECONDS
+#define INFECT_DELAY 13 SECONDS
+#define TO_PLAYER_INFECTED_SOUND 'code/module/halo/sounds/flood_infect_gravemind.ogg'
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
@@ -105,6 +106,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	visible_message("<span class = 'danger'>[name] leaps at [h.name], tearing at their armor and burrowing through their skin!</span>")
 	adjustBruteLoss(1)
 	src = null //Just in case we get killed.
+	sound_to(h,TO_PLAYER_INFECTED_SOUND)
 	spawn(INFECT_DELAY)
 		h.Stun(999)
 		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
