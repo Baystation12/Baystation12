@@ -506,6 +506,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 //Exploration Outfits
+/decl/hierarchy/outfit/job/torch/crew/exploration/New()
+	..()
+	backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/weapon/storage/backpack/explorer
+	backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/weapon/storage/backpack/satchel_explorer
+	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/weapon/storage/backpack/messenger/explorer
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/pathfinder
 	name = OUTFIT_JOB_NAME("Pathfinder")
