@@ -113,6 +113,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	spawn(INFECT_DELAY)
 		h.Stun(999)
 		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
+		new /obj/effect/decal/cleanable/blood/splatter(h.loc)
 		var/mob/living/simple_animal/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_form/human
 		new_combat_form.maxHealth = 200 //Buff their health a bit.
 		new_combat_form.health = 200
