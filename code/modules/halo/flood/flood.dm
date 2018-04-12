@@ -118,7 +118,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		qdel(h)
 
 /mob/living/simple_animal/hostile/flood/infestor/Move()
-	. - ..()
+	. = ..()
 	for(var/mob/living/carbon/human/h in view(2,src))
 		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
 		if(mob_healthdam > h.maxHealth/2) //Less than half health? Jump 'em.
