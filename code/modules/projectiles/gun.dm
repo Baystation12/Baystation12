@@ -306,7 +306,7 @@
 			process_point_blank(projectile, user, target)
 
 		var/target_zone
-		if(user.zone_sel.selecting)
+		if(user.zone_sel)
 			target_zone = user.zone_sel.selecting
 		else
 			target_zone = "chest"
