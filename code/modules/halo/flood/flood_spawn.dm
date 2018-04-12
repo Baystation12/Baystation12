@@ -60,7 +60,7 @@
 	var/spawn_type = pick(\
 		/mob/living/simple_animal/hostile/flood/infestor,\
 		/mob/living/simple_animal/hostile/flood/carrier,\
-		/mob/living/simple_animal/hostile/flood/combat_human)
+		/mob/living/simple_animal/hostile/flood/combat_form/human)
 	var/turf/spawn_turf = owner.loc//pick(owner.locs)
 	F = new spawn_type(spawn_turf)
 	F.wander = 1

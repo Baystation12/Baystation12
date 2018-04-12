@@ -320,6 +320,7 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	//user.setMoveCooldown(move_delay)//
 	next_fire_time = world.time + fire_delay
+	return 1
 
 //obtains the next projectile to fire
 /obj/item/weapon/gun/proc/consume_next_projectile()
