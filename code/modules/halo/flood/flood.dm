@@ -3,6 +3,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 #define INFECT_DELAY 13 SECONDS
 #define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
+#define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
@@ -118,6 +119,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		new_combat_form.forceMove(h.loc)
 		new_combat_form.ckey = h.ckey
 		new_combat_form.name = h.real_name
+		if(prob(25))
+			playsound(src,PLAYER_TRANSFORM_SFX,100)
 		if(new_combat_form.ckey)
 			new_combat_form.stop_automated_movement = 1
 		for(var/obj/i in h.contents)
@@ -245,6 +248,11 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(our_gun) //Only class us as an advanced tool user if we need it to use our gun.
 		return 1
 	return 0
+
+/mob/living/simple_animal/hostile/flood/combat_form/can_wield_item(var/obj/item)
+	if(istype(item,/obj/item/weapon/gun))
+		return TRUE
+	return FALSE
 
 /mob/living/simple_animal/hostile/flood/combat_form/UnarmedAttack(var/atom/attacked)
 	. = ..(attacked)
