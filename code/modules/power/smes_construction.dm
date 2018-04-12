@@ -132,10 +132,10 @@
 	if(istype(usr, /mob/living/silicon/robot) && Adjacent(usr) && panel_open)
 		wires.Interact(usr)
 
-// Proc: New()
+// Proc: Initialize()
 // Parameters: None
 // Description: Adds standard components for this SMES, and forces recalculation of properties.
-/obj/machinery/power/smes/buildable/New()
+/obj/machinery/power/smes/buildable/Initialize()
 	component_parts = list()
 	component_parts += new /obj/item/stack/cable_coil(src,30)
 	component_parts += new /obj/item/weapon/circuitboard/smes(src)
@@ -146,7 +146,7 @@
 		for(var/i = 1, i <= cur_coils, i++)
 			component_parts += new /obj/item/weapon/smes_coil(src)
 		recalc_coils()
-	..()
+	. = ..()
 
 // Proc: attack_hand()
 // Parameters: None
