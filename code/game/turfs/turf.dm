@@ -58,7 +58,10 @@
 		for (var/obj/item/grab/G in user.grabbed_by)
 			if(G.stop_move())
 				return
-		if(do_after(user, 8 + (user.weakened * 2) , incapacitation_flags = INCAPACITATION_KNOCKDOWN))
+		var/area/A = loc
+		if((!(A.has_gravity)) || (istype(src,/turf/space)))
+			return
+		if(do_after(user, 8 + (user.weakened * 2) , incapacitation_flags = ~INCAPACITATION_FORCELYING))
 			step_towards(user, src)
 
 	if(user.restrained())
