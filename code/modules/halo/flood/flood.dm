@@ -118,13 +118,20 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 			h.drop_from_inventory(i)
 		qdel(h)
 
-/mob/living/simple_animal/hostile/flood/infestor/Move()
-	. = ..()
+/mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
 	for(var/mob/living/carbon/human/h in view(2,src))
 		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
 		if(mob_healthdam > h.maxHealth/4) //Less than quarter health? Jump 'em.
 			infect_mob(h)
 			return //No more than one at a time.
+
+/mob/living/simple_animal/hostile/flood/infestor/Move()
+	. = ..()
+	attempt_nearby_infect()
+
+/mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
+	. = ..()
+	attempt_nearby_infect()
 
 /mob/living/simple_animal/hostile/flood/infestor/adjustBruteLoss(damage)
 	if(health > 0)
