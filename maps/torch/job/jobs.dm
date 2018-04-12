@@ -1068,6 +1068,7 @@
 	supervisors = "the Executive Officer"
 	selection_color = "#515151"
 	economic_modifier = 6
+	announced = FALSE
 	alt_titles = list(
 		"Journalist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist,
 		"Historian",
@@ -1089,7 +1090,7 @@
 /datum/job/offduty
 	title = "Off-Duty"
 	department_flag = CIV
-
+	announced = FALSE
 	total_positions = 6
 	spawn_positions = 6
 	supervisors = "the Executive Officer and Commanding Officer"
