@@ -171,7 +171,7 @@
 	if(!.)
 		walk(src, 0)
 		return 0
-	if(client)
+	if(client || ckey)
 		return 0
 	if(isturf(src.loc))
 		if(!stat)
