@@ -98,8 +98,11 @@
 	setClickCooldown(attack_delay)
 	if(!Adjacent(target_mob))
 		return
-	if(isliving(target_mob))
-		var/mob/living/L = target_mob
+	UnarmedAttack(target_mob)
+
+/mob/living/simple_animal/hostile/UnarmedAttack(var/atom/attacked,var/prox_flag)
+	if(istype(attacked,/mob/living))
+		var/mob/living/L = attacked
 		var/damage_to_apply = rand(melee_damage_lower,melee_damage_upper)
 		if(istype(L,/mob/living/carbon/human))
 			var/mob/living/carbon/human/h = L
@@ -110,10 +113,34 @@
 		src.do_attack_animation(L)
 		spawn(1) L.updatehealth()
 		return L
-	if(istype(target_mob,/obj/mecha))
-		var/obj/mecha/M = target_mob
+	if(istype(attacked,/obj/mecha))
+		var/obj/mecha/M = attacked
 		M.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 		return M
+
+/mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
+	if(!ranged)
+		return
+	var/target = attacked
+	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>", 1)
+
+	if(rapid)
+		spawn(1)
+			Shoot(target, src.loc, src)
+			if(casingtype)
+				new casingtype(get_turf(src))
+		spawn(4)
+			Shoot(target, src.loc, src)
+			if(casingtype)
+				new casingtype(get_turf(src))
+		spawn(6)
+			Shoot(target, src.loc, src)
+			if(casingtype)
+				new casingtype(get_turf(src))
+	else
+		Shoot(target, src.loc, src)
+		if(casingtype)
+			new casingtype
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -191,31 +218,9 @@
 		MoveToTarget()
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
-	var/target = target_mob
-	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>", 1)
-
-	if(rapid)
-		spawn(1)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
-		spawn(4)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
-		spawn(6)
-			Shoot(target, src.loc, src)
-			if(casingtype)
-				new casingtype(get_turf(src))
-	else
-		Shoot(target, src.loc, src)
-		if(casingtype)
-			new casingtype
-
+	RangedAttack(target_mob)
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
-	return
-
 
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
 	if(target == start)

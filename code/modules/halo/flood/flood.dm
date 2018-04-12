@@ -21,6 +21,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	wander = 0
 	melee_damage_lower = 5
 	melee_damage_upper = 10
+	min_gas = list()
+	max_gas = list()
 	var/datum/flood_spawner/flood_spawner
 
 /mob/living/simple_animal/hostile/flood/death()
@@ -110,7 +112,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	spawn(INFECT_DELAY)
 		h.Stun(999)
 		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
-		var/mob/living/simple_animal/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_human
+		var/mob/living/simple_animal/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_form/human
 		new_combat_form.maxHealth = 200 //Buff their health a bit.
 		new_combat_form.health = 200
 		new_combat_form.forceMove(h.loc)
@@ -125,7 +127,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
 	for(var/mob/living/carbon/human/h in view(2,src))
 		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
-		if(mob_healthdam > (3*h.maxHealth)/4) //Less than quarter health? Jump 'em.
+		if(mob_healthdam > h.maxHealth/4) //Less than quarter health? Jump 'em.
 			infect_mob(h)
 			return //No more than one at a time.
 
@@ -234,6 +236,54 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	spawn(3)
 		qdel(src)
 	return ..(0,deathmessage)
+
+/mob/living/simple_animal/hostile/flood/combat_form
+
+	var/obj/item/weapon/gun/our_gun
+
+/mob/living/simple_animal/hostile/flood/combat_form/IsAdvancedToolUser()
+	if(our_gun) //Only class us as an advanced tool user if we need it to use our gun.
+		return 1
+	return 0
+
+/mob/living/simple_animal/hostile/flood/combat_form/UnarmedAttack(var/atom/attacked)
+	. = ..(attacked)
+	pickup_gun(attacked)
+
+/mob/living/simple_animal/hostile/flood/combat_form/RangedAttack(var/atom/attacked)
+	if(!our_gun)
+		return
+	var/gun_fire = our_gun.Fire(attacked,src)
+	if(!ckey && !gun_fire)
+		drop_gun()
+
+/mob/living/simple_animal/hostile/flood/combat_form/proc/pickup_gun(var/obj/item/weapon/gun/G)
+	if(!istype(G))
+		return
+	if(our_gun)
+		drop_gun()
+	visible_message("<span class = 'notice'>[name] picks up [G.name]</span>")
+	our_gun = G
+	contents += our_gun
+	ranged = 1
+
+/mob/living/simple_animal/hostile/flood/combat_form/proc/drop_gun()
+	if(our_gun)
+		visible_message("<span class = 'notice'>[name] drops [our_gun.name]</span>")
+		our_gun.forceMove(loc)
+		contents -= our_gun
+		ranged = 0
+
+/mob/living/simple_animal/hostile/flood/combat_form/death()
+	drop_gun()
+	. = ..()
+
+/mob/living/simple_animal/hostile/flood/combat_form/Move()
+	. = ..()
+	if(!our_gun)
+		for(var/obj/item/weapon/gun/G in view(1,src))
+			pickup_gun(G)
+			return
 
 /mob/living/simple_animal/hostile/flood/combat_form/human
 	name = "Flood infested human"
