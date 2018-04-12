@@ -5,6 +5,7 @@
 	name = "Cargo Ship"
 	desc = "A ship specialised to carry cargo."
 
+	ship_datums = list(/datum/npc_ship/ccv_sbs)
 	var/atom/cargo_call_target
 	var/cargo_stay_time = BASE_CARGO_STAY_TIME
 	var/warn_depart_time = BASE_CARGO_DEPART_TIME

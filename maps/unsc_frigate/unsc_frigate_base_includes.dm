@@ -1,5 +1,5 @@
 #include "unsc_frigate_areas.dm"
-#include "../civ_hauler/hauler_area.dm"
+#include "../overmap_ships/om_ship_areas.dm"
 #include "../area_holders/overmap_ship_area_holder.dmm"
 
 #include "unsc_frigate_spawns.dm"
