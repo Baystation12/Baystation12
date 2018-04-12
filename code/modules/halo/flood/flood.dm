@@ -122,7 +122,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	. = ..()
 	for(var/mob/living/carbon/human/h in view(2,src))
 		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
-		if(mob_healthdam > h.maxHealth/2) //Less than half health? Jump 'em.
+		if(mob_healthdam > h.maxHealth/4) //Less than quarter health? Jump 'em.
 			infect_mob(h)
 			return //No more than one at a time.
 
