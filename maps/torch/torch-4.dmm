@@ -13251,6 +13251,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/blanks)
 "aOU" = (
@@ -13676,6 +13677,12 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/blanks)
 "aPX" = (
@@ -13688,6 +13695,12 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/blanks)
@@ -16454,6 +16467,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/access)
+"bta" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 2;
+	layer = 2.4;
+	level = 2
+	},
+/turf/simulated/floor/tiled/white,
+/area/rnd/research)
 "btb" = (
 /obj/machinery/door/blast/regular{
 	dir = 1;
@@ -24216,6 +24237,13 @@
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
+"nBK" = (
+/obj/structure/closet/crate/secure/biohazard/blanks,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rnd/blanks)
 "nCb" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/o2{
@@ -25138,6 +25166,7 @@
 	pixel_x = 24;
 	pixel_y = 6
 	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/blanks)
 "oZb" = (
@@ -26326,20 +26355,20 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
 "rrb" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white,
-/area/rnd/research)
-"rsb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/rnd/research)
+"rsb" = (
 /obj/effect/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
@@ -26348,6 +26377,10 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
@@ -26554,7 +26587,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
@@ -26562,6 +26594,9 @@
 	},
 /obj/effect/floor_decal/corner/purple{
 	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
@@ -47787,7 +47822,7 @@ aCZ
 aCZ
 aOU
 aOS
-aOR
+nBK
 aOU
 aRI
 aCZ
@@ -48594,7 +48629,7 @@ pAb
 pWb
 qrb
 qFb
-jfb
+bta
 rsb
 jfb
 rQb

@@ -18,7 +18,7 @@
 	var/datum/radio_frequency/radio_connection
 
 	var/hibernate = 0 //Do we even process?
-	var/scrubbing = 1 //0 = siphoning, 1 = scrubbing
+	var/scrubbing = SCRUBBER_EXCHANGE
 	var/list/scrubbing_gas
 
 	var/panic = 0 //is this scrubber panicked?
@@ -149,16 +149,22 @@
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	var/power_draw = -1
-	if(scrubbing)
+	if(scrubbing == SCRUBBER_SCRUB)
 		//limit flow rate from turfs
 		var/transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 
 		power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, power_rating)
-	else //Just siphon all air
-		//limit flow rate from turfs
-		var/transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+	else
+		var/transfer_moles = 0
+		if(scrubbing == SCRUBBER_SIPHON) //Just siphon all air
+			//limit flow rate from turfs
+			transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+			power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
+		else if(scrubbing == SCRUBBER_EXCHANGE) //Figure out a good amount to siphon
+			transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+			power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
+			power_draw += scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles / 2, power_rating)
 
-		power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
 
 	if(scrubbing && power_draw <= 0)	//99% of all scrubbers
 		//Fucking hibernate because you ain't doing shit.
@@ -192,24 +198,20 @@
 		panic = text2num(signal.data["panic_siphon"])
 		if(panic)
 			use_power = 1
-			scrubbing = 0
+			scrubbing = SCRUBBER_SIPHON
 		else
-			scrubbing = 1
+			scrubbing = SCRUBBER_EXCHANGE
 	if(signal.data["toggle_panic_siphon"] != null)
 		panic = !panic
 		if(panic)
 			use_power = 1
-			scrubbing = 0
+			scrubbing = SCRUBBER_SIPHON
 		else
-			scrubbing = 1
+			scrubbing = SCRUBBER_EXCHANGE
 
 	if(signal.data["scrubbing"] != null)
-		scrubbing = text2num(signal.data["scrubbing"])
-		if(scrubbing)
-			panic = 0
-	if(signal.data["toggle_scrubbing"])
-		scrubbing = !scrubbing
-		if(scrubbing)
+		scrubbing = signal.data["scrubbing"]
+		if(scrubbing != SCRUBBER_SIPHON)
 			panic = 0
 
 	var/list/toggle = list()
