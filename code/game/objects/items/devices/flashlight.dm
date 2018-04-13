@@ -413,44 +413,44 @@
 	icon_state = "lavalamp"
 	on = 0
 	action_button_name = "Toggle lamp"
-	brightness_on = 3 //range of light when on
+	flashlight_outer_range = 3 //range of light when on
 
 /obj/item/device/flashlight/lamp/lava/red
 	desc = "A kitchy red decorative light."
 	icon_state = "redlamp"
-	light_color = "#ff0000"
+	light_color = COLOR_RED
 
 /obj/item/device/flashlight/lamp/lava/blue
 	desc = "A kitchy blue decorative light"
 	icon_state = "bluelamp"
-	light_color = "#0000ff"
+	light_color = COLOR_BLUE
 
 /obj/item/device/flashlight/lamp/lava/cyan
 	desc = "A kitchy cyan decorative light"
 	icon_state = "cyanlamp"
-	light_color = "#00ffff"
+	light_color = COLOR_CYAN
 
 /obj/item/device/flashlight/lamp/lava/green
 	desc = "A kitchy green decorative light"
 	icon_state = "greenlamp"
-	light_color = "#00ff00"
+	light_color = COLOR_GREEN
 
 /obj/item/device/flashlight/lamp/lava/orange
 	desc = "A kitchy orange decorative light"
 	icon_state = "orangelamp"
-	light_color = "#ff9b00"
+	light_color = COLOR_ORANGE
 
 /obj/item/device/flashlight/lamp/lava/purple
 	desc = "A kitchy purple decorative light"
 	icon_state = "purplelamp"
-	light_color = "#9b00ff"
+	light_color = COLOR_PURPLE
 
 /obj/item/device/flashlight/lamp/lava/pink
 	desc = "A kitchy pink decorative light"
 	icon_state = "pinklamp"
-	light_color = "#ff00ff"
+	light_color = COLOR_PINK
 
 /obj/item/device/flashlight/lamp/lava/yellow
 	desc = "A kitchy yellow decorative light"
 	icon_state = "yellowlamp"
-	light_color = "#ffff00"
+	light_color = COLOR_YELLOW
