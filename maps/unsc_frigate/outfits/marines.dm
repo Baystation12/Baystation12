@@ -10,6 +10,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o2)
 
 	flags = 0
@@ -25,6 +26,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e7)
 
 	flags = 0
@@ -40,7 +42,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	gloves = /obj/item/clothing/gloves/thick/combat
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e5)
 
 	flags = 0
@@ -55,7 +57,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	gloves = /obj/item/clothing/gloves/thick/combat
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted)
 
 	flags = 0
