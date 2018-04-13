@@ -1,0 +1,8 @@
+author: "Cajoes"
+delete-after: True
+changes: 
+  - rscadd: "Added a lube variant called oil, comes in jugs of 100 units, dispensable from robotics vendor."
+  - rscadd: "Added beer and ale cans to the alcohol vendor."
+  - rscadd: "Added lava lamps and office toys to the misc. supply menu."
+  - rscadd: "Added fish meat and a big bag of salt to the kitchen."
+  - tweak: "Changed contents of some drinks."
