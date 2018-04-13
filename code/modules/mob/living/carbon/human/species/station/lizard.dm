@@ -20,6 +20,7 @@
 	strength = STR_HIGH
 	slowdown = 0.5
 	brute_mod = 0.8
+	flash_mod = 1.2
 	blood_volume = 800
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_UNATHI)
