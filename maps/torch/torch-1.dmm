@@ -20,9 +20,6 @@
 /obj/effect/shuttle_landmark/merc/deck1,
 /turf/space,
 /area/space)
-"af" = (
-/turf/simulated/wall/r_wall,
-/area/quartermaster/expedition/storage)
 "ag" = (
 /turf/simulated/wall/r_wall,
 /area/quartermaster/hangar)
@@ -748,15 +745,12 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "ca" = (
-/obj/machinery/mining/brace,
+/obj/machinery/mining/brace{
+	dir = 4
+	},
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/expedition/storage)
-"cb" = (
-/obj/machinery/mining/brace,
-/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "cc" = (
@@ -783,6 +777,7 @@
 	},
 /obj/item/weapon/cell/high,
 /obj/item/weapon/cell/high,
+/obj/random/powercell,
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "ce" = (
@@ -1036,12 +1031,23 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "cJ" = (
-/obj/machinery/mining/brace,
+/obj/machinery/mining/brace{
+	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "cK" = (
-/obj/machinery/mining/brace,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/mining/drill,
+/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "cL" = (
@@ -1363,41 +1369,41 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "dq" = (
-/obj/machinery/power/apc{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
 /obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
 	},
-/obj/structure/anomaly_container,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "dr" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
-	},
-/obj/structure/anomaly_container,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "ds" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/stasis_cage,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "dt" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
@@ -1675,51 +1681,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
-"dV" = (
-/obj/machinery/door/airlock/mining{
-	name = "Expedition Storage";
-	req_one_access = list(48,65)
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/expedition/storage)
 "dW" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
+/obj/structure/anomaly_container,
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "dX" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9;
-	pixel_y = 0
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
+/obj/structure/stasis_cage,
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "dY" = (
@@ -2032,7 +2002,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "eD" = (
-/obj/machinery/floodlight,
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -22
@@ -2044,12 +2013,9 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/structure/anomaly_container,
 /turf/simulated/floor/tiled,
-/area/quartermaster/quarantine)
-"eE" = (
-/obj/machinery/suspension_gen,
-/turf/simulated/floor/tiled,
-/area/quartermaster/quarantine)
+/area/quartermaster/expedition/storage)
 "eF" = (
 /obj/structure/table/rack,
 /obj/structure/window/reinforced{
@@ -2066,18 +2032,18 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
-/area/quartermaster/quarantine)
+/area/quartermaster/expedition/storage)
 "eG" = (
 /obj/structure/ore_box,
 /turf/simulated/floor/tiled,
-/area/quartermaster/quarantine)
+/area/quartermaster/expedition/storage)
 "eH" = (
 /obj/structure/ore_box,
 /obj/machinery/light/small{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
-/area/quartermaster/quarantine)
+/area/quartermaster/expedition/storage)
 "eI" = (
 /turf/simulated/wall,
 /area/quartermaster/quarantine)
@@ -19226,14 +19192,46 @@
 "MH" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/expedition/storage)
+"Nq" = (
+/obj/machinery/suspension_gen,
+/turf/simulated/floor/tiled,
+/area/quartermaster/expedition/storage)
 "Nv" = (
 /obj/structure/sign/solgov,
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/fourthdeck/fore)
+"NF" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/door/airlock/mining{
+	name = "Expedition Storage";
+	req_one_access = list(48,65)
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/expedition/storage)
 "NK" = (
 /obj/structure/sign/warning/docking_area,
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/mess)
+"OZ" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/plating,
+/area/maintenance/fourthdeck/starboard)
 "PO" = (
 /obj/item/seeds/potatoseed,
 /turf/simulated/floor/plating,
@@ -19241,6 +19239,11 @@
 "Qd" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/hangar)
+"Qp" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/floodlight,
+/turf/simulated/floor/tiled,
+/area/quartermaster/expedition/storage)
 "Qq" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -19279,6 +19282,20 @@
 "RQ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/storage/auxillary/starboard)
+"Sm" = (
+/obj/machinery/mining/brace{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/expedition/storage)
+"Sz" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	layer = 2.4;
+	level = 2
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/expedition/storage)
 "Ty" = (
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/infirmary)
@@ -37981,8 +37998,8 @@ aY
 bw
 bZ
 dp
-dp
 dU
+OZ
 eC
 fB
 gu
@@ -38181,10 +38198,10 @@ MH
 MH
 MH
 MH
-af
-af
 ce
-dV
+ce
+NF
+ce
 ce
 ce
 fB
@@ -38585,11 +38602,11 @@ aa
 MH
 MH
 MH
-cb
+cc
 cK
 dr
 dX
-eE
+cL
 eI
 gx
 hs
@@ -38787,8 +38804,8 @@ aa
 MH
 MH
 MH
-cc
-cL
+Sm
+Sm
 ds
 dY
 eF
@@ -38989,10 +39006,10 @@ MH
 MH
 MH
 MH
-cc
-cL
+Nq
+Qp
 dt
-dY
+Sz
 eG
 eI
 gy
@@ -39397,7 +39414,7 @@ ce
 cN
 cN
 ce
-eI
+ce
 eI
 eI
 hw
