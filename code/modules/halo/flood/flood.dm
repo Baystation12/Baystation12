@@ -105,11 +105,20 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	spawn(30)
 		spawning = 0
 
+/mob/living/simple_animal/hostile/flood/proc/is_being_infested(var/mob/m)
+	for(var/obj/effect/dead_infestor/f in m.contents)
+		return 1
+	return 0
+
 /mob/living/simple_animal/hostile/flood/proc/infect_mob(var/mob/living/carbon/human/h)
+	if(is_being_infested(h))
+		return 0
 	visible_message("<span class = 'danger'>[name] leaps at [h.name], tearing at their armor and burrowing through their skin!</span>")
 	adjustBruteLoss(1)
 	src = null //Just in case we get killed.
 	sound_to(h,TO_PLAYER_INFECTED_SOUND)
+	var/atom/moveable/infest_placeholder = new /obj/effect/dead_infestor
+	infest_placeholder.forceMove(h.contents)
 	spawn(INFECT_DELAY)
 		h.Stun(999)
 		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
@@ -121,19 +130,21 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		new_combat_form.ckey = h.ckey
 		new_combat_form.name = h.real_name
 		if(prob(25))
-			playsound(src,PLAYER_TRANSFORM_SFX,100)
+			playsound(src.loc,PLAYER_TRANSFORM_SFX,100)
 		if(new_combat_form.ckey)
 			new_combat_form.stop_automated_movement = 1
 		for(var/obj/i in h.contents)
 			h.drop_from_inventory(i)
+		qdel(infest_placeholder)
 		qdel(h)
+	return 1
 
 /mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
 	for(var/mob/living/carbon/human/h in view(2,src))
 		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
 		if(mob_healthdam > h.maxHealth/4) //Less than quarter health? Jump 'em.
-			infect_mob(h)
-			return //No more than one at a time.
+			if(infect_mob(h))
+				return //No more than one at a time.
 
 /mob/living/simple_animal/hostile/flood/infestor/Move()
 	. = ..()
