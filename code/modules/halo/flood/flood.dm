@@ -117,7 +117,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	adjustBruteLoss(1)
 	src = null //Just in case we get killed.
 	sound_to(h,TO_PLAYER_INFECTED_SOUND)
-	var/atom/moveable/infest_placeholder = new /obj/effect/dead_infestor
+	var/obj/infest_placeholder = new /obj/effect/dead_infestor
 	infest_placeholder.forceMove(h.contents)
 	spawn(INFECT_DELAY)
 		h.Stun(999)
