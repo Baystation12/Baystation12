@@ -90,18 +90,55 @@ MOD_TEMPBAN_MAX 1440
 ## Maximum mod job tempban duration (in minutes)
 MOD_JOB_TEMPBAN_MAX 1440
 
+## Panic Bunker
+# PANIC_BUNKER
+
+## Epic Anti-Multiacc System
+EAMS
 
 ## probablities for game modes chosen in "secret" and "random" modes
 ##
 ## default probablity is 1, increase to make that mode more likely to be picked
 ## set to 0 to disable that mode
-PROBABILITY EXTENDED 1
-PROBABILITY MALFUNCTION 1
-PROBABILITY MERCENARY 1
-PROBABILITY WIZARD 1
-PROBABILITY CHANGELING 1
-PROBABILITY CULT 1
-PROBABILITY EXTEND-A-TRAITORMONGOUS 6
+
+PROBABILITY extended 0
+PROBABILITY traitor 3
+PROBABILITY changeling 3
+PROBABILITY wizard 1
+PROBABILITY malfunction 1
+PROBABILITY ninja 1
+PROBABILITY revolution 2
+PROBABILITY cult 2
+PROBABILITY mercenary 1
+PROBABILITY meteor 1
+
+PROBABILITY calamity 2
+## Deity
+PROBABILITY god 1
+## Cult & wizard
+PROBABILITY conflux 2
+## Ninja & traitor
+PROBABILITY intrigue 2
+## Changelings & wizards
+PROBABILITY lizard 2
+	
+## Changeling, malf & renegade
+PROBABILITY paranoia 2
+## Changeling & traitor
+PROBABILITY traitorling 3
+## Revolution & wizard
+PROBABILITY unity 1
+## Cult & revolution
+PROBABILITY uprising 2
+## Ninja & wizard
+PROBABILITY visitors 1
+## Mercenary & revolution
+PROBABILITY siege 2
+
+##PROBABILITY heist 			0
+##PROBABILITY bughunt 			0	## Deathsquad & xenophage
+##PROBABILITY crossfire 		0	## Mercenary & heist
+##PROBABILITY infestation 		0	## Borer, changeling & xenophage
 
 ## Hash out to disable random events during the round.
 ALLOW_RANDOM_EVENTS

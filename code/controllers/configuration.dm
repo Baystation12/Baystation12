@@ -698,7 +698,7 @@ var/list/gamemode_cache = list()
 					config.panic_bunker = 1
 
 				if("eams")
-					config.eams = 0
+					config.eams = 1
 
 				if("delist_when_no_admins")
 					config.delist_when_no_admins = TRUE
