@@ -112,7 +112,6 @@
 	spawn(20) if(!QDELETED(src)) set_opacity(0)
 
 	..()
-	return
 /obj/machinery/shieldgen
 	name = "Emergency shield projector"
 	desc = "Used to seal minor hull breaches."
@@ -162,12 +161,19 @@
 	update_use_power(0)
 
 /obj/machinery/shieldgen/proc/create_shields()
-	for(var/turf/target_tile in range(2, src))
-		if (istype(target_tile,/turf/space) && !(locate(/obj/machinery/shield) in target_tile))
+	for(var/turf/target_tile in range(8, src))
+		if ((istype(target_tile,/turf/space)|| istype(target_tile, /turf/simulated/open)) && !(locate(/obj/machinery/shield) in target_tile))
 			if (malfunction && prob(33) || !malfunction)
 				var/obj/machinery/shield/S = new/obj/machinery/shield(target_tile)
 				deployed_shields += S
 				use_power(S.shield_generate_power)
+
+	for(var/turf/above in range(8, GetAbove(src)))//Probably a better way to do this.
+		if ((istype(above,/turf/space)|| istype(above, /turf/simulated/open)) && !(locate(/obj/machinery/shield) in above))
+			if (malfunction && prob(33) || !malfunction)
+				var/obj/machinery/shield/A = new/obj/machinery/shield(above)
+				deployed_shields += A
+				use_power(A.shield_generate_power)
 
 /obj/machinery/shieldgen/proc/collapse_shields()
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
