@@ -235,7 +235,7 @@ datum/controller/vote
 									antag_add_finished = 1
 									if(auto_add_antag)
 										auto_add_antag = 0
-										// the buffer will already have an hour added to it, so we'll give it one more
+										// the buffer will already have half an hour added to it, so we'll give it one more
 										transfer_controller.timerbuffer = transfer_controller.timerbuffer + config.vote_autotransfer_interval
 								else
 									to_world("<b>No antags were added.</b>")
@@ -319,7 +319,7 @@ datum/controller/vote
 				if("crew_transfer")
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
-						choices.Add("Initiate Crew Transfer", "Continue The Round")
+						choices.Add("Initiate Crew Transfer", "Extend the Round ([config.vote_autotransfer_interval / 600] minutes)")
 						if (config.allow_extra_antags && !antag_add_finished)
 							choices.Add("Add Antagonist")
 					else
@@ -331,7 +331,7 @@ datum/controller/vote
 							return 0
 							to_chat(initiator_key, "The crew transfer button has been disabled!")
 						question = "End the shift?"
-						choices.Add("Initiate Crew Transfer", "Continue The Round")
+						choices.Add("Initiate Crew Transfer", "Extend the Round ([config.vote_autotransfer_interval / 600] minutes)")
 						if (config.allow_extra_antags && is_addantag_allowed(1))
 							choices.Add("Add Antagonist")
 				if("add_antagonist")
