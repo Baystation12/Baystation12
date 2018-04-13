@@ -1,4 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - rscadd: "Can now use grab on EC plaques to display Directives to people. Forcefully."
