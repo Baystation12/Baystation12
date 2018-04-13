@@ -1,0 +1,6 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - imageadd: "Adds new floor tile sprites."
+  - imageadd: "Adds new floor decals."
+  - rscadd: "Adds several new floor tile types to litter the station with."
