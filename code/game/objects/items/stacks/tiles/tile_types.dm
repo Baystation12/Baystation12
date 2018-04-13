@@ -60,6 +60,48 @@
 	throwforce = 15
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
+/obj/item/stack/tile/mono
+	name = "grey mono tile"
+	singular_name = "grey mono tile"
+	icon_state = "tile"
+	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+/obj/item/stack/tile/grid
+	name = "grey grid tile"
+	singular_name = "grey grid tile"
+	icon_state = "tile_grid"
+	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+/obj/item/stack/tile/ridge
+	name = "grey ridge tile"
+	singular_name = "grey ridge tile"
+	icon_state = "tile_ridged"
+	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+/obj/item/stack/tile/techgrey
+	name = "grey techfloor tile"
+	singular_name = "grey techfloor tile"
+	icon_state = "techtile_grey"
+	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+/obj/item/stack/tile/techgrid
+	name = "grid techfloor tile"
+	singular_name = "grid techfloor tile"
+	icon_state = "techtile_grid"
+	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+/obj/item/stack/tile/techmaint
+	name = "dark techfloor tile"
+	singular_name = "dark techfloor tile"
+	icon_state = "techtile_maint"
+	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
 /obj/item/stack/tile/floor_white
 	name = "white floor tile"
 	singular_name = "white floor tile"
