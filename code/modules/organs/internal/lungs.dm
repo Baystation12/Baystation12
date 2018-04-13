@@ -159,7 +159,7 @@
 
 	owner.oxygen_alert = failed_inhale * 2
 
-	var/inhaled_gas_used = inhaling / 2
+	var/inhaled_gas_used = inhaling / 4
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 
 	if(exhale_type)
