@@ -41,7 +41,7 @@
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/spirit
 	integrity = 300
-	resistances = list("brute"=65,"burn"=65,"emp"=40)
+	resistances = list("brute"=30,"burn"=30,"emp"=40)
 
 /datum/component_profile/spirit
 	pos_to_check = "driver"
