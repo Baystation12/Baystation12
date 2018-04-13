@@ -2,7 +2,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job/medical
 	l_ear = /obj/item/device/radio/headset/headset_med
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/device/pda/medical
+	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store
 
 /decl/hierarchy/outfit/job/medical/New()
@@ -18,7 +18,7 @@
 	l_hand = /obj/item/weapon/storage/firstaid/adv
 	r_pocket = /obj/item/device/flashlight/pen
 	id_type = /obj/item/weapon/card/id/medical/head
-	pda_type = /obj/item/device/pda/heads/cmo
+	pda_type = /obj/item/modular_computer/pda/heads/cmo
 
 /decl/hierarchy/outfit/job/medical/doctor
 	name = OUTFIT_JOB_NAME("Medical Doctor")
@@ -67,7 +67,7 @@
 	uniform = /obj/item/clothing/under/rank/chemist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/chemist
 	id_type = /obj/item/weapon/card/id/medical/chemist
-	pda_type = /obj/item/device/pda/chemist
+	pda_type = /obj/item/modular_computer/pda/medical
 
 /decl/hierarchy/outfit/job/medical/chemist/New()
 	..()
@@ -79,7 +79,7 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/genetics
 	r_pocket = /obj/item/device/flashlight/pen
 	id_type = /obj/item/weapon/card/id/medical/geneticist
-	pda_type = /obj/item/device/pda/geneticist
+	pda_type = /obj/item/modular_computer/pda/medical
 
 /decl/hierarchy/outfit/job/medical/geneticist/New()
 	..()

@@ -57,7 +57,7 @@
 	var/timer
 	var/damage = 1
 
-	if(ishuman(src)) //Being on antidepressants will stop you from making runes. A metagaming-free solution to cultists, just in case the pesky therapist took the Chaplain's slot.
+	if(iscarbon(src)) //Being on antidepressants will stop you from making runes. A metagaming-free solution to cultists, just in case the pesky therapist took the Chaplain's slot.
 		var/mob/living/carbon/C = src
 		if(C.chem_effects[CE_MIND] > 0 && prob(90))
 			C.visible_message(\

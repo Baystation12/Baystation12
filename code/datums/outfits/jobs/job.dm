@@ -9,7 +9,7 @@
 	id_slot = slot_wear_id
 	id_type = /obj/item/weapon/card/id/civilian
 	pda_slot = slot_belt
-	pda_type = /obj/item/device/pda
+	pda_type = /obj/item/modular_computer/pda
 
 	flags = OUTFIT_HAS_BACKPACK
 
@@ -18,4 +18,6 @@
 	if(H.mind)
 		if(H.mind.initial_account)
 			C.associated_account_number = H.mind.initial_account.account_number
+		if(H.mind.initial_email_login)
+			C.associated_email_login = H.mind.initial_email_login.Copy()
 	return C

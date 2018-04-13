@@ -99,19 +99,22 @@
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/Stun(amount)
-	if(HULK in mutations)	return
+	amount *= species.stun_mod
+	if(amount <= 0 || (HULK in mutations)) return
 	..()
 
 /mob/living/carbon/human/Weaken(amount)
-	if(HULK in mutations)	return
-	..()
+	amount *= species.weaken_mod
+	if(amount <= 0 || (HULK in mutations)) return
+	..(amount)
 
 /mob/living/carbon/human/Paralyse(amount)
-	if(HULK in mutations)	return
+	amount *= species.paralysis_mod
+	if(amount <= 0 || (HULK in mutations)) return
 	// Notify our AI if they can now control the suit.
 	if(wearing_rig && !stat && paralysis < amount) //We are passing out right this second.
 		wearing_rig.notify_ai("<span class='danger'>Warning: user consciousness failure. Mobility control passed to integrated intelligence system.</span>")
-	..()
+	..(amount)
 
 /mob/living/carbon/human/getCloneLoss()
 	var/amount = 0

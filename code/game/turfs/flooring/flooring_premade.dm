@@ -10,8 +10,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "bcircuit"
 	initial_flooring = /decl/flooring/reinforced/circuit
-	light_range = 2
-	light_power = 3
+	light_outer_range = 2
+	light_max_bright = 3
 	light_color = COLOR_BLUE
 
 /turf/simulated/floor/bluegrid/airless
@@ -22,8 +22,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "gcircuit"
 	initial_flooring = /decl/flooring/reinforced/circuit/green
-	light_range = 2
-	light_power = 3
+	light_outer_range = 2
+	light_max_bright = 3
 	light_color = COLOR_GREEN
 
 /turf/simulated/floor/blackgrid
@@ -31,8 +31,8 @@
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_state = "rcircuit"
 	initial_flooring = /decl/flooring/reinforced/circuit/red
-	light_range = 2
-	light_power = 2
+	light_outer_range = 2
+	light_max_bright = 2
 	light_color = COLOR_RED
 
 /turf/simulated/floor/greengrid/airless
@@ -54,12 +54,6 @@
 	name = "biomass"
 	icon = 'icons/turf/floors.dmi'
 	initial_flooring = /decl/flooring/diona
-
-/turf/simulated/floor/tiled
-	name = "steel floor"
-	icon = 'icons/turf/flooring/tiles.dmi'
-	icon_state = "steel"
-	initial_flooring = /decl/flooring/tiling
 
 /turf/simulated/floor/carpet
 	name = "brown carpet"
@@ -150,6 +144,14 @@
 /turf/simulated/floor/cult/cultify()
 	return
 
+//Tiled floor + sub-types
+
+/turf/simulated/floor/tiled
+	name = "steel floor"
+	icon = 'icons/turf/flooring/tiles.dmi'
+	icon_state = "steel"
+	initial_flooring = /decl/flooring/tiling
+
 /turf/simulated/floor/tiled/dark
 	name = "dark floor"
 	icon_state = "dark"
@@ -163,10 +165,77 @@
 	icon_state = "white"
 	initial_flooring = /decl/flooring/tiling/white
 
+/turf/simulated/floor/tiled/white/monotile
+	name = "floor"
+	icon_state = "monotile"
+	initial_flooring = /decl/flooring/tiling/mono
+
+/turf/simulated/floor/tiled/monofloor
+	name = "floor"
+	icon_state = "steel_monofloor"
+	initial_flooring = /decl/flooring/tiling/new_tile/monofloor
+
+/turf/simulated/floor/tiled/white/airless
+	name = "airless floor"
+	initial_gas = null
+	temperature = TCMB
+
 /turf/simulated/floor/tiled/freezer
 	name = "tiles"
 	icon_state = "freezer"
 	initial_flooring = /decl/flooring/tiling/freezer
+
+/turf/simulated/floor/tiled/techmaint
+	name = "floor"
+	icon = 'icons/turf/flooring/tiles.dmi'
+	icon_state = "techmaint"
+	initial_flooring = /decl/flooring/tiling/new_tile/techmaint
+
+/turf/simulated/floor/tiled/monofloor
+	name = "floor"
+	icon_state = "monofloor"
+	initial_flooring = /decl/flooring/tiling/new_tile/monofloor
+
+/turf/simulated/floor/tiled/techfloor
+	name = "floor"
+	icon = 'icons/turf/flooring/techfloor.dmi'
+	icon_state = "techfloor_gray"
+	initial_flooring = /decl/flooring/tiling/tech
+
+/turf/simulated/floor/tiled/monotile
+	name = "floor"
+	icon_state = "steel_monotile"
+	initial_flooring = /decl/flooring/tiling/mono
+
+/turf/simulated/floor/tiled/steel_grid
+	name = "floor"
+	icon_state = "steel_grid"
+	initial_flooring = /decl/flooring/tiling/new_tile/steel_grid
+
+/turf/simulated/floor/tiled/steel_ridged
+	name = "floor"
+	icon_state = "steel_ridged"
+	initial_flooring = /decl/flooring/tiling/new_tile/steel_ridged
+
+/turf/simulated/floor/tiled/old_tile
+	name = "floor"
+	icon_state = "tile_full"
+	initial_flooring = /decl/flooring/tiling/new_tile
+
+/turf/simulated/floor/tiled/old_cargo
+	name = "floor"
+	icon_state = "cargo_one_full"
+	initial_flooring = /decl/flooring/tiling/new_tile/cargo_one
+
+/turf/simulated/floor/tiled/kafel_full
+	name = "floor"
+	icon_state = "kafel_full"
+	initial_flooring = /decl/flooring/tiling/new_tile/kafel
+
+/turf/simulated/floor/tiled/techfloor/grid
+	name = "floor"
+	icon_state = "techfloor_grid"
+	initial_flooring = /decl/flooring/tiling/tech/grid
 
 /turf/simulated/floor/lino
 	name = "lino"
@@ -202,11 +271,6 @@
 
 /turf/simulated/floor/greengrid/nitrogen
 	initial_gas = list("nitrogen" = MOLES_N2STANDARD)
-
-/turf/simulated/floor/tiled/white/airless
-	name = "airless floor"
-	initial_gas = null
-	temperature = TCMB
 
 // Placeholders
 /turf/simulated/floor/airless/lava

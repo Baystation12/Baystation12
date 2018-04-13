@@ -215,3 +215,20 @@
 /obj/item/weapon/reagent_containers/food/condiment/flour/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nutriment/flour, 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/salt
+	name = "big bag of salt"
+	desc = "A nonsensically large bag of salt. Carefully refined from countless shifts."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "salt"
+	item_state = "flour"
+	randpixel = 10
+	volume = 500
+	w_class = ITEM_SIZE_LARGE
+
+/obj/item/weapon/reagent_containers/food/condiment/salt/on_reagent_change()
+	return
+
+/obj/item/weapon/reagent_containers/food/condiment/salt/New()
+	..()
+	reagents.add_reagent(/datum/reagent/sodiumchloride, 500)

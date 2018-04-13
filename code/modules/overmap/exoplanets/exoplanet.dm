@@ -411,8 +411,8 @@
 				initial_gas = E.atmosphere.gas.Copy()
 				temperature = E.atmosphere.temperature
 			if(E.lightlevel)
-				light_power = E.lightlevel
-				light_range = 2
+				light_max_bright = E.lightlevel
+				light_outer_range = 2
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)

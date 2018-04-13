@@ -170,7 +170,9 @@ Used In File(s): \code\game\machinery\alarm.dm
 					Operation Mode:
 				</div>
 				<div class="itemContent">
-					{{:helper.link(value.scrubbing ? 'Scrubbing' : 'Siphoning', null, { 'id_tag' : value.id_tag, 'command' : 'scrubbing', 'val' : value.scrubbing ? 0 : 1}, null, value.scrubbing ? null : 'redButton')}}
+					{{:helper.link('Scrub', null, { 'id_tag' : value.id_tag, 'command' : 'scrubbing', 'scrub_mode' : 'scrub'}, null, value.scrubbing == 'scrub' ? 'selected' : null)}}
+					{{:helper.link('Exchange', null, { 'id_tag' : value.id_tag, 'command' : 'scrubbing', 'scrub_mode' : 'exchange'}, null, value.scrubbing == 'exchange' ? 'selected' : null)}}
+					{{:helper.link('Siphon', null, { 'id_tag' : value.id_tag, 'command' : 'scrubbing', 'scrub_mode' : 'siphon'}, null, value.scrubbing == 'siphon' ? 'redButton' : null)}}
 				</div>
 			</div>
 			<div class="item">

@@ -52,7 +52,7 @@
 		icon_state = "[initial(name)]"
 
 	if(icon_state == "[initial(name)]_active")
-		set_light(1.5, 2, "#ff6a00")
+		set_light(0.4, 0.1, 1, 2, "#ff6a00")
 	else
 		set_light(0)
 
@@ -93,6 +93,12 @@
 	set_status(!status, user)
 	add_fingerprint(user)
 
+/obj/item/weapon/melee/baton/throw_impact(atom/hit_atom, var/speed)
+	if(istype(hit_atom,/mob/living))
+		apply_hit_effect(hit_atom, hit_zone = pick(BP_HEAD, BP_CHEST, BP_CHEST, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
+	else
+		..()
+
 /obj/item/weapon/melee/baton/proc/set_status(var/newstatus, mob/user)
 	if(bcell && bcell.charge > hitcost)
 		if(status != newstatus)
@@ -132,8 +138,8 @@
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		affecting = H.get_organ(hit_zone)
-
-	if(user.a_intent == I_HURT)
+	var/abuser =  user ? "" : "by [user]"
+	if(user && user.a_intent == I_HURT)
 		. = ..()
 		if (!.)	//item/attack() does it's own messaging and logs
 			return 0	// item/attack() will return 1 if they hit, 0 if they missed.
@@ -147,14 +153,14 @@
 		//we can't really extract the actual hit zone from ..(), unfortunately. Just act like they attacked the area they intended to.
 	else if(!status)
 		if(affecting)
-			target.visible_message("<span class='warning'>[target] has been prodded in the [affecting.name] with [src] by [user]. Luckily it was off.</span>")
+			target.visible_message("<span class='warning'>[target] has been prodded in the [affecting.name] with [src][abuser]. Luckily it was off.</span>")
 		else
-			target.visible_message("<span class='warning'>[target] has been prodded with [src] by [user]. Luckily it was off.</span>")
+			target.visible_message("<span class='warning'>[target] has been prodded with [src][abuser]. Luckily it was off.</span>")
 	else
 		if(affecting)
-			target.visible_message("<span class='danger'>[target] has been prodded in the [affecting.name] with [src] by [user]!</span>")
+			target.visible_message("<span class='danger'>[target] has been prodded in the [affecting.name] with [src]!</span>")
 		else
-			target.visible_message("<span class='danger'>[target] has been prodded with [src] by [user]!</span>")
+			target.visible_message("<span class='danger'>[target] has been prodded with [src][abuser]!</span>")
 		playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 
 	//stun effects
@@ -223,7 +229,7 @@
 /obj/item/weapon/melee/baton/robot/electrified_arm/update_icon()
 	if(status)
 		icon_state = "electrified_arm_active"
-		set_light(1.5, 2, "#006aff")
+		set_light(0.4, 0.1, 1, 2, "#006aff")
 	else
 		icon_state = "electrified_arm"
 		set_light(0)

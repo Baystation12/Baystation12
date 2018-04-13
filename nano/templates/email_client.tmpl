@@ -26,51 +26,61 @@
 	{{:helper.link('Cancel Download', null, {'canceldownload' : 1})}}
 {{else data.current_account}}
 	<b>Welcome to your account, {{:data.current_account}}</b><br>
-	{{:helper.link('New Message', null, {'new_message' : 1})}}
-	{{:helper.link('Change Password', null, {'changepassword' : 1})}}
-	{{:helper.link('Log Out', null, {'logout' : 1})}}<br><br>
+	{{:helper.link('New Message', 'mail-closed', {'new_message' : 1})}}
+	{{:helper.link('Change Password', 'locked', {'changepassword' : 1})}}
+	{{:helper.link('Log Out', 'key', {'logout' : 1})}}<br><br>
 	{{if data.addressbook}}
+		{{:helper.link('Back', null, {'close_addressbook' : 1})}}
+		{{:helper.link('Enter Email', 'pencil', {'edit_recipient' : 1})}}
+		<br><br>
 		<table>
+		<tr><td>Address book:
 		{{for data.accounts}}
-			<tr><td>{{:helper.link(value.login, null, {'set_recipient' : value.login})}}
+			<tr class="candystripe"><td>{{:helper.link(value.login, null, {'set_recipient' : value.login})}}
 		{{/for}}
 		</table>
 	{{else data.new_message}}
 		<div class="item">
 			<div class="itemLabel">
-				Title: 
+				{{:helper.link('', 'pencil', {'edit_title' : 1})}} Title: 
 			</div>
 			<div class="itemContent">
-				{{:data.msg_title}}&nbsp
-			</div>
-			<div class="itemLabel">
-				Recipient:
-			</div>
-			<div class="itemContent">
-				{{:data.msg_recipient}}&nbsp
-			</div>
-			<div class="itemLabel">
-				Message:
-			</div>
-			<div class="itemContent">
-				{{:data.msg_body}}&nbsp
-			</div>
-			{{if data.msg_hasattachment}}
-				<div class="itemLabel">
-					Attachment:
+				<div class="statusDisplayComm" style="width:100%;min-height:1.7em;padding-bottom: 0;">
+					{{:data.msg_title}}
 				</div>
-				<div class="itemContent">
-					{{:data.msg_attachment_filename}} ({{:data.msg_attachment_size}}GQ)
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				{{:helper.link('', 'plusthick', {'addressbook' : 1})}} Recipient:
+			</div>
+			<div class="itemContent">
+				<div class="statusDisplayComm" style="width:100%;min-height:1.7em;padding-bottom: 0;">
+					{{:data.msg_recipient}}
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				{{:helper.link('','pencil', {'edit_body' : 1})}} Message:
+			</div>
+			<div class="itemContent">
+				<div class="statusDisplayComm" style="width:100%;min-height:1.7em;padding-bottom: 0;">
+					{{:data.msg_body}}
+				</div>
+			</div>
+		</div>
+			{{if data.msg_hasattachment}}
+				<div class="item">
+					<div class="itemLabel">
+						Attachment:
+					</div>
+					<div class="itemContent">
+						{{:data.msg_attachment_filename}} ({{:data.msg_attachment_size}}GQ)
+					</div>
 				</div>
 			{{/if}}
-			<div class="itemLabel">
-				Options:
-			</div>
 			<div class="itemContent">
-				{{:helper.link('Edit Title', null, {'edit_title' : 1})}}
-				{{:helper.link('Find Recipient', null, {'addressbook' : 1})}}
-				{{:helper.link('Enter Recipient', null, {'edit_recipient' : 1})}}
-				{{:helper.link('Edit Message', null, {'edit_body' : 1})}}
 				{{:helper.link('Add attachment', null, {'addattachment' : 1})}}
 				{{if data.msg_hasattachment}}
 					{{:helper.link('Remove attachment', null, {'remove_attachment' : 1})}}
@@ -127,9 +137,10 @@
 			</div>
 		</div>		
 	{{else}}
-		{{:helper.link('Inbox', null, {'set_folder' : 'Inbox'}, data.folder == 'Inbox' ? 'selected' : null)}}
-		{{:helper.link('Spam', null, {'set_folder' : 'Spam'}, data.folder == 'Spam' ? 'selected' : null)}}
-		{{:helper.link('Deleted', null, {'set_folder' : 'Deleted'}, data.folder == 'Deleted' ? 'selected' : null)}}
+		{{:helper.link('Inbox', 'mail-closed', {'set_folder' : 'Inbox'}, data.folder == 'Inbox' ? 'selected' : null)}}
+		{{:helper.link('Sent', 'arrowreturnthick-1-w', {'set_folder' : 'Sent'}, data.folder == 'Sent' ? 'selected' : null)}}
+		{{:helper.link('Spam', 'cancel', {'set_folder' : 'Spam'}, data.folder == 'Spam' ? 'selected' : null)}}
+		{{:helper.link('Deleted', 'trash', {'set_folder' : 'Deleted'}, data.folder == 'Deleted' ? 'selected' : null)}}
 		<br><br>
 		{{if data.messagecount}}
 			<table>
@@ -137,17 +148,17 @@
 					<th>Source</th>
 					<th>Title</th>
 					<th>Received at</th>
-					<th>Actions</th>
+					<th></th>
 				</tr>
 				{{for data.messages}}
-					<tr>
+					<tr class="candystripe">
 						<td>{{:value.source}}&nbsp</td>
 						<td>{{:value.title}}&nbsp</td>
 						<td>{{:value.timestamp}}&nbsp</td>
 						<td>
-							{{:helper.link('Delete', null, {'delete' : value.uid})}}
-							{{:helper.link('Reply', null, {'reply' :  value.uid})}}
-							{{:helper.link('View', null, {'view' :  value.uid})}}
+							{{:helper.link('', 'trash', {'delete' : value.uid})}}
+							{{:helper.link('', 'arrowreturnthick-1-w', {'reply' :  value.uid})}}
+							{{:helper.link('', 'search', {'view' :  value.uid})}}
 						</td>
 					</tr>
 				{{/for}}

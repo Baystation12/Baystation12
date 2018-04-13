@@ -13,7 +13,7 @@ def convert(mes):
     result = ""
     counter = 0
     for char in mes:
-        if(char == 'd' and mes[counter + 1] == 'ʒ'):
+        if(len(mes) > counter + 1 and char == 'd' and mes[counter + 1] == 'ʒ'):
             result += 'N'
         else:
             result += pholet[char] if char in pholet else ''

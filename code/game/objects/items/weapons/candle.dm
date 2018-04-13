@@ -48,7 +48,7 @@
 		//src.damtype = "fire"
 		for(var/mob/O in viewers(usr, null))
 			O.show_message(flavor_text, 1)
-		set_light(CANDLE_LUM)
+		set_light(0.3, 0.1, 4, 2)
 		START_PROCESSING(SSobj, src)
 
 

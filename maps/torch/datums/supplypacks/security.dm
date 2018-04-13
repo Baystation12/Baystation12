@@ -57,12 +57,19 @@
 
 /decl/hierarchy/supply_pack/security/laser
 	name = "Weapons - Laser carbines"
-	contains = list(/obj/item/weapon/gun/energy/laser = 4)
+	contains = list(/obj/item/weapon/gun/energy/secure/laser = 4)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Laser carbines crate"
 	access = access_emergency_armory
 	security_level = SUPPLY_SECURITY_ELEVATED
+
+/decl/hierarchy/supply_pack/security/laser/shady
+	name = "Weapons - Laser carbines (For disposal)"
+	contains = list(/obj/item/weapon/gun/energy/laser = 4)
+	cost = 80
+	contraband = 1
+	security_level = null
 
 /decl/hierarchy/supply_pack/security/advancedlaser
 	name = "Weapons - Advanced Laser Weapons"
@@ -112,8 +119,7 @@
 
 /decl/hierarchy/supply_pack/security/securityextragear
 	name = "Misc - Security equipment"
-	contains = list(/obj/item/weapon/cartridge/security = 2,
-					/obj/item/weapon/storage/belt/security = 2,
+	contains = list(/obj/item/weapon/storage/belt/security = 2,
 					/obj/item/device/radio/headset/headset_sec = 2,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles = 2,
 					/obj/item/taperoll/police = 2,
@@ -128,8 +134,7 @@
 
 /decl/hierarchy/supply_pack/security/cosextragear
 	name = "Misc - Chief of Security equipment"
-	contains = list(/obj/item/weapon/cartridge/hos,
-					/obj/item/device/radio/headset/heads/cos,
+	contains = list(/obj/item/device/radio/headset/heads/cos,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 					/obj/item/taperoll/police,
 					/obj/item/weapon/storage/belt/security,

@@ -7,8 +7,10 @@
 	var/atom/source_atom     // The atom that we belong to.
 
 	var/turf/source_turf     // The turf under the above.
-	var/light_power    // Intensity of the emitter light.
-	var/light_range      // The range of the emitted light.
+	var/light_max_bright = 1  // intensity of the light within the full brightness range. Value between 0 and 1
+	var/light_inner_range = 0 // range, in tiles, the light is at full brightness
+	var/light_outer_range = 0 // range, in tiles, where the light becomes darkness
+	var/light_falloff_curve   // adjusts curve for falloff gradient
 	var/light_color    // The colour of the light, string, decomposed by parse_light_color()
 
 	// Variables for keeping track of the colour.
@@ -46,8 +48,10 @@
 		top_atom.light_sources += src
 
 	source_turf = top_atom
-	light_power = source_atom.light_power
-	light_range = source_atom.light_range
+	light_max_bright = source_atom.light_max_bright
+	light_inner_range = source_atom.light_inner_range
+	light_outer_range = source_atom.light_outer_range
+	light_falloff_curve = source_atom.light_falloff_curve
 	light_color = source_atom.light_color
 
 	parse_light_color()
@@ -59,6 +63,17 @@
 
 
 	return ..()
+
+/* lighting debugging verb
+/mob/verb/self_light()
+	set name = "set self light"
+	set category = "Light"
+	var/v1 = input(usr, "Enter max bright", "max bright", 1) as num|null
+	var/v2 = input(usr, "Enter inner range", "inner range", 0.1) as num|null
+	var/v3 = input(usr, "Enter outer range", "outer range", 4) as num|null
+	var/v4 = input(usr, "Enter curve", "curve", 2) as num|null
+	set_light(v1, v2, v3, v4, "#0066ff")
+*/
 
 // Kill ourselves.
 /datum/light_source/proc/destroy()
@@ -112,7 +127,7 @@
 
 // Will check if we actually need to update, and update any variables that may need to be updated.
 /datum/light_source/proc/check()
-	if(!source_atom || !light_range || !light_power)
+	if(!source_atom || !light_outer_range || !light_max_bright)
 		destroy()
 		return 1
 
@@ -128,15 +143,23 @@
 		source_turf = top_atom.loc
 		. = 1
 
-	if(source_atom.light_power != light_power)
-		light_power = source_atom.light_power
+	if(source_atom.light_max_bright != light_max_bright)
+		light_max_bright = source_atom.light_max_bright
 		. = 1
 
-	if(source_atom.light_range != light_range)
-		light_range = source_atom.light_range
+	if(source_atom.light_inner_range != light_inner_range)
+		light_inner_range = source_atom.light_inner_range
 		. = 1
 
-	if(light_range && light_power && !applied)
+	if(source_atom.light_outer_range != light_outer_range)
+		light_outer_range = source_atom.light_outer_range
+		. = 1
+
+	if(source_atom.light_falloff_curve != light_falloff_curve)
+		light_falloff_curve = source_atom.light_falloff_curve
+		. = 1
+
+	if(light_max_bright && light_outer_range && !applied)
 		. = 1
 
 	if(source_atom.light_color != light_color)
@@ -163,7 +186,8 @@
 
 #define APPLY_CORNER(C)              \
 	. = LUM_FALLOFF(C, source_turf); \
-	. *= light_power/2;              \
+	. *= (light_max_bright ** 2);    \
+	. *= light_max_bright < 0 ? -1:1;\
 	effect_str[C] = .;               \
 	C.update_lumcount                \
 	(                                \
@@ -183,7 +207,11 @@
 	);
 
 // This is the define used to calculate falloff.
-#define LUM_FALLOFF(C, T)(1 - CLAMP01(((C.x - T.x) ** 2 +(C.y - T.y) ** 2 + LIGHTING_HEIGHT) ** 0.6 / max(1, light_range)))
+// Assuming a brightness of 1 at range 1, formula should be (brightness = 1 / distance^2)
+// However, due to the weird range factor, brightness = (-(distance - full_dark_start) / (full_dark_start - full_light_end)) ^ light_max_bright
+
+#define LUM_FALLOFF(C, T)(CLAMP01(-((((C.x - T.x) ** 2 +(C.y - T.y) ** 2) ** 0.5 - light_outer_range) / (light_outer_range - light_inner_range))) ** light_falloff_curve)
+
 
 /datum/light_source/proc/apply_lum()
 	var/static/update_gen = 1
@@ -194,7 +222,7 @@
 	applied_lum_g = lum_g
 	applied_lum_b = lum_b
 
-	FOR_DVIEW(var/turf/T, light_range, source_turf, INVISIBILITY_LIGHTING)
+	FOR_DVIEW(var/turf/T, light_outer_range, source_turf, INVISIBILITY_LIGHTING)
 		if(!T.lighting_corners_initialised)
 			T.generate_missing_corners()
 
@@ -287,7 +315,7 @@
 /datum/light_source/proc/smart_vis_update()
 	var/list/datum/lighting_corner/corners = list()
 	var/list/turf/turfs                    = list()
-	FOR_DVIEW(var/turf/T, light_range, source_turf, 0)
+	FOR_DVIEW(var/turf/T, light_outer_range, source_turf, 0)
 		if(!T.lighting_corners_initialised)
 			T.generate_missing_corners()
 		corners |= T.get_corners()

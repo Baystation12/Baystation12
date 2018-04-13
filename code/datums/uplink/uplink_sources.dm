@@ -19,16 +19,16 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	desc = NO_GUARANTEE_NO_EXTRA_COST_DESC("a PDA")
 
 /decl/uplink_source/pda/setup_uplink_source(var/mob/M, var/amount)
-	var/obj/item/device/pda/P = find_in_mob(M, /obj/item/device/pda)
-	if(!P)
+	var/obj/item/modular_computer/pda/P = find_in_mob(M, /obj/item/modular_computer/pda)
+	if(!P || !P.hard_drive)
 		return SETUP_FAILED
 
 	var/pda_pass = "[rand(100,999)] [pick(GLOB.greek_letters)]"
 	var/obj/item/device/uplink/T = new(P, M.mind, amount)
 	P.hidden_uplink = T
-	P.lock_code = pda_pass
-	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" into the ringtone select to unlock its hidden features.</span>")
-	M.mind.store_memory("<B>Uplink Passcode:</B> [pda_pass] ([P.name]).")
+	P.hard_drive.store_file(new /datum/computer_file/program/uplink(pda_pass))
+	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in your new program to unlock its hidden features.</span>")
+	M.mind.store_memory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).")
 
 /decl/uplink_source/radio
 	name = "Radio"

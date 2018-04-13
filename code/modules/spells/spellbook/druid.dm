@@ -26,10 +26,11 @@
 				/spell/aoe_turf/conjure/grove/sanctuary = 			1,
 				/spell/aoe_turf/knock = 							1,
 				/spell/area_teleport = 								2,
+				/spell/portal_teleport = 							2,
 				/spell/noclothes = 									1,
 				/obj/structure/closet/wizard/souls = 				1,
 				/obj/item/weapon/magic_rock = 						1,
-				/obj/item/weapon/monster_manual = 					1,
+				/obj/item/weapon/summoning_stone = 					2,
 				/obj/item/weapon/contract/wizard/telepathy = 		1,
 				/obj/item/weapon/contract/apprentice = 				1
 				)

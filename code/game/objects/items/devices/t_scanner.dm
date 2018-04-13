@@ -97,6 +97,7 @@
 		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state)
 		I.plane = HUD_PLANE
 		I.layer = UNDER_HUD_LAYER
+		I.appearance_flags = RESET_ALPHA
 
 		//Pipes are special
 		if(istype(scanned, /obj/machinery/atmospherics/pipe))
@@ -110,6 +111,8 @@
 				var/mob/living/carbon/human/H = scanned
 				if(H.species.appearance_flags & HAS_SKIN_COLOR)
 					I.color = rgb(H.r_skin, H.g_skin, H.b_skin)
+					I.icon = 'icons/mob/mob.dmi'
+					I.icon_state = "phaseout"
 			var/mob/M = scanned
 			I.color = M.color
 			I.overlays += M.overlays

@@ -138,6 +138,19 @@
 	else
 		..()
 
+/obj/structure/bed/Move()
+	. = ..()
+	if(buckled_mob)
+		buckled_mob.forceMove(src.loc)
+
+/obj/structure/bed/forceMove()
+	. = ..()
+	if(buckled_mob)
+		if(isturf(src.loc))
+			buckled_mob.forceMove(src.loc)
+		else
+			unbuckle_mob()
+
 /obj/structure/bed/proc/remove_padding()
 	if(padding_material)
 		padding_material.place_sheet(get_turf(src))
@@ -189,20 +202,26 @@
 	buckle_pixel_shift = "x=0;y=6"
 
 /obj/structure/bed/roller/update_icon()
-	return // Doesn't care about material or anything else.
+	if(density)
+		icon_state = "up"
+	else
+		icon_state = "down"
 
-/obj/structure/bed/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
+/obj/structure/bed/roller/attackby(obj/item/I as obj, mob/user as mob)
+	if(isWrench(I) || istype(I, /obj/item/stack) || isWirecutter(I))
 		return
-	else if(istype(W,/obj/item/roller_holder))
+	else if(istype(I, /obj/item/roller_holder))
 		if(buckled_mob)
 			user_unbuckle_mob(user)
 		else
-			visible_message("[user] collapses \the [src.name].")
-			new/obj/item/roller(get_turf(src))
-			QDEL_IN(src, 0)
+			collapse()
 		return
 	..()
+
+/obj/structure/bed/roller/proc/collapse()
+	visible_message("[usr] collapses [src].")
+	new /obj/item/roller(get_turf(src))
+	qdel(src)
 
 /obj/item/roller
 	name = "roller bed"
@@ -214,12 +233,11 @@
 	w_class = ITEM_SIZE_HUGE // Can't be put in backpacks. Oh well. For now.
 
 /obj/item/roller/attack_self(mob/user)
-		var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
-		R.add_fingerprint(user)
-		qdel(src)
+	var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
+	R.add_fingerprint(user)
+	qdel(src)
 
 /obj/item/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
 	if(istype(W,/obj/item/roller_holder))
 		var/obj/item/roller_holder/RH = W
 		if(!RH.held)
@@ -246,20 +264,15 @@
 		to_chat(user, "<span class='notice'>The rack is empty.</span>")
 		return
 
-	var/obj/structure/bed/roller/R = held
+	var/obj/item/roller/R = held
 	R.forceMove(get_turf(src))
+	R.attack_self(user) // deploy it
 	to_chat(user, "<span class='notice'>You deploy [R].</span>")
 	R.add_fingerprint(user)
-
-
-/obj/structure/bed/roller/proc/move_buckled()
-	if(buckled_mob)
-		if(buckled_mob.buckled == src)
-			buckled_mob.forceMove(src.loc)
-		else
-			buckled_mob = null
+	held = null
 
 /obj/structure/bed/roller/post_buckle_mob(mob/living/M as mob)
+	. = ..()
 	if(M == buckled_mob)
 		set_density(1)
 		icon_state = "up"
@@ -267,23 +280,10 @@
 		set_density(0)
 		icon_state = "down"
 
-	return ..()
-
-/obj/structure/bed/roller/buckle_mob()
-	. = ..()
-	if(.)
-		GLOB.moved_event.register(src, src, /obj/structure/bed/roller/proc/move_buckled)
-
-/obj/structure/bed/roller/unbuckle_mob()
-	GLOB.moved_event.unregister(src, src)
-	return ..()
-
 /obj/structure/bed/roller/MouseDrop(over_object, src_location, over_location)
 	..()
-	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
-		if(!ishuman(usr))	return
-		if(buckled_mob)	return 0
-		visible_message("[usr] collapses \the [src.name].")
-		new/obj/item/roller(get_turf(src))
-		QDEL_IN(src, 0)
-		return
+	if(!CanMouseDrop(over_object))	return
+	if(!ishuman(usr))	return
+	if(buckled_mob)	return
+
+	collapse()

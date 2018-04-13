@@ -86,8 +86,8 @@
 /obj/effect/rune/proc/cast(var/mob/living/user)
 	fizzle(user)
 
-/obj/effect/rune/proc/cast_effect(var/duration = 5)
-	var/obj/effect/temporary/B = new (loc = get_turf(src), del_in = duration, _icon = 'icons/obj/cult.dmi', _state = "runetrigger-build")
+/obj/effect/rune/proc/cast_effect(var/time = 5)
+	var/obj/B = new /obj/effect/temporary(get_turf(src), time, 'icons/obj/cult.dmi', "runetrigger-build")
 	B.plane = ABOVE_TURF_PLANE
 	B.layer = BLOOD_LAYER + 0.1
 
@@ -406,7 +406,7 @@
 	if(O && !istype(O, /obj/item/clothing/head/culthood))
 		user.unEquip(O)
 	O = user.get_equipped_item(slot_wear_suit)
-	if(O && !istype(O, /obj/item/clothing/suit/cultrobes))
+	if(O && !istype(O, /obj/item/clothing/suit/storage/hooded/cultrobes))
 		user.unEquip(O)
 	O = user.get_equipped_item(slot_shoes)
 	if(O && !istype(O, /obj/item/clothing/shoes/cult))
@@ -639,7 +639,7 @@
 	wall_writable = FALSE
 
 /obj/effect/rune/weapon/cast(var/mob/living/user)
-	if(!istype(user.get_equipped_item(slot_head), /obj/item/clothing/head/culthood) || !istype(user.get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) || !istype(user.get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
+	if(!istype(user.get_equipped_item(slot_head), /obj/item/clothing/head/culthood) || !istype(user.get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/storage/hooded/cultrobes) || !istype(user.get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
 		to_chat(user, "<span class='warning'>You need to be wearing your robes to use this rune.</span>")
 		return fizzle(user)
 	var/turf/T = get_turf(src)

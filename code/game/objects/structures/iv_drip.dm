@@ -97,6 +97,10 @@
 
 	if(!beaker)
 		return
+	
+	//SSObj fires twice as fast as SSMobs, so gotta slow down to not OD our victims.
+	if(SSobj.times_fired % 2)
+		return
 
 	if(mode) // Give blood
 		if(beaker.volume > 0)

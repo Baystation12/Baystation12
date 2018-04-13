@@ -30,7 +30,9 @@
 	flash_mod = 1.2
 	brute_mod = 1.1
 	burn_mod =  1.1
-	darksight = 6
+	darksight_range = 6
+	darksight_tint = DARKTINT_MODERATE
+
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 

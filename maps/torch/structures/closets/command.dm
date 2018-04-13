@@ -15,13 +15,10 @@
 /obj/structure/closet/secure_closet/CO/WillContain()
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
-		/obj/item/weapon/cartridge/captain,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchcaptain,
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/weapon/gun/projectile/revolver/webley/captain,
-		/obj/item/ammo_magazine/c44,
-		/obj/item/ammo_magazine/c44,
+		/obj/item/weapon/gun/energy/secure/gun,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
@@ -46,14 +43,11 @@
 /obj/structure/closet/secure_closet/XO/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/weapon/cartridge/hop,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchxo,
-		/obj/item/weapon/gun/projectile/revolver/webley,
-		/obj/item/ammo_magazine/c44,
-		/obj/item/ammo_magazine/c44,
 		/obj/item/clothing/accessory/holster/thigh,
+		/obj/item/weapon/gun/energy/secure/gun,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
@@ -81,11 +75,10 @@
 /obj/structure/closet/secure_closet/sea/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/weapon/cartridge/hop,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchxo,
-		/obj/item/weapon/gun/energy/gun,
+		/obj/item/weapon/gun/energy/secure/gun,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
@@ -112,14 +105,15 @@
 		/obj/item/weapon/pen,
 		/obj/item/device/tape/random,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
+		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/taperecorder,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/clipboard,
 		/obj/item/weapon/folder/blue,
-		/obj/item/modular_computer/tablet/preset/custom_loadout/standard,
+		/obj/item/modular_computer/tablet/lease/preset/command,
 		/obj/item/device/radio/headset/bridgeofficer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger)),
-		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/glowstick/random))
+		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
 	)

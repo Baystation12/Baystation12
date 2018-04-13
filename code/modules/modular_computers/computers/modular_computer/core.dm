@@ -55,18 +55,25 @@
 			prog_file = new prog_file
 			hard_drive.store_file(prog_file)
 
-/obj/item/modular_computer/New()
+/obj/item/modular_computer/Initialize()
 	START_PROCESSING(SSobj, src)
+
+	if(stores_pen && ispath(stored_pen))
+		stored_pen = new stored_pen(src)
+
 	install_default_hardware()
 	if(hard_drive)
 		install_default_programs()
 	update_icon()
 	update_verbs()
-	..()
+	update_name()
+	. = ..()
 
 /obj/item/modular_computer/Destroy()
 	kill_program(1)
 	STOP_PROCESSING(SSobj, src)
+	if(istype(stored_pen))
+		QDEL_NULL(stored_pen)
 	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
 		uninstall_component(null, CH)
 		qdel(CH)
@@ -93,7 +100,7 @@
 			overlays.Add(icon_state_screensaver)
 		set_light(0)
 		return
-	set_light(light_strength)
+	set_light(0.2, 0.1, light_strength)
 	if(active_program)
 		overlays.Add(active_program.program_icon_state ? active_program.program_icon_state : icon_state_menu)
 		if(active_program.program_key_state)
@@ -194,7 +201,6 @@
 		return
 
 	P.computer = src
-
 	if(!P.is_supported_by_hardware(hardware_flag, 1, user))
 		return
 	if(P in idle_threads)
@@ -276,8 +282,11 @@
 	if(!istype(autorun))
 		autorun = new/datum/computer_file/data()
 		autorun.filename = "autorun"
+		autorun.stored_data = "[program]"
 		hard_drive.store_file(autorun)
-	if(autorun.stored_data == program)
-		autorun.stored_data = null
-	else
-		autorun.stored_data = program
+
+/obj/item/modular_computer/GetIdCard()
+	if(card_slot && card_slot.can_broadcast && istype(card_slot.stored_card))
+		return card_slot.stored_card
+
+/obj/item/modular_computer/proc/update_name()

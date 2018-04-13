@@ -15,8 +15,6 @@
 	var/damage_state = "00"            // Modifier used for generating the on-mob damage overlay for this limb.
 
 	// Damage vars.
-	var/brute_mod = 1                  // Multiplier for incoming brute damage.
-	var/burn_mod = 1                   // As above for burn.
 	var/brute_dam = 0                  // Actual current brute damage.
 	var/brute_ratio = 0                // Ratio of current brute damage to max damage.
 	var/burn_dam = 0                   // Actual current burn damage.
@@ -141,7 +139,7 @@
 			burn_damage = 7
 		if (3)
 			burn_damage = 3
-	burn_damage *= robotic/burn_mod //ignore burn mod for EMP damage
+	burn_damage *= robotic/species.burn_mod //ignore burn mod for EMP damage
 
 	var/power = 4 - severity //stupid reverse severity
 	for(var/obj/item/I in implants)
@@ -926,6 +924,17 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(W.clamped)
 			return 1
 
+// open incisions and expose implants
+// this is the retract step of surgery
+/obj/item/organ/external/proc/open_incision()
+	var/datum/wound/W = get_incision()
+	if(!W)	return
+	W.open_wound(min(W.damage * 2, W.damage_list[1] - W.damage))
+
+	if(!encased)
+		for(var/obj/item/weapon/implant/I in implants)
+			I.exposed()
+
 /obj/item/organ/external/proc/fracture()
 	if(!config.bones_can_break)
 		return
@@ -1178,7 +1187,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			incision = W
 	return incision
 
-/obj/item/organ/external/proc/open()
+/obj/item/organ/external/proc/how_open()
 	var/datum/wound/cut/incision = get_incision()
 	. = 0
 	if(!incision)
@@ -1256,13 +1265,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 		else
 			wound_descriptors[this_wound_desc] = W.amount
 
-	if(open() >= SURGERY_RETRACTED)
+	if(how_open() >= SURGERY_RETRACTED)
 		var/bone = encased ? encased : "bone"
 		if(status & ORGAN_BROKEN)
 			bone = "broken [bone]"
 		wound_descriptors["a [bone] exposed"] = 1
 
-		if(!encased || open() >= SURGERY_ENCASED)
+		if(!encased || how_open() >= SURGERY_ENCASED)
 			var/list/bits = list()
 			for(var/obj/item/organ/internal/organ in internal_organs)
 				bits += organ.get_visible_state()

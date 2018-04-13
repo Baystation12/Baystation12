@@ -25,48 +25,19 @@
 /spell/area_teleport/choose_targets()
 	var/area/thearea
 	if(!randomise_selection)
-		thearea = input("Area to teleport to", "Teleport") as null|anything in teleportlocs
+		thearea = input("Area to teleport to", "Teleport") as null|anything in wizteleportlocs
 		if(!thearea) return
 	else
-		thearea = pick(teleportlocs)
-	return list(teleportlocs[thearea])
+		thearea = pick(wizteleportlocs)
+	return list(wizteleportlocs[thearea])
 
 /spell/area_teleport/cast(area/thearea, mob/user)
 	playsound(get_turf(user),cast_sound,50,1)
-	if(!istype(thearea))
-		if(istype(thearea, /list))
-			thearea = thearea[1]
-	var/list/L = list()
-	for(var/turf/T in get_area_turfs(thearea))
-		if(!T.density)
-			var/clear = 1
-			for(var/obj/O in T)
-				if(O.density)
-					clear = 0
-					break
-			if(clear)
-				L+=T
+	var/turf/end = user.try_teleport(thearea)
 
-	if(!L.len)
+	if(!end)
 		to_chat(user, "The spell matrix was unable to locate a suitable teleport destination for an unknown reason. Sorry.")
 		return
-
-	if(user && user.buckled)
-		user.buckled = null
-
-	var/attempt = null
-	var/success = 0
-	while(L.len)
-		attempt = pick(L)
-		success = user.Move(attempt)
-		if(!success)
-			L.Remove(attempt)
-		else
-			break
-
-	if(!success)
-		user.loc = pick(L)
-
 	return
 
 /spell/area_teleport/after_cast()

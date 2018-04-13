@@ -15,6 +15,7 @@
 	throw_range = 8
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
+	use_sound = 'sound/effects/storage/box.ogg'
 
 /obj/item/weapon/storage/firstaid/empty
 	icon_state = "firstaid"
@@ -135,6 +136,7 @@
 	storage_slots = 14
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = null
+	use_sound = 'sound/effects/storage/briefcase.ogg'
 
 	can_hold = list(
 		/obj/item/weapon/bonesetter,
@@ -178,8 +180,25 @@
 	can_hold = list(/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/dice,/obj/item/weapon/paper)
 	allow_quick_gather = 1
 	use_to_pickup = 1
-	use_sound = null
+	use_sound = 'sound/effects/storage/pillbottle.ogg'
 
+/obj/item/weapon/storage/pill_bottle/afterattack(mob/living/target, mob/living/user, proximity_flag)
+	if(!proximity_flag || !istype(target) || target != user)
+		return 1
+	if(!contents.len)
+		to_chat(user, "<span class='warning'>It's empty!</span>")
+		return 1
+	var/zone = user.zone_sel.selecting
+	if(zone == BP_MOUTH && target.can_eat())
+		user.visible_message("<span class='notice'>[user] pops a pill from \the [src].</span>")
+		playsound(get_turf(src), 'sound/effects/peelz.ogg', 50)
+		var/list/peelz = filter_list(contents,/obj/item/weapon/reagent_containers/pill/)
+		if(peelz.len)
+			var/obj/item/weapon/reagent_containers/pill/P = pick(peelz)
+			remove_from_storage(P)
+			P.attack(target,user)
+			return 1
+	
 /obj/item/weapon/storage/pill_bottle/antitox
 	name = "bottle of Dylovene pills"
 	desc = "Contains pills used to counter toxins."

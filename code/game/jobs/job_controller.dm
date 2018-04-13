@@ -15,7 +15,8 @@ var/global/datum/controller/occupations/job_master
 	var/list/unassigned = list()
 		//Debug info
 	var/list/job_debug = list()
-
+		//Cache of icons for job info window
+	var/list/job_icons = list()
 
 	proc/SetupOccupations(var/setup_titles = 0)
 		occupations = list()
@@ -58,6 +59,11 @@ var/global/datum/controller/occupations/job_master
 			if(job.department_flag & MSC)
 				GLOB.nonhuman_positions |= job.title
 
+		if(!GLOB.skills.len)
+			decls_repository.get_decl(/decl/hierarchy/skill)
+		if(!GLOB.skills.len)
+			log_error("<span class='warning'>Error setting up job skill requirements, no skill datums found!</span>")
+			return 0
 		return 1
 
 
@@ -357,8 +363,42 @@ var/global/datum/controller/occupations/job_master
 
 		if(job)
 
+			// Transfers the skill settings for the job to the mob
+			if(job in H.client.prefs.skills_allocated)
+				H.skillset.obtain_from_allocation(job, H.client.prefs.skills_allocated[job])
+			else H.skillset.obtain_from_allocation(job)
+
 			//Equip job items.
 			job.setup_account(H)
+
+			// EMAIL GENERATION
+			var/domain
+			if(H.char_branch && H.char_branch.email_domain)
+				domain = H.char_branch.email_domain
+			else
+				domain = "freemail.nt"
+			var/sanitized_name = sanitize(replacetext(replacetext(lowertext(H.real_name), " ", "."), "'", ""))
+			var/complete_login = "[sanitized_name]@[domain]"
+
+			// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
+			// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
+			if(ntnet_global.does_email_exist(complete_login))
+				complete_login = "[sanitized_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
+
+			// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
+			if(ntnet_global.does_email_exist(complete_login))
+				to_chat(H, "You were not assigned an email address.")
+				H.mind.store_memory("You were not assigned an email address.")
+			else
+				var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+				EA.password = GenerateKey()
+				EA.login = 	complete_login
+				to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
+				H.mind.initial_email_login["login"] = EA.login
+				H.mind.initial_email_login["password"] = EA.password
+				H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+			// END EMAIL GENERATION
+
 			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)
 			job.apply_fingerprints(H)
 
@@ -439,7 +479,7 @@ var/global/datum/controller/occupations/job_master
 			alt_title = H.mind.role_alt_title
 
 			switch(rank)
-				if("Cyborg")
+				if("Robot")
 					return H.Robotize()
 				if("AI")
 					return H
@@ -471,33 +511,6 @@ var/global/datum/controller/occupations/job_master
 
 		if(job.req_admin_notify)
 			to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
-
-
-		// EMAIL GENERATION
-		var/domain
-		if(H.char_branch && H.char_branch.email_domain)
-			domain = H.char_branch.email_domain
-		else
-			domain = "freemail.nt"
-		var/sanitized_name = sanitize(replacetext(replacetext(lowertext(H.real_name), " ", "."), "'", ""))
-		var/complete_login = "[sanitized_name]@[domain]"
-
-		// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
-		// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
-		if(ntnet_global.does_email_exist(complete_login))
-			complete_login = "[sanitized_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
-
-		// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
-		if(ntnet_global.does_email_exist(complete_login))
-			to_chat(H, "You were not assigned an email address.")
-			H.mind.store_memory("You were not assigned an email address.")
-		else
-			var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
-			EA.password = GenerateKey()
-			EA.login = 	complete_login
-			to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
-			H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
-		// END EMAIL GENERATION
 
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
@@ -540,7 +553,7 @@ var/global/datum/controller/occupations/job_master
 				if(!J)	continue
 				J.total_positions = text2num(value)
 				J.spawn_positions = text2num(value)
-				if(name == "AI" || name == "Cyborg")//I dont like this here but it will do for now
+				if(name == "AI" || name == "Robot")//I dont like this here but it will do for now
 					J.total_positions = 0
 
 		return 1

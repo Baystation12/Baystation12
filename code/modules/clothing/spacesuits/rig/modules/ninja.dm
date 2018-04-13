@@ -242,17 +242,17 @@
 		if(0)
 			return
 		if(1)
-			src.holder.set_light(1.5, 8.5, "#ff0a00")
+			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
 			sleep(6)
 			src.holder.set_light(0, 0, "#000000")
 			spawn(6) .()
 		if(2)
-			src.holder.set_light(1.5, 8.5, "#ff0a00")
+			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
 			sleep(2)
 			src.holder.set_light(0, 0, "#000000")
 			spawn(2) .()
 		if(3)
-			src.holder.set_light(1.5, 8.5, "#ff0a00")
+			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
 
 /obj/item/rig_module/grenade_launcher/ninja
 	suit_overlay = null

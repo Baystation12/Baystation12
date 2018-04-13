@@ -40,9 +40,9 @@ var/bomb_set
 /obj/machinery/nuclearbomb/Process(var/wait)
 	if(timing)
 		timeleft = max(timeleft - (wait / 10), 0)
+		playsound(loc, 'sound/items/timer.ogg', 50)
 		if(timeleft <= 0)
-			spawn
-				explode()
+			addtimer(CALLBACK(src, .proc/explode), 0)
 		GLOB.nanomanager.update_uis(src)
 
 /obj/machinery/nuclearbomb/attackby(obj/item/weapon/O as obj, mob/user as mob, params)
@@ -370,12 +370,10 @@ var/bomb_set
 	item_state = "card-id"
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/weapon/disk/nuclear/New()
-	..()
-	nuke_disks |= src
 
 /obj/item/weapon/disk/nuclear/Initialize()
 	. = ..()
+	nuke_disks |= src
 	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
 	GLOB.moved_event.register(src, src, /obj/item/weapon/disk/nuclear/proc/check_z_level)
 

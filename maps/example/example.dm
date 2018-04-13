@@ -7,8 +7,6 @@
 	#include "example-2.dmm"
 	#include "example-3.dmm"
 
-	#include "../../code/modules/lobby_music/absconditus.dm"
-
 	#define using_map_DATUM /datum/map/example
 
 #elif !defined(MAP_OVERRIDE)

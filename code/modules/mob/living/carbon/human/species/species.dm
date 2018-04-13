@@ -78,6 +78,8 @@
 		/datum/unarmed_attack/bite
 		)
 	var/list/unarmed_attacks = null           // For empty hand harm-intent attack
+
+	var/list/natural_armour_values            // Armour values used if naked.
 	var/brute_mod =      1                    // Physical damage multiplier.
 	var/burn_mod =       1                    // Burn damage multiplier.
 	var/oxy_mod =        1                    // Oxyloss modifier
@@ -85,6 +87,10 @@
 	var/radiation_mod =  1                    // Radiation modifier
 	var/flash_mod =      1                    // Stun from blindness modifier.
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
+	var/stun_mod =       1                    // Stun period modifier.
+	var/paralysis_mod =  1                    // Paralysis period modifier.
+	var/weaken_mod =     1                    // Weaken period modifier.
+
 	var/vision_flags = SEE_SELF               // Same flags as glasses.
 
 	// Death vars.
@@ -105,7 +111,8 @@
 	var/breath_type = "oxygen"                        // Non-oxygen gas breathed, if any.
 	var/poison_type = "phoron"                        // Poisonous air.
 	var/exhale_type = "carbon_dioxide"                // Exhaled gas type.
-	var/cold_level_1 = 243                           // Cold damage level 1 below this point. -30 Celsium degrees
+	var/max_pressure_diff = 60						  // Maximum pressure difference that is safe for lungs
+	var/cold_level_1 = 243                            // Cold damage level 1 below this point. -30 Celsium degrees
 	var/cold_level_2 = 200                            // Cold damage level 2 below this point.
 	var/cold_level_3 = 120                            // Cold damage level 3 below this point.
 	var/heat_level_1 = 360                            // Heat damage level 1 above this point.
@@ -143,7 +150,8 @@
 	var/list/inherent_verbs 	  // Species-specific verbs.
 	var/has_fine_manipulation = 1 // Can use small items.
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
-	var/darksight = 2             // Native darksight distance.
+	var/darksight_range = 2       // Native darksight distance.
+	var/darksight_tint = DARKTINT_NONE // How shadows are tinted.
 	var/species_flags = 0         // Various specific features.
 	var/appearance_flags = 0      // Appearance/display related features.
 	var/spawn_flags = 0           // Flags that specify who can spawn as this species
@@ -200,9 +208,13 @@
 	var/list/equip_adjust = list()
 	var/list/equip_overlays = list()
 
+	var/list/base_auras
+
 	var/sexybits_location	//organ tag where they are located if they can be kicked for increased pain
 
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
+	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job recieves.
+
 /*
 These are all the things that can be adjusted for equipping stuff and
 each one can be in the NORTH, SOUTH, EAST, and WEST direction. Specify
@@ -312,6 +324,21 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
 					"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")
 
+/datum/species/proc/add_base_auras(var/mob/living/carbon/human/H)
+	if(base_auras)
+		for(var/type in base_auras)
+			H.add_aura(new type(H))
+
+/datum/species/proc/remove_base_auras(var/mob/living/carbon/human/H)
+	if(base_auras)
+		var/list/bcopy = base_auras.Copy()
+		for(var/a in H.auras)
+			var/obj/aura/A = a
+			if(is_type_in_list(a, bcopy))
+				bcopy -= A.type
+				H.remove_aura(A)
+				qdel(A)
+
 /datum/species/proc/remove_inherent_verbs(var/mob/living/carbon/human/H)
 	if(inherent_verbs)
 		for(var/verb_path in inherent_verbs)
@@ -326,6 +353,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
+	add_base_auras(H)
 	H.mob_bump_flag = bump_flag
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
@@ -395,12 +423,13 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/handle_vision(var/mob/living/carbon/human/H)
 	H.update_sight()
 	H.set_sight(H.sight|get_vision_flags(H)|H.equipment_vision_flags)
+	H.change_light_colour(darksight_tint)
 
 	if(H.stat == DEAD)
 		return 1
 
 	if(!H.druggy)
-		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(darksight + H.equipment_darkness_modifier, 8))
+		H.set_see_in_dark((H.sight == (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : min(darksight_range + H.equipment_darkness_modifier, 8))
 		if(H.equipment_see_invis)
 			H.set_see_invisible(min(H.see_invisible, H.equipment_see_invis))
 
@@ -570,3 +599,76 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			facial_hair_style_by_gender[facialhairstyle] = S
 
 	return facial_hair_style_by_gender
+
+/datum/species/proc/get_description()
+	var/list/damage_types = list(
+		"physical trauma" = brute_mod,
+		"burns" = burn_mod,
+		"lack of air" = oxy_mod,
+		"poison" = toxins_mod
+	)
+	var/dat = list()
+	dat += "<center><h2>[name] \[<a href='?src=\ref[src];show_species=1'>change</a>\]</h2></center><hr/>"
+	dat += "<table padding='8px'>"
+	dat += "<tr>"
+	dat += "<td width = 400>[blurb]</td>"
+	dat += "<td width = 200 align='center'>"
+	if("preview" in icon_states(get_icobase()))
+		usr << browse_rsc(icon(get_icobase(),"preview"), "species_preview_[name].png")
+		dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
+	dat += "<b>Language:</b> [language]<br/>"
+	dat += "<small>"
+	if(spawn_flags & SPECIES_CAN_JOIN)
+		dat += "</br><b>Often present among humans.</b>"
+	if(spawn_flags & SPECIES_IS_WHITELISTED)
+		dat += "</br><b>Whitelist restricted.</b>"
+	if(!has_organ[BP_HEART])
+		dat += "</br><b>Does not have blood.</b>"
+	if(!has_organ[breathing_organ])
+		dat += "</br><b>Does not breathe.</b>"
+	if(species_flags & SPECIES_FLAG_NO_SCAN)
+		dat += "</br><b>Does not have DNA.</b>"
+	if(species_flags & SPECIES_FLAG_NO_PAIN)
+		dat += "</br><b>Does not feel pain.</b>"
+	if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
+		dat += "</br><b>Has thick skin/scales.</b>"
+	if(species_flags & SPECIES_FLAG_NO_SLIP)
+		dat += "</br><b>Has excellent traction.</b>"
+	if(species_flags & SPECIES_FLAG_NO_POISON)
+		dat += "</br><b>Immune to most poisons.</b>"
+	if(appearance_flags & HAS_A_SKIN_TONE)
+		dat += "</br><b>Has a variety of skin tones.</b>"
+	if(appearance_flags & HAS_SKIN_COLOR)
+		dat += "</br><b>Has a variety of skin colours.</b>"
+	if(appearance_flags & HAS_EYE_COLOR)
+		dat += "</br><b>Has a variety of eye colours.</b>"
+	if(species_flags & SPECIES_FLAG_IS_PLANT)
+		dat += "</br><b>Has a plantlike physiology.</b>"
+	if(slowdown)
+		dat += "</br><b>Moves [slowdown > 0 ? "slower" : "faster"] than most.</b>"
+	for(var/kind in damage_types)
+		if(damage_types[kind] > 1)
+			dat += "</br><b>Vulnerable to [kind].</b>"
+		else if(damage_types[kind] < 1)
+			dat += "</br><b>Resistant to [kind].</b>"
+	dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
+	dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
+	dat += "</br><b>[gas_data.name[poison_type]] is poisonous to them.</b>"
+	dat += "</small></td>"
+	dat += "</tr>"
+	dat += "</table><hr/>"
+	return jointext(dat, null)
+
+/mob/living/carbon/human/verb/check_species()
+	set name = "Check Species Information"
+	set category = "IC"
+	set src = usr
+
+	show_browser(src, species.get_description(), "window=species;size=700x400")
+
+/datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
+	switch(age)
+		if(0 to 22) 	. = -4
+		if(23 to 30) 	. = 0
+		if(31 to 45)	. = 4
+		else			. = 8

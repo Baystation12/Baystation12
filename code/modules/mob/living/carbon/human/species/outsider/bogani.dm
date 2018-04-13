@@ -8,9 +8,10 @@
 	default_language = SPECIES_BOGANI
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	blurb = "An unknown species of Slavers and Conquerors from distant stars yet discovered by the known species, the Bogani are a force to be reckoned with."
-	blood_color = "#FFF5EE"
+	blood_color = "#fff5ee"
 
-	darksight = 7
+	darksight_range = 7
+	darksight_tint = DARKTINT_MODERATE
 
 	total_health = 150
 	blood_volume = 840
@@ -59,9 +60,11 @@
 	default_language = SPECIES_BOGANI
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	blurb = "An unknown species of Slavers and Conquerors from distant stars yet discovered by the known species, the Bogani are a force to be reckoned with."
-	blood_color = "#FFF5EE"
+	blood_color = "#fff5ee"
 
-	darksight = 5
+	darksight_range = 5
+	darksight_tint = DARKTINT_MODERATE
+
 
 	total_health = 90
 	blood_volume = 540

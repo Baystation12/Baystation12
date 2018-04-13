@@ -1,10 +1,11 @@
 #if !defined(using_map_DATUM)
 	#include "overmap_unit_testing.dm"
 
+	#include "overmap_example_lobby.dm"
 	#include "bearcat/bearcat.dm"
 
-	#include "../../code/modules/lobby_music/businessend.dm"
-	#include "../../code/modules/lobby_music/salutjohn.dm"
+	#include "../../code/datums/music_tracks/businessend.dm"
+	#include "../../code/datums/music_tracks/salutjohn.dm"
 
 	#define using_map_DATUM /datum/map/overmap_example
 

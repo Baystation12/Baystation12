@@ -5,17 +5,39 @@
 
 	var/obj/item/clothing/cloth // the clothing on the ironing board
 	var/obj/item/weapon/ironingiron/holding // ironing iron on the board
-	var/image/cloth_overlay // overlay for the clothing
 	var/list/move_sounds = list( // some nasty sounds to make when moving the board
 		'sound/effects/metalscrape1.ogg',
 		'sound/effects/metalscrape2.ogg',
 		'sound/effects/metalscrape3.ogg'
 	)
 
+/obj/structure/bed/roller/ironingboard/Destroy()
+	var/turf/T = get_turf(src)
+	if(cloth)
+		cloth.forceMove(T)
+		remove_item(cloth)
+	if(holding)
+		holding.forceMove(T)
+		remove_item(holding)
+
+	. = ..()
+
+/obj/structure/bed/roller/ironingboard/proc/remove_item(var/obj/item/I)
+	if(I == cloth)
+		cloth = null
+	else if(I == holding)
+		holding = null
+
+	update_icon()
+	GLOB.destroyed_event.unregister(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
+
 // make a screeching noise to drive people mad
 /obj/structure/bed/roller/ironingboard/Move()
-	if(!isspace(src.loc) && !istype(src.loc, /turf/simulated/floor/carpet))
-		playsound(src.loc, pick(move_sounds), 75, 1)
+	var/turf/T = get_turf(src)
+	if(isspace(T) || istype(T, /turf/simulated/floor/carpet))
+		return
+	playsound(T, pick(move_sounds), 75, 1)
+
 	. = ..()
 
 /obj/structure/bed/roller/ironingboard/examine(var/mob/user)
@@ -23,33 +45,40 @@
 	if(cloth)
 		to_chat(user, "<span class='notice'>\The \icon[cloth] [cloth] lies on it.</span>")
 
-/obj/structure/bed/roller/ironingboard/attackby(var/obj/item/weapon/W, var/mob/user)
-	if(istype(W,/obj/item/roller_holder))
-		if(buckled_mob)
+/obj/structure/bed/roller/ironingboard/update_icon()
+	if(density)
+		icon_state = "up"
+	else
+		icon_state = "down"
+	if(holding)
+		icon_state = "holding"
+
+	overlays.Cut()
+	if(cloth)
+		overlays += new /icon(cloth.icon, cloth.icon_state)
+
+/obj/structure/bed/roller/ironingboard/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I,/obj/item/roller_holder))
+		if(holding && user.put_in_hands(holding))
+			remove_item(holding)
+			return
+		else if(cloth && user.put_in_hands(cloth))
+			remove_item(cloth)
+			return
+		else if(buckled_mob)
 			user_unbuckle_mob(user)
 			return
-		if(holding && user.put_in_hands(holding))
-			holding = null
-			icon_state = "up"
-			return
-		if(cloth && user.put_in_hands(cloth))
-			overlays -= cloth_overlay
-			src.cloth_overlay = null
-			src.cloth = null
-			return
 
-		visible_message("[user] collapses [src].")
-		new/obj/item/roller/ironingboard(get_turf(src))
-		QDEL_IN(src, 0)
+		collapse()
 		return
 
 	if(!density)
-		if(istype(W,/obj/item/clothing) || istype(W,/obj/item/weapon/ironingiron))
+		if(istype(I,/obj/item/clothing) || istype(I,/obj/item/weapon/ironingiron))
 			to_chat(user, "<span class='notice'>[src] isn't deployed!</span>")
 			return
 		return ..()
 
-	if(istype(W,/obj/item/clothing))
+	if(istype(I,/obj/item/clothing))
 		if(cloth)
 			to_chat(user, "<span class='notice'>[cloth] is already on the ironing table!</span>")
 			return
@@ -58,19 +87,19 @@
 			return
 
 		if(user.drop_item())
-			cloth = W
-			cloth_overlay = new /icon(W.icon, W.icon_state)
-			overlays += cloth_overlay
-
-			W.forceMove(src)
-		return
-	else if(istype(W,/obj/item/weapon/ironingiron))
-		var/obj/item/weapon/ironingiron/I = W
-
-		if(!I.enabled && user.drop_item())
-			holding = I
+			cloth = I
 			I.forceMove(src)
-			icon_state = "holding"
+			GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
+			update_icon()
+		return
+	else if(istype(I,/obj/item/weapon/ironingiron))
+		var/obj/item/weapon/ironingiron/R = I
+
+		if(!holding && !R.enabled && user.drop_item())
+			holding = R
+			I.forceMove(src)
+			GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
+			update_icon()
 			return
 
 		// anti-wrinkle "massage"
@@ -106,42 +135,45 @@
 
 /obj/structure/bed/roller/ironingboard/attack_hand(var/mob/user)
 	if(density) // check if it's deployed
-		if(buckled_mob)
-			user_unbuckle_mob(user)
-			return
 		if(holding && user.put_in_hands(holding))
-			holding = null
-			icon_state = "up"
+			remove_item(holding)
 			return
-		if(cloth && user.put_in_hands(cloth))
-			overlays -= cloth_overlay
-			src.cloth_overlay = null
-			src.cloth = null
+		else if(cloth && user.put_in_hands(cloth))
+			remove_item(cloth)
+			return
+		else if(buckled_mob)
+			user_unbuckle_mob(user)
 			return
 
 		to_chat(user, "You fold the ironing table down.")
-		density = 0
-		icon_state = "down"
+		set_density(0)
 	else
 		to_chat(user, "You deploy the ironing table.")
-		density = 1
-		icon_state = "up"
+		set_density(1)
+
+	update_icon()
 
 	..()
 
 /obj/structure/bed/roller/ironingboard/MouseDrop(var/over_object, var/src_location, var/over_location)
-	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
-		if(!ishuman(usr))	return
-		if(buckled_mob)	return 0
-		if(cloth)
-			cloth.forceMove(get_turf(src))
-		if(holding)
-			holding.forceMove(get_turf(src))
+	if(!CanMouseDrop(over_object))	return
+	if(!ishuman(usr))	return
+	if(buckled_mob)	return
 
-		visible_message("[usr] collapses [src].")
-		new/obj/item/roller/ironingboard(get_turf(src))
-		QDEL_IN(src, 0)
-		return
+	collapse()
+
+/obj/structure/bed/roller/ironingboard/collapse()
+	var/turf/T = get_turf(src)
+	if(cloth)
+		cloth.forceMove(T)
+		remove_item(cloth)
+	if(holding)
+		holding.forceMove(T)
+		remove_item(holding)
+
+	visible_message("[usr] collapses [src].")
+	new /obj/item/roller/ironingboard(T)
+	qdel(src)
 
 /obj/item/roller/ironingboard
 	name = "ironing board"
@@ -149,6 +181,6 @@
 	icon = 'icons/obj/ironing.dmi'
 
 /obj/item/roller/ironingboard/attack_self(var/mob/user)
-		var/obj/structure/bed/roller/ironingboard/R = new /obj/structure/bed/roller/ironingboard(user.loc)
-		R.add_fingerprint(user)
-		qdel(src)
+	var/obj/structure/bed/roller/ironingboard/R = new /obj/structure/bed/roller/ironingboard(user.loc)
+	R.add_fingerprint(user)
+	qdel(src)

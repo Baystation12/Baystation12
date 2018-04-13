@@ -12,6 +12,7 @@
 		create_default(player.current)
 	else
 		create_antagonist(player, move_to_spawn, do_not_announce, preserve_appearance)
+		player.current.skillset.set_antag_skills()
 		if(!do_not_equip)
 			equip(player.current)
 

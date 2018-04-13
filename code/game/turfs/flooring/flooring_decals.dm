@@ -117,6 +117,21 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/black/three_quarters
 	icon_state = "corner_white_three_quarters"
 
+/obj/effect/floor_decal/corner/black/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/black/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/black/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/black/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/black/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/corner/blue
 	name = "blue corner"
 	color = COLOR_BLUE_GRAY
@@ -126,6 +141,21 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/blue/three_quarters
 	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/blue/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/blue/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/blue/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/blue/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/blue/bordercee
+	icon_state = "bordercolorcee"
 
 /obj/effect/floor_decal/corner/paleblue
 	name = "pale blue corner"
@@ -137,6 +167,21 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/paleblue/three_quarters
 	icon_state = "corner_white_three_quarters"
 
+/obj/effect/floor_decal/corner/paleblue/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/paleblue/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/paleblue/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/paleblue/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/paleblue/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/corner/green
 	name = "green corner"
 	color = COLOR_GREEN_GRAY
@@ -147,6 +192,21 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/green/three_quarters
 	icon_state = "corner_white_three_quarters"
 
+/obj/effect/floor_decal/corner/green/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/green/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/green/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/green/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/green/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/corner/lime
 	name = "lime corner"
 	color = COLOR_PALE_GREEN_GRAY
@@ -156,6 +216,21 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/lime/three_quarters
 	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/lime/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/lime/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/lime/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/lime/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/lime/bordercee
+	icon_state = "bordercolorcee"
 
 /obj/effect/floor_decal/corner/yellow
 	name = "yellow corner"
@@ -170,6 +245,21 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/yellow/full
 	icon_state = "corner_white_full"
 
+/obj/effect/floor_decal/corner/yellow/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/yellow/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/yellow/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/yellow/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/yellow/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/corner/beige
 	name = "beige corner"
 	color = COLOR_BEIGE
@@ -179,6 +269,21 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/beige/three_quarters
 	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/beige/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/beige/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/beige/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/beige/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/beige/bordercee
+	icon_state = "bordercolorcee"
 
 /obj/effect/floor_decal/corner/red
 	name = "red corner"
@@ -193,6 +298,21 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/red/full
 	icon_state = "corner_white_full"
 
+/obj/effect/floor_decal/corner/red/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/red/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/red/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/red/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/red/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/corner/pink
 	name = "pink corner"
 	color = COLOR_PALE_RED_GRAY
@@ -202,6 +322,21 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/pink/three_quarters
 	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/pink/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/pink/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/pink/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/pink/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/pink/bordercee
+	icon_state = "bordercolorcee"
 
 /obj/effect/floor_decal/corner/purple
 	name = "purple corner"
@@ -213,6 +348,24 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/purple/three_quarters
 	icon_state = "corner_white_three_quarters"
 
+/obj/effect/floor_decal/corner/purple/three_quarters
+	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/purple/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/purple/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/purple/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/purple/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/purple/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/corner/mauve
 	name = "mauve corner"
 	color = COLOR_PALE_PURPLE_GRAY
@@ -222,6 +375,24 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/mauve/three_quarters
 	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/mauve/three_quarters
+	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/mauve/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/mauve/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/mauve/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/mauve/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/mauve/bordercee
+	icon_state = "bordercolorcee"
 
 /obj/effect/floor_decal/corner/orange
 	name = "orange corner"
@@ -233,6 +404,21 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/corner/orange/three_quarters
 	icon_state = "corner_white_three_quarters"
 
+/obj/effect/floor_decal/corner/orange/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/orange/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/orange/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/orange/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/orange/bordercee
+	icon_state = "bordercolorcee"
+
 /obj/effect/floor_decal/corner/brown
 	name = "brown corner"
 	color = COLOR_DARK_BROWN
@@ -242,6 +428,21 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/brown/three_quarters
 	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/brown/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/brown/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/brown/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/brown/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/brown/bordercee
+	icon_state = "bordercolorcee"
 
 /obj/effect/floor_decal/corner/white
 	name = "white corner"
@@ -262,6 +463,67 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/corner/grey/three_quarters
 	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/white/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/white/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/white/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/white/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/white/bordercee
+	icon_state = "bordercolorcee"
+
+/obj/effect/floor_decal/corner/grey/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/grey/three_quarters
+	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/grey/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/grey/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/grey/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/grey/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/grey/bordercee
+	icon_state = "bordercolorcee"
+
+/obj/effect/floor_decal/corner/lightgrey
+	name = "lightgrey corner"
+	color = "#a8b2b6"
+
+/obj/effect/floor_decal/corner/lightgrey/diagonal
+	icon_state = "corner_white_diagonal"
+
+/obj/effect/floor_decal/corner/lightgrey/three_quarters
+	icon_state = "corner_white_three_quarters"
+
+/obj/effect/floor_decal/corner/lightgrey/border
+	icon_state = "bordercolor"
+
+/obj/effect/floor_decal/corner/lightgrey/bordercorner
+	icon_state = "bordercolorcorner"
+
+/obj/effect/floor_decal/corner/lightgrey/bordercorner2
+	icon_state = "bordercolorcorner2"
+
+/obj/effect/floor_decal/corner/lightgrey/borderfull
+	icon_state = "bordercolorfull"
+
+/obj/effect/floor_decal/corner/lightgrey/bordercee
+	icon_state = "bordercolorcee"
 
 /obj/effect/floor_decal/spline/plain
 	name = "spline - plain"
@@ -548,3 +810,173 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/ntlogo
 	icon_state = "ntlogo"
+
+//Techfloor
+
+/obj/effect/floor_decal/corner_techfloor_gray
+	name = "corner techfloorgray"
+	icon_state = "corner_techfloor_gray"
+
+/obj/effect/floor_decal/corner_techfloor_gray/diagonal
+	name = "corner techfloorgray diagonal"
+	icon_state = "corner_techfloor_gray_diagonal"
+
+/obj/effect/floor_decal/corner_techfloor_gray/full
+	name = "corner techfloorgray full"
+	icon_state = "corner_techfloor_gray_full"
+
+/obj/effect/floor_decal/corner_techfloor_grid
+	name = "corner techfloorgrid"
+	icon_state = "corner_techfloor_grid"
+
+/obj/effect/floor_decal/corner_techfloor_grid/diagonal
+	name = "corner techfloorgrid diagonal"
+	icon_state = "corner_techfloor_grid_diagonal"
+
+/obj/effect/floor_decal/corner_techfloor_grid/full
+	name = "corner techfloorgrid full"
+	icon_state = "corner_techfloor_grid_full"
+
+/obj/effect/floor_decal/corner_steel_grid
+	name = "corner steel_grid"
+	icon_state = "steel_grid"
+
+/obj/effect/floor_decal/corner_steel_grid/diagonal
+	name = "corner tsteel_grid diagonal"
+	icon_state = "steel_grid_diagonal"
+
+/obj/effect/floor_decal/corner_steel_grid/full
+	name = "corner steel_grid full"
+	icon_state = "steel_grid_full"
+
+/obj/effect/floor_decal/borderfloor
+	name = "border floor"
+	icon_state = "borderfloor_white"
+	color = COLOR_GUNMETAL
+
+/obj/effect/floor_decal/borderfloor/corner
+	icon_state = "borderfloorcorner_white"
+
+/obj/effect/floor_decal/borderfloor/corner2
+	icon_state = "borderfloorcorner2_white"
+
+/obj/effect/floor_decal/borderfloor/full
+	icon_state = "borderfloorfull_white"
+
+/obj/effect/floor_decal/borderfloor/cee
+	icon_state = "borderfloorcee_white"
+
+/obj/effect/floor_decal/borderfloorblack
+	name = "border floor"
+	icon_state = "borderfloor_white"
+	color = COLOR_DARK_GRAY
+
+/obj/effect/floor_decal/borderfloorblack/corner
+	icon_state = "borderfloorcorner_white"
+
+/obj/effect/floor_decal/borderfloorblack/corner2
+	icon_state = "borderfloorcorner2_white"
+
+/obj/effect/floor_decal/borderfloorblack/full
+	icon_state = "borderfloorfull_white"
+
+/obj/effect/floor_decal/borderfloorblack/cee
+	icon_state = "borderfloorcee_white"
+
+/obj/effect/floor_decal/borderfloorwhite
+	name = "border floor"
+	icon_state = "borderfloor_white"
+
+/obj/effect/floor_decal/borderfloorwhite/corner
+	icon_state = "borderfloorcorner_white"
+
+/obj/effect/floor_decal/borderfloorwhite/corner2
+	icon_state = "borderfloorcorner2_white"
+
+/obj/effect/floor_decal/borderfloorwhite/full
+	icon_state = "borderfloorfull_white"
+
+/obj/effect/floor_decal/borderfloorwhite/cee
+	icon_state = "borderfloorcee_white"
+
+/obj/effect/floor_decal/steeldecal
+	name = "steel decal"
+	icon_state = "steel_decals1"
+	color = COLOR_GUNMETAL
+
+/obj/effect/floor_decal/steeldecal/steel_decals1
+	icon_state = "steel_decals1"
+
+/obj/effect/floor_decal/steeldecal/steel_decals2
+	icon_state = "steel_decals2"
+
+/obj/effect/floor_decal/steeldecal/steel_decals3
+	icon_state = "steel_decals3"
+
+/obj/effect/floor_decal/steeldecal/steel_decals4
+	icon_state = "steel_decals4"
+
+/obj/effect/floor_decal/steeldecal/steel_decals5
+	icon_state = "steel_decals5"
+
+/obj/effect/floor_decal/steeldecal/steel_decals6
+	icon_state = "steel_decals6"
+
+/obj/effect/floor_decal/steeldecal/steel_decals7
+	icon_state = "steel_decals7"
+
+/obj/effect/floor_decal/steeldecal/steel_decals8
+	icon_state = "steel_decals8"
+
+/obj/effect/floor_decal/steeldecal/steel_decals9
+	icon_state = "steel_decals9"
+
+/obj/effect/floor_decal/steeldecal/steel_decals10
+	icon_state = "steel_decals10"
+
+/obj/effect/floor_decal/steeldecal/steel_decals_central1
+	icon_state = "steel_decals_central1"
+
+/obj/effect/floor_decal/steeldecal/steel_decals_central2
+	icon_state = "steel_decals_central2"
+
+/obj/effect/floor_decal/steeldecal/steel_decals_central3
+	icon_state = "steel_decals_central3"
+
+/obj/effect/floor_decal/steeldecal/steel_decals_central4
+	icon_state = "steel_decals_central4"
+
+/obj/effect/floor_decal/steeldecal/steel_decals_central5
+	icon_state = "steel_decals_central5"
+
+/obj/effect/floor_decal/steeldecal/steel_decals_central6
+	icon_state = "steel_decals_central6"
+
+/obj/effect/floor_decal/steeldecal/steel_decals_central7
+	icon_state = "steel_decals_central7"
+
+
+/obj/effect/floor_decal/techfloor
+	name = "techfloor edges"
+	icon_state = "techfloor_edges"
+
+/obj/effect/floor_decal/techfloor/corner
+	name = "techfloor corner"
+	icon_state = "techfloor_corners"
+
+/obj/effect/floor_decal/techfloor/orange
+	name = "techfloor edges"
+	icon_state = "techfloororange_edges"
+
+/obj/effect/floor_decal/techfloor/orange/corner
+	name = "techfloor corner"
+	icon_state = "techfloororange_corners"
+
+/obj/effect/floor_decal/techfloor/hole
+	name = "hole left"
+	icon_state = "techfloor_hole_left"
+
+/obj/effect/floor_decal/techfloor/hole/right
+	name = "hole right"
+	icon_state = "techfloor_hole_right"
+

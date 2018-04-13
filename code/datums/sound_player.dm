@@ -1,4 +1,4 @@
-var/decl/sound_player/sound_player = new()
+GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 /*
 	A sound player/manager for looping 3D sound effects.
@@ -17,7 +17,7 @@ var/decl/sound_player/sound_player = new()
 
 	var/datum/stack/available_channels
 	var/list/taken_channels // taken_channels and source_id_uses can be merged into one but would then require a meta-object to store the different values I desire.
-	var/list/source_id_uses
+	var/list/sound_tokens_by_sound_id
 
 	var/static/list/reserved_channels = list(1,2,3,123) // The following channels have been found to be in use at various locations in the codebase
 
@@ -25,28 +25,43 @@ var/decl/sound_player/sound_player = new()
 	..()
 	available_channels = new()
 	taken_channels = list()
-	source_id_uses = list()
+	sound_tokens_by_sound_id = list()
 
-/decl/sound_player/proc/PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff, var/prefer_mute)
-	var/channel = PrivGetChannel(sound_id)
-	if(!channel)
-		log_warning("All available sound channels are in active use.")
-		return
 
-	return new/datum/sound_token(source, sound_id, sound, volume, channel, range, falloff, prefer_mute)
+//This can be called if either we're doing whole sound setup ourselves or it will be as part of from-file sound setup
+/decl/sound_player/proc/PlaySoundDatum(var/atom/source, var/sound_id, var/sound/sound, var/range, var/prefer_mute)
+	var/token_type = isnum(sound.environment) ? /datum/sound_token : /datum/sound_token/static_environment
+	return new token_type(source, sound_id, sound, range, prefer_mute)
+
+/decl/sound_player/proc/PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff = 1, var/echo, var/frequency, var/prefer_mute)
+	var/sound/S = istype(sound, /sound) ? sound : new(sound)
+	S.environment = 0 // Ensures a 3D effect even if x/y offset happens to be 0 the first time it's played
+	S.volume  = volume
+	S.falloff = falloff
+	S.echo = echo
+	S.frequency = frequency
+	S.repeat = TRUE
+
+	return PlaySoundDatum(source, sound_id, S, range, prefer_mute)
 
 /decl/sound_player/proc/PrivStopSound(var/datum/sound_token/sound_token)
-	var/channel = sound_token.channel
+	var/channel = sound_token.sound.channel
 	var/sound_id = sound_token.sound_id
 
-	if(--source_id_uses[sound_id])
+	var/sound_tokens = sound_tokens_by_sound_id[sound_id]
+	if(!(sound_token in sound_tokens))
+		return
+	sound_tokens -= sound_token
+	if(length(sound_tokens))
 		return
 
 	available_channels.Push(channel)
 	taken_channels -= sound_id
-	source_id_uses -= sound_id
+	sound_tokens_by_sound_id -= sound_id
 
-/decl/sound_player/proc/PrivGetChannel(var/sound_id)
+/decl/sound_player/proc/PrivGetChannel(var/datum/sound_token/sound_token)
+	var/sound_id = sound_token.sound_id
+
 	. = taken_channels[sound_id] // Does this sound_id already have an assigned channel?
 	if(!.)
 		. = available_channels.Pop() // If not, check if someone else has released their channel.
@@ -56,11 +71,13 @@ var/decl/sound_player/sound_player = new()
 			while(. && (. in reserved_channels))
 			if(. <= 0) // Should never be negative but never say never.
 				return
-
 		taken_channels[sound_id] = .
-	source_id_uses[sound_id]++
 
-
+	var/sound_tokens = sound_tokens_by_sound_id[sound_id]
+	if(!sound_tokens)
+		sound_tokens = list()
+		sound_tokens_by_sound_id[sound_id] = sound_tokens
+	sound_tokens += sound_token
 
 /*
 	Outwardly this is a merely a toke/little helper that a user utilize to adjust sounds as desired (and possible).
@@ -68,35 +85,45 @@ var/decl/sound_player/sound_player = new()
 */
 /datum/sound_token
 	var/atom/source    // Where the sound originates from
-	var/channel        // The current sound channel
-	var/falloff        // How many turfs away the sound will still play at full volume
 	var/list/listeners // Assoc: Atoms hearing this sound, and their sound datum
 	var/range          // How many turfs away the sound will stop playing completely
 	var/prefer_mute    // If sound should be muted instead of stopped when mob moves out of range. In the general case this should be avoided because listeners will remain tracked.
-	var/sound          // Sound file, not sound datum
+	var/sound/sound    // Sound datum, holds most sound relevant data
 	var/sound_id       // The associated sound id, used for cleanup
 	var/status = 0     // Paused, muted, running? Global for all listeners
 	var/listener_status// Paused, muted, running? Specific for the given listener.
-	var/volume         // Take a guess
-
 	var/const/SOUND_STOPPED = 0x8000
 
 	var/datum/proximity_trigger/square/proxy_listener
 	var/list/can_be_heard_from
 
-/datum/sound_token/New(var/atom/source, var/sound_id, var/sound, var/volume, var/channel, var/range = 4, var/falloff = 1, var/prefer_mute = FALSE)
+/datum/sound_token/New(var/atom/source, var/sound_id, var/sound/sound, var/range = 4, var/prefer_mute = FALSE)
 	..()
+	if(!istype(source))
+		CRASH("Invalid sound source: [log_info_line(source)]")
+	if(!istype(sound))
+		CRASH("Invalid sound: [log_info_line(sound)]")
+	if(sound.repeat && !sound_id)
+		CRASH("No sound id given")
+	if(!PrivIsValidEnvironment(sound.environment))
+		CRASH("Invalid sound environment: [log_info_line(sound.environment)]")
+
+	src.prefer_mute = prefer_mute
+	src.range       = range
+	src.source      = source
+	src.sound       = sound
+	src.sound_id    = sound_id
+
+	if(sound.repeat) // Non-looping sounds may not reserve a sound channel due to the risk of not hearing when someone forgets to stop the token
+		var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
+		if(!channel)
+			CRASH("All available sound channels are in active use.")
+		sound.channel = channel
+	else
+		sound.channel = 0
+
 	listeners = list()
 	listener_status = list()
-
-	src.channel = channel
-	src.falloff = falloff
-	src.range = range
-	src.prefer_mute = prefer_mute
-	src.sound = sound
-	src.sound_id = sound_id
-	src.source = source
-	src.volume = volume
 
 	GLOB.destroyed_event.register(source, src, /datum/sound_token/proc/Stop)
 
@@ -110,9 +137,9 @@ var/decl/sound_player/sound_player = new()
 
 datum/sound_token/proc/SetVolume(var/new_volume)
 	new_volume = Clamp(new_volume, 0, 100)
-	if(volume == new_volume)
+	if(sound.volume == new_volume)
 		return
-	volume = new_volume
+	sound.volume = new_volume
 	PrivUpdateListeners()
 
 datum/sound_token/proc/Mute()
@@ -133,16 +160,17 @@ datum/sound_token/proc/Mute()
 		return
 	status |= SOUND_STOPPED
 
-	var/sound/null_sound = new(channel = channel)
+	var/sound/null_sound = new(channel = sound.channel)
 	for(var/listener in listeners)
 		PrivRemoveListener(listener, null_sound)
 	listeners = null
+	listener_status = null
 
 	GLOB.destroyed_event.unregister(source, src, /datum/sound_token/proc/Stop)
 	QDEL_NULL(proxy_listener)
 	source = null
 
-	sound_player.PrivStopSound(src)
+	GLOB.sound_player.PrivStopSound(src)
 
 /datum/sound_token/proc/PrivLocateListeners(var/list/prior_turfs, var/list/current_turfs)
 	if(status & SOUND_STOPPED)
@@ -180,10 +208,7 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	if(listener in listeners)
 		return
 
-	var/sound/S = new(sound, repeat = TRUE, volume = volume, channel = channel)
-	S.environment = 0 // Ensures a 3D effect even if x/y offset happens to be 0 the first time it's played
-	S.falloff = falloff
-	listeners[listener] = S
+	listeners += listener
 
 	GLOB.moved_event.register(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
 	GLOB.destroyed_event.register(listener, src, /datum/sound_token/proc/PrivRemoveListener)
@@ -191,16 +216,13 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	PrivUpdateListenerLoc(listener)
 
 /datum/sound_token/proc/PrivRemoveListener(var/atom/listener, var/sound/null_sound)
-	if(!null_sound)
-		null_sound = new(channel = channel)
+	null_sound = null_sound || new(channel = sound.channel)
 	sound_to(listener, null_sound)
 	GLOB.moved_event.unregister(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
 	GLOB.destroyed_event.unregister(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
 
 /datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener)
-	var/sound/S = listeners[listener]
-
 	var/turf/source_turf = get_turf(source)
 	var/turf/listener_turf = get_turf(listener)
 
@@ -214,12 +236,11 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	else if(prefer_mute)
 		listener_status[listener] &= ~SOUND_MUTE
 
-	S.x = source_turf.x - listener_turf.x
-	S.y = source_turf.y - listener_turf.y
-
+	sound.x = source_turf.x - listener_turf.x
+	sound.y = source_turf.y - listener_turf.y
 	// Far as I can tell from testing, sound priority just doesn't work.
 	// Sounds happily steal channels from each other no matter what.
-	S.priority = Clamp(255 - distance, 0, 255)
+	sound.priority = Clamp(255 - distance, 0, 255)
 	PrivUpdateListener(listener)
 
 /datum/sound_token/proc/PrivUpdateListeners()
@@ -227,14 +248,27 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 		PrivUpdateListener(listener)
 
 /datum/sound_token/proc/PrivUpdateListener(var/listener)
-	var/sound/S = listeners[listener]
-	S.volume = volume
-	S.status = status|listener_status[listener]|SOUND_UPDATE
-	sound_to(listener, S)
+	sound.environment = PrivGetEnvironment(listener)
+	sound.status = status|listener_status[listener]|SOUND_UPDATE
+	sound_to(listener, sound)
+
+/datum/sound_token/proc/PrivGetEnvironment(var/listener)
+	var/area/A = get_area(listener)
+	return A && PrivIsValidEnvironment(A.sound_env) ? A.sound_env : sound.environment
+
+/datum/sound_token/proc/PrivIsValidEnvironment(var/environment)
+	if(islist(environment) && length(environment) != 23)
+		return FALSE
+	if(!isnum(environment) || environment < 0 || environment > 25)
+		return FALSE
+	return TRUE
+
+/datum/sound_token/static_environment/PrivGetEnvironment()
+	return sound.environment
 
 /obj/sound_test
 	var/sound = 'sound/misc/TestLoop1.ogg'
 
 /obj/sound_test/New()
 	..()
-	sound_player.PlayLoopingSound(src, /obj/sound_test, sound, 50, 3)
+	GLOB.sound_player.PlayLoopingSound(src, /obj/sound_test, sound, 50, 3)

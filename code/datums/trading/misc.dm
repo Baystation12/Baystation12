@@ -95,8 +95,6 @@
 								/obj/item/clothing/mask/gas/mime        = TRADER_THIS_TYPE,
 								/obj/item/clothing/shoes/clown_shoes    = TRADER_THIS_TYPE,
 								/obj/item/clothing/under/rank/clown     = TRADER_THIS_TYPE,
-								/obj/item/device/pda/clown              = TRADER_THIS_TYPE,
-								/obj/item/weapon/cartridge/clown        = TRADER_THIS_TYPE,
 								/obj/item/weapon/stamp/clown            = TRADER_THIS_TYPE,
 								/obj/item/weapon/storage/backpack/clown = TRADER_THIS_TYPE,
 								/obj/item/weapon/bananapeel             = TRADER_THIS_TYPE,

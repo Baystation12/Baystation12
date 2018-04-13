@@ -24,7 +24,9 @@
 		/obj/item/weapon/circuitboard,
 		/obj/item/weapon/smes_coil,
 		/obj/item/weapon/computer_hardware,
-		/obj/item/weapon/fuel_assembly
+		/obj/item/weapon/fuel_assembly,
+		/obj/item/stack/material/deuterium,
+		/obj/item/stack/material/tritium
 		)
 
 	var/obj/item/wrapped = null // Item currently being held.
@@ -116,7 +118,8 @@
 
 	can_hold = list(
 	/obj/item/organ,
-	/obj/item/robot_parts
+	/obj/item/robot_parts,
+	/obj/item/weapon/reagent_containers/ivbag
 	)
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item

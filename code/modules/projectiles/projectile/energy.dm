@@ -39,7 +39,7 @@
 	sparks.start()
 
 	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
-	new /obj/effect/effect/smoke/illumination(T, 5, brightness, brightness, light_colour)
+	new /obj/effect/effect/smoke/illumination(T, 5, 4, 1, light_colour)
 
 //blinds people like the flash round, but in a larger area and can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
@@ -51,11 +51,11 @@
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
 	light_colour = pick("#e58775", "#ffffff", "#90ff90", "#a09030")
-
+	set_light(1, 1, 4, 2, light_colour)
 	..() //initial flash
 
 	//residual illumination
-	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240) SECONDS, range=8, power=3, color=light_colour) //same lighting power as flare
+	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240), range=8, power=1, color=light_colour) //same lighting power as flare
 
 /obj/item/projectile/energy/electrode
 	name = "electrode"
@@ -63,8 +63,11 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	nodamage = 1
 	agony = 50
-	damage_type = PAIN
-	//Damage will be handled on the MOB side, to prevent window shattering.
+	damage_type = PAIN //Damage will be handled on the MOB side, to prevent window shattering.
+	step_delay = 0.7
+
+/obj/item/projectile/energy/electrode/green
+	icon_state = "spark_green"
 
 /obj/item/projectile/energy/electrode/stunshot
 	nodamage = 0

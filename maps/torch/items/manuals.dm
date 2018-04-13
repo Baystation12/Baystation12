@@ -94,6 +94,13 @@
 	<i>H.B.</i></tt>
 	"}
 
+/obj/item/weapon/paper/liason_note
+	name = "note"
+	info = {"
+	<i>Pick your way out.<br>
+	H.B.</i>
+	"}
+
 /obj/item/weapon/folder/envelope/captain
 	desc = "A thick envelope. The SCG crest is stamped in the corner, along with 'TOP SECRET - TORCH UMBRA'."
 

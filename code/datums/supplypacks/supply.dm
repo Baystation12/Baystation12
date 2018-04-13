@@ -62,7 +62,7 @@
 
 /decl/hierarchy/supply_pack/supply/spare_pda
 	name = "Spare PDAs"
-	contains = list(/obj/item/device/pda = 3)
+	contains = list(/obj/item/modular_computer/pda = 3)
 	cost = 10
 	containername = "\improper Spare PDA crate"
 

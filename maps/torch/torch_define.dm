@@ -4,8 +4,6 @@
 	path = "torch"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
-	lobby_icon = 'maps/torch/icons/lobby.dmi'
-
 	station_levels = list(1,2,3,4,5)
 	contact_levels = list(1,2,3,4,5)
 	player_levels = list(1,2,3,4,5,8)
@@ -45,7 +43,6 @@
 	away_site_budget = 3
 
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
-	lobby_screens = list("title","title2")
 
 /datum/map/torch/setup_map()
 	..()
@@ -67,7 +64,7 @@
 		if(O.name == torch.name)
 			continue
 		space_things |= O
-	
+
 	for(var/obj/effect/overmap/O in space_things)
 		var/location_desc = " at present co-ordinates."
 		if (O.loc != torch.loc)

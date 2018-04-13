@@ -50,3 +50,18 @@
 /obj/item/projectile/spell_projectile/fireball
 	name = "fireball"
 	icon_state = "fireball"
+
+/spell/targeted/projectile/dumbfire/fireball/firebolt
+	name = "Firebolt"
+	desc = "A quick-casted fireball. Burns the user, and their enemies, but is much faster to shoot."
+	feedback = "FO"
+	charge_type = Sp_HOLDVAR
+	invocation = "Ignus!"
+	holder_var_type = "fireloss"
+	holder_var_amount = 10
+	amt_dam_brute = 10
+	amt_dam_fire = 15
+	ex_heavy = -1
+	ex_light = 1
+	ex_flash = 3
+	hud_state = "firebolt"

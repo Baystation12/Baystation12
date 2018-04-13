@@ -271,14 +271,11 @@
 		var/perpname = "wot"
 		var/criminal = "None"
 
-		if(wear_id)
-			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
+		var/obj/item/weapon/card/id/id = GetIdCard()
+		if(istype(id))
+			perpname = id.registered_name
 		else
-			perpname = name
+			perpname = src.name
 
 		if(perpname)
 			var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
@@ -292,12 +289,9 @@
 		var/perpname = "wot"
 		var/medical = "None"
 
-		if(wear_id)
-			if(istype(wear_id,/obj/item/weapon/card/id))
-				perpname = wear_id:registered_name
-			else if(istype(wear_id,/obj/item/device/pda))
-				var/obj/item/device/pda/tempPda = wear_id
-				perpname = tempPda.owner
+		var/obj/item/weapon/card/id/id = GetIdCard()
+		if(istype(id))
+			perpname = id.registered_name
 		else
 			perpname = src.name
 

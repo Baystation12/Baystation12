@@ -6,7 +6,7 @@
 		)
 
 	desc = "A basic energy-based gun with a secure authorization chip."
-	req_access = list(access_brig)
+	req_one_access = list(access_brig, access_heads)
 	var/list/authorized_modes = list(ALWAYS_AUTHORIZED) // index of this list should line up with firemodes, unincluded firemodes at the end will default to unauthorized
 	var/registered_owner
 	var/emagged = 0
@@ -24,13 +24,10 @@
 	if(istype(W, /obj/item/weapon/card/id))
 		if(!emagged)
 			if(!registered_owner)
-				if(allowed(user))
-					var/obj/item/weapon/card/id/id = W
-					GLOB.registered_weapons += src
-					registered_owner = id.registered_name
-					user.visible_message("[user] swipes an ID through \the [src], registering it.", "You swipe an ID through \the [src], registering it.")
-				else
-					to_chat(user, "<span class='warning'>Access denied.</span>")
+				var/obj/item/weapon/card/id/id = W
+				GLOB.registered_weapons += src
+				registered_owner = id.registered_name
+				user.visible_message("[user] swipes an ID through \the [src], registering it.", "You swipe an ID through \the [src], registering it.")
 			else
 				to_chat(user, "This weapon is already registered, you must reset it first.")
 		else
@@ -72,12 +69,16 @@
 	return 1
 
 /obj/item/weapon/gun/energy/secure/special_check()
-	if(!emagged && (!authorized_modes[sel_mode] || !registered_owner))
+	if(!emagged && !fire_free() && (!authorized_modes[sel_mode] || !registered_owner))
 		audible_message("<span class='warning'>\The [src] buzzes, refusing to fire.</span>")
 		playsound(loc, 'sound/machines/buzz-sigh.ogg', 30, 0)
 		return 0
 
 	. = ..()
+
+/obj/item/weapon/gun/energy/secure/proc/fire_free()
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	return security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)
 
 /obj/item/weapon/gun/energy/secure/switch_firemodes()
 	var/next_mode = get_next_authorized_mode()
@@ -105,7 +106,7 @@
 			. = 1
 		if(. == sel_mode) // just in case all modes are unauthorized
 			return null
-	while(!authorized_modes[.] && !emagged)
+	while(!authorized_modes[.] && !emagged && !fire_free())
 
 /obj/item/weapon/gun/energy/secure/emag_act(var/charges, var/mob/user)
 	if(emagged || !charges)
@@ -125,11 +126,11 @@
 	modifystate = "revolverstun"
 	item_state = null
 
-	projectile_type = /obj/item/projectile/energy/electrode
+	projectile_type = /obj/item/projectile/energy/electrode/green
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_DATA = 2)
 	max_shots = 8
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode, modifystate="revolverstun"),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode/green, modifystate="revolverstun"),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/energy/electrode/stunshot, modifystate="revolvershock")
 		)
 
@@ -153,6 +154,21 @@
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
 		)
 
+/obj/item/weapon/gun/energy/secure/gun/mounted
+	name = "robot energy gun"
+	desc = "A robot-mounted equivalnet of the LAEP90-S, which is always registered to its owner."
+	self_recharge = 1
+	use_external_power = 1
+	one_hand_penalty = 0
+
+/obj/item/weapon/gun/energy/secure/gun/mounted/New()
+	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)
+	if(!borg)
+		CRASH("Invalid spawn location.")
+	registered_owner = borg.name
+	GLOB.registered_cyborg_weapons += src
+	..()
+
 /obj/item/weapon/gun/energy/secure/gun/small
 	name = "small energy gun"
 	desc = "Combining the two LAEP90 variants, the secure and compact LAEP90-CS is the next best thing to keeping your security forces on a literal leash."
@@ -169,3 +185,18 @@
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="smallgunshock"),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam/smalllaser, modifystate="smallgunkill"),
 		)
+
+/obj/item/weapon/gun/energy/secure/laser
+	name = "laser carbine"
+	desc = "A Hephaestus Industries G40E carbine, designed to kill with concentrated energy blasts. Fitted with an NT1019 chip to make sure killcount is tracked appropriately."
+	icon_state = "lasersec"
+	item_state = "laser"
+	slot_flags = SLOT_BELT|SLOT_BACK
+	w_class = ITEM_SIZE_LARGE
+	force = 10
+	one_hand_penalty = 2
+	accuracy = 2
+	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	projectile_type = /obj/item/projectile/beam/midlaser
+	wielded_item_state = "laser-wielded"
