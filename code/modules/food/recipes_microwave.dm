@@ -794,9 +794,9 @@ I said no!
 /datum/recipe/chocolateegg
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
-		/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
+		/obj/item/weapon/reagent_containers/food/snacks/candy/chocolatebar,
 	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/chocolateegg
+	result = /obj/item/weapon/reagent_containers/food/snacks/candy/chocolateegg
 
 /datum/recipe/sausage
 	items = list(
@@ -997,7 +997,7 @@ I said no!
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/lemoncake
 
 /datum/recipe/cake/chocolate
-	items = list(/obj/item/weapon/reagent_containers/food/snacks/chocolatebar)
+	items = list(/obj/item/weapon/reagent_containers/food/snacks/candy/chocolatebar)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/chocolatecake
 
 //datum/recipe/cake/birthday
@@ -1018,4 +1018,4 @@ I said no!
 
 /datum/recipe/cake/chocolatebar
 	reagents = list(/datum/reagent/drink/milk/chocolate = 10, /datum/reagent/nutriment/coco = 5, /datum/reagent/sugar = 5)
-	result = /obj/item/weapon/reagent_containers/food/snacks/chocolatebar
+	result = /obj/item/weapon/reagent_containers/food/snacks/candy/chocolatebar
