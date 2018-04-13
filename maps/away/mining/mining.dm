@@ -135,34 +135,36 @@
 	cost = 1
 	accessibility_weight = 10
 	spawn_guaranteed = TRUE
+	base_turf_for_zs = /turf/simulated/floor/asteroid
 
 /obj/effect/shuttle_landmark/orb/nav1
-	name = "Landing zone #1"
+	name = "Anchor point A"
 	landmark_tag = "nav_orb_1"
 
 /obj/effect/shuttle_landmark/orb/nav2
-	name = "Landing zone #2"
+	name = "Anchor point B"
 	landmark_tag = "nav_orb_2"
 
 /obj/effect/shuttle_landmark/orb/nav3
-	name = "Landing zone #3"
+	name = "Anchor point C"
 	landmark_tag = "nav_orb_3"
 
 /obj/effect/shuttle_landmark/orb/nav4
-	name = "Landing zone #4"
+	name = "Anchor point D"
 	landmark_tag = "nav_orb_4"
 
 /obj/effect/shuttle_landmark/orb/nav5
-	name = "Landing zone #5"
+	name = "Anchor point E"
 	landmark_tag = "nav_orb_5"
 
 /obj/effect/shuttle_landmark/orb/nav6
-	name = "Landing zone #6"
+	name = "Anchor point F"
 	landmark_tag = "nav_orb_6"
 
 /obj/effect/shuttle_landmark/orb/nav7
-	name = "Landing zone #7"
+	name = "Landing zone A"
 	landmark_tag = "nav_orb_7"
+	base_area = /area/mine/explored
 
 /mob/living/simple_animal/parrot/space
 	name = "space parrot"
@@ -185,7 +187,6 @@
 	see_in_dark = 7
 	can_escape = 1
 
-
 /mob/living/simple_animal/parrot/space/Initialize()
 	. = ..()
 	name = pick("Simurgh", "Ziz", "Phoenix", "Fenghuang")
@@ -193,6 +194,7 @@
 	M.Scale(2)
 	transform = M
 	color = get_random_colour(lower = 190)
+
 
 /obj/structure/showcase/totem
 	name = "totem"
@@ -208,10 +210,11 @@
 	..()
 	to_chat(usr, "It's been engraved with the symbols '<font face='Shage'>LArge bIrD [number]</font>'.") //i am not a linguist
 
+
 /obj/item/weapon/stool/stone/New(var/newloc)
 	..(newloc,"sandstone")
 
-/turf/unsimulated/floor/stone
+/turf/simulated/floor/airless/stone
 	name = "temple floor"
 	desc = "You can only imagine what once took place in these halls."
 	icon = 'icons/turf/flooring/cult.dmi'
