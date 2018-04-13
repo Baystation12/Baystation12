@@ -1,0 +1,5 @@
+author: "PurpleMartinJCK"
+delete-after: True
+changes: 
+  - rscadd: "Adds species based darkvision"
+  - tweak: "Tweaks light falloff calculations"
