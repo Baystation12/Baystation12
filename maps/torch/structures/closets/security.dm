@@ -125,7 +125,6 @@
 	return list(
 		/obj/item/clothing/gloves/forensic,
 		/obj/item/device/radio/headset/headset_sec,
-		/obj/item/clothing/suit/armor/vest/detective,
 		/obj/item/clothing/head/helmet/solgov/security,
 		/obj/item/clothing/suit/armor/pcarrier/medium/security,
 		/obj/item/weapon/gun/energy/secure/gun/small,
@@ -142,10 +141,6 @@
 		/obj/item/weapon/folder/red,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape/random = 3,
-		/obj/item/weapon/forensics/sample_kit/powder,
-		/obj/item/weapon/forensics/sample_kit,
-		/obj/item/device/uv_light,
-		/obj/item/weapon/reagent_containers/spray/luminol,
 		/obj/item/weapon/reagent_containers/syringe,
 		/obj/item/clothing/glasses/sunglasses/sechud/toggle,
 		/obj/item/device/holowarrant,
