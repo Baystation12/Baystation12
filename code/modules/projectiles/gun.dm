@@ -305,7 +305,13 @@
 		if(pointblank)
 			process_point_blank(projectile, user, target)
 
-		if(process_projectile(projectile, user, target, user.zone_sel.selecting, clickparams))
+		var/target_zone
+		if(user.zone_sel)
+			target_zone = user.zone_sel.selecting
+		else
+			target_zone = "chest"
+
+		if(process_projectile(projectile, user, target, target_zone, clickparams))
 			handle_post_fire(user, target, pointblank, reflex)
 			update_icon()
 
@@ -320,6 +326,7 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	//user.setMoveCooldown(move_delay)//
 	next_fire_time = world.time + fire_delay
+	return 1
 
 //obtains the next projectile to fire
 /obj/item/weapon/gun/proc/consume_next_projectile()

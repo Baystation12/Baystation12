@@ -8,7 +8,7 @@
 		var/spawn_type
 		if(prob(33))
 			number_to_spawn = 1
-			spawn_type = /mob/living/simple_animal/hostile/flood/combat_human
+			spawn_type = /mob/living/simple_animal/hostile/flood/combat_form/human
 		else if(prob(50))
 			number_to_spawn = 1
 			spawn_type = /mob/living/simple_animal/hostile/flood/carrier

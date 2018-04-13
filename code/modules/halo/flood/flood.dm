@@ -1,6 +1,9 @@
 GLOBAL_VAR(max_flood_simplemobs)
 GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
+#define INFECT_DELAY 13 SECONDS
+#define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
+#define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
@@ -19,6 +22,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	wander = 0
 	melee_damage_lower = 5
 	melee_damage_upper = 10
+	min_gas = list()
+	max_gas = list()
 	var/datum/flood_spawner/flood_spawner
 
 /mob/living/simple_animal/hostile/flood/death()
@@ -99,6 +104,46 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	pixel_y = rand(0,24)
 	spawn(30)
 		spawning = 0
+
+/mob/living/simple_animal/hostile/flood/proc/infect_mob(var/mob/living/carbon/human/h)
+	visible_message("<span class = 'danger'>[name] leaps at [h.name], tearing at their armor and burrowing through their skin!</span>")
+	adjustBruteLoss(1)
+	src = null //Just in case we get killed.
+	sound_to(h,TO_PLAYER_INFECTED_SOUND)
+	spawn(INFECT_DELAY)
+		h.Stun(999)
+		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
+		new /obj/effect/decal/cleanable/blood/splatter(h.loc)
+		var/mob/living/simple_animal/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_form/human
+		new_combat_form.maxHealth = 200 //Buff their health a bit.
+		new_combat_form.health = 200
+		new_combat_form.forceMove(h.loc)
+		new_combat_form.ckey = h.ckey
+		new_combat_form.name = h.real_name
+		if(prob(25))
+			playsound(src,PLAYER_TRANSFORM_SFX,100)
+		if(new_combat_form.ckey)
+			new_combat_form.stop_automated_movement = 1
+		for(var/obj/i in h.contents)
+			h.drop_from_inventory(i)
+		qdel(h)
+
+/mob/living/simple_animal/hostile/flood/infestor/proc/attempt_nearby_infect()
+	for(var/mob/living/carbon/human/h in view(2,src))
+		var/mob_healthdam = h.getBruteLoss() + h.getFireLoss()
+		if(mob_healthdam > h.maxHealth/4) //Less than quarter health? Jump 'em.
+			infect_mob(h)
+			return //No more than one at a time.
+
+/mob/living/simple_animal/hostile/flood/infestor/Move()
+	. = ..()
+	if(ckey || client)
+		return
+	attempt_nearby_infect()
+
+/mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
+	. = ..()
+	attempt_nearby_infect()
 
 /mob/living/simple_animal/hostile/flood/infestor/adjustBruteLoss(damage)
 	if(health > 0)
@@ -198,7 +243,62 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		qdel(src)
 	return ..(0,deathmessage)
 
-/mob/living/simple_animal/hostile/flood/combat_human
+/mob/living/simple_animal/hostile/flood/combat_form
+
+	var/obj/item/weapon/gun/our_gun
+
+/mob/living/simple_animal/hostile/flood/combat_form/IsAdvancedToolUser()
+	if(our_gun) //Only class us as an advanced tool user if we need it to use our gun.
+		return 1
+	return 0
+
+/mob/living/simple_animal/hostile/flood/combat_form/can_wield_item(var/obj/item)
+	if(istype(item,/obj/item/weapon/gun))
+		return TRUE
+	return FALSE
+
+/mob/living/simple_animal/hostile/flood/combat_form/UnarmedAttack(var/atom/attacked)
+	. = ..(attacked)
+	pickup_gun(attacked)
+
+/mob/living/simple_animal/hostile/flood/combat_form/RangedAttack(var/atom/attacked)
+	if(!our_gun)
+		return
+	var/gun_fire = our_gun.Fire(attacked,src)
+	if(!ckey && !gun_fire)
+		drop_gun()
+
+/mob/living/simple_animal/hostile/flood/combat_form/proc/pickup_gun(var/obj/item/weapon/gun/G)
+	if(!istype(G))
+		return
+	if(our_gun)
+		drop_gun()
+	visible_message("<span class = 'notice'>[name] picks up [G.name]</span>")
+	our_gun = G
+	contents += our_gun
+	ranged = 1
+
+/mob/living/simple_animal/hostile/flood/combat_form/proc/drop_gun()
+	if(our_gun)
+		visible_message("<span class = 'notice'>[name] drops [our_gun.name]</span>")
+		our_gun.forceMove(loc)
+		contents -= our_gun
+		ranged = 0
+
+/mob/living/simple_animal/hostile/flood/combat_form/death()
+	drop_gun()
+	. = ..()
+
+/mob/living/simple_animal/hostile/flood/combat_form/Move()
+	. = ..()
+	if(ckey || client)
+		return
+	if(!our_gun)
+		for(var/obj/item/weapon/gun/G in view(1,src))
+			pickup_gun(G)
+			return
+
+/mob/living/simple_animal/hostile/flood/combat_form/human
 	name = "Flood infested human"
 	icon = 'code/modules/halo/flood/flood_combat_human.dmi'
 	icon_state = "marine_infested"
