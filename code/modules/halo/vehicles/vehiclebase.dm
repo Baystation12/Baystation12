@@ -148,7 +148,8 @@
 
 	occupants += user
 	occupants[user] = position
-	user.forceMove(contents)
+	user.loc = contents
+	contents += user	
 	update_object_sprites()
 	return 1
 
@@ -199,7 +200,7 @@
 		return
 	occupants -= user
 	contents -= user
-	user.forceMove(pick(locs))
+	user.loc = pick(src.locs)
 	update_object_sprites()
 
 /obj/vehicles/verb/enter_vehicle()
