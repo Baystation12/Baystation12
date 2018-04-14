@@ -869,6 +869,7 @@
 	on = !on
 	if(on && activation_sound)
 		playsound(src.loc, activation_sound, 75, 1)
+	update_icon()
 	return 1
 
 /obj/item/toy/desk/newtoncradle
