@@ -11230,8 +11230,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/secure_closet/forensics,
+/obj/structure/filingcabinet/chestdrawer,
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "vj" = (
@@ -12302,6 +12301,10 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/security/processing)
+"xu" = (
+/obj/structure/table/glass,
+/turf/simulated/floor/tiled/white,
+/area/security/detectives_office)
 "xv" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 4
@@ -13136,10 +13139,6 @@
 /obj/machinery/microscope,
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
-"zo" = (
-/obj/structure/filingcabinet/chestdrawer,
-/turf/simulated/floor/tiled/white,
-/area/security/detectives_office)
 "zp" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -13720,8 +13719,6 @@
 /area/security/detectives_office)
 "AQ" = (
 /obj/structure/table/glass,
-/obj/item/weapon/forensics/sample_kit,
-/obj/item/device/uv_light,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
 /obj/item/weapon/reagent_containers/spray/luminol,
 /obj/structure/noticeboard{
@@ -17965,10 +17962,6 @@
 	},
 /turf/simulated/floor/wood,
 /area/crew_quarters/gym)
-"Lg" = (
-/obj/item/modular_computer/console/preset/medical,
-/turf/simulated/floor/tiled/white,
-/area/security/detectives_office)
 "Lh" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/firedoor/border_only,
@@ -18584,7 +18577,6 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
 "Og" = (
-/obj/item/modular_computer/console/preset/security,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -18592,6 +18584,8 @@
 	dir = 4;
 	pixel_x = -22
 	},
+/obj/structure/closet/secure_closet/forensics,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "Oh" = (
@@ -42995,7 +42989,7 @@ rp
 sD
 tX
 vf
-Lg
+xp
 Og
 yq
 zn
@@ -43400,9 +43394,9 @@ sF
 tW
 vh
 wp
-xp
+xu
 ys
-zo
+yr
 yr
 AR
 vh
