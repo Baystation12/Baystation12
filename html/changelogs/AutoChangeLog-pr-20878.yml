@@ -1,0 +1,5 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "The default type of robot in character select is now 'robot', a positronic unit, as opposed to 'cyborg', which has a human brain."
+  - tweak: "Robots with a computer chip based brain are now referred to as 'drones'."
