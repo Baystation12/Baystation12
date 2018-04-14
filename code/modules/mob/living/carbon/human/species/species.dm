@@ -9,6 +9,10 @@
 	var/name_plural                                      // Pluralized name (since "[name]s" is not always valid)
 	var/blurb = "A completely nondescript species."      // A brief lore summary for use in the chargen screen.
 
+	var/list/body_builds = list(
+		new/datum/body_build
+	)
+
 	// Icon/appearance vars.
 	var/icobase = 'icons/mob/human_races/r_human.dmi'   // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.

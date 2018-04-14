@@ -231,7 +231,7 @@ var/global/list/damage_icon_parts = list()
 		var/cache_index = "[O.damage_state]/[O.icon_name]/[use_colour]/[species.get_bodytype(src)]"
 		if(damage_icon_parts[cache_index] == null)
 			DI = new /icon(species.get_damage_overlays(src), O.damage_state)			// the damage icon for whole human
-			DI.Blend(new /icon(species.get_damage_mask(src), O.icon_name), ICON_MULTIPLY)	// mask with this organ's pixels
+			DI.Blend(new /icon(species.get_damage_mask(src), "[O.icon_name]"), ICON_MULTIPLY)	// mask with this organ's pixels
 			DI.Blend(use_colour, ICON_MULTIPLY)
 			damage_icon_parts[cache_index] = DI
 		else
@@ -265,7 +265,7 @@ var/global/list/damage_icon_parts = list()
 	if(gender == FEMALE)
 		g = "female"
 
-	var/icon_key = "[species.get_race_key(src)][g][s_tone][r_skin][g_skin][b_skin]"
+	var/icon_key = "[species.get_race_key(src)][g][body_build.index][s_tone][r_skin][g_skin][b_skin]"
 	if(lip_style)
 		icon_key += "[lip_style]"
 	else

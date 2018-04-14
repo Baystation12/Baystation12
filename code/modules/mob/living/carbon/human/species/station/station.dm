@@ -15,6 +15,11 @@
 	max_age = 100
 	gluttonous = GLUT_TINY
 
+	body_builds = list(
+		new/datum/body_build,
+		new/datum/body_build/slim
+	)
+
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_NORMAL | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
