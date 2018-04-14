@@ -23,7 +23,8 @@
 		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/glasses/sunglasses/big,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
-		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50)
+		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50),
+		/obj/item/weapon/storage/fakebook
 	)
 
 /obj/structure/closet/secure_closet/representative
