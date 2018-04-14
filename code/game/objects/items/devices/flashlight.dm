@@ -297,6 +297,7 @@
 		I.blend_mode = BLEND_ADD
 		overlays += I
 		item_state = "glowstick-on"
+		set_light(flashlight_max_bright, flashlight_inner_range, flashlight_outer_range, 2, light_color)
 	else
 		icon_state = "glowstick"
 	var/mob/M = loc
