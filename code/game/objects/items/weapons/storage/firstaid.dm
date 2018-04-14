@@ -180,6 +180,23 @@
 	use_to_pickup = 1
 	use_sound = null
 
+/obj/item/weapon/storage/pill_bottle/afterattack(mob/living/target, mob/living/user, proximity_flag)
+	if(!proximity_flag || !istype(target) || target != user)
+		return 1
+	if(!contents.len)
+		to_chat(user, "<span class='warning'>It's empty!</span>")
+		return 1
+	var/zone = user.zone_sel.selecting
+	if(zone == BP_MOUTH && target.can_eat())
+		user.visible_message("<span class='notice'>[user] pops a pill from \the [src].</span>")
+		playsound(get_turf(src), 'sound/effects/peelz.ogg', 50)
+		var/list/peelz = filter_list(contents,/obj/item/weapon/reagent_containers/pill/)
+		if(peelz.len)
+			var/obj/item/weapon/reagent_containers/pill/P = pick(peelz)
+			remove_from_storage(P)
+			P.attack(target,user)
+			return 1
+	
 /obj/item/weapon/storage/pill_bottle/antitox
 	name = "bottle of Dylovene pills"
 	desc = "Contains pills used to counter toxins."
