@@ -80,6 +80,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/check_customitem_activity,
 	/client/proc/man_up,
 	/client/proc/global_man_up,
+	/client/proc/only_game,
+	/client/proc/global_only_game,
 	/client/proc/response_team, // Response Teams admin verb,
 	/client/proc/toggle_antagHUD_use,
 	/client/proc/toggle_antagHUD_restrictions,
@@ -923,6 +925,8 @@ var/list/admin_verbs_mentor = list(
 	set name = "Man Up"
 	set desc = "Tells mob to man up and deal with it."
 
+	if(!check_rights(R_FUN))
+		return
 	to_chat(T, "<span class='notice'><b><font size=3>Man up and deal with it.</font></b></span>")
 	to_chat(T, "<span class='notice'>Move on.</span>")
 
@@ -933,11 +937,40 @@ var/list/admin_verbs_mentor = list(
 	set name = "Man Up Global"
 	set desc = "Tells everyone to man up and deal with it."
 
+	if(!check_rights(R_FUN))
+		return
 	for (var/mob/T as mob in SSmobs.mob_list)
 		to_chat(T, "<br><center><span class='notice'><b><font size=4>Man up.<br> Deal with it.</font></b><br>Move on.</span></center><br>")
 		sound_to(T, 'sound/voice/ManUp1.ogg')
 
 	log_and_message_admins("told everyone to man up and deal with it.")
+
+/client/proc/only_game(mob/M as mob in GLOB.clients)
+	set category = "Fun"
+	set name = "Only A Game"
+	set desc = "Reminds a mob that this is only a game. They don't need to be upset."
+
+	if(!check_rights(R_FUN))
+		return
+	to_chat(M, "<span class='notice'><b><font size=3>It's only a game.</font></b></span>")
+	to_chat(M, "<span class='notice'>Why do you have to be mad?</span>")
+	sound_to(M, 'sound/voice/its_only_game.ogg')
+
+	log_and_message_admins("told [key_name(M)] that it's only a game.")
+
+
+/client/proc/global_only_game()
+	set category = "Fun"
+	set name = "Only A Game Global"
+	set desc = "Reminds everyone that this is only a game. They don't need to be upset."
+
+	if(!check_rights(R_FUN))
+		return
+
+	to_world("<br><center><span class='notice'><b><font size=4>It's only a game.<br> Why do you have to be mad?</font></b><br>Move on.</span></center><br>")
+	sound_to(world, 'sound/voice/its_only_game.ogg')
+
+	log_and_message_admins("told everyone that it's only a game.")
 
 /client/proc/give_spell(mob/T as mob in SSmobs.mob_list) // -- Urist
 	set category = "Fun"
