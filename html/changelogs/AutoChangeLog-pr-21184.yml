@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "The automatic transfer vote called at 3 hours has been changed. The 'Continue the Round' option will now extend the round by 30 minutes instead of 1 hour."

@@ -1,5 +1,0 @@
-author: "HetNeSS"
-delete-after: True
-changes: 
-  - bugfix: "Expedition storage area layout fixed. All lights should be connected properly now."
-  - maptweak: "Sorted out the expedition storage inventory. Piping, maint door location adjusted."
