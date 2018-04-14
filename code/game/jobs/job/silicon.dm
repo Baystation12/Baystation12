@@ -22,7 +22,7 @@
 	return (empty_playable_ai_cores.len != 0)
 
 /datum/job/cyborg
-	title = "Cyborg"
+	title = "Robot"
 	department_flag = MSC
 
 	total_positions = 2
@@ -30,7 +30,7 @@
 	supervisors = "your laws and the AI"	//Nodrak
 	selection_color = "#254c25"
 	minimal_player_age = 7
-	alt_titles = list("Android", "Robot")
+	alt_titles = list("Drone", "Cyborg")
 	account_allowed = 0
 	economic_modifier = 0
 	loadout_allowed = FALSE
