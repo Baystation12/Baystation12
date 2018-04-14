@@ -1,0 +1,5 @@
+author: "Sbotkin"
+delete-after: True
+changes: 
+  - maptweak: "Removed excess stuff (extra tools, consoles) from the forensic technician's laboratory."
+  - rscdel: "Removed excess tools from the forensic technician's locker."
