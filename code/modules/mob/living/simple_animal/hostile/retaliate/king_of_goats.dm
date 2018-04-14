@@ -39,7 +39,7 @@
 	var/spellscast = 0
 	var/phase3 = 0
 	var/datum/sound_token/boss_theme
-	var/sound_id
+	var/sound_id = "goat"
 
 //alright let's get stupid
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Initialize()
