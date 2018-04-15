@@ -81,7 +81,7 @@
 
 /decl/hierarchy/outfit/job/UNSC_ship/odsto
 	name = "ONI Bridge Officer"
-	l_ear = /obj/item/device/radio/headset/unsc/odst
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	uniform = /obj/item/clothing/under/utility
 	shoes = /obj/item/clothing/shoes/dress
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
