@@ -5,7 +5,6 @@
 	icon_state = "telescreen"
 	icon_state_unpowered = "telescreen"
 	icon_state_menu = "menu"
-	icon_state_screensaver = "standby"
 	hardware_flag = PROGRAM_TELESCREEN
 	anchored = TRUE
 	density = 0
