@@ -17154,7 +17154,7 @@
 	},
 /area/tdome)
 "aMf" = (
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/merchant_station)
 "aMg" = (
 /turf/simulated/floor/asteroid,
@@ -17501,7 +17501,7 @@
 /area/merchant_station)
 "aNc" = (
 /obj/structure/disposalpipe/segment,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/merchant_station)
 "aNd" = (
 /obj/random/trash,
@@ -17718,7 +17718,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/merchant_station)
 "aNC" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/merchant_station)
 "aND" = (
 /obj/random/coin,
@@ -19345,7 +19345,7 @@
 /area/merchant_station)
 "aRn" = (
 /obj/structure/sign/warning/docking_area,
-/turf/simulated/wall,
+/turf/simulated/wall/prepainted,
 /area/merchant_station)
 "aRo" = (
 /obj/structure/disposalpipe/segment{
