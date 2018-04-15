@@ -126,7 +126,7 @@ var/list/flooring_types
 
 /decl/flooring/tiling/white
 	desc = "How sterile."
-	color = COLOR_WHITE
+	color = COLOR_OFF_WHITE
 	build_type = /obj/item/stack/tile/floor_white
 
 /decl/flooring/tiling/white/mono

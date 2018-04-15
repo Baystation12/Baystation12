@@ -851,35 +851,37 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/borderfloor
 	name = "border floor"
-	icon_state = "borderfloor"
+	icon_state = "borderfloor_white"
+	color = COLOR_GUNMETAL
 
 /obj/effect/floor_decal/borderfloor/corner
-	icon_state = "borderfloorcorner"
+	icon_state = "borderfloorcorner_white"
 
 /obj/effect/floor_decal/borderfloor/corner2
-	icon_state = "borderfloorcorner2"
+	icon_state = "borderfloorcorner2_white"
 
 /obj/effect/floor_decal/borderfloor/full
-	icon_state = "borderfloorfull"
+	icon_state = "borderfloorfull_white"
 
 /obj/effect/floor_decal/borderfloor/cee
-	icon_state = "borderfloorcee"
+	icon_state = "borderfloorcee_white"
 
 /obj/effect/floor_decal/borderfloorblack
 	name = "border floor"
-	icon_state = "borderfloor_black"
+	icon_state = "borderfloor_white"
+	color = COLOR_DARK_GRAY
 
 /obj/effect/floor_decal/borderfloorblack/corner
-	icon_state = "borderfloorcorner_black"
+	icon_state = "borderfloorcorner_white"
 
 /obj/effect/floor_decal/borderfloorblack/corner2
-	icon_state = "borderfloorcorner2_black"
+	icon_state = "borderfloorcorner2_white"
 
 /obj/effect/floor_decal/borderfloorblack/full
-	icon_state = "borderfloorfull_black"
+	icon_state = "borderfloorfull_white"
 
 /obj/effect/floor_decal/borderfloorblack/cee
-	icon_state = "borderfloorcee_black"
+	icon_state = "borderfloorcee_white"
 
 /obj/effect/floor_decal/borderfloorwhite
 	name = "border floor"
