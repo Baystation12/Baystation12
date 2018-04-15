@@ -38,7 +38,11 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		qdel(dummy)
 
 	// Generic record
-	set_name(H ? H.real_name : "Unset")
+	if(!H.med_record && !H.sec_record && !H.gen_record)
+		set_name(H ? H.real_name + " (No record)" : "Unset")
+	else
+		set_name(H ? H.real_name : "Unset")
+
 	set_job(H ? GetAssignment(H) : "Unset")
 	set_sex(H ? gender2text(H.gender) : "Unset")
 	set_age(H ? H.age : 30)
