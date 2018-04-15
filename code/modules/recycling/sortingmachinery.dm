@@ -233,6 +233,7 @@
 
 /obj/item/stack/package_wrap
 	name = "package wrapper"
+	desc = "Heavy duty brown paper used to wrap packages to protect them during shipping."
 	singular_name = "sheet"
 	max_amount = 25
 	icon = 'icons/obj/items.dmi'

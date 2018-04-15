@@ -3868,7 +3868,7 @@
 /turf/simulated/wall,
 /area/ship/scrap/hidden)
 "gm" = (
-/obj/structure/closet/firecloset/full,
+/obj/structure/closet/firecloset,
 /obj/effect/decal/cleanable/cobweb,
 /obj/effect/floor_decal/corner/blue{
 	dir = 1

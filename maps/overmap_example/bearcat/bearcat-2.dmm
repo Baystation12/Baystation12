@@ -5761,7 +5761,7 @@
 	icon_state = "bulb1";
 	dir = 1
 	},
-/obj/structure/closet/firecloset/full,
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/atmos)
 "Cc" = (
