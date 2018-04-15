@@ -119,6 +119,8 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 /proc/get_announcement_frequency(var/datum/job/job)
 	if(job.faction_flag & UNSC)
 		return "SHIPCOM"
+	if(job.faction_flag & ODST)
+		return "TACCOM"
 	if(job.faction_flag & INNIE)
 		return "INNIECOM"
 	if(job.faction_flag & COLONY)

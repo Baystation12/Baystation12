@@ -1,7 +1,7 @@
 
 /obj/effect/overmap/ship/unsc_frigate
-	name = "UNSC Frigate"
-	desc = "A UNSC Frigate"
+	name = "UNSC Heavens Above"
+	desc = "A frigate in service of the UNSC"
 
 	fore_dir = EAST
 

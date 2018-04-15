@@ -133,13 +133,16 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	channels = list(SEC_NAME = 1,EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/fleetcom
-	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,FLEETCOM_NAME = 1,EBAND_NAME = 1)
+	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,FLEETCOM_NAME = 1,EBAND_NAME = 1, TACCOM = 1)
 
 /obj/item/device/encryptionkey/officercom
 	channels = list(SHIPCOM_NAME = 1,FLEETCOM_NAME = 1, EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/squadcom
 	channels = list(SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1)
+
+/obj/item/device/encryptionkey/taccomo
+	channels = list(SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1, ODST_NAME = 1, FLEETCOM = 1)
 
 /obj/item/device/encryptionkey/taccom
 	channels = list(SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1, ODST_NAME = 1)
@@ -162,9 +165,12 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	if(frequency == halo_frequencies.police_freq)
 		return "secradio"
 
-	// ODST channel
-	if(frequency == halo_frequencies.odst_freq)
+	// ODST/Covenant Battlenet channels
+	if(frequency == halo_frequencies.odst_freq || frequency == halo_frequencies.covenant_battlenet_freq)
 		return "centradio"
+
+	if(frequency == halo_frequencies.fleetcom_freq)
+		return "medradio"
 
 	//general ship comms
 	if(frequency == halo_frequencies.shipcom_freq)
