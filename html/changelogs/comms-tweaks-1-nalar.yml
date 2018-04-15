@@ -1,0 +1,9 @@
+author: Nalar
+delete-after: True
+changes: 
+  - rscadd: New arrivals for ODST now announced.
+  - tweak: The CO now has access to TACCOM for coordination between the marines and ODST.
+  - tweak: The CO, Bridge Officer and XO now all have access to FLEETCOM to allow for greater coordination.
+  - tweak: The overmap now shows the UNSC Heavens Above rather than UNSC Frigate.
+  - tweak: The arrivals message now refers to the Heavens Above by name, instead of UNSC Frigate.
+  - bugfix: The covenant battlenet is now coloured, and is the same colour as TACCOM.
