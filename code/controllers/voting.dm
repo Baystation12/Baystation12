@@ -1,6 +1,6 @@
-var/datum/controller/vote/vote = new()
+/var/datum/controller/vote/vote = new()
 
-datum/controller/vote
+/datum/controller/vote
 	var/initiator = null
 	var/started_time = null
 	var/time_remaining = 0
@@ -16,6 +16,7 @@ datum/controller/vote
 	var/list/additional_text = list()
 	var/auto_muted = 0
 	var/auto_add_antag = 0
+	var/current_vote_type = null
 
 	New()
 		if(vote != src)
@@ -72,6 +73,7 @@ datum/controller/vote
 		time_remaining = 0
 		mode = null
 		question = null
+		current_vote_type = null
 		choices.Cut()
 		voted.Cut()
 		voting.Cut()
@@ -300,8 +302,8 @@ datum/controller/vote
 				var/next_allowed_time = (started_time + config.vote_delay)
 				if(next_allowed_time > world.time)
 					return 0
-
 			reset()
+			current_vote_type = vote_type
 			switch(vote_type)
 				if("restart")
 					choices.Add("Restart Round","Continue Playing")
@@ -397,50 +399,53 @@ datum/controller/vote
 
 		. = "<html><head><title>Voting Panel</title></head><body>"
 		if(mode)
-			if(question)	. += "<h2>Vote: '[question]'</h2>"
-			else			. += "<h2>Vote: [capitalize(mode)]</h2>"
-			. += "Time Left: [time_remaining] s<hr>"
-			. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='3' align = 'center'><b>Vote</b></td><td align = 'center'><b>Votes</b></td>"
-			if(capitalize(mode) == "Gamemode") .+= "<td align = 'center'><b>Minimum Players</b></td></tr>"
+			if(config.vote_no_dead_crew_transfer && current_vote_type == "crew_transfer" && !isliving(C.mob))
+				. += "<h2>Sorry, you are currently unable to vote while out-of-round right now.</h2><br>"
+			else
+				if(question)	. += "<h2>Vote: '[question]'</h2>"
+				else			. += "<h2>Vote: [capitalize(mode)]</h2>"
+				. += "Time Left: [time_remaining] s<hr>"
+				. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='3' align = 'center'><b>Votex</b></td><td align = 'center'><b>Votes</b></td>"
+				if(capitalize(mode) == "Gamemode") .+= "<td align = 'center'><b>Minimum Players</b></td></tr>"
 
-			var/totalvotes = 0
-			for(var/i = 1, i <= choices.len, i++)
-				totalvotes += choices[choices[i]]
+				var/totalvotes = 0
+				for(var/i = 1, i <= choices.len, i++)
+					totalvotes += choices[choices[i]]
 
-			for(var/i = 1, i <= choices.len, i++)
-				var/votes = choices[choices[i]]
-				var/votepercent
-				if(totalvotes)
-					votepercent = round((votes/totalvotes)*100)
-				else
-					votepercent = 0
-				if(!votes)	votes = 0
-				. += "<tr><td>"
-				if(mode == "gamemode")
-					. += "[gamemode_names[choices[i]]]"
-				else
-					. += "[choices[i]]"
-				. += "</td><td>"
-				if(current_high_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];high_vote=[i]'>First</a></b>"
-				else
-					. += "<a href='?src=\ref[src];high_vote=[i]'>First</a>"
-				. += "</td><td>"
-				if(current_med_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];med_vote=[i]'>Second</a></b>"
-				else
-					. += "<a href='?src=\ref[src];med_vote=[i]'>Second</a>"
-				. += "</td><td>"
-				if(current_low_votes[C.ckey] == i)
-					. += "<b><a href='?src=\ref[src];low_vote=[i]'>Third</a></b>"
-				else
-					. += "<a href='?src=\ref[src];low_vote=[i]'>Third</a>"
-				. += "</td><td align = 'center'>[votepercent]%</td>"
-				if (additional_text.len >= i)
-					. += additional_text[i]
-				. += "</tr>"
+				for(var/i = 1, i <= choices.len, i++)
+					var/votes = choices[choices[i]]
+					var/votepercent
+					if(totalvotes)
+						votepercent = round((votes/totalvotes)*100)
+					else
+						votepercent = 0
+					if(!votes)	votes = 0
+					. += "<tr><td>"
+					if(mode == "gamemode")
+						. += "[gamemode_names[choices[i]]]"
+					else
+						. += "[choices[i]]"
+					. += "</td><td>"
+					if(current_high_votes[C.ckey] == i)
+						. += "<b><a href='?src=\ref[src];high_vote=[i]'>First</a></b>"
+					else
+						. += "<a href='?src=\ref[src];high_vote=[i]'>First</a>"
+					. += "</td><td>"
+					if(current_med_votes[C.ckey] == i)
+						. += "<b><a href='?src=\ref[src];med_vote=[i]'>Second</a></b>"
+					else
+						. += "<a href='?src=\ref[src];med_vote=[i]'>Second</a>"
+					. += "</td><td>"
+					if(current_low_votes[C.ckey] == i)
+						. += "<b><a href='?src=\ref[src];low_vote=[i]'>Third</a></b>"
+					else
+						. += "<a href='?src=\ref[src];low_vote=[i]'>Third</a>"
+					. += "</td><td align = 'center'>[votepercent]%</td>"
+					if (additional_text.len >= i)
+						. += additional_text[i]
+					. += "</tr>"
 
-			. += "</table><hr>"
+				. += "</table><hr>"
 			if(admin)
 				. += "(<a href='?src=\ref[src];vote=cancel'>Cancel Vote</a>) "
 		else
@@ -537,7 +542,7 @@ datum/controller/vote
 		usr.vote()
 
 // Helper proc for determining whether addantag vote can be called.
-datum/controller/vote/proc/is_addantag_allowed(var/automatic)
+/datum/controller/vote/proc/is_addantag_allowed(var/automatic)
 	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
 	if(!ticker || (ticker.current_state <= 2) || !ticker.mode)
 		return 0
