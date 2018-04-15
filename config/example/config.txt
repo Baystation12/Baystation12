@@ -154,6 +154,9 @@ VOTE_AUTOGAMEMODE_TIMELEFT 100
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE
 
+## Prevents players not in-round from voting on crew transfer votes.
+#NO_DEAD_VOTE_CREW_TRANSFER
+
 ## players' votes default to "No vote" (otherwise,  default to "No change")
 DEFAULT_NO_VOTE
 
