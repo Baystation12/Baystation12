@@ -76,6 +76,17 @@
 			if(covered)
 				to_chat(H, "<span class='danger'>[pick(heat_discomfort_strings)]</span>")
 
+/datum/species/proc/get_body_build(var/gender, var/prefered)
+	for(var/datum/body_build/BB in body_builds)
+		if( (!prefered || BB.name == prefered) && (gender in BB.genders) )
+			return BB
+
+/datum/species/proc/get_body_build_list(var/gender)
+	. = list()
+	for(var/datum/body_build/BB in body_builds)
+		if(gender in BB.genders)
+			. += BB.name
+
 /datum/species/proc/get_random_name(var/gender)
 	if(!name_language)
 		if(gender == FEMALE)

@@ -69,7 +69,7 @@
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
 	arterial_bleed_severity = 0.75
-	gendered_icon = 1
+	//gendered_icon = 1
 
 /obj/item/organ/external/arm/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || (agony_amount < 5))
@@ -84,7 +84,7 @@
 	body_part = ARM_RIGHT
 	joint = "right elbow"
 	amputation_point = "right shoulder"
-	gendered_icon = 1
+	//gendered_icon = 1
 
 /obj/item/organ/external/leg
 	organ_tag = BP_L_LEG
@@ -103,7 +103,7 @@
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
 	arterial_bleed_severity = 0.75
-	gendered_icon = 1
+	//gendered_icon = 1
 
 /obj/item/organ/external/leg/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || agony_amount < 5)
@@ -137,7 +137,7 @@
 	has_tendon = TRUE
 	tendon_name = "Achilles tendon"
 	arterial_bleed_severity = 0.5
-	gendered_icon = 1
+	//gendered_icon = 1
 
 /obj/item/organ/external/foot/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || agony_amount < 5)
@@ -176,7 +176,7 @@
 	has_tendon = TRUE
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
-	gendered_icon = 1
+	//gendered_icon = 1
 
 /obj/item/organ/external/hand/stun_act(var/stun_amount, var/agony_amount)
 	if(!owner || (agony_amount < 5))
