@@ -353,7 +353,7 @@
 	// This uses similar editing mechanism as the FileManager program, therefore it supports various paper tags and remembers formatting.
 	if(href_list["edit_body"])
 		var/oldtext = html_decode(msg_body)
-		oldtext = replacetext(oldtext, "\[editorbr\]", "\n")
+		oldtext = replacetext(oldtext, "\[br\]", "\n")
 
 		var/newtext = sanitize(replacetext(input(usr, "Enter your message. You may use most tags from paper formatting", "Message Editor", oldtext) as message|null, "\n", "\[br\]"), 20000)
 		if(newtext)
@@ -403,9 +403,11 @@
 	if(href_list["send"])
 		if(!current_account)
 			return 1
-		if((msg_title == "") || (msg_body == "") || (msg_recipient == ""))
-			error = "Error sending mail: Title or message body is empty!"
+		if((msg_body == "") || (msg_recipient == ""))
+			error = "Error sending mail: Message body is empty!"
 			return 1
+		if(!length(msg_title))
+			msg_title = "No subject"
 
 		var/datum/computer_file/data/email_message/message = new()
 		message.title = msg_title
@@ -428,12 +430,14 @@
 		var/datum/computer_file/data/email_message/M = find_message_by_fuid(href_list["reply"])
 		if(!istype(M))
 			return 1
-
+		error = null
 		new_message = TRUE
 		msg_recipient = M.source
 		msg_title = "Re: [M.title]"
-		msg_body = "\[editorbr\]\[editorbr\]\[editorbr\]\[br\]==============================\[br\]\[editorbr\]"
-		msg_body += "Received by [current_account.login] at [M.timestamp]\[br\]\[editorbr\][M.stored_data]"
+		var/atom/movable/AM = host
+		if(istype(AM))		
+			if(ismob(AM.loc))
+				ui_interact(AM.loc)
 		return 1
 
 	if(href_list["view"])
