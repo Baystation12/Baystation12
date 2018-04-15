@@ -1302,7 +1302,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dn" = (
-/obj/structure/closet/firecloset/full,
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "do" = (

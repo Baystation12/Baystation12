@@ -1282,7 +1282,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "cO" = (
-/obj/structure/closet/firecloset/full,
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
 "cP" = (

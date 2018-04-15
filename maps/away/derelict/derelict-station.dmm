@@ -2434,7 +2434,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "hU" = (
-/obj/structure/closet/firecloset/full,
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "hV" = (
