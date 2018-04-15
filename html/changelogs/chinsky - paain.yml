@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Being in pain, not seeing properly, or being confused will now affects accuracy of your attacks."

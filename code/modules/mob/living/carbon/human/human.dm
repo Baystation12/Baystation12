@@ -1540,3 +1540,21 @@
 //Point at which you dun breathe no more. Separate from asystole crit, which is heart-related.
 /mob/living/carbon/human/proc/nervous_system_failure()
 	return getBrainLoss() >= maxHealth * 0.75
+
+/mob/living/carbon/human/melee_accuracy_mods()
+	. = ..()
+	if(get_shock() > 50)
+		. += 15
+	if(shock_stage > 10)
+		. += 15
+	if(shock_stage > 30)
+		. += 15
+
+/mob/living/carbon/human/ranged_accuracy_mods()
+	. = ..()
+	if(get_shock() > 50)
+		. -= 1
+	if(shock_stage > 10)
+		. -= 1
+	if(shock_stage > 30)
+		. -= 1
