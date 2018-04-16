@@ -2964,6 +2964,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"hk" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/machinery/newscaster{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila_hangar/start)
 "hn" = (
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -14145,6 +14154,9 @@
 	},
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 4
+	},
+/obj/machinery/newscaster{
+	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
@@ -34666,7 +34678,7 @@ eg
 nr
 hc
 ec
-ix
+hk
 jl
 ki
 kW

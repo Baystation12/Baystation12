@@ -909,6 +909,9 @@
 	pixel_x = 22
 	},
 /obj/machinery/camera/network/exploration_shuttle,
+/obj/machinery/newscaster{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "cq" = (
@@ -8658,6 +8661,9 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
+/obj/machinery/newscaster{
+	pixel_x = 32
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "qW" = (
@@ -11819,6 +11825,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/newscaster{
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/ship)
@@ -17667,6 +17676,11 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/terminal,
+/obj/machinery/alarm{
+	dir = 2;
+	pixel_x = 0;
+	pixel_y = 23
+	},
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "Hg" = (
@@ -17915,6 +17929,9 @@
 /obj/structure/cable/yellow{
 	d2 = 4;
 	icon_state = "0-4"
+	},
+/obj/machinery/newscaster{
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
