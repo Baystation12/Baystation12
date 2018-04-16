@@ -254,6 +254,13 @@
 	icon_state = "skrellmet"
 	species = SPECIES_SKRELL
 
+/obj/item/clothing/mask/rubber/species/grey
+	name = "grey mask"
+	desc = "A rubber grey mask... Which is green."
+	icon_state = "greymet"
+	species = SPECIES_GREY
+	color = "#96ffc8"
+
 /obj/item/clothing/mask/spirit
 	name = "spirit mask"
 	desc = "An eerie mask of ancient, pitted wood."
