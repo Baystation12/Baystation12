@@ -320,7 +320,7 @@ obj/structure/closet/crate
 	storage_types = CLOSET_STORAGE_ITEMS|CLOSET_STORAGE_MOBS
 
 /obj/structure/closet/crate/secure/biohazard/blanks/WillContain()
-	return list(/mob/living/carbon/human/blank, /obj/item/usedcryobag)
+	return list(/obj/structure/closet/body_bag/cryobag/blank)
 
 /obj/structure/closet/crate/paper_refill
 	name = "paper refill crate"
