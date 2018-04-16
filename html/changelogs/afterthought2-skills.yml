@@ -1,4 +1,0 @@
-author: afterthought
-delete-after: True
-changes: 
-  - tweak: "Skills are now selected on a per-job basis under Occupations. Warning: current skill data will be lost!"
