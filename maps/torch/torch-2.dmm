@@ -11959,6 +11959,9 @@
 "xp" = (
 /obj/structure/table/glass,
 /obj/item/weapon/book/manual/solgov_law,
+/obj/machinery/newscaster{
+	pixel_x = -32
+	},
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "xq" = (
