@@ -7,8 +7,8 @@
 	return ((robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage * 4)
 
 /obj/item/organ/external/take_damage(brute, burn, damage_flags, used_weapon = null)
-	brute = round(brute * brute_mod, 0.1)
-	burn = round(burn * burn_mod, 0.1)
+	brute = round(brute * species.brute_mod, 0.1)
+	burn = round(burn * species.burn_mod, 0.1)
 	if((brute <= 0) && (burn <= 0))
 		return 0
 

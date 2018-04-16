@@ -124,10 +124,6 @@
 		else
 			H.oxygen_alert = 2
 
-
-/obj/item/organ/internal/heart/nabber
-	open = 1
-
 /obj/item/organ/internal/brain/nabber
 	var lowblood_tally = 0
 	var lowblood_mult = 2

@@ -38,7 +38,7 @@
 		// Aliens can get straight through these.
 		if(istype(user,/mob/living/carbon))
 			var/mob/living/carbon/M = user
-			if(locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs)
+			if(locate(/obj/item/organ/internal/xeno/hivenode) in M.internal_organs)
 				visible_message("<span class='alium'>\The [user] strokes \the [name] and it melts away!</span>")
 				health = 0
 				healthcheck()

@@ -80,7 +80,7 @@
 		BP_BRAIN =    /obj/item/organ/internal/brain/nabber,
 		BP_EYES =     /obj/item/organ/internal/eyes/nabber,
 		BP_TRACH =    /obj/item/organ/internal/lungs/nabber,
-		BP_HEART =    /obj/item/organ/internal/heart/nabber,
+		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_LIVER =    /obj/item/organ/internal/liver/nabber,
 		BP_PHORON =   /obj/item/organ/internal/phoron,
 		BP_VOICE =    /obj/item/organ/internal/voicebox/nabber
