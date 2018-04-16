@@ -6443,15 +6443,16 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/machinery/door/airlock/glass_security{
-	name = "Brig Officer";
-	req_access = list(3)
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/security{
+	name = "Brig Officer";
+	req_access = list(3)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
@@ -6964,12 +6965,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
-"ov" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/security/bo)
 "ox" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7525,6 +7520,7 @@
 /obj/item/weapon/shield/riot,
 /obj/item/weapon/shield/riot,
 /obj/item/weapon/shield/riot,
+/obj/item/weapon/shield/riot,
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "px" = (
@@ -7951,13 +7947,13 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "qm" = (
-/obj/machinery/computer/prisoner,
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/red{
 	dir = 8
 	},
+/obj/item/modular_computer/console/preset/security,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "qn" = (
@@ -8504,6 +8500,11 @@
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
+	},
+/obj/machinery/door/blast/shutters/open{
+	dir = 2;
+	id = "bo_pshutters";
+	name = "Privacy Shutters"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
@@ -9683,6 +9684,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled,
 /area/security/equipment)
 "sQ" = (
@@ -17746,6 +17748,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/blast/shutters/open{
+	dir = 8;
+	id = "bo_pshutters";
+	name = "Privacy Shutters"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Li" = (
@@ -18084,11 +18091,15 @@
 	name = "east bump";
 	pixel_x = 24
 	},
-/obj/structure/table/steel_reinforced,
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
 /obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/closet/secure_closet/brigofficer,
+/obj/item/device/radio,
+/obj/item/weapon/crowbar,
+/obj/item/clothing/mask/gas/half,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Mm" = (
@@ -18470,14 +18481,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/structure/closet/secure_closet/brigofficer,
-/obj/item/device/radio,
-/obj/item/weapon/crowbar,
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/clothing/mask/gas/half,
+/obj/machinery/computer/prisoner,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Om" = (
@@ -18525,6 +18532,12 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
+"OK" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/bo)
 "OS" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan,
@@ -18686,6 +18699,17 @@
 /obj/structure/closet/chefcloset_torch,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
+"PK" = (
+/obj/structure/table/steel,
+/obj/item/weapon/paper_bin{
+	pixel_x = -3;
+	pixel_y = 7
+	},
+/obj/item/weapon/clipboard,
+/obj/item/weapon/folder/red,
+/obj/item/weapon/pen,
+/turf/simulated/floor/tiled/dark,
+/area/security/bo)
 "PL" = (
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
 	dir = 1;
@@ -19367,7 +19391,6 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "Tl" = (
-/obj/structure/table/steel_reinforced,
 /obj/machinery/photocopier/faxmachine{
 	department = "Warden's Office"
 	},
@@ -19377,6 +19400,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
+/obj/structure/table/steel,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Tm" = (
@@ -19782,7 +19806,6 @@
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "Vl" = (
-/obj/item/modular_computer/console/preset/security,
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
@@ -19967,11 +19990,9 @@
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "Wl" = (
-/obj/structure/table/steel_reinforced,
 /obj/item/weapon/stamp/denied{
 	pixel_x = 5
 	},
-/obj/item/weapon/hand_labeler,
 /obj/machinery/newscaster/security_unit{
 	pixel_x = 30;
 	pixel_y = -30
@@ -19984,6 +20005,7 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
+/obj/structure/table/steel,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Wn" = (
@@ -20287,7 +20309,6 @@
 /turf/simulated/floor/wood,
 /area/crew_quarters/lounge)
 "Yl" = (
-/obj/item/modular_computer/console/preset/security,
 /obj/machinery/button/remote/airlock{
 	desc = "A remote control switch for the brig foyer.";
 	id = "BrigFoyer";
@@ -20312,6 +20333,12 @@
 	dir = 9
 	},
 /obj/effect/floor_decal/corner/red,
+/obj/machinery/button/remote/blast_door{
+	id = "bo_pshutters";
+	name = "Privacy Shutters";
+	pixel_x = 0;
+	pixel_y = -34
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Ym" = (
@@ -20505,14 +20532,6 @@
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Zl" = (
-/obj/structure/table/steel_reinforced,
-/obj/item/weapon/clipboard,
-/obj/item/weapon/paper_bin{
-	pixel_x = -3;
-	pixel_y = 7
-	},
-/obj/item/weapon/folder/red,
-/obj/item/weapon/pen,
 /obj/effect/floor_decal/corner/red{
 	dir = 10
 	},
@@ -20598,6 +20617,10 @@
 "ZN" = (
 /turf/simulated/wall/r_wall/hull,
 /area/tcommsat/chamber)
+"ZR" = (
+/obj/structure/table/steel,
+/turf/simulated/floor/tiled/dark,
+/area/security/bo)
 
 (1,1,1) = {"
 aa
@@ -44125,7 +44148,7 @@ lc
 El
 Ol
 Rl
-ov
+mD
 Vl
 Yl
 le
@@ -44328,7 +44351,7 @@ Fl
 mC
 nx
 mD
-mD
+PK
 Zl
 lc
 sJ
@@ -44529,9 +44552,9 @@ le
 Il
 mD
 ny
-mD
-mD
 qn
+ZR
+OK
 rs
 sK
 ud
