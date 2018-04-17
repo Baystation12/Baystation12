@@ -17,7 +17,8 @@
 
 	body_builds = list(
 		new/datum/body_build,
-		new/datum/body_build/slim
+		new/datum/body_build/slim,
+		new/datum/body_build/slim/alt
 	)
 
 	spawn_flags = SPECIES_CAN_JOIN

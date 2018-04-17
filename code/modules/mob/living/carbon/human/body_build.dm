@@ -109,6 +109,24 @@ var/datum/body_build/default_body_build = new
 	// hand_groups["[SPRITE_MELEE]_l"]    = 'icons/inv_slots/items/melee_l_slim.dmi'
 	// hand_groups["[SPRITE_MELEE]_r"]    = 'icons/inv_slots/items/melee_r_slim.dmi'
 
+/datum/body_build/slim/alt
+	name			= "Slim Alt"
+
+	index			= "_slim_alt"
+	genders			= list(FEMALE)
+	uniform_icon	= 'icons/inv_slots/uniforms/mob_slim.dmi'
+	suit_icon		= 'icons/inv_slots/suits/mob_slim.dmi'
+	gloves_icon		= 'icons/inv_slots/gloves/mob_slim.dmi'
+	glasses_icon	= 'icons/inv_slots/glasses/mob_slim.dmi'
+	ears_icon		= 'icons/inv_slots/ears/mob_slim.dmi'
+	mask_icon		= 'icons/inv_slots/masks/mob_slim.dmi'
+	shoes_icon		= 'icons/inv_slots/shoes/mob_slim.dmi'
+	belt_icon		= 'icons/inv_slots/belts/mob_slim.dmi'
+	back_icon		= 'icons/inv_slots/back/mob_slim.dmi'
+	ties_icon		= 'icons/inv_slots/acessories/mob_slim.dmi'
+	hidden_icon 	= 'icons/inv_slots/hidden/mob_slim.dmi'
+	rig_back		= 'icons/inv_slots/rig/mob_slim.dmi'
+
 /datum/body_build/tajaran
 	name		= "Tajaran"
 

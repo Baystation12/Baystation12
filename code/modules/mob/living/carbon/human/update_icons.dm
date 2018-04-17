@@ -369,7 +369,7 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[UNDERWEAR_LAYER] = list()
 	for(var/entry in worn_underwear)
 		var/obj/item/underwear/UW = entry
-		var/image/I = image(icon = UW.icon, icon_state = UW.CheckGender(src, icon_state))
+		var/image/I = image(body_build.get_mob_icon("hidden", UW.icon_state), UW.icon_state)
 		I.appearance_flags = RESET_COLOR
 		I.color = UW.color
 
