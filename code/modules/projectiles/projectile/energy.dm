@@ -63,8 +63,11 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	nodamage = 1
 	agony = 50
-	damage_type = PAIN
-	//Damage will be handled on the MOB side, to prevent window shattering.
+	damage_type = PAIN //Damage will be handled on the MOB side, to prevent window shattering.
+	step_delay = 0.7
+
+/obj/item/projectile/energy/electrode/green
+	icon_state = "spark_green"
 
 /obj/item/projectile/energy/electrode/stunshot
 	nodamage = 0

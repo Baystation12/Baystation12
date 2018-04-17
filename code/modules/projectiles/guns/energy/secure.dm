@@ -116,24 +116,24 @@
 		to_chat(user, "The authorization chip fries, giving you full use of \the [src].")
 		return 1
 
-
+//The guns themselves
 /obj/item/weapon/gun/energy/secure/stunrevolver
-	name = "stun revolver"
+	name = "smart stun revolver"
 	desc = "This A&M X6 is fitted with an NT1019 chip, a component that allows remote authorization of weapon functionality, created by NanoTrasen following the Baetiff Incident."
 	icon_state = "revolverstun100"
 	modifystate = "revolverstun"
 	item_state = null
 
-	projectile_type = /obj/item/projectile/energy/electrode
+	projectile_type = /obj/item/projectile/energy/electrode/green
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_DATA = 2)
 	max_shots = 8
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode, modifystate="revolverstun"),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode/green, modifystate="revolverstun"),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/energy/electrode/stunshot, modifystate="revolvershock")
 		)
 
 /obj/item/weapon/gun/energy/secure/gun
-	name = "energy gun"
+	name = "smart gun"
 	desc = "A more secure LAEP90, the LAEP90-S is designed to please paranoid constituents. Body cam not included."
 	icon = 'icons/obj/gun_secure.dmi'
 	icon_state = "energystun100"
@@ -153,7 +153,7 @@
 		)
 
 /obj/item/weapon/gun/energy/secure/gun/small
-	name = "small energy gun"
+	name = "smart gun"
 	desc = "Combining the two LAEP90 variants, the secure and compact LAEP90-CS is the next best thing to keeping your security forces on a literal leash."
 	icon_state = "smallgunstun100"
 	modifystate = "smallgunstun"
