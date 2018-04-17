@@ -15,6 +15,7 @@
 	var/decl/security_level/current_security_level  // The current security level. Defaults to the first entry in all_security_levels if unset.
 	var/list/all_security_levels                    // List of all available security levels
 	var/list/standard_security_levels               // List of all normally selectable security levels
+	var/list/comm_console_security_levels           // List of all selectable security levels for the command and communication console - basically standard_security_levels - 1
 
 /decl/security_state/New()
 	// Setup the severe security level
@@ -53,6 +54,13 @@
 		standard_security_levels += security_level
 		if(security_level == highest_standard_security_level)
 			break
+
+	comm_console_security_levels = list()
+	// Setup the list of selectable security levels available in the comm. console
+	for(var/security_level in all_security_levels)
+		if(security_level == highest_standard_security_level)
+			break
+		comm_console_security_levels += security_level
 
 	// Now we ensure the high security level is not above the severe one (but we allow them to be equal)
 	var/severe_index = all_security_levels.Find(severe_security_level)
