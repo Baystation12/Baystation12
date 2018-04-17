@@ -19,6 +19,7 @@
 		S.hide_from(usr)
 		for(var/obj/item/weapon/ore/O in S.contents)
 			S.remove_from_storage(O, src) //This will move the item to this item's contents
+			CHECK_TICK
 		to_chat(user, "<span class='notice'>You empty the satchel into the box.</span>")
 
 	update_ore_count()
@@ -59,7 +60,6 @@
 	to_chat(user, "It holds:")
 	for(var/ore in stored_ore)
 		to_chat(user, "- [stored_ore[ore]] [ore]")
-	return
 
 
 /obj/structure/ore_box/verb/empty_box()
@@ -86,7 +86,8 @@
 
 	for (var/obj/item/weapon/ore/O in contents)
 		contents -= O
-		O.loc = src.loc
+		O.forceMove(loc)
+		CHEC_TICK
 	to_chat(usr, "<span class='notice'>You empty the ore box</span>")
 
 	return
@@ -94,7 +95,7 @@
 /obj/structure/ore_box/ex_act(severity)
 	if(severity == 1.0 || (severity < 3.0 && prob(50)))
 		for (var/obj/item/weapon/ore/O in contents)
-			O.loc = src.loc
+			O.forceMove(loc)
 			O.ex_act(severity++)
 		qdel(src)
 		return
