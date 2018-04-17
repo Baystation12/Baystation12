@@ -1,17 +1,19 @@
 /datum/event/solar_storm
-	startWhen				= 45
+	startWhen				= 1
 	announceWhen			= 1
 	var/const/rad_interval 	= 5  	//Same interval period as radiation storms.
 	var/const/temp_incr     = 100
 	var/const/fire_loss     = 40
 	var/base_solar_gen_rate
+	var/list/solar_flames = list()
+	var/image/fire
 
 
 /datum/event/solar_storm/setup()
 	endWhen = startWhen + rand(30,90) + rand(30,90) //2-6 minute duration
 
 /datum/event/solar_storm/announce()
-	command_announcement.Announce("A solar storm has been detected approaching the [location_name()]. Please halt all EVA activites immediately and return inside.", "[location_name()] Sensor Array", zlevels = affecting_z)
+	command_announcement.Announce("A solar storm has been detected approaching the [location_name()]. Please halt all EVA activites immediately and take shelter from the storm.", "[location_name()] Sensor Array", zlevels = affecting_z)
 	adjust_solar_output(1.5)
 
 /datum/event/solar_storm/proc/adjust_solar_output(var/mult = 1)
@@ -22,6 +24,28 @@
 /datum/event/solar_storm/start()
 	command_announcement.Announce("The solar storm has reached the [location_name()]. Please refain from EVA and remain inside until it has passed.", "[location_name()] Sensor Array", zlevels = affecting_z)
 	adjust_solar_output(5)
+	fire = image('icons/effects/fire.dmi', src, "2")
+	fire.color = heat2color(5800) //Kelvin. That's our sun's surface temp. A bit too crispy, but I digress.
+	fire.plane = EFFECTS_BELOW_LIGHTING_PLANE
+	fire.layer = FIRE_LAYER
+	fire.blend_mode = BLEND_DEFAULT
+	fire.mouse_opacity = 2
+	for(var/area/A in world) //I will regret this.
+		if(A.area_flags & AREA_FLAG_EXTERNAL)
+			var/turf/simulated/wall/S
+			var/turf/unsimulated/wall/U
+			var/turf/simulated/floor/F
+			var/turf/unsimulated/floor/UN
+
+			if(S in A.contents || U in A.contents) //Imperfect, because somehow you are able to have more than one turf in a coordinate cell, but it shouldn't cause issues.
+				continue //Doesn't work..?
+			if(F in A.contents || UN in A.contents) //ditto. We should really have a UT that prevents this.
+				fire.blend_mode = BLEND_ADD //This doesn't appear to work.
+
+			fire.dir = pick(GLOB.cardinal)
+			A.underlays += fire
+			solar_flames += A
+			CHECK_TICK
 
 
 /datum/event/solar_storm/tick()
@@ -35,7 +59,7 @@
 		if(!T || !(T.z in GLOB.using_map.player_levels))
 			continue
 
-		if(!istype(T.loc,/area/space) && !istype(T,/turf/space))	//Make sure you're in a space area or on a space turf
+		if(!get_area(T) in solar_flames)	//Make sure you're in an external area -- GET THAT ASS INSIDE NOW.
 			continue
 
 		//Apply some heat or burn damage from the sun.
@@ -48,6 +72,10 @@
 /datum/event/solar_storm/end()
 	command_announcement.Announce("The solar storm has passed the [location_name()]. It is now safe to resume EVA activities. ", "[location_name()] Sensor Array", zlevels = affecting_z)
 	adjust_solar_output()
+	for(var/area/A in solar_flames)
+		A.overlays -= fire
+		CHECK_TICK
+	qdel(fire)
 
 
 //For a false alarm scenario.

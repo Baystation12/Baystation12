@@ -7,6 +7,7 @@
 	var/global/global_uid = 0
 	var/uid
 	var/area_flags
+	mouse_opacity = 2
 
 /area/New()
 	icon_state = ""
