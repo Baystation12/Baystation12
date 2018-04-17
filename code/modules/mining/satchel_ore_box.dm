@@ -87,7 +87,7 @@
 	for (var/obj/item/weapon/ore/O in contents)
 		contents -= O
 		O.forceMove(loc)
-		CHEC_TICK
+		CHECk_TICK
 	to_chat(usr, "<span class='notice'>You empty the ore box</span>")
 
 	return
