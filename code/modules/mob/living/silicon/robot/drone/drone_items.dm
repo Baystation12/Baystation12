@@ -116,7 +116,8 @@
 
 	can_hold = list(
 	/obj/item/organ,
-	/obj/item/robot_parts
+	/obj/item/robot_parts,
+	/obj/item/weapon/reagent_containers/ivbag
 	)
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
