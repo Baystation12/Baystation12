@@ -156,7 +156,7 @@
 		var/mob/living/L = t
 		var/turf/T = get_turf(L)
 		effect = new /obj/effect/rift(T)
-		effect.color = "#F0E68C"
+		effect.color = "f0e68c"
 		L.forceMove(effect)
 		var/time = (L.getBruteLoss() + L.getFireLoss()) * 20
 		L.status_flags &= GODMODE
