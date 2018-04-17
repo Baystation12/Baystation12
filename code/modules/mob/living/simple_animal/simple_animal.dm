@@ -138,7 +138,7 @@
 		return 1
 	var/datum/gas_mixture/environment = A.return_air()
 
-	if(environment)
+	if(!(SPACERES in mutations) && environment)
 		if( abs(environment.temperature - bodytemperature) > 40 )
 			bodytemperature += (environment.temperature - bodytemperature) / 5
 		if(min_gas)
