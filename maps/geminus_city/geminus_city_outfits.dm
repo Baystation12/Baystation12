@@ -24,7 +24,7 @@
 
 	head = null
 	uniform = null
-	belt = null
+	belt = /obj/item/weapon/storage/wallet/random
 	shoes = /obj/item/clothing/shoes/brown
 	pda_slot = null
 
