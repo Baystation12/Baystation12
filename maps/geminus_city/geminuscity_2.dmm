@@ -3263,7 +3263,7 @@
 "bkM" = (/obj/machinery/vending/tool,/obj/machinery/light/colored/blue{tag = "icon-blue1 (NORTH)"; icon_state = "blue1"; dir = 1},/obj/effect/floor_decal/corner/white/diagonal,/turf/simulated/floor/tech/white,/area/planets/Geminus/indoor/tech_storage)
 "bkN" = (/obj/machinery/lapvend,/obj/effect/floor_decal/corner/white/diagonal,/turf/simulated/floor/tech/white,/area/planets/Geminus/indoor/tech_storage)
 "bkO" = (/obj/random/powercell,/obj/structure/table/reinforced,/obj/effect/floor_decal/corner/white/diagonal,/obj/random/powercell,/turf/simulated/floor/tech/white,/area/planets/Geminus/indoor/tech_storage)
-"bkP" = (/obj/item/clothing/suit/cyborg_suit,/obj/structure/table/reinforced,/obj/effect/floor_decal/corner/white/diagonal,/turf/simulated/floor/tech/white,/area/planets/Geminus/indoor/tech_storage)
+"bkP" = (/obj/structure/table/reinforced,/obj/effect/floor_decal/corner/white/diagonal,/turf/simulated/floor/tech/white,/area/planets/Geminus/indoor/tech_storage)
 "bkQ" = (/obj/structure/flora/pottedplant{icon_state = "plant-20"; pixel_y = 10; tag = "icon-plant-22"},/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/planets/Geminus/indoor/bar)
 "bkR" = (/obj/structure/table/woodentable,/obj/item/weapon/flame/candle,/turf/simulated/floor/wood,/area/planets/Geminus/indoor/bar)
 "bkS" = (/obj/item/weapon/flame/candle,/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/planets/Geminus/indoor/bar)
