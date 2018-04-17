@@ -5551,9 +5551,6 @@
 "lR" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack,
-/obj/item/weapon/gun/energy/gun,
-/obj/item/weapon/gun/energy/gun,
-/obj/item/weapon/gun/energy/gun,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
@@ -5563,7 +5560,9 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/weapon/gun/energy/gun,
+/obj/item/weapon/gun/energy/secure/gun,
+/obj/item/weapon/gun/energy/secure/gun,
+/obj/item/weapon/gun/energy/secure/gun,
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "lS" = (
