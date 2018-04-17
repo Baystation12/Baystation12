@@ -123,6 +123,7 @@
 	id = "scraplock";
 	name = "External Lockdown"
 	},
+/obj/item/weapon/gun/energy/captain,
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "al" = (
