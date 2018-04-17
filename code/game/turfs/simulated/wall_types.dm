@@ -11,11 +11,6 @@
 	name = "hull"
 	color = COLOR_HULL
 
-/turf/simulated/wall/prepainted
-	paint_color = COLOR_GUNMETAL
-/turf/simulated/wall/r_wall/prepainted
-	paint_color = COLOR_GUNMETAL
-
 /turf/simulated/wall/r_wall/hull/Initialize()
 	. = ..()
 	paint_color = color
