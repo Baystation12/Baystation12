@@ -116,9 +116,9 @@
 		to_chat(user, "The authorization chip fries, giving you full use of \the [src].")
 		return 1
 
-//The guns themselves
+
 /obj/item/weapon/gun/energy/secure/stunrevolver
-	name = "smart stun revolver"
+	name = "stun revolver"
 	desc = "This A&M X6 is fitted with an NT1019 chip, a component that allows remote authorization of weapon functionality, created by NanoTrasen following the Baetiff Incident."
 	icon_state = "revolverstun100"
 	modifystate = "revolverstun"
@@ -133,7 +133,7 @@
 		)
 
 /obj/item/weapon/gun/energy/secure/gun
-	name = "smart gun"
+	name = "energy gun"
 	desc = "A more secure LAEP90, the LAEP90-S is designed to please paranoid constituents. Body cam not included."
 	icon = 'icons/obj/gun_secure.dmi'
 	icon_state = "energystun100"
@@ -153,7 +153,7 @@
 		)
 
 /obj/item/weapon/gun/energy/secure/gun/small
-	name = "smart gun"
+	name = "small energy gun"
 	desc = "Combining the two LAEP90 variants, the secure and compact LAEP90-CS is the next best thing to keeping your security forces on a literal leash."
 	icon_state = "smallgunstun100"
 	modifystate = "smallgunstun"
