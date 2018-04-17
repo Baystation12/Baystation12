@@ -6,7 +6,7 @@
 		)
 
 	desc = "A basic energy-based gun with a secure authorization chip."
-	req_access = list(access_brig)
+	req_one_access = list(access_brig, access_heads)
 	var/list/authorized_modes = list(ALWAYS_AUTHORIZED) // index of this list should line up with firemodes, unincluded firemodes at the end will default to unauthorized
 	var/registered_owner
 	var/emagged = 0
@@ -24,13 +24,10 @@
 	if(istype(W, /obj/item/weapon/card/id))
 		if(!emagged)
 			if(!registered_owner)
-				if(allowed(user))
-					var/obj/item/weapon/card/id/id = W
-					GLOB.registered_weapons += src
-					registered_owner = id.registered_name
-					user.visible_message("[user] swipes an ID through \the [src], registering it.", "You swipe an ID through \the [src], registering it.")
-				else
-					to_chat(user, "<span class='warning'>Access denied.</span>")
+				var/obj/item/weapon/card/id/id = W
+				GLOB.registered_weapons += src
+				registered_owner = id.registered_name
+				user.visible_message("[user] swipes an ID through \the [src], registering it.", "You swipe an ID through \the [src], registering it.")
 			else
 				to_chat(user, "This weapon is already registered, you must reset it first.")
 		else
@@ -98,6 +95,8 @@
 		to_chat(user, "A small screen on the side of the weapon indicates that it is registered to [registered_owner].")
 
 /obj/item/weapon/gun/energy/secure/proc/get_next_authorized_mode()
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/shit_on_fan = security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)
 	. = sel_mode
 	do
 		.++
@@ -105,7 +104,7 @@
 			. = 1
 		if(. == sel_mode) // just in case all modes are unauthorized
 			return null
-	while(!authorized_modes[.] && !emagged)
+	while(!authorized_modes[.] && !emagged && !shit_on_fan)
 
 /obj/item/weapon/gun/energy/secure/emag_act(var/charges, var/mob/user)
 	if(emagged || !charges)
