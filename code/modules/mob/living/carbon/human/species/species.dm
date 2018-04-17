@@ -207,6 +207,8 @@
 	var/list/equip_adjust = list()
 	var/list/equip_overlays = list()
 
+	var/list/base_auras
+
 	var/sexybits_location	//organ tag where they are located if they can be kicked for increased pain
 
 	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
@@ -321,6 +323,21 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
 					"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")
 
+/datum/species/proc/add_base_auras(var/mob/living/carbon/human/H)
+	if(base_auras)
+		for(var/type in base_auras)
+			H.add_aura(new type(H))
+
+/datum/species/proc/remove_base_auras(var/mob/living/carbon/human/H)
+	if(base_auras)
+		var/list/bcopy = base_auras.Copy()
+		for(var/a in H.auras)
+			var/obj/aura/A = a
+			if(is_type_in_list(a, bcopy))
+				bcopy -= A.type
+				H.remove_aura(A)
+				qdel(A)
+
 /datum/species/proc/remove_inherent_verbs(var/mob/living/carbon/human/H)
 	if(inherent_verbs)
 		for(var/verb_path in inherent_verbs)
@@ -335,6 +352,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
+	add_base_auras(H)
 	H.mob_bump_flag = bump_flag
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags

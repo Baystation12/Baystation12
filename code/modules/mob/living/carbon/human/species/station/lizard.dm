@@ -72,6 +72,10 @@
 		)
 	breathing_sound = 'sound/voice/lizard.ogg'
 
+	base_auras = list(
+		/obj/aura/regenerating/human/unathi
+		)
+
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/diona_heal_toggle
 		)

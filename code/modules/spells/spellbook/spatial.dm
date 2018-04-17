@@ -32,6 +32,7 @@
 				/obj/structure/closet/wizard/scrying = 			2,
 				/obj/item/weapon/teleportation_scroll = 		1,
 				/obj/item/weapon/magic_rock = 					1,
+				/obj/item/weapon/summoning_stone = 				3,
 				/obj/item/weapon/contract/wizard/telepathy = 	1,
 				/obj/item/weapon/contract/apprentice = 			1
 				)

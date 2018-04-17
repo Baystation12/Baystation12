@@ -1031,6 +1031,7 @@
 		for(var/datum/language/L in species.assisted_langs)
 			remove_language(L)
 		// Clear out their species abilities.
+		species.remove_base_auras(src)
 		species.remove_inherent_verbs(src)
 		holder_type = null
 
@@ -1441,7 +1442,7 @@
 		. *= (H.robotic < ORGAN_ROBOT) ? pulse()/PULSE_NORM : 1.5
 
 /mob/living/carbon/human/need_breathe()
-	if(species.breathing_organ && should_have_organ(species.breathing_organ))
+	if(!(mNobreath in mutations) && species.breathing_organ && should_have_organ(species.breathing_organ))
 		return 1
 	else
 		return 0

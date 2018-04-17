@@ -30,3 +30,7 @@
 	range *= 2
 
 	return "You've doubled the range of [src]."
+
+/spell/aoe_turf/knock/slow
+	name = "Slow Knock"
+	charge_max = 200

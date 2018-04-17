@@ -30,6 +30,7 @@
 				/spell/noclothes = 									1,
 				/obj/item/weapon/magic_rock = 						1,
 				/obj/structure/closet/wizard/scrying = 				2,
+				/obj/item/weapon/summoning_stone = 					2,
 				/obj/item/weapon/contract/wizard/telepathy = 		1,
 				/obj/item/weapon/contract/apprentice = 				1
 				)
