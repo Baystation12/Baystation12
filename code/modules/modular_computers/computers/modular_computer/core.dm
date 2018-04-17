@@ -192,7 +192,7 @@
 		ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
 
 
-/obj/item/modular_computer/proc/run_program(prog, var/background = FALSE)
+/obj/item/modular_computer/proc/run_program(prog)
 	var/datum/computer_file/program/P = null
 	var/mob/user = usr
 	if(hard_drive)
@@ -203,21 +203,14 @@
 		return
 
 	P.computer = src
-
 	if(!P.is_supported_by_hardware(hardware_flag, 1, user))
 		return
-	if(P in idle_threads && !background)
+	if(P in idle_threads)
 		P.program_state = PROGRAM_STATE_ACTIVE
 		active_program = P
 		idle_threads.Remove(P)
 		update_icon()
 		return
-	else if(background)
-		if(idle_threads.len >= processor_unit.max_idle_programs+1)
-			return
-		P.program_state = PROGRAM_STATE_BACKGROUND
-		idle_threads.Add(P)
-		return 1
 
 	if(idle_threads.len >= processor_unit.max_idle_programs+1)
 		to_chat(user, "<span class='notice'>\The [src] displays a \"Maximal CPU load reached. Unable to run another program.\" error</span>")
@@ -284,19 +277,15 @@
 	else
 		return ..()
 
-/obj/item/modular_computer/proc/set_autorun(program, var/background = FALSE)
+/obj/item/modular_computer/proc/set_autorun(program)
 	if(!hard_drive)
 		return
 	var/datum/computer_file/data/autorun = hard_drive.find_file_by_name("autorun")
 	if(!istype(autorun))
 		autorun = new/datum/computer_file/data()
 		autorun.filename = "autorun"
+		autorun.stored_data = "[program]"
 		hard_drive.store_file(autorun)
-	var/list/autorun_data = splittext(autorun.stored_data, ":")
-	if(autorun_data.len && autorun_data[1] == program)
-		autorun.stored_data = null
-	else
-		autorun.stored_data = "[program]:[background]"
 
 /obj/item/modular_computer/GetIdCard()
 	if(card_slot && card_slot.can_broadcast && istype(card_slot.stored_card))
