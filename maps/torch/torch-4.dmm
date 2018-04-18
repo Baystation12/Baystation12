@@ -18624,7 +18624,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/alarm{
 	dir = 8;
-	step_x = 23
+	pixel_x = 25;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/autopsy)
@@ -19362,7 +19363,6 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
-	step_x = 13;
 	pixel_x = -35
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -21810,8 +21810,9 @@
 	dir = 8
 	},
 /obj/machinery/light_switch{
-	step_x = 24;
-	step_y = -8
+	pixel_x = 24;
+	pixel_y = -8;
+	
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
@@ -22602,7 +22603,6 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
-	step_x = 13;
 	pixel_x = -35
 	},
 /obj/machinery/light{
@@ -24390,7 +24390,6 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
-	step_x = 13;
 	pixel_x = -35
 	},
 /obj/machinery/camera/network/research{
@@ -26093,7 +26092,6 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
-	step_x = 13;
 	pixel_x = -35
 	},
 /turf/simulated/floor/tiled/white,
@@ -26687,7 +26685,6 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
-	step_x = 13;
 	pixel_x = -35
 	},
 /turf/simulated/floor/tiled/white,
