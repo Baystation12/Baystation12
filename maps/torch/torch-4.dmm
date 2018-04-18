@@ -27805,8 +27805,7 @@
 /obj/structure/morgue,
 /obj/item/device/radio/intercom{
 	dir = 4;
-	step_x = 13;
-	pixel_x = -35
+	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
