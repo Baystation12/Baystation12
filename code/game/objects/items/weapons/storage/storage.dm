@@ -293,6 +293,7 @@
 			continue
 		success = 1
 		handle_item_insertion(I, 1, 1) // First 1 is no messages, second 1 is no ui updates
+		CHECK_TICK
 	if(success && !failure)
 		to_chat(user, "<span class='notice'>You put everything into \the [src].</span>")
 		update_ui_after_item_insertion()
