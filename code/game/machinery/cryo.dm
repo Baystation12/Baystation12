@@ -109,9 +109,9 @@
 			cloneloss = "minor"
 		var/scan = medical_scan_results(occupant)
 		scan += "<br><br>Genetic degradation: [cloneloss]"
-		scan = replacetext(scan,"'notice'","'white'")
-		scan = replacetext(scan,"'warning'","'average'")
-		scan = replacetext(scan,"'danger'","'bad'")
+		scan = replacetext(scan,"'scan_notice'","'white'")
+		scan = replacetext(scan,"'scan_warning'","'average'")
+		scan = replacetext(scan,"'scan_danger'","'bad'")
 		scan += "<br>Cryostasis factor: [occupant.stasis_value]x"
 		data["occupant"] = scan
 

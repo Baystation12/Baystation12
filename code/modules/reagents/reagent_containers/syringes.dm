@@ -75,7 +75,7 @@
 	if(!target.reagents)
 		return
 
-	if(user.a_intent == I_HURT && ismob(target))
+	if((user.a_intent == I_HURT) && ismob(target))
 		syringestab(target, user)
 		return
 
@@ -139,6 +139,9 @@
 			if(NOCLONE in T.mutations) //target done been et, no more blood in him
 				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
 				return
+			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
+				syringestab(target, user)
+				return
 
 			var/injtime = time //Taking a blood sample through a hardsuit takes longer due to needing to find a port.
 			var/allow = T.can_inject(user, check_zone(user.zone_sel.selecting))
@@ -150,6 +153,7 @@
 			else
 				user.visible_message("<span class='warning'>\The [user] is trying to take a blood sample from [target].</span>")
 
+			injtime *= user.skill_delay_mult(SKILL_MEDICAL)
 			user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 			user.do_attack_animation(target)
 
@@ -179,6 +183,9 @@
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/proc/injectReagents(var/atom/target, var/mob/user)
+	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
+		syringestab(target, user)
+
 	if(!reagents.total_volume)
 		to_chat(user, "<span class='notice'>The syringe is empty.</span>")
 		mode = SYRINGE_DRAW
@@ -228,7 +235,7 @@
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		user.do_attack_animation(trackTarget)
 
-		if(!do_after(user, injtime, trackTarget))
+		if(!user.do_skilled(injtime, SKILL_MEDICAL, trackTarget))
 			return
 
 		if(target != trackTarget && target.loc != trackTarget)
@@ -253,7 +260,7 @@
 
 		var/mob/living/carbon/human/H = target
 
-		var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
+		var/target_zone = check_zone(user.zone_sel.selecting)
 		var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
 		if (!affecting || affecting.is_stump())
