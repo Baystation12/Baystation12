@@ -114,13 +114,7 @@
 			to_chat(user, "<span class='danger'>There's no reason to swipe your ID - \the [src] has no brain to remove.</span>")
 			return 0
 
-		var/obj/item/weapon/card/id/id_card
-
-		if(istype(O, /obj/item/weapon/card/id))
-			id_card = O
-		else
-			var/obj/item/modular_computer/computer = O
-			id_card = computer.GetIdCard()
+		var/obj/item/weapon/card/id/id_card = O.GetIdCard()
 
 		if(id_card && (access_robotics in id_card.access))
 			to_chat(user, "<span class='notice'>You swipe your access card and pop the brain out of \the [src].</span>")

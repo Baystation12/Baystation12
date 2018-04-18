@@ -2006,7 +2006,6 @@
 	"LIGHTING_CORNER_DIAGONAL",
 	"Master",
 	"OOClog",
-	"SKILLS",
 	"SSair",
 	"SSairflow",
 	"SSantags",
