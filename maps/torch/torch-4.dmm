@@ -9434,10 +9434,6 @@
 /area/command/armoury/tactical)
 "aCv" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/energy/gun,
-/obj/item/weapon/gun/energy/gun,
-/obj/item/weapon/gun/energy/gun,
-/obj/item/weapon/gun/energy/gun,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -9446,6 +9442,10 @@
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/item/weapon/gun/energy/secure/gun,
+/obj/item/weapon/gun/energy/secure/gun,
+/obj/item/weapon/gun/energy/secure/gun,
+/obj/item/weapon/gun/energy/secure/gun,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aCw" = (
@@ -9471,8 +9471,6 @@
 /area/command/armoury/tactical)
 "aCx" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/energy/laser,
-/obj/item/weapon/gun/energy/laser,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -9480,8 +9478,9 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/weapon/gun/energy/laser,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/item/weapon/gun/energy/secure/laser,
+/obj/item/weapon/gun/energy/secure/laser,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aCy" = (
