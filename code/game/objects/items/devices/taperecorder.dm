@@ -94,7 +94,7 @@
 		if(speaking)
 			if(!speaking.machine_understands)
 				msg = speaking.scramble(msg)
-			mytape.record_speech("[M.name] [speaking.format_message_plain(msg, verb)]")
+			mytape.record_speech("[M.name] [speaking.format_message_plain(msg, verb, M)]")
 		else
 			mytape.record_speech("[M.name] [verb], \"[msg]\"")
 

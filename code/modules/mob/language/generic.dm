@@ -5,13 +5,13 @@
 	key = ""
 	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
 
-/datum/language/noise/format_message(message, verb)
+/datum/language/noise/format_message(message, verb, var/mob/speaker)
 	return "<span class='message'><span class='[colour]'>[message]</span></span>"
 
-/datum/language/noise/format_message_plain(message, verb)
+/datum/language/noise/format_message_plain(message, verb, var/mob/speaker)
 	return message
 
-/datum/language/noise/format_message_radio(message, verb)
+/datum/language/noise/format_message_radio(message, verb, var/mob/speaker)
 	return "<span class='[colour]'>[message]</span>"
 
 /datum/language/noise/get_talkinto_msg_range(message)

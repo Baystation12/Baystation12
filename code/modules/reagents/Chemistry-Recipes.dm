@@ -442,6 +442,17 @@
 	required_reagents = list(/datum/reagent/tramadol/oxycodone = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
 
+/datum/chemical_reaction/methyl_bromide
+	name = "Methyl Bromide"
+	required_reagents = list(/datum/reagent/toxin/bromide = 1, /datum/reagent/ethanol = 1, /datum/reagent/hydrazine = 1)
+	result_amount = 3
+	result = null
+
+/datum/chemical_reaction/methyl_bromide/on_reaction(var/datum/reagents/holder, var/created_volume)
+	var/turf/simulated/T = get_turf(holder.my_atom)
+	if(istype(T))
+		T.assume_gas("methyl_bromide", created_volume, T20C)
+
 /* Solidification */
 
 /datum/chemical_reaction/phoronsolidification

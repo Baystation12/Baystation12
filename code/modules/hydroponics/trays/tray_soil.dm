@@ -73,3 +73,14 @@
 		if(plant.invisibility == INVISIBILITY_MAXIMUM)
 			plant.set_invisibility(initial(plant.invisibility))
 	. = ..()
+
+/obj/machinery/portable_atmospherics/hydroponics/mantid
+	name = "algae vat"
+	desc = "A kind of squat tank of alien design."
+	icon_state = "mantid"
+	pixel_y = 10
+
+/obj/machinery/portable_atmospherics/hydroponics/mantid/Process()
+	waterlevel = 100
+	nutrilevel = 100
+	. = ..()

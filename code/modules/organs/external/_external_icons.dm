@@ -146,7 +146,6 @@ var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#6666
 		hud_damage_image = image(null)
 		hud_damage_image.overlays += temp
 
-
 	// Calculate the required color index.
 	var/dam_state = min(1,((brute_dam+burn_dam)/max(1,max_damage)))
 	var/min_dam_state = min(1,(get_pain()/max(1,max_damage)))
@@ -155,6 +154,8 @@ var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#6666
 	// Apply colour and return product.
 	var/list/hud_colours = (robotic < ORGAN_ROBOT) ? flesh_hud_colours : robot_hud_colours
 	hud_damage_image.color = hud_colours[max(1,min(ceil(dam_state*hud_colours.len),hud_colours.len))]
+	if(species.pixel_offset_x) hud_damage_image.pixel_x = species.pixel_offset_x
+	if(species.pixel_offset_y) hud_damage_image.pixel_y = species.pixel_offset_y
 	return hud_damage_image
 
 /obj/item/organ/external/proc/apply_colouration(var/icon/applying)

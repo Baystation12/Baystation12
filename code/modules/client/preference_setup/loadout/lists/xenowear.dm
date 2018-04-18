@@ -87,7 +87,7 @@
 	display_name = "gear harness (Full Body Prosthetic, Diona, Giant Armoured Serpentid)"
 	path = /obj/item/clothing/under/harness
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_IPC,SPECIES_DIONA, SPECIES_NABBER)
+	whitelisted = list(SPECIES_IPC,SPECIES_DIONA, SPECIES_NABBER, SPECIES_MANTID_ALATE, SPECIES_NABBER_MONARCH)
 
 /datum/gear/shoes/toeless
 	display_name = "toeless jackboots"

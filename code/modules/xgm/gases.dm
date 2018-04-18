@@ -18,6 +18,12 @@
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.044	// kg/mol
 
+/decl/xgm_gas/methyl_bromide
+	id = "methyl_bromide"
+	name = "Methyl Bromide"
+	specific_heat = 42.59 // J/(mol*K)
+	molar_mass = 0.095	  // kg/mol
+
 /decl/xgm_gas/phoron
 	id = "phoron"
 	name = "Phoron"

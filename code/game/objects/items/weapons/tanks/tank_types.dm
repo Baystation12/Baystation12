@@ -17,7 +17,6 @@
 	icon_state = "oxygen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list("oxygen" = 6*ONE_ATMOSPHERE)
-	volume = 180
 
 /obj/item/weapon/tank/oxygen/yellow
 	desc = "A tank of oxygen. This one is yellow."
@@ -95,7 +94,7 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 4
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	volume = 40 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
+	volume = 2 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
 
 /obj/item/weapon/tank/emergency/oxygen
 	name = "emergency oxygen tank"
@@ -107,14 +106,13 @@
 /obj/item/weapon/tank/emergency/oxygen/engi
 	name = "extended-capacity emergency oxygen tank"
 	icon_state = "emergency_engi"
-	volume = 60
+	volume = 6
 
 /obj/item/weapon/tank/emergency/oxygen/double
 	name = "double emergency oxygen tank"
 	icon_state = "emergency_double"
 	gauge_icon = "indicator_emergency_double"
-	volume = 90
-	w_class = ITEM_SIZE_NORMAL
+	volume = 10
 
 /obj/item/weapon/tank/emergency/nitrogen
 	name = "emergency nitrogen tank"
@@ -127,7 +125,7 @@
 	name = "double emergency nitrogen tank"
 	icon_state = "emergency_double_nitrogen"
 	gauge_icon = "indicator_emergency_double"
-	volume = 60
+	volume = 10
 
 /*
  * Nitrogen
@@ -137,5 +135,4 @@
 	desc = "A tank of nitrogen."
 	icon_state = "oxygen_fr"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	starting_pressure = list("nitrogen" = 10*ONE_ATMOSPHERE)
-	volume = 180
+	starting_pressure = list("nitrogen" = 6*ONE_ATMOSPHERE)

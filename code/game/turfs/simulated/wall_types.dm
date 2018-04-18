@@ -99,3 +99,18 @@
 	if(prob(explosion_resistance))
 		return
 	..()
+
+// Mantid.
+/turf/simulated/wall/mantid
+	color = "#9c73dd"
+	icon_state = "composite_preview"
+
+/turf/simulated/wall/mantid/New(var/newloc)
+	..(newloc, "composite")
+
+/turf/simulated/wall/mantid_reinf
+	color = "#9c73dd"
+	icon_state = "composite_reinf_preview"
+
+/turf/simulated/wall/mantid_reinf/New(var/newloc)
+	..(newloc, "composite", "energy conduit")

@@ -1,5 +1,3 @@
-#define SCRAMBLE_CACHE_LEN 20
-
 /*
 	Datum based languages. Easily editable and modular.
 */
@@ -86,13 +84,13 @@
 
 	return scrambled_text
 
-/datum/language/proc/format_message(message, verb)
+/datum/language/proc/format_message(message, verb, var/mob/speaker)
 	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
 
-/datum/language/proc/format_message_plain(message, verb)
+/datum/language/proc/format_message_plain(message, verb, var/mob/speaker)
 	return "[verb], \"[capitalize(message)]\""
 
-/datum/language/proc/format_message_radio(message, verb)
+/datum/language/proc/format_message_radio(message, verb, var/mob/speaker)
 	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
 
 /datum/language/proc/get_talkinto_msg_range(message)
@@ -103,7 +101,7 @@
 	log_say("[key_name(speaker)] : ([name]) [message]")
 
 	if(!speaker_mask) speaker_mask = speaker.name
-	message = format_message(message, get_spoken_verb(message))
+	message = format_message(message, get_spoken_verb(message), speaker)
 
 	for(var/mob/player in GLOB.player_list)
 		player.hear_broadcast(src, speaker, speaker_mask, message)
@@ -229,5 +227,3 @@
 		if(L.flags & except_flags)
 			continue
 		target.add_language(L.name)
-
-#undef SCRAMBLE_CACHE_LEN

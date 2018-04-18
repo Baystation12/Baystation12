@@ -6,6 +6,9 @@
 /datum/reagent/blood
 	value = 2
 
+/datum/reagent/toxin/bromide
+	value = 2
+
 /datum/reagent/antibodies
 	value = 6
 
