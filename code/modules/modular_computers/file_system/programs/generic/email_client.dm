@@ -103,8 +103,11 @@
 
 	if(istype(host, /obj/item/modular_computer))
 		var/obj/item/modular_computer/computer = host
-		if(computer.GetIdCard())
-			var/obj/item/weapon/card/id/id = computer.GetIdCard()
+		var/obj/item/weapon/card/id/id = computer.GetIdCard()
+		if(!id && ismob(computer.loc))
+			var/mob/M = computer.loc
+			id = M.GetIdCard()
+		if(id)
 			id_login = id.associated_email_login.Copy()
 
 	var/datum/computer_file/data/email_account/target
