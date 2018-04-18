@@ -75,37 +75,25 @@
 	var/datum/sample_pair/pair = src.instrument_data.sample_map[GLOB.musical_config.n2t(note_num)]
 	#define Q 0.083 // 1/12
 	var/freq = 2**(Q*pair.deviation)
-	var/chan = src.take_any_channel()
-	if (!chan)
-		if (!src.player.channel_overload())
-			src.playing = 0
-			src.autorepeat = 0
-			return
 	#undef Q
-	var/list/mob/to_play_for = src.player.who_to_play_for()
 
-	if (!to_play_for.len)
-		src.free_channel(chan) // I'm an idiot, fuck
-		return
-
-	for (var/mob/hearer in to_play_for)
-		src.play_for(hearer, pair.sample, duration, freq, chan, note_num, where, which_one)
+	src.play(pair.sample, duration, freq, 0, note_num, where, which_one)
 
 
-/datum/synthesized_song/proc/play_for(mob/who, what, duration, frequency, channel, which, where, which_one)
+/datum/synthesized_song/proc/play(what, duration, frequency, channel, which, where, which_one)
 	var/sound/sound_copy = sound(what)
 	sound_copy.wait = 0
 	sound_copy.repeat = 0
 	sound_copy.frequency = frequency
 	sound_copy.channel = channel
-	player.apply_modifications_for(who, sound_copy, which, where, which_one)
+	player.apply_modifications(sound_copy, which, where, which_one)
 
-	sound_to(who, sound_copy)
 	#if DM_VERSION < 511
 	sound_copy.frequency = 1
 	#endif
 	var/delta_volume = player.volume / src.sustain_timer
 	var/current_volume = max(round(sound_copy.volume), 0)
+
 	var/tick = duration
 	while (current_volume > 0)
 		var/new_volume = current_volume
@@ -124,7 +112,7 @@
 			current_volume = new_volume
 			continue
 		current_volume = sanitized_volume
-		src.player.event_manager.push_event(src.player, who, sound_copy, tick, current_volume)
+		src.player.event_manager.push_event(src.player, sound_copy, tick, current_volume)
 		if (current_volume <= 0)
 			break
 
