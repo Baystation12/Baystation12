@@ -1,6 +1,0 @@
-author: "comma"
-delete-after: True
-changes: 
-  - tweak: "Replaces most eguns with secure variants. Swipe ID to register."
-  - tweak: "Secure guns get all modes unlocked if it's Red Alert"
-  - tweak: "CO's revolver was moved out of locker into a display case"
