@@ -20142,7 +20142,8 @@
 /obj/machinery/door/airlock/glass_medical{
 	id_tag = "TreatmentCenter";
 	name = "Infirmary Wing";
-	req_access = list(5)
+	req_access = newlist();
+	req_one_access = list(6,5)
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
@@ -22177,12 +22178,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass_medical{
 	id_tag = "TreatmentCenter";
 	name = "Infirmary Wing";
-	req_access = list(5)
+	req_access = newlist();
+	req_one_access = list(6,5)
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "kkb" = (
