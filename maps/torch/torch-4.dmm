@@ -17080,6 +17080,11 @@
 	name = "Morgue Maintenance";
 	req_access = list(6)
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
 /area/medical/morgue)
 "csb" = (
@@ -17286,6 +17291,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
 "cKb" = (
@@ -18274,15 +18284,18 @@
 	},
 /obj/item/weapon/pen,
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "enb" = (
 /obj/structure/window/reinforced{
 	dir = 1;
 	health = 1e+006
 	},
 /obj/structure/filingcabinet/chestdrawer,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "eob" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -18299,16 +18312,19 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
 	dir = 9
 	},
 /obj/effect/floor_decal/corner/paleblue,
+/obj/machinery/door/window/northleft{
+	name = "Morgue";
+	req_access = newlist();
+	req_one_access = list(6,5)
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "eqb" = (
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
@@ -18323,8 +18339,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/door/window/northright{
+	name = "Morgue";
+	req_access = newlist();
+	req_one_access = list(6,5)
+	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "erb" = (
 /obj/structure/window/reinforced{
 	dir = 1;
@@ -18344,7 +18365,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "esb" = (
 /turf/simulated/wall/prepainted,
 /area/assembly/robotics_surgery)
@@ -18388,7 +18409,7 @@
 	},
 /obj/item/modular_computer/laptop/preset/records,
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "ewb" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -18573,7 +18594,7 @@
 "eJb" = (
 /obj/item/weapon/stool/padded,
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "eKb" = (
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
@@ -18584,11 +18605,11 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "eLb" = (
 /obj/machinery/optable,
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "eMb" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -18603,8 +18624,12 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/alarm{
+	dir = 8;
+	step_x = 23
+	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "eNb" = (
 /obj/machinery/computer/operating{
 	name = "Robotics Operating Computer"
@@ -18973,13 +18998,16 @@
 	pixel_y = 2
 	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "fkb" = (
 /obj/structure/table/standard,
 /obj/item/weapon/autopsy_scanner,
 /obj/item/weapon/scalpel,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "flb" = (
 /obj/machinery/firealarm{
 	dir = 2;
@@ -19005,11 +19033,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "fnb" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/extinguisher_cabinet{
@@ -19140,7 +19168,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "fyb" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -19336,6 +19364,7 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
+	step_x = 13;
 	pixel_x = -35
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -19400,8 +19429,8 @@
 /area/medical/infirmary)
 "fVb" = (
 /obj/machinery/door/airlock/medical{
-	name = "Morgue";
-	req_access = list(6,5)
+	name = "Autopsy";
+	req_access = list(5)
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -19412,7 +19441,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "fWb" = (
 /obj/machinery/door/airlock/medical{
 	name = "Examination Room";
@@ -21778,6 +21807,17 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
+"jxa" = (
+/obj/structure/morgue{
+	icon_state = "morgue1";
+	dir = 8
+	},
+/obj/machinery/light_switch{
+	step_x = 24;
+	step_y = -8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/medical/morgue)
 "jxb" = (
 /obj/structure/table/standard,
 /obj/item/device/robotanalyzer,
@@ -21877,6 +21917,9 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
+"jCM" = (
+/turf/simulated/wall,
+/area/medical/autopsy)
 "jDb" = (
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -22563,6 +22606,7 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
+	step_x = 13;
 	pixel_x = -35
 	},
 /obj/machinery/light{
@@ -22695,6 +22739,20 @@
 /obj/machinery/photocopier,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
+"kYM" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/medical/morgue)
 "kZb" = (
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
@@ -22710,8 +22768,11 @@
 	pixel_x = 6;
 	pixel_y = -24
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
-/area/medical/morgue)
+/area/medical/autopsy)
 "lab" = (
 /turf/simulated/floor/tiled,
 /area/assembly/chargebay)
@@ -23573,6 +23634,18 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
+"mww" = (
+/obj/structure/morgue,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/medical/morgue)
 "mxb" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -24321,6 +24394,7 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
+	step_x = 13;
 	pixel_x = -35
 	},
 /obj/machinery/camera/network/research{
@@ -26023,6 +26097,7 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
+	step_x = 13;
 	pixel_x = -35
 	},
 /turf/simulated/floor/tiled/white,
@@ -26616,6 +26691,7 @@
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
+	step_x = 13;
 	pixel_x = -35
 	},
 /turf/simulated/floor/tiled/white,
@@ -27725,6 +27801,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
+"xuW" = (
+/obj/structure/morgue,
+/obj/item/device/radio/intercom{
+	dir = 4;
+	step_x = 13;
+	pixel_x = -35
+	},
+/turf/simulated/floor/tiled/dark,
+/area/medical/morgue)
 "xPU" = (
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
@@ -51044,10 +51129,10 @@ cYb
 aep
 aep
 aep
-aep
-aep
-aep
-aep
+jCM
+jCM
+jCM
+jCM
 hYb
 apJ
 aqQ
@@ -51243,13 +51328,13 @@ adt
 aep
 afn
 agn
-agn
+xuW
 agn
 dRb
 emb
 evb
 fjb
-aep
+jCM
 aoK
 lXb
 aqR
@@ -51443,7 +51528,7 @@ mpy
 acS
 adt
 aep
-cIb
+kYM
 cIb
 cIb
 cIb
@@ -51451,7 +51536,7 @@ cIb
 enb
 eJb
 fkb
-aep
+jCM
 idb
 kmb
 aqS
@@ -51645,7 +51730,7 @@ mpy
 acT
 adw
 aep
-afn
+mww
 agn
 agn
 dIb
@@ -51653,7 +51738,7 @@ dSb
 epb
 eKb
 kZb
-aep
+jCM
 ieb
 ktb
 aqQ
@@ -52057,7 +52142,7 @@ cIb
 erb
 eMb
 fxb
-aep
+jCM
 iub
 fpb
 aqT
@@ -52253,7 +52338,7 @@ adt
 aep
 afq
 agq
-agq
+jxa
 dFb
 dTb
 alM
