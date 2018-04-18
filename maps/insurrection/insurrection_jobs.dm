@@ -26,6 +26,7 @@
 	create_record = 0
 	account_allowed = 1
 	generate_email = 0
+	is_whitelisted = 1
 
 	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/Insurrectionist_leader
