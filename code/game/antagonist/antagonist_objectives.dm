@@ -63,7 +63,7 @@
 		return
 	var/new_ambitions = input(src, "Write a short sentence of what your character hopes to accomplish \
 	today as an antagonist.  Remember that this is purely optional.  It will be shown at the end of the \
-	round for everybody else.", "Ambitions", mind.ambitions) as null|message
+	round for everybody else.", "Ambitions", html_decode(mind.ambitions)) as null|message
 	if(isnull(new_ambitions))
 		return
 	new_ambitions = sanitize(new_ambitions)

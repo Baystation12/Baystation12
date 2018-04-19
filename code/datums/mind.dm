@@ -193,7 +193,7 @@
 		var/datum/mind/mind = locate(href_list["amb_edit"])
 		if(!mind)
 			return
-		var/new_ambition = input("Enter a new ambition", "Memory", mind.ambitions) as null|message
+		var/new_ambition = input("Enter a new ambition", "Memory", html_decode(mind.ambitions)) as null|message
 		if(isnull(new_ambition))
 			return
 		new_ambition = sanitize(new_ambition)

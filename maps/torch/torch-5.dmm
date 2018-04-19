@@ -11377,16 +11377,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
-"yg" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
-	},
-/obj/structure/sign/solgov{
-	pixel_x = -32
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/space)
 "yh" = (
 /obj/effect/floor_decal/scglogo{
 	icon_state = "1,0"
@@ -12008,12 +11998,6 @@
 /obj/structure/closet/secure_closet/cos,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cos)
-"Eg" = (
-/obj/structure/sign/solgov{
-	pixel_x = 32
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/hallway/primary/bridge/aft)
 "Eh" = (
 /obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue{
@@ -14786,6 +14770,10 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"Xp" = (
+/obj/structure/sign/solgov,
+/turf/simulated/wall/titanium,
+/area/aquila_hangar/start)
 "Xz" = (
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/heads/cobed)
@@ -32258,7 +32246,7 @@ eb
 eb
 Ec
 Fc
-Eg
+DN
 Ug
 DN
 ec
@@ -32460,7 +32448,7 @@ ec
 ec
 ec
 Gc
-ec
+Xp
 Vg
 Ib
 ec
@@ -35284,7 +35272,7 @@ ad
 ad
 ad
 gY
-ec
+Xp
 Ag
 Ag
 Ag
@@ -35486,7 +35474,7 @@ ad
 ad
 ad
 fp
-yg
+eg
 eg
 eg
 eg
