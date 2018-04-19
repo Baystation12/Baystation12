@@ -1,5 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Adds Spellbound Servants. Powerful minions of wizards, each with their own gimmick and theme."
-  - rscadd: "Implements two mutations, nobreathe and spaceres, in conjunction with the spellbound."
