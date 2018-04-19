@@ -141,12 +141,19 @@
 
 /decl/hierarchy/supply_pack/security/egun
 	name = "Weapons - Energy sidearms"
-	contains = list(/obj/item/weapon/gun/energy/gun = 4)
+	contains = list(/obj/item/weapon/gun/energy/secure/gun = 4)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Energy sidearms crate"
 	access = access_armory
 	security_level = SUPPLY_SECURITY_ELEVATED
+
+/decl/hierarchy/supply_pack/security/egun/shady
+	name = "Weapons - Energy sidearms (For disposal)"
+	contains = list(/obj/item/weapon/gun/energy/gun = 4)
+	cost = 60
+	contraband = 1
+	security_level = null
 
 /decl/hierarchy/supply_pack/security/ion
 	name = "Weapons - Electromagnetic"

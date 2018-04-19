@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Supply crates now have secure variants of guns."
+  - rscadd: "Unsecure guns can be ordered with contraband crates."
