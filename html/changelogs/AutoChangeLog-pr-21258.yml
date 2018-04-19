@@ -1,0 +1,6 @@
+author: "HetNeSS"
+delete-after: True
+changes: 
+  - maptweak: "Morgue has been split up to two sections - \"Morgue\" and \"Autopsy\". Autopsy - area created."
+  - imageadd: "Autopsy - area icon added"
+  - rscadd: "Two sliding doors added to separate the morgue from the autopsy zone. Morgue or Medical access level required on each one. Autopsy atmospherics controller added. Morgue - lightswitch, APC added."
