@@ -25,15 +25,6 @@
 	</div>
 </div>
 
-<div class="item">
-	<div class="itemLabel">
-		3D sound:
-	</div>
-	<div class="itemContent">
-		{{:helper.link('On', null, {'target': '3d_sound', 'value': 1}, data.playback.three_dimensional_sound ? 'selected' : null)}}
-		{{:helper.link('Off', null, {'target': '3d_sound', 'value': 0}, !data.playback.three_dimensional_sound ? 'selected' : null)}}
-	</div>
-</div>
 {{/if}}
 
 <h3>Basic options</h3>
@@ -154,7 +145,7 @@
 	<div class="itemContent">
 		{{for data.advanced_options.all_environments}}
 			{{if value == "Custom"}}
-				{{:helper.link(value, null, {'target': 'select_env', 'value': index-1}, data.advanced_options.selected_environment == value ? 'selected': data.playback.three_dimensional_sound ? null : 'disabled')}}
+				{{:helper.link(value, null, {'target': 'select_env', 'value': index-1}, data.advanced_options.selected_environment == value ? 'selected': 'disabled')}}
 			{{else}}
 				{{:helper.link(value, null, {'target': 'select_env', 'value': index-1}, data.advanced_options.selected_environment == value ? 'selected': null)}}
 			{{/if}}

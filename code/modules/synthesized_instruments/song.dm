@@ -88,8 +88,10 @@
 	sound_copy.wait = 0
 	sound_copy.repeat = 0
 	sound_copy.frequency = frequency
-	sound_copy.environment = 0 //Assume 0 unless player overrides it
+
 	player.apply_modifications(sound_copy, which, where, which_one)
+	//Technically no environment is possible, but our procs are not designed to handle it
+	sound_copy.environment = isnum(sound_copy.environment) ? Clamp(sound_copy.environment, 0, 25) : sound_copy.environment
 
 	var/current_volume = Clamp(sound_copy.volume, 0, 100)
 	sound_copy.volume = current_volume //Sanitize volume

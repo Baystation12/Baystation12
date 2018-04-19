@@ -15,9 +15,9 @@
 /datum/nano_module/usage_info/ui_interact(mob/user, ui_key = "usage_info", var/datum/nanoui/ui = null, var/force_open = 0)
 	var/global/list/data = list()
 	data.Cut()
-	data["channels_left"] = src.song_channels.len
+	data["channels_left"] = GLOB.sound_player.channel_ceiling - GLOB.sound_player.taken_channels.len
 	data["events_active"] = src.event_manager_events.len
-	data["max_channels"] = GLOB.musical_config.channels_per_instrument
+	data["max_channels"] = GLOB.sound_player.channel_ceiling
 	data["max_events"] = GLOB.musical_config.max_events
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)

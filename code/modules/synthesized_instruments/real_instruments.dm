@@ -109,7 +109,6 @@
 			var/new_instrument = input(usr, "Choose an instrument") in instruments_available as text|null
 			if (new_instrument)
 				src.player.song.instrument_data = instruments[new_instrument]
-		if ("3d_sound") src.player.three_dimensional_sound = value
 		if ("autorepeat") src.player.song.autorepeat = value
 		if ("decay") src.player.song.linear_decay = value
 		if ("echo") src.player.apply_echo = value
@@ -142,7 +141,6 @@
 		"playback" = list(
 			"playing" = src.player.song.playing,
 			"autorepeat" = src.player.song.autorepeat,
-			"three_dimensional_sound" = src.player.three_dimensional_sound
 		),
 		"basic_options" = list(
 			"cur_instrument" = src.player.song.instrument_data.name,
@@ -166,7 +164,7 @@
 		),
 		"show" = list(
 			"playback" = src.player.song.lines.len > 0,
-			"custom_env_options" = GLOB.musical_config.is_custom_env(src.player.virtual_environment_selected) && src.player.three_dimensional_sound,
+			"custom_env_options" = GLOB.musical_config.is_custom_env(src.player.virtual_environment_selected),
 			"env_settings" = GLOB.musical_config.env_settings_available
 		),
 		"status" = list(
