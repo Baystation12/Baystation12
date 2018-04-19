@@ -92,22 +92,22 @@
 /obj/structure/closet/secure_closet/guncabinet/sidearm/WillContain()
 	return list(
 			/obj/item/clothing/accessory/holster/thigh = 2,
-			/obj/item/weapon/gun/energy/secure/gun = 3,
+			/obj/item/weapon/gun/energy/gun/secure = 3,
 	)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small
 	name = "personal sidearm cabinet"
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small/WillContain()
-	return list(/obj/item/weapon/gun/energy/secure/gun/small = 4)
+	return list(/obj/item/weapon/gun/energy/gun/small/secure = 4)
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined
 	name = "combined sidearm cabinet"
 
 /obj/structure/closet/secure_closet/guncabinet/sidearm/combined/WillContain()
 	return list(
-		/obj/item/weapon/gun/energy/secure/gun/small = 2,
+		/obj/item/weapon/gun/energy/gun/small/secure = 2,
 		/obj/item/clothing/accessory/holster/thigh = 2,
-		/obj/item/weapon/gun/energy/secure/gun = 2,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/gun/energy/secure/gun, /obj/item/weapon/gun/energy/secure/gun/small))
+		/obj/item/weapon/gun/energy/gun/secure = 2,
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/gun/energy/gun/secure, /obj/item/weapon/gun/energy/gun/small/secure))
 	)
