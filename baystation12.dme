@@ -52,6 +52,7 @@
 #include "code\__defines\qdel.dm"
 #include "code\__defines\research.dm"
 #include "code\__defines\shields.dm"
+#include "code\__defines\skills.dm"
 #include "code\__defines\species.dm"
 #include "code\__defines\subsystem-priority.dm"
 #include "code\__defines\subsystems.dm"

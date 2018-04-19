@@ -1,44 +1,4 @@
-// Skill-related constants
-
 GLOBAL_LIST_EMPTY(skills)
-
-var/const/SKILL_NONE = 1
-var/const/SKILL_BASIC = 2
-var/const/SKILL_ADEPT = 3
-var/const/SKILL_EXPERT = 4
-var/const/SKILL_PROF = 5
-
-var/const/SKILL_MIN = 1 // Min skill value selectable
-var/const/SKILL_MAX = 5 // Max skill value selectable
-var/const/SKILL_DEFAULT = 4 //most mobs will default to this
-
-var/const/SKILL_EASY = 1
-var/const/SKILL_AVERAGE = 2
-var/const/SKILL_HARD = 4
-
-var/const/SKILL_MANAGEMENT = /decl/hierarchy/skill/organizational/management
-var/const/SKILL_BUREAUCRACY =/decl/hierarchy/skill/organizational/bureaucracy
-var/const/SKILL_FINANCE = /decl/hierarchy/skill/organizational/finance
-var/const/SKILL_EVA = /decl/hierarchy/skill/general/EVA
-var/const/SKILL_MECH = /decl/hierarchy/skill/general/mech
-var/const/SKILL_PILOT = /decl/hierarchy/skill/general/pilot
-var/const/SKILL_HAULING = /decl/hierarchy/skill/general/hauling
-var/const/SKILL_COMPUTER = /decl/hierarchy/skill/general/computer
-var/const/SKILL_BOTANY = /decl/hierarchy/skill/service/botany
-var/const/SKILL_COOKING = /decl/hierarchy/skill/service/cooking
-var/const/SKILL_COMBAT = /decl/hierarchy/skill/security/combat
-var/const/SKILL_WEAPONS = /decl/hierarchy/skill/security/weapons
-var/const/SKILL_FORENSICS = /decl/hierarchy/skill/security/forensics
-var/const/SKILL_CONSTRUCTION = /decl/hierarchy/skill/engineering/construction
-var/const/SKILL_ELECTRICAL = /decl/hierarchy/skill/engineering/electrical
-var/const/SKILL_ATMOS = /decl/hierarchy/skill/engineering/atmos
-var/const/SKILL_ENGINES = /decl/hierarchy/skill/engineering/engines
-var/const/SKILL_DEVICES = /decl/hierarchy/skill/research/devices
-var/const/SKILL_SCIENCE = /decl/hierarchy/skill/research/science
-var/const/SKILL_MEDICAL = /decl/hierarchy/skill/medical/medical
-var/const/SKILL_ANATOMY = /decl/hierarchy/skill/medical/anatomy
-var/const/SKILL_VIROLOGY = /decl/hierarchy/skill/medical/virology
-var/const/SKILL_CHEMISTRY = /decl/hierarchy/skill/medical/chemistry
 
 /decl/hierarchy/skill
 	var/ID = "none"					// ID of this skill. Needs to be unique.
