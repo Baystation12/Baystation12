@@ -1,0 +1,6 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - rscadd: "hydroponics trays, covers, and plump helmets have been re-sprited."
+  - tweak: "Plump helmets are now repeatedly harvest-able, but require a high amount of nutriment to sustain. You only harvest the 'helmet' of the plump helmet, as well."
+  - tweak: "Hydro trays will default to 5 lumen lighting for their covers"
