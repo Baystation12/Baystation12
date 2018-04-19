@@ -28,6 +28,7 @@ datum/musical_event
 
 
 /datum/musical_event/proc/update_sound()
+	src.token.PrivUpdateStatus(SOUND_UPDATE)
 	src.token.SetVolume(new_volume)
 
 

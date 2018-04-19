@@ -20,7 +20,7 @@ GLOBAL_DATUM_INIT(musical_config, /datum/musical_config, new)
 	var/usage_info_channel_resolution = 1
 	var/usage_info_event_resolution = 8
 
-	var/env_settings_available = 0
+	var/env_settings_available = 1
 	// Keep disabled until I figure out how to preserve environment settings
 
 	var/list/env_default = list(7.5, 1.0, -1000, -100, 0, 1.49, 0.83, 1.0, -2602, 0.0007, 200, 0.011, 0.25, 0.0, 0.25, 0.0, -5.0, 5000, 250.0, 0.0, 100, 100, 63)

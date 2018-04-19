@@ -7,7 +7,6 @@
 	var/volume_falloff_exponent = 0.9
 	var/forced_sound_in = 4
 	var/falloff = 2
-	var/three_dimensional_sound = 1
 	var/apply_echo = 0
 	var/virtual_environment_selected = -1
 	var/env[23]
@@ -52,8 +51,7 @@
 
 /datum/sound_player/proc/apply_modifications(sound/what, note_num, which_line, which_note) // You don't need to override this
 	what.volume = volume
-	if (src.three_dimensional_sound)
-		what.falloff = falloff
+	what.falloff = falloff
 	if (GLOB.musical_config.env_settings_available)
 		what.environment = GLOB.musical_config.is_custom_env(src.virtual_environment_selected) ? src.env : src.virtual_environment_selected
 	if (src.apply_echo)
