@@ -1,5 +1,4 @@
 datum/musical_event
-	var/sound/object
 	var/datum/sound_player/source
 	var/time = 0
 	var/new_volume = 100
@@ -7,23 +6,21 @@ datum/musical_event
 	var/sound_id
 
 
-/datum/musical_event/New(datum/sound_player/source, sound/object, time, volume)
+/datum/musical_event/New(datum/sound_player/source, datum/sound_token/token, time, volume)
 	src.source = source
-	src.object = object
+	src.token = token
 	src.time = time
 	src.new_volume = volume
-	src.sound_id = "[type]_[sequential_id(type)]"
+
 
 
 /datum/musical_event/Destroy()
 	source = null
-	if(token)
-		QDEL_NULL(token)
-	object = null
+	token = null
 
 
 /datum/musical_event/proc/tick()
-	if (!(istype(object) && istype(source)))
+	if (!(istype(token) && istype(source)))
 		return
 	if (src.new_volume > 0) src.update_sound()
 	else src.destroy_sound()
@@ -31,12 +28,11 @@ datum/musical_event
 
 
 /datum/musical_event/proc/update_sound()
-	src.token = sound_player.PlayLoopingSound(src.source.actual_instrument, sound_id, src.object, volume = src.new_volume, range = src.source.range, falloff = src.object.falloff, prefer_mute = FALSE)
-	if(src.token == null)
-		log_world("THIS IS FAILING!")
+	src.token.SetVolume(new_volume)
 
 
 /datum/musical_event/proc/destroy_sound()
+	token.Stop()
 	QDEL_NULL(token)
 
 
@@ -47,9 +43,9 @@ datum/musical_event
 	var/kill_loop = 0
 
 
-/datum/musical_event_manager/proc/push_event(datum/sound_player/source, sound/object, time, volume)
-	if (istype(source) && istype(object) && volume >= 0 && volume <= 100)
-		src.events += new /datum/musical_event(source, object, time, volume)
+/datum/musical_event_manager/proc/push_event(datum/sound_player/source, datum/sound_token/token, time, volume)
+	if (istype(source) && istype(token) && volume >= 0 && volume <= 100)
+		src.events += new /datum/musical_event(source, token, time, volume)
 
 
 
