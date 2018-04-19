@@ -69,12 +69,16 @@
 	return 1
 
 /obj/item/weapon/gun/energy/secure/special_check()
-	if(!emagged && (!authorized_modes[sel_mode] || !registered_owner))
+	if(!emagged && !fire_free() && (!authorized_modes[sel_mode] || !registered_owner))
 		audible_message("<span class='warning'>\The [src] buzzes, refusing to fire.</span>")
 		playsound(loc, 'sound/machines/buzz-sigh.ogg', 30, 0)
 		return 0
 
 	. = ..()
+
+/obj/item/weapon/gun/energy/secure/proc/fire_free()
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	return security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)
 
 /obj/item/weapon/gun/energy/secure/switch_firemodes()
 	var/next_mode = get_next_authorized_mode()
@@ -95,8 +99,6 @@
 		to_chat(user, "A small screen on the side of the weapon indicates that it is registered to [registered_owner].")
 
 /obj/item/weapon/gun/energy/secure/proc/get_next_authorized_mode()
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	var/shit_on_fan = security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)
 	. = sel_mode
 	do
 		.++
@@ -104,7 +106,7 @@
 			. = 1
 		if(. == sel_mode) // just in case all modes are unauthorized
 			return null
-	while(!authorized_modes[.] && !emagged && !shit_on_fan)
+	while(!authorized_modes[.] && !emagged && !fire_free())
 
 /obj/item/weapon/gun/energy/secure/emag_act(var/charges, var/mob/user)
 	if(emagged || !charges)
