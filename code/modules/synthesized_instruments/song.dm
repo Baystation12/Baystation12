@@ -19,6 +19,8 @@
 	var/octave_range_min
 	var/octave_range_max
 
+	var/sound_id
+
 
 /datum/synthesized_song/New(datum/sound_player/playing_object, datum/instrument/instrument)
 	src.player = playing_object
@@ -27,7 +29,8 @@
 	src.octave_range_max = GLOB.musical_config.highest_octave
 
 	instrument.create_full_sample_deviation_map()
-	src.occupy_channels()
+
+	src.sound_id = "[type]_[sequential_id(type)]"
 
 
 /datum/synthesized_song/proc/sanitize_tempo(new_tempo) // Identical to datum/song
@@ -77,25 +80,27 @@
 	var/freq = 2**(Q*pair.deviation)
 	#undef Q
 
-	src.play(pair.sample, duration, freq, 0, note_num, where, which_one)
+	src.play(pair.sample, duration, freq, note_num, where, which_one)
 
 
-/datum/synthesized_song/proc/play(what, duration, frequency, channel, which, where, which_one)
+/datum/synthesized_song/proc/play(what, duration, frequency, which, where, which_one)
 	var/sound/sound_copy = sound(what)
 	sound_copy.wait = 0
 	sound_copy.repeat = 0
 	sound_copy.frequency = frequency
-	sound_copy.channel = channel
+	sound_copy.environment = 0 //Assume 0 unless player overrides it
 	player.apply_modifications(sound_copy, which, where, which_one)
 
+	var/current_volume = Clamp(sound_copy.volume, 0, 100)
+	sound_copy.volume = current_volume //Sanitize volume
+	var/datum/sound_token/token = GLOB.sound_player.PlaySoundDatum(src.player.actual_instrument, src.sound_id, sound_copy, src.player.range, prefer_mute = FALSE)
 	#if DM_VERSION < 511
 	sound_copy.frequency = 1
 	#endif
 	var/delta_volume = player.volume / src.sustain_timer
-	var/current_volume = max(round(sound_copy.volume), 0)
 
 	var/tick = duration
-	while (current_volume > 0)
+	while ((current_volume > 0) && token)
 		var/new_volume = current_volume
 		tick += world.tick_lag
 		if (delta_volume <= 0)
@@ -112,7 +117,7 @@
 			current_volume = new_volume
 			continue
 		current_volume = sanitized_volume
-		src.player.event_manager.push_event(src.player, sound_copy, tick, current_volume)
+		src.player.event_manager.push_event(src.player, token, tick, current_volume)
 		if (current_volume <= 0)
 			break
 
@@ -192,7 +197,6 @@
 
 /datum/synthesized_song/proc/play_song(mob/user)
 	// This code is really fucking horrible.
-	src.player.cache_unseen_tiles()
 	src.player.event_manager.activate()
 	var/list/allowed_suff = list("b", "n", "#", "s")
 	var/list/note_off_delta = list("a"=91, "b"=91, "c"=98, "d"=98, "e"=98, "f"=98, "g"=98)

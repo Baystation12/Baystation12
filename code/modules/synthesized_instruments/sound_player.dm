@@ -45,14 +45,13 @@
 	src.stored_locations.Cut()
 	src.actual_instrument = null
 	src.instrument = null
-	for (var/channel in src.song.free_channels)
-		GLOB.musical_config.free_channels += channel // Deoccupy channels
 	song = null
 	QDEL_NULL(song)
 	. = ..()
 
 
 /datum/sound_player/proc/apply_modifications(sound/what, note_num, which_line, which_note) // You don't need to override this
+	what.volume = volume
 	if (src.three_dimensional_sound)
 		what.falloff = falloff
 	if (GLOB.musical_config.env_settings_available)
@@ -63,10 +62,5 @@
 
 /datum/sound_player/proc/shouldStopPlaying(mob/user)
 	return actual_instrument:shouldStopPlaying(user)
-
-
-/datum/sound_player/proc/channel_overload()
-	// Cease playing
-	return 0
 
 #undef REFRESH_FREQUENCY
