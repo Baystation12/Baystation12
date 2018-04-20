@@ -208,7 +208,7 @@
 
 /obj/structure/showcase/totem/examine()
 	..()
-	to_chat(usr, "It's been engraved with the symbols '<font face='Shage'>LArge bIrD [number]</font>'.") //i am not a linguist
+	to_chat(usr, "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'.") //i am not a linguist
 
 
 /obj/item/weapon/stool/stone/New(var/newloc)
