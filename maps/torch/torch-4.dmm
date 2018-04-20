@@ -21814,8 +21814,7 @@
 	},
 /obj/machinery/light_switch{
 	pixel_x = 24;
-	pixel_y = -8;
-	
+	pixel_y = -8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
@@ -24771,7 +24770,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
 "olG" = (
-/turf/simulated/wall/r_wall/hull,
+/turf/simulated/shuttle/wall/corner/dark,
 /area/shuttle/escape_pod16/station)
 "omb" = (
 /obj/structure/table/standard,
@@ -44895,9 +44894,9 @@ aAr
 aPO
 jjh
 vwr
-olG
-olG
-olG
+aSz
+aSz
+aSz
 olG
 aaa
 aaa
