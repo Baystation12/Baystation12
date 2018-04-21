@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "Stun electrode projectiles fired from stun revolvers now move faster."
