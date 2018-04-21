@@ -21,7 +21,6 @@
 		/area/unscfrigate/tcomms = NO_SCRUBBER,
 		/area/unscfrigate/bridge = NO_SCRUBBER,
 		/area/unscfrigate/mac/cannon = NO_SCRUBBER|NO_VENT,
-
 		/area/turbolift = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 //Top Deck
