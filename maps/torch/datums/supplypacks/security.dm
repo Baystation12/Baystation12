@@ -57,12 +57,19 @@
 
 /decl/hierarchy/supply_pack/security/laser
 	name = "Weapons - Laser carbines"
-	contains = list(/obj/item/weapon/gun/energy/laser = 4)
+	contains = list(/obj/item/weapon/gun/energy/secure/laser = 4)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Laser carbines crate"
 	access = access_emergency_armory
 	security_level = SUPPLY_SECURITY_ELEVATED
+
+/decl/hierarchy/supply_pack/security/laser/shady
+	name = "Weapons - Laser carbines (For disposal)"
+	contains = list(/obj/item/weapon/gun/energy/laser = 4)
+	cost = 80
+	contraband = 1
+	security_level = null
 
 /decl/hierarchy/supply_pack/security/advancedlaser
 	name = "Weapons - Advanced Laser Weapons"
