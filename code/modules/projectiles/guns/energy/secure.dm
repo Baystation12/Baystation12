@@ -124,11 +124,11 @@
 	modifystate = "revolverstun"
 	item_state = null
 
-	projectile_type = /obj/item/projectile/energy/electrode
+	projectile_type = /obj/item/projectile/energy/electrode/green
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_DATA = 2)
 	max_shots = 8
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode, modifystate="revolverstun"),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode/green, modifystate="revolverstun"),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/energy/electrode/stunshot, modifystate="revolvershock")
 		)
 
