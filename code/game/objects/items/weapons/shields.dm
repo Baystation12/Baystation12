@@ -64,6 +64,8 @@
 	matter = list("glass" = 7500, DEFAULT_WALL_MATERIAL = 1000)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
+	var/max_block = 10
+	var/can_block_lasers = FALSE
 
 /obj/item/weapon/shield/riot/handle_shield(mob/user)
 	. = ..()
@@ -73,7 +75,9 @@
 	if(istype(damage_source, /obj/item/projectile))
 		var/obj/item/projectile/P = damage_source
 		//plastic shields do not stop bullets or lasers, even in space. Will block beanbags, rubber bullets, and stunshots just fine though.
-		if((is_sharp(P) && damage > 10) || istype(P, /obj/item/projectile/beam))
+		if(is_sharp(P) && damage >= max_block)
+			return 0
+		if(istype(P, /obj/item/projectile/beam) && (!can_block_lasers || (P.armor_penetration >= max_block)))
 			return 0
 	return base_block_chance
 
@@ -85,6 +89,20 @@
 			cooldown = world.time
 	else
 		..()
+
+/obj/item/weapon/shield/riot/metal
+	name = "plasteel combat shield"
+	icon_state = "metal"
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_BACK
+	force = 6.0
+	throwforce = 7.0
+	throw_range = 3
+	w_class = ITEM_SIZE_HUGE
+	matter = list("plasteel" = 8500)
+	max_block = 35
+	can_block_lasers = TRUE
+	slowdown_general = 1.5
 
 /obj/item/weapon/shield/buckler
 	name = "buckler"
