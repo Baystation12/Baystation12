@@ -205,17 +205,12 @@
 
 /obj/item/clothing/accessory/medal/iron/star
 	name = "iron star medal"
-	desc = "An iron star awarded to members of the SCG for meritorious achievement or service in a combat zone."
+	desc = "An iron star awarded to members of the UNSC for meritorious achievement or service in a combat zone."
 	icon_state = "iron_star"
 
-/obj/item/clothing/accessory/medal/iron/nanotrasen
-	name = "\improper NanoTrasen merit medal"
-	desc = "An iron medal awarded to NanoTrasen employees for merit."
-	icon_state = "iron_nt"
-
 /obj/item/clothing/accessory/medal/iron/sol
-	name = "\improper Sol expeditionary medal"
-	desc = "An iron medal awarded to members of the SCG for service outside of the borders of the Sol Central Government."
+	name = "\improper UNSC expeditionary medal"
+	desc = "An iron medal awarded to members of the UNSC for service outside of the borders of the United Earth Government."
 	icon_state = "iron_sol"
 
 /obj/item/clothing/accessory/medal/bronze
@@ -226,17 +221,12 @@
 
 /obj/item/clothing/accessory/medal/bronze/heart
 	name = "bronze heart medal"
-	desc = "A bronze heart awarded to members of the SCG for injury or death in the line of duty."
+	desc = "A bronze heart awarded to members of the UNSC for injury or death in the line of duty."
 	icon_state = "bronze_heart"
 
-/obj/item/clothing/accessory/medal/bronze/nanotrasen
-	name = "\improper NanoTrasen sciences medal"
-	desc = "A bronze medal awarded to NanoTrasen employees for signifigant contributions to the fields of science or engineering."
-	icon_state = "bronze_nt"
-
 /obj/item/clothing/accessory/medal/bronze/sol
-	name = "\improper Sol defensive operations medal"
-	desc = "A bronze medal awarded for members of the SCG for service defending the border regions."
+	name = "\improper UNSC defensive operations medal"
+	desc = "A bronze medal awarded for members of the UNSC for service defending the border regions."
 	icon_state = "bronze_sol"
 
 /obj/item/clothing/accessory/medal/silver
@@ -247,17 +237,12 @@
 
 /obj/item/clothing/accessory/medal/silver/sword
 	name = "combat action medal"
-	desc = "A silver medal awarded to members of the SCG for honorable service while under enemy fire."
+	desc = "A silver medal awarded to members of the UNSC for honorable service while under enemy fire."
 	icon_state = "silver_sword"
 
-/obj/item/clothing/accessory/medal/silver/nanotrasen
-	name = "\improper NanoTrasen service medal"
-	desc = "A silver medal awarded to NanoTrasen employees for distinguished service in support of corporate interests."
-	icon_state = "silver_nt"
-
 /obj/item/clothing/accessory/medal/silver/sol
-	name = "\improper Sol valor medal"
-	desc = "A silver medal awarded for members of the SCG for acts of exceptional valor."
+	name = "\improper UNSC valor medal"
+	desc = "A silver medal awarded for members of the UNSC for acts of exceptional valor."
 	icon_state = "silver_sol"
 
 /obj/item/clothing/accessory/medal/gold
@@ -268,32 +253,27 @@
 
 /obj/item/clothing/accessory/medal/gold/star
 	name = "gold star medal"
-	desc = "A gold star awarded to members of the SCG for acts of heroism in a combat zone."
+	desc = "A gold star awarded to members of the UNSC for acts of heroism in a combat zone."
 	icon_state = "gold_star"
 
 /obj/item/clothing/accessory/medal/gold/sun
 	name = "solar service medal"
-	desc = "A gold medal awarded to members of the SCG by the Secretary General for significant contributions to the Sol Central Government."
+	desc = "A gold medal awarded to members of the UEG by the Secretary General for significant contributions to the United Earth Government"
 	icon_state = "gold_sun"
 
 /obj/item/clothing/accessory/medal/gold/crest
 	name = "solar honor medal"
-	desc = "A gold medal awarded to members of the Defense Forces by the Secretary General for personal acts of valor and heroism above and beyond the call of duty."
+	desc = "A gold medal awarded to members of the UNSC by the Secretary General for personal acts of valor and heroism above and beyond the call of duty."
 	icon_state = "gold_crest"
 
-/obj/item/clothing/accessory/medal/gold/nanotrasen
-	name = "\improper NanoTrasen command medal"
-	desc = "A gold medal awarded to NanoTrasen employees for service as the Captain of a NanoTrasen facility, station, or vessel."
-	icon_state = "gold_nt"
-
 /obj/item/clothing/accessory/medal/gold/sol
-	name = "\improper Sol sapientarian medal"
-	desc = "A gold medal awarded for members of the SCG for significant contributions to sapient rights."
+	name = "\improper Earth sapientarian medal"
+	desc = "A gold medal awarded for members of the UEG for significant contributions to sapient rights."
 	icon_state = "gold_sol"
 
 /obj/item/clothing/accessory/medal/heart
 	name = "medical medal"
-	desc = "A white heart emblazoned with a red cross awarded to members of the SCG for service as a medical professional in a combat zone."
+	desc = "A white heart emblazoned with a red cross awarded to members of the UNSC for service as a medical professional in a combat zone."
 	icon_state = "white_heart"
 
 //Ribbons
@@ -305,22 +285,22 @@
 
 /obj/item/clothing/accessory/ribbon/marksman
 	name = "marksmanship ribbon"
-	desc = "A military decoration awarded to members of the SCG for good marksmanship scores in training. Common in the days of energy weapons."
+	desc = "A military decoration awarded to members of the UNSC for good marksmanship scores in training."
 	icon_state = "ribbon_marksman"
 
 /obj/item/clothing/accessory/ribbon/peace
 	name = "peacekeeping ribbon"
-	desc = "A military decoration awarded to members of the SCG for service during a peacekeeping operation."
+	desc = "A military decoration awarded to members of the UNSC for service during a peacekeeping operation."
 	icon_state = "ribbon_peace"
 
 /obj/item/clothing/accessory/ribbon/frontier
 	name = "frontier ribbon"
-	desc = "A military decoration awarded to members of the SCG for service along the frontier."
+	desc = "A military decoration awarded to members of the UNSC for service along the frontier."
 	icon_state = "ribbon_frontier"
 
 /obj/item/clothing/accessory/ribbon/instructor
 	name = "instructor ribbon"
-	desc = "A military decoration awarded to members of the SCG for service as an instructor."
+	desc = "A military decoration awarded to members of the UNSC for service as an instructor."
 	icon_state = "ribbon_instructor"
 
 //Specialty Pins

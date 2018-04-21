@@ -18,6 +18,12 @@
 /obj/item/device/radio/headset/unsc/marine
 	ks2type = /obj/item/device/encryptionkey/teamcom
 
+/obj/item/device/radio/headset/unsc/odst
+	ks2type = /obj/item/device/encryptionkey/taccom
+
+/obj/item/device/radio/headset/unsc/odsto
+	ks2type = /obj/item/device/encryptionkey/taccomo
+
 //unsc officer headset
 /obj/item/device/radio/headset/unsc/officer
 	ks2type = /obj/item/device/encryptionkey/officercom

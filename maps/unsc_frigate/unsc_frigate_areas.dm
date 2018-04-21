@@ -16,7 +16,7 @@
 		/area/unscfrigate/logistics/hangar_aftport = NO_SCRUBBER,
 		/area/unscfrigate/logistics/hangar_foreport = NO_SCRUBBER,
 		/area/unscfrigate/hangar_starb = NO_SCRUBBER,
-		/area/unscfrigate/central = NO_SCRUBBER,
+		/area/unscfrigate/central = NO_SCRUBBER|NO_VENT,
 		/area/unscfrigate/hangar_port = NO_SCRUBBER,
 		/area/unscfrigate/tcomms = NO_SCRUBBER,
 		/area/unscfrigate/bridge = NO_SCRUBBER,

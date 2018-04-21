@@ -309,7 +309,7 @@
 
 /obj/item/clothing/suit/armor/vest/solgov
 	name = "\improper Sol Central Government armored vest"
-	desc = "A synthetic armor vest. This one is marked with the crest of the Sol Central Government."
+	desc = "A synthetic armor vest. This one is marked with the crest of the United Earth Government"
 	icon_state = "solvest"
 
 /obj/item/clothing/suit/armor/vest/detective
@@ -343,22 +343,22 @@
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/suit/storage/vest/nt
-	name = "corporate security heavy armored vest"
-	desc = "A synthetic armor vest with CORPORATE SECURITY printed in red lettering on the chest. This one has added webbing and ballistic plates."
+	name = "GCPD heavy armored vest"
+	desc = "A synthetic armor vest with GCPD printed in blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "ntwebvest"
 
 /obj/item/clothing/suit/storage/vest/nt/warden
-	name = "warden heavy armored vest"
-	desc = "A synthetic armor vest with WARDEN printed in silver lettering on the chest. This one has added webbing and ballistic plates."
+	name = "GCPD CID heavy armored vest"
+	desc = "A synthetic armor vest with CID printed in silver lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "secwebvest"
 
 /obj/item/clothing/suit/storage/vest/nt/hos
-	name = "commander heavy armored vest"
-	desc = "A synthetic armor vest with COMMANDER printed in gold lettering on the chest. This one has added webbing and ballistic plates."
+	name = "Chief of Police heavy armored vest"
+	desc = "A synthetic armor vest with Chief printed in gold lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "comwebvest"
 
 /obj/item/clothing/suit/storage/vest/solgov
-	name = "\improper Sol Central Government heavy armored vest"
+	name = "\improper United Earth Government heavy armored vest"
 	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "solwebvest"
 
@@ -369,7 +369,7 @@
 
 /obj/item/clothing/suit/storage/vest/solgov/command
 	name = "command heavy armored vest"
-	desc = "A synthetic armor vest with SOL CENTRAL GOVERNMENT printed in gold lettering on the chest. This one has added webbing and ballistic plates."
+	desc = "A synthetic armor vest with UNITED EARTH GOVERNMENT printed in gold lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "comwebvest"
 
 /obj/item/clothing/suit/storage/vest/pcrc

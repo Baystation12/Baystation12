@@ -5,6 +5,7 @@
 	uniform = /obj/item/clothing/under/unsc/technician
 	shoes = /obj/item/clothing/shoes/workboots
 	belt = /obj/item/weapon/storage/belt/utility/full
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e6)
 
 	flags = 0
 
@@ -15,5 +16,6 @@
 	uniform = /obj/item/clothing/under/unsc/technician
 	shoes = /obj/item/clothing/shoes/workboots
 	belt = /obj/item/weapon/storage/belt/utility/full
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
 
 	flags = 0

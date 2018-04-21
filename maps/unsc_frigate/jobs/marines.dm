@@ -1,6 +1,6 @@
 
 /datum/job/UNSC_ship/marine_co
-	title = "Marine Commanding Officer"
+	title = "Marine Company Officer"
 	min_rank = RANK_CAPT
 	default_rank = RANK_COL
 	max_rank = MARINE_CO_MAX
@@ -10,13 +10,14 @@
 	selection_color = "#667700"
 	req_admin_notify = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine_co
+	is_whitelisted = 1
 	//job_guide = "Your responsibility is to command the shipboard complement of marines. Nominally you answer to the captain, but he has limited control over you once deployed. Remember that a good soldier leads from the front, but you can't lead if you're dead."
 
 	access = list(access_unsc_bridge, access_unsc_crew, access_unsc_shuttles,
 		access_unsc_armoury, access_unsc_officers, access_unsc_marine)
 
 /datum/job/UNSC_ship/marine_xo
-	title = "Marine Executive Officer"
+	title = "Marine Company Sergeant"
 	min_rank = MARINE_CO_MIN
 	default_rank = RANK_1LT
 	max_rank = RANK_CAPT
@@ -26,6 +27,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine_xo
 	selection_color = "#667700"
 	req_admin_notify = 1
+	is_whitelisted = 1
 	//job_guide = "You are the 2IC of the shipboard marine complement, and what the marine CO says to you is gospel. Remember that a good soldier leads from the front, but you can't lead if you're dead."
 
 	access = list(access_unsc_bridge, access_unsc_crew, access_unsc_shuttles,
@@ -114,6 +116,7 @@
 	department_flag = MAR
 	total_positions = 4
 	spawn_positions = 4
+	faction_flag = ODST
 	ideal_character_age = 40
 	minimal_player_age = 21
 	selection_color = "#667700"
@@ -121,5 +124,22 @@
 	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist")
 	access = list(access_unsc_crew,
 		access_unsc_supplies, access_unsc_marine)
+	latejoin_at_spawnpoints = TRUE
+	is_whitelisted = 1
+
+/datum/job/UNSC_ship/odsto
+	title = "ONI Bridge Officer"
+	department_flag = MAR
+	total_positions = 1
+	faction_flag = ODST
+	spawn_positions = 1
+	ideal_character_age = 36
+	minimal_player_age = 27
+	selection_color = "#667700"
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odsto
+	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
+		access_unsc_ops, access_unsc_fighters, access_unsc_shuttles, access_unsc_medical,
+		access_unsc_armoury, access_unsc_supplies, access_unsc_officers, access_unsc_marine,
+		access_unsc_gunnery, access_unsc_ids, 60)
 	latejoin_at_spawnpoints = TRUE
 	is_whitelisted = 1

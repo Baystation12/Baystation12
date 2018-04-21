@@ -133,5 +133,27 @@
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
+/obj/item/weapon/card/id/unsc
+	name = "identification card"
+	desc = "An identification card worn by members of the UNSC."
+	icon = 'code/modules/halo/icons/objs/(Placeholder)card.dmi'
+	icon_state = "id"
+	item_state = "card-id"
+
+/obj/item/clothing/gloves/thick/unsc //Combined effect of SWAT gloves and insulated gloves
+	desc = "Standard Issue UNSC Marine Gloves."
+	name = "UNSC Combat gloves"
+	icon_state = "unsc_gloves"
+	item_state = "unsc_gloves"
+	siemens_coefficient = 0
+	permeability_coefficient = 0.05
+	force = 5
+	body_parts_covered = HANDS
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
+	cold_protection = HANDS
+	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
+	heat_protection = HANDS
+	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
+
 #undef MARINE_OVERRIDE
 #undef ITEM_INHAND

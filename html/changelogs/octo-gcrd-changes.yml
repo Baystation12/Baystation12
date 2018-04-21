@@ -1,0 +1,17 @@
+author: DoctorOctopus
+delete-after: True
+changes: 
+  - rscadd: "Makes R&D more halo-lore friendly."
+  - rscadd: "Removes the items that got it mapped out in the first place, no more laser guns."
+  - maptweak: "Mine cordoned off for safety reasons."
+  - maptweak: "Geminus City has had its nuclear weapons removed after concerns brought up by ONI."
+  - maptweak: "Slums given fronts in which illegal business can be conducted as though it is legal."
+  - maptweak: "Dead ends in slums increased."
+  - maptweak: "Project Theta instituted with Lore Master The Pillow's Approval."
+  - experiment: "Research and Development has been restored to GC's Science Bay."
+  - maptweak: "GCPD Armory remodeled, made more secure, organized."
+  - maptweak: "GCPD Storage Room emptied and refilled with various storage-related items."
+  - maptweak: "Redesigns the Detective's Office."
+  - maptweak: "Redesigns the Forensic Scientist's Lab, adds a morgue, full lab, ect."
+  - rscadd: "Adds a new GCPD Officer Alt-Title, GCPD Forensic Scientist."
+  - bugfix: "Fixed a few bugs for Desolane."

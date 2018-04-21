@@ -199,7 +199,7 @@
 
 /obj/item/projectile/bullet/a145_ap
 	damage = 80
-	step_delay = 0.3
+	step_delay = 0.1
 	penetrating = 5
 	armor_penetration = 80
 	accuracy = 6

@@ -106,7 +106,7 @@
 		var/chan_stat = channels[ch_name]
 		var/listening = !!(chan_stat & FREQ_LISTENING) != 0
 
-		dat.Add(list(list("chan" = ch_name, "display_name" = ch_name, "secure_channel" = 1, "sec_channel_listen" = !listening, "chan_span" = frequency_span_class(radiochannels[ch_name]))))
+		dat.Add(list(list("chan" = ch_name, "display_name" = ch_name, "secure_channel" = 1, "sec_channel_listen" = !listening, "chan_span" = halo_frequency_span_class(radiochannels[ch_name]))))
 
 	return dat
 
@@ -114,7 +114,7 @@
 	var/dat[0]
 	for(var/internal_chan in internal_channels)
 		if(has_channel_access(user, internal_chan))
-			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_name(text2num(internal_chan)), "chan_span" = frequency_span_class(text2num(internal_chan)))))
+			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_name(text2num(internal_chan)), "chan_span" = halo_frequency_span_class(text2num(internal_chan)))))
 
 	return dat
 
@@ -714,7 +714,8 @@
 	invisibility = 101
 	listening = 0
 	canhear_range = 0
-	channels=list("Engineering" = 1, "Security" = 1, "Medical" = 1, "Command" = 1, "Common" = 1, "Science" = 1, "Supply" = 1, "Service" = 1)
+	channels=list("Engineering" = 1, "Security" = 1, "Medical" = 1, "Command" = 1, "Common" = 1, "Science" = 1, "Supply" = 1, "Service" = 1,\
+	"SHIPCOM" = 1,"TEAMCOM" = 1,"SQUADCOM" = 1,"FLEETCOM" = 1,"EBAND" = 1,"Battlenet" = 1,"GCPD" = 1, "INNIECOM" = 1, "TACCOM" = 1, "System" = 1)
 
 /obj/item/device/radio/announcer/Destroy()
 	crash_with("attempt to delete a [src.type] detected, and prevented.")

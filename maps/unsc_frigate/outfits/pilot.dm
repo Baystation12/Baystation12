@@ -16,6 +16,7 @@
 	uniform = /obj/item/clothing/under/unsc/pilot
 	shoes = /obj/item/clothing/shoes/black
 	head = /obj/item/clothing/head/helmet/pilot
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o4)
 
 	flags = 0
 
@@ -26,5 +27,6 @@
 	uniform = /obj/item/clothing/under/unsc/pilot
 	shoes = /obj/item/clothing/shoes/black
 	head = /obj/item/clothing/head/helmet/pilot
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
 
 	flags = 0

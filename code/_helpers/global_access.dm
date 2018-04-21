@@ -979,6 +979,8 @@
 			return global.shatter_sound;
 		if("ship_engines")
 			return global.ship_engines;
+		if("shipmap_handler")
+			return global.shipmap_handler;
 		if("shuttle_controller")
 			return global.shuttle_controller;
 		if("side_effects")
@@ -2200,6 +2202,8 @@
 			global.shatter_sound=newval;
 		if("ship_engines")
 			global.ship_engines=newval;
+		if("shipmap_handler")
+			global.shipmap_handler=newval;
 		if("shuttle_controller")
 			global.shuttle_controller=newval;
 		if("side_effects")
@@ -2931,6 +2935,7 @@
 	"severity_to_string",
 	"shatter_sound",
 	"ship_engines",
+	"shipmap_handler",
 	"shuttle_controller",
 	"side_effects",
 	"skin_styles_female_list",

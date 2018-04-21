@@ -24,7 +24,7 @@
 
 	head = null
 	uniform = null
-	belt = null
+	belt = /obj/item/weapon/storage/wallet/random
 	shoes = /obj/item/clothing/shoes/brown
 	pda_slot = null
 
@@ -60,15 +60,29 @@
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser
 	name = "Insurrectionist Sympathiser"
 
-	mask = /obj/item/clothing/mask/innie/shemagh
-
 	l_pocket = /obj/item/ammo_magazine/m127_saphp
-	l_ear = /obj/item/device/radio/headset/insurrection
 
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser/equip_special()
 	return
 
 /decl/hierarchy/outfit/job/colonist/innie_sympathiser/equip_base(mob/living/carbon/human/H)
+	. = ..()
+
+	var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/m6d_magnum
+	G.ammo_magazine = new /obj/item/ammo_magazine/m127_saphp
+	H.equip_to_slot_or_del(G,slot_belt)
+
+/decl/hierarchy/outfit/job/colonist/innie_recruiter
+	name = "Insurrectionist Recruiter"
+
+	l_pocket = /obj/item/ammo_magazine/m127_saphp
+	mask = /obj/item/clothing/mask/balaclava
+	l_ear = /obj/item/device/radio/headset/insurrection
+
+/decl/hierarchy/outfit/job/colonist/innie_recruiter/equip_special()
+	return
+
+/decl/hierarchy/outfit/job/colonist/innie_recruiter/equip_base(mob/living/carbon/human/H)
 	. = ..()
 
 	var/obj/item/weapon/gun/projectile/G = new /obj/item/weapon/gun/projectile/m6d_magnum

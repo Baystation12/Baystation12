@@ -1,3 +1,6 @@
+/datum/job/UNSC_ship
+	title = "unknown" //For travis
+	faction_flag = UNSC //Defining here rather than in every job
 
 //ship commanding officer
 /datum/job/UNSC_ship/commander
@@ -13,12 +16,13 @@
 	selection_color = "#777777"
 	req_admin_notify = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/CO
+	is_whitelisted = 1
 	//job_guide = "Commander on deck! This is your ship, and your word is law. Subject matter experts have theoretical authority in their area of expertise, but otherwise everyone on the ship is a tool to complete the mission and the more that go home the better."
 
 	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
 		access_unsc_ops, access_unsc_fighters, access_unsc_shuttles, access_unsc_medical,
 		access_unsc_armoury, access_unsc_supplies, access_unsc_officers, access_unsc_marine,
-		access_unsc_gunnery, access_unsc_ids)
+		access_unsc_gunnery, access_unsc_ids, 60)
 
 //ship 2ic officer
 /datum/job/UNSC_ship/exo
@@ -39,7 +43,7 @@
 	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
 		access_unsc_ops, access_unsc_fighters, access_unsc_shuttles, access_unsc_medical,
 		access_unsc_armoury, access_unsc_supplies, access_unsc_officers, access_unsc_marine,
-		access_unsc_gunnery, access_unsc_ids)
+		access_unsc_gunnery, access_unsc_ids, 60)
 
 //overall commander of strike craft
 /datum/job/UNSC_ship/cag

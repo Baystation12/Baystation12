@@ -1,0 +1,4 @@
+author: Cael_Aislinn
+delete-after: True
+changes: 
+  - bugfix: "Resolved various bugs with lighting and other things on Stranded."

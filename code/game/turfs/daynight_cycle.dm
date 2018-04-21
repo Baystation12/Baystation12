@@ -5,6 +5,7 @@
 
 /obj/effect/landmark/day_night_zcontroller
 	name = "day night controller"
+	icon_state = "x"
 	//day night cycle stuff
 	var/solar_cycle_start = 0			//deciseconds, calculated using world.time
 	var/solar_cycle_duration = 6000		//deciseconds
@@ -35,12 +36,13 @@
 	dusk_threshold_time = solar_cycle_start + (solar_cycle_duration * threshold_dusk)
 	dawn_threshold_time = solar_cycle_start + (solar_cycle_duration * threshold_dawn)
 
-	var/new_brightness = calculate_light_level()
-	set_ambient_light(new_brightness)
+	//var/new_brightness = calculate_light_level()
+	//set_ambient_light(new_brightness)
 
 /obj/effect/landmark/day_night_zcontroller/Initialize()
 	..()
 	GLOB.processing_objects.Add(src)
+	return INITIALIZE_HINT_NORMAL
 
 /obj/effect/landmark/day_night_zcontroller/process()
 

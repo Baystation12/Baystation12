@@ -2,118 +2,6 @@
 #define LAUNCH_ABORTED -1
 #define LAUNCH_UNDERWAY -2
 
-
-/obj/machinery/podcontrol
-	name = "Assault Pod Controller"
-	desc = "Controls the launching of the assault pod. One way only."
-	icon = 'code/modules/halo/icons/machinery/computer.dmi'
-	icon_state = "computer"
-	density = 1
-	anchored = 1
-	var/launching = LAUNCH_ABORTED
-	var/obj/land_point
-	var/area/contained_area
-
-/obj/machinery/podcontrol/New()
-	..()
-	overlays += icon(icon,"nav")
-	contained_area = loc.loc
-
-/obj/machinery/podcontrol/proc/get_and_set_land_point()
-	var/obj/point = pick(get_valid_landings())
-	point.name += "_[contained_area.name]"
-	land_point = point
-
-/obj/machinery/podcontrol/proc/calc_translation(var/obj/target)
-	var/x_trans = target.x - x
-	var/y_trans = target.y - y
-	var/z_trans = target.z - z
-	var/returnlist = list(x_trans,y_trans,z_trans)
-	return returnlist
-
-/obj/machinery/podcontrol/proc/get_valid_landings()
-	var/list/valid_points = list()
-	for(var/obj/effect/landmark/lm in world)
-		if(lm.name == "UNSC_ASSAULT")
-			valid_points += lm
-	return valid_points
-
-/obj/machinery/podcontrol/attack_hand(var/mob/user)
-	//TODO: Move controls to UI based.
-	if(launching == LAUNCH_UNDERWAY)
-		return
-	if(launching == LAUNCH_ABORTED)
-		to_chat(user,"<span class='notice'>Launch Initiated. 20 seconds to launch.</span>")
-		start_launch()
-	else
-		stop_launch()
-		to_chat(user,"<span class='danger'>Launch Aborted!</span>")
-
-/obj/machinery/podcontrol/proc/start_launch()
-	GLOB.processing_objects += src
-	launching = 20
-
-/obj/machinery/podcontrol/proc/stop_launch()
-	GLOB.processing_objects -= src
-	launching = LAUNCH_ABORTED
-
-/obj/machinery/podcontrol/proc/dest_item_move_or_del(var/turf/newloc)
-	for(var/obj/O in newloc.contents)
-		if(O.anchored) //Obliterate anything anchored down.
-			qdel(O)
-			continue
-		step_away(O,newloc,4,64)
-
-/obj/machinery/podcontrol/proc/check_if_turf_then_translate(var/i,var/turf/newloc)
-	if(isturf(i)) //Turfs can't have their .loc set.
-		var/turf/T = i
-		new T.type(newloc)
-		new contained_area.type(newloc) //Re-create the area too.
-		new /area/space(i) //Change the area to space
-		new /turf/space (i)//The turf too.
-	else
-		var/obj/O = i
-		O.loc = newloc
-
-
-/obj/machinery/podcontrol/proc/launch()
-	get_and_set_land_point()
-	if(isnull(land_point))
-		visible_message("<span class = 'notice'>POD LAUNCH FAILURE</span>","<span class = 'notice'>You hear an angry beep</span>")
-		return
-	playsound(land_point, get_sfx("explosion"), 100, 1,, falloff = 1)
-	var/translation = calc_translation(land_point)
-	for(var/mob/m in view(7,land_point))
-		to_chat(m,"<span class='danger'>A concussive blast throws everything aside!</span>") //Tell everyone things were thrown away.
-
-	for(var/i in contained_area.contents)
-		var/atom/I = i //Typecast to atom
-		var/dest_x = I.x + translation[1]
-		var/dest_y = I.y + translation[2]
-		var/dest_z = I.z + translation[3]
-		var/turf/newloc = locate(dest_x,dest_y,dest_z)
-
-		dest_item_move_or_del(newloc)
-
-		spawn(1) //A small delay to allow the items that were present before to be moved or deleted.
-			check_if_turf_then_translate(i,newloc)
-
-	qdel(land_point)
-	land_point = null
-
-/obj/machinery/podcontrol/process()
-	if(launching == LAUNCH_ABORTED)
-		return
-	if(launching > 0)
-		launching--
-		return
-	if(launching == 0)
-		for(var/mob/M in view(7,src))
-			to_chat(M,"<span class='notice'>ASSAULT POD DEPARTING!</span>")
-		launching = LAUNCH_UNDERWAY
-		spawn(20)
-			launch()
-
 /obj/effect/landmark/innie_bomb
 	name = "innie bomb spawn"
 
@@ -136,6 +24,97 @@
 
 /obj/payload/innie/set_anchor()
 	return
+
+/obj/structure/payload/inactive
+	name = "Inactive Nuclear Warhead"
+	desc = "A dust covered nuclear warhead. Banging this thing around might be the last thing you do."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "MFDD"
+	anchored = 0
+	density = 1
+
+/turf/simulated/hangar_door
+	icon = 'maps/insurrection/hangar_door.dmi'
+	icon_state = "pdoor1"
+
+/obj/structure/hangar_door
+	invisibility = 101
+	icon = 'maps/insurrection/hangar_door.dmi'
+	icon_state = "pdoor0"
+	density = 0
+	anchored = 1
+	var/closed = 0 //This is immediately changed on init to be 1
+
+/obj/structure/hangar_door/Initialize()
+	. = ..()
+	toggle_door()
+
+/obj/structure/hangar_door/proc/door_animate(var/close = 0)
+	invisibility = 0
+	if(close)
+		flick("pdoorc0",src)
+	else
+		flick("pdoorc1",src)
+		invisibility = 101
+
+/obj/structure/hangar_door/proc/toggle_door()
+	var/turf/our_turf = loc
+	if(closed)
+		door_animate()
+		if(istype(our_turf))
+			our_turf.ChangeTurf(/turf/simulated/open)
+		closed = 0
+	else
+		door_animate(1)
+		if(istype(our_turf))
+			our_turf.ChangeTurf(/turf/simulated/hangar_door)
+		closed = 1
+
+/obj/machinery/button/toggle/tranq_hangar
+	name = "Hangar Toggle"
+	desc = "Opens/closes the hangar doors."
+
+/obj/machinery/button/toggle/tranq_hangar/proc/toggle_hangar_doors()
+	for(var/obj/structure/hangar_door/d in world)
+		if(d.z in GetConnectedZlevels(z))
+			d.toggle_door()
+
+/obj/machinery/button/toggle/tranq_hangar/proc/toggle_landing_points()
+	for(var/obj/effect/landmark/dropship_land_point/insurrection_hangar/point in world)
+		if(point.faction == initial(point.faction))
+			point.faction = "civillian"
+		else
+			point.faction = initial(point.faction)
+
+/obj/machinery/button/toggle/tranq_hangar/activate(mob/living/user)
+	if(operating || !istype(wifi_sender))
+		return
+
+	. = ..()
+	toggle_hangar_doors()
+	toggle_landing_points()
+
+turf/simulated/floor/tranquility
+	icon = 'code/modules/halo/icons/turfs/catwalks.dmi'
+	name = "catwalk"
+turf/simulated/floor/tranquility/catwalk1
+	icon_state = "catwalk7"
+turf/simulated/floor/tranquility/catwalk2
+	icon_state = "catwalk10"
+turf/simulated/floor/tranquility/catwalk3
+	icon_state = "catwalk13"
+turf/simulated/floor/tranquility/catwalk4
+	icon_state = "catwalk14"
+turf/simulated/floor/tranquility/catwalk5
+	icon_state = "catwalk11"
+turf/simulated/floor/tranquility/catwalk6
+	icon_state = "catwalk5"
+turf/simulated/floor/tranquility/catwalk7
+	icon_state = "catwalk6"
+turf/simulated/floor/tranquility/catwalk8
+	icon_state = "catwalk15"
+turf/simulated/floor/tranquility/catwalk9
+	icon_state = "catwalk9"
 
 #undef LAUNCH_ABORTED
 #undef LAUNCH_UNDERWAY

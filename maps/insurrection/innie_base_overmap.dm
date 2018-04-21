@@ -1,10 +1,10 @@
 
 /obj/effect/overmap/sector/innie_base
-	name = "Listening Outpost"
+	name = "New New Antarctica"
 	icon = 'maps/insurrection/sector_icon.dmi'
-	icon_state = "listening_post"
+	icon_state = "ice"
 
 
 /obj/effect/landmark/dropship_land_point/insurrection_hangar
-	name = "Listening Outpost Hangar"
+	name = "Antarctica Hangar"
 	faction = "innie"

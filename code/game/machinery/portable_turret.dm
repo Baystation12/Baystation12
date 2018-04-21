@@ -73,7 +73,7 @@
 /obj/machinery/porta_turret/stationary
 	ailock = 1
 	lethal = 1
-	installation = /obj/item/weapon/gun/energy/laser
+	installation = /obj/item/weapon/gun/projectile/m739_lmg
 
 /obj/machinery/porta_turret/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()

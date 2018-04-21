@@ -63,6 +63,20 @@ GLOBAL_LIST_EMPTY(UNSC_turfs)
 	..()
 	GLOB.UNSC_turfs += loc
 
+/obj/effect/landmark/start/UNSC_R
+	name = "ODST Rifleman"
+
+/obj/effect/landmark/start/UNSC_R/New()
+	..()
+	GLOB.UNSC_turfs += loc
+
+/obj/effect/landmark/start/UNSC_OBO
+	name = "ONI Bridge Officer"
+
+/obj/effect/landmark/start/UNSC_OBO/New()
+	..()
+	GLOB.UNSC_turfs += loc
+
 /datum/spawnpoint/UNSC_A_S_L
 	display_name = "ODST Assault Squad Lead"
 	restrict_job = list("ODST Assault Squad Lead")
