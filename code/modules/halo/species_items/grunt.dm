@@ -14,7 +14,7 @@
 	icon_state = "combatharness_minor"
 	item_state = "combatharness_minor"
 
-	armor = list(melee = 40, bullet = 55, laser = 30, energy = 30, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 45, bullet = 40, laser = 10, energy = 10, bomb = 30, bio = 0, rad = 0)
 	armor_thickness_modifiers = list()
 
 	species_restricted = list("unggoy")
@@ -33,7 +33,7 @@
 
 	body_parts_covered = HEAD|FACE
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
-	armor = list(melee = 10,bullet = 15,laser = 10,energy = 10,bomb = 5,bio = 0,rad = 0)
+	armor = list(melee = 40, bullet = 20, laser = 35,energy = 35, bomb = 15, bio = 0, rad = 0)
 	armor_thickness = 10
 
 	var/rebreath_efficiency = 50 //Rebreather efficiency: Percentile
@@ -95,6 +95,8 @@
 	icon_state = "combatharness_major"
 	item_state = "combatharness_major"
 
+	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0) //As good as armor
+
 	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
@@ -104,6 +106,8 @@
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "combatharness_ultra"
 	item_state = "combatharness_ultra"
+
+	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 50, bio = 0, rad = 0)
 
 	totalshields = 100
 	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy,/datum/armourspecials/shields/unggoy)
