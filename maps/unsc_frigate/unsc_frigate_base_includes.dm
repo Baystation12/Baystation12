@@ -1,4 +1,5 @@
 #include "unsc_frigate_areas.dm"
+#include "lifts.dm"
 
 #include "unsc_frigate_spawns.dm"
 
