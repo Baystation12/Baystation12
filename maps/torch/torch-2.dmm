@@ -19517,6 +19517,10 @@
 /obj/structure/closet/shipping_wall/filled{
 	pixel_x = -24
 	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "Mess Hall - Galley";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "Ub" = (
