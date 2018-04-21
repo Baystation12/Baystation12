@@ -13666,11 +13666,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "aPW" = (
-/obj/machinery/alarm{
-	dir = 1;
-	icon_state = "alarm0";
-	pixel_y = -22
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
@@ -13681,6 +13676,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/blanks)
