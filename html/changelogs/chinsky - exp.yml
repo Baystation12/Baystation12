@@ -1,0 +1,7 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Moved explorers gearup room to where that gross quarantine thing was. Previous location is now an unused room"
+  - tweak: "Moved bunch of crap from explorer lockers onto the racks and tables."
+  - tweak: "Explorer access now opens the room where anomaly containers/stasis cages are, the one with the drill."
+  - tweak: "Gave bunch of random crap to explorers in the gear room - glowsticks, cameras."
