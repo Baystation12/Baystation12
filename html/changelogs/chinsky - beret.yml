@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Adds color picker mode to floor painter (which is renamed to paintgun)."
