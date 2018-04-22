@@ -69,3 +69,7 @@
 			owner.nutrition -= 10
 		else if(owner.nutrition >= 200)
 			owner.nutrition -= 3
+
+//We got it covered in Process with more detailed thing
+/obj/item/organ/internal/liver/handle_regeneration()
+	return
