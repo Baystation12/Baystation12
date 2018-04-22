@@ -656,12 +656,6 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/stewedsoymeat
 
-/*/datum/recipe/spagetti We have the processor now
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/doughslice
-	)
-	result= /obj/item/weapon/reagent_containers/food/snacks/spagetti*/
-
 /datum/recipe/boiledspagetti
 	reagents = list(/datum/reagent/water = 10)
 	items = list(
@@ -707,6 +701,12 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/meatball,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spesslaw
+
+/datum/recipe/nanopasta
+	reagents = list(/datum/reagent/water = 10)
+	items = list(/obj/item/weapon/reagent_containers/food/snacks/spagetti,
+				/obj/item/stack/nanopaste)
+	result = /obj/item/weapon/reagent_containers/food/snacks/nanopasta
 
 /datum/recipe/superbiteburger
 	fruit = list("tomato" = 1)
