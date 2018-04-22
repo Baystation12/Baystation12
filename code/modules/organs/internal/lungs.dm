@@ -204,7 +204,7 @@
 		if(robotic >= ORGAN_ROBOT)
 			ratio /= 2 //Robolungs filter out some of the inhaled toxic air.
 		owner.reagents.add_reagent(/datum/reagent/toxin, Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
-		breath.adjust_gas(poison_type, -poison/6, update = 0) //update after
+		breath.adjust_gas(poison_type, -poison, update = 0) //update after
 		owner.phoron_alert = 1
 	else
 		owner.phoron_alert = 0
@@ -220,7 +220,7 @@
 			if(prob(20))
 				owner.emote(pick("giggle", "laugh"))
 
-		breath.adjust_gas("sleeping_agent", -breath.gas["sleeping_agent"]/6, update = 0) //update after
+		breath.adjust_gas("sleeping_agent", -breath.gas["sleeping_agent"], update = 0) //update after
 
 	// Were we able to breathe?
 	var/failed_breath = failed_inhale || failed_exhale
