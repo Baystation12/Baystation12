@@ -13412,7 +13412,6 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/item/modular_computer/tablet/lease/preset/command,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Mg" = (
@@ -13531,7 +13530,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light,
 /obj/structure/closet/secure_closet/bridgeofficer,
-/obj/item/modular_computer/tablet/lease/preset/command,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Ng" = (
