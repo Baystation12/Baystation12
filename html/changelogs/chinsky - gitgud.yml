@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Skill costs and free skillpoints amounts were severely tweaked, check your allocations since they're most likely invalid now."
