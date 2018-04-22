@@ -431,6 +431,8 @@ This function restores all organs.
 		traumatic_shock *= 0.75
 	if(stat == UNCONSCIOUS)
 		traumatic_shock *= 0.5
+	if(species && species.pain_mod)
+		traumatic_shock *= species.pain_mod
 
 	return max(0,traumatic_shock)
 
