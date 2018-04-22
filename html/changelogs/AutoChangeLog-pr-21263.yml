@@ -1,4 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "Admins are now provided jump links in the 'has forced open an emergency shutter' message."

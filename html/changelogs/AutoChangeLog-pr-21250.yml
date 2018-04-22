@@ -1,6 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - bugfix: "Fixes red alert being available in the command and communications program."
-  - bugfix: "Red alert once again may only be set through the keycard authentication devices (small white and black panels on walls) found in officers' offices and on the bridge."
-  - rscadd: "Red alert now only be cancelled using the keycard authentication devices."
