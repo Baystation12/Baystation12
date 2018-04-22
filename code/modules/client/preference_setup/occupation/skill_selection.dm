@@ -31,10 +31,10 @@
 		. += S.get_cost(i)
 
 /datum/preferences/proc/get_max_affordable(datum/job/job, decl/hierarchy/skill/S)
-	var/current_level = 1
+	var/current_level = get_min_skill(job, S)
 	var/allocation = skills_allocated[job]
 	if(allocation && allocation[S])
-		current_level = allocation[S]
+		current_level += allocation[S]
 	var/max = get_max_skill(job, S)
 	var/budget = points_by_job[job]
 	. = max
@@ -119,10 +119,10 @@
 	if(!(job in pref.skills_allocated))
 		pref.skills_allocated[job] = list()
 	var/list/T = pref.skills_allocated[job]
-	var/current_value = pref.get_spent_points(job, S)
+	var/current_value = pref.get_level_cost(job, S, min+T[S])
 	var/new_value = pref.get_level_cost(job, S, new_level)
 
-	if((new_level < min) || (new_level > max) || (pref.points_by_job[job] + current_value - new_level < 0))
+	if((new_level < min) || (new_level > max) || (pref.points_by_job[job] + current_value - new_value < 0))
 		return											//Checks if the new value is actually allowed.
 														//None of this should happen normally, but this avoids client attacks.
 	pref.points_by_job[job] += (current_value - new_value)
