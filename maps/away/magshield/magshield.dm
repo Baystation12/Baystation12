@@ -49,7 +49,7 @@
 	anchored = 1
 	density = 1
 	light_outer_range = 3
-	light_max_bright = 3
+	light_max_bright = 1
 	light_color = "#ffea61"
 	var/heavy_range = 10
 	var/lighter_range = 20
@@ -125,7 +125,7 @@
 	anchored = 1
 	density = 1
 	light_outer_range = 10
-	light_max_bright = 10
+	light_max_bright = 1
 	light_color = "#00ee00"
 
 /obj/structure/magshield/nav_light/New()//try make flashing through the process
