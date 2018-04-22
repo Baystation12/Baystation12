@@ -64,6 +64,8 @@
 
 	if(shock_stage >= 10) tally += 3
 
+	if(is_asystole()) tally += 10  //heart attacks are kinda distracting
+
 	if(aiming && aiming.aiming_at) tally += 5 // Iron sights make you slower, it's a well-known fact.
 
 	if(FAT in src.mutations)
