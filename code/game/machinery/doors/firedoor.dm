@@ -349,7 +349,7 @@
 		else
 			use_power(360)
 	else
-		log_and_message_admins("[usr]([usr.ckey]) has forced open an emergency shutter.")
+		log_and_message_admins("has forced open an emergency shutter.")
 	latetoggle()
 	return ..()
 
