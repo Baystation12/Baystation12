@@ -150,7 +150,7 @@ var/const/SKILL_HARD = 4
 
 /decl/hierarchy/skill/general/hauling
 	ID = "hauling"
-	name = "Manual Labor"
+	name = "Athletics"
 	desc = "Your ability to perform tasks requiring great strength, dexterity, or endurance."
 	levels = list( "Unskilled"			= "You are not used to manual labor, tire easily, and are likely not in great shape. Extended heavy labor may be dangerous for you.",
 						"Basic"				= "You have some familiarity with manual labor, and are in reasonable physical shape. Tasks requiring great dexterity or strength may still elude you.",

@@ -238,6 +238,7 @@
 			pref.char_branch = choice
 			pref.char_rank = "None"
 			prune_job_prefs()
+			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// Check our skillset is still valid
 			return TOPIC_REFRESH
 
 	else if(href_list["char_rank"])
