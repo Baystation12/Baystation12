@@ -45,8 +45,6 @@
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_LARGE
 	body_part = LOWER_TORSO
-	vital = 1
-	can_heal_overkill = 1
 	parent_organ = BP_CHEST
 	amputation_point = "lumbar"
 	joint = "hip"

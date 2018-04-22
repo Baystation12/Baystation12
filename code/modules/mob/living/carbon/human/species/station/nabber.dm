@@ -111,6 +111,7 @@
 		BP_LIVER =   list(/obj/item/organ/internal/liver/nabber,        35),
 		BP_ACETONE = list(/obj/item/organ/internal/acetone,             50),
 		BP_HEAD    = list(/obj/item/organ/external/head/nabber,         90),
+		BP_GROIN    = list(/obj/item/organ/external/groin/nabber,   	90),
 		BP_L_ARM   = list(/obj/item/organ/external/arm/nabber,          75),
 		BP_R_ARM   = list(/obj/item/organ/external/arm/right/nabber,    75),
 		BP_L_LEG   = list(/obj/item/organ/external/leg/nabber,          75),

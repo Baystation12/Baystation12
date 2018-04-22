@@ -200,6 +200,7 @@
 		BP_KIDNEYS  = list(/obj/item/organ/internal/kidneys,    20),
 		BP_EYES     = list(/obj/item/organ/internal/eyes,       20),
 		BP_LIVER    = list(/obj/item/organ/internal/liver,      25),
+		BP_GROIN    = list(/obj/item/organ/external/groin,      80),
 		BP_L_ARM    = list(/obj/item/organ/external/arm,        65),
 		BP_R_ARM    = list(/obj/item/organ/external/arm/right,  65),
 		BP_L_LEG    = list(/obj/item/organ/external/leg,        65),
