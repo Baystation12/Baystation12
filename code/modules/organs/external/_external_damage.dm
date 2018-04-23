@@ -212,7 +212,7 @@
 		lasting_pain += 10
 	else if(is_dislocated())
 		lasting_pain += 5
-	return pain + lasting_pain + 1.2 * brute_dam + 1.5 * burn_dam
+	return pain + lasting_pain + 1.1 * brute_dam + 1.25 * burn_dam
 
 /obj/item/organ/external/proc/remove_pain(var/amount)
 	if(!can_feel_pain() || robotic >= ORGAN_ROBOT)
