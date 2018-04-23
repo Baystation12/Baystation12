@@ -20,9 +20,7 @@
 	if(!(S in allocated))
 		return 0
 	var/min = get_min_skill(job, S)
-	. = 0
-	for(var/i=min+1, i <= allocated[S]+1, i++)
-		. += S.get_cost(i)
+	return get_level_cost(job, S, min + allocated[S])
 
 /datum/preferences/proc/get_level_cost(datum/job/job, decl/hierarchy/skill/S, level)
 	var/min = get_min_skill(job, S)
@@ -87,9 +85,12 @@
 		
 		for(var/decl/hierarchy/skill/skill in GLOB.skills)
 			if(skill in input_skills)
-				var/spent = get_spent_points(job, skill)
+				var/min = get_min_skill(job, S)
+				var/max = get_max_skill(job, S)
+				var/level = sanitize_integer(input_skills[skill], 0, max - min, 0)
+				var/spent = get_level_cost(job, skill, min + level)
 				if(spent)						//Only include entries with nonzero spent points
-					L[skill] = spent 
+					L[skill] = level
 					sum += spent
 
 		points_by_job[job] = job.skill_points							//We compute how many points we had.
