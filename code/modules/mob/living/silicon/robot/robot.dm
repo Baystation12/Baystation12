@@ -17,10 +17,11 @@
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
-	var/crisis //Admin-settable for combat module use.
-	var/crisis_override = 0
+	var/combat_override = 0 // Admin-settable for combat module use.
 	var/integrated_light_max_bright = 0.75
 	var/datum/wires/robot/wires
+
+	GLOBAL_VAR_INIT(combat_mode, 0) // You can be swiped to use the combat module on a keycard device during red.
 
 //Icon stuff
 
@@ -258,7 +259,7 @@
 	var/list/modules = list()
 	modules.Add(GLOB.robot_module_types)
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	if((crisis && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)) || crisis_override) //Leaving this in until it's balanced appropriately.
+	if((GLOB.combat_mode && security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level)) || combat_override)
 		to_chat(src, "<span class='warning'>Crisis mode active. Combat module available.</span>")
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot module", null, null) as null|anything in modules

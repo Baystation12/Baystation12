@@ -675,7 +675,6 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/security/combat
 	name = "combat robot module"
-	hide_on_manifest = 1
 	sprites = list("Combat Android" = "droid-combat")
 
 /obj/item/weapon/robot_module/security/combat/New()
@@ -685,6 +684,13 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/gun/energy/plasmacutter(src)
 	src.modules += new /obj/item/borg/combat/shield(src)
 	src.modules += new /obj/item/borg/combat/mobility(src)
+	src.modules += new /obj/item/borg/sight/hud/sec(src)
+	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
+	src.modules += new /obj/item/weapon/melee/baton/robot(src)
+	src.modules += new /obj/item/weapon/gun/energy/taser/mounted/cyborg(src)
+	src.modules += new /obj/item/taperoll/police(src)
+	src.modules += new /obj/item/device/megaphone(src)
+	src.modules += new /obj/item/device/holowarrant(src)
 	src.emag = new /obj/item/weapon/gun/energy/lasercannon/mounted(src)
 	..()
 

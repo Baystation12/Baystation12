@@ -82,6 +82,9 @@
 		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Emergency Maintenance Access'>Grant Emergency Maintenance Access</A></li>"
 		dat += "<li><A href='?src=\ref[src];triggerevent=Revoke Emergency Maintenance Access'>Revoke Emergency Maintenance Access</A></li>"
 		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Nuclear Authorization Code'>Grant Nuclear Authorization Code</A></li>"
+		if(security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
+			dat += "<li><A href='?src=\ref[src];triggerevent=Grant Robot Combat Module'>Grant Robot Combat Module</A></li>"
+		dat += "<li><A href='?src=\ref[src];triggerevent=Revoke Robot Combat Module'>Revoke Robot Combat Module</A></li>"
 		dat += "</ul>"
 		user << browse(dat, "window=keycard_auth;size=500x250")
 	if(screen == 2)
@@ -183,6 +186,14 @@
 			else
 				to_chat(usr, "No self destruct terminal found.")
 			feedback_inc("alert_keycard_auth_nukecode",1)
+		if("Grant Robot Combat Module")
+			for(var/mob/living/silicon/robot/A in GLOB.silicon_mob_list)
+				to_chat(A, "<span class='warning'>Crisis mode activated. Combat module available.</span>")
+			GLOB.combat_mode = 1
+		if("Revoke Robot Combat Module")
+			for(var/mob/living/silicon/robot/A in GLOB.silicon_mob_list)
+				to_chat(A, "<span class='warning'>Crisis mode deactivated. The combat module is no longer available.</span>")
+			GLOB.combat_mode = 0
 
 /obj/machinery/keycard_auth/proc/is_ert_blocked()
 	if(config.ert_admin_call_only) return 1
