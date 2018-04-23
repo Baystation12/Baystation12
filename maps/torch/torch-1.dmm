@@ -2619,8 +2619,8 @@
 /turf/simulated/wall/prepainted,
 /area/quartermaster/expedition/eva)
 "fC" = (
-/obj/machinery/door/airlock/mining{
-	name = "Expedition EVA";
+/obj/machinery/door/airlock/maintenance{
+	name = "Expedition EVA Maintenance";
 	req_one_access = list(48,65)
 	},
 /turf/simulated/floor/plating,
@@ -11569,10 +11569,12 @@
 "vO" = (
 /obj/machinery/door/airlock/mining{
 	name = "Deck Officer";
-	req_one_access = list(41)
+	req_access = list(41);
+	req_one_access = newlist()
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
 "vP" = (
@@ -11587,6 +11589,7 @@
 	name = "Supply Office";
 	req_access = list(31)
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "vQ" = (
@@ -13128,13 +13131,13 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
 "yr" = (
-/obj/machinery/door/airlock/glass_mining{
-	id_tag = null;
-	name = "Deck Officer";
-	req_access = list(41)
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/door/airlock/mining{
+	name = "Deck Officer";
+	req_access = list(41);
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
@@ -14810,6 +14813,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "Bg" = (
@@ -15426,18 +15430,7 @@
 	id = "qm_warehouse2";
 	name = "Warehouse Shutters"
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/storage)
-"Ct" = (
-/obj/machinery/door/blast/shutters{
-	dir = 2;
-	id = "qm_warehouse2";
-	name = "Warehouse Shutters"
-	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Cu" = (
 /obj/structure/cable/cyan{
@@ -15814,7 +15807,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -32
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Dm" = (
 /obj/vehicle/train/cargo/trolley,
@@ -15830,12 +15823,15 @@
 /area/quartermaster/storage)
 "Do" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 8
+	dir = 9
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Dp" = (
-/turf/simulated/floor/plating,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Dq" = (
 /obj/structure/table/rack{
@@ -15857,7 +15853,10 @@
 	pixel_x = 6;
 	pixel_y = 24
 	},
-/turf/simulated/floor/plating,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Dr" = (
 /obj/machinery/status_display/supply_display,
@@ -16195,6 +16194,12 @@
 /obj/structure/disposalpipe/sortjunction/untagged/flipped{
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "Ee" = (
@@ -16202,6 +16207,12 @@
 	dir = 8;
 	name = "Sorting Office";
 	sortType = "Sorting Office"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
@@ -16230,8 +16241,6 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 6
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -16239,6 +16248,12 @@
 	},
 /obj/machinery/light{
 	icon_state = "tube1";
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -16262,7 +16277,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Ei" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -16270,20 +16285,20 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Ej" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Ek" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "El" = (
 /obj/structure/table/standard{
@@ -16294,7 +16309,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Em" = (
 /turf/simulated/wall/prepainted,
@@ -16617,7 +16632,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/office)
 "EX" = (
 /obj/structure/cable/green{
@@ -16631,7 +16647,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "EY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -16640,13 +16656,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "EZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Fa" = (
 /obj/machinery/button/remote/blast_door{
@@ -16657,7 +16673,7 @@
 	req_access = list(31)
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Fb" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -17028,13 +17044,13 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "FK" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "FL" = (
 /obj/machinery/door/blast/shutters{
@@ -17317,7 +17333,7 @@
 /area/shuttle/escape_pod9/station)
 "Gp" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "CargoMaintenance";
+	name = "Cargo Maintenance";
 	req_access = list(31)
 	},
 /obj/structure/cable/green{
@@ -17621,7 +17637,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Hc" = (
 /obj/effect/shuttle_landmark/supply/station,
@@ -17811,7 +17827,6 @@
 /area/maintenance/fourthdeck/port)
 "Hy" = (
 /obj/structure/largecrate,
-/obj/machinery/portable_atmospherics/canister/air/airlock,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "Hz" = (
@@ -17908,7 +17923,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "HF" = (
 /obj/machinery/camera/network/supply{
@@ -18129,7 +18144,7 @@
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = -32
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Ie" = (
 /obj/structure/table/rack{
@@ -18172,7 +18187,7 @@
 "Ig" = (
 /obj/structure/ladder/up,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
 "Ih" = (
 /obj/structure/bed/chair{
@@ -18317,7 +18332,7 @@
 /area/shuttle/escape_pod9/station)
 "Iv" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "CargoMaintenance";
+	name = "Cargo Maintenance";
 	req_access = list(31)
 	},
 /turf/simulated/floor/plating,
@@ -19217,6 +19232,9 @@
 /obj/structure/sign/solgov,
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/fourthdeck/fore)
+"NB" = (
+/turf/simulated/floor/tiled/dark,
+/area/quartermaster/storage)
 "NF" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19319,6 +19337,10 @@
 "Vr" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fourthdeck/aft)
+"Wb" = (
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/turf/simulated/floor/plating,
+/area/maintenance/fourthdeck/port)
 "Wh" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/office)
@@ -37439,7 +37461,7 @@ FF
 vQ
 GX
 Hy
-Hv
+Wb
 Hv
 IR
 Jq
@@ -38446,9 +38468,9 @@ Dm
 Ej
 EZ
 FJ
-Dp
-Dp
-Dp
+NB
+NB
+NB
 Id
 Em
 IV
@@ -38646,7 +38668,7 @@ Bh
 Cr
 Dn
 Ej
-Dp
+NB
 FI
 Gr
 GZ
@@ -38848,7 +38870,7 @@ Bi
 Cs
 Do
 Ek
-Dp
+NB
 FI
 Gs
 Ha
@@ -39047,15 +39069,15 @@ xh
 yE
 zY
 Bj
-Ct
+Cs
 Dp
-Dp
-Dp
-Dp
-Dp
-Dp
-Dp
-Dp
+NB
+NB
+NB
+NB
+NB
+NB
+NB
 Iv
 Hv
 Js
@@ -40037,12 +40059,12 @@ bA
 bA
 bA
 bA
+bA
+bA
+bA
+bA
+bA
 eJ
-bi
-bi
-bi
-bi
-bi
 bb
 kz
 mM
