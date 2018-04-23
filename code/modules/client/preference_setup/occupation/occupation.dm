@@ -17,10 +17,6 @@
 	var/char_branch	= "None"   // military branch
 	var/char_rank = "None"     // military rank
 
-	var/list/skills_saved	 	= list()	   //List of /datum/job paths, with values (lists of "/decl/hierarchy/skill" , with values saved skill points spent). Should only include entries with nonzero spending.
-	var/list/skills_allocated	= list()	   //Same as above, but using instances rather than path strings for both jobs and skills.
-	var/list/points_by_job		= list()	   //List of jobs, with value the number of free skill points remaining
-
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 2
 
@@ -242,6 +238,7 @@
 			pref.char_branch = choice
 			pref.char_rank = "None"
 			prune_job_prefs()
+			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		// Check our skillset is still valid
 			return TOPIC_REFRESH
 
 	else if(href_list["char_rank"])
@@ -276,7 +273,6 @@
 		if(!istype(S) || !istype(J))
 			return
 		var/value = text2num(href_list["newvalue"])
-
 		update_skill_value(J, S, value)
 		panel.set_content(generate_skill_content(J))
 		panel.open()
@@ -287,11 +283,11 @@
 			return
 		var/HTML = list()
 		HTML += "<h2>[S.name]</h2>"
-		HTML += "<b>Generic Description</b>: [S.desc]<br>"
+		HTML += "[S.desc]<br>"
 		var/i
 		for(i=SKILL_MIN, i <= SKILL_MAX, i++)
-			var/level_name = S.level_names[i]
-			HTML +=	"<br><b>[level_name]</b>: [S.desc_levels[level_name]]<br>"
+			var/level_name = S.levels[i]
+			HTML +=	"<br><b>[level_name]</b>: [S.levels[level_name]]<br>"
 		show_browser(user, jointext(HTML, null), "window=\ref[user]skillinfo")
 
 	return ..()

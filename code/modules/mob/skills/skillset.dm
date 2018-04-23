@@ -66,7 +66,7 @@ proc/show_skill_window(var/mob/user, var/mob/M)
 			HTML += "<tr style='text-align:left;'>"
 			HTML += "<th>[S.name]</th>"
 			for(var/i = SKILL_MIN, i <= SKILL_MAX, i++)
-				HTML += "<th><font color=[(level == i) ? "red" : "black"]>[S.level_names[i]]</font></th>"
+				HTML += "<th><font color=[(level == i) ? "red" : "black"]>[S.levels[i]]</font></th>"
 			HTML += "</tr>"
 	HTML += "</table>"
 
