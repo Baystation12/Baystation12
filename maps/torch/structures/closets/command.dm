@@ -15,7 +15,6 @@
 /obj/structure/closet/secure_closet/CO/WillContain()
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
-		/obj/item/weapon/cartridge/captain,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchcaptain,
 		/obj/item/clothing/glasses/sunglasses,
@@ -44,7 +43,6 @@
 /obj/structure/closet/secure_closet/XO/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/weapon/cartridge/hop,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchxo,
@@ -77,7 +75,6 @@
 /obj/structure/closet/secure_closet/sea/WillContain()
 	return list(
 		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/weapon/cartridge/hop,
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/radio/headset/heads/torchxo,

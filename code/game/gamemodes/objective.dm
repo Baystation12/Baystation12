@@ -123,37 +123,33 @@ datum/objective/anti_revolution/brig
 			return 0
 		return 0
 
-datum/objective/anti_revolution/demote
-	find_target()
-		..()
-		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
+/datum/objective/anti_revolution/demote/find_target()
+	..()
+	if(target && target.current)
+		explanation_text = "[target.current.real_name], the [target.assigned_role]  has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
+	else
+		explanation_text = "Free Objective"
+	return target
+
+/datum/objective/anti_revolution/demote/find_target_by_role(role, role_type=0)
+	..(role, role_type)
+	if(target && target.current)
+		explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
+	else
+		explanation_text = "Free Objective"
+	return target
+
+/datum/objective/anti_revolution/demote/check_completion()
+	if(target && target.current && istype(target,/mob/living/carbon/human))
+		var/obj/item/weapon/card/id/I = target.current.GetIdCard()
+
+		if(!istype(I)) return 1
+
+		if(I.assignment == "Assistant")
+			return 1
 		else
-			explanation_text = "Free Objective"
-		return target
-
-	find_target_by_role(role, role_type=0)
-		..(role, role_type)
-		if(target && target.current)
-			explanation_text = "[target.current.real_name], the [!role_type ? target.assigned_role : target.special_role] has been classified as harmful to [GLOB.using_map.company_name]'s goals. Demote \him[target.current] to assistant."
-		else
-			explanation_text = "Free Objective"
-		return target
-
-	check_completion()
-		if(target && target.current && istype(target,/mob/living/carbon/human))
-			var/obj/item/weapon/card/id/I = target.current:wear_id
-			if(istype(I, /obj/item/device/pda))
-				var/obj/item/device/pda/P = I
-				I = P.id
-
-			if(!istype(I)) return 1
-
-			if(I.assignment == "Assistant")
-				return 1
-			else
-				return 0
-		return 1
+			return 0
+	return 1
 
 datum/objective/debrain//I want braaaainssss
 	find_target()

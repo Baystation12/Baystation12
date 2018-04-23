@@ -211,7 +211,7 @@ var/list/mob_hat_cache = list()
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return
 
-	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
+	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/modular_computer))
 
 		if(stat == 2)
 

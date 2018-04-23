@@ -19,10 +19,9 @@
 		if ((!( istype(W, /obj/item/weapon/card) ) || !( ticker ) || evacuation_controller.has_evacuated() || !( user )))
 			return
 
-		if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
-			if (istype(W, /obj/item/device/pda))
-				var/obj/item/device/pda/pda = W
-				W = pda.id
+		if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/modular_computer))
+			if (istype(W, /obj/item/modular_computer))
+				W = W.GetIdCard()
 			if (!W:access) //no access
 				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
 				return

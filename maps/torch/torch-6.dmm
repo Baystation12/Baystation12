@@ -3069,12 +3069,12 @@
 /area/rescue_base/base)
 "ahk" = (
 /obj/structure/table/reinforced,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -10230,7 +10230,7 @@
 	},
 /area/syndicate_mothership)
 "axE" = (
-/obj/item/device/pda/syndicate,
+/obj/item/modular_computer/pda/syndicate,
 /obj/structure/table/standard,
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -10943,7 +10943,7 @@
 /area/centcom/specops)
 "ayR" = (
 /obj/structure/table/reinforced,
-/obj/item/device/pda/ert,
+/obj/item/modular_computer/pda/ert,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -12077,13 +12077,13 @@
 /area/centcom/specops)
 "aBe" = (
 /obj/structure/table/reinforced,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
+/obj/item/modular_computer/pda/ert,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -12104,7 +12104,7 @@
 /area/centcom/specops)
 "aBh" = (
 /obj/structure/table/reinforced,
-/obj/item/device/pda/captain,
+/obj/item/modular_computer/pda/captain,
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -12940,6 +12940,10 @@
 	pixel_x = -8;
 	pixel_y = 25;
 	req_access = list(150)
+	},
+/obj/machinery/button/remote/blast_door{
+	id = "smindicate";
+	pixel_y = 20;
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)

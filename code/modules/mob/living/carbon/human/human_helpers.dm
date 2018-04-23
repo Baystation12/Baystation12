@@ -108,10 +108,10 @@
 				ID.registered_name = new_name
 				ID.update_name()
 				search_id = 0
-		else if(search_pda && istype(A,/obj/item/device/pda))
-			var/obj/item/device/pda/PDA = A
-			if(PDA.owner == old_name)
-				PDA.set_owner(new_name)
+		else if(search_pda && istype(A,/obj/item/modular_computer/pda))
+			var/obj/item/modular_computer/pda/PDA = A
+			if(findtext(PDA.name, old_name))
+				PDA.SetName(replacetext(PDA.name, old_name, new_name))
 				search_pda = 0
 
 
@@ -137,7 +137,7 @@
 		return 0
 	if(!species)
 		return 0
-	
+
 	if(bodytemperature > species.cold_level_1)
 		return 0
 	else if(bodytemperature > species.cold_level_2)

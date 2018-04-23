@@ -15,7 +15,6 @@
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/security,
 		/obj/item/clothing/head/helmet/solgov/security,
-		/obj/item/weapon/cartridge/security,
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/weapon/storage/belt/security,
 		/obj/item/device/flash,
@@ -51,7 +50,6 @@
 		/obj/item/clothing/suit/armor/pcarrier/medium/command/security,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/clothing/head/HoS/dermal,
-		/obj/item/weapon/cartridge/hos,
 		/obj/item/device/radio/headset/heads/cos,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,
@@ -90,7 +88,6 @@
 	return list(
 		/obj/item/clothing/suit/armor/pcarrier/medium/security,
 		/obj/item/clothing/head/helmet/solgov/security,
-		/obj/item/weapon/cartridge/hos,
 		/obj/item/device/radio/headset/headset_sec,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,

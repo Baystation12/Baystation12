@@ -98,7 +98,7 @@
 
 /decl/hierarchy/outfit/job/bearcat/
 	hierarchy_type = /decl/hierarchy/outfit/job/bearcat
-	pda_type = /obj/item/device/pda
+	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store
 	l_ear = null
 	r_ear = null
@@ -107,7 +107,7 @@
 	name = BEARCAT_OUTFIT_JOB_NAME("Captain")
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	shoes = /obj/item/clothing/shoes/black
-	pda_type = /obj/item/device/pda/captain
+	pda_type = /obj/item/modular_computer/pda/captain
 	r_pocket = /obj/item/device/radio
 	id_type = /obj/item/weapon/card/id/gold
 
@@ -129,7 +129,7 @@
 	suit = /obj/item/clothing/suit/storage/hazardvest
 	gloves = /obj/item/clothing/gloves/thick
 	shoes = /obj/item/clothing/shoes/workboots
-	pda_type = /obj/item/device/pda/heads/ce
+	pda_type = /obj/item/modular_computer/pda/heads/ce
 	l_hand = /obj/item/weapon/wrench
 	belt = /obj/item/weapon/storage/belt/utility/full
 	id_type = /obj/item/weapon/card/id/engineering/head
@@ -141,14 +141,14 @@
 	uniform = /obj/item/clothing/under/det/black
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/laceup
-	pda_type = /obj/item/device/pda/medical
+	pda_type = /obj/item/modular_computer/pda/medical
 
 /decl/hierarchy/outfit/job/bearcat/mate
 	name = BEARCAT_OUTFIT_JOB_NAME("First Mate")
 	uniform = /obj/item/clothing/under/suit_jacket/checkered
 	shoes = /obj/item/clothing/shoes/laceup
 	glasses = /obj/item/clothing/glasses/sunglasses/big
-	pda_type = /obj/item/device/pda/cargo
+	pda_type = /obj/item/modular_computer/pda/cargo
 	l_hand = /obj/item/weapon/clipboard
 
 /decl/hierarchy/outfit/job/bearcat/hand

@@ -606,7 +606,7 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/weapon/handcuffs,
 				/obj/item/weapon/camera_assembly,
 				/obj/item/device/camera,
-				/obj/item/device/pda,
+				/obj/item/modular_computer/pda,
 				/obj/item/weapon/card/emag_broken,
 				/obj/item/device/radio/headset,
 				/obj/item/device/flashlight/glowstick/yellow,

@@ -51,7 +51,6 @@
 	return list(
 		/obj/item/clothing/head/soft/purple,
 		/obj/item/device/radio/headset/headset_service,
-		/obj/item/weapon/cartridge/janitor,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/device/flashlight,
 		/obj/item/weapon/caution = 4,

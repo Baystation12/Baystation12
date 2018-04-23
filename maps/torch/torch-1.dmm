@@ -13988,15 +13988,6 @@
 	dir = 9
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/cartridge/quartermaster{
-	pixel_x = -4;
-	pixel_y = 7
-	},
-/obj/item/weapon/cartridge/quartermaster,
-/obj/item/weapon/cartridge/quartermaster{
-	pixel_x = 6;
-	pixel_y = 5
-	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
 "zK" = (

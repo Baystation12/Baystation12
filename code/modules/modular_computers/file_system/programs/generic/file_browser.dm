@@ -12,6 +12,7 @@
 	nanomodule_path = /datum/nano_module/program/computer_filemanager/
 	var/open_file
 	var/error
+	usage_flags = PROGRAM_ALL
 
 /datum/computer_file/program/filemanager/Topic(href, href_list)
 	if(..())

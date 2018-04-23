@@ -58,7 +58,6 @@ var/list/ai_verbs_default = list(
 	var/icon/holo_icon//Blue hologram. Face is assigned when AI is created.
 	var/icon/holo_icon_longrange //Yellow hologram.
 	var/holo_icon_malf = FALSE // for new hologram system
-	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
 
 	silicon_camera = /obj/item/device/camera/siliconcam/ai_camera
@@ -130,7 +129,6 @@ var/list/ai_verbs_default = list(
 				possibleNames -= pickedName
 				pickedName = null
 
-	aiPDA = new/obj/item/device/pda/ai(src)
 	fully_replace_character_name(pickedName)
 	anchored = 1
 	canmove = 0
@@ -227,7 +225,6 @@ var/list/ai_verbs_default = list(
 	QDEL_NULL(announcement)
 	QDEL_NULL(eyeobj)
 	QDEL_NULL(psupply)
-	QDEL_NULL(aiPDA)
 	QDEL_NULL(aiMulti)
 	hack = null
 
@@ -281,10 +278,6 @@ var/list/ai_verbs_default = list(
 	announcement.announcer = pickedName
 	if(eyeobj)
 		eyeobj.SetName("[pickedName] (AI Eye)")
-
-	// Set ai pda name
-	if(aiPDA)
-		aiPDA.set_owner_rank_job(pickedName, "AI")
 
 	setup_icon()
 

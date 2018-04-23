@@ -19,6 +19,7 @@
 	var/download_netspeed = 0
 	var/downloaderror = ""
 	var/list/downloads_queue[0]
+	usage_flags = PROGRAM_ALL
 
 /datum/computer_file/program/ntnetdownload/kill_program()
 	..()

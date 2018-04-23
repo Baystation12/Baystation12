@@ -660,7 +660,7 @@
 
 /obj/machinery/vending/assist
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
-						/obj/item/weapon/wirecutters = 1, /obj/item/weapon/cartridge/signal = 4)
+						/obj/item/weapon/wirecutters = 1)
 	contraband = list(/obj/item/device/flashlight = 5,/obj/item/device/assembly/timer = 2)
 	product_ads = "Only the finest!;Have some tools.;The most robust equipment.;The finest gear in space!"
 
@@ -669,8 +669,7 @@
 	contraband = list()
 	products = list(	/obj/item/device/assembly/prox_sensor = 5, /obj/item/device/assembly/signaler = 4,
 						/obj/item/device/assembly/infra = 4, /obj/item/device/assembly/prox_sensor = 4,
-						/obj/item/weapon/handcuffs = 8, /obj/item/device/flash = 4,
-						/obj/item/weapon/cartridge/signal = 4, /obj/item/clothing/glasses/sunglasses = 4)
+						/obj/item/weapon/handcuffs = 8, /obj/item/device/flash = 4, /obj/item/clothing/glasses/sunglasses = 4)
 
 /obj/machinery/vending/coffee
 	name = "Hot Drinks machine"
@@ -758,20 +757,6 @@
 					/obj/item/weapon/towel/random = 40)
 
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/steroid = 4)
-
-//This one's from bay12
-/obj/machinery/vending/cart
-	name = "PTech"
-	desc = "Cartridges for PDAs."
-	product_slogans = "Carts to go!"
-	icon_state = "cart"
-	icon_deny = "cart-deny"
-	icon_vend = "cart-vend"
-	vend_delay = 23
-	products = list(/obj/item/weapon/cartridge/medical = 10,/obj/item/weapon/cartridge/engineering = 10,/obj/item/weapon/cartridge/security = 10,
-					/obj/item/weapon/cartridge/janitor = 10,/obj/item/weapon/cartridge/signal/science = 10,/obj/item/device/pda/heads = 10,
-					/obj/item/weapon/cartridge/captain = 3,/obj/item/weapon/cartridge/quartermaster = 10)
-
 
 /obj/machinery/vending/cigarette
 	name = "Cigarette machine" //OCD had to be uppercase to look nice with the new formating

@@ -13300,15 +13300,6 @@
 	dir = 4
 	},
 /obj/structure/table/glass,
-/obj/item/weapon/cartridge/signal/science,
-/obj/item/weapon/cartridge/signal/science{
-	pixel_x = -4;
-	pixel_y = 2
-	},
-/obj/item/weapon/cartridge/signal/science{
-	pixel_x = 4;
-	pixel_y = 6
-	},
 /obj/item/device/healthanalyzer,
 /obj/item/weapon/book/manual/nt_regs,
 /turf/simulated/floor/tiled/white,

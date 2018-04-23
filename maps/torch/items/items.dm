@@ -45,17 +45,15 @@ Random item spawning
 Torch specific items
 *******************/
 
-/obj/item/device/pda/explorer
-	icon_state = "pda-explorer"
+/obj/item/modular_computer/pda/explorer
+	icon_state = "pda-exp"
+	icon_state_unpowered = "pda-exp"
 
-/obj/item/device/pda/pathfinder
-	icon_state = "pda-pathfinder"
+/obj/item/modular_computer/pda/heads/hop
+	stored_pen = /obj/item/weapon/pen/multi/cmd/xo
 
-/obj/item/device/pda/heads/hop
-	pen = /obj/item/weapon/pen/multi/cmd/xo
-
-/obj/item/device/pda/captain
-	pen = /obj/item/weapon/pen/multi/cmd/co
+/obj/item/modular_computer/pda/captain
+	stored_pen = /obj/item/weapon/pen/multi/cmd/co
 
 /obj/item/weapon/storage/backpack/explorer
 	name = "explorer backpack"

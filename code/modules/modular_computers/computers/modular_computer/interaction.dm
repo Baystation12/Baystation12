@@ -4,8 +4,11 @@
 		verbs |= /obj/item/modular_computer/verb/eject_ai
 	if(portable_drive)
 		verbs |= /obj/item/modular_computer/verb/eject_usb
-	if(card_slot)
+	if(card_slot && card_slot.stored_card)
 		verbs |= /obj/item/modular_computer/verb/eject_id
+	if(stores_pen && istype(stored_pen))
+		verbs |= /obj/item/modular_computer/verb/remove_pen
+
 	verbs |= /obj/item/modular_computer/verb/emergency_shutdown
 
 // Forcibly shut down the device. To be used when something bugs out and the UI is nonfunctional.
@@ -34,7 +37,7 @@
 
 // Eject ID card from computer, if it has ID slot with card inside.
 /obj/item/modular_computer/verb/eject_id()
-	set name = "Eject ID"
+	set name = "Remove ID"
 	set category = "Object"
 	set src in view(1)
 
@@ -79,6 +82,27 @@
 
 	proc_eject_ai(usr)
 
+/obj/item/modular_computer/verb/remove_pen()
+	set name = "Remove Pen"
+	set category = "Object"
+	set src in view(1)
+
+	if(usr.incapacitated() || !istype(usr, /mob/living))
+		to_chat(usr, "<span class='warning'>You can't do that.</span>")
+		return
+
+	if(!Adjacent(usr))
+		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
+		return
+
+	if(istype(stored_pen))
+		to_chat(usr, "<span class='notice'>You remove [stored_pen] from [src].</span>")
+		stored_pen.forceMove(get_turf(src))
+		if(!issilicon(usr))
+			usr.put_in_hands(stored_pen)
+		stored_pen = null
+		update_verbs()
+
 /obj/item/modular_computer/proc/proc_eject_id(mob/user)
 	if(!user)
 		user = usr
@@ -100,10 +124,10 @@
 	card_slot.stored_card.forceMove(get_turf(src))
 	if(!issilicon(user))
 		user.put_in_hands(card_slot.stored_card)
+	to_chat(user, "You remove [card_slot.stored_card] from [src].")
 	card_slot.stored_card = null
 	update_uis()
-	to_chat(user, "You remove the card from \the [src]")
-
+	update_verbs()
 
 /obj/item/modular_computer/proc/proc_eject_usb(mob/user)
 	if(!user)
@@ -156,17 +180,31 @@
 	if(istype(W, /obj/item/weapon/card/id)) // ID Card, try to insert it.
 		var/obj/item/weapon/card/id/I = W
 		if(!card_slot)
-			to_chat(user, "You try to insert \the [I] into \the [src], but it does not have an ID card slot installed.")
+			to_chat(user, "You try to insert [I] into [src], but it does not have an ID card slot installed.")
 			return
 
 		if(card_slot.stored_card)
-			to_chat(user, "You try to insert \the [I] into \the [src], but it's ID card slot is occupied.")
+			to_chat(user, "You try to insert [I] into [src], but its ID card slot is occupied.")
 			return
+
 		user.drop_from_inventory(I)
 		card_slot.stored_card = I
 		I.forceMove(src)
 		update_uis()
-		to_chat(user, "You insert \the [I] into \the [src].")
+		update_verbs()
+		update_name()
+		to_chat(user, "You insert [I] into [src].")
+
+		return
+	if(istype(W, /obj/item/weapon/pen) && stores_pen)
+		if(istype(stored_pen))
+			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
+			return
+		user.drop_from_inventory(W)
+		stored_pen = W
+		W.forceMove(src)
+		update_verbs()
+		to_chat(user, "<span class='notice'>You insert [W] into [src].</span>")
 		return
 	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper_bundle))
 		if(!nano_printer)
@@ -176,6 +214,10 @@
 		if(!ai_slot)
 			return
 		ai_slot.attackby(W, user)
+
+	if(!modifiable)
+		return ..()
+
 	if(istype(W, /obj/item/weapon/computer_hardware))
 		var/obj/item/weapon/computer_hardware/C = W
 		if(C.hardware_size <= max_hardware_size)
@@ -234,3 +276,14 @@
 		return
 
 	..()
+
+/obj/item/modular_computer/examine(var/mob/user)
+	. = ..()
+
+	if(enabled && .)
+		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
+
+/obj/item/modular_computer/MouseDrop(var/atom/over_object)
+	var/mob/M = usr
+	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
+		return attack_self(M)

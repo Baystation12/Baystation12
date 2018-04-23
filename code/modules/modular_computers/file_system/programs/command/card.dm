@@ -27,7 +27,7 @@
 		data["have_id_slot"] = !!program.computer.card_slot
 		data["have_printer"] = !!program.computer.nano_printer
 		data["authenticated"] = program.can_run(user)
-		if(!program.computer.card_slot)
+		if(!program.computer.card_slot || !program.computer.card_slot.can_write)
 			mod_mode = 0 //We can't modify IDs when there is no card reader
 	else
 		data["have_id_slot"] = 0
@@ -40,6 +40,8 @@
 		var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
 		data["has_id"] = !!id_card
 		data["id_account_number"] = id_card ? id_card.associated_account_number : null
+		data["id_email_login"] = id_card ? id_card.associated_email_login["login"] : null
+		data["id_email_password"] = id_card ? stars(id_card.associated_email_login["password"], 0) : null
 		data["id_rank"] = id_card && id_card.assignment ? id_card.assignment : "Unassigned"
 		data["id_owner"] = id_card && id_card.registered_name ? id_card.registered_name : "-----"
 		data["id_name"] = id_card ? id_card.name : "-----"
@@ -139,6 +141,8 @@
 									<hr>
 									<u>Assignment:</u> [id_card.assignment]<br>
 									<u>Account Number:</u> #[id_card.associated_account_number]<br>
+									<u>Email account:</u> [id_card.associated_email_login["login"]]
+									<u>Email password:</u> [stars(id_card.associated_email_login["password"], 0)]
 									<u>Blood Type:</u> [id_card.blood_type]<br><br>
 									<u>Access:</u><br>
 								"}
@@ -185,6 +189,12 @@
 				else if(href_list["account"])
 					var/account_num = text2num(input("Enter account number.", "Account", id_card.associated_account_number))
 					id_card.associated_account_number = account_num
+				else if(href_list["elogin"])
+					var/email_login = input("Enter email login.", "Email login", id_card.associated_email_login["login"])
+					id_card.associated_email_login["login"] = email_login
+				else if(href_list["epswd"])
+					var/email_password = input("Enter email password.", "Email password")
+					id_card.associated_email_login["password"] = email_password
 		if("assign")
 			if(computer && can_run(user, 1) && id_card)
 				var/t1 = href_list["assign_target"]

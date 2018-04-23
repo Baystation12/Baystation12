@@ -788,7 +788,7 @@
 				update_icon()
 				return
 
-			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
+			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
 				if(stat & (NOPOWER|BROKEN))
 					to_chat(user, "It does nothing")
 					return

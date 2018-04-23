@@ -11,7 +11,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/color/grey
 	l_ear = /obj/item/device/radio/headset
 	shoes = /obj/item/clothing/shoes/black
-	pda_type = /obj/item/device/pda
+	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store
 
 /decl/hierarchy/outfit/job/torch/crew
@@ -45,7 +45,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/solgov/expedition/co
 	id_type = /obj/item/weapon/card/id/torch/gold
-	pda_type = /obj/item/device/pda/captain
+	pda_type = /obj/item/modular_computer/pda/captain
 
 /decl/hierarchy/outfit/job/torch/crew/command/CO/New()
 	..()
@@ -59,7 +59,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = /obj/item/device/radio/headset/heads/torchxo
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/silver
-	pda_type = /obj/item/device/pda/heads/hop
+	pda_type = /obj/item/modular_computer/pda/heads/hop
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
 	name = OUTFIT_JOB_NAME("Executive Officer - Fleet")
@@ -73,7 +73,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/brown
 	id_type = /obj/item/weapon/card/id/torch/silver/research
-	pda_type = /obj/item/device/pda/heads/rd
+	pda_type = /obj/item/modular_computer/pda/heads/rd
 
 /decl/hierarchy/outfit/job/torch/crew/command/cmo
 	name = OUTFIT_JOB_NAME("Chief Medical Officer - Torch")
@@ -81,7 +81,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/silver/medical
-	pda_type = /obj/item/device/pda/heads/cmo
+	pda_type = /obj/item/modular_computer/pda/heads/cmo
 	pda_slot = slot_l_store
 
 /decl/hierarchy/outfit/job/torch/crew/command/cmo/New()
@@ -99,7 +99,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/heads/ce
 	id_type = /obj/item/weapon/card/id/torch/silver/engineering
-	pda_type = /obj/item/device/pda/heads/ce
+	pda_type = /obj/item/modular_computer/pda/heads/ce
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
@@ -118,7 +118,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/silver/security
-	pda_type = /obj/item/device/pda/heads/hos
+	pda_type = /obj/item/modular_computer/pda/heads/hos
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/New()
 	..()
@@ -136,7 +136,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/liaison
-	pda_type = /obj/item/device/pda/heads/paperpusher
+	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
 
 /decl/hierarchy/outfit/job/torch/crew/representative
@@ -146,7 +146,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/torch/crew/representative
-	pda_type = /obj/item/device/pda/heads/paperpusher
+	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/solgov/representative = 1)
 
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
@@ -155,14 +155,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/heads/torchxo
 	id_type = /obj/item/weapon/card/id/torch/crew/sea
-	pda_type = /obj/item/device/pda/heads
+	pda_type = /obj/item/modular_computer/pda/heads
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	name = OUTFIT_JOB_NAME("Bridge Officer")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/bridgeofficer
-	pda_type = /obj/item/device/pda/heads
+	pda_type = /obj/item/modular_computer/pda/heads
 	l_ear = /obj/item/device/radio/headset/bridgeofficer
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
@@ -187,7 +187,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/engineering/senior
-	pda_type = /obj/item/device/pda/heads/ce
+	pda_type = /obj/item/modular_computer/pda/heads/ce
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/fleet
 	name = OUTFIT_JOB_NAME("Senior Engineer - Fleet")
@@ -199,7 +199,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/engineering
-	pda_type = /obj/item/device/pda/engineering
+	pda_type = /obj/item/modular_computer/pda/engineering
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
 	name = OUTFIT_JOB_NAME("Engineer - Fleet")
@@ -211,7 +211,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/engineer
 	shoes = /obj/item/clothing/shoes/workboots
 	id_type = /obj/item/weapon/card/id/torch/contractor/engineering
-	pda_type = /obj/item/device/pda/engineering
+	pda_type = /obj/item/modular_computer/pda/engineering
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
 	name = OUTFIT_JOB_NAME("Roboticist - Torch")
@@ -219,7 +219,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/black
 	l_ear = /obj/item/device/radio/headset/torchroboticist
 	id_type = /obj/item/weapon/card/id/torch/contractor/engineering/roboticist
-	pda_type = /obj/item/device/pda/roboticist
+	pda_type = /obj/item/modular_computer/pda/roboticist
 
 //Security Outfits
 
@@ -237,7 +237,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/security/brigofficer
-	pda_type = /obj/item/device/pda/warden
+	pda_type = /obj/item/modular_computer/pda/security
 
 /decl/hierarchy/outfit/job/torch/crew/security/brig_officer/fleet
 	name = OUTFIT_JOB_NAME("Brig Officer - Fleet")
@@ -249,7 +249,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/security/forensic
-	pda_type = /obj/item/device/pda/detective
+	pda_type = /obj/item/modular_computer/pda/security
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor
 	name = OUTFIT_JOB_NAME("Forensic Technician - Contractor")
@@ -275,7 +275,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/security
-	pda_type = /obj/item/device/pda/security
+	pda_type = /obj/item/modular_computer/pda/security
 
 /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
 	name = OUTFIT_JOB_NAME("Master at Arms - Fleet")
@@ -287,7 +287,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/crew/medical
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/medical
 	l_ear = /obj/item/device/radio/headset/headset_med
-	pda_type = /obj/item/device/pda/medical
+	pda_type = /obj/item/modular_computer/pda/medical
 	pda_slot = slot_l_store
 
 /decl/hierarchy/outfit/job/torch/crew/medical/New()
@@ -364,7 +364,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Chemist - Torch")
 	uniform = /obj/item/clothing/under/rank/chemist
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/device/pda/chemist
+	pda_type = /obj/item/modular_computer/pda/medical
 	id_type = /obj/item/weapon/card/id/torch/contractor/chemist
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist/New()
@@ -411,7 +411,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/supply
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/supply/deckofficer
-	pda_type = /obj/item/device/pda/quartermaster
+	pda_type = /obj/item/modular_computer/pda/cargo
 
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/commissioned
 	name = OUTFIT_JOB_NAME("Deck Officer - EC Officer")
@@ -427,7 +427,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/supply
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/supply
-	pda_type = /obj/item/device/pda/cargo
+	pda_type = /obj/item/modular_computer/pda/cargo
 
 /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet
 	name = OUTFIT_JOB_NAME("Deck Technician - Fleet")
@@ -439,7 +439,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/cargotech
 	shoes = /obj/item/clothing/shoes/brown
 	id_type = /obj/item/weapon/card/id/torch/contractor/supply
-	pda_type = /obj/item/device/pda/cargo
+	pda_type = /obj/item/modular_computer/pda/cargo
 
 
 //Service Outfits
@@ -453,14 +453,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/janitor
 	shoes = /obj/item/clothing/shoes/black
 	id_type = /obj/item/weapon/card/id/torch/crew/service/janitor
-	pda_type = /obj/item/device/pda/janitor
+	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/torch/crew/service/janitor/ec
 	name = OUTFIT_JOB_NAME("Sanitation Technician - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/service/janitor
-	pda_type = /obj/item/device/pda/janitor
+	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
 	name = OUTFIT_JOB_NAME("Sanitation Technician - Fleet")
@@ -472,14 +472,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/chef
 	shoes = /obj/item/clothing/shoes/black
 	id_type = /obj/item/weapon/card/id/torch/crew/service/chef
-	pda_type = /obj/item/device/pda/chef
+	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/torch/crew/service/cook/ec
 	name = OUTFIT_JOB_NAME("Cook - Expeditionary Corps")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/service/chef
-	pda_type = /obj/item/device/pda/chef
+	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/torch/crew/service/cook/fleet
 	name = OUTFIT_JOB_NAME("Cook - Fleet")
@@ -491,14 +491,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/bartender
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/torch/contractor/service/bartender
-	pda_type = /obj/item/device/pda/bar
+	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	name = OUTFIT_JOB_NAME("Crewman")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew
-	pda_type = /obj/item/device/pda
+	pda_type = /obj/item/modular_computer/pda
 
 /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet
 	name = OUTFIT_JOB_NAME("Crewman - Fleet")
@@ -517,7 +517,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/exploration
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/pathfinder
-	pda_type = /obj/item/device/pda/pathfinder
+	pda_type = /obj/item/modular_computer/pda/explorer
 	l_ear = /obj/item/device/radio/headset/pathfinder
 
 /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
@@ -525,7 +525,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/exploration
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/explorer
-	pda_type = /obj/item/device/pda/explorer
+	pda_type = /obj/item/modular_computer/pda/explorer
 	l_ear = /obj/item/device/radio/headset/exploration
 
 //Passenger Outfits
@@ -539,7 +539,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/scientist/executive
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/device/pda/heads/rd
+	pda_type = /obj/item/modular_computer/pda/heads/rd
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/senior_scientist
 
 /decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist/New()
@@ -557,7 +557,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Scientist - Torch")
 	uniform = /obj/item/clothing/under/rank/scientist
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/device/pda/science
+	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/scientist
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/New()
@@ -573,7 +573,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/ntwork
 	shoes = /obj/item/clothing/shoes/workboots
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/mining
-	pda_type = /obj/item/device/pda/shaftminer
+	pda_type = /obj/item/modular_computer/pda/science
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector/New()
@@ -585,7 +585,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/guard
 	shoes = /obj/item/clothing/shoes/jackboots
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/guard
-	pda_type = /obj/item/device/pda/security
+	pda_type = /obj/item/modular_computer/pda/security
 
 /decl/hierarchy/outfit/job/torch/passenger/research/guard/New()
 	..()
@@ -595,7 +595,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Research Assistant - Torch")
 	uniform = /obj/item/clothing/under/rank/scientist
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/device/pda/science
+	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/weapon/card/id/torch/passenger/research
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor
@@ -611,7 +611,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/color/grey
 	l_ear = /obj/item/device/radio/headset
 	shoes = /obj/item/clothing/shoes/black
-	pda_type = /obj/item/device/pda
+	pda_type = /obj/item/modular_computer/pda
 	id_type = /obj/item/weapon/card/id/torch/passenger
 
 /decl/hierarchy/outfit/job/torch/passenger/passenger/journalist
@@ -632,7 +632,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/service/expeditionary
 	l_ear = /obj/item/device/radio/headset
 	shoes = /obj/item/clothing/shoes/dress
-	pda_type = /obj/item/device/pda
+	pda_type = /obj/item/modular_computer/pda
 	id_type = /obj/item/weapon/card/id/torch/offduty
 
 /decl/hierarchy/outfit/job/torch/offduty/officer
@@ -649,7 +649,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/color/black
 	l_ear = null
 	shoes = /obj/item/clothing/shoes/black
-	pda_type = /obj/item/device/pda
+	pda_type = /obj/item/modular_computer/pda
 	id_type = /obj/item/weapon/card/id/torch/merchant
 
 /decl/hierarchy/outfit/job/torch/stowaway

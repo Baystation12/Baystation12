@@ -33,8 +33,6 @@
 			return global.Master;
 		if("OOClog")
 			return global.OOClog;
-		if("PDAs")
-			return global.PDAs;
 		if("SSair")
 			return global.SSair;
 		if("SSairflow")
@@ -1030,8 +1028,6 @@
 			global.Master=newval;
 		if("OOClog")
 			global.OOClog=newval;
-		if("PDAs")
-			global.PDAs=newval;
 		if("SSair")
 			global.SSair=newval;
 		if("SSairflow")
@@ -2010,7 +2006,6 @@
 	"LIGHTING_CORNER_DIAGONAL",
 	"Master",
 	"OOClog",
-	"PDAs",
 	"SSair",
 	"SSairflow",
 	"SSantags",

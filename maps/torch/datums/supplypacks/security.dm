@@ -119,8 +119,7 @@
 
 /decl/hierarchy/supply_pack/security/securityextragear
 	name = "Misc - Security equipment"
-	contains = list(/obj/item/weapon/cartridge/security = 2,
-					/obj/item/weapon/storage/belt/security = 2,
+	contains = list(/obj/item/weapon/storage/belt/security = 2,
 					/obj/item/device/radio/headset/headset_sec = 2,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles = 2,
 					/obj/item/taperoll/police = 2,
@@ -135,8 +134,7 @@
 
 /decl/hierarchy/supply_pack/security/cosextragear
 	name = "Misc - Chief of Security equipment"
-	contains = list(/obj/item/weapon/cartridge/hos,
-					/obj/item/device/radio/headset/heads/cos,
+	contains = list(/obj/item/device/radio/headset/heads/cos,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 					/obj/item/taperoll/police,
 					/obj/item/weapon/storage/belt/security,
