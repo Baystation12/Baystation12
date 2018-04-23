@@ -34,7 +34,7 @@
 	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
-	diary << "\[[time_stamp()]] [game_id] [category]: [text][log_end]"
+	diary << "\[[time_stamp()]\] [game_id] [category]: [text][log_end]"
 
 /proc/log_admin(text)
 	GLOB.admin_log.Add(text)

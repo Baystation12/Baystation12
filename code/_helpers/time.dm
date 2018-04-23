@@ -52,7 +52,7 @@ var/next_station_date_change = 1 DAY
 	return station_date
 
 /proc/time_stamp()
-	return time2text(station_time_in_ticks, "hh:mm:ss")
+	return time2text(world.timeofday, "hh:mm:ss")
 
 /* Returns 1 if it is the selected month and day */
 proc/isDay(var/month, var/day)
