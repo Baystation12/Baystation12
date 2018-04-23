@@ -152,3 +152,13 @@
 		else
 			. = "necrotic [.]"
 	. = "[.][name]"
+
+/obj/item/organ/internal/Process()
+	..()
+	handle_regeneration()
+
+/obj/item/organ/internal/proc/handle_regeneration()
+	if(!damage || isrobotic() || !owner || owner.chem_effects[CE_TOXIN])
+		return
+	if(damage < 0.1*max_damage)
+		heal_damage(0.1)
