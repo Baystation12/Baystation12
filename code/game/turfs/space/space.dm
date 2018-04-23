@@ -1,3 +1,4 @@
+GLOBAL_LIST_EMPTY(space_turfs)
 /turf/space
 	plane = SPACE_PLANE
 	icon = 'icons/turf/space.dmi'
@@ -21,6 +22,7 @@
 
 /turf/space/Initialize()
 	. = ..()
+	GLOB.space_turfs += src
 	icon_state = "white"
 	update_starlight()
 	if (!dust_cache)
@@ -217,6 +219,7 @@
 	return
 
 /turf/space/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
+	GLOB.space_turfs -= src
 	return ..(N, tell_universe, 1)
 
 //Bluespace turfs for shuttles and possible future transit use
