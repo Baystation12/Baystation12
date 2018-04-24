@@ -16,6 +16,7 @@
 	var/initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
 	var/slowdown_held = 2
 	var/slowdown_worn = 1
+	gun_unreliable = 0
 
 /obj/item/weapon/gun/magnetic/railgun/Initialize()
 
