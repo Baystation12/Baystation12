@@ -726,7 +726,8 @@
 	economic_modifier = 8
 	alt_titles = list(
 		"Surgeon",
-		"Trauma Surgeon")
+		"Trauma Surgeon",
+		"Nurse")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/senior
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
@@ -761,8 +762,8 @@
 	ideal_character_age = 40
 	alt_titles = list(
 		"Field Medic" = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/medic,
-		"Medical Technician",
-		"Nurse")
+		"Medical Technician"
+		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/medical/doctor,
@@ -799,10 +800,10 @@
 	economic_modifier = 3
 	ideal_character_age = 30
 	alt_titles = list(
-		"Orderly" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly,
 		"Virologist" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/virologist,
 		"Xenosurgeon" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/xenosurgeon,
-		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic)
+		"Paramedic" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/paramedic,
+		"Registered Nurse" = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/nurse)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)

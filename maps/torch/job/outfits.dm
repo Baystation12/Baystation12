@@ -327,10 +327,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/white
 	id_type = /obj/item/weapon/card/id/torch/contractor/medical
 
-/decl/hierarchy/outfit/job/torch/crew/medical/contractor/orderly
-	name = OUTFIT_JOB_NAME("Orderly")
-	uniform = /obj/item/clothing/under/rank/orderly
-
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/resident
 	name = OUTFIT_JOB_NAME("Medical Resident")
 	uniform = /obj/item/clothing/under/color/white
@@ -359,6 +355,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_hand = /obj/item/weapon/storage/firstaid/adv
 	belt = /obj/item/weapon/storage/belt/medical/emt
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/nurse
+	name = OUTFIT_JOB_NAME("Registered Nurse - Torch")
+	head = /obj/item/clothing/head/nursehat
+	uniform = /obj/item/clothing/under/sterile
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	name = OUTFIT_JOB_NAME("Chemist - Torch")
