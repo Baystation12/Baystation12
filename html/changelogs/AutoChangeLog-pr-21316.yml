@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - bugfix: "Skill system saving works correctly again."
