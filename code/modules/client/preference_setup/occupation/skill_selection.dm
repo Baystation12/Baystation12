@@ -85,8 +85,8 @@
 		
 		for(var/decl/hierarchy/skill/skill in GLOB.skills)
 			if(skill in input_skills)
-				var/min = get_min_skill(job, S)
-				var/max = get_max_skill(job, S)
+				var/min = get_min_skill(job, skill)
+				var/max = get_max_skill(job, skill)
 				var/level = sanitize_integer(input_skills[skill], 0, max - min, 0)
 				var/spent = get_level_cost(job, skill, min + level)
 				if(spent)						//Only include entries with nonzero spent points
