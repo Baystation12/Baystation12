@@ -589,6 +589,7 @@ BLIND     // can't see anything
 	if(usr.put_in_hands(holding))
 		usr.visible_message("<span class='warning'>\The [usr] pulls \the [holding] out of \the [src]!</span>", range = 1)
 		holding = null
+		playsound(get_turf(src), 'sound/effects/holster/sheathout.ogg', 25)
 	else
 		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
 		holding.forceMove(src)
