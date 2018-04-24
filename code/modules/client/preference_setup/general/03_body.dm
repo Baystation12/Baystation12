@@ -621,44 +621,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if(!pref.species_preview || !(pref.species_preview in all_species))
 		pref.species_preview = SPECIES_HUMAN
 	var/datum/species/current_species = all_species[pref.species_preview]
-	var/dat = "<body>"
-	dat += "<center><h2>[current_species.name] \[<a href='?src=\ref[src];show_species=1'>change</a>\]</h2></center><hr/>"
-	dat += "<table padding='8px'>"
-	dat += "<tr>"
-	dat += "<td width = 400>[current_species.blurb]</td>"
-	dat += "<td width = 200 align='center'>"
-	if("preview" in icon_states(current_species.get_icobase()))
-		usr << browse_rsc(icon(current_species.get_icobase(),"preview"), "species_preview_[current_species.name].png")
-		dat += "<img src='species_preview_[current_species.name].png' width='64px' height='64px'><br/><br/>"
-	dat += "<b>Language:</b> [current_species.language]<br/>"
-	dat += "<small>"
-	if(current_species.spawn_flags & SPECIES_CAN_JOIN)
-		dat += "</br><b>Often present among humans.</b>"
-	if(current_species.spawn_flags & SPECIES_IS_WHITELISTED)
-		dat += "</br><b>Whitelist restricted.</b>"
-	if(!current_species.has_organ[BP_HEART])
-		dat += "</br><b>Does not have blood.</b>"
-	if(!current_species.has_organ[BP_LUNGS])
-		dat += "</br><b>Does not breathe.</b>"
-	if(current_species.species_flags & SPECIES_FLAG_NO_SCAN)
-		dat += "</br><b>Does not have DNA.</b>"
-	if(current_species.species_flags & SPECIES_FLAG_NO_PAIN)
-		dat += "</br><b>Does not feel pain.</b>"
-	if(current_species.species_flags & SPECIES_FLAG_NO_SLIP)
-		dat += "</br><b>Has excellent traction.</b>"
-	if(current_species.species_flags & SPECIES_FLAG_NO_POISON)
-		dat += "</br><b>Immune to most poisons.</b>"
-	if(current_species.appearance_flags & HAS_A_SKIN_TONE)
-		dat += "</br><b>Has a variety of skin tones.</b>"
-	if(current_species.appearance_flags & HAS_SKIN_COLOR)
-		dat += "</br><b>Has a variety of skin colours.</b>"
-	if(current_species.appearance_flags & HAS_EYE_COLOR)
-		dat += "</br><b>Has a variety of eye colours.</b>"
-	if(current_species.species_flags & SPECIES_FLAG_IS_PLANT)
-		dat += "</br><b>Has a plantlike physiology.</b>"
-	dat += "</small></td>"
-	dat += "</tr>"
-	dat += "</table><center><hr/>"
+
+	var/dat = current_species.get_description()
 
 	var/restricted = 0
 	if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
@@ -674,7 +638,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available as a player race.</small></b></font></br>"
 	if(!restricted || check_rights(R_ADMIN, 0))
 		dat += "\[<a href='?src=\ref[src];set_species=[pref.species_preview]'>select</a>\]"
-	dat += "</center></body>"
 
 	user << browse(dat, "window=species;size=700x400")
 

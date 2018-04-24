@@ -135,3 +135,26 @@
 	"egyno","bogani","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")
 	machine_understands = 0
 	shorthand = "BG"
+	
+/datum/language/alium
+	name = LANGUAGE_ALIUM
+	colour = "cult"
+	speech_verb = "hisses"
+	key = "c"
+	flags = RESTRICTED
+	syllables = list("qy","bok","mok","yok","dy","gly","ryl","byl","dok","forbici", "tarem", "n'ath", "reth", "sh'yro", "eth", "d'raggathnor","niii",
+	"d'rekkathnor", "khari'd", "gual'te", "ki","ki","ki","ki","ya","ta","wej","nym","assah","qwssa","nieasl","qyno","shaffar",
+	"egyno","bogani","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")
+	machine_understands = 0
+	shorthand = "AL"
+
+/datum/language/alium/New()
+	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
+	..()
+
+/datum/language/alium/get_random_name()
+	var/new_name = ""
+	var/length = rand(1,3)
+	for(var/i=0 to length)
+		new_name += pick(syllables)
+	return capitalize(new_name)
