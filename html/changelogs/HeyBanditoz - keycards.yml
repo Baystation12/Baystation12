@@ -1,0 +1,7 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - maptweak: "Added numerous keycard authenticaton devices around the map, including research, medical, the E-arm, and a few other places."
+  - maptweak: "Added a guest pass terminal outside of robotics and engineering."
+  - maptweak: "Added another extra laser carbine to the E-arm, and another energy gun to security's armory (so every sec officer has one.)"
+  - bugfix: "The deck four teleporter access shutter button has been fixed."

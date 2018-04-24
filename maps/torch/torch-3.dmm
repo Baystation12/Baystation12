@@ -9956,6 +9956,9 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
+/obj/machinery/computer/guestpass{
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled,
 /area/engineering/locker_room)
 "wB" = (

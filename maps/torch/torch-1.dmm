@@ -13983,13 +13983,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/deckofficer)
-"zJ" = (
-/obj/effect/floor_decal/corner/brown{
-	dir = 9
-	},
-/obj/structure/table/standard,
-/turf/simulated/floor/tiled,
-/area/quartermaster/deckofficer)
 "zK" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -19325,6 +19318,13 @@
 "Ty" = (
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/infirmary)
+"zJ" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 9
+	},
+/obj/structure/table/standard,
+/turf/simulated/floor/tiled,
+/area/quartermaster/deckofficer)
 "Vr" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fourthdeck/aft)

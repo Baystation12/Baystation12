@@ -5574,6 +5574,7 @@
 /obj/item/weapon/gun/energy/secure/gun,
 /obj/item/weapon/gun/energy/secure/gun,
 /obj/item/weapon/gun/energy/secure/gun,
+/obj/item/weapon/gun/energy/secure/gun,
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "lS" = (
