@@ -86,8 +86,13 @@ datum/preferences
 		S = all_species[pref.species]
 		if(new_gender && CanUseTopic(user) && (new_gender in S.genders))
 			pref.gender = new_gender
+
 			if(!(pref.f_style in S.get_facial_hair_styles(pref.gender)))
 				ResetFacialHair()
+
+			var/list/body_builds = S.get_body_build_list(pref.gender)
+			if(!(pref.body in body_builds))
+				pref.body = body_builds[1]
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["body_build"])

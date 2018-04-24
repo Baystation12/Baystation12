@@ -21,10 +21,13 @@ var/datum/body_build/default_body_build = new
 	var/hidden_icon = 'icons/inv_slots/hidden/mob.dmi'
 	var/rig_back	= 'icons/inv_slots/rig/mob.dmi'
 
-	var/r_hand		= 'icons/inv_slots/items/items_r_default.dmi'
-	var/l_hand		= 'icons/inv_slots/items/items_l_default.dmi'
+	//var/r_hand		= 'icons/inv_slots/items/items_r_default.dmi'
+	//var/l_hand		= 'icons/inv_slots/items/items_l_default.dmi'
 
-	var/list/hand_groups = list()
+	var/l_hand = 'icons/mob/onmob/items/lefthand.dmi'
+	var/r_hand = 'icons/mob/onmob/items/righthand.dmi'
+
+	//var/list/hand_groups = list()
 
 /datum/body_build/New()
 	// hand_groups["[SPRITE_UNIFORMS]_l"] = 'icons/inv_slots/uniforms/hand_l_default.dmi'
@@ -42,36 +45,39 @@ var/datum/body_build/default_body_build = new
 	// hand_groups["[SPRITE_GUNS]_l"]     = 'icons/inv_slots/items/guns_l_default.dmi'
 	// hand_groups["[SPRITE_GUNS]_r"]     = 'icons/inv_slots/items/guns_r_default.dmi'
 
-/datum/body_build/proc/get_inhand_icon(var/group, var/hand)
-	if(hand == LEFT)
-		group += "_l"
-	else
-		group += "_r"
-	if(group in hand_groups)
-		return hand_groups[group]
-	else
-		return (hand == LEFT) ? l_hand : r_hand
+// /datum/body_build/proc/get_inhand_icon(var/group, var/hand)
+// 	if(hand == LEFT)
+// 		group += "_l"
+// 	else
+// 		group += "_r"
+// 	if(group in hand_groups)
+// 		return hand_groups[group]
+// 	else
+// 		return (hand == LEFT) ? l_hand : r_hand
 
 /datum/body_build/proc/get_mob_icon(var/slot, var/icon_state)
 	var/icon/I
-	for(var/build in list(src, default_body_build))
-		var/datum/body_build/BB = build
+	for(var/datum/body_build/BB in list(src, default_body_build))
 		switch(slot)
-			if("misk")    I = BB.misk_icon
-			if("uniform") I = BB.uniform_icon
-			if("suit")    I = BB.suit_icon
-			if("gloves")  I = BB.gloves_icon
-			if("glasses") I = BB.glasses_icon
-			if("ears")    I = BB.ears_icon
-			if("mask")    I = BB.mask_icon
-			if("head")    I = BB.hat_icon
-			if("shoes")   I = BB.shoes_icon
-			if("belt")    I = BB.belt_icon
-			//if("s_store") I = BB.s_store_icon
-			if("back")    I = BB.back_icon
-			if("tie")     I = BB.ties_icon
-			if("hidden")  I = BB.hidden_icon
-			if("rig")     I = BB.rig_back
+			if("misk")    			I = BB.misk_icon
+			if(slot_w_uniform_str)  I = BB.uniform_icon
+			if(slot_wear_suit_str)  I = BB.suit_icon
+			if(slot_gloves_str)  	I = BB.gloves_icon
+			if(slot_glasses_str) 	I = BB.glasses_icon
+			if("ears")    			I = BB.ears_icon
+			if(slot_l_ear_str) 		I = BB.ears_icon
+			if(slot_r_ear_str) 		I = BB.ears_icon
+			if(slot_wear_mask_str)  I = BB.mask_icon
+			if(slot_head_str)    	I = BB.hat_icon
+			if(slot_shoes_str)   	I = BB.shoes_icon
+			if(slot_belt_str)    	I = BB.belt_icon
+			//if("s_store")	 		I = BB.s_store_icon
+			if(slot_back_str)    	I = BB.back_icon
+			if(slot_tie_str)     	I = BB.ties_icon
+			if("hidden")  			I = BB.hidden_icon
+			if("rig")     			I = BB.rig_back
+			if(slot_l_hand_str)		I = BB.l_hand
+			if(slot_r_hand_str)		I = BB.r_hand
 			else
 				world.log << "##ERROR. Wrong sprite group for mob icon \"[slot]\""
 		if(icon_state in icon_states(I)) break
@@ -98,6 +104,9 @@ var/datum/body_build/default_body_build = new
 	hidden_icon 	= 'icons/inv_slots/hidden/mob_slim.dmi'
 	rig_back		= 'icons/inv_slots/rig/mob_slim.dmi'
 
+	l_hand = 'icons/mob/onmob/items/lefthand_slim.dmi'
+	r_hand = 'icons/mob/onmob/items/righthand_slim.dmi'
+
 /datum/body_build/slim/New()
 	..()
 	// hand_groups["[SPRITE_UNIFORMS]_l"] = 'icons/inv_slots/uniforms/hand_l_slim.dmi'
@@ -115,12 +124,12 @@ var/datum/body_build/default_body_build = new
 	index			= "_slim_alt"
 	genders			= list(FEMALE)
 	uniform_icon	= 'icons/inv_slots/uniforms/mob_slim.dmi'
-	suit_icon		= 'icons/inv_slots/suits/mob_slim.dmi'
+	suit_icon		= 'icons/inv_slots/suits/mob_slimalt.dmi'
 	gloves_icon		= 'icons/inv_slots/gloves/mob_slim.dmi'
 	glasses_icon	= 'icons/inv_slots/glasses/mob_slim.dmi'
 	ears_icon		= 'icons/inv_slots/ears/mob_slim.dmi'
 	mask_icon		= 'icons/inv_slots/masks/mob_slim.dmi'
-	shoes_icon		= 'icons/inv_slots/shoes/mob_slim.dmi'
+	shoes_icon		= 'icons/inv_slots/shoes/mob_slimalt.dmi'
 	belt_icon		= 'icons/inv_slots/belts/mob_slim.dmi'
 	back_icon		= 'icons/inv_slots/back/mob_slim.dmi'
 	ties_icon		= 'icons/inv_slots/acessories/mob_slim.dmi'

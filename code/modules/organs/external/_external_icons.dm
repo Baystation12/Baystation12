@@ -83,7 +83,7 @@ var/list/limb_icon_cache = list()
 	if(force_icon)
 		icon = force_icon
 	else if (!dna)
-		icon = 'icons/mob/human_races/r_human_new.dmi'
+		icon = 'icons/mob/human_races/r_human.dmi'
 	else if (robotic >= ORGAN_ROBOT)
 		icon = 'icons/mob/human_races/robotic.dmi'
 	else if (status & ORGAN_MUTATED)

@@ -720,7 +720,7 @@ BLIND     // can't see anything
 		ret = item_state_slots[slot]
 	else
 		ret = icon_state
-	return "[ret]_s"
+	return "[ret]"
 
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(accessories && accessories.len)

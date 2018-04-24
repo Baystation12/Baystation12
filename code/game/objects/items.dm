@@ -64,6 +64,8 @@
 	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
 	var/list/item_icons
 
+	var/tmp/sprite_group = null
+
 	//** These specify item/icon overrides for _species_
 
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
@@ -709,11 +711,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return given_icon
 
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
-	var/bodytype = "Default"
 	var/mob/living/carbon/human/user_human
 	if(ishuman(user_mob))
 		user_human = user_mob
-		bodytype = user_human.species.get_bodytype(user_human)
 
 	var/mob_state = get_icon_state(user_mob, slot)
 
@@ -725,20 +725,19 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_l"
 		if(slot == 	slot_r_hand_str || slot == slot_r_ear_str)
 			mob_state = "[mob_state]_r"
-	else if(use_spritesheet(bodytype, slot, mob_state))
-		if(slot == slot_l_ear)
-			mob_state = "[mob_state]_l"
-		if(slot == slot_r_ear)
-			mob_state = "[mob_state]_r"
-		spritesheet = TRUE
-		mob_icon = sprite_sheets[bodytype]
-	else if(item_icons && item_icons[slot])
-		mob_icon = item_icons[slot]
-	else
-		if(user_human && user_human.gender == FEMALE && user_human.species.name == SPECIES_HUMAN)
-			mob_icon = slim_onmob_icons[slot]
-		else
-			mob_icon = default_onmob_icons[slot]
+	else 
+		if(item_icons && item_icons[slot])
+			mob_icon = item_icons[slot]
+		else if (user_human && user_human.body_build)
+			mob_icon = user_human.body_build.get_mob_icon(slot, mob_state)
+
+	// if(use_spritesheet(bodytype, slot, mob_state))
+	// 	if(slot == slot_l_ear)
+	// 		mob_state = "[mob_state]_l"
+	// 	if(slot == slot_r_ear)
+	// 		mob_state = "[mob_state]_r"
+	// 	spritesheet = TRUE
+	// 	mob_icon = sprite_sheets[bodytype]	
 
 	var/image/ret_overlay = overlay_image(mob_icon,mob_state,color,RESET_COLOR)
 	if(user_human && user_human.species && user_human.species.equip_adjust.len && !spritesheet)
