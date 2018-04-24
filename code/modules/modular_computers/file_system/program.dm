@@ -127,7 +127,8 @@
 	if(can_run(user, 1) || !requires_access_to_run)
 		if(nanomodule_path)
 			NM = new nanomodule_path(src, new /datum/topic_manager/program(src), src)
-			NM.using_access = user.GetAccess()
+			if(user)
+				NM.using_access = user.GetAccess()
 		if(requires_ntnet && network_destination)
 			generate_network_log("Connection opened to [network_destination].")
 		program_state = PROGRAM_STATE_ACTIVE
