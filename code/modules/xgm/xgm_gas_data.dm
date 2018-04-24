@@ -17,6 +17,8 @@
 	var/list/flags = list()
 	//Products created when burned. For fuel only for now (not oxidizers)
 	var/list/burn_product = list()
+	//Poison reagent for each gas
+	var/list/poison_reagent = list()
 
 /decl/xgm_gas
 	var/id = ""
@@ -29,6 +31,7 @@
 
 	var/flags = 0
 	var/burn_product = "carbon_dioxide"
+	var/poison_reagent = /datum/reagent/toxin
 
 /hook/startup/proc/generateGasData()
 	gas_data = new
@@ -49,5 +52,6 @@
 		if(gas.overlay_limit) gas_data.overlay_limit[gas.id] = gas.overlay_limit
 		gas_data.flags[gas.id] = gas.flags
 		gas_data.burn_product[gas.id] = gas.burn_product
+		gas_data.poison_reagent = gas.poison_reagent
 
 	return 1

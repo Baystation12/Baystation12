@@ -66,8 +66,8 @@
 	touch_met = 5
 	var/fire_mult = 5
 
-/datum/reagent/toxin/chloride
-	name = "Chloride"
+/datum/reagent/toxin/chlorine
+	name = "Chlorine"
 	description = "A highly poisonous liquid. Smells strongly of bleach."
 	reagent_state = LIQUID
 	taste_description = "bleach"

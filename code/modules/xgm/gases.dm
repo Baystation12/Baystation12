@@ -153,6 +153,7 @@
 
 	tile_overlay = "chlorine"
 	overlay_limit = 0.7
+	poison_reagent = /datum/reagent/toxin/chlorine
 
 /decl/xgm_gas/vapor
 	id = "watervapor"

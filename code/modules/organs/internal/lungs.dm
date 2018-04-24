@@ -14,7 +14,6 @@
 
 	var/breath_type
 	var/list/poison_type = list()
-	var/list/poison_reagents = list("chlorine"="Chloride") //For gases with a different poison type
 	var/exhale_type
 
 	var/min_breath_pressure
@@ -208,7 +207,7 @@
 	if(toxins_pp > safe_toxins_max)
 		var/adding_poison
 		for(var/possible_poison in poison_list)
-			adding_poison = possible_poison in poison_reagents ? poison_reagents[possible_poison] : "Toxin"
+			adding_poison = gas_data.poison_reagent[possible_poison]
 			var/ratio = (poison_list[possible_poison]/safe_toxins_max) * 10
 			if(robotic >= ORGAN_ROBOT)
 				ratio /= 2 //Robolungs filter out some of the inhaled toxic air.
