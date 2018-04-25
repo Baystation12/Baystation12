@@ -1399,7 +1399,7 @@
 /mob/living/carbon/human/get_breath_volume()
 	. = ..()
 	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
-	if(H)
+	if(H && !H.open)
 		. *= (H.robotic < ORGAN_ROBOT) ? pulse()/PULSE_NORM : 1.5
 
 /mob/living/carbon/human/need_breathe()
