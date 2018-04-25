@@ -270,7 +270,7 @@
 			if(M == user && prob(75))
 				user.visible_message("<span class='danger'>\The [user] fumbles [src].</span>", "<span class='danger'>You fumble [src].</span>", "<span class='danger'>You hear something being wrapped.</span>")
 				return
-			var/obj/item/stack/medical/splint/S = split(1)
+			var/obj/item/stack/medical/splint/S = split(1, TRUE)
 			if(S)
 				if(affecting.apply_splint(S))
 					S.forceMove(affecting)
