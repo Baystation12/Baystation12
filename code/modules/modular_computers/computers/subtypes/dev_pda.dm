@@ -6,7 +6,6 @@
 	icon_state_unpowered = "pda"
 	hardware_flag = PROGRAM_PDA
 	max_hardware_size = 1
-	modifiable = FALSE
 	w_class = ITEM_SIZE_SMALL
 	light_strength = 5
 	slot_flags = SLOT_ID | SLOT_BELT
