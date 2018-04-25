@@ -1090,9 +1090,9 @@
 						/decl/hierarchy/skill/organizational/finance		= SKILL_BASIC,
 						/decl/hierarchy/skill/service/botany				= SKILL_BASIC,
 						/decl/hierarchy/skill/medical/anatomy				= SKILL_BASIC,
-						/decl/hierarchy/skill/research/devices				= SKILL_BASIC,
-						/decl/hierarchy/skill/research/science				= SKILL_BASIC)
-	skill_points = 8
+						/decl/hierarchy/skill/research/devices				= SKILL_ADEPT,
+						/decl/hierarchy/skill/research/science				= SKILL_ADEPT)
+	skill_points = 20
 
 /datum/job/nt_pilot
 	title = "NanoTrasen Pilot"
@@ -1115,9 +1115,7 @@
 						access_mining_station, access_nanotrasen, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
 						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_mining)
 	min_skill = list(	/decl/hierarchy/skill/general/EVA			= SKILL_BASIC,
-						/decl/hierarchy/skill/general/computer		= SKILL_BASIC,
 						/decl/hierarchy/skill/general/pilot			= SKILL_ADEPT)
-	skill_points = 6
 
 /datum/job/scientist
 	title = "Scientist"
@@ -1136,8 +1134,8 @@
 		"Psychologist" = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych)
 	min_skill = list(	/decl/hierarchy/skill/organizational/bureaucracy	= SKILL_BASIC,
 						/decl/hierarchy/skill/general/computer				= SKILL_BASIC,
-						/decl/hierarchy/skill/organizational/finance		= SKILL_BASIC)
-	skill_points = 10
+						/decl/hierarchy/skill/research/devices				= SKILL_BASIC,
+						/decl/hierarchy/skill/research/science				= SKILL_ADEPT)
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	allowed_branches = list(/datum/mil_branch/civilian)
@@ -1147,6 +1145,7 @@
 						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
 						access_xenoarch, access_nanotrasen, access_expedition_shuttle, access_guppy, access_hangar)
 	minimal_access = list()
+	skill_points = 20
 
 
 /datum/job/mining
@@ -1166,7 +1165,6 @@
 	min_skill = list(	/decl/hierarchy/skill/general/mech			= SKILL_BASIC,
 						/decl/hierarchy/skill/general/hauling		= SKILL_ADEPT,
 						/decl/hierarchy/skill/general/EVA			= SKILL_BASIC)
-	skill_points = 7
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/prospector
 	allowed_branches = list(/datum/mil_branch/civilian)
