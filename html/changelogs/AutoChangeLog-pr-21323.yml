@@ -1,0 +1,4 @@
+author: "BlueNexus"
+delete-after: True
+changes: 
+  - bugfix: "Uplink-bought railguns no longer explode"
