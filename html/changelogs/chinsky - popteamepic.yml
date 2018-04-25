@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Lung popping condition changed. Now it only happens when pressure changes (both internal and external), not constantly when you're in vacuum. Pressurized suits prevent popping by reducing external pressure difference impact."
