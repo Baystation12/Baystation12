@@ -139,9 +139,6 @@
 			if(NOCLONE in T.mutations) //target done been et, no more blood in him
 				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
 				return
-			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
-				syringestab(target, user)
-				return
 
 			var/injtime = time //Taking a blood sample through a hardsuit takes longer due to needing to find a port.
 			var/allow = T.can_inject(user, check_zone(user.zone_sel.selecting))
@@ -152,6 +149,12 @@
 				user.visible_message("<span class='warning'>\The [user] begins hunting for an injection port on [target]'s suit!</span>")
 			else
 				user.visible_message("<span class='warning'>\The [user] is trying to take a blood sample from [target].</span>")
+
+			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
+				to_chat(user, "<span class='warning'>You miss the vein!</span>")
+				var/target_zone = check_zone(user.zone_sel.selecting)
+				T.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
+				return
 
 			injtime *= user.skill_delay_mult(SKILL_MEDICAL)
 			user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
@@ -282,11 +285,11 @@
 			return
 
 		user.visible_message("<span class='danger'>[user] stabs [target] in \the [hit_area] with [src.name]!</span>")
-		affecting.take_damage(3)
+		target.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
 
 	else
 		user.visible_message("<span class='danger'>[user] stabs [target] with [src.name]!</span>")
-		target.take_organ_damage(3)// 7 is the same as crowbar punch
+		target.apply_damage(3, BRUTE)
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 	var/contained_reagents = reagents.get_reagents()

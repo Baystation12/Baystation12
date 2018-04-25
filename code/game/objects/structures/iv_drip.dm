@@ -170,7 +170,7 @@
 
 /obj/structure/iv_drip/proc/rip_out()
 	visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
-	attached.apply_damage(1, BRUTE, pick(BP_R_ARM, BP_L_ARM))
+	attached.apply_damage(1, BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAM_SHARP)
 	attached = null
 	update_icon()
 
@@ -181,7 +181,7 @@
 
 	if(prob(user.skill_fail_chance(SKILL_MEDICAL, 80, SKILL_BASIC)))
 		visible_message("\The [user] fails to find the vein while trying to hook \the [target] up to \the [src], stabbing them instead!")
-		target.apply_damage(2, BRUTE, pick(BP_R_ARM, BP_L_ARM))
+		target.apply_damage(2, BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAM_SHARP)
 		return
 
 	visible_message("\The [usr] hooks \the [target] up to \the [src].")

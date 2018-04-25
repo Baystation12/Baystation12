@@ -85,19 +85,22 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_
 			if(H.has_brain_worms())
 				brain_result = "<span class='scan_danger'>ERROR - aberrant/unknown brainwave patterns, advanced scanner recommended</span>"
 			else
-				switch(brain.get_current_damage_threshold())
-					if(0)
-						brain_result = "<span class='scan_notice'>normal</span>"
-					if(1 to 2)
-						brain_result = "<span class='scan_notice'>minor brain damage</span>"
-					if(3 to 5)
-						brain_result = "<span class='scan_warning'>weak</span>"
-					if(6 to 8)
-						brain_result = "<span class='scan_danger'>extremely weak</span>"
-					if(9 to INFINITY)
-						brain_result = "<span class='scan_danger'>fading</span>"
-					else
-						brain_result = "<span class='scan_danger'>ERROR - Hardware fault</span>"
+				if(skill_level < SKILL_BASIC)
+					brain_result = "there's movement on the graph"
+				else
+					switch(brain.get_current_damage_threshold())
+						if(0)
+							brain_result = "<span class='scan_notice'>normal</span>"
+						if(1 to 2)
+							brain_result = "<span class='scan_notice'>minor brain damage</span>"
+						if(3 to 5)
+							brain_result = "<span class='scan_warning'>weak</span>"
+						if(6 to 8)
+							brain_result = "<span class='scan_danger'>extremely weak</span>"
+						if(9 to INFINITY)
+							brain_result = "<span class='scan_danger'>fading</span>"
+						else
+							brain_result = "<span class='scan_danger'>ERROR - Hardware fault</span>"
 	else
 		brain_result = "<span class='scan_danger'>ERROR - Nonstandard biology</span>"
 	dat += "<span class='scan_notice'>Brain activity:</span> [brain_result]."
@@ -152,48 +155,50 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_
 		dat += "<span class='scan_warning'>Patient is at serious risk of going into shock. Pain relief recommended.</span>"
 
 	// Other general warnings.
-	if(H.getOxyLoss() > 50)
-		dat += "<span class='scan_blue'>[b]Severe oxygen deprivation detected.[endb]</span>"
-	if(H.getToxLoss() > 50)
-		dat += "<span class='scan_green'>[b]Major systemic organ failure detected.[endb]</span>"
+	if(skill_level >= SKILL_BASIC)
+		if(H.getOxyLoss() > 50)
+			dat += "<span class='scan_blue'>[b]Severe oxygen deprivation detected.[endb]</span>"
+		if(H.getToxLoss() > 50)
+			dat += "<span class='scan_green'>[b]Major systemic organ failure detected.[endb]</span>"
 	if(H.getFireLoss() > 50)
 		dat += "<span class='scan_orange'>[b]Severe burn damage detected.[endb]</span>"
 	if(H.getBruteLoss() > 50)
 		dat += "<span class='scan_red'>[b]Severe anatomical damage detected.[endb]</span>"
 
-	for(var/name in H.organs_by_name)
-		var/obj/item/organ/external/e = H.organs_by_name[name]
-		if(!e)
-			continue
-		var/limb = e.name
-		if(e.status & ORGAN_BROKEN)
-			if(((e.name == BP_L_ARM) || (e.name == BP_R_ARM) || (e.name == BP_L_LEG) || (e.name == BP_R_LEG)) && (!e.splinted))
-				dat += "<span class='scan_warning'>Unsecured fracture in subject [limb]. Splinting recommended for transport.</span>"
-		if(e.has_infected_wound())
-			dat += "<span class='scan_warning'>Infected wound detected in subject [limb]. Disinfection recommended.</span>"
+	if(skill_level >= SKILL_BASIC)
+		for(var/name in H.organs_by_name)
+			var/obj/item/organ/external/e = H.organs_by_name[name]
+			if(!e)
+				continue
+			var/limb = e.name
+			if(e.status & ORGAN_BROKEN)
+				if(((e.name == BP_L_ARM) || (e.name == BP_R_ARM) || (e.name == BP_L_LEG) || (e.name == BP_R_LEG)) && (!e.splinted))
+					dat += "<span class='scan_warning'>Unsecured fracture in subject [limb]. Splinting recommended for transport.</span>"
+			if(e.has_infected_wound())
+				dat += "<span class='scan_warning'>Infected wound detected in subject [limb]. Disinfection recommended.</span>"
 
-	for(var/name in H.organs_by_name)
-		var/obj/item/organ/external/e = H.organs_by_name[name]
-		if(e && e.status & ORGAN_BROKEN)
-			dat += "<span class='scan_warning'>Bone fractures detected. Advanced scanner required for location.</span>"
-			break
+		for(var/name in H.organs_by_name)
+			var/obj/item/organ/external/e = H.organs_by_name[name]
+			if(e && e.status & ORGAN_BROKEN)
+				dat += "<span class='scan_warning'>Bone fractures detected. Advanced scanner required for location.</span>"
+				break
 
-	var/found_bleed
-	var/found_tendon
-	var/found_disloc
-	for(var/obj/item/organ/external/e in H.organs)
-		if(e)
-			if(!found_disloc && e.dislocated == 2)
-				dat += "<span class='scan_warning'>Dislocation detected. Advanced scanner required for location.</span>"
-				found_disloc = TRUE
-			if(!found_bleed && (e.status & ORGAN_ARTERY_CUT))
-				dat += "<span class='scan_warning'>Arterial bleeding detected. Advanced scanner required for location.</span>"
-				found_bleed = TRUE
-			if(!found_tendon && (e.status & ORGAN_TENDON_CUT))
-				dat += "<span class='scan_warning'>Tendon or ligament damage detected. Advanced scanner required for location.</span>"
-				found_tendon = TRUE
-		if(found_disloc && found_bleed && found_tendon)
-			break
+		var/found_bleed
+		var/found_tendon
+		var/found_disloc
+		for(var/obj/item/organ/external/e in H.organs)
+			if(e)
+				if(!found_disloc && e.dislocated == 2)
+					dat += "<span class='scan_warning'>Dislocation detected. Advanced scanner required for location.</span>"
+					found_disloc = TRUE
+				if(!found_bleed && (e.status & ORGAN_ARTERY_CUT))
+					dat += "<span class='scan_warning'>Arterial bleeding detected. Advanced scanner required for location.</span>"
+					found_bleed = TRUE
+				if(!found_tendon && (e.status & ORGAN_TENDON_CUT))
+					dat += "<span class='scan_warning'>Tendon or ligament damage detected. Advanced scanner required for location.</span>"
+					found_tendon = TRUE
+			if(found_disloc && found_bleed && found_tendon)
+				break
 
 	. += (skill_level < SKILL_BASIC) ? shuffle(dat) : dat
 

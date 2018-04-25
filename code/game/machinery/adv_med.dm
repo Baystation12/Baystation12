@@ -281,7 +281,10 @@
 		if(!brain || H.stat == DEAD || (H.status_flags & FAKEDEATH))
 			brain_result = "<span class='danger'>none, patient is braindead</span>"
 		else if(H.stat != DEAD)
-			brain_result = "[round(max(0,(1 - brain.damage/brain.max_damage)*100))]%"
+			if(skill_level >= SKILL_BASIC)
+				brain_result = "[round(max(0,(1 - brain.damage/brain.max_damage)*100))]%"
+			else
+				brain_result = "there's some activity"
 	else
 		brain_result = "<span class='danger'>ERROR - Nonstandard biology</span>"
 	dat += "<b>Brain activity:</b> [brain_result]"
@@ -369,20 +372,21 @@
 		subdat = list()
 		table += "<tr><td>---</td><td><b>INTERNAL ORGANS</b></td><td>---</td></tr>"
 
-	for(var/obj/item/organ/internal/I in H.internal_organs)
-		var/row = list()
-		row += "<tr><td>[I.name]</td>"
-		row += "<td>"
-		if(I.is_broken())
-			row += "Severe"
-		else if(I.is_bruised())
-			row += "Moderate"
-		else if(I.is_damaged())
-			row += "Minor"
-		else
-			row += "None"
-		row += "</td><td>[english_list(I.get_scan_results(), nothing_text = "", and_text = ", ")]</td></tr>"
-		subdat += jointext(row, null)
+	if(skill_level >= SKILL_BASIC)
+		for(var/obj/item/organ/internal/I in H.internal_organs)
+			var/row = list()
+			row += "<tr><td>[I.name]</td>"
+			row += "<td>"
+			if(I.is_broken())
+				row += "Severe"
+			else if(I.is_bruised())
+				row += "Moderate"
+			else if(I.is_damaged())
+				row += "Minor"
+			else
+				row += "None"
+			row += "</td><td>[english_list(I.get_scan_results(), nothing_text = "", and_text = ", ")]</td></tr>"
+			subdat += jointext(row, null)
 
 	if(skill_level <= SKILL_ADEPT)
 		table += shuffle(subdat)
