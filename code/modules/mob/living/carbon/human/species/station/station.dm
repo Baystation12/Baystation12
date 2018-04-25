@@ -26,9 +26,6 @@
 
 	sexybits_location = BP_GROIN
 
-/datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
-	return SPECIES_HUMAN
-
 /datum/species/human/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return

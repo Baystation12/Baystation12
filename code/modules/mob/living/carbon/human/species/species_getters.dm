@@ -34,9 +34,6 @@
 /datum/species/proc/get_race_key(var/mob/living/carbon/human/H)
 	return race_key
 
-/datum/species/proc/get_bodytype(var/mob/living/carbon/human/H)
-	return name
-
 /datum/species/proc/get_knockout_message(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "encounters a hardware fault and suddenly reboots!" : knockout_message)
 

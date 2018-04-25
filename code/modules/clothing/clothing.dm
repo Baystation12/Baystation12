@@ -82,10 +82,10 @@
 
 		if(H.species)
 			if(exclusive)
-				if(!(H.species.get_bodytype(H) in species_restricted))
+				if(!(H.species.name in species_restricted))
 					wearable = 1
 			else
-				if(H.species.get_bodytype(H) in species_restricted)
+				if(H.species.name in species_restricted)
 					wearable = 1
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
@@ -381,11 +381,11 @@ BLIND     // can't see anything
 
 /obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	var/bodytype = "Default"
+	var/species_name = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		bodytype = user_human.species.get_bodytype(user_human)
-	var/cache_key = "[light_overlay]_[bodytype]"
+		species_name = user_human.species.name
+	var/cache_key = "[light_overlay]_[species_name]"
 	if(on && light_overlay_cache[cache_key] && slot == slot_head_str)
 		ret.overlays |= light_overlay_cache[cache_key]
 	return ret
@@ -461,11 +461,11 @@ BLIND     // can't see anything
 		overlays |= light_overlay_cache["[light_overlay]_icon"]
 
 		// Generate and cache the on-mob icon, which is used in update_inv_head().
-		var/cache_key = "[light_overlay][H ? "_[H.species.get_bodytype(H)]" : ""]"
+		var/cache_key = "[light_overlay][H ? "_[H.species.name]" : ""]"
 		if(!light_overlay_cache[cache_key])
 			var/use_icon = 'icons/mob/light_overlays.dmi'
-			if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
-				use_icon = sprite_sheets[H.species.get_bodytype(H)]
+			if(H && sprite_sheets && sprite_sheets[H.species.name])
+				use_icon = sprite_sheets[H.species.name]
 			light_overlay_cache[cache_key] = image("icon" = use_icon, "icon_state" = "[light_overlay]")
 
 	if(H)
@@ -752,8 +752,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
-		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+	else if(H && sprite_sheets && sprite_sheets[H.species.name])
+		under_icon = sprite_sheets[H.species.name]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
@@ -775,8 +775,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
-		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+	else if(H && sprite_sheets && sprite_sheets[H.species.name])
+		under_icon = sprite_sheets[H.species.name]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else

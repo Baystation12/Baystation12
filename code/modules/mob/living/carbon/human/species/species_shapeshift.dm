@@ -26,10 +26,10 @@ var/list/wrapped_species_by_ref = list()
 /datum/species/shapeshifter/get_race_key(var/mob/living/carbon/human/H)
 	return "[..()]-[wrapped_species_by_ref["\ref[H]"]]"
 
-/datum/species/shapeshifter/get_bodytype(var/mob/living/carbon/human/H)
-	if(!H) return ..()
-	var/datum/species/S = all_species[wrapped_species_by_ref["\ref[H]"]]
-	return S.get_bodytype(H)
+// /datum/species/shapeshifter/get_bodytype(var/mob/living/carbon/human/H)
+// 	if(!H) return ..()
+// 	var/datum/species/S = all_species[wrapped_species_by_ref["\ref[H]"]]
+// 	return S.get_bodytype(H)
 
 /datum/species/shapeshifter/get_blood_mask(var/mob/living/carbon/human/H)
 	if(!H) return ..()

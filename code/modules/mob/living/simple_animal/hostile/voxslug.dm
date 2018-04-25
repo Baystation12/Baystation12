@@ -32,7 +32,7 @@ Small, little HP, poisonous.
 	for(var/a in hearers(src, dist))
 		if(istype(a,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = a
-			if(H.species.get_bodytype() == SPECIES_VOX)
+			if(H.species.name == SPECIES_VOX)
 				continue
 		if(isliving(a))
 			var/mob/living/M = a
@@ -47,7 +47,7 @@ Small, little HP, poisonous.
 	return L
 
 /mob/living/simple_animal/hostile/voxslug/get_scooped(var/mob/living/carbon/grabber)
-	if(grabber.species.get_bodytype() != SPECIES_VOX)
+	if(grabber.species.name != SPECIES_VOX)
 		to_chat(grabber, "<span class='warning'>\The [src] wriggles out of your hands before you can pick it up!</span>")
 		return
 	else return ..()

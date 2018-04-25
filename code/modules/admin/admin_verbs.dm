@@ -619,7 +619,7 @@ var/list/admin_verbs_mentor = list(
 	if(istype(T,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = T
 		if (H.species)
-			D.affected_species = list(H.species.get_bodytype(H))
+			D.affected_species = list(H.species.name)
 			if(H.species.primitive_form)
 				D.affected_species |= H.species.primitive_form
 			if(H.species.greater_form)

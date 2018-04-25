@@ -167,7 +167,7 @@ var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#6666
 
 	if(nonsolid)
 		applying.MapColors("#4d4d4d","#969696","#1c1c1c", "#000000")
-		if(species && species.get_bodytype(owner) != SPECIES_HUMAN)
+		if(species && species.name != SPECIES_HUMAN)
 			applying.SetIntensity(1.5)
 		else
 			applying.SetIntensity(0.7)
