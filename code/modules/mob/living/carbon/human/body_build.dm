@@ -5,6 +5,7 @@ var/datum/body_build/default_body_build = new
 
 	var/genders		= list(MALE, FEMALE, NEUTER, PLURAL)
 	var/index		= ""
+	var/roboindex   = ""										// for slim and slim_alt BBs prothesis
 	var/misk_icon	= 'icons/mob/mob.dmi'
 	var/uniform_icon= 'icons/inv_slots/uniforms/mob.dmi'
 	var/suit_icon	= 'icons/inv_slots/suits/mob.dmi'
@@ -90,6 +91,7 @@ var/datum/body_build/default_body_build = new
 	name			= "Slim"
 
 	index			= "_slim"
+	roboindex   	= "_slim"
 	genders			= list(FEMALE)
 	uniform_icon	= 'icons/inv_slots/uniforms/mob_slim.dmi'
 	suit_icon		= 'icons/inv_slots/suits/mob_slim.dmi'
