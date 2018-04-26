@@ -225,6 +225,7 @@
 #include "code\datums\extensions\extensions.dm"
 #include "code\datums\extensions\interactive.dm"
 #include "code\datums\extensions\label.dm"
+#include "code\datums\extensions\penetration.dm"
 #include "code\datums\extensions\appearance\appearance.dm"
 #include "code\datums\extensions\appearance\base_icon_state.dm"
 #include "code\datums\extensions\appearance\cardborg.dm"
