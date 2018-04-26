@@ -294,11 +294,10 @@
 		var/datum/job/job = job_master.GetJob(rank)
 		var/dat = list()
 
-		dat += "<body bgcolor='[job.selection_color]'><font color='white'>"
-		dat += "<h2>[capitalize(rank)]</h2>"
+		dat += "<p style='background-color: [job.selection_color]'><br><br><p>"
 		if(job.alt_titles)
 			dat += "<i><b>Alternative titles:</b> [english_list(job.alt_titles)].</i>"
-		user << browse_rsc(job.get_job_icon(), "job[ckey(rank)].png")
+		send_rsc(user, job.get_job_icon(), "job[ckey(rank)].png")
 		dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
 		if(job.department)
 			dat += "<b>Department:</b> [job.department]."
@@ -318,12 +317,13 @@
 		var/description = job.get_description_blurb()
 		if(description)
 			dat += html_encode(description)
-		close_browser(user, "window=jobinfo;size=430x450")
-		show_browser(user, jointext(dat,"<br>"), "window=jobinfo;size=430x500")
+		var/datum/browser/popup = new(user, "Job Info", "[capitalize(rank)]", 430, 520, src)
+		popup.set_content(jointext(dat,"<br>"))
+		popup.open()
 
 	else if(href_list["job_wiki"])
 		var/rank = href_list["job_wiki"]
-		user << link("[config.wikiurl][rank]")
+		open_link(user,"[config.wikiurl][rank]")
 
 	return ..()
 
