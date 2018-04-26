@@ -154,6 +154,21 @@
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
 		)
 
+/obj/item/weapon/gun/energy/secure/gun/mounted
+	name = "robot energy gun"
+	desc = "A robot-mounted equivalnet of the LAEP90-S, which is always registered to its owner."
+	self_recharge = 1
+	use_external_power = 1
+	one_hand_penalty = 0
+
+/obj/item/weapon/gun/energy/secure/gun/mounted/New()
+	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)
+	if(!borg)
+		CRASH("Invalid spawn location.")
+	registered_owner = borg.name
+	GLOB.registered_cyborg_weapons += src
+	..()
+
 /obj/item/weapon/gun/energy/secure/gun/small
 	name = "small energy gun"
 	desc = "Combining the two LAEP90 variants, the secure and compact LAEP90-CS is the next best thing to keeping your security forces on a literal leash."
