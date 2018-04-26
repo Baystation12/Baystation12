@@ -68,7 +68,10 @@
 	update_icon()
 
 	update_nearby_tiles(need_rebuild=1)
-	return
+
+/obj/machinery/door/Initialize()
+	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	. = ..()
 
 /obj/machinery/door/Destroy()
 	set_density(0)
@@ -462,6 +465,11 @@
 	if(.)
 		deconstruct(null, TRUE)
 
+/obj/machinery/door/proc/CheckPenetration(var/base_chance, var/damage)
+	. = damage/maxhealth*180
+	if(glass)
+		. *= 2
+	. = round(.)
 
 /obj/machinery/door/proc/deconstruct(mob/user, var/moved = FALSE)
 	return null
