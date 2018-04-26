@@ -16,6 +16,13 @@
 		M.add_chemical_effect(CE_STABLE)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
 
+/datum/reagent/inaprovaline/overdose(var/mob/living/carbon/M, var/alien)
+	M.add_chemical_effect(CE_SLOWDOWN, 1)
+	if(prob(5))
+		M.slurring = max(M.slurring, 10)
+	if(prob(2))
+		M.drowsyness = max(M.drowsyness, 5)
+
 /datum/reagent/bicaridine
 	name = "Bicaridine"
 	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
@@ -30,6 +37,16 @@
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(6 * removed, 0)
+		M.add_chemical_effect(CE_PAINKILLER, 10)
+
+/datum/reagent/bicaridine/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	if(ishuman(M))
+		M.add_chemical_effect(CE_BLOCKAGE, (15 + volume - overdose)/100)
+		var/mob/living/carbon/human/H = M
+		for(var/obj/item/organ/external/E in H.organs)
+			if(E.status & ORGAN_ARTERY_CUT && prob(2))
+				E.status &= ~ORGAN_ARTERY_CUT
 
 /datum/reagent/kelotane
 	name = "Kelotane"
@@ -190,7 +207,7 @@
 	M.add_chemical_effect(CE_PAINKILLER, 35)
 
 /datum/reagent/paracetamol/overdose(var/mob/living/carbon/M, var/alien)
-	..()
+	M.add_chemical_effect(CE_TOXIN, 1)
 	M.druggy = max(M.druggy, 2)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
@@ -731,7 +748,7 @@
 	M.add_chemical_effect(CE_ANTIVIRAL, 1)
 
 /datum/reagent/antidexafen/overdose(var/mob/living/carbon/M, var/alien)
-	..()
+	M.add_chemical_effect(CE_TOXIN, 1)
 	M.hallucination(60, 20)
 	M.druggy = max(M.druggy, 2)
 

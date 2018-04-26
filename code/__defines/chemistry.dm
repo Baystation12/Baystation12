@@ -44,6 +44,7 @@
 #define CE_BREATHLOSS    "breathloss"   // Breathing depression, makes you need more air
 #define CE_MIND    		 "mindbending"  // Stabilizes or wrecks mind. Used for hallucinations
 #define CE_CRYO 	     "cryogenic"    // Prevents damage from being frozen
+#define CE_BLOCKAGE	     "blockage"     // Gets in the way of blood circulation, higher the worse
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1
