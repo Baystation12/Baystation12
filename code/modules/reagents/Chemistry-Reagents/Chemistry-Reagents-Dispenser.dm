@@ -53,6 +53,10 @@
 	else if(alien != IS_DIONA)
 		M.adjustToxLoss(removed * 1.5)
 
+/datum/reagent/ammonia/overdose(var/mob/living/carbon/M, var/alien)
+	if(alien != IS_VOX || volume > overdose*6)
+		..()
+
 /datum/reagent/carbon
 	name = "Carbon"
 	description = "A chemical element, the building block of life."
