@@ -25,6 +25,10 @@
 
 	SetName("[id.get_display_name()]'s PDA")
 
+/obj/item/modular_computer/pda/Initialize()
+	. = ..()
+	enable_computer()
+
 /obj/item/modular_computer/pda/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))
 		return

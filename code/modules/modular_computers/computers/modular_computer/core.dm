@@ -172,9 +172,7 @@
 	// Autorun feature
 	var/datum/computer_file/data/autorun = hard_drive ? hard_drive.find_file_by_name("autorun") : null
 	if(istype(autorun))
-		var/list/autorun_data = splittext(autorun.stored_data, ":")
-		if(autorun_data.len >= 2)
-			run_program(autorun_data[1], text2num(autorun_data[2]))
+		run_program(autorun.stored_data)
 
 	if(user)
 		ui_interact(user)
