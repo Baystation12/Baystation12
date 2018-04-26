@@ -39,8 +39,8 @@
 	var/list/temp_chem = list()
 	for(var/datum/reagent/R in C.reagents.reagent_list)
 		temp_chem[R.type] = R.volume
-	data["trace_chem"] = list2params(temp_chem)
-	data["dose_chem"] = list2params(C.chem_doses)
+	data["trace_chem"] = temp_chem
+	data["dose_chem"] = C.chem_doses.Copy()
 	data["blood_colour"] = C.species.get_blood_colour(C)
 	color = data["blood_colour"]
 
