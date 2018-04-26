@@ -472,7 +472,7 @@ This function completely restores a damaged organ to perfect condition.
 	var/wound_type = get_wound_type(type, damage)
 
 	if(wound_type)
-		var/datum/wound/W = new wound_type(damage)
+		var/datum/wound/W = new wound_type(damage, src)
 
 		//Check whether we can add the wound to an existing wound
 		if(surgical)
@@ -783,6 +783,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(parent_organ)
 		var/datum/wound/lost_limb/W = new (src, disintegrate, clean)
 		if(clean)
+			W.parent_organ = parent_organ
 			parent_organ.wounds |= W
 			parent_organ.update_damages()
 		else
@@ -793,6 +794,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			stump.add_pain(max_damage)
 			if(robotic >= ORGAN_ROBOT)
 				stump.robotize()
+			W.parent_organ = stump
 			stump.wounds |= W
 			victim.organs |= stump
 			if(disintegrate != DROPLIMB_BURN)
