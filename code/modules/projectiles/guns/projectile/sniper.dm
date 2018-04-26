@@ -5,7 +5,7 @@
 	item_state = "heavysniper" //sort of placeholder
 	w_class = ITEM_SIZE_HUGE
 	force = 10
-	slot_flags = SLOT_BACK
+	slot_flags = SLOT_BACK | SLOT_ID
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	caliber = "14.5mm"
 	screen_shake = 2 //extra kickback
