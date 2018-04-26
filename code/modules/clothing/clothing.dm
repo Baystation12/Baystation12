@@ -701,7 +701,7 @@ BLIND     // can't see anything
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/uniform.dmi',
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/uniform.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/uniform.dmi'
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
