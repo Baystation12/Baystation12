@@ -2,7 +2,7 @@
  * Job related
  */
 
-//Botonist
+//Botanist
 /obj/item/clothing/suit/apron
 	name = "apron"
 	desc = "A basic blue apron."
@@ -10,6 +10,8 @@
 	item_state = "apron"
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
+	species_restricted = null
+	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/suit.dmi')
 	allowed = list (/obj/item/weapon/reagent_containers/spray/plantbgone,/obj/item/device/analyzer/plant_analyzer,/obj/item/seeds,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/material/minihoe)
 
 //Captain
@@ -63,6 +65,8 @@
 	desc = "A basic, dull, white chef's apron."
 	icon_state = "apronchef"
 	item_state = "apronchef"
+	species_restricted = null
+	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/suit.dmi')
 	blood_overlay_type = "armor"
 	body_parts_covered = 0
 
@@ -134,6 +138,8 @@
 	icon_state = "hazard"
 	item_state = "hazard"
 	blood_overlay_type = "armor"
+	species_restricted = null
+	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/suit.dmi')
 	allowed = list (/obj/item/device/analyzer, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/pipe_painter, /obj/item/device/radio, /obj/item/device/t_scanner, \
 	/obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency, \
 	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
@@ -142,16 +148,19 @@
 /obj/item/clothing/suit/storage/hazardvest/blue
 	name = "blue hazard vest"
 	desc = "A high-visibility vest used in work zones. This one is blue!"
+	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/suit.dmi')
 	icon_state = "hazard_b"
 
 /obj/item/clothing/suit/storage/hazardvest/white
 	name = "white hazard vest"
-	desc = "A high-visibility vest used in work zones. This one has a red cross!"
+	desc = "A high-visibility vest used in work zones. This one has a blue cross!"
+	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/suit.dmi')
 	icon_state = "hazard_w"
 
 /obj/item/clothing/suit/storage/hazardvest/green
 	name = "green hazard vest"
 	desc = "A high-visibility vest used in work zones. This one is green!"
+	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/suit.dmi')
 	icon_state = "hazard_g"
 
 //Lawyer
