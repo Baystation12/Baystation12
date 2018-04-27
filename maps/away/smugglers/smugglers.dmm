@@ -148,11 +148,11 @@
 /turf/simulated/floor/airless,
 /area/smugglers/base)
 "au" = (
-/obj/item/device/flashlight/glowstick/yellow{
+/obj/item/device/flashlight/flare/glowstick/yellow{
 	pixel_x = 5;
 	pixel_y = 7
 	},
-/obj/item/device/flashlight/glowstick/yellow,
+/obj/item/device/flashlight/flare/glowstick/yellow,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "av" = (

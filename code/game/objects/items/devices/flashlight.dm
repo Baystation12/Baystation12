@@ -36,7 +36,7 @@
 		return 0
 	on = !on
 	if(on && activation_sound)
-		playsound(src.loc, activation_sound, 75, 1)
+		playsound(get_turf(src), activation_sound, 75, 1)
 	update_icon()
 	user.update_action_buttons()
 	return 1
@@ -210,47 +210,64 @@
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 5
 
-/obj/item/device/flashlight/flare/New()
-	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.
-	..()
+/obj/item/device/flashlight/flare/Initialize()
+	. = ..()
+	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.v
+	update_icon()
+
+/obj/item/device/flashlight/flare/Destroy()
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
 
 /obj/item/device/flashlight/flare/Process()
-	var/turf/pos = get_turf(src)
-	if(pos)
-		pos.hotspot_expose(produce_heat, 5)
+	if(produce_heat)
+		var/turf/T = get_turf(src)
+		if(T)
+			T.hotspot_expose(produce_heat, 5)
 	fuel = max(fuel - 1, 0)
 	if(!fuel || !on)
-		turn_off()
-		if(!fuel)
-			src.icon_state = "[initial(icon_state)]-empty"
+		update_damage()
+		update_icon()
 		STOP_PROCESSING(SSobj, src)
 
-/obj/item/device/flashlight/flare/proc/turn_off()
-	on = 0
-	src.force = initial(src.force)
-	src.damtype = initial(src.damtype)
-	update_icon()
-
-/obj/item/device/flashlight/flare/attack_self(mob/user)
-	if(turn_on(user))
-		user.visible_message("<span class='notice'>\The [user] activates \the [src].</span>", "<span class='notice'>You pull the cord on the flare, activating it!</span>")
-
-/obj/item/device/flashlight/flare/proc/turn_on(var/mob/user)
-	if(on)
-		return FALSE
+/obj/item/device/flashlight/flare/attack_self(var/mob/user)
 	if(!fuel)
-		if(user)
-			to_chat(user, "<span class='notice'>It's out of fuel.</span>")
-		return FALSE
-	on = TRUE
-	force = on_damage
-	damtype = "fire"
-	START_PROCESSING(SSobj, src)
+		to_chat(user,"<span class='notice'>\The [src] is spent.</span>")
+		return
+	if(on)
+		to_chat(user,"<span class='notice'>\The [src] is already lit.</span>")
+		return
+
+	. = ..()
+
+	if(.)
+		activate(user)
+
+/obj/item/device/flashlight/flare/proc/activate(var/mob/user)
+	if(on)
+		return
+	on = 1
+	if(user)
+		user.visible_message("<span class='notice'>[user] pulls the cord on \the [src], activating it.</span>", "<span class='notice'>You pull the cord on \the [src], activating it!</span>")
+	update_damage()
 	update_icon()
-	return 1
+	START_PROCESSING(SSobj, src)
+
+/obj/item/device/flashlight/flare/proc/update_damage()
+	if(on)
+		force = on_damage
+		damtype = BURN
+	else
+		force = initial(force)
+		damtype = initial(damtype)
+
+/obj/item/device/flashlight/flare/update_icon()
+	..()
+	if(!on && !fuel)
+		icon_state = "[initial(icon_state)]-empty"
 
 //Glowsticks
-/obj/item/device/flashlight/glowstick
+/obj/item/device/flashlight/flare/glowstick
 	name = "green glowstick"
 	desc = "A military-grade glowstick."
 	w_class = 2.0
@@ -258,35 +275,19 @@
 	icon_state = "glowstick"
 	item_state = "glowstick"
 	randpixel = 12
-	var/fuel = 0
+	produce_heat = 0
 	activation_sound = null
 
 	flashlight_max_bright = 0.6
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 3
 
-
-/obj/item/device/flashlight/glowstick/New()
+/obj/item/device/flashlight/flare/glowstick/Initialize()
+	. = ..()
 	fuel = rand(1600, 2000)
 	light_color = color
-	..()
 
-/obj/item/device/flashlight/glowstick/Destroy()
-	. = ..()
-	STOP_PROCESSING(SSobj, src)
-
-/obj/item/device/flashlight/glowstick/Process()
-	fuel = max(fuel - 1, 0)
-	if(!fuel)
-		turn_off()
-		STOP_PROCESSING(SSobj, src)
-		update_icon()
-
-/obj/item/device/flashlight/glowstick/proc/turn_off()
-	on = 0
-	update_icon()
-
-/obj/item/device/flashlight/glowstick/update_icon()
+/obj/item/device/flashlight/flare/glowstick/update_icon()
 	item_state = "glowstick"
 	overlays.Cut()
 	if(!fuel)
@@ -307,42 +308,35 @@
 		if(M.r_hand == src)
 			M.update_inv_r_hand()
 
-/obj/item/device/flashlight/glowstick/attack_self(mob/user)
-
-	if(!fuel)
-		to_chat(user,"<span class='notice'>\The [src] is spent.</span>")
-		return
+/obj/item/device/flashlight/flare/glowstick/activate(var/mob/user)
 	if(on)
-		to_chat(user,"<span class='notice'>\The [src] is already lit.</span>")
 		return
+	if(user)
+		user.visible_message("<span class='notice'>[user] cracks and shakes \the [src].</span>", "<span class='notice'>You crack and shake \the [src], turning it on!</span>")
+	START_PROCESSING(SSobj, src)
 
-	. = ..()
-	if(.)
-		user.visible_message("<span class='notice'>[user] cracks and shakes the glowstick.</span>", "<span class='notice'>You crack and shake the glowstick, turning it on!</span>")
-		START_PROCESSING(SSobj, src)
-
-/obj/item/device/flashlight/glowstick/red
+/obj/item/device/flashlight/flare/glowstick/red
 	name = "red glowstick"
 	color = "#fc0f29"
 
-/obj/item/device/flashlight/glowstick/blue
+/obj/item/device/flashlight/flare/glowstick/blue
 	name = "blue glowstick"
 	color = "#599dff"
 
-/obj/item/device/flashlight/glowstick/orange
+/obj/item/device/flashlight/flare/glowstick/orange
 	name = "orange glowstick"
 	color = "#fa7c0b"
 
-/obj/item/device/flashlight/glowstick/yellow
+/obj/item/device/flashlight/flare/glowstick/yellow
 	name = "yellow glowstick"
 	color = "#fef923"
 
-/obj/item/device/flashlight/glowstick/random
+/obj/item/device/flashlight/flare/glowstick/random
 	name = "glowstick"
 	desc = "A party-grade glowstick."
 	color = "#ff00ff"
 
-/obj/item/device/flashlight/glowstick/random/New()
+/obj/item/device/flashlight/flare/glowstick/random/New()
 	color = rgb(rand(50,255),rand(50,255),rand(50,255))
 	..()
 

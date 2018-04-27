@@ -625,7 +625,7 @@
 /area/magshield/smes_storage)
 "bG" = (
 /obj/structure/closet,
-/obj/item/device/flashlight/glowstick/random,
+/obj/item/device/flashlight/flare/glowstick/random,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "bH" = (
@@ -1005,7 +1005,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "cA" = (
-/obj/item/device/flashlight/glowstick/yellow,
+/obj/item/device/flashlight/flare/glowstick/yellow,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "cB" = (
