@@ -47,6 +47,26 @@
 		"precise" = 0
 		)
 
+	var/list/preset_colors = list(
+		"beasty brown" = 	COLOR_BEASTY_BROWN,
+		"blue" = 			COLOR_BLUE_GRAY,
+		"civvie green" =   	COLOR_CIVIE_GREEN,
+		"command blue" = 	COLOR_COMMAND_BLUE,
+		"cyan" =        	COLOR_CYAN,
+		"green" =      		COLOR_GREEN,
+		"NT red" =   		COLOR_NT_RED,
+		"orange" = 			COLOR_ORANGE,
+		"pale orange" =   	COLOR_PALE_ORANGE,
+		"red" = 			COLOR_RED,
+		"sky blue" =   		COLOR_DEEP_SKY_BLUE,
+		"titanium" =     	COLOR_TITANIUM,
+		"hull blue" = 		COLOR_HULL,
+		"violet" = 			COLOR_VIOLET,
+		"white" =        	COLOR_WHITE,
+		"yellow" =       	COLOR_AMBER
+		)
+
+
 /obj/item/device/floor_painter/afterattack(var/atom/A, var/mob/user, proximity, params)
 	if(!proximity)
 		return
@@ -64,9 +84,35 @@
 		W.update_icon()
 		return
 
+	var/obj/structure/wall_frame/WF = A
+	if(istype(WF))
+		WF.color = paint_colour
+		WF.update_icon()
+		return
+
+	var/obj/machinery/door/airlock/D = A
+	if(istype(D))
+		var/choice
+		if(!D.paintable)
+			to_chat(user, "<span class='warning'>You can't paint this airlock type.</span>")
+			return
+		if(D.paintable == AIRLOCK_PAINTABLE)
+			choice = "Paint"
+		else if(D.paintable == AIRLOCK_STRIPABLE)
+			choice = "Stripe"
+		else if(D.paintable == AIRLOCK_PAINTABLE|AIRLOCK_STRIPABLE)
+			choice = input(user, "What do you wish to paint?") as null|anything in list("Paint","Stripe")
+		if(user.incapacitated())
+			return
+		if(choice == "Paint")
+			D.paint_airlock(paint_colour)
+		else if(choice == "Stripe")
+			D.stripe_airlock(paint_colour)
+		return
+
 	var/turf/simulated/floor/F = A
 	if(!istype(F))
-		to_chat(user, "<span class='warning'>\The [src] can only be used on floors or walls.</span>")
+		to_chat(user, "<span class='warning'>\The [src] can only be used on floors, walls or certain airlocks.</span>")
 		return
 
 	if(!F.flooring.can_paint || F.broken || F.burnt)
@@ -122,13 +168,15 @@
 	new painting_decal(F, painting_dir, painting_colour)
 
 /obj/item/device/floor_painter/attack_self(var/mob/user)
-	var/choice = input("What do you wish to change?") as null|anything in list("Decal","Direction", "Colour", "Mode")
+	var/choice = input("What do you wish to change?") as null|anything in list("Decal","Direction", "Colour", "Preset Colour", "Mode")
 	if(choice == "Decal")
 		choose_decal()
 	else if(choice == "Direction")
 		choose_direction()
 	else if(choice == "Colour")
 		choose_colour()
+	else if(choice == "Preset Colour")
+		choose_preset_colour()
 	else if(choice == "Mode")
 		toggle_mode()
 
@@ -147,6 +195,19 @@
 	var/new_colour = input(usr, "Choose a colour.", "paintgun", paint_colour) as color|null
 	if(new_colour && new_colour != paint_colour)
 		paint_colour = new_colour
+		to_chat(usr, "<span class='notice'>You set \the [src] to paint with <font color='[paint_colour]'>a new colour</font>.</span>")
+
+/obj/item/device/floor_painter/verb/choose_preset_colour()
+	set name = "Choose Preset Colour"
+	set desc = "Choose a paintgun colour."
+	set category = "Object"
+	set src in usr
+
+	if(usr.incapacitated())
+		return
+	var/new_colour = input(usr, "Choose a colour.", "paintgun", paint_colour) as color|anything in preset_colors
+	if(new_colour && new_colour != paint_colour)
+		paint_colour = preset_colors[new_colour]
 		to_chat(usr, "<span class='notice'>You set \the [src] to paint with <font color='[paint_colour]'>a new colour</font>.</span>")
 
 /obj/item/device/floor_painter/verb/choose_decal()
