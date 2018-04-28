@@ -233,5 +233,28 @@
 		var/datum/mil_rank/R = T
 		if(B && !(initial(R.name) in B.ranks))
 			continue
-		res += initial(R.name)
+		res |= initial(R.name)
 	return english_list(res)
+
+/datum/job/proc/get_description_blurb()
+	return ""
+
+/datum/job/proc/get_job_icon()
+	if(!job_master.job_icons[title])
+		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
+		dress_mannequin(mannequin)
+		mannequin.dir = SOUTH
+		var/icon/preview_icon = getFlatIcon(mannequin)
+
+		preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
+		job_master.job_icons[title] = preview_icon
+
+	return job_master.job_icons[title]
+
+/datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
+	mannequin.delete_inventory(TRUE)
+	equip(mannequin)
+	if(mannequin.back)
+		var/obj/O = mannequin.back
+		mannequin.drop_from_inventory(O)
+		qdel(O)
