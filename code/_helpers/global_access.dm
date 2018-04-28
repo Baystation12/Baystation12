@@ -679,8 +679,6 @@
 			return global.possible_cable_coil_colours;
 		if("possible_changeling_IDs")
 			return global.possible_changeling_IDs;
-		if("poster_designs")
-			return global.poster_designs;
 		if("power_alarm")
 			return global.power_alarm;
 		if("powerinstances")
@@ -1674,8 +1672,6 @@
 			global.possible_cable_coil_colours=newval;
 		if("possible_changeling_IDs")
 			global.possible_changeling_IDs=newval;
-		if("poster_designs")
-			global.poster_designs=newval;
 		if("power_alarm")
 			global.power_alarm=newval;
 		if("powerinstances")
@@ -2329,7 +2325,6 @@
 	"point_source_descriptions",
 	"possible_cable_coil_colours",
 	"possible_changeling_IDs",
-	"poster_designs",
 	"power_alarm",
 	"powerinstances",
 	"powers",

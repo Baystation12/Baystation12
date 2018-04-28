@@ -615,14 +615,16 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		if(istype(N, areatype)) areas += N
 	return areas
 
-//Takes: Area type as text string or as typepath OR an instance of the area.
+//Takes: Area type as a typepath OR an instance of the area.
 //Returns: A list of all atoms	(objs, turfs, mobs) in areas of that type of that type in the world.
 /proc/get_area_all_atoms(var/areatype)
-	if(!areatype) return null
-	if(istext(areatype)) areatype = text2path(areatype)
+	if(!areatype)
+		return null
 	if(isarea(areatype))
 		var/area/areatemp = areatype
 		areatype = areatemp.type
+	if(!ispath(areatype, /area))
+		return null
 
 	var/list/atoms = new/list()
 	for(var/area/N in world)

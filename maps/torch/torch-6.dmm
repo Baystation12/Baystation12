@@ -6958,9 +6958,8 @@
 /turf/simulated/floor/shuttle/black,
 /area/rescue_base/start)
 "apF" = (
-/obj/structure/sign/poster{
+/obj/structure/sign/poster/bay_9{
 	pixel_x = -32;
-	poster_type = "/datum/poster/bay_9"
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/rescue_base/start)
@@ -12586,8 +12585,7 @@
 /turf/unsimulated/wall,
 /area/centcom/control)
 "aCc" = (
-/obj/structure/sign/poster{
-	poster_type = "/datum/poster/bay_50";
+/obj/structure/sign/poster/bay_50{
 	pixel_x = -32
 	},
 /turf/simulated/floor/shuttle/darkred,

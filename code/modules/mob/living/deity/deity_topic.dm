@@ -2,8 +2,9 @@
 	if(..())
 		return 1
 	if(href_list["form"])
-		var/type = text2path(href_list["form"])
-		set_form(type)
+		var/type = locate(href_list["form"]) in subtypesof(/datum/god_form)
+		if(type)
+			set_form(type)
 		return 1
 	if(href_list["intent"] && href_list["modifier"])
 		var/choice = input(src, "Set [href_list["intent"]]:[href_list["modifier"]] to:", "Phenomenas", null) as null|anything in phenomenas
