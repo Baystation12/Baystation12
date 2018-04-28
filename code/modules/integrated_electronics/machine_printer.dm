@@ -79,7 +79,7 @@ var/list/integrated_circuit_blacklist = list(/obj/item/integrated_circuit, /obj/
 		mode = href_list["mode"]
 	else
 		var/build_type = text2path(href_list["build"])
-		if(!build_type || !ispath(build_type))
+		if(!build_type || !ispath(build_type) || !(build_type in recipe_list[mode]))
 			return 1
 		var/cost = 1
 		if(ispath(build_type, /obj/item/device/electronic_assembly))
