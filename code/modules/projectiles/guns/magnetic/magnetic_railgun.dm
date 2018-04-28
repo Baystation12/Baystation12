@@ -25,9 +25,7 @@
 
 	cell = new initial_cell_type(src)
 	if (ispath(loaded))
-		if(load_sheet_max > 1)
-			loaded = new loaded(src,load_sheet_max)
-		loaded = new loaded
+		loaded = new loaded (src, load_sheet_max)
 	slowdown_per_slot[slot_l_hand] =  slowdown_held
 	slowdown_per_slot[slot_r_hand] =  slowdown_held
 	slowdown_per_slot[slot_back] =    slowdown_worn
