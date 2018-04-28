@@ -4193,6 +4193,7 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
+/obj/item/device/floor_painter,
 /turf/simulated/floor/tiled,
 /area/engineering/locker_room)
 "iI" = (
@@ -4625,6 +4626,7 @@
 	},
 /obj/structure/table/standard,
 /obj/item/weapon/storage/box/lights/mixed,
+/obj/item/device/floor_painter,
 /turf/simulated/floor/plating,
 /area/janitor)
 "jC" = (
