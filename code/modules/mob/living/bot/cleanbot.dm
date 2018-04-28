@@ -37,7 +37,7 @@
 			ignore_list -= g
 
 /mob/living/bot/cleanbot/lookForTargets()
-	for(var/obj/effect/decal/cleanable/D in view(world.view + 1)) // There was some odd code to make it start with nearest decals, it's unnecessary, this works
+	for(var/obj/effect/decal/cleanable/D in view(world.view + 1, src))
 		if(confirmTarget(D))
 			target = D
 			return
