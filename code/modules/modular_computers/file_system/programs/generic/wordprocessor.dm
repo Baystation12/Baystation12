@@ -15,15 +15,6 @@
 	var/is_edited
 	usage_flags = PROGRAM_ALL
 
-/datum/computer_file/program/wordprocessor/proc/get_file(var/filename)
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
-	if(!HDD)
-		return
-	var/datum/computer_file/data/F = HDD.find_file_by_name(filename)
-	if(!istype(F))
-		return
-	return F
-
 /datum/computer_file/program/wordprocessor/proc/open_file(var/filename)
 	var/datum/computer_file/data/F = get_file(filename)
 	if(F)
@@ -34,7 +25,7 @@
 /datum/computer_file/program/wordprocessor/proc/save_file(var/filename)
 	var/datum/computer_file/data/F = get_file(filename)
 	if(!F) //try to make one if it doesn't exist
-		F = create_file(filename, loaded_data)
+		F = create_file(filename, loaded_data, /datum/computer_file/data/text)
 		return !isnull(F)
 	var/datum/computer_file/data/backup = F.clone()
 	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
@@ -48,22 +39,6 @@
 		return 0
 	is_edited = 0
 	return 1
-
-/datum/computer_file/program/wordprocessor/proc/create_file(var/newname, var/data = "")
-	if(!newname)
-		return
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
-	if(!HDD)
-		return
-	if(get_file(newname))
-		return
-	var/datum/computer_file/data/F = new/datum/computer_file/data()
-	F.filename = newname
-	F.filetype = "TXT"
-	F.stored_data = data
-	F.calculate_size()
-	if(HDD.store_file(F))
-		return F
 
 /datum/computer_file/program/wordprocessor/Topic(href, href_list)
 	if(..())
@@ -134,7 +109,7 @@
 		var/newname = sanitize(input(usr, "Enter file name:", "New File") as text|null)
 		if(!newname)
 			return 1
-		var/datum/computer_file/data/F = create_file(newname)
+		var/datum/computer_file/data/F = create_file(newname, "", /datum/computer_file/data/text)
 		if(F)
 			open_file = F.filename
 			loaded_data = ""
@@ -147,7 +122,7 @@
 		var/newname = sanitize(input(usr, "Enter file name:", "Save As") as text|null)
 		if(!newname)
 			return 1
-		var/datum/computer_file/data/F = create_file(newname, loaded_data)
+		var/datum/computer_file/data/F = create_file(newname, loaded_data, /datum/computer_file/data/text)
 		if(F)
 			open_file = F.filename
 		else

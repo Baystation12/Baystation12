@@ -1,0 +1,34 @@
+{{if data.scanner_name}}
+	<h2>Attached scanner hardware: {{:data.scanner_name}}</h2>
+	<div class="item">
+		<div class="itemLabel">
+			Scanner installation status:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Installed', null, {'connect_scanner' : 1}, data.using_scanner ? 'selected' : null)}}
+			{{:helper.link('Uninstalled', null, {'connect_scanner' : 0}, !data.using_scanner ? 'selected' : null)}}
+		</div>
+		<div class="itemLabel">
+			Scanner is:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Enabled', null, {'PC_enable_component' : data.scanner_name}, data.scanner_enabled ? 'selected' : null)}}
+			{{:helper.link('Disabled', null, {'PC_disable_component' : data.scanner_name}, !data.scanner_enabled ? 'selected' : null)}}
+		</div>
+		<div class="itemLabel">
+			Scanner Actions:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Perform Scan', null, {'scan' : 1}, data.check_scanning ? null : 'disabled')}}
+			{{:helper.link('Save Scan', null, {'save' : 1}, data.can_save_scan ? null : 'disabled')}}
+		</div>
+	</div>
+	{{if data.can_view_scan}}
+		<h3>Scan Preview:</h3><br>
+		<div class = "block">
+			{{:data.data_buffer}}
+		</div>
+	{{/if}}
+{{else}}
+	<h2>There is no scanner attached.</h2>
+{{/if}}

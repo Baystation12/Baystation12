@@ -58,11 +58,19 @@
 	icon_state = "pda-m"
 	icon_state_unpowered = "pda-m"
 
+/obj/item/modular_computer/pda/chemistry
+	icon_state = "pda-m"
+	icon_state_unpowered = "pda-m"
+
 /obj/item/modular_computer/pda/engineering
 	icon_state = "pda-e"
 	icon_state_unpowered = "pda-e"
 
 /obj/item/modular_computer/pda/security
+	icon_state = "pda-s"
+	icon_state_unpowered = "pda-s"
+
+/obj/item/modular_computer/pda/forensics
 	icon_state = "pda-s"
 	icon_state_unpowered = "pda-s"
 

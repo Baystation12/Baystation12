@@ -249,7 +249,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/security/forensic
-	pda_type = /obj/item/modular_computer/pda/security
+	pda_type = /obj/item/modular_computer/pda/forensics
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor
 	name = OUTFIT_JOB_NAME("Forensic Technician - Contractor")
@@ -364,7 +364,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Chemist - Torch")
 	uniform = /obj/item/clothing/under/rank/chemist
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/modular_computer/pda/medical
+	pda_type = /obj/item/modular_computer/pda/chemistry
 	id_type = /obj/item/weapon/card/id/torch/contractor/chemist
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist/New()
