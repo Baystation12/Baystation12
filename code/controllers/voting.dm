@@ -400,7 +400,7 @@
 		. = "<html><head><title>Voting Panel</title></head><body>"
 		if(mode)
 			if(config.vote_no_dead_crew_transfer && current_vote_type == "crew_transfer" && !isliving(C.mob))
-				. += "<h2>Sorry, you are currently unable to vote while out-of-round right now.</h2><br>"
+				. += "<h2>You can't participate in this vote unless you're participating in the round.</h2><br>"
 			else
 				if(question)	. += "<h2>Vote: '[question]'</h2>"
 				else			. += "<h2>Vote: [capitalize(mode)]</h2>"
