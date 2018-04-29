@@ -1,5 +1,6 @@
 /obj/item/weapon/grenade/flashbang
 	name = "flashbang"
+	desc = "A grenade designed to blind, stun and disorient by means of an extremely bright flash and loud explosion."
 	icon_state = "flashbang"
 	item_state = "flashbang"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)

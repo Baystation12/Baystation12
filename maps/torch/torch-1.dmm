@@ -1053,6 +1053,10 @@
 /area/quartermaster/expedition/storage)
 "cL" = (
 /obj/structure/stasis_cage,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "cM" = (
@@ -1664,9 +1668,11 @@
 	dir = 1
 	},
 /obj/structure/stasis_cage,
+/obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "dY" = (
+/obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "dZ" = (
@@ -1972,10 +1978,19 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/corner/brown{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/brown{
+	dir = 9
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "eG" = (
 /obj/structure/ore_box,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "eH" = (
@@ -1993,6 +2008,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
+	},
+/obj/machinery/light{
+	icon_state = "tube1";
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
@@ -2952,8 +2971,12 @@
 /area/quartermaster/expedition/eva)
 "gw" = (
 /obj/machinery/suit_storage_unit/explorer,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/corner/mauve/diagonal,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "gx" = (
@@ -2975,36 +2998,41 @@
 	pixel_x = 0;
 	pixel_y = 24
 	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "gz" = (
 /obj/structure/table/rack,
-/obj/item/clothing/mask/gas/half,
-/obj/item/clothing/mask/gas/half,
-/obj/item/clothing/mask/gas/half,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/light{
-	dir = 4
-	},
 /obj/machinery/camera/network/exploration,
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
-"gA" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
+/obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/door/window/northright{
+	dir = 2;
+	name = "pathfinder suit storage";
+	req_access = list(94)
+	},
+/obj/item/weapon/rig/command/exploration/equipped,
+/obj/item/clothing/mask/gas/half,
+/obj/effect/floor_decal/corner/mauve/diagonal{
+	tag = "icon-corner_white_diagonal (EAST)";
+	icon_state = "corner_white_diagonal";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/mauve/diagonal,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "gB" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
@@ -3433,6 +3461,9 @@
 /area/quartermaster/exploration)
 "hv" = (
 /obj/effect/floor_decal/industrial/warning/corner,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "hw" = (
@@ -3447,9 +3478,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8
-	},
 /obj/machinery/embedded_controller/radio/airlock/access_controller{
 	id_tag = "hangar_quarantine_control";
 	name = "Quarantine Access Console";
@@ -3458,6 +3486,9 @@
 	req_access = list(39);
 	tag_exterior_door = "hangar_quarantine_outer";
 	tag_interior_door = "hangar_quarantine_inner"
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -3855,11 +3886,11 @@
 /area/quartermaster/expedition/eva)
 "in" = (
 /obj/machinery/suit_storage_unit/explorer,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/mauve/diagonal,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "ip" = (
@@ -3882,8 +3913,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 1
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -4371,18 +4402,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
-"jt" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/light/spot{
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
 "ju" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -5304,7 +5323,6 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition)
 "lr" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/pathfinder,
 /obj/effect/floor_decal/corner/mauve{
 	tag = "icon-corner_white (EAST)";
@@ -5315,6 +5333,7 @@
 	dir = 2;
 	pixel_y = 24
 	},
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "ls" = (
@@ -5327,7 +5346,6 @@
 /area/quartermaster/exploration)
 "lt" = (
 /obj/structure/table/rack,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/weapon/material/hatchet/machete,
 /obj/item/weapon/material/hatchet/machete,
 /obj/item/weapon/material/hatchet/machete,
@@ -5338,6 +5356,7 @@
 	icon_state = "corner_white";
 	dir = 1
 	},
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "lu" = (
@@ -5345,7 +5364,6 @@
 /obj/item/stack/flag/green,
 /obj/item/stack/flag/green,
 /obj/item/stack/flag/green,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/stack/flag/solgov,
 /obj/item/stack/flag/solgov,
 /obj/item/stack/flag/red,
@@ -5369,6 +5387,7 @@
 	dir = 1
 	},
 /obj/item/weapon/mining_scanner,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "lv" = (
@@ -6140,13 +6159,6 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition)
 "mG" = (
-/turf/simulated/floor/tiled,
-/area/quartermaster/expedition)
-"mH" = (
-/obj/machinery/door/airlock/mining{
-	name = "Expedition Prep";
-	req_one_access = list(48,65,81)
-	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition)
 "mI" = (
@@ -7380,8 +7392,8 @@
 /area/quartermaster/expedition)
 "oY" = (
 /obj/structure/closet/secure_closet/explorer,
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/corner/mauve,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "oZ" = (
@@ -8734,16 +8746,17 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 1
 	},
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 1;
 	icon_state = "pipe-c"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "rC" = (
@@ -19060,10 +19073,26 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
+"Py" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 1
+	},
+/obj/machinery/light{
+	icon_state = "tube1";
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/aft)
 "PO" = (
 /obj/item/seeds/potatoseed,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
+"Qc" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "Qd" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/hangar)
@@ -19096,6 +19125,11 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "RJ" = (
@@ -19117,6 +19151,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
+"RL" = (
+/obj/machinery/suit_storage_unit/explorer,
+/obj/effect/floor_decal/corner/mauve/diagonal,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "RQ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/storage/auxillary/starboard)
@@ -19140,6 +19180,10 @@
 	layer = 2.4;
 	level = 2
 	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
 "Ty" = (
@@ -19154,6 +19198,9 @@
 /obj/item/weapon/storage/box/greenglowsticks,
 /obj/item/weapon/storage/box/greenglowsticks,
 /obj/item/weapon/storage/box/greenglowsticks,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
+/obj/item/clothing/mask/gas/half,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "TG" = (
@@ -19189,10 +19236,6 @@
 /area/quartermaster/office)
 "Wv" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass_science{
-	name = "Exploration Equipment";
-	req_access = list(93)
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -19201,6 +19244,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/airlock/glass_science{
+	name = "Exploration Equipment";
+	req_access = list(93)
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "WB" = (
@@ -38127,7 +38174,7 @@ fB
 fB
 kt
 kq
-mH
+kq
 kq
 kq
 qn
@@ -38324,16 +38371,16 @@ dW
 eD
 cq
 gw
-gw
+RL
 in
-gw
+RL
 cq
 lr
 mI
 nN
 oY
 cq
-rA
+Py
 sU
 uz
 vV
@@ -38930,7 +38977,7 @@ Sz
 eG
 cq
 gy
-dG
+Qc
 ip
 js
 dF
@@ -39535,10 +39582,10 @@ dv
 ea
 by
 by
-gA
+by
 hx
 ir
-jt
+ea
 ky
 fO
 fO
