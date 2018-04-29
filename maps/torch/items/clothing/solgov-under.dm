@@ -205,6 +205,8 @@
 	icon_state = "tanutility"
 	item_state = "johnny"
 	worn_state = "tanutility"
+	uscm
+		desc = "A tan version of the US colonial marine utility uniform, made from durable material."
 
 //Service
 
