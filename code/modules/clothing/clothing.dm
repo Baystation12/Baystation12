@@ -648,6 +648,61 @@ BLIND     // can't see anything
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
 
+	var/light_overlay = "suit_light"
+	var/light_applied
+	var/brightness_on
+	var/on = 0
+
+///////////////////////////////////////////////////start of new
+
+/obj/item/clothing/suit/update_icon(var/mob/user)
+
+	overlays.Cut()
+	var/mob/living/carbon/human/H
+	if(istype(user,/mob/living/carbon/human))
+		H = user
+
+	if(on)
+
+		// Generate object icon.
+		if(!light_overlay_cache["[light_overlay]_icon"])
+			light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
+		overlays |= light_overlay_cache["[light_overlay]_icon"]
+
+		// Generate and cache the on-mob icon, which is used in update_inv_head().
+		var/cache_key = "[light_overlay][H ? "_[H.species.get_bodytype(H)]" : ""]"
+		if(!light_overlay_cache[cache_key])
+			var/use_icon = 'icons/mob/light_overlays.dmi'
+			if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+				use_icon = sprite_sheets[H.species.get_bodytype(H)]
+			light_overlay_cache[cache_key] = image("icon" = use_icon, "icon_state" = "[light_overlay]")
+
+	if(H)
+		H.update_inv_wear_suit()
+
+/obj/item/clothing/suit/attack_self(mob/user)
+	if(brightness_on)
+		if(!isturf(user.loc))
+			to_chat(user, "You cannot turn the light on while in this [user.loc]")
+			return
+		on = !on
+		to_chat(user, "You [on ? "enable" : "disable"] the suit light.")
+		update_flashlight(user)
+	else
+		return ..(user)
+
+/obj/item/clothing/suit/proc/update_flashlight(var/mob/user = null)
+	if(on && !light_applied)
+		set_light(0.6, 2, brightness_on)
+		light_applied = 1
+	else if(!on && light_applied)
+		set_light(0)
+		light_applied = 0
+	update_icon(user)
+	user.update_action_buttons()
+
+//////////////////////////////////////////End of new
+
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
 		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/suit.dmi',
@@ -664,6 +719,9 @@ BLIND     // can't see anything
 		ret.icon_state = item_state_slots[slot]
 	else
 		ret.icon_state = icon_state
+	var/cache_key = "[light_overlay]"
+	if(on && light_overlay_cache[cache_key] && slot == slot_wear_suit)
+		ret.overlays |= light_overlay_cache[cache_key]
 	return ret
 
 /obj/item/clothing/suit/proc/get_collar()
