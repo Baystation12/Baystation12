@@ -11,9 +11,9 @@
 /obj/item/clothing/under/rank/warden
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for more robust protection. It has the word \"Warden\" written on the shoulders."
 	name = "warden's jumpsuit"
-	icon_state = "warden_red"
+	icon_state = "warden"
 	item_state = "r_suit"
-	worn_state = "warden_red"
+	worn_state = "warden"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
@@ -45,21 +45,21 @@
 /obj/item/clothing/under/rank/security2
 	name = "security officer's uniform"
 	desc = "It's made of a slightly sturdier material, to allow for robust protection."
-	icon_state = "redshirt"
+	icon_state = "redshirt2"
 	item_state = "r_suit"
-	worn_state = "redshirt"
+	worn_state = "redshirt2"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/security/corp
-	icon_state = "sec_corp"
+	icon_state = "sec_corporate"
 	//item_state = "sec_corporate"
-	worn_state = "sec_corp"
+	worn_state = "sec_corporate"
 
 /obj/item/clothing/under/rank/warden/corp
-	icon_state = "warden_corp"
+	icon_state = "warden_corporate"
 	//item_state = "warden_corporate"
-	worn_state = "warden_corp"
+	worn_state = "warden_corporate"
 
 /obj/item/clothing/under/tactical
 	name = "tactical jumpsuit"
@@ -131,9 +131,9 @@
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/under/rank/head_of_security/corp
-	icon_state = "hos_corp"
+	icon_state = "hos_corporate"
 	//item_state = "hos_corporate"
-	worn_state = "hos_corp"
+	worn_state = "hos_corporate"
 
 /obj/item/clothing/head/HoS
 	name = "Head of Security Hat"
