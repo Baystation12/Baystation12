@@ -16,6 +16,8 @@ datum/preferences
 	S["name_is_always_random"]	>> pref.be_random_name
 	S["gender"]					>> pref.gender
 	S["body"]					>> pref.body
+	if (!pref.body)
+		pref.body = "Default" // fucking crutch for hot fix
 	S["age"]					>> pref.age
 	S["spawnpoint"]				>> pref.spawnpoint
 	S["OOC_Notes"]				>> pref.metadata
