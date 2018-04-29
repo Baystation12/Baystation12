@@ -1,4 +1,4 @@
-var/datum/body_build/default_body_build = new
+var/global/datum/body_build/default_body_build = new
 
 /datum/body_build
 	var/name		= "Default"
@@ -81,7 +81,8 @@ var/datum/body_build/default_body_build = new
 			if(slot_r_hand_str)		I = BB.r_hand
 			else
 				world.log << "##ERROR. Wrong sprite group for mob icon \"[slot]\""
-		if(icon_state in icon_states(I)) break
+		if(icon_state in icon_states(I))
+			break
 
 	return I
 

@@ -166,6 +166,10 @@
 	min_age = 19
 	max_age = 90
 
+	body_builds = list(
+		new/datum/body_build
+	)
+
 	burn_mod = 0.9
 	oxy_mod = 1.3
 	flash_mod = 1.1
@@ -243,6 +247,10 @@
 	all known species, especially the Skrell. Their communal mind makes them slow to react, and they have difficulty understanding \
 	even the simplest concepts of other minds. Their alien physiology allows them survive happily off a diet of nothing but light, \
 	water and other radiation."
+
+	body_builds = list(
+		new/datum/body_build
+	)
 
 	has_organ = list(
 		BP_NUTRIENT = /obj/item/organ/internal/diona/nutrients,

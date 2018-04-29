@@ -661,7 +661,6 @@
 	icon_state = "punpun"
 	worn_state = "punpun"
 	species_restricted = list("Monkey")
-	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
 
 /obj/item/clothing/under/punpants
 	name = "monkey pants"
@@ -669,7 +668,6 @@
 	icon_state = "jeansmustang"
 	worn_state = "jeansmustang"
 	species_restricted = list("Monkey")
-	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
 
 /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	desc = "A warm looking sweater and a pair of dark blue slacks."

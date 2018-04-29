@@ -41,27 +41,18 @@
 	icon_state = "blackutility"
 	item_state = "bl_suit"
 	worn_state = "blackutility"
-	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi'
-		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary
 	name = "expeditionary uniform"
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim."
 	icon_state = "blackutility_crew"
 	worn_state = "blackutility_crew"
-	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi'
-		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt
 	name = "expeditionary skirt"
 	desc = "A black turtleneck and skirt, the elusive ladies' uniform of the Expeditionary Corps."
 	icon_state = "blackservicef"
 	worn_state = "blackservicef"
-	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/uniform.dmi'
-		)
 
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt/officer
 	name = "expeditionary officer skirt"
@@ -325,5 +316,4 @@
 	name = "adjusted expeditionary uniform"
 	desc = "The utility uniform of the SCG Expeditionary Corps, made from biohazard resistant material. This one has silver trim. It was also mangled to fit a monkey. This better be worth the NJP you'll get for making it."
 	species_restricted = list("Monkey")
-	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/uniform.dmi')
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/rank/fleet/officer/wo1_monkey)

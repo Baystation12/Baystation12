@@ -49,9 +49,6 @@
 	down_body_parts_covered = null
 	down_icon_state = "steriledown"
 	pull_mask = 1
-	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi'
-		)
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
@@ -285,13 +282,11 @@
 			flags_inv = initial(flags_inv)
 			body_parts_covered = initial(body_parts_covered)
 			icon_state = initial(icon_state)
-			sprite_sheets = list(SPECIES_TAJARA = 'icons/mob/species/tajaran/mask.dmi')
 
 		if(slot_head)
 			flags_inv = 0
 			body_parts_covered = HEAD
 			icon_state = "[initial(icon_state)]_up"
-			sprite_sheets = list()
 
 	return ..()
 

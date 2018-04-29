@@ -13,10 +13,6 @@
 	var/overlay_state = null
 	var/list/accessory_icons = list(slot_w_uniform_str = 'icons/mob/onmob/ties.dmi', slot_wear_suit_str = 'icons/mob/onmob/ties.dmi')
 	var/list/slim_accessory_icons = list(slot_w_uniform_str = 'icons/mob/onmob/ties_slim.dmi', slot_wear_suit_str = 'icons/mob/onmob/ties_slim.dmi')
-	sprite_sheets = list(
-		SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi',
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/ties.dmi'
-		)
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 	var/high_visibility	//if it should appear on examine without detailed view
 	var/slowdown //used when an accessory is meant to slow the wearer down when attached to clothing
@@ -40,31 +36,24 @@
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
 	if(!istype(loc,/obj/item/clothing/))	//don't need special handling if it's worn as normal item.
 		return ..()
-	var/bodytype = "Default"
+
 	if(ishuman(user_mob))
+		var/tmp_icon_state = overlay_state ? overlay_state : icon_state
+
 		var/mob/living/carbon/human/user_human = user_mob
-		if(user_human.species.name in sprite_sheets)
-			bodytype = user_human.species.name
+		var/sprite_sheet = user_human.body_build.get_mob_icon(slot, tmp_icon_state)
 
-		var/tmp_icon_state = overlay_state? overlay_state : icon_state
-
-		if(istype(loc,/obj/item/clothing/under))
+		if(istype(loc, /obj/item/clothing/under))
 			var/obj/item/clothing/under/C = loc
 			if(on_rolled["down"] && C.rolled_down > 0)
 				tmp_icon_state = on_rolled["down"]
 			else if(on_rolled["rolled"] && C.rolled_sleeves > 0)
 				tmp_icon_state = on_rolled["rolled"]
 
-		var/use_sprite_sheet = accessory_icons[slot]
-		if(sprite_sheets[bodytype])
-			use_sprite_sheet = sprite_sheets[bodytype]
-		if(user_human.gender == FEMALE && user_human.species.name == SPECIES_HUMAN)
-			use_sprite_sheet = slim_accessory_icons[slot]
-
 		if(icon_override && ("[tmp_icon_state]_mob" in icon_states(icon_override)))
 			return overlay_image(icon_override, "[tmp_icon_state]_mob", color, RESET_COLOR)
 		else
-			return overlay_image(use_sprite_sheet, tmp_icon_state, color, RESET_COLOR)
+			return overlay_image(sprite_sheet, tmp_icon_state, color, RESET_COLOR)
 
 
 //when user attached an accessory to S
