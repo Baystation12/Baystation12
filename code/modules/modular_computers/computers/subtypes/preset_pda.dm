@@ -21,3 +21,35 @@
 	if(prob(50)) //harmless tax software
 		hard_drive.store_file(new /datum/computer_file/program/uplink())
 	set_autorun("emailc")
+
+/obj/item/modular_computer/pda/medical/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/medical(src)
+
+/obj/item/modular_computer/pda/reagent/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/reagent(src)
+
+/obj/item/modular_computer/pda/engineering/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/atmos(src)
+
+/obj/item/modular_computer/pda/science/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/reagent(src)
+
+/obj/item/modular_computer/pda/forensics/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/reagent(src)
+
+/obj/item/modular_computer/pda/heads/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)
+
+/obj/item/modular_computer/pda/cargo/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)
+
+/obj/item/modular_computer/pda/captain/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)

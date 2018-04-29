@@ -59,6 +59,13 @@
 			return
 		found = 1
 		tesla_link = H
+	else if(istype(H, /obj/item/weapon/computer_hardware/scanner))
+		if(scanner)
+			to_chat(user, "This computer's scanner slot is already occupied by \the [scanner].")
+			return
+		found = 1
+		scanner = H
+		scanner.do_after_install(user, src)
 	if(found)
 		to_chat(user, "You install \the [H] into \the [src]")
 		H.holder2 = src
@@ -97,6 +104,10 @@
 	if(tesla_link == H)
 		tesla_link = null
 		found = 1
+	if(scanner == H)
+		scanner.do_before_uninstall()
+		scanner = null
+		found = 1
 	if(found)
 		if(user)
 			to_chat(user, "You remove \the [H] from \the [src].")
@@ -130,6 +141,8 @@
 		return ai_slot
 	if(tesla_link && (tesla_link.name == name))
 		return tesla_link
+	if(scanner && (scanner.name == name))
+		return scanner
 	return null
 
 // Returns list of all components
@@ -153,4 +166,6 @@
 		all_components.Add(ai_slot)
 	if(tesla_link)
 		all_components.Add(tesla_link)
+	if(scanner)
+		all_components.Add(scanner)
 	return all_components

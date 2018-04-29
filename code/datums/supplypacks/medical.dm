@@ -302,3 +302,11 @@
 	containername = "\improper Medical voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_medical_equip
+
+/decl/hierarchy/supply_pack/medical/scanner_module
+	name = "Medical scanner module crate"
+	contains = list(/obj/item/weapon/computer_hardware/scanner/medical = 4)
+	cost = 20
+	containername = "\improper Medical scanner module crate"
+	containertype = /obj/structure/closet/crate/secure
+	access = access_medical_equip

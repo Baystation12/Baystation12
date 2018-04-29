@@ -111,3 +111,11 @@
 	containername = "\improper Atmospherics voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_atmospherics
+
+/decl/hierarchy/supply_pack/atmospherics/scanner_module
+	name = "Atmospherics scanner module crate"
+	contains = list(/obj/item/weapon/computer_hardware/scanner/atmos = 4)
+	cost = 20
+	containername = "\improper Atmospherics scanner module crate"
+	containertype = /obj/structure/closet/crate/secure
+	access = access_atmospherics
