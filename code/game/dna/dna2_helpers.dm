@@ -164,6 +164,9 @@
 			else
 				H.gender = MALE
 
+		H.body_build = H.species.get_body_build(H.gender, dna.body_build)
+		H.fix_body_build()
+
 		//Body markings
 		for(var/tag in dna.body_markings)
 			var/obj/item/organ/external/E = H.organs_by_name[tag]
