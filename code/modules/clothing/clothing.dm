@@ -41,7 +41,7 @@
 
 	if(accessories.len)
 		for(var/obj/item/clothing/accessory/A in accessories)
-			ret.overlays |= A.get_mob_overlay(user_mob, slot_tie_str)
+			ret.overlays |= A.get_mob_overlay(user_mob, slot)
 	return ret
 
 // Aurora forensics port.
@@ -82,10 +82,10 @@
 
 		if(H.species)
 			if(exclusive)
-				if(!(H.species.name in species_restricted))
+				if(!(H.species.get_bodytype(H) in species_restricted))
 					wearable = 1
 			else
-				if(H.species.name in species_restricted)
+				if(H.species.get_bodytype(H) in species_restricted)
 					wearable = 1
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
@@ -226,6 +226,10 @@ BLIND     // can't see anything
 	var/darkness_view = 0//Base human is 2
 	var/see_invisible = -1
 	var/light_protection = 0
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/eyes.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/eyes.dmi',
+		)
 
 /obj/item/clothing/glasses/get_icon_state(mob/user_mob, slot)
 	if(item_state_slots && item_state_slots[slot])
@@ -256,6 +260,11 @@ BLIND     // can't see anything
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
 	species_restricted = list("exclude",SPECIES_NABBER, SPECIES_UNATHI,SPECIES_TAJARA, SPECIES_VOX)
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/gloves.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/hands.dmi',
+		)
 	blood_overlay_type = "bloodyhands"
 
 /obj/item/clothing/gloves/Initialize()
@@ -364,15 +373,19 @@ BLIND     // can't see anything
 	var/brightness_on
 	var/on = 0
 
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi',
+		)
 	blood_overlay_type = "helmetblood"
 
 /obj/item/clothing/head/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
-	var/species_name = "Default"
+	var/bodytype = "Default"
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
-		species_name = user_human.species.name
-	var/cache_key = "[light_overlay]_[species_name]"
+		bodytype = user_human.species.get_bodytype(user_human)
+	var/cache_key = "[light_overlay]_[bodytype]"
 	if(on && light_overlay_cache[cache_key] && slot == slot_head_str)
 		ret.overlays |= light_overlay_cache[cache_key]
 	return ret
@@ -448,9 +461,11 @@ BLIND     // can't see anything
 		overlays |= light_overlay_cache["[light_overlay]_icon"]
 
 		// Generate and cache the on-mob icon, which is used in update_inv_head().
-		var/cache_key = "[light_overlay][H ? "_[H.species.name]" : ""]"
+		var/cache_key = "[light_overlay][H ? "_[H.species.get_bodytype(H)]" : ""]"
 		if(!light_overlay_cache[cache_key])
 			var/use_icon = 'icons/mob/light_overlays.dmi'
+			if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+				use_icon = sprite_sheets[H.species.get_bodytype(H)]
 			light_overlay_cache[cache_key] = image("icon" = use_icon, "icon_state" = "[light_overlay]")
 
 	if(H)
@@ -468,6 +483,10 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/masks.dmi'
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/mask.dmi',
+		)
 
 	var/voicechange = 0
 	var/list/say_messages
@@ -547,6 +566,10 @@ BLIND     // can't see anything
 	force = 2
 	var/overshoes = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_UNATHI, SPECIES_TAJARA, SPECIES_VOX)
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/feet.dmi',
+		)
 	blood_overlay_type = "shoeblood"
 
 /obj/item/clothing/shoes/proc/draw_knife()
@@ -621,6 +644,11 @@ BLIND     // can't see anything
 	siemens_coefficient = 0.9
 	w_class = ITEM_SIZE_NORMAL
 
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/suit.dmi',
+		)
+
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
@@ -665,6 +693,11 @@ BLIND     // can't see anything
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/uniform.dmi',
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/uniform.dmi',
+		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
@@ -687,7 +720,7 @@ BLIND     // can't see anything
 		ret = item_state_slots[slot]
 	else
 		ret = icon_state
-	return "[ret]"
+	return "[ret]_s"
 
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(accessories && accessories.len)
@@ -719,6 +752,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+		under_icon = sprite_sheets[H.species.get_bodytype(H)]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else
@@ -740,6 +775,8 @@ BLIND     // can't see anything
 	var/icon/under_icon
 	if(icon_override)
 		under_icon = icon_override
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+		under_icon = sprite_sheets[H.species.get_bodytype(H)]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else

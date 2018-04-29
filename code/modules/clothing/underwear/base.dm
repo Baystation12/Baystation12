@@ -77,6 +77,13 @@
 		return FALSE
 	return ForceEquipUnderwear(H)
 
+/obj/item/underwear/proc/CheckGender(var/mob/living/carbon/human/user, state)
+	if(user.gender == FEMALE && user.species.name == SPECIES_HUMAN)
+		state = "[icon_state]_f"
+	else
+		state = "[icon_state]"
+	return state
+
 /obj/item/underwear/proc/ForceEquipUnderwear(var/mob/living/carbon/human/H, var/update_icons = TRUE)
 	// No matter how forceful, we still don't allow multiples of the same underwear type
 	if(is_path_in_list(type, H.worn_underwear))

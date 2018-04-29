@@ -64,62 +64,56 @@ var/list/limb_icon_cache = list()
 
 /obj/item/organ/external/var/icon_cache_key
 /obj/item/organ/external/update_icon(var/regenerate = 0)
-	if (!icon_name)
-		icon = null
+	var/gender = "_m"
+	if(!gendered_icon)
+		gender = null
+	else if (dna && dna.GetUIState(DNA_UI_GENDER))
+		gender = "_f"
+	else if(owner && owner.gender == FEMALE)
+		gender = "_f"
+
+	icon_state = "[icon_name][gender]"
+	if(species.base_skin_colours && !isnull(species.base_skin_colours[s_base]))
+		icon_state += species.base_skin_colours[s_base]
+
+	icon_cache_key = "[icon_state]_[species ? species.name : SPECIES_HUMAN]"
+
+	if(force_icon)
+		icon = force_icon
+	else if (!dna)
+		icon = 'icons/mob/human_races/r_human.dmi'
+	else if (robotic >= ORGAN_ROBOT)
+		icon = 'icons/mob/human_races/robotic.dmi'
+	else if (status & ORGAN_MUTATED)
+		icon = species.deform
+	else if (owner && (SKELETON in owner.mutations))
+		icon = 'icons/mob/human_races/r_skeleton.dmi'
 	else
-		var/gender = "_m"
-		if (!gendered_icon)
-			gender = null
-		else if (dna && dna.GetUIState(DNA_UI_GENDER))
-			gender = "_f"
-		else if(owner && owner.gender == FEMALE)
-			gender = "_f"
+		icon = species.get_icobase(owner)
 
-		if (robotic < ORGAN_ROBOT)
-			body_build = owner.body_build.index
-		else
-			body_build = owner.body_build.roboindex
+	mob_icon = apply_colouration(new/icon(icon, icon_state))
 
-		icon_state = "[icon_name][gender][body_build]"
-		if(species.base_skin_colours && !isnull(species.base_skin_colours[s_base]))
-			icon_state += species.base_skin_colours[s_base]
+	//Body markings, does not include head, duplicated (sadly) above.
+	for(var/M in markings)
+		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+		var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
+		mark_s.Blend(markings[M]["color"], ICON_ADD)
+		overlays |= mark_s //So when it's not on your body, it has icons
+		mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
+		icon_cache_key += "[M][markings[M]["color"]]"
 
-		icon_cache_key = "[icon_state]_[species ? species.name : SPECIES_HUMAN]"
+	if(body_hair && islist(h_col) && h_col.len >= 3)
+		var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
+		if(!limb_icon_cache[cache_key])
+			var/icon/I = icon(species.get_icobase(owner), "[icon_name]_[body_hair]")
+			I.Blend(rgb(h_col[1],h_col[2],h_col[3]), ICON_ADD)
+			limb_icon_cache[cache_key] = I
+		mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
 
-		if(force_icon)
-			icon = force_icon
-		else if (!dna)
-			icon = 'icons/mob/human_races/r_human.dmi'
-		else if (status & ORGAN_MUTATED)
-			icon = species.deform
-		else if (owner && (SKELETON in owner.mutations))
-			icon = 'icons/mob/human_races/r_skeleton.dmi'
-		else
-			icon = species.get_icobase(owner)
-
-		mob_icon = apply_colouration(new/icon(icon, icon_state))
-
-		//Body markings, does not include head, duplicated (sadly) above.
-		for(var/M in markings)
-			var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
-			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-			mark_s.Blend(markings[M]["color"], ICON_ADD)
-			overlays |= mark_s //So when it's not on your body, it has icons
-			mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
-			icon_cache_key += "[M][markings[M]["color"]]"
-
-		if(body_hair && islist(h_col) && h_col.len >= 3)
-			var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
-			if(!limb_icon_cache[cache_key])
-				var/icon/I = icon(species.get_icobase(owner), "[icon_name]_[body_hair]")
-				I.Blend(rgb(h_col[1],h_col[2],h_col[3]), ICON_ADD)
-				limb_icon_cache[cache_key] = I
-			mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
-
-		if(model)
-			icon_cache_key += "_model_[model]"
-		dir = EAST
-		icon = mob_icon
+	if(model)
+		icon_cache_key += "_model_[model]"
+	dir = EAST
+	icon = mob_icon
 
 /obj/item/organ/external/proc/get_icon()
 	update_icon()
@@ -167,7 +161,7 @@ var/list/robot_hud_colours = list("#ffffff","#cccccc","#aaaaaa","#888888","#6666
 
 	if(nonsolid)
 		applying.MapColors("#4d4d4d","#969696","#1c1c1c", "#000000")
-		if(species && species.name != SPECIES_HUMAN)
+		if(species && species.get_bodytype(owner) != SPECIES_HUMAN)
 			applying.SetIntensity(1.5)
 		else
 			applying.SetIntensity(0.7)

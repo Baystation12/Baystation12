@@ -19,6 +19,9 @@
 		item_icons = copy.item_icons.Copy()
 	if(copy.item_state_slots)
 		item_state_slots = copy.item_state_slots.Copy()
+	if(copy.sprite_sheets)
+		sprite_sheets = copy.sprite_sheets.Copy()
+	//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
 
 	return copy //for inheritance
 

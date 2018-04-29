@@ -34,6 +34,9 @@
 /datum/species/proc/get_race_key(var/mob/living/carbon/human/H)
 	return race_key
 
+/datum/species/proc/get_bodytype(var/mob/living/carbon/human/H)
+	return name
+
 /datum/species/proc/get_knockout_message(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "encounters a hardware fault and suddenly reboots!" : knockout_message)
 
@@ -72,17 +75,6 @@
 		if("heat")
 			if(covered)
 				to_chat(H, "<span class='danger'>[pick(heat_discomfort_strings)]</span>")
-
-/datum/species/proc/get_body_build(var/gender, var/prefered)
-	for(var/datum/body_build/BB in body_builds)
-		if( (!prefered || BB.name == prefered) && (gender in BB.genders) )
-			return BB
-
-/datum/species/proc/get_body_build_list(var/gender)
-	. = list()
-	for(var/datum/body_build/BB in body_builds)
-		if(gender in BB.genders)
-			. += BB.name
 
 /datum/species/proc/get_random_name(var/gender)
 	if(!name_language)

@@ -103,21 +103,36 @@
 
 	req_access = list()
 	req_one_access = list()
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/back.dmi'
+		)
 
 /obj/item/clothing/head/helmet/space/rig/eva
 	light_overlay = "helmet_light_dual"
 	camera = /obj/machinery/camera/network/engineering
 	species_restricted = list(SPECIES_HUMAN)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi'
+		)
 
 /obj/item/clothing/suit/space/rig/eva
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/suit.dmi'
+		)
 
 /obj/item/clothing/shoes/magboots/rig/eva
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/feet.dmi'
+		)
 
 /obj/item/clothing/gloves/rig/eva
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 	siemens_coefficient = 0
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/hands.dmi'
+		)
 
 /obj/item/weapon/rig/eva/equipped
 
@@ -239,15 +254,31 @@
 /obj/item/clothing/head/helmet/space/rig/medical
 	camera = /obj/machinery/camera/network/medbay
 	species_restricted = list(SPECIES_HUMAN, SPECIES_TAJARA, SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/suit.dmi'
+		)
 
 /obj/item/clothing/suit/space/rig/medical
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA, SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/suit.dmi'
+		)
 
 /obj/item/clothing/shoes/magboots/rig/medical
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA, SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/suit.dmi'
+		)
 
 /obj/item/clothing/gloves/rig/medical
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_TAJARA, SPECIES_UNATHI)
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/head.dmi',
+		SPECIES_TAJARA = 'icons/mob/species/tajaran/suit.dmi'
+		)
 
 /obj/item/weapon/rig/medical/equipped
 

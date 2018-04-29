@@ -96,6 +96,10 @@
 /datum/species/xenos/handle_post_spawn(var/mob/living/carbon/human/H)
 	..(H)
 
+
+/datum/species/xenos/get_bodytype(var/mob/living/carbon/H)
+	return "Xenophage"
+
 /datum/species/xenos/get_random_name()
 	return "alien [caste_name] ([alien_number])"
 

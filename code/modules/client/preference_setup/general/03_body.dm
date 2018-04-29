@@ -321,9 +321,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			mob_species = all_species[pref.species]
 			if(!(pref.gender in mob_species.genders))
 				pref.gender = mob_species.genders[1]
-			if(!(pref.body in mob_species.body_builds))
-				var/datum/body_build/BB = mob_species.body_builds[1]
-				pref.body = BB.name
 
 			ResetAllHair()
 

@@ -34,7 +34,6 @@
 	var/force_icon                     // Used to force override of species-specific limb icons (for prosthetics).
 	var/icon/mob_icon                  // Cached icon for use in mob overlays.
 	var/gendered_icon = 0              // Whether or not the icon state appends a gender.
-	var/body_build
 	var/s_tone                         // Skin tone.
 	var/s_base = ""                    // Skin base.
 	var/list/s_col                     // skin colour

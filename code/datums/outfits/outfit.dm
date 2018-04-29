@@ -90,7 +90,7 @@ var/list/outfits_decls_by_type_
 	// Gloves
 	if (gloves && !H.get_equipped_item(slot_gloves)) // does mob not have gloves, despite the outfit has one specified?
 		var/obj/item/clothing/gloves/G = new gloves(H) // we've no use of a null object, instantize one
-		if (S.name in G.species_restricted) // what was the problem?
+		if (S.get_bodytype(H) in G.species_restricted) // what was the problem?
 			if ("exclude" in G.species_restricted) // are they excluded?
 				G.cut_fingertops()
 				// I could optimize this bit when we are trying to apply the gloves to e.g. Vox, a species still restricted despite G.cut_fingertops(). But who cares if this is codebase is like a plate of spaghetti twice over the brim, right? RIGHT?

@@ -7,6 +7,10 @@ var/list/holder_mob_icon_cache = list()
 	icon = 'icons/obj/objects.dmi'
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
+		)
+
 	origin_tech = null
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_holder.dmi',
@@ -189,7 +193,7 @@ var/list/holder_mob_icon_cache = list()
 		var/skin_colour = rgb(owner.r_skin, owner.g_skin, owner.b_skin)
 		var/hair_colour = rgb(owner.r_hair, owner.g_hair, owner.b_hair)
 		var/eye_colour =  rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes)
-		var/species_name = lowertext(owner.species.name)
+		var/species_name = lowertext(owner.species.get_bodytype(owner))
 
 		for(var/cache_entry in generate_for_slots)
 			var/cache_key = "[owner.species]-[cache_entry]-[skin_colour]-[hair_colour]"

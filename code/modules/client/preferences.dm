@@ -194,10 +194,7 @@ datum/preferences
 
 	character.fully_replace_character_name(real_name)
 
-	var/datum/species/S = all_species[species]
-
 	character.gender = gender
-	character.body_build = S.get_body_build(gender, body)
 	character.age = age
 	character.b_type = b_type
 

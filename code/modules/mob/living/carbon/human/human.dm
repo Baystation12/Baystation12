@@ -1036,8 +1036,6 @@
 	species = all_species[new_species]
 	species.handle_pre_spawn(src)
 
-	fix_body_build()
-
 	if(species.language)
 		add_language(species.language)
 		species_language = all_languages[species.language]
@@ -1107,16 +1105,6 @@
 			unEquip(C)
 
 	return 1
-
-/mob/living/carbon/human/proc/fix_body_build()
-	if(body_build && (gender in body_build.genders) && (body_build in species.body_builds))
-		return 1
-	for(var/datum/body_build/BB in species.body_builds)
-		if(gender in BB.genders)
-			body_build = BB
-			return 1
-	world.log << "Can't find possible body_build. Gender = [gender], Species = [species]"
-	return 0
 
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
