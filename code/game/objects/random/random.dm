@@ -610,7 +610,8 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/weapon/card/emag_broken,
 				/obj/item/device/radio/headset,
 				/obj/item/device/flashlight/flare/glowstick/yellow,
-				/obj/item/device/flashlight/flare/glowstick/orange)
+				/obj/item/device/flashlight/flare/glowstick/orange,
+				/obj/item/weapon/grenade/light)
 
 /obj/random/smokes
 	name = "random smokeable"

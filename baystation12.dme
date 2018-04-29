@@ -899,6 +899,7 @@
 #include "code\game\objects\items\weapons\grenades\explosive.dm"
 #include "code\game\objects\items\weapons\grenades\flashbang.dm"
 #include "code\game\objects\items\weapons\grenades\grenade.dm"
+#include "code\game\objects\items\weapons\grenades\light.dm"
 #include "code\game\objects\items\weapons\grenades\prank_grenades.dm"
 #include "code\game\objects\items\weapons\grenades\smokebomb.dm"
 #include "code\game\objects\items\weapons\grenades\spawnergrenade.dm"

@@ -318,3 +318,8 @@
 	cost = 10
 	containername = "\improper Pest Control Crate"
 
+/decl/hierarchy/supply_pack/miscellaneous/illuminate
+	name = "Illumination grenades"
+	contains = list(/obj/item/weapon/grenade/light = 8)
+	cost = 20
+	containername = "\improper Illumination grenade crate"
