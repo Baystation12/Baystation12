@@ -80,6 +80,12 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
+	charlie
+		icon_state = "charlie"
+		item_state = "charlie"
+		name = "ancient marine combat gloves"
+		armor = list(melee = 50, bullet = 30, laser = 10,energy = 15, bomb = 30, bio = 5, rad = 0)
+
 /obj/item/clothing/gloves/thick/botany
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
 	name = "thick leather gloves"
