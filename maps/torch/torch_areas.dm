@@ -744,8 +744,8 @@
 	icon_state = "hangar"
 	sound_env = LARGE_ENCLOSED
 
-/area/quartermaster/unused
-	name = "\improper Ready Room"
+/area/quartermaster/quarantine
+	name = "\improper Quarantine Equipment"
 	icon_state = "auxstorage"
 
 // Research
