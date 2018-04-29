@@ -25,7 +25,7 @@
 	suffixes = list("mining/mining-asteroid.dmm")
 	cost = 1
 	accessibility_weight = 10
-	spawn_guaranteed = TRUE
+	mining = TRUE
 
 /obj/effect/shuttle_landmark/cluster/nav1
 	name = "Asteroid Navpoint #1"
@@ -72,6 +72,8 @@
 		"nav_away_7"
 	)
 	known = 0
+	start_x = 4
+	start_y = 5
 
 /datum/map_template/ruin/away_site/mining_signal
 	name = "Mining - Planetoid"
@@ -80,6 +82,7 @@
 	suffixes = list("mining/mining-signal.dmm")
 	cost = 1
 	base_turf_for_zs = /turf/simulated/floor/asteroid
+	mining = TRUE
 
 /obj/effect/shuttle_landmark/away
 	base_area = /area/mine/explored
@@ -127,6 +130,8 @@
 		"nav_orb_7"
 	)
 	known = 0
+	start_x = 4
+	start_y = 5
 
 /datum/map_template/ruin/away_site/orb
 	name = "Mining - Orb"
@@ -136,6 +141,7 @@
 	cost = 1
 	accessibility_weight = 10
 	base_turf_for_zs = /turf/simulated/floor/asteroid
+	mining = TRUE
 
 /obj/effect/shuttle_landmark/orb/nav1
 	name = "Anchor point A"
