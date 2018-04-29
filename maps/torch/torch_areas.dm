@@ -556,7 +556,7 @@
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/command/armoury
-	name = "\improper Emergency Armory"
+	name = "\improper Emergency Supplies Storage"
 	icon_state = "Warden"
 
 /area/command/armoury/access

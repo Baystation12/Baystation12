@@ -443,6 +443,16 @@
 "aY" = (
 /obj/structure/closet/secure_closet/CO,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/power/apc{
+	desc = "A control terminal for the area electrical systems. This one has a red sticker on it that gleefully states 'CODE VIOLATION'.";
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "aZ" = (
@@ -1114,11 +1124,6 @@
 	dir = 4
 	},
 /obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
@@ -1338,25 +1343,33 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/substation/bridge)
 "du" = (
-/obj/structure/cable/green,
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	pixel_y = -24
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/substation/bridge)
-"dv" = (
 /obj/machinery/alarm{
 	dir = 1;
 	icon_state = "alarm0";
 	pixel_y = -22
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/substation/bridge)
+"dv" = (
 /obj/machinery/atmospherics/valve/shutoff{
 	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	pixel_y = -24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/substation/bridge)
@@ -5758,10 +5771,13 @@
 	c_tag = "Bridge Hallway - Lift";
 	dir = 1
 	},
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -22
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -24
 	},
+/obj/structure/cable/green,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/aft)
 "mX" = (
@@ -5826,11 +5842,6 @@
 /obj/machinery/hologram/holopad,
 /obj/structure/disposalpipe/segment{
 	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/aft)
@@ -6845,6 +6856,25 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
+"ps" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/bridge/aft)
 "pt" = (
 /obj/structure/table/steel,
 /obj/item/weapon/paper_bin{
@@ -7928,7 +7958,13 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/alarm{
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc/hyper{
+	dir = 1;
+	name = "north bump";
 	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
@@ -8502,6 +8538,11 @@
 	dir = 4
 	},
 /obj/machinery/meter,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
 /area/aquila_hangar/start)
 "st" = (
@@ -8835,6 +8876,11 @@
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -22
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
 /area/aquila_hangar/start)
@@ -10744,20 +10790,28 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/auxsolarbridge)
 "wT" = (
-/obj/structure/cable,
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	pixel_y = -24
+/obj/machinery/alarm{
+	dir = 1;
+	icon_state = "alarm0";
+	pixel_y = -22
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarbridge)
 "wU" = (
 /obj/item/weapon/stool,
-/obj/machinery/alarm{
-	dir = 1;
-	icon_state = "alarm0";
-	pixel_y = -22
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	pixel_y = -24
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarbridge)
@@ -11436,16 +11490,13 @@
 /turf/space,
 /area/space)
 "yZ" = (
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	operating = 1;
-	pixel_y = -24
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 8
 	},
-/obj/structure/cable/green,
+/obj/item/device/radio/intercom{
+	dir = 1;
+	pixel_y = -22
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/aft)
 "zb" = (
@@ -11560,9 +11611,9 @@
 	icon_state = "intact"
 	},
 /obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/aquila_hangar/start)
@@ -11668,22 +11719,17 @@
 /turf/simulated/floor/plating,
 /area/aquila_hangar/start)
 "Bd" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
 /obj/machinery/light{
 	dir = 8
 	},
 /obj/structure/flora/pottedplant/fern,
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 8
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
@@ -11874,13 +11920,11 @@
 /turf/simulated/floor/plating,
 /area/aquila_hangar/start)
 "Dd" = (
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_x = 0;
-	pixel_y = 24
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
+	},
+/obj/machinery/newscaster/security_unit{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
@@ -11976,11 +12020,18 @@
 /obj/machinery/camera/network/command{
 	c_tag = "Executive Officer - Office"
 	},
-/obj/machinery/newscaster/security_unit{
-	pixel_y = 32
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
@@ -12260,6 +12311,11 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
 "GY" = (
@@ -12329,16 +12385,10 @@
 /area/crew_quarters/heads/cobed)
 "Hd" = (
 /obj/machinery/papershredder,
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/structure/cable/green,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/cobed)
@@ -12947,13 +12997,6 @@
 	dir = 1;
 	icon_state = "map"
 	},
-/turf/simulated/floor/tiled/dark,
-/area/crew_quarters/safe_room/bridge)
-"IA" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
-	dir = 4;
-	icon_state = "intact"
-	},
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
@@ -13025,6 +13068,12 @@
 	},
 /obj/structure/closet/crate/freezer/rations,
 /obj/random/drinkbottle,
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -24
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/bridge)
 "IH" = (
@@ -13470,11 +13519,6 @@
 /turf/simulated/floor/plating,
 /area/aquila_hangar/start)
 "Nd" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -13484,6 +13528,11 @@
 /obj/structure/disposalpipe/segment{
 	dir = 2;
 	icon_state = "pipe-c"
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
@@ -13915,6 +13964,11 @@
 "Rd" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
 "Re" = (
@@ -14046,6 +14100,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
@@ -14333,6 +14392,11 @@
 	pixel_y = 7
 	},
 /obj/item/weapon/pen,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
 "Ue" = (
@@ -14438,17 +14502,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/obj/machinery/power/apc/hyper{
-	dir = 1;
-	name = "north bump";
-	pixel_y = 24
-	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
-/obj/structure/cable/cyan{
-	d2 = 2;
-	icon_state = "0-2"
+/obj/machinery/alarm{
+	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
 /area/aquila_hangar/start)
@@ -14857,15 +14915,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
-"Zb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/plating,
-/area/aquila_hangar/start)
 "Zc" = (
 /obj/machinery/light{
 	dir = 1
@@ -23364,7 +23413,7 @@ tT
 uB
 qO
 Iv
-IA
+IC
 IH
 ti
 xb
@@ -30016,7 +30065,7 @@ gm
 gm
 fI
 kM
-lI
+ps
 mW
 of
 of
@@ -33659,7 +33708,7 @@ pe
 pX
 ec
 Vb
-Zb
+tc
 Ac
 tL
 uw

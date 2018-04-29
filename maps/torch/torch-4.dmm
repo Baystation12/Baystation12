@@ -1041,6 +1041,7 @@
 	dir = 6
 	},
 /obj/machinery/power/apc{
+	desc = "A control terminal for the area electrical systems.This one has a red sticker on it that gleefully states 'CODE VIOLATION'.";
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -2061,10 +2062,14 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
 	pixel_x = 24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
@@ -2282,45 +2287,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/firstdeck)
-"aeC" = (
-/obj/structure/grille,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/forestarboard)
 "aeD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
 "aeE" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/forestarboard)
-"aeF" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
@@ -2332,11 +2307,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
 "aeH" = (
@@ -2347,11 +2317,6 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor/border_only,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
 "aeI" = (
@@ -2360,11 +2325,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
@@ -2387,11 +2347,6 @@
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
 	},
 /obj/machinery/access_button{
 	command = "cycle_interior";
@@ -3545,6 +3500,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/apc{
+	desc = "A control terminal for the area electrical systems. This one has a red sticker on it that gleefully states 'CODE VIOLATION'.";
 	dir = 1;
 	name = "north bump";
 	pixel_x = 0;
@@ -5441,14 +5397,9 @@
 "aoa" = (
 /obj/machinery/light/small,
 /obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	operating = 1;
-	pixel_y = -24
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
@@ -6277,11 +6228,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
 "asa" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
@@ -6799,6 +6745,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
 "aug" = (
@@ -7069,14 +7020,6 @@
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
-"auS" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled,
-/area/assembly/robotics)
 "auW" = (
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
@@ -9761,6 +9704,16 @@
 	icon_state = "tube1";
 	dir = 8
 	},
+/obj/machinery/power/apc{
+	desc = "A control terminal for the area electrical systems. This one has a red sticker on it that gleefully states 'CODE VIOLATION'";
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aDD" = (
@@ -10030,6 +9983,11 @@
 /area/maintenance/firstdeck/aftport)
 "aEF" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aEG" = (
@@ -10452,6 +10410,11 @@
 /area/maintenance/firstdeck/aftport)
 "aFO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aFP" = (
@@ -11104,33 +11067,28 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aHW" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aHX" = (
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	operating = 1;
-	pixel_y = -24
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
@@ -11881,15 +11839,6 @@
 "aKB" = (
 /obj/structure/table/steel,
 /obj/machinery/recharger,
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
 /obj/item/weapon/pinpointer,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury)
@@ -12195,6 +12144,11 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/hologram/holopad,
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury)
 "aLD" = (
@@ -12521,6 +12475,11 @@
 /area/command/armoury)
 "aMD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury)
 "aME" = (
@@ -13261,6 +13220,16 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/blanks)
 "aOU" = (
@@ -13681,16 +13650,16 @@
 	icon_state = "alarm0";
 	pixel_y = -22
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/blanks)
@@ -14830,6 +14799,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
 "aTd" = (
@@ -15415,6 +15389,7 @@
 	},
 /obj/structure/closet/emcloset,
 /obj/machinery/power/apc{
+	desc = "A control terminal for the area electrical systems.This one has a red sticker on it that gleefully states 'CODE VIOLATION'.";
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -16276,6 +16251,14 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1starboard)
+"bfe" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled,
+/area/vacant/office)
 "bgb" = (
 /obj/structure/window/phoronreinforced{
 	dir = 4
@@ -16329,11 +16312,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
 	},
 /obj/structure/cable/green{
 	d1 = 2;
@@ -17233,6 +17211,16 @@
 	dir = 9
 	},
 /obj/effect/floor_decal/corner/paleblue,
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "cCb" = (
@@ -17352,6 +17340,14 @@
 /obj/item/weapon/reagent_containers/ivbag/nanoblood,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
+"cMI" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/white,
+/area/medical/chemistry)
 "cNb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /obj/effect/floor_decal/corner/paleblue{
@@ -17424,6 +17420,11 @@
 /obj/effect/floor_decal/corner/paleblue{
 	icon_state = "corner_white";
 	dir = 6
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -17636,16 +17637,16 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -17688,17 +17689,6 @@
 /obj/structure/table/standard,
 /turf/simulated/floor/plating,
 /area/engineering/auxpower)
-"dmb" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/surgery)
 "dnb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -17843,19 +17833,6 @@
 	c_tag = "Infirmary - Operating Theatre";
 	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
-/area/medical/surgery)
-"dBb" = (
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	pixel_y = -24
-	},
-/obj/effect/floor_decal/floordetail/edgedrain,
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 5
-	},
-/obj/structure/cable/green,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "dCb" = (
@@ -18557,17 +18534,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
-"eFb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/subacute)
 "eGb" = (
 /obj/structure/table/standard,
 /obj/item/stack/material/uranium,
@@ -18829,28 +18795,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
-"eYb" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/subacute)
 "eZb" = (
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/medical,
 /obj/effect/floor_decal/corner/pink{
 	dir = 6
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
 	},
 /obj/machinery/button/remote/airlock{
 	desc = "A remote control switch.";
@@ -18858,6 +18807,11 @@
 	name = "Sub-acute Door Control";
 	pixel_x = 0;
 	pixel_y = -25
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
@@ -18868,6 +18822,16 @@
 /obj/effect/floor_decal/corner/paleblue/three_quarters{
 	icon_state = "corner_white_three_quarters";
 	dir = 8
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
@@ -19407,17 +19371,13 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "fSb" = (
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/apc{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
@@ -19874,10 +19834,14 @@
 /obj/effect/floor_decal/corner/beige{
 	dir = 6
 	},
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
 	pixel_x = 24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
@@ -22286,6 +22250,28 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
+"knJ" = (
+/obj/structure/sink{
+	icon_state = "sink";
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/item/weapon/storage/mirror{
+	pixel_x = -32
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "kob" = (
 /obj/machinery/mecha_part_fabricator,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -22391,11 +22377,26 @@
 "kub" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/window/reinforced,
+/obj/machinery/power/apc{
+	desc = "A control terminal for the area electrical systems. This one has a red sticker on it that gleefully states 'CODE VIOLATION'";
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
 "kvb" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
@@ -22467,25 +22468,7 @@
 	},
 /turf/simulated/floor/plating,
 /area/assembly/robotics)
-"kEb" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/turf/simulated/floor/tiled,
-/area/assembly/robotics)
 "kFb" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
@@ -24017,6 +24000,7 @@
 	dir = 6
 	},
 /obj/machinery/power/apc{
+	desc = "A control terminal for the area electrical systems. This one has a red sticker on it that gleefully states 'CODE VIOLATION'.";
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
@@ -24119,6 +24103,18 @@
 	},
 /turf/simulated/floor/blackgrid,
 /area/security/nuke_storage)
+"nnV" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/armoury/tactical)
 "nob" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/blackgrid,
@@ -24203,12 +24199,21 @@
 	},
 /turf/simulated/floor/tiled,
 /area/vacant/office)
-"nwb" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
+"nvz" = (
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24;
+	req_access = list(201)
 	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/tiled,
+/area/vacant/office)
+"nwb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -24217,6 +24222,11 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
 /area/vacant/office)
@@ -24323,6 +24333,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/blanks)
 "nCb" = (
@@ -24366,12 +24381,6 @@
 /turf/simulated/floor/tiled,
 /area/vacant/office)
 "nGb" = (
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	pixel_y = -24
-	},
-/obj/structure/cable/green,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 20
@@ -24614,16 +24623,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "oab" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -24634,6 +24633,11 @@
 /obj/machinery/light_switch{
 	pixel_x = -12;
 	pixel_y = 24
+	},
+/obj/machinery/alarm{
+	frequency = 1439;
+	pixel_y = 23;
+	req_one_access = list(201)
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
@@ -25060,6 +25064,15 @@
 /area/chapel/main)
 "oMb" = (
 /obj/structure/reagent_dispensers/fueltank,
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury)
 "oOb" = (
@@ -25138,11 +25151,6 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/locker)
 "oSb" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -25233,16 +25241,6 @@
 "oYb" = (
 /obj/structure/mopbucket,
 /obj/item/weapon/mop,
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
 /obj/machinery/light_switch{
 	pixel_x = 24;
 	pixel_y = 6
@@ -26605,6 +26603,15 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
+"rGY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/command/armoury)
 "rHb" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /obj/structure/table/standard,
@@ -36810,7 +36817,7 @@ mBb
 nkb
 aBc
 aCv
-aDD
+nnV
 aEF
 aFO
 aFO
@@ -37021,7 +37028,7 @@ aJn
 aKA
 aLA
 aMD
-aMD
+rGY
 aOI
 aPv
 aQu
@@ -37393,7 +37400,7 @@ hBr
 hBr
 hBr
 adN
-aeC
+afG
 afG
 agC
 adK
@@ -37999,7 +38006,7 @@ hBr
 hBr
 hBr
 adQ
-aeF
+aeE
 afG
 adM
 adK
@@ -39220,7 +39227,7 @@ ajW
 akX
 ame
 kqb
-kqb
+knJ
 ahL
 aqb
 arv
@@ -41047,9 +41054,9 @@ atD
 auH
 avU
 awX
-atw
-atw
-atw
+nvz
+bfe
+bfe
 nwb
 nGb
 asx
@@ -44880,7 +44887,7 @@ amA
 amA
 amA
 amA
-kEb
+apo
 kMb
 kUb
 amA
@@ -45082,7 +45089,7 @@ iyb
 kfb
 kob
 kub
-auS
+apo
 apo
 auW
 awg
@@ -49313,8 +49320,8 @@ adt
 aen
 cCb
 age
-dmb
-dBb
+dnb
+dCb
 amL
 eeb
 eEb
@@ -49519,8 +49526,8 @@ dnb
 dCb
 dOb
 efb
-eFb
-eYb
+eEb
+efb
 fJb
 ffb
 hkb
@@ -51749,7 +51756,7 @@ ktb
 aqQ
 oab
 atf
-atg
+cMI
 avr
 awx
 axC
@@ -51951,7 +51958,7 @@ lUb
 aqT
 mmb
 atg
-atg
+cMI
 avs
 awy
 axs

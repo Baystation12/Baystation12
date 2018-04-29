@@ -530,6 +530,7 @@
 /area/maintenance/seconddeck/central)
 "bg" = (
 /obj/machinery/door/blast/regular{
+	dir = 4;
 	id = "prototype_exhaust"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -1057,10 +1058,14 @@
 /area/maintenance/seconddeck/central)
 "cm" = (
 /obj/item/weapon/stool,
-/obj/machinery/alarm{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -22
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarstarboard)
@@ -1133,10 +1138,20 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "cu" = (
 /obj/item/weapon/stool,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
 "cv" = (
@@ -1314,18 +1329,19 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/auxsolarstarboard)
 "cV" = (
-/obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
-	},
-/obj/machinery/power/apc{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
 /obj/machinery/camera/network/engineering{
 	c_tag = "Solar Control - Starboard";
 	dir = 1
+	},
+/obj/machinery/alarm{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -22
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarstarboard)
@@ -1422,13 +1438,9 @@
 /area/maintenance/disposal)
 "df" = (
 /obj/structure/cable/green{
+	d1 = 4;
 	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/machinery/power/apc{
-	dir = 2;
-	name = "south bump";
-	pixel_y = -24
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
@@ -3791,14 +3803,6 @@
 	icon_state = "warning";
 	dir = 8
 	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_x = 0;
-	pixel_y = -24
-	},
-/turf/simulated/floor/plating,
-/area/engineering/hardstorage)
-"hW" = (
 /obj/machinery/power/apc{
 	dir = 2;
 	name = "south bump";
@@ -3808,7 +3812,20 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/turf/simulated/floor/plating,
+/area/engineering/hardstorage)
+"hW" = (
 /obj/machinery/light/small,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
+	},
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage)
 "hX" = (
@@ -4871,14 +4888,14 @@
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)
 "ka" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/bluespace_beacon,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)
 "kb" = (
@@ -4919,19 +4936,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
-"kf" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/teleporter/seconddeck)
 "kg" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Expedition Storage Maintenance";
@@ -4998,6 +5002,11 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)
 "kn" = (
@@ -5104,6 +5113,11 @@
 	dir = 5
 	},
 /obj/effect/floor_decal/industrial/warning,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)
 "ky" = (
@@ -5155,19 +5169,26 @@
 "kE" = (
 /obj/prefab/hand_teleporter,
 /obj/structure/table/standard,
-/turf/simulated/floor/tiled/dark,
-/area/teleporter/seconddeck)
-"kF" = (
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_x = 0;
 	pixel_y = -24
 	},
+/turf/simulated/floor/tiled/dark,
+/area/teleporter/seconddeck)
+"kF" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/structure/table/standard,
 /obj/random/tank,
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -24
+	},
+/obj/structure/cable/green,
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)
 "kG" = (
@@ -7094,6 +7115,11 @@
 /obj/structure/fireaxecabinet{
 	pixel_y = 32
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/seconddeck)
 "pL" = (
@@ -7101,6 +7127,13 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
+	},
+/obj/machinery/power/apc/super{
+	pixel_y = 24
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/seconddeck)
@@ -7111,12 +7144,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/power/apc/super{
-	pixel_y = 24
-	},
 /obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/seconddeck)
@@ -7175,6 +7206,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/engine_monitoring)
+"pQ" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/disposal)
 "pR" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
@@ -8009,27 +8048,11 @@
 /turf/simulated/floor/plating,
 /area/engineering/drone_fabrication)
 "rD" = (
+/obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
 	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/plating,
-/area/engineering/drone_fabrication)
-"rE" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
 /area/engineering/drone_fabrication)
@@ -8116,6 +8139,7 @@
 /area/crew_quarters/safe_room/seconddeck)
 "rX" = (
 /obj/machinery/power/apc{
+	desc = "A control terminal for the area electrical systems.This one has a red sticker on it that gleefully states 'CODE VIOLATION'.";
 	dir = 4;
 	name = "east bump";
 	pixel_x = 24
@@ -8350,6 +8374,11 @@
 /obj/effect/landmark{
 	name = "lightsout"
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
 /area/engineering/drone_fabrication)
 "sF" = (
@@ -8478,27 +8507,13 @@
 /turf/simulated/floor/tiled,
 /area/engineering/engine_eva)
 "sV" = (
-/obj/machinery/alarm{
-	pixel_y = 24
-	},
-/obj/structure/table/rack{
+/obj/machinery/camera/network/engineering{
+	c_tag = "Engineering - EVA";
 	dir = 8
 	},
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/machinery/light/small{
-	dir = 4
-	},
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
+/obj/structure/dispenser/oxygen,
+/obj/machinery/alarm{
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/engine_eva)
@@ -8850,11 +8865,25 @@
 /turf/simulated/floor/reinforced/carbon_dioxide,
 /area/engineering/atmos)
 "tW" = (
-/obj/machinery/camera/network/engineering{
-	c_tag = "Engineering - EVA";
+/obj/structure/table/rack{
 	dir = 8
 	},
-/obj/structure/dispenser/oxygen,
+/obj/item/weapon/tank/emergency/oxygen/double,
+/obj/item/weapon/tank/emergency/oxygen/double,
+/obj/item/weapon/tank/emergency/oxygen/double,
+/obj/item/weapon/tank/emergency/oxygen/double,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /turf/simulated/floor/tiled,
 /area/engineering/engine_eva)
 "tY" = (
@@ -10568,17 +10597,6 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/structure/extinguisher_cabinet{
-	pixel_y = 32
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/incinerator)
-"yX" = (
-/obj/machinery/atmospherics/portables_connector,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/plating,
-/area/maintenance/incinerator)
-"yY" = (
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -10588,6 +10606,17 @@
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/incinerator)
+"yX" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/plating,
+/area/maintenance/incinerator)
+"yY" = (
+/obj/structure/extinguisher_cabinet{
+	pixel_y = 32
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
@@ -10825,6 +10854,11 @@
 /obj/machinery/atmospherics/binary/pump{
 	dir = 1
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/incinerator)
 "zI" = (
@@ -10903,6 +10937,20 @@
 "zO" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/atmos/storage)
+"zP" = (
+/obj/structure/table/standard,
+/obj/random/maintenance/solgov,
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/engineering/drone_fabrication)
 "zS" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -11540,18 +11588,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/storage/cargo)
-"Bu" = (
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
-/turf/simulated/floor/plating,
-/area/storage/cargo)
 "Bv" = (
 /obj/machinery/shieldgen,
 /turf/simulated/floor/plating,
@@ -11999,17 +12035,18 @@
 /turf/simulated/floor/plating,
 /area/vacant/cargo)
 "Cx" = (
-/obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
-	},
-/obj/machinery/power/apc{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
 /obj/machinery/camera/network/engineering{
 	c_tag = "Solar Control - Port"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/alarm{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -22
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarport)
@@ -12064,15 +12101,6 @@
 /turf/simulated/floor/plating,
 /area/storage/research)
 "CF" = (
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
 /obj/structure/table/rack,
 /obj/item/weapon/storage/box/bodybags,
 /turf/simulated/floor/plating,
@@ -12249,11 +12277,12 @@
 /area/vacant/cargo)
 "CZ" = (
 /obj/item/weapon/stool,
-/obj/machinery/alarm{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -22
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
 	},
+/obj/structure/cable,
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarport)
 "Da" = (
@@ -12309,6 +12338,15 @@
 "Dh" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/box/beakers,
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /turf/simulated/floor/plating,
 /area/storage/research)
 "Di" = (
@@ -13519,6 +13557,18 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/atmos)
+"Gw" = (
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/storage/cargo)
 "GQ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -13531,6 +13581,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/engineering/engine_room)
+"GU" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/incinerator)
 "GW" = (
 /turf/simulated/wall/r_wall/hull,
 /area/storage/tech)
@@ -13698,6 +13756,11 @@
 	pixel_x = 23;
 	pixel_y = 23
 	},
+/obj/machinery/access_button/airlock_interior{
+	master_tag = "prototype_controller";
+	pixel_x = -23;
+	pixel_y = 23
+	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/control)
 "Hm" = (
@@ -13751,6 +13814,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/atmos)
+"HG" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/storage/expedition)
 "Ib" = (
 /obj/effect/wingrille_spawn/reinforced/full,
 /obj/machinery/door/firedoor/border_only,
@@ -14061,6 +14132,9 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/atmos)
+"Jt" = (
+/turf/space,
+/area/maintenance/seconddeck/aftport)
 "JF" = (
 /turf/simulated/wall/r_wall/hull,
 /area/engineering/fuelbay)
@@ -14663,6 +14737,14 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/atmos)
+"NB" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/storage/cargo)
 "Ob" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	icon_state = "intact";
@@ -15019,6 +15101,14 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/engineering/atmos)
+"PY" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/storage/research)
 "Qb" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/wingrille_spawn/reinforced_phoron,
@@ -15272,6 +15362,11 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/access_button/airlock_exterior{
+	master_tag = "prototype_controller";
+	pixel_x = -23;
+	pixel_y = 23
+	},
 /turf/simulated/floor/tiled,
 /area/vacant/prototype/control)
 "Rk" = (
@@ -15389,6 +15484,9 @@
 	},
 /obj/item/stack/material/tritium/ten,
 /obj/item/stack/material/tritium/ten,
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
 /turf/simulated/floor/reinforced/airless,
 /area/vacant/prototype/engine)
 "Sh" = (
@@ -15475,6 +15573,18 @@
 	},
 /turf/simulated/floor/plating,
 /area/engineering/engine_room)
+"SK" = (
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/disposal)
 "Tb" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /turf/simulated/floor/tiled,
@@ -15751,6 +15861,17 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /turf/simulated/floor/greengrid/airless,
 /area/engineering/engine_room)
+"Uw" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/engineering/drone_fabrication)
 "Vb" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/manifold/visible{
@@ -16020,11 +16141,12 @@
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod10/station)
 "Wm" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
-	dir = 4
-	},
 /obj/machinery/light/small{
 	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	dir = 9;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/seconddeck)
@@ -16518,6 +16640,15 @@
 "Zs" = (
 /turf/simulated/wall/r_wall/hull,
 /area/engineering/engine_room)
+"Zv" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/plating,
+/area/engineering/drone_fabrication)
 
 (1,1,1) = {"
 aa
@@ -30769,7 +30900,7 @@ qv
 uO
 yg
 yW
-zG
+zI
 Az
 Bi
 zG
@@ -31165,7 +31296,7 @@ Am
 iP
 rD
 sE
-tl
+Zv
 tl
 tl
 vB
@@ -31173,7 +31304,7 @@ qv
 uO
 yg
 yY
-zI
+GU
 Ki
 EU
 EU
@@ -31365,9 +31496,9 @@ bd
 Xl
 Fm
 qv
-rE
 sF
 sF
+Uw
 sF
 sF
 vC
@@ -31569,7 +31700,7 @@ Gm
 qv
 rF
 rF
-tm
+zP
 tm
 rF
 rF
@@ -36200,7 +36331,7 @@ ee
 hd
 He
 iJ
-Ke
+iK
 ee
 ee
 iF
@@ -36219,7 +36350,7 @@ ty
 oc
 jS
 qu
-kf
+kk
 kz
 kM
 qu
@@ -36402,7 +36533,7 @@ ee
 ef
 eR
 Ke
-iK
+HG
 ee
 kO
 kT
@@ -36629,9 +36760,9 @@ qu
 qu
 zU
 AO
+NB
+NB
 Bt
-Ce
-Ce
 Ce
 Ce
 DT
@@ -36831,9 +36962,9 @@ AP
 xC
 DG
 AN
-Bu
-Cf
 Ce
+Cf
+Gw
 De
 Dx
 DU
@@ -37029,7 +37160,7 @@ xH
 vc
 zV
 xC
-xC
+Jt
 xC
 zT
 AN
@@ -37641,8 +37772,8 @@ Ez
 AR
 Bx
 Ch
+PY
 CE
-Dg
 Dg
 DX
 Eh
@@ -38013,7 +38144,7 @@ aN
 aN
 aN
 ct
-bs
+pQ
 dh
 em
 aN
@@ -38213,7 +38344,7 @@ aa
 fb
 aO
 bs
-bs
+SK
 cu
 dg
 dh
