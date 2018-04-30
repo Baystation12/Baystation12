@@ -130,6 +130,13 @@
 	siemens_coefficient = 0.6
 	electric = TRUE
 
+/obj/item/clothing/glasses/balgoggles
+	name = "balistic goggles"
+	desc = "balistic goggles, designed to protect eyes from stray shrapnel."
+	icon_state = "bal_goggles"
+	armor = list(melee = 10, bullet = 10, laser = 10, energy = 10, bomb = 20, bio = 0, rad = 0)
+	siemens_coefficient = 0.6
+
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
 	desc = "Yarr."

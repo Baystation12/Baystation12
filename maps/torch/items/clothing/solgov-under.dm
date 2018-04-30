@@ -206,6 +206,9 @@
 	item_state = "johnny"
 	worn_state = "tanutility"
 
+/obj/item/clothing/under/solgov/utility/marine/tan/uscm
+		desc = "A tan version of the US Marine Corps utility uniform, made from durable material."
+
 //Service
 
 /obj/item/clothing/under/solgov/service

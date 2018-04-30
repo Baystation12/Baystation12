@@ -93,6 +93,13 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_sec
 
+/obj/item/device/radio/headset/headset_charlie
+	name = "\improper Charlie Squad radio headset"
+	desc = "This used by Charlie squadrant, ooohraa."
+	icon_state = "charlie_headset"
+	item_state = "earset"
+	keyslot1 = null
+
 /obj/item/device/radio/headset/headset_eng
 	name = "engineering radio headset"
 	desc = "When the engineers wish to chat like girls."

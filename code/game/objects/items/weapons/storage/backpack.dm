@@ -136,6 +136,7 @@
 	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
 	icon_state = "chempack"
 
+
 /*
  * Duffle Types
  */
@@ -312,6 +313,13 @@
 		slot_l_hand_str = "satchel-cap",
 		slot_r_hand_str = "satchel-cap",
 		)
+
+/obj/item/weapon/storage/backpack/satchel/marinepack
+	name = "marine backpack"
+	desc = "A small marine pack."
+	icon_state = "pocketbook"
+	color = "#3d2711"
+	max_storage_space = DEFAULT_BACKPACK_STORAGE/2
 
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
