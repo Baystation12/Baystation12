@@ -8,19 +8,10 @@
 	path = /obj/item/clothing/under/color
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/uniform/jumpsuit_f
-	display_name = "feminine jumpsuit, colour select"
-	path = /obj/item/clothing/under/fcolor
-	flags = GEAR_HAS_COLOR_SELECTION
-
 /datum/gear/uniform/shortjumpskirt
 	display_name = "short jumpskirt, colour select"
 	path = /obj/item/clothing/under/shortjumpskirt
 	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/uniform/blackjumpshorts
-	display_name = "black jumpsuit shorts"
-	path = /obj/item/clothing/under/color/blackjumpshorts
 
 /datum/gear/uniform/roboticist_skirt
 	display_name = "skirt, roboticist"

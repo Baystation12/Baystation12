@@ -11,26 +11,15 @@
 	name = "orange jumpsuit"
 	desc = "It's standardised prisoner-wear. Its suit sensor controls are permanently set to the \"Fully On\" position."
 	icon_state = "orange"
-	item_state = "o_suit"
-	worn_state = "orange"
 	has_sensor = 2
 	sensor_mode = 3
-
-/obj/item/clothing/under/color/blackjumpshorts
-	name = "black jumpsuit shorts"
-	desc = "The latest in space fashion, in a ladies' cut with shorts."
-	icon_state = "black"
-	item_state = "bl_suit"
-	worn_state = "blackshortsf"
 
 // coloured jumpsuits, male pattern
 
 /obj/item/clothing/under/color
 	name = "jumpsuit"
 	desc = "The latest in space fashion."
-	icon_state = "jumpsuit"
-	item_state = "jumpsuit"
-	worn_state = "jumpsuit"
+	icon_state = "white"
 
 // legacy colours - these are used somewhere in the game, but aren't available in the loadout
 
@@ -73,12 +62,3 @@
 /obj/item/clothing/under/color/brown
 	name = "brown jumpsuit"
 	color = "#c08720"
-
-// coloured jumpsuits, female pattern
-
-/obj/item/clothing/under/fcolor
-	name = "feminine jumpsuit"
-	desc = "The latest in space fashion, in a slimming ladies' cut."
-	icon_state = "jumpsuit"
-	item_state = "jumpsuit"
-	worn_state = "f_jumpsuit"

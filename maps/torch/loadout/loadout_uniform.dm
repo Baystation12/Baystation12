@@ -6,13 +6,7 @@
 /datum/gear/uniform/jumpsuit
 	allowed_roles = NON_MILITARY_ROLES
 
-/datum/gear/uniform/jumpsuit_f
-	allowed_roles = NON_MILITARY_ROLES
-
 /datum/gear/uniform/shortjumpskirt
-	allowed_roles = RESTRICTED_ROLES
-
-/datum/gear/uniform/blackjumpshorts
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/uniform/roboticist_skirt
