@@ -108,7 +108,6 @@ datum/preferences
 
 	if(!get_mob_by_key(client_ckey))
 		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
-		close_load_dialog(user)
 		return
 
 	var/dat = "<html><body><center>"
