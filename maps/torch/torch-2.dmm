@@ -8811,6 +8811,7 @@
 /obj/effect/landmark{
 	name = "lightsout"
 	},
+/obj/machinery/ai_slipper,
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai_upload)
 "rV" = (
