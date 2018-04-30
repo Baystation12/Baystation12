@@ -1,0 +1,4 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - rscadd: "You can now enable a combat module for borgs via the keycard authentication device during red."
