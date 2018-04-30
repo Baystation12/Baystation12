@@ -179,12 +179,6 @@
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
 
-/datum/gear/gloves/evening/modified
-	display_name = "modified gloves, evening"
-	path = /obj/item/clothing/gloves/color/evening/modified
-	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_TAJARA, SPECIES_UNATHI)
-
 /datum/gear/gloves/botany/modified
 	display_name = "modified gloves, botany"
 	path = /obj/item/clothing/gloves/thick/botany/modified

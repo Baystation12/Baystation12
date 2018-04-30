@@ -117,11 +117,6 @@
 	path = /obj/item/clothing/under/formal_pants
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/uniform/formal_pants/baggycustom
-	display_name = "baggy suit pants, colour select"
-	path = /obj/item/clothing/under/formal_pants/baggy
-	flags = GEAR_HAS_COLOR_SELECTION
-
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
 	path = /obj/item/clothing/under/shorts/jeans

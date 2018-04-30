@@ -213,7 +213,7 @@
 "wd" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/turf/simulated/floor/tiled/dark,/area/hydro/station/growX)
 "we" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/fixed/alium/airless,/area/hydro/solars)
 "wf" = (/obj/item/weapon/material/kitchen/utensil/knife,/obj/structure/table/glass/pglass,/obj/item/weapon/material/ashtray/bronze,/turf/simulated/floor/tiled,/area/hydro/station/growF)
-"wg" = (/obj/item/clothing/accessory/toggleable/hawaii/random,/obj/item/clothing/under/casual_pants/greyjeans,/obj/item/clothing/head/bowlerhat,/obj/item/clothing/shoes/leather,/obj/structure/closet,/turf/simulated/floor/tiled/freezer,/area/hydro/station/shower)
+"wg" = (/obj/item/clothing/accessory/toggleable/hawaii/random,/obj/item/clothing/under/casual_pants/classicjeans,/obj/item/clothing/head/bowlerhat,/obj/item/clothing/shoes/leather,/obj/structure/closet,/turf/simulated/floor/tiled/freezer,/area/hydro/station/shower)
 "xb" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 2; layer = 2.4; level = 2},/turf/simulated/floor/tiled/dark,/area/hydro/station/growX)
 "xc" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/obj/structure/flora/ausbushes/fullgrass,/obj/structure/flora/ausbushes/ppflowers,/turf/simulated/floor/grass,/area/hydro/station/goatzone)
 "xd" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/catwalk,/obj/machinery/portable_atmospherics/hydroponics,/obj/item/seeds/puretobaccoseed,/turf/simulated/floor/fixed/alium,/area/hydro/station/growA)

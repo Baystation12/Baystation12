@@ -45,9 +45,6 @@
 /datum/gear/uniform/formal_pants/custom
 	allowed_roles = FORMAL_ROLES
 
-/datum/gear/uniform/formal_pants/baggycustom
-	allowed_roles = FORMAL_ROLES
-
 /datum/gear/uniform/shorts
 	allowed_roles = RESTRICTED_ROLES
 
