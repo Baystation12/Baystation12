@@ -227,7 +227,7 @@ BLIND     // can't see anything
 	var/see_invisible = -1
 	var/light_protection = 0
 
-/obj/item/clothing/glasses/get_icon_state(mob/user_mob, slot)
+/obj/item/clothing/glasses/get_icon_state(slot)
 	if(item_state_slots && item_state_slots[slot])
 		return item_state_slots[slot]
 	else
@@ -645,8 +645,8 @@ BLIND     // can't see anything
 /obj/item/clothing/under
 	icon = 'icons/obj/clothing/uniforms.dmi'
 	item_icons = list(
-		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_uniforms.dmi',
-		slot_r_hand_str = 'icons/mob/onmob/items/righthand_uniforms.dmi',
+		slot_l_hand_str = 'icons/inv_slots/uniforms/hand_l_default.dmi',
+		slot_r_hand_str = 'icons/inv_slots/uniforms/hand_r_default.dmi',
 		)
 	name = "under"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -681,14 +681,6 @@ BLIND     // can't see anything
 	if(rolled_sleeves == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
 
-/obj/item/clothing/under/get_icon_state(mob/user_mob, slot)
-	var/ret
-	if(item_state_slots && item_state_slots[slot])
-		ret = item_state_slots[slot]
-	else
-		ret = icon_state
-	return "[ret]"
-
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(accessories && accessories.len)
 		..()
@@ -703,11 +695,14 @@ BLIND     // can't see anything
 			item_state_slots = list()
 		item_state_slots[slot_w_uniform_str] = worn_state
 	else
-		worn_state = icon_state
+		if (item_state)
+			worn_state = item_state
+		else
+			worn_state = icon_state
 
 	//autodetect rollability
 	if(rolled_down < 0)
-		if((worn_state + "_d_s") in icon_states(default_onmob_icons[slot_w_uniform_str]))
+		if((worn_state + "_d_s") in icon_states(default_onmob_icons[slot_w_uniform_str])) // TODO: real dmi now depends on body_build, so it's not actual now
 			rolled_down = 0
 
 /obj/item/clothing/under/proc/update_rolldown_status()

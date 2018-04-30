@@ -20,7 +20,7 @@
 
 
 
-/obj/item/weapon/handcuffs/get_icon_state(mob/user_mob, slot)
+/obj/item/weapon/handcuffs/get_icon_state(slot)
 	if(slot == slot_handcuffed_str)
 		return "handcuff1"
 	if(slot == slot_legcuffed_str)

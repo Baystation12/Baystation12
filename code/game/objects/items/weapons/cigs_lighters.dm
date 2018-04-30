@@ -381,7 +381,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		die(1)
 	return ..()
 
-/obj/item/clothing/mask/smokable/cigarette/get_icon_state(mob/user_mob, slot)
+/obj/item/clothing/mask/smokable/cigarette/get_icon_state(slot)
 	return item_state
 
 /obj/item/clothing/mask/smokable/cigarette/get_mob_overlay(mob/user_mob, slot)

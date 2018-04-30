@@ -670,15 +670,23 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
-/obj/item/proc/get_icon_state(mob/user_mob, slot)
-	var/mob_state
-	if(item_state_slots && item_state_slots[slot])
-		mob_state = item_state_slots[slot]
-	else if (item_state)
-		mob_state = item_state
-	else
-		mob_state = icon_state
-	return mob_state
+/obj/item/proc/get_icon_state(slot)
+	if (item_state_slots)
+		if (item_state_slots[slot])
+			return item_state_slots[slot]
+
+		switch (slot)
+			if (slot_l_hand_str, slot_r_hand_str)
+				if (item_state_slots[slot_hand_str])
+					return item_state_slots[slot_hand_str]
+			if (slot_l_ear_str, slot_r_ear_str)
+				if (item_state_slots[slot_ear_str])
+					return item_state_slots[slot_ear_str]
+
+	if (item_state)
+		return item_state
+
+	return icon_state
 
 /obj/item/proc/dir_shift(var/icon/given_icon, var/dir_given, var/x = 0, var/y = 0)
 	var/icon/I = new(given_icon, dir = dir_given)
@@ -692,7 +700,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(ishuman(user_mob))
 		user_human = user_mob
 
-	var/mob_state = get_icon_state(user_mob, slot)
+	var/mob_state = get_icon_state(slot)
 
 	var/mob_icon
 	

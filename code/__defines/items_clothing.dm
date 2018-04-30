@@ -82,11 +82,13 @@
 // since numbers cannot be used as associative list keys.
 //icon_back, icon_l_hand, etc would be much better names for these...
 #define slot_back_str		"slot_back"
+#define slot_hand_str		"slot_hand"
 #define slot_l_hand_str		"slot_l_hand"
 #define slot_r_hand_str		"slot_r_hand"
 #define slot_w_uniform_str	"slot_w_uniform"
 #define slot_head_str		"slot_head"
 #define slot_wear_suit_str	"slot_suit"
+#define slot_ear_str        "slot_ear"
 #define slot_l_ear_str      "slot_l_ear"
 #define slot_r_ear_str      "slot_r_ear"
 #define slot_belt_str       "slot_belt"
