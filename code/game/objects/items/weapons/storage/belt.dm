@@ -206,6 +206,13 @@
 	item_state = "swatbelt"
 	storage_slots = 9
 
+
+/obj/item/weapon/storage/belt/marinebelt
+	item_state = "marinebelt"
+	icon_state = "marinebelt"
+	name = "marine belt"
+	max_w_class = ITEM_SIZE_NORMAL
+
 /obj/item/weapon/storage/belt/waistpack
 	name = "waist pack"
 	desc = "A small bag designed to be worn on the waist. May make your butt look big."
