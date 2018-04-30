@@ -15,7 +15,7 @@
 
 
 /datum/nano_module/email_administration/
-	name = "Email Client"
+	name = "Email Administration"
 	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 	var/error = ""
@@ -133,7 +133,7 @@
 			return 1
 
 		var/complete_login = "[newlogin]@[newdomain]"
-		if(ntnet_global.does_email_exist(complete_login))
+		if(ntnet_global.find_email_by_name(complete_login))
 			error = "Error creating account: An account with same address already exists."
 			return 1
 

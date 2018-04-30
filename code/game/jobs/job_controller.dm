@@ -372,31 +372,15 @@ var/global/datum/controller/occupations/job_master
 			job.setup_account(H)
 
 			// EMAIL GENERATION
-			var/domain
-			if(H.char_branch && H.char_branch.email_domain)
-				domain = H.char_branch.email_domain
-			else
-				domain = "freemail.nt"
-			var/sanitized_name = sanitize(replacetext(replacetext(lowertext(H.real_name), " ", "."), "'", ""))
-			var/complete_login = "[sanitized_name]@[domain]"
-
-			// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
-			// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
-			if(ntnet_global.does_email_exist(complete_login))
-				complete_login = "[sanitized_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
-
-			// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
-			if(ntnet_global.does_email_exist(complete_login))
-				to_chat(H, "You were not assigned an email address.")
-				H.mind.store_memory("You were not assigned an email address.")
-			else
-				var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
-				EA.password = GenerateKey()
-				EA.login = 	complete_login
-				to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
-				H.mind.initial_email_login["login"] = EA.login
-				H.mind.initial_email_login["password"] = EA.password
-				H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+			if(rank != "Robot" && rank != "AI")		//These guys get their emails later.
+				var/domain
+				var/desired_name
+				if(H.char_branch && H.char_branch.email_domain)
+					domain = H.char_branch.email_domain
+				else
+					domain = "freemail.nt"
+				desired_name = H.real_name
+				ntnet_global.create_email(H, desired_name, domain)
 			// END EMAIL GENERATION
 
 			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)

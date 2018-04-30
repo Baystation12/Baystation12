@@ -54,6 +54,7 @@
 
 /mob/living/silicon/fully_replace_character_name(new_name)
 	..()
+	create_or_rename_email(new_name, "root.rt")
 	if(istype(idcard))
 		idcard.registered_name = new_name
 		idcard.update_name()
