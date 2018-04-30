@@ -1,0 +1,6 @@
+author: tlc2013
+
+delete-after: True
+
+changes: 
+  - bugfix: "Fixed certain Spellbound Servant equipment not having the proper icons, or - at worst - having no icons at all."
