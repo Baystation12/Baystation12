@@ -14,14 +14,14 @@
 	return list(
 		/obj/item/clothing/suit/bio_suit/general,
 		/obj/item/clothing/head/bio_hood/general,
-		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/mask/gas/old,
 		/obj/item/weapon/tank/emergency/oxygen/engi,
 	)
 
 /obj/structure/closet/l3closet/general/multi/WillContain()
 	return MERGE_ASSOCS_WITH_NUM_VALUES(..(), list(
 		/obj/item/clothing/head/bio_hood/general = 5,
-		/obj/item/clothing/mask/gas/half = 5,
+		/obj/item/clothing/mask/gas/old = 5,
 		/obj/item/clothing/suit/bio_suit/general = 5,
 		/obj/item/weapon/tank/emergency/oxygen/engi = 5
 	))
@@ -50,7 +50,7 @@
 	return list(
 		/obj/item/clothing/suit/bio_suit/security,
 		/obj/item/clothing/head/bio_hood/security,
-		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/mask/gas/old,
 		/obj/item/weapon/tank/emergency/oxygen/engi
 	)
 
@@ -63,7 +63,7 @@
 	return list(
 		/obj/item/clothing/suit/bio_suit/janitor,
 		/obj/item/clothing/head/bio_hood/janitor,
-		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/mask/gas/old,
 		/obj/item/weapon/tank/emergency/oxygen/engi
 	)
 
@@ -97,6 +97,6 @@
 	return list(
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
-		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/mask/gas/old,
 		/obj/item/weapon/tank/emergency/oxygen/engi
 	)

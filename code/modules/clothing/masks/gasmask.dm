@@ -1,8 +1,8 @@
 /obj/item/clothing/mask/gas
 	name = "gas mask"
 	desc = "A face-covering mask that can be connected to an air supply. Filters harmful gases from the air."
-	icon_state = "fullgas"
-	item_state = "fullgas"
+	icon_state = "gas_alt"
+	item_state = "gas_alt"
 	item_flags = ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT | ITEM_FLAG_AIRTIGHT
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = FACE|EYES
@@ -27,14 +27,12 @@
 
 	return filtered
 
-/obj/item/clothing/mask/gas/half
-	name = "face mask"
-	desc = "A compact, durable gas mask that can be connected to an air supply."
-	icon_state = "halfgas"
-	item_state = "halfgas"
-	siemens_coefficient = 0.7
-	body_parts_covered = FACE
-	w_class = ITEM_SIZE_SMALL
+/obj/item/clothing/mask/gas/old
+	name = "old gas mask"
+	desc = "An old face-covering mask that can be connected to an air supply. Not less reliable than the new one, but it doesn't look very good. Filters harmful gases from the air."
+	icon_state = "gas_mask"
+	item_state = "gas_mask"
+
 	armor = list(melee = 10, bullet = 10, laser = 10, energy = 0, bomb = 0, bio = 55, rad = 0)
 
 //Plague Dr suit can be found in clothing/suits/bio.dm
@@ -42,7 +40,7 @@
 	name = "plague doctor mask"
 	desc = "A modernised version of the classic design, this mask will not only filter out phoron but it can also be connected to an air supply."
 	icon_state = "plaguedoctor"
-	item_state = "gas_mask"
+	item_state = "plaguedoctor"
 	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 90, rad = 0)
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -50,6 +48,7 @@
 	name = "\improper SWAT mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
+	item_state = "swat"
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE|EYES
 	armor = list(melee = 15, bullet = 15, laser = 15, energy = 0, bomb = 0, bio = 75, rad = 0)

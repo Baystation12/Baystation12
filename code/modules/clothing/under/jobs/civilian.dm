@@ -38,7 +38,7 @@
 	name = "chaplain's jumpsuit"
 	icon_state = "chaplain"
 	item_state = "bl_suit"
-	worn_state = "chapblack"
+	worn_state = "chaplain"
 
 
 /obj/item/clothing/under/rank/chef
