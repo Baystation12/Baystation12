@@ -26,7 +26,7 @@
 	var/p_x = 16
 	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
 
-	var/accuracy = 0
+	var/accuracy = 0 //Technically an inaccuracy variable.
 	var/dispersion = 0.0
 
 	var/damage = 10

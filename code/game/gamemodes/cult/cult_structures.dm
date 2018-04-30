@@ -37,24 +37,28 @@
 		return
 	cult_radius()
 	time_last_cultification = world.time
+
 /obj/structure/cult/pylon/proc/cult_radius()
 	var/list/cultable = list()
 
-	for(var/A in range(8, src)) //arbitrary distance. One screen... Ish... Circular?
+	for(var/A in oview(8, src)) //arbitrary distance. One screen... Ish... Circular?
 		if (istype(A, /obj/structure/window) && !istype(A, /obj/structure/window/cult))
 			cultable += A
+/*While we *can* hit grilles and windows, the projectile likes to break them instead.
 		else if (istype(A, /obj/structure/grille) && !istype(A, /obj/structure/grille/cult) )
 			cultable += A
-		else if (iswall(A) && !istype(A ,/turf/simulated/wall/cult) )
+*/
+		else if (iswall(A) && !istype(A ,/turf/simulated/wall/cult) ) //Basically: Keeps the cultists from instantly building a strong base with an offensive tower. This forces nearby walls to be weak.
 			cultable += A
-		else if (istype(A, /turf/simulated/floor))
-			var/turf/simulated/floor/F = A
-			if(F.flooring != /decl/flooring/reinforced/cult) //This is always true, even when this is the case. Weird.
-				cultable += F
+		else if (!iscultist(A)) //Aha, tricked you. It's a defense matrix.
+			cultable += A
 
 	if(cultable.len)
 		var/atom/to_cult = pick(cultable)
-		to_cult.cultify()
+		var/obj/item/projectile/beam/blood/B = new (get_turf(src))
+		for(var/I = 0, I <= 3, I++)// Hah, it tracks.
+			B.launch(to_cult, pick(BP_ALL_LIMBS))
+			sleep(1)
 
 /obj/structure/cult/pylon/attack_hand(mob/M as mob)
 	attackpylon(M, 5)

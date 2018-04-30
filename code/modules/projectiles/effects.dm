@@ -176,6 +176,14 @@
 /obj/effect/projectile/stun/impact
 	icon_state = "impact_stun"
 
+//------------------------------------------------
+//Nar-sian blood beam (No impact or start sprites)
+//------------------------------------------------
+
+/obj/effect/projectile/blood
+	icon_state = "blood"
+	light_color = COLOR_RED_LIGHT
+
 //----------------------------
 // Bullet
 //----------------------------
