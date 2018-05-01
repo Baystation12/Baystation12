@@ -70,7 +70,7 @@
 	name = "Dead Magnitka's fleet officer"
 	uniform = /obj/item/clothing/under/magintka_uniform
 	suit = /obj/item/clothing/suit/storage/hooded/wintercoat
-	shoes = /obj/item/clothing/shoes/jungleboots
+	shoes = /obj/item/clothing/shoes/jackboots
 	gloves = /obj/item/clothing/gloves/thick
 	head = /obj/item/clothing/head/beret
 	l_pocket = /obj/item/weapon/material/butterfly/switchblade

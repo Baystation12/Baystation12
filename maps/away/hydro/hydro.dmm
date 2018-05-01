@@ -207,7 +207,7 @@
 "vd" = (/obj/structure/catwalk,/obj/machinery/portable_atmospherics/hydroponics,/obj/item/seeds/soyaseed,/turf/simulated/floor/fixed/alium,/area/hydro/station/growC)
 "ve" = (/obj/effect/floor_decal/industrial/warning{dir = 6},/turf/simulated/floor/exoplanet/concrete,/area/hydro/solars)
 "vf" = (/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/hydro/station/growF)
-"vg" = (/obj/item/clothing/under/overalls,/obj/item/clothing/shoes/desertboots,/obj/structure/closet,/turf/simulated/floor/tiled/freezer,/area/hydro/station/shower)
+"vg" = (/obj/item/clothing/under/overalls,/obj/structure/closet,/turf/simulated/floor/tiled/freezer,/area/hydro/station/shower)
 "wb" = (/mob/living/bot/farmbot{faction = "farmbots"},/turf/simulated/floor/tiled/dark,/area/hydro/station/growX)
 "wc" = (/obj/structure/catwalk,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/machinery/portable_atmospherics/hydroponics,/obj/item/seeds/ambrosiadeusseed,/turf/simulated/floor/fixed/alium,/area/hydro/station/growD)
 "wd" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/turf/simulated/floor/tiled/dark,/area/hydro/station/growX)

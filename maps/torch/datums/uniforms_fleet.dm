@@ -59,7 +59,7 @@
 	name = "Fleet medical"
 	departments = MED
 
-	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/medical, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet, /obj/item/clothing/under/solgov/utility/fleet/combat/medical, /obj/item/clothing/shoes/jungleboots)
+	utility_extra = list(/obj/item/clothing/head/beret/solgov/fleet/medical, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet, /obj/item/clothing/under/solgov/utility/fleet/combat/medical, /obj/item/clothing/shoes/jackboots)
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/medical
 
 /decl/hierarchy/mil_uniform/fleet/med/officer

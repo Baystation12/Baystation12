@@ -4,11 +4,6 @@
 	slot = slot_shoes
 	category = /datum/gear/shoes
 
-/datum/gear/shoes/athletic
-	display_name = "athletic shoes, colour select"
-	path = /obj/item/clothing/shoes/athletic
-	flags = GEAR_HAS_COLOR_SELECTION
-
 /datum/gear/shoes/boots
 	display_name = "boot selection"
 	path = /obj/item/clothing/shoes
@@ -19,9 +14,6 @@
 	var/boots = list()
 	boots += /obj/item/clothing/shoes/jackboots
 	boots += /obj/item/clothing/shoes/workboots
-	boots += /obj/item/clothing/shoes/dutyboots
-	boots += /obj/item/clothing/shoes/jungleboots
-	boots += /obj/item/clothing/shoes/desertboots
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(boots)
 
 /datum/gear/shoes/color
@@ -35,7 +27,6 @@
 	shoes += /obj/item/clothing/shoes/blue
 	shoes += /obj/item/clothing/shoes/brown
 	shoes += /obj/item/clothing/shoes/laceup
-	shoes += /obj/item/clothing/shoes/dress/white
 	shoes += /obj/item/clothing/shoes/green
 	shoes += /obj/item/clothing/shoes/leather
 	shoes += /obj/item/clothing/shoes/orange
@@ -45,16 +36,6 @@
 	shoes += /obj/item/clothing/shoes/white
 	shoes += /obj/item/clothing/shoes/yellow
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(shoes)
-
-/datum/gear/shoes/flats
-	display_name = "flats, colour select"
-	path = /obj/item/clothing/shoes/flats
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/shoes/high
-	display_name = "high tops selection"
-	path = /obj/item/clothing/shoes/hightops
-	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/shoes/sandal
 	display_name = "wooden sandals"

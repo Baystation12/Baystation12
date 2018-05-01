@@ -36,7 +36,7 @@
 					/obj/item/clothing/mask/balaclava/tactical,
 					/obj/item/clothing/glasses/tacgoggles,
 					/obj/item/weapon/storage/belt/security/tactical,
-					/obj/item/clothing/shoes/tactical,
+					/obj/item/clothing/shoes/jackboots,
 					/obj/item/clothing/gloves/tactical)
 	cost = 45
 	containertype = /obj/structure/closet/crate/secure

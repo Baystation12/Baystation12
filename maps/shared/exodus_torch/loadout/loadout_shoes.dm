@@ -1,8 +1,3 @@
-/datum/gear/shoes/athletic
-	display_name = "athletic shoes"
-	path = /obj/item/clothing/shoes/athletic
-	flags = GEAR_HAS_COLOR_SELECTION
-
 /datum/gear/shoes/boots
 	display_name = "boot selection"
 	path = /obj/item/clothing/shoes/jackboots
@@ -13,8 +8,6 @@
 	var/boots = list()
 	boots["jackboots"] = /obj/item/clothing/shoes/jackboots
 	boots["workboots"] = /obj/item/clothing/shoes/workboots
-	boots["duty boots"] = /obj/item/clothing/shoes/dutyboots
-	boots["jungle boots"] = /obj/item/clothing/shoes/jungleboots
 	gear_tweaks += new/datum/gear_tweak/path(boots)
 
 /datum/gear/shoes/color
@@ -42,15 +35,3 @@
 	display_name = "dress shoes"
 	path = /obj/item/clothing/shoes/dress
 
-/datum/gear/shoes/flats
-	display_name = "flats"
-	path = /obj/item/clothing/shoes/flats
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/shoes/high
-	display_name = "high tops selection"
-	path = /obj/item/clothing/shoes/hightops
-
-/datum/gear/shoes/high/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/shoes/hightops)

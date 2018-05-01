@@ -132,7 +132,7 @@
 /decl/hierarchy/outfit/corpse/slavers_base/slave
 	name = "Dead Slave"
 	uniform = /obj/item/clothing/under/color/orange
-	shoes = /obj/item/clothing/shoes/tactical
+	shoes = /obj/item/clothing/shoes/jackboots
 
 /mob/living/simple_animal/hostile/abolition_extremist
 	name = "abolition extremist"
