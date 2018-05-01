@@ -12,8 +12,6 @@
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0
 	var/diffused_for = 0
-	filters = filter(type="blur", size=1) //Delete this line before the pullreqeust gets made.
-
 
 /obj/effect/shield/update_icon()
 	if(gen && gen.check_flag(MODEFLAG_PHOTONIC) && !disabled_for && !diffused_for)
@@ -48,6 +46,7 @@
 	..()
 	update_nearby_tiles()
 	animate(src, alpha = 255, time = 1 SECOND)
+	
 
 /obj/effect/shield/Destroy()
 	. = ..()
@@ -70,7 +69,7 @@
 		gen.damaged_segments |= src
 	disabled_for += duration
 	set_density(0)
-	animate(src, alpha = 0, time = 1 SECOND)
+	animate(src, alpha = 0, time = 1 SECOND) //This needs some testing to determine if this is viable or ideal in any way
 	addtimer(CALLBACK(src, /atom/proc/set_invisibility, INVISIBILITY_MAXIMUM), 5)
 	update_nearby_tiles()
 	update_icon()
@@ -105,7 +104,7 @@
 	diffused_for = max(duration, 0)
 	gen.damaged_segments |= src
 	set_density(0)
-	animate(src, alpha = 0, time = 1 SECOND)
+	//animate(src, alpha = 0, time = 1 SECOND) //This would be called often, and would be quite expensive at that!.. Perhaps it's wisest just to make a new state.
 	addtimer(CALLBACK(src, /atom/proc/set_invisibility, INVISIBILITY_MAXIMUM), 5)
 	update_icon()
 	update_nearby_tiles()
@@ -163,6 +162,7 @@
 			fail_adjacent_segments(rand(8, 16), hitby)
 			for(var/obj/effect/shield/S in field_segments)
 				S.fail(1)
+				CHECK_TICK
 			return
 
 
