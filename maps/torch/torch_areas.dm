@@ -1237,10 +1237,6 @@
 	name = "\improper Operating Theatre"
 	icon_state = "surgery"
 
-/area/medical/autopsy
-	name = "\improper Autopsy"
-	icon_state = "autopsy"
-
 // Research
 /area/assembly/chargebay
 	name = "\improper Mech Bay"
