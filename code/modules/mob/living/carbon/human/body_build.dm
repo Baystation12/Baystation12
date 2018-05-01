@@ -168,3 +168,9 @@ var/global/datum/body_build/default_body_build = new
 	hat_icon	= 'icons/inv_slots/hats/mob_vox.dmi'
 	shoes_icon	= 'icons/inv_slots/shoes/mob_vox.dmi'
 	ties_icon	= 'icons/inv_slots/acessories/mob_vox.dmi'
+
+/datum/body_build/monkey
+	name		= "Monkey"
+
+	uniform_icon= 'icons/mob/species/monkey/uniform.dmi'
+	ties_icon	= 'icons/mob/species/monkey/ties.dmi'

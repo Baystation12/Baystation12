@@ -20,6 +20,10 @@
 	death_message = "lets out a faint chimper as it collapses and stops moving..."
 	tail = "chimptail"
 
+	body_builds = list(
+		new/datum/body_build/monkey
+	)
+
 	unarmed_types = list(/datum/unarmed_attack/bite, /datum/unarmed_attack/claws)
 	inherent_verbs = list(/mob/living/proc/ventcrawl)
 	hud_type = /datum/hud_data/monkey
