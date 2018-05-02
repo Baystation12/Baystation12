@@ -204,6 +204,11 @@
 	desc = "A green beret with a silver emblem, denoting service in the Bureau of Border Security. For border guards who are more inclined towards style than safety."
 	icon_state = "beret_greensilver"
 
+/obj/item/clothing/head/beret/solgov/postal
+	name = "postal service beret"
+	desc = "A medium blue beret with a brown emblem, denoting service in the Interstellar Postal Service. For mailpeople who are more inclined towards style than safety."
+	icon_state = "beret_mediumblue"
+
 /obj/item/clothing/head/beret/solgov/expedition
 	name = "expeditionary beret"
 	desc = "A black beret belonging to the SCG Expeditionary Corps. For personnel that are more inclined towards style than safety."
