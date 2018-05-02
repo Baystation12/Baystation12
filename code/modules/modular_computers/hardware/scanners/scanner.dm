@@ -19,11 +19,6 @@
 	do_before_uninstall()
 	. = ..()
 
-/obj/item/weapon/computer_hardware/scanner/New(obj/item/modular_computer/device)
-	..()
-	if(istype(device))
-		addtimer(CALLBACK(src, .proc/do_after_install, null, device), 0)	//Have to wait to make sure the hard drive has spawned.
-
 /obj/item/weapon/computer_hardware/scanner/proc/do_after_install(user, obj/item/modular_computer/device)
 	if(!driver_type || !device)
 		return 0
