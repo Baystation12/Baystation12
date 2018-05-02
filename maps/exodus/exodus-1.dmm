@@ -383,7 +383,7 @@
 "ok" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/tiled{icon_state = "steel_dirty"},/area/maintenance/ghetto_main)
 "ol" = (/obj/machinery/light/small,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/plating,/area/maintenance/atmos_control)
 "om" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/wood,/area/maintenance/ghetto_casino)
-"pb" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/maintenance,/obj/machinery/door/airlock/maintenance,/turf/simulated/floor/plating,/area/maintenance/atmos_control)
+"pb" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/maintenance,/turf/simulated/floor/plating,/area/maintenance/atmos_control)
 "pc" = (/turf/simulated/floor/plating,/area/maintenance/ghetto_bar)
 "pd" = (/obj/structure/girder,/turf/simulated/floor/tiled{icon_state = "steel_dirty"},/area/maintenance/ghetto_main)
 "pe" = (/obj/structure/table/standard,/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/steel{amount = 50},/turf/simulated/floor/tiled{icon_state = "steel_dirty"},/area/maintenance/ghetto_main)

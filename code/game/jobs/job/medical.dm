@@ -89,7 +89,7 @@
 	alt_titles = list("Psychologist" = /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist)
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
 
-/datum/job/Paramedic
+/datum/job/paramedic
 	title = "Paramedic"
 	department = "Medical"
 	department_flag = MED

@@ -23,31 +23,31 @@
 	path = /obj/item/clothing/accessory/storage/pouches
 	cost = 2
 	flags = GEAR_HAS_SUBTYPE_SELECTION
-	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/Paramedic)
+	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/paramedic)
 
 /datum/gear/tactical/large_pouches
 	display_name = "armor large pouches"
 	path = /obj/item/clothing/accessory/storage/pouches/large
 	cost = 5
 	flags = GEAR_HAS_SUBTYPE_SELECTION
-	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/Paramedic)
+	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/paramedic)
 
 /datum/gear/tactical/armor_deco
 	display_name = "armor customization"
 	path = /obj/item/clothing/accessory/armor/tag
 	flags = GEAR_HAS_SUBTYPE_SELECTION
-	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/Paramedic)
+	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/paramedic)
 
 /datum/gear/tactical/helm_covers
 	display_name = "helmet covers"
 	path = /obj/item/clothing/accessory/armor/helmcover
 	flags = GEAR_HAS_SUBTYPE_SELECTION
-	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/Paramedic)
+	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/paramedic)
 
 /datum/gear/tactical/kneepads
 	display_name = "kneepads"
 	path = /obj/item/clothing/accessory/kneepads
-	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/Paramedic)
+	allowed_roles = list(/datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/captain, /datum/job/hos, /datum/job/paramedic)
 
 /datum/gear/tactical/holster
 	display_name = "holster selection"

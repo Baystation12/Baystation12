@@ -39,7 +39,7 @@
 	display_name = "drop pouches, medical"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/white
 	cost = 3
-	allowed_roles = list(/datum/job/cmo, , /datum/job/doctor)
+	allowed_roles = list(/datum/job/cmo, /datum/job/doctor, /datum/job/paramedic, /datum/job/psychiatrist, /datum/job/chemist)
 
 /datum/gear/storage/webbing
 	display_name = "webbing, simple"
