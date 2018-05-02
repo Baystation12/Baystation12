@@ -209,4 +209,5 @@
 /obj/item/organ/external/head/nabber
 	name = "head"
 	vital = 0
+	can_heal_overkill = 0
 	has_lips = 0
