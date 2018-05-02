@@ -47,8 +47,7 @@
 		generate_atmosphere()
 		generate_map()
 		generate_features()
-		for(var/i = 0 to 3)
-			generate_landing()
+		generate_landing(4)		//try making 4 landmarks
 		update_biome()
 		START_PROCESSING(SSobj, src)
 
@@ -178,11 +177,14 @@
 			A.verbs -= /mob/living/simple_animal/proc/name_species
 	return TRUE
 
-/obj/effect/overmap/sector/exoplanet/proc/generate_landing()
-	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
-	if(T)
-		new landmark_type(T)
-	return T
+//Tries to generate num landmarks, but avoids repeats.
+/obj/effect/overmap/sector/exoplanet/proc/generate_landing(num = 1)
+	var/places = list()
+	for(var/i = 1, i <= num, i++)
+		var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
+		if(T && !(T in places))
+			places += T
+			new landmark_type(T)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
