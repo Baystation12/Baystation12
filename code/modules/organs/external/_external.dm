@@ -19,6 +19,7 @@
 	var/brute_ratio = 0                // Ratio of current brute damage to max damage.
 	var/burn_dam = 0                   // Actual current burn damage.
 	var/burn_ratio = 0                 // Ratio of current burn damage to max damage.
+	var/can_heal_overkill = 0          // Whether organ can be still healed once past max_damage in brute/burn.
 	var/last_dam = -1                  // used in healing/processing calculations.
 	var/pain = 0                       // How much the limb hurts.
 	var/pain_disability_threshold      // Point at which a limb becomes unusable due to pain.

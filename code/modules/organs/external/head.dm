@@ -8,6 +8,7 @@
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_NORMAL
 	body_part = HEAD
+	can_heal_overkill = 1
 	parent_organ = BP_CHEST
 	joint = "jaw"
 	amputation_point = "neck"
