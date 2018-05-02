@@ -78,7 +78,7 @@
 									/obj/machinery/computer,			/obj/machinery/telecomms, \
 									/obj/machinery/nuclearbomb,			/obj/machinery/particle_accelerator, \
 									/obj/machinery/recharge_station,	/obj/machinery/smartfridge, \
-									/obj/machinery/suit_storage_unit,	/obj/structure/showcase)
+									/obj/machinery/suit_storage_unit,	/obj/structure/showcase, /obj/machinery/clonepod)
 
 	//Parrots are kleptomaniacs. This variable ... stores the item a parrot is holding.
 	var/obj/item/held_item = null
