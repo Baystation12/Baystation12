@@ -64,6 +64,8 @@
 	install_default_hardware()
 	if(hard_drive)
 		install_default_programs()
+	if(scanner)
+		scanner.do_after_install(null, src)
 	update_icon()
 	update_verbs()
 	update_name()
