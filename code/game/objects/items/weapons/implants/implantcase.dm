@@ -18,6 +18,10 @@
 	..()
 	update_icon()
 
+/obj/item/weapon/implantcase/health
+	name = "glass case - 'health'"
+	imp = /obj/item/weapon/implant/health
+
 /obj/item/weapon/implantcase/proc/update_description()
 	if (imp)
 		desc = "A case containing \a [imp]."
