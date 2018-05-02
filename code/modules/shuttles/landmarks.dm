@@ -75,7 +75,7 @@
 	var/shuttle_restricted //name of the shuttle, null for generic waypoint
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
-	tag = landmark_tag+"-[x]-[y]"
+	tag = landmark_tag+"-[x]-[y]-[z]"
 	. = ..()
 	base_area = get_area(src)
 	if(!GLOB.using_map.use_overmap)
