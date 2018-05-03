@@ -336,6 +336,12 @@
 	else
 		return ..()
 
+/obj/item/stack/Crossed(var/atom/movable/AM)
+	..()
+	if(istype(AM, src.type)) //We check for any identical sheets in our container. Should nullify the need for the sheet stacker, in time. This may lead to hand weirdness.
+		var/obj/item/stack/S = AM
+		src.transfer_to(S)
+
 /*
  * Recipe datum
  */
