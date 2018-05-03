@@ -1,0 +1,6 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - rscadd: "Added a pathfinder hardsuit module to exploration suit room."
+  - maptweak: "Fixed several issues in the exploration storage rooms."
+  - rscadd: "Added illumination grenades, which generate a bright, wide light when detonated. Added illumination grenade crate to supply under miscellaneous category. Added hardsuit illumination grenade module."
