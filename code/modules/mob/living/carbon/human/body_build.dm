@@ -60,25 +60,23 @@ var/global/datum/body_build/default_body_build = new
 	var/icon/I
 	for(var/datum/body_build/BB in list(src, default_body_build))
 		switch(slot)
-			if("misk")    			I = BB.misk_icon
-			if(slot_w_uniform_str)  I = BB.uniform_icon
-			if(slot_wear_suit_str)  I = BB.suit_icon
-			if(slot_gloves_str)  	I = BB.gloves_icon
-			if(slot_glasses_str) 	I = BB.glasses_icon
-			if("ears")    			I = BB.ears_icon
-			if(slot_l_ear_str) 		I = BB.ears_icon
-			if(slot_r_ear_str) 		I = BB.ears_icon
-			if(slot_wear_mask_str)  I = BB.mask_icon
-			if(slot_head_str)    	I = BB.hat_icon
-			if(slot_shoes_str)   	I = BB.shoes_icon
-			if(slot_belt_str)    	I = BB.belt_icon
-			//if("s_store")	 		I = BB.s_store_icon
-			if(slot_back_str)    	I = BB.back_icon
-			if(slot_tie_str)     	I = BB.ties_icon
-			if("hidden")  			I = BB.hidden_icon
-			if("rig")     			I = BB.rig_back
-			if(slot_l_hand_str)		I = BB.l_hand
-			if(slot_r_hand_str)		I = BB.r_hand
+			if ("hidden")  				I = BB.hidden_icon
+			if (slot_w_uniform_str)  	I = BB.uniform_icon
+			if (slot_wear_suit_str)  	I = BB.suit_icon
+			if (slot_gloves_str)  		I = BB.gloves_icon
+			if (slot_glasses_str) 		I = BB.glasses_icon
+			if (slot_l_ear_str) 		I = BB.ears_icon
+			if (slot_r_ear_str) 		I = BB.ears_icon
+			if (slot_wear_mask_str)  	I = BB.mask_icon
+			if (slot_head_str)    		I = BB.hat_icon
+			if (slot_shoes_str)   		I = BB.shoes_icon
+			if (slot_belt_str)    		I = BB.belt_icon
+			if (slot_back_str)    		I = BB.back_icon
+			if (slot_tie_str)     		I = BB.ties_icon
+			if (slot_l_hand_str)		I = BB.l_hand
+			if (slot_r_hand_str)		I = BB.r_hand
+			if (slot_handcuffed_str)	I = BB.misk_icon 
+			if (slot_legcuffed_str)		I = BB.misk_icon 
 			else
 				world.log << "##ERROR. Wrong sprite group for mob icon \"[slot]\""
 		if(icon_state in icon_states(I))
