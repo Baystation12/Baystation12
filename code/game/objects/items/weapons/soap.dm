@@ -89,3 +89,7 @@
 /obj/item/weapon/soap/gold
 	desc = "One true soap to rule them all."
 	icon_state = "soapgold"
+
+/obj/item/weapon/soap/brig
+	desc = "Train your security guards!"
+	icon_state = "soapbrig"
