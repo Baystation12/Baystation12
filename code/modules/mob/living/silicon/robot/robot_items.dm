@@ -409,3 +409,45 @@
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
 	volume = 150
+
+/obj/item/robot_rack
+	name = "a generic robot rack"
+	desc = "A rack for carrying large items as a robot."
+	var/object_type                    //The types of object the rack holds (subtypes are allowed).
+	var/interact_type                  //Things of this type will trigger attack_hand when attacked by this.
+	var/capacity = 1                   //How many objects can be held.
+	var/list/obj/item/held = list()    //What is being held.
+
+/obj/item/robot_rack/examine(mob/user)
+	. = ..()
+	to_chat(user, "It can hold up to [capacity] item[capacity == 1 ? "" : "s"].")
+
+/obj/item/robot_rack/Initialize(mapload, starting_objects = 0)
+	. = ..()
+	for(var/i = 1, i <= min(starting_objects, capacity), i++)
+		held += new object_type(src)
+
+/obj/item/robot_rack/attack_self(mob/user)
+	if(!length(held))
+		to_chat(user, "<span class='notice'>The rack is empty.</span>")
+		return
+	var/obj/item/R = held[length(held)]
+	R.forceMove(get_turf(src))
+	held -= R
+	R.attack_self(user) // deploy it
+	to_chat(user, "<span class='notice'>You deploy [R].</span>")
+	R.add_fingerprint(user)
+
+/obj/item/robot_rack/resolve_attackby(obj/O, mob/user, click_params)
+	if(istype(O, object_type))
+		if(length(held) < capacity)
+			to_chat(user, "<span class='notice'>You collect [O].</span>")
+			O.forceMove(src)
+			held += O
+			return
+		to_chat(user, "<span class='notice'>\The [src] is full and can't store any more items.</span>")
+		return
+	if(istype(O, interact_type))
+		O.attack_hand(user)
+		return
+	. = ..()

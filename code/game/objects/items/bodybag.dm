@@ -83,7 +83,7 @@
 	return 0
 
 /obj/structure/closet/body_bag/proc/fold(var/user)
-	if(!ishuman(user))	return 0
+	if(!(ishuman(user) || isrobot(user)))	return 0
 	if(opened)	return 0
 	if(contents.len)	return 0
 	visible_message("[user] folds up the [name]")
@@ -103,3 +103,12 @@
 			icon_state = "bodybag_closed1"
 		else
 			icon_state = icon_closed
+
+/obj/item/robot_rack/body_bag
+	name = "stasis bag rack"
+	desc = "A rack for carrying folded stasis bags and body bags."
+	icon = 'icons/obj/cryobag.dmi'
+	icon_state = "bodybag_folded"
+	object_type = /obj/item/bodybag
+	interact_type = /obj/structure/closet/body_bag
+	capacity = 3
