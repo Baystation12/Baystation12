@@ -8,10 +8,10 @@
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	invisibility = 0
+	alpha = 0
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0
 	var/diffused_for = 0
-
 
 /obj/effect/shield/update_icon()
 	if(gen && gen.check_flag(MODEFLAG_PHOTONIC) && !disabled_for && !diffused_for)
@@ -21,8 +21,18 @@
 
 	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
 		icon_state = "shield_overcharged"
+
+
+		if(!disabled_for && !diffused_for)
+			set_light(1, 0.5, 2, 2, COLOR_ORANGE)
+		else
+			set_light(0)
 	else
 		icon_state = "shield_normal"
+		if(!disabled_for && !diffused_for)
+			set_light(1, 0.5, 2, 2, "#00ccaa") //Perhaps a bit bright, and entirely the wrong color, but it's a prettier one.
+		else
+			set_light(0)
 
 // Prevents shuttles, singularities and pretty much everything else from moving the field segments away.
 // The only thing that is allowed to move us is the Destroy() proc.
@@ -35,7 +45,8 @@
 /obj/effect/shield/New()
 	..()
 	update_nearby_tiles()
-
+	animate(src, alpha = 255, time = 1 SECOND)
+	
 
 /obj/effect/shield/Destroy()
 	. = ..()
@@ -58,7 +69,8 @@
 		gen.damaged_segments |= src
 	disabled_for += duration
 	set_density(0)
-	set_invisibility(INVISIBILITY_MAXIMUM)
+	animate(src, alpha = 0, time = 1 SECOND) //This needs some testing to determine if this is viable or ideal in any way
+	addtimer(CALLBACK(src, /atom/proc/set_invisibility, INVISIBILITY_MAXIMUM), 5)
 	update_nearby_tiles()
 	update_icon()
 	update_explosion_resistance()
@@ -74,7 +86,9 @@
 
 	if(!disabled_for && !diffused_for)
 		set_density(1)
-		set_invisibility(0)
+
+		animate(src, alpha = 255, time = 1 SECOND)
+		addtimer(CALLBACK(src, /atom/proc/set_invisibility, 0), 5)
 		update_nearby_tiles()
 		update_icon()
 		update_explosion_resistance()
@@ -90,9 +104,11 @@
 	diffused_for = max(duration, 0)
 	gen.damaged_segments |= src
 	set_density(0)
-	set_invisibility(INVISIBILITY_MAXIMUM)
-	update_nearby_tiles()
+	//animate(src, alpha = 0, time = 1 SECOND) //This would be called often, and would be quite expensive at that!.. Perhaps it's wisest just to make a new state.
+	addtimer(CALLBACK(src, /atom/proc/set_invisibility, INVISIBILITY_MAXIMUM), 5)
 	update_icon()
+	update_nearby_tiles()
+
 	update_explosion_resistance()
 
 /obj/effect/shield/attack_generic(var/source, var/damage, var/emote)
@@ -146,6 +162,7 @@
 			fail_adjacent_segments(rand(8, 16), hitby)
 			for(var/obj/effect/shield/S in field_segments)
 				S.fail(1)
+				CHECK_TICK
 			return
 
 
