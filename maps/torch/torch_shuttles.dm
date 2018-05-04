@@ -678,3 +678,10 @@
 /obj/effect/shuttle_landmark/torch/transit/aquila
 	name = "In transit"
 	landmark_tag = "nav_transit_aquila"
+
+/obj/effect/overmap/ship/bogani
+	name = "Unidentified vessel"
+	fore_dir = WEST
+	vessel_mass = 250
+	default_delay = 6 SECONDS
+	generic_waypoints = list("nav_hangar_bogani")

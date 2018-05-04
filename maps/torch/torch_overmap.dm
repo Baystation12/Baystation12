@@ -38,7 +38,12 @@
 		"nav_deck2_aquila",
 		"nav_deck3_aquila",
 		"nav_deck4_aquila",
-		"nav_bridge_aquila"
+		"nav_bridge_aquila",
+		"nav_deck1_bogani",
+		"nav_deck2_bogani",
+		"nav_deck3_bogani",
+		"nav_deck4_bogani",
+		"nav_bridge_bogani"
 	)
 
 /obj/machinery/computer/shuttle_control/explore/aquila
@@ -55,3 +60,13 @@
 	name = "guppy control console"
 	shuttle_tag = "Guppy"
 	req_access = list(access_guppy_helm)
+
+
+/obj/machinery/computer/shuttle_control/explore/bogani
+	name = "alien control console"
+	shuttle_area = /area/bogshuttle_hangar/start
+	shuttle_tag = "Bogani"
+	req_access = list(202)
+	icon_keyboard = "bogconsole"
+	icon_screen = "bogshuttle"
+	icon_state = "bogconsole"

@@ -481,6 +481,46 @@
 	requires_power = 0
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
+//Bogani
+
+/area/bog_vessel
+	name = "\improper Unidentified Vessel"
+	icon_state = "green"
+	requires_power = 0
+	dynamic_lighting = 1
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
+/area/bogshuttle_hangar
+	name = "\improper Mothership hangar deck"
+	icon_state = "yellow"
+	requires_power = 0
+	dynamic_lighting = 1
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
+/area/bogshuttle_hangar/start
+	name = "\improper Bogani Shuttle"
+	icon_state = "yellow"
+
+/area/bogshuttle_hangar/bridge
+	name = "northeast of bridge"
+	icon_state = "northeast"
+
+/area/bogshuttle_hangar/firstdeck
+	name = "south of first deck"
+	icon_state = "south"
+
+/area/bogshuttle_hangar/seconddeck
+	name = "south of second deck"
+	icon_state = "south"
+
+/area/bogshuttle_hangar/thirddeck
+	name = "north of third deck"
+	icon_state = "north"
+
+/area/bogshuttle_hangar/fourthdeck
+	name = "south of fourth deck"
+	icon_state = "south"
+
 //Skipjack
 
 /area/skipjack_station

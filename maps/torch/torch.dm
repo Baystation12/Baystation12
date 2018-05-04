@@ -73,6 +73,7 @@
 	#include "torch-5.dmm"
 	#include "torch-6.dmm"
 	#include "torch-7.dmm"
+	#include "torch-8.dmm"
 	#include "../away/empty.dmm"
 	#include "../away/mining/mining.dm"
 	#include "../away/derelict/derelict.dm"
