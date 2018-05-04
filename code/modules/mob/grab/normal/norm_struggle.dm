@@ -15,7 +15,7 @@
 	breakability = 3
 
 	grab_slowdown = 10
-	upgrade_cooldown = 20
+	upgrade_cooldown = 1 SECOND
 
 	can_downgrade_on_resist = 0
 
@@ -45,8 +45,7 @@
 		G.upgrade(TRUE)
 	else
 		affecting.visible_message("<span class='warning'>[affecting] struggles against [assailant]!</span>")
-		spawn(10)
-			handle_resist(G)
+		addtimer(CALLBACK(src, /obj/item/grab/proc/handle_resist, G), 1 SECOND)
 		if(do_after(assailant, upgrade_cooldown, G, can_move = 1))
 			done_struggle = TRUE
 			G.upgrade(TRUE)
