@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - bugfix: "The tax program should no longer produce duplicate copies or unexpected behavior."
