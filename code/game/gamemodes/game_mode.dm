@@ -524,6 +524,8 @@ proc/get_nt_opposed()
 	set name = "Check Round Info"
 	set category = "OOC"
 
+	GLOB.using_map.map_info(src)
+
 	if(!ticker || !ticker.mode)
 		to_chat(usr, "Something is terribly wrong; there is no gametype.")
 		return
@@ -536,4 +538,3 @@ proc/get_nt_opposed()
 			to_chat(usr, "[ticker.mode.extended_round_description]")
 	else
 		to_chat(usr, "<i>Shhhh</i>. It's a secret.")
-	return
