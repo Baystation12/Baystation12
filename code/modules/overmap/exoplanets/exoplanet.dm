@@ -379,7 +379,7 @@
 			if(color == "RANDOM")
 				color = get_random_colour(0,75,190)
 			S.set_trait(TRAIT_LEAVES_COLOUR,color)
-			S.chems["woodpulp"] = 1
+			S.chems[/datum/reagent/woodpulp] = 1
 			big_flora_types += S
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)
