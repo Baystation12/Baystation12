@@ -1,6 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "The crisis borg module comes with a stasis bag rack, which can hold 3 body bags or stasis bags. Starts empty to avoid exploits: go find your own."
-  - tweak: "Borgs now fold up roller beds by clicking and dragging, like everyone else."
-  - tweak: "Borg interactions with ironing boards while having the roller rack equipped are similar to humans (they still can't iron, though)."
