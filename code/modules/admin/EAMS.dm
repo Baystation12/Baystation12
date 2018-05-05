@@ -2,10 +2,6 @@
 
 /datum/configuration/var/EAMSallowedCountries = list("ru", "am", "az", "by", "kz", "kg", "mb", "ti", "uz", "ua", "tm")
 
-/proc/EAMS_DBError(num)
-	config.eams = 0
-	log_and_message_admins("The Database Error #[num] has occured! Epic Anti-Multiaccount System was deactivated!", 0)
-
 //
 //	Toggle Verb
 //
@@ -26,7 +22,7 @@
 //
 
 /proc/EAMS_GetPlayerPannelButton(var/datum/admins/source, var/client/player)
-	var/result = {"<br><br><b>EAMS whitelisted:</b>  
+	var/result = {"<br><br><b>EAMS whitelisted:</b>
 		[player.whitelisted ? "<A href='?src=\ref[source];removefromwhitelist=\ref[player]'>Yes</A>" : "<A href='?src=\ref[source];addtowhitelist=\ref[player]'>No</A>"]
 		"}
 	return result
@@ -43,7 +39,7 @@
 			player.whitelisted = FALSE
 	else
 		return
-	
+
 	source.show_player_panel(player.mob) // update panel
 
 //
@@ -95,43 +91,45 @@
 
 // return TRUE if user IP is allowed
 /mob/new_player/proc/EAMS_CheckIP()
-	if (!config.eams)	// EAMS doesn't active
-		return TRUE
-
-	if(!dbcon || !dbcon.IsConnected())  //Database wasn't connected
-		EAMS_DBError(1)
+	if (!config.eams)	// EAMS isn't active
 		return TRUE
 
 	if(!lastKnownIP || client.holder) // admin or host
-		return TRUE
-
-	// check country
-	var/DBQuery/query = dbcon.NewQuery("SELECT country FROM ip2nation WHERE ip < INET_ATON(\"[lastKnownIP]\") ORDER BY ip DESC LIMIT 0,1")
-	if (!query.Execute())
-		EAMS_DBError(2)
-		return TRUE
-
-	if (!query.NextRow())
-		EAMS_DBError(3)
-		return TRUE
-
-	var/country = ""
-	var/countryCode = query.item[1]
-
-	if (countryCode in config.EAMSallowedCountries)
 		return TRUE
 
 	// check whitelist
 	if (client.whitelisted)
 		return TRUE
 
-	
-	// Bad IP and player doesn't whitelisted.. so create Warning
-	query = dbcon.NewQuery("SELECT country FROM ip2nationcountries WHERE code = \"[countryCode]\" LIMIT 1")
-	if (query.Execute())
-		if (query.NextRow())
-			country = query.item[1]
+	// check country
+	var/list/http = world.Export("http://ip-api.com/json/[lastKnownIP]?fields=country,countryCode,status,message")
 
-	usr << "<span class='warning'>You was blocked by EAMS! Please, contact Administrators.</span>"
+	if(!http)
+		log_and_message_admins("EAMS could not check [key]: connection failed")
+		return TRUE
+
+	var/list/response
+	try
+		response = json_decode(file2text(http["CONTENT"]))
+	catch (var/exception/e)
+		log_and_message_admins("EAMS could not check [key]: json decode failed: [e.name]")
+		return TRUE
+
+	if (response["status"] == "fail")
+		log_and_message_admins("EAMS could not check [key]: [response["message"]]")
+		return TRUE
+
+	var/countryCode = response["countryCode"]
+
+	if (countryCode in config.EAMSallowedCountries)
+		return TRUE
+
+	// Bad IP and player isn't whitelisted.. so create a warning
+	var/country = response["country"]
+
+	if (country == "")
+		country = "unknown"
+
+	usr << "<span class='warning'>You were blocked by EAMS! Please, contact Administrators.</span>"
 	log_and_message_admins("<span class='adminnotice'>Failed join the game: [key] ([lastKnownIP]) connected from [country] ([countryCode]) </span>", 0)
 	return FALSE
