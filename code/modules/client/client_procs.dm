@@ -155,8 +155,8 @@
 		del(src)
 		return 0
 
-	// Load whitelisted from DB
-	whitelisted = EAMS_GetWhitelistedFromDB(src)
+	// Load EAMS data
+	EAMS_CollectData()
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = preferences_datums[ckey]

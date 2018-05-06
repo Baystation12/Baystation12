@@ -20,7 +20,8 @@
 	var/adminhelped = 0
 
 	var/staffwarn = null
-	var/whitelisted = FALSE
+	
+	var/datum/eams_info/eams_info = new
 
 		///////////////
 		//SOUND STUFF//
