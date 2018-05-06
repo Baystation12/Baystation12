@@ -1,5 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Can now use multitool on secure guns to disable tracker. Prevents gun from firing, but won't report its coordinates to the force auth program."
-  - rscadd: "Makes emagged secure guns not show up too."
