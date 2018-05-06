@@ -109,11 +109,11 @@
 	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
-/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade, var/additional_skips)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(!outfit)
 		return FALSE
-	. = outfit.equip(H, title, alt_title, OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA)
+	. = outfit.equip(H, title, alt_title, OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP|OUTFIT_ADJUSTMENT_SKIP_ID_PDA|additional_skips)
 
 /datum/job/proc/get_access()
 	if(minimal_access.len && (!config || config.jobs_have_minimal_access))
@@ -233,5 +233,24 @@
 		var/datum/mil_rank/R = T
 		if(B && !(initial(R.name) in B.ranks))
 			continue
-		res += initial(R.name)
+		res |= initial(R.name)
 	return english_list(res)
+
+/datum/job/proc/get_description_blurb()
+	return ""
+
+/datum/job/proc/get_job_icon()
+	if(!job_master.job_icons[title])
+		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
+		dress_mannequin(mannequin)
+		mannequin.dir = SOUTH
+		var/icon/preview_icon = getFlatIcon(mannequin)
+
+		preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
+		job_master.job_icons[title] = preview_icon
+
+	return job_master.job_icons[title]
+
+/datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
+	mannequin.delete_inventory(TRUE)
+	equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK)

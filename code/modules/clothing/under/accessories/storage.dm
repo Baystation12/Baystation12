@@ -146,11 +146,17 @@
 		/obj/item/weapon/magnetic_ammo,
 		/obj/item/ammo_magazine,
 		/obj/item/weapon/net_shell,
-		/obj/item/weapon/reagent_containers/glass/beaker/vial
+		/obj/item/weapon/reagent_containers/glass/beaker/vial,
+		/obj/item/weapon/paper,
+		/obj/item/weapon/pen,
+		/obj/item/weapon/photo,
+		/obj/item/weapon/marshalling_wand,
+		/obj/item/weapon/reagent_containers/pill,
+		/obj/item/weapon/storage/pill_bottle
 	)
 
 /obj/item/clothing/accessory/storage/bandolier/safari/Initialize()
 	. = ..()
-
+	
 	for(var/i = 0, i < slots, i++)
 		new /obj/item/weapon/net_shell(hold)

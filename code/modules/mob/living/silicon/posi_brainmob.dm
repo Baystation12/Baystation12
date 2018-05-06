@@ -24,7 +24,7 @@
 		if(stat!=DEAD)	//If not dead.
 			death(1)	//Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
 		ghostize()		//Ghostize checks for key so nothing else is necessary.
-	..()
+	return ..()
 
 /mob/living/silicon/sil_brainmob/update_canmove()
 	if(in_contents_of(/obj/mecha))

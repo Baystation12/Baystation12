@@ -2,6 +2,7 @@
 	name = "ironing board"
 	desc = "An ironing board to unwrinkle your wrinkled clothing."
 	icon = 'icons/obj/ironing.dmi'
+	item_form_type = /obj/item/roller/ironingboard
 
 	var/obj/item/clothing/cloth // the clothing on the ironing board
 	var/obj/item/weapon/ironingiron/holding // ironing iron on the board
@@ -58,20 +59,6 @@
 		overlays += new /icon(cloth.icon, cloth.icon_state)
 
 /obj/structure/bed/roller/ironingboard/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I,/obj/item/roller_holder))
-		if(holding && user.put_in_hands(holding))
-			remove_item(holding)
-			return
-		else if(cloth && user.put_in_hands(cloth))
-			remove_item(cloth)
-			return
-		else if(buckled_mob)
-			user_unbuckle_mob(user)
-			return
-
-		collapse()
-		return
-
 	if(!density)
 		if(istype(I,/obj/item/clothing) || istype(I,/obj/item/weapon/ironingiron))
 			to_chat(user, "<span class='notice'>[src] isn't deployed!</span>")
@@ -138,29 +125,17 @@
 		if(holding && user.put_in_hands(holding))
 			remove_item(holding)
 			return
-		else if(cloth && user.put_in_hands(cloth))
+		if(cloth && user.put_in_hands(cloth))
 			remove_item(cloth)
 			return
-		else if(buckled_mob)
-			user_unbuckle_mob(user)
-			return
-
-		to_chat(user, "You fold the ironing table down.")
-		set_density(0)
+		if(!buckled_mob)
+			to_chat(user, "You fold the ironing table down.")
+			set_density(0)
 	else
 		to_chat(user, "You deploy the ironing table.")
 		set_density(1)
-
 	update_icon()
-
-	..()
-
-/obj/structure/bed/roller/ironingboard/MouseDrop(var/over_object, var/src_location, var/over_location)
-	if(!CanMouseDrop(over_object))	return
-	if(!ishuman(usr))	return
-	if(buckled_mob)	return
-
-	collapse()
+	. = ..()	//Takes care of unbuckling.
 
 /obj/structure/bed/roller/ironingboard/collapse()
 	var/turf/T = get_turf(src)
@@ -170,17 +145,10 @@
 	if(holding)
 		holding.forceMove(T)
 		remove_item(holding)
-
-	visible_message("[usr] collapses [src].")
-	new /obj/item/roller/ironingboard(T)
-	qdel(src)
+	..()
 
 /obj/item/roller/ironingboard
 	name = "ironing board"
 	desc = "A collapsed ironing board that can be carried around."
 	icon = 'icons/obj/ironing.dmi'
-
-/obj/item/roller/ironingboard/attack_self(var/mob/user)
-	var/obj/structure/bed/roller/ironingboard/R = new /obj/structure/bed/roller/ironingboard(user.loc)
-	R.add_fingerprint(user)
-	qdel(src)
+	structure_form_type = /obj/structure/bed/roller/ironingboard

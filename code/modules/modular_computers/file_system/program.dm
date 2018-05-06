@@ -48,6 +48,31 @@
 	temp.usage_flags = usage_flags
 	return temp
 
+// Used by programs that manipulate files.
+/datum/computer_file/program/proc/get_file(var/filename)
+	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+	if(!HDD)
+		return
+	var/datum/computer_file/data/F = HDD.find_file_by_name(filename)
+	if(!istype(F))
+		return
+	return F
+
+/datum/computer_file/program/proc/create_file(var/newname, var/data = "", var/file_type = /datum/computer_file/data)
+	if(!newname)
+		return
+	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+	if(!HDD)
+		return
+	if(get_file(newname))
+		return
+	var/datum/computer_file/data/F = new file_type
+	F.filename = newname
+	F.stored_data = data
+	F.calculate_size()
+	if(HDD.store_file(F))
+		return F
+
 // Relays icon update to the computer.
 /datum/computer_file/program/proc/update_computer_icon()
 	if(computer)
@@ -127,7 +152,8 @@
 	if(can_run(user, 1) || !requires_access_to_run)
 		if(nanomodule_path)
 			NM = new nanomodule_path(src, new /datum/topic_manager/program(src), src)
-			NM.using_access = user.GetAccess()
+			if(user)
+				NM.using_access = user.GetAccess()
 		if(requires_ntnet && network_destination)
 			generate_network_log("Connection opened to [network_destination].")
 		program_state = PROGRAM_STATE_ACTIVE

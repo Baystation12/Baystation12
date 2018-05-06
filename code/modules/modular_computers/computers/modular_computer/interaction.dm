@@ -207,9 +207,11 @@
 		to_chat(user, "<span class='notice'>You insert [W] into [src].</span>")
 		return
 	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper_bundle))
-		if(!nano_printer)
-			return
-		nano_printer.attackby(W, user)
+		var/obj/item/weapon/paper/paper = W
+		if(scanner && paper.info)
+			scanner.do_on_attackby(user, W)
+		else if(nano_printer)
+			nano_printer.attackby(W, user)
 	if(istype(W, /obj/item/weapon/aicard))
 		if(!ai_slot)
 			return
@@ -287,3 +289,8 @@
 	var/mob/M = usr
 	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
 		return attack_self(M)
+
+/obj/item/modular_computer/afterattack(atom/target, mob/user, proximity)
+	. = ..()
+	if(scanner)
+		scanner.do_on_afterattack(user, target, proximity)

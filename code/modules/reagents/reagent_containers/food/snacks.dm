@@ -589,11 +589,15 @@
 	desc = "We all love tofu."
 	filling_color = "#fffee0"
 	center_of_mass = "x=17;y=10"
-	nutriment_amt = 3
+//	nutriment_amt = 3
 	nutriment_desc = list("tofu" = 3, "goeyness" = 3)
 	New()
 		..()
 		src.bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/tofu/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/softtofu, 6)
 
 /obj/item/weapon/reagent_containers/food/snacks/tofurkey
 	name = "\improper Tofurkey"
@@ -2063,6 +2067,20 @@
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/drink/juice/tomato, 10)
+		bitesize = 4
+
+/obj/item/weapon/reagent_containers/food/snacks/nanopasta
+	name = "nanopasta"
+	desc = "Nanomachines, son!"
+	icon_state = "nanopasta"
+	trash = /obj/item/trash/plate
+	filling_color = "#535e66"
+	center_of_mass = "x=16;y=10"
+	nutriment_amt = 6
+
+/obj/item/weapon/reagent_containers/food/snacks/nanopasta/New()
+		..()
+		reagents.add_reagent(/datum/reagent/nanites, 10)
 		bitesize = 4
 
 /obj/item/weapon/reagent_containers/food/snacks/meatballspagetti

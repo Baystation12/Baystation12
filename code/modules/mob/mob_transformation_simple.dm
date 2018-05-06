@@ -11,9 +11,6 @@
 	if(!new_type)
 		new_type = input("Mob type path:", "Mob type") as text|null
 
-	if(istext(new_type))
-		new_type = text2path(new_type)
-
 	if( !ispath(new_type) )
 		to_chat(usr, "Invalid type path (new_type = [new_type]) in change_mob_type(). Contact a coder.")
 		return

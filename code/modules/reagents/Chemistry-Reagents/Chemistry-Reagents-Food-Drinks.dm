@@ -83,6 +83,14 @@
 	taste_description = "egg"
 	color = "#ffffaa"
 
+//vegetamarian alternative that is safe for skrell to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
+
+/datum/reagent/nutriment/softtofu
+	name = "plant protein"
+	description = "A gooey pale bean paste."
+	taste_description = "healthy sadness"
+	color = "#ffffff"
+
 /datum/reagent/nutriment/honey
 	name = "Honey"
 	description = "A golden yellow syrup, loaded with sugary sweetness."

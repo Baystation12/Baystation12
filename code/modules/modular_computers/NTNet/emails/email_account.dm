@@ -1,5 +1,6 @@
 /datum/computer_file/data/email_account/
 	var/list/inbox = list()
+	var/list/outbox = list()
 	var/list/spam = list()
 	var/list/deleted = list()
 
@@ -24,7 +25,7 @@
 	. = ..()
 
 /datum/computer_file/data/email_account/proc/all_emails()
-	return (inbox | spam | deleted)
+	return (inbox | spam | deleted | outbox)
 
 /datum/computer_file/data/email_account/proc/send_mail(var/recipient_address, var/datum/computer_file/data/email_message/message, var/relayed = 0)
 	var/datum/computer_file/data/email_account/recipient
@@ -39,6 +40,7 @@
 	if(!recipient.receive_mail(message, relayed))
 		return
 
+	outbox.Add(message)
 	ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].")
 	return 1
 

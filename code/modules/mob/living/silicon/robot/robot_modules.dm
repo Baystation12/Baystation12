@@ -222,7 +222,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/circular_saw(src)
 	src.modules += new /obj/item/weapon/surgicaldrill(src)
 	src.modules += new /obj/item/weapon/gripper/organ(src)
-	src.modules += new /obj/item/roller_holder(src)
+	src.modules += new /obj/item/robot_rack/roller(src, 1)
 	src.modules += new /obj/item/weapon/shockpaddles/robot(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
@@ -268,7 +268,8 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/borg/sight/hud/med(src)
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.modules += new /obj/item/device/reagent_scanner/adv(src)
-	src.modules += new /obj/item/roller_holder(src)
+	src.modules += new /obj/item/robot_rack/roller(src, 1)
+	src.modules += new /obj/item/robot_rack/body_bag(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/crisis(src)
 	src.modules += new /obj/item/weapon/shockpaddles/robot(src)
 	src.modules += new /obj/item/weapon/reagent_containers/dropper/industrial(src)
@@ -429,7 +430,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/borg/sight/hud/sec(src)
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
-	src.modules += new /obj/item/weapon/gun/energy/taser/mounted/cyborg(src)
+	src.modules += new /obj/item/weapon/gun/energy/secure/gun/mounted(src)
 	src.modules += new /obj/item/taperoll/police(src)
 	src.modules += new /obj/item/device/megaphone(src)
 	src.modules += new /obj/item/device/holowarrant(src)
@@ -438,7 +439,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
-	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in src.modules
+	var/obj/item/weapon/gun/energy/secure/gun/mounted/T = locate() in src.modules
 	if(T && T.power_supply)
 		if(T.power_supply.charge < T.power_supply.maxcharge)
 			T.power_supply.give(T.charge_cost * amount)

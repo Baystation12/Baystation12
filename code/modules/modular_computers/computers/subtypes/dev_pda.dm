@@ -6,7 +6,6 @@
 	icon_state_unpowered = "pda"
 	hardware_flag = PROGRAM_PDA
 	max_hardware_size = 1
-	modifiable = FALSE
 	w_class = ITEM_SIZE_SMALL
 	light_strength = 5
 	slot_flags = SLOT_ID | SLOT_BELT
@@ -25,6 +24,10 @@
 			return
 
 	SetName("[id.get_display_name()]'s PDA")
+
+/obj/item/modular_computer/pda/Initialize()
+	. = ..()
+	enable_computer()
 
 /obj/item/modular_computer/pda/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -55,11 +58,19 @@
 	icon_state = "pda-m"
 	icon_state_unpowered = "pda-m"
 
+/obj/item/modular_computer/pda/chemistry
+	icon_state = "pda-m"
+	icon_state_unpowered = "pda-m"
+
 /obj/item/modular_computer/pda/engineering
 	icon_state = "pda-e"
 	icon_state_unpowered = "pda-e"
 
 /obj/item/modular_computer/pda/security
+	icon_state = "pda-s"
+	icon_state_unpowered = "pda-s"
+
+/obj/item/modular_computer/pda/forensics
 	icon_state = "pda-s"
 	icon_state_unpowered = "pda-s"
 

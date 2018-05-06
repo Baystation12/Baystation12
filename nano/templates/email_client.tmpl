@@ -138,6 +138,7 @@
 		</div>		
 	{{else}}
 		{{:helper.link('Inbox', 'mail-closed', {'set_folder' : 'Inbox'}, data.folder == 'Inbox' ? 'selected' : null)}}
+		{{:helper.link('Sent', 'arrowreturnthick-1-w', {'set_folder' : 'Sent'}, data.folder == 'Sent' ? 'selected' : null)}}
 		{{:helper.link('Spam', 'cancel', {'set_folder' : 'Spam'}, data.folder == 'Spam' ? 'selected' : null)}}
 		{{:helper.link('Deleted', 'trash', {'set_folder' : 'Deleted'}, data.folder == 'Deleted' ? 'selected' : null)}}
 		<br><br>

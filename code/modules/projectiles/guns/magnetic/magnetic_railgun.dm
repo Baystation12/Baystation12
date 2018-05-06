@@ -16,6 +16,7 @@
 	var/initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
 	var/slowdown_held = 2
 	var/slowdown_worn = 1
+	gun_unreliable = 0
 
 /obj/item/weapon/gun/magnetic/railgun/Initialize()
 
@@ -24,9 +25,7 @@
 
 	cell = new initial_cell_type(src)
 	if (ispath(loaded))
-		if(load_sheet_max > 1)
-			loaded = new loaded(src,load_sheet_max)
-		loaded = new loaded
+		loaded = new loaded (src, load_sheet_max)
 	slowdown_per_slot[slot_l_hand] =  slowdown_held
 	slowdown_per_slot[slot_r_hand] =  slowdown_held
 	slowdown_per_slot[slot_back] =    slowdown_worn

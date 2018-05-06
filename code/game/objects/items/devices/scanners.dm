@@ -428,21 +428,18 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 		return
 	if(!istype(O))
 		return
+	var/dat = reagent_scan_results(O, details)
+	to_chat(user, "<span class = 'notice'>[jointext(dat,"<br>")]</span>")
 
-	if(!isnull(O.reagents))
-		var/dat = ""
-		if(O.reagents.reagent_list.len > 0)
-			var/one_percent = O.reagents.total_volume / 100
-			for (var/datum/reagent/R in O.reagents.reagent_list)
-				dat += "\n \t <span class='notice'>[R][details ? ": [R.volume / one_percent]%" : ""]</span>"
-		if(dat)
-			to_chat(user, "<span class='notice'>Chemicals found: [dat]</span>")
-		else
-			to_chat(user, "<span class='notice'>No active chemical agents found in [O].</span>")
-	else
-		to_chat(user, "<span class='notice'>No significant chemical agents found in [O].</span>")
-
-	return
+/proc/reagent_scan_results(obj/O, details = 0)
+	if(isnull(O.reagents))
+		return list("No significant chemical agents found in [O].")
+	if(O.reagents.reagent_list.len == 0)
+		return list("No active chemical agents found in [O].")
+	. = list("Chemicals found:")
+	var/one_percent = O.reagents.total_volume / 100
+	for (var/datum/reagent/R in O.reagents.reagent_list)
+		. += "[R][details ? ": [R.volume / one_percent]%" : ""]"
 
 /obj/item/device/reagent_scanner/adv
 	name = "advanced reagent scanner"

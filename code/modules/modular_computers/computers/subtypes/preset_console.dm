@@ -4,6 +4,7 @@
 	tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)
 	hard_drive = new/obj/item/weapon/computer_hardware/hard_drive/super(src)
 	network_card = new/obj/item/weapon/computer_hardware/network_card/wired(src)
+	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)
 
 // Engineering
 /obj/item/modular_computer/console/preset/engineering/install_default_programs()

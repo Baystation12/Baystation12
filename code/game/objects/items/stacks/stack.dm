@@ -26,7 +26,7 @@
 	..()
 	if (!stacktype)
 		stacktype = type
-	if (amount)
+	if (amount > 1)
 		src.amount = amount
 
 /obj/item/stack/Destroy()

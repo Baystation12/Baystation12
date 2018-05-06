@@ -1345,6 +1345,17 @@
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/weapon/reagent_containers/food/snacks/dough(location)
 
+/datum/chemical_reaction/soydough
+	name = "Soy dough"
+	result = null
+	required_reagents = list(/datum/reagent/nutriment/softtofu = 3, /datum/reagent/nutriment/flour = 10, /datum/reagent/water = 10)
+	result_amount = 1
+
+/datum/chemical_reaction/soydough/on_reaction(var/datum/reagents/holder, var/created_volume)
+	var/location = get_turf(holder.my_atom)
+	for(var/i = 1, i <= created_volume, i++)
+		new /obj/item/weapon/reagent_containers/food/snacks/dough(location)
+
 //batter reaction as food precursor, for things that don't use pliable dough precursor.
 
 /datum/chemical_reaction/batter
@@ -1358,6 +1369,12 @@
 	result = /datum/reagent/nutriment/batter/cakebatter
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/nutriment/batter = 2)
 	result_amount = 3
+
+/datum/chemical_reaction/soybatter
+	name = "Vegan Batter"
+	result = /datum/reagent/nutriment/batter
+	required_reagents = list(/datum/reagent/nutriment/softtofu = 3, /datum/reagent/nutriment/flour = 5, /datum/reagent/drink/milk = 5)
+	result_amount = 10
 
 /datum/chemical_reaction/syntiflesh
 	name = "Syntiflesh"

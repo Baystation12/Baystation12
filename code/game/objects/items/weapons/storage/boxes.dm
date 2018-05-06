@@ -75,7 +75,7 @@
 					/obj/item/weapon/tank/emergency/oxygen = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
-					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/vox/
@@ -85,7 +85,7 @@
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/nitrogen = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
-					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/engineer/
@@ -97,7 +97,7 @@
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
-					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/gloves
@@ -409,14 +409,14 @@
 /obj/item/weapon/storage/box/glowsticks
 	name = "box of mixed glowsticks"
 	icon_state = "box"
-	startswith = list(/obj/item/device/flashlight/glowstick = 1, /obj/item/device/flashlight/glowstick/red = 1,
-					/obj/item/device/flashlight/glowstick/blue = 1, /obj/item/device/flashlight/glowstick/orange = 1,
-					/obj/item/device/flashlight/glowstick/yellow = 1, /obj/item/device/flashlight/glowstick/random = 1)
+	startswith = list(/obj/item/device/flashlight/flare/glowstick = 1, /obj/item/device/flashlight/flare/glowstick/red = 1,
+					/obj/item/device/flashlight/flare/glowstick/blue = 1, /obj/item/device/flashlight/flare/glowstick/orange = 1,
+					/obj/item/device/flashlight/flare/glowstick/yellow = 1, /obj/item/device/flashlight/flare/glowstick/random = 1)
 
 /obj/item/weapon/storage/box/greenglowsticks
 	name = "box of green glowsticks"
 	icon_state = "box"
-	startswith = list(/obj/item/device/flashlight/glowstick = 6)
+	startswith = list(/obj/item/device/flashlight/flare/glowstick = 6)
 
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"

@@ -121,9 +121,8 @@
 		. += "<tr bgcolor='[job.selection_color]'><td width='40%' align='right'>"
 		var/rank = job.title
 		lastJob = job
-
+		. += "<a href='?src=\ref[src];job_info=[rank]'>\[?\]</a>"
 		. += "<a href='?src=\ref[src];set_skills=[rank]'>"
-
 		if(job.total_positions == 0 && job.spawn_positions == 0)
 			. += "<del>[rank]</del></a></td><td><b> \[UNAVAILABLE]</b></td></tr>"
 			continue
@@ -289,6 +288,42 @@
 			var/level_name = S.levels[i]
 			HTML +=	"<br><b>[level_name]</b>: [S.levels[level_name]]<br>"
 		show_browser(user, jointext(HTML, null), "window=\ref[user]skillinfo")
+
+	else if(href_list["job_info"])
+		var/rank = href_list["job_info"]
+		var/datum/job/job = job_master.GetJob(rank)
+		var/dat = list()
+
+		dat += "<p style='background-color: [job.selection_color]'><br><br><p>"
+		if(job.alt_titles)
+			dat += "<i><b>Alternative titles:</b> [english_list(job.alt_titles)].</i>"
+		send_rsc(user, job.get_job_icon(), "job[ckey(rank)].png")
+		dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
+		if(job.department)
+			dat += "<b>Department:</b> [job.department]."
+			if(job.head_position)
+				dat += "You are in charge of this department."
+
+		dat += "You answer to <b>[job.supervisors]</b> normally."
+
+		if(job.allowed_branches)
+			dat += "You can be of following ranks:"
+			for(var/T in job.allowed_branches)
+				var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+				dat += "<li>[B.name]: [job.get_ranks(B.name)]"
+		dat += "<hr style='clear:left;'>"
+		if(config.wikiurl)
+			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
+		var/description = job.get_description_blurb()
+		if(description)
+			dat += html_encode(description)
+		var/datum/browser/popup = new(user, "Job Info", "[capitalize(rank)]", 430, 520, src)
+		popup.set_content(jointext(dat,"<br>"))
+		popup.open()
+
+	else if(href_list["job_wiki"])
+		var/rank = href_list["job_wiki"]
+		open_link(user,"[config.wikiurl][rank]")
 
 	return ..()
 

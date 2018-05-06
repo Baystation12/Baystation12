@@ -47,6 +47,7 @@
 	card_slot = new/obj/item/weapon/computer_hardware/card_slot(src)
 	battery_module = new/obj/item/weapon/computer_hardware/battery_module(src)
 	battery_module.charge_to_full()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)
 
 /obj/item/modular_computer/tablet/lease/preset/command/install_default_programs()
 	..()

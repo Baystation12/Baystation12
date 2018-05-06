@@ -111,7 +111,8 @@
 	var/breath_type = "oxygen"                        // Non-oxygen gas breathed, if any.
 	var/poison_type = "phoron"                        // Poisonous air.
 	var/exhale_type = "carbon_dioxide"                // Exhaled gas type.
-	var/cold_level_1 = 243                           // Cold damage level 1 below this point. -30 Celsium degrees
+	var/max_pressure_diff = 60						  // Maximum pressure difference that is safe for lungs
+	var/cold_level_1 = 243                            // Cold damage level 1 below this point. -30 Celsium degrees
 	var/cold_level_2 = 200                            // Cold damage level 2 below this point.
 	var/cold_level_3 = 120                            // Cold damage level 3 below this point.
 	var/heat_level_1 = 360                            // Heat damage level 1 above this point.
@@ -598,6 +599,72 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			facial_hair_style_by_gender[facialhairstyle] = S
 
 	return facial_hair_style_by_gender
+
+/datum/species/proc/get_description()
+	var/list/damage_types = list(
+		"physical trauma" = brute_mod,
+		"burns" = burn_mod,
+		"lack of air" = oxy_mod,
+		"poison" = toxins_mod
+	)
+	var/dat = list()
+	dat += "<center><h2>[name] \[<a href='?src=\ref[src];show_species=1'>change</a>\]</h2></center><hr/>"
+	dat += "<table padding='8px'>"
+	dat += "<tr>"
+	dat += "<td width = 400>[blurb]</td>"
+	dat += "<td width = 200 align='center'>"
+	if("preview" in icon_states(get_icobase()))
+		usr << browse_rsc(icon(get_icobase(),"preview"), "species_preview_[name].png")
+		dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
+	dat += "<b>Language:</b> [language]<br/>"
+	dat += "<small>"
+	if(spawn_flags & SPECIES_CAN_JOIN)
+		dat += "</br><b>Often present among humans.</b>"
+	if(spawn_flags & SPECIES_IS_WHITELISTED)
+		dat += "</br><b>Whitelist restricted.</b>"
+	if(!has_organ[BP_HEART])
+		dat += "</br><b>Does not have blood.</b>"
+	if(!has_organ[breathing_organ])
+		dat += "</br><b>Does not breathe.</b>"
+	if(species_flags & SPECIES_FLAG_NO_SCAN)
+		dat += "</br><b>Does not have DNA.</b>"
+	if(species_flags & SPECIES_FLAG_NO_PAIN)
+		dat += "</br><b>Does not feel pain.</b>"
+	if(species_flags & SPECIES_FLAG_NO_MINOR_CUT)
+		dat += "</br><b>Has thick skin/scales.</b>"
+	if(species_flags & SPECIES_FLAG_NO_SLIP)
+		dat += "</br><b>Has excellent traction.</b>"
+	if(species_flags & SPECIES_FLAG_NO_POISON)
+		dat += "</br><b>Immune to most poisons.</b>"
+	if(appearance_flags & HAS_A_SKIN_TONE)
+		dat += "</br><b>Has a variety of skin tones.</b>"
+	if(appearance_flags & HAS_SKIN_COLOR)
+		dat += "</br><b>Has a variety of skin colours.</b>"
+	if(appearance_flags & HAS_EYE_COLOR)
+		dat += "</br><b>Has a variety of eye colours.</b>"
+	if(species_flags & SPECIES_FLAG_IS_PLANT)
+		dat += "</br><b>Has a plantlike physiology.</b>"
+	if(slowdown)
+		dat += "</br><b>Moves [slowdown > 0 ? "slower" : "faster"] than most.</b>"
+	for(var/kind in damage_types)
+		if(damage_types[kind] > 1)
+			dat += "</br><b>Vulnerable to [kind].</b>"
+		else if(damage_types[kind] < 1)
+			dat += "</br><b>Resistant to [kind].</b>"
+	dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
+	dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
+	dat += "</br><b>[gas_data.name[poison_type]] is poisonous to them.</b>"
+	dat += "</small></td>"
+	dat += "</tr>"
+	dat += "</table><hr/>"
+	return jointext(dat, null)
+
+/mob/living/carbon/human/verb/check_species()
+	set name = "Check Species Information"
+	set category = "IC"
+	set src = usr
+
+	show_browser(src, species.get_description(), "window=species;size=700x400")
 
 /datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
