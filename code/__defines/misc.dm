@@ -210,13 +210,6 @@
 
 #define LEGACY_RECORD_STRUCTURE(X, Y) GLOBAL_LIST_EMPTY(##X);/datum/computer_file/data/##Y/var/list/fields[0];/datum/computer_file/data/##Y/New(){..();GLOB.##X.Add(src);}/datum/computer_file/data/##Y/Destroy(){..();GLOB.##X.Remove(src);}
 
-#define EDIT_SHORTTEXT 1	// Short (single line) text input field
-#define EDIT_LONGTEXT 2		// Long (multi line, papercode tag formattable) text input field
-#define EDIT_NUMERIC 3		// Single-line number input field
-#define EDIT_LIST 4			// Option select dialog
-
-#define REC_FIELD(KEY) 		/record_field/##KEY
-
 #define SUPPLY_SECURITY_ELEVATED 1
 #define SUPPLY_SECURITY_HIGH 2
 
@@ -229,3 +222,12 @@
 #define WRINKLES_DEFAULT	0
 #define WRINKLES_WRINKLY	1
 #define WRINKLES_NONE		2
+
+//Shuttle mission stages
+#define SHUTTLE_MISSION_PLANNED  1
+#define SHUTTLE_MISSION_STARTED  2
+#define SHUTTLE_MISSION_FINISHED 3
+
+//Built-in email accounts
+#define EMAIL_DOCUMENTS "document.server@internal-services.nt"
+#define EMAIL_BROADCAST "broadcast@internal-services.nt"

@@ -124,7 +124,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	if(href_list["deletewarrant"])
 		. = 1
 		if(!activewarrant)
-			for(var/datum/computer_file/crew_record/W in GLOB.all_crew_records)
+			for(var/datum/computer_file/report/crew_record/W in GLOB.all_crew_records)
 				if(W.uid == text2num(href_list["deletewarrant"]))
 					activewarrant = W
 					break
@@ -134,7 +134,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	if(href_list["editwarrantname"])
 		. = 1
 		var/namelist = list()
-		for(var/datum/computer_file/crew_record/CR in GLOB.all_crew_records)
+		for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 			namelist += CR.get_name()
 		var/new_name = sanitize(input(usr, "Please input name") as null|anything in namelist)
 		if(CanInteract(user, GLOB.default_state))
