@@ -26,7 +26,7 @@
 	..()
 	scanner = new /obj/item/weapon/computer_hardware/scanner/medical(src)
 
-/obj/item/modular_computer/pda/reagent/install_default_hardware()
+/obj/item/modular_computer/pda/chemistry/install_default_hardware()
 	..()
 	scanner = new /obj/item/weapon/computer_hardware/scanner/reagent(src)
 
@@ -42,7 +42,23 @@
 	..()
 	scanner = new /obj/item/weapon/computer_hardware/scanner/reagent(src)
 
-/obj/item/modular_computer/pda/heads/install_default_hardware()
+/obj/item/modular_computer/pda/heads/hop/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)
+
+/obj/item/modular_computer/pda/heads/hos/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)
+
+/obj/item/modular_computer/pda/heads/ce/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/atmos(src)
+
+/obj/item/modular_computer/pda/heads/cmo/install_default_hardware()
+	..()
+	scanner = new /obj/item/weapon/computer_hardware/scanner/medical(src)
+
+/obj/item/modular_computer/pda/heads/rd/install_default_hardware()
 	..()
 	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)
 
