@@ -26,10 +26,13 @@
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian
-	name = "Ian"
-	real_name = "Ian"	//Intended to hold the name without altering it.
+	name = "Captain Ian"
+	real_name = "Captain Ian"	//Intended to hold the name without altering it.
 	gender = MALE
 	desc = "It's a corgi."
+	icon_state = "ian"
+	icon_living = "ian"
+	icon_dead = "ian_dead"
 	var/turns_since_scan = 0
 	var/obj/movement_target
 	response_help  = "pets"
