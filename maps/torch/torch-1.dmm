@@ -347,14 +347,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/powered/pump,
+/obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "aV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/machinery/portable_atmospherics/powered/pump,
+/obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "aW" = (
@@ -7834,8 +7834,8 @@
 /area/teleporter/fourthdeck)
 "pN" = (
 /obj/machinery/button/remote/blast_door{
-	id = "teleport3";
-	name = "Third Deck Teleporter Access Shutter Control";
+	id = "teleport4";
+	name = "Fourth Deck Teleporter Access Shutter Control";
 	pixel_x = -6;
 	pixel_y = 24
 	},
@@ -13803,7 +13803,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 9
 	},
-/obj/structure/table/standard,
+/obj/machinery/papershredder,
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
 "zK" = (
@@ -15114,7 +15114,6 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
-/obj/machinery/papershredder,
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
 "Cg" = (

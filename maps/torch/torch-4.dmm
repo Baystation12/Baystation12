@@ -7738,6 +7738,9 @@
 /obj/effect/floor_decal/corner/yellow{
 	dir = 1
 	},
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "axs" = (
@@ -9481,6 +9484,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/item/weapon/gun/energy/secure/laser,
 /obj/item/weapon/gun/energy/secure/laser,
+/obj/item/weapon/gun/energy/secure/laser,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aCy" = (
@@ -10843,6 +10847,9 @@
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
+	},
+/obj/machinery/keycard_auth{
+	pixel_x = -28
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
@@ -17287,6 +17294,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/medical/locker)
+"cGZ" = (
+/obj/effect/floor_decal/corner/purple{
+	dir = 5
+	},
+/obj/machinery/keycard_auth{
+	pixel_y = 28
+	},
+/turf/simulated/floor/tiled/white,
+/area/rnd/research)
 "cHb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
@@ -18967,6 +18983,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/keycard_auth{
+	pixel_y = 28
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
@@ -50145,7 +50164,7 @@ dob
 irb
 jjb
 aCf
-jSb
+cGZ
 srR
 aSK
 qtb

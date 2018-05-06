@@ -5574,6 +5574,7 @@
 /obj/item/weapon/gun/energy/secure/gun,
 /obj/item/weapon/gun/energy/secure/gun,
 /obj/item/weapon/gun/energy/secure/gun,
+/obj/item/weapon/gun/energy/secure/gun,
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "lS" = (
@@ -13023,8 +13024,8 @@
 /area/teleporter/thirddeck)
 "zK" = (
 /obj/machinery/button/remote/blast_door{
-	id = "teleport3";
-	name = "Third Deck Teleporter Access Shutter Control";
+	id = "teleport4";
+	name = "Fourth Deck Teleporter Access Shutter Control";
 	pixel_x = -6;
 	pixel_y = 24
 	},
