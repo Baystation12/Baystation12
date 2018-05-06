@@ -18,9 +18,16 @@
 	data["is_silicon_usr"] = issilicon(user)
 
 	data["guns"] = list()
+	var/atom/movable/AM = nano_host()
+	if(!istype(AM))
+		return
+	var/list/zlevels = GetConnectedZlevels(AM.z)
 	for(var/obj/item/weapon/gun/energy/secure/G in GLOB.registered_weapons)
+		if(G.standby || G.emagged)
+			continue
+
 		var/turf/T = get_turf(G)
-		if(!T || !(T.z in GLOB.using_map.station_levels))
+		if(!T || !(T.z in zlevels))
 			continue
 
 		var/list/modes = list()
@@ -31,6 +38,9 @@
 			modes += list(list("index" = i, "mode_name" = firemode.name, "authorized" = G.authorized_modes[i]))
 
 		data["guns"] += list(list("name" = "[G]", "ref" = "\ref[G]", "owner" = G.registered_owner, "modes" = modes, "loc" = list("x" = T.x, "y" = T.y, "z" = T.z)))
+	var/list/guns = data["guns"]
+	if(!guns.len)
+		data["message"] = "No weapons registered"
 
 	if(!data["is_silicon_usr"]) // don't send data even though they won't be able to see it
 		data["cyborg_guns"] = list()
