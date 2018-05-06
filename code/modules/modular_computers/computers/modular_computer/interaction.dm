@@ -206,11 +206,13 @@
 		update_verbs()
 		to_chat(user, "<span class='notice'>You insert [W] into [src].</span>")
 		return
-	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper_bundle))
+	if(istype(W, /obj/item/weapon/paper))
 		var/obj/item/weapon/paper/paper = W
 		if(scanner && paper.info)
 			scanner.do_on_attackby(user, W)
-		else if(nano_printer)
+			return
+	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper_bundle))
+		if(nano_printer)
 			nano_printer.attackby(W, user)
 	if(istype(W, /obj/item/weapon/aicard))
 		if(!ai_slot)
