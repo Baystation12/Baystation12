@@ -92,7 +92,7 @@
 	if(!. || !in_depth)
 		return
 
-	var/datum/computer_file/crew_record/R = get_crewmember_record(old_name)
+	var/datum/computer_file/report/crew_record/R = get_crewmember_record(old_name)
 	if(R)
 		R.set_name(new_name)
 

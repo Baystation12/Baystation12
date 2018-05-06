@@ -7,6 +7,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	var/list/process_shuttles	//simple list of shuttles, for processing
 	var/list/registered_shuttle_landmarks
 	var/last_landmark_registration_time
+	var/list/shuttle_logs = list() //Keeps records of shuttle movement, format is list(datum/shuttle = datum/shuttle_log)
 
 /datum/shuttle_controller/New()
 	shuttles = list()

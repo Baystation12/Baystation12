@@ -525,7 +525,7 @@ proc/is_blind(A)
 		if(id)
 			perpname = id.registered_name
 
-		var/datum/computer_file/crew_record/CR = get_crewmember_record(perpname)
+		var/datum/computer_file/report/crew_record/CR = get_crewmember_record(perpname)
 		if(check_records && !CR && !isMonkey())
 			threatcount += 4
 
@@ -658,3 +658,11 @@ proc/is_blind(A)
 		forceMove(end)
 
 	return end
+
+//Tries to find the mob's email.
+/proc/find_email(real_name)
+	for(var/mob/mob in GLOB.living_mob_list_)
+		if(mob.real_name == real_name)
+			if(!mob.mind)
+				return
+			return mob.mind.initial_email_login["login"]

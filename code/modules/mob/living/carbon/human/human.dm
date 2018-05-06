@@ -407,7 +407,7 @@
 			else
 				perpname = name
 
-			var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
+			var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
 			if(R)
 				var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) in GLOB.security_statuses as null|text
 				if(hasHUD(usr, HUD_SECURITY) && setcriminal)
@@ -435,12 +435,12 @@
 				perpname = id.registered_name
 			else
 				perpname = src.name
-			var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
 				if(hasHUD(usr, HUD_SECURITY))
 					to_chat(usr, "<b>Name:</b> [E.get_name()]")
 					to_chat(usr, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
-					to_chat(usr, "<b>Details:</b> [pencode2html(E.get_criminalStatus())]")
+					to_chat(usr, "<b>Details:</b> [E.get_secRecord()]")
 					read = 1
 
 			if(!read)
@@ -456,7 +456,7 @@
 			else
 				perpname = src.name
 
-			var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
 				var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) in GLOB.physical_statuses as null|text
 				if(hasHUD(usr, HUD_MEDICAL) && setmedical)
@@ -484,14 +484,14 @@
 			else
 				perpname = src.name
 
-			var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
 				if(hasHUD(usr, HUD_MEDICAL))
 					to_chat(usr, "<b>Name:</b> [E.get_name()]")
 					to_chat(usr, "<b>Gender:</b> [E.get_sex()]")
 					to_chat(usr, "<b>Species:</b> [E.get_species()]")
 					to_chat(usr, "<b>Blood Type:</b> [E.get_bloodtype()]")
-					to_chat(usr, "<b>Details:</b> [pencode2html(E.get_medRecord())]")
+					to_chat(usr, "<b>Details:</b> [E.get_medRecord()]")
 					read = 1
 			if(!read)
 				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
