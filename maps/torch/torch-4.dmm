@@ -7738,6 +7738,9 @@
 /obj/effect/floor_decal/corner/yellow{
 	dir = 1
 	},
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "axs" = (
@@ -9481,6 +9484,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/item/weapon/gun/energy/secure/laser,
 /obj/item/weapon/gun/energy/secure/laser,
+/obj/item/weapon/gun/energy/secure/laser,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aCy" = (
@@ -10843,6 +10847,10 @@
 	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
+	},
+/obj/machinery/keycard_auth{
+	pixel_x = -24;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
@@ -12839,9 +12847,9 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/item/weapon/storage/box/lights/tubes,
 /obj/item/weapon/storage/box/lights/bulbs,
-/obj/item/device/flashlight/flare/glowstick/random,
-/obj/item/device/flashlight/flare/glowstick/random,
-/obj/item/device/flashlight/flare/glowstick/random,
+/obj/item/device/flashlight/glowstick/random,
+/obj/item/device/flashlight/glowstick/random,
+/obj/item/device/flashlight/glowstick/random,
 /obj/item/device/flashlight,
 /obj/item/device/flashlight,
 /obj/item/device/flashlight,
@@ -18968,6 +18976,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/keycard_auth{
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "fhb" = (
@@ -23767,7 +23778,7 @@
 	dir = 1
 	},
 /obj/machinery/keycard_auth{
-	pixel_x = -28
+	pixel_x = -24
 	},
 /turf/simulated/floor/blackgrid,
 /area/security/nuke_storage)
@@ -24115,7 +24126,7 @@
 "nnb" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/keycard_auth{
-	pixel_x = -28
+	pixel_x = -24
 	},
 /turf/simulated/floor/blackgrid,
 /area/security/nuke_storage)
@@ -27789,12 +27800,6 @@
 "tAS" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/firstdeck/foreport)
-"vwr" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 1
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/shuttle/escape_pod16/station)
 "vIi" = (
 /obj/structure/table/marble,
 /obj/machinery/door/blast/shutters{
@@ -27807,6 +27812,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/captainmess)
+"wKL" = (
+/obj/effect/floor_decal/corner/purple{
+	dir = 5
+	},
+/obj/machinery/keycard_auth{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/rnd/research)
 "xuW" = (
 /obj/structure/morgue,
 /obj/item/device/radio/intercom{
@@ -44903,7 +44917,7 @@ aJO
 aAr
 aPO
 jjh
-vwr
+aRD
 aSz
 aSz
 aSz
@@ -50145,7 +50159,7 @@ dob
 irb
 jjb
 aCf
-jSb
+wKL
 srR
 aSK
 qtb

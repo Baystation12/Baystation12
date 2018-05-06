@@ -4193,7 +4193,6 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/item/device/floor_painter,
 /turf/simulated/floor/tiled,
 /area/engineering/locker_room)
 "iI" = (
@@ -4626,7 +4625,6 @@
 	},
 /obj/structure/table/standard,
 /obj/item/weapon/storage/box/lights/mixed,
-/obj/item/device/floor_painter,
 /turf/simulated/floor/plating,
 /area/janitor)
 "jC" = (
@@ -9957,6 +9955,9 @@
 /obj/effect/floor_decal/corner/yellow{
 	icon_state = "corner_white";
 	dir = 9
+	},
+/obj/machinery/computer/guestpass{
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/locker_room)

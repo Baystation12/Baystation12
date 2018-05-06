@@ -3454,8 +3454,20 @@
 "hq" = (
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/eva)
+"hr" = (
+/obj/machinery/suit_storage_unit/explorer,
+/obj/effect/floor_decal/corner/mauve/diagonal,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "ht" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
+"hu" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "hv" = (
@@ -8740,16 +8752,9 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 1
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/machinery/light{
+	icon_state = "tube1";
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
@@ -13803,7 +13808,7 @@
 /obj/effect/floor_decal/corner/brown{
 	dir = 9
 	},
-/obj/structure/table/standard,
+/obj/machinery/papershredder,
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
 "zK" = (
@@ -15114,7 +15119,6 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
-/obj/machinery/papershredder,
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
 "Cg" = (
@@ -18979,6 +18983,22 @@
 /obj/effect/landmark/test/space_turf,
 /turf/space,
 /area/space)
+"KO" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/disposalpipe/segment,
+/obj/machinery/door/airlock/glass_science{
+	name = "Exploration Equipment";
+	req_access = list(93)
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "KS" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -18993,6 +19013,12 @@
 /obj/structure/sign/solgov,
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/fourthdeck/center)
+"Ln" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/unused)
 "MA" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 4
@@ -19012,6 +19038,17 @@
 "MH" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/expedition/storage)
+"Ng" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/glass_science{
+	name = "Exploration Equipment";
+	req_access = list(93)
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "Nq" = (
 /obj/machinery/suspension_gen,
 /turf/simulated/floor/tiled,
@@ -19020,6 +19057,13 @@
 /obj/structure/sign/solgov,
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/fourthdeck/fore)
+"NA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
 "NB" = (
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/storage)
@@ -19045,6 +19089,9 @@
 /obj/structure/sign/warning/docking_area,
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/mess)
+"NQ" = (
+/turf/simulated/floor/tiled,
+/area/quartermaster/unused)
 "OZ" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -19055,24 +19102,18 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
-"Ps" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass_science{
-	name = "Exploration Equipment";
-	req_access = list(93)
+"Pc" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
-"Py" = (
-/obj/effect/floor_decal/corner/brown{
-	dir = 1
-	},
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
@@ -19080,15 +19121,12 @@
 /obj/item/seeds/potatoseed,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
-"Qc" = (
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
 "Qd" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/hangar)
+"Qm" = (
+/turf/simulated/wall/prepainted,
+/area/quartermaster/unused)
 "Qp" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/floodlight,
@@ -19110,21 +19148,14 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/laundry)
-"QI" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
+"RG" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/glass_science{
+	name = "Exploration Equipment";
+	req_access = list(93)
 	},
 /turf/simulated/floor/tiled,
-/area/hallway/primary/fourthdeck/aft)
+/area/quartermaster/exploration)
 "RJ" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19144,23 +19175,9 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
-"RL" = (
-/obj/machinery/suit_storage_unit/explorer,
-/obj/effect/floor_decal/corner/mauve/diagonal,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
 "RQ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/storage/auxillary/starboard)
-"Sg" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass_science{
-	name = "Exploration Equipment";
-	req_access = list(93)
-	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
 "Sm" = (
 /obj/machinery/mining/brace{
 	dir = 8
@@ -19182,7 +19199,40 @@
 "Ty" = (
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/infirmary)
-"TC" = (
+"UA" = (
+/obj/effect/wingrille_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/quartermaster/unused)
+"Vr" = (
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/fourthdeck/aft)
+"Wb" = (
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/turf/simulated/floor/plating,
+/area/maintenance/fourthdeck/port)
+"Wh" = (
+/turf/simulated/wall/r_wall/hull,
+/area/quartermaster/office)
+"WB" = (
+/obj/structure/sign/warning/airlock,
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/fourthdeck/aft)
+"WT" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/exploration)
+"WZ" = (
+/turf/simulated/wall/r_wall/hull,
+/area/hallway/primary/fourthdeck/fore)
+"Xb" = (
+/obj/structure/table/steel,
+/turf/simulated/floor/plating,
+/area/quartermaster/unused)
+"XA" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
@@ -19196,75 +19246,23 @@
 /obj/item/clothing/mask/gas/half,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
-"TG" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 4
+"XP" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 1
 	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
-"US" = (
-/obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
-"Vr" = (
-/turf/simulated/wall/r_wall/hull,
-/area/maintenance/fourthdeck/aft)
-"VO" = (
-/obj/structure/table/steel,
-/turf/simulated/floor/plating,
-/area/quartermaster/unused)
-"VW" = (
+/obj/structure/disposalpipe/segment{
+	dir = 1;
+	icon_state = "pipe-c"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
-"Wb" = (
-/obj/machinery/portable_atmospherics/canister/air/airlock,
-/turf/simulated/floor/plating,
-/area/maintenance/fourthdeck/port)
-"Wh" = (
-/turf/simulated/wall/r_wall/hull,
-/area/quartermaster/office)
-"Wv" = (
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/glass_science{
-	name = "Exploration Equipment";
-	req_access = list(93)
-	},
 /turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
-"WB" = (
-/obj/structure/sign/warning/airlock,
-/turf/simulated/wall/r_wall/hull,
-/area/maintenance/fourthdeck/aft)
-"WL" = (
-/obj/machinery/light,
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
-"WT" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/exploration)
-"WZ" = (
-/turf/simulated/wall/r_wall/hull,
-/area/hallway/primary/fourthdeck/fore)
-"XJ" = (
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
+/area/hallway/primary/fourthdeck/aft)
 "XZ" = (
 /obj/structure/disposalpipe/junction{
 	icon_state = "pipe-j2";
@@ -19272,7 +19270,11 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/quartermaster/office)
-"YA" = (
+"Yr" = (
+/obj/machinery/light,
+/turf/simulated/floor/tiled,
+/area/quartermaster/unused)
+"Zj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment{
@@ -19284,9 +19286,6 @@
 "ZG" = (
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/fourthdeck/center)
-"ZM" = (
-/turf/simulated/wall/prepainted,
-/area/quartermaster/unused)
 
 (1,1,1) = {"
 aa
@@ -38364,16 +38363,16 @@ dW
 eD
 cq
 gw
-RL
+hr
 in
-RL
+hr
 cq
 lr
 mI
 nN
 oY
 cq
-Py
+rB
 sU
 uz
 vV
@@ -38769,16 +38768,16 @@ eF
 cq
 eI
 ht
-VW
-YA
-Ps
+NA
+Zj
+Ng
 ls
 mJ
 nP
 pa
-Wv
-rB
-QI
+KO
+XP
+Pc
 uA
 vX
 xg
@@ -38970,7 +38969,7 @@ Sz
 eG
 cq
 gy
-Qc
+hu
 ip
 js
 dF
@@ -39174,7 +39173,7 @@ cq
 gz
 hv
 iq
-TC
+XA
 cq
 lu
 mL
@@ -39375,7 +39374,7 @@ ce
 cq
 cq
 hw
-Sg
+RG
 hw
 cq
 hw
@@ -43407,13 +43406,13 @@ Qd
 aJ
 bk
 aJ
-ZM
-ZM
-US
-US
+Qm
+Qm
+UA
+UA
 eX
-US
-ZM
+UA
+Qm
 ag
 iF
 ag
@@ -43609,9 +43608,9 @@ Vr
 aK
 bl
 bJ
-ZM
+Qm
 da
-XJ
+NQ
 ed
 eY
 fP
@@ -43811,10 +43810,10 @@ Vr
 Vr
 bm
 bl
-ZM
+Qm
 da
-VO
-XJ
+Xb
+NQ
 eZ
 dd
 da
@@ -44013,13 +44012,13 @@ Vr
 Vr
 Vr
 bK
-ZM
+Qm
 dc
-XJ
-XJ
+NQ
+NQ
 eZ
 da
-WL
+Yr
 ag
 iG
 jF
@@ -44215,13 +44214,13 @@ Vr
 Vr
 Vr
 Vr
-ZM
+Qm
 dd
-TG
+Ln
 eg
 fb
-XJ
-XJ
+NQ
+NQ
 ag
 ag
 ag
@@ -44417,7 +44416,7 @@ Vr
 Vr
 Vr
 Vr
-ZM
+Qm
 de
 dH
 eh

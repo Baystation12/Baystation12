@@ -6960,6 +6960,7 @@
 "apF" = (
 /obj/structure/sign/poster/bay_9{
 	pixel_x = -32;
+	
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/rescue_base/start)
@@ -12942,6 +12943,7 @@
 /obj/machinery/button/remote/blast_door{
 	id = "smindicate";
 	pixel_y = 20;
+	
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
