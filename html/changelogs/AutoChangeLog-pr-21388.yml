@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - bugfix: "Borgs and AI are given emails after name selection. Emails are updated on name change."
+  - bugfix: "Borgs and AI can read emails from the \"Email Client\" in the Subsystems verb. The email administration program can still be accessed by AI but has been moved to \"Email Administration.\""
