@@ -84,6 +84,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/overmap_size = 20		//Dimensions of overmap zlevel if overmap is used.
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 	var/overmap_event_areas = 0 //How many event "clouds" will be generated
+	var/mining_spawned = FALSE //To prevent the loader from spawning two mining areas
 
 	var/lobby_icon									// The icon which contains the lobby image(s)
 	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
@@ -188,10 +189,16 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	for (var/site_name in SSmapping.away_sites_templates)
 		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
 
-		if(site.spawn_guaranteed && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
-			report_progress("Loaded guaranteed away site [site]!")
-			away_site_budget -= site.cost
-			continue
+		if(site.mining)
+			if(!mining_spawned) //only do this once
+				if(site.load_new_z()) // no check for budget, but guaranteed means guaranteed
+					report_progress("Loaded mining away site [site]!")
+					away_site_budget -= site.cost
+					mining_spawned = TRUE
+					continue
+			else
+				world << "attempted to load [site.name], but a mining site was already spawned"
+				continue
 
 		sites_by_spawn_weight[site] = site.spawn_weight
 	while (away_site_budget > 0 && sites_by_spawn_weight.len)
