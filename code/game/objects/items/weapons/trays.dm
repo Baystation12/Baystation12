@@ -21,7 +21,7 @@
 		to_chat(user, "<span class='warning'>The tray won't fit in [A].</span>")
 		return
 	else
-		..()
+		. = ..()
 
 /obj/item/weapon/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
