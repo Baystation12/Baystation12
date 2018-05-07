@@ -177,7 +177,8 @@ var/global/list/robot_modules = list(
 					"Android" = "droid",
 					"Default" = "robot",
 					"Drone" = "drone-standard",
-					"Doot" = "eyebot-standard"
+					"Doot" = "eyebot-standard",
+					"Vix" = "vixbot"
 				  )
 
 /obj/item/weapon/robot_module/standard/New()
@@ -205,7 +206,9 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
 					"Drone" = "drone-surgery",
-					"Doot" = "eyebot-medical"
+					"Doot" = "eyebot-medical",
+					"Vix" = "vixbot-medical",
+					"Pon" = "flutterdoc"
 					)
 
 /obj/item/weapon/robot_module/medical/surgeon/New()
@@ -330,7 +333,10 @@ var/global/list/robot_modules = list(
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
 					"Drone" = "drone-engineer",
-					"Doot" = "eyebot-engineering"
+					"Doot" = "eyebot-engineering",
+					"Vix" = "vixbot-engineering",
+					"Pon" = "hydraulicjack",
+					"Scuzzer" = "scuzzer"
 					)
 	no_slip = 1
 
@@ -422,7 +428,10 @@ var/global/list/robot_modules = list(
 					"Bloodhound - Treaded" = "secborg+tread",
 					"Drone" = "drone-sec",
 					"Doot" = "eyebot-security",
-					"Tridroid" = "orb-security"
+					"Tridroid" = "orb-security",
+					"Vix" = "vixbot-security",
+					"Pon" = "secbow",
+					"Fuzzer" = "fuzzer"
 				)
 
 /obj/item/weapon/robot_module/security/general/New()
@@ -459,7 +468,9 @@ var/global/list/robot_modules = list(
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
 					"Drone" = "drone-janitor",
-					"Doot" = "eyebot-janitor"
+					"Doot" = "eyebot-janitor",
+					"Vix" = "vixbot-janitor",
+					"Pon" = "soapsparkle"
 					)
 
 /obj/item/weapon/robot_module/janitor/New()
@@ -504,7 +515,12 @@ var/global/list/robot_modules = list(
 					"Default" = "Service2",
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
-					"Doot" = "eyebot-standard"
+					"Doot" = "eyebot-standard",
+					"Vix - Fancy" = "vixbot-bar1",
+					"Vix - Bar" = "vixbot-bar2",
+					"Vix - Bunny" = "vixbot-bar3",
+					"Pon - Plain" = "pinkiebot",
+					"Pon - Fancy" = "partypie"
 					)
 
 /obj/item/weapon/robot_module/clerical/butler/New()
@@ -589,7 +605,10 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-miner",
 					"Treadhead" = "Miner",
 					"Drone" = "drone-miner",
-					"Doot" = "eyebot-miner"
+					"Doot" = "eyebot-miner",
+					"Vix" = "vixbot-miner",
+					"Pon" = "rarimine"
+
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
@@ -652,6 +671,7 @@ var/global/list/robot_modules = list(
 	hide_on_manifest = 1
 	sprites = list(
 					"Dread" = "securityrobot",
+					"Wizard" = "Wizborg"
 				)
 	var/id
 
@@ -677,7 +697,9 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/security/combat
 	name = "combat robot module"
 	hide_on_manifest = 1
-	sprites = list("Combat Android" = "droid-combat")
+	sprites = list("Combat Android" = "droid-combat",
+					"Vix" = "vixbot-combat"
+					)
 
 /obj/item/weapon/robot_module/security/combat/New()
 	src.modules += new /obj/item/device/flash(src)
