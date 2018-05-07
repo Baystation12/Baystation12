@@ -78,6 +78,7 @@
 				qdel(L)
 		if(amt_inserted)
 			to_chat(user, "You insert [amt_inserted] light[uses > 1 ? "s" : ""] into \The [src]. It has [uses] light[uses > 1 ? "s" : ""] remaining.")
+			add_fingerprint(user)
 			return
 
 	//Actually replace the light.
@@ -86,8 +87,9 @@
 		if(isliving(user))
 			var/mob/living/U = user
 			ReplaceLight(L, U)
+			add_fingerprint(user)
 			return
-	..()
+	. = ..()
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
