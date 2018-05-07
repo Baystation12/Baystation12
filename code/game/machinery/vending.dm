@@ -1140,4 +1140,6 @@
 	/obj/item/ammo_magazine/m127_saphe = 16,
 	/obj/item/ammo_magazine/m5 = 16,
 	/obj/item/ammo_magazine/m762_ap/M392 = 16,
-	/obj/item/ammo_magazine/m145_ap = 2)
+	/obj/item/ammo_magazine/m145_ap = 2,
+	/obj/item/weapon/grenade/smokebomb = 8,
+	/obj/item/weapon/grenade/frag/m9_hedp = 8)

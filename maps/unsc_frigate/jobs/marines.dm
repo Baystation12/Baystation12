@@ -50,7 +50,7 @@
 
 /datum/job/UNSC_ship/weapons
 	title = "Infantry Weapons Officer"
-	total_positions = 1
+	total_positions = 2
 	spawn_positions = 4
 	min_rank = RANK_GYSGT
 	default_rank = RANK_GYSGT
