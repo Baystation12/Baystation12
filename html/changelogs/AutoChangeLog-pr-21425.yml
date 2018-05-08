@@ -1,7 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - tweak: "CE and CMO get job-appropriate scanners on their PDAs now."
-  - tweak: "Modular computer scanners can now be printed via protolathe."
-  - tweak: "Hitting a modular computer with a paper bundle puts it in the printer. To scan, separate the bundle."
-  - bugfix: "The chemist's pda scanner is fixed."
