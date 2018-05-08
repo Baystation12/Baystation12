@@ -14,6 +14,7 @@
 	desc = "A forge used in crafting the unholy weapons used by the armies of Nar-Sie."
 	icon_state = "forge"
 
+/obj/structure/cult/pylon/prop
 /obj/structure/cult/pylon
 	name = "Pylon"
 	desc = "A floating crystal that hums with an unearthly energy."
@@ -103,6 +104,10 @@
 		set_density(1)
 		icon_state = "pylon"
 		set_light(5)
+
+/obj/structure/cult/pylon/prop/Initialize() //Fake pylon that doesn't kill people. Used for mappping decorations.
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
 
 /obj/structure/cult/tome
 	name = "Desk"
