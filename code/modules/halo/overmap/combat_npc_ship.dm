@@ -31,6 +31,8 @@
 	next_fireat = world.time + fire_delay
 
 /obj/effect/overmap/ship/npc_ship/combat/process()
+	if(hull <= initial(hull)/4)
+		return
 	if(target && (target in view(7,src)))
 		if(world.time > next_fireat)
 			var/obj/effect/overmap/ship/npc_ship/targ_ship = target
@@ -56,11 +58,17 @@
 				target = object
 	. = ..()
 
+/obj/effect/overmap/ship/npc_ship/combat/unsc
+	ship_datums = list(/datum/npc_ship/unsc_patrol)
+
 /obj/effect/overmap/ship/npc_ship/combat/unsc/get_requestable_actions(var/auth_level)
 	var/list/requestable_actions = list()
 	if(auth_level >= AUTHORITY_LEVEL_UNSC)
 		requestable_actions += "Fire on target"
 	. = ..() + requestable_actions
+
+/obj/effect/overmap/ship/npc_ship/combat/innie
+	ship_datums = list(/datum/npc_ship/ccv_comet)
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/get_requestable_actions(var/auth_level)
 	var/list/requestable_actions = list()

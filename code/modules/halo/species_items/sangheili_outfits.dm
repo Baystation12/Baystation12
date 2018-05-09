@@ -37,7 +37,7 @@
 
 	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra
 	suit_store = /obj/item/weapon/gun/projectile/type51carbine
-	l_hand = /obj/item/weapon/melee/energysword
+	l_hand = /obj/item/weapon/melee/energy/elite_sword
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	shoes = /obj/item/clothing/shoes/sangheili/ultra
@@ -52,8 +52,8 @@
 
 	suit = /obj/item/clothing/suit/armor/special/combatharness/zealot
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	l_hand = /obj/item/weapon/melee/energysword
-	r_hand = /obj/item/weapon/melee/energysword
+	l_hand = /obj/item/weapon/melee/energy/elite_sword
+	r_hand = /obj/item/weapon/melee/energy/elite_sword
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	shoes = /obj/item/clothing/shoes/sangheili/zealot
@@ -69,7 +69,7 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/specops
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/projectile/type51carbine
-	belt = /obj/item/weapon/melee/energysword
+	belt = /obj/item/weapon/melee/energy/elite_sword
 	shoes = /obj/item/clothing/shoes/sangheili/specops
 	head = /obj/item/clothing/head/helmet/sangheili/specops
 	l_pocket = /obj/item/ammo_magazine/type51mag
@@ -83,7 +83,7 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/eva
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/melee/energysword
+	belt = /obj/item/weapon/melee/energy/elite_sword
 	shoes = /obj/item/clothing/shoes/sangheili/eva
 	head = /obj/item/clothing/head/helmet/sangheili/eva
 	l_pocket = /obj/item/weapon/grenade/plasma

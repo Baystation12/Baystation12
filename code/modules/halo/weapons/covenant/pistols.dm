@@ -18,12 +18,12 @@
 		visible_message("<span class='notice'>[user.name]'s [src]'s lights darken</span>","<span class='notice'>You deactivate your [src]'s overcharge</span>")
 		projectile_type = /obj/item/projectile/covenant/plasmapistol
 		overcharge = 0
-		charge_cost = 20
+		charge_cost = initial(charge_cost)
 		return
 	else
 		visible_message("<span class='notice'>[user.name]'s [src]'s lights brighten</span>","<span class='notice'>You activate your [src]'s overcharge</span>")
 		projectile_type = /obj/item/projectile/covenant/plasmapistol/overcharge
-		charge_cost = 100 // half of inbuiilt cell charge
+		charge_cost = initial(charge_cost)*(max_shots/2)
 		overcharge = 1
 		return
 

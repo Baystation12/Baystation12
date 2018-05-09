@@ -14,7 +14,7 @@
 	icon_state = "combatharness_minor"
 	item_state = "combatharness_minor"
 
-	armor = list(melee = 40, bullet = 55, laser = 30, energy = 30, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 45, bullet = 40, laser = 10, energy = 10, bomb = 30, bio = 0, rad = 0)
 	armor_thickness_modifiers = list()
 
 	species_restricted = list("unggoy")
@@ -31,8 +31,9 @@
 
 	species_restricted = list("unggoy")
 
+	body_parts_covered = HEAD|FACE
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
-	armor = list(melee = 10,bullet = 15,laser = 10,energy = 10,bomb = 5,bio = 0,rad = 0)
+	armor = list(melee = 40, bullet = 20, laser = 35,energy = 35, bomb = 15, bio = 0, rad = 0)
 	armor_thickness = 10
 
 	var/rebreath_efficiency = 50 //Rebreather efficiency: Percentile
@@ -80,6 +81,12 @@
 	canremove = 0
 
 //Unggoy Harness Sub-Defines//
+/obj/item/clothing/suit/armor/special/unggoy_combat_harness
+
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS //Essentially, the entire body besides the head
+
+	species_restricted = list("unggoy")
+
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
 	name = "Unggoy Combat Harness (Major)"
 	desc = "A combat harness with an inbuilt gas tank"
@@ -88,7 +95,7 @@
 	icon_state = "combatharness_major"
 	item_state = "combatharness_major"
 
-	species_restricted = list("unggoy")
+	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0) //As good as armor
 
 	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy)
 
@@ -100,7 +107,7 @@
 	icon_state = "combatharness_ultra"
 	item_state = "combatharness_ultra"
 
-	species_restricted = list("unggoy")
+	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 50, bio = 0, rad = 0)
 
 	totalshields = 100
 	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy,/datum/armourspecials/shields/unggoy)
@@ -112,8 +119,6 @@
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "combatharness_specops"
 	item_state = "combatharness_specops"
-
-	species_restricted = list("unggoy")
 
 	action_button_name = "Toggle Active Camoflage"
 	specials = list(/datum/armourspecials/internal_jumpsuit/unggoy,/datum/armourspecials/internal_air_tank/unggoy,/datum/armourspecials/cloaking)

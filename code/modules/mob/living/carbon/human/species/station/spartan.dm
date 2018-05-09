@@ -11,11 +11,12 @@
 	total_health = 250 //Same base health as sangheili
 	spawn_flags = SPECIES_IS_WHITELISTED
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
+	pain_mod = 0.75 //But they also feel pain a bit more.
 	item_icon_offsets = list(-1,3)
 
 	metabolism_mod = 1.25 //Faster metabolism
 	breath_pressure = 14.5 //Better lungs!
-	darksight = 4 //Beter night vision!
+	darksight = 4 //Better night vision!
 
 	//Spartans have a bit better temperature tolerance
 	siemens_coefficient = 0.9 //Better insulated against temp changes

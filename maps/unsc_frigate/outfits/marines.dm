@@ -10,6 +10,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o2)
 
 	flags = 0
@@ -25,6 +26,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e7)
 
 	flags = 0
@@ -40,7 +42,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	gloves = /obj/item/clothing/gloves/thick/combat
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e5)
 
 	flags = 0
@@ -55,7 +57,7 @@
 	head = /obj/item/clothing/head/helmet/marine
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
-	gloves = /obj/item/clothing/gloves/thick/combat
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted)
 
 	flags = 0
@@ -79,7 +81,7 @@
 
 /decl/hierarchy/outfit/job/UNSC_ship/odsto
 	name = "ONI Bridge Officer"
-	l_ear = /obj/item/device/radio/headset/unsc/odst
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	uniform = /obj/item/clothing/under/utility
 	shoes = /obj/item/clothing/shoes/dress
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s

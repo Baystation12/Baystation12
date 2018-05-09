@@ -1,0 +1,5 @@
+author: Nalar
+delete-after: True
+changes: 
+  - bugfix: Communications consoles and faxes now have the correct option to message United Nations Space Command/UNSC HIGHCOM (admins)
+  - bugfix: Fax machines in the COs quarters and command areas are now correctly named.

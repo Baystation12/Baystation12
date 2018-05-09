@@ -21,7 +21,7 @@
 
 	occupants = list(13,1)
 
-	exposed_positions = list("driver" = 10,"passengers" = 20)//Passengers could technically be hit by bullets through the troop bay.
+	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
 
 /obj/vehicles/air/pelican/update_object_sprites()
 
@@ -29,7 +29,7 @@
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/pelican
 	integrity = 300
-	resistances = list("brute"=70,"burn"=65,"emp"=50)
+	resistances = list("brute"=30,"burn"=20,"emp"=50)
 
 /datum/component_profile/pelican
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
@@ -79,7 +79,7 @@
 
 	occupants = list(13,1)
 
-	exposed_positions = list("driver" = 10,"passengers" = 20)//Passengers could technically be hit by bullets through the troop bay.
+	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
 
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"
@@ -92,7 +92,7 @@
 	comp_prof = /datum/component_profile/pelican/civ
 
 /obj/item/vehicle_component/health_manager/pelican/civ
-	resistances = list("brute"=50,"burn"=35,"emp"=20)
+	resistances = list("brute"=15,"burn"=10,"emp"=20)
 
 /datum/component_profile/pelican/civ
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/civ)
@@ -109,7 +109,7 @@
 	overlays += image(icon,"innie_overlay")
 
 /obj/item/vehicle_component/health_manager/pelican/innie
-	resistances = list("brute"=60,"burn"=45,"emp"=35)
+	resistances = list("brute"=25,"burn"=20,"emp"=35)
 
 /datum/component_profile/pelican/innie
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie)

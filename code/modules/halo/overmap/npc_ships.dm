@@ -33,7 +33,7 @@
 	var/turf/target_loc
 
 	var/unload_at = 0
-	var/list/ship_datums = list(/datum/npc_ship)
+	var/list/ship_datums = list(/datum/npc_ship/ccv_star)
 	var/datum/npc_ship/chosen_ship_datum
 
 	var/list/projectiles_to_spawn = list()
@@ -149,9 +149,9 @@
 /obj/effect/overmap/ship/npc_ship/proc/parse_action_request(var/request,var/mob/requester)
 	if(request == "Cargo Inspection" || "Halt")
 		target_loc = null
-		GLOB.global_headset.autosay("Slowing down..\nI can only give you [STOP_WAIT_TIME/600] minutes.","[name]","Common")
+		GLOB.global_headset.autosay("Slowing down..\nI can only give you [STOP_WAIT_TIME/600] minutes.","[name]","System")
 		spawn(STOP_WAIT_TIME)
-			GLOB.global_headset.autosay("I need to leave now. I'll give you [STOP_DISEMBARK_TIME/600] minutes to disembark.","[name]","Common")
+			GLOB.global_headset.autosay("I need to leave now. I'll give you [STOP_DISEMBARK_TIME/600] minutes to disembark.","[name]","System")
 			spawn(STOP_DISEMBARK_TIME)
 				pick_target_loc()
 
@@ -160,6 +160,26 @@
 
 	var/fore_dir = WEST //The direction of "fore" for the mapfile.
 	var/list/map_bounds = list(1,50,50,1)//Used for projectile collision bounds for the selected mapfile.
+
+/datum/npc_ship/ccv_star
+	mapfile_links = list('maps/overmap_ships/CCV_Star.dmm')
+	fore_dir = WEST
+	map_bounds = list(1,50,50,1)
+
+/datum/npc_ship/ccv_comet
+	mapfile_links = list('maps/overmap_ships/CCV_Comet.dmm')
+	fore_dir = WEST
+	map_bounds = list(1,50,50,1)
+
+/datum/npc_ship/ccv_sbs
+	mapfile_links = list('maps/overmap_ships/CCV_Slow_But_Steady.dmm')
+	fore_dir = WEST
+	map_bounds = list(6,51,72,27)
+
+/datum/npc_ship/unsc_patrol
+	mapfile_links = list('maps/overmap_ships/UNSC_Corvette.dmm')
+	fore_dir = WEST
+	map_bounds = list(7,70,54,29)
 
 #undef NPC_SHIP_LOSE_DELAY
 #undef ON_PROJECTILE_HIT_MESSAGES

@@ -8,7 +8,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define FLEETCOM_NAME "FLEETCOM"
 #define EBAND_NAME "EBAND"
 #define COV_COMMON_NAME "Battlenet"
-#define CIV_NAME "Colony"
+#define CIV_NAME "System"
 #define SEC_NAME "GCPD"
 #define ODST_NAME "TACCOM"
 
@@ -133,13 +133,16 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	channels = list(SEC_NAME = 1,EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/fleetcom
-	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,FLEETCOM_NAME = 1,EBAND_NAME = 1)
+	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,FLEETCOM_NAME = 1,EBAND_NAME = 1, TACCOM = 1)
 
 /obj/item/device/encryptionkey/officercom
 	channels = list(SHIPCOM_NAME = 1,FLEETCOM_NAME = 1, EBAND_NAME = 1)
 
 /obj/item/device/encryptionkey/squadcom
 	channels = list(SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1)
+
+/obj/item/device/encryptionkey/taccomo
+	channels = list(SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1, ODST_NAME = 1, FLEETCOM = 1)
 
 /obj/item/device/encryptionkey/taccom
 	channels = list(SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1, ODST_NAME = 1)
@@ -152,3 +155,25 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 
 /obj/item/device/encryptionkey/public
 	channels = list(CIV_NAME = 1)
+
+/proc/halo_frequency_span_class(var/frequency)
+	//Innie channel
+	if (frequency == halo_frequencies.innie_freq)
+		return "syndradio"
+
+	// GCPD channel
+	if(frequency == halo_frequencies.police_freq)
+		return "secradio"
+
+	// ODST/Covenant Battlenet channels
+	if(frequency == halo_frequencies.odst_freq || frequency == halo_frequencies.covenant_battlenet_freq)
+		return "centradio"
+
+	if(frequency == halo_frequencies.fleetcom_freq)
+		return "medradio"
+
+	//general ship comms
+	if(frequency == halo_frequencies.shipcom_freq)
+		return "comradio"
+
+	return "radio"
