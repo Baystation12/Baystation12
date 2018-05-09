@@ -45,14 +45,6 @@
 		name = "[name] ([sequential_id(/mob/living/simple_animal/octopus)])"
 	real_name = name
 
-	if(!body_color)
-		body_color = pick( list("brown","gray","white") )
-	icon_state = "mouse_[body_color]"
-	item_state = "mouse_[body_color]"
-	icon_living = "mouse_[body_color]"
-	icon_dead = "mouse_[body_color]_dead"
-	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
-
 /mob/living/simple_animal/mouse/proc/splat()
 	icon_dead = "mouse_[body_color]_splat"
 	adjustBruteLoss(maxHealth)  // Enough damage to kill
