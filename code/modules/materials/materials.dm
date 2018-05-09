@@ -73,6 +73,7 @@ var/list/name_to_material
 	var/sheet_singular_name = "sheet"
 	var/sheet_plural_name = "sheets"
 	var/is_fusion_fuel
+	var/list/chem_products				  //Used with the grinder to produce chemicals.
 
 	// Shards/tables/structures
 	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
@@ -244,6 +245,9 @@ var/list/name_to_material
 	icon_colour = "#007a00"
 	weight = 22
 	stack_origin_tech = list(TECH_MATERIAL = 5)
+	chem_products = list(
+				/datum/reagent/uranium = 20
+				)
 
 /material/diamond
 	name = "diamond"
@@ -270,6 +274,9 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	chem_products = list(
+				/datum/reagent/gold = 20
+				)
 
 /material/gold/bronze //placeholder for ashtrays
 	name = "bronze"
@@ -284,6 +291,9 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	chem_products = list(
+				/datum/reagent/silver = 20
+				)
 
 /material/phoron
 	name = "phoron"
@@ -299,6 +309,9 @@ var/list/name_to_material
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
+	chem_products = list(
+				/datum/reagent/toxin/phoron = 20
+				)
 
 /material/phoron/supermatter
 	name = "supermatter"
@@ -359,6 +372,10 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 	hitsound = 'sound/weapons/smash.ogg'
+	chem_products = list(
+				/datum/reagent/iron = 15,
+				/datum/reagent/carbon = 5
+				)
 
 /material/diona
 	name = "biomass"
@@ -559,6 +576,9 @@ var/list/name_to_material
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
 	rod_product = /obj/item/stack/material/glass/phoronrglass
+	chem_products = list(
+				/datum/reagent/toxin/phoron = 10
+				)
 
 /material/glass/phoron/reinforced
 	name = "rphglass"
@@ -588,6 +608,9 @@ var/list/name_to_material
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	conductive = 0
+	chem_products = list(
+				/datum/reagent/toxin/plasticide = 20
+				)
 
 /material/plastic/holographic
 	name = "holoplastic"
@@ -627,6 +650,9 @@ var/list/name_to_material
 	icon_colour = "#e6c5de"
 	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 6, TECH_MAGNET = 5)
 	is_fusion_fuel = 1
+	chem_products = list(
+				/datum/reagent/hydrazine = 20
+				)
 
 /material/platinum
 	name = "platinum"
@@ -645,6 +671,9 @@ var/list/name_to_material
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	hitsound = 'sound/weapons/smash.ogg'
+	chem_products = list(
+				/datum/reagent/iron = 20
+				)
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy
@@ -688,6 +717,10 @@ var/list/name_to_material
 	sheet_plural_name = "planks"
 	hitsound = 'sound/effects/woodhit.ogg'
 	conductive = 0
+	chem_products = list(
+				/datum/reagent/carbon = 10
+				/datum/reagent/water = 5
+				)
 
 /material/wood/holographic
 	name = "holowood"

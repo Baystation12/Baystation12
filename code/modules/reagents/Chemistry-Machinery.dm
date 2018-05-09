@@ -3,8 +3,6 @@
 #define GAS 3
 
 #define BOTTLE_SPRITES list("bottle-1", "bottle-2", "bottle-3", "bottle-4") //list of available bottle sprites
-#define REAGENTS_PER_SHEET 20
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -309,15 +307,6 @@
 	var/obj/item/weapon/reagent_containers/beaker = null
 	var/limit = 10
 	var/list/holdingitems = list()
-	var/list/sheet_reagents = list(
-		/obj/item/stack/material/iron = /datum/reagent/iron,
-		/obj/item/stack/material/uranium = /datum/reagent/uranium,
-		/obj/item/stack/material/phoron = /datum/reagent/toxin/phoron,
-		/obj/item/stack/material/phoron/fifty = /datum/reagent/toxin/phoron,
-		/obj/item/stack/material/gold = /datum/reagent/gold,
-		/obj/item/stack/material/silver = /datum/reagent/silver,
-		/obj/item/stack/material/mhydrogen = /datum/reagent/hydrazine
-		)
 
 /obj/machinery/reagentgrinder/New()
 	..()
@@ -375,7 +364,14 @@
 		src.updateUsrDialog()
 		return 0
 
-	if(!sheet_reagents[O.type] && (!O.reagents || !O.reagents.total_volume))
+	if(istype(O,/obj/item/stack/material))
+		var/obj/item/stack/material/stack = O
+		var/material/material = stack.material
+		if(!material.chem_products.len)
+			to_chat(user, "\The [material.name] is unable to produce any usable reagents.")
+			return 1
+
+	if(!O.reagents || !O.reagents.total_volume)
 		to_chat(user, "\The [O] is not suitable for blending.")
 		return 1
 
@@ -499,16 +495,25 @@
 		if(remaining_volume <= 0)
 			break
 
-		if(sheet_reagents[O.type])
-			var/obj/item/stack/stack = O
-			if(istype(stack))
-				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/REAGENTS_PER_SHEET)))
-				if(amount_to_take)
-					stack.use(amount_to_take)
-					if(QDELETED(stack))
-						holdingitems -= stack
-					beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
-					continue
+		var/obj/item/stack/material/stack = O
+		if(istype(stack))
+			var/material/material = stack.material
+			if(!material.chem_products.len)
+				break
+
+			var/list/chem_products = material.chem_products
+			var/sheet_volume = 0
+			for(var/chem in chem_products)
+				sheet_volume += chem_products[chem]
+
+			var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/sheet_volume)))
+			if(amount_to_take)
+				stack.use(amount_to_take)
+				if(QDELETED(stack))
+					holdingitems -= stack
+				for(var/chem in chem_products)
+					beaker.reagents.add_reagent(chem, (amount_to_take*chem_products[chem]))
+				continue
 
 		if(O.reagents)
 			O.reagents.trans_to(beaker, min(O.reagents.total_volume, remaining_volume))
@@ -517,5 +522,3 @@
 				qdel(O)
 			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 				break
-
-#undef REAGENTS_PER_SHEET
