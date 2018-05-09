@@ -60,6 +60,21 @@
 #define	PIPE_COLOR_BLACK       "#444444"
 #define	PIPE_COLOR_ORANGE      "#b95a00"
 
+#define	COMMS_COLOR_DEFAULT    "#ff00ff"
+#define	COMMS_COLOR_ENTERTAIN  "#666666"
+#define	COMMS_COLOR_AI         "#ff00ff"
+#define	COMMS_COLOR_COMMON     "#408010"
+#define	COMMS_COLOR_SERVICE    "#709b00"
+#define	COMMS_COLOR_SUPPLY     "#7f6539"
+#define	COMMS_COLOR_SCIENCE    "#993399"
+#define	COMMS_COLOR_MEDICAL    "#009190"
+#define	COMMS_COLOR_EXPLORER   "#929820"
+#define	COMMS_COLOR_ENGINEER   "#a68300"
+#define	COMMS_COLOR_SECURITY   "#930000"
+#define	COMMS_COLOR_COMMAND    "#204090"
+#define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
+#define	COMMS_COLOR_SYNDICATE  "#6d3f40"
+
 #define COLOR_BLOOD_HUMAN "#a10808"
 
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))
