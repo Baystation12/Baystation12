@@ -16,18 +16,19 @@
 	see_in_dark = 6
 	maxHealth = 50
 	health = 50
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carp/safe
+	//placeholder until I add more exotic meats with varying degrees of toxicity
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "stamps on"
 	density = 0
-	var/body_color //brown, gray and white, leave blank for random
+//	var/body_color //brown, gray and white, leave blank for random
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	universal_speak = 0
 	universal_understand = 1
 	holder_type = /obj/item/weapon/holder/mouse
-	mob_size = MOB_MINISCULE
+	mob_size = MOB_SMALL
 	possession_candidate = 1
 	can_escape = 1
 	var/footstep = 1

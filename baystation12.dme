@@ -1838,6 +1838,7 @@
 #include "code\modules\mob\living\simple_animal\friendly\lizard.dm"
 #include "code\modules\mob\living\simple_animal\friendly\mouse.dm"
 #include "code\modules\mob\living\simple_animal\friendly\mushroom.dm"
+#include "code\modules\mob\living\simple_animal\friendly\octopus.dm"
 #include "code\modules\mob\living\simple_animal\friendly\slime.dm"
 #include "code\modules\mob\living\simple_animal\friendly\spiderbot.dm"
 #include "code\modules\mob\living\simple_animal\friendly\tomato.dm"
