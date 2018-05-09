@@ -2599,6 +2599,7 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
+#include "maps\civ_hauler\ship_cap_ghost_role.dm"
 #include "maps\crashsite_zeta\crashsite_zeta_map.dm"
 #include "maps\desert_outpost\__desert_outpost_map.dm"
 #include "maps\example\example_define.dm"
