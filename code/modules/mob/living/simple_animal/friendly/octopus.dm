@@ -45,17 +45,17 @@
 		name = "[name] ([sequential_id(/mob/living/simple_animal/octopus)])"
 	real_name = name
 
-/mob/living/simple_animal/mouse/proc/splat()
+/mob/living/simple_animal/octopus/proc/splat()
 	icon_dead = "mouse_[body_color]_splat"
 	adjustBruteLoss(maxHealth)  // Enough damage to kill
 	src.death()
 
-/mob/living/simple_animal/mouse/Crossed(AM as mob|obj)
+/mob/living/simple_animal/octopus/Crossed(AM as mob|obj)
 	if( ishuman(AM) )
 		if(!stat)
 			var/mob/M = AM
 			to_chat(M, "<span class='warning'>\icon[src] Squeek!</span>")
-			sound_to(M, 'sound/effects/mousesqueek.ogg')
+			sound_to(M, 'sound/items/bikehorn.ogg')
 	..()
 
 /mob/living/simple_animal/octopus/handle_movement(var/turf/walking, var/running)
