@@ -45,11 +45,6 @@
 		name = "[name] ([sequential_id(/mob/living/simple_animal/octopus)])"
 	real_name = name
 
-/mob/living/simple_animal/octopus/proc/splat()
-	icon_dead = "mouse_[body_color]_splat"
-	adjustBruteLoss(maxHealth)  // Enough damage to kill
-	src.death()
-
 /mob/living/simple_animal/octopus/Crossed(AM as mob|obj)
 	if( ishuman(AM) )
 		if(!stat)
