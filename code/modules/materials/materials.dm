@@ -718,7 +718,7 @@ var/list/name_to_material
 	hitsound = 'sound/effects/woodhit.ogg'
 	conductive = 0
 	chem_products = list(
-				/datum/reagent/carbon = 10
+				/datum/reagent/carbon = 10,
 				/datum/reagent/water = 5
 				)
 
