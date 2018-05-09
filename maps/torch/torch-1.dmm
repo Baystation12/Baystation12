@@ -17,7 +17,7 @@
 /turf/space,
 /area/space)
 "ae" = (
-/obj/effect/shuttle_landmark/merc/deck1,
+/obj/effect/shuttle_landmark/merc/deck4,
 /turf/space,
 /area/space)
 "ag" = (
@@ -7865,10 +7865,6 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/item/device/radio/intercom{
-	dir = 4;
-	pixel_x = -22
-	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "pK" = (
@@ -9081,15 +9077,6 @@
 	name = "Docking Port Airlock";
 	req_access = list(13)
 	},
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1331;
-	master_tag = "nuke_shuttle_dock_airlock";
-	name = "exterior access button";
-	pixel_x = -6;
-	pixel_y = 24;
-	req_one_access = list(13,80)
-	},
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor,
 /area/hallway/primary/fourthdeck/fore)
@@ -9147,15 +9134,6 @@
 	dir = 9
 	},
 /obj/item/device/radio/beacon,
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1331;
-	master_tag = "nuke_shuttle_dock_airlock";
-	name = "interior access button";
-	pixel_x = -28;
-	pixel_y = 24;
-	req_one_access = list(13,80)
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
@@ -9354,6 +9332,17 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/center)
+"sE" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	icon_state = "door_locked";
+	id_tag = "nuke_shuttle_dock_inner";
+	locked = 1;
+	name = "Docking Port Airlock";
+	req_access = list(13)
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/fore)
 "sF" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -10329,8 +10318,16 @@
 /turf/space,
 /area/space)
 "tM" = (
-/obj/structure/sign/warning/airlock,
-/turf/simulated/wall/r_wall/prepainted,
+/obj/machinery/shield_diffuser,
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	icon_state = "door_locked";
+	id_tag = "nuke_shuttle_dock_outer";
+	locked = 1;
+	name = "Docking Port Airlock";
+	req_access = list(13)
+	},
+/turf/simulated/floor,
 /area/hallway/primary/fourthdeck/fore)
 "tN" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -10394,13 +10391,17 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
 /obj/effect/floor_decal/corner/white{
 	dir = 8
+	},
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	frequency = 1331;
+	master_tag = "nuke_shuttle_dock_airlock";
+	name = "interior access button";
+	pixel_x = -23;
+	pixel_y = -22;
+	req_one_access = list(13,80)
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
@@ -10408,6 +10409,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/corner/blue,
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 22
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "tV" = (
@@ -19029,6 +19034,27 @@
 /obj/item/modular_computer/console/preset/security,
 /turf/simulated/floor/tiled/dark,
 /area/security/checkpoint2)
+"QB" = (
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1331;
+	master_tag = "nuke_shuttle_dock_airlock";
+	name = "exterior access button";
+	pixel_x = -6;
+	pixel_y = 19;
+	req_one_access = list(13,80)
+	},
+/obj/machinery/shield_diffuser,
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	icon_state = "door_locked";
+	id_tag = "nuke_shuttle_dock_outer";
+	locked = 1;
+	name = "Docking Port Airlock";
+	req_access = list(13)
+	},
+/turf/simulated/floor,
+/area/hallway/primary/fourthdeck/fore)
 "QI" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19092,6 +19118,10 @@
 /obj/structure/sign/warning/high_voltage,
 /turf/simulated/wall/r_wall/prepainted,
 /area/security/checkpoint2)
+"Rp" = (
+/obj/effect/wingrille_spawn/reinforced/full,
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/fore)
 "RJ" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19146,6 +19176,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
+"SA" = (
+/obj/structure/sign/warning/airlock,
+/turf/simulated/wall/prepainted,
+/area/hallway/primary/fourthdeck/fore)
 "SD" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -28351,7 +28385,7 @@ aa
 aa
 aa
 WZ
-WZ
+QB
 sj
 tM
 WZ
@@ -28550,15 +28584,15 @@ WZ
 WZ
 WZ
 WZ
-aa
-aa
+Rp
+Rp
 WZ
 qP
 sk
 tN
 WZ
-aa
-aa
+Rp
+Rp
 WZ
 WZ
 WZ
@@ -29562,10 +29596,10 @@ ej
 le
 le
 ow
-le
-le
+SA
+sE
 so
-tS
+sE
 vl
 wB
 le
