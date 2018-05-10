@@ -1,5 +1,7 @@
 #if !defined(using_map_DATUM)
 
+	#include "overall_overmap.dm"
+
 	#include "../covenant_ships/kig_yar_pirates/includes.dm"
 
 	#include "maps/corvette_spawns.dm"
