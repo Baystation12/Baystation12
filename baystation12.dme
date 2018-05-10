@@ -244,6 +244,8 @@
 #include "code\datums\helper_datums\teleport.dm"
 #include "code\datums\helper_datums\topic_input.dm"
 #include "code\datums\licences\license.dm"
+#include "code\datums\movement\mob.dm"
+#include "code\datums\movement\movement.dm"
 #include "code\datums\music_tracks\1.dm"
 #include "code\datums\music_tracks\_music_track.dm"
 #include "code\datums\music_tracks\absconditus.dm"

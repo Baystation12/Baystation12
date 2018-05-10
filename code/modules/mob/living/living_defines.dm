@@ -2,6 +2,8 @@
 	see_in_dark = 2
 	see_invisible = SEE_INVISIBLE_LIVING
 
+	movement_handlers = list(/datum/movement_handler/mob_living/death, /datum/movement_handler/mob/eye)
+
 	//Health and life related vars
 	var/maxHealth = 100 //Maximum health that should be possible.
 	var/health = 100 	//A mob's health

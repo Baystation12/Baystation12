@@ -31,7 +31,7 @@
 
 /mob/observer/eye/Move(n, direct)
 	if(owner == src)
-		return EyeMove(n, direct)
+		return EyeMove(direct)
 	return 0
 
 /mob/observer/eye/facedir(var/ndir)
@@ -111,11 +111,11 @@
 
 	return eyeobj.EyeMove(n, direct)
 
-/mob/observer/eye/EyeMove(n, direct)
+/mob/observer/eye/EyeMove(direct)
 	var/initial = initial(sprint)
 	var/max_sprint = 50
 
-	if(cooldown && cooldown < world.timeofday)
+	if(cooldown && cooldown < world.time)
 		sprint = initial
 
 	for(var/i = 0; i < max(sprint, initial); i += 20)
@@ -123,7 +123,7 @@
 		if(step)
 			setLoc(step)
 
-	cooldown = world.timeofday + 5
+	cooldown = world.time + 5
 	if(acceleration)
 		sprint = min(sprint + 0.5, max_sprint)
 	else

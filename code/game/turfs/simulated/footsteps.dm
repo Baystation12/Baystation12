@@ -102,7 +102,7 @@
 	if(buckled || lying || throwing)
 		return //people flying, lying down or sitting do not step
 
-	if(m_intent == "run")
+	if(m_intent == M_RUN)
 		if(step_count % 2) //every other turf makes a sound
 			return
 
@@ -123,7 +123,7 @@
 	if(S)
 		var/range = -(world.view - 2)
 		var/volume = 70
-		if(m_intent == "walk")
+		if(m_intent == M_WALK)
 			volume -= 45
 			range -= 0.333
 		if(!shoes)
