@@ -5574,6 +5574,7 @@
 /obj/item/weapon/gun/energy/secure/gun,
 /obj/item/weapon/gun/energy/secure/gun,
 /obj/item/weapon/gun/energy/secure/gun,
+/obj/item/weapon/gun/energy/secure/gun,
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
 "lS" = (
@@ -6419,6 +6420,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "ny" = (
@@ -6431,6 +6438,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "nz" = (
@@ -6439,9 +6452,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -6449,6 +6459,12 @@
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
@@ -6474,6 +6490,9 @@
 	name = "Brig Officer";
 	req_access = list(3)
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "nB" = (
@@ -6495,6 +6514,10 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/item/device/radio/beacon,
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
+	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "nC" = (
@@ -6998,6 +7021,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "oy" = (
@@ -7500,6 +7524,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "pu" = (
@@ -8018,6 +8043,7 @@
 	req_access = list(2);
 	secured_wires = 0
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "qq" = (
@@ -8561,6 +8587,7 @@
 	pixel_x = -24;
 	pixel_y = 0
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "rw" = (
@@ -9671,8 +9698,10 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/structure/disposalpipe/segment{
-	dir = 4
+/obj/structure/disposalpipe/sortjunction{
+	dir = 8;
+	name = "Brig Officer";
+	sortType = "Brig Officer"
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
@@ -15036,13 +15065,15 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/filingcabinet/chestdrawer,
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
 /obj/effect/floor_decal/corner/red{
 	dir = 4
 	},
+/obj/machinery/disposal,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/disposalpipe/trunk,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Em" = (
@@ -18240,6 +18271,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
+"MZ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/bo)
 "Nb" = (
 /obj/effect/shuttle_landmark/merc/deck3,
 /turf/space,
@@ -18509,6 +18546,7 @@
 	dir = 9
 	},
 /obj/machinery/computer/prisoner,
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Om" = (
@@ -19014,6 +19052,10 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 1;
+	icon_state = "pipe-c"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Rm" = (
@@ -19443,16 +19485,10 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "Tl" = (
-/obj/machinery/photocopier/faxmachine{
-	department = "Warden's Office"
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
-/obj/structure/table/steel,
+/obj/structure/filingcabinet/chestdrawer,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Tm" = (
@@ -20059,9 +20095,6 @@
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "Wl" = (
-/obj/item/weapon/stamp/denied{
-	pixel_x = 5
-	},
 /obj/machinery/newscaster/security_unit{
 	pixel_x = 30;
 	pixel_y = -30
@@ -20070,11 +20103,13 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/obj/item/weapon/stamp/brig,
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
 /obj/structure/table/steel,
+/obj/machinery/photocopier/faxmachine{
+	department = "Warden's Office"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Wn" = (
@@ -20701,6 +20736,10 @@
 /area/tcommsat/chamber)
 "ZR" = (
 /obj/structure/table/steel,
+/obj/item/weapon/stamp/brig,
+/obj/item/weapon/stamp/denied{
+	pixel_x = 5
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 
@@ -44432,7 +44471,7 @@ ld
 Fl
 mC
 nx
-mD
+MZ
 PK
 Zl
 lc
