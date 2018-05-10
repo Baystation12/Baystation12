@@ -53,5 +53,5 @@
 	spawnpoint_override = "Corvette Crew"
 
 /datum/map/first_contact
-	allowed_jobs = list(/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/unsc_ship_crew,/datum/job/unsc_ship_cap)
+	allowed_jobs = list(/datum/job/ship_crew_civ,/datum/job/ship_cap_civ,/datum/job/ship_crew_innie,/datum/job/ship_cap_innie,/datum/job/unsc_ship_crew,/datum/job/unsc_ship_cap,/datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
 	allowed_spawns = list("Innie Crew","Corvette Crew","Civ Crew","Civ Ship Cap Crew","Kig-Yar Pirate Spawn")
