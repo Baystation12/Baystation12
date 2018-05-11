@@ -11,6 +11,7 @@
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	inherent_verbs = list(/mob/living/carbon/human/proc/focus_view)
 	spawn_flags = SPECIES_IS_WHITELISTED
+	flags = NO_MINOR_CUT
 	darksight = 6
 	brute_mod = 1.1
 	slowdown = -1.5 //-1 to negate noshoes, -0.5 for their natural speed increase.
