@@ -5,6 +5,7 @@
 
 	icon = 'maps/covenant_ships/kig_yar_pirates/pirate.dmi'
 	icon_state = "ship"
+	fore_dir = WEST
 
 /obj/effect/overmap/ship/kigyar_pirates/New()
 	. = ..()
@@ -13,6 +14,6 @@
 /obj/effect/overmap/ship/kigyar_pirates/process()
 	. = ..()
 	if(is_still())
-		animate(src,alpha = 10) //Hard to see if sat still.
+		animate(src,alpha = 50,time = 2 SECONDS) //Hard to see if sat still.
 	else
-		animate(src,alpha = 255)
+		animate(src,alpha = 255, time = 2 SECONDS)

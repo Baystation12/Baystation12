@@ -4,6 +4,7 @@
 
 	icon = 'maps/first_contact/freighter.dmi'
 	icon_state = "ship"
+	fore_dir = WEST
 
 /obj/effect/overmap/ship/CCV_star
 	name = "Civillian Vessel"
@@ -11,6 +12,7 @@
 
 	icon = 'maps/first_contact/freighter.dmi'
 	icon_state = "ship"
+	fore_dir = WEST
 
 /obj/effect/overmap/ship/CCV_sbs
 	name = "CCV Slow But Steady"
@@ -18,6 +20,7 @@
 
 	icon = 'maps/first_contact/freighter.dmi'
 	icon_state = "ship"
+	fore_dir = WEST
 
 /obj/effect/overmap/ship/unsc_corvette
 	name = "UNSC Corvette"
@@ -25,3 +28,4 @@
 
 	icon = 'maps/first_contact/corvette.dmi'
 	icon_state = "ship"
+	fore_dir = WEST
