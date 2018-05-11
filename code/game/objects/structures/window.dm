@@ -571,9 +571,4 @@
 	glasstype = /obj/item/stack/material/glass/reinforced
 
 /obj/structure/window/reinforced/projresist/bullet_act(var/obj/item/projectile/p)
-	if(p.damtype == BURN)
-		visible_message("<span class = 'danger'>[p.name] dissapates across [name]\'s surface.</span>")
-	if(p.damtype == BRUTE)
-		visible_message("<span class = 'danger'>[p.name] shatters on impact with [name]\'s surface.</span>")
-	else
-		visible_message("<span class = 'danger'>[p.name] bounces off [name]\'s surface.</span>")
+	visible_message("<span class = 'danger'>[name] doesn't appear to take any damage from [p.name]</span>")
