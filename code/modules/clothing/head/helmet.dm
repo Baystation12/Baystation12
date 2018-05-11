@@ -46,6 +46,13 @@
 	armor = list(melee = 70, bullet = 70, laser = 70, energy = 35, bomb = 30, bio = 0, rad = 0)
 	siemens_coefficient = 0.5
 
+/obj/item/clothing/head/helmet/marine
+	name = "United States Marine Corps helmet"
+	desc = "An older design of helmet, has strange emblems and patterns from earths past."
+	icon_state = "charlie_helmet"
+	armor = list(melee = 45, bullet = 45, laser = 30, energy = 25, bomb = 25, bio = 0, rad = 0)
+	siemens_coefficient = 0.5
+
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."

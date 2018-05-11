@@ -265,6 +265,24 @@
 	cold_protection = UPPER_TORSO|LOWER_TORSO|LEGS
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS
 
+/obj/item/clothing/suit/storage/vest/charlie
+	name = "United States Marines Corps armored vest"
+	desc = "An antiquated armor design (22nd-23rd Century), looks like something right out of an early human space exploration movie. It has a shoulder mounted flashlight."
+	icon_state = "marine_charlie"
+	item_state = "marine_charlie"
+	officon="marine_charlie"
+	onicon="marine_charlie_on"
+	armor = list(melee = 40, bullet = 35, laser = 25, energy = 15, bomb = 25, bio = 0, rad = 0)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	cold_protection = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	action_button_name = "Toggle Shoulder lamp"
+	brightness_on = 4 //luminosity when on
+	light_overlay = "marine_charlie_light"
+
+//	flags_inv = 0
+
+
 //Modular plate carriers
 /obj/item/clothing/suit/armor/pcarrier
 	name = "plate carrier"
