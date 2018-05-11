@@ -7,6 +7,7 @@ obj/structure/firedoor_assembly
 	opacity = 0
 	density = 1
 	var/wired = 0
+	var/result = /obj/machinery/door/firedoor
 
 obj/structure/firedoor_assembly/update_icon()
 	if(anchored)
@@ -41,7 +42,9 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='warning'>[user] has inserted a circuit into \the [src]!</span>",
 								  "You have inserted the circuit into \the [src]!")
-			new /obj/machinery/door/firedoor(src.loc)
+			var/obj/O = new result(src.loc)
+			O.dir = src.dir
+
 			qdel(C)
 			qdel(src)
 		else
@@ -67,3 +70,27 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
 	else
 		..(C, user)
+
+/obj/structure/firedoor_assembly/edge_only
+	name = "unidirectional emergency shutter assembly"
+	result = /obj/machinery/door/firedoor/border_only
+
+obj/structure/firedoor_assembly/edge_only/verb/rotate_clock()
+	set category = "Object"
+	set name = "Rotate Assembly (Clockwise)"
+	set src in view(1)
+
+	if (usr.incapacitated() || anchored)
+		return
+
+	set_dir(turn(dir, -90))
+
+obj/structure/firedoor_assembly/edge_only/verb/rotate_anticlock()
+	set category = "Object"
+	set name = "Rotate Assembly (Counter-clockwise)"
+	set src in view(1)
+
+	if (usr.incapacitated()|| anchored)
+		return
+
+	set_dir(turn(dir, 90))
