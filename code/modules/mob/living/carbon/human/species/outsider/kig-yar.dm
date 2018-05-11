@@ -1,7 +1,7 @@
 /datum/species/kig_yar
 	name = "Kig-Yar"
 	name_plural = "Kig-Yar"
-	blurb = "Shouldn't be seeing this." // Doesn't appear in chargen
+	blurb = ""
 	flesh_color = "#FF9463"
 	blood_color = "#4A4A64" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_kig-yar.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
@@ -13,6 +13,8 @@
 	spawn_flags = SPECIES_IS_WHITELISTED
 	darksight = 6
 	brute_mod = 1.1
+	slowdown = -1.5 //-1 to negate noshoes, -0.5 for their natural speed increase.
+	gluttonous = GLUT_ANYTHING
 	item_icon_offsets = list(-1,1)
 
 	has_limbs = list(
