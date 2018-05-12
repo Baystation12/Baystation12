@@ -8,7 +8,7 @@
 	var/list/breathgas = list()	//list of gases animals/plants require to survive
 	var/badgas					//id of gas that is toxic to life here
 
-	var/lightlevel
+	var/lightlevel    //natural lighting power, currently broken and unused
 	in_space = 0
 	var/maxx
 	var/maxy
@@ -46,6 +46,7 @@
 	spawn()
 		generate_atmosphere()
 		generate_map()
+		create_lighting_overlays_zlevel(z)
 		generate_features()
 		generate_landing(4)		//try making 4 landmarks
 		update_biome()
@@ -412,9 +413,8 @@
 			if(E.atmosphere)
 				initial_gas = E.atmosphere.gas.Copy()
 				temperature = E.atmosphere.temperature
-			if(E.lightlevel)
-				light_max_bright = E.lightlevel
-				light_outer_range = 2
+	//For some reason without this call dynamic lighitng breaks
+	set_light(0)
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
