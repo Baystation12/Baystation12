@@ -205,7 +205,7 @@ var/list/ai_verbs_default = list(
 
 	to_chat(src, radio_text)
 
-	if (malf && !(mind in malf.current_antagonists))
+	if (GLOB.malf && !(mind in GLOB.malf.current_antagonists))
 		show_laws()
 		to_chat(src, "<b>These laws may be changed by other players, or by you being the traitor.</b>")
 
@@ -698,13 +698,13 @@ var/list/ai_verbs_default = list(
 	icon = selected_sprite.icon
 	if(stat == DEAD)
 		icon_state = selected_sprite.dead_icon
-		set_light(0.7, 1, selected_sprite.dead_light)
+		set_light(0.7, 0.1, 1, 2, selected_sprite.dead_light)
 	else if(!has_power())
 		icon_state = selected_sprite.nopower_icon
-		set_light(0.4, 1, selected_sprite.nopower_light)
+		set_light(0.4, 0.1, 1, 2, selected_sprite.nopower_light)
 	else
 		icon_state = selected_sprite.alive_icon
-		set_light(0.4, 1, selected_sprite.alive_light)
+		set_light(0.4, 0.1, 1, 2, selected_sprite.alive_light)
 
 // Pass lying down or getting up to our pet human, if we're in a rig.
 /mob/living/silicon/ai/lay_down()

@@ -31,15 +31,15 @@
 	id = "Service and Exploration Server"
 	freq_listening = list(SRV_FREQ, EXP_FREQ)
 	channel_tags = list(
-		list(SRV_FREQ, "Service", "#6eaa2c"),
-		list(EXP_FREQ, "Exploration", "#a3a332")
+		list(SRV_FREQ, "Service", COMMS_COLOR_SERVICE),
+		list(EXP_FREQ, "Exploration", COMMS_COLOR_EXPLORER)
 	)
 	autolinkers = list("service", "exploration")
 
 /obj/machinery/telecomms/server/presets/exploration
 	id = "Utility Server"
 	freq_listening = list(EXP_FREQ)
-	channel_tags = list(list(EXP_FREQ, "Exploration", "#a3a332"))
+	channel_tags = list(list(EXP_FREQ, "Exploration", COMMS_COLOR_EXPLORER))
 	autolinkers = list("Exploration")
 
 // Suit cyclers and storage
