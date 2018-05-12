@@ -13,7 +13,7 @@
 	action_button_name = "Toggle Flashlight"
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
-	var/flashlight_max_bright = 0.5 //brightness of light when on, can be negative
+	var/flashlight_max_bright = 0.5 //brightness of light when on, must be no greater than 1.
 	var/flashlight_inner_range = 1 //inner range of light when on, can be negative
 	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
 
