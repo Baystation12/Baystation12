@@ -177,10 +177,9 @@ proc/get_radio_key_from_channel(var/channel)
 		speaking.broadcast(src,trim(message))
 		return 1
 
-	if(is_muzzled())
-		if(!(speaking && (speaking.flags & SIGNLANG)))
-			to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
-			return
+	if((is_muzzled()) && !(speaking && (speaking.flags & SIGNLANG)))
+		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
+		return
 
 	if (speaking)
 		if(whispering)
