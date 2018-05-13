@@ -4,6 +4,7 @@
 	description = "Bunch of monoliths surrounding an artifact."
 	suffixes = list("monoliths/monoliths.dmm")
 	cost = 1
+	allow_duplicates = FALSE
 
 /obj/structure/monolith
 	name = "monolith"
