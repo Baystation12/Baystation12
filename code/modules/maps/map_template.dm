@@ -9,7 +9,8 @@
 	var/list/shuttles_to_initialise = list()
 	var/base_turf_for_zs = null
 	var/accessibility_weight = 0
-	var/clean_slate = null //templates with this var set will always attempt to clear_contents when automatically loaded
+	var/spawn_guaranteed = FALSE
+	var/clear_contents = FALSE  //if it should destroy objects it spawns on top of
 
 /datum/map_template/New(var/list/paths = null, var/rename = null)
 	if(paths && !islist(paths))
@@ -25,7 +26,7 @@
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	var/z_offset = 1 // needed to calculate z-bounds correctly
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), 1, 1, z_offset, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE)
+		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), 1, 1, z_offset, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE, clear_contents=clear_contents)
 		if(M)
 			bounds = extend_bounds_if_needed(bounds, M.bounds)
 			z_offset++
@@ -75,6 +76,7 @@
 
 	var/x = round((world.maxx - width)/2)
 	var/y = round((world.maxy - height)/2)
+	var/initial_z = world.maxz
 
 	if (x < 1) x = 1
 	if (y < 1) y = 1
@@ -100,6 +102,8 @@
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
 	init_shuttles()
+	for(var/light_z = initial_z to world.maxz)
+		create_lighting_overlays_zlevel(light_z)
 	log_game("Z-level [name] loaded at [x],[y],[world.maxz]")
 	loaded++
 
@@ -114,8 +118,6 @@
 		return
 	if(T.y+height > world.maxy)
 		return
-	if(clean_slate)
-		clear_contents = 1
 
 	var/list/atoms_to_initialise = list()
 
@@ -152,7 +154,7 @@
 	return block(placement, locate(placement.x+width-1, placement.y+height-1, placement.z))
 
 //for your ever biggening badminnery kevinz000
-//❤ - Cyberboss
+//? - Cyberboss
 /proc/load_new_z_level(var/file, var/name)
 	var/datum/map_template/template = new(file, name)
 	template.load_new_z()

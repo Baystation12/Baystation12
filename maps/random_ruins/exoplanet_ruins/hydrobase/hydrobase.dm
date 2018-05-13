@@ -5,7 +5,7 @@
 	suffixes = list("hydrobase/hydrobase.dmm")
 	cost = 1
 	allow_duplicates = FALSE
-	clean_slate = 1
+	clear_contents = 1
 
 // Areas //
 /area/map_template/hydrobase
