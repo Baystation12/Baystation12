@@ -1372,7 +1372,7 @@
 "At" = (/obj/effect/floor_decal/industrial/warning/corner{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo)
 "Au" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo)
 "Av" = (/obj/effect/floor_decal/industrial/warning/corner{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo)
-"Aw" = (/obj/machinery/vending/lavatory,/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo)
+"Aw" = (/obj/machinery/vending/lavatory,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor/tiled/white,/area/crew_quarters/sleep/cryo)
 "Ax" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/obj/machinery/firealarm{dir = 8; pixel_x = -24},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/head)
 "Ay" = (/obj/structure/urinal{pixel_y = 32},/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled/freezer,/area/crew_quarters/head)
 "Az" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/obj/item/weapon/storage/mirror{pixel_x = 28},/turf/simulated/floor/tiled/freezer,/area/crew_quarters/head)

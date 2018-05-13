@@ -1400,7 +1400,7 @@
 "AV" = (/obj/machinery/atmospherics/portables_connector,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/maintenance/incinerator)
 "AW" = (/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/turf/simulated/floor/plating,/area/maintenance/incinerator)
 "AX" = (/obj/structure/sign/warning/nosmoking_2,/turf/simulated/wall/prepainted,/area/maintenance/incinerator)
-"AY" = (/obj/machinery/vending/lavatory,/turf/simulated/floor/plating,/area/maintenance/seconddeck/foreport)
+"AY" = (/obj/machinery/vending/lavatory,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/seconddeck/foreport)
 "AZ" = (/obj/effect/floor_decal/corner/yellow/diagonal,/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/item/weapon/storage/mirror{icon_state = "mirror_broke"; pixel_x = -28},/turf/simulated/floor/tiled/freezer,/area/maintenance/seconddeck/foreport)
 "Ba" = (/obj/effect/floor_decal/corner/yellow/diagonal,/obj/item/weapon/caution,/turf/simulated/floor/tiled/freezer,/area/maintenance/seconddeck/foreport)
 "Bb" = (/obj/machinery/alarm{dir = 1; pixel_y = -22},/turf/simulated/floor/plating,/area/maintenance/seconddeck/foreport)
