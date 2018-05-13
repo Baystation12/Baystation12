@@ -867,7 +867,7 @@
 	set_trait(TRAIT_YIELD,5)
 	set_trait(TRAIT_POTENCY,10)
 	set_trait(TRAIT_PRODUCT_ICON,"carrot")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#ffdb4a")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#ff9900")
 	set_trait(TRAIT_PLANT_ICON,"carrot")
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
