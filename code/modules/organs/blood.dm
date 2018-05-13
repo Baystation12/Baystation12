@@ -143,7 +143,7 @@
 	if (injected.data["antibodies"] && prob(5))
 		antibodies |= injected.data["antibodies"]
 	var/list/chems = list()
-	chems = params2list(injected.data["trace_chem"])
+	chems = injected.data["trace_chem"]
 	for(var/C in chems)
 		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
 	reagents.update_total()
@@ -282,6 +282,8 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 			if(PULSE_2FAST, PULSE_THREADY)
 				pulse_mod *= 1.25
 		blood_volume *= max(0.3, (1-(heart.damage / heart.max_damage))) * pulse_mod
+		if(!heart.open && chem_effects[CE_BLOCKAGE])
+			blood_volume *= max(0, 1-chem_effects[CE_BLOCKAGE])
 	return min(blood_volume, 100)
 
 //Whether the species needs blood to carry oxygen. Used in get_blood_oxygenation and may be expanded based on blood rather than species in the future.
@@ -301,7 +303,7 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 	if(!blood_carries_oxygen())
 		blood_volume = 100
 
-	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(maxHealth/2))
+	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(species.total_health/2))
 	var/oxygenated_mult = 0
 	if(chem_effects[CE_OXYGENATED] == 1) // Dexalin.
 		oxygenated_mult = 0.5

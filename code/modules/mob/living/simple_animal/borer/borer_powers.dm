@@ -117,7 +117,7 @@ GLOBAL_LIST_INIT(borer_reagent_types_by_name, setup_borer_reagents())
 
 		//Update their traitor status.
 		if(host.mind)
-			borers.add_antagonist_mind(host.mind, 1, borers.faction_role_text, borers.faction_welcome)
+			GLOB.borers.add_antagonist_mind(host.mind, 1, GLOB.borers.faction_role_text, GLOB.borers.faction_welcome)
 
 		if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M

@@ -53,6 +53,9 @@
 			if(crayon && iscolorablegloves(I))
 				var/obj/item/clothing/gloves/C = I
 				C.color = crayon.color
+			if(istype(A, /obj/item/clothing))
+				var/obj/item/clothing/C = A
+				C.ironed_state = WRINKLES_WRINKLY
 
 	//Tanning!
 	for(var/obj/item/stack/material/hairlesshide/HH in contents)
@@ -173,7 +176,7 @@
 		if(4)
 			state = 3
 			for(var/atom/movable/O in contents)
-				O.forceMove(src)
+				O.forceMove(get_turf(src))
 			crayon = null
 			state = 1
 		if(5)

@@ -54,10 +54,13 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 		if(!T)
 			T = locate(x,y,z)
 
+		var/throw_target = get_edge_target_turf(T, get_dir(epicenter,T))
 		for(var/atom_movable in T.contents)
 			var/atom/movable/AM = atom_movable
 			if(AM && AM.simulated && !T.protects_atom(AM))
 				AM.ex_act(severity)
+				if(!AM.anchored)
+					addtimer(CALLBACK(AM, /atom/movable/.proc/throw_at, throw_target, 9/severity, 9/severity), 0)
 
 	explosion_turfs.Cut()
 	explosion_in_progress = 0
@@ -72,20 +75,18 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 	if(explosion_turfs[src] >= power)
 		return //The turf already sustained and spread a power greated than what we are dealing with. No point spreading again.
 	explosion_turfs[src] = power
-
-/*	sleep(2)
+/*
+	sleep(2)
 	var/obj/effect/debugging/M = locate() in src
 	if (!M)
 		M = new(src, power, direction)
-	M.maptext = "[power]"
+	M.maptext = "[power] vs [src.get_explosion_resistance()]"
 	if(power > 10)
 		M.color = "#cccc00"
 	if(power > 20)
 		M.color = "#ffcc00"
 */
 	var/spread_power = power - src.get_explosion_resistance() //This is the amount of power that will be spread to the tile in the direction of the blast
-	for(var/obj/O in src)
-		spread_power -= O.get_explosion_resistance()
 
 	var/turf/T = get_step(src, direction)
 	if(T)
@@ -102,11 +103,21 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 
 /atom/var/explosion_resistance
 /atom/proc/get_explosion_resistance()
-	if(simulated && density)
+	if(simulated)
 		return explosion_resistance
+
+/turf/get_explosion_resistance()
+	. = ..()
+	for(var/obj/O in src)
+		. += O.get_explosion_resistance()
 
 /turf/space
 	explosion_resistance = 3
+
+/turf/simulated/floor/get_explosion_resistance()
+	. = ..()
+	if(is_below_sound_pressure(src))
+		. *= 3
 
 /turf/simulated/floor
 	explosion_resistance = 1
@@ -119,3 +130,9 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 
 /turf/simulated/wall
 	explosion_resistance = 10
+
+/obj/machinery/door/get_explosion_resistance()
+	if(!density)
+		return 0
+	else
+		return ..()

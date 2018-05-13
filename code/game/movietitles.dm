@@ -11,6 +11,9 @@ client
 /client/proc/RollCredits()
 	set waitfor = FALSE
 
+	if(get_preference_value(/datum/client_preference/show_credits) != GLOB.PREF_YES)
+		return
+
 	if(!GLOB.end_titles)
 		GLOB.end_titles = generate_titles()
 

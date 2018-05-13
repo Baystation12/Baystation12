@@ -25,6 +25,7 @@
 	icon_state = "box"
 	item_state = "syringe_kit"
 	max_storage_space = DEFAULT_BOX_STORAGE
+	use_sound = 'sound/effects/storage/box.ogg'
 	var/foldable = /obj/item/stack/material/cardboard	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 
 /obj/item/weapon/storage/box/large
@@ -74,7 +75,7 @@
 					/obj/item/weapon/tank/emergency/oxygen = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
-					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/vox/
@@ -84,7 +85,7 @@
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/nitrogen = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
-					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/engineer/
@@ -96,7 +97,7 @@
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
-					/obj/item/device/flashlight/glowstick = 1,
+					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/gloves
@@ -311,12 +312,6 @@
 	icon_state = "id_large"
 	startswith = list(/obj/item/weapon/card/id = 14)
 
-/obj/item/weapon/storage/box/seccarts
-	name = "box of spare R.O.B.U.S.T. Cartridges"
-	desc = "A box full of R.O.B.U.S.T. Cartridges, used by Security."
-	icon_state = "pda"
-	startswith = list(/obj/item/weapon/cartridge/security = 7)
-
 /obj/item/weapon/storage/box/handcuffs
 	name = "box of spare handcuffs"
 	desc = "A box full of handcuffs."
@@ -414,14 +409,14 @@
 /obj/item/weapon/storage/box/glowsticks
 	name = "box of mixed glowsticks"
 	icon_state = "box"
-	startswith = list(/obj/item/device/flashlight/glowstick = 1, /obj/item/device/flashlight/glowstick/red = 1,
-					/obj/item/device/flashlight/glowstick/blue = 1, /obj/item/device/flashlight/glowstick/orange = 1,
-					/obj/item/device/flashlight/glowstick/yellow = 1, /obj/item/device/flashlight/glowstick/random = 1)
+	startswith = list(/obj/item/device/flashlight/flare/glowstick = 1, /obj/item/device/flashlight/flare/glowstick/red = 1,
+					/obj/item/device/flashlight/flare/glowstick/blue = 1, /obj/item/device/flashlight/flare/glowstick/orange = 1,
+					/obj/item/device/flashlight/flare/glowstick/yellow = 1, /obj/item/device/flashlight/flare/glowstick/random = 1)
 
 /obj/item/weapon/storage/box/greenglowsticks
 	name = "box of green glowsticks"
 	icon_state = "box"
-	startswith = list(/obj/item/device/flashlight/glowstick = 6)
+	startswith = list(/obj/item/device/flashlight/flare/glowstick = 6)
 
 /obj/item/weapon/storage/box/freezer
 	name = "portable freezer"
@@ -494,3 +489,9 @@
 		/obj/item/weapon/implantpad,
 		/obj/item/weapon/implantcase/imprinting = 3
 		)
+
+/obj/item/weapon/storage/box/detergent
+	name = "detergent pods bag"
+	desc = "A bag full of juicy, yummy detergent pods. This bag has been labeled: Tod Pods, a Waffle Co. product."
+	icon_state = "detergent"
+	startswith = list(/obj/item/weapon/reagent_containers/pill/detergent = 10)

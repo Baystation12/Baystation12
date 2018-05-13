@@ -54,7 +54,6 @@ var/list/uplink_random_selections_
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealthy_weapons/soap, 5, 100)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealthy_weapons/concealed_cane, 50, 10)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealthy_weapons/detomatix, 20, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealthy_weapons/sleepy)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealthy_weapons/cigarette_kit)
 
@@ -139,9 +138,8 @@ var/list/uplink_random_selections_
 
 #ifdef DEBUG
 /proc/debug_uplink_purchage_log()
-	var/list/all_antag_types = all_antag_types()
-	for(var/antag_type in all_antag_types)
-		var/datum/antagonist/A = all_antag_types[antag_type]
+	for(var/antag_type in GLOB.all_antag_types_)
+		var/datum/antagonist/A = GLOB.all_antag_types_[antag_type]
 		A.print_player_summary()
 
 /proc/debug_uplink_item_assoc_list()

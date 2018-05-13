@@ -21,7 +21,7 @@
 	harm_intent_damage = 3
 	melee_damage_lower = 3
 	melee_damage_upper = 4
-	light_color = "#8A0707"
+	light_color = "#8a0707"
 	attacktext = "mauled"
 	attack_sound = 'sound/weapons/bite.ogg'
 	min_gas = null
@@ -90,7 +90,7 @@
 	else //It's fight time
 		alpha = 255
 		icon_state = "vagrant_glowing"
-		set_light(4)
+		set_light(0.2, 0.1, 3)
 		move_to_delay = 2
 
 /mob/living/simple_animal/hostile/vagrant/AttackingTarget()

@@ -27,7 +27,7 @@
 	var/mutation_mod = 0       // Modifier to mutation chance
 	var/toxins = 0             // Toxicity in the tray?
 	var/mutation_level = 0     // When it hits 100, the plant mutates.
-	var/tray_light = 1         // Supplied lighting.
+	var/tray_light = 5         // Supplied lighting.
 
 	// Mechanical concerns.
 	var/health = 0             // Plant health.
@@ -119,8 +119,8 @@
 	// than a bound as the lists above specify.
 	var/global/list/mutagenic_reagents = list(
 		/datum/reagent/radium =  8,
-		/datum/reagent/mutagen = 15
-		)
+		/datum/reagent/mutagen = 15,
+		/datum/reagent/toxin/fertilizer/left4zed = 30)
 
 /obj/machinery/portable_atmospherics/hydroponics/AltClick()
 	if(mechanical && !usr.incapacitated() && Adjacent(usr))

@@ -32,9 +32,9 @@
 		)
 
 	var/light_min_range = 2
-	var/light_min_power = 3
+	var/light_min_power = 0.2
 	var/light_max_range = 12
-	var/light_max_power = 12
+	var/light_max_power = 1
 
 	var/last_range
 	var/last_power
@@ -42,7 +42,7 @@
 /obj/effect/fusion_em_field/New(loc, var/obj/machinery/power/fusion_core/new_owned_core)
 	..()
 
-	set_light(light_min_range,light_min_power)
+	set_light(light_min_power, light_min_range / 10, light_min_range)
 	last_range = light_min_range
 	last_power = light_min_power
 
@@ -137,7 +137,7 @@
 		use_power = light_min_power + ceil((light_max_power-light_min_power)*temp_mod)
 
 	if(last_range != use_range || last_power != use_power)
-		set_light(use_range,use_power)
+		set_light(use_power, use_range / 6, use_range)
 		last_range = use_range
 		last_power = use_power
 

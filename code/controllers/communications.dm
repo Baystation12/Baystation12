@@ -145,6 +145,21 @@ var/list/radiochannels = list(
 	"Security(I)"	= SEC_I_FREQ
 )
 
+var/list/channel_color_presets = list(
+	"Global Green" = COMMS_COLOR_COMMON,
+	"Phenomenal Purple" = COMMS_COLOR_SCIENCE,
+	"Bitchin' Blue" = COMMS_COLOR_COMMAND,
+	"Menacing Maroon" = COMMS_COLOR_SYNDICATE,
+	"Pretty Periwinkle" = COMMS_COLOR_CENTCOMM,
+	"Painful Pink" = COMMS_COLOR_AI,
+	"Raging Red" = COMMS_COLOR_SECURITY,
+	"Operational Orange" = COMMS_COLOR_ENGINEER,
+	"Tantalizing Turquoise" = COMMS_COLOR_MEDICAL,
+	"Bemoaning Brown" = COMMS_COLOR_SUPPLY,
+	"Gastric Green" = COMMS_COLOR_SERVICE,
+	"Bold Brass" = COMMS_COLOR_EXPLORER
+)
+
 // central command channels, i.e deathsquid & response teams
 var/list/CENT_FREQS = list(ERT_FREQ, DTH_FREQ)
 

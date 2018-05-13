@@ -112,6 +112,7 @@
 	status_flags = 0
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
+	can_escape = 1
 
 /mob/living/simple_animal/construct/armoured/Life()
 	weakened = 0
@@ -218,6 +219,7 @@
 	var/energy = 0
 	var/max_energy = 1000
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
+	can_escape = 1
 
 ////////////////////////Harvester////////////////////////////////
 
@@ -251,7 +253,7 @@
 	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	eye_glow.layer = EYE_GLOW_LAYER
 	overlays += eye_glow
-	set_light(3, -10, l_color = "#ffffff")
+	set_light(-10, 0.1, 3, l_color = "#ffffff")
 
 ////////////////HUD//////////////////////
 

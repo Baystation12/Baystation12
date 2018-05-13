@@ -117,7 +117,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/tonic/New()
 	..()
-	reagents.add_reagent(/datum/reagent/drink/tonic, 50)
+	reagents.add_reagent(/datum/reagent/drink/tonic, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater
 	name = "soda water"
@@ -127,4 +127,88 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater/New()
 	..()
-	reagents.add_reagent(/datum/reagent/drink/sodawater, 50)
+	reagents.add_reagent(/datum/reagent/drink/sodawater, 30)
+
+//Items exclusive to the BODA machine on deck 4 and wherever else it pops up. First two are a bit jokey. Second two are genuine article.
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/syndicolax
+	name = "\improper Red Army Twist!"
+	desc = "A taste of what keeps our glorious nation running! Served as Space Commissariat Stahlin prefers it! Luke warm."
+	icon_state = "syndi_cola_x"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/syndicolax/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/juice/potato, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/artbru
+	name = "\improper Arstotzka Bru"
+	desc = "Just what any bureaucrat needs to get through the day. Keep stamping those papers!"
+	icon_state = "art_bru"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/artbru/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/juice/turnip, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/syndicola
+	name = "\improper Soviet Cola"
+	desc = "A can of the only soft drink state approved for the benefit of the people's revolution. Served at room temperature regardless of ambient temperatures thanks to innovative Soviet insulation technology."
+	icon_state = "syndi_cola"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/syndicola/New()
+	..()
+	reagents.add_reagent(/datum/reagent/water, 25)
+	reagents.add_reagent(/datum/reagent/iron, 5)
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/square/boda
+	name = "boda"
+	desc = "A tall glass of refreshing Boda!"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/square/boda/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/sodawater, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/square/bodaplus
+	name = "tri kopeiki sirop boda"
+	desc = "A tall glass of even more refreshing Boda! Now with Sok!"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/square/bodaplus/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/sodawater, 15)
+	reagents.add_reagent(pick(list(
+				/datum/reagent/drink/kiraspecial,
+				/datum/reagent/drink/juice/grape,
+				/datum/reagent/drink/juice/orange,
+				/datum/reagent/drink/juice/lemon,
+				/datum/reagent/drink/juice/lime,
+				/datum/reagent/drink/juice/apple,
+				/datum/reagent/drink/juice/pear,
+				/datum/reagent/drink/juice/banana,
+				/datum/reagent/drink/juice/berry,
+				/datum/reagent/drink/juice/watermelon)), 15)
+
+//Canned alcohols.
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/speer
+	name = "\improper Space Beer"
+	desc = "Now in a can!"
+	icon_state = "beercan"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/speer/New()
+	..()
+	reagents.add_reagent(/datum/reagent/ethanol/beer/good, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/ale
+	name = "\improper Magm-Ale"
+	desc = "Now in a can!"
+	icon_state = "alecan"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/ale/New()
+	..()
+	reagents.add_reagent(/datum/reagent/ethanol/ale, 30)

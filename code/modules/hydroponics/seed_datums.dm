@@ -63,6 +63,7 @@
 	display_name = "blueberry bush"
 	mutants = list("berries","poisonberries","glowberries")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/juice/berry = list(10,10))
+	kitchen_tag = "blueberries"
 
 /datum/seed/berry/blue/New()
 	..()
@@ -262,7 +263,7 @@
 	seed_name = "apple"
 	display_name = "apple tree"
 	mutants = list("poisonapple","goldapple")
-	chems = list(/datum/reagent/nutriment = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/juice/apple = list(10,10))
 	kitchen_tag = "apple"
 
 /datum/seed/apple/New()
@@ -384,13 +385,15 @@
 
 /datum/seed/mushroom/plump/New()
 	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
 	set_trait(TRAIT_MATURATION,8)
-	set_trait(TRAIT_YIELD,4)
-	set_trait(TRAIT_POTENCY,0)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,2)
 	set_trait(TRAIT_PRODUCT_ICON,"mushroom10")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#b57bb0")
 	set_trait(TRAIT_PLANT_COLOUR,"#9e4f9d")
 	set_trait(TRAIT_PLANT_ICON,"mushroom2")
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.35)
 
 /datum/seed/mushroom/plump/walking
 	name = "walkingmushroom"
@@ -657,7 +660,7 @@
 	name = "peppercorn"
 	seed_name = "peppercorn"
 	display_name = "black pepper"
-	chems = list(blackpepper = list(10,10))
+	chems = list(/datum/reagent/blackpepper = list(10,10))
 
 /datum/seed/peppercorn/New()
 	..()
@@ -697,7 +700,7 @@
 	name = "banana"
 	seed_name = "banana"
 	display_name = "banana tree"
-	chems = list(/datum/reagent/drink/juice/banana = list(10,10))
+	chems = list(/datum/reagent/drink/juice/banana = list(10,10), /datum/reagent/potassium = list(2,3))
 	trash_type = /obj/item/weapon/bananapeel
 	kitchen_tag = "banana"
 

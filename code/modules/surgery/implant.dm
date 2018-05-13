@@ -15,7 +15,7 @@
 	if(!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	return affected && affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
+	return affected && affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)
 
 /datum/surgery_step/cavity/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
@@ -159,7 +159,7 @@
 	if(!affected)
 		return FALSE
 	if(affected.robotic < ORGAN_ROBOT)
-		return affected.open() >= SURGERY_RETRACTED
+		return affected.how_open() >= SURGERY_RETRACTED
 	else
 		return affected.hatch_state == HATCH_OPENED
 
@@ -173,7 +173,7 @@
 /datum/surgery_step/cavity/implant_removal/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 	var/exposed = 0
-	if(affected.open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
+	if(affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED))
 		exposed = 1
 	if(affected.robotic >= ORGAN_ROBOT && affected.hatch_state == HATCH_OPENED)
 		exposed = 1

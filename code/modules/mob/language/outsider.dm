@@ -9,6 +9,7 @@
 	flags = RESTRICTED
 	syllables = list("sss","sSs","SSS")
 	machine_understands = 0
+	shorthand = "Xeno"
 
 /datum/language/xenos
 	name = "Hivemind"
@@ -19,13 +20,14 @@
 	colour = "alien"
 	key = "a"
 	flags = RESTRICTED | HIVEMIND
+	shorthand = "N/A"
 
 /datum/language/xenos/check_special_condition(var/mob/other)
 
 	var/mob/living/carbon/M = other
 	if(!istype(M))
 		return 1
-	if(locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs)
+	if(locate(/obj/item/organ/internal/xeno/hivenode) in M.internal_organs)
 		return 1
 
 	return 0
@@ -37,6 +39,7 @@
 	colour = "changeling"
 	key = "g"
 	flags = RESTRICTED | HIVEMIND
+	shorthand = "N/A"
 
 /datum/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -54,6 +57,7 @@
 	colour = "alien"
 	key = "x"
 	flags = RESTRICTED | HIVEMIND
+	shorthand = "N/A"
 
 /datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
@@ -81,6 +85,7 @@
 	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
 	machine_understands = 0
+	shorthand = "Vox"
 
 /datum/language/vox/get_random_name()
 	return ..(FEMALE,1,6)
@@ -103,6 +108,7 @@
 		"gal'h'rfikk", "harfrandid", "mud'gib", "fuu", "ma'jin", "dedo", "ol'btoh", "n'ath", "reth", "sh'yro", "eth", \
 		"d'rekkathnor", "khari'd", "gual'te", "nikka", "nikt'o", "barada", "kla'atu", "barhah", "hra" ,"zar'garis")
 	machine_understands = 0
+	shorthand = "CT"
 
 /datum/language/cult
 	name = "Occult"
@@ -113,6 +119,7 @@
 	colour = "cult"
 	key = "y"
 	flags = RESTRICTED | HIVEMIND
+	shorthand = "N/A"
 
 /datum/language/bogani
 	name = LANGUAGE_BOGANI
@@ -127,3 +134,27 @@
 	"eri","erk","eok","eyl","yyl","hyk","qyb","eon","gni","shaf","bissna","goqqo","xokj","wej","nym","assah","qwssa","nieasl","qyno","shaffar",
 	"egyno","bogani","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")
 	machine_understands = 0
+	shorthand = "BG"
+	
+/datum/language/alium
+	name = LANGUAGE_ALIUM
+	colour = "cult"
+	speech_verb = "hisses"
+	key = "c"
+	flags = RESTRICTED
+	syllables = list("qy","bok","mok","yok","dy","gly","ryl","byl","dok","forbici", "tarem", "n'ath", "reth", "sh'yro", "eth", "d'raggathnor","niii",
+	"d'rekkathnor", "khari'd", "gual'te", "ki","ki","ki","ki","ya","ta","wej","nym","assah","qwssa","nieasl","qyno","shaffar",
+	"egyno","bogani","voijs","nekks","bollos","qoulsan","borrksakja","neemen","aka","nikka","qyegno","shafra","beolas","Byno")
+	machine_understands = 0
+	shorthand = "AL"
+
+/datum/language/alium/New()
+	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
+	..()
+
+/datum/language/alium/get_random_name()
+	var/new_name = ""
+	var/length = rand(1,3)
+	for(var/i=0 to length)
+		new_name += pick(syllables)
+	return capitalize(new_name)

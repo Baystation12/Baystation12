@@ -50,7 +50,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	var/message = "";
 	var/recipient = ""; //the department which will be receiving the message
 	var/priority = -1 ; //Priority of the message being sent
-	light_range = 0
+	light_outer_range = 0
 	var/datum/announcement/announcement = new
 
 /obj/machinery/requests_console/update_icon()
@@ -158,13 +158,10 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	if( href_list["department"] && message )
 		var/log_msg = message
-		var/pass = 0
 		screen = RCS_SENTFAIL
-		for (var/obj/machinery/message_server/MS in world)
-			if(!MS.active) continue
+		var/obj/machinery/message_server/MS = get_message_server(get_z(src))
+		if(MS)
 			MS.send_rc_message(ckey(href_list["department"]),department,log_msg,msgStamped,msgVerified,priority)
-			pass = 1
-		if(pass)
 			screen = RCS_SENTPASS
 			message_log += "<B>Message sent to [recipient]</B><BR>[message]"
 		else

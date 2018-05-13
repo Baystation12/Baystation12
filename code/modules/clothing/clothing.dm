@@ -12,6 +12,9 @@
 	var/list/starting_accessories
 	var/blood_overlay_type = "uniformblood"
 	var/visible_name = "Unknown"
+	var/ironed_state = WRINKLES_DEFAULT
+
+	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
@@ -403,7 +406,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/head/proc/update_flashlight(var/mob/user = null)
 	if(on && !light_applied)
-		set_light(brightness_on)
+		set_light(0.5, 1, 3)
 		light_applied = 1
 	else if(!on && light_applied)
 		set_light(0)
@@ -586,6 +589,7 @@ BLIND     // can't see anything
 	if(usr.put_in_hands(holding))
 		usr.visible_message("<span class='warning'>\The [usr] pulls \the [holding] out of \the [src]!</span>", range = 1)
 		holding = null
+		playsound(get_turf(src), 'sound/effects/holster/sheathout.ogg', 25)
 	else
 		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
 		holding.forceMove(src)

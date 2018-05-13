@@ -21,8 +21,8 @@
 
 /obj/effect/rune/update_icon()
 	overlays.Cut()
-	if(cult.rune_strokes[type])
-		var/list/f = cult.rune_strokes[type]
+	if(GLOB.cult.rune_strokes[type])
+		var/list/f = GLOB.cult.rune_strokes[type]
 		for(var/i in f)
 			var/image/t = image('icons/effects/uristrunes.dmi', "rune-[i]")
 			overlays += t
@@ -35,7 +35,7 @@
 			q -= f
 			var/image/t = image('icons/effects/uristrunes.dmi', "rune-[j]")
 			overlays += t
-		cult.rune_strokes[type] = f.Copy()
+		GLOB.cult.rune_strokes[type] = f.Copy()
 	color = bcolor
 	desc = "A strange collection of symbols drawn in [blood]."
 
@@ -61,7 +61,7 @@
 	if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle) || user.silent)
 		to_chat(user, "You are unable to speak the words of the rune.")
 		return
-	if(cult.powerless)
+	if(GLOB.cult.powerless)
 		to_chat(user, "You read the words, but nothing happens.")
 		return fizzle(user)
 	cast(user)
@@ -114,7 +114,7 @@
 	target.visible_message("<span class='warning'>The markings below [target] glow a bloody red.</span>")
 
 	to_chat(target, "<span class='cult'>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</span>")
-	if(!cult.can_become_antag(target.mind, 1))
+	if(!GLOB.cult.can_become_antag(target.mind, 1))
 		to_chat(target, "<span class='danger'>Are you going insane?</span>")
 	else
 		to_chat(target, "<span class='cult'>Do you want to join the cult of Nar'Sie? You can choose to ignore offer... <a href='?src=\ref[src];join=1'>Join the cult</a>.</span>")
@@ -141,7 +141,7 @@
 /obj/effect/rune/convert/Topic(href, href_list)
 	if(href_list["join"])
 		if(usr.loc == loc && !iscultist(usr))
-			cult.add_antagonist(usr.mind, ignore_role = 1, do_not_equip = 1)
+			GLOB.cult.add_antagonist(usr.mind, ignore_role = 1, do_not_equip = 1)
 
 /obj/effect/rune/teleport
 	cultname = "teleport"
@@ -151,10 +151,10 @@
 	..()
 	var/area/A = get_area(src)
 	destination = A.name
-	cult.teleport_runes += src
+	GLOB.cult.teleport_runes += src
 
 /obj/effect/rune/teleport/Destroy()
-	cult.teleport_runes -= src
+	GLOB.cult.teleport_runes -= src
 	var/turf/T = get_turf(src)
 	for(var/atom/movable/A in contents)
 		A.forceMove(T)
@@ -210,7 +210,7 @@
 
 /obj/effect/rune/teleport/proc/showOptions(var/mob/living/user)
 	var/list/t = list()
-	for(var/obj/effect/rune/teleport/T in cult.teleport_runes)
+	for(var/obj/effect/rune/teleport/T in GLOB.cult.teleport_runes)
 		if(T == src)
 			continue
 		t += "<a href='?src=\ref[src];target=\ref[T]'>[T.destination]</a>"
@@ -439,14 +439,14 @@
 				H.adjustBrainLoss(2 + casters.len)
 		sleep(40)
 	if(victim && victim.loc == T && victim.stat == DEAD)
-		cult.add_cultiness(CULTINESS_PER_SACRIFICE)
+		GLOB.cult.add_cultiness(CULTINESS_PER_SACRIFICE)
 		var/obj/item/device/soulstone/full/F = new(get_turf(src))
 		for(var/mob/M in cultists | get_cultists())
 			to_chat(M, "<span class='warning'>The Geometer of Blood accepts this offering.</span>")
 		visible_message("<span class='notice'>\The [F] appears over \the [src].</span>")
-		cult.sacrificed += victim.mind
-		if(victim.mind == cult.sacrifice_target)
-			for(var/datum/mind/H in cult.current_antagonists)
+		GLOB.cult.sacrificed += victim.mind
+		if(victim.mind == GLOB.cult.sacrifice_target)
+			for(var/datum/mind/H in GLOB.cult.current_antagonists)
 				if(H.current)
 					to_chat(H.current, "<span class='cult'>Your objective is now complete.</span>")
 		//TODO: other rewards?
@@ -750,7 +750,7 @@
 	strokes = 9
 
 /obj/effect/rune/tearreality/cast(var/mob/living/user)
-	if(!cult.allow_narsie)
+	if(!GLOB.cult.allow_narsie)
 		return
 	if(the_end_comes)
 		to_chat(user, "<span class='cult'>You are already summoning! Be patient!</span>")
@@ -805,7 +805,7 @@
 				to_chat(M, "You see a vision of [name] keeling over dead, his blood glowing blue as it escapes his body and dissipates into thin air; you hear an otherwordly scream and feel very weak for a moment.")
 		log_and_message_admins("mended reality with the greatest sacrifice", user)
 		user.dust()
-		cult.powerless = 1
+		GLOB.cult.powerless = 1
 		qdel(HECOMES)
 		qdel(src)
 		return

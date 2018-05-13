@@ -191,6 +191,12 @@
 // Hair Flags
 #define VERY_SHORT 0x1
 #define HAIR_TRIPPABLE 0x2
+#define HAIR_TIEABLE 0x4
+
+//flags to determine if an eyepiece is a hud.
+#define HUD_SCIENCE 0x1
+#define HUD_SECURITY 0x2
+#define HUD_MEDICAL 0x4
 
 // Storage
 

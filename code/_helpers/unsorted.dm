@@ -312,8 +312,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 		fully_replace_character_name(newname)
 
-
-
 //Picks a string of symbols to display as the law number for hacked or ion laws
 /proc/ionnum()
 	return "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
@@ -615,14 +613,16 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		if(istype(N, areatype)) areas += N
 	return areas
 
-//Takes: Area type as text string or as typepath OR an instance of the area.
+//Takes: Area type as a typepath OR an instance of the area.
 //Returns: A list of all atoms	(objs, turfs, mobs) in areas of that type of that type in the world.
 /proc/get_area_all_atoms(var/areatype)
-	if(!areatype) return null
-	if(istext(areatype)) areatype = text2path(areatype)
+	if(!areatype)
+		return null
 	if(isarea(areatype))
 		var/area/areatemp = areatype
 		areatype = areatemp.type
+	if(!ispath(areatype, /area))
+		return null
 
 	var/list/atoms = new/list()
 	for(var/area/N in world)
@@ -1004,7 +1004,7 @@ var/list/WALLITEMS = list(
 	/obj/machinery/status_display, /obj/machinery/requests_console, /obj/machinery/light_switch, /obj/structure/sign,
 	/obj/machinery/newscaster, /obj/machinery/firealarm, /obj/structure/noticeboard,
 	/obj/item/weapon/storage/secure/safe, /obj/machinery/door_timer, /obj/machinery/flasher, /obj/machinery/keycard_auth,
-	/obj/structure/mirror, /obj/structure/fireaxecabinet, /obj/structure/filingcabinet/wallcabinet
+	/obj/item/weapon/storage/mirror, /obj/structure/fireaxecabinet, /obj/structure/filingcabinet/wallcabinet
 	)
 /proc/gotwallitem(loc, dir)
 	for(var/obj/O in loc)
@@ -1088,7 +1088,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /atom/proc/get_light_and_color(var/atom/origin)
 	if(origin)
 		color = origin.color
-		set_light(origin.light_range, origin.light_power, origin.light_color)
+		set_light(origin.light_max_bright, origin.light_inner_range, origin.light_outer_range, origin.light_falloff_curve)
 
 /mob/dview/Initialize()
 	. = ..()

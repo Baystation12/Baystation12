@@ -51,11 +51,9 @@
 	. = ..()
 	if(density)
 		layer = closed_layer
-		explosion_resistance = initial(explosion_resistance)
 		update_heat_protection(get_turf(src))
 	else
 		layer = open_layer
-		explosion_resistance = 0
 
 
 	if(width > 1)
@@ -326,21 +324,22 @@
 
 /obj/machinery/door/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(1)
 			qdel(src)
-		if(2.0)
+		if(2)
 			if(prob(25))
 				qdel(src)
 			else
-				take_damage(300)
-		if(3.0)
+				take_damage(100)
+			take_damage(200)
+		if(3)
 			if(prob(80))
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(2, 1, src)
 				s.start()
 			else
-				take_damage(150)
-	return
+				take_damage(100)
+			take_damage(100)
 
 
 /obj/machinery/door/update_icon()
@@ -387,7 +386,6 @@
 	update_nearby_tiles()
 	sleep(7)
 	src.layer = open_layer
-	explosion_resistance = 0
 	update_icon()
 	set_opacity(0)
 	operating = 0
@@ -409,7 +407,6 @@
 	do_animate("closing")
 	sleep(3)
 	src.set_density(1)
-	explosion_resistance = initial(explosion_resistance)
 	src.layer = closed_layer
 	update_nearby_tiles()
 	sleep(7)

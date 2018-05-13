@@ -204,7 +204,7 @@
 			set_light(0)
 	else
 		if(species.appearance_flags & RADIATION_GLOWS)
-			set_light(max(1,min(10,radiation/10)), max(1,min(20,radiation/20)), species.get_flesh_colour(src))
+			set_light(0.3, 0.1, max(1,min(20,radiation/20)), 2, species.get_flesh_colour(src))
 		// END DOGSHIT SNOWFLAKE
 
 		var/obj/item/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
@@ -257,8 +257,8 @@
 			damage = 8
 			radiation -= 4 * RADIATION_SPEED_COEFFICIENT
 
+		damage = Floor(damage * (isSynthetic() ? 0.5 : species.radiation_mod))
 		if(damage)
-			damage *= isSynthetic() ? 0.5 : species.radiation_mod
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
 			if(!isSynthetic() && organs.len)
@@ -284,7 +284,7 @@
 			src.spread_disease_to(M)
 
 
-/mob/living/carbon/human/get_breath_from_internal(volume_needed=BREATH_VOLUME)
+/mob/living/carbon/human/get_breath_from_internal(volume_needed=STD_BREATH_VOLUME)
 	if(internal)
 
 		var/obj/item/weapon/tank/rig_supply
@@ -317,7 +317,7 @@
 	return !failed_last_breath
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
-	if(!environment)
+	if(!environment || (SPACERES in mutations))
 		return
 
 	//Stuff like the xenomorph's plasma regen happens here.
@@ -371,7 +371,7 @@
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 		var/burn_dam = 0
-		if(bodytemperature < getSpeciesOrSynthTemp(HEAT_LEVEL_1))
+		if(bodytemperature < getSpeciesOrSynthTemp(HEAT_LEVEL_2))
 			burn_dam = HEAT_DAMAGE_LEVEL_1
 		else if(bodytemperature < getSpeciesOrSynthTemp(HEAT_LEVEL_3))
 			burn_dam = HEAT_DAMAGE_LEVEL_2
@@ -576,7 +576,7 @@
 		if(get_shock() >= species.total_health)
 			if(!stat)
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
-				src.visible_message("<B>[src]</B> [species.halloss_message].")
+				src.visible_message("<B>[src]</B> [species.halloss_message]")
 			Paralyse(10)
 
 		if(paralysis || sleeping)
@@ -621,10 +621,12 @@
 		if (drowsyness > 0)
 			drowsyness = max(0, drowsyness-1)
 			eye_blurry = max(2, eye_blurry)
-			if (drowsyness > 10 && (prob(5) || drowsyness >= 60))
-				if(stat == CONSCIOUS)
-					to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
-				Sleeping(5)
+			if(drowsyness > 10)
+				var/zzzchance = min(5, 5*drowsyness/30)
+				if((prob(zzzchance) || drowsyness >= 60))
+					if(stat == CONSCIOUS)
+						to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
+					Sleeping(5)
 
 		confused = max(0, confused - 1)
 
@@ -643,7 +645,7 @@
 		if (nutrition > 0)
 			nutrition = max (0, nutrition - species.hunger_factor)
 
-		if(stasis_value > 1 && drowsyness < stasis_value * 5)
+		if(stasis_value > 1 && drowsyness < stasis_value * 4)
 			drowsyness += min(stasis_value, 3)
 			if(!stat && prob(1))
 				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")

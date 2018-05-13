@@ -39,8 +39,8 @@
 	var/list/temp_chem = list()
 	for(var/datum/reagent/R in C.reagents.reagent_list)
 		temp_chem[R.type] = R.volume
-	data["trace_chem"] = list2params(temp_chem)
-	data["dose_chem"] = list2params(C.chem_doses)
+	data["trace_chem"] = temp_chem
+	data["dose_chem"] = C.chem_doses.Copy()
 	data["blood_colour"] = C.species.get_blood_colour(C)
 	color = data["blood_colour"]
 
@@ -121,7 +121,7 @@
 		M.antibodies |= src.data["antibodies"]
 	..()
 
-#define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
+#define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /datum/reagent/water
 	name = "Water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
@@ -147,7 +147,7 @@
 		return
 
 	var/datum/gas_mixture/environment = T.return_air()
-	var/min_temperature = T0C + 100 // 100C, the boiling point of water
+	var/min_temperature = T20C + rand(0, 20) // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
 
 	var/hotspot = (locate(/obj/fire) in T)
 	if(hotspot && !istype(T, /turf/space))
@@ -160,7 +160,7 @@
 	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
 		var/removed_heat = between(0, volume * WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
-		if (prob(5))
+		if (prob(5) && environment && environment.temperature > T100C)
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
 
 	else if(volume >= 10)

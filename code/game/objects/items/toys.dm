@@ -17,7 +17,10 @@
  *		Toy cult sword
  *		Marshalling wand
  *		Ring bell
+ *
+ *	desk toys
  */
+
 
 
 /obj/item/toy
@@ -684,6 +687,7 @@
 	var/phrase = "I don't want to exist anymore!"
 
 /obj/structure/plushie/attack_hand(mob/user)
+	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if(user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'><b>\The [user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
 	else if (user.a_intent == I_HURT)
@@ -799,10 +803,11 @@
 	attack_verb = list("attacked", "whacked", "jabbed", "poked", "marshalled")
 
 /obj/item/weapon/marshalling_wand/Initialize()
-	set_light(1.5, 1.5, "#ff0000")
+	set_light(0.6, 0.5, 2, 2, "#ff0000")
 	return ..()
 
 /obj/item/weapon/marshalling_wand/attack_self(mob/living/user as mob)
+	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",
 							"<span class='notice'>You beckon with \the [src], signalling forward motion.</span>")
@@ -843,3 +848,46 @@
 	else if (user.a_intent == I_HURT)
 		user.visible_message("<span class='warning'>[user] rings \the [src] repeatedly, signalling a disqualification!</span>")
 		playsound(user.loc, 'sound/items/manydings.ogg', 60)
+
+
+//Office Desk Toys
+
+/obj/item/toy/desk
+	name = "desk toy master"
+	desc = "A object that does not exist. Parent Item"
+
+	var/on = 0
+	var/activation_sound = 'sound/effects/flashlight.ogg'
+
+/obj/item/toy/desk/update_icon()
+	if(on)
+		icon_state = "[initial(icon_state)]-on"
+	else
+		icon_state = "[initial(icon_state)]"
+
+/obj/item/toy/desk/attack_self(mob/user)
+	on = !on
+	if(on && activation_sound)
+		playsound(src.loc, activation_sound, 75, 1)
+	update_icon()
+	return 1
+
+/obj/item/toy/desk/newtoncradle
+	name = "\improper Newton's cradle"
+	desc = "A ancient 21th century super-weapon model demonstrating that Sir Isaac Newton is the deadliest sonuvabitch in space."
+	icon_state = "newtoncradle"
+
+/obj/item/toy/desk/fan
+	name = "office fan"
+	desc = "Your greatest fan."
+	icon_state= "fan"
+
+/obj/item/toy/desk/officetoy
+	name = "office toy"
+	desc = "A generic microfusion powered office desk toy. Only generates magnetism and ennui."
+	icon_state= "desktoy"
+
+/obj/item/toy/desk/dippingbird
+	name = "dipping bird toy"
+	desc = "A ancient human bird idol, worshipped by clerks and desk jockeys."
+	icon_state= "dippybird"

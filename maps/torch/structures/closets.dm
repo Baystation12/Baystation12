@@ -24,7 +24,7 @@
 		/obj/item/clothing/glasses/science,
 		/obj/item/weapon/pickaxe,
 		/obj/item/device/measuring_tape,
-		/obj/item/weapon/pickaxe/hand,
+		/obj/item/weapon/pickaxe/xeno/hand,
 		/obj/item/weapon/storage/bag/fossils,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/taperoll/research,
@@ -51,7 +51,6 @@
 /obj/random/torchcloset/spawn_choices()
 	return list(/obj/structure/closet,
 				/obj/structure/closet/firecloset,
-				/obj/structure/closet/firecloset/full,
 				/obj/structure/closet/emcloset,
 				/obj/structure/closet/jcloset_torch,
 				/obj/structure/closet/athletic_mixed,

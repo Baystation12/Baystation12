@@ -71,7 +71,7 @@
 /// Pills. END
 ////////////////////////////////////////////////////////////////////////////////
 
-//Pills
+//We lied - it's pills all the way down
 /obj/item/weapon/reagent_containers/pill/antitox
 	name = "Dylovene (25u)"
 	desc = "Neutralizes many common toxins."
@@ -95,7 +95,7 @@
 /obj/item/weapon/reagent_containers/pill/cyanide
 	name = "strange pill"
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
-	icon_state = "pillS"
+	icon_state = "pillC"
 /obj/item/weapon/reagent_containers/pill/cyanide/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/cyanide, 50)
@@ -132,7 +132,7 @@
 
 /obj/item/weapon/reagent_containers/pill/paracetamol
 	name = "Paracetamol (15u)"
-	desc = "Tylenol! A painkiller for the ages. Chewables!"
+	desc = "A painkiller for the ages. Chewables!"
 	icon_state = "pill3"
 /obj/item/weapon/reagent_containers/pill/paracetamol/New()
 	..()
@@ -197,16 +197,6 @@
 /obj/item/weapon/reagent_containers/pill/dylovene/New()
 	..()
 	reagents.add_reagent(/datum/reagent/dylovene, 15)
-	color = reagents.get_color()
-
-
-/obj/item/weapon/reagent_containers/pill/inaprovaline
-	name = "Inaprovaline (30u)"
-	desc = "Used to stabilize patients."
-	icon_state = "pill2"
-/obj/item/weapon/reagent_containers/pill/inaprovaline/New()
-	..()
-	reagents.add_reagent(/datum/reagent/inaprovaline, 30)
 	color = reagents.get_color()
 
 
@@ -313,3 +303,33 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 	..()
 	reagents.add_reagent(/datum/reagent/paroxetine, 10)
 	color = reagents.get_color()
+
+
+/obj/item/weapon/reagent_containers/pill/hyronalin
+	name = "Hyronalin (7u)"
+	desc = "Used to treat radiation poisoning."
+	icon_state = "pill1"
+/obj/item/weapon/reagent_containers/pill/hyronalin/New()
+	..()
+	reagents.add_reagent(/datum/reagent/hyronalin, 7)
+	color = reagents.get_color()
+
+
+/obj/item/weapon/reagent_containers/pill/sugariron
+	name = "Sugar-Iron (10u)"
+	desc = "Used to help the body naturally replenish blood."
+	icon_state = "pill1"
+/obj/item/weapon/reagent_containers/pill/sugariron/New()
+	..()
+	reagents.add_reagent(/datum/reagent/iron, 5)
+	reagents.add_reagent(/datum/reagent/sugar, 5)
+	color = reagents.get_color()
+
+/obj/item/weapon/reagent_containers/pill/detergent
+	name = "detergent pod"
+	desc = "Put in water to get space cleaner. Do not eat. Really."
+	icon_state = "pill21"
+
+/obj/item/weapon/reagent_containers/pill/detergent/New()
+	..()
+	reagents.add_reagent(/datum/reagent/ammonia, 30)

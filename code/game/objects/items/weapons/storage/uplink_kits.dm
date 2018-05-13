@@ -78,7 +78,7 @@
 	name = "clerical kit"
 	desc = "Comes with all you need to fake paperwork. Assumes you have passed basic writing lessons."
 	startswith = list(
-		/obj/item/weapon/packageWrap,
+		/obj/item/stack/package_wrap/twenty_five,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/weapon/stamp/chameleon,
 		/obj/item/weapon/pen/chameleon,

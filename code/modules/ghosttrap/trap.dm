@@ -22,7 +22,7 @@ var/list/ghost_traps
 /datum/ghosttrap
 	var/object = "positronic brain"
 	var/minutes_since_death = 0     // If non-zero the ghost must have been dead for this many minutes to be allowed to spawn
-	var/list/ban_checks = list("AI","Cyborg")
+	var/list/ban_checks = list("AI","Robot")
 	var/pref_check = BE_SYNTH
 	var/ghost_trap_message = "They are occupying a positronic brain now."
 	var/ghost_trap_role = "Positronic Brain"
@@ -223,7 +223,7 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 	var/obj/item/device/soulstone/S = target.loc
 	if(istype(S))
 		if(S.is_evil)
-			cult.add_antagonist(target.mind)
+			GLOB.cult.add_antagonist(target.mind)
 			to_chat(target, "<b>Remember, you serve the one who summoned you first, and the cult second.</b>")
 		else
 			to_chat(target, "<b>This soultone has been purified. You do not belong to the cult.</b>")

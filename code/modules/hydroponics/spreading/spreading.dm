@@ -177,7 +177,7 @@
 
 	// Apply colour and light from seed datum.
 	if(seed.get_trait(TRAIT_BIOLUM))
-		set_light(1+round(seed.get_trait(TRAIT_POTENCY)/20), l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR))
+		set_light(0.5, 0.1, 3, l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR))
 	else
 		set_light(0)
 

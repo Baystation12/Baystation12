@@ -30,7 +30,7 @@
 							/obj/structure/closet/wizard/souls = 				1,
 							/obj/item/weapon/gun/energy/staff/animate = 		1,
 							/obj/structure/closet/wizard/scrying = 				1,
-							/obj/item/weapon/monster_manual = 					2,
+							/obj/item/weapon/summoning_stone = 					2,
 							/obj/item/weapon/magic_rock = 						1,
 							/obj/item/weapon/contract/wizard/telepathy = 		1,
 							/obj/item/weapon/contract/apprentice = 				1

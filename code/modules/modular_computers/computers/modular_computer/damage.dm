@@ -14,9 +14,12 @@
 		H.forceMove(newloc)
 		if(prob(25))
 			H.take_damage(rand(10,30))
-	qdel()
+	qdel(src)
 
 /obj/item/modular_computer/proc/take_damage(var/amount, var/component_probability, var/damage_casing = 1, var/randomize = 1)
+	if(!modifiable)
+		return
+
 	if(randomize)
 		// 75%-125%, rand() works with integers, apparently.
 		amount *= (rand(75, 125) / 100.0)

@@ -19,6 +19,7 @@
 	var/const/damage_threshold_count = 10
 	var/damage_threshold_value
 	var/healed_threshold = 1
+	var/oxygen_reserve = 6
 
 /obj/item/organ/internal/brain/robotize()
 	replace_self_with(/obj/item/organ/internal/posibrain)
@@ -136,7 +137,6 @@
 	return (get_current_damage_threshold() > threshold)
 
 /obj/item/organ/internal/brain/Process()
-
 	if(owner)
 		if(damage > max_damage / 2 && healed_threshold)
 			spawn()
@@ -146,45 +146,20 @@
 		if(damage < (max_damage / 4))
 			healed_threshold = 1
 
-		if(owner.paralysis < 1) // Skip it if we're already down.
-
-			if((owner.disabilities & EPILEPSY) && prob(1))
-				to_chat(owner, "<span class='warning'>You have a seizure!</span>")
-				owner.visible_message("<span class='danger'>\The [owner] starts having a seizure!</span>")
-				owner.Paralyse(10)
-				owner.make_jittery(1000)
-			else if((owner.disabilities & TOURETTES) && prob(10))
-				owner.Stun(10)
-				switch(rand(1, 3))
-					if(1)
-						owner.emote("twitch")
-					if(2 to 3)
-						owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-				owner.make_jittery(100)
-			else if((owner.disabilities & NERVOUS) && prob(10))
-				owner.stuttering = max(10, owner.stuttering)
-
-			if(owner.stat == CONSCIOUS)
-				if(damage > 0 && prob(1))
-					owner.custom_pain("Your head feels numb and painful.",10)
-				if(is_bruised() && prob(1) && owner.eye_blurry <= 0)
-					to_chat(owner, "<span class='warning'>It becomes hard to see for some reason.</span>")
-					owner.eye_blurry = 10
-				if(is_broken() && prob(1) && owner.get_active_hand())
-					to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
-					owner.drop_item()
-				if((damage >= (max_damage * 0.75)))
-					if(!owner.lying)
-						to_chat(owner, "<span class='danger'>You black out!</span>")
-					owner.Paralyse(10)
+		handle_disabilities()
+		handle_damage_effects()
 
 		// Brain damage from low oxygenation or lack of blood.
 		if(owner.should_have_organ(BP_HEART))
 
 			// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
 			var/blood_volume = owner.get_blood_oxygenation()
-
-			if(owner.is_asystole()) // Heart is missing or isn't beating and we're not breathing (hardcrit)
+			if(blood_volume < BLOOD_VOLUME_SURVIVE)
+				if(!owner.chem_effects[CE_STABLE] || prob(60))
+					oxygen_reserve = max(0, oxygen_reserve-1)
+			else
+				oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
+			if(!oxygen_reserve) //(hardcrit)
 				owner.Paralyse(3)
 			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || owner.chem_effects[CE_BRAIN_REGEN] || (!past_damage_threshold(3) && owner.chem_effects[CE_STABLE]))
 			var/damprob
@@ -222,3 +197,40 @@
 					if(prob(damprob))
 						take_damage(1)
 	..()
+
+/obj/item/organ/internal/brain/proc/handle_disabilities()
+	if(owner.stat)
+		return
+	if((owner.disabilities & EPILEPSY) && prob(1))
+		to_chat(owner, "<span class='warning'>You have a seizure!</span>")
+		owner.visible_message("<span class='danger'>\The [owner] starts having a seizure!</span>")
+		owner.Paralyse(10)
+		owner.make_jittery(1000)
+	else if((owner.disabilities & TOURETTES) && prob(10))
+		owner.Stun(10)
+		switch(rand(1, 3))
+			if(1)
+				owner.emote("twitch")
+			if(2 to 3)
+				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
+		owner.make_jittery(100)
+	else if((owner.disabilities & NERVOUS) && prob(10))
+		owner.stuttering = max(10, owner.stuttering)
+
+/obj/item/organ/internal/brain/proc/handle_damage_effects()
+	if(owner.stat)
+		return
+	if(damage > 0 && prob(1))
+		owner.custom_pain("Your head feels numb and painful.",10)
+	if(is_bruised() && prob(1) && owner.eye_blurry <= 0)
+		to_chat(owner, "<span class='warning'>It becomes hard to see for some reason.</span>")
+		owner.eye_blurry = 10
+	if(damage >= 0.5*max_damage && prob(1) && owner.get_active_hand())
+		to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
+		owner.drop_item()
+	if(damage >= 0.6*max_damage)
+		owner.slurring = max(owner.slurring, 2)
+	if(is_broken())
+		if(!owner.lying)
+			to_chat(owner, "<span class='danger'>You black out!</span>")
+		owner.Paralyse(10)

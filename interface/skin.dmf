@@ -1,63 +1,63 @@
 macro "borghotkeymode"
 	elem 
-		name = "TAB"
+		name = "Tab"
 		command = ".winset \"mainwindow.macro=borgmacro hotkey_toggle.is-checked=false input.focus=true input.background-color=#D3B5B5\""
 	elem 
-		name = "CENTER+REP"
+		name = "Center+REP"
 		command = ".center"
 	elem 
-		name = "NORTHEAST"
+		name = "Northeast"
 		command = ".northeast"
 	elem 
-		name = "SOUTHEAST"
+		name = "Southeast"
 		command = ".southeast"
 	elem 
-		name = "SOUTHWEST"
+		name = "Southwest"
 		command = ".southwest"
 	elem 
-		name = "NORTHWEST"
+		name = "Northwest"
 		command = ".northwest"
 	elem 
-		name = "ALT+WEST"
+		name = "ALT+West"
 		command = "westfaceperm"
 	elem 
-		name = "CTRL+WEST"
+		name = "CTRL+West"
 		command = "westface"
 	elem 
-		name = "WEST+REP"
+		name = "West+REP"
 		command = ".moveleft"
 	elem 
-		name = "ALT+NORTH"
+		name = "ALT+North"
 		command = "northfaceperm"
 	elem 
-		name = "CTRL+NORTH"
+		name = "CTRL+North"
 		command = "northface"
 	elem 
-		name = "NORTH+REP"
+		name = "North+REP"
 		command = ".moveup"
 	elem 
-		name = "ALT+EAST"
+		name = "ALT+East"
 		command = "eastfaceperm"
 	elem 
-		name = "CTRL+EAST"
+		name = "CTRL+East"
 		command = "eastface"
 	elem 
-		name = "EAST+REP"
+		name = "East+REP"
 		command = ".moveright"
 	elem 
-		name = "ALT+SOUTH"
+		name = "ALT+South"
 		command = "southfaceperm"
 	elem 
-		name = "CTRL+SOUTH"
+		name = "CTRL+South"
 		command = "southface"
 	elem 
-		name = "SOUTH+REP"
+		name = "South+REP"
 		command = ".movedown"
 	elem 
-		name = "INSERT"
+		name = "Insert"
 		command = "a-intent right"
 	elem 
-		name = "DELETE"
+		name = "Delete"
 		command = "delete-key-pressed"
 	elem 
 		name = "1"
@@ -162,6 +162,27 @@ macro "borghotkeymode"
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
 	elem 
+		name = "Numpad1"
+		command = "body-r-leg"
+	elem 
+		name = "Numpad2"
+		command = "body-groin"
+	elem 
+		name = "Numpad3"
+		command = "body-l-leg"
+	elem 
+		name = "Numpad4"
+		command = "body-r-arm"
+	elem 
+		name = "Numpad5"
+		command = "body-chest"
+	elem 
+		name = "Numpad6"
+		command = "body-l-arm"
+	elem 
+		name = "Numpad8"
+		command = "body-toggle-head"
+	elem 
 		name = "F1"
 		command = "adminhelp"
 	elem 
@@ -184,7 +205,7 @@ macro "borghotkeymode"
 		command = ".me"
 	elem 
 		name = "F5"
-		command = "asay"
+		command = "msay"
 	elem 
 		name = "F6"
 		command = "Player-Panel-New"
@@ -197,88 +218,67 @@ macro "borghotkeymode"
 	elem 
 		name = "F12"
 		command = "F12"
-	elem 
-		name = "NUMPAD8"
-		command = "body-toggle-head"
-	elem 
-		name = "NUMPAD5"
-		command = "body-chest"
-	elem 
-		name = "NUMPAD4"
-		command = "body-r-arm"
-	elem 
-		name = "NUMPAD6"
-		command = "body-l-arm"
-	elem 
-		name = "NUMPAD2"
-		command = "body-groin"
-	elem 
-		name = "NUMPAD1"
-		command = "body-r-leg"
-	elem 
-		name = "NUMPAD3"
-		command = "body-l-leg"
 
 macro "macro"
 	elem 
-		name = "TAB"
+		name = "Tab"
 		command = ".winset \"mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
 	elem 
-		name = "CENTER+REP"
+		name = "Center+REP"
 		command = ".center"
 	elem 
-		name = "NORTHEAST"
+		name = "Northeast"
 		command = ".northeast"
 	elem 
-		name = "SOUTHEAST"
+		name = "Southeast"
 		command = ".southeast"
 	elem 
-		name = "SOUTHWEST"
+		name = "Southwest"
 		command = ".southwest"
 	elem 
-		name = "NORTHWEST"
+		name = "Northwest"
 		command = ".northwest"
 	elem 
-		name = "ALT+WEST"
+		name = "ALT+West"
 		command = "westfaceperm"
 	elem 
-		name = "CTRL+WEST"
+		name = "CTRL+West"
 		command = "westface"
 	elem 
-		name = "WEST+REP"
+		name = "West+REP"
 		command = ".moveleft"
 	elem 
-		name = "ALT+NORTH"
+		name = "ALT+North"
 		command = "northfaceperm"
 	elem 
-		name = "CTRL+NORTH"
+		name = "CTRL+North"
 		command = "northface"
 	elem 
-		name = "NORTH+REP"
+		name = "North+REP"
 		command = ".moveup"
 	elem 
-		name = "ALT+EAST"
+		name = "ALT+East"
 		command = "eastfaceperm"
 	elem 
-		name = "CTRL+EAST"
+		name = "CTRL+East"
 		command = "eastface"
 	elem 
-		name = "EAST+REP"
+		name = "East+REP"
 		command = ".moveright"
 	elem 
-		name = "ALT+SOUTH"
+		name = "ALT+South"
 		command = "southfaceperm"
 	elem 
-		name = "CTRL+SOUTH"
+		name = "CTRL+South"
 		command = "southface"
 	elem 
-		name = "SOUTH+REP"
+		name = "South+REP"
 		command = ".movedown"
 	elem 
-		name = "INSERT"
+		name = "Insert"
 		command = "a-intent right"
 	elem 
-		name = "DELETE"
+		name = "Delete"
 		command = "delete-key-pressed"
 	elem 
 		name = "CTRL+1"
@@ -332,25 +332,25 @@ macro "macro"
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
 	elem 
-		name = "CTRL+NUMPAD1"
+		name = "CTRL+Numpad1"
 		command = "body-r-leg"
 	elem 
-		name = "CTRL+NUMPAD2"
+		name = "CTRL+Numpad2"
 		command = "body-groin"
 	elem 
-		name = "CTRL+NUMPAD3"
+		name = "CTRL+Numpad3"
 		command = "body-l-leg"
 	elem 
-		name = "CTRL+NUMPAD4"
+		name = "CTRL+Numpad4"
 		command = "body-r-arm"
 	elem 
-		name = "CTRL+NUMPAD5"
+		name = "CTRL+Numpad5"
 		command = "body-chest"
 	elem 
-		name = "CTRL+NUMPAD6"
+		name = "CTRL+Numpad6"
 		command = "body-l-arm"
 	elem 
-		name = "CTRL+NUMPAD8"
+		name = "CTRL+Numpad8"
 		command = "body-toggle-head"
 	elem 
 		name = "F1"
@@ -375,7 +375,7 @@ macro "macro"
 		command = ".me"
 	elem 
 		name = "F5"
-		command = "asay"
+		command = "msay"
 	elem 
 		name = "F6"
 		command = "Player-Panel-New"
@@ -391,64 +391,64 @@ macro "macro"
 
 macro "hotkeymode"
 	elem 
-		name = "TAB"
+		name = "Tab"
 		command = ".winset \"mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true\""
 	elem 
-		name = "CENTER+REP"
+		name = "Center+REP"
 		command = ".center"
 	elem 
-		name = "NORTHEAST"
+		name = "Northeast"
 		command = ".northeast"
 	elem 
-		name = "SOUTHEAST"
+		name = "Southeast"
 		command = ".southeast"
 	elem 
-		name = "SOUTHWEST"
+		name = "Southwest"
 		command = ".southwest"
 	elem 
-		name = "NORTHWEST"
+		name = "Northwest"
 		command = ".northwest"
 	elem 
-		name = "ALT+WEST"
+		name = "ALT+West"
 		command = "westfaceperm"
 	elem 
-		name = "CTRL+WEST"
+		name = "CTRL+West"
 		command = "westface"
 	elem 
-		name = "WEST+REP"
+		name = "West+REP"
 		command = ".moveleft"
 	elem 
-		name = "ALT+NORTH"
+		name = "ALT+North"
 		command = "northfaceperm"
 	elem 
-		name = "CTRL+NORTH"
+		name = "CTRL+North"
 		command = "northface"
 	elem 
-		name = "NORTH+REP"
+		name = "North+REP"
 		command = ".moveup"
 	elem 
-		name = "ALT+EAST"
+		name = "ALT+East"
 		command = "eastfaceperm"
 	elem 
-		name = "CTRL+EAST"
+		name = "CTRL+East"
 		command = "eastface"
 	elem 
-		name = "EAST+REP"
+		name = "East+REP"
 		command = ".moveright"
 	elem 
-		name = "ALT+SOUTH"
+		name = "ALT+South"
 		command = "southfaceperm"
 	elem 
-		name = "CTRL+SOUTH"
+		name = "CTRL+South"
 		command = "southface"
 	elem 
-		name = "SOUTH+REP"
+		name = "South+REP"
 		command = ".movedown"
 	elem 
-		name = "INSERT"
+		name = "Insert"
 		command = "a-intent right"
 	elem 
-		name = "DELETE"
+		name = "Delete"
 		command = "delete-key-pressed"
 	elem 
 		name = "1"
@@ -565,25 +565,25 @@ macro "hotkeymode"
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
 	elem 
-		name = "NUMPAD1"
+		name = "Numpad1"
 		command = "body-r-leg"
 	elem 
-		name = "NUMPAD2"
+		name = "Numpad2"
 		command = "body-groin"
 	elem 
-		name = "NUMPAD3"
+		name = "Numpad3"
 		command = "body-l-leg"
 	elem 
-		name = "NUMPAD4"
+		name = "Numpad4"
 		command = "body-r-arm"
 	elem 
-		name = "NUMPAD5"
+		name = "Numpad5"
 		command = "body-chest"
 	elem 
-		name = "NUMPAD6"
+		name = "Numpad6"
 		command = "body-l-arm"
 	elem 
-		name = "NUMPAD8"
+		name = "Numpad8"
 		command = "body-toggle-head"
 	elem 
 		name = "F1"
@@ -608,7 +608,9 @@ macro "hotkeymode"
 		command = ".me"
 	elem 
 		name = "F5"
-		command = "asay"
+		command = "msay"
+	elem 
+		name = "F5+REP"
 	elem 
 		name = "F6"
 		command = "Player-Panel-New"
@@ -630,64 +632,64 @@ macro "hotkeymode"
 
 macro "borgmacro"
 	elem 
-		name = "TAB"
+		name = "Tab"
 		command = ".winset \"mainwindow.macro=borghotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#F0F0F0\""
 	elem 
-		name = "CENTER+REP"
+		name = "Center+REP"
 		command = ".center"
 	elem 
-		name = "NORTHEAST"
+		name = "Northeast"
 		command = ".northeast"
 	elem 
-		name = "SOUTHEAST"
+		name = "Southeast"
 		command = ".southeast"
 	elem 
-		name = "SOUTHWEST"
+		name = "Southwest"
 		command = ".southwest"
 	elem 
-		name = "NORTHWEST"
+		name = "Northwest"
 		command = ".northwest"
 	elem 
-		name = "ALT+WEST"
+		name = "ALT+West"
 		command = "westfaceperm"
 	elem 
-		name = "CTRL+WEST"
+		name = "CTRL+West"
 		command = "westface"
 	elem 
-		name = "WEST+REP"
+		name = "West+REP"
 		command = ".moveleft"
 	elem 
-		name = "ALT+NORTH"
+		name = "ALT+North"
 		command = "northfaceperm"
 	elem 
-		name = "CTRL+NORTH"
+		name = "CTRL+North"
 		command = "northface"
 	elem 
-		name = "NORTH+REP"
+		name = "North+REP"
 		command = ".moveup"
 	elem 
-		name = "ALT+EAST"
+		name = "ALT+East"
 		command = "eastfaceperm"
 	elem 
-		name = "CTRL+EAST"
+		name = "CTRL+East"
 		command = "eastface"
 	elem 
-		name = "EAST+REP"
+		name = "East+REP"
 		command = ".moveright"
 	elem 
-		name = "ALT+SOUTH"
+		name = "ALT+South"
 		command = "southfaceperm"
 	elem 
-		name = "CTRL+SOUTH"
+		name = "CTRL+South"
 		command = "southface"
 	elem 
-		name = "SOUTH+REP"
+		name = "South+REP"
 		command = ".movedown"
 	elem 
-		name = "INSERT"
+		name = "Insert"
 		command = "a-intent right"
 	elem 
-		name = "DELETE"
+		name = "Delete"
 		command = "delete-key-pressed"
 	elem 
 		name = "CTRL+1"
@@ -735,25 +737,25 @@ macro "borgmacro"
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
 	elem 
-		name = "CTRL+NUMPAD1"
+		name = "CTRL+Numpad1"
 		command = "body-r-leg"
 	elem 
-		name = "CTRL+NUMPAD2"
+		name = "CTRL+Numpad2"
 		command = "body-groin"
 	elem 
-		name = "CTRL+NUMPAD3"
+		name = "CTRL+Numpad3"
 		command = "body-l-leg"
 	elem 
-		name = "CTRL+NUMPAD4"
+		name = "CTRL+Numpad4"
 		command = "body-r-arm"
 	elem 
-		name = "CTRL+NUMPAD5"
+		name = "CTRL+Numpad5"
 		command = "body-chest"
 	elem 
-		name = "CTRL+NUMPAD6"
+		name = "CTRL+Numpad6"
 		command = "body-l-arm"
 	elem 
-		name = "CTRL+NUMPAD8"
+		name = "CTRL+Numpad8"
 		command = "body-toggle-head"
 	elem 
 		name = "F1"
@@ -778,7 +780,7 @@ macro "borgmacro"
 		command = ".me"
 	elem 
 		name = "F5"
-		command = "asay"
+		command = "msay"
 	elem 
 		name = "F6"
 		command = "Player-Panel-New"

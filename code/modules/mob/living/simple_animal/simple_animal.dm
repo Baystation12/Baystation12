@@ -33,6 +33,7 @@
 	var/response_disarm = "tries to disarm"
 	var/response_harm   = "tries to hurt"
 	var/harm_intent_damage = 3
+	var/can_escape = 0 // 'smart' simple animals such as human enemies, or things small, big, sharp or strong enough to power out of a net
 
 	//Temperature effect
 	var/minbodytemp = 250
@@ -76,7 +77,6 @@
 			set_density(1)
 		return 0
 
-
 	if(health <= 0)
 		death()
 		return
@@ -88,6 +88,15 @@
 	handle_weakened()
 	handle_paralysed()
 	handle_supernatural()
+
+	if(buckled && can_escape)
+		if(istype(buckled, /obj/effect/energy_net))
+			var/obj/effect/energy_net/Net = buckled
+			Net.escape_net(src)
+		else if(prob(50))
+			escape(src, buckled)
+		else if(prob(50))
+			visible_message("<span class='warning'>\The [src] struggles against \the [buckled]!</span>")
 
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
@@ -129,7 +138,7 @@
 		return 1
 	var/datum/gas_mixture/environment = A.return_air()
 
-	if(environment)
+	if(!(SPACERES in mutations) && environment)
 		if( abs(environment.temperature - bodytemperature) > 40 )
 			bodytemperature += (environment.temperature - bodytemperature) / 5
 		if(min_gas)
@@ -155,6 +164,10 @@
 		adjustBruteLoss(unsuitable_atoms_damage)
 	return 1
 
+/mob/living/simple_animal/proc/escape(mob/living/M, obj/O)
+	O.unbuckle_mob(M)
+	visible_message("<span class='danger'>\The [M] escapes from \the [O]!</span>")
+
 /mob/living/simple_animal/proc/handle_supernatural()
 	if(purge)
 		purge -= 1
@@ -177,6 +190,7 @@
 		damage = (Proj.damage / 8)
 
 	adjustBruteLoss(damage)
+	Proj.on_hit(src)
 	return 0
 
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
@@ -267,6 +281,7 @@
 
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
 	icon_state = icon_dead
+	update_icon()
 	density = 0
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)

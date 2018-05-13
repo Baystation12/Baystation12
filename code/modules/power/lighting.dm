@@ -221,7 +221,7 @@
 		if(current_mode && (current_mode in lightbulb.lighting_modes))
 			changed = set_light(arglist(lightbulb.lighting_modes[current_mode]))
 		else
-			changed = set_light(lightbulb.brightness_range, lightbulb.brightness_power, lightbulb.brightness_color)
+			changed = set_light(lightbulb.b_max_bright, lightbulb.b_inner_range, lightbulb.b_outer_range, lightbulb.b_curve, lightbulb.b_colour)
 
 		if(trigger && changed && get_status() == LIGHT_OK)
 			switch_check()
@@ -229,7 +229,7 @@
 		use_power = 0
 		set_light(0)
 
-	active_power_usage = ((light_range * light_power) * LIGHTING_POWER_FACTOR)
+	active_power_usage = ((light_outer_range * light_max_bright) * LIGHTING_POWER_FACTOR)
 
 /obj/machinery/light/proc/get_status()
 	if(!lightbulb)
@@ -283,13 +283,13 @@
 	var/fitting = get_fitting_name()
 	switch(get_status())
 		if(LIGHT_OK)
-			to_chat(user, "[desc] It is turned [on? "on" : "off"].")
+			to_chat(user, "It is turned [on? "on" : "off"].")
 		if(LIGHT_EMPTY)
-			to_chat(user, "[desc] The [fitting] has been removed.")
+			to_chat(user, "The [fitting] has been removed.")
 		if(LIGHT_BURNED)
-			to_chat(user, "[desc] The [fitting] is burnt out.")
+			to_chat(user, "The [fitting] is burnt out.")
 		if(LIGHT_BROKEN)
-			to_chat(user, "[desc] The [fitting] has been smashed.")
+			to_chat(user, "The [fitting] has been smashed.")
 
 /obj/machinery/light/proc/get_fitting_name()
 	var/obj/item/weapon/light/L = light_type
@@ -532,9 +532,11 @@
 	var/rigged = 0		// true if rigged to explode
 	var/broken_chance = 2
 
-	var/brightness_range = 2 //how much light it gives off
-	var/brightness_power = 1
-	var/brightness_color = "#ffffff"
+	var/b_max_bright = 0.9
+	var/b_inner_range = 1
+	var/b_outer_range = 5
+	var/b_curve = 2
+	var/b_colour = "#fffee0"
 	var/list/lighting_modes = list()
 	var/sound_on
 
@@ -546,19 +548,20 @@
 	item_state = "c_tube"
 	matter = list("glass" = 100)
 
-	brightness_range = 7	// luminosity when on, also used in power calculation
-	brightness_power = 6
-	brightness_color = "#fffee0"
+	b_outer_range = 5
+	b_colour = "#fffee0"
 	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_range = 4, l_power = 1, l_color = "#da0205"),
+		LIGHTMODE_EMERGENCY = list(l_outer_range = 4, l_max_bright = 1, l_color = "#da0205"),
 		)
 	sound_on = 'sound/machines/lightson.ogg'
 
 /obj/item/weapon/light/tube/large
 	w_class = ITEM_SIZE_SMALL
 	name = "large light tube"
-	brightness_range = 9
-	brightness_power = 6
+	b_max_bright = 0.95
+	b_inner_range = 2
+	b_outer_range = 8
+	b_curve = 2.5
 
 /obj/item/weapon/light/bulb
 	name = "light bulb"
@@ -569,22 +572,22 @@
 	broken_chance = 5
 	matter = list("glass" = 100)
 
-	brightness_range = 4
-	brightness_power = 4
-	brightness_color = "#a0a080"
+	b_max_bright = 0.6
+	b_inner_range = 0.1
+	b_outer_range = 4
+	b_curve = 3
+	b_colour = "#fcfcc7"
 	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_range = 3, l_power = 1, l_color = "#da0205"),
+		LIGHTMODE_EMERGENCY = list(l_outer_range = 3, l_max_bright = 1, l_color = "#da0205"),
 		)
 
 /obj/item/weapon/light/bulb/red
 	color = "#da0205"
-	brightness_color = "#da0205"
+	b_colour = "#da0205"
 
 /obj/item/weapon/light/bulb/red/readylight
-	brightness_range = 5
-	brightness_power = 2
 	lighting_modes = list(
-		LIGHTMODE_READY = list(l_range = 5, l_power = 1, l_color = "#00ff00"),
+		LIGHTMODE_READY = list(l_outer_range = 5, l_max_bright = 1, l_color = "#00ff00"),
 		)
 
 /obj/item/weapon/light/throw_impact(atom/hit_atom)
@@ -598,8 +601,6 @@
 	base_state = "fbulb"
 	item_state = "egg4"
 	matter = list("glass" = 100)
-	brightness_range = 4
-	brightness_power = 4
 
 // update the icon state and description of the light
 /obj/item/weapon/light/update_icon()
@@ -676,5 +677,5 @@
 	else if(prob(min(60, switchcount*switchcount*0.01)))
 		status = LIGHT_BURNED
 	else if(sound_on)
-		playsound(get_turf(src),sound_on, 40)
+		playsound(src, sound_on, 75)
 	return status

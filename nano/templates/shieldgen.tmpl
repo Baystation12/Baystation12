@@ -75,9 +75,9 @@
 				<td>{{:helper.link('Turn on', null, {'start_generator' : '1'})}}
 			{{/if}}
 			{{if data.running}}
-				<td>{{:helper.link('EMERGENCY SHUTDOWN', null, {'emergency_shutdown' : '1'}, null, 'redButton')}}
-			{{else}}
-				<td>{{:helper.link('EMERGENCY SHUTDOWN', null, {'emergency_shutdown' : '1'}, null, 'disabled')}}
+				{{if data.hacked}}
+					<td>{{:helper.link('EMERGENCY SHUTDOWN', null, {'emergency_shutdown' : '1'}, null, 'redButton')}}
+				{{/if}}
 			{{/if}}
 			
 			<tr>

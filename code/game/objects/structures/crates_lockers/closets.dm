@@ -20,8 +20,8 @@
 	var/breakout = 0 //if someone is currently breaking out. mutex
 	var/storage_capacity = 2 * MOB_MEDIUM //This is so that someone can't pack hundreds of items in a locker/crate
 							  //then open it in a populated area to crash clients.
-	var/open_sound = 'sound/effects/locker_open.ogg'
-	var/close_sound = 'sound/effects/locker_close.ogg'
+	var/open_sound = 'sound/effects/closet_open.ogg'
+	var/close_sound = 'sound/effects/closet_close.ogg'
 
 	var/storage_types = CLOSET_STORAGE_ALL
 	var/setup = CLOSET_CAN_BE_WELDED
@@ -114,7 +114,7 @@
 	src.dump_contents()
 
 	src.opened = 1
-	playsound(src.loc, open_sound, 15, 1, -3)
+	playsound(src.loc, open_sound, 50, 1, -3)
 	density = 0
 	update_icon()
 	return 1
@@ -128,7 +128,7 @@
 	store_contents()
 	src.opened = 0
 
-	playsound(src.loc, close_sound, 25, 0, -3)
+	playsound(src.loc, close_sound, 50, 0, -3)
 	density = 1
 
 	update_icon()
@@ -257,7 +257,7 @@
 
 	return
 
-/obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/attackby(obj/item/W as obj, mob/user as mob)
 	if(src.opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W
@@ -295,7 +295,7 @@
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(src.loc, "sparks", 50, 1)
 			open()
-	else if(istype(W, /obj/item/weapon/packageWrap))
+	else if(istype(W, /obj/item/stack/package_wrap))
 		return
 	else if(isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/weapon/weldingtool/WT = W
@@ -443,7 +443,7 @@
 			return
 
 		playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
-		animate_shake()
+		shake_animation()
 		add_fingerprint(escapee)
 
 	//Well then break it!
@@ -452,7 +452,7 @@
 	visible_message("<span class='danger'>\The [escapee] successfully broke out of \the [src]!</span>")
 	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 	break_open()
-	animate_shake()
+	shake_animation()
 
 /obj/structure/closet/proc/break_open()
 	welded = 0
@@ -465,12 +465,6 @@
 		var/obj/structure/bigDelivery/BD = loc
 		BD.unwrap()
 	open()
-
-/obj/structure/closet/proc/animate_shake()
-	var/init_px = pixel_x
-	var/shake_dir = pick(-1, 1)
-	animate(src, transform=turn(matrix(), 8*shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
-	animate(transform=null, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
 
 /obj/structure/closet/onDropInto(var/atom/movable/AM)
 	return

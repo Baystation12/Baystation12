@@ -4,6 +4,8 @@
 	GLOB.living_mob_list_ -= src
 	unset_machine()
 	QDEL_NULL(hud_used)
+	if(istype(skillset))
+		QDEL_NULL(skillset)
 	for(var/obj/item/grab/G in grabbed_by)
 		qdel(G)
 	clear_fullscreen()
@@ -44,6 +46,7 @@
 
 /mob/Initialize()
 	. = ..()
+	skillset = new skillset(src)
 	START_PROCESSING(SSmobs, src)
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
@@ -600,7 +603,7 @@
 	return stat == DEAD
 
 /mob/proc/is_mechanical()
-	if(mind && (mind.assigned_role == "Cyborg" || mind.assigned_role == "AI"))
+	if(mind && (mind.assigned_role == "Robot" || mind.assigned_role == "AI"))
 		return 1
 	return istype(src, /mob/living/silicon) || get_species() == SPECIES_IPC
 
@@ -859,7 +862,7 @@
 /mob/proc/embedded_needs_process()
 	return (embedded.len > 0)
 
-mob/proc/yank_out_object()
+/mob/proc/yank_out_object()
 	set category = "Object"
 	set name = "Yank out object"
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
@@ -899,7 +902,7 @@ mob/proc/yank_out_object()
 		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
 	else
 		to_chat(U, "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>")
-	if(!do_mob(U, S, 30))
+	if(!do_mob(U, S, 30, incapacitation_flags = INCAPACITATION_DEFAULT & (~INCAPACITATION_FORCELYING))) //let people pinned to stuff yank it out, otherwise they're stuck... forever!!!
 		return
 	if(!selection || !S || !U)
 		return

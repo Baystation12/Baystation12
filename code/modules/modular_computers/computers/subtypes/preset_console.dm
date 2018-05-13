@@ -4,6 +4,7 @@
 	tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)
 	hard_drive = new/obj/item/weapon/computer_hardware/hard_drive/super(src)
 	network_card = new/obj/item/weapon/computer_hardware/network_card/wired(src)
+	scanner = new /obj/item/weapon/computer_hardware/scanner/paper(src)
 
 // Engineering
 /obj/item/modular_computer/console/preset/engineering/install_default_programs()
@@ -79,6 +80,7 @@
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
+	hard_drive.store_file(new/datum/computer_file/program/forceauthorization())
 	hard_drive.store_file(new/datum/computer_file/program/records())
 	hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 

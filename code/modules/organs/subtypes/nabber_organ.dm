@@ -124,10 +124,6 @@
 		else
 			H.oxygen_alert = 2
 
-
-/obj/item/organ/internal/heart/nabber
-	open = 1
-
 /obj/item/organ/internal/brain/nabber
 	var lowblood_tally = 0
 	var lowblood_mult = 2
@@ -213,4 +209,5 @@
 /obj/item/organ/external/head/nabber
 	name = "head"
 	vital = 0
+	can_heal_overkill = 0
 	has_lips = 0

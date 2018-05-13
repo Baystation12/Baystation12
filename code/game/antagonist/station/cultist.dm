@@ -12,12 +12,12 @@
 
 #define CULT_MAX_CULTINESS 1200 // When this value is reached, the game stops checking for updates so we don't recheck every time a tile is converted in endgame
 
-var/datum/antagonist/cultist/cult
+GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 
 /proc/iscultist(var/mob/player)
-	if(!cult || !player.mind)
+	if(!GLOB.cult || !player.mind)
 		return 0
-	if(player.mind in cult.current_antagonists)
+	if(player.mind in GLOB.cult.current_antagonists)
 		return 1
 
 /datum/antagonist/cultist
@@ -53,10 +53,6 @@ var/datum/antagonist/cultist/cult
 	var/conversion_blurb = "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
 
 	faction = "cult"
-
-/datum/antagonist/cultist/New()
-	..()
-	cult = src
 
 /datum/antagonist/cultist/create_global_objectives()
 
@@ -138,17 +134,17 @@ var/datum/antagonist/cultist/cult
 
 /datum/antagonist/cultist/proc/update_cult_magic(var/list/to_update)
 	if(CULT_RUNES_1 in to_update)
-		for(var/datum/mind/H in cult.current_antagonists)
+		for(var/datum/mind/H in GLOB.cult.current_antagonists)
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>The veil between this world and beyond grows thin, and your power grows.</span>")
 				add_cult_magic(H.current)
 	if(CULT_RUNES_2 in to_update)
-		for(var/datum/mind/H in cult.current_antagonists)
+		for(var/datum/mind/H in GLOB.cult.current_antagonists)
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>You feel that the fabric of reality is tearing.</span>")
 				add_cult_magic(H.current)
 	if(CULT_RUNES_3 in to_update)
-		for(var/datum/mind/H in cult.current_antagonists)
+		for(var/datum/mind/H in GLOB.cult.current_antagonists)
 			if(H.current)
 				to_chat(H.current, "<span class='cult'>The world is at end. The veil is as thin as ever.</span>")
 				add_cult_magic(H.current)
@@ -165,7 +161,7 @@ var/datum/antagonist/cultist/cult
 
 /datum/antagonist/cultist/Topic(href, href_list)
 	if(href_list["confirmleave"])
-		cult.remove_antagonist(usr.mind, 1)
+		GLOB.cult.remove_antagonist(usr.mind, 1)
 
 /datum/antagonist/cultist/proc/remove_cultiness(var/amount)
 	cult_rating = max(0, cult_rating - amount)

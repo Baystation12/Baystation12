@@ -33,12 +33,12 @@
 			if (shuttle.in_use)
 				shuttle_status = "Busy."
 			else
-				shuttle_status = "Standing-by at [shuttle.get_location_name()]."
+				shuttle_status = "Standing-by at \the [shuttle.get_location_name()]."
 
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."
 		if(WAIT_ARRIVE)
-			shuttle_status = "Proceeding to [shuttle.get_destination_name()]."
+			shuttle_status = "Proceeding to \the [shuttle.get_destination_name()]."
 		if(WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
 

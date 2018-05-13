@@ -35,6 +35,7 @@
 	speed = -1
 	health = 280
 	maxHealth = 280
+	can_escape = 1
 
 	harm_intent_damage = 8
 	melee_damage_lower = 30
@@ -92,6 +93,7 @@
 /mob/living/simple_animal/hostile/hive_alien/defender/wounded
 	name = "wounded hive defender"
 	health = 80
+	can_escape = 0
 
 /obj/effect/shuttle_landmark/nav_blueriv/nav1
 	name = "Arctic Planet Landing Point #1"
@@ -123,7 +125,7 @@
 /turf/simulated/floor/away/blueriver/alienfloor/Initialize()
 	.=..()
 
-	set_light(l_range = 5, l_power = 2, l_color = "#0066FF")
+	set_light(0.7, 1, 5, l_color = "#0066ff")
 
 /turf/unsimulated/wall/away/blueriver/livingwall
 	name = "alien wall"
@@ -154,7 +156,7 @@
 	.=..()
 
 	icon_state = "bluespacecrystal[rand(1,3)]"
-	set_light(l_range = 5, l_power = 2, l_color = "#0066FF")
+	set_light(0.7, 1, 5, l_color = "#0066ff")
 
 /turf/unsimulated/wall/supermatter/no_spread/process()
 	return PROCESS_KILL

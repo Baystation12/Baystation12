@@ -29,7 +29,8 @@
 		"Monkey" = "monkey",
 		"Rabbit" = "rabbit",
 		"Mushroom" = "mushroom",
-		"Corgi" = "corgi"
+		"Corgi" = "corgi",
+		"Crow" = "crow"
 		)
 
 	var/global/list/possible_say_verbs = list(
@@ -38,7 +39,8 @@
 		"Beep" = list("beeps","beeps loudly","boops"),
 		"Chirp" = list("chirps","chirrups","cheeps"),
 		"Feline" = list("purrs","yowls","meows"),
-		"Canine" = list("yaps", "barks", "woofs")
+		"Canine" = list("yaps", "barks", "woofs"),
+		"Corvid" = list("caws", "caws loudly", "whistles")
 		)
 
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
@@ -57,8 +59,6 @@
 	var/screen				// Which screen our main window displays
 	var/subscreen			// Which specific function of the main screen is being displayed
 
-	var/obj/item/device/pda/ai/pai/pda = null
-
 	var/secHUD = 0			// Toggles whether the Security HUD is active or not
 	var/medHUD = 0			// Toggles whether the Medical  HUD is active or not
 
@@ -74,17 +74,12 @@
 	var/hackprogress = 0				// Possible values: 0 - 1000, >= 1000 means the hack is complete and will be reset upon next check
 	var/hack_aborted = 0
 
-	var/obj/item/radio/integrated/signal/sradio // AI's signaller
-
 	var/translator_on = 0 // keeps track of the translator module
-
-	var/current_pda_messaging = null
 
 /mob/living/silicon/pai/New(var/obj/item/device/paicard)
 	status_flags |= NO_ANTAG
 	src.loc = paicard
 	card = paicard
-	sradio = new(src)
 
 	//As a human made device, we'll understand sol common without the need of the translator
 	add_language(LANGUAGE_SOL_COMMON, 1)
@@ -101,7 +96,6 @@
 		silicon_radio = card.radio
 
 /mob/living/silicon/pai/Destroy()
-	QDEL_NULL(sradio)
 	card = null
 	silicon_radio = null // Because this radio actually belongs to another instance we simply null
 	. = ..()
@@ -184,43 +178,6 @@
 	src.unset_machine()
 	src.cameraFollow = null
 
-//Addition by Mord_Sith to define AI's network change ability
-/*
-/mob/living/silicon/pai/proc/pai_network_change()
-	set category = "pAI Commands"
-	set name = "Change Camera Network"
-	src.reset_view(null)
-	src.unset_machine()
-	src.cameraFollow = null
-	var/cameralist[0]
-
-	if(usr.stat == 2)
-		to_chat(usr, "You can't change your camera network because you are dead!")
-		return
-
-	for (var/obj/machinery/camera/C in Cameras)
-		if(!C.status)
-			continue
-		else
-			if(C.network != "CREED" && C.network != "thunder" && C.network != "RD" && C.network != "phoron" && C.network != "Prison") COMPILE ERROR! This will have to be updated as camera.network is no longer a string, but a list instead
-				cameralist[C.network] = C.network
-
-	src.network = input(usr, "Which network would you like to view?") as null|anything in cameralist
-	to_chat(src, "<span class='notice'>Switched to [src.network] camera network.</span>")
-//End of code by Mord_Sith
-*/
-
-
-/*
-// Debug command - Maybe should be added to admin verbs later
-/mob/verb/makePAI(var/turf/t in view())
-	var/obj/item/device/paicard/card = new(t)
-	var/mob/living/silicon/pai/pai = new(card)
-	pai.key = src.key
-	card.setPersonality(pai)
-
-*/
-
 // Procs/code after this point is used to convert the stationary pai item into a
 // mobile pai mob. This also includes handling some of the general shit that can occur
 // to it. Really this deserves its own file, but for the moment it can sit here. ~ Z
@@ -255,9 +212,6 @@
 					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!</span>")
 					break
 		holder.drop_from_inventory(card)
-	else if(istype(card.loc,/obj/item/device/pda))
-		var/obj/item/device/pda/holder = card.loc
-		holder.pai = null
 
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src

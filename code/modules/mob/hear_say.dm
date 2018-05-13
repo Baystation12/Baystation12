@@ -68,7 +68,19 @@
 				to_chat(src, "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear \him.")
 	else
 		if(language)
-			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
+			var/nverb = null
+			if(!say_understands(speaker,language) || language.name == LANGUAGE_GALCOM) //Check to see if we can understand what the speaker is saying. If so, add the name of the language after the verb. Don't do this for Galactic Common.
+				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
+			else //Check if the client WANTS to see language names.
+				switch(src.get_preference_value(/datum/client_preference/language_display))
+					if(GLOB.PREF_FULL) // Full language name
+						nverb = "[verb] in [language.name]"
+					if(GLOB.PREF_SHORTHAND) //Shorthand codes
+						nverb = "[verb] ([language.shorthand])"
+					if(GLOB.PREF_OFF)//Regular output
+						nverb = verb
+				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, nverb)]</span>")
+
 		else
 			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
@@ -164,7 +176,7 @@
 		else if (isAI(speaker))
 			jobname = "AI"
 		else if (isrobot(speaker))
-			jobname = "Cyborg"
+			jobname = "Robot"
 		else if (istype(speaker, /mob/living/silicon/pai))
 			jobname = "Personal AI"
 		else
@@ -185,7 +197,18 @@
 
 	var/formatted
 	if(language)
-		formatted = language.format_message_radio(message, verb)
+		if(!say_understands(speaker,language) || language.name == LANGUAGE_GALCOM) //Check if we understand the message. If so, add the language name after the verb. Don't do this for Galactic Common.
+			formatted = language.format_message_radio(message, verb)
+		else
+			var/nverb = null
+			switch(src.get_preference_value(/datum/client_preference/language_display))
+				if(GLOB.PREF_FULL) // Full language name
+					nverb = "[verb] in [language.name]"
+				if(GLOB.PREF_SHORTHAND) //Shorthand codes
+					nverb = "[verb] ([language.shorthand])"
+				if(GLOB.PREF_OFF)//Regular output
+					nverb = verb
+			formatted = language.format_message_radio(message, nverb)
 	else
 		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
 	if(sdisabilities & DEAF || ear_deaf)
@@ -220,7 +243,15 @@
 		return 0
 
 	if(say_understands(speaker, language))
-		message = "<B>[speaker]</B> [verb], \"[message]\""
+		var/nverb = null
+		switch(src.get_preference_value(/datum/client_preference/language_display))
+			if(GLOB.PREF_FULL) // Full language name
+				nverb = "[verb] in [language.name]"
+			if(GLOB.PREF_SHORTHAND) //Shorthand codes
+				nverb = "[verb] ([language.shorthand])"
+			if(GLOB.PREF_OFF)//Regular output
+				nverb = verb
+		message = "<B>[speaker]</B> [nverb], \"[message]\""
 	else
 		var/adverb
 		var/length = length(message) * pick(0.8, 0.9, 1.0, 1.1, 1.2)	//Inserts a little fuzziness.

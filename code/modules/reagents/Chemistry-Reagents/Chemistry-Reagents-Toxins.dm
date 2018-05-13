@@ -71,7 +71,7 @@
 	description = "A highly poisonous liquid. Smells strongly of bleach."
 	reagent_state = LIQUID
 	taste_description = "bleach"
-	color = "#707C13"
+	color = "#707c13"
 	strength = 15
 	metabolism = REM
 
@@ -649,7 +649,7 @@
 	color = "#ffffff"
 	taste_mult = 5
 	strength = 10
-	metabolism = REM * 2
+	metabolism = REM * 5
 	overdose = 30
 
 /datum/reagent/toxin/corrupting/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
@@ -657,14 +657,16 @@
 
 /datum/reagent/toxin/corrupting/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(prob(5))
-		if(M.chem_doses[type] < 15)
+	if(prob(M.chem_doses[type]*10))
+		if(istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			H.zombieze()
+		else
+			to_chat(M, "<span class='danger'>Your insides are melting!!!</span>")
+			M.adjustToxLoss(100)
+		remove_self(volume)
+	else if(prob(5))
+		if(M.chem_doses[type] < 5)
 			to_chat(M, "<span class='warning'>You feel funny...</span>")
 		else
 			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")
-
-/datum/reagent/toxin/corrupting/overdose(var/mob/living/carbon/M, var/alien)
-	if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		H.zombieze()
-	remove_self(volume)

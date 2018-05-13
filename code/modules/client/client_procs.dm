@@ -205,6 +205,8 @@
 	//////////////
 /client/Del()
 	ticket_panels -= src
+	if(src && watched_variables_window)
+		STOP_PROCESSING(SSprocessing, watched_variables_window)
 	if(holder)
 		holder.owner = null
 		GLOB.admins -= src

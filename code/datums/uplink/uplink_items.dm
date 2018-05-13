@@ -78,7 +78,7 @@ var/datum/uplink/uplink = new()
 	for(var/antag_role in antag_roles)
 		if(antag_role == "Exclude")
 			continue
-		var/datum/antagonist/antag = all_antag_types()[antag_role]
+		var/datum/antagonist/antag = GLOB.all_antag_types_[antag_role]
 		if(antag.is_antagonist(U.uplink_owner))
 			return !("Exclude" in antag_roles)
 	return ("Exclude" in antag_roles)
@@ -87,7 +87,7 @@ var/datum/uplink/uplink = new()
 	. = item_cost
 	if(U && U.uplink_owner)
 		for(var/antag_role in antag_costs)
-			var/datum/antagonist/antag = all_antag_types()[antag_role]
+			var/datum/antagonist/antag = GLOB.all_antag_types_[antag_role]
 			if(antag.is_antagonist(U.uplink_owner))
 				. = min(antag_costs[antag_role], .)
 	return max(1, U ?  U.get_item_cost(src, .) : .)

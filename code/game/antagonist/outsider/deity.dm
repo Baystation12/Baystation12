@@ -1,4 +1,4 @@
-var/datum/antagonist/deity/deity
+GLOBAL_DATUM_INIT(deity, /datum/antagonist/deity, new)
 
 /datum/antagonist/deity
 	id = MODE_DEITY
@@ -14,7 +14,3 @@ var/datum/antagonist/deity/deity
 	hard_cap_round = 2
 	initial_spawn_req = 1
 	initial_spawn_target = 1
-
-/datum/antagonist/deity/New()
-	..()
-	deity = src

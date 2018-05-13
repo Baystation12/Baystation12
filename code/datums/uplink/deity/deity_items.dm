@@ -3,6 +3,12 @@
 	var/list/required_feats //is a list of the feat names
 	var/path
 
+/datum/uplink_item/deity/purchase_log(obj/item/device/uplink/U, var/mob/user, var/cost)
+	feedback_add_details("traitor_uplink_items_bought", "[src]")
+	log_admin("[key_name(user)] used \the [U] in [U.loc] to buy \a [src]")
+	if(user)
+		uplink_purchase_repository.add_entry(user.mind, src, cost)
+
 /datum/uplink_item/deity/can_view(obj/item/device/uplink/U)
 	if(!..() || !U || !U.uplink_owner || !istype(U.uplink_owner.current, /mob/living/deity))
 		return 0

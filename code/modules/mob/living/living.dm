@@ -584,8 +584,8 @@ default behaviour is:
 	set name = "Resist"
 	set category = "IC"
 
-	if(!incapacitated(INCAPACITATION_KNOCKOUT) && canClick())
-		setClickCooldown(20)
+	if(!incapacitated(INCAPACITATION_KNOCKOUT) && last_resist + 2 SECONDS <= world.time)
+		last_resist = world.time
 		resist_grab()
 		if(!weakened)
 			process_resist()
@@ -771,3 +771,23 @@ default behaviour is:
 		for(var/a in auras)
 			remove_aura(a)
 	return ..()
+
+/mob/living/proc/melee_accuracy_mods()
+	. = 0
+	if(eye_blind)
+		. += 75
+	if(eye_blurry)
+		. += 15
+	if(confused)
+		. += 30
+
+/mob/living/proc/ranged_accuracy_mods()
+	. = 0
+	if(jitteriness)
+		. -= 2
+	if(confused)
+		. -= 2
+	if(eye_blind)
+		. -= 5
+	if(eye_blurry)
+		. -= 1

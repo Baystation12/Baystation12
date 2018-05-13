@@ -329,7 +329,7 @@
 			icon_state = "alarm1"
 			new_color = COLOR_RED_LIGHT
 
-	set_light(l_range = 2, l_power = 0.6, l_color = new_color)
+	set_light(0.25, 0.1, 1, 2, new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
@@ -414,7 +414,7 @@
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
 			for(var/device_id in alarm_area.air_scrub_names)
-				send_signal(device_id, list("power"= 1, "co2_scrub"= 1, "scrubbing"= 1, "panic_siphon"= 0) )
+				send_signal(device_id, list("power"= 1, "co2_scrub"= 1, "scrubbing"= SCRUBBER_SCRUB, "panic_siphon"= 0) )
 			for(var/device_id in alarm_area.air_vent_names)
 				send_signal(device_id, list("power"= 1, "checks"= "default", "set_external_pressure"= "default") )
 
@@ -681,10 +681,13 @@
 					"co2_scrub",
 					"tox_scrub",
 					"n2o_scrub",
-					"panic_siphon",
-					"scrubbing")
+					"panic_siphon")
 
 					send_signal(device_id, list(href_list["command"] = text2num(href_list["val"]) ) )
+					return TOPIC_REFRESH
+
+				if("scrubbing")
+					send_signal(device_id, list(href_list["command"] = href_list["scrub_mode"]) )
 					return TOPIC_REFRESH
 
 				if("set_threshold")
@@ -785,7 +788,7 @@
 				update_icon()
 				return
 
-			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
+			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
 				if(stat & (NOPOWER|BROKEN))
 					to_chat(user, "It does nothing")
 					return
@@ -812,7 +815,7 @@
 			else if(isCrowbar(W))
 				to_chat(user, "You start prying out the circuit.")
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				if(do_after(user,20))
+				if(do_after(user,20) && buildstage == 1)
 					to_chat(user, "You pry out the circuit!")
 					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
 					circuit.dropInto(user.loc)
@@ -904,13 +907,13 @@ FIRE ALARM
 	else
 		if(!src.detecting)
 			icon_state = "fire1"
-			set_light(l_range = 4, l_power = 2, l_color = COLOR_RED)
+			set_light(0.25, 0.1, 1, 2, COLOR_RED)
 		else if(z in GLOB.using_map.contact_levels)
 			icon_state = "fire0"
 			var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 			var/decl/security_level/sl = security_state.current_security_level
 
-			set_light(sl.light_range, sl.light_power, sl.light_color_alarm)
+			set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
 			src.overlays += image(sl.icon, sl.overlay_alarm)
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, temperature, volume)
@@ -1092,7 +1095,7 @@ FIRE ALARM
 	for(var/obj/machinery/firealarm/FA in area)
 		fire_alarm.triggerAlarm(loc, FA, duration)
 	update_icon()
-	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
+	playsound(src, 'sound/machines/fire_alarm.ogg', 75, 0)
 	return
 
 

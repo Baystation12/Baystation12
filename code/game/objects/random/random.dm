@@ -39,7 +39,7 @@
 	var/spawn_object = null
 
 /obj/random/single/spawn_choices()
-	return list(ispath(spawn_object) ? spawn_object : text2path(spawn_object))
+	return list(spawn_object)
 
 /obj/random/tool
 	name = "random tool"
@@ -117,7 +117,7 @@
 /obj/random/tech_supply/spawn_choices()
 	return list(/obj/random/powercell = 3,
 				/obj/random/technology_scanner = 2,
-				/obj/item/weapon/packageWrap = 1,
+				/obj/item/stack/package_wrap/twenty_five = 1,
 				/obj/item/weapon/hand_labeler = 1,
 				/obj/random/bomb_supply = 2,
 				/obj/item/weapon/extinguisher = 1,
@@ -170,7 +170,11 @@
 				/obj/item/bodybag/cryobag = 1,
 				/obj/item/weapon/reagent_containers/hypospray/autoinjector = 3,
 				/obj/item/weapon/storage/pill_bottle/kelotane = 2,
-				/obj/item/weapon/storage/pill_bottle/antitox = 2)
+				/obj/item/weapon/storage/pill_bottle/antitox = 2,
+				/obj/item/weapon/storage/med_pouch/trauma = 2,
+				/obj/item/weapon/storage/med_pouch/burn = 2,
+				/obj/item/weapon/storage/med_pouch/toxin = 2,
+				/obj/item/weapon/storage/med_pouch/oxyloss = 2)
 
 /obj/random/firstaid
 	name = "Random First Aid Kit"
@@ -180,8 +184,10 @@
 
 /obj/random/firstaid/spawn_choices()
 	return list(/obj/item/weapon/storage/firstaid/regular = 4,
+				/obj/item/weapon/storage/firstaid/trauma = 3,
 				/obj/item/weapon/storage/firstaid/toxin = 3,
 				/obj/item/weapon/storage/firstaid/o2 = 3,
+				/obj/item/weapon/storage/firstaid/stab = 2,
 				/obj/item/weapon/storage/firstaid/adv = 2,
 				/obj/item/weapon/storage/firstaid/combat = 1,
 				/obj/item/weapon/storage/firstaid/empty = 2,
@@ -424,7 +430,6 @@ obj/random/closet //A couple of random closets to spice up maint
 obj/random/closet/spawn_choices()
 	return list(/obj/structure/closet,
 				/obj/structure/closet/firecloset,
-				/obj/structure/closet/firecloset/full,
 				/obj/structure/closet/emcloset,
 				/obj/structure/closet/jcloset,
 				/obj/structure/closet/athletic_mixed,
@@ -601,11 +606,12 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/weapon/handcuffs,
 				/obj/item/weapon/camera_assembly,
 				/obj/item/device/camera,
-				/obj/item/device/pda,
+				/obj/item/modular_computer/pda,
 				/obj/item/weapon/card/emag_broken,
 				/obj/item/device/radio/headset,
-				/obj/item/device/flashlight/glowstick/yellow,
-				/obj/item/device/flashlight/glowstick/orange)
+				/obj/item/device/flashlight/flare/glowstick/yellow,
+				/obj/item/device/flashlight/flare/glowstick/orange,
+				/obj/item/weapon/grenade/light)
 
 /obj/random/smokes
 	name = "random smokeable"

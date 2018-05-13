@@ -72,7 +72,6 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 /obj/machinery/message_server/New()
 	message_servers += src
 	decryptkey = GenerateKey()
-	send_pda_message("System Administrator", "system", "This is an automated message. The messaging system is functioning correctly.")
 	..()
 
 /obj/machinery/message_server/Destroy()
@@ -91,15 +90,6 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		if(!(--power_failure))
 			active = 1
 			update_icon()
-
-/obj/machinery/message_server/proc/send_pda_message(var/recipient = "",var/sender = "",var/message = "")
-	var/result
-	for (var/token in spamfilter)
-		if (findtextEx(message,token))
-			message = "<font color=\"red\">[message]</font>"	//Rejected messages will be indicated by red color.
-			result = token										//Token caused rejection (if there are multiple, last will be chosen>.
-	pda_msgs += new/datum/data_pda_msg(recipient,sender,message)
-	return result
 
 /obj/machinery/message_server/proc/send_rc_message(var/recipient = "",var/sender = "",var/message = "",var/stamp = "", var/id_auth = "", var/priority = 1)
 	rc_msgs += new/datum/data_rc_msg(recipient,sender,message,stamp,id_auth)
@@ -125,7 +115,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 					Console.audible_message("\icon[Console]<span class='notice'>\The [Console] announces: 'Message received from [sender].'</span>", hearing_distance = 5)
 				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
-		Console.set_light(2)
+		Console.set_light(0.3, 0.1, 2)
 
 
 /obj/machinery/message_server/attack_hand(user as mob)
@@ -158,15 +148,20 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 /obj/machinery/message_server/proc/send_to_department(var/department, var/message, var/tone)
 	var/reached = 0
-	for(var/obj/item/device/pda/P in PDAs)
-		if(P.toff)
+
+	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
+		var/obj/item/modular_computer/pda/pda = locate() in H
+		if(!pda)
 			continue
-		var/datum/job/J = job_master.GetJob(P.ownrank)
+
+		var/datum/job/J = job_master.GetJob(H.char_rank)
 		if(!J)
 			continue
+
 		if(J.department_flag & department)
-			P.new_info(P.message_silent, tone ? tone : P.ttone, "\icon[P] [message]")
+			to_chat(H, "<span class='notice'>Your [pda.name] alerts you to the fact that somebody is requesting your presence at your department.</span>")
 			reached++
+
 	return reached
 
 /datum/feedback_variable

@@ -3,7 +3,7 @@
 	icon = 'icons/turf/space.dmi'
 
 	name = "\proper space"
-	icon_state = "white"
+	icon_state = "default"
 	dynamic_lighting = 0
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -21,6 +21,7 @@
 
 /turf/space/Initialize()
 	. = ..()
+	icon_state = "white"
 	update_starlight()
 	if (!dust_cache)
 		build_dust_cache()
@@ -34,9 +35,8 @@
 		return
 	var/area/A = below.loc
 
-	if(A.area_flags & AREA_FLAG_EXTERNAL)
+	if(!below.density && (A.area_flags & AREA_FLAG_EXTERNAL))
 		return
-
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
 
@@ -59,7 +59,7 @@
 	if(!config.starlight)
 		return
 	if(locate(/turf/simulated) in orange(src,1))
-		set_light(config.starlight)
+		set_light(0.1*config.starlight, 1, 3, l_color = SSskybox.BGcolor)
 	else
 		set_light(0)
 

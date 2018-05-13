@@ -35,7 +35,7 @@
 	siemens_coefficient = 0.2
 
 	species_flags = SPECIES_FLAG_NO_SCAN
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 	blood_color = "#2299fc"
@@ -79,7 +79,7 @@
 	return species_language.get_random_name(gender)
 
 /datum/species/vox/equip_survival_gear(var/mob/living/carbon/human/H)
-	H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask)
 
 	if(istype(H.get_equipped_item(slot_back), /obj/item/weapon/storage/backpack))
 		H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(H), slot_r_hand)

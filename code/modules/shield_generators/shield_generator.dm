@@ -269,13 +269,15 @@
 		if((choice != "Yes") || !running)
 			return TOPIC_HANDLED
 
-		var/temp_integrity = field_integrity()
-		// If the shield would take 5 minutes to disperse and shut down using regular methods, it will take x2 (10 minutes) of this time to cool down after emergency shutdown
-		offline_for = round(current_energy / (SHIELD_SHUTDOWN_DISPERSION_RATE / 2))
+		// If the shield would take 5 minutes to disperse and shut down using regular methods, it will take x1.5 (7 minutes and 30 seconds) of this time to cool down after emergency shutdown
+		offline_for = round(current_energy / (SHIELD_SHUTDOWN_DISPERSION_RATE / 1.5))
+		var/old_energy = current_energy
 		shutdown_field()
-		if(prob(temp_integrity - 50) * 1.75)
-			spawn()
-				empulse(src, 7, 14)
+		log_and_message_admins("has triggered \the [src]'s emergency shutdown!", user)
+		spawn()	
+			empulse(src, old_energy / 60000000, old_energy / 32000000, 1) // If shields are charged at 450 MJ, the EMP will be 7.5, 14.0625. 90 MJ, 1.5, 2.8125
+		old_energy = 0
+
 		return TOPIC_REFRESH
 
 	if(mode_changes_locked)

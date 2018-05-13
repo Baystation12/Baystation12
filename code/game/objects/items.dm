@@ -169,7 +169,29 @@
 			size = "bulky"
 		if(ITEM_SIZE_HUGE + 1 to INFINITY)
 			size = "huge"
-	return ..(user, distance, "", "It is a [size] item.")
+	var/desc_comp = "" //For "description composite"
+	desc_comp += "It is a [size] item."
+
+	if(hasHUD(user, HUD_SCIENCE)) //Mob has a research scanner active.
+		desc_comp += "<BR>*--------* <BR>"
+
+		if(origin_tech)
+			desc_comp += "<span class='notice'>Testing potentials:</span><BR>"
+			//var/list/techlvls = params2list(origin_tech)
+			for(var/T in origin_tech)
+				desc_comp += "Tech: Level [origin_tech[T]] [CallTechName(T)] <BR>"
+		else
+			desc_comp += "No tech origins detected.<BR>"
+
+		if(LAZYLEN(matter))
+			desc_comp += "<span class='notice'>Extractable materials:</span><BR>"
+			for(var/mat in matter)
+				desc_comp += "[get_material_by_name(mat)]<BR>"
+		else
+			desc_comp += "<span class='danger'>No extractable materials detected.</span><BR>"
+		desc_comp += "*--------*"
+
+	return ..(user, distance, "", desc_comp)
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
@@ -186,6 +208,9 @@
 		if(!temp)
 			to_chat(user, "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>")
 			return
+
+	var/old_loc = src.loc
+
 	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
@@ -198,7 +223,11 @@
 	else
 		if(isliving(src.loc))
 			return
+
 	if(user.put_in_active_hand(src))
+		if (isturf(old_loc))
+			var/obj/effect/temporary/item_pickup_ghost/ghost = new(old_loc, src)
+			ghost.animate_towards(user)
 		if(randpixel)
 			pixel_x = rand(-randpixel, randpixel)
 			pixel_y = rand(-randpixel/2, randpixel/2)
@@ -342,8 +371,10 @@ var/list/global/slot_flags_enumeration = list(
 				return 0
 			if( (slot_flags & SLOT_TWOEARS) && H.get_equipped_item(slot_other_ear) )
 				return 0
-		if(slot_wear_id, slot_belt)
-			if(!H.w_uniform && (slot_w_uniform in mob_equip))
+		if(slot_belt, slot_wear_id)
+			if(slot == slot_belt && (item_flags & ITEM_FLAG_IS_BELT))
+				return 1
+			else if(!H.w_uniform && (slot_w_uniform in mob_equip))
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>")
 				return 0
@@ -367,7 +398,7 @@ var/list/global/slot_flags_enumeration = list(
 				if(!disable_warning)
 					to_chat(usr, "<span class='warning'>You somehow have a suit with no defined allowed items for suit storage, stop that.</span>")
 				return 0
-			if( !(istype(src, /obj/item/device/pda) || istype(src, /obj/item/weapon/pen) || is_type_in_list(src, H.wear_suit.allowed)) )
+			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/weapon/pen) || is_type_in_list(src, H.wear_suit.allowed)) )
 				return 0
 		if(slot_handcuffed)
 			if(!istype(src, /obj/item/weapon/handcuffs))
@@ -385,12 +416,20 @@ var/list/global/slot_flags_enumeration = list(
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>You need something you can attach \the [src] to.</span>")
 				return 0
-			var/obj/item/clothing/under/uniform = H.w_uniform
-			var/obj/item/clothing/suit/suit = H.wear_suit
-			if((uniform && !uniform.can_attach_accessory(src)) && (suit && !suit.can_attach_accessory(src)))
-				if (!disable_warning)
-					to_chat(H, "<span class='warning'>You can not equip \the [src].</span>")
-				return 0
+			if(H.w_uniform && (slot_w_uniform in mob_equip))
+				var/obj/item/clothing/under/uniform = H.w_uniform
+				if(uniform && !uniform.can_attach_accessory(src))
+					if (!disable_warning)
+						to_chat(H, "<span class='warning'>You cannot equip \the [src] to \the [uniform].</span>")
+					return 0
+				else return 1
+			if(H.wear_suit && (slot_wear_suit in mob_equip))
+				var/obj/item/clothing/suit/suit = H.wear_suit
+				if(suit && !suit.can_attach_accessory(src))
+					if (!disable_warning)
+						to_chat(H, "<span class='warning'>You cannot equip \the [src] to \the [suit].</span>")
+					return 0
+
 	return 1
 
 /obj/item/proc/mob_can_unequip(mob/M, slot, disable_warning = 0)

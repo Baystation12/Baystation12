@@ -48,6 +48,7 @@
 	user.do_attack_animation(M)
 	to_chat(user, "<span class='notice'>You inject [M] with [src].</span>")
 	to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
+	playsound(src, 'sound/effects/hypospray.ogg',25)
 	user.visible_message("<span class='warning'>[user] injects [M] with [src].</span>")
 
 	if(M.reagents)
@@ -116,6 +117,8 @@
 	amount_per_transfer_from_this = 5
 	volume = 5
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
+	slot_flags = SLOT_BELT | SLOT_EARS
+	w_class = ITEM_SIZE_TINY
 	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()

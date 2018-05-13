@@ -1,9 +1,11 @@
 /mob/living/bot/secbot/ed209
 	name = "ED-209 Security Robot"
 	desc = "A security robot.  He looks less than thrilled."
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/ED209.dmi'
 	icon_state = "ed2090"
 	attack_state = "ed209-c"
+	plane = MOB_PLANE
+	layer = MOB_LAYER
 	density = 1
 	health = 100
 	maxHealth = 100
@@ -69,7 +71,7 @@
 /obj/item/weapon/secbot_assembly/ed209_assembly
 	name = "ED-209 assembly"
 	desc = "Some sort of bizarre assembly."
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/ED209.dmi'
 	icon_state = "ed209_frame"
 	item_state = "ed209_frame"
 	created_name = "ED-209 Security Robot"

@@ -12,6 +12,7 @@
 	desc = "A generic drinking glass." // Description when empty
 	icon = DRINK_ICON_FILE
 	base_icon = "square" // Base icon name
+	filling_states = "20;40;60;80;100"
 	volume = 30
 	matter = list("glass" = 65)
 

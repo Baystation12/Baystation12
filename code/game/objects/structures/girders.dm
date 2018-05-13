@@ -100,8 +100,11 @@
 		if(do_after(user, 40,src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You removed the support struts!</span>")
-			reinf_material.place_dismantled_product(get_turf(src))
-			reinf_material = null
+
+			if(reinf_material)
+				reinf_material.place_dismantled_product(get_turf(src))
+				reinf_material = null
+
 			reset_girder()
 
 	else if(isCrowbar(W) && state == 0 && anchored)

@@ -85,6 +85,9 @@
 
 	assistant_job = "Crewman"
 
+	min_skill = list(	/decl/hierarchy/skill/research/science				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC)
+
 /datum/mil_branch/fleet
 	name = "Fleet"
 	name_short = "SCGF"
@@ -140,6 +143,9 @@
 	)
 
 	assistant_job = "Crewman"
+	min_skill = list(	/decl/hierarchy/skill/general/hauling				= SKILL_BASIC,
+						/decl/hierarchy/skill/security/weapons				= SKILL_BASIC,
+						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC)
 
 /datum/mil_branch/civilian
 	name = "Civilian"
@@ -150,7 +156,6 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/marshal,
 		/datum/mil_rank/civ/synthetic
 	)
@@ -159,7 +164,6 @@
 		/datum/mil_rank/civ/civ,
 		/datum/mil_rank/civ/nt,
 		/datum/mil_rank/civ/contractor,
-		/datum/mil_rank/civ/offduty,
 		/datum/mil_rank/civ/marshal,
 		/datum/mil_rank/civ/synthetic
 	)

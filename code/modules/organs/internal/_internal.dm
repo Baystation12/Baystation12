@@ -35,6 +35,11 @@
 		if(istype(E)) E.internal_organs -= src
 	return ..()
 
+/obj/item/organ/internal/set_dna(var/datum/dna/new_dna)
+	..()
+	if(species && species.organs_icon)
+		icon = species.organs_icon
+
 //disconnected the organ from it's owner but does not remove it, instead it becomes an implant that can be removed with implant surgery
 //TODO move this to organ/internal once the FPB port comes through
 /obj/item/organ/proc/cut_away(var/mob/living/user)
@@ -131,3 +136,29 @@
 				if(damage < 5)
 					degree = " a bit"
 				owner.custom_pain("Something inside your [parent.name] hurts[degree].", amount, affecting = parent)
+
+/obj/item/organ/internal/proc/get_visible_state()
+	if(damage > max_damage)
+		. = "bits and pieces of a destroyed "
+	else if(is_broken())
+		. = "broken "
+	else if(is_bruised())
+		. = "badly damaged "
+	else if(damage > 5)
+		. = "damaged "
+	if(status & ORGAN_DEAD)
+		if(can_recover())
+			. = "decaying [.]"
+		else
+			. = "necrotic [.]"
+	. = "[.][name]"
+
+/obj/item/organ/internal/Process()
+	..()
+	handle_regeneration()
+
+/obj/item/organ/internal/proc/handle_regeneration()
+	if(!damage || isrobotic() || !owner || owner.chem_effects[CE_TOXIN])
+		return
+	if(damage < 0.1*max_damage)
+		heal_damage(0.1)

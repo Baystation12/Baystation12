@@ -128,12 +128,12 @@
 		GLOB.nanomanager.update_uis(src)
 
 	if(beaker)
-		if(foodsupply < 100 && beaker.reagents.remove_reagent(/datum/reagent/nutriment/virus_food,5))
-			if(foodsupply + 10 <= 100)
-				foodsupply += 10
-			else
-				beaker.reagents.add_reagent(/datum/reagent/nutriment/virus_food,(100 - foodsupply)/2)
-				foodsupply = 100
+		if (foodsupply < 100 && beaker.reagents.has_reagent(/datum/reagent/nutriment/virus_food))
+			var/food_needed = min(10, 100 - foodsupply) / 2
+			var/food_taken = min(food_needed, beaker.reagents.get_reagent_amount(/datum/reagent/nutriment/virus_food))
+
+			beaker.reagents.remove_reagent(/datum/reagent/nutriment/virus_food, food_taken)
+			foodsupply = min(100, foodsupply+(food_taken * 2))
 			GLOB.nanomanager.update_uis(src)
 
 		if (locate(/datum/reagent/toxin) in beaker.reagents.reagent_list && toxins < 100)

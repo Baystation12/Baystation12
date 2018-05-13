@@ -1,0 +1,33 @@
+{{if data.message}}
+    {{:data.message}}
+{{/if}}
+<h1>Non-Cyborg Weapons</h1>
+{{for data.guns :value:index}}
+    <div>
+        {{:value.name}} registered to {{:value.owner}} at ({{:value.loc.x}}, {{:value.loc.y}}, {{:value.loc.z}})<br />
+        {{for value.modes :inner_value:inner_index}}
+            {{if inner_value.authorized == "1"}}
+                {{:helper.link("Unauthorize " + inner_value.mode_name, null, {"gun" : value.ref, "mode" : inner_value.index, "authorize" : 0})}}
+            {{else}}
+                {{:helper.link("Authorize " + inner_value.mode_name, null, {"gun" : value.ref, "mode" : inner_value.index, "authorize" : 1})}}
+            {{/if}}
+        {{/for}}
+    </div>
+    <br><br>
+{{/for}}
+{{if data.is_silicon_usr == 0}}
+	<h1>Cyborg Weapons</h1>
+	{{for data.cyborg_guns :value:index}}
+		<div>
+			{{:value.name}} registered to {{:value.owner}}<br />
+			{{for value.modes :inner_value:inner_index}}
+				{{if inner_value.authorized == "1"}}
+					{{:helper.link("Unauthorize " + inner_value.mode_name, null, {"cyborg_gun" : value.ref, "mode" : inner_value.index, "authorize" : 0})}}
+				{{else}}
+					{{:helper.link("Authorize " + inner_value.mode_name, null, {"cyborg_gun" : value.ref, "mode" : inner_value.index, "authorize" : 1})}}
+				{{/if}}
+			{{/for}}
+		</div>
+		<br><br>
+	{{/for}}
+{{/if}}

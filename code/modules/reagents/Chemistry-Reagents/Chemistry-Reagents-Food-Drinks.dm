@@ -83,6 +83,14 @@
 	taste_description = "egg"
 	color = "#ffffaa"
 
+//vegetamarian alternative that is safe for skrell to ingest//rewired it from its intended nutriment/protein/egg/softtofu because it would not actually work, going with plan B, more recipes.
+
+/datum/reagent/nutriment/softtofu
+	name = "plant protein"
+	description = "A gooey pale bean paste."
+	taste_description = "healthy sadness"
+	color = "#ffffff"
+
 /datum/reagent/nutriment/honey
 	name = "Honey"
 	description = "A golden yellow syrup, loaded with sugary sweetness."
@@ -90,7 +98,7 @@
 	nutriment_factor = 10
 	color = "#ffff00"
 
-/datum/reagent/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/nutriment/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 
 	if(alien == IS_UNATHI)
@@ -122,6 +130,28 @@
 			T.wet = min(T.wet, 1)
 		else
 			T.wet = 0
+
+/datum/reagent/nutriment/batter
+	name = "Batter"
+	description = "A gooey mixture of eggs and flour, a base for turning wheat into food."
+	taste_description = "blandness"
+	reagent_state = LIQUID
+	nutriment_factor = 3
+	color = "#ffd592"
+
+/datum/reagent/nutriment/batter/touch_turf(var/turf/simulated/T)
+	if(!istype(T, /turf/space))
+		new /obj/effect/decal/cleanable/pie_smudge(T)
+		if(T.wet > 1)
+			T.wet = min(T.wet, 1)
+		else
+			T.wet = 0
+
+/datum/reagent/nutriment/batter/cakebatter
+	name = "Cake Batter"
+	description = "A gooey mixture of eggs, flour and sugar, a important precursor to cake!"
+	taste_description = "sweetness"
+	color = "#ffe992"
 
 /datum/reagent/nutriment/coco
 	name = "Coco Powder"
@@ -547,7 +577,7 @@
 /datum/reagent/drink/juice/potato
 	name = "Potato Juice"
 	description = "Juice of the potato. Bleh."
-	taste_description = "irish sadness"
+	taste_description = "irish sadness and potatoes"
 	nutrition = 2
 	color = "#302000"
 
@@ -597,6 +627,34 @@
 
 	glass_name = "watermelon juice"
 	glass_desc = "Delicious juice made from watermelon."
+
+/datum/reagent/drink/juice/turnip
+	name = "Turnip Juice"
+	description = "Delicious (?) juice made from turnips."
+	taste_description = "love of motherland and oppression"
+	color = "#b1166e"
+
+	glass_name = "turnip juice"
+	glass_desc = "Delicious (?) juice made from turnips."
+
+
+/datum/reagent/drink/juice/apple
+	name = "Apple Juice"
+	description = "Delicious sweet juice made from apples."
+	taste_description = "sweet apples"
+	color = "#c07c40"
+
+	glass_name = "apple juice"
+	glass_desc = "Delicious juice made from apples."
+
+/datum/reagent/drink/juice/pear
+	name = "Pear Juice"
+	description = "Delicious sweet juice made from pears."
+	taste_description = "sweet pears"
+	color = "#ffff66"
+
+	glass_name = "pear juice"
+	glass_desc = "Delicious juice made from pears."
 
 // Everything else
 
@@ -1068,7 +1126,7 @@
 	strength = 50
 
 	glass_name = "ale"
-	glass_desc = "A freezing pint of delicious ale"
+	glass_desc = "A freezing container of delicious ale"
 
 /datum/reagent/ethanol/beer
 	name = "Beer"
@@ -1079,7 +1137,11 @@
 	nutriment_factor = 1
 
 	glass_name = "beer"
-	glass_desc = "A freezing pint of beer"
+	glass_desc = "A freezing container of beer"
+
+/datum/reagent/ethanol/beer/good
+
+	taste_description = "beer"
 
 /datum/reagent/ethanol/beer/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()

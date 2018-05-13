@@ -6,12 +6,13 @@
 	high_visibility = 1
 	var/obj/item/holstered = null
 	var/list/can_hold
+	var/sound_in = 'sound/effects/holster/holsterin.ogg'
+	var/sound_out = 'sound/effects/holster/holsterout.ogg'
 
 /obj/item/clothing/accessory/holster/proc/holster(var/obj/item/I, var/mob/living/user)
 	if(holstered && istype(user))
 		to_chat(user, "<span class='warning'>There is already \a [holstered] holstered here!</span>")
 		return
-
 	if (can_hold)
 		if(!is_type_in_list(I,can_hold))
 			to_chat(user, "<span class='warning'>[I] won't fit in [src]!</span>")
@@ -21,6 +22,8 @@
 		to_chat(user, "<span class='warning'>[I] won't fit in [src]!</span>")
 		return
 
+	if(sound_in)
+		playsound(get_turf(src), sound_in, 50)
 	if(istype(user))
 		user.stop_aiming(no_message=1)
 	holstered = I
@@ -42,7 +45,9 @@
 	if(istype(user.get_active_hand(),/obj) && istype(user.get_inactive_hand(),/obj))
 		to_chat(user, "<span class='warning'>You need an empty hand to draw \the [holstered]!</span>")
 	else
+		var/sound_vol = 25
 		if(user.a_intent == I_HURT)
+			sound_vol = 50
 			usr.visible_message(
 				"<span class='danger'>[user] draws \the [holstered], ready to go!</span>",
 				"<span class='warning'>You draw \the [holstered], ready to go!</span>"
@@ -52,6 +57,8 @@
 				"<span class='notice'>[user] draws \the [holstered], pointing it at the ground.</span>",
 				"<span class='notice'>You draw \the [holstered], pointing it at the ground.</span>"
 				)
+		if(sound_out)
+			playsound(get_turf(src), sound_out, sound_vol)
 		user.put_in_hands(holstered)
 		holstered.add_fingerprint(user)
 		w_class = initial(w_class)
@@ -130,9 +137,13 @@
 	name = "thigh holster"
 	desc = "A drop leg holster made of a durable synthetic fiber."
 	icon_state = "holster_thigh"
+	sound_in = 'sound/effects/holster/tactiholsterin.ogg'
+	sound_out = 'sound/effects/holster/tactiholsterout.ogg'
 
 /obj/item/clothing/accessory/holster/machete
 	name = "machete sheath"
 	desc = "A handsome synthetic leather sheath with matching belt."
 	icon_state = "holster_machete"
 	can_hold = list(/obj/item/weapon/material/hatchet/machete)
+	sound_in = 'sound/effects/holster/sheathin.ogg'
+	sound_out = 'sound/effects/holster/sheathout.ogg'

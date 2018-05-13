@@ -108,6 +108,9 @@ var/savefile/Banlist
 	if ( Banlist.dir.Find("[ckey][computerid]") )
 		to_chat(usr, "<span class='warning'>Ban already exists.</span>")
 		return 0
+	else if (!ckey)
+		to_chat(usr, "<span class='warning'>Ckey does not exist.</span>")
+		return 0
 	else
 		Banlist.dir.Add("[ckey][computerid]")
 		Banlist.cd = "/base/[ckey][computerid]"

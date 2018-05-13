@@ -21,6 +21,7 @@ GLOBAL_VAR_CONST(PREF_CTRL_CLICK, "ctrl click")
 GLOBAL_VAR_CONST(PREF_CTRL_SHIFT_CLICK, "ctrl shift click")
 GLOBAL_VAR_CONST(PREF_HEAR, "Hear")
 GLOBAL_VAR_CONST(PREF_SILENT, "Silent")
+GLOBAL_VAR_CONST(PREF_SHORTHAND, "Shorthand")
 
 var/list/_client_preferences
 var/list/_client_preferences_by_key
@@ -90,7 +91,8 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/play_lobby_music/changed(var/mob/preference_mob, var/new_value)
 	if(new_value == GLOB.PREF_YES)
-		GLOB.using_map.lobby_music.play_to(preference_mob)
+		if(isnewplayer(preference_mob))
+			GLOB.using_map.lobby_track.play_to(preference_mob)
 	else
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = 1))
 
@@ -117,6 +119,11 @@ var/list/_client_preferences_by_type
 	description ="Ghost radio"
 	key = "CHAT_GHOSTRADIO"
 	options = list(GLOB.PREF_ALL_CHATTER, GLOB.PREF_NEARBY)
+
+/datum/client_preference/language_display
+	description = "Display Language Names"
+	key = "LANGUAGE_DISPLAY"
+	options = list(GLOB.PREF_FULL, GLOB.PREF_SHORTHAND, GLOB.PREF_OFF)
 
 /datum/client_preference/ghost_follow_link_length
 	description ="Ghost Follow Links"
@@ -186,6 +193,11 @@ var/list/_client_preferences_by_type
 	description = "Hardsuit Module Activation Key"
 	key = "HARDSUIT_ACTIVATION"
 	options = list(GLOB.PREF_MIDDLE_CLICK, GLOB.PREF_CTRL_CLICK, GLOB.PREF_ALT_CLICK, GLOB.PREF_CTRL_SHIFT_CLICK)
+
+/datum/client_preference/show_credits
+	description = "Show End Titles"
+	key = "SHOW_CREDITS"
+
 
 /********************
 * General Staff Preferences *

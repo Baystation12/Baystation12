@@ -8,6 +8,7 @@
  *		Hydrant
  *		First Aid
  *		Excavation Closet
+ *		Shipping Supplies Closet
  */
 
 /*
@@ -61,7 +62,6 @@
 			new /obj/item/clothing/head/helmet/space/emergency(src)
 
 /obj/structure/closet/emcloset/legacy/New()
-	..()
 	new /obj/item/weapon/tank/oxygen(src)
 	new /obj/item/clothing/mask/gas(src)
 
@@ -75,31 +75,21 @@
 	icon_closed = "firecloset"
 	icon_opened = "fireclosetopen"
 
-/obj/structure/closet/firecloset/New()
-	..()
-
-	new /obj/item/clothing/suit/fire/firefighter(src)
-	new /obj/item/clothing/mask/gas(src)
-	new /obj/item/weapon/tank/oxygen/red(src)
-	new /obj/item/weapon/extinguisher(src)
-	new /obj/item/clothing/head/hardhat/red(src)
-
-/obj/structure/closet/firecloset/full/New()
-	..()
-
-	new /obj/item/clothing/suit/fire/firefighter(src)
-	new /obj/item/clothing/mask/gas(src)
-	new /obj/item/device/flashlight(src)
-	new /obj/item/weapon/tank/oxygen/red(src)
-	new /obj/item/weapon/extinguisher(src)
-	new /obj/item/clothing/head/hardhat/red(src)
+/obj/structure/closet/firecloset/WillContain()
+	return list(
+		/obj/item/weapon/storage/med_pouch/burn,
+		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/mask/gas,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/weapon/extinguisher,
+		/obj/item/clothing/head/hardhat/red)
 
 /obj/structure/closet/firecloset/update_icon()
 	if(!opened)
 		icon_state = icon_closed
 	else
 		icon_state = icon_opened
-
 
 /*
  * Tool Closet
@@ -155,14 +145,14 @@
 	icon_opened = "toolclosetopen"
 	icon_closed = "radsuitcloset"
 
-/obj/structure/closet/radiation/New()
-	..()
-	new /obj/item/clothing/suit/radiation(src)
-	new /obj/item/clothing/head/radiation(src)
-	new /obj/item/clothing/suit/radiation(src)
-	new /obj/item/clothing/head/radiation(src)
-	new /obj/item/device/geiger(src)
-	new /obj/item/device/geiger(src)
+/obj/structure/closet/radiation/WillContain()
+	return list(
+		/obj/item/weapon/storage/med_pouch/toxin = 2,
+		/obj/item/clothing/suit/radiation,
+		/obj/item/clothing/head/radiation,
+		/obj/item/clothing/suit/radiation,
+		/obj/item/clothing/head/radiation,
+		/obj/item/device/geiger = 2)
 
 /*
  * Bombsuit closet
@@ -174,12 +164,12 @@
 	icon_closed = "bombsuit"
 	icon_opened = "bombsuitopen"
 
-/obj/structure/closet/bombcloset/New()
-	..()
-	new /obj/item/clothing/suit/bomb_suit( src )
-	new /obj/item/clothing/under/color/black( src )
-	new /obj/item/clothing/shoes/black( src )
-	new /obj/item/clothing/head/bomb_hood( src )
+/obj/structure/closet/bombcloset/WillContain()
+	return list(
+		/obj/item/clothing/suit/bomb_suit,
+		/obj/item/clothing/under/color/black,
+		/obj/item/clothing/shoes/black,
+		/obj/item/clothing/head/bomb_hood)
 
 
 /obj/structure/closet/bombclosetsecurity
@@ -189,12 +179,12 @@
 	icon_closed = "bombsuitsec"
 	icon_opened = "bombsuitsecopen"
 
-/obj/structure/closet/bombclosetsecurity/New()
-	..()
-	new /obj/item/clothing/suit/bomb_suit/security( src )
-	new /obj/item/clothing/under/rank/security( src )
-	new /obj/item/clothing/shoes/brown( src )
-	new /obj/item/clothing/head/bomb_hood/security( src )
+/obj/structure/closet/bombclosetsecurity/WillContain()
+	return list(
+		/obj/item/clothing/suit/bomb_suit/security,
+		/obj/item/clothing/under/rank/security,
+		/obj/item/clothing/shoes/brown,
+		/obj/item/clothing/head/bomb_hood/security)
 
 /*
  * Hydrant
@@ -211,16 +201,16 @@
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
 
-/obj/structure/closet/hydrant/New()
-	..()
-	new /obj/item/inflatable/door(src)
-	new /obj/item/inflatable/door(src)
-	new /obj/item/clothing/suit/fire/firefighter(src)
-	new /obj/item/clothing/mask/gas/half(src)
-	new /obj/item/device/flashlight(src)
-	new /obj/item/weapon/tank/oxygen/red(src)
-	new /obj/item/weapon/extinguisher(src)
-	new /obj/item/clothing/head/hardhat/red(src)
+/obj/structure/closet/hydrant/WillContain()
+	return list(
+		/obj/item/inflatable/door = 2,
+		/obj/item/weapon/storage/med_pouch/burn = 2,
+		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/weapon/extinguisher,
+		/obj/item/clothing/head/hardhat/red)
 
 /*
  * First Aid
@@ -242,8 +232,6 @@
 		icon_state = icon_closed
 	else
 		icon_state = icon_opened
-
-/obj/structure/closet/medical_wall/filled
 
 /obj/structure/closet/medical_wall/filled/WillContain()
 	return list(
@@ -268,10 +256,8 @@
 	else
 		icon_state = icon_opened
 
-/obj/structure/closet/shipping_wall/filled
-
 /obj/structure/closet/shipping_wall/filled/WillContain()
 	return list(
 		/obj/item/stack/material/cardboard/ten,
 		/obj/item/device/destTagger,
-		/obj/item/weapon/packageWrap)
+		/obj/item/stack/package_wrap/twenty_five)

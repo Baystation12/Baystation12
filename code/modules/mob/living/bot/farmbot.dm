@@ -6,7 +6,7 @@
 /mob/living/bot/farmbot
 	name = "Farmbot"
 	desc = "The botanist's best friend."
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/farmbot.dmi'
 	icon_state = "farmbot0"
 	health = 50
 	maxHealth = 50
@@ -285,7 +285,7 @@
 /obj/item/weapon/farmbot_arm_assembly
 	name = "water tank/robot arm assembly"
 	desc = "A water tank with a robot arm permanently grafted to it."
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/farmbot.dmi'
 	icon_state = "water_arm"
 	var/build_step = 0
 	var/created_name = "Farmbot"

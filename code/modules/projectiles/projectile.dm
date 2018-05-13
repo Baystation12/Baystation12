@@ -153,13 +153,14 @@
 	original = target
 	def_zone = target_zone
 
-	spawn()
-		setup_trajectory(curloc, targloc, x_offset, y_offset, angle_offset) //plot the initial trajectory
-		Process()
-		spawn(SEGMENT_DELETION_DELAY)
-			QDEL_NULL_LIST(segments)
-
+	addtimer(CALLBACK(src, .proc/finalize_launch, curloc, targloc, x_offset, y_offset, angle_offset),0)
 	return 0
+
+/obj/item/projectile/proc/finalize_launch(var/turf/curloc, var/turf/targloc, var/x_offset, var/y_offset, var/angle_offset)
+	setup_trajectory(curloc, targloc, x_offset, y_offset, angle_offset) //plot the initial trajectory
+	Process()
+	spawn(SEGMENT_DELETION_DELAY) //running this from a proc wasn't working.
+		QDEL_NULL_LIST(segments)
 
 //called to launch a projectile from a gun
 /obj/item/projectile/proc/launch_from_gun(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
@@ -337,7 +338,7 @@
 		if(first_step)
 			muzzle_effect(effect_transform)
 			first_step = 0
-		else if(!bumped)
+		else if(!bumped && kill_count > 0)
 			tracer_effect(effect_transform)
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
@@ -349,8 +350,8 @@
 	// setup projectile state
 	starting = startloc
 	current = startloc
-	yo = targloc.y - startloc.y + y_offset
-	xo = targloc.x - startloc.x + x_offset
+	yo = round(targloc.y - startloc.y + y_offset, 1)
+	xo = round(targloc.x - startloc.x + x_offset, 1)
 
 	// trajectory dispersion
 	var/offset = 0
@@ -364,8 +365,8 @@
 
 	// generate this now since all visual effects the projectile makes can use it
 	effect_transform = new()
-	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
-	effect_transform.Turn(-trajectory.return_angle())		//no idea why this has to be inverted, but it works
+	effect_transform.Scale(round(trajectory.return_hypotenuse() + 0.005, 0.001) , 1) //Seems like a weird spot to truncate, but it minimizes gaps.
+	effect_transform.Turn(round(-trajectory.return_angle(), 0.1))		//no idea why this has to be inverted, but it works
 
 	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
 
@@ -378,11 +379,10 @@
 
 		if(istype(M))
 			M.set_transform(T)
-			M.pixel_x = location.pixel_x
-			M.pixel_y = location.pixel_y
+			M.pixel_x = round(location.pixel_x, 1)
+			M.pixel_y = round(location.pixel_y, 1)
 			if(!hitscan) //Bullets don't hit their target instantly, so we can't link the deletion of the muzzle flash to the bullet's Destroy()
-				spawn(1)
-					qdel(M)
+				QDEL_IN(M,1)
 			else
 				segments += M
 
@@ -392,11 +392,10 @@
 
 		if(istype(P))
 			P.set_transform(M)
-			P.pixel_x = location.pixel_x
-			P.pixel_y = location.pixel_y
+			P.pixel_x = round(location.pixel_x, 1)
+			P.pixel_y = round(location.pixel_y, 1)
 			if(!hitscan)
-				spawn(step_delay)	//if not a hitscan projectile, remove after a single delay. Do not spawn hitscan projectiles. EVER.
-					qdel(P)
+				QDEL_IN(M,1)
 			else
 				segments += P
 
@@ -406,8 +405,8 @@
 
 		if(istype(P))
 			P.set_transform(M)
-			P.pixel_x = location.pixel_x
-			P.pixel_y = location.pixel_y
+			P.pixel_x = round(location.pixel_x, 1)
+			P.pixel_y = round(location.pixel_y, 1)
 			segments += P
 
 //"Tracing" projectile
@@ -478,3 +477,5 @@
 	var/output = trace.launch(target) //Test it!
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!
+
+

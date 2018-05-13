@@ -65,6 +65,8 @@ var/global/photo_count = 0
 	..()
 
 /obj/item/weapon/photo/examine(mob/user)
+	if(!img)
+		return
 	if(in_range(user, src))
 		show(user)
 		to_chat(user, desc)

@@ -42,7 +42,7 @@
 		if(enemies.len && prob(10))
 			enemies = list()
 			LoseTarget()
-			src.visible_message("<span class='notice'>[src] calms down.</span>")
+			src.visible_message("<span class='notice'>\The [src] calms down.</span>")
 
 		if(stat == CONSCIOUS)
 			if(udder && prob(5))
@@ -69,8 +69,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
 	..()
-	if(stat == CONSCIOUS)
-		visible_message("<span class='warning'>[src] gets an evil-looking gleam in their eye.</span>")
+	if(stat == CONSCIOUS && prob(50))
+		visible_message("<span class='warning'>\The [src] gets an evil-looking gleam in their eye.</span>")
 
 /mob/living/simple_animal/hostile/retaliate/goat/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	var/obj/item/weapon/reagent_containers/glass/G = O
@@ -83,38 +83,6 @@
 			to_chat(user, "<span class='warning'>The udder is dry. Wait a bit longer...</span>")
 	else
 		..()
-
-//this is the king of goats. he is very powerful, which is why he is the king
-/mob/living/simple_animal/hostile/retaliate/goat/king
-	name = "king of goats"
-	desc = "The oldest and wisest of goats; king of his race, peerless in dignity and power. His golden fleece radiates nobility."
-	icon_state = "king_goat"
-	icon_living = "king_goat"
-	icon_dead = "goat_dead"
-	speak_emote = list("brays in a booming voice")
-	emote_hear = list("brays in a booming voice")
-	emote_see = list("stamps a mighty foot, shaking the surroundings")
-	meat_amount = 12
-	response_help  = "placates"
-	response_harm   = "assaults"
-	faction = "goat"
-	attacktext = "brutalized"
-	turns_per_move = 10
-	health = 500
-	maxHealth = 500
-	melee_damage_lower = 35
-	melee_damage_upper = 55
-	mob_size = MOB_LARGE
-
-/mob/living/simple_animal/hostile/retaliate/goat/king/Retaliate()
-	..()
-	if(stat == CONSCIOUS)
-		visible_message("<span class='warning'>[src] bellows indignantly, with a judgemental gleam in their eye.</span>")
-
-/mob/living/simple_animal/hostile/retaliate/goat/king/death()
-	..()
-	visible_message("<span class='warning'>\The [src] shrieks as the seal on their power breaks and his wool peels off!</span>")
-	new /obj/item/weapon/towel/fleece(src.loc)
 
 //cow
 /mob/living/simple_animal/cow

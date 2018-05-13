@@ -20,8 +20,6 @@
 		if (computer)
 			computer.table = src
 			break
-//	spawn(100) //Wont the MC just call this process() before and at the 10 second mark anyway?
-//		process()
 
 /obj/machinery/optable/ex_act(severity)
 
@@ -38,8 +36,6 @@
 		if(3.0)
 			if (prob(25))
 				src.set_density(0)
-		else
-	return
 
 /obj/machinery/optable/attack_hand(mob/user as mob)
 	if (HULK in usr.mutations)

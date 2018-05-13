@@ -80,9 +80,7 @@ var/const/tk_maxrange = 15
 		if(focus.Adjacent(loc))
 			focus.loc = loc
 	loc = null
-	spawn(1)
-		qdel(src)
-	return
+	QDEL_IN(src, 1)
 
 //stops TK grabs being equipped anywhere but into hands
 /obj/item/tk_grab/equipped(var/mob/user, var/slot)

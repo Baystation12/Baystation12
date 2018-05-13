@@ -33,6 +33,8 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ITEM_FLAG_BLOCK_GAS_SMOKE_EFFECT 0x0100 // Blocks the effect that chemical clouds would have on a mob -- glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
 #define ITEM_FLAG_FLEXIBLEMATERIAL       0x0200 // At the moment, masks with this flag will not prevent eating even if they are covering your face.
 #define ITEM_FLAG_PREMODIFIED            0x0400 // Gloves that are clipped by default
+#define ITEM_FLAG_IS_BELT                0x0800 // Items that can be worn on the belt slot, even with no undersuit equipped
+#define ITEM_FLAG_SILENT                 0x1000 // sneaky shoes
 
 // Flags for pass_flags.
 #define PASS_FLAG_TABLE  0x1

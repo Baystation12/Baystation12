@@ -2,7 +2,7 @@
 	name = "Bot"
 	health = 20
 	maxHealth = 20
-	icon = 'icons/obj/aibots.dmi'
+	icon = 'icons/mob/bot/placeholder.dmi'
 	universal_speak = 1
 	density = 0
 	var/obj/item/weapon/card/id/botcard = null
@@ -36,6 +36,9 @@
 	var/target_patience = 5
 	var/frustration = 0
 	var/max_frustration = 0
+
+	plane = HIDING_MOB_PLANE
+	layer = HIDING_MOB_LAYER
 
 /mob/living/bot/New()
 	..()
@@ -347,7 +350,7 @@
 	if(stat)
 		return 0
 	on = 1
-	set_light(light_strength)
+	set_light(0.5, 0.1, light_strength)
 	update_icons()
 	resetTarget()
 	patrol_path = list()

@@ -298,7 +298,7 @@ var/list/Tier4Runes = list(
 
 	input = sanitize(input)
 	log_and_message_admins("used a communicate verb to say '[input]'")
-	for(var/datum/mind/H in cult.current_antagonists)
+	for(var/datum/mind/H in GLOB.cult.current_antagonists)
 		if(H.current && !H.current.stat)
 			to_chat(H.current, "<span class='cult'>[input]</span>")
 

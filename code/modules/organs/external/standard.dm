@@ -13,6 +13,7 @@
 	w_class = ITEM_SIZE_HUGE //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
 	body_part = UPPER_TORSO
 	vital = 1
+	can_heal_overkill = 1
 	amputation_point = "spine"
 	joint = "neck"
 	dislocated = -1
@@ -45,6 +46,7 @@
 	w_class = ITEM_SIZE_LARGE
 	body_part = LOWER_TORSO
 	vital = 1
+	can_heal_overkill = 1
 	parent_organ = BP_CHEST
 	amputation_point = "lumbar"
 	joint = "hip"

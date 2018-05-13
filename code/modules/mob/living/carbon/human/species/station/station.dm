@@ -20,6 +20,9 @@
 
 	sexybits_location = BP_GROIN
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/tie_hair)
+
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
@@ -81,10 +84,12 @@
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
 	default_h_style = "Tajaran Ears"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	darksight = 8
+	darksight_range = 8
+	darksight_tint = DARKTINT_GOOD
 	slowdown = -0.5
 	brute_mod = 1.15
 	burn_mod =  1.15
+	flash_mod = 1.4
 	gluttonous = GLUT_TINY
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SIIK_TAJR)
@@ -118,7 +123,7 @@
 	flesh_color = "#afa59e"
 	base_color = "#333333"
 	blood_color = "#862a51"
-
+	organs_icon = 'icons/mob/human_races/organs/tajaran.dmi'
 	reagent_tag = IS_TAJARA
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
@@ -159,7 +164,20 @@
 	min_age = 19
 	max_age = 90
 
-	darksight = 4
+	burn_mod = 0.9
+	oxy_mod = 1.3
+	flash_mod = 1.2
+	toxins_mod = 0.8
+	siemens_coefficient = 1.3
+	warning_low_pressure = WARNING_LOW_PRESSURE * 1.4
+	hazard_low_pressure = HAZARD_LOW_PRESSURE * 2
+	warning_high_pressure = WARNING_HIGH_PRESSURE / 0.8125
+	hazard_high_pressure = HAZARD_HIGH_PRESSURE / 0.84615
+
+	body_temperature = null // cold-blooded, implemented the same way nabbers do it
+
+	darksight_range = 4
+	darksight_tint = DARKTINT_MODERATE
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
@@ -167,6 +185,7 @@
 	flesh_color = "#8cd7a3"
 	blood_color = "#1d2cbf"
 	base_color = "#006666"
+	organs_icon = 'icons/mob/human_races/organs/skrell.dmi'
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -247,6 +266,10 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/diona/foot/right)
 		)
 
+	base_auras = list(
+		/obj/aura/regenerating/human/diona
+		)
+
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/diona_split_nymph,
 		/mob/living/carbon/human/proc/diona_heal_toggle
@@ -319,48 +342,5 @@
 	return "sap"
 
 /datum/species/diona/handle_environment_special(var/mob/living/carbon/human/H)
-	if(H.InStasis() || H.stat == DEAD)
-		return
-	if(H.nutrition < 10)
+	if(!H.InStasis() && H.stat != DEAD && H.nutrition < 10)
 		H.take_overall_damage(2,0)
-	else if (H.innate_heal)
-		// Heals normal damage.
-		if(H.getBruteLoss())
-			H.adjustBruteLoss(-4)
-			H.nutrition -= 2
-		if(H.getFireLoss())
-			H.adjustFireLoss(-4)
-			H.nutrition -= 2
-
-		if(prob(10) && H.nutrition > 200 && !H.getBruteLoss() && !H.getFireLoss())
-			var/obj/item/organ/external/head/D = H.organs_by_name["head"]
-			if (D.disfigured)
-				D.disfigured = 0
-				H.nutrition -= 20
-
-		for(var/obj/item/organ/I in H.internal_organs)
-			if(I.damage > 0)
-				I.damage = max(I.damage - 2, 0)
-				H.nutrition -= 2
-				if (prob(5))
-					to_chat(H, "<span class='warning'>You sense your nymphs shifting internally to regenerate your [I.name]...</span>")
-
-		if (prob(10) && H.nutrition > 70)
-			for(var/limb_type in has_limbs)
-				var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-				if(E && !E.is_usable())
-					E.removed()
-					qdel(E)
-					E = null
-				if(!E)
-					var/list/organ_data = has_limbs[limb_type]
-					var/limb_path = organ_data["path"]
-					var/obj/item/organ/O = new limb_path(H)
-					organ_data["descriptor"] = O.name
-					to_chat(H, "<span class='warning'>Some of your nymphs split and hurry to reform your [O.name].</span>")
-					H.nutrition -= 60
-					H.update_body()
-				else
-					for(var/datum/wound/W in E.wounds)
-						if (W.wound_damage() == 0 && prob(50))
-							E.wounds -= W

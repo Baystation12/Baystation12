@@ -41,7 +41,7 @@
 #define COLOR_OFF_WHITE        "#eeeeee"
 #define COLOR_WHITE            "#ffffff"
 #define COLOR_NT_RED           "#9d2300"
-#define COLOR_GUNMETAL         "#80868e"
+#define COLOR_GUNMETAL         "#545c68"
 #define COLOR_MUZZLE_FLASH     "#ffffb2"
 #define COLOR_CHESTNUT         "#996633"
 #define COLOR_BEASTY_BROWN     "#663300"
@@ -49,6 +49,7 @@
 #define COLOR_CYAN_BLUE        "#3366cc"
 #define COLOR_LIGHT_CYAN       "#66ccff"
 #define COLOR_PAKISTAN_GREEN   "#006600"
+#define COLOR_HULL			   "#436b8e"
 
 #define	PIPE_COLOR_GREY        "#ffffff"	//yes white is grey
 #define	PIPE_COLOR_RED         "#ff0000"
@@ -59,4 +60,21 @@
 #define	PIPE_COLOR_BLACK       "#444444"
 #define	PIPE_COLOR_ORANGE      "#b95a00"
 
+#define	COMMS_COLOR_DEFAULT    "#ff00ff"
+#define	COMMS_COLOR_ENTERTAIN  "#666666"
+#define	COMMS_COLOR_AI         "#ff00ff"
+#define	COMMS_COLOR_COMMON     "#408010"
+#define	COMMS_COLOR_SERVICE    "#709b00"
+#define	COMMS_COLOR_SUPPLY     "#7f6539"
+#define	COMMS_COLOR_SCIENCE    "#993399"
+#define	COMMS_COLOR_MEDICAL    "#009190"
+#define	COMMS_COLOR_EXPLORER   "#929820"
+#define	COMMS_COLOR_ENGINEER   "#a68300"
+#define	COMMS_COLOR_SECURITY   "#930000"
+#define	COMMS_COLOR_COMMAND    "#204090"
+#define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
+#define	COMMS_COLOR_SYNDICATE  "#6d3f40"
+
 #define COLOR_BLOOD_HUMAN "#a10808"
+
+#define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))

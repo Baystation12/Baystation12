@@ -41,6 +41,7 @@
 		to_chat(usr, "You can see \a [cooking_obj] inside.")
 
 /obj/machinery/cooker/attackby(var/obj/item/I, var/mob/user)
+	set waitfor = 0  //So that any remaining parts of calling proc don't have to wait for the long cooking time ahead.
 
 	if(!cook_type || (stat & (NOPOWER|BROKEN)))
 		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")

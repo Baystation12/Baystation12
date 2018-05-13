@@ -41,7 +41,7 @@
 	dat += "Channel name is: <a href='?src=\ref[src];channel=1'>[channel ? channel : "unidentified broadcast"]</a><br>"
 	dat += "Video streaming is: <a href='?src=\ref[src];video=1'>[camera.status ? "Online" : "Offline"]</a><br>"
 	dat += "Microphone is: <a href='?src=\ref[src];sound=1'>[radio.broadcasting ? "Online" : "Offline"]</a><br>"
-	dat += "Sound is being broadcasted on frequency: [format_frequency(radio.frequency)] ([get_frequency_name(radio.frequency)])<br>"
+	dat += "Sound is being broadcasted on frequency: [format_frequency(radio.frequency)] ([get_frequency_default_name(radio.frequency)])<br>"
 	var/datum/browser/popup = new(user, "Press Camera Drone", "EyeBuddy", 300, 390, src)
 	popup.set_content(jointext(dat,null))
 	popup.open()

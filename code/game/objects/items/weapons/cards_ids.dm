@@ -18,6 +18,7 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	var/associated_account_number = 0
+	var/list/associated_email_login = list("login" = "", "password" = "")
 
 	var/list/files = list(  )
 
@@ -149,12 +150,14 @@ var/const/NO_EMAG_ACT = -50
 	return
 
 /obj/item/weapon/card/id/proc/update_name()
-	var/final_name = "[registered_name]'s ID Card"
+	SetName("[get_display_name()]'s ID Card")
+
+/obj/item/weapon/card/id/proc/get_display_name()
+	. = registered_name
 	if(military_rank && military_rank.name_short)
-		final_name = military_rank.name_short + " " + final_name
+		. = military_rank.name_short + " " + .
 	if(assignment)
-		final_name = final_name + " ([assignment])"
-	SetName(final_name)
+		. += " ([assignment])"
 
 /obj/item/weapon/card/id/proc/set_id_photo(var/mob/M)
 	front = getFlatIcon(M, SOUTH, always_use_defdir = 1)

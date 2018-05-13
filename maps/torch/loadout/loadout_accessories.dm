@@ -43,7 +43,6 @@
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
-	allowed_roles = MILITARY_ROLES
 
 /datum/gear/accessory/torch_patch
 	display_name = "Torch mission patch"
@@ -104,7 +103,7 @@
 						/datum/job/roboticist, /datum/job/engineer_contractor,
 						/datum/job/psychiatrist, /datum/job/doctor_contractor, /datum/job/chemist,
 						/datum/job/cargo_contractor, /datum/job/janitor, /datum/job/chef, /datum/job/bartender)
-					
+
 /datum/gear/accessory/ntaward
 	allowed_roles = NANOTRASEN_ROLES
 
@@ -125,7 +124,7 @@
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
 
 /datum/gear/storage/white_vest
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/merchant)
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/roboticist, /datum/job/merchant)
 
 /datum/gear/storage/brown_drop_pouches
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
@@ -135,7 +134,7 @@
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/guard, /datum/job/merchant)
 
 /datum/gear/storage/white_drop_pouches
-	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/merchant)
+	allowed_roles = list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor, /datum/job/roboticist, /datum/job/merchant)
 
 /datum/gear/tactical/holster
 	allowed_roles = ARMED_ROLES
@@ -190,3 +189,8 @@
 
 /datum/gear/accessory/bowtie
 	allowed_roles = NON_MILITARY_ROLES
+
+/datum/gear/accessory/ftupin
+	allowed_roles = list(/datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
+						/datum/job/scientist_assistant, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/doctor_contractor,
+						/datum/job/psychiatrist, /datum/job/cargo_contractor, /datum/job/bartender, /datum/job/merchant, /datum/job/assistant)

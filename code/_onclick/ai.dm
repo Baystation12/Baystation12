@@ -23,7 +23,7 @@
 		return
 	next_click = world.time + 1
 
-	if(stat)
+	if(incapacitated())
 		return
 
 	var/list/modifiers = params2list(params)
@@ -125,6 +125,8 @@
 /atom/proc/AICtrlAltClick()
 
 /obj/machinery/door/airlock/AICtrlAltClick() // Electrifies doors.
+	if(usr.incapacitated())
+		return
 	if(!electrified_until)
 		// permanent shock
 		Topic(src, list("command"="electrify_permanently", "activate" = "1"))
@@ -140,6 +142,8 @@
 	return
 
 /obj/machinery/door/airlock/AIShiftClick()  // Opens and closes doors!
+	if(usr.incapacitated())
+		return
 	if(density)
 		Topic(src, list("command"="open", "activate" = "1"))
 	else
@@ -150,6 +154,8 @@
 	return
 
 /obj/machinery/door/airlock/AICtrlClick() // Bolts doors
+	if(usr.incapacitated())
+		return
 	if(locked)
 		Topic(src, list("command"="bolts", "activate" = "0"))
 	else
@@ -157,10 +163,14 @@
 	return 1
 
 /obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
+	if(usr.incapacitated())
+		return
 	Topic(src, list("breaker"="1"))
 	return 1
 
 /obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
+	if(usr.incapacitated())
+		return
 	Topic(src, list("command"="enable", "value"="[!enabled]"))
 	return 1
 
@@ -168,6 +178,8 @@
 	return AltClick(A)
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
+	if(usr.incapacitated())
+		return
 	Topic(src, list("command"="lethal", "value"="[!lethal]"))
 	return 1
 
@@ -178,7 +190,8 @@
 	return 0
 
 /obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
-
+	if(usr.incapacitated())
+		return
 	if(..())
 		return
 

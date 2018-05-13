@@ -7,7 +7,8 @@
 
 	language = "Sol Common" //todo?
 	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/sharp)
-	darksight = 8
+	darksight_range = 8
+	darksight_tint = DARKTINT_GOOD
 	has_organ = list()
 	siemens_coefficient = 0
 
@@ -23,9 +24,7 @@
 	genders = list(NEUTER)
 
 /datum/species/shadow/handle_death(var/mob/living/carbon/human/H)
-	spawn(1)
-		new /obj/effect/decal/cleanable/ash(H.loc)
-		qdel(H)
+	H.dust()
 
 /datum/species/shadow/handle_environment_special(var/mob/living/carbon/human/H)
 	if(H.InStasis() || H.stat == DEAD || H.isSynthetic())

@@ -2,7 +2,7 @@
 	icon = 'icons/obj/robotics.dmi'
 	icon_state = "fab-idle"
 	name = "Exosuit Fabricator"
-	desc = "A machine used for construction of robotcs and mechas."
+	desc = "A machine used for construction of robotics and mechas."
 	density = 1
 	anchored = 1
 	use_power = 1

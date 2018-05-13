@@ -1,16 +1,18 @@
 /obj/item/device/floor_painter
-	name = "floor painter"
+	name = "paintgun"
 	icon = 'icons/obj/device.dmi'
 	icon_state = "flpainter"
 	item_state = "fl_painter"
-	desc = "A slender and none-too-sophisticated device capable of painting, erasing, and applying decals to most types of floors."
+	desc = "A slender and none-too-sophisticated device capable of painting, erasing, and applying decals to most types of floors. It can also paint walls."
 	description_info = "Use this item in your hand to access a menu in which you may change the type of decal, applied direction, and color. Click any accessible tile on the floor to apply your choice."
-	description_fluff = "This ubiquitous maintenance-grade floor painter isn't as fancy or convenient as modern consumer models, but with an internal synthesizer it never runs out of pigment!"
+	description_fluff = "This ubiquitous maintenance-grade paintgun isn't as fancy or convenient as modern consumer models, but with an internal synthesizer it never runs out of pigment!"
 	description_antag = "This thing would be perfect for vandalism. Could you write your name in the halls?"
 
 	var/decal =        "remove all decals"
 	var/paint_dir =    "precise"
 	var/paint_colour = COLOR_WHITE
+
+	var/color_picker = 0
 
 	var/list/decals = list(
 		"quarter-turf" =      list("path" = /obj/effect/floor_decal/corner, "precise" = 1, "coloured" = 1),
@@ -49,9 +51,22 @@
 	if(!proximity)
 		return
 
+	if(color_picker)
+		paint_colour = A.get_color()
+		to_chat(usr, "<span class='notice'>You set \the [src] to paint with <font color='[paint_colour]'>a new colour</font>.</span>")
+		return
+
+	playsound(get_turf(src), 'sound/effects/spray3.ogg', 30, 1, -6)
+
+	var/turf/simulated/wall/W = A
+	if(istype(W))
+		W.paint_color = paint_colour
+		W.update_icon()
+		return
+
 	var/turf/simulated/floor/F = A
 	if(!istype(F))
-		to_chat(user, "<span class='warning'>\The [src] can only be used on actual flooring.</span>")
+		to_chat(user, "<span class='warning'>\The [src] can only be used on floors or walls.</span>")
 		return
 
 	if(!F.flooring.can_paint || F.broken || F.burnt)
@@ -107,13 +122,15 @@
 	new painting_decal(F, painting_dir, painting_colour)
 
 /obj/item/device/floor_painter/attack_self(var/mob/user)
-	var/choice = input("Do you wish to change the decal type, paint direction, or paint colour?") as null|anything in list("Decal","Direction", "Colour")
+	var/choice = input("What do you wish to change?") as null|anything in list("Decal","Direction", "Colour", "Mode")
 	if(choice == "Decal")
 		choose_decal()
 	else if(choice == "Direction")
 		choose_direction()
 	else if(choice == "Colour")
 		choose_colour()
+	else if(choice == "Mode")
+		toggle_mode()
 
 /obj/item/device/floor_painter/examine(mob/user)
 	. = ..(user)
@@ -121,20 +138,20 @@
 
 /obj/item/device/floor_painter/verb/choose_colour()
 	set name = "Choose Colour"
-	set desc = "Choose a floor painter colour."
+	set desc = "Choose a paintgun colour."
 	set category = "Object"
 	set src in usr
 
 	if(usr.incapacitated())
 		return
-	var/new_colour = input(usr, "Choose a colour.", "Floor painter", paint_colour) as color|null
+	var/new_colour = input(usr, "Choose a colour.", "paintgun", paint_colour) as color|null
 	if(new_colour && new_colour != paint_colour)
 		paint_colour = new_colour
 		to_chat(usr, "<span class='notice'>You set \the [src] to paint with <font color='[paint_colour]'>a new colour</font>.</span>")
 
 /obj/item/device/floor_painter/verb/choose_decal()
 	set name = "Choose Decal"
-	set desc = "Choose a floor painter decal."
+	set desc = "Choose a paintgun decal."
 	set category = "Object"
 	set src in usr
 
@@ -148,7 +165,7 @@
 
 /obj/item/device/floor_painter/verb/choose_direction()
 	set name = "Choose Direction"
-	set desc = "Choose a floor painter direction."
+	set desc = "Choose a paintgun direction."
 	set category = "Object"
 	set src in usr
 
@@ -159,3 +176,17 @@
 	if(new_dir && !isnull(paint_dirs[new_dir]))
 		paint_dir = new_dir
 		to_chat(usr, "<span class='notice'>You set \the [src] direction to '[paint_dir]'.</span>")
+
+/obj/item/device/floor_painter/verb/toggle_mode()
+	set name = "Toggle Painter Mode"
+	set desc = "Choose a paintgun mode."
+	set category = "Object"
+	set src in usr
+
+	if(usr.incapacitated())
+		return
+	color_picker = !color_picker
+	if(color_picker)
+		to_chat(usr, "<span class='notice'>You set \the [src] to color picker mode, scanning colors off objects.</span>")
+	else
+		to_chat(usr, "<span class='notice'>You set \the [src] to painting mode.</span>")

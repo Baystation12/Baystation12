@@ -49,8 +49,7 @@
 		generate_atmosphere()
 		generate_map()
 		generate_features()
-		for(var/i = 0 to 3)
-			generate_landing()
+		generate_landing(4)		//try making 4 landmarks
 		update_biome()
 		START_PROCESSING(SSobj, src)
 
@@ -180,11 +179,14 @@
 			A.verbs -= /mob/living/simple_animal/proc/name_species
 	return TRUE
 
-/obj/effect/overmap/sector/exoplanet/proc/generate_landing()
-	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
-	if(T)
-		new landmark_type(T)
-	return T
+//Tries to generate num landmarks, but avoids repeats.
+/obj/effect/overmap/sector/exoplanet/proc/generate_landing(num = 1)
+	var/places = list()
+	for(var/i = 1, i <= num, i++)
+		var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
+		if(T && !(T in places))
+			places += T
+			new landmark_type(T)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
@@ -232,26 +234,30 @@
 	badgas = pick(badgases)
 
 /obj/effect/overmap/sector/exoplanet/proc/process_map_edge(atom/movable/A)
-	var/new_x
-	var/new_y
+	var/new_x = A.x
+	var/new_y = A.y
+	var/old_x = A.x
+	var/old_y = A.y
 	if(A.x <= TRANSITIONEDGE)
 		new_x = maxx - TRANSITIONEDGE - 2
-		new_y = rand(TRANSITIONEDGE + 2, maxy - TRANSITIONEDGE - 2)
+		old_x = A.x + 1
 
 	else if (A.x >= (maxx - TRANSITIONEDGE + 1))
 		new_x = TRANSITIONEDGE + 1
-		new_y = rand(TRANSITIONEDGE + 2, maxy - TRANSITIONEDGE - 2)
+		old_x = A.x - 1
 
 	else if (A.y <= TRANSITIONEDGE)
 		new_y = maxy - TRANSITIONEDGE -2
-		new_x = rand(TRANSITIONEDGE + 2, maxx - TRANSITIONEDGE - 2)
+		old_y = A.y + 1
 
 	else if (A.y >= (maxy - TRANSITIONEDGE + 1))
 		new_y = TRANSITIONEDGE + 1
-		new_x = rand(TRANSITIONEDGE + 2, maxx - TRANSITIONEDGE - 2)
+		old_y = A.y - 1
 
 	var/turf/T = locate(new_x, new_y, A.z)
 	if(T)
+		if(T.density) // dense thing will block movement
+			T = locate(old_x, old_y, A.z)
 		A.forceMove(T)
 
 /area/exoplanet
@@ -311,7 +317,6 @@
 		if(istype(T, /turf/simulated))
 			var/turf/simulated/S = T
 			S.blocks_air = 1
-
 
 /datum/random_map/noise/exoplanet/get_map_char(var/value)
 	if(water_type && noise2value(value) < water_level)
@@ -376,7 +381,7 @@
 			if(color == "RANDOM")
 				color = get_random_colour(0,75,190)
 			S.set_trait(TRAIT_LEAVES_COLOUR,color)
-			S.chems["woodpulp"] = 1
+			S.chems[/datum/reagent/woodpulp] = 1
 			big_flora_types += S
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)
@@ -410,8 +415,8 @@
 				initial_gas = E.atmosphere.gas.Copy()
 				temperature = E.atmosphere.temperature
 			if(E.lightlevel)
-				light_power = E.lightlevel
-				light_range = 2
+				light_max_bright = E.lightlevel
+				light_outer_range = 2
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)

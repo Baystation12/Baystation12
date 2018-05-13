@@ -165,7 +165,7 @@ var/list/outfits_decls_by_type_
 	if(r_hand)
 		H.put_in_r_hand(new r_hand(H))
 
-	if((flags & OUTFIT_HAS_BACKPACK))
+	if((flags & OUTFIT_HAS_BACKPACK) && !(OUTFIT_ADJUSTMENT_SKIP_BACKPACK & equip_adjustments))
 		var/decl/backpack_outfit/bo
 		var/metadata
 
@@ -210,8 +210,7 @@ var/list/outfits_decls_by_type_
 		return
 	if(OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)
 		return
-	var/obj/item/device/pda/heads/pda = new pda_type(H)
-	pda.set_owner_rank_job(H.real_name, rank, assignment)
+	var/obj/item/modular_computer/pda/pda = new pda_type(H)
 	if(H.equip_to_slot_or_store_or_drop(pda, pda_slot))
 		return pda
 

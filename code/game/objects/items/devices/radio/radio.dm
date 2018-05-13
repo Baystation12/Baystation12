@@ -115,7 +115,7 @@
 	var/dat[0]
 	for(var/internal_chan in internal_channels)
 		if(has_channel_access(user, internal_chan))
-			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_name(text2num(internal_chan)), "chan_span" = frequency_span_class(text2num(internal_chan)))))
+			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_default_name(text2num(internal_chan)), "chan_span" = frequency_span_class(text2num(internal_chan)))))
 
 	return dat
 
@@ -300,7 +300,7 @@
 
 	// --- Cyborg ---
 	else if (isrobot(M))
-		jobname = "Cyborg"
+		jobname = "Robot"
 
 	// --- Personal AI (pAI) ---
 	else if (istype(M, /mob/living/silicon/pai))
@@ -355,6 +355,8 @@
 			"server" = null, // the last server to log this signal
 			"reject" = 0,	// if nonzero, the signal will not be accepted by any broadcasting machinery
 			"level" = position.z, // The source's z level
+			"channel_tag" = "#unkn", // channel tag for the message
+			"channel_color" = channel_color_presets["Menacing Maroon"], // radio message color
 			"language" = speaking,
 			"verb" = verb
 		)
@@ -410,6 +412,8 @@
 		"server" = null,
 		"reject" = 0,
 		"level" = position.z,
+		"channel_tag" = "#unkn",
+		"channel_color" = channel_color_presets["Menacing Maroon"],
 		"language" = speaking,
 		"verb" = verb
 	)
@@ -432,7 +436,8 @@
 	if(!connection)	return 0	//~Carn
 	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
-					  filter_type, signal.data["compression"], GetConnectedZlevels(position.z), connection.frequency,verb,speaking)
+					  filter_type, signal.data["compression"], GetConnectedZlevels(position.z), connection.frequency, verb, speaking,
+					  "#unkn", channel_color_presets["Menacing Maroon"])
 
 
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)

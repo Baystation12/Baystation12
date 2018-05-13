@@ -26,6 +26,7 @@
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	var/z_offset = 1 // needed to calculate z-bounds correctly
 	for (var/mappath in mappaths)
+
 		var/datum/map_load_metadata/M = maploader.load_map(file(mappath), 1, 1, z_offset, cropMap=FALSE, measureOnly=TRUE, no_changeturf=TRUE, clear_contents=clear_contents)
 		if(M)
 			bounds = extend_bounds_if_needed(bounds, M.bounds)
@@ -154,7 +155,7 @@
 	return block(placement, locate(placement.x+width-1, placement.y+height-1, placement.z))
 
 //for your ever biggening badminnery kevinz000
-//? - Cyberboss
+
 /proc/load_new_z_level(var/file, var/name)
 	var/datum/map_template/template = new(file, name)
 	template.load_new_z()
