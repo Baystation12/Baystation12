@@ -1,0 +1,4 @@
+author: "Miraviel"
+delete-after: True
+changes: 
+  - bugfix: "You can now use sign language even if you are muzzled."
