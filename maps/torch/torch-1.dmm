@@ -9286,12 +9286,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/hologram/holopad,
 /obj/structure/disposalpipe/sortjunction/flipped{
 	dir = 8;
-	name = "Chief Engineer";
-	sortType = "Chief Engineer"
+	name = "Primary Tool Storage";
+	sortType = "Primary Tool Storage"
 	},
-/obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "sB" = (
