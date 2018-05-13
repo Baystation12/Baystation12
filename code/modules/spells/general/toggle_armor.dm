@@ -42,7 +42,7 @@
 /spell/toggle_armor/greytide_worldwide
 	name = "Greytide Worldwide"
 	invocation_type = SpI_EMOTE
-	invocation = "screams incoherently"
+	invocation = "screams incoherently!"
 	armor_pieces = list(/obj/item/clothing/under/color/grey = slot_w_uniform,
 						/obj/item/clothing/gloves/insulated/cheap = slot_gloves,
 						/obj/item/clothing/mask/gas = slot_wear_mask,
@@ -61,8 +61,8 @@
 
 /spell/toggle_armor/champion
 	name = "Toggle Armor (Champion)"
-	invocation_type = SpI_SHOUT
-	invocation = "Armor! To me!"
+	invocation_type = SpI_EMOTE
+	invocation = "is covered in golden embers for a moment, before they fade"
 	armor_pieces = list(/obj/item/clothing/head/champhelm = slot_head,
 						/obj/item/clothing/suit/champarmor = slot_wear_suit
 						)
@@ -70,15 +70,15 @@
 
 /spell/toggle_armor/excalibur
 	name = "Toggle Sword"
-	invocation_type = SpI_SHOUT
-	invocation = "Sword! To me!"
+	invocation_type = SpI_EMOTE
+	invocation = "thrusts /his hand forward, and it is enveloped in golden embers!"
 	armor_pieces = list(/obj/item/weapon/excalibur = slot_r_hand)
 	hud_state = "excalibur"
 
 /spell/toggle_armor/fiend
 	name = "Toggle Armor (Fiend)"
 	invocation_type = SpI_EMOTE
-	invocation = "'s clothes rapidly change"
+	invocation = "snaps /his fingers, and /his clothes begin to shift and change"
 	armor_pieces = list(/obj/item/clothing/head/fiendhood = slot_head,
 						/obj/item/clothing/suit/fiendcowl = slot_wear_suit
 						)
@@ -92,7 +92,7 @@
 /spell/toggle_armor/infiltrator
 	name = "Toggle Armor (Infiltrator)"
 	invocation_type = SpI_EMOTE
-	invocation = "winks"
+	invocation = "winks. In an instant, /his clothes change dramatically"
 	armor_pieces = list(/obj/item/clothing/head/infilhat = slot_head,
 						/obj/item/clothing/suit/infilsuit = slot_wear_suit
 						)
@@ -105,8 +105,8 @@
 
 /spell/toggle_armor/infil_items
 	name = "Toggle Counterfeit Kit"
-	invocation_type = SpI_WHISPER
-	invocation = "implements of illusion, tools of the trade, come to me."
+	invocation_type = SpI_EMOTE
+	invocation = "flicks /his wrists, one at a time"
 	armor_pieces = list(/obj/item/weapon/stamp/chameleon = slot_l_hand,
 						/obj/item/weapon/pen/chameleon = slot_r_hand)
 	hud_state = "forgery"
@@ -114,7 +114,7 @@
 /spell/toggle_armor/overseer
 	name = "Toggle Armor (Overseer)"
 	invocation_type = SpI_EMOTE
-	invocation = "'s form changes rapidly"
+	invocation = " is enveloped in shadows, before /his form begins to shift rapidly"
 	armor_pieces = list(/obj/item/clothing/head/overseerhood = slot_head,
 						/obj/item/clothing/suit/straight_jacket/overseercloak = slot_wear_suit
 						)

@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Very damaged heads will be marked as \"critical\" rather than \"irreparable\" on scanners, and can be healed even past max_damage threshold."

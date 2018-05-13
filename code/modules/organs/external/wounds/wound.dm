@@ -143,9 +143,9 @@
 	if(embedded_objects.len)
 		return amount // heal nothing
 	if(parent_organ)
-		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || parent_organ.vital))
+		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || parent_organ.can_heal_overkill))
 			return amount	//We don't want to heal wounds on irreparable organs.
-		else if(!(parent_organ.brute_ratio < 1 || parent_organ.vital))
+		else if(!(parent_organ.brute_ratio < 1 || parent_organ.can_heal_overkill))
 			return amount
 
 	var/healed_damage = min(src.damage, amount)
