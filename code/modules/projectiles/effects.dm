@@ -149,7 +149,7 @@
 // Emitter beam
 //----------------------------
 /obj/effect/projectile/laser/emitter/
-	light_max_bright = 3
+	light_max_bright = 1
 	light_color = "#00cc00"
 
 /obj/effect/projectile/laser/emitter/tracer
