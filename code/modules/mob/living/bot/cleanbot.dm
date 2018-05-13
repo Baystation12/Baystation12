@@ -12,6 +12,7 @@
 	var/cleaning = 0
 	var/screwloose = 0
 	var/oddbutton = 0
+	var/booped = 0
 	var/blood = 1
 	var/list/target_types = list()
 
@@ -20,6 +21,9 @@
 	get_targets()
 
 /mob/living/bot/cleanbot/handleIdle()
+	if(!target && !booped)
+		playsound(src, 'sound/machines/boop2.ogg', 15)
+		booped = 1
 	if(!screwloose && !oddbutton && prob(5))
 		visible_message("\The [src] makes an excited beeping booping sound!")
 
@@ -40,7 +44,6 @@
 	for(var/obj/effect/decal/cleanable/D in view(world.view + 1, src))
 		if(confirmTarget(D))
 			target = D
-			playsound(src, 'sound/machines/boop1.ogg', 30)
 			return
 
 /mob/living/bot/cleanbot/confirmTarget(var/obj/effect/decal/cleanable/D)
@@ -78,7 +81,7 @@
 		qdel(D)
 		if(D == target)
 			target = null
-	playsound(src, 'sound/machines/boop2.ogg', 30)
+	booped = 0
 	busy = 0
 	update_icons()
 
