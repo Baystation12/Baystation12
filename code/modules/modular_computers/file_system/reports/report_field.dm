@@ -18,6 +18,12 @@
 	owner = null
 	. = ..()
 
+//Access stuff. Can be given access constants or lists.
+/datum/report_field/proc/set_access(given_access = list(), given_access_edit = list())
+	access |= given_access
+	access_edit |= given_access
+	access_edit |= given_access_edit
+
 /datum/report_field/proc/verify_access(given_access)
 	if(!islist(given_access))
 		given_access = list(given_access)
