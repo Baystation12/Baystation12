@@ -313,30 +313,35 @@
 /obj/item/clothing/suit/poncho/colored
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
+	species_restricted = null
 	icon_state = "classicponcho"
 	item_state = "classicponcho"
 
 /obj/item/clothing/suit/poncho/colored/green
 	name = "green poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is green."
+	species_restricted = null
 	icon_state = "greenponcho"
 	item_state = "greenponcho"
 
 /obj/item/clothing/suit/poncho/colored/red
 	name = "red poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is red."
+	species_restricted = null
 	icon_state = "redponcho"
 	item_state = "redponcho"
 
 /obj/item/clothing/suit/poncho/colored/purple
 	name = "purple poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is purple."
+	species_restricted = null
 	icon_state = "purpleponcho"
 	item_state = "purpleponcho"
 
 /obj/item/clothing/suit/poncho/colored/blue
 	name = "blue poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is blue."
+	species_restricted = null
 	icon_state = "blueponcho"
 	item_state = "blueponcho"
 
@@ -440,31 +445,36 @@
 
 /obj/item/clothing/suit/poncho/roles/security
 	name = "security poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is black and red, which are standard NanoTrasen Security colors."
+	desc = "A simple, comfortable cloak without sleeves. This one is black and red, which are standard Security colors."
+	species_restricted = null
 	icon_state = "secponcho"
 	item_state = "secponcho"
 
 /obj/item/clothing/suit/poncho/roles/medical
 	name = "medical poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is white with a blue tint, which are standard Medical colors."
+	species_restricted = null
 	icon_state = "medponcho"
 	item_state = "medponcho"
 
 /obj/item/clothing/suit/poncho/roles/engineering
 	name = "engineering poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, which are standard Engineering colors."
+	species_restricted = null
 	icon_state = "engiponcho"
 	item_state = "engiponcho"
 
 /obj/item/clothing/suit/poncho/roles/science
 	name = "science poncho"
-	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, which are standard NanoTrasen Science colors."
+	desc = "A simple, comfortable cloak without sleeves. This one is white with a few red stripes, which are standard NanoTrasen colors."
+	species_restricted = null
 	icon_state = "sciponcho"
 	item_state = "sciponcho"
 
 /obj/item/clothing/suit/poncho/roles/cargo
 	name = "cargo poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, which are standard Cargo colors."
+	species_restricted = null
 	icon_state = "cargoponcho"
 	item_state = "cargoponcho"
 
