@@ -1,4 +1,0 @@
-author: "chaoko99"
-delete-after: True
-changes: 
-  - rscdel: "Reverted a change that made it impossible to draw/fill plant reagents. You may now make your tomato grenades again."
