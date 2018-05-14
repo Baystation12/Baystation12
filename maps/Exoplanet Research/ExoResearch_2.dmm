@@ -242,91 +242,90 @@
 "eH" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
 "eI" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
 "eJ" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"eK" = (/turf/space,/area/exo_research_facility)
-"eL" = (/obj/structure/lattice,/turf/space,/area/exo_research_facility)
-"eM" = (/obj/effect/decal/cleanable/dirt,/turf/space,/area/exo_research_facility)
+"eK" = (/turf/simulated/open,/area/exo_research_facility)
+"eL" = (/obj/structure/lattice,/turf/simulated/open,/area/exo_research_facility)
+"eM" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/open,/area/exo_research_facility)
 "eN" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
 "eO" = (/obj/structure/table/steel_reinforced,/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
 "eP" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
 "eQ" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Flight Operations"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"eR" = (/turf/simulated/open,/area/exo_research_facility)
-"eS" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"eT" = (/obj/structure/ladder{name = "Hangar Sublevel 1"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"eU" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor,/area/exo_research_facility)
-"eV" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/space,/area/exo_research_facility)
-"eW" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Marine Armory"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"eX" = (/obj/machinery/vending/armory/armor,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"eY" = (/obj/machinery/vending/armory/hybrid,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"eZ" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-stalkybush_1"; icon_state = "stalkybush_1"},/turf/unsimulated/beach/water{tag = "icon-beach (WEST)"; icon_state = "beach"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"fa" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fb" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/exo_research_facility)
-"fc" = (/turf/simulated/floor/pavement/corner{tag = "icon-pave_corner (WEST)"; icon_state = "pave_corner"; dir = 8},/area/exo_research_facility/outer)
-"fd" = (/turf/simulated/floor/pavement{dir = 1; icon_state = "pavement"; tag = "icon-pavement (EAST)"},/area/exo_research_facility/outer)
-"fe" = (/turf/simulated/floor/pavement{tag = "icon-pave_invert_corner (WEST)"; icon_state = "pave_invert_corner"; dir = 8},/area/exo_research_facility/outer)
-"ff" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Marine Dorm Hallway 2"; id = "Marine Dorm Hallway 2"; name = "Privacy Shutter Control"; pixel_x = -32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fg" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (EAST)"; icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fh" = (/obj/structure/table/steel,/obj/machinery/button/remote/blast_door{_wifi_id = "Research Compound Hangar Blast Doors"; id = "Research Compound Hangar Blast Doors"; name = "Hangar Acces Control"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fi" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-envelope_sealed"; icon_state = "envelope_sealed"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fj" = (/obj/structure/closet,/obj/item/clothing/mask/marine,/obj/item/clothing/head/helmet/marine/visor,/obj/item/clothing/under/unsc/marine_fatigues,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/accessory/holster/thigh,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fk" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fl" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fm" = (/obj/machinery/computer/telecomms/monitor,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fn" = (/obj/structure/bed,/obj/item/weapon/bedsheet{tag = "icon-sheetbrown"; icon_state = "sheetbrown"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fo" = (/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fp" = (/obj/structure/table/steel,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fq" = (/obj/item/modular_computer/console/preset/sysadmin,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fr" = (/turf/simulated/floor/road/markings{tag = "icon-road_marking (NORTH)"; icon_state = "road_marking"; dir = 1},/area/exo_research_facility/outer)
-"fs" = (/obj/machinery/door/airlock/halo{name = "Marine Detachment Dorms"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"ft" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Marine Dorm Hallway 1"; id = "Marine Dorm Hallway 1"; name = "Privacy Shutter Control"; pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fu" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Marine Dorm Hallway 1"; name = "Privacy Shutter Control"; pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fv" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/space,/area/exo_research_facility)
-"fw" = (/obj/structure/lattice,/turf/simulated/floor,/area/exo_research_facility)
-"fx" = (/turf/simulated/floor/pavement{tag = "icon-pavement (WEST)"; icon_state = "pavement"; dir = 8},/area/exo_research_facility/outer)
-"fy" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Marine Dorm Hallway 1"; density = 0; icon_state = "pdoor0"; id = "Marine Dorm Hallway 1"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/exo_research_facility)
-"fz" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"fA" = (/obj/machinery/door/blast/regular{_wifi_id = "Security Checkpoint 2"; density = 0; icon_state = "pdoor0"; id = "Security Checkpoint 2"; name = "Security Gate"; opacity = 0},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/exo_research_facility/outer)
-"fB" = (/obj/machinery/door/airlock/halo{name = "Security Checkpoint"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fC" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Security Checkpoint 1"; density = 0; icon_state = "pdoor0"; id = "Security Checkpoint 1"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/exo_research_facility)
-"fD" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/obj/item/weapon/pen,/obj/item/weapon/paper_bin{pixel_x = 1; pixel_y = 9},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fE" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Security Checkpoint 1"; id = "Security Checkpoint 1"; name = "Privacy Shutter Control"; pixel_x = 32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fF" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHWEST)"; icon_state = "beach"; dir = 10},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"fG" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (SOUTHWEST)"; icon_state = "barbedwire"; dir = 10},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fH" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (NORTH)"; icon_state = "barbedwire"; dir = 1},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fI" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (NORTHWEST)"; icon_state = "barbedwire"; dir = 9},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fJ" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (NORTHEAST)"; icon_state = "barbedwire"; dir = 5},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fK" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/folder{tag = "icon-folder_nt"; icon_state = "folder_nt"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fL" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (WEST)"; icon_state = "officechair_dark_preview"; dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fM" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (SOUTHEAST)"; icon_state = "barbedwire"; dir = 6},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fN" = (/obj/structure/sandbag{tag = "icon-sandbag (NORTHWEST)"; icon_state = "sandbag"; dir = 9},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fO" = (/obj/structure/sandbag{dir = 1},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fP" = (/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fQ" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Security Checkpoint 2"; id = "Security Checkpoint 2"; name = "Security Gate Control"; pixel_x = -32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
-"fR" = (/obj/structure/sandbag{dir = 8},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fS" = (/turf/unsimulated/floor/desert,/area/exo_research_facility/outer)
-"fT" = (/obj/structure/sandbag{tag = "icon-sandbag (EAST)"; icon_state = "sandbag"; dir = 4},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fU" = (/obj/structure/sandbag{tag = "icon-sandbag (SOUTHWEST)"; icon_state = "sandbag"; dir = 10},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fV" = (/obj/structure/turret/chaingun{dir = 2},/turf/unsimulated/floor/desert,/area/exo_research_facility/outer)
-"fW" = (/obj/structure/sandbag{tag = "icon-sandbag (SOUTHEAST)"; icon_state = "sandbag"; dir = 6},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fX" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/unsimulated/beach/water{tag = "icon-seashallow"; icon_state = "seashallow"},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"fY" = (/turf/unsimulated/floor/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"fZ" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"ga" = (/turf/unsimulated/beach/water{tag = "icon-beach (NORTHEAST)"; icon_state = "beach"; dir = 5},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gb" = (/turf/unsimulated/beach/water{tag = "icon-beach (EAST)"; icon_state = "beach"; dir = 4},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gc" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{requires_power = 0})
-"gd" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner (WEST)"; icon_state = "beachcorner"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"ge" = (/obj/docking_umbilical/north{name = "Research Compound LZ Space Elevator"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gf" = (/turf/unsimulated/floor/rock2,/area/exoplanet/desert{requires_power = 0})
-"gg" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner"; icon_state = "beachcorner"},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gh" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gi" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{requires_power = 0})
-"gj" = (/obj/effect/dummy/spell_jaunt,/turf/unsimulated/floor/rock2,/area/exoplanet/desert{requires_power = 0})
-"gk" = (/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHEAST)"; icon_state = "beach"; dir = 6},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gl" = (/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{requires_power = 0})
-"gm" = (/obj/effect/landmark/dropship_land_point{name = "Research Compound LZ"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gn" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{requires_power = 0})
-"go" = (/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gp" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gq" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor/rock2,/area/exoplanet/desert{requires_power = 0})
+"eR" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"eS" = (/obj/structure/ladder{name = "Hangar Sublevel 1"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"eT" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor,/area/exo_research_facility)
+"eU" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/open,/area/exo_research_facility)
+"eV" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Marine Armory"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"eW" = (/obj/machinery/vending/armory/armor,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"eX" = (/obj/machinery/vending/armory/hybrid,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"eY" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-stalkybush_1"; icon_state = "stalkybush_1"},/turf/unsimulated/beach/water{tag = "icon-beach (WEST)"; icon_state = "beach"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"eZ" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fa" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/exo_research_facility)
+"fb" = (/turf/simulated/floor/pavement/corner{tag = "icon-pave_corner (WEST)"; icon_state = "pave_corner"; dir = 8},/area/exo_research_facility/outer)
+"fc" = (/turf/simulated/floor/pavement{dir = 1; icon_state = "pavement"; tag = "icon-pavement (EAST)"},/area/exo_research_facility/outer)
+"fd" = (/turf/simulated/floor/pavement{tag = "icon-pave_invert_corner (WEST)"; icon_state = "pave_invert_corner"; dir = 8},/area/exo_research_facility/outer)
+"fe" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Marine Dorm Hallway 2"; id = "Marine Dorm Hallway 2"; name = "Privacy Shutter Control"; pixel_x = -32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"ff" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (EAST)"; icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fg" = (/obj/structure/table/steel,/obj/machinery/button/remote/blast_door{_wifi_id = "Research Compound Hangar Blast Doors"; id = "Research Compound Hangar Blast Doors"; name = "Hangar Acces Control"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fh" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-envelope_sealed"; icon_state = "envelope_sealed"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fi" = (/obj/structure/closet,/obj/item/clothing/mask/marine,/obj/item/clothing/head/helmet/marine/visor,/obj/item/clothing/under/unsc/marine_fatigues,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/accessory/holster/thigh,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fj" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fk" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fl" = (/obj/machinery/computer/telecomms/monitor,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fm" = (/obj/structure/bed,/obj/item/weapon/bedsheet{tag = "icon-sheetbrown"; icon_state = "sheetbrown"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fn" = (/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fo" = (/obj/structure/table/steel,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fp" = (/obj/item/modular_computer/console/preset/sysadmin,/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fq" = (/turf/simulated/floor/road/markings{tag = "icon-road_marking (NORTH)"; icon_state = "road_marking"; dir = 1},/area/exo_research_facility/outer)
+"fr" = (/obj/machinery/door/airlock/halo{name = "Marine Detachment Dorms"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fs" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Marine Dorm Hallway 1"; id = "Marine Dorm Hallway 1"; name = "Privacy Shutter Control"; pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"ft" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Marine Dorm Hallway 1"; name = "Privacy Shutter Control"; pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fu" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/space,/area/exo_research_facility)
+"fv" = (/obj/structure/lattice,/turf/simulated/floor,/area/exo_research_facility)
+"fw" = (/turf/simulated/floor/pavement{tag = "icon-pavement (WEST)"; icon_state = "pavement"; dir = 8},/area/exo_research_facility/outer)
+"fx" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Marine Dorm Hallway 1"; density = 0; icon_state = "pdoor0"; id = "Marine Dorm Hallway 1"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/exo_research_facility)
+"fy" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"fz" = (/obj/machinery/door/blast/regular{_wifi_id = "Security Checkpoint 2"; density = 0; icon_state = "pdoor0"; id = "Security Checkpoint 2"; name = "Security Gate"; opacity = 0},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/exo_research_facility/outer)
+"fA" = (/obj/machinery/door/airlock/halo{name = "Security Checkpoint"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fB" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Security Checkpoint 1"; density = 0; icon_state = "pdoor0"; id = "Security Checkpoint 1"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/exo_research_facility)
+"fC" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/obj/item/weapon/pen,/obj/item/weapon/paper_bin{pixel_x = 1; pixel_y = 9},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fD" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Security Checkpoint 1"; id = "Security Checkpoint 1"; name = "Privacy Shutter Control"; pixel_x = 32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fE" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHWEST)"; icon_state = "beach"; dir = 10},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"fF" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (SOUTHWEST)"; icon_state = "barbedwire"; dir = 10},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fG" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (NORTH)"; icon_state = "barbedwire"; dir = 1},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fH" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (NORTHWEST)"; icon_state = "barbedwire"; dir = 9},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fI" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (NORTHEAST)"; icon_state = "barbedwire"; dir = 5},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fJ" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/folder{tag = "icon-folder_nt"; icon_state = "folder_nt"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fK" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (WEST)"; icon_state = "officechair_dark_preview"; dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fL" = (/obj/item/stack/barbedwire{tag = "icon-barbedwire (SOUTHEAST)"; icon_state = "barbedwire"; dir = 6},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fM" = (/obj/structure/sandbag{tag = "icon-sandbag (NORTHWEST)"; icon_state = "sandbag"; dir = 9},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fN" = (/obj/structure/sandbag{dir = 1},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fO" = (/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fP" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Security Checkpoint 2"; id = "Security Checkpoint 2"; name = "Security Gate Control"; pixel_x = -32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/exo_research_facility)
+"fQ" = (/obj/structure/sandbag{dir = 8},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fR" = (/turf/unsimulated/floor/desert,/area/exo_research_facility/outer)
+"fS" = (/obj/structure/sandbag{tag = "icon-sandbag (EAST)"; icon_state = "sandbag"; dir = 4},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fT" = (/obj/structure/sandbag{tag = "icon-sandbag (SOUTHWEST)"; icon_state = "sandbag"; dir = 10},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fU" = (/obj/structure/turret/chaingun{dir = 2},/turf/unsimulated/floor/desert,/area/exo_research_facility/outer)
+"fV" = (/obj/structure/sandbag{tag = "icon-sandbag (SOUTHEAST)"; icon_state = "sandbag"; dir = 6},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
+"fW" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/unsimulated/beach/water{tag = "icon-seashallow"; icon_state = "seashallow"},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"fX" = (/turf/unsimulated/floor/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"fY" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"fZ" = (/turf/unsimulated/beach/water{tag = "icon-beach (NORTHEAST)"; icon_state = "beach"; dir = 5},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"ga" = (/turf/unsimulated/beach/water{tag = "icon-beach (EAST)"; icon_state = "beach"; dir = 4},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"gb" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{requires_power = 0})
+"gc" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner (WEST)"; icon_state = "beachcorner"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"gd" = (/obj/docking_umbilical/north{name = "Research Compound LZ Space Elevator"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"ge" = (/turf/unsimulated/floor/rock2,/area/exoplanet/desert{requires_power = 0})
+"gf" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner"; icon_state = "beachcorner"},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"gg" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"gh" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{requires_power = 0})
+"gi" = (/obj/effect/dummy/spell_jaunt,/turf/unsimulated/floor/rock2,/area/exoplanet/desert{requires_power = 0})
+"gj" = (/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHEAST)"; icon_state = "beach"; dir = 6},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"gk" = (/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{requires_power = 0})
+"gl" = (/obj/effect/landmark/dropship_land_point{name = "Research Compound LZ"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"gm" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{requires_power = 0})
+"gn" = (/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"go" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"gp" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor/rock2,/area/exoplanet/desert{requires_power = 0})
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -355,29 +354,29 @@ ababababababacadadadadadagahaiajajajajajerajajajajajajajajajajajajajajajajajajaj
 abababababaIaJadadadadadagahaiajajafexeyafafafafafafafafafafafafafafafafafafafajajcjcxcxdScxcxckckckckcmajajafezalalalalalaleAafejeBalaleCejafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
 abababababacadadadadadadagahaiajajafakalalalalalalaleDeEeDeFeDeDeEeDeDeFeDeEafajajcjcxcxdScxcxckeGckckcmajajenalalbhbibjbhbibjafejeHalaleIejafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
 abababababacadadadadadadagahaiajajafalalalalalaleJdIeDeDeKeKeKeKeKeKeLeMeKeDafajajcjcxcxcxcxcxclclclclcmajajenalalbheNbjbheObjafejeBalalePejafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
-abababababacadadadadadadagahaiajajafalalafeQalafafafeDeKeReReReReReReReReReKafajajcjcxcxcxcxcxckeGckckcmajajafazalafafafafafafafejeBalaleSejafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
-abababababcOcQadadadadadagahaiajajafalalafalalameTafeUeKeReReReReReReReReReVafajajcjcxcxcxcxcxckckckckcmajajenalalalalalalalalalalalalalalejafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
-ababababababacadadadadadagahaiajajafalalafalalalalbLeDeKeReReReReReReReReReKafajajcjcxcxdScxcxclclclclcmajajenalalaleJalalalaleJeWalaleXeYejafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
-ababababababeZadadadadadagahaiajajafalalafalalalfafbeDeKeReReReReReReReReReKafajajcjcxcxdScxcxfcfdfdfdfeajajafffalafafafafafafafejejejejejejafajajaiahatadadadadadadadbpadadadadadadadadadadadadadadadaa
-ababababababacadadadadadagahaiajajafakalafakalfgfhfbeDeKeReReReReReReReReReKafajajcjcxcxcxcxcxcVajajajajajajenalalafafafafafafafafafafafafafafajajaiahatadadadadadadbpbpadadadadadadadadadadadadadadadaa
-ababababababacadadadadadagahaiajajafalalafalalalfifbeDeKeReReReReReReReReReKafajajcjcxcxcxcxcxcmajajajajajajenaleAafaffjfjaffjfjaffjfjaffjfjafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
-ababababababacadadadadadagahaiajajafalalafalfkflfmafeDeKeReReReReReReReReReKafajajcjcxcxcxcxcxcmajajafafafafafalalbLaffnalaffnalaffnalaffnalafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
-ababababababacadadadadadagahaiajajafalalaffofpfqaFafeUeKeReReReReReReReReReVafajajcjfrfrfrfrfrcmajajafafafafafalalafaffnalaffnalaffnalaffnalafajajaiahatadadbpbpadadadadadadadbpadadadadadadadadadadadaa
-ababababababacbpadadadadagahaiajajafalalafafafafafafeDeKeReReReReReReReReReKafajajcjfrfrfrfrfrcmajajafafafafafazalafafaffsafaffsafaffsafaffsafajajaiahatadadadbpbpadadadadadadbpbpadadadadadadadadadadaa
-ababababababacbpadadadadagahaiajajafalalalalalalalaleDeDeKeKeKeKeKeKeKeKeKeDafajajcjcxcxcxcxcxcmajajalalalalalalalalftalalalalalalalalfualalafajajaiahatadadadadbpbpadadadadadadbpbpadadadadadadadadadaa
-ababababababacadadadadadagahaiajajafakalalalalaleJdIeDfvfweDeDeDfveDeDeDeDfvafajajcjcxcxcxcxcxfxajajdIaleJalalalaleJalalalalaleJalalalalaleJafajajaiahatadadadadadbpbpbpadadadadadbpadadadadadadadadadaa
-ababababababacadadadadadagahaiajajafafafafafafafafafafafafafafafafafafafafafafajajcjcxcxcxcxcxfxajajafafafafaffyfyaffyfyaffyfyaffyfyaffyfyafafajajaiahatadadadadadadadbpadadadadadbpadadadadadadadadadaa
-abababababaIaJadfzadadadagahaiajajajajajajajajajajajajajajajajajajajajajajajajajajcjcxcxdScxcxcVajajajajajajajajajajajajajajajajajajajajajajajajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
-abababababacadadadadadadagahaiajajajajajajajajajajajajajajajajajajajajajajajajajajcjcxcxdScxcxfxajajajajajajajajajajajajajajajajajajajajajajajajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
-abababababacadadadadadadagahajajajajajajajajajajajajajajajajajajajajajajajajajajajajfAfAfAfAfAafaffBafajajajajajajajajajajajajajajajajajajajajajajajahatadadadadadadadadadadadadadadadadadadadadadadadaa
-abababababacadadadadadadagahahahahahahahahahahahahahahahahahahahahahahahahahahahahahadadadadadfCfDfEafahahahahahahahahahahahahahahahahahahahahahahahahatadadadadadadadadadadadadadadadadadadadadadadadaa
-abababababfFcQadadadadadfGfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfIfHfHfHfJadadadadadfCfKfLaffHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfHfMadadadadadadadadadadadadadadadadadadadaHadadadaa
-ababababababacadadadadbpadadadadadadadadadadadadadadadadadadadbpadadadadadagfNfOfPfPadadadadadfCesfQbLbpadadadadadadadadadadadadadadadadadadadadbpbpadadadadadadadadadadadadadadadadadadadadadadadadadaa
-ababababababacadadadadadadadadadbpadadadadadadadadfzadadadadadadadadadadadagfRfSfTatadadadadadafafafafadadadadadadadadadadadadadadadadadadadadadadadadadadadbpadadadadadadadadadadadadadadadadadadadadaa
-ababababababcOcPcPcPcPcQadadadadadadadadadadadadadadadadadadadadadadadadadagfUfVfWatadadadadadadadadadadbpadadbpadadadbpadbpbpbpadadadadadadadadadadadadbpbpbpadadadadadadadadadadadadaHadadadadadadadaa
-abababababababababababcOcPcPcPcPcPcPcQadadadadadadadadadadadadadadadadadadfGfHfSfHfMadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
-ababababababababababababfXabababababacadadadadadadadbpadadadadadadadadaHadadadadfYadadadadadadadadaHadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
-ababababababababababababfXabababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadbpadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
+abababababacadadadadadadagahaiajajafalalafeQalafafafeDeKeKeKeKeKeKeKeKeKeKeKafajajcjcxcxcxcxcxckeGckckcmajajafazalafafafafafafafejeBalaleRejafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
+abababababcOcQadadadadadagahaiajajafalalafalalameSafeTeKeKeKeKeKeKeKeKeKeKeUafajajcjcxcxcxcxcxckckckckcmajajenalalalalalalalalalalalalalalejafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
+ababababababacadadadadadagahaiajajafalalafalalalalbLeDeKeKeKeKeKeKeKeKeKeKeKafajajcjcxcxdScxcxclclclclcmajajenalalaleJalalalaleJeValaleWeXejafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
+ababababababeYadadadadadagahaiajajafalalafalalaleZfaeDeKeKeKeKeKeKeKeKeKeKeKafajajcjcxcxdScxcxfbfcfcfcfdajajaffealafafafafafafafejejejejejejafajajaiahatadadadadadadadbpadadadadadadadadadadadadadadadaa
+ababababababacadadadadadagahaiajajafakalafakalfffgfaeDeKeKeKeKeKeKeKeKeKeKeKafajajcjcxcxcxcxcxcVajajajajajajenalalafafafafafafafafafafafafafafajajaiahatadadadadadadbpbpadadadadadadadadadadadadadadadaa
+ababababababacadadadadadagahaiajajafalalafalalalfhfaeDeKeKeKeKeKeKeKeKeKeKeKafajajcjcxcxcxcxcxcmajajajajajajenaleAafaffifiaffifiaffifiaffifiafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
+ababababababacadadadadadagahaiajajafalalafalfjfkflafeDeKeKeKeKeKeKeKeKeKeKeKafajajcjcxcxcxcxcxcmajajafafafafafalalbLaffmalaffmalaffmalaffmalafajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
+ababababababacadadadadadagahaiajajafalalaffnfofpaFafeTeKeKeKeKeKeKeKeKeKeKeUafajajcjfqfqfqfqfqcmajajafafafafafalalafaffmalaffmalaffmalaffmalafajajaiahatadadbpbpadadadadadadadbpadadadadadadadadadadadaa
+ababababababacbpadadadadagahaiajajafalalafafafafafafeDeKeKeKeKeKeKeKeKeKeKeKafajajcjfqfqfqfqfqcmajajafafafafafazalafafaffrafaffrafaffrafaffrafajajaiahatadadadbpbpadadadadadadbpbpadadadadadadadadadadaa
+ababababababacbpadadadadagahaiajajafalalalalalalalaleDeDeKeKeKeKeKeKeKeKeKeDafajajcjcxcxcxcxcxcmajajalalalalalalalalfsalalalalalalalalftalalafajajaiahatadadadadbpbpadadadadadadbpbpadadadadadadadadadaa
+ababababababacadadadadadagahaiajajafakalalalalaleJdIeDfufveDeDeDfueDeDeDeDfuafajajcjcxcxcxcxcxfwajajdIaleJalalalaleJalalalalaleJalalalalaleJafajajaiahatadadadadadbpbpbpadadadadadbpadadadadadadadadadaa
+ababababababacadadadadadagahaiajajafafafafafafafafafafafafafafafafafafafafafafajajcjcxcxcxcxcxfwajajafafafafaffxfxaffxfxaffxfxaffxfxaffxfxafafajajaiahatadadadadadadadbpadadadadadbpadadadadadadadadadaa
+abababababaIaJadfyadadadagahaiajajajajajajajajajajajajajajajajajajajajajajajajajajcjcxcxdScxcxcVajajajajajajajajajajajajajajajajajajajajajajajajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
+abababababacadadadadadadagahaiajajajajajajajajajajajajajajajajajajajajajajajajajajcjcxcxdScxcxfwajajajajajajajajajajajajajajajajajajajajajajajajajaiahatadadadadadadadadadadadadadadadadadadadadadadadaa
+abababababacadadadadadadagahajajajajajajajajajajajajajajajajajajajajajajajajajajajajfzfzfzfzfzafaffAafajajajajajajajajajajajajajajajajajajajajajajajahatadadadadadadadadadadadadadadadadadadadadadadadaa
+abababababacadadadadadadagahahahahahahahahahahahahahahahahahahahahahahahahahahahahahadadadadadfBfCfDafahahahahahahahahahahahahahahahahahahahahahahahahatadadadadadadadadadadadadadadadadadadadadadadadaa
+abababababfEcQadadadadadfFfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfHfGfGfGfIadadadadadfBfJfKaffGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfLadadadadadadadadadadadadadadadadadadadaHadadadaa
+ababababababacadadadadbpadadadadadadadadadadadadadadadadadadadbpadadadadadagfMfNfOfOadadadadadfBesfPbLbpadadadadadadadadadadadadadadadadadadadadbpbpadadadadadadadadadadadadadadadadadadadadadadadadadaa
+ababababababacadadadadadadadadadbpadadadadadadadadfyadadadadadadadadadadadagfQfRfSatadadadadadafafafafadadadadadadadadadadadadadadadadadadadadadadadadadadadbpadadadadadadadadadadadadadadadadadadadadaa
+ababababababcOcPcPcPcPcQadadadadadadadadadadadadadadadadadadadadadadadadadagfTfUfVatadadadadadadadadadadbpadadbpadadadbpadbpbpbpadadadadadadadadadadadadbpbpbpadadadadadadadadadadadadaHadadadadadadadaa
+abababababababababababcOcPcPcPcPcPcPcQadadadadadadadadadadadadadadadadadadfFfGfRfGfLadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
+ababababababababababababfWabababababacadadadadadadadbpadadadadadadadadaHadadadadfXadadadadadadadadaHadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
+ababababababababababababfWabababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadbpadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
 ababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadbpadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
 ababababababababababababababababababacadadadadadadadadadadadadbcadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
 ababababababababababababababababababacadadbcadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
@@ -402,31 +401,31 @@ ababababababababababababababababababacadadadadadadadadbpadadadadadadadadadadadad
 ababababababababababababababababababcOcQadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadbcadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
 abababababababababababababababababababacadadadadadadadadadadadadadadadadbpadadadbcadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadbcadadadaHadadadadadadadadadadadadadadadadaa
 abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaHaHadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
-abababababababababababababababababababacadadadadadadbpbpbpbpbpadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfZfZfZfZfZfZadadadadadadadadadaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfZfZfZfZfZfZfZadadadadadadadadfZadaa
-abababababababababababababababababababacadadadadadadadadadbpadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfZfZadadadadadadadadadadadadadfZfZfZfZfZfZadadadadadadfZfZadfZfZfZaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfZfZfZfZadadadadadadadadadadadadfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadfZfZfZfZfZfZfZfZfZfZfZfZadadfZfZfZfZfZfZfZfZfZfZadadadadadadadadfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadfZfZfZadadadadfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZaa
-ababababababaIdududududududugaababababacadadadadadadadadadadadadadadadfZfZfZfZfZfZfZfZfZadfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZaa
-ababababababacadadadadadadadgbabababaIaJadadadadbpadadbpbpadadadadadfZfZfZfZfZfZfZfZfZadadfZfZfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZaa
-ababababababacadadadadadadadgbababaIaJadadadadbpbpadadadadadadadadfZfZfZfZfZfZfZadadadadfZfZfZfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZfZaa
-ababababababacadadadadadadadgdduduaJadadadadadbpadadadadadadadadadfZfZfZfZgefZfZadfZfZfZfZfZfZfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgf
-ababababaIduaJadadadadadadadadadadadadadadadadadadadadadadadadadfZfZfZfZadadadadadfZadadfZfZfZfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgf
-ababababacadadadadadggcPcPcQadadadadadadadadadadadadadadadadadadfZfZfZadadadadfZfZadadadfZfZfZghghghghgigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigigj
-ababababacadadadadadgbababcOcPcPcPcPcPcQadadadadadadadadadadadadfZfZfZadadadfZfZadadadadfZfZfZfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgf
-ababababacadadadadadgbababababababababacadadadadadadadadadadadadfZadadfZadadbpfZadadadadadadfZfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgf
-ababababacadadadadadgbababababababababacadadadadadadbpbpadadadadadadadadadadadadadadadadadadadfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgf
-ababababcOcPcPcPcPcPgkababababababababacadadadbpbpbpbpbpadadadadadadadadadadadadadadadadadadadfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcglglglglgcgcgcgcgcgcgcglgcgcgcgcgcgcgcgcgcgcgcgf
-abababababababababababababababababababacadadadbpadadadadadadadbpadadadadadadgmadadadadadadadadfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcglglglglglglglgcgcgcgcgcglglglgcgcgcgcgcgcgcglglgf
-abababababababababababababababababababacadadadbpadadadadadadadadadadadadadbpadadadadadadadadadfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcgcglglglglglglglglglglglglglglglglglglglglgcgcgcgcglglgcgcgcgcgcgcgcgcglgf
-abababababababababababababababababababacadadadbpbpbpadadadadadadadadadadadadadadadadadadadadadfZfZfZfZgcgcgcgcgcgcgcgcgcgcgcgcglglglgnglglglglglglglglglglglgcgcgcglglglgcgcgcgcgcgcgcgcgcgcgcgcgcgcglgf
-abababababababababababababababababababacadadadadadbpbpadadadadadadadadadadadadadadadadbpbpadadfZfZfZfZgcgcgcgcglglglglgcgcgcgcglglglglglglglglgcgcgcgcglglglgcgcgcglglglgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgf
-abababababababababababababababababababacadadadadadadbpbpadadadadadadadadadadadadadadadadadadadadfZgogoglgogcglgcgcgcglglgcgcglglglglglglglglgcgcgcgcgcgcglglgcgcgcglglglgcgcgcgcgcgcgcgcgcgcglgcgcgcglgf
-abababababababababababababababababababacadadadadadadadadadadadadadfZfZadadadadadadadadadadadadgogogogofZglglglgcgcglglglgcglglgnglglglglglglgcgcgcgcgcgcgcglglglgcgcglglglglgcgcgcgcgcgcgcglglglglglglgf
-abababababababababababababababababababacadadadadadadadadadfZadadfZfZfZfZfZfZadadadadadadadadadgpgogogoglgoglglglglglglglglglglglglgcgcglglglgcgcgcgcgcgcgcglglglglgcglglglglglglglglglglglglglglglglglgf
-abababababababababababababababababababacadadadadadadadfZadfZfZfZfZfZfZfZfZfZadadadadadadadadadadadgogogngoglglglglgcglglglglglglgcgcgcgcglglglgcgcgcgcgcglglglgnglglgnglglglglglglglglglglglglglglglglgf
-abababababababababababababababababababacadadadadadadfZfZfZfZfZfZfZfZfZfZfZfZadadadadadadadadadadadgogoglglgoglglglgcglglglglglglglgcgcgcgcglglglglglglglglglglglglglglglgcgcgcgcgcgcgcgcgcgcgcgcglglglgf
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgqgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgfgf
+abababababababababababababababababababacadadadadadadbpbpbpbpbpadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfYfYfYfYfYfYadadadadadadadadadaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfYfYfYfYfYfYfYadadadadadadadadfYadaa
+abababababababababababababababababababacadadadadadadadadadbpadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfYfYadadadadadadadadadadadadadfYfYfYfYfYfYadadadadadadfYfYadfYfYfYaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfYfYfYfYadadadadadadadadadadadadfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadfYfYfYfYfYfYfYfYfYfYfYfYadadfYfYfYfYfYfYfYfYfYfYadadadadadadadadfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadfYfYfYadadadadfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYaa
+ababababababaIdududududududufZababababacadadadadadadadadadadadadadadadfYfYfYfYfYfYfYfYfYadfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYaa
+ababababababacadadadadadadadgaabababaIaJadadadadbpadadbpbpadadadadadfYfYfYfYfYfYfYfYfYadadfYfYfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYaa
+ababababababacadadadadadadadgaababaIaJadadadadbpbpadadadadadadadadfYfYfYfYfYfYfYadadadadfYfYfYfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYaa
+ababababababacadadadadadadadgcduduaJadadadadadbpadadadadadadadadadfYfYfYfYgdfYfYadfYfYfYfYfYfYfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbge
+ababababaIduaJadadadadadadadadadadadadadadadadadadadadadadadadadfYfYfYfYadadadadadfYadadfYfYfYfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbge
+ababababacadadadadadgfcPcPcQadadadadadadadadadadadadadadadadadadfYfYfYadadadadfYfYadadadfYfYfYggggggggghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghghgi
+ababababacadadadadadgaababcOcPcPcPcPcPcQadadadadadadadadadadadadfYfYfYadadadfYfYadadadadfYfYfYfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbge
+ababababacadadadadadgaababababababababacadadadadadadadadadadadadfYadadfYadadbpfYadadadadadadfYfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbge
+ababababacadadadadadgaababababababababacadadadadadadbpbpadadadadadadadadadadadadadadadadadadadfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbge
+ababababcOcPcPcPcPcPgjababababababababacadadadbpbpbpbpbpadadadadadadadadadadadadadadadadadadadfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgkgkgkgkgbgbgbgbgbgbgbgkgbgbgbgbgbgbgbgbgbgbgbge
+abababababababababababababababababababacadadadbpadadadadadadadbpadadadadadadgladadadadadadadadfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgkgkgkgkgkgkgkgbgbgbgbgbgkgkgkgbgbgbgbgbgbgbgkgkge
+abababababababababababababababababababacadadadbpadadadadadadadadadadadadadbpadadadadadadadadadfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgbgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgbgbgbgbgkgkgbgbgbgbgbgbgbgbgkge
+abababababababababababababababababababacadadadbpbpbpadadadadadadadadadadadadadadadadadadadadadfYfYfYfYgbgbgbgbgbgbgbgbgbgbgbgbgkgkgkgmgkgkgkgkgkgkgkgkgkgkgkgbgbgbgkgkgkgbgbgbgbgbgbgbgbgbgbgbgbgbgbgkge
+abababababababababababababababababababacadadadadadbpbpadadadadadadadadadadadadadadadadbpbpadadfYfYfYfYgbgbgbgbgkgkgkgkgbgbgbgbgkgkgkgkgkgkgkgkgbgbgbgbgkgkgkgbgbgbgkgkgkgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbge
+abababababababababababababababababababacadadadadadadbpbpadadadadadadadadadadadadadadadadadadadadfYgngngkgngbgkgbgbgbgkgkgbgbgkgkgkgkgkgkgkgkgbgbgbgbgbgbgkgkgbgbgbgkgkgkgbgbgbgbgbgbgbgbgbgbgkgbgbgbgkge
+abababababababababababababababababababacadadadadadadadadadadadadadfYfYadadadadadadadadadadadadgngngngnfYgkgkgkgbgbgkgkgkgbgkgkgmgkgkgkgkgkgkgbgbgbgbgbgbgbgkgkgkgbgbgkgkgkgkgbgbgbgbgbgbgbgkgkgkgkgkgkge
+abababababababababababababababababababacadadadadadadadadadfYadadfYfYfYfYfYfYadadadadadadadadadgogngngngkgngkgkgkgkgkgkgkgkgkgkgkgkgbgbgkgkgkgbgbgbgbgbgbgbgkgkgkgkgbgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkge
+abababababababababababababababababababacadadadadadadadfYadfYfYfYfYfYfYfYfYfYadadadadadadadadadadadgngngmgngkgkgkgkgbgkgkgkgkgkgkgbgbgbgbgkgkgkgbgbgbgbgbgkgkgkgmgkgkgmgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkge
+abababababababababababababababababababacadadadadadadfYfYfYfYfYfYfYfYfYfYfYfYadadadadadadadadadadadgngngkgkgngkgkgkgbgkgkgkgkgkgkgkgbgbgbgbgkgkgkgkgkgkgkgkgkgkgkgkgkgkgkgbgbgbgbgbgbgbgbgbgbgbgbgkgkgkge
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegpgegegegegegegegegegegegegegegegegege
 "}

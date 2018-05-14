@@ -30,4 +30,4 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
 	selection_color = "#667700"
-	spawnpoint_override = "Researcher Spawn"
+	spawnpoint_override = "Research Facility Spawn"
