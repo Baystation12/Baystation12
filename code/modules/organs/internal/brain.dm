@@ -140,6 +140,11 @@
 	if(owner)
 		if(damage > max_damage / 2 && healed_threshold)
 			spawn()
+				to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
+				sleep(5 SECONDS)
+				to_chat(owner, "<span class = 'notice' font size='10'><B>What's going on...?</B></span>")
+				sleep(10 SECONDS)
+				to_chat(owner, "<span class = 'notice' font size='10'><B>What happened...?</B></span>")
 				alert(owner, "You have taken massive brain damage! You will not be able to remember the events leading up to your injury.", "Brain Damaged")
 			healed_threshold = 0
 
@@ -197,6 +202,23 @@
 					if(prob(damprob))
 						take_damage(1)
 	..()
+
+/obj/item/organ/internal/brain/take_damage(var/damage)
+	set waitfor = 0
+	..()
+	if(damage >= 10) //This probably won't be triggered by oxyloss or mercury. Probably.
+		var/damage_secondary = damage * 0.20
+		owner.flash_eyes()
+		owner.eye_blurry += damage_secondary
+		owner.confused += damage_secondary * 2
+		owner.Paralyse(damage_secondary)
+		owner.Weaken(round(damage, 1))
+		if(prob(30))
+			addtimer(CALLBACK(src, .proc/brain_damage_callback, damage), rand(6, 20) SECONDS, TIMER_UNIQUE)
+
+/obj/item/organ/internal/brain/proc/brain_damage_callback(var/damage) //Confuse them as a somewhat uncommon aftershock. Side note: Only here so a spawn isn't used. Also, for the sake of a unique timer.
+	to_chat(owner, "<span class = 'notice' font size='10'><B>I can't remember which way is forward...</B></span>")
+	owner.confused += damage
 
 /obj/item/organ/internal/brain/proc/handle_disabilities()
 	if(owner.stat)
