@@ -3,6 +3,7 @@
 	#include "overall_overmap.dm"
 
 	#include "../covenant_ships/kig_yar_pirates/includes.dm"
+	#include "../Exoplanet Research/includes.dm"
 
 	#include "maps/corvette_spawns.dm"
 	#include "maps/UNSC_Corvette.dmm"
