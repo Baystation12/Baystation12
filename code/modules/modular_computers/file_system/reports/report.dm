@@ -33,8 +33,7 @@ Recursive will add the access to all fields as well.
 	src.access_edit |= src.access
 	if(recursive)
 		for(var/datum/report_field/field in fields)
-			field.access |= src.access
-			field.access_edit |= src.access_edit
+			field.set_access(src.access, src.access_edit)
 
 /datum/computer_file/report/proc/verify_access(given_access)
 	if(!islist(given_access))
