@@ -1,7 +1,0 @@
-author: "Cakey"
-delete-after: True
-changes: 
-  - maptweak: "Moved alll checkpoints to be positioned in more key areas. B-deck and deck one checkpoints are now connected via ladder. All checkpoints now have the ability to cut-off certain sections of the hallways for flow control."
-  - maptweak: "Brig officer now has a disposals bin."
-  - maptweak: "Emergency armory has been altered to have 3 carbines and 3 e-guns as opposed to the 2:3 loadout to match the rest of the E-ARM."
-  - maptweak: "Brig armory has been altered to have 4 e-guns as opposed to 3 to match the rest of the armory."
