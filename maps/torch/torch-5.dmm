@@ -2830,6 +2830,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
+/obj/item/device/radio/intercom{
+	dir = 1;
+	pixel_y = -35
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "gR" = (
@@ -2840,10 +2844,6 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
-	},
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -22
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
@@ -3428,18 +3428,12 @@
 /area/crew_quarters/heads/office/ce)
 "ik" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/machinery/alarm{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -22;
-	pixel_y = 0
-	},
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
-	},
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "il" = (
@@ -3449,6 +3443,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "im" = (
+/obj/structure/railing/mapped,
 /turf/simulated/open,
 /area/hallway/primary/bridge/fore)
 "in" = (
@@ -4151,6 +4146,10 @@
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -22
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -25
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
@@ -27753,7 +27752,7 @@ fb
 fE
 ge
 gR
-gl
+fD
 ik
 iT
 jN
@@ -27955,7 +27954,7 @@ Ge
 fB
 gf
 gO
-gl
+fD
 il
 iU
 jO
