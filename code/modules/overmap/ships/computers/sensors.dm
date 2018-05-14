@@ -1,6 +1,5 @@
 /obj/machinery/computer/sensors
 	name = "sensors console"
-	icon_state = "thick"
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	light_color = "#77fff8"
