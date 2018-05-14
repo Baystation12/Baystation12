@@ -3458,30 +3458,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
-"hu" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/effect/floor_decal/corner/red{
-	icon_state = "corner_white";
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/white{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 8;
-	icon_state = "shutter0";
-	id = "hangar_hallway_shutters";
-	name = "Hangar Deck Hallway Shutters";
-	opacity = 0
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/fourthdeck/fore)
 "hv" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/effect/floor_decal/industrial/warning{
@@ -6211,6 +6187,26 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
+"mK" = (
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 4;
+	icon_state = "shutter0";
+	id = "hangar_checkpoint_shutters";
+	name = "Hangar Deck Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/effect/wingrille_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/security/checkpoint2)
 "mL" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -8636,6 +8632,16 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/center)
+"rr" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 4
+	},
+/obj/structure/closet/hydrant{
+	pixel_x = 4;
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/center)
@@ -11912,6 +11918,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/checkpoint2)
+"wL" = (
+/obj/item/modular_computer/console/preset/security,
+/turf/simulated/floor/tiled/dark,
+/area/security/checkpoint2)
 "wM" = (
 /obj/item/modular_computer/console/preset/security,
 /obj/structure/cable/green{
@@ -13625,6 +13635,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/dark,
 /area/security/checkpoint2)
 "zE" = (
@@ -18823,18 +18834,18 @@
 /obj/effect/landmark/test/space_turf,
 /turf/space,
 /area/space)
-"KH" = (
+"Kt" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
-	dir = 2;
+	dir = 8;
 	icon_state = "shutter0";
 	id = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
 /obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -18849,6 +18860,17 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
+"KW" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 8
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/center)
 "Ld" = (
 /obj/structure/sign/solgov,
 /turf/simulated/wall/r_wall/hull,
@@ -18869,34 +18891,9 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
-"MD" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/hologram/holopad,
-/turf/simulated/floor/tiled/dark,
-/area/security/checkpoint2)
 "MH" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/expedition/storage)
-"Nm" = (
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 8;
-	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
-	name = "Hangar Deck Checkpoint Shutters";
-	opacity = 0
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/security/checkpoint2)
 "Nq" = (
 /obj/machinery/suspension_gen,
 /turf/simulated/floor/tiled,
@@ -18930,10 +18927,10 @@
 /obj/structure/sign/warning/docking_area,
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/mess)
-"NN" = (
+"Oj" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
-	dir = 4;
+	dir = 8;
 	icon_state = "shutter0";
 	id = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
@@ -18943,28 +18940,23 @@
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/checkpoint2)
-"Oj" = (
-/obj/machinery/door/blast/shutters{
-	density = 0;
+"OP" = (
+/obj/random/maintenance/solgov/clean,
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/machinery/light,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/closet/secure_closet{
+	name = "Security Equipment Locker";
+	req_access = list(1)
+	},
+/obj/machinery/alarm{
 	dir = 4;
-	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
-	name = "Hangar Deck Checkpoint Shutters";
-	opacity = 0
+	pixel_x = -25;
+	pixel_y = 0
 	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/security/checkpoint2)
-"OX" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/floor/tiled/dark,
 /area/security/checkpoint2)
 "OZ" = (
 /obj/structure/cable/green{
@@ -18997,10 +18989,29 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
+"PC" = (
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id = "hangar_checkpoint_shutters";
+	name = "Hangar Deck Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/effect/wingrille_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/security/checkpoint2)
 "PO" = (
 /obj/item/seeds/potatoseed,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
+"PT" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/security/checkpoint2)
 "Qc" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
@@ -19010,13 +19021,25 @@
 "Qd" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/hangar)
-"Qo" = (
-/obj/effect/floor_decal/corner/brown{
+"Qg" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/closet/hydrant{
-	pixel_x = 4;
-	pixel_y = 32
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/center)
@@ -19025,10 +19048,6 @@
 /obj/machinery/floodlight,
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
-"Qq" = (
-/obj/item/modular_computer/console/preset/security,
-/turf/simulated/floor/tiled/dark,
-/area/security/checkpoint2)
 "QI" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19044,53 +19063,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
-"Rl" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/window/brigdoor/northleft{
-	dir = 4;
-	name = "Security Checkpoint";
-	req_access = list(63)
-	},
-/obj/structure/table/steel_reinforced,
-/obj/machinery/door/window/southleft{
-	dir = 8;
-	name = "Security Checkpoint"
-	},
+"QP" = (
 /obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/structure/cable/green{
-	d1 = 2;
+	d1 = 4;
 	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/item/weapon/paper_bin{
-	pixel_x = -3;
-	pixel_y = 7
-	},
-/obj/item/weapon/pen{
-	pixel_x = 4;
-	pixel_y = 4
-	},
-/obj/machinery/door/blast/shutters{
-	density = 0;
-	dir = 8;
-	icon_state = "shutter0";
-	id = "hangar_checkpoint_shutters";
-	name = "Hangar Deck Checkpoint Shutters";
-	opacity = 0
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/security/checkpoint2)
-"Rm" = (
-/obj/structure/sign/warning/high_voltage,
-/turf/simulated/wall/r_wall/prepainted,
 /area/security/checkpoint2)
 "RJ" = (
 /obj/structure/cable/green{
@@ -19146,10 +19125,38 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/expedition/storage)
-"SD" = (
+"SG" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/window/brigdoor/northleft{
+	dir = 4;
+	name = "Security Checkpoint";
+	req_access = list(63)
+	},
+/obj/structure/table/steel_reinforced,
+/obj/machinery/door/window/southleft{
+	dir = 8;
+	name = "Security Checkpoint"
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/item/weapon/paper_bin{
+	pixel_x = -3;
+	pixel_y = 7
+	},
+/obj/item/weapon/pen{
+	pixel_x = 4;
+	pixel_y = 4
+	},
 /obj/machinery/door/blast/shutters{
 	density = 0;
-	dir = 2;
+	dir = 8;
 	icon_state = "shutter0";
 	id = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
@@ -19157,48 +19164,14 @@
 	},
 /obj/structure/cable/green{
 	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/cable/green{
 	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/structure/cable/green,
-/obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/security/checkpoint2)
-"Tc" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/brown,
-/obj/structure/extinguisher_cabinet{
-	pixel_y = -32
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/fourthdeck/center)
-"Ty" = (
-/turf/simulated/wall/r_wall/hull,
-/area/vacant/infirmary)
-"TB" = (
-/obj/random/maintenance/solgov/clean,
-/obj/effect/floor_decal/corner/red{
-	dir = 10
-	},
-/obj/machinery/light,
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/closet/secure_closet{
-	name = "Security Equipment Locker";
-	req_access = list(1)
-	},
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -25;
-	pixel_y = 0
+	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/checkpoint2)
+"Ty" = (
+/turf/simulated/wall/r_wall/hull,
+/area/vacant/infirmary)
 "TC" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
@@ -19213,38 +19186,12 @@
 /obj/item/clothing/mask/gas/half,
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
-"TE" = (
-/obj/structure/table/rack,
-/obj/effect/floor_decal/corner/red{
-	dir = 10
-	},
-/obj/machinery/newscaster/security_unit{
-	pixel_y = -32
-	},
-/obj/machinery/recharger/wallcharger{
-	pixel_x = 32;
-	pixel_y = -28
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/dark,
-/area/security/checkpoint2)
 "TG" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/unused)
-"Uq" = (
-/obj/effect/floor_decal/corner/red{
-	dir = 8
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/fourthdeck/center)
 "US" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -19294,6 +19241,16 @@
 /obj/machinery/light,
 /turf/simulated/floor/tiled,
 /area/quartermaster/unused)
+"WQ" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/brown,
+/obj/structure/extinguisher_cabinet{
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/center)
 "WT" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -19305,44 +19262,46 @@
 "WZ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/fourthdeck/fore)
-"XJ" = (
-/turf/simulated/floor/tiled,
-/area/quartermaster/unused)
-"XQ" = (
+"XI" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
-	dir = 8;
+	dir = 2;
 	icon_state = "shutter0";
 	id = "hangar_checkpoint_shutters";
 	name = "Hangar Deck Checkpoint Shutters";
 	opacity = 0
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /obj/structure/cable/green,
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/checkpoint2)
-"XV" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
+"XJ" = (
 /turf/simulated/floor/tiled,
-/area/hallway/primary/fourthdeck/center)
+/area/quartermaster/unused)
+"XM" = (
+/obj/structure/table/rack,
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/machinery/newscaster/security_unit{
+	pixel_y = -32
+	},
+/obj/machinery/recharger/wallcharger{
+	pixel_x = 32;
+	pixel_y = -28
+	},
+/obj/effect/floor_decal/industrial/outline/grey,
+/turf/simulated/floor/tiled/dark,
+/area/security/checkpoint2)
 "XZ" = (
 /obj/structure/disposalpipe/junction{
 	icon_state = "pipe-j2";
@@ -19359,6 +19318,47 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
+"YH" = (
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 4;
+	icon_state = "shutter0";
+	id = "hangar_checkpoint_shutters";
+	name = "Hangar Deck Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/structure/cable/green,
+/obj/effect/wingrille_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/security/checkpoint2)
+"YP" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/floor_decal/corner/red{
+	icon_state = "corner_white";
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/white{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 8;
+	icon_state = "shutter0";
+	id = "hangar_hallway_shutters";
+	name = "Hangar Deck Hallway Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/fore)
+"Zk" = (
+/obj/structure/sign/warning/high_voltage,
+/turf/simulated/wall/r_wall/prepainted,
+/area/security/checkpoint2)
 "ZG" = (
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/fourthdeck/center)
@@ -31781,7 +31781,7 @@ hV
 jf
 kg
 lf
-hu
+YP
 nu
 wF
 pS
@@ -33405,11 +33405,11 @@ rg
 sB
 uf
 vC
-Nm
-Rl
-XQ
-OX
-OX
+Kt
+SG
+Oj
+PT
+PT
 Db
 DT
 DT
@@ -33606,12 +33606,12 @@ pZ
 rh
 sC
 ug
-OX
+PT
 wI
 ye
-Qq
-OX
-OX
+wL
+PT
+PT
 Db
 DU
 EN
@@ -33812,8 +33812,8 @@ vE
 wJ
 yf
 zC
-TB
-OX
+OP
+PT
 Db
 DV
 EO
@@ -34010,12 +34010,12 @@ qa
 ri
 sL
 ui
-OX
+PT
 wK
 yg
-MD
+zD
 AN
-OX
+PT
 Db
 DV
 EO
@@ -34212,12 +34212,12 @@ qa
 rh
 sF
 uj
-KH
-Qq
+PC
+wL
 yh
-zD
-TE
-OX
+QP
+XM
+PT
 Db
 DV
 EO
@@ -34412,14 +34412,14 @@ kl
 kl
 am
 rh
-XV
-Uq
-SD
+Qg
+KW
+XI
 wM
 yi
 zF
 AO
-OX
+PT
 Db
 DW
 EN
@@ -34616,12 +34616,12 @@ qb
 rj
 sG
 uk
-Rm
-Oj
-NN
-OX
-OX
-OX
+Zk
+mK
+YH
+PT
+PT
+PT
 Dc
 ZG
 an
@@ -36229,7 +36229,7 @@ mB
 zE
 oR
 vD
-Qo
+rr
 sN
 us
 vO
@@ -36433,7 +36433,7 @@ vD
 vD
 rs
 sL
-Tc
+WQ
 vK
 vK
 yr

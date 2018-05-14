@@ -18271,12 +18271,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
-"MZ" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/security/bo)
 "Nb" = (
 /obj/effect/shuttle_landmark/merc/deck3,
 /turf/space,
@@ -19158,6 +19152,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
+"RQ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/bo)
 "Sb" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
@@ -44471,7 +44471,7 @@ ld
 Fl
 mC
 nx
-MZ
+RQ
 PK
 Zl
 lc
