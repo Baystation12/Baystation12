@@ -14,12 +14,14 @@
 	add_field(/datum/report_field/instruction, "These fields are optional:")	
 	manifest = add_field(/datum/report_field/people/list_from_manifest, "Manifest")
 	add_field(/datum/report_field/pencode_text, "Objective")
+	add_field(/datum/report_field/time, "Expected Return/Contact Time")
 	add_field(/datum/report_field/simple_text, "Fuel Status")
 
 //These fields will be auto-set.
 /datum/computer_file/report/recipient/shuttle
 	var/datum/report_field/shuttle
 	var/datum/report_field/mission
+	var/access_shuttle = 0 //Set to 1 to have the report's access_edit set to be the shuttle's logging access.
 
 /datum/computer_file/report/recipient/shuttle/generate_fields()
 	..()
@@ -39,6 +41,7 @@
 	add_field(/datum/report_field/simple_text, "Flight readiness")
 	add_field(/datum/report_field/pencode_text, "Repairs required")
 	add_field(/datum/report_field/time, "Estimated completion time")
+	set_access(null, access_cargo)
 
 /datum/computer_file/report/recipient/shuttle/fuel
 	form_name = "DC12"
@@ -50,6 +53,7 @@
 	add_field(/datum/report_field/simple_text, "Current fuel level")
 	add_field(/datum/report_field/time, "Time of refueling")
 	add_field(/datum/report_field/pencode_text, "Additional notes")
+	set_access(null, access_cargo)
 	
 /datum/computer_file/report/recipient/shuttle/atmos
 	form_name = "DC245"
@@ -61,6 +65,7 @@
 	add_field(/datum/report_field/pencode_text, "State of atmospherics supplies")
 	add_field(/datum/report_field/time, "Estimated time of exhaustion")
 	add_field(/datum/report_field/simple_text, "Supplies required")
+	set_access(null, access_cargo)
 
 /datum/computer_file/report/recipient/shuttle/gear
 	form_name = "DC248b"
@@ -73,4 +78,21 @@
 	add_field(/datum/report_field/pencode_text, "Supplies restocked")
 	add_field(/datum/report_field/time, "Time of restocking")
 	add_field(/datum/report_field/simple_text, "Flight readiness")
+	add_field(/datum/report_field/pencode_text, "Additional Notes")
+	set_access(null, access_cargo)
+
+/datum/computer_file/report/recipient/shuttle/post_flight
+	form_name = "DC102"
+	title = "Standard Expedition Summary"
+	access_shuttle = 1
+
+/datum/computer_file/report/recipient/shuttle/post_flight/generate_fields()
+	..()
+	add_field(/datum/report_field/instruction, "Report on the expedition's findings, results, or outcomes.")
+	add_field(/datum/report_field/simple_text, "Locations visited")
+	add_field(/datum/report_field/simple_text, "General purpose of mission")
+	add_field(/datum/report_field/pencode_text, "Brief summary of activities")
+	add_field(/datum/report_field/pencode_text, "Crew status and casualties")
+	add_field(/datum/report_field/pencode_text, "Objects or materials returned")
+	add_field(/datum/report_field/pencode_text, "Recommended follow-up activities")
 	add_field(/datum/report_field/pencode_text, "Additional Notes")
