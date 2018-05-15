@@ -1,0 +1,8 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Adds a deck management program, which gives some information on shuttle movements."
+  - rscadd: "Adds flight plans, which can be filed via this program by those with shuttle flight access."
+  - rscadd: "If the flight plan includes a roster, the members on the roster can be summoned via automatic comms announcements or batch-emailed."
+  - rscadd: "Adds other reports that supply can file about shuttle missions after the mission has departed/returned."
+  - rscadd: "Adds a stripped-down report viewer program, currently mostly useful for viewing emailed reports."

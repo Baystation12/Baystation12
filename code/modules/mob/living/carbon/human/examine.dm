@@ -278,7 +278,7 @@
 			perpname = src.name
 
 		if(perpname)
-			var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
+			var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
 			if(R)
 				criminal = R.get_criminalStatus()
 
@@ -295,7 +295,7 @@
 		else
 			perpname = src.name
 
-		var/datum/computer_file/crew_record/R = get_crewmember_record(perpname)
+		var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
 		if(R)
 			medical = R.get_status()
 

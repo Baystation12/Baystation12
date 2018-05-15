@@ -200,6 +200,7 @@
 	icon_state = "down"
 	anchored = 0
 	buckle_pixel_shift = "x=0;y=6"
+	var/item_form_type = /obj/item/roller	//The folded-up object path.
 
 /obj/structure/bed/roller/update_icon()
 	if(density)
@@ -210,17 +211,11 @@
 /obj/structure/bed/roller/attackby(obj/item/I as obj, mob/user as mob)
 	if(isWrench(I) || istype(I, /obj/item/stack) || isWirecutter(I))
 		return
-	else if(istype(I, /obj/item/roller_holder))
-		if(buckled_mob)
-			user_unbuckle_mob(user)
-		else
-			collapse()
-		return
 	..()
 
 /obj/structure/bed/roller/proc/collapse()
 	visible_message("[usr] collapses [src].")
-	new /obj/item/roller(get_turf(src))
+	new item_form_type(get_turf(src))
 	qdel(src)
 
 /obj/item/roller
@@ -231,45 +226,12 @@
 	item_state = "rbed"
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_HUGE // Can't be put in backpacks. Oh well. For now.
+	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
 
 /obj/item/roller/attack_self(mob/user)
-	var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
+	var/obj/structure/bed/roller/R = new structure_form_type(user.loc)
 	R.add_fingerprint(user)
 	qdel(src)
-
-/obj/item/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/roller_holder))
-		var/obj/item/roller_holder/RH = W
-		if(!RH.held)
-			to_chat(user, "<span class='notice'>You collect [src].</span>")
-			src.forceMove(RH)
-			RH.held = src
-			return
-
-	..()
-
-/obj/item/roller_holder
-	name = "roller bed rack"
-	desc = "A rack for carrying collapsed roller beds. Can also be used for carrying ironing boards."
-	icon = 'icons/obj/rollerbed.dmi'
-	icon_state = "folded"
-	var/obj/item/roller/held
-
-/obj/item/roller_holder/Initialize()
-	. = ..()
-	held = new /obj/item/roller(src)
-
-/obj/item/roller_holder/attack_self(mob/user as mob)
-	if(!held)
-		to_chat(user, "<span class='notice'>The rack is empty.</span>")
-		return
-
-	var/obj/item/roller/R = held
-	R.forceMove(get_turf(src))
-	R.attack_self(user) // deploy it
-	to_chat(user, "<span class='notice'>You deploy [R].</span>")
-	R.add_fingerprint(user)
-	held = null
 
 /obj/structure/bed/roller/post_buckle_mob(mob/living/M as mob)
 	. = ..()
@@ -283,7 +245,15 @@
 /obj/structure/bed/roller/MouseDrop(over_object, src_location, over_location)
 	..()
 	if(!CanMouseDrop(over_object))	return
-	if(!ishuman(usr))	return
+	if(!(ishuman(usr) || isrobot(usr)))	return
 	if(buckled_mob)	return
 
 	collapse()
+
+/obj/item/robot_rack/roller
+	name = "roller bed rack"
+	desc = "A rack for carrying collapsed roller beds. Can also be used for carrying ironing boards."
+	icon = 'icons/obj/rollerbed.dmi'
+	icon_state = "folded"
+	object_type = /obj/item/roller
+	interact_type = /obj/structure/bed/roller

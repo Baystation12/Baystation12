@@ -1,7 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "Scanner modules added for modular computers. Available (job-depending) on spawn, and also from supply crates."
-  - rscadd: "The scanners are: paper, medical, atmos, and reagent. You can have at most one at any time. Compatible with all computers, but only the paper and atmos scanners will do anything when in a console."
-  - rscadd: "Scanner program added for modular computers, which interfaces with scanners. Can view and save scan results, which may be edited with NanoWord."
-  - tweak: "If a scanner and a nanoprinter is installed, the printer can now only be refilled with blank paper."

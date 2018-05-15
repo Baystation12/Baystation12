@@ -10,6 +10,7 @@
 	var/list/authorized_modes = list(ALWAYS_AUTHORIZED) // index of this list should line up with firemodes, unincluded firemodes at the end will default to unauthorized
 	var/registered_owner
 	var/emagged = 0
+	var/standby = 0
 
 /obj/item/weapon/gun/energy/secure/Initialize()
 	if(!authorized_modes)
@@ -32,6 +33,14 @@
 				to_chat(user, "This weapon is already registered, you must reset it first.")
 		else
 			to_chat(user, "You swipe your ID, but nothing happens.")
+	else if(istype(W, /obj/item/device/multitool))
+		visible_message("<span class='warning'>[user] starts fiddling with the [src]'s security chip!</span>")
+		if(do_after(user, 20, src))
+			standby = !standby
+			if(standby)
+				to_chat(user,"<span class='notice'>You put \the [src] in the standby mode.</span>")
+			else
+				to_chat(user,"<span class='notice'>You reactivate \the [src].</span>")
 	else
 		..()
 
@@ -69,7 +78,7 @@
 	return 1
 
 /obj/item/weapon/gun/energy/secure/special_check()
-	if(!emagged && !fire_free() && (!authorized_modes[sel_mode] || !registered_owner))
+	if(!emagged && !fire_free() && (!authorized_modes[sel_mode] || !registered_owner || standby))
 		audible_message("<span class='warning'>\The [src] buzzes, refusing to fire.</span>")
 		playsound(loc, 'sound/machines/buzz-sigh.ogg', 30, 0)
 		return 0
@@ -97,6 +106,8 @@
 
 	if(registered_owner)
 		to_chat(user, "A small screen on the side of the weapon indicates that it is registered to [registered_owner].")
+	if(standby)
+		to_chat(user, "It's in a standby mode.")
 
 /obj/item/weapon/gun/energy/secure/proc/get_next_authorized_mode()
 	. = sel_mode

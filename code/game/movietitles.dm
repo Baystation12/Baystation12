@@ -117,7 +117,7 @@ client
 		if(GetAssignment(H) != "Unassigned")
 			job = ", [uppertext(GetAssignment(H))]"
 		var/used_name = H.real_name
-		var/datum/computer_file/crew_record/R = get_crewmember_record(H.real_name)
+		var/datum/computer_file/report/crew_record/R = get_crewmember_record(H.real_name)
 		if(R && R.get_rank())
 			var/datum/mil_rank/rank = mil_branches.get_rank(R.get_branch(), R.get_rank())
 			if(rank.name_short)

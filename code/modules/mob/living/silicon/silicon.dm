@@ -54,6 +54,7 @@
 
 /mob/living/silicon/fully_replace_character_name(new_name)
 	..()
+	create_or_rename_email(new_name, "root.rt")
 	if(istype(idcard))
 		idcard.registered_name = new_name
 		idcard.update_name()
@@ -341,7 +342,7 @@
 	return mind && (mind in GLOB.traitors.current_antagonists)
 
 /mob/living/silicon/proc/is_malf()
-	return mind && (mind in malf.current_antagonists)
+	return mind && (mind in GLOB.malf.current_antagonists)
 
 /mob/living/silicon/proc/is_malf_or_traitor()
 	return is_traitor() || is_malf()
