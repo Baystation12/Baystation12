@@ -13606,6 +13606,10 @@
 	dir = 8
 	},
 /obj/machinery/washing_machine,
+/obj/machinery/light{
+	icon_state = "tube1";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/laundry)
 "zC" = (
