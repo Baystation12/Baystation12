@@ -1,0 +1,5 @@
+#Listing maps here will blacklist them from generating in space.
+#Maps must be the full path to them
+#SPECIFYING AN INVALID MAP WILL RESULT IN RUNTIMES ON GAME START
+
+#maps/random_ruins/space_ruins/example.dmm
