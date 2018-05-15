@@ -85,4 +85,4 @@
 			H.drip(5,get_turf(src))
 		else
 			H.adjustBruteLoss(5)
-		linked_god.adjust_power(1,1)
+		linked_god.adjust_power_min(1,1)

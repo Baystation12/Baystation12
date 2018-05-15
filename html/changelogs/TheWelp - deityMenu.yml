@@ -1,0 +1,6 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds a new deity menu free of uplink structure."
+  - tweak: "Some deity store items now increase in price the more you buy them. (E.G. Conjuration)"
+  - rscdel: "Remove Godvision."

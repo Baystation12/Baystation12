@@ -1,7 +1,7 @@
 /mob/living/deity/ClickOn(var/atom/A, var/params)
 	if(A == src)
 		if(form)
-			open_menu()
+			ui_interact(src)
 		else
 			choose_form()
 		return
