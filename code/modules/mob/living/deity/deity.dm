@@ -3,7 +3,6 @@
 	desc = "A shape of otherworldly matter, not yet ready to be unleashed into this world."
 	icon = 'icons/mob/deity_big.dmi'
 	icon_state = "egg"
-	var/power_min = 10 //Below this amount you regenerate uplink TCs
 	pixel_x = -128
 	pixel_y = -128
 	health = 100
@@ -12,8 +11,7 @@
 	var/eye_type = /mob/observer/eye/cult
 	var/list/minions = list() //Minds of those who follow him
 	var/list/structures = list() //The objs that this dude controls.
-	var/list/feats = list() //These are the deities 'skills' that they unlocked. Which can unlock abilities, new categories, etc. What this list actually IS is the names of the feats and whatever data they need,
-	var/obj/item/device/uplink/contained/mob_uplink
+	var/list/feats = list()
 	var/datum/god_form/form
 	var/datum/current_boon
 	var/mob/living/following
@@ -24,13 +22,6 @@
 		eyeobj = new eye_type(src)
 		eyeobj.possess(src)
 		eyeobj.visualnet.add_source(src)
-	mob_uplink = new(src, telecrystals = 0)
-
-/mob/living/deity/Life()
-	. = ..()
-	if(. && mob_uplink.uses < power_min)
-		mob_uplink.uses += 1 + (!feats[DEITY_POWER_BONUS] ? 0 : feats[DEITY_POWER_BONUS])
-		GLOB.nanomanager.update_uis(mob_uplink)
 
 /mob/living/deity/death()
 	. = ..()
@@ -45,6 +36,11 @@
 			var/obj/structure/deity/S = s
 			S.linked_god = null
 
+/mob/living/deity/shared_nano_interaction()
+	if(stat == DEAD)
+		return STATUS_CLOSE
+	return STATUS_INTERACTIVE
+
 /mob/living/deity/Destroy()
 	death(0)
 	minions.Cut()
@@ -58,18 +54,6 @@
 	set category = "Godhood"
 
 	eyeobj.forceMove(get_turf(src))
-
-/mob/living/deity/verb/open_menu()
-	set name = "Open Menu"
-	set category = "Godhood"
-
-	if(!form)
-		to_chat(src, "<span class='warning'>Choose a form first!</span>")
-		return
-	if(!src.mob_uplink.uplink_owner)
-		src.mob_uplink.uplink_owner = src.mind
-	mob_uplink.update_nano_data()
-	src.mob_uplink.trigger(src)
 
 /mob/living/deity/verb/choose_form()
 	set name = "Choose Form"
@@ -92,7 +76,7 @@
 		var/icon/god_icon = icon('icons/mob/mob.dmi', initial(G.pylon_icon_state))
 		send_rsc(src,god_icon, "[god_name].png")
 		dat += {"<tr>
-					<td><a href="?src=\ref[src];form=ref\[G]">[god_name]</a></td>
+					<td><a href="?src=\ref[src];form=\ref[G]">[god_name]</a></td>
 					<td><img src="[god_name].png"></td>
 					<td>[initial(G.info)]</td>
 				</tr>"}

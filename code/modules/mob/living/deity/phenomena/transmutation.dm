@@ -1,5 +1,6 @@
 /datum/phenomena/warp
 	name = "Warp Body"
+	desc = "Corrupt a mortal being, causing their DNA to break and their body to fail on them."
 	cost = 25
 	cooldown = 300
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
@@ -13,6 +14,7 @@
 
 /datum/phenomena/rock_form
 	name = "Rock Form"
+	desc = "Convert your mortal followers into immortal stone beings."
 	cost = 15
 	flags = PHENOMENA_NEAR_STRUCTURE|PHENOMENA_FOLLOWER
 	expected_type = /mob/living/carbon/human
