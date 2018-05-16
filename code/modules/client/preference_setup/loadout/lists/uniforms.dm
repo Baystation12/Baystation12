@@ -146,6 +146,11 @@
 	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/uniform/kimono
+	display_name = "kimono, colour select"
+	path = /obj/item/clothing/under/kimono
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/uniform/corporate
 	display_name = "corporate uniform selection"
 	path = /obj/item/clothing/under
