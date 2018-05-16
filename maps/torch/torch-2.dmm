@@ -2601,7 +2601,10 @@
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "fU" = (
-/obj/item/modular_computer/console/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/security/brig)
 "fV" = (
@@ -3565,6 +3568,8 @@
 /area/tcommsat/computer)
 "hX" = (
 /obj/machinery/computer/telecomms/monitor{
+	icon_state = "computer";
+	dir = 4;
 	network = "tcommsat"
 	},
 /turf/simulated/floor/lino,
@@ -4079,6 +4084,8 @@
 /area/tcommsat/computer)
 "iK" = (
 /obj/machinery/computer/telecomms/server{
+	icon_state = "computer";
+	dir = 4;
 	network = "tcommsat"
 	},
 /turf/simulated/floor/lino,
@@ -4105,7 +4112,10 @@
 	c_tag = "Telecommunications -  Control";
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/research,
+/obj/item/modular_computer/console/preset/research{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/lino,
 /area/tcommsat/computer)
 "iO" = (
@@ -4476,11 +4486,14 @@
 /turf/simulated/floor/plating,
 /area/tcommsat/computer)
 "jC" = (
-/obj/machinery/computer/message_monitor,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/computer/message_monitor{
+	icon_state = "computer";
+	dir = 4
 	},
 /turf/simulated/floor/lino,
 /area/tcommsat/computer)
@@ -5014,7 +5027,10 @@
 /turf/simulated/floor/plating,
 /area/tcommsat/computer)
 "kz" = (
-/obj/machinery/computer/rdservercontrol,
+/obj/machinery/computer/rdservercontrol{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/lino,
 /area/tcommsat/computer)
 "kA" = (
@@ -7398,7 +7414,10 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "pi" = (
@@ -7998,7 +8017,10 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "qn" = (
@@ -10717,10 +10739,13 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/computer/aiupload,
 /obj/item/device/radio/intercom/locked/ai_private{
 	dir = 1;
 	pixel_y = -22
+	},
+/obj/machinery/computer/aiupload{
+	icon_state = "computer";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/turret_protected/ai_upload)
@@ -12520,7 +12545,10 @@
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
 "ys" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "yt" = (
@@ -12592,7 +12620,10 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/security/equipment)
 "yC" = (
@@ -13038,7 +13069,10 @@
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/cryolocker)
 "zH" = (
-/obj/machinery/computer/teleporter,
+/obj/machinery/computer/teleporter{
+	icon_state = "computer";
+	dir = 2
+	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
 "zI" = (
@@ -13768,7 +13802,10 @@
 /obj/machinery/newscaster{
 	pixel_x = -32
 	},
-/obj/item/modular_computer/console/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/sleep/cryo)
 "Bw" = (
@@ -18545,8 +18582,10 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
-/obj/machinery/computer/prisoner,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/computer/prisoner{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "Om" = (
@@ -18892,7 +18931,10 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 8
 	},
-/obj/item/modular_computer/console/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/wood,
 /area/crew_quarters/lounge)
 "Qk" = (
@@ -19048,13 +19090,16 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
 "Rl" = (
-/obj/machinery/computer/station_alert/security,
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 1;
 	icon_state = "pipe-c"
+	},
+/obj/machinery/computer/station_alert/security{
+	icon_state = "computer";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)

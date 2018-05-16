@@ -731,11 +731,13 @@
 /turf/space,
 /area/space)
 "bX" = (
-/obj/item/modular_computer/console,
 /obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
+	},
+/obj/item/modular_computer/console{
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -766,7 +768,9 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cb" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cc" = (
@@ -828,11 +832,13 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cj" = (
-/obj/item/modular_computer/console,
 /obj/structure/cable/yellow{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/item/modular_computer/console{
+	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -952,11 +958,13 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cu" = (
-/obj/item/modular_computer/console,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
 	layer = 2.4;
 	level = 2
+	},
+/obj/item/modular_computer/console{
+	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -1510,7 +1518,9 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dO" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 4
+	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dP" = (
@@ -2306,12 +2316,14 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "fM" = (
-/obj/item/modular_computer/console,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_y = 0
+	},
+/obj/item/modular_computer/console{
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -2407,7 +2419,9 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "ga" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "gb" = (
@@ -2749,7 +2763,9 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "ha" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hb" = (
@@ -2856,8 +2872,10 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hq" = (
-/obj/item/modular_computer/console,
 /obj/item/weapon/paper/magshield/log,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hr" = (
