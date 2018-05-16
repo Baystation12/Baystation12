@@ -1,7 +1,7 @@
 /datum/species/unggoy
 	name = "unggoy"
 	name_plural = "unggoy"
-	blurb = "Shouldn't be seeing this." // Doesn't appear in chargen
+	blurb = "" // Doesn't appear in chargen
 	flesh_color = "#4F4F7F"
 	blood_color = "#4A4A64" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_unggoy.dmi'
@@ -12,6 +12,7 @@
 	spawn_flags = SPECIES_IS_WHITELISTED
 	flags = NO_MINOR_CUT
 	item_icon_offsets = list(0,0)
+	slowdown = -1 //-1 to negate noshoes
 
 	breath_type = "methane"
 	poison_type = "oxygen"
