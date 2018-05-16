@@ -39,6 +39,14 @@
 		return 0
 	return 1
 
+//Checks if the access (constant or list) is contained in one of the entries of access_patterns, a list of lists.
+/proc/has_access_pattern(list/access_patterns, access)
+	if(!islist(access))
+		access = list(access)
+	for(var/access_pattern in access_patterns)
+		if(has_access(access_pattern, list(), access))
+			return 1
+
 /proc/get_centcom_access(job)
 	switch(job)
 		if("VIP Guest")

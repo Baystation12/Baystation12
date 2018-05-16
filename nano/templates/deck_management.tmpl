@@ -3,7 +3,7 @@
 	{{if !data.default_access}}
 		do not 
 	{{/if}}
-	have hangar access.
+	have program access.
 </div>
 {{if data.default_access}}<!--Suppressed indentation.-->
 {{if data.prog_state == 1}}<!--DECK_HOME-->
@@ -226,8 +226,8 @@
 			</div>
 			<div class='itemContent'>
 				{{:helper.link('View Report', null, {'report' : 1, 'view' : 1, 'index' : value.index, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, value.exists ? null : 'disabled')}}
-				{{:helper.link('Create Report', null, {'report' : 1, 'index' : value.index, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, (data.access_cargo && !value.exists) ? null : 'disabled')}}
-				{{:helper.link('Edit Report', null, {'report' : 1, 'index' : value.index, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, (data.access_cargo && value.exists) ? null : 'disabled')}}
+				{{:helper.link('Create Report', null, {'report' : 1, 'index' : value.index, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, (value.access_edit && !value.exists) ? null : 'disabled')}}
+				{{:helper.link('Edit Report', null, {'report' : 1, 'index' : value.index, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, (value.access_edit && value.exists) ? null : 'disabled')}}
 			</div>
 		</div>
 		{{/for}}

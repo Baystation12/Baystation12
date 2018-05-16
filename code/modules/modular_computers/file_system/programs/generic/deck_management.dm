@@ -20,15 +20,15 @@
 	var/datum/shuttle_mission/selected_mission       //Which mission is selected.
 	var/datum/computer_file/report/selected_report   //A report being viewed/edited.
 	var/list/report_prototypes = list()              //Stores report prototypes to use for UI purposes.
-	var/default_access = access_cargo                //The default access needed to properly use. Should be set in map files.
+	var/datum/shuttle/prototype_shuttle              //The shuttle for which the prototypes were built (to avoid excessive prototype rebuilding)
+	//The default access needed to properly use. Should be set in map files.
+	var/default_access = list(access_cargo, access_heads)  //The format is (needs one of list(these access constants or lists of access constants))
 
 /datum/nano_module/deck_management/New()
 	..()
 	for(var/shuttle in shuttle_controller.shuttle_logs) //Registering to get shuttle updates.
 		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[shuttle]
 		my_log.register(src)
-	for(var/report_type in subtypesof(/datum/computer_file/report/recipient/shuttle))
-		report_prototypes += new report_type
 
 /datum/nano_module/deck_management/Destroy()
 	for(var/shuttle in shuttle_controller.shuttle_logs) //Unregistering; important for garbage collection.
@@ -41,8 +41,7 @@
 	var/logs = shuttle_controller.shuttle_logs
 
 	data["prog_state"] = prog_state
-	data["default_access"] = check_access(user, default_access)
-	data["access_cargo"] = check_access(user, access_cargo)
+	data["default_access"] = get_default_access(user)
 
 	switch(prog_state)
 		if(DECK_HOME)
@@ -97,11 +96,12 @@
 			if(!(selected_mission.stage in list(SHUTTLE_MISSION_PLANNED, SHUTTLE_MISSION_QUEUED)))
 				var/other_reports = list()
 				for(var/i = 1, i <= length(report_prototypes), i++)
-					var/datum/computer_file/report/report = report_prototypes[i]
+					var/datum/computer_file/report/recipient/shuttle/report = report_prototypes[i]
 					var/L = list()
 					L["name"] = report.display_name()
 					L["index"] = i
 					L["exists"] = locate(report) in selected_mission.other_reports
+					L["access_edit"] = report.verify_access_edit(get_access(user))
 					other_reports += list(L)
 				data["other_reports"] = other_reports
 
@@ -167,8 +167,13 @@
 			mission_data["queued"] = 1
 	return mission_data
 
+/datum/nano_module/deck_management/proc/get_default_access(mob/user)
+	for(var/access_pattern in default_access)
+		if(check_access(user, access_pattern))
+			return 1
+
 /datum/nano_module/deck_management/proc/get_shuttle_access(mob/user, datum/shuttle/shuttle)
-	return shuttle.logging_access ? check_access(user, shuttle.logging_access) : 0
+	return shuttle.logging_access ? (check_access(user, shuttle.logging_access) || check_access(user, access_heads)) : 0
 
 /datum/nano_module/deck_management/proc/set_shuttle(mob/user, shuttle_name, need_access = 1)
 	var/datum/shuttle/shuttle
@@ -177,7 +182,17 @@
 	if(need_access && !get_shuttle_access(user, shuttle))
 		return 0
 	selected_shuttle = shuttle
-	return ensure_valid_shuttle()
+	if(!ensure_valid_shuttle())
+		return 0
+	if(selected_shuttle != prototype_shuttle)
+		prototype_shuttle = selected_shuttle
+		report_prototypes = list()
+		for(var/report_type in subtypesof(/datum/computer_file/report/recipient/shuttle))
+			var/datum/computer_file/report/recipient/shuttle/new_report = new report_type
+			if(new_report.access_shuttle)
+				new_report.set_access(null, selected_shuttle.logging_access, override = 0)
+			report_prototypes += new_report
+	return 1
 
 /datum/nano_module/deck_management/proc/set_mission(mission_ID)
 	var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
@@ -192,7 +207,7 @@
 	if(..())
 		return 1
 
-	if(!check_access(user, default_access))
+	if(!get_default_access(user))
 		return 1 //No program access if you don't have the right access.
 	if(text2num(href_list["warning"])) //Gives the user a chance to avoid losing unsaved reports.
 		if(alert(user, "Are you sure you want to do this? Data may be lost.",, "Yes.", "No.") == "No.")
@@ -239,7 +254,7 @@
 	if(href_list["report"])
 		var/shuttle_name = href_list["shuttle"]
 		var/mission_ID = text2num(href_list["mission"])
-		if(set_shuttle(user, shuttle_name, 1) && set_mission(mission_ID))
+		if(set_shuttle(user, shuttle_name, 0) && set_mission(mission_ID))
 			can_view_only = (href_list["view"] ? 1 : 0)
 			if(href_list["flight_plan"])
 				prog_state = DECK_REPORT_EDIT
@@ -247,7 +262,7 @@
 					selected_report = selected_mission.flight_plan.clone()//We always make a new one to buffer changes until submitted.
 				else
 					selected_report = new /datum/computer_file/report/flight_plan
-					selected_report.set_access(null, selected_shuttle.logging_access)
+					selected_report.set_access(null, selected_shuttle.logging_access, override = 0)
 			else
 				if(selected_mission.stage in list(SHUTTLE_MISSION_PLANNED, SHUTTLE_MISSION_QUEUED))
 					return 1 //Hold your horses until the mission is started on these reports.
@@ -262,8 +277,6 @@
 					var/datum/computer_file/report/recipient/shuttle/new_report = prototype.clone()
 					new_report.shuttle.set_value(selected_shuttle.name)
 					new_report.mission.set_value(selected_mission.name)
-					if(new_report.access_shuttle)
-						new_report.set_access(null, selected_shuttle.logging_access)
 					selected_report = new_report
 		return 1
 	if(href_list["home"])
