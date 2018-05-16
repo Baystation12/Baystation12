@@ -1,0 +1,4 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - tweak: "Emergency shield generators now cover an entire screen. Power draw per shield unaffected."
