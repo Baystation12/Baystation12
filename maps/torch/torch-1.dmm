@@ -4879,7 +4879,7 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/machinery/vending/snack,
+/obj/machinery/vending/snix,
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
 "kk" = (
@@ -19242,6 +19242,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/unused)
+"TO" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/machinery/vending/hotfood,
+/turf/simulated/floor/tiled/dark,
+/area/vacant/mess)
 "TX" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -32610,7 +32617,7 @@ eq
 fp
 gg
 hg
-hW
+TO
 jh
 kj
 lf

@@ -14238,6 +14238,15 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/atmos)
+"KA" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/vending/lavatory,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/foreport)
 "Lb" = (
 /obj/effect/shuttle_landmark/ninja/deck2,
 /turf/space,
@@ -32031,7 +32040,7 @@ qx
 qx
 qx
 qx
-qx
+KA
 zM
 AE
 ls

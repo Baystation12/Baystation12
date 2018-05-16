@@ -59,6 +59,26 @@
 	name = "semki pack"
 	icon_state = "semki_pack"
 
+/obj/item/trash/caviar
+	name = "caviar can"
+	icon_state = "fisheggs_can"
+
+/obj/item/trash/salo
+	name = "salo pack"
+	icon_state = "salo"
+
+/obj/item/trash/croutons
+	name = "suhariki pack"
+	icon_state = "croutons"
+
+/obj/item/trash/squid
+	name = "calamari pack"
+	icon_state = "squid"
+
+/obj/item/trash/driedfish
+	name = "vobla pack"
+	icon_state = "driedfish"
+
 /obj/item/trash/tray
 	name = "tray"
 	icon_state = "tray"
