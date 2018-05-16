@@ -1,0 +1,7 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "The deck management program will now allow you to queue up scheduled missions, rearrange their order, and delete them. Once started (i.e. once the shuttle departs) the active mission is finalized and can no longer be deleted or moved around, but can still be renamed."
+  - tweak: "Deck management announcements are now a bit less spammy and let you choose an area other than the shuttle to meet."
+  - tweak: "One more report has been added, a post-mission summary."
+  - bugfix: "Crew record access issues fixed."
