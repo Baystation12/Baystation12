@@ -12452,6 +12452,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
+/obj/machinery/vending/lavatory,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/sleep/cryo)
 "yi" = (
