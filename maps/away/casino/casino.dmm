@@ -167,7 +167,9 @@
 /turf/space,
 /area/space)
 "ax" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "ay" = (
@@ -176,6 +178,7 @@
 /area/casino/casino_bridge)
 "aA" = (
 /obj/item/modular_computer/console{
+	dir = 8;
 	name = "Gambling console"
 	},
 /turf/simulated/floor/tiled,
@@ -267,6 +270,7 @@
 /area/casino/casino_bridge)
 "aM" = (
 /obj/item/modular_computer/console{
+	dir = 8;
 	name = "Security console"
 	},
 /turf/simulated/floor/tiled,
@@ -1001,6 +1005,7 @@
 /area/casino/casino_security)
 "cC" = (
 /obj/item/modular_computer/console{
+	dir = 8;
 	name = "Gambling console"
 	},
 /turf/simulated/floor/tiled,
@@ -1104,12 +1109,14 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "cT" = (
-/obj/item/modular_computer/console{
-	name = "Cameras console"
-	},
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
+	},
+/obj/item/modular_computer/console{
+	name = "Cameras console";
+	icon_state = "console";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -1225,6 +1232,7 @@
 /area/casino/casino_security)
 "dm" = (
 /obj/item/modular_computer/console{
+	dir = 8;
 	name = "Security console"
 	},
 /turf/simulated/floor/tiled,
@@ -4725,7 +4733,10 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "mk" = (
-/obj/machinery/computer/engines,
+/obj/machinery/computer/engines{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "ml" = (
@@ -4854,7 +4865,9 @@
 /turf/space,
 /area/space)
 "mG" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "mH" = (
@@ -5635,7 +5648,9 @@
 /area/casino/casino_mainfloor)
 "Kb" = (
 /obj/item/modular_computer/console{
-	name = "Cameras console"
+	name = "Cameras console";
+	icon_state = "console";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
@@ -5884,10 +5899,12 @@
 /turf/simulated/floor/airless,
 /area/casino/casino_bow)
 "Ub" = (
-/obj/machinery/computer/shuttle_control/explore/casino_cutter,
 /obj/structure/window/basic{
 	icon_state = "window";
 	dir = 4
+	},
+/obj/machinery/computer/shuttle_control/explore/casino_cutter{
+	dir = 1
 	},
 /turf/simulated/floor/shuttle/yellow,
 /area/casino/casino_cutter)

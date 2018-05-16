@@ -904,7 +904,10 @@
 	icon_state = "corner_white_three_quarters";
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "dc" = (
@@ -2572,7 +2575,6 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "hw" = (
-/obj/machinery/power/solar_control/autostart,
 /obj/structure/cable/orange{
 	icon_state = "0-4"
 	},
@@ -2580,6 +2582,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/power/solar_control/autostart{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -2769,8 +2774,10 @@
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "wb" = (
-/obj/structure/table/woodentable,
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/carpet/blue,
 /area/outpost/abandoned)
 "xb" = (

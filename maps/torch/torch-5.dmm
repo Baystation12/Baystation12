@@ -4414,11 +4414,14 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/machinery/computer/engines,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/computer/engines{
+	icon_state = "computer";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -4889,7 +4892,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "lo" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "lq" = (
@@ -5490,7 +5496,6 @@
 	c_tag = "Head of Security - Office";
 	network = list("Command","Security")
 	},
-/obj/item/modular_computer/console/preset/command,
 /obj/machinery/requests_console{
 	announcementConsole = 1;
 	department = "Chief of Security's Desk";
@@ -5498,6 +5503,10 @@
 	name = "Chief of Security RC";
 	pixel_x = 0;
 	pixel_y = 30
+	},
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/cos)
@@ -6127,10 +6136,13 @@
 /area/space)
 "nG" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
-/obj/item/modular_computer/console/preset/command,
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -22
+	},
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
@@ -6148,7 +6160,10 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "nL" = (
@@ -6723,10 +6738,13 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
-/obj/machinery/computer/robotics,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
+	},
+/obj/machinery/computer/robotics{
+	icon_state = "computer";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11888,11 +11906,14 @@
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/command,
 /obj/structure/sign/dedicationplaque{
 	desc = "S.E.V. Torch - Mako Class - Sol Expeditionary Corps Registry 95519 - Shiva Fleet Yards, Mars - First Vessel To Bear The Name - Launched 2560 - Sol Central Government - 'Never was anything great achieved without danger.' The protective housing of the plaque has been sunken into the floor.";
 	pixel_x = 30;
 	pixel_y = 0
+	},
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -12554,11 +12575,13 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/machinery/computer/helm,
+/obj/machinery/computer/helm{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HN" = (
-/obj/item/modular_computer/console/preset/command,
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
@@ -12566,6 +12589,10 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -12629,7 +12656,10 @@
 /area/bridge)
 "HU" = (
 /obj/effect/floor_decal/corner/blue/three_quarters,
-/obj/machinery/computer/mecha,
+/obj/machinery/computer/mecha{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HW" = (
@@ -13031,7 +13061,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/bridge)
 "II" = (
-/obj/machinery/computer/navigation,
+/obj/machinery/computer/navigation{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Jb" = (
@@ -14120,7 +14153,10 @@
 	pixel_y = -24
 	},
 /obj/structure/cable/green,
-/obj/item/modular_computer/console/preset/sysadmin,
+/obj/item/modular_computer/console/preset/sysadmin{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Sd" = (
@@ -14600,7 +14636,6 @@
 	pixel_x = 24;
 	pixel_y = -6
 	},
-/obj/item/modular_computer/console/preset/command,
 /obj/machinery/button/windowtint{
 	id = "xo_windows";
 	pixel_x = 24;
@@ -14608,6 +14643,10 @@
 	},
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 4
+	},
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
@@ -14757,7 +14796,10 @@
 /area/bridge/meeting_room)
 "Wf" = (
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/cl)
 "Wg" = (
@@ -14858,7 +14900,10 @@
 /obj/effect/floor_decal/corner/grey{
 	dir = 9
 	},
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sgr)
 "Xg" = (
@@ -14970,7 +15015,10 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
 "Yg" = (

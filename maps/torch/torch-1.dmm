@@ -5049,6 +5049,8 @@
 /area/maintenance/fourthdeck/aft)
 "kI" = (
 /obj/machinery/computer/shuttle_control{
+	icon_state = "computer";
+	dir = 4;
 	req_access = list(75);
 	shuttle_tag = "Petrov"
 	},
@@ -7765,7 +7767,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/ship)
 "pI" = (
-/obj/machinery/computer/area_atmos/area,
+/obj/machinery/computer/area_atmos/area{
+	icon_state = "computer";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/ship)
 "pJ" = (
@@ -9095,9 +9100,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "sr" = (
-/obj/machinery/computer/teleporter{
-	dir = 1
-	},
+/obj/machinery/computer/teleporter,
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/fourthdeck)
 "ss" = (
@@ -11943,7 +11946,10 @@
 	icon_state = "corner_white";
 	dir = 5
 	},
-/obj/item/modular_computer/console/preset/dock,
+/obj/item/modular_computer/console/preset/dock{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/deckofficer)
 "wT" = (
@@ -16102,7 +16108,10 @@
 /turf/simulated/floor/plating,
 /area/vacant/monitoring)
 "EL" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/vacant/monitoring)
 "EM" = (
@@ -18193,7 +18202,10 @@
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "Jb" = (
-/obj/machinery/computer/shuttle_control/explore/guppy,
+/obj/machinery/computer/shuttle_control/explore/guppy{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "Jc" = (
@@ -18808,6 +18820,13 @@
 	},
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/ship)
+"Mm" = (
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/checkpoint2)
 "MA" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 4
@@ -33615,7 +33634,7 @@ ug
 OX
 wI
 ye
-Qq
+Mm
 OX
 OX
 Db

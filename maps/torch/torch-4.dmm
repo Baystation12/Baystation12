@@ -1604,7 +1604,10 @@
 	icon_state = "tube1";
 	dir = 8
 	},
-/obj/machinery/computer/navigation,
+/obj/machinery/computer/navigation{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/command/pathfinder)
 "adn" = (
@@ -2013,9 +2016,12 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/command,
 /obj/effect/floor_decal/corner/purple/diagonal{
 	dir = 4
+	},
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/command/pathfinder)
@@ -9378,7 +9384,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/firstdeck)
 "aCn" = (
-/obj/machinery/computer/teleporter,
+/obj/machinery/computer/teleporter{
+	icon_state = "computer";
+	dir = 2
+	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/firstdeck)
 "aCo" = (
@@ -11224,9 +11233,12 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "aIe" = (
-/obj/structure/filingcabinet/filingcabinet,
 /obj/item/device/radio/intercom{
 	pixel_y = 22
+	},
+/obj/item/modular_computer/console/preset/civilian{
+	icon_state = "console";
+	dir = 4
 	},
 /turf/simulated/floor/lino,
 /area/vacant/office)
@@ -11238,7 +11250,10 @@
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "aIh" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "aIi" = (
@@ -11564,7 +11579,6 @@
 	dir = 5
 	},
 /obj/structure/disposalpipe/junction/yjunction{
-	tag = "icon-pipe-y (NORTH)";
 	icon_state = "pipe-y";
 	dir = 1
 	},
@@ -12605,9 +12619,12 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aNb" = (
-/obj/item/modular_computer/console/preset/civilian,
 /obj/machinery/light/spot{
 	dir = 8
+	},
+/obj/item/modular_computer/console/preset/civilian{
+	icon_state = "console";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/sleep/cryo/aux)
@@ -22505,7 +22522,10 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "kxb" = (
-/obj/machinery/computer/rdconsole/robotics,
+/obj/machinery/computer/rdconsole/robotics{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "kyb" = (
@@ -23106,8 +23126,11 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "ltb" = (
-/obj/machinery/computer/rdconsole/core,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/computer/rdconsole/core{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/development)
 "lub" = (
@@ -24329,7 +24352,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "nvb" = (
@@ -24488,7 +24514,10 @@
 	pixel_x = -24;
 	pixel_y = 18
 	},
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "nGb" = (
@@ -25075,10 +25104,13 @@
 /turf/simulated/floor/carpet/red,
 /area/rnd/breakroom)
 "oCb" = (
-/obj/item/modular_computer/console/preset/research,
 /obj/structure/window/reinforced{
 	dir = 2;
 	health = 1e+007
+	},
+/obj/item/modular_computer/console/preset/research{
+	icon_state = "console";
+	dir = 1
 	},
 /turf/simulated/floor/carpet/red,
 /area/rnd/breakroom)
@@ -26762,7 +26794,10 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "rGU" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/item/modular_computer/console/preset/civilian{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/lino,
 /area/vacant/office)
 "rHb" = (

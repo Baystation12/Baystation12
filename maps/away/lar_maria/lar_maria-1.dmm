@@ -1946,7 +1946,10 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
 "eW" = (
-/obj/machinery/computer/diseasesplicer,
+/obj/machinery/computer/diseasesplicer{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eX" = (
