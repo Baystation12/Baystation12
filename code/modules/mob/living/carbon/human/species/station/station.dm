@@ -77,7 +77,7 @@
 
 /datum/species/tajaran
 	name = SPECIES_TAJARA
-	name_plural = "Tajaran"
+	name_plural = "Tajara"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
 	tail = "tajtail"
@@ -100,7 +100,7 @@
 	min_age = 19
 	max_age = 140
 
-	blurb = "The Tajaran are a species of furred mammalian bipeds hailing from the chilly planet of Ahdomai \
+	blurb = "The Tajara are a species of furred mammalian bipeds hailing from the chilly planet of Ahdomai \
 	in the Zamsiin-lr system. They are a naturally superstitious species, with the new generations growing up with tales \
 	of the heroic struggles of their forebears against the Overseers. This spirit has led them forward to the \
 	reconstruction and advancement of their society to what they are today. Their pride for the struggles they \
