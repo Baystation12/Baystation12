@@ -192,7 +192,6 @@
 		I.forceMove(src)
 		update_uis()
 		update_verbs()
-		update_name()
 		to_chat(user, "You insert [I] into [src].")
 
 		return
@@ -286,6 +285,9 @@
 
 	if(enabled && .)
 		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
+		
+	if(card_slot && card_slot.stored_card)
+		to_chat(user, "The [card_slot.stored_card] is inserted into it.")
 
 /obj/item/modular_computer/MouseDrop(var/atom/over_object)
 	var/mob/M = usr
