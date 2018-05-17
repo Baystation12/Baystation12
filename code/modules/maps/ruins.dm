@@ -65,7 +65,7 @@
 				for(var/m in ruins)
 					var/datum/map_template/ruin/ruin_to_remove = ruins[m]
 					if(ruin_to_remove.id == ruin.id) //remove all ruins with the same ID, to make sure that ruins with multiple variants work properly
-						ruins -= ruin_to_remove.name
+						ruins -= ruin_to_remove.id
 						last_checked_ruin_index--
 			break
 
