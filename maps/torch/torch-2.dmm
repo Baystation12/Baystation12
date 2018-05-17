@@ -3306,6 +3306,10 @@
 /obj/item/weapon/stool,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"hx" = (
+/obj/structure/railing/mapped,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/fore)
 "hy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -6844,6 +6848,7 @@
 /area/maintenance/thirddeck/forestarboard)
 "oa" = (
 /obj/structure/stairs/west,
+/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "ob" = (
@@ -7187,6 +7192,7 @@
 /area/hallway/primary/thirddeck/fore)
 "oT" = (
 /obj/effect/floor_decal/industrial/warning,
+/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "oU" = (
@@ -33967,7 +33973,7 @@ kI
 dx
 mi
 mX
-ob
+hx
 oT
 pO
 pM

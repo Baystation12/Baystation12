@@ -18836,6 +18836,10 @@
 "MH" = (
 /turf/simulated/wall/r_wall/hull,
 /area/quartermaster/expedition/storage)
+"Nf" = (
+/obj/structure/railing/mapped,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/fore)
 "Nm" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -32391,7 +32395,7 @@ ki
 lf
 mo
 nx
-oF
+Nf
 oF
 oB
 sy
@@ -32593,7 +32597,7 @@ kj
 lf
 mo
 ny
-oF
+Nf
 pV
 oB
 sy
