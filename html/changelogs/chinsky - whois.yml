@@ -1,5 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - tweak: "PDAs and ID cards no longer have whole name and job in their item name."
-  - tweak: "When examining people, you will see a linkie to see their ID. That will give you name/job if you're nearby, or show you the window with full info if you're adjacent."
