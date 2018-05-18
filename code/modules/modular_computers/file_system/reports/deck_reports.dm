@@ -7,6 +7,10 @@
 	var/datum/report_field/people/manifest
 	var/datum/report_field/planned_depart
 
+/datum/computer_file/report/flight_plan/New()
+	..()
+	set_access(null, access_heads)
+
 /datum/computer_file/report/flight_plan/generate_fields()
 	add_field(/datum/report_field/instruction, "These fields are required:")
 	leader = add_field(/datum/report_field/people/from_manifest, "Leader", required = 1)
@@ -21,7 +25,11 @@
 /datum/computer_file/report/recipient/shuttle
 	var/datum/report_field/shuttle
 	var/datum/report_field/mission
-	var/access_shuttle = 0 //Set to 1 to have the report's access_edit set to be the shuttle's logging access.
+	var/access_shuttle = 0 //Set to 1 to give the shuttle's logging access as an access_edit pattern.
+
+/datum/computer_file/report/recipient/shuttle/New()
+	..()
+	set_access(null, access_heads)
 
 /datum/computer_file/report/recipient/shuttle/generate_fields()
 	..()
@@ -34,6 +42,10 @@
 	form_name = "DC243"
 	title = "Post-flight Damage Assessment"
 
+/datum/computer_file/report/recipient/shuttle/damage/New()
+	..()
+	set_access(null, access_cargo, override = 0)
+
 /datum/computer_file/report/recipient/shuttle/damage/generate_fields()
 	..()
 	add_field(/datum/report_field/instruction, "Assess the damage sustained by the shuttle and its flight readiness.")
@@ -41,11 +53,14 @@
 	add_field(/datum/report_field/simple_text, "Flight readiness")
 	add_field(/datum/report_field/pencode_text, "Repairs required")
 	add_field(/datum/report_field/time, "Estimated completion time")
-	set_access(null, access_cargo)
 
 /datum/computer_file/report/recipient/shuttle/fuel
 	form_name = "DC12"
 	title = "Post-flight Refueling Report"
+
+/datum/computer_file/report/recipient/shuttle/fuel/New()
+	..()
+	set_access(null, access_cargo, override = 0)
 
 /datum/computer_file/report/recipient/shuttle/fuel/generate_fields()
 	..()
@@ -53,11 +68,14 @@
 	add_field(/datum/report_field/simple_text, "Current fuel level")
 	add_field(/datum/report_field/time, "Time of refueling")
 	add_field(/datum/report_field/pencode_text, "Additional notes")
-	set_access(null, access_cargo)
 	
 /datum/computer_file/report/recipient/shuttle/atmos
 	form_name = "DC245"
 	title = "Post-flight Atmospherics Assessment"
+
+/datum/computer_file/report/recipient/shuttle/atmos/New()
+	..()
+	set_access(null, access_cargo, override = 0)
 
 /datum/computer_file/report/recipient/shuttle/atmos/generate_fields()
 	..()
@@ -65,11 +83,14 @@
 	add_field(/datum/report_field/pencode_text, "State of atmospherics supplies")
 	add_field(/datum/report_field/time, "Estimated time of exhaustion")
 	add_field(/datum/report_field/simple_text, "Supplies required")
-	set_access(null, access_cargo)
 
 /datum/computer_file/report/recipient/shuttle/gear
 	form_name = "DC248b"
 	title = "Post-flight Emergency Supply Inventory; Summary Version"
+
+/datum/computer_file/report/recipient/shuttle/gear/New()
+	..()
+	set_access(null, access_cargo, override = 0)
 
 /datum/computer_file/report/recipient/shuttle/gear/generate_fields()
 	..()
@@ -79,7 +100,6 @@
 	add_field(/datum/report_field/time, "Time of restocking")
 	add_field(/datum/report_field/simple_text, "Flight readiness")
 	add_field(/datum/report_field/pencode_text, "Additional Notes")
-	set_access(null, access_cargo)
 
 /datum/computer_file/report/recipient/shuttle/post_flight
 	form_name = "DC102"
