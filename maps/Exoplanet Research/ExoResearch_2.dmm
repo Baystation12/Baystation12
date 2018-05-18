@@ -1,7 +1,7 @@
-"aa" = (/turf/unsimulated/floor/rock2,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"ab" = (/turf/unsimulated/beach/water{tag = "icon-seashallow"; icon_state = "seashallow"},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"ac" = (/turf/unsimulated/beach/water{tag = "icon-beach (WEST)"; icon_state = "beach"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"ad" = (/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"aa" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"ab" = (/turf/unsimulated/beach/water{tag = "icon-seashallow"; icon_state = "seashallow"},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"ac" = (/turf/unsimulated/beach/water{tag = "icon-beach (WEST)"; icon_state = "beach"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"ad" = (/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "ae" = (/turf/unsimulated/wall,/area/exo_research_facility/outer)
 "af" = (/turf/unsimulated/wall,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "ag" = (/obj/structure/bardbedwire{tag = "icon-barbedwire (WEST)"; icon_state = "barbedwire"; dir = 8},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
@@ -18,8 +18,8 @@
 "ar" = (/obj/machinery/vending/hydronutrients,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "as" = (/obj/structure/table/steel,/obj/item/device/analyzer/plant_analyzer,/obj/item/weapon/storage/box/botanydisk,/obj/item/weapon/storage/box/botanydisk,/obj/item/weapon/storage/box/botanydisk,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "at" = (/obj/structure/bardbedwire{tag = "icon-barbedwire (EAST)"; icon_state = "barbedwire"; dir = 4},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"au" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-genericbush_2"; icon_state = "genericbush_2"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"av" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/beach/water{tag = "icon-seashallow"; icon_state = "seashallow"},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"au" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-genericbush_2"; icon_state = "genericbush_2"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"av" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/beach/water{tag = "icon-seashallow"; icon_state = "seashallow"},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "aw" = (/obj/structure/cable/orange{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "ax" = (/obj/structure/table/steel,/obj/item/weapon/storage/box/syringes,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "ay" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Xenoflora Laboratory"; density = 0; icon_state = "pdoor0"; id = "Xenoflora Laboratory"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
@@ -31,9 +31,9 @@
 "aE" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin{pixel_x = 1; pixel_y = 9},/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "aF" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "aG" = (/obj/structure/table/steel,/obj/machinery/reagentgrinder,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"aH" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-stalkybush_1"; icon_state = "stalkybush_1"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"aI" = (/turf/unsimulated/beach/water{tag = "icon-beach (NORTHWEST)"; icon_state = "beach"; dir = 9},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"aJ" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner (EAST)"; icon_state = "beachcorner"; dir = 4},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"aH" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-stalkybush_1"; icon_state = "stalkybush_1"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"aI" = (/turf/unsimulated/beach/water{tag = "icon-beach (NORTHWEST)"; icon_state = "beach"; dir = 9},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"aJ" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner (EAST)"; icon_state = "beachcorner"; dir = 4},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "aK" = (/obj/structure/closet/secure_closet/personal,/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "aL" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Science Dorm 2"; id = "Science Dorm 2"; name = "Privacy Shutter Control"; pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "aM" = (/obj/structure/closet/secure_closet/personal,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
@@ -51,8 +51,8 @@
 "aY" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (EAST)"; icon_state = "officechair_white_preview"; dir = 4},/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "aZ" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-folder_nt"; icon_state = "folder_nt"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "ba" = (/obj/machinery/smartfridge,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"bb" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-lavendergrass_4"; icon_state = "lavendergrass_4"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"bc" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-lavendergrass_2"; icon_state = "lavendergrass_2"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"bb" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-lavendergrass_4"; icon_state = "lavendergrass_4"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"bc" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-lavendergrass_2"; icon_state = "lavendergrass_2"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "bd" = (/obj/structure/bed,/obj/item/weapon/bedsheet{tag = "icon-sheetyellow"; icon_state = "sheetyellow"},/obj/effect/landmark/start/facil_researcher,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "be" = (/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "bf" = (/obj/structure/mirror,/turf/unsimulated/wall,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
@@ -64,7 +64,7 @@
 "bl" = (/obj/item/weapon/folder/white,/obj/structure/table/steel,/obj/item/weapon/disk/tech_disk{pixel_x = 0; pixel_y = 0},/obj/item/weapon/disk/tech_disk{pixel_x = 0; pixel_y = 0},/obj/item/weapon/disk/design_disk,/obj/item/weapon/disk/design_disk,/obj/item/weapon/reagent_containers/dropper{pixel_y = -4},/obj/structure/cable/orange{icon_state = "0-4"},/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "bm" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Xenoflora Laboratory"; id = "Xenoflora Laboratory"; name = "Privacy Shutter Control"; pixel_x = -32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "bn" = (/obj/machinery/botany/editor,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"bo" = (/obj/structure/flora/ausbushes/fullgrass,/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"bo" = (/obj/structure/flora/ausbushes/fullgrass,/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "bp" = (/obj/structure/closet/secure_closet/personal,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "bq" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/freezer,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "br" = (/obj/structure/sink/kitchen{dir = 8; icon_state = "sink_alt"; name = "bathroom sink"; pixel_x = 20; tag = "icon-sink_alt (WEST)"},/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/freezer,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
@@ -85,7 +85,7 @@
 "bG" = (/obj/item/weapon/stock_parts/matter_bin,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "bH" = (/obj/machinery/biogenerator,/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "bI" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"bJ" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/beach/water{tag = "icon-beach (WEST)"; icon_state = "beach"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"bJ" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/beach/water{tag = "icon-beach (WEST)"; icon_state = "beach"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "bK" = (/obj/machinery/r_n_d/destructive_analyzer,/obj/structure/cable/orange{icon_state = "0-4"},/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "bL" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "bM" = (/obj/machinery/door/window{dir = 2},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
@@ -144,9 +144,9 @@
 "cN" = (/obj/machinery/power/fusion_drive,/obj/structure/cable/orange{icon_state = "0-8"},/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "cO" = (/obj/machinery/atmospherics/binary/fusion_cooling,/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "cP" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/steel,/obj/item/weapon/storage/box/lights,/obj/item/weapon/storage/box/lights,/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"cQ" = (/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHWEST)"; icon_state = "beach"; dir = 10},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"cR" = (/turf/unsimulated/beach/water{tag = "icon-beach"; icon_state = "beach"},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"cS" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner (NORTH)"; icon_state = "beachcorner"; dir = 1},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"cQ" = (/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHWEST)"; icon_state = "beach"; dir = 10},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"cR" = (/turf/unsimulated/beach/water{tag = "icon-beach"; icon_state = "beach"},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"cS" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner (NORTH)"; icon_state = "beachcorner"; dir = 1},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "cT" = (/turf/simulated/floor/pavement{tag = "icon-pave_invert_corner (EAST)"; icon_state = "pave_invert_corner"; dir = 4},/area/exo_research_facility/outer)
 "cU" = (/turf/simulated/floor/pavement/corner{tag = "icon-pave_corner (EAST)"; icon_state = "pave_corner"; dir = 4},/area/exo_research_facility/outer)
 "cV" = (/obj/structure/bed/chair/office/dark,/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/white,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
@@ -173,7 +173,7 @@
 "dq" = (/obj/machinery/atmospherics/pipe/simple/visible/red{dir = 10},/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "dr" = (/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "ds" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"dt" = (/turf/unsimulated/beach/water{tag = "icon-beach (NORTH)"; icon_state = "beach"; dir = 1},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"dt" = (/turf/unsimulated/beach/water{tag = "icon-beach (NORTH)"; icon_state = "beach"; dir = 1},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "du" = (/obj/structure/cable/orange{icon_state = "0-4"},/turf/simulated/floor/tiled/white,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "dv" = (/obj/structure/cable/orange{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "dw" = (/obj/machinery/door/airlock/halo{name = "Reactor Acces"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
@@ -196,7 +196,7 @@
 "dN" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/outline/grey,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "dO" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "dP" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; set_temperature = 0; use_power = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"dQ" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-fernybush_3"; icon_state = "fernybush_3"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"dQ" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-fernybush_3"; icon_state = "fernybush_3"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "dR" = (/turf/simulated/floor/road/markings,/area/exo_research_facility/outer)
 "dS" = (/obj/structure/cable/orange{icon_state = "1-2"},/turf/unsimulated/wall,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "dT" = (/obj/structure/cable/orange{icon_state = "1-4"},/turf/unsimulated/wall,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
@@ -253,7 +253,7 @@
 "eS" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Marine Armory"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "eT" = (/obj/machinery/vending/armory/armor,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "eU" = (/obj/machinery/vending/armory/hybrid,/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"eV" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-stalkybush_1"; icon_state = "stalkybush_1"},/turf/unsimulated/beach/water{tag = "icon-beach (WEST)"; icon_state = "beach"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"eV" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-stalkybush_1"; icon_state = "stalkybush_1"},/turf/unsimulated/beach/water{tag = "icon-beach (WEST)"; icon_state = "beach"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "eW" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "eX" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "eY" = (/turf/simulated/floor/pavement/corner{tag = "icon-pave_corner (WEST)"; icon_state = "pave_corner"; dir = 8},/area/exo_research_facility/outer)
@@ -278,13 +278,13 @@
 "fr" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "fs" = (/turf/simulated/floor/pavement{tag = "icon-pavement (WEST)"; icon_state = "pavement"; dir = 8},/area/exo_research_facility/outer)
 "ft" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Marine Dorm Hallway 1"; density = 0; icon_state = "pdoor0"; id = "Marine Dorm Hallway 1"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"fu" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"fu" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "fv" = (/obj/machinery/door/blast/regular{_wifi_id = "Security Checkpoint 2"; closed_layer = 8; icon_state = "pdoor0"; id = "Security Checkpoint 2"; name = "Security Gate"},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "fw" = (/obj/machinery/door/airlock/halo{name = "Security Checkpoint"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "fx" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "Security Checkpoint 1"; density = 0; icon_state = "pdoor0"; id = "Security Checkpoint 1"; name = "Privacy Shutter"; opacity = 0},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/plating,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "fy" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/obj/item/weapon/pen,/obj/item/weapon/paper_bin{pixel_x = 1; pixel_y = 9},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
 "fz" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Security Checkpoint 1"; id = "Security Checkpoint 1"; name = "Privacy Shutter Control"; pixel_x = 32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/exo_research_facility{tag = "icon-apmaint"; name = "Research Facility Interior up"; icon_state = "apmaint"; requires_power = 0})
-"fA" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHWEST)"; icon_state = "beach"; dir = 10},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"fA" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHWEST)"; icon_state = "beach"; dir = 10},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "fB" = (/obj/structure/bardbedwire{tag = "icon-barbedwire (SOUTHWEST)"; icon_state = "barbedwire"; dir = 10},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
 "fC" = (/obj/structure/bardbedwire,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
 "fD" = (/obj/structure/bardbedwire{tag = "icon-barbedwire (NORTHWEST)"; icon_state = "barbedwire"; dir = 9},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
@@ -303,28 +303,39 @@
 "fQ" = (/obj/structure/sandbag{tag = "icon-sandbag (SOUTHWEST)"; icon_state = "sandbag"; dir = 10},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
 "fR" = (/obj/structure/turret/chaingun{dir = 2},/turf/unsimulated/floor/desert,/area/exo_research_facility/outer)
 "fS" = (/obj/structure/sandbag{tag = "icon-sandbag (SOUTHEAST)"; icon_state = "sandbag"; dir = 6},/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/outer)
-"fT" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/unsimulated/beach/water{tag = "icon-seashallow"; icon_state = "seashallow"},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"fU" = (/turf/unsimulated/floor/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"fV" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"fW" = (/turf/unsimulated/beach/water{tag = "icon-beach (NORTHEAST)"; icon_state = "beach"; dir = 5},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"fX" = (/turf/unsimulated/beach/water{tag = "icon-beach (EAST)"; icon_state = "beach"; dir = 4},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"fT" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-sparsegrass_3"; icon_state = "sparsegrass_3"},/turf/unsimulated/beach/water{tag = "icon-seashallow"; icon_state = "seashallow"},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"fU" = (/turf/unsimulated/floor/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"fV" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"fW" = (/turf/unsimulated/beach/water{tag = "icon-beach (NORTHEAST)"; icon_state = "beach"; dir = 5},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"fX" = (/turf/unsimulated/beach/water{tag = "icon-beach (EAST)"; icon_state = "beach"; dir = 4},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "fY" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{requires_power = 0})
-"fZ" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner (WEST)"; icon_state = "beachcorner"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"ga" = (/obj/docking_umbilical/north{name = "Research Compound LZ Space Elevator"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gb" = (/turf/unsimulated/floor/rock2,/area/exoplanet/desert{requires_power = 0})
-"gc" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner"; icon_state = "beachcorner"},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gd" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
+"fZ" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner (WEST)"; icon_state = "beachcorner"; dir = 8},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"ga" = (/obj/docking_umbilical/north{name = "Research Compound LZ Space Elevator"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"gb" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exoplanet/desert{requires_power = 0})
+"gc" = (/turf/unsimulated/beach/water{tag = "icon-beachcorner"; icon_state = "beachcorner"},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"gd" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "ge" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{requires_power = 0})
-"gf" = (/obj/effect/dummy/spell_jaunt,/turf/unsimulated/floor/rock2,/area/exoplanet/desert{requires_power = 0})
-"gg" = (/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHEAST)"; icon_state = "beach"; dir = 6},/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gh" = (/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{requires_power = 0})
-"gi" = (/obj/effect/landmark/dropship_land_point{name = "Research Compound LZ"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gj" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{requires_power = 0})
-"gk" = (/obj/effect/landmark/dropship_land_point/covenant,/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gl" = (/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gm" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"gn" = (/obj/effect/landmark/map_data{desc = "Research base Sublevel"; height = 2},/turf/unsimulated/floor/rock2,/area/exoplanet/desert{dynamic_lighting = 0; requires_power = 0})
-"go" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor/rock2,/area/exoplanet/desert{requires_power = 0})
+"gf" = (/obj/effect/dummy/spell_jaunt,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exoplanet/desert{requires_power = 0})
+"gg" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0})
+"gh" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0})
+"gi" = (/turf/unsimulated/beach/water{tag = "icon-beach (SOUTHEAST)"; icon_state = "beach"; dir = 6},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"gj" = (/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gk" = (/obj/effect/landmark/dropship_land_point{name = "Research Compound LZ"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"gl" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gm" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gn" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"go" = (/obj/effect/landmark/dropship_land_point/covenant,/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"gp" = (/obj/structure/inflatable/wall,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gq" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/pickaxe/drill,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gr" = (/obj/structure/table/steel_reinforced,/obj/item/device/flashlight,/obj/item/device/flashlight,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gs" = (/obj/machinery/floodlight,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gt" = (/obj/structure/ladder,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gu" = (/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"gv" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"gw" = (/obj/structure/inflatable/door,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gx" = (/obj/effect/landmark/map_data{desc = "Research base Sublevel"; height = 2},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"gy" = (/turf/unsimulated/floor/rock2,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
+"gz" = (/obj/effect/floor_decal/asteroid,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -400,31 +411,31 @@ ababababababababababababababababababacadadadadadadadadboadadadadadadadadadadadad
 ababababababababababababababababababcQcSadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadbbadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
 abababababababababababababababababababacadadadadadadadadadadadadadadadadboadadadbbadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadbbadadadaHadadadadadadadadadadadadadadadadaa
 abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaHaHadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaa
-abababababababababababababababababababacadadadadadadboboboboboadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfVfVfVfVfVfVadadadadadadadadadaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfVfVfVfVfVfVfVadadadadadadadadfVadaa
-abababababababababababababababababababacadadadadadadadadadboadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfVfVadadadadadadadadadadadadadfVfVfVfVfVfVadadadadadadfVfVadfVfVfVaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadfVfVfVfVadadadadadadadadadadadadfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadfVfVfVfVfVfVfVfVfVfVfVfVadadfVfVfVfVfVfVfVfVfVfVadadadadadadadadfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
-abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadfVfVfVadadadadfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
-ababababababaIdtdtdtdtdtdtdtfWababababacadadadadadadadadadadadadadadadfVfVfVfVfVfVfVfVfVadfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
-ababababababacadadadadadadadfXabababaIaJadadadadboadadboboadadadadadfVfVfVfVfVfVfVfVfVadadfVfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
-ababababababacadadadadadadadfXababaIaJadadadadboboadadadadadadadadfVfVfVfVfVfVfVadadadadfVfVfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
-ababababababacadadadadadadadfZdtdtaJadadadadadboadadadadadadadadadfVfVfVfVgafVfVadfVfVfVfVfVfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
-ababababaIdtaJadadadadadadadadadadadadadadadadadadadadadadadadadfVfVfVfVadadadadadfVadadfVfVfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
-ababababacadadadadadgccRcRcSadadadadadadadadadadadadadadadadadadfVfVfVadadadadfVfVadadadfVfVfVgdgdgdgdgegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegf
-ababababacadadadadadfXababcQcRcRcRcRcRcSadadadadadadadadadadadadfVfVfVadadadfVfVadadadadfVfVfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
-ababababacadadadadadfXababababababababacadadadadadadadadadadadadfVadadfVadadbofVadadadadadadfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
-ababababacadadadadadfXababababababababacadadadadadadboboadadadadadadadadadadadadadadadadadadadfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
-ababababcQcRcRcRcRcRggababababababababacadadadboboboboboadadadadadadadadadadadadadadadadadadadfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYghghghghfYfYfYfYfYfYfYghfYfYfYfYfYfYfYfYfYfYfYgb
-abababababababababababababababababababacadadadboadadadadadadadboadadadadadadgiadadadadadadadadfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYghghghghghghghfYfYfYfYfYghghghfYfYfYfYfYfYfYghghgb
-abababababababababababababababababababacadadadboadadadadadadadadadadadadadboadadadadadadadadadfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYghghghghghghghghghghghghghghghghghghghghfYfYfYfYghghfYfYfYfYfYfYfYfYghgb
-abababababababababababababababababababacadadadboboboadadadadadadadadadadadadadadadadadadadadadfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYghghghgjghghghghghghghghghghghfYfYfYghghghfYfYfYfYfYfYfYfYfYfYfYfYfYfYghgb
-abababababababababababababababababababacadadadadadboboadadadadadadadadadadadadadadadgkboboadadfVfVfVfVfYfYfYfYghghghghfYfYfYfYghghghghghghghghfYfYfYfYghghghfYfYfYghghghfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
-abababababababababababababababababababacadadadadadadboboadadadadadadadadadadadadadadadadadadadadfVglglghglfYghfYfYfYghghfYfYghghghghghghghghfYfYfYfYfYfYghghfYfYfYghghghfYfYfYfYfYfYfYfYfYfYghfYfYfYghgb
-abababababababababababababababababababacadadadadadadadadadadadadadfVfVadadadadadadadadadadadadglglglglfVghghghfYfYghghghfYghghgjghghghghghghfYfYfYfYfYfYfYghghghfYfYghghghghfYfYfYfYfYfYfYghghghghghghgb
-abababababababababababababababababababacadadadadadadadadadfVadadfVfVfVfVfVfVadadadadadadadadadgmglglglghglghghghghghghghghghghghghfYfYghghghfYfYfYfYfYfYfYghghghghfYghghghghghghghghghghghghghghghghghgb
-abababababababababababababababababababacadadadadadadadfVadfVfVfVfVfVfVfVfVfVadadadadadadadadadadadglglgjglghghghghfYghghghghghghfYfYfYfYghghghfYfYfYfYfYghghghgjghghgjghghghghghghghghghghghghghghghghgb
-abababababababababababababababababababacadadadadadadfVfVfVfVfVfVfVfVfVfVfVfVadadadadadadadadadadadglglghghglghghghfYghghghghghghghfYfYfYfYghghghghghghghghghghghghghghghfYfYfYfYfYfYfYfYfYfYfYfYghghghgb
-gnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgogbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgbgb
+abababababababababababababababababababacadadadadadadboboboboboadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaaaaaaaaaaaaadadadadadadadadadaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaaaaaaaaaaaaaaadadadadadadadadaaadaa
+abababababababababababababababababababacadadadadadadadadadboadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaaaaadadadadadadadadadadadadadaaaafVfVfVaaadadadadadadaaaaadaaaaaaaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadaaaaaaaaadadadadadadadadadadadadaaaafVfVfVfVaaaaaaaaaaaaaaaaaaaaaaaafVaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadadaaaaaaaaaaaaaaaaaaaaaaaaadaaaaaaaafVaaaaaaaaaaaaadadadadadadadadaafVfVfVfVfVfVfVfVfVfVfVfVaafVfVfVfVfVaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadadadadadadadadaaaafVfVfVfVfVfVfVfVfVfVaaaaaafVfVfVfVfVfVfVfVfVaaaaaaaaaaaaaaaaaaaafVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
+abababababababababababababababababababacadadadadadadadadadadadadadadadadadadadadaaaaaaadadadadaafVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
+ababababababaIdtdtdtdtdtdtdtfWababababacadadadadadadadadadadadadadadadaaaaaaaaaaaaaaaaadadaaaaaafVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
+ababababababacadadadadadadadfXabababaIaJadadadadboadadboboadadadadadaaaaaaaaaaaaaaaaaaadaafVfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
+ababababababacadadadadadadadfXababaIaJadadadadboboadadadadadadadadaaaaaaaaaaaaaaadadadadaafVfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVfVaa
+ababababababacadadadadadadadfZdtdtaJadadadadadboadadadadadadadadadaaaaaafVgafVaaadaaaaaaaafVfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
+ababababaIdtaJadadadadadadadadadadadadadadadadadadadadadadadadadaaaaaaaaadadadadadaaadadaafVfVfVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
+ababababacadadadadadgccRcRcSadadadadadadadadadadadadadadadadadadaaaaaaadadadadaaaaadadadaafVfVgdgdgdgdgegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegegf
+ababababacadadadadadfXababcQcRcRcRcRcRcSadadadadadadadadadadadadaaaaaaadadadaaaaadadadadaaaaaafVfVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
+ababababacadadadadadfXababababababababacadadadadadadadadadadadadaaadadaaadadboaaadadadadadadaaaafVfVfVfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYfYgb
+ababababacadadadadadfXababababababababacadadadadadadboboadadadadadadadadadadadadadadadadadadadaafVfVfVggggggggggggggggggggggggggggggggggggggggggggggggghghghghghghggggggggggghgggggggggggggggggggggggggh
+ababababcQcRcRcRcRcRgiababababababababacadadadboboboboboadadadadadadadadadadadadadadadadadadadaafVfVfVggggggggggggggggggggggggggggggggggggggggggggggghghgjgjgjgjghghghghghghghghghgggggggggggggggggggggh
+abababababababababababababababababababacadadadboadadadadadadadboadadadadadadgkadadadadadadadadaafVglglglglglglglglglglglglglglgmgmgmgmgmgmgmgmgmgmgmgmgjgjgjgjgjgjgjgmgmgmgmgmgmgmgmgmgmgmgmgmglglgmgmgm
+abababababababababababababababababababacadadadboadadadadadadadadadadadadadboadadadadadadadadadaafVglglglglglglglglglglglglgmgmgmgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgmgmgmgmgmgmgjgjgjgjgmglglglgmgm
+abababababababababababababababababababacadadadboboboadadadadadadadadadadadadadadadadadadadadadaaaaglglglglglgmgmgmgmgmgmgmgmgmgjgjgjgngjgjgjgjgjgjgjgjgjgjgjgmgmgmgjgjgjgmgmgmgmgmgjgjgjgjgjgmglglglgmgm
+abababababababababababababababababababacadadadadadboboadadadadadadadadadadadadadadadgoboboadadaaaagmgmgmgmgmgmgjgjgjgjgmgmgmgmgjgjgjgjgjgjgjgjgmgmgmgmgjgjgjgmgmgmgjgjgjgmgmgmgmgmgpgpgpgpgpgmgmgmgmgmgm
+abababababababababababababababababababacadadadadadadboboadadadadadadadadadadadadadadadadadadadadaagjgjgjgjgmgjgmgmgmgjgjgmgmgjgjgjgjgjgjgjgjgmgmgmgmgmgmgjgjgmgmgmgjgjgjgmgmgmgmgmgpgqgrgsgjgtgmgmgmgjgm
+abababababababababababababababababababacadadadadadadadadadadadadadaaaaadadadadadadadadadadadadgugugjgjgmgjgjgjgmgmgjgjgjgmgjgjgngjgjgjgjgjgjgmgmgmgmgmgmgmgjgjgjgmgmgjgjgjgjgmgjgpgpgjgjgjgjgjgpgjgjgjgm
+abababababababababababababababababababacadadadadadadadadadaaadadaaaaaaaaaaaaadadadadadadadadadgvgugjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgmgmgjgjgjgmgmgmgmgmgmgmgjgjgjgjgmgjgjgjgjgjgjgwgjgjgjgjgjgjgpgjgjgjgm
+abababababababababababababababababababacadadadadadadadaaadaaaaaaaaaaaaaaaaaaadadadadadadadadadadadgjgjgngjgjgjgjgjgmgjgjgjgjgjgjgmgmgmgmgjgjgjgmgmgmgmgmgjgjgjgngjgjgngjgjgjgjgjgpgjgjgjgjgjgjgpgjgjgjgm
+abababababababababababababababababababacadadadadadadaaaaaaaaaaaaaaaaaaaaaaaaadadadadadadadadadadadgjgjgjgjgjgjgjgjgmgjgjgjgjgjgjgjgmgmgmgmgjgjgjgjgjgjgjgjgjgjgjgjgjgjgjgmgmgmgmgmgmgmgmgmgmgmgmgjgjgjgm
+gxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagmgmgmgmgmgmgmgmgmgmgmgygygygygmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgzgmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgmgm
 "}
