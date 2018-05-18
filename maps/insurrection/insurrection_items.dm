@@ -82,7 +82,7 @@
 /obj/machinery/button/toggle/tranq_hangar/proc/toggle_landing_points()
 	for(var/obj/effect/landmark/dropship_land_point/insurrection_hangar/point in world)
 		if(point.faction == initial(point.faction))
-			point.faction = "civillian"
+			point.faction = "Civilian"
 		else
 			point.faction = initial(point.faction)
 

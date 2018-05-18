@@ -1,15 +1,15 @@
 GLOBAL_LIST_EMPTY(civ_crew_spawns)
 
 /datum/spawnpoint/civ_crew
-	display_name = "Civillian Ship Crew"
-	restrict_job = list("Civillian Ship Crew")
+	display_name = "Civilian Ship Crew"
+	restrict_job = list("Civilian Ship Crew")
 
 /datum/spawnpoint/civ_crew/New()
 	..()
 	turfs = GLOB.civ_crew_spawns
 
 /obj/effect/landmark/start/civ_crew
-	name = "Civillian Ship Captain"
+	name = "Civilian Ship Captain"
 
 /obj/effect/landmark/start/civ_crew/New()
 	..()
@@ -19,7 +19,7 @@ GLOBAL_LIST_EMPTY(ship_cap_civ_spawns)
 
 /datum/spawnpoint/ship_cap_civ
 	display_name = "Civ Ship Cap Crew"
-	restrict_job = list("Civillian Ship Captain")
+	restrict_job = list("Civilian Ship Captain")
 
 /datum/spawnpoint/ship_cap_civ/New()
 	..()

@@ -34,7 +34,7 @@ var/global/datum/dropship_landing_controller/dropship_landing_controller = new /
 /datum/dropship_landing_controller/proc/get_potential_landing_points(var/check_active = 1,var/check_occupied = 1,var/faction_check)
 	var/list/potential_landing_points = land_points.Copy()
 	if(faction_check)
-		potential_landing_points &= (get_faction_land_points(faction_check,check_active,check_occupied) + get_faction_land_points("civillian",check_active,check_occupied))
+		potential_landing_points &= (get_faction_land_points(faction_check,check_active,check_occupied) + get_faction_land_points("Civilian",check_active,check_occupied))
 	else
 		if(check_active)
 			potential_landing_points &= get_active_land_points()

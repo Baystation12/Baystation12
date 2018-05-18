@@ -1,5 +1,5 @@
 /datum/job/ship_crew_civ
-	title = "Civillian Ship Crew"
+	title = "Civilian Ship Crew"
 	total_positions = 6
 	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/civ_crewmember
@@ -7,7 +7,7 @@
 	spawnpoint_override = "Civ Crew"
 
 /datum/job/ship_cap_civ
-	title = "Civillian Ship Captain"
+	title = "Civilian Ship Captain"
 	total_positions = 2
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/civ_captain

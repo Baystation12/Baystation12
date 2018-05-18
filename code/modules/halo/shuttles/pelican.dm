@@ -48,11 +48,11 @@
 	overmap_range = 1
 
 /obj/structure/dropship/pelican/civ
-	desc = "A versatile aircraft usually used by the UNSC. This one has been modified to allow for fast transit between civillian endpoints."
-	faction = "civillian"
+	desc = "A versatile aircraft usually used by the UNSC. This one has been modified to allow for fast transit between Civilian endpoints."
+	faction = "Civilian"
 
 /obj/structure/dropship/pelican/innie
-	desc = "A versatile aircraft usually used by the UNSC. This one has been modified to allow for fast transit between civillian endpoints. This one appears to have a red fist on the wings."
+	desc = "A versatile aircraft usually used by the UNSC. This one has been modified to allow for fast transit between Civilian endpoints. This one appears to have a red fist on the wings."
 	faction = "innie"
 
 /obj/structure/dropship/overmap/pelican/unsc
