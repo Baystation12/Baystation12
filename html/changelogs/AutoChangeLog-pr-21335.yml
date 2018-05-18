@@ -1,0 +1,9 @@
+author: "PurpleMartinJCK"
+delete-after: True
+changes: 
+  - rscadd: "add new nabber organs"
+  - rscadd: "flesh printer can now print nabber organs"
+  - rscadd: "low blood can force nabbers out of nab mode"
+  - tweak: "crushing and shredding now decloak nabbers"
+  - tweak: "lower some nabber brute resistance in favour of natural armour"
+  - tweak: "encases all external nabber organs in carapace"
