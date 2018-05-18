@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Those with heads access now have more access to Deck Management."
+  - bugfix: "Access issues with supplementary Deck Management reports should be resolved."
