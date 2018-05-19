@@ -4,7 +4,7 @@
 	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/civ_crewmember
 	selection_color = "#667700"
-	spawnpoint_override = "Civ Crew"
+	spawnpoint_override = "Civilian Ship Crew"
 
 /datum/job/ship_cap_civ
 	title = "Civilian Ship Captain"
