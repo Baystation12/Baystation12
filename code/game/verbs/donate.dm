@@ -67,7 +67,7 @@ Vice Policeman:/obj/item/clothing/under/rank/vice:180
 Pirate outfit:/obj/item/clothing/under/pirate:130
 Waiter outfit:/obj/item/clothing/under/waiter:120
 Black suit:/obj/item/clothing/under/lawyer/blacksuit:150
-Central Command officer:/obj/item/clothing/under/rank/centcom_officer:390
+Central Command officer:/obj/item/clothing/under/rank/centcom/officer:390
 Jeans:/obj/item/clothing/under/pants/jeans:160
 Rainbow Suit:/obj/item/clothing/under/color/rainbow:130
 Grim Jacket:/obj/item/clothing/under/suit_jacket:130

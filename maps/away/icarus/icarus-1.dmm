@@ -131,7 +131,7 @@
 "cC" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/icarus/vessel)
 "cD" = (/obj/structure/closet,/obj/random/smokes,/obj/item/clothing/under/icarus/ec_uniform,/turf/simulated/floor/tiled,/area/icarus/vessel)
 "cE" = (/obj/structure/icarus/broken_cryo{dir = 4},/turf/simulated/floor/tiled,/area/icarus/vessel)
-"cF" = (/obj/structure/closet,/obj/item/clothing/under/harness,/turf/simulated/floor/tiled,/area/icarus/vessel)
+"cF" = (/obj/structure/closet,/turf/simulated/floor/tiled,/area/icarus/vessel)
 "cG" = (/obj/structure/closet/medical_wall{pixel_y = 30},/turf/simulated/floor/tiled,/area/icarus/vessel)
 "cH" = (/obj/structure/icarus/broken_cryo{dir = 8},/turf/simulated/floor/tiled,/area/icarus/vessel)
 "cI" = (/obj/structure/closet,/obj/random/smokes,/obj/item/key,/turf/simulated/floor/tiled,/area/icarus/vessel)
