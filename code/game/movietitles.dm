@@ -17,8 +17,9 @@ client
 	LAZYINITLIST(credits)
 
 	if(mob)
-		mob.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
-		mob.overlay_fullscreen("fadeout",/obj/screen/fullscreen/fadeout)
+	//blacking screen for player when round ends
+		//mob.overlay_fullscreen("fishbed",/obj/screen/fullscreen/fishbed)
+		//mob.overlay_fullscreen("fadeout",/obj/screen/fullscreen/fadeout)
 
 		if(mob.get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
 			sound_to(mob, sound(null, channel = 1))
