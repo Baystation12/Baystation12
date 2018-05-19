@@ -199,15 +199,14 @@
 
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
 	var/obj/item/organ/O
+	var/weakref/R = loaded_dna["donor"]
+	var/mob/living/carbon/human/H = R.resolve()
 	if(loaded_species.has_organ[choice])
 		var/new_organ = loaded_species.has_organ[choice]
-		O = new new_organ(get_turf(src))
+		O = new new_organ(get_turf(src), given_dna = H.dna)
 		O.status |= ORGAN_CUT_AWAY
 	else
 		O = ..()
-	var/weakref/R = loaded_dna["donor"]
-	var/mob/living/carbon/human/H = R.resolve()
-	O.set_dna(H.dna)
 	if(O.species)
 		// This is a very hacky way of doing of what organ/New() does if it has an owner
 		O.w_class = max(O.w_class + mob_size_difference(O.species.mob_size, MOB_MEDIUM), 1)
