@@ -997,6 +997,16 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/shield_diffuser
 	sort_string = "VAGAH"
 
+/datum/design/item/tool/oxycandle
+	name = "oxycandle"
+	desc = "a device which, via a chemical reaction, can pressurise small areas."
+	id="oxycandle"
+	req_tech = list(TECH_ENGINEERING = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 3000)
+	chemicals = list(/datum/reagent/sodiumchloride = 20, /datum/reagent/acetone = 20)
+	build_path = /obj/item/device/oxycandle
+	sort_string = "VAGAI"
+
 /datum/design/item/encryptionkey/AssembleDesignName()
 	..()
 	name = "Encryption key design ([item_name])"
