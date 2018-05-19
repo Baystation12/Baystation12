@@ -172,3 +172,35 @@
 	name = "bundeforz tactical helmet"
 	desc = "A light grey helmet made from advanced ceramic. Comfortable and robust."
 	icon_state = "m_helmet"
+
+/vietnam/clothing/obj/hats/m1helmet
+	name = "M1 helmet"
+	desc = "Common american soldier helmet, this one camo."
+	icon_state = "m1helmet"
+	valid_accessory_slots = null
+	armor = list(melee = 5, bullet = 82, laser = 30, energy = 5, bomb = 30, bio = 2, rad = 0)
+	siemens_coefficient = 0.7
+
+/vietnam/clothing/obj/hats/m1helmet-medic
+	name = "M1 Medic helmet"
+	desc = "Common american soldier helmet, this one camo and have red cross."
+	icon_state = "m1helmet-medic"
+	valid_accessory_slots = null
+	armor = list(melee = 5, bullet = 82, laser = 30, energy = 5, bomb = 30, bio = 2, rad = 0)
+	siemens_coefficient = 0.7
+
+/vietnam/clothing/obj/hats/ssh68helmet
+	name = "SSH helmet"
+	desc = "Common soviet soldier helmet."
+	icon_state = "ssh68helmet"
+	valid_accessory_slots = null
+	armor = list(melee = 8, bullet = 72, laser = 30, energy = 5, bomb = 30, bio = 2, rad = 0)
+	siemens_coefficient = 0.7
+
+/vietnam/clothing/obj/hats/ssh68helmet-medic
+	name = "SSH Medic helmet"
+	desc = "Common soviet soldier helmet, this one have red cross."
+	icon_state = "ssh60helmet-medic"
+	valid_accessory_slots = null
+	armor = list(melee = 8, bullet = 72, laser = 30, energy = 5, bomb = 30, bio = 2, rad = 0)
+	siemens_coefficient = 0.7
