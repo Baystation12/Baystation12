@@ -10,7 +10,7 @@
 "Do you feel like a hero yet?","Oof-",\
 "You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required."\
 )
-#define ALL_CIVILLIAN_SHIPNAMES list(\
+#define ALL_Civilian_SHIPNAMES list(\
 "Pete's Cube","The Nomad","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home"\
 )
 
@@ -58,7 +58,7 @@
 	qdel(src)
 
 /obj/effect/overmap/ship/npc_ship/proc/generate_ship_name()
-	name = pick(ALL_CIVILLIAN_SHIPNAMES)
+	name = pick(ALL_Civilian_SHIPNAMES)
 
 /obj/effect/overmap/ship/npc_ship/Initialize()
 	var/turf/start_turf = locate(x,y,z)
@@ -184,4 +184,4 @@
 #undef NPC_SHIP_LOSE_DELAY
 #undef ON_PROJECTILE_HIT_MESSAGES
 #undef ON_DEATH_MESSAGES
-#undef ALL_CIVILLIAN_SHIPNAMES
+#undef ALL_Civilian_SHIPNAMES

@@ -1,14 +1,14 @@
 /obj/effect/overmap/ship/CCV_comet
-	name = "Civillian Vessel"
-	desc = "A civillian vessel with a traditional cargo-hauler design."
+	name = "Civilian Vessel"
+	desc = "A Civilian vessel with a traditional cargo-hauler design."
 
 	icon = 'maps/first_contact/freighter.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 
 /obj/effect/overmap/ship/CCV_star
-	name = "Civillian Vessel"
-	desc = "A civillian vessel with a traditional cargo-hauler design."
+	name = "Civilian Vessel"
+	desc = "A Civilian vessel with a traditional cargo-hauler design."
 
 	icon = 'maps/first_contact/freighter.dmi'
 	icon_state = "ship"
