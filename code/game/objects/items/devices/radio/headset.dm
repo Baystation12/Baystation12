@@ -27,10 +27,8 @@
 	recalculateChannels(1)
 
 /obj/item/device/radio/headset/Destroy()
-	qdel(keyslot1)
-	qdel(keyslot2)
-	keyslot1 = null
-	keyslot2 = null
+	QDEL_NULL(keyslot1)
+	QDEL_NULL(keyslot2)
 	return ..()
 
 /obj/item/device/radio/headset/list_channels(var/mob/user)
@@ -91,56 +89,56 @@
 	desc = "This is used by your elite security force."
 	icon_state = "sec_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_sec
+	ks1type = /obj/item/device/encryptionkey/headset_sec
 
 /obj/item/device/radio/headset/headset_eng
 	name = "engineering radio headset"
 	desc = "When the engineers wish to chat like girls."
 	icon_state = "eng_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_eng
+	ks1type = /obj/item/device/encryptionkey/headset_eng
 
 /obj/item/device/radio/headset/headset_rob
 	name = "robotics radio headset"
 	desc = "Made specifically for the roboticists who cannot decide between departments."
 	icon_state = "rob_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_rob
+	ks1type = /obj/item/device/encryptionkey/headset_rob
 
 /obj/item/device/radio/headset/headset_med
 	name = "medical radio headset"
 	desc = "A headset for the trained staff of the medbay."
 	icon_state = "med_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_med
+	ks1type = /obj/item/device/encryptionkey/headset_med
 
 /obj/item/device/radio/headset/headset_sci
 	name = "science radio headset"
 	desc = "A sciency headset. Like usual."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_sci
+	ks1type = /obj/item/device/encryptionkey/headset_sci
 
 /obj/item/device/radio/headset/headset_medsci
 	name = "medical research radio headset"
 	desc = "A headset that is a result of the mating between medical and science."
 	icon_state = "med_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_medsci
+	ks1type = /obj/item/device/encryptionkey/headset_medsci
 
 /obj/item/device/radio/headset/headset_com
 	name = "command radio headset"
 	desc = "A headset with a commanding channel."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_com
+	ks1type = /obj/item/device/encryptionkey/headset_com
 
 /obj/item/device/radio/headset/heads/captain
 	name = "captain's headset"
 	desc = "The headset of the boss."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/captain
+	ks1type = /obj/item/device/encryptionkey/heads/captain
 
 /obj/item/device/radio/headset/heads/ai_integrated //No need to care about icons, it should be hidden inside the AI anyway.
 	name = "\improper AI subspace transceiver"
@@ -148,7 +146,7 @@
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "radio"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/ai_integrated
+	ks1type = /obj/item/device/encryptionkey/heads/ai_integrated
 	var/myAi = null    // Atlantis: Reference back to the AI which has this radio.
 	var/disabledAi = 0 // Atlantis: Used to manually disable AI's integrated radio via inteliCard menu.
 
@@ -166,77 +164,77 @@
 	desc = "Headset of the researching God."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/rd
+	ks1type = /obj/item/device/encryptionkey/heads/rd
 
 /obj/item/device/radio/headset/heads/hos
 	name = "head of security's headset"
 	desc = "The headset of the man who protects your worthless lives."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/hos
+	ks1type = /obj/item/device/encryptionkey/heads/hos
 
 /obj/item/device/radio/headset/heads/ce
 	name = "chief engineer's headset"
 	desc = "The headset of the guy who is in charge of morons."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/ce
+	ks1type = /obj/item/device/encryptionkey/heads/ce
 
 /obj/item/device/radio/headset/heads/cmo
 	name = "chief medical officer's headset"
 	desc = "The headset of the highly trained medical chief."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/cmo
+	ks1type = /obj/item/device/encryptionkey/heads/cmo
 
 /obj/item/device/radio/headset/heads/hop
 	name = "head of personnel's headset"
 	desc = "The headset of the guy who will one day be captain."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/hop
+	ks1type = /obj/item/device/encryptionkey/heads/hop
 
 /obj/item/device/radio/headset/headset_cargo
 	name = "supply radio headset"
 	desc = "A headset used by the box pushers."
 	icon_state = "cargo_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_cargo
+	ks1type = /obj/item/device/encryptionkey/headset_cargo
 
 /obj/item/device/radio/headset/headset_service
 	name = "service radio headset"
 	desc = "Headset used by the service staff, tasked with keeping everyone full, happy and clean."
 	icon_state = "srv_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_service
+	ks1type = /obj/item/device/encryptionkey/headset_service
 
 /obj/item/device/radio/headset/ert
 	name = "emergency response team radio headset"
 	desc = "The headset of the boss's boss."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/ert
+	ks1type = /obj/item/device/encryptionkey/ert
 
 /obj/item/device/radio/headset/ia
 	name = "internal affair's headset"
 	desc = "The headset of your worst enemy."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/hos
+	ks1type = /obj/item/device/encryptionkey/heads/hos
 
 /obj/item/device/radio/headset/entertainment
 	name = "actor's radio headset"
 	desc = "specially made to make you sound less cheesy."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/entertainment
+	ks1type = /obj/item/device/encryptionkey/entertainment
 
 /obj/item/device/radio/headset/specops
 	name = "special operations radio headset"
 	desc = "The headset of the spooks."
 	icon_state = "cent_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/specops
+	ks1type = /obj/item/device/encryptionkey/specops
 
 /obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()
@@ -304,53 +302,32 @@
 	src.translate_binary = 0
 	src.translate_hive = 0
 	src.syndie = 0
-
-	if(keyslot1)
-		for(var/ch_name in keyslot1.channels)
-			if(ch_name in src.channels)
-				continue
-			src.channels += ch_name
-			src.channels[ch_name] = keyslot1.channels[ch_name]
-
-		if(keyslot1.translate_binary)
-			src.translate_binary = 1
-
-		if(keyslot1.translate_hive)
-			src.translate_hive = 1
-
-		if(keyslot1.syndie)
-			src.syndie = 1
-
-	if(keyslot2)
-		for(var/ch_name in keyslot2.channels)
-			if(ch_name in src.channels)
-				continue
-			src.channels += ch_name
-			src.channels[ch_name] = keyslot2.channels[ch_name]
-
-		if(keyslot2.translate_binary)
-			src.translate_binary = 1
-
-		if(keyslot2.translate_hive)
-			src.translate_hive = 1
-
-		if(keyslot2.syndie)
-			src.syndie = 1
-
-
+	import_key_data(keyslot1)
+	import_key_data(keyslot2)
 	for (var/ch_name in channels)
 		if(!radio_controller)
 			sleep(30) // Waiting for the radio_controller to be created.
 		if(!radio_controller)
 			src.SetName("broken radio headset")
 			return
-
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 
 	if(setDescription)
 		setupRadioDescription()
 
-	return
+/obj/item/device/radio/headset/proc/import_key_data(obj/item/device/encryptionkey/key)
+	if(!key)
+		return
+	for(var/ch_name in key.channels)
+		if(ch_name in src.channels)
+			continue
+		src.channels[ch_name] = key.channels[ch_name]
+	if(key.translate_binary)
+		src.translate_binary = 1
+	if(key.translate_hive)
+		src.translate_hive = 1
+	if(key.syndie)
+		src.syndie = 1	
 
 /obj/item/device/radio/headset/proc/setupRadioDescription()
 	var/radio_text = ""
