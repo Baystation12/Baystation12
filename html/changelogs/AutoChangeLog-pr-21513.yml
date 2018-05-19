@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - bugfix: "The organ printer now prints visible organs."
