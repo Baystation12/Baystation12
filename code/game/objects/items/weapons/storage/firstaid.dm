@@ -252,3 +252,11 @@
 	desc = "Mild painkiller, also known as Tylenol. Won't fix the cause of your headache (unlike cyanide), but might make it bearable."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/paracetamol = 21)
+
+/obj/item/weapon/storage/pill_bottle/vietnam/paracetamol
+	name = "pill box of paracetamol"
+	desc = "Paracetamol pillbox, use it if you feel pain."
+	icon = 'icons/vietnam/usable/medical.dmi'
+	icon_state = "pillbox"
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/paracetamol = 21)
