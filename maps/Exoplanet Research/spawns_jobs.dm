@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 
 /datum/spawnpoint/facil_researcher
 	display_name =  "Research Facility Spawn"
-	restrict_job = list("Researcher")
+	restrict_job = list("Researcher","ODST Rifleman","ONI Officer")
 
 /datum/spawnpoint/facil_researcher/New()
 	..()
@@ -24,6 +24,33 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 
 	hierarchy_type = /decl/hierarchy/outfit/job
 
+/decl/hierarchy/outfit/job/facil_ODST
+	name = "ODST Rifleman"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	shoes = /obj/item/clothing/shoes/jungleboots
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/facil_ODSTO
+	name = "ONI Officer"
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	uniform = /obj/item/clothing/under/utility
+	shoes = /obj/item/clothing/shoes/dress
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/holster/thigh)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+
 /datum/job/researcher
 	title = "Researcher"
 	total_positions = 6
@@ -31,3 +58,22 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
 	selection_color = "#667700"
 	spawnpoint_override = "Research Facility Spawn"
+
+/datum/job/ODST
+	title = "ODST Rifleman"
+	total_positions = 4
+	spawn_positions = 4
+	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
+	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist")
+	selection_color = "#667700"
+	spawnpoint_override = "Research Facility Spawn"
+	is_whitelisted = 1
+
+/datum/job/ODSTO
+	title = "ONI Officer"
+	total_positions = 1
+	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO
+	selection_color = "#667700"
+	spawnpoint_override = "Research Facility Spawn"
+	is_whitelisted = 1
