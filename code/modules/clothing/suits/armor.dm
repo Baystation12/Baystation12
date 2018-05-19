@@ -478,3 +478,71 @@
 	desc = "A heavy armored vest in a light grey urban camo. It is surprisingly flexible and light, even with the extra webbing and advanced ceramic plates."
 	icon_state = "m_vest"
 	item_state = "m_vest"
+
+/obj/item/clothing/suit/armor/vietnam
+	icon = 'icons/vietnam/clothing/obj/suit.dmi'
+
+/obj/item/clothing/suit/armor/vietnam/Initialize()
+	. = ..()
+	if(!item_icons)
+		item_icons = list()
+	item_icons[slot_wear_suit_str] = 'icons/vietnam/clothing/mob/suit.dmi'
+
+/obj/item/clothing/suit/armor/vietnam/vest
+	name = "armored vest"
+	desc = "An armor vest made of synthetic fibers."
+	icon_state = "pasgt_olive"
+	armor = list(melee = 65, bullet = 40, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/vest
+	name = "armored vest"
+	desc = "An armor vest made of synthetic fibers."
+	icon_state = "pasgt_olive"
+	armor = list(melee = 45, bullet = 20, laser = 30, energy = 10, bomb = 15, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/armor/vietnam/vest/soviet6b2armor
+	name = "Soviet armor vest"
+	desc = "Typical soviet armor."
+	icon_state = "6b2"
+
+/obj/item/clothing/suit/storage/soviet6b2webbed
+	name = "Soviet webbed armor vest"
+	desc = "Typical soviet armor, this one have webbing"
+	icon_state = "6b2_webbed"
+	armor = list(melee = 25, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/armor/vietnam/vest/pilot
+	name = "Pilot vest"
+	desc = "Common American pilot vest."
+	icon_state = "pilotvest"
+
+/obj/item/clothing/suit/storage/usmcwebvest
+	name = "USMC webbing"
+	desc = "American webbing. This one have 2 slots"
+	icon_state = "usmc_webvest"
+
+/obj/item/clothing/suit/storage/bigusmcwebvest
+	name = "Big USMC webbing"
+	desc = "American webbing. This one have 4 slots"
+	icon_state = "usmc_webvest-big"
+
+/obj/item/clothing/suit/armor/vietnam/vest/pasgtpress
+	name = "Press armored vest"
+	desc = "Armored vest for correspondent."
+	icon_state = "pasgt_press"
+
+/obj/item/clothing/suit/armor/vietnam/vest/pasgtwoodland
+	name = "PASGT woodland"
+	desc = "American armor vest, this one camo."
+	icon_state = "pasgt_woodland"
+
+/obj/item/clothing/suit/armor/vietnam/vest/usmcarmor
+	name = "USMC armor vest"
+	desc = "American armor vest."
+	icon_state = "usmc_flakvest"
+
+/obj/item/clothing/suit/storage/chicom
+	name = "USMC officer webbing vest"
+	desc = "American officer webbing. This one have 4 slots"
+	icon_state = "chicom"
+	armor = list(melee = 35, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)

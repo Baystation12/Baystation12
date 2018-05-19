@@ -681,3 +681,60 @@
 	worn_state = "sterile"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 30, rad = 0)
+
+/obj/item/clothing/under/vietnam
+    icon = 'icons/vietnam/clothing/obj/uniform.dmi'
+
+/obj/item/clothing/under/vietnam/Initialize()
+	. = ..()
+	if(!item_icons)
+		item_icons = list()
+	item_icons[slot_w_uniform_str] = 'icons/vietnam/clothing/mob/uniform.dmi'
+
+/obj/item/clothing/under/vietnam/usmc_green_s
+	name = "USMC BDU"
+	desc = "Common american uniform."
+	icon_state = "usmc_green"
+	worn_state = "usmc_green"
+
+/obj/item/clothing/under/vietnam/usmc_camo_s
+	name = "USMC camo BDU"
+	desc = "Common american uniform, this one camo."
+	icon_state = "usmc_camo"
+	worn_state = "usmc_camo"
+
+/obj/item/clothing/under/vietnam/usmcpilot_s
+	name = "Pilot BDU"
+	desc = "Common american pilot uniform."
+	icon_state = "usmcpilot"
+	worn_state = "usmcpilot"
+
+/obj/item/clothing/under/vietnam/pressunder_s
+	name = "Press clothing"
+	desc = "American press clothing, nothing special."
+	icon_state = "pressunder"
+	worn_state = "pressunder"
+
+/obj/item/clothing/under/vietnam/partisan1
+	name = "Vietnam partisan clothing"
+	desc = "Gook uniform, this one have tag Made in Vietnam."
+	icon_state = "soviet_soldier"
+	worn_state = "soviet_soldier"
+
+/obj/item/clothing/under/vietnam/sovietofficer
+	name = "Soviet officer uniform"
+	desc = "USSR officer uniform, this one have tag Made in Soviet Union."
+	icon_state = "soviet_officer"
+	worn_state = "soviet_officer"
+
+/obj/item/clothing/under/vietnam/sovietsoldier1
+	name = "Soviet uniform"
+	desc = "USSR uniform, this one have tag Made in Soviet Union."
+	icon_state = "soviet_soldier"
+	worn_state = "soviet_soldier"
+
+/obj/item/clothing/under/vietnam/sovietsoldier2
+	name = "Soviet uniform"
+	desc = "USSR uniform, this one have tag Made in Soviet Union."
+	icon_state = "afganka_autumn_var1"
+	worn_state = "afganka_autumn_var1"
