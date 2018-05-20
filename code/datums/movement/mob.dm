@@ -50,7 +50,7 @@
 
 
 /datum/movement_handler/mob_living/death/DoMove()
-	if(living.stat == DEAD)
+	if(living.stat != DEAD)
 		return
 	living.ghostize()
 	return MOVEMENT_HANDLED
