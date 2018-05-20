@@ -7,14 +7,7 @@
 			to_chat(usr, "It is forbidden to possess singularities.")
 			return
 
-	var/turf/T = get_turf(O)
-
-	if(T)
-		log_admin("[key_name(usr)] has possessed [O] ([O.type]) at ([T.x], [T.y], [T.z])")
-		message_admins("[key_name(usr)] has possessed [O] ([O.type]) at ([T.x], [T.y], [T.z])", 1)
-	else
-		log_admin("[key_name(usr)] has possessed [O] ([O.type]) at an unknown location")
-		message_admins("[key_name(usr)] has possessed [O] ([O.type]) at an unknown location", 1)
+	log_and_message_admins("has possessed [O]")
 
 	if(!usr.control_object) //If you're not already possessing something...
 		usr.name_archive = usr.real_name
@@ -24,6 +17,7 @@
 	usr.SetName(O.name)
 	usr.client.eye = O
 	usr.control_object = O
+	usr.ReplaceMovementHandler(/datum/movement_handler/mob/admin_possess)
 	feedback_add_details("admin_verb","PO") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /proc/release(obj/O)
@@ -32,6 +26,7 @@
 	//usr.loc = get_turf(usr)
 
 	if(usr.control_object && usr.name_archive) //if you have a name archived and if you are actually relassing an object
+		usr.RemoveMovementHandler(/datum/movement_handler/mob/admin_possess)
 		usr.real_name = usr.name_archive
 		usr.SetName(usr.real_name)
 		if(ishuman(usr))

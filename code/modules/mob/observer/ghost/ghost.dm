@@ -11,6 +11,10 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	blinded = 0
 	anchored = 1	//  don't get pushed around
 	universal_speak = 1
+
+	mob_flags = MOB_FLAG_HOLY_BAD
+	movement_handlers = list(/datum/movement_handler/mob/incorporeal)
+
 	var/is_manifest = FALSE
 	var/next_visibility_toggle = 0
 	var/can_reenter_corpse
@@ -28,8 +32,6 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/seedarkness = 1
 
 	var/obj/item/device/multitool/ghost_multitool
-	incorporeal_move = 1
-
 	var/list/hud_images // A list of hud images
 
 /mob/observer/ghost/New(mob/body)
@@ -326,7 +328,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/add_memory()
 	set hidden = 1
 	to_chat(src, "<span class='warning'>You are dead! You have no mind to store memory!</span>")
-/mob/observer/ghost/Post_Incorpmove()
+/mob/observer/ghost/PostIncorporealMovement()
 	stop_following()
 
 /mob/observer/ghost/verb/analyze_air()
