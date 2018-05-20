@@ -266,7 +266,7 @@
 /obj/random/projectile/spawn_choices()
 	return list(/obj/item/weapon/gun/projectile/shotgun/pump = 3,
 				/obj/item/weapon/gun/projectile/automatic/c20r = 2,
-				/obj/item/weapon/gun/projectile/automatic/sts35 = 2,
+				/obj/item/weapon/gun/projectile/automatic/m16 = 2,
 				/obj/item/weapon/gun/projectile/automatic/z8 = 2,
 				/obj/item/weapon/gun/projectile/colt = 4,
 				/obj/item/weapon/gun/projectile/sec = 4,
