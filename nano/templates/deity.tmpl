@@ -20,7 +20,7 @@ Deity Menu. Three seperate modes within it, followers, shop, and phenomena.
 <div class="item">
 	{{:helper.link('Followers', 'person', {'switchMenu' : 0, 'menu' : 'menu'}, data.menu == 0 ? 'disabled' : null)}}
 	{{:helper.link('Shop', 'suitcase', {'switchMenu' : 1, 'menu' : 'menu'}, data.menu == 1 ? 'disabled' : null)}}
-	{{:helper.link('Phenomenas', 'star', {'switchMenu' : 2, 'menu' : 'menu'}, data.menu == 2 ? 'disabled' : null)}}
+	{{:helper.link('Phenomena', 'star', {'switchMenu' : 2, 'menu' : 'menu'}, data.menu == 2 ? 'disabled' : null)}}
 </div>
 <br>
 {{if data.menu == 0}}
@@ -60,7 +60,7 @@ Deity Menu. Three seperate modes within it, followers, shop, and phenomena.
 		There is nothing there!
 	{{/for}}
 {{else data.menu == 2}}
-	<h4>Phenomenas</h4>
+	<h4>Phenomena</h4>
 	<div class="item">
 		<div class="itemLabel">
 			Selected Phenomena:
@@ -74,7 +74,7 @@ Deity Menu. Three seperate modes within it, followers, shop, and phenomena.
 		</div>
 	</div>
 	<div class="item">
-		{{:helper.link('Phenomenas', 'star', {'switchMenu' : 0, 'menu' : 'phenomenaMenu'}, data.phenomenaMenu == 0 ? 'disabled' : null)}}
+		{{:helper.link('Phenomena', 'star', {'switchMenu' : 0, 'menu' : 'phenomenaMenu'}, data.phenomenaMenu == 0 ? 'disabled' : null)}}
 		{{:helper.link('Bindings', 'key', {'switchMenu' : 1, 'menu' : 'phenomenaMenu'}, data.phenomenaMenu == 1 ? 'disabled' : null)}}
 	</div>
 	{{if data.phenomenaMenu == 0}}
@@ -94,7 +94,7 @@ Deity Menu. Three seperate modes within it, followers, shop, and phenomena.
 				</div>
 			</div>
 		{{empty}}
-			<b>You don't have any phenomenas!</b>
+			<b>You don't have any phenomena!</b>
 		{{/for}}
 	{{else data.phenomenaMenu == 1}}
 		{{for data.bindings}}
