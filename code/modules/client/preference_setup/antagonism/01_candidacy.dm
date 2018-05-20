@@ -21,10 +21,12 @@
 		pref.never_be_special_role = list()
 
 	var/special_roles = valid_special_roles()
-	for(var/role in pref.be_special_role)
+	var/old_be_special_role = pref.be_special_role.Copy()
+	var/old_never_be_special_role = pref.never_be_special_role.Copy()
+	for(var/role in old_be_special_role)
 		if(!(role in special_roles))
 			pref.be_special_role -= role
-	for(var/role in pref.never_be_special_role)
+	for(var/role in old_never_be_special_role)
 		if(!(role in special_roles))
 			pref.never_be_special_role -= role
 
@@ -38,12 +40,12 @@
 		. += "<tr><td>[antag.role_text]: </td><td>"
 		if(jobban_isbanned(preference_mob(), antag.id) || (antag.id == MODE_MALFUNCTION && jobban_isbanned(preference_mob(), "AI")))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
-		else if(antag.role_type in pref.be_special_role)
-			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];del_special=[antag.role_type]'>Low</a> <a href='?src=\ref[src];add_never=[antag.role_type]'>Never</a></br>"
-		else if(antag.role_type in pref.never_be_special_role)
-			. += "<a href='?src=\ref[src];add_special=[antag.role_type]'>High</a> <a href='?src=\ref[src];del_special=[antag.role_type]'>Low</a> <span class='linkOn'>Never</span></br>"
+		else if(antag.id in pref.be_special_role)
+			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];del_special=[antag.id]'>Low</a> <a href='?src=\ref[src];add_never=[antag.id]'>Never</a></br>"
+		else if(antag.id in pref.never_be_special_role)
+			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <a href='?src=\ref[src];del_special=[antag.id]'>Low</a> <span class='linkOn'>Never</span></br>"
 		else
-			. += "<a href='?src=\ref[src];add_special=[antag.role_type]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];add_never=[antag.role_type]'>Never</a></br>"
+			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];add_never=[antag.id]'>Never</a></br>"
 		. += "</td></tr>"
 
 	var/list/ghost_traps = get_ghost_traps()
@@ -96,10 +98,8 @@
 /datum/category_item/player_setup_item/antagonism/candidacy/proc/valid_special_roles()
 	var/list/private_valid_special_roles = list()
 
-	var/list/all_antag_types = GLOB.all_antag_types_
-	for(var/antag_type in all_antag_types)
-		var/datum/antagonist/antag = all_antag_types[antag_type]
-		private_valid_special_roles += antag.role_type
+	for(var/antag_type in GLOB.all_antag_types_)
+		private_valid_special_roles += antag_type
 
 	var/list/ghost_traps = get_ghost_traps()
 	for(var/ghost_trap_key in ghost_traps)
