@@ -7,8 +7,8 @@
 	var/ID                         //A unique (per report) id; don't set manually.
 	var/needs_big_box = 0          //Suggests that the output won't look good in-line. Useful in nanoui logic.
 	var/ignore_value = 0           //Suggests that the value should not be displayed.
-	var/list/access_edit = list()  //The access required to edit the field.
-	var/list/access = list()       //The access required to view the field.
+	var/list/access_edit = list(list())  //The access required to edit the field.
+	var/list/access = list(list())       //The access required to view the field.
 
 /datum/report_field/New(datum/computer_file/report/report)
 	owner = report
@@ -18,15 +18,24 @@
 	owner = null
 	. = ..()
 
+//Access stuff. Can be given access constants or lists. See report access procs for documentation.
+/datum/report_field/proc/set_access(access, access_edit, override = 1)
+	if(access)
+		if(!islist(access))
+			access = list(access)
+		override ? (src.access = list(access)) : (src.access += list(access))
+	if(access_edit)
+		if(!islist(access_edit))
+			access_edit = list(access_edit)
+		override ? (src.access_edit = list(access_edit)) : (src.access_edit += list(access_edit))
+
 /datum/report_field/proc/verify_access(given_access)
-	if(!islist(given_access))
-		given_access = list(given_access)
-	return  has_access(access, list(), given_access)
+	return has_access_pattern(access, given_access)
 
 /datum/report_field/proc/verify_access_edit(given_access)
-	if(!islist(given_access))
-		given_access = list(given_access)
-	return  has_access(access_edit, list(), given_access)
+	if(!verify_access(given_access))
+		return
+	return has_access_pattern(access_edit, given_access)
 
 //Assumes the old and new fields are of the same type. Override if the field stores information differently.
 /datum/report_field/proc/copy_value(datum/report_field/old_field)

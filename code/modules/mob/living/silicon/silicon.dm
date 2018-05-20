@@ -57,7 +57,6 @@
 	create_or_rename_email(new_name, "root.rt")
 	if(istype(idcard))
 		idcard.registered_name = new_name
-		idcard.update_name()
 
 /mob/living/silicon/proc/init_id()
 	if(ispath(idcard))

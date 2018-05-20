@@ -18,20 +18,22 @@
 		</div>
 	{{/if}}
 	{{for data.fields}}
-		<div class='item'>
-			{{if value.access_edit}}
-				<div class='itemLabel'>{{:helper.link(value.name, 'pencil', {'edit_field' : value.ID}, null)}}</div>
-			{{else}}
-				<div class='itemLabel'>{{:value.name}}:</div>
-			{{/if}}
-			{{if value.needs_big_box}}
-				<div style="display: inline-block;">
-				{{:value.value}}
-				</div>
-			{{else}}
-				<div class='itemBody'>{{:value.value}}</div>
-			{{/if}}
-		</div>
+		{{if value.access}}
+			<div class='item'>
+				{{if value.access_edit}}
+					<div class='itemLabel'>{{:helper.link(value.name, 'pencil', {'edit_field' : value.ID}, null)}}</div>
+				{{else}}
+					<div class='itemLabel'>{{:value.name}}:</div>
+				{{/if}}
+				{{if value.needs_big_box}}
+					<div style="display: inline-block;">
+					{{:value.value}}
+					</div>
+				{{else}}
+					<div class='itemBody'>{{:value.value}}</div>
+				{{/if}}
+			</div>
+		{{/if}}
 	{{/for}}
 </div>
 {{else}}

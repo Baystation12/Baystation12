@@ -6844,6 +6844,7 @@
 /area/maintenance/thirddeck/forestarboard)
 "oa" = (
 /obj/structure/stairs/west,
+/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "ob" = (
@@ -7187,6 +7188,7 @@
 /area/hallway/primary/thirddeck/fore)
 "oT" = (
 /obj/effect/floor_decal/industrial/warning,
+/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
 "oU" = (
@@ -19971,6 +19973,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"VU" = (
+/obj/structure/railing/mapped,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/fore)
 "Wb" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/gym)
@@ -33967,7 +33973,7 @@ kI
 dx
 mi
 mX
-ob
+VU
 oT
 pO
 pM

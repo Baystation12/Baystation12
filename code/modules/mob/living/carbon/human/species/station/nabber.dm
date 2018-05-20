@@ -1,6 +1,6 @@
 /datum/species/nabber
 	name = SPECIES_NABBER
-	name_plural = "Giant Armoured Serpentids"
+	name_plural = "giant armoured serpentids"
 	blurb = "A species of large invertebrates who, after being discovered by a \
 	research company, were taught how to live and work with humans. Standing \
 	upwards of nine feet tall, these people have a tendency to terrify \
@@ -48,9 +48,12 @@
 	slowdown = -0.5
 	rarity_value = 4
 	hud_type = /datum/hud_data/nabber
+
 	total_health = 200
-	brute_mod = 0.85
+	brute_mod = 0.9
 	burn_mod =  1.35
+	natural_armour_values = list(melee = 30, bullet = 15, laser = 0, energy = 0, bomb = 30, bio = 100, rad = 10)
+
 	gluttonous = GLUT_SMALLER
 	mob_size = MOB_LARGE
 	strength = STR_HIGH
@@ -83,6 +86,7 @@
 		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_LIVER =    /obj/item/organ/internal/liver/nabber,
 		BP_PHORON =   /obj/item/organ/internal/phoron,
+		BP_ACETONE =  /obj/item/organ/internal/acetone,
 		BP_VOICE =    /obj/item/organ/internal/voicebox/nabber
 		)
 
@@ -98,6 +102,23 @@
 		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/nabber),
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/nabber),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/nabber)
+		)
+
+	bioprint_products = list(
+		BP_EYES =    list(/obj/item/organ/internal/eyes/nabber,         30),
+		BP_TRACH =   list(/obj/item/organ/internal/lungs/nabber,        40),
+		BP_HEART =   list(/obj/item/organ/internal/heart/open,          15),
+		BP_LIVER =   list(/obj/item/organ/internal/liver/nabber,        35),
+		BP_ACETONE = list(/obj/item/organ/internal/acetone,             50),
+		BP_HEAD    = list(/obj/item/organ/external/head/nabber,         90),
+		BP_L_ARM   = list(/obj/item/organ/external/arm/nabber,          75),
+		BP_R_ARM   = list(/obj/item/organ/external/arm/right/nabber,    75),
+		BP_L_LEG   = list(/obj/item/organ/external/leg/nabber,          75),
+		BP_R_LEG   = list(/obj/item/organ/external/leg/right/nabber,    75),
+		BP_L_FOOT   = list(/obj/item/organ/external/foot/nabber,        45),
+		BP_R_FOOT   = list(/obj/item/organ/external/foot/right/nabber,  45),
+		BP_L_HAND   = list(/obj/item/organ/external/hand/nabber,        45),
+		BP_R_HAND   = list(/obj/item/organ/external/hand/right/nabber,  45)
 		)
 
 	base_skin_colours = list(
@@ -201,8 +222,7 @@
 	if(istype(B,/obj/item/organ/internal/brain/nabber))
 		var/obj/item/organ/internal/brain/nabber/N = B
 
-		tally += N.lowblood_tally
-
+		tally += N.lowblood_tally * 2
 	return tally
 
 /obj/item/grab/nab/special

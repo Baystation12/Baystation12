@@ -19,21 +19,7 @@
 	var/printing
 
 	// These should be subtypes of /obj/item/organ
-	var/list/products = list(
-		BP_HEART   = list(/obj/item/organ/internal/heart,  25),
-		BP_LUNGS   = list(/obj/item/organ/internal/lungs,  25),
-		BP_KIDNEYS = list(/obj/item/organ/internal/kidneys,20),
-		BP_EYES    = list(/obj/item/organ/internal/eyes,   20),
-		BP_LIVER   = list(/obj/item/organ/internal/liver,  25),
-		BP_L_ARM   = list(/obj/item/organ/external/arm,  65),
-		BP_R_ARM   = list(/obj/item/organ/external/arm/right,  65),
-		BP_L_LEG   = list(/obj/item/organ/external/leg,  65),
-		BP_R_LEG   = list(/obj/item/organ/external/leg/right,  65),
-		BP_L_FOOT   = list(/obj/item/organ/external/foot,  40),
-		BP_R_FOOT   = list(/obj/item/organ/external/foot/right,  40),
-		BP_L_HAND   = list(/obj/item/organ/external/hand,  40),
-		BP_R_HAND   = list(/obj/item/organ/external/hand/right,  40)
-		)
+	var/list/products = list()
 
 /obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)
 	if(default_deconstruction_screwdriver(user, O))
@@ -75,12 +61,13 @@
 	print_delay = max(0,print_delay)
 	. = ..()
 
-/obj/machinery/organ_printer/attack_hand(mob/user)
+/obj/machinery/organ_printer/attack_hand(mob/user, var/choice = null)
 
 	if(printing || (stat & (BROKEN|NOPOWER)))
 		return
 
-	var/choice = input("What would you like to print?") as null|anything in products
+	if(!choice)
+		choice = input("What would you like to print?") as null|anything in products
 
 	if(!choice || printing || (stat & (BROKEN|NOPOWER)))
 		return
@@ -123,6 +110,22 @@
 	name = "prosthetic organ fabricator"
 	desc = "It's a machine that prints prosthetic organs."
 	icon_state = "roboprinter"
+
+	products = list(
+		BP_HEART    = list(/obj/item/organ/internal/heart,      25),
+		BP_LUNGS    = list(/obj/item/organ/internal/lungs,      25),
+		BP_KIDNEYS  = list(/obj/item/organ/internal/kidneys,    20),
+		BP_EYES     = list(/obj/item/organ/internal/eyes,       20),
+		BP_LIVER    = list(/obj/item/organ/internal/liver,      25),
+		BP_L_ARM    = list(/obj/item/organ/external/arm,        65),
+		BP_R_ARM    = list(/obj/item/organ/external/arm/right,  65),
+		BP_L_LEG    = list(/obj/item/organ/external/leg,        65),
+		BP_R_LEG    = list(/obj/item/organ/external/leg/right,  65),
+		BP_L_FOOT   = list(/obj/item/organ/external/foot,       40),
+		BP_R_FOOT   = list(/obj/item/organ/external/foot/right, 40),
+		BP_L_HAND   = list(/obj/item/organ/external/hand,       40),
+		BP_R_HAND   = list(/obj/item/organ/external/hand/right, 40)
+		)
 
 	var/matter_amount_per_sheet = 10
 	var/matter_type = DEFAULT_WALL_MATERIAL
@@ -175,12 +178,7 @@
 		/obj/item/weapon/reagent_containers/food/snacks/rawcutlet = 15
 		)
 	var/loaded_dna //Blood sample for DNA hashing.
-
-/obj/machinery/organ_printer/flesh/can_print(var/choice)
-	. = ..()
-	if(!loaded_dna || !loaded_dna["donor"])
-		visible_message("<span class='info'>\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'</span>")
-		return 0
+	var/datum/species/loaded_species //For quick refrencing
 
 /obj/machinery/organ_printer/flesh/mapped/Initialize()
 	. = ..()
@@ -201,22 +199,33 @@
 
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
 	var/obj/item/organ/O
-	var/weakref/W = loaded_dna["donor"]
-	var/mob/living/carbon/human/H = W.resolve()
-	if(H && istype(H))
-		if(H.species && H.species.has_organ[choice])
-			var/new_organ = H.species.has_organ[choice]
-			O = new new_organ(get_turf(src))
-			O.status |= ORGAN_CUT_AWAY
-		else
-			O = ..()
-		O.set_dna(H.dna)
-		if(O.species)
-			// This is a very hacky way of doing of what organ/New() does if it has an owner
-			O.w_class = max(O.w_class + mob_size_difference(O.species.mob_size, MOB_MEDIUM), 1)
+	var/weakref/R = loaded_dna["donor"]
+	var/mob/living/carbon/human/H = R.resolve()
+	if(loaded_species.has_organ[choice])
+		var/new_organ = loaded_species.has_organ[choice]
+		O = new new_organ(get_turf(src), given_dna = H.dna)
+		O.status |= ORGAN_CUT_AWAY
+	else
+		O = ..()
+	if(O.species)
+		// This is a very hacky way of doing of what organ/New() does if it has an owner
+		O.w_class = max(O.w_class + mob_size_difference(O.species.mob_size, MOB_MEDIUM), 1)
 
 	visible_message("<span class='info'>\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O].</span>")
 	return O
+
+/obj/machinery/organ_printer/flesh/attack_hand(mob/user)
+	if(!loaded_dna || !loaded_dna["donor"] || !loaded_species)
+		visible_message("<span class='info'>\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'</span>")
+		return
+
+	var/choice = input("What [loaded_species.name] organ would you like to print?") as null|anything in products
+
+	if(!choice)
+		return
+
+	..(user, choice)
+
 
 /obj/machinery/organ_printer/flesh/attackby(obj/item/weapon/W, mob/user)
 	// Load with matter for printing.
@@ -238,6 +247,11 @@
 		if(injected && injected.data)
 			loaded_dna = injected.data
 			to_chat(user, "<span class='info'>You inject the blood sample into the bioprinter.</span>")
+		var/weakref/R = loaded_dna["donor"]
+		var/mob/living/carbon/human/H = R.resolve()
+		if(H && istype(H) && H.species)
+			loaded_species = H.species
+			products = loaded_species.bioprint_products
 		return
 	return ..()
 // END FLESH ORGAN PRINTER

@@ -5,8 +5,8 @@
 	var/form_name = "AB1"                                  //Form code, for maximum bureaucracy.
 	var/creator                                            //The name of the mob that made the report.
 	var/file_time                                          //Time submitted.
-	var/list/access_edit = list()                          //The access required to submit the report.
-	var/list/access = list()                               //The access required to view the report.
+	var/list/access_edit = list(list())                    //The access required to submit the report. See documentation below.
+	var/list/access = list(list())                         //The access required to view the report.
 	var/list/datum/report_field/fields = list()            //A list of fields the report comes with, in order that they should be displayed.
 	var/ID_ticker = 1                                      //Used to name fields, for internal use only.
 
@@ -21,30 +21,38 @@
 /*
 Access stuff. The report's access/access_edit should control whether it can be opened/submitted.
 For field editing or viewing, use the field's access/access_edit permission instead.
-Recursive will add the access to all fields as well.
+The access system is based on "access patterns", lists of access values. 
+A user needs all access values in a pattern to be granted access.
+A user needs to only match one of the potentially several stored access patterns to be granted access.
+You must have access to have edit access.
+
+This proc resets the access to the report, resulting in just one access pattern for access/edit.
+Arguments can be access values (numbers) or lists of access values.
+If null is passed to one of the arguments, that access type is left alone. Pass list() to reset to no access needed instead.
+The recursive option resets access to all fields in the report as well.
+If the override option is set to 0, the access supplied will instead be added as another access pattern, rather than resetting the access.
 */
-/datum/computer_file/report/proc/set_access(access = list(), access_edit = list(), recursive = 1)
+/datum/computer_file/report/proc/set_access(access, access_edit, recursive = 1, override = 1)
 	if(access)
-		src.access = list()
-		src.access += access //works whether access is a list or not.
+		if(!islist(access))
+			access = list(access)
+		override ? (src.access = list(access)) : (src.access += list(access))  //Note that this is a list of lists.
 	if(access_edit)
-		src.access = list()
-		src.access_edit += access_edit
-	src.access_edit |= src.access
+		if(!islist(access_edit))
+			access_edit = list(access_edit)
+		override ? (src.access_edit = list(access_edit)) : (src.access_edit += list(access_edit))
 	if(recursive)
 		for(var/datum/report_field/field in fields)
-			field.access |= src.access
-			field.access_edit |= src.access_edit
+			field.set_access(access, access_edit, override)
 
+//Strongly recommended to use these procs to check for access. They can take access values (numbers) or lists of values.
 /datum/computer_file/report/proc/verify_access(given_access)
-	if(!islist(given_access))
-		given_access = list(given_access)
-	return  has_access(access, list(), given_access)
+	return has_access_pattern(access, given_access)
 
 /datum/computer_file/report/proc/verify_access_edit(given_access)
-	if(!islist(given_access))
-		given_access = list(given_access)
-	return  has_access(access_edit, list(), given_access)
+	if(!verify_access(given_access))
+		return //Need access for access_edit
+	return has_access_pattern(access_edit, given_access)
 
 //Looking up fields. Names might not be unique unless you ensure otherwise.
 /datum/computer_file/report/proc/field_from_ID(ID)

@@ -3,42 +3,42 @@
 	desc = "A headset for corporate drones."
 	icon_state = "nt_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_torchnt
+	ks1type = /obj/item/device/encryptionkey/headset_torchnt
 
 /obj/item/device/radio/headset/heads/torchcaptain
 	name = "commanding officer's headset"
 	desc = "The skipper's headset."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/torchcaptain
+	ks1type = /obj/item/device/encryptionkey/heads/torchcaptain
 
 /obj/item/device/radio/headset/heads/torchxo
 	name = "executive officer's headset"
 	desc = "The headset of the guy who will one day be CO."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/torchxo
+	ks1type = /obj/item/device/encryptionkey/heads/torchxo
 
 /obj/item/device/radio/headset/heads/torchntcommand
 	name = "nanotrasen command headset"
 	desc = "Headset of the corporate overlords."
 	icon_state = "nt_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_torchrd
+	ks1type = /obj/item/device/encryptionkey/headset_torchrd
 
 /obj/item/device/radio/headset/heads/cos
 	name = "chief of security's headset"
 	desc = "The headset of the man who protects your worthless lives."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/heads/hos
+	ks1type = /obj/item/device/encryptionkey/heads/hos
 
 /obj/item/device/radio/headset/headset_deckofficer
 	name = "deck officer's radio headset"
 	desc = "The headset of the chief box pusher."
 	icon_state = "cargo_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_deckofficer
+	ks1type = /obj/item/device/encryptionkey/headset_deckofficer
 
 /obj/item/weapon/storage/box/headset/torchxo
 	name = "box of spare executive officer headsets"
@@ -50,25 +50,25 @@
 	desc = "A headset with access to the command, engineering and exploration channels."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/bridgeofficer
+	ks1type = /obj/item/device/encryptionkey/bridgeofficer
 
 /obj/item/device/radio/headset/exploration
 	name = "exploration headset"
 	desc = "A headset for real tools, with access to the exploration channel."
 	icon_state = "srv_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/exploration
+	ks1type = /obj/item/device/encryptionkey/exploration
 
 /obj/item/device/radio/headset/pathfinder
 	name = "pathfinder's headset"
 	desc = "A headset with access to the command and exploration channels."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/pathfinder
+	ks1type = /obj/item/device/encryptionkey/pathfinder
 
 /obj/item/device/radio/headset/torchroboticist
 	name = "roboticist's headset"
 	desc = "A headset with access to the engineering and medical channels."
 	icon_state = "eng_headset"
 	item_state = "headset"
-	ks2type = /obj/item/device/encryptionkey/headset_torchroboticist
+	ks1type = /obj/item/device/encryptionkey/headset_torchroboticist

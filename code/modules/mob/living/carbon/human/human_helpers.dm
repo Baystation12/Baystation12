@@ -106,7 +106,6 @@
 			var/obj/item/weapon/card/id/ID = A
 			if(ID.registered_name == old_name)
 				ID.registered_name = new_name
-				ID.update_name()
 				search_id = 0
 		else if(search_pda && istype(A,/obj/item/modular_computer/pda))
 			var/obj/item/modular_computer/pda/PDA = A
