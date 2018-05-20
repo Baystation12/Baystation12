@@ -1,0 +1,6 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - tweak: "Borgs have had their overall health doubled."
+  - tweak: "Borgs also have had their armour plating component health doubled."
+  - tweak: "Borgs are now more resistant to EMP, and lose less cell charge per EMP."
