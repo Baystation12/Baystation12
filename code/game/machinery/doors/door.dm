@@ -1,6 +1,10 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 #define DOOR_REPAIR_AMOUNT 50	//amount of health regained per stack amount used
 
+//A = thing to open, B = how long until opening, C = if the opening is forced.
+#define OPEN_IN(A, B, C) addtimer(CALLBACK(A, /obj/machinery/door/proc/open, C), B)
+#define CLOSE_IN(A, B, C) addtimer(CALLBACK(A, /obj/machinery/door/proc/close, C), B)
+
 /obj/machinery/door
 	name = "Door"
 	desc = "It opens and closes."
