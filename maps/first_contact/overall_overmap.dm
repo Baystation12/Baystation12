@@ -23,7 +23,7 @@
 	fore_dir = WEST
 
 /obj/effect/overmap/ship/unsc_corvette
-	name = "UNSC Corvette"
+	name = "UNSC Thorin"
 	desc = "A standard contruction-model corvette."
 
 	icon = 'maps/first_contact/corvette.dmi'
