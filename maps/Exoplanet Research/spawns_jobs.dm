@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 
 /datum/spawnpoint/facil_researcher
 	display_name =  "Research Facility Spawn"
-	restrict_job = list("Researcher","ODST Rifleman","ONI Officer")
+	restrict_job = list("Researcher")
 
 /datum/spawnpoint/facil_researcher/New()
 	..()
@@ -14,6 +14,25 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 /obj/effect/landmark/start/facil_researcher/New()
 	..()
 	GLOB.facil_researcher_spawns += loc
+
+
+GLOBAL_LIST_EMPTY(facil_security_spawn)
+
+/datum/spawnpoint/facil_security_spawn
+	display_name = "Research Facility Security Spawn"
+	restrict_job = list("ODST Rifleman","ONI Officer")
+
+/datum/spawnpoint/facil_security_spawn/New()
+	..()
+	turfs = GLOB.facil_security_spawn
+
+/obj/effect/landmark/start/facil_security_spawn
+	name = "Research Facility Security Spawn"
+
+/obj/effect/landmark/start/facil_security_spawn/New()
+	..()
+	GLOB.facil_security_spawn += loc
+
 
 /decl/hierarchy/outfit/job/facil_researcher
 	name = "Researcher"
@@ -56,6 +75,7 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 	total_positions = 6
 	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
+	alt_titles = list("Physicist","Botanist","Chemist","Weapons Researcher","Artifact Analyser")
 	selection_color = "#667700"
 	access = list(309)
 	spawnpoint_override = "Research Facility Spawn"
@@ -68,7 +88,7 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist")
 	selection_color = "#667700"
 	access = list(309)
-	spawnpoint_override = "Research Facility Spawn"
+	spawnpoint_override = "Research Facility Security Spawn"
 	is_whitelisted = 1
 
 /datum/job/ODSTO
@@ -78,5 +98,5 @@ GLOBAL_LIST_EMPTY(facil_researcher_spawns)
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO
 	selection_color = "#667700"
 	access = list(309)
-	spawnpoint_override = "Research Facility Spawn"
+	spawnpoint_override = "Research Facility Security Spawn"
 	is_whitelisted = 1
