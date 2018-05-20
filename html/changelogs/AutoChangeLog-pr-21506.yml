@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Cryo tubes use up chemicals ten times faster. Effective healing rate remains unchanged."
+  - tweak: "Genetic damage is healed ten times faster in cryo tubes."
