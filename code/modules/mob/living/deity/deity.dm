@@ -92,7 +92,7 @@
 		var/icon/god_icon = icon('icons/mob/mob.dmi', initial(G.pylon_icon_state))
 		send_rsc(src,god_icon, "[god_name].png")
 		dat += {"<tr>
-					<td><a href="?src=\ref[src];form=ref\[G]">[god_name]</a></td>
+					<td><a href="?src=\ref[src];form=\ref[G]">[god_name]</a></td>
 					<td><img src="[god_name].png"></td>
 					<td>[initial(G.info)]</td>
 				</tr>"}
