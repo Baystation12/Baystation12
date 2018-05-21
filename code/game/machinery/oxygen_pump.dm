@@ -158,14 +158,17 @@
 	else
 		to_chat(user, "<span class='warning'>It is missing a tank!</span>")
 
-
 /obj/machinery/oxygen_pump/Process()
 	if(breather)
 		if(!can_apply_to_target(breather))
 			if(tank)
 				tank.forceMove(src)
-			breather.remove_from_mob(contained)
-			contained.forceMove(src)
+			if (breather.wear_mask==contained)
+				breather.remove_from_mob(contained)
+				contained.forceMove(src)
+			else
+				qdel(contained)
+				contained=new mask_type (src)
 			src.visible_message("<span class='notice'>\The [contained] rapidly retracts back into \the [src]!</span>")
 			breather = null
 			use_power = 1
