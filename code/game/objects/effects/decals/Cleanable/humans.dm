@@ -187,7 +187,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/gibs/Move()
 	..()
-	if(GLOB.cult.current_antagonists.len && isturf(loc))
+	if(GLOB.cult.current_antagonists.len && isturf(loc) && (locate(/obj/effect/rune/offering/) in view())) //Yes. It doesn't work in the dark. Shush.
 		loc.cultify()
 
 /obj/effect/decal/cleanable/blood/gibs/update_icon()
