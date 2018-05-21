@@ -65,9 +65,11 @@ GLOBAL_LIST_EMPTY(kigyar_pirate_spawns)
 	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/covenant/kigyar
 	suit = /obj/item/clothing/suit/armor/covenant/kigyar
-	back = null
+	suit_store = /obj/item/weapon/gun/energy/plasmapistol
+	back = /obj/item/weapon/gun/projectile/type51carbine
 	l_pocket = /obj/item/weapon/melee/energy/sword/pirate
-	belt= /obj/item/weapon/gun/energy/plasmapistol
+	r_pocket = /obj/item/ammo_magazine/type51mag
+	belt = /obj/item/ammo_magazine/type51mag
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
 	l_hand = /obj/item/language_learner/kigyar_to_common
