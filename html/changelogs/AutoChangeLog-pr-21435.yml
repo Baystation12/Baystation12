@@ -1,6 +1,0 @@
-author: "chaoko99"
-delete-after: True
-changes: 
-  - rscadd: "Fingerprints will no longer magically phase through gloves."
-  - tweak: "Robolimbs don't make fingerprints anymore."
-  - bugfix: "Thick gloves actually use thickmaterial."

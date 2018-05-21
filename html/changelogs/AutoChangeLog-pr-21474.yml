@@ -1,5 +1,0 @@
-author: "Cajoes"
-delete-after: True
-changes: 
-  - rscadd: "Snix, HotFoods and Lavatory vending machines and hid them on the map."
-  - tweak: "All snack food relative paths are now absolute paths. Nobody noticed nor cared."
