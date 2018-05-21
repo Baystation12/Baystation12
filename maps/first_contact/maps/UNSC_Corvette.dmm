@@ -66,7 +66,7 @@
 "bn" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bo" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bp" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/structure/table/rack,/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/glass{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/obj/item/stack/material/steel{amount = 50},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"bq" = (/obj/machinery/power/apc/super{name = "UNSC Corvette central power controller"; pixel_y = 32},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"bq" = (/obj/machinery/power/apc/super{name = "UNSC Corvette central power controller"; pixel_y = 32},/obj/structure/window/reinforced{dir = 4},/obj/structure/cable/blue{icon_state = "0-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "br" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bs" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 6},/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
 "bt" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
@@ -74,7 +74,7 @@
 "bv" = (/obj/machinery/atmospherics/pipe/tank/phoron,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bw" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bx" = (/obj/machinery/vending/tool,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"by" = (/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"by" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bz" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
 "bA" = (/obj/structure/window/reinforced/treated{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/treated,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 5},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
 "bB" = (/obj/structure/closet,/obj/item/clothing/head/helmet/marine/visor,/obj/item/clothing/shoes/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/under/unsc/marine_fatigues,/obj/item/clothing/head/helmet/marine,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
@@ -98,13 +98,13 @@
 "bT" = (/obj/machinery/door/blast/regular{id = "abull"; name = "Armored Bull"},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/grille,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bU" = (/obj/machinery/door/blast/regular{id = "abull"; name = "Armored Bull"},/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/grille,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bV" = (/obj/machinery/door/blast/regular{id = "abull"; name = "Armored Bull"},/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/grille,/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"bW" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"bW" = (/obj/machinery/door/airlock/halo{name = "Armory"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bX" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "bY" = (/obj/structure/cable/blue{d1 = 2; d2 = 32; icon_state = "32-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
 "bZ" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
 "ca" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
 "cb" = (/obj/machinery/door/blast/regular{id = "abull"; name = "Armored Bull"},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/grille,/obj/structure/window/reinforced/projresist{dir = 4; icon_state = "rwindow"; tag = "icon-rwindow (WEST)"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"cc" = (/obj/machinery/computer/station_alert/all,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"cc" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/structure/table/standard,/obj/machinery/photocopier/faxmachine{department = "UNSC Thorin"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "cd" = (/obj/machinery/computer/telecomms/monitor,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "ce" = (/obj/structure/closet,/obj/item/clothing/mask/marine,/obj/item/clothing/head/helmet/marine/visor,/obj/item/clothing/shoes/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/under/unsc/marine_fatigues,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "cf" = (/obj/structure/bed,/obj/item/weapon/bedsheet/green,/obj/structure/closet/walllocker{pixel_x = 0; pixel_y = -32},/obj/effect/landmark/start/corvette_crew,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
@@ -171,22 +171,33 @@
 "do" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
 "dp" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
 "dq" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"dr" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/machinery/overmap_weapon_console/mac,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
-"ds" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"dt" = (/obj/machinery/vending/wallmed1{name = "NanoMed Wall"; pixel_y = -32},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"du" = (/obj/machinery/light,/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol)
-"dv" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/mac_cannon/capacitor{tag = "icon-mac_capacitor (WEST)"; icon_state = "mac_capacitor"; dir = 8},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
-"dw" = (/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
-"dx" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 9},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dy" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/mac_cannon/accelerator{tag = "icon-mac_accelerator (EAST)"; icon_state = "mac_accelerator"; dir = 4},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
-"dz" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/projresist,/obj/machinery/mac_cannon/capacitor{tag = "icon-mac_capacitor (WEST)"; icon_state = "mac_capacitor"; dir = 8},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
-"dA" = (/obj/machinery/mac_cannon/ammo_loader,/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
-"dB" = (/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dC" = (/obj/docking_umbilical/south{name = "Starboard Docking Umbilical"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dD" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dE" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 10},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dF" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dG" = (/obj/effect/overmap/ship/unsc_corvette,/turf/space,/area/space)
+"dr" = (/obj/machinery/mac_cannon/capacitor{tag = "icon-mac_capacitor (WEST)"; icon_state = "mac_capacitor"; dir = 8},/obj/structure/cable/blue{d1 = 2; d2 = 32; icon_state = "32-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"ds" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/machinery/overmap_weapon_console/mac,/obj/structure/cable/blue{icon_state = "0-4"},/obj/structure/cable/blue{d1 = 2; d2 = 32; icon_state = "32-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dt" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"du" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"dv" = (/obj/machinery/vending/wallmed1{name = "NanoMed Wall"; pixel_y = -32},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"dw" = (/obj/machinery/light,/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol)
+"dx" = (/obj/machinery/mac_cannon/capacitor{tag = "icon-mac_capacitor (WEST)"; icon_state = "mac_capacitor"; dir = 8},/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dy" = (/obj/machinery/mac_cannon/capacitor{tag = "icon-mac_capacitor (WEST)"; icon_state = "mac_capacitor"; dir = 8},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dz" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/mac_cannon/capacitor{tag = "icon-mac_capacitor (WEST)"; icon_state = "mac_capacitor"; dir = 8},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dA" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dB" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dC" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 9},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dD" = (/obj/machinery/mac_cannon/accelerator{tag = "icon-mac_accelerator (EAST)"; icon_state = "mac_accelerator"; dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dE" = (/obj/machinery/mac_cannon/accelerator{tag = "icon-mac_accelerator (EAST)"; icon_state = "mac_accelerator"; dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dF" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/mac_cannon/accelerator{tag = "icon-mac_accelerator (EAST)"; icon_state = "mac_accelerator"; dir = 4},/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dG" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dH" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/projresist,/obj/machinery/mac_cannon/capacitor{tag = "icon-mac_capacitor (WEST)"; icon_state = "mac_capacitor"; dir = 8},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dI" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dJ" = (/obj/machinery/mac_cannon/capacitor{tag = "icon-mac_capacitor (WEST)"; icon_state = "mac_capacitor"; dir = 8},/obj/structure/cable/blue,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dK" = (/obj/machinery/mac_cannon/ammo_loader,/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/cable/blue{icon_state = "0-4"},/obj/structure/cable/blue,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"dL" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dM" = (/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dN" = (/obj/docking_umbilical/south{name = "Starboard Docking Umbilical"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dO" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dP" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 10},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dQ" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dR" = (/obj/effect/overmap/ship/unsc_corvette,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -247,14 +258,14 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaFbfaZaZaZbQbrauaFcVcWcXaFcYcZababababababab
 aaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeabaFauauauauaFaKauaFaFaFaFaFaFaFaFdadbdcdddedfdcdgabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaalaeaeaeaeaeaeaeabaFcecfcecfaFaKauaFdhdidjdkdldmaFdadbaFdbdndbaFaFabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaalalababababababababaFaFaFaFaFaFbwauaFdodldpdldldqaFdadbaFdbdndbdcdgababababababacadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaalalabaCaCaCaCaCaCaCdrafbZafafaFaKauaFdsdldpdldtdmaFdadudcdbdnduaFaFabajajajajabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaalalalabaCaCaCaCaCaCaCdvafafafdwbgbrauaFaFaFbiaFaFaFaFaFaFaFaFbiaFaFaFabaqarasdxabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaalalalalaWaWaWaWaWaWaWaWdyafafafafaFbFaZaZaZaZcuaZaZaZaZaZaZaZaZcuaZaZaZaZcBauaLauabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaalalalabaCaCaCaCaCaCaCdzafafafafaFauauauboauauauauboauauauauboauauauaucAaKauaSaTaUaVadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaalalabaCaCaCaCaCaCaCdAafcUafafabaDaEaDababababababababababaFbWaFaFaFabaKaubeauabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaalalababababababababababababababauauauabaaaaaaaaaaaaaaaaabauauauauauabdBauaAaBabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaalaeaeaeaeaeaeaeaeaeaeaeaeaeababdCababaaaaaaaaaaaaaaaaabdDdDdDdDdDabbkblasdEabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaeaeaeaeaeaeabababababaaaaaaaaaaaaaaaaabdDdDdFdDdDabbvbvbvbvabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaalalabdrdrdrdrdrdrdrdsdtbZafafaFaKauaFdudldpdldvdmaFdadwdcdbdndwaFaFabajajajajabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalalabdxdydydydydydydzdAdBdBdBbgbrauaFaFaFbiaFaFaFaFaFaFaFaFbiaFaFaFabaqarasdCabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaalalalaldDdEdEdEdEdEdEdEdFdGafafafaFbFaZaZaZaZcuaZaZaZaZaZaZaZaZcuaZaZaZaZcBauaLauabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalalabdydydydydydydydHdIafafafaFauauauboauauauauboauauauauboauauauaucAaKauaSaTaUaVadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaalalabdJdJdJdJdJdJdJdKcvcUafafabaDaEaDababababababababababaFdLaFaFaFabaKaubeauabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaalalababababababababababababababauauauabaaaaaaaaaaaaaaaaabauauauauauabdMauaAaBabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaalaeaeaeaeaeaeaeaeaeaeaeaeaeababdNababaaaaaaaaaaaaaaaaabdOdOdOdOdOabbkblasdPabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaeaeaeaeaeaeabababababaaaaaaaaaaaaaaaaabdOdOdQdOdOabbvbvbvbvabakadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababbAadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -288,5 +299,5 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-dGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+dRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

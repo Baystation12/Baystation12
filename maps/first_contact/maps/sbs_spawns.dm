@@ -9,7 +9,7 @@ GLOBAL_LIST_EMPTY(civ_crew_spawns)
 	turfs = GLOB.civ_crew_spawns
 
 /obj/effect/landmark/start/civ_crew
-	name = "Civilian Ship Captain"
+	name = "Civilian Ship Crew"
 
 /obj/effect/landmark/start/civ_crew/New()
 	..()
