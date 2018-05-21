@@ -58,13 +58,14 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ODSTO
-	name = "ONI Officer"
+	name = "ODST Squad Leader"
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	uniform = /obj/item/clothing/under/utility
-	shoes = /obj/item/clothing/shoes/dress
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	shoes = /obj/item/clothing/shoes/jungleboots
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
-	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -93,11 +94,11 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 	is_whitelisted = 1
 
 /datum/job/ODSTO
-	title = "ONI Officer"
+	title = "ODST Squad Leader"
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO
 	selection_color = "#667700"
-	access = list(309)
+	access = list(309,310)
 	spawnpoint_override = "Research Facility Security Spawn"
 	is_whitelisted = 1
