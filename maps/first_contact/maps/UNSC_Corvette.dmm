@@ -137,7 +137,7 @@
 "cG" = (/obj/machinery/button/remote/blast_door{id = "abull"; name = "Armored Bull"},/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol)
 "cH" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
 "cI" = (/obj/vehicles/air/overmap/pelican/unsc{tag = "icon-base (EAST)"; icon_state = "base"; dir = 4},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
-"cJ" = (/obj/item/modular_computer/console/preset/sysadmin,/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"cJ" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/light,/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "cK" = (/obj/item/modular_computer/console/preset/sysadmin,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "cL" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "cM" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 6},/obj/structure/cable/blue{icon_state = "0-4"},/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
