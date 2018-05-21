@@ -211,11 +211,11 @@
 
 		if("mov_intent")
 			switch(usr.m_intent)
-				if("run")
-					usr.m_intent = "walk"
+				if(M_RUN)
+					usr.m_intent = M_WALK
 					usr.hud_used.move_intent.icon_state = "walking"
-				if("walk")
-					usr.m_intent = "run"
+				if(M_WALK)
+					usr.m_intent = M_RUN
 					usr.hud_used.move_intent.icon_state = "running"
 
 		if("Reset Machine")

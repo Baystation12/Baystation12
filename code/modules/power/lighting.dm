@@ -136,7 +136,7 @@
 	name = "light fixture"
 	icon = 'icons/obj/lighting.dmi'
 	var/base_state = "tube"		// base description and icon_state
-	icon_state = "tube1"
+	icon_state = "tube_map"
 	desc = "A lighting fixture."
 	anchored = 1
 	plane = ABOVE_HUMAN_PLANE
@@ -159,7 +159,7 @@
 
 // the smaller bulb light fixture
 /obj/machinery/light/small
-	icon_state = "bulb1"
+	icon_state = "bulb_map"
 	base_state = "bulb"
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
@@ -200,21 +200,28 @@
 	. = ..()
 
 /obj/machinery/light/update_icon(var/trigger = 1)
-
+	overlays = overlays.Cut()
+	icon_state = "[base_state]_empty" //Never use the initial state. That'll just reset it to the mapping icon.
+	var/_state
 	switch(get_status())		// set icon_states
 		if(LIGHT_OK)
-			icon_state = "[base_state][on]"
+			_state = "[base_state][on]"
 		if(LIGHT_EMPTY)
-			icon_state = "[base_state]-empty"
 			on = 0
 		if(LIGHT_BURNED)
-			icon_state = "[base_state]-burned"
+			_state = "[base_state]-burned"
 			on = 0
 		if(LIGHT_BROKEN)
-			icon_state = "[base_state]-broken"
+			_state = "[base_state]-broken"
 			on = 0
 
+	if(istype(lightbulb, /obj/item/weapon/light/))
+		var/image.I = image(icon, src, _state)
+		I.color = lightbulb.b_colour
+		overlays += I
+
 	if(on)
+
 		use_power = 2
 
 		var/changed = 0
@@ -532,7 +539,7 @@
 	var/rigged = 0		// true if rigged to explode
 	var/broken_chance = 2
 
-	var/b_max_bright = 0.9
+	var/b_max_bright = 0.7
 	var/b_inner_range = 1
 	var/b_outer_range = 5
 	var/b_curve = 2
@@ -555,6 +562,10 @@
 		)
 	sound_on = 'sound/machines/lightson.ogg'
 
+/obj/item/weapon/light/tube/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
+	. = ..()
+	b_colour = rgb(pick(0,255), pick(0,255), pick(0,255))
+
 /obj/item/weapon/light/tube/large
 	w_class = ITEM_SIZE_SMALL
 	name = "large light tube"
@@ -563,13 +574,17 @@
 	b_outer_range = 8
 	b_curve = 2.5
 
+/obj/item/weapon/light/tube/large/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
+	. = ..()
+	b_colour = rgb(pick(0,255), pick(0,255), pick(0,255))
+
 /obj/item/weapon/light/bulb
 	name = "light bulb"
 	desc = "A replacement light bulb."
 	icon_state = "lbulb"
 	base_state = "lbulb"
 	item_state = "contvapour"
-	broken_chance = 5
+	broken_chance = 3
 	matter = list("glass" = 100)
 
 	b_max_bright = 0.6
@@ -604,6 +619,8 @@
 
 // update the icon state and description of the light
 /obj/item/weapon/light/update_icon()
+	color = b_colour
+	var/broken
 	switch(status)
 		if(LIGHT_OK)
 			icon_state = base_state
@@ -614,6 +631,10 @@
 		if(LIGHT_BROKEN)
 			icon_state = "[base_state]-broken"
 			desc = "A broken [name]."
+			broken = TRUE
+	var/image/I = image(icon, src, "[base_state]_attachment[broken ? "_broken" : ""]")
+	I.color = null
+	overlays += I
 
 /obj/item/weapon/light/New(atom/newloc, obj/machinery/light/fixture = null)
 	..()

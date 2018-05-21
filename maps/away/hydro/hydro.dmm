@@ -1273,16 +1273,18 @@
 /turf/simulated/floor/bluegrid,
 /area/hydro/station/growC)
 "md" = (
-/obj/machinery/power/solar_control/autostart{
-	id = "hydrosolar";
-	track = 2
-	},
 /obj/structure/window/phoronreinforced{
 	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/structure/cable,
 /obj/structure/catwalk,
+/obj/machinery/power/solar_control/autostart{
+	icon_state = "solar";
+	dir = 4;
+	id = "hydrosolar";
+	track = 2
+	},
 /turf/simulated/floor/fixed/alium,
 /area/hydro/station/processing)
 "me" = (

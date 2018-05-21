@@ -96,7 +96,7 @@
 /obj/item/weapon/beartrap/Crossed(AM as mob|obj)
 	if(deployed && isliving(AM))
 		var/mob/living/L = AM
-		if(L.m_intent == "run")
+		if(L.m_intent == M_RUN)
 			L.visible_message(
 				"<span class='danger'>[L] steps on \the [src].</span>",
 				"<span class='danger'>You step on \the [src]!</span>",

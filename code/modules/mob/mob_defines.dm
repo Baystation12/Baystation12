@@ -8,6 +8,10 @@
 
 	virtual_mob = /mob/observer/virtual/mob
 
+	movement_handlers = list(/datum/movement_handler/mob/eye)
+
+	var/mob_flags
+
 	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
 	var/datum/mind/mind
 
@@ -70,8 +74,7 @@
 	var/lying = 0
 	var/lying_prev = 0
 	var/canmove = 1
-	//Allows mobs to move through dense areas without restriction. For instance, in space or out of holder objects.
-	var/incorporeal_move = 0 //0 is off, 1 is normal, 2 is for ninjas.
+
 	var/unacidable = 0
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
@@ -92,7 +95,7 @@
 
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living
-	var/m_intent = "run"//Living
+	var/m_intent = M_RUN//Living
 	var/obj/buckled = null//Living
 	var/obj/item/l_hand = null//Living
 	var/obj/item/r_hand = null//Living
@@ -162,5 +165,5 @@
 	var/flavor_text = ""
 
 	var/nabbing = 0  // Whether a creature with a CAN_NAB tag is grabbing normally or in nab mode.
-	
+
 	var/datum/skillset/skillset = /datum/skillset
