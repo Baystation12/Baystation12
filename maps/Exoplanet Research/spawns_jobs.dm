@@ -37,8 +37,9 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 /decl/hierarchy/outfit/job/facil_researcher
 	name = "Researcher"
 
+	l_ear = /obj/item/device/radio/headset/unsc
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
-
+	pda_slot = null
 	flags = 0
 
 	hierarchy_type = /decl/hierarchy/outfit/job
@@ -50,7 +51,7 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	shoes = /obj/item/clothing/shoes/jungleboots
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -63,7 +64,7 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 	shoes = /obj/item/clothing/shoes/dress
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
-	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/holster/thigh)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -85,7 +86,7 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 	total_positions = 4
 	spawn_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
-	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist")
+	alt_titles = list("ODST Medic","ODST CQC Specialist")
 	selection_color = "#667700"
 	access = list(309)
 	spawnpoint_override = "Research Facility Security Spawn"

@@ -5,6 +5,8 @@
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/command
 	shoes = /obj/item/clothing/shoes/brown
+	pda_slot = null
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -15,7 +17,8 @@
 	uniform = /obj/item/clothing/under/unsc/technician
 	shoes = /obj/item/clothing/shoes/workboots
 	belt = /obj/item/weapon/storage/belt/utility/full
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
+	pda_slot = null
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
