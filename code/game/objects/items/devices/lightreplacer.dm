@@ -77,7 +77,7 @@
 				S.remove_from_storage(L, T)
 				qdel(L)
 		if(amt_inserted)
-			to_chat(user, "You insert [amt_inserted] light[uses > 1 ? "s" : ""] into \The [src]. It has [uses] light[uses > 1 ? "s" : ""] remaining.")
+			to_chat(user, "You insert [amt_inserted] light\s into \The [src]. It has [uses] light\s remaining.")
 			add_fingerprint(user)
 			return
 
