@@ -9,7 +9,7 @@
 	density = 1
 	fired_projectile = /obj/item/projectile/overmap/npc_comms_projectile
 
-	var/authority_level = 0 //How much authority this console broadcasts, scaling from civillian, to innie, to unsc to ONI.
+	var/authority_level = 0 //How much authority this console broadcasts, scaling from Civilian, to innie, to unsc to ONI.
 
 /obj/item/projectile/overmap/npc_comms_projectile
 	invisibility = 101

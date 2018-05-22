@@ -1,7 +1,7 @@
 /datum/species/sangheili
 	name = "Sangheili"
 	name_plural = "Sangheili"
-	blurb = "Shouldn't be seeing this." // Doesn't appear in chargen
+	blurb = ""
 	flesh_color = "#4A4A64"
 	blood_color = "#4A4A64"
 	icobase = 'code/modules/halo/icons/species/r_elite.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
@@ -15,6 +15,7 @@
 	spawn_flags = SPECIES_IS_WHITELISTED
 	brute_mod = 0.9
 	pain_mod = 0.5 //Pain has half an effect on them.
+	slowdown = -1 //negates noshoes
 	item_icon_offsets = list(-1,2)
 
 	has_organ = list(

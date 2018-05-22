@@ -14,7 +14,7 @@
 
 	active = 0
 
-	var/faction = null //The faction this vehicle belongs to. Setting this will restrict landing to faction-owned and civillian points only
+	var/faction = null //The faction this vehicle belongs to. Setting this will restrict landing to faction-owned and Civilian points only
 
 	var/takeoff_overlay_icon_state
 	var/takeoff_sound

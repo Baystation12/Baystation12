@@ -1,7 +1,7 @@
 
 /obj/effect/landmark/dropship_land_point
 	name = "Dropship Land Point"
-	var/faction = "civillian"//The faction this landing point belongs to. Null for all-factions.
+	var/faction = "Civilian"//The faction this landing point belongs to. Null for all-factions.
 	var/active = 1 //Is this landing point available.
 	var/occupied = 0 //Is this landing point currently occupied?
 

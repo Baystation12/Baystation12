@@ -549,7 +549,7 @@
 /obj/machinery/button/windowtint/update_icon()
 	icon_state = "light[active]"
 
-obj/structure/window/reinforced/treated
+/obj/structure/window/reinforced/treated
 	name = "treated window"
 	desc = "It looks so dense it's almost solid. Nothing short of a rocket will break it."
 	maxhealth = 400
@@ -559,3 +559,16 @@ obj/structure/window/reinforced/treated
 	maximal_heat = T0C + 750
 	damage_per_fire_tick = 2.0
 	glasstype = /obj/item/stack/material/glass/reinforced
+
+/obj/structure/window/reinforced/projresist
+	name = "coated window"
+	desc = "A thin sheen covers this window. It looks incredibly hard to destroy with guns."
+	maxhealth = 500
+	icon_state = "rwindow"
+	basestate = "rwindow"
+	reinf = 1
+	damage_per_fire_tick = 0
+	glasstype = /obj/item/stack/material/glass/reinforced
+
+/obj/structure/window/reinforced/projresist/bullet_act(var/obj/item/projectile/p)
+	visible_message("<span class = 'danger'>[name] doesn't appear to take any damage from [p.name]</span>")
