@@ -95,13 +95,14 @@ GLOBAL_LIST_EMPTY(kigyar_pirate_spawns)
 	total_positions = 4
 	spawn_positions = 4
 	outfit_type = /decl/hierarchy/outfit/kigyarpirate
-	selection_color = "#667700"
+	selection_color = "#f7e5e5"
 	spawnpoint_override = "Kig-Yar Pirate Spawn"
 
 /datum/job/covenant/kigyarpirate/captain
 	title = "Kig-Yar Ship - Captain"
 	total_positions = 1
 	spawn_positions = 1
+	selection_color = "#f7e5e5"
 	outfit_type = /decl/hierarchy/outfit/kigyarpirate/captain
 	spawnpoint_override = "Kig-Yar Pirate Spawn"
 
@@ -109,5 +110,6 @@ GLOBAL_LIST_EMPTY(kigyar_pirate_spawns)
 	title = "Kig-Yar Ship - Unggoy Crewmember"
 	total_positions = 2
 	spawn_positions = 2
+	selection_color = "#f7e5e5"
 	outfit_type = /decl/hierarchy/outfit/unggoy_deacon_observer
 	spawnpoint_override = "Kig-Yar Pirate Spawn"
