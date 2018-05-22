@@ -44,23 +44,23 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 
 	// Medical record
 	set_bloodtype(H ? H.b_type : "Unset")
-	set_medRecord((H && H.med_record && !jobban_isbanned(H, "Records") ? H.med_record : "No record supplied"))
+	set_medRecord((H && H.med_record && !jobban_isbanned(H, "Records") ? html_decode(H.med_record) : "No record supplied"))
 
 	// Security record
 	set_criminalStatus(GLOB.default_security_status)
 	set_dna(H ? H.dna.unique_enzymes : "")
 	set_fingerprint(H ? md5(H.dna.uni_identity) : "")
-	set_secRecord(H && H.sec_record && !jobban_isbanned(H, "Records") ? H.sec_record : "No record supplied")
+	set_secRecord(H && H.sec_record && !jobban_isbanned(H, "Records") ? html_decode(H.sec_record) : "No record supplied")
 
 	// Employment record
-	set_emplRecord(H && H.gen_record && !jobban_isbanned(H, "Records") ? H.gen_record : "No record supplied")
-	set_homeSystem(H ? H.home_system : "Unset")
-	set_citizenship(H ? H.citizenship : "Unset")
-	set_faction(H ? H.personal_faction : "Unset")
-	set_religion(H ? H.religion : "Unset")
+	set_emplRecord(H && H.gen_record && !jobban_isbanned(H, "Records") ? html_decode(H.gen_record) : "No record supplied")
+	set_homeSystem(H ? html_decode(H.home_system) : "Unset")
+	set_citizenship(H ? html_decode(H.citizenship) : "Unset")
+	set_faction(H ? html_decode(H.personal_faction) : "Unset")
+	set_religion(H ? html_decode(H.religion) : "Unset")
 
 	// Antag record
-	set_antagRecord(H && H.exploit_record && !jobban_isbanned(H, "Records") ? H.exploit_record : "")
+	set_antagRecord(H && H.exploit_record && !jobban_isbanned(H, "Records") ? html_decode(H.exploit_record) : "")
 
 // Global methods
 // Used by character creation to create a record for new arrivals.
