@@ -223,3 +223,27 @@
 		else
 			M.emitter_blasts_taken += 2
 	. = ..()
+
+/obj/item/projectile/beam/blood
+	name = "arkhanian blood beam"
+	icon_state = "blood"
+	damage = 5 //Not intended to really kill as much as deterr. It'll also bleed people!
+	sharp = TRUE
+	edge = TRUE
+	damage_type = BRUTE
+	kill_count = 10
+	accuracy = 1 //Minorly inaccurate.
+	dispersion = 50 //Spreads out.
+	muzzle_type = /obj/effect/projectile/blood
+	tracer_type = /obj/effect/projectile/blood
+	impact_type = /obj/effect/projectile/blood
+
+/obj/item/projectile/beam/blood/on_impact(var/atom/A)
+	if(!ismob(A))
+		A.cultify()
+	if(iscultist(A)) //Someone got in the way.
+		var/mob/living/M = A
+		M.heal_overall_damage(5, 5) //No real way to do this on purpose, so it may as well mean something.
+		to_chat(M, "<span class = 'notice'>You feel an unholy warmth filling you from where \The [src] breaches your body. Your wounds close, and your burns heal.</span>")
+	else
+		..()

@@ -39,7 +39,7 @@
 	else if(tome_required && mob_needs_tome())
 		to_chat(src, "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>")
 		return
-	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
+	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/storage/hooded/cultrobes)  && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
 		has_robes = 1
 	var/turf/T = get_turf(src)
 	if(T.holy)
@@ -56,6 +56,16 @@
 	var/self
 	var/timer
 	var/damage = 1
+
+	if(iscarbon(src)) //Being on antidepressants will stop you from making runes. A metagaming-free solution to cultists, just in case the pesky therapist took the Chaplain's slot.
+		var/mob/living/carbon/C = src
+		if(C.chem_effects[CE_MIND] > 0 && prob(90))
+			C.visible_message(\
+			"[C.name] looks as if \He is [pick("contemplating", "pondering", "considering")] something, and decides to stop.", \
+			"<span class = 'notice'>You try to remember the Geometer's sigils, and the ritual that binds them, but your mind wavers, and you question your reality briefly instead.</span>"
+			)
+			return FALSE
+
 	if(has_tome)
 		if(has_robes && cult_ground)
 			self = "Feeling greatly empowered, you slice open your finger and make a rune on the engraved floor. It shifts when your blood touches it, and starts vibrating as you begin to chant the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."
@@ -92,12 +102,29 @@
 		pay_for_rune(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
+
 		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
+		move_rune_afore(R)
 		var/area/A = get_area(R)
 		log_and_message_admins("created \an [R.cultname] rune at \the [A.name] - [loc.x]-[loc.y]-[loc.z].")
 		R.add_fingerprint(src)
 		return 1
 	return 0
+
+/mob/proc/move_rune_afore(var/obj/O) //A stupid, stupid handler for planting a rune in front of you.
+	if(!istype(O, /obj/effect/rune))
+		return
+	var/obj/effect/rune/R = O
+	var/turf/T = get_step(src, dir)
+	if(locate(/obj/effect/rune) in T) //This could probably be a loop.
+		T = get_turf(src)
+		if(locate(/obj/effect/rune) in T)
+			return
+	else
+		if(iswall(T) && R.wall_writable)
+			R.forceMove(T) //Drawing on walls. Yes, this allows you to use spells from both sides. No, I don't want to deal with wall attachment bullshit and pixel math.
+		else
+			step(R, dir, 32) //Yes, this is dumb. It does, however, respect solid objects.
 
 /mob/living/carbon/human/make_rune(var/rune, var/cost, var/tome_required)
 	if(should_have_organ(BP_HEART) && vessel && !vessel.has_reagent(/datum/reagent/blood, species.blood_volume * 0.7))
@@ -154,10 +181,10 @@ var/list/Tier2Runes = list(
 	/mob/proc/offering_rune,
 	/mob/proc/drain_rune,
 	/mob/proc/emp_rune,
-	/mob/proc/massdefile_rune
 	)
 
 var/list/Tier3Runes = list(
+	/mob/proc/summon_pylon,
 	/mob/proc/weapon_rune,
 	/mob/proc/shell_rune,
 	/mob/proc/bloodboil_rune,
@@ -205,12 +232,6 @@ var/list/Tier4Runes = list(
 
 	make_rune(/obj/effect/rune/defile, tome_required = 1)
 
-/mob/proc/massdefile_rune()
-	set category = "Cult Magic"
-	set name = "Rune: Mass Defile"
-
-	make_rune(/obj/effect/rune/massdefile, tome_required = 1, cost = 20)
-
 /mob/proc/armor_rune()
 	set category = "Cult Magic"
 	set name = "Rune: Summon Robes"
@@ -222,8 +243,6 @@ var/list/Tier4Runes = list(
 	set name = "Rune: Offering"
 
 	make_rune(/obj/effect/rune/offering, tome_required = 1)
-
-
 
 /mob/proc/drain_rune()
 	set category = "Cult Magic"
@@ -313,3 +332,10 @@ var/list/Tier4Runes = list(
 
 /mob/living/carbon/human/message_cult_communicate()
 	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of \his hand.</span>")
+
+/mob/proc/summon_pylon()
+	set category = "Cult Magic"
+	set name = "Rune: Summon Pylon"
+	set desc = "Summons a corrupting pylon at cost of one soul stone."
+
+	make_rune(/obj/effect/rune/pylon)

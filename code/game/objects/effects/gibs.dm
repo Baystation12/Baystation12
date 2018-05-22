@@ -10,6 +10,7 @@
 	var/fleshcolor //Used for gibbed humans.
 	var/bloodcolor //Used for gibbed humans.
 	var/datum/dna/MobDNA
+	var/is_cult
 
 	New(location, var/datum/dna/MobDNA, var/fleshcolor, var/bloodcolor)
 		..()

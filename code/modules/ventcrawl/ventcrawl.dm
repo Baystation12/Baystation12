@@ -11,7 +11,7 @@ var/list/ventcrawl_machinery = list(
 	/obj/machinery/camera,
 	/mob/living/simple_animal/borer,
 	/obj/item/clothing/head/culthood,
-	/obj/item/clothing/suit/cultrobes,
+	/obj/item/clothing/suit/storage/hooded/cultrobes,
 	/obj/item/weapon/book/tome,
 	/obj/item/weapon/paper/,
 	/obj/item/weapon/melee/cultblade

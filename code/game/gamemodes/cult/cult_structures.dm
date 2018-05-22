@@ -14,6 +14,7 @@
 	desc = "A forge used in crafting the unholy weapons used by the armies of Nar-Sie."
 	icon_state = "forge"
 
+/obj/structure/cult/pylon/prop
 /obj/structure/cult/pylon
 	name = "Pylon"
 	desc = "A floating crystal that hums with an unearthly energy."
@@ -23,7 +24,42 @@
 	light_inner_range = 1
 	light_outer_range = 13
 	light_color = "#3e0000"
-	var/obj/item/wepon = null
+	var/time_last_cultification
+	var/cult_interval = 1 SECOND
+
+/obj/structure/cult/pylon/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/obj/structure/cult/pylon/Process()
+	..()
+
+	if (world.time - time_last_cultification < cult_interval)
+		return
+	cult_radius()
+	time_last_cultification = world.time
+
+/obj/structure/cult/pylon/proc/cult_radius()
+	var/list/cultable = list()
+
+	for(var/A in oview(8, src)) //arbitrary distance. One screen... Ish... Circular?
+		if (istype(A, /obj/structure/window) && !istype(A, /obj/structure/window/cult))
+			cultable += A
+/*While we *can* hit grilles and windows, the projectile likes to break them instead.
+		else if (istype(A, /obj/structure/grille) && !istype(A, /obj/structure/grille/cult) )
+			cultable += A
+*/
+		else if (iswall(A) && !istype(A ,/turf/simulated/wall/cult) ) //Basically: Keeps the cultists from instantly building a strong base with an offensive tower. This forces nearby walls to be weak.
+			cultable += A
+		else if (!iscultist(A)) //Aha, tricked you. It's a defense matrix.
+			cultable += A
+
+	if(cultable.len)
+		var/atom/to_cult = pick(cultable)
+		var/obj/item/projectile/beam/blood/B = new (get_turf(src))
+		for(var/I = 0, I <= 3, I++)// Hah, it tracks.
+			B.launch(to_cult, pick(BP_ALL_LIMBS))
+			sleep(1)
 
 /obj/structure/cult/pylon/attack_hand(mob/M as mob)
 	attackpylon(M, 5)
@@ -68,6 +104,10 @@
 		set_density(1)
 		icon_state = "pylon"
 		set_light(5)
+
+/obj/structure/cult/pylon/prop/Initialize() //Fake pylon that doesn't kill people. Used for mappping decorations.
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
 
 /obj/structure/cult/tome
 	name = "Desk"

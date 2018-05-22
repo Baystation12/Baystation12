@@ -7331,7 +7331,7 @@
 /turf/simulated/floor/shuttle/white,
 /area/rescue_base/start)
 "aqC" = (
-/obj/structure/cult/pylon,
+/obj/structure/cult/pylon/prop,
 /turf/unsimulated/floor{
 	name = "plating";
 	icon_state = "cult"
