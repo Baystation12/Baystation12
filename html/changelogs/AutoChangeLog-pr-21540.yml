@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - bugfix: "Fake crew announcements should use ID card data now."
