@@ -1,4 +1,0 @@
-author: Banditoz
-delete-after: True
-changes: 
-  - bugfix: "Destroyed portable turrets are now climbable."
