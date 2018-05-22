@@ -209,10 +209,10 @@
 		if(LIGHT_EMPTY)
 			on = 0
 		if(LIGHT_BURNED)
-			_state = "[base_state]-burned"
+			_state = "[base_state]_burned"
 			on = 0
 		if(LIGHT_BROKEN)
-			_state = "[base_state]-broken"
+			_state = "[base_state]_broken"
 			on = 0
 
 	if(istype(lightbulb, /obj/item/weapon/light/))
@@ -539,7 +539,7 @@
 	var/rigged = 0		// true if rigged to explode
 	var/broken_chance = 2
 
-	var/b_max_bright = 0.7
+	var/b_max_bright = 0.9
 	var/b_inner_range = 1
 	var/b_outer_range = 5
 	var/b_curve = 2
@@ -626,10 +626,10 @@
 			icon_state = base_state
 			desc = "A replacement [name]."
 		if(LIGHT_BURNED)
-			icon_state = "[base_state]-burned"
+			icon_state = "[base_state]_burned"
 			desc = "A burnt-out [name]."
 		if(LIGHT_BROKEN)
-			icon_state = "[base_state]-broken"
+			icon_state = "[base_state]_broken"
 			desc = "A broken [name]."
 			broken = TRUE
 	var/image/I = image(icon, src, "[base_state]_attachment[broken ? "_broken" : ""]")
