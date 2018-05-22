@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - bugfix: "Antag preferences being reset to low should be fixed. If you continue experiencing this issue, please submit a new bug report."
