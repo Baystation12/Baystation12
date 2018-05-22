@@ -1,0 +1,8 @@
+author: Chinsky
+
+delete-after: True
+
+changes: 
+  - tweak: "Removes supply drone. There was no supply drone. It can't go that far."
+  - tweak: "Adds elevator going to deep storage. It's not a lazy redraw of supply drone, that'd be silly."
+  - tweak: "Renames 'credits' to 'points' in supply program for less monetary implications."
