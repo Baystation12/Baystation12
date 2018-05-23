@@ -47,8 +47,8 @@
 /area/om_ships/unscpatrol
 	name = "UNSC Corvette"
 
-/area/om_ships/unscpatrolstarboard
+/area/om_ships/unscpatrol/starboardbattery
 	name = "UNSC Corvette Starboard Gun Battery"
 
-/area/om_ships/unscpatrolport
+/area/om_ships/unscpatrol/portbattery
 	name = "UNSC Corvette Port Gun Battery"
