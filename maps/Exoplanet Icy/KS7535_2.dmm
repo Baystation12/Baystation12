@@ -1,0 +1,198 @@
+"aa" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"ab" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer)
+"ac" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer)
+"ad" = (/mob/living/simple_animal/hostile/shantak,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer)
+"ae" = (/turf/simulated/floor/exoplanet/ice,/area/exo_Ice_facility/outer)
+"af" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow3"; icon_state = "snow3"},/area/exo_Ice_facility/outer)
+"ag" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow10"; icon_state = "snow10"},/area/exo_Ice_facility/outer)
+"ah" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow7"; icon_state = "snow7"},/area/exo_Ice_facility/outer)
+"ai" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow5"; icon_state = "snow5"},/area/exo_Ice_facility/outer)
+"aj" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow8"; icon_state = "snow8"},/area/exo_Ice_facility/outer)
+"ak" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow12"; icon_state = "snow12"},/area/exo_Ice_facility/outer)
+"al" = (/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"am" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid9"; icon_state = "asteroid9"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"an" = (/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/outer)
+"ao" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid4"; icon_state = "asteroid4"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"ap" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid7"; icon_state = "asteroid7"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"aq" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid8"; icon_state = "asteroid8"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"ar" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"as" = (/obj/effect/dummy/spell_jaunt,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"at" = (/turf/unsimulated/wall,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"au" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/obj/machinery/door/blast/regular{_wifi_id = "Fuel Compound Hangar Blast Doors"; begins_closed = 0; icon_state = "pdoor0"; id = "Fuel Compound Hangar Blast Doors"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"av" = (/obj/machinery/door/blast/regular{_wifi_id = "Fuel Compound Hangar Blast Doors"; begins_closed = 0; icon_state = "pdoor0"; id = "Fuel Compound Hangar Blast Doors"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aw" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"ax" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Fuel Compound Hangar Blast Doors"; id = "Fuel Compound Hangar Blast Doors"; name = "Fuel Compound Acces Control"; pixel_x = 32},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"ay" = (/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"az" = (/obj/docking_umbilical/north{name = "KS7-535 Space Elevator"},/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer)
+"aA" = (/mob/living/simple_animal/hostile/bear,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"aB" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid3"; icon_state = "asteroid3"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/outer)
+"aC" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aD" = (/obj/machinery/light/spot{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aE" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/suit/storage/marine,/obj/item/clothing/head/helmet/marine,/obj/item/clothing/head/helmet/marine,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aF" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aG" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/obj/item/clothing/shoes/marine,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aH" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aI" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aJ" = (/obj/effect/landmark/dropship_land_point/covenant{name = "KS7-535 Spirit Land Point"},/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer)
+"aK" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aL" = (/obj/machinery/food_replicator,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aM" = (/obj/structure/closet/wall_medical{pixel_y = 32},/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aN" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aO" = (/obj/item/weapon/stool,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aP" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aQ" = (/obj/machinery/door/airlock/halo{name = "Armory"; req_access = list(110)},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aR" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aS" = (/turf/simulated/floor,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aT" = (/obj/machinery/light/spot{dir = 1},/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aU" = (/obj/structure/ladder{name = "Hangar Sublevel 1"},/turf/simulated/floor,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aV" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer)
+"aW" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid3"; icon_state = "asteroid3"},/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"aX" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aY" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; icon_state = "door_closed"; req_access = newlist(); tag = "icon-door_closed (NORTH)"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"aZ" = (/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"ba" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bb" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bc" = (/obj/machinery/light,/obj/machinery/power/apc/super{pixel_y = -32},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bd" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Flight Operations"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"be" = (/turf/simulated/open,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bf" = (/mob/living/simple_animal/hostile/shantak,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/outer)
+"bg" = (/obj/machinery/door/airlock/halo{name = "Break Room"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bh" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bi" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bj" = (/obj/machinery/vending/wallmed1,/turf/unsimulated/wall,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bk" = (/obj/effect/landmark/dropship_land_point{name = "Frozen Plains"},/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer)
+"bl" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow1"; icon_state = "snow1"},/area/exo_Ice_facility/outer)
+"bm" = (/obj/machinery/door/airlock/halo{name = "Living Quarters"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bn" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bo" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bp" = (/obj/machinery/door/airlock/halo{name = "Sleeping Quarters"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bq" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (EAST)"; icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"br" = (/obj/structure/table/steel,/obj/machinery/photocopier/faxmachine{department = "KS7-535 Fuel Depot"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bs" = (/obj/structure/closet/secure_closet/personal,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bt" = (/obj/effect/landmark/start/ice_staff,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bu" = (/obj/structure/bed,/obj/item/weapon/bedsheet{tag = "icon-sheetblue"; icon_state = "sheetblue"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bv" = (/obj/structure/toilet,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bw" = (/obj/machinery/shower,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bx" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-envelope_sealed"; icon_state = "envelope_sealed"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"by" = (/obj/structure/closet/secure_closet/personal,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bz" = (/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bA" = (/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bB" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bC" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bD" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bE" = (/obj/machinery/computer/telecomms/monitor,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bF" = (/obj/structure/mirror{pixel_x = 32},/obj/structure/sink/kitchen{dir = 8; icon_state = "sink_alt"; name = "bathroom sink"; pixel_x = 20; tag = "icon-sink_alt (WEST)"},/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bG" = (/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bH" = (/obj/structure/table/steel,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bI" = (/obj/item/modular_computer/console/preset/sysadmin,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bJ" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bK" = (/mob/living/simple_animal/hostile/shantak,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
+"bL" = (/obj/machinery/door/airlock/halo_lifepod{name = "Interior Airlock"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bM" = (/obj/machinery/light,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bN" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer)
+"bO" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility{icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"bP" = (/obj/effect/landmark/map_data{height = 2},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer)
+"bQ" = (/obj/effect/overmap/sector/innie_base{name = "KS7-535"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabababababacadacacacacabababacacacabababababababababacabababababababababacacabababababababababababababababababababacacacababababababababababababababababababababababababababababababababababababababaa
+aaababababababacacacacacabababacacacacacacababababababacacacababababacacacacacacacababababababababababababababacabababacababacabababacacacacabababababaeaeaeaeababababababababaeaeaeaeaeabababababababaa
+aaabababababababacacacadababacafafafafafafacacacacababacacacacacacacacacacacacacacacabababababababababababacacacacacacacacacacacacacacacacaeaeababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeabababababaa
+aaabababababababacacababababagacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeaeaeababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeababababaa
+aaababacacababacacabababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacadacababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeababababaa
+aaababacacacacacacacacafacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabababaeabaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeababababaa
+aaababacahacacacafacacacacacacacacacacacacacacacacacacacacadacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacadacacacacacacacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeababababaa
+aaababacacacacacacacacacacacafafacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeababaa
+aaababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeabaa
+aaabacacagacacacacajajacacacacacacacacacahacacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeabaa
+aaabafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacafafafafafafacacacacacacacacacacacacacacacacacacacacacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeababaa
+aaabacacacacacacacacacacacaiacacacacacacagacacacacacacacacacacacacacacacacacacacacacacacagacacacacacacacacacacacacacacacacacacacacacacacacacacacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeabaa
+aaabacacacacacacacacacacahacacacacacacacagacacacacacacacacacacacacacacacacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacahacacacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeabaa
+aaabacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacafacacacacacacacacacafacacacacacacacacacacacacacacacacacacacadaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeababaa
+aaabacacacacacacakacacacacacacacacacacacacacacacacacacacacacacacacacahacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeababaa
+aaabacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacafafacacacacacafacacacacacacacacacacacacacacacacagacacaeaeaeaeaeacacacacaeaeaeaeaeaeaeaeaeaeaeaeaeaeacacacacabaa
+aaabababadacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacafafacacacacacacaeaeaeacacacacacacacacacacaeaeaeaeaeaeaeaeacacacacabaa
+aaababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacagacacacacajajacacacacacacacacacahacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacagacacaeaeaeaeaeaeaeacacabababaa
+aaababacacacacacacacacacacacacacacacacacacacacacacacacacacacacafafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacahacacacacacacacagacacacacacacaeaeaeacacacacacaa
+aaababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaiacacacacacacagacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaeaeacacacacacacaa
+aaababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacahacacacacacacacagacacacacacacacacacacacacacacacacacacacacacakacacacacacacacacacacacacacafafafafafafacacacacacacacaa
+aaababacacacacacacacacacacacacacacacacacacacacacacabacacacabacacabababababacacababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabaa
+aaabababacacacacacacacacacacacacacacacacacacacacacababababababababaaaaaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacacacacacacacacacababababababababacacacacacacacacacacacacacababababacacacacacacacabaa
+aaabacacacacacacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaalalalalaaaaaaaaabacacacacacacacacacacacacacacacacacacacacababacacabababababacacacacacacacacacabacacabacacababababacafacacacacacabaa
+aaababacacacacaiacacabacacacacacacacacacacacacacacacabaaaaaaaaalalalalalalalamalalanananacacacacacacacacacacacacacacacacacacabababababababababababababacacacacababababacacacabababababacacacacacacacabaa
+aaabababacacacacacacabababacacacacacacacacafafafafababaaaaaaalalalalalalalalalalalalacananacacacacacacacacacacacacacacacacababababababababababababababababababababababababababababababacafacacacacababaa
+aaababababacacacabababababababacacacacacacacacacababaaaaaaalalalalaaaaaaaaalaaaaaaaaabacacacacacacacacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababanacacacacababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaabababacacacacacacacacacababaaaaaaalalalaaaaaaaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababananacahacacacababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaabababacacacacacacacacabababaaaaaaalalalaaaaaaaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacacacababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabanananananabababababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaabacafacacacacacacacacacacabaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaabacacacacacacacacacacacacafafafafafababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalanababababababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaabababacacacacacafafacacacabaaaaaaalalaaaaaaaaaaaaaaaaaaabababacacacacacacacacacacacagacacacacacababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamalalaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabacacacacacacacacabababaaaaalalalaaaaaaaaaaaaaaaaaaababacacacacacacacacacafacacacacacacacacababaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaababajacacacacacacabababaaaaalalalaaaaaaaaaaaaaaaaaaabacacacacacacacacacacafacacacacacacacacababaaalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaa
+aaalalalalalalaaaaaaaaaaaaaaababacacacacacacacababaaaaaaaaalaoalaaaaaaaaaaaaaaaaabababacahacacacafacacacacacacacacacacacababaaalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaa
+aaalalalalalalalaaaaaaaaaaaaabababacacaiacacacacabaaaaaaaaalalalalaaaaaaaaaaaaaaabababacacacacacacacacacacacafafacacacacababaaalalapapalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaalalaaaaaaaaaaaaaa
+aaaaalaoalalalalaaaaaaaaaaabababacacahacacacacababaaaaaaaaaaalalalaaaaaaaaaaaaaaabababacacacacacacacacacacacacacacacacacababaaaaaaalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalaaaaaaaaaaaaaa
+aaaaalalalalalalalaaaaaaaaabacacacacacacacacacababaaaaaaaaaaaaalalaaaaaaaaaaaaaaabacacacagacacacacajajacacacacacacacacacababaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalapalaaaaaaaaaaaaaa
+aaaaalalalalalalalalaaaaaaabakacacanacacacacacababaaaaaaaaaaaaalalaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacacacacacababaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaa
+aaaaalalalalalalalalaaaaaaababacacacacacacacacababaaaaaaaaaaalalalaaaaaaaaaaaaaaabacacacacacacacacacacacacaiacacacacacacababaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalalaaaaaaaaaaaaaaabababacacacanacacabababaaaaaaaaaaalapalaaaaaaaaaaaaaaabacacacacacacacacacacacahacacacacacacacababaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaa
+aaaaaaalapalaaaaaaaaaaaaaaaaababacacananabababababaaaaaaaaaaalalalaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacacacacacabababaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaa
+aaaaaaalalalalaaaaaaaaaaaaaaaaababananalaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaababacacacacacacakacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaa
+aaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaababacacacacacacacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaabacacacacacacacacacacacacacacacacadacababaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaalalaqalalalaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaabacacacacacacacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaalapalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaabacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaalalalaqalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaababababacacacacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaabacacadacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaalalalaaaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaapalalalaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaabacacacacacacacacabababacacacabababaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaalalalaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaabababacacabababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaalalalaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaalamalaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalamalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaalaoalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalamalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalalalalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalalalalalalaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalamaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalalalaaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalalalaaaaaaaaalalalalaaaaaaalalalalalalalalalalalalalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalaaaaaaaaaaalalalalalalalalalalalalalalalalalalalalaoalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalaaaaaaaaaaalalalalalalalalalaaaaaaaaalalalalalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalalaaaaaaaaaaalalaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaralaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaalalalalalaaaaalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaalalalalapaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalaralalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaalaoalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasaaaaaaalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatauavataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalalalaaaaaaababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaatawaxataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalalaaaaaaaaaaababacacacababababababababacacabababababababababababacacacacabababababacacacababaaaaaaaaaaaaalalalalalaralalalaaaaaaaaaaaaaaaaaaaaaaaaatayayataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaalanaaaaaaaaaaababacacacacacacacacacacacacacacababazababababacacacacacacacacacadacacacacacababaaaaaaaaaaaaaaalalaAalalalalalaaaaaaaaaaaaaaaaaaaaaaaaatayayataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abababananabababababababacacacacacacacacacaiacacacacacacacacacacacacacacacacacacacacacacacacajacababaaaaaaaaaaaaaaalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaatawayatatatatataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abababaBanababababacacacacacacacacacacacacacacacacacacacacacacacacacacafafafafafafacacacacacacacacacaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaatayayataCaDaEataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abababanacacacabacacacacacacacacacacacacacacacacacacacacacacacacacacagacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaatayayataFayaGataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacafacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaalamaaaaaaaaaaaaaaaaaaaaatatatatatatatawayataHayaIataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abacaiacacacacacacacacaiacacacacacacacacacacacacacacaJacacacacafacacacacacacacacacafafacacacacacacabaaaaaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaataKaLaMaNaOataPayatataQatatatatatatatatatatatatatatatataa
+ababacacacacacacacacacacacacacacacacacacacacacacahacacacafacacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaalaaalalaaaaaaaaaaaaaaaaaaaaatayayaRaNaRatawayayayayayayayaSaTaSaUaSaSaTaSaSaUaSaTataa
+ababacacacacacacacacacacacacaVacacacacacacacacacacacacacacacacacacacafafacacacacacafacacacacahadacabaaaaaaaaaWalalalalalalaaaaaaaaaaaaaaaaaaaaatayayayayayatayayayayayayaXaYaSaSaSaSaSaSaSaSaZbaaSaSataa
+abacacacacaVacacacacacacacacacacacacacacaVacacacacacacacacacacacacacacacacacacacacacacacacacacacababalalaaalalalaaalalalaaaaaaaaaaaaaaaaaaaaaaatbbayayaybcatatatatbdayatatataSaSbebebebebebebebeaSaSataa
+abacacacacacacacacacacacacacacafacacacacacacacacagacacacacajajacacacacacacacacacahacacacacacacacababbfalalalaaalaaaaalalalaaaaaaaaaaaaaaaaaaaaatatbgatatatatatatatayayaDayatbhaSbebebebebebebebeaSbiataa
+abacacacacacacacacacacacacacacacacacacacacafafacacacacacacacacacacacacacacacacacacacacacacacacananananalaaalalaaaaaaalalalaaaaaaaaaaaaaaaaaaaaataKayayayaKayayaKatayayayaybjaSaSbebebebebebebebeaSaSataa
+abababacacacacacacbkaiacacacacacacacacacblacacacacacacacacacacacacaiacacacacacacagacacacacacacacanabaaalaaaaaaaaaaaaaaalalaaaaaaaaaaaaaaaaaaaaatayayayayayayayaybmayayaybnboaSaSbebebebebebebebeaSaSataa
+abacacacacacacacacacacacacacacacacacafacacacacacacacacacacacacacahacacacacacacacagacahacacacacacacabalaaaaaaaaaaaaaaalalalalalaaaaaaaaaaaaaaaaatatbpatatatatatatatawaybqbrboaSaSbebebebebebebebeaSaSataa
+abacacacacakacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaalaoalalalalaaaaaaaaaaaaaaatbsbtbuatbvatbwbwatayayaybxboaSaSbebebebebebebebeaSaSataa
+abacacacacacacacacacacacacacaVacacacacacaVacacacacacacacakacacacacacacacacacacacacacafacacacacacacabaaaaaaaaaaaaaaalalalalalalalaaaaaaaaaaaaaaatbybtbuatbzatbAbBataybCbDbEataSaSbebebebebebebebeaSaSataa
+ababacacacaVacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababaaaaaaaaaaalalalalalalalaqalaaaaaaaaaaaaaaatbsbtbuatbFatbzbzatbGbHbIbJatbhaSbebebebebebebebeaSbiataa
+ababacacacacacacacacacacafacacacacacacacacacacacacacacacacacajacacacacacacacacacacacacacacacacacababaaaaaaaaaaaaaaaaalalalbKalaaaaaaaaaaaaaaaaatayayaybLbAbMbAbAatatatatatataSaSbebebebebebebebeaSaSataa
+ababacacacacacacacacacacacacacacacacacahblacacacacacacacacacacacacacagacacacacacacacacacacacacacababaaaaaaaaaaaaaaalalalalalalaaaaaaaaaaaaaaaaatatatatatatatatatataaaaaaaaataSaSaSaSaSaSaSaSaSaSaSaSataa
+ababababbNacacacacacacacacacacacacacacacacacacabacacacacacacacacacacacabacacacacacacajajacacababababaaaaaaaaaaaaalalaqalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaataSbOaZaSaSaSbOaSaSaSaSbOataa
+abababababacacacacacacababacaVacacabacacacacacabababacacacacacacacacababababacacacacacabababababababaaaaaaaaaaaaalalalaaaaaaalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaatatatatatatatatatatatatatataa
+bPbQababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

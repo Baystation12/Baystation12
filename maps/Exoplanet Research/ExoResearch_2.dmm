@@ -330,7 +330,7 @@
 "gr" = (/obj/structure/flora/ausbushes/fullgrass{tag = "icon-lavendergrass_4"; icon_state = "lavendergrass_4"},/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
 "gs" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 1; icon_state = "ai_server"; luminosity = 0; name = "\improper Planetary surfacecave"; requires_power = 0; tag = "icon-ai_server"})
 "gt" = (/turf/simulated/mineral/random/high_chance,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
-"gu" = (/obj/docking_umbilical/north{name = "Research Compound LZ Space Elevator"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
+"gu" = (/obj/docking_umbilical/north{name = "VT9-042 Space Elevator"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "gv" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "gw" = (/obj/effect/landmark/dropship_land_point{name = "Research Compound LZ"},/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
 "gx" = (/obj/effect/landmark/dropship_land_point/covenant,/turf/simulated/floor/exoplanet/desert,/area/exoplanet/desert{dynamic_lighting = 0; luminosity = 1; requires_power = 0})
