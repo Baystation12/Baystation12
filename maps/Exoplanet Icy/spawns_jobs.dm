@@ -1,7 +1,7 @@
 GLOBAL_LIST_EMPTY(ice_staff_spawns)
 
 /datum/spawnpoint/ice_staff
-	display_name =  "KS7535 Facility Spawn"
+	display_name =  "Depot Guard Spawn"
 	restrict_job = list("Depot Guard")
 
 /datum/spawnpoint/ice_staff/New()
