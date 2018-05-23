@@ -12,6 +12,7 @@
 	#include "torch_antagonism.dm"
 	#include "torch_npcs.dm"
 	#include "torch_security_state.dm"
+	#include "vietnam_areas.dm"
 
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
@@ -64,6 +65,7 @@
 	#include "loadout/loadout_xeno.dm"
 	#include "loadout/~defines.dm"
 
+	#include "vietnam.dmm"
 	#include "torch-1.dmm"
 	#include "torch-2.dmm"
 	#include "torch-3.dmm"
