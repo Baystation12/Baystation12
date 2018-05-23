@@ -1,4 +1,4 @@
-#define DECK_GUN_ROUND_RELOAD_TIME 0.25 SECONDS//Time it takes a deck gun to reload a single round.
+#define DECK_GUN_ROUND_RELOAD_TIME 1 SECONDS//Time it takes a deck gun to reload a single round.
 #define DECK_GUN_BASE_MAXROUNDS 10
 #define DECK_GUN_FIRE_DELAY_LOWER 0.1 SECONDS
 #define DECK_GUN_FIRE_DELAY_UPPER 0.35 SECONDS
@@ -149,7 +149,13 @@
 	damage = 150
 
 /obj/item/projectile/deck_gun_damage_proj/get_structure_damage()
-	return damage * 100 //Counteract the /100 from reinf. walls and wallcode damage processing.
+	return damage * 10 //Counteract the /10 from wallcode damage processing.
+
+/obj/item/projectile/deck_gun_damage_proj/on_impact(var/atom/impacted)
+	var/turf/simulated/wall/wall = impacted
+	if(istype(wall) && wall.reinf_material)
+		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls
+	. = ..()
 
 /obj/item/projectile/overmap/deck_gun_proj
 	name = "deck gun round"

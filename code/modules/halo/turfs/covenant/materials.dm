@@ -10,14 +10,14 @@
 	icon_reinf = "reinf_metal"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 
-	cut_delay = 20
+	cut_delay = 120
 
 	melting_point = 17273
 
-	brute_armor = 5
+	brute_armor = 15
 	burn_armor = 1 //Not as defensive when burn applied.
 
-	integrity = 250
+	integrity = 500
 
 	explosion_resistance = 10
 
