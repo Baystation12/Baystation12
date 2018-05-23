@@ -9,7 +9,7 @@
 	default_language = "Sangheili" //Just for now, no special language just yet
 	language = "Sangheili"
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
-	spawn_flags = SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	flags = NO_MINOR_CUT
 	item_icon_offsets = list(0,0)
 	slowdown = -1 //-1 to negate noshoes

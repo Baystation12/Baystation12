@@ -45,7 +45,7 @@
 	name = "CMV Elivagar"
 
 /area/om_ships/unscpatrol
-	name = "UNSC Corvette"
+	name = "UNSC Patrol Vessel"
 
 /area/om_ships/unscpatrol/starboardbattery
 	name = "UNSC Corvette Starboard Gun Battery"
