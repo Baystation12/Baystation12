@@ -28,16 +28,12 @@
 	for(var/obj/machinery/overmap_weapon_console/deck_gun_control/console in linked_devices)
 		console.fire(target,user,click_params)//Fire with all linked consoles.
 
-/area/deck_gun_debug
-	name = "Deck Gun Debug Area"
-	desc = "Use this for testing deck gun linking"
-
 /obj/machinery/overmap_weapon_console/deck_gun_control/local
 	name = "Local Deck Gun Control"
 	desc = "A control console to allow for local override of a single set of deck guns"
 	requires_ammo = 1
 	var/currently_firing = 0 //Has a fire-order been given recently?
-	var/area/deck_gun_area = /area/deck_gun_debug //Area-defines to scan for deck guns.
+	var/area/deck_gun_area = null //Area-defines to scan for deck guns.
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/scan_linked_devices()
 	var/list/devices = list()
@@ -132,6 +128,12 @@
 	desc = "A deck gun modified to fire multiple times per fire-input."
 	icon = 'code/modules/halo/machinery/deck_chaingun.dmi'
 	icon_state = "deck_gatling3"
+
+/obj/machinery/deck_gun/chaingun/can_fire()
+	. = ..()
+	if(.)
+		icon_state = "[initial(icon_state)]_spin"
+	icon_state = "[initial(icon_state)]"
 
 /obj/machinery/deck_gun/chaingun/return_list_addto()
 	return list(src,src,src,src,src,src) //Instead of once, fire us 6 times.
