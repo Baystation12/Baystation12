@@ -1460,6 +1460,7 @@
 #include "code\modules\halo\machinery\ammo_fabricator.dm"
 #include "code\modules\halo\machinery\ammo_fabricator_datums.dm"
 #include "code\modules\halo\machinery\atmos_blastdoor.dm"
+#include "code\modules\halo\machinery\deck_gun.dm"
 #include "code\modules\halo\machinery\laser_designator.dm"
 #include "code\modules\halo\machinery\MAC.dm"
 #include "code\modules\halo\machinery\npc_comms.dm"
