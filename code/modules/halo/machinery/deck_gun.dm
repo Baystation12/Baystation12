@@ -151,7 +151,7 @@
 /obj/item/projectile/deck_gun_damage_proj/get_structure_damage()
 	return damage * 10 //Counteract the /10 from wallcode damage processing.
 
-/obj/item/projectile/deck_gun_damage_proj/on_impact(var/atom/impacted)
+/obj/item/projectile/deck_gun_damage_proj/Bump(var/atom/impacted)
 	var/turf/simulated/wall/wall = impacted
 	if(istype(wall) && wall.reinf_material)
 		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls
