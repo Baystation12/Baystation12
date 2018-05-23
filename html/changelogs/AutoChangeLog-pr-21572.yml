@@ -1,0 +1,5 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - bugfix: "Lights aren't super dark anymore. Blame Chaoko99 for being blind and not noticing the difference during testing."
+  - bugfix: "Fixes weird sprite bugs for broken and burnt lights."
