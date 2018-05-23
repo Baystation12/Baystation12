@@ -88,6 +88,7 @@
 	desc = "The firing mechanism of a deck gun."
 	icon = 'code/modules/halo/machinery/deck_gun.dmi'
 	icon_state = "deck_gun"
+	anchored = 1
 	var/sound/fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
 	var/obj/item/projectile/overmap/fired_projectile = /obj/item/projectile/overmap/deck_gun_proj
 	var/round_reload_time = DECK_GUN_ROUND_RELOAD_TIME //Time it takes to reload a single round.
