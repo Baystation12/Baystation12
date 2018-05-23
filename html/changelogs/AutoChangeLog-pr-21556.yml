@@ -1,4 +1,0 @@
-author: "Alex6511"
-delete-after: True
-changes: 
-  - bugfix: "Fixed \"3\" being printed when placed on a surgery table."
