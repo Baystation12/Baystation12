@@ -9100,7 +9100,9 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "sr" = (
-/obj/machinery/computer/teleporter,
+/obj/machinery/computer/teleporter{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/fourthdeck)
 "ss" = (

@@ -5214,10 +5214,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_monitoring)
-"kL" = (
-/obj/machinery/computer/teleporter,
-/turf/simulated/floor/tiled/dark,
-/area/teleporter/seconddeck)
 "kM" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -13411,6 +13407,12 @@
 /obj/effect/shuttle_landmark/torch/deck3/aquila,
 /turf/space,
 /area/space)
+"FV" = (
+/obj/machinery/computer/teleporter{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/teleporter/seconddeck)
 "Gb" = (
 /obj/effect/shuttle_landmark/torch/deck3/guppy,
 /turf/space,
@@ -36079,7 +36081,7 @@ jR
 jT
 ka
 kx
-kL
+kG
 qu
 zS
 AN
@@ -36483,7 +36485,7 @@ sQ
 jW
 kh
 kB
-kG
+FV
 qu
 zT
 AN

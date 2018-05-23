@@ -4,7 +4,6 @@
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	circuit = /obj/item/weapon/circuitboard/teleporter
-	dir = 4
 	var/obj/machinery/teleport/station/station = null
 	var/obj/machinery/teleport/hub/hub = null
 	var/obj/item/locked = null
@@ -21,9 +20,9 @@
 
 /obj/machinery/computer/teleporter/Initialize()
 	. = ..()
-	station = locate(/obj/machinery/teleport/station, get_step(src, dir))
+	station = locate(/obj/machinery/teleport/station, get_step(src, turn(dir, 90)))
 	if(station)
-		hub = locate(/obj/machinery/teleport/hub, get_step(station, dir))
+		hub = locate(/obj/machinery/teleport/hub, get_step(station, turn(dir, 90)))
 
 	if(istype(station))
 		station.com = hub
