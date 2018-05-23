@@ -20,7 +20,7 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 
 /datum/spawnpoint/facil_security_spawn
 	display_name = "Research Facility Security Spawn"
-	restrict_job = list("ODST Rifleman","ONI Officer")
+	restrict_job = list("ODST Rifleman","ODST Squad Leader")
 
 /datum/spawnpoint/facil_security_spawn/New()
 	..()
@@ -32,6 +32,23 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 /obj/effect/landmark/start/facil_security_spawn/New()
 	..()
 	GLOB.facil_security_spawn += loc
+
+GLOBAL_LIST_EMPTY(facil_comms_spawn)
+
+/datum/spawnpoint/facil_comms_spawn
+	display_name = "Research Facility Comms Spawn"
+	restrict_job = list("Communications Operator")
+
+/datum/spawnpoint/facil_comms_spawn/New()
+	..()
+	turfs = GLOB.facil_comms_spawn
+
+/obj/effect/landmark/start/facil_comms_spawn
+	name = "Research Facility comms Spawn"
+
+/obj/effect/landmark/start/facil_comms_spawn/New()
+	..()
+	GLOB.facil_comms_spawn += loc
 
 
 /decl/hierarchy/outfit/job/facil_researcher
@@ -58,13 +75,28 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ODSTO
-	name = "ONI Officer"
+	name = "ODST Squad Leader"
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
-	uniform = /obj/item/clothing/under/utility
-	shoes = /obj/item/clothing/shoes/dress
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	shoes = /obj/item/clothing/shoes/jungleboots
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	pda_slot = null
 	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
-	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/facil_COMMO
+	name = "Communications Operator"
+	l_ear = /obj/item/device/radio/headset/unsc
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -77,7 +109,7 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
 	alt_titles = list("Physicist","Botanist","Chemist","Weapons Researcher","Artifact Analyser")
-	selection_color = "#667700"
+	selection_color = "#008000"
 	access = list(309)
 	spawnpoint_override = "Research Facility Spawn"
 
@@ -87,17 +119,27 @@ GLOBAL_LIST_EMPTY(facil_security_spawn)
 	spawn_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
 	alt_titles = list("ODST Medic","ODST CQC Specialist")
-	selection_color = "#667700"
-	access = list(309)
+	selection_color = "#008000"
+	access = list(309,311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	is_whitelisted = 1
 
 /datum/job/ODSTO
-	title = "ONI Officer"
+	title = "ODST Squad Leader"
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO
-	selection_color = "#667700"
-	access = list(309)
+	selection_color = "#008000"
+	access = list(309,310,311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	is_whitelisted = 1
+
+/datum/job/COMMO
+	title = "Communications Operator"
+	total_positions = 2
+	spawn_positions = 2
+	outfit_type = /decl/hierarchy/outfit/job/facil_COMMO
+	selection_color = "#008000"
+	access = list(311)
+	spawnpoint_override = "Research Facility Comms Spawn"
+	is_whitelisted = 0

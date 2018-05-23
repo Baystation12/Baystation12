@@ -144,28 +144,30 @@
 "cN" = (/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol)
 "cO" = (/obj/structure/sink{dir = 1; pixel_y = 16},/obj/structure/mirror{pixel_x = 0; pixel_y = 30},/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol)
 "cP" = (/obj/structure/toilet{dir = 8},/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol)
-"cQ" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"cR" = (/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"cS" = (/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"cQ" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/clothing/mask/breath/medical,/obj/item/clothing/mask/breath/medical,/obj/item/clothing/mask/breath/medical,/obj/item/clothing/mask/surgical,/obj/item/clothing/mask/surgical,/obj/item/weapon/storage/box/gloves,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"cR" = (/obj/structure/table/standard,/obj/item/weapon/hemostat,/obj/item/weapon/cautery,/obj/item/weapon/retractor,/obj/item/weapon/bonegel,/obj/item/weapon/bonesetter,/obj/item/weapon/scalpel,/obj/item/weapon/circular_saw{pixel_y = 8},/obj/item/weapon/surgicaldrill,/obj/item/weapon/FixOVein,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"cS" = (/obj/machinery/optable,/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
 "cT" = (/obj/machinery/sleeper,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"cU" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/medical,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"cV" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol)
-"cW" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"cX" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"cY" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"cZ" = (/obj/machinery/vending/armory/armor,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"da" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"db" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"dc" = (/obj/machinery/vending/wallmed1{name = "NanoMed Wall"; pixel_y = -32},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
-"dd" = (/obj/machinery/light,/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol)
-"de" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 9},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"df" = (/obj/machinery/vending/armory/hybrid,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dg" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dh" = (/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"di" = (/obj/docking_umbilical/south{name = "Starboard Docking Umbilical"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dj" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dk" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 10},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
-"dl" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"cU" = (/obj/structure/closet/secure_closet/medical2,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"cV" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/medical,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"cW" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol)
+"cX" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"cY" = (/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"cZ" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"da" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"db" = (/obj/machinery/vending/armory/armor,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dc" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dd" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"de" = (/obj/machinery/vending/wallmed1{name = "NanoMed Wall"; pixel_y = -32},/turf/simulated/floor/tiled/white,/area/om_ships/unscpatrol)
+"df" = (/obj/machinery/light,/turf/simulated/floor/tiled/freezer,/area/om_ships/unscpatrol)
+"dg" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 9},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dh" = (/obj/machinery/vending/armory/hybrid,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"di" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dj" = (/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dk" = (/obj/docking_umbilical/south{name = "Starboard Docking Umbilical"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dl" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dm" = (/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 10},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
+"dn" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -224,16 +226,16 @@ aaaaaaaaaaaaaaaaaaaaaabNbwaVczcAcBabaCbtbubvbuaCbqasaCcCbZcDcEaeaeabaeaeaeaeaeae
 aaaaaaaaaaaaaaaaaaaaaabNbNbNababababaCasasasasaCaHasaCbObPbQaCaeaeabaeaeaeaeaeaeaeaebSaeaeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaCbaaVaVaVbHblasaCcFcGcHaCcIbMababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaCasasasasaCaHasaCaCaCaCaCaCaCaCcJcKcLcMcNcOcLcPabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaCbWbXbWbXaCaHasaCcQcRcScTcRcUaCcJcKaCcKcVcKaCaCabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaCaCaCaCaCaCbqasaCcWcRcXcRcRcYaCcJcKaCcKcVcKcLcPababababababacadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcZdadadadaaCaHasaCdbcRcXcRdccUaCcJddcLcKcVddaCaCabaiaiaiaiabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbaaVaVaVaVbbblasaCaCaCbdaCaCaCaCaCaCaCaCbdaCaCaCabaoapaqdeabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaCbWbXbWbXaCaHasaCcQcRcScTcUcVaCcJcKaCcKcWcKaCaCabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaCaCaCaCaCaCbqasaCcXcYcZcYcYdaaCcJcKaCcKcWcKcLcPababababababacadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabdbdcdcdcdcaCaHasaCddcYcZcYdecVaCcJdfcLcKcWdfaCaCabaiaiaiaiabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbaaVaVaVaVbbblasaCaCaCbdaCaCaCaCaCaCaCaCbdaCaCaCabaoapaqdgabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabasasasasasaCbwaVaVaVaVcnaVaVaVaVaVaVaVaVcnaVaVaVaVcvasayasabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabdfdadadadaaCasasasbjasasasasbjasasasasbjasasasascuaHasaPaQaRaSadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaAaBaAababababababababababaCdgaCaCaCabaHasaIasabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabasasasabaaaaaaaaaaaaaaaaabasasasasasabdhasayazabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababdiababaaaaaaaaaaaaaaaaabdjdjdjdjdjabbfbgaqdkabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaaaabdjdjdldjdjabbpbpbpbpabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabdhdcdcdcdcaCasasasbjasasasasbjasasasasbjasasasascuaHasaPaQaRaSadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaAaBaAababababababababababaCdiaCaCaCabaHasaIasabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabasasasabaaaaaaaaaaaaaaaaabasasasasasabdjasayazabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababdkababaaaaaaaaaaaaaaaaabdldldldldlabbfbgaqdmabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaaaabdldldndldlabbpbpbpbpabajadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababbsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
