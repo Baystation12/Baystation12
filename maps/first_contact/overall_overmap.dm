@@ -37,3 +37,13 @@
 	fore_dir = WEST
 
 	map_bounds = list(7,70,53,31)
+
+//Overmap Weapon Console Defines//
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/corvetteport
+	deck_gun_area = /area/om_ships/unscpatrol/portbattery
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/corvettestarboard
+	deck_gun_area = /area/om_ships/unscpatrol/starboardbattery
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/comet
+	deck_gun_area = /area/om_ships/comet
