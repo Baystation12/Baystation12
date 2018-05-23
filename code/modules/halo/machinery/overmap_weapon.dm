@@ -65,18 +65,19 @@
 		new_projectile.on_impact(target)
 		qdel(new_projectile)
 	else
-		new_projectile.launch(target)
+		new_projectile.launch(target,null,rand(0,new_projectile.dispersion),rand(0,new_projectile.dispersion))
+	play_fire_sound()
 
 /obj/machinery/overmap_weapon_console/proc/play_fire_sound()
 	if(isnull(fire_sound))
 		return
 
-	playsound(src, fire_sound, 50, 1, 5, 5)
+	playsound(src, fire_sound, 100, 1, 5, 5)
 
-/obj/machinery/overmap_weapon_console/proc/fire(var/atom/target,var/mob/living/user,var/click_params)
+/obj/machinery/overmap_weapon_console/proc/can_fire(var/atom/target,var/mob/living/user,var/click_params)
 	scan_linked_devices()
 	if(!user)
-		return
+		return 0
 	var/obj/overmap_sector = map_sectors["[z]"]
 	if(!overmap_sector)
 		return 0
@@ -88,6 +89,13 @@
 		return 0
 	if(!consume_loaded_ammo(user))
 		return 0
+	return 1
+
+/obj/machinery/overmap_weapon_console/proc/fire(var/atom/target,var/mob/living/user,var/click_params)
+	scan_linked_devices()
+	if(!can_fire(target,user,click_params))
+		return 0
+	var/obj/overmap_sector = map_sectors["[z]"]
 	var/directly_above = 0
 	if(target.loc == overmap_sector.loc)
 		directly_above = 1
@@ -99,7 +107,7 @@
 
 /obj/item/weapon/gun/aim_tool
 	name = "Aiming Tool"
-	desc = "Used for aiming a ship- or planet- board weapon"
+	desc = "Used for aiming a ship- or planet- board devices"
 	w_class = ITEM_SIZE_LARGE
 	can_rename = 0
 	var/obj/machinery/overmap_weapon_console/creator_console

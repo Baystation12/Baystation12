@@ -78,6 +78,8 @@
 	var/obj/effect/overmap/overmap_object = impacted
 	var/chosen_impact_z
 
+	if(isnull(overmap_object))
+		return
 	if(!(starting in range(1,impacted)) && prob(overmap_object.weapon_miss_chance))
 		visible_message("<span class = 'warning'>[src] flies past [impacted].</span>")
 		return 0
