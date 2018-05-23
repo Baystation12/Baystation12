@@ -13733,6 +13733,11 @@
 	pixel_x = 23;
 	pixel_y = 23
 	},
+/obj/machinery/access_button/airlock_interior{
+	master_tag = "prototype_controller";
+	pixel_x = -23;
+	pixel_y = 23
+	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/control)
 "Hm" = (
