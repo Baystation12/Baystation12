@@ -83,7 +83,7 @@
 	tail = "tajtail"
 	tail_animation = 'icons/mob/species/tajaran/tail.dmi'
 	default_h_style = "Tajaran Ears"
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite/sharp)
 	darksight_range = 8
 	darksight_tint = DARKTINT_GOOD
 	slowdown = -0.5
