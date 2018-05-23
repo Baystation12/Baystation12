@@ -1121,7 +1121,7 @@
 	name = "Smashing Fashions"
 	desc = "For all your cheap knockoff needs."
 	product_slogans = "Look smashing for your darling!;Be rich! Dress rich!"
-	icon_state = "Theater"
+	icon_state = "theater"
 	vend_delay = 15
 	vend_reply = "Absolutely smashing!"
 	product_ads = "Impress the love of your life!;Don't look poor, look rich!;100% authentic designers!;All sales are final!;Lowest prices guaranteed!"

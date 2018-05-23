@@ -3245,7 +3245,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/squid
 	name = "\improper Calamari Crisps"
-	icon_state = "squidjerky"
+	icon_state = "squid"
 	desc = "Space squid tentacles, Carefully removed (from the squid) then dried into strips of delicious rubbery goodness!"
 	trash = /obj/item/trash/squid
 	filling_color = "#c0a9d7"
