@@ -24,11 +24,6 @@
 	else
 		..()
 
-/obj/item/modular_computer/pda/get_examine_line()
-	. = ..()
-	if(card_slot && istype(card_slot.stored_card))
-		. += "  <a href='?src=\ref[card_slot.stored_card];look_at_id=1'>\[Look at ID\]</a>"
-
 // PDA box
 /obj/item/weapon/storage/box/PDAs
 	name = "box of spare PDAs"

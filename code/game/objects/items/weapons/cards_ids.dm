@@ -128,10 +128,6 @@ var/const/NO_EMAG_ACT = -50
 			assignment = rank
 			access |= j.get_access()
 
-/obj/item/weapon/card/id/get_examine_line()
-	. = ..()
-	. += "  <a href='?src=\ref[src];look_at_id=1'>\[View\]</a>"
-
 /obj/item/weapon/card/id/CanUseTopic(var/user)
 	if(user in view(get_turf(src)))
 		return STATUS_INTERACTIVE
