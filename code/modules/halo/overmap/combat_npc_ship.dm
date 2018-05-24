@@ -21,7 +21,7 @@
 	messages_on_death = ON_DEATH_MESSAGES
 
 	var/next_fireat = 0
-	var/list/projectiles_to_fire = list(/obj/item/projectile/overmap/mac = 10 SECONDS) //Associated list: [projectile type]=[fire_delay]
+	var/list/projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.05 SECONDS,/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/deck_gun_proj = 0.35 SECONDS) //Associated list: [projectile type]=[fire_delay]
 
 /obj/effect/overmap/ship/npc_ship/combat/proc/fire_at_target()
 	var/obj/item/projectile/to_fire = pick(projectiles_to_fire)
