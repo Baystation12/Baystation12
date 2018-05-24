@@ -646,6 +646,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	set src = usr
 
 	show_browser(src, species.get_description(), "window=species;size=700x400")
+
 /datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
 		if(0 to 22) 	. = -1
