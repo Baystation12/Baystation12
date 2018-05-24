@@ -33,7 +33,7 @@
 	can_escape = 1
 	var/footstep = 1
 	can_pull_size = ITEM_SIZE_TINY
-	can_pull_mobs = MOB_PULL_TINY
+	can_pull_mobs = MOB_PULL_NONE
 
 /mob/living/simple_animal/octopus/New()
 	..()
