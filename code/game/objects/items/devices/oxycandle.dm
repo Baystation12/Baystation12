@@ -16,6 +16,10 @@
 	var/brightness_on = 1 // Moderate-low bright.
 	action_button_name = null
 
+/obj/item/device/oxycandle/New()
+	..()
+	update_icon()
+
 /obj/item/device/oxycandle/attack_self(mob/user)
 	if(!on)
 		to_chat(user, "<span class='notice'>You pull the cord and [src] ignites.</span>")
