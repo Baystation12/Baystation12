@@ -121,11 +121,6 @@
 	processScheduler.setup()
 	Master.Initialize(10, FALSE)
 
-#ifdef UNIT_TEST
-	spawn(1)
-		initialize_unit_tests()
-#endif
-
 #undef RECOMMENDED_VERSION
 
 var/world_topic_spam_protect_ip = "0.0.0.0"
