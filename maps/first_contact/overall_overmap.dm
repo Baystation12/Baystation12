@@ -40,7 +40,7 @@
 
 //Overmap Weapon Console Defines//
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/corvetteport
-	deck_gun_area = /area/om_ships/unscpatrol/portbattery
+	deck_gun_area = /area/om_ships/unscpatrol
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/corvettestarboard
 	deck_gun_area = /area/om_ships/unscpatrol/starboardbattery
