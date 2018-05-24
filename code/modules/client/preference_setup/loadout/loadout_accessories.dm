@@ -198,10 +198,10 @@
 	..()
 	var/solmajors = list()
 	solmajors["iron star"] = /obj/item/clothing/accessory/medal/iron/star
-	solmajors["bronze heart"] = /obj/item/clothing/accessory/medal/bronze/heart
-	solmajors["silver sword"] = /obj/item/clothing/accessory/medal/silver/sword
+	solmajors["bronze star"] = /obj/item/clothing/accessory/medal/bronze/heart
+	solmajors["silver star"] = /obj/item/clothing/accessory/medal/silver/sword
 	solmajors["medical heart"] = /obj/item/clothing/accessory/medal/heart
-	solmajors["valor medal"] = /obj/item/clothing/accessory/medal/silver/sol
+	solmajors["medal of valor"] = /obj/item/clothing/accessory/medal/silver/sol
 	solmajors["sapienterian medal"] = /obj/item/clothing/accessory/medal/gold/sol
 	solmajors["peacekeeper ribbon"] = /obj/item/clothing/accessory/ribbon/peace
 	solmajors["marksman ribbon"] = /obj/item/clothing/accessory/ribbon/marksman

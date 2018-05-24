@@ -132,7 +132,7 @@
 	return
 
 /datum/nuclearexplosion/New(var/obj/b)
-	explosion(b.loc,20,30,40,50)
+	explosion(b.loc,40,60,70,75)
 	for(var/mob/living/m in range(50,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
