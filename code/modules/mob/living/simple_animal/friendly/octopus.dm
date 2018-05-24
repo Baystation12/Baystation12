@@ -33,7 +33,7 @@
 	can_escape = 1
 	var/footstep = 1
 	can_pull_size = ITEM_SIZE_TINY
-	can_pull_mobs = MOB_PULL_NONE
+	can_pull_mobs = MOB_PULL_TINY
 
 /mob/living/simple_animal/octopus/New()
 	..()
@@ -53,12 +53,12 @@
 			sound_to(M, 'sound/items/bikehorn.ogg')
 	..()
 
-/mob/living/simple_animal/octopus/handle_movement(var/turf/walking, var/running)
-	if(running)
-		if(footstep >= 2)
-			footstep = 0
-			playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
-		else
-			footstep++
-	else
-		playsound(src, "clownstep", 20, 1)
+//mob/living/simple_animal/octopus/handle_movement(var/turf/walking, var/running)
+//	if(running)
+//		if(footstep >= 2)
+//			footstep = 0
+//			playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
+//		else
+//			footstep++
+//	else
+//		playsound(src, "clownstep", 20, 1)
