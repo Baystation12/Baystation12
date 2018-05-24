@@ -293,7 +293,7 @@
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor)
 
 /datum/job/bridgeofficer
-	title = "Bridge Officer"
+	title = "Military Police"
 	department = "Support"
 	department_flag = SPT
 
@@ -408,7 +408,7 @@
 							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer
-	title = "Engineer"
+	title = "Military Engineer"
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the Chief Engineer"
@@ -451,7 +451,7 @@
 							 /datum/computer_file/program/shields_monitor)
 
 /datum/job/engineer_contractor
-	title = "Engineering Contractor"
+	title = "Military Contractor"
 	department = "Engineering"
 	department_flag = ENG
 
@@ -936,7 +936,7 @@
 						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
 
 /datum/job/nt_pilot
-	title = "NanoTrasen Pilot"
+	title = "Huey Pilot"
 	supervisors = "the Research Director"
 	department = "Science"
 	department_flag = SCI
