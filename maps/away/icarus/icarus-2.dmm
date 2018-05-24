@@ -110,7 +110,9 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "az" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "aA" = (
@@ -1096,9 +1098,11 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "dt" = (
-/obj/item/modular_computer/console,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
+	},
+/obj/item/modular_computer/console{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1191,11 +1195,13 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dJ" = (
-/obj/item/modular_computer/console,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
 	req_one_access = list(24,11)
+	},
+/obj/item/modular_computer/console{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1210,7 +1216,6 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "dM" = (
-/obj/item/modular_computer/console,
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1";
@@ -1218,6 +1223,9 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
+	},
+/obj/item/modular_computer/console{
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1515,7 +1523,9 @@
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eJ" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 4
+	},
 /turf/simulated/floor/shuttle/white,
 /area/icarus/open)
 "eK" = (
@@ -1903,6 +1913,36 @@
 /obj/effect/landmark/random_gen/asteroid,
 /turf/unsimulated/mineral,
 /area/space)
+"nW" = (
+/obj/item/modular_computer/console{
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/white,
+/area/icarus/open)
+"yS" = (
+/obj/item/modular_computer/console{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/vessel)
+"Mf" = (
+/obj/item/modular_computer/console{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/vessel)
+"Rc" = (
+/obj/item/modular_computer/console{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/vessel)
+"Ru" = (
+/obj/item/modular_computer/console{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/open)
 
 (1,1,1) = {"
 gb
@@ -21745,9 +21785,9 @@ ad
 ad
 ad
 ap
-aj
+Rc
 az
-aj
+Rc
 ap
 ap
 ap
@@ -23380,7 +23420,7 @@ aM
 ak
 ak
 dz
-aj
+yS
 cL
 ac
 ac
@@ -23986,7 +24026,7 @@ aM
 ak
 ak
 dz
-aj
+yS
 cL
 cL
 dQ
@@ -24573,9 +24613,9 @@ ad
 ac
 ac
 ao
-aj
-az
-aj
+Mf
+Ru
+Mf
 ap
 ap
 ap
@@ -26082,7 +26122,7 @@ ag
 ap
 er
 ey
-eJ
+nW
 ey
 eY
 fd
@@ -26404,7 +26444,7 @@ ap
 bP
 ap
 aR
-aj
+yS
 ap
 dg
 dp

@@ -1,6 +1,6 @@
 language: generic
 sudo: false
-dist: precise
+dist: trusty
 
 env:
   global:
@@ -21,6 +21,9 @@ cache:
   directories:
     - tgui/node_modules
     - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+
+before_install:
+  - unset _JAVA_OPTIONS
 
 addons:
   apt:

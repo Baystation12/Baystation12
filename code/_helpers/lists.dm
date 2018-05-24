@@ -90,6 +90,29 @@ proc/listclearnulls(list/list)
 	return result
 
 /*
+Two lists may be different (A!=B) even if they have the same elements.
+This actually tests if they have the same entries and values.
+*/
+/proc/same_entries(var/list/first, var/list/second)
+	if(!islist(first) || !islist(second))
+		return 0
+	if(length(first) != length(second))
+		return 0
+	for(var/entry in first)
+		if(!(entry in second) || (first[entry] != second[entry]))
+			return 0
+	return 1
+/*
+Checks if a list has the same entries and values as an element of big.
+*/
+/proc/in_as_list(var/list/little, var/list/big)
+	if(!islist(big))
+		return 0
+	for(var/element in big)
+		if(same_entries(little, element))
+			return 1
+	return 0
+/*
  * Returns list containing entries that are in either list but not both.
  * If skipref = 1, repeated elements are treated as one.
  * If either of arguments is not a list, returns null

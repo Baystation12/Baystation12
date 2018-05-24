@@ -15,7 +15,7 @@
 
 	spawn(extra_delay)
 		spawn(200)
-			set_light(10, 1, 10, 2, "#[num2hex(rand(64,255))][num2hex(rand(64,255))][num2hex(rand(64,255))]")
+			set_light(1, 1, 10, 2, "#[num2hex(rand(64,255))][num2hex(rand(64,255))][num2hex(rand(64,255))]")
 			playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, 5)
 		spawn(210)
 			..()

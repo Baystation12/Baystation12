@@ -367,7 +367,7 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/check_win() //universal trigger to be called at mob death, nuke explosion, etc. To be called from everywhere.
 	return 0
 
-/datum/game_mode/proc/get_players_for_role(var/role, var/antag_id)
+/datum/game_mode/proc/get_players_for_role(var/antag_id)
 	var/list/players = list()
 	var/list/candidates = list()
 
@@ -383,7 +383,7 @@ var/global/list/additional_antag_types = list()
 				continue
 			if(istype(player, /mob/new_player))
 				continue
-			if(!role || (role in player.client.prefs.be_special_role))
+			if(!antag_id || (antag_id in player.client.prefs.be_special_role))
 				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
 				candidates += player.mind
 	else
@@ -394,7 +394,7 @@ var/global/list/additional_antag_types = list()
 
 		// Get a list of all the people who want to be the antagonist for this round
 		for(var/mob/new_player/player in players)
-			if(!role || (role in player.client.prefs.be_special_role))
+			if(!antag_id || (antag_id in player.client.prefs.be_special_role))
 				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
 				candidates += player.mind
 				players -= player
@@ -402,7 +402,7 @@ var/global/list/additional_antag_types = list()
 		// If we don't have enough antags, draft people who voted for the round.
 		if(candidates.len < required_enemies)
 			for(var/mob/new_player/player in players)
-				if(!role || !(role in player.client.prefs.never_be_special_role))
+				if(!antag_id || !(antag_id in player.client.prefs.never_be_special_role))
 					log_debug("[player.key] has not selected never for this role, so we are drafting them.")
 					candidates += player.mind
 					players -= player
@@ -524,6 +524,8 @@ proc/get_nt_opposed()
 	set name = "Check Round Info"
 	set category = "OOC"
 
+	GLOB.using_map.map_info(src)
+
 	if(!ticker || !ticker.mode)
 		to_chat(usr, "Something is terribly wrong; there is no gametype.")
 		return
@@ -536,4 +538,3 @@ proc/get_nt_opposed()
 			to_chat(usr, "[ticker.mode.extended_round_description]")
 	else
 		to_chat(usr, "<i>Shhhh</i>. It's a secret.")
-	return

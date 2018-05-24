@@ -12,19 +12,6 @@
 	stores_pen = TRUE
 	stored_pen = /obj/item/weapon/pen
 
-/obj/item/modular_computer/pda/update_name()
-	var/obj/item/weapon/card/id/id
-	if(card_slot && istype(card_slot.stored_card))
-		id = card_slot.stored_card
-	else
-		var/mob/living/L = get_holder_of_type(src, /mob/living)
-		if(istype(L) && L.GetIdCard())
-			id = L.GetIdCard()
-		else
-			return
-
-	SetName("[id.get_display_name()]'s PDA")
-
 /obj/item/modular_computer/pda/Initialize()
 	. = ..()
 	enable_computer()
@@ -36,7 +23,7 @@
 		eject_id()
 	else
 		..()
-	
+
 // PDA box
 /obj/item/weapon/storage/box/PDAs
 	name = "box of spare PDAs"
@@ -79,6 +66,7 @@
 	icon_state_unpowered = "pda-nt"
 
 /obj/item/modular_computer/pda/heads
+	name = "command PDA"
 	icon_state = "pda-h"
 	icon_state_unpowered = "pda-h"
 

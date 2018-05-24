@@ -997,6 +997,16 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/shield_diffuser
 	sort_string = "VAGAH"
 
+/datum/design/item/tool/oxycandle
+	name = "oxycandle"
+	desc = "a device which, via a chemical reaction, can pressurise small areas."
+	id="oxycandle"
+	req_tech = list(TECH_ENGINEERING = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 3000)
+	chemicals = list(/datum/reagent/sodiumchloride = 20, /datum/reagent/acetone = 20)
+	build_path = /obj/item/device/oxycandle
+	sort_string = "VAGAI"
+
 /datum/design/item/encryptionkey/AssembleDesignName()
 	..()
 	name = "Encryption key design ([item_name])"
@@ -1228,6 +1238,43 @@ other types of metals and chemistry for reagents).
 	materials = list(DEFAULT_WALL_MATERIAL = 2000)
 	build_path = /obj/item/weapon/computer_hardware/tesla_link
 	sort_string = "VBADD"
+
+//Scanners
+/datum/design/item/modularcomponent/accessory/reagent_scanner
+	name = "reagent scanner module"
+	id = "scan_reagent"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_BIO = 2, TECH_MAGNET = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 600, "glass" = 200)
+	build_path = /obj/item/weapon/computer_hardware/scanner/reagent
+	sort_string = "VBADE"
+
+/datum/design/item/modularcomponent/accessory/paper_scanner
+	name = "paper scanner module"
+	id = "scan_paper"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 600, "glass" = 200)
+	build_path = /obj/item/weapon/computer_hardware/scanner/paper
+	sort_string = "VBADF"
+
+/datum/design/item/modularcomponent/accessory/atmos_scanner
+	name = "atmospheric scanner module"
+	id = "scan_atmos"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_MAGNET = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 600, "glass" = 200)
+	build_path = /obj/item/weapon/computer_hardware/scanner/atmos
+	sort_string = "VBADG"
+
+/datum/design/item/modularcomponent/accessory/medical_scanner
+	name = "medical scanner module"
+	id = "scan_medical"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_MAGNET = 2, TECH_BIO = 2)
+	build_type = PROTOLATHE
+	materials = list(DEFAULT_WALL_MATERIAL = 600, "glass" = 200)
+	build_path = /obj/item/weapon/computer_hardware/scanner/medical
+	sort_string = "VBADH"
 
 // Batteries
 /datum/design/item/modularcomponent/battery/AssembleDesignName()

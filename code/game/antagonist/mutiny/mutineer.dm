@@ -1,7 +1,6 @@
 var/datum/antagonist/mutineer/mutineers
 
 /datum/antagonist/mutineer
-	role_type = BE_MUTINEER
 	role_text = "Mutineer"
 	role_text_plural = "Mutineers"
 	id = MODE_MUTINEER

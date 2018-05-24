@@ -42,8 +42,11 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/is_broken()
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
-/obj/item/organ/New(var/mob/living/carbon/holder)
+//Second argument may be a dna datum; if null will be set to holder's dna.
+/obj/item/organ/New(var/mob/living/carbon/holder, var/datum/dna/given_dna)
 	..(holder)
+	if(!istype(given_dna))
+		given_dna = null
 
 	if(max_damage)
 		min_broken_damage = Floor(max_damage / 2)
@@ -53,18 +56,12 @@ var/list/organ_cache = list()
 	if(istype(holder))
 		owner = holder
 		w_class = max(w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
-
-		if(holder.dna)
-			dna = holder.dna.Clone()
-			species = all_species[dna.species]
+		if(!given_dna && holder.dna)
+			given_dna = holder.dna
 		else
-			species = all_species[SPECIES_HUMAN]
 			log_debug("[src] spawned in [holder] without a proper DNA.")
 
-	if(dna)
-		if(!blood_DNA)
-			blood_DNA = list()
-		blood_DNA[dna.unique_enzymes] = dna.b_type
+	given_dna ? set_dna(given_dna) : (species = all_species[SPECIES_HUMAN])
 
 	create_reagents(5 * (w_class-1)**2)
 	reagents.add_reagent(/datum/reagent/nutriment/protein, reagents.maximum_volume)

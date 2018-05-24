@@ -97,7 +97,7 @@
 
 	var/obj/item/weapon/stuck = null
 
-/obj/item/solar_assembly/attack_hand(var/mob/user)
+/obj/item/weapon/ducttape/attack_hand(var/mob/user)
 	anchored = FALSE // Unattach it from whereever it's on, if anything.
 	return ..()
 

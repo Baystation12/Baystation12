@@ -142,6 +142,8 @@
 #define LAZYREMOVE(L, I) if(L) { L -= I; if(!L.len) { L = null; } }
 // Adds I to L, initalizing L if necessary
 #define LAZYADD(L, I) if(!L) { L = list(); } L += I;
+// Insert I into L at position X, initalizing L if necessary
+#define LAZYINSERT(L, I, X) if(!L) { L = list(); } L.Insert(X, I);
 // Adds I to L, initalizing L if necessary, if I is not already in L
 #define LAZYDISTINCTADD(L, I) if(!L) { L = list(); } L |= I;
 // Sets L[A] to I, initalizing L if necessary
@@ -169,4 +171,4 @@
 
 #define FLAGS_EQUALS(flag, flags) ((flag & (flags)) == (flags))
 
-#define JOINTEXT(X) jointext(x, null)
+#define JOINTEXT(X) jointext(X, null)

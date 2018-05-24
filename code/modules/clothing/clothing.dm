@@ -141,7 +141,7 @@
 	var/list/ties = list()
 	for(var/obj/item/clothing/accessory/accessory in accessories)
 		if(accessory.high_visibility)
-			ties += "\icon[accessory] \a [accessory]"
+			ties += "\a [accessory.get_examine_line()]"
 	if(ties.len)
 		.+= " with [english_list(ties)] attached"
 	if(accessories.len > ties.len)
@@ -651,6 +651,7 @@ BLIND     // can't see anything
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
 		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/suit.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/suit.dmi',
 		)
 
 /obj/item/clothing/suit/update_clothing_icon()

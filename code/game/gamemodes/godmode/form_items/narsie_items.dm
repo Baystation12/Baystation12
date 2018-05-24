@@ -30,7 +30,7 @@
 		user.visible_message("<span class='danger'>\The [user] plunges the knife down into \the [a]!</span>")
 		L.adjustBruteLoss(20)
 		if(altar.linked_god)
-			altar.linked_god.adjust_power(2 * multiplier,0,"from a delicious sacrifice!")
+			altar.linked_god.adjust_power_min(2 * multiplier,0,"from a delicious sacrifice!")
 
 
 //EXEC AXE
@@ -51,7 +51,7 @@
 	if(istype(a, /obj/structure/deity/altar))
 		var/obj/structure/deity/altar/altar = a
 		if(stored_power && altar.linked_god)
-			altar.linked_god.adjust_power(stored_power, "from harvested souls.")
+			altar.linked_god.adjust_power_min(stored_power, "from harvested souls.")
 			altar.visible_message("<span class='warning'>\The [altar] absorbs a black mist exuded from \the [src].</span>")
 			return
 	if(ismob(a))

@@ -16,7 +16,10 @@
 /turf/unsimulated/wall,
 /area/rescue_base/base)
 "aaf" = (
-/obj/machinery/computer/teleporter,
+/obj/machinery/computer/teleporter{
+	icon_state = "computer";
+	dir = 2
+	},
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -3143,7 +3146,10 @@
 	},
 /area/centcom/evac)
 "ahs" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/shuttle.dmi';
 	icon_state = "floor4"
@@ -3838,7 +3844,10 @@
 	},
 /area/rescue_base/base)
 "aiY" = (
-/obj/machinery/computer/crew,
+/obj/machinery/computer/crew{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/shuttle.dmi';
 	icon_state = "floor"
@@ -4084,7 +4093,10 @@
 	},
 /area/centcom/evac)
 "ajC" = (
-/obj/machinery/computer/shuttle,
+/obj/machinery/computer/shuttle{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/shuttle.dmi';
 	icon_state = "floor"
@@ -4437,7 +4449,10 @@
 	},
 /area/ninja_dojo/dojo)
 "aks" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 4
+	},
 /obj/item/weapon/card/id/centcom,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -5881,14 +5896,20 @@
 	},
 /area/ninja_dojo/dojo)
 "ank" = (
-/obj/item/modular_computer/console/preset/medical,
+/obj/item/modular_computer/console/preset/medical{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/shuttle/black,
 /area/rescue_base/start)
 "anl" = (
 /turf/simulated/floor/shuttle/black,
 /area/rescue_base/start)
 "anm" = (
-/obj/item/modular_computer/console/preset/engineering,
+/obj/item/modular_computer/console/preset/engineering{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/shuttle/black,
 /area/rescue_base/start)
 "ann" = (
@@ -6098,16 +6119,20 @@
 	},
 /area/ninja_dojo/dojo)
 "anJ" = (
-/obj/machinery/computer/prisoner{
-	name = "Implant Management"
-	},
 /obj/machinery/light{
 	dir = 8
+	},
+/obj/machinery/computer/prisoner{
+	dir = 4;
+	name = "Implant Management"
 	},
 /turf/simulated/floor/shuttle/black,
 /area/rescue_base/start)
 "anK" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/shuttle/black,
 /area/rescue_base/start)
 "anL" = (
@@ -6959,7 +6984,7 @@
 /area/rescue_base/start)
 "apF" = (
 /obj/structure/sign/poster/bay_9{
-	pixel_x = -32;
+	pixel_x = -32
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/rescue_base/start)
@@ -8005,7 +8030,10 @@
 	},
 /area/ninja_dojo/start)
 "asf" = (
-/obj/machinery/computer/teleporter,
+/obj/machinery/computer/teleporter{
+	icon_state = "computer";
+	dir = 2
+	},
 /turf/simulated/floor/plating,
 /area/ninja_dojo/start)
 "asg" = (
@@ -8317,24 +8345,33 @@
 	},
 /area/ninja_dojo/start)
 "asJ" = (
-/obj/machinery/computer/station_alert/all,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/computer/station_alert/all{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/unsimulated/floor{
 	dir = 2;
 	icon_state = "dark"
 	},
 /area/ninja_dojo/start)
 "asK" = (
-/obj/machinery/computer/shuttle_control/multi/ninja,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/computer/shuttle_control/multi/ninja{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/unsimulated/floor{
 	dir = 2;
 	icon_state = "dark"
 	},
 /area/ninja_dojo/start)
 "asL" = (
-/obj/item/modular_computer/console/preset/security,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/unsimulated/floor{
 	dir = 2;
 	icon_state = "dark"
@@ -8867,7 +8904,10 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "aul" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "aum" = (
@@ -8934,7 +8974,10 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "auu" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "auv" = (
@@ -9005,6 +9048,7 @@
 /area/shuttle/administration/centcom)
 "auG" = (
 /obj/machinery/computer/shuttle_control{
+	dir = 8;
 	req_access = list(101);
 	shuttle_tag = "Administration"
 	},
@@ -9317,7 +9361,10 @@
 	},
 /area/centcom/living)
 "avy" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -9802,7 +9849,10 @@
 	},
 /area/centcom/control)
 "awD" = (
-/obj/machinery/computer/teleporter,
+/obj/machinery/computer/teleporter{
+	icon_state = "computer";
+	dir = 2
+	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -10176,12 +10226,13 @@
 	},
 /area/centcom/control)
 "axx" = (
-/obj/machinery/computer/rdservercontrol{
-	badmin = 1;
-	name = "Master R&amp;D Server Controller"
-	},
 /obj/effect/floor_decal/corner/green{
 	dir = 10
+	},
+/obj/machinery/computer/rdservercontrol{
+	badmin = 1;
+	dir = 1;
+	name = "Master R&amp;D Server Controller"
 	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
@@ -11271,7 +11322,10 @@
 	},
 /area/centcom/control)
 "azB" = (
-/obj/machinery/computer/crew,
+/obj/machinery/computer/crew{
+	icon_state = "computer";
+	dir = 8
+	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -11730,13 +11784,19 @@
 	},
 /area/centcom/control)
 "aAu" = (
-/obj/machinery/computer/robotics,
+/obj/machinery/computer/robotics{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
 /area/centcom/control)
 "aAv" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -12109,7 +12169,10 @@
 	},
 /area/centcom/control)
 "aBj" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -12941,7 +13004,7 @@
 	},
 /obj/machinery/button/remote/blast_door{
 	id = "smindicate";
-	pixel_y = 20;
+	pixel_y = 20
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
@@ -13546,7 +13609,10 @@
 	},
 /area/centcom/holding)
 "aDV" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -13635,7 +13701,10 @@
 	},
 /area/syndicate_mothership)
 "aEd" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/specops/centcom)
 "aEe" = (
@@ -13643,7 +13712,9 @@
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/specops/centcom)
 "aEf" = (
-/obj/machinery/computer/shuttle_control/specops,
+/obj/machinery/computer/shuttle_control/specops{
+	dir = 8
+	},
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/specops/centcom)
 "aEg" = (
@@ -13735,6 +13806,7 @@
 /area/syndicate_mothership)
 "aEq" = (
 /obj/machinery/computer/prisoner{
+	dir = 4;
 	name = "Implant Management"
 	},
 /turf/simulated/floor/shuttle/red,
@@ -15937,7 +16009,10 @@
 	},
 /area/centcom/holding)
 "aJx" = (
-/obj/machinery/computer/operating,
+/obj/machinery/computer/operating{
+	icon_state = "computer";
+	dir = 8
+	},
 /turf/unsimulated/floor{
 	icon_state = "white"
 	},
@@ -16379,6 +16454,7 @@
 /area/tdome/tdomeobserve)
 "aKy" = (
 /obj/machinery/computer/pod{
+	dir = 1;
 	id = "syndicate_elite";
 	name = "Hull Door Control"
 	},
@@ -18600,8 +18676,10 @@
 /area/tdome/tdomeadmin)
 "aPJ" = (
 /obj/machinery/computer/pod{
-	id = "thunderdomeaxe";
-	name = "Thunderdome Axe Supply"
+	name = "Thunderdome Axe Supply";
+	icon_state = "computer";
+	dir = 1;
+	id = "thunderdomeaxe"
 	},
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -18609,6 +18687,7 @@
 /area/tdome/tdomeadmin)
 "aPK" = (
 /obj/machinery/computer/pod{
+	dir = 1;
 	id = "thunderdomegen";
 	name = "Thunderdome General Supply"
 	},
@@ -18618,17 +18697,9 @@
 /area/tdome/tdomeadmin)
 "aPL" = (
 /obj/machinery/computer/pod{
+	dir = 1;
 	id = "thunderdomehea";
 	name = "Thunderdome Heavy Supply"
-	},
-/turf/unsimulated/floor{
-	icon_state = "lino"
-	},
-/area/tdome/tdomeadmin)
-"aPM" = (
-/obj/machinery/computer/pod{
-	id = "thunderdome";
-	name = "Thunderdome Blast Door Control"
 	},
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -18683,7 +18754,10 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
-/obj/machinery/computer/shuttle_control/merchant,
+/obj/machinery/computer/shuttle_control/merchant{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aPU" = (
@@ -19673,7 +19747,10 @@
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aRZ" = (
-/obj/item/modular_computer/console/preset/merchant,
+/obj/item/modular_computer/console/preset/merchant{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/merchant_station)
 "aSa" = (
@@ -20129,7 +20206,10 @@
 /turf/simulated/floor/plating,
 /area/shuttle/merchant/home)
 "aTc" = (
-/obj/machinery/computer/shuttle_control/merchant,
+/obj/machinery/computer/shuttle_control/merchant{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/carpet/blue,
 /area/shuttle/merchant/home)
 "aTd" = (
@@ -21029,9 +21109,12 @@
 /turf/simulated/floor/plating,
 /area/skipjack_station/start)
 "aVc" = (
-/obj/machinery/computer/station_alert/all,
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/machinery/computer/station_alert/all{
+	icon_state = "computer";
+	dir = 4
 	},
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
@@ -22535,7 +22618,10 @@
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aZb" = (
-/obj/item/modular_computer/console/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian{
+	icon_state = "console";
+	dir = 4
+	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -22727,14 +22813,20 @@
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/merchant/home)
 "bub" = (
-/obj/item/modular_computer/console/preset/security,
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/shuttle.dmi';
 	icon_state = "floor4"
 	},
 /area/centcom/evac)
 "bvb" = (
-/obj/item/modular_computer/console/preset/medical,
+/obj/item/modular_computer/console/preset/medical{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -22749,9 +22841,12 @@
 	},
 /area/centcom/holding)
 "bxb" = (
-/obj/item/modular_computer/console/preset/security,
 /obj/machinery/camera/network/crescent{
 	c_tag = "Crescent Arrivals North";
+	dir = 8
+	},
+/obj/item/modular_computer/console/preset/security{
+	icon_state = "console";
 	dir = 8
 	},
 /turf/unsimulated/floor{
@@ -22760,11 +22855,14 @@
 /area/centcom/holding)
 "byb" = (
 /obj/structure/table/reinforced,
-/obj/item/modular_computer/console/preset/command,
 /obj/structure/window/reinforced/crescent{
 	dir = 8
 	},
 /obj/structure/window/reinforced/crescent,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -22795,8 +22893,10 @@
 	},
 /area/wizard_station)
 "bBb" = (
-/obj/structure/table/reinforced,
-/obj/item/modular_computer/console/preset/library,
+/obj/item/modular_computer/console/preset/library{
+	icon_state = "console";
+	dir = 8
+	},
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
 "bCb" = (
@@ -22962,6 +23062,16 @@
 	dir = 2
 	},
 /area/syndicate_mothership/raider_base)
+"exk" = (
+/obj/machinery/computer/pod{
+	dir = 1;
+	id = "thunderdome";
+	name = "Thunderdome Blast Door Control"
+	},
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/tdome/tdomeadmin)
 
 (1,1,1) = {"
 aaa
@@ -32202,7 +32312,7 @@ aNm
 aNO
 aOt
 aNL
-aNL
+exk
 aIx
 aab
 aab
@@ -32404,7 +32514,7 @@ aNl
 aNL
 aOu
 aNL
-aPM
+exk
 aIx
 aab
 aab

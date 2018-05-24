@@ -1,5 +1,6 @@
 /datum/phenomena/conversion
 	name = "Conversion"
+	desc = "Ask a non-follower to convert to your cult. This is completely voluntary. Requires the subject to be close to an altar."
 	cost = 20
 	flags = PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living
@@ -28,6 +29,7 @@
 
 /datum/phenomena/forced_conversion
 	name = "Forced Conversion"
+	desc = "Force a non-follower to join you. They need to be on top of an altar and conscious for this to work. They may resist, but that will hurt them."
 	cost = 50
 	flags = PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living

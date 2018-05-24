@@ -128,13 +128,21 @@ var/const/NO_EMAG_ACT = -50
 			assignment = rank
 			access |= j.get_access()
 
+/obj/item/weapon/card/id/CanUseTopic(var/user)
+	if(user in view(get_turf(src)))
+		return STATUS_INTERACTIVE
+
+/obj/item/weapon/card/id/OnTopic(var/mob/user, var/list/href_list)
+	if(href_list["look_at_id"])
+		if(istype(user))
+			user.examinate(src)
+			return TOPIC_HANDLED
+
 /obj/item/weapon/card/id/examine(mob/user)
-	set src in oview(1)
-	if(in_range(usr, src))
-		show(usr)
-		to_chat(usr, desc)
-	else
-		to_chat(usr, "<span class='warning'>It is too far away.</span>")
+	..()
+	to_chat(user, "It says '[get_display_name()]'.")
+	if(in_range(user, src))
+		show(user)
 
 /obj/item/weapon/card/id/proc/prevent_tracking()
 	return 0
@@ -149,15 +157,12 @@ var/const/NO_EMAG_ACT = -50
 	popup.open()
 	return
 
-/obj/item/weapon/card/id/proc/update_name()
-	SetName("[get_display_name()]'s ID Card")
-
 /obj/item/weapon/card/id/proc/get_display_name()
 	. = registered_name
 	if(military_rank && military_rank.name_short)
 		. = military_rank.name_short + " " + .
 	if(assignment)
-		. += " ([assignment])"
+		. += ", [assignment]"
 
 /obj/item/weapon/card/id/proc/set_id_photo(var/mob/M)
 	front = getFlatIcon(M, SOUTH, always_use_defdir = 1)
@@ -173,7 +178,6 @@ var/const/NO_EMAG_ACT = -50
 		id_card.blood_type		= dna.b_type
 		id_card.dna_hash		= dna.unique_enzymes
 		id_card.fingerprint_hash= md5(dna.uni_identity)
-	id_card.update_name()
 
 /mob/living/carbon/human/set_id_info(var/obj/item/weapon/card/id/id_card)
 	..()

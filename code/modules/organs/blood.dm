@@ -98,7 +98,10 @@
 		return 0
 	if(!amt)
 		return 0
-	return vessel.remove_reagent(/datum/reagent/blood, amt * (src.mob_size/MOB_MEDIUM))
+
+	amt *= ((src.mob_size/MOB_MEDIUM) ** 0.5)
+
+	return vessel.remove_reagent(/datum/reagent/blood, amt)
 
 /****************************************************
 				BLOOD TRANSFERS
@@ -195,7 +198,8 @@
 		//AB is a universal receiver.
 	return 0
 
-/mob/living/carbon/human/proc/regenerate_blood(amount)
+/mob/living/carbon/human/proc/regenerate_blood(var/amount, var/volume_scale = TRUE)
+	amount *= (species.blood_volume / SPECIES_BLOOD_DEFAULT)
 	var/blood_volume_raw = vessel.get_reagent_amount(/datum/reagent/blood)
 	amount = max(0,min(amount, species.blood_volume - blood_volume_raw))
 	if(amount)
@@ -293,14 +297,13 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/spra
 //Percentage of maximum blood volume, affected by the condition of circulation organs, affected by the oxygen loss. What ultimately matters for brain
 /mob/living/carbon/human/proc/get_blood_oxygenation()
 	var/blood_volume = get_blood_circulation()
+	if(blood_carries_oxygen())
+		if(is_asystole()) // Heart is missing or isn't beating and we're not breathing (hardcrit)
+			return min(blood_volume, BLOOD_VOLUME_SURVIVE)
 
-	if(is_asystole()) // Heart is missing or isn't beating and we're not breathing (hardcrit)
-		return min(blood_volume, BLOOD_VOLUME_SURVIVE)
-
-	if(!need_breathe())
-		return blood_volume
-
-	if(!blood_carries_oxygen())
+		if(!need_breathe())
+			return blood_volume
+	else
 		blood_volume = 100
 
 	var/blood_volume_mod = max(0, 1 - getOxyLoss()/(species.total_health/2))

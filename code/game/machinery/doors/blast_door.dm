@@ -144,6 +144,7 @@
 				src.repair()
 			else
 				to_chat(usr, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
+	check_force(C, user)
 
 
 
@@ -191,7 +192,8 @@
 	icon_state_closed = "pdoor1"
 	icon_state_closing = "pdoorc1"
 	icon_state = "pdoor1"
-	maxhealth = 600
+	min_force = 30
+	maxhealth = 1000
 	block_air_zones = 1
 
 /obj/machinery/door/blast/regular/open
@@ -200,6 +202,7 @@
 // SUBTYPE: Shutters
 // Nicer looking, and also weaker, shutters. Found in kitchen and similar areas.
 /obj/machinery/door/blast/shutters
+	desc = "A set of mechanized shutters made of a pretty sturdy material."
 	icon_state_open = "shutter0"
 	icon_state_opening = "shutterc0"
 	icon_state_closed = "shutter1"
@@ -207,6 +210,9 @@
 	icon_state = "shutter1"
 	open_sound = 'sound/machines/shutters_open.ogg'
 	close_sound = 'sound/machines/shutters_close.ogg'
+	min_force = 15
+	maxhealth = 500
+	explosion_resistance = 10
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE

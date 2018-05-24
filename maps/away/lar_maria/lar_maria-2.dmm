@@ -1093,7 +1093,9 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "cI" = (
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "cJ" = (
@@ -1161,7 +1163,9 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cQ" = (
@@ -1267,8 +1271,10 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "dh" = (
-/obj/item/modular_computer/console,
 /obj/structure/window/basic,
+/obj/item/modular_computer/console{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "di" = (
@@ -1289,7 +1295,9 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dl" = (
@@ -1435,8 +1443,9 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/structure/table/standard,
-/obj/item/modular_computer/console,
+/obj/item/modular_computer/console{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dK" = (
@@ -3591,6 +3600,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
+"DN" = (
+/obj/item/modular_computer/console{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/lar_maria/office)
 
 (1,1,1) = {"
 aa
@@ -20652,7 +20667,7 @@ ct
 cL
 dh
 cd
-cP
+dJ
 ec
 er
 eJ
@@ -21056,7 +21071,7 @@ cv
 cN
 dh
 cd
-cP
+dJ
 ed
 er
 eK
@@ -24496,7 +24511,7 @@ eC
 eU
 ff
 ex
-eW
+DN
 eW
 ex
 gu

@@ -189,9 +189,9 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 			for(var/obj/item/organ/external/org in damaged)
 				var/limb_result = "[capitalize(org.name)][(org.robotic >= ORGAN_ROBOT) ? " (Cybernetic)" : ""]:"
 				if(org.brute_dam > 0)
-					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, org.vital)] physical trauma</b></font>\]"
+					limb_result = "[limb_result] \[<font color = 'red'><b>[get_wound_severity(org.brute_ratio, org.can_heal_overkill)] physical trauma</b></font>\]"
 				if(org.burn_dam > 0)
-					limb_result = "[limb_result] \[<font color = '#ffa500'><b>[get_wound_severity(org.burn_ratio, org.vital)] burns</b></font>\]"
+					limb_result = "[limb_result] \[<font color = '#ffa500'><b>[get_wound_severity(org.burn_ratio, org.can_heal_overkill)] burns</b></font>\]"
 				if(org.status & ORGAN_BLEEDING)
 					limb_result = "[limb_result] \[<span class='danger'>bleeding</span>\]"
 				. += limb_result
@@ -254,7 +254,7 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose)
 	. = jointext(.,"<br>")
 
 // Calculates severity based on the ratios defined external limbs.
-proc/get_wound_severity(var/damage_ratio, var/vital = 0)
+proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 	var/degree
 
 	switch(damage_ratio)
@@ -269,7 +269,7 @@ proc/get_wound_severity(var/damage_ratio, var/vital = 0)
 		if(0.75 to 1)
 			degree = "extreme"
 		else
-			if(vital)
+			if(can_heal_overkill)
 				degree = "critical"
 			else
 				degree = "irreparable"

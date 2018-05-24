@@ -1,7 +1,6 @@
 //Shuttle controller computer for shuttles going between sectors
 /obj/machinery/computer/shuttle_control/explore
 	name = "general shuttle control console"
-	icon_state = "thick"
 	ui_template = "shuttle_control_console_exploration.tmpl"
 
 /obj/machinery/computer/shuttle_control/explore/get_ui_data(var/datum/shuttle/autodock/overmap/shuttle)

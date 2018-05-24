@@ -92,7 +92,7 @@
 	if(!. || !in_depth)
 		return
 
-	var/datum/computer_file/crew_record/R = get_crewmember_record(old_name)
+	var/datum/computer_file/report/crew_record/R = get_crewmember_record(old_name)
 	if(R)
 		R.set_name(new_name)
 
@@ -106,7 +106,6 @@
 			var/obj/item/weapon/card/id/ID = A
 			if(ID.registered_name == old_name)
 				ID.registered_name = new_name
-				ID.update_name()
 				search_id = 0
 		else if(search_pda && istype(A,/obj/item/modular_computer/pda))
 			var/obj/item/modular_computer/pda/PDA = A

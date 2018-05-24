@@ -109,7 +109,7 @@ proc/get_radio_key_from_channel(var/channel)
 		verb = pick("slobbers","slurs")
 		. = 1
 	if(stuttering)
-		message = stutter(message)
+		message = NewStutter(message)
 		verb = pick("stammers","stutters")
 		. = 1
 
@@ -177,7 +177,7 @@ proc/get_radio_key_from_channel(var/channel)
 		speaking.broadcast(src,trim(message))
 		return 1
 
-	if(is_muzzled())
+	if((is_muzzled()) && !(speaking && (speaking.flags & SIGNLANG)))
 		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
 		return
 

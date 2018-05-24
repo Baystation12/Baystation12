@@ -20,7 +20,7 @@
 			return
 
 	..()
-
+	remove_cloaking_source(species)
 	// Should this all be in Touch()?
 	if(istype(H))
 		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))

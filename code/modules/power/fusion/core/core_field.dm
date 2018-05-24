@@ -137,7 +137,7 @@
 		use_power = light_min_power + ceil((light_max_power-light_min_power)*temp_mod)
 
 	if(last_range != use_range || last_power != use_power)
-		set_light(use_power, use_range / 6, use_range)
+		set_light(min(use_power, 1), use_range / 6, use_range) //cap first arg at 1 to avoid breaking lighting stuff.
 		last_range = use_range
 		last_power = use_power
 
@@ -205,7 +205,7 @@
 
 /obj/effect/fusion_em_field/proc/Rupture()
 	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
-	set_light(15, 15, "#ccccff")
+	set_light(1, 0.1, 15, 2, "#ccccff")
 	empulse(get_turf(src), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
 	sleep(5)
 	RadiateAll()

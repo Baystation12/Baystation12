@@ -7,7 +7,8 @@
 	spell_flags = NEEDSCLOTHES
 	invocation = "Scyar Peranda!"
 	invocation_type = SpI_SHOUT
-	cooldown_min = 30 MINUTES //100 deciseconds reduction per rank
+	charge_max = 30 MINUTES
+	cooldown_min = 25 MINUTES
 
 	smoke_spread = 1
 	smoke_amt = 5

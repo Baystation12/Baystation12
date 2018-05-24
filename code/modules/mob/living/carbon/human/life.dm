@@ -884,11 +884,11 @@
 		return
 
 	if(is_asystole())
-		shock_stage = max(shock_stage, 61)
+		shock_stage = max(shock_stage + 1, 61)
 	var/traumatic_shock = get_shock()
 	if(traumatic_shock >= max(30, 0.8*shock_stage))
 		shock_stage += 1
-	else
+	else if (!is_asystole())
 		shock_stage = min(shock_stage, 160)
 		var/recovery = 1
 		if(traumatic_shock < 0.5 * shock_stage) //lower shock faster if pain is gone completely
@@ -1021,7 +1021,7 @@
 			if(I)
 				perpname = I.registered_name
 
-		var/datum/computer_file/crew_record/E = get_crewmember_record(perpname)
+		var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 		if(E)
 			switch(E.get_criminalStatus())
 				if("Arrest")

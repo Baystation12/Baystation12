@@ -8,3 +8,4 @@
 #define TURF_HAS_CORNERS        128
 #define TURF_IS_FRAGILE         256
 #define TURF_ACID_IMMUNE        512
+#define TURF_IS_WET             1024

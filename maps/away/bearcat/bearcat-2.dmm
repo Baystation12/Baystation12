@@ -151,7 +151,10 @@
 	layer = 2.4;
 	level = 2
 	},
-/obj/machinery/computer/engines,
+/obj/machinery/computer/engines{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "an" = (
@@ -162,7 +165,10 @@
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "ao" = (
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/sensors{
+	icon_state = "computer";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "ap" = (
@@ -230,9 +236,12 @@
 	pixel_y = -32
 	},
 /obj/machinery/light,
-/obj/item/modular_computer/console/preset/engineering,
 /obj/item/device/radio/intercom{
 	pixel_x = -32
+	},
+/obj/item/modular_computer/console/preset/engineering{
+	icon_state = "console";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
@@ -249,7 +258,10 @@
 /obj/machinery/newscaster{
 	pixel_y = -32
 	},
-/obj/item/modular_computer/console/preset/command,
+/obj/item/modular_computer/console/preset/command{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/usedup,
 /area/ship/scrap/command/bridge)
 "aB" = (
@@ -540,7 +552,10 @@
 	pixel_x = 0;
 	pixel_y = -32
 	},
-/obj/machinery/computer/message_monitor,
+/obj/machinery/computer/message_monitor{
+	icon_state = "computer";
+	dir = 4
+	},
 /turf/simulated/floor/bluegrid/airless,
 /area/ship/scrap/comms)
 "aY" = (
@@ -4974,7 +4989,10 @@
 	icon_state = "corner_white";
 	dir = 10
 	},
-/obj/machinery/computer/engines,
+/obj/machinery/computer/engines{
+	icon_state = "computer";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
 "hV" = (
@@ -5003,11 +5021,14 @@
 	dir = 10
 	},
 /obj/machinery/light/small,
-/obj/item/modular_computer/console/preset/engineering,
 /obj/machinery/button/remote/blast_door{
 	id = "scram";
 	name = "CORE SCRAM";
 	pixel_y = -26
+	},
+/obj/item/modular_computer/console/preset/engineering{
+	icon_state = "console";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)

@@ -1,5 +1,6 @@
 /datum/phenomena/communicate
 	name = "Direct Communication"
+	desc = "Communicate directly with a mortal being. You may communicate with non-followers, but they will find you easier to ignore."
 	cost = 0
 	flags = PHENOMENA_FOLLOWER | PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living
@@ -16,6 +17,7 @@
 
 /datum/phenomena/point
 	name = "Point"
+	desc = "Attract your follower's attentions to something nearby."
 	cost = 0
 	flags = PHENOMENA_MUNDANE|PHENOMENA_FOLLOWER|PHENOMENA_NONFOLLOWER
 	expected_type = /atom
@@ -46,6 +48,7 @@
 
 /datum/phenomena/punish
 	name = "Punish"
+	desc = "Punish your followers for insubordination, the cost to use this phenomena is based on how deadly you choose the punishment to be."
 	cost = 0
 	flags = PHENOMENA_FOLLOWER
 	expected_type = /mob/living
@@ -55,11 +58,11 @@
 	var/pain = input(linked, "Choose their punishment.", "Punishment") as anything in punishment_list
 	if(!pain)
 		return
-	if(linked.mob_uplink.uses < punishment_list[pain])
+	if(punishment_list[pain] && linked.power < punishment_list[pain])
 		to_chat(linked, "<span class='warning'>[pain] costs too much power for you to use on \the [L]</span>")
 		return
 	..()
-	linked.take_cost(punishment_list[pain])
+	linked.adjust_power(-punishment_list[pain])
 	switch(pain)
 		if("Pain (0)")
 			L.adjustHalLoss(15)
