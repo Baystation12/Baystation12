@@ -106,7 +106,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		spawning = 0
 
 /mob/living/simple_animal/hostile/flood/proc/is_being_infested(var/mob/m)
-	for(var/obj/effect/dead_infestor/f in m.contents)
+	if(locate(/obj/effect/dead_infestor) in m.contents)
 		return 1
 	return 0
 
@@ -118,14 +118,14 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	src = null //Just in case we get killed.
 	sound_to(h,TO_PLAYER_INFECTED_SOUND)
 	var/obj/infest_placeholder = new /obj/effect/dead_infestor
-	infest_placeholder.forceMove(h.contents)
+	h.contents += infest_placeholder
 	spawn(INFECT_DELAY)
 		h.Stun(999)
 		h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
 		new /obj/effect/decal/cleanable/blood/splatter(h.loc)
 		var/mob/living/simple_animal/new_combat_form = new /mob/living/simple_animal/hostile/flood/combat_form/human
-		new_combat_form.maxHealth = 200 //Buff their health a bit.
-		new_combat_form.health = 200
+		new_combat_form.maxHealth = 350 //Buff their health a bit.
+		new_combat_form.health = 350
 		new_combat_form.forceMove(h.loc)
 		new_combat_form.ckey = h.ckey
 		new_combat_form.name = h.real_name
@@ -135,7 +135,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 			new_combat_form.stop_automated_movement = 1
 		for(var/obj/i in h.contents)
 			h.drop_from_inventory(i)
-		qdel(infest_placeholder)
 		qdel(h)
 	return 1
 
