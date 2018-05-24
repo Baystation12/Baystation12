@@ -53,10 +53,11 @@
 	name = "Random Corvette Alarm Button"
 
 /obj/random_corvette_alarm_button/New()
-	var/obj/to_spawn = pick(\
+	var/obj/to_spawn = pick(list(\
 	/obj/machinery/button/toggle/alarm_button/corvette = 75,/obj/machinery/button/toggle/alarm_button/corvette/v2 = 10,\
 	/obj/machinery/button/toggle/alarm_button/corvette/v2 = 10,/obj/machinery/button/toggle/alarm_button/corvette/v4 = 5
-	)
+	))
+	new to_spawn (loc)
 
 /obj/random_corvette_alarm_button/Initialize()
 	return INITIALIZE_HINT_QDEL
