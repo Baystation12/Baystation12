@@ -147,7 +147,7 @@
 	step_delay = 0.1 SECONDS
 	dispersion = 1
 	damtype = BRUTE
-	damage = 150
+	damage = 200
 
 /obj/item/projectile/deck_gun_damage_proj/get_structure_damage()
 	return damage * 10 //Counteract the /10 from wallcode damage processing.
