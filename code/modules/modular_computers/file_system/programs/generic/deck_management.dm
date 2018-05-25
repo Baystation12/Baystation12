@@ -137,7 +137,7 @@
 	if(!ensure_valid_shuttle())
 		return 0
 	var/datum/shuttle_log/log = shuttle_controller.shuttle_logs[selected_shuttle]
-	if((selected_mission.shuttle_name != selected_shuttle.name) || !(selected_mission in (log.missions + log.queued_missions)))
+	if(!(selected_mission in (log.missions + log.queued_missions)) || (selected_mission.shuttle_name != selected_shuttle.name))
 		selected_mission = null
 		prog_state = DECK_ALL_MISSIONS
 		return 0
