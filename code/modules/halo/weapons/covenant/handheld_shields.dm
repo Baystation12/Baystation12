@@ -168,7 +168,7 @@
 		if(get_dir(src,damage_source) in get_allowed_attack_dirs())
 			return 0
 
-	if((def_zone in list("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm","r_arm")) && prob(creator_gauntlet.limb_hit_chance))
+	if((def_zone in list("l_hand","r_hand")) && prob(creator_gauntlet.limb_hit_chance))
 		return 0
 	else
 		if(!isnull(attacker))
