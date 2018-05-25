@@ -172,9 +172,16 @@
 			user.visible_message("<span class='notice'>[user] starts filling [src]...</span>",\
 				"<span class='notice'>You start filling [src]...</span>")
 			if(do_after(user,50))
-				var/obj/structure/sandbag/S = new(src.loc)
+				var/loc_dropon = get_turf(src)
+				if(src.loc == user)
+					loc_dropon = get_turf(user)
+				var/obj/structure/sandbag/S = new(loc_dropon)
 				S.dir = src.dir
+				if(src.loc == user)
+					S.dir = user.dir
 				user.remove_from_mob(I)
+				if(src.loc == user)
+					user.remove_from_mob(src)
 				qdel(I)
 				qdel(src)
 	else
