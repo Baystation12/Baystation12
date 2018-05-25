@@ -42,6 +42,7 @@
 	spawn_positions = 7
 	outfit_type = /decl/hierarchy/outfit/job/unsc_corvette/crewmember
 	selection_color = "#008000"
+	access = list(042)
 	spawnpoint_override = "Corvette Crew"
 
 /datum/job/unsc_ship_cap
@@ -50,6 +51,7 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc_corvette/CO
 	selection_color = "#008000"
+	access = list(042)
 	spawnpoint_override = "Corvette Crew"
 
 /datum/map/first_contact
