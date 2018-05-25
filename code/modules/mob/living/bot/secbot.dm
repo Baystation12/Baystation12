@@ -34,7 +34,7 @@
 
 /mob/living/bot/secbot/beepsky
 	name = "Officer Beepsky"
-	desc = "It's Officer Beep O'sky! Powered by a potato and a shot of whiskey."
+	desc = "It's Officer Beep O'sky! Powered by a potato and a shot of whiskey. There is text engraved on its case &quot;I'm back, scumbags&quot;."
 	will_patrol = 1
 
 /mob/living/bot/secbot/New()

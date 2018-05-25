@@ -171,62 +171,65 @@ Transponder Codes:<UL>"}
 	..()
 
 // Patrol beacon types below. So many.
+/obj/machinery/navbeacon/Robotics
+	location = "Robotics"
+	codes = list("patrol" = 1, "next_patrol" = "CH_EAST2")
 
-/obj/machinery/navbeacon/Security
-	location = "Security"
-	codes = list("patrol" = 1, "next_patrol" = "EVA")
+/obj/machinery/navbeacon/Sec
+	location = "Sec"
+	codes = list("patrol" = 1, "next_patrol" = "CH_NORTH1")
 
-/obj/machinery/navbeacon/EVA
-	location = "EVA"
+/obj/machinery/navbeacon/CH_NORTH1
+	location = "CH_NORTH1"
 	codes = list("patrol" = 1, "next_patrol" = "Lockers")
 
 /obj/machinery/navbeacon/Lockers
 	location = "Lockers"
-	codes = list("patrol" = 1, "next_patrol" = "CHW")
+	codes = list("patrol" = 1, "next_patrol" = "CH_NORTHWEST")
 
-/obj/machinery/navbeacon/CHW
-	location = "CHW"
+/obj/machinery/navbeacon/CH_NORTHWEST
+	location = "CH_NORTHWEST"
 	codes = list("patrol" = 1, "next_patrol" = "QM")
 
 /obj/machinery/navbeacon/QM
 	location = "QM"
-	codes = list("patrol" = 1, "next_patrol" = "AIW")
+	codes = list("patrol" = 1, "next_patrol" = "AI1")
 
-/obj/machinery/navbeacon/AIW
-	location = "AIW"
+/obj/machinery/navbeacon/AI1
+	location = "AI1"
 	codes = list("patrol" = 1, "next_patrol" = "AftH")
 
 /obj/machinery/navbeacon/AftH
 	location = "AftH"
-	codes = list("patrol" = 1, "next_patrol" = "AIE")
+	codes = list("patrol" = 1, "next_patrol" = "AI2")
 
-/obj/machinery/navbeacon/AIE
-	location = "AIE"
-	codes = list("patrol" = 1, "next_patrol" = "CHE")
+/obj/machinery/navbeacon/AI2
+	location = "AI2"
+	codes = list("patrol" = 1, "next_patrol" = "CH_EAST1")
 
-/obj/machinery/navbeacon/CHE
-	location = "CHE"
-	codes = list("patrol" = 1, "next_patrol" = "HOP")
+/obj/machinery/navbeacon/CH_EAST1
+	location = "CH_EAST1"
+	codes = list("patrol" = 1, "next_patrol" = "ESCAPE")
 
-/obj/machinery/navbeacon/HOP
-	location = "HOP"
-	codes = list("patrol" = 1, "next_patrol" = "Stbd")
+/obj/machinery/navbeacon/ESCAPE
+	location = "ESCAPE"
+	codes = list("patrol" = 1, "next_patrol" = "CH_EAST2")
 
-/obj/machinery/navbeacon/Stbd
-	location = "Stbd"
-	codes = list("patrol" = 1, "next_patrol" = "HOP2")
-
-/obj/machinery/navbeacon/HOP2
-	location = "HOP2"
+/obj/machinery/navbeacon/CH_EAST2
+	location = "CH_EAST2"
 	codes = list("patrol" = 1, "next_patrol" = "Dorm")
 
 /obj/machinery/navbeacon/Dorm
 	location = "Dorm"
-	codes = list("patrol" = 1, "next_patrol" = "EVA2")
+	codes = list("patrol" = 1, "next_patrol" = "CH_NORTHEAST")
 
-/obj/machinery/navbeacon/EVA2
-	location = "EVA2"
-	codes = list("patrol" = 1, "next_patrol" = "Security") // And the cycle is finished
+/obj/machinery/navbeacon/CH_NORTHEAST
+	location = "CH_NORTHEAST"
+	codes = list("patrol" = 1, "next_patrol" = "CH_NORTH2")
+
+/obj/machinery/navbeacon/CH_NORTH2
+	location = "CH_NORTH2"
+	codes = list("patrol" = 1, "next_patrol" = "Sec") // And the cycle is finished
 
 // Delivery types below.
 
