@@ -21,6 +21,7 @@
 
 	var/staffwarn = null
 	var/whitelisted = FALSE
+	var/species_ingame_whitelisted = FALSE
 
 		///////////////
 		//SOUND STUFF//

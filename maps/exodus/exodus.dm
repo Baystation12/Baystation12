@@ -7,6 +7,7 @@
 	#include "exodus_holodecks.dm"
 	#include "exodus_presets.dm"
 	#include "exodus_shuttles.dm"
+	#include "exodus_jobs.dm"
 
 	#include "exodus_unit_testing.dm"
 	#include "exodus_zas_tests.dm"
