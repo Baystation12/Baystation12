@@ -1,6 +1,0 @@
-author: "HetNeSS"
-delete-after: True
-changes: 
-  - maptweak: "The fore docking port on deck four had been widened in size, as the main docking port be probably should."
-  - maptweak: "Remodelled the Mercenaries gamemode transport shuttle, to suit the extended docking bay, as well as for more beefy and physics-justifiable look."
-  - bugfix: "\"Northeast of First Deck\" and \"Northwest of Fourth Deck\" waypoints swapped places (aka fixed)"
