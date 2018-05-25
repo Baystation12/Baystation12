@@ -8,11 +8,11 @@
 <div class="item">
 	{{:helper.link('Browse Goods', 'cart', {'set_screen' : 1}, data.screen == 1 ? 'selected' : null)}}
 	{{:helper.link('View Statistics', 'calculator', {'set_screen' : 2}, data.screen == 2 ? 'selected' : null)}}
-	{{:helper.link('Shuttle Control', 'bullet', {'set_screen' : 3}, data.screen == 3 ? 'selected' : null)}}
+	{{:helper.link('Controls', 'bullet', {'set_screen' : 3}, data.screen == 3 ? 'selected' : null)}}
 	{{:helper.link('Browse Orders', 'check', {'set_screen' : 4}, data.screen == 4 ? 'selected' : null)}}
 </div>
 <hr>
-<span>Current balance: {{:data.credits}} Credits</span>
+<span>Current balance: {{:data.credits}} Points</span>
 <hr>
 {{if data.screen == 1}}
 	{{for data.categories}}
@@ -24,7 +24,7 @@
 			{{for data.possible_purchases}}
 				<tr>
 				<td>{{:value.name}}
-				<td>{{:value.cost}} Credits
+				<td>{{:value.cost}} Points
 				<td>{{:helper.link('Order', null, {'order' : value.ref})}}
 			{{/for}}
 		</table>
@@ -32,7 +32,7 @@
 {{else data.screen == 2}}
 	<div class="item">
 		<div class="itemLabel">
-			Total credits generated today:
+			Total points generated today:
 		</div>
 		<div class="itemContent">
 			{{:data.total_credits}} Cr.
@@ -48,7 +48,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Credits from recycled crates:
+			Points from recycled crates:
 		</div>
 		<div class="itemContent">
 			{{:data.credits_crates}} Cr.
@@ -56,7 +56,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Credits from phoron exports:
+			Points from phoron exports:
 		</div>
 		<div class="itemContent">
 			{{:data.credits_phoron}} Cr.
@@ -64,7 +64,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Credits from platinum exports:
+			Points from platinum exports:
 		</div>
 		<div class="itemContent">
 			{{:data.credits_platinum}} Cr.
@@ -72,7 +72,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Credits from uploaded antibody data:
+			Points from uploaded antibody data:
 		</div>
 		<div class="itemContent">
 			{{:data.credits_virology}} Cr.
@@ -80,7 +80,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Credits from uploaded good explorer points:
+			Points from uploaded good explorer points:
 		</div>
 		<div class="itemContent">
 			{{:data.credits_gep}} Cr.
@@ -88,7 +88,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Credit bonus for paperwork handling:
+			Point bonus for paperwork handling:
 		</div>
 		<div class="itemContent">
 			{{:data.credits_paperwork}} Cr.
@@ -105,7 +105,7 @@
 {{else data.screen == 3}}
 	<div class="item">
 		<div class="itemLabel">
-			Current shuttle location:
+			Current {{:data.shuttle_name}} location:
 		</div>
 		<div class="itemContent">
 			{{:data.shuttle_location}}
@@ -113,7 +113,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Current shuttle status:
+			Current {{:data.shuttle_name}} status:
 		</div>
 		<div class="itemContent">
 			{{:data.shuttle_status}}

@@ -8848,14 +8848,6 @@
 	name = "plating"
 	},
 /area/centcom/living)
-"auc" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 1
-	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/supply/dock)
 "aud" = (
 /turf/space,
 /area/shuttle/alien/base)
@@ -8936,32 +8928,19 @@
 	name = "plating"
 	},
 /area/centcom/living)
-"auo" = (
-/turf/simulated/floor/plating,
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "diagonalWall3"
-	},
-/area/supply/dock)
 "aup" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 10
 	},
-/area/supply/dock)
-"auq" = (
-/obj/structure/shuttle/engine/heater{
-	icon_state = "heater";
-	dir = 1
+/obj/structure/railing/mapped,
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (WEST)";
+	icon_state = "railing0";
+	dir = 8
 	},
-/obj/structure/window/reinforced,
-/turf/simulated/floor/plating,
-/area/supply/dock)
-"aur" = (
-/turf/simulated/floor/plating,
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "diagonalWall3"
-	},
+/turf/simulated/floor/tiled/dark,
 /area/supply/dock)
 "aus" = (
 /obj/effect/decal/cleanable/blood,
@@ -8991,39 +8970,67 @@
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/administration/centcom)
-"auw" = (
-/obj/machinery/button/remote/blast_door{
-	id = "supply_shuttle";
-	name = "Supply Drone Shutter Control";
-	pixel_x = 0;
-	pixel_y = 0;
-	req_access = list(31)
-	},
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
-/area/supply/dock)
 "aux" = (
-/turf/simulated/floor/plating,
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "diagonalWall3"
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9
 	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (NORTH)";
+	icon_state = "railing0";
+	dir = 1
+	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (WEST)";
+	icon_state = "railing0";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
 /area/supply/dock)
 "auy" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (NORTH)";
+	icon_state = "railing0";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/supply/dock)
+"auz" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (NORTH)";
+	icon_state = "railing0";
+	dir = 1
+	},
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
-/area/supply/dock)
-"auz" = (
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/supply/dock)
 "auA" = (
-/turf/simulated/floor/plating,
-/turf/simulated/shuttle/wall{
-	icon_state = "diagonalWall3"
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
 	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (NORTH)";
+	icon_state = "railing0";
+	dir = 1
+	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (EAST)";
+	icon_state = "railing0";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
 /area/supply/dock)
 "auB" = (
 /turf/simulated/mineral,
@@ -9125,15 +9132,6 @@
 	dir = 2
 	},
 /area/centcom/living)
-"auQ" = (
-/obj/machinery/door/blast/shutters{
-	dir = 2;
-	id = "supply_shuttle";
-	name = "Supply Drone Shutters"
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/plating,
-/area/supply/dock)
 "auR" = (
 /obj/machinery/light{
 	dir = 8
@@ -9177,7 +9175,7 @@
 /area/centcom/living)
 "auX" = (
 /obj/effect/shuttle_landmark/supply/centcom,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/supply/dock)
 "auY" = (
 /obj/machinery/body_scanconsole{
@@ -9383,39 +9381,16 @@
 	},
 /area/centcom/living)
 "avA" = (
-/turf/simulated/floor/plating,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "diagonalWall3"
-	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning,
+/obj/structure/railing/mapped,
+/turf/simulated/floor/tiled/dark,
 /area/supply/dock)
 "avB" = (
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/obj/structure/showcase{
-	desc = "A self-contained autopilot that controls supply drones.";
-	icon_state = "comm_server";
-	name = "Supply Drone Virtual Intelligence"
-	},
+/obj/effect/floor_decal/industrial/warning,
+/obj/structure/railing/mapped,
 /obj/machinery/light/spot,
-/turf/simulated/floor/plating,
-/area/supply/dock)
-"avC" = (
-/turf/simulated/floor/plating,
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "diagonalWall3"
-	},
+/turf/simulated/floor/tiled/dark,
 /area/supply/dock)
 "avD" = (
 /obj/structure/lattice,
@@ -23062,6 +23037,18 @@
 	dir = 2
 	},
 /area/syndicate_mothership/raider_base)
+"cfx" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (WEST)";
+	icon_state = "railing0";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/supply/dock)
 "exk" = (
 /obj/machinery/computer/pod{
 	dir = 1;
@@ -23072,6 +23059,52 @@
 	icon_state = "lino"
 	},
 /area/tdome/tdomeadmin)
+"jGP" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
+	},
+/obj/structure/railing/mapped,
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (EAST)";
+	icon_state = "railing0";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/supply/dock)
+"mDM" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/dark,
+/area/supply/dock)
+"oIk" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/structure/railing/mapped{
+	tag = "icon-railing0 (EAST)";
+	icon_state = "railing0";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/supply/dock)
+"tji" = (
+/turf/simulated/floor/tiled/dark,
+/area/supply/dock)
+"vAH" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark,
+/area/supply/dock)
+"wkc" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/dark,
+/area/supply/dock)
 
 (1,1,1) = {"
 aaa
@@ -37488,13 +37521,13 @@ aab
 atx
 atR
 atR
-auo
-auw
-auQ
-auQ
-auQ
-auw
-auA
+atR
+atR
+atR
+atR
+atR
+atR
+atR
 atR
 atR
 atR
@@ -37690,14 +37723,14 @@ aab
 atx
 atR
 atR
-aup
+atR
 aux
-auz
-auz
-auz
-aur
+cfx
+wkc
+wkc
+cfx
 aup
-auA
+atR
 atR
 atR
 atR
@@ -37891,15 +37924,15 @@ aab
 aab
 atx
 atR
-auc
-auq
+atR
+atR
 auy
-auz
-auz
-auz
-auz
+vAH
+tji
+tji
+vAH
 avA
-aup
+atR
 atR
 atR
 atR
@@ -38093,15 +38126,15 @@ aab
 aab
 atx
 atR
-auc
-auq
+atR
+atR
 auz
-auz
+tji
 auX
-auz
-auz
+tji
+tji
 avB
-aup
+atR
 atR
 atR
 atR
@@ -38295,15 +38328,15 @@ aab
 aab
 atx
 atR
-auc
-auq
+atR
+atR
 auy
-auz
-auz
-auz
-auz
-avC
-aup
+vAH
+tji
+tji
+vAH
+avA
+atR
 atR
 atR
 atR
@@ -38498,14 +38531,14 @@ aab
 atx
 atR
 atR
-aup
+atR
 auA
-auz
-auz
-auz
-auo
-aup
-aux
+oIk
+mDM
+mDM
+oIk
+jGP
+atR
 atR
 atR
 atR
@@ -38700,13 +38733,13 @@ aab
 atx
 atR
 atR
-aur
-auw
-auQ
-auQ
-auQ
-auw
-aux
+atR
+atR
+atR
+atR
+atR
+atR
+atR
 atR
 atR
 atR

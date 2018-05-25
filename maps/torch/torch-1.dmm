@@ -15895,18 +15895,6 @@
 "Em" = (
 /turf/simulated/wall/prepainted,
 /area/quartermaster/storage)
-"En" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 6
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
-"Eo" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 10
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
 "Ep" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/cyan{
@@ -17225,7 +17213,7 @@
 /area/quartermaster/storage)
 "Hc" = (
 /obj/effect/shuttle_landmark/supply/station,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/reinforced,
 /area/quartermaster/hangar)
 "Hd" = (
 /obj/machinery/light{
@@ -18180,18 +18168,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
-"IY" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 5
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
-"IZ" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 9
-	},
-/turf/simulated/floor/plating,
-/area/quartermaster/hangar)
 "Ja" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light{
@@ -19333,6 +19309,9 @@
 "XJ" = (
 /turf/simulated/floor/tiled,
 /area/quartermaster/unused)
+"XM" = (
+/turf/simulated/floor/reinforced,
+/area/quartermaster/hangar)
 "XQ" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -39907,15 +39886,15 @@ bi
 bi
 bi
 bi
-bb
-pd
-pd
-pd
-pd
-pd
-pd
-pd
-eJ
+bi
+bi
+bi
+bi
+bi
+bi
+bi
+bi
+bi
 bi
 JL
 JZ
@@ -40109,15 +40088,15 @@ fO
 fO
 Cu
 bi
-bd
 bi
-bi
-bi
-bi
-bi
-bi
-bi
-IY
+bb
+pd
+pd
+pd
+pd
+pd
+pd
+eJ
 bi
 bi
 bi
@@ -40310,17 +40289,17 @@ bi
 bi
 bi
 Cv
-bb
-En
 bi
 bi
-bi
-bi
-bi
-bi
-bi
-bi
+bd
+XM
+XM
+XM
+XM
+XM
+XM
 we
+bi
 bi
 bi
 Qd
@@ -40512,17 +40491,17 @@ bi
 bi
 bi
 Cv
+bi
+bi
 bd
-bi
-bi
-bi
-bi
-bi
-bi
-bi
-bi
-bi
+XM
+XM
+XM
+XM
+XM
+XM
 we
+bi
 bi
 bi
 Qd
@@ -40714,17 +40693,17 @@ yH
 Ab
 bi
 Cv
+bi
+bi
 bd
-bi
-bi
-bi
-bi
+XM
+XM
 Hc
-bi
-bi
-bi
-bi
+XM
+XM
+XM
 we
+bi
 JM
 Ka
 Qd
@@ -40916,17 +40895,17 @@ bi
 bi
 bi
 Cv
+bi
+bi
 bd
-bi
-bi
-bi
-bi
-bi
-bi
-bi
-bi
-bi
+XM
+XM
+XM
+XM
+XM
+XM
 we
+bi
 bi
 Kb
 Qd
@@ -41118,17 +41097,17 @@ bi
 bi
 bi
 Cv
-bh
-Eo
 bi
 bi
-bi
-bi
-bi
-bi
-bi
-bi
+bd
+XM
+XM
+XM
+XM
+XM
+XM
 we
+bi
 bi
 Kc
 Qd
@@ -41321,16 +41300,16 @@ gK
 bi
 Cv
 bi
-bd
 bi
-bi
-bi
-bi
-bi
-bi
-bi
-IZ
+bh
+bH
+bH
+bH
+bH
+bH
+bH
 tg
+bi
 bi
 Kb
 Qd
@@ -41523,15 +41502,15 @@ aJ
 Bn
 Cv
 bi
-bh
-bH
-bH
-bH
-bH
-bH
-bH
-bH
-tg
+bi
+bi
+bi
+bi
+bi
+bi
+bi
+bi
+bi
 bi
 bi
 Kd

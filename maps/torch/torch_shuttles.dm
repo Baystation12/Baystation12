@@ -540,25 +540,27 @@
 	landmark_tag = "nav_specops_out"
 	docking_controller = "specops_dock_airlock"
 
-//Cargo drone
+//Cargo elevator
 
 /datum/shuttle/autodock/ferry/supply/drone
-	name = "Supply Drone"
+	name = "elevator"
 	location = 1
 	warmup_time = 10
 	shuttle_area = /area/supply/dock
 	waypoint_offsite = "nav_cargo_start"
 	waypoint_station = "nav_cargo_station"
+	sound_takeoff = 'sound/effects/lift_heavy_start.ogg'
+	sound_landing = 'sound/effects/lift_heavy_stop.ogg'
 
 /obj/effect/shuttle_landmark/supply/centcom
-	name = "Centcom"
+	name = "Deep Storage"
 	landmark_tag = "nav_cargo_start"
 
 /obj/effect/shuttle_landmark/supply/station
 	name = "Hangar"
 	landmark_tag = "nav_cargo_station"
 	base_area = /area/quartermaster/hangar
-	base_turf = /turf/simulated/floor/plating
+	base_turf = /turf/simulated/floor/reinforced
 
 /datum/shuttle/autodock/overmap/exploration_shuttle
 	name = "Charon"
