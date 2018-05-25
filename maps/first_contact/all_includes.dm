@@ -7,6 +7,8 @@
 
 	#include "../Exoplanet Icy/includes.dm"
 
+	#include "../Asteroid Listening Post/includes.dm"
+
 	#include "maps/corvette_spawns.dm"
 	#include "maps/UNSC_Corvette.dmm"
 
