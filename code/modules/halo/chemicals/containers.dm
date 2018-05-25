@@ -20,15 +20,16 @@
 
 /obj/item/weapon/reagent_containers/syringe/biofoam
 	name = "Biofoam Syringe"
-	desc = "A canister filled with biofoam, used to quickly fix internal and external injuries."
+	desc = "A syringe filled with biofoam, used to quickly fix internal and external injuries."
 	amount_per_transfer_from_this = 10
 	volume = 10
 
 	New()
 		..()
-		reagents.add_reagent(/datum/reagent/biofoam,10)
+		reagents.add_reagent(/datum/reagent/biofoam, 10)
 		mode = SYRINGE_INJECT
 		update_icon()
+
 
 /obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline
 	name = "Tri-Adrenaline Syringe"
