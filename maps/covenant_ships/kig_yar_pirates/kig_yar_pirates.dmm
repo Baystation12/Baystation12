@@ -7,7 +7,6 @@
 "ag" = (/obj/machinery/light/covenant/north,/obj/effect/landmark/start/unggoy_pirate,/turf/simulated/floor/covenant,/area/kigyar_pirate)
 "ah" = (/obj/effect/landmark/start/unggoy_pirate,/turf/simulated/floor/covenant,/area/kigyar_pirate)
 "ai" = (/obj/structure/closet/crate/covenant{name = "Plasma Pistols Crate"},/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/device/radio/headset/covenant,/obj/item/device/radio/headset/covenant,/obj/item/device/radio/headset/covenant,/obj/item/device/radio/headset/covenant,/obj/item/device/radio/headset/covenant,/obj/item/device/radio/headset/covenant,/obj/item/device/radio/headset/covenant,/turf/simulated/floor/covenant,/area/kigyar_pirate)
-"aj" = (/obj/machinery/light/covenant/north,/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/projectile/needler,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/turf/simulated/floor/covenant,/area/kigyar_pirate)
 "ak" = (/obj/structure/closet/crate/covenant,/obj/item/clothing/suit/space/vox/pressure,/obj/item/clothing/suit/space/vox/pressure,/obj/item/clothing/suit/space/vox/pressure,/turf/simulated/floor/covenant,/area/kigyar_pirate)
 "al" = (/turf/simulated/floor/covenant,/area/kigyar_pirate)
 "am" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant,/area/kigyar_pirate)
@@ -69,6 +68,13 @@
 "bq" = (/obj/structure/closet/crate/covenant{name = "Point Defense Gauntlets Crate"},/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/obj/item/clothing/gloves/shield_gauntlet/kigyar,/turf/simulated/floor/covenant,/area/kigyar_pirate)
 "br" = (/obj/structure/closet/crate/covenant{name = "Type-51 Carbine Crate"},/obj/item/weapon/gun/projectile/type51carbine,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/turf/simulated/floor/covenant,/area/kigyar_pirate)
 "bs" = (/obj/effect/overmap/ship/kigyar_pirates,/turf/space,/area/space)
+"mx" = (/obj/machinery/atmospherics/pipe/simple/hidden/green{dir = 8},/turf/simulated/wall/covenant,/area/kigyar_pirate)
+"wZ" = (/obj/machinery/atmospherics/pipe/simple/hidden/red{dir = 8},/turf/simulated/wall/covenant,/area/kigyar_pirate)
+"xS" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/covenant,/area/kigyar_pirate)
+"Hy" = (/obj/machinery/atmospherics/portables_connector{dir = 8},/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary{on = 1; start_pressure = 1013},/turf/simulated/floor/covenant,/area/kigyar_pirate)
+"PJ" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/projectile/needler,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/turf/simulated/floor/covenant,/area/kigyar_pirate)
+"TK" = (/obj/machinery/light/covenant/north,/obj/machinery/atmospherics/portables_connector{dir = 4},/obj/machinery/portable_atmospherics/canister/empty,/turf/simulated/floor/covenant,/area/kigyar_pirate)
+"Xi" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/obj/machinery/portable_atmospherics/powered/scrubber{on = 1; scrubbing_gas = list("oxygen"); start_pressure = 1013},/turf/simulated/floor/covenant,/area/kigyar_pirate)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -112,8 +118,8 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababacadadaeababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababafabababababagahahahahabaiajababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababakalalamabalalabalalalalalabalalabalanabaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababafabababababagahahahahabaiTKmxHyababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababakalalamabalalabalalalalalabPJXiwZxSanabaaaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababakalaoalapalalabaoalalalaoaqalalaqalalabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaababababababalamababababababababababaqababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaabarasabalalabalalalalalalalalalalalabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -172,3 +178,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 bsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

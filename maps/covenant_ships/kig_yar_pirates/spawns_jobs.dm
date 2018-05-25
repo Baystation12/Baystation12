@@ -21,11 +21,11 @@ GLOBAL_LIST_EMPTY(unggoy_pirate_spawns)
 	display_name =  "Unggoy Pirate Spawn"
 	restrict_job = list("Kig-Yar Ship - Unggoy Crewmember",)
 
-/datum/spawnpoint/kigyar_pirate/New()
+/datum/spawnpoint/unggoy_pirate/New()
 	..()
-	turfs = GLOB.kigyar_pirate_spawns
+	turfs = GLOB.unggoy_pirate_spawns
 
-/obj/effect/landmark/start/kigyar_pirate
+/obj/effect/landmark/start/unggoy_pirate
 	name = "Unggoy Pirate Spawn"
 
 /obj/effect/landmark/start/unggoy_pirate/New()
