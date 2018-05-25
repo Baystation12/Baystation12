@@ -3309,10 +3309,6 @@
 /obj/item/weapon/stool,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
-"hx" = (
-/obj/structure/railing/mapped,
-/turf/simulated/floor/tiled,
-/area/hallway/primary/thirddeck/fore)
 "hy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -20023,6 +20019,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"VU" = (
+/obj/structure/railing/mapped,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/fore)
 "Wb" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/gym)
@@ -34019,7 +34019,7 @@ kI
 dx
 mi
 mX
-hx
+VU
 oT
 pO
 pM

@@ -7035,7 +7035,7 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
-"Xg" = (
+"Ti" = (
 /obj/item/modular_computer/console{
 	dir = 4
 	},
@@ -24921,7 +24921,7 @@ jj
 jC
 hq
 jz
-Xg
+Ti
 kh
 lx
 lQ

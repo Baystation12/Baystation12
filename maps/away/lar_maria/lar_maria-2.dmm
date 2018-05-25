@@ -3600,7 +3600,7 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
-"DN" = (
+"DG" = (
 /obj/item/modular_computer/console{
 	dir = 1
 	},
@@ -24511,7 +24511,7 @@ eC
 eU
 ff
 ex
-DN
+DG
 eW
 ex
 gu

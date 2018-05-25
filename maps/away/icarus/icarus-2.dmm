@@ -1913,36 +1913,36 @@
 /obj/effect/landmark/random_gen/asteroid,
 /turf/unsimulated/mineral,
 /area/space)
-"nW" = (
+"kT" = (
 /obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/white,
 /area/icarus/open)
-"yS" = (
+"le" = (
 /obj/item/modular_computer/console{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
-"Mf" = (
-/obj/item/modular_computer/console{
-	dir = 8
-	},
-/turf/simulated/floor/tiled,
-/area/icarus/vessel)
-"Rc" = (
-/obj/item/modular_computer/console{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/icarus/vessel)
-"Ru" = (
+"mg" = (
 /obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/open)
+"RQ" = (
+/obj/item/modular_computer/console{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/vessel)
+"Vb" = (
+/obj/item/modular_computer/console{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/icarus/vessel)
 
 (1,1,1) = {"
 gb
@@ -21785,9 +21785,9 @@ ad
 ad
 ad
 ap
-Rc
+RQ
 az
-Rc
+RQ
 ap
 ap
 ap
@@ -23420,7 +23420,7 @@ aM
 ak
 ak
 dz
-yS
+le
 cL
 ac
 ac
@@ -24026,7 +24026,7 @@ aM
 ak
 ak
 dz
-yS
+le
 cL
 cL
 dQ
@@ -24613,9 +24613,9 @@ ad
 ac
 ac
 ao
-Mf
-Ru
-Mf
+Vb
+mg
+Vb
 ap
 ap
 ap
@@ -26122,7 +26122,7 @@ ag
 ap
 er
 ey
-nW
+kT
 ey
 eY
 fd
@@ -26444,7 +26444,7 @@ ap
 bP
 ap
 aR
-yS
+le
 ap
 dg
 dp

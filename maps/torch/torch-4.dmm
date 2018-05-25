@@ -7,7 +7,7 @@
 /turf/space,
 /area/space)
 "aac" = (
-/obj/effect/shuttle_landmark/merc/deck4,
+/obj/effect/shuttle_landmark/merc/deck1,
 /turf/space,
 /area/space)
 "aad" = (

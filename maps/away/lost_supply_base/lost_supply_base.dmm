@@ -2430,7 +2430,7 @@
 	icon_state = "steel_broken0"
 	},
 /area/lost_supply_base/supply)
-"ps" = (
+"Jd" = (
 /obj/item/modular_computer/console{
 	dir = 1
 	},
@@ -7072,7 +7072,7 @@ dI
 dW
 ej
 ex
-ps
+Jd
 eO
 eP
 aa
