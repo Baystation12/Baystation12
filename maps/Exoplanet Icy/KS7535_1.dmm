@@ -118,7 +118,9 @@
 "cn" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/machinery/light,/obj/machinery/power/apc/super{pixel_y = -32},/turf/simulated/floor/tiled,/area/exo_Ice_facility/lower{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "maintcentral"; requires_power = 0; tag = "icon-maintcentral"})
 "co" = (/obj/item/weapon/weldingtool,/turf/simulated/floor/plating,/area/exo_Ice_facility/lower{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "maintcentral"; requires_power = 0; tag = "icon-maintcentral"})
 "cp" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/exo_Ice_facility/lower{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "maintcentral"; requires_power = 0; tag = "icon-maintcentral"})
-"cq" = (/obj/machinery/light,/obj/structure/reagent_dispensers/coolanttank,/turf/simulated/floor/plating,/area/exo_Ice_facility/lower{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "maintcentral"; requires_power = 0; tag = "icon-maintcentral"})
+"cq" = (/obj/item/weapon/mop,/obj/structure/janitorialcart,/turf/simulated/floor/plating,/area/exo_Ice_facility/lower{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "maintcentral"; requires_power = 0; tag = "icon-maintcentral"})
+"cr" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/exo_Ice_facility/lower{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "maintcentral"; requires_power = 0; tag = "icon-maintcentral"})
+"cs" = (/obj/machinery/light,/obj/structure/reagent_dispensers/coolanttank,/turf/simulated/floor/plating,/area/exo_Ice_facility/lower{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "maintcentral"; requires_power = 0; tag = "icon-maintcentral"})
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -218,7 +220,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaqbWbWapaqbWbWapaqbWbWapaqbWbWapaqbublapaqbpbXapabaaaaaaaaaaaaaaaaaaaaabbYbwbZcacacbcbcacbccbwbwabaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaqbWbWapaqbWbWapaqbWbWapaqbWbWapaqbublcdaqbpbpapabaaaaaaaaaaaaaaaaaaaaabcecfbwbwbwbwbwbwbwbwbwcgabaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaqchchapcibWbWapaqbWchapaqbWbWapaqblbuapaqbXbXapabaaaaaaaaaaaaaaaaaaaaabcjcjckclbwbCbwbwbCbwcgcgabaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcmbWchcdaqbWbWapcmbWbWapcmbWbWapcmbgbgapaqbpbjcnabaaaaaaaaaaaaaaaaaaaaabcjckckckcobwcpbwbwbwcgcqabaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcmbWchcdaqbWbWapcmbWbWapcmbWbWapcmbgbgapaqbpbjcnabaaaaaaaaaaaaaaaaaaaaabcjckckckcobwcpbwcqcrcgcsabaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaababababababababababababababaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
