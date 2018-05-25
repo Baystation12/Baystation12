@@ -375,6 +375,31 @@
 		src.updateUsrDialog()
 		return 0
 
+	// Clicking on a grinder with a pill bottle will empty the bottle's contents into the grinder
+	if(istype(O,/obj/item/weapon/storage/pill_bottle))
+		var/obj/item/weapon/storage/pill_bottle/bag = O
+		var/failed = 1
+		for(var/obj/item/G in O.contents)
+			if(!G.reagents || !G.reagents.total_volume)
+				continue
+			failed = 0
+			bag.remove_from_storage(G, src)
+			holdingitems += G
+			if(holdingitems && holdingitems.len >= limit)
+				break
+
+		if(failed)
+			to_chat(user, "The pill bottle is empty.")
+			return 1
+
+		if(!O.contents.len)
+			to_chat(user, "You empty \the [O] into \the [src].")
+		else
+			to_chat(user, "You fill \the [src] from \the [O].")
+
+		src.updateUsrDialog()
+		return 0
+		
 	if(!sheet_reagents[O.type] && (!O.reagents || !O.reagents.total_volume))
 		to_chat(user, "\The [O] is not suitable for blending.")
 		return 1
