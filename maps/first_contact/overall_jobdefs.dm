@@ -22,8 +22,8 @@
 
 /datum/job/ship_crew_innie
 	title = "Innie Ship Crew"
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 6
+	spawn_positions = 6
 	outfit_type = /decl/hierarchy/outfit/job/innie_crewmember
 	selection_color = "#ff0000"
 	spawnpoint_override = "Innie Crew"

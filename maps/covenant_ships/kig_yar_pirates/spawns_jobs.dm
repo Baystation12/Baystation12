@@ -113,8 +113,8 @@ GLOBAL_LIST_EMPTY(unggoy_pirate_spawns)
 
 /datum/job/covenant/kigyarpirate
 	title = "Kig-Yar Ship - Pirate"
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 7
+	spawn_positions = 7
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/kigyarpirate
 	access = list(240,250)
