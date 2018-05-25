@@ -66,7 +66,9 @@ GLOBAL_LIST_EMPTY(facil_comms_spawn)
 	l_ear = /obj/item/device/radio/headset/unsc/odst
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
@@ -79,11 +81,12 @@ GLOBAL_LIST_EMPTY(facil_comms_spawn)
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	pda_slot = null
 	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer, /obj/item/clothing/accessory/holster/thigh,/obj/item/clothing/accessory/ribbon/instructor,/obj/item/clothing/accessory/ribbon/marksman, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -94,6 +97,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawn)
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)

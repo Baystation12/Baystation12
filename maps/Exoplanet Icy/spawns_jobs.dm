@@ -23,6 +23,7 @@ GLOBAL_LIST_EMPTY(ice_staff_spawns)
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	gloves = /obj/item/clothing/gloves/thick/unsc
 	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)

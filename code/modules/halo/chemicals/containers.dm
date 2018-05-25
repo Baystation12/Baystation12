@@ -19,10 +19,10 @@
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/biofoam
-	name = "Biofoam Canister"
+	name = "Biofoam Syringe"
 	desc = "A canister filled with biofoam, used to quickly fix internal and external injuries."
 	amount_per_transfer_from_this = 10
-	volume = 20
+	volume = 10
 
 	New()
 		..()
