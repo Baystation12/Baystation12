@@ -52,7 +52,8 @@
 #define SS_INIT_MACHINES         1
 #define SS_INIT_DEFAULT          0
 #define SS_INIT_AIR             -1
-#define SS_INIT_LIGHTING        -2
+#define SS_INIT_ALARM           -2
+#define SS_INIT_LIGHTING        -3
 #define SS_INIT_XENOARCH       -50
 #define SS_INIT_OPEN_SPACE    -150
 #define SS_INIT_BAY_LEGACY    -200
