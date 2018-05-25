@@ -1,5 +1,4 @@
 /obj/item/weapon/card/id/syndicate
-	name = "agent card"
 	icon_state = "syndicate"
 	assignment = "Agent"
 	origin_tech = list(TECH_ILLEGAL = 3)
