@@ -1,7 +1,7 @@
-#define DECK_GUN_ROUND_RELOAD_TIME 1 SECONDS//Time it takes a deck gun to reload a single round.
-#define DECK_GUN_BASE_MAXROUNDS 10
-#define DECK_GUN_FIRE_DELAY_LOWER 0.1 SECONDS
-#define DECK_GUN_FIRE_DELAY_UPPER 0.35 SECONDS
+#define DECK_GUN_ROUND_RELOAD_TIME 2 SECONDS//Time it takes a deck gun to reload a single round.
+#define DECK_GUN_BASE_MAXROUNDS 5
+#define DECK_GUN_FIRE_DELAY_LOWER 0.35 SECONDS
+#define DECK_GUN_FIRE_DELAY_UPPER 0.5 SECONDS
 
 /obj/machinery/overmap_weapon_console/deck_gun_control
 	name = "Global Deck Gun Control"
@@ -129,6 +129,7 @@
 	desc = "A deck gun modified to fire multiple times per fire-input."
 	icon = 'code/modules/halo/machinery/deck_chaingun.dmi'
 	icon_state = "deck_gatling3"
+	max_rounds_loadable = 12
 
 /obj/machinery/deck_gun/chaingun/can_fire()
 	. = ..()
@@ -163,6 +164,7 @@
 	desc = "thanks for examining this"
 	step_delay = 0.3 SECONDS
 	dispersion = 1
+	accuracy = 50 //miss chance of impacted overmap objects halved.
 	ship_damage_projectile = /obj/item/projectile/deck_gun_damage_proj
 
 /obj/item/projectile/overmap/deck_gun_proj/New()

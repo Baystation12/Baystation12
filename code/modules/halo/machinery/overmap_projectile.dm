@@ -1,6 +1,5 @@
 
 /obj/item/projectile/overmap
-
 	var/obj/effect/projectile/ship_damage_projectile = /obj/item/projectile/overmap_test_round //This is the projectile used when this impacts a ship on the overmap. This is spawned in a random connected z-level of that overmap ship object.
 	step_delay = 1 SECOND //These will only be traversing overmap tiles.
 	var/obj/effect/overmap/overmap_fired_by
@@ -8,7 +7,6 @@
 /obj/item/projectile/overmap/New(var/obj/spawner)
 	if(map_sectors["[spawner.z]"])
 		overmap_fired_by = map_sectors["[spawner.z]"]
-	//used for later-down-the-line overrides.
 
 /obj/item/projectile/overmap/Move(var/newloc,var/dir)
 	if(istype(newloc,/turf/unsimulated/map/edge))
@@ -80,7 +78,7 @@
 
 	if(isnull(overmap_object))
 		return
-	if(!(starting in range(1,impacted)) && prob(overmap_object.weapon_miss_chance))
+	if(!(starting in range(1,impacted)) && prob(overmap_object.weapon_miss_chance * (1- accuracy/100))) //accuracy = 1 means miss chance is multiplied by 0.99
 		visible_message("<span class = 'warning'>[src] flies past [impacted].</span>")
 		return 0
 	if(istype(impacted,/obj/effect/overmap/ship/npc_ship))
