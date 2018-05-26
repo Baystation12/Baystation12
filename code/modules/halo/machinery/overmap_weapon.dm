@@ -38,6 +38,8 @@
 	user.machine = src
 	user.reset_view(map_sectors["[z]"])
 
+/obj/machinery/overmap_weapon_console/proc/aim_tool_attackself(var/mob/user)
+
 /obj/machinery/overmap_weapon_console/proc/consume_external_ammo()
 	var/obj/ammo_to_remove = loaded_ammo[loaded_ammo.len]
 	loaded_ammo -= ammo_to_remove
@@ -66,13 +68,17 @@
 		qdel(new_projectile)
 	else
 		new_projectile.launch(target,null,rand(0,new_projectile.dispersion),rand(0,new_projectile.dispersion))
-	play_fire_sound()
+	play_fire_sound(src)
+	var/obj/effect/overmap/om_targ = target
+	if(istype(om_targ) && om_targ.map_z.len > 0)
+		for(var/z_level in om_targ)
+			play_fire_sound(1,1,z_level)
 
-/obj/machinery/overmap_weapon_console/proc/play_fire_sound()
+/obj/machinery/overmap_weapon_console/proc/play_fire_sound(var/atom/loc_sound_origin)
 	if(isnull(fire_sound))
 		return
 
-	playsound(src, fire_sound, 100, 1, 5, 5)
+	playsound(loc_sound_origin, fire_sound, 100, 1, 5, 5,1)
 
 /obj/machinery/overmap_weapon_console/proc/can_fire(var/atom/target,var/mob/living/user,var/click_params)
 	scan_linked_devices()
@@ -115,6 +121,9 @@
 /obj/item/weapon/gun/aim_tool/New(var/console)
 	. = ..()
 	creator_console = console
+
+/obj/item/weapon/gun/aim_tool/attack_self(var/mob/user)
+	creator_console.aim_tool_attackself(user)
 
 /obj/item/weapon/gun/aim_tool/afterattack(var/atom/target,var/mob/user,adjacent,var/clickparams)
 	creator_console.fire(target,user,clickparams)
