@@ -9,7 +9,7 @@
 	name = "Pulse Turret Local Control"
 	fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/pulse_laser
-	deck_gun_area = /area/missile_debug_area
+	deck_gun_area = null
 
 /obj/machinery/deck_gun/cov_pulse_turret
 	name = "Pulse Turret"

@@ -11,7 +11,7 @@
 	name = "Local Missile Control Console"
 	fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/missile
-	deck_gun_area = /area/missile_debug_area
+	deck_gun_area = null
 	var/list/all_projectiles_firable = MISSILE_POD_PROJTYPES
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/aim_tool_attackself(var/mob/user)
@@ -29,9 +29,6 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/New()
 	if(isnull(control_tag))
 		control_tag = "missile_control - [z]"
-
-/area/missile_debug_area
-	name = "debug"
 
 //Missile "deck gun"//
 /obj/machinery/deck_gun/missile_pod
