@@ -2,15 +2,6 @@
 	name = "medical scanner module"
 	desc = "A medical scanner module. It can be used to scan patients and display medical information."
 
-/obj/item/weapon/computer_hardware/scanner/medical/can_use_scanner(mob/user, atom/target, proximity = TRUE)
-	if(!..())
-		return 0
-	if(CLUMSY in user.mutations)
-		return 0
-	if(!istype(target))
-		return 0
-	return 1
-
 /obj/item/weapon/computer_hardware/scanner/medical/do_on_afterattack(mob/user, atom/target, proximity)
 	if(!can_use_scanner(user, target, proximity))
 		return

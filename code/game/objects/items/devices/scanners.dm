@@ -34,8 +34,6 @@ REAGENT SCANNER
 /obj/item/device/healthanalyzer/afterattack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return
-	if(!istype(target))
-		return
 
 	medical_scan_action(target, user, src, mode)
 
