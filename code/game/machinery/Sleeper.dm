@@ -19,12 +19,9 @@
 	idle_power_usage = 15
 	active_power_usage = 200 //builtin health analyzer, dialysis machine, injectors.
 
-/obj/machinery/sleeper/New()
-	..()
-	set_extension(src, /datum/extension/scan, /datum/extension/scan/pod/sleeper)
-
 /obj/machinery/sleeper/Initialize()
 	. = ..()
+	set_extension(src, /datum/extension/scan, /datum/extension/scan/pod/sleeper)
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 

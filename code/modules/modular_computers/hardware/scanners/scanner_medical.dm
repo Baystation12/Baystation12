@@ -11,7 +11,7 @@
 		return 0
 	return 1
 
-/obj/item/weapon/computer_hardware/scanner/medical/do_on_afterattack(mob/user, atom/target as mob|obj, proximity)
+/obj/item/weapon/computer_hardware/scanner/medical/do_on_afterattack(mob/user, atom/target, proximity)
 	if(!can_use_scanner(user, target, proximity))
 		return
 

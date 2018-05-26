@@ -31,9 +31,7 @@ REAGENT SCANNER
 	medical_scan_action(M, user, src, mode) //default surgery behaviour is just to scan as usual
 	return 1
 
-/obj/item/device/healthanalyzer/afterattack(atom/target as mob|obj, mob/user, proximity)
-	if (user.incapacitated())
-		return
+/obj/item/device/healthanalyzer/afterattack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return
 	if(!istype(target))
@@ -59,8 +57,6 @@ proc/medical_scan_action(atom/target, mob/living/user, obj/scanner, var/verbose)
 	else if (has_extension(target, /datum/extension/scan))
 		user.visible_message("<span class='notice'>\The [user] runs \the [scanner] over \the [target].</span>")
 		var/datum/extension/scan/S = get_extension(target, /datum/extension/scan)
-		if (!S)
-			return
 		var/list/scan_content = S.GetAllowedContent(EXTENSION_SCAN_TYPE_HEALTH, /mob/living/carbon/human)
 		if (!scan_content)
 			return

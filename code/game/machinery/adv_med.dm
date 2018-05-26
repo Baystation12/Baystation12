@@ -14,8 +14,8 @@
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 
-/obj/machinery/bodyscanner/New()
-	..()
+/obj/machinery/bodyscanner/Initialize()
+	. = ..()
 	set_extension(src, /datum/extension/scan, /datum/extension/scan/pod/bodyscanner)
 
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)

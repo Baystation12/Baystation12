@@ -42,8 +42,8 @@
 	storage_capacity = (MOB_MEDIUM * 2) - 1
 	var/contains_body = 0
 
-/obj/structure/closet/body_bag/New()
-	..()
+/obj/structure/closet/body_bag/Initialize()
+	. = ..()
 	set_extension(src, /datum/extension/scan, /datum/extension/scan/closet)
 
 /obj/structure/closet/body_bag/attackby(W as obj, mob/user as mob)
