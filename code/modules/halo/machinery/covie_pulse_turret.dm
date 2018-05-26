@@ -1,5 +1,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/cov_pulse_turret
 	name = "Pulse Turret Control"
+	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
+	icon_state = "covie_console"
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/cov_pulse_turret/New()
 	if(isnull(control_tag))
@@ -7,7 +9,9 @@
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turret
 	name = "Pulse Turret Local Control"
-	fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
+	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
+	icon_state = "covie_console"
+	fire_sound = 'code/modules/halo/sounds/pulse_turret_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/pulse_laser
 	deck_gun_area = null
 

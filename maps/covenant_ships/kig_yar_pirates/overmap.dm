@@ -19,3 +19,8 @@
 		animate(src,alpha = 50,time = 2 SECONDS) //Hard to see if sat still.
 	else
 		animate(src,alpha = 255, time = 2 SECONDS)
+
+//overmap weapons//
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turret/kig_yar_pirate
+	deck_gun_area = /area/kigyar_pirate/pulse_lasers
+
