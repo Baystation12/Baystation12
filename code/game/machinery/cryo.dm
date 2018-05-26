@@ -28,6 +28,7 @@
 	icon = 'icons/obj/cryogenics_split.dmi'
 	update_icon()
 	initialize_directions = dir
+	set_extension(src, /datum/extension/scan, /datum/extension/scan/pod/cryocell)
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
 	var/turf/T = loc

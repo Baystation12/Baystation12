@@ -37,6 +37,8 @@
 	RefreshParts()
 	update_icon()
 
+	set_extension(src, /datum/extension/scan, /datum/extension/scan/pod/resleever)
+
 /obj/machinery/resleever/Destroy()
 	eject_occupant()
 	eject_lace()

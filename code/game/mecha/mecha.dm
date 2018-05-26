@@ -93,6 +93,8 @@
 
 /obj/mecha/New()
 	..()
+	set_extension(src, /datum/extension/scan, /datum/extension/scan/mecha)
+
 	events = new
 
 	icon_state += "-open"

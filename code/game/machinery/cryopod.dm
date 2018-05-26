@@ -256,6 +256,7 @@
 /obj/machinery/cryopod/New()
 	announce = new /obj/item/device/radio/intercom(src)
 	..()
+	set_extension(src, /datum/extension/scan, /datum/extension/scan/pod)
 
 /obj/machinery/cryopod/Destroy()
 	if(occupant)
