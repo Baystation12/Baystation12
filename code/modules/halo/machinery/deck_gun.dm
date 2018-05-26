@@ -16,6 +16,10 @@
 	if(isnull(control_tag))
 		control_tag = "deck_gun_control - [z]"
 
+/obj/machinery/overmap_weapon_console/deck_gun_control/aim_tool_attackself(var/mob/user)
+	for(var/obj/machinery/overmap_weapon_console/ctrl in linked_devices)
+		ctrl.aim_tool_attackself(user)
+
 /obj/machinery/overmap_weapon_console/deck_gun_control/scan_linked_devices()
 	var/list/devices = list()
 	for(var/obj/machinery/overmap_weapon_console/deck_gun_control/local/ctrl in world)
@@ -93,7 +97,7 @@
 	var/obj/item/projectile/overmap/fired_projectile = /obj/item/projectile/overmap/deck_gun_proj
 	var/round_reload_time = DECK_GUN_ROUND_RELOAD_TIME //Time it takes to reload a single round.
 	var/next_reload_time = 0
-	var/rounds_loaded = 0
+	var/rounds_loaded = DECK_GUN_BASE_MAXROUNDS
 	var/max_rounds_loadable = DECK_GUN_BASE_MAXROUNDS
 
 /obj/machinery/deck_gun/process()
@@ -130,6 +134,7 @@
 	icon = 'code/modules/halo/machinery/deck_chaingun.dmi'
 	icon_state = "deck_gatling3"
 	max_rounds_loadable = 12
+	rounds_loaded = 12
 
 /obj/machinery/deck_gun/chaingun/can_fire()
 	. = ..()
@@ -146,7 +151,6 @@
 	desc = "oh hello"
 
 	step_delay = 0.1 SECONDS
-	dispersion = 1
 	damtype = BRUTE
 	damage = 200
 
@@ -163,7 +167,6 @@
 	name = "deck gun round"
 	desc = "thanks for examining this"
 	step_delay = 0.3 SECONDS
-	dispersion = 1
 	accuracy = 50 //miss chance of impacted overmap objects halved.
 	ship_damage_projectile = /obj/item/projectile/deck_gun_damage_proj
 
