@@ -9,13 +9,22 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/device/gps/attack_self(var/mob/user as mob)
-	var/turf/T = get_turf(src)
-	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[T.x]:[T.y]:[T.z]</i>.</span>")
+	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
 
 /obj/item/device/gps/examine(var/mob/user)
 	..()
+	to_chat(user, "<span class='notice'>\The [src]'s screen shows: <i>[get_coordinates()]</i>.</span>")
+
+/obj/item/device/gps/proc/get_coordinates()
 	var/turf/T = get_turf(src)
-	to_chat(user, "<span class='notice'>\The [src]'s screen shows: <i>[T.x]:[T.y]:[T.z]</i>.</span>")
+	return T ? "[T.x]:[T.y]:[T.z]" : "N/A"
+
+/mob/living/carbon/human/Stat()
+	. = ..()
+	if(statpanel("Status"))
+		var/obj/item/device/gps/L = locate() in src
+		if(L)
+			stat("Coordinates:", "[L.get_coordinates()]")
 
 /obj/item/device/measuring_tape
 	name = "measuring tape"
