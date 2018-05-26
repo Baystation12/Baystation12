@@ -42,18 +42,18 @@
 "aP" = (/obj/structure/ore_box,/obj/random/powercell,/turf/simulated/floor/plating,/area/om_ships/caelum)
 "aQ" = (/obj/structure/reagent_dispensers/beerkeg,/turf/simulated/floor/plating,/area/om_ships/caelum)
 "aR" = (/obj/structure/grille,/turf/space,/area/om_ships/caelum)
-"aS" = (/obj/machinery/alarm{pixel_y = 32},/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"aT" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"aU" = (/turf/simulated/wall,/area/om_ships/caelum)
-"aV" = (/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"aW" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"aX" = (/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/turf/simulated/floor,/area/om_ships/caelum)
-"aY" = (/obj/machinery/door/airlock/external,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"aZ" = (/obj/machinery/door/airlock/glass_external,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"ba" = (/obj/structure/lattice,/turf/space,/area/om_ships/caelum)
-"bb" = (/obj/structure/inflatable/door,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bc" = (/obj/machinery/door/airlock/external,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bd" = (/obj/structure/inflatable/door,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"aS" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/shoes/magboots,/obj/item/clothing/suit/space/void/engineering/alt/prepared,/obj/item/clothing/head/helmet/space/void/engineering/alt,/obj/item/clothing/mask/breath,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"aT" = (/obj/structure/dispenser/oxygen,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"aU" = (/obj/machinery/alarm{pixel_y = 32},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"aV" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"aW" = (/turf/simulated/wall,/area/om_ships/caelum)
+"aX" = (/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"aY" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"aZ" = (/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/turf/simulated/floor,/area/om_ships/caelum)
+"ba" = (/obj/machinery/door/airlock/external,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bb" = (/obj/machinery/door/airlock/glass_external,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bc" = (/obj/structure/lattice,/turf/space,/area/om_ships/caelum)
+"bd" = (/obj/machinery/door/airlock/external,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/om_ships/caelum)
 "be" = (/obj/machinery/door/airlock,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/caelum)
 "bf" = (/obj/machinery/portable_atmospherics/canister/air{anchored = 1},/turf/simulated/floor/tiled,/area/om_ships/caelum)
 "bg" = (/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/caelum)
@@ -63,54 +63,56 @@
 "bk" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/om_ships/caelum)
 "bl" = (/obj/structure/sign/warning/caution{pixel_x = 32},/turf/simulated/floor/plating,/area/om_ships/caelum)
 "bm" = (/obj/machinery/computer/station_alert,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bn" = (/obj/machinery/computer/power_monitor,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bo" = (/obj/item/modular_computer/console,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bp" = (/obj/structure/oxy_dispenser/large{pixel_x = 32},/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bq" = (/obj/machinery/door/airlock/halo_maint,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"br" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bs" = (/obj/machinery/door/airlock/glass_external,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bt" = (/obj/machinery/computer/navigation,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bu" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bv" = (/obj/machinery/button{id = 1; pixel_x = 32},/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bw" = (/obj/random/drinkbottle,/obj/random/drinkbottle,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bx" = (/obj/random/plushie,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"by" = (/obj/random/contraband,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bz" = (/obj/structure/closet/crate/large/hydroponics,/obj/random/projectile,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bA" = (/obj/structure/ore_box,/obj/random/accessory,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bB" = (/obj/structure/largecrate,/obj/random/masks,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bC" = (/obj/random/tool,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bD" = (/obj/machinery/computer/helm,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bE" = (/obj/machinery/computer/engines,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bF" = (/obj/machinery/door/blast/regular{_wifi_id = "Steady1"; id = "Steady1"},/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bG" = (/obj/structure/oxy_dispenser/large{pixel_y = -32},/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bH" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bI" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/table/steel,/obj/structure/closet/medical_wall/filled{pixel_x = 24},/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bJ" = (/obj/structure/bed,/obj/item/weapon/bedsheet,/obj/structure/oxy_dispenser/large{pixel_y = -32},/obj/effect/landmark/start/ship_cap_civ,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bK" = (/obj/structure/closet/wardrobe,/obj/item/clothing/under/frontier,/obj/random/shoes,/obj/random/shoes,/obj/item/clothing/under/serviceoveralls,/obj/item/clothing/under/confederacy,/obj/random/gloves,/obj/random/handgun,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bL" = (/obj/machinery/alarm{pixel_y = -32},/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bM" = (/obj/machinery/vending/wallmed1{pixel_x = 28},/obj/structure/table/steel,/obj/random/firstaid,/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"bN" = (/obj/structure/window/reinforced{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 6},/turf/simulated/floor,/area/om_ships/caelum)
-"bO" = (/obj/docking_umbilical/east{name = "Cargo Umbilical"},/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bP" = (/obj/random/hat,/obj/random/shoes,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bQ" = (/obj/random/clothing,/obj/random/shoes,/obj/random/masks,/obj/random/gloves,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bR" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/mushroom,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bS" = (/obj/item/pizzabox/margherita,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bT" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/margherita,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bU" = (/obj/structure/ore_box,/obj/random/ammo,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bV" = (/obj/structure/closet/crate/secure/weapon,/obj/random/handgun,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bW" = (/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/pipe/manifold/visible/fuel,/turf/simulated/floor,/area/om_ships/caelum)
-"bX" = (/obj/item/pizzabox/mushroom,/obj/item/pizzabox/mushroom,/obj/item/pizzabox/vegetable,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bY" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/vegetable,/obj/item/pizzabox/vegetable,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"bZ" = (/obj/item/pizzabox/margherita,/obj/item/pizzabox/margherita,/obj/item/pizzabox/vegetable,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"ca" = (/obj/random/firstaid,/obj/structure/largecrate,/obj/random/ammo,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"cb" = (/obj/structure/closet/crate/secure/weapon,/obj/random/ammo,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"cc" = (/obj/machinery/button{_wifi_id = "Steady1"; id = "Steady1"; pixel_y = -32},/turf/simulated/floor/plating,/area/om_ships/caelum)
-"cd" = (/obj/random/storage,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"ce" = (/obj/random/tool,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"cf" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/meat,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"cg" = (/obj/item/pizzabox/mushroom,/obj/item/pizzabox/margherita,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"ch" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/margherita,/obj/item/pizzabox/vegetable,/turf/simulated/floor/plating,/area/om_ships/caelum)
-"ci" = (/obj/effect/overmap/ship/CCV_sbs,/turf/space,/area/space)
+"bn" = (/obj/effect/landmark/start/civ_crew,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bo" = (/obj/machinery/computer/power_monitor,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bp" = (/obj/item/modular_computer/console,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bq" = (/obj/structure/oxy_dispenser/large{pixel_x = 32},/turf/simulated/floor/plating,/area/om_ships/caelum)
+"br" = (/obj/machinery/door/airlock/halo_maint,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bs" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bt" = (/obj/machinery/door/airlock/glass_external,/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bu" = (/obj/machinery/computer/navigation,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bv" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bw" = (/obj/machinery/button{id = 1; pixel_x = 32},/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bx" = (/obj/random/drinkbottle,/obj/random/drinkbottle,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"by" = (/obj/random/plushie,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bz" = (/obj/random/contraband,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bA" = (/obj/structure/closet/crate/large/hydroponics,/obj/random/projectile,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bB" = (/obj/structure/ore_box,/obj/random/accessory,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bC" = (/obj/structure/largecrate,/obj/random/masks,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bD" = (/obj/random/tool,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bE" = (/obj/machinery/computer/helm,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bF" = (/obj/machinery/computer/engines,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bG" = (/obj/machinery/door/blast/regular{_wifi_id = "Steady1"; id = "Steady1"},/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bH" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bI" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bJ" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/table/steel,/obj/structure/closet/medical_wall/filled{pixel_x = 24},/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bK" = (/obj/structure/bed,/obj/item/weapon/bedsheet,/obj/structure/oxy_dispenser/large{pixel_y = -32},/obj/effect/landmark/start/ship_cap_civ,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bL" = (/obj/structure/closet/wardrobe,/obj/item/clothing/under/frontier,/obj/random/shoes,/obj/random/shoes,/obj/item/clothing/under/serviceoveralls,/obj/item/clothing/under/confederacy,/obj/random/gloves,/obj/random/handgun,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bM" = (/obj/machinery/alarm{pixel_y = -32},/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bN" = (/obj/machinery/vending/wallmed1{pixel_x = 28},/obj/structure/table/steel,/obj/random/firstaid,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"bO" = (/obj/structure/window/reinforced{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 6},/turf/simulated/floor,/area/om_ships/caelum)
+"bP" = (/obj/docking_umbilical/east{name = "Cargo Umbilical"},/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bQ" = (/obj/random/hat,/obj/random/shoes,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bR" = (/obj/random/clothing,/obj/random/shoes,/obj/random/masks,/obj/random/gloves,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bS" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/mushroom,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bT" = (/obj/item/pizzabox/margherita,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bU" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/margherita,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bV" = (/obj/structure/ore_box,/obj/random/ammo,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bW" = (/obj/structure/closet/crate/secure/weapon,/obj/random/handgun,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bX" = (/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/pipe/manifold/visible/fuel,/turf/simulated/floor,/area/om_ships/caelum)
+"bY" = (/obj/item/pizzabox/mushroom,/obj/item/pizzabox/mushroom,/obj/item/pizzabox/vegetable,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"bZ" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/vegetable,/obj/item/pizzabox/vegetable,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"ca" = (/obj/item/pizzabox/margherita,/obj/item/pizzabox/margherita,/obj/item/pizzabox/vegetable,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"cb" = (/obj/random/firstaid,/obj/structure/largecrate,/obj/random/ammo,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"cc" = (/obj/structure/closet/crate/secure/weapon,/obj/random/ammo,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"cd" = (/obj/structure/oxy_dispenser/large{pixel_y = -32},/turf/simulated/floor/plating,/area/om_ships/caelum)
+"ce" = (/obj/machinery/button{_wifi_id = "Steady1"; id = "Steady1"; pixel_y = -32},/turf/simulated/floor/plating,/area/om_ships/caelum)
+"cf" = (/obj/random/storage,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"cg" = (/obj/random/tool,/obj/structure/largecrate,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"ch" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/meat,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"ci" = (/obj/item/pizzabox/mushroom,/obj/item/pizzabox/margherita,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"cj" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/margherita,/obj/item/pizzabox/vegetable,/turf/simulated/floor/plating,/area/om_ships/caelum)
+"ck" = (/obj/effect/overmap/ship/CCV_sbs,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -147,17 +149,17 @@ aaaaaaaaaaaaaaaaaaabacadabaeafafafacagagagahahahacagaiajacahakalacamanaoapacaqaq
 aaaaaaaaaaaaaaaaaaasacacatacafafafacauagagahahahacaiagavacawahalacacaxayayacaqaqaqacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaasacacatacafafafacagauagahahahacajavazacawacacacacahayaoacaqaqaqacacacabaaaaaaaaaaaaaaaaababababababababababababaAaBaCaDaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaasacacatacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaabababababababaEaFaGaHaIabaJaKaDaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaasaLacataMaMaracacacacacacacaNaNaNacacacacaOaOaOacacaPaPaPacacahaQaQacabababaRaRaRaRaRaRabacadabaSaTaUaVaVaVaVaWabaXaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaasacacataMavaiacacalahawacacaNaNaNacacacacaOaOaOacacaPaPaPacacaQaQaQacaYacaZbabababababaaZacbbbcbdaVbeaVaVaVaVbfabaXaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaabbgbhabavbibiacacahakawacacaNaNaNacacacacaOaOaOacacaPaPaPacacaQaQaQbjabababaRaRaRaRaRaRabbkblabaVaVaUbmaVbnaVaVaZaXaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaabbobpababababbqbqabababbqbqabababbracbracabababbqbqabababbqbqabababababaaaaaaaaaaaaaaaaababababbsbsaUbtbuaVaVaWabaXaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaabbgbvabbwbxbyacacbzbzbzacacafafafacacacacbAbAbAacacbBbBbBacacahahahbCabababaRaRaRaRaRaRabbkblabaVaVaUbDaVbEaVaVaZaXaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaasacacbFacacbwacacbzbzbzacacafafafacacacacbAbAbAacacbBbBbBacacahahahacaYacaZbabababababaaZacbbbcbdaVbeaVaVaVaVbfabaXaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaasacacbFacacacacacbzbzbzacacafafafaracacacbAbAbAacacbBbBbBacacahahahacabababaRaRaRaRaRaRabacbGabaVbHaUbeaUaUaVbIabaXaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaasacacbFacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaabababababababbJbKaUbLbMabaJbNaDaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaasbOacbFacafafafacbPbQbQaMaMaMafafafacacawahbRbSbTacbUbUbUacacacbVbVbVabaaaaaaaaaaaaaaaaababababababababababababaAaBbWaDaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaasacacbFacafafafacbQahahaMbxaMafafafacacahakbXbYbZacbUbUbUaccaaccbcbcbabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaabacbGabccafafafacbQahahaMcdceafafafacacalawcfcgchacbUbUbUaccaaccbcbcbabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaasaLacataMaMaracacacacacacacaNaNaNacacacacaOaOaOacacaPaPaPacacahaQaQacabababaRaRaRaRaRaRabaSaTabaUaVaWaXaXaXaXaYabaZaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaasacacataMavaiacacalahawacacaNaNaNacacacacaOaOaOacacaPaPaPacacaQaQaQacbaacbbbcbcbcbcbcbcbbacacbdaXaXbeaXaXaXaXbfabaZaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaabbgbhabavbibiacacahakawacacaNaNaNacacacacaOaOaOacacaPaPaPacacaQaQaQbjabababaRaRaRaRaRaRabbkblabaXaXaWbmbnboaXaXbbaZaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaabbpbqababababbrbrabababbrbrabababbsacbsacabababbrbrabababbrbrabababababaaaaaaaaaaaaaaaaababababbtbtaWbubvaXaXaYabaZaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaabbgbwabbxbybzacacbAbAbAacacafafafacacacacbBbBbBacacbCbCbCacacahahahbDabababaRaRaRaRaRaRabbkblabaXaXaWbEaXbFaXaXbbaZaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaasacacbGacacbxacacbAbAbAacacafafafacacacacbBbBbBacacbCbCbCacacahahahacbaacbbbcbcbcbcbcbcbbacacbdaXaXbeaXaXaXaXbfabaZaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaasacacbGacacacacacbAbAbAacacafafafaracacacbBbBbBacacbCbCbCacacahahahacabababaRaRaRaRaRaRabaSaTabbHbIaWbeaWaWaXbJabaZaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaasacacbGacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaabababababababbKbLaWbMbNabaJbOaDaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaasbPacbGacafafafacbQbRbRaMaMaMafafafacacawahbSbTbUacbVbVbVacacacbWbWbWabaaaaaaaaaaaaaaaaababababababababababababaAaBbXaDaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaasacacbGacafafafacbRahahaMbyaMafafafacacahakbYbZcaacbVbVbVaccbacccccccabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaabaccdabceafafafacbRahahaMcfcgafafafacacalawchcicjacbVbVbVaccbacccccccabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -187,5 +189,5 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-ciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ckaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

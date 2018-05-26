@@ -16,13 +16,13 @@
 "ap" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "aq" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "solar_xeno_outer"; locked = 1; name = "Exterior Airlock"; req_access = list(11,13)},/turf/simulated/floor/plating,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "ar" = (/obj/machinery/embedded_controller/radio/airlock/airlock_controller{tag_airpump = "solar_xeno_pump"; tag_exterior_door = "solar_xeno_outer"; frequency = 1379; id_tag = "solar_xeno_airlock"; tag_interior_door = "solar_xeno_inner"; pixel_x = 25; req_access = list(13); tag_chamber_sensor = "solar_xeno_sensor"},/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "solar_xeno_sensor"; pixel_x = 25; pixel_y = 12},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 2; frequency = 1379; id_tag = "solar_tool_pump"},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/plating,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
-"as" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "solar_xeno_inner"; locked = 1; name = "Exterior Airlock"; req_access = list(11,13)},/obj/machinery/atmospherics/pipe/simple/visible,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/turf/simulated/floor/plating,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
-"at" = (/obj/machinery/button/toggle/door{desc = "A remote control switch for docking airlock."; name = "Exterior access button"; pixel_x = -25; pixel_y = 25},/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
-"au" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
+"as" = (/obj/machinery/door/airlock/external{_wifi_id = 200; frequency = 1379; icon_state = "door_locked"; id_tag = "solar_xeno_inner"; locked = 1; name = "Exterior Airlock"; req_access = list(11,13)},/obj/machinery/atmospherics/pipe/simple/visible,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/turf/simulated/floor/plating,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
+"at" = (/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
+"au" = (/obj/machinery/embedded_controller/radio/airlock/airlock_controller{frequency = 1379; id_tag = "solar_xeno_airlock"; pixel_x = 0; pixel_y = 25; req_access = list(13); tag_airpump = "solar_xeno_pump"; tag_chamber_sensor = "solar_xeno_sensor"; tag_exterior_door = "solar_xeno_outer"; tag_interior_door = "solar_xeno_inner"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "av" = (/obj/structure/dispenser/oxygen,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
-"aw" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "UNSC Hardsuit"},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "UNSC Hardsuit"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
-"ax" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid8"; icon_state = "asteroid8"},/turf/simulated/floor/asteroid/planet,/area/asteroid_listening)
-"ay" = (/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
+"aw" = (/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
+"ax" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "UNSC Hardsuit"},/obj/item/clothing/suit/space/void/engineering/salvage/prepared{name = "UNSC Hardsuit"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
+"ay" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid8"; icon_state = "asteroid8"},/turf/simulated/floor/asteroid/planet,/area/asteroid_listening)
 "az" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "aA" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid1"; icon_state = "asteroid1"},/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark{luminosity = 0})
 "aB" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
@@ -123,23 +123,23 @@ aaaaabaeaeaeaeaeaeaeaeaeaeabakaiababaeaeajajajajabababaeaeaeaeaeaeaeaeajajajajaj
 aaaaaaaaaaaaabaeaeababababaeaeaeaeaeaeaeaeaeaeaeapaqapaeaeaeaeaeaeaeaeajajajajajaeaeaeaeaealalaeaeae
 aaaaaaaaaaaaaaabaeababababaeaeaeaeaeaeaeaeaeaeaeaparapaeaeaeaeaeaeaeaeajalalalalaeaeaeaealalaeaeaeae
 aaaaaaaaaaaaaaababababababaeaeaeaeaeaeaeaeaeaeaeapasapapapapapajajajajajalalalalalalalalalaeaeaeaeae
-aaaaaaaaaaaaaaababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeapatauavauawapajajajalalajajalalaeaeaeaeaeaeaeaeaeae
-aaaaaaaaaaaaaaaxabaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeapayauauauazapajajajalaAalalalalaeaeaeaeaeaeaeaeaeae
-aaaaaaaaaaaaaaabaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeapayauauauaBapajajajajalajajajajaeaeaeaeaeaeaeaeaeae
-aaaaaaaaaaabababaeaeaeaeaeaeaeaeaeaeaeaeaeajajajapayauauauaCapajajajajalajajajajaeaeaeaeaeaeaeaeaeae
-aaaaaaaaaaaiabaeajajajajajajajajajajapapapapapapapayauapapapapajajajajajajajajajaeaeaeaeaeaeaeaeaeae
-aaaaaaaaaaaaaaajajajajajajajajajajajapaDaEaFaGaHapaIauapapapapapapapapapapapapaJapapapapapapaeaeaeae
-aaaaaaaaaaaaaaajajajajajajajajajajajapauauaKaLaKapaMauauauauauauauaNaOaNaNaNaNaOaNaNaNaNaOapaeaeaeae
-aaaaaaaaaaaaaaaaapapapapapapajajajajapaPauauauaQaRaSauauauauauaTaUaNaNaNaNaNaNaNaNaVaWaNaNapaeaeaeae
-aaaaaaaaaaaaaaaaapaXaYauaZapajajajajapbaauauaubbapapapapbcauapapapaNaNbdbebebebebebebfbgaNapaeaeaeae
-aaaaaaaaaaaaaaaaapbhauauauapapapapapapapbiapapapapapapapauaubjbkapblaNbmbgbgbgbgbgbgbnbgboapaeaeaeae
-aaaaaaaaaaaaaaaaapauauauauauauauauauauaDauauauaDauauaDapauauauaPbpaNaNbmbgbgbgbgbgbgbnbgaNapaeaeaeae
-aaaaaaaaaaaaaaaabqauauauauaUauauauauaUauauauauauauauaubrauauaubsbtaNaNbmbgbgbgbgbgbgbnbgaNapaeaeaeae
-aaaaaaaaaaaaaaaabqbuauauaYapapapapapapapbvapapapapapapapbwaubxbybtaNaNbmbgbgbgbgbgbgbnbgaNapaeaeaeae
-aaaaaaaaaaaaaaaabqbzauaubAbqaaaeaeaeapbBbCbDapbEapbFbFapauauaubGbtaNaNbmbgbgbHbgbgbgbnbgaNapaeaeaeae
-aaaaaaaaaaaaaaaabIbqbqbqbqbIaaaaaeaeapbJbCbDapbKapbLbMapaubNbAbOapaNaNbmbgbgbgbgbgbgbnbgaNapaeaeaeae
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeapbBaubDapbPapbKbKapbQbRbSbyapblaNbTbUbUbUbUbUbUbVbgboapaeaeaeae
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeapauauaubWbLbXbLbLapapapapapapaNaNaNaNaNaNaNaNaNaNaNaNapaeaeaeae
+aaaaaaaaaaaaaaababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeapatauavawaxapajajajalalajajalalaeaeaeaeaeaeaeaeaeae
+aaaaaaaaaaaaaaayabaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeapatawawawazapajajajalaAalalalalaeaeaeaeaeaeaeaeaeae
+aaaaaaaaaaaaaaabaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeapatawawawaBapajajajajalajajajajaeaeaeaeaeaeaeaeaeae
+aaaaaaaaaaabababaeaeaeaeaeaeaeaeaeaeaeaeaeajajajapatawawawaCapajajajajalajajajajaeaeaeaeaeaeaeaeaeae
+aaaaaaaaaaaiabaeajajajajajajajajajajapapapapapapapatawapapapapajajajajajajajajajaeaeaeaeaeaeaeaeaeae
+aaaaaaaaaaaaaaajajajajajajajajajajajapaDaEaFaGaHapaIawapapapapapapapapapapapapaJapapapapapapaeaeaeae
+aaaaaaaaaaaaaaajajajajajajajajajajajapawawaKaLaKapaMawawawawawawawaNaOaNaNaNaNaOaNaNaNaNaOapaeaeaeae
+aaaaaaaaaaaaaaaaapapapapapapajajajajapaPawawawaQaRaSawawawawawaTaUaNaNaNaNaNaNaNaNaVaWaNaNapaeaeaeae
+aaaaaaaaaaaaaaaaapaXaYawaZapajajajajapbaawawawbbapapapapbcawapapapaNaNbdbebebebebebebfbgaNapaeaeaeae
+aaaaaaaaaaaaaaaaapbhawawawapapapapapapapbiapapapapapapapawawbjbkapblaNbmbgbgbgbgbgbgbnbgboapaeaeaeae
+aaaaaaaaaaaaaaaaapawawawawawawawawawawaDawawawaDawawaDapawawawaPbpaNaNbmbgbgbgbgbgbgbnbgaNapaeaeaeae
+aaaaaaaaaaaaaaaabqawawawawaUawawawawaUawawawawawawawawbrawawawbsbtaNaNbmbgbgbgbgbgbgbnbgaNapaeaeaeae
+aaaaaaaaaaaaaaaabqbuawawaYapapapapapapapbvapapapapapapapbwawbxbybtaNaNbmbgbgbgbgbgbgbnbgaNapaeaeaeae
+aaaaaaaaaaaaaaaabqbzawawbAbqaaaeaeaeapbBbCbDapbEapbFbFapawawawbGbtaNaNbmbgbgbHbgbgbgbnbgaNapaeaeaeae
+aaaaaaaaaaaaaaaabIbqbqbqbqbIaaaaaeaeapbJbCbDapbKapbLbMapawbNbAbOapaNaNbmbgbgbgbgbgbgbnbgaNapaeaeaeae
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeapbBawbDapbPapbKbKapbQbRbSbyapblaNbTbUbUbUbUbUbUbVbgboapaeaeaeae
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeapawawawbWbLbXbLbLapapapapapapaNaNaNaNaNaNaNaNaNaNaNaNapaeaeaeae
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeapapapapapapapapapapaeaeaeaeapaNaNaNaNaNaNaNaNaNaNaNaNapaeaeaeae
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeapaNaNaNaNaNaNaNaNaNaNaNaNapaeaeaeae
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeapbYbYbYbYbYbYbYbYbYbYbYbYapaeaeaeae
