@@ -101,7 +101,7 @@
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=6,    one_hand_penalty=6, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.0, 1.2, 1.2, 1.5)),
 		)
 
-/obj/item/weapon/gun/projectile/autosmatic/sts35/update_icon()
+/obj/item/weapon/gun/projectile/autosmatic/m16/update_icon()
 	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
 	wielded_item_state = (ammo_magazine)? "arifle-wielded" : "arifle-wielded-empty"
 	..()
@@ -283,3 +283,59 @@
 		to_chat(user, "<span class='warning'>You need to open the cover to unload [src].</span>")
 		return
 	..()
+
+
+
+/obj/item/weapon/gun/projectile/automatic/ak47
+	name = "AK47"
+	desc = "Mostly used weapon in Vietnam war. The serial number has been scratched off. Uses 7.62mm rounds."
+	icon = 'icons/vietnam/usable/weapons.dmi
+	icon_state = "ak47"
+	item_state = null
+	w_class = ITEM_SIZE_HUGE
+	force = 9
+	caliber = "a762"
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 5)
+	slot_flags = SLOT_BACK
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/a762
+	allowed_magazines = /obj/item/ammo_magazine/a762
+	one_hand_penalty = 3
+	wielded_item_state = "arifle-wielded"
+
+//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
+	firemodes = list(
+		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=4, burst_accuracy=null, dispersion=null),
+		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    one_hand_penalty=5, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
+		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=6,    one_hand_penalty=6, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.0, 1.2, 1.2, 1.5)),
+
+/obj/item/weapon/gun/projectile/autosmatic/ak47/update_icon()
+	icon_state = (ammo_magazine)? "ak47" : "ak47-empty"
+	wielded_item_state = (ammo_magazine)? "arifle-wielded" : "arifle-wielded-empty"
+
+
+/obj/item/weapon/gun/projectile/automatic/ppsh
+	name = "PPSH-41"
+	desc = "Soviet automatic gun, used by Soviet Specialists and Gooks."
+	icon = 'icons/vietnam/usable/weapons.dmi
+	icon_state = "ppsh"
+	item_state = null
+	w_class = ITEM_SIZE_HUGE
+	force = 9
+	caliber = "a762"
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 5)
+	slot_flags = SLOT_BACK
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/a762
+	allowed_magazines = /obj/item/ammo_magazine/a762
+	one_hand_penalty = 3
+	wielded_item_state = "arifle-wielded"
+
+//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
+	firemodes = list(
+		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=4, burst_accuracy=null, dispersion=null),
+		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=6,    one_hand_penalty=6, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.0, 1.2, 1.2, 1.5)),
+
+/obj/item/weapon/gun/projectile/autosmatic/ppsh/update_icon()
+	icon_state = (ammo_magazine)? "ppsh" : "ppsh-empty"
+	wielded_item_state = (ammo_magazine)? "arifle-wielded" : "arifle-wielded-empty"
