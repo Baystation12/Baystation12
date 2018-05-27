@@ -11,6 +11,12 @@
 	..()
 	set_access(null, access_heads)
 
+/datum/computer_file/report/flight_plan/Destroy()
+	leader = null
+	manifest = null
+	planned_depart = null
+	return ..()
+
 /datum/computer_file/report/flight_plan/generate_fields()
 	add_field(/datum/report_field/instruction, "These fields are required:")
 	leader = add_field(/datum/report_field/people/from_manifest, "Leader", required = 1)
@@ -30,6 +36,11 @@
 /datum/computer_file/report/recipient/shuttle/New()
 	..()
 	set_access(null, access_heads)
+
+/datum/computer_file/report/recipient/shuttle/Destroy()
+	shuttle = null
+	mission = null
+	return ..()
 
 /datum/computer_file/report/recipient/shuttle/generate_fields()
 	..()
