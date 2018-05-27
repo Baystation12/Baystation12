@@ -12,5 +12,5 @@
 	src.canmove = 0
 
 /mob/living/silicon/decoy/Initialize()
-	initialized = TRUE
+	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_NORMAL
