@@ -25,7 +25,7 @@
  */
 
 
-#define MAX_UNIT_TEST_RUN_TIME 2 MINUTES
+#define MAX_UNIT_TEST_RUN_TIME 3 MINUTES
 
 var/all_unit_tests_passed = 1
 var/failed_unit_tests = 0
