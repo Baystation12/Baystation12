@@ -29,6 +29,9 @@ var/list/points_of_interest = list()
 /obj/effect/overmap/Initialize()
 
 	. = ..()
+	setup_object()
+
+/obj/effect/overmap/proc/setup_object()
 
 	if(!GLOB.using_map.use_overmap)
 		return INITIALIZE_HINT_QDEL
