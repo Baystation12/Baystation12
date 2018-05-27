@@ -16,7 +16,7 @@
 /obj/effect/overmap/ship/kigyar_pirates/process()
 	. = ..()
 	if(is_still())
-		animate(src,alpha = 50,time = 2 SECONDS) //Hard to see if sat still.
+		animate(src,alpha = 127,time = 2 SECONDS) //Hard to see if sat still.
 	else
 		animate(src,alpha = 255, time = 2 SECONDS)
 
