@@ -40,7 +40,7 @@
 "aN" = (/obj/machinery/light/spot{dir = 8},/obj/structure/cable{tag = "icon-1-2 (NORTH)"; icon_state = "1-2"; dir = 1; pixel_x = 0; d1 = 4; d2 = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "aO" = (/turf/simulated/floor,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "aP" = (/obj/machinery/light/spot{dir = 1},/obj/structure/lattice,/turf/simulated/floor,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
-"aQ" = (/obj/item/weapon/stock_parts/matter_bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
+"aQ" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "aR" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "aS" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "aT" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
@@ -74,7 +74,7 @@
 "bv" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/plating,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "bw" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (WEST)"; icon_state = "officechair_dark_preview"; dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "bx" = (/obj/machinery/door/airlock/halo{name = "Sleeping Quarters"},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
-"by" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
+"by" = (/obj/machinery/light/spot{dir = 8},/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "bz" = (/obj/structure/bed/chair/office/dark{tag = "icon-officechair_dark_preview (EAST)"; icon_state = "officechair_dark_preview"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "bA" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "bB" = (/obj/structure/flora/pottedplant/orientaltree,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
@@ -138,7 +138,7 @@ aaaaaaaaaaaaaaajajajajajajajajajajajapawawaLaMaLapaNawawawawawawawaOaPaOaOaOaOaP
 aaaaaaaaaaaaaaaaapapapapapapajajajajapaQawawawaRaSaTawawawawawaUaVaOaOaOaOaOaOaOaOaWaXaOaOapaeaeaeae
 aaaaaaaaaaaaaaaaapaYaZawbaapajajajajapbbawawawbcapapapapbdawapapapaOaObebfbfbfbfbfbfbgbhaOapaeaeaeae
 aaaaaaaaaaaaaaaaapbiawawawapapapapapapapbjapapapapapapapawawbkblapbmaObnbhbhbhbhbhbhbobhbpapaeaeaeae
-aaaaaaaaaaaaaaaaapawawawawawawawawawawaEawawawaEawawaEapawawawaQbqaOaObnbhbhbhbhbhbhbobhaOapaeaeaeae
+aaaaaaaaaaaaaaaaapawawawawawawawawawawaEawawawaEawawaEapawawawawbqaOaObnbhbhbhbhbhbhbobhaOapaeaeaeae
 aaaaaaaaaaaaaaaabrawawawawbsawawawawbsawawawawawawawawbtawawawbubvaOaObnbhbhbhbhbhbhbobhaOapaeaeaeae
 aaaaaaaaaaaaaaaabrbwawawaZapapapapapapapbxapapapapapapapbyawbzbAbvaOaObnbhbhbhbhbhbhbobhaOapaeaeaeae
 aaaaaaaaaaaaaaaabrbBawawbCbraaaeaeaeapbDbEbFapbGapbHbHapawawawbIbvaOaObnbhbhbJbhbhbhbobhaOapaeaeaeae
