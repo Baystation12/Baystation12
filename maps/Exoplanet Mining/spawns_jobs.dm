@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(mining_asteroid_spawns)
 
 /datum/spawnpoint/mining_asteroid
 	display_name =  "Mining Asteroid Spawn"
-	restrict_job = list("Miner")
+	restrict_job = list("Colonist")
 
 /datum/spawnpoint/mining_asteroid/New()
 	..()
@@ -16,7 +16,6 @@ GLOBAL_LIST_EMPTY(mining_asteroid_spawns)
 	GLOB.mining_asteroid_spawns += loc
 
 
-/decl/hierarchy/outfit/job/colonist
 /decl/hierarchy/outfit/job/colonist
 	name = "Colonist"
 
