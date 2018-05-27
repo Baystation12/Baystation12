@@ -118,6 +118,10 @@
 	var/obj/item/weapon/card/id/id_card
 	if (computer.card_slot)
 		id_card = computer.card_slot.stored_card
+	if (id_card.offduty)
+		computer.visible_message("<span class='warning'>\The [computer] flashes an error and ejects the ID: 'Error XX107: The modification and issuance of identification cards for off-duty personnel is prohibited.'</span>")
+		computer.proc_eject_id(user)
+		return
 
 	var/datum/nano_module/program/card_mod/module = NM
 	switch(href_list["action"])
