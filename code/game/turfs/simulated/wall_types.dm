@@ -74,3 +74,9 @@
 	if(prob(explosion_resistance))
 		return
 	..()
+
+/turf/unsimulated/wall/vietnam/endofmap
+	name = "End of Map"
+	icon = 'icons/vietnam/walls.dmi'
+	icon_state = "matrix"
+	density = 1
