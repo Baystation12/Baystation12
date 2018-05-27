@@ -54,6 +54,8 @@
 	ship_damage_projectile = /obj/item/projectile/missile_damage_proj
 	step_delay = 0.75 SECOND
 
+/obj/item/projectile/overmap/missile/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
+
 /obj/item/projectile/missile_damage_proj
 	name = "missile"
 	desc = "An explosive warhead on the end of a guided thruster."

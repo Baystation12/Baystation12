@@ -40,6 +40,8 @@
 	tracer_type = /obj/effect/projectile/pulse_laser_proj
 	tracer_delay_time = 2 SECONDS
 
+/obj/item/projectile/overmap/pulse_laser/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
+
 /obj/effect/projectile/pulse_laser_proj
 	icon = 'code/modules/halo/machinery/pulse_turret_tracers.dmi'
 	icon_state = "pulse_proj"
