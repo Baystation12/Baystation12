@@ -141,9 +141,10 @@
 	job_access_type = /datum/job/assistant
 
 /obj/item/weapon/card/id/torch/offduty
-	desc = "A card issued to off-duty personnel aboard the SEV Torch."
-	icon_state = "id"
+	desc = "A cheaply laminated card issued to off-duty personnel aboard the SEV Torch. Tiny print warns against attempting to modify this ID card."
+	icon_state = "mime"
 	job_access_type = /datum/job/offduty
+	offduty = TRUE
 
 /obj/item/weapon/card/id/torch/passenger/research
 	desc = "A card issued to NanoTrasen personnel aboard the SEV Torch."
