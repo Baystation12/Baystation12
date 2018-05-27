@@ -50,7 +50,7 @@
 	icon = 'code/modules/halo/machinery/pulse_turret.dmi'
 	icon_state = ""
 	alpha = 0
-	damage = 350
+	damage = 300
 	penetrating = 999
 	step_delay = 0.0 SECONDS
 	tracer_type = /obj/effect/projectile/pulse_laser_dam_proj
