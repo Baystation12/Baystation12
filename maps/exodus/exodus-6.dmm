@@ -516,7 +516,7 @@
 "jV" = (/obj/machinery/portable_atmospherics/canister/phoron,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/sign/warning/compressed_gas{pixel_x = -32},/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
 "jW" = (/obj/machinery/portable_atmospherics/canister/sleeping_agent,/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
 "jX" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
-"jY" = (/obj/machinery/door/airlock/external{frequency = 1380; icon_state = "door_locked"; id_tag = "engineering_outpost_outer"; locked = 1; name = "Engineering Dock Airlock"; req_access = newlist()},/turf/simulated/floor/plating,/area/outpost/mining_main/west_hall)
+"jY" = (/obj/machinery/door/airlock/external{frequency = 1380; icon_state = "door_locked"; id_tag = "mining_outpost_outer"; locked = 1; name = "Mining Dock Airlock"; req_access = list(13)},/turf/simulated/floor/plating,/area/outpost/mining_main/west_hall)
 "jZ" = (/obj/machinery/atmospherics/pipe/simple/visible/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{dir = 4},/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
 "ka" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/structure/mirror{dir = 4; pixel_x = -32; pixel_y = 0},/turf/simulated/floor/tiled/freezer,/area/outpost/engineering/meeting)
 "kb" = (/obj/structure/table/standard,/obj/item/weapon/folder,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/outpost/research/isolation_monitoring)
