@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(open_space)
 	init_order = INIT_OPEN_SPACE
 	var/list/turfs_to_process = list()		// List of turfs queued for update.
 	var/list/turfs_to_process_old = list()  //List of previous turfs that is set to update
-	var counter = 1 //Can't use .len because we need to iterate in order
+	var/counter = 1 //Can't use .len because we need to iterate in order
 
 
 
