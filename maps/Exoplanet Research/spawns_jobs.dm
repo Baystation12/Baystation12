@@ -124,7 +124,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawn)
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODST
 	alt_titles = list("ODST Medic","ODST CQC Specialist","ODST Sharpshooter","ODST Combat Engineer")
 	selection_color = "#008000"
-	access = list(042,110,309,311)
+	access = list(142,110,309,311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	is_whitelisted = 1
 
@@ -134,7 +134,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawn)
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO
 	selection_color = "#008000"
-	access = list(042,110,309,310,311)
+	access = list(142,110,309,310,311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	is_whitelisted = 1
 
