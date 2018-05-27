@@ -18,6 +18,9 @@
 /area/om_ships/comet
 	name = "CCV Comet"
 
+/area/om_ships/comet/cometrockets
+	name = "CCV Comet - Rocket Pods"
+
 /area/om_ships/caelum
 	name = "CCV Slow But Steady"
 	has_gravity = 0
@@ -52,3 +55,9 @@
 
 /area/om_ships/unscpatrol/portbattery
 	name = "UNSC Corvette Port Gun Battery"
+
+/area/om_ships/unscpatrol/portrockets
+ 	name = "UNSC Corvette Port Rocket Pods"
+
+/area/om_ships/unscpatrol/starboardrockets
+ 	name = "UNSC Corvette Starboard Rocket Pods"

@@ -42,11 +42,20 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/corvetteport
 	deck_gun_area = /area/om_ships/unscpatrol/portbattery
 
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/corvetteport
+	deck_gun_area = /area/om_ships/unscpatrol/portrockets
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/corvettestarboard
+	deck_gun_area = /area/om_ships/unscpatrol/starboardrockets
+
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/corvettestarboard
 	deck_gun_area = /area/om_ships/unscpatrol/starboardbattery
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/comet
 	deck_gun_area = /area/om_ships/comet
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/comet
+	deck_gun_area = /area/om_ships/comet/cometrockets
 
 //Misc Stuff//
 /obj/random_corvette_alarm_button

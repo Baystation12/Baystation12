@@ -144,13 +144,13 @@
 	var/list/allowed_attack_dirs = list()
 	switch(dir)
 		if(NORTH)
-			allowed_attack_dirs = list(SOUTH,EAST,WEST,SOUTHEAST,SOUTHWEST)
+			allowed_attack_dirs = list(SOUTH,SOUTHEAST,SOUTHWEST)
 		if(SOUTH)
-			allowed_attack_dirs = list(EAST,WEST,NORTH,NORTHEAST,NORTHWEST)
+			allowed_attack_dirs = list(NORTH,NORTHEAST,NORTHWEST)
 		if(EAST)
-			allowed_attack_dirs = list(NORTH,SOUTH,WEST,NORTHWEST,SOUTHWEST)
+			allowed_attack_dirs = list(WEST,NORTHWEST,SOUTHWEST)
 		if(WEST)
-			allowed_attack_dirs = list(NORTH,SOUTH,EAST,NORTHEAST,SOUTHEAST)
+			allowed_attack_dirs = list(EAST,NORTHEAST,SOUTHEAST)
 
 	return allowed_attack_dirs
 
@@ -168,7 +168,7 @@
 		if(get_dir(src,damage_source) in get_allowed_attack_dirs())
 			return 0
 
-	if((def_zone in list("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm","r_arm")) && prob(creator_gauntlet.limb_hit_chance))
+	if((def_zone in list("l_hand","r_hand")) && prob(creator_gauntlet.limb_hit_chance))
 		return 0
 	else
 		if(!isnull(attacker))

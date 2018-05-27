@@ -1,7 +1,7 @@
-#define DECK_GUN_ROUND_RELOAD_TIME 1 SECONDS//Time it takes a deck gun to reload a single round.
-#define DECK_GUN_BASE_MAXROUNDS 10
-#define DECK_GUN_FIRE_DELAY_LOWER 0.1 SECONDS
-#define DECK_GUN_FIRE_DELAY_UPPER 0.35 SECONDS
+#define DECK_GUN_ROUND_RELOAD_TIME 2 SECONDS//Time it takes a deck gun to reload a single round.
+#define DECK_GUN_BASE_MAXROUNDS 5
+#define DECK_GUN_FIRE_DELAY_LOWER 0.35 SECONDS
+#define DECK_GUN_FIRE_DELAY_UPPER 0.5 SECONDS
 
 /obj/machinery/overmap_weapon_console/deck_gun_control
 	name = "Global Deck Gun Control"
@@ -15,6 +15,10 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/New()
 	if(isnull(control_tag))
 		control_tag = "deck_gun_control - [z]"
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/aim_tool_attackself(var/mob/user)
+	for(var/obj/machinery/overmap_weapon_console/ctrl in linked_devices)
+		ctrl.aim_tool_attackself(user)
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/scan_linked_devices()
 	var/list/devices = list()
@@ -93,7 +97,7 @@
 	var/obj/item/projectile/overmap/fired_projectile = /obj/item/projectile/overmap/deck_gun_proj
 	var/round_reload_time = DECK_GUN_ROUND_RELOAD_TIME //Time it takes to reload a single round.
 	var/next_reload_time = 0
-	var/rounds_loaded = 0
+	var/rounds_loaded = DECK_GUN_BASE_MAXROUNDS
 	var/max_rounds_loadable = DECK_GUN_BASE_MAXROUNDS
 
 /obj/machinery/deck_gun/process()
@@ -129,6 +133,8 @@
 	desc = "A deck gun modified to fire multiple times per fire-input."
 	icon = 'code/modules/halo/machinery/deck_chaingun.dmi'
 	icon_state = "deck_gatling3"
+	max_rounds_loadable = 12
+	rounds_loaded = 12
 
 /obj/machinery/deck_gun/chaingun/can_fire()
 	. = ..()
@@ -145,7 +151,6 @@
 	desc = "oh hello"
 
 	step_delay = 0.1 SECONDS
-	dispersion = 1
 	damtype = BRUTE
 	damage = 200
 
@@ -162,7 +167,7 @@
 	name = "deck gun round"
 	desc = "thanks for examining this"
 	step_delay = 0.3 SECONDS
-	dispersion = 1
+	accuracy = 50 //miss chance of impacted overmap objects halved.
 	ship_damage_projectile = /obj/item/projectile/deck_gun_damage_proj
 
 /obj/item/projectile/overmap/deck_gun_proj/New()
