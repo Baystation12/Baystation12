@@ -87,14 +87,24 @@
 		loader.visible_message("<span class = 'notice'>[loader] pushes [user] through [src]\'s airlock.</span>")
 	else
 		user.visible_message("<span class = 'notice'>[user] climbs through [src]\'s airlock.</span>")
-	transform_mob(user)
+	translate_obj(user)
 
-/obj/docking_umbilical/proc/transform_mob(var/mob/user)
-	if(!istype(user))
-		return
+/obj/docking_umbilical/proc/translate_obj(var/obj/to_move)
 	if(!isturf(current_connected.loc))
 		return
-	user.forceMove(current_connected.loc)
+	to_move.forceMove(current_connected.loc)
+
+/obj/docking_umbilical/MouseDrop(var/obj/over_object)
+	var/mob/user = usr
+	if(!istype(over_object)) return
+	if(istype(over_object,/obj/vehicles)) return //Yeah no vehicles-through-umbilical thanks. use a dropship.
+	if(over_object.anchored) return
+	if(!Adjacent(user) || !user.Adjacent(over_object)) return
+	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] through [src]\'s airlock.</span>")
+	if(!do_after(user,UMBI_CROSS_DELAY,over_object))
+		return
+	user.visible_message("<span class = 'notice'>[user] loads [over_object] into [src].</span>")
+	translate_obj(over_object)
 
 /obj/docking_umbilical/attackby(var/obj/item/grab/I, var/mob/user)
 	if(!istype(I))
