@@ -6,7 +6,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 */
 
 /decl/hierarchy/outfit/job/torch
-	name = OUTFIT_JOB_NAME("Torch Outfit")
+	name = OUTFIT_JOB_NAME("USMC uniform")
 	hierarchy_type = /decl/hierarchy/outfit/job/torch
 	uniform = /obj/item/clothing/under/color/grey
 	l_ear = /obj/item/device/radio/headset
@@ -152,8 +152,8 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
-	l_ear = /obj/item/device/radio/headset/heads/torchxo		
-	id_type = /obj/item/weapon/card/id/torch/crew/sea		
+	l_ear = /obj/item/device/radio/headset/heads/torchxo
+	id_type = /obj/item/weapon/card/id/torch/crew/sea
 	pda_type = /obj/item/device/pda/heads
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
@@ -627,6 +627,35 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = null
 	l_pocket = /obj/item/weapon/wrench
 	r_pocket = /obj/item/weapon/crowbar
+
+/decl/hierarchy/outfit/vietnam/usmcbdu
+	name = OUTFIT_JOB_NAME("USMC bdu uniform")
+	uniform = /obj/item/clothing/under/vietnam/usmc_green_s
+	shoes = /obj/item/clothing/shoes/jungleboots
+
+/decl/hierarchy/outfit/vietnam/usmcwoodland
+	name = OUTFIT_JOB_NAME("USMC Woodland uniform")
+	uniform = /obj/item/clothing/under/vietnam/usmc_camo_s
+	shoes = /obj/item/clothing/shoes/jungleboots
+
+/decl/hierarchy/outfit/vietnam/pilot
+	name = OUTFIT_JOB_NAME("USMC Pilot uniform")
+	uniform = /obj/item/clothing/under/vietnam/usmcpilot_s
+	shoes = /obj/item/clothing/shoes/jungleboots
+	head = /obj/item/clothing/head/helmet/vietnam/pilothelm
+	suit = /obj/item/clothing/suit/armor/vietnam/vest/pilot
+
+/decl/hierarchy/outfit/vietnam/usmcmedic
+	name = OUTFIT_JOB_NAME("USMC Medic unifrom")
+	uniform = /obj/item/clothing/under/vietnam/usmc_green_s
+	shoes = /obj/item/clothing/shoes/jungleboots
+	head = /obj/item/clothing/head/helmet/vietnam/m1/medic
+
+/decl/hierarchy/outfit/vietnam/journalist
+	name = OUTFIT_JOB_NAME("Journalist")
+	uniform = /obj/item/clothing/under/vietnam/pressunder_s
+	shoes = /obj/item/clothing/shoes/jungleboots
+	suit = /obj/item/clothing/suit/armor/vietnam/vest/pasgtpress
 
 /decl/hierarchy/outfit/job/torch/stowaway/post_equip(var/mob/living/carbon/human/H)
 	..()
