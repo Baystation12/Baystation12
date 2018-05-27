@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(antags)
 	name = "Antags"
-	init_order = INIT_ORDER_ANTAGS
+	init_order = SS_INIT_ANTAGS
 	flags = SS_NO_FIRE
 
 /datum/controller/subsystem/antags/Initialize(timeofday)

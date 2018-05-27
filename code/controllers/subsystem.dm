@@ -1,30 +1,34 @@
-
 /datum/controller/subsystem
 	// Metadata; you should define these.
-	name = "fire coderbus"              //name of the subsystem
-	var/init_order = INIT_ORDER_DEFAULT //order of initialization. Higher numbers are initialized first, lower numbers later. Use defines in __DEFINES/subsystems.dm for easy understanding of order.
-	var/wait = 20                       //time to wait (in deciseconds) between each call to fire(). Must be a positive integer.
-	var/priority = SS_PRIORITY_DEFAULT  //When mutiple subsystems need to run in the same tick, higher priority subsystems will run first and be given a higher share of the tick before MC_TICK_CHECK triggers a sleep
+	name = "fire coderbus"               //name of the subsystem
+	var/init_order = SS_INIT_DEFAULT  //order of initialization. Higher numbers are initialized first, lower numbers later. Use defines in __DEFINES/subsystems.dm for easy understanding of order.
+	var/wait = 20                        //time to wait (in deciseconds) between each call to fire(). Must be a positive integer.
+	var/priority = SS_PRIORITY_DEFAULT //When mutiple subsystems need to run in the same tick, higher priority subsystems will run first and be given a higher share of the tick before MC_TICK_CHECK triggers a sleep
 
-	var/flags = 0                       //see MC.dm in __DEFINES Most flags must be set on world start to take full effect. (You can also restart the mc to force them to process again)
+	var/flags = 0                        //see MC.dm in __DEFINES Most flags must be set on world start to take full effect. (You can also restart the mc to force them to process again)
+	// Similar to can_fire, but intended explicitly for subsystems that are asleep. Using this var instead of can_fire
+	//	 allows admins to disable subsystems without them re-enabling themselves.
+	var/suspended = FALSE
+
+	var/initialized = FALSE	//set to TRUE after it has been initialized, will obviously never be set if the subsystem doesn't initialize
 
 	//set to 0 to prevent fire() calls, mostly for admin use or subsystems that may be resumed later
 	//	use the SS_NO_FIRE flag instead for systems that never fire to keep it from even being added to the list
 	var/can_fire = TRUE
 
 	// Bookkeeping variables; probably shouldn't mess with these.
-	var/last_fire = 0		//last world.time we called fire()
-	var/next_fire = 0		//scheduled world.time for next fire()
-	var/cost = 0			//average time to execute
-	var/tick_usage = 0		//average tick usage
-	var/tick_overrun = 0	//average tick overrun
-	var/state = SS_IDLE		//tracks the current state of the ss, running, paused, etc.
-	var/paused_ticks = 0	//ticks this ss is taking to run right now.
-	var/paused_tick_usage	//total tick_usage of all of our runs while pausing this run
-	var/ticks = 1			//how many ticks does this ss take to run on avg.
-	var/times_fired = 0		//number of times we have called fire()
-	var/queued_time = 0		//time we entered the queue, (for timing and priority reasons)
-	var/queued_priority 	//we keep a running total to make the math easier, if priority changes mid-fire that would break our running total, so we store it here
+	var/last_fire = 0     //last world.time we called fire()
+	var/next_fire = 0     //scheduled world.time for next fire()
+	var/cost = 0          //average time to execute
+	var/tick_usage = 0    //average tick usage
+	var/tick_overrun = 0  //average tick overrun
+	var/state = SS_IDLE   //tracks the current state of the ss, running, paused, etc.
+	var/paused_ticks = 0  //ticks this ss is taking to run right now.
+	var/paused_tick_usage //total tick_usage of all of our runs while pausing this run
+	var/ticks = 1         //how many ticks does this ss take to run on avg.
+	var/times_fired = 0   //number of times we have called fire()
+	var/queued_time = 0   //time we entered the queue, (for timing and priority reasons)
+	var/queued_priority   //we keep a running total to make the math easier, if priority changes mid-fire that would break our running total, so we store it here
 	//linked list stuff for the queue
 	var/datum/controller/subsystem/queue_next
 	var/datum/controller/subsystem/queue_prev
@@ -34,8 +38,7 @@
 	var/static/list/failure_strikes //How many times we suspect a subsystem type has crashed the MC, 3 strikes and you're out!
 
 //Do not override
-/datum/controller/subsystem/New()
-	return
+///datum/controller/subsystem/New()
 
 // Used to initialize the subsystem BEFORE the map has loaded
 // Called AFTER Recover if that is called
@@ -69,7 +72,7 @@
 	can_fire = 0
 	flags |= SS_NO_FIRE
 	Master.subsystems -= src
-
+	return ..()
 
 //Queue it to run.
 //	(we loop thru a linked list until we get to the end or find the right point)
@@ -157,6 +160,7 @@
 
 //used to initialize the subsystem AFTER the map has loaded
 /datum/controller/subsystem/Initialize(start_timeofday)
+	initialized = TRUE
 	var/time = (REALTIMEOFDAY - start_timeofday) / 10
 	var/msg = "Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!"
 	to_chat(world, "<span class='boldannounce'>[msg]</span>")
@@ -168,12 +172,14 @@
 	if(!statclick)
 		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
 
-
-
-	if(can_fire && !(SS_NO_FIRE in flags))
-		msg = "[round(cost,1)]ms|[round(tick_usage,1)]%([round(tick_overrun,1)]%)|[round(ticks,0.1)]\t[msg]"
+	if (flags & SS_NO_FIRE)
+		. = "NO FIRE"
+	else if (can_fire && !suspended)
+		. = "[round(cost,1)]ms|[round(tick_usage,1)]%([round(tick_overrun,1)]%)|[round(ticks,0.1)]"
+	else if (!can_fire)
+		. = "OFFLINE"
 	else
-		msg = "OFFLINE\t[msg]"
+		. = "SUSPEND"
 
 	var/title = name
 	if (can_fire)
@@ -204,8 +210,30 @@
 //should attempt to salvage what it can from the old instance of subsystem
 /datum/controller/subsystem/Recover()
 
+// Admin-disables this subsystem. Will show as OFFLINE in MC panel.
+/datum/controller/subsystem/proc/disable()
+	can_fire = FALSE
+
+// Admin-enables this subsystem.
+/datum/controller/subsystem/proc/enable()
+	if (!can_fire)
+		next_fire = world.time + wait
+		can_fire = TRUE
+
+// Suspends this subsystem. Functionally identical to disable(), but shows SUSPEND in MC panel.
+// 	Preferred over disable() for self-disabling subsystems.
+/datum/controller/subsystem/proc/suspend()
+	suspended = TRUE
+
+// Wakes a suspended subsystem.
+/datum/controller/subsystem/proc/wake()
+	if (suspended)
+		suspended = FALSE
+		if (can_fire)
+			next_fire = world.time + wait
+
 /datum/controller/subsystem/VV_static()
-	return ..() + list("queued_priority")
+	return ..() + list("queued_priority", "suspended")
 
 /decl/vv_set_handler/subsystem_handler
 	handled_type = /datum/controller/subsystem
@@ -213,7 +241,7 @@
 	predicates = list(/proc/is_num_predicate)
 
 /decl/vv_set_handler/subsystem_handler/handle_set_var(var/datum/controller/subsystem/SS, variable, var_value, client)
-	var_value = !!var_value
 	if (var_value)
-		SS.next_fire = world.time + SS.wait
-	SS.can_fire = var_value
+		SS.enable()
+	else
+		SS.disable()
