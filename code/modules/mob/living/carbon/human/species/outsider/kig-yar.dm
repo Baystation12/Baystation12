@@ -31,3 +31,27 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/hollow_bones),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/hollow_bones)
 		)
+
+/datum/species/kig_yar/skirmisher
+	name = "Kig-Yar - T'vaoan"
+	icobase = 'code/modules/halo/icons/species/r_skirmishers.dmi'
+	deform = 'code/modules/halo/icons/species/r_skirmishers.dmi'
+	icon_template = 'code/modules/halo/icons/species/r_skirmishers.dmi'
+
+	pain_mod = 0.9
+	brute_mod = 0.95
+	slowdown = -1.75
+
+	has_limbs = list( //Normal limbs. A bit better than ruutian
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
+		)
