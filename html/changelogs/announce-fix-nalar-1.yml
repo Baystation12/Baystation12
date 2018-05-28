@@ -1,4 +1,0 @@
-author: Nalar
-delete-after: True
-changes: 
-  - bugfix: Announcements generated via admins or the communications console can now be heard by characters in-game.

@@ -1,4 +1,0 @@
-author: Nalar
-delete-after: True
-changes: 
-  - bugfix: Announced arrivals now correctly state which place new arrivals arrive at.
