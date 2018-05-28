@@ -4621,9 +4621,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/thirddeck)
 "jP" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
