@@ -15859,6 +15859,9 @@
 	icon_state = "0-2";
 	pixel_y = 0
 	},
+/obj/item/stack/material/mhydrogen{
+	amount = 50
+	},
 /turf/simulated/floor/reinforced/airless,
 /area/vacant/prototype/engine)
 "Vf" = (

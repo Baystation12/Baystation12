@@ -36,6 +36,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 //  tritium
 //  phoron
 //  supermatter
+//  mhydrogen (metallic hydrogen from compressing metallic hydrogen ores)
 
 // Gaseous/reagent fuels
 // hydrogen
@@ -48,6 +49,13 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 /decl/fusion_reaction/hydrogen_hydrogen
 	p_react = "hydrogen"
 	s_react = "hydrogen"
+	energy_consumption = 1
+	energy_production = 2
+	products = list("helium" = 1)
+
+/decl/fusion_reaction/mhydrogen_mhydrogen
+	p_react = "mhydrogen"
+	s_react = "mhydrogen"
 	energy_consumption = 1
 	energy_production = 2
 	products = list("helium" = 1)
