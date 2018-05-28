@@ -52,6 +52,13 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_production = 2
 	products = list("helium" = 1)
 
+/decl/fusion_reaction/mhydrogen_mhydrogen
+	p_react = "mhydrogen"
+	s_react = "mhydrogen"
+	energy_consumption = 1
+	energy_production = 2
+	products = list("helium" = 1)
+
 /decl/fusion_reaction/deuterium_deuterium
 	p_react = "deuterium"
 	s_react = "deuterium"
