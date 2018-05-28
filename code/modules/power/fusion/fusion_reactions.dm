@@ -36,6 +36,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 //  tritium
 //  phoron
 //  supermatter
+//  mhydrogen (metallic hydrogen from compressing metallic hydrogen ores)
 
 // Gaseous/reagent fuels
 // hydrogen
