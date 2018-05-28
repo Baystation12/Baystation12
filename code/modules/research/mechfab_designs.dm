@@ -354,12 +354,12 @@
 	materials = list(DEFAULT_WALL_MATERIAL = 80000, "glass" = 6000, "gold" = 5000)
 	build_path = /obj/item/borg/upgrade/vtec
 
-/datum/design/item/robot_upgrade/tasercooler
-	name = "Rapid taser cooling module"
-	desc = "Used to cool a mounted taser, increasing the potential current in it and thus its recharge rate."
+/datum/design/item/robot_upgrade/weaponcooler
+	name = "Rapid weapon cooling module"
+	desc = "Used to cool a mounted energy gun, increasing the potential current in it and thus its recharge rate."
 	id = "borg_taser_module"
 	materials = list(DEFAULT_WALL_MATERIAL = 80000, "glass" = 6000, "gold" = 2000, "diamond" = 500)
-	build_path = /obj/item/borg/upgrade/tasercooler
+	build_path = /obj/item/borg/upgrade/weaponcooler
 
 /datum/design/item/robot_upgrade/jetpack
 	name = "Jetpack module"

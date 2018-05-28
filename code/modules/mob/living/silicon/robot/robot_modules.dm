@@ -411,7 +411,7 @@ var/global/list/robot_modules = list(
 	networks = list(NETWORK_SECURITY)
 	subsystems = list(/datum/nano_module/crew_monitor, /datum/nano_module/digitalwarrant)
 	can_be_pushed = 0
-	supported_upgrades = list(/obj/item/borg/upgrade/tasercooler)
+	supported_upgrades = list(/obj/item/borg/upgrade/weaponcooler)
 
 /obj/item/weapon/robot_module/security/general
 	sprites = list(
