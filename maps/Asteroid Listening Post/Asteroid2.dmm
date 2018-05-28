@@ -106,7 +106,9 @@
 "cb" = (/obj/machinery/computer/cryopod{pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "cc" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "cd" = (/obj/machinery/door/blast/regular,/turf/simulated/floor,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
-"ce" = (/obj/effect/landmark/map_data{desc = "Research base Sublevel"; height = 2},/turf/simulated/floor/holofloor/space,/area/space)
+"ce" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/space)
+"cf" = (/obj/effect/overmap/sector/exo_listen,/turf/simulated/floor/holofloor/space,/area/space)
+"cg" = (/obj/effect/landmark/map_data{desc = "Research base Sublevel"; height = 2},/turf/simulated/floor/holofloor/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -155,8 +157,8 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeaeaeaeaeaeaeaeaeaeaeaeababaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeaeaeaeaeaeaeabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaaaaaaababababaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-ceaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+ceceaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cfceaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaceaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cgceaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

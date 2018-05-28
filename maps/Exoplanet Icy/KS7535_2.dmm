@@ -99,13 +99,13 @@
 "bU" = (/obj/machinery/door/airlock/halo_lifepod{name = "Interior Airlock"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "bV" = (/obj/machinery/light,/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "bW" = (/obj/machinery/door/airlock/halo{name = "Cryodorms"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
-"bX" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
-"bY" = (/obj/machinery/computer/cryopod{pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
-"bZ" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
-"ca" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
-"cb" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
-"cc" = (/obj/effect/landmark/map_data{height = 2},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
-"cd" = (/obj/effect/overmap/sector/innie_base{name = "KS7-535"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
+"bX" = (/obj/effect/overmap/sector/exo_depot,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
+"bY" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
+"bZ" = (/obj/machinery/computer/cryopod{pixel_y = 32},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"ca" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"cb" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"cc" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"cd" = (/obj/effect/landmark/map_data{height = 2},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -205,7 +205,7 @@ abacacacacacacacacacacacacacbdacacacacacbdacacacacacacacakacacacacacacacacacacac
 ababacacacbdacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababaaaaaaaaaaalalalalalalalaralaaaaaaaaaaaaaaaubBbCbDaubOaubIbIaubPbQbRbSaubqbabnbnbnbnbnbnbnbnbabrauaa
 ababacacacacacacacacacacafacacacacacacacacacacacacacacacacacajacacacacacacacacacacacacacacacacacababaaaaaaaaaaaaaaaaalalalbTalaaaaaaaaaaaaaaaaauaAaAaAbUbJbVbJbJauauauauauaubababnbnbnbnbnbnbnbnbabaauaa
 ababacacacacacacacacacacacacacacacacacahbuacacacacacacacacacacacacacagacacacacacacacacacacacacacababaaaaaaaaaaaaaaalalalalalalaaaaaaaaaaaaaaauauaubWauauauauauauauaaaaaaaaaubabababababababababababaauaa
-ababababbXacacacacacacacacacacacacacacacacacacabacacacacacacacacacacacabacacacacacacajajacacababababaaaaaaaaaaaaalalaralalalalaaaaaaaaaaaaaaauaAbYaAaAaAauaaaaaaaaaaaaaaaaaubabZbibabababZbababababZauaa
-abababababacacacacacacababacbdacacabacacacacacabababacacacacacacacacababababacacacacacabababababababaaaaaaaaaaaaalalalaaaaaaalaaaaaaaaaaaaaaaucaaAaAcbaAauaaaaaaaaaaaaaaaaauauauauauauauauauauauauauauaa
-cccdababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauauauauauauauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+bXabababbYacacacacacacacacacacacacacacacacacacabacacacacacacacacacacacabacacacacacacajajacacababababaaaaaaaaaaaaalalaralalalalaaaaaaaaaaaaaaauaAbZaAaAaAauaaaaaaaaaaaaaaaaaubacabibababacababababacaauaa
+abababababacacacacacacababacbdacacabacacacacacabababacacacacacacacacababababacacacacacabababababababaaaaaaaaaaaaalalalaaaaaaalaaaaaaaaaaaaaaaucbaAaAccaAauaaaaaaaaaaaaaaaaauauauauauauauauauauauauauauaa
+cdabababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaauauauauauauauaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

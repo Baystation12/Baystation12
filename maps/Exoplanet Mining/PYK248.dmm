@@ -409,7 +409,7 @@
 "hS" = (/obj/docking_umbilical/north{name = "PYK-248 Docking Umbilical 2"},/turf/simulated/floor/plating,/area/mining_colony/Interior{icon_state = "yellow"; name = "Mining Colony Hallways"; requires_power = 0; tag = "icon-yellow"})
 "hT" = (/obj/docking_umbilical/north{name = "PYK-248 Docking Umbilical 3"},/turf/simulated/floor/plating,/area/mining_colony/Interior{icon_state = "yellow"; name = "Mining Colony Hallways"; requires_power = 0; tag = "icon-yellow"})
 "hU" = (/obj/docking_umbilical/north{name = "PYK-248 Docking Umbilical 4"},/turf/simulated/floor/plating,/area/mining_colony/Interior{icon_state = "yellow"; name = "Mining Colony Hallways"; requires_power = 0; tag = "icon-yellow"})
-"hV" = (/obj/effect/overmap/sector/exo_research,/turf/space,/area/mining_colony/Exterior{dynamic_lighting = 1})
+"hV" = (/obj/effect/overmap/sector/exo_mining,/turf/space,/area/mining_colony/Exterior{dynamic_lighting = 1})
 "hW" = (/obj/effect/landmark/map_data,/turf/space,/area/mining_colony/Exterior{dynamic_lighting = 1})
 
 (1,1,1) = {"

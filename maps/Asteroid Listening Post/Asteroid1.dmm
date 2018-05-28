@@ -54,8 +54,6 @@
 "bb" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
 "bc" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/obj/item/ammo_magazine/m762_ap/MA5B,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
 "bd" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel2{tag = "icon-anomaly"; icon_state = "anomaly"; requires_power = 0})
-"be" = (/turf/space,/area/space)
-"bf" = (/obj/effect/overmap/sector/exo_depot,/turf/space,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -105,7 +103,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-beaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-bfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-beaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
