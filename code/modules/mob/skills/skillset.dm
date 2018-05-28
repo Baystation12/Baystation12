@@ -33,15 +33,20 @@
 	skill_list = list()
 	return												//Antags get generic skills, unless this is modified
 
-/datum/skillset/proc/obtain_from_allocation(datum/job/job, allocation = list())
+/datum/skillset/proc/obtain_from_client(datum/job/job, client/given_client)
 	if(!skills_transferable)
 		return
 	if(owner.mind && player_is_antag(owner.mind))		//Antags are dealt with at a different time. Note that this may be called before or after antag roles are assigned.
 		return
- 
+	if(!given_client)
+		return
+
+	var/allocation = list()
+	if(job in given_client.prefs.skills_allocated)
+		allocation = given_client.prefs.skills_allocated[job]
 	skill_list = list()
 	for(var/decl/hierarchy/skill/S in GLOB.skills)
-		var/min = job.min_skill[S.type] || SKILL_MIN
+		var/min = given_client.prefs.get_min_skill(job, S)
 		skill_list[S] = min + (allocation[S] || 0)
 
 // Show skills verb

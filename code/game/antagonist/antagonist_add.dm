@@ -6,6 +6,7 @@
 	//do this again, just in case
 	if(flags & ANTAG_OVERRIDE_JOB)
 		player.assigned_role = role_text
+		player.role_alt_title = null
 	player.special_role = role_text
 
 	if(isghostmind(player))
@@ -66,6 +67,10 @@
 		player.special_role = null
 		update_icons_removed(player)
 		BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
+
+		var/datum/job/job = job_master.GetJob(player.assigned_role) //Reset their skills to be job-appropriate.
+		if(player.current)
+			player.current.skillset.obtain_from_client(job, player.current.client)
 
 		if(!is_special_character(player))
 			player.current.verbs -= /mob/living/proc/write_ambition
