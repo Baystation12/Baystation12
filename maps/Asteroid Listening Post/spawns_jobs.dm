@@ -33,7 +33,7 @@ GLOBAL_LIST_EMPTY(listen_staff_spawns)
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 
-/datum/job/IGUARD
+/datum/job/LISTENG
 	title = "Listening Post Technician"
 	total_positions = 2
 	spawn_positions = 2
