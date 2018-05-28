@@ -15,11 +15,11 @@
 	melting_point = 17273
 
 	brute_armor = 15
-	burn_armor = 1 //Not as defensive when burn applied.
+	burn_armor = 10 //Not as defensive when burn applied.
 
-	integrity = 500
+	integrity = 600
 
-	explosion_resistance = 10
+	explosion_resistance = 45
 
 	stack_type = /obj/item/stack/material/nanolaminate
 
