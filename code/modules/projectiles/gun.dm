@@ -431,16 +431,23 @@
 		to_chat(user, "The fire selector is set to [current_mode.name].")
 
 /obj/item/weapon/gun/proc/switch_firemodes()
-	if(firemodes.len <= 1)
-		return null
 
-	sel_mode++
-	if(sel_mode > firemodes.len)
-		sel_mode = 1
+	var/next_mode = get_next_firemode()
+	if(!next_mode || next_mode == sel_mode)
+		return null
+	
+	sel_mode = next_mode
 	var/datum/firemode/new_mode = firemodes[sel_mode]
 	new_mode.apply_to(src)
 
 	return new_mode
+
+/obj/item/weapon/gun/proc/get_next_firemode()
+	if(firemodes.len <= 1)
+		return null
+	. = sel_mode + 1
+	if(. > firemodes.len)
+		. = 1
 
 /obj/item/weapon/gun/attack_self(mob/user)
 	var/datum/firemode/new_mode = switch_firemodes(user)
