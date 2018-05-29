@@ -1,6 +1,7 @@
 /area/mining_colony
 	name = "Mining_colony"
 	dynamic_lighting = 0
+	base_turf = /turf/simulated/floor/asteroid
 
 /area/mining_colony/Exterior
 	name = "Mining Colony Exterior"
