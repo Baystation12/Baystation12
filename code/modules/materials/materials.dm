@@ -576,9 +576,6 @@ var/list/name_to_material
 	created_window = /obj/structure/window/phoronbasic
 	wire_product = null
 	rod_product = /obj/item/stack/material/glass/phoronrglass
-	chem_products = list(
-				/datum/reagent/toxin/phoron = 10
-				)
 
 /material/glass/phoron/reinforced
 	name = "rphglass"
