@@ -310,6 +310,28 @@
 	landmark_tag = "nav_merc_residentiel"
 	autoset = 1
 
+//Merchant
+
+/datum/shuttle/autodock/ferry/merchant
+	name = "Merchant"
+	warmup_time = 10
+	location = 0
+	shuttle_area = /area/shuttle/merchant/home
+	waypoint_station = "nav_merchant_start"
+	waypoint_offsite = "nav_merchant_out"
+	dock_target = "merchant_ship_dock"
+
+/obj/effect/shuttle_landmark/merchant/start
+	name = "Merchant Base"
+	landmark_tag = "nav_merchant_start"
+	docking_controller = "merchant_station_dock"
+	autoset = 0
+
+/obj/effect/shuttle_landmark/merchant/out
+	name = "Docking Bay"
+	landmark_tag = "nav_merchant_out"
+	docking_controller = "merchant_shuttle_station_dock"
+	autoset = 1
 
 //Skipjack
 /*
