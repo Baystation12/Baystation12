@@ -125,9 +125,7 @@
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
 
-	var/obj/item/weapon/gun/energy/secure/gun/mounted/T = locate() in R.module
-	if(!T)
-		T = locate() in R.module.contents
+	var/obj/item/weapon/gun/energy/gun/secure/mounted/T = locate() in R.module
 	if(!T)
 		T = locate() in R.module.modules
 	if(!T)
