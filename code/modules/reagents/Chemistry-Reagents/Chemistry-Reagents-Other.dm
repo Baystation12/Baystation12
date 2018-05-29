@@ -181,7 +181,7 @@
 	if(ishuman(M)) // Any location
 		if(iscultist(M))
 			if(prob(10))
-				cult.offer_uncult(M)
+				GLOB.cult.offer_uncult(M)
 			if(prob(2))
 				var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
 				M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
@@ -300,6 +300,16 @@
 	if(volume >= 1)
 		T.wet_floor(80)
 
+/datum/reagent/lube/oil // TODO: Robot Overhaul in general
+	name = "Oil"
+	description = "A thick greasy industrial lubricant. Commonly found in robotics."
+	taste_description = "greasy diesel"
+	color = "#000000"
+
+/datum/reagent/lube/oil/touch_turf(var/turf/simulated/T)
+	if(!istype(T, /turf/space))
+		new /obj/effect/decal/cleanable/blood/oil/streak(T)
+
 /datum/reagent/silicate
 	name = "Silicate"
 	description = "A compound that can be used to reinforce glass."
@@ -332,6 +342,7 @@
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
+#define COOLANT_LATENT_HEAT 19000 //Twice as good at cooling than water is, but may cool below 20c. It'll cause freezing that atmos will have to deal with..
 /datum/reagent/coolant
 	name = "Coolant"
 	description = "Industrial cooling substance."
@@ -339,6 +350,29 @@
 	taste_mult = 1.1
 	reagent_state = LIQUID
 	color = "#c8a5dc"
+
+/datum/reagent/coolant/touch_turf(var/turf/simulated/T)
+	if(!istype(T))
+		return
+
+	var/datum/gas_mixture/environment = T.return_air()
+	var/min_temperature = 0 // Room temperature + some variance. An actual diminishing return would be better, but this is *like* that. In a way. . This has the potential for weird behavior, but I says fuck it. Water grenades for everyone.
+
+	var/hotspot = (locate(/obj/fire) in T)
+	if(hotspot && !istype(T, /turf/space))
+		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
+		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
+		lowertemp.react()
+		T.assume_air(lowertemp)
+		qdel(hotspot)
+
+	if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
+		var/removed_heat = between(0, volume * COOLANT_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
+		environment.add_thermal_energy(-removed_heat)
+		if (prob(5) && environment && environment.temperature > T100C)
+			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
+
+
 
 /datum/reagent/ultraglue
 	name = "Ultra Glue"

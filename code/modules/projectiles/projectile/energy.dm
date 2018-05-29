@@ -39,7 +39,7 @@
 	sparks.start()
 
 	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
-	new /obj/effect/effect/smoke/illumination(T, 5, brightness, brightness, light_colour)
+	new /obj/effect/effect/smoke/illumination(T, 5, 4, 1, light_colour)
 
 //blinds people like the flash round, but in a larger area and can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
@@ -51,11 +51,11 @@
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
 	light_colour = pick("#e58775", "#ffffff", "#90ff90", "#a09030")
-
+	set_light(1, 1, 4, 2, light_colour)
 	..() //initial flash
 
 	//residual illumination
-	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240) SECONDS, range=8, power=3, color=light_colour) //same lighting power as flare
+	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240), range=8, power=1, color=light_colour) //same lighting power as flare
 
 /obj/item/projectile/energy/electrode
 	name = "electrode"
@@ -63,8 +63,11 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	nodamage = 1
 	agony = 50
-	damage_type = PAIN
-	//Damage will be handled on the MOB side, to prevent window shattering.
+	damage_type = PAIN //Damage will be handled on the MOB side, to prevent window shattering.
+	step_delay = 0.7
+
+/obj/item/projectile/energy/electrode/green
+	icon_state = "spark_green"
 
 /obj/item/projectile/energy/electrode/stunshot
 	nodamage = 0
@@ -145,23 +148,23 @@
 				ear_safety += 1
 			if(istype(H.head, /obj/item/clothing/head/helmet))
 				ear_safety += 1
-	if(ear_safety == 1)
-		M.make_dizzy(120)
-	else if (ear_safety > 1)
-		M.make_dizzy(60)
-	else if (!ear_safety)
-		M.make_dizzy(300)
-		M.ear_damage += rand(1, 10)
-		M.ear_deaf = max(M.ear_deaf,15)
-	if (M.ear_damage >= 15)
-		to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
-		if (prob(M.ear_damage - 5))
-			to_chat(M, "<span class='danger'>You can't hear anything!</span>")
-			M.sdisabilities |= DEAF
-	else
-		if (M.ear_damage >= 5)
-			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
-	M.update_icons()
+		if(ear_safety == 1)
+			M.make_dizzy(120)
+		else if (ear_safety > 1)
+			M.make_dizzy(60)
+		else if (!ear_safety)
+			M.make_dizzy(300)
+			M.ear_damage += rand(1, 10)
+			M.ear_deaf = max(M.ear_deaf,15)
+		if (M.ear_damage >= 15)
+			to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
+			if (prob(M.ear_damage - 5))
+				to_chat(M, "<span class='danger'>You can't hear anything!</span>")
+				M.sdisabilities |= DEAF
+		else
+			if (M.ear_damage >= 5)
+				to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
+		M.update_icons()
 
 /obj/item/projectile/energy/plasmastun/on_hit(var/atom/target)
 	bang(target)

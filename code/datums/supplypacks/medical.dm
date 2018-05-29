@@ -5,6 +5,7 @@
 /decl/hierarchy/supply_pack/medical/medical
 	name = "Medical crate"
 	contains = list(/obj/item/weapon/storage/firstaid/regular,
+					/obj/item/weapon/storage/firstaid/trauma,
 					/obj/item/weapon/storage/firstaid/fire,
 					/obj/item/weapon/storage/firstaid/toxin,
 					/obj/item/weapon/storage/firstaid/o2,
@@ -15,8 +16,38 @@
 					/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
 					/obj/item/weapon/storage/box/syringes,
 					/obj/item/weapon/storage/box/autoinjectors)
-	cost = 10
+	cost = 20
 	containername = "\improper Medical crate"
+
+/decl/hierarchy/supply_pack/medical/trauma
+	name = "Trauma pouch crate"
+	contains = list(/obj/item/weapon/storage/firstaid/trauma = 3)
+	cost = 10
+	containername = "\improper Trauma pouch crate"
+
+/decl/hierarchy/supply_pack/medical/burn
+	name = "Burn pouch crate"
+	contains = list(/obj/item/weapon/storage/firstaid/fire = 3)
+	cost = 10
+	containername = "\improper Burn pouch crate"
+
+/decl/hierarchy/supply_pack/medical/toxin
+	name = "Toxin pouch crate"
+	contains = list(/obj/item/weapon/storage/firstaid/toxin = 3)
+	cost = 10
+	containername = "\improper Toxin pouch crate"
+
+/decl/hierarchy/supply_pack/medical/oxyloss
+	name = "Low oxygen pouch crate"
+	contains = list(/obj/item/weapon/storage/firstaid/o2 = 3)
+	cost = 10
+	containername = "\improper Low oxygen pouch crate"
+
+/decl/hierarchy/supply_pack/medical/stab
+	name = "Stability kit crate"
+	contains = list(/obj/item/weapon/storage/firstaid/stab = 3)
+	cost = 60
+	containername = "\improper Stability kit crate"
 
 /decl/hierarchy/supply_pack/medical/bloodpack
 	name = "Blood pack crate"
@@ -63,7 +94,6 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 					/obj/item/clothing/mask/surgical,
 					/obj/item/clothing/shoes/white,
-					/obj/item/weapon/cartridge/cmo,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/device/healthanalyzer,
 					/obj/item/device/flashlight/pen,
@@ -84,7 +114,6 @@
 					/obj/item/clothing/mask/surgical,
 					/obj/item/weapon/storage/firstaid/adv,
 					/obj/item/clothing/shoes/white,
-					/obj/item/weapon/cartridge/medical,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/device/healthanalyzer,
 					/obj/item/device/flashlight/pen,
@@ -104,7 +133,6 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
 					/obj/item/clothing/mask/surgical,
 					/obj/item/clothing/shoes/white,
-					/obj/item/weapon/cartridge/chemistry,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/weapon/reagent_containers/dropper,
 					/obj/item/device/healthanalyzer,
@@ -132,7 +160,6 @@
 					/obj/item/clothing/shoes/jackboots,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/device/healthanalyzer,
-					/obj/item/weapon/cartridge/medical,
 					/obj/item/device/flashlight/pen,
 					/obj/item/weapon/reagent_containers/syringe,
 					/obj/item/clothing/accessory/storage/white_vest)
@@ -151,8 +178,7 @@
 					/obj/item/clothing/shoes/white,
 					/obj/item/weapon/clipboard,
 					/obj/item/weapon/folder/white,
-					/obj/item/weapon/pen,
-					/obj/item/weapon/cartridge/medical)
+					/obj/item/weapon/pen)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Psychiatrist equipment"
@@ -275,4 +301,12 @@
 	cost = 120
 	containername = "\improper Medical voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
+	access = access_medical_equip
+
+/decl/hierarchy/supply_pack/medical/scanner_module
+	name = "Medical scanner module crate"
+	contains = list(/obj/item/weapon/computer_hardware/scanner/medical = 4)
+	cost = 20
+	containername = "\improper Medical scanner module crate"
+	containertype = /obj/structure/closet/crate/secure
 	access = access_medical_equip

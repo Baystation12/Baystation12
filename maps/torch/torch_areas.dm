@@ -88,6 +88,10 @@
 	name = "Fourth Deck Starboard Maintenance"
 	icon_state = "smaint"
 
+/area/maintenance/fourthdeck/port
+	name = "Fourth Deck Port Maintenance"
+	icon_state = "pmaint"
+
 /area/teleporter/fourthdeck
 	name = "\improper Fourth Deck Teleporter"
 	icon_state = "teleporter"
@@ -147,6 +151,9 @@
 	name = "\improper Third Deck Safe Room"
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
+/area/crew_quarters/laundry
+	name = "\improper Laundry Room"
+	icon_state = "Sleep"
 
 //Second Deck (Z-3)
 /area/maintenance/seconddeck
@@ -534,7 +541,7 @@
 
 // Command
 /area/command/conference
-	name = "Conference Room"
+	name = "Briefing Room"
 	icon_state = "head_quarters"
 	sound_env = MEDIUM_SOFTFLOOR
 
@@ -736,6 +743,10 @@
 	name = "\improper Hangar Deck"
 	icon_state = "hangar"
 	sound_env = LARGE_ENCLOSED
+
+/area/quartermaster/unused
+	name = "\improper Ready Room"
+	icon_state = "auxstorage"
 
 // Research
 /area/rnd/canister
@@ -1225,6 +1236,10 @@
 /area/medical/surgery
 	name = "\improper Operating Theatre"
 	icon_state = "surgery"
+
+/area/medical/autopsy
+	name = "\improper Autopsy"
+	icon_state = "autopsy"
 
 // Research
 /area/assembly/chargebay

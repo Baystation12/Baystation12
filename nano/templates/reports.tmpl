@@ -1,0 +1,47 @@
+<div class='item'>
+	{{:helper.link('Load Report', null, {'load' : 1, 'warning' : data.report_data && data.report_data.access_edit}, null)}}
+	{{:helper.link('Save Report', null, {'save' : 1}, data.report_data ? null : 'disabled')}}
+</div>
+<center><h2>Report Editor</h2></center>
+{{if data.report_data}}
+	<h3>{{:data.report_data.name}}</h3>
+	{{for data.report_data.fields}}
+		<div class='item'>
+			{{if value.ignore_value}}
+				<h3>{{:value.name}}</h3>
+			{{else}}
+				<div class='itemLabel'>
+					{{if (value.can_edit && value.access_edit && !data.view_only)}}
+						{{:helper.link('','pencil' , {'edit' : 1, 'ID' : value.ID}, null)}}
+					{{/if}}
+					{{:value.name}}: 
+				</div>
+				{{if value.access}}
+					<div class="itemContent">
+						{{if value.needs_big_box}}
+						<div class='block'>
+							{{:value.value}}
+						</div>
+						{{else}}
+						<div class='statusDisplayComm'>
+							{{:value.value}}
+						</div>
+						{{/if}}
+					</div>
+				{{else}}
+					<div class="itemContent">Access Denied.</div>
+				{{/if}}
+			{{/if}}
+		</div>
+	{{/for}}
+	{{if !data.view_only}}
+		<div class='item'>
+			<div class='itemContent'>
+				{{:helper.link('Submit Report', null, {'submit' : 1}, data.report_data.access_edit ? null : 'disabled')}}
+				{{:helper.link('Discard Changes', null, {'discard' : 1, 'warning' : 1}, data.report_data.access_edit ? null : 'disabled')}}
+			</div>
+		</div>
+	{{else}}
+		{{:helper.link('Close Report', null, {'discard' : 1}, null)}}
+	{{/if}}
+{{/if}}

@@ -397,7 +397,7 @@
 			//current_mode.possible_traitors.Remove(occupant)
 
 	// Delete them from datacore.
-	var/datum/computer_file/crew_record/R = get_crewmember_record(occupant.real_name)
+	var/datum/computer_file/report/crew_record/R = get_crewmember_record(occupant.real_name)
 	if(R)
 		qdel(R)
 

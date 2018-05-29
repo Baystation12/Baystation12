@@ -1,0 +1,4 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - bugfix: "The rapid taser cooling module (now called the rapid weapon cooling module) upgrade now works."

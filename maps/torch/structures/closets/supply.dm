@@ -15,7 +15,6 @@
 	return list(
 		/obj/item/device/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
-		/obj/item/weapon/cartridge/quartermaster,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/accessory/storage/webbing_large,
 		/obj/item/weapon/storage/belt/utility/atmostech,
@@ -42,7 +41,6 @@
 	return list(
 		/obj/item/device/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
-		/obj/item/weapon/cartridge/quartermaster,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/suit/storage/hazardvest,

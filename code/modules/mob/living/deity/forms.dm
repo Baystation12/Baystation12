@@ -10,19 +10,26 @@ Each plays slightly different and has different challenges/benefits
 	var/god_icon_state = "nar-sie" //What you look like
 	var/pylon_icon_state //What image shows up when appearing in a pylon
 	var/mob/living/deity/linked_god = null
+	var/starting_power_min = 10
+	var/starting_regeneration = 1
 	var/list/buildables = list() //Both a list of var changes and a list of buildables.
 	var/list/icon_states = list()
-	var/list/starting_feats //This is used to give different forms different starting trees
+	var/list/items
 
 /datum/god_form/New(var/mob/living/deity/D)
 	..()
-	D.feats += name
 	D.icon_state = god_icon_state
 	D.desc = desc
+	D.power_min = starting_power_min
+	D.power_per_regen = starting_regeneration
 	linked_god = D
-	if(starting_feats)
-		for(var/feat in starting_feats)
-			D.feats |= feat
+	if(items && items.len)
+		var/list/complete_items = list()
+		for(var/l in items)
+			var/datum/deity_item/di = new l()
+			complete_items[di.name] = di
+		D.set_items(complete_items)
+		items.Cut()
 
 /datum/god_form/proc/sync_structure(var/obj/O)
 	var/list/svars = buildables[O.type]
@@ -59,8 +66,27 @@ Each plays slightly different and has different challenges/benefits
 														"icon_state" = "talismanaltar"),
 					/obj/structure/deity/pylon
 					)
-
-	starting_feats = list(DEITY_FORM_DARK_ART, DEITY_FORM_BLOOD_SAC, DEITY_FORM_DARK_MINION, DEITY_FORM_BLOOD_FORGE)
+	items = list(/datum/deity_item/general/potential,
+				/datum/deity_item/general/regeneration,
+				/datum/deity_item/boon/eternal_darkness,
+				/datum/deity_item/boon/torment,
+				/datum/deity_item/boon/blood_shard,
+				/datum/deity_item/boon/drain_blood,
+				/datum/deity_item/phenomena/exhude_blood,
+				/datum/deity_item/sacrifice,
+				/datum/deity_item/boon/sac_dagger,
+				/datum/deity_item/boon/sac_spell,
+				/datum/deity_item/boon/execution_axe,
+				/datum/deity_item/blood_stone,
+				/datum/deity_item/minions,
+				/datum/deity_item/boon/soul_shard,
+				/datum/deity_item/boon/blood_zombie,
+				/datum/deity_item/boon/tear_veil,
+				/datum/deity_item/phenomena/hellscape,
+				/datum/deity_item/blood_crafting,
+				/datum/deity_item/blood_crafting/armored,
+				/datum/deity_item/blood_crafting/space
+				)
 
 /datum/god_form/narsie/take_charge(var/mob/living/user, var/charge)
 	charge = min(100, charge * 0.25)
@@ -90,8 +116,35 @@ Each plays slightly different and has different challenges/benefits
 					/obj/structure/deity/pylon,
 					/obj/structure/deity/wizard_recharger
 					)
-	starting_feats = list(DEITY_TREE_TRANSMUTATION, DEITY_TREE_CONJURATION)
+	items = list(/datum/deity_item/general/potential,
+				/datum/deity_item/general/regeneration,
+				/datum/deity_item/conjuration,
+				/datum/deity_item/boon/single_charge/create_air,
+				/datum/deity_item/boon/single_charge/acid_spray,
+				/datum/deity_item/boon/single_charge/force_wall,
+				/datum/deity_item/phenomena/dimensional_locker,
+				/datum/deity_item/boon/single_charge/faithful_hound,
+				/datum/deity_item/wizard_armaments,
+				/datum/deity_item/boon/single_charge/sword,
+				/datum/deity_item/boon/single_charge/shield,
+				/datum/deity_item/phenomena/portals,
+				/datum/deity_item/boon/single_charge/fireball,
+				/datum/deity_item/boon/single_charge/force_portal,
+				/datum/deity_item/phenomena/banishing_smite,
+				/datum/deity_item/transmutation,
+				/datum/deity_item/boon/single_charge/slippery_surface,
+				/datum/deity_item/boon/single_charge/smoke,
+				/datum/deity_item/boon/single_charge/knock,
+				/datum/deity_item/boon/single_charge/burning_grip,
+				/datum/deity_item/phenomena/warp_body,
+				/datum/deity_item/boon/single_charge/jaunt,
+				/datum/deity_item/healing_spells,
+				/datum/deity_item/boon/single_charge/heal,
+				/datum/deity_item/boon/single_charge/heal/major,
+				/datum/deity_item/boon/single_charge/heal/area,
+				/datum/deity_item/phenomena/rock_form
+				)
 
 /datum/god_form/wizard/take_charge(var/mob/living/user, var/charge)
-	linked_god.adjust_power(max(round(charge/100), 1),silent = 1)
+	linked_god.adjust_power_min(max(round(charge/100), 1),silent = 1)
 	return 1

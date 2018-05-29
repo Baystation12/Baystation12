@@ -41,7 +41,7 @@
 		for(var/name_and_type in items_by_name_and_type)
 			var/list/items = items_by_name_and_type[name_and_type]
 			var/obj/item/first_item = items[1]
-			item_list[++item_list.len] = list("name" = first_item.name, "type" = first_item.type, "amount" = items.len)
+			item_list[++item_list.len] = list("name" = first_item.name, "type" = any2ref(first_item.type), "amount" = items.len)
 
 		cached_ui_data = list(
 			"items" = item_list
@@ -54,17 +54,17 @@
 		return TRUE
 
 	if(action == "remove_item")
-		if(remove_item_by_name_and_type(params["name"], params["type"]))
+		var/item_type = locate(params["type"])
+		if(remove_item_by_name_and_type(params["name"], item_type))
 			return TRUE
 
-/datum/storage_ui/tgui/proc/remove_item_by_name_and_type(var/name, var/type_name)
-	if(!istext(name) || !istext(type_name))
+/datum/storage_ui/tgui/proc/remove_item_by_name_and_type(var/name, var/item_type)
+	if(!istext(name))
 		return FALSE
-	var/type = text2path(type_name)
-	if(!type)
+	if(!item_type)
 		return FALSE
 	for(var/obj/item/W in storage)
-		if(W.name == name && W.type == type)
+		if(W.name == name && W.type == item_type)
 			if(storage.remove_from_storage(W))
 				return TRUE
 	return FALSE

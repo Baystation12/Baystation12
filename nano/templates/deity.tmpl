@@ -1,0 +1,116 @@
+<!--
+Deity Menu. Three seperate modes within it, followers, shop, and phenomena.
+-->
+<center>
+<h3>Deity Menu</h3>
+<div class="item">
+	{{:data.name}} the {{:data.form_name}}
+</div>
+<div class="item">
+	Current Boon: 
+	{{if data.boon_name}}
+		{{:data.boon_name}}
+	{{else}}
+		N/A
+	{{/if}}
+</div>
+<div class="item">
+	Power: {{:data.power}}   Power Minimum: {{:data.power_min}}   Regen: {{:data.regen}}
+</div>
+<div class="item">
+	{{:helper.link('Followers', 'person', {'switchMenu' : 0, 'menu' : 'menu'}, data.menu == 0 ? 'disabled' : null)}}
+	{{:helper.link('Shop', 'suitcase', {'switchMenu' : 1, 'menu' : 'menu'}, data.menu == 1 ? 'disabled' : null)}}
+	{{:helper.link('Phenomena', 'star', {'switchMenu' : 2, 'menu' : 'menu'}, data.menu == 2 ? 'disabled' : null)}}
+</div>
+<br>
+{{if data.menu == 0}}
+	<h4>Followers</h4>
+	{{for data.followers}}
+		<div class="itemLabel">
+			{{:value.name}}
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Jump', 'zoomin', {'jump' : value.ref}, value.ref ? null : 'disabled')}}
+			{{:helper.link('Follow', 'zoomout', {'jump' : value.ref, 'follow' : 1}, value.ref ? null : 'disabled')}}
+		</div>
+	{{empty}}
+		<b>You have no minions!</b>
+	{{/for}}
+{{else data.menu == 1}}
+	<h4>Shop</h4>
+	<div class="item">
+		{{for data.categories}}
+			{{:helper.link(value, null, {'switchCategory' : index}, index == data.category ? 'disabled' : null)}}
+		{{/for}}
+	</div>
+	<br>
+	{{for data.item_data}}
+		<div class="item">
+			<div class="itemLabel">
+				{{:helper.link(value.name, null, {'buy' : value.ref})}} (Level {{:value.level}})
+			</div>
+			<div class="itemContentNarrow">
+				<b>Costs: {{:value.cost}}</b> Requires: {{:value.requirements}}
+			</div>
+			<div class="itemContentNarrow">
+				{{:value.desc}}
+			</div>
+		</div>
+	{{empty}}
+		There is nothing there!
+	{{/for}}
+{{else data.menu == 2}}
+	<h4>Phenomena</h4>
+	<div class="item">
+		<div class="itemLabel">
+			Selected Phenomena:
+		</div>
+		<div class="itemContent">
+			{{if data.selectedPhenomenaName}}
+				{{:helper.link(data.selectedPhenomenaName, null, {'clear_selected' : 1})}}
+			{{else}}
+				N/A
+			{{/if}}
+		</div>
+	</div>
+	<div class="item">
+		{{:helper.link('Phenomena', 'star', {'switchMenu' : 0, 'menu' : 'phenomenaMenu'}, data.phenomenaMenu == 0 ? 'disabled' : null)}}
+		{{:helper.link('Bindings', 'key', {'switchMenu' : 1, 'menu' : 'phenomenaMenu'}, data.phenomenaMenu == 1 ? 'disabled' : null)}}
+	</div>
+	{{if data.phenomenaMenu == 0}}
+		{{for data.phenomenas}}
+			<div class="item">
+				<div class="itemLabel">
+					{{:helper.link(value.name, null, {'select_phenomena' : value.name})}}
+				</div>
+				<div class="itemContentNarrow">
+					Use Cost: {{:value.cost}}  
+					{{if value.cooldown}}
+						Cooldown: {{:value.cooldown}}
+					{{/if}}
+				</div>
+				<div class="itemContentNarrow">
+					{{:value.description}}
+				</div>
+			</div>
+		{{empty}}
+			<b>You don't have any phenomena!</b>
+		{{/for}}
+	{{else data.phenomenaMenu == 1}}
+		{{for data.bindings}}
+			<h4>{{:value.intent}}</h4>
+				{{for value.intent_data :intentValue:intentKey}}
+					<div class="item">
+						<div class="itemLabel">
+							{{:intentValue.binding}}
+						</div>
+						<div class="itemContentNarrow">
+							{{:helper.link(intentValue.phenomena_name ? intentValue.phenomena_name : 'N/A', null, {'select_intent' : value.intent, 'select_binding' : intentValue.binding})}}
+						</div>
+					</div>
+				{{/for}}
+			<br>
+		{{/for}}
+	{{/if}}
+{{/if}}
+</center>

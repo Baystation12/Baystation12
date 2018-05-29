@@ -26,9 +26,9 @@
 	var/list/mil_ranks = list() // HTML to prepend to name
 	var/dat = {"
 	<head><style>
-		.manifest {border-collapse:collapse;}
+		.manifest {border-collapse:collapse;width:100%;}
 		.manifest td, th {border:1px solid [monochrome?"black":"[OOC?"black; background-color:#272727; color:white":"#DEF; background-color:white; color:black"]"]; padding:.25em}
-		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: [OOC?"#40628A":"#48C"]; color:white"]}
+		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: [OOC?"#40628a":"#48C"]; color:white"]}
 		.manifest tr.head th { [monochrome?"border-top-width: 1px":"background-color: [OOC?"#013D3B;":"#488;"]"] }
 		.manifest td:first-child {text-align:right}
 		.manifest tr.alt td {[monochrome?"border-top-width: 2px":"background-color: [OOC?"#373737; color:white":"#DEF"]"]}
@@ -37,7 +37,7 @@
 	<tr class='head'><th>Name</th><th>Position</th><th>Activity</th></tr>
 	"}
 	// sort mobs
-	for(var/datum/computer_file/crew_record/CR in GLOB.all_crew_records)
+	for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 		var/name = CR.get_name()
 		var/rank = CR.get_job()
 		mil_ranks[name] = ""
@@ -114,7 +114,7 @@
 
 /proc/filtered_nano_crew_manifest(var/list/filter, var/blacklist = FALSE)
 	var/list/filtered_entries = list()
-	for(var/datum/computer_file/crew_record/CR in department_crew_manifest(filter, blacklist))
+	for(var/datum/computer_file/report/crew_record/CR in department_crew_manifest(filter, blacklist))
 		filtered_entries.Add(list(list(
 			"name" = CR.get_name(),
 			"rank" = CR.get_job(),
@@ -139,3 +139,8 @@
 		"civ" = filtered_nano_crew_manifest(GLOB.civilian_positions),\
 		"misc" = filtered_nano_crew_manifest(GLOB.unsorted_positions)\
 		)
+
+/proc/flat_nano_crew_manifest()
+	. = list()
+	. += filtered_nano_crew_manifest(null, TRUE)
+	. += silicon_nano_crew_manifest(GLOB.nonhuman_positions)

@@ -80,7 +80,7 @@
 
 /obj/item/weapon/storage/proc/open(mob/user as mob)
 	if (src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+		playsound(src.loc, src.use_sound, 50, 0, -5)
 
 	prepare_ui()
 	storage_ui.on_open(user)
@@ -223,8 +223,14 @@
 	if(W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
-	update_icon()
+	if(!NoUpdate)
+		update_icon()
 	return 1
+
+//Run once after using remove_from_storage with NoUpdate = 1
+/obj/item/weapon/storage/proc/finish_bulk_removal()
+	update_ui_after_item_removal()
+	update_icon()
 
 //This proc is called when you want to place an item into the storage item.
 /obj/item/weapon/storage/attackby(obj/item/W as obj, mob/user as mob)
@@ -324,7 +330,7 @@
 	hide_from(usr)
 	for(var/obj/item/I in contents)
 		remove_from_storage(I, T, 1)
-	update_ui_after_item_removal()
+	finish_bulk_removal()
 
 /obj/item/weapon/storage/Initialize()
 	. = ..()

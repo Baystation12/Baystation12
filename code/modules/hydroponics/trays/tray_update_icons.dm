@@ -46,7 +46,7 @@
 	if(mechanical)
 		//Draw the cover.
 		if(closed_system)
-			new_overlays += "hydrocover"
+			new_overlays += "hydrocover2"
 		if(seed && health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
 			new_overlays += "over_lowhealth3"
 		if(waterlevel <= 10)
@@ -71,7 +71,7 @@
 
 	// Update bioluminescence.
 	if(seed && seed.get_trait(TRAIT_BIOLUM))
-		set_light(round(seed.get_trait(TRAIT_POTENCY)/10), l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR))
+		set_light(0.5, 0.1, 3, l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR))
 	else
 		set_light(0)
 

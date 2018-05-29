@@ -75,7 +75,7 @@
 	var/shuttle_restricted //name of the shuttle, null for generic waypoint
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
-	tag = landmark_tag+"-[x]-[y]"
+	tag = landmark_tag+"-[x]-[y]-[z]"
 	. = ..()
 	base_area = get_area(src)
 	if(!GLOB.using_map.use_overmap)
@@ -136,4 +136,4 @@
 /obj/item/device/spaceflare/update_icon()
 	if(active)
 		icon_state = "bluflare_on"
-		set_light(l_range = 6, l_power = 3)
+		set_light(0.3, 0.1, 6, 2, "85d1ff")

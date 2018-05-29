@@ -45,3 +45,9 @@
 	containertype = /obj/structure/closet/crate/secure/phoron
 	containername = "\improper Phoron assembly crate"
 	access = access_tox_storage
+
+/decl/hierarchy/supply_pack/science/scanner_module
+	name = "Reagent scanner module crate"
+	contains = list(/obj/item/weapon/computer_hardware/scanner/reagent = 4)
+	cost = 20
+	containername = "\improper Reagent scanner module crate"

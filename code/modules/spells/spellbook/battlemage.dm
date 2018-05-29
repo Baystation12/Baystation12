@@ -24,7 +24,7 @@
 				/obj/structure/closet/wizard/armor = 				1,
 				/obj/item/weapon/gun/energy/staff/focus = 			1,
 				/obj/item/weapon/dice/d20/cursed = 					1,
-				/obj/item/weapon/monster_manual = 					2,
+				/obj/item/weapon/summoning_stone = 					2,
 				/obj/item/weapon/magic_rock = 						1,
 				/obj/item/weapon/contract/wizard/xray = 			1,
 				/obj/item/weapon/contract/wizard/telepathy = 		1,

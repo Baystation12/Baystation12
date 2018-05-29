@@ -10,7 +10,9 @@
 	invisibility = INVISIBILITY_LIGHTING
 	color = LIGHTING_BASE_MATRIX
 	icon_state = "light1"
-	blend_mode = BLEND_MULTIPLY
+	blend_mode = BLEND_OVERLAY
+
+	appearance_flags = 0
 
 	var/lum_r = 0
 	var/lum_g = 0
@@ -20,7 +22,7 @@
 
 /atom/movable/lighting_overlay/Initialize()
 	// doesn't need special init
-	initialized = TRUE
+	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_NORMAL
 
 /atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
@@ -104,11 +106,11 @@
 	else
 		icon_state = null
 		color = list(
-			rr, rg, rb, 00,
-			gr, gg, gb, 00,
-			br, bg, bb, 00,
-			ar, ag, ab, 00,
-			00, 00, 00, 01
+			-rr, -rg, -rb, 00,
+			-gr, -gg, -gb, 00,
+			-br, -bg, -bb, 00,
+			-ar, -ag, -ab, 00,
+			01, 01, 01, 01
 		)
 
 	luminosity = set_luminosity
@@ -122,8 +124,7 @@
 
 /atom/movable/lighting_overlay/Destroy()
 	total_lighting_overlays--
-	global.lighting_update_overlays     -= src
-	global.lighting_update_overlays_old -= src
+	SSlighting.overlay_queue -= src
 
 	var/turf/T = loc
 	if(istype(T))

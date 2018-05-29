@@ -3,7 +3,7 @@
 	name = "blob"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob"
-	light_range = 2
+	light_outer_range = 2
 	light_color = "#b5ff5b"
 	desc = "Some blob creature thingy."
 	density = 1

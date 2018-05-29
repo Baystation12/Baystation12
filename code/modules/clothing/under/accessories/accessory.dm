@@ -19,6 +19,7 @@
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
 	var/high_visibility	//if it should appear on examine without detailed view
 	var/slowdown //used when an accessory is meant to slow the wearer down when attached to clothing
+	var/removable = TRUE
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()

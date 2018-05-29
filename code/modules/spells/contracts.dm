@@ -43,10 +43,13 @@
 	color = "#993300"
 
 /obj/item/weapon/contract/apprentice/contract_effect(mob/user as mob)
-	if(user.mind.special_role == "apprentice")
+	if(user.mind.special_role == ANTAG_APPRENTICE)
 		to_chat(user, "<span class='warning'>You are already a wizarding apprentice!</span>")
 		return 0
-	if(wizards.add_antagonist_mind(user.mind,1,"apprentice","<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
+	if(user.mind.special_role == ANTAG_SERVANT)
+		to_chat(user, "<span class='notice'>You are a servant. You have no need of apprenticeship.</span>")
+		return 0
+	if(GLOB.wizards.add_antagonist_mind(user.mind,1,ANTAG_APPRENTICE,"<b>You are an apprentice! Your job is to learn the wizarding arts!</b>"))
 		to_chat(user, "<span class='notice'>With the signing of this paper you agree to become \the [contract_master]'s apprentice in the art of wizardry.</span>")
 		return 1
 	return 0
@@ -78,13 +81,15 @@
 
 /obj/item/weapon/contract/wizard/telepathy/contract_effect(mob/user as mob)
 	..()
-	if(!(mRemotetalk in user.mutations))
-		user.mutations.Add(mRemotetalk)
-		user.dna.SetSEState(GLOB.REMOTETALKBLOCK,1)
-		domutcheck(user, null, MUTCHK_FORCED)
-		to_chat(user, "<span class='notice'>You expand your mind outwards.</span>")
-		return 1
-	return 0
+	if (!ishuman(user))
+		return 0
+	var/mob/living/carbon/human/H = user
+	if (mRemotetalk in H.mutations)
+		return 0
+	H.mutations.Add(mRemotetalk)
+	H.verbs += /mob/living/carbon/human/proc/remotesay
+	to_chat(H, "<span class='notice'>You expand your mind outwards.</span>")
+	return 1
 
 /obj/item/weapon/contract/wizard/tk
 	name = "telekinesis contract"

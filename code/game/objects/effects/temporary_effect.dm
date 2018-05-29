@@ -11,4 +11,4 @@
 	. = ..()
 	icon = _icon
 	icon_state = _state
-	addtimer(CALLBACK(src,/datum/proc/qdel_self), duration)
+	QDEL_IN(src, duration)

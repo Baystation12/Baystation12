@@ -3,7 +3,7 @@
 	l_ear = /obj/item/device/radio/headset/headset_sci
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/device/pda/science
+	pda_type = /obj/item/modular_computer/pda/science
 
 /decl/hierarchy/outfit/job/science/New()
 	..()
@@ -16,7 +16,7 @@
 	shoes = /obj/item/clothing/shoes/brown
 	l_hand = /obj/item/weapon/clipboard
 	id_type = /obj/item/weapon/card/id/science/head
-	pda_type = /obj/item/device/pda/heads/rd
+	pda_type = /obj/item/modular_computer/pda/heads/rd
 
 /decl/hierarchy/outfit/job/science/scientist
 	name = OUTFIT_JOB_NAME("Scientist")
@@ -37,7 +37,7 @@
 	belt = /obj/item/weapon/storage/belt/utility/full
 	id_type = /obj/item/weapon/card/id/science/roboticist
 	pda_slot = slot_r_store
-	pda_type = /obj/item/device/pda/roboticist
+	pda_type = /obj/item/modular_computer/pda/roboticist
 
 /decl/hierarchy/outfit/job/science/roboticist/New()
 	..()

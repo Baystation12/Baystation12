@@ -10,14 +10,33 @@
 	icon_state = "detectivebadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
+	high_visibility = 1
 	var/badge_string = "Detective"
 	var/stored_name
 
 /obj/item/clothing/accessory/badge/proc/set_name(var/new_name)
 	stored_name = new_name
-	name = "[initial(name)] ([stored_name])"
 
 /obj/item/clothing/accessory/badge/proc/set_desc(var/mob/living/carbon/human/H)
+
+/obj/item/clothing/accessory/badge/CanUseTopic(var/user)
+	if(user in view(get_turf(src)))
+		return STATUS_INTERACTIVE
+
+/obj/item/clothing/accessory/badge/OnTopic(var/mob/user, var/list/href_list)
+	if(href_list["look_at_me"])
+		if(istype(user))
+			user.examinate(src)
+			return TOPIC_HANDLED
+
+/obj/item/clothing/accessory/badge/get_examine_line()
+	. = ..()
+	. += "  <a href='?src=\ref[src];look_at_me=1'>\[View\]</a>"
+
+/obj/item/clothing/accessory/badge/examine(user)
+	..()
+	if(stored_name)
+		to_chat(user,"It reads: [stored_name], [badge_string].")
 
 /obj/item/clothing/accessory/badge/attack_self(mob/user as mob)
 
@@ -36,6 +55,8 @@
 /obj/item/clothing/accessory/badge/attack(mob/living/carbon/human/M, mob/living/user)
 	if(isliving(user))
 		user.visible_message("<span class='danger'>[user] invades [M]'s personal space, thrusting \the [src] into their face insistently.</span>","<span class='danger'>You invade [M]'s personal space, thrusting \the [src] into their face insistently.</span>")
+		if(stored_name)
+			to_chat(M, "<span class='warning'>It reads: [stored_name], [badge_string].</span>")
 
 /obj/item/clothing/accessory/badge/PI
 	name = "private investigator's badge"
@@ -52,6 +73,7 @@
 	item_state = "holobadge"
 	badge_string = "Security"
 	var/badge_access = access_security
+	var/badge_number
 	var/emagged //emag_act removes access requirements
 
 /obj/item/clothing/accessory/badge/holo/NT
@@ -70,6 +92,16 @@
 	icon_state = "holobadge-cord"
 	slot_flags = SLOT_MASK | SLOT_TIE
 
+/obj/item/clothing/accessory/badge/holo/set_name(var/new_name)
+	..()
+	badge_number = random_id(type,1000,9999)
+	name = "[name] ([badge_number])"
+
+/obj/item/clothing/accessory/badge/holo/examine(user)
+	..()
+	if(badge_number)
+		to_chat(user,"The badge number is [badge_number].")
+
 /obj/item/clothing/accessory/badge/holo/attack_self(mob/user as mob)
 	if(!stored_name)
 		to_chat(user, "Waving around a holobadge before swiping an ID would be pretty pointless.")
@@ -86,22 +118,17 @@
 		return 1
 
 /obj/item/clothing/accessory/badge/holo/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/device/pda))
+	if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/modular_computer))
 
-		var/obj/item/weapon/card/id/id_card = null
-
-		if(istype(O, /obj/item/weapon/card/id))
-			id_card = O
-		else
-			var/obj/item/device/pda/pda = O
-			id_card = pda.id
+		var/obj/item/weapon/card/id/id_card = O.GetIdCard()
 
 		if(!id_card)
 			return
 
 		if((badge_access in id_card.access) || emagged)
 			to_chat(user, "You imprint your ID details onto the badge.")
-			set_name(user.real_name)
+			set_name(id_card.registered_name)
+			set_desc(user)
 		else
 			to_chat(user, "[src] rejects your ID, and flashes 'Insufficient access!'")
 		return

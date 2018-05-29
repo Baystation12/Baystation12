@@ -16,13 +16,8 @@
 	impact_type = /obj/effect/projectile/laser/impact
 
 /obj/item/projectile/beam/practice
-	name = "laser"
-	icon_state = "laser"
 	fire_sound = 'sound/weapons/Taser.ogg'
-	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 2
-	damage_type = BURN
-	check_armour = "laser"
 	eyeblur = 2
 
 /obj/item/projectile/beam/smalllaser

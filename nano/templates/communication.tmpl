@@ -55,7 +55,7 @@
             <div class="itemContent">
                 {{:helper.link('Clear',       'trash', {'action' : 'setstatus', 'target' : 'blank'})}}
 		        {{:helper.link('Local Time',  'gear', {'action' : 'setstatus', 'target' : 'time'})}}
-		        {{:helper.link('Shuttle ETA', 'gear', {'action' : 'setstatus', 'target' : 'shuttle'})}}
+		        {{:helper.link('Evacuation ETA', 'gear', {'action' : 'setstatus', 'target' : 'shuttle'})}}
 		        {{:helper.link('Message',     'gear', {'action' : 'setstatus', 'target' : 'message'})}}
              </div>
          </div>
@@ -91,18 +91,22 @@
 	{{else data.state === 5}}
 		Security Level: {{:data.current_security_level_title}}
 		{{if data.cannot_change_security_level}}
-			<div class=item><font color='red'><b>The self-destruct mechanism is active. Find a way to deactivate the mechanism to lower the alert level or evacuate.</b></font></div>
+			<div class=item><font color='red'><b>The self-destruct mechanism is active! Find a way to deactivate the mechanism, or evacuate.</b></font></div>
 		{{else}}
-			<div class=item>Set Security Level: </div>
-			<div class=itemGroup>
-			{{for data.security_levels}}
-				<div class="item">
-					<div class=item>{{:helper.link(value.title, null, {'action' : 'setalert', 'target' : value.ref}, data.current_security_level_ref === value.ref || data.isAI ? 'disabled' : null)}} </div>
-				</div>
-			{{/for}}
+			{{if data.current_security_level_is_high_security_level}}
+				<div class=item><font color='red'><b>This emergency may not be resolved from this system! Utilise the authentication devices.</b></font></div>
+			{{else}}
+				<div class=item>Set Security Level: </div>
+				<div class=itemGroup>
+				{{for data.security_levels}}
+					<div class="item">
+						<div class=item>{{:helper.link(value.title, null, {'action' : 'setalert', 'target' : value.ref}, data.current_security_level_ref === value.ref || data.isAI ? 'disabled' : null)}} </div>
+					</div>
+				{{/for}}
+			{{/if}}
+			</br>
+			<div class=item>{{:helper.link('Back', null, {'action' : 'sw_menu', 'target' : 1})}} </div>
 		{{/if}}
-		</br>
-		<div class=item>{{:helper.link('Back', null, {'action' : 'sw_menu', 'target' : 1})}} </div>
 	{{else}}
 		Something went wrong. Please reset your console.
 		<div class=item>{{:helper.link('Back', null, {'action' : 'sw_menu', 'target' : 1})}}</div>

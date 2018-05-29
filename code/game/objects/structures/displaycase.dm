@@ -1,79 +1,77 @@
 /obj/structure/displaycase
 	name = "display case"
 	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "glassbox1"
+	icon_state = "glassbox"
 	desc = "A display case for prized possessions. It taunts you to kick it."
 	density = 1
 	anchored = 1
 	unacidable = 1//Dissolving the case would also delete the gun.
-	var/health = 30
-	var/occupied = 1
+	alpha = 150
+	var/health = 14
 	var/destroyed = 0
+
+/obj/structure/displaycase/Initialize()
+	. = ..()
+	var/turf/T = get_turf(src)
+	for(var/atom/movable/AM in T)
+		if(AM.simulated && !AM.anchored)
+			AM.forceMove(src)
+	update_icon()
+
+/obj/structure/displaycase/examine(var/user)
+	..()
+	if(contents.len)
+		to_chat(user, "Inside you see [english_list(contents)].")
 
 /obj/structure/displaycase/ex_act(severity)
 	switch(severity)
 		if (1)
-			new /obj/item/weapon/material/shard( src.loc )
-			if (occupied)
-				new /obj/item/weapon/gun/energy/captain( src.loc )
-				occupied = 0
+			new /obj/item/weapon/material/shard(loc)
+			for(var/atom/movable/AM in src)
+				AM.dropInto(loc)
 			qdel(src)
 		if (2)
 			if (prob(50))
-				src.health -= 15
-				src.healthcheck()
+				take_damage(15)
 		if (3)
 			if (prob(50))
-				src.health -= 5
-				src.healthcheck()
-
+				take_damage(5)
 
 /obj/structure/displaycase/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
 	..()
-	src.healthcheck()
-	return
+	take_damage(Proj.get_structure_damage())
 
-/obj/structure/displaycase/proc/healthcheck()
-	if (src.health <= 0)
-		if (!( src.destroyed ))
-			src.set_density(0)
-			src.destroyed = 1
-			new /obj/item/weapon/material/shard( src.loc )
+/obj/structure/displaycase/proc/take_damage(damage)
+	health -= damage
+	if(health <= 0)
+		if (!destroyed)
+			set_density(0)
+			destroyed = 1
+			new /obj/item/weapon/material/shard(loc)
+			for(var/atom/movable/AM in src)
+				AM.dropInto(loc)
 			playsound(src, "shatter", 70, 1)
 			update_icon()
 	else
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-	return
 
 /obj/structure/displaycase/update_icon()
-	if(src.destroyed)
-		src.icon_state = "glassboxb[src.occupied]"
+	if(destroyed)
+		icon_state = "glassboxb"
 	else
-		src.icon_state = "glassbox[src.occupied]"
-	return
-
+		icon_state = "glassbox"
+		underlays.Cut()
+		for(var/atom/movable/AM in contents)
+			underlays += AM.appearance
 
 /obj/structure/displaycase/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	src.health -= W.force
-	src.healthcheck()
+	take_damage(W.force)
 	..()
-	return
 
 /obj/structure/displaycase/attack_hand(mob/user as mob)
-	if (src.destroyed && src.occupied)
-		new /obj/item/weapon/gun/energy/captain( src.loc )
-		to_chat(user, "<span class='notice'>You deactivate the hover field built into the case.</span>")
-		src.occupied = 0
-		src.add_fingerprint(user)
-		update_icon()
-		return
-	else
+	add_fingerprint(user)
+	if(!destroyed)
 		to_chat(usr, text("<span class='warning'>You kick the display case.</span>"))
-		for(var/mob/O in oviewers())
-			if ((O.client && !( O.blinded )))
-				to_chat(O, "<span class='warning'>[usr] kicks the display case.</span>")
-		src.health -= 2
-		healthcheck()
-		return
+		visible_message("<span class='warning'>[usr] kicks the display case.</span>")
+		take_damage(2)

@@ -2,7 +2,7 @@
 
 /obj/effect/overmap/ship/bearcat
 	name = "light freighter"
-	color = "#00FFFF"
+	color = "#00ffff"
 	vessel_mass = 60
 	default_delay = 3 MINUTES
 	speed_mod = 0.1 MINUTE

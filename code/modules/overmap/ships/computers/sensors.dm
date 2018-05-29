@@ -1,6 +1,5 @@
 /obj/machinery/computer/sensors
 	name = "sensors console"
-	icon_state = "thick"
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	light_color = "#77fff8"
@@ -112,7 +111,7 @@
 	if(!linked)
 		return
 	if(sensors && sensors.use_power && sensors.powered())
-		linked.set_light(sensors.range+1, 5)
+		linked.set_light(1, sensors.range, sensors.range+1)
 	else
 		linked.set_light(0)
 

@@ -114,6 +114,8 @@ var/datum/mil_branches/mil_branches = new()
 	// Email addresses will be created under this domain name. Mostly for the looks.
 	var/email_domain = "freemail.nt"
 
+	var/list/min_skill
+
 /datum/mil_branch/New()
 	ranks = list()
 	spawn_ranks_ = list()

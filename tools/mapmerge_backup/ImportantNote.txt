@@ -1,5 +1,0 @@
-This is a backup of Python mapmerge and Java mapmerge.
-They are both considered outdated. For new version look at folder /tools/jmerge
-These backups may eventually be outdated, when the new map merge tool is fully tested.
-
-NOTE: If you want to use these, move them back to /tools folder locally, otherwise various scripts may not work correctly.

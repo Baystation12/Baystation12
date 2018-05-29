@@ -15,8 +15,9 @@
 		return
 
 	var/icon/sprite
+	var/atom/A
 	if(istype(D, /atom))
-		var/atom/A = D
+		A = D
 		if(A.icon && A.icon_state)
 			sprite = icon(A.icon, A.icon_state)
 			usr << browse_rsc(sprite, "view_vars_sprite.png")
@@ -49,6 +50,7 @@
 					<td width='50%'>
 						<div align='center'>
 							<a href='?_src_=vars;datumrefresh=\ref[D]'>Refresh</a>
+							[A ? "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[A.x];Y=[A.y];Z=[A.z]'>Jump To</a>":""]
 							<form>
 								<select name='file'
 								        size='1'

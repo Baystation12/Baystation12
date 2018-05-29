@@ -64,7 +64,6 @@
 	if(.)
 		if(!front_id && istype(W, /obj/item/weapon/card/id))
 			front_id = W
-			SetName("[name] ([front_id])")
 			update_icon()
 
 /obj/item/weapon/storage/wallet/update_icon()

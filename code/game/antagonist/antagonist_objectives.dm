@@ -41,7 +41,7 @@
 	if(!src.mind)
 		return
 
-	var/all_antag_types = all_antag_types()
+	var/all_antag_types = GLOB.all_antag_types_
 	for(var/tag in all_antag_types) //we do all of them in case an admin adds an antagonist via the PP. Those do not show up in gamemode.
 		var/datum/antagonist/antagonist = all_antag_types[tag]
 		if(antagonist && antagonist.is_antagonist(src.mind))
@@ -63,7 +63,7 @@
 		return
 	var/new_ambitions = input(src, "Write a short sentence of what your character hopes to accomplish \
 	today as an antagonist.  Remember that this is purely optional.  It will be shown at the end of the \
-	round for everybody else.", "Ambitions", mind.ambitions) as null|message
+	round for everybody else.", "Ambitions", html_decode(mind.ambitions)) as null|message
 	if(isnull(new_ambitions))
 		return
 	new_ambitions = sanitize(new_ambitions)

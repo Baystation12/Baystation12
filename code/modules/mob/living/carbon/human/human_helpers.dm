@@ -61,21 +61,23 @@
 		process_rig(back)
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
-	if(G && G.active)
-		equipment_darkness_modifier += G.darkness_view
-		equipment_vision_flags |= G.vision_flags
+	if(G)
+		// prescription applies regardless of if the glasses are active
 		equipment_prescription += G.prescription
-		equipment_light_protection += G.light_protection
-		if(G.overlay)
-			equipment_overlays |= G.overlay
-		if(G.see_invisible >= 0)
-			if(equipment_see_invis)
-				equipment_see_invis = min(equipment_see_invis, G.see_invisible)
-			else
-				equipment_see_invis = G.see_invisible
+		if(G.active)
+			equipment_darkness_modifier += G.darkness_view
+			equipment_vision_flags |= G.vision_flags
+			equipment_light_protection += G.light_protection
+			if(G.overlay)
+				equipment_overlays |= G.overlay
+			if(G.see_invisible >= 0)
+				if(equipment_see_invis)
+					equipment_see_invis = min(equipment_see_invis, G.see_invisible)
+				else
+					equipment_see_invis = G.see_invisible
 
-		add_clothing_protection(G)
-		G.process_hud(src)
+			add_clothing_protection(G)
+			G.process_hud(src)
 
 /mob/living/carbon/human/proc/process_rig(var/obj/item/weapon/rig/O)
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))
@@ -90,7 +92,7 @@
 	if(!. || !in_depth)
 		return
 
-	var/datum/computer_file/crew_record/R = get_crewmember_record(old_name)
+	var/datum/computer_file/report/crew_record/R = get_crewmember_record(old_name)
 	if(R)
 		R.set_name(new_name)
 
@@ -104,12 +106,11 @@
 			var/obj/item/weapon/card/id/ID = A
 			if(ID.registered_name == old_name)
 				ID.registered_name = new_name
-				ID.update_name()
 				search_id = 0
-		else if(search_pda && istype(A,/obj/item/device/pda))
-			var/obj/item/device/pda/PDA = A
-			if(PDA.owner == old_name)
-				PDA.set_owner(new_name)
+		else if(search_pda && istype(A,/obj/item/modular_computer/pda))
+			var/obj/item/modular_computer/pda/PDA = A
+			if(findtext(PDA.name, old_name))
+				PDA.SetName(replacetext(PDA.name, old_name, new_name))
 				search_pda = 0
 
 
@@ -135,7 +136,7 @@
 		return 0
 	if(!species)
 		return 0
-	
+
 	if(bodytemperature > species.cold_level_1)
 		return 0
 	else if(bodytemperature > species.cold_level_2)

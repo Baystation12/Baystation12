@@ -29,18 +29,20 @@
 	phenomenas[P.name] = P
 	return P
 
-/mob/living/deity/proc/remove_phenomena_from_intent(var/datum/phenomena/to_remove)
-	for(var/intent in intent_phenomenas)
-		var/list/intent_list = intent_phenomenas[intent]
-		for(var/modifier in intent_list)
-			if(intent_list[modifier] == to_remove)
-				intent_list[modifier] = null
-				break
+/mob/living/deity/proc/remove_phenomena_from_intent(var/intent, var/modifier, var/update = 1)
+	var/list/intent_list = intent_phenomenas[intent]
+	intent_list[modifier] = null
+	if(update)
+		update_phenomena_bindings()
 
 /mob/living/deity/proc/remove_phenomena(var/datum/phenomena/to_remove)
 	phenomenas[to_remove.name] = null
 	phenomenas -= to_remove.name
-	remove_phenomena_from_intent(to_remove)
+	for(var/intent in intent_phenomenas)
+		var/list/intent_list = intent_phenomenas[intent]
+		for(var/mod in intent_list)
+			if(intent_list[mod] == to_remove)
+				intent_list[mod] = null
 	qdel(to_remove)
 
 /mob/living/deity/proc/populate_intent(var/intent)
@@ -65,20 +67,3 @@
 		if(intent_list[type])
 			return intent_list[type]
 	return null
-
-/mob/living/deity/verb/configure_phenomenas()
-	set name = "Configure Phenomena"
-	set category = "Godhood"
-
-	var/dat = "<h3>Phenomena Configuration</h3><br><br>"
-	for(var/intent in intents)
-		dat += "<b>[capitalize(intent)]</b><br>"
-		var/list/intent_list = intent_phenomenas[intent]
-		if(!intent_list)
-			continue
-		dat += "<table border='1' style='width:100%;border-collapse:collapse;'><tr><th>Modifier</th><th>Linked Phenomena</th></tr>"
-		for(var/modifier in intent_list)
-			var/datum/phenomena/P = intent_list[modifier]
-			dat += "<tr><td><A href='?src=\ref[src];intent=[intent];modifier=[modifier]'>[modifier]</a></td><td>[P ? "[P.name] ([P.cost] Power)" : "None"]</td>"
-		dat += "</table><br><br>"
-	show_browser(src, dat, "window=phenomena")

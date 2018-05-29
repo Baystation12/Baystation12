@@ -213,7 +213,7 @@
 			src.anchored = 0
 			return
 
-	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
+	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/modular_computer))
 		if (src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
@@ -261,7 +261,7 @@
 	anchored = 1
 	density = 1
 	unacidable = 1
-	light_range = 3
+	light_outer_range = 3
 	var/needs_power = 0
 	var/active = 1
 	var/delay = 5

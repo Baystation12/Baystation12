@@ -10,6 +10,10 @@
 	rarity_value = 3
 	health_hud_intensity = 1
 
+	slowdown = -2
+
+	natural_armour_values = list(melee = 30, bullet = 15, laser = 25, energy = 30, bomb = 30, bio = 100, rad = 100)
+
 	icon_template = 'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 	has_floating_eyes = TRUE
 
@@ -25,8 +29,13 @@
 	gluttonous = GLUT_ANYTHING
 	stomach_capacity = MOB_MEDIUM
 
-	brute_mod = 0.25 // Hardened carapace.
-	burn_mod = 1.1    // Weak to fire.
+	brute_mod =     0.75 // Hardened carapace.
+	burn_mod =      0.75 // ~~Weak to fire.~~ scratch that, we :original_character: now
+	radiation_mod = 0    // No feasible way of curing radiation.
+	flash_mod =     0    // Denied.
+	stun_mod =      0.5  // Halved stun times.
+	paralysis_mod = 0.25 // Quartered paralysis times.
+	weaken_mod =    0    // Cannot be weakened.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -60,26 +69,28 @@
 	vision_flags = SEE_SELF|SEE_MOBS
 
 	has_organ = list(
-		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
-		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
+		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
-		BP_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel,
-		BP_HIVE =     /obj/item/organ/internal/xenos/hivenode,
-		BP_NUTRIENT = /obj/item/organ/internal/diona/nutrients
+		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel,
+		BP_HIVE =     /obj/item/organ/internal/xeno/hivenode,
 		)
 
+	var/list/started_healing = list()
+	var/accelerated_healing_threshold = 10 SECONDS
+
 	has_limbs = list(
-		"chest" =  list("path" = /obj/item/organ/external/chest/unbreakable),
-		"groin" =  list("path" = /obj/item/organ/external/groin/unbreakable),
+		"chest" =  list("path" = /obj/item/organ/external/chest/unbreakable/xeno),
+		"groin" =  list("path" = /obj/item/organ/external/groin/unbreakable/xeno),
 		"head" =   list("path" = /obj/item/organ/external/head/unbreakable/xeno),
-		"l_arm" =  list("path" = /obj/item/organ/external/arm/unbreakable),
-		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/unbreakable),
-		"l_leg" =  list("path" = /obj/item/organ/external/leg/unbreakable),
-		"r_leg" =  list("path" = /obj/item/organ/external/leg/right/unbreakable),
-		"l_hand" = list("path" = /obj/item/organ/external/hand/unbreakable),
-		"r_hand" = list("path" = /obj/item/organ/external/hand/right/unbreakable),
-		"l_foot" = list("path" = /obj/item/organ/external/foot/unbreakable),
-		"r_foot" = list("path" = /obj/item/organ/external/foot/right/unbreakable)
+		"l_arm" =  list("path" = /obj/item/organ/external/arm/unbreakable/xeno),
+		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/unbreakable/xeno),
+		"l_leg" =  list("path" = /obj/item/organ/external/leg/unbreakable/xeno),
+		"r_leg" =  list("path" = /obj/item/organ/external/leg/right/unbreakable/xeno),
+		"l_hand" = list("path" = /obj/item/organ/external/hand/unbreakable/xeno),
+		"r_hand" = list("path" = /obj/item/organ/external/hand/right/unbreakable/xeno),
+		"l_foot" = list("path" = /obj/item/organ/external/foot/unbreakable/xeno),
+		"r_foot" = list("path" = /obj/item/organ/external/foot/right/unbreakable/xeno)
 		)
 
 	bump_flag = ALIEN
@@ -88,7 +99,7 @@
 
 	var/alien_number = 0
 	var/caste_name = "creature" // Used to update alien name.
-	var/weeds_heal_rate = 3     // Health regen on weeds.
+	var/weeds_heal_rate = 5     // Health regen on weeds.
 	var/weeds_plasma_rate = 5   // Plasma regen on weeds.
 
 	genders = list(NEUTER)
@@ -134,20 +145,38 @@
 	if(!environment) return
 
 	var/obj/effect/vine/plant = locate() in T
-	if((environment.gas["phoron"] > 0 || (plant && plant.seed && plant.seed.name == "xenomorph")) && !regenerate(H))
-		var/obj/item/organ/internal/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
-		P.stored_plasma += weeds_plasma_rate
-		P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
+	if((environment.gas["phoron"] > 0 || (plant && plant.seed && plant.seed.name == "xenomorph")))
+		if(!regenerate(H))
+			var/obj/item/organ/internal/xeno/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
+			P.stored_plasma += weeds_plasma_rate
+			P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
+	else
+		started_healing["\ref[H]"] = null
 	..()
 
 /datum/species/xenos/proc/regenerate(var/mob/living/carbon/human/H)
+
 	var/heal_rate = weeds_heal_rate
 	var/mend_prob = 10
-	if (!H.resting)
+	if (!H.lying)
 		heal_rate = weeds_heal_rate / 3
 		mend_prob = 1
 
-	//first heal damages
+	if(!H.resting || !started_healing["\ref[H]"])
+		started_healing["\ref[H]"] = world.time
+	if(world.time - started_healing["\ref[H]"] > accelerated_healing_threshold)
+		heal_rate *= 1.5
+		mend_prob *= 5
+
+	//heal internal organs
+	for(var/obj/item/organ/I in H.internal_organs)
+		if(I.damage > 0)
+			I.damage = max(I.damage - heal_rate, 0)
+			if (prob(5))
+				to_chat(H, "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>")
+			return 1
+
+	//heal damages
 	if (H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
 		H.adjustBruteLoss(-heal_rate)
 		H.adjustFireLoss(-heal_rate)
@@ -156,14 +185,6 @@
 		if (prob(5))
 			to_chat(H, "<span class='alium'>You feel a soothing sensation come over you...</span>")
 		return 1
-
-	//next internal organs
-	for(var/obj/item/organ/I in H.internal_organs)
-		if(I.damage > 0)
-			I.damage = max(I.damage - heal_rate, 0)
-			if (prob(5))
-				to_chat(H, "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>")
-			return 1
 
 	//next mend broken bones, approx 10 ticks each
 	for(var/obj/item/organ/external/E in H.bad_external_organs)
@@ -179,21 +200,24 @@
 	name = "Xenophage Drone"
 	caste_name = "drone"
 	weeds_plasma_rate = 15
-	slowdown = 1
+	slowdown = -1
+
+	brute_mod =     0.6
+	burn_mod =      0.6
+
 	rarity_value = 5
 	base_color = "#000d1a"
 	icobase = 'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 
 	has_organ = list(
-		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
-		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
+		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
-		BP_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/queen,
-		BP_ACID =     /obj/item/organ/internal/xenos/acidgland,
-		BP_HIVE =     /obj/item/organ/internal/xenos/hivenode,
-		BP_RESIN =    /obj/item/organ/internal/xenos/resinspinner,
-		BP_NUTRIENT = /obj/item/organ/internal/diona/nutrients
+		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel/queen,
+		BP_ACID =     /obj/item/organ/internal/xeno/acidgland,
+		BP_HIVE =     /obj/item/organ/internal/xeno/hivenode,
+		BP_RESIN =    /obj/item/organ/internal/xeno/resinspinner,
 		)
 
 	inherent_verbs = list(
@@ -218,20 +242,22 @@
 	name = "Xenophage Hunter"
 	weeds_plasma_rate = 5
 	caste_name = "hunter"
-	slowdown = -2
+	slowdown = -3
 	total_health = 300
 	base_color = "#001a33"
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
 
+	brute_mod =     0.8
+	burn_mod =      0.8
+
 	has_organ = list(
-		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
-		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
+		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
-		BP_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/hunter,
-		BP_HIVE =     /obj/item/organ/internal/xenos/hivenode,
-		BP_NUTRIENT = /obj/item/organ/internal/diona/nutrients
+		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel/hunter,
+		BP_HIVE =     /obj/item/organ/internal/xeno/hivenode,
 		)
 
 	inherent_verbs = list(
@@ -247,20 +273,19 @@
 	name = "Xenophage Sentinel"
 	weeds_plasma_rate = 10
 	caste_name = "sentinel"
-	slowdown = 0
+	slowdown = -1
 	base_color = "#00284d"
 	total_health = 250
 	icobase = 'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 
 	has_organ = list(
-		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
-		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
+		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
-		BP_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/sentinel,
-		BP_ACID =     /obj/item/organ/internal/xenos/acidgland,
-		BP_HIVE =     /obj/item/organ/internal/xenos/hivenode,
-		BP_NUTRIENT = /obj/item/organ/internal/diona/nutrients
+		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel/sentinel,
+		BP_ACID =     /obj/item/organ/internal/xeno/acidgland,
+		BP_HIVE =     /obj/item/organ/internal/xeno/hivenode,
 		)
 
 	inherent_verbs = list(
@@ -276,25 +301,28 @@
 
 	name = "Xenophage Queen"
 	total_health = 500
-	weeds_heal_rate = 5
+	weeds_heal_rate = 8
 	weeds_plasma_rate = 20
 	caste_name = "queen"
-	slowdown = 4
+	slowdown = 1
 	rarity_value = 10
+
+	brute_mod =     0.6
+	burn_mod =      0.6
+
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 
 	has_organ = list(
-		BP_EYES =     /obj/item/organ/internal/eyes/xenos,
-		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_EYES =     /obj/item/organ/internal/eyes/xeno,
+		BP_HEART =    /obj/item/organ/internal/heart/open,
 		BP_BRAIN =    /obj/item/organ/internal/brain/xeno,
-		BP_EGG =      /obj/item/organ/internal/xenos/eggsac,
-		BP_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/queen,
-		BP_ACID =     /obj/item/organ/internal/xenos/acidgland,
-		BP_HIVE =     /obj/item/organ/internal/xenos/hivenode,
-		BP_RESIN =    /obj/item/organ/internal/xenos/resinspinner,
-		BP_NUTRIENT = /obj/item/organ/internal/diona/nutrients
+		BP_EGG =      /obj/item/organ/internal/xeno/eggsac,
+		BP_PLASMA =   /obj/item/organ/internal/xeno/plasmavessel/queen,
+		BP_ACID =     /obj/item/organ/internal/xeno/acidgland,
+		BP_HIVE =     /obj/item/organ/internal/xeno/hivenode,
+		BP_RESIN =    /obj/item/organ/internal/xeno/resinspinner,
 		)
 
 	inherent_verbs = list(

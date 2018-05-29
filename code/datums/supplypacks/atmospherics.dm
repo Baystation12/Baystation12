@@ -18,7 +18,7 @@
 			 		/obj/item/clothing/suit/space/emergency = 4,
 					/obj/item/clothing/head/helmet/space/emergency = 4,
 					/obj/item/clothing/mask/gas = 4,
-					/obj/item/device/flashlight/glowstick = 5)
+					/obj/item/device/flashlight/flare/glowstick = 5)
 	cost = 45
 
 	containername = "\improper Emergency crate"
@@ -110,4 +110,12 @@
 	cost = 120
 	containername = "\improper Atmospherics voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
+	access = access_atmospherics
+
+/decl/hierarchy/supply_pack/atmospherics/scanner_module
+	name = "Atmospherics scanner module crate"
+	contains = list(/obj/item/weapon/computer_hardware/scanner/atmos = 4)
+	cost = 20
+	containername = "\improper Atmospherics scanner module crate"
+	containertype = /obj/structure/closet/crate/secure
 	access = access_atmospherics

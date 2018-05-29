@@ -8,7 +8,7 @@
 	var/list/breathgas = list()	//list of gases animals/plants require to survive
 	var/badgas					//id of gas that is toxic to life here
 
-	var/lightlevel
+	var/lightlevel = 0 //This default makes turfs not generate light. Adjust to have exoplanents be lit.
 	in_space = 0
 	var/maxx
 	var/maxy
@@ -46,9 +46,9 @@
 	spawn()
 		generate_atmosphere()
 		generate_map()
+		create_lighting_overlays_zlevel(z) //Creates overlays, if not created already.
 		generate_features()
-		for(var/i = 0 to 3)
-			generate_landing()
+		generate_landing(4)		//try making 4 landmarks
 		update_biome()
 		START_PROCESSING(SSobj, src)
 
@@ -178,11 +178,14 @@
 			A.verbs -= /mob/living/simple_animal/proc/name_species
 	return TRUE
 
-/obj/effect/overmap/sector/exoplanet/proc/generate_landing()
-	var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
-	if(T)
-		new landmark_type(T)
-	return T
+//Tries to generate num landmarks, but avoids repeats.
+/obj/effect/overmap/sector/exoplanet/proc/generate_landing(num = 1)
+	var/places = list()
+	for(var/i = 1, i <= num, i++)
+		var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
+		if(T && !(T in places))
+			places += T
+			new landmark_type(T)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new
@@ -377,7 +380,7 @@
 			if(color == "RANDOM")
 				color = get_random_colour(0,75,190)
 			S.set_trait(TRAIT_LEAVES_COLOUR,color)
-			S.chems["woodpulp"] = 1
+			S.chems[/datum/reagent/woodpulp] = 1
 			big_flora_types += S
 
 /datum/random_map/noise/exoplanet/proc/spawn_flora(var/turf/T, var/big)
@@ -410,9 +413,8 @@
 			if(E.atmosphere)
 				initial_gas = E.atmosphere.gas.Copy()
 				temperature = E.atmosphere.temperature
-			if(E.lightlevel)
-				light_power = E.lightlevel
-				light_range = 2
+			//Must be done here, as light data is not fully carried over by ChangeTurf (but overlays are).
+			set_light(E.lightlevel, 0.1, 2)
 	..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)

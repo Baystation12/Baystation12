@@ -16,6 +16,7 @@
 	spells = list(/spell/targeted/ethereal_jaunt = 				1,
 				/spell/aoe_turf/blink = 						1,
 				/spell/area_teleport = 							1,
+				/spell/portal_teleport = 						1,
 				/spell/targeted/projectile/dumbfire/passage = 	1,
 				/spell/mark_recall = 							1,
 				/spell/targeted/swap = 							1,
@@ -31,6 +32,7 @@
 				/obj/structure/closet/wizard/scrying = 			2,
 				/obj/item/weapon/teleportation_scroll = 		1,
 				/obj/item/weapon/magic_rock = 					1,
+				/obj/item/weapon/summoning_stone = 				3,
 				/obj/item/weapon/contract/wizard/telepathy = 	1,
 				/obj/item/weapon/contract/apprentice = 			1
 				)

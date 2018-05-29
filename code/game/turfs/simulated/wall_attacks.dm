@@ -31,7 +31,7 @@
 		update_icon()
 		update_air()
 		sleep(15)
-		set_light(1)
+		set_light(0.4, 0.1, 1)
 		src.blocks_air = 1
 		set_opacity(1)
 		for(var/turf/simulated/turf in loc)
@@ -367,4 +367,5 @@
 				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W]!</span>")
 		else
 			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W], but it bounces off!</span>")
+			playsound(src, hitsound, 25, 1)
 		return

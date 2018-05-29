@@ -4,7 +4,6 @@
 //Torch map alert levels. Refer to security_state.dm.
 /decl/security_state/default/torchdept
 	all_security_levels = list(/decl/security_level/default/torchdept/code_green, /decl/security_level/default/torchdept/code_violet, /decl/security_level/default/torchdept/code_orange, /decl/security_level/default/torchdept/code_blue, /decl/security_level/default/torchdept/code_red, /decl/security_level/default/code_delta)
-	standard_security_levels = list(/decl/security_level/default/torchdept/code_green, /decl/security_level/default/torchdept/code_violet, /decl/security_level/default/torchdept/code_orange, /decl/security_level/default/torchdept/code_blue)
 
 /decl/security_level/default/torchdept
 	icon = 'maps/torch/icons/security_state.dmi'
@@ -13,8 +12,9 @@
 	name = "code green"
 	icon = 'icons/misc/security_state.dmi'
 
-	light_range = 2
-	light_power = 1
+	light_max_bright = 0.25
+	light_inner_range = 0.1
+	light_outer_range = 1
 	light_color_alarm = COLOR_GREEN
 	light_color_status_display = COLOR_GREEN
 
@@ -30,8 +30,9 @@
 /decl/security_level/default/torchdept/code_violet
 	name = "code violet"
 
-	light_range = 3
-	light_power = 2
+	light_max_bright = 0.5
+	light_inner_range = 1
+	light_outer_range = 2
 	light_color_alarm = COLOR_VIOLET
 	light_color_status_display = COLOR_VIOLET
 
@@ -44,8 +45,9 @@
 /decl/security_level/default/torchdept/code_orange
 	name = "code orange"
 
-	light_range = 3
-	light_power = 2
+	light_max_bright = 0.5
+	light_inner_range = 1
+	light_outer_range = 2
 	light_color_alarm = COLOR_ORANGE
 	light_color_status_display = COLOR_ORANGE
 	overlay_alarm = "alarm_orange"
@@ -59,8 +61,9 @@
 	name = "code blue"
 	icon = 'icons/misc/security_state.dmi'
 
-	light_range = 3
-	light_power = 2
+	light_max_bright = 0.5
+	light_inner_range = 1
+	light_outer_range = 2
 	light_color_alarm = COLOR_BLUE
 	light_color_status_display = COLOR_BLUE
 	overlay_alarm = "alarm_blue"
@@ -73,8 +76,9 @@
 	name = "code red"
 	icon = 'icons/misc/security_state.dmi'
 
-	light_range = 4
-	light_power = 2
+	light_max_bright = 0.75
+	light_inner_range = 1
+	light_outer_range = 3
 	light_color_alarm = COLOR_RED
 	light_color_status_display = COLOR_RED
 	overlay_alarm = "alarm_red"

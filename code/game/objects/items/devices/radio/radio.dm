@@ -300,7 +300,7 @@
 
 	// --- Cyborg ---
 	else if (isrobot(M))
-		jobname = "Cyborg"
+		jobname = "Robot"
 
 	// --- Personal AI (pAI) ---
 	else if (istype(M, /mob/living/silicon/pai))
@@ -557,6 +557,8 @@
 	if(!istype(loc))
 		CRASH("Invalid spawn location: [log_info_line(loc)]")
 	..()
+	if(keyslot)
+		keyslot = new keyslot(src)
 	myborg = loc
 
 /obj/item/device/radio/borg/Initialize()

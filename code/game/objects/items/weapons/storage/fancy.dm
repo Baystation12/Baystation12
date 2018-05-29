@@ -234,6 +234,7 @@
 	desc = "The Trident brand's wood tipped little cigar, favored by the Sol corps diplomatique for their pleasant aroma. Machine made on Mars for over 100 years."
 	icon_state = "CRpacket"
 	item_state = "Dpacket"
+	max_storage_space = 5
 	key_type = /obj/item/clothing/mask/smokable/cigarette/trident
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/trident = 5)
 
@@ -261,7 +262,6 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	w_class = ITEM_SIZE_SMALL
 	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 6
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	storage_slots = 7

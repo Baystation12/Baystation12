@@ -27,14 +27,11 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 3, TECH_ENGINEERING = 5)
 
 /obj/item/rig_module/grenade_launcher
-
 	name = "mounted grenade launcher"
 	desc = "A shoulder-mounted micro-explosive dispenser."
 	selectable = 1
 	icon_state = "grenadelauncher"
 	use_power_cost = 2 KILOWATTS	// 2kJ per shot, a mass driver that propels the grenade?
-
-	suit_overlay = "grenade"
 
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
@@ -104,6 +101,7 @@
 
 /obj/item/rig_module/grenade_launcher/cleaner
 	name = "mounted cleaning grenade launcher"
+	interface_name = "cleaning grenade launcher"
 	desc = "A shoulder-mounted micro-explosive dispenser designed only to accept standard cleaning foam grenades."
 
 	charges = list(
@@ -112,6 +110,7 @@
 
 /obj/item/rig_module/grenade_launcher/smoke
 	name = "mounted smoke grenade launcher"
+	interface_name = "smoke grenade launcher"
 	desc = "A shoulder-mounted micro-explosive dispenser designed only to accept standard smoke grenades."
 
 	charges = list(
@@ -120,10 +119,20 @@
 
 /obj/item/rig_module/grenade_launcher/mfoam
 	name = "mounted foam grenade launcher"
+	interface_name = "foam grenade launcher"
 	desc = "A shoulder-mounted micro-explosive dispenser designed only to accept standard metal foam grenades."
 
 	charges = list(
 		list("metal foam grenade",   "metal foam grenade",   /obj/item/weapon/grenade/chem_grenade/metalfoam,  4),
+		)
+
+/obj/item/rig_module/grenade_launcher/light
+	name = "mounted illumination grenade launcher"
+	interface_name = "illumination grenade launcher"
+	desc = "A shoulder-mounted micro-explosive dispenser designed only to accept standard illumination grenades."
+
+	charges = list(
+		list("illumination grenade",   "illumination grenade",   /obj/item/weapon/grenade/light,  6),
 		)
 
 /obj/item/rig_module/mounted

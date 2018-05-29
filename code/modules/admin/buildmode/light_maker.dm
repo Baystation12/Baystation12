@@ -2,8 +2,8 @@
 	name = "Light Maker"
 	icon_state = "buildmode8"
 
-	var/light_range = 3
-	var/light_power = 3
+	var/light_outer_range = 3
+	var/light_max_bright = 3
 	var/light_color = COLOR_WHITE
 
 /datum/build_mode/light_maker/Help()
@@ -17,13 +17,13 @@
 	var/choice = alert("Change the new light range, power, or color?", "Light Maker", "Range", "Power", "Color", "Cancel")
 	switch(choice)
 		if("Range")
-			var/input = input("New light range.", name, light_range) as null|num
+			var/input = input("New light range.", name, light_outer_range) as null|num
 			if(input)
-				light_range = input
+				light_outer_range = input
 		if("Power")
-			var/input = input("New light power.", name, light_power) as null|num
+			var/input = input("New light power.", name, light_max_bright) as null|num
 			if(input)
-				light_power = input
+				light_max_bright = input
 		if("Color")
 			var/input = input("New light color.", name, light_color) as null|color
 			if(input)
@@ -32,7 +32,7 @@
 /datum/build_mode/light_maker/OnClick(var/atom/A, var/list/parameters)
 	if(parameters["left"])
 		if(A)
-			A.set_light(light_range, light_power, light_color)
+			A.set_light(light_max_bright, 0.1, light_outer_range, l_color = light_color)
 	if(parameters["right"])
 		if(A)
-			A.set_light(0, 0, COLOR_WHITE)
+			A.set_light(0, 0, 0, l_color = COLOR_WHITE)

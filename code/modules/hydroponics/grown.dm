@@ -6,7 +6,6 @@
 	randpixel = 5
 	desc = "Nutritious! Probably."
 	slot_flags = SLOT_HOLSTER
-	atom_flags = null
 
 	var/plantname
 	var/datum/seed/seed

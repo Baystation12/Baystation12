@@ -12,9 +12,10 @@
 
 	action_button_name = "Toggle Flashlight"
 	var/on = 0
-	var/brightness_on = 4 //range of light when on
 	var/activation_sound = 'sound/effects/flashlight.ogg'
-	var/flashlight_power //luminosity of light when on, can be negative
+	var/flashlight_max_bright = 0.5 //brightness of light when on, must be no greater than 1.
+	var/flashlight_inner_range = 1 //inner range of light when on, can be negative
+	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
 
 /obj/item/device/flashlight/Initialize()
 	. = ..()
@@ -23,10 +24,7 @@
 /obj/item/device/flashlight/update_icon()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		if(flashlight_power)
-			set_light(l_range = brightness_on, l_power = flashlight_power)
-		else
-			set_light(brightness_on)
+		set_light(flashlight_max_bright, flashlight_inner_range, flashlight_outer_range, 2, light_color)
 	else
 		icon_state = "[initial(icon_state)]"
 		set_light(0)
@@ -38,7 +36,7 @@
 		return 0
 	on = !on
 	if(on && activation_sound)
-		playsound(src.loc, activation_sound, 75, 1)
+		playsound(get_turf(src), activation_sound, 75, 1)
 	update_icon()
 	user.update_action_buttons()
 	return 1
@@ -115,8 +113,8 @@
 	desc = "An energy efficient flashlight."
 	icon_state = "biglight"
 	item_state = "biglight"
-	brightness_on = 6
-	flashlight_power = 3
+	flashlight_max_bright = 0.75
+	flashlight_outer_range = 4
 
 /obj/item/device/flashlight/flashdark
 	name = "flashdark"
@@ -124,8 +122,9 @@
 	icon_state = "flashdark"
 	item_state = "flashdark"
 	w_class = ITEM_SIZE_NORMAL
-	brightness_on = 8
-	flashlight_power = -6
+	flashlight_max_bright = -1
+	flashlight_outer_range = 4
+	flashlight_inner_range = 1
 
 /obj/item/device/flashlight/pen
 	name = "penlight"
@@ -134,8 +133,10 @@
 	item_state = ""
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_EARS
-	brightness_on = 2
 	w_class = ITEM_SIZE_TINY
+	flashlight_max_bright = 0.25
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 2
 
 /obj/item/device/flashlight/maglight
 	name = "maglight"
@@ -146,6 +147,8 @@
 	attack_verb = list ("smacked", "thwacked", "thunked")
 	matter = list(DEFAULT_WALL_MATERIAL = 200,"glass" = 50)
 	hitsound = "swing_hit"
+	flashlight_max_bright = 0.5
+	flashlight_outer_range = 5
 
 /obj/item/device/flashlight/drone
 	name = "low-power flashlight"
@@ -153,8 +156,10 @@
 	icon_state = "penlight"
 	item_state = ""
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	brightness_on = 2
 	w_class = ITEM_SIZE_TINY
+	flashlight_max_bright = 0.25
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 2
 
 
 // the desk lamps are a bit special
@@ -163,19 +168,19 @@
 	desc = "A desk lamp with an adjustable mount."
 	icon_state = "lamp"
 	item_state = "lamp"
-	brightness_on = 5
 	w_class = ITEM_SIZE_LARGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	flashlight_max_bright = 0.3
+	flashlight_inner_range = 2
+	flashlight_outer_range = 5
 
 	on = 1
-
 
 // green-shaded desk lamp
 /obj/item/device/flashlight/lamp/green
 	desc = "A classic green-shaded desk lamp."
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
-	brightness_on = 4
 	light_color = "#ffc58f"
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
@@ -192,8 +197,6 @@
 	name = "flare"
 	desc = "A red standard-issue flare. There are instructions on the side reading 'pull cord, make light'."
 	w_class = ITEM_SIZE_TINY
-	brightness_on = 8 // Pretty bright.
-	light_power = 3
 	light_color = "#e58775"
 	icon_state = "flare"
 	item_state = "flare"
@@ -203,80 +206,88 @@
 	var/produce_heat = 1500
 	activation_sound = 'sound/effects/flare.ogg'
 
-/obj/item/device/flashlight/flare/New()
-	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.
-	..()
+	flashlight_max_bright = 0.8
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 5
+
+/obj/item/device/flashlight/flare/Initialize()
+	. = ..()
+	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.v
+	update_icon()
+
+/obj/item/device/flashlight/flare/Destroy()
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
 
 /obj/item/device/flashlight/flare/Process()
-	var/turf/pos = get_turf(src)
-	if(pos)
-		pos.hotspot_expose(produce_heat, 5)
+	if(produce_heat)
+		var/turf/T = get_turf(src)
+		if(T)
+			T.hotspot_expose(produce_heat, 5)
 	fuel = max(fuel - 1, 0)
 	if(!fuel || !on)
-		turn_off()
-		if(!fuel)
-			src.icon_state = "[initial(icon_state)]-empty"
+		update_damage()
+		update_icon()
 		STOP_PROCESSING(SSobj, src)
 
-/obj/item/device/flashlight/flare/proc/turn_off()
-	on = 0
-	src.force = initial(src.force)
-	src.damtype = initial(src.damtype)
-	update_icon()
-
-/obj/item/device/flashlight/flare/attack_self(mob/user)
-	if(turn_on(user))
-		user.visible_message("<span class='notice'>\The [user] activates \the [src].</span>", "<span class='notice'>You pull the cord on the flare, activating it!</span>")
-
-/obj/item/device/flashlight/flare/proc/turn_on(var/mob/user)
-	if(on)
-		return FALSE
+/obj/item/device/flashlight/flare/attack_self(var/mob/user)
 	if(!fuel)
-		if(user)
-			to_chat(user, "<span class='notice'>It's out of fuel.</span>")
-		return FALSE
-	on = TRUE
-	force = on_damage
-	damtype = "fire"
-	START_PROCESSING(SSobj, src)
+		to_chat(user,"<span class='notice'>\The [src] is spent.</span>")
+		return
+	if(on)
+		to_chat(user,"<span class='notice'>\The [src] is already lit.</span>")
+		return
+
+	. = ..()
+
+	if(.)
+		activate(user)
+
+/obj/item/device/flashlight/flare/proc/activate(var/mob/user)
+	if(on)
+		return
+	on = 1
+	if(user)
+		user.visible_message("<span class='notice'>[user] pulls the cord on \the [src], activating it.</span>", "<span class='notice'>You pull the cord on \the [src], activating it!</span>")
+	update_damage()
 	update_icon()
-	return 1
+	START_PROCESSING(SSobj, src)
+
+/obj/item/device/flashlight/flare/proc/update_damage()
+	if(on)
+		force = on_damage
+		damtype = BURN
+	else
+		force = initial(force)
+		damtype = initial(damtype)
+
+/obj/item/device/flashlight/flare/update_icon()
+	..()
+	if(!on && !fuel)
+		icon_state = "[initial(icon_state)]-empty"
 
 //Glowsticks
-/obj/item/device/flashlight/glowstick
+/obj/item/device/flashlight/flare/glowstick
 	name = "green glowstick"
 	desc = "A military-grade glowstick."
 	w_class = 2.0
-	brightness_on = 4
-	light_power = 2
 	color = "#49f37c"
 	icon_state = "glowstick"
 	item_state = "glowstick"
 	randpixel = 12
-	var/fuel = 0
+	produce_heat = 0
 	activation_sound = null
 
-/obj/item/device/flashlight/glowstick/New()
+	flashlight_max_bright = 0.6
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 3
+
+/obj/item/device/flashlight/flare/glowstick/Initialize()
+	. = ..()
 	fuel = rand(1600, 2000)
 	light_color = color
-	..()
 
-/obj/item/device/flashlight/glowstick/Destroy()
-	. = ..()
-	STOP_PROCESSING(SSobj, src)
-
-/obj/item/device/flashlight/glowstick/Process()
-	fuel = max(fuel - 1, 0)
-	if(!fuel)
-		turn_off()
-		STOP_PROCESSING(SSobj, src)
-		update_icon()
-
-/obj/item/device/flashlight/glowstick/proc/turn_off()
-	on = 0
-	update_icon()
-
-/obj/item/device/flashlight/glowstick/update_icon()
+/obj/item/device/flashlight/flare/glowstick/update_icon()
 	item_state = "glowstick"
 	overlays.Cut()
 	if(!fuel)
@@ -287,7 +298,7 @@
 		I.blend_mode = BLEND_ADD
 		overlays += I
 		item_state = "glowstick-on"
-		set_light(brightness_on)
+		set_light(flashlight_max_bright, flashlight_inner_range, flashlight_outer_range, 2, light_color)
 	else
 		icon_state = "glowstick"
 	var/mob/M = loc
@@ -297,42 +308,35 @@
 		if(M.r_hand == src)
 			M.update_inv_r_hand()
 
-/obj/item/device/flashlight/glowstick/attack_self(mob/user)
-
-	if(!fuel)
-		to_chat(user,"<span class='notice'>\The [src] is spent.</span>")
-		return
+/obj/item/device/flashlight/flare/glowstick/activate(var/mob/user)
 	if(on)
-		to_chat(user,"<span class='notice'>\The [src] is already lit.</span>")
 		return
+	if(user)
+		user.visible_message("<span class='notice'>[user] cracks and shakes \the [src].</span>", "<span class='notice'>You crack and shake \the [src], turning it on!</span>")
+	START_PROCESSING(SSobj, src)
 
-	. = ..()
-	if(.)
-		user.visible_message("<span class='notice'>[user] cracks and shakes the glowstick.</span>", "<span class='notice'>You crack and shake the glowstick, turning it on!</span>")
-		START_PROCESSING(SSobj, src)
-
-/obj/item/device/flashlight/glowstick/red
+/obj/item/device/flashlight/flare/glowstick/red
 	name = "red glowstick"
 	color = "#fc0f29"
 
-/obj/item/device/flashlight/glowstick/blue
+/obj/item/device/flashlight/flare/glowstick/blue
 	name = "blue glowstick"
 	color = "#599dff"
 
-/obj/item/device/flashlight/glowstick/orange
+/obj/item/device/flashlight/flare/glowstick/orange
 	name = "orange glowstick"
 	color = "#fa7c0b"
 
-/obj/item/device/flashlight/glowstick/yellow
+/obj/item/device/flashlight/flare/glowstick/yellow
 	name = "yellow glowstick"
 	color = "#fef923"
 
-/obj/item/device/flashlight/glowstick/random
+/obj/item/device/flashlight/flare/glowstick/random
 	name = "glowstick"
 	desc = "A party-grade glowstick."
 	color = "#ff00ff"
 
-/obj/item/device/flashlight/glowstick/random/New()
+/obj/item/device/flashlight/flare/glowstick/random/New()
 	color = rgb(rand(50,255),rand(50,255),rand(50,255))
 	..()
 
@@ -344,15 +348,104 @@
 	icon_state = "floor1" //not a slime extract sprite but... something close enough!
 	item_state = "slime"
 	w_class = ITEM_SIZE_TINY
-	brightness_on = 6
 	on = 1 //Bio-luminesence has one setting, on.
+
+	flashlight_max_bright = 1
+	flashlight_inner_range = 0.1
+	flashlight_outer_range = 5
 
 /obj/item/device/flashlight/slime/New()
 	..()
-	set_light(brightness_on)
 
 /obj/item/device/flashlight/slime/update_icon()
 	return
 
 /obj/item/device/flashlight/slime/attack_self(mob/user)
 	return //Bio-luminescence does not toggle.
+
+//hand portable floodlights for emergencies. Less bulky than the large ones. But also less light. Unused green variant in the sheet.
+
+/obj/item/device/flashlight/lamp/floodlamp
+	name = "flood lamp"
+	desc = "A portable emergency flood light with a ultra-bright LED."
+	icon = 'icons/obj/machines/floodlight.dmi'
+	icon_state = "floodlamp"
+	item_state = "lamp"
+	w_class = ITEM_SIZE_LARGE
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+	flashlight_max_bright = 1
+	flashlight_inner_range = 3
+	flashlight_outer_range = 7
+
+
+/obj/item/device/flashlight/floodlamp/verb/rotate()
+	set name = "Rotate Light"
+	set category = "Object"
+	set src in oview(1)
+
+	if(!usr || !Adjacent(usr))
+		return
+
+	if(usr.stat == DEAD)
+		if(!round_is_spooky())
+			to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
+			return
+	else if(usr.incapacitated())
+		return
+
+	src.set_dir(turn(src.dir, 90))
+	return
+
+/obj/item/device/flashlight/floodlamp/AltClick()
+	rotate()
+
+//Lava Lamps: Because we're already stuck in the 70ies with those fax machines.
+/obj/item/device/flashlight/lamp/lava
+	name = "lava lamp"
+	desc = "A kitchy throwback decorative light. Noir Edition."
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "lavalamp"
+	on = 0
+	action_button_name = "Toggle lamp"
+	flashlight_outer_range = 3 //range of light when on
+
+/obj/item/device/flashlight/lamp/lava/red
+	desc = "A kitchy red decorative light."
+	icon_state = "redlamp"
+	light_color = COLOR_RED
+
+/obj/item/device/flashlight/lamp/lava/blue
+	desc = "A kitchy blue decorative light"
+	icon_state = "bluelamp"
+	light_color = COLOR_BLUE
+
+/obj/item/device/flashlight/lamp/lava/cyan
+	desc = "A kitchy cyan decorative light"
+	icon_state = "cyanlamp"
+	light_color = COLOR_CYAN
+
+/obj/item/device/flashlight/lamp/lava/green
+	desc = "A kitchy green decorative light"
+	icon_state = "greenlamp"
+	light_color = COLOR_GREEN
+
+/obj/item/device/flashlight/lamp/lava/orange
+	desc = "A kitchy orange decorative light"
+	icon_state = "orangelamp"
+	light_color = COLOR_ORANGE
+
+/obj/item/device/flashlight/lamp/lava/purple
+	desc = "A kitchy purple decorative light"
+	icon_state = "purplelamp"
+	light_color = COLOR_PURPLE
+
+/obj/item/device/flashlight/lamp/lava/pink
+	desc = "A kitchy pink decorative light"
+	icon_state = "pinklamp"
+	light_color = COLOR_PINK
+
+/obj/item/device/flashlight/lamp/lava/yellow
+	desc = "A kitchy yellow decorative light"
+	icon_state = "yellowlamp"
+	light_color = COLOR_YELLOW
