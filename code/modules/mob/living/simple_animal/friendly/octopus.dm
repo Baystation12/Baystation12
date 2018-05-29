@@ -9,7 +9,7 @@
 	speak = list("Blug!","Glubber!","Blab?")
 	speak_emote = list("babbles","blorps","blarps")
 	emote_hear = list("babbles","blorps","blarps")
-	emote_see = list("wiggles tentacles", "pulsates", "schlepps")
+	emote_see = list("wriggles its tentacles", "pulsates", "schlepps")
 	pass_flags = PASS_FLAG_TABLE
 	speak_chance = 1
 	turns_per_move = 5
@@ -35,15 +35,11 @@
 	can_pull_size = ITEM_SIZE_TINY
 	can_pull_mobs = MOB_PULL_NONE
 
-/mob/living/simple_animal/octopus/New()
-	..()
+/mob/living/simple_animal/octopus/Initialize()
+	. = ..()
 
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
-
-	if(name == initial(name))
-		name = "[name] ([sequential_id(/mob/living/simple_animal/octopus)])"
-	real_name = name
 
 /mob/living/simple_animal/octopus/Crossed(AM as mob|obj)
 	if( ishuman(AM) )
