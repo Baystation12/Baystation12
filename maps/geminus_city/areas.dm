@@ -4,6 +4,7 @@
 	requires_power = 0
 	luminosity = 0
 	has_gravity = 1
+	base_turf = /turf/simulated/floor/asteroid/planet
 
 
 /area/planets/Geminus
