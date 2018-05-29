@@ -283,6 +283,8 @@
 		W.close()
 	if(affected.is_stump())
 		affected.status &= ~ORGAN_ARTERY_CUT
+	if(affected.clamped())
+		affected.remove_clamps()
 
 /datum/surgery_step/generic/cauterize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
