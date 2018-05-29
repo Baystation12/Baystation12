@@ -894,10 +894,18 @@ mob/proc/yank_out_object()
 
 	var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
 
+	var/is_shrapnel = istype(selection,/obj/item/weapon/material/shard/shrapnel)
+
 	if(self)
-		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
+		if(is_shrapnel)
+			to_chat(src,"<span class = 'warning'>You start picking shrapnel out of your body.</span>")
+		else
+			to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
 	else
-		to_chat(U, "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>")
+		if(is_shrapnel)
+			to_chat(U,"<span class = 'warning'>You start picking shrapnel out of [S]'s body.</span>")
+		else
+			to_chat(U, "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>")
 	if(!do_mob(U, S, 30))
 		return
 	if(!selection || !S || !U)
