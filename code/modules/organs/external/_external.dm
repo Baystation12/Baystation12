@@ -927,6 +927,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(W.clamped)
 			return 1
 
+obj/item/organ/external/proc/remove_clamps()
+	var/rval = 0
+	for(var/datum/wound/W in wounds)
+		rval |= W.clamped
+		W.clamped = 0
+	return rval
+
 // open incisions and expose implants
 // this is the retract step of surgery
 /obj/item/organ/external/proc/open_incision()
