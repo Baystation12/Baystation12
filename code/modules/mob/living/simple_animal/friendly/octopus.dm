@@ -1,7 +1,7 @@
 /mob/living/simple_animal/octopus
 	name = "cephalapod"
-	real_name = "octopus"
-	desc = "It's a small octopus."
+	real_name = "space octopus"
+	desc = "It's a small spaceborne octopus."
 	icon_state = "octo"
 	item_state = "octo"
 	icon_living = "octo"
@@ -20,7 +20,7 @@
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
-	response_harm   = "stamps on"
+	response_harm   = "stomps on"
 	density = 0
 //	var/body_color //brown, gray and white, leave blank for random
 	minbodytemp = 223		//Below -50 Degrees Celcius
