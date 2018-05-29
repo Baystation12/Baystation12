@@ -316,6 +316,7 @@ BLIND     // can't see anything
 		return
 
 	clipped = 1
+	siemens_coefficient = max(siemens_coefficient, 0.75)
 	name = "modified [name]"
 	desc = "[desc]<br>They have been modified to accommodate a different shape."
 	if("exclude" in species_restricted)
