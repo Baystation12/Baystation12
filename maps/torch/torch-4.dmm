@@ -9465,9 +9465,10 @@
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/item/weapon/gun/energy/secure/gun,
-/obj/item/weapon/gun/energy/secure/gun,
-/obj/item/weapon/gun/energy/secure/gun,
+/obj/item/weapon/gun/energy/gun/secure,
+/obj/item/weapon/gun/energy/gun/secure,
+/obj/item/weapon/gun/energy/gun/secure,
+/obj/item/weapon/gun/energy/gun/secure,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aCw" = (
@@ -9501,9 +9502,9 @@
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/item/weapon/gun/energy/secure/laser,
-/obj/item/weapon/gun/energy/secure/laser,
-/obj/item/weapon/gun/energy/secure/laser,
+/obj/item/weapon/gun/energy/laser/secure,
+/obj/item/weapon/gun/energy/laser/secure,
+/obj/item/weapon/gun/energy/laser/secure,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/tactical)
 "aCy" = (

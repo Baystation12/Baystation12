@@ -3,7 +3,7 @@
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
 	wait = 1
-	init_order = INIT_ORDER_LIGHTING
+	init_order = SS_INIT_LIGHTING
 
 	// Queues of update counts, waiting to be rolled into stats lists
 	var/list/stats_queues = list(
@@ -42,8 +42,8 @@ SUBSYSTEM_DEF(lighting)
 /datum/controller/subsystem/lighting/Initialize()
 	InitializeTurfs()
 	lighting_overlays_initialised = TRUE
-
 	fire(FALSE, TRUE)
+	..()
 
 // It's safe to pass a list of non-turfs to this list - it'll only check turfs.
 /datum/controller/subsystem/lighting/proc/InitializeTurfs(list/targets)
