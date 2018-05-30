@@ -1,0 +1,5 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - maptweak: "Teleporter beacons have been removed from some high security areas onboard the Torch."
+  - maptweak: "A teleporter beacon has been added to NanoTrasen's miscellaneous research's test chamber."

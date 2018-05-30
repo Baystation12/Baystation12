@@ -11771,7 +11771,6 @@
 	dir = 6
 	},
 /obj/effect/overmap/ship/torch,
-/obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ci" = (
