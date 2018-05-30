@@ -1,5 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "the report editor can now print reports and export them to text files."
-  - rscadd: "the report editor can download new (blank) reports from NTnet. A few of the forms from the wiki can now be chosen in this way."
