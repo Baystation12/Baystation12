@@ -14106,11 +14106,6 @@
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
-"Cd" = (
-/obj/structure/table/standard,
-/obj/prefab/hand_teleporter,
-/turf/simulated/floor/tiled/dark,
-/area/teleporter/thirddeck)
 "Ce" = (
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Third Deck - Teleporter";
@@ -32616,7 +32611,7 @@ yN
 zI
 At
 Bj
-Cd
+Cc
 yN
 DC
 Eo

@@ -5156,7 +5156,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/seconddeck/center)
 "kE" = (
-/obj/prefab/hand_teleporter,
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)

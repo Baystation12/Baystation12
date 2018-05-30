@@ -1,0 +1,4 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - rscdel: "Hand teleporters have been removed from teleporter rooms."
