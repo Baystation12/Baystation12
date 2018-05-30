@@ -10457,7 +10457,6 @@
 /area/teleporter/firstdeck)
 "aFI" = (
 /obj/structure/table/standard,
-/obj/prefab/hand_teleporter,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22

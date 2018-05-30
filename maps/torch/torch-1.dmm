@@ -10348,7 +10348,6 @@
 /area/teleporter/fourthdeck)
 "tX" = (
 /obj/structure/table/standard,
-/obj/prefab/hand_teleporter,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 22
