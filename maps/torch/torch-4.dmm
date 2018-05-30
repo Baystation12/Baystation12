@@ -6074,7 +6074,6 @@
 /obj/effect/floor_decal/corner/pink{
 	dir = 10
 	},
-/obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "are" = (
@@ -19747,6 +19746,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmreception)
 "gwb" = (
@@ -22241,7 +22241,6 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/item/device/radio/beacon,
 /obj/machinery/light,
 /obj/machinery/computer/guestpass{
 	pixel_y = -32
@@ -22583,15 +22582,6 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled,
-/area/assembly/robotics)
-"kFb" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics)
 "kGb" = (
@@ -27241,6 +27231,7 @@
 /obj/effect/landmark{
 	name = "bluespacerift"
 	},
+/obj/item/device/radio/beacon,
 /turf/simulated/floor/reinforced,
 /area/rnd/misc_lab)
 "srb" = (
@@ -45557,7 +45548,7 @@ iAb
 kgb
 kgb
 kvb
-kFb
+auS
 kNb
 kVb
 awg
