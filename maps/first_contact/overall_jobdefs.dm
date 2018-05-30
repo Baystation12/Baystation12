@@ -66,7 +66,7 @@
 	is_whitelisted = 1
 
 /datum/job/ODSTO
-	title = "ODST Squad Leader"
+	title = "ODST Officer"
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO

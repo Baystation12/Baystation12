@@ -55,7 +55,7 @@ GLOBAL_LIST_EMPTY(corvette_odsto_spawns)
 
 /datum/spawnpoint/corvette_odsto
 	display_name = "ODST Squad Leader Spawn"
-	restrict_job = list("ODST Squad Leader")
+	restrict_job = list("ODST Officer")
 
 /datum/spawnpoint/corvette_odsto/New()
 	..()
