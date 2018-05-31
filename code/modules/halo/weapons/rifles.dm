@@ -79,6 +79,22 @@
 	else
 		set_light(0)
 
+/obj/item/weapon/gun/projectile/ma5b_ar/MA3
+	name = "\improper MA3 Assault Rifle"
+	desc = "An obsolete military assault rifle commonly available on the black market."
+	icon_state = "MA3"
+	magazine_type = /obj/item/ammo_magazine/m762_ap/MA3
+	ammo_icon_state = null
+	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA3)
+	attachment_slots = null
+	attachments_on_spawn = null
+
+/obj/item/weapon/gun/projectile/ma5b_ar/MA3/update_icon()
+	. = ..()
+	if(ammo_magazine)
+		icon_state = "MA3"
+	else
+		icon_state = "MA3_unloaded"
 
 //BR85 battle
 
