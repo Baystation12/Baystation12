@@ -191,6 +191,11 @@
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
 		msg += "<span class='notice'>[T.He] [T.has] \"[H.forehead_graffiti]\" written on [T.his] [H.name] in [H.graffiti_style]!</span>\n"
 
+	if(became_younger)
+		msg += "[T.He] looks a lot younger than you remember.\n"
+	if(became_older)
+		msg += "[T.He] looks a lot older than you remember.\n"
+
 	var/list/wound_flavor_text = list()
 	var/applying_pressure = ""
 	var/list/shown_objects = list()
