@@ -14,14 +14,8 @@
 	owner = null
 	. = ..()
 
-/datum/skillset/proc/from_datum(decl/hierarchy/skill/skill)
+/datum/skillset/proc/get_value_from_datum(decl/hierarchy/skill/skill)
 	return skill_list[skill] || default_value
-
-/datum/skillset/proc/from_path(skill_path)
-	for(var/decl/hierarchy/skill/S in skill_list)
-		if(istype(S, skill_path))
-			return from_datum(S)			// So that if from_datum is modified, so is this.
-	return from_datum()
 
 /datum/skillset/proc/obtain_from_mob(mob/mob)
 	if(!istype(mob) || !skills_transferable || !mob.skillset.skills_transferable)
@@ -49,6 +43,41 @@
 		var/min = given_client.prefs.get_min_skill(job, S)
 		skill_list[S] = min + (allocation[S] || 0)
 
+//Skill-related mob helper procs
+
+/mob/proc/get_skill_value(skill_path)
+	for(var/decl/hierarchy/skill/S in skillset.skill_list)
+		if(istype(S, skill_path))
+			return skillset.get_value_from_datum(S)			// So that if get_value_from_datum is modified, so is this.
+	return skillset.get_value_from_datum()
+
+// Use to perform skill checks
+/mob/proc/skill_check(skill_path, needed)
+	var/points = get_skill_value(skill_path)
+	return points >= needed
+
+// A generic way of modifying times via skill values	
+/mob/proc/skill_delay_mult(skill_path, factor = 0.3) 
+	var/points = get_skill_value(skill_path)
+	switch(points)
+		if(SKILL_BASIC)
+			return max(0, 1 + 3*factor)
+		if(SKILL_NONE)
+			return max(0, 1 + 6*factor)
+		else
+			return max(0, 1 + (SKILL_DEFAULT - points) * factor)
+
+/mob/proc/do_skilled(base_delay, skill_path , atom/target = null, factor = 0.3)
+	return do_after(src, base_delay * skill_delay_mult(skill_path, factor), target)
+
+// A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_NONE.
+/mob/proc/skill_fail_chance(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1) 
+	var/points = get_skill_value(skill_path)
+	if(points >= no_more_fail)
+		return 0
+	else
+		return fail_chance * 2 ** (factor*(SKILL_MIN - points))
+
 // Show skills verb
 
 proc/show_skill_window(var/mob/user, var/mob/M)
@@ -67,7 +96,7 @@ proc/show_skill_window(var/mob/user, var/mob/M)
 		HTML += "<tr><th colspan = 4><b>[V.name]</b>"
 		HTML += "</th></tr>"
 		for(var/decl/hierarchy/skill/S in V.children)
-			var/level = M.skillset.from_datum(S)
+			var/level = M.skillset.get_value_from_datum(S)
 			HTML += "<tr style='text-align:left;'>"
 			HTML += "<th>[S.name]</th>"
 			for(var/i = SKILL_MIN, i <= SKILL_MAX, i++)

@@ -1,19 +1,5 @@
 GLOBAL_LIST_EMPTY(skills)
 
-var/const/SKILL_NONE = 1
-var/const/SKILL_BASIC = 2
-var/const/SKILL_ADEPT = 3
-var/const/SKILL_EXPERT = 4
-var/const/SKILL_PROF = 5
-
-var/const/SKILL_MIN = 1 // Min skill value selectable
-var/const/SKILL_MAX = 5 // Max skill value selectable
-var/const/SKILL_DEFAULT = 4 //most mobs will default to this
-
-var/const/SKILL_EASY = 1
-var/const/SKILL_AVERAGE = 2
-var/const/SKILL_HARD = 4
-
 /decl/hierarchy/skill
 	var/ID = "none"					// ID of this skill. Needs to be unique.
 	name = "None" 				// Name of the skill. This is what the player sees.
@@ -297,9 +283,9 @@ var/const/SKILL_HARD = 4
 	desc = "Covers an understanding of the human body and medicine. At a low level, this skill gives a basic understanding of applying common types of medicine, and a rough understanding of medical devices like the health analyzer. At a high level, this skill grants exact knowledge of all the medicine available on the installation, as well as the ability to use complex medical devices like the body scanner or mass spectrometer."
 	levels = list( "Unskilled"			= "You know basic first aid, such as how to apply a bandage or ointment to an injury. You can use an autoinjector designed for civilian use, probably by reading the directions printed on it. You can tell when someone is badly hurt and needs a doctor; you can see whether someone has a badly broken bone, is having trouble breathing, or is unconscious. You may not be able to tell the difference between unconscious and dead.",
 						"Basic"				= "You've taken a first-aid training, nursing, or EMT course. You can stop bleeding, do CPR, apply a splint, take someone's pulse, apply trauma and burn treatments, and read a handheld health scanner. You probably know that Dylovene helps poisoning and Dexalin helps people with breathing problems; you can use a syringe or start an IV. You've been briefed on the symptoms of common emergencies like a punctured lung, appendicitis, alcohol poisoning, or broken bones, and though you can't treat them, you know that they need a doctor's attention. You can recognize most emergencies as emergencies and safely stabilize and transport a patient.",
-						"Trained"			= "You are an experienced EMT, an experienced nurse, or a medical resident. You know how to treat most illnesses and injuries, though exotic illnesses and unusual injuries may still stump you. You have probably begun to specialize in some sub-field of medicine. In emergencies, you can think fast enough to keep your patients alive, and even when you can't treat a patient, you know how to find someone who can. You probably have some skill in genetics, virology, and surgery, if only to the extent of being able to create an antibody, do a cloning scan, or assist a surgeon in the operating room. You can use a full-body scanner, and you know something's off about a patient with an alien parasite or cortical borer.",
-						"Experienced"		= "You are a senior nurse or paramedic, or a practicing doctor. You know how to use all of the medical devices available to treat a patient. Your deep knowledge of the body and medications will let you diagnose and come up with a course of treatment for most ailments.",
-						"Professional"		= "You are an experienced doctor. You've seen almost everything there is to see when it comes to injuries and illness and even when it comes to something you haven't seen, you can apply your wide knowledge base to put together a treatment. In a pinch, you can do just about any medicine-related task, but your specialty, whatever it may be, is where you really shine.")
+						"Trained"			= "You are an experienced EMT, an experienced nurse, or a medical resident. You know how to treat most illnesses and injuries, though exotic illnesses and unusual injuries may still stump you. You have probably begun to specialize in some sub-field of medicine. In emergencies, you can think fast enough to keep your patients alive, and even when you can't treat a patient, you know how to find someone who can. You can use a full-body scanner, and you know something's off about a patient with an alien parasite or cortical borer.",
+						"Experienced"		= "You are a senior nurse or paramedic, or a practicing doctor. You know how to use all of the medical devices available to treat a patient. Your deep knowledge of the body and medications will let you diagnose and come up with a course of treatment for most ailments. You can perform a full-body scan thoroughly and find important information.",
+						"Professional"		= "You are an experienced doctor or an expert nurse or EMT. You've seen almost everything there is to see when it comes to injuries and illness and even when it comes to something you haven't seen, you can apply your wide knowledge base to put together a treatment. In a pinch, you can do just about any medicine-related task, but your specialty, whatever it may be, is where you really shine.")
 
 /decl/hierarchy/skill/medical/anatomy
 	ID = "anatomy"
