@@ -35,7 +35,7 @@
 
 /obj/item/ammo_magazine/m127_saphp
 	name = "magazine (12.7mm) M228 SAP-HP"
-	desc = "12.7x40mm M228 Semi-Armor-Piercing High-Penetration magazine containing 12 shots. Low profile rounds."
+	desc = "12.7x40mm M228 Semi-Armor-Piercing High-Penetration magazine containing 12 rounds."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "SOCOMmag"
 	mag_type = MAGAZINE
@@ -64,7 +64,7 @@
 
 /obj/item/ammo_magazine/m762_ap
 	name = "magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 shots. Fits both the MA5B and M392."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 30 rounds. Fits both the MA5B and M392."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M395mag"
 	mag_type = MAGAZINE
@@ -76,7 +76,7 @@
 
 /obj/item/ammo_magazine/m762_ap/MA5B
 	name = "MA5B magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 60 shots. Specific to the MA5B."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 60 rounds. Specific to the MA5B."
 	icon_state = "MA5B_mag"
 	max_ammo = 60
 
@@ -87,17 +87,24 @@
 
 /obj/item/ammo_magazine/m762_ap/M392
 	name = "M392 magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 15 shots. Specific to the M392."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 15 rounds. Specific to the M392."
 	ammo_type = /obj/item/ammo_casing/a762_m392
 	max_ammo = 15
 	matter = list(DEFAULT_WALL_MATERIAL = 750)
 
 /obj/item/ammo_magazine/m762_ap/MA37
 	name = "MA37 magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 32 shots. Specific to the MA37."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 32 rounds. Specific to the MA37."
 	icon_state = "MA37_mag"
 	max_ammo = 32
 	matter = list(DEFAULT_WALL_MATERIAL = 1600)
+
+/obj/item/ammo_magazine/m762_ap/MA3
+	name = "MA3 magazine (7.62mm) FMJ-AP"
+	desc = "7.62x51mm Full Metal Jacket Armor Piercing magazine containing 40 rounds. Specific to the MA3."
+	icon_state = "MA3_mag"
+	max_ammo = 40
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 
 /obj/item/ammo_casing/a762_ttr
 	desc = "A 7.62mm bullet casing."
@@ -136,7 +143,7 @@
 
 /obj/item/ammo_magazine/m95_sap
 	name = "magazine (9.5mm) M634 X-HP-SAP"
-	desc = "9.5x40mm M634 Experimental High-Powered Semi-Armor-Piercing magazine containing 36 shots. Standard issue."
+	desc = "9.5x40mm M634 Experimental High-Powered Semi-Armor-Piercing magazine containing 36 rounds. Standard issue."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "Br85_mag"
 	mag_type = MAGAZINE
@@ -163,7 +170,7 @@
 
 /obj/item/ammo_magazine/a762_box_ap
 	name = "box magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 72 shots. Designed for heavier use."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 72 rounds. Designed for heavier use."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	mag_type = MAGAZINE
 	icon_state = "M739mag"
@@ -182,7 +189,7 @@
 
 /obj/item/ammo_magazine/m145_ap
 	name = "magazine (14.5mm) M112 AP-FS-DS"
-	desc = "14.5×114mm M112 armor piercing, fin-stabilized, discarding sabot magazine containing 4 shots. Not much this won't penetrate"
+	desc = "14.5×114mm M112 armor piercing, fin-stabilized, discarding sabot magazine containing 4 rounds. Not much this won't penetrate"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "SRS99mag"
 	mag_type = MAGAZINE
