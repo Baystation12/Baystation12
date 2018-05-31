@@ -63,7 +63,7 @@
 	name = "Assault Rifle"
 	item_cost = 60
 	antag_costs = list(MODE_MERCENARY = 9)
-	path = /obj/item/weapon/gun/projectile/automatic/sts35
+	path = /obj/item/weapon/gun/projectile/automatic/m16
 
 /datum/uplink_item/item/visible_weapons/advanced_energy_gun
 	name = "Advanced Energy Gun"
