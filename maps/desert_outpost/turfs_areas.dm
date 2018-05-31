@@ -10,7 +10,9 @@
 		'sound/effects/wind/wind_4_2.ogg',\
 		'sound/effects/wind/wind_5_1.ogg'\
 		)
+	base_turf = /turf/simulated/floor/asteroid/planet
 
 /area/planet/stranded_outpost
 	name = "Stranded Outpost"
 	icon_state = "security"
+	base_turf = /turf/simulated/floor/asteroid/planet
