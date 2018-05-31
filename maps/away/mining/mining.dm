@@ -189,7 +189,7 @@
 
 /mob/living/simple_animal/parrot/space/Initialize()
 	. = ..()
-	name = pick("Simurgh", "Ziz", "Phoenix", "Fenghuang")
+	name = pick("Simurgh", "Ziz", "Phoenix", "Fenghuang", "Roc of Ages")
 	var/matrix/M = new
 	M.Scale(2)
 	transform = M

@@ -79,18 +79,8 @@
 	},
 /turf/simulated/floor/airless/stone,
 /area/mine/explored)
-"aw" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner,
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/mine/explored)
 "ax" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/mine/explored)
-"ay" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 8
-	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
 "az" = (
@@ -114,9 +104,9 @@
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
 "aC" = (
-/obj/structure/showcase/totem,
+/obj/structure/showcase/fountain,
 /mob/living/simple_animal/parrot/space,
-/turf/simulated/floor/fixed/alium/airless,
+/turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
 "aD" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -124,22 +114,10 @@
 	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
-"aE" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 1
-	},
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/mine/explored)
 "aF" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	icon_state = "spline_fancy";
 	dir = 1
-	},
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/mine/explored)
-"aG" = (
-/obj/effect/floor_decal/spline/fancy/wood/corner{
-	dir = 4
 	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/mine/explored)
@@ -20994,9 +20972,9 @@ ao
 aj
 aj
 ar
-aw
-aB
-aE
+aP
+aP
+aP
 aJ
 aj
 aj
@@ -21196,9 +21174,9 @@ ao
 aj
 ap
 ar
-ax
+aP
 aC
-aF
+aP
 aK
 ap
 aj
@@ -21398,9 +21376,9 @@ ao
 aj
 aj
 as
-ay
-aD
-aG
+aP
+aP
+aP
 aK
 aj
 aj
