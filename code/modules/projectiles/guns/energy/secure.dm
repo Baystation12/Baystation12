@@ -22,7 +22,7 @@
 					list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode/green, modifystate="revolverstun"),
 					list(mode_name="shock", projectile_type=/obj/item/projectile/energy/electrode/stunshot, modifystate="revolvershock")
 					)
-	item_state = "revolverstun"
+	item_state = null
 	req_one_access = list(access_brig, access_heads)
 	projectile_type = /obj/item/projectile/energy/electrode/green
 
