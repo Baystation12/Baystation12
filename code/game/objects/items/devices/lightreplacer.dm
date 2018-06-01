@@ -61,7 +61,7 @@
 
 /obj/item/device/lightreplacer/examine(mob/user)
 	if(..(user, 2))
-		to_chat(user, "It has [uses] light[uses > 1 ? "s" : ""] remaining.")
+		to_chat(user, "It has [uses] light\s remaining.")
 
 /obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
 
