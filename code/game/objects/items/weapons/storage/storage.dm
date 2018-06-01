@@ -35,7 +35,7 @@
 	if(!canremove)
 		return
 
-	if ((ishuman(usr) || issmall(usr)) && !usr.incapacitated())
+	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated())
 		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
 			src.open(usr)
 			return TRUE
@@ -81,6 +81,10 @@
 /obj/item/weapon/storage/proc/open(mob/user as mob)
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 0, -5)
+	if (isrobot(user) && user.hud_used)
+		var/mob/living/silicon/robot/robot = user
+		if(robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
+			robot.hud_used.toggle_show_robot_modules()
 
 	prepare_ui()
 	storage_ui.on_open(user)
@@ -236,8 +240,8 @@
 /obj/item/weapon/storage/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 
-	if(isrobot(user))
-		return //Robots can't interact with storage items.
+	if(isrobot(user) && (W == user.get_active_hand()))
+		return //Robots can't store their modules.
 
 	if(istype(W, /obj/item/device/lightreplacer))
 		var/obj/item/device/lightreplacer/LP = W
