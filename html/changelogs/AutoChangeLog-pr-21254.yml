@@ -1,0 +1,6 @@
+author: "afterthought and chinsky"
+delete-after: True
+changes: 
+  - rscadd: "The \"Medicine\" skill now influences interaction with some medical objects: syringes, defibrillators, sleepers, handheld scanners, full body scanners, IV drips, and splints."
+  - tweak: "Full body scanners now store scan data. Use the menu options to print, erase, or scan/re-scan."
+  - tweak: "IV drips now take a short time to hook up."
