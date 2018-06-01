@@ -1230,6 +1230,7 @@
 #include "code\modules\client\preference_setup\loadout\loadout_eyes.dm"
 #include "code\modules\client\preference_setup\loadout\loadout_general.dm"
 #include "code\modules\client\preference_setup\loadout\loadout_gloves.dm"
+#include "code\modules\client\preference_setup\loadout\loadout_head.dm"
 #include "code\modules\client\preference_setup\loadout\loadout_mask.dm"
 #include "code\modules\client\preference_setup\loadout\loadout_shoes.dm"
 #include "code\modules\client\preference_setup\loadout\loadout_smoking.dm"
