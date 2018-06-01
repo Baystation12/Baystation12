@@ -290,6 +290,7 @@
 	dat += "<b>Brain activity:</b> [brain_result]"
 
 	var/pulse_result = "normal"
+	var/pulse_suffix = "bpm"
 	if(H.should_have_organ(BP_HEART))
 		if(H.status_flags & FAKEDEATH)
 			pulse_result = 0
@@ -297,7 +298,8 @@
 			pulse_result = H.get_pulse(1)
 	else
 		pulse_result = "ERROR - Nonstandard biology"
-	dat += "<b>Pulse rate:</b> [pulse_result]bpm."
+		pulse_suffix = ""
+	dat += "<b>Pulse rate:</b> [pulse_result][pulse_suffix]"
 
 	// Blood pressure. Based on the idea of a normal blood pressure being 120 over 80.
 	if(H.get_blood_volume() <= 70)
