@@ -422,7 +422,7 @@
 /obj/item/clothing/accessory/badge/onib
 	name = "agent's badge"
 	desc = "A synthleather holographic badge bearing the crest of the Office of Naval Intelligence"
-	icon_state = "intelbadge"
+	icon_state = "onibadge"
 	slot_flags = SLOT_TIE
 	var/global/list/clothing_choices
 
