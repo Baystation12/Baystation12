@@ -265,6 +265,7 @@
 
 /obj/machinery/cryopod/Initialize()
 	. = ..()
+	set_extension(src, /datum/extension/scan, /datum/extension/scan/pod)
 	find_control_computer()
 
 /obj/machinery/cryopod/proc/find_control_computer(urgent=0)

@@ -21,6 +21,7 @@
 
 /obj/machinery/sleeper/Initialize()
 	. = ..()
+	set_extension(src, /datum/extension/scan, /datum/extension/scan/pod/sleeper)
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 

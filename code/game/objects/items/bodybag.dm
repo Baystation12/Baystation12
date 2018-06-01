@@ -42,6 +42,10 @@
 	storage_capacity = (MOB_MEDIUM * 2) - 1
 	var/contains_body = 0
 
+/obj/structure/closet/body_bag/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/scan, /datum/extension/scan/closet)
+
 /obj/structure/closet/body_bag/attackby(W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
@@ -62,14 +66,6 @@
 		src.SetName("body bag")
 		src.overlays.Cut()
 		to_chat(user, "You cut the tag off \the [src].")
-		return
-	else if(istype(W, /obj/item/device/healthanalyzer/) && !opened)
-		if(contains_body)
-			var/obj/item/device/healthanalyzer/HA = W
-			for(var/mob/living/L in contents)
-				HA.scan_mob(L, user)
-		else
-			to_chat(user, "\The [W] reports that \the [src] is empty.")
 		return
 
 /obj/structure/closet/body_bag/store_mobs(var/stored_units)

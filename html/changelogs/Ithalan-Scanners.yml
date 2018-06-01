@@ -1,0 +1,7 @@
+author: Ithalan
+
+delete-after: True
+
+changes: 
+  - bugfix: "PDA medical scanner now works on all the same targets as the regular health analyzer"
+  - rscadd: "Health analyzer can now scan scan the occupants of body/stasis bags, most medical machinery and the pilot inside exosuits"
