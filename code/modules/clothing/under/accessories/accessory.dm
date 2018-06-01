@@ -131,8 +131,8 @@
 	icon_state = "browntie"
 
 /obj/item/clothing/accessory/nt
-	name = "\improper NanoTrasen tie with a clip"
-	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears 'NT' on it."
+	name = "\improper Misriah Armory tie with a clip"
+	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears 'MA' on it."
 	icon_state = "ntcliptie"
 
 /obj/item/clothing/accessory/stethoscope
