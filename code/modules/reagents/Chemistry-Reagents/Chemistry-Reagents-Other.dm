@@ -236,6 +236,27 @@
 /datum/reagent/thermite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustFireLoss(3 * removed)
 
+/datum/reagent/napalm
+	name = "Napalm"
+	description = "A sticky volatile substance made from mixing quick burning goo with slow burning goo, to make a viscous average burning goo that sticks to everything."
+	taste_description = "faint hint of banana?"
+	reagent_state = LIQUID
+	color = "#673910"
+	touch_met = 50
+
+/datum/reagent/napalm/b
+	name = "Napalm B"
+	taste_description = "burnt plastic and metal"
+
+/datum/reagent/napalm/touch_turf(var/turf/T)
+	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
+	remove_self(volume)
+	return
+
+/datum/reagent/napalm/touch_mob(var/mob/living/L, var/amount)
+	if(istype(L))
+		L.adjust_fire_stacks(amount / 100)
+
 /datum/reagent/space_cleaner
 	name = "Space cleaner"
 	description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
