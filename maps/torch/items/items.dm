@@ -122,7 +122,7 @@ Weapons
 	fire_anim = "mosley_fire"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 
-/obj/item/weapon/gun/energy/secure/stunrevolver
+/obj/item/weapon/gun/energy/stunrevolver/secure
 	req_access = list(access_sec_guard)
 
 /obj/item/weapon/gun/projectile/pistol/liaison
