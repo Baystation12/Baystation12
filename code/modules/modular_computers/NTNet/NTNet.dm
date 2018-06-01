@@ -11,6 +11,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/chat_channels = list()
 	var/list/fileservers = list()
 	var/list/email_accounts = list()				// I guess we won't have more than 999 email accounts active at once in single round, so this will do until Servers are implemented someday.
+	var/list/available_reports = list()             // A list containing one of each available report datums, used for the report editor program.
 	var/list/banned_nids = list()
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
 	// High values make displaying logs much laggier.
@@ -37,6 +38,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	build_software_lists()
 	build_news_list()
 	build_emails_list()
+	build_reports_list()
 	add_log("NTNet logging system activated.")
 
 /datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
@@ -124,6 +126,22 @@ var/global/datum/ntnet/ntnet_global = new()
 /datum/ntnet/proc/build_emails_list()
 	for(var/F in subtypesof(/datum/computer_file/data/email_account/service))
 		new F()
+
+// Builds report list.
+/datum/ntnet/proc/build_reports_list()
+	available_reports = list()
+	for(var/F in typesof(/datum/computer_file/report))
+		var/datum/computer_file/report/type = F
+		if(initial(type.available_on_ntnet))
+			available_reports += new type
+
+/datum/ntnet/proc/fetch_reports(access)
+	if(!access)
+		return available_reports
+	. = list()
+	for(var/datum/computer_file/report/report in available_reports)
+		if(report.verify_access_edit(access))
+			. += report
 
 // Attempts to find a downloadable file according to filename var
 /datum/ntnet/proc/find_ntnet_file_by_name(var/filename)

@@ -5156,7 +5156,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/seconddeck/center)
 "kE" = (
-/obj/prefab/hand_teleporter,
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)
@@ -6428,10 +6427,6 @@
 	icon_state = "warning";
 	dir = 8
 	},
-/turf/simulated/floor/plating,
-/area/engineering/engine_room)
-"nG" = (
-/obj/item/device/radio/beacon,
 /turf/simulated/floor/plating,
 /area/engineering/engine_room)
 "nH" = (
@@ -10741,13 +10736,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
-"zo" = (
-/obj/item/device/radio/beacon,
-/obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 10
-	},
-/turf/simulated/floor/tiled,
-/area/engineering/atmos)
 "zr" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 9
@@ -40126,7 +40114,7 @@ uy
 vX
 vX
 wc
-zo
+yF
 yJ
 Fe
 AY
@@ -41730,7 +41718,7 @@ ks
 le
 lU
 mL
-nG
+if
 oA
 rc
 Md

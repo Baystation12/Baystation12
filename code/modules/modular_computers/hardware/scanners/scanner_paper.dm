@@ -17,6 +17,7 @@
 	var/data = html2pencode(target.info)
 	if(!data)
 		return
+	to_chat(user, "You scan \the [target] with [src].")
 	driver.data_buffer = data
 	GLOB.nanomanager.update_uis(driver.NM)
 

@@ -99,11 +99,21 @@ Basic field subtypes.
 	value = "00:00"
 
 /datum/report_field/time/set_value(given_value)
-	if(istext(given_value))
-		value = sanitize_time(given_value)
+	value = sanitize_time(given_value, value, "hh:mm")
 
 /datum/report_field/time/ask_value(mob/user)
 	set_value(input(user, "[display_name()] (time as hh:mm):", "Form Input", get_value()) as null|text)
+
+//Uses YYYY-MM-DD format for dates.
+/datum/report_field/date/New()
+	..()
+	value = stationdate2text()
+
+/datum/report_field/date/set_value(given_value)
+	value = sanitize_time(given_value, value, "YEAR-MM-DD")
+
+/datum/report_field/date/ask_value(mob/user)
+	set_value(input(user, "[display_name()] (date as YYYY-MM-DD):", "Form Input", get_value()) as null|text)
 
 //Will prompt for numbers.
 /datum/report_field/number
@@ -125,3 +135,17 @@ Basic field subtypes.
 
 /datum/report_field/options/ask_value(mob/user)
 	set_value(input(user, "[display_name()] (select one):", "Form Input", get_value()) as null|anything in get_options())
+
+//Yes or no field.
+/datum/report_field/options/yes_no
+	value = "No"
+
+/datum/report_field/options/yes_no/get_options()
+	return list("Yes", "No")
+
+//Signature field; ask_value will obtain the user's signature.
+/datum/report_field/signature/get_value()
+	return "<font face=\"Times New Roman\"><i>[value]</i></font>"
+
+/datum/report_field/signature/ask_value(mob/user)
+	set_value((user && user.real_name) ? user.real_name : "Anonymous")

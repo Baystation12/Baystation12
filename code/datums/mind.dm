@@ -182,9 +182,14 @@
 		if(antag) antag.place_mob(src.current)
 
 	else if (href_list["role_edit"])
-		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in joblist
+		var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in job_master.occupations_by_title
 		if (!new_role) return
-		assigned_role = new_role
+		var/datum/job/job = job_master.occupations_by_title[new_role]
+		if(job)
+			assigned_role = job.title
+			role_alt_title = new_role
+			if(current)
+				current.skillset.obtain_from_client(job, current.client)
 
 	else if (href_list["memory_edit"])
 		var/new_memo = sanitize(input("Write new memory", "Memory", memory) as null|message)

@@ -48,22 +48,59 @@
 			else			return default
 	return .
 
-/proc/sanitize_time(time, default = "00:00")
-	if(!istext(time))
+//Valid format codes: YY, YEAR, MM, DD, hh, mm, ss, :, -. " " (space). Invalid format will return default.
+/proc/sanitize_time(time, default, format = "hh:mm")
+	if(!istext(time) || !(length(time) == length(format)))
 		return default
-	if(length(time) != 5)
-		return default
-	var/atime[5]
-	for(var/i = 1, i <= 5, i++)
-		atime[i] = text2ascii(time, i)
-	var/early = (atime[1] in 48 to 49) && (atime[2] in 48 to 57) //00 to 19
-	var/late = (atime[1] == 50) && (atime[2] in 48 to 51) //20 to 23
-	if(!(early || late))
-		return default
-	if(!(atime[3] == 58)) //:
-		return default
-	if(!(text2ascii(time, 4) in 48 to 53)) //0 to 5
-		return default
-	if(!(text2ascii(time, 5) in 48 to 57)) //0 to 9
-		return default
-	return time
+	var/fragment = ""
+	. = list()
+	for(var/i = 1, i <= length(format), i++)
+		fragment += copytext(format,i,i+1)
+		if(fragment in list("YY", "YEAR", "MM", "DD", "hh", "mm", "ss"))
+			. += sanitize_one_time(copytext(time, i - length(fragment) + 1, i + 1), copytext(default, i - length(fragment) + 1, i + 1), fragment)
+			fragment = ""
+		else if(fragment in list(":", "-", " "))
+			. += fragment
+			fragment = ""
+	if(fragment)
+		return default //This means the format was improper.
+	return JOINTEXT(.)
+
+//Internal proc, expects valid format and text input of equal length to format.
+/proc/sanitize_one_time(input, default, format)
+	var/list/ainput = list()
+	for(var/i = 1, i <= length(input), i++)
+		ainput += text2ascii(input, i)
+	switch(format)
+		if("YY")
+			if(!(ainput[1] in 48 to 57) || !(ainput[2] in 48 to 57))//0 to 9
+				return (default || "00")
+			return input
+		if("YEAR")
+			for(var/i = 1, i <= 4, i++)
+				if(!(ainput[i] in 48 to 57))//0 to 9
+					return (default || "0000")
+			return input
+		if("MM")
+			var/early = (ainput[1] == 48) && (ainput[2] in 49 to 57) //01 to 09
+			var/late = (ainput[1] == 49) && (ainput[2] in 48 to 50) //10 to 12
+			if(!(early || late))
+				return (default || "01")
+			return input
+		if("DD")
+			var/early = (ainput[1] == 48) && (ainput[2] in 49 to 57) //01 to 09
+			var/mid = (ainput[1] in 49 to 50) && (ainput[2] in 48 to 57) //10 to 29
+			var/late = (ainput[1] == 51) && (ainput[2] in 48 to 49) //30 to 31
+			if(!(early || mid || late))
+				return (default || "01")
+			return input
+		if("hh")
+			var/early = (ainput[1] in 48 to 49) && (ainput[2] in 48 to 57) //00 to 19
+			var/late = (ainput[1] == 50) && (ainput[2] in 48 to 51) //20 to 23
+			if(!(early || late))
+				return (default || "00")
+			return input
+		if("mm", "ss")
+			if(!(ainput[1] in 48 to 53) || !(ainput[2] in 48 to 57)) //0 to 5, 0 to 9
+				return (default || "00")
+			return input
