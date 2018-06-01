@@ -66,3 +66,34 @@
 
 	pda_slot = null
 	flags = 0
+
+/decl/hierarchy/outfit/job/facil_ODST
+	name = "ODST Rifleman"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/facil_ODSTO
+	name = "ODST Squad Leader"
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	pda_slot = null
+	l_pocket = /obj/item/weapon/folder/envelope/nuke_instructions
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/officer, /obj/item/clothing/accessory/holster/thigh,/obj/item/clothing/accessory/ribbon/instructor,/obj/item/clothing/accessory/ribbon/marksman, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
