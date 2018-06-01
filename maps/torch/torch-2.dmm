@@ -20168,6 +20168,18 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
+"Wt" = (
+/obj/machinery/door/blast/shutters{
+	dir = 2;
+	id = "kitchen";
+	name = "Kitchen Shutters"
+	},
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/obj/machinery/smartfridge/foods,
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/galley)
 "Wu" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -37437,7 +37449,7 @@ MT
 fp
 hr
 Tg
-TH
+Wt
 gv
 cT
 cT

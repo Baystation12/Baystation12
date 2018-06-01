@@ -13552,15 +13552,6 @@
 "GW" = (
 /turf/simulated/wall/r_wall/hull,
 /area/storage/tech)
-"GY" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/vending/lavatory,
-/turf/simulated/floor/plating,
-/area/maintenance/seconddeck/foreport)
 "Hb" = (
 /obj/effect/shuttle_landmark/petrov/out,
 /turf/space,
@@ -32035,7 +32026,7 @@ qx
 qx
 qx
 qx
-GY
+qx
 zM
 AE
 ls
