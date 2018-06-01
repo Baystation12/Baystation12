@@ -11,8 +11,9 @@
 
 /obj/item/weapon/gun/energy/stunrevolver/secure
 	name = "smart stun revolver"
-	desc = "This A&M X6 is fitted with an NT1019 chip, a component that allows remote authorization of weapon functionality, created by NanoTrasen following the Baetiff Incident."
+	desc = "This A&M X6 is fitted with an NT1019 chip which allows remote authorization of weapon functionality. It has an SCG emblem on the grip."
 	icon = 'icons/obj/gun_secure.dmi'
+	icon_state = "revolverstun"
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
@@ -21,7 +22,7 @@
 					list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode/green, modifystate="revolverstun"),
 					list(mode_name="shock", projectile_type=/obj/item/projectile/energy/electrode/stunshot, modifystate="revolvershock")
 					)
-	item_state = null	//so the human update icon uses the icon_state instead.
+	item_state = "revolverstun"
 	req_one_access = list(access_brig, access_heads)
 	projectile_type = /obj/item/projectile/energy/electrode/green
 
