@@ -2628,7 +2628,6 @@
 #include "maps\overmap_ships\nh_overmap.dm"
 #include "maps\overmap_ships\om_ship_areas.dm"
 #include "maps\slayer\__death_asteroid_map.dm"
-#include "maps\torch\loadout\loadout_eyes.dm"
 #include "maps\unsc_frigate\unsc_frigate_innies_geminus.dm"
 #include "maps\unsc_frigate\unsc_frigate_map.dm"
 #include "maps\unsc_frigate\unsc_frigate_overmap.dm"
