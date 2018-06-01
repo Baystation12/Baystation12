@@ -418,3 +418,34 @@
 		var/mob/M = src.loc
 		M.update_inv_r_hand()
 		M.update_inv_l_hand()
+
+/obj/item/clothing/accessory/badge/onib
+	name = "agent's badge"
+	desc = "A synthleather holographic badge bearing the crest of the Office of Naval Intelligence"
+	icon_state = "intelbadge"
+	slot_flags = SLOT_TIE
+	var/global/list/clothing_choices
+
+/obj/item/clothing/accessory/badge/onib/New()
+	..()
+	if(!clothing_choices)
+		clothing_choices = generate_chameleon_choices(/obj/item/clothing/accessory/badge, list(src.type))
+
+/obj/item/clothing/accessory/badge/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
+	name = initial(name)
+	desc = initial(desc)
+	icon_state = initial(icon_state)
+	item_state = initial(item_state)
+	update_icon()
+	update_clothing_icon()
+
+/obj/item/clothing/accessory/badge/onib/verb/change(picked in clothing_choices)
+	set name = "Change Badge Appearance"
+	set category = "ONI Badge"
+	set src in usr
+
+	if(!ispath(clothing_choices[picked]))
+		return
+
+	disguise(clothing_choices[picked], usr)
+	update_clothing_icon()	//so our overlays update.
