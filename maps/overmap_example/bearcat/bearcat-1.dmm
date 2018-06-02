@@ -1427,10 +1427,13 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "dh" = (
-/obj/structure/stairs/east,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
+	},
+/obj/structure/stairs/upper{
+	icon_state = "stairs_upper";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
@@ -2495,6 +2498,10 @@
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
+	},
+/obj/structure/stairs/lower{
+	icon_state = "stairs_lower";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)

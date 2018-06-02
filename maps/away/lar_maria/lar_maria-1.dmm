@@ -3026,7 +3026,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hd" = (
-/obj/structure/stairs/south,
+/obj/structure/stairs/upper,
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
 "he" = (
@@ -3843,6 +3843,20 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/sec_wing)
+"vu" = (
+/obj/structure/stairs/lower,
+/turf/simulated/floor/tiled,
+/area/lar_maria/vir_access)
+"IR" = (
+/obj/machinery/alarm{
+	alarm_id = "misc_research";
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 24
+	},
+/obj/structure/stairs/lower,
+/turf/simulated/floor/tiled,
+/area/lar_maria/vir_access)
 
 (1,1,1) = {"
 aa
@@ -23540,7 +23554,7 @@ fO
 cO
 gn
 gE
-gF
+vu
 hd
 cO
 cO
@@ -24550,7 +24564,7 @@ fN
 cO
 gn
 gG
-gX
+IR
 hd
 gz
 hH
