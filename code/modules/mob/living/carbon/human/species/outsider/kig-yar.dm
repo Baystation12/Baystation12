@@ -16,7 +16,7 @@
 	brute_mod = 1.1
 	slowdown = -1.5 //-1 to negate noshoes, -0.5 for their natural speed increase.
 	gluttonous = GLUT_ANYTHING
-	item_icon_offsets = list(-1,1)
+	item_icon_offsets = list(0,0)
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
@@ -33,14 +33,21 @@
 		)
 
 /datum/species/kig_yar/skirmisher
-	name = "Kig-Yar - T'vaoan"
+	name = "Kig-Yar - Tvaoan"
+	name_plural = "Kig-Yar"
+	blurb = ""
 	icobase = 'code/modules/halo/icons/species/r_skirmishers.dmi'
 	deform = 'code/modules/halo/icons/species/r_skirmishers.dmi'
-	icon_template = 'code/modules/halo/icons/species/r_skirmishers.dmi'
+	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
 
 	pain_mod = 0.9
 	brute_mod = 0.95
 	slowdown = -1.75
+
+	total_health = 225
+	pixel_offset_x = -5
+
+	item_icon_offsets = list(4,-1)
 
 	has_limbs = list( //Normal limbs. A bit better than ruutian
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
@@ -55,3 +62,9 @@
 		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
+
+/datum/sprite_accessory/hair/skirmisherquills
+	icon = 'code/modules/halo/icons/species/r_skirmishers.dmi'
+	icon_state = "h_quills"
+	name = "Quills"
+	species_allowed = list("Kig-Yar - Tvaoan")

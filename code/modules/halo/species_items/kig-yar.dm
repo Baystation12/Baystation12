@@ -12,9 +12,9 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	desc = "A Kig-Yar scout helmet with inbuilt night vision."
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
 	icon_state = "scouthelm"
-	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi')
+	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Kig-Yar - Tvaoan" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 25, bio = 0, rad = 0)
-	species_restricted = list("Kig-Yar")
+	species_restricted = list("Kig-Yar","Kig-Yar - Tvaoan")
 	action_button_name = "Toggle Night Vision"
 	var/linked_glasses
 	var/mob/living/carbon/human/u
@@ -58,14 +58,15 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
 	icon_state = "jackal_bodysuit_s"
 	worn_state = "jackal_bodysuit"
-	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi')
-	species_restricted = list("Kig-Yar")
+	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Kig-Yar - Tvaoan" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
+	species_restricted = list("Kig-Yar","Kig-Yar - Tvaoan")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/under/covenant/kigyar/armless
 	icon_state = "jackal_bodysuit_armless_s"
 	worn_state = "jackal_bodysuit_armless"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	species_restricted = list("Kig-Yar")
 
 /obj/item/clothing/suit/armor/covenant/kigyar
 	name = "Kig-Yar Combat Harness"
@@ -73,8 +74,8 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
 	icon_state = "scout"
 	item_state = "scout"
-	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi')
-	species_restricted = list("Kig-Yar")
+	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Kig-Yar - Tvaoan" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
+	species_restricted = list("Kig-Yar","Kig-Yar - Tvaoan")
 	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
 	armor_thickness_modifiers = list()
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
