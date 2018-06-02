@@ -181,13 +181,17 @@
 		above.ChangeTurf(/turf/simulated/open)
 	. = ..()
 
-/obj/structure/stairs/upper/Uncross(atom/movable/A)
+/obj/structure/stairs/upper/Uncrossed(atom/movable/A)
+	if(isliving(A))
+		var/mob/living/L = A
+		if(L.client)
+			L.reset_view(0)
 	if(A.dir == dir)
 		// This is hackish but whatever.
 		var/turf/target = get_step(GetAbove(A), dir)
 		var/turf/source = A.loc
 		var/turf/above = GetAbove(A)
-		if(above.CanZPass(source, UP) && target.Enter(A, source))
+		if(above.CanZPass(source, UP) && target.CanPass(A, source))
 			A.forceMove(target)
 			if(isliving(A))
 				var/mob/living/L = A
@@ -198,11 +202,32 @@
 		return 0
 	return 1
 
+/obj/structure/stairs/upper/Crossed(atom/movable/A)
+	if(A.dir == GLOB.reverse_dir[dir])
+		return
+	if(isliving(A))
+		spawn(0) // Execute after all movement is done
+			var/mob/living/L = A
+			if(L.client && L.shadow)
+				L.reset_view(L.shadow)
+
 /obj/structure/stairs/CanPass(obj/mover, turf/source, height, airflow)
 	return airflow || !density
 
 /obj/structure/stairs/upper
 	icon_state = "stairs_upper"
 
+/obj/structure/stairs/upper/Destroy()
+	if(QDELING(src))
+		return ..()
+	var/obj/structure/stairs/lower = locate(get_step(loc, GLOB.reverse_dir[dir]))
+	qdel(lower)
+
 /obj/structure/stairs/lower
 	icon_state = "stairs_lower"
+
+/obj/structure/stairs/lower/Destroy()
+	if(QDELING(src))
+		return ..()
+	var/obj/structure/stairs/upper = locate(get_step(loc, dir))
+	qdel(upper)
