@@ -159,10 +159,13 @@
 	allowed_directions = UP|DOWN
 	icon_state = "ladder11"
 
+
+//----- Stairs -----//
+
 /obj/structure/stairs
-	name = "Stairs"
+	name = "stairs"
 	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."
-	icon = 'icons/obj/stairs.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	density = 0
 	opacity = 0
 	anchored = 1
@@ -170,17 +173,16 @@
 	layer = RUNE_LAYER
 
 /obj/structure/stairs/Initialize()
-	for(var/turf/turf in locs)
-		var/turf/simulated/open/above = GetAbove(turf)
-		if(!above)
-			warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
-			return INITIALIZE_HINT_QDEL
-		if(!istype(above))
-			above.ChangeTurf(/turf/simulated/open)
+	var/turf/simulated/open/above = GetAbove(get_turf(src))
+	if(!above)
+		warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
+		return INITIALIZE_HINT_QDEL
+	if(!istype(above))
+		above.ChangeTurf(/turf/simulated/open)
 	. = ..()
 
-/obj/structure/stairs/Uncross(atom/movable/A)
-	if(A.dir == dir && upperStep(A.loc))
+/obj/structure/stairs/upper/Uncross(atom/movable/A)
+	if(A.dir == dir)
 		// This is hackish but whatever.
 		var/turf/target = get_step(GetAbove(A), dir)
 		var/turf/source = A.loc
@@ -196,29 +198,11 @@
 		return 0
 	return 1
 
-/obj/structure/stairs/proc/upperStep(var/turf/T)
-	return (T == loc)
-
 /obj/structure/stairs/CanPass(obj/mover, turf/source, height, airflow)
 	return airflow || !density
 
-// type paths to make mapping easier.
-/obj/structure/stairs/north
-	dir = NORTH
-	bound_height = 64
-	bound_y = -32
-	pixel_y = -32
+/obj/structure/stairs/upper
+	icon_state = "stairs_upper"
 
-/obj/structure/stairs/south
-	dir = SOUTH
-	bound_height = 64
-
-/obj/structure/stairs/east
-	dir = EAST
-	bound_width = 64
-	bound_x = -32
-	pixel_x = -32
-
-/obj/structure/stairs/west
-	dir = WEST
-	bound_width = 64
+/obj/structure/stairs/lower
+	icon_state = "stairs_lower"
