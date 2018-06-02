@@ -1,0 +1,9 @@
+author: DoctorOctopus
+delete-after: True
+changes: 
+  - experiment: "To the new players reading this, our development is extremely active just really bad at doing changelogs. Check our github for real-time updates."
+  - rscadd: "Adds a hat, and eyeglass section to the loadout."
+  - rscadd: "Codes, Sprites, and Implements an ONI Badge, badge will be given to all ONI Staff."
+  - rscadd: "(most of) Nanotrasen has been phased out, replaced with http://halo.wikia.com/wiki/Misriah_Armory , an armaments manufacturer."
+  - tweak: "Changes all sprites to be MA Themed, renames all NT Objects"
+  

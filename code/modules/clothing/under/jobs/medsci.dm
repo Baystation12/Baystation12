@@ -27,8 +27,8 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/rank/scientist
-	name = "\improper NanoTrasen polo and pants"
-	desc = "A fashionable polo and pair of trousers made from patented biohazard-resistant synthetic fabrics. The colors denote the wearer as a member of NanoTrasen."
+	name = "\improper Misriah Armory polo and pants"
+	desc = "A fashionable polo and pair of trousers made from patented biohazard-resistant synthetic fabrics. The colors denote the wearer as a member of Misriah Armory."
 	icon_state = "ntsmock"
 	item_state = "w_suit"
 	worn_state = "ntsmock"
@@ -37,8 +37,8 @@
 	starting_accessories = list(/obj/item/clothing/accessory/nt_tunic)
 
 /obj/item/clothing/under/rank/scientist/executive
-	name = "\improper NanoTrasen executive polo and pants"
-	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a member of NanoTrasen's higher-ups."
+	name = "\improper Misriah Armory executive polo and pants"
+	desc = "A fashionable polo and pair of trousers made from expensive biohazard-resistant fabrics. The colors denote the wearer as a member of Misriah Armory's higher-ups."
 	icon_state = "ntsmockexec"
 	worn_state = "ntsmockexec"
 	starting_accessories = list(/obj/item/clothing/accessory/nt_tunic/exec)
