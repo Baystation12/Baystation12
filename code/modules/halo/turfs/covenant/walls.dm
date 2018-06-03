@@ -7,4 +7,4 @@
 	floor_type = /turf/simulated/floor/covenant
 
 /turf/simulated/wall/covenant/New(var/newloc)
-	..(newloc,"nanolaminate")
+	..(newloc,"nanolaminate","nanolaminate")
