@@ -7,7 +7,6 @@
 	icon_state = "snow"
 	temperature = T0C - 30
 	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
-	dynamic_lighting = 0
 
 /obj/effect/overmap/sector/marooned
 	name = "glacial planetoid"

@@ -8,4 +8,3 @@
 /area/icarus/open
 	name = "SEV Icarus surroundings"
 	icon_state = "open_area"
-	dynamic_lighting = 0
