@@ -88,6 +88,13 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA3)
 	attachment_slots = null
 	attachments_on_spawn = null
+	burst_delay = 1
+	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
+	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
+	firemodes = list(
+		list(mode_name="4-round bursts", burst=4, fire_delay=1, move_delay=6,    burst_accuracy=list(0,-1,-1,-2),       dispersion=list(0.6, 1.2, 1.6, 1.9)),
+		list(mode_name="short bursts", 	burst=6, fire_delay=1, move_delay=6,    burst_accuracy=list(-1,-1,-2,-2,-3,-3), dispersion=list(0.6, 1.0, 1.5, 1.5, 1.9, 1.9)),
+		)
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA3/update_icon()
 	. = ..()
@@ -95,6 +102,7 @@
 		icon_state = "MA3"
 	else
 		icon_state = "MA3_unloaded"
+
 
 //BR85 battle
 
