@@ -7,7 +7,7 @@
 
 	icon_base = "nanolaminate"
 	door_icon_base = "nanolaminate"
-	icon_reinf = "reinf_metal"
+	icon_reinf = "nanolaminate"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 
 	cut_delay = 120
@@ -19,7 +19,7 @@
 
 	integrity = 600
 
-	explosion_resistance = 45
+	explosion_resistance = 50
 
 	stack_type = /obj/item/stack/material/nanolaminate
 
