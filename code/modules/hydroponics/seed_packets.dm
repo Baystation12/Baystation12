@@ -278,3 +278,6 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/onionseed
 	seed_type = "onion"
+
+/obj/item/seeds/algaeseed
+	seed_type = "algae"

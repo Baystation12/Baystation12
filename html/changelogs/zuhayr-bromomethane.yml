@@ -1,0 +1,6 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Added methyl bromide, a fumigant gas that kills spiders."
+  - rscadd: "Added bromide, a toxic reagent, from which can be derived a liquid form of methyl bromide. Methyl bromide kills spiderlings and egg sacs when injected."
+  - rscadd: "Added algae to hydroponics. Algae produce liquid bromide and gaseous methyl bromide."
