@@ -16,10 +16,13 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "ac" = (
-/obj/structure/cable,
-/obj/machinery/power/terminal,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "ad" = (
 /turf/simulated/floor/reinforced/airless,
 /area/space)
@@ -1314,6 +1317,19 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
+"dq" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
 "dr" = (
 /obj/machinery/atmospherics/binary/pump/on{
 	dir = 1;
@@ -1565,7 +1581,7 @@
 /area/space)
 "ec" = (
 /turf/simulated/wall/titanium,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "ed" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/regular/open{
@@ -1801,15 +1817,15 @@
 /obj/structure/table/steel_reinforced,
 /obj/item/device/radio,
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "eI" = (
 /obj/machinery/computer/shuttle_control/explore/aquila,
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "eJ" = (
 /obj/item/modular_computer/console/preset/command,
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "eM" = (
 /obj/structure/sign/warning/high_voltage,
 /turf/simulated/wall/r_wall/hull,
@@ -2034,14 +2050,14 @@
 "fm" = (
 /obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "fn" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
 /obj/machinery/button/remote/blast_door{
-	id = "aquila_hatch";
-	name = "Starboard Hatch Control";
+	id = "aquila_shutters";
+	name = "Protective Shutters Control";
 	pixel_x = -32
 	},
 /obj/machinery/turretid/stun{
@@ -2052,7 +2068,7 @@
 	req_access = list(79)
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "fp" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -2213,10 +2229,10 @@
 	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "fK" = (
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "fL" = (
 /obj/structure/bed/chair{
 	dir = 8
@@ -2230,7 +2246,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "fP" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -2345,6 +2361,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
+"fX" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/turf/simulated/floor/airless,
+/area/aquila/medical)
 "fY" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -2558,13 +2582,13 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "gp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "gq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -2575,25 +2599,41 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "gr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "gs" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
 /obj/structure/table/steel_reinforced,
-/obj/structure/extinguisher_cabinet{
-	pixel_y = -32
-	},
 /obj/random/toolbox,
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "gt" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/turret_protected/ai_foyer)
@@ -2607,6 +2647,9 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/turret_protected/ai_outer_chamber)
+"gw" = (
+/turf/simulated/wall/titanium,
+/area/aquila/medical)
 "gz" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/bridge/aftstarboard)
@@ -2679,9 +2722,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "gF" = (
-/obj/structure/extinguisher_cabinet{
-	pixel_y = -32
-	},
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
 	},
@@ -2689,6 +2729,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -2906,11 +2949,11 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/airless,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "ha" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "hb" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Cockpit";
@@ -2918,8 +2961,13 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "hc" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/porta_turret{
@@ -2928,7 +2976,7 @@
 	lethal = 1
 	},
 /turf/simulated/floor/airless,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "hd" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/porta_turret{
@@ -2988,7 +3036,7 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "hn" = (
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -3215,26 +3263,46 @@
 	dir = 2
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "hM" = (
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
 /obj/random/snack,
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "hN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "hO" = (
 /obj/structure/bed/chair,
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "hP" = (
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -3533,13 +3601,13 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/aquila_hangar/start)
+/area/aquila/head)
 "iu" = (
 /obj/structure/toilet{
 	pixel_y = 12
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/aquila_hangar/start)
+/area/aquila/head)
 "iv" = (
 /obj/structure/table/standard{
 	name = "plastic table frame"
@@ -3556,18 +3624,23 @@
 	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "iw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "ix" = (
 /obj/structure/bed/chair{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "iy" = (
 /obj/structure/table/standard{
 	name = "plastic table frame"
@@ -3579,20 +3652,20 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "iz" = (
 /obj/machinery/firealarm{
 	dir = 2;
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "iA" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
+/obj/structure/bed/chair{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "iC" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -3893,8 +3966,12 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/aft)
 "je" = (
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/freezer,
-/area/aquila_hangar/start)
+/area/aquila/head)
 "jf" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -3904,7 +3981,7 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/aquila_hangar/start)
+/area/aquila/head)
 "jg" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/alarm{
@@ -3913,7 +3990,7 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/aquila_hangar/start)
+/area/aquila/head)
 "jh" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -3925,7 +4002,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "ji" = (
 /obj/machinery/papershredder,
 /turf/simulated/floor/plating,
@@ -3938,7 +4015,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "jk" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -3955,16 +4032,22 @@
 	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "jl" = (
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/machinery/light/small{
-	dir = 8
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "jm" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/portables_connector,
@@ -4265,7 +4348,7 @@
 	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/aquila_hangar/start)
+/area/aquila/head)
 "kc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4273,8 +4356,18 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -24
+	},
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/tiled/freezer,
-/area/aquila_hangar/start)
+/area/aquila/head)
 "kd" = (
 /obj/machinery/photocopier/faxmachine{
 	department = "XO"
@@ -4295,8 +4388,13 @@
 /obj/effect/floor_decal/corner/lime{
 	dir = 9
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "kf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -4304,8 +4402,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "kg" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
@@ -4316,14 +4419,24 @@
 /obj/effect/floor_decal/corner/lime{
 	dir = 10
 	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "kh" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "ki" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -4332,8 +4445,13 @@
 	dir = 4;
 	pixel_x = -22
 	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "kj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
 /turf/simulated/wall/r_wall/prepainted,
@@ -4670,22 +4788,18 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
-"kX" = (
-/obj/structure/bed/chair{
-	dir = 8
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "aquila_hatch";
-	name = "Starboard Hatch Control";
-	pixel_x = 32
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 4
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "kY" = (
 /obj/machinery/teleport/hub,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -4898,6 +5012,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
+"lp" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/turf/simulated/floor/airless,
+/area/aquila/secure_storage)
 "lq" = (
 /obj/machinery/door/airlock/command{
 	id_tag = "captaindoor";
@@ -5148,7 +5270,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "lZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5159,8 +5281,13 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 6
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "mb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9;
@@ -5173,23 +5300,18 @@
 	icon_state = "corner_white";
 	dir = 9
 	},
-/turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
-"mc" = (
-/obj/structure/bed/chair{
-	dir = 8
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
 	},
-/obj/machinery/alarm{
-	dir = 8;
-	icon_state = "alarm0";
-	pixel_x = 24
-	},
-/obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "md" = (
 /obj/machinery/teleport/station,
 /obj/structure/sign/kiddieplaque{
@@ -5840,8 +5962,12 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "nj" = (
 /obj/effect/floor_decal/scglogo{
 	icon_state = "0,1";
@@ -5852,10 +5978,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "nk" = (
-/obj/machinery/atmospherics/binary/pump/on{
-	dir = 8;
-	target_pressure = 200
-	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 8
@@ -5867,72 +5989,61 @@
 	name = "interior access button";
 	pixel_x = -24;
 	pixel_y = -24;
-	req_access = list(78)
+	req_access = newlist()
 	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_x = 0;
-	pixel_y = -24
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4;
+	icon_state = "intact"
 	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
-	},
-/turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
-"nl" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	dir = 4
-	},
-/obj/machinery/alarm{
-	dir = 1;
-	icon_state = "alarm0";
-	pixel_y = -22
-	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
-	},
-/turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
-"nm" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
+"nl" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
+"nm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10;
+	icon_state = "intact"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
 "nn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/light/small,
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "no" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/structure/table/rack,
-/obj/random/maintenance/solgov/clean,
-/obj/random/maintenance/solgov/clean,
-/obj/random/maintenance/solgov/clean,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 22
 	},
-/obj/structure/extinguisher_cabinet{
-	pixel_y = -32
+/obj/structure/bed/chair{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "np" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -5941,17 +6052,17 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "nq" = (
 /obj/structure/bed/chair{
 	dir = 8
 	},
 /obj/machinery/camera/network/aquila{
 	c_tag = "Aquila - Seating";
-	dir = 8
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "nr" = (
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -6605,6 +6716,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
+"oU" = (
+/obj/effect/wingrille_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/aquila/medical)
 "oW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -6623,90 +6738,83 @@
 /obj/structure/table/steel_reinforced,
 /obj/item/device/radio,
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "pa" = (
-/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/emcloset,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "pb" = (
-/obj/structure/table/steel_reinforced,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "pc" = (
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "pd" = (
-/obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
-"pe" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
-"pf" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
-"pg" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
+/area/aquila/airlock)
+"pf" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
+"ph" = (
+/obj/structure/handrai{
+	icon_state = "handrail";
 	dir = 8
 	},
-/obj/structure/table/standard,
-/obj/item/device/radio,
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
-	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
-"ph" = (
-/obj/structure/table/standard,
-/obj/random/solgov,
-/turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "pi" = (
 /obj/machinery/sleeper{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "pj" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "pk" = (
 /obj/machinery/bodyscanner{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "pl" = (
 /obj/machinery/body_scanconsole{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "pm" = (
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/machinery/atmospherics/portables_connector{
@@ -6985,7 +7093,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "pT" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
@@ -6993,15 +7101,25 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "pU" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "pW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -7013,8 +7131,23 @@
 	c_tag = "Aquila - Aft Passageway";
 	dir = 1
 	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	icon_state = "alarm0";
+	pixel_y = -22
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "pX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -7023,20 +7156,39 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
-/obj/machinery/light/small,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "pY" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/effect/floor_decal/industrial/warning,
-/obj/structure/cable{
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "pZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -7052,8 +7204,13 @@
 	icon_state = "warningcorner";
 	dir = 8
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "qb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -7062,16 +7219,21 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "qc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "qd" = (
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "qe" = (
 /obj/machinery/light{
 	dir = 4
@@ -7082,7 +7244,7 @@
 	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "qf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -7377,12 +7539,17 @@
 	pixel_x = -22
 	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "qE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "qF" = (
 /obj/structure/table/rack,
 /obj/random/tech_supply,
@@ -7399,7 +7566,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "qH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/table/rack,
@@ -7416,13 +7583,13 @@
 	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "qI" = (
 /obj/machinery/sleeper{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "qJ" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7795,42 +7962,53 @@
 /obj/random/maintenance/solgov/clean,
 /obj/random/maintenance/solgov/clean,
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "rw" = (
 /obj/structure/table/rack,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/structure/extinguisher_cabinet{
-	pixel_y = -32
-	},
 /obj/machinery/camera/network/aquila{
 	c_tag = "Aquila - Storage";
 	dir = 1
 	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "rx" = (
 /obj/machinery/atmospherics/pipe/tank/air{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "ry" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
-	icon_state = "intact";
-	dir = 10
-	},
 /obj/machinery/light/small{
 	dir = 1
 	},
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "rD" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -7850,7 +8028,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "rE" = (
 /obj/structure/table/standard,
 /obj/item/weapon/defibrillator/loaded,
@@ -7859,7 +8037,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "rF" = (
 /obj/machinery/light,
 /turf/simulated/floor/bluegrid,
@@ -8398,15 +8576,26 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
-"so" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
-	dir = 4
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
+/turf/simulated/floor/tiled,
+/area/aquila/secure_storage)
+"so" = (
 /obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	icon_state = "intact";
+	dir = 10
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "st" = (
 /obj/structure/sink{
 	icon_state = "sink";
@@ -8414,8 +8603,14 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/cyan,
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "su" = (
 /obj/structure/table/standard,
 /obj/item/clothing/gloves/latex,
@@ -8425,7 +8620,7 @@
 	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "sv" = (
 /obj/item/device/radio/intercom/locked/ai_private{
 	dir = 1;
@@ -8706,7 +8901,7 @@
 	pixel_x = -24
 	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/secure_storage)
 "sV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -8714,8 +8909,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/secure_storage)
 "sW" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -8724,15 +8924,26 @@
 	dir = 8;
 	pixel_x = 22
 	},
+/obj/structure/handrai,
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/secure_storage)
 "sX" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/tank/air{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "sY" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan,
 /obj/item/device/radio/intercom{
@@ -8740,7 +8951,7 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "tb" = (
 /obj/structure/cable/green{
 	d2 = 4;
@@ -8761,7 +8972,7 @@
 "tc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "td" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/portables_connector{
@@ -8769,7 +8980,7 @@
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "te" = (
 /obj/structure/closet/medical_wall{
 	pixel_x = -32
@@ -8783,7 +8994,7 @@
 /obj/item/clothing/mask/breath/medical,
 /obj/structure/iv_drip,
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "tf" = (
 /obj/structure/table/standard,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
@@ -8792,7 +9003,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "tg" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/bridge/foreport)
@@ -9042,13 +9253,13 @@
 	pixel_x = -6;
 	pixel_y = 24
 	},
+/obj/machinery/computer/rdconsole,
 /obj/machinery/button/windowtint{
 	id = "rd_windows";
 	pixel_x = 6;
 	pixel_y = 24;
 	range = 11
 	},
-/obj/machinery/computer/rdconsole,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
 "tE" = (
@@ -9086,18 +9297,18 @@
 	pixel_y = 1
 	},
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/secure_storage)
 "tJ" = (
 /obj/structure/table/rack,
 /obj/random/solgov,
 /obj/random/solgov,
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/secure_storage)
 "tK" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/guncabinet/sidearm/small,
 /turf/simulated/floor/tiled,
-/area/aquila_hangar/start)
+/area/aquila/secure_storage)
 "tL" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
@@ -9105,23 +9316,23 @@
 	health = 1e+006
 	},
 /turf/simulated/floor/airless,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "tM" = (
 /obj/structure/table/standard,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/stack/medical/advanced/bruise_pack,
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "tN" = (
 /obj/machinery/optable,
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "tO" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "tP" = (
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -9492,7 +9703,7 @@
 	dir = 2
 	},
 /turf/simulated/floor/airless,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "ux" = (
 /obj/structure/closet/toolcloset,
 /obj/random/action_figure,
@@ -9828,6 +10039,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
+"vn" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/passenger)
 "vp" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10347,6 +10566,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarbridge)
+"wr" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/passenger)
 "ws" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -11076,8 +11303,11 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
+/obj/machinery/portable_atmospherics/canister/air/airlock{
+	start_pressure = 1900
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "xR" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/cable/yellow{
@@ -11376,7 +11606,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "zd" = (
 /obj/machinery/newscaster{
 	pixel_x = 32
@@ -11471,13 +11701,12 @@
 	dir = 9;
 	icon_state = "intact"
 	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
+/obj/machinery/power/terminal{
+	dir = 4
 	},
+/obj/structure/cable,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Ad" = (
 /obj/machinery/power/apc{
 	dir = 4;
@@ -11517,15 +11746,17 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ag" = (
-/obj/machinery/door/blast/regular{
+/obj/effect/wingrille_spawn/reinforced/full,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
 	dir = 4;
-	id = "aquila_hatch";
-	name = "Starboard Hatch"
+	icon_state = "pdoor0";
+	id = "aquila_shutters";
+	name = "Protective Shutters";
+	opacity = 0
 	},
-/obj/machinery/shield_diffuser,
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "Ah" = (
 /obj/structure/bed/chair/comfy/black{
 	icon_state = "comfychair_preview";
@@ -11587,6 +11818,9 @@
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
+"AN" = (
+/turf/simulated/floor/tiled/dark,
+/area/aquila/mess)
 "Bb" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -11609,12 +11843,9 @@
 /obj/machinery/power/smes/buildable/preset/torch/shuttle{
 	RCon_tag = "Shuttle - Aquila"
 	},
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
-	},
+/obj/structure/cable/cyan,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Bd" = (
 /obj/machinery/power/apc{
 	dir = 1;
@@ -11706,6 +11937,9 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
+"BO" = (
+/turf/simulated/wall/titanium,
+/area/aquila/secure_storage)
 "Cb" = (
 /obj/effect/shuttle_landmark/torch/deck5/aquila,
 /turf/space,
@@ -11730,7 +11964,7 @@
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Cd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -11761,8 +11995,13 @@
 	dir = 4
 	},
 /obj/machinery/hologram/holopad/longrange,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/mess)
 "Ch" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -11807,6 +12046,18 @@
 "Cs" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/security/bridgecheck)
+"CD" = (
+/obj/effect/wingrille_spawn/reinforced/full,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id = "aquila_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/aquila/airlock)
 "CN" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/bridge/aftport)
@@ -11835,8 +12086,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/freezer,
-/area/aquila_hangar/start)
+/area/aquila/head)
 "Dc" = (
 /obj/machinery/light/small,
 /obj/machinery/meter,
@@ -11850,7 +12106,7 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Dd" = (
 /obj/machinery/firealarm{
 	dir = 1;
@@ -11932,9 +12188,23 @@
 	},
 /turf/simulated/floor/plating,
 /area/bridge/disciplinary_board_room)
+"Dl" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/white,
+/area/aquila/medical)
+"Dw" = (
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
 "DN" = (
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/bridge/aft)
+"DR" = (
+/turf/simulated/wall/titanium,
+/area/aquila/head)
 "Eb" = (
 /obj/machinery/camera/network/engineering{
 	c_tag = "Shield Generator - Bridge Deck"
@@ -12035,6 +12305,25 @@
 	},
 /turf/simulated/floor/tiled,
 /area/maintenance/bridge/aftport)
+"EE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -24
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
 "EN" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/structure/table/glass,
@@ -12072,10 +12361,23 @@
 	frequency = 1331;
 	id_tag = "aquila_shuttle_sensor_external";
 	pixel_x = 25;
-	pixel_y = 0
+	pixel_y = -6
+	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 8
+	},
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1331;
+	master_tag = "aquila_shuttle";
+	name = "exterior access button";
+	pixel_x = 23;
+	pixel_y = 6;
+	req_one_access = newlist()
 	},
 /turf/simulated/floor/airless,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Fd" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 8
@@ -12113,16 +12415,16 @@
 /turf/simulated/floor/plating,
 /area/bridge/storage)
 "Fh" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4
+/obj/machinery/alarm{
+	frequency = 1439;
+	pixel_y = 23;
+	req_one_access = list(201)
 	},
-/obj/structure/sign/warning/airlock{
-	name = "\improper EXTERNAL HATCH";
-	pixel_x = 0;
-	pixel_y = 32
+/obj/structure/bed/chair{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "Fi" = (
 /obj/structure/dispenser/oxygen,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -12143,6 +12445,9 @@
 "Fp" = (
 /turf/simulated/wall/r_wall/hull,
 /area/bridge/storage)
+"FK" = (
+/turf/simulated/wall/titanium,
+/area/aquila/airlock)
 "Gb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12169,7 +12474,7 @@
 	dir = 4
 	},
 /turf/simulated/wall/titanium,
-/area/aquila_hangar/start)
+/area/aquila/head)
 "Gd" = (
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/co)
@@ -12400,8 +12705,9 @@
 /obj/machinery/oxygen_pump{
 	pixel_y = 32
 	},
+/obj/structure/handrai,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Hh" = (
 /obj/effect/wingrille_spawn/reinforced/polarized{
 	id = "co_windows"
@@ -12705,8 +13011,15 @@
 /area/bridge/meeting_room)
 "Ib" = (
 /obj/effect/wingrille_spawn/reinforced/full,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id = "aquila_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/cockpit)
 "Ic" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/structure/bed/chair{
@@ -13133,8 +13446,9 @@
 /obj/machinery/oxygen_pump{
 	pixel_y = 32
 	},
+/obj/structure/handrai,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Jh" = (
 /obj/structure/table/woodentable,
 /obj/machinery/newscaster/security_unit{
@@ -13151,6 +13465,21 @@
 /obj/structure/table/woodentable,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"JA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled,
+/area/aquila/storage)
 "JD" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -13177,10 +13506,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"JV" = (
+/turf/simulated/floor/tiled/dark,
+/area/aquila/passenger)
 "Kc" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /turf/simulated/wall/titanium,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Kd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -13361,8 +13693,12 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Lh" = (
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
@@ -13383,8 +13719,18 @@
 /obj/item/device/radio/beacon/anchored{
 	level = 1
 	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Lj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -13437,8 +13783,9 @@
 	frequency = 1331;
 	id_tag = "aquila_shuttle_pump"
 	},
+/obj/structure/handrai,
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Md" = (
 /obj/structure/table/steel,
 /obj/item/weapon/paper_bin{
@@ -13539,6 +13886,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"Mw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/mess)
 "MF" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -13555,6 +13908,15 @@
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
+"MU" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
 "Nb" = (
 /obj/machinery/requests_console{
 	announcementConsole = 1;
@@ -13589,8 +13951,12 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Nd" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -13672,8 +14038,13 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Oc" = (
 /obj/structure/sign/solgov{
 	pixel_x = 32;
@@ -13764,6 +14135,14 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"Ok" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/wall/titanium,
+/area/aquila/maintenance)
 "Ov" = (
 /obj/structure/table/steel,
 /obj/item/modular_computer/tablet/lease/preset/command,
@@ -13783,8 +14162,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/passenger)
 "Pc" = (
 /obj/structure/cable{
 	d2 = 2;
@@ -13881,21 +14265,37 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
-"Qb" = (
-/obj/machinery/door/airlock/hatch{
-	name = "Passageway";
-	req_access = list()
+"PC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -26
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
+"Qb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/cable{
+/obj/effect/shuttle_landmark/torch/hangar/aquila,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/shuttle_landmark/torch/hangar/aquila,
+/obj/machinery/hologram/holopad/longrange,
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Qc" = (
 /obj/machinery/door/airlock/glass_command{
 	name = "Auxiliary E.V.A.";
@@ -14003,13 +14403,39 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"Qz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/handrai,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
+"QF" = (
+/turf/simulated/wall/titanium,
+/area/aquila/passenger)
+"QL" = (
+/turf/simulated/wall/titanium,
+/area/aquila/storage)
 "Rb" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Infirmary";
 	req_access = list()
 	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "Rc" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -14140,8 +14566,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
-/area/aquila_hangar/start)
+/area/aquila/storage)
 "Sc" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
@@ -14274,12 +14705,30 @@
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
+"SA" = (
+/obj/effect/wingrille_spawn/reinforced/full,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id = "aquila_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/aquila/cockpit)
 "SE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"SQ" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 2
+	},
+/turf/simulated/floor/airless,
+/area/aquila/medical)
 "Tb" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Infirmary";
@@ -14292,7 +14741,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/aquila_hangar/start)
+/area/aquila/medical)
 "Tc" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -14463,13 +14912,14 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Uc" = (
 /obj/machinery/recharger/wallcharger{
 	pixel_x = 0;
@@ -14608,12 +15058,16 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4;
+	icon_state = "intact"
+	},
 /obj/structure/cable/cyan{
-	d2 = 2;
-	icon_state = "0-2"
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Vc" = (
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -14673,7 +15127,7 @@
 	id_tag = "aquila_shuttle_outer";
 	locked = 1;
 	name = "Aquila External Access";
-	req_access = list(78)
+	req_access = newlist()
 	},
 /obj/machinery/shield_diffuser,
 /obj/structure/cable{
@@ -14683,7 +15137,7 @@
 	pixel_x = 0
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Vh" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/structure/sign/goldenplaque/medical{
@@ -14720,6 +15174,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"Vs" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 2
+	},
+/turf/simulated/floor/airless,
+/area/aquila/secure_storage)
 "Wa" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -14756,13 +15216,22 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/structure/cable{
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9;
+	icon_state = "intact"
+	},
+/obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Wc" = (
 /obj/effect/floor_decal/corner/blue/three_quarters{
 	dir = 8
@@ -14811,7 +15280,7 @@
 	id_tag = "aquila_shuttle_inner";
 	locked = 1;
 	name = "Aquila External Access";
-	req_access = list(78)
+	req_access = newlist()
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -14820,7 +15289,7 @@
 	pixel_x = 0
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Wh" = (
 /obj/machinery/firealarm{
 	dir = 1;
@@ -14858,6 +15327,9 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"Ww" = (
+/turf/simulated/wall/titanium,
+/area/aquila/maintenance)
 "Xb" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -14866,8 +15338,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
+/obj/structure/handrai,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Xc" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
@@ -14963,10 +15440,14 @@
 "Xp" = (
 /obj/structure/sign/solgov,
 /turf/simulated/wall/titanium,
-/area/aquila_hangar/start)
+/area/aquila/airlock)
 "Xz" = (
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/heads/cobed)
+"XI" = (
+/obj/effect/wingrille_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/aquila/airlock)
 "Yb" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/power/port_gen/pacman{
@@ -14978,7 +15459,7 @@
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Yc" = (
 /obj/machinery/papershredder,
 /obj/machinery/alarm{
@@ -15059,15 +15540,23 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"YY" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/mess)
 "Zb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
-/area/aquila_hangar/start)
+/area/aquila/maintenance)
 "Zc" = (
 /obj/machinery/light{
 	dir = 1
@@ -15170,7 +15659,14 @@
 	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/freezer,
-/area/aquila_hangar/start)
+/area/aquila/head)
+"ZA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/handrai,
+/turf/simulated/floor/tiled/dark,
+/area/aquila/airlock)
 "ZQ" = (
 /obj/random/closet,
 /obj/random/maintenance/solgov/clean,
@@ -32452,16 +32948,16 @@ Fc
 DN
 Ug
 DN
-ec
-ec
-ec
-ec
-ec
-ec
-ec
-ec
-ec
-ec
+QL
+QL
+QL
+QL
+QL
+BO
+BO
+BO
+BO
+BO
 vL
 cP
 ah
@@ -32647,23 +33143,23 @@ dy
 ad
 ad
 gY
-ec
-ec
-ec
+DR
+DR
+DR
 Gc
 Xp
 Vg
-Ib
-ec
+CD
+QL
 oZ
 pS
 qD
 rv
-ec
+BO
 sU
 tI
-tL
-uw
+lp
+Vs
 vL
 cP
 ah
@@ -32849,23 +33345,23 @@ fi
 ad
 ad
 gY
-ec
+DR
 it
 je
 Zj
 Kc
 Hg
 Nc
-ec
+QL
 pa
 pT
 qE
-qE
+JA
 sn
 sV
 tJ
-tL
-uw
+lp
+Vs
 vL
 cP
 ah
@@ -33051,23 +33547,23 @@ ad
 ad
 fj
 fk
-ec
-ec
+DR
+DR
 jf
 kb
-ec
+FK
 Mc
 Lg
-ec
+QL
 pb
 pU
 qF
 rw
-ec
+BO
 sW
 tK
-tL
-uw
+lp
+Vs
 vL
 cP
 ah
@@ -33253,23 +33749,23 @@ fj
 eb
 fk
 gZ
-ec
+DR
 iu
 jg
 kc
-ec
+FK
 Jg
 ni
-ec
-ec
+QL
+QL
 Sb
-ec
-ec
-ec
-ec
-ec
-ec
-ec
+QL
+QL
+BO
+BO
+BO
+BO
+BO
 vL
 cP
 ah
@@ -33455,21 +33951,21 @@ fk
 ec
 ec
 ec
-ec
-ec
-ec
+DR
+DR
+DR
 Db
-ec
-ha
+FK
+XI
 Wg
-ec
+FK
 pc
-kf
-ec
+PC
+Ww
 xQ
 rx
 sX
-ec
+Ww
 uv
 uZ
 nE
@@ -33652,8 +34148,8 @@ aI
 cP
 dA
 ec
-Ib
-Ib
+SA
+SA
 ec
 go
 ec
@@ -33661,18 +34157,18 @@ hL
 iv
 jh
 ke
-ha
+XI
 lX
 nk
-ec
+dq
 pd
 pW
-ec
+Ok
 ry
 so
 sY
-ec
-ec
+Ww
+Ww
 vL
 ad
 cP
@@ -33860,16 +34356,16 @@ fJ
 gp
 ha
 hM
-fK
-gp
+AN
+Mw
 kf
-ha
-gr
+XI
+ZA
 nl
-ec
-pe
+Dw
+Dw
 pX
-ec
+Ww
 Vb
 Zb
 Ac
@@ -34263,17 +34759,17 @@ fm
 fL
 gr
 ha
-fK
+YY
 ix
 jj
-fK
-ha
-kf
+AN
+XI
+Qz
 nn
-ec
-pg
+Dw
+Dw
 pZ
-ec
+Ww
 Xb
 tc
 Cc
@@ -34460,8 +34956,8 @@ aI
 cP
 dA
 ec
-Ib
-Ib
+SA
+SA
 ec
 gs
 ec
@@ -34469,18 +34965,18 @@ hO
 iy
 jk
 kh
-ha
+XI
 lZ
 no
-ec
+MU
 ph
-kf
-ec
+EE
+Ww
 Yb
 zc
 Dc
-ec
-ec
+Ww
+Ww
 vL
 ad
 cP
@@ -34667,21 +35163,21 @@ nr
 ec
 ec
 ec
-ec
-ec
-ec
-ec
-ec
+QF
+QF
+QF
+QF
+QF
 Pb
-ec
-ec
-ha
+QF
+gw
+oU
 Tb
-ec
-ec
-ec
+gw
+gw
+gw
 td
-ec
+Ww
 uv
 vb
 vK
@@ -34869,23 +35365,23 @@ fp
 eg
 nr
 hc
-ec
+QF
 hk
 jl
 ki
 kW
 mb
 np
-ec
+gw
 pi
 qb
 qH
 rD
-ec
-ec
-ec
-ec
-ec
+gw
+gw
+gw
+gw
+gw
 vL
 cP
 ah
@@ -35071,23 +35567,23 @@ ad
 ad
 fp
 nr
-ec
+QF
 iz
-fK
-fK
-fK
-fK
-fK
+JV
+JV
+JV
+wr
+vn
 Rb
 pj
 qc
-qd
-qd
+Dl
+Dl
 st
 te
 tM
-tL
-uw
+fX
+SQ
 vL
 cP
 ah
@@ -35273,14 +35769,14 @@ ad
 ad
 ad
 gY
-ec
+QF
 Fh
 iA
 iA
-kX
-mc
+iA
+iA
 nq
-ec
+gw
 pk
 qd
 qd
@@ -35288,8 +35784,8 @@ qd
 qd
 qd
 tN
-tL
-uw
+fX
+SQ
 vL
 cP
 ah
@@ -35475,14 +35971,14 @@ ad
 ad
 ad
 gY
-Xp
+QF
+QF
+QF
 Ag
 Ag
-Ag
-ec
-ec
-ec
-ec
+QF
+QF
+gw
 pl
 qe
 qI
@@ -35490,8 +35986,8 @@ rE
 su
 tf
 tO
-tL
-uw
+fX
+SQ
 vL
 cP
 ah
@@ -35684,16 +36180,16 @@ eg
 eg
 eg
 nr
-ec
-ec
-ec
-ec
-ec
-ec
-ec
-ec
-ec
-ec
+gw
+gw
+gw
+gw
+gw
+gw
+gw
+gw
+gw
+gw
 vL
 cP
 ah
