@@ -77,6 +77,14 @@
 	setOxyLoss(0)
 	setToxLoss(0)
 
+/mob/living/bot/adjustBruteLoss(var/amount)
+	if(amount > 0)
+		health -= amount
+
+/mob/living/bot/adjustFireLoss(var/amount)
+	if(amount > 0)
+		health -= amount
+
 /mob/living/bot/death()
 	explode()
 

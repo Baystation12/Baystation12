@@ -127,6 +127,11 @@ var/list/flooring_types
 	icon_base = "white"
 	build_type = /obj/item/stack/tile/floor_white
 
+/decl/flooring/tiling/brown
+	desc = "How sterile."
+	icon_base = "brown"
+	build_type = /obj/item/stack/tile/floor_white
+
 /decl/flooring/tiling/white/mono
 	icon_base = "monotile"
 

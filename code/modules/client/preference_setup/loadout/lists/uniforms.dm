@@ -8,10 +8,10 @@
 	path = /obj/item/clothing/under/color
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/uniform/shortjumpskirt
-	display_name = "short jumpskirt, colour select"
-	path = /obj/item/clothing/under/shortjumpskirt
-	flags = GEAR_HAS_COLOR_SELECTION
+// /datum/gear/uniform/shortjumpskirt
+// 	display_name = "short jumpskirt, colour select"
+// 	path = /obj/item/clothing/under/shortjumpskirt
+// 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/roboticist_skirt
 	display_name = "skirt, roboticist"
@@ -27,19 +27,14 @@
 	suits += /obj/item/clothing/under/sl_suit
 	suits += /obj/item/clothing/under/suit_jacket
 	suits += /obj/item/clothing/under/lawyer/blue
-	suits += /obj/item/clothing/under/suit_jacket/burgundy
-	suits += /obj/item/clothing/under/suit_jacket/charcoal
-	suits += /obj/item/clothing/under/suit_jacket/checkered
 	suits += /obj/item/clothing/under/suit_jacket/really_black
 	suits += /obj/item/clothing/under/suit_jacket/female
 	suits += /obj/item/clothing/under/gentlesuit
-	suits += /obj/item/clothing/under/suit_jacket/navy
 	suits += /obj/item/clothing/under/lawyer/oldman
 	suits += /obj/item/clothing/under/lawyer/purpsuit
 	suits += /obj/item/clothing/under/suit_jacket/red
 	suits += /obj/item/clothing/under/lawyer/red
 	suits += /obj/item/clothing/under/lawyer/black
-	suits += /obj/item/clothing/under/suit_jacket/tan
 	suits += /obj/item/clothing/under/scratch
 	suits += /obj/item/clothing/under/lawyer/bluesuit
 	suits += /obj/item/clothing/under/rank/internalaffairs/plain
@@ -76,16 +71,6 @@
 	dresses += /obj/item/clothing/under/dress/dress_purple
 	dresses += /obj/item/clothing/under/sundress
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(dresses)
-
-/datum/gear/uniform/cheongsam
-	display_name = "cheongsam, colour select"
-	path = /obj/item/clothing/under/cheongsam
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/uniform/abaya
-	display_name = "abaya, colour select"
-	path = /obj/item/clothing/under/abaya
-	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/skirt
 	display_name = "skirt selection"
@@ -127,10 +112,10 @@
 	path = /obj/item/clothing/under/shorts/
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/uniform/turtleneck
-	display_name = "sweater, colour select"
-	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
-	flags = GEAR_HAS_COLOR_SELECTION
+// /datum/gear/uniform/turtleneck
+// 	display_name = "sweater, colour select"
+// 	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
+// 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/corporate
 	display_name = "corporate uniform selection"
@@ -139,15 +124,15 @@
 /datum/gear/uniform/corporate/New()
 	..()
 	var/corps = list()
-	corps += /obj/item/clothing/under/mbill
-	corps += /obj/item/clothing/under/saare
-	corps += /obj/item/clothing/under/aether
-	corps += /obj/item/clothing/under/hephaestus
-	corps += /obj/item/clothing/under/pcrc
-	corps += /obj/item/clothing/under/wardt
-	corps += /obj/item/clothing/under/grayson
-	corps += /obj/item/clothing/under/focal
-	corps += /obj/item/clothing/under/rank/ntwork
+	// corps += /obj/item/clothing/under/mbill
+	// corps += /obj/item/clothing/under/saare
+	// corps += /obj/item/clothing/under/aether
+	// corps += /obj/item/clothing/under/hephaestus
+	// corps += /obj/item/clothing/under/pcrc
+	// corps += /obj/item/clothing/under/wardt
+	// corps += /obj/item/clothing/under/grayson
+	// corps += /obj/item/clothing/under/focal
+	// corps += /obj/item/clothing/under/rank/ntwork
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(corps)
 
 /datum/gear/uniform/sterile
@@ -158,7 +143,7 @@
 	display_name = "hazard jumpsuit"
 	path = /obj/item/clothing/under/hazard
 
-/datum/gear/uniform/frontier
-	display_name = "frontier clothes"
-	path = /obj/item/clothing/under/frontier
+// /datum/gear/uniform/frontier
+// 	display_name = "frontier clothes"
+// 	path = /obj/item/clothing/under/frontier
 

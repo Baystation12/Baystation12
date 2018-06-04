@@ -64,7 +64,7 @@
 		/obj/item/clothing/under/rank/medical,
 		/obj/item/clothing/under/rank/nurse,
 		/obj/item/clothing/under/rank/orderly,
-		/obj/item/clothing/under/rank/rosa,
+		///obj/item/clothing/under/rank/rosa,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/white,

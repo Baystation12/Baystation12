@@ -5,11 +5,6 @@
 	slot = slot_w_uniform
 	sort_category = "Uniforms and Casual Dress"
 
-/datum/gear/uniform/cheongsam
-	display_name = "cheongsam"
-	path = /obj/item/clothing/under/cheongsam
-	flags = GEAR_HAS_COLOR_SELECTION
-
 /datum/gear/uniform/kilt
 	display_name = "kilt"
 	path = /obj/item/clothing/under/kilt
@@ -18,10 +13,10 @@
 	display_name = "jumpskirt, black"
 	path = /obj/item/clothing/under/blackjumpskirt
 
-/datum/gear/uniform/shortjumpskirt
-    display_name = "short jumpskirt"
-    path = /obj/item/clothing/under/shortjumpskirt
-    flags = GEAR_HAS_COLOR_SELECTION
+// /datum/gear/uniform/shortjumpskirt
+//     display_name = "short jumpskirt"
+//     path = /obj/item/clothing/under/shortjumpskirt
+//     flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/uniform/jumpsuit
 	display_name = "generic jumpsuits"
@@ -46,19 +41,14 @@
 	suits["amish suit"] = /obj/item/clothing/under/sl_suit
 	suits["black suit"] = /obj/item/clothing/under/suit_jacket
 	suits["blue suit"] = /obj/item/clothing/under/lawyer/blue
-	suits["burgundy suit"] = /obj/item/clothing/under/suit_jacket/burgundy
-	suits["charcoal suit"] = /obj/item/clothing/under/suit_jacket/charcoal
-	suits["checkered suit"] = /obj/item/clothing/under/suit_jacket/checkered
 	suits["executive suit"] = /obj/item/clothing/under/suit_jacket/really_black
 	suits["female executive suit"] = /obj/item/clothing/under/suit_jacket/female
 	suits["gentleman suit"] = /obj/item/clothing/under/gentlesuit
-	suits["navy suit"] = /obj/item/clothing/under/suit_jacket/navy
 	suits["old man suit"] = /obj/item/clothing/under/lawyer/oldman
 	suits["purple suit"] = /obj/item/clothing/under/lawyer/purpsuit
 	suits["red suit"] = /obj/item/clothing/under/suit_jacket/red
 	suits["red lawyer suit"] = /obj/item/clothing/under/lawyer/red
 	suits["shiny black suit"] = /obj/item/clothing/under/lawyer/black
-	suits["tan suit"] = /obj/item/clothing/under/suit_jacket/tan
 	suits["white suit"] = /obj/item/clothing/under/scratch
 	suits["white-blue suit"] = /obj/item/clothing/under/lawyer/bluesuit
 	suits["formal outfit"] = /obj/item/clothing/under/rank/internalaffairs/plain
@@ -136,7 +126,7 @@
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
 
-/datum/gear/uniform/turtleneck
-	display_name = "sweater"
-	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
-	flags = GEAR_HAS_COLOR_SELECTION
+// /datum/gear/uniform/turtleneck
+// 	display_name = "sweater"
+// 	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
+// 	flags = GEAR_HAS_COLOR_SELECTION

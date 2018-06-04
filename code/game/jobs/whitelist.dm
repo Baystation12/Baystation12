@@ -59,8 +59,10 @@ var/list/whitelist = list()
 		return 0
 	if(!config.usealienwhitelist)
 		return 1
-	if(check_rights(R_ADMIN, 0, M))
-		return 1
+
+	var/client/C = M.client
+	if (C && SpeciesIngameWhitelist_CheckPlayer(C))
+		return TRUE
 
 	if(istype(species,/datum/language))
 		var/datum/language/L = species

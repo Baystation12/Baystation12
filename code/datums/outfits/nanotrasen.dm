@@ -25,7 +25,7 @@
 
 /decl/hierarchy/outfit/nanotrasen/captain
 	name = "NanoTrasen Captain"
-	uniform = /obj/item/clothing/under/rank/centcom_captain
+	uniform = /obj/item/clothing/under/rank/centcom/captain
 	l_ear = /obj/item/device/radio/headset/heads/captain
 	head = /obj/item/clothing/head/beret/centcom/captain
 	belt = /obj/item/weapon/gun/energy
@@ -36,7 +36,7 @@
 	head = /obj/item/clothing/head/centhat
 	mask = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/swat
-	uniform = /obj/item/clothing/under/rank/centcom_captain
+	uniform = /obj/item/clothing/under/rank/centcom/captain
 	suit = /obj/item/clothing/suit/armor/bulletproof
 	gloves = /obj/item/clothing/gloves/thick/swat
 	l_ear =  /obj/item/device/radio/headset/heads/captain

@@ -33,7 +33,7 @@ var/datum/antagonist/deathsquad/deathsquad
 		return
 
 	if (player.mind == leader)
-		player.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(player), slot_w_uniform)
+		player.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom/officer(player), slot_w_uniform)
 	else
 		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/green(player), slot_w_uniform)
 

@@ -163,6 +163,11 @@
 	icon_state = "white"
 	initial_flooring = /decl/flooring/tiling/white
 
+/turf/simulated/floor/tiled/brown
+	name = "brown tile floor"
+	icon_state = "brown"
+	initial_flooring = /decl/flooring/tiling/brown
+
 /turf/simulated/floor/tiled/freezer
 	name = "tiles"
 	icon_state = "freezer"

@@ -394,6 +394,211 @@
     name = "\improper Ghetto Casino"
     icon_state = "ghettocasino"
 
+/area/maintenance/underground/central_one
+	name = "\improper Underground Central Primary Hallway SE"
+	icon_state = "uhall1"
+
+/area/maintenance/underground/central_two
+	name = "\improper Underground Central Primary Hallway SW"
+	icon_state = "uhall2"
+
+/area/maintenance/underground/central_three
+	name = "\improper Underground Central Primary Hallway NW"
+	icon_state = "uhall3"
+
+/area/maintenance/underground/central_four
+	name = "\improper Underground Central Primary Hallway NE"
+	icon_state = "uhall4"
+
+/area/maintenance/underground/central_five
+	name = "\improper Underground Central Primary Hallway E"
+	icon_state = "uhall5"
+
+/area/maintenance/underground/central_six
+	name = "\improper Underground Central Primary Hallway N"
+	icon_state = "uhall6"
+
+/area/maintenance/underground/cargo
+	name = "\improper Underground Cargo Maintenance"
+	icon_state = "ucargo"
+
+/area/maintenance/underground/atmospherics
+	name = "\improper Underground Atmospherics Maintenance"
+	icon_state = "uatmos"
+
+
+/area/maintenance/underground/arrivals
+	name = "\improper Underground Arrivals Maintenance"
+	icon_state = "uarrival"
+
+/area/maintenance/underground/locker_room
+	name = "\improper Underground Locker Room Maintenance"
+	icon_state = "ulocker"
+
+/area/maintenance/underground/EVA
+	name = "\improper Underground EVA Maintenance"
+	icon_state = "uEVA"
+
+/area/maintenance/underground/security
+	name = "\improper Underground Security Maintenance"
+	icon_state = "usecurity"
+
+/area/maintenance/underground/security_port
+	name = "\improper Underground Security Port Maintenance"
+	icon_state = "usecurityport"
+
+/area/maintenance/underground/security_main
+	name = "\improper Underground Security Main Maintenance"
+	icon_state = "usecuritymain"
+
+/area/maintenance/underground/security_lobby
+	name = "\improper Underground Security Lobby Maintenance"
+	icon_state = "usecuritylobby"
+
+/area/maintenance/underground/security_firefighting
+	name = "\improper Underground Security Firefighting Equipment"
+	icon_state = "usecurityfirefighting"
+
+/area/maintenance/underground/security_meeting
+	name = "\improper Underground Security Meeting Maintenance"
+	icon_state = "usecuritymeeting"
+
+/area/maintenance/underground/engineering
+	name = "\improper Underground Engineering Maintenance"
+	icon_state = "uengineering"
+
+/area/maintenance/underground/research
+	name = "\improper Underground Research Maintenance"
+	icon_state = "uresearch"
+
+/area/maintenance/underground/robotics_lab
+	name = "\improper Underground Robotics Lab Maintenance"
+	icon_state = "urobotics"
+
+/area/maintenance/underground/research_port
+	name = "\improper Underground Research Port Maintenance"
+	icon_state = "uresearchport"
+
+/area/maintenance/underground/research_shuttle
+	name = "\improper Underground Research Shuttle Dock Maintenance"
+	icon_state = "uresearchshuttle"
+
+/area/maintenance/underground/research_starboard
+	name = "\improper Underground Research Maintenance - Starboard"
+	icon_state = "uresearchstarboard"
+
+/area/maintenance/underground/research_xenobiology
+	name = "\improper Underground Research Xenobiology Maintenance"
+	icon_state = "uresearchxeno"
+
+/area/maintenance/underground/research_misc
+	name = "\improper Underground Research Miscellaneous Maintenance"
+	icon_state = "uresearchmisc"
+
+/area/maintenance/underground/civilian_NE
+	name = "\improper Underground Civilian NE Maintenance"
+	icon_state = "ucivne"
+
+/area/maintenance/underground/medbay
+	name = "\improper Underground Medbay Maintenance"
+	icon_state = "umedbay"
+
+/area/maintenance/underground/dormitories
+	name = "\improper Underground Dormitories Maintenance"
+	icon_state = "udorm"
+
+/area/maintenance/underground/warehouse
+	name = "\improper Underground Warehouse Maintenance"
+	icon_state = "uwarehouse"
+
+/area/maintenance/underground/vault
+	name = "\improper Underground Vault Maintenance"
+	icon_state = "uvault"
+
+/area/maintenance/underground/tool_storage
+	name = "\improper Underground Tool Storage Maintenance"
+	icon_state = "utoolstorage"
+
+/area/maintenance/underground/janitor
+	name = "\improper Underground Custodial Closet Maintenance"
+	icon_state = "ujanitor"
+
+/area/maintenance/underground/vaccant_office
+	name = "\improper Underground Vaccant Office Maintenance"
+	icon_state = "uvaccant"
+
+/area/maintenance/underground/engine
+	name = "\improper Underground Engine Maintenance"
+	icon_state = "uengine"
+
+/area/maintenance/underground/incinerator
+	name = "\improper Underground Incinerator Maintenance"
+	icon_state = "uincinerator"
+
+/area/maintenance/underground/port_primary_hallway
+	name = "\improper Underground Port Primary Hallway Maintenance"
+	icon_state = "uportprim"
+
+/area/maintenance/underground/gateway
+	name = "\improper Underground Gateway Maintenance"
+	icon_state = "ugateway"
+
+/area/maintenance/underground/fitness
+	name = "\improper Underground Fitness Room Maintenance"
+	icon_state = "ufitness"
+
+/area/maintenance/underground/bar
+	name = "\improper Underground Bar Maintenance"
+	icon_state = "ubar"
+
+/area/maintenance/underground/kitchen
+	name = "\improper Underground Kitchen Maintenance"
+	icon_state = "ukitchen"
+
+/area/maintenance/underground/hydroponics
+	name = "\improper Underground Hydroponics Maintenance"
+	icon_state = "uhydro"
+
+/area/maintenance/underground/library
+	name = "\improper Underground Library Maintenance"
+	icon_state = "ulibrary"
+
+/area/maintenance/underground/starboard_primary_hallway
+	name = "\improper Starboard Primary Hallway Maintenance"
+	icon_state = "ustarboard"
+
+/area/maintenance/underground/cloning_entrance
+	name = "\improper Undefined Area"
+	icon_state = "dark"
+
+/area/maintenance/underground/cloning_checkpoint
+	name = "\improper Undefined Area"
+	icon_state = "dark"
+
+/area/maintenance/underground/cloning_storage
+	name = "\improper Undefined Area"
+	icon_state = "dark"
+
+/area/maintenance/underground/cloning_lobby
+	name = "\improper Undefined Area"
+	icon_state = "dark"
+
+/area/maintenance/underground/cloning_laboratory
+	name = "\improper Undefined Area"
+	icon_state = "dark"
+
+/area/maintenance/underground/cloning_surgery
+	name = "\improper Undefined Area"
+	icon_state = "dark"
+
+/area/maintenance/underground/cloning_morgue
+	name = "\improper Undefined Area"
+	icon_state = "dark"
+
+/area/maintenance/underground/cloning_cells
+	name = "\improper Undefined Area"
+	icon_state = "dark"
+
 /area/maintenance/atmos_control
 	name = "\improper Atmospherics Maintenance"
 	icon_state = "fpmaint"
@@ -704,6 +909,15 @@
 /area/crew_quarters/bar
 	name = "\improper Bar"
 	icon_state = "bar"
+	sound_env = LARGE_SOFTFLOOR
+
+/area/crew_quarters/barbackroom
+	name = "\improper Bar Backroom"
+	icon_state = "barBR"
+
+/area/crew_quarters/mess
+	name = "\improper Mess Hall"
+	icon_state = "cafeteria"
 	sound_env = LARGE_SOFTFLOOR
 
 /area/library

@@ -49,7 +49,7 @@
 /obj/item/clothing/under/chameleon/New()
 	..()
 	if(!clothing_choices)
-		var/blocked = list(src.type, /obj/item/clothing/under/cloud, /obj/item/clothing/under/gimmick)//Prevent infinite loops and bad jumpsuits.
+		var/blocked = list(src.type, /obj/item/clothing/under/gimmick)//Prevent infinite loops and bad jumpsuits.
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under, blocked)
 
 /obj/item/clothing/under/chameleon/emp_act(severity)

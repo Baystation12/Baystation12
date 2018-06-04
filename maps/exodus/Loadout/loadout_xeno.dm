@@ -79,11 +79,6 @@
 	var/list/valid_colors = list("#c20c00", "#0227f7", "#6262ff", "#454545", "#009900", "#e17291")
 	gear_tweaks = list(new/datum/gear_tweak/color(valid_colors))
 
-/datum/gear/uniform/harness
-	display_name = "gear harness (Full Body Prosthetic, Diona)"
-	path = /obj/item/clothing/under/harness
-	sort_category = "Xenowear"
-
 /datum/gear/mask/ipc_monitor
 	display_name = "display monitor (IPC)"
 	path = /obj/item/clothing/mask/monitor
