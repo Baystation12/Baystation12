@@ -108,28 +108,27 @@
 
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
-	var/reagent_tag                                   //Used for metabolizing reagents.
-	var/breath_pressure = 16                          // Minimum partial pressure safe for breathing, kPa
-	var/breath_type = "oxygen"                        // Non-oxygen gas breathed, if any.
-	var/poison_type = "phoron"                        // Poisonous air.
-	var/exhale_type = "carbon_dioxide"                // Exhaled gas type.
-	var/max_pressure_diff = 60						  // Maximum pressure difference that is safe for lungs
-	var/cold_level_1 = 243                            // Cold damage level 1 below this point. -30 Celsium degrees
-	var/cold_level_2 = 200                            // Cold damage level 2 below this point.
-	var/cold_level_3 = 120                            // Cold damage level 3 below this point.
-	var/heat_level_1 = 360                            // Heat damage level 1 above this point.
-	var/heat_level_2 = 400                            // Heat damage level 2 above this point.
-	var/heat_level_3 = 1000                           // Heat damage level 3 above this point.
-	var/passive_temp_gain = 0		                  // Species will gain this much temperature every second
-	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
-	var/warning_high_pressure = WARNING_HIGH_PRESSURE // High pressure warning.
-	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
-	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
-	var/body_temperature = 310.15	                  // Species will try to stabilize at this temperature.
-	                                                  // (also affects temperature processing)
-
-	var/heat_discomfort_level = 315                   // Aesthetic messages about feeling warm.
-	var/cold_discomfort_level = 285                   // Aesthetic messages about feeling chilly.
+	var/reagent_tag                                             // Used for metabolizing reagents.
+	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
+	var/breath_type = "oxygen"                                  // Non-oxygen gas breathed, if any.
+	var/poison_types = list("phoron" = TRUE, "chlorine" = TRUE) // Noticeably poisonous air - ie. updates the toxins indicator on the HUD.
+	var/exhale_type = "carbon_dioxide"                          // Exhaled gas type.
+	var/max_pressure_diff = 60                                  // Maximum pressure difference that is safe for lungs
+	var/cold_level_1 = 243                                      // Cold damage level 1 below this point. -30 Celsium degrees
+	var/cold_level_2 = 200                                      // Cold damage level 2 below this point.
+	var/cold_level_3 = 120                                      // Cold damage level 3 below this point.
+	var/heat_level_1 = 360                                      // Heat damage level 1 above this point.
+	var/heat_level_2 = 400                                      // Heat damage level 2 above this point.
+	var/heat_level_3 = 1000                                     // Heat damage level 3 above this point.
+	var/passive_temp_gain = 0		                            // Species will gain this much temperature every second
+	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE             // Dangerously high pressure.
+	var/warning_high_pressure = WARNING_HIGH_PRESSURE           // High pressure warning.
+	var/warning_low_pressure = WARNING_LOW_PRESSURE             // Low pressure warning.
+	var/hazard_low_pressure = HAZARD_LOW_PRESSURE               // Dangerously low pressure.
+	var/body_temperature = 310.15	                            // Species will try to stabilize at this temperature.
+	                                                            // (also affects temperature processing)
+	var/heat_discomfort_level = 315                             // Aesthetic messages about feeling warm.
+	var/cold_discomfort_level = 285                             // Aesthetic messages about feeling chilly.
 	var/list/heat_discomfort_strings = list(
 		"You feel sweat drip down your neck.",
 		"You feel uncomfortably warm.",
@@ -673,7 +672,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			dat += "</br><b>Resistant to [kind].</b>"
 	dat += "</br><b>They breathe [gas_data.name[breath_type]].</b>"
 	dat += "</br><b>They exhale [gas_data.name[exhale_type]].</b>"
-	dat += "</br><b>[gas_data.name[poison_type]] is poisonous to them.</b>"
+	dat += "</br><b>[capitalize(english_list(poison_types))] [LAZYLEN(poison_types) == 1 ? "is" : "are"] poisonous to them.</b>"
 	dat += "</small></td>"
 	dat += "</tr>"
 	dat += "</table><hr/>"
