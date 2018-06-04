@@ -1,6 +1,7 @@
 /datum/map/torch
 	// Unit test exemptions
 	apc_test_exempt_areas = list(
+		/area/aquila/maintenance = NO_SCRUBBER|NO_VENT,
 		/area/engineering/atmos/storage = NO_SCRUBBER|NO_VENT,
 		/area/engineering/auxpower = NO_SCRUBBER|NO_VENT,
 		/area/engineering/drone_fabrication = NO_SCRUBBER|NO_VENT,
@@ -71,6 +72,7 @@
 	)
 
 	area_coherency_test_exempt_areas = list(
+		/area/aquila/airlock,
 		/area/space,
 		/area/mine/explored,
 		/area/mine/unexplored,
