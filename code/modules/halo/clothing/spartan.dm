@@ -1,6 +1,6 @@
 
 /obj/item/clothing/head/helmet/spartan
-	name = "MJOLNIR Powered Assault Armor Helmet"
+	name = "MJOLNIR Powered Assault Armor Helmet Mark IV"
 	desc = "Ave, Imperator, morituri te salutant."
 	icon = 'code/modules/halo/clothing/spartan.dmi'
 	icon_state = "markIVhelm"
@@ -33,7 +33,7 @@
 	icon_state = "markIVhelmR"
 
 /obj/item/clothing/suit/armor/special/spartan
-	name = "MJOLNIR Powered Assault Armor Mark V"
+	name = "MJOLNIR Powered Assault Armor Mark IV"
 	desc = "a technologically-advanced combat exoskeleton system designed to vastly improve the strength, speed, agility, reflexes and durability of a SPARTAN-II, supersoldier in the field of combat."
 	icon = 'code/modules/halo/clothing/spartan.dmi'
 	icon_state = "markIVmale"
@@ -83,3 +83,41 @@
 	item_state = "blackutility"
 	worn_state = null
 	canremove = 0
+
+
+
+
+//*** VARIANTS ***//
+
+/obj/item/clothing/suit/armor/special/spartan/mkv
+	icon_state = "Mjolnir Powered Assault Armor/Mark V Male"
+
+/obj/item/clothing/suit/armor/special/spartan/mkv/gungnir
+	icon_state = "Mjolnir Powered Assault Armor/Mark V Gungir"
+
+/obj/item/clothing/suit/armor/special/spartan/mkv/mistermann
+	icon_state = "Mjolnir Powered Assault Armor/Mark V Male MisterMann"
+
+/obj/item/clothing/head/helmet/spartan/mkv
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V"
+
+/obj/item/clothing/head/helmet/spartan/mkv/gungnir
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Gungir"
+
+/obj/item/clothing/head/helmet/spartan/mkv/mistermann
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V MisterMann"
+
+/obj/item/clothing/head/helmet/spartan/mkv/mistermann_gungnir
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Gungir MisterMann"
+
+/obj/item/clothing/head/helmet/spartan/mkv/airassault
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Airassault"
+
+/obj/item/clothing/head/helmet/spartan/mkv/eva
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V EVA"
+
+/obj/item/clothing/head/helmet/spartan/mkv/commando
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Commando"
+
+/obj/item/clothing/head/helmet/spartan/mkv/noble
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Noble"
