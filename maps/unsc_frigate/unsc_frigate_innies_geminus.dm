@@ -32,6 +32,27 @@
 
 	#include "../odst_prowler/ODST_Ship.dmm"
 
+	#include "../first_contact/overall_overmap.dm"
+
+	#include "../covenant_ships/kig_yar_pirates/includes.dm"
+	#include "../Exoplanet Research/includes.dm"
+
+	#include "../Exoplanet Icy/includes.dm"
+
+	#include "../Asteroid Listening Post/includes.dm"
+
+	#include "../Exoplanet Mining/includes.dm"
+
+	#include "../first_contact/maps/ccv_star_spawns.dm"
+	#include "../first_contact/maps/CCV_Star.dmm"
+	#include "../first_contact/maps/comet_spawns.dm"
+	#include "../first_contact/maps/CCV_Comet.dmm"
+	#include "../first_contact/maps/sbs_spawns.dm"
+	#include "../first_contact/maps/CCV_Slow_But_Steady.dmm"
+
+	#include "../first_contact/overall_outfits.dm"
+	#include "../first_contact/overall_jobdefs.dm"
+
 	#define using_map_DATUM /datum/map/unsc_frigate
 
 #elif !defined(MAP_OVERRIDE)
