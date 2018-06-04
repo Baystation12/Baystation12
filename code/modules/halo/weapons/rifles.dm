@@ -54,7 +54,7 @@
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA37
 	name = "\improper MA37 ICWS"
-	desc = "Also formally known as the MA5."
+	desc = "Also formally known as the MA5. Takes 7.62mm ammo."
 	icon_state = "MA37"
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
 	ammo_icon_state = null
@@ -81,7 +81,7 @@
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA3
 	name = "\improper MA3 Assault Rifle"
-	desc = "An obsolete military assault rifle commonly available on the black market."
+	desc = "An obsolete military assault rifle commonly available on the black market. Takes 7.62mm ammo."
 	icon_state = "MA3"
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA3
 	ammo_icon_state = null
@@ -92,8 +92,8 @@
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
 	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
 	firemodes = list(
-		list(mode_name="4-round bursts", burst=4, fire_delay=1, move_delay=6,    burst_accuracy=list(0,-1,-1,-2),       dispersion=list(0.6, 1.2, 1.6, 1.9)),
-		list(mode_name="short bursts", 	burst=6, fire_delay=1, move_delay=6,    burst_accuracy=list(-1,-1,-2,-2,-3,-3), dispersion=list(0.6, 1.0, 1.5, 1.5, 1.9, 1.9)),
+		list(mode_name="4-round bursts", burst=4, fire_delay=1, move_delay=6,    burst_accuracy=list(0,0,-1,-1),       dispersion=list(0.6, 1.2, 1.6, 1.9)),
+		list(mode_name="short bursts", 	burst=6, fire_delay=1, move_delay=6,    burst_accuracy=list(0,0,-1,-1,-2,-2), dispersion=list(0.6, 1.0, 1.5, 1.5, 1.9, 1.9)),
 		)
 
 /obj/item/weapon/gun/projectile/ma5b_ar/MA3/update_icon()
