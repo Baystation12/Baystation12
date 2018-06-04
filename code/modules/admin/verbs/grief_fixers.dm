@@ -17,7 +17,7 @@
 	for(var/obj/machinery/power/supermatter/S in GLOB.machines)
 		S.power = 0
 	to_chat(usr, "\[1/5\] - Supermatter depowered")
-
+/*
 	// Remove all gases from all pipenets
 	for(var/datum/pipe_network/PN in pipe_networks)
 		for(var/datum/gas_mixture/G in PN.gases)
@@ -25,7 +25,7 @@
 			G.update_values()
 
 	to_chat(usr, "\[2/5\] - All pipenets purged of gas.")
-
+*/
 	// Delete all zones.
 	for(var/zone/Z in world)
 		Z.c_invalidate()
