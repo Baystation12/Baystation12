@@ -15,7 +15,6 @@
 #define LANGUAGE_INDEPENDENT "Independent"
 #define LANGUAGE_NABBER "Serpentid"
 #define LANGUAGE_SPACER "Spacer"
-#define LANGUAGE_BOGANI "Bogani"
 #define LANGUAGE_ALIUM "Alium"
 
 // Language flags.

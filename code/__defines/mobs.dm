@@ -264,8 +264,6 @@
 #define SPECIES_SKRELL      "Skrell"
 #define SPECIES_NABBER      "giant armoured serpentid"
 #define SPECIES_PROMETHEAN  "Promethean"
-#define SPECIES_BOGANI      "Bogani"
-#define SPECIES_EGYNO       "Egyno"
 #define SPECIES_XENO        "Xenophage"
 
 #define SURGERY_CLOSED 0
