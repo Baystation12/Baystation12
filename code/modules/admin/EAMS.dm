@@ -1,6 +1,9 @@
 // Epic Anti-Multiaccount System
 
 /datum/configuration/var/EAMSallowedCountries = list("RU", "AM", "AZ", "BY", "KZ", "KG", "MB", "TI", "UZ", "UA", "TM")
+/datum/configuration/var/EAMSacceptableCountOfErrors = 5
+
+var/global/EAMS_errorsCounter = 0
 
 /datum/eams_info
 	var/loaded 			= FALSE
@@ -128,26 +131,35 @@
 	//
 	// load IP info
 	//
-	if (!address || address == "127.0.0.1")
+	if (!address || address == "127.0.0.1") // host
 		return
-
-	// check country
-	var/list/http = world.Export("http://ip-api.com/json/[address]?fields=262143")
-
-	if(!http)
-		log_and_message_admins("EAMS could not check [key]: connection failed")
-		return TRUE
-
+	
 	var/list/response
-	try
-		response = json_decode(file2text(http["CONTENT"]))
-	catch (var/exception/e)
-		log_and_message_admins("EAMS could not check [key]: json decode failed: [e.name]")
-		return TRUE
 
-	if (response["status"] == "fail")
-		log_and_message_admins("EAMS could not check [key]: [response["message"]]")
-		return TRUE
+	while (config.eams && EAMS_errorsCounter < config.EAMSacceptableCountOfErrors)
+		var/list/http = world.Export("http://ip-api.com/json/[address]?fields=262143")
+
+		if(!http)
+			log_and_message_admins("EAMS could not check [key]: connection failed")
+			EAMS_errorsCounter += 1
+			sleep(2) // If error occured, let's wait while it will be fixed ;)
+			continue
+
+		try
+			response = json_decode(file2text(http["CONTENT"]))
+		catch (var/exception/e)
+			log_and_message_admins("EAMS could not check [key] due JSON decode error, EAMS will not be disabled! JSON decode error: [e.name]")
+			return TRUE
+
+		if (response["status"] == "fail")
+			log_and_message_admins("EAMS could not check [key] due request error, EAMS will not be disabled! CheckIP response: [response["message"]]")
+			return TRUE
+		break
+
+	if (EAMS_errorsCounter >= config.EAMSacceptableCountOfErrors && config.eams)
+		log_and_message_admins("EAMS was disabled due connection errors!")
+		config.eams = FALSE
+		return
 
 	eams_info.ip_as			 	= response["as"]
 	eams_info.ip_isp			= response["isp"]
