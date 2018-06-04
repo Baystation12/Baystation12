@@ -2236,6 +2236,7 @@
 #include "code\modules\reagents\Chemistry-Readme.dm"
 #include "code\modules\reagents\Chemistry-Reagents.dm"
 #include "code\modules\reagents\Chemistry-Recipes.dm"
+#include "code\modules\reagents\Chemistry-Sublimator.dm"
 #include "code\modules\reagents\reagent_containers.dm"
 #include "code\modules\reagents\reagent_dispenser.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Core.dm"
