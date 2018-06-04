@@ -1,0 +1,10 @@
+author: Desolane900
+
+delete-after: True
+
+changes: 
+  - bugfix: "stopped admin atmos grief verb from deleting all the fuel everywhere"
+  - rscadd: "added the MA3 assault rifle"
+  - rscadd: "changed canister health to double of what it was"
+  - rscadd: "changed a few weapon and magazine descriptions"
+  - rscadd: "added 5.56mm and 9mm to ammo fabricators"
