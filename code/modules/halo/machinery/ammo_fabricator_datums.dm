@@ -53,3 +53,8 @@
 	name = "magazine (5.56mm)"
 	path = /obj/item/ammo_magazine/a556
 	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/m762ma3
+	name = "magazine (7.62mm) MA3"
+	path = /obj/item/ammo_magazine/m762_ap/MA3
+	category = "Arms and Ammunition"
