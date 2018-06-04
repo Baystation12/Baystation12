@@ -1116,3 +1116,6 @@
 		return
 	var/obj/screen/zone_sel/selector = mob.zone_sel
 	selector.set_selected_zone(next_in_list(mob.zone_sel.selecting,zones))
+
+/mob/proc/has_chem_effect(chem, threshold)
+	return FALSE

@@ -25,6 +25,7 @@
 #define IS_XENOS   6
 #define IS_SLIME   8
 #define IS_NABBER  9
+#define IS_BOGANI 10
 
 #define CE_STABLE        "stable"       // Inaprovaline
 #define CE_ANTIBIOTIC    "antibiotic"   // Spaceacilin
@@ -45,6 +46,7 @@
 #define CE_MIND    		 "mindbending"  // Stabilizes or wrecks mind. Used for hallucinations
 #define CE_CRYO 	     "cryogenic"    // Prevents damage from being frozen
 #define CE_BLOCKAGE	     "blockage"     // Gets in the way of blood circulation, higher the worse
+#define CE_SQUEAKY		 "squeaky"      // Helium voice. Squeak squeak.
 
 //reagent flags
 #define IGNORE_MOB_SIZE 0x1

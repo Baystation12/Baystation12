@@ -31,7 +31,7 @@
 	stomach_capacity = 12
 
 	breath_type = "nitrogen"
-	poison_type = "oxygen"
+	poison_types = list("oxygen" = TRUE)
 	siemens_coefficient = 0.2
 
 	species_flags = SPECIES_FLAG_NO_SCAN

@@ -795,3 +795,36 @@
 		M.immunity = max(M.immunity - 0.1, 0)
 		if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
 			M.immunity = max(M.immunity - 0.5, 0)
+
+// Sleeping agent, produced by breathing N2O.
+/datum/reagent/nitrous_oxide
+	name = "Nitrous Oxide"
+	description = "An ubiquitous sleeping agent also known as laughing gas."
+	taste_description = "dental surgery"
+	reagent_state = LIQUID
+	color = "#cccccc"
+	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
+	var/do_giggle = TRUE
+
+/datum/reagent/nitrous_oxide/xenon
+	name = "Xenon"
+	description = "A nontoxic gas used as a general anaesthetic."
+	do_giggle = FALSE
+	taste_description = "nothing"
+	color = "#cccccc"
+
+/datum/reagent/nitrous_oxide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	var/dosage = M.chem_doses[type]
+	if(dosage >= 1)
+		if(prob(5)) M.Sleeping(3)
+		M.dizziness =  max(M.dizziness, 3)
+		M.confused =   max(M.confused, 3)
+	if(dosage >= 0.3)
+		if(prob(5)) M.Paralyse(1)
+		M.drowsyness = max(M.drowsyness, 3)
+		M.slurring =   max(M.slurring, 3)
+	if(do_giggle && prob(20))
+		M.emote(pick("giggle", "laugh"))
+	M.add_chemical_effect(CE_PULSE, -1)

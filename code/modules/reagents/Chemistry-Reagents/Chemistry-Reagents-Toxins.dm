@@ -56,6 +56,15 @@
 	target_organ = BP_BRAIN
 	strength = 10
 
+/datum/reagent/toxin/chlorine
+	name = "Chlorine"
+	description = "A highly poisonous liquid. Smells strongly of bleach."
+	reagent_state = LIQUID
+	taste_description = "bleach"
+	color = "#707c13"
+	strength = 15
+	metabolism = REM
+
 /datum/reagent/toxin/phoron
 	name = "Phoron"
 	description = "Phoron in its liquid form."
@@ -65,15 +74,6 @@
 	strength = 30
 	touch_met = 5
 	var/fire_mult = 5
-
-/datum/reagent/toxin/chlorine
-	name = "Chlorine"
-	description = "A highly poisonous liquid. Smells strongly of bleach."
-	reagent_state = LIQUID
-	taste_description = "bleach"
-	color = "#707c13"
-	strength = 15
-	metabolism = REM
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
@@ -644,7 +644,7 @@
 
 /datum/reagent/toxin/corrupting
 	name = "Corruption"
-	description = "a loyalty changing liquid."
+	description = "A loyalty changing liquid."
 	taste_description = "blood"
 	color = "#ffffff"
 	taste_mult = 5
