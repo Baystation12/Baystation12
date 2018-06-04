@@ -230,17 +230,13 @@ default behaviour is:
 
 	return temperature
 
-
-// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
-// Stop! ... Hammertime! ~Carn
-// I touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
-
 /mob/living/proc/getBruteLoss()
 	return maxHealth - health
 
 /mob/living/proc/adjustBruteLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	health = max(health-amount, 0)
+	if (status_flags & GODMODE)
+		return
+	health = min(max(health - amount, 0), maxHealth)
 
 /mob/living/proc/getOxyLoss()
 	return 0
