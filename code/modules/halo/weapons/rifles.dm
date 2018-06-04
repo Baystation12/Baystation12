@@ -88,7 +88,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA3)
 	attachment_slots = null
 	attachments_on_spawn = null
-	burst_delay = 1
+	burst_delay = 0.5
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
 	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
 	firemodes = list(
@@ -120,7 +120,8 @@
 	magazine_type = /obj/item/ammo_magazine/m95_sap
 	one_hand_penalty = -1
 	burst = 3
-	burst_delay = 2
+	burst_delay = 0.5
+	fire_delay = 2
 	accuracy = 1
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.0, 0.6, 0.6)
