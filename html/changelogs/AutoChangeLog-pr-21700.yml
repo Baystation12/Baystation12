@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Off-Duty is no longer a separate job, but an alt-title of Passenger. You no longer spawn with ranks in uniform if selecting off-duty."
