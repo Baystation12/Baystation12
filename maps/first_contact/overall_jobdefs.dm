@@ -71,7 +71,7 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO
 	selection_color = "#008000"
-	access = list(142,110,309,310,311)
+	access = list(142,110,300,306,309,310,311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	is_whitelisted = 1
 
