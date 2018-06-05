@@ -9,6 +9,7 @@
 	spawn_positions = 1
 	selection_color = "#ffee00"
 	req_admin_notify = 1
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/logistics_chief
 	//job_guide = "Your responsibility is to oversee the logistics crewman as they distribute and manage inventory levels, as well as requesting and processing additional supplies as needed."
 
@@ -22,6 +23,7 @@
 	department_flag = LOG
 	total_positions = -1
 	spawn_positions = 6
+	spawnpoint_override = "UNSC Frigate"
 	selection_color = "#ffee00"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/logistics
 	alt_titles = list("Ordnance Specialist","Culinary Specialist", "Service Specialist")

@@ -7,6 +7,7 @@ f
 	department_flag = WINGCOM
 	total_positions = 1
 	spawn_positions = 1
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/cmdr_wing
 	selection_color = "#995500"
 	req_admin_notify = 1
@@ -24,6 +25,7 @@ f
 	department_flag = SQCOM
 	total_positions = 1
 	spawn_positions = 1
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/cmdr_sqr
 	selection_color = "#995500"
 	//job_guide = "You are the wing commander's 2IC, meaning you help him lead strike craft (fighters, dropships, shuttles) in battle. The CAG will also give orders from the bridge."
@@ -40,6 +42,7 @@ f
 	department_flag = PILOT
 	total_positions = -1
 	spawn_positions = 3
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/pilot
 	selection_color = "#995500"
 	alt_titles = list("Fighter Pilot","Dropship Pilot","Logistics Pilot")

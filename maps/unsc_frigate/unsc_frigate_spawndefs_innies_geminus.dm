@@ -13,7 +13,7 @@
 /datum/job/IGUARD,/datum/job/LISTENG,\
 /datum/job/ship_crew_innie,/datum/job/ship_cap_innie,\
 /datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
-	allowed_spawns = list("UNSC Frigate","Insurrectionist","Insurrectionist Leader","Innie Crew","Corvette Crew","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Mining Asteroid Spawn","ODST Rifleman Spawn","ODST Squad Leader Spawn")
+	allowed_spawns = list("UNSC Frigate","Colony Arrival Shuttle","Insurrectionist","Insurrectionist Leader","Innie Crew","Corvette Crew","Corvette Crew Captain","Civilian Ship Crew","Civ Ship Cap Crew","Kig-Yar Pirate Spawn","Unggoy Pirate Spawn","Research Facility Spawn","Research Facility Security Spawn","Research Facility Comms Spawn","Depot Guard Spawn","Listening Post Spawn","Mining Asteroid Spawn","ODST Rifleman Spawn","ODST Squad Leader Spawn")
 	base_turf_by_z = list("6" = /turf/simulated/floor/planet/dirt)
 
 
