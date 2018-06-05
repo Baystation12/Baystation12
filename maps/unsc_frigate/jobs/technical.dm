@@ -7,6 +7,7 @@
 	department_flag = TECHCO
 	total_positions = 1
 	spawn_positions = 1
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/technician_chief
 	selection_color = "#CC6600"
 	req_admin_notify = 1
@@ -23,6 +24,7 @@
 	department_flag = TECH
 	total_positions = -1
 	spawn_positions = 8
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/technician
 	selection_color = "#CC6600"
 	alt_titles = list("Life Support Technician","Engine Technician","Electrical Technician","Damage Control Technician","EVA Technician","Hull Technician","Maintenance Technician")
