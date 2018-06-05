@@ -43,10 +43,8 @@
 				item_slowdown += I.slowdown_accessory
 
 				if(item_slowdown >= 0)
-					var/size_mod = 0
-					if(!(mob_size == MOB_MEDIUM))
-						size_mod = log(2, mob_size / MOB_MEDIUM)
-					if(species.strength + size_mod + 1 > 0)
+					var/size_mod = size_strength_mod()
+					if(size_mod + 1 > 0)
 						item_slowdown = item_slowdown / (species.strength + size_mod + 1)
 					else
 						item_slowdown = item_slowdown - species.strength - size_mod
@@ -79,6 +77,10 @@
 		tally = 0
 
 	return (tally+config.human_delay)
+
+/mob/living/carbon/human/size_strength_mod()
+	. = ..()
+	. += species.strength
 
 /mob/living/carbon/human/Allow_Spacemove(var/check_drift = 0)
 	//Can we act?
@@ -122,3 +124,20 @@
 	if(shoes && (shoes.item_flags & ITEM_FLAG_NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1
 	return 0
+
+/mob/living/carbon/human/Move()
+	. = ..()
+	if(.) //We moved
+		handle_exertion()
+
+/mob/living/carbon/human/proc/handle_exertion()
+	if(isSynthetic())
+		return
+	var/encumbrance = encumbrance()
+	if(encumbrance && prob(skill_fail_chance(SKILL_HAULING, 4 * encumbrance)))
+		make_adrenaline(1)
+		switch(rand(1,8))
+			if(1)
+				visible_message("<span class='notice'>\The [src] is sweating heavily!</span>", "<span class='notice'>You are sweating heavily!</span>")
+			if(2)
+				visible_message("<span class='notice'>\The [src] looks out of breath!</span>", "<span class='notice'>You are out of breath!</span>")
