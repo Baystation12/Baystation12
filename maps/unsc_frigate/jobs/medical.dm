@@ -7,6 +7,7 @@
 	department_flag = MEDCO
 	total_positions = 1
 	spawn_positions = 1
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/medical_chief
 	selection_color = "#3300cc"
 	req_admin_notify = 1
@@ -22,6 +23,7 @@
 	department_flag = MED
 	total_positions = -1
 	spawn_positions = 6
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/medical
 	selection_color = "#3300cc"
 	//job_guide = "Your job is ensure the crew, pilots and marines are in good medical condition."

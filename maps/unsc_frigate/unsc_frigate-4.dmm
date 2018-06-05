@@ -190,7 +190,7 @@
 "dH" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "dI" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "dJ" = (/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
-"dK" = (/obj/structure/sofa{tag = "icon-sofamiddle (EAST)"; icon_state = "sofamiddle"; dir = 4},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
+"dK" = (/obj/structure/sofa{tag = "icon-sofamiddle (EAST)"; icon_state = "sofamiddle"; dir = 4},/obj/machinery/light{dir = 1},/obj/machinery/button/remote/blast_door{_wifi_id = "ODST3"; id = "ODST3"; name = "ODST Country Acces Control"; pixel_x = 0; pixel_y = 32; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "dL" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "dM" = (/obj/structure/sofa{tag = "icon-sofamiddle (WEST)"; icon_state = "sofamiddle"; dir = 8},/obj/machinery/button/remote/blast_door{_wifi_id = "ODST4"; id = "ODST4"; name = "Privacy Shutter Control"; pixel_x = 32; pixel_y = 0; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "dN" = (/turf/simulated/wall,/area/unscfrigate/odstcountry)

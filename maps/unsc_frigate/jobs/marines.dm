@@ -9,6 +9,7 @@
 	spawn_positions = 1
 	selection_color = "#667700"
 	req_admin_notify = 1
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine_co
 	is_whitelisted = 1
 	//job_guide = "Your responsibility is to command the shipboard complement of marines. Nominally you answer to the captain, but he has limited control over you once deployed. Remember that a good soldier leads from the front, but you can't lead if you're dead."
@@ -24,6 +25,7 @@
 	department_flag = MARXO
 	total_positions = 1
 	spawn_positions = 1
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine_xo
 	selection_color = "#667700"
 	req_admin_notify = 1
@@ -41,6 +43,7 @@
 	department_flag = MARSL
 	total_positions = 2
 	spawn_positions = 6
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine_sl
 	selection_color = "#667700"
 	//job_guide = "You lead a squad of marines (not yet implemented, so pick some guys to be in your squad and try to RP it). Your marines are the best of the best, but they're only human."
@@ -52,6 +55,7 @@
 	title = "Infantry Weapons Officer"
 	total_positions = 2
 	spawn_positions = 4
+	spawnpoint_override = "UNSC Frigate"
 	min_rank = RANK_GYSGT
 	default_rank = RANK_GYSGT
 	max_rank = RANK_MGYSGT
@@ -71,6 +75,7 @@
 	department_flag = MAR
 	total_positions = -1
 	spawn_positions = 12
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/marine
 	selection_color = "#667700"
 	alt_titles = list("Machine Gunner Marine","Marine Combat Medic","Assault Recon Marine",\
@@ -85,6 +90,7 @@
 	department_flag = MARDR
 	total_positions = 3
 	spawn_positions = 5
+	spawnpoint_override = "UNSC Frigate"
 	alt_titles = list("Light Armored Vehicle Operator","Heavy Armored Vehicle Operator","Support Vehicle Operator","Tilt-rotor/VTOL Operator")
 
 /datum/job/UNSC_ship/marine/specialist
@@ -92,6 +98,7 @@
 	department_flag = MARSPEC
 	total_positions = 3
 	spawn_positions = 8
+	spawnpoint_override = "UNSC Frigate"
 	alt_titles = list("Field Radio Operator","Explosive Ordnance Disposal Marine","Hazardous Materials Marine")
 
 /obj/structure/closet/unsc_wardrobe/marine
@@ -119,6 +126,7 @@
 	faction_flag = ODST
 	ideal_character_age = 40
 	minimal_player_age = 21
+	spawnpoint_override = "UNSC Frigate"
 	selection_color = "#667700"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odst
 	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist","ODST Combat Engineer")
@@ -135,6 +143,7 @@
 	spawn_positions = 1
 	ideal_character_age = 36
 	minimal_player_age = 27
+	spawnpoint_override = "UNSC Frigate"
 	selection_color = "#667700"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odsto
 	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,

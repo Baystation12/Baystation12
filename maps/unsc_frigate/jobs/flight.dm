@@ -7,6 +7,7 @@
 	department_flag = MECHCO
 	total_positions = 1
 	spawn_positions = 1
+	spawnpoint_override = "UNSC Frigate"
 	selection_color = "#995500"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/mechanic_chief
 	req_admin_notify = 1
@@ -23,6 +24,7 @@
 	department_flag = MECH
 	total_positions = -1
 	spawn_positions = 4
+	spawnpoint_override = "UNSC Frigate"
 	selection_color = "#995500"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/mechanic
 	alt_titles = list("Deck Mechanic","Hangar Mechanic","Structural Mechanic","Reserve Pilot","Ordnance Mechanic")

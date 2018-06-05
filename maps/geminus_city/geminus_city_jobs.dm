@@ -8,6 +8,7 @@
 /datum/job/colonist
 	title = "Colonist"
 	total_positions = 20
+	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	faction_flag = COLONY
 	supervisors = " the Colony Mayor"
@@ -25,6 +26,7 @@
 /datum/job/innie_sympathiser
 	title = "Colonist - Insurrectionist Sympathiser"
 	total_positions = 5
+	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	faction_flag = INNIE
 	supervisors = " the Colony Mayor and your local insurrection contact"
@@ -42,6 +44,7 @@
 	title = "Colonist - Insurrectionist Recruiter"
 	total_positions = 1
 	head_position = 1
+	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	faction_flag = INNIE
 	supervisors = " the Insurrection"
@@ -60,6 +63,7 @@
 	title = "Mayor"
 	total_positions = 1
 	head_position = 1
+	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	faction_flag = COLONY
 	supervisors = " your citizens"
@@ -119,6 +123,7 @@
 /datum/job/police
 	title = "GCPD Officer"
 	total_positions = 6
+	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	supervisors = " the Colony Mayor"
 	create_record = 0
@@ -141,6 +146,7 @@
 	total_positions = 1
 	faction_flag = COLONY
 	head_position = 1
+	spawnpoint_override = "Colony Arrival Shuttle"
 	selection_color = "#000000"
 	supervisors = "the Colony Mayor"
 
