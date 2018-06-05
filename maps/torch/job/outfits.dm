@@ -642,7 +642,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/torch/offduty/fleet
 	name = OUTFIT_JOB_NAME("Off-Duty - Fleet")
 	uniform = /obj/item/clothing/under/solgov/service/fleet
-	shoes = /obj/item/clothing/shoes/dress/white
+
+/decl/hierarchy/outfit/job/torch/offduty/civilian
+	name = OUTFIT_JOB_NAME("Off-Duty - Civilian")
+	uniform = /obj/item/clothing/under/color/grey
+	shoes = /obj/item/clothing/shoes/black
 
 /decl/hierarchy/outfit/job/torch/merchant
 	name = OUTFIT_JOB_NAME("Merchant - Torch")
