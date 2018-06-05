@@ -289,3 +289,7 @@
 /area/unscfrigate/garage_4
 	name = "Primary Vehicle Garage"
 	icon_state = "garage"
+
+/area/unscfrigate/odstcountry
+	name = "ODST Country"
+	icon_state = "marine"

@@ -121,7 +121,7 @@
 	minimal_player_age = 21
 	selection_color = "#667700"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/odst
-	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist")
+	alt_titles = list("ODST Medic","ODST Sharpshooter","ODST CQC Specialist","ODST Combat Engineer")
 	access = list(access_unsc_crew,
 		access_unsc_supplies, access_unsc_marine)
 	latejoin_at_spawnpoints = TRUE

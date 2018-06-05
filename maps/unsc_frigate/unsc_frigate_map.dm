@@ -18,5 +18,6 @@
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
 	system_name = "Uncharted System"
+	overmap_size= 60
 
 	use_overmap = 1

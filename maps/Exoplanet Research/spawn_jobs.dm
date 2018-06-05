@@ -58,6 +58,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
+	l_pocket = /obj/item/clothing/accessory/badge/onib
 	pda_slot = null
 	flags = 0
 
@@ -79,13 +80,14 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ONIGUARD
-	name = "ONI Security Guard"
+	name = "Communications Operator"
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	gloves = /obj/item/clothing/gloves/thick/unsc
 	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	l_pocket = /obj/item/clothing/accessory/badge/onib
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
@@ -93,13 +95,14 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ONIGUARDS
-	name = "ONI Security Squad Leader"
+	name = "Communications Operator"
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	gloves = /obj/item/clothing/gloves/thick/unsc
 	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
+	l_pocket = /obj/item/clothing/accessory/badge/onib
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e7, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
@@ -121,7 +124,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	title = "ONI Security Guard"
 	total_positions = 4
 	spawn_positions = 4
-	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARD
+	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARDS
 	selection_color = "#008000"
 	access = list(311)
 	spawnpoint_override = "Research Facility Spawn"

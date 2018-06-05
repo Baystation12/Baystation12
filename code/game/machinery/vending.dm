@@ -1179,6 +1179,7 @@
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
 	/obj/item/weapon/gun/projectile/m392_dmr = 2,
 	/obj/item/weapon/gun/projectile/br85 = 2,
+	/obj/item/weapon/gun/projectile/srs99_sniper = 1,
 	/obj/item/weapon/plastique = 9,
 	/obj/item/weapon/storage/firstaid/unsc = 6,
 	/obj/item/device/binoculars = 4,

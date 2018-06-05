@@ -58,15 +58,15 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science
-	name = "\improper NanoTrasen labcoat"
-	desc = "A suit that protects against minor chemical spills. Has a red stripe on the shoulder and red trim on the sleeves, denoting it as a NanoTrasen labcoat."
+	name = "\improper Misriah Armory labcoat"
+	desc = "A suit that protects against minor chemical spills. Has a green stripe on the shoulder and brown trim on the sleeves, denoting it as a Misriah Armory labcoat."
 	icon_state = "labcoat_nt_open"
 	icon_open = "labcoat_nt_open"
 	icon_closed = "labcoat_nt"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	name = "research director's labcoat"
-	desc = "A full-body labcoat covered in red and black designs, denoting it as a NanoTrasen management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of NanoTrasen employees."
+	desc = "A full-body labcoat covered in green and brown designs, denoting it as a Misriah Armory management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of Misriah Armory employees."
 	icon_state = "labcoat_rd_open"
 	icon_open = "labcoat_rd_open"
 	icon_closed = "labcoat_rd"

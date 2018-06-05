@@ -367,6 +367,9 @@ var/global/list/damage_icon_parts = list()
 		var/image/I = image(icon = UW.icon, icon_state = UW.icon_state)
 		I.appearance_flags = RESET_COLOR
 		I.color = UW.color
+		if(species.icon_template)//Is the species-size greater than 32x32? Probably needs repositioning.
+			I.pixel_x = species.item_icon_offsets[1]
+			I.pixel_y = species.item_icon_offsets[2]
 
 		overlays_standing[UNDERWEAR_LAYER] += I
 
