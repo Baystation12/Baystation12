@@ -118,7 +118,6 @@ var/const/NO_EMAG_ACT = -50
 
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
-	var/offduty = FALSE
 
 /obj/item/weapon/card/id/New()
 	..()
