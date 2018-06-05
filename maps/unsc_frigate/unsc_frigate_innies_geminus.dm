@@ -41,6 +41,8 @@
 
 	#include "../Asteroid Listening Post/includes.dm"
 
+	#include "../first_contact/maps/corvette_spawns.dm"
+
 	#include "../Exoplanet Mining/includes.dm"
 
 	#include "../first_contact/maps/ccv_star_spawns.dm"

@@ -79,7 +79,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ONIGUARD
-	name = "Communications Operator"
+	name = "ONI Security Guard"
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
@@ -93,7 +93,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ONIGUARDS
-	name = "Communications Operator"
+	name = "ONI Security Squad Leader"
 	l_ear = /obj/item/device/radio/headset/unsc
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
@@ -121,7 +121,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	title = "ONI Security Guard"
 	total_positions = 4
 	spawn_positions = 4
-	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARDS
+	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARD
 	selection_color = "#008000"
 	access = list(311)
 	spawnpoint_override = "Research Facility Spawn"
