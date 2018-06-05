@@ -8,6 +8,8 @@
 	average person. Even so, they do their jobs well and are thriving in this \
 	new environment."
 
+	antaghud_offset_y = 8
+
 	language = LANGUAGE_NABBER
 	default_language = LANGUAGE_NABBER
 	assisted_langs = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
