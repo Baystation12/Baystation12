@@ -67,6 +67,7 @@
 		to_chat(minion.current, "Your master is now known as [new_name]")
 		minion.special_role = "Servant of [new_name]"
 	eyeobj.SetName("[src] ([eyeobj.name_sufix])")
+	nano_data["name"] = new_name
 	return 1
 
 //Whether we are near an important structure.
