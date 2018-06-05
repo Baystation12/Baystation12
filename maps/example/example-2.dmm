@@ -22,9 +22,6 @@
 "e" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/optable,
-/obj/machinery/oxygen_pump/anesthetic{
-	pixel_y = 32
-	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "f" = (

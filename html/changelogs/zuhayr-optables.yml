@@ -1,0 +1,5 @@
+author: Zuhayr
+delete-after: True
+changes: 
+  - rscadd: "Added an interaction to optables that will automatically put someone lying on top of it to sleep with no need for N2O or painkillers."
+  - rscdel: "Removed N2O pumps as being both redundant and buggy."

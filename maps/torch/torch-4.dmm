@@ -17194,9 +17194,6 @@
 /area/medical/surgery)
 "cDb" = (
 /obj/machinery/optable,
-/obj/machinery/oxygen_pump/anesthetic{
-	pixel_y = 32
-	},
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
 	dir = 1
@@ -18653,9 +18650,6 @@
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
 	dir = 1
-	},
-/obj/machinery/oxygen_pump/anesthetic{
-	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics_surgery)
