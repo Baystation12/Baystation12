@@ -201,9 +201,9 @@ proc/medical_scan_results(var/mob/living/carbon/human/H, var/verbose, var/skill_
 				break
 
 	. += (skill_level < SKILL_BASIC) ? shuffle(dat) : dat
+	dat = list()
 
 	if(verbose)
-		dat = list()
 		// Limb status.
 		. += "<span class='scan_notice'>[b]Specific limb damage:[endb]</span>"
 
