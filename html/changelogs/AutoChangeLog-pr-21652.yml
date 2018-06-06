@@ -1,0 +1,5 @@
+author: "Cajoes"
+delete-after: True
+changes: 
+  - rscadd: "Added Hot Food showcase to manage kitchen's output."
+  - rscdel: "Removed Lavatory Essentials Vendor on Deck 2 due to [redacted]."
