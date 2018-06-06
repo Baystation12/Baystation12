@@ -22,7 +22,7 @@
 #################################
 
 # Your name.  
-author: Unknown
+author: Ingredients
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
 delete-after: True
@@ -33,5 +33,16 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Added a changelog editing system that should cause fewer conflicts and more accurate timestamps."
-  - rscdel: "Killed innocent kittens."
+  - tweak: "Changed Theta Project Armor to a cooler looking armor set."
+  - tweak: "Theta armor should be capable of holding most weapons in its suit slot."
+  - tweak: "Gave the theta project closet a bullpup rifle and three mags to equip their creation, or be killed by it."
+  - tweak: "The armor gives a slight boost to walk speed."
+  - tweak: "Theta Undersuit was replaced and now will actually work."
+  - tweak: "Slightly Changed Theta Project equipment names so they arn't so long."
+  - tweak: "Decreased armor in Theta Arm Guards."
+  - tweak: "Made armor thicker on Theta armor to facilitate longer usage time. And to offset no shields."
+  - tweak: "5 armor thickness to boots and gloves."
+  - tweak: "10 armor thickness on Theta Undersuit."
+  - tweak: "Minimum breath pressure halved for augmented lungs."
+  - tweak: "Slightly increased lung max damage because it was formally at the native damage levels"
+  - tweak: "Added descriptions to all the augmented organs."
