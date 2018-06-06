@@ -34,7 +34,7 @@
 						beakers -= B
 						user.put_in_hands(B)
 			SetName("unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]")
-		if(stage > 1 && !active && clown_check(user))
+		if(stage > 1 && !active)
 			to_chat(user, "<span class='warning'>You prime \the [name]!</span>")
 
 			msg_admin_attack("[user.name] ([user.ckey]) primed \a [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")

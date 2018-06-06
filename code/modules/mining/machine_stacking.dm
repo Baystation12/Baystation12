@@ -18,7 +18,7 @@
 		if (machine)
 			machine.console = src
 		else
-			qdel(src)
+			CRASH("Someone forgot to map in a stacking machine to for \The [src] at ([x],[y],[z]).")
 
 /obj/machinery/mineral/stacking_unit_console/attack_hand(mob/user)
 	add_fingerprint(user)

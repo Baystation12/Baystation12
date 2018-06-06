@@ -34,12 +34,14 @@
 				summoned_items += new_item //we store it in a list to remove later
 
 	if(duration)
-		spawn(duration)
-			for(var/obj/item/to_remove in summoned_items)
-				if(istype(to_remove.loc, /mob))
-					var/mob/M = to_remove.loc
-					M.remove_from_mob(to_remove)
-				qdel(to_remove)
+		addtimer(CALLBACK(src, .proc/remove_summons), duration)
+
+/spell/targeted/equip_item/proc/remove_summons()
+	for(var/obj/item/to_remove in summoned_items)
+		if(istype(to_remove.loc, /mob))
+			var/mob/M = to_remove.loc
+			M.remove_from_mob(to_remove)
+		qdel(to_remove)
 
 /spell/targeted/equip_item/proc/summon_item(var/newtype)
 	return new newtype

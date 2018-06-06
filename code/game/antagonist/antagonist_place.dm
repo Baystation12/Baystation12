@@ -11,17 +11,20 @@
 		if(announced)
 			return
 		announced = 1
-		spawn(0)
-			if(spawn_announcement_delay)
-				sleep(spawn_announcement_delay)
-			if(spawn_announcement_sound)
-				command_announcement.Announce("[spawn_announcement]", "[spawn_announcement_title ? spawn_announcement_title : "Priority Alert"]", new_sound = spawn_announcement_sound)
-			else
-				command_announcement.Announce("[spawn_announcement]", "[spawn_announcement_title ? spawn_announcement_title : "Priority Alert"]")
-	return
+		if(spawn_announcement_delay)
+			// Or just always all addtimer, no matter the spawn_announcement_delay value
+			addtimer(CALLBACK(src, .proc/do_announcement), spawn_announcement_delay)
+		else
+			do_announcement()
 
 /datum/antagonist/proc/place_mob(var/mob/living/mob)
 	if(!starting_locations || !starting_locations.len)
 		return
 	var/turf/T = pick_mobless_turf_if_exists(starting_locations)
 	mob.forceMove(T)
+
+/datum/antagonist/proc/do_announcement()
+	if(spawn_announcement_sound)
+		command_announcement.Announce("[spawn_announcement]", "[spawn_announcement_title ? spawn_announcement_title : "Priority Alert"]", new_sound = spawn_announcement_sound)
+	else
+		command_announcement.Announce("[spawn_announcement]", "[spawn_announcement_title ? spawn_announcement_title : "Priority Alert"]")

@@ -40,5 +40,4 @@
 		B.leave_host()
 		B.ckey = owner.ckey
 
-	spawn(0)
-		qdel(src)
+	QDEL_IN(src, 0)

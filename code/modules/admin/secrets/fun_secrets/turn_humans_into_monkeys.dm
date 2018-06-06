@@ -7,5 +7,5 @@
 		return
 
 	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
-		spawn(0)
-			H.monkeyize()
+		addtimer(CALLBACK(H, /mob/living/carbon/human/proc/monkeyize), 0)
+

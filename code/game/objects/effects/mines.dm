@@ -33,8 +33,7 @@
 	obj:radiation += 50
 	randmutb(obj)
 	domutcheck(obj,null)
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/triggerstun(obj)
 	if(ismob(obj))
@@ -43,8 +42,7 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/triggern2o(obj)
 	//example: n2o triggerproc
@@ -54,8 +52,7 @@
 		if(!target.blocks_air)
 			target.assume_gas("sleeping_agent", 30)
 
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/triggerphoron(obj)
 	for (var/turf/simulated/floor/target in range(1,src))
@@ -64,21 +61,18 @@
 
 			target.hotspot_expose(1000, CELL_VOLUME)
 
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/triggerkick(obj)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(obj:client)
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/proc/explode(obj)
 	explosion(loc, 0, 1, 2, 3)
-	spawn(0)
-		qdel(src)
+	qdel(src)
 
 /obj/effect/mine/dnascramble
 	name = "Radiation Mine"

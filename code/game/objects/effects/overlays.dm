@@ -10,7 +10,7 @@
 	var/tmp/atom/BeamSource
 	New()
 		..()
-		spawn(10) qdel(src)
+		QDEL_IN(src, 1 SECONDS)
 
 /obj/effect/overlay/palmtree_r
 	name = "Palm tree"

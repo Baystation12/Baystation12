@@ -126,7 +126,7 @@
 		use_power = !use_power
 
 	if(signal.data["inject"])
-		spawn inject()
+		addtimer(CALLBACK(src, .proc/inject), 0)
 		return
 
 	if(signal.data["set_volume_rate"])
@@ -134,12 +134,10 @@
 		volume_rate = between(0, number, air_contents.volume)
 
 	if(signal.data["status"])
-		spawn(2)
-			broadcast_status()
+		addtimer(CALLBACK(src, .proc/broadcast_status), 2)
 		return //do not update_icon
 
-	spawn(2)
-		broadcast_status()
+	addtimer(CALLBACK(src, .proc/broadcast_status), 2)
 	update_icon()
 
 /obj/machinery/atmospherics/unary/outlet_injector/hide(var/i)

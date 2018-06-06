@@ -61,5 +61,4 @@
 	P.failchance = 0
 	P.icon_state = "anom"
 	P.SetName("wormhole")
-	spawn(rand(300,600))
-		qdel(P)
+	QDEL_IN(P,rand(300,600))

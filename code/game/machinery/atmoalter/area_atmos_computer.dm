@@ -14,11 +14,10 @@
 	//Simple variable to prevent me from doing attack_hand in both this and the child computer
 	var/zone = "This computer is working on a wireless range, the range is currently limited to 25 meters."
 
-	New()
-		..()
+	Initialize()
+		. = ..()
 		//So the scrubbers have time to spawn
-		spawn(10)
-			scanscrubbers()
+		addtimer(CALLBACK(src, .proc/scanscrubbers), 1 SECOND)
 
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)

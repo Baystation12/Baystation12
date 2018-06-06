@@ -1,5 +1,4 @@
 #define EMITTER_DAMAGE_POWER_TRANSFER 450 //used to transfer power to containment field generators
-
 /obj/machinery/power/emitter
 	name = "emitter"
 	desc = "A massive heavy industrial laser. This design is a fixed installation, capable of shooting in only one direction."

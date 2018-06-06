@@ -24,23 +24,35 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 		if(NUCLEARBOMB_WIRE_LIGHT)
 			N.lighthack = !N.lighthack
 			N.update_icon()
-			spawn(100)
-				N.lighthack = !N.lighthack
-				N.update_icon()
+			addtimer(CALLBACK(src, .proc/handle_light), 10 SECONDS, TIMER_UNIQUE)
+
 		if(NUCLEARBOMB_WIRE_TIMING)
 			if(N.timing)
-				spawn
-					log_and_message_admins("pulsed a nuclear bomb's detonation wire, causing it to explode.")
-					N.explode()
+				addtimer(CALLBACK(src, .proc/handle_timing), 0, TIMER_UNIQUE)
+
 		if(NUCLEARBOMB_WIRE_SAFETY)
 			N.safety = !N.safety
-			spawn(100)
-				N.safety = !N.safety
-				if(N.safety == 1)
-					N.visible_message("<span class='notice'>\The [N] quiets down.</span>")
-					N.secure_device()
-				else
-					N.visible_message("<span class='notice'>\The [N] emits a quiet whirling noise!</span>")
+			addtimer(CALLBACK(src, .proc/handle_safety), 10 SECONDS, TIMER_UNIQUE)
+
+
+/datum/wires/nuclearbomb/proc/handle_light()
+	var/obj/machinery/nuclearbomb/N = holder
+	N.lighthack = !N.lighthack
+	N.update_icon()
+
+/datum/wires/nuclearbomb/proc/handle_timing()
+	var/obj/machinery/nuclearbomb/N = holder
+	log_and_message_admins("pulsed/cut a nuclear bomb's detonation wire, causing it to explode.")
+	N.explode()
+
+/datum/wires/nuclearbomb/proc/handle_safety()
+	var/obj/machinery/nuclearbomb/N = holder
+	N.safety = !N.safety
+	if(N.safety == 1)
+		N.visible_message("<span class='notice'>\The [N] quiets down.</span>")
+		N.secure_device()
+	else
+		N.visible_message("<span class='notice'>\The [N] emits a quiet whirling noise!</span>")
 
 /datum/wires/nuclearbomb/UpdateCut(var/index, var/mended)
 	var/obj/machinery/nuclearbomb/N = holder
@@ -48,9 +60,7 @@ var/const/NUCLEARBOMB_WIRE_SAFETY		= 4
 		if(NUCLEARBOMB_WIRE_SAFETY)
 			N.safety = mended
 			if(N.timing)
-				spawn
-					log_and_message_admins("cut a nuclear bomb's timing wire, causing it to explode.")
-					N.explode()
+				addtimer(CALLBACK(src, .proc/handle_timing), 0)
 		if(NUCLEARBOMB_WIRE_TIMING)
 			N.secure_device()
 		if(NUCLEARBOMB_WIRE_LIGHT)

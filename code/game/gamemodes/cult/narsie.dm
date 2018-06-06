@@ -53,10 +53,12 @@ var/global/list/narsie_list = list()
 			SetUniversalState(/datum/universal_state/hell)
 		narsie_cometh = 1
 
-		spawn(10 SECONDS)
-			if(evacuation_controller)
-				evacuation_controller.call_evacuation(null, TRUE, 1)
-				evacuation_controller.evac_no_return = 0 // Cannot recall
+		addtimer(CALLBACK(src, .proc/do_evacuation), 10 SECONDS)
+
+obj/singularity/narsie/proc/do_evacuation()
+	if(evacuation_controller)
+		evacuation_controller.call_evacuation(null, TRUE, 1)
+		evacuation_controller.evac_no_return = 0 // Cannot recall
 
 /obj/singularity/narsie/Process()
 	eat()

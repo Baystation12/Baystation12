@@ -16,12 +16,11 @@
 /spell/aoe_turf/knock/cast(list/targets)
 	for(var/turf/T in targets)
 		for(var/obj/machinery/door/door in T.contents)
-			spawn(1)
-				if(istype(door,/obj/machinery/door/airlock))
-					var/obj/machinery/door/airlock/AL = door //casting is important
-					AL.locked = 0
-				door.open()
-	return
+			if(istype(door,/obj/machinery/door/airlock))
+				var/obj/machinery/door/airlock/AL = door //casting is important
+				AL.locked = 0
+			door.open()
+
 
 
 /spell/aoe_turf/knock/empower_spell()
