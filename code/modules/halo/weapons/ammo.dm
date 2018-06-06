@@ -92,6 +92,13 @@
 	max_ammo = 15
 	matter = list(DEFAULT_WALL_MATERIAL = 750)
 
+/obj/item/ammo_magazine/m762_ap/M392/innie
+	name = "Modified M392 magazine (7.62mm) M118 FMJ-AP"
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 20 rounds. A modified version of the magazine specific to the M392."
+	ammo_type = /obj/item/ammo_casing/a762_m392
+	max_ammo = 20
+	matter = list(DEFAULT_WALL_MATERIAL = 1000)
+
 /obj/item/ammo_magazine/m762_ap/MA37
 	name = "MA37 magazine (7.62mm) M118 FMJ-AP"
 	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 32 rounds. Specific to the MA37."

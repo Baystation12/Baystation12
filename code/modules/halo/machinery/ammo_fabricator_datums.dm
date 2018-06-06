@@ -58,3 +58,8 @@
 	name = "magazine (7.62mm) MA3"
 	path = /obj/item/ammo_magazine/m762_ap/MA3
 	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/m392innie
+	name = "magazine (7.62mm) M392-M"
+	path = /obj/item/ammo_magazine/m762_ap/M392/innie
+	category = "Arms and Ammunition"
