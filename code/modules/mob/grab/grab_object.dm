@@ -131,7 +131,7 @@
 
 /obj/item/grab/proc/init()
 	last_target = assailant.zone_sel.selecting
-	affecting.update_canmove()
+	affecting.UpdateLyingBuckledAndVerbStatus()
 	adjust_position()
 	update_icons()
 	action_used()

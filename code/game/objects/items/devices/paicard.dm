@@ -321,7 +321,7 @@
 		qdel(src)
 
 /obj/item/device/paicard/see_emote(mob/living/M, text)
-	if(pai && pai.client && !pai.canmove)
+	if(pai && pai.client && pai.stat == CONSCIOUS)
 		var/rendered = "<span class='message'>[text]</span>"
 		pai.show_message(rendered, 2)
 	..()

@@ -1,3 +1,11 @@
+/mob
+	var/move_delay		= 1
+	var/moving			= FALSE
+
+/mob/proc/SelfMove(var/direction)
+	if(DoMove(direction, src) & MOVEMENT_HANDLED)
+		return TRUE // Doesn't necessarily mean the mob physically moved
+
 /mob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
 
@@ -11,8 +19,9 @@
 	return
 
 /mob/proc/setMoveCooldown(var/timeout)
-	if(client)
-		client.move_delay = max(world.time + timeout, client.move_delay)
+	var/datum/movement_handler/mob/delay/delay = GetMovementHandler(/datum/movement_handler/mob/delay)
+	if(delay)
+		delay.AddDelay(timeout)
 
 /client/proc/client_dir(input, direction=-1)
 	return turn(input, direction*dir2angle(dir))
@@ -144,186 +153,10 @@
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
 
-/client/Move(n, direct)
+/client/Move(n, direction)
 	if(!mob)
 		return // Moved here to avoid nullrefs below
-
-	if(mob.DoMove(direct) == MOVEMENT_HANDLED)
-		return
-
-	if(moving)	return 0
-
-	if(world.time < move_delay)	return
-
-	if(locate(/obj/effect/stop, mob.loc))
-		for(var/obj/effect/stop/S in mob.loc)
-			if(S.victim == mob)
-				return
-
-	if(mob.transforming)	return//This is sota the goto stop mobs from moving var
-
-	if(Process_Grab())	return
-
-	if(!mob.canmove)
-		return
-
-	if(isliving(mob))
-		if(mob.client)
-			if(mob.client.view != world.view) // If mob moves while zoomed in with device, unzoom them.
-				for(var/obj/item/item in mob.contents)
-					if(item.zoom)
-						item.zoom(mob)
-						break
-				/*
-				if(locate(/obj/item/weapon/gun/energy/sniperrifle, mob.contents))		// If mob moves while zoomed in with sniper rifle, unzoom them.
-					var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in mob
-					if(s.zoom)
-						s.zoom()
-				if(locate(/obj/item/device/binoculars, mob.contents))		// If mob moves while zoomed in with binoculars, unzoom them.
-					var/obj/item/device/binoculars/b = locate() in mob
-					if(b.zoom)
-						b.zoom()
-				*/
-
-
-
-	//if(istype(mob.loc, /turf/space) || (mob.flags & NOGRAV))
-	//	if(!mob.Allow_Spacemove(0))	return 0
-
-	if(!mob.lastarea)
-		mob.lastarea = get_area(mob.loc)
-
-	if(istype(mob.loc,/obj/mecha)) //mecha handles spacemove internally
-		return mob.loc.relaymove(mob, direct)
-
-	if(!mob.check_solid_ground())
-		var/allowmove = mob.Allow_Spacemove(0)
-		if(!allowmove)
-			return 0
-		else if(allowmove == -1 && mob.handle_spaceslipping()) //Check to see if we slipped
-			return 0
-		else
-			mob.inertia_dir = 0 //If not then we can reset inertia and move
-
-	if(isobj(mob.loc) || ismob(mob.loc))//Inside an object, tell it we moved
-		var/atom/O = mob.loc
-		return O.relaymove(mob, direct)
-
-	if(isturf(mob.loc))
-
-		if(mob.restrained())//Why being pulled while cuffed prevents you from moving
-			for(var/mob/M in range(mob, 1))
-				if(M.pulling == mob)
-					if(!M.restrained() && M.stat == 0 && M.canmove && mob.Adjacent(M))
-						to_chat(src, "<span class='notice'>You're restrained! You can't move!</span>")
-						return 0
-					else
-						M.stop_pulling()
-
-		if(mob.pinned.len)
-			to_chat(src, "<span class='notice'>You're pinned to a wall by [mob.pinned[1]]!</span>")
-			return 0
-
-		move_delay = world.time//set move delay
-
-		switch(mob.m_intent)
-			if(M_RUN)
-				if(mob.drowsyness > 0)
-					move_delay += 6
-				move_delay += 1+config.run_speed
-			if(M_WALK)
-				move_delay += 7+config.walk_speed
-		move_delay += mob.movement_delay()
-
-		if(istype(mob.buckled, /obj/vehicle))
-			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
-			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
-			move_delay = world.time
-			//drunk driving
-			if(mob.confused && prob(20)) //vehicles tend to keep moving in the same direction
-				direct = turn(direct, pick(90, -90))
-			return mob.buckled.relaymove(mob,direct)
-
-		if(istype(mob.machine, /obj/machinery))
-			if(mob.machine.relaymove(mob,direct))
-				return
-
-		if(mob.pulledby || mob.buckled) // Wheelchair driving!
-			if(istype(mob.loc, /turf/space))
-				return // No wheelchair driving in space
-			if(istype(mob.pulledby, /obj/structure/bed/chair/wheelchair))
-				return mob.pulledby.relaymove(mob, direct)
-			else if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
-				if(ishuman(mob))
-					var/mob/living/carbon/human/driver = mob
-					var/obj/item/organ/external/l_hand = driver.get_organ(BP_L_HAND)
-					var/obj/item/organ/external/r_hand = driver.get_organ(BP_R_HAND)
-					if((!l_hand || l_hand.is_stump()) && (!r_hand || r_hand.is_stump()))
-						return // No hands to drive your chair? Tough luck!
-				//drunk wheelchair driving
-				else
-					direct = mob.AdjustMovementDirection(direct)
-				move_delay += 2
-				return mob.buckled.relaymove(mob,direct)
-
-		if(mob.check_slipmove())
-			return
-
-		//We are now going to move
-		moving = 1
-		//Something with pulling things
-		if(locate(/obj/item/grab, mob))
-			for (var/obj/item/grab/G in mob)
-				move_delay = max(move_delay, world.time + G.grab_slowdown())
-				var/list/L = mob.ret_grab()
-				if(istype(L, /list))
-					if(L.len == 2)
-						L -= mob
-						var/mob/M = L[1]
-						if(M)
-							if ((get_dist(mob, M) <= 1 || M.loc == mob.loc))
-								var/turf/T = mob.loc
-								. = ..()
-								if (isturf(M.loc))
-									var/diag = get_dir(mob, M)
-									if ((diag - 1) & diag)
-									else
-										diag = null
-									if ((get_dist(mob, M) > 1 || diag))
-										step(M, get_dir(M.loc, T))
-					else
-						for(var/mob/M in L)
-							M.other_mobs = 1
-							if(mob != M)
-								M.animate_movement = 3
-						for(var/mob/M in L)
-							spawn( 0 )
-								step(M, direct)
-								return
-							spawn( 1 )
-								M.other_mobs = null
-								M.animate_movement = 2
-								return
-					G.adjust_position()
-		else
-			direct = mob.AdjustMovementDirection(direct)
-			. = mob.SelfMove(n, direct)
-
-		for (var/obj/item/grab/G in mob)
-			if (G.assailant_reverse_facing())
-				mob.set_dir(GLOB.reverse_dir[direct])
-			G.assailant_moved()
-		for (var/obj/item/grab/G in mob.grabbed_by)
-			G.adjust_position()
-
-		moving = 0
-
-		return .
-
-	return
-
-/mob/proc/SelfMove(turf/n, direct)
-	return Move(n, direct)
+	return mob.SelfMove(direction)
 
 // Checks whether this mob is allowed to move in space
 // Return 1 for movement, 0 for none,
