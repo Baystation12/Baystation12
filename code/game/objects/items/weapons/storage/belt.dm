@@ -132,6 +132,7 @@
 		/obj/item/ammo_magazine,
 		/obj/item/weapon/reagent_containers/food/snacks/donut/,
 		/obj/item/weapon/melee/baton,
+		/obj/item/weapon/gun/energy/gun/small,
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/gun/energy/stunrevolver,
 		/obj/item/weapon/flame/lighter,
