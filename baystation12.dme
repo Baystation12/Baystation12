@@ -2620,6 +2620,7 @@
 #include "maps\example\example_define.dm"
 #include "maps\geminus_city\geminus_city_map.dm"
 #include "maps\geminus_city\geminus_city_overmap.dm"
+#include "maps\geminus_city\Theta Project.dm"
 #include "maps\geminus_city\unit_tests.dm"
 #include "maps\insurrection\innie_base_map.dm"
 #include "maps\insurrection\innie_base_overmap.dm"
