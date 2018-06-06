@@ -21,7 +21,7 @@
 	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by the subject of project Theta. Any common soldier should fear the person who wears this armor."
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
 	armor = list("melee" = 65, "bullet" = 65, "laser" = 55, "energy" = 45, "bomb" = 60, "bio" = 0, "rad" = 0)
-	armor_thickness = 40
+	armor_thickness = 50
 	flags_inv = 29
 	slowdown_general = -1
 	breach_threshold = 100
@@ -118,7 +118,6 @@
 	ammo_type = /obj/item/ammo_casing/a762
 	magazine_type = /obj/item/ammo_magazine/m762_ap
 	allowed_magazines = list(/obj/item/ammo_magazine/box/a762, /obj/item/ammo_magazine/c762, /obj/item/ammo_magazine/m762_ap, /obj/item/ammo_magazine/c762)
-
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
