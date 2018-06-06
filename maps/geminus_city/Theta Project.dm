@@ -112,6 +112,7 @@
 	item_state = "ma5b"
 	caliber = "a762"
 	burst_delay = 0.5
+	wielded_item_state = "ma5b"
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
 	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 5, TECH_ILLEGAL = 4)
