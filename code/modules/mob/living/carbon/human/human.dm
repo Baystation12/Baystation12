@@ -1042,7 +1042,7 @@
 	pixel_y = default_pixel_y
 
 	if(!(species.appearance_flags & HAS_UNDERWEAR))
-		worn_underwear = null
+		QDEL_NULL_LIST(worn_underwear)
 
 	spawn(0)
 		regenerate_icons()
