@@ -24,6 +24,8 @@
 	armor_thickness = 40
 	flags_inv = 29
 	slowdown_general = -1
+	breach_threshold = 100
+	flags_inv = HIDESHOES
 
 /obj/item/clothing/suit/space/void/swat/theta/New()
 	..()
@@ -104,10 +106,10 @@
 //Testing out New Gun for Theta Project, may not end up using this.
 /obj/item/weapon/gun/projectile/automatic/z8/theta
 	name = "MA3 All Purpose Carbine"
-	desc = "This weapon was designed and funded by anti-UNSC factions as their reaction to the standard MA5B assult rifle. Designed with high accuracy and easy maneuverability in combat situations, it was quickly discontinued because of it's high price range. It is highly versatile being capable of utilizing any and all 7.62 magazines found in the field. If attachments can be found, this carbine is capable of using them. It can be fired one handed with an accuracy penalty."
+	desc = "This weapon was designed and funded by anti-UNSC factions as their reaction to the standard MA5B assault rifle. Designed with high accuracy and easy maneuverability in combat situations, it was quickly discontinued because of it's high price range. It is highly versatile being capable of utilizing any and all 7.62 magazines found in the field. If attachments can be found, this carbine is capable of using them. It can be fired one handed with an accuracy penalty."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "MA3"
-	item_state = "MA3"
+	item_state = "ma5b"
 	caliber = "a762"
 	burst_delay = 0.5
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
@@ -116,14 +118,17 @@
 	ammo_type = /obj/item/ammo_casing/a762
 	magazine_type = /obj/item/ammo_magazine/m762_ap
 	allowed_magazines = list(/obj/item/ammo_magazine/box/a762, /obj/item/ammo_magazine/c762, /obj/item/ammo_magazine/m762_ap, /obj/item/ammo_magazine/c762)
+
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+
 	firemodes = list(
 		list(mode_name="Semiauto",       burst=1,    fire_delay=0,    move_delay=null, use_launcher=null, one_hand_penalty=4, burst_accuracy=(1), dispersion=null),
 		list(mode_name="3-round bursts", burst=3,    fire_delay=null, move_delay=5,    use_launcher=null, one_hand_penalty=5, burst_accuracy=list(0,0,-1), dispersion=list(0.0, 0.6, 0.8))
 		)
+
 	attachment_slots = list("sight","stock","barrel")
 
 /obj/item/weapon/gun/projectile/automatic/z8/theta/update_icon()
