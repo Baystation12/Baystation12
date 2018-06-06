@@ -40,8 +40,8 @@ changes:
   - tweak: "Theta Undersuit was replaced and now will actually work."
   - tweak: "Slightly Changed Theta Project equipment names so they arn't so long."
   - tweak: "Decreased armor in Theta Arm Guards. Decreased armor from Theta Boots to be more in line with the Arm Guards."
-  - tweak: "Made armor thicker on Theta armor to facilitate longer usage time. And to offset no shields."
-  - tweak: "Added slight armor thickness to Gloves, Boots and undersuit
+  - tweak: "Made armor thicker on Theta armor to facilitate longer usage time and to offset no shields."
+  - tweak: "Added slight armor thickness to Gloves, Boots and undersuit"
   - tweak: "Minimum breath pressure halved for augmented lungs. Slightly increased lung max damage because it was formally at the native damage levels"
   - tweak: "Added descriptions to all the augmented organs."
   - experiment: "Theta Armor and Theta Helmet given a chance to deflect bullets for no damage."
