@@ -133,7 +133,7 @@
 
 		if(R.stat)
 			robot["status"] = "Not Responding"
-		else if (!R.canmove)
+		else if (!R.MayMove())
 			robot["status"] = "Lockdown"
 		else
 			robot["status"] = "Operational"

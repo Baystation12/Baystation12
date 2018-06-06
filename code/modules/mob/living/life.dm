@@ -4,9 +4,9 @@
 
 	..()
 
-	if (transforming)
+	if (HasMovementHandler(/datum/movement_handler/mob/transformation/))
 		return
-	if(!loc)
+	if (!loc)
 		return
 
 	if(machine && !CanMouseDrop(machine, src))
@@ -34,7 +34,7 @@
 
 	handle_actions()
 
-	update_canmove()
+	UpdateLyingBuckledAndVerbStatus()
 
 	handle_regular_hud_updates()
 
