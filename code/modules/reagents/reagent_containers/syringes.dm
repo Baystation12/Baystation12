@@ -243,7 +243,7 @@
 
 		if(target != trackTarget && target.loc != trackTarget)
 			return
-  admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
+	admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 
 	if(target != user)
