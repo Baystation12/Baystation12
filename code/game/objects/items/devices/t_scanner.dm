@@ -3,7 +3,7 @@
 /obj/item/device/t_scanner
 	name = "\improper T-ray scanner"
 	desc = "A terahertz-ray emitter and scanner, capable of penetrating conventional hull materials."
-	description_info = "Use this to toggle its scanning capabilities on and off. While on, it will expose the layout of cabling and pipework in a 3x3 area around you."
+	description_info = "Use this to toggle its scanning capabilities on and off. While on, it will expose the layout of cabling and pipework in a 7x7 area around you."
 	description_fluff = "The T-ray scanner is a modern spectroscopy solution and labor-saving device. Why work yourself to the bone removing floor panels when you can simply look through them with submillimeter radiation?"
 	icon_state = "t-ray0"
 	slot_flags = SLOT_BELT
@@ -13,12 +13,11 @@
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	action_button_name = "Toggle T-Ray scanner"
 
-	var/scan_range = 1
+	var/scan_range = 3
 
 	var/on = 0
 	var/list/active_scanned = list() //assoc list of objects being scanned, mapped to their overlay
 	var/client/user_client //since making sure overlays are properly added and removed is pretty important, so we track the current user explicitly
-	var/flicker = 0
 
 	var/global/list/overlay_cache = list() //cache recent overlays
 
@@ -41,10 +40,9 @@
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active
 	if(on)
-		START_PROCESSING(SSobj, src)
-		flicker = 0
+		START_PROCESSING(SSfastprocess, src)
 	else
-		STOP_PROCESSING(SSobj, src)
+		STOP_PROCESSING(SSfastprocess, src)
 		set_user_client(null)
 	update_icon()
 
@@ -77,15 +75,6 @@
 	for(var/obj/O in update_remove)
 		user_client.images -= active_scanned[O]
 		active_scanned -= O
-
-	//Flicker effect
-	for(var/obj/O in active_scanned)
-		var/image/overlay = active_scanned[O]
-		if(flicker)
-			overlay.alpha = 0
-		else
-			overlay.alpha = 128
-	flicker = !flicker
 
 //creates a new overlay for a scanned object
 /obj/item/device/t_scanner/proc/get_overlay(var/atom/movable/scanned)
