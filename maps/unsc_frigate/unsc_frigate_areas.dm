@@ -293,3 +293,9 @@
 /area/unscfrigate/odstcountry
 	name = "ODST Country"
 	icon_state = "marine"
+
+/area/unscfrigate/portguns
+	name = "Port weapon emplacement"
+
+/area/unscfrigate/starboardguns
+	name = "Starboard weapon emplacement"
