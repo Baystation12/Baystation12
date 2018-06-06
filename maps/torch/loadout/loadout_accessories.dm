@@ -148,6 +148,7 @@
 /datum/gear/tactical/press_tag
 	display_name = "Press tag"
 	path = /obj/item/clothing/accessory/armor/tag/press
+	allowed_roles = list(/datum/job/assistant)
 
 /datum/gear/tactical/helm_covers
 	allowed_roles = ARMORED_ROLES
