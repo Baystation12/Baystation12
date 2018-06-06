@@ -47,3 +47,6 @@ changes:
   - tweak: "Minimum breath pressure halved for augmented lungs."
   - tweak: "Slightly increased lung max damage because it was formally at the native damage levels"
   - tweak: "Added descriptions to all the augmented organs."
+  - experiment: "Theta Armor lowered slightly and chest is given a roughly 30% chance to reflect ballistics from the chest for no damage."
+  - experiment: "Theta Helmet was given a roughly 20% chance to deflect bullets for no damage."
+  - experiment: "Added in the All Purpose Carbine for use with the Theta Project."
