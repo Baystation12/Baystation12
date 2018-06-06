@@ -59,7 +59,7 @@ GLOBAL_LIST_EMPTY(mining_asteroid_spawns)
 
 
 /datum/job/Outer_Colonist
-	title = "Outer_Colonist"
+	title = "Outer Colonist"
 	total_positions = 10
 	spawn_positions = 10
 	outfit_type = /decl/hierarchy/outfit/job/Outer_Colonist
