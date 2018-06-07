@@ -299,7 +299,3 @@
 
 /area/unscfrigate/starboardguns
 	name = "Starboard weapon emplacement"
-
-/area/unscfrigate/forelevator2
-
-/area/unscfrigate/forelevator3
