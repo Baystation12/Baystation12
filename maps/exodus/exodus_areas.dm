@@ -73,6 +73,14 @@
 	name = "Station dock"
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
+/area/shuttle/deathsquad/centcom
+	name = "Deathsquad Shuttle"
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
+/area/shuttle/deathsquad/station
+	name = "Deathsquad Shuttle"
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
 /area/shuttle/administration
 	area_flags = AREA_FLAG_RAD_SHIELDED
 
@@ -99,6 +107,10 @@
 /area/shuttle/arrival/station
 	icon_state = "shuttle"
 
+/area/shuttle/escape/centcom
+	name = "\improper Emergency Shuttle Centcom"
+	icon_state = "shuttle"
+
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
 	area_flags = AREA_FLAG_RAD_SHIELDED
@@ -110,7 +122,6 @@
 /area/shuttle/escape/transit // the area to pass through for 3 minute transit
 	name = "\improper Emergency Shuttle Transit"
 	icon_state = "shuttle"
-	base_turf = /turf/space/transit/north
 
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
@@ -156,6 +167,11 @@
 	icon_state = "shuttle"
 	base_turf = /turf/space/transit/east
 
+/area/shuttle/administration/transit
+	name = "Administration Shuttle Transit"
+	icon_state = "shuttle"
+	base_turf = /turf/space/transit/east
+
 // === Trying to remove these areas:
 
 /area/shuttle/research
@@ -179,6 +195,8 @@
 
 /area/syndicate_mothership/ninja
 	name = "\improper Ninja Base"
+	requires_power = 0
+	base_turf = /turf/space/transit/north
 
 //RESCUE
 
@@ -297,15 +315,27 @@
 	icon_state = "shuttle"
 	base_turf = /turf/space/transit/north
 
+/area/shuttle/syndicate_elite/northwest
+	icon_state = "northwest"
+
+/area/shuttle/syndicate_elite/northeast
+	icon_state = "northeast"
+
+/area/shuttle/syndicate_elite/southwest
+	icon_state = "southwest"
+
+/area/shuttle/syndicate_elite/southeast
+	icon_state = "southeast"
+
+/area/shuttle/syndicate_elite/transit
+	name = "\proper bluespace"
+	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north
+
 /area/skipjack_station
 	name = "\improper Skipjack"
 	icon_state = "yellow"
 	requires_power = 0
-
-/area/skipjack_station/transit
-	name = "\proper bluespace"
-	icon_state = "shuttle"
-	base_turf = /turf/space/transit/north
 
 /area/skipjack_station/southwest_solars
 	name = "aft port solars"
@@ -323,10 +353,19 @@
 	name = "aft starboard solars"
 	icon_state = "southeast"
 
-/area/skipjack_station/mining
-	name = "south of mining station"
-	icon_state = "north"
+/area/skipjack_station/base
+	name = "Raider Base"
+	icon_state = "yellow"
 	base_turf = /turf/simulated/floor/asteroid
+
+/area/skipjack_station/start
+	name = "\improper Skipjack"
+	icon_state = "shuttlered"
+
+/area/skipjack_station/transit
+	name = "In transit"
+	icon_state = "shuttle"
+	base_turf = /turf/space/transit/north
 
 // SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
 
@@ -1657,6 +1696,7 @@ area/rnd/test_area
 /area/merchant_station
 	name = "\improper Merchant Station"
 	icon_state = "LP"
+	requires_power = 0
 
 /area/acting/backstage
 	name = "\improper Backstage"

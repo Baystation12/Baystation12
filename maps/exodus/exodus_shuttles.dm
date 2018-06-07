@@ -88,32 +88,6 @@
 /obj/effect/shuttle_landmark/escape_pod/transit/pod5
 	number = 5
 
-// ERT - Shuttle
-
-
-/datum/shuttle/autodock/ferry/rescue
-	name = "Rescue"
-	warmup_time = 0
-	dock_target = "specops_shuttle_port"
-	shuttle_area = /area/shuttle/specops/centcom
-	waypoint_offsite = "nav_specops_start"
-	waypoint_station = "nav_specops_xenoarch"
-	location = 1
-
-
-/obj/effect/shuttle_landmark/specops/start
-	name = "Centcomm"
-	landmark_tag = "nav_specops_start"
-	docking_controller = "specops_centcom_dock"
-	autoset = 0
-
-
-/obj/effect/shuttle_landmark/specops/xenoarch
-	name = "To station"
-	landmark_tag = "nav_specops_xenoarch"
-	docking_controller = "rescue_shuttle_dock_airlock"
-	autoset = 1
-
 //Transport shuttle
 
 /datum/shuttle/autodock/ferry/transport
@@ -232,7 +206,74 @@
 	autoset = 1
 
 
-//Emergency shuttle
+//Emergency Response Team Shuttle
+
+/datum/shuttle/autodock/multi/antag/rescue
+	name = "Rescue"
+	warmup_time = 10
+	destination_tags = list(
+		"nav_rescue_start",
+		"nav_rescue_station",
+		"nav_rescue_dock",
+		"nav_rescue_coupole",
+		"nav_rescue_minage",
+		"nav_rescue_residentiel",
+		"nav_rescue_southeast",
+		"nav_rescue_northeast",
+		)
+	shuttle_area = /area/rescue_base/start
+	dock_target = "rescue_shuttle"
+	current_location = "nav_rescue_start"
+	landmark_transition = "nav_rescue_transition"
+	home_waypoint = "nav_rescue_start"
+
+/obj/effect/shuttle_landmark/rescue/start
+	name = "Rescue Base"
+	landmark_tag = "nav_rescue_start"
+	docking_controller = "rescue_base"
+
+/obj/effect/shuttle_landmark/rescue/internim
+	name = "In transit"
+	landmark_tag = "nav_rescue_transition"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/rescue/station
+	name = "Station Dock"
+	landmark_tag = "nav_rescue_station"
+	autoset = 1
+	docking_controller = "rescue_shuttle_dock_airlock"
+
+/obj/effect/shuttle_landmark/rescue/dock
+	name = "North West"
+	landmark_tag = "nav_rescue_dock"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/rescue/northeast
+	name = "North East"
+	landmark_tag = "nav_rescue_northeast"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/rescue/coupole
+	name = "South"
+	landmark_tag = "nav_rescue_coupole"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/rescue/minage
+	name = "South West"
+	landmark_tag = "nav_rescue_minage"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/rescue/residentiel
+	name = "North"
+	landmark_tag = "nav_rescue_residentiel"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/rescue/southeast
+	name = "South East"
+	landmark_tag = "nav_rescue_southeast"
+	autoset = 1
+
+// emergency
 
 /datum/shuttle/autodock/ferry/emergency/centcom
 	name = "Escape"
@@ -261,15 +302,48 @@
 	docking_controller = "escape_dock"
 	autoset = 1
 
+// Administration
+
+/datum/shuttle/autodock/ferry/administration
+	name = "Administration"
+	location = 1
+	warmup_time = 10
+	shuttle_area = /area/shuttle/administration/centcom
+	dock_target = "admin_shuttle"
+	landmark_transition = "nav_admin_transition"
+	waypoint_offsite = "nav_admin_centcom_dock"
+	waypoint_station = "nav_admin_station_dock"
+
+/obj/effect/shuttle_landmark/administration/centcom
+	name = "Centcom"
+	landmark_tag = "nav_admin_centcom_dock"
+	docking_controller = "admin_shuttle_centcom_dock"
+	autoset = 0
+
+/obj/effect/shuttle_landmark/administration/internim
+	name = "In transit"
+	landmark_tag = "nav_admin_transition"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/administration/station
+	name = "Station"
+	landmark_tag = "nav_admin_station_dock"
+	docking_controller = "admin_shuttle_dock_airlock"
+	autoset = 1
+
+// Merc
+
 /datum/shuttle/autodock/multi/antag/mercenary
 	name = "Mercenary"
-	warmup_time = 0
+	warmup_time = 10
 	destination_tags = list(
 		"nav_merc_start",
 		"nav_merc_dock",
 		"nav_merc_coupole",
 		"nav_merc_minage",
 		"nav_merc_residentiel",
+		"nav_merc_south",
+		"nav_merc_north",
 		)
 	shuttle_area = /area/syndicate_station/start
 	dock_target = "merc_shuttle"
@@ -291,23 +365,104 @@
 	autoset = 1
 
 /obj/effect/shuttle_landmark/merc/dock
-	name = "Northwest"
+	name = "North West"
 	landmark_tag = "nav_merc_dock"
 	autoset = 1
 
 /obj/effect/shuttle_landmark/merc/coupole
-	name = "South"
+	name = "South West"
 	landmark_tag = "nav_merc_coupole"
 	autoset = 1
 
 /obj/effect/shuttle_landmark/merc/minage
-	name = "Southwest"
+	name = "South East"
 	landmark_tag = "nav_merc_minage"
 	autoset = 1
 
 /obj/effect/shuttle_landmark/merc/residentiel
-	name = "North"
+	name = "North East"
 	landmark_tag = "nav_merc_residentiel"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/merc/north
+	name = "North"
+	landmark_tag = "nav_merc_north"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/merc/south
+	name = "South"
+	landmark_tag = "nav_merc_south"
+	autoset = 1
+
+// Elite Merc
+
+/datum/shuttle/autodock/multi/antag/elite_mercenary
+	name = "Elite Mercenary"
+	warmup_time = 10
+	destination_tags = list(
+		"nav_emerc_start",
+		"nav_emerc_nw",
+		"nav_emerc_sw",
+		"nav_emerc_se",
+		"nav_emerc_ne",
+		)
+	shuttle_area = /area/shuttle/syndicate_elite/mothership
+	dock_target = "emerc_shuttle"
+	current_location = "nav_emerc_start"
+	landmark_transition = "nav_emerc_transition"
+	home_waypoint = "nav_emerc_start"
+
+/obj/effect/shuttle_landmark/elite_mercenary/start
+	name = "Elite Mercenary Base"
+	landmark_tag = "nav_emerc_start"
+	docking_controller = "emerc_base"
+
+/obj/effect/shuttle_landmark/elite_mercenary/internim
+	name = "In transit"
+	landmark_tag = "nav_emerc_transition"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/elite_mercenary/northwest
+	name = "North West"
+	landmark_tag = "nav_emerc_nw"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/elite_mercenary/southwest
+	name = "South West"
+	landmark_tag = "nav_emerc_sw"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/elite_mercenary/southeast
+	name = "South East"
+	landmark_tag = "nav_emerc_se"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/elite_mercenary/northeast
+	name = "North East"
+	landmark_tag = "nav_emerc_ne"
+	autoset = 1
+
+// deathsquad
+
+/datum/shuttle/autodock/ferry/deathsquad
+	name = "Deathsquad"
+	warmup_time = 10
+	location = 0
+	shuttle_area = /area/shuttle/specops/centcom
+	dock_target = "deathsquad_shuttle_port"
+	waypoint_station = "nav_deathsquad_centcom"
+	waypoint_offsite = "nav_deathsquad_station"
+
+/obj/effect/shuttle_landmark/deathsquad/centcom
+	name = "Centcom"
+	landmark_tag = "nav_deathsquad_centcom"
+	docking_controller = "deathsquad_centcom_dock"
+	autoset = 0
+
+/obj/effect/shuttle_landmark/deathsquad/station
+	name = "Station"
+	landmark_tag = "nav_deathsquad_station"
+	docking_controller = "deathsquad_shuttle_dock_airlock"
 	autoset = 1
 
 //Merchant
@@ -333,44 +488,51 @@
 	docking_controller = "merchant_shuttle_station_dock"
 	autoset = 1
 
+
 //Skipjack
-/*
+
 /datum/shuttle/autodock/multi/antag/skipjack
-    name = "Skipjack"
-    warmup_time = 0
-    destination_tags = list(
-        "nav_skipjack_ai",
-        "nav_skipjack_civ",
-        "nav_skipjack_ind",
-        "nav_skipjack_start"
-        )
-    shuttle_area =  /area/skipjack_station/start
-    dock_target = "skipjack_shuttle"
-    current_location = "nav_skipjack_start"
-    landmark_transition = "nav_skipjack_transition"
-    announcer = "ESIN Dreyfus Sensor Array"
-    home_waypoint = "nav_skipjack_start"
-    arrival_message = "Attention, vessel detected entering station proximity."
-    departure_message = "Attention, vessel detected leaving station proximity."
+	name = "Skipjack"
+	warmup_time = 10
+	destination_tags = list(
+		"nav_skipjack_start",
+		"nav_skipjack_nw",
+		"nav_skipjack_sw",
+		"nav_skipjack_se",
+		"nav_skipjack_ne",
+		)
+	shuttle_area = /area/skipjack_station/start
+	dock_target = "skipjack_shuttle"
+	current_location = "nav_skipjack_start"
+	landmark_transition = "nav_skipjack_transition"
+	home_waypoint = "nav_skipjack_start"
 
 /obj/effect/shuttle_landmark/skipjack/start
-    name = "Raider Outpost"
-    landmark_tag = "nav_skipjack_start"
-    docking_controller = "skipjack_base"
+	name = "Raider Base"
+	landmark_tag = "nav_skipjack_start"
+	docking_controller = "skipjack_base"
 
 /obj/effect/shuttle_landmark/skipjack/internim
     name = "In transit"
     landmark_tag = "nav_skipjack_transition"
+    autoset = 1
 
-/obj/effect/shuttle_landmark/skipjack/ai
-    name = "Silicon Deck"
-    landmark_tag = "nav_skipjack_ai"
+/obj/effect/shuttle_landmark/skipjack/northwest
+	name = "North West"
+	landmark_tag = "nav_skipjack_nw"
+	autoset = 1
 
-/obj/effect/shuttle_landmark/skipjack/civ
-    name = "West of Civilian Deck"
-    landmark_tag = "nav_skipjack_civ"
+/obj/effect/shuttle_landmark/skipjack/southwest
+	name = "South West"
+	landmark_tag = "nav_skipjack_sw"
+	autoset = 1
 
-/obj/effect/shuttle_landmark/skipjack/ind
-    name = "Mining Airlock"
-    landmark_tag = "nav_skipjack_ind"
-*/
+/obj/effect/shuttle_landmark/skipjack/southeast
+	name = "South East"
+	landmark_tag = "nav_skipjack_se"
+	autoset = 1
+
+/obj/effect/shuttle_landmark/skipjack/northeast
+	name = "North East"
+	landmark_tag = "nav_skipjack_ne"
+	autoset = 1

@@ -8,6 +8,11 @@
 	req_access = list(access_syndicate)
 	shuttle_tag = "Mercenary"
 
+/obj/machinery/computer/shuttle_control/multi/elite_syndicate
+	name = "elite mercenary shuttle control console"
+	req_access = list(access_syndicate)
+	shuttle_tag = "Elite Mercenary"
+
 /obj/machinery/computer/shuttle_control/multi/rescue
 	name = "rescue shuttle control console"
 	req_access = list(access_cent_specops)

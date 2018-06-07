@@ -23,6 +23,12 @@
 	req_access = list(access_merchant)
 	shuttle_tag = "Merchant"
 
+/obj/machinery/computer/shuttle_control/administration
+	name = "administration shuttle control console"
+	icon_keyboard = "power_key"
+	icon_screen = "shuttle"
+	req_access = list(access_cent_general)
+	shuttle_tag = "Administration"
 
 /*
 /obj/machinery/computer/shuttle_control/multi/turbolift

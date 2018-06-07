@@ -6,8 +6,9 @@ var/datum/antagonist/deathsquad/mercenary/commandos
 	role_text = "Syndicate Commando"
 	role_text_plural = "Commandos"
 	welcome_text = "You are in the employ of a criminal syndicate hostile to corporate interests."
-	id_type = /obj/item/weapon/card/id/centcom/ERT
-	flags = ANTAG_RANDOM_EXCEPTED
+	id_type = /obj/item/weapon/card/id/syndicate
+	flags = ANTAG_RANDOM_EXCEPTED | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE
+	antaghud_indicator = "hudoperative"
 
 	hard_cap = 4
 	hard_cap_round = 8
