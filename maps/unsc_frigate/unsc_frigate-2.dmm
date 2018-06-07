@@ -941,7 +941,7 @@
 "se" = (/obj/machinery/door/blast/atmos_close/regular{id = "deck2hall3"},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/unscfrigate/flight/office)
 "sf" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/effect/floor_decal/industrial/warning{dir = 8},/turf/simulated/floor/tiled,/area/unscfrigate/flight/vehicle_shop)
 "sg" = (/obj/effect/floor_decal/industrial/loading{dir = 8},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/unscfrigate/flight/vehicle_shop)
-"sh" = (/obj/machinery/door/blast/regular,/obj/structure/inflatable/door,/turf/simulated/floor/plating,/area/unscfrigate/flight/vehicle_shop)
+"sh" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/unscfrigate/flight/vehicle_shop)
 "si" = (/turf/simulated/open,/area/unscfrigate/flight/vehicle_shop)
 "sj" = (/obj/structure/sign/deck2{pixel_y = -32},/turf/simulated/floor/tiled,/area/unscfrigate/flight/vehicle_shop)
 "sk" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/unscfrigate/flight/vehicle_shop)
