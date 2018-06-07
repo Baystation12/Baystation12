@@ -4,6 +4,8 @@
 
 	#include "unsc_frigate_spawndefs.dm"
 
+	#include "../first_contact/overall_overmap.dm
+
 	#include "../first_contact/maps/corvette_spawns.dm"
 
 	#define using_map_DATUM /datum/map/unsc_frigate

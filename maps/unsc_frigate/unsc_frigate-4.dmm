@@ -261,7 +261,7 @@
 "fa" = (/obj/effect/floor_decal/corner/green{dir = 5},/obj/machinery/vending/fitness,/turf/simulated/floor/tiled/dark,/area/unscfrigate/marine_dorms)
 "fb" = (/obj/effect/floor_decal/corner/green{dir = 5},/turf/simulated/floor/tiled/dark,/area/unscfrigate/marine_dorms)
 "fc" = (/obj/effect/floor_decal/corner/green{dir = 1},/turf/simulated/floor/tiled/dark,/area/unscfrigate/marine_dorms)
-"fd" = (/obj/machinery/door/airlock/halo{name = "ODST Officer Bunk"; req_access = list(310)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
+"fd" = (/obj/machinery/door/airlock/halo{name = "ODST Officer Bunk"; req_access = list(310)},/obj/machinery/door/firedoor,/obj/machinery/door/blast/shutters{_wifi_id = "ODST5"; id = "ODST5"; name = "Privacy Shutters"},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "fe" = (/obj/structure/extinguisher_cabinet,/turf/simulated/wall/r_wall,/area/unscfrigate/odstcountry)
 "ff" = (/obj/machinery/door/airlock/halo{name = "ODST Bunks"; req_access = list(309)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "fg" = (/obj/structure/table/rack,/obj/item/stack/material/wood/fifty,/turf/simulated/floor/tiled,/area/unscfrigate/marine_dorms)
@@ -280,7 +280,7 @@
 "ft" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "fu" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/folder{tag = "icon-folder_nt"; icon_state = "folder_nt"},/obj/item/weapon/folder{tag = "icon-folder_nt"; icon_state = "folder_nt"},/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "fv" = (/obj/structure/bed/chair/office/dark{dir = 8},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
-"fw" = (/obj/effect/landmark/start/corvette_odsto,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
+"fw" = (/obj/machinery/light,/obj/effect/landmark/start/corvette_odsto,/obj/machinery/button/remote/blast_door{_wifi_id = "ODST5"; id = "ODST5"; name = "ODST Country Acces Control"; pixel_x = 0; pixel_y = -32; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "fx" = (/obj/effect/landmark/start/corvette_odst,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 
 (1,1,1) = {"
