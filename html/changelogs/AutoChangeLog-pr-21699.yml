@@ -1,0 +1,6 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "The slowdown for pulling (i.e. ctl-click) stuff is now affected by the \"Athletics\" skill."
+  - tweak: "Bigger/stronger species pull things faster."
+  - rscadd: "Pulling stuff generates adrenaline, depending on \"Athletics\" skill. This may raise your heart rate. Pulling for a long time without breaks with low skill may give you the jitter effect and minor heart damage (won't kill you)."
