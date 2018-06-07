@@ -196,17 +196,21 @@
 	color = get_random_colour(lower = 190)
 
 
-/obj/structure/showcase/totem
+/obj/structure/totem
 	name = "totem"
 	desc = "Some kind of post, pillar, plinth, column, or totem."
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "totem"
+	density = 1
+	anchored = 1
+	unacidable = 1
 	var/number
 
-/obj/structure/showcase/totem/Initialize()
+/obj/structure/totem/Initialize()
 	. = ..()
 	number = rand(10,99)
 
-/obj/structure/showcase/totem/examine()
+/obj/structure/totem/examine()
 	..()
 	to_chat(usr, "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'.") //i am not a linguist
 
