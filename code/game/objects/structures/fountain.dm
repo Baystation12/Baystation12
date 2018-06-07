@@ -1,14 +1,22 @@
 //the fountain of youth/unyouth
 
-/obj/structure/showcase/fountain
-	name = "fountain"
+/obj/structure/fountain
+	name = "strange fountain"
 	desc = "The water from the spout is still as if frozen in time, yet the water in the base ripples perpetually."
 	icon = 'icons/obj/fountain.dmi'
 	icon_state = "fountain"
-	var/used = FALSE
+	density = 1
+	anchored = 1
+	unacidable = 1
 	pixel_x = -16
+	var/used = FALSE
 
-/obj/structure/showcase/fountain/attack_hand(var/mob/living/user as mob)
+/obj/structure/fountain/Initialize()
+	. = ..()
+	light_color = get_random_colour(lower = 190)
+	set_light(0.6, 3, 5, 2, light_color)
+
+/obj/structure/fountain/attack_hand(var/mob/living/user as mob)
 	if(user.incapacitated())
 		return
 	if(!CanPhysicallyInteract(user))
@@ -26,10 +34,10 @@
 	else
 		visible_message("\The [user] retracts their hand suddenly.")
 
-/obj/structure/showcase/fountain/proc/time_dilation(var/mob/living/carbon/human/user as mob)
+/obj/structure/fountain/proc/time_dilation(var/mob/living/carbon/human/user as mob)
 	for(var/mob/living/L in oviewers(7, src))
-		L.flash_eyes()
-		L.eye_blurry += 8
+		L.flash_eyes(3)
+		L.eye_blurry += 9
 	visible_message("<span class='warning'>\The [src] erupts in a bright flash of light!</span>")
 	playsound(src,'sound/items/time.ogg',100)
 
@@ -41,7 +49,7 @@
 		var/age_holder = round(rand(15,20))
 		user.age += age_holder
 	else               //become younger
-		to_chat(user, "<span class='cult'>You touch the fountain. Everything stops - then reverses. You relive in an instant the events of your life. The fountain, yesterday's lunch, your first love, your first kiss. It all feels as though it just happened moments ago. Then it feels like it never happened at all. Time reverses back into normality and contines its advance. You feel great, but why are you here?</span>")
+		to_chat(user, "<span class='cult'>You touch the fountain. Everything stops - then reverses. You relive in an instant the events of your life. The fountain, yesterday's lunch, your first love, your first kiss. It all feels as though it just happened moments ago. Then it feels like it never happened at all. Time reverses back into normality and continues its advance. You feel great, but why are you here?</span>")
 		user.became_younger = TRUE
 		user.age = round(rand(15,17))
 	used = TRUE
