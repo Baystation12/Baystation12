@@ -147,6 +147,11 @@
 	if(istype(loc, /turf))
 		var/turf/T = loc
 		. += T.movement_delay
+	. += encumbrance() * (0.5 + 1.5 * (SKILL_MAX - get_skill_value(SKILL_HAULING))/(SKILL_MAX - SKILL_MIN)) //Varies between 0.5 and 2, depending on skill
+
+//How much the stuff the mob is pulling contributes to its movement delay.
+/mob/proc/encumbrance()
+	. = 0
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling
@@ -156,6 +161,11 @@
 			. += max(0, M.mob_size) / MOB_MEDIUM
 		else
 			. += 1
+	. *= (0.8 ** size_strength_mod())
+
+//Determines mob size/strength effects for slowdown purposes. Standard is 0; can be pos/neg.
+/mob/proc/size_strength_mod()
+	return log(2, mob_size / MOB_MEDIUM)
 
 /mob/proc/Life()
 //	if(organStructure)

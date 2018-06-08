@@ -6526,7 +6526,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/item/device/radio/beacon,
 /obj/structure/disposalpipe/segment{
 	dir = 2;
 	icon_state = "pipe-c"
@@ -12588,7 +12587,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled,
 /area/security/processing)
 "yy" = (
@@ -14104,11 +14102,6 @@
 /area/hallway/primary/thirddeck/fore)
 "Cc" = (
 /obj/structure/table/standard,
-/turf/simulated/floor/tiled/dark,
-/area/teleporter/thirddeck)
-"Cd" = (
-/obj/structure/table/standard,
-/obj/prefab/hand_teleporter,
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
 "Ce" = (
@@ -20175,6 +20168,18 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
+"Wt" = (
+/obj/machinery/door/blast/shutters{
+	dir = 2;
+	id = "kitchen";
+	name = "Kitchen Shutters"
+	},
+/obj/effect/floor_decal/corner/grey/diagonal{
+	dir = 4
+	},
+/obj/machinery/smartfridge/foods,
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/galley)
 "Wu" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -32616,7 +32621,7 @@ yN
 zI
 At
 Bj
-Cd
+Cc
 yN
 DC
 Eo
@@ -37444,7 +37449,7 @@ MT
 fp
 hr
 Tg
-TH
+Wt
 gv
 cT
 cT

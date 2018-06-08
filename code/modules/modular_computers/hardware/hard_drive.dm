@@ -63,27 +63,8 @@
 
 // Use this proc to add file to the drive. Returns 1 on success and 0 on failure. Contains necessary sanity checks.
 /obj/item/weapon/computer_hardware/hard_drive/proc/store_file(var/datum/computer_file/F)
-	if(!F || !istype(F))
+	if(!try_store_file(F))
 		return 0
-
-	if(!can_store_file(F.size))
-		return 0
-
-	if(!check_functionality())
-		return 0
-
-	if(!stored_files)
-		return 0
-
-	var/list/badchars = list("/","\\",":","*","?","\"","<",">","|","#", ".")
-	for(var/char in badchars)
-		if(findtext(F.filename, char))
-			return 0
-
-	// This file is already stored. Don't store it again.
-	if(F in stored_files)
-		return 0
-
 	F.holder = src
 	stored_files.Add(F)
 	recalculate_size()
@@ -137,13 +118,27 @@
 /obj/item/weapon/computer_hardware/hard_drive/proc/try_store_file(var/datum/computer_file/F)
 	if(!F || !istype(F))
 		return 0
+	if(!can_store_file(F.size))
+		return 0
+	if(!check_functionality())
+		return 0
+	if(!stored_files)
+		return 0
+
+	var/list/badchars = list("/","\\",":","*","?","\"","<",">","|","#", ".")
+	for(var/char in badchars)
+		if(findtext(F.filename, char))
+			return 0
+
+	// This file is already stored. Don't store it again.
+	if(F in stored_files)
+		return 0
+
 	var/name = F.filename + "." + F.filetype
 	for(var/datum/computer_file/file in stored_files)
 		if((file.filename + "." + file.filetype) == name)
 			return 0
-	return can_store_file(F.size)
-
-
+	return 1
 
 // Tries to find the file by filename. Returns null on failure
 /obj/item/weapon/computer_hardware/hard_drive/proc/find_file_by_name(var/filename)

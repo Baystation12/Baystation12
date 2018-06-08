@@ -670,3 +670,36 @@
 			to_chat(M, "<span class='warning'>You feel funny...</span>")
 		else
 			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")
+
+/datum/reagent/toxin/bromide
+	name = "Bromide"
+	description = "A dark, nearly opaque, red-orange, toxic element."
+	taste_description = "pestkiller"
+	reagent_state = LIQUID
+	color = "#4c3b34"
+	strength = 3
+
+/datum/reagent/toxin/methyl_bromide
+	name = "Methyl Bromide"
+	description = "A fumigant derived from bromide."
+	taste_description = "pestkiller"
+	reagent_state = LIQUID
+	color = "#4c3b34"
+	strength = 5
+
+/datum/reagent/toxin/methyl_bromide/touch_turf(var/turf/simulated/T)
+	if(istype(T))
+		T.assume_gas("methyl_bromide", volume, T20C)
+		remove_self(volume)
+
+/datum/reagent/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	. = ..()
+	if(istype(M))
+		for(var/obj/item/organ/external/E in M.organs)
+			if(LAZYLEN(E.implants))
+				for(var/obj/effect/spider/spider in E.implants)
+					if(prob(25))
+						E.implants -= spider
+						M.visible_message("<span class='notice'>The dying form of \a [spider] emerges from inside \the [M]'s [E.name].</span>")
+						qdel(spider)
+						break

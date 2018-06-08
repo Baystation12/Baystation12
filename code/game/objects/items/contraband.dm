@@ -4,30 +4,14 @@
 /obj/item/weapon/storage/pill_bottle/happy
 	name = "bottle of Happy pills"
 	desc = "Highly illegal drug. When you want to see the rainbow."
-
-/obj/item/weapon/storage/pill_bottle/happy/New()
-	..()
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
+	wrapper_color = COLOR_PINK
+	startswith = list(/obj/item/weapon/reagent_containers/pill/happy = 14)
 
 /obj/item/weapon/storage/pill_bottle/zoom
 	name = "bottle of Zoom pills"
 	desc = "Highly illegal drug. Trade brain for speed."
-
-/obj/item/weapon/storage/pill_bottle/zoom/New()
-	..()
-	new /obj/item/weapon/reagent_containers/pill/zoom( src )
-	new /obj/item/weapon/reagent_containers/pill/zoom( src )
-	new /obj/item/weapon/reagent_containers/pill/zoom( src )
-	new /obj/item/weapon/reagent_containers/pill/zoom( src )
-	new /obj/item/weapon/reagent_containers/pill/zoom( src )
-	new /obj/item/weapon/reagent_containers/pill/zoom( src )
-	new /obj/item/weapon/reagent_containers/pill/zoom( src )
+	wrapper_color = COLOR_BLUE
+	startswith = list(/obj/item/weapon/reagent_containers/pill/zoom = 14)
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random
 	atom_flags = 0

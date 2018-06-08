@@ -201,14 +201,17 @@
 					if(.[1] == "Restart Round")
 						restart = 1
 				if("gamemode")
-					if(master_mode != .[1])
-						world.save_mode(.[1])
-						if(ticker && ticker.mode)
-							restart = 1
-						else
-							master_mode = .[1]
-					secondary_mode = .[2]
-					tertiary_mode = .[3]
+					// set gamemode
+					// inconclusive vote -> do nothing
+					if(.[1])
+						if(master_mode != .[1])
+							world.save_mode(.[1])
+							if(ticker && ticker.mode)
+								restart = 1
+							else
+								master_mode = .[1]
+						secondary_mode = .[2]
+						tertiary_mode = .[3]
 				if("crew_transfer")
 					if(.[1] == "Initiate Crew Transfer")
 						init_autotransfer()

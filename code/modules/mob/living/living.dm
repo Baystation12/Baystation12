@@ -780,6 +780,8 @@ default behaviour is:
 		. += 15
 	if(confused)
 		. += 30
+	if(CLUMSY in mutations)
+		. += 40
 
 /mob/living/proc/ranged_accuracy_mods()
 	. = 0
@@ -791,3 +793,5 @@ default behaviour is:
 		. -= 5
 	if(eye_blurry)
 		. -= 1
+	if(CLUMSY in mutations)
+		. -= 3

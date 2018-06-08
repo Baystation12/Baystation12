@@ -364,9 +364,7 @@ var/global/datum/controller/occupations/job_master
 		if(job)
 
 			// Transfers the skill settings for the job to the mob
-			if(job in H.client.prefs.skills_allocated)
-				H.skillset.obtain_from_allocation(job, H.client.prefs.skills_allocated[job])
-			else H.skillset.obtain_from_allocation(job)
+			H.skillset.obtain_from_client(job, H.client)
 
 			//Equip job items.
 			job.setup_account(H)

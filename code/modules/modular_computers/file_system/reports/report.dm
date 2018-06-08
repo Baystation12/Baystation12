@@ -8,7 +8,8 @@
 	var/list/access_edit = list(list())                    //The access required to submit the report. See documentation below.
 	var/list/access = list(list())                         //The access required to view the report.
 	var/list/datum/report_field/fields = list()            //A list of fields the report comes with, in order that they should be displayed.
-	var/ID_ticker = 1                                      //Used to name fields, for internal use only.
+	var/available_on_ntnet = 0                             //Whether this report type should show up on NTNet.
+	var/logo                                               //Can be set to a pencode logo for use with some display methods.
 
 /datum/computer_file/report/New()
 	..()
@@ -77,8 +78,14 @@ If the override option is set to 0, the access supplied will instead be added as
 			to_chat(user, "<span class='notice'>You are missing a required field!</span>")
 			return 0
 	creator = user.name
-	file_time = stationtime2text()
+	file_time = time_stamp()
+	rename_file(file_time)
 	return 1
+
+/datum/computer_file/report/proc/rename_file(append)
+	append = append || time_stamp()
+	append = replacetext(append, ":", "_")
+	filename = "[form_name]_[append]"
 
 //Don't add fields except through this proc.
 /datum/computer_file/report/proc/add_field(field_type, name, value = null, required = 0)
@@ -131,10 +138,38 @@ If the override option is set to 0, the access supplied will instead be added as
 		dat["ignore_value"] = field.ignore_value
 		dat["ID"] = field.ID
 		.["fields"] += list(dat)
+/*
+This formats the report into pencode for use with paper and printing. Setting access to null will bypass access checks.
+with_fields will include a field link after the field value (useful to print fillable forms).
+no_html will strip any html, possibly killing useful formatting in the process.
+*/
+/datum/computer_file/report/proc/generate_pencode(access, with_fields, no_html)
+	. = list()
+	. += "\[center\][logo]\[/center\]"
+	. += "\[center\]\[h2\][display_name()]\[/h2\]\[/center\]"
+	. += "\[grid\]"
+	for(var/datum/report_field/F in fields)
+		if(!F.ignore_value)
+			. += "\[row\]\[cell\]\[b\][F.display_name()]:\[/b\]"
+			var/field = ((with_fields && F.can_edit) ? "\[field\]" : "" )
+			if(!access || F.verify_access(access))
+				. += (F.needs_big_box ? "\[/grid\][F.get_value()][field]\[grid\]" : "\[cell\][F.get_value()][field]")
+			else
+				. += "\[cell\]\[REDACTED\][field]"
+		else
+			. += "\[/grid\]\[h3\][F.display_name()]\[/h3\]\[grid\]"
+	. += "\[/grid\]"
+	. = JOINTEXT(.)
+	if(no_html)
+		. = html2pencode(.)
 
-//recipient reports have a designated recipitents field, for recieving submitted reports.
+//recipient reports have a designated recipients field, for recieving submitted reports.
 /datum/computer_file/report/recipient
 	var/datum/report_field/people/list_from_manifest/recipients
+
+/datum/computer_file/report/recipient/Destroy()
+	recipients = null
+	return ..()
 
 /datum/computer_file/report/recipient/generate_fields()
 	recipients = add_field(/datum/report_field/people/list_from_manifest/, "Send Copies To")

@@ -55,13 +55,14 @@
 		return
 
 	if(attached)
-		visible_message("\The [attached] is taken off \the [src]")
-		attached = null
+		if(!usr.skill_check(SKILL_MEDICAL, SKILL_BASIC))
+			rip_out()
+			STOP_PROCESSING(SSobj,src)
+		else
+			visible_message("\The [attached] is taken off \the [src]")
+			attached = null
 	else if(ishuman(over_object))
-		visible_message("\The [usr] hooks \the [over_object] up to \the [src].")
-		attached = over_object
-		START_PROCESSING(SSobj,src)
-
+		hook_up(over_object, usr)
 	update_icon()
 
 /obj/structure/iv_drip/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -87,10 +88,7 @@
 /obj/structure/iv_drip/Process()
 	if(attached)
 		if(!Adjacent(attached))
-			visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
-			attached.apply_damage(1, BRUTE, pick(BP_R_ARM, BP_L_ARM))
-			attached = null
-			update_icon()
+			rip_out()
 			return PROCESS_KILL
 	else
 		return PROCESS_KILL
@@ -169,3 +167,23 @@
 		to_chat(usr, "<span class='notice'>No chemicals are attached.</span>")
 
 	to_chat(usr, "<span class='notice'>[attached ? attached : "No one"] is hooked up to it.</span>")
+
+/obj/structure/iv_drip/proc/rip_out()
+	visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
+	attached.apply_damage(1, BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAM_SHARP)
+	attached = null
+	update_icon()
+
+/obj/structure/iv_drip/proc/hook_up(mob/living/carbon/human/target, mob/user)
+	to_chat(user, "<span class='notice'>You start to hook up \the [target] to \the [src].</span>")
+	if(!user.do_skilled(2 SECONDS, SKILL_MEDICAL, target))
+		return
+
+	if(prob(user.skill_fail_chance(SKILL_MEDICAL, 80, SKILL_BASIC)))
+		visible_message("\The [user] fails to find the vein while trying to hook \the [target] up to \the [src], stabbing them instead!")
+		target.apply_damage(2, BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags=DAM_SHARP)
+		return
+
+	visible_message("\The [usr] hooks \the [target] up to \the [src].")
+	attached = target
+	START_PROCESSING(SSobj,src)

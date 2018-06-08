@@ -8,9 +8,10 @@
 	use_power = 1
 	idle_power_usage = 1
 	active_power_usage = 5
+
+	var/suppressing = FALSE
 	var/mob/living/carbon/human/victim = null
 	var/strapped = 0.0
-
 	var/obj/machinery/computer/operating/computer = null
 
 /obj/machinery/optable/New()
@@ -20,6 +21,10 @@
 		if (computer)
 			computer.table = src
 			break
+
+/obj/machinery/optable/examine(var/mob/user)
+	. = ..()
+	to_chat(user, "<span class='notice'>The neural suppressors are switched [suppressing ? "on" : "off"].</span>")
 
 /obj/machinery/optable/ex_act(severity)
 
@@ -37,12 +42,32 @@
 			if (prob(25))
 				src.set_density(0)
 
-/obj/machinery/optable/attack_hand(mob/user as mob)
-	if (HULK in usr.mutations)
+
+/obj/machinery/optable/attack_ai(var/mob/user)
+	attack_hand(user)
+
+/obj/machinery/optable/attack_hand(var/mob/user)
+
+	if(HULK in user.mutations)
 		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
 		src.set_density(0)
 		qdel(src)
-	return
+		return
+
+	if(!victim)
+		to_chat(user, "<span class='warning'>There is nobody on \the [src]. It would be pointless to turn the suppressor on.</span>")
+		return
+
+	if(user != victim) // Skip checks if you're doing it to yourself, this is an anti-griefing mechanic more than anything.
+		user.visible_message("<span class='warning'>\The [user] begins switching on \the [src]'s neural suppressor.</span>")
+		if(!do_after(user, 30, src) || !user || !src || user.incapacitated() || !user.Adjacent(src))
+			return
+		if(!victim)
+			to_chat(user, "<span class='warning'>There is nobody on \the [src]. It would be pointless to turn the suppressor on.</span>")
+			return
+
+	suppressing = !suppressing
+	user.visible_message("<span class='notice'>\The [user] switches [suppressing ? "on" : "off"] \the [src]'s neural suppressor.</span>")
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -63,14 +88,19 @@
 	return
 
 /obj/machinery/optable/proc/check_victim()
-	if(locate(/mob/living/carbon/human, src.loc))
-		var/mob/living/carbon/human/M = locate(/mob/living/carbon/human, src.loc)
-		if(M.lying)
-			src.victim = M
-			icon_state = M.pulse() ? "table2-active" : "table2-idle"
-			return 1
-	src.victim = null
-	icon_state = "table2-idle"
+	if(!victim || !victim.lying || victim.loc != loc)
+		suppressing = FALSE
+		victim = null
+		if(locate(/mob/living/carbon/human) in loc)
+			for(var/mob/living/carbon/human/H in loc)
+				if(H.lying)
+					victim = H
+					break
+	icon_state = (victim && victim.pulse()) ? "table2-active" : "table2-idle"
+	if(victim)
+		if(suppressing && victim.sleeping < 3)
+			victim.Sleeping(3 - victim.sleeping)
+		return 1
 	return 0
 
 /obj/machinery/optable/Process()
