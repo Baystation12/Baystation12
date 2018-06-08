@@ -281,8 +281,9 @@ var/global/datum/controller/radio/radio_controller
 
 //Sends a signal to all machines belonging to a given filter. Should be called by post_signal()
 /datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/filter, var/turf/start_point = null, var/range = 0)
-	if(!using_map.use_overmap) //Don't need to bother with any of this if we're not using the overmap.
-
+	if(!GLOB.using_map.use_overmap) //Don't need to bother with any of this if we're not using the overmap.
+		for(var/obj/device in devices[filter])
+			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 		return
 
 	var/list/devices_signalled = list()
