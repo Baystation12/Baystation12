@@ -1,6 +1,0 @@
-author: "sabiram"
-delete-after: True
-changes: 
-  - tweak: "Gyroscooters now shield their pilot from 5% of projectiles, down from 40%."
-  - tweak: "Gyroscooters are now slightly slower."
-  - tweak: "Attempting to move a bike or gyroscooter while stunned will now eject you."
