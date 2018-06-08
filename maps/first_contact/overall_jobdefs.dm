@@ -62,7 +62,7 @@
 	alt_titles = list("ODST Medic","ODST CQC Specialist","ODST Sharpshooter","ODST Combat Engineer")
 	selection_color = "#008000"
 	access = list(142,110,309,311)
-	spawnpoint_override = "Research Facility Security Spawn"
+	spawnpoint_override = "ODST Rifleman Spawn"
 	is_whitelisted = 1
 
 /datum/job/ODSTO
@@ -71,8 +71,8 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ODSTO
 	selection_color = "#008000"
-	access = list(142,110,309,310,311)
-	spawnpoint_override = "Research Facility Security Spawn"
+	access = list(142,110,300,306,309,310,311)
+	spawnpoint_override = "ODST Squad Leader Spawn"
 	is_whitelisted = 1
 
 /datum/map/first_contact

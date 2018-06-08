@@ -11,7 +11,7 @@
 "You bastards.","Automated Alert: Fuel lines damaged. Multiple hull breaches. Immediate assistance required."\
 )
 #define ALL_Civilian_SHIPNAMES list(\
-"Pete's Cube","The Nomad","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home"\
+"Pete's Cube","The Nomad","The Alexander","Free Range","Bigger Stick","Fist of Sol","Hammerhead","Spirit of Jupiter","Trident","The Messenger","Slow But Steady","Road Less Travelled","Dawson's Christian","Flexi Taped","Paycheck","Distant Home"\
 )
 
 #define STOP_WAIT_TIME 10 MINUTES

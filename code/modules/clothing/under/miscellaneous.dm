@@ -520,8 +520,8 @@
 	starting_accessories = list(/obj/item/clothing/accessory/yellow, /obj/item/clothing/accessory/toggleable/tan_jacket)
 
 /obj/item/clothing/under/suit_jacket/nt
-	name = "\improper NanoTrasen executive suit"
-	desc = "A suit that NanoTrasen gives to its executives."
+	name = "\improper Misriah Armory executive suit"
+	desc = "A suit that Misriah Armory gives to its executives."
 	icon_state = "ntsuit"
 	item_state = "bl_suit"
 	worn_state = "ntsuit"

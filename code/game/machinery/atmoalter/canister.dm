@@ -3,7 +3,7 @@
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "yellow"
 	density = 1
-	var/health = 100.0
+	var/health = 200.0
 	flags = CONDUCT
 	w_class = ITEM_SIZE_GARGANTUAN
 

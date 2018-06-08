@@ -1022,7 +1022,7 @@
 	var/list/visible_implants = list()
 	for(var/obj/item/organ/external/organ in src.organs)
 		for(var/obj/item/weapon/O in organ.implants)
-			if(!istype(O,/obj/item/weapon/implant) && (O.w_class > class) && !istype(O,/obj/item/weapon/material/shard/shrapnel))
+			if(!istype(O,/obj/item/weapon/implant) && (O.w_class > class))
 				visible_implants += O
 
 	return(visible_implants)

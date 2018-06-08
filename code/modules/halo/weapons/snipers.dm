@@ -60,6 +60,8 @@
 	w_class = ITEM_SIZE_LARGE
 	accuracy = 2
 	scoped_accuracy = 3
+	fire_delay = 4
+	burst_delay = 4
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 
@@ -91,3 +93,24 @@
 		set_light(4)
 	else
 		set_light(0)
+
+/obj/item/weapon/gun/projectile/m392_dmr/innie
+	name = "Modified M392 DMR"
+	desc = "A heavily modified M392 remade without a bullpup design and including a hardened barrel for a faster fire rate. Takes 7.62mm rounds."
+	icon_state = "innie_M392"
+	fire_sound = 'code/modules/halo/sounds/innieDMRfirfix.ogg'
+	reload_sound = 'code/modules/halo/sounds/InnieDMRreload.ogg'
+	fire_delay = 2
+	burst_delay = 2
+	magazine_type = /obj/item/ammo_magazine/m762_ap/M392/innie
+	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392)
+	accuracy = 1
+	scoped_accuracy = 2
+	dispersion = 0.2
+
+/obj/item/weapon/gun/projectile/m392_dmr/innie/update_icon()
+	if(ammo_magazine)
+		icon_state = "innie_M392"
+	else
+		icon_state = "innie_M392_unloaded"
+	. = ..()

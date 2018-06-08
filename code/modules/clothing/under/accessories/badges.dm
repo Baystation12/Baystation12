@@ -134,13 +134,6 @@
 	slot_flags = SLOT_TIE
 	badge_string = "Defense Intelligence Agency"
 
-/obj/item/clothing/accessory/badge/interstellarintel
-	name = "agent's badge"
-	desc = "A synthleather holographic badge bearing the crest of the Office of Interstellar Intelligence."
-	icon_state = "intelbadge"
-	slot_flags = SLOT_TIE
-	badge_string = "Office of Interstellar Intelligence"
-
 /obj/item/clothing/accessory/badge/representative
 	name = "representative's badge"
 	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a representative of the Sol Central Government."

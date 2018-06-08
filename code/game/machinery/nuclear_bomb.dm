@@ -487,7 +487,7 @@ var/bomb_set
 	name = "Project Theta"
 	info = {"
 	<tt><center><b><font color='red'>CONFIDENTIAL: UPPER MANAGEMENT ONLY</font></b>
-	<h3>NANOTRASEN RESEARCH DIVISION</h3>
+	<h3>MISRIAH ARMORY RESEARCH DIVISION</h3>
 	<img src = ntlogo.png>
 	</center>
 	<b>FROM:</b> J.P <br>
