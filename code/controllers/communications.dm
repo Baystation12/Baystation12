@@ -313,7 +313,6 @@ var/global/datum/controller/radio/radio_controller
 				if(is_valid_node(tc_2) && get_dist(map_sectors["[tc.z]"],tc_2_om_obj) <= tc.signal_range && !(tc_2 in signal_nodes))
 					if(tc_2.on && tc_2.is_freq_listening(signal))
 						signal_nodes += tc_2
-						world << "EXTRA NODE ADDED"
 						nodes_exhausted = 0
 						if(tc_2.long_range_link)
 							for(var/z_level in tc_2_om_obj.map_z)
