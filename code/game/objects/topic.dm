@@ -5,6 +5,7 @@
 		CouldUseTopic(usr)
 		return OnTopic(usr, href_list, state)
 	CouldNotUseTopic(usr)
+	return TRUE
 
 /obj/proc/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	return TOPIC_NOACTION
@@ -18,7 +19,7 @@
 	var/id = src.GetIdCard()
 	if(id && O.check_access(id))
 		return TRUE
-	to_chat(src, "<span class='danger'>\icon[src]Access Denied!</span>")
+	to_chat(src, "<span class='danger'>\icon[src] Access Denied!</span>")
 	return FALSE
 
 /mob/proc/CanUseObjTopic()
