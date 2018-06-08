@@ -307,7 +307,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		if(!choice) return
 		pref.species_preview = choice
 		SetSpecies(preference_mob())
-		pref.alternate_languages.Cut() // Reset their alternate languages. Todo: attempt to just fix it instead?
 		return TOPIC_HANDLED
 
 	else if(href_list["set_species"])
@@ -327,12 +326,23 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 			ResetAllHair()
 
-			//reset hair colour and skin colour
-			pref.r_hair = 0//hex2num(copytext(new_hair, 2, 4))
-			pref.g_hair = 0//hex2num(copytext(new_hair, 4, 6))
-			pref.b_hair = 0//hex2num(copytext(new_hair, 6, 8))
+			//reset colors
+			pref.r_hair = 0
+			pref.g_hair = 0
+			pref.b_hair = 0
+			pref.r_facial = 0
+			pref.g_facial = 0
+			pref.b_facial = 0
 			pref.s_tone = 0
+			pref.r_skin = hex2num(copytext(mob_species.flesh_color, 2, 4))
+			pref.g_skin = hex2num(copytext(mob_species.flesh_color, 4, 6))
+			pref.b_skin = hex2num(copytext(mob_species.flesh_color, 6, 8))
+			pref.r_eyes = 0
+			pref.g_eyes = 0
+			pref.b_eyes = 0
 			pref.age = max(min(pref.age, mob_species.max_age), mob_species.min_age)
+
+			pref.alternate_languages = mob_species.secondary_langs
 
 			reset_limbs() // Safety for species with incompatible manufacturers; easier than trying to do it case by case.
 			pref.body_markings.Cut() // Basically same as above.

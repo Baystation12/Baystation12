@@ -122,7 +122,7 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
-	flesh_color = "#afa59e"
+	flesh_color = "#663300"
 	base_color = "#333333"
 	blood_color = "#862a51"
 	organs_icon = 'icons/mob/human_races/organs/tajaran.dmi'
@@ -187,7 +187,7 @@
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
-	flesh_color = "#8cd7a3"
+	flesh_color = "#339966"
 	blood_color = "#1d2cbf"
 	base_color = "#006666"
 	organs_icon = 'icons/mob/human_races/organs/skrell.dmi'
