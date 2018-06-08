@@ -36,5 +36,6 @@ changes:
   - maptweak: "Reworked Kig-Yar engines (369 max thrust baby!)"
   - maptweak: "Fixed a small piping error on the UNSC Corvette engines."
   - maptweak: "Made the ID required for the covenant fax easier to find."
+  - maptweak: "Replaced the frigate fuel pumps with pumps that are activated on round start (like all other ships have already), removes the bothersome startup procedure and acces problems."
   - tweak: "Updated kig-yar ship icon to reflect recent interior remaps on overmap icon."
   - tweak: "Fixed sloppyness in the spawnpoint override coding for ODST roles."
