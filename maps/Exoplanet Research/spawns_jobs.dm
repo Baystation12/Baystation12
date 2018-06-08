@@ -124,7 +124,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARD
 	selection_color = "#008000"
 	access = list(311)
-	spawnpoint_override = "Research Facility Spawn"
+	spawnpoint_override = "Research Facility Security Spawn"
 
 /datum/job/ONIGUARDS
 	title = "ONI Security Squad Leader"
@@ -133,7 +133,7 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARDS
 	selection_color = "#008000"
 	access = list(311)
-	spawnpoint_override = "Research Facility Spawn"
+	spawnpoint_override = "Research Facility Security Spawn"
 
 
 /datum/job/COMMO
