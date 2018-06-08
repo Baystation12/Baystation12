@@ -1041,6 +1041,9 @@
 	pixel_x = default_pixel_x
 	pixel_y = default_pixel_y
 
+	if(!(species.appearance_flags & HAS_UNDERWEAR))
+		QDEL_NULL_LIST(worn_underwear)
+
 	spawn(0)
 		regenerate_icons()
 		if(vessel.total_volume < species.blood_volume)
