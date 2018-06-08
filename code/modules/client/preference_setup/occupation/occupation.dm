@@ -86,8 +86,10 @@
 	var/datum/mil_rank/player_rank = null
 
 	. = list()
+	. += "<style>.Points,a.Points{background: #cc5555;}</style>"
+	. += "<style>a.Points:hover{background: #55cc55;}</style>"
 	. += "<tt><center>"
-	. += "<b>Choose occupation chances. Click on the occupation to select skills.</b><br>Unavailable occupations are crossed out.<br>"
+	. += "<b>Choose occupation chances. <font size=3>Click on the occupation to select skills.</font><br>Unavailable occupations are crossed out.</b>"
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 
 		player_branch = mil_branches.get_branch(pref.char_branch)
@@ -107,6 +109,14 @@
 	//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
 	var/datum/job/lastJob
 	for(var/datum/job/job in job_master.occupations)
+		var/unspent = pref.points_by_job[job]
+		var/current_level = JOB_LEVEL_NEVER
+		if(pref.job_high == job.title)
+			current_level = JOB_LEVEL_HIGH
+		else if(job.title in pref.job_medium)
+			current_level = JOB_LEVEL_MEDIUM
+		else if(job.title in pref.job_low)
+			current_level = JOB_LEVEL_LOW
 
 		index += 1
 		if((index >= limit) || (job.title in splitJobs))
@@ -122,45 +132,40 @@
 		var/rank = job.title
 		lastJob = job
 		. += "<a href='?src=\ref[src];job_info=[rank]'>\[?\]</a>"
-		. += "<a href='?src=\ref[src];set_skills=[rank]'>"
+		var/bad_message = ""
 		if(job.total_positions == 0 && job.spawn_positions == 0)
-			. += "<del>[rank]</del></a></td><td><b> \[UNAVAILABLE]</b></td></tr>"
-			continue
-		if(jobban_isbanned(user, rank))
-			. += "<del>[rank]</del></a></td><td><b> \[BANNED]</b></td></tr>"
-			continue
-		if(!job.player_old_enough(user.client))
+			bad_message = "<b> \[UNAVAILABLE]</b>"
+		else if(jobban_isbanned(user, rank))
+			bad_message = "<b> \[BANNED]</b>"
+		else if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
-			. += "<del>[rank]</del></a></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
-			continue
-		if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
-			. += "<del>[rank]</del></a></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
-			continue
+			bad_message = "\[IN [(available_in_days)] DAYS]"
+		else if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
+			bad_message = "\[MINIMUM CHARACTER AGE: [job.minimum_character_age]]"
 
-		if(!job.is_species_allowed(S))
-			. += "<del>[rank]</del></a></td><td><b> \[SPECIES RESTRICTED]</b></td></tr>"
-			continue
+		else if(!job.is_species_allowed(S))
+			bad_message = "<b> \[SPECIES RESTRICTED]</b>"
 
-		if(job.allowed_branches)
+		if(!bad_message && job.allowed_branches)
 			if(!player_branch)
-				. += "<del>[rank]</del></a></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[BRANCH RESTRICTED]</b></a></td></tr>"
-				continue
-			if(!is_type_in_list(player_branch, job.allowed_branches))
-				. += "<del>[rank]</del></a></td><td><a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [player_branch.name_short]]</b></a></td></tr>"
-				continue
+				bad_message = "<a href='?src=\ref[src];show_branches=[rank]'><b> \[BRANCH RESTRICTED]</b></a>"
+			else if(!is_type_in_list(player_branch, job.allowed_branches))
+				bad_message = "<a href='?src=\ref[src];show_branches=[rank]'><b> \[NOT FOR [player_branch.name_short]]</b></a>"
 
-		if(job.allowed_ranks)
+		if(!bad_message && job.allowed_ranks)
 			if(!player_rank)
-				. += "<del>[rank]</del></a></td><td><a href='?src=\ref[src];show_ranks=[rank]'><b> \[RANK RESTRICTED]</b></a></td></tr>"
-				continue
-
-			if(!is_type_in_list(player_rank, job.allowed_ranks))
-				. += "<del>[rank]</del></a></td><td><a href='?src=\ref[src];show_ranks=[rank]'><b> \[NOT FOR [player_rank.name_short || player_rank.name]]</b></a></td></tr>"
-				continue
+				bad_message = "<a href='?src=\ref[src];show_ranks=[rank]'><b> \[RANK RESTRICTED]</b></a>"
+			else if(!is_type_in_list(player_rank, job.allowed_ranks))
+				bad_message = "<a href='?src=\ref[src];show_ranks=[rank]'><b> \[NOT FOR [player_rank.name_short || player_rank.name]]</b></a>"
 
 		if(("Assistant" in pref.job_low) && (rank != "Assistant"))
-			. += "<font color=grey>[rank]</font></a></td><td></td></tr>"
+			. += "<a href='?src=\ref[src];set_skills=[rank]'><font color=grey>[rank]</font></a></td><td></td></tr>"
 			continue
+		if(bad_message)
+			. += "<a href='?src=\ref[src];set_skills=[rank]'><del>[rank]</del></a></td><td>[bad_message]</td></tr>"
+			continue
+
+		. += (unspent && (current_level != JOB_LEVEL_NEVER) ? "<a class='Points' href='?src=\ref[src];set_skills=[rank]'>" : "<a href='?src=\ref[src];set_skills=[rank]'>") 
 		if((rank in GLOB.command_positions) || (rank == "AI"))//Bold head jobs
 			. += "<b>[rank]</b>"
 		else
@@ -176,14 +181,6 @@
 			. += " [!(rank in pref.job_low) ? "<font color=black>" : ""]\[No][!(rank in pref.job_low) ? "</font>" : ""]"
 			. += "</a>"
 		else
-			var/current_level = JOB_LEVEL_NEVER
-			if(pref.job_high == job.title)
-				current_level = JOB_LEVEL_HIGH
-			else if(job.title in pref.job_medium)
-				current_level = JOB_LEVEL_MEDIUM
-			else if(job.title in pref.job_low)
-				current_level = JOB_LEVEL_LOW
-
 			. += " <a href='?src=\ref[src];set_job=[rank];set_level=[JOB_LEVEL_HIGH]'>[current_level == JOB_LEVEL_HIGH ? "<font color=55cc55>" : ""]\[High][current_level == JOB_LEVEL_HIGH ? "</font>" : ""]</a>"
 			. += " <a href='?src=\ref[src];set_job=[rank];set_level=[JOB_LEVEL_MEDIUM]'>[current_level == JOB_LEVEL_MEDIUM ? "<font color=eecc22>" : ""]\[Medium][current_level == JOB_LEVEL_MEDIUM ? "</font>" : ""]</a>"
 			. += " <a href='?src=\ref[src];set_job=[rank];set_level=[JOB_LEVEL_LOW]'>[current_level == JOB_LEVEL_LOW ? "<font color=cc5555>" : ""]\[Low][current_level == JOB_LEVEL_LOW ? "</font>" : ""]</a>"
@@ -204,7 +201,8 @@
 			. += "<u><a href='?src=\ref[src];job_alternative=1'>Return to lobby if preference unavailable</a></u>"
 
 	. += "<a href='?src=\ref[src];reset_jobs=1'>\[Reset\]</a></center>"
-	. += "</tt>"
+	. += "</tt><br>"
+	. += "Jobs that <span class='Points'>look like this</span> have unspent skill points remaining."
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/occupation/OnTopic(href, href_list, user)
@@ -273,6 +271,7 @@
 			return
 		var/value = text2num(href_list["newvalue"])
 		update_skill_value(J, S, value)
+		pref.ShowChoices(user) //Manual refresh to foreground/background windows.
 		panel.set_content(generate_skill_content(J))
 		panel.open()
 
