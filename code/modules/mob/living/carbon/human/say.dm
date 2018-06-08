@@ -203,8 +203,8 @@
 			if(has_radio)
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += R
-		if("whisper")
-			whisper_say(message, speaking, alt_name)
+		if("whisper") //It's going to get sanitized again immediately, so decode.
+			whisper_say(html_decode(message), speaking, alt_name)
 			return 1
 		else
 			if(message_mode)
