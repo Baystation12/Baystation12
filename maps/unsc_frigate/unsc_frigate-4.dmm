@@ -280,7 +280,7 @@
 "ft" = (/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "fu" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/folder{tag = "icon-folder_nt"; icon_state = "folder_nt"},/obj/item/weapon/folder{tag = "icon-folder_nt"; icon_state = "folder_nt"},/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "fv" = (/obj/structure/bed/chair/office/dark{dir = 8},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
-"fw" = (/obj/machinery/light,/obj/effect/landmark/start/corvette_odsto,/obj/machinery/button/remote/blast_door{_wifi_id = "ODST5"; id = "ODST5"; name = "ODST Country Acces Control"; pixel_x = 0; pixel_y = -32; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
+"fw" = (/obj/machinery/light,/obj/machinery/button/remote/blast_door{_wifi_id = "ODST5"; id = "ODST5"; name = "ODST Country Acces Control"; pixel_x = 0; pixel_y = -32; req_access = list(309)},/obj/effect/landmark/start/corvette_odsto,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 "fx" = (/obj/effect/landmark/start/corvette_odst,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/unscfrigate/odstcountry)
 
 (1,1,1) = {"
