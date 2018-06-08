@@ -23,6 +23,12 @@
 /area/turbolift/unscfrigate/lifts/lift_2_third
 	name = "Deck 2"
 
+/area/turbolift/unscfrigate/lifts/lift_3_third
+	name = "Deck 2"
+
+/area/turbolift/unscfrigate/lifts/lift_3_fourth
+	name = "Deck 1"
+
 /obj/turbolift_map_holder/cargolift/unsc_frigate
 	dir = SOUTH
 	depth = 4
@@ -40,3 +46,11 @@
 	lift_size_y = 3
 
 	areas_to_use = list(/area/turbolift/unscfrigate/lifts/lift_2_ground,/area/turbolift/unscfrigate/lifts/lift_2_second,/area/turbolift/unscfrigate/lifts/lift_2_third)
+
+/obj/turbolift_map_holder/cargolift/unsc_frigate/front
+	dir = WEST
+	depth = 2
+	lift_size_x = 3
+	lift_size_y = 3
+
+	areas_to_use = list(/area/turbolift/unscfrigate/lifts/lift_3_third,/area/turbolift/unscfrigate/lifts/lift_3_fourth)
