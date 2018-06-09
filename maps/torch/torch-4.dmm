@@ -23992,7 +23992,7 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
-/area/hallway/primary/bridge/fore)
+/area/hallway/primary/firstdeck/fore)
 "mSb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
