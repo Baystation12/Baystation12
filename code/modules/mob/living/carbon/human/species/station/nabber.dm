@@ -32,6 +32,8 @@
 
 	reagent_tag = IS_NABBER
 
+	have_vision_cone = FALSE
+
 	icon_template = 'icons/mob/human_races/r_template_tall.dmi'
 	icobase = 'icons/mob/human_races/r_nabber.dmi'
 	deform = 'icons/mob/human_races/r_nabber.dmi'

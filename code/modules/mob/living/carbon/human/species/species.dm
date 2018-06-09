@@ -31,6 +31,8 @@
 	var/tail_blend = ICON_ADD
 	var/tail_hair
 
+	var/have_vision_cone = TRUE
+
 	var/list/hair_styles
 	var/list/facial_hair_styles
 
