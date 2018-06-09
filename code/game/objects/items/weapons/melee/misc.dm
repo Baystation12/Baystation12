@@ -40,14 +40,14 @@
 	slot_flags = SLOT_BELT
 	applies_material_colour = FALSE
 
-/obj/item/weapon/material/sword/replica/officersword/marine
-	name = "marine NCO's sword"
-	desc = "A polished sword issued to SCG Marine NCOs."
+/obj/item/weapon/material/sword/replica/officersword/oac
+	name = "orbital assault NCO's sword"
+	desc = "A polished sword issued to SCG OAC NCOs."
 	icon_state = "marinesword"
 
-/obj/item/weapon/material/sword/replica/officersword/marineofficer
-	name = "marine officer's sword"
-	desc = "A curved sword issued to SCG Marine officers."
+/obj/item/weapon/material/sword/replica/officersword/oacofficer
+	name = "orbital assault officer's sword"
+	desc = "A curved sword issued to SCG OAC officers."
 	icon_state = "marineofficersword"
 	item_state = "marineofficersword"
 

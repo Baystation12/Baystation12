@@ -72,8 +72,8 @@
 	name = "Shirt, I<3NT"
 	icon_state = "lover_s"
 
-/datum/category_item/underwear/undershirt/shirt_marine
-	name = "Shirt, Marine Corps"
+/datum/category_item/underwear/undershirt/shirt_oak
+	name = "Shirt, Orbital Assault Corps"
 	icon_state = "marine_s"
 
 /datum/category_item/underwear/undershirt/shirt_nt
@@ -175,8 +175,8 @@
 	underwear_name = "tanktop"
 	icon_state = "tank_fleet_female_s"
 
-/datum/category_item/underwear/undershirt/marine_female
-	name = "Shirt, Marine Corps, Female"
+/datum/category_item/underwear/undershirt/oac_female
+	name = "Shirt, Orbital Assault Corps, Female"
 	icon_state = "marine_female_s"
 
 /datum/category_item/underwear/undershirt/expedition_female

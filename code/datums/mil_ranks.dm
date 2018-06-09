@@ -92,11 +92,11 @@ var/datum/mil_branches/mil_branches = new()
 		return FALSE
 
 /**
- *  A single military branch, such as Fleet or Marines
+ *  A single military branch, such as Fleet or OAC
  */
 /datum/mil_branch
-	var/name = "Unknown"         // Longer name for branch, eg "Sol Central Marine Corps"
-	var/name_short       		// Abbreviation of the name, eg "SCMC"
+	var/name = "Unknown"         // Longer name for branch, eg "Orbital Assault Corps"
+	var/name_short       		// Abbreviation of the name, eg "SCGOAC"
 
 
 
