@@ -1472,6 +1472,7 @@
 #include "code\modules\halo\machinery\overmap_projectile.dm"
 #include "code\modules\halo\machinery\overmap_weapon.dm"
 #include "code\modules\halo\machinery\overmap_weapon_ammo.dm"
+#include "code\modules\halo\machinery\telecomms_relays.dm"
 #include "code\modules\halo\machinery\buttons\alertbutton.dm"
 #include "code\modules\halo\machinery\buttons\basic_weapon_vendor_unlock.dm"
 #include "code\modules\halo\machinery\buttons\heavy_weapon_vendor_unlock.dm"

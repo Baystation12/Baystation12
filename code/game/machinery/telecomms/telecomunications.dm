@@ -269,6 +269,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		return
 	if(!check_receive_level(signal))
 		return
+	if(signal.data["done"] == 1)
+		return
 
 	if(signal.transmission_method == 2)
 

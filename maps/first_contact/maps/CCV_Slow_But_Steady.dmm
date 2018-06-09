@@ -48,7 +48,6 @@
 "aV" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/om_ships/caelum)
 "aW" = (/turf/simulated/wall,/area/om_ships/caelum)
 "aX" = (/turf/simulated/floor/tiled,/area/om_ships/caelum)
-"aY" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/caelum)
 "aZ" = (/obj/structure/window/reinforced{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/turf/simulated/floor,/area/om_ships/caelum)
 "ba" = (/obj/machinery/door/airlock/external,/turf/simulated/floor/plating,/area/om_ships/caelum)
 "bb" = (/obj/machinery/door/airlock/glass_external,/turf/simulated/floor/plating,/area/om_ships/caelum)
@@ -113,6 +112,8 @@
 "ci" = (/obj/item/pizzabox/mushroom,/obj/item/pizzabox/margherita,/turf/simulated/floor/plating,/area/om_ships/caelum)
 "cj" = (/obj/item/pizzabox/meat,/obj/item/pizzabox/margherita,/obj/item/pizzabox/vegetable,/turf/simulated/floor/plating,/area/om_ships/caelum)
 "ck" = (/obj/effect/overmap/ship/CCV_sbs,/turf/space,/area/space)
+"cm" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled,/area/om_ships/caelum)
+"dV" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/tiled,/area/om_ships/caelum)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -149,10 +150,10 @@ aaaaaaaaaaaaaaaaaaabacadabaeafafafacagagagahahahacagaiajacahakalacamanaoapacaqaq
 aaaaaaaaaaaaaaaaaaasacacatacafafafacauagagahahahacaiagavacawahalacacaxayayacaqaqaqacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaasacacatacafafafacagauagahahahacajavazacawacacacacahayaoacaqaqaqacacacabaaaaaaaaaaaaaaaaababababababababababababaAaBaCaDaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaasacacatacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaabababababababaEaFaGaHaIabaJaKaDaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaasaLacataMaMaracacacacacacacaNaNaNacacacacaOaOaOacacaPaPaPacacahaQaQacabababaRaRaRaRaRaRabaSaTabaUaVaWaXaXaXaXaYabaZaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaasaLacataMaMaracacacacacacacaNaNaNacacacacaOaOaOacacaPaPaPacacahaQaQacabababaRaRaRaRaRaRabaSaTabaUaVaWaXaXaXaXdVabaZaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaasacacataMavaiacacalahawacacaNaNaNacacacacaOaOaOacacaPaPaPacacaQaQaQacbaacbbbcbcbcbcbcbcbbacacbdaXaXbeaXaXaXaXbfabaZaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaabbgbhabavbibiacacahakawacacaNaNaNacacacacaOaOaOacacaPaPaPacacaQaQaQbjabababaRaRaRaRaRaRabbkblabaXaXaWbmbnboaXaXbbaZaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaabbpbqababababbrbrabababbrbrabababbsacbsacabababbrbrabababbrbrabababababaaaaaaaaaaaaaaaaababababbtbtaWbubvaXaXaYabaZaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaabbpbqababababbrbrabababbrbrabababbsacbsacabababbrbrabababbrbrabababababaaaaaaaaaaaaaaaaababababbtbtaWbubvaXaXcmabaZaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaabbgbwabbxbybzacacbAbAbAacacafafafacacacacbBbBbBacacbCbCbCacacahahahbDabababaRaRaRaRaRaRabbkblabaXaXaWbEaXbFaXaXbbaZaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaasacacbGacacbxacacbAbAbAacacafafafacacacacbBbBbBacacbCbCbCacacahahahacbaacbbbcbcbcbcbcbcbbacacbdaXaXbeaXaXaXaXbfabaZaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaasacacbGacacacacacbAbAbAacacafafafaracacacbBbBbBacacbCbCbCacacahahahacabababaRaRaRaRaRaRabaSaTabbHbIaWbeaWaWaXbJabaZaaaaaaaaaaaaaaaa
@@ -191,3 +192,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 ckaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

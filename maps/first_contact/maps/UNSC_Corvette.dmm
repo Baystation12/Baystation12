@@ -371,7 +371,6 @@
 "hg" = (/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{tag = "icon-map_on (EAST)"; icon_state = "map_on"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/unscpatrol{icon_state = "ai_upload"; name = "UNSC Patrol Vessel Starboard Engine"; tag = "icon-ai_upload"})
 "hh" = (/obj/machinery/door/airlock/halo,/obj/machinery/atmospherics/pipe/simple/visible/fuel{dir = 4},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol{icon_state = "ai_upload"; name = "UNSC Patrol Vessel Starboard Engine"; tag = "icon-ai_upload"})
 "hi" = (/obj/structure/window/reinforced/treated{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,/turf/simulated/floor/plating,/area/om_ships/unscpatrol{icon_state = "ai_upload"; name = "UNSC Patrol Vessel Starboard Engine"; tag = "icon-ai_upload"})
-"hj" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
 "hk" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Starboard Umbilical Acces"; req_access = list(142)},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol)
 "hl" = (/turf/simulated/wall/r_wall,/area/om_ships/unscpatrol{icon_state = "ai_chamber"; name = "UNSC Patrol Vessel Holding Cells"; tag = "icon-ai_chamber"})
 "hm" = (/obj/machinery/door/airlock/halo{name = "Holding Cells"; req_access = newlist()},/obj/machinery/door/firedoor,/turf/simulated/floor/tiled,/area/om_ships/unscpatrol{icon_state = "ai_chamber"; name = "UNSC Patrol Vessel Holding Cells"; tag = "icon-ai_chamber"})
@@ -424,6 +423,16 @@
 "ih" = (/obj/effect/landmark/start/corvette_odsto,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol{icon_state = "atmos"; name = "UNSC Patrol Vessel ODST Section"; tag = "icon-atmos"})
 "ii" = (/obj/effect/landmark/start/corvette_odst,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/om_ships/unscpatrol{icon_state = "atmos"; name = "UNSC Patrol Vessel ODST Section"; tag = "icon-atmos"})
 "ij" = (/obj/effect/overmap/ship/unsc_corvette,/turf/space,/area/space)
+"ri" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"sj" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"ty" = (/obj/structure/table/standard,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"wX" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"xp" = (/obj/machinery/light,/obj/machinery/telecomms/hub,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"xN" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"BG" = (/obj/structure/bed/chair,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"FD" = (/obj/machinery/telecomms/processor,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"KP" = (/obj/machinery/telecomms/bus,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
+"Xu" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/plating,/area/om_ships/unscpatrol)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -486,9 +495,9 @@ aaaaaaaaaaaaaaaaaaaQaBaBaBaBaBaBaBaodfdfdoekdodfcQbjfQgagbgcgdgegffgfNfxfxfxfxfO
 aaaaaaaaaaaaaaaaaaaQaoaoaoaoaoaoaoaodfdfdfdfdfdfdgbjfQgigigigigigjfgfxfxfxfxfxfxfxfhfGfAfGfAfGfAfGfjfPfTfUggfUghfUfVfZgkgkgkgkgkgkglgmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaQaogngngngngngngnaHaHgoaHaHbFcQbjfQgpgegigigjgqfggrfxfxfxfxfOgsfhfzfAfzfAfzfAfzfjfPfTgtfVfUghgtgggggkgugvgwgxgkgygmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaagzaogngAgBgCgDgDgEgFgFgFgFgFgGfIbjfQfQfQgHfQfQfQfgfgfgfggIfgfgfgfhfifjfifjfifjfifjfPgggggggggJgggggggkgKgvgLgMgkgygmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaagzaogngNgOgPgQgRgnaHaHaHaHaHbFeUclgScleDeJclclclclclclclgTclclclclclclclclclclclclclclclclcleJclclcpgUgVgugWgXgkgYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaagzaogngPgZgPhagPgnaHaHaHaHaHbFbjhbbjhcbjbjbjbjhcbjbjbjbjhcbjbjbjhcbjbjbjhcbjbjbjhcbjbjbjhcbjhdbjhccahehfhggLhghhhigmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaagzaogngngngngngngnaHaHhjaHaHaobBhkbBaoaoaoaoaoaoaoaoaoaohlhmhlhlhlhlhlhnhohohohohohohohohohohohohohogkhpgugWgugkgygmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaagzaogngNgOgPgQgRgnaHaHBGaHaHbFeUclgScleDeJclclclclclclclgTclclclclclclclclclclclclclclclclcleJclclcpgUgVgugWgXgkgYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaagzaogngPgZgPhagPgnwXritysjxNbFbjhbbjhcbjbjbjbjhcbjbjbjbjhcbjbjbjhcbjbjbjhcbjbjbjhcbjbjbjhcbjhdbjhccahehfhggLhghhhigmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaagzaogngngngngngngnXuFDxpKPtyaobBhkbBaoaoaoaoaoaoaoaoaoaohlhmhlhlhlhlhlhnhohohohohohohohohohohohohohogkhpgugWgugkgygmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaQaoaoaoaoaoaoaoaoaoaoaoaoaoaobibjbjaoaoaoaoaoaoaoaoaoaohlhqhrhlhlhlhlhshthuhvhwhxhyhzhshohAhBhChDhEgkhFgugWgugkhGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaQaBaBaBaBaBaBaBaBaBaBaBaBaBaoaohHaoaoaoaoaoaoaoaoaoaoaohlhqhqhIhJhKhlhLhthMhvhshshshshshNhshshshshsgkgKgvgLgMgkgygmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaBaBaBaBaBaBaBaBaBaBaBaBaBaoaoaoaoaoaoaoaoaoaoaoaoaoaohlhqhqhOhPhQhlhshshRhshshshRhshshohRhshShShTgkgugvhUgxgkgygmaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -527,3 +536,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 ijaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
