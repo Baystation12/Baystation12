@@ -1490,10 +1490,10 @@
 		heart.pulse = PULSE_NORM
 		heart.handle_pulse()
 
-/mob/living/carbon/human/proc/make_adrenaline(amount)
+/mob/living/carbon/human/proc/make_reagent(amount, reagent_type)
 	if(stat == CONSCIOUS)
-		var/limit = max(0, reagents.get_overdose(/datum/reagent/adrenaline) - reagents.get_reagent_amount(/datum/reagent/adrenaline))
-		reagents.add_reagent(/datum/reagent/adrenaline, min(amount, limit))
+		var/limit = max(0, reagents.get_overdose(reagent_type) - reagents.get_reagent_amount(reagent_type))
+		reagents.add_reagent(reagent_type, min(amount, limit))
 
 //Get fluffy numbers
 /mob/living/carbon/human/proc/get_blood_pressure()
