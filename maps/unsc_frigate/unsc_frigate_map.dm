@@ -13,10 +13,11 @@
 	station_name  = "UNSC Frigate"
 	station_short = "Frigate"
 	dock_name     = "Hangar Bay"
-	boss_name     = "Captain"
-	boss_short    = "Captain"
+	boss_name     = "United Nations Space Command"
+	boss_short    = "UNSC HIGHCOM"
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
 	system_name = "Uncharted System"
+	overmap_size= 60
 
 	use_overmap = 1

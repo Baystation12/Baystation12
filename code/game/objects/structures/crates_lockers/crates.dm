@@ -178,7 +178,7 @@ obj/structure/closet/crate
 
 
 /obj/structure/closet/crate/freezer/rations/WillContain()
-	return list(/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 4)
+	return list(/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 12)
 
 /obj/structure/closet/crate/bin
 	name = "large bin"

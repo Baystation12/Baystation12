@@ -22,6 +22,79 @@
 	turbolifts += src
 	..()
 
+/obj/turbolift_map_holder/proc/get_location_values(var/ux,var/uy,var/uz,var/udir,var/az,var/ex,var/ey,var/ez)
+	var/list/location_values = list()
+	. = location_values
+	switch(dir)
+
+		if(NORTH)
+
+			location_values.Add(ux + Floor(lift_size_x/2))
+			location_values.Add(uy + 1)
+			location_values.Add(ux)
+			location_values.Add(ey + 2)
+
+			location_values.Add(ux + 1)
+			location_values.Add(ey)
+			location_values.Add(ex - 1)
+			location_values.Add(ey + 1)
+
+			location_values.Add(ux + 1)
+			location_values.Add(uy + 1)
+			location_values.Add(ux + lift_size_x - 1)
+			location_values.Add(uy + 1)
+
+		if(SOUTH)
+
+			location_values.Add(ux + Floor(lift_size_x/2))
+			location_values.Add(ey - 1)
+			location_values.Add(ex)
+			location_values.Add(uy - 2)
+
+			location_values.Add(ux + 1)
+			location_values.Add(uy - 1)
+			location_values.Add(ex - 1)
+			location_values.Add(uy)
+
+			location_values.Add(ux + 1)
+			location_values.Add(uy + 2)
+			location_values.Add(ux + lift_size_x - 1)
+			location_values.Add(uy + lift_size_y - 1)
+
+		if(EAST)
+
+			location_values.Add(ux+1)
+			location_values.Add(uy + Floor(lift_size_y/2))
+			location_values.Add(ex+2)
+			location_values.Add(ey)
+
+			location_values.Add(ex)
+			location_values.Add(uy + 1)
+			location_values.Add(ex + 1)
+			location_values.Add(ey - 1)
+
+			location_values.Add(ux + 1)
+			location_values.Add(uy + 1)
+			location_values.Add(ux + 1)
+			location_values.Add(uy + lift_size_x - 1)
+
+		if(WEST)
+
+			location_values.Add(ex-1)
+			location_values.Add(uy + Floor(lift_size_y/2))
+			location_values.Add(ux-2)
+			location_values.Add(uy)
+
+			location_values.Add(ux - 1)
+			location_values.Add(uy + 1)
+			location_values.Add(ux)
+			location_values.Add(ey - 1)
+
+			location_values.Add(ux + lift_size_x - 1)
+			location_values.Add(uy + 1)
+			location_values.Add(ux + lift_size_x - 1)
+			location_values.Add(uy + lift_size_y - 1)
+
 /obj/turbolift_map_holder/Initialize()
 	. = ..()
 	// Create our system controller.
@@ -54,75 +127,22 @@
 	var/ey = (uy+lift_size_y)
 	var/ez = (uz+(depth-1))
 
-	switch(dir)
+	var/list/location_values = get_location_values(ux,uy,uz,udir,az,ex,ey,ez)
 
-		if(NORTH)
+	int_panel_x = location_values[1]
+	int_panel_y = location_values[2]
+	ext_panel_x = location_values[3]
+	ext_panel_y = location_values[4]
 
-			int_panel_x = ux + Floor(lift_size_x/2)
-			int_panel_y = uy + 1
-			ext_panel_x = ux
-			ext_panel_y = ey + 2
+	door_x1 = location_values[5]
+	door_y1 = location_values[6]
+	door_x2 = location_values[7]
+	door_y2 = location_values[8]
 
-			door_x1 = ux + 1
-			door_y1 = ey
-			door_x2 = ex - 1
-			door_y2 = ey + 1
-
-			light_x1 = ux + 1
-			light_y1 = uy + 1
-			light_x2 = ux + lift_size_x - 1
-			light_y2 = uy + 1
-
-		if(SOUTH)
-
-			int_panel_x = ux + Floor(lift_size_x/2)
-			int_panel_y = ey - 1
-			ext_panel_x = ex
-			ext_panel_y = uy - 2
-
-			door_x1 = ux + 1
-			door_y1 = uy - 1
-			door_x2 = ex - 1
-			door_y2 = uy
-
-			light_x1 = ux + 1
-			light_y1 = uy + 2
-			light_x2 = ux + lift_size_x - 1
-			light_y2 = uy + lift_size_y - 1
-
-		if(EAST)
-
-			int_panel_x = ux+1
-			int_panel_y = uy + Floor(lift_size_y/2)
-			ext_panel_x = ex+2
-			ext_panel_y = ey
-
-			door_x1 = ex
-			door_y1 = uy + 1
-			door_x2 = ex + 1
-			door_y2 = ey - 1
-
-			light_x1 = ux + 1
-			light_y1 = uy + 1
-			light_x2 = ux + 1
-			light_y2 = uy + lift_size_x - 1
-
-		if(WEST)
-
-			int_panel_x = ex-1
-			int_panel_y = uy + Floor(lift_size_y/2)
-			ext_panel_x = ux-2
-			ext_panel_y = uy
-
-			door_x1 = ux - 1
-			door_y1 = uy + 1
-			door_x2 = ux
-			door_y2 = ey - 1
-
-			light_x1 = ux + lift_size_x - 1
-			light_y1 = uy + 1
-			light_x2 = ux + lift_size_x - 1
-			light_y2 = uy + lift_size_y - 1
+	light_x1 = location_values[9]
+	light_y1 = location_values[10]
+	light_x2 = location_values[11]
+	light_y2 = location_values[12]
 
 	// Generate each floor and store it in the controller datum.
 	for(var/cz = uz;cz<=ez;cz++)
@@ -226,3 +246,77 @@
 	lift.open_doors()
 
 	qdel(src) // We're done.
+
+//Cargolift Subtype. Larger Doors.//
+/obj/turbolift_map_holder/cargolift/get_location_values(var/ux,var/uy,var/uz,var/udir,var/az,var/ex,var/ey,var/ez)
+	var/list/location_values = list()
+	. = location_values
+	switch(dir)
+
+		if(NORTH)
+
+			location_values.Add(ux + Floor(lift_size_x/2))
+			location_values.Add(uy + 1)
+			location_values.Add(ux)
+			location_values.Add(ey + 2)
+
+			location_values.Add(ux)
+			location_values.Add(ey + 1)
+			location_values.Add(ex)
+			location_values.Add(ey + 1)
+
+			location_values.Add(ux + 1)
+			location_values.Add(uy + 1)
+			location_values.Add(ux + lift_size_x - 1)
+			location_values.Add(uy + 1)
+
+		if(SOUTH)
+
+			location_values.Add(ux + Floor(lift_size_x/2))
+			location_values.Add(ey - 1)
+			location_values.Add(ex)
+			location_values.Add(uy - 2)
+
+			location_values.Add(ux)
+			location_values.Add(uy - 1)
+			location_values.Add(ex)
+			location_values.Add(uy - 1)
+
+			location_values.Add(ux + 1)
+			location_values.Add(uy + 2)
+			location_values.Add(ux + lift_size_x - 1)
+			location_values.Add(uy + lift_size_y - 1)
+
+		if(EAST)
+
+			location_values.Add(ux+1)
+			location_values.Add(uy + Floor(lift_size_y/2))
+			location_values.Add(ex+2)
+			location_values.Add(ey)
+
+			location_values.Add(ex + 1)
+			location_values.Add(uy)
+			location_values.Add(ex + 1)
+			location_values.Add(ey)
+
+			location_values.Add(ux + 1)
+			location_values.Add(uy + 1)
+			location_values.Add(ux + 1)
+			location_values.Add(uy + lift_size_x - 1)
+
+		if(WEST)
+
+			location_values.Add(ex-1)
+			location_values.Add(uy + Floor(lift_size_y/2))
+			location_values.Add(ux-2)
+			location_values.Add(uy)
+
+			location_values.Add(ux - 1)
+			location_values.Add(uy)
+			location_values.Add(ux - 1)
+			location_values.Add(ey)
+
+			location_values.Add(ux + lift_size_x - 1)
+			location_values.Add(uy + 1)
+			location_values.Add(ux + lift_size_x - 1)
+			location_values.Add(uy + lift_size_y - 1)

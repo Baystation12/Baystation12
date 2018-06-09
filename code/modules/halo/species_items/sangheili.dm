@@ -16,6 +16,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	name = LANGUAGE_SANGHEILI
 	desc = "The language of the Sangheili"
 	native = 1
+	colour = "vox"
 	syllables = list("ree","wortwortwort","wort","nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "S"
 	flags = RESTRICTED
@@ -92,7 +93,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 /obj/item/clothing/suit/armor/special/combatharness/major
 	name = "Sangheili Combat Harness (Major)"
 	icon_state = "major_chest"
-	totalshields = 150
+	totalshields = 125
 
 /obj/item/clothing/shoes/sangheili/major
 	name = "Sanghelli Leg Armour (Major)"
@@ -108,7 +109,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 /obj/item/clothing/suit/armor/special/combatharness/ultra
 	name = "Sangheili Combat Harness (Ultra)"
 	icon_state = "ultra_chest"
-	totalshields = 200
+	totalshields = 150
 
 /obj/item/clothing/shoes/sangheili/ultra
 	name = "Sanghelli Leg Armour (Ultra)"
@@ -124,7 +125,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 /obj/item/clothing/suit/armor/special/combatharness/zealot
 	name = "Sangheili Combat Harness (Zealot)"
 	icon_state = "zealot_chest"
-	totalshields = 250
+	totalshields = 200
 
 /obj/item/clothing/shoes/sangheili/zealot
 	name = "Sanghelli Leg Armour (Zealot)"
@@ -140,7 +141,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 /obj/item/clothing/suit/armor/special/combatharness/specops
 	name = "Sangheili Combat Harness (Spec-Ops)"
 	icon_state = "specops_chest"
-	totalshields = 200
+	totalshields = 175
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili,/datum/armourspecials/cloaking)
 	action_button_name = "Toggle Active Camoflage"
 

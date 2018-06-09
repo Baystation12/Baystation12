@@ -5,7 +5,7 @@
 	anchored = 1
 	density = 0
 	plane = OBJ_PLANE
-	layer = ABOVE_OBJ_LAYER
+	layer = ABOVE_DOOR_LAYER
 
 	var/datum/turbolift/lift
 

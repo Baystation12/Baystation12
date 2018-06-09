@@ -314,7 +314,7 @@
 	if(job.is_restricted(client.prefs, src))
 		return
 
-	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job.title)
+	var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(client, job)
 	var/turf/spawn_turf = pick(spawnpoint.turfs)
 	if(job.latejoin_at_spawnpoints)
 		var/obj/S = job_master.get_roundstart_spawnpoint(job.title)
@@ -371,10 +371,10 @@
 		if(character.mind.assigned_role != "Cyborg")
 			GLOB.data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-			AnnounceArrival(character, job, spawnpoint.msg)
 		else
 			AnnounceCyborg(character, job, spawnpoint.msg)
 		matchmaker.do_matchmaking()
+	AnnounceArrival(character, job, spawnpoint.msg)
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 	qdel(src)
 

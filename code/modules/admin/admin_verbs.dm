@@ -91,6 +91,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/makePAI,
 	/datum/admins/proc/paralyze_mob,
 	/client/proc/fixatmos,
+	/client/proc/minorfixatmos,
 	/client/proc/list_traders,
 	/client/proc/add_trader,
 	/client/proc/remove_trader,

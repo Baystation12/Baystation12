@@ -38,6 +38,8 @@
 	user.machine = src
 	user.reset_view(map_sectors["[z]"])
 
+/obj/machinery/overmap_weapon_console/proc/aim_tool_attackself(var/mob/user)
+
 /obj/machinery/overmap_weapon_console/proc/consume_external_ammo()
 	var/obj/ammo_to_remove = loaded_ammo[loaded_ammo.len]
 	loaded_ammo -= ammo_to_remove
@@ -56,7 +58,7 @@
 	return 0
 
 /obj/machinery/overmap_weapon_console/proc/fire_projectile(var/atom/target,var/mob/user,var/directly_above = 0)
-	var/obj/item/projectile/new_projectile = new fired_projectile
+	var/obj/item/projectile/new_projectile = new fired_projectile (src)
 	new_projectile.damage += get_linked_device_damage_mod()
 	new_projectile.loc = map_sectors["[z]"]
 	new_projectile.permutated = map_sectors["[z]"] //Ensuring we don't hit ourselves somehow
@@ -65,18 +67,23 @@
 		new_projectile.on_impact(target)
 		qdel(new_projectile)
 	else
-		new_projectile.launch(target)
+		new_projectile.launch(target,null,rand(0,new_projectile.dispersion),rand(0,new_projectile.dispersion))
+	play_fire_sound(src)
+	var/obj/effect/overmap/om_targ = target
+	if(istype(om_targ) && om_targ.map_z.len > 0)
+		for(var/z_level in om_targ)
+			play_fire_sound(1,1,z_level)
 
-/obj/machinery/overmap_weapon_console/proc/play_fire_sound()
+/obj/machinery/overmap_weapon_console/proc/play_fire_sound(var/atom/loc_sound_origin)
 	if(isnull(fire_sound))
 		return
 
-	playsound(src, fire_sound, 50, 1, 5, 5)
+	playsound(loc_sound_origin, fire_sound, 100, 1, 5, 5,1)
 
-/obj/machinery/overmap_weapon_console/proc/fire(var/atom/target,var/mob/living/user,var/click_params)
+/obj/machinery/overmap_weapon_console/proc/can_fire(var/atom/target,var/mob/living/user,var/click_params)
 	scan_linked_devices()
 	if(!user)
-		return
+		return 0
 	var/obj/overmap_sector = map_sectors["[z]"]
 	if(!overmap_sector)
 		return 0
@@ -88,6 +95,13 @@
 		return 0
 	if(!consume_loaded_ammo(user))
 		return 0
+	return 1
+
+/obj/machinery/overmap_weapon_console/proc/fire(var/atom/target,var/mob/living/user,var/click_params)
+	scan_linked_devices()
+	if(!can_fire(target,user,click_params))
+		return 0
+	var/obj/overmap_sector = map_sectors["[z]"]
 	var/directly_above = 0
 	if(target.loc == overmap_sector.loc)
 		directly_above = 1
@@ -99,7 +113,7 @@
 
 /obj/item/weapon/gun/aim_tool
 	name = "Aiming Tool"
-	desc = "Used for aiming a ship- or planet- board weapon"
+	desc = "Used for aiming a ship- or planet- board devices"
 	w_class = ITEM_SIZE_LARGE
 	can_rename = 0
 	var/obj/machinery/overmap_weapon_console/creator_console
@@ -107,6 +121,9 @@
 /obj/item/weapon/gun/aim_tool/New(var/console)
 	. = ..()
 	creator_console = console
+
+/obj/item/weapon/gun/aim_tool/attack_self(var/mob/user)
+	creator_console.aim_tool_attackself(user)
 
 /obj/item/weapon/gun/aim_tool/afterattack(var/atom/target,var/mob/user,adjacent,var/clickparams)
 	creator_console.fire(target,user,clickparams)

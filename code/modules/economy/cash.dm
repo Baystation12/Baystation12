@@ -37,7 +37,7 @@
 			h_user.drop_from_inventory(src)
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
-		to_chat(user, "<span class='notice'>You add [src.worth] credits worth of money to the bundles.<br>It holds [bundle.worth] credits now.</span>")
+		to_chat(user, "<span class='notice'>You add [src.worth] worth of credits to the bundles.<br>It holds [bundle.worth] credits now.</span>")
 		qdel(src)
 
 /obj/item/weapon/spacecash/proc/getMoneyImages()
@@ -88,7 +88,7 @@
 		w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/spacecash/bundle/attack_self()
-	var/amount = input(usr, "How many credits do you want to take? (0 to [src.worth])", "Take Money", 20) as num
+	var/amount = input(usr, "How many credits do you want to take out? (0 to [src.worth])", "Take Money", 20) as num
 	var/result = split_off(amount, usr)
 	if(result)
 		usr.put_in_hands(result)
@@ -186,4 +186,4 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 /obj/item/weapon/spacecash/ewallet/examine(mob/user)
 	. = ..(user)
 	if (!(user in view(2)) && user!=src.loc) return
-	to_chat(user, "<span class='notice'>Charge card's owner: [src.owner_name]. credits remaining: [src.worth].</span>")
+	to_chat(user, "<span class='notice'>Charge card's owner: [src.owner_name]. Credits remaining: [src.worth].</span>")

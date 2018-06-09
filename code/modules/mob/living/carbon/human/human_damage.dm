@@ -396,7 +396,7 @@ This function restores all organs.
 		damage *= blocked_mult(blocked)
 
 	if(damage > 15)
-		make_adrenaline(round(damage/10))
+		make_adrenaline(round(damage/5))
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)
@@ -431,6 +431,8 @@ This function restores all organs.
 		traumatic_shock *= 0.75
 	if(stat == UNCONSCIOUS)
 		traumatic_shock *= 0.5
+	if(species && species.pain_mod)
+		traumatic_shock *= species.pain_mod
 
 	return max(0,traumatic_shock)
 

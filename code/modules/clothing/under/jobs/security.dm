@@ -71,8 +71,8 @@
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/guard
-	desc = "A durable uniform worn by NanoTrasen corporate security."
-	name = "\improper NanoTrasen security uniform"
+	desc = "A durable uniform worn by Misriah Armory corporate security."
+	name = "\improper Misriah Armory security uniform"
 	icon_state = "ntguard"
 	item_state = "r_suit"
 	worn_state = "ntguard"

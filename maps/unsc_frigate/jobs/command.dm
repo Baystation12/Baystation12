@@ -1,3 +1,6 @@
+/datum/job/UNSC_ship
+	title = "unknown" //For travis
+	faction_flag = UNSC //Defining here rather than in every job
 
 //ship commanding officer
 /datum/job/UNSC_ship/commander
@@ -10,9 +13,11 @@
 	spawn_positions = 1
 	ideal_character_age = 40
 	minimal_player_age = 21
+	spawnpoint_override = "UNSC Frigate"
 	selection_color = "#777777"
 	req_admin_notify = 1
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/CO
+	is_whitelisted = 1
 	//job_guide = "Commander on deck! This is your ship, and your word is law. Subject matter experts have theoretical authority in their area of expertise, but otherwise everyone on the ship is a tool to complete the mission and the more that go home the better."
 
 	access = list(access_unsc_bridge, access_unsc_tech, access_unsc_crew, access_unsc_navsec,
@@ -31,6 +36,7 @@
 	spawn_positions = 1
 	ideal_character_age = 40
 	minimal_player_age = 14
+	spawnpoint_override = "UNSC Frigate"
 	selection_color = "#777777"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/EXO
 	req_admin_notify = 1
@@ -50,6 +56,7 @@
 	department_flag = CAG
 	total_positions = 1
 	spawn_positions = 1
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/cag
 	selection_color = "#777777"
 	//job_guide = "You are the ultimate commander of all strike craft (fighters, shuttles, dropships) on the ship. You have the final word on docking approaches, fire missions, strike deployments and whether to engage or retreat. Remember to trust the word of your pilots though as you're stuck on the bridge and it's probably been decades since you flew yourself."
@@ -69,6 +76,7 @@
 	spawn_positions = 2
 	ideal_character_age = 40
 	minimal_player_age = 7
+	spawnpoint_override = "UNSC Frigate"
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/BO
 	selection_color = "#777777"
 	//job_guide = "You are a bridge officer. It's your job to push buttons, supervise and generally look busy. Try and help out one of the senior officers if you can, otherwise go and bug busy crewmen elsewhere on the ship."

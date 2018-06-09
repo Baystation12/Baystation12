@@ -77,7 +77,7 @@
 
 /obj/item/device/mobilecomms/commsbackpack/unsc
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. The insignia of the UNSC is stitched into the back."
-	recieving_frequencies = list(TEAMCOM_NAME,CIV_NAME,EBAND_NAME,FLEETCOM_NAME,SQUADCOM_NAME,SHIPCOM_NAME)
+	recieving_frequencies = list(TEAMCOM_NAME,CIV_NAME,EBAND_NAME,FLEETCOM_NAME,SQUADCOM_NAME,SHIPCOM_NAME,ODST_NAME)
 
 /obj/item/device/mobilecomms/commsbackpack/innie
 	desc = "A reinforced backpack filled with an array of wires and communication equipment. This one appears to have been tampered with."
@@ -117,3 +117,4 @@
 #undef EBAND_NAME
 #undef CIV_NAME
 #undef SEC_NAME
+#undef ODST_NAME

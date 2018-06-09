@@ -112,7 +112,7 @@
 
 /obj/item/projectile/bullet/covenant/needles/before_move()
 	if(locked_target)
-		redirect(locked_target.x,locked_target.y,loc)
+		redirect(locked_target.x,locked_target.y,starting)
 
 /obj/item/ammo_magazine/type51mag
 	name = "Type-51 Carbine magazine"

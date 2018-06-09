@@ -14,7 +14,7 @@
 /obj/structure/biomass/New()
 	..()
 	flood_spawner = new(src, max_flood, respawn_delay)
-	icon_state = "biomass[rand(1,3)]"
+	icon_state = pick(icon_states(icon))
 
 //not necessary if they all spawn in the bottom left corner
 /*/obj/structure/biomass/Bump(var/atom/movable/AM)

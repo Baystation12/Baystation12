@@ -620,14 +620,23 @@ var/global/datum/controller/occupations/job_master
  *  preference is not set, or the preference is not appropriate for the rank, in
  *  which case a fallback will be selected.
  */
-/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/rank)
+/datum/controller/occupations/proc/get_spawnpoint_for(var/client/C, var/datum/job/job_datum)
 
 	if(!C)
 		CRASH("Null client passed to get_spawnpoint_for() proc!")
 
+	var/rank = job_datum.title
 	var/mob/H = C.mob
 	var/spawnpoint = C.prefs.spawnpoint
 	var/datum/spawnpoint/spawnpos
+
+	if(job_datum.spawnpoint_override)
+		to_chat(H,"<span class = 'notice'>Job has spawnpoint override set. Ignoring preference-set spawnpoint.</span>")
+		var/datum/spawnpoint/candidate = spawntypes()[job_datum.spawnpoint_override]
+		if(isnull(candidate))
+			to_chat(H,"<span class = 'warning'>ERROR: Spawnpoint override set, yet spawnpoint not allowed on current map!</span>")
+		if(candidate.check_job_spawning(rank))
+			return candidate
 
 	if(spawnpoint == DEFAULT_SPAWNPOINT_ID)
 		spawnpoint = GLOB.using_map.default_spawn

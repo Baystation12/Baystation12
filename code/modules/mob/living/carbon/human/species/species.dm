@@ -74,6 +74,7 @@
 	var/radiation_mod =  1                    // Radiation modifier
 	var/flash_mod =      1                    // Stun from blindness modifier.
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
+	var/pain_mod = 1						  //Traumatic Shock modifier
 	var/vision_flags = SEE_SELF               // Same flags as glasses.
 
 	// Death vars.
@@ -106,6 +107,7 @@
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
 	var/light_dam                                     // If set, mob will be damaged in light over this value and heal in light below its negative.
+	var/adrenal_break_threshold = 25 				  // The volume of adrenaline at which adrenaline will cause a large painkill effect and raise heartrate.
 	var/body_temperature = 310.15	                  // Species will try to stabilize at this temperature.
 	                                                  // (also affects temperature processing)
 

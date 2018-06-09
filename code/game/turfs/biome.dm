@@ -41,7 +41,7 @@
 
 			//spawn something there
 			var/atom_type = pickweight(atom_types)
-			new atom_type(cur_turf)
+			cur_turf.ChangeTurf(atom_type)
 
 		//increment the counters
 		turf_index++

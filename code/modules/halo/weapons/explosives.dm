@@ -60,6 +60,6 @@
 	if(state != 3)
 		state = 3
 		spawn(10)
-			explosion(get_turf(src), 2, 5, 8, 14, z_transfer = 0)
+			explosion(get_turf(src), -1, 1, 2, 15, z_transfer = 0)
 			qdel(src)
 

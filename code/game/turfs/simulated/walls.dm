@@ -70,8 +70,8 @@
 		else if(Proj.damage_type == BRUTE)
 			proj_damage /= reinf_material.brute_armor
 
-	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
-	var/damage = min(proj_damage, 100)
+	//Damage cap removed. If we want to insta-kill a wall we'll do it.
+	var/damage = proj_damage/10//Apply the /10 before throwing it through the cap.
 
 	take_damage(damage)
 	return

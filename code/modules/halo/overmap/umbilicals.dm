@@ -52,12 +52,14 @@
 		if(!no_message)
 			visible_message("<span class = 'notice'>[src] starts extending towards [current_connected.our_ship.name].</span>")
 
-/obj/docking_umbilical/verb/cross_umbilical()
+/obj/docking_umbilical/verb/cross_umbilical_verb()
 	set name = "Cross Umbilical"
 	set category = "Object"
 	set src in view(1)
 
-	var/mob/user = usr
+	cross_umbilical(usr)
+
+/obj/docking_umbilical/proc/cross_umbilical(var/mob/user,var/mob/loader = null)
 	if(!istype(user))
 		return
 
@@ -69,18 +71,45 @@
 	if(!isturf(current_connected.loc))
 		return
 	user.forceMove(loc)
-	user.visible_message("<span class = 'notice'>[user] starts climbing through [src]\'s airlock...</span>")
-	if(!do_after(user,UMBI_CROSS_DELAY,src,same_direction = 1))
+	if(loader)
+		loader.visible_message("<span class = 'notice'>[loader] starts pushing [user] through [src]\'s airlock.</span>")
+	else
+		user.visible_message("<span class = 'notice'>[user] starts climbing through [src]\'s airlock...</span>")
+	if(loader)
+		if(!do_after(loader,UMBI_CROSS_DELAY,user))
+			return
+	else
+		if(!do_after(user,UMBI_CROSS_DELAY,src))
+			return
+	if(!src.Adjacent(user) || !(user.loc = loc))
 		return
-	user.visible_message("<span class = 'notice'>[user] climbs through [src]\'s airlock.</span>")
-	transform_mob(user)
+	if(loader)
+		loader.visible_message("<span class = 'notice'>[loader] pushes [user] through [src]\'s airlock.</span>")
+	else
+		user.visible_message("<span class = 'notice'>[user] climbs through [src]\'s airlock.</span>")
+	translate_obj(user)
 
-/obj/docking_umbilical/proc/transform_mob(var/mob/user)
-	if(!istype(user))
-		return
+/obj/docking_umbilical/proc/translate_obj(var/obj/to_move)
 	if(!isturf(current_connected.loc))
 		return
-	user.forceMove(current_connected.loc)
+	to_move.forceMove(current_connected.loc)
+
+/obj/docking_umbilical/MouseDrop(var/obj/over_object)
+	var/mob/user = usr
+	if(!istype(over_object)) return
+	if(istype(over_object,/obj/vehicles)) return //Yeah no vehicles-through-umbilical thanks. use a dropship.
+	if(over_object.anchored) return
+	if(!Adjacent(user) || !user.Adjacent(over_object)) return
+	user.visible_message("<span class = 'notice'>[user] starts loading [over_object] through [src]\'s airlock.</span>")
+	if(!do_after(user,UMBI_CROSS_DELAY,over_object))
+		return
+	user.visible_message("<span class = 'notice'>[user] loads [over_object] into [src].</span>")
+	translate_obj(over_object)
+
+/obj/docking_umbilical/attackby(var/obj/item/grab/I, var/mob/user)
+	if(!istype(I))
+		return
+	cross_umbilical(I.affecting,user)
 
 /obj/docking_umbilical/proc/check_dir_compatible(var/obj/docking_umbilical/umbi)
 	if(isnull(side) || isnull(umbi.side)) //Null value means either we or they don't care about sides.
@@ -109,6 +138,12 @@
 	return umbi_name_assoc[umbi_name_picked]
 
 /obj/docking_umbilical/proc/connect(var/obj/effect/overmap/connect_to,var/mob/user,var/random_connect = 0)
+	if(istype(connect_to,/obj/effect/overmap/ship/npc_ship))
+		var/obj/effect/overmap/ship/npc_ship/ship = connect_to
+		if(!ship.can_board())
+			to_chat(user,"<span class = 'notice'>[ship] is too functional to force a umbilical connection.</span>")
+			return
+		ship.load_mapfile()
 	var/obj/docking_umbilical/umbi //This will be the umbilical we connect to.
 	if(random_connect)
 		umbi = pick(get_all_umbis(connect_to))
@@ -169,7 +204,13 @@
 	pick_entity_connect_disconnect(user)
 
 /obj/docking_umbilical/proc/umbi_rip()
+	if(isnull(current_connected))
+		return
 	if(initial(broke) == -1)
+		current_connected.visual_umbi_change(1)
+		current_connected.current_connected = null
+		visual_umbi_change(1)
+		current_connected = null
 		return
 	broke = TRUE
 	icon_state = "umbi_broken"
@@ -189,6 +230,23 @@
 	dir = EAST
 
 /obj/docking_umbilical/west
+	dir = WEST
+	pixel_x = -96
+
+/obj/docking_umbilical/covenant
+	icon = 'code/modules/halo/icons/overmap/umbilical_covenant.dmi'
+
+/obj/docking_umbilical/covenant/north
+	dir = NORTH
+
+/obj/docking_umbilical/covenant/south
+	dir = SOUTH
+	pixel_y = -96
+
+/obj/docking_umbilical/covenant/east
+	dir = EAST
+
+/obj/docking_umbilical/covenant/west
 	dir = WEST
 	pixel_x = -96
 

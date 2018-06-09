@@ -29,6 +29,7 @@ var/global/datum/ghost_role_manager/ghost_role_manager = new /datum/ghost_role_m
 /datum/ghost_role
 	var/mob/mob_to_spawn
 	var/list/objects_spawn_on = list()
+	var/always_spawnable = 1 //Defines if the role should always have a valid spawn point
 
 /datum/ghost_role/proc/unique_role_checks(var/mob/observer/ghost/ghost,var/list/possible_spawns)//Used to check some special circumstances, like welded vents for mice.
 	return 1
@@ -39,8 +40,9 @@ var/global/datum/ghost_role_manager/ghost_role_manager = new /datum/ghost_role_m
 		if(O.type in objects_spawn_on)
 			possible_spawns += O
 	if(possible_spawns.len == 0)
-		log_admin("ERROR: ([ghost.ckey]/[ghost.name]) attempted to spawn as a [src], but had no valid spawnobjects.")
-		to_chat(ghost,"<span class = 'notice'>There was an error spawning your mob.</span>")
+		if(always_spawnable)
+			log_admin("ERROR: ([ghost.ckey]/[ghost.name]) attempted to spawn as a [src], but had no valid spawnobjects.")
+		to_chat(ghost,"<span class = 'notice'>No locations to spawn your mob!.</span>")
 		return
 	if(!unique_role_checks(ghost,possible_spawns))
 		return

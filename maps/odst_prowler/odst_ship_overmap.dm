@@ -1,7 +1,7 @@
 
 /obj/effect/overmap/ship/odst_prowler
 	name = "? ? ?"
-	desc = "Sensors show a Civillian Cargo Vessel. Something tells you that's an incorrect readout... You feel you'd have a hard time hitting it."
+	desc = "Sensors show a Civilian Cargo Vessel. Something tells you that's an incorrect readout... You feel you'd have a hard time hitting it."
 
 	fore_dir = WEST
 

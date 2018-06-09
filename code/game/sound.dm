@@ -93,7 +93,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 	//sound volume falloff with pressure
 	var/pressure_factor = 1.0
 
-	if(isturf(turf_source))
+	if(isturf(turf_source) && !is_global) //If it's a global sound, let's not apply 3d sounds.
 		// 3D sounds, the technology is here!
 		var/turf/T = get_turf(src)
 

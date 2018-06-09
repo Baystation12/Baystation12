@@ -11,7 +11,7 @@
 
 	layer = ABOVE_HUMAN_LAYER
 	plane = ABOVE_HUMAN_PLANE
-	var/faction = null //The faction this ship belongs to. Setting this will restrict landing to faction-owned and civillian points only
+	var/faction = null //The faction this ship belongs to. Setting this will restrict landing to faction-owned and Civilian points only
 
 
 	var/takeoff_overlay_icon_state

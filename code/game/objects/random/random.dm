@@ -280,7 +280,8 @@
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel = 4,
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn = 3,
 				/obj/item/weapon/gun/projectile/heavysniper = 1,
-				/obj/item/weapon/gun/projectile/shotgun/pump/combat = 2)
+				/obj/item/weapon/gun/projectile/shotgun/pump/combat = 2,
+				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 4)
 
 /obj/random/handgun
 	name = "Random Handgun"
@@ -1086,6 +1087,21 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/weapon/rig/light,
 				/obj/item/weapon/rig/unathi,
 				/obj/item/weapon/rig/unathi/fancy)
+
+/obj/random/so
+	name = "Random SO"
+	desc = "This is a random spartan organ"
+	icon = 'icons/obj/rig_modules.dmi'
+	icon_state = "generic"
+
+/obj/random/hardsuit/spawn_choices()
+	return list(/obj/item/organ/internal/eyes/occipital_reversal,
+				/obj/item/organ/internal/heart/spartan,
+				/obj/item/organ/internal/liver/spartan,
+				/obj/item/organ/internal/lungs/vox,
+				/obj/item/organ/internal/heart/vox,
+				/obj/item/organ/external/groin/augmented,
+				/obj/item/organ/external/leg/augmented)
 
 /obj/random/hostile
 	name = "Random Hostile Mob"
