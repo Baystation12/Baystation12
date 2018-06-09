@@ -82,35 +82,35 @@
 	dress_gloves = /obj/item/clothing/gloves/white
 
 	dress_extra = list(/obj/item/clothing/head/beret/solgov/fleet/dress)
-	
-decl/hierarchy/mil_uniform/marine
-	name = "Master marine outfit"
-	hierarchy_type = /decl/hierarchy/mil_uniform/marine
-	branch = /datum/mil_branch/marine_corps
 
-	pt_under = /obj/item/clothing/under/solgov/pt/marine
+/decl/hierarchy/mil_uniform/oac
+	name = "Master OAC outfit"
+	hierarchy_type = /decl/hierarchy/mil_uniform/oac
+	branch = /datum/mil_branch/oac
+
+	pt_under = /obj/item/clothing/under/solgov/pt/oac
 	pt_shoes = /obj/item/clothing/shoes/black
 
-	utility_under = /obj/item/clothing/under/solgov/utility/marine
+	utility_under = /obj/item/clothing/under/solgov/utility/oac
 	utility_shoes = /obj/item/clothing/shoes/jungleboots
-	utility_hat = /obj/item/clothing/head/solgov/utility/marine
-	utility_extra = list(/obj/item/clothing/head/ushanka/solgov/marine/green, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/marine)
+	utility_hat = /obj/item/clothing/head/solgov/utility/oac
+	utility_extra = list(/obj/item/clothing/head/ushanka/solgov/oac/green, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/oac)
 
-	service_under = /obj/item/clothing/under/solgov/service/marine
-	service_skirt = /obj/item/clothing/under/solgov/service/marine/skirt
-	service_over = /obj/item/clothing/suit/storage/solgov/service/marine
+	service_under = /obj/item/clothing/under/solgov/service/oac
+	service_skirt = /obj/item/clothing/under/solgov/service/oac/skirt
+	service_over = /obj/item/clothing/suit/storage/solgov/service/oac
 	service_shoes = /obj/item/clothing/shoes/dress
-	service_hat = /obj/item/clothing/head/solgov/service/marine
-	service_extra = list(/obj/item/clothing/head/solgov/service/marine/garrison)
+	service_hat = /obj/item/clothing/head/solgov/service/oac
+	service_extra = list(/obj/item/clothing/head/solgov/service/oac/garrison)
 
-	dress_under = /obj/item/clothing/under/solgov/mildress/marine
-	dress_skirt = /obj/item/clothing/under/solgov/mildress/marine/skirt
-	dress_over = /obj/item/clothing/suit/dress/solgov/marine
+	dress_under = /obj/item/clothing/under/solgov/mildress/oac
+	dress_skirt = /obj/item/clothing/under/solgov/mildress/oac/skirt
+	dress_over = /obj/item/clothing/suit/dress/solgov/oac
 	dress_shoes = /obj/item/clothing/shoes/dress
-	dress_hat = /obj/item/clothing/head/solgov/dress/marine
+	dress_hat = /obj/item/clothing/head/solgov/dress/oac
 	dress_gloves = /obj/item/clothing/gloves/white
 
-decl/hierarchy/mil_uniform/civilian
+/decl/hierarchy/mil_uniform/civilian
 	name = "Master civilian outfit"		//Basically just here for the rent-a-tux, ahem, I mean... dress uniform.
 	hierarchy_type = /decl/hierarchy/mil_uniform/civilian
 	branch = /datum/mil_branch/civilian
