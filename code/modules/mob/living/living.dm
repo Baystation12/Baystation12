@@ -7,10 +7,6 @@
 
 /mob/living/Initialize()
 	. = ..()
-	if(can_have_vision_cone)
-		vision_cone = can_have_vision_cone
-
-	GLOB.moved_event.register(src, src, /mob/proc/update_vision_cone)
 
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
@@ -782,8 +778,6 @@ default behaviour is:
 	if(auras)
 		for(var/a in auras)
 			remove_aura(a)
-
-	GLOB.moved_event.unregister(src, src, /mob/proc/update_vision_cone)
 
 	return ..()
 

@@ -49,7 +49,7 @@
 
 /mob/living/update_vision_cone()
 	if(!can_have_vision_cone)
-		if(vision_cone)
+		if(vision_cone_overlay != null)
 			hide_cone()
 		return
 
@@ -100,7 +100,7 @@
 		src.vision_cone_overlay.alpha = 0
 		return
 
-	else if(src.vision_cone)
+	else if(src.vision_cone_overlay != null)
 		show_cone()
 	else
 		hide_cone()
@@ -112,12 +112,10 @@
 
 	if(src.vision_cone_overlay)
 		src.vision_cone_overlay.alpha = 255
-		src.vision_cone = 1
 
 /mob/living/proc/hide_cone()
 	if(src.vision_cone_overlay)
 		src.vision_cone_overlay.alpha = 0
-		src.vision_cone = 0
 
 /mob/living/set_dir()
 	. = ..()
