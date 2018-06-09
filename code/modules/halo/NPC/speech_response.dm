@@ -24,14 +24,14 @@
 		"The UNSC are only doing what's best.",\
 		"UNSC pride colony wide!",\
 		"UNSC marines are the best trained in the colonies.",\
-		"My [pick("uncle","aunt","sister","brother")] was a [pick("marine","figher pilot","crewman in the navy")]. Our entire family supports them.",\
+		"My [pick("uncle","aunt","sister","brother")] was a [pick("marine","fighter pilot","crewman in the navy")]. Our entire family supports them.",\
+		"The UNSC are what's keeping humanity together out here.",\
 		"A strong military is needed to keep the colonies in line.")
 	else
 		responses = list(\
 		"I wish the UNSC would leave us alone.",\
 		"Taxes are rising and UNSC builds a new warship. Coincidence?",\
 		"I'll tell you what I think of the UNSC!",\
-		"The UNSC are what's keeping humanity together out here.",\
 		"The UNSC stink.",\
 		"We need to demilitarise and unite to colonise space, not build UNSC warships.",\
 		"Scumbag UNSC only out for themselves")

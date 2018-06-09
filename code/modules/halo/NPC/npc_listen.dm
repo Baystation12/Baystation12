@@ -21,5 +21,5 @@
 			src.audible_message(msg)
 			var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
 			for(var/mob/M in view(7, src))
-				M << speech_bubble
+				to_chat(M, speech_bubble)
 			spawn(30) qdel(speech_bubble)
