@@ -13,13 +13,7 @@ var/obj/screen/robot_inventory
 //Fov
 	var/mob/living/silicon/robot/r = mymob
 	if(r.can_have_vision_cone)
-		r.vision_cone_overlay = new /obj/screen()
-		r.vision_cone_overlay.icon = 'icons/mob/vision_cone.dmi'
-		r.vision_cone_overlay.icon_state = "combat"
-		r.vision_cone_overlay.name = ""
-		r.vision_cone_overlay.screen_loc = "1,1"
-		r.vision_cone_overlay.mouse_opacity = 0
-		r.vision_cone_overlay.layer = UNDER_HUD_LAYER
+		r.vision_cone_overlay = new /obj/screen/fov()
 		src.adding += r.vision_cone_overlay
 
 //Radio

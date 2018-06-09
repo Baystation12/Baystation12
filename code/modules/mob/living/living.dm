@@ -8,9 +8,8 @@
 /mob/living/Initialize()
 	. = ..()
 	if(can_have_vision_cone)
-		vision_cone = 1
+		vision_cone = can_have_vision_cone
 
-	GLOB.dir_set_event.register(src, src, /mob/proc/update_vision_cone)
 	GLOB.moved_event.register(src, src, /mob/proc/update_vision_cone)
 
 //mob verbs are faster than object verbs. See mob/verb/examine.
@@ -784,7 +783,6 @@ default behaviour is:
 		for(var/a in auras)
 			remove_aura(a)
 
-	GLOB.dir_set_event.unregister(src, src, /mob/proc/update_vision_cone)
 	GLOB.moved_event.unregister(src, src, /mob/proc/update_vision_cone)
 
 	return ..()

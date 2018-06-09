@@ -22,13 +22,7 @@
 
 	if(target.can_have_vision_cone)
 		var/mob/living/carbon/human/H = mymob
-		H.vision_cone_overlay = new /obj/screen()
-		H.vision_cone_overlay.icon = 'icons/mob/vision_cone.dmi'
-		H.vision_cone_overlay.icon_state = "combat"
-		H.vision_cone_overlay.name = ""
-		H.vision_cone_overlay.screen_loc = "1,1"
-		H.vision_cone_overlay.mouse_opacity = 0
-		H.vision_cone_overlay.layer = UNDER_HUD_LAYER
+		H.vision_cone_overlay = new /obj/screen/fov()
 		hud_elements |= H.vision_cone_overlay
 
 	// Draw the various inventory equipment slots.

@@ -47,7 +47,6 @@
 	var/stuttering = null	//Carbon
 	var/slurring = null		//Carbon
 
-	var/list/in_vision_cones = list()
 	var/obj/screen/vision_cone_overlay = null
 	var/vision_cone
 	var/can_have_vision_cone = FALSE

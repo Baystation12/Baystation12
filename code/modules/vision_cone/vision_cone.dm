@@ -10,7 +10,7 @@
 //Defines.
 #define OPPOSITE_DIR(D) turn(D, 180)
 
-/client/
+/client
 	var/list/hidden_atoms = list()
 	var/list/hidden_mobs = list()
 
@@ -76,14 +76,8 @@
 				if(src.pulling == M)//If we're pulling them we don't want them to be invisible, too hard to play like that.
 					I.override = 0
 
-				M.in_vision_cones[src.client] = 1
-
-	else
-		return
-
 /mob/living/proc/clear_cone_effect(var/image/I)
-	if(I)
-		qdel(I)
+	qdel(I)
 
 /mob/living/proc/SetFov(var/n)
 	if(!can_have_vision_cone)
@@ -99,13 +93,7 @@
 		return
 
 	if(isnull(vision_cone_overlay))
-		src.vision_cone_overlay = new /obj/screen()
-		src.vision_cone_overlay.icon = 'icons/mob/vision_cone.dmi'
-		src.vision_cone_overlay.icon_state = "combat"
-		src.vision_cone_overlay.name = ""
-		src.vision_cone_overlay.screen_loc = "1,1"
-		src.vision_cone_overlay.mouse_opacity = 0
-		src.vision_cone_overlay.layer = UNDER_HUD_LAYER
+		src.vision_cone_overlay = new /obj/screen/fov()
 		src.client.screen |= src.vision_cone_overlay
 
 	if(resting || lying || client.eye != client.mob)
@@ -132,10 +120,6 @@
 		src.vision_cone = 0
 
 /mob/living/set_dir()
-	..()
-	update_vision_cone()
-
-
-/mob/living/proc/clear_noise_effect(var/client/C, var/image/I)
-	if(C && I)
-		C.images -= I
+	. = ..()
+	if(.)
+		update_vision_cone()
