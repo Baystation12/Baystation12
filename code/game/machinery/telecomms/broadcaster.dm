@@ -144,6 +144,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		/* ###### Broadcast a message using signal.data ###### */
 
 		var/datum/radio_frequency/connection = signal.data["connection"]
+		if(isnull(connection))
+			return
 
 		Broadcast_Message(signal.data["connection"], signal.data["mob"],
 						  signal.data["vmask"], signal.data["vmessage"],
