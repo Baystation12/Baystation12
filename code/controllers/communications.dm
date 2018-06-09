@@ -298,6 +298,8 @@ var/global/datum/controller/radio/radio_controller
 				var/obj/effect/overmap/our_om_obj = map_sectors["[start_point.z]"]
 				signal_nodes += tc
 				if(tc.long_range_link)
+					if(isnull(our_om_obj))
+						continue
 					for(var/z_level in our_om_obj.map_z)
 						allowed_broadcast_zs.Add("[z_level]")
 				else
