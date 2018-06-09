@@ -409,3 +409,10 @@
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
 	return 1
+
+/obj/screen/fov
+	icon = 'icons/mob/vision_cone.dmi'
+	icon_state = "combat"
+	name = " "
+	screen_loc = "1,1"
+	mouse_opacity = 0
