@@ -180,6 +180,8 @@ var/list/gamemode_cache = list()
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 
+	var/discord_bot_address = "" //The address to push info to the discord bot
+
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
 	// If the first delay has a custom start time
@@ -578,6 +580,9 @@ var/list/gamemode_cache = list()
 
 				if("irc_bot_export")
 					irc_bot_export = 1
+
+				if("discord_bot_address")
+					discord_bot_address = value
 
 				if("ticklag")
 					var/ticklag = text2num(value)
