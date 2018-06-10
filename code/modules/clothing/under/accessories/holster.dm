@@ -88,7 +88,7 @@
 
 /obj/item/clothing/accessory/holster/hip
 	name = "hip holster"
-	desc = "A handgun holster slung low on the hip, draw pardner!"
+	desc = "A handgun holster slung low on the hip."
 	icon_state = "holster_hip"
 
 /obj/item/clothing/accessory/holster/thigh

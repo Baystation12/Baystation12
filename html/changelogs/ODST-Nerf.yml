@@ -1,0 +1,10 @@
+author: Desolane
+
+delete-after: True
+
+changes: 
+  - bugfix: "reduced damage threshold of ODST general attire making them not invincible"
+  - tweak: "reduced damage threshold of Marine general attire and gave marine armor a holster"
+  - spellcheck: "fixed a plethora of typos across multiple items"
+  - tweak: "marine armor vendors now carry gloves"
+  - tweak: "CH252 Helmet alternate variant is now the CH252-V Helmet and marine uniforms now spawn with dogtags"
