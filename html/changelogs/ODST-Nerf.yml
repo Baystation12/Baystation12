@@ -3,11 +3,8 @@ author: Desolane
 delete-after: True
 
 changes: 
-  - rscadd: "marine uniforms spawn with dogtags now"
   - bugfix: "reduced damage threshold of ODST general attire making them not invincible"
-  - tweak: "reduced damage threshold of Marine general attire"
+  - tweak: "reduced damage threshold of Marine general attire and gave marine armor a holster"
   - spellcheck: "fixed a plethora of typos across multiple items"
-  - rscadd: "marine armor now spawns with a holster to make up for the nerf"
   - tweak: "marine armor vendors now carry gloves"
-  - tweak: "CH252 Helmet alternate variant is now the CH252-V Helmet"
-  - rscdel: "nerfed covie ship weapons for being snowflakes"
+  - tweak: "CH252 Helmet alternate variant is now the CH252-V Helmet and marine uniforms now spawn with dogtags"
