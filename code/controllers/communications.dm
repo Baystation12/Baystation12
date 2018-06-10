@@ -294,7 +294,7 @@ var/global/datum/controller/radio/radio_controller
 	//GRAB THE FIRST STEP OF OUR SIGNAL AS OUR FIRST NODE. IF THERE IS NO FIRST NODE, NO BROADCAST OCCURS.
 	for(var/obj/machinery/telecomms/tc in telecomms_list)
 		var/obj/effect/overmap/our_om_obj = map_sectors["[start_point.z]"]
-		if(isnull(our_om_obj) && tc.long_range_link)
+		if(isnull(our_om_obj))
 			continue
 		if((tc.z == start_point.z) || (tc.long_range_link && tc.z in our_om_obj.map_z) && allowed_broadcast_zs.len == 0)
 			if(is_valid_node(tc) && tc.on && tc.is_freq_listening(signal))
