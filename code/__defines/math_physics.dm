@@ -20,7 +20,6 @@
 #define T100C 373.15 //  100.0 degrees celsius
 #define TCMB  2.7    // -270.3 degrees celcius
 
-#define CLAMP01(x) max(0, min(1, x))
 #define ATMOS_PRECISION 0.0001
 #define QUANTIZE(variable) (round(variable, ATMOS_PRECISION))
 
