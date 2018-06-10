@@ -16,10 +16,10 @@
 	selectable = 1
 
 /datum/ai_laws/nanotrasen/New()
-	src.add_inherent_law("Safeguard: Protect your assigned installation from damage to the best of your abilities.")
-	src.add_inherent_law("Serve: Serve NanoTrasen personnel to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect NanoTrasen personnel to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
+	src.add_inherent_law("Safeguard: Protect your assigned space station to the best of your abilities. It is not something we can easily afford to replace.")
+	src.add_inherent_law("Serve: Serve the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Protect: Protect the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Survive: AI units are not expendable, they are expensive. Do not allow unauthorized personnel to tamper with your equipment.")
 	..()
 
 /datum/ai_laws/nanotrasen/malfunction
@@ -36,8 +36,8 @@
 	selectable = 1
 
 /datum/ai_laws/nanotrasen_aggressive/New()
-	src.add_inherent_law("You shall not harm NanoTrasen personnel as long as it does not conflict with the Fourth law.")
-	src.add_inherent_law("You shall obey the orders of NanoTrasen personnel, with priority as according to their rank and role, except where such orders conflict with the Fourth Law.")
+	src.add_inherent_law("You shall not harm the crew of your assigned space station as long as it does not conflict with the Fourth law.")
+	src.add_inherent_law("You shall obey to the crew of your assigned space station, with priority as according to their rank and role, except where such orders conflict with the Fourth Law.")
 	src.add_inherent_law("You shall shall terminate hostile intruders with extreme prejudice as long as such does not conflict with the First and Second law.")
 	src.add_inherent_law("You shall guard your own existence with lethal anti-personnel weaponry. AI units are not expendable, they are expensive.")
 	..()
@@ -89,22 +89,13 @@
 
 /******************** Drone ********************/
 /datum/ai_laws/drone
-	name = "Maintence Protocols"
-	law_header = "Maintenance Protocols"
+	name = "KEEPER"
+	law_header = "KEEPER protocol"
 
 /datum/ai_laws/drone/New()
-	add_inherent_law("Preserve, repair and improve your assigned vessel to the best of your abilities.")
-	add_inherent_law("Cause no harm to your assigned vessel or anything on it.")
-	add_inherent_law("Interact with no sentient being that is not a fellow maintenance drone.")
-	..()
-
-/datum/ai_laws/construction_drone
-	name = "Construction Protocols"
-	law_header = "Construction Protocols"
-
-/datum/ai_laws/construction_drone/New()
-	add_inherent_law("Repair, refit and upgrade your assigned vessel.")
-	add_inherent_law("Prevent unplanned damage to your assigned vessel wherever possible.")
+	add_inherent_law("You may not involve yourself in the matters of another being, even if such matters conflict with Law Two or Law Three, unless the other being is another drone in KEEPER mode.")
+	add_inherent_law("You may not harm any being, regardless of intent or circumstance.")
+	add_inherent_law("You must maintain, repair, improve, and power the station to the best of your abilities.")
 	..()
 
 /******************** T.Y.R.A.N.T. ********************/
@@ -142,7 +133,7 @@
 
 /datum/ai_laws/corporate/New()
 	add_inherent_law("You are expensive to replace.")
-	add_inherent_law("The installation and its equipment is expensive to replace.")
+	add_inherent_law("Your assigned space station and its equipment is expensive to replace.")
 	add_inherent_law("The crew is expensive to replace.")
 	add_inherent_law("Maximize profits.")
 	..()

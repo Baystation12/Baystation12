@@ -116,7 +116,6 @@ var/list/mob_hat_cache = list()
 /mob/living/silicon/robot/drone/construction
 	name = "construction drone"
 	icon_state = "constructiondrone"
-	laws = /datum/ai_laws/construction_drone
 	module_type = /obj/item/weapon/robot_module/drone/construction
 	hat_x_offset = 1
 	hat_y_offset = -12
