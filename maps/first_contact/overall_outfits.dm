@@ -74,7 +74,7 @@
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
-	gloves = /obj/item/clothing/gloves/thick/unsc
+	gloves = /obj/item/clothing/gloves/thick/combat
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
@@ -87,7 +87,7 @@
 	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
-	gloves = /obj/item/clothing/gloves/tactical
+	gloves = /obj/item/clothing/gloves/thick/combat
 	shoes = /obj/item/clothing/shoes/jungleboots
 	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 	pda_slot = null
