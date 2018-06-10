@@ -2,24 +2,25 @@
 #define ITEM_INHAND 'code/modules/halo/clothing/marine_items.dmi'
 
 /obj/item/clothing/under/unsc/marine_fatigues
-	desc = "standard issue for UNSC marines"
+	desc = "Standard issue uniform for UNSC marine corps."
 	name = "UNSC Marine fatigues"
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "uniform"
 	icon_state = "uniform"
 	worn_state = "UNSC Marine Fatigues"
+	starting_accessories = /obj/item/clothing/accessory/badge/tags
 
 /obj/item/clothing/head/helmet/marine
 	name = "CH252 Helmet"
-	desc = "the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "CH252 Helmet"
 	icon_state = "helmet_novisor"
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
-	armor = list(melee = 50, bullet = 25, laser = 50,energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 25, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -29,7 +30,8 @@
 	w_class = 3
 
 /obj/item/clothing/head/helmet/marine/visor
-	desc = "the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR."
+	name = "CH252-V Helmet"
+	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "CH252 Visor Helmet"
@@ -38,28 +40,29 @@
 
 /obj/item/clothing/suit/storage/marine
 	name = "M52B Body Armor"
-	desc = "an armored protective vest worn by the members of the UNSC Marine Corps."
+	desc = "An armored protective vest worn by the members of the UNSC Marine Corps."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "armor"
 	icon_state = "M52B Body Armor"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 35, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
+	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
 /obj/item/clothing/shoes/marine
 	name = "VZG7 Armored Boots"
-	desc = "standard issue combat boots for the UNSC Marines, worn as a part of the Marine BDU."
+	desc = "Standard issue combat boots for the UNSC Marines, worn as a part of the Marine BDU."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "boots"
 	icon_state = "boots"
 	force = 5
-	armor = list(melee = 40, bullet = 40, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 40, bio = 0, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
@@ -99,6 +102,7 @@
 	icon_state = "marinemask"
 	item_state = "marinemask"
 	w_class = ITEM_SIZE_SMALL
+	body_parts_covered = HEAD|FACE
 
 /obj/item/clothing/suit/space/void/unsc
 	name = "\improper Salvage Suit"
@@ -147,7 +151,6 @@
 	item_state = "unsc_gloves"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
-	force = 5
 	body_parts_covered = HANDS
 	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 20, bio = 0, rad = 0)
 	cold_protection = HANDS
