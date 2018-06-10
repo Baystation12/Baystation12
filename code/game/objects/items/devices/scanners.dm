@@ -545,7 +545,7 @@ proc/get_wound_severity(var/damage_ratio, var/can_heal_overkill = 0)
 		else if (T.nutrition < T.get_hunger_nutrition())
 			user.show_message("<span class='warning'>Warning:\tthe slime is hungry.</span>")
 		user.show_message("Electric charge strength:\t[T.powerlevel]")
-		user.show_message("Health:\t[round(T.health / T.maxHealth)]%")
+		user.show_message("Health:\t[round((T.health * 100) / T.maxHealth)]%")
 
 		var/list/mutations = T.GetMutations()
 
