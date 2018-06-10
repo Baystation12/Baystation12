@@ -343,6 +343,39 @@ proc/TextPreview(var/string,var/len=40)
 		return tagdesc
 	return "<IMG src='\ref[text_tag_icons.icon]' class='text_tag' iconstate='[tagname]'" + (tagdesc ? " alt='[tagdesc]'" : "") + ">"
 
+// For processing simple markup, similar to what Skype and Discord use.
+// Enabled from a config setting.
+// Stolen from Aurora.
+/proc/process_chat_markup(var/message, var/list/ignore_tags = list())
+	if (!config.allow_chat_markup)
+		return message
+
+	if (!message)
+		return ""
+
+	// ---Begin URL caching.
+	var/list/urls = list()
+	var/i = 1
+	while (GLOB.url_find_lazy.Find(message))
+		urls["\ref[urls]-[i]"] = GLOB.url_find_lazy.match
+		i++
+
+	for (var/ref in urls)
+		message = replacetextEx(message, urls[ref], ref)
+	// ---End URL caching
+
+	var/regex/tag_markup
+	for (var/tag in (GLOB.markup_tags - ignore_tags))
+		tag_markup = GLOB.markup_regex[tag]
+		message = tag_markup.Replace(message, "$2[GLOB.markup_tags[tag][1]]$3[GLOB.markup_tags[tag][2]]$5")
+
+	// ---Unload URL cache
+	for (var/ref in urls)
+		message = replacetextEx(message, ref, urls[ref])
+
+	return message
+
+
 /proc/contains_az09(var/input)
 	for(var/i=1, i<=length(input), i++)
 		var/ascii_char = text2ascii(input,i)

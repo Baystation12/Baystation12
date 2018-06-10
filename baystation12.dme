@@ -50,6 +50,7 @@
 #include "code\__defines\proc_presets.dm"
 #include "code\__defines\process_scheduler.dm"
 #include "code\__defines\qdel.dm"
+#include "code\__defines\regex.dm"
 #include "code\__defines\research.dm"
 #include "code\__defines\shields.dm"
 #include "code\__defines\species.dm"

@@ -110,6 +110,7 @@
 
 	if (!msg)
 		return
+	msg = process_chat_markup(msg, list("~", "_"))
 	to_world(msg)
 
 	log_and_message_admins(" - GlobalNarrate: [msg]")
@@ -134,6 +135,7 @@
 
 	if( !msg )
 		return
+	msg = process_chat_markup(msg, list("~", "_"))
 
 	to_chat(M, msg)
 	log_and_message_admins(" - DirectNarrate to ([M.name]/[M.key]): [msg]")
@@ -153,6 +155,7 @@
 	if( !msg )
 		return
 
+	msg = process_chat_markup(msg, list("~", "_"))
 	var/list/listening_hosts = hosts_in_view_range(usr)
 
 	for(var/listener in listening_hosts)
@@ -178,6 +181,7 @@
 
 	if( !msg )
 		return
+	msg = process_chat_markup(msg, list("~", "_"))
 
 	M.visible_message(msg, narrate = TRUE)
 	log_and_message_admins(" - VisibleNarrate on [A]: [msg]")
@@ -202,6 +206,7 @@
 
 	if( !msg )
 		return
+	msg = process_chat_markup(msg, list("~", "_"))
 
 	M.audible_message(msg, narrate = TRUE)
 	log_and_message_admins(" - AudibleNarrate on [A]: [msg]")
