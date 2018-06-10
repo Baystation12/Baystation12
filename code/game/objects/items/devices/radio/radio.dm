@@ -360,16 +360,7 @@
 		signal.frequency = connection.frequency // Quick frequency set
 
 	  //#### Sending the signal to all subspace receivers ####//
-
-		for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
-			R.receive_signal(signal)
-
-		// Allinone can act as receivers.
-		for(var/obj/machinery/telecomms/allinone/R in telecomms_list)
-			R.receive_signal(signal)
-
-		for(var/obj/item/device/mobilecomms/R in telecomms_list)
-			R.receive_signal(signal)
+		connection.post_signal(src,signal)
 
 		// Receiving code can be located in Telecommunications.dm
 		return signal.data["done"] && position.z in signal.data["level"]
@@ -420,7 +411,6 @@
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
 
-
 	sleep(rand(10,25)) // wait a little...
 
 	if(signal.data["done"] && position.z in signal.data["level"])
@@ -468,7 +458,7 @@
 		return -1
 	if(!(0 in level))
 		var/turf/position = get_turf(src)
-		if(!position || !(position.z in level))
+		if(!position || !("[position.z]" in level))
 			return -1
 	if(freq in ANTAG_FREQS)
 		if(!(src.syndie))//Checks to see if it's allowed on that frequency, based on the encryption keys

@@ -90,12 +90,9 @@
 "bL" = (/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "bM" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "bN" = (/obj/structure/table/steel,/obj/item/weapon/folder{tag = "icon-folder_blue"; icon_state = "folder_blue"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
-"bO" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
-"bP" = (/obj/machinery/computer/telecomms/monitor,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "bQ" = (/obj/structure/mirror{pixel_x = 32},/obj/structure/sink/kitchen{dir = 8; icon_state = "sink_alt"; name = "bathroom sink"; pixel_x = 20; tag = "icon-sink_alt (WEST)"},/turf/simulated/floor/tiled/freezer,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "bR" = (/obj/machinery/papershredder,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "bS" = (/obj/structure/table/steel,/obj/item/weapon/pen,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
-"bT" = (/obj/item/modular_computer/console/preset/sysadmin,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "bU" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "bV" = (/mob/living/simple_animal/hostile/shantak,/turf/simulated/floor/asteroid/planet,/area/exo_Ice_facility/Cave{base_turf = /turf/simulated/floor/asteroid/planet; dynamic_lighting = 1; icon_state = "anoentry"; luminosity = 0; tag = "icon-anoentry"})
 "bW" = (/obj/machinery/door/airlock/halo_lifepod{name = "Interior Airlock"},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
@@ -107,6 +104,10 @@
 "cc" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "cd" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "ce" = (/obj/effect/landmark/map_data{height = 2},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
+"kv" = (/obj/structure/bed/chair/office/dark{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"pC" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
+"qx" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
+"Mt" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -157,7 +158,7 @@ aaaaaaaoaoaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaoaa
 aaaaaaaoaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaaaaaaaracacacacacacacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaoaoaoaoaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaoaoaaaaaaaaaaaaaaaaaaaaaaaaaoataoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaaaaaracacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaaoaoaoauaoaoaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaoaoaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaaarabababacacacacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaaaaaaaoaoaoaaaaaaaaaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaaaaaaaaaaaaabacacadacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaaaaaaaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaaaaaaaaaaaaabacacadacacacacacqxacacacacacacababaaaaaaaaaaaaaaaaaaaaaaaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaoaoaoaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaataoaoaoaaaaaaaaaaaaaaaaaaaaaoaoaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaaaaaaaaaaaaaaabacacacacacacacacabababacacacabababaaaaaaaaaaaaaaaaaaaaaaaaaoaoaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -202,11 +203,12 @@ abacacacacacacacacacacacacacacacacacacacacafafacacacacacacacacacacacacacacacacac
 abababacacacacacacbvajacacacacacacacacacbwacacacacacacacacacacacacajacacacacacacagacacacacacacacaqabaaaoaaaaaaaaaaaaaaaoaoaaaaaaaaaaaaaaaaaaaaaxaDaDaDaDaDaDaDaDbxaDaDaDbybzbdbdbpbpbpbpbpbpbpbpbdbdaxaa
 abacacacacacacacacacacacacacacacacacafacacacacacacacacacacacacacaiacacacacacacacagacaiacacacacacacabaoaaaaaaaaaaaaaaaoaoaoaoaoaaaaaaaaaaaaaaaaaxaxbAaxaxaxaxaxaxaxaAaDbBbCbzbdbdbpbpbpbpbpbpbpbpbdbdaxaa
 abacacacacamacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaoasaoaoaoaoaaaaaaaaaaaaaaaxbDbEbFaxbGaxbHbHaxaDaDaDbIbzbdbdbpbpbpbpbpbpbpbpbdbdaxaa
-abacacacacacacacacacacacacacacacacacacacacacacacacacacacamacacacacacacacacacacacacacafacacacacacacabaaaaaaaaaaaaaaaoaoaoaoaoaoaoaaaaaaaaaaaaaaaxbJbEbFaxbKaxbLbMaxaDbNbObPaxbdbdbpbpbpbpbpbpbpbpbdbdaxaa
-ababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababaaaaaaaaaaaoaoaoaoaoaoaoauaoaaaaaaaaaaaaaaaxbDbEbFaxbQaxbKbKaxbRbSbTbUaxbsbdbpbpbpbpbpbpbpbpbdbtaxaa
+abacacacacacacacacacacacacacacacacacacacacacacacacacacacamacacacacacacacacacacacacacafacacacacacacabaaaaaaaaaaaaaaaoaoaoaoaoaoaoaaaaaaaaaaaaaaaxbJbEbFaxbKaxbLbMaxaDbNkvpCaxbdbdbpbpbpbpbpbpbpbpbdbdaxaa
+ababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacababaaaaaaaaaaaoaoaoaoaoaoaoauaoaaaaaaaaaaaaaaaxbDbEbFaxbQaxbKbKaxbRbSMtbUaxbsbdbpbpbpbpbpbpbpbpbdbtaxaa
 ababacacacacacacacacacacafacacacacacacacacacacacacacacacacacakacacacacacacacacacacacacacacacacacababaaaaaaaaaaaaaaaaaoaoaobVaoaaaaaaaaaaaaaaaaaxaDaDaDbWbLbXbLbLaxaxaxaxaxaxbdbdbpbpbpbpbpbpbpbpbdbdaxaa
 ababacacacacacacacacacacacacacacacacacaibwacacacacacacacacacacacacacagacacacacacacacacacacacacacababaaaaaaaaaaaaaaaoaoaoaoaoaoaaaaaaaaaaaaaaaxaxaxbYaxaxaxaxaxaxaxaaaaaaaaaxbdbdbdbdbdbdbdbdbdbdbdbdaxaa
 bZabababacacacacacacacacacacacacacacacacacacacabacacacacacacacacacacacabacacacacacacakakacacababababaaaaaaaaaaaaaoaoauaoaoaoaoaaaaaaaaaaaaaaaxaDcaaDaDaDaxaaaaaaaaaaaaaaaaaxbdcbbkbdbdbdcbbdbdbdbdcbaxaa
 abababababacacacacacacababacacacacabacacacacacabababacacacacacacacacababababacacacacacabababababababaaaaaaaaaaaaaoaoaoaaaaaaaoaaaaaaaaaaaaaaaxccaDaDcdaDaxaaaaaaaaaaaaaaaaaxaxaxaxaxaxaxaxaxaxaxaxaxaxaa
 ceabababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaxaxaxaxaxaxaxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

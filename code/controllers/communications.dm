@@ -260,37 +260,80 @@ var/global/datum/controller/radio/radio_controller
 	var/frequency as num
 	var/list/list/obj/devices = list()
 
-/datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, var/filter = null as text|null, var/range = null as num|null)
+/datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, var/filter = null as text|null, var/range = 0 as num|null)
 	var/turf/start_point
-	if(range)
-		start_point = get_turf(source)
-		if(!start_point)
-			qdel(signal)
-			return 0
+	start_point = get_turf(source)
+	if(!start_point)
+		qdel(signal)
+		return 0
 	if (filter)
 		send_to_filter(source, signal, filter, start_point, range)
-		send_to_filter(source, signal, RADIO_DEFAULT, start_point, range)
+		//send_to_filter(source, signal, RADIO_DEFAULT, start_point, range) //Not too sure why this also sent a signal to the base radio channel, so leaving this commented just in case.
 	else
 		//Broadcast the signal to everyone!
 		for (var/next_filter in devices)
 			send_to_filter(source, signal, next_filter, start_point, range)
 
+/datum/radio_frequency/proc/is_valid_node(var/atom/A)
+	if(istype(A,/obj/machinery/telecomms/relay) || istype(A,/obj/machinery/telecomms/hub) || istype(A,/obj/machinery/telecomms/allinone) || istype(A,/obj/machinery/telecomms/receiver))
+		return 1
+	return 0
+
 //Sends a signal to all machines belonging to a given filter. Should be called by post_signal()
-/datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/filter, var/turf/start_point = null, var/range = null)
-	if (range && !start_point)
+/datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/filter, var/turf/start_point = null, var/range = 0)
+	if(!GLOB.using_map.use_overmap) //Don't need to bother with any of this if we're not using the overmap.
+		for(var/obj/device in devices[filter])
+			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 		return
 
-	for(var/obj/device in devices[filter])
-		if(device == source)
-			continue
-		if(range)
-			var/turf/end_point = get_turf(device)
-			if(!end_point)
-				continue
-			if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
-				continue
+	var/list/devices_signalled = list()
 
-		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
+	var/list/signal_nodes = list()
+	var/list/allowed_broadcast_zs = list()
+	//NOTES: WE WANT TO FORM A NETWORK OF NODES, STARTING WITH THE ORIGIN OF THE SIGNAL.
+	//GRAB THE FIRST STEP OF OUR SIGNAL AS OUR FIRST NODE. IF THERE IS NO FIRST NODE, NO BROADCAST OCCURS.
+	for(var/obj/machinery/telecomms/tc in telecomms_list)
+		var/obj/effect/overmap/our_om_obj = map_sectors["[start_point.z]"]
+		if(isnull(our_om_obj))
+			continue
+		if((tc.z == start_point.z) || (tc.long_range_link && tc.z in our_om_obj.map_z) && allowed_broadcast_zs.len == 0)
+			if(is_valid_node(tc) && tc.on && tc.is_freq_listening(signal))
+				signal_nodes += tc
+				if(tc.long_range_link)
+					for(var/z_level in our_om_obj.map_z)
+						allowed_broadcast_zs.Add("[z_level]")
+				else
+					allowed_broadcast_zs.Add("[tc.z]")
+				break
+
+	var/nodes_exhausted = 0
+	while(!nodes_exhausted)
+		nodes_exhausted = 1
+		for(var/obj/machinery/telecomms/tc in signal_nodes)
+			for(var/obj/machinery/telecomms/tc_2 in telecomms_list)
+				var/obj/effect/overmap/tc_2_om_obj = map_sectors["[tc_2.z]"]
+				if(is_valid_node(tc_2) && get_dist(map_sectors["[tc.z]"],tc_2_om_obj) <= tc.signal_range && !(tc_2 in signal_nodes))
+					if(tc_2.on && tc_2.is_freq_listening(signal))
+						signal_nodes += tc_2
+						nodes_exhausted = 0
+						if(tc_2.long_range_link)
+							for(var/z_level in tc_2_om_obj.map_z)
+								allowed_broadcast_zs.Add("[z_level]")
+						else
+							allowed_broadcast_zs.Add("[tc_2.z]")
+
+	signal.data["level"] = allowed_broadcast_zs.Copy() //Set the signal's allowed levels to ours, mostly for use within comms-radioing.
+
+	for(var/obj/device in devices[filter] + signal_nodes) //Send our signal to our nodes too, just in case.
+		if(device in devices_signalled)
+			continue
+
+		for(var/z_str in allowed_broadcast_zs)
+			var/z_level = text2num(z_str)
+			if(z_level == device.z)
+				device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
+				devices_signalled += device
+				break
 
 /datum/radio_frequency/proc/add_listener(obj/device as obj, var/filter as text|null)
 	if (!filter)
