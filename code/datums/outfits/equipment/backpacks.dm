@@ -17,6 +17,11 @@
 	path = /obj/item/weapon/storage/backpack
 	is_default = TRUE
 
+/decl/backpack_outfit/rucksack
+	name = "Rucksack"
+	path = /obj/item/weapon/storage/backpack/rucksack
+	flags = BACKPACK_HAS_TYPE_SELECTION
+
 /decl/backpack_outfit/satchel
 	name = "Satchel"
 	path = /obj/item/weapon/storage/backpack/satchel
