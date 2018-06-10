@@ -1,0 +1,6 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Offstation antags (and traider) can now become ALIUMS!"
+  - rscadd: "Their bases have 'alien monolith' somewhere, which turns you into a humanoid alien of unknown species."
+  - rscadd: "Remember to implant the spawned translator implanter if you're planning on talking to people."

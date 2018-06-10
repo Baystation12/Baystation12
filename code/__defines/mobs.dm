@@ -265,6 +265,7 @@
 #define SPECIES_NABBER      "giant armoured serpentid"
 #define SPECIES_PROMETHEAN  "Promethean"
 #define SPECIES_XENO        "Xenophage"
+#define SPECIES_ALIEN       "Humanoid"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
