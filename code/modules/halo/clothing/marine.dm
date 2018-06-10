@@ -93,7 +93,7 @@
 
 /obj/item/clothing/mask/marine
 	name = "marine bandana"
-	desc = "For masking your identity, keeping your face warm, and blocking dust or sand. Comes in a stylish olice drab marine camo."
+	desc = "For masking your identity, keeping your face warm, and blocking dust or sand. Comes in a stylish olive drab marine camo."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	icon_state = "marinemask"
