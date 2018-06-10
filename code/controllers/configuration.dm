@@ -445,6 +445,8 @@ var/list/gamemode_cache = list()
 
 				if ("disable_ooc")
 					config.ooc_allowed = 0
+
+				if ("disable_looc")
 					config.looc_allowed = 0
 
 				if ("disable_aooc")
