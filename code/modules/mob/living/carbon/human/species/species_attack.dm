@@ -146,3 +146,10 @@
 	delay = 20
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"
+
+/datum/unarmed_attack/punch/starborn
+	attack_verb = list("scorched", "burned", "fried")
+	shredding = 1
+
+/datum/unarmed_attack/punc/starborn/get_damage_type()
+	return BURN
