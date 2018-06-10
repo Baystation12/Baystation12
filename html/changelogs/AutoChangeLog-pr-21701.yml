@@ -1,0 +1,6 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Throwing \"huge\" items (e.g. roller beds, backpacks, certain guns, rigs, jetpacks) or normal sized mobs without \"Basic\" skill in \"Athletics\" will briefly weaken you (and the items won't go far)."
+  - rscadd: "Thrown items don't go as far and have less speed/force if you have lower \"Athletics\" skill."
+  - rscadd: "The weightlifting machine at the gym has more weight levels. Having high \"Athletics\" means you can lift more. If you try lifting way more than you are capable of, you may hurt yourself."
