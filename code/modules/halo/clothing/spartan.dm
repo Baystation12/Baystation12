@@ -100,9 +100,9 @@
 	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant (customised)"
 	icon_state = "Mjolnir Powered Assault Armor/Mark V Male MisterMann"
 
-/obj/item/clothing/suit/armor/special/spartan/mkvi_eva
-	name = "MJOLNIR Powered Assault Armor Mark VI EVA variant"
-	icon_state = "Mjolnir Powered Assault Armor/Mark VI EVA"
+/obj/item/clothing/suit/armor/special/spartan/mkvi_grenadier
+	name = "MJOLNIR Powered Assault Armor Mark VI Grenadier variant (customised)"
+	icon_state = "Mjolnir Powered Assault Armor/Mark VI grenadier"
 
 
 
@@ -140,6 +140,6 @@
 	name = "MJOLNIR Powered Assault Armor Mark V Noble variant"
 	icon_state = "Mjolnir Powered Assault Helmet/Mark V Noble"
 
-/obj/item/clothing/head/helmet/spartan/mkvi_grenadier
-	name = "MJOLNIR Powered Assault Armor Mark VI Grenadier variant"
-	icon_state = "Mjolnir Powered Assault Helmet/Mark VI grenadier"
+/obj/item/clothing/head/helmet/spartan/mkvi_eva
+	name = "MJOLNIR Powered Assault Helmet Mark VI EVA variant"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark VI EVA"
