@@ -48,19 +48,19 @@
 	desc = "A navy blue utility cover bearing the crest of the SCG Fleet."
 	icon_state = "navyutility"
 
-/obj/item/clothing/head/solgov/utility/marine
-	name = "marine utility cover"
-	desc = "A green utility cover bearing the crest of the SCG Marine Corps."
+/obj/item/clothing/head/solgov/utility/oac
+	name = "orbital assault utility cover"
+	desc = "A green utility cover bearing the crest of the SCG Orbital Assault Corps."
 	icon_state = "greenutility"
 
-/obj/item/clothing/head/solgov/utility/marine/tan
+/obj/item/clothing/head/solgov/utility/oac/tan
 	name = "tan utility cover"
-	desc = "A tan utility cover bearing the crest of the SCG Marine Corps."
+	desc = "A tan utility cover bearing the crest of the SCG Orbital Assault Corps."
 	icon_state = "tanutility"
 
-/obj/item/clothing/head/solgov/utility/marine/urban
+/obj/item/clothing/head/solgov/utility/oac/urban
 	name = "urban utility cover"
-	desc = "A grey utility cover bearing the crest of the SCG Marine Corps."
+	desc = "A grey utility cover bearing the crest of the SCG Orbital Assault Corps."
 	icon_state = "greyutility"
 
 //Service
@@ -84,29 +84,29 @@
 	desc = "A peaked grey uniform cap belonging to the SCG Expeditionary Corps. This one is trimmed in gold."
 	icon_state = "greydresscap_com"
 
-/obj/item/clothing/head/solgov/service/marine
-	name = "marine wheel cover"
-	desc = "A green service uniform cover with an SCG Marine Corps crest."
+/obj/item/clothing/head/solgov/service/oac
+	name = "orbital assault wheel cover"
+	desc = "A green service uniform cover with an SCG Orbital Assault Corps crest."
 	icon_state = "greenwheelcap"
 
-/obj/item/clothing/head/solgov/service/marine/command
-	name = "marine officer's wheel cover"
-	desc = "A green service uniform cover with an SCG Marine Corps crest and gold stripe."
+/obj/item/clothing/head/solgov/service/oac/command
+	name = "orbital assault officer's wheel cover"
+	desc = "A green service uniform cover with an SCG Orbital Assault Corps crest and gold stripe."
 	icon_state = "greenwheelcap_com"
 
-/obj/item/clothing/head/solgov/service/marine/garrison
-	name = "marine garrison cap"
-	desc = "A green garrison cap belonging to the SCG Marine Corps."
+/obj/item/clothing/head/solgov/service/oac/garrison
+	name = "orbital assault garrison cap"
+	desc = "A green garrison cap belonging to the SCG Orbital Assault Corps."
 	icon_state = "greengarrisoncap"
 
-/obj/item/clothing/head/solgov/service/marine/garrison/command
-	name = "marine officer's garrison cap"
-	desc = "A green garrison cap belonging to the SCG Marine Corps. This one has a gold pin."
+/obj/item/clothing/head/solgov/service/oac/garrison/command
+	name = "orbital assault officer's garrison cap"
+	desc = "A green garrison cap belonging to the SCG Orbital Assault Corps. This one has a gold pin."
 	icon_state = "greengarrisoncap_com"
 
-/obj/item/clothing/head/solgov/service/marine/campaign
+/obj/item/clothing/head/solgov/service/oac/campaign
 	name = "campaign cover"
-	desc = "A green campaign cover with an SCG Marine Corps crest. Only found on the heads of Drill Instructors."
+	desc = "A green campaign cover with an SCG Orbital Assault Corps crest. Only found on the heads of Drill Instructors."
 	icon_state = "greendrill"
 
 //Dress
@@ -135,14 +135,14 @@
 	desc = "A white dress uniform cover. This one has a gold stripe and an SCG Fleet crest."
 	icon_state = "whitepeakcap_com"
 
-/obj/item/clothing/head/solgov/dress/marine
-	name = "marine dress wheel cover"
-	desc = "A white dress uniform cover with an SCG Marine Corps crest."
+/obj/item/clothing/head/solgov/dress/oac
+	name = "orbital assault dress wheel cover"
+	desc = "A white dress uniform cover with an SCG Orbital Assault Corps crest."
 	icon_state = "whitewheelcap"
 
-/obj/item/clothing/head/solgov/dress/marine/command
-	name = "marine officer's dress wheel cover"
-	desc = "A white dress uniform cover with an SCG Marine Corps crest and gold stripe."
+/obj/item/clothing/head/solgov/dress/oac/command
+	name = "orbital assault officer's dress wheel cover"
+	desc = "A white dress uniform cover with an SCG Orbital Assault Corps crest and gold stripe."
 	icon_state = "whitewheelcap_com"
 
 //Berets
@@ -196,7 +196,7 @@
 
 /obj/item/clothing/head/beret/solgov/diplomatic
 	name = "diplomatic security beret"
-	desc = "A tan beret denoting service in the SCG Marine Corps Diplomatic Security Group. For security personnel who are more inclined towards style than safety."
+	desc = "A tan beret denoting service in the SCG Orbital Assault Corps Diplomatic Security Group. For security personnel who are more inclined towards style than safety."
 	icon_state = "beret_tan"
 
 /obj/item/clothing/head/beret/solgov/borderguard
@@ -310,15 +310,15 @@
 	icon_state = "flushankadown"
 	icon_state_up = "flushankaup"
 
-/obj/item/clothing/head/ushanka/solgov/marine
-	name = "marine fur hat"
-	desc = "An SCG Marine Corps synthfur-lined hat for operating in cold environments."
+/obj/item/clothing/head/ushanka/solgov/oac
+	name = "orbital assault fur hat"
+	desc = "An SCG Orbital Assault Corps synthfur-lined hat for operating in cold environments."
 	icon_state = "bmcushankadown"
 	icon_state_up = "bmcushankaup"
 
-/obj/item/clothing/head/ushanka/solgov/marine/green
-	name = "green marine fur hat"
-	desc = "An SCG Marine Corps synthfur-lined hat for operating in cold environments."
+/obj/item/clothing/head/ushanka/solgov/oac/green
+	name = "green orbital assault fur hat"
+	desc = "An SCG Orbital Assault Corps synthfur-lined hat for operating in cold environments."
 	icon_state = "mcushankadown"
 	icon_state_up = "mcushankaup"
 

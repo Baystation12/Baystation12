@@ -2,12 +2,14 @@
 	branch_types = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet,
+		/datum/mil_branch/oac,
 		/datum/mil_branch/civilian
 	)
 
 	spawn_branch_types = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet,
+		/datum/mil_branch/oac,
 		/datum/mil_branch/civilian
 	)
 
@@ -34,6 +36,11 @@
 				/datum/mil_rank/fleet/e4,
 				/datum/mil_rank/fleet/e5,
 				/datum/mil_rank/fleet/o1
+			),
+			/datum/mil_branch/oac = list(
+				/datum/mil_rank/fleet/e1,
+				/datum/mil_rank/fleet/e2,
+				/datum/mil_rank/fleet/e3
 			)
 		),
 		/datum/species/tajaran = list(
@@ -146,6 +153,58 @@
 	min_skill = list(	/decl/hierarchy/skill/general/hauling				= SKILL_BASIC,
 						/decl/hierarchy/skill/security/weapons				= SKILL_BASIC,
 						/decl/hierarchy/skill/general/EVA					= SKILL_BASIC)
+
+/datum/mil_branch/oac
+	name = "Orbital Assault Corps"
+	name_short = "SCGOAC"
+	email_domain = "torch.oak.mil"
+
+	rank_types = list(
+		/datum/mil_rank/oac/e1,
+		/datum/mil_rank/oac/e2,
+		/datum/mil_rank/oac/e3,
+		/datum/mil_rank/oac/e4,
+		/datum/mil_rank/oac/e5,
+		/datum/mil_rank/oac/e6,
+		/datum/mil_rank/oac/e7,
+		/datum/mil_rank/oac/e8,
+		/datum/mil_rank/oac/e8_alt,
+		/datum/mil_rank/oac/e9,
+		/datum/mil_rank/oac/e9_alt1,
+		/datum/mil_rank/oac/e9_alt2,
+		/datum/mil_rank/oac/w1,
+		/datum/mil_rank/oac/w2,
+		/datum/mil_rank/oac/w3,
+		/datum/mil_rank/oac/w4,
+		/datum/mil_rank/oac/w5,
+		/datum/mil_rank/oac/o1,
+		/datum/mil_rank/oac/o2,
+		/datum/mil_rank/oac/o3,
+		/datum/mil_rank/oac/o4,
+		/datum/mil_rank/oac/o5,
+		/datum/mil_rank/oac/o6,
+		/datum/mil_rank/oac/o7,
+		/datum/mil_rank/oac/o8,
+		/datum/mil_rank/oac/o9,
+		/datum/mil_rank/oac/o10,
+		/datum/mil_rank/oac/o10_alt,
+	)
+
+	spawn_rank_types = list(
+		/datum/mil_rank/oac/e2,
+		/datum/mil_rank/oac/e3,
+		/datum/mil_rank/oac/e4,
+		/datum/mil_rank/oac/e5,
+		/datum/mil_rank/oac/e6,
+		/datum/mil_rank/oac/e7,
+		/datum/mil_rank/oac/e8,
+		/datum/mil_rank/oac/e8_alt,
+		/datum/mil_rank/oac/e9,
+		/datum/mil_rank/oac/e9_alt1,
+		/datum/mil_rank/oac/o2
+	)
+
+	assistant_job = "Crewman"
 
 /datum/mil_branch/civilian
 	name = "Civilian"
@@ -411,6 +470,174 @@
 	name_short = "ADM"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o8)
 	sort_order = 16
+
+/*
+ *  OAC
+ *  =======
+ */
+
+/datum/mil_rank/oac/e1
+	name = "Private"
+	name_short = "Pvt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted)
+	sort_order = 1
+
+/datum/mil_rank/oac/e2
+	name = "Private First Class"
+	name_short = "PFC"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e2)
+	sort_order = 2
+
+/datum/mil_rank/oac/e3
+	name = "Lance Corporal"
+	name_short = "LCpl"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e3)
+	sort_order = 3
+
+/datum/mil_rank/oac/e4
+	name = "Corporal"
+	name_short = "Cpl"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e4)
+	sort_order = 4
+
+/datum/mil_rank/oac/e5
+	name = "Sergeant"
+	name_short = "Sgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e5)
+	sort_order = 5
+
+/datum/mil_rank/oac/e6
+	name = "Staff Sergeant"
+	name_short = "SSgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e6)
+	sort_order = 6
+
+/datum/mil_rank/oac/e7
+	name = "Gunnery Sergeant"
+	name_short = "GySgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e7)
+	sort_order = 7
+
+/datum/mil_rank/oac/e8
+	name = "Master Sergeant"
+	name_short = "MSgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e8)
+
+/datum/mil_rank/oac/e8_alt
+	name = "First Sergeant"
+	name_short = "1st Sgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e8_alt)
+	sort_order = 8
+
+/datum/mil_rank/oac/e9
+	name = "Master Gunnery Sergeant"
+	name_short = "MGySgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e9)
+	sort_order = 8
+
+/datum/mil_rank/oac/e9_alt1
+	name = "Sergeant Major"
+	name_short = "SgtMaj"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e9_alt1)
+	sort_order = 9
+
+/datum/mil_rank/oac/e9_alt2
+	name = "Sergeant Major of the Orbital Assault Corps"
+	name_short = "SMOAC"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/enlisted/e9_alt2)
+	sort_order = 9
+
+/datum/mil_rank/oac/w1
+	name = "Warrant Officer 1"
+	name_short = "WO"
+	sort_order = -1
+
+/datum/mil_rank/oac/w2
+	name = "Chief Warrant Officer 2"
+	name_short = "CWO2"
+	sort_order = -2
+
+/datum/mil_rank/oac/w3
+	name = "Chief Warrant Officer 3"
+	name_short = "CWO3"
+	sort_order = -3
+
+/datum/mil_rank/oac/w4
+	name = "Chief Warrant Officer 4"
+	name_short = "CWO4"
+	sort_order = -4
+
+/datum/mil_rank/oac/w5
+	name = "Chief Warrant Officer 5"
+	name_short = "CWO5"
+	sort_order = -5
+
+/datum/mil_rank/oac/o1
+	name = "Cadet"
+	name_short = "CDT"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/officer)
+	sort_order = 11
+
+/datum/mil_rank/oac/o2
+	name = "Second Lieutenant"
+	name_short = "2LT"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/officer/o2)
+	sort_order = 12
+
+/datum/mil_rank/oac/o3
+	name = "First Lieutenant"
+	name_short = "1LT"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/officer/o3)
+	sort_order = 13
+
+/datum/mil_rank/oac/o4
+	name = "Major"
+	name_short = "Maj"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/officer/o4)
+	sort_order = 14
+
+/datum/mil_rank/oac/o5
+	name = "Lieutenant Colonel"
+	name_short = "LtCol"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/officer/o5)
+	sort_order = 15
+
+/datum/mil_rank/oac/o6
+	name = "Colonel"
+	name_short = "Col"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/officer/o6)
+	sort_order = 16
+
+/datum/mil_rank/oac/o7
+	name = "Brigadier General"
+	name_short = "BGen"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/flag)
+	sort_order = 17
+
+/datum/mil_rank/oac/o8
+	name = "Major General"
+	name_short = "MajGen"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/flag/o8)
+	sort_order = 18
+
+/datum/mil_rank/oac/o9
+	name = "Lieutenant General"
+	name_short = "LtGen"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/flag/o9)
+	sort_order = 19
+
+/datum/mil_rank/oac/o10
+	name = "General"
+	name_short = "Gen"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/flag/o10)
+	sort_order = 20
+
+/datum/mil_rank/oac/o10_alt
+	name = "Commandant of the Orbital Assault Corps"
+	name_short = "COAC"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/oac/flag/o10_alt)
+	sort_order = 20
+
 
 /*
  *  Civilians
