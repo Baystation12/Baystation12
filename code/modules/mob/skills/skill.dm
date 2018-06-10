@@ -203,10 +203,10 @@ GLOBAL_LIST_EMPTY(skills)
 	name = "Forensics"
 	desc = "Describes your skill at performing forensic examinations and identifying vital evidence. Does not cover analytical abilities, and as such isn't the only indicator for your investigation skill. Note that in order to perform autopsy, the surgery skill is also required."
 	levels = list( "Unskilled"			= "You know that detectives solve crimes. You may have some idea that it's bad to contaminate a crime scene, but you're not too clear on the details.",
-						"Basic"				= "You know how to avoid contaminating a crime scene. You know how to use the tools of the trade (scanner, computer database, and so forth), and you can conduct an interview with a witness or a suspect.",
-						"Trained"			= "You have had training in policework, and have some experience in the field. You can follow procedure and process evidence, though your lack of practice may make it difficult to arrive at a definitive conclusion.",
-						"Experienced"		= "You're a police officer, pathologist, or detective. You can secure a crime scene, gather evidence, interview witnesses, and put two and two together to get an arrest. If you're trained in anatomy, you can perform an autopsy.",
-						"Master"		= "You specialize in criminal investigations. Your ability to gather and analyze evidence has been honed through intensive schooling, years of practice, or most likely both. You can organize a manhunt or draw a criminal into a trap, and though you're behind the scenes and may never even see the criminal, your skills make the difference between an unsolved crime and a convicted criminal.")
+						"Basic"				= "You know how to avoid contaminating a crime scene. You know how to bag the evidence without contaminating it unduely.",
+						"Trained"			= "You are trained in collecting forensic evidence - fibers, fingerprints, the works. You know how autopsies are done, and might've assisted performing one.",
+						"Experienced"		= "You're a pathologist, or detective. You've seen your share of bizzare cases, and spent a lot of time putting pieces of forensic puzzle together, so you're faster now.",
+						"Master"		= "You're a big name in forensic science. You might be an investigator who cracked a famous case, or you published papers on new methods of forensics. Either way, if there's a forensic trail, you will find it, period.")
 	difficulty = SKILL_HARD
 
 // Category: Engineering
