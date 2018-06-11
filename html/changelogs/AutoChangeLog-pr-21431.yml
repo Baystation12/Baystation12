@@ -1,0 +1,4 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - bugfix: "Trays will now adequately notify you of not being able to be placed in bags."
