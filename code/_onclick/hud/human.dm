@@ -20,6 +20,11 @@
 	var/obj/screen/using
 	var/obj/screen/inventory/inv_box
 
+	if(target.can_have_vision_cone)
+		var/mob/living/carbon/human/H = mymob
+		H.vision_cone_overlay = new /obj/screen/fov()
+		hud_elements |= H.vision_cone_overlay
+
 	// Draw the various inventory equipment slots.
 	var/has_hidden_gear
 	for(var/gear_slot in hud_data.gear)
