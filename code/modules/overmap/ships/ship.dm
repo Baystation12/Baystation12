@@ -173,3 +173,10 @@
 	if(istype(A,/turf/unsimulated/map/edge))
 		handle_wraparound()
 	..()
+
+/obj/effect/overmap/ship/proc/get_helm_skill()
+	. = SKILL_MIN
+	if(nav_control)
+		for(var/mob/living/M in orange(nav_control,1))
+			if(M.client && !M.stat && !M.restrained() && M.IsAdvancedToolUser())
+				. = max(., M.get_skill_value(SKILL_PILOT))
