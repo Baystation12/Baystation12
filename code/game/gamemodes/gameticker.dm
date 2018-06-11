@@ -123,20 +123,6 @@ var/global/datum/controller/gameticker/ticker
 		job_master.ResetOccupations()
 		return 0
 
-	if(hide_mode)
-		to_world("<B>The current game mode is - Secret!</B>")
-
-		if(runnable_modes.len)
-			var/list/tmpmodes = new
-			for (var/datum/game_mode/M in runnable_modes)
-				tmpmodes+=M.name
-			tmpmodes = sortList(tmpmodes)
-			if(tmpmodes.len)
-				to_world("<B>Possibilities:</B> [english_list(tmpmodes)]")
-
-	else
-		src.mode.announce()
-
 	GLOB.using_map.setup_economy()
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)

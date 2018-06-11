@@ -126,27 +126,6 @@ var/global/list/additional_antag_types = list()
 				admin.show_game_mode(usr)
 				return
 
-/datum/game_mode/proc/announce() //to be called when round starts
-	to_world("<B>The current game mode is [capitalize(name)]!</B>")
-	if(round_description) to_world("[round_description]")
-	if(round_autoantag) to_world("Antagonists will be added to the round automagically as needed.")
-	if(antag_templates && antag_templates.len)
-		var/antag_summary = "<b>Possible antagonist types:</b> "
-		var/i = 1
-		for(var/datum/antagonist/antag in antag_templates)
-			if(i > 1)
-				if(i == antag_templates.len)
-					antag_summary += " and "
-				else
-					antag_summary += ", "
-			antag_summary += "[antag.role_text_plural]"
-			i++
-		antag_summary += "."
-		if(antag_templates.len > 1 && master_mode != "secret")
-			to_world("[antag_summary]")
-		else
-			message_admins("[antag_summary]")
-
 // startRequirements()
 // Checks to see if the game can be setup and ran with the current number of players or whatnot.
 // Returns 0 if the mode can start and a message explaining the reason why it can't otherwise.
@@ -520,7 +499,7 @@ proc/get_nt_opposed()
 		to_chat(player.current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 		obj_count++
 
-/mob/verb/check_round_info()
+/client/proc/check_round_info()
 	set name = "Check Round Info"
 	set category = "OOC"
 
