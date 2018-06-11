@@ -308,8 +308,15 @@
 
 	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
 	var/disp_mod = dispersion[min(burst, dispersion.len)]
+	var/stood_still = round((world.time - user.l_move_time)/15)
+	if(stood_still)
+		acc_mod += 1 * max(2, stood_still)
+		if(stood_still > 5)
+			acc_mod += accuracy
 
 	if(one_hand_penalty)
+		if(!stood_still)
+			acc_mod -= 1
 		if(!held_twohanded)
 			acc_mod += -ceil(one_hand_penalty/2)
 			disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
