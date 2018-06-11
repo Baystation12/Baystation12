@@ -346,7 +346,15 @@
 	************************************WARNING!***********************************/
 		var/counter = 0
 //Regular jobs
-	//Command (Blue)
+	//Chats(by Error_777)
+		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
+		jobs += "<br><b>Chatbans: </b>"
+		jobs +={"
+			<A href='?_src_=holder;jobban3=OOC;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "OOC"))?"red":"blue"]>OOCBAN</font></A> |
+			<A href='?_src_=holder;jobban3=AHELP;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "AHELP"))?"red":"blue"]>AHELPBAN</font></A> |
+			<A href='?_src_=holder;jobban3=LOOC;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "LOOC"))?"red":"blue"]>LOOCBAN</font></A>"}
+
+		//Command(Blue)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
 		jobs += "<tr align='center' bgcolor='ccccff'><th colspan='[length(GLOB.command_positions)]'><a href='?src=\ref[src];jobban3=commanddept;jobban4=\ref[M]'>Command Positions</a></th></tr><tr align='center'>"
 		for(var/jobPos in GLOB.command_positions)
@@ -1982,7 +1990,7 @@
 				show_player_panel(M)
 			if("No")
 				return
-				
+
 	EAMS_AdminTopicProcess(src, href_list)
 	SpeciesIngameWhitelist_AdminTopicProcess(src, href_list)
 
