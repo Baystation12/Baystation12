@@ -1,0 +1,6 @@
+author: Cael_Aislinn
+
+delete-after: True
+
+changes: 
+  - tweak: "Removes turfs global list to speed up server startup."
