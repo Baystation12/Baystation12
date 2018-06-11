@@ -30,6 +30,14 @@ var/global/datum/matchmaker/matchmaker = new()
 		if(R.holder == M && R.other)
 			. += R
 
+/datum/mind/proc/may_have_relations()
+	var/datum/antagonist/special_role_data = get_antag_data(special_role)
+
+	if(special_role_data && (special_role_data.flags & ANTAG_OVERRIDE_JOB))
+		return FALSE
+
+	return TRUE
+
 //Types of relations
 
 /datum/relation
@@ -61,10 +69,6 @@ var/global/datum/matchmaker/matchmaker = new()
 		return FALSE
 
 	if(!M.current)	//no extremely platonic relationships
-		return FALSE
-
-	var/datum/antagonist/special_role_data = get_antag_data(M.special_role)
-	if(special_role_data && (special_role_data.flags & ANTAG_OVERRIDE_JOB))
 		return FALSE
 
 	return TRUE

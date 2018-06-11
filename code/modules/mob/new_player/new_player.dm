@@ -469,7 +469,7 @@
 		mind.original = new_character
 		if(client.prefs.memory)
 			mind.store_memory(client.prefs.memory)
-		if(client.prefs.relations.len)
+		if(client.prefs.relations.len && mind.may_have_relations())
 			for(var/T in client.prefs.relations)
 				var/TT = matchmaker.relation_types[T]
 				var/datum/relation/R = new TT
