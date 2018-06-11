@@ -22,7 +22,6 @@
 		/obj/item/clothing/shoes/brown,
 		/obj/item/device/radio/headset/heads/captain,
 		/obj/item/clothing/gloves/captain,
-		/obj/item/weapon/gun/energy/gun,
 		/obj/item/clothing/suit/armor/captain,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/clothing/under/dress/dress_cap,
