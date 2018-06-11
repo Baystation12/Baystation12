@@ -88,6 +88,7 @@
 			null)
 		if(speech_trigger_type)
 			speech_triggers.Add(new speech_trigger_type())
+	desc = "This is [src]. \He is from one of Earth's many diverse cultures that decided to try a future offplanet."
 
 /mob/living/simple_animal/npc/colonist/labourer
 	jumpsuits = list(\

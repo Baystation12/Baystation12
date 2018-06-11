@@ -11,7 +11,6 @@
 		name = "[real_name] ([npc_job_title])"
 	else
 		name = "[real_name] (NPC)"
-	desc = "This is [src]. \He is from one of Earth's many diverse cultures that decided to try a future offplanet."
 
 	if(jumpsuits.len)
 		var/newtype = pick(jumpsuits)
