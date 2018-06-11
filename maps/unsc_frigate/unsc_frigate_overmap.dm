@@ -22,3 +22,12 @@
 
 /obj/effect/landmark/dropship_land_point/frigate_hangar/south
 	name = "UNSC Frigate Hangar - South"
+
+
+//Overmap Weapon Console Defines//
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/frigate
+	deck_gun_area = /area/unscfrigate/portguns
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/frigate
+	deck_gun_area = /area/unscfrigate/starboardguns
