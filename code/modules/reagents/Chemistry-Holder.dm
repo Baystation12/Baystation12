@@ -219,10 +219,16 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return initial(current.overdose)
 	return 0
 
-/datum/reagents/proc/get_reagents()
+/datum/reagents/proc/get_reagents(scannable_only = 0, precision)
 	. = list()
 	for(var/datum/reagent/current in reagent_list)
-		. += "[current.name] ([current.volume])"
+		if(scannable_only && !current.scannable)
+			continue
+		var/volume = current.volume
+		if(precision)
+			volume = round(volume, precision)
+		if(volume)
+			. += "[current.name] ([volume])"
 	return english_list(., "EMPTY", "", ", ", ", ")
 
 /* Holder-to-holder and similar procs */
