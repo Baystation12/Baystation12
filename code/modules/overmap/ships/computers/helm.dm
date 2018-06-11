@@ -190,6 +190,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
+		var/mob/M = usr
+		if(istype(M) && prob(M.skill_fail_chance(SKILL_PILOT, 50, SKILL_ADEPT, factor = 1)))
+			ndir = turn(ndir,pick(90,-90))
 		linked.relaymove(usr, ndir)
 
 	if (href_list["brake"])
