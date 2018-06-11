@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Lactate is a reagent that increases heart rate, causes generally harmless shortness of breath, and slows movement. After processing a large amount of lactate, mobs may experience temporary jitters."
+  - tweak: "Instead of producing adrenaline, pulling produces lactate."
