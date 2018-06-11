@@ -124,7 +124,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	if(config.discord_bot_address != "")
 		var/list/discord_report = list()
 		discord_report["key"] = config.comms_password
-		discord_report["note"] = "New Note:\n[P.content]\nby [P.author] ([P.rank]) on [P.timestamp]"
+		discord_report["note"] = "New Note for [key]:\n[P.content]\nby [P.author] ([P.rank]) on [P.timestamp]"
 		discord_report["ckey"] = "[key]"
 		//Send the note
 		world.Export("[config.discord_bot_address]/newnote?[list2params(discord_report)]")
