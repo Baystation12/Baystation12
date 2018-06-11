@@ -4,11 +4,21 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "taperoll"
 	w_class = ITEM_SIZE_SMALL
+	var/dirtiness = 0 //For seeing if you might get infected from using it as a bandage. Who knows where they keep this stuff?
+	//If you use it for just a small boo-boo, probably fine. Using it to clot major bleeding, not a good plan.
+
+/obj/item/weapon/tape_roll/New()
+	..()
+	dirtiness = rand(10, 50)
 
 /obj/item/weapon/tape_roll/attack(var/mob/living/carbon/human/H, var/mob/user)
 	if(istype(H))
+		var/hostile = 0
+		if(user.a_intent == I_DISARM || user.a_intent == I_HURT || user.a_intent == I_GRAB)
+			hostile = 1
 		if(user.zone_sel.selecting == BP_EYES)
-
+			if(hostile == 0)
+				return
 			if(!H.organs_by_name[BP_HEAD])
 				to_chat(user, "<span class='warning'>\The [H] doesn't have a head.</span>")
 				return
@@ -34,7 +44,9 @@
 			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s eyes!</span>")
 			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/blindfold/tape(H), slot_glasses)
 
-		else if(user.zone_sel.selecting == BP_MOUTH || user.zone_sel.selecting == BP_HEAD)
+		else if(user.zone_sel.selecting == BP_MOUTH)
+			if(hostile == 0)
+				return
 			if(!H.organs_by_name[BP_HEAD])
 				to_chat(user, "<span class='warning'>\The [H] doesn't have a head.</span>")
 				return
@@ -61,11 +73,17 @@
 			H.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(H), slot_wear_mask)
 
 		else if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
-			playsound(src, 'sound/effects/tape.ogg',25)
-			var/obj/item/weapon/handcuffs/cable/tape/T = new(user)
-			if(!T.place_handcuffs(H, user))
-				user.unEquip(T)
-				qdel(T)
+			if(hostile == 1)
+				if(!H.has_organ_for_slot(slot_handcuffed))
+					to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can tape them together!</span>")
+					return
+				playsound(src, 'sound/effects/tape.ogg',25)
+				var/obj/item/weapon/handcuffs/cable/tape/T = new(user)
+				if(!T.place_handcuffs(H, user))
+					user.unEquip(T)
+					qdel(T)
+			else if(hostile == 0)
+				tape_bandage(H, user)
 
 		else if(user.zone_sel.selecting == BP_CHEST)
 			if(H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
@@ -73,8 +91,10 @@
 					playsound(src, 'sound/effects/tape.ogg',25)
 					H.wear_suit.attackby(src, user)
 			else
-				to_chat(user, "<span class='warning'>\The [H] isn't wearing a spacesuit for you to reseal.</span>")
+				tape_bandage(H, user)
 
+		else if(hostile == 0)
+			tape_bandage(H, user)
 		else
 			return ..()
 		return 1
@@ -86,6 +106,39 @@
 	var/obj/item/weapon/ducttape/tape = new(get_turf(src))
 	tape.attach(W)
 	user.put_in_hands(tape)
+
+/obj/item/weapon/tape_roll/proc/tape_bandage(var/mob/living/carbon/human/H, var/mob/user)
+	if(!H.get_organ(user.zone_sel.selecting))
+		return
+	var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
+	if(!affecting.wounds.len)
+		to_chat(user, "<span class='warning'>[H]'s [affecting.name] has no wounds.</span>")
+		return
+	if(affecting.is_bandaged())
+		to_chat(user, "<span class='warning'>The wounds on [H]'s [affecting.name] have already been bandaged.</span>")
+		return
+	else
+		user.visible_message("<span class='notice'>\The [user] starts applying tape to [H]'s [affecting.name].</span>", \
+				             "<span class='notice'>You start applying tape to [H]'s [affecting.name].</span>" )
+		for (var/datum/wound/W in affecting.wounds)
+			if(W.bandaged)
+				continue
+			if(!do_mob(user, H, W.damage/5))
+				to_chat(user, "<span class='notice'>You must stand still to bandage wounds.</span>")
+				break
+			if (W.current_stage <= W.max_bleeding_stage)
+				user.visible_message("<span class='notice'>\The [user] puts tape over \a [W.desc] on [H]'s [affecting.name].</span>", \
+				                              "<span class='notice'>You put tape over \a [W.desc] on [H]'s [affecting.name].</span>" )
+			else if (W.damage_type == BRUISE)
+				user.visible_message("<span class='notice'>\The [user] places a patch of tape over \a [W.desc] on [H]'s [affecting.name].</span>", \
+				                              "<span class='notice'>You place a patch of tape over \a [W.desc] on [H]'s [affecting.name].</span>" )
+			else
+				user.visible_message("<span class='notice'>\The [user] places some tape over \a [W.desc] on [H]'s [affecting.name].</span>", \
+					                              "<span class='notice'>You place some tape over \a [W.desc] on [H]'s [affecting.name].</span>" )
+			W.bandage()
+			playsound(src, 'sound/effects/tape.ogg',25)
+			W.germ_level += dirtiness
+
 
 /obj/item/weapon/ducttape
 	name = "piece of tape"
