@@ -56,6 +56,9 @@
 	var/points = get_skill_value(skill_path)
 	return points >= needed
 
+/mob/proc/get_skill_difference(skill_path, mob/opponent)
+	return get_skill_value(skill_path) - opponent.get_skill_value(skill_path)
+
 // A generic way of modifying times via skill values	
 /mob/proc/skill_delay_mult(skill_path, factor = 0.3) 
 	var/points = get_skill_value(skill_path)
