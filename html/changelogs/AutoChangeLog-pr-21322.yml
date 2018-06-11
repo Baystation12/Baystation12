@@ -1,0 +1,14 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - imageadd: "New wall sprites have been added."
+  - imageadd: "New door sprites have been added."
+  - imageadd: "New window sprites have been added."
+  - imageadd: "New grille sprites have been added."
+  - rscadd: "Airlocks are now paintable."
+  - rscadd: "Window frames have been added, which connect to walls for that aesthetic look."
+  - rscadd: "Airlocks can now be painted using the airlock painter."
+  - rscadd: "Added paint presets to the paintgun."
+  - maptweak: "The Torch has been modified to use window frames instead of just windows."
+  - maptweak: "Maintenance has been given more catwalks."
+  - maptweak: "Added binoculars to security checkpoints."
