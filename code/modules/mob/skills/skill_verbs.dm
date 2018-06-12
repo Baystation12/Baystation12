@@ -52,3 +52,76 @@ GLOBAL_LIST_INIT(skill_verbs, init_subtypes(/datum/skill_verb))
 	cooling_down = 1
 	update_verb()
 	addtimer(CALLBACK(src, .proc/remove_cooldown), cooldown)
+/*
+The Instruct verb. buffs untrained -> basic and requires skill in the skill training as well as leadership.
+Robots and antags can instruct.
+*/
+/datum/skill_verb/instruct
+	the_verb = /mob/proc/instruct
+	cooldown = 15 MINUTES
+
+/datum/skill_verb/instruct/should_have_verb(datum/skillset/given_skillset)
+	if(!..())
+		return
+	if(!isliving(given_skillset.owner))
+		return
+	return 1
+
+/datum/skill_verb/instruct/should_see_verb()
+	if(!..())
+		return
+	if(!skillset.owner.skill_check(SKILL_MANAGEMENT, SKILL_BASIC))
+		return
+	return 1
+
+/mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
+	set category = "IC"
+	set name = "Instruct"
+	set src = usr
+
+	var/datum/skill_verb/instruct/SV = skillset.fetch_verb_datum(/datum/skill_verb/instruct)
+	if(!SV || !istype(target))
+		return
+	if(src == target)
+		return
+	if(incapacitated() || target.incapacitated())
+		return
+
+	if(target.too_many_buffs(/datum/skill_buff/instruct))
+		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
+		return
+
+	var/options = list()
+	for(var/decl/hierarchy/skill/S in GLOB.skills)
+		if(istype(S, SKILL_MANAGEMENT))
+			continue
+		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
+			options[S.name] = S
+	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
+	if(!(choice in options) || !(target in view(2)))
+		return
+	var/decl/hierarchy/skill/skill = options[choice]
+
+	if(!do_skilled(6 SECONDS, SKILL_MANAGEMENT, target))
+		return
+	if(incapacitated() || target.incapacitated())
+		return
+	if(target.too_many_buffs(/datum/skill_buff/instruct))
+		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
+		return
+	if(!target.skill_check(skill.type, SKILL_BASIC) && skill_check(skill.type, SKILL_EXPERT))
+		return
+
+	target.buff_skill(list(skill.type = 1), buff_type = /datum/skill_buff/instruct)
+	visible_message("<span class='notice'>\The [src] trained \the [target] in the basics of \the [skill.name].</span>")
+	SV.set_cooldown()
+
+/datum/skill_buff/instruct/
+	limit = 3
+
+/datum/skill_buff/motivate/can_buff(mob/target)
+	if(!..())
+		return
+	if(!ishuman(target))
+		return
+	return 1
