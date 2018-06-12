@@ -459,9 +459,9 @@
 	selection_color = "#68099e"
 	minimal_player_age = 4
 	ideal_character_age = 20
+	alt_titles = list("Geography Technician", "Geology Technician", "Meteorology Technician", "Exobiology Technician", "Xenoarchaelogy Technician")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
-
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5
@@ -1092,6 +1092,7 @@
 	alt_titles = list(
 		"Engineer Trainee",
 		"Corpsman Trainee",
+		"Mass Communication Specialist",
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
