@@ -58,7 +58,7 @@ The Motivate verb.
 */
 /datum/skill_verb/motivate
 	the_verb = /mob/living/carbon/human/proc/motivate
-	cooldown = 15 MINUTES
+	cooldown = 10 MINUTES
 
 /datum/skill_verb/motivate/should_have_verb(datum/skillset/given_skillset)
 	if(!ishuman(given_skillset.owner))
@@ -71,7 +71,7 @@ The Motivate verb.
 	var/mob/owner = skillset.owner
 	if(owner.mind && player_is_antag(owner.mind))
 		return
-	if(!owner.skill_check(SKILL_MANAGEMENT, SKILL_BASIC))
+	if(!owner.skill_check(SKILL_MANAGEMENT, SKILL_ADEPT))
 		return
 	return 1
 
@@ -109,7 +109,8 @@ The Motivate verb.
 	if(target.skill_check(skill.type, own_leadership))
 		return //Maybe they got buffed while we waited for input.
 
-	target.buff_skill(list(skill.type = 1), 45 MINUTES, /datum/skill_buff/motivate)
+	var/duration = 30 MINUTES * (1 + (get_skill_value(SKILL_MANAGEMENT)-SKILL_ADEPT)/(SKILL_MAX-SKILL_ADEPT))
+	target.buff_skill(list(skill.type = 1), duration, /datum/skill_buff/motivate)
 	visible_message(motivate_message(target, skill))
 	SV.set_cooldown()
 
@@ -172,6 +173,73 @@ The Motivate verb.
 	to_chat(skillset.owner, "<span class='notice'>You feel some of your motivation wearing off.</span>")
 	..()
 /*
+The Instruct verb. Like motivate, but only does untrained -> basic and requires skill in the skill training as well as leadership.
+Robots and antags can instruct but not motivate.
+*/
+/datum/skill_verb/instruct
+	the_verb = /mob/proc/instruct
+	cooldown = 15 MINUTES
+
+/datum/skill_verb/instruct/should_see_verb()
+	if(!..())
+		return
+	if(!skillset.owner.skill_check(SKILL_MANAGEMENT, SKILL_BASIC))
+		return
+	return 1
+
+/mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
+	set category = "IC"
+	set name = "Instruct"
+	set src = usr
+
+	var/datum/skill_verb/instruct/SV = skillset.fetch_verb_datum(/datum/skill_verb/instruct)
+	if(!SV || !istype(target))
+		return
+	if(src == target)
+		return
+
+	var/datum/skill_buff/instruct/buff = new
+	if(buff.too_many_buffs(target))
+		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
+		return
+
+	var/options = list()
+	for(var/decl/hierarchy/skill/S in GLOB.skills)
+		if(istype(S, SKILL_MANAGEMENT))
+			continue
+		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
+			options[S.name] = S
+	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
+	if(!(choice in options) || !(target in view(2)))
+		return
+	var/decl/hierarchy/skill/skill = options[choice]
+
+	visible_message("<span class='notice'>\The [src] begins to instructs \the [target] in \the [skill.name].</span>")
+	spawn() // Just showing the progress bar. Real do_mob is on src.
+		do_mob(target , src, 1 MINUTE)
+	if(!do_mob(src, target, 1 MINUTE))
+		return
+
+	if(buff.too_many_buffs(target))
+		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
+		return
+	if(!target.skill_check(skill.type, SKILL_BASIC) && skill_check(skill.type, SKILL_EXPERT))
+		return
+
+	target.buff_skill(list(skill.type = 1), buff_type = /datum/skill_buff/instruct)
+	visible_message("<span class='notice'>\The [src] trained \the [target] in the basics of \the [skill.name].</span>")
+	SV.set_cooldown()
+
+/datum/skill_buff/instruct/
+	limit = 3
+
+/datum/skill_buff/motivate/can_buff(mob/target)
+	if(!..())
+		return
+	if(!ishuman(target))
+		return
+	return 1
+/*
 The Call to Attention verb
 */
 /datum/skill_verb/attention
@@ -210,6 +278,6 @@ The Call to Attention verb
 			continue //No mass stunning the antags, but they do get distracted.
 		if(!H.skill_check(SKILL_MANAGEMENT, SKILL_PROF))
 			H.Stun(5)
-			H.silent += 10 SECONDS
+			H.silent += 5
 
 	SV.set_cooldown()
