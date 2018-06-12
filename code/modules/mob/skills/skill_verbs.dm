@@ -52,3 +52,43 @@ GLOBAL_LIST_INIT(skill_verbs, init_subtypes(/datum/skill_verb))
 	cooling_down = 1
 	update_verb()
 	addtimer(CALLBACK(src, .proc/remove_cooldown), cooldown)
+
+/*
+The Call to Attention verb
+*/
+/datum/skill_verb/attention
+	the_verb = /mob/living/carbon/human/proc/attention
+	cooldown = 5 MINUTES
+
+/datum/skill_verb/attention/should_have_verb(datum/skillset/given_skillset)
+	if(!ishuman(given_skillset.owner))
+		return
+	return ..()
+
+/datum/skill_verb/attention/should_see_verb()
+	if(!..())
+		return
+	var/mob/owner = skillset.owner
+	if(owner.mind && player_is_antag(owner.mind))
+		return
+	if(!owner.skill_check(SKILL_MANAGEMENT, SKILL_PROF))
+		return
+	return 1
+
+/mob/living/carbon/human/proc/attention()
+	set category = "IC"
+	set name = "Call To Attention"
+	set src = usr
+
+	if(incapacitated())
+		return
+	var/datum/skill_verb/attention/SV = skillset.fetch_verb_datum(/datum/skill_verb/attention)
+	if(!SV)
+		return
+
+	usr.visible_message("<span class='danger'><font size=3>\The [src] calls for attention!</font></span>")
+	for(var/mob/living/carbon/human/H in oview())
+		if(!H.incapacitated())
+			H.set_dir(get_dir(H, src))
+
+	SV.set_cooldown()
