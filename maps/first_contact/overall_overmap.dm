@@ -22,7 +22,7 @@
 	name = "CCV Slow But Steady"
 	desc = "A cargo freighter with a safer, isolated design."
 
-	icon = 'maps/first_contact/freighter.dmi'
+	icon = 'maps/first_contact/slowbutsteady.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 
