@@ -240,8 +240,8 @@
 	for (var/obj/item/grab/G in mob.grabbed_by)
 		G.adjust_position()
 
-	mob.moving = 0
 	step(mob, direction)
+	mob.moving = 0
 
 /datum/movement_handler/mob/movement/MayMove(var/mob/mover)
 	return !mob.moving
