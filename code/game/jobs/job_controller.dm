@@ -390,19 +390,27 @@ var/global/datum/controller/occupations/job_master
 				for(var/thing in H.client.prefs.Gear())
 					var/datum/gear/G = gear_datums[thing]
 					if(G)
-						var/permitted
-						if(G.allowed_roles)
-							for(var/job_type in G.allowed_roles)
-								if(job.type == job_type)
-									permitted = 1
+						var/permitted = 0
+						if(G.allowed_branches)
+							if(H.char_branch.type in G.allowed_branches)
+								permitted = 1
 						else
 							permitted = 1
+		
+						if(permitted)
+							if(G.allowed_roles)
+								if(job.type in G.allowed_roles)
+									permitted = 1
+								else
+									permitted = 0
+							else
+								permitted = 1
 
 						if(G.whitelisted && (!(H.species.name in G.whitelisted)))
 							permitted = 0
 
 						if(!permitted)
-							to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
+							to_chat(H, "<span class='warning'>Your current species, job, branch or whitelist status does not permit you to spawn with [thing]!</span>")
 							continue
 
 						if(!G.slot || G.slot == slot_tie || (G.slot in loadout_taken_slots) || !G.spawn_on_mob(H, H.client.prefs.Gear()[G.display_name]))

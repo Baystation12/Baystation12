@@ -1,0 +1,4 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Some loadout items are now restricted by branch instead of jobs. Some are restricted by both. You might experience sudden loss of swag on next spawn, check your setup."
