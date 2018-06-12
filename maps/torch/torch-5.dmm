@@ -11,7 +11,8 @@
 	},
 /obj/machinery/camera/network/engineering{
 	c_tag = "Command Hallway - Center Fore Staboard";
-	dir = 4
+	dir = 4;
+	network = list("Bridge")
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
@@ -156,6 +157,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "ay" = (
@@ -164,6 +166,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "az" = (
@@ -198,6 +201,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor/border_only,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aB" = (
@@ -207,6 +211,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aC" = (
@@ -230,6 +235,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aD" = (
@@ -252,6 +258,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aE" = (
@@ -269,6 +276,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aF" = (
@@ -287,6 +295,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aG" = (
@@ -316,6 +325,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aK" = (
@@ -332,7 +342,7 @@
 "aN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/maintenance_hatch{
+/obj/machinery/door/airlock/hatch/maintenance{
 	req_access = list(12)
 	},
 /obj/structure/disposalpipe/segment,
@@ -341,7 +351,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/tiled,
 /area/maintenance/bridge/forestarboard)
 "aO" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -355,6 +366,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "aQ" = (
@@ -553,6 +565,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "bh" = (
@@ -575,6 +588,7 @@
 	icon_state = "alarm0";
 	pixel_y = -22
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "bi" = (
@@ -596,6 +610,7 @@
 /obj/machinery/door/airlock/maintenance{
 	req_access = list(12)
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "bj" = (
@@ -661,6 +676,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "bz" = (
@@ -678,6 +694,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "bB" = (
@@ -696,6 +713,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "bC" = (
@@ -818,6 +836,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "cf" = (
@@ -878,8 +897,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "ck" = (
-/obj/machinery/door/airlock{
-	name = "Private Restroom"
+/obj/machinery/door/airlock/civilian{
+	name = "Head"
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/heads/cobed)
@@ -963,6 +982,7 @@
 	dir = 10;
 	icon_state = "intact"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "cJ" = (
@@ -981,6 +1001,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/substation/bridge)
 "cK" = (
@@ -1003,6 +1024,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/substation/bridge)
 "cL" = (
@@ -1020,6 +1042,7 @@
 	icon_state = "0-4";
 	d2 = 4
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/substation/bridge)
 "cM" = (
@@ -1043,6 +1066,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/substation/bridge)
 "cN" = (
@@ -1347,6 +1371,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "dt" = (
@@ -1497,7 +1522,7 @@
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "dI" = (
@@ -1562,6 +1587,7 @@
 /area/shield/bridge)
 "dZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "ea" = (
@@ -1593,7 +1619,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/cobed)
 "ee" = (
@@ -1603,7 +1629,7 @@
 	name = "CO's Quarters Shutters"
 	},
 /obj/structure/cable/green,
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/cobed)
 "ef" = (
@@ -1617,7 +1643,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge)
 "eg" = (
@@ -1777,7 +1803,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "xo_windows"
 	},
 /turf/simulated/floor/plating,
@@ -1852,7 +1878,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "eR" = (
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "co_windows"
 	},
 /obj/structure/cable/green{
@@ -1976,6 +2002,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/shield/bridge)
 "ff" = (
@@ -2003,6 +2030,7 @@
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "fh" = (
@@ -2025,6 +2053,7 @@
 	dir = 10;
 	icon_state = "intact"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "fi" = (
@@ -2192,7 +2221,7 @@
 /turf/simulated/wall/prepainted,
 /area/hallway/primary/bridge/fore)
 "fD" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
 "fE" = (
@@ -2524,6 +2553,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "gi" = (
@@ -2908,7 +2938,7 @@
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "bridge_eva_outer";
 	locked = 1;
 	name = "Bridge EVA External Access";
@@ -2920,7 +2950,7 @@
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "bridge_eva_outer";
 	locked = 1;
 	name = "Bridge EVA External Access";
@@ -2951,7 +2981,7 @@
 /turf/simulated/floor/airless,
 /area/aquila/cockpit)
 "ha" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/aquila/cockpit)
 "hb" = (
@@ -3041,7 +3071,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "ho" = (
-/obj/machinery/door/airlock/glass_command{
+/obj/machinery/door/airlock/glass/command{
 	id_tag = "starboardbridgedoor";
 	name = "Bridge";
 	req_access = list(19);
@@ -3068,7 +3098,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "hp" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
@@ -3154,7 +3184,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "ce_windows"
 	},
 /obj/structure/cable/green{
@@ -3168,7 +3198,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "ce_windows"
 	},
 /turf/simulated/floor/plating,
@@ -4072,7 +4102,7 @@
 /area/turret_protected/ai_foyer)
 "jo" = (
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "door_locked";
+	icon_state = "closed";
 	locked = 1;
 	name = "AI Core Access";
 	req_access = list(16)
@@ -4154,7 +4184,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "meeting_windows"
 	},
 /obj/machinery/door/blast/shutters{
@@ -4306,17 +4336,19 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/maintenance_hatch{
+/obj/machinery/door/airlock/hatch/maintenance{
 	req_access = list(12)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/door/firedoor/border_only,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "jY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "bridge_eva_inner";
 	locked = 1;
 	name = "Bridge EVA Internal Access";
@@ -4327,7 +4359,7 @@
 "jZ" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "bridge_eva_inner";
 	locked = 1;
 	name = "Bridge EVA Internal Access";
@@ -4464,7 +4496,7 @@
 	},
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "ai_core_outer";
 	locked = 1;
 	name = "AI Core Internal Access";
@@ -4579,7 +4611,7 @@
 /area/bridge/meeting_room)
 "kB" = (
 /obj/structure/cable/green,
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "meeting_windows"
 	},
 /obj/structure/cable/green{
@@ -4682,7 +4714,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
 	},
-/obj/machinery/door/airlock/glass,
+/obj/machinery/door/airlock/glass/civilian,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "kM" = (
@@ -4761,7 +4793,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/aft)
 "kT" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
@@ -5124,7 +5156,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "lD" = (
-/obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -5136,8 +5167,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/airlock/glass,
-/turf/simulated/floor/tiled,
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
 "lE" = (
 /obj/structure/cable/green{
@@ -5210,7 +5241,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/machinery/door/airlock/glass_command{
+/obj/machinery/door/airlock/glass/command{
 	id_tag = null;
 	name = "Aquila Dock";
 	req_access = list(78);
@@ -5359,7 +5390,7 @@
 	},
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "ai_core_inner";
 	locked = 1;
 	name = "AI Internal Access";
@@ -5748,7 +5779,6 @@
 /area/hallway/primary/bridge/fore)
 "mR" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass,
 /obj/effect/floor_decal/corner/blue{
 	icon_state = "corner_white";
 	dir = 8
@@ -5756,6 +5786,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/airlock/glass/civilian,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "mS" = (
@@ -5880,7 +5911,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/aft)
 "nd" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green,
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/aft)
@@ -5911,16 +5942,10 @@
 	icon_state = "0-2"
 	},
 /obj/structure/cable/green,
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge)
 "ng" = (
-/obj/machinery/door/airlock/glass_command{
-	id_tag = "starboardbridgeaccess";
-	name = "Bridge Access";
-	req_one_access = list(19,80);
-	secured_wires = 1
-	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -6295,7 +6320,7 @@
 	icon_state = "1-4"
 	},
 /obj/structure/cable/green,
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "meeting_windows"
 	},
 /obj/machinery/door/blast/shutters{
@@ -6413,7 +6438,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cmo_windows"
 	},
 /turf/simulated/floor/plating,
@@ -6427,7 +6452,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cmo_windows"
 	},
 /turf/simulated/floor/plating,
@@ -6437,7 +6462,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cmo_windows"
 	},
 /turf/simulated/floor/plating,
@@ -6454,10 +6479,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/maintenance_hatch{
+/obj/machinery/door/airlock/hatch/maintenance{
 	req_access = list(12)
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/tiled,
 /area/maintenance/bridge/aftport)
 "oj" = (
 /obj/effect/floor_decal/scglogo{
@@ -6467,7 +6493,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "ol" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
@@ -6489,7 +6515,7 @@
 	},
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "ai_core_outer";
 	locked = 1;
 	name = "AI Core Internal Access";
@@ -6635,7 +6661,7 @@
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "oL" = (
@@ -6714,10 +6740,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "oU" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/aquila/medical)
 "oW" = (
@@ -6825,21 +6852,29 @@
 /area/turret_protected/ai_outer_chamber)
 "pn" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/civilian,
+/obj/item/modular_computer/console/preset/civilian{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/turret_protected/ai)
 "po" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/engineering,
 /obj/machinery/camera/all/command{
 	c_tag = "AI Core - Port";
+	dir = 1
+	},
+/obj/item/modular_computer/console/preset/engineering{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/turret_protected/ai)
 "pp" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/modular_computer/console/preset/research,
+/obj/item/modular_computer/console/preset/research{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/turret_protected/ai)
 "pq" = (
@@ -7037,7 +7072,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "pI" = (
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cmo_windows"
 	},
 /obj/structure/cable/green{
@@ -7254,12 +7289,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "qg" = (
-/obj/machinery/door/airlock/glass_command{
-	id_tag = "starboardbridgeaccess";
-	name = "Bridge Access";
-	req_one_access = list(19,80);
-	secured_wires = 1
-	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -7274,6 +7303,12 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/machinery/door/airlock/multi_tile/glass/command{
+	dir = 8;
+	id_tag = "starboardbridgeaccess";
+	name = "Bridge Access";
+	req_one_access = list(19,80)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -7315,7 +7350,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "qj" = (
-/obj/machinery/door/airlock/glass_command{
+/obj/machinery/door/airlock/glass/command{
 	id_tag = "portbridgedoor";
 	name = "Bridge";
 	req_access = list(19);
@@ -7395,7 +7430,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cos_windows"
 	},
 /obj/structure/cable/green{
@@ -7413,7 +7448,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cos_windows"
 	},
 /turf/simulated/floor/plating,
@@ -7423,7 +7458,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cos_windows"
 	},
 /turf/simulated/floor/plating,
@@ -8730,7 +8765,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cl_windows"
 	},
 /turf/simulated/floor/plating,
@@ -8740,7 +8775,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cl_windows"
 	},
 /obj/structure/cable/green{
@@ -8750,7 +8785,6 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cl)
 "sI" = (
-/obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
@@ -8804,14 +8838,14 @@
 	req_access = list(85);
 	secured_wires = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/sgr)
 "sN" = (
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sgr_windows"
 	},
 /obj/structure/cable/green{
@@ -8825,7 +8859,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sgr_windows"
 	},
 /turf/simulated/floor/plating,
@@ -8839,13 +8873,13 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "rd_windows"
 	},
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/rd)
 "sR" = (
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "rd_windows"
 	},
 /obj/structure/cable/green{
@@ -8859,9 +8893,6 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/rd)
 "sS" = (
-/obj/effect/floor_decal/corner/grey/diagonal{
-	dir = 4
-	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -8881,7 +8912,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "sT" = (
 /turf/simulated/wall/r_wall/prepainted,
@@ -9013,7 +9044,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge/storage)
 "ti" = (
@@ -9670,6 +9701,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "uu" = (
@@ -9689,6 +9721,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "uv" = (
@@ -9715,6 +9748,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "uB" = (
@@ -9769,7 +9803,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
 "uI" = (
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sea_windows"
 	},
 /obj/structure/cable/green{
@@ -9992,7 +10026,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge)
 "vh" = (
@@ -10054,7 +10088,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/cable/green,
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sea_windows"
 	},
 /turf/simulated/floor/plating,
@@ -10275,7 +10309,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sea_windows"
 	},
 /turf/simulated/floor/plating,
@@ -10437,6 +10471,7 @@
 	icon_state = "warning";
 	dir = 8
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "wk" = (
@@ -10454,6 +10489,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "wl" = (
@@ -10475,6 +10511,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "wm" = (
@@ -10483,7 +10520,7 @@
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/engineering{
-	icon_state = "door_closed";
+	icon_state = "closed";
 	locked = 0;
 	name = "Bridge Solar Access";
 	req_access = list(11)
@@ -10494,6 +10531,7 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarbridge)
 "wn" = (
@@ -10510,6 +10548,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarbridge)
 "wo" = (
@@ -10522,6 +10561,7 @@
 	dir = 4;
 	target_pressure = 200
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarbridge)
 "wp" = (
@@ -10545,6 +10585,7 @@
 	pixel_y = 24;
 	req_access = list(11,13)
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/auxsolarbridge)
 "wq" = (
@@ -10558,7 +10599,7 @@
 	},
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "solar_bridge_inner";
 	locked = 1;
 	name = "Engineering External Access";
@@ -10583,7 +10624,7 @@
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "solar_bridge_outer";
 	locked = 1;
 	name = "Engineering External Access";
@@ -10859,6 +10900,7 @@
 	icon_state = "warningcorner";
 	dir = 1
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "wR" = (
@@ -10867,6 +10909,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "wS" = (
@@ -10994,6 +11037,7 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xj" = (
@@ -11011,6 +11055,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xk" = (
@@ -11032,6 +11077,7 @@
 /obj/machinery/door/airlock/maintenance{
 	req_access = list(12)
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xl" = (
@@ -11049,6 +11095,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "xm" = (
@@ -11070,6 +11117,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "xn" = (
@@ -11088,6 +11136,7 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor/border_only,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftport)
 "xo" = (
@@ -11103,10 +11152,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/maintenance_hatch{
+/obj/machinery/door/airlock/hatch/maintenance{
 	req_access = list(12)
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/tiled,
 /area/maintenance/bridge/foreport)
 "xq" = (
 /obj/structure/cable/green{
@@ -11129,6 +11179,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xs" = (
@@ -11159,6 +11210,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xx" = (
@@ -11167,6 +11219,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xy" = (
@@ -11176,6 +11229,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor/border_only,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xz" = (
@@ -11199,6 +11253,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xA" = (
@@ -11221,6 +11276,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xB" = (
@@ -11240,6 +11296,7 @@
 	dir = 8;
 	icon_state = "pipe-c"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
 "xD" = (
@@ -11637,7 +11694,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge)
 "zh" = (
@@ -11746,7 +11803,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ag" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -11815,7 +11872,7 @@
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "AN" = (
@@ -11892,7 +11949,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge)
 "Bh" = (
@@ -12047,7 +12104,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/security/bridgecheck)
 "CD" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -12186,7 +12243,7 @@
 	name = "Disciplinary Board Room Maintenance Access";
 	req_access = list(19)
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled,
 /area/bridge/disciplinary_board_room)
 "Dl" = (
 /obj/structure/cable/cyan{
@@ -12215,6 +12272,7 @@
 	pixel_x = -22;
 	pixel_y = 0
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/shield/bridge)
 "Ec" = (
@@ -12411,7 +12469,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge/storage)
 "Fh" = (
@@ -12709,7 +12767,7 @@
 /turf/simulated/floor/plating,
 /area/aquila/airlock)
 "Hh" = (
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "co_windows"
 	},
 /obj/structure/cable/green{
@@ -12760,7 +12818,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Hp" = (
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "co_windows"
 	},
 /obj/structure/cable/green{
@@ -12771,7 +12829,7 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/co)
 "Hq" = (
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "co_windows"
 	},
 /obj/structure/cable/green{
@@ -12790,7 +12848,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Hu" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
@@ -13010,7 +13068,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
 "Ib" = (
-/obj/effect/wingrille_spawn/reinforced/full,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	icon_state = "pdoor0";
@@ -13018,6 +13075,7 @@
 	name = "Protective Shutters";
 	opacity = 0
 	},
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/aquila/cockpit)
 "Ic" = (
@@ -13046,7 +13104,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge)
 "If" = (
@@ -13061,7 +13119,7 @@
 	icon_state = "0-4"
 	},
 /obj/structure/cable/green,
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/bridge)
 "Ig" = (
@@ -13127,7 +13185,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ik" = (
-/obj/effect/wingrille_spawn/reinforced/polarized{
+/obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sea_windows"
 	},
 /turf/simulated/floor/plating,
@@ -13410,6 +13468,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/shield/bridge)
 "Jd" = (
@@ -13619,7 +13678,7 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/rd)
 "Lc" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
@@ -13754,6 +13813,10 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/dark,
 /area/security/bridgecheck)
+"LM" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/maintenance/bridge/aftport)
 "Mb" = (
 /obj/effect/floor_decal/corner/purple/diagonal{
 	dir = 4
@@ -13822,7 +13885,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Mg" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
@@ -13863,6 +13926,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "Mq" = (
@@ -13892,6 +13956,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/mess)
+"MD" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/maintenance/bridge/aftstarboard)
 "MF" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -13905,7 +13973,7 @@
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "MU" = (
@@ -14025,12 +14093,17 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/shield/bridge)
 "Nj" = (
 /obj/effect/floor_decal/corner/blue/three_quarters,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"NW" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/maintenance/bridge/foreport)
 "Ob" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Crew Area";
@@ -14070,12 +14143,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
 "Og" = (
-/obj/machinery/door/airlock/glass_command{
-	id_tag = "portbridgeaccess";
-	name = "Bridge Access";
-	req_one_access = list(19,80);
-	secured_wires = 1
-	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -14167,6 +14234,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/passenger)
 "Pc" = (
@@ -14227,12 +14295,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
 "Pg" = (
-/obj/machinery/door/airlock/glass_command{
-	id_tag = "portbridgeaccess";
-	name = "Bridge Access";
-	req_one_access = list(19,80);
-	secured_wires = 1
-	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -14249,6 +14311,12 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/door/airlock/multi_tile/glass/command{
+	dir = 8;
+	id_tag = "portbridgeaccess";
+	name = "Bridge Access";
+	req_one_access = list(19,80)
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -14297,7 +14365,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/aquila/airlock)
 "Qc" = (
-/obj/machinery/door/airlock/glass_command{
+/obj/machinery/door/airlock/glass/command{
 	name = "Auxiliary E.V.A.";
 	req_access = list(18);
 	secured_wires = 1
@@ -14314,7 +14382,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled,
 /area/aux_eva)
 "Qd" = (
 /obj/machinery/firealarm{
@@ -14390,6 +14458,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "Qj" = (
@@ -14540,6 +14609,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "Rj" = (
@@ -14702,11 +14772,11 @@
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "SA" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -14822,7 +14892,7 @@
 	},
 /obj/machinery/door/airlock/external{
 	frequency = 1331;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "aquila_shuttle_dock_inner";
 	locked = 1;
 	name = "Docking Port Airlock";
@@ -14974,7 +15044,7 @@
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
 	frequency = 1331;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "aquila_shuttle_dock_outer";
 	locked = 1;
 	name = "Docking Port Airlock";
@@ -15123,7 +15193,7 @@
 /obj/machinery/door/airlock/external{
 	density = 1;
 	frequency = 1331;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "aquila_shuttle_outer";
 	locked = 1;
 	name = "Aquila External Access";
@@ -15180,6 +15250,10 @@
 	},
 /turf/simulated/floor/airless,
 /area/aquila/secure_storage)
+"VB" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/maintenance/bridge/forestarboard)
 "Wa" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -15276,7 +15350,7 @@
 	},
 /obj/machinery/door/airlock/external{
 	frequency = 1331;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "aquila_shuttle_inner";
 	locked = 1;
 	name = "Aquila External Access";
@@ -15445,7 +15519,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/heads/cobed)
 "XI" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/aquila/airlock)
 "Yb" = (
@@ -26665,7 +26739,7 @@ ad
 af
 af
 af
-aj
+VB
 aC
 aN
 bb
@@ -26905,7 +26979,7 @@ sJ
 xc
 xc
 xj
-vM
+NW
 tg
 tg
 tg
@@ -27271,7 +27345,7 @@ ad
 af
 af
 af
-aj
+VB
 aE
 aO
 gb
@@ -27306,10 +27380,10 @@ Rf
 vX
 wD
 sJ
-vM
-vM
+NW
+NW
 xj
-vM
+NW
 tg
 tg
 tg
@@ -30309,7 +30383,7 @@ Qi
 aG
 cc
 aG
-aG
+MD
 bm
 ag
 fI
@@ -30511,7 +30585,7 @@ bz
 Xi
 aG
 aT
-aG
+MD
 aG
 ag
 fI
@@ -30740,7 +30814,7 @@ oS
 wk
 oS
 oS
-oS
+LM
 xu
 Ki
 CN
@@ -34354,7 +34428,7 @@ eH
 fm
 fJ
 gp
-ha
+Ib
 hM
 AN
 Mw

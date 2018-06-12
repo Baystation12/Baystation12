@@ -782,7 +782,7 @@
 	name = "Engine Monitoring Room Blast Doors";
 	opacity = 0
 	},
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/magshield/engine)
 "cd" = (
@@ -851,7 +851,7 @@
 	name = "Engine Monitoring Room Blast Doors";
 	opacity = 0
 	},
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/yellow{
 	d1 = 4;
 	d2 = 8;
@@ -2431,9 +2431,8 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "gc" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "gd" = (
@@ -3416,8 +3415,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "iS" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "iT" = (
@@ -3492,9 +3490,8 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jf" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jg" = (
@@ -4377,6 +4374,10 @@
 /obj/effect/shuttle_landmark/nav_magshield/nav3,
 /turf/space,
 /area/space)
+"uL" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/tiled,
+/area/magshield/west)
 
 (1,1,1) = {"
 aa
@@ -17201,15 +17202,15 @@ aa
 fu
 fu
 fu
-gc
-gc
+uL
+uL
 fu
 fu
 fu
 fu
 fu
-gc
-gc
+uL
+uL
 fu
 fu
 fu
@@ -19852,7 +19853,7 @@ kw
 kP
 jd
 jd
-iS
+jf
 iS
 aa
 aa
@@ -20458,7 +20459,7 @@ kx
 jd
 jd
 jd
-iS
+jf
 iS
 aa
 aa
@@ -20833,23 +20834,23 @@ de
 fu
 fu
 fu
-gc
-gc
-gc
+uL
+uL
+uL
 fu
 fu
 fu
 fu
-gc
-gc
-gc
+uL
+uL
+uL
 fu
 fu
 fu
 fu
-gc
-gc
-gc
+uL
+uL
+uL
 fu
 fu
 fu

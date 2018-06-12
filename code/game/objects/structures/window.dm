@@ -1,13 +1,14 @@
 /obj/structure/window
 	name = "window"
 	desc = "A window."
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/window.dmi'
 	density = 1
 	w_class = ITEM_SIZE_NORMAL
 
 	layer = SIDE_WINDOW_LAYER
 	anchored = 1.0
 	atom_flags = ATOM_FLAG_CHECKS_BORDER
+	alpha = 122
 	var/maxhealth = 14.0
 	var/maximal_heat = T0C + 100 		// Maximal heat before this window begins taking damage from fire
 	var/damage_per_fire_tick = 2.0 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
@@ -16,10 +17,14 @@
 	var/state = 2
 	var/reinf = 0
 	var/polarized = 0
-	var/basestate
+	var/basestate = "window"
 	var/shardtype = /obj/item/weapon/material/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 	var/silicate = 0 // number of units of silicate
+	var/on_frame = FALSE
+	var/material_color
+	blend_objects = list(/obj/machinery/door) // Objects which to blend with
+	noblend_objects = list(/obj/machinery/door/window)
 
 	atmos_canpass = CANPASS_PROC
 
@@ -323,6 +328,8 @@
 
 	ini_dir = dir
 
+	update_connections(1)
+
 	update_nearby_tiles(need_rebuild=1)
 	update_nearby_icons()
 
@@ -376,24 +383,29 @@
 	//A little cludge here, since I don't know how it will work with slim windows. Most likely VERY wrong.
 	//this way it will only update full-tile ones
 	overlays.Cut()
+	update_onframe()
 	layer = FULL_WINDOW_LAYER
 	if(!is_fulltile())
 		layer = SIDE_WINDOW_LAYER
 		icon_state = "[basestate]"
 		return
-	var/list/dirs = list()
-	if(anchored)
-		for(var/obj/structure/window/W in orange(src,1))
-			if(W.anchored && W.density && W.glasstype == src.glasstype && W.is_fulltile()) //Only counts anchored, not-destroyed fill-tile windows.
-				dirs += get_dir(src, W)
-
-	var/list/connections = dirs_to_corner_states(dirs)
-
-	icon_state = ""
-	for(var/i = 1 to 4)
-		var/image/I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
-		overlays += I
-
+	else
+		var/image/I
+		icon_state = ""
+		if(on_frame)
+			for(var/i = 1 to 4)
+				if(other_connections[i] != "0")
+					I = image(icon, "[basestate]_other_onframe[connections[i]]", dir = 1<<(i-1))
+				else
+					I = image(icon, "[basestate]_onframe[connections[i]]", dir = 1<<(i-1))
+				overlays += I
+		else
+			for(var/i = 1 to 4)
+				if(other_connections[i] != "0")
+					I = image(icon, "[basestate]_other[connections[i]]", dir = 1<<(i-1))
+				else
+					I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
+				overlays += I
 	return
 
 /obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -406,34 +418,42 @@
 /obj/structure/window/basic
 	desc = "It looks thin and flimsy. A few knocks with... anything, really should shatter it."
 	icon_state = "window"
-	basestate = "window"
 	glasstype = /obj/item/stack/material/glass
 	maximal_heat = T0C + 100
 	damage_per_fire_tick = 2.0
 	maxhealth = 12.0
+	material_color = GLASS_COLOR
+	color = GLASS_COLOR
 
 /obj/structure/window/phoronbasic
 	name = "phoron window"
 	desc = "A borosilicate alloy window. It seems to be quite strong."
-	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
 	shardtype = /obj/item/weapon/material/shard/phoron
 	glasstype = /obj/item/stack/material/glass/phoronglass
 	maximal_heat = T0C + 2000
 	damage_per_fire_tick = 1.0
 	maxhealth = 40.0
+	material_color = GLASS_COLOR_PHORON
+	color = GLASS_COLOR_PHORON
+
+/obj/structure/window/phoronbasic/full
+	dir = 5
+	icon_state = "phoronwindow0"
 
 /obj/structure/window/phoronreinforced
 	name = "reinforced borosilicate window"
 	desc = "A borosilicate alloy window, with rods supporting it. It seems to be very strong."
-	basestate = "phoronrwindow"
-	icon_state = "phoronrwindow"
+	icon_state = "rwindow"
+	basestate = "rwindow"
 	shardtype = /obj/item/weapon/material/shard/phoron
 	glasstype = /obj/item/stack/material/glass/phoronrglass
 	reinf = 1
 	maximal_heat = T0C + 4000
 	damage_per_fire_tick = 1.0 // This should last for 80 fire ticks if the window is not damaged at all. The idea is that borosilicate windows have something like ablative layer that protects them for a while.
 	maxhealth = 80.0
+	material_color = GLASS_COLOR_PHORON
+	color = GLASS_COLOR_PHORON
 
 /obj/structure/window/phoronreinforced/full
 	dir = 5
@@ -449,7 +469,8 @@
 	maximal_heat = T0C + 750
 	damage_per_fire_tick = 2.0
 	glasstype = /obj/item/stack/material/glass/reinforced
-
+	material_color = GLASS_COLOR
+	color = GLASS_COLOR
 
 /obj/structure/window/New(Loc, constructed=0)
 	..()
@@ -457,6 +478,7 @@
 	//player-constructed windows
 	if (constructed)
 		state = 0
+	update_connections(1)
 
 /obj/structure/window/Initialize()
 	. = ..()
@@ -464,21 +486,21 @@
 
 /obj/structure/window/reinforced/full
 	dir = 5
-	icon_state = "fwindow"
+	icon_state = "rwindow_full"
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
 	desc = "It looks rather strong and opaque. Might take a few good hits to shatter it."
-	icon_state = "twindow"
-	basestate = "twindow"
+	icon_state = "window"
 	opacity = 1
+	color = GLASS_COLOR_TINTED
 
 /obj/structure/window/reinforced/tinted/frosted
 	name = "frosted window"
-	desc = "It looks rather strong and frosted over. Looks like it might take a few less hits then a normal reinforced window."
-	icon_state = "fwindow"
-	basestate = "fwindow"
+	desc = "It looks rather strong and frosted over. Looks like it might take a few less hits than a normal reinforced window."
+	icon_state = "window"
 	maxhealth = 30
+	color = GLASS_COLOR_FROSTED
 
 /obj/structure/window/shuttle
 	name = "shuttle window"
@@ -494,12 +516,13 @@
 /obj/structure/window/reinforced/polarized
 	name = "electrochromic window"
 	desc = "Adjusts its tint with voltage. Might take a few good hits to shatter it."
+	basestate = "rwindow"
 	var/id
 	polarized = 1
 
 /obj/structure/window/reinforced/polarized/full
 	dir = 5
-	icon_state = "fwindow"
+	icon_state = "rwindow_full"
 
 /obj/structure/window/reinforced/polarized/attackby(obj/item/W as obj, mob/user as mob)
 	if(isMultitool(W))
@@ -517,10 +540,10 @@
 
 /obj/structure/window/reinforced/polarized/proc/toggle()
 	if(opacity)
-		animate(src, color="#ffffff", time=5)
+		animate(src, color=material_color, time=5)
 		set_opacity(0)
 	else
-		animate(src, color="#222222", time=5)
+		animate(src, color=GLASS_COLOR_TINTED, time=5)
 		set_opacity(1)
 
 /obj/structure/window/reinforced/crescent/attack_hand()
@@ -540,6 +563,20 @@
 
 /obj/structure/window/reinforced/crescent/shatter()
 	return
+
+
+/obj/structure/window/proc/update_onframe()
+	var/success = FALSE
+	var/turf/T = get_turf(src)
+	for(var/obj/O in T)
+		if(istype(O, /obj/structure/wall_frame))
+			success = TRUE
+		if(success)
+			break
+	if(success)
+		on_frame = TRUE
+	else
+		on_frame = FALSE
 
 /obj/machinery/button/windowtint
 	name = "window tint control"

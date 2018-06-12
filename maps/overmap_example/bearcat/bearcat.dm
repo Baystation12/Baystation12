@@ -97,12 +97,27 @@
 /decl/flooring/tiling
 	name = "deck"
 
-/obj/machinery/door/airlock/autoname/command
-	icon = 'icons/obj/doors/Doorhatchele.dmi'
-	req_access = list(access_heads)
+/obj/machinery/door/airlock/hatch/autoname
 
-/obj/machinery/door/airlock/autoname/engineering
+/obj/machinery/door/airlock/hatch/autoname/New()
+	var/area/A = get_area(src)
+	name = A.name
+	..()
+
+/obj/machinery/door/airlock/hatch/autoname/general
+	stripe_color = COLOR_CIVIE_GREEN
+
+/obj/machinery/door/airlock/hatch/autoname/maintenance
+	stripe_color = COLOR_AMBER
+
+/obj/machinery/door/airlock/hatch/autoname/command
+	req_access = list(access_heads)
+	stripe_color = COLOR_COMMAND_BLUE
+
+/obj/machinery/door/airlock/hatch/autoname/engineering
 	req_access = list(access_engine)
+	stripe_color = COLOR_AMBER
+
 
 //wild capitalism
 /datum/computer_file/program/merchant

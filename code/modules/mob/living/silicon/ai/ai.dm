@@ -131,7 +131,6 @@ var/list/ai_verbs_default = list(
 
 	fully_replace_character_name(pickedName)
 	anchored = 1
-	canmove = 0
 	set_density(1)
 
 	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"))

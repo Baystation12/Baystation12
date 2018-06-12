@@ -117,17 +117,26 @@
 
 	return 1
 
+/obj/item/organ/internal/brain/can_recover()
+	return ~status & ORGAN_DEAD
+
 /obj/item/organ/internal/brain/slime
 	name = "slime core"
 	desc = "A complex, organic knot of jelly and crystalline particles."
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "green slime extract"
 
+/obj/item/organ/internal/brain/slime/can_recover()
+	return 0
+
 /obj/item/organ/internal/brain/golem
 	name = "chem"
 	desc = "A tightly furled roll of paper, covered with indecipherable runes."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "scroll"
+
+/obj/item/organ/internal/brain/golem/can_recover()
+	return 0
 
 /obj/item/organ/internal/brain/starlight
 	name = "essence of fire"

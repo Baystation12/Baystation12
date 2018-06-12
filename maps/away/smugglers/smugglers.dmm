@@ -48,17 +48,7 @@
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "al" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/wall/r_wall,
 /area/smugglers/base)
 "am" = (
@@ -103,43 +93,7 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "ar" = (
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/machinery/door/blast/regular,
-/obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
-	},
-/turf/simulated/floor/airless,
-/area/smugglers/base)
-"as" = (
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular,
-/obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
-	},
-/turf/simulated/floor/airless,
-/area/smugglers/base)
-"at" = (
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular,
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -4918,7 +4872,7 @@ aa
 aa
 aa
 aa
-as
+ar
 aC
 aS
 aZ
@@ -5020,7 +4974,7 @@ aa
 aa
 aa
 aa
-at
+ar
 aD
 aT
 be

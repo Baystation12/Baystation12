@@ -1,7 +1,7 @@
 /obj/structure/door_assembly
 	name = "airlock assembly"
-	icon = 'icons/obj/doors/door_assembly.dmi'
-	icon_state = "door_as_0"
+	icon = 'icons/obj/doors/station/door.dmi'
+	icon_state = "construction"
 	anchored = 0
 	density = 1
 	w_class = ITEM_SIZE_NO_CONTAINER
@@ -13,118 +13,44 @@
 	var/glass_type = "/glass"
 	var/glass = 0 // 0 = glass can be installed. -1 = glass can't be installed. 1 = glass is already installed. Text = mineral plating is installed instead.
 	var/created_name = null
+	var/panel_icon = 'icons/obj/doors/station/panel.dmi'
+	var/fill_icon = 'icons/obj/doors/station/fill_steel.dmi'
+	var/glass_icon = 'icons/obj/doors/station/fill_glass.dmi'
 
 	New()
 		update_state()
 
-/obj/structure/door_assembly/door_assembly_com
-	base_icon_state = "com"
-	base_name = "Command Airlock"
-	glass_type = "/glass_command"
-	airlock_type = "/command"
-
-/obj/structure/door_assembly/door_assembly_sec
-	base_icon_state = "sec"
-	base_name = "Security Airlock"
-	glass_type = "/glass_security"
-	airlock_type = "/security"
-
-/obj/structure/door_assembly/door_assembly_eng
-	base_icon_state = "eng"
-	base_name = "Engineering Airlock"
-	glass_type = "/glass_engineering"
-	airlock_type = "/engineering"
-
-/obj/structure/door_assembly/door_assembly_min
-	base_icon_state = "min"
-	base_name = "Mining Airlock"
-	glass_type = "/glass_mining"
-	airlock_type = "/mining"
-
-/obj/structure/door_assembly/door_assembly_atmo
-	base_icon_state = "atmo"
-	base_name = "Atmospherics Airlock"
-	glass_type = "/glass_atmos"
-	airlock_type = "/atmos"
-
-/obj/structure/door_assembly/door_assembly_research
-	base_icon_state = "res"
-	base_name = "Research Airlock"
-	glass_type = "/glass_research"
-	airlock_type = "/research"
-
-/obj/structure/door_assembly/door_assembly_science
-	base_icon_state = "sci"
-	base_name = "Science Airlock"
-	glass_type = "/glass_science"
-	airlock_type = "/science"
-
-/obj/structure/door_assembly/door_assembly_med
-	base_icon_state = "med"
-	base_name = "Medical Airlock"
-	glass_type = "/glass_medical"
-	airlock_type = "/medical"
-
-/obj/structure/door_assembly/door_assembly_viro
-	base_icon_state = "viro"
-	base_name = "Virology Airlock"
-	glass_type = "/glass_virology"
-	airlock_type = "/virology"
-
-/obj/structure/door_assembly/door_assembly_sol
-	base_icon_state = "sol"
-	base_name = "Sol Central Government Airlock"
-	glass_type = "/glass_sol"
-	airlock_type = "/sol"
-
-/obj/structure/door_assembly/door_assembly_ext
-	base_icon_state = "ext"
-	base_name = "External Airlock"
-	glass_type = "/glass_external"
-	airlock_type = "/external"
-
-/obj/structure/door_assembly/door_assembly_mai
-	base_icon_state = "mai"
-	base_name = "Maintenance Airlock"
-	airlock_type = "/maintenance"
-	glass = -1
-
-/obj/structure/door_assembly/door_assembly_fre
-	base_icon_state = "fre"
-	base_name = "Freezer Airlock"
-	airlock_type = "/freezer"
-	glass = -1
-
 /obj/structure/door_assembly/door_assembly_hatch
-	base_icon_state = "hatch"
+	icon = 'icons/obj/doors/hatch/door.dmi'
+	panel_icon = 'icons/obj/doors/hatch/panel.dmi'
+	fill_icon = 'icons/obj/doors/hatch/fill_steel.dmi'
 	base_name = "Airtight Hatch"
 	airlock_type = "/hatch"
 	glass = -1
 
-/obj/structure/door_assembly/door_assembly_mhatch
-	base_icon_state = "mhatch"
-	base_name = "Maintenance Hatch"
-	airlock_type = "/maintenance_hatch"
-	glass = -1
-
 /obj/structure/door_assembly/door_assembly_highsecurity // Borrowing this until WJohnston makes sprites for the assembly
-	base_icon_state = "highsec"
+	icon = 'icons/obj/doors/secure/door.dmi'
+	fill_icon = 'icons/obj/doors/secure/fill_steel.dmi'
 	base_name = "High Security Airlock"
 	airlock_type = "/highsecurity"
 	glass = -1
 
+/obj/structure/door_assembly/door_assembly_ext
+	icon = 'icons/obj/doors/external/door.dmi'
+	fill_icon = 'icons/obj/doors/external/fill_steel.dmi'
+	glass_icon = 'icons/obj/doors/external/fill_glass.dmi'
+	base_name = "External Airlock"
+	airlock_type = "/external"
+
 /obj/structure/door_assembly/multi_tile
-	icon = 'icons/obj/doors/door_assembly2x1.dmi'
+	icon = 'icons/obj/doors/double/door.dmi'
+	fill_icon = 'icons/obj/doors/double/fill_steel.dmi'
+	glass_icon = 'icons/obj/doors/double/fill_glass.dmi'
+	panel_icon = 'icons/obj/doors/double/panel.dmi'
 	dir = EAST
 	var/width = 1
-
-/*Temporary until we get sprites.
+	airlock_type = "/multi_tile"
 	glass_type = "/multi_tile/glass"
-	airlock_type = "/multi_tile/maint"
-	glass = 1*/
-	base_icon_state = "g" //Remember to delete this line when reverting "glass" var to 1.
-	airlock_type = "/multi_tile/glass"
-	glass = -1 //To prevent bugs in deconstruction process.
 
 	New()
 		if(dir in list(EAST, WEST))
@@ -295,15 +221,25 @@
 	update_state()
 
 /obj/structure/door_assembly/proc/update_state()
-	icon_state = "door_as_[glass == 1 ? "g" : ""][istext(glass) ? glass : base_icon_state][state]"
+	overlays.Cut()
+	var/image/filling_overlay
+	var/image/panel_overlay
 	var/final_name = ""
+	if(glass == 1)
+		filling_overlay = image(glass_icon, "construction")
+	else
+		filling_overlay = image(fill_icon, "construction")
 	switch (state)
 		if(0)
 			if (anchored)
 				final_name = "Secured "
 		if(1)
 			final_name = "Wired "
+			panel_overlay = image(panel_icon, "construction0")
 		if(2)
 			final_name = "Near Finished "
+			panel_overlay = image(panel_icon, "construction1")
 	final_name += "[glass == 1 ? "Window " : ""][istext(glass) ? "[glass] Airlock" : base_name] Assembly"
 	SetName(final_name)
+	overlays += filling_overlay
+	overlays += panel_overlay

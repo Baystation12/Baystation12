@@ -292,10 +292,8 @@
 	user << browse(dat, "window=violin;size=700x300")
 	onclose(user, "violin")
 
-/obj/item/device/violin/Topic(href, href_list)
-	if(..())
-		return 1
-	if(!in_range(src, usr) || issilicon(usr) || !isliving(usr) || !usr.canmove || usr.restrained())
+/obj/item/device/violin/Topic(href, href_list, state = GLOB.physical_state)
+	if((. = ..()))
 		usr << browse(null, "window=violin;size=700x300")
 		onclose(usr, "violin")
 		return

@@ -16,4 +16,7 @@
 
 
 /obj/item/device/binoculars/attack_self(mob/user)
-	zoom(user)
+	if(zoom)
+		unzoom(user)
+	else
+		zoom(user)
