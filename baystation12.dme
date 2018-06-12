@@ -1908,6 +1908,8 @@
 #include "code\modules\mob\observer\virtual\helpers.dm"
 #include "code\modules\mob\observer\virtual\mob.dm"
 #include "code\modules\mob\skills\skill.dm"
+#include "code\modules\mob\skills\skill_buffs.dm"
+#include "code\modules\mob\skills\skill_verbs.dm"
 #include "code\modules\mob\skills\skillset.dm"
 #include "code\modules\mob\skills\skillset_silicon.dm"
 #include "code\modules\modular_computers\laptop_vendor.dm"
