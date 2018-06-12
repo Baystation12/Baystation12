@@ -199,7 +199,10 @@
 	//We are now going to move
 	mob.moving = 1
 	direction = mob.AdjustMovementDirection(direction)
-	//Something with pulling things
+	step(mob, direction)
+
+	// Something with pulling things
+	// TODO: Look into making grabs use movement events instead, this is a mess.
 	for (var/obj/item/grab/G in mob)
 		mob.move_delay = max(mob.move_delay, G.grab_slowdown())
 		var/list/L = mob.ret_grab()
@@ -210,7 +213,6 @@
 				if(M)
 					if ((get_dist(mob, M) <= 1 || M.loc == mob.loc))
 						var/turf/T = mob.loc
-						. = ..()
 						if (isturf(M.loc))
 							var/diag = get_dir(mob, M)
 							if ((diag - 1) & diag)
@@ -240,7 +242,6 @@
 	for (var/obj/item/grab/G in mob.grabbed_by)
 		G.adjust_position()
 
-	step(mob, direction)
 	mob.moving = 0
 
 /datum/movement_handler/mob/movement/MayMove(var/mob/mover)
