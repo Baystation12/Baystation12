@@ -5,27 +5,38 @@
 	var/mob/owner
 	var/default_value = SKILL_DEFAULT
 	var/skills_transferable = TRUE
+	var/list/skill_buffs                                            // A list of /datum/skill_buff being applied to the skillset.
+	var/list/skill_verbs                                            // A list of skill-related verb datums.
 
 /datum/skillset/New(mob/mob)
 	owner = mob
+	for(var/datum/skill_verb/SV in GLOB.skill_verbs)
+		if(SV.should_have_verb(src))
+			SV.give_to_skillset(src)
 	..()
 
 /datum/skillset/Destroy()
 	owner = null
+	QDEL_NULL_LIST(skill_buffs)
+	QDEL_NULL_LIST(skill_verbs)
 	. = ..()
 
-/datum/skillset/proc/get_value_from_datum(decl/hierarchy/skill/skill)
-	return skill_list[skill] || default_value
+/datum/skillset/proc/get_value(skill_path)
+	. = skill_list[skill_path] || default_value
+	for(var/datum/skill_buff/SB in skill_buffs)
+		. += SB.buffs[skill_path]
 
 /datum/skillset/proc/obtain_from_mob(mob/mob)
 	if(!istype(mob) || !skills_transferable || !mob.skillset.skills_transferable)
 		return
 	skill_list = mob.skillset.skill_list
 	default_value = mob.skillset.default_value
+	skill_buffs = mob.skillset.skill_buffs
+	update_verbs()
 
 /datum/skillset/proc/set_antag_skills()
 	skill_list = list()
-	return												//Antags get generic skills, unless this is modified
+	update_verbs()                                      //Antags get generic skills, unless this is modified
 
 /datum/skillset/proc/obtain_from_client(datum/job/job, client/given_client)
 	if(!skills_transferable)
@@ -41,15 +52,13 @@
 	skill_list = list()
 	for(var/decl/hierarchy/skill/S in GLOB.skills)
 		var/min = given_client.prefs.get_min_skill(job, S)
-		skill_list[S] = min + (allocation[S] || 0)
+		skill_list[S.type] = min + (allocation[S] || 0)
+	update_verbs()
 
 //Skill-related mob helper procs
 
 /mob/proc/get_skill_value(skill_path)
-	for(var/decl/hierarchy/skill/S in skillset.skill_list)
-		if(istype(S, skill_path))
-			return skillset.get_value_from_datum(S)			// So that if get_value_from_datum is modified, so is this.
-	return skillset.get_value_from_datum()
+	return skillset.get_value(skill_path)
 
 // Use to perform skill checks
 /mob/proc/skill_check(skill_path, needed)
@@ -96,7 +105,7 @@ proc/show_skill_window(var/mob/user, var/mob/M)
 		HTML += "<tr><th colspan = 4><b>[V.name]</b>"
 		HTML += "</th></tr>"
 		for(var/decl/hierarchy/skill/S in V.children)
-			var/level = M.skillset.get_value_from_datum(S)
+			var/level = M.get_skill_value(S.type)
 			HTML += "<tr style='text-align:left;'>"
 			HTML += "<th>[S.name]</th>"
 			for(var/i = SKILL_MIN, i <= SKILL_MAX, i++)
