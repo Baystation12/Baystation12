@@ -10,7 +10,7 @@
  */
 
 //Returns a list in plain english as a string
-/proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
+/proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "," )
 	switch(input.len)
 		if(0) return nothing_text
 		if(1) return "[input[1]]"
