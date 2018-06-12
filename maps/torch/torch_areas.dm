@@ -369,13 +369,32 @@
 
 //Aquila
 
-/area/aquila_hangar/start
+/area/aquila
 	name = "\improper SEV Aquila"
 	icon_state = "shuttlered"
 	base_turf = /turf/simulated/floor/reinforced/airless
 	requires_power = 1
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED
+
+/area/aquila/cockpit
+	name = "\improper SEV Aquila - Cockpit"
+/area/aquila/maintenance
+	name = "\improper SEV Aquila - Maintenance"
+/area/aquila/storage
+	name = "\improper SEV Aquila - Storage"
+/area/aquila/secure_storage
+	name = "\improper SEV Aquila - Secure Storage"
+/area/aquila/mess
+	name = "\improper SEV Aquila - Mess Hall"
+/area/aquila/passenger
+	name = "\improper SEV Aquila - Passenger Compartment"
+/area/aquila/medical
+	name = "\improper SEV Aquila - Medical"
+/area/aquila/head
+	name = "\improper SEV Aquila - Head"
+/area/aquila/airlock
+	name = "\improper SEV Aquila - Airlock Compartment"
 
 //Guppy
 

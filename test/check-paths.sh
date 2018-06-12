@@ -31,7 +31,7 @@ exactly 12 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
 exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 46 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
-exactly 643 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 653 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 24 "text2path uses" 'text2path'
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
@@ -39,5 +39,9 @@ exactly 24 "text2path uses" 'text2path'
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`
 echo "$num non-yml files (expecting exactly 2)"
 [ $num -eq 2 ] || FAILED=1
+
+num=`find . -perm /111 -name "*.dm*" | wc -l`
+echo "$num executable *.dm? files (expecting exactly 0)"
+[ $num -eq 0 ] || FAILED=1
 
 exit $FAILED

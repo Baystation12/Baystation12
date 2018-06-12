@@ -287,7 +287,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aJ" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aK" = (
@@ -380,7 +380,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/cells)
 "aZ" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -583,7 +583,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "bD" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -1358,7 +1358,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "du" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "dv" = (
@@ -1536,7 +1536,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/sec_wing)
 "dW" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
 	icon_state = "pdoor0";
@@ -3160,7 +3160,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "hB" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -3630,7 +3630,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "iv" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 2;

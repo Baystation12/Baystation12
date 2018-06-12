@@ -16,6 +16,7 @@
 /area/icarus/vessel)
 "af" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ag" = (
@@ -104,9 +105,8 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ay" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "az" = (
@@ -463,9 +463,8 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bE" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -529,12 +528,6 @@
 /obj/machinery/suit_storage_unit/security/alt,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
-"bQ" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled,
-/area/icarus/open)
 "bR" = (
 /obj/structure/table/steel,
 /obj/random/tool,
@@ -931,8 +924,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cX" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -1931,6 +1923,15 @@
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/open)
+"Bd" = (
+/obj/structure/wall_frame,
+/turf/simulated/floor/plating,
+/area/icarus/vessel)
+"Fo" = (
+/obj/item/weapon/ore/slag,
+/obj/structure/wall_frame,
+/turf/simulated/floor/plating,
+/area/icarus/vessel)
 "RQ" = (
 /obj/item/modular_computer/console{
 	dir = 4
@@ -19574,7 +19575,7 @@ ac
 ac
 ac
 ao
-bQ
+ay
 ao
 ao
 ao
@@ -22186,7 +22187,7 @@ ad
 ad
 ad
 ae
-ah
+Fo
 aq
 at
 ar
@@ -22588,8 +22589,8 @@ ad
 ad
 ae
 ae
-ah
-ag
+Fo
+Bd
 ak
 ar
 ai
@@ -22790,7 +22791,7 @@ ad
 ad
 ae
 af
-ag
+Bd
 ai
 ai
 ai
@@ -23800,7 +23801,7 @@ ad
 ad
 ae
 ae
-ag
+Bd
 ak
 am
 ak
@@ -24003,7 +24004,7 @@ ad
 ad
 ae
 ae
-ah
+Fo
 ai
 ak
 ak
@@ -25644,7 +25645,7 @@ ap
 cX
 dn
 ap
-bQ
+ay
 dW
 cL
 dR
@@ -27053,14 +27054,14 @@ ao
 ao
 ao
 ao
-bQ
-bQ
-bQ
+ay
+ay
+ay
 ao
 ao
-bQ
-bQ
-bQ
+ay
+ay
+ay
 cL
 ac
 ac

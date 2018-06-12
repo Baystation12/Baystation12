@@ -49,7 +49,13 @@
 #define COLOR_CYAN_BLUE        "#3366cc"
 #define COLOR_LIGHT_CYAN       "#66ccff"
 #define COLOR_PAKISTAN_GREEN   "#006600"
-#define COLOR_HULL			   "#436b8e"
+#define COLOR_HULL             "#436b8e"
+#define COLOR_AMBER            "#ffbf00"
+#define COLOR_COMMAND_BLUE     "#46698c"
+#define COLOR_SKY_BLUE         "#5ca1cc"
+#define COLOR_PALE_ORANGE      "#b88a3b"
+#define COLOR_CIVIE_GREEN      "#b7f27d"
+#define COLOR_TITANIUM         "#d1e6e3"
 
 #define	PIPE_COLOR_GREY        "#ffffff"	//yes white is grey
 #define	PIPE_COLOR_RED         "#ff0000"
@@ -75,6 +81,11 @@
 #define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
 #define	COMMS_COLOR_SYNDICATE  "#6d3f40"
 
-#define COLOR_BLOOD_HUMAN "#a10808"
+#define GLASS_COLOR            "#74b1ee"
+#define GLASS_COLOR_PHORON     "#7c3a9a"
+#define GLASS_COLOR_TINTED     "#222222"
+#define GLASS_COLOR_FROSTED    "#ffffff"
+
+#define COLOR_BLOOD_HUMAN      "#a10808"
 
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))

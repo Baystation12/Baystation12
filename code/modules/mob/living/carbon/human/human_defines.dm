@@ -112,3 +112,7 @@
 
 	var/obj/item/grab/current_grab_type 	// What type of grab they use when they grab someone.
 	var/skin_state = SKIN_NORMAL
+
+	//vars for fountain of youth examine lines
+	var/became_older
+	var/became_younger

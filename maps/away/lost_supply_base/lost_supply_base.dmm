@@ -749,17 +749,7 @@
 	},
 /area/lost_supply_base/office)
 "bI" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/wall/r_wall,
 /area/lost_supply_base/office)
 "bJ" = (
@@ -822,17 +812,7 @@
 /turf/space,
 /area/lost_supply_base/office)
 "bR" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/wall/r_wall,
 /area/lost_supply_base)
 "bS" = (
@@ -1120,16 +1100,7 @@
 	},
 /area/lost_supply_base/common)
 "cM" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
+/obj/effect/wallframe_spawn/reinforced,
 /turf/space,
 /area/lost_supply_base/common)
 "cN" = (
@@ -1191,14 +1162,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "cW" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/wall/r_wall,
 /area/lost_supply_base/common)
 "cX" = (
@@ -1490,16 +1454,6 @@
 	icon_state = "steel_burned0"
 	},
 /area/lost_supply_base/common)
-"dQ" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/turf/space,
-/area/lost_supply_base/common)
 "dR" = (
 /turf/simulated/shuttle/wall{
 	icon_state = "swall_straight";
@@ -1682,17 +1636,6 @@
 /turf/simulated/floor/tiled/airless{
 	icon_state = "steel_burned0"
 	},
-/area/lost_supply_base/common)
-"eu" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/turf/space,
 /area/lost_supply_base/common)
 "ev" = (
 /obj/machinery/portable_atmospherics/canister,
@@ -10026,9 +9969,9 @@ cW
 ck
 ck
 cM
-dQ
-dQ
-eu
+cM
+cM
+cM
 ck
 ck
 ck

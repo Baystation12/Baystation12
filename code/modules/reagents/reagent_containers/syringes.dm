@@ -134,7 +134,8 @@
 			var/mob/living/carbon/T = target
 			if(!T.dna)
 				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
-				CRASH("[T] \[[T.type]\] was missing their dna datum!")
+				if(istype(target, /mob/living/carbon/human))
+					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
 			if(NOCLONE in T.mutations) //target done been et, no more blood in him
 				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
@@ -243,12 +244,10 @@
 
 		if(target != trackTarget && target.loc != trackTarget)
 			return
-
+	admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 
 	if(target != user)
-		var/contained = reagentlist()
-		admin_inject_log(user, target, src, contained, trans)
 		user.visible_message("<span class='warning'>\the [user] injects \the [target] with [visible_name]!</span>", "<span class='notice'>You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units.</span>")
 	else
 		to_chat(user, "<span class='notice'>You inject yourself with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units.</span>")

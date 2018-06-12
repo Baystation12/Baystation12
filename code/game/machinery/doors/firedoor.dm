@@ -11,8 +11,10 @@
 /obj/machinery/door/firedoor
 	name = "\improper Emergency Shutter"
 	desc = "Emergency air-tight shutter, capable of sealing off breached areas."
-	icon = 'icons/obj/doors/DoorHazard.dmi'
-	icon_state = "door_open"
+	icon = 'icons/obj/doors/hazard/door.dmi'
+	var/panel_file = 'icons/obj/doors/hazard/panel.dmi'
+	var/welded_file = 'icons/obj/doors/hazard/welded.dmi'
+	icon_state = "open"
 	req_one_access = list(access_atmospherics, access_engine_equip)
 	opacity = 0
 	density = 0
@@ -48,6 +50,8 @@
 		"hot",
 		"cold"
 	)
+
+	blend_objects = list(/obj/machinery/door/firedoor, /obj/structure/wall_frame, /turf/unsimulated/wall, /obj/structure/window) // Objects which to blend with
 
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()
@@ -376,25 +380,35 @@
 /obj/machinery/door/firedoor/do_animate(animation)
 	switch(animation)
 		if("opening")
-			flick("door_opening", src)
+			flick("opening", src)
 		if("closing")
-			flick("door_closing", src)
+			flick("closing", src)
 	return
 
 
 /obj/machinery/door/firedoor/update_icon()
+	var/icon/lights_overlay
+	var/icon/panel_overlay
+	var/icon/weld_overlay
+
 	overlays.Cut()
 	set_light(0)
 	var/do_set_light = FALSE
 
+	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
+		if(connections in list(WEST, EAST, EAST|WEST))
+			set_dir(SOUTH)
+		else
+			set_dir(EAST)
+	else
+		set_dir(SOUTH)
+
 	if(density)
-		icon_state = "door_closed"
+		icon_state = "closed"
 		if(hatch_open)
-			overlays += "hatch"
-		if(blocked)
-			overlays += "welded"
+			overlays = panel_overlay
 		if(pdiff_alert)
-			overlays += "palert"
+			lights_overlay += "palert"
 			do_set_light = TRUE
 		if(dir_alerts)
 			for(var/d=1;d<=4;d++)
@@ -404,12 +418,17 @@
 						overlays += new/icon(icon,"alert_[ALERT_STATES[i]]", dir=cdir)
 						do_set_light = TRUE
 	else
-		icon_state = "door_open"
-		if(blocked)
-			overlays += "welded_open"
+		icon_state = "open"
+
+	if(blocked)
+		weld_overlay = welded_file
 
 	if(do_set_light)
 		set_light(0.25, 0.1, 1, 2, COLOR_SUN)
+
+	overlays += panel_overlay
+	overlays += weld_overlay
+	overlays += lights_overlay
 
 //These are playing merry hell on ZAS.  Sorry fellas :(
 

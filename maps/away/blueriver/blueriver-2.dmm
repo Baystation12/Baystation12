@@ -78,7 +78,7 @@
 	},
 /area/bluespaceriver/ground)
 "an" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/bluespaceriver/ship)
 "ao" = (
@@ -292,7 +292,7 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ba" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/bluespaceriver/ship)
 "bb" = (
@@ -570,7 +570,7 @@
 /area/bluespaceriver/ship)
 "bN" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	 icon_state = "intact";
+	icon_state = "intact";
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -735,7 +735,7 @@
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)
 "cm" = (
-/obj/machinery/door/airlock/glass_external/bolted,
+/obj/machinery/door/airlock/external/bolted,
 /turf/simulated/floor/tiled/dark,
 /area/bluespaceriver/ship)
 "cn" = (

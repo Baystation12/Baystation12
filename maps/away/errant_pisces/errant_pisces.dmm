@@ -1423,7 +1423,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "dB" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	icon_state = "intact";
 	dir = 4
@@ -1436,7 +1436,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "dC" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	icon_state = "intact";
 	dir = 4
@@ -1569,12 +1569,12 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "dP" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
 "dQ" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -2332,7 +2332,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
 "fm" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
@@ -2341,7 +2341,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
 "fn" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
 "fo" = (
@@ -2532,12 +2532,12 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
 "fE" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
 "fF" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -2928,7 +2928,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gx" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/rooms)
@@ -2959,7 +2959,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/hallway)
 "gB" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/dorms)
@@ -3497,7 +3497,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "if" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
@@ -3606,7 +3606,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "iA" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
 "iB" = (
@@ -6359,7 +6359,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "po" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/errant_pisces/bridge)

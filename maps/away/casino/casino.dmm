@@ -105,7 +105,7 @@
 /turf/simulated/wall/r_wall,
 /area/casino/casino_bridge)
 "an" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -137,7 +137,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "at" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -188,18 +188,7 @@
 /area/casino/casino_maintenance)
 "aC" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
+/obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "aD" = (
@@ -1011,7 +1000,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "cD" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	icon_state = "pdoor0";
 	id = "casino_shuttle_control"
@@ -1340,7 +1329,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_hangar)
 "dF" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled,
 /area/casino/casino_cutter)
 "dG" = (
@@ -2129,7 +2118,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "fA" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 8;
@@ -5000,7 +4989,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "mZ" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open{
 	icon_state = "pdoor0";
 	id = "Starboard wide window BD"
@@ -5722,7 +5711,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "Nb" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)

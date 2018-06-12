@@ -778,6 +778,28 @@
 		remove_self(5)
 		M.resuscitate()
 
+/datum/reagent/lactate
+	name = "Lactate"
+	description = "Lactate is produced by the body during strenuous exercise. It often correlates with elevated heart rate, shortness of breath, and general exhaustion."
+	taste_description = "sourness"
+	reagent_state = LIQUID
+	color = "#eeddcc"
+	scannable = 1
+	overdose = REAGENTS_OVERDOSE
+	metabolism = REM
+
+/datum/reagent/lactate/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+
+	M.add_chemical_effect(CE_PULSE, 1)
+	M.add_chemical_effect(CE_BREATHLOSS, 0.02 * volume)
+	if(volume >= 5)
+		M.add_chemical_effect(CE_PULSE, 1)
+		M.add_chemical_effect(CE_SLOWDOWN, (volume/5) ** 2)
+	else if(M.chem_doses[type] > 20) //after prolonged exertion
+		M.make_jittery(10)
+
 /datum/reagent/nanoblood
 	name = "Nanoblood"
 	description = "A stable hemoglobin-based nanoparticle oxygen carrier, used to rapidly replace lost blood. Toxic unless injected in small doses. Does not contain white blood cells."

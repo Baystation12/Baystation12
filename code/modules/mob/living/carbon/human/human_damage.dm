@@ -387,7 +387,7 @@ This function restores all organs.
 		damage *= blocked_mult(blocked)
 
 	if(damage > 15 && prob(damage*4))
-		make_adrenaline(round(damage/10))
+		make_reagent(round(damage/10), /datum/reagent/adrenaline)
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)
