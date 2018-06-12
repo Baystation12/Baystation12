@@ -2,9 +2,7 @@
 /obj/item/projectile/bullet/magnetic
 	name = "rod"
 	icon_state = "rod"
-	damage = 65
-	stun = 1
-	weaken = 1
+	damage = 55
 	penetrating = 5
 	armor_penetration = 70
 	penetration_modifier = 1.1
@@ -13,6 +11,7 @@
 /obj/item/projectile/bullet/magnetic/slug
 	name = "slug"
 	icon_state = "gauss_silenced"
+	stun = 1
 	damage = 75
 	armor_penetration = 90
 
