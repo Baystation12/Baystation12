@@ -1,6 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "Experienced in Chemistry allows you to see scannable reagents in a held beaker/container."
-  - rscadd: "Professional in Chemistry allows you to see all reagents in a held container."
-  - tweak: "Science goggles give more precise volume readings at higher chem skill."
