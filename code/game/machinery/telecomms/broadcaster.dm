@@ -270,7 +270,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					radios += R
 
 	// --- Broadcast to ALL radio devices ---
-
 	else
 
 		for (var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
@@ -340,7 +339,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		// Default to commons channel green
 		if(!channel_color)
-			channel_color = channel_color_presets["Global Green"] 
+			channel_color = channel_color_presets["Global Green"]
 
 		var/part_b_extra = ""
 		if(data == 3) // intercepted radio message
@@ -532,7 +531,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			freq_text = channel_tag
 
 		if(!channel_color)
-			channel_color = channel_color_presets["Global Green"] 
+			channel_color = channel_color_presets["Global Green"]
 
 		var/part_a = "<span style='color: [channel_color]'><span class='name'>" // goes in the actual output
 

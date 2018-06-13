@@ -19,6 +19,7 @@
 		/obj/item/device/radio/headset/heads/torchcaptain,
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/weapon/gun/energy/gun/secure,
+		/obj/item/device/radio/headset/heads/torchcaptain/alt,
 		/obj/item/clothing/accessory/holster/thigh,
 		/obj/item/weapon/melee/telebaton,
 		/obj/item/device/flash,
@@ -53,6 +54,7 @@
 		/obj/item/device/megaphone,
 		/obj/item/weapon/storage/box/headset,
 		/obj/item/weapon/storage/box/headset/torchxo,
+		/obj/item/device/radio/headset/heads/torchxo/alt,
 		/obj/item/weapon/storage/box/large/ids,
 		/obj/item/weapon/storage/box/PDAs,
 		/obj/item/weapon/clipboard,
@@ -113,6 +115,7 @@
 		/obj/item/weapon/folder/blue,
 		/obj/item/modular_computer/tablet/lease/preset/command,
 		/obj/item/device/radio/headset/bridgeofficer,
+		/obj/item/device/radio/headset/bridgeofficer/alt,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger)),
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
