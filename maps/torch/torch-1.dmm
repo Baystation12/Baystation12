@@ -19347,10 +19347,6 @@
 /area/shuttle/petrov/ship)
 "Wv" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass/science{
-	name = "Exploration Equipment";
-	req_access = list(93)
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
