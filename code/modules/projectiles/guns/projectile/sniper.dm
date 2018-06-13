@@ -18,6 +18,7 @@
 	scoped_accuracy = 5 //increased accuracy over the LWAP because only one shot
 	var/bolt_open = 0
 	wielded_item_state = "heavysniper-wielded" //sort of placeholder
+	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
 
 /obj/item/weapon/gun/projectile/heavysniper/update_icon()
 	..()
@@ -27,18 +28,19 @@
 		icon_state = "heavysniper"
 
 /obj/item/weapon/gun/projectile/heavysniper/attack_self(mob/user as mob)
-	playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 	bolt_open = !bolt_open
 	if(bolt_open)
 		if(chambered)
 			to_chat(user, "<span class='notice'>You work the bolt open, ejecting [chambered]!</span>")
-			chambered.loc = get_turf(src)
+			chambered.dropInto(loc)
 			loaded -= chambered
 			chambered = null
 		else
 			to_chat(user, "<span class='notice'>You work the bolt open.</span>")
+		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltback.ogg', 50, 1)
 	else
 		to_chat(user, "<span class='notice'>You work the bolt closed.</span>")
+		playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltforward.ogg', 50, 1)
 		bolt_open = 0
 	add_fingerprint(user)
 	update_icon()
