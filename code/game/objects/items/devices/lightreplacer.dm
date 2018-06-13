@@ -79,9 +79,9 @@
 
 /obj/item/device/lightreplacer/examine(mob/user)
 	if(..(user, 2))
-		to_chat(usr, "It has [uses] light\s remaining.")
+		to_chat(user, "It has [uses] light\s remaining.")
 		if (store_broken)
-			to_chat(usr, "It is storing [stored()]/[max_stored] broken light\s.")
+			to_chat(user, "It is storing [stored()]/[max_stored] broken light\s.")
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
@@ -89,7 +89,7 @@
 		if(uses >= max_uses)
 			to_chat(user, "<span class='warning'>[src.name] is full.</span>")
 			return
-		else if(G.use(2))
+		else if(G.use(5))
 			AddUses(2)
 			if (prob(50))
 				AddUses(1)
@@ -103,7 +103,7 @@
 		if(L.status == 0) // LIGHT OKAY
 			if(uses < max_uses)
 				AddUses(1)
-				to_chat(usr, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
+				to_chat(user, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
 				user.drop_item()
 				qdel(L)
 				return
@@ -116,7 +116,7 @@
 		if (box_contains_lights(target))
 			load_lights_from_box(target, user)
 		else
-			to_chat(usr, "This box has no bulbs in it!")
+			to_chat(user, "This box has no bulbs in it!")
 
 
 /obj/item/device/lightreplacer/proc/box_contains_lights(var/obj/item/weapon/storage/box/box)
@@ -138,12 +138,12 @@
 				break
 
 		if (!bulb)
-			to_chat(usr, "<span class='warning'>There are no more working lights left in the box!</span>")
+			to_chat(user, "<span class='warning'>There are no more working lights left in the box!</span>")
 			return
 
 		if (do_after(user, load_interval, needhand = 0) && boxstartloc == box.loc && ourstartloc == src.loc)
 			uses++
-			to_chat(usr, "<span class='notice'>Light loaded: [uses]/[max_uses]</span>")
+			to_chat(user, "<span class='notice'>Light loaded: [uses]/[max_uses]</span>")
 			playsound(src.loc, 'sound/machines/click.ogg', 20, 1)
 			box.remove_from_storage(bulb,get_turf(box))
 			qdel(bulb)
@@ -151,7 +151,7 @@
 			to_chat(usr, "<span class='warning'>You need to keep the [src] close to the box!</span>")
 			return
 
-	to_chat(usr, "<span class='notice'>The [src]'s refill light shines a solid green, indicating it's full and ready to go!</span>")
+	to_chat(user, "<span class='notice'>The [src]'s refill light shines a solid green, indicating it's full and ready to go!</span>")
 
 /obj/item/device/lightreplacer/proc/stored()
 	var/count = 0
@@ -169,7 +169,7 @@
 			to_chat(usr, "You shortcircuit the [src].")
 			return
 	*/
-	to_chat(usr, "It has [uses] lights remaining.")
+	to_chat(user, "It has [uses] lights remaining.")
 
 /obj/item/device/lightreplacer/update_icon()
 	icon_state = "lightreplacer[emagged]"

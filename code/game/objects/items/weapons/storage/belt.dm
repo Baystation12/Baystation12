@@ -216,8 +216,7 @@
 	storage_slots = 9
 	w_class = 4
 	max_w_class = 4 //Pickaxes are big.
-	can_hold = list(/obj/item/weapon/crowbar,
-		/obj/item/weapon/screwdriver,
+	can_hold = list(/obj/item/weapon/screwdriver,
 		/obj/item/weapon/weldingtool,
 		/obj/item/weapon/wirecutters,
 		/obj/item/weapon/wrench,
@@ -233,8 +232,6 @@
 		/obj/item/device/radio,
 		/obj/item/clothing/gloves,
 		/obj/item/clothing/glasses/material,
-		/obj/item/weapon/pickaxe,
-		/obj/item/weapon/shovel,
 		/obj/item/stack/material/animalhide,
 		/obj/item/weapon/flame/lighter,
 		/obj/item/weapon/storage/fancy/cigarettes,
