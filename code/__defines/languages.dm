@@ -16,6 +16,7 @@
 #define LANGUAGE_NABBER "Serpentid"
 #define LANGUAGE_SPACER "Spacer"
 #define LANGUAGE_ALIUM "Alium"
+#define LANGUAGE_OCCULT "Occult"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.

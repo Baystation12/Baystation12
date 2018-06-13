@@ -1,0 +1,5 @@
+author: TheWelp
+delete-after: True
+changes: 
+  - rscadd: "Adds two currently admin-only races, the Starborn and the Blueforged. Will be available in future deity form."
+  - tweak: "Tweaks Shadow species death to not cause runtimes."
