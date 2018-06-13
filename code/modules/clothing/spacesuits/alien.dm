@@ -40,7 +40,7 @@
 
 /obj/item/clothing/suit/space/vox/New()
 	..()
-	slowdown_per_slot[slot_wear_suit] = 2
+	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/head/helmet/space/vox
 	armor = list(melee = 60, bullet = 50, laser = 40, energy = 15, bomb = 30, bio = 30, rad = 30)
