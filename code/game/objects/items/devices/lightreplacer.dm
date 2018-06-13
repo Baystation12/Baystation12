@@ -48,17 +48,30 @@
 
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer0"
-	item_state = "electronic"
+	item_state = "lightreplacer"
 
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 2)
 
-	var/max_uses = 32
-	var/uses = 32
+	var/max_uses = 20
+	var/uses = 10
 	var/emagged = 0
 	var/failmsg = ""
 	var/charge = 0
+	var/load_interval = 60
+	var/store_broken = 0//If set, this lightreplacer will suck up and store broken bulbs
+	var/max_stored = 10
+
+/obj/item/device/lightreplacer/advanced
+	store_broken = 1
+	load_interval = 10
+	max_uses = 30
+	uses = 0 //Starts empty
+	name = "advanced light replacer"
+	desc = "A specialised light replacer which stores more lights and refills faster from boxes."
+	icon_state = "adv_lightreplacer"
+	item_state = "adv_lightreplacer"
 
 /obj/item/device/lightreplacer/New()
 	failmsg = "The [name]'s refill light blinks red."
@@ -66,7 +79,9 @@
 
 /obj/item/device/lightreplacer/examine(mob/user)
 	if(..(user, 2))
-		to_chat(user, "It has [uses] light\s remaining.")
+		to_chat(usr, "It has [uses] light\s remaining.")
+		if (store_broken)
+			to_chat(usr, "It is storing [stored()]/[max_stored] broken light\s.")
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
@@ -74,25 +89,76 @@
 		if(uses >= max_uses)
 			to_chat(user, "<span class='warning'>[src.name] is full.</span>")
 			return
-		else if(G.use(1))
-			AddUses(16) //Autolathe converts 1 sheet into 16 lights.
+		else if(G.use(2))
+			AddUses(2)
+			if (prob(50))
+				AddUses(1)
 			to_chat(user, "<span class='notice'>You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>")
 			return
 		else
-			to_chat(user, "<span class='warning'>You need one sheet of glass to replace lights.</span>")
+			to_chat(user, "<span class='warning'>You need 5 sheets of glass to replace lights.</span>")
 
 	if(istype(W, /obj/item/weapon/light))
 		var/obj/item/weapon/light/L = W
 		if(L.status == 0) // LIGHT OKAY
 			if(uses < max_uses)
 				AddUses(1)
-				to_chat(user, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
+				to_chat(usr, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
 				user.drop_item()
 				qdel(L)
 				return
 		else
 			to_chat(user, "You need a working light.")
 			return
+
+/obj/item/device/lightreplacer/afterattack(var/atom/target, var/mob/living/user, proximity, params)
+	if (istype(target, /obj/item/weapon/storage/box))
+		if (box_contains_lights(target))
+			load_lights_from_box(target, user)
+		else
+			to_chat(usr, "This box has no bulbs in it!")
+
+
+/obj/item/device/lightreplacer/proc/box_contains_lights(var/obj/item/weapon/storage/box/box)
+	for (var/obj/item/weapon/light/L in box.contents)
+		if (L.status == 0)
+			return 1
+	return 0
+
+
+/obj/item/device/lightreplacer/proc/load_lights_from_box(var/obj/item/weapon/storage/box/box, var/mob/user)
+	var/boxstartloc = box.loc
+	var/ourstartloc = src.loc
+	user.visible_message("<span class='notice'>[user] starts loading lights from the [box] into their [src]</span>", "<span class='notice'>You start loading lights from the [box] into the [src]</span>")
+	while (uses < max_uses)
+		var/bulb = null
+		for (var/obj/item/weapon/light/L in box.contents)
+			if (L.status == 0)
+				bulb = L
+				break
+
+		if (!bulb)
+			to_chat(usr, "<span class='warning'>There are no more working lights left in the box!</span>")
+			return
+
+		if (do_after(user, load_interval, needhand = 0) && boxstartloc == box.loc && ourstartloc == src.loc)
+			uses++
+			to_chat(usr, "<span class='notice'>Light loaded: [uses]/[max_uses]</span>")
+			playsound(src.loc, 'sound/machines/click.ogg', 20, 1)
+			box.remove_from_storage(bulb,get_turf(box))
+			qdel(bulb)
+		else
+			to_chat(usr, "<span class='warning'>You need to keep the [src] close to the box!</span>")
+			return
+
+	to_chat(usr, "<span class='notice'>The [src]'s refill light shines a solid green, indicating it's full and ready to go!</span>")
+
+/obj/item/device/lightreplacer/proc/stored()
+	var/count = 0
+	for (var/obj/item/weapon/light/L in src)
+		count++
+
+	return count
 
 /obj/item/device/lightreplacer/attack_self(mob/user)
 	/* // This would probably be a bit OP. If you want it though, uncomment the code.
@@ -140,7 +206,6 @@
 		var/obj/item/weapon/light/L = new target.light_type()
 		L.rigged = emagged
 		target.insert_bulb(L)
-
 
 /obj/item/device/lightreplacer/emag_act(var/remaining_charges, var/mob/user)
 	emagged = !emagged

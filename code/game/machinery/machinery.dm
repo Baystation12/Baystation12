@@ -108,6 +108,19 @@ Class Procs:
 	var/idle_power_usage = 0
 	var/active_power_usage = 0
 	var/power_channel = EQUIP //EQUIP, ENVIRON or LIGHT
+	/* List of types that should be spawned as component_parts for this machine.
+		Structure:
+			type -> num_objects
+
+		num_objects is optional, and will be treated as 1 if omitted.
+
+		example:
+		component_types = list(
+			/obj/foo/bar,
+			/obj/baz = 2
+		)
+	*/
+	var/list/component_types
 	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
 	var/panel_open = 0
@@ -116,10 +129,24 @@ Class Procs:
 	var/clicksound			// sound played on succesful interface use by a carbon lifeform
 	var/clickvol = 40		// sound played on succesful interface use
 
-/obj/machinery/Initialize(mapload, d=0)
+/obj/machinery/Initialize(mapload, d=0, populate_components = TRUE)
 	. = ..()
 	if(d)
 		set_dir(d)
+
+	if (populate_components && component_types)
+		component_parts = list()
+		for (var/type in component_types)
+			var/count = component_types[type]
+			if (count > 1)
+				for (var/i in 1 to count)
+					component_parts += new type(src)
+			else
+				component_parts += new type(src)
+
+		if(component_parts.len)
+			RefreshParts()
+
 	START_PROCESSING(SSmachines, src)
 
 /obj/machinery/Destroy()

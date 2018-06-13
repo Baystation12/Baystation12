@@ -24,10 +24,10 @@
 	desc = "Blueprints of the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
 
 /obj/item/blueprints/attack_self(mob/M as mob)
-	if (!istype(M,/mob/living/carbon/human))
+	if (!ishuman(M))
 		to_chat(M, "This stack of blue paper means nothing to you.")//monkeys cannot into projecting
-
 		return
+	add_fingerprint(M)
 	interact()
 	return
 

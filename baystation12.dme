@@ -1553,6 +1553,7 @@
 #include "code\modules\mining\machine_processing.dm"
 #include "code\modules\mining\machine_stacking.dm"
 #include "code\modules\mining\machine_unloading.dm"
+#include "code\modules\mining\machine_vending.dm"
 #include "code\modules\mining\mine_items.dm"
 #include "code\modules\mining\mine_turfs.dm"
 #include "code\modules\mining\mint.dm"

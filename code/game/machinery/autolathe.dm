@@ -25,20 +25,16 @@
 
 	var/datum/wires/autolathe/wires = null
 
+	component_types = list(
+		/obj/item/weapon/circuitboard/autolathe,
+		/obj/item/weapon/stock_parts/matter_bin = 3,
+		/obj/item/weapon/stock_parts/manipulator,
+		/obj/item/weapon/stock_parts/console_screen
+	)
 
-/obj/machinery/autolathe/New()
-
-	..()
+/obj/machinery/autolathe/Initialize()
+	. = ..()
 	wires = new(src)
-	//Create parts for lathe.
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/autolathe(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	RefreshParts()
 
 /obj/machinery/autolathe/Destroy()
 	qdel(wires)
@@ -284,10 +280,11 @@
 	..()
 	var/mb_rating = 0
 	var/man_rating = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/MB in component_parts)
-		mb_rating += MB.rating
-	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
-		man_rating += M.rating
+	for(var/obj/item/weapon/stock_parts/P in component_parts)
+		if(ismatterbin(P))
+			mb_rating += P.rating
+		else if(ismanipulator(P))
+			man_rating += P.rating
 
 	storage_capacity[DEFAULT_WALL_MATERIAL] = mb_rating  * 25000
 	storage_capacity["glass"] = mb_rating  * 12500

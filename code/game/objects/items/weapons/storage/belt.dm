@@ -207,3 +207,97 @@
 /obj/item/weapon/storage/belt/waistpack/big/New()
 	..()
 	slowdown_per_slot[slot_belt] = 3
+
+/obj/item/weapon/storage/belt/mining
+	name = "explorer's belt"
+	desc = "A versatile chest rig, cherished by miners and hunters alike."
+	icon_state = "explorer"
+	item_state = "explorer"
+	storage_slots = 9
+	w_class = 4
+	max_w_class = 4 //Pickaxes are big.
+	can_hold = list(/obj/item/weapon/crowbar,
+		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/weldingtool,
+		/obj/item/weapon/wirecutters,
+		/obj/item/weapon/wrench,
+		/obj/item/weapon/resonator,
+		/obj/item/weapon/oreportal,
+		/obj/item/weapon/oremagnet,
+		/obj/item/weapon/ore_radar,
+		/obj/item/device/flashlight,
+		/obj/item/stack/cable_coil,
+		/obj/item/stack/flag,
+		/obj/item/device/analyzer,
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/device/radio,
+		/obj/item/clothing/gloves,
+		/obj/item/clothing/glasses/material,
+		/obj/item/weapon/pickaxe,
+		/obj/item/weapon/shovel,
+		/obj/item/stack/material/animalhide,
+		/obj/item/weapon/flame/lighter,
+		/obj/item/weapon/storage/fancy/cigarettes,
+		/obj/item/weapon/reagent_containers/food/drinks/bottle,
+		/obj/item/stack/medical,
+		/obj/item/weapon/reagent_containers/hypospray,
+		/obj/item/device/gps,
+		/obj/item/weapon/storage/ore,
+		/obj/item/weapon/reagent_containers/pill,
+		/obj/item/weapon/storage/pill_bottle,
+		/obj/item/weapon/ore,
+		/obj/item/weapon/reagent_containers/food/drinks,
+		/obj/item/weapon/storage/plants,
+		)
+
+/obj/item/weapon/storage/belt/military
+	name = "military belt"
+	desc = "A syndicate belt designed to be used by boarding parties. Its style is modeled after the hardsuits they wear."
+	icon_state = "militarybelt"
+	item_state = "militarybelt"
+	storage_slots = 9 //same as a combat belt now
+	max_w_class = 3
+	max_storage_space  = 28
+	can_hold = list(
+		/obj/item/weapon/grenade,
+		/obj/item/weapon/handcuffs,
+		/obj/item/device/flash,
+		/obj/item/clothing/glasses,
+		/obj/item/ammo_casing/shotgun,
+		/obj/item/ammo_magazine,
+		/obj/item/weapon/melee/baton,
+		/obj/item/device/flashlight,
+		/obj/item/device/pda,
+		/obj/item/device/radio/headset,
+		/obj/item/weapon/melee,
+		/obj/item/weapon/shield/energy,
+		/obj/item/weapon/pinpointer,
+		/obj/item/weapon/plastique,
+		/obj/item/weapon/gun/projectile/pistol,
+		/obj/item/weapon/gun/energy/crossbow,
+		/obj/item/ammo_casing/a145,
+		/obj/item/device/radio/uplink,
+		/obj/item/weapon/card/emag,
+		/obj/item/device/multitool/hacktool,
+		/obj/item/stack/telecrystal
+		)
+
+/obj/item/weapon/storage/belt/janitor
+	name = "janibelt"
+	desc = "A belt used to hold most janitorial supplies."
+	icon_state = "janibelt"
+	item_state = "janibelt"
+	storage_slots = 6
+	w_class = 3
+	max_w_class = 3
+	can_hold = list(
+		/obj/item/weapon/grenade/chem_grenade/cleaner,
+		/obj/item/device/lightreplacer,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/reagent_containers/spray,
+		/obj/item/weapon/soap,
+		/obj/item/weapon/storage/bag/trash,
+		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/wrench,
+		/obj/item/weapon/crowbar
+		)
