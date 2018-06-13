@@ -22,3 +22,4 @@
 
 /obj/effect/landmark/dropship_land_point/frigate_hangar/south
 	name = "UNSC Frigate Hangar - South"
+

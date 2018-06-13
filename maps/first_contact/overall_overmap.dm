@@ -22,7 +22,7 @@
 	name = "CCV Slow But Steady"
 	desc = "A cargo freighter with a safer, isolated design."
 
-	icon = 'maps/first_contact/freighter.dmi'
+	icon = 'maps/first_contact/slowbutsteady.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 
@@ -53,12 +53,6 @@
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/comet
 	deck_gun_area = /area/om_ships/comet
-
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/frigate
-	deck_gun_area = /area/unscfrigate/portguns
-
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/frigate
-	deck_gun_area = /area/unscfrigate/starboardguns
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/comet
 	deck_gun_area = /area/om_ships/comet/cometrockets
