@@ -1,0 +1,4 @@
+author: "ElRobusto"
+delete-after: True
+changes: 
+  - tweak: "Cuts the Vox space suit movement penalty by half."
