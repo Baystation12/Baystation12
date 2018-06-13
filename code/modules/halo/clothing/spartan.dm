@@ -1,13 +1,13 @@
 
 /obj/item/clothing/head/helmet/spartan
-	name = "MJOLNIR Powered Assault Armor Helmet"
+	name = "MJOLNIR Powered Assault Armor Helmet Mark IV"
 	desc = "Ave, Imperator, morituri te salutant."
 	icon = 'code/modules/halo/clothing/spartan.dmi'
 	icon_state = "markIVhelm"
 	icon_override = 'code/modules/halo/clothing/mob_spartanhelm.dmi'
 	item_state_slots = list(
-		slot_l_hand_str = "spartan5",
-		slot_r_hand_str = "spartan5",
+		slot_l_hand_str = "spartan5_l",
+		slot_r_hand_str = "spartan5_r",
 		)
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
@@ -33,7 +33,7 @@
 	icon_state = "markIVhelmR"
 
 /obj/item/clothing/suit/armor/special/spartan
-	name = "MJOLNIR Powered Assault Armor Mark V"
+	name = "MJOLNIR Powered Assault Armor Mark IV"
 	desc = "a technologically-advanced combat exoskeleton system designed to vastly improve the strength, speed, agility, reflexes and durability of a SPARTAN-II, supersoldier in the field of combat."
 	icon = 'code/modules/halo/clothing/spartan.dmi'
 	icon_state = "markIVmale"
@@ -83,3 +83,63 @@
 	item_state = "blackutility"
 	worn_state = null
 	canremove = 0
+
+
+
+//*** SUIT VARIANTS ***//
+
+/obj/item/clothing/suit/armor/special/spartan/mkv
+	name = "MJOLNIR Powered Assault Armor Mark V"
+	icon_state = "Mjolnir Powered Assault Armor/Mark V Male"
+
+/obj/item/clothing/suit/armor/special/spartan/mkv/gungnir
+	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant"
+	icon_state = "Mjolnir Powered Assault Armor/Mark V Gungir"
+
+/obj/item/clothing/suit/armor/special/spartan/mkv/mistermann
+	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant (customised)"
+	icon_state = "Mjolnir Powered Assault Armor/Mark V Male MisterMann"
+
+/obj/item/clothing/suit/armor/special/spartan/mkvi_grenadier
+	name = "MJOLNIR Powered Assault Armor Mark VI Grenadier variant (customised)"
+	icon_state = "Mjolnir Powered Assault Armor/Mark VI grenadier"
+
+
+
+//*** HELMET VARIANTS ***//
+
+/obj/item/clothing/head/helmet/spartan/mkv
+	name = "MJOLNIR Powered Assault Armor Helmet Mark V"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V"
+
+/obj/item/clothing/head/helmet/spartan/mkv/gungnir
+	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Gungir"
+
+/obj/item/clothing/head/helmet/spartan/mkv/mistermann
+	name = "MJOLNIR Powered Assault Armor Helmet Mark V (customised)"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V MisterMann"
+
+/obj/item/clothing/head/helmet/spartan/mkv/mistermann_gungnir
+	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant (customised)"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Gungir MisterMann"
+
+/obj/item/clothing/head/helmet/spartan/mkv/airassault
+	name = "MJOLNIR Powered Assault Armor Mark V Air Assault variant"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Airassault"
+
+/obj/item/clothing/head/helmet/spartan/mkv/eva
+	name = "MJOLNIR Powered Assault Armor Mark V EVA variant"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V EVA"
+
+/obj/item/clothing/head/helmet/spartan/mkv/commando
+	name = "MJOLNIR Powered Assault Armor Mark V Commando variant"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Commando"
+
+/obj/item/clothing/head/helmet/spartan/mkv/noble
+	name = "MJOLNIR Powered Assault Armor Mark V Noble variant"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark V Noble"
+
+/obj/item/clothing/head/helmet/spartan/mkvi_eva
+	name = "MJOLNIR Powered Assault Helmet Mark VI EVA variant"
+	icon_state = "Mjolnir Powered Assault Helmet/Mark VI EVA"

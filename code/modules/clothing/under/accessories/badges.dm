@@ -41,11 +41,11 @@
 
 //.Holobadges.
 /obj/item/clothing/accessory/badge/holo
-	name = "holobadge"
-	desc = "This glowing blue badge marks the holder as a member of corporate security."
+	name = "LED Badge"
+	desc = "This glowing blue badge marks the holder as a member of the GCPD."
 	icon_state = "holobadge"
 	item_state = "holobadge"
-	badge_string = "NanoTrasen Security"
+	badge_string = "Geminus City Police Department"
 	var/emagged //Emagging removes Sec check.
 
 /obj/item/clothing/accessory/badge/holo/cord
@@ -124,7 +124,7 @@
 	desc = "Plain identification tags made from a durable metal. Stamped with a variety of informational details."
 	gender = PLURAL
 	icon_state = "tags"
-	badge_string = "Sol Central Government"
+	badge_string = "UNSC"
 	slot_flags = SLOT_MASK | SLOT_TIE
 
 /obj/item/clothing/accessory/badge/defenseintel

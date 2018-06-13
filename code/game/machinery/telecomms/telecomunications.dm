@@ -36,6 +36,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/hide = 0				// Is it a hidden machine?
 	var/listening_level = 0	// 0 = auto set in New() - this is the z level that the machine is listening to.
 
+	var/signal_range = 0 //The range in overmap tiles.
+
 
 /obj/machinery/telecomms/proc/relay_information(datum/signal/signal, filter, copysig, amount = 20)
 	// relay signal to all linked machinery that are of type [filter]. If signal has been sent [amount] times, stop sending
@@ -267,6 +269,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		return
 	if(!check_receive_level(signal))
 		return
+	if(signal.data["done"] == 1)
+		return
 
 	if(signal.transmission_method == 2)
 
@@ -393,7 +397,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	name = "Bus Mainframe"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "bus"
-	desc = "A mighty piece of hardware used to send massive amounts of data quickly."
+	desc = "A mighty piece of hardware used to send massive amounts of data quickly. Also has an integrated signal-relay."
 	density = 1
 	anchored = 1
 	use_power = 1

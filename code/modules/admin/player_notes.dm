@@ -120,6 +120,15 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	note_list << note_keys
 	del(note_list) // savefile, so NOT qdel
 
+	//Report notes to Discord
+	if(config.discord_bot_address != "")
+		var/list/discord_report = list()
+		discord_report["key"] = config.comms_password
+		discord_report["note"] = "New Note for [key]:\n[P.content]\nby [P.author] ([P.rank]) on [P.timestamp]"
+		discord_report["ckey"] = "[key]"
+		//Send the note
+		world.Export("[config.discord_bot_address]/newnote?[list2params(discord_report)]")
+
 
 /proc/notes_del(var/key, var/index)
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")

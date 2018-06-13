@@ -115,9 +115,9 @@
 "ck" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "cl" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
 "cm" = (/obj/machinery/door/blast/regular,/turf/simulated/floor,/area/asteroid_listening/Interiorlevel1{tag = "icon-anosample"; icon_state = "anosample"; requires_power = 0})
-"cn" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/space)
 "co" = (/obj/effect/overmap/sector/exo_listen,/turf/simulated/floor/holofloor/space,/area/space)
 "cp" = (/obj/effect/landmark/map_data{desc = "Research base Sublevel"; height = 2},/turf/simulated/floor/holofloor/space,/area/space)
+"OO" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/simulated/floor/asteroid/planet,/area/asteroid_listening)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -131,7 +131,7 @@ aaaaaaaaababababababaaaaabababaaaaaaaaaaaaaaaeaeaeaeaeaaaaafababaaaaaaaaaaaaaaaa
 aaaaabababababahabaaaaaaababaaaaaaaaababaeaeaeaeaeaeaeaaaaabaaaaaaaaaaaaaaaaaaaaababababababaaaaaaaa
 aaaaafaeaeaeababababababaiabababababababajajajajajaeaeabababababaaaaaaaaaaaaaaaaabagababababaaaaaaaa
 aaaaabaeaeaeaeaeabaeababababababafababaeajajajajajajajabakabababaaaaaaabababaaaaababababaaaaaaaaaaaa
-aaababaeaeaeaeaeaeaeaeaeaeaeaeababababaeajajajajajajajabababababaaaaabababababababababaaaaaaaaaaaaaa
+aaababaeaeaeaeaeaeaeaeaeaeaeaeababababaeajajajajajajajababOOababaaaaabababababababababaaaaaaaaaaaaaa
 aaababaeaeaeaeaeaeaeaeaeaeaeaeabababagabalalalajajajabamabafabababababaeaeaeaeababababaaaaaaaaaaaaaa
 aaakabaeaeaeaeaeaeaeaeaeaeaeaeababababaeajajanalabababababaoababaiababaeaeaeaeaeaeabababafaaaaaaaaaa
 aaaaabaeaeaeaeaeaeaeaeaeaeabababababaeaeajajajajabagabaeaeaeaeabaeaeaeaeaeaeaeaeaeaeaeababalaaaaaaaa
@@ -166,8 +166,9 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeaeaeaeaeaeaeaeaeaeaeaeababaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaeaeaeaeaeaeaeabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaaaaaaababababaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-cncnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-cocnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aacnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-cpcnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+coaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+cpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

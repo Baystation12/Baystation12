@@ -1157,8 +1157,6 @@
 			return global.turbolift_controller;
 		if("turbolifts")
 			return global.turbolifts;
-		if("turfs")
-			return global.turfs;
 		if("turret_icons")
 			return global.turret_icons;
 		if("uniqueness_repository")
@@ -1223,7 +1221,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -2380,8 +2378,6 @@
 			global.turbolift_controller=newval;
 		if("turbolifts")
 			global.turbolifts=newval;
-		if("turfs")
-			global.turfs=newval;
 		if("turret_icons")
 			global.turret_icons=newval;
 		if("uniqueness_repository")
@@ -2446,7 +2442,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",

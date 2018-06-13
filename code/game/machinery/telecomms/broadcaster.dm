@@ -29,7 +29,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if(signal.data["reject"])
 		return
 
-	if(signal.data["message"])
+	if(signal.data["message"] && signal.data["done"] != 1)
 
 		// Prevents massive radio spam
 		signal.data["done"] = 1 // mark the signal as being broadcasted
@@ -127,6 +127,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	if(!on) // has to be on to receive messages
 		return
+	if(signal.data["done"] == 1)
+		return
 
 	if(is_freq_listening(signal)) // detect subspace signals
 
@@ -144,23 +146,22 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		/* ###### Broadcast a message using signal.data ###### */
 
 		var/datum/radio_frequency/connection = signal.data["connection"]
+		if(isnull(connection))
+			return
 
-		if(connection.frequency in ANTAG_FREQS) // if antag broadcast, just
+		Broadcast_Message(signal.data["connection"], signal.data["mob"],
+						  signal.data["vmask"], signal.data["vmessage"],
+						  signal.data["radio"], signal.data["message"],
+						  signal.data["name"], signal.data["job"],
+						  signal.data["realname"], signal.data["vname"],, signal.data["compression"], signal.data["level"], connection.frequency,
+						  signal.data["verb"], signal.data["language"])
+		if(intercept)
 			Broadcast_Message(signal.data["connection"], signal.data["mob"],
-							  signal.data["vmask"], signal.data["vmessage"],
-							  signal.data["radio"], signal.data["message"],
-							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
-							  signal.data["verb"], signal.data["language"])
-		else
-			if(intercept)
-				Broadcast_Message(signal.data["connection"], signal.data["mob"],
-							  signal.data["vmask"], signal.data["vmessage"],
-							  signal.data["radio"], signal.data["message"],
-							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency,
-							  signal.data["verb"], signal.data["language"])
-
+						  signal.data["vmask"], signal.data["vmessage"],
+						  signal.data["radio"], signal.data["message"],
+						  signal.data["name"], signal.data["job"],
+						  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], signal.data["level"], connection.frequency,
+						  signal.data["verb"], signal.data["language"])
 
 
 /**
@@ -298,29 +299,37 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			heard_gibberish += R
 			continue
 
+		//Inteference due to jammers of some sort.
+		var/signal_jammed = 0
+		for(var/obj/machinery/telecomms_jammers/tj in telecomms_list)
+			if(get_dist(tj,R) <= tj.jam_range)
+				if(prob(tj.jam_chance))
+					compression += tj.jam_power
+					signal_jammed = 1
+				break
+
 		// --- Can understand the speech ---
+		if(!signal_jammed)//Only deal with this if the signal hasn't been jammed beforehand
+			if (!M || R.say_understands(M))
 
-		if (!M || R.say_understands(M))
+				// - Not human or wearing a voice mask -
+				if (!M || !ishuman(M) || vmask)
+					heard_masked += R
 
-			// - Not human or wearing a voice mask -
-			if (!M || !ishuman(M) || vmask)
-				heard_masked += R
+				// - Human and not wearing voice mask -
+				else
+					heard_normal += R
 
-			// - Human and not wearing voice mask -
+			// --- Can't understand the speech ---
+
 			else
-				heard_normal += R
+				// - The speaker has a prespecified "voice message" to display if not understood -
+				if (vmessage)
+					heard_voice += R
 
-		// --- Can't understand the speech ---
-
-		else
-			// - The speaker has a prespecified "voice message" to display if not understood -
-			if (vmessage)
-				heard_voice += R
-
-			// - Just display a garbled message -
-			else
-				heard_garbled += R
-
+				// - Just display a garbled message -
+				else
+					heard_garbled += R
 
   /* ###### Begin formatting and sending the message ###### */
 	if (length(heard_masked) || length(heard_normal) || length(heard_voice) || length(heard_garbled) || length(heard_gibberish))
