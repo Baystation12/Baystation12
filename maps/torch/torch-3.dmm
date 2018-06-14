@@ -6916,10 +6916,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "pb" = (
-/obj/machinery/door/airlock/engineering{
-	name = "Engineering Hard Storage";
-	req_access = list(11)
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -6928,6 +6924,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/multi_tile/engineering{
+	name = "Engineering Hard Storage";
+	req_access = list(11)
+	},
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage)
 "pc" = (
@@ -7046,10 +7046,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/seconddeck)
 "po" = (
-/obj/machinery/door/airlock/engineering{
-	name = "Engineering Hard Storage";
-	req_access = list(11)
-	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/plating,
 /area/engineering/hardstorage)

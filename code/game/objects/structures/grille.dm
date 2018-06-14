@@ -133,6 +133,7 @@
 			anchored = !anchored
 			user.visible_message("<span class='notice'>[user] [anchored ? "fastens" : "unfastens"] the grille.</span>", \
 								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.</span>")
+			update_connections(1)
 			update_icon()
 			return
 
@@ -142,24 +143,25 @@
 		if(!ST.material.created_window)
 			return 0
 
-		var/dir_to_set = 1
-		if(loc == user.loc)
-			dir_to_set = user.dir
-		else
-			if( ( x == user.x ) || (y == user.y) ) //Only supposed to work for cardinal directions.
-				if( x == user.x )
-					if( y > user.y )
-						dir_to_set = 2
-					else
-						dir_to_set = 1
-				else if( y == user.y )
-					if( x > user.x )
-						dir_to_set = 8
-					else
-						dir_to_set = 4
+		var/dir_to_set = 5
+		if(!on_frame)
+			if(loc == user.loc)
+				dir_to_set = user.dir
 			else
-				to_chat(user, "<span class='notice'>You can't reach.</span>")
-				return //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
+				if( ( x == user.x ) || (y == user.y) ) //Only supposed to work for cardinal directions.
+					if( x == user.x )
+						if( y > user.y )
+							dir_to_set = 2
+						else
+							dir_to_set = 1
+					else if( y == user.y )
+						if( x > user.x )
+							dir_to_set = 8
+						else
+							dir_to_set = 4
+				else
+					to_chat(user, "<span class='notice'>You can't reach.</span>")
+					return //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
 		for(var/obj/structure/window/WINDOW in loc)
 			if(WINDOW.dir == dir_to_set)
 				to_chat(user, "<span class='notice'>There is already a window facing this way there.</span>")
