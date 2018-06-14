@@ -1,6 +1,6 @@
 // At minimum every mob has a hear_say proc.
 
-/mob/proc/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/proc/hear_say(var/message, var/verb = "says", var/datum/language/language, var/alt_name = "", var/style, var/mob/speaker, var/sound/speech_sound, var/sound_vol)
 	if(!client)
 		return
 
@@ -18,7 +18,7 @@
 			return
 
 		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
-			italics = 1
+			style = SAY_STYLE_ITALIC
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
 	if(sleeping || stat == UNCONSCIOUS)
@@ -49,16 +49,13 @@
 		var/mob/living/carbon/human/H = speaker
 		speaker_name = H.GetVoice()
 
-	if(italics)
-		message = "<i>[message]</i>"
-
 	var/track = null
 	if(isghost(src))
 		if(speaker_name != speaker.real_name && speaker.real_name)
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		track = "([ghost_follow_link(speaker, src)]) "
 		if(get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH && (speaker in view(src)))
-			message = "<b>[message]</b>"
+			style = SAY_STYLE_BOLD
 
 	if(is_deaf())
 		if(!language || !(language.flags & INNATE)) // INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
@@ -70,7 +67,7 @@
 		if(language)
 			var/nverb = null
 			if(!say_understands(speaker,language) || language.name == LANGUAGE_GALCOM) //Check to see if we can understand what the speaker is saying. If so, add the name of the language after the verb. Don't do this for Galactic Common.
-				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
+				on_hear_say("[style]<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
 			else //Check if the client WANTS to see language names.
 				switch(src.get_preference_value(/datum/client_preference/language_display))
 					if(GLOB.PREF_FULL) // Full language name
@@ -79,10 +76,10 @@
 						nverb = "[verb] ([language.shorthand])"
 					if(GLOB.PREF_OFF)//Regular output
 						nverb = verb
-				on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, nverb)]</span>")
+				on_hear_say("[style]<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, nverb)]</span>")
 
 		else
-			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
+			on_hear_say("[style]<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message body SayStyle'>\"[capitalize(message)]\"</span></span>")
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)

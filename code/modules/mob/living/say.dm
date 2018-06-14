@@ -10,6 +10,7 @@ var/list/department_radio_keys = list(
 	  ":e" = "Engineering", ".e" = "Engineering",
 	  ":s" = "Security",	".s" = "Security",
 	  ":w" = "whisper",		".w" = "whisper",
+	  ":b" = "big",         ".b" = "big",
 	  ":t" = "Mercenary",	".t" = "Mercenary",
 	  ":x" = "Raider",		".x" = "Raider",
 	  ":u" = "Supply",		".u" = "Supply",
@@ -28,6 +29,7 @@ var/list/department_radio_keys = list(
 	  ":E" = "Engineering",	".E" = "Engineering",
 	  ":S" = "Security",	".S" = "Security",
 	  ":W" = "whisper",		".W" = "whisper",
+	  ":B" = "big",         ".B" = "big",
 	  ":T" = "Mercenary",	".T" = "Mercenary",
 	  ":X" = "Raider",		".X" = "Raider",
 	  ":U" = "Supply",		".U" = "Supply",
@@ -212,16 +214,19 @@ proc/get_radio_key_from_channel(var/channel)
 	var/sound/speech_sound = handle_v[1]
 	var/sound_vol = handle_v[2]
 
-	var/italics = 0
+	var/style
 	var/message_range = world.view
 
+	if((message_mode == "big") && skill_check(SKILL_MANAGEMENT, SKILL_EXPERT))
+		style = SAY_STYLE_BIG
+
 	if(whispering)
-		italics = 1
+		style = SAY_STYLE_ITALIC
 		message_range = 1
 
 	//speaking into radios
 	if(used_radios.len)
-		italics = 1
+		style = SAY_STYLE_ITALIC
 		message_range = 1
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
@@ -256,7 +261,7 @@ proc/get_radio_key_from_channel(var/channel)
 			message_range = 1
 
 		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
-			italics = 1
+			style = SAY_STYLE_ITALIC
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
 		get_mobs_and_objs_in_view_fast(T, message_range, listening, listening_obj, /datum/client_preference/ghost_ears)
@@ -281,7 +286,7 @@ proc/get_radio_key_from_channel(var/channel)
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/M in listening)
 		if(M)
-			M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+			M.hear_say(message, verb, speaking, alt_name, style, src, speech_sound, sound_vol)
 			if(M.client)
 				speech_bubble_recipients += M.client
 
@@ -302,7 +307,7 @@ proc/get_radio_key_from_channel(var/channel)
 		for(var/mob/M in eavesdroping)
 			if(M)
 				show_image(M, speech_bubble)
-				M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+				M.hear_say(stars(message), verb, speaking, alt_name, style, src, speech_sound, sound_vol)
 
 		for(var/obj/O in eavesdroping)
 			spawn(0)

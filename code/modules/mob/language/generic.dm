@@ -6,7 +6,7 @@
 	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
 
 /datum/language/noise/format_message(message, verb)
-	return "<span class='message'><span class='[colour]'>[message]</span></span>"
+	return "<span class='message [colour] SayStyle'>[message]</span>"
 
 /datum/language/noise/format_message_plain(message, verb)
 	return message
