@@ -1,0 +1,7 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "The chem grinder is dangerous to use at \"Unskilled\" in Chemistry and will lose some ingredients depending on skill level."
+  - rscadd: "The chem dispenser will give inaccurate amounts of ingredients or add extra contaminating ingredients when below skill \"Trained\" (in Chemistry or Cooking, depending on dispenser)  Can be slightly dangerous."
+  - rscadd: "The chem master now has two modes. \"Quick\" will move the correct amount of ingredients from beaker to buffer, but also add contaminants (depending on skill). \"Thorough\" will only move the desired ingredient, but incur losses (depending on skill). Skill checked is Chemistry for chem master, Cooking for Condimaster."
+  - rscadd: "Moving ingredients from buffer to waste or beaker acts like on \"Quick\" mode."
