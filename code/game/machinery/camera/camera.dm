@@ -75,6 +75,8 @@
 	assembly = new(src)
 	assembly.state = 4
 
+	update_icon()
+
 	/* // Use this to look for cameras that have the same c_tag.
 	for(var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
@@ -297,11 +299,11 @@
 
 	var/turf/T = get_step(get_turf(src), turn(src.dir, 180))
 	if(istype(T, /turf/simulated/wall))
-		if(src.dir == NORTH)
+		if(dir == SOUTH)
 			pixel_y = 21
-		else if(src.dir == EAST)
+		else if(dir == WEST)
 			pixel_x = 10
-		else if(src.dir == WEST)
+		else if(dir == EAST)
 			pixel_x = -10
 
 	if (!status || (stat & BROKEN))

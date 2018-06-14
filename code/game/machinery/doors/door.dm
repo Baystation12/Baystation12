@@ -277,6 +277,7 @@
 
 	if(src.density)
 		do_animate("deny")
+	update_icon()
 	return
 
 /obj/machinery/door/emag_act(var/remaining_charges)
@@ -501,10 +502,10 @@
 			success = 1
 			if(propagate)
 				var/turf/simulated/wall/W = T
-				W.update_connections()
+				W.update_connections(1)
 				W.update_icon()
 
-		else if( istype(T, /turf/simulated/shuttle/wall))
+		else if( istype(T, /turf/simulated/shuttle/wall) ||  istype(T, /turf/unsimulated/wall))
 			success = 1
 		else
 			for(var/obj/O in T)

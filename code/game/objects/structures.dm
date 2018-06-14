@@ -71,7 +71,7 @@
 		var/turf/simulated/wall/W = T
 		if(istype(W))
 			if(propagate)
-				W.update_connections()
+				W.update_connections(1)
 				W.update_icon()
 			dirs += get_dir(src, T)
 			other_dirs += get_dir(src, T)
