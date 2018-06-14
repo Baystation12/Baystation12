@@ -33,6 +33,9 @@
 		bcell = null
 	return ..()
 
+/obj/item/weapon/melee/baton/get_cell()
+	return bcell
+
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
 		if(bcell.checked_use(chrgdeductamt))
