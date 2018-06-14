@@ -32,26 +32,14 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		if(!powered())
 			to_chat(user, "<span class='warning'>The [name] blinks red as you try to insert the item!</span>")
 			return
-		if (istype(G, /obj/item/weapon/gun/energy/gun/nuclear) || istype(G, /obj/item/weapon/gun/energy/crossbow))
-			to_chat(user, "<span class='notice'>Your gun's recharge port was removed to make room for a miniaturized reactor.</span>")
+		if (istype(G, /obj/item/weapon/gun/energy/))
+			var/obj/item/weapon/gun/energy/E = G
+			if(E.self_recharge)
+				to_chat(user, "<span class='notice'>You can't find a charging port on \the [E].</span>")
+				return
+		if(!G.get_cell())
+			to_chat(user, "This device does not have a battery installed.")
 			return
-		if (istype(G, /obj/item/weapon/gun/energy/staff))
-			return
-		if(istype(G, /obj/item/modular_computer))
-			var/obj/item/modular_computer/C = G
-			if(!C.battery_module)
-				to_chat(user, "This device does not have a battery installed.")
-				return
-		if(istype(G, /obj/item/device/suit_sensor_jammer))
-			var/obj/item/device/suit_sensor_jammer/J = G
-			if(!J.bcell)
-				to_chat(user, "This device does not have a battery installed.")
-				return
-		if(istype(G, /obj/item/weapon/gun/magnetic/railgun))
-			var/obj/item/weapon/gun/magnetic/railgun/RG = G
-			if(!RG.cell)
-				to_chat(user, "This device does not have a battery installed.")
-				return
 
 		if(user.unEquip(G))
 			G.forceMove(src)
@@ -87,34 +75,8 @@ obj/machinery/recharger/Process()
 		update_use_power(1)
 		icon_state = icon_state_idle
 	else
-		var/cell = charging
-		if(istype(charging, /obj/item/device/suit_sensor_jammer))
-			var/obj/item/device/suit_sensor_jammer/J = charging
-			charging = J.bcell
-		else if(istype(charging, /obj/item/weapon/melee/baton))
-			var/obj/item/weapon/melee/baton/B = charging
-			cell = B.bcell
-		else if(istype(charging, /obj/item/modular_computer))
-			var/obj/item/modular_computer/C = charging
-			cell = C.battery_module.battery
-		else if(istype(charging, /obj/item/weapon/gun/energy))
-			var/obj/item/weapon/gun/energy/E = charging
-			cell = E.power_supply
-		else if(istype(charging, /obj/item/weapon/computer_hardware/battery_module))
-			var/obj/item/weapon/computer_hardware/battery_module/BM = charging
-			cell = BM.battery
-		else if(istype(charging, /obj/item/weapon/shield_diffuser))
-			var/obj/item/weapon/shield_diffuser/SD = charging
-			cell = SD.cell
-		else if(istype(charging, /obj/item/weapon/gun/magnetic/railgun))
-			var/obj/item/weapon/gun/magnetic/railgun/RG = charging
-			cell = RG.cell
-		else if(istype(charging, /obj/item/clothing/mask/smokable/ecig))
-			var/obj/item/clothing/mask/smokable/ecig/CIG = charging
-			cell = CIG.cigcell
-
-		if(istype(cell, /obj/item/weapon/cell))
-			var/obj/item/weapon/cell/C = cell
+		var/obj/item/weapon/cell/C = charging.get_cell()
+		if(istype(C))
 			if(!C.fully_charged())
 				icon_state = icon_state_charging
 				C.give(active_power_usage*CELLRATE)
@@ -122,27 +84,15 @@ obj/machinery/recharger/Process()
 			else
 				icon_state = icon_state_charged
 				update_use_power(1)
-			return
 
 obj/machinery/recharger/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN) || !anchored)
 		..(severity)
 		return
-
-	if(istype(charging,  /obj/item/weapon/gun/energy))
-		var/obj/item/weapon/gun/energy/E = charging
-		if(E.power_supply)
-			E.power_supply.emp_act(severity)
-
-	else if(istype(charging, /obj/item/weapon/melee/baton))
-		var/obj/item/weapon/melee/baton/B = charging
-		if(B.bcell)
-			B.bcell.charge = 0
-
-	else if(istype(charging, /obj/item/weapon/gun/magnetic/railgun))
-		var/obj/item/weapon/gun/magnetic/railgun/RG = charging
-		if(RG.cell)
-			RG.cell.charge = 0
+	if(charging)
+		var/obj/item/weapon/cell/C = charging.get_cell()
+		if(istype(C))
+			C.emp_act(severity)
 	..(severity)
 
 obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.

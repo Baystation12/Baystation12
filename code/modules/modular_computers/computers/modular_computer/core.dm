@@ -292,3 +292,7 @@
 		return card_slot.stored_card
 
 /obj/item/modular_computer/proc/update_name()
+
+/obj/item/modular_computer/get_cell()
+	if(battery_module)
+		return battery_module.get_cell()

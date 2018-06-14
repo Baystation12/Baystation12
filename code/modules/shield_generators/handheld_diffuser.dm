@@ -24,6 +24,9 @@
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
+/obj/item/weapon/shield_diffuser/get_cell()
+	return cell
+
 /obj/item/weapon/shield_diffuser/Process()
 	if(!enabled)
 		return

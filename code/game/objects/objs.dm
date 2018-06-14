@@ -157,3 +157,6 @@
 	if(Adjacent(user))
 		add_fingerprint(user)
 	..()
+
+/obj/proc/get_cell()
+	return
