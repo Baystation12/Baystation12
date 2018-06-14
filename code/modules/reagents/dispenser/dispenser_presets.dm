@@ -62,7 +62,6 @@
 	icon_state = "soda_dispenser"
 	ui_title = "Soda Dispenser"
 	accept_drinking = 1
-	core_skill = SKILL_COOKING
 
 /obj/machinery/chemical_dispenser/bar_soft/full
 	spawn_cartridges = list(
@@ -91,7 +90,6 @@
 	icon_state = "booze_dispenser"
 	ui_title = "Booze Dispenser"
 	accept_drinking = 1
-	core_skill = SKILL_COOKING
 
 /obj/machinery/chemical_dispenser/bar_alc/full
 	spawn_cartridges = list(
@@ -121,7 +119,6 @@
 	icon_state = "coffee_dispenser"
 	ui_title = "Coffee Dispenser"
 	accept_drinking = 1
-	core_skill = SKILL_COOKING
 
 /obj/machinery/chemical_dispenser/bar_coffee/full
 	spawn_cartridges = list(

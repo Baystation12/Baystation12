@@ -20,7 +20,6 @@
 	density = 1
 	anchored = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
-	core_skill = SKILL_CHEMISTRY
 
 /obj/machinery/chemical_dispenser/New()
 	..()
@@ -138,7 +137,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/chemical_dispenser/OnTopic(mob/user, href_list)
+/obj/machinery/chemical_dispenser/OnTopic(user, href_list)
 	if(href_list["amount"])
 		amount = round(text2num(href_list["amount"]), 1) // round to nearest 1
 		amount = max(0, min(120, amount)) // Since the user can actually type the commands himself, some sanity checking
@@ -148,17 +147,7 @@
 		var/label = href_list["dispense"]
 		if(cartridges[label] && container && container.is_open_container())
 			var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = cartridges[label]
-			var/mult = 1 + (-0.5 + round(rand(), 0.1))*(user.skill_fail_chance(core_skill, 0.3, SKILL_ADEPT))
-			C.reagents.trans_to(container, amount*mult)
-			var/contaminants_left = rand(0, max(SKILL_ADEPT - user.get_skill_value(core_skill), 0))
-			var/choices = cartridges.Copy()
-			while(length(choices) && contaminants_left)
-				var/chosen_label = pick_n_take(choices)
-				var/obj/item/weapon/reagent_containers/chem_disp_cartridge/choice = cartridges[chosen_label]
-				if(choice == C)
-					continue
-				choice.reagents.trans_to(container, round(rand()*amount/5, 0.1))
-				contaminants_left--
+			C.reagents.trans_to(container, amount)
 			return TOPIC_REFRESH
 		return TOPIC_HANDLED
 
