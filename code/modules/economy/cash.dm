@@ -61,7 +61,7 @@
 			sum -= i
 			num++
 			. += "spacecash[i]"
-	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
+	if(num == 0) // Less than one credit, let's just make it look like 1 for ease
 		. += "spacecash1"
 
 /obj/item/weapon/spacecash/bundle/update_icon()
@@ -76,11 +76,11 @@
 		banknote.transform = M
 		src.overlays += banknote
 
-	src.desc = "They are worth [worth] Thalers."
+	src.desc = "They are worth [worth] credits."
 	if(worth in denominations)
-		src.name = "[worth] Thaler"
+		src.name = "[worth] credit"
 	else
-		src.name = "pile of [worth] thalers"
+		src.name = "pile of [worth] credits"
 
 	if(overlays.len <= 2)
 		w_class = ITEM_SIZE_TINY
@@ -89,22 +89,29 @@
 
 /obj/item/weapon/spacecash/bundle/attack_self()
 	var/amount = input(usr, "How many credits do you want to take out? (0 to [src.worth])", "Take Money", 20) as num
+	var/result = split_off(amount, usr)
+	if(result)
+		usr.put_in_hands(result)
+	else
+		return 0
+
+/obj/item/weapon/spacecash/bundle/proc/split_off(var/amount, var/mob/user)
 	amount = round(Clamp(amount, 0, src.worth))
 	if(amount==0) return 0
 
 	src.worth -= amount
 	src.update_icon()
 	if(!worth)
-		usr.drop_from_inventory(src)
+		user.drop_from_inventory(src)
 	if(amount in list(1000,500,200,100,50,20,1))
 		var/cashtype = text2path("/obj/item/weapon/spacecash/bundle/c[amount]")
-		var/obj/cash = new cashtype (usr.loc)
-		usr.put_in_hands(cash)
+		var/obj/cash = new cashtype (user.loc)
+		. = cash
 	else
-		var/obj/item/weapon/spacecash/bundle/bundle = new (usr.loc)
+		var/obj/item/weapon/spacecash/bundle/bundle = new (user.loc)
 		bundle.worth = amount
 		bundle.update_icon()
-		usr.put_in_hands(bundle)
+		. = bundle
 	if(!worth)
 		qdel(src)
 

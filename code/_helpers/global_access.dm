@@ -107,6 +107,8 @@
 			return global.Tier3Runes;
 		if("Tier4Runes")
 			return global.Tier4Runes;
+		if("TRADE_CONTROLLER")
+			return global.trade_controller;
 		if("UNSC_ranks")
 			return global.UNSC_ranks;
 		if("WALLITEMS")

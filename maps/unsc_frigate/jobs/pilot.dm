@@ -1,4 +1,4 @@
-f
+
 /datum/job/UNSC_ship/cmdr_wing
 	title = "Wing Commander"
 	min_rank = RANK_LT

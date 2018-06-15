@@ -1,0 +1,44 @@
+<h3>Interacting with <b>{{:data.npc_name}}</b></h3>
+<h2>You are currently holding:</h2>
+<div class='block'>
+	<div class="itemLabel" style="width:20%;">-</div>
+	<div class="itemLabel" style="width:50%;">Name</div>
+	<div class="itemLabel" style="width:20%;">Trader Offer</div>
+	<div class='item'>
+		<div class="itemLabel" style="width:20%;">Left hand:</div>
+		<div class="itemContentNarrow" style="width:50%;">{{:data.l_hand}}</div>
+		{{if data.l_sellable > 0}}
+			<div class="itemContentNarrow" style="width:20%;">cR-{{:data.l_hand_worth}}</div>
+			<div class="itemContentNarrow" style="width:10%;">{{:helper.link('Sell', 'bookmark', {'sell_item_l' : data.l_hand, 'user' : data.user, 'worth' : data.l_hand_worth})}}</div>
+		{{else data.l_sellable < 0}}
+			<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
+		{{/if}}
+	</div>
+	<div class='item'>
+		<div class="itemLabel" style="width:20%;">Right hand:</div>
+		<div class="itemContentNarrow" style="width:50%;">{{:data.r_hand}}</div>
+		{{if data.r_sellable > 0}}
+			<div class="itemContentNarrow" style="width:20%;">cR-{{:data.r_hand_worth}}</div>
+			<div class="itemContentNarrow" style="width:10%;">{{:helper.link('Sell', 'bookmark', {'sell_item_r' : data.r_hand, 'user' : data.user, 'worth' : data.r_hand_worth})}}</div>
+		{{else data.r_sellable < 0}}
+			<div class="itemContentNarrow" style="width:30%;">Trader does not want this item.</div>
+		{{/if}}
+	</div>
+</div>
+
+<h2>NPC items for sale:</h2>
+<div class='block'>
+	<div class="itemLabel" style="width:50%;">Name</div>
+	<div class="itemLabel" style="width:20%;">Stock</div>
+	<div class="itemLabel" style="width:20%;">Price</div>
+	{{for data.interact_inventory}}
+		<div class="item">
+			<div class="itemContentNarrow" style="width:50%;">{{:value.name}}</div>
+			<div class="itemContentNarrow" style="width:20%;">{{:value.quantity}} units</div>
+			<div class="itemContentNarrow" style="width:20%;">cR-{{:value.value}}</div>
+			<div class="itemContentNarrow" style="width:10%;float:right">{{:helper.link('Buy', 'bookmark', {'buy_item' : value.name, 'user' : data.user})}}</div>
+		</div>
+	{{empty}}
+		<div class="notice">This NPC has no items for sale.</div>
+	{{/for}}
+</div> 
