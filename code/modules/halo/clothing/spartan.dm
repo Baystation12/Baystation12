@@ -94,7 +94,11 @@
 
 /obj/item/clothing/suit/armor/special/spartan/mkv/gungnir
 	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant"
-	icon_state = "Mjolnir Powered Assault Armor/Mark V Gungir"
+	icon_state = "gungirmale"
+
+/obj/item/clothing/suit/armor/special/spartan/mkv/gungnir/blue
+	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant"
+	icon_state = "gungirbluemale"
 
 /obj/item/clothing/suit/armor/special/spartan/mkv/mistermann
 	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant (customised)"
@@ -114,7 +118,11 @@
 
 /obj/item/clothing/head/helmet/spartan/mkv/gungnir
 	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant"
-	icon_state = "Mjolnir Powered Assault Helmet/Mark V Gungir"
+	icon_state = "gungirhelm"
+
+/obj/item/clothing/head/helmet/spartan/mkv/gungnir/blue
+	name = "MJOLNIR Powered Assault Armor Mark V Gungnir variant"
+	icon_state = "gungirbluehelm"
 
 /obj/item/clothing/head/helmet/spartan/mkv/mistermann
 	name = "MJOLNIR Powered Assault Armor Helmet Mark V (customised)"
