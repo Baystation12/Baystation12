@@ -33,6 +33,12 @@
 	cost = 0
 	allowed_roles = SOLGOV_ROLES
 
+/datum/gear/head/oachat
+	display_name = "orbital assault cap"
+	path = /obj/item/clothing/head/solgov/utility/oac
+	cost = 0
+	allowed_roles = SOLGOV_ROLES
+
 /datum/gear/head/echat
 	display_name = "EC cap"
 	path = /obj/item/clothing/head/soft/solgov/expedition
@@ -55,7 +61,7 @@
 
 /datum/gear/mask/bandana
 	allowed_roles = NON_MILITARY_ROLES
-	
+
 /datum/gear/head/bandana
 	allowed_roles = NON_MILITARY_ROLES
 

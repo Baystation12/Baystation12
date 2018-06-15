@@ -10366,7 +10366,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "closed";
 	locked = 1;
-	name = "Marine Armory";
+	name = "Orbital Assault Armory";
 	req_access = list(3)
 	},
 /turf/simulated/floor/plating,

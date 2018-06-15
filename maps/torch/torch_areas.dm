@@ -655,7 +655,7 @@
 	icon_state = "construction"
 
 /area/vacant/armory
-	name = "\improper Marine Armory"
+	name = "\improper OAC Armory"
 	icon_state = "Tactical"
 
 /area/vacant/cabin
