@@ -178,8 +178,8 @@
 		return 0
 
 	if(!lastarea)
-		lastarea = get_area(loc)
-	if(!lastarea.has_gravity)
+		lastarea = get_area(src)
+	if(!lastarea || !lastarea.has_gravity)
 		return 0
 
 	return 1

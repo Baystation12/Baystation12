@@ -5,7 +5,9 @@ var/const/MOVEMENT_REMOVE  = 0x0002
 if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \
 	var/new_handlers = list(); \
 	for(var/path in movement_handlers){ \
-		new_handlers += new path(src); \
+		var/arguments = movement_handlers[path];   \
+		arguments = arguments ? (list(src) | (arguments)) : list(src); \
+		new_handlers += new path(arglist(arguments)); \
 	} \
 	movement_handlers= new_handlers; \
 }
