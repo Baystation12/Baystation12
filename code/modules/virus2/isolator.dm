@@ -37,7 +37,7 @@
 
 	sample = S
 	user.drop_item()
-	S.loc = src
+	S.forceMove(src)
 
 	user.visible_message("[user] adds \a [O] to \the [src]!", "You add \a [O] to \the [src]!")
 	GLOB.nanomanager.update_uis(src)
@@ -110,6 +110,8 @@
 /obj/machinery/disease2/isolator/Process()
 	if (isolating > 0)
 		isolating -= 1
+		if(virus2)
+			infect_nearby(virus2)
 		if (isolating == 0)
 			if (virus2)
 				var/obj/item/weapon/virusdish/d = new /obj/item/weapon/virusdish(src.loc)
@@ -120,7 +122,7 @@
 			GLOB.nanomanager.update_uis(src)
 			update_icon()
 
-/obj/machinery/disease2/isolator/OnTopic(user, href_list)
+/obj/machinery/disease2/isolator/OnTopic(mob/user, href_list)
 	if (href_list["close"])
 		GLOB.nanomanager.close_user_uis(user, src, "main")
 		return TOPIC_HANDLED
@@ -147,6 +149,7 @@
 	if(!sample) return TOPIC_HANDLED
 
 	if (href_list["isolate"])
+		operator_skill = user.get_skill_value(core_skill)
 		var/datum/disease2/disease/V = locate(href_list["isolate"])
 		if (V)
 			virus2 = V
