@@ -149,7 +149,7 @@
 	occupants += user
 	occupants[user] = position
 	user.loc = contents
-	contents += user	
+	contents += user
 	update_object_sprites()
 	return 1
 
@@ -208,7 +208,7 @@
 	set category = "Vehicle"
 	set src in view(1)
 
-	var/mob/user = usr
+	var/mob/living/user = usr
 	if(!istype(user) || !is_atom_adjacent(user))
 		return
 	var/player_pos_choice = input(user,"Enter which position?","Vehicle Entry Position Select","Cancel") in ALL_VEHICLE_POSITIONS + list("Cancel")
@@ -265,6 +265,8 @@
 
 //TODO: CARGO SYSTEM
 /obj/vehicles/proc/put_cargo_item(var/mob/user,var/obj/O)
+	if(O == src)
+		return
 	var/confirm = alert(user,"Place [O.name] into [src.name]'s storage?",,"Yes","No")
 	if(confirm != "Yes" || !is_atom_adjacent(user) || !is_atom_adjacent(O,user.loc))
 		return
