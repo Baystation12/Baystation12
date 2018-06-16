@@ -38,10 +38,14 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/mineral/New()
 	mining_walls += src
-	spawn(0)
-		MineralSpread()
-	spawn(2)
-		update_icon(1)
+	. = ..()
+
+/turf/simulated/mineral/Initialize()
+	. = INITIALIZE_HINT_LATELOAD
+
+/turf/simulated/mineral/LateInitialize()
+	MineralSpread()
+	update_icon(1)
 
 /turf/simulated/mineral/Destroy()
 	mining_walls -= src
