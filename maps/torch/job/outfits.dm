@@ -310,16 +310,19 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/medical
+	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
 	name = OUTFIT_JOB_NAME("Corpsman - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor/medic
 	name = OUTFIT_JOB_NAME("Corpsman - Medic")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	name = OUTFIT_JOB_NAME("Medical Contractor")
@@ -552,6 +555,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	shoes = /obj/item/clothing/shoes/workboots
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/nt_pilot
+	l_ear = /obj/item/device/radio/headset/headset_pilot/
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	name = OUTFIT_JOB_NAME("Scientist - Torch")
@@ -575,6 +579,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/mining
 	pda_type = /obj/item/modular_computer/pda/science
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	l_ear = /obj/item/device/radio/headset/headset_mining
 
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector/New()
 	..()

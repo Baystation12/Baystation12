@@ -40,6 +40,9 @@
 /obj/item/device/suit_sensor_jammer/attack_self(var/mob/user)
 	tg_ui_interact(user)
 
+/obj/item/device/suit_sensor_jammer/get_cell()
+	return bcell
+
 /obj/item/device/suit_sensor_jammer/attackby(obj/item/I as obj, mob/user as mob)
 	if(isCrowbar(I))
 		if(bcell)

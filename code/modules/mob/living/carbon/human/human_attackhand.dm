@@ -150,14 +150,14 @@
 					accurate = 1
 				if(I_HURT, I_GRAB)
 					// We're in a fighting stance, there's a chance we block
-					if(src.canmove && src!=H && prob(20))
+					if(MayMove() && src!=H && prob(20))
 						block = 1
 
 			if (M.grabbed_by.len)
 				// Someone got a good grip on them, they won't be able to do much damage
 				rand_damage = max(1, rand_damage - 2)
 
-			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H || H.species.species_flags & SPECIES_FLAG_NO_BLOCK)
+			if(src.grabbed_by.len || !src.MayMove() || src==H || H.species.species_flags & SPECIES_FLAG_NO_BLOCK)
 				accurate = 1 // certain circumstances make it impossible for us to evade punches
 				rand_damage = 5
 
@@ -229,7 +229,7 @@
 			attack.apply_effects(H, src, armour, rand_damage, hit_zone)
 
 			// Finally, apply damage to target
-			apply_damage(real_damage, (attack.deal_halloss ? PAIN : BRUTE), hit_zone, armour, damage_flags=attack.damage_flags())
+			apply_damage(real_damage, attack.get_damage_type(), hit_zone, armour, damage_flags=attack.damage_flags())
 
 		if(I_DISARM)
 			if(H.species)

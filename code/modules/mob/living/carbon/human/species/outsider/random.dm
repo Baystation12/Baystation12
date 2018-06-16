@@ -6,7 +6,7 @@
 
 	species_flags = SPECIES_FLAG_NO_SCAN
 
-	icobase = 'icons/mob/human_races/r_humanoid.dmi' 
+	icobase = 'icons/mob/human_races/r_humanoid.dmi'
 	deform = 'icons/mob/human_races/r_humanoid.dmi'
 	appearance_flags = HAS_SKIN_COLOR
 	limb_blend = ICON_MULTIPLY
@@ -69,7 +69,7 @@
 	hazard_low_pressure += pressure_comfort_shift
 
 	//Misc traits
-	darksight_range = rand(1,8)       
+	darksight_range = rand(1,8)
 	darksight_tint = pick(DARKTINT_NONE,DARKTINT_MODERATE,DARKTINT_GOOD)
 	if(prob(40))
 		genders = list(PLURAL)
@@ -117,6 +117,6 @@
 		if(gas_data.flags[gas] & (XGM_GAS_OXIDIZER|XGM_GAS_FUEL))
 			newgases -= gas
 	if(newgases.len)
-		poison_type = pick_n_take(newgases)
+		poison_types = list(pick_n_take(newgases))
 	if(newgases.len)
 		exhale_type = pick_n_take(newgases)

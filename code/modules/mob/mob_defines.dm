@@ -8,7 +8,19 @@
 
 	virtual_mob = /mob/observer/virtual/mob
 
-	movement_handlers = list(/datum/movement_handler/mob/eye)
+	movement_handlers = list(
+		/datum/movement_handler/mob/death,
+		/datum/movement_handler/mob/conscious,
+		/datum/movement_handler/mob/eye,
+		/datum/movement_handler/move_relay,
+		/datum/movement_handler/mob/buckle_relay,
+		/datum/movement_handler/mob/delay,
+		/datum/movement_handler/mob/stop_effect,
+		/datum/movement_handler/mob/physically_capable,
+		/datum/movement_handler/mob/physically_restrained,
+		/datum/movement_handler/mob/space,
+		/datum/movement_handler/mob/movement
+	)
 
 	var/mob_flags
 
@@ -61,7 +73,6 @@
 	var/atom/movable/pulling = null
 	var/other_mobs = null
 	var/next_move = null
-	var/transforming = null	//Carbon
 	var/hand = null
 	var/real_name = null
 
@@ -73,7 +84,6 @@
 	var/resting = 0			//Carbon
 	var/lying = 0
 	var/lying_prev = 0
-	var/canmove = 1
 
 	var/unacidable = 0
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)

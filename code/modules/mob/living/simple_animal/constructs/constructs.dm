@@ -39,7 +39,7 @@
 	name = text("[initial(name)] ([random_id(/mob/living/simple_animal/construct, 1000, 9999)])")
 	real_name = name
 	add_language("Cult")
-	add_language("Occult")
+	add_language(LANGUAGE_OCCULT)
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
 	update_icon()

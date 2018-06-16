@@ -467,7 +467,7 @@ proc/is_blind(A)
 		communicate(/decl/communication_channel/dsay, C || O, message, /decl/dsay_communication/direct)
 
 /mob/proc/switch_to_camera(var/obj/machinery/camera/C)
-	if (!C.can_use() || stat || (get_dist(C, src) > 1 || machine != src || blinded || !canmove))
+	if (!C.can_use() || stat || (get_dist(C, src) > 1 || machine != src || blinded))
 		return 0
 	check_eye(src)
 	return 1

@@ -219,10 +219,16 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		return initial(current.overdose)
 	return 0
 
-/datum/reagents/proc/get_reagents()
+/datum/reagents/proc/get_reagents(scannable_only = 0, precision)
 	. = list()
 	for(var/datum/reagent/current in reagent_list)
-		. += "[current.name] ([current.volume])"
+		if(scannable_only && !current.scannable)
+			continue
+		var/volume = current.volume
+		if(precision)
+			volume = round(volume, precision)
+		if(volume)
+			. += "[current.name] ([volume])"
 	return english_list(., "EMPTY", "", ", ", ", ")
 
 /* Holder-to-holder and similar procs */
@@ -293,7 +299,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 	trans_to(target, amount, multiplier, copy)
 
-/datum/reagents/proc/trans_type_to(var/atom/target, var/type, var/amount = 1)
+/datum/reagents/proc/trans_type_to(var/atom/target, var/type, var/amount = 1, var/multiplier = 1)
 	if (!target || !target.reagents || !target.simulated)
 		return
 
@@ -307,7 +313,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	F.add_reagent(type, amount, tmpdata)
 	remove_reagent(type, amount)
 
-	. = F.trans_to(target, amount) // Let this proc check the atom's type
+	. = F.trans_to(target, amount, multiplier) // Let this proc check the atom's type
 
 	qdel(F)
 

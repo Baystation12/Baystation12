@@ -46,6 +46,9 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 		STOP_PROCESSING(SSobj, src)
 	return ..()
 
+/obj/item/weapon/gun/energy/get_cell()
+	return power_supply
+
 /obj/item/weapon/gun/energy/Process()
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
 		charge_tick++

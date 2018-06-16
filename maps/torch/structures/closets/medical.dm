@@ -19,6 +19,7 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
 		/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 		/obj/item/device/radio/headset/heads/cmo,
+		/obj/item/device/radio/headset/heads/cmo/alt,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/weapon/reagent_containers/hypospray/vial,

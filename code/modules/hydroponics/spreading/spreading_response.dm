@@ -43,7 +43,7 @@
 		if(buckled_mob.buckled == src)
 			buckled_mob.buckled = null
 			buckled_mob.anchored = initial(buckled_mob.anchored)
-			buckled_mob.update_canmove()
+			buckled_mob.UpdateLyingBuckledAndVerbStatus()
 		buckled_mob = null
 	START_PROCESSING(SSvines, src)
 	return

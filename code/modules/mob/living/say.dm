@@ -104,13 +104,17 @@ proc/get_radio_key_from_channel(var/channel)
 		verb = pick("yells","roars","hollers")
 		message_data[3] = 0
 		. = 1
-	if(slurring)
+	else if(slurring)
 		message = slur(message)
 		verb = pick("slobbers","slurs")
 		. = 1
-	if(stuttering)
+	else if(stuttering)
 		message = NewStutter(message)
 		verb = pick("stammers","stutters")
+		. = 1
+	else if(has_chem_effect(CE_SQUEAKY, 1))
+		message = "<font face = 'Comic Sans MS'>[message]</font>"
+		verb = "squeaks"
 		. = 1
 
 	message_data[1] = message

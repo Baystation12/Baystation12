@@ -118,7 +118,7 @@
 		/obj/item/rig_module/grenade_launcher,
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/mounted/egun,
-		/obj/item/rig_module/chem_dispenser/injector,
+		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/mounted/plasmacutter,
 		/obj/item/rig_module/device/rcd,
 		/obj/item/rig_module/datajack,

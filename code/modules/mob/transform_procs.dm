@@ -1,13 +1,12 @@
 /mob/living/carbon/human/proc/monkeyize()
-	if (transforming)
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)
 		if (W==w_uniform) // will be torn
 			continue
 		drop_from_inventory(W)
 	regenerate_icons()
-	transforming = 1
-	canmove = 0
+	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	stunned = 1
 	icon = null
 	set_invisibility(101)
@@ -21,9 +20,9 @@
 	sleep(48)
 	//animation = null
 
-	transforming = 0
+	DEL_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	stunned = 0
-	update_canmove()
+	UpdateLyingBuckledAndVerbStatus()
 	set_invisibility(initial(invisibility))
 
 	if(!species.primitive_form) //If the creature in question has no primitive set, this is going to be messy.
@@ -46,7 +45,7 @@
 	return ..()
 
 /mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
-	if (transforming)
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/t in organs)
 		qdel(t)
@@ -54,12 +53,11 @@
 	return ..(move)
 
 /mob/living/carbon/AIize()
-	if (transforming)
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
-	transforming = 1
-	canmove = 0
+	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
 	return ..()
@@ -109,14 +107,13 @@
 
 //human -> robot
 /mob/living/carbon/human/proc/Robotize()
-	if (transforming)
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	QDEL_NULL_LIST(worn_underwear)
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
-	transforming = 1
-	canmove = 0
+	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
 	for(var/t in organs)
@@ -156,13 +153,12 @@
 	return O
 
 /mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
-	if (transforming)
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
-	transforming = 1
-	canmove = 0
+	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
 	for(var/t in organs)
@@ -190,13 +186,12 @@
 	return
 
 /mob/living/carbon/human/proc/corgize()
-	if (transforming)
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 	regenerate_icons()
-	transforming = 1
-	canmove = 0
+	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
 	for(var/t in organs)	//this really should not be necessary
@@ -219,14 +214,13 @@
 		to_chat(usr, "<span class='warning'>Sorry but this mob type is currently unavailable.</span>")
 		return
 
-	if(transforming)
+	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)
 		drop_from_inventory(W)
 
 	regenerate_icons()
-	transforming = 1
-	canmove = 0
+	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
 

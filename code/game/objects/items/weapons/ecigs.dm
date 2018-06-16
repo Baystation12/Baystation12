@@ -27,6 +27,9 @@
 		cigcell = new cell_type
 	ec_cartridge = new cartridge_type(src)
 
+/obj/item/clothing/mask/smokable/ecig/get_cell()
+	return cigcell
+
 /obj/item/clothing/mask/smokable/ecig/simple
 	name = "cheap electronic cigarette"
 	desc = "A cheap Lucky 1337 electronic cigarette, styled like a traditional cigarette."
