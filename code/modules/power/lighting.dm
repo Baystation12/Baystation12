@@ -205,7 +205,7 @@
 	pixel_y = 0
 	pixel_x = 0
 	var/turf/T = get_step(get_turf(src), src.dir)
-	if(istype(T, /turf/simulated/wall))
+	if(istype(T) && T.density)
 		if(src.dir == NORTH)
 			pixel_y = 21
 		else if(src.dir == EAST)
