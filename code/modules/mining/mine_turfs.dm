@@ -407,6 +407,7 @@ var/global/list/mining_floors = list()
 	if (prob(mineralChance) && !mineral)
 		var/mineral_name = pickweight(mineralSpawnChanceList) //temp mineral name
 		mineral_name = lowertext(mineral_name)
+		ensure_ore_data_initialised()
 		if (mineral_name && (mineral_name in ore_data))
 			mineral = ore_data[mineral_name]
 			UpdateMineral()
