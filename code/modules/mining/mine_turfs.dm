@@ -400,7 +400,7 @@ var/global/list/mining_floors = list()
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
 	icon_state = "rock_mineral"
-	var/mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 5, "Iron" = 35, "Carbon" = 35, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 10)
+	var/mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 5, "Iron" = 35, "Carbon" = 35, "Diamond" = 1, "Gold" = 5, "Silver" = 5)
 	var/mineralChance = 10 //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
@@ -416,7 +416,7 @@ var/global/list/mining_floors = list()
 /turf/simulated/mineral/random/high_chance
 	icon_state = "rock_mineral_high"
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 10, "Iron" = 60, "Carbon" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10)
+	mineralSpawnChanceList = list("Uranium" = 1, "Platinum" = 10, "Iron" = 60, "Carbon" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "mhydrogen" = 1)
 
 
 /**********************Asteroid**************************/
