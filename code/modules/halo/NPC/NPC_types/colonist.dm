@@ -89,6 +89,7 @@
 		if(speech_trigger_type)
 			speech_triggers.Add(new speech_trigger_type())
 	desc = "This is [src]. \He is from one of Earth's many diverse cultures that decided to try a future offplanet."
+	..()
 
 /mob/living/simple_animal/npc/colonist/labourer
 	jumpsuits = list(\
@@ -121,7 +122,7 @@
 	)
 	suit_chance = 5
 
-/mob/living/simple_animal/npc/highclass
+/mob/living/simple_animal/npc/colonist/highclass
 	jumpsuits = list(\
 		/obj/item/clothing/under/blazer,\
 		/obj/item/clothing/under/assistantformal,\
