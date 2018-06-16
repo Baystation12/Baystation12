@@ -10,6 +10,11 @@
 	var/list/blend_objects = newlist() // Objects which to blend with
 	var/list/noblend_objects = newlist() //Objects to avoid blending with (such as children of listed blend objects.
 
+	var/list/footstep_sounds	//footstep sounds when stepped on
+
+/obj/structure/proc/get_footstep_sound()
+	if(LAZYLEN(footstep_sounds)) return pick(footstep_sounds)
+
 /obj/structure/Destroy()
 	if(parts)
 		new parts(loc)

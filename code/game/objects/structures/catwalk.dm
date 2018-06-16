@@ -7,6 +7,12 @@
 	anchored = 1.0
 	plane = ABOVE_TURF_PLANE
 	layer = CATWALK_LAYER
+	footstep_sounds= list(
+		'sound/effects/footstep/catwalk1.ogg',
+		'sound/effects/footstep/catwalk2.ogg',
+		'sound/effects/footstep/catwalk3.ogg',
+		'sound/effects/footstep/catwalk4.ogg',
+		'sound/effects/footstep/catwalk5.ogg')
 
 /obj/structure/catwalk/Initialize()
 	. = ..()
