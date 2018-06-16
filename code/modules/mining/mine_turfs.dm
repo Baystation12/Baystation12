@@ -43,6 +43,7 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/mineral/Initialize()
 	. = INITIALIZE_HINT_LATELOAD
+	..()
 
 /turf/simulated/mineral/LateInitialize()
 	MineralSpread()
