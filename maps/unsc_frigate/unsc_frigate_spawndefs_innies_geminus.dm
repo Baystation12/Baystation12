@@ -9,7 +9,7 @@
 /datum/job/UNSC_ship/cmdr_sqr,\
 /datum/job/UNSC_ship/pilot,/datum/job/UNSC_ship/ai,\
 /datum/job/UNSC_ship/technician_chief,/datum/job/UNSC_ship/technician,\
-/datum/job/researcher,,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,\
+/datum/job/researcher,/datum/job/ONIGUARD,/datum/job/ONIGUARDS,/datum/job/COMMO,\
 /datum/job/IGUARD,/datum/job/LISTENG,\
 /datum/job/ship_crew_innie,/datum/job/ship_cap_innie,\
 /datum/job/covenant/kigyarpirate/captain,/datum/job/covenant/kigyarpirate,/datum/job/covenant/unggoy_deacon)
