@@ -98,6 +98,7 @@
 	speak = list("Awrr?","Aowrl!","Worrl")
 	emote_see = list("sniffs the air cautiously","looks around")
 	emote_hear = list("snuffles")
+	mob_size = MOB_SMALL
 
 /mob/living/simple_animal/hostile/retaliate/beast/shantak
 	name = "shantak"
@@ -124,6 +125,7 @@
 	icon_state = "yithian"
 	icon_living = "yithian"
 	icon_dead = "yithian_dead"
+	mob_size = MOB_TINY
 
 /mob/living/simple_animal/tindalos
 	name = "tindalos"
@@ -131,6 +133,7 @@
 	icon_state = "tindalos"
 	icon_living = "tindalos"
 	icon_dead = "tindalos_dead"
+	mob_size = MOB_TINY
 
 /mob/living/simple_animal/thinbug
 	name = "taki"
@@ -140,6 +143,7 @@
 	icon_dead = "thinbug_dead"
 	speak_chance = 1
 	emote_hear = list("scratches the ground","chitters")
+	mob_size = MOB_MINISCULE
 
 /mob/living/simple_animal/hostile/retaliate/jelly
 	name = "zeq"
@@ -160,4 +164,5 @@
 	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
 
 /mob/living/simple_animal/hostile/jelly/New()
+	..()
 	color = color_rotation(round(rand(0,360),20))
