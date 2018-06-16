@@ -26,6 +26,7 @@
 	var/base_icon
 	var/base_name
 	var/unwielded_force_divisor = 0.25
+	var/wielded_parry_chance = 15
 
 /obj/item/weapon/material/twohanded/update_twohanding()
 	var/mob/living/M = loc
@@ -55,13 +56,8 @@
 	..()
 	update_icon()
 
-//Allow a small chance of parrying melee attacks when wielded - maybe generalize this to other weapons someday
-/obj/item/weapon/material/twohanded/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
-	if(wielded && default_parry_check(user, attacker, damage_source) && prob(15))
-		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
-		playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
-		return 1
-	return 0
+/obj/item/weapon/material/twohanded/get_parry_chance()
+	return wielded ? wielded_parry_chance : base_parry_chance
 
 /obj/item/weapon/material/twohanded/update_icon()
 	icon_state = "[base_icon][wielded]"
