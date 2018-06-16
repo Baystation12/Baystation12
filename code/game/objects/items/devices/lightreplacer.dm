@@ -57,16 +57,39 @@
 	var/max_uses = 32
 	var/uses = 32
 	var/emagged = 0
-	var/failmsg = ""
 	var/charge = 0
-
-/obj/item/device/lightreplacer/New()
-	failmsg = "The [name]'s refill light blinks red."
-	..()
 
 /obj/item/device/lightreplacer/examine(mob/user)
 	if(..(user, 2))
 		to_chat(user, "It has [uses] light\s remaining.")
+
+/obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
+
+	//Check for lights in a container, refilling our charges.
+	if(istype(A, /obj/item/weapon/storage/))
+		var/obj/item/weapon/storage/S = A
+		var/amt_inserted = 0
+		var/turf/T = get_turf(user)
+		for(var/obj/item/weapon/light/L in S.contents)
+			if(!user.stat && src.uses < src.max_uses)
+				src.AddUses(1)
+				amt_inserted++
+				S.remove_from_storage(L, T)
+				qdel(L)
+		if(amt_inserted)
+			to_chat(user, "You insert [amt_inserted] light\s into \The [src]. It has [uses] light\s remaining.")
+			add_fingerprint(user)
+			return
+
+	//Actually replace the light.
+	if(istype(A, /obj/machinery/light/))
+		var/obj/machinery/light/L = A
+		if(isliving(user))
+			var/mob/living/U = user
+			ReplaceLight(L, U)
+			add_fingerprint(user)
+			return
+	. = ..()
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
@@ -130,7 +153,7 @@
 	if(target.get_status() == LIGHT_OK)
 		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
 	else if(!CanUse(U))
-		to_chat(U, failmsg)
+		to_chat(U, "\The [src]'s refill light blinks red.")
 	else if(Use(U))
 		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
 

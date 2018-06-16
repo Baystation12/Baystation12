@@ -119,6 +119,8 @@
 		else
 			return 0
 
+/obj/item/weapon/cell/get_cell()
+	return src //no shit Sherlock
 
 // SUBTYPES BELOW
 

@@ -4,7 +4,7 @@
 	var/datum/phenomena/selected
 
 /mob/living/deity/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.self_state)
-	if(!nano_data.len)
+	if(!nano_data["categories"]) //If we don't have the categories set yet, we should populate our data.
 		var/list/categories = list()
 		for(var/cat in items_by_category)
 			categories += cat

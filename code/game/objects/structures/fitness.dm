@@ -32,12 +32,14 @@
 	desc = "A machine used to lift weights."
 	icon_state = "weightlifter"
 	var/weight = 1
-	var/list/qualifiers = list("with ease", "without any trouble", "with great effort")
+	var/max_weight = 5
+	var/list/success_message = list("with great effort", "straining hard", "without any trouble", "with ease")
+	var/list/fail_message = list(", lifting them part of the way and then letting them drop", ", unable to even budge them")
 
 /obj/structure/fitness/weightlifter/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 75, 1)
-		weight = ((weight) % qualifiers.len) + 1
+		weight = (weight % max_weight) + 1
 		to_chat(user, "You set the machine's weight level to [weight].")
 
 /obj/structure/fitness/weightlifter/attack_hand(var/mob/living/carbon/human/user)
@@ -60,9 +62,23 @@
 		flick("[icon_state]_[weight]", src)
 		if(do_after(user, 20 + (weight * 10)))
 			playsound(src.loc, 'sound/effects/weightdrop.ogg', 25, 1)
-			if(!synth)
-				user.nutrition -= weight * 10
-			to_chat(user, "<span class='notice'>You lift the weights [qualifiers[weight]].</span>")
+			var/skill = max_weight * user.get_skill_value(SKILL_HAULING)/SKILL_MAX
+			var/message
+			if(skill < weight)
+				if(weight - skill > max_weight/2)
+					if(prob(50))
+						message = ", getting hurt in the process"
+						user.apply_damage(5)
+					else
+						message = "; this does not look safe"
+				else
+					message = fail_message[min(1 + round(weight - skill), fail_message.len)]
+				user.visible_message("<span class='notice'>\The [user] fails to lift the weights[message].</span>", "<span class='notice'>You fail to lift the weights[message].</span>")
+			else
+				if(!synth)
+					user.nutrition -= weight * 5
+				message = success_message[min(1 + round(skill - weight), fail_message.len)]
+				user.visible_message("<span class='notice'>\The [user] lift\s the weights [message].</span>", "<span class='notice'>You lift the weights [message].</span>")
 			being_used = 0
 		else
 			to_chat(user, "<span class='notice'>Against your previous judgement, perhaps working out is not for you.</span>")

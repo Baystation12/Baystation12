@@ -118,6 +118,42 @@
 	whitelisted = list(SPECIES_TAJARA)
 	sort_category = "Xenowear"
 
+/datum/gear/eyes/visors
+	display_name = "visor selection (Tajara)"
+	path = /obj/item/clothing/glasses/tajvisor
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_TAJARA)
+
+/datum/gear/eyes/visors/New()
+	..()
+	var/visors = list()
+	visors["visor type-A (Tajara)"] = /obj/item/clothing/glasses/tajvisor/a
+	visors["visor type-B (Tajara)"] = /obj/item/clothing/glasses/tajvisor/b
+	visors["visor type-C (Tajara)"] = /obj/item/clothing/glasses/tajvisor/c
+	visors["visor type-D (Tajara)"] = /obj/item/clothing/glasses/tajvisor/d
+	visors["visor type-E (Tajara)"] = /obj/item/clothing/glasses/tajvisor/e
+	visors["visor type-F (Tajara)"] = /obj/item/clothing/glasses/tajvisor/f
+	visors["visor type-G (Tajara)"] = /obj/item/clothing/glasses/tajvisor/g
+	gear_tweaks += new/datum/gear_tweak/path(visors)
+
+/datum/gear/eyes/medical/tajvisor
+	display_name = "MEDICAL visor (Tajara)"
+	path = /obj/item/clothing/glasses/hud/health/tajvisor
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
+
+/datum/gear/eyes/security/tajvisor
+	display_name = "SECURITY visor (Tajara)"
+	path = /obj/item/clothing/glasses/sunglasses/sechud/tajvisor
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
+
+/datum/gear/eyes/meson/tajvisor
+	display_name = "ENGINEERING visor (Tajara)"
+	path = /obj/item/clothing/glasses/meson/prescription/tajvisor
+	whitelisted = list(SPECIES_TAJARA)
+	sort_category = "Xenowear"
+
 /datum/gear/shoes/caligae
 	display_name = "caligae (Tajara)"
 	path = /obj/item/clothing/shoes/sandal/tajaran/caligae

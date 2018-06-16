@@ -23,7 +23,7 @@
 
 /obj/item/device/boombox/Initialize()
 	. = ..()
-	tracks = tracks || GLOB.music_tracks.Copy()
+	tracks = setup_music_tracks(tracks)
 
 /obj/item/device/boombox/Destroy()
 	stop()

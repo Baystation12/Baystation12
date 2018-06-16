@@ -110,14 +110,14 @@
 	return 1
 
 
-/obj/item/borg/upgrade/tasercooler
-	name = "robotic Rapid Taser Cooling Module"
-	desc = "Used to cool a mounted taser, increasing the potential current in it and thus its recharge rate."
+/obj/item/borg/upgrade/weaponcooler
+	name = "robotic Rapid Weapon Cooling Module"
+	desc = "Used to cool a mounted energy gun, increasing the potential current in it and thus its recharge rate."
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 
 
-/obj/item/borg/upgrade/tasercooler/action(var/mob/living/silicon/robot/R)
+/obj/item/borg/upgrade/weaponcooler/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
 
 	if(!R.module || !(type in R.module.supported_upgrades))
@@ -125,13 +125,11 @@
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
 
-	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in R.module
-	if(!T)
-		T = locate() in R.module.contents
+	var/obj/item/weapon/gun/energy/gun/secure/mounted/T = locate() in R.module
 	if(!T)
 		T = locate() in R.module.modules
 	if(!T)
-		to_chat(usr, "This robot has had its taser removed!")
+		to_chat(usr, "This robot has had its energy gun removed!")
 		return 0
 
 	if(T.recharge_time <= 2)

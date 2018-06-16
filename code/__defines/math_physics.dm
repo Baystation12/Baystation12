@@ -20,7 +20,6 @@
 #define T100C 373.15 //  100.0 degrees celsius
 #define TCMB  2.7    // -270.3 degrees celcius
 
-#define CLAMP01(x) max(0, min(1, x))
 #define ATMOS_PRECISION 0.0001
 #define QUANTIZE(variable) (round(variable, ATMOS_PRECISION))
 
@@ -31,3 +30,6 @@
 
 #define SIMPLE_SIGN(X) ((X) < 0 ? -1 : 1)
 #define SIGN(X)        ((X) ? SIMPLE_SIGN(X) : 0)
+
+// Determines the exchange ratio of reagents being converted to gas and vice versa.
+#define REAGENT_GAS_EXCHANGE_FACTOR 10

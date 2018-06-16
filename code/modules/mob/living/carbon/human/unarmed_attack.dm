@@ -18,6 +18,11 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text
 	var/eye_attack_text_victim
 
+/datum/unarmed_attack/proc/get_damage_type()
+	if(deal_halloss)
+		return PAIN
+	return BRUTE
+
 /datum/unarmed_attack/proc/get_sparring_variant()
 	if(sparring_variant_type)
 		if(!sparring_attack_cache[sparring_variant_type])

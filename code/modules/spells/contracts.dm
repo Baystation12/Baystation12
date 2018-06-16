@@ -124,6 +124,9 @@
 
 /obj/item/weapon/contract/boon/contract_effect(mob/user as mob)
 	..()
+	if(user.mind.special_role == ANTAG_SERVANT)
+		to_chat(user, "<span class='warning'>As a servant you find yourself unable to use this contract.</span>")
+		return 0
 	if(ispath(path,/spell))
 		user.add_spell(new path)
 		return 1

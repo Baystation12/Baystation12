@@ -59,11 +59,6 @@
 	flags = GEAR_HAS_TYPE_SELECTION
 	allowed_roles = MILITARY_ROLES
 
-/datum/gear/accessory/armband_mp
-	display_name = "military police brassard"
-	path = /obj/item/clothing/accessory/armband/solgov/mp
-	allowed_roles = SECURITY_ROLES
-
 /datum/gear/accessory/armband_ma
 	display_name = "master at arms brassard"
 	path = /obj/item/clothing/accessory/armband/solgov/ma
@@ -144,6 +139,11 @@
 
 /datum/gear/tactical/armor_deco
 	allowed_roles = ARMORED_ROLES
+
+/datum/gear/tactical/press_tag
+	display_name = "Press tag"
+	path = /obj/item/clothing/accessory/armor/tag/press
+	allowed_roles = list(/datum/job/assistant)
 
 /datum/gear/tactical/helm_covers
 	allowed_roles = ARMORED_ROLES

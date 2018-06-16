@@ -8,6 +8,8 @@
 	average person. Even so, they do their jobs well and are thriving in this \
 	new environment."
 
+	antaghud_offset_y = 8
+
 	language = LANGUAGE_NABBER
 	default_language = LANGUAGE_NABBER
 	assisted_langs = list(LANGUAGE_GALCOM, LANGUAGE_LUNAR, LANGUAGE_GUTTER, LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_SOL_COMMON, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER)
@@ -111,6 +113,7 @@
 		BP_LIVER =   list(/obj/item/organ/internal/liver/nabber,        35),
 		BP_ACETONE = list(/obj/item/organ/internal/acetone,             50),
 		BP_HEAD    = list(/obj/item/organ/external/head/nabber,         90),
+		BP_GROIN    = list(/obj/item/organ/external/groin/nabber,   	90),
 		BP_L_ARM   = list(/obj/item/organ/external/arm/nabber,          75),
 		BP_R_ARM   = list(/obj/item/organ/external/arm/right/nabber,    75),
 		BP_L_LEG   = list(/obj/item/organ/external/leg/nabber,          75),

@@ -442,8 +442,13 @@
 	required_reagents = list(/datum/reagent/tramadol/oxycodone = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
 
-/* Solidification */
+/datum/chemical_reaction/methyl_bromide
+	name = "Methyl Bromide"
+	required_reagents = list(/datum/reagent/toxin/bromide = 1, /datum/reagent/ethanol = 1, /datum/reagent/hydrazine = 1)
+	result_amount = 3
+	result = /datum/reagent/toxin/methyl_bromide
 
+/* Solidification */
 /datum/chemical_reaction/phoronsolidification
 	name = "Solid Phoron"
 	result = null

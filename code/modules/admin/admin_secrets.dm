@@ -31,7 +31,6 @@ var/datum/admin_secrets/admin_secrets = new()
 	var/list/datum/admin_secret_item/items
 
 /datum/admin_secret_category
-	..()
 	items = list()
 
 /datum/admin_secret_category/proc/can_view(var/mob/user)

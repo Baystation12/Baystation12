@@ -1222,3 +1222,29 @@
 	set_trait(TRAIT_YIELD,-1)
 	set_trait(TRAIT_SPREAD,2)
 	set_trait(TRAIT_POTENCY,50)
+
+/datum/seed/algae
+	name = "algae"
+	seed_name = "algae"
+	display_name = "algae"
+	chems = list(
+		/datum/reagent/nutriment = list(2,12),
+		/datum/reagent/toxin/bromide = list(3,8)
+	)
+	kitchen_tag = "algae"
+	exude_gasses = list("methyl_bromide" = 3)
+
+/datum/seed/algae/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,3)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"algae")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#84bd82")
+	set_trait(TRAIT_PLANT_COLOUR,"#6d9c6b")
+	set_trait(TRAIT_PLANT_ICON,"algae")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)

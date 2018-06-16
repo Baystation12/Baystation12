@@ -310,16 +310,19 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/medical
+	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
 	name = OUTFIT_JOB_NAME("Corpsman - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor/medic
 	name = OUTFIT_JOB_NAME("Corpsman - Medic")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor
 	name = OUTFIT_JOB_NAME("Medical Contractor")
@@ -552,6 +555,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	suit = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	shoes = /obj/item/clothing/shoes/workboots
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/nt_pilot
+	l_ear = /obj/item/device/radio/headset/headset_pilot/
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	name = OUTFIT_JOB_NAME("Scientist - Torch")
@@ -575,6 +579,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/torch/passenger/research/mining
 	pda_type = /obj/item/modular_computer/pda/science
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	l_ear = /obj/item/device/radio/headset/headset_mining
 
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector/New()
 	..()
@@ -626,23 +631,6 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	..()
 	var/obj/item/weapon/storage/secure/briefcase/money/case = new(H.loc)
 	H.put_in_hands(case)
-
-/decl/hierarchy/outfit/job/torch/offduty
-	name = OUTFIT_JOB_NAME("Off-Duty - Torch")
-	uniform = /obj/item/clothing/under/solgov/service/expeditionary
-	l_ear = /obj/item/device/radio/headset
-	shoes = /obj/item/clothing/shoes/dress
-	pda_type = /obj/item/modular_computer/pda
-	id_type = /obj/item/weapon/card/id/torch/offduty
-
-/decl/hierarchy/outfit/job/torch/offduty/officer
-	name = OUTFIT_JOB_NAME("Off-Duty - Officer")
-	uniform = /obj/item/clothing/under/solgov/service/expeditionary/command
-
-/decl/hierarchy/outfit/job/torch/offduty/fleet
-	name = OUTFIT_JOB_NAME("Off-Duty - Fleet")
-	uniform = /obj/item/clothing/under/solgov/service/fleet
-	shoes = /obj/item/clothing/shoes/dress/white
 
 /decl/hierarchy/outfit/job/torch/merchant
 	name = OUTFIT_JOB_NAME("Merchant - Torch")

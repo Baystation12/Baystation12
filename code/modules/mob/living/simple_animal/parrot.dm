@@ -78,7 +78,8 @@
 									/obj/machinery/computer,			/obj/machinery/telecomms, \
 									/obj/machinery/nuclearbomb,			/obj/machinery/particle_accelerator, \
 									/obj/machinery/recharge_station,	/obj/machinery/smartfridge, \
-									/obj/machinery/suit_storage_unit,	/obj/structure/showcase)
+									/obj/machinery/suit_storage_unit,	/obj/structure/showcase, \
+									/obj/item/modular_computer/console, /obj/structure/fountain)
 
 	//Parrots are kleptomaniacs. This variable ... stores the item a parrot is holding.
 	var/obj/item/held_item = null
@@ -130,10 +131,8 @@
 	onclose(user, "mob[real_name]")
 	return
 
-/mob/living/simple_animal/parrot/Topic(href, href_list)
-
-	//Can the usr physically do this?
-	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
+/mob/living/simple_animal/parrot/Topic(href, href_list, state = GLOB.physical_state)
+	if((. = ..()))
 		return
 
 	//Is the usr's mob type able to do this?
@@ -275,7 +274,7 @@
 	if(client || stat)
 		return //Lets not force players or dead/incap parrots to move
 
-	if(!isturf(src.loc) || !canmove || buckled)
+	if(!isturf(src.loc) || !MayMove())
 		return //If it can't move, dont let it move. (The buckled check probably isn't necessary thanks to canmove)
 
 

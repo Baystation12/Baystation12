@@ -4,7 +4,7 @@
 	set invisibility = 0
 	set background = 1
 
-	if (transforming)	return
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))	return
 	if(!loc)			return
 
 	..()

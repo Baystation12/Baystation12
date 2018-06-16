@@ -3,9 +3,6 @@ FROM mloc6/byond:511
 ARG BUILD_ARGS
 
 COPY . /bs12
-RUN chown -R nobody:nogroup /bs12
-
-USER nobody
 
 WORKDIR /bs12
 

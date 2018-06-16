@@ -373,6 +373,13 @@
 		to_chat(user, "<span class='warning'>You can't find anywhere to attach [organ_to_replace] to!</span>")
 		return SURGERY_FAILURE
 
+	var/o_a =  (organ_to_replace.gender == PLURAL) ? "" : "a "
+
+	var/obj/item/organ/internal/I = target.internal_organs_by_name[organ_to_replace.organ_tag]
+	if(I && (I.parent_organ == affected.organ_tag || istype(organ_to_replace, /obj/item/organ/internal/stack)))
+		to_chat(user, "<span class='warning'>\The [target] already has [o_a][organ_to_replace.name].</span>")
+		return SURGERY_FAILURE
+
 	target.op_stage.current_organ = organ_to_replace
 	return ..()
 

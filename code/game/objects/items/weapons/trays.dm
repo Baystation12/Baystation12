@@ -16,6 +16,13 @@
 	var/list/carrying = list() // List of things on the tray. - Doohl
 	var/max_carry = 2*base_storage_cost(ITEM_SIZE_NORMAL)
 
+/obj/item/weapon/tray/resolve_attackby(var/atom/A, mob/user)
+	if(istype(A, /obj/item/weapon/storage/)) // There used to be here where it would just deny the tray storage if it had contents. It seems wiser, considering just how useful this tray is as a weapon, to deny it backpacks entirely without actually raising its weight class.
+		to_chat(user, "<span class='warning'>The tray won't fit in [A].</span>")
+		return
+	else
+		. = ..()
+
 /obj/item/weapon/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	// Drop all the things. All of them.

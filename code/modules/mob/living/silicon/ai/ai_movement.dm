@@ -1,2 +1,7 @@
-/mob/living/silicon/ai/SelfMove(turf/n, direct)
-	return 0
+/mob/living/silicon/ai
+	movement_handlers = list(
+		/datum/movement_handler/mob/death,
+		/datum/movement_handler/mob/conscious,
+		/datum/movement_handler/mob/eye,
+		/datum/movement_handler/move_relay
+	)

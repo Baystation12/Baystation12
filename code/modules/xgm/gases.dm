@@ -3,8 +3,8 @@
 	name = "Oxygen"
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.032	// kg/mol
-
 	flags = XGM_GAS_OXIDIZER | XGM_GAS_FUSION_FUEL
+	breathed_product = /datum/reagent/oxygen
 
 /decl/xgm_gas/nitrogen
 	id = "nitrogen"
@@ -17,6 +17,14 @@
 	name = "Carbon Dioxide"
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.044	// kg/mol
+	breathed_product = /datum/reagent/carbon_dioxide
+
+/decl/xgm_gas/methyl_bromide
+	id = "methyl_bromide"
+	name = "Methyl Bromide"
+	specific_heat = 42.59 // J/(mol*K)
+	molar_mass = 0.095	  // kg/mol
+	breathed_product = /datum/reagent/toxin/methyl_bromide
 
 /decl/xgm_gas/phoron
 	id = "phoron"
@@ -34,6 +42,7 @@
 	tile_overlay = "phoron"
 	overlay_limit = 0.7
 	flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT | XGM_GAS_FUSION_FUEL
+	breathed_product = /datum/reagent/toxin/phoron
 
 /decl/xgm_gas/sleeping_agent
 	id = "sleeping_agent"
@@ -44,14 +53,13 @@
 	tile_overlay = "sleeping_agent"
 	overlay_limit = 1
 	flags = XGM_GAS_OXIDIZER //N2O is a powerful oxidizer
+	breathed_product = /datum/reagent/nitrous_oxide
 
 /decl/xgm_gas/methane
 	id = "methane"
 	name = "Methane"
-
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.016	// kg/mol
-
 	flags = XGM_GAS_FUEL
 
 /decl/xgm_gas/alium
@@ -74,12 +82,9 @@
 /decl/xgm_gas/hydrogen
 	id = "hydrogen"
 	name = "Hydrogen"
-
 	specific_heat = 100	// J/(mol*K)
 	molar_mass = 0.002	// kg/mol
-
 	flags = XGM_GAS_FUEL|XGM_GAS_FUSION_FUEL
-
 	burn_product = "watervapor"
 
 /decl/xgm_gas/hydrogen/deuterium
@@ -93,47 +98,44 @@
 /decl/xgm_gas/helium
 	id = "helium"
 	name = "Helium"
-
 	specific_heat = 80	// J/(mol*K)
 	molar_mass = 0.004	// kg/mol
-
 	flags = XGM_GAS_FUSION_FUEL
+	breathed_product = /datum/reagent/helium
 
 /decl/xgm_gas/argon
 	id = "argon"
 	name = "Argon"
-
 	specific_heat = 10	// J/(mol*K)
 	molar_mass = 0.018	// kg/mol
 
+// If narcosis is ever simulated, krypton has a narcotic potency seven times greater than regular airmix.
 /decl/xgm_gas/krypton
 	id = "krypton"
 	name = "Krypton"
-
 	specific_heat = 5	// J/(mol*K)
 	molar_mass = 0.036	// kg/mol
 
 /decl/xgm_gas/neon
 	id = "neon"
 	name = "Neon"
-
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.01	// kg/mol
 
 /decl/xgm_gas/xenon
 	id = "xenon"
 	name = "Xenon"
-
 	specific_heat = 3	// J/(mol*K)
 	molar_mass = 0.054	// kg/mol
+	breathed_product = /datum/reagent/nitrous_oxide/xenon
 
 /decl/xgm_gas/nitrodioxide
 	id = "nitrodioxide"
 	name = "Nitrogen Dioxide"
-
 	specific_heat = 37	// J/(mol*K)
 	molar_mass = 0.054	// kg/mol
 	flags = XGM_GAS_OXIDIZER
+	breathed_product = /datum/reagent/toxin
 
 /decl/xgm_gas/nitricoxide
 	id = "nitricoxide"
@@ -146,10 +148,11 @@
 /decl/xgm_gas/chlorine
 	id = "chlorine"
 	name = "Chlorine"
-
+	tile_overlay = "chlorine"
 	specific_heat = 5	// J/(mol*K)
 	molar_mass = 0.017	// kg/mol
 	flags = XGM_GAS_CONTAMINANT
+	breathed_product = /datum/reagent/toxin/chlorine
 
 /decl/xgm_gas/vapor
 	id = "watervapor"
@@ -157,3 +160,4 @@
 
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.020	// kg/mol
+	breathed_product = /datum/reagent/water

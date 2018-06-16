@@ -12,7 +12,7 @@
 	eye_icon = "eyes_lizard"
 	eye_icon_location = 'icons/mob/lizard_face.dmi'
 
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/tail, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/tail, /datum/unarmed_attack/claws, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite/sharp)
 	primitive_form = "Stok"
 	darksight_range = 3
 	darksight_tint = DARKTINT_MODERATE

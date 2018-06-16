@@ -75,7 +75,7 @@
 	if(!target.reagents)
 		return
 
-	if(user.a_intent == I_HURT && ismob(target))
+	if((user.a_intent == I_HURT) && ismob(target))
 		syringestab(target, user)
 		return
 
@@ -134,7 +134,8 @@
 			var/mob/living/carbon/T = target
 			if(!T.dna)
 				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
-				CRASH("[T] \[[T.type]\] was missing their dna datum!")
+				if(istype(target, /mob/living/carbon/human))
+					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
 			if(NOCLONE in T.mutations) //target done been et, no more blood in him
 				to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
@@ -150,6 +151,13 @@
 			else
 				user.visible_message("<span class='warning'>\The [user] is trying to take a blood sample from [target].</span>")
 
+			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
+				to_chat(user, "<span class='warning'>You miss the vein!</span>")
+				var/target_zone = check_zone(user.zone_sel.selecting)
+				T.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
+				return
+
+			injtime *= user.skill_delay_mult(SKILL_MEDICAL)
 			user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 			user.do_attack_animation(target)
 
@@ -179,6 +187,9 @@
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/proc/injectReagents(var/atom/target, var/mob/user)
+	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
+		syringestab(target, user)
+
 	if(!reagents.total_volume)
 		to_chat(user, "<span class='notice'>The syringe is empty.</span>")
 		mode = SYRINGE_DRAW
@@ -228,17 +239,15 @@
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		user.do_attack_animation(trackTarget)
 
-		if(!do_after(user, injtime, trackTarget))
+		if(!user.do_skilled(injtime, SKILL_MEDICAL, trackTarget))
 			return
 
 		if(target != trackTarget && target.loc != trackTarget)
 			return
-
+	admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 
 	if(target != user)
-		var/contained = reagentlist()
-		admin_inject_log(user, target, src, contained, trans)
 		user.visible_message("<span class='warning'>\the [user] injects \the [target] with [visible_name]!</span>", "<span class='notice'>You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units.</span>")
 	else
 		to_chat(user, "<span class='notice'>You inject yourself with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units.</span>")
@@ -253,7 +262,7 @@
 
 		var/mob/living/carbon/human/H = target
 
-		var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
+		var/target_zone = check_zone(user.zone_sel.selecting)
 		var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
 		if (!affecting || affecting.is_stump())
@@ -275,11 +284,11 @@
 			return
 
 		user.visible_message("<span class='danger'>[user] stabs [target] in \the [hit_area] with [src.name]!</span>")
-		affecting.take_damage(3)
+		target.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
 
 	else
 		user.visible_message("<span class='danger'>[user] stabs [target] with [src.name]!</span>")
-		target.take_organ_damage(3)// 7 is the same as crowbar punch
+		target.apply_damage(3, BRUTE)
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 	var/contained_reagents = reagents.get_reagents()

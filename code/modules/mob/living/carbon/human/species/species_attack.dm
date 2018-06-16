@@ -20,6 +20,16 @@
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	sharp = 1
 	edge = 1
+	
+/datum/unarmed_attack/claws/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+	if(user.gloves)
+		var/obj/item/clothing/gloves/gloves = user.gloves
+		if(istype(gloves) && !gloves.clipped)
+			return 0
+		else
+			return 1
+	else
+		return 1
 
 /datum/unarmed_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
@@ -136,3 +146,10 @@
 	delay = 20
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"
+
+/datum/unarmed_attack/punch/starborn
+	attack_verb = list("scorched", "burned", "fried")
+	shredding = 1
+
+/datum/unarmed_attack/punc/starborn/get_damage_type()
+	return BURN

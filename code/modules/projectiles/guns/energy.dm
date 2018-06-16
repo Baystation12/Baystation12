@@ -21,8 +21,6 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	var/use_external_power = 0 //if set, the weapon will look for an external power source to draw from, otherwise it recharges magically
 	var/recharge_time = 4
 	var/charge_tick = 0
-	var/icon_rounder = 25
-	combustion = 1
 
 /obj/item/weapon/gun/energy/switch_firemodes()
 	. = ..()
@@ -47,6 +45,9 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	if(self_recharge)
 		STOP_PROCESSING(SSobj, src)
 	return ..()
+
+/obj/item/weapon/gun/energy/get_cell()
+	return power_supply
 
 /obj/item/weapon/gun/energy/Process()
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
@@ -104,7 +105,7 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 		if(power_supply.charge < charge_cost)
 			ratio = 0
 		else
-			ratio = max(round(ratio, icon_rounder), icon_rounder)
+			ratio = max(round(ratio, 25), 25)
 
 		if(modifystate)
 			icon_state = "[modifystate][ratio]"

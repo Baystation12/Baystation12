@@ -7,7 +7,7 @@
 /turf/space,
 /area/space)
 "ac" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/yacht/bridge)
 "ad" = (
@@ -428,7 +428,7 @@
 /turf/simulated/wall/wood,
 /area/yacht/living)
 "bk" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/yacht/living)
 "bl" = (
@@ -1112,8 +1112,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "dj" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "dk" = (

@@ -141,14 +141,12 @@
 			if(child.departments & tmp_department)
 				user_outfit = child
 				break
-
-		if(user_rank.sort_order >= 11) //user is an officer
-			if(user_outfit.children[1]) // officer outfit exists
+		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
+			if(user_rank.sort_order >= child.min_rank && user_outfit.min_rank < child.min_rank)
+				user_outfit = child
+		if(department & COM) //user is in command of their department
+			if(user_outfit.children[1])// Command outfit exists
 				user_outfit = user_outfit.children[1]
-
-				if(department & COM) //user is in command of their department
-					if(user_outfit.children[1])// Command outfit exists
-						user_outfit = user_outfit.children[1]
 
 	return populate_uniforms(user_outfit) //Generate uniform lists.
 

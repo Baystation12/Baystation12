@@ -239,11 +239,3 @@
 			tank.distribute_pressure += cp
 		tank.distribute_pressure = min(max(round(tank.distribute_pressure), 0), TANK_MAX_RELEASE_PRESSURE)
 		return 1
-
-/obj/machinery/oxygen_pump/anesthetic
-	name = "anesthetic pump"
-	spawn_type = /obj/item/weapon/tank/anesthetic
-	icon_state = "anesthetic_tank"
-	icon_state_closed = "anesthetic_tank"
-	icon_state_open = "anesthetic_tank_open"
-	mask_type = /obj/item/clothing/mask/breath/anesthetic

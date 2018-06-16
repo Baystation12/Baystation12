@@ -308,8 +308,15 @@
 
 	var/acc_mod = burst_accuracy[min(burst, burst_accuracy.len)]
 	var/disp_mod = dispersion[min(burst, dispersion.len)]
+	var/stood_still = round((world.time - user.l_move_time)/15)
+	if(stood_still)
+		acc_mod += 1 * max(2, stood_still)
+		if(stood_still > 5)
+			acc_mod += accuracy
 
 	if(one_hand_penalty)
+		if(!stood_still)
+			acc_mod -= 1
 		if(!held_twohanded)
 			acc_mod += -ceil(one_hand_penalty/2)
 			disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
@@ -411,6 +418,10 @@
 	var/view_size = round(world.view + zoom_amount)
 	var/scoped_accuracy_mod = zoom_offset
 
+	if(zoom)
+		unzoom(user)
+		return
+
 	zoom(user, zoom_offset, view_size)
 	if(zoom)
 		accuracy = scoped_accuracy + scoped_accuracy_mod
@@ -431,16 +442,23 @@
 		to_chat(user, "The fire selector is set to [current_mode.name].")
 
 /obj/item/weapon/gun/proc/switch_firemodes()
-	if(firemodes.len <= 1)
-		return null
 
-	sel_mode++
-	if(sel_mode > firemodes.len)
-		sel_mode = 1
+	var/next_mode = get_next_firemode()
+	if(!next_mode || next_mode == sel_mode)
+		return null
+	
+	sel_mode = next_mode
 	var/datum/firemode/new_mode = firemodes[sel_mode]
 	new_mode.apply_to(src)
 
 	return new_mode
+
+/obj/item/weapon/gun/proc/get_next_firemode()
+	if(firemodes.len <= 1)
+		return null
+	. = sel_mode + 1
+	if(. > firemodes.len)
+		. = 1
 
 /obj/item/weapon/gun/attack_self(mob/user)
 	var/datum/firemode/new_mode = switch_firemodes(user)
