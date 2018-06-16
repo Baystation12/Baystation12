@@ -4,7 +4,6 @@
 // Do not remove this functionality without good reason, cough reagent_containers cough.
 // -Sayu
 
-
 /obj/item/weapon/storage
 	name = "storage"
 	icon = 'icons/obj/storage.dmi'
@@ -219,8 +218,15 @@
 	if(W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
-	update_icon()
+	if(!NoUpdate)
+		update_icon()
 	return 1
+
+
+/obj/item/weapon/storage/proc/finish_bulk_removal()
+	update_ui_after_item_removal()
+	update_icon()
+
 
 //This proc is called when you want to place an item into the storage item.
 /obj/item/weapon/storage/attackby(obj/item/W as obj, mob/user as mob)
@@ -320,7 +326,7 @@
 	hide_from(usr)
 	for(var/obj/item/I in contents)
 		remove_from_storage(I, T, 1)
-	update_ui_after_item_removal()
+	finish_bulk_removal()
 
 /obj/item/weapon/storage/Initialize()
 	. = ..()

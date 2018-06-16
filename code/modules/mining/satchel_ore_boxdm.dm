@@ -1,6 +1,8 @@
 
 /**********************Ore box**************************/
 
+//
+
 /obj/structure/ore_box
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "orebox0"
@@ -18,7 +20,8 @@
 		var/obj/item/weapon/storage/S = W
 		S.hide_from(usr)
 		for(var/obj/item/weapon/ore/O in S.contents)
-			S.remove_from_storage(O, src) //This will move the item to this item's contents
+			S.remove_from_storage(O, src, 1)
+		S.finish_bulk_removal() //This will move the item to this item's contents
 		to_chat(user, "<span class='notice'>You empty the satchel into the box.</span>")
 
 	update_ore_count()
