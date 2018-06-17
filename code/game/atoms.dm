@@ -476,6 +476,7 @@ its easier to just keep the beam vertical.
 	if (!can_climb(user))
 		return
 
+	add_fingerprint(user)
 	user.visible_message("<span class='warning'>\The [user] starts climbing onto \the [src]!</span>")
 	climbers |= user
 
