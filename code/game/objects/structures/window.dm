@@ -23,7 +23,7 @@
 	var/silicate = 0 // number of units of silicate
 	var/on_frame = FALSE
 	var/material_color
-	blend_objects = list(/obj/machinery/door) // Objects which to blend with
+	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 
 	atmos_canpass = CANPASS_PROC

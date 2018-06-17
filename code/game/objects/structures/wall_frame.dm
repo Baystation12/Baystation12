@@ -18,7 +18,7 @@
 	var/maxhealth = 10
 	var/health = 10
 
-	blend_objects = list(/obj/machinery/door) // Objects which to blend with
+	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 
 /obj/structure/wall_frame/New(var/new_loc)
