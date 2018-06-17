@@ -89,4 +89,3 @@
 	starting_accessories = list (/obj/item/clothing/accessory/rank/fleet/officer/o5, /obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
-e

@@ -107,8 +107,6 @@
 			return global.Tier3Runes;
 		if("Tier4Runes")
 			return global.Tier4Runes;
-		if("TRADE_CONTROLLER")
-			return global.trade_controller;
 		if("UNSC_ranks")
 			return global.UNSC_ranks;
 		if("WALLITEMS")
@@ -1149,6 +1147,8 @@
 			return global.total_lighting_sources;
 		if("total_unit_tests")
 			return global.total_unit_tests;
+		if("trade_controller")
+			return global.trade_controller;
 		if("traitors")
 			return global.traitors;
 		if("transfer_controller")
@@ -2370,6 +2370,8 @@
 			global.total_lighting_sources=newval;
 		if("total_unit_tests")
 			global.total_unit_tests=newval;
+		if("trade_controller")
+			global.trade_controller=newval;
 		if("traitors")
 			global.traitors=newval;
 		if("transfer_controller")
@@ -3017,11 +3019,11 @@
 	"total_lighting_overlays",
 	"total_lighting_sources",
 	"total_unit_tests",
+	"trade_controller",
 	"traitors",
 	"transfer_controller",
 	"turbolift_controller",
 	"turbolifts",
-	"turfs",
 	"turret_icons",
 	"uniqueness_repository",
 	"universe_has_ended",

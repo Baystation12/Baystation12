@@ -66,7 +66,7 @@ def main():
 	variables.sort()
 	code = GenCode(variables)
 	
-	with open(namespace.outfile, 'wb') as outfile:
+	with open(namespace.outfile, 'w') as outfile:
 		outfile.write(code)
 	
 	hash = GenerateMD5(namespace.outfile)

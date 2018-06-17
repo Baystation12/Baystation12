@@ -21,7 +21,7 @@
 	warning_low_pressure = 25
 	hazard_low_pressure = -1
 
-/datum/species/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
+/datum/species/unggoy/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	H.backbag = 0
 	H.equip_to_slot_if_possible(new /obj/item/clothing/suit/armor/special/unggoy_combat_harness,slot_back_str)
 	H.equip_to_slot_if_possible(new /obj/item/clothing/mask/rebreather,slot_wear_mask_str)
