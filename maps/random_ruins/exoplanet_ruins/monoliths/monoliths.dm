@@ -4,6 +4,12 @@
 	description = "Bunch of monoliths surrounding an artifact."
 	suffixes = list("monoliths/monoliths.dmm")
 	cost = 1
+	allow_duplicates = FALSE
+
+/area/map_template/monolith
+	name = "Monolith Ring"
+	icon = 'icons/obj/monolith.dmi'
+	icon_state = "jaggy1"
 
 /obj/structure/monolith
 	name = "monolith"

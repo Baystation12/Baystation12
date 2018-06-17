@@ -109,7 +109,7 @@
 
 	return locate(world.maxx/2, world.maxy/2, world.maxz)
 
-/datum/map_template/proc/load(turf/T, centered=FALSE, clear_contents=FALSE)
+/datum/map_template/proc/load(turf/T, centered=FALSE)
 	if(centered)
 		T = locate(T.x - round(width/2) , T.y - round(height/2) , T.z)
 	if(!T)
@@ -155,7 +155,7 @@
 	return block(placement, locate(placement.x+width-1, placement.y+height-1, placement.z))
 
 //for your ever biggening badminnery kevinz000
-//❤ - Cyberboss
+//? - Cyberboss
 /proc/load_new_z_level(var/file, var/name)
 	var/datum/map_template/template = new(file, name)
 	template.load_new_z()
