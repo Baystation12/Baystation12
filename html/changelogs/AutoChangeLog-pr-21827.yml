@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "adds the instruct verb. A character with basic leadership and experienced skill X can instruct a character in X from Untrained to Basic. Has a 15 minute cooldown to use; buff lasts all round; max of three buffs on any person. The target has to be close and there's a short timer during which neither party should move."

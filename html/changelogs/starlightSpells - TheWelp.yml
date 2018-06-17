@@ -1,6 +1,0 @@
-author: TheWelp
-delete-after: True
-changes: 
-  - rscadd: "Adds various starlight specific spells for use in future deity form."
-  - tweak: "Adds two new flags for targeted spells to filter via faction."
-  - tweak: "Adds more effects for some spells."
