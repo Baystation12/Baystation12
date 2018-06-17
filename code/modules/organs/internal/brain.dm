@@ -49,16 +49,18 @@
 
 /obj/item/organ/internal/brain/New(var/mob/living/carbon/holder)
 	..()
-	max_damage = 200
 	if(species)
-		max_damage = species.total_health
-	min_bruised_damage = max_damage*0.25
-	min_broken_damage = max_damage*0.75
+		set_max_damage(species.total_health)
+	else
+		set_max_damage(200)
 
-	damage_threshold_value = round(max_damage / damage_threshold_count)
 	spawn(5)
 		if(brainmob && brainmob.client)
 			brainmob.client.screen.len = null //clear the hud
+
+/obj/item/organ/internal/brain/set_max_damage(var/ndamage)
+	..()
+	damage_threshold_value = round(max_damage / damage_threshold_count)
 
 /obj/item/organ/internal/brain/Destroy()
 	QDEL_NULL(brainmob)
@@ -215,6 +217,8 @@
 					damprob = owner.chem_effects[CE_STABLE] ? 80 : 100
 					if(prob(damprob))
 						take_damage(1)
+					if(prob(damprob))
+						take_damage(1)
 	..()
 
 /obj/item/organ/internal/brain/take_damage(var/damage)
@@ -270,3 +274,13 @@
 		if(!owner.lying)
 			to_chat(owner, "<span class='danger'>You black out!</span>")
 		owner.Paralyse(10)
+
+/obj/item/organ/internal/brain/surgical_fix(mob/user)
+	var/blood_volume = owner.get_blood_oxygenation()
+	if(blood_volume < BLOOD_VOLUME_SURVIVE)
+		to_chat(user, "<span class='danger'>Parts of [src] didn't survive the procedure due to lack of air supply!</span>")
+		set_max_damage(Floor(max_damage - 0.25*damage))
+	heal_damage(damage)
+
+/obj/item/organ/internal/brain/get_scarring_level()
+	. = (species.total_health - max_damage)/species.total_health
