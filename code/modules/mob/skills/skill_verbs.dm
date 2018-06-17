@@ -52,3 +52,31 @@ GLOBAL_LIST_INIT(skill_verbs, init_subtypes(/datum/skill_verb))
 	cooling_down = 1
 	update_verb()
 	addtimer(CALLBACK(src, .proc/remove_cooldown), cooldown)
+
+/*
+The Say Loudly verb. Same effect as using :b.
+*/
+
+/datum/skill_verb/say_loudly
+	the_verb = /mob/living/proc/say_loudly
+
+/datum/skill_verb/say_loudly/should_have_verb(datum/skillset/given_skillset)
+	if(!isliving(given_skillset.owner))
+		return
+	return ..()
+
+/datum/skill_verb/say_loudly/should_see_verb()
+	if(!..())
+		return
+	if(!skillset.owner.skill_check(SKILL_MANAGEMENT, SKILL_EXPERT))
+		return
+	return 1
+
+/mob/living/proc/say_loudly()
+	set category = "IC"
+	set name = "Say Loudly"
+	set src = usr
+
+	var/message = input(src, null, "Say Loudly \"text\"") as null|text
+	if(message)
+		say(":b[message]")

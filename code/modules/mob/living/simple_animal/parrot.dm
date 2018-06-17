@@ -717,7 +717,7 @@
 	..(message)
 
 
-/mob/living/simple_animal/parrot/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
+/mob/living/simple_animal/parrot/hear_say(var/message, var/verb = "says", var/datum/language/language, var/alt_name = "", var/style, var/mob/speaker)
 	if(prob(50))
 		parrot_hear(message)
 	..()

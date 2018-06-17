@@ -10,7 +10,7 @@
 	var/list/allowed_targets = list() //WHO CAN I KILL D:
 	var/retribution = 1 //whether or not they will attack us if we attack them like some kinda dick.
 
-/mob/living/simple_animal/hostile/commanded/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/simple_animal/hostile/commanded/hear_say(var/message, var/verb = "says", var/datum/language/language, var/alt_name = "", var/style, var/mob/speaker, var/sound/speech_sound, var/sound_vol)
 	if((weakref(speaker) in friends) || speaker == master)
 		command_buffer.Add(speaker)
 		command_buffer.Add(lowertext(html_decode(message)))

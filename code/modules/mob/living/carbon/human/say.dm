@@ -206,6 +206,8 @@
 		if("whisper") //It's going to get sanitized again immediately, so decode.
 			whisper_say(html_decode(message), speaking, alt_name)
 			return 1
+		if("big") //Doesn't work over radio.
+			return
 		else
 			if(message_mode)
 				if(l_ear && istype(l_ear,/obj/item/device/radio))
