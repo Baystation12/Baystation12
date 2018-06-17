@@ -2427,6 +2427,7 @@
 	dir = 4;
 	pixel_x = -22
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/plating,
 /area/vacant/mess)
 "fm" = (
@@ -6914,6 +6915,7 @@
 	icon_state = "0-2"
 	},
 /obj/structure/handrai,
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
 "ob" = (
@@ -8311,6 +8313,7 @@
 /obj/item/weapon/crowbar,
 /obj/item/device/flashlight,
 /obj/item/device/radio,
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/ship)
 "qL" = (
@@ -12453,6 +12456,7 @@
 	pixel_x = 4;
 	pixel_y = 4
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/fore)
 "xP" = (
@@ -14104,6 +14108,7 @@
 	name = "Security Equipment Locker";
 	req_access = list(1)
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled/dark,
 /area/security/checkpoint2)
 "AO" = (
@@ -14726,6 +14731,7 @@
 "BU" = (
 /obj/structure/table/steel,
 /obj/random/maintenance/solgov,
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/plating,
 /area/vacant/monitoring)
 "BV" = (
@@ -15123,6 +15129,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled,
 /area/storage/auxillary/port)
 "CR" = (
@@ -16873,6 +16880,7 @@
 "Gr" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/crate,
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/plating,
 /area/quartermaster/storage)
 "Gs" = (
@@ -18155,6 +18163,7 @@
 	},
 /obj/machinery/cell_charger,
 /obj/item/device/radio,
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "Jb" = (
@@ -18443,6 +18452,7 @@
 /area/quartermaster/hangar)
 "JL" = (
 /obj/structure/closet/crate/plastic,
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "JM" = (
@@ -19145,6 +19155,10 @@
 "RQ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/storage/auxillary/starboard)
+"Se" = (
+/obj/random_multi/single_item/boombox,
+/turf/simulated/floor/plating,
+/area/maintenance/fourthdeck/port)
 "Sg" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/glass/science{
@@ -19209,6 +19223,11 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/security/checkpoint2)
+"SH" = (
+/obj/structure/table/steel,
+/obj/random_multi/single_item/boombox,
+/turf/simulated/floor/tiled,
+/area/quartermaster/unused)
 "SZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -36938,7 +36957,7 @@ vQ
 GV
 Hw
 HY
-Hv
+Se
 IP
 Hv
 Jr
@@ -44380,7 +44399,7 @@ Vr
 Vr
 Vr
 ZM
-dd
+SH
 TG
 eg
 fb
