@@ -571,9 +571,7 @@
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "bB" = (
-/obj/machinery/light/spot{
-	pixel_y = 32
-	},
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/cockpit)
 "bC" = (
@@ -586,12 +584,11 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
-"bD" = (
-/turf/simulated/wall/titanium,
-/area/exploration_shuttle/cockpit)
 "bE" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/crew)
 "bF" = (
@@ -604,13 +601,8 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
-/area/exploration_shuttle/crew)
-"bG" = (
-/obj/machinery/light/spot{
-	pixel_y = 32
-	},
-/turf/simulated/wall/titanium,
 /area/exploration_shuttle/crew)
 "bH" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -820,6 +812,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "ch" = (
@@ -844,10 +837,6 @@
 /obj/structure/table/steel_reinforced,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
-/area/exploration_shuttle/cockpit)
-"ck" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "cl" = (
 /obj/structure/bed/chair,
@@ -1231,6 +1220,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/crew)
 "da" = (
@@ -1729,10 +1719,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
-"ec" = (
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/plating,
-/area/exploration_shuttle/crew)
 "ed" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
@@ -2077,6 +2063,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "eM" = (
@@ -2139,7 +2126,16 @@
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "eP" = (
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 1;
+	icon_state = "pdoor0";
+	id = "calypso_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "eQ" = (
@@ -2204,6 +2200,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exploration_shuttle/airlock)
 "eV" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/airlock)
 "eW" = (
@@ -3575,6 +3572,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/airlock)
 "hA" = (
@@ -3582,6 +3580,7 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/airlock)
 "hB" = (
@@ -4005,6 +4004,7 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/cargo)
 "iu" = (
@@ -4105,6 +4105,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/exploration_shuttle/cargo)
 "iC" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/cargo)
 "iD" = (
@@ -4461,6 +4462,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo)
 "jw" = (
@@ -4511,6 +4513,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo)
 "jB" = (
@@ -6208,6 +6211,7 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/exploration)
 "mM" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/atmos)
 "mN" = (
@@ -6240,6 +6244,7 @@
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
 "mP" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/power)
 "mQ" = (
@@ -7668,6 +7673,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/power)
 "pr" = (
@@ -9706,6 +9712,7 @@
 /area/exploration_shuttle/power)
 "te" = (
 /obj/structure/fuel_port,
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/power)
 "tf" = (
@@ -15381,6 +15388,7 @@
 /turf/simulated/wall/prepainted,
 /area/quartermaster/storage)
 "Ds" = (
+/obj/effect/paint/red,
 /turf/simulated/wall/titanium,
 /area/guppy_hangar/start)
 "Dt" = (
@@ -15391,6 +15399,7 @@
 /area/guppy_hangar/start)
 "Du" = (
 /obj/structure/fuel_port,
+/obj/effect/paint/red,
 /turf/simulated/wall/titanium,
 /area/guppy_hangar/start)
 "Dv" = (
@@ -18304,6 +18313,7 @@
 "Jv" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "Jw" = (
@@ -19286,6 +19296,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/unused)
+"TT" = (
+/obj/effect/paint/hull,
+/turf/simulated/wall/titanium,
+/area/guppy_hangar/start)
 "Uq" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 8
@@ -19320,6 +19334,11 @@
 "Vr" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fourthdeck/aft)
+"Vt" = (
+/obj/effect/paint/black,
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/atmos)
 "VO" = (
 /obj/structure/table/steel,
 /turf/simulated/floor/plating,
@@ -19429,6 +19448,16 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/quartermaster/office)
+"Yc" = (
+/obj/effect/paint/black,
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/power)
+"Ye" = (
+/obj/effect/paint/black,
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/cargo)
 "Yp" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -40342,7 +40371,7 @@ bB
 cg
 cg
 cg
-bD
+bB
 eK
 fD
 gB
@@ -40357,7 +40386,7 @@ pe
 qq
 mM
 mM
-mM
+Vt
 we
 ti
 bi
@@ -40544,7 +40573,7 @@ bC
 ch
 cP
 dw
-bD
+bB
 eL
 fE
 eL
@@ -40746,7 +40775,7 @@ bC
 ci
 cQ
 dx
-bD
+bB
 eM
 fF
 gC
@@ -40948,7 +40977,7 @@ bC
 cj
 cR
 dy
-bD
+bB
 eN
 fG
 gD
@@ -40963,7 +40992,7 @@ ph
 qt
 mM
 mM
-mM
+Vt
 we
 ti
 bi
@@ -41146,11 +41175,11 @@ Qd
 Qd
 aE
 bd
-bD
-ck
+bB
+cg
 cS
-ck
-bD
+cg
+bB
 eO
 fH
 gE
@@ -41353,9 +41382,9 @@ cl
 cT
 dz
 bE
-eP
+eL
 fI
-eP
+eL
 eV
 ix
 iA
@@ -41958,7 +41987,7 @@ bF
 co
 cW
 dC
-ec
+bF
 eS
 fL
 gH
@@ -41973,7 +42002,7 @@ pm
 iC
 iC
 iC
-iC
+Ye
 we
 ti
 bi
@@ -42183,16 +42212,16 @@ bi
 bi
 bd
 Ds
-Ds
+TT
 Fe
 FN
-Ds
-Ds
-Ds
-Ds
-Ds
-Ds
-Ds
+TT
+TT
+TT
+TT
+TT
+TT
+TT
 we
 Kb
 Qd
@@ -42388,13 +42417,13 @@ Dt
 Er
 Ff
 FO
-Ds
+TT
 Hd
 HG
 Ih
 Iw
 Ja
-Ds
+TT
 JN
 Ke
 Qd
@@ -42560,7 +42589,7 @@ Qd
 Qd
 aF
 bg
-bG
+bE
 bE
 cZ
 bE
@@ -42579,7 +42608,7 @@ pp
 qz
 mP
 te
-mP
+Yc
 we
 ti
 bi
@@ -42792,13 +42821,13 @@ Dt
 Er
 Fh
 FQ
-Ds
+TT
 Hf
 HI
 Ij
 Iy
 Jc
-Ds
+TT
 we
 Kf
 Qd
@@ -42991,16 +43020,16 @@ bi
 bi
 bd
 Du
-Ds
+TT
 Fi
-Ds
-Ds
-Ds
-Ds
-Ds
-Ds
-Ds
-Ds
+TT
+TT
+TT
+TT
+TT
+TT
+TT
+TT
 we
 Kf
 Qd

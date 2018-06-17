@@ -132,3 +132,9 @@ Weapons
 
 /obj/item/ammo_magazine/mc9mm/oneway
 	initial_ammo = 1
+
+/obj/effect/paint/hull
+	color = COLOR_HULL
+	
+/obj/effect/paint/expeditionary
+	color = "#68099e"
