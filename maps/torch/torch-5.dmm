@@ -2081,9 +2081,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
 "fn" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
 /obj/machinery/button/remote/blast_door{
 	id = "aquila_shutters";
 	name = "Protective Shutters Control";
@@ -2095,6 +2092,11 @@
 	pixel_x = 32;
 	pixel_y = 0;
 	req_access = list(79)
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
@@ -5027,13 +5029,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "lm" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 8
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
