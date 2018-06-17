@@ -23,6 +23,7 @@
 			var/obj/item/new_item = summon_item(to_create)
 			var/obj/item/old_item = L.get_equipped_item(slot_id)
 			L.equip_to_slot(new_item, slot_id)
+			new_item.pickup(L)
 			if(old_item)
 				L.remove_from_mob(old_item)
 				if(delete_old)
