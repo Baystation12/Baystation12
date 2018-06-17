@@ -457,7 +457,6 @@
 	spawn_positions = 3
 	supervisors = "the Commanding Officer, Executive Officer, and Pathfinder"
 	selection_color = "#68099e"
-	minimal_player_age = 4
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
@@ -797,7 +796,6 @@
 
 /datum/job/doctor
 	title = "Corpsman"
-	minimal_player_age = 7
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the Chief Medical Officer"
@@ -959,7 +957,6 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Deck Officer and Executive Officer"
-	minimal_player_age = 3
 	ideal_character_age = 24
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/tech
 	allowed_branches = list(
@@ -1167,7 +1164,6 @@
 	spawn_positions = 6
 	supervisors = "the Research Director"
 	economic_modifier = 10
-	minimal_player_age = 7
 	ideal_character_age = 45
 	alt_titles = list(
 		"Xenoarcheologist",
