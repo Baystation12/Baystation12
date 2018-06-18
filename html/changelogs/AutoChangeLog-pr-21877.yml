@@ -1,0 +1,5 @@
+author: "Miraviel"
+delete-after: True
+changes: 
+  - maptweak: "Reorganized the kitchen cabinet and the crates in the Medical Storage (the big bag of salt and the defibrillator are no longer blocking everything else)."
+  - maptweak: "Removed the anaesthetics closet from the Medical Storage."
