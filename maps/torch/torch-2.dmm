@@ -5057,6 +5057,7 @@
 "kA" = (
 /obj/structure/table/steel,
 /obj/item/device/flashlight/lamp,
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/lino,
 /area/tcommsat/computer)
 "kB" = (
@@ -14484,6 +14485,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled/dark,
 /area/security/evidence)
 "CK" = (
@@ -18623,6 +18625,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
+"NF" = (
+/obj/structure/closet/emcloset,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/random_multi/single_item/boombox,
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/sleep/cryo)
 "Ob" = (
 /obj/effect/shuttle_landmark/torch/deck2/aquila,
 /turf/space,
@@ -38301,7 +38309,7 @@ vT
 vT
 Df
 za
-Hc
+NF
 Hc
 Ew
 Vj

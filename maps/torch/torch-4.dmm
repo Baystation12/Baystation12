@@ -3077,6 +3077,7 @@
 	spawn_nothing_percentage = 50;
 	spawn_object = /obj/item/weapon/deck/cards
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/safe_room/firstdeck)
 "agA" = (
@@ -15897,6 +15898,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "aVu" = (
@@ -22205,6 +22207,7 @@
 /obj/effect/floor_decal/corner/purple{
 	dir = 9
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
 "jCb" = (
@@ -23551,6 +23554,7 @@
 /obj/machinery/newscaster{
 	pixel_x = 32
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/carpet,
 /area/medical/mentalhealth)
 "lIb" = (

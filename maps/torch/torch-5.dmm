@@ -11662,6 +11662,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/plating,
 /area/aquila/maintenance)
 "zd" = (
@@ -13146,6 +13147,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/random_multi/single_item/boombox,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Ih" = (
