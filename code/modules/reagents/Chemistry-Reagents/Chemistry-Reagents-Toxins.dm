@@ -465,7 +465,7 @@
 		return
 	M.jitteriness = max(M.jitteriness - 5, 0)
 	if(prob(80))
-		M.adjustBrainLoss(0.1 * removed)
+		M.adjustBrainLoss(5.25 * removed)
 	if(prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
