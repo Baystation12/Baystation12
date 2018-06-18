@@ -9,7 +9,7 @@
 	var/wax = 30 MINUTES
 
 /obj/item/weapon/flame/candle/New()
-	wax = rand(27 MINUTES, 33 MINUTES) / SSobjs.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
+	wax = rand(27 MINUTES, 33 MINUTES) / SSobj.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
 
 	..()
 
@@ -25,9 +25,14 @@
 
 /obj/item/weapon/flame/candle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	if(W.is_hot)
+	if(is_hot(W))
 		light()
 
+/obj/item/weapon/flame/candle/resolve_attackby(var/atom/A, mob/user)
+	. = ..()
+	if(istype(A, /obj/item/weapon/flame/candle/) && is_hot(src))
+		var/obj/item/weapon/flame/candle/other_candle = A
+		other_candle.light()
 
 /obj/item/weapon/flame/candle/proc/light(mob/user)
 	if(!src.lit)

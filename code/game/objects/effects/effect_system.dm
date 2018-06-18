@@ -69,9 +69,9 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/steam_spread/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread), 0)
+		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
 
-/datum/effect/effect/system/steam_spread/spread()
+/datum/effect/effect/system/steam_spread/spread(var/i)
 	set waitfor = 0
 	if(holder)
 		src.location = get_turf(holder)
@@ -139,9 +139,9 @@ steam.start() -- spawns the effect
 /datum/effect/effect/system/spark_spread/start()
 	var/i = 0
 	for(i=0, i<src.number, i++)
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread), 0)
+		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
 
-/datum/effect/effect/system/spark_spread/spread()
+/datum/effect/effect/system/spark_spread/spread(var/i)
 	set waitfor = 0
 	if(holder)
 		src.location = get_turf(holder)
@@ -319,9 +319,9 @@ steam.start() -- spawns the effect
 	for(i=0, i<src.number, i++)
 		if(src.total_smoke > 20)
 			return
-		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread), 0)
+		addtimer(CALLBACK(src, /datum/effect/effect/system/proc/spread, i), 0)
 
-/datum/effect/effect/system/smoke_spread/spread()
+/datum/effect/effect/system/smoke_spread/spread(var/i)
 	set waitfor = 0
 	if(holder)
 		src.location = get_turf(holder)
@@ -336,8 +336,9 @@ steam.start() -- spawns the effect
 	for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 		sleep(1 SECOND)
 		step(smoke,direction)
-		if(var/obj/effect/effect/smoke/not_us in loc && not_us != smoke)
-		step(not_us,direction)
+		var/obj/effect/effect/smoke/not_us = locate() in get_turf(src)
+		if(not_us && not_us != smoke)
+			step(not_us,direction)
 	addtimer(CALLBACK(src, .proc/spread_callback),0)
 
 /datum/effect/effect/system/smoke_spread/proc/spread_callback(var/obj/effect/effect/smoke/smoke, var/datum/effect/effect/system/smoke_spread/parent, var/time)
