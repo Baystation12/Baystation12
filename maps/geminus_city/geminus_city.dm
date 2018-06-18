@@ -17,6 +17,8 @@
 	#include "../insurrection/unsc_staging_areas.dm"
 
 	#include "geminuscity_2.dmm"
+	#include "geminuscity_3.dmm"
+	#include "geminuscity_4.dmm"
 	#include "unsc_staging.dmm"
 
 	#define using_map_DATUM /datum/map/geminus_city

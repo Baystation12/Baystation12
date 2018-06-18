@@ -106,7 +106,7 @@
 "cb" = (/obj/machinery/light/spot,/obj/structure/lattice,/turf/simulated/floor,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "cc" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
 "cd" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/dark,/area/exo_Ice_facility{base_turf = /turf/simulated/floor/asteroid/planet; icon_state = "fsmaint"; requires_power = 0; tag = "icon-fsmaint"})
-"ce" = (/obj/effect/landmark/map_data{height = 2},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
+"ce" = (/obj/effect/landmark/map_data{height = 2; name = "Map Data Fuel Depot"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_Ice_facility/outer{base_turf = /turf/simulated/floor/exoplanet/snow})
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

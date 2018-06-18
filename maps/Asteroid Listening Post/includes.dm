@@ -3,5 +3,5 @@
 #include "areas.dm"
 #include "spawns_jobs.dm"
 
-#include "Asteroid1.dmm"
-#include "Asteroid2.dmm"
+#include "Asteroid_2.dmm"
+#include "Asteroid_1.dmm"
