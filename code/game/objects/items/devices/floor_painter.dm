@@ -67,7 +67,8 @@
 		)
 
 
-/obj/item/device/floor_painter/afterattack(var/atom/A, var/mob/user, proximity, params)
+/obj/item/device/floor_painter/resolve_attackby(var/atom/A, var/mob/user, proximity, params)
+	add_fingerprint(user)
 	if(!proximity)
 		return
 
