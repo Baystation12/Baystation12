@@ -8,7 +8,6 @@
 	atom_flags = ATOM_FLAG_NO_BLOOD
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
-	anchored = 1
 	if(active)
 		return
 	active = 1
@@ -20,7 +19,6 @@
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
-	anchored = 0
 	if(!active)
 		return
 	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
@@ -209,7 +207,7 @@
 
 /obj/item/weapon/melee/energy/blade/dropped()
 	..()
-	spawn(1) if(src) qdel(src)
+	QDEL_IN(src, 0)
 
 /obj/item/weapon/melee/energy/blade/Process()
 	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
@@ -224,4 +222,4 @@
 			host.pinned -= src
 			host.embedded -= src
 			host.drop_from_inventory(src)
-		spawn(1) if(src) qdel(src)
+		QDEL_IN(src, 0)
