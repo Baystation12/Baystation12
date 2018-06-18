@@ -2239,7 +2239,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/airlock/glass/science{
+/obj/machinery/door/airlock/glass/sol{
 	name = "Ready Room";
 	req_access = list(93)
 	},
@@ -5093,7 +5093,7 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/ship)
 "kL" = (
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	id_tag = null;
 	name = "Cockpit";
 	req_access = list(74)
@@ -5148,7 +5148,7 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/ship)
 "kQ" = (
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	id_tag = null;
 	name = "Laboratory";
 	req_access = list(74)
@@ -7741,7 +7741,7 @@
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/ship)
 "pz" = (
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	id_tag = null;
 	name = "Analysis";
 	req_access = list(74)
@@ -9784,7 +9784,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	name = "Petrov Access";
 	req_access = list(73)
 	},
@@ -9872,7 +9872,7 @@
 /area/maintenance/fourthdeck/aft)
 "to" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	name = "Petrov Dock";
 	req_access = list(74)
 	},
@@ -10227,7 +10227,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/ship)
 "tK" = (
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	id_tag = null;
 	name = "Laboratory";
 	req_access = list(74)
@@ -10883,7 +10883,7 @@
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/ship)
 "vb" = (
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	id_tag = null;
 	name = "Isolation Chambers";
 	req_access = list(74)
@@ -11521,7 +11521,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	id_tag = null;
 	name = "Storage and Power";
 	req_access = list(74)
@@ -17760,7 +17760,7 @@
 /area/rnd/canister)
 "Il" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	name = "Canister Storage";
 	req_access = list(8)
 	},
@@ -18959,7 +18959,7 @@
 /area/maintenance/fourthdeck/starboard)
 "Ps" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass/science{
+/obj/machinery/door/airlock/glass/sol{
 	name = "Exploration Equipment";
 	req_access = list(93)
 	},
@@ -19161,7 +19161,7 @@
 /area/maintenance/fourthdeck/port)
 "Sg" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass/science{
+/obj/machinery/door/airlock/glass/sol{
 	name = "Exploration Equipment";
 	req_access = list(93)
 	},
@@ -19374,7 +19374,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
-/obj/machinery/door/airlock/glass/science{
+/obj/machinery/door/airlock/glass/sol{
 	name = "Exploration Equipment";
 	req_access = list(93)
 	},

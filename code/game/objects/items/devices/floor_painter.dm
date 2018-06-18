@@ -57,6 +57,7 @@
 		"NT red" =   		COLOR_NT_RED,
 		"orange" = 			COLOR_ORANGE,
 		"pale orange" =   	COLOR_PALE_ORANGE,
+		"pale purple" = 	COLOR_PURPLE_GRAY,
 		"red" = 			COLOR_RED,
 		"sky blue" =   		COLOR_DEEP_SKY_BLUE,
 		"titanium" =     	COLOR_TITANIUM,

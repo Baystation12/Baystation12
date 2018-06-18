@@ -166,8 +166,8 @@
 
 /obj/item/clothing/head/beret/solgov/customs
 	name = "customs and trade beret"
-	desc = "A purple beret denoting service in the Customs and Trade Bureau. For personnel that are more inclined towards style than safety."
-	icon_state = "beret_purpleyellow"
+	desc = "A green beret denoting service in the Customs and Trade Bureau. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_green"
 
 /obj/item/clothing/head/beret/solgov/orbital
 	name = "orbital assault beret"
@@ -176,8 +176,8 @@
 
 /obj/item/clothing/head/beret/solgov/research
 	name = "government research beret"
-	desc = "A green beret denoting service in the Bureau of Research. For explorers that are more inclined towards style than safety."
-	icon_state = "beret_green"
+	desc = "A purple beret denoting service in the Bureau of Research. For explorers that are more inclined towards style than safety."
+	icon_state = "beret_purpleyellow"
 
 /obj/item/clothing/head/beret/solgov/health
 	name = "health service beret"
@@ -342,3 +342,8 @@
 	icon = 'maps/torch/icons/obj/solgov-head.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/solgov-head.dmi')
 	starting_accessories = null
+
+/obj/item/clothing/head/helmet/pilot
+	name = "pilot's helmet"
+	desc = "A pilot's helmet for operating the cockpit in style. For when you want to protect your noggin AND look stylish."
+	icon_state = "pilotgov"

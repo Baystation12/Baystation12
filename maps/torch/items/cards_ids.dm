@@ -101,6 +101,11 @@
 /obj/item/weapon/card/id/torch/contractor/supply
 	job_access_type = /datum/job/cargo_contractor
 
+/obj/item/weapon/card/id/torch/crew/mining
+	job_access_type = /datum/job/mining
+
+/obj/item/weapon/card/id/torch/contractor/mining
+	job_access_type = /datum/job/mining
 
 /obj/item/weapon/card/id/torch/crew/service //unused
 	job_access_type = /datum/job/assistant
@@ -117,7 +122,6 @@
 /obj/item/weapon/card/id/torch/contractor/service/bartender
 	job_access_type = /datum/job/bartender
 
-
 /obj/item/weapon/card/id/torch/crew/representative
 	job_access_type = /datum/job/representative
 
@@ -133,6 +137,21 @@
 /obj/item/weapon/card/id/torch/crew/explorer
 	job_access_type = /datum/job/explorer
 
+/obj/item/weapon/card/id/torch/silver/research
+	job_access_type = /datum/job/rd
+
+/obj/item/weapon/card/id/torch/crew/pilot
+	job_access_type = /datum/job/pilot
+
+/obj/item/weapon/card/id/torch/crew/senior_scientist
+	job_access_type = /datum/job/senior_scientist
+
+/obj/item/weapon/card/id/torch/crew/scientist
+	job_access_type = /datum/job/scientist
+
+/obj/item/weapon/card/id/torch/crew/researchassist
+	job_access_type = /datum/job/scientist_assistant
+
 //NanoTrasen and Passengers
 
 /obj/item/weapon/card/id/torch/passenger
@@ -145,14 +164,8 @@
 	icon_state = "corporate"
 	job_access_type = /datum/job/scientist_assistant
 
-/obj/item/weapon/card/id/torch/silver/research
-	job_access_type = /datum/job/rd
-
 /obj/item/weapon/card/id/torch/passenger/research/senior_scientist
 	job_access_type = /datum/job/senior_scientist
-
-/obj/item/weapon/card/id/torch/passenger/research/nt_pilot
-	job_access_type = /datum/job/nt_pilot
 
 /obj/item/weapon/card/id/torch/passenger/research/scientist
 	job_access_type = /datum/job/scientist

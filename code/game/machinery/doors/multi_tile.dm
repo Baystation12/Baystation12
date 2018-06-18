@@ -114,7 +114,7 @@
 
 /obj/machinery/door/airlock/multi_tile/science
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_VIOLET
+	stripe_color = COLOR_PURPLE_GRAY
 
 /obj/machinery/door/airlock/multi_tile/sol
 	door_color = COLOR_BLUE_GRAY
@@ -168,7 +168,7 @@
 
 /obj/machinery/door/airlock/multi_tile/glass/science
 	door_color = COLOR_WHITE
-	stripe_color = COLOR_VIOLET
+	stripe_color = COLOR_PURPLE_GRAY
 
 /obj/machinery/door/airlock/multi_tile/glass/sol
 	door_color = COLOR_BLUE_GRAY
