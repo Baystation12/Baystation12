@@ -62,13 +62,9 @@
 
 /obj/item/device/radio/headset/headset_deckofficer/alt
 	name = "deck officer's bowman headset"
-	icon_state = "cargo_headset_alt"
 	item_state = "cargo_headset_alt"
-
-/obj/item/weapon/storage/box/headset/torchxo
-	name = "box of spare executive officer headsets"
-	desc = "A box full of executive officer headsets."
-	startswith = list(/obj/item/device/radio/headset/heads/torchxo = 7)
+	icon_state = "cargo_headset_alt"
+	max_keys = 3
 
 /obj/item/device/radio/headset/bridgeofficer
 	name = "bridge officer's headset"
@@ -81,6 +77,7 @@
 	name = "bridge officer's bowman headset"
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
+	max_keys = 4
 
 /obj/item/device/radio/headset/exploration
 	name = "exploration headset"
