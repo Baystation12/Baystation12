@@ -28,15 +28,6 @@
 	new /obj/item/weapon/pickaxe(src)
 	new /obj/item/clothing/glasses/meson(src)
 
-/******************************Lantern*******************************/
-
-/obj/item/device/flashlight/lantern
-	/*name = "lantern"
-	icon_state = "lantern"
-	item_state = "lantern"
-	desc = "A mining lantern."
-	flashlight_outer_range = 5*/
-
 
 /*****************************Pickaxe********************************/
 

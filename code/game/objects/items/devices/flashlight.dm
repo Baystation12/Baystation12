@@ -164,13 +164,11 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 200,"glass" = 100)
 	flashlight_outer_range = 5
 
-/obj/item/device/flashlight/lantern/update_icon(mob/user as mob)
+/obj/item/device/flashlight/lantern/update_icon()
 	..()
 	if(on)
-		icon_state = "lantern-on"
 		item_state = "lantern-on"
 	else
-		icon_state = "lantern"
 		item_state = "lantern"
 
 /******************************Lantern*******************************/
