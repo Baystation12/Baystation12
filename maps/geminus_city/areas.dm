@@ -26,10 +26,6 @@
 	icon_state = "blue"
 
 
-/area/planets/Geminus/outdoor/east
-	name = "\improper Geminus City - East"
-	icon_state = "green"
-
 /area/planets/Geminus/outdoor/west
 	name = "\improper Geminus City - West"
 	icon_state = "red"
@@ -72,10 +68,6 @@
 	name = "\improper Stage"
 	icon_state = "theatre"
 
-/area/planets/Geminus/indoor/shoppingarea
-	name = "\improper Clothes Store"
-	icon_state = "red"
-
 /area/planets/Geminus/indoor/barber
 	name = "\improper Salon and Barber Shop"
 	icon_state = "yellow"
@@ -107,10 +99,6 @@
 /area/planets/Geminus/indoor/police_station
 	name = "\improper Police Station"
 	icon_state = "brig"
-
-/area/planets/Geminus/indoor/prison
-	name = "\improper Security - Prison Wing"
-	icon_state = "sec_prison"
 
 /area/planets/Geminus/indoor/xenoflora
 	name = "\improper Xenoflora Lab"
@@ -167,14 +155,6 @@
 /area/planets/Geminus/indoor/mining
 	name = "\improper Mine"
 	icon_state = "mining"
-
-/area/planets/Geminus/indoor/cop_office
-	name = "\improper Chief Of Police Office"
-	icon_state = "green"
-
-/area/planets/Geminus/indoor/warden_office
-	name = "\improper Warden Office"
-	icon_state = "green"
 
 /area/planets/Geminus/indoor/armory
 	name = "\improper City Police Armory"
