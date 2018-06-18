@@ -68,14 +68,6 @@
 	name = "\improper Stage"
 	icon_state = "theatre"
 
-/area/planets/Geminus/indoor/barber
-	name = "\improper Salon and Barber Shop"
-	icon_state = "yellow"
-
-/area/planets/Geminus/indoor/shoppingarea
-	name = "\improper Shopping Area"
-	icon_state = "green"
-
 /area/planets/Geminus/indoor/hotel
 	name = "\improper Hotel"
 	icon_state = "yellow"
