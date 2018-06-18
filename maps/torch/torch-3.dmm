@@ -195,14 +195,6 @@
 "as" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/disposal)
-"at" = (
-/obj/structure/closet/secure_closet/medical2,
-/obj/item/weapon/storage/box/autoinjectors,
-/obj/item/weapon/storage/box/syringes,
-/obj/item/weapon/storage/box/bodybags,
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/storage/medical)
 "au" = (
 /obj/structure/sign/warning/vent_port,
 /turf/simulated/wall/r_wall/hull,
@@ -37283,7 +37275,7 @@ aa
 aB
 bn
 bq
-at
+bq
 db
 ee
 Ge
