@@ -70,16 +70,6 @@ GLOBAL_LIST_EMPTY(skills)
 // ONLY SKILL DEFINITIONS BELOW THIS LINE
 // Category: Organizational
 
-/decl/hierarchy/skill/organizational/management
-	ID = "management"
-	name = "Leadership"
-	desc = "Your ability to manage and command other crew members."
-	levels = list( "Unskilled"			= "You know a little about management, but you have a lot of flaws and little experience. You are likely to micromanage, lose track of people, or generally muck things up. Handling a major crisis is probably beyond your ability.",
-						"Basic"				= "You have recieved basic leadership training, but have little experience actually managing people. You can come up with good organizational strategies, but won't know what to do when they fall apart in a crisis.",
-						"Trained"			= "You're a good commander. You know how to coordinate the efforts of a large group of people effectively. You'll still be thrown off in a crisis, but you'll probably get through it.",
-						"Experienced"		= "You're a highly experienced commander. In addition to just doing your job, you know how to inspire love, loyalty or fear, and you handle crises smoothly and efficiently.",
-						"Master"		= "You are an excellent commander. You are listened to instinctively, and can navigate your people through anything thrown at you.")
-
 /decl/hierarchy/skill/organizational/bureaucracy
 	ID = "bureaucracy"
 	name = "Bureaucracy"
