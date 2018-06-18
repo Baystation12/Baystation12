@@ -1,6 +1,0 @@
-author: "comma"
-delete-after: True
-changes: 
-  - tweak: "XO now gets a box of spare headset keys instead of box of XO headsets"
-  - rscadd: "Bowman headsets can hold 3 keys instead of 2"
-  - rscadd: "BO Bowman headsets hold 4 keys"
