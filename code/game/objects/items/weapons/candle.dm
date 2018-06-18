@@ -6,7 +6,7 @@
 	item_state = "candle1"
 	w_class = ITEM_SIZE_TINY
 	light_color = "#e09d37"
-	var/wax = 30 MINUTES
+	var/wax
 
 /obj/item/weapon/flame/candle/New()
 	wax = rand(27 MINUTES, 33 MINUTES) / SSobj.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
