@@ -17,14 +17,14 @@
 
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea,
-						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/explorer,
+						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/pilot, /datum/job/explorer,
 						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
 						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist,
 						/datum/job/psychiatrist,
-						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
+						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor, /datum/job/mining,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
-						/datum/job/senior_scientist, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/mining, /datum/job/guard, /datum/job/scientist_assistant,
+						/datum/job/senior_scientist, /datum/job/scientist, /datum/job/guard, /datum/job/scientist_assistant,
 						/datum/job/ai, /datum/job/cyborg,
 						/datum/job/crew, /datum/job/assistant,
 						/datum/job/merchant, /datum/job/stowaway
@@ -123,14 +123,15 @@
 	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
 
 /datum/job/rd
-	title = "Research Director"
-	supervisors = "NanoTrasen and the Commanding Officer"
+	title = "Chief Science Officer"
+	supervisors = "the Commanding Officer and the Executive Officer"
 	economic_modifier = 20
 	minimal_player_age = 14
 	ideal_character_age = 60
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/rd
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	selection_color = "#633d63"
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/cso
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	allowed_ranks = list(/datum/mil_rank/ec/o3)
 	min_skill = list(	SKILL_MANAGEMENT  = SKILL_ADEPT,
 						SKILL_BUREAUCRACY = SKILL_ADEPT,
 						SKILL_COMPUTER    = SKILL_BASIC,
@@ -143,7 +144,7 @@
 
 	access = list(access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_heads, access_rd,
 						access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology,
-						access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard,
+						access_RC_announce, access_keycard_auth, access_xenoarch, access_sec_guard,
 						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm)
 	minimal_access = list()
 
@@ -152,7 +153,7 @@
 							 /datum/computer_file/program/camera_monitor)
 
 /datum/job/rd/get_description_blurb()
-	return "You are the Research Director. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring Nanotrasen's interests along with your Nanotrasen Liaison. Make sure science gets done, do some yourself, and get your prospectors and scientists on away missions to find things to benefit NT. Don’t put NT’s position on board in jeopardy.  Advise the CO on science matters."
+	return "You are the Chief Science Officer. You are responsible for the research department. You handle both the science part of the mission but are also responsible for ensuring Nanotrasen's interests along with the Nanotrasen Liaison. Make sure science gets done, do some yourself, and get your prospectors and scientists on away missions to fulfill the expeditionary mission. Make sure you work with NT.  Advise the CO on science matters."
 
 /datum/job/cmo
 	title = "Chief Medical Officer"
@@ -282,7 +283,7 @@
 	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
 
 /datum/job/liaison
-	title = "NanoTrasen Liaison"
+	title = "NanoTrasen Executive"
 	department = "Support"
 	department_flag = SPT
 
@@ -294,7 +295,7 @@
 	minimal_player_age = 10
 	alt_titles = list(
 		"NanoTrasen Representative",
-		"NanoTrasen Executive"
+		"NanoTrasen Liaison"
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/cl
 	allowed_branches = list(/datum/mil_branch/civilian)
@@ -309,7 +310,7 @@
 						access_hangar, access_petrov, access_petrov_helm)
 
 /datum/job/liaison/get_description_blurb()
-	return "You are the Nanotrasen Liaison. You are a civilian employee of Nanotrasen assigned to the vessel to promote, protect and ensure the interests of the corporation on board. You are not internal affairs. You assume command of the Research Department in the absence of the RD and the Senior Researcher. You advise the RD on NT matters and try to push NT interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
+	return "You are the Nanotrasen Liaison. You are a civilian employee of Nanotrasen assigned to the vessel to promote, protect and ensure the interests of the corporation on board. You are not internal affairs. You assume command of the Research Department in the absence of the CSO and the Senior Researcher. You advise the CSO on NT matters and try to push NT interests on the CO. Maximise profit. Be the rich corporate lawyer you always wanted to be."
 
 /datum/job/representative
 	title = "SolGov Representative"
@@ -448,6 +449,31 @@
 
 /datum/job/pathfinder/get_description_blurb()
 	return "You are the Pathfinder. Your duty is to organize and lead the expeditions to away sites, carrying out the EC’s Primary Mission. You command Explorers. You make sure that expedition has the supplies and personnel it needs. You can pilot Charon if NT doesn’t provide their pilot. Once on the away mission, your duty is to ensure that anything of scientific interest is brought back to the ship and passed to the relevant research lab."
+
+/datum/job/pilot
+	title = "Shuttle Pilot"
+	supervisors = "the Pathfinder"
+	department = "Exploration"
+	department_flag = EXP
+
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#68099e"
+	economic_modifier = 10
+	minimal_player_age = 4
+	ideal_character_age = 25
+	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/pilot
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/contractor,
+		/datum/mil_rank/civ/nt = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot
+	)
+
+	access = list(access_mining_office,
+						access_mining_station, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
+						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_mining)
+	min_skill = list(	SKILL_EVA   = SKILL_BASIC,
+						SKILL_PILOT = SKILL_ADEPT)
 
 /datum/job/explorer
 	title = "Explorer"
@@ -1000,6 +1026,35 @@
 
 	software_on_spawn = list(/datum/computer_file/program/supply)
 
+/datum/job/mining
+	title = "Prospector"
+	department = "Supply"
+	department_flag = SUP
+	total_positions = 4
+	spawn_positions = 4
+	supervisors = "the Deck Officer and Executive Officer"
+	selection_color = "#515151"
+	economic_modifier = 7
+	ideal_character_age = 25
+	alt_titles = list(
+		"Drill Technician",
+		"Shaft Miner",
+		"Salvage Technician")
+	min_skill = list(	SKILL_MECH    = SKILL_BASIC,
+						SKILL_HAULING = SKILL_ADEPT,
+						SKILL_EVA     = SKILL_BASIC)
+
+	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/prospector
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/nt,
+		/datum/mil_rank/civ/contractor
+	)
+
+	access = list(access_mining, access_mining_office, access_mining_station,
+						access_expedition_shuttle, access_guppy, access_hangar, access_guppy_helm)
+	minimal_access = list()
+
 /datum/job/janitor
 	title = "Sanitation Technician"
 	department = "Service"
@@ -1112,7 +1167,7 @@
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Research Director"
+	supervisors = "the Chief Science Officer and NT Executive"
 	selection_color = "#633d63"
 	economic_modifier = 12
 	minimal_player_age = 10
@@ -1120,8 +1175,14 @@
 	alt_titles = list(
 		"Research Supervisor")
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/senior_scientist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/research/senior_scientist
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/nt,
+		/datum/mil_rank/ec/o1
+	)
 
 	access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
 						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen,
@@ -1135,34 +1196,11 @@
 						SKILL_SCIENCE     = SKILL_ADEPT)
 	skill_points = 20
 
-/datum/job/nt_pilot
-	title = "NanoTrasen Pilot"
-	supervisors = "the Research Director"
-	department = "Science"
-	department_flag = SCI
-
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the Research Director and NanoTrasen Personnel"
-	selection_color = "#633d63"
-	economic_modifier = 10
-	minimal_player_age = 5
-	ideal_character_age = 40
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
-
-	access = list(access_research, access_mining_office,
-						access_mining_station, access_nanotrasen, access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy,
-						access_hangar, access_petrov, access_petrov_helm, access_guppy_helm, access_mining)
-	min_skill = list(	SKILL_EVA   = SKILL_BASIC,
-						SKILL_PILOT = SKILL_ADEPT)
-
 /datum/job/scientist
 	title = "Scientist"
 	total_positions = 6
 	spawn_positions = 6
-	supervisors = "the Research Director"
+	supervisors = "the Chief Science Officer and NT Executive"
 	economic_modifier = 10
 	ideal_character_age = 45
 	alt_titles = list(
@@ -1170,16 +1208,21 @@
 		"Anomalist",
 		"Researcher",
 		"Xenobiologist",
-		"Xenobotanist",
-		"Psychologist" = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/psych)
+		"Xenobotanist")
 	min_skill = list(	SKILL_BUREAUCRACY = SKILL_BASIC,
 						SKILL_COMPUTER    = SKILL_BASIC,
 						SKILL_DEVICES     = SKILL_BASIC,
 						SKILL_SCIENCE     = SKILL_ADEPT)
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/scientist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
+	allowed_branches = list(
+		/datum/mil_branch/civilian	,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/research/scientist
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/nt,
+		/datum/mil_rank/ec/o1
+	)
 
 	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
 						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
@@ -1187,42 +1230,14 @@
 	minimal_access = list()
 	skill_points = 20
 
-
-/datum/job/mining
-	title = "Prospector"
-	department = "Science"
-	department_flag = SCI
-	total_positions = 4
-	spawn_positions = 4
-	supervisors = "the Research Director"
-	selection_color = "#633d63"
-	economic_modifier = 7
-	ideal_character_age = 25
-	alt_titles = list(
-		"Drill Technician",
-		"Shaft Miner",
-		"Salvage Technician")
-	min_skill = list(	SKILL_MECH    = SKILL_BASIC,
-						SKILL_HAULING = SKILL_ADEPT,
-						SKILL_EVA     = SKILL_BASIC)
-
-	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/prospector
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
-
-	access = list(access_research, access_mining, access_mining_office, access_mining_station, access_nanotrasen,
-						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_guppy_helm)
-	minimal_access = list()
-
-
 /datum/job/guard
-	title = "Security Guard"
+	title = "Nanotrasen Guard"
 	department = "Science"
 	department_flag = SCI
 
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Research Director and NanoTrasen Personnel"
+	supervisors = "the Nanotrasen Executive and Chief Science Officer"
 	selection_color = "#633d63"
 	economic_modifier = 6
 	minimal_player_age = 3
@@ -1244,22 +1259,23 @@
 
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Research Director and NanoTrasen Personnel"
+	supervisors = "the Chief Science Officer and NT Executive"
 	selection_color = "#633d63"
 	economic_modifier = 3
 	ideal_character_age = 30
 	alt_titles = list(
-		"Custodian" = /decl/hierarchy/outfit/job/torch/passenger/research/assist/janitor,
 		"Testing Assistant" = /decl/hierarchy/outfit/job/torch/passenger/research/assist/testsubject,
-		"Laboratory Technician",
-		"Intern",
-		"Clerk",
-		"Field Assistant")
+		"Laboratory Technician")
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/research/assist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/nt)
-
+	allowed_branches = list(
+		/datum/mil_branch/civilian	,
+		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/research/assist
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/nt,
+		/datum/mil_rank/ec/e3
+	)
 	access = list(access_research, access_mining_office, access_nanotrasen, access_petrov, access_expedition_shuttle, access_guppy, access_hangar)
 
 

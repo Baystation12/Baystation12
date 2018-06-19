@@ -2105,8 +2105,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/science{
-	name = "Pathfinder's Office";
+/obj/machinery/door/airlock/sol{
+	name = "Pathfinder";
 	req_access = list(94)
 	},
 /turf/simulated/floor/tiled,
@@ -9804,7 +9804,10 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/hologram/holopad,
+/obj/effect/floor_decal/ntlogo{
+	icon_state = "ntlogo";
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
 "aDt" = (
@@ -10075,6 +10078,10 @@
 /area/hallway/primary/firstdeck/center)
 "aEs" = (
 /obj/structure/disposalpipe/segment,
+/obj/effect/floor_decal/ntlogo{
+	icon_state = "ntlogo";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
 "aEt" = (
@@ -11532,7 +11539,7 @@
 /area/maintenance/firstdeck/centralport)
 "aIG" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	id_tag = null;
 	name = "Locker Room";
 	req_access = list(47)
@@ -13721,9 +13728,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/rnd/blanks)
 "aPX" = (
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	name = "Aux Custodial Supplies";
-	req_access = list(30);
+	req_access = list(81);
 	secured_wires = 1
 	},
 /obj/structure/cable/green{
@@ -15274,7 +15281,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aUb" = (
-/obj/machinery/door/airlock/multi_tile/research{
+/obj/machinery/door/airlock/multi_tile/science{
 	frequency = 1379;
 	id_tag = "xeno_airlock_exterior";
 	name = "Xenobiology External Airlock";
@@ -15583,7 +15590,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/rnd/xenobiology)
 "aUF" = (
-/obj/machinery/door/airlock/multi_tile/research{
+/obj/machinery/door/airlock/multi_tile/science{
 	frequency = 1379;
 	id_tag = "xeno_airlock_interior";
 	name = "Xenobiology Internal Airlock";
@@ -16387,10 +16394,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/airlock/glass/research{
-	name = "Research Suites";
-	req_access = "";
-	req_one_access = list(47,81)
+/obj/machinery/door/airlock/science{
+	name = "Research Suite";
+	req_access = list(81,47)
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
@@ -17581,7 +17587,7 @@
 /area/medical/surgery)
 "cUb" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass/research{
+/obj/machinery/door/airlock/glass/science{
 	name = "Fabricator Laboratory";
 	req_access = list(7)
 	},
@@ -21111,11 +21117,10 @@
 /turf/simulated/floor/plating,
 /area/rnd/checkpoint)
 "hVb" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
-	},
 /obj/item/weapon/stool/padded,
+/obj/effect/floor_decal/corner/purple{
+	dir = 9
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
 "hWb" = (
@@ -21245,6 +21250,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/floor_decal/ntlogo{
+	icon_state = "ntlogo";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
 "igb" = (
@@ -21353,9 +21362,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "imb" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+/obj/effect/floor_decal/corner/purple{
+	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
@@ -21511,6 +21519,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/floor_decal/ntlogo,
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
 "ixb" = (
@@ -21712,10 +21721,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "iOb" = (
-/obj/machinery/door/airlock/security{
-	name = "Checkpoint";
-	req_one_access = list(86)
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
@@ -21724,6 +21729,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/research{
+	name = "Nanotrasen Asset Protection";
+	req_access = list(86)
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/checkpoint)
 "iPb" = (
@@ -21744,10 +21753,10 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/multi_tile/research{
+/obj/machinery/door/airlock/multi_tile/science{
 	id_tag = "researchdoor_interior";
 	name = "Research Division Access";
-	req_one_access = list(47,81)
+	req_one_access = list(47)
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
@@ -21897,6 +21906,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics_surgery)
 "jdb" = (
+/obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/white,
 /area/rnd/breakroom)
 "jeb" = (
@@ -23203,9 +23213,8 @@
 	},
 /obj/structure/closet/firecloset,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+/obj/effect/floor_decal/corner/purple{
+	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
@@ -23215,9 +23224,8 @@
 	},
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
@@ -23409,8 +23417,9 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 10
+/obj/effect/floor_decal/industrial/warning/corner,
+/obj/effect/floor_decal/corner/purple{
+	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
@@ -24796,25 +24805,16 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/ntlogo{
-	icon_state = "ntlogo";
-	dir = 1
-	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
 "nKb" = (
-/obj/effect/floor_decal/ntlogo{
-	icon_state = "ntlogo";
-	dir = 8
-	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
 "nLb" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
-	},
 /obj/item/weapon/stool/padded,
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
 "nMb" = (
@@ -24888,26 +24888,20 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
-/obj/effect/floor_decal/ntlogo,
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
 "nSb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/ntlogo{
-	icon_state = "ntlogo";
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
 "nTb" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
+	},
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
@@ -25053,12 +25047,14 @@
 	c_tag = "Research - Entry";
 	dir = 1
 	},
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/purple{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/entry)
@@ -25768,7 +25764,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	name = "Miscellaneous Laboratory";
 	req_access = list(47)
 	},
@@ -25962,7 +25958,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/airlock/glass/research{
+/obj/machinery/door/airlock/glass/science{
 	name = "Xenoflora Laboratory";
 	req_access = list(55)
 	},
@@ -27264,7 +27260,7 @@
 /area/rnd/research)
 "sdb" = (
 /obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/research{
+/obj/machinery/door/airlock/science{
 	name = "Xenobiology Access";
 	req_access = list(47)
 	},
@@ -27406,7 +27402,7 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "smb" = (
-/obj/machinery/door/airlock/glass/research{
+/obj/machinery/door/airlock/glass/science{
 	name = "Xenoflora Laboratory";
 	req_access = list(55)
 	},

@@ -371,6 +371,14 @@ department tags
 	desc = "Insignia denoting assignment to the medical department. These fit Marine Corps uniforms."
 	on_rolled = list("down" = "none")
 
+/obj/item/clothing/accessory/solgov/department/research
+	name = "research insignia"
+	desc = "Insignia denoting assignment to the research department. These fit Expeditionary Corps uniforms."
+	color = "#a2819e"
+
+/obj/item/clothing/accessory/solgov/department/research/service
+	icon_state = "dept_exped_service"
+
 /obj/item/clothing/accessory/solgov/department/supply
 	name = "supply insignia"
 	desc = "Insignia denoting assignment to the supply department. These fit Expeditionary Corps uniforms."
