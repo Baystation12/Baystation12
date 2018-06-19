@@ -1,0 +1,8 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "EVA skill now has mechanical effects."
+  - rscadd: "Space slipping chance is affected by EVA skill. Bit higher at unskilled, lesser with skill, no slipping at experienced."
+  - rscadd: "Flooring when entering gravity from space is now not guaranteed at Basic skill or more. Doesn't happen at Professional skill."
+  - rscadd: "At Unskilled and Basic skill, jetpack can sometimes go wrong way. Not that bad if you notice in time and have fuel to turn back."
+  - rscadd: "At Professional skill you go faster when in space with a jetpack. Zooom."
