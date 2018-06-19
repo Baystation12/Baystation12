@@ -81,6 +81,9 @@
 
 #define RECOMMENDED_VERSION 511
 /world/New()
+	//Log startup times
+	var/startedAt = world.timeofday
+
 	//set window title
 	name = "[server_name] - [GLOB.using_map.full_name]"
 
@@ -110,6 +113,9 @@
 	//Emergency Fix
 	load_mods()
 	//end-emergency fix
+
+	var/timeToStart = world.timeofday - startedAt
+	log_world("Startup took: [timeToStart] seconds")
 
 	. = ..()
 
