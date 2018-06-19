@@ -12,3 +12,38 @@
 	icon_state = "empty"
 	name = "Geas"
 	desc = "You can't resist."
+
+//Paints the wall it spawns on, then dies
+/obj/effect/paint
+	name = "coat of paint"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "white"
+	plane = TURF_PLANE
+	layer = TURF_DETAIL_LAYER
+	blend_mode = BLEND_MULTIPLY
+
+/obj/effect/paint/Initialize()
+	..()
+	var/turf/simulated/wall/W = get_turf(src)
+	if(istype(W))
+		W.paint_color = color
+		W.update_icon()
+	var/obj/structure/wall_frame/WF = locate() in loc
+	if(WF)
+		WF.color = color
+	return INITIALIZE_HINT_QDEL
+
+/obj/effect/paint/pink
+	color = COLOR_PINK
+
+/obj/effect/paint/sun
+	color = COLOR_SUN
+
+/obj/effect/paint/red
+	color = COLOR_RED
+
+/obj/effect/paint/silver
+	color = COLOR_SILVER
+
+/obj/effect/paint/black
+	color = COLOR_DARK_GRAY

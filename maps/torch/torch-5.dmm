@@ -1331,6 +1331,11 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"dl" = (
+/obj/effect/paint/silver,
+/obj/effect/paint/hull,
+/turf/simulated/wall/titanium,
+/area/aquila/secure_storage)
 "dm" = (
 /turf/simulated/wall/r_wall/hull,
 /area/turret_protected/ai_foyer)
@@ -1606,6 +1611,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/space)
 "ec" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/cockpit)
 "ed" = (
@@ -2678,6 +2684,7 @@
 /turf/simulated/floor/reinforced,
 /area/turret_protected/ai_outer_chamber)
 "gw" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/medical)
 "gz" = (
@@ -6350,6 +6357,11 @@
 /obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/office/cos)
+"nT" = (
+/obj/effect/paint/silver,
+/obj/effect/paint/hull,
+/turf/simulated/wall/titanium,
+/area/aquila/storage)
 "nU" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -6740,6 +6752,7 @@
 /area/maintenance/bridge/aftport)
 "oU" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/medical)
 "oW" = (
@@ -11750,6 +11763,16 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"zm" = (
+/obj/effect/paint/hull,
+/obj/effect/paint/hull,
+/turf/simulated/wall/titanium,
+/area/aquila/secure_storage)
+"zP" = (
+/obj/effect/paint/hull,
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/aquila/maintenance)
 "Ab" = (
 /obj/effect/shuttle_landmark/merc/deck5,
 /turf/space,
@@ -11813,6 +11836,7 @@
 	name = "Protective Shutters";
 	opacity = 0
 	},
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/passenger)
 "Ah" = (
@@ -11996,8 +12020,14 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "BO" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/secure_storage)
+"BX" = (
+/obj/effect/paint/silver,
+/obj/effect/paint/hull,
+/turf/simulated/wall/titanium,
+/area/aquila/passenger)
 "Cb" = (
 /obj/effect/shuttle_landmark/torch/deck5/aquila,
 /turf/space,
@@ -12114,6 +12144,7 @@
 	name = "Protective Shutters";
 	opacity = 0
 	},
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/airlock)
 "CN" = (
@@ -12133,6 +12164,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/maintenance/bridge/aftport)
+"CW" = (
+/obj/effect/paint/silver,
+/obj/effect/paint/hull,
+/turf/simulated/wall/titanium,
+/area/aquila/head)
 "Db" = (
 /obj/machinery/door/airlock/hatch{
 	name = "Head";
@@ -12261,6 +12297,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/bridge/aft)
 "DR" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/head)
 "Eb" = (
@@ -12505,8 +12542,14 @@
 /turf/simulated/wall/r_wall/hull,
 /area/bridge/storage)
 "FK" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/airlock)
+"FX" = (
+/obj/effect/paint/hull,
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/aquila/medical)
 "Gb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12532,6 +12575,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/head)
 "Gd" = (
@@ -13077,6 +13121,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/cockpit)
 "Ic" = (
@@ -13526,6 +13571,11 @@
 /obj/structure/table/woodentable,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"Jt" = (
+/obj/effect/paint/silver,
+/obj/effect/paint/hull,
+/turf/simulated/wall/titanium,
+/area/aquila/medical)
 "JA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -13572,6 +13622,7 @@
 /area/aquila/passenger)
 "Kc" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/airlock)
 "Kd" = (
@@ -13663,6 +13714,11 @@
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
+"KR" = (
+/obj/effect/paint/hull,
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/aquila/secure_storage)
 "Lb" = (
 /obj/machinery/camera/network/command{
 	c_tag = "Research Director - Office";
@@ -14210,6 +14266,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/maintenance)
 "Ov" = (
@@ -14490,9 +14547,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/aquila/airlock)
 "QF" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/passenger)
 "QL" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/storage)
 "Rb" = (
@@ -14787,6 +14846,7 @@
 	name = "Protective Shutters";
 	opacity = 0
 	},
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/cockpit)
 "SE" = (
@@ -15404,6 +15464,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "Ww" = (
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/maintenance)
 "Xb" = (
@@ -15515,6 +15576,7 @@
 /area/security/bridgecheck)
 "Xp" = (
 /obj/structure/sign/solgov,
+/obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/airlock)
 "Xz" = (
@@ -15522,6 +15584,7 @@
 /area/crew_quarters/heads/cobed)
 "XI" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/airlock)
 "Yb" = (
@@ -33026,14 +33089,14 @@ Ug
 DN
 QL
 QL
+nT
 QL
 QL
-QL
 BO
 BO
+dl
 BO
-BO
-BO
+KR
 vL
 cP
 ah
@@ -33221,7 +33284,7 @@ ad
 gY
 DR
 DR
-DR
+CW
 Gc
 Xp
 Vg
@@ -33837,11 +33900,11 @@ QL
 Sb
 QL
 QL
+zm
 BO
 BO
 BO
-BO
-BO
+KR
 vL
 cP
 ah
@@ -34244,7 +34307,7 @@ ry
 so
 sY
 Ww
-Ww
+zP
 vL
 ad
 cP
@@ -35052,7 +35115,7 @@ Yb
 zc
 Dc
 Ww
-Ww
+zP
 vL
 ad
 cP
@@ -35457,7 +35520,7 @@ gw
 gw
 gw
 gw
-gw
+FX
 vL
 cP
 ah
@@ -36049,7 +36112,7 @@ ad
 gY
 QF
 QF
-QF
+BX
 Ag
 Ag
 QF
@@ -36258,14 +36321,14 @@ eg
 nr
 gw
 gw
+Jt
 gw
 gw
 gw
 gw
+Jt
 gw
-gw
-gw
-gw
+FX
 vL
 cP
 ah
