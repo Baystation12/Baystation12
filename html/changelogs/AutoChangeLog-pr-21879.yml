@@ -1,0 +1,5 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - rscadd: "Underwear may now go into washing machines. Still can't be bloodied, but at least you can do that now. For you weird people who roleplay showering!"
+  - tweak: "Rags may now clean more than just blood. More importantly, they show their progress bar when cleaning."
