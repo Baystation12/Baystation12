@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - tweak: "Skills now affect surgery. Trained or Experienced (depending on what you're trying to do) skill is needed to ensure step won't fail. Professional skill will offset various penalties (not proper optable, improvised tools etc) a bit. Time of step is affected by Anatomy skill too."
+  - tweak: "Some other skills help with some steps, e.g. Trained Forensics offsets penalty for incisions, and Complex Devices skill is used instead for robotic organ steps, with Electrician and Construction helping with simple limb repair steps."

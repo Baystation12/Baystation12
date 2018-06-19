@@ -20,6 +20,21 @@
 		return 0
 	return 1
 
+/datum/surgery_step/robotics/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = ..()
+	
+	//Compensating for anatomy skill req in base proc
+	. += 10
+
+	if(!user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+		. -= 20
+
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+		. += 10
+
+	if(user.skill_check(SKILL_DEVICES, SKILL_PROF))
+		. += 20
+
 //////////////////////////////////////////////////////////////////
 //	 unscrew robotic limb hatch surgery step
 //////////////////////////////////////////////////////////////////
@@ -173,6 +188,11 @@
 	min_duration = 50
 	max_duration = 60
 
+/datum/surgery_step/robotics/repair_brute/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = ..()
+	if(user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC))
+		. += 10
+
 /datum/surgery_step/robotics/repair_brute/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -211,6 +231,12 @@
 
 	min_duration = 50
 	max_duration = 60
+
+/datum/surgery_step/robotics/repair_burn/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = ..()
+
+	if(user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
+		. += 10
 
 /datum/surgery_step/robotics/repair_burn/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
