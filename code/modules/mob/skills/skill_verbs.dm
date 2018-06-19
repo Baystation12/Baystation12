@@ -70,9 +70,9 @@ Robots and antags can instruct.
 /datum/skill_verb/instruct/should_see_verb()
 	if(!..())
 		return
-	if(!skillset.owner.skill_check(SKILL_MANAGEMENT, SKILL_BASIC))
-		return
-	return 1
+	for(var/decl/hierarchy/skill/S in GLOB.skills)
+		if(skillset.owner.skill_check(S.type, SKILL_EXPERT))
+			return 1
 
 /mob/proc/instruct(mob/living/carbon/human/target as mob in oview(2))
 	set category = "IC"
@@ -93,8 +93,6 @@ Robots and antags can instruct.
 
 	var/options = list()
 	for(var/decl/hierarchy/skill/S in GLOB.skills)
-		if(istype(S, SKILL_MANAGEMENT))
-			continue
 		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
 			options[S.name] = S
 	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
@@ -102,7 +100,7 @@ Robots and antags can instruct.
 		return
 	var/decl/hierarchy/skill/skill = options[choice]
 
-	if(!do_skilled(6 SECONDS, SKILL_MANAGEMENT, target))
+	if(!do_skilled(6 SECONDS, skill.type, target))
 		return
 	if(incapacitated() || target.incapacitated())
 		return
