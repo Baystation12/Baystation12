@@ -216,6 +216,11 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/heads/ce
 
+/obj/item/device/radio/headset/heads/ce/alt
+	name = "chief engineer's bowman headset"
+	icon_state = "com_headset_alt"
+	item_state = "com_headset_alt"
+
 /obj/item/device/radio/headset/heads/cmo
 	name = "chief medical officer's headset"
 	desc = "The headset of the highly trained medical chief."
@@ -224,7 +229,7 @@
 	ks1type = /obj/item/device/encryptionkey/heads/cmo
 
 /obj/item/device/radio/headset/heads/cmo/alt
-	name = "chief medical officer's headset"
+	name = "chief medical officer's bowman headset"
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
 
@@ -295,7 +300,7 @@
 	icon_state = "cent_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/specops
-	
+
 /obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
