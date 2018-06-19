@@ -1,0 +1,11 @@
+author: "chaoko99"
+delete-after: True
+changes: 
+  - bugfix: "You may no longer spam the skeleton as hard as you could before."
+  - bugfix: "Wall painters no longer hit walls when used."
+  - bugfix: "Energy axes will no longer anchor when dropped."
+  - bugfix: "Candles will now last about 30 minutes."
+  - bugfix: "Bucklers can now block any projectiles that aren't bullets, as suggested intent in their code."
+  - rscdel: "You may no longer worry about reagent contamination in a soft drink dispenser, only unintended reagent amounts."
+  - rscadd: "You may light an unlit candle with a lit candle that isn't in your hand."
+  - rscadd: "Optimization pass on Geiger counters, and a few effect systems (Smoke and sparks)"
