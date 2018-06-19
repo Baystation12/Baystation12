@@ -40,6 +40,7 @@
 	slot_flags = SLOT_BELT
 	default_material = "titanium"
 	base_parry_chance = 50
+	attack_cooldown_modifier = 1
 
 /obj/item/weapon/material/hatchet/machete/Initialize()
 	icon_state = "machete[pick("","_red","_blue", "_black", "_olive")]"

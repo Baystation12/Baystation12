@@ -1,0 +1,5 @@
+author: Chisnky
+delete-after: True
+changes: 
+  - experiment: "Melee weapons now have different attack cooldowns, generally with smaller weapons being faster, bigger slower. Normal sized weapons are baseline, having same attack cooldown as they did."
+  - experiment: "Material weapons further tweak their attack cooldown based on material used."

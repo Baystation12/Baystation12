@@ -15,6 +15,7 @@
 	var/unbreakable
 	var/force_divisor = 0.5
 	var/thrown_force_divisor = 0.5
+	var/attack_cooldown_modifier
 	var/default_material = DEFAULT_WALL_MATERIAL
 	var/material/material
 	var/drops_debris = 1
@@ -44,6 +45,7 @@
 		force = material.get_blunt_damage()
 	force = round(force*force_divisor)
 	throwforce = round(material.get_blunt_damage()*thrown_force_divisor)
+	attack_cooldown = material.get_attack_cooldown() + attack_cooldown_modifier
 	//spawn(1)
 //		log_debug("[src] has force [force] and throwforce [throwforce] when made from default material [material.name]")
 

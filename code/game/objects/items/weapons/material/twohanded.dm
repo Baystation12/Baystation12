@@ -40,15 +40,11 @@
 	..()
 
 /obj/item/weapon/material/twohanded/update_force()
+	..()
 	base_name = name
-	if(sharp || edge)
-		force_wielded = material.get_edge_damage()
-	else
-		force_wielded = material.get_blunt_damage()
-	force_wielded = round(force_wielded*force_divisor)
-	force_unwielded = round(force_wielded*unwielded_force_divisor)
+	force_unwielded = round(force*unwielded_force_divisor)
+	force_wielded = force
 	force = force_unwielded
-	throwforce = round(force*thrown_force_divisor)
 //	log_debug("[src] has unwielded force [force_unwielded], wielded force [force_wielded] and throwforce [throwforce] when made from default material [material.name]")
 
 
@@ -73,9 +69,8 @@
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 
-	// 15/32 with hardness 60 (steel) and 20/42 with hardness 80 (plasteel)
-	force_divisor = 0.525
-	unwielded_force_divisor = 0.25
+	force_divisor = 0.6
+	unwielded_force_divisor = 0.3
 	sharp = 1
 	edge = 1
 	w_class = ITEM_SIZE_HUGE
