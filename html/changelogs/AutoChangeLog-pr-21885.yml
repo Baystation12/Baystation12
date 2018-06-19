@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscdel: "The leadership skill has been removed. Check your characters' skill allocations."
+  - tweak: "The instruct verb works like before, but no longer requires leadership skill to use."
