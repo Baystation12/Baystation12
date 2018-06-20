@@ -1,5 +1,3 @@
-#define SCRAMBLE_CACHE_LEN 20
-
 /*
 	Datum based languages. Easily editable and modular.
 */
@@ -20,6 +18,12 @@
 	var/list/space_chance = 55        // Likelihood of getting a space in the random scramble string
 	var/machine_understands = 1       // Whether machines can parse and understand this language
 	var/shorthand = "UL"			  // Shorthand that shows up in chat for this language.
+
+/datum/language/proc/check_speaker_muddle(var/mob/speaker)
+	return FALSE
+
+/datum/language/proc/muddle(var/message)
+	return message
 
 /datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!syllables || !syllables.len)
@@ -229,5 +233,3 @@
 		if(L.flags & except_flags)
 			continue
 		target.add_language(L.name)
-
-#undef SCRAMBLE_CACHE_LEN

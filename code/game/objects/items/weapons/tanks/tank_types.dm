@@ -139,3 +139,10 @@
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list("nitrogen" = 10*ONE_ATMOSPHERE)
 	volume = 180
+
+/obj/item/weapon/tank/methyl_bromide
+	name = "bromomethane tank"
+	desc = "A tank of methyl bromide."
+	icon_state = "bromomethane"
+	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+	starting_pressure = list("methyl_bromide" = 6*ONE_ATMOSPHERE)
