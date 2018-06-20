@@ -68,7 +68,7 @@
 	)
 
 	var/list/area_usage_test_exempted_root_areas = list(
-		/area/map_template/hydrobase
+		/area/map_template/hydrobase,
 	)
 
 	var/list/area_purity_test_exempt_areas = list()
