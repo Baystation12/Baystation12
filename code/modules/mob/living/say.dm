@@ -12,7 +12,7 @@ var/list/department_radio_keys = list(
 	  ":w" = "whisper",		".w" = "whisper",
 	  ":t" = "Mercenary",	".t" = "Mercenary",
 	  ":x" = "Raider",		".x" = "Raider",
-	  ":u" = "Supply",		".u" = "Supply",
+	  ":u" = "Requisitions",".u" = "Requisitions",
 	  ":v" = "Service",		".v" = "Service",
 	  ":p" = "AI Private",	".p" = "AI Private",
 	  ":z" = "Entertainment",".z" = "Entertainment",

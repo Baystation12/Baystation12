@@ -438,7 +438,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/supply/contractor
-	name = OUTFIT_JOB_NAME("Supply Assistant")
+	name = OUTFIT_JOB_NAME("Deck Assistant")
 	uniform = /obj/item/clothing/under/rank/cargotech
 	shoes = /obj/item/clothing/shoes/brown
 	id_type = /obj/item/weapon/card/id/torch/contractor/supply

@@ -1346,7 +1346,7 @@
 
 // Cargo
 /area/quartermaster/office
-	name = "\improper Supply Office"
+	name = "\improper Requisitions Office"
 	icon_state = "quartoffice"
 
 /area/quartermaster/storage

@@ -275,14 +275,14 @@
 	max_keys = 3
 
 /obj/item/device/radio/headset/headset_cargo
-	name = "supply radio headset"
+	name = "requisitions radio headset"
 	desc = "A headset used by the box-pushers."
 	icon_state = "cargo_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_cargo
 
 /obj/item/device/radio/headset/headset_cargo/alt
-	name = "supply bowman headset"
+	name = "requisitions bowman headset"
 	icon_state = "cargo_headset_alt"
 	item_state = "cargo_headset_alt"
 	max_keys = 3
