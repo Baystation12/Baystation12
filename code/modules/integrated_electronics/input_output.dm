@@ -90,11 +90,11 @@
 
 /obj/item/integrated_circuit/input/med_scanner
 	name = "integrated medical analyser"
-	desc = "A very small version of the common medical analyser.  This allows the machine to know how healthy someone is."
+	desc = "A very small version of the common medical analyser.  This tracks some vital signs."
 	icon_state = "medscan"
 	complexity = 4
 	inputs = list("target ref")
-	outputs = list("total health %", "total missing health")
+	outputs = list("brain activity", "conscious", "pulse")
 	activators = list("scan")
 
 	dist_check = /decl/dist_check/in_view
@@ -104,32 +104,47 @@
 	if(!istype(H)) //Invalid input
 		return
 
-	var/total_health = round(H.health/H.maxHealth, 0.1)*100
-	var/missing_health = H.maxHealth - H.health
-
-	set_pin_data(IC_OUTPUT, 1, total_health)
-	set_pin_data(IC_OUTPUT, 2, missing_health)
+	var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+	set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
+	set_pin_data(IC_OUTPUT, 2, (H.stat == 0))
+	set_pin_data(IC_OUTPUT, 3, H.pulse())
 	push_data()
 
 /obj/item/integrated_circuit/input/adv_med_scanner
 	name = "integrated advanced medical analyser"
 	desc = "A very small version of the common medical analyser.  This allows the machine to know how healthy someone is.  \
-	This type is much more precise, allowing the machine to know much more about the target than a normal analyzer."
+	This type is much more precise, allowing the machine to know much more about the target than a normal analyzer. Output is 'severity' of damage detected, from 0 (none) to 5 (extreme)"
 	icon_state = "medscan_adv"
 	complexity = 12
 	inputs = list("target ref")
 	outputs = list(
-		"total health %",
-		"total missing health",
+		"brain activity",
+		"conscious",
 		"brute damage",
 		"burn damage",
 		"tox damage",
 		"oxy damage",
-		"clone damage"
+		"clone damage",
+		"pulse",
+		"oxygenation level",
+		"pain level"
 	)
 	activators = list("scan")
 
 	dist_check = /decl/dist_check/in_view
+
+/obj/item/integrated_circuit/input/adv_med_scanner/proc/damage_to_severity(var/value)
+	if(value < 1)
+		return 0
+	if(value < 25)
+		return 1
+	if(value < 50)
+		return 2
+	if(value < 75)
+		return 3
+	if(value < 100)
+		return 4
+	return 5
 
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
 	var/datum/integrated_io/I = inputs[1]
@@ -137,16 +152,17 @@
 	if(!istype(H)) //Invalid input
 		return
 
-	var/total_health = round(H.health/H.maxHealth, 0.1)*100
-	var/missing_health = H.maxHealth - H.health
-
-	set_pin_data(IC_OUTPUT, 1, total_health)
-	set_pin_data(IC_OUTPUT, 2, missing_health)
-	set_pin_data(IC_OUTPUT, 3, H.getBruteLoss())
-	set_pin_data(IC_OUTPUT, 4, H.getFireLoss())
-	set_pin_data(IC_OUTPUT, 5, H.getToxLoss())
-	set_pin_data(IC_OUTPUT, 6, H.getOxyLoss())
-	set_pin_data(IC_OUTPUT, 7, H.getCloneLoss())
+	var/obj/item/organ/internal/brain/brain = H.internal_organs_by_name[BP_BRAIN]
+	set_pin_data(IC_OUTPUT, 1, (brain && H.stat != DEAD))
+	set_pin_data(IC_OUTPUT, 2, (H.stat == 0))
+	set_pin_data(IC_OUTPUT, 3, damage_to_severity(100 * H.getBruteLoss() / H.maxHealth))
+	set_pin_data(IC_OUTPUT, 4, damage_to_severity(100 * H.getFireLoss() / H.maxHealth))
+	set_pin_data(IC_OUTPUT, 5, damage_to_severity(100 * H.getToxLoss() / H.maxHealth))
+	set_pin_data(IC_OUTPUT, 6, damage_to_severity(100 * H.getOxyLoss() / H.maxHealth))
+	set_pin_data(IC_OUTPUT, 7, damage_to_severity(100 * H.getCloneLoss() / H.maxHealth))
+	set_pin_data(IC_OUTPUT, 8, H.pulse())
+	set_pin_data(IC_OUTPUT, 9, H.get_blood_oxygenation())
+	set_pin_data(IC_OUTPUT, 10, damage_to_severity(H.get_shock()))
 
 /obj/item/integrated_circuit/input/local_locator
 	name = "local locator"
@@ -680,7 +696,7 @@
 		text_output += "\an [name]"
 	else
 		text_output += "\an ["\improper[initial_name]"] labeled '[name]'"
-	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>¤</font>" : "unlit."]"
+	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>ï¿½</font>" : "unlit."]"
 	to_chat(user,jointext(text_output,null))
 /obj/item/integrated_circuit/output/led/get_topic_data()
 	return list("\An [initial(name)] that is currently [get_pin_data(IC_INPUT, 1) ? "lit" : "unlit."]")
