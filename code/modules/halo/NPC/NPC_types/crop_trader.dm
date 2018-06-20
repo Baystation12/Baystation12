@@ -1,5 +1,6 @@
 
 /mob/living/simple_animal/npc/colonist/crop_trader
+	name = "NPC Crop Trader"
 	npc_job_title = "NPC Crop Trader"
 	desc = "A human from one of Earth's diverse cultures. This NPC buys crops for cash"
 	trade_categories_by_name =  list("crops")
