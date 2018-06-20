@@ -388,7 +388,6 @@
 	},
 /area/rescue_base/base)
 "abp" = (
-/obj/item/weapon/aiModule/nanotrasen,
 /obj/item/weapon/aiModule/reset,
 /obj/item/weapon/aiModule/freeformcore,
 /obj/item/weapon/aiModule/protectStation,
@@ -397,6 +396,8 @@
 /obj/item/weapon/aiModule/robocop,
 /obj/item/weapon/aiModule/safeguard,
 /obj/structure/table/rack,
+/obj/item/weapon/aiModule/solgov_aggressive,
+/obj/item/weapon/aiModule/solgov,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1673,18 +1674,15 @@
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_courtroom)
 "aef" = (
-/obj/item/clothing/under/ert,
-/obj/item/clothing/under/syndicate/combat,
-/obj/item/clothing/under/rank/centcom_officer,
-/obj/item/clothing/head/beret/centcom/officer,
-/obj/item/clothing/mask/balaclava,
-/obj/item/weapon/coin/silver,
 /obj/structure/closet{
 	icon_closed = "syndicate1";
 	icon_opened = "syndicate1open";
 	icon_state = "syndicate1";
 	name = "emergency response team wardrobe"
 	},
+/obj/item/clothing/under/solgov/utility/fleet/combat,
+/obj/item/clothing/head/solgov/utility/fleet,
+/obj/item/clothing/accessory/solgov/fleet_patch/fifth,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1692,7 +1690,7 @@
 /area/rescue_base/base)
 "aeg" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/captain,
+/obj/item/weapon/bedsheet/hop,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -1700,11 +1698,11 @@
 /area/rescue_base/base)
 "aeh" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/captain,
 /obj/item/device/radio/intercom/specops{
 	dir = 2;
 	pixel_y = 22
 	},
+/obj/item/weapon/bedsheet/hop,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -2244,8 +2242,6 @@
 /obj/item/weapon/melee/baton/loaded,
 /obj/item/weapon/reagent_containers/spray/pepper,
 /obj/item/weapon/reagent_containers/spray/pepper,
-/obj/item/weapon/gun/energy/stunrevolver,
-/obj/item/weapon/gun/energy/stunrevolver,
 /obj/item/weapon/melee/telebaton,
 /obj/item/weapon/melee/telebaton,
 /obj/machinery/recharger/wallcharger{
@@ -2292,14 +2288,14 @@
 /area/rescue_base/base)
 "afD" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/armor/vest/ert/security,
-/obj/item/clothing/head/helmet/ert/security,
-/obj/item/clothing/suit/armor/vest/ert/security,
-/obj/item/clothing/head/helmet/ert/security,
 /obj/machinery/recharger/wallcharger{
 	pixel_x = 4;
 	pixel_y = 32
 	},
+/obj/item/clothing/suit/armor/pcarrier/medium/sol,
+/obj/item/clothing/suit/armor/pcarrier/medium/sol,
+/obj/item/clothing/head/helmet,
+/obj/item/clothing/head/helmet,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -2307,10 +2303,10 @@
 /area/rescue_base/base)
 "afE" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/armor/vest/ert/medical,
-/obj/item/clothing/head/helmet/ert/medical,
-/obj/item/clothing/suit/armor/vest/ert/medical,
-/obj/item/clothing/head/helmet/ert/medical,
+/obj/item/clothing/suit/armor/pcarrier/medium/sol,
+/obj/item/clothing/suit/armor/pcarrier/medium/sol,
+/obj/item/clothing/head/helmet,
+/obj/item/clothing/head/helmet,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -2318,8 +2314,8 @@
 /area/rescue_base/base)
 "afF" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/energy/stunrevolver,
-/obj/item/weapon/gun/energy/stunrevolver,
+/obj/item/weapon/gun/energy/gun,
+/obj/item/weapon/gun/energy/gun,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -3049,7 +3045,6 @@
 /area/rescue_base/base)
 "ahh" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/stamp/centcomm,
 /obj/item/weapon/pen,
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -3265,8 +3260,14 @@
 /area/rescue_base/base)
 "ahI" = (
 /obj/structure/table/reinforced,
-/obj/item/taperoll/police,
-/obj/item/taperoll/police,
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/head/beret/solgov/fleet/security,
+/obj/item/clothing/head/beret/solgov/fleet/security,
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/accessory/solgov/department/security/fleet,
+/obj/item/clothing/head/beret/solgov/fleet/security,
+/obj/item/clothing/head/beret/solgov/fleet/security,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -3505,12 +3506,12 @@
 /area/rescue_base/base)
 "aik" = (
 /obj/structure/table/reinforced,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
+/obj/item/modular_computer/tablet/lease/preset/command,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -3688,7 +3689,7 @@
 	desc = "A secure airlock. Doesn't look like you can get through easily.";
 	icon = 'icons/obj/doors/centcomm/door.dmi';
 	icon_state = "closed";
-	name = "Delta Barracks"
+	name = "Delta Barracks";
 	dir = 4
 	},
 /area/rescue_base/base)
@@ -3991,6 +3992,9 @@
 /obj/structure/table/reinforced,
 /obj/item/weapon/storage/box/trackimp,
 /obj/item/weapon/storage/box/cdeathalarm_kit,
+/obj/item/clothing/accessory/solgov/department/command/fleet,
+/obj/item/clothing/accessory/solgov/rank/fleet/officer/o3,
+/obj/item/clothing/head/beret/solgov/fleet/command,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -4225,7 +4229,7 @@
 /area/rescue_base/base)
 "ajR" = (
 /obj/structure/table/steel,
-/obj/item/weapon/stamp/centcomm,
+/obj/item/weapon/stamp/solgov,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -4355,7 +4359,6 @@
 /obj/item/weapon/storage/box/teargas,
 /obj/item/weapon/storage/box/handcuffs,
 /obj/item/weapon/melee/baton/loaded,
-/obj/item/weapon/gun/energy/stunrevolver,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -4389,8 +4392,8 @@
 /area/rescue_base/base)
 "akk" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/armor/vest/ert,
-/obj/item/clothing/head/helmet/ert,
+/obj/item/clothing/suit/armor/pcarrier/medium/command,
+/obj/item/clothing/head/helmet/solgov/command,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -4434,7 +4437,10 @@
 "akp" = (
 /obj/machinery/mech_recharger,
 /obj/mecha/medical/odysseus/loaded,
-/turf/space,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
 /area/rescue_base/base)
 "akq" = (
 /obj/effect/floor_decal/asteroid,
@@ -4460,7 +4466,7 @@
 	},
 /area/rescue_base/base)
 "akt" = (
-/obj/structure/closet/secure_closet/hos,
+/obj/structure/closet/secure_closet/cos,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -4469,7 +4475,6 @@
 "aku" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/secure/briefcase,
-/obj/item/clothing/head/beret/centcom/captain,
 /turf/unsimulated/floor{
 	icon_state = "vault";
 	dir = 1
@@ -4485,7 +4490,10 @@
 "akw" = (
 /obj/machinery/mech_recharger,
 /obj/mecha/working/ripley/firefighter,
-/turf/space,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
 /area/rescue_base/base)
 "akx" = (
 /obj/structure/flora/tree/pine,
@@ -4535,17 +4543,6 @@
 /turf/unsimulated/floor{
 	name = "plating";
 	icon_state = "cult"
-	},
-/area/rescue_base/base)
-"akB" = (
-/obj/structure/table/rack,
-/obj/item/clothing/suit/armor/vest/ert/engineer,
-/obj/item/clothing/head/helmet/ert/engineer,
-/obj/item/clothing/suit/armor/vest/ert/engineer,
-/obj/item/clothing/head/helmet/ert/engineer,
-/turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
 	},
 /area/rescue_base/base)
 "akC" = (
@@ -4771,7 +4768,10 @@
 "akK" = (
 /obj/machinery/mech_recharger,
 /obj/mecha/working/hoverpod,
-/turf/space,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
 /area/rescue_base/base)
 "akL" = (
 /obj/item/device/radio/intercom/specops{
@@ -4841,7 +4841,10 @@
 "akR" = (
 /obj/mecha/combat/gygax/dark,
 /obj/machinery/mech_recharger,
-/turf/space,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
 /area/rescue_base/base)
 "akS" = (
 /obj/structure/flora/tree/dead,
@@ -5416,9 +5419,7 @@
 	},
 /area/rescue_base/base)
 "aml" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 9
-	},
+/turf/simulated/wall/titanium,
 /area/rescue_base/start)
 "amm" = (
 /obj/machinery/door/blast/regular{
@@ -5428,81 +5429,17 @@
 	name = "Cockpit Blast Shutters";
 	opacity = 0
 	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
-/area/rescue_base/start)
-"amn" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescuebridge";
-	name = "Cockpit Blast Shutters";
-	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"amo" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescuebridge";
-	name = "Cockpit Blast Shutters";
-	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
-"amp" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 5
-	},
-/area/rescue_base/start)
-"amq" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
 /area/rescue_base/start)
 "amr" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id = "rescuedock";
+	id = "rescueinfirm";
 	name = "Blast Shutters";
 	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
@@ -5514,7 +5451,7 @@
 	name = "Ship External Access";
 	req_access = list(103)
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "amt" = (
 /obj/machinery/door/unpowered/simple/wood,
@@ -5608,15 +5545,15 @@
 	pixel_y = -4;
 	req_access = list(108)
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amE" = (
 /obj/item/modular_computer/console/preset/command,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amF" = (
 /obj/machinery/computer/shuttle_control/multi/rescue,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amG" = (
 /obj/structure/table/steel_reinforced,
@@ -5626,12 +5563,9 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amH" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
 	frequency = 1331;
@@ -5646,18 +5580,19 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/red,
+/obj/machinery/oxygen_pump{
+	pixel_x = -30;
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "amI" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 1
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "amJ" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
 	frequency = 1331;
@@ -5673,7 +5608,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "amK" = (
 /obj/effect/overlay/palmtree_r,
@@ -5769,13 +5704,13 @@
 /area/ninja_dojo/dojo)
 "amV" = (
 /obj/structure/table/steel_reinforced,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amW" = (
-/obj/structure/bed/chair/office/dark{
+/obj/structure/bed/chair{
 	dir = 1
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amX" = (
 /obj/structure/table/steel_reinforced,
@@ -5784,31 +5719,33 @@
 	pixel_x = 22;
 	pixel_y = 0
 	},
-/turf/simulated/floor/shuttle/black,
+/obj/machinery/button/remote/blast_door{
+	icon_state = "doorctrl0";
+	id = "rescueeva";
+	name = "Window Shutters Control";
+	pixel_x = 0;
+	pixel_y = 0;
+	req_access = list(108)
+	},
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "amY" = (
-/obj/structure/bed/chair{
+/obj/structure/handrai{
+	icon_state = "handrail";
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "amZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "ana" = (
-/obj/structure/bed/chair{
+/obj/structure/handrai{
+	icon_state = "handrail";
 	dir = 8
 	},
-/obj/machinery/button/remote/blast_door{
-	icon_state = "doorctrl0";
-	id = "rescuedock";
-	name = "Window Shutters Control";
-	pixel_x = 24;
-	pixel_y = -4;
-	req_access = list(108)
-	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "anb" = (
 /obj/effect/landmark{
@@ -5901,28 +5838,29 @@
 	icon_state = "console";
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "anl" = (
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "anm" = (
 /obj/item/modular_computer/console/preset/engineering{
 	icon_state = "console";
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "ann" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/item/device/radio/intercom/specops{
 	dir = 8;
 	pixel_x = 22;
 	pixel_y = 0
 	},
-/turf/simulated/floor/shuttle/red,
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "ano" = (
 /obj/structure/table/standard,
@@ -6127,19 +6065,16 @@
 	dir = 4;
 	name = "Implant Management"
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "anK" = (
 /obj/item/modular_computer/console/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "anL" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
 	frequency = 1331;
@@ -6148,21 +6083,22 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/red,
+/obj/machinery/oxygen_pump{
+	pixel_x = -30;
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "anM" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "anN" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /obj/machinery/meter,
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "anO" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
 	frequency = 1331;
@@ -6171,7 +6107,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/plating,
 /area/rescue_base/start)
 "anP" = (
 /obj/structure/table/standard,
@@ -6282,20 +6218,19 @@
 	},
 /area/ninja_dojo/dojo)
 "aoe" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "aof" = (
-/obj/machinery/door/airlock/centcom{
-	name = "Flight Deck";
-	opacity = 1;
+/obj/machinery/door/airlock/hatch{
+	name = "Cockpit";
 	req_access = list(103)
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aog" = (
-/obj/effect/wingrille_spawn/reinforced/crescent,
 /obj/machinery/atmospherics/pipe/simple/visible,
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "aoh" = (
@@ -6306,7 +6241,7 @@
 	name = "Ship External Access";
 	req_access = list(103)
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoi" = (
 /turf/unsimulated/wall/fakeglass,
@@ -6432,23 +6367,14 @@
 	},
 /area/rescue_base/base)
 "aov" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
+	dir = 4;
 	icon_state = "pdoor0";
-	id = "rescuebridge";
-	name = "Cockpit Blast Shutters";
+	id = "rescueeva";
+	name = "Blast Shutters";
 	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
@@ -6460,7 +6386,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aox" = (
 /obj/structure/table/rack,
@@ -6473,7 +6399,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoy" = (
 /obj/machinery/atmospherics/pipe/tank/air{
@@ -6483,12 +6409,12 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoz" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /obj/machinery/meter,
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoA" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
@@ -6501,34 +6427,13 @@
 	pixel_y = 25;
 	req_access = list(103)
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoB" = (
 /obj/machinery/atmospherics/pipe/tank/air{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/darkred,
-/area/rescue_base/start)
-"aoC" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescueeva";
-	name = "Blast Shutters";
-	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoD" = (
 /obj/structure/bookcase,
@@ -6592,33 +6497,15 @@
 	icon_state = "wood"
 	},
 /area/ninja_dojo/dojo)
-"aoL" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescuebridge";
-	name = "Cockpit Blast Shutters";
-	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
 "aoM" = (
 /obj/structure/closet,
 /obj/item/weapon/storage/box/sinpockets,
 /obj/item/weapon/storage/box/sinpockets,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoN" = (
 /obj/structure/closet/bombclosetsecurity,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoO" = (
 /obj/structure/table/rack,
@@ -6628,35 +6515,15 @@
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/shoes/magboots,
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoP" = (
-/turf/simulated/floor/shuttle/darkred,
+/obj/effect/floor_decal/corner/blue,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoQ" = (
-/obj/structure/table/rack,
-/obj/item/clothing/mask/breath,
-/obj/item/clothing/suit/space/void/engineering,
-/obj/item/clothing/head/helmet/space/void/engineering,
-/turf/simulated/floor/shuttle/darkred,
-/area/rescue_base/start)
-"aoR" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescueeva";
-	name = "Blast Shutters";
-	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
+/obj/machinery/suit_storage_unit/standard_unit,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aoT" = (
 /obj/structure/table/woodentable,
@@ -6741,25 +6608,6 @@
 	icon_state = "wood"
 	},
 /area/ninja_dojo/dojo)
-"apc" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescuebridge";
-	name = "Cockpit Blast Shutters";
-	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
 "apd" = (
 /obj/structure/closet,
 /obj/item/device/flashlight/flare,
@@ -6774,7 +6622,7 @@
 /obj/item/device/flashlight,
 /obj/item/device/flashlight,
 /obj/item/device/flashlight,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "ape" = (
 /obj/item/device/radio/intercom/specops{
@@ -6782,33 +6630,14 @@
 	pixel_x = 22;
 	pixel_y = 0
 	},
-/obj/structure/closet/l3closet,
-/turf/simulated/floor/shuttle/black,
+/obj/structure/closet/l3closet/general,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apf" = (
 /obj/structure/table/rack,
 /obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/tank/emergency/oxygen/double,
-/turf/simulated/floor/shuttle/darkred,
-/area/rescue_base/start)
-"apg" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescueeva";
-	name = "Blast Shutters";
-	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aph" = (
 /obj/structure/bed/chair,
@@ -6833,7 +6662,7 @@
 	desc = "A secure airlock. Doesn't look like you can get through easily.";
 	icon = 'icons/obj/doors/centcomm/door.dmi';
 	icon_state = "closed";
-	name = "Outer Gate"
+	name = "Outer Gate";
 	dir = 4
 	},
 /area/ninja_dojo/dojo)
@@ -6888,14 +6717,13 @@
 /area/ninja_dojo/dojo)
 "apr" = (
 /obj/structure/closet,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aps" = (
-/obj/structure/closet/l3closet,
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apt" = (
 /obj/structure/bed/chair{
@@ -6904,16 +6732,12 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apu" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
-/turf/simulated/floor/shuttle/darkred,
-/area/rescue_base/start)
-"apv" = (
-/obj/structure/table/steel_reinforced,
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apw" = (
 /obj/structure/bed/chair{
@@ -6922,33 +6746,25 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apx" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apy" = (
 /obj/item/device/radio/intercom/specops{
 	dir = 1;
 	pixel_y = -22
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apz" = (
 /obj/structure/table/rack,
 /obj/machinery/light,
 /obj/item/weapon/tank/jetpack/carbondioxide,
 /obj/item/weapon/tank/jetpack/carbondioxide,
-/obj/machinery/button/remote/blast_door{
-	icon_state = "doorctrl0";
-	id = "rescueeva";
-	name = "Window Shutters Control";
-	pixel_x = 24;
-	pixel_y = -4;
-	req_access = list(108)
-	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apA" = (
 /obj/item/clothing/head/collectable/paper,
@@ -6971,30 +6787,18 @@
 	icon_state = "wood"
 	},
 /area/ninja_dojo/dojo)
-"apD" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 10
-	},
-/area/rescue_base/start)
 "apE" = (
-/obj/machinery/door/airlock/centcom{
+/obj/machinery/door/airlock/hatch{
 	name = "Crew Area";
-	opacity = 1;
 	req_access = list(103)
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apF" = (
 /obj/structure/sign/poster/bay_9{
 	pixel_x = -32
 	},
-/turf/simulated/floor/shuttle/darkred,
-/area/rescue_base/start)
-"apG" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apH" = (
 /obj/machinery/vending/wallmed1{
@@ -7004,20 +6808,14 @@
 	pixel_y = 0;
 	req_access = newlist()
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apI" = (
-/obj/machinery/door/airlock/centcom{
+/obj/machinery/door/airlock/hatch{
 	name = "Passageway";
-	opacity = 1;
 	req_access = list(103)
 	},
-/turf/simulated/floor/shuttle/darkred,
-/area/rescue_base/start)
-"apJ" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apK" = (
 /obj/effect/floor_decal/carpet,
@@ -7136,13 +6934,16 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apY" = (
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/darkred,
+/obj/effect/floor_decal/corner/blue/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "apZ" = (
 /turf/unsimulated/beach/water{
@@ -7166,7 +6967,7 @@
 "aqc" = (
 /obj/structure/bed,
 /obj/item/weapon/bedsheet/orange,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqd" = (
 /obj/machinery/flasher{
@@ -7174,50 +6975,47 @@
 	pixel_x = 0;
 	pixel_y = 28
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqe" = (
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqf" = (
-/obj/machinery/door/airlock/centcom{
+/obj/effect/shuttle_landmark/ert/start,
+/obj/machinery/door/airlock/hatch{
 	name = "Storage";
-	opacity = 1;
 	req_access = list(103)
 	},
-/obj/effect/shuttle_landmark/ert/start,
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "aqg" = (
-/obj/machinery/door/airlock/centcom{
+/obj/machinery/door/airlock/hatch{
 	name = "Storage";
-	opacity = 1;
 	req_access = list(103)
 	},
 /turf/simulated/floor/plating,
 /area/rescue_base/start)
 "aqh" = (
-/obj/machinery/door/airlock/centcom{
+/obj/machinery/door/airlock/hatch{
 	name = "Infirmary";
-	opacity = 1;
 	req_access = list(103)
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqi" = (
 /obj/machinery/atmospherics/unary/cryo_cell,
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqj" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqk" = (
 /obj/structure/table/glass,
@@ -7225,7 +7023,7 @@
 	pixel_x = 0;
 	pixel_y = 0
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aql" = (
 /obj/structure/closet/coffin,
@@ -7287,18 +7085,18 @@
 /area/ninja_dojo/dojo)
 "aqs" = (
 /obj/item/weapon/stool,
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqt" = (
 /obj/structure/toilet{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqu" = (
 /obj/structure/table/rack,
 /obj/random/loot,
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqv" = (
 /obj/structure/closet/crate/freezer/rations,
@@ -7313,24 +7111,24 @@
 /area/rescue_base/start)
 "aqy" = (
 /obj/structure/closet/secure_closet/chemical,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqz" = (
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5;
 	icon_state = "intact"
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9;
 	icon_state = "intact"
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqC" = (
 /obj/structure/cult/pylon,
@@ -7408,12 +7206,11 @@
 	},
 /area/ninja_dojo/dojo)
 "aqJ" = (
-/obj/machinery/door/airlock/centcom{
+/obj/machinery/door/airlock/glass/security{
 	name = "Cell";
-	opacity = 1;
 	req_access = list(103)
 	},
-/turf/simulated/floor/shuttle/black,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqK" = (
 /obj/machinery/light{
@@ -7423,7 +7220,7 @@
 /area/rescue_base/start)
 "aqL" = (
 /obj/structure/closet/secure_closet/medical1,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqM" = (
 /obj/structure/closet/medical_wall{
@@ -7442,25 +7239,25 @@
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
 /obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqN" = (
 /obj/machinery/bodyscanner{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqO" = (
 /obj/machinery/body_scanconsole{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqP" = (
 /obj/machinery/sleeper{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "aqQ" = (
 /obj/item/remains/human,
@@ -7492,26 +7289,28 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_x = -25
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqW" = (
-/turf/simulated/floor/shuttle/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqX" = (
-/obj/machinery/door/airlock/centcom{
+/obj/machinery/door/airlock/hatch{
 	name = "Brig";
-	opacity = 1;
 	req_access = list(103)
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqY" = (
 /obj/machinery/light,
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aqZ" = (
 /obj/machinery/recharge_station,
-/turf/simulated/floor/shuttle/darkred,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "ara" = (
 /obj/machinery/light{
@@ -7522,18 +7321,18 @@
 "arb" = (
 /obj/structure/table/glass,
 /obj/item/weapon/defibrillator/loaded,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arc" = (
 /obj/item/device/radio/intercom/specops{
 	dir = 1;
 	pixel_y = -22
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "ard" = (
 /obj/machinery/light,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "are" = (
 /obj/item/device/radio/intercom/specops{
@@ -7541,7 +7340,7 @@
 	pixel_x = 22;
 	pixel_y = 0
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arf" = (
 /mob/living/simple_animal/hostile/creature{
@@ -7617,7 +7416,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "aro" = (
 /obj/machinery/portable_atmospherics/canister/air,
@@ -7641,22 +7440,14 @@
 /obj/item/weapon/reagent_containers/syringe,
 /obj/item/weapon/tank/anesthetic,
 /obj/item/clothing/mask/breath/medical,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arq" = (
 /obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/structure/iv_drip,
-/obj/machinery/button/remote/blast_door{
-	icon_state = "doorctrl0";
-	id = "rescueinfirm";
-	name = "Window Shutters Control";
-	pixel_x = 24;
-	pixel_y = -4;
-	req_access = list(108)
-	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arr" = (
 /obj/structure/flora/ausbushes/grassybush,
@@ -7758,21 +7549,6 @@
 	icon_state = "asteroid"
 	},
 /area/rescue_base/base)
-"arC" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/rescue_base/start)
 "arD" = (
 /obj/structure/closet{
 	name = "Prisoner's Locker"
@@ -7784,7 +7560,7 @@
 	pixel_x = 22;
 	pixel_y = 0
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "arE" = (
 /obj/structure/shuttle/engine/heater,
@@ -7797,33 +7573,11 @@
 /obj/structure/table/glass,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
 /obj/item/weapon/reagent_containers/spray/cleaner,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arG" = (
 /obj/machinery/optable,
-/turf/simulated/floor/shuttle/white,
-/area/rescue_base/start)
-"arH" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	icon_state = "pdoor0";
-	id = "rescueinfirm";
-	name = "Blast Shutters";
-	opacity = 0
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arI" = (
 /obj/machinery/door/airlock/centcom{
@@ -7855,7 +7609,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "arM" = (
 /obj/structure/closet{
@@ -7863,7 +7617,7 @@
 	},
 /obj/item/clothing/shoes/orange,
 /obj/item/clothing/under/color/orange,
-/turf/simulated/floor/shuttle/red,
+/turf/simulated/floor/tiled/dark,
 /area/rescue_base/start)
 "arN" = (
 /obj/structure/shuttle/engine/propulsion,
@@ -7874,12 +7628,12 @@
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/weapon/reagent_containers/syringe/antiviral,
 /obj/item/stack/medical/advanced/bruise_pack,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arP" = (
 /obj/structure/table/glass,
 /obj/item/weapon/storage/firstaid/surgery,
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arQ" = (
 /obj/structure/table/glass,
@@ -7888,7 +7642,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/shuttle/white,
+/turf/simulated/floor/tiled/white,
 /area/rescue_base/start)
 "arR" = (
 /obj/structure/flora/pottedplant/unusual,
@@ -22993,6 +22747,25 @@
 /obj/item/clothing/mask/breath/medical,
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
+"ePc" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/clothing/head/helmet/riot,
+/obj/item/weapon/shield/riot,
+/obj/item/weapon/shield/riot,
+/obj/item/weapon/shield/riot,
+/obj/item/weapon/shield/riot,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/rescue_base/base)
 "eYq" = (
 /obj/structure/shuttle/engine/heater{
 	icon_state = "heater";
@@ -23028,6 +22801,17 @@
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
+"gLQ" = (
+/obj/structure/table/reinforced,
+/obj/item/clothing/accessory/solgov/department/engineering/fleet,
+/obj/item/clothing/accessory/solgov/department/engineering/fleet,
+/obj/item/clothing/head/beret/solgov/fleet/engineering,
+/obj/item/clothing/head/beret/solgov/fleet/engineering,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 1
+	},
+/area/rescue_base/base)
 "ixw" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "propulsion_l";
@@ -23121,6 +22905,12 @@
 	icon_state = "lino"
 	},
 /area/tdome/tdomeadmin)
+"nQg" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
 "nUi" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -23132,6 +22922,10 @@
 /obj/machinery/teleport/hub,
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
+"sbO" = (
+/obj/effect/floor_decal/corner/red/three_quarters,
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
 "snr" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced/full,
@@ -23154,6 +22948,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/syndicate_station/start)
+"std" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/rescue_base/start)
 "suk" = (
 /obj/structure/table/standard,
 /obj/structure/window/reinforced/crescent{
@@ -23208,6 +23008,36 @@
 /obj/item/weapon/storage/firstaid/surgery,
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
+"vlI" = (
+/obj/structure/table/reinforced,
+/obj/item/clothing/accessory/solgov/department/medical/fleet,
+/obj/item/clothing/accessory/solgov/department/medical/fleet,
+/obj/item/clothing/head/beret/solgov/fleet/medical,
+/obj/item/clothing/head/beret/solgov/fleet/medical,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 1
+	},
+/area/rescue_base/base)
+"vlK" = (
+/obj/structure/table/rack,
+/obj/item/weapon/shield/riot/metal,
+/obj/item/weapon/shield/riot/metal,
+/obj/item/weapon/shield/riot/metal,
+/obj/item/weapon/shield/riot/metal,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/rescue_base/base)
+"xZQ" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/storage/box/ertranks,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 1
+	},
+/area/rescue_base/base)
 
 (1,1,1) = {"
 aaa
@@ -25884,15 +25714,15 @@ alU
 alU
 alU
 aml
-amq
-amq
-amq
-amq
-amq
-arC
-amq
-amq
-apD
+aml
+aml
+aml
+aml
+aml
+aov
+aml
+aml
+aml
 alU
 ass
 adB
@@ -26051,7 +25881,7 @@ aae
 aei
 aaO
 aaO
-afh
+xZQ
 aae
 agl
 agE
@@ -26085,13 +25915,13 @@ alU
 alU
 alU
 alU
-amq
+aml
 aqc
 aqs
 aoe
 aqV
 aqV
-amY
+std
 arL
 arE
 arN
@@ -26287,14 +26117,14 @@ alU
 alU
 alU
 alU
-amq
+aml
 aqd
 anl
 aqJ
 aqW
-aqW
-aqW
-aqW
+anl
+anl
+anl
 arE
 arN
 alU
@@ -26489,11 +26319,11 @@ alU
 alU
 alU
 alU
-amq
+aml
 aqe
 aqt
 aoe
-aqW
+anl
 arn
 arD
 arM
@@ -26680,27 +26510,27 @@ adA
 alH
 alU
 aml
-amq
-amq
-amq
-amq
-amq
+aml
+aml
+aml
+aml
+aml
 aov
-aoL
-apc
-amq
-apD
+aov
+aov
+aml
+aml
 alU
-amp
-amq
-amq
-amq
+aml
+aml
+aml
+aml
 aqX
-amq
-amq
-amq
-amq
-apJ
+aml
+aml
+aml
+aml
+aml
 alU
 ass
 adB
@@ -26891,14 +26721,14 @@ aow
 aoM
 apd
 apr
-amq
+aml
 alU
 alU
 alU
-amq
-aoP
-aoP
-amq
+aml
+nQg
+sbO
+aml
 alU
 alU
 alU
@@ -27083,7 +26913,7 @@ adB
 adB
 alH
 alU
-amn
+amm
 amE
 amW
 anl
@@ -27093,14 +26923,14 @@ anl
 anl
 anl
 anl
-amq
-amq
-amq
-amq
-amq
-aoP
+aml
+aml
+aml
+aml
+aml
+anl
 aqY
-amq
+aml
 alU
 alU
 alU
@@ -27266,8 +27096,8 @@ aaO
 aae
 afD
 aaL
-aaL
-aaL
+ePc
+vlK
 aaL
 aim
 aaL
@@ -27285,7 +27115,7 @@ adA
 adB
 alH
 alU
-amn
+amm
 amF
 amW
 anl
@@ -27296,13 +27126,13 @@ anl
 anl
 anl
 apE
-aoP
+anl
 apX
 apI
-aoP
-aoP
+anl
+anl
 apy
-amq
+aml
 alU
 alU
 alU
@@ -27487,7 +27317,7 @@ adB
 adB
 alH
 alU
-amo
+amm
 amG
 amX
 anm
@@ -27498,13 +27328,13 @@ aoN
 ape
 aps
 aoe
-aoP
-aoP
+anl
+anl
 aoe
 aqu
 aqu
 aqZ
-amq
+aml
 alU
 alU
 alU
@@ -27682,33 +27512,33 @@ aaL
 aaL
 aaL
 aaL
-akB
+afE
 aae
 adB
 adB
 aih
 alH
 alU
-amp
-amq
-amq
-amq
-amq
-amq
-amq
-amq
-amq
-amq
-amq
-aoP
-aoP
-amq
-amq
-amq
-amq
-amq
-amq
-apD
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+anl
+anl
+aml
+aml
+aml
+aml
+aml
+aml
+aml
 alU
 alU
 alU
@@ -27899,12 +27729,12 @@ alU
 alU
 alU
 alU
-amq
+aml
 apt
 apF
-aoP
-aoP
-amq
+anl
+anl
+aml
 aqv
 aqK
 aqw
@@ -28101,11 +27931,11 @@ alU
 alU
 alU
 alU
-amq
+aml
 apu
-apG
-aoP
-aoP
+amW
+anl
+anl
 aqf
 aqw
 aqw
@@ -28303,11 +28133,11 @@ alU
 alU
 alU
 alU
-amq
-apv
-apG
-aoP
-aoP
+aml
+amV
+amW
+anl
+anl
 aqg
 aqw
 aqw
@@ -28478,7 +28308,7 @@ aaL
 acy
 afI
 aaO
-aaO
+vlI
 aaO
 ahK
 aip
@@ -28505,12 +28335,12 @@ alU
 alU
 alU
 alU
-amq
+aml
 apw
 apH
-aoP
-aoP
-amq
+anl
+anl
+aml
 aqx
 aqx
 ara
@@ -28700,25 +28530,25 @@ adB
 alH
 alU
 aml
-amq
-amq
-amq
-amq
-amq
-amq
-amq
-amq
-amq
-amq
-aoP
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+aml
+anl
 apy
-amq
-amq
-amq
-amq
-amq
-amq
-apJ
+aml
+aml
+aml
+aml
+aml
+aml
+aml
 alU
 alU
 alU
@@ -28901,24 +28731,24 @@ adB
 adB
 alH
 alU
-amq
+aml
 amH
 amY
 amY
 anL
-amq
+aml
 aoy
 aoO
 apf
 apx
 aoe
-aoP
+anl
 aoP
 aoe
 aqy
 aqL
 arb
-amq
+aml
 alU
 alU
 alU
@@ -29110,17 +28940,17 @@ amZ
 anM
 aog
 aoz
-aoP
-aoP
-aoP
+anl
+anl
+anl
 apI
-aoP
+anl
 apY
 aqh
 aqz
 aqz
 arc
-amq
+aml
 alU
 alU
 alU
@@ -29312,17 +29142,17 @@ amZ
 anN
 aoh
 aoA
-aoP
-aoP
+anl
+anl
 apy
-amq
-amq
-amq
-amq
-amq
+aml
+aml
+aml
+aml
+aml
 aqM
 ard
-amq
+aml
 alU
 alU
 alU
@@ -29495,7 +29325,7 @@ aaL
 aaL
 aaL
 aae
-ajy
+gLQ
 ajy
 ajW
 ajW
@@ -29507,24 +29337,24 @@ ajX
 adB
 alH
 alU
-amq
+aml
 amJ
 ana
 ann
 anO
-amq
+aml
 aoB
-aoQ
+anl
 aoQ
 apz
-amq
+aml
 alU
 alU
 alU
-amq
+aml
 aqN
 aqz
-amq
+aml
 alU
 alU
 alU
@@ -29709,28 +29539,28 @@ ajX
 adB
 alH
 alU
-amp
-amq
-amq
-amq
-amq
-amq
-aoC
-aoR
-apg
-amq
-apJ
+aml
+aml
+aml
+aml
+aml
+aml
+aov
+aov
+aov
+aml
+aml
 alU
 aml
-amq
-amq
+aml
+aml
 aqO
 aqz
-amq
-amq
-amq
-amq
-apD
+aml
+aml
+aml
+aml
+aml
 alU
 ass
 adB
@@ -29923,7 +29753,7 @@ alU
 alU
 alU
 alU
-amq
+aml
 aqi
 aqA
 aqz
@@ -30125,7 +29955,7 @@ alU
 alU
 alU
 alU
-amq
+aml
 aqj
 aqB
 aqz
@@ -30327,7 +30157,7 @@ alU
 alU
 alU
 alU
-amq
+aml
 aqk
 aqz
 aqP
@@ -30529,16 +30359,16 @@ alU
 alU
 alU
 alU
-amp
-amq
-amq
-amq
-amq
-amq
-arH
-amq
-amq
-apJ
+aml
+aml
+aml
+aml
+aml
+aml
+aov
+aml
+aml
+aml
 alU
 ass
 adB
