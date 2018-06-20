@@ -135,6 +135,14 @@ Weapons
 
 /obj/effect/paint/hull
 	color = COLOR_HULL
-	
+
 /obj/effect/paint/expeditionary
 	color = "#68099e"
+
+
+/obj/item/weapon/storage/box/ertranks
+	name = "box of rank tabs"
+	desc = "A box with various Fleet rank tabs."
+	startswith = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e7,
+					  /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e6 = 2,
+					  /obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e5 = 2)
