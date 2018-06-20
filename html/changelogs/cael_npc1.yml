@@ -1,8 +1,0 @@
-
-author: Cael_Aislinn
-
-delete-after: True
-
-changes: 
-  - wip: "Adds NPCs with basic speech interaction system."
-  - wip: "Adds NPC traders for ore, hydroponics produce and black market weapons."
