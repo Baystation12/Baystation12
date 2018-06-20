@@ -6,7 +6,8 @@
 							 /datum/map_template/ruin/exoplanet/oasis,
 							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
 							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
-							 /datum/map_template/ruin/exoplanet/fountain)
+							 /datum/map_template/ruin/exoplanet/fountain,
+							 /datum/map_template/ruin/exoplanet/hydrobase)
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()
 	if(prob(70))
