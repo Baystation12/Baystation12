@@ -1,3 +1,5 @@
+GLOBAL_LIST_EMPTY(banned_ruin_ids)
+
 /proc/seedRuins(list/z_levels = null, budget = 0, whitelist = /area/space, list/potentialRuins, var/maxx = world.maxx, var/maxy = world.maxy)
 	if(!z_levels || !z_levels.len)
 		WARNING("No Z levels provided - Not generating ruins")
@@ -9,52 +11,52 @@
 			WARNING("Z level [zl] does not exist - Not generating ruins")
 			return
 
-	var/overall_sanity = 100
 	var/list/ruins = potentialRuins.Copy()
+	for(var/ruin_id in GLOB.banned_ruin_ids)
+		while(ruin_id in ruins)
+			ruins -= ruin_id //remove all prohibited ids from the candidate list; used to forbit global duplicates.
 
-	var/is_picking = FALSE
-	var/last_checked_ruin_index = 0
-	while(budget > 0 && overall_sanity > 0)
+//Each iteration needs to either place a ruin or strictly decrease either the budget or ruins.len (or break).
+	while(budget > 0)
 		// Pick a ruin
 		var/datum/map_template/ruin/ruin = null
+		var/i //The list index of the ruin being worked on
 		if(ruins && ruins.len)
-			last_checked_ruin_index++ //ruins with no cost come first in the ruin list, so they'll get picked really often
-			if(is_picking)
-				ruin = ruins[pick(ruins)]
-			else
-				var/ruin_key = ruins[last_checked_ruin_index] //get the ruin's key via index
-				ruin = ruins[ruin_key] //use that key to get the ruin datum itself
-				if(ruin.cost >= 0) //if it has a non-negative cost, cancel out and pick another, to ensure true randomness
-					is_picking = TRUE
-					ruin = ruins[pick(ruins)]
+			i = rand(1,ruins.len)
+			ruin = ruins[ruins[i]]
+			if(ruin.cost > budget)
+				ruins.Cut(i,i+1)
+				continue //Too expensive, get rid of it and try again
 		else
 			log_world("Ruin loader had no ruins to pick from with [budget] left to spend.")
 			break
-		// Can we afford it
-		if(ruin.cost > budget)
-			overall_sanity--
-			continue
-		// If so, try to place it
-		var/sanity = 100
+		// Try to place it
+		var/sanity = 20
 		// And if we can't fit it anywhere, give up, try again
 
 		while(sanity > 0)
 			sanity--
+
 			var/width_border = TRANSITIONEDGE + RUIN_MAP_EDGE_PAD + round(ruin.width / 2)
 			var/height_border = TRANSITIONEDGE + RUIN_MAP_EDGE_PAD + round(ruin.height / 2)
 			var/z_level = pick(z_levels)
+			if(width_border > maxx - width_border || height_border > maxx - height_border) // Too big and will never fit.
+				ruins.Cut(i,i+1) //So let's not even try anymore with this one.
+				break
+
 			var/turf/T = locate(rand(width_border, maxx - width_border), rand(height_border, maxy - height_border), z_level)
 			var/valid = TRUE
 
 			for(var/turf/check in ruin.get_affected_turfs(T,1))
 				var/area/new_area = get_area(check)
 				if(!(istype(new_area, whitelist)) || check.turf_flags & TURF_FLAG_NORUINS)
+					if(sanity == 0)
+						ruins.Cut(i,i+1) //It didn't fit, and we are out of sanity. Let's make sure not to keep trying the same one.
 					valid = FALSE
-					break
+					break //Let's try again
 
 			if(!valid)
 				continue
-
 			log_world("Ruin \"[ruin.name]\" placed at ([T.x], [T.y], [T.z])")
 
 			var/obj/effect/ruin_loader/R = new /obj/effect/ruin_loader(T)
@@ -62,16 +64,10 @@
 			if(ruin.cost >= 0)
 				budget -= ruin.cost
 			if(!ruin.allow_duplicates)
-				for(var/m in ruins)
-					var/datum/map_template/ruin/ruin_to_remove = ruins[m]
-					if(ruin_to_remove.id == ruin.id) //remove all ruins with the same ID, to make sure that ruins with multiple variants work properly
-						ruins -= ruin_to_remove.id
-						last_checked_ruin_index--
+				while(ruin.id in ruins)
+					ruins -= ruin.id //Removes all candidates with the same id.
+				GLOB.banned_ruin_ids += ruin.id
 			break
-
-	if(!overall_sanity)
-		log_world("Ruin loader gave up with [budget] left to spend.")
-
 
 /obj/effect/ruin_loader
 	name = "random ruin"
