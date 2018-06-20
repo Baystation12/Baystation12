@@ -149,8 +149,8 @@
 
 		if(do_after(user, 40,src))
 			if(!src) return
-			user.drop_item()
-			W.loc = src
+			if(!user.unEquip(W, src))
+				return
 			to_chat(user, "<span class='notice'>You installed the airlock electronics!</span>")
 			src.state = 2
 			src.SetName("Near finished Airlock Assembly")

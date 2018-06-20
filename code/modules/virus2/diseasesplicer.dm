@@ -17,14 +17,12 @@
 		return ..(I,user)
 
 	if(istype(I,/obj/item/weapon/virusdish))
-		var/mob/living/carbon/c = user
 		if (dish)
 			to_chat(user, "\The [src] is already loaded.")
 			return
-
+		if(!user.unEquip(I, src))
+			return
 		dish = I
-		c.drop_item()
-		I.forceMove(src)
 
 	if(istype(I,/obj/item/weapon/diseasedisk))
 		to_chat(user, "You upload the contents of the disk onto the buffer.")

@@ -464,10 +464,11 @@
 		for(var/V in components)
 			var/datum/robot_component/C = components[V]
 			if(!C.installed && istype(W, C.external_type))
+				if(!user.unEquip(W))
+					return
 				C.installed = 1
 				C.wrapped = W
 				C.install()
-				user.drop_item()
 				W.loc = null
 
 				var/obj/item/robot_parts/robot_component/WC = W
@@ -574,15 +575,15 @@
 
 	// If the robot is having something inserted which will remain inside it, self-inserting must be handled before exiting to avoid logic errors. Use the handle_selfinsert proc.
 	else if (istype(W, /obj/item/weapon/stock_parts/matter_bin) && opened) // Installing/swapping a matter bin
+		if(!user.unEquip(W, src))
+			return
 		if(storage)
 			to_chat(user, "You replace \the [storage] with \the [W]")
 			storage.forceMove(get_turf(src))
 			storage = null
 		else
 			to_chat(user, "You install \the [W]")
-		user.drop_item()
 		storage = W
-		W.forceMove(src)
 		handle_selfinsert(W, user)
 		recalculate_synth_capacities()
 
@@ -594,9 +595,7 @@
 			to_chat(user, "There is a power cell already installed.")
 		else if(W.w_class != ITEM_SIZE_NORMAL)
 			to_chat(user, "\The [W] is too [W.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
-		else
-			user.drop_item()
-			W.loc = src
+		else if(user.unEquip(W, src))
 			cell = W
 			handle_selfinsert(W, user) //Just in case.
 			to_chat(user, "You insert the power cell.")
@@ -651,9 +650,9 @@
 			to_chat(usr, "The upgrade is locked and cannot be used yet!")
 		else
 			if(U.action(src))
+				if(!user.unEquip(U, src))
+					return
 				to_chat(usr, "You apply the upgrade to [src]!")
-				usr.drop_item()
-				U.loc = src
 				handle_selfinsert(W, user)
 			else
 				to_chat(usr, "Upgrade error!")

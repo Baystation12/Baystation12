@@ -47,8 +47,7 @@
 
 /obj/item/weapon/sample/attackby(var/obj/O, var/mob/user)
 	if(O.type == src.type)
-		user.unEquip(O)
-		if(merge_evidence(O, user))
+		if(user.unEquip(O) && merge_evidence(O, user))
 			qdel(O)
 		return 1
 	return ..()

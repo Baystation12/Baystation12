@@ -234,7 +234,6 @@ var/global/chicken_count = 0
 		if(G.seed && G.seed.kitchen_tag == "wheat")
 			if(!stat && eggsleft < 8)
 				user.visible_message("<span class='notice'>[user] feeds [O] to [name]! It clucks happily.</span>","<span class='notice'>You feed [O] to [name]! It clucks happily.</span>")
-				user.drop_item()
 				qdel(O)
 				eggsleft += rand(1, 4)
 			else

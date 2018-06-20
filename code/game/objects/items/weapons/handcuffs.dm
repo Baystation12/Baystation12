@@ -86,6 +86,12 @@
 	if(!can_place(target, user)) // victim may have resisted out of the grab in the meantime
 		return 0
 
+	var/obj/item/weapon/handcuffs/cuffs = src
+	if(dispenser)
+		cuffs = new(get_turf(user))
+	else if(!user.unEquip(cuffs))
+		return 0
+
 	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")
 	feedback_add_details("handcuffs","H")
 
@@ -95,11 +101,6 @@
 	user.visible_message("<span class='danger'>\The [user] has put [cuff_type] on \the [H]!</span>")
 
 	// Apply cuffs.
-	var/obj/item/weapon/handcuffs/cuffs = src
-	if(dispenser)
-		cuffs = new(get_turf(user))
-	else
-		user.drop_from_inventory(cuffs)
 	target.equip_to_slot(cuffs,slot_handcuffed)
 	return 1
 

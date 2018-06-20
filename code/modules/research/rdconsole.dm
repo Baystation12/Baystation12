@@ -118,7 +118,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(t_disk || d_disk)
 			to_chat(user, "A disk is already loaded into the machine.")
 			return
-
+		if(!user.canUnEquip(D))
+			return
 		if(istype(D, /obj/item/weapon/disk/tech_disk))
 			t_disk = D
 		else if (istype(D, /obj/item/weapon/disk/design_disk))
@@ -126,8 +127,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		else
 			to_chat(user, "<span class='notice'>Machine cannot accept disks in that format.</span>")
 			return
-		user.drop_item()
-		D.loc = src
+		user.drop_from_inventory(D, src)
 		to_chat(user, "<span class='notice'>You add \the [D] to the machine.</span>")
 	else
 		//The construction/deconstruction of the console code.

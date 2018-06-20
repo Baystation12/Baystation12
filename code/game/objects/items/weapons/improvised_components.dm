@@ -64,8 +64,6 @@
 		finished = new /obj/item/weapon/melee/baton/cattleprod(get_turf(user))
 		to_chat(user, "<span class='notice'>You fasten the wirecutters to the top of the rod with the cable, prongs outward.</span>")
 	if(finished)
-		user.drop_from_inventory(src)
-		user.drop_from_inventory(I)
 		qdel(I)
 		qdel(src)
 		user.put_in_hands(finished)

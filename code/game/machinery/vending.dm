@@ -199,8 +199,8 @@
 		power_change()
 		return
 	else if(istype(W, /obj/item/weapon/coin) && premium.len > 0)
-		user.drop_item()
-		W.forceMove(src)
+		if(!user.unEquip(W, src))
+			return
 		coin = W
 		categories |= CAT_COIN
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
@@ -236,7 +236,6 @@
 	cashmoney.worth -= currently_vending.price
 
 	if(cashmoney.worth <= 0)
-		usr.drop_from_inventory(cashmoney)
 		qdel(cashmoney)
 	else
 		cashmoney.update_icon()

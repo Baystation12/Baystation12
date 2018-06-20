@@ -326,7 +326,8 @@
 	if(!bypass_removal)
 		if (istype(O.loc, /mob))
 			var/mob/user = O.loc
-			user.remove_from_mob(O)
+			if(!user.unEquip(O, src))
+				return
 		else if(istype(O.loc,/obj/item/weapon/storage))
 			var/obj/item/weapon/storage/S = O.loc
 			S.remove_from_storage(O, src)

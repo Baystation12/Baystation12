@@ -44,8 +44,9 @@
 		return
 
 	if(istype(W, /obj/item/stack/tile))
+		if(!user.unEquip(W, T))
+			return
 		to_chat(user, "<span class='notice'>\The [W] successfully loaded.</span>")
-		user.drop_item(T)
 		TakeTile(T)
 		return
 

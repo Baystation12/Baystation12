@@ -124,11 +124,9 @@
 				return
 
 	// Upgrades!
-	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades)) // Is a possible upgrade and isn't in the camera already.
+	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades) && user.unEquip(W, src)) // Is a possible upgrade and isn't in the camera already.
 		to_chat(user, "You attach \the [W] into the assembly inner circuits.")
 		upgrades += W
-		user.remove_from_mob(W)
-		W.forceMove(src)
 		return
 
 	// Taking out upgrades
