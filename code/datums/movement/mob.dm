@@ -149,7 +149,7 @@
 // Along with more physical checks
 /datum/movement_handler/mob/physically_capable/MayMove(var/mob/mover)
 	// We only check physical capability if the host mob tried to do the moving
-	return ((mover && mover != mob) || !mob.is_physically_disabled()) ? MOVEMENT_PROCEED : MOVEMENT_STOP
+	return ((mover && mover != mob) || !mob.incapacitated(INCAPACITATION_DISABLED & ~INCAPACITATION_FORCELYING)) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
 // Is anything physically preventing movement?
 /datum/movement_handler/mob/physically_restrained/MayMove(var/mob/mover)
@@ -222,6 +222,11 @@
 
 	//We are now going to move
 	mob.moving = 1
+
+	//Crawling, it's slower
+	if(mob.lying && !do_after(mob, 8 + (mob.weakened * 2) , incapacitation_flags = ~INCAPACITATION_FORCELYING))
+		return
+
 	direction = mob.AdjustMovementDirection(direction)
 	step(mob, direction)
 
