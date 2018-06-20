@@ -315,6 +315,8 @@
 	if(!H || (H.status & ORGAN_DISFIGURED) || H.is_stump() || !real_name || (MUTATION_HUSK in mutations) || (wear_mask && (wear_mask.flags_inv&HIDEFACE)) || (head && (head.flags_inv&HIDEFACE)))	//Face is unrecognizeable, use ID if able
 		if(istype(wear_mask))
 			return wear_mask.visible_name
+		else if(istype(wearing_rig) && wearing_rig.visible_name)
+			return wearing_rig.visible_name
 		else
 			return "Unknown"
 	return real_name

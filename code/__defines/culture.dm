@@ -167,3 +167,11 @@
 #define CULTURE_NABBER_AMINUS "Grade A-"
 #define CULTURE_NABBER_A      "Grade A"
 #define CULTURE_NABBER_APLUS  "Grade A+"
+
+// Ascent culture.
+#define CULTURE_ASCENT           "The Ascent"
+#define HOME_SYSTEM_KHARMAANI    "Core"
+#define FACTION_ASCENT_GYNE      "Ascent Gyne"
+#define FACTION_ASCENT_ALATE     "Ascent Alate"
+#define FACTION_ASCENT_SERPENTID "Ascent Serpentid"
+#define RELIGION_KHARMAANI       "Nest-Lineage Veneration"

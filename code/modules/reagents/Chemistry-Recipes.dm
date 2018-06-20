@@ -2283,3 +2283,10 @@
 	required_reagents = list(/datum/reagent/nutriment/rice = 10, /datum/reagent/drink/tea/green = 1)
 	result_amount = 10
 	mix_message = "The tea mingles with the rice."
+
+/datum/chemical_reaction/crystal
+	name = "Crystallizing Agent"
+	result = /datum/reagent/crystal
+	required_reagents = list(/datum/reagent/silicon = 2, /datum/reagent/acetone = 2, /datum/chemical_reaction/mutagen = 1)
+	result_amount = 5
+

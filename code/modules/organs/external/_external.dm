@@ -173,24 +173,23 @@
 		take_external_damage(0, burn_damage, 0, used_weapon = "Hot metal")
 
 /obj/item/organ/external/attack_self(var/mob/user)
-	if(!contents.len)
-		return ..()
-	var/list/removable_objects = list()
-	for(var/obj/item/organ/external/E in (contents + src))
-		if(!istype(E))
-			continue
-		for(var/obj/item/I in E.contents)
-			if(istype(I,/obj/item/organ))
+	if((!owner || loc != owner) && contents.len)
+		var/list/removable_objects = list()
+		for(var/obj/item/organ/external/E in (contents + src))
+			if(!istype(E))
 				continue
-			removable_objects |= I
-	if(removable_objects.len)
-		var/obj/item/I = pick(removable_objects)
-		I.forceMove(get_turf(user)) //just in case something was embedded that is not an item
-		if(istype(I))
-			if(!(user.l_hand && user.r_hand))
-				user.put_in_hands(I)
-		user.visible_message("<span class='danger'>\The [user] rips \the [I] out of \the [src]!</span>")
-		return //no eating the limb until everything's been removed
+			for(var/obj/item/I in E.contents)
+				if(istype(I,/obj/item/organ))
+					continue
+				removable_objects |= I
+		if(removable_objects.len)
+			var/obj/item/I = pick(removable_objects)
+			I.forceMove(get_turf(user)) //just in case something was embedded that is not an item
+			if(istype(I))
+				if(!(user.l_hand && user.r_hand))
+					user.put_in_hands(I)
+			user.visible_message("<span class='danger'>\The [user] rips \the [I] out of \the [src]!</span>")
+			return //no eating the limb until everything's been removed
 	return ..()
 
 /obj/item/organ/external/examine()

@@ -1,15 +1,13 @@
-/obj/item/organ/external/chest/nabber
-	name = "thorax"
-	encased = "carapace"
+/obj/item/organ/external/chest/insectoid/nabber
 	action_button_name = "Perform Threat Display"
 
-/obj/item/organ/external/chest/nabber/refresh_action_button()
+/obj/item/organ/external/chest/insectoid/nabber/refresh_action_button()
 	. = ..()
 	if(.)
 		action.button_icon_state = "nabber-threat"
 		if(action.button) action.button.UpdateIcon()
 
-/obj/item/organ/external/chest/nabber/attack_self(var/mob/user)
+/obj/item/organ/external/chest/insectoid/nabber/attack_self(var/mob/user)
 	. = ..()
 	if(.)
 		if(owner.incapacitated())
