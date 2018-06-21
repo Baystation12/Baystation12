@@ -10,6 +10,7 @@
 	eyeblur = 4
 	hitscan = 1
 	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
+	penetration_modifier = 0.3
 
 	muzzle_type = /obj/effect/projectile/laser/muzzle
 	tracer_type = /obj/effect/projectile/laser/tracer
@@ -22,10 +23,11 @@
 
 /obj/item/projectile/beam/smalllaser
 	damage = 25
+	armor_penetration = 10
 
 /obj/item/projectile/beam/midlaser
 	damage = 50
-	armor_penetration = 10
+	armor_penetration = 20
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
