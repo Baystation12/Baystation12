@@ -37,7 +37,3 @@
 /obj/item/device/radio/headset/police
 	ks2type = /obj/item/device/encryptionkey/police
 	icon_state = "sec_headset"
-
-//Project Orion Headset
-/obj/item/device/radio/headset/specops/orion
-	ks2type = /obj/item/device/encryptionkey/orionspecops

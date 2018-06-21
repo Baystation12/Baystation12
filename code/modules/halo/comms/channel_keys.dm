@@ -11,7 +11,6 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define CIV_NAME "System"
 #define SEC_NAME "GCPD"
 #define ODST_NAME "TACCOM"
-#define SPECOPS_NAME "OpsCom"
 
 /datum/halo_frequencies
 	var/innie_channel = "INNIECOM"
@@ -25,9 +24,8 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	var/const/civ_freq = 1459
 	var/covenant_battlenet_freq = -1
 	var/police_freq = -1
-	var/specops_freq = -1
 	var/list/used_freqs = list()
-	var/list/frequencies = list("INNIECOM",SHIPCOM_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,COV_COMMON_NAME,SEC_NAME,ODST_NAME,SPECOPS_NAME)
+	var/list/frequencies = list("INNIECOM",SHIPCOM_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,COV_COMMON_NAME,SEC_NAME,ODST_NAME)
 
 /datum/halo_frequencies/New()
 	if(GLOB.using_map.use_global_covenant_comms)
@@ -56,7 +54,6 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	frequencies[COV_COMMON_NAME] = covenant_battlenet_freq
 	frequencies[SEC_NAME] = police_freq
 	frequencies[ODST_NAME] = odst_freq
-	frequencies[SPECOPS_NAME] = specops_freq
 	GLOB.default_internal_channels["[eband_freq]"] = list()
 	radiochannels = frequencies
 
@@ -118,11 +115,6 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 		police_freq = rand(1001, 9998)
 	used_freqs += "[police_freq]"
 
-	specops_freq = rand(1001, 9998)
-	while(used_freqs.Find("[specops_freq]"))
-		specops_freq = rand(1001, 9998)
-	used_freqs += "[specops_freq]"
-
 	setup_com_channel_list()
 
 	return 1
@@ -164,9 +156,6 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 /obj/item/device/encryptionkey/public
 	channels = list(CIV_NAME = 1)
 
-/obj/item/device/encryptionkey/orionspecops
-	channels = list(EBAND_NAME = 1, CIV_NAME = 1, SHIPCOM_NAME = 1, SPECOPS_NAME = 1)
-
 /proc/halo_frequency_span_class(var/frequency)
 	//Innie channel
 	if (frequency == halo_frequencies.innie_freq)
@@ -186,9 +175,5 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	//general ship comms
 	if(frequency == halo_frequencies.shipcom_freq)
 		return "comradio"
-
-	//Specops Channel
-	if(frequency == halo_frequencies.specops_freq)
-		return "opsradio"
 
 	return "radio"
