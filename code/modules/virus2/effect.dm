@@ -32,6 +32,16 @@
 	var/hold_until		//can only fire after this worldtime
 	var/allow_multiple	//allow to have more than 1 effect of this type in the same virus
 
+/datum/disease2/effect/proc/get_effect_info(verbose = 1)
+	. = list()
+	if(verbose)
+		. += "([stage]) [name]    "
+		. += "<small><u>Strength:</u> [multiplier >= 3 ? "Severe" : multiplier > 1 ? "Above Average" : "Average"]    "
+		. += "<u>Verosity:</u> [chance * 15]</small><br>"
+	else
+		. += name
+	return JOINTEXT(.)
+
 /datum/disease2/effect/proc/fire(var/mob/living/carbon/human/mob,var/current_stage)
 	if(oneshot == -1)
 		return
