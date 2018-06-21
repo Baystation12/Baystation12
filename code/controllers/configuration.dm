@@ -575,13 +575,14 @@ var/list/gamemode_cache = list()
 				if("humans_need_surnames")
 					humans_need_surnames = 1
 
-				if("usealienwhitelist")
-					usealienwhitelist = 1
+				//if("usealienwhitelist")
+				//	usealienwhitelist = 1
 				if("useingamealienwhitelist")
 					usealienwhitelist = 1
 					useingamealienwhitelist = 1
-				if("usealienwhitelist_sql") // above need to be enabled as well
-					usealienwhitelistSQL = 1;
+				//if("usealienwhitelist_sql") // above need to be enabled as well
+				//	usealienwhitelist = 1
+				//	usealienwhitelistSQL = 1;
 				if("alien_player_ratio")
 					limitalienplayers = 1
 					alien_to_human_ratio = text2num(value)
