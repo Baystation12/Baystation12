@@ -521,6 +521,8 @@
 			return global.gear_tweak_free_color_choice_;
 		if("gender_datums")
 			return global.gender_datums;
+		if("get_orion_password")
+			return global.get_orion_password;
 		if("ghost_darkness_images")
 			return global.ghost_darkness_images;
 		if("ghost_role_manager")
@@ -1221,7 +1223,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1744,6 +1746,8 @@
 			global.gear_tweak_free_color_choice_=newval;
 		if("gender_datums")
 			global.gender_datums=newval;
+		if("get_orion_password")
+			global.get_orion_password=newval;
 		if("ghost_darkness_images")
 			global.ghost_darkness_images=newval;
 		if("ghost_role_manager")
@@ -2444,7 +2448,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2706,6 +2710,7 @@
 	"gear_datums",
 	"gear_tweak_free_color_choice_",
 	"gender_datums",
+	"get_orion_password",
 	"ghost_darkness_images",
 	"ghost_role_manager",
 	"ghost_sightless_images",
