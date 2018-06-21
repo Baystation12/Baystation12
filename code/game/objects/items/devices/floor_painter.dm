@@ -60,10 +60,11 @@
 		"red" = 			COLOR_RED,
 		"sky blue" =   		COLOR_DEEP_SKY_BLUE,
 		"titanium" =     	COLOR_TITANIUM,
-		"hull blue" = 		COLOR_HULL,
 		"violet" = 			COLOR_VIOLET,
 		"white" =        	COLOR_WHITE,
-		"yellow" =       	COLOR_AMBER
+		"yellow" =       	COLOR_AMBER,
+		"hull blue" = 		COLOR_HULL,
+		"bulkhead black" =	COLOR_GUNMETAL
 		)
 
 
