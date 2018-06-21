@@ -17480,6 +17480,7 @@
 	dir = 4;
 	pixel_y = 8
 	},
+/obj/structure/aliumizer,
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNc" = (
@@ -22613,6 +22614,12 @@
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
 /area/skipjack_station/start)
+"bfZ" = (
+/obj/structure/aliumizer,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
 "bgb" = (
 /obj/structure/closet{
 	icon_closed = "cabinet_closed";
@@ -23028,6 +23035,14 @@
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
+"isk" = (
+/obj/effect/floor_decal/snow,
+/obj/structure/aliumizer,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "ice"
+	},
+/area/ninja_dojo/dojo)
 "ixw" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "propulsion_l";
@@ -23127,6 +23142,13 @@
 	},
 /turf/simulated/floor/shuttle/black,
 /area/syndicate_station/start)
+"pMd" = (
+/obj/structure/aliumizer,
+/turf/unsimulated/floor{
+	dir = 2;
+	icon_state = "dark"
+	},
+/area/syndicate_mothership)
 "ryl" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/teleport/hub,
@@ -23208,6 +23230,10 @@
 /obj/item/weapon/storage/firstaid/surgery,
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
+"wIu" = (
+/obj/structure/aliumizer,
+/turf/simulated/floor/carpet,
+/area/wizard_station)
 
 (1,1,1) = {"
 aaa
@@ -50916,7 +50942,7 @@ ajN
 ajN
 ale
 alj
-alv
+wIu
 alM
 alZ
 alb
@@ -56078,7 +56104,7 @@ aLM
 aLM
 aLM
 aLM
-aML
+bfZ
 aML
 aOO
 aML
@@ -58604,7 +58630,7 @@ akd
 ajP
 apa
 apo
-apo
+isk
 aoZ
 ajP
 ajP
@@ -59462,7 +59488,7 @@ ayB
 azK
 aAf
 aAB
-aAS
+pMd
 aAS
 aAS
 aBS

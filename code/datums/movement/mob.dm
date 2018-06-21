@@ -41,12 +41,21 @@
 
 // Eye movement
 /datum/movement_handler/mob/eye/DoMove(var/direction, var/mob/mover)
-	if(mover != mob) // We only care about direct movement
+	if(IS_NOT_SELF(mover)) // We only care about direct movement
 		return
 	if(!mob.eyeobj)
 		return
 	mob.eyeobj.EyeMove(direction)
 	return MOVEMENT_HANDLED
+
+/datum/movement_handler/mob/eye/MayMove(var/mob/mover, var/is_external)
+	if(IS_NOT_SELF(mover))
+		return MOVEMENT_PROCEED
+	if(is_external)
+		return MOVEMENT_PROCEED
+	if(!mob.eyeobj)
+		return MOVEMENT_PROCEED
+	return (MOVEMENT_PROCEED|MOVEMENT_HANDLED)
 
 // Space movement
 /datum/movement_handler/mob/space/DoMove(var/direction, var/mob/mover)
@@ -58,6 +67,15 @@
 			return MOVEMENT_HANDLED
 		else
 			mob.inertia_dir = 0 //If not then we can reset inertia and move
+
+/datum/movement_handler/mob/space/MayMove(var/mob/mover, var/is_external)
+	if(IS_NOT_SELF(mover) && is_external)
+		return MOVEMENT_PROCEED
+
+	if(!mob.check_solid_ground())
+		if(!mob.Allow_Spacemove(0))
+			return MOVEMENT_STOP
+	return MOVEMENT_PROCEED
 
 // Buckle movement
 /datum/movement_handler/mob/buckle_relay/DoMove(var/direction, var/mover)
@@ -74,7 +92,7 @@
 			return // No wheelchair driving in space
 		if(istype(mob.pulledby, /obj/structure/bed/chair/wheelchair))
 			. = MOVEMENT_HANDLED
-			mob.pulledby.relaymove(mob, direction)
+			mob.pulledby.DoMove(direction, mob)
 		else if(istype(mob.buckled, /obj/structure/bed/chair/wheelchair))
 			. = MOVEMENT_HANDLED
 			if(ishuman(mob))
@@ -85,71 +103,77 @@
 					return // No hands to drive your chair? Tough luck!
 			//drunk wheelchair driving
 			direction = mob.AdjustMovementDirection(direction)
-			mob.move_delay += 2
-			mob.buckled.relaymove(mob, direction)
+			mob.buckled.DoMove(direction, mob)
+
+/datum/movement_handler/mob/buckle_relay/MayMove(var/mover)
+	if(mob.buckled)
+		return mob.buckled.MayMove(mover) ? (MOVEMENT_PROCEED|MOVEMENT_HANDLED) : MOVEMENT_STOP
+	return MOVEMENT_PROCEED
 
 // Movement delay
 /datum/movement_handler/mob/delay
 	var/next_move
 
-/datum/movement_handler/mob/delay/DoMove()
-	if(!MayMove())
-		return MOVEMENT_HANDLED
+/datum/movement_handler/mob/delay/DoMove(var/direction, var/mover)
+	if(IS_NOT_SELF(mover))
+		return
 	next_move = world.time + max(1, mob.move_delay)
 
-/datum/movement_handler/mob/delay/MayMove()
-	return world.time >= next_move
+/datum/movement_handler/mob/delay/MayMove(var/mover, var/is_external)
+	if(IS_NOT_SELF(mover) && is_external)
+		return MOVEMENT_PROCEED
+	return ((mover && mover != mob) ||  world.time >= next_move) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
 /datum/movement_handler/mob/delay/proc/AddDelay(var/delay)
 	next_move = max(next_move, world.time + delay)
 
 // Stop effect
 /datum/movement_handler/mob/stop_effect/DoMove()
-	if(!MayMove())
+	if(MayMove() == MOVEMENT_STOP)
 		return MOVEMENT_HANDLED
 
 /datum/movement_handler/mob/stop_effect/MayMove()
 	for(var/obj/effect/stop/S in mob.loc)
 		if(S.victim == mob)
-			return FALSE
-	return TRUE
+			return MOVEMENT_STOP
+	return MOVEMENT_PROCEED
 
 // Transformation
 /datum/movement_handler/mob/transformation/MayMove()
-	return FALSE
+	return MOVEMENT_STOP
 
-// Consciousness
+// Consciousness - Is the entity trying to conduct the move conscious?
 /datum/movement_handler/mob/conscious/MayMove(var/mob/mover)
-	return (mover && mover != mob) || mob.stat == CONSCIOUS
+	return (mover ? mover.stat == CONSCIOUS : mob.stat == CONSCIOUS) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
 // Along with more physical checks
 /datum/movement_handler/mob/physically_capable/MayMove(var/mob/mover)
 	// We only check physical capability if the host mob tried to do the moving
-	return (mover && mover != mob) || !mob.is_physically_disabled()
+	return ((mover && mover != mob) || !mob.is_physically_disabled()) ? MOVEMENT_PROCEED : MOVEMENT_STOP
 
 // Is anything physically preventing movement?
 /datum/movement_handler/mob/physically_restrained/MayMove(var/mob/mover)
 	if(mob.anchored)
 		if(mover == mob)
 			to_chat(mob, "<span class='notice'>You're anchored down!</span>")
-		return FALSE
+		return MOVEMENT_STOP
 
 	if(istype(mob.buckled) && !mob.buckled.buckle_movable)
 		if(mover == mob)
 			to_chat(mob, "<span class='notice'>You're buckled to \the [mob.buckled]!</span>")
-		return FALSE
+		return MOVEMENT_STOP
 
 	if(LAZYLEN(mob.pinned))
 		if(mover == mob)
 			to_chat(mob, "<span class='notice'>You're pinned down by \a [mob.pinned[1]]!</span>")
-		return FALSE
+		return MOVEMENT_STOP
 
 	for(var/obj/item/grab/G in mob.grabbed_by)
 		if(G.stop_move())
 			if(mover == mob)
 				to_chat(mob, "<span class='notice'>You're stuck in a grab!</span>")
 			mob.ProcessGrabs()
-			return FALSE
+			return MOVEMENT_STOP
 
 	if(mob.restrained())
 		for(var/mob/M in range(mob, 1))
@@ -157,11 +181,11 @@
 				if(!M.incapacitated() && mob.Adjacent(M))
 					if(mover == mob)
 						to_chat(mob, "<span class='notice'>You're restrained! You can't move!</span>")
-					return FALSE
+					return MOVEMENT_STOP
 				else
 					M.stop_pulling()
 
-	return TRUE
+	return MOVEMENT_PROCEED
 
 
 /mob/living/ProcessGrabs()
@@ -202,6 +226,21 @@
 	step(mob, direction)
 
 	// Something with pulling things
+	HandleGrabs(direction)
+
+	for (var/obj/item/grab/G in mob)
+		if (G.assailant_reverse_facing())
+			mob.set_dir(GLOB.reverse_dir[direction])
+		G.assailant_moved()
+	for (var/obj/item/grab/G in mob.grabbed_by)
+		G.adjust_position()
+
+	mob.moving = 0
+
+/datum/movement_handler/mob/movement/MayMove(var/mob/mover)
+	return IS_SELF(mover) &&  mob.moving ? MOVEMENT_STOP : MOVEMENT_PROCEED
+
+/datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction)
 	// TODO: Look into making grabs use movement events instead, this is a mess.
 	for (var/obj/item/grab/G in mob)
 		mob.move_delay = max(mob.move_delay, G.grab_slowdown())
@@ -235,29 +274,21 @@
 						return
 			G.adjust_position()
 
-	for (var/obj/item/grab/G in mob)
-		if (G.assailant_reverse_facing())
-			mob.set_dir(GLOB.reverse_dir[direction])
-		G.assailant_moved()
-	for (var/obj/item/grab/G in mob.grabbed_by)
-		G.adjust_position()
-
-	mob.moving = 0
-
-/datum/movement_handler/mob/movement/MayMove(var/mob/mover)
-	return !mob.moving
-
 // Misc. helpers
 /mob/proc/MayEnterTurf(var/turf/T)
 	return T && !((mob_flags & MOB_FLAG_HOLY_BAD) && check_is_holy_turf(T))
 
 /mob/proc/AdjustMovementDirection(var/direction)
-	if(confused)
-		switch(m_intent)
-			if(M_RUN)
-				if(prob(75))
-					return turn(direction, pick(90, -90))
-			if(M_WALK)
-				if(prob(25))
-					return turn(direction, pick(90, -90))
-	return direction
+	. = direction
+	if(!confused)
+		return
+
+	switch(m_intent)
+		if(M_RUN)
+			if(prob(25))
+				return
+		if(M_WALK)
+			if(prob(75))
+				return
+
+	return prob(50) ? GLOB.cw_dir[.] : GLOB.ccw_dir[.]

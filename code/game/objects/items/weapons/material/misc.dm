@@ -39,13 +39,8 @@
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
 	default_material = "titanium"
-
-/obj/item/weapon/material/hatchet/machete/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
-	if(default_parry_check(user, attacker, damage_source) && prob(50))
-		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
-		playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
-		return 1
-	return 0
+	base_parry_chance = 50
+	attack_cooldown_modifier = 1
 
 /obj/item/weapon/material/hatchet/machete/Initialize()
 	icon_state = "machete[pick("","_red","_blue", "_black", "_olive")]"

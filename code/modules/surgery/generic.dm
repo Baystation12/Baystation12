@@ -154,6 +154,11 @@
 	"<span class='warning'>Your hand slips, slicing open [target]'s [affected.name] in the wrong place with \the [tool]!</span>")
 	affected.take_damage(10, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 
+/datum/surgery_step/generic/cut_open/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	. = ..()
+	if(user.skill_check(SKILL_FORENSICS, SKILL_ADEPT))
+		. += 10
+
 //////////////////////////////////////////////////////////////////
 //	 bleeder clamping surgery step
 //////////////////////////////////////////////////////////////////

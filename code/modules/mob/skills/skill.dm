@@ -70,16 +70,6 @@ GLOBAL_LIST_EMPTY(skills)
 // ONLY SKILL DEFINITIONS BELOW THIS LINE
 // Category: Organizational
 
-/decl/hierarchy/skill/organizational/management
-	ID = "management"
-	name = "Leadership"
-	desc = "Your ability to manage and command other crew members."
-	levels = list( "Unskilled"			= "You know a little about management, but you have a lot of flaws and little experience. You are likely to micromanage, lose track of people, or generally muck things up. Handling a major crisis is probably beyond your ability.",
-						"Basic"				= "You have recieved basic leadership training, but have little experience actually managing people. You can come up with good organizational strategies, but won't know what to do when they fall apart in a crisis.",
-						"Trained"			= "You're a good commander. You know how to coordinate the efforts of a large group of people effectively. You'll still be thrown off in a crisis, but you'll probably get through it.",
-						"Experienced"		= "You're a highly experienced commander. In addition to just doing your job, you know how to inspire love, loyalty or fear, and you handle crises smoothly and efficiently.",
-						"Master"		= "You are an excellent commander. You are listened to instinctively, and can navigate your people through anything thrown at you.")
-
 /decl/hierarchy/skill/organizational/bureaucracy
 	ID = "bureaucracy"
 	name = "Bureaucracy"
@@ -162,9 +152,9 @@ GLOBAL_LIST_EMPTY(skills)
 	desc = "Describes how good a character is at growing and maintaining plants."
 	levels = list( "Unskilled"			= "You know next to nothing about plants. While you can attempt to plant, weed, or harvest, you are just as likely to kill the plant instead.",
 						"Basic"				= "You've done some gardening. You can water, weed, fertilize, plant, and harvest, and you can recognize and deal with pests. You may be a hobby gardener.",
-						"Trained"			= "You are proficient at botony, and can grow plants for food or oxygen production. Your plants will generally survive and prosper, though you are unfamilliar with more exotic varieties.",
-						"Experienced"		= "You're a botanist or farmer, growing crops on large scales or doing botanical research. You know the basics of manipulating plant genes.",
-						"Master"		= "You're a specialized botanist. You can care for even the most exotic, fragile, or dangerous plants, and you can create custom hybrids and modified strains.")
+						"Trained"			= "You are proficient at botany, and can grow plants for food or oxygen production. Your plants will generally survive and prosper. You know the basics of manipulating plant genes.",
+						"Experienced"		= "You're a botanist or farmer, capable of running facility's hydroponics farms or doing botanical research. You are adept at creating custom hybrids and modified strains.",
+						"Master"		= "You're a specialized botanist. You can care for even the most exotic, fragile, or dangerous plants. You can use gene manipulation machinery with precision, and are often able to avoid the degradation of samples.")
 
 /decl/hierarchy/skill/service/cooking
 	ID = "cooking"
@@ -203,10 +193,10 @@ GLOBAL_LIST_EMPTY(skills)
 	name = "Forensics"
 	desc = "Describes your skill at performing forensic examinations and identifying vital evidence. Does not cover analytical abilities, and as such isn't the only indicator for your investigation skill. Note that in order to perform autopsy, the surgery skill is also required."
 	levels = list( "Unskilled"			= "You know that detectives solve crimes. You may have some idea that it's bad to contaminate a crime scene, but you're not too clear on the details.",
-						"Basic"				= "You know how to avoid contaminating a crime scene. You know how to use the tools of the trade (scanner, computer database, and so forth), and you can conduct an interview with a witness or a suspect.",
-						"Trained"			= "You have had training in policework, and have some experience in the field. You can follow procedure and process evidence, though your lack of practice may make it difficult to arrive at a definitive conclusion.",
-						"Experienced"		= "You're a police officer, pathologist, or detective. You can secure a crime scene, gather evidence, interview witnesses, and put two and two together to get an arrest. If you're trained in anatomy, you can perform an autopsy.",
-						"Master"		= "You specialize in criminal investigations. Your ability to gather and analyze evidence has been honed through intensive schooling, years of practice, or most likely both. You can organize a manhunt or draw a criminal into a trap, and though you're behind the scenes and may never even see the criminal, your skills make the difference between an unsolved crime and a convicted criminal.")
+						"Basic"				= "You know how to avoid contaminating a crime scene. You know how to bag the evidence without contaminating it unduely.",
+						"Trained"			= "You are trained in collecting forensic evidence - fibers, fingerprints, the works. You know how autopsies are done, and might've assisted performing one.",
+						"Experienced"		= "You're a pathologist, or detective. You've seen your share of bizzare cases, and spent a lot of time putting pieces of forensic puzzle together, so you're faster now.",
+						"Master"		= "You're a big name in forensic science. You might be an investigator who cracked a famous case, or you published papers on new methods of forensics. Either way, if there's a forensic trail, you will find it, period.")
 	difficulty = SKILL_HARD
 
 // Category: Engineering

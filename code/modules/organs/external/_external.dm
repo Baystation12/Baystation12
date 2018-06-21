@@ -566,15 +566,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/proc/handle_germ_sync()
 	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/spaceacillin)
+	var/turf/simulated/T = get_turf(owner)
 	for(var/datum/wound/W in wounds)
 		//Open wounds can become infected
-		if (owner.germ_level > W.germ_level && W.infection_check())
+		if(max(istype(T) && T.dirt*10, 2*owner.germ_level) > W.germ_level && W.infection_check())
 			W.germ_level++
 
 	if (antibiotics < 5)
 		for(var/datum/wound/W in wounds)
 			//Infected wounds raise the organ's germ level
-			if (W.germ_level > germ_level)
+			if (W.germ_level > germ_level || prob(max(W.germ_level, 30)))
 				germ_level++
 				break	//limit increase to a maximum of one per second
 

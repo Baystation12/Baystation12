@@ -5,11 +5,12 @@
 
 	// Unit test vars
 	var/list/apc_test_exempt_areas = list(
-		/area/exoplanet          = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/exoplanet/desert   = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/exoplanet/grass    = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/exoplanet/snow     = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/exoplanet/garbage  = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/exoplanet             = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/desert      = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/grass       = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/snow        = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/exoplanet/garbage     = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/map_template/monolith = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 	var/list/area_coherency_test_exempt_areas = list(
@@ -65,8 +66,11 @@
 		/area/template_noop,
 		/area/map_template,
 		/area/map_template/little_house,
+		/area/map_template/monolith
 	)
 
-	var/list/area_usage_test_exempted_root_areas = list()
+	var/list/area_usage_test_exempted_root_areas = list(
+		/area/map_template/hydrobase
+	)
 
 	var/list/area_purity_test_exempt_areas = list()

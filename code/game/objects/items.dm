@@ -20,6 +20,7 @@
 	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
+	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
@@ -51,6 +52,7 @@
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
 
+	var/base_parry_chance	// Will allow weapon to parry melee attacks if non-zero
 	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
 
 	var/use_alt_layer = FALSE // Use the slot's alternative layer when rendering on a mob
@@ -484,7 +486,15 @@ var/list/global/slot_flags_enumeration = list(
 //For non-projectile attacks this usually means the attack is blocked.
 //Otherwise should return 0 to indicate that the attack is not affected in any way.
 /obj/item/proc/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	if(get_parry_chance())
+		if(default_parry_check(user, attacker, damage_source) && prob(get_parry_chance()))
+			user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
+			playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
+			return 1
 	return 0
+
+/obj/item/proc/get_parry_chance()
+	return base_parry_chance
 
 /obj/item/proc/get_loc_turf()
 	var/atom/L = loc

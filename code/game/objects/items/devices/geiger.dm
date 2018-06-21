@@ -10,12 +10,9 @@
 	icon_state = "geiger_off"
 	item_state = "multitool"
 	w_class = ITEM_SIZE_SMALL
+	action_button_name = "Toggle geiger counter"
 	var/scanning = 0
 	var/radiation_count = 0
-
-/obj/item/device/geiger/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
 
 /obj/item/device/geiger/Destroy()
 	. = ..()
@@ -37,6 +34,10 @@
 
 /obj/item/device/geiger/attack_self(var/mob/user)
 	scanning = !scanning
+	if(scanning)
+		START_PROCESSING(SSobj, src)
+	else
+		STOP_PROCESSING(SSobj, src)
 	update_icon()
 	to_chat(user, "<span class='notice'>\icon[src] You switch [scanning ? "on" : "off"] [src].</span>")
 

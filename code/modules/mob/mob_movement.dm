@@ -178,8 +178,8 @@
 		return 0
 
 	if(!lastarea)
-		lastarea = get_area(loc)
-	if(!lastarea.has_gravity)
+		lastarea = get_area(src)
+	if(!lastarea || !lastarea.has_gravity)
 		return 0
 
 	return 1
@@ -209,18 +209,22 @@
 
 //return 1 if slipped, 0 otherwise
 /mob/proc/handle_spaceslipping()
-	if(prob(slip_chance(5)) && !buckled)
+	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERT)))
 		to_chat(src, "<span class='warning'>You slipped!</span>")
 		src.inertia_dir = src.last_move
 		step(src, src.inertia_dir)
 		return 1
 	return 0
 
-/mob/proc/slip_chance(var/prob_slip = 5)
+/mob/proc/slip_chance(var/prob_slip = 10)
 	if(stat)
+		return 0
+	if(buckled)
 		return 0
 	if(Check_Shoegrip())
 		return 0
+	if(m_intent == M_WALK)
+		prob_slip *= 0.5
 	return prob_slip
 
 #define DO_MOVE(this_dir) var/final_dir = turn(this_dir, -dir2angle(dir)); Move(get_step(mob, final_dir), final_dir);

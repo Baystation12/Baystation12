@@ -58,7 +58,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 								msg += " <A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A>"
 							msg += "</b> "
 							continue
-			msg += "[original_word] "
+		msg += "[original_word] "
 
 	return msg
 

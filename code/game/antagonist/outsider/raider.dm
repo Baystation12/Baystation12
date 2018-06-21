@@ -4,11 +4,11 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	id = MODE_RAIDER
 	role_text = "Raider"
 	role_text_plural = "Raiders"
-	antag_indicator = "hudmutineer"
+	antag_indicator = "hudraider"
 	landmark_id = "voxstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
-	antaghud_indicator = "hudmutineer"
+	antaghud_indicator = "hudraider"
 
 	hard_cap = 6
 	hard_cap_round = 10
@@ -88,6 +88,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/weapon/gun/projectile/shotgun/doublebarrel,
 		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/pellet,
 		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
+		/obj/item/weapon/gun/projectile/beretta,
 		/obj/item/weapon/gun/projectile/colt,
 		/obj/item/weapon/gun/projectile/sec,
 		/obj/item/weapon/gun/projectile/pistol,

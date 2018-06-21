@@ -78,3 +78,8 @@
 	sound_token = GLOB.sound_player.PlayLoopingSound(src, sound_id, T.GetTrack(), volume = volume, range = 7, falloff = 4, prefer_mute = TRUE)
 	playing = 1
 	update_icon()
+
+/obj/random_multi/single_item/boombox
+	name = "boombox spawnpoint"
+	id = "boomtastic"
+	item_path = /obj/item/device/boombox/

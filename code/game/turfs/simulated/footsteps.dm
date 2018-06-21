@@ -6,6 +6,7 @@
 #define FOOTSTEP_GRASS 		"grass"
 #define FOOTSTEP_WATER		"water"
 #define FOOTSTEP_BLANK		"blank"
+#define FOOTSTEP_CATWALK	"catwalk"
 
 /turf/simulated/floor/var/global/list/footstep_sounds = list(
 	FOOTSTEP_WOOD = list(
@@ -119,8 +120,13 @@
 	if(!has_organ(BP_L_FOOT) && !has_organ(BP_R_FOOT))
 		return //no feet no footsteps
 
-	var/S = T.get_footstep_sound()
-	if(S)
+	var/footsound
+	for(var/obj/structure/S in T)
+		footsound = S.get_footstep_sound()
+		if(footsound) break
+	if(!footsound)
+		footsound = T.get_footstep_sound()
+	if(footsound)
 		var/range = -(world.view - 2)
 		var/volume = 70
 		if(m_intent == M_WALK)
@@ -130,4 +136,4 @@
 			volume -= 60
 			range -= 0.333
 
-		playsound(T, S, volume, 1, range)
+		playsound(T, footsound, volume, 1, range)

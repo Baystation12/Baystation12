@@ -30,13 +30,9 @@
 /datum/skill_buff/proc/can_buff(mob/target)
 	if(!length(buffs) || !istype(target))
 		return //what are we even buffing?
-	if(too_many_buffs(target))
+	if(target.too_many_buffs(type))
 		return
 	return 1
-
-/datum/skill_buff/proc/too_many_buffs(mob/target)
-	if(limit && (length(target.fetch_buffs_of_type(type, 0)) >= limit))
-		return 1
 
 /datum/skill_buff/proc/remove()
 	var/datum/skillset/my_skillset = skillset
@@ -65,3 +61,9 @@
 	if(duration)
 		addtimer(CALLBACK(buff, /datum/skill_buff/proc/remove), duration)
 	return 1
+
+//Takes a buff type or datum; typing is false here.
+/mob/proc/too_many_buffs(datum/skill_buff/buff_type)
+	var/limit = initial(buff_type.limit)
+	if(limit && (length(fetch_buffs_of_type(buff_type, 0)) >= limit))
+		return 1

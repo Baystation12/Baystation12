@@ -17,7 +17,7 @@
 
 //mob verbs are faster than object verbs. See above.
 /mob/living/pointed(atom/A as mob|obj|turf in view())
-	if(!MayMove() || src.restrained())
+	if(incapacitated())
 		return 0
 	if(src.status_flags & FAKEDEATH)
 		return 0
@@ -173,7 +173,7 @@ default behaviour is:
 	//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
 	if(!(tmob.mob_always_swap || (tmob.a_intent == I_HELP || tmob.restrained()) && (a_intent == I_HELP || src.restrained())))
 		return 0
-	if(!tmob.MayMove() || !MayMove())
+	if(!tmob.MayMove(src) || incapacitated())
 		return 0
 
 	if(swap_density_check(src, tmob))
