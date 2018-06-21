@@ -4,43 +4,40 @@
 /mob/living/proc/handle_autohiss(message, datum/language/L)
 	return message // no autohiss at this level
 
-/*/mob/living/carbon/human/handle_autohiss(message, datum/language/L)
-	if(!client || get_preference_value(/datum/client_preference/autohiss) == GLOB.PREF_OFF) // no need to process if there's no client or they have autohiss off
+/mob/living/carbon/human/handle_autohiss(message, datum/language/L)
+	if(!client) // no need to process if there's no client
 		return message
-	return species.handle_autohiss(message, L, get_preference_value(/datum/client_preference/autohiss))
-*/
+	return species.handle_autohiss(message, L)
+
 /datum/species
-	var/list/autohiss_basic_map = null
-	var/list/autohiss_extra_map = null
+	var/list/autohiss_map = null
 	var/list/autohiss_exempt = null
 
 /datum/species/unathi
-	autohiss_basic_map = list(
-			"Ñ" = list("ÑÑ", "Ñ-Ñ", "ÑÑÑ")
-		)
-	autohiss_extra_map = list(
-			"Ñˆ" = list("ÑˆÑˆ", "Ñˆ-Ñˆ", "ÑˆÑˆÑˆ")
+	autohiss_map = list(
+			"ñ" = list("ññ", "ñ-ñ", "ñññ"),
+			"s" = list("ss", "s-s", "sss"),
+			"ø" = list("ø", "ø-ø", "øøø"),
+			"ù" = list("ù", "ù-ù", "ùùù")
 		)
 	autohiss_exempt = list(LANGUAGE_UNATHI)
 
 /datum/species/tajaran
-	autohiss_basic_map = list(
-			"Ñ€" = list("Ñ€Ñ€", "Ñ€-Ñ€", "Ñ€Ñ€Ñ€")
+	autohiss_map = list(
+			"ğ" = list("ğğ", "ğ-ğ", "ğğğ")
 		)
 	autohiss_exempt = list(LANGUAGE_SIIK_MAAS)
 
 
-/datum/species/proc/handle_autohiss(message, datum/language/lang, mode)
-	if(!autohiss_basic_map)
+/datum/species/proc/handle_autohiss(message, datum/language/lang)
+	if(!autohiss_map)
 		return message
 	if(lang.flags & NO_STUTTER)	// Currently prevents EAL, Sign language, and emotes from autohissing
 		return message
 	if(autohiss_exempt && (lang.name in autohiss_exempt))
 		return message
 
-	var/map = autohiss_basic_map.Copy()
-	if(mode == GLOB.PREF_FULL && autohiss_extra_map)
-		map |= autohiss_extra_map
+	var/map = autohiss_map.Copy()
 
 	. = list()
 
@@ -58,12 +55,12 @@
 			. += message
 			break
 		. += copytext(message, 1, min_index)
-		if(copytext(message, min_index, min_index+1) == uppertext(min_char))
+		if(copytext(message, min_index, min_index+1) == ruppertext(min_char))
 			switch(text2ascii(message, min_index+1))
 				if(65 to 90) // A-Z, uppercase; uppercase R/S followed by another uppercase letter, uppercase the entire replacement string
-					. += uppertext(pick(map[min_char]))
+					. += ruppertext(pick(map[min_char]))
 				else
-					. += capitalize(pick(map[min_char]))
+					. += capitalize_cp1251(pick(map[min_char]))
 		else
 			. += pick(map[min_char])
 		message = copytext(message, min_index + 1)
