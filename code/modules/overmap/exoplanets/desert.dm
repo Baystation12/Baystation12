@@ -2,6 +2,9 @@
 	name = "desert exoplanet"
 	desc = "An arid exoplanet with sparse biological resources but rich mineral deposits underground."
 	color = "#d6cca4"
+	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+									  /datum/map_template/ruin/exoplanet/hydrobase,
+									  /datum/map_template/ruin/exoplanet/marooned)
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()
 	if(prob(70))

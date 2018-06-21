@@ -2,6 +2,9 @@
 	name = "lush exoplanet"
 	desc = "Planet with abundant flora and fauna."
 	color = "#538224"
+	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+									  /datum/map_template/ruin/exoplanet/hydrobase,
+									  /datum/map_template/ruin/exoplanet/marooned)
 
 /obj/effect/overmap/sector/exoplanet/grass/generate_map()
 	if(prob(40))

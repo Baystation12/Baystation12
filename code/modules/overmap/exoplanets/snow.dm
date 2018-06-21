@@ -2,6 +2,8 @@
 	name = "snow exoplanet"
 	desc = "Cold planet with limited plant life."
 	color = "#e8faff"
+	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+							/datum/map_template/ruin/exoplanet/marooned) 
 
 /obj/effect/overmap/sector/exoplanet/snow/generate_map()
 	for(var/zlevel in map_z)
