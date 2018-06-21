@@ -674,17 +674,21 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	var/restricted = 0
 	if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-		if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
+		if (!(current_species.spawn_flags & SPECIES_CAN_JOIN))
 			restricted = 2
-		else if((current_species.spawn_flags & SPECIES_IS_WHITELISTED) && !is_alien_whitelisted(preference_mob(),current_species))
+		else if ((current_species.spawn_flags & SPECIES_IS_WHITELISTED) && !is_alien_whitelisted(preference_mob(),current_species))
 			restricted = 1
+		else if (jobban_isbanned(user, "SPECIES"))
+			restricted = 3
 
-	if(restricted)
-		if(restricted == 1)
-			dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, you can make an application post on <a href='?src=\ref[user];preference=open_whitelist_forum'>the forums</a>.</small></b></font></br>"
-		else if(restricted == 2)
+	if (restricted)
+		if (restricted == 1)
+			dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, contact admins by AHelp.</small></b></font></br>"
+		else if (restricted == 2)
 			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available as a player race.</small></b></font></br>"
-	if(!restricted)
+		else if (restricted == 3)
+			dat += "<font color='red'><b>You cannot play as this species.</br><small>You was banned to play species!</small></b></font></br>"
+	if (!restricted)
 		dat += "\[<a href='?src=\ref[src];set_species=[pref.species_preview]'>select</a>\]"
 	dat += "</center></body>"
 

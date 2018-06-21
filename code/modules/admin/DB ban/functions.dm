@@ -328,6 +328,8 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	output += "<tr><td width='50%' align='right'><b>Duration:</b> <input type='text' name='dbbaddduration'></td>"
 	output += "<td width='50%' align='right'><b>Job:</b><select name='dbbanaddjob'>"
 	output += "<option value=''>--</option>"
+	for(var/j in list("OOC", "LOOC", "AHelp", "Species")) // new bans
+		output += "<option value='[j]'>[j]</option>"
 	for(var/j in get_all_jobs())
 		output += "<option value='[j]'>[j]</option>"
 	for(var/j in GLOB.nonhuman_positions)
@@ -336,7 +338,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	var/list/all_antag_types = all_antag_types()
 	for(var/antag_type in all_antag_types) // Grab other bans.
 		var/datum/antagonist/antag = all_antag_types[antag_type]
-		bantypes |= antag.id
+		bantypes |= antag.id 
 	for(var/j in bantypes)
 		output += "<option value='[j]'>[j]</option>"
 	output += "</select></td></tr></table>"

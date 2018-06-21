@@ -345,14 +345,34 @@
 						                -Nodrak
 	************************************WARNING!***********************************/
 		var/counter = 0
-//Regular jobs
-	//Chats(by Error_777)
-		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<br><b>Chatbans: </b>"
+
+		jobs += "<table cellpadding='1' cellspacing='5' width='100%'>"
+
+		jobs += "<tr>"
+
+		jobs += "<td rowspan='2' align='center' width=80px style='border-right: 1px;'><b>Misc Bans</b></td>"
+		jobs += "<td>"
+
+		// Chats (by Error_777)
 		jobs +={"
-			<A href='?_src_=holder;jobban3=OOC;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "OOC"))?"red":"blue"]>OOCBAN</font></A> |
-			<A href='?_src_=holder;jobban3=AHELP;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "AHELP"))?"red":"blue"]>AHELPBAN</font></A> |
-			<A href='?_src_=holder;jobban3=LOOC;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "LOOC"))?"red":"blue"]>LOOCBAN</font></A>"}
+			<A href='?_src_=holder;jobban3=OOC;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "OOC"))?"red":"blue"]>OOC</font></A> |
+			<A href='?_src_=holder;jobban3=LOOC;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "LOOC"))?"red":"blue"]>LOOC</font></A> |
+			<A href='?_src_=holder;jobban3=AHELP;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "AHELP"))?"red":"blue"]>AHelp</font></A>"}
+			
+		jobs += "</td>"
+
+		jobs += "</tr>"
+
+		// Species
+		jobs += "<tr>"
+		jobs += "<td><A href='?_src_=holder;jobban3=SPECIES;jobban4=\ref[M]'><font color=[(jobban_isbanned(M, "SPECIES"))?"red":"blue"]>Species</font></A></td>"
+		jobs += "</tr>"
+
+		jobs += "</table>"
+
+//
+//Regular jobs
+//
 
 		//Command(Blue)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"

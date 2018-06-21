@@ -518,13 +518,17 @@
 	return check_rights(R_ADMIN, 0, src)
 
 /mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
-	if(!(S.spawn_flags & SPECIES_CAN_JOIN) && !has_admin_rights())
-		if(show_alert)
-			to_chat(src, alert("Your current species, [client.prefs.species], is not available for play."))
+	if (!(S.spawn_flags & SPECIES_CAN_JOIN) && !has_admin_rights())
+		if (show_alert)
+			alert(client, "Your current species, [client.prefs.species], is not available for play.")
 		return 0
-	if(!is_alien_whitelisted(src, S))
-		if(show_alert)
-			to_chat(src, alert("You are currently not whitelisted to play [client.prefs.species]."))
+	if (!is_alien_whitelisted(src, S))
+		if (show_alert)
+			alert(client, "You are currently not whitelisted to play [client.prefs.species].")
+		return 0
+	if (jobban_isbanned(src, "SPECIES"))
+		if (show_alert)
+			alert(client, "You are currently banned to play species!")
 		return 0
 	return 1
 
