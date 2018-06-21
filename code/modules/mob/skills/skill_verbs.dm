@@ -107,7 +107,7 @@ Robots and antags can instruct.
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
 		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
 		return
-	if(!target.skill_check(skill.type, SKILL_BASIC) && skill_check(skill.type, SKILL_EXPERT))
+	if(target.skill_check(skill.type, SKILL_BASIC) || !skill_check(skill.type, SKILL_EXPERT))
 		return
 
 	target.buff_skill(list(skill.type = 1), buff_type = /datum/skill_buff/instruct)
