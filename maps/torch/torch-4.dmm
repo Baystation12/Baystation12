@@ -6810,8 +6810,11 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "atC" = (
-/obj/structure/stairs/west,
 /obj/structure/railing/mapped,
+/obj/structure/stairs/upper{
+	icon_state = "stairs_upper";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "atD" = (
@@ -6820,6 +6823,10 @@
 	pixel_y = 24
 	},
 /obj/structure/railing/mapped,
+/obj/structure/stairs/lower{
+	icon_state = "stairs_lower";
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/fore)
 "atE" = (

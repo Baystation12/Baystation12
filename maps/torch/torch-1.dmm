@@ -7168,6 +7168,10 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "oF" = (
+/obj/structure/stairs/lower{
+	icon_state = "stairs_lower";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "oG" = (
@@ -7922,7 +7926,10 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "pV" = (
-/obj/structure/stairs/east,
+/obj/structure/stairs/upper{
+	icon_state = "stairs_upper";
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "pW" = (

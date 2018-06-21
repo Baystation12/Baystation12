@@ -1632,13 +1632,20 @@
 	icon_state = "warning";
 	dir = 1
 	},
+/obj/structure/stairs/lower{
+	icon_state = "stairs_lower";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "dc" = (
-/obj/structure/stairs/east,
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
 	dir = 1
+	},
+/obj/structure/stairs/upper{
+	icon_state = "stairs_upper";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
