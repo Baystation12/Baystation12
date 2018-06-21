@@ -139,7 +139,8 @@
 		/area/icarus,
 		/area/errant_pisces,
 		/area/lar_maria,
-		/area/map_template/hydrobase
+		/area/map_template/hydrobase,
+		/area/exoplanet
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber

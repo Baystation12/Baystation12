@@ -26,6 +26,9 @@
 	icon_state = "blank"
 	var/list/connected_zlevels //cached for checking if we someone is obseving us so we should process
 
+/obj/machinery/portable_atmospherics/hydroponics/soil/is_burnable()
+	return ..() && seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000
+
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/New(var/newloc,var/datum/seed/newseed, var/start_mature)
 	..()
 	seed = newseed
