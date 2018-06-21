@@ -1,6 +1,8 @@
 // Temporary ingame species whitelist created for test purposes
 
 /proc/SpeciesIngameWhitelist_GetPlayerPannelButton(var/datum/admins/source, var/client/player)
+	if (!config.useingamealienwhitelist)
+		return
 	var/result = {"<br><b>Species whitelisted:</b>  
 		[player.species_ingame_whitelisted ? "<A href='?src=\ref[source];removefromspeciesingamewhitelist=\ref[player]'>Yes</A>" : "<A href='?src=\ref[source];addtospeciesingamewhitelist=\ref[player]'>No</A>"]
 		"}
@@ -20,4 +22,6 @@
 	source.show_player_panel(player.mob) // update panel
 
 /proc/SpeciesIngameWhitelist_CheckPlayer(var/client/player)
+	if (!config.useingamealienwhitelist)
+		return
 	return player.species_ingame_whitelisted
