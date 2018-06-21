@@ -154,6 +154,11 @@
 	icon_state = "dark"
 	initial_flooring = /decl/flooring/tiling/dark
 
+/turf/simulated/floor/tiled/dark/monotile
+	name = "floor"
+	icon_state = "monotiledark"
+	initial_flooring = /decl/flooring/tiling/mono/dark
+
 /turf/simulated/floor/tiled/dark/airless
 	initial_gas = null
 
@@ -165,12 +170,12 @@
 /turf/simulated/floor/tiled/white/monotile
 	name = "floor"
 	icon_state = "monotile"
-	initial_flooring = /decl/flooring/tiling/mono
+	initial_flooring = /decl/flooring/tiling/mono/white
 
 /turf/simulated/floor/tiled/monofloor
 	name = "floor"
 	icon_state = "steel_monofloor"
-	initial_flooring = /decl/flooring/tiling/new_tile/monofloor
+	initial_flooring = /decl/flooring/tiling/mono
 
 /turf/simulated/floor/tiled/white/airless
 	name = "airless floor"

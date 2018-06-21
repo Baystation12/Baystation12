@@ -61,8 +61,22 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/mono
-	name = "grey mono tile"
-	singular_name = "grey mono tile"
+	name = "steel mono tile"
+	singular_name = "steel mono tile"
+	icon_state = "tile"
+	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+/obj/item/stack/tile/mono/dark
+	name = "dark mono tile"
+	singular_name = "dark mono tile"
+	icon_state = "tile"
+	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+
+/obj/item/stack/tile/mono/white
+	name = "white mono tile"
+	singular_name = "white mono tile"
 	icon_state = "tile"
 	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
