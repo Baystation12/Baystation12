@@ -1,0 +1,6 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Having Basic finance gives the Appraise verb, which allows you to estimate the value of items you are holding or have equipped (found in the IC tab). Higher skill levels give more accurate assessments."
+  - tweak: "The financial skill has a large effect on your starting cash."
+  - tweak: "Higher financial skill gives you better deals from traders."
