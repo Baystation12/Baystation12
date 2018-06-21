@@ -1,0 +1,6 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - maptweak: "The Torch has been modified to use a wider variety of flooring types and decals."
+  - maptweak: "Added a door button to the XO's office."
+  - rscadd: "Added plated catwalks, which can be constructed by placing monotiles on catwalks."
