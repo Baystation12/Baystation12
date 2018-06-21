@@ -3054,4 +3054,5 @@
 	"worths",
 	"wrapped_species_by_ref",
 	"xenomorphs",
-	"z_levels",)
+	"z_levels",
+	"zone_blocked")
