@@ -38,8 +38,7 @@
 		/area/slavers_base/hangar = NO_SCRUBBER,
 		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/hydrobase/station = NO_SCRUBBER,
-		/area/map_template/monolith = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC
 //		/area/icarus/vessel = NO_APC,
 //		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC,
 	)

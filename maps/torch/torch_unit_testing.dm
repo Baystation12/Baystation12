@@ -70,8 +70,7 @@
 		/area/icarus/vessel = NO_APC,
 		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/map_template/hydrobase/station = NO_SCRUBBER,
-		/area/map_template/monolith = NO_SCRUBBER|NO_VENT|NO_APC
+		/area/map_template/hydrobase/station = NO_SCRUBBER
 	)
 
 	area_coherency_test_exempt_areas = list(
@@ -119,8 +118,7 @@
 		/area/exoplanet/garbage,
 		/area/template_noop,
 		/area/map_template,
-		/area/map_template/little_house,
-		/area/map_template/monolith
+		/area/map_template/little_house
 	)
 
 	// not an away site? you probably want to be using area_usage_test_exempted_areas

@@ -10,6 +10,7 @@
 
 	var/prefix = null
 	var/suffixes = null
+	template_flags = 0 // No duplicates by default
 
 /datum/map_template/ruin/New()
 	if(!name && id)
