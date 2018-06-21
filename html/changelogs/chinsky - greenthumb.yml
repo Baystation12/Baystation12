@@ -1,8 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Botany skill now has ingame effects."
-  - rscadd: "Without at least basic skill, you can screw up when planting or weeding trays. You'll also be unable to recognize pests and weeds from useful things."
-  - rscadd: "Exotic seeds (all random variations) need trained skill to avoid screw ups like that."
-  - rscadd: "Trained skill is also needed to handle xenobotany machines, otherwise you'll be prone to wasting your samples really fast."
-  - rscadd: "Experienced and professional levels of skill reduce degradation of samples in xenobotany machines."

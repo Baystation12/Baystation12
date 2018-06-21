@@ -1,5 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - rscadd: "Using virology machines without sufficient virology skill may get you or your friends infected. For curing purposes, \"Trained\" negates this effect, but for doing splicing and mutations, \"Experienced\" or \"Professional\" may be needed."
-  - rscadd: "The printout from the virus analyzer may have missing or erroneous information if you lack \"Experienced\" in virology. Quality of information improves with skill."

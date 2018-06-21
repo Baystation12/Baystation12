@@ -1,6 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - experiment: "Constantly fixing brain is no longer the pro strat anymore."
-  - rscadd: "When fixing very damaged (broken level or more) organs in surgery, their max health is lowered."
-  - rscadd: "Brains get their health lowered /always/ if oxygenation is below survival level (30%). Better fix cause of damage first, if you don't want to do permanent damage."

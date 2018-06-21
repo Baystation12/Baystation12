@@ -1,5 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - rscadd: "Forensic skils now have ingame effects. Without at least basic skill, you leave slightly more fingerprints on things, and you will leave prints when trying to evidence bag things."
-  - rscdel: "You need Trained skill to use evidence collection things and forensic machines. At higher skill you work microscope faster."
