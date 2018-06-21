@@ -902,7 +902,7 @@
 
 /datum/job/qm
 	title = "Deck Officer"
-	department = "Supply"
+	department = "Requisitions"
 	department_flag = SUP
 	total_positions = 1
 	spawn_positions = 1
@@ -941,7 +941,7 @@
 
 /datum/job/cargo_tech
 	title = "Deck Technician"
-	department = "Supply"
+	department = "Requisitions"
 	department_flag = SUP
 	total_positions = 2
 	spawn_positions = 2
@@ -969,13 +969,13 @@
 	software_on_spawn = list(/datum/computer_file/program/supply)
 
 /datum/job/cargo_contractor
-	title = "Supply Assistant"
-	department = "Supply"
+	title = "Deck Assistant"
+	department = "Requisitions"
 	department_flag = SUP
 
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Deck Officer and Supply Personnel"
+	supervisors = "the Deck Officer and Requisitions Personnel"
 	ideal_character_age = 20
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/supply/contractor

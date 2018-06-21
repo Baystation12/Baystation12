@@ -11302,7 +11302,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
-	name = "Supply Office";
+	name = "Requisitions Office";
 	req_access = list(31)
 	},
 /obj/machinery/door/firedoor/border_only,
@@ -14341,7 +14341,7 @@
 "Bf" = (
 /obj/machinery/door/airlock/mining{
 	id_tag = null;
-	name = "Supply Office";
+	name = "Requisitions Office";
 	req_access = list(31)
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -16870,7 +16870,7 @@
 /area/shuttle/escape_pod9/station)
 "Gp" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Cargo Maintenance";
+	name = "Requisitions Maintenance";
 	req_access = list(31)
 	},
 /obj/structure/cable/green{
@@ -17880,7 +17880,7 @@
 /area/shuttle/escape_pod9/station)
 "Iv" = (
 /obj/machinery/door/airlock/maintenance{
-	name = "Cargo Maintenance";
+	name = "Requisitions Maintenance";
 	req_access = list(31)
 	},
 /obj/machinery/door/firedoor/border_only,

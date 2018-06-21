@@ -156,7 +156,7 @@
 				</ul>
 
 				<h3>Clerical Cyborg</h3>
-				The clerical cyborg module is prepared to run the supply department, including a vareity of stamps.<br>A clerical cyborg comes with:
+				The clerical cyborg module is prepared to run the requisitions department, including a vareity of stamps.<br>A clerical cyborg comes with:
 				<ul>
 				  <li>Pen</li>
 				  <li>Paper Dispenser</li>
@@ -167,7 +167,7 @@
 				  <li>Package Wrapper</li>
 				  <li>Destination Tagger</li>
 				</ul>
-				
+
 				<h3>Crisis Cyborg</h3>
 				The crisis cyborg module is prepared to handle a variety of non-surgical medical emergencies.<br>A medical cyborg comes with:
 				<ul>

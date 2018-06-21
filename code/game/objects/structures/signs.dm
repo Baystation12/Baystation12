@@ -369,7 +369,7 @@
 	icon_state = "direction_bridge"
 
 /obj/structure/sign/directions/supply
-	name = "\improper Supply Office"
+	name = "\improper Requisitions Office"
 	icon_state = "direction_supply"
 
 /obj/structure/sign/directions/infirmary
