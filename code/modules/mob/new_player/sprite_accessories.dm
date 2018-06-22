@@ -750,7 +750,6 @@
 /datum/sprite_accessory/hair/sideundercut
 	name = "Side Undercut"
 	icon_state = "hair_sideundercut"
-	gender = MALE
 	flags = VERY_SHORT
 
 /datum/sprite_accessory/hair/bighawk
