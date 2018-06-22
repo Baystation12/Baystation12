@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Additional reports have been added to the Report Editor."
