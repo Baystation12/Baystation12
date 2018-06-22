@@ -42,6 +42,70 @@
 
 	away_site_budget = 3
 
+	citizenship_choices = list(
+		"Earth",
+		"Luna",
+		"Mars",
+		"Terra",
+		"Gaia",
+		"Moghes",
+		"Ahdomai",
+		"Qerrbalak",
+		"Tersten",
+		"Avalon",
+		"Yuklid",
+		"Venus",
+		"Cinu",
+		"Tau-Wilo",
+		"Ceres",
+		"Galilei"
+	)
+
+	home_system_choices = list(
+		"Sol",
+		"Nyx",
+		"Tau Ceti",
+		"Epsilon Ursae Minoris",
+		"Zamsiin-lr",
+		"Gilgamesh",
+		"Gavil",
+		"Uuoea-Esa",
+		"Kernel",
+		"Gessshire",
+		"Galilei"
+		)
+
+	faction_choices = list(
+		"Sol Central Government",
+		"Terran Colonial Confederation",
+		"Vey Med",
+		"Einstein Engines",
+		"Free Trade Union",
+		"NanoTrasen",
+		"Ward-Takahashi GMB",
+		"Gilthari Exports",
+		"Grayson Manufactories Ltd.",
+		"Aether Atmospherics",
+		"Zeng-Hu Pharmaceuticals",
+		"Hephaestus Industries",
+		"Commonwealth of Ahdomai",
+		"Xynergy",
+		"Positronic Union"
+		)
+
+	religion_choices = list(
+		"Jewish",
+		"Hinduism",
+		"Buddhist",
+		"Islamic",
+		"Christian",
+		"Agnostic",
+		"Deist",
+		"Athiest",
+		"Thelema",
+		"Spiritualist"
+		)
+
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
 
 /datum/map/torch/setup_map()
