@@ -86,7 +86,6 @@
 		/area/exoplanet/grass,
 		/area/exoplanet/snow,
 		/area/exoplanet/garbage,
-		/area/marooned/marooned_snow,
 		/area/icarus/vessel,
 		/area/icarus/open,
 	)
@@ -130,7 +129,6 @@
 		/area/derelict,
 		/area/lost_supply_base,
 		/area/magshield,
-		/area/marooned,
 		/area/mine,
 		/area/ship,
 		/area/smugglers,
@@ -141,7 +139,7 @@
 		/area/icarus,
 		/area/errant_pisces,
 		/area/lar_maria,
-		/area/map_template/hydrobase
+		/area/map_template
 	)
 
 /datum/unit_test/zas_area_test/ai_chamber
