@@ -2,6 +2,7 @@
 	gender = NEUTER
 	voice_name = "synthesized voice"
 	skillset = /datum/skillset/silicon
+	can_have_vision_cone = TRUE
 	var/syndicate = 0
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws

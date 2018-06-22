@@ -1,0 +1,5 @@
+author: Virgil
+delete-after: True
+changes: 
+  - rscadd: "Added vision cones to mobs."
+  - rscdel: "Removed 360 degree vision of other mobs. Items are not effected."
