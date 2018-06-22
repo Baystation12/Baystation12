@@ -3688,7 +3688,7 @@
 	desc = "A secure airlock. Doesn't look like you can get through easily.";
 	icon = 'icons/obj/doors/centcomm/door.dmi';
 	icon_state = "closed";
-	name = "Delta Barracks"
+	name = "Delta Barracks";
 	dir = 4
 	},
 /area/rescue_base/base)
@@ -6833,7 +6833,7 @@
 	desc = "A secure airlock. Doesn't look like you can get through easily.";
 	icon = 'icons/obj/doors/centcomm/door.dmi';
 	icon_state = "closed";
-	name = "Outer Gate"
+	name = "Outer Gate";
 	dir = 4
 	},
 /area/ninja_dojo/dojo)
@@ -8310,7 +8310,7 @@
 	},
 /area/ninja_dojo/start)
 "asG" = (
-/obj/structure/bed/chair/comfy/black,
+/obj/structure/bed/chair/shuttle,
 /turf/unsimulated/floor{
 	dir = 2;
 	icon_state = "dark"
@@ -11349,7 +11349,9 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "azF" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -17480,6 +17482,7 @@
 	dir = 4;
 	pixel_y = 8
 	},
+/obj/structure/aliumizer,
 /turf/simulated/floor/carpet/blue,
 /area/merchant_station)
 "aNc" = (
@@ -20118,15 +20121,17 @@
 /turf/simulated/floor/carpet/blue,
 /area/shuttle/merchant/home)
 "aTd" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/button/remote/blast_door{
 	id = "merchantshuttle";
 	name = "Merchant Window Shutters";
 	pixel_x = 0;
 	pixel_y = -28;
 	req_access = list(201)
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/carpet/blue,
 /area/shuttle/merchant/home)
@@ -21024,7 +21029,9 @@
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aVd" = (
-/obj/structure/bed/chair/office/light{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/red,
@@ -22613,6 +22620,12 @@
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/plating,
 /area/skipjack_station/start)
+"bfZ" = (
+/obj/structure/aliumizer,
+/turf/unsimulated/floor{
+	icon_state = "asteroid"
+	},
+/area/syndicate_mothership/raider_base)
 "bgb" = (
 /obj/structure/closet{
 	icon_closed = "cabinet_closed";
@@ -23028,6 +23041,14 @@
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
+"isk" = (
+/obj/effect/floor_decal/snow,
+/obj/structure/aliumizer,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/snow.dmi';
+	icon_state = "ice"
+	},
+/area/ninja_dojo/dojo)
 "ixw" = (
 /obj/structure/shuttle/engine/propulsion{
 	icon_state = "propulsion_l";
@@ -23085,6 +23106,10 @@
 /obj/item/weapon/mop,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
+"kRX" = (
+/obj/structure/bed/chair/shuttle,
+/turf/simulated/floor/shuttle/black,
+/area/rescue_base/start)
 "kUL" = (
 /obj/machinery/porta_turret_construct,
 /turf/simulated/floor/shuttle/darkred,
@@ -23127,6 +23152,13 @@
 	},
 /turf/simulated/floor/shuttle/black,
 /area/syndicate_station/start)
+"pMd" = (
+/obj/structure/aliumizer,
+/turf/unsimulated/floor{
+	dir = 2;
+	icon_state = "dark"
+	},
+/area/syndicate_mothership)
 "ryl" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/teleport/hub,
@@ -23208,6 +23240,10 @@
 /obj/item/weapon/storage/firstaid/surgery,
 /turf/simulated/floor/shuttle/white,
 /area/syndicate_station/start)
+"wIu" = (
+/obj/structure/aliumizer,
+/turf/simulated/floor/carpet,
+/area/wizard_station)
 
 (1,1,1) = {"
 aaa
@@ -27287,7 +27323,7 @@ alH
 alU
 amn
 amF
-amW
+kRX
 anl
 anl
 aoe
@@ -50916,7 +50952,7 @@ ajN
 ajN
 ale
 alj
-alv
+wIu
 alM
 alZ
 alb
@@ -56078,7 +56114,7 @@ aLM
 aLM
 aLM
 aLM
-aML
+bfZ
 aML
 aOO
 aML
@@ -58604,7 +58640,7 @@ akd
 ajP
 apa
 apo
-apo
+isk
 aoZ
 ajP
 ajP
@@ -59462,7 +59498,7 @@ ayB
 azK
 aAf
 aAB
-aAS
+pMd
 aAS
 aAS
 aBS

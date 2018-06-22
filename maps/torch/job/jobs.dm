@@ -676,6 +676,7 @@
 	economic_modifier = 5
 	minimal_player_age = 7
 	ideal_character_age = 35
+	skill_points = 14
 	alt_titles = list(
 		"Criminal Investigator"
 	)

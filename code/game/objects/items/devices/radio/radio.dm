@@ -270,11 +270,17 @@
 	if(!radio_connection)
 		set_frequency(frequency)
 
+
 	if(power_usage)
 		if(!cell)
 			return 0
 		if(!cell.checked_use(power_usage * CELLRATE))
 			return 0
+
+	if(loc == M)
+		playsound(loc, 'sound/effects/walkietalkie.ogg', 20, 0, -1)
+
+
 	/* Quick introduction:
 		This new radio system uses a very robust FTL signaling technology unoriginally
 		dubbed "subspace" which is somewhat similar to 'blue-space' but can't

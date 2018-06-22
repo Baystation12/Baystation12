@@ -806,7 +806,7 @@ var/list/name_to_material
 	sheet_plural_name = "chunks"
 
 /material/aliumium/New()
-	icon_base = pick("jaggy","curvy")
+	icon_base = "metal"
 	icon_colour = rgb(rand(10,150),rand(10,150),rand(10,150))
 	explosion_resistance = rand(25,40)
 	brute_armor = rand(10,20)

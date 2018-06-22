@@ -54,6 +54,7 @@
 	recipes += new/datum/stack_recipe("cannon frame", /obj/item/weapon/cannonframe, 10, time = 15, one_per_turf = 0, on_floor = 0)
 	recipes += new/datum/stack_recipe("regular floor tile", /obj/item/stack/tile/floor, 1, 4, 20)
 	recipes += new/datum/stack_recipe("mono floor tile", /obj/item/stack/tile/mono, 1, 4, 20)
+	recipes += new/datum/stack_recipe("dark mono floor tile", /obj/item/stack/tile/mono/dark, 1, 4, 20)
 	recipes += new/datum/stack_recipe("grid floor tile", /obj/item/stack/tile/grid, 1, 4, 20)
 	recipes += new/datum/stack_recipe("ridged floor tile", /obj/item/stack/tile/ridge, 1, 4, 20)
 	recipes += new/datum/stack_recipe("grey techfloor tile", /obj/item/stack/tile/techgrey, 1, 4, 20)

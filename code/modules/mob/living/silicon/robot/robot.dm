@@ -5,8 +5,8 @@
 	real_name = "Cyborg"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "robot"
-	maxHealth = 200
-	health = 200
+	maxHealth = 300
+	health = 300
 
 	mob_bump_flag = ROBOT
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
@@ -53,7 +53,7 @@
 	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/high
 	var/obj/machinery/camera/camera = null
 
-	var/cell_emp_mult = 2
+	var/cell_emp_mult = 2.5
 
 	// Components are basically robot organs.
 	var/list/components = list()

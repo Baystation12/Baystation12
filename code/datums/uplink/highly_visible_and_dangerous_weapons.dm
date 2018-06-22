@@ -102,6 +102,11 @@
 	item_cost = 52
 	path = /obj/item/weapon/gun/projectile/magnum_pistol
 
+/datum/uplink_item/item/visible_weapons/beretta
+	name = "9mm Pistol"
+	item_cost = 40
+	path = /obj/item/weapon/gun/projectile/beretta
+
 /datum/uplink_item/item/visible_weapons/detective_revolver
 	name = "Holdout Revolver"
 	item_cost = 38

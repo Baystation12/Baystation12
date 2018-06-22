@@ -36,8 +36,9 @@
 		/area/bluespaceriver/underground = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/bluespaceriver/ground = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/slavers_base/hangar = NO_SCRUBBER,
-		/area/hydro = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/hydro/station = NO_SCRUBBER,
+		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/map_template/hydrobase/station = NO_SCRUBBER,
+		/area/map_template/monolith = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC,
 //		/area/icarus/vessel = NO_APC,
 //		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -93,7 +94,8 @@
 		/area/syndicate_mothership/elite_squad,
 		/area/wizard_station,
 		/area/beach,
-		/area/turbolift
+		/area/turbolift,
+		/area/map_template/hydrobase
 	)
 
 	area_usage_test_exempted_root_areas = list(

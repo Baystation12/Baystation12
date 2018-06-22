@@ -73,14 +73,19 @@
 	for(var/direction in GLOB.cardinal)
 		var/turf/T = get_step(src, direction)
 		var/success = 0
-		var/turf/simulated/wall/W = T
-		if(istype(W))
-			if(propagate)
-				W.update_connections(1)
-				W.update_icon()
-			dirs += get_dir(src, T)
-			other_dirs += get_dir(src, T)
-		else
+		for(var/b_type in blend_objects)
+			if(istype(T, b_type))
+				success = 1
+				if(propagate)
+					var/turf/simulated/wall/W = T
+					if(istype(W))
+						W.update_connections(1)
+						W.update_icon()
+				if(success)
+					break
+			if(success)
+				break
+		if(!success)
 			for(var/obj/O in T)
 				for(var/b_type in blend_objects)
 					if(istype(O, b_type))
@@ -97,9 +102,9 @@
 				if(success)
 					break
 
-			if(success)
-				dirs += get_dir(src, T)
-				other_dirs += get_dir(src, T)
+		if(success)
+			dirs += get_dir(src, T)
+			other_dirs += get_dir(src, T)
 
 	connections = dirs_to_corner_states(dirs)
 	other_connections = dirs_to_corner_states(other_dirs)

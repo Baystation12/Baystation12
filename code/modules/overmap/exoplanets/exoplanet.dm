@@ -21,7 +21,9 @@
 	var/repopulate_types = list() // animals which have died that may come back
 
 	var/features_budget = 2
-	var/list/possible_features = list(/datum/map_template/ruin/exoplanet/monolith) //pre-defined list of features templates to pick from
+	//pre-defined list of features templates to pick from
+	var/list/possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+									  /datum/map_template/ruin/exoplanet/hydrobase)
 
 /obj/effect/overmap/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
@@ -181,11 +183,24 @@
 //Tries to generate num landmarks, but avoids repeats.
 /obj/effect/overmap/sector/exoplanet/proc/generate_landing(num = 1)
 	var/places = list()
-	for(var/i = 1, i <= num, i++)
+	var/attempts = 5*num
+	while(num)
+		attempts--
 		var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
-		if(T && !(T in places))
-			places += T
-			new landmark_type(T)
+		if(!T || (T in places))
+			continue
+		if(attempts >= 0) // While we have the patience, try to find better spawn points. If out of patience, put them down wherever, so long as there are no repeats.
+			var/valid = 1
+			var/list/block_to_check = block(locate(T.x - 10, T.y - 10, T.z), locate(T.x + 10, T.y + 10, T.z))
+			for(var/turf/check in block_to_check)
+				if(!istype(get_area(check), /area/exoplanet) || check.turf_flags & TURF_FLAG_NORUINS)
+					valid = 0
+					break
+			if(!valid)
+				continue
+		num--
+		places += T
+		new landmark_type(T)
 
 /obj/effect/overmap/sector/exoplanet/proc/generate_atmosphere()
 	atmosphere = new

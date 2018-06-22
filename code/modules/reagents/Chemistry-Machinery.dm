@@ -557,7 +557,10 @@
 				break
 
 /obj/machinery/reagentgrinder/proc/hurt_hand(mob/living/carbon/human/user)
-	if(!istype(user) || !prob(user.skill_fail_chance(SKILL_CHEMISTRY, 50, SKILL_BASIC)))
+	var/skill_to_check = SKILL_CHEMISTRY
+	if(user.get_skill_value(SKILL_COOKING) > user.get_skill_value(SKILL_CHEMISTRY))
+		skill_to_check = SKILL_COOKING
+	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
 		return
 	var/hand = pick(BP_L_HAND, BP_R_HAND)
 	var/obj/item/organ/external/hand_organ = user.get_organ(hand)

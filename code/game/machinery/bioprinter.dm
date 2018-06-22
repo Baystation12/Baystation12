@@ -201,9 +201,13 @@
 	var/obj/item/organ/O
 	var/weakref/R = loaded_dna["donor"]
 	var/mob/living/carbon/human/H = R.resolve()
+	var/new_organ
 	if(loaded_species.has_organ[choice])
-		var/new_organ = loaded_species.has_organ[choice]
-		O = new new_organ(get_turf(src), given_dna = H.dna)
+		new_organ = loaded_species.has_organ[choice]
+	else if(loaded_species.has_limbs[choice])
+		new_organ = loaded_species.has_limbs[choice]["path"]
+	if(new_organ)
+		O = new new_organ(get_turf(src), H.dna)
 		O.status |= ORGAN_CUT_AWAY
 	else
 		O = ..()

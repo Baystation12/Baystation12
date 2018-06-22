@@ -36,6 +36,7 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 		/obj/item/weapon/gun/projectile/colt/detective,
 		/obj/item/weapon/gun/projectile/sec/wood,
 		/obj/item/weapon/gun/projectile/silenced,
+		/obj/item/weapon/gun/projectile/beretta,
 		/obj/item/weapon/gun/projectile/pistol,
 		/obj/item/weapon/gun/projectile/revolver,
 		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,

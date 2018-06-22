@@ -149,6 +149,29 @@
 	hitsound = "swing_hit"
 	flashlight_max_bright = 0.5
 	flashlight_outer_range = 5
+/******************************Lantern*******************************/
+/obj/item/device/flashlight/lantern
+	name = "lantern"
+	desc = "A mining lantern."
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "lantern"
+	item_state = "lantern"
+	force = 10
+	attack_verb = list ("bludgeoned", "bashed", "whack")
+	w_class = ITEM_SIZE_NORMAL
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = SLOT_BELT
+	matter = list(DEFAULT_WALL_MATERIAL = 200,"glass" = 100)
+	flashlight_outer_range = 5
+
+/obj/item/device/flashlight/lantern/update_icon()
+	..()
+	if(on)
+		item_state = "lantern-on"
+	else
+		item_state = "lantern"
+
+/******************************Lantern*******************************/
 
 /obj/item/device/flashlight/drone
 	name = "low-power flashlight"
