@@ -32,7 +32,7 @@
 
 	to_chat(user, "<span class='notice'>The microscope whirrs as you examine \the [sample].</span>")
 
-	if(!user.do_skilled(SKILL_FORENSICS, 25, src) || !sample)
+	if(!user.do_skilled(25, SKILL_FORENSICS, src) || !sample)
 		to_chat(user, "<span class='notice'>You stop examining \the [sample].</span>")
 		return
 
