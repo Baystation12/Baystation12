@@ -11,9 +11,9 @@ var/global/get_orion_password = null
 	name += pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Gamma", "Zulu")
 	name += "-" + pick("Hotel", "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Yankee")
 	name += "-" + pick("Oscar", "Papa", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "Xray")
-	name += "-" + rand(0,9)
-	name += rand(0,9)
-	name += rand(0,9)
+	name += "-" + pick("1","2","3","4","5","6","7","8","9","0")
+	name += pick("1","2","3","4","5","6","7","8","9","0")
+	name += pick("1","2","3","4","5","6","7","8","9","0")
 
 	return name
 
