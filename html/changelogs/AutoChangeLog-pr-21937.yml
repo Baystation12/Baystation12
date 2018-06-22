@@ -1,0 +1,4 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - bugfix: "The magic missile wizard spell now works. It inflicts small burn damage and a substantial disable."
