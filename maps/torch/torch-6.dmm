@@ -3688,7 +3688,7 @@
 	desc = "A secure airlock. Doesn't look like you can get through easily.";
 	icon = 'icons/obj/doors/centcomm/door.dmi';
 	icon_state = "closed";
-	name = "Delta Barracks"
+	name = "Delta Barracks";
 	dir = 4
 	},
 /area/rescue_base/base)
@@ -6833,7 +6833,7 @@
 	desc = "A secure airlock. Doesn't look like you can get through easily.";
 	icon = 'icons/obj/doors/centcomm/door.dmi';
 	icon_state = "closed";
-	name = "Outer Gate"
+	name = "Outer Gate";
 	dir = 4
 	},
 /area/ninja_dojo/dojo)
@@ -8310,7 +8310,7 @@
 	},
 /area/ninja_dojo/start)
 "asG" = (
-/obj/structure/bed/chair/comfy/black,
+/obj/structure/bed/chair/shuttle,
 /turf/unsimulated/floor{
 	dir = 2;
 	icon_state = "dark"
@@ -11349,7 +11349,9 @@
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
 "azF" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/darkred,
@@ -20119,15 +20121,17 @@
 /turf/simulated/floor/carpet/blue,
 /area/shuttle/merchant/home)
 "aTd" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
 /obj/machinery/button/remote/blast_door{
 	id = "merchantshuttle";
 	name = "Merchant Window Shutters";
 	pixel_x = 0;
 	pixel_y = -28;
 	req_access = list(201)
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/carpet/blue,
 /area/shuttle/merchant/home)
@@ -21025,7 +21029,9 @@
 /turf/simulated/floor/shuttle/red,
 /area/skipjack_station/start)
 "aVd" = (
-/obj/structure/bed/chair/office/light{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/red,
@@ -23100,6 +23106,10 @@
 /obj/item/weapon/mop,
 /turf/simulated/floor/shuttle/darkred,
 /area/syndicate_station/start)
+"kRX" = (
+/obj/structure/bed/chair/shuttle,
+/turf/simulated/floor/shuttle/black,
+/area/rescue_base/start)
 "kUL" = (
 /obj/machinery/porta_turret_construct,
 /turf/simulated/floor/shuttle/darkred,
@@ -27313,7 +27323,7 @@ alH
 alU
 amn
 amF
-amW
+kRX
 anl
 anl
 aoe
