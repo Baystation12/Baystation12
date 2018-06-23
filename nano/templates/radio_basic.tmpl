@@ -79,6 +79,18 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 	</div>
 {{/if}}
 
+
+{{if data.charge}}
+	<div class="item">
+		<div class="itemLabelWide">
+			Battery charge:
+		</div>
+		<div class="itemContentMedium">
+			{{:data.charge}}
+		</div>
+	</div>
+{{/if}}
+
 <div class="item">
 	<div class="itemLabelWide">
 		Frequency: {{:data.freq}}
