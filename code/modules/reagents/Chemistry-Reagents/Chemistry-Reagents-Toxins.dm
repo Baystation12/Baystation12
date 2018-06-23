@@ -658,14 +658,14 @@
 	..()
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/doses = H.chem_doses[type]
-		if (doses >= 5)
+		var/current_dose = H.chem_doses[type]
+		var/true_dose = current_dose + volume
+		if (true_dose >= 5)
 			H.zombify()
-		else if (doses > 1)
-			if (prob(doses * 10))
-				H.zombify()
+		else if (true_dose > 1 && prob(20))
+			H.zombify()
 		else if (prob(10))
-			to_chat(M, "<span class='warning'>You feel terribly ill!</span>")
+			to_chat(H, "<span class='warning'>You feel terribly ill!</span>")
 
 /datum/reagent/toxin/bromide
 	name = "Bromide"
