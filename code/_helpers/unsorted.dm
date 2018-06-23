@@ -888,27 +888,44 @@ var/global/list/common_tools = list(
 				return 3800
 			else
 				return 0
+
 		if(/obj/item/weapon/flame/lighter)
 			if(W:lit)
 				return 1500
 			else
 				return 0
+
+		if(/obj/item/weapon/flame/candle)
+			if(W:lit)
+				return 1250
+			else
+				return 0
+
 		if(/obj/item/weapon/flame/match)
 			if(W:lit)
 				return 1000
 			else
 				return 0
+
 		if(/obj/item/clothing/mask/smokable/cigarette)
 			if(W:lit)
 				return 1000
 			else
 				return 0
+
 		if(/obj/item/weapon/gun/energy/plasmacutter)
 			return 3800
 		if(/obj/item/weapon/melee/energy)
-			return 3500
-		else
-			return 0
+			if(W:active)
+				return 3500
+			else
+				return 0
+
+		if(/obj/item/projectile)
+			if(W:damage_type == BURN) //Ew.
+				return 100 * W:damage // EW
+			else
+				return 0
 
 	return 0
 
@@ -977,23 +994,7 @@ var/global/list/common_tools = list(
 			return FALSE
 
 /proc/reverse_direction(var/dir)
-	switch(dir)
-		if(NORTH)
-			return SOUTH
-		if(NORTHEAST)
-			return SOUTHWEST
-		if(EAST)
-			return WEST
-		if(SOUTHEAST)
-			return NORTHWEST
-		if(SOUTH)
-			return NORTH
-		if(SOUTHWEST)
-			return NORTHEAST
-		if(WEST)
-			return EAST
-		if(NORTHWEST)
-			return SOUTHEAST
+	return turn(dir, 180)
 
 /*
 Checks if that loc and dir has a item on the wall

@@ -396,6 +396,7 @@
 		busy = 0
 		if(!WT.isOn())
 			return 0
+		update_icon()
 		return 1
 	busy = 0
 	return 0

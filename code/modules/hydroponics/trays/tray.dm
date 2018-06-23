@@ -134,9 +134,6 @@
 	if(!(harvest && seed && seed.has_mob_product))
 		return
 
-	if(!user.can_admin_interact())
-		return
-
 	var/response = alert(user, "Are you sure you want to harvest this [seed.display_name]?", "Living plant request", "Yes", "No")
 	if(response == "Yes")
 		harvest()
