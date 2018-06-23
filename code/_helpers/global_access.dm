@@ -522,7 +522,7 @@
 		if("gender_datums")
 			return global.gender_datums;
 		if("get_orion_password")
-			return global.get_orion_password;
+			return global.orion_password;
 		if("ghost_darkness_images")
 			return global.ghost_darkness_images;
 		if("ghost_role_manager")
@@ -1223,7 +1223,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1747,7 +1747,7 @@
 		if("gender_datums")
 			global.gender_datums=newval;
 		if("get_orion_password")
-			global.get_orion_password=newval;
+			global.orion_password=newval;
 		if("ghost_darkness_images")
 			global.ghost_darkness_images=newval;
 		if("ghost_role_manager")
@@ -2448,7 +2448,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
