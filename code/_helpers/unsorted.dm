@@ -889,23 +889,18 @@ var/global/list/common_tools = list(
 			else
 				return 0
 
-		if(/obj/item/weapon/flame/lighter)
-			if(W:lit)
-				return 1500
-			else
-				return 0
+		if(/obj/item/weapon/flame/)
+			var/obj/item/weapon/flame/F = W
+			if(F.lit)
+				switch(W.type)
+					if(/obj/item/weapon/flame/lighter)
+						return 1500
 
-		if(/obj/item/weapon/flame/candle)
-			if(W:lit)
-				return 1250
-			else
-				return 0
+					if(/obj/item/weapon/flame/candle)
+						return 1250
 
-		if(/obj/item/weapon/flame/match)
-			if(W:lit)
-				return 1000
-			else
-				return 0
+					if(/obj/item/weapon/flame/match)
+						return 1000
 
 		if(/obj/item/clothing/mask/smokable/cigarette)
 			if(W:lit)
@@ -922,8 +917,9 @@ var/global/list/common_tools = list(
 				return 0
 
 		if(/obj/item/projectile)
-			if(W:damage_type == BURN) //Ew.
-				return 100 * W:damage // EW
+			var/obj/item/projectile/P = W
+			if(P.damage_type == BURN)
+				return 100 * P.damage
 			else
 				return 0
 

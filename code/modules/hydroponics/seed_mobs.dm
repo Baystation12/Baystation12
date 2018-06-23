@@ -9,8 +9,7 @@
 		if(!host.ckey && !host.client)
 			host.death()  // This seems redundant, but a lot of mobs don't
 			host.set_stat(DEAD) // handle death() properly. Better safe than etc.
-			host.visible_message("<span class='notice'>\The [host] is malformed and unable to survive. It expires pitifully, leaving behind a seed.</span>")
-
 			var/obj/item/seeds/S = new(get_turf(host))
 			S.seed_type = name
 			S.update_seed()
+			host.visible_message("<span class='notice'>\The [host] is malformed and unable to survive. It expires pitifully, leaving behind \an [S].</span>")

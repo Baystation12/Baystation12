@@ -49,7 +49,7 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/New()
+/obj/machinery/door/Initialize()
 	. = ..()
 	if(density)
 		layer = closed_layer
@@ -65,19 +65,16 @@
 			bound_width = world.icon_size
 			bound_height = width * world.icon_size
 		if(!glass) //Glass multiturfs don't need a dummy.
-			addtimer(CALLBACK(src, .proc/create_dummy), 0)
-
+			create_dummy()
 	health = maxhealth
 	update_connections(1)
 	update_icon()
 
 	update_nearby_tiles(need_rebuild=1)
 
-/obj/machinery/door/Initialize()
 	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	if(glass)
 		set_opacity(0)
-	. = ..()
 
 /obj/machinery/door/Destroy()
 	set_density(0)
@@ -108,40 +105,24 @@
 	dummy = new //Only supports 2x2 walls atm.
 	dummy.set_opacity(opacity)
 	adjust_dummy()
+	GLOB.dir_set_event.register(src, dummy, .proc/adjust_dummy)
+	GLOB.moved_event.register(src, dummy, .proc/adjust_dummy)
+	GLOB.opacity_set_event.register(src, dummy, .proc/set_dummy_opacity)
 
 #define ADJUSTIT(A) dummy.forceMove(get_step(src, A))
 /obj/machinery/door/proc/adjust_dummy()//Special proc because dir doesn't adjust the object's origin point.
 	if(!isnull(dummy))
 		switch(dir)
-			if(NORTH)
-				ADJUSTIT(NORTHEAST)
 			if(SOUTH)
-				ADJUSTIT(EAST)
-			if(EAST)
 				ADJUSTIT(EAST)
 			if(WEST)
 				ADJUSTIT(NORTH)
 #undef ADJUSTIT
 
-/obj/machinery/door/set_opacity(var/N)
+/obj/machinery/door/proc/set_dummy_opacity(var/atom/A, var/old_opacity, var/new_opacity)
 	. = ..()
 	if(!isnull(dummy))
-		if(N == TRUE)
-			dummy.set_opacity(TRUE)
-		else
-			dummy.set_opacity(FALSE)
-
-/obj/machinery/door/Move()
-	..()
-	adjust_dummy()
-
-/obj/machinery/door/forceMove()
-	..()
-	adjust_dummy()
-
-/obj/machinery/door/set_dir()
-	..()
-	adjust_dummy()
+		dummy.set_opacity(new_opacity)
 
 //Opacity dummy related stuff ends.
 
