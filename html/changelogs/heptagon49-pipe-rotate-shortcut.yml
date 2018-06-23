@@ -1,0 +1,5 @@
+
+author: Heptagon49
+delete-after: True
+changes:
+  - rscadd: "You can now alt-click on pipes and disposal pipes to rotate them."
