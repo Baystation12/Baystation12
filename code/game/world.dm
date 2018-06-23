@@ -121,11 +121,6 @@
 	processScheduler.setup()
 	Master.Initialize(10, FALSE)
 
-#ifdef UNIT_TEST
-	spawn(1)
-		initialize_unit_tests()
-#endif
-
 #undef RECOMMENDED_VERSION
 
 var/world_topic_spam_protect_ip = "0.0.0.0"
@@ -584,9 +579,9 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += "<a href=\"http://\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"https://forums.baystation12.net/\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
-	s += "Default"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
+	s += "Forums"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"
 

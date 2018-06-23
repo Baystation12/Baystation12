@@ -1136,9 +1136,6 @@
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
 "cQ" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
 /obj/machinery/button/remote/blast_door{
 	id = "calypso_shutters";
 	name = "Protective Shutters Control";
@@ -1151,6 +1148,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
@@ -5280,7 +5282,9 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/ship)
 "kJ" = (
-/obj/structure/bed/chair/office/light{
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -18781,7 +18785,6 @@
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "Ix" = (
-/obj/structure/bed/chair,
 /obj/machinery/button/remote/blast_door{
 	id = "guppy_hatch";
 	name = "Rear Hatch Control";
@@ -18790,6 +18793,7 @@
 	req_access = list(89);
 	req_one_access = newlist()
 	},
+/obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/tiled,
 /area/guppy_hangar/start)
 "Iy" = (
