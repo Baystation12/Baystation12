@@ -106,13 +106,13 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to everyone:")) as text)
+	var/msg = russian_to_cp1251(input("Message:", text("Enter the text you wish to appear to everyone:")) as message)
 
 	if (!msg)
 		return
 	to_world(msg)
 
-	log_and_message_admins(" - GlobalNarrate: [msg]")
+	log_and_message_admins(" - GlobalNarrate: [sanitize(msg)]")
 	feedback_add_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 // Targetted narrate: will narrate to one specific mob
@@ -130,13 +130,13 @@
 	if(!M)
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
+	var/msg = russian_to_cp1251(input("Message:", text("Enter the text you wish to appear to your target:")) as message)
 
 	if( !msg )
 		return
 
 	to_chat(M, msg)
-	log_and_message_admins(" - DirectNarrate to ([M.name]/[M.key]): [msg]")
+	log_and_message_admins(" - DirectNarrate to ([M.name]/[M.key]): [sanitize(msg)]")
 	feedback_add_details("admin_verb","DIRN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 // Local narrate, narrates to everyone who can see where you are regardless of whether they are blind or deaf.
@@ -148,7 +148,7 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
+	var/msg = russian_to_cp1251(input("Message:", text("Enter the text you wish to appear to your target:")) as message)
 
 	if( !msg )
 		return
@@ -174,13 +174,13 @@
 		to_chat(src, "You must be in control of a mob to use this.")
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
+	var/msg = russian_to_cp1251(input("Message:", text("Enter the text you wish to appear to your target:")) as message)
 
 	if( !msg )
 		return
 
 	M.visible_message(msg, narrate = TRUE)
-	log_and_message_admins(" - VisibleNarrate on [A]: [msg]")
+	log_and_message_admins(" - VisibleNarrate on [A]: [sanitize(msg)]")
 
 // Visible narrate, it's as if it's a audible message
 /client/proc/cmd_admin_audible_narrate(var/atom/A)
@@ -188,8 +188,7 @@
 	set name = "Audible Narrate"
 	set desc = "Narrate to those who can hear the given atom."
 
-	if(!holder)
-		to_chat(src, "Only administrators may use this command.")
+	if(!check_rights(R_ADMIN))
 		return
 
 	var/mob/M = mob
@@ -198,13 +197,13 @@
 		to_chat(src, "You must be in control of a mob to use this.")
 		return
 
-	var/msg = sanitize(input("Message:", text("Enter the text you wish to appear to your target:")) as text)
+	var/msg = russian_to_cp1251(input("Message:", text("Enter the text you wish to appear to your target:")) as message)
 
 	if( !msg )
 		return
 
 	M.audible_message(msg, narrate = TRUE)
-	log_and_message_admins(" - AudibleNarrate on [A]: [msg]")
+	log_and_message_admins(" - AudibleNarrate on [A]: [sanitize(msg)]")
 
 /client/proc/cmd_admin_godmode(mob/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
