@@ -1,14 +1,14 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/template_noop,
-/area/map_template/monolith)
+/area/template_noop)
 "b" = (
 /obj/structure/monolith,
 /turf/template_noop,
-/area/map_template/monolith)
+/area/template_noop)
 "c" = (
 /turf/simulated/floor/fixed/alium/ruin,
-/area/map_template/monolith)
+/area/template_noop)
 "d" = (
 /obj/machinery/artifact,
 /obj/structure/window/phoronreinforced{
@@ -25,7 +25,7 @@
 	},
 /obj/structure/window/phoronreinforced,
 /turf/simulated/floor/fixed/alium/ruin,
-/area/map_template/monolith)
+/area/template_noop)
 
 (1,1,1) = {"
 a
