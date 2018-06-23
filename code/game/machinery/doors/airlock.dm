@@ -1123,7 +1123,7 @@ About the new airlock wires panel:
 				else
 					to_chat(user, "<span class='warning'>You need to be wielding \the [C] to do that.</span>")
 
-	if(istype(C, /obj/item/device/floor_painter))
+	else if(istype(C, /obj/item/device/floor_painter))
 		return
 
 	else
