@@ -2,6 +2,8 @@
 /mob/living/simple_animal/npc/colonist
 	name = "colonist"
 	desc = "A human from one of Earth's diverse cultures who decided to try a future offplanet."
+	icon = 'code/modules/halo/NPC/npc.dmi'
+	icon_state = "body_m_s"
 	emote_hear = list("coughs","sneezes","sniffs","clears their throat","whistles tunelessly")
 	emote_see = list("shifts from side to side","scratches their arm","examines their nails","stares at at the ground aimlessly","looks bored")
 	speak = list("Have you heard the latest news from Earth?",\
