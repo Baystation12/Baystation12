@@ -1,4 +1,0 @@
-author: Chinsky
-delete-after: True
-changes: 
-  - tweak: "Handheld radios now have batteries and use power to transmit. You'll have ~50 transmissions worth of power from one cell. When charge is getting low, message might become garbled. Radios can be recharged in standard rechargers."
