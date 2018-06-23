@@ -641,34 +641,31 @@
 	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
 	remove_self(volume)
 
-/datum/reagent/toxin/corrupting
-	name = "Corruption"
-	description = "A loyalty changing liquid."
-	taste_description = "blood"
-	color = "#ffffff"
+/datum/reagent/toxin/zombie
+	name = "Liquid Corruption"
+	description = "A filthy, oily substance which slowly churns of its own accord."
+	taste_description = "decaying blood"
+	color = "#800000"
 	taste_mult = 5
 	strength = 10
 	metabolism = REM * 5
 	overdose = 30
 
-/datum/reagent/toxin/corrupting/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	affect_blood(M,alien,removed*0.5)
+/datum/reagent/toxin/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_blood(M, alien, removed * 0.5)
 
-/datum/reagent/toxin/corrupting/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(prob(M.chem_doses[type]*10))
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			H.zombieze()
-		else
-			to_chat(M, "<span class='danger'>Your insides are melting!!!</span>")
-			M.adjustToxLoss(100)
-		remove_self(volume)
-	else if(prob(5))
-		if(M.chem_doses[type] < 5)
-			to_chat(M, "<span class='warning'>You feel funny...</span>")
-		else
-			to_chat(M, "<span class='danger'>You feel like you could die at any moment!</span>")
+	if (istype(M, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		var/doses = M.chem_doses[type]
+		if (doses >= 5)
+			H.zombify()
+		else if (doses > 1)
+			if (prob(doses * 10))
+				H.zombify()
+		else if (prob(10))
+			to_chat(M, "<span class='warning'>You feel terribly ill!</span>")
 
 /datum/reagent/toxin/bromide
 	name = "Bromide"
