@@ -658,7 +658,7 @@
 	..()
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/doses = M.chem_doses[type]
+		var/doses = H.chem_doses[type]
 		if (doses >= 5)
 			H.zombify()
 		else if (doses > 1)
