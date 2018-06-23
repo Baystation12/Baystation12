@@ -75,7 +75,7 @@
 "bw" = (/turf/simulated/floor/tiled,/area/asteroid_base/shuttle_dock)
 "bx" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled,/area/asteroid_base/shuttle_dock)
 "by" = (/obj/machinery/door/unpowered/simple/wood,/turf/simulated/floor/plating,/area/asteroid_base/shuttle_dock)
-"bz" = (/obj/effect/decal/cleanable/dirt,/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (EAST)"; icon_state = "wooden_chair_preview"; dir = 4},/mob/living/simple_animal/npc/colonist/labourer,/turf/simulated/floor/plating,/area/asteroid_base/shuttle_dock)
+"bz" = (/obj/effect/decal/cleanable/dirt,/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (EAST)"; icon_state = "wooden_chair_preview"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/shuttle_dock)
 "bA" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,/turf/simulated/floor/plating,/area/asteroid_base/shuttle_dock)
 "bB" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small/red{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/asteroid_base/shuttle_dock)
 "bC" = (/obj/machinery/door/airlock/multi_tile/halo,/turf/simulated/floor/tiled,/area/asteroid_base/armoury_4)
