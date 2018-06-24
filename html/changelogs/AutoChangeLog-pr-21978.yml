@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - tweak: "observers cannot circumvent voting checks"
