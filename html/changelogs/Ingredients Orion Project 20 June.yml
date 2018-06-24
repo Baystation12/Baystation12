@@ -37,5 +37,5 @@ changes:
   - tweak: "Armor thickness is now only on helmet and armor pieces. Undersuit no longer provides armor values."
   - tweak: "Added in Orion Project Race called Orion which Admins will have to manually set once proper RP is done ICly to create project Orion. Added in armor race restrictions so it can only be worn once race is set by an admin."
   - imageadd: "Added a modded Icon, MA9 gun into Weapon sprites.dm, changed the Orion Project Icon gun to use the MA9. Changed weight class from huge to large."
-  - mapweak: "Added in Chemistry station to Exo3."
+  - maptweak: "Added in Chemistry station to Exo3."
   - maptweak: "Removed random project theta Labratory hidden in rocks of Exo-research 2. Removed old project theta lab in Gem City RnD"
