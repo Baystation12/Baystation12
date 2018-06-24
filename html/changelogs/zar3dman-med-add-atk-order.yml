@@ -33,4 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Added Advanced Trauma Kit and Advanced Burn Kit crates that can be ordered from Cargo. 6 kits for 20 points."
+  - rscadd: "Added Advanced Trauma Kit and Advanced Burn Kit crates that can be ordered from Cargo. 6 ATK or ABK for 30 points."
+  - rscadd: "Adjusted cost of Medical Crate to 70 supply points to be more appropriate when compared to other crates like Stability kit crates."
