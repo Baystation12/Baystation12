@@ -34,10 +34,9 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - tweak: "Changed Theta project names to Project Orion for guns and armor.Removed Code to deflect bullets from armor and helmet as it wasn't working. Added in code for all Theta Armor to species restrict armor."
-  - tweak: "Armor thickness is now only on helmet and armor pieces. Undersuit no longer provides armor values. All armor values were decreased so that max is 65 for two values on main armor piece. Replaced Orion equipment tables with Three seperate closets each holding gear needed for one subject."
+  - tweak: "Armor thickness is now only on helmet and armor pieces. Undersuit no longer provides armor values."
   - tweak: "Added in Orion Project Race called Orion which Admins will have to manually set once proper RP is done ICly to create project Orion. Added in armor race restrictions so it can only be worn once race is set by an admin."
   - tweak: "Added a modded Icon, MA9 gun into Weapon sprites.dm, changed the Orion Project Icon gun to use the MA9. Changed weight class from huge to large."
   - tweak: "Changed Theta Project .DM file name to Orion Project. Changed Project Theta evelope to reflect Project Orion's needs."
-  - tweak: "Deleted prototype SMGs from shooting range in Exo3 as they are actually terrible. Added in three ammobags for Orion project. Added in a few extra misc items to spice up the room. Added in Chemistry station to Exo3. Swapped around surgery kits and IV drips. Added in sinks to surgery."
+  - tweak: "Added in Chemistry station to Exo3."
   - tweak: "Removed random project theta Labratory hidden in rocks of Exo-research 2. Removed old project theta lab in Gem City RnD"
-  - tweak: "Added three Orion Code envelopes to frigate bridge and CO quarters."

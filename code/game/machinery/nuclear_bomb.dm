@@ -1,7 +1,7 @@
 var/bomb_set
 
 //Code to pick a random pass-phrase for Project Orion
-var/global/orion_password = get_orion_password()
+var/global/orion_password = null
 /proc/get_orion_password()
 	if (orion_password)
 		return orion_password
@@ -14,6 +14,7 @@ var/global/orion_password = get_orion_password()
 	name += "-" + pick("1","2","3","4","5","6","7","8","9","0")
 	name += pick("1","2","3","4","5","6","7","8","9","0")
 	name += pick("1","2","3","4","5","6","7","8","9","0")
+	orion_password = name
 
 	return name
 
