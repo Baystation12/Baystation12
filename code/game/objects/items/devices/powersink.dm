@@ -80,18 +80,19 @@
 			STOP_PROCESSING_POWER_OBJECT(src)
 
 /obj/item/device/powersink/pwr_drain()
+	to_world("honk1")
 	if(!attached)
 		return 0
-
+	to_world("honk2")
 	if(drained_this_tick)
 		return 1
 	drained_this_tick = 1
-
+	to_world("honk3")
 	var/drained = 0
-
+	to_world("honk4")
 	if(!PN)
 		return 1
-
+	to_world("honk5")
 	set_light(0.5, 0.1, 12)
 	PN.trigger_warning()
 	// found a powernet, so drain up to max power from it
@@ -111,10 +112,12 @@
 					A.cell.use(drain_val * CELLRATE)
 					drained += drain_val
 	power_drained += drained
+	to_world("honk6 [drained] [power_drained]")
 	return 1
 
 
 /obj/item/device/powersink/Process()
+	to_world("squeak1")
 	drained_this_tick = 0
 	power_drained -= min(dissipation_rate, power_drained)
 	if(power_drained > max_power * 0.95)
@@ -123,7 +126,10 @@
 		explosion(src.loc, 3,6,9,12)
 		qdel(src)
 		return
+	to_world("squeak2")
 	if(attached && attached.powernet)
 		PN = attached.powernet
+		to_world("squeak3")
 	else
 		PN = null
+		to_world("squeak4")
