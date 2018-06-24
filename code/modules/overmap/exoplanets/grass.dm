@@ -3,6 +3,12 @@
 	desc = "Planet with abundant flora and fauna."
 	color = "#538224"
 
+	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+							 /datum/map_template/ruin/exoplanet/oasis,
+							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
+							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
+							 /datum/map_template/ruin/exoplanet/fountain)
+
 /obj/effect/overmap/sector/exoplanet/grass/generate_map()
 	if(prob(40))
 		lightlevel = rand(1,7)/10	//give a chance of twilight jungle
@@ -97,7 +103,7 @@
 		resources["diamond"] = 1
 
 /turf/simulated/floor/exoplanet/grass/fire_act(datum/gas_mixture/air, temperature, volume)
-	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000) 
+	if((temperature > T0C + 200 && prob(5)) || temperature > T0C + 1000)
 		SetName("scorched ground")
 		icon_state = "scorched"
 		color = null

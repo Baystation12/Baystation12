@@ -19,6 +19,7 @@
 	var/blood_level = 0
 	var/shock_level = 0	//what shock level will this step put patient on
 	var/delicate = 0  //if this step NEEDS stable optable or can be done on any valid surface with no penalty
+	var/core_skill = SKILL_ANATOMY //The skill that's checked for speed modifiers.
 
 //returns how well tool is suited for this step
 /datum/surgery_step/proc/tool_quality(obj/item/tool)
@@ -134,7 +135,7 @@
 				M.op_stage.in_progress += zone
 				S.begin_step(user, M, zone, src)		//start on it
 				//We had proper tools! (or RNG smiled.) and user did not move or change hands.
-				var/duration = user.skill_delay_mult(SKILL_ANATOMY) * rand(S.min_duration, S.max_duration)
+				var/duration = user.skill_delay_mult(S.core_skill) * rand(S.min_duration, S.max_duration)
 				if(prob(S.success_chance(user, M, src)) &&  do_mob(user, M, duration))
 					S.end_step(user, M, zone, src)		//finish successfully
 				else if ((src in user.contents) && user.Adjacent(M))			//or

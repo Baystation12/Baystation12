@@ -4,6 +4,11 @@
 	landmark_type = /obj/effect/shuttle_landmark/automatic/clearing
 	color = "#7c7670"
 
+	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+							 /datum/map_template/ruin/exoplanet/oasis,
+							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
+							 /datum/map_template/ruin/exoplanet/hydrobase)
+
 /obj/effect/overmap/sector/exoplanet/rocks/generate_map()
 	if(prob(50))
 		lightlevel = rand(1,10)/10 //total random

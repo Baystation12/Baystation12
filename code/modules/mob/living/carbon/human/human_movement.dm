@@ -100,7 +100,7 @@
 				thrust = module.jets
 				break
 
-	if(thrust)
+	if(thrust && thrust.on)
 		if(prob(skill_fail_chance(SKILL_EVA, 10, SKILL_ADEPT)))
 			to_chat(src, "<span class='warning'>You fumble with [thrust] controls!</span>")
 			inertia_dir = pick(GLOB.cardinal)

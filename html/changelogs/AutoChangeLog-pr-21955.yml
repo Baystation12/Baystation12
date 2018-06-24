@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - tweak: "Robotics surgery uses the Complex Devices skill now to compute delay. Hardsuit removal uses the EVA skill."
+  - bugfix: "Constantly escaping from grabs regardless of skill should be fixed."
