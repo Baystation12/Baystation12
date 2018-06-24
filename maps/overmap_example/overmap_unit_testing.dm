@@ -21,5 +21,6 @@
 		/area/ship/scrap/shuttle/outgoing = NO_SCRUBBER,
 		/area/ship/scrap/maintenance/atmos = NO_SCRUBBER,
 		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/map_template/hydrobase/station = NO_SCRUBBER
+		/area/map_template/hydrobase/station = NO_SCRUBBER,
+		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC
 	)

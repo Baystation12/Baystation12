@@ -7,6 +7,7 @@
 							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
 							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
 							 /datum/map_template/ruin/exoplanet/fountain,
+							 /datum/map_template/ruin/exoplanet/marooned,
 							 /datum/map_template/ruin/exoplanet/hydrobase)
 
 /obj/effect/overmap/sector/exoplanet/desert/generate_map()
