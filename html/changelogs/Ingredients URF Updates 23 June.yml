@@ -34,9 +34,7 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - tweak: "Added in random clothes sets in Innibase3 Laundry room and Eastern Storage."
-  - tweak: "Added in five voice analysers into Engineering storage in Inniebase3 so innies can get creative with bombs."
   - tweak: "Added in a small assortment of old guns with a bit of ammo into the ammo crates Inniebase3 north storage. Added in a few sets of armor vests."
-  - tweak: "Added in two random medkit spawners and four random eyewear spawners. to Inniebase3 north storage."
   - tweak: "Added in randomised misc items to Eastern and Northern Storage in Inniebase2. Should help with blending in with civies if they want to go incognito. Added in a emergency rations freezer as well."
   - tweak: "Added in a few old style guns to the weapons crates in Northern Storage Inniebase2."
   - tweak: "Added in some merc armor and helmets into northern Storage Inniebase2."
