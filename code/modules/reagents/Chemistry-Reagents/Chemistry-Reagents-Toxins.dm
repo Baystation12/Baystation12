@@ -658,8 +658,7 @@
 	..()
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/current_dose = H.chem_doses[type]
-		var/true_dose = current_dose + volume
+		var/true_dose = H.chem_doses[type] + volume
 		if (true_dose >= 5)
 			H.zombify()
 		else if (true_dose > 1 && prob(20))
