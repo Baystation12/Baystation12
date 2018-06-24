@@ -22,11 +22,11 @@
 	set category = "Abilities"
 
 	if (last_special > world.time)
-		to_chat(src, "You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds.")
+		to_chat(src, "<span class='warning'>You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds.</span>")
 		return
 	
 	if (incapacitated())
-		to_chat(src, "You can't do that while you're incapacitated!")
+		to_chat(src, "<span class='warning'>You can't do that while you're incapacitated!</span>")
 		return
 
 	last_special = world.time + 60 SECONDS
@@ -44,21 +44,20 @@
 	set category = "Abilities"
 
 	if (last_special > world.time)
-		to_chat(src, "You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds.")
+		to_chat(src, "<span class='warning'>You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds.</span>")
 		return
 	
 	if (incapacitated())
-		to_chat(src, "You can't do that while you're incapacitated!")
+		to_chat(src, "<span class='warning'>You can't do that while you're incapacitated!</span>")
 		return
 
 	var/mob/living/target
 	for (var/mob/living/L in get_turf(src))
-		if (L.lying || L.stat == DEAD)
-			if (target != src)
-				target = L
-				break
+		if (L != src && (L.lying || L.stat == DEAD))
+			target = L
+			break
 	if (!target)
-		to_chat(src, "You aren't on top of a victim!")
+		to_chat(src, "<span class='warning'>You aren't on top of a victim!</span>")
 		return
 
 	last_special = world.time + 5 SECONDS
