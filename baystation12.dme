@@ -1627,6 +1627,7 @@
 #include "code\modules\mob\living\carbon\give.dm"
 #include "code\modules\mob\living\carbon\hallucinations.dm"
 #include "code\modules\mob\living\carbon\life.dm"
+#include "code\modules\mob\living\carbon\obsession.dm"
 #include "code\modules\mob\living\carbon\resist.dm"
 #include "code\modules\mob\living\carbon\taste.dm"
 #include "code\modules\mob\living\carbon\viruses.dm"

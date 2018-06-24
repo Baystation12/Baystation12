@@ -111,6 +111,11 @@
 /obj/screen/fullscreen/flash/noise
 	icon_state = "noise"
 
+/obj/screen/fullscreen/red
+	icon = 'icons/mob/screen1.dmi'
+	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	icon_state = "red"
+
 /obj/screen/fullscreen/high
 	icon = 'icons/mob/screen1.dmi'
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
