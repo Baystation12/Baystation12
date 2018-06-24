@@ -734,7 +734,7 @@
 	min_skill = list(	SKILL_BUREAUCRACY = SKILL_BASIC,
 						SKILL_EVA         = SKILL_BASIC,
 						SKILL_COMBAT      = SKILL_BASIC,
-						SKILL_WEAPONS     = SKILL_BASIC,
+						SKILL_WEAPONS     = SKILL_ADEPT,
 						SKILL_FORENSICS   = SKILL_BASIC)
 
 	access = list(access_security, access_brig, access_maint_tunnels,

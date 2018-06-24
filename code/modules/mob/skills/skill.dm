@@ -182,11 +182,22 @@ GLOBAL_LIST_EMPTY(skills)
 	ID = "weapons"
 	name = "Weapons Expertise"
 	desc = "This skill describes your expertise with and knowledge of weapons. A low level in this skill implies knowledge of simple weapons, for example flashes. A high level in this skill implies knowledge of complex weapons, such as unconfigured grenades, riot shields, pulse rifles or bombs. A low-medium level in this skill is typical for security officers, a high level of this skill is typical for special agents and soldiers."
-	levels = list( "Unskilled"			= "You know how to recognize a weapon when you see one. You can probably use pepper spray or a flash, though you might fumble and turn them on yourself by mistake. You're likely to shoot yourself in the foot or forget to take the safety off. Your lack of training may make you more dangerous to your allies than your enemies.",
+	levels = list( "Unskilled"			= "You know how to recognize a weapon when you see one. You can point a gun and shoot it, though results vary wildly. You might forget the safety, you can't control burst recoil well, and you don't have trained reflexes for gun fighting.",
 						"Basic"				= "You know how to handle weapons safely, and you're comfortable using simple weapons. Your aim is decent and you can usually be trusted not to do anything stupid with a weapon you are familiar with, but your training isn't automatic yet and your performance will degrade in high-stress situations.",
-						"Trained"			= "You have had extnensive weapons training, or have used weapons in combat. You are familiar with most types of weapons and can use them in a pinch. You have an understanding of tactics, and can be trusted to stay calm under fire.",
-						"Experienced"		= "You've used firearms and other ranged weapons in a high-stress situation, and your skills have become automatic. You spend time practicing at the firing range. Your aim is good. You can maintain and repair your weaponry. You may have military or police experience and you probably carry a weapon on the job.",
-						"Master"		= "You are an exceptional shot with a variety of weapons, from simple to exotic. You can depend on hitting not just your target, but a specific part of your target, such as shooting someone in the leg. You use a weapon as naturally as though it were a part of your own body. You may be a professional marksman of some kind. You probably know a good deal about tactics, and you may have designed or modified your own weaponry.")
+						"Trained"			= "You have had extnensive weapons training, or have used weapons in combat. Your aim is better now. You are familiar with most types of weapons and can use them in a pinch. You have an understanding of tactics, and can be trusted to stay calm under fire. You may have military or police experience and you probably carry a weapon on the job.",
+						"Experienced"		= "You've used firearms and other ranged weapons in high-stress situations, and your skills have become automatic. Your aim is good.",
+						"Master"		= "You are an exceptional shot with a variety of weapons, from simple to exotic. You use a weapon as naturally as though it were a part of your own body. You may be a sniper or special forces operator of some kind.")
+
+/decl/hierarchy/skill/security/weapons/get_cost(var/level)
+	switch(level)
+		if(SKILL_BASIC)
+			return difficulty
+		if(SKILL_ADEPT)
+			return 2*difficulty
+		if(SKILL_EXPERT, SKILL_PROF)
+			return 4*difficulty
+		else
+			return 0
 
 /decl/hierarchy/skill/security/forensics
 	ID = "forensics"
