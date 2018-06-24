@@ -19,6 +19,18 @@
 	cost = 20
 	containername = "\improper Medical crate"
 
+/decl/hierarchy/supply_pack/medical/atk
+	name = "Advanced trauma crate"
+	contains = list(/obj/item/stack/medical/advanced/bruise_pack = 6)
+	cost = 20
+	containername = "\improper Advanced trauma crate"
+
+/decl/hierarchy/supply_pack/medical/abk
+	name = "Advanced burn crate"
+	contains = list(/obj/item/stack/medical/advanced/ointment = 6)
+	cost = 20
+	containername = "\improper Advanced burn crate"
+
 /decl/hierarchy/supply_pack/medical/trauma
 	name = "Trauma pouch crate"
 	contains = list(/obj/item/weapon/storage/firstaid/trauma = 3)
