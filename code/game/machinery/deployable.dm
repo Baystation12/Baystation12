@@ -65,6 +65,7 @@ for reference:
 	var/maxhealth = 100
 	var/material/material
 	atom_flags = ATOM_FLAG_CLIMBABLE
+	layer = ABOVE_WINDOW_LAYER
 
 /obj/structure/barricade/New(var/newloc, var/material_name)
 	..(newloc)

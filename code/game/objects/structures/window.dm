@@ -8,7 +8,7 @@
 	layer = SIDE_WINDOW_LAYER
 	anchored = 1.0
 	atom_flags = ATOM_FLAG_CHECKS_BORDER
-	alpha = 122
+	alpha = 180
 	var/maxhealth = 14.0
 	var/maximal_heat = T0C + 100 		// Maximal heat before this window begins taking damage from fire
 	var/damage_per_fire_tick = 2.0 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
@@ -428,6 +428,10 @@
 	material_color = GLASS_COLOR
 	color = GLASS_COLOR
 
+/obj/structure/window/basic/full
+	dir = 5
+	icon_state = "window_full"
+
 /obj/structure/window/phoronbasic
 	name = "phoron window"
 	desc = "A borosilicate alloy window. It seems to be quite strong."
@@ -442,7 +446,7 @@
 
 /obj/structure/window/phoronbasic/full
 	dir = 5
-	icon_state = "phoronwindow0"
+	icon_state = "window_full"
 
 /obj/structure/window/phoronreinforced
 	name = "reinforced borosilicate window"
@@ -460,7 +464,7 @@
 
 /obj/structure/window/phoronreinforced/full
 	dir = 5
-	icon_state = "phoronwindow0"
+	icon_state = "window_full"
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
