@@ -167,13 +167,13 @@
 
 	wires = new(src)
 
-	// offset 24 pixels in direction of dir
+	// offset 22 pixels in direction of dir
 	// this allows the APC to be embedded in a wall, yet still inside an area
 	if (building)
 		set_dir(ndir)
 
-	pixel_x = (src.dir & 3)? 0 : (src.dir == 4 ? 21 : -21)
-	pixel_y = (src.dir & 3)? (src.dir ==1 ? 23 : -28) : 0
+	pixel_x = (src.dir & 3)? 0 : (src.dir == 4 ? 22 : -22)
+	pixel_y = (src.dir & 3)? (src.dir ==1 ? 22 : -22) : 0
 
 	if (building==0)
 		init_round_start()
@@ -308,13 +308,13 @@
 		var/turf/T = get_step(get_turf(src), dir)
 		if(istype(T) && T.density)
 			if(dir == SOUTH)
-				pixel_y = -28
+				pixel_y = -22
 			else if(dir == NORTH)
-				pixel_y = 23
+				pixel_y = 22
 			else if(dir == EAST)
-				pixel_x = 21
+				pixel_x = 22
 			else if(dir == WEST)
-				pixel_x = -21
+				pixel_x = -22
 
 	var/update = check_updates() 		//returns 0 if no need to update icons.
 						// 1 if we need to update the icon_state

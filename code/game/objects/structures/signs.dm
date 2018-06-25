@@ -180,7 +180,19 @@
 
 /obj/structure/sign/warning/pods
 	name = "\improper ESCAPE PODS"
-	icon_state = "pods"
+	icon_state = "podsnorth"
+
+/obj/structure/sign/warning/pods/south
+	name = "\improper ESCAPE PODS"
+	icon_state = "podssouth"
+
+/obj/structure/sign/warning/pods/east
+	name = "\improper ESCAPE PODS"
+	icon_state = "podseast"
+
+/obj/structure/sign/warning/pods/west
+	name = "\improper ESCAPE PODS"
+	icon_state = "podswest"
 
 /obj/structure/sign/warning/radioactive
 	name = "\improper RADIOACTIVE AREA"
@@ -313,7 +325,7 @@
 /obj/structure/sign/chemistry
 	name = "\improper CHEMISTRY"
 	desc = "A sign labelling an area containing chemical equipment."
-	icon_state = "chemistry1"
+	icon_state = "chemistry"
 
 /obj/structure/sign/xenoflora
 	name = "\improper XENOFLORA"
