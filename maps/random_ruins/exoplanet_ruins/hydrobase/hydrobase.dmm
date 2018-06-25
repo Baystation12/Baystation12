@@ -15,7 +15,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growX)
 "ae" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growX)
@@ -47,16 +47,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growX)
-"aj" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
-/turf/template_noop,
-/area/map_template/hydrobase/station/growA)
 "ak" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growX)
 "al" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growA)
@@ -134,7 +130,7 @@
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/growD)
 "au" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growD)
@@ -196,33 +192,26 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "aF" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/fullgrass,
-/turf/simulated/floor/grass,
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -38;
+	pixel_y = 0
+	},
+/mob/living/simple_animal/hostile/retaliate/goat/king/hydro,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aG" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/structure/flora/ausbushes/lavendergrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aH" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/ywflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/hydrobase/station/goatzone)
 "aI" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/disposaloutlet,
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
-/turf/simulated/floor/exoplanet/water/shallow,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aJ" = (
 /obj/structure/disposalpipe/segment{
@@ -311,35 +300,26 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "aU" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/dogbed{
-	desc = "An oversized pet bed.";
-	name = "goat bed"
-	},
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -38;
-	pixel_y = 0
-	},
-/mob/living/simple_animal/hostile/retaliate/goat/king/hydro,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "aV" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
 	layer = 2.4;
 	level = 2
 	},
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/hydrobase/station/goatzone)
 "aW" = (
-/turf/simulated/floor/exoplanet/water/shallow,
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/structure/catwalk,
+/obj/item/seeds/whitebeetseed,
+/turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/goatzone)
 "aX" = (
 /obj/structure/disposalpipe/segment{
@@ -361,7 +341,6 @@
 	pixel_x = 0;
 	pixel_y = 32
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
@@ -399,7 +378,6 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growD)
 "bc" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/machinery/power/apc{
 	dir = 2;
 	name = "south bump";
@@ -409,35 +387,26 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/ppflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "bd" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/yellow{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/lavendergrass,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "be" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/cable/yellow{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/flora/ausbushes/brflowers,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
 "bf" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/floor_decal/industrial/warning/cee,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growF)
@@ -490,11 +459,6 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
 "bm" = (
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id = "goatzone";
-	name = "Containment Zone"
-	},
 /obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 2;
@@ -502,9 +466,11 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/artifact_scanpad{
-	desc = "It looks like some kind of force field generator. It obviously isn't working.";
-	name = "Containment Field Generator"
+/obj/effect/floor_decal/industrial/warning/fulltile,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id = "goatzone";
+	name = "Containment Zone"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/goatzone)
@@ -836,7 +802,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/hydrobase/station/growF)
 "ca" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
@@ -983,7 +949,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/growF)
 "cv" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growC)
@@ -1363,7 +1329,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -1771,7 +1736,6 @@
 /area/map_template/hydrobase/station/processing)
 "el" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/item/weapon/shreddedp,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
 "em" = (
@@ -2158,10 +2122,6 @@
 /obj/item/weapon/cigbutt/woodbutt,
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
-"eV" = (
-/obj/item/weapon/shreddedp,
-/turf/simulated/floor/tiled,
-/area/map_template/hydrobase/station/processing)
 "eW" = (
 /obj/structure/catwalk,
 /obj/structure/closet/crate,
@@ -2256,7 +2216,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "fd" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/solarlock)
 "fe" = (
@@ -2417,7 +2377,7 @@
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
 "fw" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growB)
@@ -2456,7 +2416,8 @@
 /turf/simulated/wall/alium,
 /area/map_template/hydrobase/station/shipaccess)
 "fC" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/map_template/hydrobase/station/shipaccess)
 "fD" = (
@@ -2836,7 +2797,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/dockport)
 "gp" = (
-/obj/effect/wingrille_spawn/reinforced_phoron/full,
+/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/map_template/hydrobase/station/dockport)
@@ -3091,7 +3052,7 @@ aa
 aa
 aa
 aa
-cv
+aa
 aa
 aa
 aa
@@ -3731,7 +3692,7 @@ aa
 aa
 aa
 aa
-aj
+aa
 al
 ao
 aq
@@ -3763,7 +3724,7 @@ av
 aq
 gI
 al
-al
+aa
 "}
 (18,1,1) = {"
 aa
@@ -4023,7 +3984,7 @@ aa
 aa
 aa
 aw
-aH
+aG
 aV
 be
 bm
@@ -4038,7 +3999,7 @@ aK
 dM
 ej
 ex
-eV
+ez
 ep
 fC
 fO
@@ -4065,7 +4026,7 @@ aa
 aa
 ax
 aI
-aW
+aG
 aW
 aw
 bA
