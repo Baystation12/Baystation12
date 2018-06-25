@@ -521,6 +521,8 @@
 			return global.gear_tweak_free_color_choice_;
 		if("gender_datums")
 			return global.gender_datums;
+		if("orion_password")
+			return global.orion_password;
 		if("ghost_darkness_images")
 			return global.ghost_darkness_images;
 		if("ghost_role_manager")
@@ -1744,6 +1746,8 @@
 			global.gear_tweak_free_color_choice_=newval;
 		if("gender_datums")
 			global.gender_datums=newval;
+		if("orion_password")
+			global.orion_password=newval;
 		if("ghost_darkness_images")
 			global.ghost_darkness_images=newval;
 		if("ghost_role_manager")
@@ -2706,6 +2710,7 @@
 	"gear_datums",
 	"gear_tweak_free_color_choice_",
 	"gender_datums",
+	"orion_password",
 	"ghost_darkness_images",
 	"ghost_role_manager",
 	"ghost_sightless_images",
