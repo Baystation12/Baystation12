@@ -4,7 +4,7 @@
 	icon_state = "liver"
 	w_class = ITEM_SIZE_SMALL
 	organ_tag = BP_LIVER
-	parent_organ = BP_GROIN
+	parent_organ = BP_CHEST
 	min_bruised_damage = 25
 	min_broken_damage = 45
 	max_damage = 70
