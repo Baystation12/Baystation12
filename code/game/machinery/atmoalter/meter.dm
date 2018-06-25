@@ -3,7 +3,7 @@
 	desc = "A gas flow meter."
 	icon = 'icons/obj/meter.dmi'
 	icon_state = "meterX"
-	var/obj/machinery/atmospherics/pipe/target = null
+	var/atom/target = null //A pipe for the base type
 	anchored = 1.0
 	power_channel = ENVIRON
 	var/frequency = 0
@@ -14,7 +14,21 @@
 /obj/machinery/meter/Initialize()
 	. = ..()
 	if (!target)
-		src.target = locate(/obj/machinery/atmospherics/pipe) in loc
+		set_target(locate(/obj/machinery/atmospherics/pipe) in loc)
+
+/obj/machinery/meter/proc/set_target(atom/new_target)
+	clear_target()
+	target = new_target
+	GLOB.destroyed_event.register(target, src, .proc/clear_target)
+
+/obj/machinery/meter/proc/clear_target()
+	if(target)
+		GLOB.destroyed_event.unregister(target, src)
+		target = null	
+
+/obj/machinery/meter/Destroy()
+	clear_target()
+	. = ..()
 
 /obj/machinery/meter/Process()
 	if(!target)
@@ -103,16 +117,9 @@
 
 // TURF METER - REPORTS A TILE'S AIR CONTENTS
 
-/obj/machinery/meter/turf/New()
-	..()
-	src.target = loc
-	return 1
-
-
 /obj/machinery/meter/turf/Initialize()
-	. = ..()
 	if (!target)
-		src.target = loc
+		set_target(loc)
+	. = ..()
 
 /obj/machinery/meter/turf/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	return

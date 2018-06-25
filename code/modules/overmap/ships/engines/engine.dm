@@ -41,7 +41,7 @@ var/list/ship_engines = list()
 	return 1
 
 /datum/ship_engine/Destroy()
-	..()
+	. = ..()
 	ship_engines -= src
 	var/obj/effect/overmap/ship/S = map_sectors["[holder.z]"]
 	if(istype(S))

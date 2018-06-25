@@ -23,6 +23,8 @@
 	for(var/obj/machinery/atmospherics/pipe/P in members)
 		P.parent = null
 	leaks.Cut()
+	members.Cut()
+	edges.Cut()
 	. = ..()
 
 /datum/pipeline/Process()//This use to be called called from the pipe networks
