@@ -120,7 +120,7 @@
 		buildstage = 0
 		wiresexposed = 1
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
-		pixel_y = (dir & 3)? (dir ==1 ? -28 : 23) : 0
+		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
 		update_icon()
 		frame.transfer_fingerprints_to(src)
 
@@ -335,9 +335,9 @@
 	var/turf/T = get_step(get_turf(src), turn(dir, 180))
 	if(istype(T) && T.density)
 		if(dir == NORTH)
-			pixel_y = -28
+			pixel_y = -21
 		else if(dir == SOUTH)
-			pixel_y = 23
+			pixel_y = 21
 		else if(dir == WEST)
 			pixel_x = 21
 		else if(dir == EAST)
@@ -911,9 +911,9 @@ FIRE ALARM
 	var/turf/T = get_step(get_turf(src), walldir)
 	if(istype(T) && T.density)
 		if(dir == SOUTH)
-			pixel_y = 23
+			pixel_y = 21
 		else if(dir == NORTH)
-			pixel_y = -28
+			pixel_y = -21
 		else if(dir == EAST)
 			pixel_x = 21
 		else if(dir == WEST)
@@ -1142,7 +1142,7 @@ FIRE ALARM
 		buildstage = 0
 		wiresexposed = 1
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
-		pixel_y = (dir & 3)? (dir ==1 ? -28 : 23) : 0
+		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
 		frame.transfer_fingerprints_to(src)
 
 /obj/machinery/firealarm/Initialize()
