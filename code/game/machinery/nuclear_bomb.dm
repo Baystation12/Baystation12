@@ -2,7 +2,7 @@ var/bomb_set
 
 /obj/machinery/nuclearbomb
 	name = "\improper Nuclear Fission Explosive"
-	desc = "Uh oh. RUN!!!!"
+	desc = "Uh oh. RUN!"
 	icon = 'icons/obj/nuke.dmi'
 	icon_state = "idle"
 	density = 1
@@ -24,6 +24,7 @@ var/bomb_set
 	var/previous_level = ""
 	var/datum/wires/nuclearbomb/wires = null
 	var/decl/security_level/original_level
+	var/self_destruct_cutoff = 60 //In seconds. Only affects station subtype.
 
 /obj/machinery/nuclearbomb/New()
 	..()
@@ -291,11 +292,16 @@ var/bomb_set
 					timing = 1
 					log_and_message_admins("activated the detonation countdown of \the [src]")
 					bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
+					visible_message("<span class='warning'>Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff] seconds before detonation.</span>")
 					var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 					original_level = security_state.current_security_level
 					security_state.set_security_level(security_state.severe_security_level, TRUE)
 					update_icon()
-				else
+					ship_blasts()
+				else 
+					if(timeleft <= self_destruct_cutoff)
+						visible_message("<span class='warning'>Self-destruct abort is no longer possible.</span>")
+						return
 					secure_device()
 
 			if(href_list["safety"])
@@ -348,6 +354,9 @@ var/bomb_set
 	update_icon()
 
 	SetUniversalState(/datum/universal_state/nuclear_explosion, arguments=list(src))
+
+/obj/machinery/nuclearbomb/proc/ship_blasts()
+	return
 
 /obj/machinery/nuclearbomb/update_icon()
 	if(lighthack)
@@ -419,9 +428,9 @@ var/bomb_set
 	. = ..()
 	var/obj/item/weapon/paper/R = new(src)
 	R.set_content("<center><img src=sollogo.png><br><br>\
-	<b>Warning: Classified<br>[GLOB.using_map.station_name] Self Destruct System - Instructions</b></center><br><br>\
+	<b>Warning: Classified<br>[GLOB.using_map.station_name] Self-Destruct System - Instructions</b></center><br><br>\
 	In the event of a Delta-level emergency, this document will guide you through the activation of the vessel's \
-	on-board nuclear self destruct system. Please read carefully.<br><br>\
+	on-board nuclear self-destruct system. Please read carefully.<br><br>\
 	1) (Optional) Announce the imminent activation to any surviving crew members, and begin evacuation procedures.<br>\
 	2) Notify two heads of staff, both with ID cards with access to the ship's Keycard Authentication Devices.<br>\
 	3) Proceed to the self-destruct chamber, located on Deck One by the stairwell.<br>\
@@ -494,6 +503,33 @@ var/bomb_set
 /obj/machinery/nuclearbomb/station/Destroy()
 	flash_tiles.Cut()
 	return ..()
+
+/obj/machinery/nuclearbomb/station/ship_blasts()
+	var/announced = 0
+	var/range
+	var/high_intensity
+	var/low_intensity
+	while(timing > 0 || !ticker.current_state == GAME_STATE_FINISHED)
+		if(timeleft <= self_destruct_cutoff && !announced)
+			priority_announcement.Announce("The self-destruct sequence has reached terminal countdown, abort systems have been disabled.", "Self-Destruct Control Computer")
+			announced = 1
+		if(timeleft in 0 to self_destruct_cutoff/2)
+			range = rand(2, 3)
+			high_intensity = rand(5,8)
+			low_intensity = rand(7,10)
+		else
+			range = rand(1, 2)
+			high_intensity = rand(3, 6)
+			low_intensity = rand(5, 8)
+		if(timeleft in 0 to self_destruct_cutoff/2)
+			var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
+			explosion(T, range, high_intensity, low_intensity)
+			sleep(30)
+		else if(timeleft in self_destruct_cutoff/2 + 1 to self_destruct_cutoff)
+			var/turf/T = pick_area_and_turf(GLOB.is_station_but_not_space_or_shuttle_area)
+			explosion(T, range, high_intensity, low_intensity)
+			sleep(60)
+		sleep(10)
 
 /obj/machinery/nuclearbomb/station/update_icon()
 	var/target_icon_state
