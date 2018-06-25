@@ -46,6 +46,8 @@
 		var/obj/structure/deity/altar/altar = A
 		if(!altar.linked_god.silenced) //Don't want them to infinity spam it.
 			altar.linked_god.silence(10)
+			new /obj/effect/temporary(get_turf(altar),'icons/effects/effects.dmi',"purple_electricity_constant", 10)
+			altar.visible_message("<span class='notice'>\The [altar] groans in protest as reality settles around \the [src].</span>")
 
 	if(istype(A, /turf/simulated/wall/cult))
 		var/turf/simulated/wall/cult/W = A
