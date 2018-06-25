@@ -60,6 +60,11 @@
 			new /obj/item/stack/rods(src.loc)
 			qdel(src)
 
+/obj/structure/catwalk/attack_hand(mob/user)
+	if(user.pulling)
+		do_pull_click(user, src)
+	..()
+
 /obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
 	if(isWelder(C))
 		var/obj/item/weapon/weldingtool/WT = C
