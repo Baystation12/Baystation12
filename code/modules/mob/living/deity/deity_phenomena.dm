@@ -57,7 +57,6 @@
 
 /mob/living/deity/proc/remove_phenomena(var/to_remove)
 	var/datum/phenomena/P = phenomenas[to_remove]
-	phenomenas[to_remove] = null
 	phenomenas -= to_remove
 	for(var/intent in intent_phenomenas)
 		var/list/intent_list = intent_phenomenas[intent]

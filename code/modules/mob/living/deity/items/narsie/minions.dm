@@ -17,7 +17,7 @@
 	desc = "Give a vessel to a follower filled with infection so vile, it turns all sapient creatures into mindless husks."
 	category = DEITY_TREE_DARK_MINION
 	requirements = list(DEITY_TREE_DARK_MINION = 1)
-	base_cost = 1000
+	base_cost = 300
 	boon_path = /obj/item/weapon/reagent_containers/food/drinks/zombiedrink
 
 /datum/deity_item/boon/tear_veil
