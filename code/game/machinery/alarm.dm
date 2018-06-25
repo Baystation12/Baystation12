@@ -119,8 +119,8 @@
 	if(istype(frame))
 		buildstage = 0
 		wiresexposed = 1
-		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
-		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
+		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
+		pixel_y = (dir & 3)? (dir ==1 ? -28 : 23) : 0
 		update_icon()
 		frame.transfer_fingerprints_to(src)
 
@@ -148,6 +148,7 @@
 	set_frequency(frequency)
 	if (!master_is_operating())
 		elect_master()
+	update_icon()
 
 /obj/machinery/alarm/Process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
@@ -328,6 +329,19 @@
 		if (2)
 			icon_state = "alarm1"
 			new_color = COLOR_RED_LIGHT
+
+	pixel_x = 0
+	pixel_y = 0
+	var/turf/T = get_step(get_turf(src), turn(dir, 180))
+	if(istype(T) && T.density)
+		if(dir == NORTH)
+			pixel_y = -28
+		else if(dir == SOUTH)
+			pixel_y = 23
+		else if(dir == WEST)
+			pixel_x = 21
+		else if(dir == EAST)
+			pixel_x = -21
 
 	set_light(0.25, 0.1, 1, 2, new_color)
 
@@ -899,11 +913,11 @@ FIRE ALARM
 		if(dir == SOUTH)
 			pixel_y = 23
 		else if(dir == NORTH)
-			pixel_y = -23
+			pixel_y = -28
 		else if(dir == EAST)
-			pixel_x = 23
+			pixel_x = 21
 		else if(dir == WEST)
-			pixel_x = -23
+			pixel_x = -21
 
 	if(wiresexposed)
 		switch(buildstage)
@@ -1127,8 +1141,8 @@ FIRE ALARM
 	if(istype(frame))
 		buildstage = 0
 		wiresexposed = 1
-		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
-		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
+		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
+		pixel_y = (dir & 3)? (dir ==1 ? -28 : 23) : 0
 		frame.transfer_fingerprints_to(src)
 
 /obj/machinery/firealarm/Initialize()
