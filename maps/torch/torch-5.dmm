@@ -754,7 +754,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/heads/cobed)
 "bM" = (
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = -6;
 	pixel_y = 24
 	},
@@ -860,7 +860,7 @@
 /area/maintenance/substation/bridge)
 "cg" = (
 /obj/effect/floor_decal/corner/grey/three_quarters,
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 0;
 	pixel_y = -24
 	},
@@ -4127,7 +4127,7 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/ce)
 "jM" = (
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 24;
 	pixel_y = 0
 	},
@@ -5508,7 +5508,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 0;
 	pixel_y = 24
 	},
@@ -9268,6 +9268,14 @@
 	icon_state = "techfloor_edges";
 	dir = 1
 	},
+/obj/machinery/button/remote/airlock{
+	id = "bridgesafedoor";
+	name = "safe room door-control";
+	pixel_x = 0;
+	pixel_y = 32;
+	req_access = newlist();
+	specialfunctions = 4
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/crew_quarters/safe_room/bridge)
 "tZ" = (
@@ -10594,7 +10602,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 0;
 	pixel_y = -24
 	},
@@ -10700,7 +10708,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sgr)
 "wL" = (
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 0;
 	pixel_y = -24
 	},
@@ -12234,7 +12242,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 38;
 	pixel_y = 0
 	},
@@ -12332,7 +12340,7 @@
 /obj/machinery/photocopier/faxmachine{
 	department = "CMO"
 	},
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 0;
 	pixel_y = -24
 	},
@@ -12531,7 +12539,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 38;
 	pixel_y = 0
 	},
@@ -13172,13 +13180,6 @@
 	id_tag = "bridgesafedoor";
 	name = "Bridge Safe Room"
 	},
-/obj/machinery/button/remote/airlock{
-	id = "bridgesafedoor";
-	name = "safe room door-control";
-	pixel_x = -32;
-	req_access = list(19);
-	specialfunctions = 4
-	},
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -13707,7 +13708,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 24;
 	pixel_y = 6
 	},
@@ -15844,7 +15845,7 @@
 /area/bridge/meeting_room)
 "Zf" = (
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = 0;
 	pixel_y = -24
 	},

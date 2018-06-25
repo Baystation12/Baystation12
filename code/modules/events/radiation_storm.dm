@@ -12,7 +12,7 @@
 	command_announcement.Announce("High levels of radiation detected in proximity of the [location_name()]. Please evacuate into one of the shielded maintenance tunnels.", "[location_name()] Sensor Array", new_sound = GLOB.using_map.radiation_detected_sound, zlevels = affecting_z)
 
 /datum/event/radiation_storm/start()
-	make_maint_all_access()
+	GLOB.using_map.make_maint_all_access(1)
 
 /datum/event/radiation_storm/tick()
 	if(activeFor == enterBelt)
@@ -51,7 +51,7 @@
 					domutcheck(H,null,MUTCHK_FORCED)
 
 /datum/event/radiation_storm/end()
-	revoke_maint_all_access()
+	GLOB.using_map.revoke_maint_all_access(1)
 
 /datum/event/radiation_storm/syndicate/radiate()
 	return

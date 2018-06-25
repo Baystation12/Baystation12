@@ -4273,13 +4273,6 @@
 	id_tag = "civsafedoor";
 	name = "Third Deck Safe Room"
 	},
-/obj/machinery/button/remote/airlock{
-	id = "civsafedoor";
-	name = "safe room door-control";
-	pixel_x = 32;
-	req_access = list(19);
-	specialfunctions = 4
-	},
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
 	d1 = 1;
@@ -4636,6 +4629,13 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/button/remote/airlock{
+	id = "civsafedoor";
+	name = "safe room door-control";
+	pixel_x = 32;
+	req_access = newlist();
+	specialfunctions = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/thirddeck)
 "jR" = (
@@ -5556,13 +5556,6 @@
 /obj/machinery/door/airlock/vault/bolted{
 	id_tag = "civsafedoorport";
 	name = "Third Deck Safe Room"
-	},
-/obj/machinery/button/remote/airlock{
-	id = "civsafedoorport";
-	name = "safe room door-control";
-	pixel_x = 32;
-	req_access = list(19);
-	specialfunctions = 4
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -8552,7 +8545,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = -24;
 	pixel_y = 0
 	},
@@ -20192,6 +20185,14 @@
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
 	dir = 6
+	},
+/obj/machinery/button/remote/airlock{
+	id = "civsafedoorport";
+	name = "safe room door-control";
+	pixel_x = 0;
+	pixel_y = -32;
+	req_access = newlist();
+	specialfunctions = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
