@@ -30,7 +30,7 @@
 /datum/phenomena/forced_conversion
 	name = "Forced Conversion"
 	desc = "Force a non-follower to join you. They need to be on top of an altar and conscious for this to work. They may resist, but that will hurt them."
-	cost = 50
+	cost = 100
 	flags = PHENOMENA_NONFOLLOWER
 	expected_type = /mob/living
 

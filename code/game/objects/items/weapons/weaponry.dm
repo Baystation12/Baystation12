@@ -42,6 +42,11 @@
 	if(!proximity)
 		return
 
+	if(istype(A, /obj/structure/deity/altar))
+		var/obj/structure/deity/altar/altar = A
+		if(!altar.linked_god.silenced) //Don't want them to infinity spam it.
+			altar.linked_god.silence(10)
+
 	if(istype(A, /turf/simulated/wall/cult))
 		var/turf/simulated/wall/cult/W = A
 		user.visible_message("<span class='notice'>\The [user] touches \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>", "<span class='notice'>You touch \the [A] with \the [src], and the enchantment affecting it fizzles away.</span>")
