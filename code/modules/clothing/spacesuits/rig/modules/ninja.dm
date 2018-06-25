@@ -50,7 +50,7 @@
 	if(H.remove_cloaking_source(src))
 		anim(get_turf(H), H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
 		anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
-	
+
 	// We still play the sound, even if not visibly uncloaking. Ninjas are not that stealthy.
 	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
 
@@ -222,7 +222,7 @@
 
 	explosion(get_turf(src), explosion_values[1], explosion_values[2], explosion_values[3], explosion_values[4])
 	if(holder && holder.wearer)
-		holder.wearer.drop_from_inventory(src)
+		holder.wearer.gib()
 		qdel(holder)
 	qdel(src)
 
