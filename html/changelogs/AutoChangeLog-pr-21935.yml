@@ -1,0 +1,6 @@
+author: "Cakey"
+delete-after: True
+changes: 
+  - maptweak: "Following several reports of Torch crew being admitted to the infirmary due to headaches the Torch has been refurbished once again to iron out any kinks left over from the flooring construction work."
+  - imageadd: "New floor sprites have been added."
+  - imageadd: "New wall-mounted sprites have been added for fire alarms, air alarms, APCs and intercomms"
