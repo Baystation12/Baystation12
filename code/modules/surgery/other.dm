@@ -206,6 +206,7 @@
 	if (trans > 0)
 		user.visible_message("<span class='notice'>[user] rubs [target]'s [affected.name] down with \the [tool]'s contents</span>.", \
 			"<span class='notice'>You rub [target]'s [affected.name] down with \the [tool]'s contents.</span>")
+	affected.disinfect()
 	qdel(temp_reagents)
 	qdel(temp_holder)
 
