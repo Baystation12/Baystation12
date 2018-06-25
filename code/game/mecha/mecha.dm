@@ -705,6 +705,8 @@
 		src.check_for_internal_damage(list(MECHA_INT_FIRE, MECHA_INT_TEMP_CONTROL))
 	return
 
+/obj/mecha/is_burnable()
+	return TRUE
 
 //////////////////////
 ////// AttackBy //////

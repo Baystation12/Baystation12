@@ -57,11 +57,6 @@
 		/area/syndicate_mothership,
 		/area/syndicate_mothership/elite_squad,
 		/area/wizard_station,
-		/area/exoplanet,
-		/area/exoplanet/desert,
-		/area/exoplanet/grass,
-		/area/exoplanet/snow,
-		/area/exoplanet/garbage,
 		/area/template_noop,
 		/area/map_template,
 		/area/map_template/little_house
@@ -69,6 +64,7 @@
 
 	var/list/area_usage_test_exempted_root_areas = list(
 		/area/map_template/hydrobase,
+		/area/exoplanet
 	)
 
 	var/list/area_purity_test_exempt_areas = list()

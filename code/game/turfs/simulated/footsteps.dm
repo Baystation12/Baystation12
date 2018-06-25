@@ -7,6 +7,7 @@
 #define FOOTSTEP_WATER		"water"
 #define FOOTSTEP_BLANK		"blank"
 #define FOOTSTEP_CATWALK	"catwalk"
+#define FOOTSTEP_LAVA		"lava"
 
 /turf/simulated/floor/var/global/list/footstep_sounds = list(
 	FOOTSTEP_WOOD = list(
@@ -49,6 +50,10 @@
 		'sound/effects/footstep/water2.ogg',
 		'sound/effects/footstep/water3.ogg',
 		'sound/effects/footstep/water4.ogg'),
+	FOOTSTEP_LAVA = list(
+		'sound/effects/footstep/lava1.ogg',
+		'sound/effects/footstep/lava2.ogg',
+		'sound/effects/footstep/lava3.ogg'),
 	FOOTSTEP_BLANK = list(
 		'sound/effects/footstep/blank.ogg')
 )
