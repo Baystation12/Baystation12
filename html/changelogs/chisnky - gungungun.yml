@@ -1,0 +1,10 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Weapons skill now has mechanical effects, hide yo children hide yo wife."
+  - rscadd: "Gist of it is if you don't have at least basic training, you're a hazard to people. You can point and fire, but safety can be a bitch."
+  - rscadd: "Speakig of safety, help intent doesn't prevent firing now. Safety is now an explicit toggle, can switch it with Ctrl-Click on the gun or with a rightclick verb."
+  - rscadd: "Higher values of skill give some buffs to accuracy, and unlikely events of jamming, also let you perform better when in pain."
+  - rscadd: "Professional skill also has bonuses when using scoped rifles."
+  - rscadd: "Weapons skil cost was changed too. Trained and higher are more expensive now, with Experienced and Professional being as costly as medical skill. MAAs start at Trained now to give them headstart."
+ 
