@@ -70,6 +70,59 @@ Torch specific items
 	desc = "A rugged backpack worn over one shoulder."
 	icon_state = "courierbagexp"
 
+/obj/item/weapon/storage/box/ranks
+	name = "box of Expeditionary Corps enlisted rank pins"
+	desc = "A box containing an assortment of spare Expeditionary Corps rank pins for enlisted personnel"
+	icon = 'maps/torch/icons/obj/storage.dmi'
+	icon_state = "ranks_ec_enlisted"
+	startswith = list(/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e3 = 4,
+					/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e5 = 4,
+					/obj/item/clothing/accessory/solgov/rank/ec/enlisted/e7 = 4)
+
+
+/obj/item/weapon/storage/box/ranks/Initialize()
+	. = ..()
+	make_exact_fit()
+
+/obj/item/weapon/storage/box/ranks/officer
+	name = "box of Expeditionary Corps officer rank pins"
+	desc = "A box containing an assortment of spare Expeditionary Corps rank pins for commisioned officers"
+	icon_state = "ranks_ec_officer"
+	startswith = list(/obj/item/clothing/accessory/solgov/rank/ec/officer = 3,
+					/obj/item/clothing/accessory/solgov/rank/ec/officer/o3 = 3,
+					/obj/item/clothing/accessory/solgov/rank/ec/officer/o5 = 2,
+					/obj/item/clothing/accessory/solgov/rank/ec/officer/o6 = 1,
+					/obj/item/clothing/accessory/solgov/rank/ec/officer/o8 = 1)
+
+/obj/item/weapon/storage/box/ranks/fleet
+	name = "box of Fleet officer rank tabs"
+	desc = "A box containing an assortment of spare Fleet rank tabs for commissioned officers"
+	icon_state = "ranks_fleet_officer"
+	startswith = list(/obj/item/clothing/accessory/solgov/rank/fleet/officer = 2,
+					/obj/item/clothing/accessory/solgov/rank/fleet/officer/o2 = 2,
+					/obj/item/clothing/accessory/solgov/rank/fleet/officer/o3 = 2,
+					/obj/item/clothing/accessory/solgov/rank/fleet/officer/o4 = 2,
+					/obj/item/clothing/accessory/solgov/rank/fleet/officer/o5 = 1,
+					/obj/item/clothing/accessory/solgov/rank/fleet/officer/o6 = 1)
+
+/obj/item/weapon/storage/box/large/ranks/fleet
+	name = "box of Fleet enlisted rate tabs"
+	desc = "A large box containing an assortment of spare Fleet rate tabs for enlisted personnel"
+	icon = 'maps/torch/icons/obj/storage.dmi'
+	icon_state = "rates_fleet_enlisted"
+	startswith = list(/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e2 = 3,
+					/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e3 = 3,
+					/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e4 = 3,
+					/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e5 = 3,
+					/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e6 = 3,
+					/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e7 = 2,
+					/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e8 = 2,
+					/obj/item/clothing/accessory/solgov/rank/fleet/enlisted/e9 = 1)
+
+/obj/item/weapon/storage/box/large/ranks/fleet/Initialize()
+	. = ..()
+	make_exact_fit()
+
 /***********
 Unique items
 ***********/
@@ -135,6 +188,6 @@ Weapons
 
 /obj/effect/paint/hull
 	color = COLOR_HULL
-	
+
 /obj/effect/paint/expeditionary
 	color = "#68099e"
