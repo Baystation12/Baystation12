@@ -60,6 +60,8 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/blue,
+		/obj/item/weapon/storage/box/ranks,
+		/obj/item/weapon/storage/box/ranks/officer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/captain, /obj/item/weapon/storage/backpack/satchel_cap)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/captain, /obj/item/weapon/storage/backpack/messenger/com)),
 		/obj/item/weapon/storage/box/imprinting
@@ -88,6 +90,8 @@
 		/obj/item/weapon/clipboard,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/blue,
+		/obj/item/weapon/storage/box/ranks/fleet,
+		/obj/item/weapon/storage/box/large/ranks/fleet,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag, /obj/item/weapon/storage/backpack/messenger))
 	)
