@@ -71,12 +71,14 @@ medals
 	name = "\improper Torch mission patch"
 	desc = "A fire resistant shoulder patch, worn by the personnel involved in the Torch Project."
 	icon_state = "torchpatch"
+	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
 
 /obj/item/clothing/accessory/solgov/fleet_patch
 	name = "\improper First Fleet patch"
 	desc = "A fancy shoulder patch carrying insignia of First Fleet, the Sol Guard, stationed in Sol."
 	icon_state = "fleetpatch1"
+	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
 
 /obj/item/clothing/accessory/solgov/fleet_patch/second
@@ -106,6 +108,7 @@ ribbons
 	name = "ribbon"
 	desc = "A simple military decoration."
 	icon_state = "ribbon_marksman"
+	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_MEDAL
 	icon = 'maps/torch/icons/obj/solgov-accessory.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'maps/torch/icons/mob/solgov-accessory.dmi', slot_wear_suit_str = 'maps/torch/icons/mob/solgov-accessory.dmi')
