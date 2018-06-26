@@ -14,6 +14,8 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	leader_welcome_text = "You shouldn't see this"
 	landmark_id = "Response Team"
 	id_type = /obj/item/weapon/card/id/centcom/ERT
+	var/outfit_type = /decl/hierarchy/outfit/ert
+	var/leader_outfit_type = /decl/hierarchy/outfit/ert
 
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
 	antaghud_indicator = "hudloyalist"
@@ -30,7 +32,7 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 
 /datum/antagonist/ert/Initialize()
 	..()
-	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to [GLOB.using_map.boss_name], and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
+	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to [GLOB.using_map.company_name], and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
 
 /datum/antagonist/ert/greet(var/datum/mind/player)
 	if(!..())
@@ -40,12 +42,27 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 
 /datum/antagonist/ert/equip(var/mob/living/carbon/human/player)
 
-	//Special radio setup
-	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(src), slot_l_ear)
-	player.equip_to_slot_or_del(new /obj/item/clothing/under/ert(src), slot_w_uniform)
-	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(src), slot_shoes)
-	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/thick/swat(src), slot_gloves)
-	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(src), slot_glasses)
+	if(!..())
+		return 0
+	if(player.mind == leader)
+		var/decl/hierarchy/outfit/ert_outfit = outfit_by_type(leader_outfit_type)
+		ert_outfit.equip(player)
+	else
+		var/decl/hierarchy/outfit/ert_outfit = outfit_by_type(outfit_type)
+		ert_outfit.equip(player)
 
-	create_id(role_text, player)
+	//mostly for Torch's military stuff like rank boards, but can be useful for other maps
+	if(player.char_rank && player.char_rank.accessory)
+		for(var/accessory_path in player.char_rank.accessory)
+			var/list/accessory_data = player.char_rank.accessory[accessory_path]
+			if(islist(accessory_data))
+				var/amt = accessory_data[1]
+				var/list/accessory_args = accessory_data.Copy()
+				accessory_args[1] = src
+				for(var/i in 1 to amt)
+					player.equip_to_slot_or_del(new accessory_path(arglist(accessory_args)), slot_tie)
+			else
+				for(var/i in 1 to (isnull(accessory_data)? 1 : accessory_data))
+					player.equip_to_slot_or_del(new accessory_path(src), slot_tie)
+
 	return 1

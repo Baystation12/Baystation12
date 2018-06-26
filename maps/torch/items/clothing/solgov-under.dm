@@ -166,6 +166,8 @@
 /obj/item/clothing/under/solgov/utility/fleet/combat/medical
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet, /obj/item/clothing/accessory/armband/medblue)
 
+/obj/item/clothing/under/solgov/utility/fleet/combat/command
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
 
 /obj/item/clothing/under/solgov/utility/marine
 	name = "marine fatigues"
