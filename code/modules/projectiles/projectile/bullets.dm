@@ -122,10 +122,11 @@
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 
 /obj/item/projectile/bullet/pistol
-	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot_9mm.ogg'
 	damage = 25 //9mm, .38, etc
 
 /obj/item/projectile/bullet/pistol/medium
+	fire_sound = 'sound/weapons/gunshot/gunshot_45.ogg'
 	damage = 26.5 //.45
 
 /obj/item/projectile/bullet/pistol/medium/smg
@@ -148,6 +149,7 @@
 
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
+	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	check_armour = "melee"
 	damage = 5
 	agony = 30
@@ -188,7 +190,7 @@
 	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a556
-	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
+	fire_sound = 'sound/weapons/gunshot/gunshot_556.ogg'
 	damage = 30
 
 /obj/item/projectile/bullet/rifle/a762
