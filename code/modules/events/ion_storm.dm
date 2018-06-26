@@ -143,3 +143,7 @@
 		return L.name
 	else // Highly unlikely but it is a failsafe fallback.
 		return "Gibberish."
+
+/datum/event/ionstorm/overmap/start()
+	..()
+	computer_damage_event(severity)
