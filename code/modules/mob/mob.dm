@@ -20,6 +20,9 @@
 	..()
 	return QDEL_HINT_HARDDEL
 
+/mob/proc/flash_weak_pain()
+	flick("weak_pain",pain)
+
 /mob/proc/remove_screen_obj_references()
 	hands = null
 	pullin = null
