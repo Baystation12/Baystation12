@@ -16,3 +16,19 @@
 
 /datum/antagonist/traitor
 	blacklisted_jobs = list(/datum/job/merchant, /datum/job/captain, /datum/job/hop)
+
+/datum/antagonist/ert
+	outfit_type = /decl/hierarchy/outfit/job/torch/ert
+	leader_outfit_type = /decl/hierarchy/outfit/job/torch/ert/leader
+
+/datum/antagonist/ert/equip(var/mob/living/carbon/human/player)
+	player.char_branch = mil_branches.get_branch("Fleet")
+	if(player.mind == leader)
+		player.char_rank = mil_branches.get_rank("Fleet", "Lieutenant")
+	else
+		switch(rand(1,2))
+			if(1)
+				player.char_rank = mil_branches.get_rank("Fleet", "Petty Officer Second Class")
+			if(2)
+				player.char_rank = mil_branches.get_rank("Fleet", "Petty Officer First Class")
+	..()
