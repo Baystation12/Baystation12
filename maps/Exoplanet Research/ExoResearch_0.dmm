@@ -81,7 +81,7 @@
 "bC" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/outer{base_turf = /turf/simulated/floor/exoplanet/desert})
 "bD" = (/obj/effect/dummy/spell_jaunt,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/outer{base_turf = /turf/simulated/floor/exoplanet/desert})
 "bE" = (/obj/effect/overmap/sector/exo_research,/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/outer{base_turf = /turf/simulated/floor/exoplanet/desert})
-"bF" = (/obj/effect/landmark/map_data{height = 4; name = "Research Map Data"},/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/exo_research_facility/outer{base_turf = /turf/simulated/floor/exoplanet/desert})
+"bF" = (/obj/effect/landmark/map_data{height = 4},/turf/unsimulated/wall{tag = "icon-rock-dark"; icon_state = "rock-dark"},/area/exo_research_facility/outer{base_turf = /turf/simulated/floor/exoplanet/desert})
 "bG" = (/turf/unsimulated/floor/rock2,/area/exo_research_facility/outer{base_turf = /turf/simulated/floor/exoplanet/desert})
 
 (1,1,1) = {"

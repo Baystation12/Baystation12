@@ -15,6 +15,8 @@
 	#include "../geminus_city/geminus_city_jobs.dm"
 	#include "../geminus_city/geminus_city_spawns.dm"
 
+	#include "../Exoplanet Research/includes.dm"
+
 	#include "../geminus_city/geminuscity_2.dmm"
 	#include "../geminus_city/geminuscity_3.dmm"
 	#include "../geminus_city/geminuscity_4.dmm"
@@ -24,6 +26,10 @@
 	#include "../insurrection/insurrection_jobs.dm"
 	#include "../insurrection/insurrection_spawns.dm"
 
+	#include "../Asteroid Listening Post/includes.dm"
+
+	#include "../Exoplanet Icy/includes.dm"
+
 	#include "../insurrection/innie_base_areas.dm"
 	#include "../insurrection/innie_base4.dmm"
 	#include "../insurrection/innie_base3.dmm"
@@ -31,12 +37,6 @@
 	#include "../insurrection/innie_base1.dmm"
 
 	#include "unsc_frigate_spawndefs_innies_geminus.dm"
-
-	#include "../Exoplanet Research/includes.dm"
-
-	#include "../Asteroid Listening Post/includes.dm"
-
-	#include "../Exoplanet Icy/includes.dm"
 
 	#include "../Exoplanet Mining/includes.dm"
 
