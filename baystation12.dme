@@ -1532,6 +1532,7 @@
 #include "code\modules\halo\structures\closets.dm"
 #include "code\modules\halo\structures\cryopod.dm"
 #include "code\modules\halo\structures\drop_pods.dm"
+#include "code\modules\halo\structures\electric_fence.dm"
 #include "code\modules\halo\structures\gunvendors.dm"
 #include "code\modules\halo\structures\misc_structures.dm"
 #include "code\modules\halo\structures\sandbag.dm"
