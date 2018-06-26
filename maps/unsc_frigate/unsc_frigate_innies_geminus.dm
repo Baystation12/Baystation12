@@ -32,9 +32,9 @@
 
 	#include "unsc_frigate_spawndefs_innies_geminus.dm"
 
-	#include "../Asteroid Listening Post/includes.dm"
-
 	#include "../Exoplanet Research/includes.dm"
+
+	#include "../Asteroid Listening Post/includes.dm"
 
 	#include "../Exoplanet Icy/includes.dm"
 
