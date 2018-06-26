@@ -92,7 +92,7 @@
 	var/species_modifier = economic_species_modifier[H.species.type]
 
 	var/money_amount = (rand(5,50) + rand(5, 50)) * loyalty * economic_modifier * species_modifier * GLOB.using_map.salary_modifier
-	money_amount *= 1 + (H.get_skill_value(SKILL_FINANCE) - SKILL_EXPERT)/(SKILL_MAX - SKILL_MIN)
+	money_amount *= 1 + 2 * H.get_skill_value(SKILL_FINANCE)/(SKILL_MAX - SKILL_MIN)
 	money_amount = round(money_amount)
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
 	if(H.mind)
