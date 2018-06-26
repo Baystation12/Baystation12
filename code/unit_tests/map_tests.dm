@@ -481,6 +481,24 @@ datum/unit_test/ladder_check/start_test()
 
 //=======================================================================================
 
+/datum/unit_test/pipes_shall_not_have_leaks
+	name = "MAP: Pipes shall not have leaks"
+
+/datum/unit_test/pipes_shall_not_have_leaks/start_test()
+	var/failures = 0
+	for (var/datum/pipe_network/PN in SSmachines.machinery)
+		for (var/obj/machinery/atmospherics/pipe/P in PN.leaks)
+			log_bad("Following pipe has a leak: [P]")
+			failures++
+	if(failures)
+		fail("[failures] pipe\s [failures > 1 ? "are" : "is"] leaking.")
+	else
+		pass("No pipes are leaking.")
+	return 1
+
+
+//=======================================================================================
+
 /datum/unit_test/shutoff_valves_shall_connect_to_two_different_pipe_networks
 	name = "MAP: Shutoff valves shall connect to two different pipe networks"
 
