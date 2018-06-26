@@ -340,3 +340,121 @@
 	desc = "This is a decorative shrub. It's been trimmed into the shape of an apple."
 	icon_state = "applebush"
 
+/obj/structure/flora/vietnam/bigbush
+	name = "bush"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "bush1"
+	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+
+/obj/structure/flora/vietnam/mediumbush
+	name = "bush"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "bush2"
+	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+
+/obj/structure/flora/vietnam/smallbush
+	name = "bush"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "bush3"
+	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+
+/obj/structure/flora/vietnam/bush1
+	name = "bush"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "bush4"
+	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+
+/obj/structure/flora/vietnam/bush1l
+	name = "bush"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "bush4l"
+	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+
+/obj/structure/flora/vietnam/bush2
+	name = "bush"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "bush5"
+	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+
+/obj/structure/flora/vietnam/bush3
+	name = "bush"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "bush6"
+	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+
+/obj/structure/flora/vietnam/grass
+	name = "tall grass"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "grass1"
+	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+
+/obj/structure/flora/tree/vietnam/oldtree
+	name = "Old tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "oldtree"
+
+/obj/structure/flora/tree/vietnam/tree1
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree1"
+
+/obj/structure/flora/tree/vietnam/tree2
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree2"
+
+/obj/structure/flora/tree/vietnam/tree3
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree3"
+
+/obj/structure/flora/tree/vietnam/tree4
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree4"
+
+/obj/structure/flora/tree/vietnam/tree5
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree5"
+
+/obj/structure/flora/tree/vietnam/tree6
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree6"
+
+/obj/structure/flora/tree/vietnam/tree7
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree7"
+
+/obj/structure/flora/tree/vietnam/tree8
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree8"
+
+/obj/structure/flora/tree/vietnam/tree9
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree9"
+
+/obj/structure/flora/tree/vietnam/tree10
+	name = "Tree"
+	icon = 'icons/vietnam/floratree.dmi'
+	icon_state = "tree10"
