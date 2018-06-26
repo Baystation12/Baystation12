@@ -124,7 +124,7 @@
 		O.ordernum = supply_controller.ordernum
 		O.object = P
 		O.orderedby = idname
-		O.reason = reason
+		O.reason = rustoutf(reason)
 		O.orderedrank = idrank
 		O.comment = "#[O.ordernum]"
 		supply_controller.requestlist += O
