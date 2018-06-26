@@ -216,7 +216,7 @@
 	update_underlays()
 
 /obj/machinery/atmospherics/tvalve/build_network()
-	if(!network_node1 && node1)
+	if(!network_node1 && node1)				
 		network_node1 = new /datum/pipe_network()
 		network_node1.normal_members += src
 		network_node1.build_network(node1, src)
