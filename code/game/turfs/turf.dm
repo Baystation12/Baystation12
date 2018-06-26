@@ -54,15 +54,6 @@
 
 /turf/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	if (user.lying  && !user.anchored && !user.restrained() && ishuman(user)) //Because do_after's aren't actually interrupted by most things unfortunately.
-		for (var/obj/item/grab/G in user.grabbed_by)
-			if(G.stop_move())
-				return
-		var/area/A = loc
-		if((!(A.has_gravity)) || (istype(src,/turf/space)))
-			return
-		if(do_after(user, 8 + (user.weakened * 2) , incapacitation_flags = ~INCAPACITATION_FORCELYING))
-			step_towards(user, src)
 
 	if(user.restrained())
 		return 0
