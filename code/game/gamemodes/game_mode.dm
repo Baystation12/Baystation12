@@ -25,7 +25,7 @@ var/global/list/additional_antag_types = list()
 	var/list/antag_templates                 // Extra antagonist types to include.
 	var/list/latejoin_antag_tags = list()        // Antags that may auto-spawn, latejoin or otherwise come in midround.
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
-	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
+	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count. How many players for one antag
 	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
 	var/addantag_allowed = ADDANTAG_ADMIN | ADDANTAG_AUTO
 
