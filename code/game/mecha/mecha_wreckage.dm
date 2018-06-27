@@ -200,3 +200,23 @@
 /obj/effect/decal/mecha_wreckage/hoverpod
 	name = "Hover pod wreckage"
 	icon_state = "engineering_pod-broken"
+
+
+/obj/effect/decal/mecha_wreckage/hrunting
+	name = "HRUNTING/YGGDRASIL Mark I ADS wreckage"
+	icon_state = "Hrunting-broken"
+
+	New()
+		..()
+		var/list/parts = list(/obj/item/mecha_parts/part/hrunting_torso,
+									/obj/item/mecha_parts/part/hrunting_head,
+									/obj/item/mecha_parts/part/hrunting_left_arm,
+									/obj/item/mecha_parts/part/hrunting_right_arm,
+									/obj/item/mecha_parts/part/hrunting_left_leg,
+									/obj/item/mecha_parts/part/hrunting_right_leg)
+		for(var/i=0;i<2;i++)
+			if(!isemptylist(parts) && prob(40))
+				var/part = pick(parts)
+				welder_salvage += part
+				parts -= part
+		return
