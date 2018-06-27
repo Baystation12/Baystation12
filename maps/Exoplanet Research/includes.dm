@@ -2,7 +2,7 @@
 #include "overmap.dm"
 #include "areas.dm"
 #include "spawn_jobs.dm"
-#include "lifts.dm"
+#include "lift.dm"
 
 #include "../geminus_city/areas.dm"
 #include "../geminus_city/citymapturfs.dm"
