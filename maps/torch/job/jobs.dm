@@ -18,9 +18,9 @@
 	allowed_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos,
 						/datum/job/liaison, /datum/job/representative, /datum/job/sea,
 						/datum/job/bridgeofficer, /datum/job/pathfinder, /datum/job/explorer,
-						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist,
+						/datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_contractor, /datum/job/roboticist, /datum/job/engineer_trainee,
 						/datum/job/officer, /datum/job/warden, /datum/job/detective,
-						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist,
+						/datum/job/senior_doctor, /datum/job/doctor, /datum/job/doctor_contractor,/datum/job/chemist, /datum/job/medical_trainee,
 						/datum/job/psychiatrist,
 						/datum/job/qm, /datum/job/cargo_tech, /datum/job/cargo_contractor,
 						/datum/job/janitor, /datum/job/chef, /datum/job/bartender,
@@ -606,6 +606,54 @@
 /datum/job/engineer_contractor/get_description_blurb()
 	return "You are an Engineering Contractor. Hired for either general maintenance duties or because of your specialist training and knowledge in a specific area of engineering you are either highly skilled or intermediate in your knowledge of engineering tasks related to your profession. You are subordinate to the rest of the engineering team."
 
+/datum/job/engineer_trainee
+	title = "Engineer Trainee"
+	department = "Engineering"
+	department_flag = ENG
+
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Chief Engineer and Engineering Personnel"
+	selection_color = "#5b4d20"
+	ideal_character_age = 20
+
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/fleet/e2,
+	)
+
+	skill_points = 4
+	no_skill_buffs = TRUE
+
+	min_skill = list(	SKILL_COMPUTER     = SKILL_BASIC,
+						SKILL_HAULING      = SKILL_ADEPT,
+						SKILL_EVA          = SKILL_ADEPT,
+						SKILL_CONSTRUCTION = SKILL_ADEPT,
+						SKILL_ELECTRICAL   = SKILL_ADEPT,
+						SKILL_ATMOS        = SKILL_ADEPT,
+						SKILL_ENGINES      = SKILL_ADEPT)
+
+	access = list(access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_eva, access_tech_storage, access_janitor, access_construction,
+			            access_solgov_crew, access_hangar)
+
+	software_on_spawn = list(/datum/computer_file/program/power_monitor,
+							 /datum/computer_file/program/supermatter_monitor,
+							 /datum/computer_file/program/alarm_monitor,
+							 /datum/computer_file/program/atmos_control,
+							 /datum/computer_file/program/rcon_console,
+							 /datum/computer_file/program/camera_monitor,
+							 /datum/computer_file/program/shields_monitor)
+
+/datum/job/engineer_trainee/get_description_blurb()
+	return "You are an Engineer Trainee. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard."
+
+
 /datum/job/roboticist
 	title = "Roboticist"
 	department = "Engineering"
@@ -849,6 +897,44 @@
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
 
+/datum/job/medical_trainee
+	title = "Corpsman Trainee"
+	department = "Medical"
+	department_flag = MED
+
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Chief Medical Officer and Medical Personnel"
+	selection_color = "#013d3b"
+	ideal_character_age = 20
+
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/fleet/e2
+	)
+
+	skill_points = 4
+	no_skill_buffs = TRUE
+
+	min_skill = list(	SKILL_EVA     = SKILL_ADEPT,
+						SKILL_HAULING = SKILL_ADEPT,
+						SKILL_MEDICAL = SKILL_EXPERT,
+						SKILL_ANATOMY = SKILL_BASIC)
+
+	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+			            access_surgery, access_medical_equip, access_solgov_crew)
+
+	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
+							 /datum/computer_file/program/camera_monitor)
+
+/datum/job/medical_trainee/get_description_blurb()
+	return "You are a Corpsman Trainee. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team."
+
 /datum/job/chemist
 	title = "Chemist"
 	department = "Medical"
@@ -1075,10 +1161,6 @@
 	supervisors = "the Executive Officer and SolGov Personnel"
 	selection_color = "#515151"
 	ideal_character_age = 20
-	alt_titles = list(
-		"Engineer Trainee",
-		"Corpsman Trainee",
-		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
