@@ -406,6 +406,7 @@
 
 /obj/structure/flora/tree/vietnam/oldtree
 	name = "Old tree"
+	desc = "THEY ARE ON THE TREES!"
 	icon = 'icons/vietnam/floratree.dmi'
 	icon_state = "oldtree"
 
@@ -458,3 +459,39 @@
 	name = "Tree"
 	icon = 'icons/vietnam/floratree.dmi'
 	icon_state = "tree10"
+
+/obj/structure/flora/tree/vietnam/stump
+	name = "Stump"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "penek"
+
+/obj/structure/flora/tree/vietnam/stump1
+	name = "Stump"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "penek1"
+
+/obj/structure/flora/tree/vietnam/stump2
+	name = "Stump"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "penek2"
+
+/obj/structure/flora/tree/vietnam/stump3
+	name = "Stump"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "penek3"
+
+/obj/structure/flora/tree/vietnam/stump4
+	name = "Stump"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "penek4
+
+/obj/structure/flora/tree/vietnam/stump5
+	name = "Stump"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "penek5"
+
+/obj/structure/flora/tree/vietnam/spidoznygribok
+	name = "AID mushroom"
+	desc = "Lovely food of ANIMUS player's"
+	icon = 'icons/vietnam/flora.dmi'
+	icon_state = "spidoznygrib"
