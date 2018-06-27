@@ -81,8 +81,9 @@
 /obj/item/weapon/gun/projectile/automatic/m16
 	name = "M16"
 	desc = "Mostly used weapon in Vietnam war. The serial number has been scratched off. Uses 5.56mm rounds."
-	icon_state = "arifle"
-	item_state = null
+	icon = 'icons/vietnam/usable/weapons.dmi'
+	icon_state = "m16"
+	item_state = "m16hand"
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	caliber = "a556"
@@ -92,7 +93,7 @@
 	magazine_type = /obj/item/ammo_magazine/c556
 	allowed_magazines = /obj/item/ammo_magazine/c556
 	one_hand_penalty = 3
-	wielded_item_state = "arifle-wielded"
+	wielded_item_state = "m16hand"
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
 	firemodes = list(
@@ -102,8 +103,8 @@
 		)
 
 /obj/item/weapon/gun/projectile/autosmatic/m16/update_icon()
-	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
-	wielded_item_state = (ammo_magazine)? "arifle-wielded" : "arifle-wielded-empty"
+	icon_state = (ammo_magazine)? "m16" : "m16-empty"
+	wielded_item_state = (ammo_magazine)? "m16-hand" : "m16-hand-empty"
 	..()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
