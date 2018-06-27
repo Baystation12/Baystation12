@@ -316,6 +316,65 @@
 	time = 60
 	materials = list(DEFAULT_WALL_MATERIAL = 50000, "uranium" = 10000)
 
+/datum/design/item/mechfab/hrunting
+	category = "HRUNTING/YGGDRASIL Mark I ADS"
+
+/datum/design/item/mechfab/hrunting/chassis
+	name = "HRUNTING/YGGDRASIL Mark I ADS chassis"
+	id = "hrunting_chassis"
+	build_path = /obj/item/mecha_parts/chassis/hrunting
+	time = 10
+	materials = list(DEFAULT_WALL_MATERIAL = 25000)
+
+/datum/design/item/mechfab/hrunting/torso
+	name = "HRUNTING/YGGDRASIL Mark I ADS torso"
+	id = "hrunting_torso"
+	build_path = /obj/item/mecha_parts/part/hrunting_torso
+	time = 30
+	materials = list(DEFAULT_WALL_MATERIAL = 50000, "glass" = 20000)
+
+/datum/design/item/mechfab/hrunting/head
+	name = "HRUNTING/YGGDRASIL Mark I ADS head"
+	id = "hrunting_head"
+	build_path = /obj/item/mecha_parts/part/hrunting_head
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 20000, "glass" = 10000)
+
+/datum/design/item/mechfab/hrunting/left_arm
+	name = "HRUNTING/YGGDRASIL Mark I ADS left arm"
+	id = "hrunting_left_arm"
+	build_path = /obj/item/mecha_parts/part/hrunting_left_arm
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 30000)
+
+/datum/design/item/mechfab/hrunting/right_arm
+	name = "HRUNTING/YGGDRASIL Mark I ADS right arm"
+	id = "hrunting_right_arm"
+	build_path = /obj/item/mecha_parts/part/hrunting_right_arm
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 30000)
+
+/datum/design/item/mechfab/hrunting/left_leg
+	name = "HRUNTING/YGGDRASIL Mark I ADS left leg"
+	id = "hrunting_left_leg"
+	build_path = /obj/item/mecha_parts/part/hrunting_left_leg
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 35000)
+
+/datum/design/item/mechfab/hrunting/right_leg
+	name = "HRUNTING/YGGDRASIL Mark I ADS right leg"
+	id = "hrunting_right_leg"
+	build_path = /obj/item/mecha_parts/part/hrunting_right_leg
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 35000)
+
+/datum/design/item/mechfab/hrunting/armour
+	name = "HRUNTING/YGGDRASIL Mark I ADS armour plates"
+	id = "hrunting_armour"
+	build_path = /obj/item/mecha_parts/part/hrunting_armour
+	time = 60
+	materials = list(DEFAULT_WALL_MATERIAL = 50000, "diamond" = 10000)
+
 /datum/design/item/robot_upgrade
 	build_type = MECHFAB
 	time = 12
@@ -420,7 +479,7 @@
 	name = "Cable layer"
 	id = "mech_cable_layer"
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/cable_layer
-	
+
 /datum/design/item/mecha/flaregun
 	name = "Flare launcher"
 	id = "mecha_flare_gun"

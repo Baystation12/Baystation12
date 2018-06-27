@@ -84,5 +84,21 @@
 		name = T_BOARD_MECHA("Odysseus central control")
 		icon_state = "mainboard"
 
+/obj/item/weapon/circuitboard/mecha/hrunting
+		origin_tech = list(TECH_DATA = 4)
+
+/obj/item/weapon/circuitboard/mecha/hrunting/peripherals
+		name = T_BOARD_MECHA("HRUNTING/YGGDRASIL Mark I ADS peripherals control")
+		icon_state = "mcontroller"
+
+/obj/item/weapon/circuitboard/mecha/hrunting/targeting
+		name = T_BOARD_MECHA("HRUNTING/YGGDRASIL Mark I ADS weapon control and targeting")
+		icon_state = "mcontroller"
+		origin_tech = list(TECH_DATA = 4, TECH_COMBAT = 4)
+
+/obj/item/weapon/circuitboard/mecha/hrunting/main
+		name = T_BOARD_MECHA("HRUNTING/YGGDRASIL Mark I ADS central control")
+		icon_state = "mainboard"
+
 //Undef the macro, shouldn't be needed anywhere else
 #undef T_BOARD_MECHA
