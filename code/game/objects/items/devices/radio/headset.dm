@@ -268,7 +268,7 @@
 	desc = "Headset used by dwarves. It has an inbuilt subspace antenna for better reception."
 	icon_state = "mine_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_sci
+	ks1type = /obj/item/device/encryptionkey/headset_mining
 
 /obj/item/device/radio/headset/headset_mining/alt
 	name = "mining bowman radio headset"

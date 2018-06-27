@@ -134,4 +134,4 @@
 	desc = "A headset for cool-tempered smugglers, cocky flyboys, and bus-drivers like you. It has an inbuilt subspace antenna for better reception."
 	icon_state = "pilot_headset_alt"
 	item_state = "pilot_headset_alt"
-	ks1type = /obj/item/device/encryptionkey/headset_sci
+	ks1type = /obj/item/device/encryptionkey/headset_pilot
