@@ -7233,13 +7233,6 @@
 	id_tag = "engsafedoor";
 	name = "Second Deck Safe Room"
 	},
-/obj/machinery/button/remote/airlock{
-	id = "engsafedoor";
-	name = "safe room door-control";
-	pixel_y = -32;
-	req_access = list(19);
-	specialfunctions = 4
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/seconddeck)
 "pk" = (
@@ -7331,13 +7324,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/machinery/button/remote/airlock{
-	id = "engrearsafedoor";
-	name = "safe room door-control";
-	pixel_y = 32;
-	req_access = list(19);
-	specialfunctions = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/seconddeck)
@@ -7561,6 +7547,13 @@
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
+	},
+/obj/machinery/button/remote/airlock{
+	id = "engrearsafedoor";
+	name = "safe room door-control";
+	pixel_y = -32;
+	req_access = newlist();
+	specialfunctions = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/seconddeck)
@@ -7963,6 +7956,10 @@
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
 	dir = 9
+	},
+/obj/machinery/camera/network/second_deck{
+	c_tag = "Second Deck - Safe Room Atomspherics";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/seconddeck)
@@ -8793,7 +8790,7 @@
 	req_access = list(10);
 	specialfunctions = 4
 	},
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = -24;
 	pixel_y = 0
 	},
@@ -11277,6 +11274,10 @@
 /obj/effect/floor_decal/techfloor{
 	icon_state = "techfloor_edges";
 	dir = 5
+	},
+/obj/machinery/camera/network/second_deck{
+	c_tag = "Second Deck - Safe Room";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/seconddeck)
@@ -17769,10 +17770,6 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
-/obj/machinery/camera/network/second_deck{
-	c_tag = "Second Deck - Safe Room";
-	dir = 1
-	},
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
@@ -17862,6 +17859,16 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
+"YX" = (
+/obj/machinery/button/remote/airlock{
+	id = "engsafedoor";
+	name = "safe room door-control";
+	pixel_y = -32;
+	req_access = newlist();
+	specialfunctions = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/crew_quarters/safe_room/seconddeck)
 "YZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	icon_state = "intact";
@@ -34134,7 +34141,7 @@ Wi
 jV
 jV
 jV
-pk
+YX
 jV
 jV
 jV

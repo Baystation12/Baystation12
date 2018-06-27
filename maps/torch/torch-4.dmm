@@ -3865,6 +3865,10 @@
 	icon_state = "techfloor_edges";
 	dir = 9
 	},
+/obj/machinery/camera/network/first_deck{
+	c_tag = "First Deck - Safe Room Entrance";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
 "aiP" = (
@@ -4271,6 +4275,14 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/effect/floor_decal/techfloor,
+/obj/machinery/button/remote/airlock{
+	id = "meetingsafedoor";
+	name = "safe room door-control";
+	pixel_x = 0;
+	pixel_y = -32;
+	req_access = newlist();
+	specialfunctions = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
 "ajR" = (
@@ -4304,6 +4316,14 @@
 	icon_state = "techfloor_edges";
 	dir = 6
 	},
+/obj/machinery/button/remote/airlock{
+	id = "opssafedoor";
+	name = "safe room door-control";
+	pixel_x = 32;
+	pixel_y = 32;
+	req_access = newlist();
+	specialfunctions = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
 "ajT" = (
@@ -4322,13 +4342,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/machinery/button/remote/airlock{
-	id = "opssafedoor";
-	name = "safe room door-control";
-	pixel_y = 32;
-	req_access = list(19);
-	specialfunctions = 4
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/safe_room/firstdeck)
@@ -18915,13 +18928,6 @@
 	id_tag = "meetingsafedoor";
 	name = "Operations Safe Room"
 	},
-/obj/machinery/button/remote/airlock{
-	id = "meetingsafedoor";
-	name = "safe room door-control";
-	pixel_x = -32;
-	req_access = list(19);
-	specialfunctions = 4
-	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/safe_room/firstdeck)
@@ -24328,7 +24334,7 @@
 	icon_state = "warning";
 	dir = 1
 	},
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = -28
 	},
 /turf/simulated/floor/blackgrid,
@@ -24709,7 +24715,7 @@
 /area/command/captainmess)
 "nnb" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/keycard_auth{
+/obj/machinery/keycard_auth/torch{
 	pixel_x = -28
 	},
 /turf/simulated/floor/blackgrid,
