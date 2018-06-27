@@ -1,0 +1,4 @@
+author: "sabiram"
+delete-after: True
+changes: 
+  - tweak: "Catwalks now act as floors do with regards to clicking to move pulled objects onto them."
