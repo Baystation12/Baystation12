@@ -9,6 +9,16 @@
 	throwpass = 1
 	var/health = 50
 
+/obj/structure/barricadeunsc
+	name = "Barricade"
+	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon_state = "barricade"
+	density = 1
+	anchored = 1
+	flags = ON_BORDER
+	throwpass = 1
+	var/health = 100
+
 /obj/structure/sandbag/New()
 	..()
 	if(dir == 2)

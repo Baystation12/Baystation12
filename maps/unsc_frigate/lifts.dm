@@ -29,7 +29,6 @@
 /area/turbolift/unscfrigate/lifts/lift_3_fourth
 	name = "Deck 1"
 
-
 /obj/turbolift_map_holder/cargolift/unsc_frigate
 	dir = SOUTH
 	depth = 4

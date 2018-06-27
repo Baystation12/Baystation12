@@ -122,8 +122,8 @@ GLOBAL_LIST_EMPTY(facil_comms_spawns)
 
 /datum/job/ONIGUARD
 	title = "ONI Security Guard"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 7
+	spawn_positions = 7
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARDS
 	selection_color = "#008000"
 	access = list(311)
