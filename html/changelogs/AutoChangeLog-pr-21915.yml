@@ -1,4 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - tweak: "Moves crawling onto regular movement, fixes crawling while hurt."

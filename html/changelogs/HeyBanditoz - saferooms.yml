@@ -1,6 +1,0 @@
-author: Banditoz
-delete-after: True
-changes: 
-  - rscadd: "Saferooms can now be bolted and unbolted via the keycard authentication device."
-  - rscadd: "If there is an impending delamination, supermatter delamination, or escalation to red alert, saferooms will unbolt."
-  - maptweak: "The button to toggle the saferoom bolts have been moved inside of the saferoom, and can now be operated by all."
