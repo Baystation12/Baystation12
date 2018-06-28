@@ -485,7 +485,7 @@
 		to_chat(user, "<span class='danger'>That brain is not usable.</span>")
 		return SURGERY_FAILURE
 
-	if(!(affected.robotic >= ORGAN_ROBOT))
+	if(!target.isSynthetic())
 		to_chat(user, "<span class='danger'>You cannot install a computer brain into a meat body.</span>")
 		return SURGERY_FAILURE
 
