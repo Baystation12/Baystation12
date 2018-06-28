@@ -1,6 +1,6 @@
 /obj/item/weapon/rig/ert
-	name = "asset protection command hardsuit control module"
-	desc = "A hardsuit used by many corporate and private asset protection forces. Has blue highlights. Armoured and space ready."
+	name = "emergency response command hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has blue highlights. Armoured and space ready."
 	suit_type = "Asset Protection command"
 	icon_state = "ert_commander_rig"
 
@@ -40,8 +40,8 @@
 
 
 /obj/item/weapon/rig/ert/engineer
-	name = "asset protection engineering hardsuit control module"
-	desc = "A hardsuit used by many corporate and private asset protection forces. Has orange highlights. Armoured and space ready."
+	name = "emergency response engineering hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has orange highlights. Armoured and space ready."
 	suit_type = "Asset Protection engineer"
 	icon_state = "ert_engineer_rig"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 15, bomb = 30, bio = 100, rad = 100)
@@ -60,8 +60,8 @@
 	siemens_coefficient = 0
 
 /obj/item/weapon/rig/ert/janitor
-	name = "asset protection sanitation hardsuit control module"
-	desc = "A hardsuit used by many corporate and private asset protection forces. Has purple highlights. Armoured and space ready."
+	name = "emergency response sanitation hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has purple highlights. Armoured and space ready."
 	suit_type = "Asset Protection sanitation"
 	icon_state = "ert_janitor_rig"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 40, bomb = 40, bio = 100, rad = 100)
@@ -76,8 +76,8 @@
 		)
 
 /obj/item/weapon/rig/ert/medical
-	name = "asset protection medical hardsuit control module"
-	desc = "A hardsuit used by many corporate and private asset protection forces. Has white highlights. Armoured and space ready."
+	name = "emergency response medical hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has white highlights. Armoured and space ready."
 	suit_type = "Asset Protection medic"
 	icon_state = "ert_medical_rig"
 
@@ -90,8 +90,8 @@
 		)
 
 /obj/item/weapon/rig/ert/security
-	name = "asset protection security hardsuit control module"
-	desc = "A hardsuit used by many corporate and private asset protection forces. Has red highlights. Armoured and space ready."
+	name = "emergency response security hardsuit control module"
+	desc = "A hardsuit used by many corporate and governmental emergency response forces. Has red highlights. Armoured and space ready."
 	suit_type = "Asset Protection security"
 	icon_state = "ert_security_rig"
 
@@ -104,8 +104,8 @@
 		)
 
 /obj/item/weapon/rig/ert/assetprotection
-	name = "heavy asset protection suit control module"
-	desc = "A heavy, modified version of a common asset protection hardsuit. Has blood red highlights.  Armoured and space ready."
+	name = "heavy emergency response suit control module"
+	desc = "A heavy, modified version of a common emergency response hardsuit. Has blood red highlights.  Armoured and space ready."
 	suit_type = "heavy asset protection"
 	icon_state = "asset_protection_rig"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 40, bomb = 40, bio = 100, rad = 100)
