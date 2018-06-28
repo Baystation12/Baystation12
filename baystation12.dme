@@ -270,6 +270,7 @@
 #include "code\datums\music_tracks\lysendraa.dm"
 #include "code\datums\music_tracks\marhaba.dm"
 #include "code\datums\music_tracks\one_loop.dm"
+#include "code\datums\music_tracks\pwmur.dm"
 #include "code\datums\music_tracks\space_oddity.dm"
 #include "code\datums\music_tracks\thunderdome.dm"
 #include "code\datums\music_tracks\title1.dm"
