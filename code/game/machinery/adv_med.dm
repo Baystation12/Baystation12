@@ -76,15 +76,9 @@
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
 	if(!istype(G))
 		return ..()
-	if (!ismob(G.affecting))
-		return
-	if (src.occupant)
-		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
-		return
-	if (G.affecting.abiotic())
-		to_chat(user, "<span class='warning'>Subject cannot have abiotic items on.</span>")
-		return
 	var/mob/M = G.affecting
+	if(!user_can_move_target_inside(M, user))
+		return
 	M.forceMove(src)
 	src.occupant = M
 	update_use_power(2)
