@@ -217,9 +217,12 @@ var/list/organ_cache = list()
 	if (germ_level < INFECTION_LEVEL_ONE)
 		germ_level = 0	//cure instantly
 	else if (germ_level < INFECTION_LEVEL_TWO)
-		germ_level -= 3	//at germ_level == 500, this should cure the infection in 5 minutes
-	else if(!owner || owner.lying) // at this point, you need to get rest to feel better
-		germ_level -= 1 //at germ_level == 1000, this will cure the infection in 10 minutes
+		germ_level -= 5	//at germ_level == 500, this should cure the infection in 5 minutes
+	else 
+		germ_level -= 3 //at germ_level == 1000, this will cure the infection in 10 minutes
+	if(owner && owner.lying)
+		germ_level -= 2
+	germ_level = max(0, germ_level)
 
 //Note: external organs have their own version of this proc
 /obj/item/organ/proc/take_damage(amount, var/silent=0)

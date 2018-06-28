@@ -1,0 +1,5 @@
+author: Chinsky
+delete-after: True
+changes: 
+  - rscadd: "Added anti-rad pouches to engineering. Also replaced detox injector engies get in survival box with anti-rad one."
+  - rscdel: "Removes mapped boomboxes from engineering. Nice try, but you'll have to do with random spawnpoints as everyone."

@@ -20,6 +20,7 @@
 	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
+	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
 
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
@@ -803,3 +804,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/ID = GetIdCard()
 	if(ID)
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"
+
+/obj/item/is_burnable()
+	return simulated
+
+/obj/item/lava_act()
+	. = (!throwing) ? ..() : FALSE

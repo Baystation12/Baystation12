@@ -125,7 +125,7 @@
 	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 
 /obj/item/weapon/shield/buckler/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
-	if(istype(damage_source, /obj/item/projectile))
+	if(istype(damage_source, /obj/item/projectile/bullet))
 		return 0 //No blocking bullets, I'm afraid.
 	return base_block_chance
 

@@ -746,6 +746,15 @@
 /datum/sprite_accessory/hair/buzzcut2
 	name = "Buzzcut 2"
 	icon_state = "hair_buzzcut2"
+	
+/datum/sprite_accessory/hair/sideundercut
+	name = "Side Undercut"
+	icon_state = "hair_sideundercut"
+	flags = VERY_SHORT
+
+/datum/sprite_accessory/hair/bighawk
+	name = "Big Mohawk"
+	icon_state = "hair_bighawk"
 
 /*
 ///////////////////////////////////

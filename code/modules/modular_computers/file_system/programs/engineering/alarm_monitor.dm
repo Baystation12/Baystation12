@@ -44,7 +44,7 @@
 
 /datum/nano_module/alarm_monitor/all/New()
 	..()
-	alarm_handlers = alarm_manager.all_handlers
+	alarm_handlers = SSalarm.all_handlers
 
 /datum/nano_module/alarm_monitor/engineering/New()
 	..()

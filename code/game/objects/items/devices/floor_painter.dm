@@ -60,23 +60,24 @@
 		"red" = 			COLOR_RED,
 		"sky blue" =   		COLOR_DEEP_SKY_BLUE,
 		"titanium" =     	COLOR_TITANIUM,
-		"hull blue" = 		COLOR_HULL,
 		"violet" = 			COLOR_VIOLET,
 		"white" =        	COLOR_WHITE,
-		"yellow" =       	COLOR_AMBER
+		"yellow" =       	COLOR_AMBER,
+		"hull blue" = 		COLOR_HULL,
+		"bulkhead black" =	COLOR_GUNMETAL
 		)
 
 
-/obj/item/device/floor_painter/afterattack(var/atom/A, var/mob/user, proximity, params)
+/obj/item/device/floor_painter/resolve_attackby(var/atom/A, var/mob/user, proximity, params)
 	if(!proximity)
 		return
+
+	add_fingerprint(user)
 
 	if(color_picker)
 		paint_colour = A.get_color()
 		to_chat(usr, "<span class='notice'>You set \the [src] to paint with <font color='[paint_colour]'>a new colour</font>.</span>")
 		return
-
-	playsound(get_turf(src), 'sound/effects/spray3.ogg', 30, 1, -6)
 
 	var/turf/simulated/wall/W = A
 	if(istype(W))
@@ -165,6 +166,7 @@
 	if(decal_data["coloured"] && paint_colour)
 		painting_colour = paint_colour
 
+	playsound(get_turf(src), 'sound/effects/spray3.ogg', 30, 1, -6)
 	new painting_decal(F, painting_dir, painting_colour)
 
 /obj/item/device/floor_painter/attack_self(var/mob/user)

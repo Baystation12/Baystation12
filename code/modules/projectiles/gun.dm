@@ -71,6 +71,7 @@
 
 	var/sel_mode = 1 //index of the currently selected mode
 	var/list/firemodes = list()
+	var/selector_sound = 'sound/weapons/guns/selector.ogg'
 
 	//aiming system stuff
 	var/keep_aim = 1 	//1 for keep shooting until aim is lowered
@@ -80,6 +81,9 @@
 	var/tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
+	var/tmp/last_safety_check = -INFINITY
+	var/safety_state = 0
+	var/has_safety = TRUE
 
 /obj/item/weapon/gun/New()
 	..()
@@ -95,15 +99,18 @@
 	..()
 
 /obj/item/weapon/gun/update_icon()
-	if(wielded_item_state)
-		var/mob/living/M = loc
-		if(istype(M))
+	var/mob/living/M = loc
+	overlays.Cut()
+	if(istype(M))
+		if(wielded_item_state)
 			if(M.can_wield_item(src) && src.is_held_twohanded(M))
 				item_state_slots[slot_l_hand_str] = wielded_item_state
 				item_state_slots[slot_r_hand_str] = wielded_item_state
 			else
 				item_state_slots[slot_l_hand_str] = initial(item_state)
 				item_state_slots[slot_r_hand_str] = initial(item_state)
+		if(M.skill_check(SKILL_WEAPONS,SKILL_BASIC))
+			overlays += image(icon,"safety[safety()]")
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
@@ -116,6 +123,10 @@
 		return 0
 
 	var/mob/living/M = user
+	if(!safety() && world.time > last_safety_check + 5 MINUTES && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
+		if(prob(30))
+			toggle_safety()
+			return 1
 	if(HULK in M.mutations)
 		to_chat(M, "<span class='danger'>Your fingers are much too large for the trigger guard!</span>")
 		return 0
@@ -148,10 +159,7 @@
 		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
 		return
 
-	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
-		to_chat(user, "<span class='warning'>You refrain from firing \the [src] as your intent is set to help.</span>")
-	else
-		Fire(A,user,params) //Otherwise, fire normally.
+	Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/weapon/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == BP_MOUTH && !mouthshoot)
@@ -160,6 +168,16 @@
 		Fire(A, user, pointblank=1)
 	else
 		return ..() //Pistolwhippin'
+
+/obj/item/weapon/gun/dropped(var/mob/living/user)
+	if(istype(user))
+		if(!safety() && prob(5) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC) && special_check(user))
+			to_chat(user, "<span class='warning'>[src] fires on its own!</span>")
+			var/list/targets = list(user)
+			targets += trange(2, src)
+			afterattack(pick(targets), user)
+	update_icon()
+	return ..()
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
@@ -170,11 +188,16 @@
 	if(!special_check(user))
 		return
 
+	if(safety())
+		handle_click_empty(user)
+		return
+
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
 		return
 
+	last_safety_check = world.time
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
 	user.setMoveCooldown(shoot_time) //no moving while shooting either
@@ -321,6 +344,10 @@
 			acc_mod += -ceil(one_hand_penalty/2)
 			disp_mod += one_hand_penalty*0.5 //dispersion per point of two-handedness
 
+	if(burst > 1 && !user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+		acc_mod -= 1 
+		disp_mod += 0.5
+
 	//Accuracy modifiers
 	P.accuracy = accuracy + acc_mod
 	P.dispersion = disp_mod
@@ -425,6 +452,8 @@
 	zoom(user, zoom_offset, view_size)
 	if(zoom)
 		accuracy = scoped_accuracy + scoped_accuracy_mod
+		if(user.skill_check(SKILL_WEAPONS, SKILL_PROF))
+			accuracy += 2
 		if(screen_shake)
 			screen_shake = round(screen_shake*zoom_amount+1) //screen shake is worse when looking through a scope
 
@@ -437,9 +466,12 @@
 
 /obj/item/weapon/gun/examine(mob/user)
 	. = ..()
-	if(firemodes.len > 1)
-		var/datum/firemode/current_mode = firemodes[sel_mode]
-		to_chat(user, "The fire selector is set to [current_mode.name].")
+	if(user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
+		if(firemodes.len > 1)
+			var/datum/firemode/current_mode = firemodes[sel_mode]
+			to_chat(user, "The fire selector is set to [current_mode.name].")
+	to_chat(user, "The safety is [safety() ? "on" : "off"].")
+	last_safety_check = world.time
 
 /obj/item/weapon/gun/proc/switch_firemodes()
 
@@ -450,7 +482,7 @@
 	sel_mode = next_mode
 	var/datum/firemode/new_mode = firemodes[sel_mode]
 	new_mode.apply_to(src)
-
+	playsound(loc, selector_sound, 50, 1)
 	return new_mode
 
 /obj/item/weapon/gun/proc/get_next_firemode()
@@ -462,6 +494,35 @@
 
 /obj/item/weapon/gun/attack_self(mob/user)
 	var/datum/firemode/new_mode = switch_firemodes(user)
+	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
+		new_mode = switch_firemodes(user)
 	if(new_mode)
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
+/obj/item/weapon/gun/proc/toggle_safety(var/mob/user)
+	safety_state = !safety_state
+	update_icon()
+	if(user)
+		to_chat(user, "<span class='notice'>You switch the safety [safety_state ? "on" : "off"] on [src].</span>")
+		last_safety_check = world.time
+		playsound(src, 'sound/weapons/flipblade.ogg', 30, 1)
+
+/obj/item/weapon/gun/verb/toggle_safety_verb()
+	set src in usr
+	set category = "Object"
+	set name = "Toggle Gun Safety"
+	if(usr == loc)
+		toggle_safety(usr)
+
+/obj/item/weapon/gun/CtrlClick(var/mob/user)
+	if(loc == user)
+		toggle_safety(user)
+	else
+		..()
+
+/obj/item/weapon/gun/proc/safety()
+	return has_safety && safety_state
+
+/obj/item/weapon/gun/attack_hand()
+	..()
+	update_icon()

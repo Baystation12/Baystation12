@@ -75,7 +75,7 @@
 obj/machinery/air_sensor/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src,frequency)
-	..()
+	. = ..()
 
 /obj/machinery/computer/general_air_control
 	icon = 'icons/obj/computer.dmi'

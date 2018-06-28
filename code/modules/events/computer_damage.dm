@@ -1,4 +1,7 @@
 /datum/event/computer_damage/start()
+	computer_damage_event(severity)
+
+/proc/computer_damage_event(var/severity)
 	var/number_of_victims = 0
 	switch(severity)
 		if(EVENT_LEVEL_MUNDANE)
@@ -20,6 +23,6 @@
 		else
 			victim.visible_message("<span class='warning'>[victim] emits some omnious clicks.</span>")
 			if(prob(60))
-				victim.hard_drive.damage = victim.hard_drive.damage_failure
+				victim.hard_drive.take_damage(victim.hard_drive.damage_failure)
 			else
-				victim.hard_drive.damage = victim.hard_drive.damage_malfunction
+				victim.hard_drive.take_damage(victim.hard_drive.damage_malfunction)

@@ -56,7 +56,7 @@
 	if(H.stat != CONSCIOUS)
 		return
 	if(prob(33) && isturf(H.loc) && !H.pulledby) //won't move if being pulled
-		H.SelfMove(GLOB.cardinal)
+		H.SelfMove(pick(GLOB.cardinal))
 	if(prob(1))
 		H.emote(pick("scratch","jump","roll","tail"))
 

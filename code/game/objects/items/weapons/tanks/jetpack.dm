@@ -53,7 +53,7 @@
 
 	to_chat(usr, "You toggle the thrusters [on? "on":"off"].")
 
-/obj/item/weapon/tank/jetpack/proc/allow_thrust(num, mob/living/user as mob)
+/obj/item/weapon/tank/jetpack/proc/allow_thrust(num, mob/living/user)
 	if(!(src.on))
 		return 0
 	if((num < 0.005 || src.air_contents.total_moles < num))
@@ -62,12 +62,10 @@
 
 	var/datum/gas_mixture/G = src.air_contents.remove(num)
 
-	var/allgases = G.gas["carbon_dioxide"] + G.gas["nitrogen"] + G.gas["oxygen"] + G.gas["phoron"]
-	if(allgases >= 0.005)
+	if(G.total_moles >= 0.005)
 		return 1
 
 	qdel(G)
-	return
 
 /obj/item/weapon/tank/jetpack/ui_action_click()
 	toggle()

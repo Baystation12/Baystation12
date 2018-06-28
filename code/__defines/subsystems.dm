@@ -52,10 +52,13 @@
 #define SS_INIT_MACHINES         1
 #define SS_INIT_DEFAULT          0
 #define SS_INIT_AIR             -1
-#define SS_INIT_LIGHTING        -2
+#define SS_INIT_MISC_LATE       -2
+#define SS_INIT_ALARM           -3
+#define SS_INIT_LIGHTING        -4
 #define SS_INIT_XENOARCH       -50
 #define SS_INIT_OPEN_SPACE    -150
 #define SS_INIT_BAY_LEGACY    -200
+#define SS_INIT_UNIT_TESTS    -250
 
 // SS runlevels
 

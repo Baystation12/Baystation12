@@ -108,6 +108,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/salary_modifier	= 1			//Multiplier to starting character money
 	var/station_departments = list()//Gets filled automatically depending on jobs allowed
 
+	var/supply_currency_name = "Credits"
+	var/supply_currency_name_short = "Cr."
+
 	//Factions prefs stuff
 	var/list/citizenship_choices = list(
 		"Earth",
@@ -188,7 +191,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	for (var/site_name in SSmapping.away_sites_templates)
 		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
 
-		if(site.spawn_guaranteed && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
+		if((site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED) && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
 			report_progress("Loaded guaranteed away site [site]!")
 			away_site_budget -= site.cost
 			continue
@@ -273,6 +276,21 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/map_info(var/client/victim)
 	return
+
+/datum/map/proc/bolt_saferooms()
+	return // overriden by torch
+
+/datum/map/proc/unbolt_saferooms()
+	return // overriden by torch
+	
+/datum/map/proc/make_maint_all_access(var/radstorm = 0) // parameter used by torch
+	maint_all_access = 1
+	priority_announcement.Announce("The maintenance access requirement has been revoked on all maintenance airlocks.", "Attention!")
+
+/datum/map/proc/revoke_maint_all_access(var/radstorm = 0) // parameter used by torch
+	maint_all_access = 0
+	priority_announcement.Announce("The maintenance access requirement has been readded on all maintenance airlocks.", "Attention!")
+
 // Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
 // This list needs to be purged but people insist on adding more cruft to the radio.
 /datum/map/proc/default_internal_channels()

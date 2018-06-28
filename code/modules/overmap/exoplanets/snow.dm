@@ -3,6 +3,14 @@
 	desc = "Cold planet with limited plant life."
 	color = "#e8faff"
 
+	possible_features = list(/datum/map_template/ruin/exoplanet/monolith,
+							 /datum/map_template/ruin/exoplanet/oasis,
+							 /datum/map_template/ruin/exoplanet/oasis/oasis2,
+							 /datum/map_template/ruin/exoplanet/oasis/oasis3,
+							 /datum/map_template/ruin/exoplanet/fountain,
+							 /datum/map_template/ruin/exoplanet/hydrobase,
+							 /datum/map_template/ruin/exoplanet/lodge)
+
 /obj/effect/overmap/sector/exoplanet/snow/generate_map()
 	for(var/zlevel in map_z)
 		var/datum/random_map/noise/exoplanet/M = new /datum/random_map/noise/exoplanet/snow(md5(world.time + rand(-100,1000)),1,1,zlevel,maxx,maxy,0,1,1)

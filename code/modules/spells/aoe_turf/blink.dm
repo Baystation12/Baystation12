@@ -18,6 +18,10 @@
 	if(!targets.len)
 		return
 
+	if(user.incapacitated(INCAPACITATION_STUNNED | INCAPACITATION_FORCELYING | INCAPACITATION_KNOCKOUT))
+		to_chat(user, "<span class='warning'>You can't cast this spell while incapacitated!</span>")
+		return
+
 	var/turf/T = pick(targets)
 	var/turf/starting = get_turf(user)
 	if(T)

@@ -25,6 +25,15 @@ PROCESSING_SUBSYSTEM_DEF(airflow)
 		var/atom/movable/target = curr[curr.len]
 		curr.len--
 
+		if(QDELETED(target))
+			if (target)
+				CLEAR_OBJECT(target)
+			else
+				processing -= target
+			if (MC_TICK_CHECK)
+				return
+			continue
+
 		if (target.airflow_speed <= 0)
 			CLEAR_OBJECT(target)
 			if (MC_TICK_CHECK)

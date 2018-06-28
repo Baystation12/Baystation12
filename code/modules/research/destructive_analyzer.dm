@@ -72,7 +72,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 			if(!O.origin_tech)
 				to_chat(user, "<span class='notice'>This doesn't seem to have a tech origin.</span>")
 				return
-			if(O.origin_tech.len == 0)
+			if(O.origin_tech.len == 0 || O.holographic)
 				to_chat(user, "<span class='notice'>You cannot deconstruct this item.</span>")
 				return
 

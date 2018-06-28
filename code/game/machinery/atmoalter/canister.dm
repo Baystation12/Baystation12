@@ -120,7 +120,7 @@
 	if(connected_port)
 		update_flag |= 2
 
-	var/tank_pressure = air_contents.return_pressure()
+	var/tank_pressure = return_pressure()
 	if(tank_pressure < 10)
 		update_flag |= 4
 	else if(tank_pressure < ONE_ATMOSPHERE)
