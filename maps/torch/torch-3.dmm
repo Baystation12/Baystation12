@@ -641,6 +641,10 @@
 /obj/item/clothing/accessory/stethoscope,
 /obj/item/clothing/accessory/stethoscope,
 /obj/structure/catwalk,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
 /turf/simulated/floor/plating,
 /area/storage/medical)
 "bn" = (
@@ -16216,6 +16220,12 @@
 "PC" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/disposal)
+"PD" = (
+/obj/structure/catwalk,
+/obj/structure/table/rack,
+/obj/structure/bedsheetbin,
+/turf/simulated/floor/plating,
+/area/storage/medical)
 "PK" = (
 /obj/machinery/door/airlock/engineering{
 	name = "Fuel Bay";
@@ -38365,8 +38375,8 @@ aa
 aB
 bn
 bq
-bq
 db
+PD
 ee
 Ge
 eR
