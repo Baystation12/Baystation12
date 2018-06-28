@@ -56,3 +56,51 @@
 	..()
 	pixel_x += rand(-10, 10)
 	pixel_y += rand(-10, 10)
+
+/obj/effect/overlay/temp
+	icon_state = "nothing"
+	anchored = 1
+	layer = 5
+	mouse_opacity = 0
+	var/duration = 10 //in deciseconds
+	var/randomdir = TRUE
+	var/timerid
+
+/obj/effect/overlay/temp/New()
+	..()
+	if(randomdir)
+		dir = (pick(NORTH, SOUTH, EAST, WEST))
+	flick("[icon_state]", src)
+
+	QDEL_IN(src, duration)
+
+/obj/effect/overlay/temp/ex_act()
+	return
+
+/obj/effect/overlay/temp/dir_setting
+	randomdir = FALSE
+
+/obj/effect/overlay/temp/dir_setting/New(loc, set_dir)
+	if(set_dir)
+		dir = set_dir
+	..()
+
+
+/obj/effect/overlay/temp/kinetic_blast
+	name = "kinetic explosion"
+	icon = 'icons/obj/projectiles.dmi'
+	icon_state = "kinetic_blast"
+	layer = 5
+	duration = 4
+
+/obj/effect/overlay/temp/explosion
+	name = "explosion"
+	icon = 'icons/effects/96x96.dmi'
+	icon_state = "explosion"
+	pixel_x = -32
+	pixel_y = -32
+	duration = 8
+
+/obj/effect/overlay/temp/explosion/fast
+	icon_state = "explosionfast"
+	duration = 4

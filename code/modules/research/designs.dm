@@ -957,6 +957,15 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/device/lightreplacer
 	sort_string = "VAGAB"
 
+/datum/design/item/advanced_light_replacer
+	name = "Advanced Light Replacer"
+	desc = "A specialised light replacer which stores more lights and refills faster from boxes."
+	id = "advanced_light_replacer"
+	req_tech = list(TECH_MAGNET = 4, TECH_MATERIAL = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 1500, "silver" = 300, "glass" = 3000, "gold" = 100, "uranium" = 250)
+	build_path =/obj/item/device/lightreplacer/advanced
+	sort_string = "VAGAC"
+
 /datum/design/item/tool/airlock_brace
 	name = "airlock brace"
 	desc = "Special door attachment that can be used to provide extra security."
@@ -964,7 +973,7 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 50)
 	build_path = /obj/item/weapon/airlock_brace
-	sort_string = "VAGAC"
+	sort_string = "VAGAD"
 
 /datum/design/item/tool/brace_jack
 	name = "maintenance jack"
@@ -973,7 +982,7 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 120)
 	build_path = /obj/item/weapon/crowbar/brace_jack
-	sort_string = "VAGAD"
+	sort_string = "VAGAE"
 
 /datum/design/item/tool/clamp
 	name = "stasis clamp"
@@ -982,7 +991,7 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MAGNET = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 500)
 	build_path = /obj/item/clamp
-	sort_string = "VAGAE"
+	sort_string = "VAGAF"
 
 /datum/design/item/tool/price_scanner
 	name = "price scanner"
@@ -991,7 +1000,7 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 3000, "silver" = 250)
 	build_path = /obj/item/device/price_scanner
-	sort_string = "VAGAF"
+	sort_string = "VAGAG"
 
 /datum/design/item/tool/experimental_welder
 	name = "experimental welding tool"
@@ -1000,7 +1009,7 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_ENGINEERING = 5, TECH_PHORON = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 120, "glass" = 50)
 	build_path = /obj/item/weapon/weldingtool/experimental
-	sort_string = "VAGAG"
+	sort_string = "VAGAH"
 
 /datum/design/item/tool/shield_diffuser
 	name = "portable shield diffuser"
@@ -1009,7 +1018,7 @@ other types of metals and chemistry for reagents).
 	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ILLEGAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 5000, "gold" = 2000, "silver" = 2000)
 	build_path = /obj/item/weapon/shield_diffuser
-	sort_string = "VAGAH"
+	sort_string = "VAGAI"
 
 /datum/design/item/encryptionkey/AssembleDesignName()
 	..()
@@ -1740,6 +1749,13 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/bioprinter
 	sort_string = "FAGAK"
 
+/datum/design/circuit/sleeper
+	name = "sleeper"
+	id = "sleeper"
+	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 3)
+	build_path = /obj/item/weapon/circuitboard/sleeper
+	sort_string = "FAGAL"
+
 /datum/design/circuit/roboprinter
 	name = "prosthetic organ fabricator"
 	id = "roboprinter"
@@ -1879,6 +1895,20 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/circuitboard/recharge_station
 	sort_string = "HACAC"
+
+/datum/design/circuit/cell_charger
+	name = "cell charger"
+	id = "cell_charger"
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
+	build_path = /obj/item/weapon/circuitboard/cell_charger
+	sort_string = "HACAD"
+
+/datum/design/circuit/recharger
+	name = "recharger"
+	id = "recharger"
+	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
+	build_path = /obj/item/weapon/circuitboard/recharger
+	sort_string = "HACAE"
 
 /datum/design/circuit/atmosalerts
 	name = "atmosphere alert console"

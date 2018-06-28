@@ -19,6 +19,13 @@
 	idle_power_usage = 15
 	active_power_usage = 200 //builtin health analyzer, dialysis machine, injectors.
 
+	component_types = list(
+			/obj/item/weapon/circuitboard/sleeper,
+			/obj/item/weapon/stock_parts/capacitor = 2,
+			/obj/item/weapon/stock_parts/scanning_module = 2,
+			/obj/item/weapon/stock_parts/console_screen
+)
+
 /obj/machinery/sleeper/Initialize()
 	. = ..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
@@ -52,6 +59,19 @@
 
 /obj/machinery/sleeper/update_icon()
 	icon_state = "sleeper_[occupant ? "1" : "0"]"
+
+/obj/machinery/sleeper/RefreshParts()
+	..()
+	var/scan_rating = 0
+	var/cap_rating = 0
+
+	for(var/obj/item/weapon/stock_parts/P in component_parts)
+		if(isscanner(P))
+			scan_rating += P.rating
+		else if(iscapacitor(P))
+			cap_rating += P.rating
+
+	active_power_usage = 200 - (cap_rating + scan_rating)*2
 
 /obj/machinery/sleeper/attack_hand(var/mob/user)
 	if(..())
@@ -101,7 +121,7 @@
 		to_chat(usr, "<span class='warning'>You can't reach the controls from the inside.</span>")
 		return STATUS_CLOSE
 	return ..()
-	    
+
 /obj/machinery/sleeper/OnTopic(user, href_list)
 	if(href_list["eject"])
 		go_out()
@@ -141,9 +161,16 @@
 			user.visible_message("<span class='notice'>\The [user] adds \a [I] to \the [src].</span>", "<span class='notice'>You add \a [I] to \the [src].</span>")
 		else
 			to_chat(user, "<span class='warning'>\The [src] has a beaker already.</span>")
-		return
-	else
-		..()
+			return
+	if(!occupant)
+		if(default_deconstruction_screwdriver(user, I))
+			return
+		if(default_deconstruction_crowbar(user, I))
+			return
+		if(default_part_replacement(user, I))
+			return
+	..()
+
 
 /obj/machinery/sleeper/MouseDrop_T(var/mob/target, var/mob/user)
 	if(!CanMouseDrop(target, user))
@@ -222,6 +249,8 @@
 	occupant = null
 	for(var/atom/movable/A in src) // In case an object was dropped inside or something
 		if(A == beaker)
+			continue
+		if(A in component_parts)
 			continue
 		A.dropInto(loc)
 	update_use_power(1)

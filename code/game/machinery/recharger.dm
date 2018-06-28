@@ -16,6 +16,11 @@ obj/machinery/recharger
 	var/icon_state_idle = "recharger0" //also when unpowered
 	var/portable = 1
 
+	component_types = list(
+		/obj/item/weapon/circuitboard/recharger,
+		/obj/item/weapon/stock_parts/capacitor
+	)
+
 obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 	if(istype(user,/mob/living/silicon))
 		return
@@ -57,13 +62,20 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 			G.forceMove(src)
 			charging = G
 			update_icon()
-	else if(portable && isWrench(G))
+	else if((isScrewdriver(G) || isCrowbar(G) || isWrench(G)) && portable)
 		if(charging)
 			to_chat(user, "<span class='warning'>Remove [charging] first!</span>")
 			return
-		anchored = !anchored
-		to_chat(user, "You [anchored ? "attached" : "detached"] the recharger.")
-		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
+		if(default_deconstruction_screwdriver(user, G))
+			return
+		if(default_deconstruction_crowbar(user, G))
+			return
+		if(isWrench(G))
+			anchored = !anchored
+			to_chat(user, "You [anchored ? "attached" : "detached"] the recharger.")
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+	if(default_part_replacement(user, G))
+		return
 
 obj/machinery/recharger/attack_hand(mob/user as mob)
 	if(istype(user,/mob/living/silicon))

@@ -11,6 +11,11 @@
 	var/obj/item/weapon/cell/charging = null
 	var/chargelevel = -1
 
+	component_types = list(
+		/obj/item/weapon/circuitboard/cell_charger,
+		/obj/item/weapon/stock_parts/capacitor
+	)
+
 /obj/machinery/cell_charger/update_icon()
 	icon_state = "ccharger[charging ? 1 : 0]"
 
@@ -59,14 +64,21 @@
 			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
 			chargelevel = -1
 		update_icon()
-	else if(isWrench(W))
+
+	if(isScrewdriver(W) || isCrowbar(W) || isWrench(W))
 		if(charging)
 			to_chat(user, "<span class='warning'>Remove the cell first!</span>")
 			return
-
-		anchored = !anchored
-		to_chat(user, "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground")
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		if(default_deconstruction_screwdriver(user, W))
+			return
+		if(default_deconstruction_crowbar(user, W))
+			return
+		if(isWrench(W))
+			anchored = !anchored
+			to_chat(user, "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground")
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+	if(default_part_replacement(user, W))
+		return
 
 /obj/machinery/cell_charger/attack_hand(mob/user)
 	if(charging)
