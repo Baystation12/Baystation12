@@ -641,6 +641,10 @@
 /obj/item/clothing/accessory/stethoscope,
 /obj/item/clothing/accessory/stethoscope,
 /obj/structure/catwalk,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
+/obj/item/device/flashlight/pen,
 /turf/simulated/floor/plating,
 /area/storage/medical)
 "bn" = (
