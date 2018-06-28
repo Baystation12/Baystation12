@@ -911,7 +911,8 @@ var/global/list/common_tools = list(
 		if(/obj/item/weapon/gun/energy/plasmacutter)
 			return 3800
 		if(/obj/item/weapon/melee/energy)
-			if(W:active)
+			var/obj/item/weapon/melee/energy/S = W
+			if(S.active)
 				return 3500
 			else
 				return 0

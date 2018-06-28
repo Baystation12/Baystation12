@@ -49,8 +49,8 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/Initialize()
-	. = ..()
+/obj/machinery/door/New() //Don't migrate this to Initialize(), it will break multi-tile door collision.
+	..()
 	if(density)
 		layer = closed_layer
 		update_heat_protection(get_turf(src))
